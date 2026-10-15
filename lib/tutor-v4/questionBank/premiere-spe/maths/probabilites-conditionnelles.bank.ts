@@ -26,7 +26,7 @@
 // propriété ou un contexte 974 ; un `template` pour tout calcul dont on peut
 // changer les nombres ; plusieurs ouvertes dont un template ouvert.
 
-import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
+import type { TutorBankItemV4, CanvasFigure, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
 
 function shuffle<T>(arr: readonly T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
@@ -91,6 +91,1254 @@ function arbre(pA: number, pBsiA: number, pBsiNonA: number): CanvasFigure {
     ],
   };
 }
+
+/* =========================================================================
+   ⛔⛔ 15/10/2026 — PC_CONDITIONNELLE : « DES QUESTIONS REVIENNENT ».
+   Mesuré avant (scripts/mesurer-squelettes-coach.ts premiere-spe
+   probabilites_conditionnelles) : 9 squelettes, environ 17 répétitions sur une
+   série de 20 à chaque étoile. Le seul gabarit tirait des NOMBRES dans une
+   phrase fixe (« On a P(A) = … et P(A ∩ B) = … »).
+   Même méthode que les probabilités de 3e (dd5e9f75) : chaque gabarit compose
+     · une SITUATION (seize : car jaune du lycée, dépistage de la dengue, Grand
+       Raid, météo de Saint-Pierre, spécialité maths, contrôle dans le car,
+       ananas Victoria, vaccin contre la grippe, filtre anti-spam, bac blanc,
+       Piton de la Fournaise, vols de Roland-Garros…), avec ses deux
+       événements écrits au singulier, au pluriel et à la forme négative ;
+     · une PRÉSENTATION des données (effectifs « parmi… », probabilités,
+       pourcentages) ;
+     · une TOURNURE (« sachant que… », « parmi les… », notation $P_C(R)$…).
+   Les nombres sont des EFFECTIFS entiers tirés pour que le quotient demandé
+   tombe juste (au millième au plus) : réponse exacte, corrigé au texte exact.
+   QCM : les leurres sont les vraies erreurs (diviser par l'effectif total,
+   prendre $P_B(A)$ au lieu de $P_A(B)$, donner $P(A \cap B)$, oublier le
+   complémentaire) et deux choix n'ont jamais la même VALEUR.
+========================================================================= */
+
+/** Un événement d'une situation : singulier, pluriel, et leurs négations. */
+type PcEv = { L: string; s: string; p: string; ns: string; np: string };
+type PcCtx = {
+  /** « On a interrogé 240 élèves d'un lycée de Saint-Denis. » */
+  pop: string;
+  /** « les élèves qui… » */
+  court: string;
+  un: string;
+  le: string;
+  il: string;
+  eux: string;
+  ceux: string;
+  A: PcEv;
+  B: PcEv;
+  /** Le verbe du recueil : « On a interrogé », « On a observé »… */
+  verbe: string;
+};
+
+const PC_CTX: readonly PcCtx[] = [
+  {
+    verbe: "On a interrogé", pop: "élèves d'un lycée de Saint-Denis", court: "élèves", un: "un élève", le: "l'élève", il: "il", eux: "eux", ceux: "ceux",
+    A: { L: "C", s: "prend le car jaune", p: "prennent le car jaune", ns: "ne prend pas le car jaune", np: "ne prennent pas le car jaune" },
+    B: { L: "R", s: "est arrivé en retard ce mois-ci", p: "sont arrivés en retard ce mois-ci", ns: "n'est jamais arrivé en retard ce mois-ci", np: "ne sont jamais arrivés en retard ce mois-ci" },
+  },
+  {
+    verbe: "Lors d'une campagne de dépistage de la dengue, on a testé", pop: "personnes", court: "personnes", un: "une personne", le: "la personne", il: "elle", eux: "elles", ceux: "celles",
+    A: { L: "M", s: "est porteuse du virus", p: "sont porteuses du virus", ns: "n'est pas porteuse du virus", np: "ne sont pas porteuses du virus" },
+    B: { L: "T", s: "a un test positif", p: "ont un test positif", ns: "a un test négatif", np: "ont un test négatif" },
+  },
+  {
+    verbe: "Au départ du Grand Raid, on a suivi", pop: "coureurs", court: "coureurs", un: "un coureur", le: "le coureur", il: "il", eux: "eux", ceux: "ceux",
+    A: { L: "J", s: "a moins de 30 ans", p: "ont moins de 30 ans", ns: "a 30 ans ou plus", np: "ont 30 ans ou plus" },
+    B: { L: "F", s: "termine la course", p: "terminent la course", ns: "abandonne", np: "abandonnent" },
+  },
+  {
+    verbe: "Une station météo de Saint-Pierre a relevé", pop: "jours", court: "jours", un: "un jour", le: "le jour", il: "il", eux: "eux", ceux: "ceux",
+    A: { L: "V", s: "a du vent fort", p: "ont du vent fort", ns: "n'a pas de vent fort", np: "n'ont pas de vent fort" },
+    B: { L: "P", s: "est pluvieux", p: "sont pluvieux", ns: "est sec", np: "sont secs" },
+  },
+  {
+    verbe: "On a sondé", pop: "élèves de première d'un lycée du Tampon", court: "élèves", un: "un élève", le: "l'élève", il: "il", eux: "eux", ceux: "ceux",
+    A: { L: "M", s: "a choisi la spécialité maths", p: "ont choisi la spécialité maths", ns: "n'a pas choisi la spécialité maths", np: "n'ont pas choisi la spécialité maths" },
+    B: { L: "S", s: "fait du sport en club", p: "font du sport en club", ns: "ne fait pas de sport en club", np: "ne font pas de sport en club" },
+  },
+  {
+    verbe: "Sur une ligne de car, on a compté", pop: "voyageurs", court: "voyageurs", un: "un voyageur", le: "le voyageur", il: "il", eux: "eux", ceux: "ceux",
+    A: { L: "A", s: "a un abonnement", p: "ont un abonnement", ns: "n'a pas d'abonnement", np: "n'ont pas d'abonnement" },
+    B: { L: "K", s: "est contrôlé", p: "sont contrôlés", ns: "n'est pas contrôlé", np: "ne sont pas contrôlés" },
+  },
+  {
+    verbe: "Dans une exploitation de Saint-André, on a examiné", pop: "ananas Victoria", court: "ananas", un: "un ananas", le: "l'ananas", il: "il", eux: "eux", ceux: "ceux",
+    A: { L: "H", s: "vient de la parcelle du haut", p: "viennent de la parcelle du haut", ns: "vient de la parcelle du bas", np: "viennent de la parcelle du bas" },
+    B: { L: "V", s: "est assez mûr pour être vendu", p: "sont assez mûrs pour être vendus", ns: "n'est pas assez mûr", np: "ne sont pas assez mûrs" },
+  },
+  {
+    verbe: "Une entreprise du Port a interrogé", pop: "salariés", court: "salariés", un: "un salarié", le: "le salarié", il: "il", eux: "eux", ceux: "ceux",
+    A: { L: "V", s: "est vacciné contre la grippe", p: "sont vaccinés contre la grippe", ns: "n'est pas vacciné contre la grippe", np: "ne sont pas vaccinés contre la grippe" },
+    B: { L: "G", s: "a eu la grippe cet hiver", p: "ont eu la grippe cet hiver", ns: "n'a pas eu la grippe cet hiver", np: "n'ont pas eu la grippe cet hiver" },
+  },
+  {
+    verbe: "Un magasin d'électroménager a suivi", pop: "clients", court: "clients", un: "un client", le: "le client", il: "il", eux: "eux", ceux: "ceux",
+    A: { L: "E", s: "a pris l'extension de garantie", p: "ont pris l'extension de garantie", ns: "n'a pas pris l'extension de garantie", np: "n'ont pas pris l'extension de garantie" },
+    B: { L: "D", s: "a eu une panne la première année", p: "ont eu une panne la première année", ns: "n'a eu aucune panne la première année", np: "n'ont eu aucune panne la première année" },
+  },
+  {
+    verbe: "Une plateforme de musique a étudié", pop: "abonnés réunionnais", court: "abonnés", un: "un abonné", le: "l'abonné", il: "il", eux: "eux", ceux: "ceux",
+    A: { L: "M", s: "écoute du maloya", p: "écoutent du maloya", ns: "n'écoute pas de maloya", np: "n'écoutent pas de maloya" },
+    B: { L: "S", s: "écoute du séga", p: "écoutent du séga", ns: "n'écoute pas de séga", np: "n'écoutent pas de séga" },
+  },
+  {
+    verbe: "Sur la plage de l'Hermitage, on a interrogé", pop: "baigneurs", court: "baigneurs", un: "un baigneur", le: "le baigneur", il: "il", eux: "eux", ceux: "ceux",
+    A: { L: "O", s: "habite dans l'Ouest", p: "habitent dans l'Ouest", ns: "n'habite pas dans l'Ouest", np: "n'habitent pas dans l'Ouest" },
+    B: { L: "H", s: "vient chaque semaine", p: "viennent chaque semaine", ns: "vient moins souvent", np: "viennent moins souvent" },
+  },
+  {
+    verbe: "Une messagerie a analysé", pop: "courriels", court: "courriels", un: "un courriel", le: "le courriel", il: "il", eux: "eux", ceux: "ceux",
+    A: { L: "S", s: "est un spam", p: "sont des spams", ns: "n'est pas un spam", np: "ne sont pas des spams" },
+    B: { L: "F", s: "est classé indésirable par le filtre", p: "sont classés indésirables par le filtre", ns: "n'est pas classé indésirable", np: "ne sont pas classés indésirables" },
+  },
+  {
+    verbe: "Après le bac blanc, on a interrogé", pop: "élèves de terminale", court: "élèves", un: "un élève", le: "l'élève", il: "il", eux: "eux", ceux: "ceux",
+    A: { L: "R", s: "a révisé avec des annales", p: "ont révisé avec des annales", ns: "n'a pas révisé avec des annales", np: "n'ont pas révisé avec des annales" },
+    B: { L: "M", s: "a eu la moyenne", p: "ont eu la moyenne", ns: "n'a pas eu la moyenne", np: "n'ont pas eu la moyenne" },
+  },
+  {
+    verbe: "Au Pas de Bellecombe, on a interrogé", pop: "randonneurs montés au Piton de la Fournaise", court: "randonneurs", un: "un randonneur", le: "le randonneur", il: "il", eux: "eux", ceux: "ceux",
+    A: { L: "T", s: "est parti avant l'aube", p: "sont partis avant l'aube", ns: "est parti après l'aube", np: "sont partis après l'aube" },
+    B: { L: "D", s: "a vu le cratère sans nuages", p: "ont vu le cratère sans nuages", ns: "a trouvé le cratère dans les nuages", np: "ont trouvé le cratère dans les nuages" },
+  },
+  {
+    verbe: "L'aéroport Roland-Garros a recensé", pop: "vols au départ", court: "vols", un: "un vol", le: "le vol", il: "il", eux: "eux", ceux: "ceux",
+    A: { L: "M", s: "part vers la métropole", p: "partent vers la métropole", ns: "part vers une autre destination", np: "partent vers une autre destination" },
+    B: { L: "R", s: "décolle en retard", p: "décollent en retard", ns: "décolle à l'heure", np: "décollent à l'heure" },
+  },
+  {
+    verbe: "Lors d'un concours de pêche à Saint-Leu, on a pesé", pop: "poissons", court: "poissons", un: "un poisson", le: "le poisson", il: "il", eux: "eux", ceux: "ceux",
+    A: { L: "L", s: "a été pris au large", p: "ont été pris au large", ns: "a été pris près du bord", np: "ont été pris près du bord" },
+    B: { L: "K", s: "pèse plus d'un kilo", p: "pèsent plus d'un kilo", ns: "pèse un kilo ou moins", np: "pèsent un kilo ou moins" },
+  },
+];
+
+/** « qu'il », « qu'elle ». */
+const pcQue = (il: string) => `qu'${il}`;
+const pcMaj = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+
+/** Le quotient a/b tombe-t-il juste avec au plus `dec` décimales ? */
+function pcJuste(a: number, b: number, dec = 3): boolean {
+  if (b <= 0) return false;
+  const v = (a / b) * 10 ** dec;
+  return Math.abs(v - Math.round(v)) < 1e-9;
+}
+/** a/b en écriture décimale française, sans bruit de calcul flottant. */
+function pcDec(a: number, b: number): string {
+  return String(Math.round((a / b) * 10000) / 10000).replace(".", ",");
+}
+/** La même chose, pour l'intérieur des $…$ : « 0{,}375 ». */
+const pcM = (a: number, b: number) => pcDec(a, b).replace(",", "{,}");
+/** Un pourcentage a/b (doit tomber juste au dixième) : « 37,5 % ». */
+const pcPct = (a: number, b: number) => `${pcDec(100 * a, b)} %`;
+const pcPctM = (a: number, b: number) => `${pcM(100 * a, b)}\\,\\%`;
+function pcPgcd(a: number, b: number): number {
+  return b === 0 ? Math.abs(a) : pcPgcd(b, a % b);
+}
+const pcFrac = (a: number, b: number) => `\\dfrac{${a}}{${b}}`;
+/** Toutes les écritures acceptées d'un quotient a/b qui tombe juste. */
+function pcEcritures(a: number, b: number): string[] {
+  const g = pcPgcd(a, b);
+  const d = pcDec(a, b);
+  return [...new Set([d, d.replace(",", "."), `${a / g}/${b / g}`, `${a}/${b}`, pcPct(a, b), pcPct(a, b).replace(" ", "")])];
+}
+
+/**
+ * Les effectifs d'une situation : N individus, nA dans A, nAB dans A et B,
+ * nB dans B. `ok` filtre (quotient juste, leurres distincts…).
+ */
+type PcEff = { N: number; nA: number; nAB: number; nB: number };
+function pcTirer(ok: (e: PcEff) => boolean, totaux?: readonly number[]): PcEff {
+  for (let t = 0; t < 20000; t++) {
+    const N = totaux ? pickOne(totaux) : randomInt(6, 60) * 10;
+    const nA = randomInt(Math.ceil(0.2 * N), Math.floor(0.7 * N));
+    const nAB = randomInt(Math.max(1, Math.ceil(0.1 * nA)), Math.floor(0.9 * nA));
+    const reste = N - nA;
+    const nB = nAB + randomInt(Math.max(1, Math.ceil(0.1 * reste)), Math.floor(0.85 * reste));
+    const e = { N, nA, nAB, nB };
+    if (nAB < nA && nB < N && ok(e)) return e;
+  }
+  return { N: 200, nA: 80, nAB: 30, nB: 90 };
+}
+
+/** Bonne réponse + trois leurres de VALEURS distinctes (fractions [a, b]). */
+function pcQcm(bon: [number, number], leurres: [number, number][]): { choices: string[]; expected: string } {
+  const val = (f: [number, number]) => f[0] / f[1];
+  const pris: [number, number][] = [];
+  for (const l of leurres) {
+    if (l[1] <= 0) continue;
+    if (Math.abs(val(l) - val(bon)) < 1e-9) continue;
+    if (pris.some((p) => Math.abs(val(p) - val(l)) < 1e-9)) continue;
+    pris.push(l);
+    if (pris.length === 3) break;
+  }
+  const txt = (f: [number, number]) => `$${pcFrac(f[0], f[1])}$`;
+  return { choices: shuffle([txt(bon), ...pris.map(txt)]), expected: txt(bon) };
+}
+/** Nombre de leurres de valeurs distinctes entre eux et de la bonne réponse. */
+function pcDistincts(bon: [number, number], leurres: [number, number][]): number {
+  const vals = [bon[0] / bon[1]];
+  for (const l of leurres) {
+    const v = l[0] / l[1];
+    if (l[1] > 0 && !vals.some((x) => Math.abs(x - v) < 1e-9)) vals.push(v);
+  }
+  return vals.length - 1;
+}
+
+/** La phrase des données, en effectifs, avec la condition « parmi ». */
+function pcDonneesEff(c: PcCtx, e: PcEff, avecB: boolean): string {
+  const v = pickOne([0, 1, 2]);
+  const fin = avecB ? ` Au total, $${e.nB}$ ${c.court} ${c.B.p}.` : "";
+  if (v === 0) return `${c.verbe} $${e.N}$ ${c.pop}. Parmi ${c.eux}, $${e.nA}$ ${c.A.p} ; parmi ces $${e.nA}$, $${e.nAB}$ ${c.B.p}.${fin}`;
+  if (v === 1) return `${c.verbe} $${e.N}$ ${c.pop} : $${e.nA}$ ${c.A.p} et, parmi ${c.eux}, $${e.nAB}$ ${c.B.p}.${fin}`;
+  return `${c.verbe} $${e.N}$ ${c.pop}. $${e.nA}$ d'entre ${c.eux} ${c.A.p}, les autres ${c.A.np}. Enfin, $${e.nAB}$ ${c.court} ${c.A.p} et ${c.B.p}.${fin}`;
+}
+
+/** La question « probabilité de B sachant A », sous une tournure tirée. */
+// `avecDef` vide : les données ont déjà tiré l'individu et nommé les événements.
+function pcQuestionSachant(c: PcCtx, cond: string, condP: string, cible: string, cibleP: string, notation: string, avecDef: string): string {
+  const deja = avecDef === "";
+  const t = pickOne([0, 1, 2, 3]);
+  if (t === 0)
+    return deja
+      ? `Sachant que ${c.le} ${cond}, quelle est la probabilité de l'événement « ${c.il} ${cible} » ?`
+      : `On choisit ${c.un} au hasard. Sachant ${pcQue(c.il)} ${cond}, quelle est la probabilité de l'événement « ${c.il} ${cible} » ?`;
+  if (t === 1) return `On choisit au hasard ${c.un} qui ${cond}. Quelle est la probabilité de l'événement « ${c.il} ${cible} » ?`;
+  if (t === 2) return `Parmi les ${c.court} qui ${condP}, quelle est la proportion de ${c.ceux} qui ${cibleP} ? Donne-la en écriture décimale.`;
+  return deja ? `Calcule $${notation}$.` : `On choisit ${c.un} au hasard. ${avecDef} Calcule $${notation}$.`;
+}
+/** « On note C : « l'élève prend le car » et R : « … ». » */
+/** Les deux lettres d'une situation sont distinctes (sinon on renomme B). */
+const pcLettres = (c: PcCtx) => ({ a: c.A.L, b: c.B.L === c.A.L ? `${c.B.L}'` : c.B.L });
+const pcDef = (c: PcCtx) => {
+  const { a, b } = pcLettres(c);
+  return `On note $${a}$ l'événement « ${c.le} ${c.A.s} » et $${b}$ l'événement « ${c.le} ${c.B.s} ».`;
+};
+
+/** Les données en probabilités, ou en pourcentages de la population. */
+function pcDonneesProba(c: PcCtx, e: PcEff, pct: boolean): string {
+  const { a, b } = pcLettres(c);
+  if (pct)
+    return `${c.verbe} des ${c.pop} : $${pcPctM(e.nA, e.N)}$ d'entre ${c.eux} ${c.A.p}, et $${pcPctM(e.nAB, e.N)}$ ${c.A.p} et ${c.B.p} à la fois.`;
+  return `On choisit ${c.un} au hasard. On note $${a}$ l'événement « ${c.le} ${c.A.s} » et $${b}$ l'événement « ${c.le} ${c.B.s} ». On sait que $P(${a}) = ${pcM(e.nA, e.N)}$ et $P(${a} \\cap ${b}) = ${pcM(e.nAB, e.N)}$.`;
+}
+
+/* ---------- Les titres courts (tableaux, arbres), dans l'ordre de PC_CTX ---------- */
+const PC_TITRES: readonly [string, string, string, string][] = [
+  ["Car jaune", "Pas le car", "En retard", "Jamais en retard"],
+  ["Porteuses", "Non porteuses", "Test positif", "Test négatif"],
+  ["Moins de 30 ans", "30 ans ou plus", "Finishers", "Abandons"],
+  ["Vent fort", "Pas de vent fort", "Pluvieux", "Secs"],
+  ["Spé maths", "Sans spé maths", "Sport en club", "Pas de club"],
+  ["Abonnés", "Sans abonnement", "Contrôlés", "Non contrôlés"],
+  ["Parcelle du haut", "Parcelle du bas", "Mûrs", "Pas mûrs"],
+  ["Vaccinés", "Non vaccinés", "Grippe", "Pas de grippe"],
+  ["Avec extension", "Sans extension", "Panne", "Sans panne"],
+  ["Maloya", "Pas de maloya", "Séga", "Pas de séga"],
+  ["Ouest", "Hors de l'Ouest", "Chaque semaine", "Moins souvent"],
+  ["Spams", "Pas des spams", "Indésirables", "Non classés"],
+  ["Annales", "Sans annales", "Moyenne", "Sous la moyenne"],
+  ["Avant l'aube", "Après l'aube", "Sans nuages", "Dans les nuages"],
+  ["Métropole", "Autres destinations", "En retard", "À l'heure"],
+  ["Au large", "Près du bord", "Plus d'un kilo", "Un kilo ou moins"],
+];
+/** Une situation tirée, avec ses titres courts et ses lettres. */
+function pcSituation() {
+  const k = randomInt(0, PC_CTX.length - 1);
+  const c = PC_CTX[k];
+  const [tA, ntA, tB, ntB] = PC_TITRES[k];
+  return { c, tA, ntA, tB, ntB, ...pcLettres(c) };
+}
+/** Le tableau croisé d'effectifs d'une situation (lignes : A / non A). */
+function pcTableau(s: ReturnType<typeof pcSituation>, e: PcEff, highlight?: { row?: number; col?: number }): CanvasFigure {
+  const ab = e.nB - e.nAB;
+  return {
+    kind: "tableau_donnees",
+    title: `Répartition des ${s.c.court}`,
+    headers: ["", s.tB, s.ntB, "Total"],
+    rows: [
+      { label: s.tA, values: [e.nAB, e.nA - e.nAB, e.nA] },
+      { label: s.ntA, values: [ab, e.N - e.nA - ab, e.N - e.nA] },
+      { label: "Total", values: [e.nB, e.N - e.nB, e.N] },
+    ],
+    ...(highlight ? { highlight } : {}),
+  } as CanvasFigure;
+}
+/** L'arbre pondéré d'une situation, probabilités écrites à la française. */
+function pcArbreFig(a: string, b: string, pA: string, pBA: string, pBnA: string, qA: string, qBA: string, qBnA: string): CanvasFigure {
+  return {
+    kind: "arbre_proba",
+    titre: "Arbre pondéré",
+    racineEnfants: [
+      { label: a, proba: pA, enfants: [{ label: b, proba: pBA }, { label: `${b}̄`, proba: qBA }] },
+      { label: `${a}̄`, proba: qA, enfants: [{ label: b, proba: pBnA }, { label: `${b}̄`, proba: qBnA }] },
+    ],
+  };
+}
+/** Deux décimaux exacts en millièmes : « 0,35 » à partir de 350 ‰. */
+const pcMil = (m: number) => pcDec(m, 1000);
+const pcMilM = (m: number) => pcM(m, 1000);
+
+/* ===================== PC_TABLEAU : générateurs ===================== */
+type PcS = ReturnType<typeof pcSituation>;
+/** Effectif d'une case du tableau (ligne A ou Ā, colonne B ou B̄). */
+function pcCase(e: PcEff, enA: boolean, enB: boolean): number {
+  const ab = e.nB - e.nAB;
+  if (enA) return enB ? e.nAB : e.nA - e.nAB;
+  return enB ? ab : e.N - e.nA - ab;
+}
+const pcLigne = (e: PcEff, enA: boolean) => (enA ? e.nA : e.N - e.nA);
+const pcColonne = (e: PcEff, enB: boolean) => (enB ? e.nB : e.N - e.nB);
+/** La cible d'une question de tableau : condition sur une ligne ou une colonne. */
+function pcCibleTableau(s: PcS, parLigne: boolean) {
+  const enA = Math.random() < 0.6;
+  const enB = Math.random() < 0.6;
+  const A = s.c.A, B = s.c.B;
+  const la = enA ? s.a : `\\overline{${s.a}}`, lb = enB ? s.b : `\\overline{${s.b}}`;
+  return parLigne
+    ? { enA, enB, cond: enA ? A.s : A.ns, condP: enA ? A.p : A.np, cible: enB ? B.s : B.ns, cibleP: enB ? B.p : B.np, not: `P_{${la}}(${lb})`, autre: `P_{${lb}}(${la})` }
+    : { enA, enB, cond: enB ? B.s : B.ns, condP: enB ? B.p : B.np, cible: enA ? A.s : A.ns, cibleP: enA ? A.p : A.np, not: `P_{${lb}}(${la})`, autre: `P_{${la}}(${lb})` };
+}
+/** ★4 (QCM, condition sur une ligne) et ★5 (condition sur une colonne). */
+function pcGenTableauQcm(parLigne: boolean): TutorGeneratedQuestionV4 {
+  const s = pcSituation();
+  const t = pcCibleTableau(s, parLigne);
+  const den = (e: PcEff) => (parLigne ? pcLigne(e, t.enA) : pcColonne(e, t.enB));
+  const fausses = (e: PcEff): [number, number][] => {
+    const n = pcCase(e, t.enA, t.enB);
+    return [[n, e.N], [n, parLigne ? pcColonne(e, t.enB) : pcLigne(e, t.enA)], [den(e), e.N], [den(e) - n, den(e)]];
+  };
+  const e = pcTirer((x) => pcCase(x, t.enA, t.enB) > 0 && pcCase(x, !t.enA, !t.enB) > 0 && pcDistincts([pcCase(x, t.enA, t.enB), den(x)], fausses(x)) >= 3);
+  const n = pcCase(e, t.enA, t.enB);
+  const q = pcQcm([n, den(e)], fausses(e));
+  return {
+    text: `Le tableau donne la répartition de $${e.N}$ ${s.c.pop}. ${pcQuestionSachant(s.c, t.cond, t.condP, t.cible, t.cibleP, t.not, pcDef(s.c)).replace(" Donne-la en écriture décimale.", "")}`,
+    format: "qcm",
+    choices: q.choices,
+    expected: [q.expected],
+    comparator: "mcq_exact",
+    canvas: pcTableau(s, e),
+    explanation: exp(
+      `La condition est « ${s.c.le} ${t.cond} » : on ne lit que la ${parLigne ? "LIGNE" : "COLONNE"} « ${parLigne ? (t.enA ? s.tA : s.ntA) : t.enB ? s.tB : s.ntB} », d'effectif $${den(e)}$.`,
+      `Dans cette ${parLigne ? "ligne" : "colonne"}, la case « ${t.cible} » contient $${n}$ ${s.c.court}.`,
+      `$${t.not} = \\dfrac{${n}}{${den(e)}}$. Diviser par $${e.N}$ donnerait la probabilité de l'intersection ; diviser par $${parLigne ? pcColonne(e, t.enB) : pcLigne(e, t.enA)}$ donnerait $${t.autre}$.`,
+      `La bonne réponse est $\\dfrac{${n}}{${den(e)}}$.`
+    ),
+  };
+}
+/** ★4 / ★5 (réponse décimale) : ligne ou colonne. */
+function pcGenTableauCourt(parLigne: boolean): TutorGeneratedQuestionV4 {
+  const s = pcSituation();
+  const t = pcCibleTableau(s, parLigne);
+  const den = (e: PcEff) => (parLigne ? pcLigne(e, t.enA) : pcColonne(e, t.enB));
+  const e = pcTirer((x) => pcCase(x, t.enA, t.enB) > 0 && pcJuste(pcCase(x, t.enA, t.enB), den(x)));
+  const n = pcCase(e, t.enA, t.enB);
+  return {
+    text: `Le tableau donne la répartition de $${e.N}$ ${s.c.pop}. ${pcQuestionSachant(s.c, t.cond, t.condP, t.cible, t.cibleP, t.not, pcDef(s.c))}`,
+    format: "short",
+    expected: pcEcritures(n, den(e)),
+    comparator: "number_equal",
+    canvas: pcTableau(s, e),
+    explanation: exp(
+      `« Sachant que ${s.c.le} ${t.cond} » : l'univers se réduit à la ${parLigne ? "ligne" : "colonne"} « ${parLigne ? (t.enA ? s.tA : s.ntA) : t.enB ? s.tB : s.ntB} », d'effectif $${den(e)}$.`,
+      `On y lit la case de la ${parLigne ? "colonne" : "ligne"} « ${parLigne ? (t.enB ? s.tB : s.ntB) : t.enA ? s.tA : s.ntA} » : $${n}$.`,
+      `$${t.not} = \\dfrac{${n}}{${den(e)}} = ${pcM(n, den(e))}$ (et non $\\dfrac{${n}}{${e.N}}$ : le total $${e.N}$ ne sert pas).`,
+      `La probabilité est $${pcM(n, den(e))}$.`
+    ),
+  };
+}
+/** ★5 ouverte : les DEUX conditionnelles d'une même case, et laquelle est la plus grande. */
+function pcGenTableauOuvert(): TutorGeneratedQuestionV4 {
+  const s = pcSituation();
+  const e = pcTirer((x) => pcJuste(x.nAB, x.nA) && pcJuste(x.nAB, x.nB) && x.nA !== x.nB);
+  const r1 = pcDec(e.nAB, e.nA), r2 = pcDec(e.nAB, e.nB);
+  const plusA = e.nA < e.nB; // P_A(B) > P_B(A) ssi nA < nB
+  const q = pickOne([
+    `Calcule $P_{${s.a}}(${s.b})$ et $P_{${s.b}}(${s.a})$, puis dis laquelle est la plus grande.`,
+    `Calcule la proportion de ${s.c.ceux} qui ${s.c.B.p} parmi les ${s.c.court} qui ${s.c.A.p}, puis la proportion de ${s.c.ceux} qui ${s.c.A.p} parmi les ${s.c.court} qui ${s.c.B.p}. Laquelle est la plus grande ?`,
+  ]);
+  return {
+    text: `Le tableau donne la répartition de $${e.N}$ ${s.c.pop}. ${pcDef(s.c)} ${q}`,
+    format: "open",
+    expected: [r1, r2, r1.replace(",", "."), r2.replace(",", ".")],
+    comparator: "contains_keyword",
+    canvas: pcTableau(s, e),
+    explanation: exp(
+      `Les deux probabilités utilisent la même case ($${e.nAB}$ ${s.c.court}), mais pas le même groupe de référence.`,
+      `$P_{${s.a}}(${s.b}) = \\dfrac{${e.nAB}}{${e.nA}} = ${pcM(e.nAB, e.nA)}$ (ligne « ${s.tA} ») et $P_{${s.b}}(${s.a}) = \\dfrac{${e.nAB}}{${e.nB}} = ${pcM(e.nAB, e.nB)}$ (colonne « ${s.tB} »).`,
+      `Même numérateur : la plus grande est celle dont le dénominateur est le plus petit, ici $${plusA ? e.nA : e.nB}$.`,
+      `$${plusA ? `P_{${s.a}}(${s.b})` : `P_{${s.b}}(${s.a})`}$ est la plus grande.`
+    ),
+  };
+}
+
+/* ===================== PC_INVERSER : générateurs ===================== */
+/** Arrondi au centième, à la française. */
+const pcCent = (x: number) => String(Math.round(x * 100) / 100).replace(".", ",");
+/** ★4 QCM : traduire « x % des … qui … » — la condition est le groupe de référence. */
+function pcGenInverserTraduire(): TutorGeneratedQuestionV4 {
+  const s = pcSituation();
+  const surA = Math.random() < 0.5; // condition sur A (sinon sur B)
+  const neg = Math.random() < 0.3; // la cible est niée
+  const x = randomInt(4, 19) * 5;
+  const [C, K] = surA ? [s.c.A, s.c.B] : [s.c.B, s.c.A];
+  const [lc, lk] = surA ? [s.a, s.b] : [s.b, s.a];
+  const lkN = neg ? `\\overline{${lk}}` : lk;
+  const cibleP = neg ? K.np : K.p;
+  const v = pcM(x, 100);
+  const info = pickOne([
+    `« Parmi les ${s.c.court} qui ${C.p}, $${x}\\,\\%$ ${cibleP}. »`,
+    `« $${x}\\,\\%$ des ${s.c.court} qui ${C.p} ${cibleP}. »`,
+    `« Chez les ${s.c.court} qui ${C.p}, la proportion de ${s.c.ceux} qui ${cibleP} est de $${x}\\,\\%$. »`,
+  ]);
+  const bon = `$P_{${lc}}(${lkN}) = ${v}$`;
+  const choices = shuffle([bon, `$P_{${lkN}}(${lc}) = ${v}$`, `$P(${lc} \\cap ${lkN}) = ${v}$`, `$P(${lkN}) = ${v}$`]);
+  return {
+    text: `${s.c.verbe} des ${s.c.pop}. ${pcDef(s.c)} On lit : ${info} Quelle écriture traduit cette information ?`,
+    format: "qcm",
+    choices,
+    expected: [bon],
+    comparator: "mcq_exact",
+    explanation: exp(
+      `Le groupe de référence est celui qui suit « parmi » / « des … qui » : les ${s.c.court} qui ${C.p}, c'est-à-dire l'événement $${lc}$.`,
+      `Ce groupe est la CONDITION : il va en indice. On calcule la proportion de « ${cibleP} » à l'intérieur.`,
+      `$P_{${lkN}}(${lc})$ inverserait les rôles (le groupe de référence serait « ${cibleP} ») ; $P(${lc} \\cap ${lkN})$ serait une part de TOUS les ${s.c.court}.`,
+      `L'information s'écrit $P_{${lc}}(${lkN}) = ${v}$.`
+    ),
+  };
+}
+/** Les données « faux positifs » : P(A), P_A(B), P_Ā(B) en pourcentages entiers. */
+function pcDonneesBayes() {
+  const s = pcSituation();
+  const p = randomInt(5, 60), q = randomInt(55, 98), r = randomInt(2, 35);
+  const inter = p * q, autre = (100 - p) * r; // en dix-millièmes
+  const pBA = inter / (inter + autre);
+  const texte = `${s.c.verbe} des ${s.c.pop}. $${p}\\,\\%$ d'entre ${s.c.eux} ${s.c.A.p}. Parmi ${s.c.ceux}-ci, $${q}\\,\\%$ ${s.c.B.p} ; parmi les autres, $${r}\\,\\%$ ${s.c.B.p}.`;
+  const calc =
+    `$P(${s.a} \\cap ${s.b}) = ${pcM(p, 100)} \\times ${pcM(q, 100)} = ${pcM(inter, 10000)}$ et $P(\\overline{${s.a}} \\cap ${s.b}) = ${pcM(100 - p, 100)} \\times ${pcM(r, 100)} = ${pcM(autre, 10000)}$, ` +
+    `donc $P(${s.b}) = ${pcM(inter + autre, 10000)}$ et $P_{${s.b}}(${s.a}) = \\dfrac{${pcM(inter, 10000)}}{${pcM(inter + autre, 10000)}} \\approx ${pcCent(pBA).replace(",", "{,}")}$.`;
+  return { s, p, q, r, inter, autre, pBA, texte, calc };
+}
+/** ★5 (court) : retourner la condition, P_B(A), avec les probabilités totales. */
+function pcGenInverserBayes(): TutorGeneratedQuestionV4 {
+  const d = pcDonneesBayes();
+  const { s } = d;
+  const question = pcQuestionSachant(s.c, s.c.B.s, s.c.B.p, s.c.A.s, s.c.A.p, `P_{${s.b}}(${s.a})`, pcDef(s.c));
+  const r = pcCent(d.pBA);
+  return {
+    text: `${d.texte} ${question} Arrondis au centième.`,
+    format: "short",
+    expected: [r, r.replace(",", ".")],
+    comparator: "number_equal",
+    explanation: exp(
+      `On connaît des probabilités sachant « ${s.c.A.s} » ; on demande l'inverse, sachant « ${s.c.B.s} ». $P_{${s.b}}(${s.a}) = \\dfrac{P(${s.a} \\cap ${s.b})}{P(${s.b})}$.`,
+      `$P(${s.b})$ se calcule par les probabilités totales (les deux chemins qui mènent à « ${s.c.B.s} »).`,
+      d.calc,
+      `$P_{${s.b}}(${s.a}) \\approx ${r.replace(",", "{,}")}$ : bien différent de $P_{${s.a}}(${s.b}) = ${pcM(d.q, 100)}$.`
+    ),
+  };
+}
+/** ★5 QCM : la valeur de P_B(A) au milieu des confusions. */
+function pcGenInverserQcm(): TutorGeneratedQuestionV4 {
+  let d = pcDonneesBayes();
+  const vals = (x: typeof d) => [x.pBA, x.q / 100, x.inter / 10000, (x.inter + x.autre) / 10000].map(pcCent);
+  for (let k = 0; k < 50 && new Set(vals(d)).size < 4; k++) d = pcDonneesBayes();
+  const [bon, ...leurres] = vals(d);
+  const { s } = d;
+  const choices = makeChoices(`$${bon.replace(",", "{,}")}$`, leurres.map((l) => `$${l.replace(",", "{,}")}$`));
+  return {
+    text: `${d.texte} On choisit ${s.c.un} au hasard. Sachant ${pcQue(s.c.il)} ${s.c.B.s}, quelle est la probabilité de l'événement « ${s.c.il} ${s.c.A.s} » ? (valeurs arrondies au centième)`,
+    format: "qcm",
+    choices,
+    expected: [`$${bon.replace(",", "{,}")}$`],
+    comparator: "mcq_exact",
+    explanation: exp(
+      `${pcDef(s.c)} On cherche $P_{${s.b}}(${s.a})$ : la condition est « ${s.c.B.s} ».`,
+      `Les pièges : $${pcM(d.q, 100)}$ est $P_{${s.a}}(${s.b})$ (l'inverse), $${pcM(d.inter, 10000)}$ est $P(${s.a} \\cap ${s.b})$, $${pcM(d.inter + d.autre, 10000)}$ est $P(${s.b})$.`,
+      d.calc,
+      `La bonne réponse est $${bon.replace(",", "{,}")}$.`
+    ),
+  };
+}
+/** ★5 ouverte : calculer P_B(A) et la comparer à P_A(B). */
+function pcGenInverserOuvert(): TutorGeneratedQuestionV4 {
+  const d = pcDonneesBayes();
+  const { s } = d;
+  const r = pcCent(d.pBA);
+  return {
+    text: `${d.texte} ${pcDef(s.c)} Calcule $P_{${s.b}}(${s.a})$ (arrondie au centième) et compare-la à $P_{${s.a}}(${s.b})$.`,
+    format: "open",
+    expected: [r, r.replace(",", ".")],
+    comparator: "contains_keyword",
+    explanation: exp(
+      `$P_{${s.a}}(${s.b}) = ${pcM(d.q, 100)}$ est donnée ; $P_{${s.b}}(${s.a})$ change de groupe de référence.`,
+      `On calcule $P(${s.b})$ par les probabilités totales, puis on divise.`,
+      d.calc,
+      `$P_{${s.b}}(${s.a}) \\approx ${r.replace(",", "{,}")}$, ${d.pBA < d.q / 100 ? "plus petite" : "plus grande"} que $P_{${s.a}}(${s.b}) = ${pcM(d.q, 100)}$ : on ne peut pas inverser la condition.`
+    ),
+  };
+}
+
+/* ===================== PC_REGISTRES : générateurs ===================== */
+type PcEcrit = { not: string; phrases: string[] };
+/** Les écritures d'une situation, chacune avec plusieurs phrases en français. */
+function pcEcritures2(s: PcS): Record<string, PcEcrit> {
+  const { c, a, b } = s;
+  const A = c.A, B = c.B;
+  return {
+    aSachantB: { not: `P_{${b}}(${a})`, phrases: [`parmi les ${c.court} qui ${B.p}, la proportion de ${c.ceux} qui ${A.p}`, `la probabilité de l'événement « ${c.il} ${A.s} », sachant que ${c.le} ${B.s}`] },
+    bSachantA: { not: `P_{${a}}(${b})`, phrases: [`parmi les ${c.court} qui ${A.p}, la proportion de ${c.ceux} qui ${B.p}`, `la probabilité de l'événement « ${c.il} ${B.s} », sachant que ${c.le} ${A.s}`] },
+    inter: { not: `P(${a} \\cap ${b})`, phrases: [`la probabilité de l'événement « ${c.le} ${A.s} et ${B.s} »`, `parmi tous les ${c.court}, la proportion de ${c.ceux} qui ${A.p} et ${B.p}`] },
+    bSachantNonA: { not: `P_{\\overline{${a}}}(${b})`, phrases: [`parmi les ${c.court} qui ${A.np}, la proportion de ${c.ceux} qui ${B.p}`, `la probabilité de l'événement « ${c.il} ${B.s} », sachant que ${c.le} ${A.ns}`] },
+    nonBSachantA: { not: `P_{${a}}(\\overline{${b}})`, phrases: [`parmi les ${c.court} qui ${A.p}, la proportion de ${c.ceux} qui ${B.np}`, `la probabilité de l'événement « ${c.il} ${B.ns} », sachant que ${c.le} ${A.s}`] },
+    a: { not: `P(${a})`, phrases: [`parmi tous les ${c.court}, la proportion de ${c.ceux} qui ${A.p}`, `la probabilité de l'événement « ${c.le} ${A.s} »`] },
+  };
+}
+/** Pour chaque écriture, les confusions les plus probables. */
+const PC_LEURRES: Record<string, string[]> = {
+  aSachantB: ["bSachantA", "inter", "a"],
+  bSachantA: ["aSachantB", "inter", "bSachantNonA"],
+  inter: ["bSachantA", "aSachantB", "a"],
+  bSachantNonA: ["bSachantA", "aSachantB", "nonBSachantA"],
+  nonBSachantA: ["bSachantA", "bSachantNonA", "aSachantB"],
+  a: ["inter", "bSachantA", "aSachantB"],
+};
+/** ★3 (phrase → écriture) ou ★4 (écriture → phrase). */
+function pcGenRegistresQcm(versNotation: boolean, cles: readonly string[]): TutorGeneratedQuestionV4 {
+  const s = pcSituation();
+  const E = pcEcritures2(s);
+  const k = pickOne(cles);
+  const leurres = PC_LEURRES[k];
+  const phrase = pickOne(E[k].phrases);
+  if (versNotation) {
+    const bon = `$${E[k].not}$`;
+    return {
+      text: `${pcDef(s.c)} Comment s'écrit : ${phrase} ?`,
+      format: "qcm",
+      choices: makeChoices(bon, leurres.map((l) => `$${E[l].not}$`)),
+      expected: [bon],
+      comparator: "mcq_exact",
+      explanation: exp(
+        "Dans $P_X(Y)$, l'événement en indice $X$ est la CONDITION : le groupe dans lequel on compte (« parmi … », « sachant que … »).",
+        k === "inter" || k === "a" ? "Ici aucun groupe n'est imposé : on compte parmi TOUS les individus, sans indice." : `Ici le groupe de référence est donné par « ${phrase.split(",")[phrase.startsWith("parmi") ? 0 : 1].trim()} ».`,
+        `D'où l'écriture $${E[k].not}$.`,
+        `La phrase s'écrit $${E[k].not}$.`
+      ),
+    };
+  }
+  const bon = pcMaj(phrase);
+  return {
+    text: `${pcDef(s.c)} Que représente $${E[k].not}$ ?`,
+    format: "qcm",
+    choices: makeChoices(bon, leurres.map((l) => pcMaj(E[l].phrases[E[k].phrases.indexOf(phrase)] ?? E[l].phrases[0]))),
+    expected: [bon],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "On lit l'indice d'abord : c'est la condition, le groupe dans lequel on compte. Sans indice, on compte parmi tous.",
+      `Dans $${E[k].not}$, ${k === "inter" || k === "a" ? "il n'y a pas d'indice" : "l'indice désigne le groupe de référence"}.`,
+      `$${E[k].not}$ : ${phrase}.`,
+      `La bonne phrase est : « ${bon} ».`
+    ),
+  };
+}
+/** ★4 court / ★5 ouverte : lire « x % parmi … » et donner P_C(K) ou P_C(K̄). */
+function pcGenRegistresValeur(ouvert: boolean): TutorGeneratedQuestionV4 {
+  const s = pcSituation();
+  const surA = Math.random() < 0.5;
+  const [C, K] = surA ? [s.c.A, s.c.B] : [s.c.B, s.c.A];
+  const [lc, lk] = surA ? [s.a, s.b] : [s.b, s.a];
+  const x = randomInt(3, 19) * 5;
+  const contraire = ouvert || Math.random() < 0.5;
+  const not = contraire ? `P_{${lc}}(\\overline{${lk}})` : `P_{${lc}}(${lk})`;
+  const val = contraire ? 100 - x : x;
+  const info = pickOne([`« Parmi les ${s.c.court} qui ${C.p}, $${x}\\,\\%$ ${K.p}. »`, `« $${x}\\,\\%$ des ${s.c.court} qui ${C.p} ${K.p}. »`]);
+  const q = ouvert
+    ? `Écris cette information avec la notation $P_\\ldots(\\ldots)$, puis donne la valeur de $${not}$.`
+    : `Quelle est la valeur de $${not}$ ?`;
+  return {
+    text: `${s.c.verbe} des ${s.c.pop}. ${pcDef(s.c)} On lit : ${info} ${q}`,
+    format: ouvert ? "open" : "short",
+    expected: pcEcritures(val, 100),
+    comparator: ouvert ? "contains_keyword" : "number_equal",
+    explanation: exp(
+      `« Parmi les ${s.c.court} qui ${C.p} » donne la condition : $${lc}$ en indice.`,
+      `L'information s'écrit $P_{${lc}}(${lk}) = ${pcM(x, 100)}$.`,
+      contraire ? `Dans le même groupe, les autres ${K.np} : $${not} = 1 - ${pcM(x, 100)} = ${pcM(val, 100)}$.` : `C'est directement la valeur demandée.`,
+      `$${not} = ${pcM(val, 100)}$.`
+    ),
+  };
+}
+
+/* ===================== PC_ARBRE : générateurs ===================== */
+/** Un arbre tiré : P(A) = p %, P_A(B) = q %, P_Ā(B) = r % (multiples de 5). */
+function pcArbreTire() {
+  const s = pcSituation();
+  let p = 0, q = 0, r = 0;
+  do {
+    p = randomInt(2, 18) * 5; q = randomInt(2, 18) * 5; r = randomInt(1, 18) * 5;
+  } while (q === r || p === 50);
+  const P = (x: number) => pcM(x, 100);
+  const fig = pcArbreFig(s.a, s.b, pcDec(p, 100), pcDec(q, 100), pcDec(r, 100), pcDec(100 - p, 100), pcDec(100 - q, 100), pcDec(100 - r, 100));
+  return { s, p, q, r, P, fig };
+}
+/** Les quatre chemins : [nom de l'événement, écriture, facteurs en %, produit en dix-millièmes]. */
+function pcChemins(t: ReturnType<typeof pcArbreTire>) {
+  const { s, p, q, r } = t;
+  const A = s.c.A, B = s.c.B;
+  return [
+    { ev: `${A.s} et ${B.s}`, not: `${s.a} \\cap ${s.b}`, f: [p, q], v: p * q },
+    { ev: `${A.s} et ${B.ns}`, not: `${s.a} \\cap \\overline{${s.b}}`, f: [p, 100 - q], v: p * (100 - q) },
+    { ev: `${A.ns} et ${B.s}`, not: `\\overline{${s.a}} \\cap ${s.b}`, f: [100 - p, r], v: (100 - p) * r },
+    { ev: `${A.ns} et ${B.ns}`, not: `\\overline{${s.a}} \\cap \\overline{${s.b}}`, f: [100 - p, 100 - r], v: (100 - p) * (100 - r) },
+  ];
+}
+/** ★2 QCM / ★3 court : la probabilité d'UN chemin. */
+function pcGenArbreChemin(qcm: boolean): TutorGeneratedQuestionV4 {
+  const t = pcArbreTire();
+  const { s, P } = t;
+  const ch = pickOne(pcChemins(t));
+  const [f1, f2] = ch.f;
+  const question = pickOne([
+    `On choisit ${s.c.un} au hasard. Quelle est la probabilité de l'événement « ${s.c.le} ${ch.ev} » ?`,
+    `Calcule $P(${ch.not})$.`,
+  ]);
+  const base = {
+    text: `${s.c.verbe} des ${s.c.pop}. ${pcDef(s.c)} L'arbre pondéré résume la situation. ${question}`,
+    canvas: t.fig,
+    explanation: exp(
+      `L'événement « ${ch.ev} » correspond à UN chemin de l'arbre : une branche du premier niveau ($${P(f1)}$), puis une du second ($${P(f2)}$).`,
+      "Règle du produit : on multiplie les probabilités rencontrées le long du chemin.",
+      `$P(${ch.not}) = ${P(f1)} \\times ${P(f2)} = ${pcM(ch.v, 10000)}$.`,
+      `La probabilité est $${pcM(ch.v, 10000)}$.`
+    ),
+  };
+  if (!qcm) return { ...base, format: "short", expected: pcEcritures(ch.v, 10000), comparator: "number_equal" };
+  const vals = [ch.v / 10000, (f1 + f2) / 100, f2 / 100, f1 / 100];
+  const txt = [`$${pcM(ch.v, 10000)}$`, `$${pcM(f1 + f2, 100)}$`, `$${P(f2)}$`, `$${P(f1)}$`];
+  vals.push(1 - ch.v / 10000, (f1 * (100 - f2)) / 10000);
+  txt.push(`$${pcM(10000 - ch.v, 10000)}$`, `$${pcM(f1 * (100 - f2), 10000)}$`);
+  const ok = txt.filter((_, i) => vals.findIndex((v) => Math.abs(v - vals[i]) < 1e-9) === i);
+  return { ...base, format: "qcm", choices: makeChoices(txt[0], ok.slice(1, 4)), expected: [txt[0]], comparator: "mcq_exact" };
+}
+/** ★4 : deux chemins à additionner (exactement un des deux) ou le chemin « ni l'un ni l'autre ». */
+function pcGenArbreDeux(): TutorGeneratedQuestionV4 {
+  const t = pcArbreTire();
+  const { s, P } = t;
+  const [, c2, c3, c4] = pcChemins(t);
+  const exact = Math.random() < 0.6;
+  const v = exact ? c2.v + c3.v : c4.v;
+  const q = exact
+    ? pickOne([
+        `Quelle est la probabilité qu'UN SEUL des deux événements $${s.a}$ et $${s.b}$ soit réalisé ?`,
+        `Calcule $P(${c2.not}) + P(${c3.not})$, la probabilité qu'exactement un des deux événements soit réalisé.`,
+      ])
+    : pickOne([`Quelle est la probabilité qu'aucun des deux événements $${s.a}$ et $${s.b}$ ne soit réalisé ?`, `Calcule $P(${c4.not})$.`]);
+  return {
+    text: `${s.c.verbe} des ${s.c.pop}. ${pcDef(s.c)} L'arbre pondéré résume la situation. ${q}`,
+    format: "short",
+    expected: pcEcritures(v, 10000),
+    comparator: "number_equal",
+    canvas: t.fig,
+    explanation: exact
+      ? exp(
+          `« Un seul des deux » regroupe deux chemins : $${c2.not}$ et $${c3.not}$.`,
+          "On multiplie le long de chaque chemin, puis on ADDITIONNE les chemins.",
+          `$${P(c2.f[0])} \\times ${P(c2.f[1])} + ${P(c3.f[0])} \\times ${P(c3.f[1])} = ${pcM(c2.v, 10000)} + ${pcM(c3.v, 10000)} = ${pcM(v, 10000)}$.`,
+          `La probabilité est $${pcM(v, 10000)}$.`
+        )
+      : exp(
+          `« Aucun des deux » est le chemin $${c4.not}$ : les deux branches « contraires ».`,
+          `Sur la branche $\\overline{${s.a}}$ on lit $${P(100 - t.p)}$, puis $${P(100 - t.r)}$ vers $\\overline{${s.b}}$ (pas $${P(100 - t.q)}$, qui part de $${s.a}$).`,
+          `$${P(c4.f[0])} \\times ${P(c4.f[1])} = ${pcM(v, 10000)}$.`,
+          `La probabilité est $${pcM(v, 10000)}$.`
+        ),
+  };
+}
+/** ★5 court / ouverte : arbre sans dessin, une branche à compléter avant le produit. */
+function pcGenArbreACompleter(ouvert: boolean): TutorGeneratedQuestionV4 {
+  const t = pcArbreTire();
+  const { s, p, q, P } = t;
+  const v = p * (100 - q);
+  const texte = pickOne([
+    `${s.c.verbe} des ${s.c.pop} : $${p}\\,\\%$ d'entre ${s.c.eux} ${s.c.A.p} et, parmi ${s.c.ceux}-ci, $${q}\\,\\%$ ${s.c.B.p}. ${pcDef(s.c)}`,
+    `${s.c.verbe} des ${s.c.pop}. ${pcDef(s.c)} On sait que $P(${s.a}) = ${P(p)}$ et $P_{${s.a}}(${s.b}) = ${P(q)}$.`,
+    `${s.c.verbe} des ${s.c.pop}. $${p}\\,\\%$ ${s.c.A.p} ; $${q}\\,\\%$ des ${s.c.court} qui ${s.c.A.p} ${s.c.B.p}. ${pcDef(s.c)}`,
+  ]);
+  const question = ouvert
+    ? `Construis l'arbre pondéré (premier niveau : $${s.a}$), puis calcule la probabilité de l'événement « ${s.c.le} ${s.c.A.s} et ${s.c.B.ns} ».`
+    : pickOne([`Calcule $P(${s.a} \\cap \\overline{${s.b}})$.`, `On choisit ${s.c.un} au hasard. Quelle est la probabilité de l'événement « ${s.c.il} ${s.c.A.s} et ${s.c.B.ns} » ?`]);
+  return {
+    text: `${texte} ${question}`,
+    format: ouvert ? "open" : "short",
+    expected: pcEcritures(v, 10000),
+    comparator: ouvert ? "contains_keyword" : "number_equal",
+    explanation: exp(
+      `Premier niveau : $P(${s.a}) = ${P(p)}$. Second niveau depuis $${s.a}$ : $P_{${s.a}}(${s.b}) = ${P(q)}$, donc la branche $\\overline{${s.b}}$ porte $1 - ${P(q)} = ${P(100 - q)}$.`,
+      "Les branches issues d'un même nœud ont une somme égale à $1$ ; puis on multiplie le long du chemin.",
+      `$P(${s.a} \\cap \\overline{${s.b}}) = ${P(p)} \\times ${P(100 - q)} = ${pcM(v, 10000)}$.`,
+      `La probabilité est $${pcM(v, 10000)}$.`
+    ),
+  };
+}
+
+/* ===================== PC_ARBRE_CONSTRUIRE : générateurs ===================== */
+/** L'énoncé d'un arbre : « p % … ; parmi ceux-ci q % … ; parmi les autres r % … ». */
+function pcEnonceArbre(t: ReturnType<typeof pcArbreTire>): string {
+  const { s, p, q, r } = t;
+  const c = s.c;
+  return pickOne([
+    `${c.verbe} des ${c.pop} : $${p}\\,\\%$ d'entre ${c.eux} ${c.A.p}. Parmi ${c.ceux}-ci, $${q}\\,\\%$ ${c.B.p} ; parmi les autres, $${r}\\,\\%$ ${c.B.p}.`,
+    `${c.verbe} des ${c.pop}. $${p}\\,\\%$ ${c.A.p}, les autres ${c.A.np}. $${q}\\,\\%$ des ${c.court} qui ${c.A.p} ${c.B.p}, contre $${r}\\,\\%$ de ${c.ceux} qui ${c.A.np}.`,
+  ]);
+}
+/** ★3 (branche donnée directement) / ★4 (branche contraire) / ★5 ouverte. */
+function pcGenArbreBranche(niveau: 3 | 4 | 5): TutorGeneratedQuestionV4 {
+  const t = pcArbreTire();
+  const { s, p, q, r, P } = t;
+  const na = `\\overline{${s.a}}`, nb = `\\overline{${s.b}}`;
+  const directes = [
+    { de: "la racine", vers: s.a, v: p, pourquoi: `$${p}\\,\\%$ ${s.c.A.p} : c'est $P(${s.a})$.` },
+    { de: s.a, vers: s.b, v: q, pourquoi: `« parmi ${s.c.ceux} qui ${s.c.A.p}, $${q}\\,\\%$ » : c'est $P_{${s.a}}(${s.b})$.` },
+    { de: na, vers: s.b, v: r, pourquoi: `« parmi les autres, $${r}\\,\\%$ » : c'est $P_{${na}}(${s.b})$.` },
+  ];
+  const contraires = [
+    { de: "la racine", vers: na, v: 100 - p, pourquoi: `Les branches issues de la racine ont une somme égale à $1$ : $1 - ${P(p)} = ${P(100 - p)}$.` },
+    { de: s.a, vers: nb, v: 100 - q, pourquoi: `Depuis $${s.a}$, les deux branches ont une somme égale à $1$ : $1 - ${P(q)} = ${P(100 - q)}$.` },
+    { de: na, vers: nb, v: 100 - r, pourquoi: `Depuis $${na}$, les deux branches ont une somme égale à $1$ : $1 - ${P(r)} = ${P(100 - r)}$.` },
+  ];
+  const b = pickOne(niveau === 3 ? directes : contraires);
+  const de = b.de === "la racine" ? "la racine" : `le nœud $${b.de}$`;
+  const question = `On construit l'arbre pondéré avec $${s.a}$ au premier niveau. Quelle probabilité porte la branche qui va de ${de} vers $${b.vers}$ ?`;
+  const base = `${pcEnonceArbre(t)} ${pcDef(s.c)} ${question}`;
+  const explication = exp(
+    "Au premier niveau : les probabilités de $" + s.a + "$ et de son contraire. Au second : des probabilités CONDITIONNELLES, sachant la branche d'où l'on part.",
+    b.pourquoi,
+    `La branche porte $${P(b.v)}$.`,
+    `Réponse : $${P(b.v)}$.`
+  );
+  if (niveau === 5)
+    return { text: `${base} Justifie.`, format: "open", expected: pcEcritures(b.v, 100), comparator: "contains_keyword", explanation: explication };
+  const cand = [b.v, p, q, r, 100 - p, 100 - q, 100 - r].filter((x, i, arr) => arr.indexOf(x) === i);
+  const bon = `$${P(b.v)}$`;
+  const leurres = cand.slice(1).map((x) => `$${P(x)}$`);
+  const extras = [p * q, p * (100 - q), (100 - p) * r].map((x) => `$${pcM(x, 10000)}$`);
+  leurres.push(...extras.filter((x) => x !== bon && !leurres.includes(x)));
+  return { text: base, format: "qcm", choices: makeChoices(bon, shuffle(leurres)), expected: [bon], comparator: "mcq_exact", explanation: explication };
+}
+/** ★5 QCM : quel événement mettre au premier niveau ? (celui qui sert de condition). */
+function pcGenArbrePremierNiveau(): TutorGeneratedQuestionV4 {
+  const s = pcSituation();
+  const surB = Math.random() < 0.5;
+  const [C, K] = surB ? [s.c.B, s.c.A] : [s.c.A, s.c.B];
+  const [lc, lk] = surB ? [s.b, s.a] : [s.a, s.b];
+  const x = randomInt(2, 18) * 5, y = randomInt(2, 18) * 5, z = randomInt(2, 18) * 5;
+  const bon = `$${lc}$, puis $${lk}$ au second niveau`;
+  const choices = makeChoices(bon, [`$${lk}$, puis $${lc}$ au second niveau`, `$${lc} \\cap ${lk}$ au premier niveau`, "peu importe : les deux arbres se construisent sans calcul"]);
+  return {
+    text: `${s.c.verbe} des ${s.c.pop}. ${pcDef(s.c)} On sait que $${x}\\,\\%$ d'entre ${s.c.eux} ${C.p} ; parmi ${s.c.ceux}-ci, $${y}\\,\\%$ ${K.p}, et parmi les autres, $${z}\\,\\%$ ${K.p}. Quel arbre pondéré construire pour placer directement ces données ?`,
+    format: "qcm",
+    choices,
+    expected: [bon],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Le second niveau d'un arbre porte des probabilités conditionnelles SACHANT le premier niveau.",
+      `Les données « parmi ${s.c.ceux} qui ${C.p} » sont des probabilités sachant $${lc}$ : $P_{${lc}}(${lk}) = ${pcM(y, 100)}$ et $P_{\\overline{${lc}}}(${lk}) = ${pcM(z, 100)}$.`,
+      `Donc $${lc}$ au premier niveau (avec $${pcM(x, 100)}$ et $${pcM(100 - x, 100)}$), $${lk}$ au second. L'autre ordre demanderait de calculer $P_{${lk}}(${lc})$ d'abord.`,
+      `On place $${lc}$ au premier niveau.`
+    ),
+  };
+}
+
+/* ===================== PC_SUCCESSION : générateurs ===================== */
+type PcEpreuve = { il: string; qui: string; e: string; fois: string; s: string; ns: string; min: number; max: number };
+const PC_EPREUVES: readonly PcEpreuve[] = [
+  { il: "il", qui: "le footballeur", e: "Un footballeur tire un penalty", fois: "deux penalties, dans les mêmes conditions", s: "marque", ns: "rate", min: 12, max: 18 },
+  { il: "il", qui: "l'élève au carrefour", e: "Le matin, un élève arrive au feu du carrefour", fois: "deux matins de suite", s: "trouve le feu vert", ns: "trouve le feu rouge", min: 6, max: 12 },
+  { il: "il", qui: "l'élève qui attend le car", e: "Un élève attend le car jaune", fois: "deux jours de suite", s: "voit le car arriver à l'heure", ns: "voit le car arriver en retard", min: 14, max: 19 },
+  { il: "elle", qui: "la basketteuse", e: "Une basketteuse tire un lancer franc", fois: "deux lancers francs", s: "réussit son tir", ns: "manque son tir", min: 10, max: 17 },
+  { il: "elle", qui: "la famille", e: "Une famille part en sortie en mer à Saint-Gilles", fois: "deux sorties", s: "aperçoit des dauphins", ns: "ne voit aucun dauphin", min: 8, max: 16 },
+  { il: "il", qui: "le jardinier", e: "Un jardinier sème une graine de vacoa", fois: "deux graines", s: "voit la graine germer", ns: "ne voit pas la graine germer", min: 8, max: 16 },
+  { il: "il", qui: "le joueur de pétanque", e: "Un joueur de pétanque tire une boule", fois: "deux boules", s: "fait un carreau", ns: "ne fait pas de carreau", min: 2, max: 7 },
+  { il: "elle", qui: "la volleyeuse", e: "Une volleyeuse sert", fois: "deux services", s: "réussit son service", ns: "met le service dans le filet", min: 14, max: 19 },
+  { il: "il", qui: "le randonneur", e: "Un randonneur arrive au belvédère du Maïdo", fois: "deux matins différents", s: "a une vue dégagée", ns: "trouve le cirque dans les nuages", min: 6, max: 14 },
+  { il: "on", qui: "on", e: "On pioche un letchi dans un grand panier", fois: "deux letchis (le panier est si grand que les proportions ne changent pas)", s: "tombe sur un letchi bien sucré", ns: "tombe sur un letchi acide", min: 12, max: 18 },
+  { il: "il", qui: "l'archer", e: "Un archer tire une flèche", fois: "deux flèches", s: "touche le centre", ns: "manque le centre", min: 3, max: 9 },
+  { il: "il", qui: "le surfeur", e: "Un surfeur part sur une vague", fois: "deux vagues", s: "réussit son take-off", ns: "chute", min: 8, max: 16 },
+];
+/** ★3 / ★4 / ★5 : deux (ou trois) épreuves identiques et indépendantes. */
+function pcGenSuccession(niveau: 3 | 4 | 5, format: "short" | "qcm" | "open"): TutorGeneratedQuestionV4 {
+  const ep = pickOne(PC_EPREUVES);
+  let p = randomInt(ep.min, ep.max) * 5; // en %
+  if (p === 50) p = pickOne([45, 55]); // à 0,5, succès et échec se confondent : les leurres coïncident
+  const q = 100 - p;
+  const P = (x: number) => pcM(x, 100);
+  type Cas = { ev: string; v: number; den: number; calc: string; leurres: [number, number][] };
+  const cas: Cas[] =
+    niveau === 3
+      ? [
+          { ev: `${ep.il} ${ep.s} les deux fois`, v: p * p, den: 10000, calc: `$${P(p)} \\times ${P(p)} = ${pcM(p * p, 10000)}$`, leurres: [[2 * p, 100], [p, 100], [p * q, 10000]] },
+          { ev: `${ep.il} ${ep.ns} les deux fois`, v: q * q, den: 10000, calc: `$${P(q)} \\times ${P(q)} = ${pcM(q * q, 10000)}$`, leurres: [[1, 1], [q, 100], [p * p, 10000]] },
+          { ev: `${ep.il} ${ep.s} la première fois, puis ${ep.ns} la seconde`, v: p * q, den: 10000, calc: `$${P(p)} \\times ${P(q)} = ${pcM(p * q, 10000)}$`, leurres: [[2 * p * q, 10000], [p * p, 10000], [100, 100]] },
+        ]
+      : niveau === 4
+        ? [
+            { ev: `${ep.il} ${ep.s} au moins une fois`, v: 10000 - q * q, den: 10000, calc: `$1 - ${P(q)} \\times ${P(q)} = 1 - ${pcM(q * q, 10000)} = ${pcM(10000 - q * q, 10000)}$ (le contraire de « au moins une fois » est « jamais »)`, leurres: [[2 * p, 100], [p * p, 10000], [2 * p * q, 10000]] },
+            { ev: `${ep.il} ${ep.s} exactement une fois`, v: 2 * p * q, den: 10000, calc: `deux chemins : $${P(p)} \\times ${P(q)} + ${P(q)} \\times ${P(p)} = ${pcM(2 * p * q, 10000)}$`, leurres: [[p * q, 10000], [10000 - q * q, 10000], [p, 100]] },
+          ]
+        : [
+            { ev: `${ep.il} ${ep.s} au moins une fois en trois essais`, v: 1000000 - q * q * q, den: 1000000, calc: `$1 - ${P(q)}^3 = 1 - ${pcM(q * q * q, 1000000)} = ${pcM(1000000 - q * q * q, 1000000)}$`, leurres: [[3 * p, 100], [p * p * p, 1000000], [10000 - q * q, 10000]] },
+            { ev: `${ep.il} ${ep.s} les trois fois`, v: p * p * p, den: 1000000, calc: `$${P(p)}^3 = ${pcM(p * p * p, 1000000)}$`, leurres: [[3 * p, 100], [p * p, 10000], [p, 100]] },
+            { ev: `${ep.il} ${ep.ns} une seule fois sur trois essais`, v: 3 * q * p * p, den: 1000000, calc: `trois chemins (l'échec au 1er, au 2e ou au 3e essai) : $3 \\times ${P(q)} \\times ${P(p)}^2 = ${pcM(3 * q * p * p, 1000000)}$`, leurres: [[q * p * p, 1000000], [q, 100], [p * p, 10000]] },
+          ];
+  const c = pickOne(cas);
+  const repet = niveau === 5 ? "trois essais" : ep.fois;
+  const text = `${ep.e} : ${ep.il} ${ep.s} avec une probabilité de $${P(p)}$. On répète l'expérience : ${repet}, les essais étant indépendants. ${pickOne([
+    `Quelle est la probabilité de l'événement « ${c.ev} » ?`,
+    `Calcule la probabilité que l'on observe : « ${c.ev} ».`,
+  ])}`;
+  const explanation = exp(
+    "Les épreuves sont indépendantes : la probabilité d'un chemin est le PRODUIT des probabilités, sans condition à prendre en compte.",
+    `Succès : $${P(p)}$ ; échec : $1 - ${P(p)} = ${P(q)}$.`,
+    `On calcule : ${c.calc}.`,
+    `La probabilité est $${pcM(c.v, c.den)}$.`
+  );
+  if (format === "short") return { text, format, expected: pcEcritures(c.v, c.den), comparator: "number_equal", explanation };
+  if (format === "open") return { text: `${text} Justifie avec un arbre.`, format, expected: pcEcritures(c.v, c.den), comparator: "contains_keyword", explanation };
+  const extras: [number, number][] = [[p, 100], [q, 100], [p * p, 10000], [q * q, 10000], [2 * p * q, 10000]];
+  const ok = [...c.leurres, ...extras].filter((l) => l[0] / l[1] <= 1 && Math.abs(l[0] / l[1] - c.v / c.den) > 1e-9);
+  const bon = `$${pcM(c.v, c.den)}$`;
+  return { text, format, choices: makeChoices(bon, [...new Set(ok.map((l) => `$${pcM(l[0], l[1])}$`))].slice(0, 3)), expected: [bon], comparator: "mcq_exact", explanation };
+}
+
+/* ===================== PC_TOTALES : générateurs ===================== */
+/** ★3 QCM « quel calcul » / ★4 court / ★5 ouverte : P(B) par les probabilités totales. */
+function pcGenTotales(format: "qcm" | "short" | "open"): TutorGeneratedQuestionV4 {
+  const t = pcArbreTire();
+  const { s, p, q, r, P } = t;
+  const vB = p * q + (100 - p) * r;
+  const avecArbre = Math.random() < 0.5;
+  const donnees = avecArbre ? `${s.c.verbe} des ${s.c.pop}. ${pcDef(s.c)} L'arbre pondéré résume la situation.` : `${pcEnonceArbre(t)} ${pcDef(s.c)}`;
+  const question = pickOne([
+    `Calcule $P(${s.b})$.`,
+    `On choisit ${s.c.un} au hasard. Quelle est la probabilité de l'événement « ${s.c.il} ${s.c.B.s} » ?`,
+    `Quelle proportion de l'ensemble des ${s.c.court} ${s.c.B.p} ? Donne-la en écriture décimale.`,
+  ]);
+  const explanation = exp(
+    `$${s.a}$ et $\\overline{${s.a}}$ forment une partition : « ${s.c.B.s} » se produit par deux chemins, $${s.a} \\cap ${s.b}$ et $\\overline{${s.a}} \\cap ${s.b}$.`,
+    `Formule des probabilités totales : $P(${s.b}) = P(${s.a}) \\times P_{${s.a}}(${s.b}) + P(\\overline{${s.a}}) \\times P_{\\overline{${s.a}}}(${s.b})$.`,
+    `$P(${s.b}) = ${P(p)} \\times ${P(q)} + ${P(100 - p)} \\times ${P(r)} = ${pcM(p * q, 10000)} + ${pcM((100 - p) * r, 10000)} = ${pcM(vB, 10000)}$.`,
+    `$P(${s.b}) = ${pcM(vB, 10000)}$.`
+  );
+  const canvas = avecArbre ? { canvas: t.fig } : {};
+  if (format === "short") return { text: `${donnees} ${question}`, format, expected: pcEcritures(vB, 10000), comparator: "number_equal", explanation, ...canvas };
+  if (format === "open")
+    return { text: `${donnees} ${question} Écris la formule utilisée.`, format, expected: pcEcritures(vB, 10000), comparator: "contains_keyword", explanation, ...canvas };
+  const bon = `$${P(p)} \\times ${P(q)} + ${P(100 - p)} \\times ${P(r)}$`;
+  const fausses: [string, number][] = [
+    [`$${P(q)} + ${P(r)}$`, (q + r) / 100],
+    [`$${P(p)} \\times ${P(q)}$`, (p * q) / 10000],
+    [`$${P(p)} \\times ${P(q)} + ${P(r)}$`, (p * q) / 10000 + r / 100],
+    [`$${P(p)} \\times ${P(q)} + ${P(p)} \\times ${P(r)}$`, (p * (q + r)) / 10000],
+  ];
+  const ok = fausses.filter(([, v], i) => Math.abs(v - vB / 10000) > 1e-9 && fausses.findIndex(([, w]) => Math.abs(w - v) < 1e-9) === i).map(([x]) => x);
+  const qq = pickOne([
+    `Quel calcul donne $P(${s.b})$ ?`,
+    `Quel calcul donne la probabilité de l'événement « ${s.c.le} ${s.c.B.s} » ?`,
+    `Quel calcul donne la proportion de l'ensemble des ${s.c.court} qui ${s.c.B.p} ?`,
+  ]);
+  return { text: `${donnees} ${qq}`, format, choices: makeChoices(bon, ok), expected: [bon], comparator: "mcq_exact", explanation, ...canvas };
+}
+/** ★5 court : la formule à l'envers — retrouver P_Ā(B) ou P(A) connaissant P(B). */
+function pcGenTotalesInverse(): TutorGeneratedQuestionV4 {
+  const t = pcArbreTire();
+  const { s, p, q, r, P } = t;
+  const vB = p * q + (100 - p) * r;
+  const chercheR = Math.random() < 0.5;
+  const c = s.c;
+  const texte = chercheR
+    ? `${c.verbe} des ${c.pop} : $${p}\\,\\%$ d'entre ${c.eux} ${c.A.p}, et $${q}\\,\\%$ de ${c.ceux}-ci ${c.B.p}. Au total, $${pcPctM(vB, 10000)}$ des ${c.court} ${c.B.p}. ${pcDef(c)} Calcule $P_{\\overline{${s.a}}}(${s.b})$.`
+    : `${c.verbe} des ${c.pop}. $${q}\\,\\%$ des ${c.court} qui ${c.A.p} ${c.B.p}, contre $${r}\\,\\%$ de ${c.ceux} qui ${c.A.np}. Au total, $${pcPctM(vB, 10000)}$ des ${c.court} ${c.B.p}. ${pcDef(c)} Calcule $P(${s.a})$.`;
+  return {
+    text: texte,
+    format: "short",
+    expected: pcEcritures(chercheR ? r : p, 100),
+    comparator: "number_equal",
+    explanation: chercheR
+      ? exp(
+          `Probabilités totales : $P(${s.b}) = P(${s.a}) P_{${s.a}}(${s.b}) + P(\\overline{${s.a}}) P_{\\overline{${s.a}}}(${s.b})$, avec une seule inconnue $x = P_{\\overline{${s.a}}}(${s.b})$.`,
+          `$${pcM(vB, 10000)} = ${P(p)} \\times ${P(q)} + ${P(100 - p)} \\, x$, soit $${pcM(vB, 10000)} = ${pcM(p * q, 10000)} + ${P(100 - p)} \\, x$.`,
+          `$x = \\dfrac{${pcM(vB, 10000)} - ${pcM(p * q, 10000)}}{${P(100 - p)}} = \\dfrac{${pcM((100 - p) * r, 10000)}}{${P(100 - p)}} = ${P(r)}$.`,
+          `$P_{\\overline{${s.a}}}(${s.b}) = ${P(r)}$.`
+        )
+      : exp(
+          `Probabilités totales avec l'inconnue $x = P(${s.a})$ : $P(${s.b}) = x \\times ${P(q)} + (1 - x) \\times ${P(r)}$.`,
+          `$${pcM(vB, 10000)} = ${P(r)} + x \\, (${P(q)} - ${P(r)})$, soit $${pcM(vB, 10000)} - ${P(r)} = ${pcM(q - r, 100)} \\, x$.`,
+          `$x = \\dfrac{${pcM(vB - 100 * r, 10000)}}{${pcM(q - r, 100)}} = ${P(p)}$.`,
+          `$P(${s.a}) = ${P(p)}$.`
+        ),
+  };
+}
+
+/* ===================== PC_PARTITION : générateurs ===================== */
+/** Un univers numéroté de 1 à n, et une famille d'événements tirée ; le verdict est CALCULÉ. */
+function pcGenPartitionDe(ouvert: boolean): TutorGeneratedQuestionV4 {
+  const univers = pickOne([
+    (n: number) => `On lance un dé équilibré à $${n}$ faces numérotées de $1$ à $${n}$.`,
+    (n: number) => `On tire une boule dans une urne contenant $${n}$ boules numérotées de $1$ à $${n}$.`,
+    (n: number) => `La roue de la kermesse a $${n}$ secteurs numérotés de $1$ à $${n}$ ; on la fait tourner.`,
+    (n: number) => `On tire au sort un dossard parmi $${n}$ dossards numérotés de $1$ à $${n}$ au trail de Cilaos.`,
+    (n: number) => `On tire un ticket de tombola parmi $${n}$ tickets numérotés de $1$ à $${n}$.`,
+  ]);
+  const n = pickOne([6, 8, 10, 12, 20]);
+  const k = randomInt(2, n - 2);
+  type Ev = { nom: string; f: (x: number) => boolean };
+  const familles: Ev[][] = [
+    [{ nom: "obtenir un nombre pair", f: (x) => x % 2 === 0 }, { nom: "obtenir un nombre impair", f: (x) => x % 2 === 1 }],
+    [{ nom: `obtenir un nombre inférieur ou égal à $${k}$`, f: (x) => x <= k }, { nom: `obtenir un nombre supérieur ou égal à $${k + 1}$`, f: (x) => x >= k + 1 }],
+    [{ nom: `obtenir un nombre strictement inférieur à $${k}$`, f: (x) => x < k }, { nom: `obtenir un nombre strictement supérieur à $${k}$`, f: (x) => x > k }],
+    [{ nom: `obtenir un nombre inférieur ou égal à $${k}$`, f: (x) => x <= k }, { nom: `obtenir un nombre supérieur ou égal à $${k}$`, f: (x) => x >= k }],
+    [{ nom: "obtenir un multiple de $2$", f: (x) => x % 2 === 0 }, { nom: "obtenir un multiple de $3$", f: (x) => x % 3 === 0 }],
+    [{ nom: "obtenir un multiple de $3$", f: (x) => x % 3 === 0 }, { nom: "obtenir un nombre dont le reste dans la division par $3$ est $1$", f: (x) => x % 3 === 1 }, { nom: "obtenir un nombre dont le reste dans la division par $3$ est $2$", f: (x) => x % 3 === 2 }],
+    [{ nom: `obtenir un nombre inférieur ou égal à $${k}$`, f: (x) => x <= k }, { nom: "obtenir un nombre pair", f: (x) => x % 2 === 0 }],
+    [{ nom: "obtenir un nombre premier", f: (x) => [2, 3, 5, 7, 11, 13, 17, 19].includes(x) }, { nom: "obtenir un nombre pair", f: (x) => x % 2 === 0 }],
+    [{ nom: "obtenir un nombre premier", f: (x) => [2, 3, 5, 7, 11, 13, 17, 19].includes(x) }, { nom: "obtenir un nombre qui n'est pas premier", f: (x) => ![2, 3, 5, 7, 11, 13, 17, 19].includes(x) }],
+  ];
+  const fam = pickOne(familles);
+  const issues = Array.from({ length: n }, (_, i) => i + 1);
+  const communes = issues.filter((x) => fam.filter((e) => e.f(x)).length >= 2);
+  const oubliees = issues.filter((x) => fam.every((e) => !e.f(x)));
+  const liste = fam.map((e) => `« ${e.nom} »`).join(fam.length === 2 ? " et " : ", ");
+  const verdict =
+    !communes.length && !oubliees.length ? "oui"
+    : communes.length && oubliees.length ? "non : des issues sont communes ET d'autres ne sont dans aucun événement"
+    : communes.length ? "non : des issues appartiennent à deux événements"
+    : "non : des issues n'appartiennent à aucun événement";
+  const lst = (xs: number[]) => xs.map((x) => `$${x}$`).join(", ");
+  const explanation = exp(
+    "Une partition : des événements non vides, deux à deux incompatibles (aucune issue commune), dont la réunion est l'univers entier (aucune issue oubliée).",
+    communes.length ? `Issues communes : ${lst(communes)} — les événements ne sont pas incompatibles.` : "Aucune issue n'appartient à deux événements : ils sont incompatibles.",
+    oubliees.length ? `Issues oubliées : ${lst(oubliees)} — la réunion n'est pas l'univers.` : "Chaque issue appartient à l'un des événements : la réunion est l'univers.",
+    verdict === "oui" ? "Oui, c'est une partition." : `Non, ce n'est pas une partition.`
+  );
+  if (ouvert) {
+    const nb = communes.length + oubliees.length;
+    return {
+      text: `${univers(n)} ${pickOne(["On considère les événements", "On s'intéresse aux événements", "Un camarade propose les événements"])} ${liste}. Combien d'issues empêchent ces événements de former une partition (issues communes à deux événements, ou dans aucun) ? Réponds $0$ si c'est une partition.`,
+      format: "short",
+      expected: [String(nb)],
+      comparator: "number_equal",
+      explanation,
+    };
+  }
+  const options = ["oui", "non : des issues appartiennent à deux événements", "non : des issues n'appartiennent à aucun événement", "non : des issues sont communes ET d'autres ne sont dans aucun événement"];
+  return {
+    text: `${univers(n)} ${pickOne([
+      `Les événements ${liste} forment-ils une partition de l'univers ?`,
+      `On considère les événements ${liste}. Peut-on dire qu'ils forment une partition de l'univers ?`,
+      `Un élève affirme que les événements ${liste} forment une partition de l'univers. A-t-il raison ?`,
+    ])}`,
+    format: "qcm",
+    choices: makeChoices(verdict, options),
+    expected: [verdict],
+    comparator: "mcq_exact",
+    explanation,
+  };
+}
+/** « un élève » → « l'élève », « un jour » → « le jour ». */
+function pcLeDe(un: string): string {
+  const nom = un.replace(/^une? /, "");
+  if (/^[aeiouéèêh]/i.test(nom)) return `l'${nom}`;
+  return `${un.startsWith("une ") ? "la" : "le"} ${nom}`;
+}
+/** Des partitions concrètes en 3 ou 4 parties. */
+const PC_PARTITIONS: readonly { univ: string; un: string; parts: string[]; cond: string }[] = [
+  { univ: "élèves d'un lycée de Saint-Paul", un: "un élève", parts: ["est en seconde", "est en première", "est en terminale"], cond: "pratique un sport en club" },
+  { univ: "élèves d'un collège de Saint-Benoît", un: "un élève", parts: ["vient en car", "vient en voiture", "vient à pied ou à vélo"], cond: "arrive en retard au moins une fois par mois" },
+  { univ: "jours de juillet à Cilaos", un: "un jour", parts: ["est ensoleillé", "est nuageux sans pluie", "est pluvieux"], cond: "voit plus de cent randonneurs au départ du sentier" },
+  { univ: "coureurs de la Diagonale des Fous", un: "un coureur", parts: ["finit en moins de 40 heures", "finit en 40 heures ou plus", "abandonne"], cond: "a déjà couru le Grand Raid" },
+  { univ: "bonbons coco d'un sachet", un: "un bonbon", parts: ["est blanc", "est rose", "est marron"], cond: "est trop sucré au goût du goûteur" },
+  { univ: "donneurs de sang d'une collecte à Saint-Pierre", un: "un donneur", parts: ["est du groupe A", "est du groupe B", "est du groupe AB", "est du groupe O"], cond: "donne son sang pour la première fois" },
+  { univ: "clients d'un snack", un: "un client", parts: ["paie en espèces", "paie par carte", "paie avec son téléphone"], cond: "commande un cari" },
+  { univ: "colis d'un transporteur", un: "un colis", parts: ["arrive en avance", "arrive à l'heure", "arrive en retard"], cond: "est abîmé" },
+  { univ: "joueurs d'un club de football de Saint-Louis", un: "un joueur", parts: ["est gardien", "est défenseur", "est milieu", "est attaquant"], cond: "a marqué cette saison" },
+  { univ: "visiteurs de la Cité du Volcan", un: "un visiteur", parts: ["vient de La Réunion", "vient de métropole", "vient d'un autre pays"], cond: "achète un souvenir" },
+  { univ: "cartes d'un jeu de 32 cartes", un: "une carte", parts: ["est un cœur", "est un carreau", "est un pique", "est un trèfle"], cond: "est une figure" },
+  { univ: "repas servis à la cantine", un: "un repas", parts: ["est un cari", "est un rougail", "est un plat végétarien"], cond: "est fini par l'élève" },
+  { univ: "vélos d'une station de location", un: "un vélo", parts: ["est un vélo électrique", "est un VTT", "est un vélo de ville"], cond: "tombe en panne dans le mois" },
+  { univ: "ananas d'une récolte", un: "un ananas", parts: ["pèse moins d'un kilo", "pèse entre un et deux kilos", "pèse plus de deux kilos"], cond: "est exporté" },
+  { univ: "letchis d'une cagette", un: "un letchi", parts: ["est petit", "est moyen", "est gros"], cond: "est bien sucré" },
+  { univ: "spectateurs d'un concert de maloya", un: "un spectateur", parts: ["habite dans le Nord", "habite dans le Sud", "habite dans l'Est", "habite dans l'Ouest"], cond: "vient pour la première fois" },
+];
+/** ★4 : la part manquante d'une partition ; ★5 : probabilités totales à trois branches. */
+function pcGenPartitionProba(totales: boolean): TutorGeneratedQuestionV4 {
+  const P0 = pickOne(PC_PARTITIONS);
+  const m = P0.parts.length;
+  let ps: number[];
+  do {
+    ps = Array.from({ length: m - 1 }, () => randomInt(2, 9) * 5);
+  } while (ps.reduce((u, v) => u + v, 0) > 90);
+  ps.push(100 - ps.reduce((u, v) => u + v, 0));
+  const descr = P0.parts.map((e, i) => `$E_${i + 1}$ : « ${pcLeDe(P0.un)} ${e} »`).join(", ");
+  const nommer = `On choisit ${P0.un} parmi les ${P0.univ}, et on note ${descr}.`;
+  if (!totales) {
+    const i = randomInt(0, m - 1);
+    const connues = ps.map((v, j) => (j === i ? null : `$P(E_${j + 1}) = ${pcM(v, 100)}$`)).filter(Boolean).join(", ");
+    return {
+      text: `${nommer} ${pickOne([
+        `Ces événements forment une partition de l'univers, avec ${connues}. Calcule $P(E_${i + 1})$.`,
+        `On sait que ${connues}, et que ces événements forment une partition. Quelle est la probabilité de l'événement $E_${i + 1}$ ?`,
+        `Ces événements sont deux à deux incompatibles et couvrent tous les cas ; de plus ${connues}. Déduis-en $P(E_${i + 1})$.`,
+      ])}`,
+      format: "short",
+      expected: pcEcritures(ps[i], 100),
+      comparator: "number_equal",
+      explanation: exp(
+        "Les événements d'une partition sont incompatibles et recouvrent tout l'univers : leurs probabilités ont une somme égale à $1$.",
+        `$P(E_${i + 1}) = 1 - (${ps.filter((_, j) => j !== i).map((v) => pcM(v, 100)).join(" + ")})$.`,
+        `$P(E_${i + 1}) = ${pcM(ps[i], 100)}$.`,
+        `$P(E_${i + 1}) = ${pcM(ps[i], 100)}$.`
+      ),
+    };
+  }
+  const qs = ps.map(() => randomInt(1, 19) * 5);
+  const v = ps.reduce((u, x, j) => u + x * qs[j], 0);
+  const cond = P0.cond;
+  return {
+    text: `${nommer} Ces événements forment une partition, avec ${ps.map((x, j) => `$P(E_${j + 1}) = ${pcM(x, 100)}$`).join(", ")}. On note $S$ : « ${pcLeDe(P0.un)} ${cond} », avec ${qs.map((x, j) => `$P_{E_${j + 1}}(S) = ${pcM(x, 100)}$`).join(", ")}. ${pickOne(["Calcule $P(S)$.", "Quelle est la probabilité de l'événement $S$ ?", "Calcule $P(S)$ avec la formule des probabilités totales."])}`,
+    format: "short",
+    expected: pcEcritures(v, 10000),
+    comparator: "number_equal",
+    explanation: exp(
+      `Les $E_i$ forment une partition : $S$ se produit par ${m} chemins, un par partie.`,
+      `Probabilités totales : $P(S) = ${ps.map((_, j) => `P(E_${j + 1}) P_{E_${j + 1}}(S)`).join(" + ")}$.`,
+      `$P(S) = ${ps.map((x, j) => `${pcM(x, 100)} \\times ${pcM(qs[j], 100)}`).join(" + ")} = ${pcM(v, 10000)}$.`,
+      `$P(S) = ${pcM(v, 10000)}$.`
+    ),
+  };
+}
+
+/* ===================== PC_INDEPENDANCE : générateurs ===================== */
+/** Deux épreuves sans lien entre elles : A et B sont naturellement indépendants. */
+function pcDeuxEpreuves() {
+  const [e1, e2] = shuffle(PC_EPREUVES).slice(0, 2);
+  const p = randomInt(e1.min, e1.max) * 5, q = randomInt(e2.min, e2.max) * 5;
+  const texte = `${e1.e} : ${e1.il} ${e1.s} avec une probabilité de $${pcM(p, 100)}$. De son côté, sans aucun lien, ${e2.e.charAt(0).toLowerCase()}${e2.e.slice(1)} : ${e2.il} ${e2.s} avec une probabilité de $${pcM(q, 100)}$. On note $A$ : « ${e1.qui} ${e1.s} » et $B$ : « ${e2.qui} ${e2.s} ».`;
+  return { e1, e2, p, q, texte };
+}
+/** ★2 QCM / ★3 court : P(A ∩ B) (ou avec un contraire) pour deux événements indépendants. */
+function pcGenIndependanceProduit(qcm: boolean): TutorGeneratedQuestionV4 {
+  const d = pcDeuxEpreuves();
+  const { p, q } = d;
+  const cas = qcm
+    ? [{ not: "A \\cap B", u: p, v: q }]
+    : [{ not: "A \\cap B", u: p, v: q }, { not: "A \\cap \\overline{B}", u: p, v: 100 - q }, { not: "\\overline{A} \\cap B", u: 100 - p, v: q }, { not: "\\overline{A} \\cap \\overline{B}", u: 100 - p, v: 100 - q }];
+  const c = pickOne(cas);
+  const r = c.u * c.v;
+  const explanation = exp(
+    "Les deux épreuves n'ont aucun lien : $A$ et $B$ sont indépendants (et leurs contraires aussi).",
+    "Pour deux événements indépendants : $P(A \\cap B) = P(A) \\times P(B)$.",
+    `$P(${c.not}) = ${pcM(c.u, 100)} \\times ${pcM(c.v, 100)} = ${pcM(r, 10000)}$.`,
+    `$P(${c.not}) = ${pcM(r, 10000)}$.`
+  );
+  const text = `${d.texte} ${pickOne([`Calcule $P(${c.not})$.`, `Quelle est la probabilité de l'événement $${c.not}$ ?`])}`;
+  if (!qcm) return { text, format: "short", expected: pcEcritures(r, 10000), comparator: "number_equal", explanation };
+  const bon = `$${pcM(r, 10000)}$`;
+  const leurres = [[p + q, 100], [100 * (p + q) - r, 10000], [Math.abs(p - q), 100]]
+    .filter(([a, b]) => a > 0 && a / b !== r / 10000 && a / b <= 1)
+    .map(([a, b]) => `$${pcM(a, b)}$`);
+  leurres.push(`$${pcM(p, 100)}$`, `$${pcM(q, 100)}$`, `$${pcM(10000 - r, 10000)}$`);
+  return { text, format: "qcm", choices: makeChoices(bon, leurres), expected: [bon], comparator: "mcq_exact", explanation };
+}
+/** ★4 QCM : tester l'indépendance à partir de P(A), P(B), P(A ∩ B) (situation d'enquête). */
+function pcGenIndependanceTest(): TutorGeneratedQuestionV4 {
+  const s = pcSituation();
+  const indep = Math.random() < 0.5;
+  const e = pcTirer(
+    (x) => [x.nA, x.nB, x.nAB].every((n) => pcJuste(n, x.N, 2)) && (indep ? x.nAB * x.N === x.nA * x.nB : Math.abs(x.nAB * x.N - x.nA * x.nB) >= 0.02 * x.N * x.N),
+    [100, 200, 400, 500],
+  );
+  const PA = pcM(e.nA, e.N), PB = pcM(e.nB, e.N), PAB = pcM(e.nAB, e.N), prod = pcM(e.nA * e.nB, e.N * e.N);
+  const oui = `oui : $P(${s.a} \\cap ${s.b}) = P(${s.a}) \\times P(${s.b})$`;
+  const non = `non : $P(${s.a} \\cap ${s.b}) \\neq P(${s.a}) \\times P(${s.b})$`;
+  const bon = indep ? oui : non;
+  const choices = makeChoices(bon, [indep ? non : oui, "non : ils sont incompatibles", `oui : $P(${s.a} \\cap ${s.b}) \\neq 0$`]);
+  return {
+    text: `${Math.random() < 0.5 ? `On choisit ${s.c.un} au hasard parmi des ${s.c.pop}. ${pcDef(s.c)} On sait que $P(${s.a}) = ${PA}$, $P(${s.b}) = ${PB}$ et $P(${s.a} \\cap ${s.b}) = ${PAB}$.` : `${s.c.verbe} des ${s.c.pop} : $${pcPctM(e.nA, e.N)}$ d'entre ${s.c.eux} ${s.c.A.p}, $${pcPctM(e.nB, e.N)}$ ${s.c.B.p}, et $${pcPctM(e.nAB, e.N)}$ ${s.c.A.p} et ${s.c.B.p}. On choisit ${s.c.un} au hasard. ${pcDef(s.c)}`} ${pickOne([
+      `Les événements $${s.a}$ et $${s.b}$ sont-ils indépendants ?`,
+      `Peut-on dire que $${s.a}$ et $${s.b}$ sont indépendants ?`,
+      `Savoir que ${s.c.le} ${s.c.A.s} change-t-il la probabilité de $${s.b}$ ? Autrement dit, $${s.a}$ et $${s.b}$ sont-ils indépendants ?`,
+    ])}`,
+    format: "qcm",
+    choices,
+    expected: [bon],
+    comparator: "mcq_exact",
+    explanation: exp(
+      `$${s.a}$ et $${s.b}$ sont indépendants si et seulement si $P(${s.a} \\cap ${s.b}) = P(${s.a}) \\times P(${s.b})$.`,
+      `$P(${s.a}) \\times P(${s.b}) = ${PA} \\times ${PB} = ${prod}$, à comparer à $P(${s.a} \\cap ${s.b}) = ${PAB}$.`,
+      indep ? "Les deux nombres sont égaux." : "Les deux nombres sont différents.",
+      indep ? "Les événements sont indépendants." : `Les événements ne sont pas indépendants (ni incompatibles : $P(${s.a} \\cap ${s.b}) \\neq 0$).`
+    ),
+  };
+}
+/** ★5 court : retrouver P(B), ou calculer P(A ∪ B), sous l'hypothèse d'indépendance. */
+function pcGenIndependanceInverse(): TutorGeneratedQuestionV4 {
+  const d = pcDeuxEpreuves();
+  const { p, q } = d;
+  const union = Math.random() < 0.5;
+  if (union) {
+    const v = 100 * (p + q) - p * q;
+    return {
+      text: `${d.texte} Calcule $P(A \\cup B)$, la probabilité qu'au moins un des deux événements soit réalisé.`,
+      format: "short",
+      expected: pcEcritures(v, 10000),
+      comparator: "number_equal",
+      explanation: exp(
+        "$P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$, et ici $P(A \\cap B) = P(A) \\times P(B)$ (indépendance).",
+        `$P(A \\cap B) = ${pcM(p, 100)} \\times ${pcM(q, 100)} = ${pcM(p * q, 10000)}$.`,
+        `$P(A \\cup B) = ${pcM(p, 100)} + ${pcM(q, 100)} - ${pcM(p * q, 10000)} = ${pcM(v, 10000)}$ (ou $1 - ${pcM(100 - p, 100)} \\times ${pcM(100 - q, 100)}$).`,
+        `$P(A \\cup B) = ${pcM(v, 10000)}$.`
+      ),
+    };
+  }
+  const s = pcSituation();
+  return {
+    text: `On choisit ${s.c.un} au hasard parmi des ${s.c.pop}. ${pcDef(s.c)} On admet que $${s.a}$ et $${s.b}$ sont indépendants, avec $P(${s.a}) = ${pcM(p, 100)}$ et $P(${s.a} \\cap ${s.b}) = ${pcM(p * q, 10000)}$. Calcule $P(${s.b})$.`,
+    format: "short",
+    expected: pcEcritures(q, 100),
+    comparator: "number_equal",
+    explanation: exp(
+      `Indépendance : $P(${s.a} \\cap ${s.b}) = P(${s.a}) \\times P(${s.b})$, donc $P(${s.b}) = \\dfrac{P(${s.a} \\cap ${s.b})}{P(${s.a})}$.`,
+      `C'est aussi $P_{${s.a}}(${s.b})$ : sous l'indépendance, savoir $${s.a}$ ne change rien.`,
+      `$P(${s.b}) = \\dfrac{${pcM(p * q, 10000)}}{${pcM(p, 100)}} = ${pcM(q, 100)}$.`,
+      `$P(${s.b}) = ${pcM(q, 100)}$.`
+    ),
+  };
+}
+/** ★5 ouverte : tableau d'effectifs, comparer P_A(B) et P(B). */
+function pcGenIndependanceOuvert(): TutorGeneratedQuestionV4 {
+  const s = pcSituation();
+  const indep = Math.random() < 0.4;
+  const e = pcTirer(
+    (x) => pcJuste(x.nAB, x.nA) && pcJuste(x.nB, x.N) && (indep ? x.nAB * x.N === x.nA * x.nB : Math.abs(x.nAB * x.N - x.nA * x.nB) >= 0.02 * x.N * x.N),
+    [100, 200, 400, 500, 1000],
+  );
+  const r = pcDec(e.nAB, e.nA);
+  return {
+    text: `Le tableau donne la répartition de $${e.N}$ ${s.c.pop}. ${pcDef(s.c)} Calcule $P_{${s.a}}(${s.b})$ et $P(${s.b})$, puis dis si $${s.a}$ et $${s.b}$ sont indépendants.`,
+    format: "open",
+    expected: [r, r.replace(",", ".")],
+    comparator: "contains_keyword",
+    canvas: pcTableau(s, e),
+    explanation: exp(
+      `$${s.a}$ et $${s.b}$ sont indépendants si et seulement si $P_{${s.a}}(${s.b}) = P(${s.b})$ (savoir $${s.a}$ ne change rien).`,
+      `$P_{${s.a}}(${s.b}) = \\dfrac{${e.nAB}}{${e.nA}} = ${pcM(e.nAB, e.nA)}$ et $P(${s.b}) = \\dfrac{${e.nB}}{${e.N}} = ${pcM(e.nB, e.N)}$.`,
+      indep ? "Les deux valeurs sont égales." : "Les deux valeurs sont différentes.",
+      indep ? "Les événements sont indépendants." : "Les événements ne sont pas indépendants."
+    ),
+  };
+}
+
+/* ===================== PC_INDEPENDANCE_INCOMPATIBLE : générateurs ===================== */
+/** Deux événements : soit deux parties d'une partition (incompatibles), soit une situation d'enquête. */
+function pcDeuxEvenements(incompatibles: boolean) {
+  if (incompatibles) {
+    const P0 = pickOne(PC_PARTITIONS);
+    const [i, j] = shuffle(P0.parts.map((_, k) => k)).slice(0, 2);
+    const le = pcLeDe(P0.un);
+    return { intro: `On choisit ${P0.un} au hasard parmi les ${P0.univ}.`, a: "A", b: "B", def: `On note $A$ l'événement « ${le} ${P0.parts[i]} » et $B$ l'événement « ${le} ${P0.parts[j]} ».` };
+  }
+  const s = pcSituation();
+  return { intro: `On choisit ${s.c.un} au hasard parmi des ${s.c.pop}.`, a: s.a, b: s.b, def: pcDef(s.c) };
+}
+const PC_VERDICTS = {
+  incomp: "incompatibles, et donc pas indépendants",
+  indep: "indépendants, mais pas incompatibles",
+  ni: "ni indépendants, ni incompatibles",
+  deux: "à la fois indépendants et incompatibles",
+} as const;
+/** ★4 QCM : classer deux événements à partir de P(A), P(B), P(A ∩ B). */
+function pcGenIndIncClasser(): TutorGeneratedQuestionV4 {
+  const cas = pickOne(["incomp", "indep", "ni"] as const);
+  const d = pcDeuxEvenements(cas === "incomp");
+  let p = 0, q = 0, inter = 0;
+  do {
+    p = randomInt(2, 12) * 5; q = randomInt(2, 12) * 5;
+    inter = cas === "incomp" ? 0 : cas === "indep" ? p * q : randomInt(1, Math.min(p, q) - 1) * 100;
+  } while ((cas === "ni" && inter === p * q) || p + q > 100);
+  const { a, b } = d;
+  const bon = PC_VERDICTS[cas];
+  return {
+    text: `${d.intro} ${d.def} On sait que $P(${a}) = ${pcM(p, 100)}$, $P(${b}) = ${pcM(q, 100)}$ et $P(${a} \\cap ${b}) = ${pcM(inter, 10000)}$. Les événements $${a}$ et $${b}$ sont :`,
+    format: "qcm",
+    choices: makeChoices(bon, Object.values(PC_VERDICTS)),
+    expected: [bon],
+    comparator: "mcq_exact",
+    explanation: exp(
+      `Incompatibles : $P(${a} \\cap ${b}) = 0$. Indépendants : $P(${a} \\cap ${b}) = P(${a}) \\times P(${b})$.`,
+      `Ici $P(${a} \\cap ${b}) = ${pcM(inter, 10000)}$ et $P(${a}) \\times P(${b}) = ${pcM(p, 100)} \\times ${pcM(q, 100)} = ${pcM(p * q, 10000)}$.`,
+      cas === "incomp"
+        ? `L'intersection est vide, mais le produit n'est pas nul : savoir $${a}$ réalisé rend $${b}$ IMPOSSIBLE, c'est le contraire de l'indépendance.`
+        : cas === "indep"
+          ? "L'intersection n'est pas nulle (pas incompatibles) et elle est égale au produit (indépendants)."
+          : "L'intersection n'est ni nulle, ni égale au produit.",
+      `Les événements sont ${bon}.`
+    ),
+  };
+}
+/** ★4 court : P(A ∪ B) selon que A et B sont incompatibles ou indépendants. */
+function pcGenIndIncUnion(): TutorGeneratedQuestionV4 {
+  const incomp = Math.random() < 0.5;
+  const d = pcDeuxEvenements(incomp);
+  const p = randomInt(2, 10) * 5, q = randomInt(2, 9) * 5;
+  const v = incomp ? 100 * (p + q) : 100 * (p + q) - p * q;
+  const { a, b } = d;
+  return {
+    text: `${d.intro} ${d.def} On sait que $P(${a}) = ${pcM(p, 100)}$ et $P(${b}) = ${pcM(q, 100)}$, et que $${a}$ et $${b}$ sont ${incomp ? "incompatibles" : "indépendants"}. Calcule $P(${a} \\cup ${b})$.`,
+    format: "short",
+    expected: pcEcritures(v, 10000),
+    comparator: "number_equal",
+    explanation: exp(
+      `$P(${a} \\cup ${b}) = P(${a}) + P(${b}) - P(${a} \\cap ${b})$.`,
+      incomp ? `Incompatibles : $P(${a} \\cap ${b}) = 0$.` : `Indépendants : $P(${a} \\cap ${b}) = ${pcM(p, 100)} \\times ${pcM(q, 100)} = ${pcM(p * q, 10000)}$.`,
+      `$P(${a} \\cup ${b}) = ${pcM(p, 100)} + ${pcM(q, 100)}${incomp ? "" : ` - ${pcM(p * q, 10000)}`} = ${pcM(v, 10000)}$.`,
+      `$P(${a} \\cup ${b}) = ${pcM(v, 10000)}$.`
+    ),
+  };
+}
+/** ★5 QCM / ouverte : A et B incompatibles — que vaut P_A(B), et sont-ils indépendants ? */
+function pcGenIndIncConditionnelle(ouvert: boolean): TutorGeneratedQuestionV4 {
+  const d = pcDeuxEvenements(true);
+  const p = randomInt(2, 10) * 5, q = randomInt(2, 9) * 5;
+  const { a, b } = d;
+  const explanation = exp(
+    `$${a}$ et $${b}$ sont deux parties distinctes d'un même découpage : ils sont incompatibles, $P(${a} \\cap ${b}) = 0$.`,
+    `Donc $P_{${a}}(${b}) = \\dfrac{P(${a} \\cap ${b})}{P(${a})} = \\dfrac{0}{${pcM(p, 100)}} = 0$, alors que $P(${b}) = ${pcM(q, 100)}$.`,
+    `Le produit $P(${a}) \\times P(${b}) = ${pcM(p * q, 10000)} \\neq 0$ : l'égalité de l'indépendance est fausse.`,
+    `$P_{${a}}(${b}) = 0$ : savoir $${a}$ change tout ; les événements ne sont pas indépendants.`
+  );
+  const base = `${d.intro} ${d.def} On sait que $P(${a}) = ${pcM(p, 100)}$ et $P(${b}) = ${pcM(q, 100)}$.`;
+  if (ouvert)
+    return {
+      text: `${base} Calcule $P(${a}) \\times P(${b})$ et compare-le à $P(${a} \\cap ${b})$ : $${a}$ et $${b}$ sont-ils indépendants ?`,
+      format: "open",
+      expected: pcEcritures(p * q, 10000),
+      comparator: "contains_keyword",
+      explanation,
+    };
+  const bon = "$0$";
+  return {
+    text: `${base} Que vaut $P_{${a}}(${b})$ ?`,
+    format: "qcm",
+    choices: makeChoices(bon, [`$${pcM(q, 100)}$`, `$${pcM(p * q, 10000)}$`, `$${pcM(100 - q, 100)}$`]),
+    expected: [bon],
+    comparator: "mcq_exact",
+    explanation,
+  };
+}
+
+// ==== FIN DES OUTILS PC ====
 
 export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
   /* ===================== PC_CONDITIONNELLE ===================== */
@@ -371,20 +1619,427 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "$P_A(B) = \\dfrac{P(A \\cap B)}{P(A)}$.",
     tags: ["premiere", "maths", "probas_cond", "conditionnelle", "template"],
+    // ★3 — les données en PROBABILITÉS ou en POURCENTAGES de la population.
     generate: () => {
-      const pA = randomInt(2, 8) / 10;
-      const pAB = (Math.round(pA * 10) * randomInt(1, 9)) / 100; // <= pA
-      const val = Math.round((pAB / pA) * 100) / 100;
+      const c = pickOne(PC_CTX);
+      const { a, b } = pcLettres(c);
+      const pct = Math.random() < 0.5;
+      const e = pcTirer((x) => pcJuste(100 * x.nA, x.N, 1) && pcJuste(100 * x.nAB, x.N, 1) && pcJuste(x.nAB, x.nA), [100, 200, 250, 400, 500, 1000]);
+      const r = pcDec(e.nAB, e.nA);
+      const text =
+        pcDonneesProba(c, e, pct) + " " +
+        pcQuestionSachant(c, c.A.s, c.A.p, c.B.s, c.B.p, `P_{${a}}(${b})`, pct ? pcDef(c) : "");
+      const pa = pct ? pcPctM(e.nA, e.N) : pcM(e.nA, e.N);
+      const pab = pct ? pcPctM(e.nAB, e.N) : pcM(e.nAB, e.N);
       return {
-        text: `On a $P(A) = ${fr(pA)}$ et $P(A \\cap B) = ${fr(pAB)}$. Combien vaut $P_A(B)$ ? (arrondir au centième)`,
+        text,
         format: "short",
-        expected: [fr(val)],
+        expected: pcEcritures(e.nAB, e.nA),
         comparator: "number_equal",
         explanation: exp(
-          "On applique $P_A(B) = \\dfrac{P(A \\cap B)}{P(A)}$.",
-          `$\\dfrac{${fr(pAB)}}{${fr(pA)}}$.`,
-          `$= ${fr(val)}$.`,
-          `$P_A(B) = ${fr(val)}$.`
+          `On cherche la probabilité que ${c.le} ${c.B.s}, SACHANT ${pcQue(c.il)} ${c.A.s} : c'est $P_{${a}}(${b}) = \\dfrac{P(${a} \\cap ${b})}{P(${a})}$.`,
+          `On divise la probabilité de « ${c.A.s} ET ${c.B.s} » par celle de la condition « ${c.A.s} »${pct ? " (les pourcentages se divisent comme les probabilités)" : ""}.`,
+          `$P_{${a}}(${b}) = \\dfrac{${pab}}{${pa}} = \\dfrac{${pcM(e.nAB, e.N)}}{${pcM(e.nA, e.N)}} = ${pcM(e.nAB, e.nA)}$.`,
+          `$P_{${a}}(${b}) = ${pcM(e.nAB, e.nA)}$ : parmi les ${c.court} qui ${c.A.p}, $${pcPctM(e.nAB, e.nA)}$ ${c.B.p}.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_cond_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_conditionnelle",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "« Sachant que… » : on ne garde que le groupe de la condition, et on divise par SON effectif.",
+    tags: ["premiere", "maths", "probas_cond", "conditionnelle", "template"],
+    // ★2 — effectifs donnés avec « parmi » : lire la bonne division.
+    generate: () => {
+      const c = pickOne(PC_CTX);
+      const { a, b } = pcLettres(c);
+      const e = pcTirer((x) => pcJuste(x.nAB, x.nA));
+      const text =
+        pcDonneesEff(c, e, false) + " " +
+        pcQuestionSachant(c, c.A.s, c.A.p, c.B.s, c.B.p, `P_{${a}}(${b})`, pcDef(c));
+      return {
+        text,
+        format: "short",
+        expected: pcEcritures(e.nAB, e.nA),
+        comparator: "number_equal",
+        explanation: exp(
+          `La condition est « ${c.A.s} » : on se restreint aux $${e.nA}$ ${c.court} qui ${c.A.p}. Ils forment le nouvel univers.`,
+          `Parmi ces $${e.nA}$, on compte ${c.ceux} qui ${c.B.p} : il y en a $${e.nAB}$. On divise par $${e.nA}$, pas par le total $${e.N}$.`,
+          `$P_{${a}}(${b}) = \\dfrac{${e.nAB}}{${e.nA}} = ${pcM(e.nAB, e.nA)}$.`,
+          `La probabilité est $${pcM(e.nAB, e.nA)}$, soit $${pcPctM(e.nAB, e.nA)}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_cond_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_conditionnelle",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Le dénominateur est l'effectif du groupe qu'on SAIT réalisé.",
+    tags: ["premiere", "maths", "probas_cond", "conditionnelle", "template", "qcm"],
+    // ★2 — QCM : les leurres sont les divisions fausses.
+    generate: () => {
+      const c = pickOne(PC_CTX);
+      const leurres = (x: PcEff): [number, number][] => [
+        [x.nAB, x.N], [x.nAB, x.nB], [x.nA, x.N], [x.nA - x.nAB, x.nA],
+      ];
+      const e = pcTirer((x) => pcDistincts([x.nAB, x.nA], leurres(x)) >= 3);
+      const q = pcQcm([e.nAB, e.nA], leurres(e));
+      const t = pickOne([0, 1, 2]);
+      const question =
+        t === 0 ? `On choisit au hasard ${c.un} qui ${c.A.s}. Quelle est la probabilité de l'événement « ${c.il} ${c.B.s} » ?`
+        : t === 1 ? `Quelle est la proportion de ${c.ceux} qui ${c.B.p} parmi les ${c.court} qui ${c.A.p} ?`
+        : `On choisit ${c.un} au hasard. Sachant ${pcQue(c.il)} ${c.A.s}, quelle est la probabilité de l'événement « ${c.il} ${c.B.s} » ?`;
+      return {
+        text: pcDonneesEff(c, e, true) + " " + question,
+        format: "qcm",
+        choices: q.choices,
+        expected: [q.expected],
+        comparator: "mcq_exact",
+        explanation: exp(
+          `On SAIT que ${c.le} ${c.A.s} : on se restreint aux $${e.nA}$ ${c.court} qui ${c.A.p}.`,
+          `Le numérateur : ${c.ceux} qui ${c.A.p} ET ${c.B.p}, soit $${e.nAB}$. Le dénominateur : l'effectif de la condition, $${e.nA}$.`,
+          `$\\dfrac{${e.nAB}}{${e.nA}} = ${pcM(e.nAB, e.nA)}$. Les pièges : $\\dfrac{${e.nAB}}{${e.N}}$ est la probabilité de « ${c.A.s} ET ${c.B.s} » (division par le total), $\\dfrac{${e.nAB}}{${e.nB}}$ est la probabilité inverse, sachant « ${c.B.s} ».`,
+          `La bonne réponse est $\\dfrac{${e.nAB}}{${e.nA}}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_cond_tpl_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_conditionnelle",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Dans le groupe de la condition, ceux qui ne vérifient pas l'événement sont « le reste ».",
+    tags: ["premiere", "maths", "probas_cond", "conditionnelle", "template"],
+    // ★3 — effectifs, la cible est le CONTRAIRE (B barre sachant A), ou B sachant A au milieu de données en trop.
+    generate: () => {
+      const c = pickOne(PC_CTX);
+      const { a, b } = pcLettres(c);
+      const contraire = Math.random() < 0.6;
+      const e = pcTirer((x) => pcJuste(x.nA - x.nAB, x.nA) && pcJuste(x.nAB, x.nA));
+      const num = contraire ? e.nA - e.nAB : e.nAB;
+      const notation = contraire ? `P_{${a}}(\\overline{${b}})` : `P_{${a}}(${b})`;
+      const text =
+        pcDonneesEff(c, e, !contraire) + " " +
+        pcQuestionSachant(c, c.A.s, c.A.p, contraire ? c.B.ns : c.B.s, contraire ? c.B.np : c.B.p, notation, pcDef(c));
+      return {
+        text,
+        format: "short",
+        expected: pcEcritures(num, e.nA),
+        comparator: "number_equal",
+        explanation: exp(
+          `La condition est « ${c.A.s} » : on se restreint aux $${e.nA}$ ${c.court} qui ${c.A.p}.`,
+          contraire
+            ? `Parmi ${c.eux}, $${e.nAB}$ ${c.B.p} ; les autres ${c.B.np} : $${e.nA} - ${e.nAB} = ${num}$.`
+            : `Parmi ${c.eux}, $${e.nAB}$ ${c.B.p}. Le nombre total $${e.nB}$ (et l'effectif $${e.N}$) ne sert pas : il mélange ceux qui ${c.A.np}.`,
+          contraire
+            ? `$${notation} = \\dfrac{${num}}{${e.nA}} = ${pcM(num, e.nA)}$ (on vérifie : $1 - ${pcM(e.nAB, e.nA)} = ${pcM(num, e.nA)}$).`
+            : `$${notation} = \\dfrac{${num}}{${e.nA}} = ${pcM(num, e.nA)}$.`,
+          `La probabilité est $${pcM(num, e.nA)}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_cond_tpl_5",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_conditionnelle",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "$P_A(B) = \\dfrac{P(A \\cap B)}{P(A)}$ : on divise par la probabilité de la CONDITION.",
+    tags: ["premiere", "maths", "probas_cond", "conditionnelle", "template", "qcm"],
+    // ★3 — QCM « quel calcul » : P(A), P(B), P(A ∩ B) donnés, choisir le bon quotient.
+    generate: () => {
+      const c = pickOne(PC_CTX);
+      const { a, b } = pcLettres(c);
+      const inverse = Math.random() < 0.4; // on demande P_B(A)
+      const vals = (x: PcEff) => ({ pA: x.nA / x.N, pB: x.nB / x.N, pAB: x.nAB / x.N });
+      const ok = (x: PcEff) => {
+        const v = vals(x);
+        const cand = [v.pAB / (inverse ? v.pB : v.pA), v.pAB / (inverse ? v.pA : v.pB), v.pAB, v.pA * v.pB];
+        return [x.nA, x.nB, x.nAB].every((n) => pcJuste(n, x.N, 2)) &&
+          cand.every((u, i) => cand.every((w, j) => i === j || Math.abs(u - w) > 1e-9));
+      };
+      const e = pcTirer(ok, [100, 200, 400, 500]);
+      const PA = pcM(e.nA, e.N), PB = pcM(e.nB, e.N), PAB = pcM(e.nAB, e.N);
+      const [cond, condM] = inverse ? [b, PB] : [a, PA];
+      const [autreM] = inverse ? [PA] : [PB];
+      const cible = inverse ? a : b;
+      const bon = `$\\dfrac{${PAB}}{${condM}}$`;
+      const choices = shuffle([bon, `$\\dfrac{${PAB}}{${autreM}}$`, `$${PAB}$`, `$${PA} \\times ${PB}$`]);
+      const t = pickOne([0, 1, 2]);
+      const ev = (x: string) => (x === a ? c.A.s : c.B.s);
+      const question =
+        t === 0 ? `Quel calcul donne $P_{${cond}}(${cible})$ ?`
+        : t === 1 ? `Quel calcul donne la probabilité de l'événement « ${c.il} ${ev(cible)} », sachant ${pcQue(c.il)} ${ev(cond)} ?`
+        : `On choisit au hasard ${c.un} qui ${ev(cond)}. Quel calcul donne la probabilité de l'événement « ${c.il} ${ev(cible)} » ?`;
+      return {
+        text: `On choisit ${c.un} au hasard. ${pcDef(c)} On sait que $P(${a}) = ${PA}$, $P(${b}) = ${PB}$ et $P(${a} \\cap ${b}) = ${PAB}$. ${question}`,
+        format: "qcm",
+        choices,
+        expected: [bon],
+        comparator: "mcq_exact",
+        explanation: exp(
+          `La condition est l'événement écrit en indice, ici $${cond}$ (« ${ev(cond)} »).`,
+          `$P_{${cond}}(${cible}) = \\dfrac{P(${a} \\cap ${b})}{P(${cond})}$ : on divise par la probabilité de la condition, pas par celle de $${cible}$.`,
+          `$\\dfrac{${PAB}}{${condM}} = ${pcM(e.nAB, inverse ? e.nB : e.nA)}$. $\\dfrac{${PAB}}{${autreM}}$ serait l'autre probabilité conditionnelle ; $${PAB}$ seul est $P(${a} \\cap ${b})$ ; le produit $${PA} \\times ${PB}$ ne vaut $P(${a} \\cap ${b})$ que pour des événements indépendants.`,
+          `Le bon calcul est $\\dfrac{${PAB}}{${condM}}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_cond_tpl_6",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_conditionnelle",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "$P(A \\cap B) = P(A) \\times P_A(B)$, et donc $P(A) = \\dfrac{P(A \\cap B)}{P_A(B)}$.",
+    tags: ["premiere", "maths", "probas_cond", "conditionnelle", "template"],
+    // ★4 — la formule retournée : trouver P(A ∩ B), ou trouver P(A).
+    generate: () => {
+      const c = pickOne(PC_CTX);
+      const { a, b } = pcLettres(c);
+      const chercheInter = Math.random() < 0.6;
+      const e = pcTirer(
+        (x) => pcJuste(100 * x.nA, x.N, 1) && pcJuste(100 * x.nAB, x.nA, 1) && pcJuste(100 * x.nAB, x.N, 1),
+        [100, 200, 250, 400, 500, 1000],
+      );
+      const PA = pcM(e.nA, e.N), PAsB = pcM(e.nAB, e.nA), PAB = pcM(e.nAB, e.N);
+      const sym = Math.random() < 0.5;
+      let text: string;
+      if (chercheInter) {
+        const donnees = sym
+          ? `On choisit ${c.un} au hasard. ${pcDef(c)} On sait que $P(${a}) = ${PA}$ et $P_{${a}}(${b}) = ${PAsB}$.`
+          : `${c.verbe} des ${c.pop} : $${pcPctM(e.nA, e.N)}$ d'entre ${c.eux} ${c.A.p} et, parmi ${c.ceux}-ci, $${pcPctM(e.nAB, e.nA)}$ ${c.B.p}.`;
+        const question = sym
+          ? pickOne([`Calcule $P(${a} \\cap ${b})$.`, `Quelle est la probabilité de l'événement « ${c.le} ${c.A.s} et ${c.B.s} » ?`])
+          : pickOne([
+              `On choisit ${c.un} au hasard. Quelle est la probabilité de l'événement « ${c.il} ${c.A.s} et ${c.B.s} » ?`,
+              `Quelle proportion de l'ensemble des ${c.court} ${c.A.p} et ${c.B.p} ? Donne-la en écriture décimale.`,
+            ]);
+        text = `${donnees} ${question}`;
+      } else {
+        const donnees = sym
+          ? `On choisit ${c.un} au hasard. ${pcDef(c)} On sait que $P(${a} \\cap ${b}) = ${PAB}$ et $P_{${a}}(${b}) = ${PAsB}$.`
+          : `${c.verbe} des ${c.pop} : $${pcPctM(e.nAB, e.N)}$ d'entre ${c.eux} ${c.A.p} et ${c.B.p}. Par ailleurs, parmi les ${c.court} qui ${c.A.p}, $${pcPctM(e.nAB, e.nA)}$ ${c.B.p}.`;
+        const question = sym
+          ? pickOne([`Calcule $P(${a})$.`, `Quelle est la probabilité de l'événement « ${c.le} ${c.A.s} » ?`])
+          : pickOne([
+              `On choisit ${c.un} au hasard. Quelle est la probabilité de l'événement « ${c.il} ${c.A.s} » ?`,
+              `Quelle proportion des ${c.court} ${c.A.p} ? Donne-la en écriture décimale.`,
+            ]);
+        text = `${donnees} ${question}`;
+      }
+      return {
+        text,
+        format: "short",
+        expected: chercheInter ? pcEcritures(e.nAB, e.N) : pcEcritures(e.nA, e.N),
+        comparator: "number_equal",
+        explanation: chercheInter
+          ? exp(
+              `De $P_{${a}}(${b}) = \\dfrac{P(${a} \\cap ${b})}{P(${a})}$, on tire $P(${a} \\cap ${b}) = P(${a}) \\times P_{${a}}(${b})$.`,
+              `Le « parmi ${c.ceux}-ci » est une probabilité CONDITIONNELLE ; on la multiplie par la part de la condition.`,
+              `$P(${a} \\cap ${b}) = ${PA} \\times ${PAsB} = ${PAB}$.`,
+              `La probabilité est $${PAB}$, soit $${pcPctM(e.nAB, e.N)}$ de l'ensemble.`
+            )
+          : exp(
+              `De $P(${a} \\cap ${b}) = P(${a}) \\times P_{${a}}(${b})$, on tire $P(${a}) = \\dfrac{P(${a} \\cap ${b})}{P_{${a}}(${b})}$.`,
+              `$${PAB}$ est la part de l'ENSEMBLE ; $${PAsB}$ la part À L'INTÉRIEUR du groupe « ${c.A.s} ». On divise l'une par l'autre.`,
+              `$P(${a}) = \\dfrac{${PAB}}{${PAsB}} = ${PA}$.`,
+              `La probabilité est $${PA}$, soit $${pcPctM(e.nA, e.N)}$ des ${c.court}.`
+            ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_cond_tpl_7",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_conditionnelle",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Repère d'abord la CONDITION (après « sachant » ou « parmi ») : son effectif est le dénominateur.",
+    tags: ["premiere", "maths", "probas_cond", "conditionnelle", "template"],
+    // ★4 — effectifs complets : P_B(A), P_Ā(B) ou P_Ā(B̄), où la condition n'est plus « A ».
+    generate: () => {
+      const c = pickOne(PC_CTX);
+      const { a, b } = pcLettres(c);
+      const cas = pickOne(["BA", "nonA_B", "nonA_nonB"] as const);
+      const frac = (x: PcEff): [number, number] =>
+        cas === "BA" ? [x.nAB, x.nB] : cas === "nonA_B" ? [x.nB - x.nAB, x.N - x.nA] : [x.N - x.nA - (x.nB - x.nAB), x.N - x.nA];
+      const e = pcTirer((x) => {
+        const f = frac(x);
+        return f[0] > 0 && pcJuste(f[0], f[1]);
+      });
+      const [num, den] = frac(e);
+      const nonA = `\\overline{${a}}`;
+      const s =
+        cas === "BA"
+          ? { cond: c.B.s, condP: c.B.p, cible: c.A.s, cibleP: c.A.p, not: `P_{${b}}(${a})` }
+          : cas === "nonA_B"
+            ? { cond: c.A.ns, condP: c.A.np, cible: c.B.s, cibleP: c.B.p, not: `P_{${nonA}}(${b})` }
+            : { cond: c.A.ns, condP: c.A.np, cible: c.B.ns, cibleP: c.B.np, not: `P_{${nonA}}(\\overline{${b}})` };
+      const calcul =
+        cas === "BA"
+          ? `La condition est « ${c.B.s} » : $${e.nB}$ ${c.court}. Parmi ${c.eux}, ${c.ceux} qui ${c.A.p} aussi sont $${e.nAB}$.`
+          : cas === "nonA_B"
+            ? `La condition est « ${c.A.ns} » : $${e.N} - ${e.nA} = ${den}$ ${c.court}. Parmi ${c.eux}, ${c.ceux} qui ${c.B.p} : $${e.nB} - ${e.nAB} = ${num}$.`
+            : `La condition est « ${c.A.ns} » : $${e.N} - ${e.nA} = ${den}$ ${c.court}. Parmi ${c.eux}, $${e.nB} - ${e.nAB} = ${e.nB - e.nAB}$ ${c.B.p}, donc $${den} - ${e.nB - e.nAB} = ${num}$ ${c.B.np}.`;
+      return {
+        text: pcDonneesEff(c, e, true) + " " + pcQuestionSachant(c, s.cond, s.condP, s.cible, s.cibleP, s.not, pcDef(c)),
+        format: "short",
+        expected: pcEcritures(num, den),
+        comparator: "number_equal",
+        explanation: exp(
+          `On cherche $${s.not}$ : la probabilité de « ${s.cible} » sachant « ${s.cond} ». On se restreint au groupe de la condition.`,
+          calcul,
+          `$${s.not} = \\dfrac{${num}}{${den}} = ${pcM(num, den)}$.${cas === "BA" ? ` Attention : ce n'est pas $P_{${a}}(${b}) = \\dfrac{${e.nAB}}{${e.nA}}$, le dénominateur change.` : ""}`,
+          `La probabilité est $${pcM(num, den)}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_cond_tpl_8",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_conditionnelle",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Même case du tableau, mais quel dénominateur ? Celui de la condition.",
+    tags: ["premiere", "maths", "probas_cond", "conditionnelle", "template", "qcm", "piege"],
+    // ★4 — QCM piège : on demande P_B(A) ; leurres P_A(B), P(A ∩ B), P(B).
+    generate: () => {
+      const c = pickOne(PC_CTX);
+      const { a, b } = pcLettres(c);
+      const leurres = (x: PcEff): [number, number][] => [[x.nAB, x.nA], [x.nAB, x.N], [x.nB, x.N], [x.nA, x.N]];
+      const e = pcTirer((x) => pcDistincts([x.nAB, x.nB], leurres(x)) >= 3);
+      const q = pcQcm([e.nAB, e.nB], leurres(e));
+      const t = pickOne([0, 1, 2]);
+      const question =
+        t === 0 ? `On choisit au hasard ${c.un} qui ${c.B.s}. Quelle est la probabilité de l'événement « ${c.il} ${c.A.s} » ?`
+        : t === 1 ? `${pcDef(c)} Quelle est la valeur de $P_{${b}}(${a})$ ?`
+        : `Parmi les ${c.court} qui ${c.B.p}, quelle est la proportion de ${c.ceux} qui ${c.A.p} ?`;
+      return {
+        text: pcDonneesEff(c, e, true) + " " + question,
+        format: "qcm",
+        choices: q.choices,
+        expected: [q.expected],
+        comparator: "mcq_exact",
+        explanation: exp(
+          `Ici la condition est « ${c.B.s} » (et non « ${c.A.s} ») : on se restreint aux $${e.nB}$ ${c.court} qui ${c.B.p}.`,
+          `Parmi ${c.eux}, $${e.nAB}$ ${c.A.p}.`,
+          `$P_{${b}}(${a}) = \\dfrac{${e.nAB}}{${e.nB}} = ${pcM(e.nAB, e.nB)}$. Le piège $\\dfrac{${e.nAB}}{${e.nA}}$ est $P_{${a}}(${b})$ : même numérateur, autre condition.`,
+          `La bonne réponse est $\\dfrac{${e.nAB}}{${e.nB}}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_cond_tpl_9",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_conditionnelle",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "D'abord $P(A \\cap B) = P(A) + P(B) - P(A \\cup B)$, puis la formule de la probabilité conditionnelle.",
+    tags: ["premiere", "maths", "probas_cond", "conditionnelle", "template"],
+    // ★5 — deux étapes : P(A ∪ B) donné, retrouver l'intersection, puis conditionner.
+    generate: () => {
+      const c = pickOne(PC_CTX);
+      const { a, b } = pcLettres(c);
+      const surB = Math.random() < 0.4;
+      const e = pcTirer(
+        (x) => [x.nA, x.nB, x.nAB].every((n) => pcJuste(100 * n, x.N, 1)) && pcJuste(x.nAB, surB ? x.nB : x.nA),
+        [100, 200, 400, 500, 1000],
+      );
+      const nU = e.nA + e.nB - e.nAB;
+      const pct = Math.random() < 0.5;
+      const [cond, cible, den] = surB ? [b, a, e.nB] : [a, b, e.nA];
+      const ev = (x: string) => (x === a ? c.A : c.B);
+      const P = (n: number) => (pct ? pcPctM(n, e.N) : pcM(n, e.N));
+      const donnees = pct
+        ? `${c.verbe} des ${c.pop} : $${P(e.nA)}$ d'entre ${c.eux} ${c.A.p}, $${P(e.nB)}$ ${c.B.p}, et $${P(nU)}$ ${c.A.p} ou ${c.B.p} (au moins l'un des deux).`
+        : `On choisit ${c.un} au hasard. ${pcDef(c)} On sait que $P(${a}) = ${P(e.nA)}$, $P(${b}) = ${P(e.nB)}$ et $P(${a} \\cup ${b}) = ${P(nU)}$.`;
+      const question = pcQuestionSachant(c, ev(cond).s, ev(cond).p, ev(cible).s, ev(cible).p, `P_{${cond}}(${cible})`, pct ? pcDef(c) : "");
+      return {
+        text: `${donnees} ${question}`,
+        format: "short",
+        expected: pcEcritures(e.nAB, den),
+        comparator: "number_equal",
+        explanation: exp(
+          `On cherche $P_{${cond}}(${cible}) = \\dfrac{P(${a} \\cap ${b})}{P(${cond})}$ ; il manque l'intersection.`,
+          `« ${c.A.s} ou ${c.B.s} » est la réunion : $P(${a} \\cup ${b}) = P(${a}) + P(${b}) - P(${a} \\cap ${b})$, donc $P(${a} \\cap ${b}) = P(${a}) + P(${b}) - P(${a} \\cup ${b})$.`,
+          `$P(${a} \\cap ${b}) = ${pcM(e.nA, e.N)} + ${pcM(e.nB, e.N)} - ${pcM(nU, e.N)} = ${pcM(e.nAB, e.N)}$, puis $P_{${cond}}(${cible}) = \\dfrac{${pcM(e.nAB, e.N)}}{${pcM(den, e.N)}} = ${pcM(e.nAB, den)}$.`,
+          `$P_{${cond}}(${cible}) = ${pcM(e.nAB, den)}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_cond_tpl_10",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_conditionnelle",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Calcule d'abord $P(A \\cap B) = P(A) \\times P_A(B)$, puis divise par $P(B)$.",
+    tags: ["premiere", "maths", "probas_cond", "conditionnelle", "template"],
+    // ★5 — on connaît P(A), P_A(B) et P(B) : retourner la condition, P_B(A).
+    generate: () => {
+      const c = pickOne(PC_CTX);
+      const { a, b } = pcLettres(c);
+      const e = pcTirer(
+        (x) => pcJuste(100 * x.nA, x.N, 1) && pcJuste(100 * x.nB, x.N, 1) && pcJuste(100 * x.nAB, x.nA, 1) && pcJuste(x.nAB, x.nB) && pcJuste(x.nAB, x.N, 4),
+        [100, 200, 250, 400, 500, 1000],
+      );
+      const pct = Math.random() < 0.5;
+      const donnees = pct
+        ? `${c.verbe} des ${c.pop} : $${pcPctM(e.nA, e.N)}$ d'entre ${c.eux} ${c.A.p} et, parmi ${c.ceux}-ci, $${pcPctM(e.nAB, e.nA)}$ ${c.B.p}. Au total, $${pcPctM(e.nB, e.N)}$ des ${c.court} ${c.B.p}.`
+        : `On choisit ${c.un} au hasard. ${pcDef(c)} On sait que $P(${a}) = ${pcM(e.nA, e.N)}$, $P_{${a}}(${b}) = ${pcM(e.nAB, e.nA)}$ et $P(${b}) = ${pcM(e.nB, e.N)}$.`;
+      const question = pcQuestionSachant(c, c.B.s, c.B.p, c.A.s, c.A.p, `P_{${b}}(${a})`, pct ? pcDef(c) : "");
+      return {
+        text: `${donnees} ${question}`,
+        format: "short",
+        expected: pcEcritures(e.nAB, e.nB),
+        comparator: "number_equal",
+        explanation: exp(
+          `On cherche $P_{${b}}(${a}) = \\dfrac{P(${a} \\cap ${b})}{P(${b})}$ : la condition est maintenant « ${c.B.s} ».`,
+          `L'intersection se calcule avec la donnée « parmi » : $P(${a} \\cap ${b}) = P(${a}) \\times P_{${a}}(${b})$.`,
+          `$P(${a} \\cap ${b}) = ${pcM(e.nA, e.N)} \\times ${pcM(e.nAB, e.nA)} = ${pcM(e.nAB, e.N)}$, puis $P_{${b}}(${a}) = \\dfrac{${pcM(e.nAB, e.N)}}{${pcM(e.nB, e.N)}} = ${pcM(e.nAB, e.nB)}$.`,
+          `$P_{${b}}(${a}) = ${pcM(e.nAB, e.nB)}$, différent de $P_{${a}}(${b}) = ${pcM(e.nAB, e.nA)}$.`
         ),
       };
     },
@@ -663,26 +2318,9 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     microId: "pc_arbre",
     difficulty: 3,
     theme: "neutral",
-    hint: "Multiplie le long du chemin.",
+    hint: "On multiplie le long d'un chemin ; on additionne les chemins.",
     tags: ["premiere", "maths", "probas_cond", "arbre", "template"],
-    generate: () => {
-      const pA = randomInt(2, 8) / 10;
-      const pBsiA = randomInt(2, 8) / 10;
-      const inter = Math.round(pA * pBsiA * 100) / 100;
-      return {
-        text: `Sur l'arbre, $P(A) = ${fr(pA)}$ et $P_A(B) = ${fr(pBsiA)}$. Calcule $P(A \\cap B)$.`,
-        format: "short",
-        expected: [fr(inter)],
-        comparator: "number_equal",
-        canvas: arbre(pA, pBsiA, 0.3),
-        explanation: exp(
-          "On multiplie le long du chemin A → B.",
-          `$P(A \\cap B) = ${fr(pA)} \\times ${fr(pBsiA)}$.`,
-          `$= ${fr(inter)}$.`,
-          `$P(A \\cap B) = ${fr(inter)}$.`
-        ),
-      };
-    },
+    generate: () => pcGenArbreChemin(false),
   },
 
   /* ===================== PC_TOTALES ===================== */
@@ -965,27 +2603,9 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     microId: "pc_totales",
     difficulty: 4,
     theme: "neutral",
-    hint: "$P(B) = P(A)P_A(B) + P(\\bar A)P_{\\bar A}(B)$.",
+    hint: "$P(B) = P(A) P_A(B) + P(\bar A) P_{\bar A}(B)$.",
     tags: ["premiere", "maths", "probas_cond", "totales", "template"],
-    generate: () => {
-      const pA = randomInt(2, 8) / 10;
-      const pBsiA = randomInt(1, 9) / 10;
-      const pBsiNonA = randomInt(1, 9) / 10;
-      const pB = Math.round((pA * pBsiA + (1 - pA) * pBsiNonA) * 100) / 100;
-      return {
-        text: `Avec $P(A) = ${fr(pA)}$, $P_A(B) = ${fr(pBsiA)}$, $P_{\\bar A}(B) = ${fr(pBsiNonA)}$, calcule $P(B)$. (arrondir au centième)`,
-        format: "short",
-        expected: [fr(pB)],
-        comparator: "number_equal",
-        canvas: arbre(pA, pBsiA, pBsiNonA),
-        explanation: exp(
-          "On applique la formule des probabilités totales.",
-          `$P(B) = ${fr(pA)} \\times ${fr(pBsiA)} + ${fr(1 - pA)} \\times ${fr(pBsiNonA)}$.`,
-          `$= ${fr(pB)}$.`,
-          `$P(B) = ${fr(pB)}$.`
-        ),
-      };
-    },
+    generate: () => pcGenTotales("short"),
   },
 
   /* ===================== PC_INDEPENDANCE ===================== */
@@ -1283,25 +2903,9 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     microId: "pc_independance",
     difficulty: 3,
     theme: "neutral",
-    hint: "Indépendants → $P(A \\cap B) = P(A) \\times P(B)$.",
+    hint: "Indépendants : $P(A \cap B) = P(A) \times P(B)$.",
     tags: ["premiere", "maths", "probas_cond", "independance", "template"],
-    generate: () => {
-      const pA = randomInt(2, 8) / 10;
-      const pB = randomInt(2, 8) / 10;
-      const inter = Math.round(pA * pB * 100) / 100;
-      return {
-        text: `$A$ et $B$ sont indépendants avec $P(A) = ${fr(pA)}$ et $P(B) = ${fr(pB)}$. Combien vaut $P(A \\cap B)$ ? (arrondir au centième)`,
-        format: "short",
-        expected: [fr(inter)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Pour des événements indépendants, on multiplie les probabilités.",
-          `$P(A \\cap B) = ${fr(pA)} \\times ${fr(pB)}$.`,
-          `$= ${fr(inter)}$.`,
-          `$P(A \\cap B) = ${fr(inter)}$.`
-        ),
-      };
-    },
+    generate: () => pcGenIndependanceProduit(false),
   },
 
   /* ===================== PC_REGISTRES ===================== */
@@ -1442,32 +3046,9 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     microId: "pc_registres",
     difficulty: 4,
     theme: "neutral",
-    hint: "Repère si l'énoncé restreint la population avant de poser sa question.",
+    hint: "L'événement en indice est la condition : le groupe qui suit « parmi » ou « sachant que ».",
     tags: ["premiere", "maths", "probabilites_conditionnelles", "registres", "template"],
-    generate: () => {
-      const cas = [
-        { phrase: "la probabilité qu'un élève tiré au hasard soit interne ET sportif", bonne: "$P(A \\cap B)$" },
-        { phrase: "parmi les internes, la proportion de sportifs", bonne: "$P_A(B)$" },
-        { phrase: "sachant qu'un élève est interne, la probabilité qu'il soit sportif", bonne: "$P_A(B)$" },
-        { phrase: "parmi les sportifs, la proportion d'internes", bonne: "$P_B(A)$" },
-        { phrase: "la probabilité qu'un élève tiré au hasard soit interne", bonne: "$P(A)$" },
-      ];
-      const c = pickOne(cas);
-      const toutes = ["$P(A \\cap B)$", "$P_A(B)$", "$P_B(A)$", "$P(A)$"];
-      return {
-        text: `On note $A$ « l'élève est interne » et $B$ « l'élève est sportif ». Comment s'écrit : ${c.phrase} ?`,
-        format: "qcm",
-        choices: [c.bonne, ...toutes.filter((t) => t !== c.bonne)],
-        expected: [c.bonne],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "L'événement écrit en INDICE est celui qu'on suppose déjà réalisé ; l'intersection, elle, se place dans l'univers entier.",
-          `On cherche les mots qui restreignent la population dans : « ${c.phrase} ».`,
-          "« Parmi » et « sachant que » annoncent une condition, donc un indice ; « et » annonce une intersection.",
-          `L'écriture correcte est ${c.bonne}.`
-        ),
-      };
-    },
+    generate: () => pcGenRegistresQcm(false, Object.keys(PC_LEURRES)),
   },
   {
     kind: "template",
@@ -1478,29 +3059,9 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     microId: "pc_registres",
     difficulty: 5,
     theme: "neutral",
-    hint: "Dis d'abord dans quel groupe on se place, puis ce qu'on y cherche.",
+    hint: "L'événement en indice est la condition : le groupe qui suit « parmi » ou « sachant que ».",
     tags: ["premiere", "maths", "probabilites_conditionnelles", "registres", "open", "template"],
-    generate: () => {
-      const cas = [
-        { ecriture: "P_M(T)", M: "le patient est malade", T: "le test est positif", mots: ["parmi les malades", "sachant", "malade"] },
-        { ecriture: "P_T(M)", M: "le patient est malade", T: "le test est positif", mots: ["parmi les tests positifs", "sachant", "positif"] },
-        { ecriture: "P(M \\cap T)", M: "le patient est malade", T: "le test est positif", mots: ["et", "les deux", "univers", "tire au hasard"] },
-        { ecriture: "P_{\\bar M}(T)", M: "le patient est malade", T: "le test est positif", mots: ["non malade", "sain", "parmi", "faux positif"] },
-      ];
-      const c = pickOne(cas);
-      return {
-        text: `On note $M$ « ${c.M} » et $T$ « ${c.T} ». Traduis $${c.ecriture}$ par une phrase en français, et précise sur quel groupe on compte.`,
-        format: "open",
-        expected: c.mots,
-        comparator: "contains_keyword",
-        explanation: exp(
-          "Lire une écriture probabiliste, c'est dire deux choses : dans quel groupe on se place, et ce qu'on y compte.",
-          "L'indice donne le groupe de référence ; l'événement entre parenthèses donne ce qu'on y cherche. Sans indice, le groupe est l'univers entier.",
-          `Ici, l'écriture $${c.ecriture}$ se lit donc en nommant d'abord la population concernée.`,
-          "La phrase doit contenir « parmi » ou « sachant que » dès qu'il y a un indice — sinon on décrit une intersection."
-        ),
-      };
-    },
+    generate: () => pcGenRegistresValeur(true),
   },
 
   /* ===================== PC_TABLEAU ===================== */
@@ -1635,53 +3196,9 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     microId: "pc_tableau",
     difficulty: 4,
     theme: "neutral",
-    hint: "Numérateur : la case. Dénominateur : le total du groupe mis en condition.",
+    hint: "« Sachant que… » : on lit la ligne (ou la colonne) de la condition, et on divise par SON total.",
     tags: ["premiere", "maths", "probabilites_conditionnelles", "tableau", "canvas", "template"],
-    generate: () => {
-      const a = randomInt(20, 60);
-      const b = randomInt(20, 60);
-      // Si $b$ et $c$ sont égaux, le total de la ligne et celui de la colonne
-      // le sont aussi : les deux propositions qui distinguent « sachant qu'il
-      // est en seconde » de « sachant qu'il est demi-pensionnaire » s'écrivent
-      // alors pareil, et la question ne teste plus rien.
-      let c = randomInt(20, 60);
-      while (c === b) c = randomInt(20, 60);
-      const d = randomInt(20, 60);
-      const ligne = a + b;
-      const colonne = a + c;
-      const total = a + b + c + d;
-      const parLigne = pickOne([true, false]);
-      const correct = parLigne ? `$\\dfrac{${a}}{${ligne}}$` : `$\\dfrac{${a}}{${colonne}}$`;
-      const autre = parLigne ? `$\\dfrac{${a}}{${colonne}}$` : `$\\dfrac{${a}}{${ligne}}$`;
-      return {
-        text: parLigne
-          ? "Dans ce tableau, quelle est la probabilité qu'un élève soit demi-pensionnaire, sachant qu'il est en seconde ?"
-          : "Dans ce tableau, quelle est la probabilité qu'un élève soit en seconde, sachant qu'il est demi-pensionnaire ?",
-        format: "qcm",
-        choices: [correct, autre, `$\\dfrac{${a}}{${total}}$`, `$\\dfrac{${ligne}}{${total}}$`],
-        expected: [correct],
-        comparator: "mcq_exact",
-        canvas: {
-          kind: "tableau_donnees",
-          title: "Régime des élèves par niveau",
-          headers: ["", "Demi-pensionnaires", "Externes", "Total"],
-          rows: [
-            { label: "Seconde", values: [a, b, ligne] },
-            { label: "Première", values: [c, d, c + d] },
-            { label: "Total", values: [colonne, b + d, total] },
-          ],
-          highlight: parLigne ? { row: 0 } : { col: 1 },
-        },
-        explanation: exp(
-          "Dans un tableau croisé, une conditionnelle est le quotient de la case par le total du groupe mis en condition.",
-          parLigne
-            ? `La condition est « être en seconde » : on prend le total de cette LIGNE, soit $${ligne}$.`
-            : `La condition est « être demi-pensionnaire » : on prend le total de cette COLONNE, soit $${colonne}$.`,
-          `Le numérateur est la case commune aux deux caractères, soit $${a}$.`,
-          `La probabilité vaut ${correct} — diviser par le total général $${total}$ donnerait une intersection.`
-        ),
-      };
-    },
+    generate: () => pcGenTableauQcm(true),
   },
   {
     kind: "template",
@@ -1692,39 +3209,9 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     microId: "pc_tableau",
     difficulty: 5,
     theme: "neutral",
-    hint: "Compare les deux dénominateurs : ce ne sont pas les mêmes groupes.",
+    hint: "« Sachant que… » : on lit la ligne (ou la colonne) de la condition, et on divise par SON total.",
     tags: ["premiere", "maths", "probabilites_conditionnelles", "tableau", "canvas", "open", "template"],
-    generate: () => {
-      const a = randomInt(20, 50);
-      const b = randomInt(20, 50);
-      const c = randomInt(20, 50);
-      const d = randomInt(20, 50);
-      const ligne = a + b;
-      const colonne = a + c;
-      const total = a + b + c + d;
-      return {
-        text: "À partir de ce tableau, calcule les deux probabilités « demi-pensionnaire sachant seconde » et « seconde sachant demi-pensionnaire », puis explique pourquoi elles diffèrent.",
-        format: "open",
-        expected: [String(ligne), String(colonne), "denominateur", "dénominateur", "groupe", "pas le meme", "pas le même"],
-        comparator: "contains_keyword",
-        canvas: {
-          kind: "tableau_donnees",
-          title: "Régime des élèves par niveau",
-          headers: ["", "Demi-pensionnaires", "Externes", "Total"],
-          rows: [
-            { label: "Seconde", values: [a, b, ligne] },
-            { label: "Première", values: [c, d, c + d] },
-            { label: "Total", values: [colonne, b + d, total] },
-          ],
-        },
-        explanation: exp(
-          "Les deux probabilités partagent le même numérateur — la case commune — mais pas le même dénominateur.",
-          `« DP sachant seconde » se calcule sur la ligne : $\\dfrac{${a}}{${ligne}}$.`,
-          `« Seconde sachant DP » se calcule sur la colonne : $\\dfrac{${a}}{${colonne}}$.`,
-          "Elles diffèrent parce qu'on ne compte pas dans le même groupe : inverser la condition change le monde de référence, pas les effectifs croisés."
-        ),
-      };
-    },
+    generate: () => pcGenTableauOuvert(),
   },
 
   /* ===================== PC_ARBRE_CONSTRUIRE (compléments) ===================== */
@@ -1804,26 +3291,9 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     microId: "pc_arbre_construire",
     difficulty: 4,
     theme: "neutral",
-    hint: "À chaque nœud, la somme des branches vaut $1$.",
+    hint: "Premier niveau : $P(A)$ ; second niveau : des probabilités SACHANT la branche d'où l'on part ; somme $1$ à chaque nœud.",
     tags: ["premiere", "maths", "probabilites_conditionnelles", "arbre_construire", "template"],
-    generate: () => {
-      const p = pickOne([0.15, 0.25, 0.3, 0.4, 0.55, 0.7, 0.8]);
-      const q = Math.round((1 - p) * 100) / 100;
-      const correct = `$${fr(q)}$`;
-      return {
-        text: `Sur un arbre, une branche issue d'un nœud porte $${fr(p)}$. Que porte l'autre branche partant du même nœud ?`,
-        format: "qcm",
-        choices: [correct, `$${fr(p)}$`, "$1$", `$${fr(Math.round(p * q * 100) / 100)}$`],
-        expected: [correct],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Les branches partant d'un même nœud décrivent tous les cas possibles à cette étape : elles forment une partition.",
-          "Leurs probabilités s'additionnent donc à $1$.",
-          `Ici $1 - ${fr(p)} = ${fr(q)}$.`,
-          `L'autre branche porte ${correct} — c'est le contrôle le plus rapide pour repérer un arbre mal rempli.`
-        ),
-      };
-    },
+    generate: () => pcGenArbreBranche(4),
   },
   {
     kind: "template",
@@ -1834,40 +3304,9 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     microId: "pc_arbre_construire",
     difficulty: 5,
     theme: "neutral",
-    hint: "Repère la probabilité donnée sans condition : elle va au premier niveau.",
+    hint: "Premier niveau : $P(A)$ ; second niveau : des probabilités SACHANT la branche d'où l'on part ; somme $1$ à chaque nœud.",
     tags: ["premiere", "maths", "probabilites_conditionnelles", "arbre_construire", "open", "template"],
-    generate: () => {
-      const cas = [
-        {
-          e: "Dans un lycée, $40\\,\\%$ des élèves sont internes. Parmi les internes, $75\\,\\%$ font du sport ; parmi les externes, $50\\,\\%$ en font.",
-          n1: "interne / externe",
-          p1: "0,4",
-        },
-        {
-          e: "Une usine a deux ateliers : le premier fabrique $60\\,\\%$ des pièces, dont $3\\,\\%$ sont défectueuses ; le second fabrique le reste, dont $7\\,\\%$ sont défectueuses.",
-          n1: "atelier 1 / atelier 2",
-          p1: "0,6",
-        },
-        {
-          e: "Sur une plage, $30\\,\\%$ des baigneurs portent un lycra. Parmi eux, $5\\,\\%$ attrapent un coup de soleil ; parmi les autres, $35\\,\\%$ en attrapent un.",
-          n1: "lycra / pas de lycra",
-          p1: "0,3",
-        },
-      ];
-      const c = pickOne(cas);
-      return {
-        text: `Décris l'arbre pondéré qui traduit cet énoncé : « ${c.e} » — quels événements places-tu au premier niveau, et quelles probabilités portent les branches ?`,
-        format: "open",
-        expected: [c.p1, "premier niveau", "conditionnelle", "second niveau", "sachant"],
-        comparator: "contains_keyword",
-        explanation: exp(
-          "On place au premier niveau l'événement dont la probabilité est donnée SANS condition ; les autres, introduits par « parmi » ou « dont », vont au second.",
-          `Ici le premier niveau oppose ${c.n1}, avec $${c.p1}$ sur la première branche et son complément sur l'autre.`,
-          "Chaque branche de second niveau porte une probabilité conditionnelle, recopiée telle quelle depuis l'énoncé.",
-          "Contrôle : à chaque nœud, les deux branches doivent totaliser $1$."
-        ),
-      };
-    },
+    generate: () => pcGenArbreBranche(5),
   },
 
   /* ===================== PC_PARTITION (compléments) ===================== */
@@ -1980,33 +3419,9 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     microId: "pc_partition",
     difficulty: 4,
     theme: "neutral",
-    hint: "Cherche une issue qui appartient aux deux, ou une issue qui n'appartient à aucun.",
+    hint: "Partition : aucune issue commune, aucune issue oubliée ; les probabilités ont une somme égale à $1$.",
     tags: ["premiere", "maths", "probabilites_conditionnelles", "partition", "template"],
-    generate: () => {
-      const cas = [
-        { a: "obtenir un nombre pair", b: "obtenir un nombre impair", ok: true, pourquoi: "chaque nombre est soit pair, soit impair, jamais les deux" },
-        { a: "obtenir un nombre inférieur ou égal à $3$", b: "obtenir un nombre supérieur ou égal à $4$", ok: true, pourquoi: "les deux ensembles se complètent exactement" },
-        { a: "obtenir un multiple de $2$", b: "obtenir un multiple de $3$", ok: false, pourquoi: "le $6$ appartient aux deux, et le $1$ à aucun" },
-        { a: "obtenir un nombre premier", b: "obtenir un nombre pair", ok: false, pourquoi: "le $2$ appartient aux deux, et le $1$ à aucun" },
-        { a: "obtenir $1$ ou $2$", b: "obtenir $3$, $4$, $5$ ou $6$", ok: true, pourquoi: "les deux ensembles se complètent exactement" },
-      ];
-      const c = pickOne(cas);
-      return {
-        text: `On lance un dé à six faces. Les événements « ${c.a} » et « ${c.b} » forment-ils une partition de l'univers ?`,
-        format: "qcm",
-        choices: c.ok
-          ? ["oui", "non : ils se chevauchent", "non : certaines issues sont oubliées", "on ne peut pas savoir"]
-          : ["non", "oui", "oui, car ils sont incompatibles", "on ne peut pas savoir"],
-        expected: [c.ok ? "oui" : "non"],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Une partition exige deux choses : aucune issue commune à deux événements, et aucune issue oubliée.",
-          "On passe donc en revue les six faces du dé, en regardant dans quel(s) événement(s) chacune tombe.",
-          `Ici, ${c.pourquoi}.`,
-          c.ok ? "Les deux événements forment bien une partition." : "Ce n'est pas une partition."
-        ),
-      };
-    },
+    generate: () => pcGenPartitionDe(false),
   },
   {
     kind: "template",
@@ -2017,31 +3432,9 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     microId: "pc_partition",
     difficulty: 5,
     theme: "neutral",
-    hint: "Vérifie les deux conditions séparément, en citant une issue à chaque fois.",
+    hint: "Partition : aucune issue commune, aucune issue oubliée ; les probabilités ont une somme égale à $1$.",
     tags: ["premiere", "maths", "probabilites_conditionnelles", "partition", "open", "template"],
-    generate: () => {
-      const cas = [
-        { liste: "« seconde », « première », « terminale »", univers: "les élèves d'un lycée général", ok: true },
-        { liste: "« interne », « demi-pensionnaire »", univers: "les élèves d'un lycée", ok: false },
-        { liste: "« fait de l'espagnol », « fait de l'allemand »", univers: "les élèves d'un collège", ok: false },
-        { liste: "« a moins de 15 ans », « a entre 15 et 18 ans », « a plus de 18 ans »", univers: "les inscrits d'un club", ok: true },
-      ];
-      const c = pickOne(cas);
-      return {
-        text: `Les événements ${c.liste} forment-ils une partition de l'univers, pour ${c.univers} ? Justifie en vérifiant les deux conditions.`,
-        format: "open",
-        expected: ["incompatibles", "reunion", "réunion", "oubli", "chevauche", "tous les cas"],
-        comparator: "contains_keyword",
-        explanation: exp(
-          "Une partition demande deux vérifications indépendantes : pas de chevauchement, pas d'oubli.",
-          "Condition 1 — les événements sont deux à deux incompatibles : personne ne peut appartenir à deux d'entre eux.",
-          c.ok
-            ? "Condition 2 — leur réunion est l'univers : chaque individu tombe dans exactement une case. Les deux conditions sont remplies."
-            : "Condition 2 — leur réunion ne couvre pas tout : il existe des individus qui ne sont dans aucune des catégories citées (externe ; élève qui fait une autre langue).",
-          c.ok ? "C'est bien une partition." : "Ce n'est pas une partition : il manque au moins un cas."
-        ),
-      };
-    },
+    generate: () => pcGenPartitionDe(true),
   },
 
   /* ===================== PC_INVERSER (compléments) ===================== */
@@ -2154,41 +3547,9 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     microId: "pc_inverser",
     difficulty: 5,
     theme: "neutral",
-    hint: "Numérateur : le chemin $A$ puis $B$. Dénominateur : les deux chemins menant à $B$.",
+    hint: "$P_A(B)$ et $P_B(A)$ ont le même numérateur $P(A \cap B)$, mais pas le même dénominateur.",
     tags: ["premiere", "maths", "probabilites_conditionnelles", "inverser", "template"],
-    generate: () => {
-      const pA = pickOne([0.02, 0.05, 0.1, 0.2]);
-      const pBsiA = pickOne([0.9, 0.95, 0.8]);
-      const pBsiNonA = pickOne([0.05, 0.1, 0.2]);
-      const num = pA * pBsiA;
-      const den = num + (1 - pA) * pBsiNonA;
-      const rep = Math.round((num / den) * 100) / 100;
-      const correct = `$${fr(rep)}$`;
-      return {
-        text:
-          `Un test donne $P(M) = ${fr(pA)}$, $P_M(+) = ${fr(pBsiA)}$ et $P_{\\bar M}(+) = ${fr(pBsiNonA)}$. ` +
-          `Quelle est la probabilité d'être malade sachant que le test est positif ? (arrondir au centième)`,
-        format: "qcm",
-        // Le numérateur arrondi au centième retombe souvent sur $P(M)$ : deux
-        // pièges, une seule ligne. On ajoute le taux de faux positifs et le
-        // complémentaire de la réponse, deux erreurs classiques.
-        choices: makeChoices(correct, [
-          `$${fr(pBsiA)}$`,
-          `$${fr(Math.round(num * 100) / 100)}$`,
-          `$${fr(pA)}$`,
-          `$${fr(pBsiNonA)}$`,
-          `$${fr(Math.round((1 - rep) * 100) / 100)}$`,
-        ]),
-        expected: [correct],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "On cherche $P_{+}(M) = \\dfrac{P(M \\cap +)}{P(+)}$ : il faut construire les deux termes.",
-          `Numérateur : $P(M) \\times P_M(+) = ${fr(pA)} \\times ${fr(pBsiA)} = ${fr(Math.round(num * 1000) / 1000)}$.`,
-          `Dénominateur, par les probabilités totales : $${fr(Math.round(num * 1000) / 1000)} + ${fr(Math.round((1 - pA) * 100) / 100)} \\times ${fr(pBsiNonA)} = ${fr(Math.round(den * 1000) / 1000)}$.`,
-          `Le quotient vaut ${correct} — souvent bien plus bas que le $${fr(pBsiA)}$ annoncé par le test, à cause des faux positifs.`
-        ),
-      };
-    },
+    generate: () => pcGenInverserQcm(),
   },
   {
     kind: "template",
@@ -2199,37 +3560,9 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     microId: "pc_inverser",
     difficulty: 5,
     theme: "neutral",
-    hint: "Dis quelle probabilité est réellement affirmée, et laquelle on croit entendre.",
+    hint: "$P_A(B)$ et $P_B(A)$ ont le même numérateur $P(A \cap B)$, mais pas le même dénominateur.",
     tags: ["premiere", "maths", "probabilites_conditionnelles", "inverser", "open", "template"],
-    generate: () => {
-      const cas = [
-        {
-          phrase: "la plupart des joueurs de basket professionnels sont grands, donc si tu es grand tu as de bonnes chances de devenir professionnel",
-          mots: ["inverse", "condition", "beaucoup de grands", "denominateur", "dénominateur"],
-        },
-        {
-          phrase: "$90\\,\\%$ des personnes hospitalisées avaient consulté un médecin, donc consulter un médecin rend malade",
-          mots: ["inverse", "condition", "cause", "consultent", "denominateur", "dénominateur"],
-        },
-        {
-          phrase: "presque tous les élèves qui ont eu $20$ avaient révisé, donc réviser garantit d'avoir $20$",
-          mots: ["inverse", "condition", "beaucoup revisent", "beaucoup révisent", "denominateur", "dénominateur"],
-        },
-      ];
-      const c = pickOne(cas);
-      return {
-        text: `Quelqu'un affirme : « ${c.phrase} ». Explique l'erreur de raisonnement.`,
-        format: "open",
-        expected: c.mots,
-        comparator: "contains_keyword",
-        explanation: exp(
-          "Deux probabilités conditionnelles inversées, $P_A(B)$ et $P_B(A)$, n'ont aucune raison d'être égales : elles se comptent sur des groupes différents.",
-          "On identifie d'abord ce que la première partie de la phrase affirme réellement, puis ce que la conclusion suppose.",
-          "La conclusion inverse la condition, et oublie que le nouveau groupe de référence est beaucoup plus grand : le dénominateur explose, la proportion s'effondre.",
-          "L'affirmation de départ peut être vraie sans que la conclusion le soit : c'est l'erreur classique d'inversion."
-        ),
-      };
-    },
+    generate: () => pcGenInverserOuvert(),
   },
 
   /* ===================== PC_INDEPENDANCE_INCOMPATIBLE (compléments) ===================== */
@@ -2336,38 +3669,9 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     microId: "pc_independance_incompatible",
     difficulty: 4,
     theme: "neutral",
-    hint: "Peuvent-ils se produire ensemble ? Le premier renseigne-t-il sur le second ?",
+    hint: "Incompatibles : $P(A \cap B) = 0$ ; indépendants : $P(A \cap B) = P(A) \times P(B)$.",
     tags: ["premiere", "maths", "probabilites_conditionnelles", "independance_incompatible", "template"],
-    generate: () => {
-      const cas = [
-        { a: "obtenir un nombre pair", b: "obtenir un $5$", meme: true, rep: "incompatibles" },
-        { a: "obtenir un nombre inférieur à $3$", b: "obtenir un $6$", meme: true, rep: "incompatibles" },
-        { a: "le premier dé donne $6$", b: "le second dé donne un nombre pair", meme: false, rep: "indépendants" },
-        { a: "le premier dé donne un nombre impair", b: "le second dé donne $4$", meme: false, rep: "indépendants" },
-        { a: "obtenir un nombre pair", b: "obtenir un multiple de $3$", meme: true, rep: "ni l'un ni l'autre" },
-      ];
-      const c = pickOne(cas);
-      const autres = ["incompatibles", "indépendants", "ni l'un ni l'autre"].filter((r) => r !== c.rep);
-      return {
-        text: `On lance ${c.meme ? "un dé" : "deux dés"}. Les événements « ${c.a} » et « ${c.b} » sont :`,
-        format: "qcm",
-        choices: [c.rep, ...autres, "les deux à la fois"],
-        expected: [c.rep],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Deux questions différentes : peuvent-ils se produire ENSEMBLE (incompatibilité) ? le premier RENSEIGNE-t-il sur le second (dépendance) ?",
-          c.meme
-            ? "Ici les deux événements portent sur le même lancer : on regarde d'abord s'il existe une face qui les réalise tous les deux."
-            : "Ici les deux événements portent sur des lancers différents : aucun résultat n'influence l'autre.",
-          c.rep === "incompatibles"
-            ? "Aucune face ne réalise les deux : l'intersection est vide."
-            : c.rep === "indépendants"
-              ? "Les deux peuvent se produire ensemble, et connaître l'un ne change rien à la probabilité de l'autre."
-              : "Le $6$ réalise les deux, donc ils ne sont pas incompatibles ; et la probabilité de l'un change quand on connaît l'autre, donc ils ne sont pas indépendants.",
-          `Ils sont ${c.rep}.`
-        ),
-      };
-    },
+    generate: () => pcGenIndIncClasser(),
   },
   {
     kind: "template",
@@ -2378,34 +3682,9 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     microId: "pc_independance_incompatible",
     difficulty: 5,
     theme: "neutral",
-    hint: "Compare $P(A \\cap B)$ et $P(A) \\times P(B)$, puis regarde si l'intersection est vide.",
+    hint: "Incompatibles : $P(A \cap B) = 0$ ; indépendants : $P(A \cap B) = P(A) \times P(B)$.",
     tags: ["premiere", "maths", "probabilites_conditionnelles", "independance_incompatible", "open", "template"],
-    generate: () => {
-      const cas = [
-        { pA: 0.4, pB: 0.5, pAB: 0.2, rep: "indépendants" },
-        { pA: 0.3, pB: 0.6, pAB: 0.18, rep: "indépendants" },
-        { pA: 0.4, pB: 0.5, pAB: 0, rep: "incompatibles" },
-        { pA: 0.25, pB: 0.4, pAB: 0, rep: "incompatibles" },
-        { pA: 0.5, pB: 0.4, pAB: 0.3, rep: "ni indépendants ni incompatibles" },
-      ];
-      const c = pickOne(cas);
-      return {
-        text: `On donne $P(A) = ${fr(c.pA)}$, $P(B) = ${fr(c.pB)}$ et $P(A \\cap B) = ${fr(c.pAB)}$. Ces événements sont-ils indépendants, incompatibles, ou ni l'un ni l'autre ? Justifie.`,
-        format: "open",
-        expected: [c.rep === "incompatibles" ? "vide" : "produit", "P(A)", "intersection", c.rep.split(" ")[0]],
-        comparator: "contains_keyword",
-        explanation: exp(
-          "Deux tests distincts : intersection nulle → incompatibles ; $P(A \\cap B) = P(A) \\times P(B)$ → indépendants.",
-          `On calcule le produit : $${fr(c.pA)} \\times ${fr(c.pB)} = ${fr(Math.round(c.pA * c.pB * 100) / 100)}$, et on le compare à $P(A \\cap B) = ${fr(c.pAB)}$.`,
-          c.rep === "incompatibles"
-            ? "L'intersection est nulle alors que le produit ne l'est pas : les événements sont incompatibles, donc dépendants."
-            : c.rep === "indépendants"
-              ? "Le produit est égal à l'intersection : la condition d'indépendance est vérifiée, et l'intersection n'est pas vide."
-              : "L'intersection n'est ni nulle ni égale au produit : aucune des deux propriétés n'est vérifiée.",
-          `Les événements sont ${c.rep}.`
-        ),
-      };
-    },
+    generate: () => pcGenIndIncConditionnelle(true),
   },
 
   /* ===================== PC_SUCCESSION (compléments) ===================== */
@@ -2518,35 +3797,9 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     microId: "pc_succession",
     difficulty: 4,
     theme: "neutral",
-    hint: "Avec remise, les deux fractions sont identiques ; sans remise, la seconde change.",
+    hint: "Épreuves indépendantes : on multiplie les probabilités le long du chemin.",
     tags: ["premiere", "maths", "probabilites_conditionnelles", "succession", "template"],
-    generate: () => {
-      const r = randomInt(2, 5);
-      const v = randomInt(2, 5);
-      const n = r + v;
-      const avecRemise = pickOne([true, false]);
-      const correct = avecRemise
-        ? `$\\dfrac{${r}}{${n}} \\times \\dfrac{${r}}{${n}}$`
-        : `$\\dfrac{${r}}{${n}} \\times \\dfrac{${r - 1}}{${n - 1}}$`;
-      const autre = avecRemise
-        ? `$\\dfrac{${r}}{${n}} \\times \\dfrac{${r - 1}}{${n - 1}}$`
-        : `$\\dfrac{${r}}{${n}} \\times \\dfrac{${r}}{${n}}$`;
-      return {
-        text: `Un sac contient $${r}$ boules rouges et $${v}$ vertes. On tire deux boules ${avecRemise ? "AVEC" : "SANS"} remise. Quel calcul donne la probabilité d'obtenir deux rouges ?`,
-        format: "qcm",
-        choices: [correct, autre, `$\\dfrac{${r}}{${n}} + \\dfrac{${r}}{${n}}$`, `$\\dfrac{${r}}{${n}}$`],
-        expected: [correct],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "La probabilité d'un chemin est le produit des probabilités des branches ; c'est la SECONDE branche qui distingue les deux situations.",
-          `Premier tirage : $\\dfrac{${r}}{${n}}$ dans les deux cas.`,
-          avecRemise
-            ? `Avec remise, le sac retrouve ses $${n}$ boules dont $${r}$ rouges : la seconde branche porte la même fraction.`
-            : `Sans remise, il reste $${n - 1}$ boules dont $${r - 1}$ rouges : la seconde branche porte $\\dfrac{${r - 1}}{${n - 1}}$.`,
-          `Le calcul correct est ${correct}.`
-        ),
-      };
-    },
+    generate: () => pcGenSuccession(4, "qcm"),
   },
   {
     kind: "template",
@@ -2557,32 +3810,9 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     microId: "pc_succession",
     difficulty: 5,
     theme: "neutral",
-    hint: "Demande-toi si le résultat de la première épreuve modifie les conditions de la seconde.",
+    hint: "Épreuves indépendantes : on multiplie les probabilités le long du chemin.",
     tags: ["premiere", "maths", "probabilites_conditionnelles", "succession", "open", "template"],
-    generate: () => {
-      const cas = [
-        { s: "on lance deux fois le même dé", ok: true },
-        { s: "on tire deux cartes d'un jeu, sans remettre la première", ok: false },
-        { s: "on tire une boule dans un sac, on la remet, puis on en tire une seconde", ok: true },
-        { s: "on interroge deux élèves différents d'une classe, sans remettre le premier nom dans la liste", ok: false },
-        { s: "on lance une pièce, puis on lance un dé", ok: true },
-      ];
-      const c = pickOne(cas);
-      return {
-        text: `Dans l'expérience suivante, les deux épreuves sont-elles indépendantes ? « ${c.s} » Justifie.`,
-        format: "open",
-        expected: [c.ok ? "independant" : "depend", c.ok ? "indépendant" : "dépend", "change", "conditions", "meme", "même"],
-        comparator: "contains_keyword",
-        explanation: exp(
-          "Deux épreuves sont indépendantes lorsque le résultat de la première ne modifie pas les probabilités de la seconde.",
-          "Le test pratique : après la première épreuve, la situation de départ est-elle intacte ?",
-          c.ok
-            ? "Ici rien n'a changé : la seconde épreuve se déroule dans exactement les mêmes conditions, quel que soit le premier résultat."
-            : "Ici la première épreuve modifie ce qui reste : les proportions ne sont plus les mêmes, et elles dépendent de ce qui est sorti.",
-          c.ok ? "Les épreuves sont indépendantes." : "Les épreuves ne sont pas indépendantes : il faut des probabilités conditionnelles."
-        ),
-      };
-    },
+    generate: () => pcGenSuccession(5, "open"),
   },
 
   /* =========================================================
@@ -2646,27 +3876,43 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "$P_A(B) = \\dfrac{P(A \\cap B)}{P(A)}$ — puis compare le résultat à $P(B)$.",
     tags: ["premiere", "maths", "probabilites_conditionnelles", "conditionnelle", "open", "template"],
+    // ★5 ouverte — une situation tirée : calculer P_A(B), la comparer à P(B), interpréter.
+    // Un tirage sur quatre est construit INDÉPENDANT (nAB × N = nA × nB).
     generate: () => {
-      const cas = [
-        { pA: 0.4, pAB: 0.3, pB: 0.5, r: "0,75", lien: "favorise" },
-        { pA: 0.5, pAB: 0.1, pB: 0.4, r: "0,2", lien: "défavorise" },
-        { pA: 0.6, pAB: 0.3, pB: 0.5, r: "0,5", lien: "n'influence pas" },
-        { pA: 0.2, pAB: 0.12, pB: 0.4, r: "0,6", lien: "favorise" },
-        { pA: 0.8, pAB: 0.16, pB: 0.3, r: "0,2", lien: "défavorise" },
-      ];
-      const c = pickOne(cas);
+      const c = pickOne(PC_CTX);
+      const { a, b } = pcLettres(c);
+      const indep = Math.random() < 0.25;
+      const e = pcTirer(
+        (x) =>
+          [x.nA, x.nB, x.nAB].every((n) => pcJuste(n, x.N, 3)) &&
+          pcJuste(x.nAB, x.nA) &&
+          (indep ? x.nAB * x.N === x.nA * x.nB : Math.abs(x.nAB * x.N - x.nA * x.nB) >= 0.03 * x.N * x.N),
+        [100, 200, 400, 500, 1000],
+      );
+      const r = pcDec(e.nAB, e.nA);
+      const cmp = e.nAB * e.N - e.nA * e.nB; // signe de P_A(B) − P(B)
+      const lien = cmp === 0 ? "n'influence pas" : cmp > 0 ? "favorise" : "défavorise";
+      const pct = Math.random() < 0.5;
+      const donnees = pct
+        ? `${c.verbe} des ${c.pop} : $${pcPctM(e.nA, e.N)}$ d'entre ${c.eux} ${c.A.p}, $${pcPctM(e.nB, e.N)}$ ${c.B.p}, et $${pcPctM(e.nAB, e.N)}$ ${c.A.p} et ${c.B.p}. ${pcDef(c)}`
+        : `On choisit ${c.un} au hasard. ${pcDef(c)} On donne $P(${a}) = ${pcM(e.nA, e.N)}$, $P(${b}) = ${pcM(e.nB, e.N)}$ et $P(${a} \\cap ${b}) = ${pcM(e.nAB, e.N)}$.`;
+      const question = pickOne([
+        `Calcule $P_{${a}}(${b})$, puis compare-la à $P(${b})$ et interprète.`,
+        `Savoir que ${c.le} ${c.A.s} rend-il l'événement $${b}$ plus probable, moins probable, ou rien ne change ? Justifie par un calcul.`,
+        `Calcule la probabilité de l'événement « ${c.le} ${c.B.s} » sachant que ${c.le} ${c.A.s}, et dis ce que ce résultat apprend en le comparant à $P(${b})$.`,
+      ]);
       return {
-        text: `On donne $P(A) = ${fr(c.pA)}$, $P(A \\cap B) = ${fr(c.pAB)}$ et $P(B) = ${fr(c.pB)}$. Calcule $P_A(B)$, puis compare-la à $P(B)$ et interprète.`,
+        text: `${donnees} ${question}`,
         format: "open",
-        expected: [c.r, "divise", c.lien.split(" ")[0], "compare", "independant"],
+        expected: [r, "divise", lien.split(" ")[0], "compare", "independant"],
         comparator: "contains_keyword",
         explanation: exp(
           "Une probabilité conditionnelle se calcule en divisant l'intersection par la probabilité de la condition, puis s'interprète en la comparant à la probabilité simple.",
-          `$P_A(B) = \\dfrac{${fr(c.pAB)}}{${fr(c.pA)}} = ${c.r}$.`,
-          `On compare à $P(B) = ${fr(c.pB)}$ : la valeur conditionnelle est ${c.lien === "n'influence pas" ? "ÉGALE" : c.lien === "favorise" ? "PLUS GRANDE" : "PLUS PETITE"}.`,
-          c.lien === "n'influence pas"
-            ? "Savoir $A$ ne change rien à la probabilité de $B$ : les deux événements sont indépendants."
-            : `Savoir $A$ réalisé ${c.lien} $B$ : les deux événements ne sont pas indépendants.`
+          `$P_{${a}}(${b}) = \\dfrac{P(${a} \\cap ${b})}{P(${a})} = \\dfrac{${pcM(e.nAB, e.N)}}{${pcM(e.nA, e.N)}} = ${pcM(e.nAB, e.nA)}$.`,
+          `On compare à $P(${b}) = ${pcM(e.nB, e.N)}$ : la valeur conditionnelle est ${lien === "n'influence pas" ? "ÉGALE" : lien === "favorise" ? "PLUS GRANDE" : "PLUS PETITE"}.`,
+          lien === "n'influence pas"
+            ? `Savoir que ${c.le} ${c.A.s} ne change rien à la probabilité de $${b}$ : les deux événements sont indépendants.`
+            : `Savoir que ${c.le} ${c.A.s} ${lien} l'événement « ${c.B.s} » : les deux événements ne sont pas indépendants.`
         ),
       };
     },
@@ -2725,25 +3971,9 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     microId: "pc_arbre",
     difficulty: 5,
     theme: "neutral",
-    hint: "Multiplie le long du chemin, puis vérifie que tous les chemins totalisent $1$.",
+    hint: "On multiplie le long d'un chemin ; on additionne les chemins.",
     tags: ["premiere", "maths", "probabilites_conditionnelles", "arbre", "open", "template"],
-    generate: () => {
-      const pA = pickOne([0.3, 0.4, 0.6, 0.7, 0.8]);
-      const pBsiA = pickOne([0.2, 0.5, 0.6, 0.9]);
-      const res = Math.round(pA * pBsiA * 100) / 100;
-      return {
-        text: `Sur un arbre, la première branche porte $P(A) = ${fr(pA)}$ et la branche suivante $P_A(B) = ${fr(pBsiA)}$. Calcule la probabilité du chemin $A$ puis $B$, et explique pourquoi on multiplie plutôt que d'additionner.`,
-        format: "open",
-        expected: [fr(res), "multiplie", "et", "successivement", "intersection"],
-        comparator: "contains_keyword",
-        explanation: exp(
-          "La probabilité d'un chemin est le produit des probabilités rencontrées, parce qu'un chemin traduit un « et » : $A$ PUIS $B$.",
-          `Ici $P(A \\cap B) = P(A) \\times P_A(B) = ${fr(pA)} \\times ${fr(pBsiA)}$.`,
-          `$= ${fr(res)}$. La seconde probabilité est conditionnelle : elle ne concerne déjà plus que les cas où $A$ s'est produit.`,
-          `Additionner n'aurait aucun sens : on ne cumule que les probabilités de chemins DIFFÉRENTS menant au même résultat.`
-        ),
-      };
-    },
+    generate: () => pcGenArbreACompleter(true),
   },
 
   {
@@ -2799,26 +4029,9 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     microId: "pc_totales",
     difficulty: 5,
     theme: "neutral",
-    hint: "Somme des chemins menant à $B$ : chaque chemin est un produit.",
+    hint: "$P(B) = P(A) P_A(B) + P(\bar A) P_{\bar A}(B)$.",
     tags: ["premiere", "maths", "probabilites_conditionnelles", "totales", "open", "template"],
-    generate: () => {
-      const pA = pickOne([0.3, 0.4, 0.6, 0.7]);
-      const p1 = pickOne([0.2, 0.5, 0.8, 0.9]);
-      const p2 = pickOne([0.1, 0.3, 0.4, 0.6]);
-      const res = Math.round((pA * p1 + (1 - pA) * p2) * 1000) / 1000;
-      return {
-        text: `On donne $P(A) = ${fr(pA)}$, $P_A(B) = ${fr(p1)}$ et $P_{\\bar A}(B) = ${fr(p2)}$. Calcule $P(B)$ en expliquant pourquoi chaque terme est pondéré.`,
-        format: "open",
-        expected: [fr(res), "pondere", "pondéré", "chemins", "additionne", "partition"],
-        comparator: "contains_keyword",
-        explanation: exp(
-          "L'événement $B$ se découpe selon la partition $\\{A ; \\bar A\\}$ : on additionne les chemins de l'arbre qui aboutissent à $B$.",
-          `Premier chemin : $P(A) \\times P_A(B) = ${fr(pA)} \\times ${fr(p1)} = ${fr(Math.round(pA * p1 * 1000) / 1000)}$.`,
-          `Second chemin : $P(\\bar A) \\times P_{\\bar A}(B) = ${fr(Math.round((1 - pA) * 100) / 100)} \\times ${fr(p2)} = ${fr(Math.round((1 - pA) * p2 * 1000) / 1000)}$.`,
-          `On additionne : $P(B) = ${fr(res)}$. Chaque conditionnelle est pondérée par la taille de son groupe — sans quoi la somme pourrait dépasser $1$.`
-        ),
-      };
-    },
+    generate: () => pcGenTotales("open"),
   },
 
   {
@@ -2874,32 +4087,335 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     microId: "pc_independance",
     difficulty: 5,
     theme: "neutral",
-    hint: "Compare $P(A \\cap B)$ et $P(A) \\times P(B)$.",
+    hint: "Indépendants : $P(A \cap B) = P(A) \times P(B)$.",
     tags: ["premiere", "maths", "probabilites_conditionnelles", "independance", "open", "template"],
-    generate: () => {
-      const cas = [
-        { pA: 0.4, pB: 0.5, pAB: 0.2, ok: true },
-        { pA: 0.3, pB: 0.6, pAB: 0.18, ok: true },
-        { pA: 0.5, pB: 0.4, pAB: 0.3, ok: false },
-        { pA: 0.2, pB: 0.5, pAB: 0.1, ok: true },
-        { pA: 0.6, pB: 0.5, pAB: 0.1, ok: false },
-      ];
-      const c = pickOne(cas);
-      const prod = Math.round(c.pA * c.pB * 100) / 100;
-      return {
-        text: `On donne $P(A) = ${fr(c.pA)}$, $P(B) = ${fr(c.pB)}$ et $P(A \\cap B) = ${fr(c.pAB)}$. Les événements sont-ils indépendants ? Justifie par le calcul, puis interprète.`,
-        format: "open",
-        expected: [fr(prod), "produit", c.ok ? "independants" : "pas independants", "compare"],
-        comparator: "contains_keyword",
-        explanation: exp(
-          "Deux événements sont indépendants si et seulement si $P(A \\cap B) = P(A) \\times P(B)$ : on compare deux nombres.",
-          `On calcule le produit : $${fr(c.pA)} \\times ${fr(c.pB)} = ${fr(prod)}$.`,
-          `On le compare à $P(A \\cap B) = ${fr(c.pAB)}$ : ${c.ok ? "les deux sont égaux" : "les deux diffèrent"}.`,
-          c.ok
-            ? "Les événements sont indépendants : savoir que l'un s'est produit ne change pas la probabilité de l'autre."
-            : `Les événements ne sont pas indépendants : savoir que $A$ s'est produit ${c.pAB > prod ? "AUGMENTE" : "DIMINUE"} la probabilité de $B$.`
-        ),
-      };
-    },
+    generate: () => pcGenIndependanceOuvert(),
+  },
+
+  /* ===== 15/10/2026 — gabarits ajoutés pour la robustesse (situation × tournure) ===== */
+  {
+    kind: "template",
+    id: "premiere_pc_tab_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_tableau",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "« Sachant que… » : on lit la ligne (ou la colonne) de la condition, et on divise par SON total.",
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "template"],
+    generate: () => pcGenTableauCourt(true),
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_tab_tpl_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_tableau",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "« Sachant que… » : on lit la ligne (ou la colonne) de la condition, et on divise par SON total.",
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "template"],
+    generate: () => pcGenTableauCourt(false),
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_tab_tpl_5",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_tableau",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "« Sachant que… » : on lit la ligne (ou la colonne) de la condition, et on divise par SON total.",
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "template"],
+    generate: () => pcGenTableauQcm(false),
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_inv_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_inverser",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "$P_A(B)$ et $P_B(A)$ ont le même numérateur $P(A \cap B)$, mais pas le même dénominateur.",
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "template"],
+    generate: () => pcGenInverserTraduire(),
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_inv_tpl_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_inverser",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "$P_A(B)$ et $P_B(A)$ ont le même numérateur $P(A \cap B)$, mais pas le même dénominateur.",
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "template"],
+    generate: () => pcGenInverserBayes(),
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_reg_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_registres",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "L'événement en indice est la condition : le groupe qui suit « parmi » ou « sachant que ».",
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "template"],
+    generate: () => pcGenRegistresQcm(true, Object.keys(PC_LEURRES)),
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_reg_tpl_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_registres",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "L'événement en indice est la condition : le groupe qui suit « parmi » ou « sachant que ».",
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "template"],
+    generate: () => pcGenRegistresValeur(false),
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_reg_tpl_5",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_registres",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "L'événement en indice est la condition : le groupe qui suit « parmi » ou « sachant que ».",
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "template"],
+    generate: () => pcGenRegistresQcm(true, ["bSachantNonA", "nonBSachantA", "aSachantB"]),
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_arb_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_arbre",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "On multiplie le long d'un chemin ; on additionne les chemins.",
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "template"],
+    generate: () => pcGenArbreChemin(true),
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_arb_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_arbre",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "On multiplie le long d'un chemin ; on additionne les chemins.",
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "template"],
+    generate: () => pcGenArbreDeux(),
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_arb_tpl_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_arbre",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "On multiplie le long d'un chemin ; on additionne les chemins.",
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "template"],
+    generate: () => pcGenArbreACompleter(false),
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_arbc_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_arbre_construire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Premier niveau : $P(A)$ ; second niveau : des probabilités SACHANT la branche d'où l'on part ; somme $1$ à chaque nœud.",
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "template"],
+    generate: () => pcGenArbreBranche(3),
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_arbc_tpl_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_arbre_construire",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Premier niveau : $P(A)$ ; second niveau : des probabilités SACHANT la branche d'où l'on part ; somme $1$ à chaque nœud.",
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "template"],
+    generate: () => pcGenArbrePremierNiveau(),
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_suc_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_succession",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Épreuves indépendantes : on multiplie les probabilités le long du chemin.",
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "template"],
+    generate: () => pcGenSuccession(3, "short"),
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_suc_tpl_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_succession",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Épreuves indépendantes : on multiplie les probabilités le long du chemin.",
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "template"],
+    generate: () => pcGenSuccession(4, "short"),
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_suc_tpl_5",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_succession",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Épreuves indépendantes : on multiplie les probabilités le long du chemin.",
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "template"],
+    generate: () => pcGenSuccession(5, "short"),
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_tot_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_totales",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "$P(B) = P(A) P_A(B) + P(\bar A) P_{\bar A}(B)$.",
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "template"],
+    generate: () => pcGenTotales("qcm"),
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_tot_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_totales",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "$P(B) = P(A) P_A(B) + P(\bar A) P_{\bar A}(B)$.",
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "template"],
+    generate: () => pcGenTotalesInverse(),
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_part_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_partition",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Partition : aucune issue commune, aucune issue oubliée ; les probabilités ont une somme égale à $1$.",
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "template"],
+    generate: () => pcGenPartitionProba(false),
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_part_tpl_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_partition",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Partition : aucune issue commune, aucune issue oubliée ; les probabilités ont une somme égale à $1$.",
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "template"],
+    generate: () => pcGenPartitionProba(true),
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_ind_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_independance",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Indépendants : $P(A \cap B) = P(A) \times P(B)$.",
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "template"],
+    generate: () => pcGenIndependanceProduit(true),
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_ind_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_independance",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Indépendants : $P(A \cap B) = P(A) \times P(B)$.",
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "template"],
+    generate: () => pcGenIndependanceTest(),
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_ind_tpl_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_independance",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Indépendants : $P(A \cap B) = P(A) \times P(B)$.",
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "template"],
+    generate: () => pcGenIndependanceInverse(),
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_indinc_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_independance_incompatible",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Incompatibles : $P(A \cap B) = 0$ ; indépendants : $P(A \cap B) = P(A) \times P(B)$.",
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "template"],
+    generate: () => pcGenIndIncUnion(),
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_indinc_tpl_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_independance_incompatible",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Incompatibles : $P(A \cap B) = 0$ ; indépendants : $P(A \cap B) = P(A) \times P(B)$.",
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "template"],
+    generate: () => pcGenIndIncConditionnelle(false),
   },
 ];

@@ -167,7 +167,50 @@ const CONTEXTES: readonly Contexte[] = [
     courtL: ["En ligne", "Magasin"],
     courtC: ["À l'heure", "En retard"],
   },
-] as const;
+  // ⭐ 15/10/2026 — ROBUSTESSE. Cinq décors seulement : l'élève revoyait la
+  // même phrase toutes les deux ou trois questions (2 à 20 squelettes par
+  // micro). Tous les contextes ci-dessous suivent le MÊME moule que les cinq
+  // premiers — une PROVENANCE en ligne (« vient de … ») et un ÉTAT en colonne
+  // (« est … ») — pour que chaque gabarit reste grammatical sans retouche.
+  // Gestion, commerce, RH, transports d'abord ; touche réunionnaise quand elle
+  // vient d'elle-même.
+  { sujet: "Satisfaction dans deux magasins", lignes: ["Magasin de Saint-Denis", "Magasin de Saint-Pierre"], colonnes: ["Satisfait", "Insatisfait"], individu: "clients", genre: "m", courtL: ["St-Denis", "St-Pierre"], courtC: ["Satisfait", "Insatisfait"] },
+  { sujet: "Formation des salariés", lignes: ["Siège social", "Usine"], colonnes: ["Formé", "Non formé"], individu: "salariés", genre: "m", courtL: ["Siège", "Usine"], courtC: ["Formé", "Non formé"] },
+  { sujet: "Service client par téléphone", lignes: ["Plateforme Nord", "Plateforme Sud"], colonnes: ["Résolu", "Non résolu"], individu: "appels", genre: "m", courtL: ["Pf Nord", "Pf Sud"], courtC: ["Résolu", "Non résolu"] },
+  { sujet: "Règlement des factures", lignes: ["Agence de Saint-Paul", "Agence du Port"], colonnes: ["Payée à l'échéance", "Payée en retard"], individu: "factures", genre: "f", courtL: ["St-Paul", "Le Port"], courtC: ["À l'échéance", "Retard"] },
+  { sujet: "Livraisons de deux transporteurs", lignes: ["Transporteur Rapido", "Transporteur Écofret"], colonnes: ["Intacte", "Endommagée"], individu: "livraisons", genre: "f", courtL: ["Rapido", "Écofret"], courtC: ["Intacte", "Abîmée"] },
+  { sujet: "Ponctualité du car jaune", lignes: ["Ligne Est", "Ligne Sud"], colonnes: ["À l'heure", "En retard"], individu: "trajets", genre: "m", courtL: ["Est", "Sud"], courtC: ["Ponctuel", "Retard"] },
+  { sujet: "Vols au départ de Roland-Garros", lignes: ["Compagnie Alizé", "Compagnie Cyclone"], colonnes: ["Ponctuel", "Retardé"], individu: "vols", genre: "m", courtL: ["Alizé", "Cyclone"], courtC: ["Ponctuel", "Retardé"] },
+  { sujet: "Recrutement d'une entreprise", lignes: ["Site d'emploi", "Candidature spontanée"], colonnes: ["Retenue", "Non retenue"], individu: "candidatures", genre: "f", courtL: ["Site", "Spontanée"], courtC: ["Retenue", "Écartée"] },
+  { sujet: "Visiteurs d'un site marchand", lignes: ["Réseaux sociaux", "Moteur de recherche"], colonnes: ["Acheteur", "Non acheteur"], individu: "visiteurs", genre: "m", courtL: ["Réseaux", "Recherche"], courtC: ["Acheteur", "Non acheteur"] },
+  { sujet: "Abonnements de deux salles de sport", lignes: ["Salle du centre-ville", "Salle de la zone commerciale"], colonnes: ["Fidèle", "Résilié"], individu: "abonnés", genre: "m", courtL: ["Centre", "Zone"], courtC: ["Fidèle", "Résilié"] },
+  { sujet: "Demandes de crédit", lignes: ["Banque en ligne", "Agence bancaire"], colonnes: ["Accordé", "Refusé"], individu: "dossiers", genre: "m", courtL: ["En ligne", "Agence"], courtC: ["Accordé", "Refusé"] },
+  { sujet: "Retours d'articles", lignes: ["Vente en ligne", "Vente en boutique"], colonnes: ["Gardé", "Retourné"], individu: "articles", genre: "m", courtL: ["Web", "Boutique"], courtC: ["Gardé", "Retourné"] },
+  { sujet: "Enquête auprès des touristes", lignes: ["Métropole", "Étranger"], colonnes: ["Satisfait", "Déçu"], individu: "touristes", genre: "m", courtL: ["Métropole", "Étranger"], courtC: ["Content", "Déçu"] },
+  { sujet: "Cagettes de letchis", lignes: ["Producteur de Saint-André", "Producteur de Sainte-Suzanne"], colonnes: ["Calibre extra", "Calibre standard"], individu: "cagettes", genre: "f", courtL: ["St-André", "Ste-Suzanne"], courtC: ["Extra", "Standard"] },
+  { sujet: "Embouteillage d'eau", lignes: ["Usine du Port", "Usine de Bras-Panon"], colonnes: ["Bien bouchée", "Mal bouchée"], individu: "bouteilles", genre: "f", courtL: ["Le Port", "Bras-Panon"], courtC: ["Bouchée", "Fuite"] },
+  { sujet: "Passages en caisse", lignes: ["Caisse rapide", "Caisse classique"], colonnes: ["Payé par carte", "Payé en espèces"], individu: "tickets", genre: "m", courtL: ["Rapide", "Classique"], courtC: ["Carte", "Espèces"] },
+  { sujet: "Réservations d'un hôtel", lignes: ["Site de l'hôtel", "Agence de voyages"], colonnes: ["Honorée", "Annulée"], individu: "réservations", genre: "f", courtL: ["Site", "Agence"], courtC: ["Honorée", "Annulée"] },
+  { sujet: "Devenir des stagiaires", lignes: ["Lycée de Saint-Denis", "Lycée du Tampon"], colonnes: ["Embauché", "Non embauché"], individu: "stagiaires", genre: "m", courtL: ["St-Denis", "Le Tampon"], courtC: ["Embauché", "Non embauché"] },
+  { sujet: "Fiabilité de smartphones", lignes: ["Usine Alpha", "Usine Bêta"], colonnes: ["Sans panne", "En panne"], individu: "smartphones", genre: "m", courtL: ["Alpha", "Bêta"], courtC: ["Sans panne", "Panne"] },
+  { sujet: "Clients d'une banque", lignes: ["Agence de Saint-Pierre", "Banque en ligne"], colonnes: ["Épargnant", "Non épargnant"], individu: "clients", genre: "m", courtL: ["Agence", "En ligne"], courtC: ["Épargnant", "Non épargnant"] },
+  { sujet: "Location de voitures", lignes: ["Agence de l'aéroport", "Agence du centre"], colonnes: ["Rendue à l'heure", "Rendue en retard"], individu: "voitures", genre: "f", courtL: ["Aéroport", "Centre"], courtC: ["À l'heure", "En retard"] },
+  { sujet: "Deux fournisseurs de pneus", lignes: ["Fournisseur Atlas", "Fournisseur Boréal"], colonnes: ["Conforme", "Défectueux"], individu: "pneus", genre: "m", courtL: ["Atlas", "Boréal"], courtC: ["Conforme", "Défectueux"] },
+  { sujet: "Livraison de plats cuisinés", lignes: ["Cuisine centrale", "Cuisine de quartier"], colonnes: ["Livré chaud", "Livré tiède"], individu: "plats", genre: "m", courtL: ["Centrale", "Quartier"], courtC: ["Chaud", "Tiède"] },
+  { sujet: "Cotisations d'une association", lignes: ["Antenne de Saint-Leu", "Antenne de Saint-Benoît"], colonnes: ["À jour", "En retard"], individu: "adhérents", genre: "m", courtL: ["St-Leu", "St-Benoît"], courtC: ["À jour", "Retard"] },
+  { sujet: "Ordinateurs reconditionnés", lignes: ["Atelier Est", "Atelier Ouest"], colonnes: ["Sans défaut", "Avec défaut"], individu: "ordinateurs", genre: "m", courtL: ["Est", "Ouest"], courtC: ["Sans défaut", "Défaut"] },
+  { sujet: "Campagnes de courriels", lignes: ["Campagne promo", "Lettre d'info"], colonnes: ["Ouvert", "Ignoré"], individu: "courriels", genre: "m", courtL: ["Promo", "Lettre"], courtC: ["Ouvert", "Ignoré"] },
+  { sujet: "Récolte de melons", lignes: ["Exploitation de Saint-Paul", "Exploitation de Saint-Louis"], colonnes: ["Premier choix", "Second choix"], individu: "melons", genre: "m", courtL: ["St-Paul", "St-Louis"], courtC: ["Premier", "Second"] },
+  { sujet: "Absences dans une entreprise", lignes: ["Équipe de jour", "Équipe de nuit"], colonnes: ["Jamais absent", "Absent"], individu: "employés", genre: "m", courtL: ["Jour", "Nuit"], courtC: ["Présent", "Absent"] },
+  { sujet: "Billets de concert", lignes: ["Billetterie en ligne", "Guichet"], colonnes: ["Utilisé", "Non utilisé"], individu: "billets", genre: "m", courtL: ["En ligne", "Guichet"], courtC: ["Utilisé", "Inutilisé"] },
+  { sujet: "Contrôle de flacons", lignes: ["Laboratoire Alizé", "Laboratoire Corail"], colonnes: ["Dosage correct", "Dosage incorrect"], individu: "flacons", genre: "m", courtL: ["Alizé", "Corail"], courtC: ["Correct", "Incorrect"] },
+  { sujet: "Réussite en BTS", lignes: ["Bac STMG", "Autre bac"], colonnes: ["Diplômé", "Non diplômé"], individu: "étudiants", genre: "m", courtL: ["STMG", "Autre"], courtC: ["Diplômé", "Non diplômé"] },
+  { sujet: "Contrôle technique", lignes: ["Centre de Saint-Denis", "Centre de Saint-Pierre"], colonnes: ["Accepté", "Contre-visite"], individu: "véhicules", genre: "m", courtL: ["St-Denis", "St-Pierre"], courtC: ["Accepté", "Contre-visite"] },
+  { sujet: "Sacs de sucre", lignes: ["Sucrerie de Bois-Rouge", "Sucrerie du Gol"], colonnes: ["Poids exact", "Poids insuffisant"], individu: "sacs", genre: "m", courtL: ["Bois-Rouge", "Le Gol"], courtC: ["Exact", "Insuffisant"] },
+  { sujet: "Prospection commerciale", lignes: ["Démarchage téléphonique", "Salon professionnel"], colonnes: ["Converti", "Non converti"], individu: "prospects", genre: "m", courtL: ["Téléphone", "Salon"], courtC: ["Converti", "Perdu"] },
+  { sujet: "Locations de vélos", lignes: ["Station de la plage", "Station de la gare"], colonnes: ["Rendu en bon état", "Rendu abîmé"], individu: "vélos", genre: "m", courtL: ["Plage", "Gare"], courtC: ["Bon état", "Abîmé"] },
+  { sujet: "Dossiers de sinistre", lignes: ["Déclaration en ligne", "Déclaration en agence"], colonnes: ["Remboursé", "Refusé"], individu: "sinistres", genre: "m", courtL: ["En ligne", "Agence"], courtC: ["Remboursé", "Refusé"] },
+];
 
 type Tableau = {
   ctx: Contexte;
@@ -280,6 +323,190 @@ function canvasArbre(
 
 /** Probabilités « rondes » : les produits restent lisibles. */
 const PROBAS = [0.1, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.7, 0.75, 0.8, 0.9] as const;
+
+/** Trois façons de dire « au hasard » : la phrase d'ouverture ne se fige plus. */
+function auHasard(): string {
+  return pick(["On choisit au hasard", "On tire au sort", "On prend au hasard"] as const);
+}
+
+/* ───────── tirages dans un stock (avec / sans remise) ───────── */
+
+type Urne = {
+  /** « Une caisse », « Un lot »… */
+  contenant: string;
+  /** Pluriel, jamais mis au singulier (« colis », « vis » restent possibles). */
+  objets: string;
+  /** Verbe au pluriel : « dont 8 comportent une erreur ». */
+  dont: string;
+  /** Étiquette courte de l'issue cherchée, et de son contraire (arbre). */
+  oui: string;
+  non: string;
+};
+
+const URNES: readonly Urne[] = [
+  { contenant: "Une caisse", objets: "factures", dont: "comportent une erreur", oui: "Erreur", non: "Correcte" },
+  { contenant: "Un lot", objets: "pièces", dont: "sont non conformes", oui: "Non conforme", non: "Conforme" },
+  { contenant: "Une boîte", objets: "billets de tombola", dont: "sont gagnants", oui: "Gagnant", non: "Perdant" },
+  { contenant: "Un carton", objets: "ampoules", dont: "sont défectueuses", oui: "Défectueuse", non: "Bonne" },
+  { contenant: "Un classeur", objets: "dossiers clients", dont: "sont incomplets", oui: "Incomplet", non: "Complet" },
+  { contenant: "Une palette", objets: "colis", dont: "sont abîmés", oui: "Abîmé", non: "Intact" },
+  { contenant: "Un panier", objets: "letchis", dont: "sont abîmés", oui: "Abîmé", non: "Sain" },
+  { contenant: "Une cagette", objets: "mangues", dont: "sont trop mûres", oui: "Trop mûre", non: "Bonne" },
+  { contenant: "Un sac", objets: "billes", dont: "sont rouges", oui: "Rouge", non: "Autre" },
+  { contenant: "Un lot", objets: "clés USB", dont: "sont défectueuses", oui: "Défectueuse", non: "Bonne" },
+  { contenant: "Un stock", objets: "smartphones", dont: "sont en panne", oui: "Panne", non: "OK" },
+  { contenant: "Un bac", objets: "bouteilles", dont: "sont mal bouchées", oui: "Fuite", non: "Bouchée" },
+  { contenant: "Une pile", objets: "chèques", dont: "ne sont pas signés", oui: "Non signé", non: "Signé" },
+  { contenant: "Un fichier", objets: "clients", dont: "sont en retard de paiement", oui: "Retard", non: "À jour" },
+  { contenant: "Une liste", objets: "salariés", dont: "sont en télétravail", oui: "Télétravail", non: "Sur site" },
+  { contenant: "Un registre", objets: "adhérents", dont: "sont bénévoles", oui: "Bénévole", non: "Non bénévole" },
+  { contenant: "Un paquet", objets: "tickets à gratter", dont: "sont gagnants", oui: "Gagnant", non: "Perdant" },
+  { contenant: "Un carton", objets: "gobelets", dont: "sont fendus", oui: "Fendu", non: "Intact" },
+  { contenant: "Un stock", objets: "tee-shirts", dont: "sont mal imprimés", oui: "Raté", non: "Réussi" },
+  { contenant: "Une caisse", objets: "ananas", dont: "sont trop mûrs", oui: "Trop mûr", non: "Bon" },
+  { contenant: "Une urne", objets: "jetons", dont: "sont bleus", oui: "Bleu", non: "Autre" },
+  { contenant: "Un lot", objets: "vis", dont: "sont tordues", oui: "Tordue", non: "Droite" },
+  { contenant: "Un paquet", objets: "enveloppes", dont: "sont mal affranchies", oui: "Mal affr.", non: "Bien affr." },
+  { contenant: "Un sachet", objets: "bonbons", dont: "sont à la menthe", oui: "Menthe", non: "Autre" },
+  { contenant: "Un carton", objets: "œufs", dont: "sont fêlés", oui: "Fêlé", non: "Intact" },
+  { contenant: "Une boîte", objets: "stylos", dont: "n'écrivent plus", oui: "Vide", non: "Écrit" },
+  { contenant: "Un lot", objets: "pneus", dont: "sont défectueux", oui: "Défectueux", non: "Conforme" },
+  { contenant: "Une corbeille", objets: "bulletins de vote", dont: "sont nuls", oui: "Nul", non: "Valable" },
+];
+
+/** Un pseudo-contexte pour dessiner l'arbre d'un tirage (mêmes étiquettes aux deux niveaux). */
+function ctxUrne(u: Urne): Contexte {
+  return {
+    sujet: u.objets,
+    lignes: [u.oui, u.non],
+    colonnes: [u.oui, u.non],
+    individu: u.objets,
+    genre: "m",
+    courtL: [u.oui, u.non],
+    courtC: [u.oui, u.non],
+  };
+}
+
+/* ───────── épreuves identiques et indépendantes ───────── */
+
+type Repetition = {
+  /** L'expérience, « {n} » étant remplacé par le nombre d'épreuves. */
+  intro: string;
+  /** « À chaque appel », « Pour chaque client »… */
+  chaque: string;
+  /** L'issue suivie, et son contraire (étiquettes de l'arbre). */
+  evt: string;
+  non: string;
+};
+
+const REPETITIONS: readonly Repetition[] = [
+  { intro: "Un téléconseiller passe {n} appels", chaque: "À chaque appel", evt: "vente conclue", non: "pas de vente" },
+  { intro: "Une enseigne interroge {n} clients choisis au hasard", chaque: "Pour chaque client", evt: "carte de fidélité", non: "pas de carte" },
+  { intro: "Un livreur effectue {n} livraisons", chaque: "À chaque livraison", evt: "client absent", non: "client présent" },
+  { intro: "Une boutique accueille {n} visiteurs", chaque: "Pour chaque visiteur", evt: "achat", non: "pas d'achat" },
+  { intro: "Un site envoie {n} courriels publicitaires", chaque: "Pour chaque courriel", evt: "courriel ouvert", non: "non ouvert" },
+  { intro: "Le car jaune effectue {n} trajets", chaque: "À chaque trajet", evt: "retard", non: "à l'heure" },
+  { intro: "Une machine fabrique {n} pièces", chaque: "Pour chaque pièce", evt: "défaut", non: "sans défaut" },
+  { intro: "Une boutique en ligne reçoit {n} commandes", chaque: "Pour chaque commande", evt: "paiement refusé", non: "paiement accepté" },
+  { intro: "Une joueuse de basket tente {n} lancers francs", chaque: "À chaque lancer", evt: "panier", non: "raté" },
+  { intro: "Un footballeur tire {n} penaltys", chaque: "À chaque tir", evt: "but", non: "raté" },
+  { intro: "Une banque étudie {n} demandes de crédit", chaque: "Pour chaque demande", evt: "crédit accordé", non: "refusé" },
+  { intro: "Un hôtel enregistre {n} réservations", chaque: "Pour chaque réservation", evt: "annulation", non: "maintenue" },
+  { intro: "Une compagnie aérienne programme {n} vols", chaque: "Pour chaque vol", evt: "vol retardé", non: "à l'heure" },
+  { intro: "Un agent immobilier organise {n} visites", chaque: "À chaque visite", evt: "offre d'achat", non: "pas d'offre" },
+  { intro: "Une commerciale démarche {n} entreprises", chaque: "Pour chaque entreprise", evt: "contrat signé", non: "pas de contrat" },
+  { intro: "Un joueur achète {n} tickets à gratter", chaque: "Pour chaque ticket", evt: "ticket gagnant", non: "perdant" },
+  { intro: "Une imprimante tire {n} affiches", chaque: "Pour chaque affiche", evt: "affiche ratée", non: "réussie" },
+  { intro: "Une recruteuse reçoit {n} candidats en entretien", chaque: "Pour chaque candidat", evt: "embauche", non: "pas d'embauche" },
+  { intro: "Un randonneur passe {n} jours à Cilaos", chaque: "Chaque jour", evt: "pluie", non: "pas de pluie" },
+  { intro: "Une caissière encaisse {n} paiements", chaque: "Pour chaque paiement", evt: "sans contact", non: "autre moyen" },
+  { intro: "Un standard reçoit {n} appels", chaque: "Pour chaque appel", evt: "réclamation", non: "autre demande" },
+  { intro: "Une messagerie reçoit {n} courriels", chaque: "Pour chaque courriel", evt: "spam", non: "courriel normal" },
+  { intro: "Un chauffeur de VTC effectue {n} courses", chaque: "À chaque course", evt: "pourboire", non: "pas de pourboire" },
+  { intro: "Un loueur prête {n} vélos", chaque: "Pour chaque vélo", evt: "rendu en retard", non: "rendu à l'heure" },
+  { intro: "À la kermesse, Noé joue {n} fois à la pêche aux canards", chaque: "À chaque partie", evt: "canard gagnant", non: "perdant" },
+  { intro: "Une joueuse lance {n} fléchettes", chaque: "À chaque lancer", evt: "dans la cible", non: "hors cible" },
+  { intro: "Un assureur traite {n} dossiers", chaque: "Pour chaque dossier", evt: "fraude", non: "dossier honnête" },
+  { intro: "Une serveuse sert {n} tables", chaque: "À chaque table", evt: "dessert commandé", non: "pas de dessert" },
+  { intro: "Un producteur de letchis vend {n} cagettes au marché", chaque: "Pour chaque cagette", evt: "cagette refusée", non: "acceptée" },
+  { intro: "Une plateforme publie {n} annonces", chaque: "Pour chaque annonce", evt: "annonce signalée", non: "non signalée" },
+];
+
+function introRep(r: Repetition, n: number): string {
+  return r.intro.replace("{n}", `$${n}$`);
+}
+
+function ctxRep(r: Repetition): Contexte {
+  const L: [string, string] = [r.evt, r.non];
+  return { sujet: r.evt, lignes: L, colonnes: L, individu: "épreuves", genre: "f", courtL: L, courtC: L };
+}
+
+/* ───────── deux évènements qu'on ADMET indépendants ───────── */
+
+type PaireIndep = { intro: string; A: string; B: string };
+
+const PAIRES_INDEP: readonly PaireIndep[] = [
+  { intro: "Une entreprise possède deux machines qui fonctionnent séparément", A: "la machine 1 tombe en panne dans le mois", B: "la machine 2 tombe en panne dans le mois" },
+  { intro: "Une agence de voyages étudie un aller-retour en avion", A: "le vol aller est retardé", B: "le vol retour est retardé" },
+  { intro: "Un commercial démarche deux entreprises sans lien entre elles", A: "la première signe un contrat", B: "la seconde signe un contrat" },
+  { intro: "Un magasin travaille avec deux fournisseurs", A: "le fournisseur A livre en retard", B: "le fournisseur B livre en retard" },
+  { intro: "Un entrepôt est équipé de deux alarmes indépendantes", A: "l'alarme 1 se déclenche en cas d'intrusion", B: "l'alarme 2 se déclenche en cas d'intrusion" },
+  { intro: "À la kermesse du lycée, Inès joue à deux stands", A: "elle gagne au chamboule-tout", B: "elle gagne à la pêche aux canards" },
+  { intro: "Une basketteuse tire deux lancers francs", A: "elle réussit le premier", B: "elle réussit le second" },
+  { intro: "Un joueur achète un ticket à gratter le lundi et un autre le vendredi", A: "le ticket du lundi est gagnant", B: "le ticket du vendredi est gagnant" },
+  { intro: "Un site marchand utilise un serveur principal et un serveur de secours", A: "le serveur principal tombe en panne", B: "le serveur de secours tombe en panne" },
+  { intro: "Une pièce passe successivement par deux postes de travail", A: "elle a un défaut de peinture", B: "elle a un défaut de soudure" },
+  { intro: "Un automobiliste traverse deux carrefours éloignés", A: "le premier feu est vert", B: "le second feu est vert" },
+  { intro: "Une banque accorde un prêt à deux clients sans lien entre eux", A: "le premier client rembourse en retard", B: "le second client rembourse en retard" },
+  { intro: "Un randonneur prévoit de monter au Piton des Neiges", A: "il fait beau samedi à Cilaos", B: "le car de Cilaos part à l'heure samedi" },
+  { intro: "Un hôtel reçoit une réservation par son site et une par une agence", A: "la réservation du site est annulée", B: "la réservation de l'agence est annulée" },
+  { intro: "Un livreur assure deux tournées, le lundi et le mardi", A: "la tournée du lundi finit en retard", B: "la tournée du mardi finit en retard" },
+  { intro: "Une imprimerie utilise deux imprimantes indépendantes", A: "l'imprimante 1 tombe en panne", B: "l'imprimante 2 tombe en panne" },
+  { intro: "Une équipe de football joue un match", A: "elle gagne le match", B: "le tirage au sort du coup d'envoi lui est favorable" },
+  { intro: "Une enseigne choisit au hasard un client dans chacun de ses deux magasins", A: "le client du premier magasin a la carte de fidélité", B: "le client du second magasin a la carte de fidélité" },
+  { intro: "Un recruteur reçoit deux candidates qui ne se connaissent pas", A: "Léa est embauchée", B: "Maëlle est embauchée" },
+  { intro: "Un producteur de letchis vend sur deux marchés, Saint-Paul et Saint-Pierre", A: "il vend tout à Saint-Paul", B: "il vend tout à Saint-Pierre" },
+  { intro: "Une entreprise envoie deux colis par deux transporteurs différents", A: "le premier colis arrive en retard", B: "le second colis arrive en retard" },
+  { intro: "Un étudiant passe deux entretiens dans deux entreprises différentes", A: "le premier entretien est réussi", B: "le second entretien est réussi" },
+  { intro: "Un festival organise deux concerts en plein air, à un mois d'écart", A: "le premier concert affiche complet", B: "le second concert affiche complet" },
+  { intro: "Un caissier encaisse deux clients qui ne se connaissent pas", A: "le premier paie sans contact", B: "le second paie sans contact" },
+  { intro: "Une association lance deux tombolas, en juin et en décembre", A: "Tom gagne à celle de juin", B: "Tom gagne à celle de décembre" },
+];
+
+/* ───────── tests et contrôles : faux positifs, faux négatifs ───────── */
+
+type TestDiag = {
+  sujet: string;
+  objets: string;
+  /** Lignes du tableau : état réel. */
+  mal: string;
+  bien: string;
+  /** Colonnes : décision du test. */
+  sig: string;
+  nonSig: string;
+  /** Phrases au pluriel pour les questions. */
+  fp: string;
+  fn: string;
+  vp: string;
+  signales: string;
+};
+
+const TESTS: readonly TestDiag[] = [
+  { sujet: "Contrôle automatique des lots", objets: "lots", mal: "Réellement défectueux", bien: "Réellement sain", sig: "Signalé", nonSig: "Non signalé", fp: "signalés alors qu'ils sont sains", fn: "non signalés alors qu'ils sont défectueux", vp: "défectueux et bien signalés", signales: "signalés" },
+  { sujet: "Filtre anti-spam", objets: "courriels", mal: "Vrai spam", bien: "Courriel normal", sig: "Classé spam", nonSig: "Boîte de réception", fp: "classés en spam alors qu'ils sont normaux", fn: "laissés en boîte de réception alors que ce sont des spams", vp: "spams bien classés en spam", signales: "classés en spam" },
+  { sujet: "Détection de fraude bancaire", objets: "paiements", mal: "Frauduleux", bien: "Honnête", sig: "Bloqué", nonSig: "Accepté", fp: "bloqués alors qu'ils sont honnêtes", fn: "acceptés alors qu'ils sont frauduleux", vp: "frauduleux et bien bloqués", signales: "bloqués" },
+  { sujet: "Détecteur de faux billets", objets: "billets", mal: "Faux billet", bien: "Vrai billet", sig: "Refusé", nonSig: "Accepté", fp: "refusés alors qu'ils sont vrais", fn: "acceptés alors qu'ils sont faux", vp: "faux et bien refusés", signales: "refusés" },
+  { sujet: "Tri optique de letchis", objets: "letchis", mal: "Abîmé", bien: "Sain", sig: "Écarté", nonSig: "Gardé", fp: "écartés alors qu'ils sont sains", fn: "gardés alors qu'ils sont abîmés", vp: "abîmés et bien écartés", signales: "écartés" },
+  { sujet: "Scanner à bagages", objets: "bagages", mal: "Objet interdit", bien: "Sans objet interdit", sig: "Fouillé", nonSig: "Non fouillé", fp: "fouillés alors qu'ils ne contiennent rien d'interdit", fn: "non fouillés alors qu'ils contiennent un objet interdit", vp: "à objet interdit et bien fouillés", signales: "fouillés" },
+  { sujet: "Logiciel de vérification des factures", objets: "factures", mal: "Erronée", bien: "Correcte", sig: "Alerte", nonSig: "Pas d'alerte", fp: "en alerte alors qu'elles sont correctes", fn: "sans alerte alors qu'elles sont erronées", vp: "erronées et bien en alerte", signales: "en alerte" },
+  { sujet: "Contrôle des déclarations de sinistre", objets: "dossiers", mal: "Frauduleux", bien: "Honnête", sig: "Suspect", nonSig: "Non suspect", fp: "jugés suspects alors qu'ils sont honnêtes", fn: "jugés non suspects alors qu'ils sont frauduleux", vp: "frauduleux et bien jugés suspects", signales: "jugés suspects" },
+  { sujet: "Balance de contrôle des colis", objets: "colis", mal: "Poids faux", bien: "Poids juste", sig: "Rejeté", nonSig: "Validé", fp: "rejetés alors que leur poids est juste", fn: "validés alors que leur poids est faux", vp: "de poids faux et bien rejetés", signales: "rejetés" },
+  { sujet: "Portique antivol d'un magasin", objets: "passages", mal: "Article non payé", bien: "Rien à signaler", sig: "Alarme", nonSig: "Pas d'alarme", fp: "avec alarme alors que tout est payé", fn: "sans alarme alors qu'un article n'est pas payé", vp: "avec article non payé et alarme", signales: "avec alarme" },
+  { sujet: "Test de dépistage", objets: "personnes", mal: "Malade", bien: "Non malade", sig: "Test positif", nonSig: "Test négatif", fp: "positives alors qu'elles ne sont pas malades", fn: "négatives alors qu'elles sont malades", vp: "malades et testées positives", signales: "testées positives" },
+  { sujet: "Contrôle de bouteilles par caméra", objets: "bouteilles", mal: "Mal remplie", bien: "Bien remplie", sig: "Éjectée", nonSig: "Gardée", fp: "éjectées alors qu'elles sont bien remplies", fn: "gardées alors qu'elles sont mal remplies", vp: "mal remplies et bien éjectées", signales: "éjectées" },
+  { sujet: "Contrôle des tickets dans le car jaune", objets: "voyageurs", mal: "Sans titre valable", bien: "En règle", sig: "Verbalisé", nonSig: "Non verbalisé", fp: "verbalisés alors qu'ils sont en règle", fn: "non verbalisés alors qu'ils sont sans titre valable", vp: "sans titre et bien verbalisés", signales: "verbalisés" },
+  { sujet: "Détecteur de pannes de smartphones", objets: "smartphones", mal: "En panne", bien: "En état", sig: "Renvoyé à l'atelier", nonSig: "Vendu", fp: "renvoyés à l'atelier alors qu'ils marchent", fn: "vendus alors qu'ils sont en panne", vp: "en panne et bien renvoyés", signales: "renvoyés à l'atelier" },
+];
 
 export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
   /* ═══════════════════ probaC_reconnaitre ═══════════════════ */
@@ -449,14 +676,16 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const evtA = `${leLa(c)}${singulier(c)} vient de « ${c.lignes[0]} »`;
       const evtB = `${leLa(c)}${singulier(c)} est « ${c.colonnes[1]} »`;
       const notation = sens === "AB" ? "$P_A(B)$" : "$P_B(A)$";
+      // « ceux » était figé : faux pour les pièces, factures, livraisons…
+      const ceux = c.genre === "f" ? "celles" : "ceux";
       const bonne =
         sens === "AB"
-          ? `la probabilité qu'${ilElle(c)} soit « ${c.colonnes[1]} », PARMI ceux qui viennent de « ${c.lignes[0]} »`
-          : `la probabilité qu'${ilElle(c)} vienne de « ${c.lignes[0]} », PARMI ceux qui sont « ${c.colonnes[1]} »`;
+          ? `la probabilité qu'${ilElle(c)} soit « ${c.colonnes[1]} », PARMI ${ceux} qui viennent de « ${c.lignes[0]} »`
+          : `la probabilité qu'${ilElle(c)} vienne de « ${c.lignes[0]} », PARMI ${ceux} qui sont « ${c.colonnes[1]} »`;
       const inverse =
         sens === "AB"
-          ? `la probabilité qu'${ilElle(c)} vienne de « ${c.lignes[0]} », PARMI ceux qui sont « ${c.colonnes[1]} »`
-          : `la probabilité qu'${ilElle(c)} soit « ${c.colonnes[1]} », PARMI ceux qui viennent de « ${c.lignes[0]} »`;
+          ? `la probabilité qu'${ilElle(c)} vienne de « ${c.lignes[0]} », PARMI ${ceux} qui sont « ${c.colonnes[1]} »`
+          : `la probabilité qu'${ilElle(c)} soit « ${c.colonnes[1]} », PARMI ${ceux} qui viennent de « ${c.lignes[0]} »`;
       return {
         text:
           `On note $A$ l'évènement « ${evtA} » et $B$ l'évènement « ${evtB} ». ` +
@@ -890,38 +1119,64 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const fauxNegatif = defectueux - vraiPositif;
       const fauxPositif = Math.round((sains * fausseAlerte) / 100);
       const vraiNegatif = sains - fauxPositif;
-      const quoi = pick(["fauxPositif", "fauxNegatif", "signales"] as const);
-      const valeur = quoi === "fauxPositif" ? fauxPositif : quoi === "fauxNegatif" ? fauxNegatif : vraiPositif + fauxPositif;
+      // ⭐ 15/10/2026 — quatorze dispositifs de contrôle (anti-spam, fraude
+      // bancaire, faux billets, tri de letchis…) et cinq questions : la micro
+      // ne servait que trois phrases, toutes sur des « lots ».
+      const T = pick(TESTS);
+      const quoi = pick(["fauxPositif", "fauxNegatif", "signales", "vraiPositif", "partSignales"] as const);
+      const signalesTot = vraiPositif + fauxPositif;
+      const part = Math.round((vraiPositif / signalesTot) * 100);
+      const valeur =
+        quoi === "fauxPositif" ? fauxPositif
+        : quoi === "fauxNegatif" ? fauxNegatif
+        : quoi === "vraiPositif" ? vraiPositif
+        : quoi === "signales" ? signalesTot
+        : part;
       const question =
         quoi === "fauxPositif"
-          ? "Combien de lots sont des FAUX POSITIFS (signalés alors qu'ils sont sains) ?"
+          ? `Combien de ${T.objets} sont des FAUX POSITIFS, c'est-à-dire ${T.fp} ?`
           : quoi === "fauxNegatif"
-            ? "Combien de lots sont des FAUX NÉGATIFS (non signalés alors qu'ils sont défectueux) ?"
-            : "Combien de lots le contrôle signale-t-il au total ?";
+            ? `Combien de ${T.objets} sont des FAUX NÉGATIFS, c'est-à-dire ${T.fn} ?`
+            : quoi === "vraiPositif"
+              ? `Combien de ${T.objets} sont des VRAIS POSITIFS, c'est-à-dire ${T.vp} ?`
+              : quoi === "signales"
+                ? `Combien de ${T.objets} sont ${T.signales} au total ?`
+                : `PARMI les ${T.objets} ${T.signales}, quel pourcentage est réellement « ${T.mal} » ? (arrondi à l'unité, en %)`;
+      const ouverture = pick([
+        `${T.sujet} : le tableau croise l'état réel et la décision, sur $${total}$ ${T.objets}.`,
+        `On a testé $${total}$ ${T.objets} (${T.sujet.toLowerCase()}). Le tableau donne les résultats.`,
+      ]);
       return {
-        text: `Le tableau résume un contrôle sur $${total}$ lots. ${question}`,
+        text: `${ouverture} ${question}`,
         format: "short",
         expected: [String(valeur)],
         comparator: "number_equal",
         canvas: {
           kind: "tableau_donnees",
-          title: `Contrôle automatique sur ${total} lots`,
-          headers: ["", "Signalé", "Non signalé", "Total"],
+          title: `${T.sujet} — ${total} ${T.objets}`,
+          headers: ["", T.sig, T.nonSig, "Total"],
           rows: [
-            { label: "Réellement défectueux", values: [String(vraiPositif), String(fauxNegatif), String(defectueux)] },
-            { label: "Réellement sain", values: [String(fauxPositif), String(vraiNegatif), String(sains)] },
-            { label: "Total", values: [String(vraiPositif + fauxPositif), String(fauxNegatif + vraiNegatif), String(total)] },
+            { label: T.mal, values: [String(vraiPositif), String(fauxNegatif), String(defectueux)] },
+            { label: T.bien, values: [String(fauxPositif), String(vraiNegatif), String(sains)] },
+            { label: "Total", values: [String(signalesTot), String(fauxNegatif + vraiNegatif), String(total)] },
           ],
         } satisfies CanvasFigure,
         explanation: exp(
-          "Un FAUX POSITIF est signalé à tort ; un FAUX NÉGATIF passe le contrôle alors qu'il est défectueux. Ces deux erreurs n'ont ni le même effectif ni les mêmes conséquences.",
-          "On lit la case correspondante dans le tableau croisé « état réel » × « décision du contrôle ».",
+          "Un FAUX POSITIF est signalé à tort ; un FAUX NÉGATIF passe le contrôle alors qu'il aurait dû être signalé. Ces deux erreurs n'ont ni le même effectif ni les mêmes conséquences.",
+          quoi === "partSignales"
+            ? "On se place DANS la colonne des signalés : c'est la population de référence, donc le dénominateur."
+            : "On lit la case correspondante dans le tableau croisé « état réel » × « décision du test ».",
           quoi === "fauxPositif"
-            ? `Sains et signalés : $${fauxPositif}$.`
+            ? `Ligne « ${T.bien} », colonne « ${T.sig} » : $${fauxPositif}$.`
             : quoi === "fauxNegatif"
-              ? `Défectueux et non signalés : $${fauxNegatif}$.`
-              : `Signalés au total : $${vraiPositif} + ${fauxPositif} = ${valeur}$.`,
-          `La réponse est $${valeur}$ lots.`
+              ? `Ligne « ${T.mal} », colonne « ${T.nonSig} » : $${fauxNegatif}$.`
+              : quoi === "vraiPositif"
+                ? `Ligne « ${T.mal} », colonne « ${T.sig} » : $${vraiPositif}$.`
+                : quoi === "signales"
+                  ? `Colonne « ${T.sig} » : $${vraiPositif} + ${fauxPositif} = ${signalesTot}$.`
+                  : `$\\dfrac{${vraiPositif}}{${signalesTot}} \\approx ${fr(Math.round((vraiPositif / signalesTot) * 1000) / 1000)}$, soit environ $${part}\\,\\%$. ` +
+                    `⚠️ Ce n'est pas la sensibilité du test ($${sensibilite}\\,\\%$), qui se lit dans l'autre sens : parmi les « ${T.mal} ».`,
+          quoi === "partSignales" ? `Environ $${part}\\,\\%$.` : `La réponse est $${valeur}$ ${T.objets}.`
         ),
       };
     },
@@ -941,12 +1196,25 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     hint: "Quand les deux épreuves sont indépendantes, les probabilités du second niveau sont les MÊMES sur les deux branches.",
     tags: ["stmg", "maths", "probabilites", "canvas", "template"],
     generate: () => {
-      const ctx = pick(CONTEXTES);
+      // ⭐ 15/10/2026 — tirages AVEC remise dans 28 stocks différents, ou
+      // épreuves répétées (appels, livraisons, penaltys…) : deux habillages.
       const p = pick(PROBAS);
+      let ctx: Contexte;
+      let situation: string;
+      if (Math.random() < 0.5) {
+        const u = pick(URNES);
+        ctx = ctxUrne(u);
+        situation =
+          `${u.contenant} contient des ${u.objets}. On en prélève DEUX au hasard, AVEC remise ; ` +
+          `à chaque prélèvement, la probabilité d'obtenir « ${u.oui} » vaut $${fr(p)}$.`;
+      } else {
+        const r = pick(REPETITIONS);
+        ctx = ctxRep(r);
+        situation =
+          `${introRep(r, 2)}. Les résultats sont indépendants d'une fois à l'autre. ${r.chaque}, la probabilité de l'issue « ${r.evt} » vaut $${fr(p)}$.`;
+      }
       return {
-        text:
-          `On prélève DEUX ${ctx.individu} au hasard, avec remise, dans un stock où la probabilité d'être « ${ctx.courtC[1]} » vaut $${fr(p)}$. ` +
-          `Que peut-on dire de l'arbre représentant cette expérience ?`,
+        text: `${situation} Que peut-on dire de l'arbre représentant cette expérience ?`,
         format: "qcm",
         choices: shuffle([
           "les probabilités du second niveau sont identiques sur les deux branches",
@@ -956,11 +1224,11 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
         ]),
         expected: ["les probabilités du second niveau sont identiques sur les deux branches"],
         comparator: "mcq_exact",
-        canvas: canvasArbre(ctx, p, p, p, `Deux prélèvements avec remise (p = ${fr(p)})`),
+        canvas: canvasArbre(ctx, p, p, p, `Deux épreuves indépendantes (p = ${fr(p)})`),
         explanation: exp(
           "Deux épreuves sont indépendantes lorsque le résultat de la première ne modifie pas les probabilités de la seconde.",
           "Sur l'arbre, cela se voit immédiatement : les branches du second niveau portent les mêmes nombres, quelle que soit la branche empruntée au premier.",
-          `Le prélèvement se fait AVEC REMISE : le stock est identique au second tirage, donc la probabilité reste $${fr(p)}$ dans les deux cas.`,
+          `Le résultat de la première épreuve ne change rien à la seconde : la probabilité de « ${ctx.courtC[0]} » reste $${fr(p)}$ sur les deux branches du second niveau.`,
           "Les probabilités du second niveau sont identiques sur les deux branches."
         ),
       };
@@ -984,15 +1252,15 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     hint: "Sans remise, le stock a changé quand on prélève le second : il compte un article de moins, et peut-être un défaut de moins.",
     tags: ["stmg", "maths", "probabilites", "piege", "template"],
     generate: () => {
-      const ctx = pick(CONTEXTES);
+      const u = pick(URNES);
       const total = pick([50, 80, 100, 200] as const);
       const defauts = pick([5, 8, 10, 20] as const);
       const bonne =
         "les probabilités du second niveau changent selon la première branche : ce sont des conditionnelles";
       return {
         text:
-          `Un stock contient $${total}$ ${ctx.individu}, dont $${defauts}$ « ${ctx.courtC[1]} ». ` +
-          `On en prélève deux SANS remise. Que peut-on dire de l'arbre représentant cette expérience ?`,
+          `${u.contenant} contient $${total}$ ${u.objets}, dont $${defauts}$ ${u.dont}. ` +
+          `On en prélève deux, l'un après l'autre, SANS remise. Que peut-on dire de l'arbre représentant cette expérience ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
           "les probabilités du second niveau sont les mêmes sur les deux branches",
@@ -1004,7 +1272,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
         explanation: exp(
           "Sans remise, le premier prélèvement modifie le stock : la composition du second tirage dépend de ce qu'on a obtenu au premier. Les probabilités du second niveau sont donc CONDITIONNELLES à la branche empruntée.",
           "On compte ce qui reste après chaque premier tirage, branche par branche.",
-          `Si le premier est « ${ctx.courtC[1]} », il reste $${defauts - 1}$ défauts sur $${total - 1}$ : ` +
+          `Si le premier est « ${u.oui} », il en reste $${defauts - 1}$ de cette sorte sur $${total - 1}$ : ` +
             `$\\dfrac{${defauts - 1}}{${total - 1}} \\approx ${fr(Math.round(((defauts - 1) / (total - 1)) * 1000) / 1000)}$. ` +
             `Sinon, il en reste $${defauts}$ sur $${total - 1}$ : ` +
             `$\\dfrac{${defauts}}{${total - 1}} \\approx ${fr(Math.round((defauts / (total - 1)) * 1000) / 1000)}$. ` +
@@ -1035,25 +1303,26 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     hint: "La probabilité d'un chemin est le PRODUIT des probabilités rencontrées le long du chemin.",
     tags: ["stmg", "maths", "probabilites", "canvas", "template", "short"],
     generate: () => {
-      const ctx = pick(CONTEXTES);
+      const r = pick(REPETITIONS);
+      const ctx = ctxRep(r);
       const p = pick(PROBAS);
+      const q = Math.round((1 - p) * 100) / 100;
       const cible = pick(["deux", "aucun"] as const);
-      const valeur = cible === "deux" ? p * p : (1 - p) * (1 - p);
+      const valeur = cible === "deux" ? p * p : q * q;
       return {
         text:
-          `On prélève deux ${ctx.individu} au hasard avec remise. ` +
-          `La probabilité qu'${unUne(ctx)} ${singulier(ctx)} soit « ${ctx.courtC[1]} » vaut $${fr(p)}$. ` +
-          `Quelle est la probabilité que ${cible === "deux" ? "LES DEUX le soient" : "AUCUN ne le soit"} ?`,
+          `${introRep(r, 2)}. Les résultats sont indépendants d'une fois à l'autre. ${r.chaque}, la probabilité de l'issue « ${r.evt} » vaut $${fr(p)}$. ` +
+          `Quelle est la probabilité d'obtenir « ${r.evt} » ${cible === "deux" ? "les DEUX fois" : "AUCUNE des deux fois"} ?`,
         format: "short",
         expected: [fr(Math.round(valeur * 10000) / 10000)],
         comparator: "number_equal",
-        canvas: canvasArbre(ctx, p, p, p, `Deux prélèvements avec remise (p = ${fr(p)})`),
+        canvas: canvasArbre(ctx, p, p, p, `Deux épreuves indépendantes (p = ${fr(p)})`),
         explanation: exp(
           "Pour une expérience à deux épreuves indépendantes, la probabilité d'un chemin est le produit des probabilités portées par ses branches.",
           "On suit le chemin correspondant à l'évènement et l'on multiplie.",
           cible === "deux"
-            ? `$${fr(p)} \\times ${fr(p)} = ${fr(Math.round(valeur * 10000) / 10000)}$.`
-            : `La probabilité de ne pas l'être vaut $1 - ${fr(p)} = ${fr(1 - p)}$, donc $${fr(1 - p)} \\times ${fr(1 - p)} = ${fr(Math.round(valeur * 10000) / 10000)}$.`,
+            ? `Chemin « ${r.evt} » puis « ${r.evt} » : $${fr(p)} \\times ${fr(p)} = ${fr(Math.round(valeur * 10000) / 10000)}$.`
+            : `« Aucune fois », c'est « ${r.non} » deux fois, de probabilité $1 - ${fr(p)} = ${fr(q)}$ à chaque épreuve : $${fr(q)} \\times ${fr(q)} = ${fr(Math.round(valeur * 10000) / 10000)}$.`,
           `La probabilité vaut $${fr(Math.round(valeur * 10000) / 10000)}$.`
         ),
       };
@@ -1077,23 +1346,38 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     hint: "Deux chemins mènent à « exactement un » : oui-puis-non, et non-puis-oui. On les additionne.",
     tags: ["stmg", "maths", "probabilites", "template", "short"],
     generate: () => {
-      const ctx = pick(CONTEXTES);
+      // Tirages avec remise OU épreuves répétées : deux habillages, 58 décors.
       const p = pick([0.1, 0.2, 0.25, 0.3, 0.4, 0.5] as const);
       const valeur = 2 * p * (1 - p);
+      let oui: string;
+      let non: string;
+      let situation: string;
+      if (Math.random() < 0.5) {
+        const u = pick(URNES);
+        oui = u.oui;
+        non = u.non;
+        situation =
+          `${u.contenant} contient des ${u.objets}. On en prélève deux au hasard, AVEC remise ; ` +
+          `à chaque prélèvement, la probabilité d'obtenir « ${oui} » vaut $${fr(p)}$.`;
+      } else {
+        const r = pick(REPETITIONS);
+        oui = r.evt;
+        non = r.non;
+        situation = `${introRep(r, 2)}. Les résultats sont indépendants d'une fois à l'autre. ${r.chaque}, la probabilité de l'issue « ${oui} » vaut $${fr(p)}$.`;
+      }
+      const un = Math.round(p * (1 - p) * 10000) / 10000;
       return {
         text:
-          `On prélève deux ${ctx.individu} au hasard, AVEC remise. ` +
-          `À chaque prélèvement, la probabilité d'obtenir « ${ctx.courtC[1]} » vaut $${fr(p)}$. ` +
-          `Quelle est la probabilité d'en obtenir EXACTEMENT ${unUne(ctx)} ? (arrondi au millième)`,
+          `${situation} Quelle est la probabilité d'obtenir « ${oui} » EXACTEMENT une fois sur les deux ? (arrondi au millième)`,
         format: "short",
         expected: [fr(Math.round(valeur * 1000) / 1000)],
         comparator: "number_equal",
         explanation: exp(
           "Un évènement qui se réalise de plusieurs façons correspond à plusieurs chemins de l'arbre. On multiplie le long d'un chemin, et l'on additionne les chemins.",
           "On énumère les chemins qui conviennent, on calcule chacun, puis on fait la somme.",
-          `Chemin 1 — « ${ctx.courtC[1]} » puis pas : $${fr(p)} \\times ${fr(Math.round((1 - p) * 100) / 100)} = ${fr(Math.round(p * (1 - p) * 1000) / 1000)}$. ` +
-            `Chemin 2 — pas puis « ${ctx.courtC[1]} » : le même produit, dans l'autre ordre. ` +
-            `Total : $2 \\times ${fr(Math.round(p * (1 - p) * 1000) / 1000)} = ${fr(Math.round(valeur * 1000) / 1000)}$. ` +
+          `Chemin 1 — « ${oui} » puis « ${non} » : $${fr(p)} \\times ${fr(Math.round((1 - p) * 100) / 100)} = ${fr(un)}$. ` +
+            `Chemin 2 — « ${non} » puis « ${oui} » : le même produit, dans l'autre ordre. ` +
+            `Total : $2 \\times ${fr(un)} = ${fr(Math.round(valeur * 1000) / 1000)}$. ` +
             `Vérification : $${fr(Math.round(p * p * 1000) / 1000)}$ (les deux) $+ ${fr(Math.round(valeur * 1000) / 1000)}$ (exactement un) ` +
             `$+ ${fr(Math.round((1 - p) * (1 - p) * 1000) / 1000)}$ (aucun) $= 1$.`,
           `La probabilité vaut environ $${fr(Math.round(valeur * 1000) / 1000)}$.`
@@ -1116,16 +1400,20 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     hint: "« Au moins un » se calcule par l'évènement contraire : « aucun ».",
     tags: ["stmg", "maths", "probabilites", "canvas", "template", "short"],
     generate: () => {
-      const ctx = pick(CONTEXTES);
+      const r = pick(REPETITIONS);
+      const ctx = ctxRep(r);
       const p = pick([0.1, 0.2, 0.25, 0.3, 0.4, 0.5] as const);
       const n = randomInt(2, 4);
       const aucun = Math.pow(1 - p, n);
       const auMoinsUn = 1 - aucun;
+      const question = pick([
+        `Quelle est la probabilité d'obtenir « ${r.evt} » AU MOINS une fois ?`,
+        `Quelle est la probabilité que l'issue « ${r.evt} » se produise au moins une fois sur les $${n}$ ?`,
+      ]);
       return {
         text:
-          `On prélève $${n}$ ${ctx.individu} au hasard avec remise. ` +
-          `À chaque prélèvement, la probabilité d'obtenir « ${ctx.courtC[1]} » vaut $${fr(p)}$. ` +
-          `Quelle est la probabilité d'en obtenir AU MOINS UN ? (arrondi au millième)`,
+          `${introRep(r, n)}. Les résultats sont indépendants d'une fois à l'autre. ${r.chaque}, la probabilité de l'issue « ${r.evt} » vaut $${fr(p)}$. ` +
+          `${question} (arrondi au millième)`,
         format: "short",
         expected: [fr(Math.round(auMoinsUn * 1000) / 1000)],
         comparator: "number_equal",
@@ -1158,21 +1446,20 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     hint: "Compte le nombre de cas favorables à « au moins un » : il y en a beaucoup. Et son contraire ?",
     tags: ["stmg", "maths", "probabilites", "template"],
     generate: () => {
-      const ctx = pick(CONTEXTES);
+      const r = pick(REPETITIONS);
       const n = pick([3, 4, 5, 6] as const);
       const p = pick([0.1, 0.2, 0.25, 0.3] as const);
       const bonne =
         `parce que le contraire de « au moins un » est « AUCUN », un seul cas — au lieu des $${n}$ cas à additionner`;
       return {
         text:
-          `On prélève $${n}$ ${ctx.individu} au hasard avec remise, la probabilité d'obtenir ` +
-          `« ${ctx.courtC[1] } » valant $${fr(p)}$ à chaque fois. ` +
-          `Pour calculer la probabilité d'en obtenir AU MOINS UN, on écrit $1 - (1 - ${fr(p)})^{${n}}$. Pourquoi ?`,
+          `${introRep(r, n)}, les résultats étant indépendants d'une fois à l'autre ; la probabilité de l'issue « ${r.evt} » vaut $${fr(p)}$ à chaque fois. ` +
+          `Pour calculer la probabilité d'obtenir « ${r.evt} » AU MOINS UNE FOIS, on écrit $1 - (1 - ${fr(p)})^{${n}}$. Pourquoi ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
           "parce que « au moins un » signifie « exactement un »",
           `parce que $(1 - ${fr(p)})^{${n}}$ est la probabilité d'en obtenir au moins un`,
-          "parce qu'une probabilité ne peut pas se calculer directement quand il y a une remise",
+          "parce qu'une probabilité ne peut pas se calculer directement quand les épreuves se répètent",
         ]),
         expected: [bonne],
         comparator: "mcq_exact",
@@ -1213,15 +1500,19 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     hint: "Sans remise, le stock diminue : la seconde probabilité n'est plus la même.",
     tags: ["stmg", "maths", "probabilites", "canvas", "piege", "template"],
     generate: () => {
-      const ctx = pick(CONTEXTES);
+      const u = pick(URNES);
+      const ctx = ctxUrne(u);
       const avecRemise = Math.random() < 0.5;
       const total = pick([20, 25, 40, 50] as const);
       const defauts = pick([4, 5, 8, 10] as const);
       const p = defauts / total;
+      const mode = avecRemise
+        ? pick(["AVEC remise", "en remettant le premier avant de tirer le second"] as const)
+        : pick(["SANS remise", "l'un après l'autre, sans remettre le premier"] as const);
       return {
         text:
-          `Un stock contient $${total}$ ${ctx.individu}, dont $${defauts}$ « ${ctx.courtC[1]} ». ` +
-          `On en prélève deux ${avecRemise ? "AVEC remise" : "SANS remise"}. ` +
+          `${u.contenant} contient $${total}$ ${u.objets}, dont $${defauts}$ ${u.dont}. ` +
+          `On en prélève deux au hasard, ${mode}. ` +
           `Les deux prélèvements sont-ils indépendants ?`,
         format: "qcm",
         choices: shuffle([
@@ -1239,16 +1530,16 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
         canvas: canvasArbre(
           ctx,
           p,
-          avecRemise ? p : (defauts - 1) / (total - 1),
-          avecRemise ? p : defauts / (total - 1),
+          avecRemise ? p : Math.round(((defauts - 1) / (total - 1)) * 10000) / 10000,
+          avecRemise ? p : Math.round((defauts / (total - 1)) * 10000) / 10000,
           avecRemise ? "Avec remise : mêmes probabilités au 2ᵉ niveau" : "Sans remise : les probabilités changent"
         ),
         explanation: exp(
           "Deux tirages sont indépendants si le premier ne modifie pas les probabilités du second. Le tirage AVEC remise garantit cette indépendance ; le tirage SANS remise la détruit.",
           "On regarde le second niveau de l'arbre : si les nombres diffèrent d'une branche à l'autre, il y a dépendance.",
           avecRemise
-            ? `Avec remise, le stock redevient $${total}$ ${ctx.individu} dont $${defauts}$ défectueux : la probabilité reste $${fr(p)}$ partout.`
-            : `Sans remise, après un premier « ${ctx.courtC[1]} » il reste $${defauts - 1}$ défectueux sur $${total - 1}$, soit $${fr(Math.round(((defauts - 1) / (total - 1)) * 10000) / 10000)}$ — au lieu de $${fr(Math.round((defauts / (total - 1)) * 10000) / 10000)}$ dans l'autre cas.`,
+            ? `Avec remise, on retrouve $${total}$ ${u.objets} dont $${defauts}$ « ${u.oui} » : la probabilité reste $\\dfrac{${defauts}}{${total}} = ${fr(p)}$ partout.`
+            : `Sans remise, après un premier « ${u.oui} » il en reste $${defauts - 1}$ sur $${total - 1}$, soit environ $${fr(Math.round(((defauts - 1) / (total - 1)) * 10000) / 10000)}$ — au lieu de $\\dfrac{${defauts}}{${total - 1}} \\approx ${fr(Math.round((defauts / (total - 1)) * 10000) / 10000)}$ après un premier « ${u.non} ».`,
           avecRemise ? "Les prélèvements sont indépendants." : "Les prélèvements ne sont pas indépendants."
         ),
       };
@@ -1272,16 +1563,16 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     hint: "Sans remise, le second tirage se fait dans un stock qui a perdu un article — et un défaut.",
     tags: ["stmg", "maths", "probabilites", "template", "short"],
     generate: () => {
-      const ctx = pick(CONTEXTES);
+      const u = pick(URNES);
       const total = pick([20, 25, 40, 50] as const);
       const defauts = pick([4, 5, 8, 10] as const);
       const sansRemise = (defauts / total) * ((defauts - 1) / (total - 1));
       const avecRemise = (defauts / total) * (defauts / total);
       return {
         text:
-          `Un stock contient $${total}$ ${ctx.individu}, dont $${defauts}$ « ${ctx.courtC[1]} ». ` +
-          `On en prélève deux SANS remise. ` +
-          `Quelle est la probabilité que les DEUX soient « ${ctx.courtC[1]} » ? (arrondi au millième)`,
+          `${u.contenant} contient $${total}$ ${u.objets}, dont $${defauts}$ ${u.dont}. ` +
+          `On en prélève deux au hasard, ${pick(["SANS remise", "l'un après l'autre, sans remettre le premier"] as const)}. ` +
+          `Quelle est la probabilité que les DEUX soient « ${u.oui} » ? (arrondi au millième)`,
         format: "short",
         expected: [fr(Math.round(sansRemise * 1000) / 1000)],
         comparator: "number_equal",
@@ -1318,7 +1609,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const pC2 = pick(PROBAS);
       return {
         text:
-          `Une production vient de « ${ctx.lignes[0]} » avec la probabilité $${fr(p1)}$, sinon de « ${ctx.lignes[1]} ». ` +
+          `${ctx.genre === "f" ? "Une" : "Un"} ${singulier(ctx)} vient de « ${ctx.lignes[0]} » avec la probabilité $${fr(p1)}$, sinon de « ${ctx.lignes[1]} ». ` +
           `Que représentent les probabilités portées par le SECOND niveau de l'arbre ?`,
         format: "qcm",
         choices: shuffle([
@@ -1368,8 +1659,14 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const pC1 = pick(PROBAS);
       const pC2 = pick(PROBAS);
       const bonne = `des probabilités SIMPLES : celles des deux provenances possibles`;
+      // Le contexte est NOMMÉ dans l'énoncé : sans lui, la micro ne servait
+      // qu'une seule phrase (15/10/2026).
+      const ouverture = pick([
+        `Une étude porte sur des ${ctx.individu} : au premier niveau, « ${ctx.courtL[0]} » ou « ${ctx.courtL[1]} » ; au second, « ${ctx.courtC[0]} » ou « ${ctx.courtC[1]} ».`,
+        `Cet arbre décrit des ${ctx.individu}, selon qu'${ilElle(ctx)}s viennent de « ${ctx.lignes[0]} » ou de « ${ctx.lignes[1]} ».`,
+      ]);
       return {
-        text: `Que représentent les probabilités portées par le PREMIER niveau de cet arbre ?`,
+        text: `${ouverture} Que représentent les probabilités portées par le PREMIER niveau de cet arbre ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
           "des probabilités conditionnelles, comme au second niveau",
@@ -1504,7 +1801,9 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const valeur = cle === "p1" ? p1 : cle === "pC1" ? pC1 : pC2;
       const noeud = cle === "p1" ? "la racine" : cle === "pC1" ? `« ${ctx.courtL[0]} »` : `« ${ctx.courtL[1]} »`;
       return {
-        text: `Une probabilité de l'arbre a été effacée (marquée « ? »). Quelle est sa valeur ?`,
+        text:
+          `${pick([`Arbre « ${ctx.sujet} »`, `Étude sur des ${ctx.individu}`] as const)} : une probabilité a été effacée ` +
+          `sur une branche issue de ${noeud} (marquée « ? »). Quelle est sa valeur ?`,
         format: "short",
         expected: [fr(valeur)],
         comparator: "number_equal",
@@ -2013,7 +2312,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       return {
         text:
           `Cet arbre a été construit à partir d'une étude sur $${t.total}$ ${t.ctx.individu}. ` +
-          `Combien de ${t.ctx.individu} relèvent à la fois de « ${t.ctx.lignes[0]} » et de « ${t.ctx.colonnes[0]} » ?`,
+          `Combien ${/^[aeiouyéèêh]/i.test(t.ctx.individu) ? "d'" : "de "}${t.ctx.individu} relèvent à la fois de « ${t.ctx.lignes[0]} » et de « ${t.ctx.colonnes[0]} » ?`,
         format: "short",
         expected: [String(t.a)],
         comparator: "number_equal",
@@ -2138,8 +2437,9 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const bonne = "$P_A(B) = P(B)$ : savoir que $A$ est réalisé ne change rien à la probabilité de $B$";
       return {
         text:
-          `Deux évènements $A$ et $B$ sont indépendants. ` +
-          `Que peut-on en dire de la probabilité conditionnelle $P_A(B)$ ?`,
+          `${pick(["Étude", "Enquête", "Bilan"] as const)} « ${c.sujet} » : on note $A$ l'évènement « ${leLa(c)}${singulier(c)} vient de « ${c.lignes[0]} » » ` +
+          `et $B$ l'évènement « ${ilElle(c)} est « ${c.colonnes[0]} » ». Ces deux évènements sont indépendants. ` +
+          `Que peut-on dire de la probabilité conditionnelle $P_A(B)$ ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
           "$P_A(B) = P(A)$",
@@ -2185,20 +2485,29 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     hint: "Pour deux évènements indépendants, $P(A \\cap B) = P(A) \\times P(B)$.",
     tags: ["stmg", "maths", "probabilites", "template", "short"],
     generate: () => {
+      // ⭐ 15/10/2026 — une SITUATION par tirage (25 paires d'évènements) et
+      // trois façons de poser la question : la micro n'avait que deux phrases.
+      const s = pick(PAIRES_INDEP);
       const pA = pick(PROBAS);
       const pB = pick(PROBAS);
+      const inter = Math.round(pA * pB * 10000) / 10000;
+      const question = pick([
+        "Que vaut $P(A \\cap B)$ ?",
+        "Quelle est la probabilité que $A$ et $B$ se réalisent TOUS LES DEUX ?",
+        `Quelle est la probabilité d'avoir à la fois « ${s.A} » et « ${s.B} » ?`,
+      ]);
       return {
         text:
-          `Deux évènements indépendants $A$ et $B$ vérifient $P(A) = ${fr(pA)}$ et $P(B) = ${fr(pB)}$. ` +
-          `Que vaut $P(A \\cap B)$ ?`,
+          `${s.intro}. On note $A$ : « ${s.A} » et $B$ : « ${s.B} », et l'on admet que $A$ et $B$ sont INDÉPENDANTS. ` +
+          `On sait que $P(A) = ${fr(pA)}$ et $P(B) = ${fr(pB)}$. ${question}`,
         format: "short",
-        expected: [fr(Math.round(pA * pB * 10000) / 10000)],
+        expected: [fr(inter)],
         comparator: "number_equal",
         explanation: exp(
           "Deux évènements sont indépendants si et seulement si $P(A \\cap B) = P(A) \\times P(B)$.",
-          "On multiplie les deux probabilités — cette formule n'est valable QUE dans le cas indépendant.",
-          `$${fr(pA)} \\times ${fr(pB)} = ${fr(Math.round(pA * pB * 10000) / 10000)}$.`,
-          `$P(A \\cap B) = ${fr(Math.round(pA * pB * 10000) / 10000)}$.`
+          "« Les deux à la fois », c'est l'intersection $A \\cap B$. On multiplie les deux probabilités — cette formule n'est valable QUE dans le cas indépendant.",
+          `$P(A \\cap B) = P(A) \\times P(B) = ${fr(pA)} \\times ${fr(pB)} = ${fr(inter)}$.`,
+          `La probabilité d'avoir à la fois « ${s.A} » et « ${s.B} » vaut $${fr(inter)}$.`
         ),
       };
     },
@@ -2224,10 +2533,16 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const pA = pick([0.2, 0.25, 0.4, 0.5, 0.8] as const);
       const pB = pick([0.1, 0.2, 0.25, 0.3, 0.5, 0.6] as const);
       const inter = Math.round(pA * pB * 10000) / 10000;
+      const s = pick(PAIRES_INDEP);
+      const question = pick([
+        "Que vaut $P(B)$ ?",
+        `Quelle est la probabilité de l'évènement $B$, « ${s.B} » ?`,
+        "Retrouve la probabilité de l'évènement $B$.",
+      ]);
       return {
         text:
-          `Deux évènements $A$ et $B$ sont INDÉPENDANTS. On sait que $P(A) = ${fr(pA)}$ et ` +
-          `$P(A \\cap B) = ${fr(inter)}$. Que vaut $P(B)$ ?`,
+          `${s.intro}. On note $A$ : « ${s.A} » et $B$ : « ${s.B} » ; ces deux évènements sont INDÉPENDANTS. ` +
+          `On sait que $P(A) = ${fr(pA)}$ et que la probabilité d'avoir les deux à la fois vaut $${fr(inter)}$. ${question}`,
         format: "short",
         expected: [fr(pB)],
         comparator: "number_equal",
@@ -2320,7 +2635,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
           `depuis « ${ctx.courtL[0]} » COMME depuis « ${ctx.courtL[1]} ». Qu'en conclure ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
-          `les deux provenances fournissent le même NOMBRE de ${ctx.individu}`,
+          `les deux provenances fournissent le même NOMBRE ${/^[aeiouyéèêh]/i.test(ctx.individu) ? "d'" : "de "}${ctx.individu}`,
           `« ${ctx.courtC[1]} » et « ${ctx.courtL[0]} » sont incompatibles`,
           "on ne peut rien conclure sans connaître l'effectif total",
         ]),
@@ -2338,7 +2653,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
         ),
         choiceDiagnostics: [
           {
-            choice: `les deux provenances fournissent le même NOMBRE de ${ctx.individu}`,
+            choice: `les deux provenances fournissent le même NOMBRE ${/^[aeiouyéèêh]/i.test(ctx.individu) ? "d'" : "de "}${ctx.individu}`,
             cause: `c'est une autre question : ici $P(${ctx.courtL[0]}) = ${fr(p1)}$, les deux provenances n'ont pas le même poids`,
           },
           {
@@ -2412,12 +2727,12 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const phrase =
         cas === "contraires"
           ? `$A$ : « ${leLa(ctx)}${singulier(ctx)} est ${ctx.courtC[0]} », de probabilité $${fr(pA)}$, ` +
-            `et $B$ : « il est ${ctx.courtC[1]} », de probabilité $${fr(Math.round((1 - pA) * 10000) / 10000)}$`
+            `et $B$ : « ${ilElle(ctx)} est ${ctx.courtC[1]} », de probabilité $${fr(Math.round((1 - pA) * 10000) / 10000)}$`
           : cas === "independants"
-            ? `$A$ : « ${leLa(ctx)}premier${ctx.genre === "f" ? "e" : ""} ${singulier(ctx)} tiré${ctx.genre === "f" ? "e" : ""} AVEC REMISE est ${ctx.courtC[1]} », de probabilité $${fr(pA)}$, ` +
-              `et $B$ : « le second l'est aussi », de même probabilité $${fr(pA)}$`
+            ? `$A$ : « ${ctx.genre === "f" ? "la première" : "le premier"} ${singulier(ctx)} tiré${ctx.genre === "f" ? "e" : ""} AVEC REMISE est ${ctx.courtC[1]} », de probabilité $${fr(pA)}$, ` +
+              `et $B$ : « ${ctx.genre === "f" ? "la seconde" : "le second"} l'est aussi », de même probabilité $${fr(pA)}$`
             : `$A$ : « ${leLa(ctx)}${singulier(ctx)} vient de ${ctx.courtL[0]} », de probabilité $${fr(pA)}$, ` +
-              `et $B$ : « il est ${ctx.courtC[1]} », de probabilité $${fr(pB)}$`;
+              `et $B$ : « ${ilElle(ctx)} est ${ctx.courtC[1]} », de probabilité $${fr(pB)}$`;
       const bonne =
         cas === "contraires"
           ? "incompatibles, donc dépendants"
@@ -2439,7 +2754,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
           "Incompatibles : ils ne peuvent pas se produire ensemble ($P(A \\cap B) = 0$). Indépendants : la réalisation de l'un ne change pas la probabilité de l'autre. Ces deux propriétés s'excluent quand les probabilités sont non nulles.",
           "On se demande d'abord si les deux évènements peuvent coexister, puis si l'un renseigne sur l'autre.",
           cas === "contraires"
-            ? `Un même ${singulier(ctx)} ne peut pas être à la fois « ${ctx.courtC[0]} » et « ${ctx.courtC[1]} » : ils sont incompatibles, donc dépendants.`
+            ? `${ctx.genre === "f" ? "Une même" : "Un même"} ${singulier(ctx)} ne peut pas être à la fois « ${ctx.courtC[0]} » et « ${ctx.courtC[1]} » : ils sont incompatibles, donc dépendants.`
             : cas === "independants"
               ? "Les deux tirages se font AVEC REMISE : le premier ne modifie pas le stock, donc les évènements sont indépendants."
               : `${ctx.genre === "f" ? "Une" : "Un"} ${singulier(ctx)} peut très bien venir de « ${ctx.courtL[0]} » ET être « ${ctx.courtC[1]} » : ils ne sont pas incompatibles. Rien ne garantit non plus l'indépendance : il faudrait la vérifier par un calcul.`,
