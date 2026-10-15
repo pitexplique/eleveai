@@ -9,6 +9,7 @@
 # pas fini. Prix, lieu, horaires : ceux de la page, rien d'autre.
 #
 # Usage : python scripts/pub-crpe-instagram.py
+#   → pub/instagram/crpe/carrousel-{1,2,3}-…-1080x1350.png (à publier en premier)
 #   → pub/instagram/crpe/post-1080x1350.png
 #   → pub/instagram/crpe/story-1080x1920.png
 #   (la légende à coller est à côté : pub/instagram/crpe/legende.md)
@@ -272,7 +273,148 @@ def composer_partage():
     return im.convert("RGB")
 
 
+# ═══ LE CARROUSEL (15/10/2026) ════════════════════════════════════════════
+# Une image = une idée. Le post unique portait tout (titre, accroche, offre,
+# philosophie, contact) : trop pour les deux secondes qu'on donne à une image
+# en faisant défiler. Le carrousel coupe en trois, et Instagram le pousse
+# davantage parce qu'on le fait glisser.
+#
+# ⭐ LA PHILOSOPHIE, SES QUATRE TEMPS MOT POUR MOT (« se présenter, se sentir
+# bien, savoir ce qui bloque, résoudre »), chacun suivi de trois mots de
+# concret. Les détails 3 et 4 viennent de la page (épreuve d'entrée, copies
+# corrigées) ; le 2 dit en clair ce que « se sentir bien » vise : la peur des
+# maths de beaucoup de candidats — c'est ce qui le distingue d'une prépa.
+PHILOSOPHIE = [
+    ("Se présenter", "on se connaît, on se lance"),
+    ("Se sentir bien", "la peur des maths, on commence par là"),
+    ("Savoir ce qui bloque", "une épreuve d'entrée, corrigée sur place"),
+    ("Résoudre", "vos copies, corrigées une à une"),
+]
+H_CAR = 1350
+
+
+def titre_large(d, texte, couleur, y, cible, larg=W):
+    """Une ligne agrandie jusqu'à `cible` px d'encre, centrée sur `larg`."""
+    t = 30
+    while d.textbbox((0, 0), texte, font=NOIR(t + 2))[2] - d.textbbox((0, 0), texte, font=NOIR(t + 2))[0] <= cible:
+        t += 2
+    f = NOIR(t)
+    b = d.textbbox((0, 0), texte, font=f)
+    d.text(((larg - (b[2] - b[0])) / 2 - b[0], y - b[1]), texte, font=f, fill=couleur)
+    return y + (b[3] - b[1])
+
+
+def pastille(d, x, y, n, r, f):
+    d.ellipse((x, y, x + 2 * r, y + 2 * r), fill=AMBRE)
+    b = d.textbbox((0, 0), n, font=f)
+    d.text((x + r - (b[2] - b[0]) / 2 - b[0], y + r - (b[3] - b[1]) / 2 - b[1]), n, font=f, fill=NAVY)
+
+
+def glisser(d, n):
+    """« 1/3  Glissez → » en bas à droite : le geste à faire, dit."""
+    f = GRAS(30)
+    texte = f"{n}/3   Glissez →" if n < 3 else "3/3"
+    x = W - 72 - largeur(d, texte, f)
+    d.text((x, H_CAR - 92), texte, font=f, fill=GRIS)
+
+
+def signature(im, d, x, bas, taille=112):
+    av = avatar_rond(taille)
+    im.paste(av, (x, bas - av.height), av)
+    tx = x + av.width + 22
+    d.text((tx, bas - av.height + 8), "Frédéric Lacoste", font=NOIR(32), fill=ENCRE)
+    d.text((tx, bas - av.height + 50), "prof de maths au collège, à La Réunion", font=GRAS(26), fill=GRIS)
+    d.text((tx, bas - av.height + 84), "concepteur d'eleveai.fr", font=GRAS(26), fill=ORANGE)
+
+
+def carrousel_1():
+    """L'accroche. Rien d'autre : le titre, le malentendu, les notions."""
+    im = fond(H_CAR).convert("RGBA")
+    d = ImageDraw.Draw(im)
+    cible = int(W * 0.9)
+    y = 110
+    y = titre_large(d, "CRPE 2027", NAVY, y, cible) + 28
+    y = titre_large(d, "ÉPREUVE DE MATHS", ORANGE, y, cible) + 24
+    y = titre_large(d, "LA RÉUNION · 974", (13, 148, 136), y, cible) + 110
+    d.text((72, y), "Vous enseignerez", font=NOIR(66), fill=ENCRE)
+    d.text((72, y + 78), "jusqu'au CM2.", font=NOIR(66), fill=ENCRE)
+    y += 196
+    d.text((72, y), "L'épreuve, elle,", font=NOIR(74), fill=ORANGE)
+    d.text((72, y + 86), "va jusqu'en 3", font=NOIR(74), fill=ORANGE)
+    x3 = 72 + largeur(d, "va jusqu'en 3", NOIR(74))
+    d.text((x3 + 2, y + 86), "e", font=NOIR(40), fill=ORANGE)
+    d.text((x3 + 4 + largeur(d, "e", NOIR(40)), y + 86), ".", font=NOIR(74), fill=ORANGE)
+    y += 220
+    x = 72
+    for n in ["Thalès", "Pythagore", "PGCD", "équations", "probabilités"]:
+        x, _ = pilule(d, x, y, n, GRAS(28), (255, 228, 230), (159, 18, 57), pad_x=22, pad_y=12)
+        x += 12
+    tm = Image.open(TI_MARGO).convert("RGBA")
+    tm = tm.resize((int(tm.width * 170 / tm.height), 170), Image.LANCZOS)
+    im.paste(tm, (60, H_CAR - 60 - 170), tm)
+    glisser(d, 1)
+    return im.convert("RGB")
+
+
+def carrousel_2():
+    """La philosophie : la peur d'abord, puis les quatre temps."""
+    im = fond(H_CAR).convert("RGBA")
+    d = ImageDraw.Draw(im)
+    d.text((72, 96), "Peur de l'épreuve de maths ?", font=NOIR(52), fill=ENCRE)
+    d.text((72, 166), "C'est normal. Ma philosophie :", font=NOIR(44), fill=ORANGE)
+    y = 270
+    for i, (titre, detail) in enumerate(PHILOSOPHIE):
+        dernier = i == len(PHILOSOPHIE) - 1
+        haut = 178
+        carte(im, (72, y, W - 72, y + haut), rayon=32,
+              fond_c=(NAVY + (255,)) if dernier else (255, 255, 255, 240))
+        d = ImageDraw.Draw(im)
+        pastille(d, 104, y + 50, str(i + 1), 38, NOIR(40))
+        d.text((206, y + 36), titre, font=NOIR(52), fill=AMBRE if dernier else ENCRE)
+        d.text((206, y + 106), detail, font=GRAS(34), fill=(226, 232, 240) if dernier else GRIS)
+        y += haut + 26
+    signature(im, d, 72, H_CAR - 56)
+    glisser(d, 2)
+    return im.convert("RGB")
+
+
+def carrousel_3():
+    """Le pratique : la date, le lieu, le prix, le téléphone."""
+    im = fond(H_CAR).convert("RGBA")
+    d = ImageDraw.Draw(im)
+    d.text((72, 96), "1re séance", font=NOIR(58), fill=ORANGE)
+    y = titre_large(d, "SAMEDI 24 OCTOBRE", NAVY, 196, int(W * 0.9)) + 60
+    carte(im, (72, y, W - 72, y + 430), rayon=36)
+    d = ImageDraw.Draw(im)
+    cx = 116
+    d.text((cx, y + 40), "8 h – 12 h, le samedi matin", font=NOIR(46), fill=ENCRE)
+    d.text((cx, y + 104), "Hôtel Terre-Sainte, Saint-Pierre", font=GRAS(38), fill=GRIS)
+    d.text((cx, y + 180), "60 €", font=NOIR(110), fill=ORANGE)
+    px = cx + largeur(d, "60 € ", NOIR(110))
+    d.text((px, y + 196), "la matinée, café compris", font=GRAS(34), fill=GRIS)
+    d.text((px, y + 244), "sans forfait : vous payez", font=GRAS(34), fill=GRIS)
+    d.text((px, y + 288), "les samedis où vous venez", font=GRAS(34), fill=GRIS)
+    d.text((cx, y + 362), "Groupe de 5 à 15 · 14 samedis jusqu'à fin mars", font=GRAS(30), fill=(13, 148, 136))
+    y += 430 + 40
+    carte(im, (72, y, W - 72, y + 300), rayon=36, fond_c=NAVY + (255,))
+    d = ImageDraw.Draw(im)
+    d.text((cx, y + 36), "Réservez votre place", font=NOIR(44), fill=BLANC)
+    d.text((cx, y + 100), "06 92 74 29 58", font=NOIR(76), fill=AMBRE)
+    d.text((cx, y + 210), "Test gratuit (15 min) : lien en bio", font=GRAS(32), fill=(203, 213, 225))
+    tm = Image.open(TI_MARGO).convert("RGBA")
+    tm = tm.resize((int(tm.width * 160 / tm.height), 160), Image.LANCZOS)
+    im.paste(tm, (60, H_CAR - 60 - 160), tm)
+    d.text((60 + tm.width + 24, H_CAR - 60 - 100), "eleveai.fr/formation-crpe", font=NOIR(38), fill=NAVY)
+    glisser(d, 3)
+    return im.convert("RGB")
+
+
 if __name__ == "__main__":
+    for i, f in enumerate([carrousel_1, carrousel_2, carrousel_3], start=1):
+        nom = ["accroche", "philosophie", "pratique"][i - 1]
+        chemin = SORTIE / f"carrousel-{i}-{nom}-1080x1350.png"
+        f().save(chemin, optimize=True)
+        print(chemin)
     for h, nom in [(1350, "post"), (1920, "story")]:
         im, fin_cta, debut_signature = composer(h)
         # garde-fou : la signature ne doit jamais chevaucher le bloc d'action
