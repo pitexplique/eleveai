@@ -214,11 +214,14 @@ const SEANCES: Seance[] = [
     // part cette semaine : la séance 1 glisse au 24/10 (dernier samedi des
     // vacances de la Toussaint, 10 → 26 octobre à La Réunion) et les 13
     // autres ne bougent pas — l'automne fait toujours huit samedis d'affilée.
+    // ⭐ Et c'est la séance des PRÉSENTATIONS (Frédéric, 15/10 : « le 24
+    // octobre présentations »). L'épreuve d'entrée y reste : elle était le
+    // contenu validé de la séance 1, la présentation s'y ajoute, rien ne saute.
     date: "samedi 24 octobre",
     bloc: "automne",
-    titre: "Où vous en êtes vraiment",
+    titre: "Présentations, et où vous en êtes vraiment",
     detail:
-      "Une épreuve d'entrée, corrigée sur place. Pas pour classer : pour savoir quelles séances comptent le plus pour vous, et lesquelles vous pourriez presque sauter.",
+      "On fait connaissance, je vous présente les 14 samedis et la façon de travailler. Puis une épreuve d'entrée, corrigée sur place — pas pour classer : pour savoir quelles séances comptent le plus pour vous, et lesquelles vous pourriez presque sauter.",
   },
   {
     date: "samedi 31 octobre",

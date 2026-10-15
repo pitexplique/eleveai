@@ -238,7 +238,7 @@ def composer_partage():
     d.text((cx, 84), "Le samedi matin", font=NOIR(32), fill=ENCRE)
     d.text((cx, 124), "8 h – 12 h, Saint-Pierre", font=GRAS(26), fill=GRIS)
     d.text((cx, 172), "60 €", font=NOIR(64), fill=ORANGE)
-    d.text((cx, 250), "1re séance : samedi 24 oct.", font=GRAS(24), fill=GRIS)
+    d.text((cx, 250), "1re séance : sam. 24 oct.", font=GRAS(24), fill=GRIS)
     carte(im, (x0, 330, x1, LH - 40), rayon=28, fond_c=NAVY + (255,))
     d = ImageDraw.Draw(im)
     d.text((cx, 356), "Test gratuit", font=NOIR(32), fill=BLANC)

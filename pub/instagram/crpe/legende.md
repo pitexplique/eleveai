@@ -17,7 +17,7 @@ L'épreuve de maths porte sur l'école ET le collège : Thalès, Pythagore, PGCD
 📍 Le samedi matin, 8 h – 12 h, à l'Hôtel Terre-Sainte (Saint-Pierre)
 💶 60 € la matinée, café compris, sans forfait : vous payez les samedis où vous venez
 ✍️ Vous écrivez, je corrige vos copies, on recommence
-🚀 Première séance : samedi 24 octobre (et on peut nous rejoindre en cours d'année)
+🚀 Première séance le samedi 24 octobre, 8 h : présentations, les 14 samedis, puis une épreuve d'entrée corrigée sur place (et on peut nous rejoindre en cours d'année)
 
 🎯 Pas sûr d'en avoir besoin ? Faites le test gratuit (15 min) : il vous dit quels thèmes travailler en priorité. Lien en bio.
 
