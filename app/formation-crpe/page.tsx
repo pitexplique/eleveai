@@ -542,9 +542,12 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "EleveAI",
     locale: "fr_FR",
+    // ⭐ 15/10/2026 : la pub Instagram, déclinée en 1200x630, remplace l'image
+    // générique du site. Un lien collé dans WhatsApp montre désormais l'offre
+    // (scripts/pub-crpe-instagram.py la régénère avec le post et la story).
     images: [
       {
-        url: "/preview.jpg",
+        url: "/images/formation-crpe-partage-1200x630.jpg",
         width: 1200,
         height: 630,
         alt: `Préparation aux mathématiques du CRPE, ${NB_SEANCES} samedis à ${LIEU.ville}, La Réunion`,
@@ -558,7 +561,7 @@ export const metadata: Metadata = {
     description:
       `${NB_SEANCES} samedis de ${TARIF.heuresParSeance} h pour la seule épreuve de mathématiques. ` +
       `${eur(PRIX_SEANCE)} la matinée, sans forfait.`,
-    images: ["/preview.jpg"],
+    images: ["/images/formation-crpe-partage-1200x630.jpg"],
   },
 };
 

@@ -115,6 +115,7 @@
 
 import { Fragment, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Bot,
   Calculator,
@@ -1152,6 +1153,41 @@ export default function AccueilMatieres() {
         {action === "evaluation" && <PanneauEvaluation matiere={matiere} />}
         {action === "photo" && <PanneauPhoto />}
         {action === "lecon" && <PanneauLecon matiere={matiere} />}
+
+        {/* ⭐ 15/10/2026 — LA PUB CRPE, EN BAS ET DISCRÈTE. Frédéric voulait la
+            pub sur l'accueil ; elle y est, mais SOUS le panneau : l'accueil
+            sert d'abord les élèves, et une offre payante ne prend pas le
+            premier écran (décision du 21/08, voir PORTES_ADULTE dans
+            lib/matrice/ressources.ts). L'image est celle du partage de
+            /formation-crpe — un seul visuel, régénéré par
+            scripts/pub-crpe-instagram.py. */}
+        <Link
+          prefetch={false}
+          href="/formation-crpe?from=accueil"
+          onClick={() => track("accueil_pub_crpe")}
+          className="mt-10 flex flex-col items-center gap-4 overflow-hidden rounded-2xl bg-white p-3 shadow-sm ring-1 ring-slate-200 transition hover:shadow-md hover:ring-orange-300 sm:flex-row sm:p-4"
+        >
+          <Image
+            src="/images/formation-crpe-partage-1200x630.jpg"
+            alt="CRPE 2027, épreuve de maths, La Réunion : le samedi matin à Saint-Pierre, 60 € la matinée"
+            width={1200}
+            height={630}
+            sizes="(min-width: 640px) 320px, 100vw"
+            loading="lazy"
+            className="w-full rounded-xl sm:w-80"
+          />
+          <div className="px-1 text-center sm:text-left">
+            <p className="text-xs font-black uppercase tracking-wide text-orange-600">
+              Futurs professeurs des écoles
+            </p>
+            <p className="mt-1 text-lg font-black text-slate-900">
+              Les maths du CRPE, le samedi matin à Saint-Pierre
+            </p>
+            <p className="mt-1 text-sm font-semibold text-slate-600">
+              Test gratuit de 15 minutes pour savoir où vous en êtes →
+            </p>
+          </div>
+        </Link>
 
         <footer className="pt-10">
           <ul className="flex flex-wrap justify-center gap-x-4 gap-y-1.5 text-xs text-slate-600">

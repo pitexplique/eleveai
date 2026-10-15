@@ -196,6 +196,58 @@ def composer(h):
     return im.convert("RGB"), y, bas - av.height
 
 
+def composer_partage():
+    """La même pub en 1200x630 : l'image de partage de /formation-crpe
+    (WhatsApp, Facebook) et le visuel du bandeau de l'accueil.
+
+    ⚠️ Elle va dans public/ — c'est la seule des trois que le site SERT.
+    """
+    LW, LH = 1200, 630
+    im = fond(LH).resize((LW, LH), Image.LANCZOS).convert("RGBA")
+    d = ImageDraw.Draw(im)
+    marge = 56
+    gauche = 640  # largeur de la colonne du titre
+
+    def ligne(texte, couleur, y, cible):
+        t = 20
+        while d.textbbox((0, 0), texte, font=NOIR(t + 2))[2] - d.textbbox((0, 0), texte, font=NOIR(t + 2))[0] <= cible:
+            t += 2
+        f = NOIR(t)
+        b = d.textbbox((0, 0), texte, font=f)
+        d.text((marge - b[0], y - b[1]), texte, font=f, fill=couleur)
+        return y + (b[3] - b[1])
+
+    y = 58
+    y = ligne("CRPE 2027", NAVY, y, gauche) + 20
+    y = ligne("ÉPREUVE DE MATHS", ORANGE, y, gauche) + 16
+    y = ligne("LA RÉUNION · 974", (13, 148, 136), y, gauche) + 30
+    d.text((marge, y), "Vous enseignerez jusqu'au CM2.", font=NOIR(30), fill=ENCRE)
+    d.text((marge, y + 40), "L'épreuve, elle, va jusqu'en 3e.", font=NOIR(30), fill=ORANGE)
+
+    # La signature, en bas à gauche
+    av = avatar_rond(92)
+    im.paste(av, (marge, LH - 40 - av.height), av)
+    d.text((marge + av.width + 18, LH - 40 - 78), "Frédéric Lacoste", font=NOIR(28), fill=ENCRE)
+    d.text((marge + av.width + 18, LH - 40 - 40), "prof de maths au collège", font=GRAS(24), fill=GRIS)
+
+    # La colonne de droite : l'offre, puis l'action
+    x0, x1 = gauche + marge + 50, LW - marge
+    carte(im, (x0, 58, x1, 300), rayon=28)
+    d = ImageDraw.Draw(im)
+    cx = x0 + 30
+    d.text((cx, 84), "Le samedi matin", font=NOIR(32), fill=ENCRE)
+    d.text((cx, 124), "8 h – 12 h, Saint-Pierre", font=GRAS(26), fill=GRIS)
+    d.text((cx, 172), "60 €", font=NOIR(64), fill=ORANGE)
+    d.text((cx, 250), "la matinée, sans forfait", font=GRAS(24), fill=GRIS)
+    carte(im, (x0, 330, x1, LH - 40), rayon=28, fond_c=NAVY + (255,))
+    d = ImageDraw.Draw(im)
+    d.text((cx, 356), "Test gratuit", font=NOIR(32), fill=BLANC)
+    d.text((cx, 400), "15 min pour savoir", font=GRAS(24), fill=(203, 213, 225))
+    d.text((cx, 430), "où vous en êtes", font=GRAS(24), fill=(203, 213, 225))
+    d.text((cx, 490), "06 92 74 29 58", font=NOIR(34), fill=AMBRE)
+    return im.convert("RGB")
+
+
 if __name__ == "__main__":
     for h, nom in [(1350, "post"), (1920, "story")]:
         im, fin_cta, debut_signature = composer(h)
@@ -204,3 +256,7 @@ if __name__ == "__main__":
         chemin = SORTIE / f"{nom}-1080x{h}.png"
         im.save(chemin, optimize=True)
         print(chemin)
+    # L image de partage en JPG : WhatsApp et Facebook lisent mal le webp en aperçu.
+    chemin = RACINE / "public" / "images" / "formation-crpe-partage-1200x630.jpg"
+    composer_partage().save(chemin, quality=88, optimize=True)
+    print(chemin)
