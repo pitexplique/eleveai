@@ -112,21 +112,26 @@ def composer(h):
     # (Frédéric, 15/10 : « mets le plus gros »). C'est ce qu'on lit en un quart
     # de seconde en faisant défiler : le concours, la matière, l'île. Chaque
     # ligne prend toute la largeur utile.
-    def ajuste(texte, maxi):
-        t = maxi
-        while largeur(d, texte, NOIR(t)) > W - 2 * marge:
-            t -= 2
-        return NOIR(t)
+    # ⭐ Puis « toute la 90 % de la largeur » : chaque ligne est agrandie
+    # jusqu'à faire 90 % de l'image, et centrée — au pixel près, mesuré sur
+    # l'encre réelle (textbbox), pas sur l'avance typographique.
+    cible = int(W * 0.9)
 
-    f1 = ajuste("CRPE 2027", k(190))
-    d.text((marge, y - f1.size * 0.12), "CRPE 2027", font=f1, fill=NAVY)
-    y += int(f1.size * 0.95)
-    f2 = ajuste("ÉPREUVE DE MATHS", k(120))
-    d.text((marge, y), "ÉPREUVE DE MATHS", font=f2, fill=ORANGE)
-    y += int(f2.size * 1.05)
-    f3 = ajuste("LA RÉUNION · 974", k(120))
-    d.text((marge, y), "LA RÉUNION · 974", font=f3, fill=(13, 148, 136))
-    y += int(f3.size * 1.25)
+    def ligne(texte, couleur, y):
+        t = 40
+        while True:
+            b = d.textbbox((0, 0), texte, font=NOIR(t + 2))
+            if b[2] - b[0] > cible:
+                break
+            t += 2
+        f = NOIR(t)
+        b = d.textbbox((0, 0), texte, font=f)
+        d.text(((W - (b[2] - b[0])) / 2 - b[0], y - b[1]), texte, font=f, fill=couleur)
+        return y + (b[3] - b[1])
+
+    y = ligne("CRPE 2027", NAVY, y) + k(26)
+    y = ligne("ÉPREUVE DE MATHS", ORANGE, y) + k(22)
+    y = ligne("LA RÉUNION · 974", (13, 148, 136), y) + k(40)
 
     # ── L'accroche, désormais en second
     d.text((marge, y), "Vous enseignerez jusqu'au CM2.", font=NOIR(k(46)), fill=ENCRE)
