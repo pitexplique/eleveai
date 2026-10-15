@@ -165,8 +165,8 @@ def composer(h):
     d.text((cx, y + k(104)), "Hôtel Terre-Sainte, Saint-Pierre", font=GRAS(k(36)), fill=GRIS)
     d.text((cx, y + k(170)), "60 €", font=NOIR(k(84)), fill=ORANGE)
     px = cx + largeur(d, "60 € ", NOIR(k(84)))
-    d.text((px, y + k(182)), "la matinée, café compris", font=GRAS(k(34)), fill=GRIS)
-    d.text((px, y + k(228)), "sans forfait, on rejoint en cours d'année", font=GRAS(k(30)), fill=GRIS)
+    d.text((px, y + k(182)), "la matinée, sans forfait", font=GRAS(k(34)), fill=GRIS)
+    d.text((px, y + k(228)), "1re séance : samedi 24 octobre", font=GRAS(k(30)), fill=GRIS)
     y += haut_carte + (56 if story else 40)
 
     # ── L'action : le seul bloc sombre
@@ -238,7 +238,7 @@ def composer_partage():
     d.text((cx, 84), "Le samedi matin", font=NOIR(32), fill=ENCRE)
     d.text((cx, 124), "8 h – 12 h, Saint-Pierre", font=GRAS(26), fill=GRIS)
     d.text((cx, 172), "60 €", font=NOIR(64), fill=ORANGE)
-    d.text((cx, 250), "la matinée, sans forfait", font=GRAS(24), fill=GRIS)
+    d.text((cx, 250), "1re séance : samedi 24 oct.", font=GRAS(24), fill=GRIS)
     carte(im, (x0, 330, x1, LH - 40), rayon=28, fond_c=NAVY + (255,))
     d = ImageDraw.Draw(im)
     d.text((cx, 356), "Test gratuit", font=NOIR(32), fill=BLANC)

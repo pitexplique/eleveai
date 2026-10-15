@@ -447,7 +447,7 @@ const ROUTES: RouteConfig[] = [
   // vendu comme tel) peut les rallumer, et `PRIX_PUBLICS` dans lib/tarifs.ts est
   // l'unique interrupteur.
   // ⭐ 22/08 — LA FORMATION CRPE ENTRE AU SITEMAP, le statut URSSAF étant réglé.
-  // `weekly` et non `monthly` : les inscriptions se jouent avant le 3 octobre et
+  // `weekly` et non `monthly` : les inscriptions se jouent avant le 24 octobre et
   // le nombre de places bouge. Priorité 0,8, au niveau de /tarifs et non des
   // pages institutionnelles : c'est une offre datée, pas une page de présentation.
   // ⚠️ Elle vise une requête locale et étroite — « préparation CRPE Réunion »,

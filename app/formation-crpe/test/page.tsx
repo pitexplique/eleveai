@@ -1,6 +1,6 @@
 // /formation-crpe/test — OÙ EN ÊTES-VOUS EN MATHS POUR LE CRPE ? (15/10/2026)
 //
-// L'épreuve d'entrée du 3 octobre, en ligne et gratuite : pour qui rejoint le
+// L'épreuve d'entrée du 24 octobre, en ligne et gratuite : pour qui rejoint le
 // groupe en cours d'année, et pour qui hésite encore à venir. Les questions et
 // la raison d'être du test sont dans `questions.ts`.
 

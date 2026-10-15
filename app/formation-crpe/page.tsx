@@ -210,7 +210,11 @@ type Seance = {
 
 const SEANCES: Seance[] = [
   {
-    date: "samedi 3 octobre",
+    // ⭐ 15/10/2026 : était le 3 octobre. La session n'avait pas ouvert, la pub
+    // part cette semaine : la séance 1 glisse au 24/10 (dernier samedi des
+    // vacances de la Toussaint, 10 → 26 octobre à La Réunion) et les 13
+    // autres ne bougent pas — l'automne fait toujours huit samedis d'affilée.
+    date: "samedi 24 octobre",
     bloc: "automne",
     titre: "Où vous en êtes vraiment",
     detail:
@@ -339,10 +343,10 @@ const CE_QUE_CE_NEST_PAS = [
 // ne les rattrape automatiquement. Si un samedi bouge en tête ou en queue,
 // c'est ICI aussi.
 //
-// (3 octobre 2026 et 27 mars 2027 sont bien deux samedis — vérifié.)
+// (24 octobre 2026 et 27 mars 2027 sont bien deux samedis — vérifié.)
 // ─────────────────────────────────────────────────────────────────────────────
 const CYCLE = {
-  debut: "2026-10-03",
+  debut: "2026-10-24",
   fin: "2027-03-27",
 };
 
@@ -802,7 +806,7 @@ export default function FormationCrpePage() {
             <p className="mt-3 text-sm font-semibold leading-7 text-slate-700">
               18 questions, deux par thème de l&apos;épreuve, corrigées une à
               une. Le bilan vous dit quels samedis comptent le plus pour vous —
-              et lesquels vous pourriez presque sauter. Vous arrivez après le 3
+              et lesquels vous pourriez presque sauter. Vous ne pouvez pas venir le 24
               octobre&nbsp;? Ce test remplace l&apos;épreuve d&apos;entrée.
             </p>
             <Link
@@ -963,7 +967,7 @@ export default function FormationCrpePage() {
 
         {/* ⚠️ LE SEUIL — motif PÉDAGOGIQUE, pas comptable (voir le bloc TARIF).
             Il est public parce qu'un candidat préfère largement l'apprendre
-            maintenant que le 3 octobre à 8 h devant une porte fermée. */}
+            maintenant que le 24 octobre à 8 h devant une porte fermée. */}
         <div className="mt-5 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200/70">
           <h3 className="text-lg font-black text-slate-900">
             De {TARIF.seuilOuverture} à {TARIF.plafondGroupe} participants, pas plus
@@ -1061,7 +1065,8 @@ export default function FormationCrpePage() {
               octobre », date passée. On entre en cours d'année (voir la FAQ),
               donc plus de date ici. */}
           <p className="mt-2 text-sm font-semibold leading-7 text-white/75">
-            Rendez-vous à {LIEU_LONG}, {HORAIRES_PHRASE}. Dites-moi où vous en
+            Première séance le {SEANCES[0].date}, à {LIEU_LONG},{" "}
+            {HORAIRES_PHRASE}. Dites-moi où vous en
             êtes — le bilan du test en ligne suffit — et ce que vous ratez
             d&apos;habitude en maths. Aucune avance à verser&nbsp;: on se
             compte, et la session s&apos;ouvre si nous sommes assez.

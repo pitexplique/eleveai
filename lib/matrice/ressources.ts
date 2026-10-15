@@ -200,7 +200,7 @@ const PORTES_CP = ["fiches-ecriture", "*", "*"];
  *
  * La page CRPE n'a pas de seconde route — hors du lexique, une carte est sa
  * seule porte. S'ajoute qu'elle EXPIRE : les inscriptions se jouent avant le
- * 3 octobre, alors qu'un coach est là toute l'année.
+ * 24 octobre (ex-3 octobre), alors qu'un coach est là toute l'année.
  *
  * ⛔ Ne pas la monter en première place « parce qu'elle rapporte ». Un adulte
  * qui arrive doit voir ce qui est gratuit avant ce qui est payant.

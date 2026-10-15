@@ -2,7 +2,7 @@
 //
 // Frédéric, après l'appel d'une candidate qui voulait rejoindre le samedi :
 // « Construire : faire le test pour savoir où ils en sont ». La première
-// séance (3 octobre) était une épreuve d'entrée corrigée sur place ; qui
+// séance (24 octobre, ex-3 octobre) est une épreuve d'entrée corrigée sur place ; qui
 // arrive après, ou qui hésite encore, la passe ici, seul, en un quart d'heure.
 //
 // ⭐ DEUX QUESTIONS PAR THÈME, UN THÈME PAR SAMEDI. Le bilan ne classe pas : il
