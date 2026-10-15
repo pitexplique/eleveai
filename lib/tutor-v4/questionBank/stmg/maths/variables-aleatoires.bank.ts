@@ -161,7 +161,7 @@ const EPREUVES = [
   { sujet: "un smartphone vendu", verbe: "est retourné au magasin", qualite: "retournés au magasin", qualiteSing: "retourné au magasin", nom: "smartphones", singulier: "smartphone", genre: "m", obs: "on suit", pp: "suivis", lot: "" },
   { sujet: "une facture émise par l'entreprise", verbe: "est payée en retard", qualite: "payées en retard", qualiteSing: "payée en retard", nom: "factures", singulier: "facture", genre: "f", obs: "on examine", pp: "examinées", lot: "un dossier" },
   { sujet: "un assuré auto", verbe: "déclare un sinistre dans l'année", qualite: "ayant déclaré un sinistre", qualiteSing: "ayant déclaré un sinistre", nom: "assurés", singulier: "assuré", genre: "m", obs: "on tire au sort", pp: "tirés au sort", lot: "un portefeuille" },
-  { sujet: "un passager du vol Saint-Denis – Paris", verbe: "ne se présente pas à l'embarquement", qualite: "absents à l'embarquement", qualiteSing: "absent à l'embarquement", nom: "passagers", singulier: "passager", genre: "m", obs: "on suit", pp: "suivis", lot: "" },
+  { sujet: "un passager du vol Saint-Denis – Paris", verbe: "est absent à l'embarquement", qualite: "absents à l'embarquement", qualiteSing: "absent à l'embarquement", nom: "passagers", singulier: "passager", genre: "m", obs: "on suit", pp: "suivis", lot: "" },
   { sujet: "une bouteille de jus de goyave remplie par la machine", verbe: "est mal remplie", qualite: "mal remplies", qualiteSing: "mal remplie", nom: "bouteilles", singulier: "bouteille", genre: "f", obs: "on contrôle", pp: "contrôlées", lot: "un carton" },
   { sujet: "une barquette de letchis", verbe: "contient un fruit abîmé", qualite: "contenant un fruit abîmé", qualiteSing: "contenant un fruit abîmé", nom: "barquettes", singulier: "barquette", genre: "f", obs: "on ouvre", pp: "ouvertes", lot: "une cagette" },
   { sujet: "un œuf livré à la pâtisserie", verbe: "est fêlé", qualite: "fêlés", qualiteSing: "fêlé", nom: "œufs", singulier: "œuf", genre: "m", obs: "on examine", pp: "examinés", lot: "une boîte" },
@@ -195,6 +195,30 @@ function siSucces(ep: Epreuve): string {
 /** « un camembert hors tolérance », « une pièce non conforme ». */
 function unSucces(ep: Epreuve): string {
   return `${ep.genre === "f" ? "une" : "un"} ${ep.singulier} ${ep.qualiteSing}`;
+}
+
+/**
+ * « $1$ œuf fêlé », « $3$ œufs fêlés » : le nom s'accorde au nombre.
+ * ⚠️ 15/10/2026 — « exactement $1$ œufs fêlés », « au plus $1$ graines ayant
+ * germé » : le pluriel était figé.
+ */
+function nbS(ep: Epreuve, k: number): string {
+  return k <= 1 ? `$${k}$ ${ep.singulier} ${ep.qualiteSing}` : `$${k}$ ${ep.nom} ${ep.qualite}`;
+}
+
+/** « $1$ échec », « $3$ échecs ». */
+function nbEchecs(m: number): string {
+  return `$${m}$ ${m <= 1 ? "échec" : "échecs"}`;
+}
+
+/** Le mot au singulier sous 2, au pluriel ensuite : jamais « chemin(s) ». */
+function accorde(x: number, sing: string, plur: string): string {
+  return Math.abs(x) < 2 ? sing : plur;
+}
+
+/** « chacun » / « chacune ». */
+function chacun(ep: Epreuve): string {
+  return ep.genre === "f" ? "chacune" : "chacun";
 }
 
 const PROBAS = [0.1, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.7, 0.75, 0.8, 0.9] as const;
@@ -278,7 +302,7 @@ const SITS: Sit[] = [
   { intro: "À la caisse d'une grande surface, on observe la file d'attente.", X: "le nombre de clients qui attendent à un instant donné", court: "le nombre de clients en attente", u: "", mot: "clients", moy: "le nombre moyen de clients en attente", ind: "instants", vals: suite(0, 2) },
   { intro: "Le standard d'une mairie reçoit des appels.", X: "le nombre d'appels reçus en dix minutes", court: "le nombre d'appels", u: "", mot: "appels", moy: "le nombre moyen d'appels par tranche de dix minutes", ind: "tranches de dix minutes", vals: suite(0, 3) },
   { intro: "Une entreprise suit le paiement de ses factures.", X: "le retard de paiement d'une facture, en jours", court: "le retard de paiement", u: " jours", mot: "jours", moy: "le retard moyen de paiement par facture", ind: "factures", vals: parmi([0, 5, 10, 15, 30, 45, 60]) },
-  { intro: "Un food truck vend des bouchons et des samoussas sur le front de mer.", X: "le nombre de centaines d'euros encaissées en une soirée", court: "la recette", u: "", mot: "centaines d'euros", moy: "la recette moyenne par soirée, en centaines d'euros", ind: "soirées", vals: suite(2, 4) },
+  { intro: "Un food truck vend des bouchons et des samoussas sur le front de mer.", X: "la recette d'une soirée, en centaines d'euros", court: "la recette", u: " centaines d'euros", mot: "centaines d'euros", moy: "la recette moyenne par soirée, en centaines d'euros", ind: "soirées", vals: suite(2, 4) },
   { intro: "Un épargnant place une somme sur un produit risqué.", X: "le gain, en euros, réalisé au bout d'un an", court: "le gain réalisé", u: " €", mot: "euros", moy: "le gain moyen par placement", ind: "placements", vals: parmi([-200, -100, 0, 50, 100, 200, 300]) },
   { intro: "Une pizzeria de Saint-André livre à domicile.", X: "le nombre de livraisons en retard en une soirée", court: "le nombre de livraisons en retard", u: "", mot: "livraisons", moy: "le nombre moyen de livraisons en retard par soirée", ind: "soirées", vals: deZero },
   { intro: "Une station de vélos en libre-service est vérifiée chaque matin.", X: "le nombre de vélos en panne", court: "le nombre de vélos en panne", u: "", mot: "vélos", moy: "le nombre moyen de vélos en panne par matin", ind: "matinées", vals: deZero },
@@ -304,7 +328,8 @@ function tirerLoi(k: number, pas: 5 | 10, filtre?: (s: Sit) => boolean): Loi {
 }
 const decor = (L: Loi) => `${L.s.intro} On note $X$ ${L.s.X}.`;
 const pc = (c: number) => tx(c / 100);
-const val = (s: Sit, x: number) => `$${tx(x)}$${s.u}`;
+/** « $3$ jours », mais « $1$ jour » et « $0$ point » : l'unité s'accorde. */
+const val = (s: Sit, x: number) => `$${tx(x)}$${Math.abs(x) < 2 ? s.u.replace(/^( \S+?)s\b/, "$1") : s.u}`;
 /** La loi écrite, en quatre tournures ; `cache` : l'indice dont la probabilité s'écrit `nom`. */
 function loiTexte(v: number[], c: number[], cache = -1, nom = "p"): string {
   const P = (i: number) => (i === cache ? nom : pc(c[i]));
@@ -426,11 +451,12 @@ const ASSUR = [
 
 /** Le décor d'une loi binomiale B(n ; p), en trois tournures. */
 function decorBin(ep: Epreuve, n: number, p: number): string {
-  const chacun = ep.genre === "f" ? "chacune" : "chacun";
+  // « On observe 11 lancers francs au hasard » ne se dit pas : « au hasard »
+  // est retiré, « de façon indépendante » porte seul l'hypothèse (15/10/2026).
   return pick([
-    `${maj(ep.obs)} $${n}$ ${ep.nom} au hasard, de façon indépendante ; ${chacun} ${ep.verbe} avec la probabilité $${fr(p)}$. $X$ compte les ${ep.nom} ${ep.qualite}.`,
+    `${maj(ep.obs)} $${n}$ ${ep.nom}, de façon indépendante ; ${chacun(ep)} ${ep.verbe} avec la probabilité $${fr(p)}$. $X$ compte les ${ep.nom} ${ep.qualite}.`,
     `La proportion ${de(ep.nom)} ${ep.qualite} vaut $${fr(p)}$. ${maj(ep.obs)} $${n}$ ${ep.nom}, ${ep.genre === "f" ? "assimilées" : "assimilés"} à des tirages avec remise, et l'on note $X$ le nombre ${de(ep.nom)} ${ep.qualite}.`,
-    `$X$, le nombre ${de(ep.nom)} ${ep.qualite} parmi $${n}$ ${ep.nom} ${ep.pp} au hasard, suit la loi $\\mathcal{B}(${n}\\,;\\,${fr(p)})$.`,
+    `On ${ep.obs.replace(/^on /, "")} $${n}$ ${ep.nom}, de façon indépendante. Le nombre $X$ ${de(ep.nom)} ${ep.qualite} suit la loi $\\mathcal{B}(${n}\\,;\\,${fr(p)})$.`,
   ]);
 }
 
@@ -534,7 +560,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       const q = pick([
         `Quelle écriture traduit la probabilité que ${S.court} soit ${cas.soit} ?`,
         `On cherche la probabilité que ${S.court} soit ${cas.soit}. Comment l'écrire ?`,
-        `Le gérant veut connaître la probabilité que ${S.court} soit ${cas.soit}. Quelle écriture correspond ?`,
+        `On veut connaître la probabilité que ${S.court} soit ${cas.soit}. Quelle écriture correspond ?`,
         `Comment note-t-on la probabilité de l'évènement « ${evt} » ?`,
       ]);
       const bonne = `$${cas.sym}$`;
@@ -579,7 +605,9 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       const S = L.s;
       const k = L.v.length;
       const sens = pick(["le", "ge", "eq"] as const);
-      const i = sens === "le" ? randomInt(1, k - 1) : sens === "ge" ? randomInt(0, k - 2) : randomInt(0, k - 1);
+      // ⚠️ Ni « d'au moins 0 » ni « d'au plus » la plus grande valeur : la
+      // réponse vaudrait 1 d'office et la phrase sonne faux (15/10/2026).
+      const i = sens === "le" ? randomInt(1, k - 2) : sens === "ge" ? randomInt(1, k - 2) : randomInt(0, k - 1);
       const idx = sens === "le" ? range(0, i) : sens === "ge" ? range(i, k - 1) : [i];
       const a = L.v[i];
       const sym = sens === "le" ? `P(X \\leqslant ${tx(a)})` : sens === "ge" ? `P(X \\geqslant ${tx(a)})` : `P(X = ${tx(a)})`;
@@ -1036,8 +1064,8 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       const tot = (N * E100) / 100;
       const q = pick([
         `Sur $${N}$ ${S.ind}, quel total de $X$ peut-on prévoir, environ ?`,
-        `Le gérant prévoit son activité sur $${N}$ ${S.ind}. Quelle somme des valeurs de $X$ doit-il attendre ?`,
-        `En moyenne, que donne l'addition des valeurs de $X$ sur $${N}$ ${S.ind} ?`,
+        `Sur $${N}$ ${S.ind}, environ combien de ${S.mot} faut-il prévoir au total ?`,
+        `Quel total de $X$ peut-on attendre sur $${N}$ ${S.ind} ?`,
       ]);
       return {
         text: `${decor(L)} On a calculé $E(X) = ${tx(E100 / 100)}$. ${q}`,
@@ -1616,7 +1644,8 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       ]);
       return {
         text:
-          `On veut simuler des échantillons par ordinateur : ${ep.obs} $${n}$ ${ep.nom}, chacun ayant la probabilité $${fr(p)}$ d'être ${ep.genre === "f" ? "une" : "un"} ${ep.singulier} ${ep.qualiteSing}, et l'on recommence $${N}$ fois. ${q}`,
+          `On veut simuler des échantillons par ordinateur. Chaque ${ep.singulier} ${ep.verbe} avec la probabilité $${fr(p)}$ ; ` +
+          `${ep.obs} $${n}$ ${ep.nom}, et l'on recommence $${N}$ fois. ${q}`,
         format: "short",
         expected: [String(N * n)],
         comparator: "number_equal",
@@ -2016,7 +2045,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
         explanation: exp(
           "En comparant l'écart observé à l'écart-type des fréquences, on juge si une observation est banale ou surprenante — sans développer de théorie des tests, ce que le programme exclut.",
           "On calcule l'écart à la proportion du modèle, puis on le divise par l'écart-type.",
-          `Écart : $|${fr(f)} - ${fr(p)}| = ${fr(Math.round(Math.abs(f - p) * 1000) / 1000)}$, soit environ $${k}$ écart(s)-type(s) de $${fr(Math.round(s * 1000) / 1000)}$.`,
+          `Écart : $|${fr(f)} - ${fr(p)}| = ${fr(Math.round(Math.abs(f - p) * 1000) / 1000)}$, soit environ $${k}$ ${accorde(k, "écart-type", "écarts-types")} de $${fr(Math.round(s * 1000) / 1000)}$.`,
           k === 1
             ? "Un écart d'un écart-type est tout à fait courant."
             : "Un écart de trois écarts-types est rare : l'observation interroge le modèle."
@@ -2064,8 +2093,10 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
         : "non : l'écart ne dépasse pas un écart-type, c'est une fluctuation banale";
       return {
         text:
-          `${pick(["Une étude annonce", "Un rapport officiel annonce", "Le responsable annonce", "Une publicité affirme qu'il y a"])} une proportion de $${fr(cas.p)}$ ${de(ep.nom)} ${ep.qualite}. ` +
-          `Un contrôle sur $${cas.n}$ ${ep.nom} en trouve une fréquence de $${fr(f)}$. ` +
+          // « Une publicité affirme qu'il y a une proportion de 0,3 de mangues
+          // trop mûres » : aucune publicité ne dit cela (15/10/2026).
+          `${pick(["Une étude annonce", "Un rapport officiel annonce", "Le responsable annonce"])} que la proportion ${de(ep.nom)} ${ep.qualite} vaut $${fr(cas.p)}$. ` +
+          `Un contrôle sur $${cas.n}$ ${ep.nom} donne une fréquence de $${fr(f)}$. ` +
           `L'écart-type des fréquences est de l'ordre de $${fr(Math.round(s * 1000) / 1000)}$. ` +
           pick(["Peut-on douter de l'annonce ?", "Ce contrôle remet-il l'annonce en cause ?", "Ce résultat permet-il de douter de l'annonce ?"]),
         format: "qcm",
@@ -2081,7 +2112,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
           "On compare l'écart entre la fréquence observée et la proportion annoncée à l'écart-type des fréquences, de l'ordre de $\\dfrac{1}{\\sqrt{n}}$. Un écart d'un écart-type est banal ; un écart de trois est rare.",
           "On calcule l'écart, on le divise par l'écart-type, puis on conclut — sans théorie des tests, que le programme exclut.",
           `Écart : $${fr(f)} - ${fr(cas.p)} = ${fr(Math.round((f - cas.p) * 1000) / 1000)}$, ` +
-            `soit $${fr(k)}$ écart(s)-type(s) de $${fr(Math.round(s * 1000) / 1000)}$. ` +
+            `soit $${fr(k)}$ ${accorde(k, "écart-type", "écarts-types")} de $${fr(Math.round(s * 1000) / 1000)}$. ` +
             (douteux
               ? `Une telle observation est très improbable si la proportion annoncée est la bonne.`
               : `Un tel écart se produit constamment : il ne dit rien contre l'annonce.`),
@@ -2189,10 +2220,14 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       const p = pick(PROBAS);
       const situation = binomiale
         ? pick([
-            `${ep.obs} $${n}$ ${ep.nom} au hasard, de façon indépendante, et l'on compte les ${ep.nom} ${ep.qualite} ; la probabilité vaut $${fr(p)}$ pour ${ep.genre === "f" ? "chacune" : "chacun"}`,
-            `${ep.obs} $${n}$ ${ep.nom}, ${ep.genre === "f" ? "choisies" : "choisis"} au hasard AVEC REMISE, et l'on compte les ${ep.nom} ${ep.qualite} ; la probabilité vaut $${fr(p)}$ à chaque fois`,
+            `${ep.obs} $${n}$ ${ep.nom}, de façon indépendante, et l'on compte les ${ep.nom} ${ep.qualite} ; la probabilité vaut $${fr(p)}$ pour ${chacun(ep)}`,
+            // « On observe 35 lancers francs, choisis au hasard AVEC REMISE » :
+            // la remise n'a de sens que s'il y a un stock où puiser.
+            ep.lot !== ""
+              ? `${ep.obs} $${n}$ ${ep.nom}, ${ep.genre === "f" ? "choisies" : "choisis"} au hasard AVEC REMISE dans ${ep.lot}, et l'on compte les ${ep.nom} ${ep.qualite} ; la probabilité vaut $${fr(p)}$ à chaque fois`
+              : `${ep.obs} $${n}$ ${ep.nom}, toujours dans les mêmes conditions et de façon indépendante, et l'on compte les ${ep.nom} ${ep.qualite} ; la probabilité vaut $${fr(p)}$ à chaque fois`,
           ])
-        : `${ep.obs} $${n}$ ${ep.nom} SANS REMISE dans ${ep.lot} de $${n + randomInt(2, 8)}$, et l'on compte les ${ep.nom} ${ep.qualite} ; au départ, la proportion vaut $${fr(p)}$`;
+        : `on prélève $${n}$ ${ep.nom} SANS REMISE dans ${ep.lot} de $${n + randomInt(2, 8)}$, et l'on compte les ${ep.nom} ${ep.qualite} ; au départ, la proportion vaut $${fr(p)}$`;
       const q = pick([
         "La variable $X$ décrite ci-dessous suit-elle une loi binomiale ?",
         "Peut-on modéliser $X$ par une loi binomiale ?",
@@ -2235,20 +2270,22 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       const ep = pick(EPS_LOT);
       const n = randomInt(5, 30);
       const p = pick(PROBAS);
-      const bonne = `${ep.obs} $${n}$ ${ep.nom} au hasard AVEC REMISE, et $X$ compte les ${ep.nom} ${ep.qualite}`;
+      // « On achète 29 cartes à gratter AVEC REMISE » : on PRÉLÈVE dans un
+      // stock, c'est là que la remise a un sens (15/10/2026).
+      const bonne = `on prélève $${n}$ ${ep.nom} au hasard AVEC REMISE dans ${ep.lot}, et $X$ compte les ${ep.nom} ${ep.qualite}`;
       const premier = `${ep.obs} des ${ep.nom} ${ep.genre === "f" ? "une par une" : "un par un"} jusqu'${ep.genre === "f" ? "à la première" : "au premier"} qui ${ep.verbe}, et $X$ compte le nombre ${de(ep.nom)} ${ep.pp}`;
       const q = pick([
         `Dans laquelle de ces situations la variable $X$ suit-elle une loi binomiale ?`,
-        `Pour chaque ${ep.singulier}, la probabilité d'obtenir ${unSucces(ep)} vaut $${fr(p)}$. Quelle variable $X$ suit une loi binomiale ?`,
+        `Chaque ${ep.singulier} ${ep.verbe} avec la probabilité $${fr(p)}$. Quelle variable $X$ suit une loi binomiale ?`,
         `On étudie des ${ep.nom}. Laquelle de ces variables suit une loi binomiale ?`,
       ]);
       return {
         text: q,
         format: "qcm",
         ...qcmT(bonne, [
-          `${ep.obs} $${n}$ ${ep.nom} SANS REMISE dans ${ep.lot} de $${n + randomInt(2, 6)}$, et $X$ compte les ${ep.nom} ${ep.qualite}`,
+          `on prélève $${n}$ ${ep.nom} SANS REMISE dans ${ep.lot} de $${n + randomInt(2, 6)}$, et $X$ compte les ${ep.nom} ${ep.qualite}`,
           premier,
-          `${ep.obs} $${n}$ ${ep.nom} au hasard AVEC REMISE, et $X$ désigne la FRÉQUENCE ${de(ep.nom)} ${ep.qualite}`,
+          `on prélève $${n}$ ${ep.nom} au hasard AVEC REMISE dans ${ep.lot}, et $X$ désigne la FRÉQUENCE ${de(ep.nom)} ${ep.qualite}`,
         ]),
         comparator: "mcq_exact",
         explanation: exp(
@@ -2293,7 +2330,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       ]);
       return {
         text:
-          `${maj(ep.obs)} $${n}$ ${ep.nom} au hasard, de façon indépendante ; ${ep.genre === "f" ? "chacune" : "chacun"} ${ep.verbe} ${probaMots(Math.round(p * 100))}. ` +
+          `${maj(ep.obs)} $${n}$ ${ep.nom}, de façon indépendante ; ${chacun(ep)} ${ep.verbe} ${probaMots(Math.round(p * 100))}. ` +
           `$X$ compte les ${ep.nom} ${ep.qualite}. ${q}`,
         format: "qcm",
         choices: makeChoices(`$n = ${n}$ et $p = ${fr(p)}$`, [
@@ -2353,7 +2390,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       ]);
       return {
         text:
-          `${maj(ep.obs)} des ${ep.nom} au hasard, de façon indépendante, et l'on note $X$ le nombre ${de(ep.nom)} ${ep.qualite}. ` +
+          `${maj(ep.obs)} des ${ep.nom}, de façon indépendante, et l'on note $X$ le nombre ${de(ep.nom)} ${ep.qualite}. ` +
           `On sait que $X$ suit la loi $\\mathcal{B}(${n}\\,;\\,${fr(p)})$. ${q}`,
         format: "qcm",
         ...qcmT(bonne, [
@@ -2401,7 +2438,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       const q = pick([
         `Combien de chemins réalisent l'évènement $\\{X = ${k}\\}$ ?`,
         `Combien de chemins de l'arbre comportent exactement $${k}$ fois la lettre S ?`,
-        `Sur l'arbre, combien de chemins correspondent à exactement $${k}$ ${ep.nom} ${ep.qualite} ?`,
+        `Sur l'arbre, combien de chemins correspondent à exactement ${nbS(ep, k)} ?`,
       ]);
       return {
         text:
@@ -2414,8 +2451,8 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
         explanation: exp(
           "L'évènement $\\{X = k\\}$ regroupe tous les chemins de l'arbre comportant exactement $k$ succès, dans n'importe quel ordre.",
           "On dénombre les chemins de l'arbre qui contiennent $k$ fois la lettre S.",
-          `Sur $${n}$ épreuves, il y a $${binom(n, k)}$ façon(s) de placer $${k}$ succès parmi $${n}$ positions.`,
-          `$${binom(n, k)}$ chemin(s) réalisent $\\{X = ${k}\\}$.`
+          `Sur $${n}$ épreuves, il y a $${binom(n, k)}$ ${accorde(binom(n, k), "façon", "façons")} de placer $${k}$ succès parmi $${n}$ positions.`,
+          `$${binom(n, k)}$ ${accorde(binom(n, k), "chemin réalise", "chemins réalisent")} $\\{X = ${k}\\}$.`
         ),
       };
     },
@@ -2463,7 +2500,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
         explanation: exp(
           "Sur un arbre de probabilité, la probabilité d'un chemin est le PRODUIT des probabilités portées par ses branches. Tous les chemins ayant le même nombre de succès ont donc la même probabilité.",
           "On multiplie $p$ autant de fois qu'il y a de S, et $1 - p$ autant de fois qu'il y a de E.",
-          `« ${chemin} » comporte $${k}$ succès et $${n - k}$ échec(s) : ` +
+          `« ${chemin} » comporte $${k}$ succès et ${nbEchecs(n - k)} : ` +
             `$${fr(p)}^{${k}} \\times ${fr(Math.round((1 - p) * 100) / 100)}^{${n - k}} \\approx ${fr(Math.round(valeur * 100000) / 100000)}$. ` +
             `Les $${binom(n, k)}$ chemins de $\\{X = ${k}\\}$ ont tous cette même probabilité — c'est ce qui permettra de les regrouper.`,
           `La probabilité du chemin « ${chemin} » est d'environ $${fr(Math.round(valeur * 1000) / 1000)}$.`
@@ -2499,9 +2536,9 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       const defaut = pick([IND, IND, NB, MEME]);
       const situation =
         defaut === IND
-          ? `${ep.obs} $${n}$ ${ep.nom} SANS REMISE dans ${ep.lot} de $${lot}$, et $X$ compte les ${ep.nom} ${ep.qualite}.`
+          ? `on prélève $${n}$ ${ep.nom} SANS REMISE dans ${ep.lot} de $${lot}$, et $X$ compte les ${ep.nom} ${ep.qualite}.`
           : defaut === NB
-            ? `${ep.obs} des ${ep.nom} au hasard, avec remise, ${ep.genre === "f" ? "jusqu'à la première" : "jusqu'au premier"} qui ${ep.verbe} ; $X$ compte le nombre ${de(ep.nom)} ${ep.pp}.`
+            ? `on prélève des ${ep.nom} dans ${ep.lot}, au hasard et avec remise, ${ep.genre === "f" ? "jusqu'à la première" : "jusqu'au premier"} qui ${ep.verbe} ; $X$ compte le nombre de prélèvements.`
             : `${ep.obs} $${n}$ ${ep.nom} le matin, où la probabilité vaut $${fr(p1)}$, puis $${n}$ autres l'après-midi, où elle vaut $${fr(p2)}$ ; $X$ compte les ${ep.nom} ${ep.qualite}.`;
       const q = pick([
         "Quelle condition de la loi binomiale n'est pas vérifiée ?",
@@ -2592,7 +2629,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       const n = randomInt(4, 9);
       const k = randomInt(1, n - 1);
       const ep = pick(EPREUVES);
-      const bonne = `le nombre de chemins de l'arbre comportant exactement $${k}$ ${ep.nom} ${ep.qualite}`;
+      const bonne = `le nombre de chemins de l'arbre comportant exactement ${nbS(ep, k)}`;
       const q = pick([
         `Que représente le coefficient binomial $\\binom{${n}}{${k}}$ ?`,
         `Dans ce contexte, que compte $\\binom{${n}}{${k}}$ ?`,
@@ -2602,7 +2639,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
         text: `${decorSchema(ep, n)} ${q}`,
         format: "qcm",
         ...qcmT(bonne, [
-          `la probabilité d'obtenir exactement $${k}$ ${ep.nom} ${ep.qualite}`,
+          `la probabilité d'obtenir exactement ${nbS(ep, k)}`,
           `le quotient de $${n}$ par $${k}$`,
           `le nombre ${de(ep.nom)} restant à observer après $${k}$ succès`,
         ]),
@@ -2616,7 +2653,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
         ),
         choiceDiagnostics: [
           {
-            choice: `la probabilité d'obtenir exactement $${k}$ ${ep.nom} ${ep.qualite}`,
+            choice: `la probabilité d'obtenir exactement ${nbS(ep, k)}`,
             cause: "un coefficient binomial est un entier, souvent supérieur à 1 : ce ne peut pas être une probabilité",
           },
         ],
@@ -2662,7 +2699,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
         explanation: exp(
           "Le coefficient $\\binom{n}{k}$ compte les chemins réalisant $k$ succès sur $n$ épreuves. Or désigner les $k$ positions des succès revient à désigner les $n-k$ positions des échecs : $\\binom{n}{k} = \\binom{n}{n-k}$.",
           "On n'a rien à calculer : on reconnaît deux façons de décrire les mêmes chemins.",
-          `Un chemin à $${k}$ succès sur $${n}$ épreuves a exactement $${n - k}$ échecs. ` +
+          `Un chemin à $${k}$ succès sur $${n}$ épreuves a exactement ${nbEchecs(n - k)}. ` +
             `Compter les uns ou les autres revient au même : $\\binom{${n}}{${n - k}} = \\binom{${n}}{${k}} = ${binom(n, k)}$. ` +
             `C'est ce qui rend chaque ligne du triangle de Pascal symétrique.`,
           `$\\binom{${n}}{${n - k}} = ${binom(n, n - k)}$.`
@@ -2820,7 +2857,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       ]);
       return {
         text:
-          `On étudie des ${ep.nom} (succès : ${ep.genre === "f" ? "elle" : "il"} ${ep.verbe}). On sait que $\\binom{${n - 1}}{${k - 1}} = ${binom(n - 1, k - 1)}$ et que $\\binom{${n}}{${k}} = ${binom(n, k)}$. ${q}`,
+          `On observe des ${ep.nom}, de façon indépendante ; un succès, c'est ${unSucces(ep)}. On sait que $\\binom{${n - 1}}{${k - 1}} = ${binom(n - 1, k - 1)}$ et que $\\binom{${n}}{${k}} = ${binom(n, k)}$. ${q}`,
         format: "short",
         expected: [String(cherche)],
         comparator: "number_equal",
@@ -2855,7 +2892,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       const ep = pick(EPREUVES);
       const q = pick([
         `Sur l'arbre, dénombre les chemins comportant exactement $${k}$ fois S. Vérifie que ton comptage donne bien $\\binom{${n}}{${k}}$.`,
-        `Combien de chemins de l'arbre donnent exactement $${k}$ ${ep.nom} ${ep.qualite} ? Compte-les sur la figure.`,
+        `Combien de chemins de l'arbre donnent exactement ${nbS(ep, k)} ? Compte-les sur la figure.`,
         `Compte sur l'arbre les chemins de l'évènement $\\{X = ${k}\\}$, où $X$ compte les S.`,
       ]);
       return {
@@ -2868,7 +2905,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
           "Le coefficient binomial se DÉNOMBRE sur l'arbre avant de se lire dans un triangle : c'est sa définition même dans le programme.",
           "On parcourt les chemins un par un et l'on retient ceux qui comportent exactement $k$ lettres S.",
           `Sur $${n}$ épreuves, il y a $2^{${n}} = ${Math.pow(2, n)}$ chemins au total, dont $${binom(n, k)}$ avec exactement $${k}$ succès.`,
-          `Il y a $${binom(n, k)}$ chemin(s), ce qui vaut bien $\\binom{${n}}{${k}}$.`
+          `Il y a $${binom(n, k)}$ ${accorde(binom(n, k), "chemin", "chemins")}, ce qui vaut bien $\\binom{${n}}{${k}}$.`
         ),
       };
     },
@@ -2901,7 +2938,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       const ep = pick(EPREUVES);
       const q = pick([
         `Combien de chemins comportent AU ${auMoins ? "MOINS" : "PLUS"} $${seuil}$ succès ?`,
-        `Combien de chemins de l'arbre donnent au ${auMoins ? "moins" : "plus"} $${seuil}$ ${ep.nom} ${ep.qualite} ?`,
+        `Combien de chemins de l'arbre donnent au ${auMoins ? "moins" : "plus"} ${nbS(ep, seuil)} ?`,
         `Dénombre les chemins de l'évènement $\\{X ${auMoins ? "\\geqslant" : "\\leqslant"} ${seuil}\\}$, où $X$ compte les S.`,
       ]);
       return {
@@ -2951,7 +2988,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       const mots =
         k === 0
           ? `qu'il n'y ait ${ep.genre === "f" ? "aucune" : "aucun"} ${ep.singulier} ${ep.qualiteSing}`
-          : `d'obtenir $${n}$ ${ep.nom} ${ep.qualite} sur $${n}$`;
+          : `d'obtenir ${nbS(ep, n)} sur $${n}$`;
       const q = pick([
         `Calcule $P(X = ${k})$, arrondi au millième.`,
         `Quelle est la probabilité ${mots} ? (arrondi au millième)`,
@@ -2999,8 +3036,8 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       const ep = pick(EPREUVES);
       const q = pick([
         `Calcule $P(X = ${n - 1})$, arrondi au millième.`,
-        `Quelle est la probabilité d'obtenir exactement $${n - 1}$ ${ep.nom} ${ep.qualite} sur $${n}$ ? (arrondi au millième)`,
-        `Tous sauf ${ep.genre === "f" ? "une" : "un"} : calcule la probabilité que $X$ vaille $${n - 1}$, arrondie au millième.`,
+        `Quelle est la probabilité d'obtenir exactement ${nbS(ep, n - 1)} sur $${n}$ ? (arrondi au millième)`,
+        `Calcule la probabilité que $X$ vaille $${n - 1}$, c'est-à-dire que tous sauf ${ep.genre === "f" ? "une" : "un"} soient des succès, arrondie au millième.`,
       ]);
       return {
         text: `${decorBin(ep, n, p)} ${q}`,
@@ -3041,7 +3078,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       const ep = pick(EPREUVES);
       const q = pick([
         `Calcule $P(X = ${k})$, arrondi au millième.`,
-        `Quelle est la probabilité d'obtenir exactement $${k}$ ${ep.nom} ${ep.qualite} ? (arrondi au millième)`,
+        `Quelle est la probabilité d'obtenir exactement ${nbS(ep, k)} ? (arrondi au millième)`,
         `À l'aide du triangle de Pascal, calcule la probabilité que $X$ vaille $${k}$, arrondie au millième.`,
       ]);
       return {
@@ -3090,7 +3127,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       const ep = pick(EPREUVES);
       const question = pick([
         `Quelle expression donne $P(X = ${k})$ ?`,
-        `Quelle expression permet de calculer la probabilité d'obtenir exactement $${k}$ ${ep.nom} ${ep.qualite} ?`,
+        `Quelle expression permet de calculer la probabilité d'obtenir exactement ${nbS(ep, k)} ?`,
         `Quel calcul faut-il taper à la calculatrice pour obtenir $P(X = ${k})$ ?`,
       ]);
       return {
@@ -3107,7 +3144,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
         explanation: exp(
           "Pour une loi binomiale : $P(X = k) = \\binom{n}{k} \\times p^{k} \\times (1-p)^{n-k}$. Le coefficient compte les chemins, et le produit des puissances donne la probabilité de CHACUN d'eux.",
           "On vérifie trois choses : le coefficient est présent, l'exposant de $p$ est le nombre de succès, et celui de $1-p$ le nombre d'échecs.",
-          `Ici $${k}$ succès et $${n - k}$ échecs : $${fr(p)}$ porte l'exposant $${k}$, et $${q}$ l'exposant $${n - k}$. ` +
+          `Ici $${k}$ succès et ${nbEchecs(n - k)} : $${fr(p)}$ porte l'exposant $${k}$, et $${q}$ l'exposant $${n - k}$. ` +
             `Sans le coefficient $\\binom{${n}}{${k}} = ${binom(n, k)}$, on ne compterait qu'UN chemin sur les $${binom(n, k)}$ possibles.`,
           `L'expression correcte est ${bonne}.`
         ),
@@ -3191,7 +3228,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       const q = pick([
         `Calcule $P(X \\geqslant 2)$, arrondi au millième.`,
         `Quelle est la probabilité d'obtenir au moins deux ${ep.nom} ${ep.qualite} ? (arrondi au millième)`,
-        `Le responsable s'inquiète s'il y a au moins deux ${ep.nom} ${ep.qualite}. Avec quelle probabilité cela arrive-t-il ? (arrondi au millième)`,
+        `Avec quelle probabilité y aura-t-il au moins deux ${ep.nom} ${ep.qualite} ? (arrondi au millième)`,
       ]);
       return {
         text: `${decorBin(ep, n, p)} ${q}`,
@@ -3274,7 +3311,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       ]);
       return {
         text:
-          `${maj(ep.obs)} des séries de $${n}$ ${ep.nom} ; sur un grand nombre de séries, on relève en moyenne $${fr(esperance)}$ ${ep.nom} ${ep.qualite} par série. ` +
+          `${maj(ep.obs)} des séries de $${n}$ ${ep.nom} ; sur un grand nombre de séries, on relève en moyenne $${fr(esperance)}$ ${accorde(esperance, `${ep.singulier} ${ep.qualiteSing}`, `${ep.nom} ${ep.qualite}`)} par série. ` +
           `Le nombre ${de(ep.nom)} ${ep.qualite} par série suit une loi binomiale $\\mathcal{B}(${n}\\,;\\,p)$. ${q}`,
         format: "short",
         expected: [fr(p)],

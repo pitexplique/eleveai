@@ -87,7 +87,47 @@ type Contexte = {
   /** Étiquettes courtes pour l'arbre. */
   courtL: [string, string];
   courtC: [string, string];
+  /**
+   * ⭐ 15/10/2026 — les mêmes catégories, dites en FRANÇAIS : un attribut qui
+   * suit « est » ou « soit » (« fabriquée sur la chaîne 1 », « non conforme »).
+   * Les étiquettes du tableau collées dans la phrase donnaient « relève de
+   * « Bien bouchée » », « le courriel vient de Promo », « il est Non converti ».
+   * Accordé au singulier de l'individu ; chaque « * » marque un mot qui prend
+   * la marque du pluriel (voir `sg` et `pl`).
+   */
+  L: [string, string];
+  C: [string, string];
 };
+
+/** Un attribut au singulier : on retire les marques d'accord. */
+function sg(s: string): string {
+  return s.replace(/\*/g, "");
+}
+
+/** Le même attribut au pluriel : chaque « * » devient « s », sauf après s ou x. */
+function pl(s: string): string {
+  return s.replace(/([^\s*]*)\*/g, (_m, mot: string) => (/[sx]$/.test(mot) ? mot : `${mot}s`));
+}
+
+/** « la pièce », « l'appel ». */
+function lInd(ctx: Contexte): string {
+  return `${leLa(ctx)}${singulier(ctx)}`;
+}
+
+/** « une pièce », « un appel ». */
+function unInd(ctx: Contexte): string {
+  return `${unUne(ctx)} ${singulier(ctx)}`;
+}
+
+/** « de pièces », « d'appels ». */
+function deInd(ctx: Contexte): string {
+  return /^[aeiouyéèêh]/i.test(ctx.individu) ? `d'${ctx.individu}` : `de ${ctx.individu}`;
+}
+
+/** Une étiquette de l'arbre dans une formule : sans `\text`, « Poids OK » perdait son espace. */
+function tx(s: string): string {
+  return `\\text{${s}}`;
+}
 
 /** « un » / « une » selon le contexte. */
 function unUne(ctx: Contexte): string {
@@ -130,6 +170,8 @@ const CONTEXTES: readonly Contexte[] = [
     genre: "f",
     courtL: ["C1", "C2"],
     courtC: ["Conf.", "Non conf."],
+    L: ["fabriquée* sur la chaîne 1", "fabriquée* sur la chaîne 2"],
+    C: ["conforme*", "non conforme*"],
   },
   {
     sujet: "Deux fournisseurs de matière première",
@@ -139,6 +181,8 @@ const CONTEXTES: readonly Contexte[] = [
     genre: "m",
     courtL: ["A", "B"],
     courtC: ["Accepté", "Refusé"],
+    L: ["livré* par le fournisseur A", "livré* par le fournisseur B"],
+    C: ["accepté*", "refusé*"],
   },
   {
     sujet: "Transport frigorifique",
@@ -148,6 +192,8 @@ const CONTEXTES: readonly Contexte[] = [
     genre: "m",
     courtL: ["Camion", "Bateau"],
     courtC: ["Froid OK", "Froid rompu"],
+    L: ["transporté* par camion", "transporté* par bateau"],
+    C: ["resté* au froid", "sorti* de la chaîne du froid"],
   },
   {
     sujet: "Deux ateliers de conditionnement",
@@ -157,6 +203,8 @@ const CONTEXTES: readonly Contexte[] = [
     genre: "m",
     courtL: ["Nord", "Sud"],
     courtC: ["Poids OK", "Hors tol."],
+    L: ["emballé* à l'atelier Nord", "emballé* à l'atelier Sud"],
+    C: ["au bon poids", "hors tolérance"],
   },
   {
     sujet: "Canaux de commande",
@@ -166,50 +214,53 @@ const CONTEXTES: readonly Contexte[] = [
     genre: "f",
     courtL: ["En ligne", "Magasin"],
     courtC: ["À l'heure", "En retard"],
+    L: ["passée* en ligne", "passée* en magasin"],
+    C: ["livrée* à l'heure", "livrée* en retard"],
   },
   // ⭐ 15/10/2026 — ROBUSTESSE. Cinq décors seulement : l'élève revoyait la
   // même phrase toutes les deux ou trois questions (2 à 20 squelettes par
   // micro). Tous les contextes ci-dessous suivent le MÊME moule que les cinq
-  // premiers — une PROVENANCE en ligne (« vient de … ») et un ÉTAT en colonne
-  // (« est … ») — pour que chaque gabarit reste grammatical sans retouche.
+  // premiers — une PROVENANCE en ligne et un ÉTAT en colonne, chacun dit par
+  // un attribut `L` / `C` (« est fabriquée sur la chaîne 1 », « est conforme »)
+  // — pour que chaque gabarit reste grammatical sans retouche.
   // Gestion, commerce, RH, transports d'abord ; touche réunionnaise quand elle
   // vient d'elle-même.
-  { sujet: "Satisfaction dans deux magasins", lignes: ["Magasin de Saint-Denis", "Magasin de Saint-Pierre"], colonnes: ["Satisfait", "Insatisfait"], individu: "clients", genre: "m", courtL: ["St-Denis", "St-Pierre"], courtC: ["Satisfait", "Insatisfait"] },
-  { sujet: "Formation des salariés", lignes: ["Siège social", "Usine"], colonnes: ["Formé", "Non formé"], individu: "salariés", genre: "m", courtL: ["Siège", "Usine"], courtC: ["Formé", "Non formé"] },
-  { sujet: "Service client par téléphone", lignes: ["Plateforme Nord", "Plateforme Sud"], colonnes: ["Résolu", "Non résolu"], individu: "appels", genre: "m", courtL: ["Pf Nord", "Pf Sud"], courtC: ["Résolu", "Non résolu"] },
-  { sujet: "Règlement des factures", lignes: ["Agence de Saint-Paul", "Agence du Port"], colonnes: ["Payée à l'échéance", "Payée en retard"], individu: "factures", genre: "f", courtL: ["St-Paul", "Le Port"], courtC: ["À l'échéance", "Retard"] },
-  { sujet: "Livraisons de deux transporteurs", lignes: ["Transporteur Rapido", "Transporteur Écofret"], colonnes: ["Intacte", "Endommagée"], individu: "livraisons", genre: "f", courtL: ["Rapido", "Écofret"], courtC: ["Intacte", "Abîmée"] },
-  { sujet: "Ponctualité du car jaune", lignes: ["Ligne Est", "Ligne Sud"], colonnes: ["À l'heure", "En retard"], individu: "trajets", genre: "m", courtL: ["Est", "Sud"], courtC: ["Ponctuel", "Retard"] },
-  { sujet: "Vols au départ de Roland-Garros", lignes: ["Compagnie Alizé", "Compagnie Cyclone"], colonnes: ["Ponctuel", "Retardé"], individu: "vols", genre: "m", courtL: ["Alizé", "Cyclone"], courtC: ["Ponctuel", "Retardé"] },
-  { sujet: "Recrutement d'une entreprise", lignes: ["Site d'emploi", "Candidature spontanée"], colonnes: ["Retenue", "Non retenue"], individu: "candidatures", genre: "f", courtL: ["Site", "Spontanée"], courtC: ["Retenue", "Écartée"] },
-  { sujet: "Visiteurs d'un site marchand", lignes: ["Réseaux sociaux", "Moteur de recherche"], colonnes: ["Acheteur", "Non acheteur"], individu: "visiteurs", genre: "m", courtL: ["Réseaux", "Recherche"], courtC: ["Acheteur", "Non acheteur"] },
-  { sujet: "Abonnements de deux salles de sport", lignes: ["Salle du centre-ville", "Salle de la zone commerciale"], colonnes: ["Fidèle", "Résilié"], individu: "abonnés", genre: "m", courtL: ["Centre", "Zone"], courtC: ["Fidèle", "Résilié"] },
-  { sujet: "Demandes de crédit", lignes: ["Banque en ligne", "Agence bancaire"], colonnes: ["Accordé", "Refusé"], individu: "dossiers", genre: "m", courtL: ["En ligne", "Agence"], courtC: ["Accordé", "Refusé"] },
-  { sujet: "Retours d'articles", lignes: ["Vente en ligne", "Vente en boutique"], colonnes: ["Gardé", "Retourné"], individu: "articles", genre: "m", courtL: ["Web", "Boutique"], courtC: ["Gardé", "Retourné"] },
-  { sujet: "Enquête auprès des touristes", lignes: ["Métropole", "Étranger"], colonnes: ["Satisfait", "Déçu"], individu: "touristes", genre: "m", courtL: ["Métropole", "Étranger"], courtC: ["Content", "Déçu"] },
-  { sujet: "Cagettes de letchis", lignes: ["Producteur de Saint-André", "Producteur de Sainte-Suzanne"], colonnes: ["Calibre extra", "Calibre standard"], individu: "cagettes", genre: "f", courtL: ["St-André", "Ste-Suzanne"], courtC: ["Extra", "Standard"] },
-  { sujet: "Embouteillage d'eau", lignes: ["Usine du Port", "Usine de Bras-Panon"], colonnes: ["Bien bouchée", "Mal bouchée"], individu: "bouteilles", genre: "f", courtL: ["Le Port", "Bras-Panon"], courtC: ["Bouchée", "Fuite"] },
-  { sujet: "Passages en caisse", lignes: ["Caisse rapide", "Caisse classique"], colonnes: ["Payé par carte", "Payé en espèces"], individu: "tickets", genre: "m", courtL: ["Rapide", "Classique"], courtC: ["Carte", "Espèces"] },
-  { sujet: "Réservations d'un hôtel", lignes: ["Site de l'hôtel", "Agence de voyages"], colonnes: ["Honorée", "Annulée"], individu: "réservations", genre: "f", courtL: ["Site", "Agence"], courtC: ["Honorée", "Annulée"] },
-  { sujet: "Devenir des stagiaires", lignes: ["Lycée de Saint-Denis", "Lycée du Tampon"], colonnes: ["Embauché", "Non embauché"], individu: "stagiaires", genre: "m", courtL: ["St-Denis", "Le Tampon"], courtC: ["Embauché", "Non embauché"] },
-  { sujet: "Fiabilité de smartphones", lignes: ["Usine Alpha", "Usine Bêta"], colonnes: ["Sans panne", "En panne"], individu: "smartphones", genre: "m", courtL: ["Alpha", "Bêta"], courtC: ["Sans panne", "Panne"] },
-  { sujet: "Clients d'une banque", lignes: ["Agence de Saint-Pierre", "Banque en ligne"], colonnes: ["Épargnant", "Non épargnant"], individu: "clients", genre: "m", courtL: ["Agence", "En ligne"], courtC: ["Épargnant", "Non épargnant"] },
-  { sujet: "Location de voitures", lignes: ["Agence de l'aéroport", "Agence du centre"], colonnes: ["Rendue à l'heure", "Rendue en retard"], individu: "voitures", genre: "f", courtL: ["Aéroport", "Centre"], courtC: ["À l'heure", "En retard"] },
-  { sujet: "Deux fournisseurs de pneus", lignes: ["Fournisseur Atlas", "Fournisseur Boréal"], colonnes: ["Conforme", "Défectueux"], individu: "pneus", genre: "m", courtL: ["Atlas", "Boréal"], courtC: ["Conforme", "Défectueux"] },
-  { sujet: "Livraison de plats cuisinés", lignes: ["Cuisine centrale", "Cuisine de quartier"], colonnes: ["Livré chaud", "Livré tiède"], individu: "plats", genre: "m", courtL: ["Centrale", "Quartier"], courtC: ["Chaud", "Tiède"] },
-  { sujet: "Cotisations d'une association", lignes: ["Antenne de Saint-Leu", "Antenne de Saint-Benoît"], colonnes: ["À jour", "En retard"], individu: "adhérents", genre: "m", courtL: ["St-Leu", "St-Benoît"], courtC: ["À jour", "Retard"] },
-  { sujet: "Ordinateurs reconditionnés", lignes: ["Atelier Est", "Atelier Ouest"], colonnes: ["Sans défaut", "Avec défaut"], individu: "ordinateurs", genre: "m", courtL: ["Est", "Ouest"], courtC: ["Sans défaut", "Défaut"] },
-  { sujet: "Campagnes de courriels", lignes: ["Campagne promo", "Lettre d'info"], colonnes: ["Ouvert", "Ignoré"], individu: "courriels", genre: "m", courtL: ["Promo", "Lettre"], courtC: ["Ouvert", "Ignoré"] },
-  { sujet: "Récolte de melons", lignes: ["Exploitation de Saint-Paul", "Exploitation de Saint-Louis"], colonnes: ["Premier choix", "Second choix"], individu: "melons", genre: "m", courtL: ["St-Paul", "St-Louis"], courtC: ["Premier", "Second"] },
-  { sujet: "Absences dans une entreprise", lignes: ["Équipe de jour", "Équipe de nuit"], colonnes: ["Jamais absent", "Absent"], individu: "employés", genre: "m", courtL: ["Jour", "Nuit"], courtC: ["Présent", "Absent"] },
-  { sujet: "Billets de concert", lignes: ["Billetterie en ligne", "Guichet"], colonnes: ["Utilisé", "Non utilisé"], individu: "billets", genre: "m", courtL: ["En ligne", "Guichet"], courtC: ["Utilisé", "Inutilisé"] },
-  { sujet: "Contrôle de flacons", lignes: ["Laboratoire Alizé", "Laboratoire Corail"], colonnes: ["Dosage correct", "Dosage incorrect"], individu: "flacons", genre: "m", courtL: ["Alizé", "Corail"], courtC: ["Correct", "Incorrect"] },
-  { sujet: "Réussite en BTS", lignes: ["Bac STMG", "Autre bac"], colonnes: ["Diplômé", "Non diplômé"], individu: "étudiants", genre: "m", courtL: ["STMG", "Autre"], courtC: ["Diplômé", "Non diplômé"] },
-  { sujet: "Contrôle technique", lignes: ["Centre de Saint-Denis", "Centre de Saint-Pierre"], colonnes: ["Accepté", "Contre-visite"], individu: "véhicules", genre: "m", courtL: ["St-Denis", "St-Pierre"], courtC: ["Accepté", "Contre-visite"] },
-  { sujet: "Sacs de sucre", lignes: ["Sucrerie de Bois-Rouge", "Sucrerie du Gol"], colonnes: ["Poids exact", "Poids insuffisant"], individu: "sacs", genre: "m", courtL: ["Bois-Rouge", "Le Gol"], courtC: ["Exact", "Insuffisant"] },
-  { sujet: "Prospection commerciale", lignes: ["Démarchage téléphonique", "Salon professionnel"], colonnes: ["Converti", "Non converti"], individu: "prospects", genre: "m", courtL: ["Téléphone", "Salon"], courtC: ["Converti", "Perdu"] },
-  { sujet: "Locations de vélos", lignes: ["Station de la plage", "Station de la gare"], colonnes: ["Rendu en bon état", "Rendu abîmé"], individu: "vélos", genre: "m", courtL: ["Plage", "Gare"], courtC: ["Bon état", "Abîmé"] },
-  { sujet: "Dossiers de sinistre", lignes: ["Déclaration en ligne", "Déclaration en agence"], colonnes: ["Remboursé", "Refusé"], individu: "sinistres", genre: "m", courtL: ["En ligne", "Agence"], courtC: ["Remboursé", "Refusé"] },
+  { sujet: "Satisfaction dans deux magasins", lignes: ["Magasin de Saint-Denis", "Magasin de Saint-Pierre"], colonnes: ["Satisfait", "Insatisfait"], individu: "clients", genre: "m", courtL: ["St-Denis", "St-Pierre"], courtC: ["Satisfait", "Insatisfait"], L: ["interrogé* au magasin de Saint-Denis", "interrogé* au magasin de Saint-Pierre"], C: ["satisfait*", "insatisfait*"] },
+  { sujet: "Formation des salariés", lignes: ["Siège social", "Usine"], colonnes: ["Formé", "Non formé"], individu: "salariés", genre: "m", courtL: ["Siège", "Usine"], courtC: ["Formé", "Non formé"], L: ["employé* au siège social", "employé* à l'usine"], C: ["formé*", "non formé*"] },
+  { sujet: "Service client par téléphone", lignes: ["Plateforme Nord", "Plateforme Sud"], colonnes: ["Résolu", "Non résolu"], individu: "appels", genre: "m", courtL: ["Pf Nord", "Pf Sud"], courtC: ["Résolu", "Non résolu"], L: ["traité* par la plateforme Nord", "traité* par la plateforme Sud"], C: ["résolu*", "non résolu*"] },
+  { sujet: "Règlement des factures", lignes: ["Agence de Saint-Paul", "Agence du Port"], colonnes: ["Payée à l'échéance", "Payée en retard"], individu: "factures", genre: "f", courtL: ["St-Paul", "Le Port"], courtC: ["À l'échéance", "Retard"], L: ["émise* par l'agence de Saint-Paul", "émise* par l'agence du Port"], C: ["payée* à l'échéance", "payée* en retard"] },
+  { sujet: "Livraisons de deux transporteurs", lignes: ["Transporteur Rapido", "Transporteur Écofret"], colonnes: ["Intacte", "Endommagée"], individu: "livraisons", genre: "f", courtL: ["Rapido", "Écofret"], courtC: ["Intacte", "Abîmée"], L: ["assurée* par le transporteur Rapido", "assurée* par le transporteur Écofret"], C: ["intacte*", "endommagée*"] },
+  { sujet: "Ponctualité du car jaune", lignes: ["Ligne Est", "Ligne Sud"], colonnes: ["À l'heure", "En retard"], individu: "trajets", genre: "m", courtL: ["Est", "Sud"], courtC: ["Ponctuel", "Retard"], L: ["effectué* sur la ligne Est", "effectué* sur la ligne Sud"], C: ["à l'heure", "en retard"] },
+  { sujet: "Vols au départ de Roland-Garros", lignes: ["Compagnie Alizé", "Compagnie Cyclone"], colonnes: ["Ponctuel", "Retardé"], individu: "vols", genre: "m", courtL: ["Alizé", "Cyclone"], courtC: ["Ponctuel", "Retardé"], L: ["assuré* par la compagnie Alizé", "assuré* par la compagnie Cyclone"], C: ["parti* à l'heure", "retardé*"] },
+  { sujet: "Recrutement d'une entreprise", lignes: ["Site d'emploi", "Candidature spontanée"], colonnes: ["Retenue", "Non retenue"], individu: "candidatures", genre: "f", courtL: ["Site", "Spontanée"], courtC: ["Retenue", "Écartée"], L: ["reçue* par un site d'emploi", "envoyée* spontanément"], C: ["retenue*", "non retenue*"] },
+  { sujet: "Visiteurs d'un site marchand", lignes: ["Réseaux sociaux", "Moteur de recherche"], colonnes: ["Acheteur", "Non acheteur"], individu: "visiteurs", genre: "m", courtL: ["Réseaux", "Recherche"], courtC: ["Acheteur", "Non acheteur"], L: ["arrivé* par les réseaux sociaux", "arrivé* par un moteur de recherche"], C: ["devenu* acheteur*", "reparti* sans acheter"] },
+  { sujet: "Abonnements de deux salles de sport", lignes: ["Salle du centre-ville", "Salle de la zone commerciale"], colonnes: ["Fidèle", "Résilié"], individu: "abonnés", genre: "m", courtL: ["Centre", "Zone"], courtC: ["Fidèle", "Résilié"], L: ["inscrit* à la salle du centre-ville", "inscrit* à la salle de la zone commerciale"], C: ["resté* fidèle*", "parti*"] },
+  { sujet: "Demandes de crédit", lignes: ["Banque en ligne", "Agence bancaire"], colonnes: ["Accordé", "Refusé"], individu: "dossiers", genre: "m", courtL: ["En ligne", "Agence"], courtC: ["Accordé", "Refusé"], L: ["déposé* à la banque en ligne", "déposé* en agence bancaire"], C: ["accepté*", "refusé*"] },
+  { sujet: "Retours d'articles", lignes: ["Vente en ligne", "Vente en boutique"], colonnes: ["Gardé", "Retourné"], individu: "articles", genre: "m", courtL: ["Web", "Boutique"], courtC: ["Gardé", "Retourné"], L: ["vendu* en ligne", "vendu* en boutique"], C: ["gardé* par le client", "retourné*"] },
+  { sujet: "Enquête auprès des touristes", lignes: ["Métropole", "Étranger"], colonnes: ["Satisfait", "Déçu"], individu: "touristes", genre: "m", courtL: ["Métropole", "Étranger"], courtC: ["Content", "Déçu"], L: ["venu* de métropole", "venu* de l'étranger"], C: ["satisfait*", "déçu*"] },
+  { sujet: "Cagettes de letchis", lignes: ["Producteur de Saint-André", "Producteur de Sainte-Suzanne"], colonnes: ["Calibre extra", "Calibre standard"], individu: "cagettes", genre: "f", courtL: ["St-André", "Ste-Suzanne"], courtC: ["Extra", "Standard"], L: ["livrée* par le producteur de Saint-André", "livrée* par le producteur de Sainte-Suzanne"], C: ["de calibre extra", "de calibre standard"] },
+  { sujet: "Embouteillage d'eau", lignes: ["Usine du Port", "Usine de Bras-Panon"], colonnes: ["Bien bouchée", "Mal bouchée"], individu: "bouteilles", genre: "f", courtL: ["Le Port", "Bras-Panon"], courtC: ["Bouchée", "Fuite"], L: ["remplie* à l'usine du Port", "remplie* à l'usine de Bras-Panon"], C: ["bien bouchée*", "mal bouchée*"] },
+  { sujet: "Passages en caisse", lignes: ["Caisse rapide", "Caisse classique"], colonnes: ["Payé par carte", "Payé en espèces"], individu: "tickets", genre: "m", courtL: ["Rapide", "Classique"], courtC: ["Carte", "Espèces"], L: ["édité* en caisse rapide", "édité* en caisse classique"], C: ["payé* par carte", "payé* en espèces"] },
+  { sujet: "Réservations d'un hôtel", lignes: ["Site de l'hôtel", "Agence de voyages"], colonnes: ["Honorée", "Annulée"], individu: "réservations", genre: "f", courtL: ["Site", "Agence"], courtC: ["Honorée", "Annulée"], L: ["faite* sur le site de l'hôtel", "faite* par une agence de voyages"], C: ["honorée*", "annulée*"] },
+  { sujet: "Devenir des stagiaires", lignes: ["Lycée de Saint-Denis", "Lycée du Tampon"], colonnes: ["Embauché", "Non embauché"], individu: "stagiaires", genre: "m", courtL: ["St-Denis", "Le Tampon"], courtC: ["Embauché", "Non embauché"], L: ["issu* du lycée de Saint-Denis", "issu* du lycée du Tampon"], C: ["embauché*", "non embauché*"] },
+  { sujet: "Fiabilité de smartphones", lignes: ["Usine Alpha", "Usine Bêta"], colonnes: ["Sans panne", "En panne"], individu: "smartphones", genre: "m", courtL: ["Alpha", "Bêta"], courtC: ["Sans panne", "Panne"], L: ["fabriqué* à l'usine Alpha", "fabriqué* à l'usine Bêta"], C: ["sans panne", "en panne"] },
+  { sujet: "Clients d'une banque", lignes: ["Agence de Saint-Pierre", "Banque en ligne"], colonnes: ["Épargnant", "Non épargnant"], individu: "clients", genre: "m", courtL: ["Agence", "En ligne"], courtC: ["Épargnant", "Non épargnant"], L: ["rattaché* à l'agence de Saint-Pierre", "rattaché* à la banque en ligne"], C: ["épargnant*", "non épargnant*"] },
+  { sujet: "Location de voitures", lignes: ["Agence de l'aéroport", "Agence du centre"], colonnes: ["Rendue à l'heure", "Rendue en retard"], individu: "voitures", genre: "f", courtL: ["Aéroport", "Centre"], courtC: ["À l'heure", "En retard"], L: ["louée* à l'agence de l'aéroport", "louée* à l'agence du centre"], C: ["rendue* à l'heure", "rendue* en retard"] },
+  { sujet: "Deux fournisseurs de pneus", lignes: ["Fournisseur Atlas", "Fournisseur Boréal"], colonnes: ["Conforme", "Défectueux"], individu: "pneus", genre: "m", courtL: ["Atlas", "Boréal"], courtC: ["Conforme", "Défectueux"], L: ["livré* par le fournisseur Atlas", "livré* par le fournisseur Boréal"], C: ["conforme*", "défectueux"] },
+  { sujet: "Livraison de plats cuisinés", lignes: ["Cuisine centrale", "Cuisine de quartier"], colonnes: ["Livré chaud", "Livré tiède"], individu: "plats", genre: "m", courtL: ["Centrale", "Quartier"], courtC: ["Chaud", "Tiède"], L: ["préparé* par la cuisine centrale", "préparé* par la cuisine de quartier"], C: ["livré* chaud*", "livré* tiède*"] },
+  { sujet: "Cotisations d'une association", lignes: ["Antenne de Saint-Leu", "Antenne de Saint-Benoît"], colonnes: ["À jour", "En retard"], individu: "adhérents", genre: "m", courtL: ["St-Leu", "St-Benoît"], courtC: ["À jour", "Retard"], L: ["inscrit* à l'antenne de Saint-Leu", "inscrit* à l'antenne de Saint-Benoît"], C: ["à jour de cotisation", "en retard de cotisation"] },
+  { sujet: "Ordinateurs reconditionnés", lignes: ["Atelier Est", "Atelier Ouest"], colonnes: ["Sans défaut", "Avec défaut"], individu: "ordinateurs", genre: "m", courtL: ["Est", "Ouest"], courtC: ["Sans défaut", "Défaut"], L: ["reconditionné* par l'atelier Est", "reconditionné* par l'atelier Ouest"], C: ["sans défaut", "défectueux"] },
+  { sujet: "Campagnes de courriels", lignes: ["Campagne promo", "Lettre d'info"], colonnes: ["Ouvert", "Ignoré"], individu: "courriels", genre: "m", courtL: ["Promo", "Lettre"], courtC: ["Ouvert", "Ignoré"], L: ["envoyé* pour la campagne promo", "envoyé* avec la lettre d'info"], C: ["ouvert*", "ignoré*"] },
+  { sujet: "Récolte de melons", lignes: ["Exploitation de Saint-Paul", "Exploitation de Saint-Louis"], colonnes: ["Premier choix", "Second choix"], individu: "melons", genre: "m", courtL: ["St-Paul", "St-Louis"], courtC: ["Premier", "Second"], L: ["récolté* à Saint-Paul", "récolté* à Saint-Louis"], C: ["classé* en premier choix", "classé* en second choix"] },
+  { sujet: "Absences dans une entreprise", lignes: ["Équipe de jour", "Équipe de nuit"], colonnes: ["Jamais absent", "Absent"], individu: "employés", genre: "m", courtL: ["Jour", "Nuit"], courtC: ["Présent", "Absent"], L: ["affecté* à l'équipe de jour", "affecté* à l'équipe de nuit"], C: ["toujours présent*", "absent* au moins une fois"] },
+  { sujet: "Billets de concert", lignes: ["Billetterie en ligne", "Guichet"], colonnes: ["Utilisé", "Non utilisé"], individu: "billets", genre: "m", courtL: ["En ligne", "Guichet"], courtC: ["Utilisé", "Inutilisé"], L: ["acheté* en ligne", "acheté* au guichet"], C: ["utilisé*", "non utilisé*"] },
+  { sujet: "Contrôle de flacons", lignes: ["Laboratoire Alizé", "Laboratoire Corail"], colonnes: ["Dosage correct", "Dosage incorrect"], individu: "flacons", genre: "m", courtL: ["Alizé", "Corail"], courtC: ["Correct", "Incorrect"], L: ["contrôlé* par le laboratoire Alizé", "contrôlé* par le laboratoire Corail"], C: ["correctement dosé*", "mal dosé*"] },
+  { sujet: "Réussite en BTS", lignes: ["Bac STMG", "Autre bac"], colonnes: ["Diplômé", "Non diplômé"], individu: "étudiants", genre: "m", courtL: ["STMG", "Autre"], courtC: ["Diplômé", "Non diplômé"], L: ["titulaire* d'un bac STMG", "titulaire* d'un autre bac"], C: ["diplômé*", "non diplômé*"] },
+  { sujet: "Contrôle technique", lignes: ["Centre de Saint-Denis", "Centre de Saint-Pierre"], colonnes: ["Accepté", "Contre-visite"], individu: "véhicules", genre: "m", courtL: ["St-Denis", "St-Pierre"], courtC: ["Accepté", "Contre-visite"], L: ["contrôlé* au centre de Saint-Denis", "contrôlé* au centre de Saint-Pierre"], C: ["accepté*", "envoyé* en contre-visite"] },
+  { sujet: "Sacs de sucre", lignes: ["Sucrerie de Bois-Rouge", "Sucrerie du Gol"], colonnes: ["Poids exact", "Poids insuffisant"], individu: "sacs", genre: "m", courtL: ["Bois-Rouge", "Le Gol"], courtC: ["Exact", "Insuffisant"], L: ["produit* à la sucrerie de Bois-Rouge", "produit* à la sucrerie du Gol"], C: ["au poids exact", "d'un poids insuffisant"] },
+  { sujet: "Prospection commerciale", lignes: ["Démarchage téléphonique", "Salon professionnel"], colonnes: ["Converti", "Non converti"], individu: "prospects", genre: "m", courtL: ["Téléphone", "Salon"], courtC: ["Converti", "Perdu"], L: ["contacté* par téléphone", "rencontré* sur un salon"], C: ["devenu* client*", "perdu*"] },
+  { sujet: "Locations de vélos", lignes: ["Station de la plage", "Station de la gare"], colonnes: ["Rendu en bon état", "Rendu abîmé"], individu: "vélos", genre: "m", courtL: ["Plage", "Gare"], courtC: ["Bon état", "Abîmé"], L: ["loué* à la station de la plage", "loué* à la station de la gare"], C: ["rendu* en bon état", "rendu* abîmé*"] },
+  { sujet: "Dossiers de sinistre", lignes: ["Déclaration en ligne", "Déclaration en agence"], colonnes: ["Remboursé", "Refusé"], individu: "sinistres", genre: "m", courtL: ["En ligne", "Agence"], courtC: ["Remboursé", "Refusé"], L: ["déclaré* en ligne", "déclaré* en agence"], C: ["remboursé*", "refusé*"] },
 ];
 
 type Tableau = {
@@ -341,37 +392,48 @@ type Urne = {
   /** Étiquette courte de l'issue cherchée, et de son contraire (arbre). */
   oui: string;
   non: string;
+  /**
+   * L'issue cherchée dite en français, avec son article : « une facture
+   * comportant une erreur ». Sans elle, l'énoncé disait « la probabilité
+   * d'obtenir « Incomplet » » (15/10/2026).
+   */
+  un: string;
 };
 
+/** « sont abîmés » → « soient abîmés » : le verbe de `dont` au subjonctif. */
+function dontSubj(u: Urne): string {
+  return u.dont.replace(/^sont /, "soient ").replace(/^ne sont /, "ne soient ");
+}
+
 const URNES: readonly Urne[] = [
-  { contenant: "Une caisse", objets: "factures", dont: "comportent une erreur", oui: "Erreur", non: "Correcte" },
-  { contenant: "Un lot", objets: "pièces", dont: "sont non conformes", oui: "Non conforme", non: "Conforme" },
-  { contenant: "Une boîte", objets: "billets de tombola", dont: "sont gagnants", oui: "Gagnant", non: "Perdant" },
-  { contenant: "Un carton", objets: "ampoules", dont: "sont défectueuses", oui: "Défectueuse", non: "Bonne" },
-  { contenant: "Un classeur", objets: "dossiers clients", dont: "sont incomplets", oui: "Incomplet", non: "Complet" },
-  { contenant: "Une palette", objets: "colis", dont: "sont abîmés", oui: "Abîmé", non: "Intact" },
-  { contenant: "Un panier", objets: "letchis", dont: "sont abîmés", oui: "Abîmé", non: "Sain" },
-  { contenant: "Une cagette", objets: "mangues", dont: "sont trop mûres", oui: "Trop mûre", non: "Bonne" },
-  { contenant: "Un sac", objets: "billes", dont: "sont rouges", oui: "Rouge", non: "Autre" },
-  { contenant: "Un lot", objets: "clés USB", dont: "sont défectueuses", oui: "Défectueuse", non: "Bonne" },
-  { contenant: "Un stock", objets: "smartphones", dont: "sont en panne", oui: "Panne", non: "OK" },
-  { contenant: "Un bac", objets: "bouteilles", dont: "sont mal bouchées", oui: "Fuite", non: "Bouchée" },
-  { contenant: "Une pile", objets: "chèques", dont: "ne sont pas signés", oui: "Non signé", non: "Signé" },
-  { contenant: "Un fichier", objets: "clients", dont: "sont en retard de paiement", oui: "Retard", non: "À jour" },
-  { contenant: "Une liste", objets: "salariés", dont: "sont en télétravail", oui: "Télétravail", non: "Sur site" },
-  { contenant: "Un registre", objets: "adhérents", dont: "sont bénévoles", oui: "Bénévole", non: "Non bénévole" },
-  { contenant: "Un paquet", objets: "tickets à gratter", dont: "sont gagnants", oui: "Gagnant", non: "Perdant" },
-  { contenant: "Un carton", objets: "gobelets", dont: "sont fendus", oui: "Fendu", non: "Intact" },
-  { contenant: "Un stock", objets: "tee-shirts", dont: "sont mal imprimés", oui: "Raté", non: "Réussi" },
-  { contenant: "Une caisse", objets: "ananas", dont: "sont trop mûrs", oui: "Trop mûr", non: "Bon" },
-  { contenant: "Une urne", objets: "jetons", dont: "sont bleus", oui: "Bleu", non: "Autre" },
-  { contenant: "Un lot", objets: "vis", dont: "sont tordues", oui: "Tordue", non: "Droite" },
-  { contenant: "Un paquet", objets: "enveloppes", dont: "sont mal affranchies", oui: "Mal affr.", non: "Bien affr." },
-  { contenant: "Un sachet", objets: "bonbons", dont: "sont à la menthe", oui: "Menthe", non: "Autre" },
-  { contenant: "Un carton", objets: "œufs", dont: "sont fêlés", oui: "Fêlé", non: "Intact" },
-  { contenant: "Une boîte", objets: "stylos", dont: "n'écrivent plus", oui: "Vide", non: "Écrit" },
-  { contenant: "Un lot", objets: "pneus", dont: "sont défectueux", oui: "Défectueux", non: "Conforme" },
-  { contenant: "Une corbeille", objets: "bulletins de vote", dont: "sont nuls", oui: "Nul", non: "Valable" },
+  { contenant: "Une caisse", objets: "factures", dont: "comportent une erreur", oui: "Erreur", non: "Correcte", un: "une facture comportant une erreur" },
+  { contenant: "Un lot", objets: "pièces", dont: "sont non conformes", oui: "Non conforme", non: "Conforme", un: "une pièce non conforme" },
+  { contenant: "Une boîte", objets: "billets de tombola", dont: "sont gagnants", oui: "Gagnant", non: "Perdant", un: "un billet gagnant" },
+  { contenant: "Un carton", objets: "ampoules", dont: "sont défectueuses", oui: "Défectueuse", non: "Bonne", un: "une ampoule défectueuse" },
+  { contenant: "Un classeur", objets: "dossiers clients", dont: "sont incomplets", oui: "Incomplet", non: "Complet", un: "un dossier incomplet" },
+  { contenant: "Une palette", objets: "colis", dont: "sont abîmés", oui: "Abîmé", non: "Intact", un: "un colis abîmé" },
+  { contenant: "Un panier", objets: "letchis", dont: "sont abîmés", oui: "Abîmé", non: "Sain", un: "un letchi abîmé" },
+  { contenant: "Une cagette", objets: "mangues", dont: "sont trop mûres", oui: "Trop mûre", non: "Bonne", un: "une mangue trop mûre" },
+  { contenant: "Un sac", objets: "billes", dont: "sont rouges", oui: "Rouge", non: "Autre", un: "une bille rouge" },
+  { contenant: "Un lot", objets: "clés USB", dont: "sont défectueuses", oui: "Défectueuse", non: "Bonne", un: "une clé USB défectueuse" },
+  { contenant: "Un stock", objets: "smartphones", dont: "sont en panne", oui: "Panne", non: "OK", un: "un smartphone en panne" },
+  { contenant: "Un bac", objets: "bouteilles", dont: "sont mal bouchées", oui: "Fuite", non: "Bouchée", un: "une bouteille mal bouchée" },
+  { contenant: "Une pile", objets: "chèques", dont: "ne sont pas signés", oui: "Non signé", non: "Signé", un: "un chèque non signé" },
+  { contenant: "Un fichier", objets: "clients", dont: "sont en retard de paiement", oui: "Retard", non: "À jour", un: "un client en retard de paiement" },
+  { contenant: "Une liste", objets: "salariés", dont: "sont en télétravail", oui: "Télétravail", non: "Sur site", un: "un salarié en télétravail" },
+  { contenant: "Un registre", objets: "adhérents", dont: "sont bénévoles", oui: "Bénévole", non: "Non bénévole", un: "un adhérent bénévole" },
+  { contenant: "Un paquet", objets: "tickets à gratter", dont: "sont gagnants", oui: "Gagnant", non: "Perdant", un: "un ticket gagnant" },
+  { contenant: "Un carton", objets: "gobelets", dont: "sont fendus", oui: "Fendu", non: "Intact", un: "un gobelet fendu" },
+  { contenant: "Un stock", objets: "tee-shirts", dont: "sont mal imprimés", oui: "Raté", non: "Réussi", un: "un tee-shirt mal imprimé" },
+  { contenant: "Une caisse", objets: "ananas", dont: "sont trop mûrs", oui: "Trop mûr", non: "Bon", un: "un ananas trop mûr" },
+  { contenant: "Une urne", objets: "jetons", dont: "sont bleus", oui: "Bleu", non: "Autre", un: "un jeton bleu" },
+  { contenant: "Un lot", objets: "vis", dont: "sont tordues", oui: "Tordue", non: "Droite", un: "une vis tordue" },
+  { contenant: "Un paquet", objets: "enveloppes", dont: "sont mal affranchies", oui: "Mal affr.", non: "Bien affr.", un: "une enveloppe mal affranchie" },
+  { contenant: "Un sachet", objets: "bonbons", dont: "sont à la menthe", oui: "Menthe", non: "Autre", un: "un bonbon à la menthe" },
+  { contenant: "Un carton", objets: "œufs", dont: "sont fêlés", oui: "Fêlé", non: "Intact", un: "un œuf fêlé" },
+  { contenant: "Une boîte", objets: "stylos", dont: "n'écrivent plus", oui: "Vide", non: "Écrit", un: "un stylo qui n'écrit plus" },
+  { contenant: "Un lot", objets: "pneus", dont: "sont défectueux", oui: "Défectueux", non: "Conforme", un: "un pneu défectueux" },
+  { contenant: "Une corbeille", objets: "bulletins de vote", dont: "sont nuls", oui: "Nul", non: "Valable", un: "un bulletin nul" },
 ];
 
 /** Un pseudo-contexte pour dessiner l'arbre d'un tirage (mêmes étiquettes aux deux niveaux). */
@@ -384,6 +446,8 @@ function ctxUrne(u: Urne): Contexte {
     genre: "m",
     courtL: [u.oui, u.non],
     courtC: [u.oui, u.non],
+    L: [u.oui, u.non],
+    C: [u.oui, u.non],
   };
 }
 
@@ -438,7 +502,7 @@ function introRep(r: Repetition, n: number): string {
 
 function ctxRep(r: Repetition): Contexte {
   const L: [string, string] = [r.evt, r.non];
-  return { sujet: r.evt, lignes: L, colonnes: L, individu: "épreuves", genre: "f", courtL: L, courtC: L };
+  return { sujet: r.evt, lignes: L, colonnes: L, individu: "épreuves", genre: "f", courtL: L, courtC: L, L, C: L };
 }
 
 /* ───────── deux évènements qu'on ADMET indépendants ───────── */
@@ -489,23 +553,25 @@ type TestDiag = {
   fn: string;
   vp: string;
   signales: string;
+  /** « quel pourcentage … ? » : la fin de la question sur la part réellement en défaut. */
+  pct: string;
 };
 
 const TESTS: readonly TestDiag[] = [
-  { sujet: "Contrôle automatique des lots", objets: "lots", mal: "Réellement défectueux", bien: "Réellement sain", sig: "Signalé", nonSig: "Non signalé", fp: "signalés alors qu'ils sont sains", fn: "non signalés alors qu'ils sont défectueux", vp: "défectueux et bien signalés", signales: "signalés" },
-  { sujet: "Filtre anti-spam", objets: "courriels", mal: "Vrai spam", bien: "Courriel normal", sig: "Classé spam", nonSig: "Boîte de réception", fp: "classés en spam alors qu'ils sont normaux", fn: "laissés en boîte de réception alors que ce sont des spams", vp: "spams bien classés en spam", signales: "classés en spam" },
-  { sujet: "Détection de fraude bancaire", objets: "paiements", mal: "Frauduleux", bien: "Honnête", sig: "Bloqué", nonSig: "Accepté", fp: "bloqués alors qu'ils sont honnêtes", fn: "acceptés alors qu'ils sont frauduleux", vp: "frauduleux et bien bloqués", signales: "bloqués" },
-  { sujet: "Détecteur de faux billets", objets: "billets", mal: "Faux billet", bien: "Vrai billet", sig: "Refusé", nonSig: "Accepté", fp: "refusés alors qu'ils sont vrais", fn: "acceptés alors qu'ils sont faux", vp: "faux et bien refusés", signales: "refusés" },
-  { sujet: "Tri optique de letchis", objets: "letchis", mal: "Abîmé", bien: "Sain", sig: "Écarté", nonSig: "Gardé", fp: "écartés alors qu'ils sont sains", fn: "gardés alors qu'ils sont abîmés", vp: "abîmés et bien écartés", signales: "écartés" },
-  { sujet: "Scanner à bagages", objets: "bagages", mal: "Objet interdit", bien: "Sans objet interdit", sig: "Fouillé", nonSig: "Non fouillé", fp: "fouillés alors qu'ils ne contiennent rien d'interdit", fn: "non fouillés alors qu'ils contiennent un objet interdit", vp: "à objet interdit et bien fouillés", signales: "fouillés" },
-  { sujet: "Logiciel de vérification des factures", objets: "factures", mal: "Erronée", bien: "Correcte", sig: "Alerte", nonSig: "Pas d'alerte", fp: "en alerte alors qu'elles sont correctes", fn: "sans alerte alors qu'elles sont erronées", vp: "erronées et bien en alerte", signales: "en alerte" },
-  { sujet: "Contrôle des déclarations de sinistre", objets: "dossiers", mal: "Frauduleux", bien: "Honnête", sig: "Suspect", nonSig: "Non suspect", fp: "jugés suspects alors qu'ils sont honnêtes", fn: "jugés non suspects alors qu'ils sont frauduleux", vp: "frauduleux et bien jugés suspects", signales: "jugés suspects" },
-  { sujet: "Balance de contrôle des colis", objets: "colis", mal: "Poids faux", bien: "Poids juste", sig: "Rejeté", nonSig: "Validé", fp: "rejetés alors que leur poids est juste", fn: "validés alors que leur poids est faux", vp: "de poids faux et bien rejetés", signales: "rejetés" },
-  { sujet: "Portique antivol d'un magasin", objets: "passages", mal: "Article non payé", bien: "Rien à signaler", sig: "Alarme", nonSig: "Pas d'alarme", fp: "avec alarme alors que tout est payé", fn: "sans alarme alors qu'un article n'est pas payé", vp: "avec article non payé et alarme", signales: "avec alarme" },
-  { sujet: "Test de dépistage", objets: "personnes", mal: "Malade", bien: "Non malade", sig: "Test positif", nonSig: "Test négatif", fp: "positives alors qu'elles ne sont pas malades", fn: "négatives alors qu'elles sont malades", vp: "malades et testées positives", signales: "testées positives" },
-  { sujet: "Contrôle de bouteilles par caméra", objets: "bouteilles", mal: "Mal remplie", bien: "Bien remplie", sig: "Éjectée", nonSig: "Gardée", fp: "éjectées alors qu'elles sont bien remplies", fn: "gardées alors qu'elles sont mal remplies", vp: "mal remplies et bien éjectées", signales: "éjectées" },
-  { sujet: "Contrôle des tickets dans le car jaune", objets: "voyageurs", mal: "Sans titre valable", bien: "En règle", sig: "Verbalisé", nonSig: "Non verbalisé", fp: "verbalisés alors qu'ils sont en règle", fn: "non verbalisés alors qu'ils sont sans titre valable", vp: "sans titre et bien verbalisés", signales: "verbalisés" },
-  { sujet: "Détecteur de pannes de smartphones", objets: "smartphones", mal: "En panne", bien: "En état", sig: "Renvoyé à l'atelier", nonSig: "Vendu", fp: "renvoyés à l'atelier alors qu'ils marchent", fn: "vendus alors qu'ils sont en panne", vp: "en panne et bien renvoyés", signales: "renvoyés à l'atelier" },
+  { sujet: "Contrôle automatique des lots", objets: "lots", mal: "Réellement défectueux", bien: "Réellement sain", sig: "Signalé", nonSig: "Non signalé", fp: "signalés alors qu'ils sont sains", fn: "non signalés alors qu'ils sont défectueux", vp: "défectueux et bien signalés", signales: "signalés", pct: "est réellement défectueux" },
+  { sujet: "Filtre anti-spam", objets: "courriels", mal: "Vrai spam", bien: "Courriel normal", sig: "Classé spam", nonSig: "Boîte de réception", fp: "classés en spam alors qu'ils sont normaux", fn: "laissés en boîte de réception alors que ce sont des spams", vp: "spams bien classés en spam", signales: "classés en spam", pct: "est vraiment du spam" },
+  { sujet: "Détection de fraude bancaire", objets: "paiements", mal: "Frauduleux", bien: "Honnête", sig: "Bloqué", nonSig: "Accepté", fp: "bloqués alors qu'ils sont honnêtes", fn: "acceptés alors qu'ils sont frauduleux", vp: "frauduleux et bien bloqués", signales: "bloqués", pct: "est réellement frauduleux" },
+  { sujet: "Détecteur de faux billets", objets: "billets", mal: "Faux billet", bien: "Vrai billet", sig: "Refusé", nonSig: "Accepté", fp: "refusés alors qu'ils sont vrais", fn: "acceptés alors qu'ils sont faux", vp: "faux et bien refusés", signales: "refusés", pct: "est réellement faux" },
+  { sujet: "Tri optique de letchis", objets: "letchis", mal: "Abîmé", bien: "Sain", sig: "Écarté", nonSig: "Gardé", fp: "écartés alors qu'ils sont sains", fn: "gardés alors qu'ils sont abîmés", vp: "abîmés et bien écartés", signales: "écartés", pct: "est réellement abîmé" },
+  { sujet: "Scanner à bagages", objets: "bagages", mal: "Objet interdit", bien: "Sans objet interdit", sig: "Fouillé", nonSig: "Non fouillé", fp: "fouillés alors qu'ils ne contiennent rien d'interdit", fn: "non fouillés alors qu'ils contiennent un objet interdit", vp: "contenant un objet interdit et bien fouillés", signales: "fouillés", pct: "contient réellement un objet interdit" },
+  { sujet: "Logiciel de vérification des factures", objets: "factures", mal: "Erronée", bien: "Correcte", sig: "Alerte", nonSig: "Pas d'alerte", fp: "signalées par une alerte alors qu'elles sont correctes", fn: "passées sans alerte alors qu'elles sont erronées", vp: "erronées et bien signalées", signales: "signalées par une alerte", pct: "est réellement erroné" },
+  { sujet: "Contrôle des déclarations de sinistre", objets: "dossiers", mal: "Frauduleux", bien: "Honnête", sig: "Suspect", nonSig: "Non suspect", fp: "jugés suspects alors qu'ils sont honnêtes", fn: "jugés non suspects alors qu'ils sont frauduleux", vp: "frauduleux et bien jugés suspects", signales: "jugés suspects", pct: "est réellement frauduleux" },
+  { sujet: "Balance de contrôle des colis", objets: "colis", mal: "Poids faux", bien: "Poids juste", sig: "Rejeté", nonSig: "Validé", fp: "rejetés alors que leur poids est juste", fn: "validés alors que leur poids est faux", vp: "au poids faux et bien rejetés", signales: "rejetés", pct: "a réellement un poids faux" },
+  { sujet: "Portique antivol d'un magasin", objets: "passages", mal: "Article non payé", bien: "Rien à signaler", sig: "Alarme", nonSig: "Pas d'alarme", fp: "suivis d'une alarme alors que tout est payé", fn: "passés sans alarme alors qu'un article n'est pas payé", vp: "suivis d'une alarme à juste titre", signales: "suivis d'une alarme", pct: "cache réellement un article non payé" },
+  { sujet: "Test de dépistage", objets: "personnes", mal: "Malade", bien: "Non malade", sig: "Test positif", nonSig: "Test négatif", fp: "testées positives alors qu'elles ne sont pas malades", fn: "testées négatives alors qu'elles sont malades", vp: "malades et testées positives", signales: "testées positives", pct: "est réellement malade" },
+  { sujet: "Contrôle de bouteilles par caméra", objets: "bouteilles", mal: "Mal remplie", bien: "Bien remplie", sig: "Éjectée", nonSig: "Gardée", fp: "éjectées alors qu'elles sont bien remplies", fn: "gardées alors qu'elles sont mal remplies", vp: "mal remplies et bien éjectées", signales: "éjectées", pct: "est réellement mal rempli" },
+  { sujet: "Contrôle des tickets dans le car jaune", objets: "voyageurs", mal: "Sans titre valable", bien: "En règle", sig: "Verbalisé", nonSig: "Non verbalisé", fp: "verbalisés alors qu'ils sont en règle", fn: "non verbalisés alors qu'ils sont sans titre valable", vp: "sans titre et bien verbalisés", signales: "verbalisés", pct: "voyage réellement sans titre valable" },
+  { sujet: "Détecteur de pannes de smartphones", objets: "smartphones", mal: "En panne", bien: "En état", sig: "Renvoyé à l'atelier", nonSig: "Vendu", fp: "renvoyés à l'atelier alors qu'ils marchent", fn: "vendus alors qu'ils sont en panne", vp: "en panne et bien renvoyés", signales: "renvoyés à l'atelier", pct: "est réellement en panne" },
 ];
 
 export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
@@ -526,8 +592,8 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const t = tirerTableau();
       const conditionnelle = Math.random() < 0.5;
       const phrase = conditionnelle
-        ? `on choisit ${unUne(t.ctx)} ${singulier(t.ctx)} PARMI ${t.ctx.genre === "f" ? "celles" : "ceux"} de « ${t.ctx.lignes[0]} », et l'on regarde ${siIlElle(t.ctx)} est « ${t.ctx.colonnes[1]} »`
-        : `on choisit ${unUne(t.ctx)} ${singulier(t.ctx)} au hasard dans l'ensemble, et l'on regarde ${siIlElle(t.ctx)} relève à la fois de « ${t.ctx.lignes[0]} » et de « ${t.ctx.colonnes[1]} »`;
+        ? `On choisit ${unInd(t.ctx)} PARMI ${t.ctx.genre === "f" ? "celles" : "ceux"} qui sont ${pl(t.ctx.L[0])}, et l'on regarde ${siIlElle(t.ctx)} est ${sg(t.ctx.C[1])}`
+        : `On choisit ${unInd(t.ctx)} au hasard dans l'ensemble, et l'on regarde ${siIlElle(t.ctx)} est à la fois ${sg(t.ctx.L[0])} et ${sg(t.ctx.C[1])}`;
       return {
         text: `Dans la situation suivante, de quelle probabilité s'agit-il ?\n\n${phrase}.`,
         format: "qcm",
@@ -544,7 +610,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
           "Une probabilité conditionnelle restreint l'univers à une sous-population ; une probabilité d'intersection porte sur l'ensemble et demande les deux caractères à la fois.",
           "On cherche si l'énoncé RÉDUIT la population de départ — « parmi », « sachant que » — ou s'il tire dans tout l'ensemble.",
           conditionnelle
-            ? `Ici on tire parmi les $${t.ligne1}$ ${t.ctx.individu} de « ${t.ctx.lignes[0]} » : l'univers est réduit, c'est une conditionnelle.`
+            ? `Ici on tire parmi les $${t.ligne1}$ ${t.ctx.individu} ${pl(t.ctx.L[0])} : l'univers est réduit, c'est une conditionnelle.`
             : `Ici on tire parmi les $${t.total}$ ${t.ctx.individu} : l'univers est complet, on demande une intersection.`,
           `Il s'agit ${conditionnelle ? "d'une probabilité conditionnelle" : "d'une probabilité d'intersection"}.`
         ),
@@ -572,16 +638,17 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const t = tirerTableau();
       const c = t.ctx;
       const bonne =
-        `Parmi les ${c.individu} venant de « ${c.lignes[0]} », quelle est la part de « ${c.colonnes[1]} » ?`;
+        `Parmi les ${c.individu} ${pl(c.L[0])}, quelle est la part ${deInd(c)} ${pl(c.C[1])} ?`;
+      const et = `Quelle est la probabilité qu'${ilElle(c)} soit ${sg(c.L[0])} ET ${sg(c.C[1])} ?`;
       return {
         text:
-          `On choisit ${unUne(c)} ${singulier(c)} au hasard. ` +
+          `On choisit ${unInd(c)} au hasard. ` +
           `Une seule de ces quatre questions porte sur une probabilité CONDITIONNELLE. Laquelle ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
-          `Quelle est la probabilité qu'${ilElle(c)} vienne de « ${c.lignes[0]} » ET soit « ${c.colonnes[1]} » ?`,
-          `Quelle est la probabilité qu'${ilElle(c)} soit « ${c.colonnes[1]} » ?`,
-          `Quelle est la probabilité qu'${ilElle(c)} vienne de « ${c.lignes[0]} » OU soit « ${c.colonnes[1]} » ?`,
+          et,
+          `Quelle est la probabilité qu'${ilElle(c)} soit ${sg(c.C[1])} ?`,
+          `Quelle est la probabilité qu'${ilElle(c)} soit ${sg(c.L[0])} OU ${sg(c.C[1])} ?`,
         ]),
         expected: [bonne],
         comparator: "mcq_exact",
@@ -589,7 +656,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
         explanation: exp(
           "Une probabilité conditionnelle se calcule dans une SOUS-POPULATION : le mot « parmi » — ou « sachant que » — annonce que l'on ne compte plus sur l'ensemble.",
           "On cherche dans chaque phrase ce qui sert de population de référence. Si elle est restreinte avant le comptage, la probabilité est conditionnelle ; sinon elle porte sur le total.",
-          `« Parmi les ${c.individu} venant de « ${c.lignes[0]} » » restreint à $${t.ligne1}$ ${c.individu} : ` +
+          `« Parmi les ${c.individu} ${pl(c.L[0])} » restreint à $${t.ligne1}$ ${c.individu} : ` +
             `la probabilité vaut $\\dfrac{${t.b}}{${t.ligne1}} \\approx ${fr(Math.round((t.b / t.ligne1) * 100) / 100)}$. ` +
             `Les trois autres se calculent sur les $${t.total}$ ${c.individu} : intersection $\\dfrac{${t.b}}{${t.total}}$, ` +
             `événement seul $\\dfrac{${t.col2}}{${t.total}}$, union $\\dfrac{${t.ligne1 + t.col2 - t.b}}{${t.total}}$.`,
@@ -597,7 +664,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
         ),
         choiceDiagnostics: [
           {
-            choice: `Quelle est la probabilité qu'${ilElle(c)} vienne de « ${c.lignes[0]} » ET soit « ${c.colonnes[1]} » ?`,
+            choice: et,
             cause: "le ET croise deux caractères, mais il compte toujours sur l'ensemble : c'est une intersection, pas une conditionnelle",
           },
         ],
@@ -623,12 +690,12 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const sens = pick(["LC", "CL"] as const);
       const enonce =
         sens === "LC"
-          ? `la probabilité qu'${unUne(t.ctx)} ${singulier(t.ctx)} soit « ${t.ctx.colonnes[1]} », sachant qu'${ilElle(t.ctx)} vient de « ${t.ctx.lignes[0]} »`
-          : `la probabilité qu'${unUne(t.ctx)} ${singulier(t.ctx)} vienne de « ${t.ctx.lignes[0]} », sachant qu'${ilElle(t.ctx)} est « ${t.ctx.colonnes[1]} »`;
+          ? `la probabilité qu'${unInd(t.ctx)} soit ${sg(t.ctx.C[1])}, sachant qu'${ilElle(t.ctx)} est ${sg(t.ctx.L[0])}`
+          : `la probabilité qu'${unInd(t.ctx)} soit ${sg(t.ctx.L[0])}, sachant qu'${ilElle(t.ctx)} est ${sg(t.ctx.C[1])}`;
       return {
         text:
-          `On note $A$ l'évènement « ${leLa(t.ctx)}${singulier(t.ctx)} vient de ${t.ctx.lignes[0]} » ` +
-          `et $B$ l'évènement « ${leLa(t.ctx)}${singulier(t.ctx)} est ${t.ctx.colonnes[1]} ». ` +
+          `On note $A$ l'évènement « ${lInd(t.ctx)} est ${sg(t.ctx.L[0])} » ` +
+          `et $B$ l'évènement « ${lInd(t.ctx)} est ${sg(t.ctx.C[1])} ». ` +
           `Comment note-t-on ${enonce} ?`,
         format: "qcm",
         choices: makeChoices(sens === "LC" ? "$P_A(B)$" : "$P_B(A)$", [
@@ -645,8 +712,8 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
           "La notation $P_A(B)$ se lit « probabilité de $B$ sachant $A$ » : la lettre en INDICE est la condition, celle qui restreint l'univers.",
           "On repère ce qui suit « sachant que » : cela va en indice. Ce qui est cherché reste entre parenthèses.",
           sens === "LC"
-            ? `La condition est « vient de ${t.ctx.lignes[0]} », c'est-à-dire $A$ : la notation est $P_A(B)$.`
-            : `La condition est « est ${t.ctx.colonnes[1]} », c'est-à-dire $B$ : la notation est $P_B(A)$.`,
+            ? `La condition est « ${ilElle(t.ctx)} est ${sg(t.ctx.L[0])} », c'est-à-dire $A$ : la notation est $P_A(B)$.`
+            : `La condition est « ${ilElle(t.ctx)} est ${sg(t.ctx.C[1])} », c'est-à-dire $B$ : la notation est $P_B(A)$.`,
           `La bonne notation est ${sens === "LC" ? "$P_A(B)$" : "$P_B(A)$"}.`
         ),
       };
@@ -673,19 +740,16 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const t = tirerTableau();
       const c = t.ctx;
       const sens = pick(["AB", "BA"] as const);
-      const evtA = `${leLa(c)}${singulier(c)} vient de « ${c.lignes[0]} »`;
-      const evtB = `${leLa(c)}${singulier(c)} est « ${c.colonnes[1]} »`;
+      const evtA = `${lInd(c)} est ${sg(c.L[0])}`;
+      const evtB = `${lInd(c)} est ${sg(c.C[1])}`;
       const notation = sens === "AB" ? "$P_A(B)$" : "$P_B(A)$";
-      // « ceux » était figé : faux pour les pièces, factures, livraisons…
-      const ceux = c.genre === "f" ? "celles" : "ceux";
-      const bonne =
-        sens === "AB"
-          ? `la probabilité qu'${ilElle(c)} soit « ${c.colonnes[1]} », PARMI ${ceux} qui viennent de « ${c.lignes[0]} »`
-          : `la probabilité qu'${ilElle(c)} vienne de « ${c.lignes[0]} », PARMI ${ceux} qui sont « ${c.colonnes[1]} »`;
-      const inverse =
-        sens === "AB"
-          ? `la probabilité qu'${ilElle(c)} vienne de « ${c.lignes[0]} », PARMI ${ceux} qui sont « ${c.colonnes[1]} »`
-          : `la probabilité qu'${ilElle(c)} soit « ${c.colonnes[1]} », PARMI ${ceux} qui viennent de « ${c.lignes[0]} »`;
+      // « celles » ou « ceux » : la phrase ne répète pas le nom.
+      const choisi = `${unInd(c)} choisi${c.genre === "f" ? "e" : ""} parmi ${c.genre === "f" ? "celles" : "ceux"}`;
+      const vA = `la probabilité d'être ${sg(c.C[1])}, pour ${choisi} ${pl(c.L[0])}`;
+      const vB = `la probabilité d'être ${sg(c.L[0])}, pour ${choisi} ${pl(c.C[1])}`;
+      const bonne = sens === "AB" ? vA : vB;
+      const inverse = sens === "AB" ? vB : vA;
+      const et = `la probabilité qu'${unInd(c)} soit ${sg(c.L[0])} ET ${sg(c.C[1])}`;
       return {
         text:
           `On note $A$ l'évènement « ${evtA} » et $B$ l'évènement « ${evtB} ». ` +
@@ -693,8 +757,8 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
         format: "qcm",
         choices: makeChoices(bonne, [
           inverse,
-          `la probabilité qu'${ilElle(c)} vienne de « ${c.lignes[0]} » ET soit « ${c.colonnes[1]} »`,
-          `la probabilité qu'${ilElle(c)} vienne de « ${c.lignes[0]} » OU soit « ${c.colonnes[1]} »`,
+          et,
+          `la probabilité qu'${unInd(c)} soit ${sg(c.L[0])} OU ${sg(c.C[1])}`,
         ]),
         expected: [bonne],
         comparator: "mcq_exact",
@@ -706,12 +770,12 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
             `${fr(Math.round((t.b / (sens === "AB" ? t.ligne1 : t.col2)) * 100) / 100)}$, ` +
             `alors que l'écriture inverse donnerait $\\dfrac{${t.b}}{${sens === "AB" ? t.col2 : t.ligne1}} \\approx ` +
             `${fr(Math.round((t.b / (sens === "AB" ? t.col2 : t.ligne1)) * 100) / 100)}$ : même numérateur, deux nombres différents.`,
-          `${notation} est ${bonne}.`
+          `${notation} se lit : ${bonne}.`
         ),
         choiceDiagnostics: [
           { choice: inverse, cause: "a échangé la condition et l'évènement cherché : l'indice est la CONDITION" },
           {
-            choice: `la probabilité qu'${ilElle(c)} vienne de « ${c.lignes[0]} » ET soit « ${c.colonnes[1]} »`,
+            choice: et,
             cause: `l'intersection se note $P(A \\cap B)$ et se divise par l'effectif TOTAL, soit $${t.total}$`,
           },
         ],
@@ -740,12 +804,13 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const num = i === 0 ? (j === 0 ? t.a : t.b) : j === 0 ? t.c : t.d;
       const den = sens === "ligne" ? (i === 0 ? t.ligne1 : t.ligne2) : j === 0 ? t.col1 : t.col2;
       const condition = sens === "ligne" ? t.ctx.lignes[i] : t.ctx.colonnes[j];
-      const cible = sens === "ligne" ? t.ctx.colonnes[j] : t.ctx.lignes[i];
+      const condAttr = sg(sens === "ligne" ? t.ctx.L[i] : t.ctx.C[j]);
+      const cibleAttr = sg(sens === "ligne" ? t.ctx.C[j] : t.ctx.L[i]);
       const p = num / den;
       return {
         text:
-          `On choisit ${unUne(t.ctx)} ${singulier(t.ctx)} au hasard. ` +
-          `Sachant qu'${ilElle(t.ctx)} relève de « ${condition} », quelle est la probabilité qu'${ilElle(t.ctx)} relève de « ${cible} » ? ` +
+          `On choisit ${unInd(t.ctx)} au hasard. ` +
+          `Sachant qu'${ilElle(t.ctx)} est ${condAttr}, quelle est la probabilité qu'${ilElle(t.ctx)} soit ${cibleAttr} ? ` +
           `(arrondi au centième)`,
         format: "short",
         expected: [fr(Math.round(p * 100) / 100)],
@@ -784,11 +849,12 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const parLigne = Math.random() < 0.5;
       const i = pick([0, 1] as const);
       const condition = parLigne ? c.lignes[i] : c.colonnes[i];
+      const condAttr = sg(parLigne ? c.L[i] : c.C[i]);
       const denominateur = parLigne ? (i === 0 ? t.ligne1 : t.ligne2) : i === 0 ? t.col1 : t.col2;
       return {
         text:
-          `On choisit ${unUne(c)} ${singulier(c)} au hasard, et l'on veut la probabilité d'un évènement ` +
-          `SACHANT qu'${ilElle(c)} relève de « ${condition} ». ` +
+          `On choisit ${unInd(c)} au hasard, et l'on veut la probabilité d'un évènement ` +
+          `SACHANT qu'${ilElle(c)} est ${condAttr}. ` +
           `Quel effectif faut-il mettre au DÉNOMINATEUR ?`,
         format: "short",
         expected: [String(denominateur)],
@@ -847,7 +913,8 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
             : `$P_B(A)$`;
       return {
         text:
-          `On note $A$ : « relève de ${t.ctx.lignes[0]} » et $B$ : « relève de ${t.ctx.colonnes[0]} ». ` +
+          `On choisit ${unInd(t.ctx)} au hasard. On note $A$ : « ${ilElle(t.ctx)} est ${sg(t.ctx.L[0])} » et ` +
+          `$B$ : « ${ilElle(t.ctx)} est ${sg(t.ctx.C[0])} ». ` +
           `Que vaut ${question} ? (arrondi au centième)`,
         format: "qcm",
         // Les trois probabilités partagent le même numérateur et peuvent
@@ -905,8 +972,8 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const pAnonB = t.b / t.ligne1;
       return {
         text:
-          `On note $A$ : « ${leLa(c)}${singulier(c)} vient de « ${c.lignes[0]} » » et ` +
-          `$B$ : « ${ilElle(c)} est « ${c.colonnes[0]} » ». ` +
+          `On note $A$ : « ${lInd(c)} est ${sg(c.L[0])} » et ` +
+          `$B$ : « ${ilElle(c)} est ${sg(c.C[0])} ». ` +
           `On a calculé $P_A(B) \\approx ${fr(Math.round(pAB * 100) / 100)}$. ` +
           `Que vaut $P_A(\\overline{B})$ ? (arrondi au centième)`,
         format: "short",
@@ -916,7 +983,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
         explanation: exp(
           "À condition fixée, les deux issues d'un caractère se partagent toute la population de référence : $P_A(B) + P_A(\\overline{B}) = 1$. La condition, elle, ne bouge pas.",
           "On retire à $1$ la probabilité connue — ou l'on relit directement le tableau, en gardant le même dénominateur.",
-          `Sur la ligne « ${c.lignes[0] }» : $P_A(B) = \\dfrac{${t.a}}{${t.ligne1}}$ et ` +
+          `Sur la ligne « ${c.lignes[0]} » : $P_A(B) = \\dfrac{${t.a}}{${t.ligne1}}$ et ` +
             `$P_A(\\overline{B}) = \\dfrac{${t.b}}{${t.ligne1}} \\approx ${fr(Math.round(pAnonB * 100) / 100)}$ — même dénominateur, et la somme fait bien $1$. ` +
             `⚠️ Ne pas confondre avec $P_{\\overline{A}}(B) = \\dfrac{${t.c}}{${t.ligne2}} \\approx ${fr(Math.round((t.c / t.ligne2) * 100) / 100)}$, ` +
             `qui change de POPULATION et ne se déduit d'aucune soustraction.`,
@@ -940,28 +1007,51 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     hint: "La phrase doit dire DANS QUELLE population on se place.",
     tags: ["stmg", "maths", "probabilites", "canvas", "open", "template"],
     generate: () => {
+      // Rare : plusieurs leurres tombent sur le même pourcentage → on retire un tableau.
+      for (let essai = 0; ; essai++) {
       const t = tirerTableau();
       const p = t.b / t.ligne1;
+      // 15/10 : était une question ouverte « Traduis ce résultat par une
+      // phrase », corrigée au mot-clé (« parmi » suffisait). Frédéric : jamais
+      // de question ouverte vague → QCM : la bonne phrase contre la condition
+      // inversée, l'intersection et la probabilité simple.
+      const pct = (x: number) => fr(Math.round(x * 1000) / 10);
+      const bonne = `Parmi les ${t.ctx.individu} ${pl(t.ctx.L[0])}, environ ${pct(p)} % sont ${pl(t.ctx.C[1])}.`;
+      const vus = new Set([pct(p)]);
+      const leurres = [
+        [t.b / t.col2, `Parmi les ${t.ctx.individu} ${pl(t.ctx.C[1])}, environ ${pct(t.b / t.col2)} % sont ${pl(t.ctx.L[0])}.`],
+        [t.b / t.total, `Environ ${pct(t.b / t.total)} % des ${t.ctx.individu} sont à la fois ${pl(t.ctx.L[0])} et ${pl(t.ctx.C[1])}.`],
+        [t.col2 / t.total, `Environ ${pct(t.col2 / t.total)} % des ${t.ctx.individu} sont ${pl(t.ctx.C[1])}.`],
+        [1 - p, `Parmi les ${t.ctx.individu} ${pl(t.ctx.L[0])}, environ ${pct(1 - p)} % sont ${pl(t.ctx.C[1])}.`],
+        [t.ligne1 / t.total, `Environ ${pct(t.ligne1 / t.total)} % des ${t.ctx.individu} sont ${pl(t.ctx.L[0])}.`],
+        [t.d / t.ligne2, `Parmi les ${t.ctx.individu} ${pl(t.ctx.L[1])}, environ ${pct(t.d / t.ligne2)} % sont ${pl(t.ctx.C[1])}.`],
+        [t.b / t.ligne2, `Parmi les ${t.ctx.individu} ${pl(t.ctx.L[1])}, environ ${pct(t.b / t.ligne2)} % sont ${pl(t.ctx.C[1])}.`],
+      ]
+        .filter(([v]) => !vus.has(pct(v as number)) && (vus.add(pct(v as number)), true))
+        .map(([, s]) => s as string);
+      if (leurres.length < 3 && essai < 50) continue;
       return {
         text:
-          `On note $A$ : « ${leLa(t.ctx)}${singulier(t.ctx)} vient de ${t.ctx.lignes[0]} » et ` +
+          `On note $A$ : « ${lInd(t.ctx)} est ${sg(t.ctx.L[0])} » et ` +
           // ⚠️ « il » était figé ici : trois des cinq contextes sont féminins
           // (« pièces », « commandes ») et rendaient « il est Non conforme ».
           // Le reste du fichier passe par `ilElle`, cette ligne l'avait oublié.
-          `$B$ : « ${ilElle(t.ctx)} est ${t.ctx.colonnes[1]} ». On a calculé $P_A(B) \\approx ${fr(Math.round(p * 100) / 100)}$. ` +
-          `Traduis ce résultat par une phrase, dans le contexte.`,
-        format: "open",
-        expected: ["parmi", "sachant", t.ctx.lignes[0].toLowerCase(), "environ"],
-        comparator: "contains_keyword",
+          `$B$ : « ${ilElle(t.ctx)} est ${sg(t.ctx.C[1])} ». On a calculé $P_A(B) \\approx ${fr(Math.round(p * 100) / 100)}$. ` +
+          `Quelle phrase traduit ce résultat dans le contexte ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, leurres),
+        expected: [bonne],
+        comparator: "mcq_exact",
         canvas: canvasTableau(t),
         explanation: exp(
           "Interpréter une probabilité conditionnelle, c'est nommer la population de référence dans la phrase.",
           "On commence par « parmi les … » ou « sachant que … » : sans cela, la phrase décrirait une autre probabilité.",
           `$P_A(B) = \\dfrac{${t.b}}{${t.ligne1}} \\approx ${fr(Math.round(p * 100) / 100)}$ : ` +
             `le dénominateur est l'effectif de « ${t.ctx.lignes[0]} », c'est donc la population de référence.`,
-          `Par exemple : « Parmi les ${t.ctx.individu} venant de ${t.ctx.lignes[0]}, environ ${fr(Math.round(p * 1000) / 10)} % sont ${t.ctx.colonnes[1].toLowerCase()}. »`
+          `Par exemple : « Parmi les ${t.ctx.individu} ${pl(t.ctx.L[0])}, environ ${fr(Math.round(p * 1000) / 10)} % sont ${pl(t.ctx.C[1])}. »`
         ),
       };
+      }
     },
   },
 
@@ -1000,17 +1090,17 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const pColonne = pct(t.b / t.col2);
       const pMarginale = pct(t.col2 / t.total);
       const bonne =
-        `Parmi les ${c.individu} venant de « ${c.lignes[0]} », environ $${pLigne}\\,\\%$ sont « ${c.colonnes[1]} ».`;
+        `Parmi les ${c.individu} ${pl(c.L[0])}, environ $${pLigne}\\,\\%$ sont ${pl(c.C[1])}.`;
       const inversee =
-        `Parmi les ${c.individu} « ${c.colonnes[1]} », environ $${pLigne}\\,\\%$ viennent de « ${c.lignes[0]} ».`;
+        `Parmi les ${c.individu} ${pl(c.C[1])}, environ $${pLigne}\\,\\%$ sont ${pl(c.L[0])}.`;
       const mauvaisNombre =
-        `Parmi les ${c.individu} venant de « ${c.lignes[0]} », environ $${pColonne}\\,\\%$ sont « ${c.colonnes[1]} ».`;
-      const marginale = `Environ $${pLigne}\\,\\%$ de tous les ${c.individu} sont « ${c.colonnes[1]} ».`;
+        `Parmi les ${c.individu} ${pl(c.L[0])}, environ $${pColonne}\\,\\%$ sont ${pl(c.C[1])}.`;
+      const marginale = `Environ $${pLigne}\\,\\%$ de tous les ${c.individu} sont ${pl(c.C[1])}.`;
       return {
         text:
           `On a calculé $P_A(B) \\approx ${fr(Math.round((t.b / t.ligne1) * 100) / 100)}$, avec ` +
-          `$A$ : « ${leLa(c)}${singulier(c)} vient de « ${c.lignes[0]} » » et ` +
-          `$B$ : « ${ilElle(c)} est « ${c.colonnes[1]} » ». ` +
+          `$A$ : « ${lInd(c)} est ${sg(c.L[0])} » et ` +
+          `$B$ : « ${ilElle(c)} est ${sg(c.C[1])} ». ` +
           `Laquelle de ces quatre phrases traduit EXACTEMENT ce résultat ?`,
         format: "qcm",
         choices: makeChoices(bonne, [inversee, mauvaisNombre, marginale]),
@@ -1141,10 +1231,10 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
               ? `Combien de ${T.objets} sont des VRAIS POSITIFS, c'est-à-dire ${T.vp} ?`
               : quoi === "signales"
                 ? `Combien de ${T.objets} sont ${T.signales} au total ?`
-                : `PARMI les ${T.objets} ${T.signales}, quel pourcentage est réellement « ${T.mal} » ? (arrondi à l'unité, en %)`;
+                : `PARMI les ${T.objets} ${T.signales}, quel pourcentage ${T.pct} ? (arrondi à l'unité, en %)`;
       const ouverture = pick([
         `${T.sujet} : le tableau croise l'état réel et la décision, sur $${total}$ ${T.objets}.`,
-        `On a testé $${total}$ ${T.objets} (${T.sujet.toLowerCase()}). Le tableau donne les résultats.`,
+        `${T.sujet} : le tableau donne les résultats obtenus sur $${total}$ ${T.objets}.`,
       ]);
       return {
         text: `${ouverture} ${question}`,
@@ -1206,7 +1296,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
         ctx = ctxUrne(u);
         situation =
           `${u.contenant} contient des ${u.objets}. On en prélève DEUX au hasard, AVEC remise ; ` +
-          `à chaque prélèvement, la probabilité d'obtenir « ${u.oui} » vaut $${fr(p)}$.`;
+          `à chaque prélèvement, la probabilité d'obtenir ${u.un} vaut $${fr(p)}$.`;
       } else {
         const r = pick(REPETITIONS);
         ctx = ctxRep(r);
@@ -1228,7 +1318,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
         explanation: exp(
           "Deux épreuves sont indépendantes lorsque le résultat de la première ne modifie pas les probabilités de la seconde.",
           "Sur l'arbre, cela se voit immédiatement : les branches du second niveau portent les mêmes nombres, quelle que soit la branche empruntée au premier.",
-          `Le résultat de la première épreuve ne change rien à la seconde : la probabilité de « ${ctx.courtC[0]} » reste $${fr(p)}$ sur les deux branches du second niveau.`,
+          `Le résultat de la première épreuve ne change rien à la seconde : la branche « ${ctx.courtC[0]} » porte $${fr(p)}$ sur les deux parties du second niveau.`,
           "Les probabilités du second niveau sont identiques sur les deux branches."
         ),
       };
@@ -1272,7 +1362,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
         explanation: exp(
           "Sans remise, le premier prélèvement modifie le stock : la composition du second tirage dépend de ce qu'on a obtenu au premier. Les probabilités du second niveau sont donc CONDITIONNELLES à la branche empruntée.",
           "On compte ce qui reste après chaque premier tirage, branche par branche.",
-          `Si le premier est « ${u.oui} », il en reste $${defauts - 1}$ de cette sorte sur $${total - 1}$ : ` +
+          `Si l'on a d'abord tiré ${u.un}, il en reste $${defauts - 1}$ de cette sorte sur $${total - 1}$ : ` +
             `$\\dfrac{${defauts - 1}}{${total - 1}} \\approx ${fr(Math.round(((defauts - 1) / (total - 1)) * 1000) / 1000)}$. ` +
             `Sinon, il en reste $${defauts}$ sur $${total - 1}$ : ` +
             `$\\dfrac{${defauts}}{${total - 1}} \\approx ${fr(Math.round((defauts / (total - 1)) * 1000) / 1000)}$. ` +
@@ -1312,7 +1402,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       return {
         text:
           `${introRep(r, 2)}. Les résultats sont indépendants d'une fois à l'autre. ${r.chaque}, la probabilité de l'issue « ${r.evt} » vaut $${fr(p)}$. ` +
-          `Quelle est la probabilité d'obtenir « ${r.evt} » ${cible === "deux" ? "les DEUX fois" : "AUCUNE des deux fois"} ?`,
+          `Quelle est la probabilité que l'issue « ${r.evt} » ${cible === "deux" ? "se produise les DEUX fois" : "ne se produise AUCUNE des deux fois"} ?`,
         format: "short",
         expected: [fr(Math.round(valeur * 10000) / 10000)],
         comparator: "number_equal",
@@ -1352,23 +1442,25 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       let oui: string;
       let non: string;
       let situation: string;
+      let question: string;
       if (Math.random() < 0.5) {
         const u = pick(URNES);
         oui = u.oui;
         non = u.non;
         situation =
           `${u.contenant} contient des ${u.objets}. On en prélève deux au hasard, AVEC remise ; ` +
-          `à chaque prélèvement, la probabilité d'obtenir « ${oui} » vaut $${fr(p)}$.`;
+          `à chaque prélèvement, la probabilité d'obtenir ${u.un} vaut $${fr(p)}$.`;
+        question = `Quelle est la probabilité d'obtenir ${u.un} EXACTEMENT une fois sur les deux ?`;
       } else {
         const r = pick(REPETITIONS);
         oui = r.evt;
         non = r.non;
         situation = `${introRep(r, 2)}. Les résultats sont indépendants d'une fois à l'autre. ${r.chaque}, la probabilité de l'issue « ${oui} » vaut $${fr(p)}$.`;
+        question = `Quelle est la probabilité que l'issue « ${oui} » se produise EXACTEMENT une fois sur les deux ?`;
       }
       const un = Math.round(p * (1 - p) * 10000) / 10000;
       return {
-        text:
-          `${situation} Quelle est la probabilité d'obtenir « ${oui} » EXACTEMENT une fois sur les deux ? (arrondi au millième)`,
+        text: `${situation} ${question} (arrondi au millième)`,
         format: "short",
         expected: [fr(Math.round(valeur * 1000) / 1000)],
         comparator: "number_equal",
@@ -1407,7 +1499,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const aucun = Math.pow(1 - p, n);
       const auMoinsUn = 1 - aucun;
       const question = pick([
-        `Quelle est la probabilité d'obtenir « ${r.evt} » AU MOINS une fois ?`,
+        `Quelle est la probabilité que l'issue « ${r.evt} » se produise AU MOINS une fois ?`,
         `Quelle est la probabilité que l'issue « ${r.evt} » se produise au moins une fois sur les $${n}$ ?`,
       ]);
       return {
@@ -1454,7 +1546,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       return {
         text:
           `${introRep(r, n)}, les résultats étant indépendants d'une fois à l'autre ; la probabilité de l'issue « ${r.evt} » vaut $${fr(p)}$ à chaque fois. ` +
-          `Pour calculer la probabilité d'obtenir « ${r.evt} » AU MOINS UNE FOIS, on écrit $1 - (1 - ${fr(p)})^{${n}}$. Pourquoi ?`,
+          `Pour calculer la probabilité que cette issue se produise AU MOINS UNE FOIS, on écrit $1 - (1 - ${fr(p)})^{${n}}$. Pourquoi ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
           "parce que « au moins un » signifie « exactement un »",
@@ -1538,8 +1630,8 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
           "Deux tirages sont indépendants si le premier ne modifie pas les probabilités du second. Le tirage AVEC remise garantit cette indépendance ; le tirage SANS remise la détruit.",
           "On regarde le second niveau de l'arbre : si les nombres diffèrent d'une branche à l'autre, il y a dépendance.",
           avecRemise
-            ? `Avec remise, on retrouve $${total}$ ${u.objets} dont $${defauts}$ « ${u.oui} » : la probabilité reste $\\dfrac{${defauts}}{${total}} = ${fr(p)}$ partout.`
-            : `Sans remise, après un premier « ${u.oui} » il en reste $${defauts - 1}$ sur $${total - 1}$, soit environ $${fr(Math.round(((defauts - 1) / (total - 1)) * 10000) / 10000)}$ — au lieu de $\\dfrac{${defauts}}{${total - 1}} \\approx ${fr(Math.round((defauts / (total - 1)) * 10000) / 10000)}$ après un premier « ${u.non} ».`,
+            ? `Avec remise, on retrouve $${total}$ ${u.objets}, dont $${defauts}$ ${u.dont} : la probabilité reste $\\dfrac{${defauts}}{${total}} = ${fr(p)}$ partout.`
+            : `Sans remise, si l'on a d'abord tiré ${u.un}, il en reste $${defauts - 1}$ de cette sorte sur $${total - 1}$, soit environ $${fr(Math.round(((defauts - 1) / (total - 1)) * 10000) / 10000)}$ — au lieu de $\\dfrac{${defauts}}{${total - 1}} \\approx ${fr(Math.round((defauts / (total - 1)) * 10000) / 10000)}$ dans le cas contraire.`,
           avecRemise ? "Les prélèvements sont indépendants." : "Les prélèvements ne sont pas indépendants."
         ),
       };
@@ -1572,7 +1664,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
         text:
           `${u.contenant} contient $${total}$ ${u.objets}, dont $${defauts}$ ${u.dont}. ` +
           `On en prélève deux au hasard, ${pick(["SANS remise", "l'un après l'autre, sans remettre le premier"] as const)}. ` +
-          `Quelle est la probabilité que les DEUX soient « ${u.oui} » ? (arrondi au millième)`,
+          `Quelle est la probabilité que les DEUX ${dontSubj(u)} ? (arrondi au millième)`,
         format: "short",
         expected: [fr(Math.round(sansRemise * 1000) / 1000)],
         comparator: "number_equal",
@@ -1609,7 +1701,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const pC2 = pick(PROBAS);
       return {
         text:
-          `${ctx.genre === "f" ? "Une" : "Un"} ${singulier(ctx)} vient de « ${ctx.lignes[0]} » avec la probabilité $${fr(p1)}$, sinon de « ${ctx.lignes[1]} ». ` +
+          `${ctx.genre === "f" ? "Une" : "Un"} ${singulier(ctx)} est ${sg(ctx.L[0])} avec la probabilité $${fr(p1)}$ ; sinon, ${ilElle(ctx)} est ${sg(ctx.L[1])}. ` +
           `Que représentent les probabilités portées par le SECOND niveau de l'arbre ?`,
         format: "qcm",
         choices: shuffle([
@@ -1625,7 +1717,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
           "Dans un arbre pondéré, une branche du second niveau porte la probabilité CONDITIONNELLE de l'évènement d'arrivée, sachant qu'on a emprunté la branche précédente.",
           "On lit le chemin depuis la racine : chaque nouvelle branche est conditionnée par tout ce qui précède.",
           `La branche menant à « ${ctx.courtC[0]} » depuis « ${ctx.courtL[0]} » porte $${fr(pC1)}$ : ` +
-            `c'est $P_{${ctx.courtL[0]}}(${ctx.courtC[0]})$, et non une probabilité d'intersection.`,
+            `c'est $P_{${tx(ctx.courtL[0])}}(${tx(ctx.courtC[0])})$, et non une probabilité d'intersection.`,
           "Le second niveau porte des probabilités conditionnelles."
         ),
         choiceDiagnostics: [
@@ -1663,7 +1755,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       // qu'une seule phrase (15/10/2026).
       const ouverture = pick([
         `Une étude porte sur des ${ctx.individu} : au premier niveau, « ${ctx.courtL[0]} » ou « ${ctx.courtL[1]} » ; au second, « ${ctx.courtC[0]} » ou « ${ctx.courtC[1]} ».`,
-        `Cet arbre décrit des ${ctx.individu}, selon qu'${ilElle(ctx)}s viennent de « ${ctx.lignes[0]} » ou de « ${ctx.lignes[1]} ».`,
+        `Cet arbre décrit des ${ctx.individu}, selon qu'${ilElle(ctx)}s sont ${pl(ctx.L[0])} ou ${pl(ctx.L[1])}.`,
       ]);
       return {
         text: `${ouverture} Que représentent les probabilités portées par le PREMIER niveau de cet arbre ?`,
@@ -1679,8 +1771,8 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
         explanation: exp(
           "Les branches issues de la RACINE portent des probabilités simples : à ce stade, on ne sait encore rien. Ce sont les branches du second niveau qui sont conditionnelles, puisqu'elles supposent connue la provenance.",
           "On regarde d'où part la branche : de la racine, la probabilité est simple ; d'un nœud déjà atteint, elle est conditionnelle à ce nœud.",
-          `$P(${ctx.courtL[0]}) = ${fr(p1)}$ : c'est une probabilité simple, et $${fr(p1)} + ${fr(Math.round((1 - p1) * 10000) / 10000)} = 1$. ` +
-            `En revanche $P_{${ctx.courtL[0]}}(${ctx.courtC[0]}) = ${fr(pC1)}$ suppose déjà la provenance connue. ` +
+          `$P(${tx(ctx.courtL[0])}) = ${fr(p1)}$ : c'est une probabilité simple, et $${fr(p1)} + ${fr(Math.round((1 - p1) * 10000) / 10000)} = 1$. ` +
+            `En revanche $P_{${tx(ctx.courtL[0])}}(${tx(ctx.courtC[0])}) = ${fr(pC1)}$ suppose déjà la provenance connue. ` +
             `Le produit des deux, $${fr(p1)} \\times ${fr(pC1)} = ${fr(Math.round(p1 * pC1 * 10000) / 10000)}$, donne l'intersection — au BOUT du chemin, pas sur une branche.`,
           `Le premier niveau porte des probabilités simples ; seul le second est conditionnel.`
         ),
@@ -1760,8 +1852,8 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       return {
         text:
           `Une étude indique : une proportion $${fr(Math.round(p1 * 100) / 100)}$ des ${ctx.individu} ` +
-          `vient de « ${ctx.courtL[0]} », et PARMI ${ceuxLa(ctx)} une proportion $${fr(pC1)}$ ` +
-          `est « ${ctx.courtC[0]} ». ` +
+          `sont ${pl(ctx.L[0])}, et PARMI ${ceuxLa(ctx)}, une proportion $${fr(pC1)}$ ` +
+          `sont ${pl(ctx.C[0])}. ` +
           `Quelle probabilité doit porter la branche marquée « ? » ?`,
         format: "short",
         expected: [fr(pC1)],
@@ -1770,9 +1862,9 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
         explanation: exp(
           "Une branche du second niveau porte une probabilité CONDITIONNELLE : celle de l'évènement sachant la branche déjà empruntée. Une phrase en « parmi » donne exactement cela, et se recopie telle quelle.",
           "On repère ce qui suit « parmi » — c'est le nœud de départ — puis on pose le nombre annoncé sur la branche qui en sort vers l'évènement cité. Sans multiplier.",
-          `La branche cherchée est $P_{${ctx.courtL[0]}}(${ctx.courtC[0]}) = ${fr(pC1)}$, recopiée depuis l'énoncé. ` +
+          `La branche cherchée est $P_{${tx(ctx.courtL[0])}}(${tx(ctx.courtC[0])}) = ${fr(pC1)}$, recopiée depuis l'énoncé. ` +
             `⚠️ Le produit $${fr(Math.round(p1 * 100) / 100)} \\times ${fr(pC1)} = ${fr(Math.round(p1 * pC1 * 10000) / 10000)}$ ` +
-            `est autre chose : c'est $P(${ctx.courtL[0]} \\cap ${ctx.courtC[0]})$, la valeur du CHEMIN entier, qui se lit au bout.`,
+            `est autre chose : c'est $P(${tx(ctx.courtL[0])} \\cap ${tx(ctx.courtC[0])})$, la valeur du CHEMIN entier, qui se lit au bout.`,
           `La branche porte $${fr(pC1)}$.`
         ),
       };
@@ -1914,18 +2006,21 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const pC2 = pick(PROBAS);
       const branche = pick([0, 1] as const);
       const valeur = branche === 0 ? pC1 : pC2;
-      const bonne = `$P_{${ctx.courtL[branche]}}(${ctx.courtC[0]}) = ${fr(valeur)}$`;
+      const Lb = tx(ctx.courtL[branche]);
+      const C0 = tx(ctx.courtC[0]);
+      const bonne = `$P_{${Lb}}(${C0}) = ${fr(valeur)}$`;
+      const inter = `$P(${Lb} \\cap ${C0}) = ${fr(valeur)}$`;
       return {
         text:
           `Sur l'arbre, la branche menant à « ${ctx.courtC[0]} » depuis « ${ctx.courtL[branche]} » porte $${fr(valeur)}$. ` +
           `Que traduit ce nombre ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
-          `$P(${ctx.courtL[branche]} \\cap ${ctx.courtC[0]}) = ${fr(valeur)}$`,
-          `$P(${ctx.courtC[0]}) = ${fr(valeur)}$`,
-          `$P_{${ctx.courtC[0]}}(${ctx.courtL[branche]}) = ${fr(valeur)}$`,
-          `$P(${ctx.courtL[branche]}) = ${fr(valeur)}$`,
-          `$P(${ctx.courtL[branche]} \\cup ${ctx.courtC[0]}) = ${fr(valeur)}$`,
+          inter,
+          `$P(${C0}) = ${fr(valeur)}$`,
+          `$P_{${C0}}(${Lb}) = ${fr(valeur)}$`,
+          `$P(${Lb}) = ${fr(valeur)}$`,
+          `$P(${Lb} \\cup ${C0}) = ${fr(valeur)}$`,
         ]),
         expected: [bonne],
         comparator: "mcq_exact",
@@ -1933,13 +2028,13 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
         explanation: exp(
           "Une pondération du second niveau est une probabilité conditionnelle : celle de l'évènement d'arrivée, sachant l'évènement du nœud d'où part la branche.",
           "On lit le nœud de départ — c'est la condition — puis le nœud d'arrivée.",
-          `La branche part de « ${ctx.courtL[branche]} » et arrive à « ${ctx.courtC[0]} », donc elle porte $P_{${ctx.courtL[branche]}}(${ctx.courtC[0]})$. ` +
+          `La branche part de « ${ctx.courtL[branche]} » et arrive à « ${ctx.courtC[0]} », donc elle porte $P_{${Lb}}(${C0})$. ` +
             `La probabilité d'intersection, elle, vaudrait $${fr(branche === 0 ? p1 : 1 - p1)} \\times ${fr(valeur)}$.`,
           `Ce nombre traduit ${bonne}.`
         ),
         choiceDiagnostics: [
           {
-            choice: `$P(${ctx.courtL[branche]} \\cap ${ctx.courtC[0]}) = ${fr(valeur)}$`,
+            choice: inter,
             cause: "a lu la branche comme une intersection : celle-ci demande de MULTIPLIER par la branche précédente",
           },
         ],
@@ -1971,8 +2066,8 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const bonne = `sur la branche du SECOND niveau qui va de « ${ctx.courtL[0]} » vers « ${ctx.courtC[1]} »`;
       return {
         text:
-          `L'énoncé dit : « parmi les ${ctx.individu} venant de « ${ctx.courtL[0]} », une proportion ` +
-          `$${fr(Math.round((1 - pC1) * 100) / 100)}$ est « ${ctx.courtC[1]} » ». ` +
+          `L'énoncé dit : « parmi les ${ctx.individu} ${pl(ctx.L[0])}, une proportion ` +
+          `$${fr(Math.round((1 - pC1) * 100) / 100)}$ sont ${pl(ctx.C[1])} ». ` +
           `Où ce nombre se place-t-il sur l'arbre ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
@@ -1986,7 +2081,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
         explanation: exp(
           "Une phrase en « parmi les $X$ » annonce une probabilité conditionnelle sachant $X$. Elle se place sur une branche ISSUE du nœud $X$, au second niveau.",
           "On identifie le nœud de départ dans le mot qui suit « parmi », puis la branche qui en sort vers l'évènement cité.",
-          `Le nombre est $P_{${ctx.courtL[0]}}(${ctx.courtC[1]})$ : il part du nœud « ${ctx.courtL[0]} » et va vers « ${ctx.courtC[1]} ». ` +
+          `Le nombre est $P_{${tx(ctx.courtL[0])}}(${tx(ctx.courtC[1])})$ : il part du nœud « ${ctx.courtL[0]} » et va vers « ${ctx.courtC[1]} ». ` +
             `Au bout de ce chemin figure autre chose : le produit ` +
             `$${fr(p1)} \\times ${fr(Math.round((1 - pC1) * 100) / 100)} = ${fr(Math.round(p1 * (1 - pC1) * 10000) / 10000)}$, ` +
             `qui est la probabilité d'intersection.`,
@@ -2030,8 +2125,8 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const valeur = pBranche * pSuite;
       return {
         text:
-          `D'après l'arbre, quelle est la probabilité qu'${unUne(ctx)} ${singulier(ctx)} vienne de « ${ctx.courtL[branche]} » ` +
-          `ET soit « ${ctx.courtC[0]} » ? (arrondi au millième)`,
+          `D'après l'arbre, quelle est la probabilité qu'${unInd(ctx)} soit ${sg(ctx.L[branche])} ` +
+          `ET ${sg(ctx.C[0])} ? (arrondi au millième)`,
         format: "short",
         expected: [fr(Math.round(valeur * 1000) / 1000)],
         comparator: "number_equal",
@@ -2081,7 +2176,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
           "La probabilité au bout d'un chemin est le produit des branches parcourues : $P(A \\cap B) = P(A) \\times P_A(B)$. Cette égalité se lit dans les deux sens.",
           "On divise la valeur du chemin par la branche connue : la branche cherchée en est le quotient.",
           `$${fr(p1)} \\times \\text{?} = ${fr(chemin)}$, donc $\\text{?} = \\dfrac{${fr(chemin)}}{${fr(p1)}} = ${fr(Math.round(pC1 * 100) / 100)}$. ` +
-            `C'est la conditionnelle $P_{${ctx.courtL[0]}}(${ctx.courtC[0]})$ — et non $${fr(chemin)}$, qui vaut l'intersection.`,
+            `C'est la conditionnelle $P_{${tx(ctx.courtL[0])}}(${tx(ctx.courtC[0])})$ — et non $${fr(chemin)}$, qui vaut l'intersection.`,
           `La seconde branche porte $${fr(Math.round(pC1 * 100) / 100)}$.`
         ),
       };
@@ -2111,7 +2206,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const total = chemin1 + chemin2;
       return {
         text:
-          `D'après l'arbre, quelle est la probabilité qu'${unUne(ctx)} ${singulier(ctx)} soit « ${ctx.courtC[0]} », ` +
+          `D'après l'arbre, quelle est la probabilité qu'${unInd(ctx)} soit ${sg(ctx.C[0])}, ` +
           `quelle que soit sa provenance ? (arrondi au millième)`,
         format: "short",
         expected: [fr(Math.round(total * 1000) / 1000)],
@@ -2156,8 +2251,8 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const conforme = p1 * pC1 + (1 - p1) * pC2;
       return {
         text:
-          `D'après l'arbre, quelle est la probabilité qu'${unUne(ctx)} ${singulier(ctx)} soit ` +
-          `« ${ctx.courtC[1]} », quelle que soit sa provenance ? (arrondi au millième)`,
+          `D'après l'arbre, quelle est la probabilité qu'${unInd(ctx)} soit ` +
+          `${sg(ctx.C[1])}, quelle que soit sa provenance ? (arrondi au millième)`,
         format: "short",
         expected: [fr(Math.round(total * 1000) / 1000)],
         comparator: "number_equal",
@@ -2168,7 +2263,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
           `Chemin « ${ctx.courtL[0]} » : $${fr(p1)} \\times ${fr(Math.round((1 - pC1) * 10000) / 10000)} = ${fr(Math.round(cheminA * 10000) / 10000)}$. ` +
             `Chemin « ${ctx.courtL[1]} » : $${fr(Math.round((1 - p1) * 10000) / 10000)} \\times ${fr(Math.round((1 - pC2) * 10000) / 10000)} = ${fr(Math.round(cheminB * 10000) / 10000)}$. ` +
             `Somme : $${fr(Math.round(total * 1000) / 1000)}$. ` +
-            `Contrôle par le contraire : « ${ctx.courtC[0]} » vaut $${fr(Math.round(conforme * 1000) / 1000)}$, ` +
+            `Contrôle par le contraire : la probabilité d'être ${sg(ctx.C[0])} vaut $${fr(Math.round(conforme * 1000) / 1000)}$, ` +
             `et $1 - ${fr(Math.round(conforme * 1000) / 1000)}$ redonne bien le même nombre.`,
           `La probabilité vaut environ $${fr(Math.round(total * 1000) / 1000)}$.`
         ),
@@ -2194,15 +2289,19 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const p1 = pick(PROBAS);
       const pC1 = pick(PROBAS);
       const pC2 = pick(PROBAS);
-      const bonne = `$P(${ctx.courtL[0]}) \\times P_{${ctx.courtL[0]}}(${ctx.courtC[0]}) + P(${ctx.courtL[1]}) \\times P_{${ctx.courtL[1]}}(${ctx.courtC[0]})$`;
+      const L0 = tx(ctx.courtL[0]);
+      const L1 = tx(ctx.courtL[1]);
+      const C0 = tx(ctx.courtC[0]);
+      const bonne = `$P(${L0}) \\times P_{${L0}}(${C0}) + P(${L1}) \\times P_{${L1}}(${C0})$`;
+      const sommeCond = `$P_{${L0}}(${C0}) + P_{${L1}}(${C0})$`;
       return {
-        text: `Quelle formule donne $P(${ctx.courtC[0]})$ à partir de cet arbre ?`,
+        text: `Quelle formule donne $P(${C0})$ à partir de cet arbre ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
-          `$P_{${ctx.courtL[0]}}(${ctx.courtC[0]}) + P_{${ctx.courtL[1]}}(${ctx.courtC[0]})$`,
-          `$P(${ctx.courtL[0]}) \\times P_{${ctx.courtL[0]}}(${ctx.courtC[0]})$`,
-          `$P(${ctx.courtL[0]}) + P(${ctx.courtL[1]})$`,
-          `$P_{${ctx.courtL[0]}}(${ctx.courtC[0]}) \\times P_{${ctx.courtL[1]}}(${ctx.courtC[0]})$`,
+          sommeCond,
+          `$P(${L0}) \\times P_{${L0}}(${C0})$`,
+          `$P(${L0}) + P(${L1})$`,
+          `$P_{${L0}}(${C0}) \\times P_{${L1}}(${C0})$`,
         ]),
         expected: [bonne],
         comparator: "mcq_exact",
@@ -2216,7 +2315,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
         ),
         choiceDiagnostics: [
           {
-            choice: `$P_{${ctx.courtL[0]}}(${ctx.courtC[0]}) + P_{${ctx.courtL[1]}}(${ctx.courtC[0]})$`,
+            choice: sommeCond,
             cause: "a additionné les probabilités conditionnelles sans les pondérer par la probabilité de chaque branche",
           },
         ],
@@ -2257,7 +2356,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
         text:
           // L'étiquette reste HORS des dollars : « $P(Poids OK)$ » passait en
           // italique mathématique, espace comprise.
-          `Pour calculer la probabilité d'être « ${ctx.courtC[0]} », un élève écrit : ` +
+          `Pour calculer la probabilité qu'${unInd(ctx)} soit ${sg(ctx.C[0])}, un élève écrit : ` +
           `« $${fr(p1)} + ${fr(p2)} \\times ${fr(pC2)} = ${fr(faux)}$ ». Où est l'erreur ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
@@ -2275,7 +2374,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
             `pas celle du chemin. Il fallait écrire $${fr(p1)} \\times ${fr(pC1)}$. ` +
             `Résultat correct : $${fr(Math.round(p1 * pC1 * 10000) / 10000)} + ${fr(Math.round(p2 * pC2 * 10000) / 10000)} = ${fr(juste)}$, ` +
             `et non $${fr(faux)}$.`,
-          `L'erreur est un chemin laissé sans sa branche conditionnelle : $P(${ctx.courtC[0]}) = ${fr(juste)}$.`
+          `L'erreur est un chemin laissé sans sa branche conditionnelle : $P(${tx(ctx.courtC[0])}) = ${fr(juste)}$.`
         ),
         choiceDiagnostics: [
           {
@@ -2312,7 +2411,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       return {
         text:
           `Cet arbre a été construit à partir d'une étude sur $${t.total}$ ${t.ctx.individu}. ` +
-          `Combien ${/^[aeiouyéèêh]/i.test(t.ctx.individu) ? "d'" : "de "}${t.ctx.individu} relèvent à la fois de « ${t.ctx.lignes[0]} » et de « ${t.ctx.colonnes[0]} » ?`,
+          `Combien ${deInd(t.ctx)} sont à la fois ${pl(t.ctx.L[0])} et ${pl(t.ctx.C[0])} ?`,
         format: "short",
         expected: [String(t.a)],
         comparator: "number_equal",
@@ -2328,7 +2427,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
           "On calcule la probabilité du chemin, puis on la multiplie par l'effectif total pour retrouver la case.",
           `$P = ${fr(Math.round(p1 * 10000) / 10000)} \\times ${fr(Math.round(pC1 * 10000) / 10000)} \\approx ${fr(Math.round(p1 * pC1 * 10000) / 10000)}$, ` +
             `donc l'effectif vaut environ $${fr(Math.round(p1 * pC1 * 10000) / 10000)} \\times ${t.total} = ${t.a}$.`,
-          `$${t.a}$ ${t.ctx.individu} relèvent des deux.`
+          `$${t.a}$ ${t.ctx.individu} sont à la fois ${pl(t.ctx.L[0])} et ${pl(t.ctx.C[0])}.`
         ),
       };
     },
@@ -2367,7 +2466,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
         explanation: exp(
           "Dans un arbre, une branche du second niveau porte une probabilité CONDITIONNELLE : elle se calcule dans la sous-population de son nœud de départ, pas sur l'ensemble.",
           "On lit la case croisée pour le numérateur, et l'effectif marginal de la LIGNE de départ pour le dénominateur.",
-          `$P_{${c.lignes[0]}}(${c.colonnes[0]}) = \\dfrac{${t.a}}{${t.ligne1}} \\approx ${fr(Math.round(valeur * 100) / 100)}$. ` +
+          `$P_{${tx(c.lignes[0])}}(${tx(c.colonnes[0])}) = \\dfrac{${t.a}}{${t.ligne1}} \\approx ${fr(Math.round(valeur * 100) / 100)}$. ` +
             `⚠️ Diviser par le total donnerait $\\dfrac{${t.a}}{${t.total}} \\approx ${fr(Math.round((t.a / t.total) * 100) / 100)}$ : ` +
             `c'est l'intersection, celle qu'on lit AU BOUT du chemin. ` +
             `La branche du premier niveau, elle, porte $\\dfrac{${t.ligne1}}{${t.total}} \\approx ${fr(Math.round((t.ligne1 / t.total) * 100) / 100)}$.`,
@@ -2397,7 +2496,9 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const independants = Math.random() < 0.5;
       const pC2 = independants ? pCommune : pick(PROBAS.filter((v) => v !== pCommune));
       return {
-        text: `D'après cet arbre, les évènements « ${ctx.courtL[0]} » et « ${ctx.courtC[0]} » sont-ils indépendants ?`,
+        text:
+          `On choisit ${unInd(ctx)} au hasard. D'après cet arbre, les évènements « ${ilElle(ctx)} est ${sg(ctx.L[0])} » ` +
+          `et « ${ilElle(ctx)} est ${sg(ctx.C[0])} » sont-ils indépendants ?`,
         format: "qcm",
         choices: shuffle(["oui", "non"]),
         expected: [independants ? "oui" : "non"],
@@ -2437,8 +2538,8 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const bonne = "$P_A(B) = P(B)$ : savoir que $A$ est réalisé ne change rien à la probabilité de $B$";
       return {
         text:
-          `${pick(["Étude", "Enquête", "Bilan"] as const)} « ${c.sujet} » : on note $A$ l'évènement « ${leLa(c)}${singulier(c)} vient de « ${c.lignes[0]} » » ` +
-          `et $B$ l'évènement « ${ilElle(c)} est « ${c.colonnes[0]} » ». Ces deux évènements sont indépendants. ` +
+          `${pick(["Étude", "Enquête", "Bilan"] as const)} « ${c.sujet} » : on note $A$ l'évènement « ${lInd(c)} est ${sg(c.L[0])} » ` +
+          `et $B$ l'évènement « ${ilElle(c)} est ${sg(c.C[0])} ». Ces deux évènements sont indépendants. ` +
           `Que peut-on dire de la probabilité conditionnelle $P_A(B)$ ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
@@ -2583,7 +2684,8 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const independants = Math.abs(pInter - produit) < 1e-9;
       return {
         text:
-          `On note $A$ : « relève de ${t.ctx.lignes[0]} » et $B$ : « relève de ${t.ctx.colonnes[0]} ». ` +
+          `On choisit ${unInd(t.ctx)} au hasard. On note $A$ : « ${ilElle(t.ctx)} est ${sg(t.ctx.L[0])} » et ` +
+          `$B$ : « ${ilElle(t.ctx)} est ${sg(t.ctx.C[0])} ». ` +
           `Ces deux évènements sont-ils indépendants ?`,
         format: "qcm",
         choices: shuffle(["oui", "non"]),
@@ -2628,15 +2730,16 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const taux = pick([0.05, 0.1, 0.15, 0.2, 0.25] as const);
       const pC = Math.round((1 - taux) * 100) / 100;
       const bonne =
-        `« ${ctx.courtC[1]} » est INDÉPENDANT de la provenance : connaître la provenance n'apprend rien`;
+        `être ${sg(ctx.C[1])} est INDÉPENDANT de la provenance : connaître la provenance n'apprend rien`;
+      const incompatibles = `être ${sg(ctx.C[1])} et être ${sg(ctx.L[0])} sont incompatibles`;
       return {
         text:
-          `Sur cet arbre, la probabilité d'être « ${ctx.courtC[1]} » vaut $${fr(taux)}$ ` +
+          `Sur cet arbre, la branche menant à « ${ctx.courtC[1]} » porte $${fr(taux)}$ ` +
           `depuis « ${ctx.courtL[0]} » COMME depuis « ${ctx.courtL[1]} ». Qu'en conclure ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
-          `les deux provenances fournissent le même NOMBRE ${/^[aeiouyéèêh]/i.test(ctx.individu) ? "d'" : "de "}${ctx.individu}`,
-          `« ${ctx.courtC[1]} » et « ${ctx.courtL[0]} » sont incompatibles`,
+          `les deux provenances fournissent le même NOMBRE ${deInd(ctx)}`,
+          incompatibles,
           "on ne peut rien conclure sans connaître l'effectif total",
         ]),
         expected: [bonne],
@@ -2649,15 +2752,15 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
             `$${fr(p1)} \\times ${fr(taux)} + ${fr(Math.round((1 - p1) * 10000) / 10000)} \\times ${fr(taux)} = ${fr(taux)}$ : ` +
             `on retombe sur le même nombre, quelle que soit la répartition entre les deux provenances. ` +
             `Concrètement : changer de « ${ctx.courtL[0]} » pour « ${ctx.courtL[1]} » ne ferait rien gagner.`,
-          `« ${ctx.courtC[1]} » est indépendant de la provenance.`
+          `Être ${sg(ctx.C[1])} est indépendant de la provenance.`
         ),
         choiceDiagnostics: [
           {
-            choice: `les deux provenances fournissent le même NOMBRE ${/^[aeiouyéèêh]/i.test(ctx.individu) ? "d'" : "de "}${ctx.individu}`,
-            cause: `c'est une autre question : ici $P(${ctx.courtL[0]}) = ${fr(p1)}$, les deux provenances n'ont pas le même poids`,
+            choice: `les deux provenances fournissent le même NOMBRE ${deInd(ctx)}`,
+            cause: `c'est une autre question : ici $P(${tx(ctx.courtL[0])}) = ${fr(p1)}$, les deux provenances n'ont pas le même poids`,
           },
           {
-            choice: `« ${ctx.courtC[1]} » et « ${ctx.courtL[0]} » sont incompatibles`,
+            choice: incompatibles,
             cause: "incompatibles voudrait dire qu'ils ne se produisent jamais ensemble — ici ils se produisent ensemble, et souvent",
           },
         ],
@@ -2726,13 +2829,13 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const pB = pick(PROBAS);
       const phrase =
         cas === "contraires"
-          ? `$A$ : « ${leLa(ctx)}${singulier(ctx)} est ${ctx.courtC[0]} », de probabilité $${fr(pA)}$, ` +
-            `et $B$ : « ${ilElle(ctx)} est ${ctx.courtC[1]} », de probabilité $${fr(Math.round((1 - pA) * 10000) / 10000)}$`
+          ? `$A$ : « ${lInd(ctx)} est ${sg(ctx.C[0])} », de probabilité $${fr(pA)}$, ` +
+            `et $B$ : « ${ilElle(ctx)} est ${sg(ctx.C[1])} », de probabilité $${fr(Math.round((1 - pA) * 10000) / 10000)}$`
           : cas === "independants"
-            ? `$A$ : « ${ctx.genre === "f" ? "la première" : "le premier"} ${singulier(ctx)} tiré${ctx.genre === "f" ? "e" : ""} AVEC REMISE est ${ctx.courtC[1]} », de probabilité $${fr(pA)}$, ` +
+            ? `$A$ : « ${ctx.genre === "f" ? "la première" : "le premier"} ${singulier(ctx)} tiré${ctx.genre === "f" ? "e" : ""} AVEC REMISE est ${sg(ctx.C[1])} », de probabilité $${fr(pA)}$, ` +
               `et $B$ : « ${ctx.genre === "f" ? "la seconde" : "le second"} l'est aussi », de même probabilité $${fr(pA)}$`
-            : `$A$ : « ${leLa(ctx)}${singulier(ctx)} vient de ${ctx.courtL[0]} », de probabilité $${fr(pA)}$, ` +
-              `et $B$ : « ${ilElle(ctx)} est ${ctx.courtC[1]} », de probabilité $${fr(pB)}$`;
+            : `$A$ : « ${lInd(ctx)} est ${sg(ctx.L[0])} », de probabilité $${fr(pA)}$, ` +
+              `et $B$ : « ${ilElle(ctx)} est ${sg(ctx.C[1])} », de probabilité $${fr(pB)}$`;
       const bonne =
         cas === "contraires"
           ? "incompatibles, donc dépendants"
@@ -2754,10 +2857,10 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
           "Incompatibles : ils ne peuvent pas se produire ensemble ($P(A \\cap B) = 0$). Indépendants : la réalisation de l'un ne change pas la probabilité de l'autre. Ces deux propriétés s'excluent quand les probabilités sont non nulles.",
           "On se demande d'abord si les deux évènements peuvent coexister, puis si l'un renseigne sur l'autre.",
           cas === "contraires"
-            ? `${ctx.genre === "f" ? "Une même" : "Un même"} ${singulier(ctx)} ne peut pas être à la fois « ${ctx.courtC[0]} » et « ${ctx.courtC[1]} » : ils sont incompatibles, donc dépendants.`
+            ? `${ctx.genre === "f" ? "Une même" : "Un même"} ${singulier(ctx)} ne peut pas être à la fois ${sg(ctx.C[0])} et ${sg(ctx.C[1])} : ils sont incompatibles, donc dépendants.`
             : cas === "independants"
               ? "Les deux tirages se font AVEC REMISE : le premier ne modifie pas le stock, donc les évènements sont indépendants."
-              : `${ctx.genre === "f" ? "Une" : "Un"} ${singulier(ctx)} peut très bien venir de « ${ctx.courtL[0]} » ET être « ${ctx.courtC[1]} » : ils ne sont pas incompatibles. Rien ne garantit non plus l'indépendance : il faudrait la vérifier par un calcul.`,
+              : `${ctx.genre === "f" ? "Une" : "Un"} ${singulier(ctx)} peut très bien être ${sg(ctx.L[0])} ET ${sg(ctx.C[1])} : ils ne sont pas incompatibles. Rien ne garantit non plus l'indépendance : il faudrait la vérifier par un calcul.`,
           `Ces évènements sont ${bonne}.`
         ),
         choiceDiagnostics: [
