@@ -1,0 +1,10 @@
+{
+  "00-accroche": "Mêmes lettres, A et B. Trois dessins différents. Tu sais pourquoi ?",
+  "01-regle": "Le crochet, c'est un mur : la ligne s'arrête. La parenthèse, c'est une porte ouverte : la ligne continue.",
+  "02-droite": "Deux parenthèses : ça continue des deux côtés. C'est la droite A B.",
+  "03-demi-droite": "Un crochet devant A, une parenthèse après B : ça s'arrête en A, et ça continue après B. C'est la demi-droite A B.",
+  "04-segment": "Deux crochets : ça s'arrête des deux côtés. C'est le segment A B.",
+  "05-longueur": "Et A B, sans rien autour ? C'est un nombre : la longueur du segment.",
+  "06-defi": "À toi. Ça part de M, ça passe par N, et ça continue. Comment l'écris-tu ?",
+  "07-fin": "Ta réponse en commentaire. Entraîne-toi sur éleveai point f r, et abonne-toi !"
+}

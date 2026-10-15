@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Une salle de sport : 1 mois coûte 30 euros, 2 mois coûtent 40 euros. Le prix est-il proportionnel ?",
+  "01-piege": "Ça augmente toujours de 10 euros : on croit que oui. Mais régulier ne veut pas dire proportionnel !",
+  "02-quotients": "Je divise le prix par le nombre de mois. 30 divisé par 1, 30. 40 divisé par 2, 20. Le quotient change : ce n'est pas proportionnel.",
+  "03-reponse": "La cause : 20 euros d'inscription, payés une seule fois. Si c'était proportionnel, 2 mois coûteraient le double : 60 euros.",
+  "04-defi": "À toi. Un plombier : 40 euros de déplacement, puis 30 euros de l'heure. Le prix est-il proportionnel au temps ?",
+  "05-fin": "Ta réponse en commentaire. La vidéo complète sur la proportionnalité est juste en dessous."
+}

@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Voici une règle vraie : la fonction inverse est décroissante. Donc si un nombre est plus petit qu'un autre, son inverse devrait être plus grand. Sauf que ça ne marche pas toujours.",
+  "01-marche": "Quand ça marche : 1 est plus petit que 2. Un sur 1 vaut 1, un sur 2 vaut zéro virgule 5. Le plus petit a bien l'inverse le plus grand. L'ordre s'est retourné, comme promis.",
+  "02-marchepas": "Maintenant, moins 2 et 3. Moins 2 est plus petit que 3. Mais un sur moins 2 vaut moins zéro virgule 5, et un sur 3 vaut environ zéro virgule 33. Cette fois, le plus petit a l'inverse le plus PETIT. L'ordre est conservé. La règle vient de tomber.",
+  "03-pourquoi": "Pourquoi ? Parce que la courbe de la fonction inverse est en DEUX morceaux, qui ne se rejoignent jamais. Elle descend sur chacun des deux, mais séparément. En traversant zéro, tu changes de morceau, et la règle ne dit plus rien.",
+  "04-retenir": "Retiens : la fonction inverse est décroissante sur les négatifs, et décroissante sur les positifs. Jamais de l'un à l'autre. Avant d'appliquer la règle, vérifie que tes deux nombres sont du même côté de zéro.",
+  "05-fin": "La vidéo complète est sur la chaîne."
+}

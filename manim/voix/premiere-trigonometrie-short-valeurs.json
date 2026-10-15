@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Dix valeurs de cosinus et de sinus à apprendre par cœur ? Non. Une seule ligne suffit, et tu ne l'oublieras plus.",
+  "01-ligne": "Écris les angles : zéro, pi sur 6, pi sur 4, pi sur 3, pi sur 2. En dessous, écris racine de 0 sur 2, racine de 1 sur 2, racine de 2 sur 2, racine de 3 sur 2, racine de 4 sur 2. Zéro, un, deux, trois, quatre : c'est tout.",
+  "02-simplifier": "Maintenant on simplifie. Racine de 0, c'est 0. Racine de 1, c'est 1 : un demi. Racine de 4, c'est 2 : 2 sur 2, égale 1. Cette ligne, ce sont les sinus.",
+  "03-cosinus": "Et les cosinus ? La même ligne, lue à l'envers. Cosinus de 0 égale 1, cosinus de pi sur 6 égale racine de 3 sur 2, et ainsi de suite, jusqu'à cosinus de pi sur 2, égale 0.",
+  "04-verifier": "Pour ne jamais les échanger, regarde le cercle. Pi sur 6 est un petit angle : le point est encore bas, son sinus est petit, un demi. Pi sur 3 est un grand angle : le point est déjà haut, son sinus est grand, racine de 3 sur 2.",
+  "05-fin": "La vidéo complète sur le cercle trigonométrique est sur la chaîne."
+}

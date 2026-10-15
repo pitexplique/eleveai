@@ -1,0 +1,17 @@
+{
+  "00-garde": "60 billes. On les partage, puis on repartage, encore et encore. Jusqu'où ? Jusqu'aux nombres premiers : les briques de tous les nombres.",
+  "00b-objectifs": "Au programme : casser un nombre en facteurs premiers, écrire sa décomposition, et s'en servir pour résoudre un problème.",
+  "01-casser-12": "Prenons 12 billes. On les partage en 2 groupes de 6 : 12 égale 2 fois 6. Chaque groupe de 6 se partage en 2 groupes de 3 : 6 égale 2 fois 3. Et 3 ? 3 billes ne se partagent plus en groupes égaux : 3 est premier. On s'arrête.",
+  "02-resultat-12": "Il reste des briques qu'on ne peut plus casser : 2, 2 et 3. 12 égale 2 fois 2 fois 3. C'est la décomposition de 12 en produit de facteurs premiers.",
+  "03-arbre-60": "Avec 60, on dessine un arbre. 60 égale 6 fois 10. 6 égale 2 fois 3. 10 égale 2 fois 5. Toutes les branches finissent sur un nombre premier. 60 égale 2 fois 2 fois 3 fois 5.",
+  "04-autre-chemin": "Et si on commence autrement ? 60 égale 4 fois 15. 4 égale 2 fois 2. 15 égale 3 fois 5. On retrouve les mêmes briques : 2, 2, 3 et 5. Quel que soit le chemin, la décomposition est toujours la même.",
+  "05-methode": "Pour aller vite, on divise par les nombres premiers, dans l'ordre. 60 divisé par 2 égale 30. 30 divisé par 2 égale 15. 15 ne se divise pas par 2 : on essaie 3. 15 divisé par 3 égale 5. Et 5 est premier : on s'arrête. Les diviseurs utilisés donnent la décomposition : 2, 2, 3 et 5.",
+  "06-puissances": "On range les briques identiques avec une puissance. 2 fois 2, c'est 2 au carré. 60 égale 2 au carré fois 3 fois 5.",
+  "07-probleme": "À quoi ça sert ? Un fleuriste a 60 roses et 84 tulipes. Il veut faire le plus grand nombre de bouquets identiques, en utilisant toutes les fleurs. 60 égale 2 fois 2 fois 3 fois 5. 84 égale 2 fois 2 fois 3 fois 7. Les briques communes : 2, 2 et 3. 2 fois 2 fois 3 égale 12. Il fera 12 bouquets, avec 5 roses et 7 tulipes dans chacun.",
+  "08-piege": "Le piège : écrire 60 égale 6 fois 10, et s'arrêter là. 6 et 10 ne sont pas premiers : on n'a pas fini. On continue tant qu'une brique se casse encore.",
+  "09-recap": "Le récapitulatif. On casse le nombre jusqu'à ce qu'il ne reste que des nombres premiers. On peut dessiner un arbre, ou diviser par 2, 3, 5, 7, dans l'ordre. Quel que soit le chemin, on trouve les mêmes briques. Et les briques communes à deux nombres donnent le plus grand nombre de paquets identiques.",
+  "10-defi": "À toi. Décompose 90 en produit de facteurs premiers. Mets pause.",
+  "11-correction": "Correction. 90 divisé par 2 égale 45. 45 ne se divise pas par 2 : on essaie 3. 45 divisé par 3 égale 15. 15 divisé par 3 égale 5. Et 5 est premier. 90 égale 2 fois 3 fois 3 fois 5, c'est-à-dire 2 fois 3 au carré fois 5.",
+  "12-finale": "Tu sais maintenant casser un nombre en facteurs premiers, écrire sa décomposition, et t'en servir pour résoudre un problème. Si tu ne devais retenir qu'une chose : les nombres premiers sont les briques de tous les nombres.",
+  "13-abonne": "Dis-moi en commentaire la décomposition de 100. Entraîne-toi sur le coach maths d'éleveai point fr, et abonne-toi à la chaîne !"
+}

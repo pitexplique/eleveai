@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Multiplier, ça rend toujours plus grand ? Alors, combien font 250 fois 0 virgule 1 ?",
+  "01-sens": "0 virgule 1, c'est un dixième. 250 fois 0 virgule 1, c'est prendre un dixième de 250.",
+  "02-partage": "On coupe 250 en 10 parts égales. Une part, c'est 25.",
+  "03-tableau": "Dans le tableau, chaque chiffre recule d'un rang. 250 devient 25.",
+  "04-regle": "Multiplier par 0 virgule 1, c'est diviser par 10. Le résultat est plus petit !",
+  "05-defi": "À toi. Combien font 40 fois 0 virgule 01 ?",
+  "06-fin": "Ta réponse en commentaire. La vidéo complète sur le calcul avec les décimaux est juste en dessous."
+}

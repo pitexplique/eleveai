@@ -1,0 +1,12 @@
+{
+  "00-garde": "Rédiger avec Pythagore. Le théorème ou la réciproque : comment savoir lequel écrire ?",
+  "01-question": "Avant d'écrire, une seule question : l'angle droit, je le connais, ou je le cherche ? Je le connais : j'utilise le théorème, pour calculer une longueur. Je le cherche : j'utilise la réciproque, pour prouver que le triangle est rectangle.",
+  "02-theoreme": "Le théorème, en quatre lignes. Un : le triangle ABC est rectangle en A. Deux : d'après le théorème de Pythagore, BC au carré égale AB au carré plus AC au carré. Trois : BC au carré égale 36 plus 64 : 100. Quatre : BC égale racine carrée de 100 : 10 centimètres.",
+  "03-reciproque": "La réciproque, en quatre lignes. Un : le plus grand côté est EF. Deux : d'une part, EF au carré égale 169. D'autre part, DE au carré plus DF au carré égale 25 plus 144 : 169. Trois : donc EF au carré égale DE au carré plus DF au carré. Quatre : d'après la réciproque du théorème de Pythagore, DEF est rectangle en D.",
+  "04-mots": "Regarde où se trouve : rectangle en. Dans le théorème, c'est la première ligne : on part de l'angle droit. Dans la réciproque, c'est la dernière ligne : on arrive à l'angle droit.",
+  "05-piege": "Le piège : mélanger les deux. Écrire : d'après le théorème de Pythagore, le triangle est rectangle. C'est faux, le théorème ne prouve pas l'angle droit. Ou commencer par : le triangle est rectangle, alors que c'est justement ce qu'on cherche.",
+  "06-defi": "À toi de jouer, deux questions. Un : RST est rectangle en S, avec RS égale 9 et ST égale 12 ; calcule RT. Deux : un triangle a pour côtés 8, 15 et 17 ; est-il rectangle ? Pour chacune : théorème ou réciproque ? Mets pause, et rédige !",
+  "06b-correction": "Correction. Question un : on connaît l'angle droit, c'est le théorème. RT au carré égale 81 plus 144 : 225. RT égale 15 centimètres. Question deux : on cherche l'angle droit, c'est la réciproque. D'une part, 17 au carré : 289. D'autre part, 8 au carré plus 15 au carré : 289. C'est égal : d'après la réciproque, le triangle est rectangle.",
+  "07-finale": "Ce que tu sais faire maintenant. Choisir entre le théorème et la réciproque ? Rédiger le théorème en quatre lignes ? Rédiger la réciproque en quatre lignes ? Tu as terminé la série Pythagore. Bravo !",
+  "08-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Moins x, c'est négatif ? Pas forcément. Moins x est parfois positif.",
+  "01-reflexe": "Le réflexe : il y a un moins devant, donc c'est négatif. C'est faux.",
+  "02-essai": "Essaie. Si x vaut moins 3, alors moins x vaut 3. Le signe moins ne veut pas dire négatif. Il veut dire : l'opposé. De l'autre côté du zéro.",
+  "03-piege": "C'est le piège de la valeur absolue. Pi moins 4 est négatif. Donc sa valeur absolue, c'est son opposé : 4 moins pi. Une valeur absolue n'est jamais négative.",
+  "04-defi": "À toi : la valeur absolue de 3 moins pi, ça vaut combien ?",
+  "05-fin": "Ta réponse en commentaire. La leçon, sur la chaîne. Les exercices, sur eleveai point f r."
+}

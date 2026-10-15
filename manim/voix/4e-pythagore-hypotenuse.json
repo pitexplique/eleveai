@@ -1,0 +1,14 @@
+{
+  "00-garde": "Calculer l'hypoténuse. Pour traverser un champ de cannes en diagonale, combien de mètres fait-on ?",
+  "01-champ": "Un champ de cannes rectangulaire : 40 mètres de long, 30 mètres de large. Pour aller d'un coin à l'autre, on peut longer les bords : 70 mètres. Ou couper en diagonale. Combien mesure la diagonale ?",
+  "02-triangle": "La diagonale coupe le champ en deux triangles rectangles. L'angle droit est au coin du champ. La diagonale est en face : c'est l'hypoténuse.",
+  "03-theoreme": "Le théorème de Pythagore dit : dans un triangle rectangle, le carré de l'hypoténuse est égal à la somme des carrés des deux autres côtés. Regarde avec des carreaux. 3 sur 3, c'est 9. 4 sur 4, c'est 16. 9 plus 16 : 25 carreaux. Exactement le carré construit sur l'hypoténuse : 5 sur 5.",
+  "04-methode": "La méthode en trois lignes. Un : j'écris l'égalité. Deux : je calcule les carrés et je les additionne. Trois : je prends la racine carrée. Pour le champ : 30 au carré, 900. 40 au carré, 1600. 900 plus 1600 : 2500. Racine carrée de 2500 : 50. La diagonale mesure 50 mètres : 20 mètres de moins que par les bords.",
+  "05-piege-longueurs": "Premier piège : additionner les longueurs. 30 plus 40, ça fait 70 : c'est le chemin par les bords, pas la diagonale. On additionne les carrés, pas les longueurs.",
+  "06-piege-racine": "Deuxième piège : oublier la racine. 2500, c'est le carré de la diagonale, pas sa longueur. Pour contrôler : l'hypoténuse est le plus long côté, mais elle est plus courte que les deux autres mis bout à bout. 50 est entre 40 et 70 : c'est cohérent.",
+  "07-arrondi": "Souvent, la racine ne tombe pas juste. Les côtés de l'angle droit mesurent 5 centimètres et 7 centimètres. 25 plus 49 : 74. Racine carrée de 74 : la calculatrice donne 8 virgule 6 0 2. On arrondit au dixième : environ 8 virgule 6 centimètres.",
+  "08-defi": "À toi de jouer. Le triangle DEF est rectangle en E, avec DE égale 6 centimètres et EF égale 8 centimètres. Combien mesure DF ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Rectangle en E : l'hypoténuse est DF. DF au carré égale 6 au carré plus 8 au carré : 36 plus 64, 100. DF égale racine carrée de 100 : 10 centimètres. Contrôle : 10 est plus grand que 8, et plus petit que 14.",
+  "09-finale": "Ce que tu sais faire maintenant. Écrire l'égalité de Pythagore ? Additionner les carrés, puis prendre la racine ? Arrondir quand la racine ne tombe pas juste ? Alors l'épisode 4 t'attend : calculer un côté de l'angle droit.",
+  "10-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

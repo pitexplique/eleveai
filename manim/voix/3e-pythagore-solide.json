@@ -1,0 +1,15 @@
+{
+  "00-garde": "Pythagore dans un solide. Ceinture verte. Où se cache le triangle rectangle dans un gobelet ?",
+  "01-gobelet": "Un gobelet. Il a la forme d'un tronc de cône : un cône dont on a coupé la pointe. C'est l'exercice 2 du brevet 2026. On veut connaître la hauteur de la partie coupée.",
+  "02-cone-complet": "Première idée : on remet la pointe. On prolonge le gobelet vers le bas, en pointillés, jusqu'au sommet O. Le gobelet redevient un cône entier.",
+  "03-triangle": "Le triangle caché. A est le centre du fond du gobelet, D un point de son bord. La hauteur OA tombe droit sur le fond : elle est perpendiculaire au rayon AD. Le triangle OAD est rectangle en A.",
+  "04-hypotenuse": "Qui est l'hypoténuse ? Le côté en face de l'angle droit : OD, le bord du cône. On connaît OD : 8 virgule 2 centimètres. Et le rayon AD : 1 virgule 8 centimètre. On cherche OA, un côté de l'angle droit.",
+  "05-calcul": "On cherche un côté de l'angle droit, donc on soustrait. OA au carré égale OD au carré moins AD au carré. 8 virgule 2 au carré : 67 virgule 24. 1 virgule 8 au carré : 3 virgule 24. 67 virgule 24 moins 3 virgule 24 : 64. OA égale racine de 64 : 8 centimètres.",
+  "06-piege": "Le piège : 8 virgule 2 au carré, ce n'est pas 64 virgule 4. On multiplie 8 virgule 2 par lui-même : 67 virgule 24. Le carré d'un décimal se calcule entier, sans couper.",
+  "07-partout": "Le même geste marche dans tous les solides. Dans un cône : la hauteur et le rayon font l'angle droit, la génératrice est l'hypoténuse. Dans une pyramide : la hauteur tombe au centre de la base. Dans un pavé : une arête verticale et la diagonale du fond. Toujours la même question : où est l'angle droit ?",
+  "08-rediger": "Comment rédiger au brevet. Ligne un : le triangle OAD est rectangle en A. Ligne deux : d'après le théorème de Pythagore, OD au carré égale OA au carré plus AD au carré. Ligne trois : OA au carré égale 67 virgule 24 moins 3 virgule 24, égale 64. Ligne quatre : OA égale 8 centimètres.",
+  "09-defi": "À toi de jouer. Une boîte en forme de pavé droit ABCDEFGH : AB égale 4 centimètres, BC égale 3 centimètres, et la hauteur CG égale 12 centimètres. Combien mesure la grande diagonale AG ? Mets pause, et cherche !",
+  "09b-correction": "Correction. Deux triangles, l'un après l'autre. Dans le fond, ABC est rectangle en B : AC au carré égale 16 plus 9, égale 25. Puis ACG est rectangle en C : AG au carré égale 25 plus 144, égale 169. AG égale racine de 169 : 13 centimètres.",
+  "10-finale": "Ce que tu as appris. Un cône coupé, on lui remet sa pointe. Dans un solide, le triangle rectangle se cache là où une hauteur tombe droit. Le carré d'un décimal se calcule entier. Pour t'entraîner, le coach t'attend : la micro Pythagore dans un solide.",
+  "11-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

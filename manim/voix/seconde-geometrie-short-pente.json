@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Un panneau annonce une pente de 12 pour cent. Combien ça fait, en degrés ? Si tu as pensé 12, c'est faux. La vraie réponse est presque deux fois plus petite.",
+  "01-sens": "D'abord, ce que veut dire 12 pour cent. La route monte de 12 mètres quand on avance de 100 mètres à l'HORIZONTALE. Douze en hauteur, cent en largeur.",
+  "02-calcul": "Le côté opposé sur le côté adjacent : c'est une tangente. Tangente de l'angle égale 12 sur 100, c'est-à-dire zéro virgule 12. La calculatrice donne 6 virgule 8 degrés. Un pourcentage de pente n'est jamais un angle.",
+  "03-piege": "Et il y a un second piège. Si tu roules 2 kilomètres, tu ne montes pas de 12 pour cent de 2000 mètres. Parce que ces 2 kilomètres sont mesurés LE LONG DE LA ROUTE : c'est l'hypoténuse, pas le côté horizontal. Il faut donc le sinus. 2000 fois sinus de 6 virgule 8 degrés, ça fait 238 mètres, et non 240.",
+  "04-retenir": "Retiens deux choses. Un pourcentage de pente, c'est une tangente, jamais un angle. Et ce que mesure ton compteur, c'est l'hypoténuse.",
+  "05-fin": "La vidéo complète est sur la chaîne."
+}

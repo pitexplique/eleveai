@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Sur cette droite, on lit 0, et plus loin 10. Le point A est sur le troisième trait. Beaucoup répondent : A, c'est 3. Et c'est faux !",
+  "01-piege": "3, c'est le nombre de traits. Pas l'abscisse. Ici, un trait ne vaut pas 1.",
+  "02-pas": "Je trouve le pas. De 0 à 10, il y a 5 écarts. 10 divisé par 5, ça fait 2. Le pas vaut 2.",
+  "03-compter": "Je compte depuis 0, de 2 en 2 : 2, 4, 6. L'abscisse de A, c'est 6.",
+  "04-defi": "À toi. On lit 0 et 20, avec 4 écarts entre les deux. Le point B est sur le troisième trait. Quelle est son abscisse ?",
+  "05-fin": "Ta réponse en commentaire. La vidéo complète sur la demi-droite graduée est juste en dessous."
+}

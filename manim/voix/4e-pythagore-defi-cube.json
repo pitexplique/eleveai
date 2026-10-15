@@ -1,0 +1,10 @@
+{
+  "00-garde": "Défi : combien de triangles rectangles dans un cube ? Mets pause, et compte avant de regarder la suite !",
+  "01-cube": "Un cube ABCDEFGH. On choisit trois de ses sommets : ils forment un triangle. Combien de ces triangles ont un angle droit ?",
+  "02-faces": "Première famille : sur les faces. Sur chaque face carrée, trois sommets font un triangle rectangle : deux arêtes et une diagonale. Une face en contient 4. Le cube a 6 faces : 6 fois 4, 24 triangles.",
+  "03-biais": "Deuxième famille, plus cachée : en biais, à l'intérieur du cube. Une arête, une diagonale de face, et la grande diagonale du cube. Par exemple ABG : l'arête AB est perpendiculaire à toute la face BCGF, donc l'angle en B est droit. La réciproque le confirme : avec des arêtes de 1, AG au carré vaut 3, et AB au carré plus BG au carré, 1 plus 2, aussi 3. Il y en a 24, eux aussi.",
+  "04-total": "24 plus 24 : 48 triangles rectangles.",
+  "05-piege": "Et les autres ? Avec trois diagonales de faces, on obtient un triangle équilatéral : aucun angle droit. Il y en a 8. En tout, 56 triangles : 48 rectangles, et 8 équilatéraux.",
+  "06-fin": "Et toi, tu en avais trouvé combien ? Dis-le en commentaire !",
+  "07-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

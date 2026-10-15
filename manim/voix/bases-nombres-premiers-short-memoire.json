@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Défi mémoire ! Retiens le plus de nombres premiers possible. Tu as quinze secondes. Prêt ?",
+  "01-liste": "2, 3, 5, 7. 11, 13, 17, 19. 23, 29. 31, 37. 41, 43, 47.",
+  "02-astuce": "Une astuce : à part 2 et 5, ils finissent tous par 1, 3, 7 ou 9.",
+  "03-cache": "Je cache tout. Combien t'en souviens-tu ?",
+  "04-defi": "Le défi : écris en commentaire tous ceux que tu as retenus. Qui fera quinze sur quinze ? Et en bonus : quel est le nombre premier juste après 47 ?",
+  "05-fin": "Entraîne-toi sur le coach maths d'éleveai point fr, et abonne-toi !"
+}

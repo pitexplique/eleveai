@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Tu as 18 bonbons. Tu en donnes les 2 tiers. Combien tu en donnes ?",
+  "01-piege": "Le piège : diviser par 2, puis multiplier par 3. 18 divisé par 2, fois 3, ça fait 27. Plus que tes 18 bonbons ! C'est faux.",
+  "02-diviser": "D'abord, je divise par le nombre du bas. 18 divisé par 3, ça fait 6. Un tiers, c'est 6 bonbons.",
+  "03-multiplier": "Puis je multiplie par le nombre du haut. 2 fois 6, ça fait 12. Tu donnes 12 bonbons.",
+  "04-retenir": "Je divise par le bas. Puis je multiplie par le haut.",
+  "05-defi": "À toi. Combien font les 3 quarts de 24 ?",
+  "06-fin": "Ta réponse en commentaire. La vidéo complète sur le calcul avec les fractions est juste en dessous."
+}

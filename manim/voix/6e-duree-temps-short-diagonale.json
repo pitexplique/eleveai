@@ -1,0 +1,11 @@
+{
+  "00-accroche": "Départ de la Diagonale des Fous : jeudi, 22 heures.",
+  "01-course": "S'il court comme le vainqueur 2025 : 23 heures 31 minutes de course.",
+  "02-question": "Il arrive à quelle heure ?",
+  "03-piege": "Beaucoup calculent 22 plus 23 égale 45… et écrivent 45 heures 31. Ça n'existe pas !",
+  "04-calcul": "45 heures 31, c'est 24 heures plus 21 heures 31.",
+  "05-minuit": "Les 24 heures, c'est une journée entière : on passe minuit, on change de jour.",
+  "06-reponse": "Il arrive vendredi, à 21 heures 31.",
+  "07-regle": "Au-delà de 24 heures : on enlève 24, et on avance d'un jour.",
+  "08-question": "À toi : un coureur met 40 heures. Il arrive quel jour, à quelle heure ? Réponds en commentaire !"
+}

@@ -1,0 +1,8 @@
+{
+  "00-accroche": "5 croissants coûtent 6 euros. Combien coûtent 8 croissants ?",
+  "01-piege": "Le réflexe : passer par un croissant. Mais attention au sens de la division : 5 divisé par 6, c'est faux !",
+  "02-unite": "Le prix d'un croissant, c'est le prix divisé par le nombre de croissants : 6 divisé par 5, 1 euro 20.",
+  "03-reponse": "8 croissants : 8 fois 1 virgule 20, 9 euros 60.",
+  "04-defi": "À toi. 4 kilos de pommes coûtent 10 euros. Combien coûtent 7 kilos ?",
+  "05-fin": "Ta réponse en commentaire. La vidéo complète sur la proportionnalité est juste en dessous."
+}

@@ -1,0 +1,20 @@
+{
+  "00-garde": "Parenthèses, crochets, lettres collées… En géométrie, chaque signe a un sens. Changer un seul signe, c'est changer de dessin. On apprend à lire ces notations.",
+  "00b-objectifs": "À la fin de cette vidéo, tu sauras trois choses. Un : lire et écrire une droite, une demi-droite et un segment. Deux : ne pas confondre un segment et sa longueur. Trois : lire les autres signes de la géométrie : appartient, parallèles, perpendiculaires, triangle et angle. On y va.",
+  "01-point": "Tout commence par un point. On le dessine avec une petite croix. On le nomme avec une lettre majuscule : le point A.",
+  "02-regle": "Voici la règle qui explique tout. Le crochet, c'est un mur : la ligne s'arrête sur le point. La parenthèse, c'est une porte ouverte : la ligne continue après le point.",
+  "03-droite": "La droite A B s'écrit avec deux parenthèses. Elle passe par A et par B, et ne s'arrête jamais, ni d'un côté, ni de l'autre. On la dessine avec un trait qui dépasse. On peut aussi la nommer avec une lettre minuscule : la droite d.",
+  "04-demi-droite": "La demi-droite A B s'écrit avec un crochet devant A, et une parenthèse après B. Elle s'arrête en A : c'est son origine. Elle passe par B et continue, sans fin. Attention : la première lettre est toujours l'origine.",
+  "05-segment": "Le segment A B s'écrit avec deux crochets. Il s'arrête en A, et il s'arrête en B. C'est le morceau de droite entre les deux points. A et B sont ses extrémités.",
+  "06-comparaison": "Mettons les trois côte à côte. Deux parenthèses : ça continue des deux côtés, c'est la droite. Un crochet et une parenthèse : ça s'arrête d'un côté, c'est la demi-droite. Deux crochets : ça s'arrête des deux côtés, c'est le segment.",
+  "07-longueur": "Et sans rien autour ? A B tout seul, c'est un nombre : la longueur du segment. On écrit A B égale 5 centimètres. Mais jamais segment A B égale 5 centimètres : un segment est un dessin, pas un nombre.",
+  "08-appartient": "Pour dire qu'un point est sur une droite, on utilise ce signe. C appartient à la droite A B. Et si le point n'est pas dessus, on barre le signe : E n'appartient pas à la droite A B.",
+  "09-triangle": "Le triangle A B C a trois sommets : A, B et C. On lit les lettres en faisant le tour de la figure. Ses trois côtés sont des segments : A B, B C et C A. Pareil pour un quadrilatère : A B C D, dans l'ordre du tour.",
+  "09b-paralleles": "Deux droites qui ne se croisent jamais sont parallèles. On écrit deux petits traits penchés : d parallèle à d prime. Deux droites qui se coupent en angle droit sont perpendiculaires. On écrit un T à l'envers : d perpendiculaire à d prime.",
+  "09c-angle": "Un angle se nomme avec trois lettres, et un petit chapeau dessus. Angle A B C : la lettre du milieu, B, c'est le sommet. C'est là que l'angle s'ouvre.",
+  "09d-recap": "Le récapitulatif, à garder. Deux parenthèses, la droite. Un crochet et une parenthèse, la demi-droite. Deux crochets, le segment. Rien autour, la longueur. Le signe appartient, pour un point sur une ligne. Deux traits penchés, parallèles. Le T à l'envers, perpendiculaires. Et le chapeau, pour un angle.",
+  "10-defi": "À toi. Sur le dessin, la ligne part de M, passe par N, et continue sans fin. Comment l'écrire ? Mets pause.",
+  "10b-correction": "Elle s'arrête en M : un crochet devant M. Elle continue après N : une parenthèse. C'est la demi-droite M N. Attention : crochet N M parenthèse, ce serait une autre demi-droite, qui part de N.",
+  "11-finale": "Tu sais maintenant lire les notations de la géométrie. Le crochet, la ligne s'arrête. La parenthèse, elle continue. A B tout seul, c'est une longueur. Et dans un angle, la lettre du milieu est le sommet.",
+  "12-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

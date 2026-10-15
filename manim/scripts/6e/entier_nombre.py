@@ -1,16 +1,19 @@
 # entier_nombre.py
-# EleveAI — Maths 6e — Les nombres entiers (notionId : entier_nombre)
-# Mêmes exemples que la fiche lib/fiches/maths-6e-entiers.tsx.
+# EleveAI — Maths 6e — Les nombres entiers (notionId : entier_nombre), AVEC VOIX.
+# Mêmes exemples que la fiche lib/fiches/maths-6e-entiers.tsx (réécrite le 30/09).
 #
-# Mapping micro-compétences (banque entiers.bank.ts) → écrans :
-# - entier_lire_ecrire  → écran 1 (tableau de numération) + écran 2 (« mille quarante-deux » → 1 042)
-# - entier_rang         → écran 1 (chaque chiffre à son rang) + écran 2 (chiffre des dizaines)
-# - entier_decomposer   → écran 1 (4 273 = 4 000 + 200 + 70 + 3)
-# - entier_comparer     → écran 3 (345 vs 354, on compare les dizaines)
-# - entier_encadrer     → écran 4 (droite graduée : 40 < 47 < 50)
-# - entier_defi         → défi + correction (plus petit nombre avec 3, 0, 5, 1)
+# ⭐ 01/10/2026 : la version muette d'août devient une vidéo parlée. Texte de la
+# voix validé par Frédéric : manim/voix/6e-entier-nombre.json (débit −10).
 #
-# Rendu : python -m manim render -qh manim/scripts/6e/entier_nombre.py EntierNombre6e -o eleveai-maths-6e-entier-nombre --media_dir manim/scripts/6e/media
+# Mapping micro-compétences (coach 6e, notion entier_nombre) → écrans :
+# - entier_lire_ecrire → 02-ecrire (« mille quarante-deux » → 1 042, le zéro)
+# - entier_rang        → 01-tableau (chaque chiffre à son rang) + 02 (dizaines)
+# - entier_decomposer  → 01-tableau (4 273 = 4 000 + 200 + 70 + 3)
+# - entier_comparer    → 03-comparer (1 042 et 98 ; 345 et 354)
+# - entier_encadrer    → 04-encadrer (40 < 47 < 50 ; 300 < 380 < 400)
+# - entier_defi        → 05-defi + correction (3, 0, 5, 1 → 1 035)
+#
+# Rendu : python -m manim render -qh --disable_caching manim/scripts/6e/entier_nombre.py EntierNombre6e -o eleveai-maths-6e-entier-nombre --media_dir manim/scripts/6e/media
 
 import sys
 from pathlib import Path
@@ -20,240 +23,250 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from manim import *
 
 from charte import *
-from mascotte import MascotteMargouillat
+from gabarit_sixieme import Notion6e
+
+OBJECTIFS = [
+    "Lire, écrire et décomposer un nombre entier",
+    "Comparer deux nombres entiers",
+    "Encadrer un nombre entier",
+]
+RANGS = ["Milliers", "Centaines", "Dizaines", "Unités"]
 
 
-class EntierNombre6e(Scene):
+class EntierNombre6e(Notion6e):
+    nom_voix = "6e-entier-nombre"
 
-    # ── outils communs ──────────────────────────────────────────────────────
-
-    def add_mascotte(self, scale=0.5):
-        m = MascotteMargouillat().scale(scale).to_corner(DOWN + RIGHT, buff=0.35)
-        self.add(m)
-        return m
-
-    def titre_ecran(self, texte):
-        t = Text(texte, font_size=40, color=JAUNE_TITRE).to_edge(UP)
-        self.play(Write(t))
-        return t
-
-    def digits(self, chaine, xs, y, color=WHITE, font_size=54):
-        """Écrit un nombre chiffre par chiffre, aligné à droite sur les colonnes xs."""
-        rangee = VGroup()
-        decalage = len(xs) - len(chaine)
-        for i, caractere in enumerate(chaine):
-            rangee.add(
-                Text(caractere, font_size=font_size, color=color)
-                .move_to([xs[decalage + i], y, 0])
-            )
-        return rangee
-
-    # ── écran 0 : accueil ───────────────────────────────────────────────────
-
-    def ecran_accueil(self):
-        self.clear()
-        self.add_mascotte(scale=0.8)
-        titre = Text("Les nombres entiers", font_size=50, color=JAUNE_TITRE).to_edge(UP)
-        sous_titre = Text("Maths 6e — EleveAI", font_size=32, color=WHITE)
-        sous_titre.next_to(titre, DOWN, buff=0.35)
-        accroche = Text("Dans 4 273, que vaut le 2 ?", font_size=36, color=BLEU_CALCUL)
-        accroche.next_to(sous_titre, DOWN, buff=0.9)
-        self.play(Write(titre), FadeIn(sous_titre))
-        self.play(Write(accroche))
-        self.wait(2.0)
-
-    # ── écran 1 : le tableau de numération (4 273) ─────────────────────────
+    # ── 01 : le tableau de numération (4 273) ──────────────────────────────
 
     def ecran_tableau(self):
         self.clear()
         self.add_mascotte()
-        self.titre_ecran("1. Le tableau de numération")
+        self.dire("01-tableau")
+        self.titre_ecran("Le tableau de numération")
 
-        cols = [-3.3, -1.1, 1.1, 3.3]
-        noms = ["Milliers", "Centaines", "Dizaines", "Unités"]
-        chiffres = ["4", "2", "7", "3"]
-        valeurs = ["4 000", "200", "70", "3"]
+        ent, cases, xs = self.tableau_num(RANGS, y_ent=1.9, y_case=1.0, largeur=2.3, x_centre=-0.6)
+        self.play(FadeIn(ent, shift=DOWN * 0.2), Create(cases))
 
-        entetes = VGroup()
-        cases = VGroup()
-        for x, nom in zip(cols, noms):
-            cell_h = Rectangle(width=2.0, height=0.6, stroke_width=2, color=BLEU_CALCUL).move_to([x, 1.7, 0])
-            lbl = Text(nom, font_size=20, color=BLEU_CALCUL).move_to([x, 1.7, 0])
-            entetes.add(VGroup(cell_h, lbl))
-            cases.add(Rectangle(width=2.0, height=1.0, stroke_width=2, color=WHITE).move_to([x, 0.8, 0]))
-        self.play(FadeIn(entetes), Create(cases))
+        self.au_mot("On range")
+        ch = self.chiffres(xs, 1.0, "4273", font_size=60)
+        # en partant des unités : de droite à gauche
+        self.play(LaggedStart(*[FadeIn(c, scale=1.5) for c in reversed(ch)], lag_ratio=0.4))
 
-        chiffres_m = VGroup(*[Text(c, font_size=52).move_to([x, 0.8, 0]) for x, c in zip(cols, chiffres)])
-        self.play(LaggedStart(*[Write(c) for c in chiffres_m], lag_ratio=0.2))
-        self.wait(1.0)
+        valeurs = VGroup()
+        for k, (mot, v) in enumerate(zip(["Le 4 est", "Le 2 est", "Le 7 vaut", "Le 3 vaut"],
+                                         ["4 000", "200", "70", "3"])):
+            self.au_mot(mot)
+            t = Text(v, font_size=36, color=VERT_OK).move_to([xs[k], -0.3, 0])
+            valeurs.add(t)
+            self.play(Indicate(ch[k], color=BLEU_CALCUL, scale_factor=1.4),
+                      FadeIn(t, shift=DOWN * 0.25))
 
-        valeurs_m = VGroup(*[Text(v, font_size=30, color=VERT_OK).move_to([x, -0.4, 0]) for x, v in zip(cols, valeurs)])
-        self.play(LaggedStart(*[Write(v) for v in valeurs_m], lag_ratio=0.2))
-        self.wait(1.2)
+        self.au_mot("Donc 4 273")
+        self.play(Write(self.chute("4 273 = 4 000 + 200 + 70 + 3", color=VERT_OK, font_size=38)))
+        self.au_mot("Le 2 vaut 200")
+        self.play(Circumscribe(VGroup(ch[1], valeurs[1]), color=ORANGE_RETENUE, buff=0.2))
+        self.play(valeurs[1].animate.scale(1.3).set_color(ORANGE_RETENUE))
+        self.attendre_voix()
 
-        conclusion = Text("4 273 = 4 000 + 200 + 70 + 3", font_size=34, color=VERT_OK).to_edge(DOWN)
-        self.play(Write(conclusion))
-        self.wait(2.2)
-
-    # ── écran 2 : lire et écrire (« mille quarante-deux » → 1 042) ─────────
+    # ── 02 : lire et écrire (« mille quarante-deux » → 1 042) ──────────────
 
     def ecran_ecrire(self):
         self.clear()
         self.add_mascotte()
-        self.titre_ecran("2. Lire et écrire")
+        self.dire("02-ecrire")
+        self.titre_ecran("Lire et écrire")
 
-        mots = Text("« mille quarante-deux »", font_size=36, color=BLEU_CALCUL).move_to([0, 1.6, 0])
-        self.play(Write(mots))
-        self.wait(1.0)
+        mots = Text("« mille quarante-deux »", font_size=42, color=BLEU_CALCUL).move_to([-0.6, 2.2, 0])
+        self.play(GrowFromCenter(mots))
 
-        fleche = Arrow([0, 1.15, 0], [0, 0.45, 0], color=WHITE, buff=0.1)
-        self.play(Create(fleche))
+        ent, cases, xs = self.tableau_num(RANGS, y_ent=1.15, y_case=0.25, largeur=2.3, x_centre=-0.6)
+        self.play(FadeIn(ent), Create(cases))
 
-        xs = [-1.2, -0.5, 0.2, 0.9]
-        nombre = self.digits("1042", xs, -0.35, font_size=64)
-        self.play(FadeIn(nombre))
-        self.wait(0.8)
+        self.au_mot("Mille : un 1")
+        un = Text("1", font_size=60).move_to([xs[0], 0.25, 0])
+        self.play(FadeIn(un, scale=1.5))
+        self.au_mot("Quarante-deux :")
+        quatre = Text("4", font_size=60).move_to([xs[2], 0.25, 0])
+        deux = Text("2", font_size=60).move_to([xs[3], 0.25, 0])
+        self.play(FadeIn(quatre, scale=1.5), FadeIn(deux, scale=1.5))
 
-        zero_box = SurroundingRectangle(nombre[1], color=ORANGE_RETENUE, buff=0.12)
-        zero_txt = Text("un zéro aux centaines", font_size=26, color=ORANGE_RETENUE).move_to([0, -1.6, 0])
-        self.play(Create(zero_box), Write(zero_txt))
-        self.wait(1.4)
+        self.au_mot("Et les centaines")
+        self.play(cases[1].animate.set_stroke(ORANGE_RETENUE, width=6))
+        self.play(Indicate(cases[1], color=ORANGE_RETENUE))
+        self.au_mot("Alors on écrit un zéro")
+        zero = Text("0", font_size=60, color=ORANGE_RETENUE).move_to([xs[1], 0.25, 0])
+        self.play(GrowFromCenter(zero))
+        self.play(Flash(zero, color=ORANGE_RETENUE, line_length=0.3))
 
-        diz_box = SurroundingRectangle(nombre[2], color=VERT_OK, buff=0.12)
-        diz_txt = Text("chiffre des dizaines : 4", font_size=30, color=VERT_OK).to_edge(DOWN)
-        self.play(FadeOut(zero_box), FadeOut(zero_txt), Create(diz_box), Write(diz_txt))
-        self.wait(2.2)
+        self.au_mot("Sans lui")
+        faux = Text("Sans le zéro : 142", font_size=36, color=ROUGE_ERREUR).move_to([-0.6, -1.25, 0])
+        barre = Line(faux.get_left(), faux.get_right(), color=ROUGE_ERREUR, stroke_width=5)
+        self.play(FadeIn(faux, shift=UP * 0.2))
+        self.au_mot("Ce n'est pas du tout")
+        self.play(Create(barre))
 
-    # ── écran 3 : comparer (345 vs 354) ────────────────────────────────────
+        self.au_mot("Mille quarante-deux s'écrit")
+        self.play(FadeOut(faux), FadeOut(barre))
+        self.play(Write(self.chute("mille quarante-deux = 1 042", color=VERT_OK, font_size=38)))
+        self.au_mot("Et son chiffre des dizaines")
+        boite = SurroundingRectangle(quatre, color=VERT_OK, buff=0.15)
+        diz = Text("chiffre des dizaines : 4", font_size=30, color=VERT_OK).move_to([-0.6, -1.25, 0])
+        self.play(Create(boite), FadeIn(diz))
+        self.attendre_voix()
+
+    # ── 03 : comparer (1 042 et 98 ; 345 et 354) ───────────────────────────
 
     def ecran_comparer(self):
         self.clear()
         self.add_mascotte()
-        self.titre_ecran("3. Comparer deux nombres")
+        self.dire("03-comparer")
+        self.titre_ecran("Comparer deux nombres")
 
-        xs = [-2.2, -1.5, -0.8]
-        n1 = self.digits("345", xs, 1.0, font_size=56)
-        n2 = self.digits("354", xs, 0.0, font_size=56)
-        self.play(FadeIn(n1), FadeIn(n2))
-        self.wait(0.8)
+        a = Text("1 042", font_size=64).move_to([-2.2, 1.3, 0])
+        b = Text("98", font_size=64).move_to([0, 0.0, 0]).align_to(a, RIGHT)
+        self.play(FadeIn(a, shift=RIGHT * 0.3), FadeIn(b, shift=RIGHT * 0.3))
 
-        box = SurroundingRectangle(VGroup(n1[0], n2[0]), color=BLEU_CALCUL, buff=0.12)
-        egal = Text("3 = 3 : on continue", font_size=28, color=BLEU_CALCUL).move_to([2.2, 0.9, 0])
-        self.play(Create(box), Write(egal))
-        self.wait(1.2)
+        self.au_mot("1 042 a quatre")
+        la = Text("4 chiffres", font_size=32, color=BLEU_CALCUL).next_to(a, RIGHT, buff=1.0)
+        self.play(Indicate(a, color=BLEU_CALCUL), FadeIn(la))
+        self.au_mot("98 n'en a")
+        lb = Text("2 chiffres", font_size=32, color=BLEU_CALCUL).next_to(b, RIGHT, buff=1.0).align_to(la, LEFT)
+        self.play(Indicate(b, color=BLEU_CALCUL), FadeIn(lb))
+        self.au_mot("Le plus long gagne")
+        c1 = self.chute("1 042 > 98", color=VERT_OK, font_size=44)
+        self.play(a.animate.set_color(VERT_OK), Write(c1))
 
-        box_d = SurroundingRectangle(VGroup(n1[1], n2[1]), color=ORANGE_RETENUE, buff=0.12)
-        comp = Text("5 > 4", font_size=36, color=ORANGE_RETENUE).move_to([2.2, 0.15, 0])
-        self.play(Transform(box, box_d), FadeOut(egal), Write(comp))
-        self.wait(1.2)
+        self.au_mot("Et si les deux")
+        self.play(FadeOut(VGroup(a, b, la, lb, c1)))
 
-        conclusion = Text("354 > 345", font_size=40, color=VERT_OK).to_edge(DOWN)
-        self.play(FadeOut(box), n2.animate.set_color(VERT_OK), Write(conclusion))
-        self.wait(2.2)
+        xs = [-3.0, -2.2, -1.4]
+        n1 = self.chiffres(xs, 1.3, "345", font_size=68)
+        n2 = self.chiffres(xs, 0.0, "354", font_size=68)
+        self.play(FadeIn(n1, shift=DOWN * 0.2), FadeIn(n2, shift=UP * 0.2))
 
-    # ── écran 4 : encadrer (droite graduée, 40 < 47 < 50) ──────────────────
+        self.au_mot("Les centaines")
+        boite = SurroundingRectangle(VGroup(n1[0], n2[0]), color=BLEU_CALCUL, buff=0.15)
+        eg = Text("3 = 3 : on continue", font_size=34, color=BLEU_CALCUL).move_to([2.3, 0.65, 0])
+        self.play(Create(boite), FadeIn(eg))
+        self.au_mot("Les dizaines")
+        boite2 = SurroundingRectangle(VGroup(n1[1], n2[1]), color=ORANGE_RETENUE, buff=0.15)
+        sup = Text("5 > 4", font_size=48, color=ORANGE_RETENUE).move_to([2.3, 0.65, 0])
+        self.play(Transform(boite, boite2), FadeOut(eg), GrowFromCenter(sup))
+        self.au_mot("C'est fini")
+        self.play(n2.animate.set_color(VERT_OK), Write(self.chute("354 > 345", color=VERT_OK, font_size=44)))
+        self.attendre_voix()
+
+    # ── 04 : encadrer (40 < 47 < 50 ; 300 < 380 < 400) ─────────────────────
 
     def ecran_encadrer(self):
         self.clear()
         self.add_mascotte()
-        self.titre_ecran("4. Encadrer un nombre")
+        self.dire("04-encadrer")
+        self.titre_ecran("Encadrer un nombre")
 
-        x0, x1, y = -4.5, 4.5, 0.0
-        axe = Line([x0, y, 0], [x1, y, 0], stroke_width=3)
-        ticks = VGroup()
-        labels = VGroup()
-        for i in range(11):
-            tx = x0 + (x1 - x0) * i / 10
-            ticks.add(Line([tx, y - 0.12, 0], [tx, y + 0.12, 0], stroke_width=2))
-            if i in (0, 10):
-                labels.add(Text(str(40 + i), font_size=30, color=WHITE).move_to([tx, y - 0.55, 0]))
-        self.play(Create(axe), Create(ticks), Write(labels))
-        self.wait(0.8)
+        dr, pt = self.droite(40, 50, 10, {40: "40", 50: "50"}, centre=(-0.4, 0.9), font_size=34)
+        self.play(Create(dr[0]), Create(dr[1]), FadeIn(dr[2]))
 
-        tx47 = x0 + (x1 - x0) * 7 / 10
-        dot = Dot([tx47, y, 0], color=VERT_OK, radius=0.13)
-        lbl47 = Text("47", font_size=34, color=VERT_OK).move_to([tx47, y + 0.7, 0])
-        self.play(FadeIn(dot, scale=0.5), Write(lbl47))
-        self.wait(1.2)
+        self.au_mot("Regarde 47")
+        p = self.point(pt, 47, "47", font_size=40)
+        self.play(FadeIn(p, scale=0.5))
+        self.au_mot("Il est après 40")
+        self.play(Indicate(dr[2][0], color=BLEU_CALCUL, scale_factor=1.5))
+        self.au_mot("et avant 50")
+        self.play(Indicate(dr[2][1], color=BLEU_CALCUL, scale_factor=1.5))
+        self.au_mot("On écrit")
+        enc = Text("40 < 47 < 50", font_size=52, color=VERT_OK).move_to([-0.4, -0.9, 0])
+        self.play(Write(enc))
+        self.play(Circumscribe(enc, color=VERT_OK))
 
-        conclusion = Text("40 < 47 < 50", font_size=40, color=VERT_OK).to_edge(DOWN)
-        self.play(Write(conclusion))
-        self.wait(2.2)
+        self.au_mot("Et 380")
+        dr2, pt2 = self.droite(300, 400, 10, {300: "300", 400: "400"}, centre=(-0.4, 0.9), font_size=34)
+        p2 = self.point(pt2, 380, "380", font_size=40)
+        enc2 = Text("300 < 380 < 400", font_size=52, color=VERT_OK).move_to([-0.4, -0.9, 0])
+        self.play(FadeOut(p), FadeOut(enc), ReplacementTransform(dr, dr2))
+        self.play(FadeIn(p2, scale=0.5))
+        self.au_mot("deux centaines")
+        self.play(Write(enc2))
+        self.attendre_voix()
 
-    # ── écran 5 : défi ──────────────────────────────────────────────────────
+    # ── 05 : défi et correction (3, 0, 5, 1 → 1 035) ───────────────────────
+
+    def cases_defi(self, y=-0.4):
+        xs = [-2.4, -1.2, 0.0, 1.2]
+        cases = VGroup(*[Square(side_length=1.0, color=WHITE, stroke_width=3).move_to([x, y, 0]) for x in xs])
+        return cases, xs
+
+    def cartes(self, y=1.4):
+        cartes = VGroup()
+        for x, c in zip([-2.4, -1.2, 0.0, 1.2], "3051"):
+            fond = RoundedRectangle(width=0.9, height=1.0, corner_radius=0.12, color=BLEU_CALCUL,
+                                    fill_opacity=0.25, stroke_width=3)
+            cartes.add(VGroup(fond, Text(c, font_size=52)).move_to([x, y, 0]))
+        return cartes
 
     def ecran_defi(self):
         self.clear()
         self.add_mascotte(scale=0.65)
-        titre = Text("Défi", font_size=46, color=JAUNE_TITRE).to_edge(UP)
-        q1 = Text("Avec les chiffres 3, 0, 5 et 1", font_size=36, color=WHITE).move_to([0, 0.9, 0])
-        q2 = Text("(chacun une seule fois)", font_size=28, color=WHITE).move_to([0, 0.35, 0])
-        q3 = Text("le plus PETIT nombre de 4 chiffres ?", font_size=34, color=BLEU_CALCUL).move_to([0, -0.45, 0])
-        pause = Text("Mets pause et cherche !", font_size=30, color=ORANGE_RETENUE).to_edge(DOWN)
-        self.play(Write(titre))
-        self.play(Write(q1), Write(q2))
-        self.play(Write(q3))
-        self.play(Write(pause))
-        self.wait(4.0)
+        self.dire("05-defi")
+        self.titre_ecran("Défi", font_size=48)
 
-    # ── écran 6 : correction (1 035) ────────────────────────────────────────
+        cartes = self.cartes()
+        self.play(LaggedStart(*[FadeIn(c, shift=DOWN * 0.3) for c in cartes], lag_ratio=0.25))
+        self.au_mot("écris le plus petit")
+        cases, _ = self.cases_defi()
+        q = Text("le plus PETIT nombre de 4 chiffres ?", font_size=36, color=BLEU_CALCUL).move_to([-0.6, -1.65, 0])
+        self.play(Create(cases), Write(q))
+        self.au_mot("Mets pause")
+        self.play(Write(self.chute("Mets pause et cherche !", color=ORANGE_RETENUE, font_size=38)))
+        self.attendre_voix(marge=3.5)
 
     def ecran_correction(self):
         self.clear()
         self.add_mascotte()
+        self.dire("05b-correction")
         self.titre_ecran("Correction")
 
-        regle = Text("Un nombre ne commence pas par 0.", font_size=30, color=ROUGE_ERREUR).move_to([0, 1.6, 0])
-        self.play(Write(regle))
-        self.wait(1.2)
+        cartes = self.cartes()
+        cases, xs = self.cases_defi()
+        self.add(cartes, cases)
+        # cartes : 0 → « 3 », 1 → « 0 », 2 → « 5 », 3 → « 1 »
 
-        xs = [-1.6, -0.9, -0.2, 0.5]
-        chiffres = ["1", "0", "3", "5"]
-        indices = [
-            "le plus petit non nul",
-            "puis 0",
-            "puis 3",
-            "puis 5",
-        ]
-        chiffres_m = VGroup(*[Text(c, font_size=60, color=VERT_OK).move_to([xs[i], 0.1, 0]) for i, c in enumerate(chiffres)])
-        note = Text("", font_size=26, color=ORANGE_RETENUE).move_to([0, -1.1, 0])
-        for i, c in enumerate(chiffres_m):
-            nouvelle = Text(indices[i], font_size=26, color=ORANGE_RETENUE).move_to([0, -1.1, 0])
-            self.play(Write(c), Transform(note, nouvelle), run_time=0.7)
-        self.wait(1.0)
+        self.au_mot("Le plus petit, c'est 0")
+        self.play(Indicate(cartes[1], color=ORANGE_RETENUE, scale_factor=1.3))
+        self.au_mot("Mais attention")
+        interdit = Text("Un nombre ne commence pas par 0", font_size=32, color=ROUGE_ERREUR).move_to([-0.6, -1.65, 0])
+        self.play(cartes[1].animate.move_to(cases[0]), FadeIn(interdit))
+        croix = Cross(cases[0], stroke_color=ROUGE_ERREUR, stroke_width=6)
+        self.play(Create(croix))
 
-        conclusion = Text("Réponse : 1 035", font_size=40, color=VERT_OK).to_edge(DOWN)
-        self.play(Write(conclusion))
-        self.wait(2.2)
-
-    # ── écran 7 : à retenir ─────────────────────────────────────────────────
-
-    def ecran_conclusion(self):
-        self.clear()
-        self.add_mascotte(scale=0.65)
-        titre = Text("À retenir", font_size=46, color=JAUNE_TITRE).to_edge(UP)
-
-        points = VGroup(
-            Text("1. La position donne la valeur.", font_size=30),
-            Text("2. Je compare de gauche à droite.", font_size=30),
-            Text("3. J'encadre entre deux nombres ronds.", font_size=30),
-        ).arrange(DOWN, aligned_edge=LEFT, buff=0.5).move_to([0, 0.3, 0])
-
-        signature = Text(SIGNATURE, font_size=26, color=VERT_OK).to_edge(DOWN)
-
-        self.play(Write(titre))
-        self.play(LaggedStart(*[Write(p) for p in points], lag_ratio=0.3))
-        self.play(Write(signature))
-        self.wait(2.5)
+        self.au_mot("On commence donc par 1")
+        self.play(FadeOut(croix), cartes[1].animate.move_to([-1.2, 1.4, 0]))
+        self.play(cartes[3].animate.move_to(cases[0]), FadeOut(interdit))
+        self.au_mot("Puis 0")
+        self.play(cartes[1].animate.move_to(cases[1]))
+        self.au_mot("puis 3")
+        self.play(cartes[0].animate.move_to(cases[2]))
+        self.au_mot("puis 5")
+        self.play(cartes[2].animate.move_to(cases[3]))
+        self.au_mot("La réponse")
+        self.play(*[c[0].animate.set_color(VERT_OK) for c in cartes],
+                  Write(self.chute("Réponse : 1 035", color=VERT_OK, font_size=44)))
+        self.attendre_voix()
 
     # ── déroulé ─────────────────────────────────────────────────────────────
 
     def construct(self):
-        self.ecran_accueil()
+        self.page_de_garde(
+            titre="Les nombres entiers",
+            accroche="Dans 4 273, que vaut le 2 ?",
+            promesse="Ce qui compte, c'est la place.",
+        )
+        self.page_objectifs(OBJECTIFS)
         self.ecran_tableau()
         self.ecran_ecrire()
         self.ecran_comparer()
         self.ecran_encadrer()
         self.ecran_defi()
         self.ecran_correction()
-        self.ecran_conclusion()
+        self.page_finale(points=OBJECTIFS, rappel="Le zéro ne vaut rien, mais il garde la place.")
+        self.page_abonnement()

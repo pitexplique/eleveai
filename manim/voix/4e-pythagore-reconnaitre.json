@@ -1,0 +1,13 @@
+{
+  "00-garde": "L'hypoténuse. Dans un triangle rectangle, quel côté est le plus long ?",
+  "01-echelle": "Une échelle est posée contre le mur d'une case. Le mur, le sol, l'échelle : trois côtés. Lequel est le plus long ? Sans rien mesurer.",
+  "02-angle-droit": "Le mur est droit, le sol est plat : ils font un angle droit. On le marque par un petit carré. L'échelle est en face de cet angle : c'est elle, l'hypoténuse.",
+  "03-definition": "Dans un triangle rectangle, l'hypoténuse est le côté en face de l'angle droit. C'est toujours le plus long des trois côtés.",
+  "04-methode": "Un : je repère le petit carré de l'angle droit. Deux : je prends le côté qui ne touche pas cet angle. Le triangle ABC est rectangle en A : l'hypoténuse, c'est le côté sans la lettre A. C'est BC.",
+  "05-tourne": "Le triangle est tourné ? Peu importe. L'hypoténuse n'est pas forcément en bas, ni penchée. Elle est toujours en face de l'angle droit.",
+  "06-sans-angle-droit": "Pas d'angle droit ? Alors pas d'hypoténuse. Ce mot n'existe que dans un triangle rectangle.",
+  "07-defi": "À toi de jouer. Le triangle EFG est rectangle en F. Quelle est son hypoténuse ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Rectangle en F : je prends le côté sans la lettre F. L'hypoténuse est EG.",
+  "08-finale": "Ce que tu sais faire maintenant. Repérer l'angle droit ? Trouver le côté en face, même si le triangle est tourné ? Savoir qu'il n'y a pas d'hypoténuse sans angle droit ? Alors l'épisode 2 t'attend.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

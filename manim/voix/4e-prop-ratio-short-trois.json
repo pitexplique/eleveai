@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Un ratio avec trois nombres. Un seul nombre connu suffit pour trouver les deux autres. Regarde.",
+  "01-donnee": "Un béton : ciment, sable, gravier, dans le ratio 1 pour 2 pour 4. On met 12 kilos de sable.",
+  "02-part": "Le sable, c'est 2 parts. 12 divisé par 2 : une part vaut 6 kilos.",
+  "03-reponse": "Le ciment, 1 part : 6 kilos. Le gravier, 4 parts : 4 fois 6, 24 kilos. Un seul nombre, et on a tout.",
+  "04-defi": "À toi. Le ratio est 2 pour 3 pour 5, et la troisième quantité vaut 40. Trouve les deux autres.",
+  "05-fin": "Ta réponse en commentaire. La vidéo complète sur les ratios est juste en dessous."
+}

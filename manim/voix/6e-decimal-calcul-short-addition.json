@@ -1,0 +1,9 @@
+{
+  "00-accroche": "2 virgule 8 plus 1 virgule 35. Combien ça fait ?",
+  "01-piege": "Le piège : aligner les derniers chiffres. Là, on ajoute des dixièmes à des centièmes. Et c'est faux !",
+  "02-virgule": "La règle : virgule sous virgule. Les unités sous les unités, les dixièmes sous les dixièmes.",
+  "03-zero": "Il manque un chiffre en haut ? On ajoute un zéro : 2 virgule 8, c'est 2 virgule 80.",
+  "04-calcul": "On calcule comme avec des entiers. 0 plus 5 : 5. 8 plus 3 : 11, je pose 1 et je retiens 1. 2 plus 1 plus 1 : 4. Résultat : 4 virgule 15.",
+  "05-defi": "À toi. Combien font 5 virgule 6 plus 2 virgule 47 ?",
+  "06-fin": "Ta réponse en commentaire. La vidéo complète sur le calcul avec les décimaux est juste en dessous."
+}

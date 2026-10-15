@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Prends moins 4 et moins 2. Élève-les au carré : l'ordre se retourne. Élève-les au cube : l'ordre ne bouge pas. Mêmes nombres, deux résultats opposés.",
+  "01-carre": "Au carré d'abord. Moins 4 au carré vaut 16, moins 2 au carré vaut 4. Or moins 4 est plus petit que moins 2, et pourtant 16 est plus grand que 4. L'ordre s'est retourné.",
+  "02-cube": "Au cube maintenant. Moins 4 au cube vaut moins 64, moins 2 au cube vaut moins 8. Et moins 64 est bien plus petit que moins 8. L'ordre est gardé.",
+  "03-pourquoi": "Toute la différence est dans le signe. Un carré est toujours positif : il efface le moins, et c'est ça qui retourne tout. Un cube, lui, garde le signe de son nombre. Sa courbe monte, monte, et ne redescend jamais : elle est croissante partout.",
+  "04-retenir": "Donc : le cube ne trahit jamais l'ordre, négatifs compris. Le carré, lui, ne le respecte que sur les positifs. Ne les confonds pas, c'est exactement là qu'on perd des points.",
+  "05-fin": "La vidéo complète est sur la chaîne."
+}

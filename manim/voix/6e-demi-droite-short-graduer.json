@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Pour couper un segment en 4 parts égales, combien de traits faut-il tracer à l'intérieur ? 4 ? Non !",
+  "01-segment": "Voici un segment de 8 centimètres. 4 parts égales, donc je divise : 8 divisé par 4, ça fait 2.",
+  "02-traits": "Je trace un trait tous les 2 centimètres : à 2, à 4, à 6 centimètres.",
+  "03-compter": "Je compte les parts : 1, 2, 3, 4. Et les traits à l'intérieur : 1, 2, 3. 4 parts, mais seulement 3 traits !",
+  "04-defi": "À toi. Un segment de 15 centimètres, coupé en 5 parts égales. Tous les combien de centimètres places-tu un trait ?",
+  "05-fin": "Ta réponse en commentaire. La vidéo complète sur la demi-droite graduée est juste en dessous."
+}

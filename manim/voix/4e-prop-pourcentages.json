@@ -1,0 +1,15 @@
+{
+  "00-garde": "Les maths, ça sert à rien… sauf à ne pas se faire avoir pendant les soldes. Une console à 300 euros est soldée à moins 20 %. Le lendemain, son prix remonte de 20 %. Elle revient à 300 euros ? Non : 288 euros. À la fin de cette vidéo, tu sauras pourquoi.",
+  "00b-objectifs": "Au programme : calculer un pourcentage de tête, utiliser le coefficient multiplicateur, et déjouer le piège des évolutions.",
+  "01-definition": "Un pourcentage, c'est tant sur cent. Imagine une barre de 100 cases. 30 %, c'est 30 cases sur 100. Pour prendre un pourcentage d'un nombre, je multiplie par le pourcentage, puis je divise par 100. Une joueuse de basket tente 20 tirs, et en réussit 40 %. 20 fois 40, divisé par 100 : 8 tirs réussis.",
+  "02-dix": "De tête, tout part de 10 %. 10 %, c'est un dixième : on divise par 10. 10 % de 80 euros ? Il y a un zéro à la fin : on l'enlève. 8 euros. 10 % de 45 euros ? Pas de zéro : on décale la virgule. 4 euros 50.",
+  "03-autres": "Avec 10 %, on a tous les autres. Reprenons 80 euros : 10 %, c'est 8 euros. 20 %, c'est le double : 16 euros. 30 %, le triple : 24 euros. 5 %, la moitié de 10 % : 4 euros. 100 %, c'est le tout : 80 euros. Et 200 %, le double du tout : 160 euros.",
+  "04-taux": "Et dans l'autre sens ? Une forêt de 400 arbres compte 60 chênes. Quel pourcentage ? Je divise la partie par le total : 60 sur 400. Puis je multiplie par 100 : 15 %. Les chênes font 15 % de la forêt.",
+  "05-coefficient": "Un sweat à 45 euros est soldé à moins 20 %. Il reste 80 % du prix. 80 %, c'est 0 virgule 8. Une seule multiplication : 45 fois 0 virgule 8, 36 euros. Et pour une hausse de 20 % ? On garde 100 %, on ajoute 20 % : 120 %, c'est fois 1 virgule 2. Ce nombre, 0 virgule 8 ou 1 virgule 2, c'est le coefficient multiplicateur.",
+  "06-evolution": "Un potager donne 40 kilos de tomates, puis 46 kilos l'année suivante. De combien de pour cent la récolte a-t-elle augmenté ? Elle a gagné 6 kilos. Je divise par la récolte de départ : 6 sur 40, fois 100. 15 %. Attention : on divise toujours par la valeur de départ.",
+  "07-piege": "Retour à notre console à 300 euros. Moins 20 % : 300 fois 0 virgule 8, 240 euros. Puis plus 20 %. Mais 20 % de 240, pas de 300 ! 240 fois 1 virgule 2 : 288 euros. Les deux pourcentages ne s'annulent pas : ils ne portent pas sur le même prix.",
+  "08-defi": "À toi de jouer. Un vélo coûte 200 euros. Son prix augmente de 10 %, puis baisse de 10 %. Quel est son prix final ? Mets pause, et cherche.",
+  "08b-correction": "Correction. Plus 10 % : 200 fois 1 virgule 1, 220 euros. Puis moins 10 %, sur 220 : 220 fois 0 virgule 9, 198 euros. Le vélo coûte 198 euros : 2 euros de moins qu'au départ.",
+  "09-finale": "Retiens trois choses. De tête, tout part de 10 %. Une hausse ou une baisse, c'est une seule multiplication, par le coefficient. Et deux évolutions ne s'annulent pas : la deuxième porte sur le nouveau prix.",
+  "10-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

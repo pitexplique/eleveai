@@ -1,0 +1,8 @@
+{
+  "00-accroche": "12 billes, je les range comme je veux. 13 billes, impossible. Regarde.",
+  "01-douze": "12 billes : 2 rangées de 6, 3 rangées de 4. Des groupes égaux, sans reste.",
+  "02-treize": "13 billes : en 2 rangées, il en reste une. En 3 rangées, il en reste une. En 4 rangées, encore une de trop.",
+  "03-premier": "13 ne se range qu'en une seule rangée. C'est un nombre premier : il n'a que deux diviseurs, 1 et lui-même.",
+  "04-defi": "À toi : avec 17 billes, peux-tu faire des groupes égaux ?",
+  "05-fin": "Ta réponse en commentaire. Entraîne-toi sur le coach maths d'éleveai point fr, et abonne-toi !"
+}

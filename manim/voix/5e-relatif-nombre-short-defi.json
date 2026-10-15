@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Le point A est à moins 4, le point B est à plus 1. Quelle est la distance entre A et B ?",
+  "01-piege": "Beaucoup répondent 3, parce que 4 moins 1, ça fait 3. Et c'est faux.",
+  "02-compter": "Sur la droite, on compte. De moins 4 jusqu'à zéro : 4 graduations. De zéro jusqu'à plus 1 : encore 1. En tout, 4 plus 1, ça fait 5.",
+  "03-regle": "Quand les deux points sont de chaque côté du zéro, on ajoute leurs distances à zéro. La distance entre A et B est 5.",
+  "04-defi": "À toi. C est à moins 6, D est à plus 3. Quelle est la distance entre C et D ?",
+  "05-fin": "Ta réponse en commentaire. La vidéo complète sur les nombres relatifs est juste en dessous."
+}

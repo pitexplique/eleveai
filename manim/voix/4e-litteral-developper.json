@@ -1,0 +1,14 @@
+{
+  "00-garde": "x plus 3, le tout au carré. Ça fait x au carré plus 9 ? Presque tout le monde le croit. Un simple dessin va montrer ce qui manque.",
+  "00b-objectifs": "Au programme : développer avec un nombre devant la parenthèse, puis avec deux parenthèses, réduire, et développer un carré sans rien oublier.",
+  "01-simple": "Développer, c'est transformer un produit en somme. 3 fois, parenthèse, x plus 4. Dessinons un rectangle de hauteur 3, et de longueur x plus 4. On le coupe en deux. Une partie de 3 sur x : 3 x. Une partie de 3 sur 4 : 12. L'aire totale : 3 x plus 12. Le 3 multiplie chaque terme. Pas 3 x plus 4 : pour x égale 1, 3 fois 5 fait 15, et 3 x plus 4 ne fait que 7.",
+  "02-signe": "Et avec un nombre négatif devant ? Moins 2 fois, parenthèse, x plus 5. Moins 2 fois x : moins 2 x. Moins 2 fois 5 : moins 10. Résultat : moins 2 x moins 10. Le signe moins voyage avec le nombre : il se distribue lui aussi.",
+  "03-double": "Maintenant, deux parenthèses. x plus 2, fois, x plus 3. Le rectangle a pour côtés x plus 2, et x plus 3. On le coupe en quatre. x fois x : x au carré. x fois 3 : 3 x. 2 fois x : 2 x. 2 fois 3 : 6. Quatre produits : chaque terme de la première parenthèse rencontre chaque terme de la seconde.",
+  "04-reduire": "On n'a pas fini : il faut réduire. x au carré, plus 3 x, plus 2 x, plus 6. Les deux termes en x se regroupent : 3 x plus 2 x, 5 x. Résultat : x au carré plus 5 x plus 6. Vérifions pour x égale 1 : 3 fois 4, 12. Et 1 plus 5 plus 6 : 12. C'est juste.",
+  "05-carre": "Revenons à notre question. x plus 3, au carré, c'est x plus 3, fois, x plus 3. Le dessin est un carré de côté x plus 3. Dedans : un carré x au carré, un petit carré de 9, et deux rectangles de 3 x chacun. Les voilà, les oubliés ! En tout : x au carré, plus 6 x, plus 9. Le terme du milieu s'appelle le double produit.",
+  "06-difference": "Un dernier cas, étonnant. x moins 5, fois, x plus 5. Quatre produits : x au carré, plus 5 x, moins 5 x, moins 25. Plus 5 x et moins 5 x s'annulent ! Il reste x au carré moins 25. Deux parenthèses presque jumelles, et le milieu disparaît.",
+  "07-defi": "À toi de jouer. Calcule 21 fois 19, de tête, sans poser l'opération. Indice : 21, c'est 20 plus 1. Et 19 ? Mets pause, et cherche.",
+  "07b-correction": "Correction. 21 fois 19, c'est 20 plus 1, fois, 20 moins 1. Les parenthèses presque jumelles ! Le milieu disparaît : il reste 20 au carré moins 1 au carré. 400 moins 1 : 399. Développer, ça sert aussi à calculer de tête.",
+  "08-finale": "Retiens trois choses. Le nombre devant la parenthèse multiplie chaque terme, avec son signe. Deux parenthèses, c'est quatre produits, puis on réduit. Et x plus 3 au carré n'est pas x au carré plus 9 : il manque le double produit, 6 x.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

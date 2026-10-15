@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Une fonction passe de moins 1 à 1. Elle touche forcément 0 ?",
+  "01-piege": "Beaucoup répondent oui, toujours. Et c'est faux !",
+  "02-saut": "Si la courbe fait un saut, elle peut passer de moins 1 à 1 sans jamais toucher 0. Il faut qu'elle soit continue : tracée sans lever le crayon.",
+  "03-regle": "Les polynômes, l'exponentielle, le logarithme sur son domaine : ils sont continus. Pas de saut, pas de trou.",
+  "04-defi": "À toi. La fonction partie entière, qui fait des marches d'escalier, est-elle continue ?",
+  "05-fin": "Ta réponse en commentaire. La vidéo complète sur le théorème des valeurs intermédiaires est juste en dessous."
+}

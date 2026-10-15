@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Un élève a calculé 3 virgule 7 fois 2 virgule 9. Il trouve 107 virgule 3. Sans poser le calcul, c'est possible ?",
+  "01-arrondir": "On arrondit. 3 virgule 7, c'est presque 4. 2 virgule 9, c'est presque 3.",
+  "02-ordre": "4 fois 3, ça fait 12. Le résultat doit être proche de 12.",
+  "03-verdict": "107 virgule 3, c'est beaucoup trop grand. C'est faux ! La virgule est mal placée.",
+  "04-correct": "Le bon résultat : 10 virgule 73. Tout près de 12.",
+  "05-defi": "À toi. 4 virgule 9 fois 5 virgule 1 : environ 2 virgule 5, 25, ou 250 ?",
+  "06-fin": "Ta réponse en commentaire. La vidéo complète sur le calcul avec les décimaux est juste en dessous."
+}

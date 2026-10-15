@@ -1,0 +1,9 @@
+{
+  "00-accroche": "x égale 3, donc x au carré égale 9. Et dans l'autre sens ? Attention, piège.",
+  "01-implique": "Cette flèche se lit : implique. x égale 3 implique x au carré égale 9. C'est vrai.",
+  "02-retour": "Mais retournée, elle ment. x au carré égale 9 n'implique pas x égale 3. Car moins 3 au carré fait 9 aussi.",
+  "03-pluie": "C'est comme la pluie. S'il pleut, le sol est mouillé. Mais si le sol est mouillé, il n'a pas forcément plu.",
+  "04-double": "Quand ça marche dans les deux sens, on met la double flèche : équivaut à. x plus 2 égale 5 équivaut à x égale 3.",
+  "05-defi": "À toi : x égale 2 implique x au carré égale 4. Et dans l'autre sens, vrai ou faux ?",
+  "06-fin": "Ta réponse en commentaire. Entraîne-toi sur éleveai point f r, et abonne-toi !"
+}

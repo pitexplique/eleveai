@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Sirop de menthe. 2 verres de sirop pour 10 verres d'eau. Ou 1 verre de sirop pour 5 verres d'eau. Lequel est le plus sucré ?",
+  "01-piege": "Beaucoup choisissent le premier, parce qu'il y a plus de sirop. Mais il y a aussi plus d'eau !",
+  "02-simplifier": "On simplifie le ratio, comme une fraction. 2 pour 10 : je divise les deux nombres par 2. J'obtiens 1 pour 5. C'est le même ratio : les deux sirops ont exactement le même goût.",
+  "03-faux": "Attention : on divise, on ne soustrait pas. Enlever 1 aux deux nombres donne 1 pour 9. Ce n'est plus du tout le même sirop.",
+  "04-defi": "À toi. Simplifie le ratio 12 pour 18.",
+  "05-fin": "Ta réponse en commentaire. La vidéo complète sur les ratios est juste en dessous."
+}

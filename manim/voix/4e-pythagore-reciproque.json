@@ -1,0 +1,13 @@
+{
+  "00-garde": "Utiliser la réciproque. La dalle du maçon : son coin est-il vraiment un angle droit ?",
+  "01-dalle": "Un maçon coule une dalle. Il mesure deux bords : 60 centimètres et 80 centimètres. Puis la diagonale : 100 centimètres. Sans équerre, peut-il savoir si le coin est droit ?",
+  "02-reciproque": "Le théorème de Pythagore part d'un triangle rectangle et donne une égalité. La réciproque fait le chemin inverse : si l'égalité est vérifiée, alors le triangle est rectangle. Et l'angle droit est en face du plus grand côté.",
+  "03-redaction": "On rédige en quatre lignes. Un : le plus grand côté est BC. Deux : d'une part, BC au carré égale 100 au carré : 10000. D'autre part, AB au carré plus AC au carré égale 60 au carré plus 80 au carré : 3600 plus 6400, 10000. Trois : donc BC au carré égale AB au carré plus AC au carré. Quatre : d'après la réciproque du théorème de Pythagore, le triangle ABC est rectangle en A. Le coin de la dalle est droit.",
+  "04-sommet": "Attention au sommet. L'angle droit est en face du plus grand côté. BC est le plus grand : l'angle droit est en A, le seul sommet qui n'est pas sur BC.",
+  "05-non": "Une autre dalle : 60, 80 et 98 centimètres. D'une part, 98 au carré : 9604. D'autre part, 60 au carré plus 80 au carré : 10000. 9604 n'est pas égal à 10000. L'égalité n'est pas vérifiée : le triangle n'est pas rectangle. Le coin n'est pas droit, et le maçon doit corriger.",
+  "06-erreurs": "Les deux erreurs de rédaction. Écrire le signe égal avant d'avoir calculé : on écrit d'une part, d'autre part. Et citer le mauvais théorème : pour prouver qu'un triangle est rectangle, c'est la réciproque, pas le théorème.",
+  "07-defi": "À toi de jouer. Le triangle KLM a pour côtés KL égale 9 centimètres, LM égale 12 centimètres et KM égale 15 centimètres. Est-il rectangle ? Si oui, en quel sommet ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Le plus grand côté est KM. D'une part, KM au carré égale 225. D'autre part, KL au carré plus LM au carré égale 81 plus 144 : 225. L'égalité est vérifiée. D'après la réciproque du théorème de Pythagore, KLM est rectangle en L.",
+  "08-finale": "Ce que tu sais faire maintenant. Comparer d'une part et d'autre part ? Citer la réciproque pour conclure ? Trouver le sommet de l'angle droit, en face du plus grand côté ? Dire non quand l'égalité n'est pas vérifiée ? Alors l'épisode 7 t'attend : rédiger avec Pythagore ou sa réciproque.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

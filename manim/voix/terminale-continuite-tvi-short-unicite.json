@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Le théorème dit « au moins une solution ». Comment prouver qu'il n'y en a qu'une ?",
+  "01-piege": "Beaucoup écrivent « unique » sans rien justifier. Et le correcteur enlève les points.",
+  "02-monotonie": "Il faut que f soit strictement monotone. Une courbe qui ne fait que monter ne peut couper l'axe qu'une fois.",
+  "03-exemple": "f de x égale x au cube plus x moins 1. f prime de x égale 3 x au carré plus 1, toujours positif. f est strictement croissante : la solution est unique.",
+  "04-defi": "À toi. f de x égale x au carré moins 1 sur l'intervalle de moins 2 à 2 : combien de solutions à f de x égale 0 ? Et pourquoi le théorème ne suffit pas ?",
+  "05-fin": "Ta réponse en commentaire. La vidéo complète sur le théorème des valeurs intermédiaires est juste en dessous."
+}

@@ -1,0 +1,14 @@
+{
+  "00-garde": "Regarde ta règle. Un 0 au bout, puis 1, 2, 3, toujours séparés par le même écart. Ta règle, c'est une demi-droite graduée. Et sur une demi-droite graduée, chaque nombre a sa place. Même 0 virgule 5. Même trois quarts.",
+  "00b-objectifs": "Au programme : lire un nombre, placer un nombre, placer une fraction, et graduer un segment.",
+  "01-definition": "Une demi-droite graduée part d'un point : l'origine. Elle vaut 0. Ensuite, on reporte toujours la même longueur : 1, 2, 3, 4. Chaque point de la droite porte un nombre. Ce nombre, c'est son abscisse. Le point A est sur le 3 : son abscisse est 3.",
+  "02-le-pas": "Attention : l'écart entre deux traits ne vaut pas toujours 1. Ici, on lit 0, 0 virgule 2, 0 virgule 4. D'un trait au suivant, on avance de 0 virgule 2. Cet écart, c'est le pas. La règle d'or : avant de lire, je trouve le pas. Je prends deux nombres écrits, côte à côte, et je calcule l'écart.",
+  "03-lire": "Lisons l'abscisse du point A. Le pas vaut 0 virgule 2. Je compte depuis 0 : 0 virgule 2, 0 virgule 4. A est juste au milieu entre 0 virgule 4 et 0 virgule 6. Son abscisse est 0 virgule 5. Et le point C, à mi-chemin entre 0 virgule 2 et 0 virgule 4 ? Son abscisse est 0 virgule 3, pas 3 !",
+  "04-placer": "Maintenant, à l'envers : placer 2 virgule 3. La droite va de 2 à 3, coupée en 10. Chaque petit trait vaut un dixième. Je vais à 2, puis j'avance de 3 dixièmes : 2 virgule 1, 2 virgule 2, 2 virgule 3. Je marque le point. Et 4 virgule 2, sur une droite graduée de 0 virgule 5 en 0 virgule 5 ? Il est entre 4 et 4 virgule 5, plus près de 4.",
+  "05-fraction": "Une fraction aussi a sa place. On coupe l'unité en 4 parts égales. Chaque trait vaut un quart. Un quart, deux quarts, trois quarts : trois quarts est sur le troisième trait. Et 4 quarts ? On arrive pile sur 1. Alors où est sept quarts ? 4 quarts font 1, 8 quarts font 2. Sept quarts est entre 1 et 2, tout près de 2.",
+  "06-graduer": "Dernier geste : graduer toi-même. On a un segment de 12 centimètres, à couper en quarts. 4 parts égales, donc je divise : 12 divisé par 4, ça fait 3. Je place un trait tous les 3 centimètres : à 3, à 6, à 9 centimètres. Trois traits à l'intérieur, et le segment est coupé en 4.",
+  "07-defi": "À toi de jouer. Sur une droite graduée de 0 virgule 5 en 0 virgule 5, le point B est sur le troisième trait après 0. Quelle est son abscisse ? Mets pause, et cherche.",
+  "07b-correction": "Correction. Le pas vaut 0 virgule 5. Je compte depuis 0 : 0 virgule 5, 1, 1 virgule 5. L'abscisse de B est 1 virgule 5. Et pas 3 : le pas ne vaut pas 1 !",
+  "08-finale": "Tu sais lire une abscisse : je trouve le pas, puis je compte depuis 0. Tu sais placer un nombre décimal, et une fraction. Et tu sais graduer un segment : je divise la longueur par le nombre de parts.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

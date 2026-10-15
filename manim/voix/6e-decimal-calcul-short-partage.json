@@ -1,0 +1,10 @@
+{
+  "00-accroche": "4 amis se partagent 4 virgule 80 euros. Combien pour chacun ?",
+  "01-pieces": "4 virgule 80 euros, c'est 4 pièces de 1 euro et 8 pièces de 10 centimes.",
+  "02-euros": "On distribue les euros : 4 pièces pour 4 amis. 1 euro chacun.",
+  "03-centimes": "Puis les pièces de 10 centimes : 8 pièces pour 4 amis. 2 pièces chacun, 20 centimes.",
+  "04-resultat": "Chacun a 1 euro et 20 centimes : 1 virgule 20 euro. On écrit 4 virgule 8 divisé par 4, égale 1 virgule 2.",
+  "05-verif": "On vérifie : 1 virgule 2 fois 4, ça fait bien 4 virgule 8.",
+  "06-defi": "À toi. Combien font 6 virgule 3 divisé par 3 ?",
+  "07-fin": "Ta réponse en commentaire. La vidéo complète sur le calcul avec les décimaux est juste en dessous."
+}

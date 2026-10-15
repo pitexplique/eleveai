@@ -1,0 +1,7 @@
+{
+  "00-accroche": "Une nuit au sommet du Piton des Neiges. Cette courbe raconte la température, heure par heure.",
+  "01-image": "Quelle température fait-il à 22 heures ? On part de l'heure, en bas. On monte jusqu'à la courbe. Et on lit à gauche : 3 degrés.",
+  "02-antecedent": "À l'envers : à quelle heure fait-il moins 2 degrés ? On part de moins 2, à gauche. On avance jusqu'à la courbe… et on la touche deux fois : à 2 heures, et à 4 heures du matin.",
+  "03-retenir": "L'heure se lit en bas. La température se lit à gauche. Ne te trompe pas d'axe !",
+  "04-question": "Et toi : à quelle heure la température remonte-t-elle à 0 degré ? Ta réponse en commentaire !"
+}

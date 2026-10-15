@@ -1,0 +1,10 @@
+{
+  "00-depart": "Ti Margo part de Saint-Pierre, 2 mètres d'altitude. Jeudi, 22 heures : 180 kilomètres l'attendent.",
+  "01-nez": "Ça monte jusqu'au Nez de Bœuf, à 2023 mètres : il a monté de plus 2021.",
+  "02-hell": "Ça descend jusqu'à Hell-Bourg, à 995 mètres : moins 1028.",
+  "03-maido": "Ça remonte jusqu'au Maïdo, à 1950 mètres : plus 955.",
+  "04-arrivee": "Puis tout redescend jusqu'à l'arrivée, à Saint-Denis : 49 mètres. Moins 1901.",
+  "05-somme": "Additionne : plus 2021, moins 1028, plus 955, moins 1901… égale 47. 47 mètres, c'est juste l'arrivée moins le départ : 49 moins 2.",
+  "06-officiel": "Pourtant, l'organisation annonce 10200 mètres de montée.",
+  "07-question": "Voici l'énigme. Ti Margo a monté 10200 mètres en tout, et il arrive 47 mètres plus haut qu'au départ. Combien de mètres a-t-il descendu, en tout ? Réponds en commentaire."
+}

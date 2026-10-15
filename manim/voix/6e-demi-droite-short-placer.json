@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Où placer 1 virgule 7 ? Entre 1 et 2, d'accord. Mais où exactement ?",
+  "01-dixiemes": "On coupe l'écart entre 1 et 2 en 10. Chaque petit trait vaut un dixième : 0 virgule 1.",
+  "02-avancer": "Je vais à 1. Puis j'avance de 7 dixièmes : 1 virgule 1, 1 virgule 2, 1 virgule 3, 1 virgule 4, 1 virgule 5, 1 virgule 6, 1 virgule 7.",
+  "03-verifier": "Je vérifie. 1 virgule 5 est pile au milieu. 1 virgule 7 est après le milieu : plus près de 2 que de 1.",
+  "04-defi": "À toi. Sur une droite de 3 à 4, coupée en 10, sur quel trait se place 3 virgule 4 ?",
+  "05-fin": "Ta réponse en commentaire. La vidéo complète sur la demi-droite graduée est juste en dessous."
+}

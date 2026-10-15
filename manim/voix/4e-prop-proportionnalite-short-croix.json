@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Une voiture consomme 6 litres pour 100 kilomètres. Combien pour 250 kilomètres ?",
+  "01-piege": "Le produit en croix, oui. Mais beaucoup multiplient les mauvais nombres : 250 fois 100, divisé par 6. Ça donne plus de 4 000 litres !",
+  "02-tableau": "Je range d'abord : en haut les kilomètres, 100 et 250. En bas les litres, 6 et la case vide. Je multiplie en diagonale : 250 fois 6, 1 500. Puis je divise par le nombre qui reste : 1 500 divisé par 100.",
+  "03-reponse": "15 litres. Je contrôle : 250, c'est 2 fois et demie 100. Et 6 fois 2 virgule 5, 15. C'est bon.",
+  "04-defi": "À toi. Une moto consomme 4 litres pour 100 kilomètres. Combien pour 350 kilomètres ?",
+  "05-fin": "Ta réponse en commentaire. La vidéo complète sur la proportionnalité est juste en dessous."
+}

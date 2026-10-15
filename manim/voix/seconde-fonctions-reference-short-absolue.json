@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Quelle est l'image de 4 par la valeur absolue ? 4. Et celle de moins 4 ? 4 aussi. Deux nombres différents, exactement la même image.",
+  "01-distance": "La valeur absolue d'un nombre, c'est sa DISTANCE à zéro. Et une distance ne peut pas être négative. Donc la valeur absolue efface le signe : valeur absolue de moins 4 égale 4, valeur absolue de 4 égale 4.",
+  "02-courbe": "Sa courbe s'en souvient : c'est un V. Elle descend sur les négatifs, elle remonte sur les positifs, et la pointe du V est en zéro. C'est exactement le comportement de la fonction carré, avec deux segments droits au lieu d'une parabole.",
+  "03-ordre": "Donc elle retourne l'ordre sur les négatifs, comme le carré. Moins 3 est plus petit que moins 1. Mais valeur absolue de moins 3 vaut 3, valeur absolue de moins 1 vaut 1, et 3 est plus grand que 1.",
+  "04-retenir": "Retiens deux choses. Une valeur absolue n'est jamais négative. Et deux nombres opposés ont la même valeur absolue : quand tu résous une équation, pense donc toujours aux DEUX solutions.",
+  "05-fin": "La vidéo complète est sur la chaîne."
+}

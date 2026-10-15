@@ -1,0 +1,17 @@
+{
+  "00-garde": "Avec 12 billes, tu peux faire des groupes égaux de plein de façons. Avec 13 billes, impossible. Pourquoi ? Parce que 13 est un nombre premier.",
+  "00b-objectifs": "Au programme : ranger des billes en rectangles, reconnaître un nombre premier, et trouver les nombres premiers jusqu'à 30.",
+  "01-rectangles-12": "Prenons 12 billes, et rangeons-les en rectangle. 1 rangée de 12. 2 rangées de 6. 3 rangées de 4. Chaque rectangle est une multiplication : 1 fois 12, 2 fois 6, 3 fois 4. Toutes égales à 12.",
+  "02-diviseurs": "Et chaque rectangle donne des divisions qui tombent juste. 12 divisé par 2 égale 6. 12 divisé par 3 égale 4. Les nombres 1, 2, 3, 4, 6 et 12 sont les diviseurs de 12 : ils divisent 12 sans reste.",
+  "03-sept": "Maintenant, 7 billes. En 2 rangées ? Il en reste une. En 3 rangées ? Il en reste une. Avec 4, 5 ou 6 rangées, il manque des billes. Le seul rectangle possible : une seule rangée de 7. 7 n'a que deux diviseurs : 1 et 7.",
+  "04-definition": "Un nombre comme 7 s'appelle un nombre premier. Un nombre premier a exactement deux diviseurs : 1 et lui-même. Avec un nombre premier de billes, impossible de faire des groupes égaux, sauf un seul groupe, ou des groupes d'une seule bille.",
+  "05-un-et-deux": "Et 1 ? Une seule bille, un seul diviseur : 1. Il lui en manque un : 1 n'est pas premier. Et 2 ? Deux diviseurs, 1 et 2 : 2 est premier. C'est même le seul nombre premier pair. Tous les autres nombres pairs se rangent en 2 rangées.",
+  "06-crible": "Pour trouver les nombres premiers jusqu'à 30, il existe une méthode de plus de deux mille ans : le crible d'Ératosthène. On barre 1. On garde 2, et on barre ses multiples : 4, 6, 8, et ainsi de suite. On garde 3, et on barre ses multiples. On garde 5, et on barre ses multiples. Ce qui reste, ce sont les nombres premiers : 2, 3, 5, 7, 11, 13, 17, 19, 23 et 29.",
+  "07-treize": "Tu te souviens de 13 divisé par 4, qui ne tombait pas juste ? C'était normal : 13 est premier. 13 billes ne se rangent qu'en une seule rangée. Toutes les autres divisions de 13 laissent un reste.",
+  "08-piege": "Le piège : un nombre impair n'est pas forcément premier. 9 est impair, mais 9 billes se rangent en 3 rangées de 3 : 9 égale 3 fois 3. 9 n'est pas premier. Pareil pour 15 : 3 rangées de 5.",
+  "09-recap": "Le récapitulatif. Les diviseurs d'un nombre se lisent dans les rectangles qu'on peut faire avec ses billes. Un nombre premier ne se range qu'en une seule rangée : il a exactement deux diviseurs, 1 et lui-même. 1 n'est pas premier, et 2 est le seul nombre premier pair.",
+  "10-defi": "À toi. Parmi 21, 23 et 25, lequel est premier ? Mets pause.",
+  "11-correction": "Correction. 21 billes, c'est 3 rangées de 7 : 21 n'est pas premier. 25 billes, c'est 5 rangées de 5 : 25 n'est pas premier. 23 billes ne se rangent qu'en une seule rangée : 23 est premier.",
+  "12-finale": "Tu sais maintenant ranger des billes en rectangles, reconnaître un nombre premier, et trouver les nombres premiers jusqu'à 30. Si tu ne devais retenir qu'une chose : un nombre premier de billes ne se range qu'en une seule rangée.",
+  "13-abonne": "Dis-moi en commentaire quel est le plus grand nombre premier que tu connais. Entraîne-toi sur le coach maths d'éleveai point fr, et abonne-toi à la chaîne !"
+}

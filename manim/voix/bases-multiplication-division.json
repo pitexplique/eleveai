@@ -1,0 +1,17 @@
+{
+  "00-garde": "56 divisé par 8. Tu poses la division ? Pas la peine. Si tu connais ta table de 8, tu as déjà la réponse. Une multiplication, c'est deux divisions… offertes.",
+  "00b-objectifs": "Au programme : voir une multiplication avec des jetons, en tirer deux divisions, et diviser en lisant la table.",
+  "01-jetons": "Voici 12 jetons, rangés en 3 rangées de 4. Combien de jetons ? 3 fois 4 égale 12. Tournons le rectangle : 4 rangées de 3. Toujours 12 jetons. 4 fois 3 égale 12 aussi.",
+  "02-en-4-groupes": "Maintenant, partageons ces 12 jetons en 4 groupes égaux. Chaque colonne est un groupe. Dans chaque groupe : 3 jetons. 12 divisé par 4 égale 3.",
+  "03-en-3-groupes": "Et si on partage les 12 jetons en 3 groupes égaux ? Chaque rangée est un groupe. Dans chaque groupe : 4 jetons. 12 divisé par 3 égale 4.",
+  "04-famille": "On n'a pas bougé un seul jeton. Les trois nombres 3, 4 et 12 forment une famille. Le plus grand, 12, en haut. Avec eux, on écrit deux multiplications : 3 fois 4 égale 12, 4 fois 3 égale 12. Et deux divisions : 12 divisé par 4 égale 3, 12 divisé par 3 égale 4. Une multiplication, deux divisions.",
+  "05-la-question": "Alors, diviser, c'est quoi ? 12 divisé par 4, c'est se demander : 4 fois combien font 12 ? On cherche le nombre qui manque dans la multiplication. 4 fois 3 égale 12 : la réponse est 3.",
+  "06-lire-la-table": "Avec le grand tableau, ça devient une lecture. 42 divisé par 6. On va sur la ligne de 6. On avance jusqu'à trouver 42. On remonte en haut de la colonne : 7. Donc 42 divisé par 6 égale 7. Et en même temps, 42 divisé par 7 égale 6.",
+  "07-exemple-56": "Revenons au début. 56 divisé par 8 : 8 fois combien font 56 ? Dans la table de 8 : 8 fois 7 égale 56. Donc 56 divisé par 8 égale 7. Et la deuxième division est offerte : 56 divisé par 7 égale 8.",
+  "08-pieges": "Deux pièges. Premier piège : 3 fois 4 égale 4 fois 3, mais une division ne se retourne pas. 12 divisé par 4 égale 3. Mais 4 divisé par 12, c'est le piège : ça ne fait pas 3. Le grand nombre se partage, il passe en premier. Second piège : 13 divisé par 4. 13 n'est pas dans la table de 4. 4 fois 3 égale 12, 4 fois 4 égale 16. La division ne tombe pas juste : il reste quelque chose. Ce sera pour un autre épisode.",
+  "09-recap": "Le récapitulatif. Une multiplication donne deux divisions : 3 fois 4 égale 12, donc 12 divisé par 4 égale 3, et 12 divisé par 3 égale 4. Diviser, c'est chercher le nombre qui manque. Et dans le tableau : la ligne, le résultat, puis le haut de la colonne.",
+  "10-defi": "À toi. 63 divisé par 9. 48 divisé par 6. 35 divisé par 5. Mets pause.",
+  "11-correction": "Correction. 9 fois 7 égale 63, donc 63 divisé par 9 égale 7. 6 fois 8 égale 48, donc 48 divisé par 6 égale 8. 5 fois 7 égale 35, donc 35 divisé par 5 égale 7.",
+  "12-finale": "Tu sais maintenant voir une multiplication avec des jetons, en tirer deux divisions, et diviser en lisant la table. Si tu ne devais retenir qu'une chose : chaque table que tu apprends, tu l'apprends deux fois. Une multiplication, deux divisions.",
+  "13-abonne": "Les tables de multiplication à imprimer, avec les divisions et le corrigé, sont gratuites sur éleveai point fr. Entraîne-toi sur le coach maths, et abonne-toi à la chaîne !"
+}

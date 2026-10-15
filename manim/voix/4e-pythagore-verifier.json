@@ -1,0 +1,14 @@
+{
+  "00-garde": "Vérifier une égalité avec trois longueurs. Une corde à 13 nœuds : pourquoi les bâtisseurs s'en servent-ils ?",
+  "01-corde": "Une corde avec 13 nœuds, régulièrement espacés : 12 intervalles. On la tend en triangle : 3 intervalles, 4 intervalles, 5 intervalles. On a trois longueurs. Est-ce qu'elles vérifient l'égalité de Pythagore ?",
+  "02-plus-grand": "Première étape : repérer le plus grand côté. Ici, 5. C'est lui qui joue le rôle de l'hypoténuse : son carré va seul d'un côté.",
+  "03-deux-calculs": "Deuxième étape : deux calculs, séparés. D'un côté, le carré du plus grand : 5 au carré, 25. De l'autre, la somme des carrés des deux autres : 3 au carré plus 4 au carré, 9 plus 16, 25. Troisième étape : on compare. 25 et 25 : l'égalité est vérifiée.",
+  "04-piege": "Le piège : écrire tout de suite 5 au carré égale 3 au carré plus 4 au carré. On ne sait pas encore si c'est égal ! On calcule chaque côté à part, et on n'écrit le signe égal qu'à la fin.",
+  "05-pas-egal": "Avec d'autres longueurs : 4, 5 et 6 centimètres. Le plus grand : 6. 6 au carré : 36. 4 au carré plus 5 au carré : 16 plus 25, 41. 36 et 41 : différents. L'égalité n'est pas vérifiée.",
+  "06-desordre": "Attention : les longueurs ne sont pas toujours données dans l'ordre. AB égale 8, BC égale 17, AC égale 15. Le plus grand, c'est BC : 17. 17 au carré : 289. 8 au carré plus 15 au carré : 64 plus 225, 289. L'égalité est vérifiée.",
+  "07-defi": "À toi de jouer. Un triangle a des côtés de 5, 12 et 13 centimètres. Calcule le carré du plus grand côté, puis la somme des carrés des deux autres. Mets pause, et cherche !",
+  "07b-correction": "Correction. Le plus grand côté : 13. 13 au carré : 169. 5 au carré plus 12 au carré : 25 plus 144, 169. Les deux font 169 : l'égalité est vérifiée.",
+  "07c-triplets": "Des triplets à connaître : 3, 4, 5. 6, 8, 10. 5, 12, 13. 8, 15, 17. Avec ces longueurs, l'égalité est toujours vérifiée, et le triangle a un angle droit. Voilà pourquoi les bâtisseurs tendent la corde à 13 nœuds : elle donne un angle droit sans équerre.",
+  "08-finale": "Ce que tu sais faire maintenant. Repérer le plus grand côté ? Faire les deux calculs séparément ? Comparer avant d'écrire le signe égal ? Alors l'épisode 6 t'attend : conclure, le triangle est-il rectangle ?",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Pourquoi les maths écrivent-elles des lettres à l'envers ?",
+  "01-pour-tout": "Ce A à l'envers, c'est le A de « All », « tous » en anglais. Il se lit : pour tout.",
+  "02-il-existe": "Ce E à l'envers, c'est le E de « Exists ». Il se lit : il existe. Au moins un.",
+  "03-exemples": "Pour tout x appartenant à R, x au carré est supérieur ou égal à 0. Et il existe n appartenant à N tel que n au carré égale 49. Lequel ? 7.",
+  "04-contre": "Le piège : pour démolir un « pour tout », un seul contre-exemple suffit. Pour tout x, x au carré est plus grand que x ? Faux : 0,5 au carré, c'est 0,25.",
+  "05-defi": "À toi : pour tout x, x plus 1 est plus grand que x. Vrai ou faux ?",
+  "06-fin": "Ta réponse en commentaire. Entraîne-toi sur éleveai point f r, et abonne-toi !"
+}

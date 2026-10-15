@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Dans un club, le ratio filles pour garçons est 4 pour 3. Il y a 5 filles de plus que de garçons. Combien de membres ?",
+  "01-piege": "Le piège : croire que 5, c'est le nombre de garçons. Non : 5, c'est l'écart.",
+  "02-ecart": "L'écart aussi, c'est des parts. 4 moins 3 : 1 part. Donc une part vaut 5.",
+  "03-reponse": "Les filles, 4 parts : 20. Les garçons, 3 parts : 15. En tout, 35 membres. Et 20 moins 15, ça fait bien 5.",
+  "04-defi": "À toi. Le ratio est 2 pour 5, et l'écart vaut 21. Combien en tout ?",
+  "05-fin": "Ta réponse en commentaire. La vidéo complète sur les ratios est juste en dessous."
+}

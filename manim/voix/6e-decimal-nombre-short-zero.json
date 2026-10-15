@@ -1,0 +1,9 @@
+{
+  "00-accroche": "0 virgule 45, ou 0 virgule 5 : lequel est le plus grand ?",
+  "01-piege": "Beaucoup répondent 0 virgule 45. Parce que 45, c'est plus que 5. Et c'est faux !",
+  "02-zero": "L'astuce : on ajoute un zéro. 0 virgule 5, c'est 0 virgule 50. Ça ne change rien au nombre.",
+  "03-compare": "Maintenant, on compare 50 centièmes et 45 centièmes. 0 virgule 5 est le plus grand.",
+  "04-droite": "Sur la droite graduée, 0 virgule 5 est à droite de 0 virgule 45. C'est lui le plus grand.",
+  "05-defi": "À toi. Lequel est le plus petit : 0 virgule 52, ou 0 virgule 507 ?",
+  "06-fin": "Ta réponse en commentaire. La vidéo complète sur les nombres décimaux est juste en dessous."
+}

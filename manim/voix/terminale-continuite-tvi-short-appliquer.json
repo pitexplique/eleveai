@@ -1,0 +1,8 @@
+{
+  "00-accroche": "x au cube plus x moins 1 égale 0. Une solution entre 0 et 1 ? Sans la calculer ?",
+  "01-calcul": "f de 0 égale moins 1. f de 1 égale 1. Un signe moins, un signe plus.",
+  "02-regle": "f est un polynôme, donc continue. Elle passe du négatif au positif : elle s'annule forcément entre 0 et 1. C'est le théorème des valeurs intermédiaires.",
+  "03-piege": "Le piège : oublier de dire que f est continue. Sans la continuité, le théorème ne s'applique pas.",
+  "04-defi": "À toi. x au cube moins 2 égale 0 a-t-elle une solution entre 1 et 2 ?",
+  "05-fin": "Ta réponse en commentaire. La vidéo complète sur le théorème des valeurs intermédiaires est juste en dessous."
+}

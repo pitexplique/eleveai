@@ -1,0 +1,14 @@
+{
+  "00-garde": "d égale v fois t. Tu crois connaître une formule ? Tu en connais trois : une pour la distance, une pour la vitesse, une pour le temps. Encore faut-il savoir les sortir.",
+  "00b-objectifs": "Au programme : lire une formule, isoler une lettre, éviter le piège classique, et le faire en deux étapes.",
+  "01-formule": "d égale v fois t : la distance égale la vitesse multipliée par le temps. Si on connaît deux des trois lettres, on trouve la troisième. À condition de savoir isoler la lettre cherchée.",
+  "02-isoler": "Un exemple. Tu montes au sommet du Piton des Neiges pour voir le soleil se lever. Disons qu'il te reste 2 kilomètres, et que tu montes à 1,5 kilomètre par heure. On cherche t. Dans d égale v fois t, t est multiplié par v. Comme dans une équation, on divise les deux côtés par v. t égale d divisé par v. 2 divisé par 1,5 : environ 1,33 heure. Une heure et vingt minutes.",
+  "03-heure": "Si le soleil se lève à 6 heures, tu pars à 4 heures 40. La formule t'a donné l'heure du réveil.",
+  "04-methode": "La méthode est toujours la même. On regarde ce qu'on fait subir à la lettre, et on le défait des deux côtés, avec l'opération inverse. C'est exactement résoudre une équation… avec des lettres à la place des nombres.",
+  "05-piege": "Le piège classique : v égale d fois t. Faux ! Vérifie avec les unités : des kilomètres fois des heures, ça ne donne pas des kilomètres par heure. La bonne formule : v égale d divisé par t.",
+  "06-deux-etapes": "Une formule en deux étapes. Un prix payé : P égale H fois 1,2, plus 5 euros de livraison. H, c'est le prix hors taxe. On cherche H. D'abord, on enlève 5 des deux côtés : P moins 5 égale H fois 1,2. Puis on divise par 1,2 : H égale, parenthèse, P moins 5, divisé par 1,2. On défait la dernière opération en premier.",
+  "07-defi": "À toi de jouer. Le périmètre d'un rectangle : P égale 2 fois, parenthèse, L plus l. Isole L. Mets pause, et cherche.",
+  "07b-correction": "Correction. L plus l est multiplié par 2 : on divise par 2. P divisé par 2 égale L plus l. Puis on enlève l : L égale P divisé par 2, moins l. Vérifions : un rectangle de 5 sur 3 a un périmètre de 16. 16 divisé par 2, 8. 8 moins 3, 5. C'est juste.",
+  "08-finale": "Retiens trois choses. Une formule, c'est une équation avec plusieurs lettres. Pour isoler une lettre, on défait ce qu'on lui a fait, des deux côtés, en commençant par la dernière opération. Et on vérifie, avec des nombres ou avec les unités.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

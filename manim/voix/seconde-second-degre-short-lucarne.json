@@ -1,0 +1,13 @@
+{
+  "00-accroche": "France, Turquie. Coup franc à 30 mètres, un mur à 9 mètres 15, la barre à 2 mètres 44. Pour la lucarne : 23 degrés, et 80 kilomètres-heure. D'où sortent ces deux nombres ?",
+  "01-equation": "Voici le tir : y égale moins 0,012 x carré, plus 0,432 x. x, la distance parcourue ; y, la hauteur du ballon, en mètres.",
+  "01b-angle": "Et l'angle de départ ? Au tout début, x est petit, et x carré encore plus : le tir suit presque la droite y égale 0,432 x. Pour x égale 1 : 0,432 moins 0,012, ça fait 0,42 ; presque pareil. En un mètre, le ballon monte de 43 centimètres. Tangente de l'angle égale 0,432 : l'angle de départ fait environ 23 degrés.",
+  "01c-vitesse": "Et la vitesse ? Les physiciens la lisent dans le 0,012 : le ballon part à environ 22 mètres par seconde, près de 80 kilomètres-heure. Il arrive au but en une seconde et demie : c'est tout le temps qu'a le gardien.",
+  "02-mur": "Au mur, x vaut 9,15. On remplace : y vaut environ 2 mètres 95. Un mur qui saute monte à peu près à 2 mètres 25 : le ballon passe largement au-dessus.",
+  "03-but": "Au but, x vaut 30. Moins 10,8, plus 12,96 : y vaut 2 mètres 16. Vingt-huit centimètres sous la barre. C'est la lucarne.",
+  "04-equation": "Et sans le filet, où retomberait-il ? On résout y égale zéro. On factorise : x fois, parenthèse, 0,432 moins 0,012 x. Un produit est nul si l'un des facteurs est nul : x égale zéro, c'est le pied du tireur ; ou x égale 36 mètres.",
+  "05-haut": "Le plus haut, c'est au milieu : à 18 mètres, le ballon monte à 3 mètres 89.",
+  "06-sert": "La recette de la lucarne : partir à 23 degrés, à 80 kilomètres-heure. Assez haut pour passer le mur, assez bas pour passer sous la barre. Une seule courbe fait les deux : une parabole.",
+  "07-en-vrai": "En vrai, le ballon tourne et l'air le freine : la parabole, c'est le modèle de départ.",
+  "08-fin": "La vidéo complète est sur la chaîne."
+}

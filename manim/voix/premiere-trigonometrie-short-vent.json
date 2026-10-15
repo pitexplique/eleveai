@@ -1,0 +1,11 @@
+{
+  "00-accroche": "Le cosinus d'un angle est-il positif ou négatif ? Demande au vent.",
+  "01-toi": "Sur le cercle trigonométrique, tu avances vers la droite, le long de l'axe rouge : l'axe des cosinus.",
+  "01-vent": "Et le vent souffle dans la direction de l'angle.",
+  "01-part": "Le cosinus, c'est la part du vent qui te pousse vers l'avant.",
+  "02-aide": "Angle pi sur 6 : le vent vient presque dans ton dos. Il t'aide à avancer. Le cosinus est positif : racine de 3 sur 2.",
+  "03-cote": "Angle pi sur 2 : le vent souffle de côté. Il ne t'aide pas, il ne te freine pas. Le cosinus vaut zéro.",
+  "04-freine": "Angle 2 pi sur 3 : le vent vient de face. Il te freine. Le cosinus est négatif : moins un demi.",
+  "04-retenir": "À retenir : à droite de l'axe vert, le cosinus est positif. À gauche, il est négatif.",
+  "05-fin": "La vidéo complète sur le cercle trigonométrique est sur la chaîne."
+}

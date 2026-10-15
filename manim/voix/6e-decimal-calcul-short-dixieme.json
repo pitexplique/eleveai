@@ -1,0 +1,10 @@
+{
+  "00-accroche": "0 virgule 1 fois 0 virgule 1. Beaucoup répondent 0 virgule 2. Et c'est faux !",
+  "01-piege": "0 virgule 2, c'est 0 virgule 1 plus 0 virgule 1. Ça, c'est une addition, pas une multiplication.",
+  "02-grille": "Regarde ce carré. Une colonne, c'est un dixième du carré.",
+  "03-dixieme-de-dixieme": "Fois 0 virgule 1, c'est prendre un dixième. Un dixième de cette colonne, c'est un seul petit carreau.",
+  "04-resultat": "Le carré a 100 carreaux. Un carreau, c'est un centième : 0 virgule 01.",
+  "05-methode": "Avec la méthode : 1 fois 1, ça fait 1. Deux chiffres après la virgule : 0 virgule 01.",
+  "06-defi": "À toi. Combien font 0 virgule 2 fois 0 virgule 3 ?",
+  "07-fin": "Ta réponse en commentaire. La vidéo complète sur le calcul avec les décimaux est juste en dessous."
+}

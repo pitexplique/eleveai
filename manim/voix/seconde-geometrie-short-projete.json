@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Tu es sur une route rectiligne, et tu veux rejoindre un phare le plus vite possible. Par où pars-tu ? Il n'y a qu'une seule bonne réponse, et elle se démontre.",
+  "01-perpendiculaire": "Le plus court chemin entre un point et une droite, c'est la perpendiculaire. Pas n'importe laquelle : celle qui passe par le point. Le pied de cette perpendiculaire s'appelle le projeté orthogonal du point sur la droite.",
+  "02-pourquoi": "Pourquoi est-ce le plus court ? Prends n'importe quel autre point A de la droite. Le triangle MHA est rectangle en H, donc MA en est l'hypoténuse. Et dans un triangle rectangle, l'hypoténuse est toujours le plus grand côté. Donc MA est plus long que MH. Toujours, quel que soit le point A.",
+  "03-exemple": "Un exemple chiffré. HA vaut 5 mètres, MA vaut 13 mètres. Pythagore : MH au carré vaut 169 moins 25, c'est-à-dire 144. Donc MH vaut 12 mètres. C'est la distance du point M à la droite.",
+  "04-retenir": "Retiens : la distance d'un point à une droite, c'est toujours la perpendiculaire. Et ce même segment est aussi la hauteur d'un triangle, donc il te donne son aire.",
+  "05-fin": "La vidéo complète est sur la chaîne."
+}

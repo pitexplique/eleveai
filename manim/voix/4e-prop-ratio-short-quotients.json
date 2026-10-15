@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Pour un béton, le ratio ciment pour sable est 2 pour 5. J'ai 40 kilos de ciment. Combien de sable ?",
+  "01-piege": "Le piège : 5 moins 2, ça fait 3. Alors on ajoute 3 kilos, et on trouve 43. C'est faux !",
+  "02-part": "Un ratio, c'est des parts égales. Ciment sur 2 égale sable sur 5. Le ciment, c'est 2 parts : 40 divisé par 2, une part vaut 20 kilos.",
+  "03-reponse": "Le sable, c'est 5 parts : 5 fois 20, 100 kilos de sable.",
+  "04-defi": "À toi. x pour y égale 3 pour 4, et y vaut 28. Combien vaut x ?",
+  "05-fin": "Ta réponse en commentaire. La vidéo complète sur les ratios est juste en dessous."
+}

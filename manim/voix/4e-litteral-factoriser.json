@@ -1,0 +1,14 @@
+{
+  "00-garde": "Développer, tout le monde sait le faire. Mais faire le chemin à l'envers ? 6 x plus 15 : qu'est-ce qui se cache derrière ? C'est ça, factoriser.",
+  "00b-objectifs": "Au programme : repérer un facteur commun, factoriser, vérifier en développant, et en 3e, factoriser avec les identités remarquables.",
+  "01-retour": "Développer, c'est passer d'un produit à une somme : 3 fois, parenthèse, 2 x plus 5, donne 6 x plus 15. Factoriser, c'est le chemin retour : de la somme, on revient au produit. Sur le rectangle découpé, on connaît les deux morceaux, 6 x et 15, et on cherche la hauteur commune.",
+  "02-facteur": "La question à se poser : qu'ont en commun 6 x et 15 ? 6, c'est 3 fois 2. 15, c'est 3 fois 5. Le 3 est dans les deux : c'est le facteur commun. On le sort devant la parenthèse : 6 x plus 15 égale 3 fois, parenthèse, 2 x plus 5.",
+  "03-lettre": "Le facteur commun peut être une lettre. x au carré plus 4 x : x au carré, c'est x fois x. 4 x, c'est 4 fois x. Le x est dans les deux : x au carré plus 4 x égale x fois, parenthèse, x plus 4.",
+  "04-verifier": "Une factorisation, ça se vérifie en développant. 3 fois, parenthèse, 2 x plus 5 : 3 fois 2 x, 6 x. 3 fois 5, 15. On retrouve 6 x plus 15 : c'est juste. Le piège : 3 fois, parenthèse, 2 x plus 15. Développe, et tu trouves 6 x plus 45. Ce n'est pas l'expression de départ.",
+  "05-identite": "En 3e, un nouvel outil : les identités remarquables, lues à l'envers. x au carré moins 9 : c'est x au carré moins 3 au carré. Une différence de deux carrés. Elle se factorise : x moins 3, fois, x plus 3. Vérifions : x au carré, plus 3 x, moins 3 x, moins 9. Le milieu disparaît, on retrouve x au carré moins 9.",
+  "06-carre": "Et x au carré plus 6 x plus 9 ? On reconnaît le carré de x plus 3 : x au carré, plus 2 fois x fois 3, plus 3 au carré. Donc x au carré plus 6 x plus 9 égale, parenthèse, x plus 3, au carré.",
+  "07-defi": "À toi de jouer. Factorise 25 moins x au carré. Attention à l'ordre. Mets pause, et cherche.",
+  "07b-correction": "Correction. 25, c'est 5 au carré. 25 moins x au carré, c'est 5 au carré moins x au carré. Une différence de deux carrés : 5 moins x, fois, 5 plus x. Le piège : écrire x moins 5, fois x plus 5. Ça donne x au carré moins 25 : le signe est inversé.",
+  "08-finale": "Retiens trois choses. Factoriser, c'est le chemin retour du développement. On cherche ce qui est commun, et on le sort devant la parenthèse. Et une factorisation se vérifie toujours, en redéveloppant.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

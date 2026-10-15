@@ -1,0 +1,7 @@
+{
+  "00-accroche": "Un dauphin saute. Où est-il, à chaque seconde ?",
+  "01-couleurs": "Sous l'eau, il devient orange : c'est le signe moins. Dans l'air, il devient bleu : c'est le signe plus.",
+  "02-tableau": "Regarde le tableau se remplir. De 0 à 1 seconde, il est sous l'eau : moins. À 1 seconde, il traverse la surface : zéro. De 1 à 3 secondes, il est dans l'air : plus. À 3 secondes, il retouche l'eau : zéro. Puis il replonge : moins.",
+  "03-retenir": "Un tableau de signes, c'est ça : dire où est le dauphin, à chaque instant.",
+  "04-question": "Et toi : pendant combien de secondes le dauphin est-il dans l'air ? Ta réponse en commentaire !"
+}

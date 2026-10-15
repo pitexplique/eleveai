@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Moins 10, ou moins 2 : lequel est le plus grand ?",
+  "01-piege": "Beaucoup répondent moins 10. Parce que 10, c'est plus que 2. Et c'est faux !",
+  "02-droite": "Regarde la droite graduée. Moins 10 est loin à gauche du zéro. Moins 2 est tout près du zéro.",
+  "03-regle": "Sur la droite, le plus à droite est le plus grand. Donc moins 2 est plus grand que moins 10. Chez les négatifs, plus on s'éloigne de zéro, plus le nombre est petit.",
+  "04-defi": "À toi. Range du plus petit au plus grand : moins 3, 2, et moins 8.",
+  "05-fin": "Ta réponse en commentaire. La vidéo complète sur les nombres relatifs est juste en dessous."
+}

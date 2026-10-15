@@ -1372,11 +1372,114 @@ def acc_fonction_vocabulaire(d):
     d.text((300, 464), "−1  et  3", font=police("ariblk.ttf", 52), fill=ROUGE)
 
 
+def acc_geometrie_2de(d):
+    """⭐ LE PANNEAU DE PENTE : 12 %, et le triangle qui dit que ce n'est pas
+    12 degrés. C'est l'erreur la plus partagée du chapitre, et elle se voit
+    sans lire une ligne."""
+    # ⛔ LE TEXTE EN HAUT, LE DESSIN EN BAS — et rien sous y = 540 : la
+    # signature commence à 556. Au premier essai, les deux lignes rouges et
+    # vertes étaient posées à 548 et 614, en plein sur « Frédéric, ton prof ».
+    centre(d, 540, 350, "12 %  n'est PAS  12°", police("ariblk.ttf", 52), ROUGE)
+    centre(d, 540, 414, "tan α = 0,12   →   α = 6,8°",
+           police("arialbd.ttf", 36), VERT)
+
+    X0, Y0 = 330, 524
+    X1, Y1 = 730, 470                       # 400 px de base, 54 de hauteur
+    d.line([(X0, Y0), (X1, Y0)], fill=NAVY, width=6)
+    d.line([(X1, Y0), (X1, Y1)], fill=ROUGE, width=6)
+    d.line([(X0, Y0), (X1, Y1)], fill=BLEU, width=7)
+    d.rectangle([X1 - 20, Y0 - 20, X1, Y0], outline=NAVY, width=3)
+    d.text((X1 + 14, Y1 + 2), "12 m", font=police("arialbd.ttf", 28), fill=ROUGE)
+    d.text((X0 + 30, Y0 - 50), "α", font=police("ariblk.ttf", 32), fill=VERT)
+
+
+def acc_fonctions_reference_2de(d):
+    """⭐ LES CINQ COURBES, DESSINÉES CÔTE À CÔTE.
+
+    Frédéric, 23/09 : « on ne comprend pas comparer », « fais des dessins de
+    fonctions de référence ». Le premier jet montrait le paradoxe du chapitre
+    (−5 < −2 mais 25 > 4) : vrai, mais c'est un raisonnement, et un
+    raisonnement ne se lit pas en une seconde. Cinq allures alignées, si — et
+    elles disent exactement ce que la vidéo contient.
+
+    ⚠️ LA BANDE UTILE : de y = 348 (sous le sous-titre, posé à 300 en corps 32)
+    à y = 544 (au-dessus de la signature, qui commence à 556), et de x = 58 à
+    x = 830 (au-delà, c'est la main de Ti-Margo).
+    ⛔ Chaque fenêtre est calée pour que la courbe TOUCHE le bord haut de sa
+    boîte sans être coupée : 1,55² = 2,40 et 1,33³ = 2,35, d'où ces bornes en x.
+    """
+    VIOLET, ORANGE, GRIS = (139, 92, 246), (217, 119, 20), (150, 165, 185)
+    cellules = [
+        ("x²", BLEU, (-1.55, 1.55), (-0.5, 2.4), lambda x: x * x,
+         [(-1.55, 1.55)]),
+        ("1/x", VERT, (-2.3, 2.3), (-2.3, 2.3), lambda x: 1 / x,
+         [(-2.3, -0.45), (0.45, 2.3)]),
+        ("√x", ROUGE, (-0.7, 3.6), (-0.7, 2.3), lambda x: x ** 0.5,
+         [(0.0, 3.6)]),
+        ("x³", VIOLET, (-1.33, 1.33), (-2.4, 2.4), lambda x: x ** 3,
+         [(-1.33, 1.33)]),
+        ("|x|", ORANGE, (-1.8, 1.8), (-0.5, 2.0), abs,
+         [(-1.8, 1.8)]),
+    ]
+    # ⭐ Traits ÉPAIS et boîtes pleines : une vignette se juge à 320 × 180 dans
+    # une liste de suggestions, où chaque case ne fait plus que 37 px. C'est la
+    # silhouette des cinq qui doit porter, pas le détail du tracé.
+    x0, cw, gap, y0, ch = 58, 148, 8, 350, 134
+    for i, (nom, coul, (xa, xb), (ya, yb), f, plages) in enumerate(cellules):
+        bx = x0 + i * (cw + gap)
+        d.rounded_rectangle([bx, y0, bx + cw, y0 + ch], radius=14,
+                            fill=(255, 255, 255), outline=CARREAU_FORT, width=2)
+        pad = 9
+        px0, px1, py0, py1 = bx + pad, bx + cw - pad, y0 + pad, y0 + ch - pad
+
+        def px(x, y, xa=xa, xb=xb, ya=ya, yb=yb, px0=px0, px1=px1, py0=py0, py1=py1):
+            return (px0 + (x - xa) / (xb - xa) * (px1 - px0),
+                    py1 - (y - ya) / (yb - ya) * (py1 - py0))
+
+        d.line([px(xa, 0), px(xb, 0)], fill=GRIS, width=2)
+        d.line([px(0, ya), px(0, yb)], fill=GRIS, width=2)
+        for a, b in plages:
+            pts = [px(a + (b - a) * k / 48, f(a + (b - a) * k / 48))
+                   for k in range(49) if ya <= f(a + (b - a) * k / 48) <= yb]
+            if len(pts) > 1:
+                d.line(pts, fill=coul, width=7, joint="curve")
+        centre(d, bx + cw / 2, y0 + ch + 6, nom, police("ariblk.ttf", 34), NAVY)
+
+
 def acc_python_2de(d):
     """La ligne impossible en maths, normale en Python."""
     d.text((300, 340), "x = x + 1", font=police("ariblk.ttf", 68), fill=BLEU)
     d.text((300, 424), "un = RANGE", font=police("arialbd.ttf", 44), fill=VERT)
     d.text((300, 480), "deux == COMPARENT", font=police("arialbd.ttf", 40), fill=ROUGE)
+
+
+def acc_reels_intervalles(d):
+    """Le piège du chapitre : un « plus » dans les barres cache un négatif."""
+    d.text((300, 336), "|x + 5|", font=police("ariblk.ttf", 72), fill=BLEU)
+    d.text((300, 432), "distance à −5", font=police("ariblk.ttf", 46), fill=VERT)
+    d.text((300, 496), "pas à 5", font=police("arialbd.ttf", 40), fill=ROUGE)
+
+
+def acc_devfac_2de(d):
+    """Le réflexe qui perd une solution, et la factorisation qui la garde."""
+    d.text((300, 336), "5x² = 20x", font=police("ariblk.ttf", 64), fill=BLEU)
+    d.text((300, 420), "÷ x : on perd 0", font=police("arialbd.ttf", 42), fill=ROUGE)
+    d.text((300, 480), "5x(x − 4) = 0", font=police("ariblk.ttf", 44), fill=VERT)
+
+
+def acc_expressions_2de(d):
+    """Trois exemples ne prouvent rien : la lettre, si."""
+    # ⛔ Pas de « ✓ » : Arial Black ne le connaît pas, il sortait en carrés (vu le 21/09).
+    d.text((300, 340), "1, 2, 3 : ça marche", font=police("ariblk.ttf", 44), fill=VERT)
+    d.text((300, 418), "prouvé ?", font=police("ariblk.ttf", 56), fill=ROUGE)
+    d.text((300, 490), "non : il faut la lettre", font=police("arialbd.ttf", 36), fill=NAVY)
+
+
+def acc_arithmetique_2de(d):
+    """Un nombre qui a l'air premier, et ne l'est pas."""
+    d.text((300, 336), "119", font=police("ariblk.ttf", 92), fill=BLEU)
+    d.text((300, 450), "= 7 × 17", font=police("ariblk.ttf", 54), fill=VERT)
+    d.text((560, 372), "premier ?", font=police("arialbd.ttf", 42), fill=ROUGE)
 
 
 def acc_974_temperature(d):
@@ -1459,6 +1562,121 @@ def acc_pisa_2025(d):
     d.text((300, 474), "record de l'OCDE", font=police("arialbd.ttf", 40), fill=NAVY)
 
 
+
+# ── L'exponentielle de première spé (15/09/2026) : trois vidéos, deux fiches ──
+# ⛔ Pas d'exposant Unicode : Arial Black n'a pas tous les petits caractères
+# (ˣ manque). On pose la base, puis l'exposant plus petit et plus haut.
+
+def puissance_pil(d, x, y, base, expo, taille, fill, fonte="ariblk.ttf"):
+    """Une base, puis son exposant plus petit et plus haut. Rend l'abscisse de fin."""
+    fb = police(fonte, taille)
+    fe = police(fonte, int(taille * 0.58))
+    d.text((x, y), base, font=fb, fill=fill)
+    x += d.textlength(base, font=fb) + 2
+    d.text((x, y - int(taille * 0.12)), expo, font=fe, fill=fill)
+    return x + d.textlength(expo, font=fe)
+
+
+def acc_exp_calculer(d):
+    """La définition, et ce qu'elle veut dire : la pente vaut la hauteur."""
+    d.text((300, 334), "f ′ = f", font=police("ariblk.ttf", 78), fill=BLEU)
+    d.text((300, 432), "la pente = la hauteur", font=police("arialbd.ttf", 40), fill=VERT)
+    d.text((300, 486), "e ≈ 2,718", font=police("arialbd.ttf", 36), fill=NAVY)
+
+
+def acc_exp_resoudre(d):
+    """Le piège qui fait perdre le point : e^x = 1 ne donne pas x = 1."""
+    x = puissance_pil(d, 300, 346, "e", "x", 70, BLEU)
+    d.text((x + 16, 346), "= 1", font=police("ariblk.ttf", 70), fill=BLEU)
+    d.text((300, 440), "x = 1 ?  NON : x = 0", font=police("arialbd.ttf", 42), fill=ROUGE)
+
+
+def acc_exp_etude(d):
+    """Le fil de la fiche 2, sous la forme de l'erreur qu'elle corrige."""
+    puissance_pil(d, 300, 344, "(x − 2)e", "x", 56, BLEU)
+    d.text((300, 426), "minimum −e", font=police("ariblk.ttf", 44), fill=VERT)
+    x = puissance_pil(d, 300, 494, "« croissante car e", "x", 32, ROUGE, fonte="arialbd.ttf")
+    d.text((x + 8, 494), "> 0 » : FAUX", font=police("arialbd.ttf", 32), fill=ROUGE)
+
+
+def _parabole_pil(d, cx, y_axe, demi, sommet_dy, coul, largeur=12, courbure=44):
+    """Une parabole dessinée, tournée vers le haut : sommet à `sommet_dy` px de
+    l'axe (positif = sous l'axe, 0 = sur l'axe, négatif = au-dessus)."""
+    n = 40
+    pts = [(cx + (i / n) * 1.35 * demi, y_axe + sommet_dy - courbure * (i / n * 1.35) ** 2) for i in range(-n, n + 1)]
+    d.line(pts, fill=coul, width=largeur, joint="curve")
+
+
+def acc_second_degre_equation(d):
+    """⭐ Le paradoxe DESSINÉ, pas la formule (15/09/2026) : la page « Populaires »
+    de la chaîne montre que les vignettes à fait ou à image font trois fois les
+    vues des vignettes à formule. Trois paraboles : coupe, touche, jamais.
+    ⚠️ Pas de texte à y = 316 : c'est la ligne du sous-titre du gabarit."""
+    for k, (sommet, coul, mot) in enumerate(((44, BLEU, "deux"), (0, VERT, "une"), (-40, ROUGE, "aucune"))):
+        cx = 380 + k * 190
+        d.line([(cx - 85, 440), (cx + 85, 440)], fill=NAVY, width=4)
+        _parabole_pil(d, cx, 440, 58, sommet, coul)
+        centre(d, cx, 500, mot, police("ariblk.ttf", 40), coul)
+
+
+def acc_second_degre_signe(d):
+    """Une seule parabole, VERTE dehors et ROUGE entre les racines — la règle
+    se voit avant de se lire."""
+    cx, y_axe = 560, 440
+    d.line([(cx - 230, y_axe), (cx + 230, y_axe)], fill=NAVY, width=4)
+    n = 40
+    pts = [(cx + (i / n) * 1.3 * 110, y_axe + 90 * (1 - (i / n * 1.3) ** 2)) for i in range(-n, n + 1)]
+    for p, q in zip(pts, pts[1:]):
+        t = (p[0] - cx) / 110
+        d.line([p, q], fill=(ROUGE if abs(t) < 1 else VERT), width=14)
+    centre(d, cx - 190, 380, "+", police("ariblk.ttf", 60), VERT)
+    centre(d, cx + 190, 380, "+", police("ariblk.ttf", 60), VERT)
+    centre(d, cx, 470, "−", police("ariblk.ttf", 60), ROUGE)
+
+def acc_suites_arith_geo(d):
+    """⭐ LE PARADOXE DESSINÉ (17/09/2026) : deux courbes parties du MÊME point.
+    La verte ajoute toujours la même chose, la bleue multiplie. La bleue passe
+    d'abord EN DESSOUS — c'est ce qui rend la fin frappante — puis elle dépasse.
+    ⚠️ Pas de texte à y = 316 : c'est la ligne du sous-titre du gabarit."""
+    x0, x1, y_axe = 340, 800, 500
+    d.line([(x0, y_axe), (x1, y_axe)], fill=NAVY, width=4)
+
+    # ⛔ Mesuré sur la première vignette (17/09) : avec une exponentielle en
+    # 9^t, les deux courbes restaient collées et le paradoxe ne se voyait pas.
+    # En t³, la bleue traîne VISIBLEMENT sous la verte jusqu'aux deux tiers,
+    # puis la lâche. C'est ce contraste qu'on vend.
+    n = 60
+    droite, expo = [], []
+    for i in range(n + 1):
+        t = i / n
+        x = x0 + t * (x1 - x0)
+        droite.append((x, 480 - 70 * t))
+        expo.append((x, 480 - 150 * (t ** 3)))
+    d.line(droite, fill=VERT, width=13, joint="curve")
+    d.line(expo, fill=BLEU, width=13, joint="curve")
+
+    # Le point de départ commun : les deux clubs partent ensemble.
+    d.ellipse([x0 - 11, 469, x0 + 11, 491], fill=JAUNE)
+
+    # Les étiquettes se posent DE PART ET D'AUTRE, jamais sur un tracé.
+    # ⛔ Les libellés se posent dans les DEUX trous du dessin : sous la verte et
+    # au-dessus de la bleue, sans toucher ni un tracé ni le sous-titre du
+    # gabarit (qui court à y ≈ 320 jusqu'à x ≈ 640). Deux essais ont échoué le
+    # 17/09 : à y = 340 la bleue traversait son libellé, à y = 298 le libellé
+    # rentrait dans le sous-titre.
+    # ⭐ Frédéric, 17/09 : « suite arithmétique et géométrique dans la miniature ».
+    # Les courbes portent donc le MOT du chapitre, pas le chiffre : le titre dit
+    # déjà « + 30 par an ou + 12 % ? ». L'élève voit le cas concret en gros, et
+    # le nom mathématique sur la courbe qui lui correspond.
+    # ⚠️ En 28 et pas en 34 : ces deux mots sont longs, et la mascotte commence
+    # vers x = 850.
+    # ⛔ `centre()` place le HAUT du texte, pas son milieu : à y = 470, le mot
+    # descendait jusqu'à 498 et l'axe (y = 500) le traversait. Et en 28, le mot
+    # bleu atteignait x = 850, c'est-à-dire la patte de la mascotte.
+    centre(d, 690, 452, "arithmétique", police("ariblk.ttf", 28), VERT)
+    centre(d, 730, 292, "géométrique", police("ariblk.ttf", 26), BLEU)
+
+
 NOTIONS = {
     # ⭐ Le titre est la phrase par laquelle Frédéric ouvrait ses cours.
     "eleveai-maths-en-vrai-fonctions": {
@@ -1513,6 +1731,34 @@ NOTIONS = {
         "accroche": acc_fonction_vocabulaire,
         "dossier": "seconde/maths/fr",
     },
+    # ⭐ 23/09/2026 : la troisième leçon du bloc Fonctions de seconde.
+    # ⭐ 24/09/2026 : les problèmes de géométrie plane.
+    "eleveai-maths-seconde-geometrie-problemes-plan": {
+        # ⭐ Frédéric, 24/09 : « je mettrais plutôt Résumé 5 minutes de la
+        # géométrie plane ». Le titre annonce donc ce que la vidéo EST — un
+        # chapitre entier d'un coup — et le paradoxe des 12 % descend dans le
+        # dessin, où il sert d'appât.
+        # ⛔ 7 MINUTES, PAS 5 : la vidéo dure 7 min 14. Annoncer une durée
+        # qu'elle ne tient pas se paie en abandons à la quatrième minute.
+        "badge": "MATHS · SECONDE", # ⭐ LE TITRE PROMET LA COMPRÉHENSION, LE SOUS-TITRE ANNONCE LA FICHE
+        # (Frédéric, 24/09). « Résumé » dit ce que la vidéo contient ;
+        # « comprendre » dit ce que l'élève en ressort — c'est ce qu'il
+        # cherche la veille d'un contrôle. Et il doit savoir SANS cliquer
+        # qu'une fiche imprimable l'attend ([[le-trio-principal-exercices-video-short]]).
+        "titre": ["COMPRENDRE TOUTE", "LA GÉOMÉTRIE PLANE"], "taille": 58,
+        "sous": "7 min — la fiche est sur eleveai.fr", "taille_sous": 46,
+        "accroche": acc_geometrie_2de,
+        "dossier": "seconde/maths/fr",
+    },
+    "eleveai-maths-seconde-fonctions-reference": {
+        "badge": "MATHS · SECONDE", "titre": ["LES FONCTIONS", "DE RÉFÉRENCE"], "taille": 60,
+        # ⛔ « comparer sans calculer » ne disait rien hors contexte (Frédéric,
+        # 23/09 : « on ne comprend pas comparer »). Le sous-titre annonce
+        # maintenant les cinq dessins posés juste en dessous.
+        "sous": "les cinq courbes à connaître par cœur",
+        "accroche": acc_fonctions_reference_2de,
+        "dossier": "seconde/maths/fr",
+    },
     "eleveai-maths-seconde-equations-inequations": {
         "badge": "MATHS · SECONDE", "titre": ["ÉQUATIONS ET", "INÉQUATIONS"], "taille": 58,
         "sous": "diviser par un négatif retourne tout",
@@ -1536,6 +1782,88 @@ NOTIONS = {
         "sous": "le milieu, la distance, et ce qu'ils prouvent",
         "accroche": acc_repere_coordonnees,
         "dossier": "seconde/maths/fr",
+    },
+    # ⭐ 21/09/2026 : les quatre leçons « pour faire le lien » du bloc Nombres et calculs.
+    "eleveai-maths-seconde-reels-intervalles": {
+        "badge": "MATHS · SECONDE", "titre": ["VALEUR ABSOLUE", "ET INTERVALLES"], "taille": 54,
+        "sous": "la valeur absolue est une distance",
+        "accroche": acc_reels_intervalles,
+        "dossier": "seconde/maths/fr",
+    },
+    "eleveai-maths-seconde-developpement-factorisation": {
+        "badge": "MATHS · SECONDE", "titre": ["DÉVELOPPER ET", "FACTORISER"], "taille": 58,
+        "sous": "on factorise pour résoudre",
+        "accroche": acc_devfac_2de,
+        "dossier": "seconde/maths/fr",
+    },
+    "eleveai-maths-seconde-expressions-litterales": {
+        "badge": "MATHS · SECONDE", "titre": ["EXPRESSIONS", "LITTÉRALES"], "taille": 62,
+        "sous": "un exemple réfute, la lettre prouve",
+        "accroche": acc_expressions_2de,
+        "dossier": "seconde/maths/fr",
+    },
+    "eleveai-maths-seconde-arithmetique": {
+        "badge": "MATHS · SECONDE", "titre": ["NOMBRES", "PREMIERS"], "taille": 72,
+        "sous": "multiples, diviseurs, décomposition",
+        "accroche": acc_arithmetique_2de,
+        "dossier": "seconde/maths/fr",
+    },
+    # ⭐ L'exponentielle de première spé : vidéos 1 et 2 → fiche partie 1, vidéo 3 → partie 2.
+    "eleveai-maths-premiere-exponentielle-calculer": {
+        "badge": "MATHS · PREMIÈRE · 1/3", "titre": ["LA FONCTION", "EXPONENTIELLE"], "taille": 56,
+        "sous": "plus elle est haute, plus elle monte vite",
+        "accroche": acc_exp_calculer,
+        "dossier": "premiere/maths/fr",
+    },
+    "eleveai-maths-premiere-exponentielle-resoudre": {
+        "badge": "MATHS · PREMIÈRE · 2/3", "titre": ["RÉSOUDRE AVEC", "L'EXPONENTIELLE"], "taille": 50,
+        "sous": "on compare les exposants",
+        "accroche": acc_exp_resoudre,
+        "dossier": "premiere/maths/fr",
+    },
+    "eleveai-maths-premiere-exponentielle-etude": {
+        "badge": "MATHS · PREMIÈRE · 3/3", "titre": ["DÉRIVER ET", "ÉTUDIER"], "taille": 66,
+        "sous": "l'exponentielle ne décide jamais du signe",
+        "accroche": acc_exp_etude,
+        "dossier": "premiere/maths/fr",
+    },
+    # ⭐ Le second degré, l'équation (15/09/2026) : la vidéo la plus simple possible.
+    # ⭐ 15/09/2026, Frédéric devant la page « Populaires » de la chaîne : « peut-
+    # être devrait-on s'en inspirer pour les vidéos paysage » puis « ou alors on
+    # tient notre ligne stratégique : le cours pour le paysage. La vérité est
+    # souvent entre les deux ». ENTRE LES DEUX, donc : le badge garde la classe
+    # (c'est un cours, un élève cherche SA classe), le titre YouTube garde les
+    # mots cherchés — et la vignette prend au short sa QUESTION en gros, son
+    # paradoxe en sous-titre et un DESSIN à la place de la formule.
+    "eleveai-maths-premiere-second-degre-equation": {
+        "badge": "MATHS · PREMIÈRE · 1/2", "titre": ["DEUX, UNE", "OU AUCUNE ?"], "taille": 70,
+        "sous": "un seul nombre le sait, avant tout calcul",
+        "accroche": acc_second_degre_equation,
+        "dossier": "premiere/maths/fr",
+    },
+    # ⛔ Frédéric, 17/09/2026 : « dans la miniature il manque le titre ou
+    # sous-titre : suite géométrique ou arithmétique, ça sert à quoi ». La
+    # première version ne portait QUE le paradoxe (« + 30 par an ou + 12 % ? ») :
+    # personne, dans son fil, ne pouvait savoir que c'était le chapitre des
+    # suites. Le badge nomme donc la NOTION, et le sous-titre son VOCABULAIRE ;
+    # le titre garde le paradoxe, qui est ce qui fait cliquer.
+    # ⭐ Frédéric a dicté le texte : « Les suites arithmétique et géométrique,
+    # 1re spé, 1/2 ». Mesuré : cette phrase entière dans le bandeau irait jusqu'à
+    # x = 1195, et la mascotte commence à 850. On la coupe donc en deux : la
+    # NOTION passe en gros titre (taille 62 : « OU GÉOMÉTRIQUE ? » finit à 761),
+    # la classe et l'épisode restent dans le bandeau, et le paradoxe descend en
+    # sous-titre — il fait cliquer, il ne nomme pas le chapitre.
+    "eleveai-maths-premiere-suites-arith-geo": {
+        "badge": "LES SUITES · 1re SPÉ · 1/2", "titre": ["ARITHMÉTIQUE", "OU GÉOMÉTRIQUE ?"], "taille": 62,
+        "sous": "+ 30 par an, ou + 12 % par an ?",
+        "accroche": acc_suites_arith_geo,
+        "dossier": "premiere/maths/fr",
+    },
+    "eleveai-maths-premiere-second-degre-signe": {
+        "badge": "MATHS · PREMIÈRE · 2/2", "titre": ["POSITIF OU", "NÉGATIF ?"], "taille": 70,
+        "sous": "ça dépend d'où l'on est",
+        "accroche": acc_second_degre_signe,
+        "dossier": "premiere/maths/fr",
     },
     "eleveai-maths-seconde-racine-carree-2de": {
         "badge": "MATHS · SECONDE", "titre": ["LA RACINE", "CARRÉE"], "taille": 78,
@@ -1922,7 +2250,14 @@ def construire(nom, spec):
     ft = police("ariblk.ttf", spec["taille"])
     d.text((56, 116), spec["titre"][0], font=ft, fill=NAVY)
     d.text((56, 208), spec["titre"][1], font=ft, fill=NAVY)
-    d.text((58, 300), spec["sous"], font=police("arialbd.ttf", 32), fill=BLEU)
+    # ⭐ `taille_sous` : le sous-titre porte parfois une information que l'élève
+    # doit lire sans cliquer (« la fiche est sur eleveai.fr »). Défaut à 32,
+    # inchangé pour les vignettes déjà validées ; il rétrécit s'il déborde.
+    t_sous = spec.get("taille_sous", 32)
+    while t_sous > 20 and d.textlength(spec["sous"],
+                                       font=police("arialbd.ttf", t_sous)) > 780:
+        t_sous -= 2
+    d.text((58, 300), spec["sous"], font=police("arialbd.ttf", t_sous), fill=BLEU)
 
     spec["accroche"](d)
     signature(img, d, spec.get("sig", "Frédéric, ton prof"))

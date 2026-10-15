@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Une chaîne passe de 800 à 1 000 abonnés. C'est plus 20 %, ou plus 25 % ?",
+  "01-gain": "Elle gagne 200 abonnés. Mais 200 sur combien ?",
+  "02-piege": "Le piège : diviser par 1 000. 200 sur 1 000, ça donne 20 %. C'est faux !",
+  "03-reponse": "On divise toujours par la valeur de départ : 200 sur 800, fois 100. 25 %. La chaîne a gagné 25 %.",
+  "04-defi": "À toi. Un prix passe de 50 euros à 40 euros. De combien de pour cent a-t-il baissé ?",
+  "05-fin": "Ta réponse en commentaire. La vidéo complète sur les pourcentages est juste en dessous."
+}

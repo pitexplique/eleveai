@@ -1,0 +1,9 @@
+{
+  "01-carte": "Cinq fonctions de référence, et pour chacune une question. Qui a une image ? Qui respecte l'ordre ? Qui garde le signe ? Les voici.",
+  "02-carre": "La fonction carré. La question : respecte-t-elle l'ordre ? À droite de zéro, oui. À gauche, non : moins 3 est plus petit que moins 2, mais 9 est plus grand que 4. Elle touche le fond en zéro, et c'est là que tout bascule.",
+  "03-inverse": "La fonction inverse. La question : est-elle décroissante ? Oui, mais sur chacun de ses deux morceaux séparément. En traversant zéro, la règle tombe.",
+  "035-racine": "La racine carrée. La question : est-ce que tout le monde a une image ? Non. Racine de 4 vaut 2, mais moins 1 n'a pas d'image : aucun carré n'est négatif. Sa courbe part de l'origine, monte, et ne repart jamais vers la gauche.",
+  "04-cube": "La fonction cube. La question : fait-elle comme le carré ? Non. Elle garde le signe de son nombre, donc elle garde l'ordre, négatifs compris. Elle monte sans jamais se retourner.",
+  "05-absolue": "La valeur absolue. La question : deux nombres différents peuvent-ils avoir la même image ? Oui. Elle efface les choses négatives : 4 et moins 4 arrivent au même endroit.",
+  "06-resume": "En résumé. Deux d'entre elles refusent des nombres : la racine carrée refuse les négatifs, l'inverse refuse zéro. Deux retournent l'ordre à gauche de zéro : le carré et la valeur absolue. Et une seule ne trahit jamais : le cube. La leçon complète est sur la chaîne."
+}

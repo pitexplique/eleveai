@@ -1,0 +1,8 @@
+{
+  "00-accroche": "La montée du Maïdo, sur la Diagonale des Fous. Une pente à 100 %, ce serait un mur vertical ?",
+  "01-piege": "Beaucoup le croient. Et c'est faux ! Une pente à 100 %, c'est 45 degrés.",
+  "02-definition": "Une pente en pourcentage, c'est le dénivelé, divisé par la distance à l'horizontale, fois 100. Tu montes de 100 mètres en avançant de 100 mètres : 100 divisé par 100, fois 100, ça fait 100 %. Le triangle a deux côtés égaux : l'angle fait 45 degrés. Ce rapport, c'est la tangente de l'angle : tangente de 45 degrés égale 1.",
+  "03-maido": "Au Maïdo, d'après le profil officiel du Grand Raid 2025. La Brèche, à 1 284 mètres. Le Ti Col, à 2 025 mètres. 741 mètres de dénivelé, sur 3,3 kilomètres de sentier, soit environ 3 200 mètres à l'horizontale. 741 divisé par 3 200 : environ 23 %.",
+  "04-angle": "23 %, c'est une tangente de 0,23 : à peine 13 degrés. Ça paraît peu… mais c'est trois fois une route de montagne, autour de 7 %. Et les coureurs l'attaquent après 117 kilomètres de course.",
+  "05-question": "À toi. Une pente à 50 % : combien de mètres de montée pour 100 mètres à l'horizontale ? Ta réponse en commentaire !"
+}

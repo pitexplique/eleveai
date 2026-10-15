@@ -1,0 +1,15 @@
+{
+  "00-garde": "Une petite entreprise fabrique des vélos. Son bénéfice dépend du nombre de vélos fabriqués. À partir de combien gagne-t-elle de l'argent ? Et quand en perd-elle ? La réponse tient dans une seule écriture.",
+  "00b-objectifs": "Au programme : lire les racines sur la forme factorisée, les voir sur la parabole, trouver le signe, résoudre une inéquation, et résoudre x au carré égale un nombre.",
+  "01-modele": "Le bénéfice, en milliers d'euros, s'écrit : B de x égale moins, parenthèse, x moins 2, fois, parenthèse, x moins 8. x, c'est le nombre de vélos, en centaines. Cette écriture, un produit de facteurs, s'appelle la forme factorisée.",
+  "02-racines": "Quand le bénéfice est-il nul ? B de x égale 0. C'est un produit nul ! Donc x moins 2 égale 0, ou x moins 8 égale 0. x égale 2, ou x égale 8. Ces deux nombres sont les racines. À 200 vélos, et à 800 vélos, l'entreprise ne gagne rien, et ne perd rien.",
+  "03-parabole": "Sur le graphique, la courbe est une parabole. Les racines sont les points où elle coupe l'axe horizontal : en 2, et en 8. Le signe moins devant les parenthèses tourne la parabole vers le bas, comme un pont.",
+  "04-signe": "Entre 2 et 8, la courbe est au-dessus de l'axe : le bénéfice est positif. Avant 2, et après 8, elle est en dessous : l'entreprise perd de l'argent. Le tableau de signes résume tout : moins, 0, plus, 0, moins.",
+  "05-inequation": "Quand l'entreprise gagne-t-elle de l'argent ? On résout l'inéquation : B de x strictement supérieur à 0. On lit la réponse dans le tableau : x entre 2 et 8, sans les bornes. Entre 200 et 800 vélos.",
+  "06-verifier": "Une forme factorisée, ça se vérifie en développant. x moins 2, fois, x moins 8 : x au carré, moins 8 x, moins 2 x, plus 16. Donc x au carré moins 10 x plus 16. Avec le signe moins devant : moins x au carré, plus 10 x, moins 16. C'est la forme développée.",
+  "07-carre": "Un automatisme de l'épreuve. x au carré égale 49. Deux solutions : 7, et moins 7, car moins 7 au carré fait aussi 49. x au carré égale 0 : une seule solution, 0. x au carré égale moins 1 : aucune solution, un carré n'est jamais négatif.",
+  "08-defi": "À toi de jouer. Une autre entreprise a pour bénéfice : B de x égale moins 3, fois, parenthèse, x moins 1, fois, parenthèse, x moins 5. Pour quelles valeurs de x ce bénéfice est-il positif ? Mets pause, et cherche.",
+  "08b-correction": "Correction. Les racines : x moins 1 égale 0 donne 1, x moins 5 égale 0 donne 5. Le nombre devant, moins 3, est négatif : la parabole est tournée vers le bas. Elle est au-dessus de l'axe entre ses racines. Le bénéfice est positif pour x entre 1 et 5.",
+  "09-finale": "Retiens trois choses. Sur la forme factorisée, les racines se lisent directement : on annule chaque facteur. Les racines sont là où la parabole coupe l'axe. Et le signe du nombre devant dit si la parabole est tournée vers le haut ou vers le bas : c'est lui qui donne le tableau de signes.",
+  "10-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

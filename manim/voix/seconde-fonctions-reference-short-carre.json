@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Moins 3 est plus petit que moins 2. Et pourtant, moins 3 au carré est plus GRAND que moins 2 au carré. Les deux phrases sont vraies.",
+  "01-calcul": "Vérifie toi-même. Moins 3 au carré, ça fait 9. Moins 2 au carré, ça fait 4. Et 9 est bien plus grand que 4. L'ordre s'est retourné.",
+  "02-pourquoi": "Pourquoi ? Parce que la fonction carré a un creux en zéro. À gauche du creux, elle DESCEND. Et sur une partie qui descend, le plus petit nombre donne la plus grande image.",
+  "03-positifs": "À droite du creux, rien de tel. 1 est plus petit que 2 ; 1 au carré vaut 1, 2 au carré vaut 4. Là, l'ordre est gardé.",
+  "04-retenir": "Donc la phrase « a plus petit que b, donc a au carré plus petit que b au carré » est FAUSSE. Elle n'est vraie que sur les positifs. Avant de comparer deux carrés, regarde de quel côté de zéro tu es.",
+  "05-fin": "La vidéo complète est sur la chaîne."
+}

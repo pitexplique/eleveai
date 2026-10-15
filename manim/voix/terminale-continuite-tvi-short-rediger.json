@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Le théorème des valeurs intermédiaires au bac : quatre lignes, et tous les points.",
+  "01-lignes": "Un : f est continue. Deux : f est strictement monotone. Trois : les signes de f aux deux bornes sont contraires.",
+  "02-conclusion": "Quatre : d'après le corollaire du théorème des valeurs intermédiaires, l'équation f de x égale 0 admet une unique solution.",
+  "03-piege": "Le piège : écrire « d'après le théorème » sans le nommer. Au bac, on cite le corollaire du TVI.",
+  "04-defi": "À toi. Laquelle des quatre lignes oublies-tu le plus souvent ?",
+  "05-fin": "Ta réponse en commentaire. La vidéo complète sur le théorème des valeurs intermédiaires est juste en dessous."
+}

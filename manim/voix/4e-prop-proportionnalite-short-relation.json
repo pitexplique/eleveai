@@ -1,0 +1,8 @@
+{
+  "00-accroche": "x vaut 2, y vaut 6. x vaut 5, y vaut 15. La relation, c'est y égale x plus 4 ?",
+  "01-piege": "Pour 2 et 6, ça marche. Mais 5 plus 4, ça fait 9, pas 15 ! Une relation doit marcher pour toutes les colonnes.",
+  "02-coefficient": "C'est proportionnel ? Je divise : 6 divisé par 2, 3. 15 divisé par 5, 3. Toujours 3 : c'est le coefficient.",
+  "03-reponse": "La relation : y égale 3 fois x. Je vérifie : 3 fois 2, 6. 3 fois 5, 15.",
+  "04-defi": "À toi. x vaut 4, y vaut 10. x vaut 10, y vaut 25. Écris la relation.",
+  "05-fin": "Ta réponse en commentaire. La vidéo complète sur la proportionnalité est juste en dessous."
+}

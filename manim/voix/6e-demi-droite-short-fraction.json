@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Cinq quarts, c'est plus petit que 1 ? Beaucoup le pensent. Plaçons-le sur une droite graduée.",
+  "01-quarts": "On coupe l'unité en 4 parts égales. Chaque trait vaut un quart.",
+  "02-compter": "Je compte les quarts depuis 0 : un quart, deux quarts, trois quarts, quatre quarts. Quatre quarts, on est pile sur 1.",
+  "03-cinq": "Encore un trait : cinq quarts. On a dépassé 1 !",
+  "04-verdict": "Cinq quarts est plus grand que 1. Quand le haut de la fraction est plus grand que le bas, la fraction dépasse 1.",
+  "05-defi": "À toi. Trois demis : entre 0 et 1, entre 1 et 2, ou entre 2 et 3 ?",
+  "06-fin": "Ta réponse en commentaire. La vidéo complète sur la demi-droite graduée est juste en dessous."
+}

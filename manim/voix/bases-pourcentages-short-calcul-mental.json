@@ -1,0 +1,11 @@
+{
+  "00-accroche": "Un jean à 80 euros, soldé à moins 30 pour cent. Tu paies combien ? Pas besoin de calculatrice.",
+  "01-dix": "Tout part de 10 pour cent. 10 pour cent de 80 : on enlève un zéro. 8 euros.",
+  "02-virgule": "Et s'il n'y a pas de zéro à enlever ? 10 pour cent de 45 : on décale la virgule d'un rang vers la gauche. 4 virgule 5 : 4 euros 50.",
+  "03-multiples": "Tu as 10 pour cent ? Alors tu as le reste. 20 pour cent, c'est 2 fois plus : 2 fois 8, 16 euros. 30 pour cent, c'est 3 fois plus : 3 fois 8, 24 euros.",
+  "04-moities": "5 pour cent, c'est la moitié de 10 pour cent : la moitié de 8, 4 euros. Et 50 pour cent, c'est la moitié du prix : 40 euros.",
+  "05-reduction": "Une réduction, on enlève. Moins 10 pour cent : 80 moins 8, 72 euros. Et notre jean à moins 30 pour cent : 80 moins 24, 56 euros.",
+  "06-augmentation": "Une augmentation, on ajoute. Plus 10 pour cent : 80 plus 8, 88 euros.",
+  "07-defi": "À toi. Un jeu vidéo à 60 euros, soldé à moins 20 pour cent. Combien tu paies ?",
+  "08-fin": "Ta réponse en commentaire. Entraîne-toi sur éleveai point f r, et abonne-toi !"
+}

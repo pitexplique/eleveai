@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Les maths, ça sert à rien… sauf à mesurer la Diagonale des Fous.",
+  "01-depart": "Départ : Saint-Pierre, altitude 2 mètres. Arrivée : Saint-Denis, La Redoute, 49 mètres. Entre les deux : 180,8 kilomètres.",
+  "02-points": "Le parcours a 35 points de pointage. À chaque tronçon, on calcule : altitude d'arrivée moins altitude de départ.",
+  "03-montee": "Domaine Vidot : 649 mètres. Notre-Dame de la Paix : 1686. 1686 moins 649 : plus 1037. La plus grosse montée.",
+  "04-descente": "Maïdo : 1950. Îlet Savannah : 133. 133 moins 1950 : moins 1817. La plus grosse descente.",
+  "05-compteurs": "On additionne tout. Les montées : plus 6419. Les descentes : moins 6372.",
+  "06-manque": "Mais l'organisation annonce 10200 mètres de montée ! Il en manque environ 3800. Où sont-ils ?",
+  "07-cachees": "Cachés entre deux points : chaque petite bosse que le tableau ne voit pas. Plus on mesure souvent, plus on trouve de montée.",
+  "08-somme": "Et 6419 moins 6372, ça fait 47. Comme 49 moins 2 : l'arrivée moins le départ. Ça, ça ne change jamais.",
+  "09-question": "À toi : un coureur monte de 300 mètres, descend de 500, puis remonte de 250. Il a gagné combien de mètres ? Réponds en commentaire !"
+}

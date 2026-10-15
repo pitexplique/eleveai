@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Où places-tu moins 2 virgule 5 sur la droite graduée ?",
+  "01-piege": "Beaucoup le placent entre moins 2 et moins 1. Parce que 2 virgule 5, c'est entre 2 et 3… mais ils vont du mauvais côté. C'est faux.",
+  "02-methode": "On part de zéro. Le signe moins : on va à gauche. On avance de 2 graduations : on est sur moins 2. Puis encore une demi-graduation vers la gauche.",
+  "03-regle": "Moins 2 virgule 5 est entre moins 3 et moins 2, pile au milieu. Côté négatif, on s'éloigne toujours de zéro vers la gauche.",
+  "04-defi": "À toi. Moins 4 virgule 5 : entre quels nombres entiers se trouve-t-il ?",
+  "05-fin": "Ta réponse en commentaire. La vidéo complète sur les nombres relatifs est juste en dessous."
+}

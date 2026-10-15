@@ -1,0 +1,8 @@
+{
+  "00-accroche": "12 divisé par 4 égale 3. Alors 4 divisé par 12, ça fait 3 aussi ? C'est le piège.",
+  "01-fois": "Une multiplication se retourne : 3 fois 4 égale 4 fois 3.",
+  "02-partage": "Une division, non. 12 divisé par 4, c'est 12 billes partagées en 4 groupes : 3 billes dans chaque groupe.",
+  "03-retourne": "4 divisé par 12, c'est 4 billes partagées en 12 groupes. Il n'y a même pas une bille par groupe ! Ça ne fait pas 3.",
+  "04-retiens": "Retiens : le grand nombre se partage, il passe en premier.",
+  "05-fin": "Entraîne-toi sur le coach maths d'éleveai point fr, et abonne-toi !"
+}

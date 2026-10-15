@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Ton abonnement à 40 euros augmente de 5 %. Par quoi faut-il multiplier ? Par 0 virgule 05 ?",
+  "01-piege": "40 fois 0 virgule 05, ça fait 2 euros. Ce n'est que la hausse, pas le nouveau prix !",
+  "02-coef": "On garde le prix entier, 100 %, et on ajoute 5 % : 105 %. 105 %, c'est 1 virgule 05. Le coefficient part toujours de 1.",
+  "03-reponse": "40 fois 1 virgule 05 : 42 euros. Une seule multiplication.",
+  "04-defi": "À toi. Une baisse de 15 % : quel est le coefficient multiplicateur ?",
+  "05-fin": "Ta réponse en commentaire. La vidéo complète sur les pourcentages est juste en dessous."
+}

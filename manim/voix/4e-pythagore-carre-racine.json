@@ -1,0 +1,13 @@
+{
+  "00-garde": "Le carré et la racine carrée. Avec 25 carreaux, on pave un carré. Combien de carreaux sur un côté ?",
+  "01-carrelage": "Un carreleur pose des carreaux en carré : 5 carreaux sur un côté, et 5 rangées. 5 fois 5 : 25 carreaux. On écrit : 5 au carré égale 25.",
+  "02-carre": "5 au carré, c'est 5 fois 5. Le petit 2 veut dire : le même nombre, deux fois, multiplié par lui-même. 3 au carré égale 3 fois 3 : 9. 8 au carré égale 8 fois 8 : 64.",
+  "03-piege": "Le piège : 3 au carré n'est pas 3 fois 2. 3 fois 2, c'est 6 : un rectangle de 3 sur 2. 3 au carré, c'est un carré de 3 sur 3 : 9 carreaux.",
+  "04-racine": "Maintenant, le chemin inverse. On a 49 carreaux, rangés en carré. Combien sur un côté ? On cherche le nombre qui, multiplié par lui-même, donne 49 : c'est 7. On écrit : racine carrée de 49 égale 7.",
+  "05-aller-retour": "Carré et racine carrée font un aller-retour. 6 au carré : 36. Racine carrée de 36 : on revient à 6.",
+  "06-pourquoi": "Pourquoi en parler maintenant ? Le théorème de Pythagore parle de carrés construits sur les côtés. Et pour retrouver une longueur, on prendra la racine carrée.",
+  "07-defi": "À toi de jouer. Combien vaut 4 au carré ? Et la racine carrée de 100 ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 4 au carré, c'est 4 fois 4 : 16, et pas 8. Racine carrée de 100 : 10, car 10 fois 10 égale 100.",
+  "08-finale": "Ce que tu sais faire maintenant. Calculer un carré, sans le confondre avec fois 2 ? Trouver une racine carrée, en cherchant le nombre qui, multiplié par lui-même, redonne le nombre ? Alors l'épisode 3 t'attend : calculer l'hypoténuse.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

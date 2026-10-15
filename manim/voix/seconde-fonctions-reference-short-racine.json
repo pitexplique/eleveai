@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Lequel est le plus grand : racine de 15, ou racine de 17 ? Tu peux répondre en deux secondes, sans calculatrice, et sans connaître ni l'une ni l'autre.",
+  "01-croissante": "La fonction racine carrée est CROISSANTE sur les positifs. Autrement dit : elle conserve l'ordre. Le plus grand nombre a la plus grande racine. Toujours.",
+  "02-conclusion": "Alors regarde : 15 est plus petit que 17. Donc racine de 15 est plus petite que racine de 17. C'est fini. Aucun calcul.",
+  "03-demonstration": "Et surtout, c'est une DÉMONSTRATION. Si tu avais sorti la calculatrice, tu aurais trouvé 3 virgule 87 et 4 virgule 12 : deux valeurs approchées. Une valeur approchée ne prouve rien, elle peut être fausse au millième près.",
+  "04-retenir": "Retiens la méthode, en trois temps. Un : je situe mes deux nombres. Deux : je lis le sens de variation. Trois : je conclus. Croissante, l'ordre est gardé. Décroissante, il s'inverse.",
+  "05-fin": "La vidéo complète est sur la chaîne."
+}

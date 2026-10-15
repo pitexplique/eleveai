@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Sur ce graphique, une belle droite qui monte. C'est forcément proportionnel ?",
+  "01-piege": "Non ! Une droite ne suffit pas. Elle doit aussi passer par l'origine.",
+  "02-deux-droites": "Un marcheur fait 4 kilomètres par heure : 0 heure, 0 kilomètre. Sa droite part de l'origine : proportionnel. Une plante mesure 5 centimètres, puis grandit de 2 centimètres par jour. Sa droite part de 5 : pas proportionnel.",
+  "03-reponse": "Proportionnel, c'est des points alignés avec l'origine. Les deux conditions, pas une seule.",
+  "04-defi": "À toi. Une droite passe par l'origine et par le point 5 ; 15. Que vaut y quand x vaut 8 ?",
+  "05-fin": "Ta réponse en commentaire. La vidéo complète sur la proportionnalité est juste en dessous."
+}

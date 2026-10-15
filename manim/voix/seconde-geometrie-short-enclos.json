@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Tu as 60 mètres de clôture et une rivière. Quel est le plus grand enclos que tu peux fermer ? La réponse n'est pas celle qu'on croit.",
+  "01-mise-en-equation": "L'enclos est un rectangle, et le côté de la rivière n'a pas besoin d'être clôturé. J'appelle x la largeur : ce sont les deux côtés perpendiculaires à la rivière. Ils consomment 2 x mètres de clôture. Il reste donc 60 moins 2 x pour la longueur.",
+  "02-essais": "L'aire vaut donc x fois 60 moins 2 x, c'est-à-dire 60 x moins 2 x au carré. Essaie des valeurs : 5 mètres de large donne 250 mètres carrés. 10 mètres donne 400. 20 mètres donne 400 aussi. Et 25 donne 250. Ça monte, puis ça redescend.",
+  "03-canonique": "Le tour de main, c'est la forme canonique. 60 x moins 2 x au carré s'écrit aussi 450 moins 2 fois x moins 15, au carré. Or un carré est toujours positif ou nul. Donc on retire toujours quelque chose à 450 — sauf quand x vaut exactement 15, où on ne retire rien du tout.",
+  "04-retenir": "L'aire maximale vaut 450 mètres carrés, pour 15 mètres de large et 30 mètres de long. Retiens : quand une aire s'écrit avec un carré, le maximum se lit sans calcul, et sans tâtonner.",
+  "05-fin": "La vidéo complète est sur la chaîne."
+}

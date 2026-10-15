@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Un prix augmente de 10 %, puis baisse de 10 %. On revient au prix de départ ?",
+  "01-piege": "Tout le monde répond oui : plus 10, moins 10, ça s'annule. Et c'est faux !",
+  "02-pas-a-pas": "Prenons 100 euros. Plus 10 % de 100 : 10 euros. Le prix passe à 110 euros. Puis moins 10 %, mais de 110 : 11 euros. Le prix tombe à 99 euros.",
+  "03-pourquoi": "On a gagné 10 euros, mais on en a perdu 11. La baisse se calcule sur un prix plus grand. Avec les coefficients : 1 virgule 1, fois 0 virgule 9, ça fait 0 virgule 99. On perd 1 %.",
+  "04-defi": "À toi. Plus 50 %, puis moins 50 %. Combien de pour cent a-t-on perdu ?",
+  "05-fin": "Ta réponse en commentaire. La vidéo complète sur les pourcentages est juste en dessous."
+}

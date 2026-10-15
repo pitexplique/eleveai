@@ -1,0 +1,12 @@
+{
+  "00-garde": "Les maths, ça sert à rien… sauf à les expliquer. Et pour vérifier qu'on a compris, rien ne vaut d'expliquer à quelqu'un d'autre. Aujourd'hui, c'est toi qui fais la vidéo.",
+  "00b-objectifs": "Au programme : écrire ton script, voir l'aperçu, y mettre ta voix, et télécharger ta vidéo.",
+  "01-idee": "Les vidéos de cette chaîne sont faites avec Manim, un logiciel gratuit de vidéos de maths. D'habitude, il faut programmer en Python. Ici, tu écris en français, une ligne par plan, sur eleveai.fr, barre oblique, atelier tiret vidéo.",
+  "02-script": "Un exemple : 12 billes. Ligne 1, l'objectif, en une phrase : voir que 12 égale 3 fois 4. Ligne 2, le titre : 12 billes. Ligne 3 : billes, 3 x 4. Et les billes apparaissent : 3 rangées de 4. Ligne 4 : écris, 12 égale 3 fois 4. Après la barre, tu écris dis, deux points, et la phrase que la voix dira.",
+  "03-regle": "Une règle : ce que la voix dit, l'écran l'écrit. Si ta voix dit 12, le 12 doit être à l'écran. Sinon, l'atelier te prévient, en orange.",
+  "04-apercu": "Clique sur Voir l'aperçu. Ta vidéo se joue tout de suite, avec la voix. Quelque chose ne va pas ? Tu corriges la ligne, et tu relances.",
+  "05-enregistrer": "Connecte-toi avec ton code établissement ou ton e-mail : ton script et ta voix restent enregistrés. Toi seul les vois.",
+  "06-ta-voix": "Et la voix peut être la tienne. Un micro suffit, celui d'un téléphone aussi. Phrase par phrase, tu t'enregistres. Le site écrit ce qu'il a entendu. Tu as dit autre chose ? Ta phrase s'écrit dans ton script.",
+  "07-telecharger": "Ta vidéo est prête ? Clique sur Télécharger ma vidéo. Elle se joue une fois, et le fichier arrive dans ton ordinateur, avec ta voix. Rien à installer.",
+  "08-fin": "Choisis une notion que tu as comprise, et explique-la en 30 secondes, avec ta voix. Si tu sais l'expliquer, tu l'as comprise. Les maths, ça sert à rien… sauf à les expliquer."
+}

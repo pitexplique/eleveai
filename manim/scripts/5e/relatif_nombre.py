@@ -1,17 +1,24 @@
 # relatif_nombre.py
-# EleveAI — Maths 5e — Les nombres relatifs (notionId : relatif_nombre)
+# EleveAI — Maths 5e — Les nombres relatifs (notionId : relatif_nombre), AVEC VOIX.
 # Mêmes exemples que la fiche lib/fiches/maths-5e-nombres-relatifs.tsx.
 #
-# Mapping micro-compétences (banque nombres-relatifs.bank.ts) → écrans :
-# - relatif_lire            → écran 1 (lire -3 : « en dessous de zéro »)
-# - relatif_signe           → écran 1 (négatifs à gauche, positifs à droite de 0)
-# - relatif_comparer        → écran 2 (Maïdo : -1 vs +6, le plus à droite gagne)
-# - relatif_placer          → écran 3 (placer A à l'abscisse -3)
-# - relatif_oppose          → écran 4 (l'opposé de -7 est +7, symétrie autour de 0)
-# - relatif_valeur_absolue  → écran 5 (la distance à 0 de -5 vaut 5)
-# - relatif_defi            → défi + correction (-2 puis +5 puis -3 → 0)
+# ⭐ 08/10/2026 : la version MUETTE de juillet (jamais publiée) devient PARLÉE.
+# Voix validée par Frédéric : manim/voix/5e-relatif-nombre.json (débit −8,
+# entre la 6e à −10 et la 4e à −7).
+# ⭐ L'accroche est LE piège de la fiche : −7 ou −4, lequel est le plus grand ?
+# La version de juillet ne comparait qu'un négatif et un positif.
 #
-# Rendu : python -m manim render -qh manim/scripts/5e/relatif_nombre.py RelatifNombre5e -o eleveai-maths-5e-relatif-nombre --media_dir manim/scripts/5e/media
+# Mapping micro-compétences (coach 5e, notion relatif_nombre) → écrans :
+# - relatif_lire, relatif_signe → 01-signe (le zéro, les deux côtés, −3)
+# - relatif_placer              → 02-placer (A d'abscisse −3)
+# - relatif_comparer            → 03-comparer (+6 > −1, puis −4 > −7)
+# - relatif_oppose              → 04-oppose (−7 et +7)
+# - relatif_valeur_absolue      → 05-distance (la distance à 0 de −5 et de +5)
+# - relatif_defi                → 06-defi + correction (−2, +5, −3 → 0)
+#
+# ⛔ Pas de LaTeX sur ce poste : droite tracée à la main, « − » typographique.
+#
+# Rendu : python -m manim render -qh --disable_caching manim/scripts/5e/relatif_nombre.py RelatifNombre5e -o eleveai-maths-5e-relatif-nombre --media_dir manim/scripts/5e/media
 
 import sys
 from pathlib import Path
@@ -21,311 +28,394 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from manim import *
 
 from charte import *
-from mascotte import MascotteMargouillat
+from gabarit_sixieme import Notion6e
+
+OBJECTIFS = [
+    "Lire un nombre relatif",
+    "Le placer sur une droite graduée",
+    "Comparer deux nombres relatifs",
+    "Trouver son opposé et sa distance à zéro",
+]
 
 
-class RelatifNombre5e(Scene):
+def ecrit(v):
+    """−3, 0, 3 : le moins typographique, jamais le tiret."""
+    return f"−{-v}" if v < 0 else str(v)
 
-    # ── outils communs ──────────────────────────────────────────────────────
 
-    def add_mascotte(self, scale=0.5):
-        m = MascotteMargouillat().scale(scale).to_corner(DOWN + RIGHT, buff=0.35)
-        self.add(m)
-        return m
+def signe(v):
+    """+6 / −7 : le signe écrit, pour les nombres que la voix dit « plus 6 »."""
+    return f"+{v}" if v > 0 else ecrit(v)
 
-    def titre_ecran(self, texte):
-        t = Text(texte, font_size=40, color=JAUNE_TITRE).to_edge(UP)
-        self.play(Write(t))
-        return t
 
-    def droite(self, vmin, vmax, y=0.0, x_span=5.2, colorer=True):
-        """Une droite graduée : axe + graduations + nombres. Renvoie (groupe, x_of)."""
-        x0, x1 = -x_span, x_span
+class Notion5e(Notion6e):
+    """Le gabarit parlé de la 6e, étiqueté 5e."""
 
-        def x_of(v):
-            return x0 + (x1 - x0) * (v - vmin) / (vmax - vmin)
+    identite = "Maths 5e — EleveAI"
 
-        axe = Arrow([x0 - 0.4, y, 0], [x1 + 0.4, y, 0], buff=0, stroke_width=3, color=WHITE)
-        ticks = VGroup()
-        labels = VGroup()
-        for v in range(vmin, vmax + 1):
-            tx = x_of(v)
-            ticks.add(Line([tx, y - 0.14, 0], [tx, y + 0.14, 0], stroke_width=2))
-            if colorer:
-                col = VERT_OK if v > 0 else (ROUGE_ERREUR if v < 0 else JAUNE_TITRE)
-            else:
-                col = WHITE
-            labels.add(Text(str(v), font_size=24, color=col).move_to([tx, y - 0.5, 0]))
-        return VGroup(axe, ticks, labels), x_of
 
-    def point(self, x_of, v, label, color, y=0.0):
-        dot = Dot([x_of(v), y, 0], color=color, radius=0.13)
-        lbl = Text(label, font_size=32, color=color).move_to([x_of(v), y + 0.68, 0])
-        return VGroup(dot, lbl)
+class RelatifNombre5e(Notion5e):
+    nom_voix = "5e-relatif-nombre"
 
-    # ── écran 0 : accueil ───────────────────────────────────────────────────
+    # ── les dessins ─────────────────────────────────────────────────────────
 
-    def ecran_accueil(self):
+    def droite_rel(self, vmin, vmax, y=0.0, longueur=10.0, x=-0.3, font_size=26):
+        """La droite des relatifs : négatifs en rouge, 0 en jaune, positifs en vert."""
+        valeurs = list(range(vmin, vmax + 1))
+        groupe, pt = self.droite(vmin, vmax, vmax - vmin, {v: ecrit(v) for v in valeurs},
+                                 longueur=longueur, centre=(x, y), font_size=font_size)
+        for v, lbl in zip(valeurs, groupe[2]):
+            lbl.set_color(ROUGE_ERREUR if v < 0 else (JAUNE_TITRE if v == 0 else VERT_OK))
+        groupe[0].add_tip(tip_length=0.22)
+        return groupe, pt
+
+    def montrer_droite(self, groupe):
+        self.play(Create(groupe[0]), Create(groupe[1]))
+        self.play(LaggedStart(*[FadeIn(l) for l in groupe[2]], lag_ratio=0.04), run_time=0.8)
+
+    def pastille(self, pt, v, texte, color, haut=True, font_size=30):
+        return self.point(pt, v, texte, color=color, font_size=font_size, haut=haut)
+
+    def mesure(self, pt, a, b, y, texte, color=BLEU_CALCUL, font_size=26):
+        """Une double flèche de a à b, à la hauteur y, avec son nombre dessous."""
+        p, q = pt(a), pt(b)
+        f = DoubleArrow([p[0], y, 0], [q[0], y, 0], buff=0.04, color=color,
+                        stroke_width=3, tip_length=0.18)
+        t = Text(texte, font_size=font_size, color=color).move_to([(p[0] + q[0]) / 2, y - 0.38, 0])
+        return VGroup(f, t)
+
+    def congelateur(self, temp, x, couleur):
+        corps = RoundedRectangle(width=2.2, height=2.2, corner_radius=0.15,
+                                 stroke_color=WHITE, stroke_width=3,
+                                 fill_color="#1E3A5F", fill_opacity=0.9)
+        porte = Line([-0.95, 0.15, 0], [0.95, 0.15, 0], stroke_width=2, color=WHITE)
+        poignee = Line([0.75, -0.2, 0], [0.75, -0.7, 0], stroke_width=4, color=GRAY_B)
+        t = Text(temp, font_size=34, color=couleur).move_to(corps.get_top() + DOWN * 0.55)
+        return VGroup(corps, porte, poignee, t).move_to([x, -1.3, 0])
+
+    def barrer(self, mob, color=ROUGE_ERREUR):
+        return Line(mob.get_left() + LEFT * 0.1, mob.get_right() + RIGHT * 0.1,
+                    stroke_width=5, color=color)
+
+    # ── 00 : la page de garde, PARLÉE ───────────────────────────────────────
+
+    def page_de_garde(self, titre, voix="00-garde"):
         self.clear()
         self.add_mascotte(scale=0.8)
-        titre = Text("Les nombres relatifs", font_size=50, color=JAUNE_TITRE).to_edge(UP)
-        sous_titre = Text("Maths 5e — EleveAI", font_size=32, color=WHITE)
-        sous_titre.next_to(titre, DOWN, buff=0.35)
-        accroche = Text("Qui est le plus grand : -2 ou +3 ?", font_size=36, color=BLEU_CALCUL)
-        accroche.next_to(sous_titre, DOWN, buff=0.9)
-        astuce = Text("Réponse dans la vidéo — tout se lit sur une droite.", font_size=26, color=WHITE)
-        astuce.next_to(accroche, DOWN, buff=0.5)
-        self.play(Write(titre), FadeIn(sous_titre))
-        self.play(Write(accroche))
-        self.play(FadeIn(astuce, shift=UP * 0.2))
-        self.wait(2.2)
+        self.dire(voix)
 
-    # ── écran 1 : lire le signe (négatifs à gauche, positifs à droite) ──────
+        t = Text(titre, font_size=54, color=JAUNE_TITRE).to_edge(UP, buff=0.55)
+        identite = Text(self.identite, font_size=28, color=WHITE).next_to(t, DOWN, buff=0.25)
+        q = Text("−7 ou −4 : lequel est le plus grand ?", font_size=36, color=BLEU_CALCUL)
+        q.next_to(identite, DOWN, buff=0.45)
+        # ⭐ La question est à l'écran DÈS la première seconde : c'est l'image
+        # que YouTube prélève.
+        self.play(Write(t), FadeIn(identite, shift=DOWN * 0.2), FadeIn(q))
+
+        self.au_mot("sauf à savoir")
+        l1 = Text("Les maths, ça sert à rien… sauf à savoir où il fait le plus froid.",
+                  font_size=26, color=WHITE).next_to(q, DOWN, buff=0.35)
+        self.play(FadeIn(l1, shift=UP * 0.15))
+
+        self.au_mot("Dans un congélateur")
+        c1 = self.congelateur("−7 °C", -3.6, ROUGE_ERREUR)
+        self.play(FadeIn(c1, shift=UP * 0.2))
+        self.au_mot("Dans l'autre")
+        c2 = self.congelateur("−4 °C", -0.6, ROUGE_ERREUR)
+        self.play(FadeIn(c2, shift=UP * 0.2))
+
+        self.au_mot("Lequel est le plus grand")
+        self.play(Indicate(q, color=BLEU_CALCUL))
+
+        self.au_mot("Beaucoup répondent")
+        rep = Text("−7 ?", font_size=48, color=ORANGE_RETENUE).move_to([2.7, -0.9, 0])
+        self.play(Write(rep))
+        self.au_mot("Et c'est faux")
+        faux = Text("Faux !", font_size=40, color=ROUGE_ERREUR).next_to(rep, DOWN, buff=0.3)
+        self.play(Create(self.barrer(rep)), Write(faux))
+        self.attendre_voix()
+
+    # ── 01 : un signe et un côté ────────────────────────────────────────────
 
     def ecran_signe(self):
         self.clear()
         self.add_mascotte()
+        self.dire("01-signe")
         self.titre_ecran("1. Un signe et un côté")
 
-        ligne, x_of = self.droite(-5, 5, y=0.3)
-        self.play(Create(ligne[0]), Create(ligne[1]))
-        self.play(LaggedStart(*[Write(l) for l in ligne[2]], lag_ratio=0.05))
-        self.wait(0.6)
+        d, pt = self.droite_rel(-5, 5, y=0.3)
+        self.montrer_droite(d)
 
-        zero_box = SurroundingRectangle(ligne[2][5], color=JAUNE_TITRE, buff=0.1)
-        zero_txt = Text("0 : ni positif, ni négatif", font_size=26, color=JAUNE_TITRE).move_to([0, -1.5, 0])
-        self.play(Create(zero_box), Write(zero_txt))
-        self.wait(1.4)
+        self.au_mot("Au milieu, le zéro")
+        zero = SurroundingRectangle(d[2][5], color=JAUNE_TITRE, buff=0.1)
+        zt = Text("0 : ni positif, ni négatif", font_size=28, color=JAUNE_TITRE).move_to([-0.3, -1.0, 0])
+        self.play(Create(zero), Write(zt))
 
-        gauche = Text("négatifs (-)", font_size=28, color=ROUGE_ERREUR).move_to([-3.3, 1.4, 0])
-        droite = Text("positifs (+)", font_size=28, color=VERT_OK).move_to([3.3, 1.4, 0])
-        fg = Arrow([-0.4, 1.0, 0], [-3.3, 1.0, 0], buff=0.1, color=ROUGE_ERREUR)
-        fd = Arrow([0.4, 1.0, 0], [3.3, 1.0, 0], buff=0.1, color=VERT_OK)
-        self.play(FadeOut(zero_box), FadeOut(zero_txt))
-        self.play(GrowArrow(fg), GrowArrow(fd), Write(gauche), Write(droite))
-        self.wait(1.2)
+        self.au_mot("À droite du zéro")
+        fd = Arrow(pt(0.4) + UP * 1.0, pt(5) + UP * 1.0, buff=0, color=VERT_OK)
+        td = Text("positifs : signe +", font_size=28, color=VERT_OK).next_to(fd, UP, buff=0.12)
+        self.play(GrowArrow(fd), Write(td))
 
-        lire = Text("« 3 en dessous de zéro » → -3", font_size=32, color=BLEU_CALCUL).to_edge(DOWN)
-        dot = Dot([x_of(-3), 0.3, 0], color=ROUGE_ERREUR, radius=0.14)
-        self.play(Write(lire), FadeIn(dot, scale=0.4))
-        self.play(Indicate(ligne[2][2], color=ROUGE_ERREUR), Flash(dot, color=ROUGE_ERREUR))
-        self.wait(2.2)
+        self.au_mot("À gauche, les nombres")
+        fg = Arrow(pt(-0.4) + UP * 1.0, pt(-5) + UP * 1.0, buff=0, color=ROUGE_ERREUR)
+        tg = Text("négatifs : signe −", font_size=28, color=ROUGE_ERREUR).next_to(fg, UP, buff=0.12)
+        self.play(GrowArrow(fg), Write(tg))
 
-    # ── écran 2 : comparer (-1 vs +6, le Maïdo) ─────────────────────────────
+        self.au_mot("Trois degrés en dessous")
+        self.play(FadeOut(zero), FadeOut(zt))
+        dot = Dot(pt(-3), color=ROUGE_ERREUR, radius=0.13)
+        lire = Text("3 degrés en dessous de 0  →  −3", font_size=32, color=WHITE).move_to([-0.3, -1.1, 0])
+        self.play(FadeIn(dot, scale=0.4), Write(lire))
+        self.play(Flash(dot, color=ROUGE_ERREUR), Indicate(d[2][2], color=ROUGE_ERREUR))
 
-    def ecran_comparer(self):
-        self.clear()
-        self.add_mascotte()
-        self.titre_ecran("2. Comparer")
+        self.au_mot("Un nombre relatif, c'est donc")
+        self.play(Write(self.chute("Un nombre relatif = un signe + une distance à zéro", color=BLEU_CALCUL)))
+        self.attendre_voix()
 
-        enonce = Text("Au Maïdo : -1 °C le matin, +6 °C l'après-midi", font_size=28, color=WHITE).move_to([0, 1.9, 0])
-        self.play(Write(enonce))
-
-        ligne, x_of = self.droite(-3, 8, y=0.0)
-        self.play(Create(ligne[0]), Create(ligne[1]), Write(ligne[2]))
-
-        p1 = self.point(x_of, -1, "-1", ROUGE_ERREUR)
-        p2 = self.point(x_of, 6, "+6", VERT_OK)
-        self.play(FadeIn(p1, scale=0.4), FadeIn(p2, scale=0.4))
-        self.wait(0.8)
-
-        fleche = Arrow([x_of(-1), -0.9, 0], [x_of(6), -0.9, 0], buff=0.1, color=BLEU_CALCUL)
-        plus_grand = Text("le plus à droite = le plus grand", font_size=26, color=BLEU_CALCUL).move_to([0, -1.5, 0])
-        self.play(GrowArrow(fleche), Write(plus_grand))
-        self.wait(1.2)
-
-        conclusion = Text("+6 > -1", font_size=44, color=VERT_OK).to_edge(DOWN)
-        self.play(Circumscribe(p2, color=VERT_OK), Write(conclusion))
-        self.wait(2.2)
-
-    # ── écran 3 : placer un point (A à l'abscisse -3) ───────────────────────
+    # ── 02 : placer un point ────────────────────────────────────────────────
 
     def ecran_placer(self):
         self.clear()
         self.add_mascotte()
-        self.titre_ecran("3. Placer un point")
+        self.dire("02-placer")
+        self.titre_ecran("2. Placer un point")
 
-        consigne = Text("Place le point A d'abscisse -3", font_size=30, color=WHITE).move_to([0, 1.9, 0])
+        consigne = Text("Place le point A d'abscisse −3", font_size=32, color=WHITE).move_to([-0.3, 2.1, 0])
         self.play(Write(consigne))
+        d, pt = self.droite_rel(-5, 5, y=0.2)
+        self.montrer_droite(d)
 
-        ligne, x_of = self.droite(-5, 5, y=0.2)
-        self.play(Create(ligne[0]), Create(ligne[1]), Write(ligne[2]))
-        self.wait(0.4)
+        self.au_mot("Je pars de zéro")
+        curseur = Dot(pt(0), color=JAUNE_TITRE, radius=0.13)
+        self.play(FadeIn(curseur, scale=0.4), Flash(curseur, color=JAUNE_TITRE))
 
-        depart = Dot([x_of(0), 0.2, 0], color=JAUNE_TITRE, radius=0.12)
-        etape = Text("Je pars de 0, je vais à GAUCHE (négatif) de 3", font_size=26, color=ORANGE_RETENUE).to_edge(DOWN)
-        self.play(FadeIn(depart), Write(etape))
+        self.au_mot("Le signe moins")
+        e1 = Text("le signe −  →  à gauche", font_size=30, color=ROUGE_ERREUR).move_to([-0.3, -1.0, 0])
+        self.play(Write(e1))
 
-        chemin = Arrow([x_of(0), 0.9, 0], [x_of(-3), 0.9, 0], buff=0.1, color=ORANGE_RETENUE)
-        self.play(GrowArrow(chemin))
-        self.play(depart.animate.move_to([x_of(-3), 0.2, 0]).set_color(BLEU_CALCUL))
-        self.wait(0.4)
+        self.au_mot("Le 3 me dit")
+        e2 = Text("le 3  →  3 graduations", font_size=30, color=ORANGE_RETENUE).move_to([-0.3, -1.65, 0])
+        self.play(Write(e2))
 
-        a_lbl = Text("A", font_size=34, color=BLEU_CALCUL).move_to([x_of(-3), 0.9, 0])
-        self.play(FadeOut(chemin), Write(a_lbl), Indicate(depart, color=BLEU_CALCUL))
-        self.wait(2.2)
+        self.au_mot("Un, deux, trois")
+        sauts = VGroup()
+        for k in range(1, 4):
+            arc = ArcBetweenPoints(pt(-(k - 1)) + UP * 0.25, pt(-k) + UP * 0.25, angle=-PI / 2,
+                                   color=ORANGE_RETENUE, stroke_width=3)
+            n = Text(str(k), font_size=26, color=ORANGE_RETENUE).move_to(arc.get_top() + UP * 0.25)
+            self.play(Create(arc), FadeIn(n), curseur.animate.move_to(pt(-k)), run_time=0.45)
+            sauts.add(arc, n)
 
-    # ── écran 4 : l'opposé (-7 et +7) ───────────────────────────────────────
+        self.au_mot("Voilà le point A")
+        a = Text("A", font_size=38, color=BLEU_CALCUL).move_to(pt(-3) + UP * 0.5 + LEFT * 0.35)
+        self.play(curseur.animate.set_color(BLEU_CALCUL), Write(a))
+        self.play(Write(self.chute("A est à l'abscisse −3", color=BLEU_CALCUL, font_size=32)))
+        self.attendre_voix()
+
+    # ── 03 : comparer ───────────────────────────────────────────────────────
+
+    def ecran_comparer(self):
+        self.clear()
+        self.add_mascotte()
+        self.dire("03-comparer")
+        self.titre_ecran("3. Comparer")
+
+        regle = Text("Le plus à droite est le plus grand", font_size=32, color=BLEU_CALCUL).move_to([-0.3, 2.3, 0])
+        self.play(Write(regle))
+        d, pt = self.droite_rel(-8, 7, y=0.45, longueur=10.6, font_size=24)
+        self.montrer_droite(d)
+        fleche = Arrow(pt(-8) + UP * 1.15, pt(7) + UP * 1.15, buff=0, color=BLEU_CALCUL, stroke_width=3)
+        self.play(GrowArrow(fleche))
+
+        # −1 et +6
+        self.au_mot("Moins 1 et plus 6")
+        p1 = self.pastille(pt, -1, "−1", ROUGE_ERREUR, haut=False)
+        p2 = self.pastille(pt, 6, "+6", VERT_OK, haut=False)
+        for p in (p1, p2):
+            p[1].shift(DOWN * 0.45)
+        self.play(FadeIn(p1, scale=0.4), FadeIn(p2, scale=0.4))
+        self.au_mot("donc plus 6 est plus grand")
+        r1 = Text("+6 > −1", font_size=40, color=VERT_OK).move_to([-2.6, -1.6, 0])
+        self.play(Write(r1), Circumscribe(p2, color=VERT_OK))
+        self.au_mot("Un positif est toujours")
+        r2 = Text("positif > négatif", font_size=30, color=WHITE).move_to([2.0, -1.6, 0])
+        self.play(Write(r2))
+
+        # −7 et −4 : les congélateurs
+        self.au_mot("nos congélateurs")
+        self.play(FadeOut(p1), FadeOut(p2), FadeOut(r1), FadeOut(r2))
+        q7 = self.pastille(pt, -7, "−7 °C", ROUGE_ERREUR, haut=False)
+        q4 = self.pastille(pt, -4, "−4 °C", ROUGE_ERREUR, haut=False)
+        for p in (q7, q4):
+            p[1].shift(DOWN * 0.45)
+        self.play(FadeIn(q7, scale=0.4), FadeIn(q4, scale=0.4))
+
+        self.au_mot("Moins 4 est à droite")
+        f = Arrow(pt(-7) + DOWN * 1.45, pt(-4) + DOWN * 1.45, buff=0.05, color=VERT_OK)
+        self.play(GrowArrow(f))
+        self.au_mot("Donc moins 4 est plus grand")
+        r3 = Text("−4 > −7", font_size=44, color=VERT_OK).move_to([2.4, -1.4, 0])
+        self.play(Write(r3), Circumscribe(q4, color=VERT_OK))
+        self.au_mot("Le congélateur le plus froid")
+        r4 = Text("le plus froid : −7 °C", font_size=28, color=BLEU_CALCUL).next_to(r3, DOWN, buff=0.3)
+        self.play(Write(r4), Indicate(q7, color=BLEU_CALCUL))
+
+        self.au_mot("Le piège")
+        piege = Text("7 > 4   mais   −7 < −4", font_size=34, color=ORANGE_RETENUE).move_to([-0.6, -3.0, 0])
+        cadre = SurroundingRectangle(piege, color=ORANGE_RETENUE, buff=0.18, stroke_width=2)
+        self.play(FadeOut(f), Write(piege), Create(cadre))
+
+        self.au_mot("Chez les négatifs")
+        loin = self.mesure(pt, -7, 0, 1.75, "loin de 0 : plus petit", color=ORANGE_RETENUE, font_size=22)
+        self.play(FadeOut(regle), FadeOut(fleche))
+        self.play(GrowFromCenter(loin[0]), FadeIn(loin[1]))
+        self.attendre_voix()
+
+    # ── 04 : l'opposé ───────────────────────────────────────────────────────
 
     def ecran_oppose(self):
         self.clear()
         self.add_mascotte()
+        self.dire("04-oppose")
         self.titre_ecran("4. L'opposé")
 
-        ligne, x_of = self.droite(-8, 8, y=0.0)
-        self.play(Create(ligne[0]), Create(ligne[1]), Write(ligne[2]))
+        defi = Text("Le même nombre, de l'autre côté du zéro", font_size=30, color=BLEU_CALCUL).move_to([-0.3, 2.2, 0])
+        self.play(Write(defi))
+        d, pt = self.droite_rel(-8, 8, y=0.5, longueur=10.6, font_size=22)
+        self.montrer_droite(d)
 
-        p_neg = self.point(x_of, -7, "-7", ROUGE_ERREUR)
-        self.play(FadeIn(p_neg, scale=0.4))
-        self.wait(0.6)
+        self.au_mot("Moins 7 est à 7")
+        pn = self.pastille(pt, -7, "−7", ROUGE_ERREUR)
+        self.play(FadeIn(pn, scale=0.4))
+        mg = self.mesure(pt, -7, 0, -0.55, "7 graduations", color=WHITE)
+        self.play(GrowFromCenter(mg[0]), Write(mg[1]))
 
-        d_neg = DoubleArrow([x_of(-7), -0.8, 0], [x_of(0), -0.8, 0], buff=0.05, color=WHITE, stroke_width=3)
-        d_pos = DoubleArrow([x_of(0), -0.8, 0], [x_of(7), -0.8, 0], buff=0.05, color=WHITE, stroke_width=3)
-        s7g = Text("7", font_size=26, color=WHITE).move_to([x_of(-3.5), -1.25, 0])
-        self.play(GrowFromCenter(d_neg), Write(s7g))
-        self.wait(0.4)
+        self.au_mot("Je fais la même distance")
+        md = self.mesure(pt, 0, 7, -0.55, "7 graduations", color=WHITE)
+        self.play(GrowFromCenter(md[0]), Write(md[1]))
+        self.au_mot("j'arrive à plus 7")
+        pp = self.pastille(pt, 7, "+7", VERT_OK)
+        self.play(TransformFromCopy(pn, pp))
 
-        p_pos = self.point(x_of, 7, "+7", VERT_OK)
-        s7d = Text("7", font_size=26, color=WHITE).move_to([x_of(3.5), -1.25, 0])
-        self.play(TransformFromCopy(p_neg, p_pos), GrowFromCenter(d_pos), Write(s7d))
-        self.wait(1.0)
+        self.au_mot("L'opposé de moins 7")
+        r1 = Text("L'opposé de −7, c'est +7", font_size=34, color=VERT_OK).move_to([-0.6, -1.85, 0])
+        self.play(Write(r1))
+        self.au_mot("Et l'opposé de plus 7")
+        r2 = Text("L'opposé de +7, c'est −7", font_size=34, color=ROUGE_ERREUR).move_to([-0.6, -2.65, 0])
+        self.play(Write(r2))
+        self.attendre_voix()
 
-        conclusion = Text("L'opposé de -7 est +7", font_size=36, color=VERT_OK).to_edge(DOWN)
-        self.play(Write(conclusion))
-        self.wait(2.2)
+    # ── 05 : la distance à zéro ─────────────────────────────────────────────
 
-    # ── écran 5 : la valeur absolue (distance à 0) ──────────────────────────
-
-    def ecran_valeur_absolue(self):
+    def ecran_distance(self):
         self.clear()
         self.add_mascotte()
-        self.titre_ecran("5. La distance à 0")
+        self.dire("05-distance")
+        self.titre_ecran("5. La distance à zéro")
 
-        ligne, x_of = self.droite(-6, 6, y=0.2)
-        self.play(Create(ligne[0]), Create(ligne[1]), Write(ligne[2]))
+        d, pt = self.droite_rel(-6, 6, y=0.9)
+        self.montrer_droite(d)
 
-        p = self.point(x_of, -5, "-5", ROUGE_ERREUR, y=0.2)
-        self.play(FadeIn(p, scale=0.4))
-        self.wait(0.5)
+        self.au_mot("De moins 5 à zéro")
+        pn = self.pastille(pt, -5, "−5", ROUGE_ERREUR)
+        m1 = self.mesure(pt, -5, 0, -0.1, "5 graduations")
+        self.play(FadeIn(pn, scale=0.4))
+        self.play(GrowFromCenter(m1[0]), Write(m1[1]))
 
-        mesure = DoubleArrow([x_of(-5), -0.7, 0], [x_of(0), -0.7, 0], buff=0.05, color=BLEU_CALCUL, stroke_width=4)
-        cinq = Text("5 unités", font_size=28, color=BLEU_CALCUL).move_to([x_of(-2.5), -1.25, 0])
-        self.play(GrowFromCenter(mesure), Write(cinq))
-        self.wait(1.0)
+        self.au_mot("La distance à zéro de moins 5")
+        r1 = Text("distance à zéro de −5 : 5", font_size=32, color=BLEU_CALCUL).move_to([-0.6, -1.3, 0])
+        self.play(Write(r1))
 
-        conclusion = Text("valeur absolue de -5 = 5  (toujours positive)", font_size=30, color=VERT_OK).to_edge(DOWN)
-        self.play(Write(conclusion))
-        self.wait(2.4)
+        self.au_mot("Et celle de plus 5")
+        pp = self.pastille(pt, 5, "+5", VERT_OK)
+        m2 = self.mesure(pt, 0, 5, -0.1, "5 graduations")
+        self.play(FadeIn(pp, scale=0.4), GrowFromCenter(m2[0]), Write(m2[1]))
+        r2 = Text("distance à zéro de +5 : 5", font_size=32, color=BLEU_CALCUL).move_to([-0.6, -1.95, 0])
+        self.play(Write(r2))
 
-    # ── écran 6 : défi (thermomètre du sommet) ──────────────────────────────
+        self.au_mot("valeur absolue")
+        va = Text("= la valeur absolue", font_size=30, color=JAUNE_TITRE).move_to([-0.6, 2.25, 0])
+        self.play(Write(va))
+
+        self.au_mot("Une distance n'a pas de signe")
+        self.play(Write(self.chute("Une distance n'a pas de signe : toujours positive", color=VERT_OK)))
+        self.attendre_voix()
+
+    # ── 06 : défi ───────────────────────────────────────────────────────────
 
     def ecran_defi(self):
         self.clear()
         self.add_mascotte(scale=0.65)
-        titre = Text("Défi", font_size=46, color=JAUNE_TITRE).to_edge(UP)
+        self.dire("06-defi")
+        titre = Text("À toi de jouer", font_size=46, color=JAUNE_TITRE).to_edge(UP)
         self.play(Write(titre))
 
-        q1 = Text("Au sommet, il fait -2 °C.", font_size=32, color=WHITE).move_to([0, 1.6, 0])
-        q2 = Text("La température monte de 5 degrés,", font_size=30, color=WHITE).move_to([0, 0.95, 0])
-        q3 = Text("puis redescend de 3 degrés.", font_size=30, color=WHITE).move_to([0, 0.4, 0])
-        q4 = Text("Quelle est la température finale ?", font_size=32, color=BLEU_CALCUL).move_to([0, -0.4, 0])
+        self.au_mot("Au sommet")
+        q1 = Text("Au sommet d'une montagne, il fait −2 °C.", font_size=32).move_to([-0.3, 1.7, 0])
+        self.play(Write(q1))
+        self.au_mot("La température monte")
+        q2 = Text("La température monte de 5 °C,", font_size=32, color=VERT_OK).move_to([-0.3, 0.95, 0])
+        self.play(Write(q2))
+        self.au_mot("puis redescend")
+        q3 = Text("puis redescend de 3 °C.", font_size=32, color=ORANGE_RETENUE).move_to([-0.3, 0.3, 0])
+        self.play(Write(q3))
+        self.au_mot("Quelle est la température")
+        q4 = Text("Quelle est la température finale ?", font_size=34, color=BLEU_CALCUL).move_to([-0.3, -0.6, 0])
+        self.play(Write(q4))
+        self.au_mot("Mets pause")
+        self.play(Write(self.chute("Mets pause, et cherche !", color=ORANGE_RETENUE, font_size=36)))
+        self.attendre_voix(marge=2.0)
 
-        ligne, _ = self.droite(-4, 6, y=-1.5, x_span=4.6)
-        self.play(Write(q1), Write(q2), Write(q3))
-        self.play(Write(q4), Create(ligne[0]), Create(ligne[1]), Write(ligne[2]))
-
-        pause = Text("Mets pause et cherche !", font_size=30, color=ORANGE_RETENUE).to_edge(DOWN)
-        self.play(Write(pause))
-        self.wait(4.0)
-
-    # ── écran 7 : correction ────────────────────────────────────────────────
+    # ── 06b : correction ────────────────────────────────────────────────────
 
     def ecran_correction(self):
         self.clear()
         self.add_mascotte()
+        self.dire("06b-correction")
         self.titre_ecran("Correction")
 
-        ligne, x_of = self.droite(-4, 6, y=1.2, x_span=5.0)
-        self.play(Create(ligne[0]), Create(ligne[1]), Write(ligne[2]))
+        d, pt = self.droite_rel(-4, 6, y=1.0)
+        self.montrer_droite(d)
 
-        curseur = Dot([x_of(-2), 1.2, 0], color=BLEU_CALCUL, radius=0.14)
-        depart = Text("On part de -2", font_size=30, color=WHITE).move_to([0, 0.1, 0])
-        self.play(FadeIn(curseur, scale=0.4), Write(depart))
-        self.wait(1.0)
+        self.au_mot("On part de moins 2")
+        cur = Dot(pt(-2), color=BLEU_CALCUL, radius=0.14)
+        e0 = Text("départ : −2 °C", font_size=30, color=WHITE).move_to([-0.6, -0.75, 0])
+        self.play(FadeIn(cur, scale=0.4), Write(e0))
 
-        etape1 = Text("+5 :  -2 + 5 = +3", font_size=32, color=VERT_OK).move_to([0, -0.7, 0])
-        f1 = Arrow([x_of(-2), 1.7, 0], [x_of(3), 1.7, 0], buff=0.1, color=VERT_OK)
-        self.play(GrowArrow(f1), curseur.animate.move_to([x_of(3), 1.2, 0]), Write(etape1))
-        self.wait(1.2)
+        self.au_mot("On monte de 5")
+        f1 = CurvedArrow(pt(-2) + UP * 0.3, pt(3) + UP * 0.3, angle=-PI / 3, color=VERT_OK)
+        e1 = Text("+5 graduations vers la droite  →  +3", font_size=30, color=VERT_OK).move_to([-0.6, -1.4, 0])
+        self.play(Create(f1), cur.animate.move_to(pt(3)), Write(e1), run_time=1.4)
 
-        etape2 = Text("-3 :  +3 - 3 = 0", font_size=32, color=ORANGE_RETENUE).move_to([0, -1.4, 0])
-        f2 = Arrow([x_of(3), 0.7, 0], [x_of(0), 0.7, 0], buff=0.1, color=ORANGE_RETENUE)
-        self.play(GrowArrow(f2), curseur.animate.move_to([x_of(0), 1.2, 0]).set_color(JAUNE_TITRE), Write(etape2))
-        self.wait(1.0)
+        self.au_mot("On redescend de 3")
+        f2 = CurvedArrow(pt(3) + DOWN * 0.85, pt(0) + DOWN * 0.85, angle=-PI / 3, color=ORANGE_RETENUE)
+        e2 = Text("3 graduations vers la gauche  →  0", font_size=30, color=ORANGE_RETENUE).move_to([-0.6, -2.05, 0])
+        self.play(Create(f2), cur.animate.move_to(pt(0)).set_color(JAUNE_TITRE), Write(e2), run_time=1.4)
 
-        conclusion = Text("Température finale : 0 °C", font_size=38, color=VERT_OK).to_edge(DOWN)
-        self.play(Write(conclusion), Flash(curseur, color=JAUNE_TITRE))
-        self.wait(2.4)
-
-    # ── écran 8 : à retenir ─────────────────────────────────────────────────
-
-    def ecran_conclusion(self):
-        self.clear()
-        self.add_mascotte(scale=0.65)
-        titre = Text("À retenir", font_size=46, color=JAUNE_TITRE).to_edge(UP)
-
-        points = VGroup(
-            Text("1. Un relatif = un signe (+/-) et une distance à 0.", font_size=28),
-            Text("2. Sur la droite : le plus à droite est le plus grand.", font_size=28),
-            Text("3. Opposés : -5 et +5, de chaque côté de 0.", font_size=28),
-        ).arrange(DOWN, aligned_edge=LEFT, buff=0.5).move_to([0, 0.3, 0])
-
-        signature = Text(SIGNATURE, font_size=26, color=VERT_OK).to_edge(DOWN)
-
-        self.play(Write(titre))
-        self.play(LaggedStart(*[Write(p) for p in points], lag_ratio=0.3))
-        self.play(Write(signature))
-        self.wait(2.5)
+        self.au_mot("La température finale")
+        self.play(Write(self.chute("Température finale : 0 °C", color=VERT_OK, font_size=36)),
+                  Flash(cur, color=JAUNE_TITRE))
+        self.attendre_voix()
 
     # ── déroulé ─────────────────────────────────────────────────────────────
 
     def construct(self):
-        self.ecran_accueil()
+        self.page_de_garde(titre="Les nombres relatifs")
+        self.page_objectifs(OBJECTIFS)
         self.ecran_signe()
-        self.ecran_comparer()
         self.ecran_placer()
+        self.ecran_comparer()
         self.ecran_oppose()
-        self.ecran_valeur_absolue()
+        self.ecran_distance()
         self.ecran_defi()
         self.ecran_correction()
-        self.ecran_conclusion()
-
-
-# ─── SCRIPT VOIX (optionnel — à lire au téléphone par-dessus la vidéo muette) ──
-# Dire « top » quand le titre d'accueil apparaît (point de synchro Clipchamp).
-# Ton simple, phrases courtes, on REDIT ce que l'écran montre.
-#
-# [Accueil ~0:00]   « Salut ! Aujourd'hui, les nombres relatifs. Petite question :
-#                     qui est le plus grand, moins deux ou plus trois ? Regarde. »
-# [Écran 1 ~0:12]   « Voici la droite des nombres. Au milieu, le zéro : il n'est ni
-#                     positif ni négatif. À droite, les positifs ; à gauche, les
-#                     négatifs. Trois en dessous de zéro, ça s'écrit moins trois. »
-# [Écran 2 ~0:30]   « Au Maïdo : moins un le matin, plus six l'après-midi. Le plus
-#                     grand, c'est le plus à droite. Donc plus six est plus grand
-#                     que moins un. Un positif gagne toujours contre un négatif. »
-# [Écran 3 ~0:48]   « Placer moins trois ? Je pars de zéro et je vais à gauche,
-#                     parce que c'est négatif, de trois pas. Voilà le point A. »
-# [Écran 4 ~1:04]   « L'opposé, c'est le même nombre de l'autre côté du zéro.
-#                     L'opposé de moins sept, c'est plus sept. Même distance :
-#                     sept d'un côté, sept de l'autre. »
-# [Écran 5 ~1:20]   « La valeur absolue, c'est juste la distance jusqu'à zéro.
-#                     De moins cinq à zéro, il y a cinq. Donc la valeur absolue de
-#                     moins cinq, c'est cinq. Une distance, c'est toujours positif. »
-# [Défi ~1:36]      « À toi ! Au sommet, moins deux degrés. Ça monte de cinq, puis
-#                     ça redescend de trois. Température finale ? Mets pause. »
-# [Correction ~1:52] « On part de moins deux. On monte de cinq : moins deux plus
-#                     cinq, ça fait plus trois. On descend de trois : plus trois
-#                     moins trois, ça fait zéro. Il fait zéro degré. »
-# [À retenir ~2:12] « On retient : un relatif, c'est un signe et une distance à
-#                     zéro. Le plus à droite est le plus grand. Et les opposés se
-#                     répondent de chaque côté du zéro. À bientôt ! »
+        self.page_finale(
+            points=[
+                "Un relatif : un signe et une distance à zéro",
+                "Le plus à droite est le plus grand : −4 > −7",
+                "L'opposé : même distance, de l'autre côté du zéro",
+            ],
+            rappel="Piège : 7 > 4, mais −7 < −4.",
+            voix="07-finale",
+        )
+        self.page_abonnement(voix="08-abonne")

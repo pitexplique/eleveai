@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Une solution existe entre 0 et 1. Peut-on la trouver au centième, sans formule ?",
+  "01-balayage": "On cherche le changement de signe. f de 0 virgule 6 est négatif, f de 0 virgule 7 est positif : alpha est entre 0 virgule 6 et 0 virgule 7.",
+  "02-centieme": "On recommence au centième. f de 0 virgule 68 est négatif, f de 0 virgule 69 est positif. Alpha est entre 0 virgule 68 et 0 virgule 69.",
+  "03-regle": "À chaque étape, on garde l'intervalle où le signe change. C'est le balayage, et la calculatrice le fait en quelques secondes.",
+  "04-defi": "À toi. Encadre au dixième la solution de x au cube égale 2.",
+  "05-fin": "Ta réponse en commentaire. La vidéo complète sur le théorème des valeurs intermédiaires est juste en dessous."
+}
