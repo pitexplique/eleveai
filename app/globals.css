@@ -3,6 +3,7 @@
    Windows dans un .md (« \1418b1ff… ») y passait pour un échappement CSS, et
    « Invalid code point » cassait la construction de TOUT le site. */
 @source not "../manim";
+@source not "../pub";
 
 /* 🔥 RESET COMPLET */
 html, body {

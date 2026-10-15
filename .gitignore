@@ -103,6 +103,12 @@ manim/sorties/**/*.mp4
 manim/miniatures/
 manim/chaine/
 manim/sorties/
+# 15/10/2026 — `pub/` rassemble les visuels de promotion. Les pubs elles-mêmes
+# (instagram/…) sont suivies ; les deux dossiers YouTube ne sont que des
+# JONCTIONS Windows vers manim/miniatures et manim/chaine (les scripts de
+# publication y écrivent), donc ignorées comme leur cible.
+/pub/youtube-miniatures
+/pub/youtube-chaine
 /public/sons/
 # … et la même règle portée à l'EXTENSION, pas au dossier : le dossier de
 # sortie d'aujourd'hui n'est pas celui de demain, et une règle qui nomme des

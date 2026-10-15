@@ -9,8 +9,9 @@
 # pas fini. Prix, lieu, horaires : ceux de la page, rien d'autre.
 #
 # Usage : python scripts/pub-crpe-instagram.py
-#   → public/images/crpe-instagram-post-1080x1350.png
-#   → public/images/crpe-instagram-story-1080x1920.png
+#   → pub/instagram/crpe/post-1080x1350.png
+#   → pub/instagram/crpe/story-1080x1920.png
+#   (la légende à coller est à côté : pub/instagram/crpe/legende.md)
 
 from pathlib import Path
 
@@ -21,7 +22,7 @@ FONTS = Path("C:/Windows/Fonts")
 # Le visage recadré : la photo entière ne montre qu'une silhouette à 130 px.
 AVATAR = RACINE / "public" / "images" / "avatar-frederic-visage.webp"
 TI_MARGO = RACINE / "public" / "cahier-vacances" / "ti-margo.png"
-SORTIE = RACINE / "public" / "images"
+SORTIE = RACINE / "pub" / "instagram" / "crpe"
 
 W = 1080
 NAVY = (4, 27, 51)
@@ -196,6 +197,6 @@ if __name__ == "__main__":
         im, fin_cta, debut_signature = composer(h)
         # garde-fou : la signature ne doit jamais chevaucher le bloc d'action
         assert fin_cta + 20 < debut_signature, (nom, fin_cta, debut_signature)
-        chemin = SORTIE / f"crpe-instagram-{nom}-1080x{h}.png"
+        chemin = SORTIE / f"{nom}-1080x{h}.png"
         im.save(chemin, optimize=True)
         print(chemin)
