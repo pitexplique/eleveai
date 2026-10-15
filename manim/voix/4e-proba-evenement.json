@@ -1,0 +1,13 @@
+{
+  "00-garde": "Les événements. Certain, impossible, ou contraire ?",
+  "01-situation": "On met 10 cartes dans un chapeau, numérotées de 1 à 10. Tu en tires une. Tu gagnes si le numéro est pair. Quelles cartes te font gagner ?",
+  "02-realise": "Les cartes 2, 4, 6, 8 et 10. Ce sont les issues qui réalisent l'événement « obtenir un nombre pair ».",
+  "03-certain": "Obtenir un nombre plus petit que 11 : toutes les cartes le réalisent. C'est un événement certain.",
+  "04-impossible": "Obtenir 12 : aucune carte ne le réalise. C'est un événement impossible.",
+  "05-contraire": "Le contraire de « obtenir un nombre pair », c'est « ne pas obtenir un nombre pair ». Il est réalisé par toutes les autres cartes : 1, 3, 5, 7 et 9. C'est « obtenir un nombre impair ». Un événement et son contraire se partagent toutes les issues, sans en oublier, sans en compter deux fois.",
+  "06-piege": "Le piège : le contraire de « obtenir 10 », ce n'est pas « obtenir 1 ». C'est obtenir n'importe quelle autre carte : de 1 à 9.",
+  "07-defi": "À toi de jouer. Toujours les cartes de 1 à 10. Quelles cartes réalisent « obtenir un multiple de 3 » ? Et son contraire ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Multiple de 3 : 3, 6 et 9. Le contraire, ce sont toutes les autres : 1, 2, 4, 5, 7, 8 et 10.",
+  "08-finale": "Ce que tu as appris. Un événement est réalisé par certaines issues. Toutes : il est certain. Aucune : il est impossible. Son contraire est réalisé par toutes les autres. L'épisode 4 t'attend : est-ce que toutes les issues ont la même chance ?",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

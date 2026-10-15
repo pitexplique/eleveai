@@ -1,0 +1,13 @@
+{
+  "00-garde": "Comparer l'observé et le calculé. Pourquoi ce n'est jamais pile pareil ?",
+  "01-situation": "Hugo a lancé un dé 60 fois. Le 6 est sorti 14 fois. Il dit : « Mon dé n'obéit pas aux maths ! » A-t-il raison ?",
+  "02-calcule": "Le calculé d'abord. La probabilité d'obtenir 6 est 1 sur 6. 1 divisé par 6 égale environ 0,17, soit environ 17 %.",
+  "03-observe": "L'observé ensuite. 14 sur 60. 14 divisé par 60 égale environ 0,23, soit environ 23 %.",
+  "04-ecart": "23 % observés, 17 % calculés. Il y a un écart. C'est normal ! Le hasard ne donne jamais exactement la probabilité. Sur 60 lancers, on attend environ 10 six. En avoir 14, ça arrive très souvent.",
+  "05-methode": "La méthode : écrire les deux nombres de la même façon, en décimal ou en pourcentage. Puis regarder l'écart.",
+  "06-piege": "Le piège : croire que la probabilité dit exactement ce qui va se passer. Elle dit ce qui se passe en moyenne, sur beaucoup d'essais.",
+  "07-defi": "À toi de jouer. Une pièce lancée 100 fois donne 47 piles. Quelle est la fréquence de pile ? Quelle est la probabilité ? Quel est l'écart ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Fréquence : 47 sur 100, donc 0,47. Probabilité : 1 sur 2, donc 0,5. L'écart est 0,03 : très petit.",
+  "08-finale": "Ce que tu as appris. On compare la fréquence observée et la probabilité calculée en les écrivant de la même façon. Un écart est normal. L'épisode suivant t'attend : que se passe-t-il quand on lance beaucoup plus ?",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

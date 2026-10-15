@@ -1,0 +1,13 @@
+{
+  "00-garde": "L'équiprobabilité. Toutes les issues ont-elles la même chance ?",
+  "01-situation": "Ce soir, quelqu'un doit faire la vaisselle. Léo et sa sœur Inès tirent au sort. Inès écrit les prénoms sur des papiers et les met dans un chapeau : Léo, Léo, Léo, et Inès. Le tirage est-il juste ?",
+  "02-reponse": "Non ! Il y a 2 issues : Léo, ou Inès. Mais Léo est écrit 3 fois. Il a beaucoup plus de chances d'être tiré. Les 2 issues n'ont pas la même chance.",
+  "03-definition": "Quand toutes les issues ont la même chance de sortir, on dit qu'elles sont équiprobables. Un dé bien équilibré : les 6 faces sont équiprobables. Une pièce normale : pile et face sont équiprobables.",
+  "04-contre-exemple": "Une punaise qu'on lance : pointe en haut, ou pointe sur le côté. 2 issues, mais elles n'ont pas la même chance. La forme de la punaise compte.",
+  "05-piege": "Le piège : 2 issues ne veut pas dire 1 chance sur 2. Au loto, tu gagnes ou tu perds : 2 issues. Mais tu n'as pas 1 chance sur 2 de gagner !",
+  "06-methode": "La méthode : se demander si quelque chose avantage une issue. Un papier écrit plusieurs fois, une couleur plus grande, un objet déséquilibré.",
+  "07-defi": "À toi de jouer. Sac A : 3 billes rouges et 3 bleues. Sac B : 4 rouges et 2 bleues. On regarde la couleur. Dans quel sac les couleurs sont-elles équiprobables ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Dans le sac A : 3 rouges, 3 bleues, autant de chaque, les couleurs sont équiprobables. Dans le sac B, il y a plus de rouges : le rouge est avantagé.",
+  "08-finale": "Ce que tu as appris. Des issues sont équiprobables quand elles ont toutes la même chance. 2 issues ne veut pas dire 1 chance sur 2. On cherche ce qui avantage une issue. L'épisode 5 t'attend : calculer une probabilité.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

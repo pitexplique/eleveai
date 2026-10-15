@@ -1,0 +1,13 @@
+{
+  "00-garde": "Calculer une probabilité. Une fraction suffit.",
+  "01-situation": "À la tombola de la kermesse, il reste 20 tickets dans l'urne. 4 d'entre eux sont gagnants. Tu en tires un. Quelle est ta chance de gagner ?",
+  "02-methode": "Les 20 tickets ont la même chance d'être tirés : les issues sont équiprobables. Alors la probabilité, c'est le nombre d'issues favorables, divisé par le nombre total d'issues.",
+  "03-calcul": "4 tickets gagnants, sur 20 tickets en tout. La probabilité de gagner est 4 sur 20. On simplifie par 4 : 1 sur 5. Tu as 1 chance sur 5 de gagner.",
+  "04-de": "Avec un dé : obtenir un multiple de 3. Les issues favorables sont 3 et 6 : il y en a 2. Sur 6 faces. La probabilité est 2 sur 6, c'est-à-dire 1 sur 3.",
+  "05-piege": "Le piège : diviser par les autres au lieu de diviser par le total. 4 gagnants et 16 perdants : la probabilité n'est pas 4 sur 16. C'est 4 sur 20, car il y a 20 tickets en tout.",
+  "06-bornes": "Une probabilité est toujours entre 0 et 1. Si tu trouves plus que 1, il y a une erreur.",
+  "07-defi": "À toi de jouer. Un sac de 12 billes : 5 rouges, 4 bleues, 3 vertes. Quelle est la probabilité de tirer une bille bleue ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 4 billes bleues, sur 12 billes en tout : 4 sur 12. On simplifie par 4 : 1 sur 3.",
+  "08-finale": "Ce que tu as appris. Quand les issues sont équiprobables, la probabilité, c'est le nombre d'issues favorables sur le nombre total d'issues. On divise par le total, pas par les autres. L'épisode 6 t'attend : écrire une probabilité en pourcentage.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

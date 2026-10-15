@@ -1,0 +1,13 @@
+{
+  "00-garde": "Les petits échantillons. Ce qu'ils ne prouvent pas.",
+  "01-situation": "Avant une partie de petits chevaux, Noah lance son dé 5 fois. Il fait 3 six. Il crie : « Mon dé est truqué ! » A-t-il la preuve ?",
+  "02-frequence": "La fréquence du 6 : 3 sur 5. 3 divisé par 5 égale 0,6, soit 60 %. C'est loin de 1 sur 6. Mais il n'a lancé que 5 fois.",
+  "03-hasard": "Sur 5 lancers, le hasard fait des surprises. Avec un dé normal, faire 3 six sur 5, c'est rare, mais ça arrive. 5 lancers, c'est un petit échantillon : il ne prouve rien.",
+  "04-grand": "Pour savoir, il faut beaucoup de lancers. Noah relance 600 fois. Le 6 sort 104 fois. 104 divisé par 600 égale environ 0,17. C'est très proche de 1 sur 6 : son dé n'est pas truqué.",
+  "05-methode": "La méthode : regarder la taille de l'échantillon avant de conclure. Petit échantillon : on ne conclut pas. Grand échantillon : la fréquence est fiable.",
+  "06-piege": "Le piège : tirer une conclusion après trois ou quatre essais. « J'ai perdu trois fois, ce jeu est truqué. » Non : trop peu d'essais.",
+  "07-defi": "À toi de jouer. Une pièce. Léa obtient 4 piles sur 5 lancers. Tom obtient 700 piles sur 1 000 lancers. Lequel peut soupçonner que sa pièce est truquée ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Tom. 700 sur 1 000, c'est 70 %, loin de 50 %, sur un grand échantillon : c'est suspect. Léa n'a lancé que 5 fois : on ne peut rien dire.",
+  "08-finale": "Ce que tu as appris. Un petit échantillon ne prouve rien : le hasard y fait de gros écarts. Sur un grand échantillon, un gros écart devient suspect. L'épisode suivant t'attend : le défi des fréquences.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

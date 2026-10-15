@@ -1,0 +1,13 @@
+{
+  "00-garde": "Le vocabulaire des probabilités. Le hasard, ça se décrit avec des mots précis.",
+  "01-situation": "Au badminton, on joue à pile ou face pour savoir qui sert en premier. Personne ne sait ce qui va tomber. Mais tout le monde sait ce qui peut tomber : pile, ou face.",
+  "02-experience": "Une expérience aléatoire, c'est une expérience dont on connaît les résultats possibles, sans savoir lequel va sortir. Lancer une pièce, lancer un dé, tirer un ticket de tombola. L'heure du lever du soleil demain, ce n'est pas du hasard : on peut la connaître à l'avance.",
+  "03-issue": "Chaque résultat possible s'appelle une issue. À pile ou face, il y a 2 issues : pile et face. Avec un dé, il y en a 6.",
+  "04-evenement": "Un événement, c'est une phrase qui sera vraie ou fausse après l'expérience. Avec un dé : obtenir un nombre plus grand que 4. Il est réalisé par 5 et par 6.",
+  "05-certain-impossible": "Obtenir un nombre entre 1 et 6 : ça arrive toujours. C'est un événement certain. Obtenir 9 : ça n'arrive jamais. C'est un événement impossible. Entre les deux, les événements possibles.",
+  "06-piege": "Le piège : rare ne veut pas dire impossible. Gagner le gros lot de la tombola, c'est rare. Mais quelqu'un le gagne !",
+  "07-defi": "À toi de jouer. Dans un sac, 3 billes rouges et 2 billes bleues. On en tire une. Tirer une bille verte : certain, possible ou impossible ? Tirer une bille rouge ou bleue ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Une bille verte : impossible, il n'y en a aucune. Une bille rouge ou bleue : certain, toutes les billes sont rouges ou bleues.",
+  "08-finale": "Ce que tu as appris. Une expérience aléatoire a des issues connues, mais un résultat imprévisible. Un événement est réalisé par certaines issues. Il peut être certain, possible ou impossible. L'épisode 2 t'attend : trouver toutes les issues.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

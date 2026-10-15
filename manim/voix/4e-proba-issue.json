@@ -1,0 +1,13 @@
+{
+  "00-garde": "Les issues d'une expérience. Comment être sûr de n'en oublier aucune ?",
+  "01-situation": "À la kermesse, une roue est numérotée de 1 à 8. On la fait tourner, et on regarde le numéro sous la flèche. Quels résultats peuvent sortir ?",
+  "02-liste": "On les écrit dans l'ordre, pour n'en oublier aucun : 1, 2, 3, 4, 5, 6, 7, 8. Il y a 8 issues.",
+  "03-objets": "Autre expérience. Dans une trousse, 4 stylos bleus et 1 stylo rouge. Les yeux fermés, on en prend un, et on regarde sa couleur. Les issues sont : bleu, et rouge. Seulement 2 issues, alors qu'il y a 5 stylos.",
+  "04-methode": "La méthode : d'abord, lire ce qu'on regarde. Le numéro ? La couleur ? Ensuite, écrire chaque résultat possible une seule fois.",
+  "05-piege": "Le piège : compter les objets au lieu des résultats. 5 stylos, mais 2 couleurs : 2 issues.",
+  "06-piege2": "Deuxième piège : écrire deux fois le même résultat. Bleu, bleu, bleu, bleu, rouge : non ! On écrit bleu une seule fois.",
+  "07-defi": "À toi de jouer. Une boîte contient 2 crayons rouges, 1 vert et 4 jaunes. On en tire un et on regarde la couleur. Quelles sont les issues ? Combien y en a-t-il ? Mets pause, et cherche !",
+  "07b-correction": "Correction. On regarde la couleur : rouge, vert, jaune. Il y a 3 issues, même s'il y a 7 crayons.",
+  "08-finale": "Ce que tu as appris. Une issue, c'est un résultat possible. On lit ce qu'on regarde, puis on écrit chaque résultat une seule fois. Les objets ne sont pas les issues. L'épisode 3 t'attend : les événements.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

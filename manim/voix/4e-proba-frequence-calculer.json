@@ -1,0 +1,13 @@
+{
+  "00-garde": "La fréquence observée. Ce que l'expérience a vraiment donné.",
+  "01-situation": "En classe, Lina lance une pièce 40 fois. Elle note chaque résultat. À la fin : 18 fois pile. Comment dire ce résultat avec un seul nombre ?",
+  "02-definition": "On calcule la fréquence de pile : le nombre de fois où pile est sorti, divisé par le nombre total de lancers.",
+  "03-calcul": "18 piles, sur 40 lancers : 18 sur 40. 18 divisé par 40 égale 0,45. En pourcentage : 0,45 fois 100 égale 45. Pile est sorti dans 45 % des lancers.",
+  "04-difference": "Attention : la fréquence, on la trouve après avoir fait l'expérience. La probabilité, on la calcule avant, sans lancer.",
+  "05-piege": "Le piège : diviser par le nombre de faces. 18 divisé par 2, ça ne veut rien dire. On divise toujours par le nombre total de lancers.",
+  "06-bornes": "Comme une probabilité, une fréquence est toujours entre 0 et 1, donc entre 0 et 100 %.",
+  "07-defi": "À toi de jouer. Hugo lance un dé 60 fois. Le 6 sort 12 fois. Quelle est la fréquence du 6, en décimal et en pourcentage ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 12 sur 60. 12 divisé par 60 égale 0,2. Et 0,2 fois 100 égale 20 : la fréquence du 6 est 20 %.",
+  "08-finale": "Ce que tu as appris. La fréquence observée, c'est le nombre de fois où le résultat est sorti, divisé par le nombre total d'essais. On la trouve après l'expérience. L'épisode suivant t'attend : comparer la fréquence et la probabilité.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

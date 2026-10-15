@@ -1,0 +1,13 @@
+{
+  "00-garde": "Le défi des fréquences. Quand on ne peut pas calculer la probabilité.",
+  "01-situation": "Un bouchon de bouteille, ça tombe à l'endroit, à l'envers, ou sur le côté. Mais impossible de calculer la probabilité : les issues ne sont pas équiprobables. Alors comment faire ?",
+  "02-idee": "On le lance beaucoup ! La classe lance le bouchon 1 000 fois. Résultat : 400 fois à l'endroit, 500 fois à l'envers, 100 fois sur le côté.",
+  "03-estimer": "Fréquence de « à l'endroit » : 400 sur 1 000, c'est 0,4, soit 40 %. Sur un si grand échantillon, la fréquence est proche de la probabilité. On estime donc la probabilité à environ 0,4.",
+  "04-prevoir": "Et ça permet de prévoir ! Sur 50 lancers demain, combien de fois à l'endroit, environ ? 40 % de 50. 0,4 fois 50 égale 20. Environ 20 fois.",
+  "05-verifier": "Vérification : 0,4 plus 0,5 plus 0,1 égale 1. Les fréquences de toutes les issues font toujours 1.",
+  "06-piege": "Le piège : dire « exactement 20 fois ». Non : environ 20. Ce n'est qu'une estimation, le hasard fera des écarts.",
+  "07-defi": "À toi de jouer. Même bouchon. Sur 200 lancers, combien de fois sur le côté, environ ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Sur le côté : 100 sur 1 000, c'est 0,1. Et 0,1 fois 200 égale 20. Environ 20 fois.",
+  "08-finale": "Ce que tu as appris. Quand on ne peut pas calculer une probabilité, on l'estime par la fréquence observée sur un grand nombre d'essais. Puis on s'en sert pour prévoir, environ. Tu as fini la série des probabilités de 4e. Bravo !",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

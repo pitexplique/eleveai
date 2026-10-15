@@ -1,0 +1,13 @@
+{
+  "00-garde": "Le défi des probabilités. Tout ce que tu as appris, dans un seul jeu.",
+  "01-situation": "Une roue numérotée de 1 à 10. Avant de la faire tourner, tu choisis ta règle. Règle A : gagner avec un nombre premier. Règle B : gagner avec un multiple de 3. Laquelle choisis-tu ?",
+  "02-issues": "D'abord, les issues : 1, 2, 3, 4, 5, 6, 7, 8, 9, 10. Il y en a 10, et elles sont équiprobables.",
+  "03-regle-a": "Règle A. Les nombres premiers sont 2, 3, 5 et 7. 4 issues favorables sur 10 : 4 sur 10, c'est 0,4, c'est 40 %.",
+  "04-regle-b": "Règle B. Les multiples de 3 sont 3, 6 et 9. 3 issues favorables sur 10 : 3 sur 10, c'est 0,3, c'est 30 %.",
+  "05-conclusion": "40 % contre 30 % : la règle A est plus favorable. Et le contraire de la règle A ? Ne pas tomber sur un nombre premier : 6 issues sur 10, 60 %.",
+  "06-piege": "Le piège : 1 n'est pas un nombre premier. Il n'a qu'un seul diviseur. Si tu le comptes, tu trouves 50 % au lieu de 40 %.",
+  "07-defi": "À toi de jouer. Même roue. Règle C : gagner avec un nombre plus grand que 7. Quelle est la probabilité, en pourcentage ? Est-elle meilleure que la règle B ? Obtenir 11, c'est quoi comme événement ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Plus grand que 7 : 8, 9 et 10, 3 issues sur 10, donc 30 %. Autant que la règle B. Et obtenir 11 : impossible, probabilité 0.",
+  "08-finale": "Ce que tu as appris. Lister les issues, repérer les favorables, calculer, convertir en pourcentage, comparer. Voilà toute la méthode. L'épisode suivant t'attend : et si on lançait vraiment ? Les fréquences.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

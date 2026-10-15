@@ -1,0 +1,13 @@
+{
+  "00-garde": "Répéter l'expérience. Plus on lance, plus l'écart se réduit.",
+  "01-situation": "On lance un dé, encore et encore, et on regarde la fréquence de chaque face. Après 10 lancers, puis 100, puis 600. Que va-t-il se passer ?",
+  "02-dix": "Après 10 lancers : le 3 est sorti 4 fois, le 5 jamais. Les barres sont toutes différentes. Les fréquences sont loin de 1 sur 6.",
+  "03-cent": "Après 100 lancers : les barres se rapprochent. Chaque face est sortie entre 12 et 21 fois.",
+  "04-six-cents": "Après 600 lancers : chaque face est sortie à peu près 100 fois. Les fréquences sont toutes proches de 1 sur 6, environ 0,17.",
+  "05-loi": "C'est la règle : quand on répète une expérience un grand nombre de fois, la fréquence observée se rapproche de la probabilité.",
+  "06-piege": "Le piège : croire que le dé se souvient. Après trois 6 de suite, le 6 n'est pas « en retard » ou « usé ». À chaque lancer, il a toujours 1 chance sur 6.",
+  "07-defi": "À toi de jouer. Trois élèves lancent une pièce. Fréquence de pile : 0,7 pour Zoé, après 10 lancers. 0,55 pour Tom, après 100 lancers. 0,51 pour Inès, après 1 000 lancers. Qui a lancé le plus, et pourquoi sa fréquence est-elle la plus proche de 0,5 ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Inès, avec 1 000 lancers. Plus on lance, plus la fréquence se rapproche de la probabilité, 0,5.",
+  "08-finale": "Ce que tu as appris. Sur peu d'essais, la fréquence peut être loin de la probabilité. Sur beaucoup d'essais, elle s'en rapproche. Le hasard n'a pas de mémoire. L'épisode suivant t'attend : ce qu'un petit échantillon ne prouve pas.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

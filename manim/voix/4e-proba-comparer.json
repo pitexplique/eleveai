@@ -1,0 +1,13 @@
+{
+  "00-garde": "Comparer des probabilités. Quel jeu est le plus favorable ?",
+  "01-situation": "À la kermesse, deux stands de pêche aux canards. Stand A : 10 canards, dont 3 gagnants. Stand B : 20 canards, dont 5 gagnants. Le stand B a plus de canards gagnants. Faut-il aller au stand B ?",
+  "02-calcul": "Calculons. Stand A : 3 sur 10. Stand B : 5 sur 20. Pour comparer, on les écrit en pourcentage.",
+  "03-pourcentages": "3 divisé par 10 égale 0,3 : 30 %. 5 divisé par 20 égale 0,25 : 25 %. 30 % est plus grand que 25 %. Le stand A est plus favorable !",
+  "04-methode": "La méthode : calculer chaque probabilité, puis les écrire de la même façon. En pourcentage, en décimal, ou en fractions de même dénominateur. Ensuite seulement, on compare.",
+  "05-fractions": "Autre façon : 3 sur 10, c'est 6 sur 20. Et 6 sur 20 est plus grand que 5 sur 20. Même conclusion.",
+  "06-piege": "Le piège : regarder seulement le nombre de gagnants. 5, c'est plus que 3. Mais il faut regarder sur combien !",
+  "07-defi": "À toi de jouer. Tu veux une bille rouge. Sac A : 2 rouges sur 5 billes. Sac B : 3 rouges sur 8 billes. Quel sac choisis-tu ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 2 divisé par 5 égale 0,4 : 40 %. 3 divisé par 8 égale 0,375 : 37,5 %. Le sac A est plus favorable.",
+  "08-finale": "Ce que tu as appris. Pour comparer deux probabilités, on les calcule, on les écrit de la même façon, puis on compare. Le nombre de gagnants seul ne suffit pas. L'épisode 8 t'attend : le défi.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

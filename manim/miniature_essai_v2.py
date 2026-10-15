@@ -532,6 +532,59 @@ def acc_proba_defi_3e(d):
     _piege3(d, "7 blancs ou 3 blancs ?", "la proportion gagne : 3/4", 54)
 
 
+# 15/10/2026 — PROBABILITÉS 4e (13 paysages, ceinture ORANGE) : le piège de l'épisode.
+def acc_proba_vocabulaire_4e(d):
+    _piege(d, "Rare = impossible ?", "non : le gros lot se gagne", 66)
+
+
+def acc_proba_issue_4e(d):
+    _piege(d, "5 stylos = 5 issues ?", "non : 2 couleurs, 2 issues", 62)
+
+
+def acc_proba_evenement_4e(d):
+    _piege(d, "Contraire de 10 = 1 ?", "non : toutes les autres", 62)
+
+
+def acc_proba_equiprobabilite_4e(d):
+    _piege(d, "2 issues = 1 chance sur 2 ?", "non : la punaise triche", 54)
+
+
+def acc_proba_calculer_fraction_4e(d):
+    _piege(d, "4 gagnants sur 16 ?", "non : 4/20 = 1/5", 66)
+
+
+def acc_proba_convertir_4e(d):
+    _piege(d, "0,5 = 5 % ?", "non : 50 %", 96)
+
+
+def acc_proba_comparer_4e(d):
+    _piege(d, "5 gagnants, c'est mieux ?", "non : 30 % > 25 %", 58)
+
+
+def acc_proba_defi_4e(d):
+    _piege(d, "1 est premier ?", "non : 40 %, pas 50 %", 76)
+
+
+def acc_proba_frequence_calculer_4e(d):
+    _piege(d, "18 piles ÷ 2 ?", "non : 18 ÷ 40 = 45 %", 76)
+
+
+def acc_proba_frequence_comparer_4e(d):
+    _piege(d, "23 % au lieu de 17 % ?", "un écart, c'est normal", 58)
+
+
+def acc_proba_frequence_repeter_4e(d):
+    _piege(d, "Le dé se souvient ?", "non : il n'a pas de mémoire", 66)
+
+
+def acc_proba_frequence_echantillon_4e(d):
+    _piege(d, "3 six sur 5 : truqué ?", "non : trop peu de lancers", 62)
+
+
+def acc_proba_frequence_defi_4e(d):
+    _piege(d, "Exactement 20 fois ?", "non : environ 20", 66)
+
+
 def acc_carre_racine_4e(d):
     """⭐ 12/10/2026 : Pythagore, épisode 2. Le carrelage de 5 sur 5 (carreaux
     orange, côté bleu), l'aller et le retour écrits ; ceinture JAUNE."""
@@ -808,6 +861,85 @@ def acc_defi_cube_4e(d):
 
 
 ESSAIS = {
+    # 15/10/2026 — probabilités 4e, 13 paysages, CEINTURE ORANGE (durée arrondie).
+    "eleveai-maths-4e-proba-vocabulaire": {
+        "badge": "MATHS · 4E", "duree": "EN 3 MIN",
+        "titre": ["LE VOCABULAIRE", "DES PROBABILITÉS"],
+        "accroche": acc_proba_vocabulaire_4e,
+        "dossier": "4e/maths/probabilites/01-vocabulaire",
+    },
+    "eleveai-maths-4e-proba-issue": {
+        "badge": "MATHS · 4E", "duree": "EN 2 MIN",
+        "titre": ["LES ISSUES", "D'UNE EXPÉRIENCE"],
+        "accroche": acc_proba_issue_4e,
+        "dossier": "4e/maths/probabilites/02-issue",
+    },
+    "eleveai-maths-4e-proba-evenement": {
+        "badge": "MATHS · 4E", "duree": "EN 2 MIN",
+        "titre": ["CERTAIN, IMPOSSIBLE", "OU CONTRAIRE ?"],
+        "accroche": acc_proba_evenement_4e,
+        "dossier": "4e/maths/probabilites/03-evenement",
+    },
+    "eleveai-maths-4e-proba-equiprobabilite": {
+        "badge": "MATHS · 4E", "duree": "EN 2 MIN",
+        "titre": ["COMPRENDRE", "L'ÉQUIPROBABILITÉ"],
+        "accroche": acc_proba_equiprobabilite_4e,
+        "dossier": "4e/maths/probabilites/04-equiprobabilite",
+    },
+    "eleveai-maths-4e-proba-calculer-fraction": {
+        "badge": "MATHS · 4E", "duree": "EN 2 MIN",
+        "titre": ["CALCULER UNE", "PROBABILITÉ"],
+        "accroche": acc_proba_calculer_fraction_4e,
+        "dossier": "4e/maths/probabilites/05-calculer-fraction",
+    },
+    "eleveai-maths-4e-proba-convertir": {
+        "badge": "MATHS · 4E", "duree": "EN 3 MIN",
+        "titre": ["UNE PROBABILITÉ", "EN POURCENTAGE"],
+        "accroche": acc_proba_convertir_4e,
+        "dossier": "4e/maths/probabilites/06-convertir",
+    },
+    "eleveai-maths-4e-proba-comparer": {
+        "badge": "MATHS · 4E", "duree": "EN 3 MIN",
+        "titre": ["QUEL JEU EST LE", "PLUS FAVORABLE ?"],
+        "accroche": acc_proba_comparer_4e,
+        "dossier": "4e/maths/probabilites/07-comparer",
+    },
+    "eleveai-maths-4e-proba-defi": {
+        "badge": "MATHS · 4E", "duree": "EN 3 MIN",
+        "titre": ["LE DÉFI DES", "PROBABILITÉS"],
+        "accroche": acc_proba_defi_4e,
+        "dossier": "4e/maths/probabilites/08-defi",
+    },
+    "eleveai-maths-4e-proba-frequence-calculer": {
+        "badge": "MATHS · 4E", "duree": "EN 2 MIN",
+        "titre": ["LA FRÉQUENCE", "OBSERVÉE"],
+        "accroche": acc_proba_frequence_calculer_4e,
+        "dossier": "4e/maths/probabilites/09-frequence-calculer",
+    },
+    "eleveai-maths-4e-proba-frequence-comparer": {
+        "badge": "MATHS · 4E", "duree": "EN 2 MIN",
+        "titre": ["FRÉQUENCE OU", "PROBABILITÉ ?"],
+        "accroche": acc_proba_frequence_comparer_4e,
+        "dossier": "4e/maths/probabilites/10-frequence-comparer",
+    },
+    "eleveai-maths-4e-proba-frequence-repeter": {
+        "badge": "MATHS · 4E", "duree": "EN 2 MIN",
+        "titre": ["PLUS ON LANCE,", "MOINS L'ÉCART"],
+        "accroche": acc_proba_frequence_repeter_4e,
+        "dossier": "4e/maths/probabilites/11-frequence-repeter",
+    },
+    "eleveai-maths-4e-proba-frequence-echantillon": {
+        "badge": "MATHS · 4E", "duree": "EN 3 MIN",
+        "titre": ["MON DÉ EST-IL", "TRUQUÉ ?"],
+        "accroche": acc_proba_frequence_echantillon_4e,
+        "dossier": "4e/maths/probabilites/12-frequence-echantillon",
+    },
+    "eleveai-maths-4e-proba-frequence-defi": {
+        "badge": "MATHS · 4E", "duree": "EN 3 MIN",
+        "titre": ["LE DÉFI DES", "FRÉQUENCES"],
+        "accroche": acc_proba_frequence_defi_4e,
+        "dossier": "4e/maths/probabilites/13-frequence-defi",
+    },
     # 15/10/2026 — probabilités 3e, 01-vocabulaire, CEINTURE VERTE.
     "eleveai-maths-3e-proba-vocabulaire": {
         "badge": "MATHS · 3E", "duree": "EN 3 MIN",

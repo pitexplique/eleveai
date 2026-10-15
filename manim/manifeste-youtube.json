@@ -4828,7 +4828,8 @@
         "collège",
         "Shorts"
       ],
-      "microId": "duree_defi"
+      "microId": "duree_defi",
+      "url": "https://youtube.com/shorts/ZvLpuAx-TBs"
     },
     {
       "id": "4e-prop-pourcentages-short-diagonale",
@@ -9395,6 +9396,1193 @@
         "maths 3e",
         "3e",
         "brevet",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "4e-proba-vocabulaire",
+      "notionId": "proba_experience",
+      "microId": "proba_vocabulaire",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/probabilites/01-vocabulaire/eleveai-maths-4e-proba-vocabulaire.mp4",
+      "miniature": "4e/maths/probabilites/01-vocabulaire/eleveai-maths-4e-proba-vocabulaire.png",
+      "titre": "Rare = impossible ? Le vocabulaire des probabilités — épisode 1 · Maths 4e",
+      "accroche": "Au badminton, on joue à pile ou face pour savoir qui sert en premier : personne ne sait ce qui va tomber, mais tout le monde sait ce qui peut tomber.\n\nDans cette vidéo :\n• expérience aléatoire, issue, événement\n• événement certain, possible, impossible\n• le piège : rare ne veut pas dire impossible\n\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : un sac de 3 billes rouges et 2 bleues : une bille verte ? une rouge ou bleue ?\n\nPour s'entraîner :\n• la feuille d'exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/proba-experience\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/proba-experience\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=proba_experience&microId=proba_vocabulaire&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Le vocabulaire des probabilités"
+        ],
+        [
+          "00:07",
+          "Pile ou face au badminton"
+        ],
+        [
+          "00:21",
+          "Une expérience aléatoire"
+        ],
+        [
+          "00:41",
+          "Les issues"
+        ],
+        [
+          "00:52",
+          "Un événement"
+        ],
+        [
+          "01:06",
+          "Certain, possible, impossible"
+        ],
+        [
+          "01:22",
+          "Le piège : rare ≠ impossible"
+        ],
+        [
+          "01:33",
+          "Défi : le sac de billes"
+        ],
+        [
+          "01:51",
+          "Correction"
+        ],
+        [
+          "02:02",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/proba-experience",
+      "tags": [
+        "vocabulaire",
+        "expérience aléatoire",
+        "issue",
+        "événement",
+        "certain",
+        "impossible",
+        "hasard",
+        "probabilités",
+        "maths",
+        "4e",
+        "collège",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "4e-proba-vocabulaire-short",
+      "notionId": "proba_experience",
+      "microId": "proba_vocabulaire",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-proba-vocabulaire",
+      "fichier": "4e/maths/probabilites/01-vocabulaire/eleveai-maths-4e-proba-vocabulaire-short.mp4",
+      "miniature": "4e/maths/probabilites/01-vocabulaire/eleveai-maths-4e-proba-vocabulaire-short.png",
+      "titre": "Hasard ou pas hasard ? 🎲 — 4e #Shorts",
+      "accroche": "Une pièce : hasard. Le lever du soleil demain : pas hasard, on le connaît déjà. Le loto : hasard. Le hasard, c'est quand on connaît les résultats possibles, mais pas celui qui va sortir.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : La note de ton prochain contrôle : hasard ou pas hasard ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n📝 La feuille d'exercices : https://www.eleveai.fr/fiches-exercices/maths/4e/proba-experience\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #4e",
+      "tags": [
+        "hasard",
+        "pile ou face",
+        "probabilités",
+        "maths 4e",
+        "4e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "4e-proba-issue",
+      "notionId": "proba_experience",
+      "microId": "proba_issue",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/probabilites/02-issue/eleveai-maths-4e-proba-issue.mp4",
+      "miniature": "4e/maths/probabilites/02-issue/eleveai-maths-4e-proba-issue.png",
+      "titre": "5 stylos = 5 issues ? Les issues d'une expérience — épisode 2 · Maths 4e",
+      "accroche": "À la kermesse, une roue est numérotée de 1 à 8. Quels résultats peuvent sortir ? Et si on tire un stylo dans une trousse ?\n\nDans cette vidéo :\n• lister les issues dans l'ordre, sans en oublier\n• lire d'abord ce qu'on regarde : le numéro ? la couleur ?\n• les pièges : compter les objets, écrire deux fois le même résultat\n\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : une boîte de 2 crayons rouges, 1 vert et 4 jaunes : quelles sont les issues ?\n\nPour s'entraîner :\n• la feuille d'exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/proba-experience\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/proba-experience\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=proba_experience&microId=proba_issue&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Les issues d'une expérience"
+        ],
+        [
+          "00:06",
+          "La roue de la kermesse"
+        ],
+        [
+          "00:18",
+          "La liste dans l'ordre"
+        ],
+        [
+          "00:28",
+          "La trousse : 2 issues, 5 stylos"
+        ],
+        [
+          "00:47",
+          "La méthode"
+        ],
+        [
+          "00:59",
+          "Piège 1 : compter les objets"
+        ],
+        [
+          "01:08",
+          "Piège 2 : écrire deux fois"
+        ],
+        [
+          "01:19",
+          "Défi : les crayons"
+        ],
+        [
+          "01:37",
+          "Correction"
+        ],
+        [
+          "01:47",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/proba-experience",
+      "tags": [
+        "issues",
+        "expérience aléatoire",
+        "résultats possibles",
+        "lister",
+        "probabilités",
+        "maths",
+        "4e",
+        "collège",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "4e-proba-issue-short",
+      "notionId": "proba_experience",
+      "microId": "proba_issue",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-proba-issue",
+      "fichier": "4e/maths/probabilites/02-issue/eleveai-maths-4e-proba-issue-short.mp4",
+      "miniature": "4e/maths/probabilites/02-issue/eleveai-maths-4e-proba-issue-short.png",
+      "titre": "6 chaussettes = 6 issues ? 🧦 — 4e #Shorts",
+      "accroche": "5 chaussettes noires et 1 rouge, dans le noir. 6 résultats possibles ? Non ! On regarde la couleur : noire ou rouge. 2 issues.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : On tire une lettre du mot COCO : combien d'issues ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n📝 La feuille d'exercices : https://www.eleveai.fr/fiches-exercices/maths/4e/proba-experience\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #4e",
+      "tags": [
+        "issues",
+        "chaussettes",
+        "probabilités",
+        "maths 4e",
+        "4e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "4e-proba-evenement",
+      "notionId": "proba_experience",
+      "microId": "proba_evenement",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/probabilites/03-evenement/eleveai-maths-4e-proba-evenement.mp4",
+      "miniature": "4e/maths/probabilites/03-evenement/eleveai-maths-4e-proba-evenement.png",
+      "titre": "Contraire de 10 = 1 ? Certain, impossible, contraire — épisode 3 · Maths 4e",
+      "accroche": "10 cartes numérotées de 1 à 10 dans un chapeau. Tu gagnes si le numéro est pair : quelles cartes te font gagner ?\n\nDans cette vidéo :\n• les issues qui réalisent un événement\n• événement certain, événement impossible\n• l'événement contraire : toutes les autres issues\n\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : les cartes de 1 à 10 : « obtenir un multiple de 3 » et son contraire\n\nPour s'entraîner :\n• la feuille d'exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/proba-experience\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/proba-experience\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=proba_experience&microId=proba_evenement&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Les événements"
+        ],
+        [
+          "00:06",
+          "10 cartes dans un chapeau"
+        ],
+        [
+          "00:18",
+          "Les cartes qui font gagner"
+        ],
+        [
+          "00:28",
+          "Un événement certain"
+        ],
+        [
+          "00:36",
+          "Un événement impossible"
+        ],
+        [
+          "00:43",
+          "L'événement contraire"
+        ],
+        [
+          "01:06",
+          "Le piège"
+        ],
+        [
+          "01:17",
+          "Défi : multiple de 3"
+        ],
+        [
+          "01:32",
+          "Correction"
+        ],
+        [
+          "01:47",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/proba-experience",
+      "tags": [
+        "événement",
+        "événement contraire",
+        "certain",
+        "impossible",
+        "cartes",
+        "probabilités",
+        "maths",
+        "4e",
+        "collège",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "4e-proba-evenement-short",
+      "notionId": "proba_experience",
+      "microId": "proba_evenement",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-proba-evenement",
+      "fichier": "4e/maths/probabilites/03-evenement/eleveai-maths-4e-proba-evenement-short.mp4",
+      "miniature": "4e/maths/probabilites/03-evenement/eleveai-maths-4e-proba-evenement-short.png",
+      "titre": "Le contraire de « faire 6 » au dé ? 🎲 — 4e #Shorts",
+      "accroche": "Le contraire de « faire un 6 », ce n'est pas « faire un 1 » ! C'est « ne pas faire un 6 » : 1, 2, 3, 4 ou 5. Toutes les autres faces.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Au dé, quel est le contraire de « faire plus de 3 » ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n📝 La feuille d'exercices : https://www.eleveai.fr/fiches-exercices/maths/4e/proba-experience\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #4e",
+      "tags": [
+        "événement contraire",
+        "dé",
+        "probabilités",
+        "maths 4e",
+        "4e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "4e-proba-equiprobabilite",
+      "notionId": "proba_experience",
+      "microId": "proba_equiprobabilite",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/probabilites/04-equiprobabilite/eleveai-maths-4e-proba-equiprobabilite.mp4",
+      "miniature": "4e/maths/probabilites/04-equiprobabilite/eleveai-maths-4e-proba-equiprobabilite.png",
+      "titre": "2 issues = 1 chance sur 2 ? L'équiprobabilité — épisode 4 · Maths 4e",
+      "accroche": "Qui fait la vaisselle ce soir ? Un prénom est écrit 3 fois dans le chapeau, l'autre une seule fois. Le tirage est-il juste ?\n\nDans cette vidéo :\n• des issues équiprobables : toutes ont la même chance\n• dé équilibré, pièce normale… et la punaise qui triche\n• le piège : 2 issues ne veut pas dire 1 chance sur 2\n\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : sac A (3 rouges, 3 bleues) ou sac B (4 rouges, 2 bleues) : où les couleurs sont-elles équiprobables ?\n\nPour s'entraîner :\n• la feuille d'exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/proba-experience\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/proba-experience\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=proba_experience&microId=proba_equiprobabilite&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "L'équiprobabilité"
+        ],
+        [
+          "00:06",
+          "Qui fait la vaisselle ?"
+        ],
+        [
+          "00:24",
+          "Pas la même chance"
+        ],
+        [
+          "00:37",
+          "Des issues équiprobables"
+        ],
+        [
+          "00:53",
+          "La punaise"
+        ],
+        [
+          "01:04",
+          "Le piège : 2 issues ≠ 1/2"
+        ],
+        [
+          "01:16",
+          "La méthode"
+        ],
+        [
+          "01:28",
+          "Défi : les deux sacs"
+        ],
+        [
+          "01:47",
+          "Correction"
+        ],
+        [
+          "02:00",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/proba-experience",
+      "tags": [
+        "équiprobabilité",
+        "équiprobable",
+        "même chance",
+        "tirage au sort",
+        "probabilités",
+        "maths",
+        "4e",
+        "collège",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "4e-proba-equiprobabilite-short",
+      "notionId": "proba_experience",
+      "microId": "proba_equiprobabilite",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-proba-equiprobabilite",
+      "fichier": "4e/maths/probabilites/04-equiprobabilite/eleveai-maths-4e-proba-equiprobabilite-short.mp4",
+      "miniature": "4e/maths/probabilites/04-equiprobabilite/eleveai-maths-4e-proba-equiprobabilite-short.png",
+      "titre": "Une punaise : 1 chance sur 2 ? 📌 — 4e #Shorts",
+      "accroche": "Pointe en haut ou sur le côté : 2 issues. Mais la punaise tombe bien plus souvent sur le côté. Pas la même chance : pas équiprobables !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Une tartine qui tombe, côté confiture : 1 chance sur 2 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n📝 La feuille d'exercices : https://www.eleveai.fr/fiches-exercices/maths/4e/proba-experience\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #4e",
+      "tags": [
+        "punaise",
+        "équiprobabilité",
+        "probabilités",
+        "maths 4e",
+        "4e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "4e-proba-calculer-fraction",
+      "notionId": "proba_experience",
+      "microId": "proba_calculer_fraction",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/probabilites/05-calculer-fraction/eleveai-maths-4e-proba-calculer-fraction.mp4",
+      "miniature": "4e/maths/probabilites/05-calculer-fraction/eleveai-maths-4e-proba-calculer-fraction.png",
+      "titre": "4 sur 16 ? Calculer une probabilité — épisode 5 · Maths 4e",
+      "accroche": "À la tombola de la kermesse, il reste 20 tickets dont 4 gagnants. Quelle est ta chance de gagner ?\n\nDans cette vidéo :\n• probabilité = issues favorables ÷ total (issues équiprobables)\n• 4/20 = 1/5, et avec un dé : 2/6 = 1/3\n• le piège : diviser par le total, pas par les autres\n\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : un sac de 12 billes (5 rouges, 4 bleues, 3 vertes) : probabilité de tirer une bleue ?\n\nPour s'entraîner :\n• la feuille d'exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/proba-experience\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/proba-experience\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=proba_experience&microId=proba_calculer_fraction&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Calculer une probabilité"
+        ],
+        [
+          "00:06",
+          "La tombola de la kermesse"
+        ],
+        [
+          "00:17",
+          "Favorables sur total"
+        ],
+        [
+          "00:30",
+          "4/20 = 1/5"
+        ],
+        [
+          "00:46",
+          "Avec un dé"
+        ],
+        [
+          "01:02",
+          "Le piège"
+        ],
+        [
+          "01:17",
+          "Toujours entre 0 et 1"
+        ],
+        [
+          "01:26",
+          "Défi : le sac de billes"
+        ],
+        [
+          "01:41",
+          "Correction"
+        ],
+        [
+          "01:52",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/proba-experience",
+      "tags": [
+        "calculer une probabilité",
+        "fraction",
+        "tombola",
+        "issues favorables",
+        "probabilités",
+        "maths",
+        "4e",
+        "collège",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "4e-proba-calculer-fraction-short",
+      "notionId": "proba_experience",
+      "microId": "proba_calculer_fraction",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-proba-calculer-fraction",
+      "fichier": "4e/maths/probabilites/05-calculer-fraction/eleveai-maths-4e-proba-calculer-fraction-short.mp4",
+      "miniature": "4e/maths/probabilites/05-calculer-fraction/eleveai-maths-4e-proba-calculer-fraction-short.png",
+      "titre": "1 chance sur 3 de tirer le rouge ? ✏️ — 4e #Shorts",
+      "accroche": "3 stylos bleus et 1 rouge dans la trousse. 1 chance sur 3 ? Non ! 1 rouge sur 4 stylos en tout : 1 chance sur 4. On divise toujours par le total.\n\n🥋 Ceinture jaune.\n👉 À toi : 2 stylos rouges et 6 bleus : quelle chance de tirer un rouge ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n📝 La feuille d'exercices : https://www.eleveai.fr/fiches-exercices/maths/4e/proba-experience\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #4e",
+      "tags": [
+        "probabilité",
+        "fraction",
+        "trousse",
+        "maths 4e",
+        "4e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "4e-proba-convertir",
+      "notionId": "proba_experience",
+      "microId": "proba_convertir",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/probabilites/06-convertir/eleveai-maths-4e-proba-convertir.mp4",
+      "miniature": "4e/maths/probabilites/06-convertir/eleveai-maths-4e-proba-convertir.png",
+      "titre": "0,5 = 5 % ? Une probabilité en décimal et en pourcentage — épisode 6 · Maths 4e",
+      "accroche": "La météo annonce 25 % de pluie pour le match, ton ami dit « 1 chance sur 4 ». Qui a raison ?\n\nDans cette vidéo :\n• fraction → décimal : on divise (1 ÷ 4 = 0,25)\n• décimal → pourcentage : on multiplie par 100 (25 %)\n• le piège : 0,5, c'est 50 %, pas 5 %\n\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : écrire 3/5 en décimal puis en pourcentage\n\nPour s'entraîner :\n• la feuille d'exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/proba-experience\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/proba-experience\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=proba_experience&microId=proba_convertir&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Trois écritures, un seul nombre"
+        ],
+        [
+          "00:08",
+          "La météo du match"
+        ],
+        [
+          "00:20",
+          "Fraction, décimal, pourcentage"
+        ],
+        [
+          "00:31",
+          "De la fraction au décimal"
+        ],
+        [
+          "00:44",
+          "Du décimal au pourcentage"
+        ],
+        [
+          "01:01",
+          "Pile ou face"
+        ],
+        [
+          "01:14",
+          "Le piège"
+        ],
+        [
+          "01:28",
+          "Défi : 3/5"
+        ],
+        [
+          "01:43",
+          "Correction"
+        ],
+        [
+          "01:59",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/proba-experience",
+      "tags": [
+        "pourcentage",
+        "nombre décimal",
+        "fraction",
+        "convertir",
+        "probabilités",
+        "maths",
+        "4e",
+        "collège",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "4e-proba-convertir-short",
+      "notionId": "proba_experience",
+      "microId": "proba_convertir",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-proba-convertir",
+      "fichier": "4e/maths/probabilites/06-convertir/eleveai-maths-4e-proba-convertir-short.mp4",
+      "miniature": "4e/maths/probabilites/06-convertir/eleveai-maths-4e-proba-convertir-short.png",
+      "titre": "1 chance sur 4, c'est 4 % ? ☔ — 4e #Shorts",
+      "accroche": "Non ! 1 ÷ 4 = 0,25. Et 0,25 × 100 = 25. 1 chance sur 4, c'est 25 %.\n\n🥋 Ceinture jaune.\n👉 À toi : 1 chance sur 5, c'est combien de pour cent ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n📝 La feuille d'exercices : https://www.eleveai.fr/fiches-exercices/maths/4e/proba-experience\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #4e",
+      "tags": [
+        "pourcentage",
+        "fraction",
+        "probabilité",
+        "maths 4e",
+        "4e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "4e-proba-comparer",
+      "notionId": "proba_experience",
+      "microId": "proba_comparer",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/probabilites/07-comparer/eleveai-maths-4e-proba-comparer.mp4",
+      "miniature": "4e/maths/probabilites/07-comparer/eleveai-maths-4e-proba-comparer.png",
+      "titre": "Plus de gagnants = plus de chances ? Comparer des probabilités — épisode 7 · Maths 4e",
+      "accroche": "À la kermesse, deux pêches aux canards : 3 gagnants sur 10, ou 5 gagnants sur 20. Le stand B a plus de canards gagnants… faut-il y aller ?\n\nDans cette vidéo :\n• calculer chaque probabilité\n• les écrire de la même façon : pourcentage, décimal, même dénominateur\n• le piège : regarder seulement le nombre de gagnants\n\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : 2 billes rouges sur 5 ou 3 sur 8 : quel sac choisir ?\n\nPour s'entraîner :\n• la feuille d'exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/proba-experience\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/proba-experience\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=proba_experience&microId=proba_comparer&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Comparer des probabilités"
+        ],
+        [
+          "00:06",
+          "La pêche aux canards"
+        ],
+        [
+          "00:23",
+          "On calcule"
+        ],
+        [
+          "00:35",
+          "En pourcentage"
+        ],
+        [
+          "00:53",
+          "La méthode"
+        ],
+        [
+          "01:08",
+          "Même dénominateur"
+        ],
+        [
+          "01:19",
+          "Le piège"
+        ],
+        [
+          "01:30",
+          "Défi : les deux sacs"
+        ],
+        [
+          "01:47",
+          "Correction"
+        ],
+        [
+          "02:05",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/proba-experience",
+      "tags": [
+        "comparer des probabilités",
+        "jeu favorable",
+        "kermesse",
+        "pourcentage",
+        "probabilités",
+        "maths",
+        "4e",
+        "collège",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "4e-proba-comparer-short",
+      "notionId": "proba_experience",
+      "microId": "proba_comparer",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-proba-comparer",
+      "fichier": "4e/maths/probabilites/07-comparer/eleveai-maths-4e-proba-comparer-short.mp4",
+      "miniature": "4e/maths/probabilites/07-comparer/eleveai-maths-4e-proba-comparer-short.png",
+      "titre": "Quelle tombola choisir ? 🎟️ — 4e #Shorts",
+      "accroche": "5 gagnants sur 20, c'est 25 %. 1 gagnant sur 3, c'est environ 33 %. La tombola B, même avec un seul gagnant !\n\n🥋 Ceinture jaune.\n👉 À toi : 3 chances sur 10, ou 1 chance sur 4 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n📝 La feuille d'exercices : https://www.eleveai.fr/fiches-exercices/maths/4e/proba-experience\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #4e",
+      "tags": [
+        "tombola",
+        "comparer",
+        "probabilités",
+        "maths 4e",
+        "4e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "4e-proba-defi",
+      "notionId": "proba_experience",
+      "microId": "proba_defi",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/probabilites/08-defi/eleveai-maths-4e-proba-defi.mp4",
+      "miniature": "4e/maths/probabilites/08-defi/eleveai-maths-4e-proba-defi.png",
+      "titre": "1 est premier ? Le défi des probabilités — épisode 8 · Maths 4e",
+      "accroche": "Une roue de 1 à 10 : tu gagnes avec un nombre premier, ou avec un multiple de 3. Quelle règle choisir ?\n\nDans cette vidéo :\n• lister les issues, repérer les favorables\n• calculer, convertir en pourcentage, comparer\n• le piège : 1 n'est pas un nombre premier\n\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : la règle C, « plus grand que 7 », et l'événement « obtenir 11 »\n\nPour s'entraîner :\n• la feuille d'exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/proba-experience\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/proba-experience\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=proba_experience&microId=proba_defi&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Le défi des probabilités"
+        ],
+        [
+          "00:07",
+          "La roue de 1 à 10"
+        ],
+        [
+          "00:23",
+          "Les issues"
+        ],
+        [
+          "00:36",
+          "Règle A : nombre premier"
+        ],
+        [
+          "00:50",
+          "Règle B : multiple de 3"
+        ],
+        [
+          "01:04",
+          "Quelle règle choisir ?"
+        ],
+        [
+          "01:19",
+          "Le piège du 1"
+        ],
+        [
+          "01:31",
+          "Défi : la règle C"
+        ],
+        [
+          "01:52",
+          "Correction"
+        ],
+        [
+          "02:08",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/proba-experience",
+      "tags": [
+        "défi",
+        "nombres premiers",
+        "roue",
+        "comparer",
+        "probabilités",
+        "maths",
+        "4e",
+        "collège",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "4e-proba-defi-short",
+      "notionId": "proba_experience",
+      "microId": "proba_defi",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-proba-defi",
+      "fichier": "4e/maths/probabilites/08-defi/eleveai-maths-4e-proba-defi-short.mp4",
+      "miniature": "4e/maths/probabilites/08-defi/eleveai-maths-4e-proba-defi-short.png",
+      "titre": "Pair, ou plus grand que 6 ? 🎡 — 4e #Shorts",
+      "accroche": "Pair : 2, 4, 6, 8, 10, 5 chances sur 10. Plus grand que 6 : 7, 8, 9, 10, 4 chances sur 10. Pair gagne !\n\n🥋 Ceinture jaune.\n👉 À toi : « Multiple de 3 » ou « plus petit que 4 » ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n📝 La feuille d'exercices : https://www.eleveai.fr/fiches-exercices/maths/4e/proba-experience\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #4e",
+      "tags": [
+        "roue",
+        "pari",
+        "probabilités",
+        "maths 4e",
+        "4e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "4e-proba-frequence-calculer",
+      "notionId": "proba_frequence",
+      "microId": "proba_frequence_calculer",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/probabilites/09-frequence-calculer/eleveai-maths-4e-proba-frequence-calculer.mp4",
+      "miniature": "4e/maths/probabilites/09-frequence-calculer/eleveai-maths-4e-proba-frequence-calculer.png",
+      "titre": "18 piles ÷ 2 ? La fréquence observée — épisode 9 · Maths 4e",
+      "accroche": "En classe, une élève lance une pièce 40 fois et obtient 18 fois pile. Comment dire ce résultat avec un seul nombre ?\n\nDans cette vidéo :\n• fréquence = nombre de fois ÷ nombre total d'essais\n• 18/40 = 0,45 = 45 %\n• la fréquence se trouve APRÈS l'expérience, la probabilité AVANT\n\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : un dé lancé 60 fois, le 6 sort 12 fois : quelle fréquence ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/proba-frequence\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=proba_frequence&microId=proba_frequence_calculer&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "La fréquence observée"
+        ],
+        [
+          "00:06",
+          "40 lancers d'une pièce"
+        ],
+        [
+          "00:19",
+          "La définition"
+        ],
+        [
+          "00:28",
+          "Le calcul : 18 ÷ 40"
+        ],
+        [
+          "00:47",
+          "Après ou avant ?"
+        ],
+        [
+          "00:58",
+          "Le piège : diviser par 2"
+        ],
+        [
+          "01:10",
+          "Entre 0 et 1"
+        ],
+        [
+          "01:18",
+          "Défi : le dé"
+        ],
+        [
+          "01:34",
+          "Correction"
+        ],
+        [
+          "01:50",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/proba-frequence",
+      "tags": [
+        "fréquence",
+        "fréquence observée",
+        "pile ou face",
+        "statistiques",
+        "probabilités",
+        "maths",
+        "4e",
+        "collège",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "4e-proba-frequence-calculer-short",
+      "notionId": "proba_frequence",
+      "microId": "proba_frequence_calculer",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-proba-frequence-calculer",
+      "fichier": "4e/maths/probabilites/09-frequence-calculer/eleveai-maths-4e-proba-frequence-calculer-short.mp4",
+      "miniature": "4e/maths/probabilites/09-frequence-calculer/eleveai-maths-4e-proba-frequence-calculer-short.png",
+      "titre": "Un bouchon lancé 50 fois 🍾 — 4e #Shorts",
+      "accroche": "30 fois à l'endroit sur 50 lancers. 30 ÷ 50 = 0,6. Et 0,6 × 100 = 60 : le bouchon est tombé à l'endroit dans 60 % des lancers.\n\n🥋 Ceinture jaune.\n👉 À toi : 20 fois à l'endroit sur 80 lancers : combien de pour cent ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n📝 La fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/proba-frequence\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #4e",
+      "tags": [
+        "fréquence",
+        "bouchon",
+        "pourcentage",
+        "maths 4e",
+        "4e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "4e-proba-frequence-comparer",
+      "notionId": "proba_frequence",
+      "microId": "proba_frequence_comparer",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/probabilites/10-frequence-comparer/eleveai-maths-4e-proba-frequence-comparer.mp4",
+      "miniature": "4e/maths/probabilites/10-frequence-comparer/eleveai-maths-4e-proba-frequence-comparer.png",
+      "titre": "Mon dé n'obéit pas aux maths ? Fréquence et probabilité — épisode 10 · Maths 4e",
+      "accroche": "Un dé lancé 60 fois : le 6 sort 14 fois. « Mon dé n'obéit pas aux maths ! » A-t-il raison ?\n\nDans cette vidéo :\n• le calculé : 1/6 ≈ 0,17\n• l'observé : 14/60 ≈ 0,23\n• un écart est normal : la probabilité dit ce qui se passe en moyenne\n\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : une pièce lancée 100 fois donne 47 piles : fréquence, probabilité, écart ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/proba-frequence\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=proba_frequence&microId=proba_frequence_comparer&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Observé ou calculé ?"
+        ],
+        [
+          "00:07",
+          "60 lancers de dé"
+        ],
+        [
+          "00:18",
+          "D'abord le calculé"
+        ],
+        [
+          "00:33",
+          "Ensuite l'observé"
+        ],
+        [
+          "00:46",
+          "Un écart, c'est normal"
+        ],
+        [
+          "01:07",
+          "La méthode"
+        ],
+        [
+          "01:17",
+          "Le piège"
+        ],
+        [
+          "01:27",
+          "Défi : 47 piles"
+        ],
+        [
+          "01:44",
+          "Correction"
+        ],
+        [
+          "02:00",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/proba-frequence",
+      "tags": [
+        "fréquence",
+        "probabilité",
+        "écart",
+        "dé",
+        "probabilités",
+        "maths",
+        "4e",
+        "collège",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "4e-proba-frequence-comparer-short",
+      "notionId": "proba_frequence",
+      "microId": "proba_frequence_comparer",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-proba-frequence-comparer",
+      "fichier": "4e/maths/probabilites/10-frequence-comparer/eleveai-maths-4e-proba-frequence-comparer-short.mp4",
+      "miniature": "4e/maths/probabilites/10-frequence-comparer/eleveai-maths-4e-proba-frequence-comparer-short.png",
+      "titre": "1 chance sur 2… donc 5 piles sur 10 ? 🪙 — 4e #Shorts",
+      "accroche": "10 lancers : 7 piles ! La probabilité dit 50 %, mais 10 lancers, c'est trop peu. Le hasard fait des écarts.\n\n🥋 Ceinture jaune.\n👉 À toi : Lance une pièce 10 fois : combien de piles ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n📝 La fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/proba-frequence\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #4e",
+      "tags": [
+        "pile ou face",
+        "fréquence",
+        "probabilité",
+        "maths 4e",
+        "4e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "4e-proba-frequence-repeter",
+      "notionId": "proba_frequence",
+      "microId": "proba_frequence_repeter",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/probabilites/11-frequence-repeter/eleveai-maths-4e-proba-frequence-repeter.mp4",
+      "miniature": "4e/maths/probabilites/11-frequence-repeter/eleveai-maths-4e-proba-frequence-repeter.png",
+      "titre": "Le dé se souvient ? Répéter l'expérience — épisode 11 · Maths 4e",
+      "accroche": "On lance un dé, encore et encore : après 10 lancers, puis 100, puis 600. Que deviennent les fréquences ?\n\nDans cette vidéo :\n• sur peu d'essais, la fréquence est loin de la probabilité\n• sur beaucoup d'essais, elle s'en rapproche\n• le piège : le dé n'a pas de mémoire\n\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : trois élèves, 10, 100 et 1 000 lancers : qui est le plus proche de 0,5 ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/proba-frequence\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=proba_frequence&microId=proba_frequence_repeter&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Répéter l'expérience"
+        ],
+        [
+          "00:08",
+          "On lance, encore et encore"
+        ],
+        [
+          "00:20",
+          "Après 10 lancers"
+        ],
+        [
+          "00:33",
+          "Après 100 lancers"
+        ],
+        [
+          "00:41",
+          "Après 600 lancers"
+        ],
+        [
+          "00:52",
+          "La règle"
+        ],
+        [
+          "01:02",
+          "Le piège : pas de mémoire"
+        ],
+        [
+          "01:16",
+          "Défi : trois élèves"
+        ],
+        [
+          "01:44",
+          "Correction"
+        ],
+        [
+          "01:57",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/proba-frequence",
+      "tags": [
+        "fréquence",
+        "loi des grands nombres",
+        "600 lancers",
+        "dé",
+        "probabilités",
+        "maths",
+        "4e",
+        "collège",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "4e-proba-frequence-repeter-short",
+      "notionId": "proba_frequence",
+      "microId": "proba_frequence_repeter",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-proba-frequence-repeter",
+      "fichier": "4e/maths/probabilites/11-frequence-repeter/eleveai-maths-4e-proba-frequence-repeter-short.mp4",
+      "miniature": "4e/maths/probabilites/11-frequence-repeter/eleveai-maths-4e-proba-frequence-repeter-short.png",
+      "titre": "600 lancers de dé 🎲 — 4e #Shorts",
+      "accroche": "Au début, tout est en désordre. Puis les barres montent, et elles s'alignent : 600 lancers, à peu près 100 fois chaque face.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Sur 6 000 lancers, combien de 6 environ ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n📝 La fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/proba-frequence\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #4e",
+      "tags": [
+        "600 lancers",
+        "dé",
+        "fréquence",
+        "maths 4e",
+        "4e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "4e-proba-frequence-echantillon",
+      "notionId": "proba_frequence",
+      "microId": "proba_frequence_echantillon",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/probabilites/12-frequence-echantillon/eleveai-maths-4e-proba-frequence-echantillon.mp4",
+      "miniature": "4e/maths/probabilites/12-frequence-echantillon/eleveai-maths-4e-proba-frequence-echantillon.png",
+      "titre": "3 six sur 5 : mon dé est truqué ? Les petits échantillons — épisode 12 · Maths 4e",
+      "accroche": "Avant une partie de petits chevaux, un joueur fait 3 six en 5 lancers : « Mon dé est truqué ! » A-t-il la preuve ?\n\nDans cette vidéo :\n• un petit échantillon ne prouve rien : le hasard y fait de gros écarts\n• 600 lancers : 104 six, très proche de 1/6\n• sur un grand échantillon, un gros écart devient suspect\n\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : 4 piles sur 5, ou 700 piles sur 1 000 : qui peut soupçonner sa pièce ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/proba-frequence\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=proba_frequence&microId=proba_frequence_echantillon&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Les petits échantillons"
+        ],
+        [
+          "00:06",
+          "Avant les petits chevaux"
+        ],
+        [
+          "00:19",
+          "La fréquence du 6"
+        ],
+        [
+          "00:34",
+          "Le hasard fait des surprises"
+        ],
+        [
+          "00:49",
+          "Il faut beaucoup de lancers"
+        ],
+        [
+          "01:09",
+          "La méthode"
+        ],
+        [
+          "01:21",
+          "Le piège"
+        ],
+        [
+          "01:32",
+          "Défi : deux pièces"
+        ],
+        [
+          "01:50",
+          "Correction"
+        ],
+        [
+          "02:06",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/proba-frequence",
+      "tags": [
+        "échantillon",
+        "fréquence",
+        "dé truqué",
+        "petits chevaux",
+        "probabilités",
+        "maths",
+        "4e",
+        "collège",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "4e-proba-frequence-echantillon-short",
+      "notionId": "proba_frequence",
+      "microId": "proba_frequence_echantillon",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-proba-frequence-echantillon",
+      "fichier": "4e/maths/probabilites/12-frequence-echantillon/eleveai-maths-4e-proba-frequence-echantillon-short.mp4",
+      "miniature": "4e/maths/probabilites/12-frequence-echantillon/eleveai-maths-4e-proba-frequence-echantillon-short.png",
+      "titre": "3 six sur 5 : dé truqué ? 🎲 — 4e #Shorts",
+      "accroche": "Pas forcément ! 5 lancers, c'est trop peu, le hasard fait des surprises. Il faut des centaines de lancers pour conclure.\n\n🥋 Ceinture jaune.\n👉 À toi : 300 six sur 600 lancers : ce dé est-il truqué ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n📝 La fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/proba-frequence\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #4e",
+      "tags": [
+        "dé truqué",
+        "échantillon",
+        "fréquence",
+        "maths 4e",
+        "4e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "4e-proba-frequence-defi",
+      "notionId": "proba_frequence",
+      "microId": "proba_frequence_defi",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/probabilites/13-frequence-defi/eleveai-maths-4e-proba-frequence-defi.mp4",
+      "miniature": "4e/maths/probabilites/13-frequence-defi/eleveai-maths-4e-proba-frequence-defi.png",
+      "titre": "Exactement 20 fois ? Le défi des fréquences — épisode 13 · Maths 4e",
+      "accroche": "Un bouchon de bouteille tombe à l'endroit, à l'envers ou sur le côté. Impossible de calculer la probabilité : alors comment faire ?\n\nDans cette vidéo :\n• estimer une probabilité par la fréquence sur 1 000 lancers\n• prévoir : 0,4 × 50 = environ 20\n• le piège : c'est environ, pas exactement\n\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : sur 200 lancers, combien de fois sur le côté ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/proba-frequence\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=proba_frequence&microId=proba_frequence_defi&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Le défi des fréquences"
+        ],
+        [
+          "00:06",
+          "Un bouchon qui tombe"
+        ],
+        [
+          "00:21",
+          "On le lance 1 000 fois"
+        ],
+        [
+          "00:33",
+          "Estimer la probabilité"
+        ],
+        [
+          "00:51",
+          "Prévoir : 50 lancers"
+        ],
+        [
+          "01:09",
+          "Vérification : total 1"
+        ],
+        [
+          "01:20",
+          "Le piège : « exactement »"
+        ],
+        [
+          "01:32",
+          "Défi : 200 lancers"
+        ],
+        [
+          "01:47",
+          "Correction"
+        ],
+        [
+          "02:01",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/proba-frequence",
+      "tags": [
+        "défi",
+        "estimer une probabilité",
+        "fréquence",
+        "bouchon",
+        "probabilités",
+        "maths",
+        "4e",
+        "collège",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "4e-proba-frequence-defi-short",
+      "notionId": "proba_frequence",
+      "microId": "proba_frequence_defi",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-proba-frequence-defi",
+      "fichier": "4e/maths/probabilites/13-frequence-defi/eleveai-maths-4e-proba-frequence-defi-short.mp4",
+      "miniature": "4e/maths/probabilites/13-frequence-defi/eleveai-maths-4e-proba-frequence-defi-short.png",
+      "titre": "Une punaise lancée 1 000 fois 📌 — 4e #Shorts",
+      "accroche": "620 fois pointe en haut sur 1 000 : 0,62. Sur 100 lancers demain : 0,62 × 100 = 62. Environ 62 fois. Pas exactement : environ !\n\n🥋 Ceinture jaune.\n👉 À toi : Sur 500 lancers, combien de fois pointe en haut, environ ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n📝 La fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/proba-frequence\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #4e",
+      "tags": [
+        "punaise",
+        "estimer",
+        "fréquence",
+        "maths 4e",
+        "4e",
         "collège",
         "eleveai",
         "maths visuel",

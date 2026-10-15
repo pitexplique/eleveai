@@ -235,6 +235,44 @@ SHORTS["eleveai-maths-3e-proba-defi-short"] = {
 }
 CEINTURE_SHORT["eleveai-maths-3e-proba-defi-short"] = "jaune"
 
+# 15/10/2026 — PROBABILITÉS 4e : les 13 shorts jumeaux (blanche si tout se voit, jaune dès un calcul).
+_PROBA_4E = [
+    ("01-vocabulaire", "vocabulaire", "blanche", ['HASARD', 'OU PAS ?'], "tu as 3 secondes",
+     [("pièce : hasard", 80, BLEU), ("soleil : pas hasard", 70, ORANGE), ("et ton contrôle ?", 76, VERT)]),
+    ("02-issue", "issue", "blanche", ['LE TIROIR', 'MYSTÈRE'], "5 noires, 1 rouge",
+     [("6 chaussettes", 90, BLEU), ("= 6 issues ?", 90, ROUGE), ("non : 2 !", 110, VERT)]),
+    ("03-evenement", "evenement", "blanche", ['LE CONTRAIRE', 'DE 6 ?'], "au dé",
+     [("contraire de 6", 86, BLEU), ("= 1 ?", 110, ROUGE), ("1, 2, 3, 4, 5 !", 86, VERT)]),
+    ("04-equiprobabilite", "equiprobabilite", "blanche", ['POINTE', 'EN HAUT ?'], "1 chance sur 2… vraiment ?",
+     [("la punaise", 100, BLEU), ("= 1/2 ?", 110, ROUGE), ("non !", 120, VERT)]),
+    ("05-calculer-fraction", "calculer-fraction", "jaune", ['3 BLEUS,', '1 ROUGE'], "1 chance sur 3 ?",
+     [("1 rouge", 100, BLEU), ("= 1/3 ?", 110, ROUGE), ("non : 1/4", 110, VERT)]),
+    ("06-convertir", "convertir", "jaune", ['1 SUR 4', '= 4 % ?'], "un quart en pourcentage",
+     [("1 ÷ 4 = 0,25", 90, BLEU), ("× 100", 100, ORANGE), ("25 % !", 120, VERT)]),
+    ("07-comparer", "comparer", "jaune", ['QUELLE', 'TOMBOLA ?'], "5 gagnants ou 1 seul ?",
+     [("A : 5/20", 100, BLEU), ("B : 1/3", 100, BLEU), ("B gagne !", 100, VERT)]),
+    ("08-defi", "defi", "jaune", ['SUR QUOI', 'TU PARIES ?'], "la roue de 1 à 10",
+     [("pair : 5/10", 96, BLEU), ("plus de 6 : 4/10", 80, ORANGE), ("pair gagne !", 96, VERT)]),
+    ("09-frequence-calculer", "frequence-calculer", "jaune", ['LE', 'BOUCHON'], "30 fois sur 50",
+     [("30/50", 110, BLEU), ("30 ÷ 50 = 0,6", 90, ORANGE), ("60 % !", 120, VERT)]),
+    ("10-frequence-comparer", "frequence-comparer", "jaune", ['5 PILES', 'SUR 10 ?'], "c'est sûr ?",
+     [("1/2 = 50 %", 96, BLEU), ("10 lancers…", 90, ORANGE), ("7 piles !", 110, VERT)]),
+    ("11-frequence-repeter", "frequence-repeter", "blanche", ['600', 'LANCERS !'], "regarde les barres",
+     [("10 lancers : désordre", 70, ORANGE), ("600 lancers :", 90, BLEU), ("≈ 100 chacune", 90, VERT)]),
+    ("12-frequence-echantillon", "frequence-echantillon", "jaune", ['MON DÉ', 'EST TRUQUÉ ?'], "3 six sur 5 lancers",
+     [("3 six sur 5", 100, BLEU), ("truqué ?", 100, ROUGE), ("trop peu !", 110, VERT)]),
+    ("13-frequence-defi", "frequence-defi", "jaune", ['LA', 'PUNAISE'], "620 fois sur 1 000",
+     [("620/1 000", 100, BLEU), ("sur 100 lancers ?", 80, ORANGE), ("≈ 62 fois", 110, VERT)]),
+]
+for _dos, _ep, _c, _titre, _sous, _acc4 in _PROBA_4E:
+    _nom = f"eleveai-maths-4e-proba-{_ep}-short"
+    SHORTS[_nom] = {
+        "badge": "PROBABILITÉS · 4E", "titre": _titre, "taille": 92, "sous": _sous, "taille_sous": 44,
+        "couleur_sous": ORANGE, "accroche": _acc(_acc4), "dossier": "4e/maths/fr",
+        "sortie": f"4e/maths/probabilites/{_dos}",
+    }
+    CEINTURE_SHORT[_nom] = _c
+
 
 def main():
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")

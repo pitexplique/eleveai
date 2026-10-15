@@ -1,0 +1,13 @@
+{
+  "00-garde": "Une probabilité en décimal et en pourcentage. Trois écritures, un seul nombre.",
+  "01-situation": "La météo annonce 25 % de risque de pluie pour le match de dimanche. Ton ami dit : « 1 chance sur 4 ». Qui a raison ?",
+  "02-idee": "Les deux ! Une probabilité peut s'écrire en fraction, en nombre décimal, ou en pourcentage. C'est le même nombre, écrit de trois façons.",
+  "03-decimal": "De la fraction au décimal : on divise. 1 sur 4, c'est 1 divisé par 4. 1 divisé par 4 égale 0,25.",
+  "04-pourcentage": "Du décimal au pourcentage : on multiplie par 100. 0,25 fois 100 égale 25. Donc 25 %. 1 sur 4, 0,25 et 25 % : c'est le même nombre.",
+  "05-exemple": "Pile ou face : 1 sur 2. 1 divisé par 2 égale 0,5. Et 0,5 fois 100 égale 50 : 50 %.",
+  "06-piege": "Le piège : 0,5, ce n'est pas 5 %. C'est 50 %. Et 1 sur 4, ce n'est pas 4 %. Un pourcentage se lit sur 100.",
+  "07-defi": "À toi de jouer. La probabilité de tirer une bille rouge est 3 sur 5. Écris-la en décimal, puis en pourcentage. Mets pause, et cherche !",
+  "07b-correction": "Correction. 3 divisé par 5 égale 0,6. Et 0,6 fois 100 égale 60. Donc 3 sur 5, c'est 0,6, c'est 60 %.",
+  "08-finale": "Ce que tu as appris. Une probabilité s'écrit en fraction, en décimal ou en pourcentage. Fraction vers décimal : on divise. Décimal vers pourcentage : on multiplie par 100. L'épisode 7 t'attend : comparer deux probabilités.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}
