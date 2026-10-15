@@ -186,8 +186,10 @@ def composer(h):
     av = avatar_rond(k(132))
     im.paste(av, (marge, bas - av.height), av)
     tx = marge + av.width + 26
-    d.text((tx, bas - k(112)), "Frédéric Lacoste", font=NOIR(k(38)), fill=ENCRE)
-    d.text((tx, bas - k(62)), "prof de maths au collège, à La Réunion", font=GRAS(k(30)), fill=GRIS)
+    # 15/10 : « concepteur d'eleveai.fr » sous le nom (demande de Frédéric).
+    d.text((tx, bas - k(136)), "Frédéric Lacoste", font=NOIR(k(38)), fill=ENCRE)
+    d.text((tx, bas - k(88)), "prof de maths au collège, à La Réunion", font=GRAS(k(30)), fill=GRIS)
+    d.text((tx, bas - k(50)), "concepteur d'eleveai.fr", font=GRAS(k(30)), fill=ORANGE)
     tm = Image.open(TI_MARGO).convert("RGBA")
     tm_h = k(190)
     tm = tm.resize((int(tm.width * tm_h / tm.height), tm_h), Image.LANCZOS)
@@ -227,8 +229,9 @@ def composer_partage():
     # La signature, en bas à gauche
     av = avatar_rond(92)
     im.paste(av, (marge, LH - 40 - av.height), av)
-    d.text((marge + av.width + 18, LH - 40 - 78), "Frédéric Lacoste", font=NOIR(28), fill=ENCRE)
-    d.text((marge + av.width + 18, LH - 40 - 40), "prof de maths au collège", font=GRAS(24), fill=GRIS)
+    d.text((marge + av.width + 18, LH - 40 - 96), "Frédéric Lacoste", font=NOIR(28), fill=ENCRE)
+    d.text((marge + av.width + 18, LH - 40 - 60), "prof de maths au collège", font=GRAS(22), fill=GRIS)
+    d.text((marge + av.width + 18, LH - 40 - 32), "concepteur d'eleveai.fr", font=GRAS(22), fill=ORANGE)
 
     # La colonne de droite : l'offre, puis l'action
     x0, x1 = gauche + marge + 50, LW - marge
