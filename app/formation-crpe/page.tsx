@@ -861,6 +861,36 @@ export default function FormationCrpePage() {
           </div>
         </div>
 
+        {/* ── OU UN SUIVI INDIVIDUEL ─────────────────────────────────────────
+            ⭐ 16/10/2026, Frédéric : « je peux aussi suivre les élèves tous les
+            jours, c'est ce que je fais avec une fille qui veut passer le
+            concours ». ⛔ RIEN D'INVENTÉ : ni prix, ni rythme, ni outil. La page
+            dit que ça existe et renvoie au téléphone ; le jour où il fixe un
+            tarif, il s'écrit ici. */}
+        <div
+          id="suivi"
+          className="mt-6 scroll-mt-24 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-amber-200 sm:p-7"
+        >
+          <p className="text-xs font-black uppercase tracking-wide text-orange-600">
+            Le samedi ne vous convient pas&nbsp;?
+          </p>
+          <h2 className="mt-1 text-lg font-black text-slate-900 sm:text-xl">
+            👤 Ou un suivi individuel, au quotidien
+          </h2>
+          <p className="mt-3 text-sm font-semibold leading-7 text-slate-700">
+            Je peux aussi vous suivre chaque jour, individuellement, sur les
+            mathématiques de l&apos;épreuve — c&apos;est ce que je fais déjà avec
+            une candidate. Le rythme et le tarif se décident ensemble&nbsp;:
+            appelez-moi, on en parle.
+          </p>
+          <a
+            href="tel:+262692742958"
+            className="mt-4 inline-block rounded-2xl bg-[#041B33] px-6 py-3 text-sm font-black text-white transition hover:bg-[#0b2d52]"
+          >
+            📞 06 92 74 29 58
+          </a>
+        </div>
+
         {/* ── LE CALENDRIER ──────────────────────────────────────────────── */}
         {/* ⭐ L'ANCRE `#calendrier` EST NOUVELLE (23/08) : c'est la cible du
             second bouton du hero. Sans elle il n'y avait aucun moyen de sauter
