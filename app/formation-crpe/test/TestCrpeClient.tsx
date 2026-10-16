@@ -26,6 +26,10 @@ export default function TestCrpeClient() {
     () => QUESTIONS.map(() => null),
   );
   const [fini, setFini] = useState(false);
+  // ⭐ 16/10/2026, Frédéric : « avant de commencer le test tu peux proposer de
+  // te connecter ». On PROPOSE, on n'impose pas : « Commencer sans compte »
+  // reste un bouton à égalité. Connecté, l'écran ne s'affiche pas.
+  const [parti, setParti] = useState(false);
   const [enregistrement, setEnregistrement] = useState<
     "rien" | "en_cours" | "ok" | "erreur"
   >("rien");
@@ -83,9 +87,68 @@ export default function TestCrpeClient() {
     }
   }
 
+  if (!eleve?.token && !parti) {
+    return (
+      <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200/70 sm:p-7">
+        <h2 className="text-xl font-black text-slate-900">Avant de commencer</h2>
+        <p className="mt-2 text-sm font-semibold leading-7 text-slate-600">
+          Connecté, votre bilan s&apos;enregistre sur votre compte et vous le
+          retrouvez quand vous voulez. Sans compte, il s&apos;affiche à la fin,
+          et vous pouvez l&apos;imprimer ou l&apos;enregistrer en PDF.
+        </p>
+        <div className="mt-5 flex flex-wrap gap-3">
+          {/* `?next=` : la page de connexion ramène ici (app/auth/signin). */}
+          <Link
+            href="/auth/signin?next=/formation-crpe/test"
+            onClick={() => track("crpe_test_connexion")}
+            className="rounded-2xl bg-sky-600 px-6 py-3 text-sm font-black text-white transition hover:bg-sky-500"
+          >
+            Me connecter
+          </Link>
+          <Link
+            href="/auth/signup"
+            onClick={() => track("crpe_test_inscription")}
+            className="rounded-2xl bg-white px-6 py-3 text-sm font-black text-sky-700 ring-1 ring-sky-200 transition hover:bg-sky-50"
+          >
+            Créer un compte gratuit
+          </Link>
+          <button
+            type="button"
+            onClick={() => {
+              track("crpe_test_sans_compte");
+              setParti(true);
+            }}
+            className="rounded-2xl bg-orange-500 px-6 py-3 text-sm font-black text-white shadow-lg shadow-orange-500/20 transition hover:bg-orange-400"
+          >
+            Commencer sans compte →
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   if (fini) {
     return (
-      <div>
+      // ⭐ IMPRIMER PLUTÔT QUE TÉLÉCHARGER (16/10/2026). `window.print()` ne
+      // coûte rien — ni bibliothèque PDF dans le paquet, ni serveur — et la
+      // fenêtre d'impression propose « Enregistrer au format PDF » : un seul
+      // bouton fait les deux. La règle `@media print` n'affiche que ce bloc.
+      <div id="bilan-crpe">
+        <style>{`@media print {
+          body * { visibility: hidden !important; }
+          #bilan-crpe, #bilan-crpe * { visibility: visible !important; }
+          #bilan-crpe { position: absolute; left: 0; top: 0; width: 100%; }
+          #bilan-crpe * { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-shadow: none !important; }
+        }`}</style>
+        <div className="mb-4 hidden print:block">
+          <p className="text-lg font-black text-slate-900">
+            Test de positionnement — les maths du CRPE
+          </p>
+          <p className="text-sm font-semibold text-slate-600">
+            Passé le {new Date().toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}
+            {" "}· eleveai.fr/formation-crpe
+          </p>
+        </div>
         <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200/70 sm:p-7">
           <p className="text-xs font-black uppercase tracking-wide text-orange-600">Votre bilan</p>
           <p className="mt-1 text-5xl font-black text-slate-900">
@@ -106,7 +169,7 @@ export default function TestCrpeClient() {
           {enregistrement === "erreur" && (
             <p className="mt-3 rounded-xl bg-rose-50 px-4 py-2 text-sm font-bold text-rose-800">
               Le bilan n&apos;a pas pu être enregistré. Il reste affiché ici :
-              faites-en une capture si vous voulez le garder.
+              imprimez-le ou enregistrez-le en PDF pour le garder.
             </p>
           )}
         </div>
@@ -139,8 +202,28 @@ export default function TestCrpeClient() {
           })}
         </ol>
 
+        {/* Sur papier seulement : un bilan imprimé circule, il dit où venir. */}
+        <p className="mt-5 hidden text-sm font-semibold text-slate-700 print:block">
+          Les maths du CRPE, le samedi de 8 h à 12 h à l&apos;Hôtel Terre-Sainte
+          (Saint-Pierre) · eleveai.fr/formation-crpe · 06 92 74 29 58
+        </p>
+
+        <button
+          type="button"
+          onClick={() => {
+            track("crpe_test_imprimer");
+            window.print();
+          }}
+          className="mt-5 w-full rounded-2xl bg-white px-6 py-3.5 text-base font-black text-slate-800 ring-1 ring-slate-300 transition hover:bg-slate-50 print:hidden"
+        >
+          🖨️ Imprimer ou enregistrer en PDF
+        </button>
+        <p className="mt-2 text-center text-xs font-semibold text-slate-500 print:hidden">
+          Pour le PDF : choisissez « Enregistrer au format PDF » comme imprimante.
+        </p>
+
         {!eleve?.token && (
-          <div className="mt-6 rounded-3xl bg-sky-50 p-6 shadow-sm ring-1 ring-sky-200">
+          <div className="mt-6 rounded-3xl bg-sky-50 p-6 shadow-sm ring-1 ring-sky-200 print:hidden">
             <h2 className="text-lg font-black text-sky-950">Garder ce bilan</h2>
             <p className="mt-2 text-sm font-semibold leading-7 text-slate-700">
               Avec un compte gratuit, le bilan s&apos;enregistre, et tout ce que
@@ -156,7 +239,7 @@ export default function TestCrpeClient() {
           </div>
         )}
 
-        <div className="mt-6 rounded-3xl bg-[#041B33] p-6 text-white shadow-xl sm:p-7">
+        <div className="mt-6 rounded-3xl bg-[#041B33] p-6 text-white shadow-xl sm:p-7 print:hidden">
           <h2 className="text-xl font-black">Travailler ces thèmes avec moi, le samedi</h2>
           <p className="mt-2 text-sm font-semibold leading-7 text-white/75">
             Apportez ce bilan à la première séance où vous venez&nbsp;: on part
