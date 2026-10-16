@@ -15,12 +15,56 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { track } from "@vercel/analytics";
 import { useEleve } from "@/context/EleveContext";
 import { saveResultat } from "@/lib/resultats";
-import { QUESTIONS, THEMES } from "./questions";
+import { QUESTIONS, THEMES, type Question, type Theme } from "./questions";
+import { QUESTIONS_ORTHO, THEMES_ORTHO } from "./orthographe";
 import FigureCrpe from "./FiguresCrpe";
 
 const LETTRES = ["A", "B", "C", "D"];
 
-export default function TestCrpeClient() {
+// ⭐ 16/10/2026 — UN MOTEUR, DEUX TESTS. Le test d'orthographe reprend tout
+// (connexion proposée, correction immédiate, bilan, impression) ; seuls
+// changent les questions, l'enregistrement et les textes ci-dessous.
+type NomTest = "maths" | "orthographe";
+const TESTS: Record<NomTest, {
+  questions: Question[];
+  themes: Theme[];
+  chemin: string;
+  cle: string;
+  activite: "parcours_maths" | "parcours_francais";
+  matiere: string;
+  idTest: string;
+  titreImpression: string;
+  texteBilan: string;
+}> = {
+  maths: {
+    questions: QUESTIONS,
+    themes: THEMES,
+    chemin: "/formation-crpe/test",
+    cle: "crpe_test",
+    activite: "parcours_maths",
+    matiere: "maths",
+    idTest: "positionnement-crpe",
+    titreImpression: "Test de positionnement — les maths du CRPE",
+    texteBilan:
+      "Ce score ne classe personne. Ce qui compte, c'est la liste du dessous : les thèmes en rouge sont les samedis à ne pas manquer, ceux en vert sont ceux que vous pourriez presque sauter.",
+  },
+  orthographe: {
+    questions: QUESTIONS_ORTHO,
+    themes: THEMES_ORTHO,
+    chemin: "/formation-crpe/test-orthographe",
+    cle: "crpe_ortho",
+    activite: "parcours_francais",
+    matiere: "francais",
+    idTest: "orthographe-crpe",
+    titreImpression: "Test d'orthographe — CRPE",
+    texteBilan:
+      "Au CRPE, la qualité de la langue compte dans la note des épreuves écrites, maths comprises. Les thèmes en rouge sont ceux à revoir en premier : chacun renvoie à une fiche de cours gratuite.",
+  },
+};
+
+export default function TestCrpeClient({ test = "maths" }: { test?: NomTest }) {
+  const T = TESTS[test];
+  const { questions: QUESTIONS, themes: THEMES } = T;
   const { eleve } = useEleve();
   const [rang, setRang] = useState(0);
   const [reponses, setReponses] = useState<(number | null)[]>(
@@ -58,22 +102,22 @@ export default function TestCrpeClient() {
   useEffect(() => {
     if (!fini || dejaEnregistre.current) return;
     dejaEnregistre.current = true;
-    track("crpe_test_fini", { score });
+    track(`${T.cle}_fini`, { score });
     if (!eleve?.token) return;
     setEnregistrement("en_cours");
-    saveResultat(eleve, "parcours_maths", {
+    saveResultat(eleve, T.activite, {
       classe: "crpe",
-      niveau: "positionnement",
-      matiere: "maths",
+      niveau: test === "maths" ? "positionnement" : "orthographe",
+      matiere: T.matiere,
       score,
       total: QUESTIONS.length,
       details: {
-        test: "positionnement-crpe",
+        test: T.idTest,
         themes: bilan.map(({ id, titre, justes, total }) => ({ id, titre, justes, total })),
         reponses,
       },
     }).then(({ error }) => setEnregistrement(error ? "erreur" : "ok"));
-  }, [fini, eleve, score, bilan, reponses]);
+  }, [fini, eleve, score, bilan, reponses, T, test, QUESTIONS.length]);
 
   function choisir(i: number) {
     if (choisi !== null) return;
@@ -100,15 +144,15 @@ export default function TestCrpeClient() {
         <div className="mt-5 flex flex-wrap gap-3">
           {/* `?next=` : la page de connexion ramène ici (app/auth/signin). */}
           <Link
-            href="/auth/signin?next=/formation-crpe/test"
-            onClick={() => track("crpe_test_connexion")}
+            href={`/auth/signin?next=${T.chemin}`}
+            onClick={() => track(`${T.cle}_connexion`)}
             className="rounded-2xl bg-sky-600 px-6 py-3 text-sm font-black text-white transition hover:bg-sky-500"
           >
             Me connecter
           </Link>
           <Link
             href="/auth/signup"
-            onClick={() => track("crpe_test_inscription")}
+            onClick={() => track(`${T.cle}_inscription`)}
             className="rounded-2xl bg-white px-6 py-3 text-sm font-black text-sky-700 ring-1 ring-sky-200 transition hover:bg-sky-50"
           >
             Créer un compte gratuit
@@ -116,7 +160,7 @@ export default function TestCrpeClient() {
           <button
             type="button"
             onClick={() => {
-              track("crpe_test_sans_compte");
+              track(`${T.cle}_sans_compte`);
               setParti(true);
             }}
             className="rounded-2xl bg-orange-500 px-6 py-3 text-sm font-black text-white shadow-lg shadow-orange-500/20 transition hover:bg-orange-400"
@@ -143,7 +187,7 @@ export default function TestCrpeClient() {
         }`}</style>
         <div className="mb-4 hidden print:block">
           <p className="text-lg font-black text-slate-900">
-            Test de positionnement — les maths du CRPE
+            {T.titreImpression}
           </p>
           <p className="text-sm font-semibold text-slate-600">
             Passé le {new Date().toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}
@@ -157,9 +201,7 @@ export default function TestCrpeClient() {
             <span className="text-2xl text-slate-400"> / {QUESTIONS.length}</span>
           </p>
           <p className="mt-3 text-sm font-semibold leading-7 text-slate-600">
-            Ce score ne classe personne. Ce qui compte, c&apos;est la liste du
-            dessous&nbsp;: les thèmes en rouge sont les samedis à ne pas manquer,
-            ceux en vert sont ceux que vous pourriez presque sauter.
+            {T.texteBilan}
           </p>
           {enregistrement === "ok" && (
             <p className="mt-3 rounded-xl bg-emerald-50 px-4 py-2 text-sm font-bold text-emerald-800">
@@ -191,9 +233,19 @@ export default function TestCrpeClient() {
                 <span aria-hidden className={`h-3 w-3 shrink-0 rounded-full ${etat.p}`} />
                 <div className="min-w-0 flex-1">
                   <p className="text-base font-black text-slate-900">{t.titre}</p>
-                  <p className="text-xs font-bold uppercase tracking-wide text-slate-400">
-                    Séance du {t.seance}
-                  </p>
+                  {t.seance && (
+                    <p className="text-xs font-bold uppercase tracking-wide text-slate-400">
+                      Séance du {t.seance}
+                    </p>
+                  )}
+                  {t.lien && (
+                    <Link
+                      href={t.lien.href}
+                      className="text-xs font-bold text-sky-700 underline underline-offset-2 hover:text-sky-900"
+                    >
+                      {t.lien.label} →
+                    </Link>
+                  )}
                 </div>
                 <span className={`shrink-0 rounded-full px-3 py-1 text-xs font-black ${etat.c}`}>
                   {etat.mot} · {t.justes}/{t.total}
@@ -212,7 +264,7 @@ export default function TestCrpeClient() {
         <button
           type="button"
           onClick={() => {
-            track("crpe_test_imprimer");
+            track(`${T.cle}_imprimer`);
             window.print();
           }}
           className="mt-5 w-full rounded-2xl bg-white px-6 py-3.5 text-base font-black text-slate-800 ring-1 ring-slate-300 transition hover:bg-slate-50 print:hidden"
@@ -240,27 +292,55 @@ export default function TestCrpeClient() {
           </div>
         )}
 
-        <div className="mt-6 rounded-3xl bg-[#041B33] p-6 text-white shadow-xl sm:p-7 print:hidden">
-          <h2 className="text-xl font-black">Travailler ces thèmes avec moi, le samedi</h2>
-          <p className="mt-2 text-sm font-semibold leading-7 text-white/75">
-            Apportez ce bilan à la première séance où vous venez&nbsp;: on part
-            de vos rouges, pas d&apos;un programme générique.
-          </p>
-          <div className="mt-4 flex flex-wrap gap-3">
-            <Link
-              href="/formation-crpe#inscription"
-              className="rounded-2xl bg-amber-400 px-6 py-3 text-sm font-black text-[#041B33] transition hover:bg-amber-300"
-            >
-              Rejoindre le groupe du samedi →
-            </Link>
-            <Link
-              href="/formation-crpe#calendrier"
-              className="rounded-2xl bg-white/10 px-6 py-3 text-sm font-black text-white ring-1 ring-white/25 transition hover:bg-white/20"
-            >
-              Voir les samedis
-            </Link>
+        {test === "maths" ? (
+          <div className="mt-6 rounded-3xl bg-[#041B33] p-6 text-white shadow-xl sm:p-7 print:hidden">
+            <h2 className="text-xl font-black">Travailler ces thèmes avec moi, le samedi</h2>
+            <p className="mt-2 text-sm font-semibold leading-7 text-white/75">
+              Apportez ce bilan à la première séance où vous venez&nbsp;: on part
+              de vos rouges, pas d&apos;un programme générique.
+            </p>
+            <div className="mt-4 flex flex-wrap gap-3">
+              <Link
+                href="/formation-crpe#inscription"
+                className="rounded-2xl bg-amber-400 px-6 py-3 text-sm font-black text-[#041B33] transition hover:bg-amber-300"
+              >
+                Rejoindre le groupe du samedi →
+              </Link>
+              <Link
+                href="/formation-crpe/test-orthographe"
+                className="rounded-2xl bg-white/10 px-6 py-3 text-sm font-black text-white ring-1 ring-white/25 transition hover:bg-white/20"
+              >
+                Et l&apos;orthographe ? Le test (10 min)
+              </Link>
+            </div>
           </div>
-        </div>
+        ) : (
+          // ⚠️ La formation du samedi, c'est les MATHS : ce bloc ne promet pas
+          // de cours d'orthographe. Il dit seulement le vrai lien entre les
+          // deux — une copie de maths se lit aussi, et se note aussi.
+          <div className="mt-6 rounded-3xl bg-[#041B33] p-6 text-white shadow-xl sm:p-7 print:hidden">
+            <h2 className="text-xl font-black">Une copie de maths se lit aussi</h2>
+            <p className="mt-2 text-sm font-semibold leading-7 text-white/75">
+              Hypoténuse, parallèle, isocèle&nbsp;: les mots des maths
+              s&apos;écrivent juste, et la phrase qui conclut un calcul aussi.
+              Où en êtes-vous en maths&nbsp;?
+            </p>
+            <div className="mt-4 flex flex-wrap gap-3">
+              <Link
+                href="/formation-crpe/test"
+                className="rounded-2xl bg-amber-400 px-6 py-3 text-sm font-black text-[#041B33] transition hover:bg-amber-300"
+              >
+                Faire le test de maths →
+              </Link>
+              <Link
+                href="/formation-crpe"
+                className="rounded-2xl bg-white/10 px-6 py-3 text-sm font-black text-white ring-1 ring-white/25 transition hover:bg-white/20"
+              >
+                La préparation du samedi
+              </Link>
+            </div>
+          </div>
+        )}
       </div>
     );
   }

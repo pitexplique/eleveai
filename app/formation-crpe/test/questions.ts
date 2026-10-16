@@ -20,8 +20,11 @@
 export type Theme = {
   id: string;
   titre: string;
-  /** La séance qui traite le thème — recopiée de SEANCES. */
-  seance: string;
+  /** La séance qui traite le thème — recopiée de SEANCES (test de maths). */
+  seance?: string;
+  /** Ou une ressource du site (test d'orthographe, 16/10 : la formation du
+   *  samedi, c'est les maths — ses thèmes renvoient à une fiche gratuite). */
+  lien?: { label: string; href: string };
 };
 
 export const THEMES: Theme[] = [

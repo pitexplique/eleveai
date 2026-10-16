@@ -819,6 +819,18 @@ export default function FormationCrpePage() {
             >
               Faire le test →
             </Link>
+            {/* ⭐ 16/10 : le test d'orthographe — au CRPE, la langue compte
+                dans la note, maths comprises (Frédéric : « c'est compté »). */}
+            <p className="mt-4 text-sm font-semibold leading-6 text-slate-700">
+              L&apos;orthographe compte aussi dans la note, maths comprises
+              (hypoténuse, parallèle…).{" "}
+              <Link
+                href="/formation-crpe/test-orthographe"
+                className="font-black text-sky-700 underline underline-offset-2 hover:text-sky-900"
+              >
+                Le test d&apos;orthographe →
+              </Link>
+            </p>
           </div>
           <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200/70 sm:p-7">
             <p className="text-xs font-black uppercase tracking-wide text-emerald-700">
