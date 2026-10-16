@@ -16,6 +16,7 @@ import { track } from "@vercel/analytics";
 import { useEleve } from "@/context/EleveContext";
 import { saveResultat } from "@/lib/resultats";
 import { QUESTIONS, THEMES } from "./questions";
+import FigureCrpe from "./FiguresCrpe";
 
 const LETTRES = ["A", "B", "C", "D"];
 
@@ -282,6 +283,7 @@ export default function TestCrpeClient() {
 
       <div className="mt-5 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200/70 sm:p-7">
         <p className="text-lg font-black leading-8 text-slate-900">{q.enonce}</p>
+        {q.figure && <FigureCrpe figure={q.figure} />}
 
         <div className="mt-5 grid gap-3">
           {q.choix.map((c, i) => {

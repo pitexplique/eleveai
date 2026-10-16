@@ -44,6 +44,10 @@ export type Question = {
   bonne: number;
   /** La correction, en une ou deux phrases : le calcul, puis le piège. */
   correction: string;
+  /** Une figure sous l'énoncé (FiguresCrpe.tsx). 16/10 : Frédéric demande
+   *  des schémas pour Pythagore et Thalès — un texte seul ne suffit pas à qui
+   *  a peur des maths. */
+  figure?: "pythagore" | "thales";
 };
 
 export const QUESTIONS: Question[] = [
@@ -111,6 +115,7 @@ export const QUESTIONS: Question[] = [
   {
     theme: "geometrie",
     enonce: "Un triangle a des côtés de 5 cm, 12 cm et 13 cm. Est-il rectangle ?",
+    figure: "pythagore",
     choix: [
       "Oui, car 5² + 12² = 13²",
       "Oui, car 13 est le plus grand côté",
@@ -123,6 +128,7 @@ export const QUESTIONS: Question[] = [
   {
     theme: "geometrie",
     enonce: "Dans un triangle ABC, M est sur [AB] et N sur [AC], avec (MN) parallèle à (BC). AM = 3 cm, AB = 5 cm et BC = 10 cm. Combien mesure MN ?",
+    figure: "thales",
     choix: ["4 cm", "5 cm", "6 cm", "8 cm"],
     bonne: 2,
     correction: "Théorème de Thalès : MN ÷ BC = AM ÷ AB = 3 ÷ 5, donc MN = 10 × 3 ÷ 5 = 6 cm.",
