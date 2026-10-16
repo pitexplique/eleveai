@@ -320,6 +320,7 @@ export default function TestCrpeClient() {
           >
             <p className="font-black">{choisi === q.bonne ? "Juste." : "Pas tout à fait."}</p>
             <p className="mt-1">{q.correction}</p>
+            {q.figureCorrection && <FigureCrpe figure={q.figureCorrection} />}
           </div>
         )}
 

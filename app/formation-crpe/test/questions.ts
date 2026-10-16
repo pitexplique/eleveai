@@ -47,7 +47,10 @@ export type Question = {
   /** Une figure sous l'énoncé (FiguresCrpe.tsx). 16/10 : Frédéric demande
    *  des schémas pour Pythagore et Thalès — un texte seul ne suffit pas à qui
    *  a peur des maths. */
-  figure?: "pythagore" | "thales";
+  figure?: "pythagore" | "thales" | "echelle" | "mediane" | "des";
+  /** Une figure qui n'apparaît QU'APRÈS la réponse, avec la correction :
+   *  le tableau des 36 issues donnerait la réponse s'il était montré avant. */
+  figureCorrection?: "des-tableau";
 };
 
 export const QUESTIONS: Question[] = [
@@ -77,6 +80,7 @@ export const QUESTIONS: Question[] = [
   {
     theme: "proportionnalite",
     enonce: "Sur une carte à l'échelle 1/25 000, deux villages sont à 6 cm l'un de l'autre. Quelle est la distance réelle ?",
+    figure: "echelle",
     choix: ["150 m", "15 km", "1,5 km", "4,2 km"],
     bonne: 2,
     correction: "6 × 25 000 = 150 000 cm, soit 1 500 m, soit 1,5 km. L'erreur fréquente est dans la conversion, pas dans le produit.",
@@ -137,6 +141,7 @@ export const QUESTIONS: Question[] = [
   {
     theme: "donnees",
     enonce: "Voici cinq notes : 8, 10, 15, 9, 18. Quelle est leur médiane ?",
+    figure: "mediane",
     choix: ["9", "10", "12", "15"],
     bonne: 1,
     correction: "On range d'abord : 8, 9, 10, 15, 18. La valeur du milieu est 10. 15 est le milieu de la liste NON rangée, 12 est la moyenne.",
@@ -144,6 +149,8 @@ export const QUESTIONS: Question[] = [
   {
     theme: "donnees",
     enonce: "On lance deux dés équilibrés à 6 faces. Quelle est la probabilité que la somme des deux faces soit 7 ?",
+    figure: "des",
+    figureCorrection: "des-tableau",
     choix: ["1/11", "1/12", "7/36", "1/6"],
     bonne: 3,
     correction: "36 issues équiprobables, dont 6 donnent 7 : (1;6), (2;5), (3;4), (4;3), (5;2), (6;1). 6/36 = 1/6. Les 11 sommes possibles ne sont pas équiprobables.",
