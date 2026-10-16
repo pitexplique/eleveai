@@ -1136,6 +1136,69 @@ export default function AccueilMatieres() {
         phrase={matiere.phrase}
       />
 
+      {/* ⭐ 16/10/2026 — LA BANDE CRPE, SOUS « COURS ET EXERCICES CORRIGÉS ».
+          Frédéric : « mettre plus en avant formation adulte avec le CRPE […] en
+          dessous de la section cours et exercices corrigés ». Elle REMPLACE le
+          bandeau du bas de page du 15/10 (un seul encart, pas deux).
+          ⚠️ Il revient ainsi sur la décision du 21/08 (« pas d'offre payante au
+          premier écran ») : d'où UNE ligne fine, et pas une 4e colonne — les
+          classes restent juste dessous, et la bande s'enlève en une ligne
+          quand le groupe est complet.
+          Maths et français seulement : ce sont les deux tests du CRPE. */}
+      {(matiere.id === "maths" || matiere.id === "francais") && (
+        // ⭐ 16/10, suite : « la bannière doit annoncer les tests, le samedi, et
+        // à gauche […] margouillat avec diplôme ». Les DEUX tests gratuits,
+        // puis le samedi ; Ti Margo diplômé (scripts/ti-margo-diplome.py).
+        <div className="bg-[#041B33] px-3 py-3 text-white sm:px-4">
+          <div className="mx-auto flex max-w-5xl items-center gap-3 sm:gap-5">
+            <Image
+              src="/images/ti-margo-diplome.png"
+              alt="Ti Margo, le margouillat d'EleveAI, en toque de diplômé, un diplôme sous le bras"
+              width={335}
+              height={520}
+              sizes="64px"
+              className="h-20 w-auto shrink-0 sm:h-24"
+            />
+            <div className="min-w-0 flex-1">
+              <p className="text-xs font-black uppercase tracking-wide text-amber-300">
+                CRPE 2027 · futurs professeurs des écoles
+              </p>
+              <p className="mt-0.5 text-sm font-bold leading-6">
+                Testez-vous gratuitement en maths et en orthographe, puis
+                préparez les maths le samedi matin à Saint-Pierre, dès le 24
+                octobre.
+              </p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                <Link
+                  prefetch={false}
+                  href="/formation-crpe/test?from=accueil"
+                  onClick={() => track("accueil_bande_crpe", { lien: "test-maths", matiere: matiere.id })}
+                  className="rounded-full bg-amber-400 px-4 py-1.5 text-xs font-black text-[#041B33] transition hover:bg-amber-300"
+                >
+                  Test de maths
+                </Link>
+                <Link
+                  prefetch={false}
+                  href="/formation-crpe/test-orthographe?from=accueil"
+                  onClick={() => track("accueil_bande_crpe", { lien: "test-ortho", matiere: matiere.id })}
+                  className="rounded-full bg-amber-400 px-4 py-1.5 text-xs font-black text-[#041B33] transition hover:bg-amber-300"
+                >
+                  Test d&apos;orthographe
+                </Link>
+                <Link
+                  prefetch={false}
+                  href="/formation-crpe?from=accueil"
+                  onClick={() => track("accueil_bande_crpe", { lien: "formation", matiere: matiere.id })}
+                  className="rounded-full bg-white/10 px-4 py-1.5 text-xs font-black text-white ring-1 ring-white/25 transition hover:bg-white/20"
+                >
+                  Le samedi →
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* ⭐ LE PANNEAU DÉCLARE QU'IL EST PILOTÉ PAR L'ONGLET OUVERT. `role` et
           `aria-labelledby` ferment la boucle commencée par `aria-controls` sur
           les onglets : un lecteur d'écran annonce « Évaluation, onglet
@@ -1154,40 +1217,6 @@ export default function AccueilMatieres() {
         {action === "photo" && <PanneauPhoto />}
         {action === "lecon" && <PanneauLecon matiere={matiere} />}
 
-        {/* ⭐ 15/10/2026 — LA PUB CRPE, EN BAS ET DISCRÈTE. Frédéric voulait la
-            pub sur l'accueil ; elle y est, mais SOUS le panneau : l'accueil
-            sert d'abord les élèves, et une offre payante ne prend pas le
-            premier écran (décision du 21/08, voir PORTES_ADULTE dans
-            lib/matrice/ressources.ts). L'image est celle du partage de
-            /formation-crpe — un seul visuel, régénéré par
-            scripts/pub-crpe-instagram.py. */}
-        <Link
-          prefetch={false}
-          href="/formation-crpe?from=accueil"
-          onClick={() => track("accueil_pub_crpe")}
-          className="mt-10 flex flex-col items-center gap-4 overflow-hidden rounded-2xl bg-white p-3 shadow-sm ring-1 ring-slate-200 transition hover:shadow-md hover:ring-orange-300 sm:flex-row sm:p-4"
-        >
-          <Image
-            src="/images/formation-crpe-partage-1200x630.jpg"
-            alt="CRPE 2027, épreuve de maths, La Réunion : le samedi matin à Saint-Pierre, 60 € la matinée"
-            width={1200}
-            height={630}
-            sizes="(min-width: 640px) 320px, 100vw"
-            loading="lazy"
-            className="w-full rounded-xl sm:w-80"
-          />
-          <div className="px-1 text-center sm:text-left">
-            <p className="text-xs font-black uppercase tracking-wide text-orange-600">
-              Futurs professeurs des écoles
-            </p>
-            <p className="mt-1 text-lg font-black text-slate-900">
-              Les maths du CRPE, le samedi matin à Saint-Pierre
-            </p>
-            <p className="mt-1 text-sm font-semibold text-slate-600">
-              Test gratuit de 15 minutes pour savoir où vous en êtes →
-            </p>
-          </div>
-        </Link>
 
         <footer className="pt-10">
           <ul className="flex flex-wrap justify-center gap-x-4 gap-y-1.5 text-xs text-slate-600">
