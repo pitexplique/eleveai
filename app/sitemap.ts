@@ -77,6 +77,11 @@ const LASTMOD_SEO_AOUT = new Date("2026-08-21");
    semaines — c'est exactement ce qui était arrivé à la SERP en juin, qui a
    annoncé « 4,90 €/mois » longtemps après la page. */
 const LASTMOD_TARIFS = new Date("2026-08-22");
+/* ⭐ LA FORMATION CRPE RELANCÉE (semaine du 15/10/2026) : séance 1 déplacée au
+   24/10, deux tests en ligne (maths le 15, orthographe le 16), pubs Instagram.
+   Les trois pages étaient restées à `LASTMOD_SEO_AOUT` — « rien de neuf depuis
+   août » au moment précis où elles changeaient. Une date par vague réelle. */
+const LASTMOD_CRPE = new Date("2026-10-17");
 const LASTMOD_LEGAL   = new Date("2026-02-18");
 
 // Les classes du site vivent dans `/programme/<classe>` (plus bas) : c'est là
@@ -453,11 +458,11 @@ const ROUTES: RouteConfig[] = [
   // ⚠️ Elle vise une requête locale et étroite — « préparation CRPE Réunion »,
   // « maths CRPE Saint-Pierre ». Ne pas espérer du volume : ce qui compte est
   // qu'un candidat de l'île qui cherche exactement ça la trouve.
-  { path: "/formation-crpe",    priority: 0.8,  changeFrequency: "weekly",  lastMod: LASTMOD_SEO_AOUT },
+  { path: "/formation-crpe",    priority: 0.8,  changeFrequency: "weekly",  lastMod: LASTMOD_CRPE },
   // 15/10/2026 : le test de positionnement CRPE, gratuit, qui renvoie au samedi.
-  { path: "/formation-crpe/test", priority: 0.7, changeFrequency: "monthly", lastMod: LASTMOD_SEO_AOUT },
+  { path: "/formation-crpe/test", priority: 0.7, changeFrequency: "monthly", lastMod: LASTMOD_CRPE },
   // 16/10/2026 : le test d'orthographe du CRPE (la langue compte dans la note).
-  { path: "/formation-crpe/test-orthographe", priority: 0.7, changeFrequency: "monthly", lastMod: LASTMOD_SEO_AOUT },
+  { path: "/formation-crpe/test-orthographe", priority: 0.7, changeFrequency: "monthly", lastMod: LASTMOD_CRPE },
   { path: "/contact",           priority: 0.65, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   // 20/07 : les pages de la PHILOSOPHIE qui manquaient au sitemap (audit
   // Frédéric « qu'il n'oublie pas notre philosophie ») — la charte d'usage de
