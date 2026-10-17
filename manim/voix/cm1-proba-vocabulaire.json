@@ -1,0 +1,13 @@
+{
+  "00-garde": "Certain, possible ou impossible ? Les mots du hasard.",
+  "01-situation": "Dans un sac, il y a 3 billes rouges. Rien que des rouges. Je ferme les yeux, et je tire une bille.",
+  "02-certain": "Je vais tirer une bille rouge. C'est sûr ! C'est certain.",
+  "03-impossible": "Tirer une bille verte ? Il n'y en a pas dans le sac. C'est impossible.",
+  "04-possible": "Maintenant, j'ajoute 1 bille bleue. 3 rouges et 1 bleue. Tirer une bille bleue ? Ça peut arriver, ou pas. C'est possible.",
+  "05-methode": "Pour décider, je regarde dans le sac. Il n'y a que ça : c'est certain. Il y en a un peu : c'est possible. Il n'y en a pas : c'est impossible.",
+  "06-piege": "Le piège : 1 seule bille bleue, ce n'est pas impossible. Il y en a une : c'est possible.",
+  "07-defi": "À toi de jouer. Un dé a 6 faces, de 1 à 6. Faire 7 : certain, possible ou impossible ? Faire 4 ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Faire 7 : impossible, il n'y a pas de 7 sur le dé. Faire 4 : possible, il y a une face 4.",
+  "08-finale": "Ce que tu as appris. Certain : ça arrive à tous les coups. Impossible : ça n'arrive jamais. Possible : ça peut arriver. L'épisode 2 t'attend : c'est quoi, le hasard ?",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

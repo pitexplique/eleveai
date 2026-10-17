@@ -1,0 +1,12 @@
+{
+  "00-garde": "Certain, possible, impossible… et entre les deux ?",
+  "01-situation": "Au jeu de l'oie, on lance un dé. Il faut faire 6 pour rejouer.",
+  "02-trois-mots": "Faire un nombre entre 1 et 6 : certain. Faire 0 : impossible. Faire 6 : possible.",
+  "03-chances": "Mais possible, ça ne dit pas tout. Faire 6, c'est 1 chance sur 6. Faire un nombre pair, 2, 4 ou 6, c'est 3 chances sur 6.",
+  "04-methode": "Pour compter les chances : je compte les cas qui me font gagner, puis tous les cas possibles. 3 cas gagnants sur 6 cas : 3 chances sur 6.",
+  "05-piege": "Le piège : 3 chances sur 6, ce n'est pas 3 chances sur 3. On compte TOUS les cas, même ceux qui font perdre.",
+  "06-defi": "À toi de jouer. Dans un sac : 2 billes rouges et 8 billes bleues. Combien de chances sur combien de tirer une rouge ? Mets pause, et cherche !",
+  "06b-correction": "Correction. 2 billes rouges, 10 billes en tout : 2 chances sur 10.",
+  "07-finale": "Ce que tu as appris. Certain, possible, impossible. Et pour le possible : on compte les chances, cas gagnants sur tous les cas. L'épisode 2 t'attend : c'est quoi, le hasard ?",
+  "08-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

@@ -1,0 +1,13 @@
+{
+  "00-garde": "Probabilité conditionnelle : quand on sait déjà quelque chose.",
+  "01-situation": "Au lycée, sur 200 élèves, 120 sont demi-pensionnaires. Parmi eux, 45 font du sport en club. Parmi les 80 externes, 35 en font.",
+  "02-tableau": "On range tout dans un tableau croisé. En ligne : demi-pensionnaires, externes. En colonne : sport, pas sport. Total : 200.",
+  "03-definition": "On choisit un demi-pensionnaire. Probabilité qu'il fasse du sport : on ne regarde plus que la ligne des demi-pensionnaires. 45 sur 120.",
+  "04-notation": "On note D : « être demi-pensionnaire », S : « faire du sport ». P indice D de S, probabilité de S sachant D, égale 45 sur 120, soit 0,375.",
+  "05-formule": "La formule : P indice D de S égale P de D inter S, divisé par P de D. 45 sur 200, divisé par 120 sur 200 : on retrouve 45 sur 120.",
+  "06-piege": "Le piège : diviser par 200. 45 sur 200, c'est P de D inter S : demi-pensionnaire ET sportif. Sachant D, on divise par l'effectif de D.",
+  "07-defi": "À toi de jouer. Probabilité qu'un externe fasse du sport ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Sachant D barre, c'est-à-dire chez les externes, on regarde leur ligne : 35 sur 80, soit 0,4375.",
+  "08-finale": "Ce que tu as appris. P indice A de B, c'est la probabilité de B quand on sait que A est réalisé. On se place dans A : on divise par l'effectif de A, ou par P de A. L'épisode 2 t'attend : traduire « parmi » et « sachant que ».",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

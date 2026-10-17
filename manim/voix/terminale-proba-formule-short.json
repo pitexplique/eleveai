@@ -1,0 +1,5 @@
+{
+  "00-accroche": "Ton test de la dengue est positif. Le test est fiable à 95 %. Tu es malade à 95 % ?",
+  "01-image": "Non : environ 33 % ! Seulement 2 % des gens sont malades. Les faux positifs des 98 % de gens sains sont plus nombreux que les vrais.",
+  "02-question": "Et toi : si la maladie touchait 50 % des gens, un test positif voudrait dire combien ? Réponds en commentaire !"
+}

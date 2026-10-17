@@ -1,0 +1,12 @@
+{
+  "00-garde": "L'événement contraire : 1 moins p.",
+  "01-situation": "Une éolienne. Un jour donné, elle tourne avec une probabilité de 0,85. Quelle est la probabilité qu'elle ne tourne pas ?",
+  "02-contraire": "« L'éolienne ne tourne pas », c'est le contraire de « elle tourne ». On le note A barre. Un des deux arrive forcément, jamais les deux.",
+  "03-regle": "Leurs probabilités font 1. Donc P de A barre égale 1 moins P de A. 1 moins 0,85 : 0,15.",
+  "04-pourcentage": "En pourcentage, pareil. 30 % des clients rapportent leur emballage : 70 % ne le rapportent pas. 100 moins 30.",
+  "05-piege": "Le piège : le contraire de « le colis arrive en avance », ce n'est pas « il arrive en retard ». Il peut aussi arriver à l'heure. Le contraire, c'est « il n'arrive pas en avance ».",
+  "06-defi": "À toi de jouer. 35 % des bouteilles ne sont pas recyclées. Quelle est la probabilité qu'une bouteille soit recyclée ? Mets pause, et cherche !",
+  "06b-correction": "Correction. Recyclée, c'est le contraire de « pas recyclée ». 100 moins 35 : 65 %, soit 0,65.",
+  "07-finale": "Ce que tu as appris. Le contraire de A, c'est « A n'arrive pas ». P de A barre égale 1 moins P de A. Et le contraire dit exactement « non A », rien d'autre. L'épisode 3 t'attend : additionner les issues.",
+  "08-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

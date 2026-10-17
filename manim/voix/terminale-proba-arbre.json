@@ -1,0 +1,13 @@
+{
+  "00-garde": "L'arbre pondéré : lire et construire.",
+  "01-situation": "Aux tirs au but, un gardien plonge à gauche dans 60 % des cas. Quand il plonge à gauche, il arrête le tir 30 fois sur 100 ; à droite, 20 fois sur 100.",
+  "02-construire": "Premier niveau : G, gauche, 0,6, et G barre, droite, 0,4. Deuxième niveau : A, arrêt, et A barre, but. Après G : 0,3 et 0,7. Après G barre : 0,2 et 0,8.",
+  "03-regles": "Deux règles. Les branches qui partent d'un même nœud ont pour somme 1. Au deuxième niveau, chaque branche porte une probabilité conditionnelle : 0,3, c'est P indice G de A.",
+  "04-chemin": "La probabilité d'un chemin, c'est le produit des branches. Plonger à gauche et arrêter : 0,6 fois 0,3, égale 0,18. C'est P de G inter A.",
+  "05-totales": "Pour P de A, on additionne les chemins qui mènent à A. 0,18 plus 0,4 fois 0,2, soit 0,18 plus 0,08 : 0,26.",
+  "06-piege": "Le piège : additionner 0,3 et 0,2. Ces branches n'ont pas le même poids : on multiplie d'abord par 0,6 et 0,4.",
+  "07-defi": "À toi de jouer. Probabilité qu'il y ait but ? Mets pause, et cherche !",
+  "07b-correction": "Correction. But, c'est A barre. 0,6 fois 0,7, plus 0,4 fois 0,8 : 0,42 plus 0,32, égale 0,74. Ou bien 1 moins 0,26.",
+  "08-finale": "Ce que tu as appris. Sur un arbre, les branches d'un nœud font 1. Au deuxième niveau, ce sont des probabilités conditionnelles. Un chemin : on multiplie. Un événement : on additionne ses chemins. L'épisode 2 t'attend : la formule des probabilités conditionnelles.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

@@ -1,0 +1,13 @@
+{
+  "00-garde": "Parmi, sachant que, et : traduire une phrase en probabilité.",
+  "01-situation": "Un sondage sur le car jaune. On note R : « le car est en retard » et P : « il pleut ».",
+  "02-et": "« Il pleut et le car est en retard » : les deux en même temps. C'est P de P inter R.",
+  "03-parmi": "« Parmi les jours de pluie, 30 % ont un retard » : on se place dans les jours de pluie. C'est P indice P de R, égale 0,3.",
+  "04-sachant": "« Sachant que le car est en retard, il pleut dans 60 % des cas » : on se place dans les retards. C'est P indice R de P, égale 0,6.",
+  "05-methode": "La méthode : chercher le groupe dans lequel on se place. Il vient après « parmi », « sachant que », « chez les ». Il va en indice.",
+  "06-piege": "Le piège : P indice P de R et P indice R de P, ce n'est pas la même chose. 30 % des jours de pluie ont un retard ; 60 % des retards ont lieu sous la pluie.",
+  "07-defi": "À toi de jouer. « 12 % des jours, il pleut et le car est en retard. » Comment l'écrire ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Les deux en même temps, sans groupe de référence : P de P inter R égale 0,12.",
+  "08-finale": "Ce que tu as appris. « Et » : une intersection. « Parmi », « sachant que » : le groupe va en indice. P indice A de B n'est pas P indice B de A. L'épisode 3 t'attend : les tableaux croisés.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

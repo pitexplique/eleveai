@@ -8742,7 +8742,8 @@
         "collège",
         "EleveAI",
         "CRPE"
-      ]
+      ],
+      "url": "https://youtu.be/PkntmnHLG0E"
     },
     {
       "id": "3e-proba-vocabulaire-short",
@@ -8755,7 +8756,7 @@
       "fichier": "3e/maths/probabilites/01-vocabulaire/eleveai-maths-3e-proba-vocabulaire-short.mp4",
       "miniature": "3e/maths/probabilites/01-vocabulaire/eleveai-maths-3e-proba-vocabulaire-short.png",
       "titre": "Gagner au loto : impossible ? 🎱 — 3e CRPE #Shorts",
-      "accroche": "Très peu probable… mais possible ! Impossible, c'est une probabilité de 0. Certain, c'est 1. Le loto, c'est tout près de 0, mais pas 0.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Obtenir 7 avec un dé : impossible ou peu probable ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n📝 La feuille d'exercices : https://www.eleveai.fr/fiches-exercices/maths/3e/proba-experience\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #3e #brevet",
+      "accroche": "Très peu probable… mais possible ! Impossible, c'est une probabilité de 0. Certain, c'est 1. Le loto, c'est tout près de 0, mais pas 0.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Obtenir 7 avec un dé : impossible ou peu probable ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : https://youtu.be/PkntmnHLG0E\n📝 La feuille d'exercices : https://www.eleveai.fr/fiches-exercices/maths/3e/proba-experience\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #3e #brevet",
       "tags": [
         "loto",
         "impossible",
@@ -8770,7 +8771,8 @@
         "ceinture blanche",
         "Shorts",
         "CRPE"
-      ]
+      ],
+      "url": "https://youtube.com/shorts/Re9H-gXzveU"
     },
     {
       "id": "3e-proba-issue",
@@ -8833,7 +8835,8 @@
         "collège",
         "EleveAI",
         "CRPE"
-      ]
+      ],
+      "url": "https://youtu.be/VVbe_Mlf3w0"
     },
     {
       "id": "3e-proba-issue-short",
@@ -8846,7 +8849,7 @@
       "fichier": "3e/maths/probabilites/02-issues/eleveai-maths-3e-proba-issue-short.mp4",
       "miniature": "3e/maths/probabilites/02-issues/eleveai-maths-3e-proba-issue-short.png",
       "titre": "BANANE dans un chapeau : combien de résultats ? 🎩 — 3e CRPE #Shorts",
-      "accroche": "6 étiquettes, mais seulement 4 lettres différentes : B, A, N, E. 4 issues ! On compte les résultats, pas les objets.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Et avec le mot ANANAS : combien d'issues ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n📝 La feuille d'exercices : https://www.eleveai.fr/fiches-exercices/maths/3e/proba-experience\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #3e #brevet",
+      "accroche": "6 étiquettes, mais seulement 4 lettres différentes : B, A, N, E. 4 issues ! On compte les résultats, pas les objets.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Et avec le mot ANANAS : combien d'issues ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : https://youtu.be/VVbe_Mlf3w0\n📝 La feuille d'exercices : https://www.eleveai.fr/fiches-exercices/maths/3e/proba-experience\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #3e #brevet",
       "tags": [
         "issues",
         "dénombrer",
@@ -8860,7 +8863,8 @@
         "ceinture blanche",
         "Shorts",
         "CRPE"
-      ]
+      ],
+      "url": "https://youtube.com/shorts/nxaoI-KMGb8"
     },
     {
       "id": "3e-proba-equiprobabilite",
@@ -10709,6 +10713,899 @@
         "CRPE"
       ],
       "url": "https://youtube.com/shorts/QkDw_s6Nv8E"
+    },
+    {
+      "id": "cm1-proba-vocabulaire",
+      "notionId": "probabilite",
+      "microId": "probabilite_vocabulaire",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/probabilites/01-vocabulaire/eleveai-maths-cm1-proba-vocabulaire.mp4",
+      "miniature": "cm1/maths/probabilites/01-vocabulaire/eleveai-maths-cm1-proba-vocabulaire.png",
+      "titre": "1 seule bille bleue : impossible ? — Certain, possible, impossible — épisode 1 · Maths CM1",
+      "accroche": "Dans un sac, 3 billes rouges. Je ferme les yeux et je tire une bille : rouge, c'est sûr ? Et verte ?\n\nDans cette vidéo :\n• certain : ça arrive à tous les coups\n• impossible : ça n'arrive jamais\n• possible : ça peut arriver, ou pas\n• le piège : 1 seule bille bleue, ce n'est pas impossible, c'est possible\n\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : faire 7, puis faire 4 avec un dé.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=probabilite&microId=probabilite_vocabulaire&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Certain, possible ou impossible ?"
+        ],
+        [
+          "00:15",
+          "Certain, puis impossible"
+        ],
+        [
+          "00:29",
+          "Possible : on ajoute 1 bleue"
+        ],
+        [
+          "00:42",
+          "La méthode et le piège"
+        ],
+        [
+          "01:03",
+          "À toi de jouer"
+        ],
+        [
+          "01:18",
+          "Correction"
+        ],
+        [
+          "01:29",
+          "Ce que tu as appris"
+        ],
+        [
+          "01:45",
+          "Entraîne-toi sur le coach"
+        ]
+      ],
+      "tags": [
+        "certain",
+        "possible",
+        "impossible",
+        "billes",
+        "hasard",
+        "probabilités",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "cm1-proba-vocabulaire-short",
+      "notionId": "probabilite",
+      "microId": "probabilite_vocabulaire",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-proba-vocabulaire",
+      "fichier": "cm1/maths/probabilites/01-vocabulaire/eleveai-maths-cm1-proba-vocabulaire-short.mp4",
+      "miniature": "cm1/maths/probabilites/01-vocabulaire/eleveai-maths-cm1-proba-vocabulaire-short.png",
+      "titre": "Les yeux fermés : quelle bille ? 🎱 — CM1 #Shorts",
+      "accroche": "Que des billes rouges dans le sac : rouge, c'est certain ; verte, c'est impossible. Et si j'ajoute 1 bille bleue ? Bleue, c'est possible !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : faire 7 avec un dé, c'est certain, possible ou impossible ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=probabilite&microId=probabilite_vocabulaire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #CM1 #école",
+      "tags": [
+        "certain",
+        "impossible",
+        "billes",
+        "probabilités",
+        "maths CM1",
+        "CM1",
+        "école",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "cm1-proba-hasard",
+      "notionId": "probabilite",
+      "microId": "probabilite_hasard",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/probabilites/02-hasard/eleveai-maths-cm1-proba-hasard.mp4",
+      "miniature": "cm1/maths/probabilites/02-hasard/eleveai-maths-cm1-proba-hasard.png",
+      "titre": "6, 6, 6… encore un 6 ? — Reconnaître le hasard — épisode 2 · Maths CM1",
+      "accroche": "À la kermesse, la roue tourne, tourne… Personne ne sait où elle va s'arrêter. Pas même celui qui la lance.\n\nDans cette vidéo :\n• le hasard : on ne peut pas connaître le résultat à l'avance\n• dé, chapeau, pile ou face : c'est le hasard ; 5 + 3, non\n• la question à se poser : est-ce que je peux savoir avant ?\n• le piège : après trois 6, le dé ne se souvient de rien\n\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : tirer une carte sans regarder, ou compter les élèves de la classe : lequel est le hasard ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=probabilite&microId=probabilite_hasard&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "À la kermesse : c'est quoi, le hasard ?"
+        ],
+        [
+          "00:14",
+          "Le hasard"
+        ],
+        [
+          "00:26",
+          "Pas le hasard"
+        ],
+        [
+          "00:37",
+          "Pour savoir"
+        ],
+        [
+          "00:49",
+          "Le piège"
+        ],
+        [
+          "01:01",
+          "À toi de jouer"
+        ],
+        [
+          "01:14",
+          "Correction"
+        ],
+        [
+          "01:25",
+          "Ce que tu as appris"
+        ],
+        [
+          "01:39",
+          "Abonne-toi"
+        ]
+      ],
+      "tags": [
+        "hasard",
+        "dé",
+        "kermesse",
+        "pile ou face",
+        "probabilités",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "cm1-proba-hasard-short",
+      "notionId": "probabilite",
+      "microId": "probabilite_hasard",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-proba-hasard",
+      "fichier": "cm1/maths/probabilites/02-hasard/eleveai-maths-cm1-proba-hasard-short.mp4",
+      "miniature": "cm1/maths/probabilites/02-hasard/eleveai-maths-cm1-proba-hasard-short.png",
+      "titre": "6… 6… 6 ! Et le prochain lancer ? 🎲 — CM1 #Shorts",
+      "accroche": "Trois 6 de suite ! Le dé ne se souvient de rien : le prochain lancer, c'est encore le hasard, 1, 2, 3, 4, 5 ou 6.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : tu crois qu'il va refaire 6 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=probabilite&microId=probabilite_hasard&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #CM1 #hasard",
+      "tags": [
+        "hasard",
+        "dé",
+        "probabilités",
+        "maths CM1",
+        "CM1",
+        "école",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "cm2-proba-vocabulaire",
+      "notionId": "probabilite",
+      "microId": "probabilite_vocabulaire",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/probabilites/01-vocabulaire/eleveai-maths-cm2-proba-vocabulaire.mp4",
+      "miniature": "cm2/maths/probabilites/01-vocabulaire/eleveai-maths-cm2-proba-vocabulaire.png",
+      "titre": "3 chances sur 6… ou sur 3 ? — Certain, possible, impossible — épisode 1 · Maths CM2",
+      "accroche": "Au jeu de l'oie, il faut faire 6 pour rejouer. C'est possible… mais combien de chances as-tu ?\n\nDans cette vidéo :\n• certain, possible, impossible avec un dé\n• compter les chances : cas gagnants sur tous les cas\n• faire 6 : 1 chance sur 6 ; un nombre pair : 3 chances sur 6\n• le piège : on compte TOUS les cas, même ceux qui font perdre\n\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : 2 billes rouges et 8 bleues : combien de chances de tirer une rouge ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/cm2/probabilite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=probabilite&microId=probabilite_vocabulaire&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Le jeu de l'oie"
+        ],
+        [
+          "00:11",
+          "Les trois mots, puis les chances"
+        ],
+        [
+          "00:33",
+          "Compter les chances"
+        ],
+        [
+          "00:44",
+          "Le piège"
+        ],
+        [
+          "00:54",
+          "Défi : le sac de billes"
+        ],
+        [
+          "01:07",
+          "Correction et ce que tu as appris"
+        ],
+        [
+          "01:29",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/cm2/probabilite",
+      "tags": [
+        "certain",
+        "possible",
+        "impossible",
+        "chances",
+        "jeu de l'oie",
+        "dé",
+        "probabilités",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "cm2-proba-vocabulaire-short",
+      "notionId": "probabilite",
+      "microId": "probabilite_vocabulaire",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-proba-vocabulaire",
+      "fichier": "cm2/maths/probabilites/01-vocabulaire/eleveai-maths-cm2-proba-vocabulaire-short.mp4",
+      "miniature": "cm2/maths/probabilites/01-vocabulaire/eleveai-maths-cm2-proba-vocabulaire-short.png",
+      "titre": "Faire 6 : tu as combien de chances ? 🎲 — CM2 #Shorts",
+      "accroche": "1 face sur 6 : 1 chance sur 6. Et un nombre pair ? 2, 4, 6 : 3 chances sur 6. C'est 3 fois plus !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : faire plus que 4 avec un dé, c'est combien de chances sur 6 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=probabilite&microId=probabilite_vocabulaire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #CM2 #école",
+      "tags": [
+        "chances",
+        "dé",
+        "jeu de l'oie",
+        "probabilités",
+        "maths CM2",
+        "CM2",
+        "école",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "cm2-proba-hasard",
+      "notionId": "probabilite",
+      "microId": "probabilite_hasard",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/probabilites/02-hasard/eleveai-maths-cm2-proba-hasard.mp4",
+      "miniature": "cm2/maths/probabilites/02-hasard/eleveai-maths-cm2-proba-hasard.png",
+      "titre": "Pile 4 fois : face, plus sûr ? — Reconnaître le hasard — épisode 2 · Maths CM2",
+      "accroche": "Pour former deux équipes de foot, on tire les noms dans un chapeau. Personne ne peut tricher : c'est le hasard qui décide.\n\nDans cette vidéo :\n• une situation de hasard : on connaît les résultats possibles, pas celui qui sortira\n• tombola, météo, 12 × 3 : hasard ou pas ?\n• les deux questions à se poser\n• le piège : après 4 piles, face n'a pas plus de chances\n\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : choisir le jour de son anniversaire, ou tirer un numéro à la tombola : lequel est le hasard ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/cm2/probabilite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=probabilite&microId=probabilite_hasard&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Deux équipes de foot : hasard ou pas ?"
+        ],
+        [
+          "00:12",
+          "Une situation de hasard ?"
+        ],
+        [
+          "00:35",
+          "Les deux questions"
+        ],
+        [
+          "00:47",
+          "Le piège : pile, pile, pile, pile"
+        ],
+        [
+          "01:00",
+          "À toi de jouer"
+        ],
+        [
+          "01:15",
+          "Correction"
+        ],
+        [
+          "01:25",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/cm2/probabilite",
+      "tags": [
+        "hasard",
+        "pile ou face",
+        "tirage au sort",
+        "pièce",
+        "probabilités",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "cm2-proba-hasard-short",
+      "notionId": "probabilite",
+      "microId": "probabilite_hasard",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-proba-hasard",
+      "fichier": "cm2/maths/probabilites/02-hasard/eleveai-maths-cm2-proba-hasard-short.mp4",
+      "miniature": "cm2/maths/probabilites/02-hasard/eleveai-maths-cm2-proba-hasard-short.png",
+      "titre": "10 piles de suite : tu paries sur quoi ? 🪙 — CM2 #Shorts",
+      "accroche": "Pile, pile, pile, pile… Le prochain, c'est sûrement face ? Raté ! La pièce ne se souvient de rien : toujours 1 chance sur 2.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : après 10 piles de suite, tu paries sur pile ou sur face ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=probabilite&microId=probabilite_hasard&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #CM2 #hasard",
+      "tags": [
+        "hasard",
+        "pile ou face",
+        "pièce",
+        "probabilités",
+        "maths CM2",
+        "CM2",
+        "école",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "seconde-proba-vocabulaire",
+      "notionId": "probabilites_ensemble_fini",
+      "microId": "proba_vocabulaire",
+      "classe": "seconde",
+      "ceinture": "bleue",
+      "serie": "Maths 2de",
+      "type": "longue",
+      "fichier": "seconde/maths/probabilites/01-vocabulaire/eleveai-maths-seconde-proba-vocabulaire.mp4",
+      "miniature": "seconde/maths/probabilites/01-vocabulaire/eleveai-maths-seconde-proba-vocabulaire.png",
+      "titre": "11 totaux, 11 chances égales ? — Univers, issue, événement — épisode 1 · Maths 2de",
+      "accroche": "Aux petits chevaux, on lance deux dés et on additionne. Quels totaux peut-on obtenir ? Et sortent-ils tous aussi souvent ?\n\nDans cette vidéo :\n• l'univers Ω : tous les résultats possibles, ici les totaux de 2 à 12\n• un événement : une partie de l'univers\n• contraire, intersection, réunion\n• le piège : les 11 totaux ne sont pas équiprobables, le 7 sort 6 fois plus que le 2\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : B : « le total est supérieur ou égal à 10 ». Quelles issues réalisent B ? Et A ∩ B ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=probabilites_ensemble_fini&microId=proba_vocabulaire&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Univers, issue, événement : deux dés"
+        ],
+        [
+          "00:13",
+          "L'univers Ω"
+        ],
+        [
+          "00:26",
+          "Un événement"
+        ],
+        [
+          "00:38",
+          "Contraire, inter, union : la méthode"
+        ],
+        [
+          "00:58",
+          "Le piège : 11 totaux pas équiprobables"
+        ],
+        [
+          "01:11",
+          "À toi de jouer"
+        ],
+        [
+          "01:25",
+          "Correction"
+        ],
+        [
+          "01:36",
+          "Ce que tu as appris"
+        ],
+        [
+          "01:58",
+          "Entraîne-toi sur le coach"
+        ]
+      ],
+      "tags": [
+        "univers",
+        "issue",
+        "événement",
+        "intersection",
+        "réunion",
+        "deux dés",
+        "probabilités",
+        "maths",
+        "seconde",
+        "2de",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "seconde-proba-vocabulaire-short",
+      "notionId": "probabilites_ensemble_fini",
+      "microId": "proba_vocabulaire",
+      "classe": "seconde",
+      "ceinture": "jaune",
+      "serie": "Maths 2de",
+      "type": "short",
+      "renvoie_vers": "seconde-proba-vocabulaire",
+      "fichier": "seconde/maths/probabilites/01-vocabulaire/eleveai-maths-seconde-proba-vocabulaire-short.mp4",
+      "miniature": "seconde/maths/probabilites/01-vocabulaire/eleveai-maths-seconde-proba-vocabulaire-short.png",
+      "titre": "7 ou 12 : sur lequel tu paries ? 🎲 — 2de #Shorts",
+      "accroche": "Deux dés. 12, il faut 6 et 6 : une seule façon. 7 : 1 et 6, 2 et 5, 3 et 4… 6 façons ! Le 7 sort 6 fois plus souvent.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : avec deux dés, le total 2 ou le total 11, lequel sort le plus ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=probabilites_ensemble_fini&microId=proba_vocabulaire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #seconde #lycée",
+      "tags": [
+        "deux dés",
+        "somme",
+        "équiprobabilité",
+        "probabilités",
+        "maths seconde",
+        "seconde",
+        "lycée",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "seconde-proba-modele",
+      "notionId": "probabilites_ensemble_fini",
+      "microId": "proba_modele",
+      "classe": "seconde",
+      "ceinture": "bleue",
+      "serie": "Maths 2de",
+      "type": "longue",
+      "fichier": "seconde/maths/probabilites/02-loi-de-probabilite/eleveai-maths-seconde-proba-modele.mp4",
+      "miniature": "seconde/maths/probabilites/02-loi-de-probabilite/eleveai-maths-seconde-proba-modele.png",
+      "titre": "Dé truqué : P(pair) = 3/6 ? — La loi de probabilité — épisode 2 · Maths 2de",
+      "accroche": "Un dé de jeu de société est truqué : le 6 sort deux fois plus souvent que chacune des autres faces. Comment écrire sa loi ?\n\nDans cette vidéo :\n• une loi de probabilité = un tableau : chaque issue et sa probabilité\n• entre 0 et 1, et une somme égale à 1\n• trouver p : 5p + 2p = 7p = 1\n• P(pair) = 1/7 + 1/7 + 2/7 = 4/7, et le piège du 3/6\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : une roue à trois couleurs, rouge 0,5 et bleu 0,3 : quelle est la probabilité de vert ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=probabilites_ensemble_fini&microId=proba_modele&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Le dé truqué et ses résultats"
+        ],
+        [
+          "00:15",
+          "Une loi = un tableau"
+        ],
+        [
+          "00:26",
+          "Trouver p : 7p = 1"
+        ],
+        [
+          "00:42",
+          "P(pair) = 4/7"
+        ],
+        [
+          "00:58",
+          "Le piège du 3/6"
+        ],
+        [
+          "01:11",
+          "Défi : la roue"
+        ],
+        [
+          "01:25",
+          "Correction"
+        ],
+        [
+          "01:35",
+          "Ce que tu as appris"
+        ],
+        [
+          "01:53",
+          "Abonnement"
+        ]
+      ],
+      "tags": [
+        "loi de probabilité",
+        "dé truqué",
+        "issue",
+        "événement",
+        "probabilités",
+        "maths",
+        "seconde",
+        "2de",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "seconde-proba-modele-short",
+      "notionId": "probabilites_ensemble_fini",
+      "microId": "proba_modele",
+      "classe": "seconde",
+      "ceinture": "jaune",
+      "serie": "Maths 2de",
+      "type": "short",
+      "renvoie_vers": "seconde-proba-modele",
+      "fichier": "seconde/maths/probabilites/02-loi-de-probabilite/eleveai-maths-seconde-proba-modele-short.mp4",
+      "miniature": "seconde/maths/probabilites/02-loi-de-probabilite/eleveai-maths-seconde-proba-modele-short.png",
+      "titre": "Le 6 sort 2 fois plus : 1 chance sur 6 ? 🎲 — 2de #Shorts",
+      "accroche": "Pas 1 sur 6, pas 1 sur 3 ! 5 faces à p, le 6 à 2p : 7p = 1. Le 6, c'est 2 chances sur 7.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : si le 6 sortait trois fois plus que les autres, ce serait combien ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=probabilites_ensemble_fini&microId=proba_modele&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #seconde #lycée",
+      "tags": [
+        "dé truqué",
+        "loi de probabilité",
+        "probabilités",
+        "maths seconde",
+        "seconde",
+        "lycée",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-proba-conditionnelle",
+      "notionId": "probabilites_conditionnelles",
+      "microId": "pc_conditionnelle",
+      "classe": "premiere-spe",
+      "ceinture": "marron",
+      "serie": "Maths 1re spé",
+      "type": "longue",
+      "fichier": "premiere/maths/probabilites/01-conditionnelle/eleveai-maths-premiere-proba-conditionnelle.mp4",
+      "miniature": "premiere/maths/probabilites/01-conditionnelle/eleveai-maths-premiere-proba-conditionnelle.png",
+      "titre": "45 sur 200 ? Non, sur 120 ! — Probabilité conditionnelle — épisode 1 · Maths 1re spé",
+      "accroche": "Au lycée, sur 200 élèves, 120 sont demi-pensionnaires, et 45 d'entre eux font du sport en club. On choisit un demi-pensionnaire : quelle est la probabilité qu'il fasse du sport ?\n\nDans cette vidéo :\n• le tableau croisé : sachant D, on ne regarde plus que la ligne D\n• la notation P_D(S) = 45/120 = 0,375\n• la formule P_D(S) = P(D ∩ S) ÷ P(D), et l'arbre\n• le piège : diviser par 200, c'est P(D ∩ S), pas P_D(S)\n\n🥋 Ceinture marron.\nUn défi en fin de vidéo, avec sa correction : la probabilité qu'un externe fasse du sport.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_conditionnelle&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "200 élèves au lycée"
+        ],
+        [
+          "00:19",
+          "Le tableau croisé"
+        ],
+        [
+          "00:32",
+          "Sachant D : la ligne D"
+        ],
+        [
+          "00:45",
+          "La notation P_D(S)"
+        ],
+        [
+          "01:01",
+          "La formule et l'arbre"
+        ],
+        [
+          "01:14",
+          "Le piège : diviser par 200"
+        ],
+        [
+          "01:28",
+          "À toi de jouer"
+        ],
+        [
+          "01:38",
+          "Correction"
+        ],
+        [
+          "01:51",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "probabilité conditionnelle",
+        "sachant",
+        "tableau croisé",
+        "intersection",
+        "arbre pondéré",
+        "probabilités",
+        "maths",
+        "première",
+        "1re spé",
+        "spécialité maths",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-proba-conditionnelle-short",
+      "notionId": "probabilites_conditionnelles",
+      "microId": "pc_conditionnelle",
+      "classe": "premiere-spe",
+      "ceinture": "orange",
+      "serie": "Maths 1re spé",
+      "type": "short",
+      "renvoie_vers": "premiere-proba-conditionnelle",
+      "fichier": "premiere/maths/probabilites/01-conditionnelle/eleveai-maths-premiere-proba-conditionnelle-short.mp4",
+      "miniature": "premiere/maths/probabilites/01-conditionnelle/eleveai-maths-premiere-proba-conditionnelle-short.png",
+      "titre": "90 % des footballeurs sont des garçons… donc ? ⚽ — 1re spé #Shorts",
+      "accroche": "90 % des joueurs de foot du lycée sont des garçons. Donc 90 % des garçons jouent au foot ? Non ! Parmi les footballeurs, 90 % de garçons ; parmi les garçons, peut-être 20 % de footballeurs. On ne divise pas par le même groupe.\n\n🥋 Ceinture orange : un calcul, et un piège à éviter.\n👉 À toi : « parmi les malades, 95 % ont un test positif ». Alors un test positif, c'est 95 % de chances d'être malade ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_conditionnelle&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #première #lycée",
+      "tags": [
+        "probabilité conditionnelle",
+        "parmi",
+        "sachant",
+        "probabilités",
+        "maths première",
+        "1re spé",
+        "lycée",
+        "eleveai",
+        "maths visuel",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-proba-registres",
+      "notionId": "probabilites_conditionnelles",
+      "microId": "pc_registres",
+      "classe": "premiere-spe",
+      "ceinture": "marron",
+      "serie": "Maths 1re spé",
+      "type": "longue",
+      "fichier": "premiere/maths/probabilites/02-parmi-sachant/eleveai-maths-premiere-proba-registres.mp4",
+      "miniature": "premiere/maths/probabilites/02-parmi-sachant/eleveai-maths-premiere-proba-registres.png",
+      "titre": "30 % ou 60 % ? Parmi QUI ? — Parmi, sachant que, et — épisode 2 · Maths 1re spé",
+      "accroche": "Un sondage sur le car jaune : R, « le car est en retard », et P, « il pleut ». « Parmi », « sachant que », « et » : trois mots, trois écritures différentes.\n\nDans cette vidéo :\n• « et » : une case du tableau, P(P ∩ R)\n• « parmi » et « sachant que » : une ligne ou une colonne, le groupe va en indice\n• la méthode : chercher le groupe dans lequel on se place\n• le piège : P_P(R) = 0,3 n'est pas P_R(P) = 0,6\n\n🥋 Ceinture marron.\nUn défi en fin de vidéo, avec sa correction : « 12 % des jours, il pleut et le car est en retard » : comment l'écrire ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_registres&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Le car jaune : parmi, sachant que, et"
+        ],
+        [
+          "00:14",
+          "« et » : une case ; « parmi » : une ligne"
+        ],
+        [
+          "00:32",
+          "« sachant que » : une colonne"
+        ],
+        [
+          "00:44",
+          "La méthode"
+        ],
+        [
+          "00:55",
+          "Le piège"
+        ],
+        [
+          "01:08",
+          "À toi de jouer"
+        ],
+        [
+          "01:21",
+          "Correction et ce que tu as appris"
+        ],
+        [
+          "01:46",
+          "Abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilité conditionnelle",
+        "parmi",
+        "sachant que",
+        "intersection",
+        "tableau croisé",
+        "probabilités",
+        "maths",
+        "première",
+        "1re spé",
+        "spécialité maths",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-proba-registres-short",
+      "notionId": "probabilites_conditionnelles",
+      "microId": "pc_registres",
+      "classe": "premiere-spe",
+      "ceinture": "orange",
+      "serie": "Maths 1re spé",
+      "type": "short",
+      "renvoie_vers": "premiere-proba-registres",
+      "fichier": "premiere/maths/probabilites/02-parmi-sachant/eleveai-maths-premiere-proba-registres-short.mp4",
+      "miniature": "premiere/maths/probabilites/02-parmi-sachant/eleveai-maths-premiere-proba-registres-short.png",
+      "titre": "60 % des retards sous la pluie… donc ? 🚌 — 1re spé #Shorts",
+      "accroche": "60 % des retards du car ont lieu sous la pluie. Donc quand il pleut, 60 % de chances d'être en retard ? Non ! Ça, c'est parmi les retards. Parmi les jours de pluie, c'est peut-être 30 %. Le mot important : parmi QUI ?\n\n🥋 Ceinture orange : un calcul, et un piège à éviter.\n👉 À toi : « parmi les gagnants du loto, 100 % ont joué ». Donc jouer, c'est 100 % de chances de gagner ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_registres&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #première #lycée",
+      "tags": [
+        "probabilité conditionnelle",
+        "parmi",
+        "sachant que",
+        "probabilités",
+        "maths première",
+        "1re spé",
+        "lycée",
+        "eleveai",
+        "maths visuel",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "terminale-proba-arbre",
+      "notionId": "probabilite_conditionnelle",
+      "microId": "proba_conditionnelle_arbre",
+      "classe": "terminale-spe",
+      "ceinture": "noire",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/probabilites/01-arbre-pondere/eleveai-maths-terminale-proba-arbre.mp4",
+      "miniature": "terminale/maths/probabilites/01-arbre-pondere/eleveai-maths-terminale-proba-arbre.png",
+      "titre": "0,3 + 0,2 ? Non ! — L'arbre pondéré — épisode 1 · Maths Tle spé",
+      "accroche": "Aux tirs au but, un gardien plonge à gauche dans 60 % des cas. À gauche, il arrête 30 % des tirs ; à droite, 20 %. Quelle part des tirs arrête-t-il vraiment ?\n\nDans cette vidéo :\n• construire l'arbre : deux niveaux, quatre chemins\n• les branches d'un même nœud font 1 ; au 2e niveau, des probabilités conditionnelles\n• un chemin : on multiplie, 0,6 × 0,3 = 0,18\n• P(A) : on additionne les chemins, 0,18 + 0,08 = 0,26, et le piège de la moyenne\n\n🥋 Ceinture noire.\nUn défi en fin de vidéo, avec sa correction : la probabilité qu'il y ait but.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=probabilite_conditionnelle&microId=proba_conditionnelle_arbre&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Les tirs au but : l'arbre pondéré"
+        ],
+        [
+          "00:17",
+          "Construire l'arbre"
+        ],
+        [
+          "00:37",
+          "Deux règles"
+        ],
+        [
+          "00:51",
+          "Un chemin : on multiplie"
+        ],
+        [
+          "01:06",
+          "P(A) : on additionne les chemins"
+        ],
+        [
+          "01:21",
+          "Le piège, puis à toi de jouer"
+        ],
+        [
+          "01:42",
+          "Correction"
+        ],
+        [
+          "02:03",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:24",
+          "Abonne-toi"
+        ]
+      ],
+      "tags": [
+        "arbre pondéré",
+        "probabilité conditionnelle",
+        "probabilités totales",
+        "tirs au but",
+        "probabilités",
+        "maths",
+        "terminale",
+        "Tle spé",
+        "spécialité maths",
+        "bac",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "terminale-proba-arbre-short",
+      "notionId": "probabilite_conditionnelle",
+      "microId": "proba_conditionnelle_arbre",
+      "classe": "terminale-spe",
+      "ceinture": "orange",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-proba-arbre",
+      "fichier": "terminale/maths/probabilites/01-arbre-pondere/eleveai-maths-terminale-proba-arbre-short.mp4",
+      "miniature": "terminale/maths/probabilites/01-arbre-pondere/eleveai-maths-terminale-proba-arbre-short.png",
+      "titre": "Il arrête 25 % des tirs ? Pas si vite ! ⚽ — Tle spé #Shorts",
+      "accroche": "Le gardien arrête 30 % des tirs à gauche, 20 % à droite. Mais il plonge à gauche 60 % du temps : 0,6 × 0,3 + 0,4 × 0,2 = 0,26. Ce n'est pas la moyenne, c'est l'arbre.\n\n🥋 Ceinture orange : un calcul, et un piège à éviter.\n👉 À toi : s'il plongeait à gauche 90 % du temps, il arrêterait combien de tirs ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=probabilite_conditionnelle&microId=proba_conditionnelle_arbre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #terminale #bac",
+      "tags": [
+        "arbre pondéré",
+        "tirs au but",
+        "probabilités",
+        "maths terminale",
+        "terminale",
+        "bac",
+        "lycée",
+        "eleveai",
+        "maths visuel",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "terminale-proba-formule",
+      "notionId": "probabilite_conditionnelle",
+      "microId": "proba_conditionnelle_formule",
+      "classe": "terminale-spe",
+      "ceinture": "noire",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/probabilites/02-formule-et-inversion/eleveai-maths-terminale-proba-formule.mp4",
+      "miniature": "terminale/maths/probabilites/02-formule-et-inversion/eleveai-maths-terminale-proba-formule.png",
+      "titre": "Test fiable à 95 %… et 33 % de malades ? — Inverser la condition — épisode 2 · Maths Tle spé",
+      "accroche": "Un test rapide de la dengue : 2 % des personnes testées sont malades. Le test est positif chez 95 % des malades, et chez 4 % des personnes saines. Ton test est positif : es-tu malade ?\n\nDans cette vidéo :\n• la formule P_A(B) = P(A ∩ B) ÷ P(A)\n• l'arbre et P(T) = 0,0582\n• inverser la condition : P_T(M) ≈ 0,33, seulement 33 %\n• le piège : confondre P_M(T) = 0,95 et P_T(M)\n\n🥋 Ceinture noire.\nUn défi en fin de vidéo, avec sa correction : test négatif : la probabilité d'être sain, au millième.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=probabilite_conditionnelle&microId=proba_conditionnelle_formule&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Le test de la dengue"
+        ],
+        [
+          "00:19",
+          "La formule"
+        ],
+        [
+          "00:30",
+          "L'arbre et P(T)"
+        ],
+        [
+          "01:03",
+          "Inverser la condition"
+        ],
+        [
+          "01:22",
+          "Seulement 33 %"
+        ],
+        [
+          "01:32",
+          "Le piège"
+        ],
+        [
+          "01:47",
+          "Défi"
+        ],
+        [
+          "01:59",
+          "Correction"
+        ],
+        [
+          "02:24",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:45",
+          "Abonnement"
+        ]
+      ],
+      "tags": [
+        "probabilité conditionnelle",
+        "inverser la condition",
+        "faux positifs",
+        "test de dépistage",
+        "arbre pondéré",
+        "probabilités",
+        "maths",
+        "terminale",
+        "Tle spé",
+        "spécialité maths",
+        "bac",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "terminale-proba-formule-short",
+      "notionId": "probabilite_conditionnelle",
+      "microId": "proba_conditionnelle_formule",
+      "classe": "terminale-spe",
+      "ceinture": "orange",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-proba-formule",
+      "fichier": "terminale/maths/probabilites/02-formule-et-inversion/eleveai-maths-terminale-proba-formule-short.mp4",
+      "miniature": "terminale/maths/probabilites/02-formule-et-inversion/eleveai-maths-terminale-proba-formule-short.png",
+      "titre": "Test positif = malade à 95 % ? NON ! 🧪 — Tle spé #Shorts",
+      "accroche": "Ton test de la dengue est positif, et le test est fiable à 95 %. Malade à 95 % ? Non : environ 33 % ! Seulement 2 % des gens sont malades : les faux positifs des 98 % de gens sains sont plus nombreux que les vrais.\n\n🥋 Ceinture orange : un calcul, et un piège à éviter.\n👉 À toi : si la maladie touchait 50 % des gens, un test positif voudrait dire combien ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=probabilite_conditionnelle&microId=proba_conditionnelle_formule&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #terminale #bac",
+      "tags": [
+        "faux positifs",
+        "test de dépistage",
+        "probabilité conditionnelle",
+        "probabilités",
+        "maths terminale",
+        "terminale",
+        "bac",
+        "eleveai",
+        "maths visuel",
+        "ceinture orange",
+        "Shorts"
+      ]
     }
   ]
 }

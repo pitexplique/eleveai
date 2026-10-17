@@ -1,0 +1,13 @@
+{
+  "00-garde": "Probabilité conditionnelle : comment la reconnaître dans un énoncé ?",
+  "01-situation": "Une boutique de vélos électriques fait le bilan de l'année : 500 clients. 200 ont acheté un vélo électrique. Parmi eux, 150 s'en servent pour aller au travail.",
+  "02-tableau": "On range les clients dans un tableau croisé. En ligne : vélo électrique, autre achat. En colonne : va au travail à vélo, ou non. Total : 500.",
+  "03-simple": "Première question : quelle proportion des 500 clients a acheté un vélo électrique ? On regarde tout le tableau : 200 sur 500. Ce n'est pas une probabilité conditionnelle.",
+  "04-conditionnelle": "Deuxième question : parmi les acheteurs de vélo électrique, quelle proportion va au travail à vélo ? On ne regarde plus que leur ligne : 150 sur 200. C'est une probabilité conditionnelle.",
+  "05-mots": "Les mots qui la signalent : parmi, sachant que, chez les, si. Ils disent dans quel groupe on se place. Le groupe devient le nouveau total.",
+  "06-piege": "Le piège : « les clients qui ont acheté un vélo électrique ET vont au travail à vélo ». Pas de groupe de référence : c'est 150 sur 500, pas une probabilité conditionnelle.",
+  "07-defi": "À toi de jouer. « Chez les clients qui vont au travail à vélo, quelle proportion a acheté un vélo électrique ? » Conditionnelle ou pas ? Dans quel groupe se place-t-on ? Mets pause, et cherche !",
+  "07b-correction": "Correction. « Chez les » : c'est conditionnel. On se place dans le groupe des clients qui vont au travail à vélo.",
+  "08-finale": "Ce que tu as appris. Parmi, sachant que, chez les, si : une probabilité conditionnelle. Le groupe qui suit ces mots devient le nouveau total. « Et », sans groupe : ce n'est pas conditionnel. L'épisode 2 t'attend : la notation P indice A de B.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

@@ -1,0 +1,13 @@
+{
+  "00-garde": "P indice A de B : la formule, et à l'envers.",
+  "01-situation": "Un test rapide de la dengue. 2 % des personnes testées sont malades. Le test est positif chez 95 % des malades, et chez 4 % des personnes saines.",
+  "02-formule": "La formule : P indice A de B égale P de A inter B, divisé par P de A. Et donc P de A inter B égale P de A fois P indice A de B.",
+  "03-arbre": "L'arbre : M, malade, 0,02 ; puis T, positif, 0,95. M barre, 0,98 ; puis T, 0,04. P de T : 0,02 fois 0,95, plus 0,98 fois 0,04. 0,019 plus 0,0392 : 0,0582.",
+  "04-inverser": "Mais la vraie question : mon test est positif, suis-je malade ? C'est P indice T de M. Égale P de M inter T, divisé par P de T : 0,019 sur 0,0582. Environ 0,33.",
+  "05-sens": "Seulement 33 % ! Les malades sont rares : la plupart des tests positifs viennent des 98 % de gens sains.",
+  "06-piege": "Le piège : confondre P indice M de T, 0,95, et P indice T de M, 0,33. Le test détecte bien les malades, mais un positif n'est pas sûr.",
+  "07-defi": "À toi de jouer. Test négatif : quelle est la probabilité d'être sain ? Arrondi au millième. Mets pause, et cherche !",
+  "07b-correction": "Correction. P de T barre : 1 moins 0,0582, égale 0,9418. P de M barre inter T barre : 0,98 fois 0,96, égale 0,9408. Le quotient : environ 0,999.",
+  "08-finale": "Ce que tu as appris. P indice A de B égale P de A inter B sur P de A. Pour inverser la condition : calculer P de B avec l'arbre, puis diviser. P indice A de B n'est pas P indice B de A. L'épisode 3 t'attend : les probabilités totales.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

@@ -1,0 +1,13 @@
+{
+  "00-garde": "Univers, issue, événement : les mots des probabilités au lycée.",
+  "01-situation": "Aux petits chevaux, on lance deux dés et on additionne. Quels totaux peut-on obtenir ?",
+  "02-univers": "L'ensemble de tous les résultats possibles s'appelle l'univers. On le note oméga. Ici, oméga contient les totaux de 2 à 12 : 11 issues.",
+  "03-evenement": "Un événement est une partie de l'univers. A : « le total est pair ». A est réalisé par 2, 4, 6, 8, 10 et 12.",
+  "04-operations": "Le contraire de A, noté A barre : « le total est impair ». A inter B : A et B en même temps. A union B : A ou B, ou les deux.",
+  "05-methode": "La méthode : d'abord écrire l'univers en entier. Puis, pour chaque événement, entourer les issues qui le réalisent.",
+  "06-piege": "Le piège : les 11 totaux ne sont pas équiprobables. 7 sort de 6 façons, 2 d'une seule. L'univers dit ce qui peut sortir, pas avec quelle chance.",
+  "07-defi": "À toi de jouer. B : « le total est supérieur ou égal à 10 ». Quelles issues réalisent B ? Et A inter B ? Mets pause, et cherche !",
+  "07b-correction": "Correction. B est réalisé par 10, 11 et 12. A inter B, total pair et au moins 10 : 10 et 12.",
+  "08-finale": "Ce que tu as appris. L'univers, c'est l'ensemble des issues. Un événement est une partie de l'univers. Contraire, intersection, réunion. Et des issues ne sont pas forcément équiprobables. L'épisode 2 t'attend : construire une loi de probabilité.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

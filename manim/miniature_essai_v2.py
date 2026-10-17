@@ -1352,6 +1352,88 @@ ESSAIS = {
 }
 
 
+# 17/10/2026 — TEST YouTube PROBABILITÉS : 5 classes × épisodes 1 et 2 (CM1, CM2 blanche ;
+# 2de bleue ; 1re spé marron ; Tle spé noire). Le piège de l'épisode + l'échelle ENTIÈRE.
+def _piege_test(ceinture, haut, bas, t_haut=66, t_bas=58):
+    def f(d):
+        from miniature_short_expression import echelle
+        # rétrécit jusqu'à tenir à gauche de Ti-Margo
+        th, tb = t_haut, t_bas
+        while th > 40 and d.textlength(haut, font=police("ariblk.ttf", th)) > 880:
+            th -= 2
+        while tb > 36 and d.textlength(bas, font=police("ariblk.ttf", tb)) > 880:
+            tb -= 2
+        d.text((56, 350), haut, font=police("ariblk.ttf", th), fill=BLEU)
+        d.text((64, 490), bas, font=police("ariblk.ttf", tb), fill=ROUGE)
+        # blanche/jaune : nommée à gauche, elle toucherait « eleveai.fr » → échelle décalée
+        echelle(d, 700 if ceinture in ("blanche", "jaune") else 640, 592, ceinture, s=0.5)
+    return f
+
+
+ESSAIS.update({
+    "eleveai-maths-cm1-proba-vocabulaire": {
+        "badge": "MATHS · CM1", "duree": "EN 2 MIN",
+        "titre": ["COMPRENDRE CERTAIN,", "POSSIBLE, IMPOSSIBLE"],
+        "accroche": _piege_test("blanche", "1 bille bleue : impossible ?", "non : elle est là, c'est possible !"),
+        "dossier": "cm1/maths/probabilites/01-vocabulaire",
+    },
+    "eleveai-maths-cm1-proba-hasard": {
+        "badge": "MATHS · CM1", "duree": "EN 2 MIN",
+        "titre": ["COMPRENDRE", "LE HASARD"],
+        "accroche": _piege_test("blanche", "6, 6, 6… encore un 6 ?", "le dé n'a pas de mémoire !", 76),
+        "dossier": "cm1/maths/probabilites/02-hasard",
+    },
+    "eleveai-maths-cm2-proba-vocabulaire": {
+        "badge": "MATHS · CM2", "duree": "EN 2 MIN",
+        "titre": ["COMPRENDRE", "LES CHANCES AU DÉ"],
+        "accroche": _piege_test("blanche", "3 chances sur 6… ou sur 3 ?", "sur 6 : on compte TOUS les cas"),
+        "dossier": "cm2/maths/probabilites/01-vocabulaire",
+    },
+    "eleveai-maths-cm2-proba-hasard": {
+        "badge": "MATHS · CM2", "duree": "EN 2 MIN",
+        "titre": ["COMPRENDRE", "LE HASARD"],
+        "accroche": _piege_test("blanche", "Pile 4 fois : face, plus sûr ?", "non : toujours 1 chance sur 2"),
+        "dossier": "cm2/maths/probabilites/02-hasard",
+    },
+    "eleveai-maths-seconde-proba-vocabulaire": {
+        "badge": "MATHS · 2DE", "duree": "EN 2 MIN",
+        "titre": ["COMPRENDRE UNIVERS,", "ISSUE, ÉVÉNEMENT"],
+        "accroche": _piege_test("bleue", "11 totaux = 11 chances égales ?", "non : le 7 sort 6 fois plus que le 2"),
+        "dossier": "seconde/maths/probabilites/01-vocabulaire",
+    },
+    "eleveai-maths-seconde-proba-modele": {
+        "badge": "MATHS · 2DE", "duree": "EN 2 MIN",
+        "titre": ["COMPRENDRE UNE", "LOI DE PROBABILITÉ"],
+        "accroche": _piege_test("bleue", "Dé truqué : P(pair) = 3/6 ?", "non : 4/7", 72, 68),
+        "dossier": "seconde/maths/probabilites/02-loi-de-probabilite",
+    },
+    "eleveai-maths-premiere-proba-conditionnelle": {
+        "badge": "MATHS · 1RE SPÉ", "duree": "EN 2 MIN",
+        "titre": ["COMPRENDRE LES PROBAS", "CONDITIONNELLES"],
+        "accroche": _piege_test("marron", "P(S sachant D) = 45/200 ?", "non : on divise par 120"),
+        "dossier": "premiere/maths/probabilites/01-conditionnelle",
+    },
+    "eleveai-maths-premiere-proba-registres": {
+        "badge": "MATHS · 1RE SPÉ", "duree": "EN 2 MIN",
+        "titre": ["COMPRENDRE « PARMI »", "ET « SACHANT QUE »"],
+        "accroche": _piege_test("marron", "30 % ou 60 % ?", "parmi QUI ? le groupe en indice", 80),
+        "dossier": "premiere/maths/probabilites/02-parmi-sachant",
+    },
+    "eleveai-maths-terminale-proba-arbre": {
+        "badge": "MATHS · TLE SPÉ", "duree": "EN 3 MIN",
+        "titre": ["COMPRENDRE", "L'ARBRE PONDÉRÉ"],
+        "accroche": _piege_test("noire", "0,3 + 0,2 ?", "non : 0,6 × 0,3 + 0,4 × 0,2", 80),
+        "dossier": "terminale/maths/probabilites/01-arbre-pondere",
+    },
+    "eleveai-maths-terminale-proba-formule": {
+        "badge": "MATHS · TLE SPÉ", "duree": "EN 3 MIN",
+        "titre": ["COMPRENDRE LA FORMULE", "ET L'INVERSION"],
+        "accroche": _piege_test("noire", "Test fiable à 95 %…", "et seulement 33 % de malades !"),
+        "dossier": "terminale/maths/probabilites/02-formule-et-inversion",
+    },
+})
+
+
 def construire(nom, spec):
     img = fond()
     d = ImageDraw.Draw(img)

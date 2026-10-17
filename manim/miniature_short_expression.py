@@ -273,6 +273,39 @@ for _dos, _ep, _c, _titre, _sous, _acc4 in _PROBA_4E:
     }
     CEINTURE_SHORT[_nom] = _c
 
+# 17/10/2026 — TEST YouTube PROBABILITÉS : les 10 shorts (CM1, CM2 blanche ; 2de jaune ;
+# 1re spé et Tle spé orange). (classe, badge, sortie, nom, ceinture, titre, sous, lignes)
+_PROBA_TEST = [
+    ("cm1", "CM1", "cm1/maths/probabilites/01-vocabulaire", "vocabulaire", "blanche", ["LES YEUX", "FERMÉS"],
+     "quelle bille vas-tu tirer ?", [("3 rouges : rouge ?", 84, BLEU), ("certain !", 110, VERT), ("verte ? impossible", 80, ROUGE)]),
+    ("cm1", "CM1", "cm1/maths/probabilites/02-hasard", "hasard", "blanche", ["6… 6…", "6 !"],
+     "et le prochain lancer ?", [("trois 6 de suite", 90, BLEU), ("encore 6 ?", 100, ROUGE), ("le dé oublie tout !", 76, VERT)]),
+    ("cm2", "CM2", "cm2/maths/probabilites/01-vocabulaire", "vocabulaire", "blanche", ["FAIRE 6", "POUR REJOUER"],
+     "tu as combien de chances ?", [("6 : 1 chance sur 6", 80, BLEU), ("pair : 3 sur 6", 90, ORANGE), ("3 fois plus !", 100, VERT)]),
+    ("cm2", "CM2", "cm2/maths/probabilites/02-hasard", "hasard", "blanche", ["10 PILES", "DE SUITE"],
+     "tu paries sur quoi ?", [("pile × 10", 110, BLEU), ("face, plus sûr ?", 90, ROUGE), ("toujours 1 sur 2 !", 80, VERT)]),
+    ("seconde", "2DE", "seconde/maths/probabilites/01-vocabulaire", "vocabulaire", "jaune", ["7 OU 12 :", "TU PARIES ?"],
+     "deux dés, on additionne", [("12 : 6 + 6", 100, BLEU), ("1 seule façon", 84, ROUGE), ("7 : 6 façons !", 100, VERT)]),
+    ("seconde", "2DE", "seconde/maths/probabilites/02-loi-de-probabilite", "modele", "jaune", ["LE DÉ", "TRUQUÉ"],
+     "le 6 sort 2 fois plus : 1 chance sur 6 ?", [("5p + 2p = 1", 100, BLEU), ("p = 1/7", 100, ORANGE), ("le 6 : 2/7 !", 100, VERT)]),
+    ("premiere", "1RE SPÉ", "premiere/maths/probabilites/01-conditionnelle", "conditionnelle", "orange", ["90 % DES", "FOOTBALLEURS…"],
+     "…donc 90 % des garçons jouent au foot ?", [("90 % des foot", 90, BLEU), ("≠ 90 % des garçons", 76, ROUGE), ("parmi QUI ?", 100, VERT)], 84),
+    ("premiere", "1RE SPÉ", "premiere/maths/probabilites/02-parmi-sachant", "registres", "orange", ["LE CAR", "EN RETARD"],
+     "60 % des retards sous la pluie…", [("retards : 60 % pluie", 74, BLEU), ("pluie : 30 % retard", 74, ORANGE), ("pas pareil !", 100, VERT)]),
+    ("terminale", "TLE SPÉ", "terminale/maths/probabilites/01-arbre-pondere", "arbre", "orange", ["LE GARDIEN", "DE BUT"],
+     "il arrête 25 % des tirs ?", [("(30 % + 20 %) ÷ 2 ?", 72, ROUGE), ("0,6×0,3 + 0,4×0,2", 72, BLEU), ("= 0,26 !", 110, VERT)]),
+    ("terminale", "TLE SPÉ", "terminale/maths/probabilites/02-formule-et-inversion", "formule", "orange", ["TEST", "POSITIF"],
+     "le test de la dengue", [("test fiable à 95 %", 80, BLEU), ("malade à 95 % ?", 90, ROUGE), ("non : ≈ 33 % !", 100, VERT)]),
+]
+for _t in _PROBA_TEST:
+    _cl, _bd, _sortie, _ep, _c, _titre, _sous, _lg = _t[:8]
+    _nom = f"eleveai-maths-{_cl}-proba-{_ep}-short"
+    SHORTS[_nom] = {
+        "badge": f"PROBABILITÉS · {_bd}", "titre": _titre, "taille": _t[8] if len(_t) > 8 else 92, "sous": _sous,
+        "taille_sous": 44, "couleur_sous": ORANGE, "accroche": _acc(_lg), "dossier": f"{_cl}/maths/fr", "sortie": _sortie,
+    }
+    CEINTURE_SHORT[_nom] = _c
+
 
 def main():
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")

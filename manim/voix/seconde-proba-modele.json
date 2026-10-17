@@ -1,0 +1,12 @@
+{
+  "00-garde": "Un dé truqué : comment écrire sa loi de probabilité ?",
+  "01-situation": "Un dé de jeu de société est truqué. On a noté ses résultats : le 6 sort deux fois plus souvent que chacune des autres faces.",
+  "02-loi": "Une loi de probabilité, c'est un tableau : chaque issue, et sa probabilité. Chaque probabilité est entre 0 et 1, et leur somme vaut 1.",
+  "03-calcul": "Les faces 1 à 5 ont la même probabilité p. La face 6 a 2p. Somme : 5p plus 2p, 7p, égale 1. Donc p vaut 1 sur 7, et la face 6 vaut 2 sur 7.",
+  "04-evenement": "La probabilité d'un événement, c'est la somme des probabilités de ses issues. Obtenir un nombre pair : 2, 4 et 6. 1 sur 7, plus 1 sur 7, plus 2 sur 7 : 4 sur 7.",
+  "05-piege": "Le piège : dire 3 sur 6 pour un nombre pair. Ça marche pour un dé équilibré, pas pour un dé truqué. Ici, c'est 4 sur 7.",
+  "06-defi": "À toi de jouer. Une roue a trois couleurs : rouge 0,5, bleu 0,3. Quelle est la probabilité de vert ? Mets pause, et cherche !",
+  "06b-correction": "Correction. La somme vaut 1. 1 moins 0,5 moins 0,3 : vert vaut 0,2.",
+  "07-finale": "Ce que tu as appris. Une loi de probabilité donne chaque issue et sa probabilité, entre 0 et 1, de somme 1. La probabilité d'un événement, c'est la somme de ses issues. L'épisode 3 t'attend : calculer avec une loi.",
+  "08-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

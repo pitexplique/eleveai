@@ -1,0 +1,12 @@
+{
+  "00-garde": "Une probabilité, c'est toujours entre 0 et 1.",
+  "01-situation": "Une publicité annonce : « Notre panneau solaire a 120 % de chances d'être rentable ! » Ça sonne bien. Mais c'est impossible.",
+  "02-regle": "Une probabilité est toujours comprise entre 0 et 1. 0, c'est un événement impossible. 1, c'est un événement certain. Entre les deux, tout ce qui peut arriver.",
+  "03-ecritures": "On l'écrit de trois façons. En décimal : 0,25. En fraction : 1 sur 4. En pourcentage : 25 %. C'est le même nombre.",
+  "04-pourcentage": "En pourcentage, la règle devient : entre 0 % et 100 %. 120 %, c'est plus que 100 % : ce n'est pas une probabilité.",
+  "05-piege": "Le piège : une fraction plus grande que 1. 7 sur 5, c'est 1,4 : impossible. Et un nombre négatif, comme moins 0,2 : impossible aussi.",
+  "06-defi": "À toi de jouer. Lesquels peuvent être des probabilités : 0,95 ; 3 sur 2 ; 100 % ; moins 0,2 ? Mets pause, et cherche !",
+  "06b-correction": "Correction. 0,95 : oui. 100 % : oui, c'est un événement certain. 3 sur 2 vaut 1,5 : non. Moins 0,2 : non.",
+  "07-finale": "Ce que tu as appris. Une probabilité est entre 0 et 1, ou entre 0 % et 100 %. 0 : impossible. 1 : certain. Plus que 1 ou négatif : ce n'est pas une probabilité. L'épisode 2 t'attend : l'événement contraire.",
+  "08-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

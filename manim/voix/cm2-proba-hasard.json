@@ -1,0 +1,12 @@
+{
+  "00-garde": "Hasard ou pas hasard ?",
+  "01-situation": "Pour former deux équipes de foot, on tire les noms dans un chapeau. Personne ne peut tricher : c'est le hasard qui décide.",
+  "02-hasard": "Une situation de hasard : on connaît tous les résultats possibles, mais on ne sait pas lequel va sortir.",
+  "03-tri": "Tirer un nom dans le chapeau : hasard. La météo de demain : on ne sait pas vraiment, il y a du hasard. Le résultat de 12 fois 3 : pas de hasard, ça fait toujours 36.",
+  "04-methode": "Je me pose deux questions. Est-ce que je connais les résultats possibles ? Est-ce que je peux savoir lequel sortira ? Oui, puis non : c'est le hasard.",
+  "05-piege": "Le piège : pile, pile, pile, pile. Ce n'est pas plus facile d'avoir face maintenant. La pièce ne se souvient de rien : toujours 1 chance sur 2.",
+  "06-defi": "À toi de jouer. Choisir le jour de son anniversaire. Tirer un numéro à la tombola. Lequel est une situation de hasard ? Mets pause, et cherche !",
+  "06b-correction": "Correction. Le numéro de la tombola, c'est le hasard. Le jour de son anniversaire, on le connaît déjà.",
+  "07-finale": "Ce que tu as appris. Le hasard : on connaît les résultats possibles, pas celui qui va sortir. Une pièce ou un dé n'ont pas de mémoire. L'épisode 3 t'attend : comparer les chances.",
+  "08-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

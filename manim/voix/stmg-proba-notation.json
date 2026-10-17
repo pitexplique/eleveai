@@ -1,0 +1,12 @@
+{
+  "00-garde": "P indice A de B : écrire une probabilité conditionnelle.",
+  "01-situation": "Une entreprise trie ses déchets. On note R : « le déchet est recyclable » et T : « il est bien trié ».",
+  "02-ecrire": "« Parmi les déchets recyclables, 70 % sont bien triés. » On se place dans R : R va en indice. On écrit P indice R de T égale 0,7.",
+  "03-lire": "On lit : probabilité de T sachant R. L'événement dont on parle, T, est entre parenthèses. Le groupe dans lequel on se place, R, est en bas, en indice.",
+  "04-autre-sens": "« Parmi les déchets bien triés, 80 % sont recyclables. » Cette fois, on se place dans T : P indice T de R égale 0,8.",
+  "05-piege": "Le piège : P indice R de T et P indice T de R, ce n'est pas la même chose. 0,7 et 0,8 : deux groupes différents, deux nombres différents.",
+  "06-defi": "À toi de jouer. Une épicerie bio. B : « le client achète bio », V : « il vient à vélo ». « Parmi les clients qui achètent bio, 40 % viennent à vélo. » Comment l'écrire ? Mets pause, et cherche !",
+  "06b-correction": "Correction. On se place parmi les clients bio : B va en indice. P indice B de V égale 0,4.",
+  "07-finale": "Ce que tu as appris. P indice A de B : la probabilité de B sachant A. Le groupe où l'on se place va en indice. P indice A de B n'est pas P indice B de A. L'épisode 3 t'attend : calculer avec un tableau croisé.",
+  "08-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}
