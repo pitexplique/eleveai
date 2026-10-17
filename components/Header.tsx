@@ -14,6 +14,7 @@ import { PROFILS } from "@/lib/matrice/profils";
 import type { ProfilId } from "@/lib/matrice/types";
 // ⚠️ N'EST RENDU QUE SUR L'ACCUEIL — voir `rechercheAuCentre` plus bas.
 import RechercheEntete from "@/components/accueil/RechercheEntete";
+import { IconeInstagram, INSTAGRAM_URL } from "@/components/IconesReseaux";
 
 // ─── Nav structure ────────────────────────────────────────────────────────────
 
@@ -787,6 +788,25 @@ export default function Header() {
               <rect width="24" height="17" rx="4.5" fill="#FF0000" />
               <path d="M9.6 4.6v7.8l6.9-3.9z" fill="#fff" />
             </svg>
+          </a>
+          {/* ⭐ INSTAGRAM À CÔTÉ DE YOUTUBE (Frédéric, 17/10/2026, le jour du
+              carrousel CRPE). Un lien À PART, pas dans la paire : la paire mène
+              à la chaîne, et un lien ne peut avoir qu'une destination.
+              ⚠️ SEULEMENT À PARTIR DE 1 340 px : à 360 px il ne reste que
+              13 px avant « Inscription », et sur l'accueil la recherche du
+              centre recouvre l'icône jusqu'à ~1 300 px (mesuré le 17/10 : 4 px
+              de trop à 1 280, 39 px d'air à 1 366). Le pied de page porte les
+              deux icônes partout, téléphone compris. */}
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => track("entete_instagram")}
+            title="Instagram — @eleveai.fr"
+            aria-label="Le compte Instagram d'EleveAI, @eleveai.fr"
+            className="hidden shrink-0 items-center rounded-md transition hover:brightness-110 min-[1340px]:inline-flex"
+          >
+            <IconeInstagram id="ig-entete" className="h-[1.15rem] w-auto drop-shadow-sm lg:h-5" />
           </a>
         </div>
 

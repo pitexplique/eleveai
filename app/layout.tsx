@@ -222,7 +222,7 @@ export default function RootLayout({
       foundingLocation: { "@type": "Place", name: "La Réunion, France" },
       // La chaîne officielle, confirmée par Frédéric le 06/08. C'est ce lien
       // qu'une IA cite quand on lui demande « la chaîne d'EleveAI ».
-      sameAs: ["https://www.youtube.com/@eleveai974"],
+      sameAs: ["https://www.youtube.com/@eleveai974", "https://www.instagram.com/eleveai.fr/"],
     },
     // ⛔ LE BLOC `Periodical` EST PARTI LE 06/08. Il déclarait EleveAI comme un
     // périodique — un journal — sur toutes les pages du site. Invisible pour un

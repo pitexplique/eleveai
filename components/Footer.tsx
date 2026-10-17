@@ -15,6 +15,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { cgvEnVigueur } from "@/lib/legal/editeur";
+import {
+  IconeInstagram,
+  IconeYoutube,
+  INSTAGRAM_URL,
+  YOUTUBE_URL,
+} from "@/components/IconesReseaux";
 
 // ⚠️ LES ÉVALUATIONS NATIONALES N'AVAIENT AUCUN LIEN DE PIED DE PAGE (22/08).
 // Les huit pages existaient, étaient au sitemap en priorité 0,9, et n'étaient
@@ -353,6 +359,33 @@ export default function Footer() {
             >
               Nous contacter
             </Link>
+
+            {/* ⭐ LES DEUX COMPTES (17/10/2026) : YouTube et Instagram côte à
+                côte, sur toutes les pages — y compris sur téléphone, où
+                l'en-tête n'a de place que pour la pastille YouTube. */}
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-slate-500">Suivez-nous</span>
+              <a
+                href={YOUTUBE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="La chaîne YouTube d'EleveAI, @eleveai974"
+                title="YouTube — @eleveai974"
+                className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 transition hover:bg-white/15"
+              >
+                <IconeYoutube className="h-4 w-auto" />
+              </a>
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Le compte Instagram d'EleveAI, @eleveai.fr"
+                title="Instagram — @eleveai.fr"
+                className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 transition hover:bg-white/15"
+              >
+                <IconeInstagram id="ig-pied" className="h-5 w-5" />
+              </a>
+            </div>
           </div>
 
           <div>
