@@ -434,9 +434,9 @@ export default function RootLayout({
               l'habillage du site — seul le contenu embarqué s'affiche. */}
           <MasqueSurEmbed>
             <DevBanner />
-            {/* 17/10/2026 : la bannière CRPE, au-dessus de l'en-tête, sur
-                l'accueil seulement (voir le composant). */}
-            <BanniereCrpe />
+            {/* 17/10/2026 : la bannière CRPE, en haut sur TÉLÉPHONE seulement
+                (sur ordinateur, elle est au-dessus des colonnes de l'accueil). */}
+            <BanniereCrpe place="haut" />
             <Header />
           </MasqueSurEmbed>
 

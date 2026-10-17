@@ -134,6 +134,7 @@ import { track } from "@vercel/analytics";
 import BandeauMatiere from "@/components/accueil/BandeauMatiere";
 import RangeeDefilante from "@/components/accueil/RangeeDefilante";
 import RechercheEntete from "@/components/accueil/RechercheEntete";
+import BanniereCrpe from "@/components/accueil/BanniereCrpe";
 import {
   actionsPour,
   MATIERES,
@@ -1134,6 +1135,10 @@ export default function AccueilMatieres() {
         titre={matiere.titreBandeau}
         phrase={matiere.phrase}
       />
+
+      {/* La bannière CRPE, au-dessus des trois colonnes — maths et français,
+          les deux tests du concours. Voir components/accueil/BanniereCrpe.tsx. */}
+      {(matiere.id === "maths" || matiere.id === "francais") && <BanniereCrpe place="colonnes" />}
 
 
       {/* ⭐ LE PANNEAU DÉCLARE QU'IL EST PILOTÉ PAR L'ONGLET OUVERT. `role` et

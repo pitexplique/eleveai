@@ -1,6 +1,15 @@
 "use client";
 
-// LA BANNIÈRE CRPE, TOUT EN HAUT DE L'ACCUEIL (17/10/2026).
+// LA BANNIÈRE CRPE DE L'ACCUEIL (17/10/2026).
+//
+// ⭐ DEUX PLACES SELON L'ÉCRAN (Frédéric, 17/10) :
+// - ORDINATEUR : au-dessus des trois colonnes Lycée / Collège / Primaire, sous
+//   « Cours et exercices corrigés » (`place="colonnes"`, AccueilMatieres) —
+//   « ça convient en bas mais pas en haut, remets-la au-dessus des 3 colonnes » ;
+// - TÉLÉPHONE : tout en haut, au-dessus de l'en-tête (`place="haut"`,
+//   app/layout.tsx) — « laisse en haut pour le téléphone ».
+// Le même composant est donc rendu deux fois, chacun masqué à l'autre taille
+// (seuil `sm`, 640 px). ⛔ Ne pas fusionner les deux places.
 //
 // Historique, pour ne pas refaire le chemin : bandeau en bas de page (15/10),
 // fine bande sombre puis bannière au style des pubs SOUS « Cours et exercices
@@ -20,16 +29,20 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { track } from "@vercel/analytics";
 
-export default function BanniereCrpe() {
+export default function BanniereCrpe({ place }: { place: "haut" | "colonnes" }) {
   const pathname = usePathname();
-  if (pathname !== "/accueil") return null;
+  // En haut, c'est le layout qui la rend : sur l'accueil seulement.
+  if (place === "haut" && pathname !== "/accueil") return null;
   return (
     // ⭐ 17/10, suite : « la bannière a trop de hauteur — il y a 2 ou 3
     // commits tu avais fait une bannière d'une bonne hauteur en fond bleu
     // foncé ». Retour à la BANDE BLEU NUIT du 16/10 (commit 05755453), en plus
     // serrée : Ti Margo plus petit, et sur grand écran les boutons À DROITE du
     // texte au lieu d'en dessous. Le contenu (deux tests, samedi, suivi) reste.
-    <section aria-label="Préparer le CRPE" className="bg-[#041B33] px-3 py-2 text-white sm:px-4">
+    <section
+      aria-label="Préparer le CRPE"
+      className={`bg-[#041B33] px-3 py-2 text-white sm:px-4 ${place === "haut" ? "sm:hidden" : "hidden sm:block"}`}
+    >
       <div className="mx-auto flex max-w-6xl items-center gap-3 sm:gap-4">
         <Image
           src="/images/ti-margo-diplome.png"
