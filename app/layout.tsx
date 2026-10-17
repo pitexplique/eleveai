@@ -13,6 +13,7 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import DevBanner from "@/components/DevBanner";
 import Header from "@/components/Header";
+import BanniereCrpe from "@/components/accueil/BanniereCrpe";
 import Footer from "@/components/Footer";
 import MasqueSurEmbed from "@/components/MasqueSurEmbed";
 import { EleveProvider } from "@/context/EleveContext";
@@ -433,6 +434,9 @@ export default function RootLayout({
               l'habillage du site — seul le contenu embarqué s'affiche. */}
           <MasqueSurEmbed>
             <DevBanner />
+            {/* 17/10/2026 : la bannière CRPE, au-dessus de l'en-tête, sur
+                l'accueil seulement (voir le composant). */}
+            <BanniereCrpe />
             <Header />
           </MasqueSurEmbed>
 
