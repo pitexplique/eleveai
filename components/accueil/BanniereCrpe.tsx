@@ -39,9 +39,12 @@ export default function BanniereCrpe({ place }: { place: "haut" | "colonnes" }) 
     // foncé ». Retour à la BANDE BLEU NUIT du 16/10 (commit 05755453), en plus
     // serrée : Ti Margo plus petit, et sur grand écran les boutons À DROITE du
     // texte au lieu d'en dessous. Le contenu (deux tests, samedi, suivi) reste.
+    // ⭐ 17/10 encore : « ce qui me dérange, c'est la couleur ». Le bleu nuit
+    // part : la bande prend les tons CHAUDS DES PUBS (ambre → rose pâle, texte
+    // bleu nuit, boutons orange), la hauteur compacte reste.
     <section
       aria-label="Préparer le CRPE"
-      className={`bg-[#041B33] px-3 py-2 text-white sm:px-4 ${place === "haut" ? "sm:hidden" : "hidden sm:block"}`}
+      className={`border-y border-amber-200 bg-gradient-to-r from-amber-100 via-rose-50 to-amber-50 px-3 py-2 text-[#041B33] sm:px-4 ${place === "haut" ? "sm:hidden" : "hidden sm:block"}`}
     >
       <div className="mx-auto flex max-w-6xl items-center gap-3 sm:gap-4">
         <Image
@@ -56,10 +59,10 @@ export default function BanniereCrpe({ place }: { place: "haut" | "colonnes" }) 
         />
         <div className="flex min-w-0 flex-1 flex-col gap-1.5 lg:flex-row lg:items-center lg:gap-4">
           <div className="min-w-0 flex-1">
-            <p className="text-xs font-black uppercase tracking-wide text-amber-300">
+            <p className="text-xs font-black uppercase tracking-wide text-orange-600">
               CRPE 2027 · futurs professeurs des écoles
             </p>
-            <p className="text-sm font-bold leading-5">
+            <p className="text-sm font-bold leading-5 text-slate-800">
               {/* ⚠️ Deux longueurs : la phrase entière doublerait la hauteur sur
                   un téléphone. */}
               <span className="sm:hidden">
@@ -76,7 +79,7 @@ export default function BanniereCrpe({ place }: { place: "haut" | "colonnes" }) 
               prefetch={false}
               href="/formation-crpe/test?from=accueil"
               onClick={() => track("accueil_bande_crpe", { lien: "test-maths" })}
-              className="rounded-full bg-amber-400 px-3 py-1 text-xs font-black text-[#041B33] transition hover:bg-amber-300"
+              className="rounded-full bg-orange-500 px-3 py-1 text-xs font-black text-white transition hover:bg-orange-400"
             >
               Test de maths
             </Link>
@@ -84,7 +87,7 @@ export default function BanniereCrpe({ place }: { place: "haut" | "colonnes" }) 
               prefetch={false}
               href="/formation-crpe/test-orthographe?from=accueil"
               onClick={() => track("accueil_bande_crpe", { lien: "test-ortho" })}
-              className="rounded-full bg-amber-400 px-3 py-1 text-xs font-black text-[#041B33] transition hover:bg-amber-300"
+              className="rounded-full bg-orange-500 px-3 py-1 text-xs font-black text-white transition hover:bg-orange-400"
             >
               Test d&apos;orthographe
             </Link>
@@ -92,7 +95,7 @@ export default function BanniereCrpe({ place }: { place: "haut" | "colonnes" }) 
               prefetch={false}
               href="/formation-crpe?from=accueil"
               onClick={() => track("accueil_bande_crpe", { lien: "formation" })}
-              className="rounded-full bg-white/10 px-3 py-1 text-xs font-black text-white ring-1 ring-white/25 transition hover:bg-white/20"
+              className="rounded-full bg-white px-3 py-1 text-xs font-black text-[#041B33] ring-1 ring-slate-300 transition hover:bg-slate-50"
             >
               Le samedi →
             </Link>
@@ -100,7 +103,7 @@ export default function BanniereCrpe({ place }: { place: "haut" | "colonnes" }) 
               prefetch={false}
               href="/formation-crpe?from=accueil#suivi"
               onClick={() => track("accueil_bande_crpe", { lien: "suivi" })}
-              className="rounded-full bg-white/10 px-3 py-1 text-xs font-black text-white ring-1 ring-white/25 transition hover:bg-white/20"
+              className="rounded-full bg-white px-3 py-1 text-xs font-black text-[#041B33] ring-1 ring-slate-300 transition hover:bg-slate-50"
             >
               Suivi quotidien →
             </Link>
