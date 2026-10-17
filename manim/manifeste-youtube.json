@@ -11606,6 +11606,375 @@
         "ceinture orange",
         "Shorts"
       ]
+    },
+    {
+      "id": "stmg-proba-reconnaitre",
+      "notionId": "proba_conditionnelle_tableau",
+      "microId": "probaC_reconnaitre",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/01-reconnaitre/eleveai-maths-stmg-proba-reconnaitre.mp4",
+      "miniature": "stmg/maths/probabilites/01-reconnaitre/eleveai-maths-stmg-proba-reconnaitre.png",
+      "titre": "150 sur 200 ou sur 500 ? — Reconnaître une probabilité conditionnelle — épisode 1 · Maths STMG",
+      "accroche": "Une boutique de vélos électriques fait son bilan : 500 clients, 200 ont acheté un vélo électrique, et parmi eux 150 s'en servent pour aller au travail. 150 sur 200, ou 150 sur 500 ?\n\nDans cette vidéo :\n• le tableau croisé des 500 clients\n• proportion simple : on regarde tout le tableau, 200 sur 500\n• parmi les acheteurs : on ne regarde plus que leur ligne, 150 sur 200\n• les mots qui la signalent : parmi, sachant que, chez les, si\n• le piège du « et » : pas de groupe de référence, c'est 150 sur 500\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : « chez les clients qui vont au travail à vélo, quelle proportion a acheté un vélo électrique ? » Conditionnelle ou pas ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_conditionnelle_tableau&microId=probaC_reconnaitre&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Probabilité conditionnelle : le bilan de la boutique"
+        ],
+        [
+          "00:20",
+          "Le tableau croisé"
+        ],
+        [
+          "00:34",
+          "Première question : 200 sur 500"
+        ],
+        [
+          "00:48",
+          "Deuxième question : parmi les acheteurs"
+        ],
+        [
+          "01:04",
+          "Les mots qui la signalent"
+        ],
+        [
+          "01:16",
+          "Le piège du « ET »"
+        ],
+        [
+          "01:29",
+          "À toi de jouer"
+        ],
+        [
+          "01:46",
+          "Correction"
+        ],
+        [
+          "01:56",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:16",
+          "Entraîne-toi sur le coach"
+        ]
+      ],
+      "tags": [
+        "probabilité conditionnelle",
+        "parmi",
+        "sachant que",
+        "tableau croisé",
+        "vélo électrique",
+        "business",
+        "probabilités",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-reconnaitre-short",
+      "notionId": "proba_conditionnelle_tableau",
+      "microId": "probaC_reconnaitre",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-reconnaitre",
+      "fichier": "stmg/maths/probabilites/01-reconnaitre/eleveai-maths-stmg-proba-reconnaitre-short.mp4",
+      "miniature": "stmg/maths/probabilites/01-reconnaitre/eleveai-maths-stmg-proba-reconnaitre-short.png",
+      "titre": "80 % des bien triés = 80 % du plastique ? ♻️ — STMG #Shorts",
+      "accroche": "80 % des déchets bien triés sont du plastique. Donc 80 % du plastique est bien trié ? Non ! Ça, c'est parmi les déchets bien triés. Parmi le plastique, c'est peut-être 40 %. Le mot qui compte : parmi QUI ?\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : « 70 % des entreprises qui recyclent font des bénéfices » : probabilité conditionnelle ou pas ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_conditionnelle_tableau&microId=probaC_reconnaitre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilité conditionnelle",
+        "parmi",
+        "tri des déchets",
+        "recyclage",
+        "écologie",
+        "probabilités",
+        "maths STMG",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "stmg-proba-notation",
+      "notionId": "proba_conditionnelle_tableau",
+      "microId": "probaC_notation",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/02-notation/eleveai-maths-stmg-proba-notation.mp4",
+      "miniature": "stmg/maths/probabilites/02-notation/eleveai-maths-stmg-proba-notation.png",
+      "titre": "P_R(T) ou P_T(R) ? Ne te trompe plus d'indice — La notation P_A(B) — épisode 2 · Maths STMG",
+      "accroche": "Une entreprise trie ses déchets. R : « le déchet est recyclable », T : « il est bien trié ». « Parmi les déchets recyclables, 70 % sont bien triés » : comment l'écrire ?\n\nDans cette vidéo :\n• on se place dans R : R va en indice, P_R(T) = 0,7\n• lire la notation : probabilité de T sachant R\n• dans l'autre sens : P_T(R) = 0,8\n• le piège : P_R(T) n'est pas P_T(R), deux groupes, deux nombres\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : une épicerie bio, « parmi les clients qui achètent bio, 40 % viennent à vélo » : comment l'écrire ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_conditionnelle_tableau&microId=probaC_notation&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "La notation P_A(B) : le tri des déchets"
+        ],
+        [
+          "00:14",
+          "On se place dans R"
+        ],
+        [
+          "00:28",
+          "Lire la notation"
+        ],
+        [
+          "00:41",
+          "Dans l'autre sens"
+        ],
+        [
+          "00:55",
+          "Le piège"
+        ],
+        [
+          "01:07",
+          "À toi de jouer"
+        ],
+        [
+          "01:27",
+          "Correction"
+        ],
+        [
+          "01:37",
+          "Ce que tu as appris"
+        ],
+        [
+          "01:56",
+          "Le coach et l'abonnement"
+        ]
+      ],
+      "tags": [
+        "probabilité conditionnelle",
+        "notation",
+        "sachant",
+        "tri des déchets",
+        "recyclage",
+        "écologie",
+        "probabilités",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-notation-short",
+      "notionId": "proba_conditionnelle_tableau",
+      "microId": "probaC_notation",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-notation",
+      "fichier": "stmg/maths/probabilites/02-notation/eleveai-maths-stmg-proba-notation-short.mp4",
+      "miniature": "stmg/maths/probabilites/02-notation/eleveai-maths-stmg-proba-notation-short.png",
+      "titre": "60 % des clients avec un avis reviennent : comment l'écrire ? 🛒 — STMG #Shorts",
+      "accroche": "Une boutique en ligne : 60 % des clients qui ont laissé un avis reviennent acheter. A : « laisse un avis », R : « revient acheter ». On se place parmi ceux qui ont laissé un avis : A en indice. P_A(R) = 0,6.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : « parmi les clients qui reviennent, 30 % ont laissé un avis » : P_A(R) ou P_R(A) ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_conditionnelle_tableau&microId=probaC_notation&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilité conditionnelle",
+        "notation",
+        "boutique en ligne",
+        "business",
+        "probabilités",
+        "maths STMG",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-encadrement",
+      "notionId": "auto_proba_base",
+      "microId": "auto_proba_encadrement",
+      "classe": "premiere",
+      "ceinture": "bleue",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "fichier": "premiere-commun/maths/probabilites/01-entre-0-et-1/eleveai-maths-premiere-commun-proba-encadrement.mp4",
+      "miniature": "premiere-commun/maths/probabilites/01-entre-0-et-1/eleveai-maths-premiere-commun-proba-encadrement.png",
+      "titre": "120 % de chances ? IMPOSSIBLE ! — Une probabilité est entre 0 et 1 — épisode 1 · Maths 1re",
+      "accroche": "Une publicité annonce : « Notre panneau solaire a 120 % de chances d'être rentable ! » Ça sonne bien. Mais c'est impossible.\n\nDans cette vidéo :\n• une probabilité est toujours entre 0 et 1 : 0 impossible, 1 certain\n• trois écritures du même nombre : 0,25 = 1/4 = 25 %\n• en pourcentage : entre 0 % et 100 %\n• le piège : 7/5 = 1,4 ou −0,2, ce ne sont pas des probabilités\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : 0,95 ; 3/2 ; 100 % ; −0,2 : lesquels peuvent être des probabilités ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_proba_base&microId=auto_proba_encadrement&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Entre 0 et 1 : la pub du panneau solaire"
+        ],
+        [
+          "00:16",
+          "La jauge : impossible, certain"
+        ],
+        [
+          "00:30",
+          "Trois écritures : 0,25 = 1/4 = 25 %"
+        ],
+        [
+          "00:44",
+          "En pourcentage : 120 % déborde"
+        ],
+        [
+          "00:56",
+          "Le piège : 7/5 et −0,2"
+        ],
+        [
+          "01:10",
+          "Défi"
+        ],
+        [
+          "01:25",
+          "Correction"
+        ],
+        [
+          "01:41",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:01",
+          "Le coach"
+        ]
+      ],
+      "tags": [
+        "probabilité",
+        "entre 0 et 1",
+        "pourcentage",
+        "panneau solaire",
+        "automatismes",
+        "probabilités",
+        "maths",
+        "première",
+        "1re",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-encadrement-short",
+      "notionId": "auto_proba_base",
+      "microId": "auto_proba_encadrement",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-commun-proba-encadrement",
+      "fichier": "premiere-commun/maths/probabilites/01-entre-0-et-1/eleveai-maths-premiere-commun-proba-encadrement-short.mp4",
+      "miniature": "premiere-commun/maths/probabilites/01-entre-0-et-1/eleveai-maths-premiere-commun-proba-encadrement-short.png",
+      "titre": "120 % de chances d'être rentable : tu signes ? ☀️ — 1re #Shorts",
+      "accroche": "« Notre panneau solaire a 120 % de chances d'être rentable ! » Tu signes ? Non ! Une probabilité ne dépasse jamais 100 %. 100 %, c'est déjà certain. 120 %, c'est du marketing, pas des maths.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : 0,99 ou 99 sur 100, lequel est le plus probable ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_proba_base&microId=auto_proba_encadrement&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #première #lycée",
+      "tags": [
+        "probabilité",
+        "pourcentage",
+        "panneau solaire",
+        "marketing",
+        "probabilités",
+        "maths première",
+        "1re",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-contraire",
+      "notionId": "auto_proba_base",
+      "microId": "auto_proba_contraire",
+      "classe": "premiere",
+      "ceinture": "bleue",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "fichier": "premiere-commun/maths/probabilites/02-contraire/eleveai-maths-premiere-commun-proba-contraire.mp4",
+      "miniature": "premiere-commun/maths/probabilites/02-contraire/eleveai-maths-premiere-commun-proba-contraire.png",
+      "titre": "En avance ? Le contraire n'est PAS « en retard » ! — L'événement contraire — épisode 2 · Maths 1re",
+      "accroche": "Une éolienne tourne, un jour donné, avec une probabilité de 0,85. Quelle est la probabilité qu'elle ne tourne pas ?\n\nDans cette vidéo :\n• l'événement contraire, noté A barre : un des deux arrive forcément, jamais les deux\n• la règle : P(Ā) = 1 − P(A), ici 1 − 0,85 = 0,15\n• en pourcentage : 30 % rapportent leur emballage, 70 % non\n• le piège du colis : le contraire de « en avance » n'est pas « en retard »\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : 35 % des bouteilles ne sont pas recyclées : quelle est la probabilité qu'une bouteille soit recyclée ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_proba_base&microId=auto_proba_contraire&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "L'événement contraire : l'éolienne à 0,85"
+        ],
+        [
+          "00:16",
+          "Le contraire, A barre"
+        ],
+        [
+          "00:26",
+          "La règle : 1 − 0,85"
+        ],
+        [
+          "00:37",
+          "En pourcentage : les emballages"
+        ],
+        [
+          "00:48",
+          "Le piège du colis"
+        ],
+        [
+          "01:02",
+          "Défi : les bouteilles recyclées"
+        ],
+        [
+          "01:16",
+          "Correction"
+        ],
+        [
+          "01:29",
+          "Ce que tu as appris"
+        ],
+        [
+          "01:47",
+          "Abonnement"
+        ]
+      ],
+      "tags": [
+        "événement contraire",
+        "1 moins p",
+        "éolienne",
+        "recyclage",
+        "écologie",
+        "automatismes",
+        "probabilités",
+        "maths",
+        "première",
+        "1re",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-contraire-short",
+      "notionId": "auto_proba_base",
+      "microId": "auto_proba_contraire",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-commun-proba-contraire",
+      "fichier": "premiere-commun/maths/probabilites/02-contraire/eleveai-maths-premiere-commun-proba-contraire-short.mp4",
+      "miniature": "premiere-commun/maths/probabilites/02-contraire/eleveai-maths-premiere-commun-proba-contraire-short.png",
+      "titre": "30 % de pluie = 70 % de soleil ? 🌧️ — 1re #Shorts",
+      "accroche": "La météo annonce 30 % de pluie demain. Donc 70 % de beau temps ? Pas tout à fait ! 70 %, c'est « pas de pluie ». Pas de pluie, ça peut être nuageux. Le contraire de pluie, c'est « pas de pluie », pas « beau temps ».\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : un colis a 20 % de chances d'arriver en retard. Quelle est la probabilité qu'il ne soit pas en retard ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_proba_base&microId=auto_proba_contraire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #première #lycée",
+      "tags": [
+        "événement contraire",
+        "météo",
+        "pluie",
+        "probabilités",
+        "maths première",
+        "1re",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
     }
   ]
 }

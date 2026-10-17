@@ -1433,6 +1433,34 @@ ESSAIS.update({
     },
 })
 
+# 17/10/2026 — même TEST, suite : STMG et 1re tronc commun (bleue), écologie / business.
+ESSAIS.update({
+    "eleveai-maths-stmg-proba-reconnaitre": {
+        "badge": "MATHS · STMG", "duree": "EN 3 MIN",
+        "titre": ["COMPRENDRE LES PROBAS", "CONDITIONNELLES"],
+        "accroche": _piege_test("bleue", "150 sur 200 ou sur 500 ?", "tout dépend du mot PARMI"),
+        "dossier": "stmg/maths/probabilites/01-reconnaitre",
+    },
+    "eleveai-maths-stmg-proba-notation": {
+        "badge": "MATHS · STMG", "duree": "EN 2 MIN",
+        "titre": ["ÉCRIRE UNE PROBA", "CONDITIONNELLE"],
+        "accroche": _piege_test("bleue", "T sachant R = R sachant T ?", "non : 0,7 et 0,8, deux groupes !"),
+        "dossier": "stmg/maths/probabilites/02-notation",
+    },
+    "eleveai-maths-premiere-commun-proba-encadrement": {
+        "badge": "MATHS · 1RE", "duree": "EN 2 MIN",
+        "titre": ["COMPRENDRE : UNE PROBA", "EST ENTRE 0 ET 1"],
+        "accroche": _piege_test("bleue", "120 % de chances ?", "IMPOSSIBLE : jamais plus que 1", 80),
+        "dossier": "premiere-commun/maths/probabilites/01-entre-0-et-1",
+    },
+    "eleveai-maths-premiere-commun-proba-contraire": {
+        "badge": "MATHS · 1RE", "duree": "EN 2 MIN",
+        "titre": ["COMPRENDRE", "L'ÉVÉNEMENT CONTRAIRE"],
+        "accroche": _piege_test("bleue", "Contraire d’en avance = en retard ?", "non : « pas en avance » !"),
+        "dossier": "premiere-commun/maths/probabilites/02-contraire",
+    },
+})
+
 
 def construire(nom, spec):
     img = fond()

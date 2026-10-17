@@ -306,6 +306,26 @@ for _t in _PROBA_TEST:
     }
     CEINTURE_SHORT[_nom] = _c
 
+# 17/10/2026 — même TEST, suite : STMG et 1re tronc commun (jaune), écologie / business.
+_PROBA_TEST_2 = [
+    ("stmg", "STMG", "stmg/maths/probabilites/01-reconnaitre", "reconnaitre", "jaune", ["80 % DES", "BIEN TRIÉS…"],
+     "…donc 80 % du plastique est bien trié ?", [("bien triés : 80 % plastique", 64, BLEU), ("plastique : 40 % trié ?", 72, ORANGE), ("parmi QUI ?", 100, VERT)], 88),
+    ("stmg", "STMG", "stmg/maths/probabilites/02-notation", "notation", "jaune", ["60 %", "REVIENNENT…"],
+     "…parmi ceux qui ont laissé un avis", [("parmi les avis", 90, BLEU), ("A en indice", 96, ORANGE), ("R sachant A = 0,6", 80, VERT)], 88),
+    ("premiere-commun", "1RE", "premiere-commun/maths/probabilites/01-entre-0-et-1", "encadrement", "jaune", ["120 %", "RENTABLE !"],
+     "le panneau solaire… tu signes ?", [("120 % ?", 120, ROUGE), ("max : 100 %", 100, BLEU), ("du marketing !", 96, VERT)]),
+    ("premiere-commun", "1RE", "premiere-commun/maths/probabilites/02-contraire", "contraire", "jaune", ["30 %", "DE PLUIE"],
+     "donc 70 % de beau temps ?", [("70 % : pas de pluie", 80, BLEU), ("≠ beau temps", 96, ROUGE), ("nuageux ?", 110, VERT)]),
+]
+for _t in _PROBA_TEST_2:
+    _cl, _bd, _sortie, _ep, _c, _titre, _sous, _lg = _t[:8]
+    _nom = f"eleveai-maths-{_cl}-proba-{_ep}-short"
+    SHORTS[_nom] = {
+        "badge": f"PROBABILITÉS · {_bd}", "titre": _titre, "taille": _t[8] if len(_t) > 8 else 92, "sous": _sous,
+        "taille_sous": 44, "couleur_sous": ORANGE, "accroche": _acc(_lg), "dossier": f"{_cl}/maths/fr", "sortie": _sortie,
+    }
+    CEINTURE_SHORT[_nom] = _c
+
 
 def main():
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
