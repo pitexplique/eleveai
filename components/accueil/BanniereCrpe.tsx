@@ -24,48 +24,46 @@ export default function BanniereCrpe() {
   const pathname = usePathname();
   if (pathname !== "/accueil") return null;
   return (
-    <section
-      aria-label="Préparer le CRPE"
-      className="relative overflow-hidden border-y border-amber-200 bg-gradient-to-r from-amber-100 via-rose-50 to-sky-100 px-3 py-5 sm:px-4 sm:py-6"
-    >
-      <div className="mx-auto flex max-w-5xl items-center gap-4 sm:gap-8">
+    // ⭐ 17/10, suite : « la bannière a trop de hauteur — il y a 2 ou 3
+    // commits tu avais fait une bannière d'une bonne hauteur en fond bleu
+    // foncé ». Retour à la BANDE BLEU NUIT du 16/10 (commit 05755453), en plus
+    // serrée : Ti Margo plus petit, et sur grand écran les boutons À DROITE du
+    // texte au lieu d'en dessous. Le contenu (deux tests, samedi, suivi) reste.
+    <section aria-label="Préparer le CRPE" className="bg-[#041B33] px-3 py-2 text-white sm:px-4">
+      <div className="mx-auto flex max-w-6xl items-center gap-3 sm:gap-4">
         <Image
           src="/images/ti-margo-diplome.png"
           alt="Ti Margo, le margouillat d'EleveAI, en toque de diplômé, un diplôme sous le bras"
           width={335}
           height={520}
-          sizes="(min-width: 640px) 120px, 96px"
+          sizes="56px"
           // Tout en haut de la page : chargée tout de suite, pas en différé.
           priority
-          className="h-24 w-auto shrink-0 sm:h-40"
+          className="h-14 w-auto shrink-0 sm:h-16"
         />
-        <div className="min-w-0 flex-1">
-          <p className="text-3xl font-black leading-none tracking-tight text-[#041B33] sm:text-5xl">
-            CRPE 2027
-          </p>
-          <p className="mt-1 text-sm font-black uppercase tracking-wide text-orange-600 sm:text-lg">
-            Maths et orthographe · La Réunion
-          </p>
-          <p className="mt-2 max-w-2xl text-sm font-semibold leading-6 text-slate-700 sm:text-base">
-            {/* 16/10 : « je peux aussi suivre les élèves tous les jours » —
-                le suivi individuel s'ajoute au samedi, il ne le remplace pas. */}
-            {/* ⚠️ Deux longueurs : la phrase entière ne tient pas sur un
-                téléphone sans faire passer la bannière à un demi-écran. */}
-            <span className="sm:hidden">
-              Tests gratuits, puis le samedi (dès le 24/10) ou un suivi au quotidien.
-            </span>
-            <span className="hidden sm:inline">
-              Testez-vous gratuitement, puis préparez-vous avec moi&nbsp;: en
-              groupe le samedi matin à Saint-Pierre (dès le 24 octobre), ou en
-              suivi individuel, au quotidien.
-            </span>
-          </p>
-          <div className="mt-3 flex flex-wrap gap-2">
+        <div className="flex min-w-0 flex-1 flex-col gap-1.5 lg:flex-row lg:items-center lg:gap-4">
+          <div className="min-w-0 flex-1">
+            <p className="text-xs font-black uppercase tracking-wide text-amber-300">
+              CRPE 2027 · futurs professeurs des écoles
+            </p>
+            <p className="text-sm font-bold leading-5">
+              {/* ⚠️ Deux longueurs : la phrase entière doublerait la hauteur sur
+                  un téléphone. */}
+              <span className="sm:hidden">
+                Tests gratuits, puis le samedi (dès le 24/10) ou un suivi au quotidien.
+              </span>
+              <span className="hidden sm:inline">
+                Tests gratuits en maths et en orthographe, puis préparation le
+                samedi matin à Saint-Pierre (dès le 24 octobre) ou suivi au quotidien.
+              </span>
+            </p>
+          </div>
+          <div className="flex shrink-0 flex-wrap gap-1.5">
             <Link
               prefetch={false}
               href="/formation-crpe/test?from=accueil"
               onClick={() => track("accueil_bande_crpe", { lien: "test-maths" })}
-              className="rounded-full bg-orange-500 px-3 py-1.5 text-xs font-black sm:px-4 sm:py-2 sm:text-sm text-white shadow-sm transition hover:bg-orange-400"
+              className="rounded-full bg-amber-400 px-3 py-1 text-xs font-black text-[#041B33] transition hover:bg-amber-300"
             >
               Test de maths
             </Link>
@@ -73,7 +71,7 @@ export default function BanniereCrpe() {
               prefetch={false}
               href="/formation-crpe/test-orthographe?from=accueil"
               onClick={() => track("accueil_bande_crpe", { lien: "test-ortho" })}
-              className="rounded-full bg-orange-500 px-3 py-1.5 text-xs font-black sm:px-4 sm:py-2 sm:text-sm text-white shadow-sm transition hover:bg-orange-400"
+              className="rounded-full bg-amber-400 px-3 py-1 text-xs font-black text-[#041B33] transition hover:bg-amber-300"
             >
               Test d&apos;orthographe
             </Link>
@@ -81,7 +79,7 @@ export default function BanniereCrpe() {
               prefetch={false}
               href="/formation-crpe?from=accueil"
               onClick={() => track("accueil_bande_crpe", { lien: "formation" })}
-              className="rounded-full bg-[#041B33] px-3 py-1.5 text-xs font-black sm:px-4 sm:py-2 sm:text-sm text-white transition hover:bg-[#0b2d52]"
+              className="rounded-full bg-white/10 px-3 py-1 text-xs font-black text-white ring-1 ring-white/25 transition hover:bg-white/20"
             >
               Le samedi →
             </Link>
@@ -89,7 +87,7 @@ export default function BanniereCrpe() {
               prefetch={false}
               href="/formation-crpe?from=accueil#suivi"
               onClick={() => track("accueil_bande_crpe", { lien: "suivi" })}
-              className="rounded-full bg-white px-3 py-1.5 text-xs font-black sm:px-4 sm:py-2 sm:text-sm text-[#041B33] ring-1 ring-slate-300 transition hover:bg-slate-50"
+              className="rounded-full bg-white/10 px-3 py-1 text-xs font-black text-white ring-1 ring-white/25 transition hover:bg-white/20"
             >
               Suivi quotidien →
             </Link>
