@@ -1,0 +1,12 @@
+{
+  "00-garde": "Ce qu'on observe, ce qu'on calcule.",
+  "01-situation": "Avec un dé, la probabilité de faire 6, c'est 1 sur 6, environ 0,17. On lance 60 fois : 13 six.",
+  "02-observe": "La fréquence observée : 13 sur 60, environ 0,22.",
+  "03-comparer": "0,22 observé, 0,17 calculé. Ce n'est pas pareil, et c'est normal : le hasard fait varier les résultats.",
+  "04-truque": "Mais si on observait 40 six sur 60 lancers ? 40 sur 60, environ 0,67. Beaucoup trop loin de 0,17 : le dé est peut-être truqué.",
+  "05-piege": "Le piège : croire que sur 6 lancers, on aura forcément un 6. La probabilité dit ce qui se passe en moyenne, pas à chaque fois.",
+  "06-defi": "À toi de jouer. Une pièce, 100 lancers, 48 piles. La pièce est-elle bien équilibrée ? Mets pause, et cherche !",
+  "06b-correction": "Correction. 48 sur 100, 0,48, tout près de un demi, 0,5. Rien d'anormal.",
+  "07-finale": "Ce que tu as appris. La fréquence observée varie, mais elle reste proche de la probabilité. Trop loin : il y a peut-être un truc. L'épisode 9 t'attend : répéter beaucoup.",
+  "08-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

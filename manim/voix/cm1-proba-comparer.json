@@ -1,0 +1,12 @@
+{
+  "00-garde": "Qui a le plus de chances ?",
+  "01-situation": "Deux sacs de bonbons. Dans le premier sac : 3 bonbons à la fraise et 1 au citron. Dans l'autre sac : 1 à la fraise et 3 au citron. Tu veux un bonbon à la fraise. Quel sac choisis-tu ?",
+  "02-comparer": "Les deux sacs ont 4 bonbons. Dans le premier, 3 à la fraise. Dans le deuxième, 1 seul. Le premier sac donne plus de chances.",
+  "03-methode": "Pour comparer : je regarde combien il y en a en tout. Si c'est pareil, je compte ceux que je veux. Plus il y en a, plus j'ai de chances.",
+  "04-autant": "Et si les deux sacs ont 2 fraises et 2 citrons ? Autant de fraises, autant de bonbons en tout : autant de chances.",
+  "05-piege": "Le piège : un sac avec 5 fraises et 20 citrons. Un sac avec 2 fraises et 1 citron. 5, c'est plus que 2… mais dans le grand sac, il y a surtout des citrons ! Le petit sac donne plus de chances.",
+  "06-defi": "À toi de jouer. Sac rouge : 2 billes vertes et 2 billes jaunes. Sac bleu : 3 billes vertes et 1 bille jaune. Pour tirer une verte, quel sac choisis-tu ? Mets pause, et cherche !",
+  "06b-correction": "Correction. Les deux sacs ont 4 billes. Le sac bleu a 3 vertes, le rouge seulement 2. Je choisis le sac bleu.",
+  "07-finale": "Ce que tu as appris. Pour comparer des chances, je regarde d'abord combien il y en a en tout. Puis je compte ceux que je veux. Attention : beaucoup, ce n'est pas toujours plus de chances. L'épisode 4 t'attend : la roue, le dé et le sac.",
+  "08-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

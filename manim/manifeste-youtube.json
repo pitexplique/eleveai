@@ -11482,7 +11482,8 @@
         "bac",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "url": "https://youtu.be/QnNsruV3HL4"
     },
     {
       "id": "terminale-proba-arbre-short",
@@ -11496,7 +11497,7 @@
       "fichier": "terminale/maths/probabilites/01-arbre-pondere/eleveai-maths-terminale-proba-arbre-short.mp4",
       "miniature": "terminale/maths/probabilites/01-arbre-pondere/eleveai-maths-terminale-proba-arbre-short.png",
       "titre": "Il arrête 25 % des tirs ? Pas si vite ! ⚽ — Tle spé #Shorts",
-      "accroche": "Le gardien arrête 30 % des tirs à gauche, 20 % à droite. Mais il plonge à gauche 60 % du temps : 0,6 × 0,3 + 0,4 × 0,2 = 0,26. Ce n'est pas la moyenne, c'est l'arbre.\n\n🥋 Ceinture orange : un calcul, et un piège à éviter.\n👉 À toi : s'il plongeait à gauche 90 % du temps, il arrêterait combien de tirs ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=probabilite_conditionnelle&microId=proba_conditionnelle_arbre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #terminale #bac",
+      "accroche": "Le gardien arrête 30 % des tirs à gauche, 20 % à droite. Mais il plonge à gauche 60 % du temps : 0,6 × 0,3 + 0,4 × 0,2 = 0,26. Ce n'est pas la moyenne, c'est l'arbre.\n\n🥋 Ceinture orange : un calcul, et un piège à éviter.\n👉 À toi : s'il plongeait à gauche 90 % du temps, il arrêterait combien de tirs ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : https://youtu.be/QnNsruV3HL4\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=probabilite_conditionnelle&microId=proba_conditionnelle_arbre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #terminale #bac",
       "tags": [
         "arbre pondéré",
         "tirs au but",
@@ -11509,7 +11510,8 @@
         "maths visuel",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "url": "https://youtube.com/shorts/ipFC4CsntgY"
     },
     {
       "id": "terminale-proba-formule",
@@ -11522,7 +11524,7 @@
       "fichier": "terminale/maths/probabilites/02-formule-et-inversion/eleveai-maths-terminale-proba-formule.mp4",
       "miniature": "terminale/maths/probabilites/02-formule-et-inversion/eleveai-maths-terminale-proba-formule.png",
       "titre": "Test fiable à 95 %… et 33 % de malades ? — Inverser la condition — épisode 2 · Maths Tle spé",
-      "accroche": "Un test rapide de la dengue : 2 % des personnes testées sont malades. Le test est positif chez 95 % des malades, et chez 4 % des personnes saines. Ton test est positif : es-tu malade ?\n\nDans cette vidéo :\n• la formule P_A(B) = P(A ∩ B) ÷ P(A)\n• l'arbre et P(T) = 0,0582\n• inverser la condition : P_T(M) ≈ 0,33, seulement 33 %\n• le piège : confondre P_M(T) = 0,95 et P_T(M)\n\n🥋 Ceinture noire.\nUn défi en fin de vidéo, avec sa correction : test négatif : la probabilité d'être sain, au millième.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=probabilite_conditionnelle&microId=proba_conditionnelle_formule&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "accroche": "Un test rapide de la dengue : 2 % des personnes testées sont malades. Le test est positif chez 95 % des malades, et chez 4 % des personnes saines. Ton test est positif : es-tu malade ?\n\nDans cette vidéo :\n• la formule P_A(B) = P(A ∩ B) ÷ P(A)\n• l'arbre et P(T) = 0,0582\n• inverser la condition : P_T(M) ≈ 0,33, seulement 33 %\n• le piège : confondre P_M(T) = 0,95 et P_T(M)\n\n🥋 Ceinture noire.\nUn défi en fin de vidéo, avec sa correction : quand le test est négatif, la probabilité d'être sain, au millième.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=probabilite_conditionnelle&microId=proba_conditionnelle_formule&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
       "chapitres": [
         [
           "00:00",
@@ -11972,6 +11974,627 @@
         "1re",
         "lycée",
         "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "6e-aire-longueur-convertir-diagonale",
+      "notionId": "aire_longueur",
+      "microId": "aire_longueur_convertir",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/paysage/fr/aire-longueur-convertir/eleveai-maths-6e-aire-longueur-convertir-diagonale.mp4",
+      "miniature": "6e/maths/paysage/fr/aire-longueur-convertir/eleveai-maths-6e-aire-longueur-convertir-diagonale.png",
+      "titre": "Grand Raid, Diagonale des Fous : combien de marches pour monter 1000 m ? Convertir des longueurs · Maths 6e",
+      "accroche": "Une marche fait 25 cm de haut. Combien de marches pour monter 1000 m de dénivelé positif, sur le Grand Raid, la Diagonale des Fous ?\n\nDans cette vidéo :\n• le dénivelé positif : les mètres qu'on monte (10 200 m sur toute la course)\n• le piège : 1000 ÷ 25 = 40 marches… de 25 m chacune, un immeuble de 8 étages !\n• la règle : avant de calculer, on met tout dans la même unité\n• un seul mètre : 25, 50, 75, 100 cm, donc 4 marches = 1 m\n• 1000 × 4 = 4000 marches\n• le tableau de conversion : 1000 m = 100 000 cm, et 100 000 ÷ 25 = 4000\n• on vérifie : 4000 × 25 = 100 000 cm = 1000 m\n\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : des marches de 20 cm.\n\nPour s'entraîner :\n• la feuille d'exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/aire-longueur\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/aire-longueur\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=aire_longueur&microId=aire_longueur_convertir&display=simple\n\n#GrandRaid #DiagonaleDesFous",
+      "chapitres": [
+        [
+          "00:00",
+          "La question"
+        ],
+        [
+          "00:09",
+          "Le Grand Raid, la Diagonale des Fous"
+        ],
+        [
+          "00:23",
+          "Le dénivelé positif"
+        ],
+        [
+          "00:35",
+          "Le piège : 40 marches ?"
+        ],
+        [
+          "00:51",
+          "Deux unités mélangées"
+        ],
+        [
+          "01:05",
+          "Un seul mètre : 4 marches"
+        ],
+        [
+          "01:26",
+          "Pour 1000 mètres"
+        ],
+        [
+          "01:34",
+          "Le tableau de conversion"
+        ],
+        [
+          "01:46",
+          "Tout en centimètres"
+        ],
+        [
+          "02:04",
+          "On vérifie"
+        ],
+        [
+          "02:19",
+          "Défi et correction"
+        ],
+        [
+          "02:51",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/aire-longueur",
+      "tags": [
+        "Diagonale des Fous",
+        "Grand Raid",
+        "Grand Raid 2026",
+        "Grand Raid Réunion",
+        "trail",
+        "ultra-trail",
+        "La Réunion",
+        "dénivelé positif",
+        "convertir des longueurs",
+        "conversions",
+        "cm en m",
+        "tableau de conversion",
+        "maths",
+        "6e",
+        "collège",
+        "EleveAI"
+      ],
+      "ceinture": "verte",
+      "url": "https://youtu.be/OudqIW-RaaA"
+    },
+    {
+      "id": "6e-aire-longueur-short-diagonale",
+      "notionId": "aire_longueur",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-aire-longueur-convertir-diagonale",
+      "fichier": "6e/maths/shorts/fr/aire-longueur/eleveai-maths-6e-aire-longueur-short-diagonale.mp4",
+      "miniature": "6e/maths/shorts/fr/aire-longueur/eleveai-maths-6e-aire-longueur-short-diagonale.png",
+      "titre": "Grand Raid, Diagonale des Fous : 1000 m de montée, combien de marches ? (tu paries ?)",
+      "accroche": "Grand Raid, la Diagonale des Fous : des marches, des marches, et encore des marches.\nUne marche fait 25 cm. Combien de marches pour monter 1000 m ? Tu paries combien ?\n1000 ÷ 25 = 40 marches ? Impossible ! Chaque marche ferait 25 m de haut.\n25, 50, 75, 100 cm : 4 marches, et on a monté 1 m.\nPour 1000 m : 1000 × 4 = 4000 marches !\n1000 m, c'est 3 tours Eiffel empilées. À pied, marche après marche.\n\nÀ toi : toute la Diagonale, c'est 10 200 m de montée. Combien de marches de 25 cm ? Réponds en commentaire !\n\nLa leçon complète : https://youtu.be/OudqIW-RaaA\n20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/aire-longueur\nLes défis du coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=aire_longueur&microId=aire_longueur_defi&display=simple\n\n#GrandRaid #DiagonaleDesFous",
+      "tags": [
+        "Diagonale des Fous",
+        "Grand Raid",
+        "Grand Raid 2026",
+        "Grand Raid Réunion",
+        "trail",
+        "ultra-trail",
+        "La Réunion",
+        "dénivelé positif",
+        "convertir des longueurs",
+        "conversions",
+        "cm en m",
+        "tableau de conversion",
+        "maths",
+        "6e",
+        "collège",
+        "Shorts"
+      ],
+      "microId": "aire_longueur_defi",
+      "ceinture": "jaune",
+      "url": "https://youtube.com/shorts/ai3qedWj4nM"
+    },
+    {
+      "id": "cm1-proba-comparer",
+      "notionId": "probabilite",
+      "microId": "probabilite_comparer",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/probabilites/03-comparer/eleveai-maths-cm1-proba-comparer.mp4",
+      "miniature": "cm1/maths/probabilites/03-comparer/eleveai-maths-cm1-proba-comparer.png",
+      "titre": "5 fraises, c'est plus que 2… et pourtant tu perds ! — Comparer des chances — épisode 3 · Maths CM1",
+      "accroche": "Deux sacs de bonbons : 3 fraises et 1 citron dans l'un, 1 fraise et 3 citrons dans l'autre. Tu veux un bonbon à la fraise : quel sac choisis-tu ?\n\nDans cette vidéo :\n• comparer deux sacs qui ont autant de bonbons\n• la méthode : combien en tout, puis combien de ceux que je veux\n• autant de fraises, autant de bonbons : autant de chances\n• le piège : 5 fraises et 20 citrons contre 2 fraises et 1 citron, le petit sac gagne\n\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : sac rouge (2 vertes, 2 jaunes) ou sac bleu (3 vertes, 1 jaune) : lequel pour tirer une verte ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=probabilite&microId=probabilite_comparer&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Qui a le plus de chances ? Deux sacs"
+        ],
+        [
+          "00:19",
+          "Je compare"
+        ],
+        [
+          "00:31",
+          "La méthode, et autant de chances"
+        ],
+        [
+          "00:52",
+          "Le piège"
+        ],
+        [
+          "01:08",
+          "À toi de jouer"
+        ],
+        [
+          "01:25",
+          "Correction"
+        ],
+        [
+          "01:37",
+          "Ce que tu as appris"
+        ],
+        [
+          "01:56",
+          "Abonne-toi"
+        ]
+      ],
+      "tags": [
+        "comparer des chances",
+        "sac de bonbons",
+        "billes",
+        "hasard",
+        "probabilités",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "cm1-proba-comparer-short",
+      "notionId": "probabilite",
+      "microId": "probabilite_comparer",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-proba-comparer",
+      "fichier": "cm1/maths/probabilites/03-comparer/eleveai-maths-cm1-proba-comparer-short.mp4",
+      "miniature": "cm1/maths/probabilites/03-comparer/eleveai-maths-cm1-proba-comparer-short.png",
+      "titre": "5 fraises ou 2 ? Le piège du grand sac 🍓 — CM1 #Shorts",
+      "accroche": "5 fraises dans le grand sac, 2 dans le petit. Mais le grand sac a aussi 20 citrons ! Le petit sac, c'est presque que des fraises : il donne plus de chances.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 1 fraise et 1 citron, ou 3 fraises et 5 citrons ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=probabilite&microId=probabilite_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #CM1 #école",
+      "tags": [
+        "comparer des chances",
+        "bonbons",
+        "piège",
+        "probabilités",
+        "maths CM1",
+        "CM1",
+        "école",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "cm1-proba-roue",
+      "notionId": "probabilite",
+      "microId": "probabilite_roue_de_sac",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/probabilites/04-roue-de-sac/eleveai-maths-cm1-proba-roue.mp4",
+      "miniature": "cm1/maths/probabilites/04-roue-de-sac/eleveai-maths-cm1-proba-roue.png",
+      "titre": "3 couleurs, mais 4 parts : le bleu, c'est 1 chance sur 3 ? — Roue, dé, sac — épisode 4 · Maths CM1",
+      "accroche": "À la kermesse, la roue a 4 parts : 1 rouge, 2 bleues et 1 verte. Si elle s'arrête sur le rouge, tu gagnes un ballon. Combien de chances as-tu ?\n\nDans cette vidéo :\n• je compte tout : les parts de la roue\n• je compte ce qui fait gagner : 1 chance sur 4\n• pareil avec un dé (1 chance sur 6) et avec un sac de billes (2 chances sur 5)\n• le piège : on compte les parts, pas les couleurs ; le bleu, c'est 2 chances sur 4\n\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : une roue de 6 parts, 3 jaunes, 2 vertes, 1 rose : combien de chances de tomber sur le jaune ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=probabilite&microId=probabilite_roue_de_sac&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Combien de chances ? À la kermesse"
+        ],
+        [
+          "00:16",
+          "Je compte tout, puis ce qui fait gagner"
+        ],
+        [
+          "00:31",
+          "Le dé, puis le sac"
+        ],
+        [
+          "00:50",
+          "Le piège : les parts, pas les couleurs"
+        ],
+        [
+          "01:02",
+          "À toi de jouer"
+        ],
+        [
+          "01:17",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "roue",
+        "dé",
+        "sac de billes",
+        "chances",
+        "kermesse",
+        "probabilités",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "cm1-proba-roue-short",
+      "notionId": "probabilite",
+      "microId": "probabilite_roue_de_sac",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-proba-roue",
+      "fichier": "cm1/maths/probabilites/04-roue-de-sac/eleveai-maths-cm1-proba-roue-short.mp4",
+      "miniature": "cm1/maths/probabilites/04-roue-de-sac/eleveai-maths-cm1-proba-roue-short.png",
+      "titre": "3 couleurs… donc 1 chance sur 3 ? NON ! 🎡 — CM1 #Shorts",
+      "accroche": "Cette roue a 3 couleurs, mais 4 parts, et 2 sont bleues. Le bleu, c'est 2 chances sur 4. On compte les parts, pas les couleurs !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : sur cette roue, le rouge, c'est combien de chances sur 4 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=probabilite&microId=probabilite_roue_de_sac&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #CM1 #école",
+      "tags": [
+        "roue",
+        "chances",
+        "parts",
+        "probabilités",
+        "maths CM1",
+        "CM1",
+        "école",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "cm1-proba-defi",
+      "notionId": "probabilite",
+      "microId": "probabilite_defi",
+      "classe": "cm1",
+      "ceinture": "jaune",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/probabilites/05-defis/eleveai-maths-cm1-proba-defi.mp4",
+      "miniature": "cm1/maths/probabilites/05-defis/eleveai-maths-cm1-proba-defi.png",
+      "titre": "1 rouge sur 4 parts… combien pour faire jeu égal ? — Le grand défi — épisode 5 · Maths CM1",
+      "accroche": "Le grand défi du hasard : trois défis, trois sacs, trois roues. À chaque fois, mets pause et cherche avant la réponse !\n\nDans cette vidéo :\n• défi 1 : 4 billes rouges, tirer une rouge, c'est certain, possible ou impossible ?\n• défi 2 : sac A (1 verte, 1 jaune) ou sac B (1 verte, 4 jaunes) ?\n• défi 3 : une roue de 4 parts, 1 rouge et 3 bleues : combien de rouges pour autant de chances ?\n• ce que tu as appris dans toute la série\n\n🥋 Ceinture jaune.\nTrois défis, chacun avec sa correction. C'est le dernier épisode : la fin de la série Probabilités du CM1 !\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=probabilite&microId=probabilite_defi&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Le grand défi du hasard : trois défis"
+        ],
+        [
+          "00:11",
+          "Défi 1 : 4 billes rouges, et correction"
+        ],
+        [
+          "00:30",
+          "Défi 2 : sac A ou sac B ?"
+        ],
+        [
+          "00:45",
+          "Correction 2"
+        ],
+        [
+          "00:57",
+          "Défi 3 : la roue, et correction"
+        ],
+        [
+          "01:22",
+          "Ce que tu as appris"
+        ],
+        [
+          "01:38",
+          "Abonne-toi"
+        ]
+      ],
+      "tags": [
+        "défi",
+        "certain",
+        "comparer des chances",
+        "roue",
+        "billes",
+        "probabilités",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "cm1-proba-defi-short",
+      "notionId": "probabilite",
+      "microId": "probabilite_defi",
+      "classe": "cm1",
+      "ceinture": "jaune",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-proba-defi",
+      "fichier": "cm1/maths/probabilites/05-defis/eleveai-maths-cm1-proba-defi-short.mp4",
+      "miniature": "cm1/maths/probabilites/05-defis/eleveai-maths-cm1-proba-defi-short.png",
+      "titre": "1 SEULE ROUGE : combien en faut-il ? 🎯 — CM1 #Shorts",
+      "accroche": "Défi express : une roue de 4 parts, 1 seule rouge. Tu veux autant de chances de rouge que de bleu. Indice : il y a toujours 4 parts.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : combien de parts rouges faut-il ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=probabilite&microId=probabilite_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #CM1 #défi",
+      "tags": [
+        "défi",
+        "roue",
+        "chances",
+        "probabilités",
+        "maths CM1",
+        "CM1",
+        "école",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "cm2-proba-comparer",
+      "notionId": "probabilite",
+      "microId": "probabilite_comparer",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/probabilites/03-comparer/eleveai-maths-cm2-proba-comparer.mp4",
+      "miniature": "cm2/maths/probabilites/03-comparer/eleveai-maths-cm2-proba-comparer.png",
+      "titre": "4 gagnants, c'est plus que 2… PIÈGE ! — Comparer des chances — épisode 3 · Maths CM2",
+      "accroche": "Tombola de l'école. Stand A : 3 tickets gagnants sur 10. Stand B : 1 ticket gagnant sur 5. Où jouer ?\n\nDans cette vidéo :\n• les totaux sont différents : je ramène au même total (1 sur 5, c'est 2 sur 10)\n• 3 sur 10 contre 2 sur 10 : le stand A gagne\n• la méthode : même total, puis je compare les gagnants\n• le piège : 4 gagnants sur 20 contre 2 sur 5, c'est 4 sur 20 contre 8 sur 20\n\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : sac 1 (2 rouges sur 8) ou sac 2 (1 rouge sur 3) : lequel pour tirer une rouge ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/cm2/probabilite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=probabilite&microId=probabilite_comparer&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Comparer des chances : la tombola"
+        ],
+        [
+          "00:16",
+          "Ramener au même total, et comparer"
+        ],
+        [
+          "00:32",
+          "La méthode"
+        ],
+        [
+          "00:43",
+          "Le piège"
+        ],
+        [
+          "01:01",
+          "À toi de jouer"
+        ],
+        [
+          "01:16",
+          "Correction"
+        ],
+        [
+          "01:31",
+          "Ce que tu as appris"
+        ],
+        [
+          "01:50",
+          "Abonne-toi"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/cm2/probabilite",
+      "tags": [
+        "comparer des chances",
+        "tombola",
+        "même total",
+        "fractions",
+        "probabilités",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "cm2-proba-comparer-short",
+      "notionId": "probabilite",
+      "microId": "probabilite_comparer",
+      "classe": "cm2",
+      "ceinture": "jaune",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-proba-comparer",
+      "fichier": "cm2/maths/probabilites/03-comparer/eleveai-maths-cm2-proba-comparer-short.mp4",
+      "miniature": "cm2/maths/probabilites/03-comparer/eleveai-maths-cm2-proba-comparer-short.png",
+      "titre": "4 gagnants ou 2 ? Tu joues où ? 🎟️ — CM2 #Shorts",
+      "accroche": "Stand C : 4 tickets gagnants sur 20. Stand D : 2 sur 5. Au même total, c'est 4 sur 20 contre 8 sur 20 : le stand D gagne !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : 3 sur 4 ou 5 sur 8, lequel donne le plus de chances ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=probabilite&microId=probabilite_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #CM2 #école",
+      "tags": [
+        "comparer des chances",
+        "tombola",
+        "piège",
+        "probabilités",
+        "maths CM2",
+        "CM2",
+        "école",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "cm2-proba-roue",
+      "notionId": "probabilite",
+      "microId": "probabilite_roue_de_sac",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/probabilites/04-roue-de-sac/eleveai-maths-cm2-proba-roue.mp4",
+      "miniature": "cm2/maths/probabilites/04-roue-de-sac/eleveai-maths-cm2-proba-roue.png",
+      "titre": "Ne pas tomber sur le bleu : 8 − 4, pas 4 sur 4 ! — Roue, dé, sac — épisode 4 · Maths CM2",
+      "accroche": "Une roue de 8 parts : 3 rouges, 4 bleues et 1 verte. On la fait tourner. Combien de chances pour chaque couleur ?\n\nDans cette vidéo :\n• compter les chances : 3 sur 8, 4 sur 8, 1 sur 8\n• toutes les chances réunies : 8 sur 8, c'est certain\n• ne pas tomber sur le bleu : 8 − 4 = 4, donc 4 chances sur 8\n• avec un dé : faire plus que 4, 2 chances sur 6\n• le piège : compter les parts ne marche que si elles sont égales\n\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : un sac de 12 billes, 5 rouges, 4 bleues, les autres vertes : combien de chances de tirer une verte ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/cm2/probabilite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=probabilite&microId=probabilite_roue_de_sac&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Roue, dé, sac : une roue de 8 parts"
+        ],
+        [
+          "00:13",
+          "Compter les chances"
+        ],
+        [
+          "00:25",
+          "Toutes les chances, et ne pas tomber sur le bleu"
+        ],
+        [
+          "00:44",
+          "Avec un dé : le piège des parts égales"
+        ],
+        [
+          "01:02",
+          "Défi : le sac de 12 billes"
+        ],
+        [
+          "01:16",
+          "Correction et ce que tu as appris"
+        ],
+        [
+          "01:40",
+          "Abonne-toi"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/cm2/probabilite",
+      "tags": [
+        "roue",
+        "dé",
+        "sac de billes",
+        "chances",
+        "événement contraire",
+        "probabilités",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "cm2-proba-roue-short",
+      "notionId": "probabilite",
+      "microId": "probabilite_roue_de_sac",
+      "classe": "cm2",
+      "ceinture": "jaune",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-proba-roue",
+      "fichier": "cm2/maths/probabilites/04-roue-de-sac/eleveai-maths-cm2-proba-roue-short.mp4",
+      "miniature": "cm2/maths/probabilites/04-roue-de-sac/eleveai-maths-cm2-proba-roue-short.png",
+      "titre": "8 parts, 4 bleues… 1 chance sur 2 ? 🎡 — CM2 #Shorts",
+      "accroche": "Ne pas tomber sur le bleu : 8 parts moins 4 bleues, il reste 4 parts. 4 chances sur 8 : une chance sur deux !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : ne pas tomber sur le rouge, avec 3 parts rouges sur 8 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=probabilite&microId=probabilite_roue_de_sac&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #CM2 #école",
+      "tags": [
+        "roue",
+        "chances",
+        "ne pas",
+        "probabilités",
+        "maths CM2",
+        "CM2",
+        "école",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "cm2-proba-defi",
+      "notionId": "probabilite",
+      "microId": "probabilite_defi",
+      "classe": "cm2",
+      "ceinture": "jaune",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/probabilites/05-defis/eleveai-maths-cm2-proba-defi.mp4",
+      "miniature": "cm2/maths/probabilites/05-defis/eleveai-maths-cm2-proba-defi.png",
+      "titre": "2 sur 6 ou 3 sur 12 : lequel gagne le plus ? — Le grand défi — épisode 5 · Maths CM2",
+      "accroche": "Le grand défi des probabilités du CM2 : trois défis. À chaque fois, mets pause et cherche avant la réponse !\n\nDans cette vidéo :\n• défi 1 : 4 noires et 6 vertes, combien de noires ajouter pour 1 chance sur 2 ?\n• défi 2 : stand A (2 gagnants sur 6) ou stand B (3 sur 12) ?\n• défi 3 : avec un dé, faire 6 ou faire un nombre pair ?\n• ce que tu as appris dans toute la série\n\n🥋 Ceinture jaune.\nTrois défis, chacun avec sa correction. C'est le dernier épisode : la fin de la série Probabilités du CM2 !\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/cm2/probabilite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=probabilite&microId=probabilite_defi&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Le grand défi : trois défis"
+        ],
+        [
+          "00:11",
+          "Défi 1 : le sac, et correction"
+        ],
+        [
+          "00:35",
+          "Défi 2 : les deux stands"
+        ],
+        [
+          "00:49",
+          "Correction 2"
+        ],
+        [
+          "01:01",
+          "Défi 3 : le dé"
+        ],
+        [
+          "01:13",
+          "Correction 3"
+        ],
+        [
+          "01:27",
+          "Ce que tu as appris"
+        ],
+        [
+          "01:41",
+          "Abonne-toi"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/cm2/probabilite",
+      "tags": [
+        "défi",
+        "comparer des chances",
+        "même total",
+        "dé",
+        "billes",
+        "probabilités",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "cm2-proba-defi-short",
+      "notionId": "probabilite",
+      "microId": "probabilite_defi",
+      "classe": "cm2",
+      "ceinture": "jaune",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-proba-defi",
+      "fichier": "cm2/maths/probabilites/05-defis/eleveai-maths-cm2-proba-defi-short.mp4",
+      "miniature": "cm2/maths/probabilites/05-defis/eleveai-maths-cm2-proba-defi-short.png",
+      "titre": "4 noires, 6 vertes : combien en ajouter ? 🎱 — CM2 #Shorts",
+      "accroche": "Pour 1 chance sur 2, il faut autant de noires que de vertes. 6 vertes… donc 6 noires : j'en ajoute 2 !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : 3 billes noires et 7 vertes, combien de noires ajouter ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=probabilite&microId=probabilite_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #CM2 #défi",
+      "tags": [
+        "défi",
+        "billes",
+        "1 chance sur 2",
+        "probabilités",
+        "maths CM2",
+        "CM2",
+        "école",
+        "eleveai",
+        "maths visuel",
         "ceinture jaune",
         "Shorts"
       ]

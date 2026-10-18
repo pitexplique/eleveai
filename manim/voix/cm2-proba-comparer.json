@@ -1,0 +1,12 @@
+{
+  "00-garde": "Comparer des chances : le grand sac ou le petit ?",
+  "01-situation": "Tombola de l'école. Stand A : 3 tickets gagnants sur 10. Stand B : 1 ticket gagnant sur 5. Où jouer ?",
+  "02-meme-total": "Les totaux sont différents : 10 et 5. Pour comparer, je ramène au même total. 1 sur 5, c'est comme 2 sur 10.",
+  "03-comparer": "3 sur 10 contre 2 sur 10 : le stand A donne plus de chances.",
+  "04-methode": "La méthode : si les totaux sont pareils, je compare les gagnants. Sinon, je ramène au même total, en multipliant les deux nombres.",
+  "05-piege": "Le piège : regarder seulement les gagnants. Stand C : 4 gagnants sur 20. Stand D : 2 gagnants sur 5. 4, c'est plus que 2… mais 2 sur 5, c'est 8 sur 20. Le stand D est meilleur !",
+  "06-defi": "À toi de jouer. Sac 1 : 2 billes rouges sur 8. Sac 2 : 1 bille rouge sur 3. Lequel donne plus de chances de tirer une rouge ? Mets pause, et cherche !",
+  "06b-correction": "Correction. Je ramène à 24. 2 sur 8, c'est 6 sur 24. 1 sur 3, c'est 8 sur 24. Le sac 2 donne plus de chances.",
+  "07-finale": "Ce que tu as appris. Pour comparer des chances, je compare au même total. Si les totaux sont différents, je les ramène au même nombre. Plus de gagnants ne veut pas dire plus de chances. L'épisode 4 t'attend : la roue, le dé et le sac.",
+  "08-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

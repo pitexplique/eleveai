@@ -1,0 +1,13 @@
+{
+  "00-garde": "Roue, dé, sac : compter les chances.",
+  "01-situation": "Une roue de 8 parts : 3 rouges, 4 bleues et 1 verte. On la fait tourner.",
+  "02-compter": "8 parts en tout. 3 rouges : 3 chances sur 8. 4 bleues : 4 chances sur 8. 1 verte : 1 chance sur 8.",
+  "03-total": "3 plus 4 plus 1, ça fait 8 : toutes les chances réunies, c'est 8 sur 8. C'est certain qu'on tombe sur une couleur.",
+  "04-ne-pas": "Ne pas tomber sur le bleu : 8 parts moins 4 bleues, il reste 4 parts. 4 chances sur 8.",
+  "05-de": "Avec un dé : faire un nombre plus grand que 4, c'est 5 ou 6. 2 chances sur 6.",
+  "06-piege": "Le piège : compter les parts ne marche que si elles ont toutes la même taille. Ici, les 8 parts sont égales : on peut compter.",
+  "07-defi": "À toi de jouer. Un sac de 12 billes : 5 rouges, 4 bleues, les autres vertes. Combien de chances de tirer une verte ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 12 moins 5 moins 4 : 3 vertes. 3 chances sur 12.",
+  "08-finale": "Ce que tu as appris. Je compte tous les cas, puis les cas gagnants. Toutes les chances réunies font le total. Ne pas gagner, c'est le total moins les gagnants. L'épisode 5 t'attend : le défi.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

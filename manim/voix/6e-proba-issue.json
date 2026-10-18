@@ -1,0 +1,12 @@
+{
+  "00-garde": "Les issues : tout ce qui peut arriver.",
+  "01-situation": "On lance une pièce, puis on lance un dé. Que peut-il arriver ?",
+  "02-issue": "Une issue, c'est un résultat possible. La pièce : pile ou face, 2 issues. Le dé : 1, 2, 3, 4, 5 ou 6, 6 issues.",
+  "03-lister": "Avant de calculer une probabilité, on liste TOUTES les issues. Sans en oublier, sans en compter deux fois.",
+  "04-evenement": "Un événement, c'est une phrase : obtenir un nombre pair. On entoure les issues qui le réalisent : 2, 4 et 6. 3 issues.",
+  "05-piege": "Le piège : une roue de 3 couleurs, mais 5 parts. Les issues, ce sont les 5 parts, pas les 3 couleurs.",
+  "06-defi": "À toi de jouer. Un sac contient une bille rouge, une verte et une jaune. On en tire une. Liste les issues. Combien y en a-t-il ? Mets pause, et cherche !",
+  "06b-correction": "Correction. Rouge, verte, jaune : 3 issues.",
+  "07-finale": "Ce que tu as appris. Une issue est un résultat possible. Je les liste toutes avant de calculer. Un événement est réalisé par certaines issues. L'épisode 4 t'attend : estimer une probabilité.",
+  "08-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

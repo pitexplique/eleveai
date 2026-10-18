@@ -1462,6 +1462,55 @@ ESSAIS.update({
 })
 
 
+# 17/10/2026 — Grand Raid, Diagonale des Fous : les marches de 25 cm (6e, verte).
+ESSAIS["eleveai-maths-6e-aire-longueur-convertir-diagonale"] = {
+    "badge": "MATHS · 6E", "duree": "EN 3 MIN",
+    "titre": ["COMPRENDRE LES", "CONVERSIONS"],
+    "accroche": _piege_test("verte", "1000 m ÷ 25 cm = 40 marches ?", "non : 4000 ! (Diagonale des Fous)"),
+    "dossier": "6e/maths/paysage/fr/aire-longueur-convertir",
+}
+
+# 18/10/2026 — même TEST, suite : CM1 et CM2, épisodes 3, 4, 5 (blanche ; défis jaune).
+ESSAIS.update({
+    "eleveai-maths-cm1-proba-comparer": {
+        "badge": "MATHS · CM1", "duree": "EN 2 MIN",
+        "titre": ["COMPARER", "DES CHANCES"],
+        "accroche": _piege_test("blanche", "5 fraises, c'est plus que 2…", "et pourtant le petit sac gagne !"),
+        "dossier": "cm1/maths/probabilites/03-comparer",
+    },
+    "eleveai-maths-cm1-proba-roue": {
+        "badge": "MATHS · CM1", "duree": "EN 2 MIN",
+        "titre": ["COMPTER", "LES CHANCES"],
+        "accroche": _piege_test("blanche", "3 couleurs : 1 chance sur 3 ?", "non : 4 parts, le bleu 2 sur 4"),
+        "dossier": "cm1/maths/probabilites/04-roue-de-sac",
+    },
+    "eleveai-maths-cm1-proba-defi": {
+        "badge": "MATHS · CM1", "duree": "EN 2 MIN",
+        "titre": ["LE GRAND DÉFI", "DU HASARD"],
+        "accroche": _piege_test("jaune", "1 rouge sur 4 parts…", "combien pour faire jeu égal ?", 76),
+        "dossier": "cm1/maths/probabilites/05-defis",
+    },
+    "eleveai-maths-cm2-proba-comparer": {
+        "badge": "MATHS · CM2", "duree": "EN 2 MIN",
+        "titre": ["COMPARER", "DES CHANCES"],
+        "accroche": _piege_test("blanche", "4 gagnants, c'est plus que 2…", "mais 4 sur 20 contre 8 sur 20 !"),
+        "dossier": "cm2/maths/probabilites/03-comparer",
+    },
+    "eleveai-maths-cm2-proba-roue": {
+        "badge": "MATHS · CM2", "duree": "EN 2 MIN",
+        "titre": ["COMPTER", "LES CHANCES"],
+        "accroche": _piege_test("blanche", "Ne pas tomber sur le bleu ?", "8 − 4 = 4 : 4 chances sur 8"),
+        "dossier": "cm2/maths/probabilites/04-roue-de-sac",
+    },
+    "eleveai-maths-cm2-proba-defi": {
+        "badge": "MATHS · CM2", "duree": "EN 2 MIN",
+        "titre": ["LE GRAND DÉFI", "DES PROBABILITÉS"],
+        "accroche": _piege_test("jaune", "2 sur 6 ou 3 sur 12 ?", "ramène au même total !", 76),
+        "dossier": "cm2/maths/probabilites/05-defis",
+    },
+})
+
+
 def construire(nom, spec):
     img = fond()
     d = ImageDraw.Draw(img)

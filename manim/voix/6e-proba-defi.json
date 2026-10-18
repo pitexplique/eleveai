@@ -1,0 +1,12 @@
+{
+  "00-garde": "Les défis des probabilités de 6e !",
+  "01-situation": "Trois défis. À chaque fois, mets pause et cherche avant la réponse.",
+  "02-defi1": "Défi 1. Sur une roue de 8 parts égales, 2 sont rouges. Quelle est la probabilité de tomber sur le rouge ? Mets pause, et cherche !",
+  "02b-correction1": "Correction. 2 parts sur 8 : 2 sur 8, c'est aussi 1 sur 4.",
+  "03-defi2": "Défi 2. Sac A : 1 bille rouge sur 4. Sac B : 2 billes rouges sur 4. Dans quel sac est-il le plus probable de tirer une rouge ? Mets pause, et cherche !",
+  "03b-correction2": "Correction. Même total, 4 billes. Sac B : 2 rouges, c'est plus probable.",
+  "04-defi3": "Défi 3. Avec un dé, quelle est la probabilité de faire un nombre plus grand que 6 ? Mets pause, et cherche !",
+  "04b-correction3": "Correction. Aucune face : c'est impossible. La probabilité est 0.",
+  "05-finale": "Ce que tu as appris. Compter les issues, écrire une fraction, comparer, et reconnaître l'impossible. L'épisode 7 t'attend : les fréquences.",
+  "06-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

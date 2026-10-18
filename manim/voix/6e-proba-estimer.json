@@ -1,0 +1,12 @@
+{
+  "00-garde": "Calculer une probabilité : une fraction.",
+  "01-situation": "Aux petits chevaux, il faut un 6 pour sortir. Quelle est la probabilité de faire 6 ?",
+  "02-formule": "Je compte les issues qui me font gagner : une seule, le 6. Je compte toutes les issues : 6. La probabilité, c'est 1 sur 6.",
+  "03-fraction": "On l'écrit en fraction : 1 sur 6. En haut, les issues favorables. En bas, toutes les issues.",
+  "04-pair": "Faire un nombre pair : 2, 4, 6, trois issues favorables sur 6. La probabilité, c'est 3 sur 6. C'est aussi un demi.",
+  "05-piege": "Le piège : écrire 6 sur 1. En haut, toujours les favorables, les plus petits. Une probabilité ne dépasse jamais 1.",
+  "06-defi": "À toi de jouer. Un sac de 10 billes, dont 3 rouges. Quelle est la probabilité de tirer une rouge ? Mets pause, et cherche !",
+  "06b-correction": "Correction. 3 favorables sur 10 : la probabilité est 3 sur 10.",
+  "07-finale": "Ce que tu as appris. La probabilité, c'est les issues favorables sur toutes les issues. On l'écrit en fraction, et elle reste entre 0 et 1. L'épisode 5 t'attend : lire une situation.",
+  "08-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

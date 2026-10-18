@@ -1,0 +1,12 @@
+{
+  "00-garde": "Lire une situation de probabilité.",
+  "01-situation": "Une tombola à la fête de l'école. 50 tickets dans l'urne. 5 sont gagnants. Tu en tires un.",
+  "02-reperer": "D'abord, je repère toutes les issues : 50 tickets. Puis les issues favorables : 5 tickets gagnants.",
+  "03-calculer": "La probabilité de gagner : 5 sur 50. C'est aussi 1 sur 10.",
+  "04-perdre": "Et perdre ? 50 moins 5 : 45 tickets perdants. La probabilité de perdre : 45 sur 50.",
+  "05-piege": "Le piège : lire trop vite. Si le texte dit « 5 gagnants et 50 perdants », alors il y a 55 tickets en tout, pas 50.",
+  "06-defi": "À toi de jouer. Un sac contient 4 billes rouges et 6 billes bleues. Quelle est la probabilité de tirer une bleue ? Mets pause, et cherche !",
+  "06b-correction": "Correction. 4 plus 6 : 10 billes en tout. 6 bleues : 6 sur 10.",
+  "07-finale": "Ce que tu as appris. Je lis : combien en tout ? combien de favorables ? Je vérifie le total. Et perdre, c'est le reste. L'épisode 6 t'attend : les défis.",
+  "08-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

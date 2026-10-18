@@ -1,0 +1,12 @@
+{
+  "00-garde": "Le grand défi des probabilités du CM2 !",
+  "01-situation": "Trois défis. À chaque fois, mets pause et cherche avant la réponse.",
+  "02-defi1": "Défi 1. Un sac : 4 billes noires et 6 billes vertes. Combien de billes noires faut-il ajouter pour avoir 1 chance sur 2 de tirer une noire ? Mets pause, et cherche !",
+  "02b-correction1": "Correction. Il faut autant de noires que de vertes : 6 noires. J'en ajoute 2.",
+  "03-defi2": "Défi 2. Stand A : 2 gagnants sur 6. Stand B : 3 gagnants sur 12. Où jouer ? Mets pause, et cherche !",
+  "03b-correction2": "Correction. Je ramène à 12. 2 sur 6, c'est 4 sur 12. 4 sur 12 contre 3 sur 12 : le stand A.",
+  "04-defi3": "Défi 3. Avec un dé, quel événement est le plus probable : faire 6, ou faire un nombre pair ? Mets pause, et cherche !",
+  "04b-correction3": "Correction. Faire 6 : 1 chance sur 6. Faire un nombre pair, 2, 4 ou 6 : 3 chances sur 6. Le nombre pair est plus probable.",
+  "05-finale": "Ce que tu as appris. Compter les chances, comparer au même total, et changer un sac pour avoir les chances qu'on veut. Bravo, tu as fini la série des probabilités du CM2 !",
+  "06-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

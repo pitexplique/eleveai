@@ -1,0 +1,12 @@
+{
+  "00-garde": "Répéter beaucoup : la fréquence se rapproche.",
+  "01-situation": "On lance une pièce. 10 lancers : 7 piles. Pile sort plus souvent ?",
+  "02-peu": "Sur 10 lancers, la fréquence de pile est 0,7. Loin de un demi. Avec peu d'essais, ça varie beaucoup.",
+  "03-beaucoup": "On continue. 100 lancers : 54 piles, 0,54. 1000 lancers : 503 piles, 0,503.",
+  "04-loi": "Plus on répète, plus la fréquence se rapproche de la probabilité : un demi, 0,5.",
+  "05-piege": "Le piège : croire qu'après 7 piles, face va « rattraper ». La pièce ne se souvient de rien. C'est le grand nombre de lancers qui rapproche la fréquence de 0,5.",
+  "06-defi": "À toi de jouer. Pour estimer la probabilité qu'une punaise tombe pointe en l'air, vaut-il mieux 10 lancers ou 500 lancers ? Mets pause, et cherche !",
+  "06b-correction": "Correction. 500 lancers : plus on répète, plus la fréquence est proche de la vraie probabilité.",
+  "07-finale": "Ce que tu as appris. Avec peu d'essais, la fréquence varie beaucoup. Avec beaucoup d'essais, elle se rapproche de la probabilité. Bravo, tu as fini la série des probabilités de 6e !",
+  "08-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

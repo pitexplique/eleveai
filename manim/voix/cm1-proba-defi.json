@@ -1,0 +1,12 @@
+{
+  "00-garde": "Le grand défi du hasard !",
+  "01-situation": "Trois défis, avec des sacs et une roue. À chaque fois, mets pause et cherche avant la réponse.",
+  "02-defi1": "Défi 1. Dans un sac : 4 billes rouges. Tirer une bille rouge : certain, possible ou impossible ? Mets pause, et cherche !",
+  "02b-correction1": "Correction. Il n'y a que des rouges : c'est certain.",
+  "03-defi2": "Défi 2. Sac A : 1 bille verte et 1 jaune. Sac B : 1 bille verte et 4 jaunes. Pour tirer une verte, quel sac ? Mets pause, et cherche !",
+  "03b-correction2": "Correction. Dans le sac A, 1 verte sur 2 billes. Dans le sac B, 1 verte sur 5. Le sac A donne plus de chances.",
+  "04-defi3": "Défi 3. Une roue de 4 parts : 1 rouge et 3 bleues. Combien de parts rouges faut-il pour avoir autant de chances de rouge que de bleu, avec toujours 4 parts ? Mets pause, et cherche !",
+  "04b-correction3": "Correction. Il faut 2 parts rouges et 2 parts bleues : autant de chances pour chaque couleur.",
+  "05-finale": "Ce que tu as appris. Certain, possible, impossible. Comparer les chances. Compter tant de chances sur tant. Bravo, tu as fini la série des probabilités du CM1 !",
+  "06-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

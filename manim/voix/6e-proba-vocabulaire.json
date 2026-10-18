@@ -1,0 +1,12 @@
+{
+  "00-garde": "Impossible, certain… et entre les deux : la probabilité.",
+  "01-situation": "Au jeu de l'oie, on lance un dé. Faire 7 ? Faire un nombre entre 1 et 6 ? Faire 6 ?",
+  "02-impossible-certain": "Faire 7 : ça n'arrive jamais. C'est impossible. Faire un nombre entre 1 et 6 : ça arrive à tous les coups. C'est certain.",
+  "03-echelle": "On range les chances sur une échelle, de 0 à 1. Impossible, c'est 0. Certain, c'est 1. Faire 6 : c'est possible, entre les deux.",
+  "04-milieu": "Au milieu de l'échelle, un demi : une chance sur deux. Pile ou face, c'est un demi.",
+  "05-piege": "Le piège : une probabilité ne dépasse jamais 1. Plus de 1, ce serait plus que certain : ça n'existe pas.",
+  "06-defi": "À toi de jouer. Où placer sur l'échelle : tirer une bille rouge dans un sac de billes toutes rouges ? Et tirer une bille bleue dans ce même sac ? Mets pause, et cherche !",
+  "06b-correction": "Correction. Une rouge : c'est certain, on la place à 1. Une bleue : c'est impossible, on la place à 0.",
+  "07-finale": "Ce que tu as appris. Une probabilité est entre 0 et 1. 0 : impossible. 1 : certain. Un demi : une chance sur deux. L'épisode 2 t'attend : comparer des probabilités.",
+  "08-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

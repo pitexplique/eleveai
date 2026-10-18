@@ -1,0 +1,12 @@
+{
+  "00-garde": "Lequel est le plus probable ?",
+  "01-situation": "Une roue de 6 parts égales : 3 rouges, 2 bleues, 1 verte. On la fait tourner.",
+  "02-compter": "Rouge : 3 parts sur 6. Bleu : 2 parts sur 6. Vert : 1 part sur 6.",
+  "03-ranger": "On range sur l'échelle de 0 à 1. Le rouge est le plus haut : c'est le plus probable. Le vert est le plus bas : c'est le moins probable.",
+  "04-methode": "La méthode : sur une même roue, plus il y a de parts, plus c'est probable. On compare le nombre de parts.",
+  "05-piege": "Le piège : 3 couleurs ne veut pas dire 1 chance sur 3 chacune. Les couleurs n'ont pas le même nombre de parts.",
+  "06-defi": "À toi de jouer. Avec un dé : faire un nombre pair, ou faire 1 ou 2 ? Lequel est le plus probable ? Mets pause, et cherche !",
+  "06b-correction": "Correction. Nombre pair : 2, 4, 6, trois faces. 1 ou 2 : deux faces. Le nombre pair est plus probable.",
+  "07-finale": "Ce que tu as appris. Sur une même roue ou un même dé, je compte les parts ou les faces. Plus il y en a, plus c'est probable. Et je range sur l'échelle de 0 à 1. L'épisode 3 t'attend : les issues.",
+  "08-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

@@ -326,6 +326,41 @@ for _t in _PROBA_TEST_2:
     }
     CEINTURE_SHORT[_nom] = _c
 
+# 18/10/2026 — même TEST, suite : CM1 et CM2, épisodes 3, 4, 5 (comparer, roue, défis).
+_PROBA_TEST_3 = [
+    ("cm1", "CM1", "cm1/maths/probabilites/03-comparer", "comparer", "blanche", ["5 FRAISES", "OU 2 ?"],
+     "le piège du grand sac", [("grand sac : 5 fraises", 76, BLEU), ("+ 20 citrons !", 96, ROUGE), ("le petit gagne !", 96, VERT)]),
+    ("cm1", "CM1", "cm1/maths/probabilites/04-roue-de-sac", "roue", "blanche", ["3 COULEURS", "= 1 SUR 3 ?"],
+     "le bleu sur la roue", [("3 couleurs", 100, BLEU), ("mais 4 parts !", 96, ORANGE), ("bleu : 2 sur 4", 96, VERT)]),
+    ("cm1", "CM1", "cm1/maths/probabilites/05-defis", "defi", "jaune", ["1 SEULE", "ROUGE"],
+     "combien en faut-il ?", [("4 parts, 1 rouge", 90, BLEU), ("autant que le bleu ?", 76, ORANGE), ("combien de rouges ?", 76, VERT)]),
+    ("cm2", "CM2", "cm2/maths/probabilites/03-comparer", "comparer", "jaune", ["4 GAGNANTS", "OU 2 ?"],
+     "tu joues où ?", [("C : 4 sur 20", 100, BLEU), ("D : 2 sur 5 = 8 sur 20", 68, ORANGE), ("D gagne !", 110, VERT)]),
+    ("cm2", "CM2", "cm2/maths/probabilites/04-roue-de-sac", "roue", "jaune", ["8 PARTS,", "4 BLEUES"],
+     "ne pas tomber sur le bleu ?", [("8 − 4 = 4", 110, BLEU), ("4 chances sur 8", 90, ORANGE), ("1 chance sur 2 !", 90, VERT)]),
+    ("cm2", "CM2", "cm2/maths/probabilites/05-defis", "defi", "jaune", ["4 NOIRES,", "6 VERTES"],
+     "combien en ajouter ?", [("pour 1 chance sur 2", 76, BLEU), ("autant que de vertes", 76, ORANGE), ("combien de noires ?", 80, VERT)]),
+]
+for _t in _PROBA_TEST_3:
+    _cl, _bd, _sortie, _ep, _c, _titre, _sous, _lg = _t[:8]
+    _nom = f"eleveai-maths-{_cl}-proba-{_ep}-short"
+    SHORTS[_nom] = {
+        "badge": f"PROBABILITÉS · {_bd}", "titre": _titre, "taille": _t[8] if len(_t) > 8 else 92, "sous": _sous,
+        "taille_sous": 44, "couleur_sous": ORANGE, "accroche": _acc(_lg), "dossier": f"{_cl}/maths/fr", "sortie": _sortie,
+    }
+    CEINTURE_SHORT[_nom] = _c
+
+
+# 17/10/2026 — Grand Raid, Diagonale des Fous : combien de marches pour 1000 m ? (6e, jaune).
+SHORTS["eleveai-maths-6e-aire-longueur-short-diagonale"] = {
+    "badge": "GRAND RAID · 6E", "titre": ["1000 M", "DE MONTÉE"], "taille": 96,
+    "sous": "combien de marches de 25 cm ?", "taille_sous": 46, "couleur_sous": ORANGE,
+    "accroche": lambda d: (badge_ceinture(d), lignes(d, [("40 ?", 110, ROUGE), ("400 ?", 110, ORANGE),
+                                                         ("4000 ?", 110, VERT)], y0=700, pas=150)),
+    "dossier": "6e/maths/fr", "sortie": "6e/maths/shorts/fr/aire-longueur",
+}
+CEINTURE_SHORT["eleveai-maths-6e-aire-longueur-short-diagonale"] = "jaune"
+
 
 def main():
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")

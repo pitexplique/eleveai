@@ -1,0 +1,13 @@
+{
+  "00-garde": "La roue, le dé et le sac : combien de chances ?",
+  "01-situation": "À la kermesse, la roue a 4 parts : 1 rouge, 2 bleues et 1 verte. Si elle s'arrête sur le rouge, tu gagnes un ballon.",
+  "02-compter": "Je compte toutes les parts : 1, 2, 3, 4. Il y a 4 parts.",
+  "03-gagnant": "Je compte les parts qui font gagner : 1 seule, la rouge. J'ai 1 chance sur 4.",
+  "04-de": "Avec un dé, c'est pareil. 6 faces en tout. Pour faire 5, une seule face : 1 chance sur 6.",
+  "05-sac": "Et avec un sac : 2 billes rouges et 3 bleues. 5 billes en tout, 2 rouges : 2 chances sur 5 de tirer une rouge.",
+  "06-piege": "Le piège : sur la roue, 3 couleurs, mais 4 parts. On compte les parts, pas les couleurs. Le bleu, c'est 2 chances sur 4.",
+  "07-defi": "À toi de jouer. Une roue de 6 parts : 3 jaunes, 2 vertes, 1 rose. Combien de chances de tomber sur le jaune ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 6 parts en tout, 3 jaunes : 3 chances sur 6.",
+  "08-finale": "Ce que tu as appris. Je compte tout : les parts, les faces ou les billes. Puis je compte ce qui fait gagner. Et je dis : tant de chances sur tant. L'épisode 5 t'attend : le défi.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}
