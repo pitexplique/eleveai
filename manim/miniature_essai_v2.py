@@ -1510,6 +1510,56 @@ ESSAIS.update({
     },
 })
 
+# 18/10/2026 — même TEST, suite : la série PROBABILITÉS 6e, 9 épisodes (1-3 blanche, 4-9 jaune).
+_P6 = "6e/maths/probabilites/"
+ESSAIS.update({
+    "eleveai-maths-6e-proba-vocabulaire": {
+        "badge": "MATHS · 6E", "duree": "EN 2 MIN", "titre": ["COMPRENDRE", "LA PROBABILITÉ"],
+        "accroche": _piege_test("blanche", "Plus que certain ?", "non : jamais plus que 1 !", 76),
+        "dossier": _P6 + "01-vocabulaire",
+    },
+    "eleveai-maths-6e-proba-comparer": {
+        "badge": "MATHS · 6E", "duree": "EN 2 MIN", "titre": ["COMPARER DES", "PROBABILITÉS"],
+        "accroche": _piege_test("blanche", "3 couleurs = 1 chance sur 3 ?", "non : on compte les parts !"),
+        "dossier": _P6 + "02-comparer",
+    },
+    "eleveai-maths-6e-proba-issue": {
+        "badge": "MATHS · 6E", "duree": "EN 2 MIN", "titre": ["COMPRENDRE", "LES ISSUES"],
+        "accroche": _piege_test("blanche", "3 couleurs = 3 issues ?", "non : 5 parts, 5 issues !"),
+        "dossier": _P6 + "03-issues",
+    },
+    "eleveai-maths-6e-proba-estimer": {
+        "badge": "MATHS · 6E", "duree": "EN 2 MIN", "titre": ["CALCULER UNE", "PROBABILITÉ"],
+        "accroche": _piege_test("jaune", "Faire 6 : 6 sur 1 ?", "non : 1 sur 6, jamais plus que 1", 76),
+        "dossier": _P6 + "04-calculer",
+    },
+    "eleveai-maths-6e-proba-lire": {
+        "badge": "MATHS · 6E", "duree": "EN 2 MIN", "titre": ["LIRE UNE", "SITUATION"],
+        "accroche": _piege_test("jaune", "5 gagnants, 50 perdants…", "5 sur 50 ? non : 5 sur 55 !", 72, 62),
+        "dossier": _P6 + "05-lire",
+    },
+    "eleveai-maths-6e-proba-defi": {
+        "badge": "MATHS · 6E", "duree": "EN 2 MIN", "titre": ["LES DÉFIS", "DES PROBABILITÉS"],
+        "accroche": _piege_test("jaune", "Plus grand que 6 avec un dé ?", "impossible : la probabilité est 0 !"),
+        "dossier": _P6 + "06-defis",
+    },
+    "eleveai-maths-6e-proba-frequence-calculer": {
+        "badge": "MATHS · 6E", "duree": "EN 2 MIN", "titre": ["COMPRENDRE", "LA FRÉQUENCE"],
+        "accroche": _piege_test("jaune", "18 six : 18/100 ou 100/18 ?", "18/100 : jamais plus que 1 !", 72),
+        "dossier": _P6 + "07-frequence",
+    },
+    "eleveai-maths-6e-proba-frequence-comparer": {
+        "badge": "MATHS · 6E", "duree": "EN 2 MIN", "titre": ["OBSERVÉ", "OU CALCULÉ ?"],
+        "accroche": _piege_test("jaune", "13 six sur 60 : dé truqué ?", "non : le hasard fait varier"),
+        "dossier": _P6 + "08-observe-calcule",
+    },
+    "eleveai-maths-6e-proba-frequence-repeter": {
+        "badge": "MATHS · 6E", "duree": "EN 2 MIN", "titre": ["RÉPÉTER", "BEAUCOUP"],
+        "accroche": _piege_test("jaune", "7 piles sur 10 : face va rattraper ?", "non : la pièce n'a pas de mémoire"),
+        "dossier": _P6 + "09-repeter",
+    },
+})
+
 
 def construire(nom, spec):
     img = fond()

@@ -350,6 +350,36 @@ for _t in _PROBA_TEST_3:
     }
     CEINTURE_SHORT[_nom] = _c
 
+# 18/10/2026 — même TEST, suite : la série PROBABILITÉS 6e, ses 9 shorts (1-3 blanche, 4-9 jaune).
+_PROBA_TEST_6E = [
+    ("6e", "6E", "6e/maths/probabilites/01-vocabulaire", "vocabulaire", "blanche", ["QUE DES", "BILLES ROUGES"],
+     "tirer une rouge, c'est combien ?", [("rouge : certain", 96, BLEU), ("= 1, tout en haut", 86, VERT), ("bleue : 0 !", 100, ROUGE)], 88),
+    ("6e", "6E", "6e/maths/probabilites/02-comparer", "comparer", "blanche", ["3 COULEURS", "= 1 SUR 3 ?"],
+     "la roue de 6 parts", [("rouge : 3 parts", 96, BLEU), ("vert : 1 seule", 96, ORANGE), ("3 fois plus !", 100, VERT)]),
+    ("6e", "6E", "6e/maths/probabilites/03-issues", "issue", "blanche", ["3 COULEURS", "= 3 ISSUES ?"],
+     "compte bien la roue", [("3 couleurs", 100, BLEU), ("mais 5 parts !", 96, ORANGE), ("5 issues !", 110, VERT)]),
+    ("6e", "6E", "6e/maths/probabilites/04-calculer", "estimer", "jaune", ["IL FAUT", "UN 6 !"],
+     "tes chances : 6 sur 1 ?", [("6 sur 1 ?", 110, ROUGE), ("1 face sur 6", 96, BLEU), ("1 sur 6 !", 110, VERT)]),
+    ("6e", "6E", "6e/maths/probabilites/05-lire", "lire", "jaune", ["5 GAGNANTS,", "50 PERDANTS"],
+     "tes chances : 5 sur 50 ?", [("5 sur 50 ?", 110, ROUGE), ("5 + 50 = 55", 100, BLEU), ("5 sur 55 !", 110, VERT)], 88),
+    ("6e", "6E", "6e/maths/probabilites/06-defis", "defi", "jaune", ["PLUS QUE 6", "AVEC UN DÉ ?"],
+     "défi express", [("faces : 1 à 6", 96, BLEU), ("aucune ne marche", 86, ORANGE), ("probabilité : 0 !", 90, VERT)], 88),
+    ("6e", "6E", "6e/maths/probabilites/07-frequence", "frequence-calculer", "jaune", ["18 SIX SUR", "100 LANCERS"],
+     "c'est beaucoup ?", [("18/100 = 0,18", 100, BLEU), ("1/6 ≈ 0,17", 100, ORANGE), ("très proche !", 100, VERT)], 88),
+    ("6e", "6E", "6e/maths/probabilites/08-observe-calcule", "frequence-comparer", "jaune", ["6 LANCERS,", "AUCUN 6 ?"],
+     "1 chance sur 6… pas une promesse", [("6 lancers", 100, BLEU), ("un 6 forcé ?", 96, ROUGE), ("aucun 6 : possible !", 80, VERT)], 88),
+    ("6e", "6E", "6e/maths/probabilites/09-repeter", "frequence-repeter", "jaune", ["10 LANCERS,", "7 PILES"],
+     "la pièce est truquée ?", [("10 lancers : 0,7", 90, ROUGE), ("1000 : 0,503", 100, BLEU), ("vers 0,5 !", 110, VERT)], 88),
+]
+for _t in _PROBA_TEST_6E:
+    _cl, _bd, _sortie, _ep, _c, _titre, _sous, _lg = _t[:8]
+    _nom = f"eleveai-maths-{_cl}-proba-{_ep}-short"
+    SHORTS[_nom] = {
+        "badge": f"PROBABILITÉS · {_bd}", "titre": _titre, "taille": _t[8] if len(_t) > 8 else 92, "sous": _sous,
+        "taille_sous": 44, "couleur_sous": ORANGE, "accroche": _acc(_lg), "dossier": f"{_cl}/maths/fr", "sortie": _sortie,
+    }
+    CEINTURE_SHORT[_nom] = _c
+
 
 # 17/10/2026 — Grand Raid, Diagonale des Fous : combien de marches pour 1000 m ? (6e, jaune).
 SHORTS["eleveai-maths-6e-aire-longueur-short-diagonale"] = {

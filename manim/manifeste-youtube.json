@@ -12598,6 +12598,772 @@
         "ceinture jaune",
         "Shorts"
       ]
+    },
+    {
+      "id": "6e-proba-vocabulaire",
+      "notionId": "proba_experience",
+      "microId": "proba_vocabulaire",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/probabilites/01-vocabulaire/eleveai-maths-6e-proba-vocabulaire.mp4",
+      "miniature": "6e/maths/probabilites/01-vocabulaire/eleveai-maths-6e-proba-vocabulaire.png",
+      "titre": "Plus que certain ? Une probabilité ne dépasse JAMAIS 1 — L'échelle de 0 à 1 — épisode 1 · Maths 6e",
+      "accroche": "Au jeu de l'oie, on lance un dé. Faire 7 ? Faire un nombre entre 1 et 6 ? Faire 6 ? Impossible, certain… et entre les deux : la probabilité.\n\nDans cette vidéo :\n• impossible, c'est 0 ; certain, c'est 1\n• on range les chances sur une échelle de 0 à 1\n• au milieu, un demi : une chance sur deux, comme pile ou face\n• le piège : une probabilité ne dépasse jamais 1\n\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : un sac de billes toutes rouges : où placer « tirer une rouge » et « tirer une bleue » sur l'échelle ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/proba-experience\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/proba-experience\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=proba_experience&microId=proba_vocabulaire&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Le jeu de l'oie"
+        ],
+        [
+          "00:15",
+          "Impossible ou certain ?"
+        ],
+        [
+          "00:26",
+          "L'échelle de 0 à 1"
+        ],
+        [
+          "00:40",
+          "Un demi, et le piège : jamais plus de 1"
+        ],
+        [
+          "00:57",
+          "À toi de jouer"
+        ],
+        [
+          "01:12",
+          "Correction"
+        ],
+        [
+          "01:23",
+          "Ce que tu as appris"
+        ],
+        [
+          "01:40",
+          "Abonne-toi"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/proba-experience",
+      "tags": [
+        "probabilité",
+        "impossible",
+        "certain",
+        "échelle de 0 à 1",
+        "jeu de l'oie",
+        "dé",
+        "probabilités",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "6e-proba-vocabulaire-short",
+      "notionId": "proba_experience",
+      "microId": "proba_vocabulaire",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-proba-vocabulaire",
+      "fichier": "6e/maths/probabilites/01-vocabulaire/eleveai-maths-6e-proba-vocabulaire-short.mp4",
+      "miniature": "6e/maths/probabilites/01-vocabulaire/eleveai-maths-6e-proba-vocabulaire-short.png",
+      "titre": "Que des billes rouges : tirer une rouge, c'est combien ? 🔴 — 6e #Shorts",
+      "accroche": "Ce sac n'a que des billes rouges. Tirer une rouge, c'est certain : 1, tout en haut de l'échelle ! Et une bleue ? Impossible : 0, tout en bas.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : pile ou face, on le place où sur l'échelle ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=proba_experience&microId=proba_vocabulaire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #6e #collège",
+      "tags": [
+        "certain",
+        "impossible",
+        "échelle",
+        "billes",
+        "probabilités",
+        "maths 6e",
+        "6e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "6e-proba-comparer",
+      "notionId": "proba_experience",
+      "microId": "proba_comparer",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/probabilites/02-comparer/eleveai-maths-6e-proba-comparer.mp4",
+      "miniature": "6e/maths/probabilites/02-comparer/eleveai-maths-6e-proba-comparer.png",
+      "titre": "3 couleurs = 1 chance sur 3 ? FAUX ! — Comparer des probabilités — épisode 2 · Maths 6e",
+      "accroche": "Une roue de 6 parts égales : 3 rouges, 2 bleues, 1 verte. On la fait tourner. Quelle couleur est la plus probable ?\n\nDans cette vidéo :\n• je compte les parts : rouge 3 sur 6, bleu 2 sur 6, vert 1 sur 6\n• je range sur l'échelle de 0 à 1 : le rouge, le plus probable\n• la méthode : sur une même roue, plus de parts, plus probable\n• le piège : 3 couleurs ne veut pas dire 1 chance sur 3 chacune\n\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : avec un dé, faire un nombre pair ou faire 1 ou 2 : lequel est le plus probable ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/proba-experience\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/proba-experience\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=proba_experience&microId=proba_comparer&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "La roue : lequel est le plus probable ?"
+        ],
+        [
+          "00:11",
+          "On compte les parts, on range sur l'échelle"
+        ],
+        [
+          "00:30",
+          "La méthode, et le piège"
+        ],
+        [
+          "00:48",
+          "À toi de jouer"
+        ],
+        [
+          "01:01",
+          "Correction"
+        ],
+        [
+          "01:13",
+          "Ce que tu as appris"
+        ],
+        [
+          "01:30",
+          "Abonne-toi"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/proba-experience",
+      "tags": [
+        "comparer des probabilités",
+        "roue",
+        "plus probable",
+        "échelle de 0 à 1",
+        "dé",
+        "probabilités",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "6e-proba-comparer-short",
+      "notionId": "proba_experience",
+      "microId": "proba_comparer",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-proba-comparer",
+      "fichier": "6e/maths/probabilites/02-comparer/eleveai-maths-6e-proba-comparer-short.mp4",
+      "miniature": "6e/maths/probabilites/02-comparer/eleveai-maths-6e-proba-comparer-short.png",
+      "titre": "Le rouge, 3 fois plus probable que le vert ? 🎡 — 6e #Shorts",
+      "accroche": "3 couleurs sur la roue, donc 1 chance sur 3 chacune ? Non ! Rouge : 3 parts, bleu : 2, vert : 1 seule. Le rouge est 3 fois plus probable que le vert.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : sur cette roue, le bleu est plus ou moins probable que le rouge ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=proba_experience&microId=proba_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #6e #collège",
+      "tags": [
+        "roue",
+        "plus probable",
+        "piège",
+        "probabilités",
+        "maths 6e",
+        "6e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "6e-proba-issue",
+      "notionId": "proba_experience",
+      "microId": "proba_issue",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/probabilites/03-issues/eleveai-maths-6e-proba-issue.mp4",
+      "miniature": "6e/maths/probabilites/03-issues/eleveai-maths-6e-proba-issue.png",
+      "titre": "3 couleurs… mais combien d'issues ? — Les issues — épisode 3 · Maths 6e",
+      "accroche": "On lance une pièce, puis on lance un dé. Que peut-il arriver ? Les issues : tout ce qui peut arriver.\n\nDans cette vidéo :\n• une issue, c'est un résultat possible : la pièce en a 2, le dé en a 6\n• avant de calculer, je liste TOUTES les issues, sans oubli ni doublon\n• un événement, c'est une phrase : « obtenir un nombre pair », réalisé par 2, 4 et 6\n• le piège : une roue de 3 couleurs mais 5 parts a 5 issues, pas 3\n\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : un sac avec une bille rouge, une verte et une jaune : liste les issues, combien y en a-t-il ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/proba-experience\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/proba-experience\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=proba_experience&microId=proba_issue&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Pièce et dé : les issues"
+        ],
+        [
+          "00:10",
+          "Une issue, lister toutes les issues"
+        ],
+        [
+          "00:32",
+          "Un événement, et le piège de la roue"
+        ],
+        [
+          "00:54",
+          "À toi de jouer"
+        ],
+        [
+          "01:10",
+          "Correction et ce que tu as appris"
+        ],
+        [
+          "01:33",
+          "Abonne-toi"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/proba-experience",
+      "tags": [
+        "issues",
+        "événement",
+        "lister les issues",
+        "pièce",
+        "dé",
+        "roue",
+        "probabilités",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "6e-proba-issue-short",
+      "notionId": "proba_experience",
+      "microId": "proba_issue",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-proba-issue",
+      "fichier": "6e/maths/probabilites/03-issues/eleveai-maths-6e-proba-issue-short.mp4",
+      "miniature": "6e/maths/probabilites/03-issues/eleveai-maths-6e-proba-issue-short.png",
+      "titre": "3 couleurs = 3 issues ? PIÈGE ! 🎡 — 6e #Shorts",
+      "accroche": "Cette roue a 3 couleurs. Combien d'issues ? Piège ! Elle a 5 parts : les issues, ce sont les 5 parts, pas les 3 couleurs !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : avec un dé, combien d'issues réalisent « obtenir plus que 4 » ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=proba_experience&microId=proba_issue&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #6e #collège",
+      "tags": [
+        "issues",
+        "roue",
+        "piège",
+        "probabilités",
+        "maths 6e",
+        "6e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "6e-proba-estimer",
+      "notionId": "proba_experience",
+      "microId": "proba_estimer",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/probabilites/04-calculer/eleveai-maths-6e-proba-estimer.mp4",
+      "miniature": "6e/maths/probabilites/04-calculer/eleveai-maths-6e-proba-estimer.png",
+      "titre": "6 SUR 1 ? FAUX ! — Calculer une probabilité — épisode 4 · Maths 6e",
+      "accroche": "Aux petits chevaux, il faut un 6 pour sortir. Quelle est la probabilité de faire 6 ?\n\nDans cette vidéo :\n• je compte les issues favorables (le 6 : une seule), puis toutes les issues (6)\n• on l'écrit en fraction : 1/6, les favorables en haut, toutes les issues en bas\n• un nombre pair : 3 issues favorables sur 6, c'est 3/6, un demi\n• le piège : écrire 6/1 ; une probabilité ne dépasse jamais 1\n\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : un sac de 10 billes dont 3 rouges : quelle est la probabilité de tirer une rouge ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/proba-experience\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/proba-experience\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=proba_experience&microId=proba_estimer&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Les petits chevaux : calculer une probabilité"
+        ],
+        [
+          "00:12",
+          "Je compte les issues"
+        ],
+        [
+          "00:23",
+          "Une fraction"
+        ],
+        [
+          "00:33",
+          "Un nombre pair : 3 sur 6"
+        ],
+        [
+          "00:48",
+          "Le piège : 6 sur 1"
+        ],
+        [
+          "01:00",
+          "À toi de jouer"
+        ],
+        [
+          "01:13",
+          "Correction et ce que tu as appris"
+        ],
+        [
+          "01:38",
+          "Abonne-toi"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/proba-experience",
+      "tags": [
+        "calculer une probabilité",
+        "fraction",
+        "issues favorables",
+        "petits chevaux",
+        "dé",
+        "probabilités",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "6e-proba-estimer-short",
+      "notionId": "proba_experience",
+      "microId": "proba_estimer",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-proba-estimer",
+      "fichier": "6e/maths/probabilites/04-calculer/eleveai-maths-6e-proba-estimer-short.mp4",
+      "miniature": "6e/maths/probabilites/04-calculer/eleveai-maths-6e-proba-estimer-short.png",
+      "titre": "Tes chances : 6 sur 1 ? 🎲 — 6e #Shorts",
+      "accroche": "Il faut un 6 pour sortir. 6 sur 1 ? Non ! 1 face gagnante, 6 faces en tout : 1 sur 6. Les favorables en haut, toutes les issues en bas.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : la probabilité de faire 5 ou 6 avec un dé ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=proba_experience&microId=proba_estimer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #6e #collège",
+      "tags": [
+        "fraction",
+        "dé",
+        "petits chevaux",
+        "piège",
+        "probabilités",
+        "maths 6e",
+        "6e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "6e-proba-lire",
+      "notionId": "proba_experience",
+      "microId": "proba_lire",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/probabilites/05-lire/eleveai-maths-6e-proba-lire.mp4",
+      "miniature": "6e/maths/probabilites/05-lire/eleveai-maths-6e-proba-lire.png",
+      "titre": "5 gagnants, 50 perdants : 5 sur 50 ? PIÈGE ! — Lire une situation — épisode 5 · Maths 6e",
+      "accroche": "Une tombola à la fête de l'école : 50 tickets dans l'urne, dont 5 gagnants. Tu en tires un. Quelle est la probabilité de gagner ?\n\nDans cette vidéo :\n• je repère toutes les issues (50 tickets), puis les favorables (5 gagnants)\n• gagner : 5 sur 50, c'est aussi 1 sur 10\n• perdre : 50 − 5 = 45 tickets, donc 45 sur 50\n• le piège : « 5 gagnants et 50 perdants », c'est 55 tickets en tout\n\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : un sac de 4 billes rouges et 6 bleues : quelle est la probabilité de tirer une bleue ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/proba-experience\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/proba-experience\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=proba_experience&microId=proba_lire&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "La tombola : lire une situation"
+        ],
+        [
+          "00:14",
+          "Je repère les issues ; gagner : 5 sur 50 = 1 sur 10"
+        ],
+        [
+          "00:32",
+          "Perdre : 45 sur 50"
+        ],
+        [
+          "00:44",
+          "Le piège du total"
+        ],
+        [
+          "00:55",
+          "À toi de jouer"
+        ],
+        [
+          "01:08",
+          "Correction et ce que tu as appris"
+        ],
+        [
+          "01:33",
+          "Abonne-toi"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/proba-experience",
+      "tags": [
+        "lire une situation",
+        "tombola",
+        "issues favorables",
+        "total",
+        "fraction",
+        "probabilités",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "6e-proba-lire-short",
+      "notionId": "proba_experience",
+      "microId": "proba_lire",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-proba-lire",
+      "fichier": "6e/maths/probabilites/05-lire/eleveai-maths-6e-proba-lire-short.mp4",
+      "miniature": "6e/maths/probabilites/05-lire/eleveai-maths-6e-proba-lire-short.png",
+      "titre": "5 sur 50… ou 5 sur 55 ? 🎟️ — 6e #Shorts",
+      "accroche": "5 tickets gagnants, 50 tickets perdants. Tes chances : 5 sur 50 ? Piège ! 5 + 50 = 55 tickets en tout : c'est 5 sur 55. Lis bien le total !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : 3 billes rouges et 7 bleues, la probabilité de tirer une rouge ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=proba_experience&microId=proba_lire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #6e #collège",
+      "tags": [
+        "tombola",
+        "total",
+        "piège",
+        "probabilités",
+        "maths 6e",
+        "6e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "6e-proba-defi",
+      "notionId": "proba_experience",
+      "microId": "proba_defi",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/probabilites/06-defis/eleveai-maths-6e-proba-defi.mp4",
+      "miniature": "6e/maths/probabilites/06-defis/eleveai-maths-6e-proba-defi.png",
+      "titre": "Plus grand que 6 avec un dé ? Piège : 0 ! — Les défis — épisode 6 · Maths 6e",
+      "accroche": "Les défis des probabilités de 6e : trois défis. À chaque fois, mets pause et cherche avant la réponse !\n\nDans cette vidéo :\n• défi 1 : une roue de 8 parts égales, dont 2 rouges : la probabilité du rouge ?\n• défi 2 : sac A (1 rouge sur 4) ou sac B (2 rouges sur 4) ?\n• défi 3 : avec un dé, faire un nombre plus grand que 6 ?\n• compter les issues, écrire une fraction, comparer, reconnaître l'impossible\n\n🥋 Ceinture jaune.\nTrois défis, chacun avec sa correction.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/proba-experience\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/proba-experience\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=proba_experience&microId=proba_defi&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Les défis : trois défis"
+        ],
+        [
+          "00:10",
+          "Défi 1 : la roue, et correction"
+        ],
+        [
+          "00:32",
+          "Défi 2 : deux sacs, et correction"
+        ],
+        [
+          "00:58",
+          "Défi 3 : plus grand que 6"
+        ],
+        [
+          "01:09",
+          "Correction 3 et ce que tu as appris"
+        ],
+        [
+          "01:31",
+          "Abonne-toi"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/proba-experience",
+      "tags": [
+        "défi",
+        "impossible",
+        "roue",
+        "sac de billes",
+        "dé",
+        "fraction",
+        "probabilités",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "6e-proba-defi-short",
+      "notionId": "proba_experience",
+      "microId": "proba_defi",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-proba-defi",
+      "fichier": "6e/maths/probabilites/06-defis/eleveai-maths-6e-proba-defi-short.mp4",
+      "miniature": "6e/maths/probabilites/06-defis/eleveai-maths-6e-proba-defi-short.png",
+      "titre": "Un dé… faire plus que 6 ?! 🎲 — 6e #Shorts",
+      "accroche": "Défi express : un dé, faire plus grand que 6. Aucune face ne le permet. C'est impossible : la probabilité est 0, tout en bas de l'échelle !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : faire plus petit que 7 avec un dé, c'est quelle probabilité ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=proba_experience&microId=proba_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #6e #défi",
+      "tags": [
+        "défi",
+        "impossible",
+        "dé",
+        "probabilités",
+        "maths 6e",
+        "6e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "6e-proba-frequence-calculer",
+      "notionId": "proba_frequence",
+      "microId": "proba_frequence_calculer",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/probabilites/07-frequence/eleveai-maths-6e-proba-frequence-calculer.mp4",
+      "miniature": "6e/maths/probabilites/07-frequence/eleveai-maths-6e-proba-frequence-calculer.png",
+      "titre": "18/100 ou 100/18 ? Le mauvais sens dépasse 1 ! — La fréquence — épisode 7 · Maths 6e",
+      "accroche": "On lance un dé 100 fois et on compte les 6 : il en sort 18. La fréquence, c'est ce qui s'est vraiment passé.\n\nDans cette vidéo :\n• la fréquence du 6 : le nombre de 6 sur le nombre de lancers, 18/100\n• trois écritures : 18/100, 0,18 ou 18 %\n• avec une pièce : 9 piles sur 50 lancers, 0,18 aussi\n• le piège : 100/18, c'est plus que 1 ; une fréquence est toujours entre 0 et 1\n\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : une pièce lancée 20 fois, 12 faces : quelle est la fréquence de face ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/proba-frequence\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/proba-frequence\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=proba_frequence&microId=proba_frequence_calculer&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "100 lancers de dé : la fréquence"
+        ],
+        [
+          "00:11",
+          "La fréquence du 6 : 18/100, 0,18, 18 %"
+        ],
+        [
+          "00:28",
+          "Avec une pièce"
+        ],
+        [
+          "00:39",
+          "Le piège"
+        ],
+        [
+          "00:50",
+          "À toi de jouer"
+        ],
+        [
+          "01:02",
+          "Correction et ce que tu as appris"
+        ],
+        [
+          "01:27",
+          "Abonne-toi"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/proba-frequence",
+      "tags": [
+        "fréquence",
+        "fréquence observée",
+        "pourcentage",
+        "lancers de dé",
+        "pièce",
+        "probabilités",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "6e-proba-frequence-calculer-short",
+      "notionId": "proba_frequence",
+      "microId": "proba_frequence_calculer",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-proba-frequence-calculer",
+      "fichier": "6e/maths/probabilites/07-frequence/eleveai-maths-6e-proba-frequence-calculer-short.mp4",
+      "miniature": "6e/maths/probabilites/07-frequence/eleveai-maths-6e-proba-frequence-calculer-short.png",
+      "titre": "18 six sur 100 lancers : c'est beaucoup ? 🎲 — 6e #Shorts",
+      "accroche": "100 lancers de dé, 18 six. Fréquence : 18 sur 100, 0,18. Et la probabilité du 6, c'est 1 sur 6, environ 0,17. Très proche !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : 20 lancers de pièce, 12 faces, quelle fréquence ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=proba_frequence&microId=proba_frequence_calculer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #6e #collège",
+      "tags": [
+        "fréquence",
+        "lancers de dé",
+        "probabilité",
+        "probabilités",
+        "maths 6e",
+        "6e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "6e-proba-frequence-comparer",
+      "notionId": "proba_frequence",
+      "microId": "proba_frequence_comparer",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/probabilites/08-observe-calcule/eleveai-maths-6e-proba-frequence-comparer.mp4",
+      "miniature": "6e/maths/probabilites/08-observe-calcule/eleveai-maths-6e-proba-frequence-comparer.png",
+      "titre": "13 six sur 60 au lieu de 10 : le dé est truqué ? — Observé ou calculé ? — épisode 8 · Maths 6e",
+      "accroche": "Avec un dé, la probabilité de faire 6, c'est 1 sur 6, environ 0,17. On lance 60 fois : 13 six. Le dé est-il truqué ?\n\nDans cette vidéo :\n• la fréquence observée : 13 sur 60, environ 0,22\n• 0,22 observé, 0,17 calculé : c'est normal, le hasard fait varier\n• 40 six sur 60, environ 0,67 : beaucoup trop loin, le dé est peut-être truqué\n• le piège : sur 6 lancers, on n'aura pas forcément un 6\n\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : une pièce, 100 lancers, 48 piles : est-elle bien équilibrée ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/proba-frequence\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/proba-frequence\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=proba_frequence&microId=proba_frequence_comparer&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Un dé, 60 lancers : observé ou calculé ?"
+        ],
+        [
+          "00:15",
+          "La fréquence observée, et on compare"
+        ],
+        [
+          "00:32",
+          "40 sur 60 : dé truqué ?"
+        ],
+        [
+          "00:48",
+          "Le piège des 6 lancers"
+        ],
+        [
+          "00:59",
+          "Défi : la pièce"
+        ],
+        [
+          "01:12",
+          "Correction"
+        ],
+        [
+          "01:23",
+          "Ce que tu as appris"
+        ],
+        [
+          "01:38",
+          "Abonne-toi"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/proba-frequence",
+      "tags": [
+        "fréquence observée",
+        "probabilité calculée",
+        "dé truqué",
+        "hasard",
+        "lancers de dé",
+        "probabilités",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "6e-proba-frequence-comparer-short",
+      "notionId": "proba_frequence",
+      "microId": "proba_frequence_comparer",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-proba-frequence-comparer",
+      "fichier": "6e/maths/probabilites/08-observe-calcule/eleveai-maths-6e-proba-frequence-comparer-short.mp4",
+      "miniature": "6e/maths/probabilites/08-observe-calcule/eleveai-maths-6e-proba-frequence-comparer-short.png",
+      "titre": "6 lancers… et AUCUN 6 ? 🎲 — 6e #Shorts",
+      "accroche": "6 lancers de dé : on aura forcément un 6 ? Non ! 1 chance sur 6 à chaque lancer, ce n'est pas une promesse. On peut faire 6 lancers sans aucun 6.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : 40 six sur 60 lancers, ce dé est normal ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=proba_frequence&microId=proba_frequence_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #6e #hasard",
+      "tags": [
+        "dé",
+        "hasard",
+        "piège",
+        "fréquence",
+        "probabilités",
+        "maths 6e",
+        "6e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "6e-proba-frequence-repeter",
+      "notionId": "proba_frequence",
+      "microId": "proba_frequence_repeter",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/probabilites/09-repeter/eleveai-maths-6e-proba-frequence-repeter.mp4",
+      "miniature": "6e/maths/probabilites/09-repeter/eleveai-maths-6e-proba-frequence-repeter.png",
+      "titre": "7 piles sur 10… la pièce va-t-elle rattraper ? — Répéter beaucoup — épisode 9 · Maths 6e",
+      "accroche": "On lance une pièce. 10 lancers : 7 piles. Pile sort plus souvent ? Et si on lançait 100 fois, puis 1000 fois ?\n\nDans cette vidéo :\n• sur 10 lancers, la fréquence de pile est 0,7 : avec peu d'essais, ça varie beaucoup\n• 100 lancers : 0,54 ; 1000 lancers : 0,503\n• plus on répète, plus la fréquence se rapproche de la probabilité, 0,5\n• le piège : face ne va pas « rattraper », la pièce ne se souvient de rien\n\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : pour estimer la probabilité qu'une punaise tombe pointe en l'air, 10 lancers ou 500 lancers ?\nC'est le dernier épisode : la fin de la série Probabilités de la 6e !\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/proba-frequence\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/proba-frequence\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=proba_frequence&microId=proba_frequence_repeter&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "10 lancers, 7 piles : répéter beaucoup"
+        ],
+        [
+          "00:12",
+          "Peu de lancers : 0,7"
+        ],
+        [
+          "00:22",
+          "100 puis 1000 lancers : vers 0,5"
+        ],
+        [
+          "00:44",
+          "Le piège : « rattraper »"
+        ],
+        [
+          "00:58",
+          "Défi : la punaise"
+        ],
+        [
+          "01:12",
+          "Correction et ce que tu as appris"
+        ],
+        [
+          "01:36",
+          "Abonne-toi"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/proba-frequence",
+      "tags": [
+        "fréquence",
+        "loi des grands nombres",
+        "répéter une expérience",
+        "pile ou face",
+        "punaise",
+        "probabilités",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "6e-proba-frequence-repeter-short",
+      "notionId": "proba_frequence",
+      "microId": "proba_frequence_repeter",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-proba-frequence-repeter",
+      "fichier": "6e/maths/probabilites/09-repeter/eleveai-maths-6e-proba-frequence-repeter-short.mp4",
+      "miniature": "6e/maths/probabilites/09-repeter/eleveai-maths-6e-proba-frequence-repeter-short.png",
+      "titre": "10 lancers, 7 piles : truquée ? 🪙 — 6e #Shorts",
+      "accroche": "10 lancers, 7 piles. La pièce est truquée ? Pas forcément ! 100 lancers : 0,54. 1000 lancers : 0,503. Plus on lance, plus on approche 0,5.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : combien de lancers ferais-tu pour savoir si une pièce est truquée ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=proba_frequence&microId=proba_frequence_repeter&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #6e #collège",
+      "tags": [
+        "pile ou face",
+        "fréquence",
+        "grand nombre de lancers",
+        "probabilités",
+        "maths 6e",
+        "6e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
     }
   ]
 }
