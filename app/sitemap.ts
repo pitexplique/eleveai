@@ -995,6 +995,14 @@ const VIDEOS_FICHES: Record<string, VideoSitemap[]> = {
       description:
         "Mesurer avec une règle graduée, convertir avec le tableau des unités (km au mm) et comparer deux longueurs dans la même unité, pas à pas (6e).",
     },
+    {
+      // 18/10/2026 : Grand Raid, Diagonale des Fous — marches de 25 cm, 1000 m de montée.
+      id: "OudqIW-RaaA",
+      title: "Grand Raid, Diagonale des Fous : combien de marches pour monter 1000 m ? Convertir des longueurs — 6e",
+      description:
+        "Une marche fait 25 cm : combien de marches pour 1000 m de dénivelé positif ? Le piège 1000 ÷ 25 = 40, la même unité d'abord, 4 marches par mètre, le tableau de conversion et la vérification (maths 6e).",
+      ajoutee: "2026-10-18",
+    },
   ],
   "/fiches-cours/maths/6e/aire-perimetre": [
     {
