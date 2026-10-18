@@ -290,10 +290,13 @@ export default function BandeauMatiere({
           haut selon la largeur d'écran — le clap y sortait coupé (« on ne le voit
           pas entièrement »). Ici il est posé dans le coin, toujours entier.
           Caché sous 1 024 px, où il touchait le titre (mesuré à 640 et 768, titre du français) :
-          la pastille 🎬 le dit. */}
+          la pastille ▶ le dit.
+          18/10/2026 — Frédéric : « sur la page d'accueil il y a un SVG vidéo,
+          peux-tu brancher le répertoire vidéo ». Le clap mène donc à /video
+          (toutes les vidéos, lues sur R2) ; l'atelier garde sa pastille 🎬. */}
       <Link
-        href={`/atelier-video?matiere=${matiere}`}
-        aria-label="Crée ta vidéo : l'atelier vidéo"
+        href="/video"
+        aria-label="Les vidéos EleveAI"
         className="absolute right-[3%] top-3 z-10 hidden w-16 opacity-95 transition-transform hover:scale-110 lg:block xl:w-20"
       >
         <svg viewBox="-4 -16 122 124" aria-hidden="true" className="h-auto w-full overflow-visible">
@@ -340,8 +343,16 @@ export default function BandeauMatiere({
             <span className="sm:hidden">Coach sonore</span>
             <span className="hidden sm:inline">Coach sonore&nbsp;: il lit les questions à voix haute</span>
           </p>
-          {/* La pastille du clap : un vrai lien, au-dessus du voile qui laisse
-              passer les clics (pointer-events-auto). */}
+          {/* Les pastilles : de vrais liens, au-dessus du voile qui laisse
+              passer les clics (pointer-events-auto). « Les vidéos » double le
+              clap, caché sous 1 024 px. */}
+          <Link
+            href="/video"
+            className="pointer-events-auto inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-1.5 text-xs font-bold text-rose-700 shadow-sm ring-1 ring-rose-200 hover:bg-white sm:text-sm"
+          >
+            <span aria-hidden="true" className="text-base sm:text-lg">▶</span>
+            Les vidéos
+          </Link>
           <Link
             href={`/atelier-video?matiere=${matiere}`}
             className="pointer-events-auto inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-1.5 text-xs font-bold text-rose-700 shadow-sm ring-1 ring-rose-200 hover:bg-white sm:text-sm"
