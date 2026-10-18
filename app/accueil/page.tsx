@@ -46,7 +46,23 @@
 // même manœuvre que pour AccueilClient.tsx, supprimé le 14/08 — et la raison
 // est la même : un fichier que plus personne ne monte est relu à chaque
 // typecheck et se périme en silence.
+// ⭐⭐ REFONTE DU 18/10/2026 — L'ACCUEIL DEVIENT UN JOURNAL POUR LA JEUNESSE.
+// Frédéric, à 72 % de rebond : « refonder la page d'accueil comme un journal,
+// avec vidéos, coach », « pour la jeunesse », « et les adultes », pour « qu'un
+// jeune, un prof se dise : je vais apprendre une chose utile, ou m'entraîner »,
+// et « avoir une perspective d'avenir ». Trois mises en page proposées sur
+// /accueil-journal ; il a choisi le QUOTIDIEN.
+// 👉 RETOUR ARRIÈRE = UNE LIGNE : `<AccueilMatieres />` au lieu de
+// `<JournalClient … accueil />` (le fichier est resté, avec son import).
+// ⚠️ La page n'est plus statique : elle est régénérée toutes les heures
+// (`revalidate`), pour que la Une, le défi, le chiffre et le métier changent
+// chaque jour. 24 rendus par jour, pas un par visiteur.
+// ⚠️ Les liens portent toujours `?from=accueil` : la mesure des départs
+// continue. Les clics se lisent aussi dans l'événement Vercel `journal_clic`
+// {rubrique, page: "accueil"}.
 import AccueilMatieres from "./AccueilMatieres";
+import JournalClient from "../accueil-journal/JournalClient";
+import { donneesDuJournal } from "../accueil-journal/donnees";
 
 // ⭐ LES MÉTADONNÉES VIVENT DANS ./metadata.ts, ET NULLE PART AILLEURS.
 // Elles étaient écrites ici en dur pendant qu'un fichier metadata.ts existait à
@@ -56,6 +72,8 @@ import AccueilMatieres from "./AccueilMatieres";
 // canonique posée à la main du site.
 export { metadata } from "./metadata";
 
+export const revalidate = 3600;
+
 export default function AccueilPage() {
-  return <AccueilMatieres />;
+  return <JournalClient {...donneesDuJournal()} accueil />;
 }

@@ -12,7 +12,7 @@
 // ⛔ Aucune vidéo ne se lance ici : la vignette mène à /video/<id>, qui s'ouvre
 // en pause (règle du site).
 
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { track } from "@vercel/analytics";
@@ -33,6 +33,8 @@ import {
   Users,
 } from "lucide-react";
 import { DEFIS, type Metier } from "@/lib/accueil/journal";
+import RechercheEntete from "@/components/accueil/RechercheEntete";
+import BanniereCrpe from "@/components/accueil/BanniereCrpe";
 
 export type VideoJournal = { id: string; titre: string; short: boolean; vignette: string };
 
@@ -45,7 +47,10 @@ const MISES: { id: Mise; label: string; texte: string }[] = [
 ];
 
 const CLE_MISE = "eleveai.journal.mise";
-const DE = "from=journal";
+/** Le marqueur posé sur tous les liens : `from=accueil` sur /accueil (la mesure
+ *  des départs de l'accueil continue, voir AccueilMatieres.tsx), `from=journal`
+ *  sur la maquette. */
+const Source = createContext<"accueil" | "journal">("journal");
 
 /* ═══ LES TONS : CE QUI CHANGE D'UNE MISE EN PAGE À L'AUTRE ═════════════════ */
 
@@ -142,12 +147,13 @@ function Lien({
   label?: string;
 }) {
   const sep = href.includes("?") ? "&" : "?";
+  const de = useContext(Source);
   return (
     <Link
       prefetch={false}
-      href={`${href}${sep}${DE}`}
+      href={`${href}${sep}from=${de}`}
       aria-label={label}
-      onClick={() => track("journal_clic", { rubrique: quoi, mise })}
+      onClick={() => track("journal_clic", { rubrique: quoi, mise, page: de })}
       className={className}
     >
       {children}
@@ -206,16 +212,20 @@ const PROMESSES = [
 function Manchette({ mise, date, numero }: { mise: Mise; date: string; numero: number }) {
   if (mise === "quotidien") {
     return (
-      <header className="border-b-[6px] border-double border-stone-900 pb-4 text-center">
+      <header className="border-b-[6px] border-double border-stone-900 pb-3 text-center sm:pb-4">
         <div className="flex items-center justify-between border-b border-stone-900 pb-1 text-[11px] font-bold uppercase tracking-widest text-stone-700">
           <span>{date}</span>
           <span className="hidden sm:inline">Du CP aux adultes</span>
           <span>N° {numero}</span>
         </div>
-        <h1 className="mt-3 font-serif text-5xl font-black leading-none tracking-tight text-stone-900 sm:text-7xl">
+        <h1 className="mt-2 font-serif text-4xl font-black leading-none tracking-tight text-stone-900 sm:mt-3 sm:text-7xl">
           Le Journal EleveAI
+          {/* ⚠️ LE h1 DE LA PAGE LA PLUS IMPORTANTE DU SITE : la marque se voit,
+              la REQUÊTE se lit (Google, lecteurs d'écran) — la règle du 23/09
+              (« un h1 qui dit la requête parle à ceux qui ne connaissent pas »). */}
+          <span className="sr-only"> : cours, exercices corrigés et coach de maths, du CP aux adultes</span>
         </h1>
-        <p className="mt-3 font-serif text-base italic text-stone-700 sm:text-lg">
+        <p className="mt-2 font-serif text-sm italic text-stone-700 sm:mt-3 sm:text-lg">
           Chaque jour, une chose utile à apprendre, de quoi s&rsquo;entraîner, et une idée pour demain.
         </p>
       </header>
@@ -721,13 +731,17 @@ export default function JournalClient(props: {
   metier: Metier;
   shorts: VideoJournal[];
   reel: VideoJournal[];
+  /** Monté par /accueil : le Quotidien, sans sélecteur (son choix du 18/10). */
+  accueil?: boolean;
 }) {
   const [mise, setMise] = useState<Mise>("quotidien");
+  const accueil = props.accueil ?? false;
 
   // ?mise= dans l'adresse l'emporte (pour lui envoyer un lien), sinon le
   // dernier choix du visiteur. Lu APRÈS l'hydratation : le serveur rend toujours
   // le Quotidien.
   useEffect(() => {
+    if (accueil) return;
     const ok = (x: string | null): x is Mise => x === "quotidien" || x === "magazine" || x === "fil";
     const url = new URLSearchParams(window.location.search).get("mise");
     let garde: string | null = null;
@@ -736,7 +750,7 @@ export default function JournalClient(props: {
     } catch {}
     if (ok(url)) setMise(url);
     else if (ok(garde)) setMise(garde);
-  }, []);
+  }, [accueil]);
 
   function choisir(m: Mise) {
     setMise(m);
@@ -766,10 +780,26 @@ export default function JournalClient(props: {
   };
 
   return (
+    <Source.Provider value={accueil ? "accueil" : "journal"}>
     <div className={`min-h-screen ${t.page}`}>
-      <Selecteur mise={mise} choisir={choisir} />
+      {accueil ? (
+        /* ⚠️ LE CHAMP DES TÉLÉPHONES : sous 640 px l'en-tête masque sa recherche
+           (voir AccueilMatieres.tsx) ; sans cette ligne, aucune recherche. */
+        <div className="border-b border-stone-300 bg-white px-3 py-2 sm:hidden">
+          <RechercheEntete variante="page" />
+        </div>
+      ) : (
+        <Selecteur mise={mise} choisir={choisir} />
+      )}
       <main className={`mx-auto w-full px-4 py-6 sm:py-8 ${t.conteneur}`}>
         <Manchette mise={mise} date={date} numero={numero} />
+        {/* La bande CRPE (ordinateur ; au téléphone elle est au-dessus de
+            l'en-tête, posée par le layout). */}
+        {accueil && (
+          <div className="mt-4">
+            <BanniereCrpe place="colonnes" />
+          </div>
+        )}
 
         {mise === "quotidien" && (
           <div className="mt-6 space-y-8">
@@ -841,5 +871,6 @@ export default function JournalClient(props: {
         </footer>
       </main>
     </div>
+    </Source.Provider>
   );
 }
