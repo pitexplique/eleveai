@@ -23,6 +23,15 @@ const existe = (rel) => rel && fs.existsSync(path.join(SORTIES, ...rel.split("/"
 // Clé = l'id du manifeste (« 3e-proba-vocabulaire »), qui existe AVANT YouTube :
 // une vidéo rendue mais pas encore publiée se regarde déjà sur /video/<id>.
 // Une vidéo publiée se trouve aussi par son ID YouTube (champ `youtube`).
+// La vignette légère de la galerie, faite par scripts/vignettes-videos.py.
+// Celle de la miniature PNG d'abord, sinon l'image à 1 s tirée de la vidéo.
+const vignetteDe = (poster, fichier) => {
+  for (const w of [poster?.replace(/\.png$/, ".vignette.webp"), fichier.replace(/\.mp4$/, ".vignette.webp")]) {
+    if (w && existe(w)) return w;
+  }
+  return null;
+};
+
 const table = {};
 let sansFichier = 0;
 for (const v of manifeste.videos) {
@@ -33,6 +42,7 @@ for (const v of manifeste.videos) {
   table[v.id] = {
     fichier: v.fichier,
     poster,
+    vignette: vignetteDe(poster, v.fichier),
     titre: v.titre,
     short: v.type === "short",
     youtube: ytId(v.url),
@@ -53,9 +63,11 @@ for (const abs of parcourir(SORTIES)) {
   const id = path.basename(rel, ".mp4").replace(/^eleveai-/, "");
   if (table[id]) continue;
   const voisine = rel.replace(/\.mp4$/, ".png");
+  const poster = existe(voisine) ? voisine : null;
   table[id] = {
     fichier: rel,
-    poster: existe(voisine) ? voisine : null,
+    poster,
+    vignette: vignetteDe(poster, rel),
     titre: id.replace(/-/g, " "),
     short: /\/shorts\//.test(rel) || /-short(-|$)/.test(id),
     youtube: null,

@@ -1,8 +1,13 @@
 "use client";
 
-// La liste des vidéos R2 : sélecteur de classe en haut + recherche dans les
-// titres (sans tenir compte des accents ni des majuscules). La classe choisie
-// reste dans l'adresse (?classe=4e) pour qu'on puisse partager le lien.
+// La galerie des vidéos R2. Sélecteur de classe + recherche en haut (sans
+// tenir compte des accents ni des majuscules) ; la classe reste dans l'adresse
+// (?classe=4e) pour qu'on puisse partager le lien.
+//   · « Toutes », sans recherche : FAÇON NETFLIX — À la une, puis une rangée
+//     par classe qui défile de côté.
+//   · Une classe ou une recherche : FAÇON YOUTUBE — une grille de paysages,
+//     puis une étagère de shorts verticaux.
+// Les vignettes (~11 Ko) sont faites par scripts/vignettes-videos.py.
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { Search, X } from "lucide-react";
@@ -11,9 +16,9 @@ export type VideoListe = {
   id: string;
   titre: string;
   classe: string;
-  rubrique: string;
   short: boolean;
   publiee: boolean;
+  vignette: string | null;
 };
 
 export type VideoUne = { id: string; titre: string; src: string; poster: string | null };
@@ -31,6 +36,8 @@ const RANG = new Map(CLASSES.map(([k], i) => [k, i]));
 const libelleClasse = (c: string) => LIBELLE.get(c) ?? c;
 
 const sansAccents = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+// Paysages d'abord, puis shorts ; à l'intérieur, l'ordre des ids (les épisodes se suivent).
+const ordre = (a: VideoListe, b: VideoListe) => Number(a.short) - Number(b.short) || a.id.localeCompare(b.id, "fr");
 
 // ⛔ En pause (preload="metadata", jamais autoPlay) : il appuie lui-même.
 function LecteurUne({ v, short }: { v: VideoUne; short?: boolean }) {
@@ -42,10 +49,7 @@ function LecteurUne({ v, short }: { v: VideoUne; short?: boolean }) {
         controls
         playsInline
         preload="metadata"
-        className={[
-          "w-full rounded-2xl bg-black shadow-lg",
-          short ? "aspect-[9/16]" : "aspect-video",
-        ].join(" ")}
+        className={["w-full rounded-2xl bg-black shadow-lg", short ? "aspect-[9/16]" : "aspect-video"].join(" ")}
       />
       <figcaption className="mt-2">
         <Link href={`/video/${v.id}`} className="text-sm font-bold leading-5 text-slate-800 hover:text-rose-700">
@@ -53,6 +57,42 @@ function LecteurUne({ v, short }: { v: VideoUne; short?: boolean }) {
         </Link>
       </figcaption>
     </figure>
+  );
+}
+
+// Une carte : la vignette, puis le titre sur deux lignes. `rangee` = taille
+// fixe pour défiler de côté ; sinon la carte prend la largeur de sa colonne.
+function Carte({ v, rangee }: { v: VideoListe; rangee?: boolean }) {
+  const largeur = rangee ? (v.short ? "w-28 shrink-0 snap-start" : "w-64 shrink-0 snap-start") : "";
+  return (
+    <Link href={`/video/${v.id}`} className={`group block min-w-0 ${largeur}`} title={v.titre}>
+      <div
+        className={[
+          "relative overflow-hidden rounded-xl bg-slate-200 shadow-sm ring-1 ring-slate-200 transition group-hover:shadow-lg group-hover:ring-rose-300",
+          v.short ? "aspect-[9/16]" : "aspect-video",
+        ].join(" ")}
+      >
+        {v.vignette ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={v.vignette}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+          />
+        ) : null}
+        {v.publiee ? null : (
+          // En bas à droite : en haut à gauche, il cachait le « EN 2 MIN » des miniatures.
+          <span className="absolute bottom-1.5 right-1.5 rounded-full bg-amber-400/95 px-1.5 text-[10px] font-black text-amber-950">
+            nouveau
+          </span>
+        )}
+      </div>
+      <p className="mt-1.5 line-clamp-2 text-[13px] font-bold leading-[18px] text-slate-800 group-hover:text-rose-700">
+        {v.titre}
+      </p>
+    </Link>
   );
 }
 
@@ -79,42 +119,36 @@ export default function VideosClient({
     if (c) url.searchParams.set("classe", c);
     else url.searchParams.delete("classe");
     window.history.replaceState(null, "", url);
+    window.scrollTo({ top: 0 });
   };
 
   // Seules les classes qui ont des vidéos ; les dossiers de travail
   // (essais, annonces) restent hors du sélecteur.
   const classes = useMemo(() => {
-    const compte = new Map<string, number>();
-    for (const v of videos) compte.set(v.classe, (compte.get(v.classe) ?? 0) + 1);
-    return [...compte.keys()]
-      .filter((c) => RANG.has(c))
-      .sort((a, b) => RANG.get(a)! - RANG.get(b)!)
-      .map((c) => ({ c, n: compte.get(c)! }));
+    const presentes = new Set(videos.map((v) => v.classe));
+    return CLASSES.map(([c]) => c).filter((c) => presentes.has(c));
   }, [videos]);
 
   const filtrees = useMemo(() => {
     const mots = sansAccents(recherche).split(/\s+/).filter(Boolean);
-    return videos.filter((v) => {
-      if (classe && v.classe !== classe) return false;
-      if (!classe && !RANG.has(v.classe)) return false;
-      if (!mots.length) return true;
-      const texte = sansAccents(`${v.titre} ${v.id} ${v.rubrique}`);
-      return mots.every((m) => texte.includes(m));
-    });
+    return videos
+      .filter((v) => {
+        if (classe ? v.classe !== classe : !RANG.has(v.classe)) return false;
+        if (!mots.length) return true;
+        const texte = sansAccents(`${v.titre} ${v.id} ${libelleClasse(v.classe)}`);
+        return mots.every((m) => texte.includes(m));
+      })
+      .sort(ordre);
   }, [videos, classe, recherche]);
 
-  const groupes = useMemo(() => {
-    const g = new Map<string, VideoListe[]>();
-    for (const v of filtrees) {
-      const cle = `${v.classe}|${v.rubrique}`;
-      g.set(cle, [...(g.get(cle) ?? []), v]);
-    }
-    return [...g.entries()].sort(([a], [b]) => {
-      const [ca, ra] = a.split("|");
-      const [cb, rb] = b.split("|");
-      return (RANG.get(ca) ?? 99) - (RANG.get(cb) ?? 99) || ra.localeCompare(rb, "fr");
-    });
-  }, [filtrees]);
+  const facon = !classe && !recherche ? "netflix" : "youtube";
+
+  const rangees = useMemo(() => {
+    if (facon !== "netflix") return [];
+    return classes
+      .map((c) => ({ c, liste: filtrees.filter((v) => v.classe === c) }))
+      .filter((r) => r.liste.length);
+  }, [facon, classes, filtrees]);
 
   const pastille = (actif: boolean) =>
     [
@@ -124,6 +158,9 @@ export default function VideosClient({
         : "border-slate-200 bg-white text-slate-700 hover:border-rose-300 hover:text-rose-700",
     ].join(" ");
 
+  const paysages = filtrees.filter((v) => !v.short);
+  const shorts = filtrees.filter((v) => v.short);
+
   return (
     <>
       {/* top-16 : sous l'en-tête du site, collant lui aussi (~62 px). */}
@@ -132,7 +169,7 @@ export default function VideosClient({
           <button type="button" onClick={() => choisir("")} className={pastille(!classe)}>
             Toutes
           </button>
-          {classes.map(({ c }) => (
+          {classes.map((c) => (
             <button key={c} type="button" onClick={() => choisir(c)} className={pastille(classe === c)}>
               {libelleClasse(c)}
             </button>
@@ -162,62 +199,78 @@ export default function VideosClient({
         </label>
       </div>
 
-      {/* À la une : seulement sur « Toutes » sans recherche — dès qu'on
-          cherche, la liste remonte en haut. */}
-      {!classe && !recherche && (paysage || short) ? (
-        <section className="mt-4">
-          <h2 className="text-lg font-black text-slate-800">À la une</h2>
-          <div className="mt-2 grid items-start gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,14rem)]">
-            {paysage ? <LecteurUne v={paysage} /> : null}
-            {short ? (
-              <div className="mx-auto w-full max-w-[14rem]">
-                <LecteurUne v={short} short />
+      {facon === "netflix" ? (
+        <>
+          {paysage || short ? (
+            <section className="mt-4">
+              <h2 className="text-lg font-black text-slate-800">À la une</h2>
+              <div className="mt-2 grid items-start gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,14rem)]">
+                {paysage ? <LecteurUne v={paysage} /> : null}
+                {short ? (
+                  <div className="mx-auto w-full max-w-[14rem]">
+                    <LecteurUne v={short} short />
+                  </div>
+                ) : null}
               </div>
-            ) : null}
-          </div>
-        </section>
-      ) : null}
+            </section>
+          ) : null}
 
-      {groupes.length === 0 ? (
-        <p className="mt-8 text-center text-slate-500">Aucune vidéo ne correspond.</p>
-      ) : null}
+          {rangees.map(({ c, liste }) => (
+            <section key={c} className="mt-8">
+              <div className="flex items-baseline justify-between gap-3">
+                <h2 className="text-lg font-black text-slate-800">
+                  {libelleClasse(c)} <span className="text-sm font-bold text-slate-400">({liste.length})</span>
+                </h2>
+                <button
+                  type="button"
+                  onClick={() => choisir(c)}
+                  className="text-sm font-bold text-rose-600 hover:text-rose-500"
+                >
+                  Tout voir →
+                </button>
+              </div>
+              {/* items-start : les shorts, plus hauts, ne tirent pas les paysages. */}
+              <div className="-mx-4 mt-2 flex snap-x items-start gap-3 overflow-x-auto scroll-px-4 px-4 pb-2">
+                {liste.map((v) => (
+                  <Carte key={v.id} v={v} rangee />
+                ))}
+              </div>
+            </section>
+          ))}
+        </>
+      ) : (
+        <>
+          {filtrees.length === 0 ? (
+            <p className="mt-8 text-center text-slate-500">Aucune vidéo ne correspond.</p>
+          ) : null}
 
-      {groupes.map(([cle, liste]) => {
-        const [c, rubrique] = cle.split("|");
-        return (
-          <section key={cle} className="mt-6">
-            <h2 className="text-lg font-black text-slate-800">
-              {libelleClasse(c)} · {rubrique}{" "}
-              <span className="text-sm font-bold text-slate-400">({liste.length})</span>
-            </h2>
-            <ul className="mt-2 grid gap-1 sm:grid-cols-2">
-              {liste.map((v) => (
-                <li key={v.id}>
-                  <Link
-                    href={`/video/${v.id}`}
-                    className="flex items-center gap-2 rounded-lg px-2 py-1 text-sm text-slate-700 transition hover:bg-rose-50 hover:text-rose-700"
-                  >
-                    <span
-                      aria-hidden="true"
-                      className={
-                        v.short
-                          ? "h-4 w-2.5 shrink-0 rounded-[3px] border-2 border-rose-300"
-                          : "h-2.5 w-4 shrink-0 rounded-[3px] border-2 border-rose-300"
-                      }
-                    />
-                    <span className="truncate">{v.titre}</span>
-                    {v.publiee ? null : (
-                      <span className="shrink-0 rounded-full bg-amber-100 px-1.5 text-[10px] font-bold text-amber-700">
-                        pas sur YouTube
-                      </span>
-                    )}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </section>
-        );
-      })}
+          {paysages.length ? (
+            <section className="mt-4">
+              <h2 className="text-lg font-black text-slate-800">
+                Vidéos <span className="text-sm font-bold text-slate-400">({paysages.length})</span>
+              </h2>
+              <div className="mt-2 grid grid-cols-1 gap-x-4 gap-y-5 min-[480px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                {paysages.map((v) => (
+                  <Carte key={v.id} v={v} />
+                ))}
+              </div>
+            </section>
+          ) : null}
+
+          {shorts.length ? (
+            <section className="mt-8">
+              <h2 className="text-lg font-black text-slate-800">
+                Shorts <span className="text-sm font-bold text-slate-400">({shorts.length})</span>
+              </h2>
+              <div className="mt-2 grid grid-cols-3 gap-x-3 gap-y-5 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
+                {shorts.map((v) => (
+                  <Carte key={v.id} v={v} />
+                ))}
+              </div>
+            </section>
+          ) : null}
+        </>
+      )}
     </>
   );
 }

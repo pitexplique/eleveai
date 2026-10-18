@@ -7,6 +7,7 @@
 #   .\scripts\r2-videos.ps1 -Rclone "size R2:"   commande brute à rclone (R2: = le bucket)
 #
 # On COPIE (rclone copy), on ne synchronise pas : effacer une vidéo en local ne l'efface pas sur R2.
+# Les vignettes .webp de la galerie (scripts/vignettes-videos.py) partent aussi.
 # Les morceaux Manim (partial_movie_files) et les brouillons 480p ne partent pas.
 param(
   [switch]$Envoyer,
@@ -45,7 +46,7 @@ if ($Rclone) {
 $commun = @(
   "copy", (Join-Path $racine "manim\sorties"), $bucket,
   "--filter", "- **/partial_movie_files/**", "--filter", "- **/480p*/**",
-  "--filter", "+ *.mp4", "--filter", "+ *.png", "--filter", "+ *.jpg", "--filter", "- *",
+  "--filter", "+ *.mp4", "--filter", "+ *.png", "--filter", "+ *.jpg", "--filter", "+ *.webp", "--filter", "- *",
   "--transfers", "16", "--checkers", "32", "--fast-list",
   "--s3-chunk-size", "16M", "--stats-one-line", "--stats", "10s"
 )

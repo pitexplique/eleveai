@@ -1,5 +1,5 @@
-// La liste de toutes les vidéos hébergées sur R2 : « À la une » (une paysage +
-// un short), sélecteur de classe et recherche (VideosClient). Page de travail : noindex.
+// La galerie de toutes les vidéos hébergées sur R2 : « À la une » (une paysage +
+// un short), rangées façon Netflix, grille façon YouTube (VideosClient). noindex.
 import type { Metadata } from "next";
 import { toutesLesVideos, trouverVideo, urlR2 } from "@/lib/videos/r2";
 import VideosClient, { type VideoListe, type VideoUne } from "./VideosClient";
@@ -34,9 +34,9 @@ export default function ListeVideos() {
     id: v.id,
     titre: v.titre,
     classe: v.fichier.split("/")[0],
-    rubrique: v.fichier.split("/")[1] ?? "",
     short: v.short,
     publiee: Boolean(v.youtube),
+    vignette: v.vignette ? urlR2(v.vignette) : null,
   }));
 
   return (

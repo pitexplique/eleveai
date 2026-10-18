@@ -11,6 +11,8 @@ export type VideoR2 = {
   id: string;
   fichier: string;
   poster: string | null;
+  /** ~11 Ko, pour la galerie (scripts/vignettes-videos.py). */
+  vignette: string | null;
   titre: string;
   short: boolean;
   youtube: string | null;
