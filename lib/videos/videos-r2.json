@@ -1,0 +1,3740 @@
+{
+ "0-premier-essai-trois-quarts": {
+  "fichier": "atelier-video-essais/0-premier-essai-trois-quarts.mp4",
+  "poster": null,
+  "titre": "0 premier essai trois quarts",
+  "short": false,
+  "youtube": null
+ },
+ "1-exemple-trois-quarts-sans-voix": {
+  "fichier": "atelier-video-essais/1-exemple-trois-quarts-sans-voix.mp4",
+  "poster": null,
+  "titre": "1 exemple trois quarts sans voix",
+  "short": false,
+  "youtube": null
+ },
+ "2-exemple-12-billes-sans-voix": {
+  "fichier": "atelier-video-essais/2-exemple-12-billes-sans-voix.mp4",
+  "poster": null,
+  "titre": "2 exemple 12 billes sans voix",
+  "short": false,
+  "youtube": null
+ },
+ "3-exemple-droite-graduee-sans-voix": {
+  "fichier": "atelier-video-essais/3-exemple-droite-graduee-sans-voix.mp4",
+  "poster": null,
+  "titre": "3 exemple droite graduee sans voix",
+  "short": false,
+  "youtube": null
+ },
+ "3e-equation-resolution": {
+  "fichier": "3e/maths/paysage/fr/equation-resolution/eleveai-maths-3e-equation-resolution.mp4",
+  "poster": "3e/maths/paysage/fr/equation-resolution/eleveai-maths-3e-equation-resolution.png",
+  "titre": "Équations : le produit nul et x² = a — Maths 3e",
+  "short": false,
+  "youtube": null
+ },
+ "3e-expression-comprendre": {
+  "fichier": "3e/maths/expression-litterale/01-comprendre/eleveai-maths-3e-expression-comprendre.mp4",
+  "poster": "3e/maths/expression-litterale/01-comprendre/eleveai-maths-3e-expression-comprendre.png",
+  "titre": "4 + 5 + 6 = 15 : hasard ? À quoi sert une lettre — Expression littérale, épisode 1 · Maths 3e",
+  "short": false,
+  "youtube": "l3SQ9HgZi1o"
+ },
+ "3e-expression-comprendre-short": {
+  "fichier": "3e/maths/expression-litterale/01-comprendre/eleveai-maths-3e-expression-comprendre-short.mp4",
+  "poster": "3e/maths/expression-litterale/01-comprendre/eleveai-maths-3e-expression-comprendre-short.png",
+  "titre": "4 + 5 + 6 : toujours un multiple de 3 ? 🤔 — 3e #Shorts",
+  "short": true,
+  "youtube": "AkbEbTgYadk"
+ },
+ "3e-expression-developper": {
+  "fichier": "3e/maths/expression-litterale/04-developper/eleveai-maths-3e-expression-developper.mp4",
+  "poster": "3e/maths/expression-litterale/04-developper/eleveai-maths-3e-expression-developper.png",
+  "titre": "(x + 2)(x + 3) : la double distributivité — Expression littérale, épisode 4 · Maths 3e",
+  "short": false,
+  "youtube": "fxZPGf2FHFo"
+ },
+ "3e-expression-developper-short": {
+  "fichier": "3e/maths/expression-litterale/04-developper/eleveai-maths-3e-expression-developper-short.mp4",
+  "poster": "3e/maths/expression-litterale/04-developper/eleveai-maths-3e-expression-developper-short.png",
+  "titre": "(x + 2)(x + 3) : combien de morceaux ? ✂️ — 3e #Shorts",
+  "short": true,
+  "youtube": "I9Z2SS2U5TY"
+ },
+ "3e-expression-factoriser": {
+  "fichier": "3e/maths/expression-litterale/05-factoriser/eleveai-maths-3e-expression-factoriser.mp4",
+  "poster": "3e/maths/expression-litterale/05-factoriser/eleveai-maths-3e-expression-factoriser.png",
+  "titre": "3x + 12 = 3(x + 4) : factoriser — Expression littérale, épisode 5 · Maths 3e",
+  "short": false,
+  "youtube": "eYqt__wDZ1g"
+ },
+ "3e-expression-factoriser-short": {
+  "fichier": "3e/maths/expression-litterale/05-factoriser/eleveai-maths-3e-expression-factoriser-short.mp4",
+  "poster": "3e/maths/expression-litterale/05-factoriser/eleveai-maths-3e-expression-factoriser-short.png",
+  "titre": "3x + 12 : comment le ranger en rangées ? 🍫 — 3e #Shorts",
+  "short": true,
+  "youtube": "8TInI8GqeH4"
+ },
+ "3e-expression-identites": {
+  "fichier": "3e/maths/expression-litterale/06-identites/eleveai-maths-3e-expression-identites.mp4",
+  "poster": "3e/maths/expression-litterale/06-identites/eleveai-maths-3e-expression-identites.png",
+  "titre": "(x + 3)² = x² + 9 ? Les identités remarquables — épisode 6 · Maths 3e",
+  "short": false,
+  "youtube": "m8XIMsxxe28"
+ },
+ "3e-expression-identites-short": {
+  "fichier": "3e/maths/expression-litterale/06-identites/eleveai-maths-3e-expression-identites-short.mp4",
+  "poster": "3e/maths/expression-litterale/06-identites/eleveai-maths-3e-expression-identites-short.png",
+  "titre": "(x + 3)² = x² + 9 ? Le carré oublié 🟧 — 3e #Shorts",
+  "short": true,
+  "youtube": "bGPldUgTnDg"
+ },
+ "3e-expression-reduire": {
+  "fichier": "3e/maths/expression-litterale/03-reduire/eleveai-maths-3e-expression-reduire.mp4",
+  "poster": "3e/maths/expression-litterale/03-reduire/eleveai-maths-3e-expression-reduire.png",
+  "titre": "5x − (2x − 3) = 3x − 3 ? Un moins devant une parenthèse — épisode 3 · Maths 3e",
+  "short": false,
+  "youtube": "T8Ld7NIiRCQ"
+ },
+ "3e-expression-reduire-short": {
+  "fichier": "3e/maths/expression-litterale/03-reduire/eleveai-maths-3e-expression-reduire-short.mp4",
+  "poster": "3e/maths/expression-litterale/03-reduire/eleveai-maths-3e-expression-reduire-short.png",
+  "titre": "Le piège du moins devant une parenthèse ⚠️ — 3e #Shorts",
+  "short": true,
+  "youtube": "RNfVItD22HQ"
+ },
+ "3e-expression-substituer": {
+  "fichier": "3e/maths/expression-litterale/02-substituer/eleveai-maths-3e-expression-substituer.mp4",
+  "poster": "3e/maths/expression-litterale/02-substituer/eleveai-maths-3e-expression-substituer.png",
+  "titre": "2 fois plus vite = 4 fois plus loin ? Calculer une expression — épisode 2 · Maths 3e",
+  "short": false,
+  "youtube": "b7D103M0mls"
+ },
+ "3e-expression-substituer-short": {
+  "fichier": "3e/maths/expression-litterale/02-substituer/eleveai-maths-3e-expression-substituer-short.mp4",
+  "poster": "3e/maths/expression-litterale/02-substituer/eleveai-maths-3e-expression-substituer-short.png",
+  "titre": "Freiner à 100 km/h : 4 fois plus loin qu'à 50 ! 🚗 — 3e #Shorts",
+  "short": true,
+  "youtube": "XVJrCN2qkPc"
+ },
+ "3e-pente-maido-short": {
+  "fichier": "3e/maths/shorts/fr/pente-maido/eleveai-maths-3e-pente-maido-short.mp4",
+  "poster": "3e/maths/shorts/fr/pente-maido/eleveai-maths-3e-pente-maido-short.png",
+  "titre": "La montée du Maïdo : une pente à 100 %, c'est un mur ? (Diagonale des Fous)",
+  "short": true,
+  "youtube": "jgKPDpsNqA8"
+ },
+ "3e-proba-calculer": {
+  "fichier": "3e/maths/probabilites/05-calculer/eleveai-maths-3e-proba-calculer.mp4",
+  "poster": "3e/maths/probabilites/05-calculer/eleveai-maths-3e-proba-calculer.png",
+  "titre": "3 parfums = 1 chance sur 3 ? Calculer une probabilité — épisode 5 · Maths 3e · CRPE",
+  "short": false,
+  "youtube": null
+ },
+ "3e-proba-calculer-short": {
+  "fichier": "3e/maths/probabilites/05-calculer/eleveai-maths-3e-proba-calculer-short.mp4",
+  "poster": "3e/maths/probabilites/05-calculer/eleveai-maths-3e-proba-calculer-short.png",
+  "titre": "3 parfums de bonbons : 1 chance sur 3 ? 🍬 — 3e CRPE #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "3e-proba-contraire": {
+  "fichier": "3e/maths/probabilites/06-contraire/eleveai-maths-3e-proba-contraire.mp4",
+  "poster": "3e/maths/probabilites/06-contraire/eleveai-maths-3e-proba-contraire.png",
+  "titre": "Gagner 0,2, perdre 0,2 ? L'événement contraire — Probabilités, épisode 6 · Maths 3e · CRPE",
+  "short": false,
+  "youtube": null
+ },
+ "3e-proba-contraire-short": {
+  "fichier": "3e/maths/probabilites/06-contraire/eleveai-maths-3e-proba-contraire-short.mp4",
+  "poster": "3e/maths/probabilites/06-contraire/eleveai-maths-3e-proba-contraire-short.png",
+  "titre": "70 % de pluie : et la chance qu'il fasse sec ? ☀️ — 3e CRPE #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "3e-proba-defi": {
+  "fichier": "3e/maths/probabilites/08-defis/eleveai-maths-3e-proba-defi.mp4",
+  "poster": "3e/maths/probabilites/08-defis/eleveai-maths-3e-proba-defi.png",
+  "titre": "7 bonbons blancs ou 3 ? Les défis des probabilités — épisode 8 · Maths 3e · CRPE",
+  "short": false,
+  "youtube": null
+ },
+ "3e-proba-defi-short": {
+  "fichier": "3e/maths/probabilites/08-defis/eleveai-maths-3e-proba-defi-short.mp4",
+  "poster": "3e/maths/probabilites/08-defis/eleveai-maths-3e-proba-defi-short.png",
+  "titre": "Tu veux un bonbon blanc : boîte A ou boîte B ? 🍬 — 3e CRPE #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "3e-proba-deux-epreuves": {
+  "fichier": "3e/maths/probabilites/07-deux-epreuves/eleveai-maths-3e-proba-deux-epreuves.mp4",
+  "poster": "3e/maths/probabilites/07-deux-epreuves/eleveai-maths-3e-proba-deux-epreuves.png",
+  "titre": "Deux fois pile = 1/2 ? Deux épreuves et l'arbre — Probabilités, épisode 7 · Maths 3e · CRPE",
+  "short": false,
+  "youtube": null
+ },
+ "3e-proba-deux-epreuves-short": {
+  "fichier": "3e/maths/probabilites/07-deux-epreuves/eleveai-maths-3e-proba-deux-epreuves-short.mp4",
+  "poster": "3e/maths/probabilites/07-deux-epreuves/eleveai-maths-3e-proba-deux-epreuves-short.png",
+  "titre": "Deux fois pile : 1 chance sur 2 ? 🪙 — 3e CRPE #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "3e-proba-equiprobabilite": {
+  "fichier": "3e/maths/probabilites/03-equiprobabilite/eleveai-maths-3e-proba-equiprobabilite.mp4",
+  "poster": "3e/maths/probabilites/03-equiprobabilite/eleveai-maths-3e-proba-equiprobabilite.png",
+  "titre": "2 couleurs = 1 chance sur 2 ? L'équiprobabilité — Probabilités, épisode 3 · Maths 3e · CRPE",
+  "short": false,
+  "youtube": null
+ },
+ "3e-proba-equiprobabilite-short": {
+  "fichier": "3e/maths/probabilites/03-equiprobabilite/eleveai-maths-3e-proba-equiprobabilite-short.mp4",
+  "poster": "3e/maths/probabilites/03-equiprobabilite/eleveai-maths-3e-proba-equiprobabilite-short.png",
+  "titre": "Une roue à 4 couleurs : 1 chance sur 4 chacune ? 🎡 — 3e CRPE #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "3e-proba-evenement": {
+  "fichier": "3e/maths/probabilites/04-evenements/eleveai-maths-3e-proba-evenement.mp4",
+  "poster": "3e/maths/probabilites/04-evenements/eleveai-maths-3e-proba-evenement.png",
+  "titre": "Plus de 4 ou au moins 4 ? Les événements — Probabilités, épisode 4 · Maths 3e · CRPE",
+  "short": false,
+  "youtube": null
+ },
+ "3e-proba-evenement-short": {
+  "fichier": "3e/maths/probabilites/04-evenements/eleveai-maths-3e-proba-evenement-short.mp4",
+  "poster": "3e/maths/probabilites/04-evenements/eleveai-maths-3e-proba-evenement-short.png",
+  "titre": "Plus de 4 ou au moins 4 au dé : c'est pareil ? 🎲 — 3e CRPE #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "3e-proba-issue": {
+  "fichier": "3e/maths/probabilites/02-issues/eleveai-maths-3e-proba-issue.mp4",
+  "poster": "3e/maths/probabilites/02-issues/eleveai-maths-3e-proba-issue.png",
+  "titre": "BANANE : 6 issues ? Compter les issues — Probabilités, épisode 2 · Maths 3e · CRPE",
+  "short": false,
+  "youtube": "VVbe_Mlf3w0"
+ },
+ "3e-proba-issue-short": {
+  "fichier": "3e/maths/probabilites/02-issues/eleveai-maths-3e-proba-issue-short.mp4",
+  "poster": "3e/maths/probabilites/02-issues/eleveai-maths-3e-proba-issue-short.png",
+  "titre": "BANANE dans un chapeau : combien de résultats ? 🎩 — 3e CRPE #Shorts",
+  "short": true,
+  "youtube": "nxaoI-KMGb8"
+ },
+ "3e-proba-vocabulaire": {
+  "fichier": "3e/maths/probabilites/01-vocabulaire/eleveai-maths-3e-proba-vocabulaire.mp4",
+  "poster": "3e/maths/probabilites/01-vocabulaire/eleveai-maths-3e-proba-vocabulaire.png",
+  "titre": "Peu probable = impossible ? Le vocabulaire des probabilités — épisode 1 · Maths 3e · CRPE",
+  "short": false,
+  "youtube": "PkntmnHLG0E"
+ },
+ "3e-proba-vocabulaire-short": {
+  "fichier": "3e/maths/probabilites/01-vocabulaire/eleveai-maths-3e-proba-vocabulaire-short.mp4",
+  "poster": "3e/maths/probabilites/01-vocabulaire/eleveai-maths-3e-proba-vocabulaire-short.png",
+  "titre": "Gagner au loto : impossible ? 🎱 — 3e CRPE #Shorts",
+  "short": true,
+  "youtube": "Re9H-gXzveU"
+ },
+ "3e-pythagore-solide": {
+  "fichier": "3e/maths/pythagore/01-gobelet-brevet/eleveai-maths-3e-pythagore-solide.mp4",
+  "poster": "3e/maths/pythagore/01-gobelet-brevet/eleveai-maths-3e-pythagore-solide.png",
+  "titre": "Pythagore dans un solide : le gobelet du brevet 2026 · Maths 3e",
+  "short": false,
+  "youtube": "Y3UpOJA9gDI"
+ },
+ "3e-pythagore-solide-short": {
+  "fichier": "3e/maths/pythagore/01-gobelet-brevet/eleveai-maths-3e-pythagore-solide-short.mp4",
+  "poster": "3e/maths/pythagore/01-gobelet-brevet/eleveai-maths-3e-pythagore-solide-short.png",
+  "titre": "Le triangle caché dans un gobelet 🥤 Pythagore au brevet 2026 #shorts",
+  "short": true,
+  "youtube": "db8qvhoqW-M"
+ },
+ "3e-trigo-trigonometrie": {
+  "fichier": "3e/maths/paysage/fr/trigo-trigonometrie/eleveai-maths-3e-trigo-trigonometrie.mp4",
+  "poster": "3e/maths/paysage/fr/trigo-trigonometrie/eleveai-maths-3e-trigo-trigonometrie.png",
+  "titre": "Trigonométrie : sinus, cosinus, tangente — Maths 3e",
+  "short": false,
+  "youtube": "H7Ow0W3NKCM"
+ },
+ "4-essai-avec-voix-gtts": {
+  "fichier": "atelier-video-essais/4-essai-avec-voix-gtts.mp4",
+  "poster": null,
+  "titre": "4 essai avec voix gtts",
+  "short": false,
+  "youtube": null
+ },
+ "4e-equation-resolution": {
+  "fichier": "4e/maths/paysage/fr/equation-resolution/eleveai-maths-4e-equation-resolution.mp4",
+  "poster": "4e/maths/paysage/fr/equation-resolution/eleveai-maths-4e-equation-resolution.png",
+  "titre": "Résoudre une équation — Maths 4e",
+  "short": false,
+  "youtube": null
+ },
+ "4e-expression-comprendre": {
+  "fichier": "4e/maths/expression-litterale/01-comprendre/eleveai-maths-4e-expression-comprendre.mp4",
+  "poster": "4e/maths/expression-litterale/01-comprendre/eleveai-maths-4e-expression-comprendre.png",
+  "titre": "3x × 2 = 5x ? Comprendre une expression littérale — épisode 1 · Maths 4e",
+  "short": false,
+  "youtube": "4lyQh6M0-bc"
+ },
+ "4e-expression-comprendre-short": {
+  "fichier": "4e/maths/expression-litterale/01-comprendre/eleveai-maths-4e-expression-comprendre-short.mp4",
+  "poster": "4e/maths/expression-litterale/01-comprendre/eleveai-maths-4e-expression-comprendre-short.png",
+  "titre": "Combien de termes dans 7a − 2 ? 🤔 — 4e #Shorts",
+  "short": true,
+  "youtube": "XJtkEsM662o"
+ },
+ "4e-expression-reduire": {
+  "fichier": "4e/maths/expression-litterale/04-reduire/eleveai-maths-4e-expression-reduire.mp4",
+  "poster": "4e/maths/expression-litterale/04-reduire/eleveai-maths-4e-expression-reduire.png",
+  "titre": "2x + 3 = 5x ? Réduire une expression — épisode 4 · Maths 4e",
+  "short": false,
+  "youtube": "zjZMaVhL2cw"
+ },
+ "4e-expression-reduire-short": {
+  "fichier": "4e/maths/expression-litterale/04-reduire/eleveai-maths-4e-expression-reduire-short.mp4",
+  "poster": "4e/maths/expression-litterale/04-reduire/eleveai-maths-4e-expression-reduire-short.png",
+  "titre": "3x × 2x, ça fait 6x ? ✂️ — 4e #Shorts",
+  "short": true,
+  "youtube": "-uLHzrF_j_I"
+ },
+ "4e-expression-substituer": {
+  "fichier": "4e/maths/expression-litterale/03-substituer/eleveai-maths-4e-expression-substituer.mp4",
+  "poster": "4e/maths/expression-litterale/03-substituer/eleveai-maths-4e-expression-substituer.png",
+  "titre": "(−3)² = −9 ? Calculer une expression littérale — épisode 3 · Maths 4e",
+  "short": false,
+  "youtube": "2TUfmxvoHv0"
+ },
+ "4e-expression-substituer-short": {
+  "fichier": "4e/maths/expression-litterale/03-substituer/eleveai-maths-4e-expression-substituer-short.mp4",
+  "poster": "4e/maths/expression-litterale/03-substituer/eleveai-maths-4e-expression-substituer-short.png",
+  "titre": "Moins 3 au carré : 9 ou −9 ? 🌡️ — 4e #Shorts",
+  "short": true,
+  "youtube": "6Yz6to8U-wY"
+ },
+ "4e-expression-traduire": {
+  "fichier": "4e/maths/expression-litterale/02-traduire/eleveai-maths-4e-expression-traduire.mp4",
+  "poster": "4e/maths/expression-litterale/02-traduire/eleveai-maths-4e-expression-traduire.png",
+  "titre": "2(x + 3) ou 2x + 3 ? Traduire une phrase — Expression littérale, épisode 2 · Maths 4e",
+  "short": false,
+  "youtube": "aWp7xTHg4yA"
+ },
+ "4e-expression-traduire-short": {
+  "fichier": "4e/maths/expression-litterale/02-traduire/eleveai-maths-4e-expression-traduire-short.mp4",
+  "poster": "4e/maths/expression-litterale/02-traduire/eleveai-maths-4e-expression-traduire-short.png",
+  "titre": "Le double de la somme… ou la somme du double ? 🌿 — 4e #Shorts",
+  "short": true,
+  "youtube": "Zbnwg-0cKE0"
+ },
+ "4e-grandeur-composee-short-diagonale": {
+  "fichier": "4e/maths/shorts/fr/grandeur-composee/eleveai-maths-4e-grandeur-composee-short-diagonale.mp4",
+  "poster": "4e/maths/shorts/fr/grandeur-composee/eleveai-maths-4e-grandeur-composee-short-diagonale.png",
+  "titre": "Diagonale des Fous : le vainqueur court à 7,7 km/h… lent ? (Grand Raid 2026)",
+  "short": true,
+  "youtube": "YwddOhgj4as"
+ },
+ "4e-litteral-developper": {
+  "fichier": "4e/maths/paysage/fr/litteral-developper/eleveai-maths-4e-litteral-developper.mp4",
+  "poster": "4e/maths/paysage/fr/litteral-developper/eleveai-maths-4e-litteral-developper.png",
+  "titre": "Développer : la distributivité et le carré — Maths 4e",
+  "short": false,
+  "youtube": null
+ },
+ "4e-litteral-factoriser": {
+  "fichier": "4e/maths/paysage/fr/litteral-factoriser/eleveai-maths-4e-litteral-factoriser.mp4",
+  "poster": "4e/maths/paysage/fr/litteral-factoriser/eleveai-maths-4e-litteral-factoriser.png",
+  "titre": "Factoriser : le chemin retour du développement — Maths 4e et 3e",
+  "short": false,
+  "youtube": "x2n_wQ9d0AY"
+ },
+ "4e-proba-calculer-fraction": {
+  "fichier": "4e/maths/probabilites/05-calculer-fraction/eleveai-maths-4e-proba-calculer-fraction.mp4",
+  "poster": "4e/maths/probabilites/05-calculer-fraction/eleveai-maths-4e-proba-calculer-fraction.png",
+  "titre": "4 sur 16 ? Calculer une probabilité — épisode 5 · Maths 5e 4e 3e · CRPE",
+  "short": false,
+  "youtube": "yM2EPbULS1k"
+ },
+ "4e-proba-calculer-fraction-short": {
+  "fichier": "4e/maths/probabilites/05-calculer-fraction/eleveai-maths-4e-proba-calculer-fraction-short.mp4",
+  "poster": "4e/maths/probabilites/05-calculer-fraction/eleveai-maths-4e-proba-calculer-fraction-short.png",
+  "titre": "1 chance sur 3 de tirer le rouge ? ✏️ — 5e 4e 3e CRPE #Shorts",
+  "short": true,
+  "youtube": "YtNNR6EQaGo"
+ },
+ "4e-proba-comparer": {
+  "fichier": "4e/maths/probabilites/07-comparer/eleveai-maths-4e-proba-comparer.mp4",
+  "poster": "4e/maths/probabilites/07-comparer/eleveai-maths-4e-proba-comparer.png",
+  "titre": "Plus de gagnants = plus de chances ? Comparer des probabilités — épisode 7 · Maths 5e 4e 3e · CRPE",
+  "short": false,
+  "youtube": "wBl9o_l9sfQ"
+ },
+ "4e-proba-comparer-short": {
+  "fichier": "4e/maths/probabilites/07-comparer/eleveai-maths-4e-proba-comparer-short.mp4",
+  "poster": "4e/maths/probabilites/07-comparer/eleveai-maths-4e-proba-comparer-short.png",
+  "titre": "Quelle tombola choisir ? 🎟️ — 5e 4e 3e CRPE #Shorts",
+  "short": true,
+  "youtube": "vUmYQEAgBDU"
+ },
+ "4e-proba-convertir": {
+  "fichier": "4e/maths/probabilites/06-convertir/eleveai-maths-4e-proba-convertir.mp4",
+  "poster": "4e/maths/probabilites/06-convertir/eleveai-maths-4e-proba-convertir.png",
+  "titre": "0,5 = 5 % ? Une probabilité en décimal et en pourcentage — épisode 6 · Maths 5e 4e 3e · CRPE",
+  "short": false,
+  "youtube": "qsIVhAmRrds"
+ },
+ "4e-proba-convertir-short": {
+  "fichier": "4e/maths/probabilites/06-convertir/eleveai-maths-4e-proba-convertir-short.mp4",
+  "poster": "4e/maths/probabilites/06-convertir/eleveai-maths-4e-proba-convertir-short.png",
+  "titre": "1 chance sur 4, c'est 4 % ? ☔ — 5e 4e 3e CRPE #Shorts",
+  "short": true,
+  "youtube": "3nP1YPji2Ik"
+ },
+ "4e-proba-defi": {
+  "fichier": "4e/maths/probabilites/08-defi/eleveai-maths-4e-proba-defi.mp4",
+  "poster": "4e/maths/probabilites/08-defi/eleveai-maths-4e-proba-defi.png",
+  "titre": "1 est premier ? Le défi des probabilités — épisode 8 · Maths 5e 4e 3e · CRPE",
+  "short": false,
+  "youtube": "cWsARmQfAmw"
+ },
+ "4e-proba-defi-short": {
+  "fichier": "4e/maths/probabilites/08-defi/eleveai-maths-4e-proba-defi-short.mp4",
+  "poster": "4e/maths/probabilites/08-defi/eleveai-maths-4e-proba-defi-short.png",
+  "titre": "Pair, ou plus grand que 6 ? 🎡 — 5e 4e 3e CRPE #Shorts",
+  "short": true,
+  "youtube": "zxREa2zRNAw"
+ },
+ "4e-proba-equiprobabilite": {
+  "fichier": "4e/maths/probabilites/04-equiprobabilite/eleveai-maths-4e-proba-equiprobabilite.mp4",
+  "poster": "4e/maths/probabilites/04-equiprobabilite/eleveai-maths-4e-proba-equiprobabilite.png",
+  "titre": "2 issues = 1 chance sur 2 ? L'équiprobabilité — épisode 4 · Maths 5e 4e 3e · CRPE",
+  "short": false,
+  "youtube": "azgYSuqRyV8"
+ },
+ "4e-proba-equiprobabilite-short": {
+  "fichier": "4e/maths/probabilites/04-equiprobabilite/eleveai-maths-4e-proba-equiprobabilite-short.mp4",
+  "poster": "4e/maths/probabilites/04-equiprobabilite/eleveai-maths-4e-proba-equiprobabilite-short.png",
+  "titre": "Une punaise : 1 chance sur 2 ? 📌 — 5e 4e 3e CRPE #Shorts",
+  "short": true,
+  "youtube": "UUd5K3JR_E4"
+ },
+ "4e-proba-evenement": {
+  "fichier": "4e/maths/probabilites/03-evenement/eleveai-maths-4e-proba-evenement.mp4",
+  "poster": "4e/maths/probabilites/03-evenement/eleveai-maths-4e-proba-evenement.png",
+  "titre": "Contraire de 10 = 1 ? Certain, impossible, contraire — épisode 3 · Maths 5e 4e 3e · CRPE",
+  "short": false,
+  "youtube": "Ah75hhm6EYU"
+ },
+ "4e-proba-evenement-short": {
+  "fichier": "4e/maths/probabilites/03-evenement/eleveai-maths-4e-proba-evenement-short.mp4",
+  "poster": "4e/maths/probabilites/03-evenement/eleveai-maths-4e-proba-evenement-short.png",
+  "titre": "Le contraire de « faire 6 » au dé ? 🎲 — 5e 4e 3e CRPE #Shorts",
+  "short": true,
+  "youtube": "HoiMo-PQgPU"
+ },
+ "4e-proba-frequence-calculer": {
+  "fichier": "4e/maths/probabilites/09-frequence-calculer/eleveai-maths-4e-proba-frequence-calculer.mp4",
+  "poster": "4e/maths/probabilites/09-frequence-calculer/eleveai-maths-4e-proba-frequence-calculer.png",
+  "titre": "18 piles ÷ 2 ? La fréquence observée — épisode 9 · Maths 5e 4e 3e · CRPE",
+  "short": false,
+  "youtube": "9PyOOlhJO3I"
+ },
+ "4e-proba-frequence-calculer-short": {
+  "fichier": "4e/maths/probabilites/09-frequence-calculer/eleveai-maths-4e-proba-frequence-calculer-short.mp4",
+  "poster": "4e/maths/probabilites/09-frequence-calculer/eleveai-maths-4e-proba-frequence-calculer-short.png",
+  "titre": "Un bouchon lancé 50 fois 🍾 — 5e 4e 3e CRPE #Shorts",
+  "short": true,
+  "youtube": "n2IgShEOGAQ"
+ },
+ "4e-proba-frequence-comparer": {
+  "fichier": "4e/maths/probabilites/10-frequence-comparer/eleveai-maths-4e-proba-frequence-comparer.mp4",
+  "poster": "4e/maths/probabilites/10-frequence-comparer/eleveai-maths-4e-proba-frequence-comparer.png",
+  "titre": "Mon dé n'obéit pas aux maths ? Fréquence et probabilité — épisode 10 · Maths 5e 4e 3e · CRPE",
+  "short": false,
+  "youtube": "YzPJ_-qevEE"
+ },
+ "4e-proba-frequence-comparer-short": {
+  "fichier": "4e/maths/probabilites/10-frequence-comparer/eleveai-maths-4e-proba-frequence-comparer-short.mp4",
+  "poster": "4e/maths/probabilites/10-frequence-comparer/eleveai-maths-4e-proba-frequence-comparer-short.png",
+  "titre": "1 chance sur 2… donc 5 piles sur 10 ? 🪙 — 5e 4e 3e CRPE #Shorts",
+  "short": true,
+  "youtube": "GRN0JrXawmM"
+ },
+ "4e-proba-frequence-defi": {
+  "fichier": "4e/maths/probabilites/13-frequence-defi/eleveai-maths-4e-proba-frequence-defi.mp4",
+  "poster": "4e/maths/probabilites/13-frequence-defi/eleveai-maths-4e-proba-frequence-defi.png",
+  "titre": "Exactement 20 fois ? Le défi des fréquences — épisode 13 · Maths 5e 4e 3e · CRPE",
+  "short": false,
+  "youtube": "mJekXn8JFVY"
+ },
+ "4e-proba-frequence-defi-short": {
+  "fichier": "4e/maths/probabilites/13-frequence-defi/eleveai-maths-4e-proba-frequence-defi-short.mp4",
+  "poster": "4e/maths/probabilites/13-frequence-defi/eleveai-maths-4e-proba-frequence-defi-short.png",
+  "titre": "Une punaise lancée 1 000 fois 📌 — 5e 4e 3e CRPE #Shorts",
+  "short": true,
+  "youtube": "QkDw_s6Nv8E"
+ },
+ "4e-proba-frequence-echantillon": {
+  "fichier": "4e/maths/probabilites/12-frequence-echantillon/eleveai-maths-4e-proba-frequence-echantillon.mp4",
+  "poster": "4e/maths/probabilites/12-frequence-echantillon/eleveai-maths-4e-proba-frequence-echantillon.png",
+  "titre": "3 six sur 5 : mon dé est truqué ? Les petits échantillons — épisode 12 · Maths 5e 4e 3e · CRPE",
+  "short": false,
+  "youtube": "aNxieXvWZmI"
+ },
+ "4e-proba-frequence-echantillon-short": {
+  "fichier": "4e/maths/probabilites/12-frequence-echantillon/eleveai-maths-4e-proba-frequence-echantillon-short.mp4",
+  "poster": "4e/maths/probabilites/12-frequence-echantillon/eleveai-maths-4e-proba-frequence-echantillon-short.png",
+  "titre": "3 six sur 5 : dé truqué ? 🎲 — 5e 4e 3e CRPE #Shorts",
+  "short": true,
+  "youtube": "MDUFjajNP20"
+ },
+ "4e-proba-frequence-repeter": {
+  "fichier": "4e/maths/probabilites/11-frequence-repeter/eleveai-maths-4e-proba-frequence-repeter.mp4",
+  "poster": "4e/maths/probabilites/11-frequence-repeter/eleveai-maths-4e-proba-frequence-repeter.png",
+  "titre": "Le dé se souvient ? Répéter l'expérience — épisode 11 · Maths 5e 4e 3e · CRPE",
+  "short": false,
+  "youtube": "8q8glwcLnks"
+ },
+ "4e-proba-frequence-repeter-short": {
+  "fichier": "4e/maths/probabilites/11-frequence-repeter/eleveai-maths-4e-proba-frequence-repeter-short.mp4",
+  "poster": "4e/maths/probabilites/11-frequence-repeter/eleveai-maths-4e-proba-frequence-repeter-short.png",
+  "titre": "600 lancers de dé 🎲 — 5e 4e 3e CRPE #Shorts",
+  "short": true,
+  "youtube": "a1sqX8AIfl0"
+ },
+ "4e-proba-issue": {
+  "fichier": "4e/maths/probabilites/02-issue/eleveai-maths-4e-proba-issue.mp4",
+  "poster": "4e/maths/probabilites/02-issue/eleveai-maths-4e-proba-issue.png",
+  "titre": "5 stylos = 5 issues ? Les issues d'une expérience — épisode 2 · Maths 5e 4e 3e · CRPE",
+  "short": false,
+  "youtube": "pZ2VJ34EG88"
+ },
+ "4e-proba-issue-short": {
+  "fichier": "4e/maths/probabilites/02-issue/eleveai-maths-4e-proba-issue-short.mp4",
+  "poster": "4e/maths/probabilites/02-issue/eleveai-maths-4e-proba-issue-short.png",
+  "titre": "6 chaussettes = 6 issues ? 🧦 — 5e 4e 3e CRPE #Shorts",
+  "short": true,
+  "youtube": "VXhEkbRiJkY"
+ },
+ "4e-proba-vocabulaire": {
+  "fichier": "4e/maths/probabilites/01-vocabulaire/eleveai-maths-4e-proba-vocabulaire.mp4",
+  "poster": "4e/maths/probabilites/01-vocabulaire/eleveai-maths-4e-proba-vocabulaire.png",
+  "titre": "Rare = impossible ? Le vocabulaire des probabilités — épisode 1 · Maths 5e 4e 3e · CRPE",
+  "short": false,
+  "youtube": "WjJBiQG_Aws"
+ },
+ "4e-proba-vocabulaire-short": {
+  "fichier": "4e/maths/probabilites/01-vocabulaire/eleveai-maths-4e-proba-vocabulaire-short.mp4",
+  "poster": "4e/maths/probabilites/01-vocabulaire/eleveai-maths-4e-proba-vocabulaire-short.png",
+  "titre": "Hasard ou pas hasard ? 🎲 — 5e 4e 3e CRPE #Shorts",
+  "short": true,
+  "youtube": "umcj7pFUwvI"
+ },
+ "4e-prop-pourcentages": {
+  "fichier": "4e/maths/paysage/fr/prop-pourcentages/eleveai-maths-4e-prop-pourcentages.mp4",
+  "poster": "4e/maths/paysage/fr/prop-pourcentages/eleveai-maths-4e-prop-pourcentages.png",
+  "titre": "Tout comprendre sur les pourcentages – Maths 4e",
+  "short": false,
+  "youtube": "4aBnDf5iXTA"
+ },
+ "4e-prop-pourcentages-short-coefficient": {
+  "fichier": "4e/maths/shorts/fr/prop-pourcentages/eleveai-maths-4e-prop-pourcentages-short-coefficient.mp4",
+  "poster": "4e/maths/shorts/fr/prop-pourcentages/eleveai-maths-4e-prop-pourcentages-short-coefficient.png",
+  "titre": "+5 % : on multiplie par 0,05 ? (le piège)",
+  "short": true,
+  "youtube": "QkZlppTzY-c"
+ },
+ "4e-prop-pourcentages-short-defi": {
+  "fichier": "4e/maths/shorts/fr/prop-pourcentages/eleveai-maths-4e-prop-pourcentages-short-defi.mp4",
+  "poster": "4e/maths/shorts/fr/prop-pourcentages/eleveai-maths-4e-prop-pourcentages-short-defi.png",
+  "titre": "+10 % puis −10 % : on revient au départ ? (le piège)",
+  "short": true,
+  "youtube": "TNm2mseiY5g"
+ },
+ "4e-prop-pourcentages-short-diagonale": {
+  "fichier": "4e/maths/shorts/fr/prop-pourcentages/eleveai-maths-4e-prop-pourcentages-short-diagonale.mp4",
+  "poster": "4e/maths/shorts/fr/prop-pourcentages/eleveai-maths-4e-prop-pourcentages-short-diagonale.png",
+  "titre": "Diagonale des Fous sans Cilaos : plus dur ou plus facile ? (Grand Raid 2026)",
+  "short": true,
+  "youtube": "uk_FTxKB4Ac"
+ },
+ "4e-prop-pourcentages-short-evolution": {
+  "fichier": "4e/maths/shorts/fr/prop-pourcentages/eleveai-maths-4e-prop-pourcentages-short-evolution.mp4",
+  "poster": "4e/maths/shorts/fr/prop-pourcentages/eleveai-maths-4e-prop-pourcentages-short-evolution.png",
+  "titre": "800 → 1 000 abonnés : +20 % ou +25 % ?",
+  "short": true,
+  "youtube": "nH0yOds7v_k"
+ },
+ "4e-prop-pourcentages-short-mental": {
+  "fichier": "4e/maths/shorts/fr/prop-pourcentages/eleveai-maths-4e-prop-pourcentages-short-mental.mp4",
+  "poster": "4e/maths/shorts/fr/prop-pourcentages/eleveai-maths-4e-prop-pourcentages-short-mental.png",
+  "titre": "30 % de 70 € de tête en 5 secondes",
+  "short": true,
+  "youtube": "Use--vaY24o"
+ },
+ "4e-prop-pourcentages-short-taux": {
+  "fichier": "4e/maths/shorts/fr/prop-pourcentages/eleveai-maths-4e-prop-pourcentages-short-taux.mp4",
+  "poster": "4e/maths/shorts/fr/prop-pourcentages/eleveai-maths-4e-prop-pourcentages-short-taux.png",
+  "titre": "18 sur 25 : combien de pour cent ? (pas 18 % !)",
+  "short": true,
+  "youtube": "Vr30yjvQnsY"
+ },
+ "4e-prop-proportionnalite": {
+  "fichier": "4e/maths/paysage/fr/prop-proportionnalite/eleveai-maths-4e-prop-proportionnalite.mp4",
+  "poster": "4e/maths/paysage/fr/prop-proportionnalite/eleveai-maths-4e-prop-proportionnalite.png",
+  "titre": "Tout comprendre sur la proportionnalité – Maths 4e",
+  "short": false,
+  "youtube": "ORVPvsNFTpY"
+ },
+ "4e-prop-proportionnalite-short-croix": {
+  "fichier": "4e/maths/shorts/fr/prop-proportionnalite/eleveai-maths-4e-prop-proportionnalite-short-croix.mp4",
+  "poster": "4e/maths/shorts/fr/prop-proportionnalite/eleveai-maths-4e-prop-proportionnalite-short-croix.png",
+  "titre": "6 L pour 100 km, combien pour 250 km ? (produit en croix)",
+  "short": true,
+  "youtube": "XkyTzWf1e_c"
+ },
+ "4e-prop-proportionnalite-short-defi": {
+  "fichier": "4e/maths/shorts/fr/prop-proportionnalite/eleveai-maths-4e-prop-proportionnalite-short-defi.mp4",
+  "poster": "4e/maths/shorts/fr/prop-proportionnalite/eleveai-maths-4e-prop-proportionnalite-short-defi.png",
+  "titre": "6 peintres : 12 heures ? Le piège du produit en croix",
+  "short": true,
+  "youtube": "Qqtg7zymoJY"
+ },
+ "4e-prop-proportionnalite-short-graphique": {
+  "fichier": "4e/maths/shorts/fr/prop-proportionnalite/eleveai-maths-4e-prop-proportionnalite-short-graphique.mp4",
+  "poster": "4e/maths/shorts/fr/prop-proportionnalite/eleveai-maths-4e-prop-proportionnalite-short-graphique.png",
+  "titre": "Une droite, donc c'est proportionnel ? Pas si vite !",
+  "short": true,
+  "youtube": "bAthxPRGQSw"
+ },
+ "4e-prop-proportionnalite-short-probleme": {
+  "fichier": "4e/maths/shorts/fr/prop-proportionnalite/eleveai-maths-4e-prop-proportionnalite-short-probleme.mp4",
+  "poster": "4e/maths/shorts/fr/prop-proportionnalite/eleveai-maths-4e-prop-proportionnalite-short-probleme.png",
+  "titre": "Un marathon en 70 minutes ? Quand le produit en croix ment",
+  "short": true,
+  "youtube": "VvUHbMV0dfo"
+ },
+ "4e-prop-proportionnalite-short-reconnaitre": {
+  "fichier": "4e/maths/shorts/fr/prop-proportionnalite/eleveai-maths-4e-prop-proportionnalite-short-reconnaitre.mp4",
+  "poster": "4e/maths/shorts/fr/prop-proportionnalite/eleveai-maths-4e-prop-proportionnalite-short-reconnaitre.png",
+  "titre": "+10 € chaque mois : c'est proportionnel ? (le piège)",
+  "short": true,
+  "youtube": "HjNFbv4z4v8"
+ },
+ "4e-prop-proportionnalite-short-relation": {
+  "fichier": "4e/maths/shorts/fr/prop-proportionnalite/eleveai-maths-4e-prop-proportionnalite-short-relation.mp4",
+  "poster": "4e/maths/shorts/fr/prop-proportionnalite/eleveai-maths-4e-prop-proportionnalite-short-relation.png",
+  "titre": "y = x + 4 ? Le piège de la relation",
+  "short": true,
+  "youtube": "w87__1livUQ"
+ },
+ "4e-prop-proportionnalite-short-tableau": {
+  "fichier": "4e/maths/shorts/fr/prop-proportionnalite/eleveai-maths-4e-prop-proportionnalite-short-tableau.mp4",
+  "poster": "4e/maths/shorts/fr/prop-proportionnalite/eleveai-maths-4e-prop-proportionnalite-short-tableau.png",
+  "titre": "3 cookies 6 €, 5 cookies 8 € ? (le piège du tableau)",
+  "short": true,
+  "youtube": "DOHZhMrfW4M"
+ },
+ "4e-prop-proportionnalite-short-unite": {
+  "fichier": "4e/maths/shorts/fr/prop-proportionnalite/eleveai-maths-4e-prop-proportionnalite-short-unite.mp4",
+  "poster": "4e/maths/shorts/fr/prop-proportionnalite/eleveai-maths-4e-prop-proportionnalite-short-unite.png",
+  "titre": "5 croissants 6 €, combien pour 8 ? (passer par l'unité)",
+  "short": true,
+  "youtube": "Xco1oGJUsjo"
+ },
+ "4e-prop-ratio": {
+  "fichier": "4e/maths/paysage/fr/prop-ratio/eleveai-maths-4e-prop-ratio.mp4",
+  "poster": "4e/maths/paysage/fr/prop-ratio/eleveai-maths-4e-prop-ratio.png",
+  "titre": "Tout comprendre sur les ratios – Maths 4e",
+  "short": false,
+  "youtube": "9hMxwfwLIGE"
+ },
+ "4e-prop-ratio-short-ecart": {
+  "fichier": "4e/maths/shorts/fr/prop-ratio/eleveai-maths-4e-prop-ratio-short-ecart.mp4",
+  "poster": "4e/maths/shorts/fr/prop-ratio/eleveai-maths-4e-prop-ratio-short-ecart.png",
+  "titre": "5 filles de plus : combien en tout ? (ratio 4 : 3)",
+  "short": true,
+  "youtube": "zXY8w-h23O8"
+ },
+ "4e-prop-ratio-short-partager": {
+  "fichier": "4e/maths/shorts/fr/prop-ratio/eleveai-maths-4e-prop-ratio-short-partager.mp4",
+  "poster": "4e/maths/shorts/fr/prop-ratio/eleveai-maths-4e-prop-ratio-short-partager.png",
+  "titre": "60 € selon le ratio 2 : 3 : 30 € chacun ?",
+  "short": true,
+  "youtube": "GpHNJgvSxYE"
+ },
+ "4e-prop-ratio-short-quotients": {
+  "fichier": "4e/maths/shorts/fr/prop-ratio/eleveai-maths-4e-prop-ratio-short-quotients.mp4",
+  "poster": "4e/maths/shorts/fr/prop-ratio/eleveai-maths-4e-prop-ratio-short-quotients.png",
+  "titre": "40 kg de ciment : combien de sable ? (ratio 2 : 5)",
+  "short": true,
+  "youtube": "vSGg0SkHwk8"
+ },
+ "4e-prop-ratio-short-simplifier": {
+  "fichier": "4e/maths/shorts/fr/prop-ratio/eleveai-maths-4e-prop-ratio-short-simplifier.mp4",
+  "poster": "4e/maths/shorts/fr/prop-ratio/eleveai-maths-4e-prop-ratio-short-simplifier.png",
+  "titre": "2 pour 10 ou 1 pour 5 : lequel est le plus sucré ?",
+  "short": true,
+  "youtube": "QXMugfqoiaM"
+ },
+ "4e-prop-ratio-short-trois": {
+  "fichier": "4e/maths/shorts/fr/prop-ratio/eleveai-maths-4e-prop-ratio-short-trois.mp4",
+  "poster": "4e/maths/shorts/fr/prop-ratio/eleveai-maths-4e-prop-ratio-short-trois.png",
+  "titre": "Un ratio à trois nombres : un seul suffit",
+  "short": true,
+  "youtube": "jPp_eBkzxg8"
+ },
+ "4e-pythagore-carre-racine": {
+  "fichier": "4e/maths/pythagore/02-carre-racine/eleveai-maths-4e-pythagore-carre-racine.mp4",
+  "poster": "4e/maths/pythagore/02-carre-racine/eleveai-maths-4e-pythagore-carre-racine.png",
+  "titre": "Le carré et la racine carrée, avec des carreaux — Pythagore, épisode 2 · Maths 4e",
+  "short": false,
+  "youtube": "FLaSgGr-lAA"
+ },
+ "4e-pythagore-carre-racine-short": {
+  "fichier": "4e/maths/pythagore/02-carre-racine/eleveai-maths-4e-pythagore-carre-racine-short.mp4",
+  "poster": "4e/maths/pythagore/02-carre-racine/eleveai-maths-4e-pythagore-carre-racine-short.png",
+  "titre": "16 carreaux en carré : 4 sur un côté. Le carré et la racine 🟧 — Pythagore 4e #Shorts",
+  "short": true,
+  "youtube": "_bINSCbkf0Y"
+ },
+ "4e-pythagore-cote": {
+  "fichier": "4e/maths/pythagore/04-cote/eleveai-maths-4e-pythagore-cote.mp4",
+  "poster": "4e/maths/pythagore/04-cote/eleveai-maths-4e-pythagore-cote.png",
+  "titre": "Calculer un côté de l'angle droit : la largeur du champ de cannes — Pythagore, épisode 4 · Maths 4e",
+  "short": false,
+  "youtube": "h3b8PvZDaEk"
+ },
+ "4e-pythagore-cote-short": {
+  "fichier": "4e/maths/pythagore/04-cote/eleveai-maths-4e-pythagore-cote-short.mp4",
+  "poster": "4e/maths/pythagore/04-cote/eleveai-maths-4e-pythagore-cote-short.png",
+  "titre": "Diagonale 50 m, longueur 40 m : quelle largeur ? Pythagore à l'envers 🌾 — 4e #Shorts",
+  "short": true,
+  "youtube": "Pavz3Vo8K-0"
+ },
+ "4e-pythagore-defi-cube": {
+  "fichier": "4e/maths/pythagore/08-defi-cube/eleveai-maths-4e-pythagore-defi-cube.mp4",
+  "poster": "4e/maths/pythagore/08-defi-cube/eleveai-maths-4e-pythagore-defi-cube.png",
+  "titre": "Combien de triangles rectangles dans un cube ? Le défi de Pythagore, corrigé · Maths 4e",
+  "short": false,
+  "youtube": "EN_5t2Jzp2s"
+ },
+ "4e-pythagore-defi-cube-short": {
+  "fichier": "4e/maths/pythagore/08-defi-cube/eleveai-maths-4e-pythagore-defi-cube-short.mp4",
+  "poster": "4e/maths/pythagore/08-defi-cube/eleveai-maths-4e-pythagore-defi-cube-short.png",
+  "titre": "Combien de triangles rectangles dans un cube ? 🧊 Le défi — maths 4e #Shorts",
+  "short": true,
+  "youtube": "fnROirX3tIY"
+ },
+ "4e-pythagore-hypotenuse": {
+  "fichier": "4e/maths/pythagore/03-hypotenuse-calcul/eleveai-maths-4e-pythagore-hypotenuse.mp4",
+  "poster": "4e/maths/pythagore/03-hypotenuse-calcul/eleveai-maths-4e-pythagore-hypotenuse.png",
+  "titre": "Calculer l'hypoténuse : le raccourci du champ de cannes — Pythagore, épisode 3 · Maths 4e",
+  "short": false,
+  "youtube": "vwkGpUNngtQ"
+ },
+ "4e-pythagore-hypotenuse-short": {
+  "fichier": "4e/maths/pythagore/03-hypotenuse-calcul/eleveai-maths-4e-pythagore-hypotenuse-short.mp4",
+  "poster": "4e/maths/pythagore/03-hypotenuse-calcul/eleveai-maths-4e-pythagore-hypotenuse-short.png",
+  "titre": "70 m par les bords, combien en diagonale ? Le raccourci de Pythagore 🌾 — 4e #Shorts",
+  "short": true,
+  "youtube": "9wOz8VlPfxU"
+ },
+ "4e-pythagore-reciproque": {
+  "fichier": "4e/maths/pythagore/06-reciproque/eleveai-maths-4e-pythagore-reciproque.mp4",
+  "poster": "4e/maths/pythagore/06-reciproque/eleveai-maths-4e-pythagore-reciproque.png",
+  "titre": "La réciproque de Pythagore (2/2) : conclure et rédiger, la dalle du maçon — Pythagore, épisode 6 · Maths 4e",
+  "short": false,
+  "youtube": "IV4gWGe597Q"
+ },
+ "4e-pythagore-reciproque-short": {
+  "fichier": "4e/maths/pythagore/06-reciproque/eleveai-maths-4e-pythagore-reciproque-short.mp4",
+  "poster": "4e/maths/pythagore/06-reciproque/eleveai-maths-4e-pythagore-reciproque-short.png",
+  "titre": "60, 80, 100 : le coin de la dalle est-il droit ? La réciproque de Pythagore 🧱 — 4e #Shorts",
+  "short": true,
+  "youtube": "9JazsOkfeDA"
+ },
+ "4e-pythagore-reconnaitre": {
+  "fichier": "4e/maths/pythagore/01-hypotenuse/eleveai-maths-4e-pythagore-reconnaitre.mp4",
+  "poster": "4e/maths/pythagore/01-hypotenuse/eleveai-maths-4e-pythagore-reconnaitre.png",
+  "titre": "L'hypoténuse : le plus long côté, sans rien mesurer — Pythagore, épisode 1 · Maths 4e",
+  "short": false,
+  "youtube": "TBM5bum-xj4"
+ },
+ "4e-pythagore-reconnaitre-short": {
+  "fichier": "4e/maths/pythagore/01-hypotenuse/eleveai-maths-4e-pythagore-reconnaitre-short.mp4",
+  "poster": "4e/maths/pythagore/01-hypotenuse/eleveai-maths-4e-pythagore-reconnaitre-short.png",
+  "titre": "L'échelle contre la case : quel côté est le plus long ? 🪜 — Pythagore 4e #Shorts",
+  "short": true,
+  "youtube": "5LNNla3waTw"
+ },
+ "4e-pythagore-rediger": {
+  "fichier": "4e/maths/pythagore/07-rediger/eleveai-maths-4e-pythagore-rediger.mp4",
+  "poster": "4e/maths/pythagore/07-rediger/eleveai-maths-4e-pythagore-rediger.png",
+  "titre": "Théorème ou réciproque ? Rédiger avec Pythagore — Pythagore, épisode 7 · Maths 4e",
+  "short": false,
+  "youtube": "cBgnO9A9cG8"
+ },
+ "4e-pythagore-rediger-short": {
+  "fichier": "4e/maths/pythagore/07-rediger/eleveai-maths-4e-pythagore-rediger-short.mp4",
+  "poster": "4e/maths/pythagore/07-rediger/eleveai-maths-4e-pythagore-rediger-short.png",
+  "titre": "Théorème ou réciproque de Pythagore ? Le choix en 10 secondes ✍️ — 4e #Shorts",
+  "short": true,
+  "youtube": "eIi_u2MlcnM"
+ },
+ "4e-pythagore-verifier": {
+  "fichier": "4e/maths/pythagore/05-verifier/eleveai-maths-4e-pythagore-verifier.mp4",
+  "poster": "4e/maths/pythagore/05-verifier/eleveai-maths-4e-pythagore-verifier.png",
+  "titre": "La réciproque de Pythagore (1/2) : vérifier l'égalité avec la corde à 13 nœuds — Pythagore, épisode 5 · Maths 4e",
+  "short": false,
+  "youtube": "82Vbm0B3lWQ"
+ },
+ "4e-pythagore-verifier-short": {
+  "fichier": "4e/maths/pythagore/05-verifier/eleveai-maths-4e-pythagore-verifier-short.mp4",
+  "poster": "4e/maths/pythagore/05-verifier/eleveai-maths-4e-pythagore-verifier-short.png",
+  "titre": "La corde à 13 nœuds : 3, 4, 5 et un angle droit sans équerre 🪢 — Pythagore 4e #Shorts",
+  "short": true,
+  "youtube": "nQNFxJqmOFQ"
+ },
+ "4e-trigo-cosinus": {
+  "fichier": "4e/maths/paysage/fr/trigo-cosinus/eleveai-maths-4e-trigo-cosinus.mp4",
+  "poster": "4e/maths/paysage/fr/trigo-cosinus/eleveai-maths-4e-trigo-cosinus.png",
+  "titre": "Le cosinus d'un angle aigu — Maths 4e",
+  "short": false,
+  "youtube": "MG0rSH1IZlM"
+ },
+ "5-version2-voix-eleve-puis-voix-generee": {
+  "fichier": "atelier-video-essais/5-version2-voix-eleve-puis-voix-generee.mp4",
+  "poster": null,
+  "titre": "5 version2 voix eleve puis voix generee",
+  "short": false,
+  "youtube": null
+ },
+ "5e-expression-comprendre": {
+  "fichier": "5e/maths/expression-litterale/01-comprendre/eleveai-maths-5e-expression-comprendre.mp4",
+  "poster": "5e/maths/expression-litterale/01-comprendre/eleveai-maths-5e-expression-comprendre.png",
+  "titre": "Que cache l'écriture 3x ? — Expression littérale, épisode 1 · Maths 5e",
+  "short": false,
+  "youtube": "shOOglwlLdU"
+ },
+ "5e-expression-developper": {
+  "fichier": "5e/maths/expression-litterale/06-developper/eleveai-maths-5e-expression-developper.mp4",
+  "poster": "5e/maths/expression-litterale/06-developper/eleveai-maths-5e-expression-developper.png",
+  "titre": "5(x + 3) = 5x + 3 ? Développer — Expression littérale, épisode 6 · Maths 5e",
+  "short": false,
+  "youtube": "lI5hsH6cfRw"
+ },
+ "5e-expression-reduire": {
+  "fichier": "5e/maths/expression-litterale/04-reduire/eleveai-maths-5e-expression-reduire.mp4",
+  "poster": "5e/maths/expression-litterale/04-reduire/eleveai-maths-5e-expression-reduire.png",
+  "titre": "3x + 2 = 5x ? Réduire une expression littérale — épisode 4 · Maths 5e",
+  "short": false,
+  "youtube": "xwWHAuKkdmI"
+ },
+ "5e-expression-substituer": {
+  "fichier": "5e/maths/expression-litterale/03-substituer/eleveai-maths-5e-expression-substituer.mp4",
+  "poster": "5e/maths/expression-litterale/03-substituer/eleveai-maths-5e-expression-substituer.png",
+  "titre": "x = 4 : 3x = 34 ? Calculer une expression littérale — épisode 3 · Maths 5e",
+  "short": false,
+  "youtube": "qFRUHMf_tNM"
+ },
+ "5e-expression-tester": {
+  "fichier": "5e/maths/expression-litterale/05-tester/eleveai-maths-5e-expression-tester.mp4",
+  "poster": "5e/maths/expression-litterale/05-tester/eleveai-maths-5e-expression-tester.png",
+  "titre": "3x + 1 = 10 : vrai pour x = 3 ? Tester une égalité — épisode 5 · Maths 5e",
+  "short": false,
+  "youtube": "40q2Wvi7KiM"
+ },
+ "5e-expression-traduire": {
+  "fichier": "5e/maths/expression-litterale/02-traduire/eleveai-maths-5e-expression-traduire.mp4",
+  "poster": "5e/maths/expression-litterale/02-traduire/eleveai-maths-5e-expression-traduire.png",
+  "titre": "Le double de x augmenté de 5 = 2(x + 5) ? — Expression littérale, épisode 2 · Maths 5e",
+  "short": false,
+  "youtube": "I0az4rv-xfk"
+ },
+ "5e-litteral-calcul": {
+  "fichier": "5e/maths/paysage/fr/litteral-calcul/eleveai-maths-5e-litteral-calcul.mp4",
+  "poster": "5e/maths/paysage/fr/litteral-calcul/eleveai-maths-5e-litteral-calcul.png",
+  "titre": "Le calcul littéral — Maths 5e",
+  "short": false,
+  "youtube": "c8ScGIErxJM"
+ },
+ "5e-litteral-calcul-short-comprendre": {
+  "fichier": "5e/maths/expression-litterale/01-comprendre/eleveai-maths-5e-litteral-calcul-short-comprendre.mp4",
+  "poster": "5e/maths/expression-litterale/01-comprendre/eleveai-maths-5e-litteral-calcul-short-comprendre.png",
+  "titre": "x = 2 : 3x, ça fait 32 ? 🤔 Le piège — 5e #Shorts",
+  "short": true,
+  "youtube": "hScDu96gAh8"
+ },
+ "5e-litteral-calcul-short-defi": {
+  "fichier": "5e/maths/expression-litterale/07-defi/eleveai-maths-5e-litteral-calcul-short-defi.mp4",
+  "poster": "5e/maths/expression-litterale/07-defi/eleveai-maths-5e-litteral-calcul-short-defi.png",
+  "titre": "Le périmètre d'un rectangle avec des x 🧩 (défi) — 5e #Shorts",
+  "short": true,
+  "youtube": "MoKzheueVZk"
+ },
+ "5e-litteral-calcul-short-developper": {
+  "fichier": "5e/maths/expression-litterale/06-developper/eleveai-maths-5e-litteral-calcul-short-developper.mp4",
+  "poster": "5e/maths/expression-litterale/06-developper/eleveai-maths-5e-litteral-calcul-short-developper.png",
+  "titre": "5(x − 2) = 5x − 2 ? (le piège) — 5e #Shorts",
+  "short": true,
+  "youtube": "BMh35mpCZTc"
+ },
+ "5e-litteral-calcul-short-reduire": {
+  "fichier": "5e/maths/expression-litterale/04-reduire/eleveai-maths-5e-litteral-calcul-short-reduire.mp4",
+  "poster": "5e/maths/expression-litterale/04-reduire/eleveai-maths-5e-litteral-calcul-short-reduire.png",
+  "titre": "2x + 3 + 4x + 1, ça fait 10x ? (le piège) — 5e #Shorts",
+  "short": true,
+  "youtube": "slT0R7chLY0"
+ },
+ "5e-litteral-calcul-short-substituer": {
+  "fichier": "5e/maths/expression-litterale/03-substituer/eleveai-maths-5e-litteral-calcul-short-substituer.mp4",
+  "poster": "5e/maths/expression-litterale/03-substituer/eleveai-maths-5e-litteral-calcul-short-substituer.png",
+  "titre": "x = −2 : combien vaut 5 − 3x ? (le piège) — 5e #Shorts",
+  "short": true,
+  "youtube": "X5i9ay_Unew"
+ },
+ "5e-litteral-calcul-short-tester": {
+  "fichier": "5e/maths/expression-litterale/05-tester/eleveai-maths-5e-litteral-calcul-short-tester.mp4",
+  "poster": "5e/maths/expression-litterale/05-tester/eleveai-maths-5e-litteral-calcul-short-tester.png",
+  "titre": "Vraie pour x = 2, donc vraie pour tous ? (le piège) — 5e #Shorts",
+  "short": true,
+  "youtube": "Ck3F8itfdDc"
+ },
+ "5e-litteral-calcul-short-traduire": {
+  "fichier": "5e/maths/expression-litterale/02-traduire/eleveai-maths-5e-litteral-calcul-short-traduire.mp4",
+  "poster": "5e/maths/expression-litterale/02-traduire/eleveai-maths-5e-litteral-calcul-short-traduire.png",
+  "titre": "Le triple de n diminué de 4 : comment l'écrire ? (le piège) — 5e #Shorts",
+  "short": true,
+  "youtube": "YaeUd2bWUJo"
+ },
+ "5e-relatif-nombre": {
+  "fichier": "5e/maths/paysage/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre.mp4",
+  "poster": "5e/maths/paysage/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre.png",
+  "titre": "Les nombres relatifs — Maths 5e",
+  "short": false,
+  "youtube": "rhmbSQdLjXw"
+ },
+ "5e-relatif-nombre-short-comparer": {
+  "fichier": "5e/maths/shorts/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre-short-comparer.mp4",
+  "poster": "5e/maths/shorts/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre-short-comparer.png",
+  "titre": "−10 ou −2 : lequel est le plus grand ? (le piège)",
+  "short": true,
+  "youtube": "MSTZ4Ab1M9Q"
+ },
+ "5e-relatif-nombre-short-defi": {
+  "fichier": "5e/maths/shorts/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre-short-defi.mp4",
+  "poster": "5e/maths/shorts/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre-short-defi.png",
+  "titre": "A à −4, B à +1 : quelle distance ? (le piège)",
+  "short": true,
+  "youtube": "pUNdh4HZzZ8"
+ },
+ "5e-relatif-nombre-short-diagonale": {
+  "fichier": "5e/maths/shorts/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre-short-diagonale.mp4",
+  "poster": "5e/maths/shorts/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre-short-diagonale.png",
+  "titre": "Diagonale des Fous : 10 200 m de montée… et 0 ? (nombres relatifs)",
+  "short": true,
+  "youtube": "lfo-Kc5QakE"
+ },
+ "5e-relatif-nombre-short-distance": {
+  "fichier": "5e/maths/shorts/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre-short-distance.mp4",
+  "poster": "5e/maths/shorts/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre-short-distance.png",
+  "titre": "La distance à zéro de −8, c'est −8 ? (le piège)",
+  "short": true,
+  "youtube": "spEDvkvoD04"
+ },
+ "5e-relatif-nombre-short-lire": {
+  "fichier": "5e/maths/shorts/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre-short-lire.mp4",
+  "poster": "5e/maths/shorts/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre-short-lire.png",
+  "titre": "3 degrés sous zéro : ça s'écrit comment ?",
+  "short": true,
+  "youtube": "F30wf64B-W0"
+ },
+ "5e-relatif-nombre-short-montees-cachees": {
+  "fichier": "5e/maths/shorts/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre-short-montees-cachees.mp4",
+  "poster": "5e/maths/shorts/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre-short-montees-cachees.png",
+  "titre": "Diagonale des Fous : 3 800 m de montées cachées (nombres relatifs, Grand Raid 2026)",
+  "short": true,
+  "youtube": "qvI5PxWYDno"
+ },
+ "5e-relatif-nombre-short-oppose": {
+  "fichier": "5e/maths/shorts/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre-short-oppose.mp4",
+  "poster": "5e/maths/shorts/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre-short-oppose.png",
+  "titre": "L'opposé de −6, c'est quoi ?",
+  "short": true,
+  "youtube": "QRzZjnhyess"
+ },
+ "5e-relatif-nombre-short-placer": {
+  "fichier": "5e/maths/shorts/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre-short-placer.mp4",
+  "poster": "5e/maths/shorts/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre-short-placer.png",
+  "titre": "Où placer −2,5 sur la droite graduée ? (le piège)",
+  "short": true,
+  "youtube": "8c_uYXQZ0rM"
+ },
+ "5e-relatif-nombre-short-signe": {
+  "fichier": "5e/maths/shorts/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre-short-signe.mp4",
+  "poster": "5e/maths/shorts/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre-short-signe.png",
+  "titre": "Zéro : positif ou négatif ? (le piège)",
+  "short": true,
+  "youtube": "KGivh0oalwI"
+ },
+ "5e-relatif-nombre-short-ti-margo-diagonale": {
+  "fichier": "5e/maths/shorts/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre-short-ti-margo-diagonale.mp4",
+  "poster": "5e/maths/shorts/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre-short-ti-margo-diagonale.png",
+  "titre": "Il monte 10 200 m et finit 47 m plus haut : l'énigme de la Diagonale des Fous",
+  "short": true,
+  "youtube": "rquoZjtF1Yw"
+ },
+ "6e-aire-longueur-convertir-diagonale": {
+  "fichier": "6e/maths/paysage/fr/aire-longueur-convertir/eleveai-maths-6e-aire-longueur-convertir-diagonale.mp4",
+  "poster": "6e/maths/paysage/fr/aire-longueur-convertir/eleveai-maths-6e-aire-longueur-convertir-diagonale.png",
+  "titre": "Grand Raid, Diagonale des Fous : combien de marches pour monter 1000 m ? Convertir des longueurs · Maths 6e",
+  "short": false,
+  "youtube": "OudqIW-RaaA"
+ },
+ "6e-aire-longueur-short-diagonale": {
+  "fichier": "6e/maths/shorts/fr/aire-longueur/eleveai-maths-6e-aire-longueur-short-diagonale.mp4",
+  "poster": "6e/maths/shorts/fr/aire-longueur/eleveai-maths-6e-aire-longueur-short-diagonale.png",
+  "titre": "Grand Raid, Diagonale des Fous : 1000 m de montée, combien de marches ? (tu paries ?)",
+  "short": true,
+  "youtube": "ai3qedWj4nM"
+ },
+ "6e-decimal-calcul": {
+  "fichier": "6e/maths/paysage/fr/decimal-calcul/eleveai-maths-6e-decimal-calcul.mp4",
+  "poster": "6e/maths/paysage/fr/decimal-calcul/eleveai-maths-6e-decimal-calcul.png",
+  "titre": "Calculer avec les nombres décimaux — Maths 6e",
+  "short": false,
+  "youtube": "QFQsyW-CXw8"
+ },
+ "6e-decimal-calcul-short-01": {
+  "fichier": "6e/maths/shorts/fr/decimal-calcul/eleveai-maths-6e-decimal-calcul-short-01.mp4",
+  "poster": "6e/maths/shorts/fr/decimal-calcul/eleveai-maths-6e-decimal-calcul-short-01.png",
+  "titre": "Multiplier, ça rend toujours plus grand ? 250 × 0,1",
+  "short": true,
+  "youtube": "VgM8dIxG4JY"
+ },
+ "6e-decimal-calcul-short-addition": {
+  "fichier": "6e/maths/shorts/fr/decimal-calcul/eleveai-maths-6e-decimal-calcul-short-addition.mp4",
+  "poster": "6e/maths/shorts/fr/decimal-calcul/eleveai-maths-6e-decimal-calcul-short-addition.png",
+  "titre": "2,8 + 1,35 : le piège de l'addition des décimaux",
+  "short": true,
+  "youtube": "8sgbhGVCCP0"
+ },
+ "6e-decimal-calcul-short-defi": {
+  "fichier": "6e/maths/shorts/fr/decimal-calcul/eleveai-maths-6e-decimal-calcul-short-defi.mp4",
+  "poster": "6e/maths/shorts/fr/decimal-calcul/eleveai-maths-6e-decimal-calcul-short-defi.png",
+  "titre": "3,7 × 2,9 = 107,3 ? Impossible, sans poser le calcul",
+  "short": true,
+  "youtube": "B2rjuK1PNcU"
+ },
+ "6e-decimal-calcul-short-dixieme": {
+  "fichier": "6e/maths/shorts/fr/decimal-calcul/eleveai-maths-6e-decimal-calcul-short-dixieme.mp4",
+  "poster": "6e/maths/shorts/fr/decimal-calcul/eleveai-maths-6e-decimal-calcul-short-dixieme.png",
+  "titre": "0,1 × 0,1 = 0,2 ? Faux !",
+  "short": true,
+  "youtube": "Qize3OaCyH4"
+ },
+ "6e-decimal-calcul-short-partage": {
+  "fichier": "6e/maths/shorts/fr/decimal-calcul/eleveai-maths-6e-decimal-calcul-short-partage.mp4",
+  "poster": "6e/maths/shorts/fr/decimal-calcul/eleveai-maths-6e-decimal-calcul-short-partage.png",
+  "titre": "4,80 € pour 4 amis : combien pour chacun ?",
+  "short": true,
+  "youtube": "rh1ecggp2YE"
+ },
+ "6e-decimal-nombre": {
+  "fichier": "6e/maths/paysage/fr/decimal-nombre/eleveai-maths-6e-decimal-nombre.mp4",
+  "poster": "6e/maths/paysage/fr/decimal-nombre/eleveai-maths-6e-decimal-nombre.png",
+  "titre": "Tout comprendre sur les nombres décimaux — Maths 6e",
+  "short": false,
+  "youtube": "hv_ZFkFVk00"
+ },
+ "6e-decimal-nombre-short-origine": {
+  "fichier": "6e/maths/shorts/fr/decimal-nombre/eleveai-maths-6e-decimal-nombre-short-origine.mp4",
+  "poster": "6e/maths/shorts/fr/decimal-nombre/eleveai-maths-6e-decimal-nombre-short-origine.png",
+  "titre": "12 cm et un petit bout : d'où viennent les nombres décimaux ?",
+  "short": true,
+  "youtube": "TuEu0TscWSw"
+ },
+ "6e-decimal-nombre-short-zero": {
+  "fichier": "6e/maths/shorts/fr/decimal-nombre/eleveai-maths-6e-decimal-nombre-short-zero.mp4",
+  "poster": "6e/maths/shorts/fr/decimal-nombre/eleveai-maths-6e-decimal-nombre-short-zero.png",
+  "titre": "0,45 ou 0,5 : lequel est le plus grand ? (le piège)",
+  "short": true,
+  "youtube": "27goai4IrnQ"
+ },
+ "6e-demi-droite-graduee": {
+  "fichier": "6e/maths/paysage/fr/demi-droite-graduee/eleveai-maths-6e-demi-droite-graduee.mp4",
+  "poster": "6e/maths/paysage/fr/demi-droite-graduee/eleveai-maths-6e-demi-droite-graduee.png",
+  "titre": "La demi-droite graduée : lire, placer, graduer — Maths 6e",
+  "short": false,
+  "youtube": "975J99l0A8w"
+ },
+ "6e-demi-droite-short-fraction": {
+  "fichier": "6e/maths/shorts/fr/demi-droite-graduee/eleveai-maths-6e-demi-droite-short-fraction.mp4",
+  "poster": "6e/maths/shorts/fr/demi-droite-graduee/eleveai-maths-6e-demi-droite-short-fraction.png",
+  "titre": "5/4, plus petit que 1 ? Une fraction sur la droite graduée",
+  "short": true,
+  "youtube": "09qk9kgFvlI"
+ },
+ "6e-demi-droite-short-graduer": {
+  "fichier": "6e/maths/shorts/fr/demi-droite-graduee/eleveai-maths-6e-demi-droite-short-graduer.mp4",
+  "poster": "6e/maths/shorts/fr/demi-droite-graduee/eleveai-maths-6e-demi-droite-short-graduer.png",
+  "titre": "4 parts égales = 4 traits ? Graduer un segment",
+  "short": true,
+  "youtube": "vrjK4sStALk"
+ },
+ "6e-demi-droite-short-lire": {
+  "fichier": "6e/maths/shorts/fr/demi-droite-graduee/eleveai-maths-6e-demi-droite-short-lire.mp4",
+  "poster": "6e/maths/shorts/fr/demi-droite-graduee/eleveai-maths-6e-demi-droite-short-lire.png",
+  "titre": "Sur le 3e trait, c'est 3 ? Le piège de la droite graduée",
+  "short": true,
+  "youtube": "tVTsxylPvSY"
+ },
+ "6e-demi-droite-short-placer": {
+  "fichier": "6e/maths/shorts/fr/demi-droite-graduee/eleveai-maths-6e-demi-droite-short-placer.mp4",
+  "poster": "6e/maths/shorts/fr/demi-droite-graduee/eleveai-maths-6e-demi-droite-short-placer.png",
+  "titre": "Où placer 1,7 sur une droite graduée ?",
+  "short": true,
+  "youtube": "vmRelEjM4PI"
+ },
+ "6e-duree-temps-short-diagonale": {
+  "fichier": "6e/maths/shorts/fr/duree-temps/eleveai-maths-6e-duree-temps-short-diagonale.mp4",
+  "poster": "6e/maths/shorts/fr/duree-temps/eleveai-maths-6e-duree-temps-short-diagonale.png",
+  "titre": "Diagonale des Fous : départ jeudi 22 h… il arrive quand ? (le piège)",
+  "short": true,
+  "youtube": "ZvLpuAx-TBs"
+ },
+ "6e-entier-nombre": {
+  "fichier": "6e/maths/paysage/fr/entier-nombre/eleveai-maths-6e-entier-nombre.mp4",
+  "poster": "6e/maths/paysage/fr/entier-nombre/eleveai-maths-6e-entier-nombre.png",
+  "titre": "Comprendre les nombres entiers en 4 minutes — Maths 6e",
+  "short": false,
+  "youtube": "Zx0Ow1AWVI4"
+ },
+ "6e-entier-nombre-short-zero": {
+  "fichier": "6e/maths/shorts/fr/entier-nombre/eleveai-maths-6e-entier-nombre-short-zero.mp4",
+  "poster": "6e/maths/shorts/fr/entier-nombre/eleveai-maths-6e-entier-nombre-short-zero.png",
+  "titre": "Un zéro, ça ne vaut rien… alors pourquoi on ne peut pas l'enlever ?",
+  "short": true,
+  "youtube": "fiW-WXNsnFI"
+ },
+ "6e-fraction-calcul": {
+  "fichier": "6e/maths/paysage/fr/fraction-calcul/eleveai-maths-6e-fraction-calcul.mp4",
+  "poster": "6e/maths/paysage/fr/fraction-calcul/eleveai-maths-6e-fraction-calcul.png",
+  "titre": "Calculer avec les fractions — Maths 6e",
+  "short": false,
+  "youtube": "RYwm7UYg9zk"
+ },
+ "6e-fraction-calcul-short-additionner": {
+  "fichier": "6e/maths/shorts/fr/fraction-calcul/eleveai-maths-6e-fraction-calcul-short-additionner.mp4",
+  "poster": "6e/maths/shorts/fr/fraction-calcul/eleveai-maths-6e-fraction-calcul-short-additionner.png",
+  "titre": "1/2 + 1/3 = 2/5 ? Faux !",
+  "short": true,
+  "youtube": "jnTNhYXlMs8"
+ },
+ "6e-fraction-calcul-short-defi": {
+  "fichier": "6e/maths/shorts/fr/fraction-calcul/eleveai-maths-6e-fraction-calcul-short-defi.mp4",
+  "poster": "6e/maths/shorts/fr/fraction-calcul/eleveai-maths-6e-fraction-calcul-short-defi.png",
+  "titre": "Un quart, puis un sixième du gâteau : il reste quoi ?",
+  "short": true,
+  "youtube": "EVJxCPQ633Y"
+ },
+ "6e-fraction-calcul-short-multiplier": {
+  "fichier": "6e/maths/shorts/fr/fraction-calcul/eleveai-maths-6e-fraction-calcul-short-multiplier.mp4",
+  "poster": "6e/maths/shorts/fr/fraction-calcul/eleveai-maths-6e-fraction-calcul-short-multiplier.png",
+  "titre": "3 × 2/5 = 6/15 ? Faux !",
+  "short": true,
+  "youtube": "Z35rFaQ2KXE"
+ },
+ "6e-fraction-calcul-short-quantite": {
+  "fichier": "6e/maths/shorts/fr/fraction-calcul/eleveai-maths-6e-fraction-calcul-short-quantite.mp4",
+  "poster": "6e/maths/shorts/fr/fraction-calcul/eleveai-maths-6e-fraction-calcul-short-quantite.png",
+  "titre": "Les 2/3 de 18 bonbons : combien ?",
+  "short": true,
+  "youtube": "ut-oUPh3hjc"
+ },
+ "6e-proba-comparer": {
+  "fichier": "6e/maths/probabilites/02-comparer/eleveai-maths-6e-proba-comparer.mp4",
+  "poster": "6e/maths/probabilites/02-comparer/eleveai-maths-6e-proba-comparer.png",
+  "titre": "3 couleurs = 1 chance sur 3 ? FAUX ! — Comparer des probabilités — épisode 2 · Maths 6e",
+  "short": false,
+  "youtube": null
+ },
+ "6e-proba-comparer-short": {
+  "fichier": "6e/maths/probabilites/02-comparer/eleveai-maths-6e-proba-comparer-short.mp4",
+  "poster": "6e/maths/probabilites/02-comparer/eleveai-maths-6e-proba-comparer-short.png",
+  "titre": "Le rouge, 3 fois plus probable que le vert ? 🎡 — 6e #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "6e-proba-defi": {
+  "fichier": "6e/maths/probabilites/06-defis/eleveai-maths-6e-proba-defi.mp4",
+  "poster": "6e/maths/probabilites/06-defis/eleveai-maths-6e-proba-defi.png",
+  "titre": "Plus grand que 6 avec un dé ? Piège : 0 ! — Les défis — épisode 6 · Maths 6e",
+  "short": false,
+  "youtube": null
+ },
+ "6e-proba-defi-short": {
+  "fichier": "6e/maths/probabilites/06-defis/eleveai-maths-6e-proba-defi-short.mp4",
+  "poster": "6e/maths/probabilites/06-defis/eleveai-maths-6e-proba-defi-short.png",
+  "titre": "Un dé… faire plus que 6 ?! 🎲 — 6e #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "6e-proba-estimer": {
+  "fichier": "6e/maths/probabilites/04-calculer/eleveai-maths-6e-proba-estimer.mp4",
+  "poster": "6e/maths/probabilites/04-calculer/eleveai-maths-6e-proba-estimer.png",
+  "titre": "6 SUR 1 ? FAUX ! — Calculer une probabilité — épisode 4 · Maths 6e",
+  "short": false,
+  "youtube": null
+ },
+ "6e-proba-estimer-short": {
+  "fichier": "6e/maths/probabilites/04-calculer/eleveai-maths-6e-proba-estimer-short.mp4",
+  "poster": "6e/maths/probabilites/04-calculer/eleveai-maths-6e-proba-estimer-short.png",
+  "titre": "Tes chances : 6 sur 1 ? 🎲 — 6e #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "6e-proba-frequence-calculer": {
+  "fichier": "6e/maths/probabilites/07-frequence/eleveai-maths-6e-proba-frequence-calculer.mp4",
+  "poster": "6e/maths/probabilites/07-frequence/eleveai-maths-6e-proba-frequence-calculer.png",
+  "titre": "18/100 ou 100/18 ? Le mauvais sens dépasse 1 ! — La fréquence — épisode 7 · Maths 6e",
+  "short": false,
+  "youtube": null
+ },
+ "6e-proba-frequence-calculer-short": {
+  "fichier": "6e/maths/probabilites/07-frequence/eleveai-maths-6e-proba-frequence-calculer-short.mp4",
+  "poster": "6e/maths/probabilites/07-frequence/eleveai-maths-6e-proba-frequence-calculer-short.png",
+  "titre": "18 six sur 100 lancers : c'est beaucoup ? 🎲 — 6e #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "6e-proba-frequence-comparer": {
+  "fichier": "6e/maths/probabilites/08-observe-calcule/eleveai-maths-6e-proba-frequence-comparer.mp4",
+  "poster": "6e/maths/probabilites/08-observe-calcule/eleveai-maths-6e-proba-frequence-comparer.png",
+  "titre": "13 six sur 60 au lieu de 10 : le dé est truqué ? — Observé ou calculé ? — épisode 8 · Maths 6e",
+  "short": false,
+  "youtube": null
+ },
+ "6e-proba-frequence-comparer-short": {
+  "fichier": "6e/maths/probabilites/08-observe-calcule/eleveai-maths-6e-proba-frequence-comparer-short.mp4",
+  "poster": "6e/maths/probabilites/08-observe-calcule/eleveai-maths-6e-proba-frequence-comparer-short.png",
+  "titre": "6 lancers… et AUCUN 6 ? 🎲 — 6e #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "6e-proba-frequence-repeter": {
+  "fichier": "6e/maths/probabilites/09-repeter/eleveai-maths-6e-proba-frequence-repeter.mp4",
+  "poster": "6e/maths/probabilites/09-repeter/eleveai-maths-6e-proba-frequence-repeter.png",
+  "titre": "7 piles sur 10… la pièce va-t-elle rattraper ? — Répéter beaucoup — épisode 9 · Maths 6e",
+  "short": false,
+  "youtube": null
+ },
+ "6e-proba-frequence-repeter-short": {
+  "fichier": "6e/maths/probabilites/09-repeter/eleveai-maths-6e-proba-frequence-repeter-short.mp4",
+  "poster": "6e/maths/probabilites/09-repeter/eleveai-maths-6e-proba-frequence-repeter-short.png",
+  "titre": "10 lancers, 7 piles : truquée ? 🪙 — 6e #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "6e-proba-issue": {
+  "fichier": "6e/maths/probabilites/03-issues/eleveai-maths-6e-proba-issue.mp4",
+  "poster": "6e/maths/probabilites/03-issues/eleveai-maths-6e-proba-issue.png",
+  "titre": "3 couleurs… mais combien d'issues ? — Les issues — épisode 3 · Maths 6e",
+  "short": false,
+  "youtube": null
+ },
+ "6e-proba-issue-short": {
+  "fichier": "6e/maths/probabilites/03-issues/eleveai-maths-6e-proba-issue-short.mp4",
+  "poster": "6e/maths/probabilites/03-issues/eleveai-maths-6e-proba-issue-short.png",
+  "titre": "3 couleurs = 3 issues ? PIÈGE ! 🎡 — 6e #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "6e-proba-lire": {
+  "fichier": "6e/maths/probabilites/05-lire/eleveai-maths-6e-proba-lire.mp4",
+  "poster": "6e/maths/probabilites/05-lire/eleveai-maths-6e-proba-lire.png",
+  "titre": "5 gagnants, 50 perdants : 5 sur 50 ? PIÈGE ! — Lire une situation — épisode 5 · Maths 6e",
+  "short": false,
+  "youtube": null
+ },
+ "6e-proba-lire-short": {
+  "fichier": "6e/maths/probabilites/05-lire/eleveai-maths-6e-proba-lire-short.mp4",
+  "poster": "6e/maths/probabilites/05-lire/eleveai-maths-6e-proba-lire-short.png",
+  "titre": "5 sur 50… ou 5 sur 55 ? 🎟️ — 6e #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "6e-proba-vocabulaire": {
+  "fichier": "6e/maths/probabilites/01-vocabulaire/eleveai-maths-6e-proba-vocabulaire.mp4",
+  "poster": "6e/maths/probabilites/01-vocabulaire/eleveai-maths-6e-proba-vocabulaire.png",
+  "titre": "Plus que certain ? Une probabilité ne dépasse JAMAIS 1 — L'échelle de 0 à 1 — épisode 1 · Maths 6e",
+  "short": false,
+  "youtube": null
+ },
+ "6e-proba-vocabulaire-short": {
+  "fichier": "6e/maths/probabilites/01-vocabulaire/eleveai-maths-6e-proba-vocabulaire-short.mp4",
+  "poster": "6e/maths/probabilites/01-vocabulaire/eleveai-maths-6e-proba-vocabulaire-short.png",
+  "titre": "Que des billes rouges : tirer une rouge, c'est combien ? 🔴 — 6e #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "974-antecedent": {
+  "fichier": "974/maths/shorts/fr/temperature-altitude/eleveai-maths-974-temperature-altitude-short-antecedent.mp4",
+  "poster": null,
+  "titre": "À quelle altitude fait-il 20 °C à La Réunion ?",
+  "short": true,
+  "youtube": null
+ },
+ "974-diagonale-trajet-2026": {
+  "fichier": "974/eleveai-974-diagonale-trajet-2026.mp4",
+  "poster": null,
+  "titre": "974 diagonale trajet 2026",
+  "short": false,
+  "youtube": null
+ },
+ "974-eau": {
+  "fichier": "974/maths/paysage/fr/eau/eleveai-maths-974-eau-paysage.mp4",
+  "poster": "974/maths/paysage/fr/eau/eleveai-maths-974-eau-paysage.png",
+  "titre": "Pourquoi la rivière est à sec à La Réunion ? Les maths de l'eau — 5e",
+  "short": false,
+  "youtube": "S3sz_p8PC3s"
+ },
+ "974-eau-short-millimetre": {
+  "fichier": "974/maths/shorts/fr/eau/eleveai-maths-974-eau-short-millimetre.mp4",
+  "poster": "974/maths/shorts/fr/eau/eleveai-maths-974-eau-short-millimetre.png",
+  "titre": "30 mm de pluie : c'est beaucoup ou pas ?",
+  "short": true,
+  "youtube": "gfl5B7IyRGA"
+ },
+ "974-fait": {
+  "fichier": "974/maths/shorts/fr/temperature-altitude/eleveai-maths-974-temperature-altitude.mp4",
+  "poster": null,
+  "titre": "26° à Saint-Gilles, 11° au Maïdo : pourquoi ?",
+  "short": true,
+  "youtube": null
+ },
+ "974-pourquoi": {
+  "fichier": "974/maths/shorts/fr/temperature-altitude/eleveai-maths-974-temperature-altitude-short-pourquoi.mp4",
+  "poster": null,
+  "titre": "Plus près du soleil, et pourtant plus froid : pourquoi ?",
+  "short": true,
+  "youtube": null
+ },
+ "974-rond-point": {
+  "fichier": "974/maths/paysage/fr/rond-point/eleveai-maths-974-rond-point-paysage.mp4",
+  "poster": "974/maths/paysage/fr/rond-point/eleveai-maths-974-rond-point-paysage.png",
+  "titre": "Pas d'accident, pas de feu rouge… alors pourquoi ce bouchon ? Les maths des embouteillages — Terminale",
+  "short": false,
+  "youtube": "EkOPAzejLlA"
+ },
+ "974-rond-point-short-hasard": {
+  "fichier": "974/maths/shorts/fr/rond-point/eleveai-maths-974-rond-point-short-hasard.mp4",
+  "poster": "974/maths/shorts/fr/rond-point/eleveai-maths-974-rond-point-short-hasard.png",
+  "titre": "Pas d'accident, pas de feu rouge : pourquoi ce bouchon ?",
+  "short": true,
+  "youtube": "OccmW_y2jd0"
+ },
+ "974-temperature-altitude": {
+  "fichier": "974/maths/paysage/fr/temperature-altitude/eleveai-maths-974-temperature-altitude-paysage.mp4",
+  "poster": null,
+  "titre": "Pourquoi il fait 26° à Saint-Gilles et 11° au Maïdo — Les maths en vrai",
+  "short": false,
+  "youtube": null
+ },
+ "annonce-probabilites": {
+  "fichier": "annonce/probabilites/eleveai-annonce-probabilites.mp4",
+  "poster": "annonce/probabilites/eleveai-annonce-probabilites.png",
+  "titre": "Les probabilités, de l'école au bac : plus de 300 vidéos arrivent 🎲 — EleveAI",
+  "short": false,
+  "youtube": "unumlzio13U"
+ },
+ "annonce-probabilites-instagram": {
+  "fichier": "annonce/probabilites/eleveai-annonce-probabilites-instagram.mp4",
+  "poster": null,
+  "titre": "annonce probabilites instagram",
+  "short": false,
+  "youtube": null
+ },
+ "annonce-probabilites-short": {
+  "fichier": "annonce/probabilites/eleveai-annonce-probabilites-short.mp4",
+  "poster": "annonce/probabilites/eleveai-annonce-probabilites-short.png",
+  "titre": "Probabilités : quelle classe en premier ? Donne ton avis ! 🎲 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "arithmetique": {
+  "fichier": "seconde/maths/paysage/fr/arithmetique/eleveai-maths-seconde-arithmetique.mp4",
+  "poster": "seconde/maths/paysage/fr/arithmetique/eleveai-maths-seconde-arithmetique.png",
+  "titre": "Maths seconde · Multiples, diviseurs et nombres premiers — EleveAI",
+  "short": false,
+  "youtube": null
+ },
+ "bases-atelier-video": {
+  "fichier": "bases/maths/paysage/fr/atelier-video/eleveai-maths-bases-atelier-video.mp4",
+  "poster": "bases/maths/paysage/fr/atelier-video/eleveai-maths-bases-atelier-video.png",
+  "titre": "Crée ta vidéo de maths : tu écris en français, elle s'anime toute seule",
+  "short": false,
+  "youtube": "2BLBr7db8kw"
+ },
+ "bases-atelier-video-short": {
+  "fichier": "bases/maths/shorts/fr/atelier-video/eleveai-maths-bases-atelier-video-short.mp4",
+  "poster": "bases/maths/shorts/fr/atelier-video/eleveai-maths-bases-atelier-video-short.png",
+  "titre": "Et si c'était toi qui faisais la vidéo de maths ? #shorts",
+  "short": true,
+  "youtube": "HceXG688Jf4"
+ },
+ "bases-decomposition": {
+  "fichier": "bases/maths/paysage/fr/decomposition/eleveai-maths-bases-decomposition.mp4",
+  "poster": "bases/maths/paysage/fr/decomposition/eleveai-maths-bases-decomposition.png",
+  "titre": "Décomposer en facteurs premiers : les nombres premiers, briques de tous les nombres",
+  "short": false,
+  "youtube": "EVkMNamCUAw"
+ },
+ "bases-decomposition-short": {
+  "fichier": "bases/maths/shorts/fr/decomposition/eleveai-maths-bases-decomposition-short.mp4",
+  "poster": "bases/maths/shorts/fr/decomposition/eleveai-maths-bases-decomposition-short.png",
+  "titre": "60 billes cassées jusqu'au bout : 2 × 2 × 3 × 5 #shorts",
+  "short": true,
+  "youtube": "qvtaPZl1SPE"
+ },
+ "bases-fonctions": {
+  "fichier": "maths-en-vrai/maths/paysage/fr/fonctions/eleveai-maths-en-vrai-fonctions.mp4",
+  "poster": null,
+  "titre": "Les fonctions, ça sert à rien… sauf à prévoir",
+  "short": false,
+  "youtube": "y5Gp1bltuaw"
+ },
+ "bases-fonctions-combien": {
+  "fichier": "maths-en-vrai/maths/shorts/fr/fonctions/eleveai-maths-en-vrai-fonctions-short-combien.mp4",
+  "poster": null,
+  "titre": "100 vues aujourd'hui, 102 400 dans 10 jours",
+  "short": true,
+  "youtube": null
+ },
+ "bases-fonctions-jusquou": {
+  "fichier": "maths-en-vrai/maths/shorts/fr/fonctions/eleveai-maths-en-vrai-fonctions-short-jusquou.mp4",
+  "poster": null,
+  "titre": "Jamais zéro : une part de gâteau partagée à l'infini",
+  "short": true,
+  "youtube": null
+ },
+ "bases-fonctions-quand": {
+  "fichier": "maths-en-vrai/maths/shorts/fr/fonctions/eleveai-maths-en-vrai-fonctions-short-quand.mp4",
+  "poster": null,
+  "titre": "Le million arrive 3 jours après les 100 000",
+  "short": true,
+  "youtube": null
+ },
+ "bases-fractions": {
+  "fichier": "bases/maths/paysage/fr/fractions/eleveai-maths-bases-fractions.mp4",
+  "poster": null,
+  "titre": "Les fractions : la leçon complète pour ne plus se tromper",
+  "short": false,
+  "youtube": null
+ },
+ "bases-fractions-additionner": {
+  "fichier": "bases/maths/shorts/fr/fractions/eleveai-maths-bases-fractions-short-additionner.mp4",
+  "poster": null,
+  "titre": "1/2 + 1/3 ne fait pas 2/5 — voici pourquoi",
+  "short": true,
+  "youtube": null
+ },
+ "bases-fractions-definition": {
+  "fichier": "bases/maths/shorts/fr/fractions/eleveai-maths-bases-fractions-short-definition.mp4",
+  "poster": null,
+  "titre": "C'est quoi une fraction ? (il y a deux réponses)",
+  "short": true,
+  "youtube": null
+ },
+ "bases-fractions-ecritures": {
+  "fichier": "bases/maths/shorts/fr/fractions/eleveai-maths-bases-fractions-short-ecritures.mp4",
+  "poster": null,
+  "titre": "1/5 = 0,2 = 20 % : le même nombre, trois écritures",
+  "short": true,
+  "youtube": null
+ },
+ "bases-fractions-egales": {
+  "fichier": "bases/maths/shorts/fr/fractions/eleveai-maths-bases-fractions-short-egales.mp4",
+  "poster": null,
+  "titre": "3/3, 4/4, 100/100 : pourquoi ça fait toujours 1",
+  "short": true,
+  "youtube": null
+ },
+ "bases-fractions-multiplier": {
+  "fichier": "bases/maths/shorts/fr/fractions/eleveai-maths-bases-fractions-short-multiplier.mp4",
+  "poster": null,
+  "titre": "Multiplier deux fractions : le calcul le plus facile",
+  "short": true,
+  "youtube": null
+ },
+ "bases-fractions-ordre": {
+  "fichier": "bases/maths/shorts/fr/fractions/eleveai-maths-bases-fractions-short-ordre.mp4",
+  "poster": null,
+  "titre": "Cette question du brevet piège presque tout le monde",
+  "short": true,
+  "youtube": null
+ },
+ "bases-fractions-simplifier": {
+  "fichier": "bases/maths/shorts/fr/fractions/eleveai-maths-bases-fractions-short-simplifier.mp4",
+  "poster": null,
+  "titre": "Comment simplifier une fraction (et le piège à éviter)",
+  "short": true,
+  "youtube": null
+ },
+ "bases-fractions-zero": {
+  "fichier": "bases/maths/shorts/fr/fractions/eleveai-maths-bases-fractions-short-zero.mp4",
+  "poster": null,
+  "titre": "Pourquoi on ne divise JAMAIS par zéro",
+  "short": true,
+  "youtube": null
+ },
+ "bases-multiplication-division": {
+  "fichier": "bases/maths/paysage/fr/multiplication-division/eleveai-maths-bases-multiplication-division.mp4",
+  "poster": "bases/maths/paysage/fr/multiplication-division/eleveai-maths-bases-multiplication-division.png",
+  "titre": "Une multiplication, deux divisions : diviser avec ses tables de multiplication",
+  "short": false,
+  "youtube": "3ISJ48NHGd8"
+ },
+ "bases-multiplication-division-short-56": {
+  "fichier": "bases/maths/shorts/fr/multiplication-division/eleveai-maths-bases-multiplication-division-short-56.mp4",
+  "poster": "bases/maths/shorts/fr/multiplication-division/eleveai-maths-bases-multiplication-division-short-56.png",
+  "titre": "56 : 8 sans poser la division ? Avec la table de 8 ! #shorts",
+  "short": true,
+  "youtube": "98txKAdPndM"
+ },
+ "bases-multiplication-division-short-billes": {
+  "fichier": "bases/maths/shorts/fr/multiplication-division/eleveai-maths-bases-multiplication-division-short-billes.mp4",
+  "poster": "bases/maths/shorts/fr/multiplication-division/eleveai-maths-bases-multiplication-division-short-billes.png",
+  "titre": "3 × 4 = 12… et deux divisions offertes ! #shorts",
+  "short": true,
+  "youtube": "735cIJ0QQCo"
+ },
+ "bases-multiplication-division-short-piege": {
+  "fichier": "bases/maths/shorts/fr/multiplication-division/eleveai-maths-bases-multiplication-division-short-piege.mp4",
+  "poster": "bases/maths/shorts/fr/multiplication-division/eleveai-maths-bases-multiplication-division-short-piege.png",
+  "titre": "4 : 12 = 3 ? Le piège de la division #shorts",
+  "short": true,
+  "youtube": "zNpEF6UJKZY"
+ },
+ "bases-nombres-premiers": {
+  "fichier": "bases/maths/paysage/fr/nombres-premiers/eleveai-maths-bases-nombres-premiers.mp4",
+  "poster": "bases/maths/paysage/fr/nombres-premiers/eleveai-maths-bases-nombres-premiers.png",
+  "titre": "Pourquoi 13 ne se range pas : les nombres premiers avec des billes",
+  "short": false,
+  "youtube": "0SMk_9elRFI"
+ },
+ "bases-nombres-premiers-short": {
+  "fichier": "bases/maths/shorts/fr/nombres-premiers/eleveai-maths-bases-nombres-premiers-short.mp4",
+  "poster": "bases/maths/shorts/fr/nombres-premiers/eleveai-maths-bases-nombres-premiers-short.png",
+  "titre": "Pourquoi 13 billes ne se rangent pas ? #shorts",
+  "short": true,
+  "youtube": "n8ArtzkknJ8"
+ },
+ "bases-nombres-premiers-short-memoire": {
+  "fichier": "bases/maths/shorts/fr/nombres-premiers/eleveai-maths-bases-nombres-premiers-short-memoire.mp4",
+  "poster": "bases/maths/shorts/fr/nombres-premiers/eleveai-maths-bases-nombres-premiers-short-memoire.png",
+  "titre": "Défi mémoire : retiens les nombres premiers en 15 secondes ! #shorts",
+  "short": true,
+  "youtube": "fjJygJIt23k"
+ },
+ "bases-notations-geometrie": {
+  "fichier": "bases/maths/paysage/fr/notations-geometrie/eleveai-maths-bases-notations-geometrie.mp4",
+  "poster": "bases/maths/paysage/fr/notations-geometrie/eleveai-maths-bases-notations-geometrie.png",
+  "titre": "Les notations en géométrie : (AB), [AB), [AB] et les autres",
+  "short": false,
+  "youtube": "sXMWOSLZ8Wo"
+ },
+ "bases-notations-geometrie-short": {
+  "fichier": "bases/maths/shorts/fr/notations-geometrie/eleveai-maths-bases-notations-geometrie-short.mp4",
+  "poster": "bases/maths/shorts/fr/notations-geometrie/eleveai-maths-bases-notations-geometrie-short.png",
+  "titre": "(AB), [AB), [AB] : mêmes lettres, 3 dessins différents",
+  "short": true,
+  "youtube": null
+ },
+ "bases-pourcentages-calcul-mental": {
+  "fichier": "bases/maths/paysage/fr/pourcentages-calcul-mental/eleveai-maths-bases-pourcentages-calcul-mental.mp4",
+  "poster": "bases/maths/paysage/fr/pourcentages-calcul-mental/eleveai-maths-bases-pourcentages-calcul-mental.png",
+  "titre": "Calculer un pourcentage de tête : la méthode des 10 %",
+  "short": false,
+  "youtube": "CVswyp89x84"
+ },
+ "bases-pourcentages-calcul-mental-short": {
+  "fichier": "bases/maths/shorts/fr/pourcentages/eleveai-maths-bases-pourcentages-short-calcul-mental.mp4",
+  "poster": "bases/maths/shorts/fr/pourcentages/eleveai-maths-bases-pourcentages-short-calcul-mental.png",
+  "titre": "10 %, 20 %, 30 % de tête : le truc que tout le monde devrait connaître",
+  "short": true,
+  "youtube": "dF4coGok0uQ"
+ },
+ "bases-pourcentages-tablette": {
+  "fichier": "bases/maths/shorts/fr/pourcentages/eleveai-maths-bases-pourcentages-short-tablette.mp4",
+  "poster": "bases/maths/shorts/fr/pourcentages/eleveai-maths-bases-pourcentages-short-tablette.png",
+  "titre": "+20 % puis −20 % : tu n'es PAS revenu au départ",
+  "short": true,
+  "youtube": "It1VgxU9n78"
+ },
+ "bases-symboles-notations": {
+  "fichier": "bases/maths/paysage/fr/symboles-notations/eleveai-maths-bases-symboles-notations.mp4",
+  "poster": "bases/maths/paysage/fr/symboles-notations/eleveai-maths-bases-symboles-notations.png",
+  "titre": "Symboles et notations en maths : ∀, ∃, ∈, ⇒, Σ… les lire comme une phrase",
+  "short": false,
+  "youtube": "8hfB2Qj3TP8"
+ },
+ "bases-symboles-short-lettres": {
+  "fichier": "bases/maths/shorts/fr/symboles-notations/eleveai-maths-bases-symboles-short-lettres.mp4",
+  "poster": "bases/maths/shorts/fr/symboles-notations/eleveai-maths-bases-symboles-short-lettres.png",
+  "titre": "∀ et ∃ : pourquoi les maths écrivent des lettres à l'envers ?",
+  "short": true,
+  "youtube": "-0VRu3pL7Ak"
+ },
+ "bases-symboles-short-ligne": {
+  "fichier": "bases/maths/shorts/fr/symboles-notations/eleveai-maths-bases-symboles-short-ligne.mp4",
+  "poster": "bases/maths/shorts/fr/symboles-notations/eleveai-maths-bases-symboles-short-ligne.png",
+  "titre": "∀ n ∈ ℕ, Σ k = n(n+1)/2 : cette ligne te fait peur ?",
+  "short": true,
+  "youtube": "m3fhwUzgNgw"
+ },
+ "bases-symboles-short-reciproque": {
+  "fichier": "bases/maths/shorts/fr/symboles-notations/eleveai-maths-bases-symboles-short-reciproque.mp4",
+  "poster": "bases/maths/shorts/fr/symboles-notations/eleveai-maths-bases-symboles-short-reciproque.png",
+  "titre": "x = 3 ⇒ x² = 9… et dans l'autre sens ? Le piège de la flèche",
+  "short": true,
+  "youtube": "_-GyjUG7noI"
+ },
+ "cm1-proba-comparer": {
+  "fichier": "cm1/maths/probabilites/03-comparer/eleveai-maths-cm1-proba-comparer.mp4",
+  "poster": "cm1/maths/probabilites/03-comparer/eleveai-maths-cm1-proba-comparer.png",
+  "titre": "5 fraises, c'est plus que 2… et pourtant tu perds ! — Comparer des chances — épisode 3 · Maths CM1",
+  "short": false,
+  "youtube": null
+ },
+ "cm1-proba-comparer-short": {
+  "fichier": "cm1/maths/probabilites/03-comparer/eleveai-maths-cm1-proba-comparer-short.mp4",
+  "poster": "cm1/maths/probabilites/03-comparer/eleveai-maths-cm1-proba-comparer-short.png",
+  "titre": "5 fraises ou 2 ? Le piège du grand sac 🍓 — CM1 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "cm1-proba-defi": {
+  "fichier": "cm1/maths/probabilites/05-defis/eleveai-maths-cm1-proba-defi.mp4",
+  "poster": "cm1/maths/probabilites/05-defis/eleveai-maths-cm1-proba-defi.png",
+  "titre": "1 rouge sur 4 parts… combien pour faire jeu égal ? — Le grand défi — épisode 5 · Maths CM1",
+  "short": false,
+  "youtube": null
+ },
+ "cm1-proba-defi-short": {
+  "fichier": "cm1/maths/probabilites/05-defis/eleveai-maths-cm1-proba-defi-short.mp4",
+  "poster": "cm1/maths/probabilites/05-defis/eleveai-maths-cm1-proba-defi-short.png",
+  "titre": "1 SEULE ROUGE : combien en faut-il ? 🎯 — CM1 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "cm1-proba-hasard": {
+  "fichier": "cm1/maths/probabilites/02-hasard/eleveai-maths-cm1-proba-hasard.mp4",
+  "poster": "cm1/maths/probabilites/02-hasard/eleveai-maths-cm1-proba-hasard.png",
+  "titre": "6, 6, 6… encore un 6 ? — Reconnaître le hasard — épisode 2 · Maths CM1",
+  "short": false,
+  "youtube": null
+ },
+ "cm1-proba-hasard-short": {
+  "fichier": "cm1/maths/probabilites/02-hasard/eleveai-maths-cm1-proba-hasard-short.mp4",
+  "poster": "cm1/maths/probabilites/02-hasard/eleveai-maths-cm1-proba-hasard-short.png",
+  "titre": "6… 6… 6 ! Et le prochain lancer ? 🎲 — CM1 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "cm1-proba-roue": {
+  "fichier": "cm1/maths/probabilites/04-roue-de-sac/eleveai-maths-cm1-proba-roue.mp4",
+  "poster": "cm1/maths/probabilites/04-roue-de-sac/eleveai-maths-cm1-proba-roue.png",
+  "titre": "3 couleurs, mais 4 parts : le bleu, c'est 1 chance sur 3 ? — Roue, dé, sac — épisode 4 · Maths CM1",
+  "short": false,
+  "youtube": null
+ },
+ "cm1-proba-roue-short": {
+  "fichier": "cm1/maths/probabilites/04-roue-de-sac/eleveai-maths-cm1-proba-roue-short.mp4",
+  "poster": "cm1/maths/probabilites/04-roue-de-sac/eleveai-maths-cm1-proba-roue-short.png",
+  "titre": "3 couleurs… donc 1 chance sur 3 ? NON ! 🎡 — CM1 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "cm1-proba-vocabulaire": {
+  "fichier": "cm1/maths/probabilites/01-vocabulaire/eleveai-maths-cm1-proba-vocabulaire.mp4",
+  "poster": "cm1/maths/probabilites/01-vocabulaire/eleveai-maths-cm1-proba-vocabulaire.png",
+  "titre": "1 seule bille bleue : impossible ? — Certain, possible, impossible — épisode 1 · Maths CM1",
+  "short": false,
+  "youtube": null
+ },
+ "cm1-proba-vocabulaire-short": {
+  "fichier": "cm1/maths/probabilites/01-vocabulaire/eleveai-maths-cm1-proba-vocabulaire-short.mp4",
+  "poster": "cm1/maths/probabilites/01-vocabulaire/eleveai-maths-cm1-proba-vocabulaire-short.png",
+  "titre": "Les yeux fermés : quelle bille ? 🎱 — CM1 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "cm2-proba-comparer": {
+  "fichier": "cm2/maths/probabilites/03-comparer/eleveai-maths-cm2-proba-comparer.mp4",
+  "poster": "cm2/maths/probabilites/03-comparer/eleveai-maths-cm2-proba-comparer.png",
+  "titre": "4 gagnants, c'est plus que 2… PIÈGE ! — Comparer des chances — épisode 3 · Maths CM2",
+  "short": false,
+  "youtube": null
+ },
+ "cm2-proba-comparer-short": {
+  "fichier": "cm2/maths/probabilites/03-comparer/eleveai-maths-cm2-proba-comparer-short.mp4",
+  "poster": "cm2/maths/probabilites/03-comparer/eleveai-maths-cm2-proba-comparer-short.png",
+  "titre": "4 gagnants ou 2 ? Tu joues où ? 🎟️ — CM2 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "cm2-proba-defi": {
+  "fichier": "cm2/maths/probabilites/05-defis/eleveai-maths-cm2-proba-defi.mp4",
+  "poster": "cm2/maths/probabilites/05-defis/eleveai-maths-cm2-proba-defi.png",
+  "titre": "2 sur 6 ou 3 sur 12 : lequel gagne le plus ? — Le grand défi — épisode 5 · Maths CM2",
+  "short": false,
+  "youtube": null
+ },
+ "cm2-proba-defi-short": {
+  "fichier": "cm2/maths/probabilites/05-defis/eleveai-maths-cm2-proba-defi-short.mp4",
+  "poster": "cm2/maths/probabilites/05-defis/eleveai-maths-cm2-proba-defi-short.png",
+  "titre": "4 noires, 6 vertes : combien en ajouter ? 🎱 — CM2 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "cm2-proba-hasard": {
+  "fichier": "cm2/maths/probabilites/02-hasard/eleveai-maths-cm2-proba-hasard.mp4",
+  "poster": "cm2/maths/probabilites/02-hasard/eleveai-maths-cm2-proba-hasard.png",
+  "titre": "Pile 4 fois : face, plus sûr ? — Reconnaître le hasard — épisode 2 · Maths CM2",
+  "short": false,
+  "youtube": null
+ },
+ "cm2-proba-hasard-short": {
+  "fichier": "cm2/maths/probabilites/02-hasard/eleveai-maths-cm2-proba-hasard-short.mp4",
+  "poster": "cm2/maths/probabilites/02-hasard/eleveai-maths-cm2-proba-hasard-short.png",
+  "titre": "10 piles de suite : tu paries sur quoi ? 🪙 — CM2 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "cm2-proba-roue": {
+  "fichier": "cm2/maths/probabilites/04-roue-de-sac/eleveai-maths-cm2-proba-roue.mp4",
+  "poster": "cm2/maths/probabilites/04-roue-de-sac/eleveai-maths-cm2-proba-roue.png",
+  "titre": "Ne pas tomber sur le bleu : 8 − 4, pas 4 sur 4 ! — Roue, dé, sac — épisode 4 · Maths CM2",
+  "short": false,
+  "youtube": null
+ },
+ "cm2-proba-roue-short": {
+  "fichier": "cm2/maths/probabilites/04-roue-de-sac/eleveai-maths-cm2-proba-roue-short.mp4",
+  "poster": "cm2/maths/probabilites/04-roue-de-sac/eleveai-maths-cm2-proba-roue-short.png",
+  "titre": "8 parts, 4 bleues… 1 chance sur 2 ? 🎡 — CM2 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "cm2-proba-vocabulaire": {
+  "fichier": "cm2/maths/probabilites/01-vocabulaire/eleveai-maths-cm2-proba-vocabulaire.mp4",
+  "poster": "cm2/maths/probabilites/01-vocabulaire/eleveai-maths-cm2-proba-vocabulaire.png",
+  "titre": "3 chances sur 6… ou sur 3 ? — Certain, possible, impossible — épisode 1 · Maths CM2",
+  "short": false,
+  "youtube": null
+ },
+ "cm2-proba-vocabulaire-short": {
+  "fichier": "cm2/maths/probabilites/01-vocabulaire/eleveai-maths-cm2-proba-vocabulaire-short.mp4",
+  "poster": "cm2/maths/probabilites/01-vocabulaire/eleveai-maths-cm2-proba-vocabulaire-short.png",
+  "titre": "Faire 6 : tu as combien de chances ? 🎲 — CM2 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "cp-famille-coccinelle": {
+  "fichier": "cp/maths/shorts/fr/eleveai-maths-cp-short-famille-coccinelle.mp4",
+  "poster": "cp/maths/shorts/fr/vignette-short-eleveai-maths-cp-short-famille-coccinelle.png",
+  "titre": "Il en manque combien ? 🐞 La famille Coccinelle #Shorts",
+  "short": true,
+  "youtube": "WnkU0_-Lj8U"
+ },
+ "developpement-factorisation": {
+  "fichier": "seconde/maths/paysage/fr/developpement-factorisation/eleveai-maths-seconde-developpement-factorisation.mp4",
+  "poster": "seconde/maths/paysage/fr/developpement-factorisation/eleveai-maths-seconde-developpement-factorisation.png",
+  "titre": "Maths seconde · Développer et factoriser — EleveAI",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-a-left-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-a/eleveai-english-cursive-letter-a-left-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter a left paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-a-left-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-a/eleveai-english-cursive-letter-a-left-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter a left portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-a-right-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-a/eleveai-english-cursive-letter-a-right-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter a right paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-a-right-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-a/eleveai-english-cursive-letter-a-right-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter a right portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-c-left-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-c/eleveai-english-cursive-letter-c-left-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter c left paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-c-left-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-c/eleveai-english-cursive-letter-c-left-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter c left portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-c-right-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-c/eleveai-english-cursive-letter-c-right-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter c right paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-c-right-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-c/eleveai-english-cursive-letter-c-right-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter c right portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-d-left-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-d/eleveai-english-cursive-letter-d-left-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter d left paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-d-left-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-d/eleveai-english-cursive-letter-d-left-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter d left portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-d-right-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-d/eleveai-english-cursive-letter-d-right-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter d right paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-d-right-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-d/eleveai-english-cursive-letter-d-right-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter d right portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-e-left-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-e/eleveai-english-cursive-letter-e-left-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter e left paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-e-left-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-e/eleveai-english-cursive-letter-e-left-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter e left portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-e-right-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-e/eleveai-english-cursive-letter-e-right-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter e right paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-e-right-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-e/eleveai-english-cursive-letter-e-right-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter e right portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-f-left-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-f/eleveai-english-cursive-letter-f-left-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter f left paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-f-left-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-f/eleveai-english-cursive-letter-f-left-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter f left portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-f-right-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-f/eleveai-english-cursive-letter-f-right-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter f right paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-f-right-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-f/eleveai-english-cursive-letter-f-right-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter f right portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-g-left-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-g/eleveai-english-cursive-letter-g-left-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter g left paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-g-left-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-g/eleveai-english-cursive-letter-g-left-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter g left portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-g-right-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-g/eleveai-english-cursive-letter-g-right-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter g right paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-g-right-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-g/eleveai-english-cursive-letter-g-right-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter g right portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-h-left-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-h/eleveai-english-cursive-letter-h-left-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter h left paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-h-left-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-h/eleveai-english-cursive-letter-h-left-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter h left portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-h-right-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-h/eleveai-english-cursive-letter-h-right-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter h right paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-h-right-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-h/eleveai-english-cursive-letter-h-right-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter h right portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-i-left-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-i/eleveai-english-cursive-letter-i-left-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter i left paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-i-left-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-i/eleveai-english-cursive-letter-i-left-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter i left portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-i-right-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-i/eleveai-english-cursive-letter-i-right-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter i right paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-i-right-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-i/eleveai-english-cursive-letter-i-right-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter i right portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-k-left-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-k/eleveai-english-cursive-letter-k-left-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter k left paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-k-left-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-k/eleveai-english-cursive-letter-k-left-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter k left portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-k-right-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-k/eleveai-english-cursive-letter-k-right-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter k right paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-k-right-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-k/eleveai-english-cursive-letter-k-right-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter k right portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-l-left-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-l/eleveai-english-cursive-letter-l-left-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter l left paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-l-left-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-l/eleveai-english-cursive-letter-l-left-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter l left portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-l-right-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-l/eleveai-english-cursive-letter-l-right-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter l right paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-l-right-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-l/eleveai-english-cursive-letter-l-right-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter l right portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-m-left-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-m/eleveai-english-cursive-letter-m-left-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter m left paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-m-left-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-m/eleveai-english-cursive-letter-m-left-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter m left portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-m-right-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-m/eleveai-english-cursive-letter-m-right-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter m right paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-m-right-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-m/eleveai-english-cursive-letter-m-right-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter m right portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-n-left-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-n/eleveai-english-cursive-letter-n-left-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter n left paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-n-left-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-n/eleveai-english-cursive-letter-n-left-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter n left portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-n-right-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-n/eleveai-english-cursive-letter-n-right-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter n right paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-n-right-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-n/eleveai-english-cursive-letter-n-right-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter n right portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-o-left-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-o/eleveai-english-cursive-letter-o-left-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter o left paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-o-left-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-o/eleveai-english-cursive-letter-o-left-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter o left portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-o-right-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-o/eleveai-english-cursive-letter-o-right-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter o right paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-o-right-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-o/eleveai-english-cursive-letter-o-right-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter o right portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-p-left-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-p/eleveai-english-cursive-letter-p-left-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter p left paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-p-left-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-p/eleveai-english-cursive-letter-p-left-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter p left portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-p-right-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-p/eleveai-english-cursive-letter-p-right-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter p right paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-p-right-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-p/eleveai-english-cursive-letter-p-right-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter p right portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-q-left-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-q/eleveai-english-cursive-letter-q-left-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter q left paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-q-left-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-q/eleveai-english-cursive-letter-q-left-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter q left portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-q-right-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-q/eleveai-english-cursive-letter-q-right-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter q right paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-q-right-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-q/eleveai-english-cursive-letter-q-right-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter q right portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-r-left-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-r/eleveai-english-cursive-letter-r-left-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter r left paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-r-left-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-r/eleveai-english-cursive-letter-r-left-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter r left portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-r-right-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-r/eleveai-english-cursive-letter-r-right-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter r right paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-r-right-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-r/eleveai-english-cursive-letter-r-right-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter r right portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-s-left-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-s/eleveai-english-cursive-letter-s-left-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter s left paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-s-left-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-s/eleveai-english-cursive-letter-s-left-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter s left portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-s-right-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-s/eleveai-english-cursive-letter-s-right-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter s right paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-s-right-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-s/eleveai-english-cursive-letter-s-right-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter s right portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-t-left-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-t/eleveai-english-cursive-letter-t-left-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter t left paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-t-left-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-t/eleveai-english-cursive-letter-t-left-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter t left portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-t-right-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-t/eleveai-english-cursive-letter-t-right-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter t right paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-t-right-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-t/eleveai-english-cursive-letter-t-right-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter t right portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-u-left-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-u/eleveai-english-cursive-letter-u-left-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter u left portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-u-right-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-u/eleveai-english-cursive-letter-u-right-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter u right portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-y-left-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-y/eleveai-english-cursive-letter-y-left-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter y left paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-y-left-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-y/eleveai-english-cursive-letter-y-left-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter y left portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-cursive-letter-y-right-paysage": {
+  "fichier": "cp/francais/paysage/gb/letter-y/eleveai-english-cursive-letter-y-right-paysage.mp4",
+  "poster": null,
+  "titre": "english cursive letter y right paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-cursive-letter-y-right-portrait": {
+  "fichier": "cp/francais/shorts/gb/letter-y/eleveai-english-cursive-letter-y-right-portrait.mp4",
+  "poster": null,
+  "titre": "english cursive letter y right portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-number-5-left-paysage": {
+  "fichier": "cp/maths/paysage/gb/number-5/eleveai-english-number-5-left-paysage.mp4",
+  "poster": null,
+  "titre": "english number 5 left paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-number-5-left-portrait": {
+  "fichier": "cp/maths/shorts/gb/number-5/eleveai-english-number-5-left-portrait.mp4",
+  "poster": null,
+  "titre": "english number 5 left portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-number-5-right-paysage": {
+  "fichier": "cp/maths/paysage/gb/number-5/eleveai-english-number-5-right-paysage.mp4",
+  "poster": null,
+  "titre": "english number 5 right paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-number-5-right-portrait": {
+  "fichier": "cp/maths/shorts/gb/number-5/eleveai-english-number-5-right-portrait.mp4",
+  "poster": null,
+  "titre": "english number 5 right portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-number-6-left-paysage": {
+  "fichier": "cp/maths/paysage/gb/number-6/eleveai-english-number-6-left-paysage.mp4",
+  "poster": null,
+  "titre": "english number 6 left paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-number-6-left-portrait": {
+  "fichier": "cp/maths/shorts/gb/number-6/eleveai-english-number-6-left-portrait.mp4",
+  "poster": null,
+  "titre": "english number 6 left portrait",
+  "short": true,
+  "youtube": null
+ },
+ "english-number-6-right-paysage": {
+  "fichier": "cp/maths/paysage/gb/number-6/eleveai-english-number-6-right-paysage.mp4",
+  "poster": null,
+  "titre": "english number 6 right paysage",
+  "short": false,
+  "youtube": null
+ },
+ "english-number-6-right-portrait": {
+  "fichier": "cp/maths/shorts/gb/number-6/eleveai-english-number-6-right-portrait.mp4",
+  "poster": null,
+  "titre": "english number 6 right portrait",
+  "short": true,
+  "youtube": null
+ },
+ "eq-balance": {
+  "fichier": "seconde/maths/shorts/fr/equations-inequations/eleveai-maths-seconde-equations-inequations-short-balance.mp4",
+  "poster": null,
+  "titre": "Résoudre une équation du premier degré en 3 gestes",
+  "short": true,
+  "youtube": null
+ },
+ "eq-probleme": {
+  "fichier": "seconde/maths/shorts/fr/equations-inequations/eleveai-maths-seconde-equations-inequations-short-probleme.mp4",
+  "poster": null,
+  "titre": "Mettre un problème en équation : la méthode en 4 étapes",
+  "short": true,
+  "youtube": null
+ },
+ "eq-retournement": {
+  "fichier": "seconde/maths/shorts/fr/equations-inequations/eleveai-maths-seconde-equations-inequations-short-retournement.mp4",
+  "poster": null,
+  "titre": "Inéquation : pourquoi le signe se retourne",
+  "short": true,
+  "youtube": null
+ },
+ "equations-inequations": {
+  "fichier": "seconde/maths/paysage/fr/equations-inequations/eleveai-maths-seconde-equations-inequations.mp4",
+  "poster": "seconde/maths/paysage/fr/equations-inequations/eleveai-maths-seconde-equations-inequations.png",
+  "titre": "Maths seconde · Équations et inéquations — EleveAI",
+  "short": false,
+  "youtube": null
+ },
+ "essence-taxes-litre": {
+  "fichier": "actu/maths/shorts/fr/essence-taxes/eleveai-maths-actu-essence-short-litre.mp4",
+  "poster": "actu/maths/shorts/fr/essence-taxes/eleveai-maths-actu-essence-short-litre.png",
+  "titre": "Prix de l'essence : +50 centimes en 8 mois, quelle stratégie ?",
+  "short": true,
+  "youtube": null
+ },
+ "essence-taxes-pays": {
+  "fichier": "actu/maths/shorts/fr/essence-taxes/eleveai-maths-actu-essence-short-pays.mp4",
+  "poster": "actu/maths/shorts/fr/essence-taxes/eleveai-maths-actu-essence-short-pays.png",
+  "titre": "Le plus taxé d'Europe, le moins cher : quelle stratégie sur le prix de l'essence ?",
+  "short": true,
+  "youtube": null
+ },
+ "expressions-litterales": {
+  "fichier": "seconde/maths/paysage/fr/expressions-litterales/eleveai-maths-seconde-expressions-litterales.mp4",
+  "poster": "seconde/maths/paysage/fr/expressions-litterales/eleveai-maths-seconde-expressions-litterales.png",
+  "titre": "Maths seconde · Les expressions littérales — EleveAI",
+  "short": false,
+  "youtube": null
+ },
+ "fonction-vocabulaire": {
+  "fichier": "seconde/maths/paysage/fr/fonction-vocabulaire/eleveai-maths-seconde-fonction-vocabulaire.mp4",
+  "poster": null,
+  "titre": "Maths seconde · Image, antécédent, courbe — EleveAI",
+  "short": false,
+  "youtube": null
+ },
+ "fonctions-reference": {
+  "fichier": "seconde/maths/paysage/fr/fonctions-reference/eleveai-maths-seconde-fonctions-reference.mp4",
+  "poster": "seconde/maths/paysage/fr/fonctions-reference/eleveai-maths-seconde-fonctions-reference.png",
+  "titre": "Maths seconde · Les fonctions de référence — EleveAI",
+  "short": false,
+  "youtube": "1g53KZ3d_XM"
+ },
+ "fr-absolue": {
+  "fichier": "seconde/maths/shorts/fr/fonctions-reference/eleveai-maths-seconde-fonctions-reference-short-absolue.mp4",
+  "poster": "seconde/maths/shorts/fr/fonctions-reference/eleveai-maths-seconde-fonctions-reference-short-absolue.png",
+  "titre": "La valeur absolue efface les choses négatives",
+  "short": true,
+  "youtube": "ZJdQtmjj1_8"
+ },
+ "fr-carre": {
+  "fichier": "seconde/maths/shorts/fr/fonctions-reference/eleveai-maths-seconde-fonctions-reference-short-carre.mp4",
+  "poster": "seconde/maths/shorts/fr/fonctions-reference/eleveai-maths-seconde-fonctions-reference-short-carre.png",
+  "titre": "La fonction carré retourne l'ordre sur les négatifs",
+  "short": true,
+  "youtube": "QcmF3CFlg4M"
+ },
+ "fr-carte": {
+  "fichier": "seconde/maths/shorts/fr/fonctions-reference/eleveai-maths-seconde-fonctions-reference-short-carte.mp4",
+  "poster": "seconde/maths/shorts/fr/fonctions-reference/eleveai-maths-seconde-fonctions-reference-short-carte.png",
+  "titre": "Les cinq fonctions de référence, et la question que chacune pose",
+  "short": true,
+  "youtube": null
+ },
+ "fr-cube": {
+  "fichier": "seconde/maths/shorts/fr/fonctions-reference/eleveai-maths-seconde-fonctions-reference-short-cube.mp4",
+  "poster": "seconde/maths/shorts/fr/fonctions-reference/eleveai-maths-seconde-fonctions-reference-short-cube.png",
+  "titre": "Le cube monte sans jamais se retourner (le carré, lui, se retourne)",
+  "short": true,
+  "youtube": "qWxopnoeDT0"
+ },
+ "fr-inverse": {
+  "fichier": "seconde/maths/shorts/fr/fonctions-reference/eleveai-maths-seconde-fonctions-reference-short-inverse.mp4",
+  "poster": "seconde/maths/shorts/fr/fonctions-reference/eleveai-maths-seconde-fonctions-reference-short-inverse.png",
+  "titre": "La fonction inverse l'ordre des choses… sauf si tu traverses zéro",
+  "short": true,
+  "youtube": "YE1XOFKzYxQ"
+ },
+ "francais-cp-lettre-a-droitier-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-a/eleveai-francais-cp-lettre-a-droitier-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre a droitier portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-a-gaucher-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-a/eleveai-francais-cp-lettre-a-gaucher-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre a gaucher portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-c-droitier-paysage": {
+  "fichier": "cp/francais/paysage/fr/lettre-c/eleveai-francais-cp-lettre-c-droitier-paysage.mp4",
+  "poster": null,
+  "titre": "francais cp lettre c droitier paysage",
+  "short": false,
+  "youtube": null
+ },
+ "francais-cp-lettre-c-droitier-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-c/eleveai-francais-cp-lettre-c-droitier-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre c droitier portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-c-gaucher-paysage": {
+  "fichier": "cp/francais/paysage/fr/lettre-c/eleveai-francais-cp-lettre-c-gaucher-paysage.mp4",
+  "poster": null,
+  "titre": "francais cp lettre c gaucher paysage",
+  "short": false,
+  "youtube": null
+ },
+ "francais-cp-lettre-c-gaucher-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-c/eleveai-francais-cp-lettre-c-gaucher-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre c gaucher portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-d-droitier-paysage": {
+  "fichier": "cp/francais/paysage/fr/lettre-d/eleveai-francais-cp-lettre-d-droitier-paysage.mp4",
+  "poster": null,
+  "titre": "francais cp lettre d droitier paysage",
+  "short": false,
+  "youtube": null
+ },
+ "francais-cp-lettre-d-droitier-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-d/eleveai-francais-cp-lettre-d-droitier-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre d droitier portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-d-gaucher-paysage": {
+  "fichier": "cp/francais/paysage/fr/lettre-d/eleveai-francais-cp-lettre-d-gaucher-paysage.mp4",
+  "poster": null,
+  "titre": "francais cp lettre d gaucher paysage",
+  "short": false,
+  "youtube": null
+ },
+ "francais-cp-lettre-d-gaucher-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-d/eleveai-francais-cp-lettre-d-gaucher-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre d gaucher portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-e-droitier-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-e/eleveai-francais-cp-lettre-e-droitier-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre e droitier portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-e-gaucher-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-e/eleveai-francais-cp-lettre-e-gaucher-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre e gaucher portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-f-droitier-paysage": {
+  "fichier": "cp/francais/paysage/fr/lettre-f/eleveai-francais-cp-lettre-f-droitier-paysage.mp4",
+  "poster": null,
+  "titre": "francais cp lettre f droitier paysage",
+  "short": false,
+  "youtube": null
+ },
+ "francais-cp-lettre-f-droitier-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-f/eleveai-francais-cp-lettre-f-droitier-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre f droitier portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-f-gaucher-paysage": {
+  "fichier": "cp/francais/paysage/fr/lettre-f/eleveai-francais-cp-lettre-f-gaucher-paysage.mp4",
+  "poster": null,
+  "titre": "francais cp lettre f gaucher paysage",
+  "short": false,
+  "youtube": null
+ },
+ "francais-cp-lettre-f-gaucher-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-f/eleveai-francais-cp-lettre-f-gaucher-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre f gaucher portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-g-droitier-paysage": {
+  "fichier": "cp/francais/paysage/fr/lettre-g/eleveai-francais-cp-lettre-g-droitier-paysage.mp4",
+  "poster": null,
+  "titre": "francais cp lettre g droitier paysage",
+  "short": false,
+  "youtube": null
+ },
+ "francais-cp-lettre-g-droitier-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-g/eleveai-francais-cp-lettre-g-droitier-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre g droitier portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-g-gaucher-paysage": {
+  "fichier": "cp/francais/paysage/fr/lettre-g/eleveai-francais-cp-lettre-g-gaucher-paysage.mp4",
+  "poster": null,
+  "titre": "francais cp lettre g gaucher paysage",
+  "short": false,
+  "youtube": null
+ },
+ "francais-cp-lettre-g-gaucher-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-g/eleveai-francais-cp-lettre-g-gaucher-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre g gaucher portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-h-droitier-paysage": {
+  "fichier": "cp/francais/paysage/fr/lettre-h/eleveai-francais-cp-lettre-h-droitier-paysage.mp4",
+  "poster": null,
+  "titre": "francais cp lettre h droitier paysage",
+  "short": false,
+  "youtube": null
+ },
+ "francais-cp-lettre-h-droitier-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-h/eleveai-francais-cp-lettre-h-droitier-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre h droitier portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-h-gaucher-paysage": {
+  "fichier": "cp/francais/paysage/fr/lettre-h/eleveai-francais-cp-lettre-h-gaucher-paysage.mp4",
+  "poster": null,
+  "titre": "francais cp lettre h gaucher paysage",
+  "short": false,
+  "youtube": null
+ },
+ "francais-cp-lettre-h-gaucher-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-h/eleveai-francais-cp-lettre-h-gaucher-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre h gaucher portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-i-droitier-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-i/eleveai-francais-cp-lettre-i-droitier-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre i droitier portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-i-gaucher-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-i/eleveai-francais-cp-lettre-i-gaucher-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre i gaucher portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-k-droitier-paysage": {
+  "fichier": "cp/francais/paysage/fr/lettre-k/eleveai-francais-cp-lettre-k-droitier-paysage.mp4",
+  "poster": null,
+  "titre": "francais cp lettre k droitier paysage",
+  "short": false,
+  "youtube": null
+ },
+ "francais-cp-lettre-k-droitier-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-k/eleveai-francais-cp-lettre-k-droitier-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre k droitier portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-k-gaucher-paysage": {
+  "fichier": "cp/francais/paysage/fr/lettre-k/eleveai-francais-cp-lettre-k-gaucher-paysage.mp4",
+  "poster": null,
+  "titre": "francais cp lettre k gaucher paysage",
+  "short": false,
+  "youtube": null
+ },
+ "francais-cp-lettre-k-gaucher-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-k/eleveai-francais-cp-lettre-k-gaucher-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre k gaucher portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-l-droitier-paysage": {
+  "fichier": "cp/francais/paysage/fr/lettre-l/eleveai-francais-cp-lettre-l-droitier-paysage.mp4",
+  "poster": null,
+  "titre": "francais cp lettre l droitier paysage",
+  "short": false,
+  "youtube": null
+ },
+ "francais-cp-lettre-l-droitier-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-l/eleveai-francais-cp-lettre-l-droitier-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre l droitier portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-l-gaucher-paysage": {
+  "fichier": "cp/francais/paysage/fr/lettre-l/eleveai-francais-cp-lettre-l-gaucher-paysage.mp4",
+  "poster": null,
+  "titre": "francais cp lettre l gaucher paysage",
+  "short": false,
+  "youtube": null
+ },
+ "francais-cp-lettre-l-gaucher-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-l/eleveai-francais-cp-lettre-l-gaucher-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre l gaucher portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-m-droitier-paysage": {
+  "fichier": "cp/francais/paysage/fr/lettre-m/eleveai-francais-cp-lettre-m-droitier-paysage.mp4",
+  "poster": null,
+  "titre": "francais cp lettre m droitier paysage",
+  "short": false,
+  "youtube": null
+ },
+ "francais-cp-lettre-m-droitier-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-m/eleveai-francais-cp-lettre-m-droitier-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre m droitier portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-m-gaucher-paysage": {
+  "fichier": "cp/francais/paysage/fr/lettre-m/eleveai-francais-cp-lettre-m-gaucher-paysage.mp4",
+  "poster": null,
+  "titre": "francais cp lettre m gaucher paysage",
+  "short": false,
+  "youtube": null
+ },
+ "francais-cp-lettre-m-gaucher-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-m/eleveai-francais-cp-lettre-m-gaucher-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre m gaucher portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-n-droitier-paysage": {
+  "fichier": "cp/francais/paysage/fr/lettre-n/eleveai-francais-cp-lettre-n-droitier-paysage.mp4",
+  "poster": null,
+  "titre": "francais cp lettre n droitier paysage",
+  "short": false,
+  "youtube": null
+ },
+ "francais-cp-lettre-n-droitier-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-n/eleveai-francais-cp-lettre-n-droitier-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre n droitier portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-n-gaucher-paysage": {
+  "fichier": "cp/francais/paysage/fr/lettre-n/eleveai-francais-cp-lettre-n-gaucher-paysage.mp4",
+  "poster": null,
+  "titre": "francais cp lettre n gaucher paysage",
+  "short": false,
+  "youtube": null
+ },
+ "francais-cp-lettre-n-gaucher-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-n/eleveai-francais-cp-lettre-n-gaucher-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre n gaucher portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-o-droitier-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-o/eleveai-francais-cp-lettre-o-droitier-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre o droitier portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-o-gaucher-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-o/eleveai-francais-cp-lettre-o-gaucher-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre o gaucher portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-p-droitier-paysage": {
+  "fichier": "cp/francais/paysage/fr/lettre-p/eleveai-francais-cp-lettre-p-droitier-paysage.mp4",
+  "poster": null,
+  "titre": "francais cp lettre p droitier paysage",
+  "short": false,
+  "youtube": null
+ },
+ "francais-cp-lettre-p-droitier-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-p/eleveai-francais-cp-lettre-p-droitier-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre p droitier portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-p-gaucher-paysage": {
+  "fichier": "cp/francais/paysage/fr/lettre-p/eleveai-francais-cp-lettre-p-gaucher-paysage.mp4",
+  "poster": null,
+  "titre": "francais cp lettre p gaucher paysage",
+  "short": false,
+  "youtube": null
+ },
+ "francais-cp-lettre-p-gaucher-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-p/eleveai-francais-cp-lettre-p-gaucher-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre p gaucher portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-q-droitier-paysage": {
+  "fichier": "cp/francais/paysage/fr/lettre-q/eleveai-francais-cp-lettre-q-droitier-paysage.mp4",
+  "poster": null,
+  "titre": "francais cp lettre q droitier paysage",
+  "short": false,
+  "youtube": null
+ },
+ "francais-cp-lettre-q-droitier-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-q/eleveai-francais-cp-lettre-q-droitier-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre q droitier portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-q-gaucher-paysage": {
+  "fichier": "cp/francais/paysage/fr/lettre-q/eleveai-francais-cp-lettre-q-gaucher-paysage.mp4",
+  "poster": null,
+  "titre": "francais cp lettre q gaucher paysage",
+  "short": false,
+  "youtube": null
+ },
+ "francais-cp-lettre-q-gaucher-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-q/eleveai-francais-cp-lettre-q-gaucher-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre q gaucher portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-r-droitier-paysage": {
+  "fichier": "cp/francais/paysage/fr/lettre-r/eleveai-francais-cp-lettre-r-droitier-paysage.mp4",
+  "poster": null,
+  "titre": "francais cp lettre r droitier paysage",
+  "short": false,
+  "youtube": null
+ },
+ "francais-cp-lettre-r-droitier-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-r/eleveai-francais-cp-lettre-r-droitier-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre r droitier portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-r-gaucher-paysage": {
+  "fichier": "cp/francais/paysage/fr/lettre-r/eleveai-francais-cp-lettre-r-gaucher-paysage.mp4",
+  "poster": null,
+  "titre": "francais cp lettre r gaucher paysage",
+  "short": false,
+  "youtube": null
+ },
+ "francais-cp-lettre-r-gaucher-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-r/eleveai-francais-cp-lettre-r-gaucher-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre r gaucher portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-s-droitier-paysage": {
+  "fichier": "cp/francais/paysage/fr/lettre-s/eleveai-francais-cp-lettre-s-droitier-paysage.mp4",
+  "poster": null,
+  "titre": "francais cp lettre s droitier paysage",
+  "short": false,
+  "youtube": null
+ },
+ "francais-cp-lettre-s-droitier-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-s/eleveai-francais-cp-lettre-s-droitier-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre s droitier portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-s-gaucher-paysage": {
+  "fichier": "cp/francais/paysage/fr/lettre-s/eleveai-francais-cp-lettre-s-gaucher-paysage.mp4",
+  "poster": null,
+  "titre": "francais cp lettre s gaucher paysage",
+  "short": false,
+  "youtube": null
+ },
+ "francais-cp-lettre-s-gaucher-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-s/eleveai-francais-cp-lettre-s-gaucher-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre s gaucher portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-t-droitier-paysage": {
+  "fichier": "cp/francais/paysage/fr/lettre-t/eleveai-francais-cp-lettre-t-droitier-paysage.mp4",
+  "poster": null,
+  "titre": "francais cp lettre t droitier paysage",
+  "short": false,
+  "youtube": null
+ },
+ "francais-cp-lettre-t-droitier-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-t/eleveai-francais-cp-lettre-t-droitier-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre t droitier portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-t-gaucher-paysage": {
+  "fichier": "cp/francais/paysage/fr/lettre-t/eleveai-francais-cp-lettre-t-gaucher-paysage.mp4",
+  "poster": null,
+  "titre": "francais cp lettre t gaucher paysage",
+  "short": false,
+  "youtube": null
+ },
+ "francais-cp-lettre-t-gaucher-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-t/eleveai-francais-cp-lettre-t-gaucher-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre t gaucher portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-u-droitier-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-u/eleveai-francais-cp-lettre-u-droitier-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre u droitier portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-u-gaucher-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-u/eleveai-francais-cp-lettre-u-gaucher-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre u gaucher portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-y-droitier-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-y/eleveai-francais-cp-lettre-y-droitier-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre y droitier portrait",
+  "short": true,
+  "youtube": null
+ },
+ "francais-cp-lettre-y-gaucher-portrait": {
+  "fichier": "cp/francais/shorts/fr/lettre-y/eleveai-francais-cp-lettre-y-gaucher-portrait.mp4",
+  "poster": null,
+  "titre": "francais cp lettre y gaucher portrait",
+  "short": true,
+  "youtube": null
+ },
+ "fv-dissymetrie": {
+  "fichier": "seconde/maths/shorts/fr/fonction-vocabulaire/eleveai-maths-seconde-fonction-vocabulaire-short-dissymetrie.mp4",
+  "poster": null,
+  "titre": "Image ou antécédent : la différence que tout le monde rate",
+  "short": true,
+  "youtube": null
+ },
+ "fv-image": {
+  "fichier": "seconde/maths/shorts/fr/fonction-vocabulaire/eleveai-maths-seconde-fonction-vocabulaire-short-image.mp4",
+  "poster": null,
+  "titre": "Calculer l'image d'un nombre : il suffit de remplacer",
+  "short": true,
+  "youtube": null
+ },
+ "fv-lecture": {
+  "fichier": "seconde/maths/shorts/fr/fonction-vocabulaire/eleveai-maths-seconde-fonction-vocabulaire-short-lecture.mp4",
+  "poster": null,
+  "titre": "Lire une image et un antécédent sur une courbe",
+  "short": true,
+  "youtube": null
+ },
+ "geo-enclos": {
+  "fichier": "seconde/maths/shorts/fr/geometrie-problemes-plan/eleveai-maths-seconde-geometrie-short-enclos.mp4",
+  "poster": "seconde/maths/shorts/fr/geometrie-problemes-plan/eleveai-maths-seconde-geometrie-short-enclos.png",
+  "titre": "60 m de clôture et une rivière : le plus grand enclos possible",
+  "short": true,
+  "youtube": null
+ },
+ "geo-pente": {
+  "fichier": "seconde/maths/shorts/fr/geometrie-problemes-plan/eleveai-maths-seconde-geometrie-short-pente.mp4",
+  "poster": "seconde/maths/shorts/fr/geometrie-problemes-plan/eleveai-maths-seconde-geometrie-short-pente.png",
+  "titre": "Une pente de 12 % ne fait pas 12 degrés",
+  "short": true,
+  "youtube": "Oir7wvsKOsA"
+ },
+ "geo-projete": {
+  "fichier": "seconde/maths/shorts/fr/geometrie-problemes-plan/eleveai-maths-seconde-geometrie-short-projete.mp4",
+  "poster": "seconde/maths/shorts/fr/geometrie-problemes-plan/eleveai-maths-seconde-geometrie-short-projete.png",
+  "titre": "Le chemin le plus court vers une droite, et sa démonstration",
+  "short": true,
+  "youtube": null
+ },
+ "geometrie-plane": {
+  "fichier": "seconde/maths/paysage/fr/geometrie-problemes-plan/eleveai-maths-seconde-geometrie-problemes-plan.mp4",
+  "poster": "seconde/maths/paysage/fr/geometrie-problemes-plan/eleveai-maths-seconde-geometrie-problemes-plan.png",
+  "titre": "Comprendre toute la géométrie plane de seconde en 7 minutes (fiche et 20 exercices corrigés)",
+  "short": false,
+  "youtube": "vJXmDdHk6_A"
+ },
+ "identites-remarquables": {
+  "fichier": "seconde/maths/paysage/fr/identites-remarquables/eleveai-maths-seconde-identites-remarquables.mp4",
+  "poster": null,
+  "titre": "Maths seconde · Les identités remarquables — EleveAI",
+  "short": false,
+  "youtube": null
+ },
+ "ir-calcul-mental": {
+  "fichier": "seconde/maths/shorts/fr/identites-remarquables/eleveai-maths-seconde-identites-remarquables-short-calculmental.mp4",
+  "poster": null,
+  "titre": "Calculer 99 au carré de tête, en 3 secondes",
+  "short": true,
+  "youtube": null
+ },
+ "ir-difference": {
+  "fichier": "seconde/maths/shorts/fr/identites-remarquables/eleveai-maths-seconde-identites-remarquables-short-difference.mp4",
+  "poster": null,
+  "titre": "Comment factoriser une différence de deux carrés",
+  "short": true,
+  "youtube": null
+ },
+ "ir-double-produit": {
+  "fichier": "seconde/maths/shorts/fr/identites-remarquables/eleveai-maths-seconde-identites-remarquables-short-doubleproduit.mp4",
+  "poster": null,
+  "titre": "Carré d'une somme : l'erreur la plus fréquente en maths",
+  "short": true,
+  "youtube": null
+ },
+ "maths-cp-chiffre-0-droitier-portrait": {
+  "fichier": "cp/maths/shorts/fr/chiffre-0/eleveai-maths-cp-chiffre-0-droitier-portrait.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 0 droitier portrait",
+  "short": true,
+  "youtube": null
+ },
+ "maths-cp-chiffre-0-gaucher-portrait": {
+  "fichier": "cp/maths/shorts/fr/chiffre-0/eleveai-maths-cp-chiffre-0-gaucher-portrait.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 0 gaucher portrait",
+  "short": true,
+  "youtube": null
+ },
+ "maths-cp-chiffre-1-droitier-portrait": {
+  "fichier": "cp/maths/shorts/fr/chiffre-1/eleveai-maths-cp-chiffre-1-droitier-portrait.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 1 droitier portrait",
+  "short": true,
+  "youtube": null
+ },
+ "maths-cp-chiffre-1-gaucher-portrait": {
+  "fichier": "cp/maths/shorts/fr/chiffre-1/eleveai-maths-cp-chiffre-1-gaucher-portrait.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 1 gaucher portrait",
+  "short": true,
+  "youtube": null
+ },
+ "maths-cp-chiffre-2-droitier-portrait": {
+  "fichier": "cp/maths/shorts/fr/chiffre-2/eleveai-maths-cp-chiffre-2-droitier-portrait.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 2 droitier portrait",
+  "short": true,
+  "youtube": null
+ },
+ "maths-cp-chiffre-2-gaucher-portrait": {
+  "fichier": "cp/maths/shorts/fr/chiffre-2/eleveai-maths-cp-chiffre-2-gaucher-portrait.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 2 gaucher portrait",
+  "short": true,
+  "youtube": null
+ },
+ "maths-cp-chiffre-3-droitier-portrait": {
+  "fichier": "cp/maths/shorts/fr/chiffre-3/eleveai-maths-cp-chiffre-3-droitier-portrait.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 3 droitier portrait",
+  "short": true,
+  "youtube": null
+ },
+ "maths-cp-chiffre-3-gaucher-portrait": {
+  "fichier": "cp/maths/shorts/fr/chiffre-3/eleveai-maths-cp-chiffre-3-gaucher-portrait.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 3 gaucher portrait",
+  "short": true,
+  "youtube": null
+ },
+ "maths-cp-chiffre-4-droitier-paysage": {
+  "fichier": "cp/maths/paysage/fr/chiffre-4/eleveai-maths-cp-chiffre-4-droitier-paysage.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 4 droitier paysage",
+  "short": false,
+  "youtube": null
+ },
+ "maths-cp-chiffre-4-droitier-portrait": {
+  "fichier": "cp/maths/shorts/fr/chiffre-4/eleveai-maths-cp-chiffre-4-droitier-portrait.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 4 droitier portrait",
+  "short": true,
+  "youtube": null
+ },
+ "maths-cp-chiffre-4-gaucher-paysage": {
+  "fichier": "cp/maths/paysage/fr/chiffre-4/eleveai-maths-cp-chiffre-4-gaucher-paysage.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 4 gaucher paysage",
+  "short": false,
+  "youtube": null
+ },
+ "maths-cp-chiffre-4-gaucher-portrait": {
+  "fichier": "cp/maths/shorts/fr/chiffre-4/eleveai-maths-cp-chiffre-4-gaucher-portrait.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 4 gaucher portrait",
+  "short": true,
+  "youtube": null
+ },
+ "maths-cp-chiffre-5-droitier-paysage": {
+  "fichier": "cp/maths/paysage/fr/chiffre-5/eleveai-maths-cp-chiffre-5-droitier-paysage.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 5 droitier paysage",
+  "short": false,
+  "youtube": null
+ },
+ "maths-cp-chiffre-5-droitier-portrait": {
+  "fichier": "cp/maths/shorts/fr/chiffre-5/eleveai-maths-cp-chiffre-5-droitier-portrait.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 5 droitier portrait",
+  "short": true,
+  "youtube": null
+ },
+ "maths-cp-chiffre-5-gaucher-paysage": {
+  "fichier": "cp/maths/paysage/fr/chiffre-5/eleveai-maths-cp-chiffre-5-gaucher-paysage.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 5 gaucher paysage",
+  "short": false,
+  "youtube": null
+ },
+ "maths-cp-chiffre-5-gaucher-portrait": {
+  "fichier": "cp/maths/shorts/fr/chiffre-5/eleveai-maths-cp-chiffre-5-gaucher-portrait.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 5 gaucher portrait",
+  "short": true,
+  "youtube": null
+ },
+ "maths-cp-chiffre-6-droitier-paysage": {
+  "fichier": "cp/maths/paysage/fr/chiffre-6/eleveai-maths-cp-chiffre-6-droitier-paysage.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 6 droitier paysage",
+  "short": false,
+  "youtube": null
+ },
+ "maths-cp-chiffre-6-droitier-portrait": {
+  "fichier": "cp/maths/shorts/fr/chiffre-6/eleveai-maths-cp-chiffre-6-droitier-portrait.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 6 droitier portrait",
+  "short": true,
+  "youtube": null
+ },
+ "maths-cp-chiffre-6-gaucher-paysage": {
+  "fichier": "cp/maths/paysage/fr/chiffre-6/eleveai-maths-cp-chiffre-6-gaucher-paysage.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 6 gaucher paysage",
+  "short": false,
+  "youtube": null
+ },
+ "maths-cp-chiffre-6-gaucher-portrait": {
+  "fichier": "cp/maths/shorts/fr/chiffre-6/eleveai-maths-cp-chiffre-6-gaucher-portrait.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 6 gaucher portrait",
+  "short": true,
+  "youtube": null
+ },
+ "maths-cp-chiffre-7-droitier-paysage": {
+  "fichier": "cp/maths/paysage/fr/chiffre-7/eleveai-maths-cp-chiffre-7-droitier-paysage.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 7 droitier paysage",
+  "short": false,
+  "youtube": null
+ },
+ "maths-cp-chiffre-7-droitier-portrait": {
+  "fichier": "cp/maths/shorts/fr/chiffre-7/eleveai-maths-cp-chiffre-7-droitier-portrait.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 7 droitier portrait",
+  "short": true,
+  "youtube": null
+ },
+ "maths-cp-chiffre-7-gaucher-paysage": {
+  "fichier": "cp/maths/paysage/fr/chiffre-7/eleveai-maths-cp-chiffre-7-gaucher-paysage.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 7 gaucher paysage",
+  "short": false,
+  "youtube": null
+ },
+ "maths-cp-chiffre-7-gaucher-portrait": {
+  "fichier": "cp/maths/shorts/fr/chiffre-7/eleveai-maths-cp-chiffre-7-gaucher-portrait.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 7 gaucher portrait",
+  "short": true,
+  "youtube": null
+ },
+ "maths-cp-chiffre-8-droitier-paysage": {
+  "fichier": "cp/maths/paysage/fr/chiffre-8/eleveai-maths-cp-chiffre-8-droitier-paysage.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 8 droitier paysage",
+  "short": false,
+  "youtube": null
+ },
+ "maths-cp-chiffre-8-droitier-portrait": {
+  "fichier": "cp/maths/shorts/fr/chiffre-8/eleveai-maths-cp-chiffre-8-droitier-portrait.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 8 droitier portrait",
+  "short": true,
+  "youtube": null
+ },
+ "maths-cp-chiffre-8-gaucher-paysage": {
+  "fichier": "cp/maths/paysage/fr/chiffre-8/eleveai-maths-cp-chiffre-8-gaucher-paysage.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 8 gaucher paysage",
+  "short": false,
+  "youtube": null
+ },
+ "maths-cp-chiffre-8-gaucher-portrait": {
+  "fichier": "cp/maths/shorts/fr/chiffre-8/eleveai-maths-cp-chiffre-8-gaucher-portrait.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 8 gaucher portrait",
+  "short": true,
+  "youtube": null
+ },
+ "maths-cp-chiffre-9-droitier-paysage": {
+  "fichier": "cp/maths/paysage/fr/chiffre-9/eleveai-maths-cp-chiffre-9-droitier-paysage.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 9 droitier paysage",
+  "short": false,
+  "youtube": null
+ },
+ "maths-cp-chiffre-9-droitier-portrait": {
+  "fichier": "cp/maths/shorts/fr/chiffre-9/eleveai-maths-cp-chiffre-9-droitier-portrait.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 9 droitier portrait",
+  "short": true,
+  "youtube": null
+ },
+ "maths-cp-chiffre-9-gaucher-paysage": {
+  "fichier": "cp/maths/paysage/fr/chiffre-9/eleveai-maths-cp-chiffre-9-gaucher-paysage.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 9 gaucher paysage",
+  "short": false,
+  "youtube": null
+ },
+ "maths-cp-chiffre-9-gaucher-portrait": {
+  "fichier": "cp/maths/shorts/fr/chiffre-9/eleveai-maths-cp-chiffre-9-gaucher-portrait.mp4",
+  "poster": null,
+  "titre": "maths cp chiffre 9 gaucher portrait",
+  "short": true,
+  "youtube": null
+ },
+ "maths-en-vrai-second-degre-short-dauphin": {
+  "fichier": "maths-en-vrai/maths/shorts/fr/second-degre-dauphin/eleveai-maths-en-vrai-second-degre-short-dauphin.mp4",
+  "poster": "maths-en-vrai/maths/shorts/fr/second-degre-dauphin/eleveai-maths-en-vrai-second-degre-short-dauphin.png",
+  "titre": "maths en vrai second degre short dauphin",
+  "short": true,
+  "youtube": null
+ },
+ "maths-premiere-exponentielle-calculer": {
+  "fichier": "premiere/maths/paysage/fr/exponentielle-calculer/eleveai-maths-premiere-exponentielle-calculer.mp4",
+  "poster": "premiere/maths/paysage/fr/exponentielle-calculer/eleveai-maths-premiere-exponentielle-calculer.png",
+  "titre": "maths premiere exponentielle calculer",
+  "short": false,
+  "youtube": null
+ },
+ "maths-premiere-exponentielle-etude": {
+  "fichier": "premiere/maths/paysage/fr/exponentielle-etude/eleveai-maths-premiere-exponentielle-etude.mp4",
+  "poster": "premiere/maths/paysage/fr/exponentielle-etude/eleveai-maths-premiere-exponentielle-etude.png",
+  "titre": "maths premiere exponentielle etude",
+  "short": false,
+  "youtube": null
+ },
+ "maths-premiere-exponentielle-resoudre": {
+  "fichier": "premiere/maths/paysage/fr/exponentielle-resoudre/eleveai-maths-premiere-exponentielle-resoudre.mp4",
+  "poster": "premiere/maths/paysage/fr/exponentielle-resoudre/eleveai-maths-premiere-exponentielle-resoudre.png",
+  "titre": "maths premiere exponentielle resoudre",
+  "short": false,
+  "youtube": null
+ },
+ "maths-premiere-second-degre-equation": {
+  "fichier": "premiere/maths/paysage/fr/second-degre-equation/eleveai-maths-premiere-second-degre-equation.mp4",
+  "poster": "premiere/maths/paysage/fr/second-degre-equation/eleveai-maths-premiere-second-degre-equation.png",
+  "titre": "maths premiere second degre equation",
+  "short": false,
+  "youtube": null
+ },
+ "maths-premiere-second-degre-signe": {
+  "fichier": "premiere/maths/paysage/fr/second-degre-signe/eleveai-maths-premiere-second-degre-signe.mp4",
+  "poster": "premiere/maths/paysage/fr/second-degre-signe/eleveai-maths-premiere-second-degre-signe.png",
+  "titre": "maths premiere second degre signe",
+  "short": false,
+  "youtube": null
+ },
+ "maths-premiere-suites-arith-geo": {
+  "fichier": "premiere/maths/paysage/fr/suites-arith-geo/eleveai-maths-premiere-suites-arith-geo.mp4",
+  "poster": "premiere/maths/paysage/fr/suites-arith-geo/eleveai-maths-premiere-suites-arith-geo.png",
+  "titre": "maths premiere suites arith geo",
+  "short": false,
+  "youtube": null
+ },
+ "maths-premiere-trigonometrie-cercle": {
+  "fichier": "premiere/maths/paysage/fr/trigonometrie-cercle/eleveai-maths-premiere-trigonometrie-cercle.mp4",
+  "poster": "premiere/maths/paysage/fr/trigonometrie-cercle/eleveai-maths-premiere-trigonometrie-cercle.png",
+  "titre": "maths premiere trigonometrie cercle",
+  "short": false,
+  "youtube": null
+ },
+ "maths-premiere-trigonometrie-rouge-vert": {
+  "fichier": "premiere/maths/paysage/fr/trigonometrie-rouge-vert/eleveai-maths-premiere-trigonometrie-rouge-vert.mp4",
+  "poster": "premiere/maths/paysage/fr/trigonometrie-rouge-vert/eleveai-maths-premiere-trigonometrie-rouge-vert.png",
+  "titre": "maths premiere trigonometrie rouge vert",
+  "short": false,
+  "youtube": null
+ },
+ "maths-premiere-trigonometrie-short-valeurs": {
+  "fichier": "premiere/maths/shorts/fr/trigonometrie/eleveai-maths-premiere-trigonometrie-short-valeurs.mp4",
+  "poster": "premiere/maths/shorts/fr/trigonometrie/eleveai-maths-premiere-trigonometrie-short-valeurs.png",
+  "titre": "maths premiere trigonometrie short valeurs",
+  "short": true,
+  "youtube": null
+ },
+ "maths-premiere-trigonometrie-short-vent": {
+  "fichier": "premiere/maths/shorts/fr/trigonometrie/eleveai-maths-premiere-trigonometrie-short-vent.mp4",
+  "poster": "premiere/maths/shorts/fr/trigonometrie/eleveai-maths-premiere-trigonometrie-short-vent.png",
+  "titre": "maths premiere trigonometrie short vent",
+  "short": true,
+  "youtube": null
+ },
+ "maths-seconde-second-degre-short-lucarne": {
+  "fichier": "maths-en-vrai/maths/shorts/fr/second-degre-lucarne/eleveai-maths-seconde-second-degre-short-lucarne.mp4",
+  "poster": null,
+  "titre": "maths seconde second degre short lucarne",
+  "short": true,
+  "youtube": null
+ },
+ "mimolette-moyenne-ecart-type": {
+  "fichier": "actu/maths/shorts/fr/mimolette/eleveai-maths-actu-mimolette-short.mp4",
+  "poster": "actu/maths/shorts/fr/mimolette/eleveai-maths-actu-mimolette-short.png",
+  "titre": "Les maths, ça rapporte : la preuve par la mimolette 🧀 (moyenne et écart type)",
+  "short": true,
+  "youtube": "x0jPcc9ldZw"
+ },
+ "paie-knafo-a-t-elle-raison": {
+  "fichier": "actu/maths/shorts/fr/fiche-de-paie/eleveai-maths-actu-paie-short-deux.mp4",
+  "poster": "actu/maths/shorts/fr/fiche-de-paie/eleveai-maths-actu-paie-short-deux.png",
+  "titre": "Sarah Knafo a-t-elle raison ? Oui… et non : sa fiche de paie vérifiée",
+  "short": true,
+  "youtube": "LaEHPPdKZHc"
+ },
+ "pisa-2025": {
+  "fichier": "actu/maths/paysage/fr/pisa-2025/eleveai-maths-actu-pisa-2025.mp4",
+  "poster": null,
+  "titre": "Le niveau baisse, et pourtant 81 % y croient : qui a raison ? — PISA 2025",
+  "short": false,
+  "youtube": null
+ },
+ "pisa-2025-croire": {
+  "fichier": "actu/maths/shorts/fr/pisa-2025/eleveai-maths-actu-pisa-2025-short-croire.mp4",
+  "poster": null,
+  "titre": "On leur dit qu'ils dégringolent, et pourtant 81 % y croient : qui a raison ?",
+  "short": true,
+  "youtube": null
+ },
+ "pisa-2025-ecart": {
+  "fichier": "actu/maths/shorts/fr/pisa-2025/eleveai-maths-actu-pisa-2025-short-ecart.mp4",
+  "poster": null,
+  "titre": "−16 points en maths, et pourtant l'écart n'a pas bougé : qui a baissé ?",
+  "short": true,
+  "youtube": null
+ },
+ "pisa-2025-favorises": {
+  "fichier": "actu/maths/shorts/fr/pisa-2025/eleveai-maths-actu-pisa-2025-short-favorises.mp4",
+  "poster": null,
+  "titre": "Parmi les meilleurs du monde, et pourtant la France est moyenne : pourquoi ?",
+  "short": true,
+  "youtube": null
+ },
+ "pisa-2025-ia": {
+  "fichier": "actu/maths/shorts/fr/pisa-2025/eleveai-maths-actu-pisa-2025-short-ia.mp4",
+  "poster": null,
+  "titre": "L'IA résout l'équation en 1 seconde : alors pourquoi l'apprendre ?",
+  "short": true,
+  "youtube": null
+ },
+ "premiere-commun-proba-contraire": {
+  "fichier": "premiere-commun/maths/probabilites/02-contraire/eleveai-maths-premiere-commun-proba-contraire.mp4",
+  "poster": "premiere-commun/maths/probabilites/02-contraire/eleveai-maths-premiere-commun-proba-contraire.png",
+  "titre": "En avance ? Le contraire n'est PAS « en retard » ! — L'événement contraire — épisode 2 · Maths 1re",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-commun-proba-contraire-short": {
+  "fichier": "premiere-commun/maths/probabilites/02-contraire/eleveai-maths-premiere-commun-proba-contraire-short.mp4",
+  "poster": "premiere-commun/maths/probabilites/02-contraire/eleveai-maths-premiere-commun-proba-contraire-short.png",
+  "titre": "30 % de pluie = 70 % de soleil ? 🌧️ — 1re #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "premiere-commun-proba-encadrement": {
+  "fichier": "premiere-commun/maths/probabilites/01-entre-0-et-1/eleveai-maths-premiere-commun-proba-encadrement.mp4",
+  "poster": "premiere-commun/maths/probabilites/01-entre-0-et-1/eleveai-maths-premiere-commun-proba-encadrement.png",
+  "titre": "120 % de chances ? IMPOSSIBLE ! — Une probabilité est entre 0 et 1 — épisode 1 · Maths 1re",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-commun-proba-encadrement-short": {
+  "fichier": "premiere-commun/maths/probabilites/01-entre-0-et-1/eleveai-maths-premiere-commun-proba-encadrement-short.mp4",
+  "poster": "premiere-commun/maths/probabilites/01-entre-0-et-1/eleveai-maths-premiere-commun-proba-encadrement-short.png",
+  "titre": "120 % de chances d'être rentable : tu signes ? ☀️ — 1re #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "premiere-degre2-forme-factorisee": {
+  "fichier": "premiere/maths/paysage/fr/degre2-forme-factorisee/eleveai-maths-premiere-degre2-forme-factorisee.mp4",
+  "poster": "premiere/maths/paysage/fr/degre2-forme-factorisee/eleveai-maths-premiere-degre2-forme-factorisee.png",
+  "titre": "Le second degré par la forme factorisée — Maths 1re et STMG",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-proba-conditionnelle": {
+  "fichier": "premiere/maths/probabilites/01-conditionnelle/eleveai-maths-premiere-proba-conditionnelle.mp4",
+  "poster": "premiere/maths/probabilites/01-conditionnelle/eleveai-maths-premiere-proba-conditionnelle.png",
+  "titre": "45 sur 200 ? Non, sur 120 ! — Probabilité conditionnelle — épisode 1 · Maths 1re spé",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-proba-conditionnelle-short": {
+  "fichier": "premiere/maths/probabilites/01-conditionnelle/eleveai-maths-premiere-proba-conditionnelle-short.mp4",
+  "poster": "premiere/maths/probabilites/01-conditionnelle/eleveai-maths-premiere-proba-conditionnelle-short.png",
+  "titre": "90 % des footballeurs sont des garçons… donc ? ⚽ — 1re spé #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "premiere-proba-registres": {
+  "fichier": "premiere/maths/probabilites/02-parmi-sachant/eleveai-maths-premiere-proba-registres.mp4",
+  "poster": "premiere/maths/probabilites/02-parmi-sachant/eleveai-maths-premiere-proba-registres.png",
+  "titre": "30 % ou 60 % ? Parmi QUI ? — Parmi, sachant que, et — épisode 2 · Maths 1re spé",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-proba-registres-short": {
+  "fichier": "premiere/maths/probabilites/02-parmi-sachant/eleveai-maths-premiere-proba-registres-short.mp4",
+  "poster": "premiere/maths/probabilites/02-parmi-sachant/eleveai-maths-premiere-proba-registres-short.png",
+  "titre": "60 % des retards sous la pluie… donc ? 🚌 — 1re spé #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "puissances": {
+  "fichier": "seconde/maths/paysage/fr/puissances/eleveai-maths-seconde-puissances.mp4",
+  "poster": null,
+  "titre": "Maths seconde · Les puissances — EleveAI",
+  "short": false,
+  "youtube": null
+ },
+ "puissances-parenthese": {
+  "fichier": "seconde/maths/shorts/fr/puissances/eleveai-maths-seconde-puissances-short.mp4",
+  "poster": null,
+  "titre": "(7³)⁴ : on additionne ou on multiplie ?",
+  "short": true,
+  "youtube": null
+ },
+ "py-boucles": {
+  "fichier": "seconde/maths/shorts/fr/python/eleveai-maths-seconde-python-short-boucles.mp4",
+  "poster": null,
+  "titre": "for ou while : quelle boucle choisir en Python",
+  "short": true,
+  "youtube": null
+ },
+ "py-egal": {
+  "fichier": "seconde/maths/shorts/fr/python/eleveai-maths-seconde-python-short-egal.mp4",
+  "poster": null,
+  "titre": "Python : pourquoi x = x + 1 n'est pas absurde",
+  "short": true,
+  "youtube": null
+ },
+ "py-tracer": {
+  "fichier": "seconde/maths/shorts/fr/python/eleveai-maths-seconde-python-short-tracer.mp4",
+  "poster": null,
+  "titre": "Tracer un programme Python ligne à ligne",
+  "short": true,
+  "youtube": null
+ },
+ "python": {
+  "fichier": "seconde/maths/paysage/fr/python/eleveai-maths-seconde-python.mp4",
+  "poster": null,
+  "titre": "Maths seconde · Algorithmique et Python — EleveAI",
+  "short": false,
+  "youtube": null
+ },
+ "racine-carree-2de": {
+  "fichier": "seconde/maths/paysage/fr/racine-carree-2de/eleveai-maths-seconde-racine-carree-2de.mp4",
+  "poster": null,
+  "titre": "Maths seconde · La racine carrée — EleveAI",
+  "short": false,
+  "youtube": null
+ },
+ "racine-negatif": {
+  "fichier": "seconde/maths/shorts/fr/racine-carree-2de/eleveai-maths-seconde-racine-carree-2de-short-negatif.mp4",
+  "poster": null,
+  "titre": "Pourquoi √(−9) n'existe pas",
+  "short": true,
+  "youtube": null
+ },
+ "racine-simplifier": {
+  "fichier": "seconde/maths/shorts/fr/racine-carree-2de/eleveai-maths-seconde-racine-carree-2de-short-simplifier.mp4",
+  "poster": null,
+  "titre": "√50 = 5√2 : comment simplifier une racine carrée",
+  "short": true,
+  "youtube": null
+ },
+ "racine-somme": {
+  "fichier": "seconde/maths/shorts/fr/racine-carree-2de/eleveai-maths-seconde-racine-carree-2de-short-somme.mp4",
+  "poster": null,
+  "titre": "√9 + √16 = √25 ? La faute que presque tout le monde fait",
+  "short": true,
+  "youtube": null
+ },
+ "reels-0999": {
+  "fichier": "seconde/maths/shorts/fr/reels-intervalles/eleveai-maths-seconde-reels-intervalles-short-0999.mp4",
+  "poster": "seconde/maths/shorts/fr/reels-intervalles/eleveai-maths-seconde-reels-intervalles-short-0999.png",
+  "titre": "0,999… = 1 — et ce n'est pas un arrondi",
+  "short": true,
+  "youtube": "rmsHC82_MoM"
+ },
+ "reels-intervalles": {
+  "fichier": "seconde/maths/paysage/fr/reels-intervalles/eleveai-maths-seconde-reels-intervalles.mp4",
+  "poster": "seconde/maths/paysage/fr/reels-intervalles/eleveai-maths-seconde-reels-intervalles.png",
+  "titre": "Maths seconde · Valeur absolue et intervalles — EleveAI",
+  "short": false,
+  "youtube": null
+ },
+ "reels-moinsx": {
+  "fichier": "seconde/maths/shorts/fr/reels-intervalles/eleveai-maths-seconde-reels-intervalles-short-moinsx.mp4",
+  "poster": "seconde/maths/shorts/fr/reels-intervalles/eleveai-maths-seconde-reels-intervalles-short-moinsx.png",
+  "titre": "−x est parfois positif : le piège de la valeur absolue",
+  "short": true,
+  "youtube": "AlpV7nui2ss"
+ },
+ "repere-coordonnees": {
+  "fichier": "seconde/maths/paysage/fr/repere-coordonnees/eleveai-maths-seconde-repere-coordonnees.mp4",
+  "poster": null,
+  "titre": "Maths seconde · Repère et coordonnées — EleveAI",
+  "short": false,
+  "youtube": null
+ },
+ "repere-diagonales": {
+  "fichier": "seconde/maths/shorts/fr/repere-coordonnees/eleveai-maths-seconde-repere-coordonnees-short.mp4",
+  "poster": null,
+  "titre": "Parallélogramme ? Compare les DIAGONALES, pas les côtés",
+  "short": true,
+  "youtube": null
+ },
+ "seconde-analyse-graphique": {
+  "fichier": "seconde/maths/paysage/fr/analyse-graphique/eleveai-maths-seconde-analyse-graphique.mp4",
+  "poster": "seconde/maths/paysage/fr/analyse-graphique/eleveai-maths-seconde-analyse-graphique.png",
+  "titre": "Analyse graphique : image, antécédents, tableaux, inéquations — Maths seconde",
+  "short": false,
+  "youtube": "YpVjGHxNKZI"
+ },
+ "seconde-analyse-graphique-short-nuit": {
+  "fichier": "seconde/maths/shorts/fr/analyse-graphique/eleveai-maths-seconde-analyse-graphique-short-nuit.mp4",
+  "poster": "seconde/maths/shorts/fr/analyse-graphique/eleveai-maths-seconde-analyse-graphique-short-nuit.png",
+  "titre": "Ne te trompe pas d'axe ! Lire une courbe en 40 secondes 🌙 — Maths seconde #Shorts",
+  "short": true,
+  "youtube": "_v75dLlG2S4"
+ },
+ "seconde-isoler-une-lettre": {
+  "fichier": "seconde/maths/paysage/fr/isoler-une-lettre/eleveai-maths-seconde-isoler-une-lettre.mp4",
+  "poster": "seconde/maths/paysage/fr/isoler-une-lettre/eleveai-maths-seconde-isoler-une-lettre.png",
+  "titre": "Une formule = 3 formules : isoler une lettre — Maths 2de, 1re, STMG",
+  "short": false,
+  "youtube": "j-vrDltO9vA"
+ },
+ "seconde-proba-modele": {
+  "fichier": "seconde/maths/probabilites/02-loi-de-probabilite/eleveai-maths-seconde-proba-modele.mp4",
+  "poster": "seconde/maths/probabilites/02-loi-de-probabilite/eleveai-maths-seconde-proba-modele.png",
+  "titre": "Dé truqué : P(pair) = 3/6 ? — La loi de probabilité — épisode 2 · Maths 2de",
+  "short": false,
+  "youtube": null
+ },
+ "seconde-proba-modele-short": {
+  "fichier": "seconde/maths/probabilites/02-loi-de-probabilite/eleveai-maths-seconde-proba-modele-short.mp4",
+  "poster": "seconde/maths/probabilites/02-loi-de-probabilite/eleveai-maths-seconde-proba-modele-short.png",
+  "titre": "Le 6 sort 2 fois plus : 1 chance sur 6 ? 🎲 — 2de #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "seconde-proba-vocabulaire": {
+  "fichier": "seconde/maths/probabilites/01-vocabulaire/eleveai-maths-seconde-proba-vocabulaire.mp4",
+  "poster": "seconde/maths/probabilites/01-vocabulaire/eleveai-maths-seconde-proba-vocabulaire.png",
+  "titre": "11 totaux, 11 chances égales ? — Univers, issue, événement — épisode 1 · Maths 2de",
+  "short": false,
+  "youtube": null
+ },
+ "seconde-proba-vocabulaire-short": {
+  "fichier": "seconde/maths/probabilites/01-vocabulaire/eleveai-maths-seconde-proba-vocabulaire-short.mp4",
+  "poster": "seconde/maths/probabilites/01-vocabulaire/eleveai-maths-seconde-proba-vocabulaire-short.png",
+  "titre": "7 ou 12 : sur lequel tu paries ? 🎲 — 2de #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "seconde-signes-expression": {
+  "fichier": "seconde/maths/paysage/fr/signes-expression/eleveai-maths-seconde-signes-expression.mp4",
+  "poster": "seconde/maths/paysage/fr/signes-expression/eleveai-maths-seconde-signes-expression.png",
+  "titre": "Le tableau de signes : produit, quotient, inéquations — Maths seconde",
+  "short": false,
+  "youtube": null
+ },
+ "seconde-signes-expression-short-dauphin": {
+  "fichier": "seconde/maths/shorts/fr/signes-expression/eleveai-maths-seconde-signes-short-dauphin.mp4",
+  "poster": "seconde/maths/shorts/fr/signes-expression/eleveai-maths-seconde-signes-short-dauphin.png",
+  "titre": "Sous l'eau −, dans l'air + : le tableau de signes du dauphin 🐬 — Maths seconde #Shorts",
+  "short": true,
+  "youtube": "x2m4vzZG1as"
+ },
+ "sondages-avance": {
+  "fichier": "actu/maths/shorts/fr/sondages/eleveai-maths-actu-sondages-short-avance.mp4",
+  "poster": null,
+  "titre": "0,5 point d'avance, ce n'est pas une avance",
+  "short": true,
+  "youtube": null
+ },
+ "sondages-avis": {
+  "fichier": "actu/maths/shorts/fr/sondages/eleveai-maths-actu-sondages-short-avis.mp4",
+  "poster": null,
+  "titre": "Sondage ou urne : où ton avis compte-t-il vraiment ?",
+  "short": true,
+  "youtube": null
+ },
+ "sondages-marge": {
+  "fichier": "actu/maths/paysage/fr/sondages/eleveai-maths-actu-sondages.mp4",
+  "poster": null,
+  "titre": "30 %, 34 %, 34,5 % : trois instituts, la même semaine",
+  "short": false,
+  "youtube": "yz5imfqjCJ8"
+ },
+ "sondages-mille": {
+  "fichier": "actu/maths/shorts/fr/sondages/eleveai-maths-actu-sondages-short-mille.mp4",
+  "poster": null,
+  "titre": "Pourquoi 1 000 personnes suffisent pour 48 millions",
+  "short": true,
+  "youtube": null
+ },
+ "sondages-racine": {
+  "fichier": "actu/maths/shorts/fr/sondages/eleveai-maths-actu-sondages-short-racine.mp4",
+  "poster": null,
+  "titre": "4 × plus de monde ne rend pas un sondage 4 × plus précis",
+  "short": true,
+  "youtube": null
+ },
+ "sondages-trois": {
+  "fichier": "actu/maths/shorts/fr/sondages/eleveai-maths-actu-sondages-short-trois.mp4",
+  "poster": null,
+  "titre": "4,5 points d'écart entre trois sondages de la même semaine",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-notation": {
+  "fichier": "stmg/maths/probabilites/02-notation/eleveai-maths-stmg-proba-notation.mp4",
+  "poster": "stmg/maths/probabilites/02-notation/eleveai-maths-stmg-proba-notation.png",
+  "titre": "P_R(T) ou P_T(R) ? Ne te trompe plus d'indice — La notation P_A(B) — épisode 2 · Maths STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-notation-short": {
+  "fichier": "stmg/maths/probabilites/02-notation/eleveai-maths-stmg-proba-notation-short.mp4",
+  "poster": "stmg/maths/probabilites/02-notation/eleveai-maths-stmg-proba-notation-short.png",
+  "titre": "60 % des clients avec un avis reviennent : comment l'écrire ? 🛒 — STMG #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-reconnaitre": {
+  "fichier": "stmg/maths/probabilites/01-reconnaitre/eleveai-maths-stmg-proba-reconnaitre.mp4",
+  "poster": "stmg/maths/probabilites/01-reconnaitre/eleveai-maths-stmg-proba-reconnaitre.png",
+  "titre": "150 sur 200 ou sur 500 ? — Reconnaître une probabilité conditionnelle — épisode 1 · Maths STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-reconnaitre-short": {
+  "fichier": "stmg/maths/probabilites/01-reconnaitre/eleveai-maths-stmg-proba-reconnaitre-short.mp4",
+  "poster": "stmg/maths/probabilites/01-reconnaitre/eleveai-maths-stmg-proba-reconnaitre-short.png",
+  "titre": "80 % des bien triés = 80 % du plastique ? ♻️ — STMG #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "terminale-continuite-tvi": {
+  "fichier": "terminale/maths/paysage/fr/continuite-tvi/eleveai-maths-terminale-continuite-tvi.mp4",
+  "poster": "terminale/maths/paysage/fr/continuite-tvi/eleveai-maths-terminale-continuite-tvi.png",
+  "titre": "Le théorème des valeurs intermédiaires (TVI) — Maths terminale",
+  "short": false,
+  "youtube": "GWVlbZyiME4"
+ },
+ "terminale-continuite-tvi-short-appliquer": {
+  "fichier": "terminale/maths/shorts/fr/continuite-tvi/eleveai-maths-terminale-continuite-tvi-short-appliquer.mp4",
+  "poster": "terminale/maths/shorts/fr/continuite-tvi/eleveai-maths-terminale-continuite-tvi-short-appliquer.png",
+  "titre": "Prouver qu'une solution existe, sans la calculer (TVI)",
+  "short": true,
+  "youtube": null
+ },
+ "terminale-continuite-tvi-short-continuite": {
+  "fichier": "terminale/maths/shorts/fr/continuite-tvi/eleveai-maths-terminale-continuite-tvi-short-continuite.mp4",
+  "poster": "terminale/maths/shorts/fr/continuite-tvi/eleveai-maths-terminale-continuite-tvi-short-continuite.png",
+  "titre": "De −1 à 1, une fonction touche forcément 0 ? (le piège)",
+  "short": true,
+  "youtube": null
+ },
+ "terminale-continuite-tvi-short-defi": {
+  "fichier": "terminale/maths/shorts/fr/continuite-tvi/eleveai-maths-terminale-continuite-tvi-short-defi.mp4",
+  "poster": "terminale/maths/shorts/fr/continuite-tvi/eleveai-maths-terminale-continuite-tvi-short-defi.png",
+  "titre": "Trouver α au centième, sans formule (TVI et balayage)",
+  "short": true,
+  "youtube": null
+ },
+ "terminale-continuite-tvi-short-rediger": {
+  "fichier": "terminale/maths/shorts/fr/continuite-tvi/eleveai-maths-terminale-continuite-tvi-short-rediger.mp4",
+  "poster": "terminale/maths/shorts/fr/continuite-tvi/eleveai-maths-terminale-continuite-tvi-short-rediger.png",
+  "titre": "Le TVI au bac : les 4 lignes qui rapportent tous les points",
+  "short": true,
+  "youtube": null
+ },
+ "terminale-continuite-tvi-short-unicite": {
+  "fichier": "terminale/maths/shorts/fr/continuite-tvi/eleveai-maths-terminale-continuite-tvi-short-unicite.mp4",
+  "poster": "terminale/maths/shorts/fr/continuite-tvi/eleveai-maths-terminale-continuite-tvi-short-unicite.png",
+  "titre": "TVI : au moins une solution, ou une seule ? (le piège du bac)",
+  "short": true,
+  "youtube": null
+ },
+ "terminale-proba-arbre": {
+  "fichier": "terminale/maths/probabilites/01-arbre-pondere/eleveai-maths-terminale-proba-arbre.mp4",
+  "poster": "terminale/maths/probabilites/01-arbre-pondere/eleveai-maths-terminale-proba-arbre.png",
+  "titre": "0,3 + 0,2 ? Non ! — L'arbre pondéré — épisode 1 · Maths Tle spé",
+  "short": false,
+  "youtube": "QnNsruV3HL4"
+ },
+ "terminale-proba-arbre-short": {
+  "fichier": "terminale/maths/probabilites/01-arbre-pondere/eleveai-maths-terminale-proba-arbre-short.mp4",
+  "poster": "terminale/maths/probabilites/01-arbre-pondere/eleveai-maths-terminale-proba-arbre-short.png",
+  "titre": "Il arrête 25 % des tirs ? Pas si vite ! ⚽ — Tle spé #Shorts",
+  "short": true,
+  "youtube": "ipFC4CsntgY"
+ },
+ "terminale-proba-formule": {
+  "fichier": "terminale/maths/probabilites/02-formule-et-inversion/eleveai-maths-terminale-proba-formule.mp4",
+  "poster": "terminale/maths/probabilites/02-formule-et-inversion/eleveai-maths-terminale-proba-formule.png",
+  "titre": "Test fiable à 95 %… et 33 % de malades ? — Inverser la condition — épisode 2 · Maths Tle spé",
+  "short": false,
+  "youtube": null
+ },
+ "terminale-proba-formule-short": {
+  "fichier": "terminale/maths/probabilites/02-formule-et-inversion/eleveai-maths-terminale-proba-formule-short.mp4",
+  "poster": "terminale/maths/probabilites/02-formule-et-inversion/eleveai-maths-terminale-proba-formule-short.png",
+  "titre": "Test positif = malade à 95 % ? NON ! 🧪 — Tle spé #Shorts",
+  "short": true,
+  "youtube": null
+ }
+}

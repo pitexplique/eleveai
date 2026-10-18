@@ -30,6 +30,7 @@ import { useEleve } from "@/context/EleveContext";
 import Link from "next/link";
 import { BookOpen, Camera, ChevronRight, PencilLine, Play } from "lucide-react";
 import { ficheExercicesHrefPourCoach } from "@/lib/fiches-exercices/registre";
+import { lienVideo } from "@/lib/videos/lienVideo";
 import { ficheClasseSource, ficheHrefPourCoach, libelleClasse } from "@/lib/fiches/registre";
 import { useNotionsPliees } from "@/components/coach/useNotionsPliees";
 import { track } from "@vercel/analytics";
@@ -1108,7 +1109,7 @@ export default function CoachIA() {
                               Le ▶ rouge dit « vidéo » aussi bien. */}
                           {videos.length ? (
                             <a
-                              href={videos[0].url}
+                              href={lienVideo(videos[0].url)}
                               target="_blank"
                               rel="noopener noreferrer"
                               className={[CASE_VIDEO, BOUTON_SECONDAIRE].join(" ")}
@@ -1175,7 +1176,7 @@ export default function CoachIA() {
                                     <span className="flex shrink-0 items-center gap-1 self-center">
                                       {paysage ? (
                                         <a
-                                          href={paysage.url}
+                                          href={lienVideo(paysage.url)}
                                           target="_blank"
                                           rel="noopener noreferrer"
                                           onClick={(e) => e.stopPropagation()}
@@ -1188,7 +1189,7 @@ export default function CoachIA() {
                                       ) : null}
                                       {short ? (
                                         <a
-                                          href={short.url}
+                                          href={lienVideo(short.url)}
                                           target="_blank"
                                           rel="noopener noreferrer"
                                           onClick={(e) => e.stopPropagation()}
