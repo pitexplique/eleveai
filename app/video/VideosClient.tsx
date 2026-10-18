@@ -16,6 +16,8 @@ export type VideoListe = {
   publiee: boolean;
 };
 
+export type VideoUne = { id: string; titre: string; src: string; poster: string | null };
+
 // Dossier de manim/sorties → libellé, dans l'ordre de la scolarité.
 const CLASSES: [string, string][] = [
   ["cp", "CP"], ["ce1", "CE1"], ["ce2", "CE2"], ["cm1", "CM1"], ["cm2", "CM2"],
@@ -30,7 +32,39 @@ const libelleClasse = (c: string) => LIBELLE.get(c) ?? c;
 
 const sansAccents = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 
-export default function VideosClient({ videos }: { videos: VideoListe[] }) {
+// ⛔ En pause (preload="metadata", jamais autoPlay) : il appuie lui-même.
+function LecteurUne({ v, short }: { v: VideoUne; short?: boolean }) {
+  return (
+    <figure className="min-w-0">
+      <video
+        src={v.src}
+        poster={v.poster ?? undefined}
+        controls
+        playsInline
+        preload="metadata"
+        className={[
+          "w-full rounded-2xl bg-black shadow-lg",
+          short ? "aspect-[9/16]" : "aspect-video",
+        ].join(" ")}
+      />
+      <figcaption className="mt-2">
+        <Link href={`/video/${v.id}`} className="text-sm font-bold leading-5 text-slate-800 hover:text-rose-700">
+          {v.titre}
+        </Link>
+      </figcaption>
+    </figure>
+  );
+}
+
+export default function VideosClient({
+  videos,
+  paysage,
+  short,
+}: {
+  videos: VideoListe[];
+  paysage: VideoUne | null;
+  short: VideoUne | null;
+}) {
   const [classe, setClasse] = useState<string>("");
   const [recherche, setRecherche] = useState("");
 
@@ -127,6 +161,22 @@ export default function VideosClient({ videos }: { videos: VideoListe[] }) {
           ) : null}
         </label>
       </div>
+
+      {/* À la une : seulement sur « Toutes » sans recherche — dès qu'on
+          cherche, la liste remonte en haut. */}
+      {!classe && !recherche && (paysage || short) ? (
+        <section className="mt-4">
+          <h2 className="text-lg font-black text-slate-800">À la une</h2>
+          <div className="mt-2 grid items-start gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,14rem)]">
+            {paysage ? <LecteurUne v={paysage} /> : null}
+            {short ? (
+              <div className="mx-auto w-full max-w-[14rem]">
+                <LecteurUne v={short} short />
+              </div>
+            ) : null}
+          </div>
+        </section>
+      ) : null}
 
       {groupes.length === 0 ? (
         <p className="mt-8 text-center text-slate-500">Aucune vidéo ne correspond.</p>
