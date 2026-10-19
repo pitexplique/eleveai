@@ -144,3 +144,9 @@ manim/**/*.srt
 # site et doivent rester suivis : `public/audio/` (1 766 fichiers, 35,5 Mo —
 # la dictée et le podcast, appelés depuis app/podcast-maths/page.tsx) et
 # `public/apercus/`. Ici on ne chasse que ce qui part sur YouTube.
+
+# ⛔ LA STORY INSTAGRAM NE PART JAMAIS (Frédéric, 19/10/2026 : « la story
+# d'Instagram ne doit jamais être poussée », « ça ne concerne pas le site
+# eleveai.fr »). Ses scripts restent sur ce poste, hors de GitHub et de Vercel.
+scripts/pub-story-du-jour.py
+scripts/story-du-jour-donnees.ts

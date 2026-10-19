@@ -22,3 +22,6 @@ pub/
 # dans un build Next.js.
 scripts/*.py
 scripts/*.ps1
+
+# La story Instagram du jour (19/10/2026) : rien à voir avec le site.
+scripts/story-du-jour-donnees.ts
