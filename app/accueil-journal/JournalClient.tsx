@@ -297,7 +297,16 @@ function Une({ mise, une }: { mise: Mise; une: UneProps }) {
   if (!une.paysage) return null;
   return (
     <Bloc mise={mise} quoi="une" rubrique={`À la Une · ${une.classe}`}>
-      <Vignette v={une.paysage} mise={mise} quoi="une" grande />
+      {/* Une Une peut être un SHORT (le dessin animé Ti Margo, 20/10/2026) :
+          vertical, il est centré et bridé en largeur au lieu de remplir la
+          colonne — sinon il ferait trois écrans de haut. */}
+      {une.paysage.short ? (
+        <div className="mx-auto max-w-[15rem]">
+          <Vignette v={une.paysage} mise={mise} quoi="une" grande />
+        </div>
+      ) : (
+        <Vignette v={une.paysage} mise={mise} quoi="une" grande />
+      )}
       <div className="mt-4 flex gap-4">
         <div className="min-w-0 flex-1">
           <h2 className={`${t.titre} text-xl leading-tight sm:text-3xl`}>

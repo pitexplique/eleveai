@@ -42,19 +42,23 @@ export type UneJournal = {
 /** L'ÉDITION DE LA SEMAINE : les Unes datées, la plus récente semaine en tête. */
 export const EDITION: UneJournal[] = [
   // ── Semaine du lundi 19 au dimanche 25 octobre 2026 ──
+  // ⭐ Lundi et mardi : la Diagonale des Fous, qui vient de finir (15-18/10).
+  // Frédéric, 19/10 : « on pourrait pas faire la une sur la Diagonale des fous
+  // pendant 2 jours ».
   {
     date: "2026-10-19",
-    paysage: "6e-decimal-nombre",
-    short: "6e-decimal-nombre-short-zero",
-    classe: "6e",
-    utile: "0,7 est plus grand que 0,65 : on compare d'abord les dixièmes, pas le nombre de chiffres.",
+    paysage: "6e-aire-longueur-convertir-diagonale",
+    short: "6e-aire-longueur-short-diagonale",
+    classe: "Diagonale des Fous · 6e",
+    utile: "Pour passer des mètres aux centimètres, on multiplie par 100 : 1 000 m de montée, c'est 100 000 cm.",
   },
   {
+    // Une SHORT en Une : le dessin animé Ti Margo (« j'adore », 15/10).
     date: "2026-10-20",
-    paysage: "4e-pythagore-hypotenuse",
-    short: "4e-pythagore-hypotenuse-short",
-    classe: "4e",
-    utile: "Dans un triangle rectangle, le carré de l'hypoténuse est égal à la somme des carrés des deux autres côtés.",
+    paysage: "5e-relatif-nombre-short-ti-margo-diagonale",
+    short: "5e-relatif-nombre-short-montees-cachees",
+    classe: "Diagonale des Fous · 5e",
+    utile: "On compte les montées en + et les descentes en − : après 10 200 m de montée, l'arrivée n'est que 47 m plus haut que le départ.",
   },
   {
     date: "2026-10-21",
@@ -65,16 +69,17 @@ export const EDITION: UneJournal[] = [
   },
   {
     date: "2026-10-22",
-    paysage: "974-eau",
-    short: "974-eau-short-millimetre",
-    classe: "5e",
-    utile: "30 mm de pluie, c'est 30 litres d'eau tombés sur chaque mètre carré.",
+    paysage: "6e-decimal-nombre",
+    short: "6e-decimal-nombre-short-zero",
+    classe: "6e",
+    utile: "0,7 est plus grand que 0,65 : on compare d'abord les dixièmes, pas le nombre de chiffres.",
   },
   {
     date: "2026-10-23",
-    paysage: "bases-fonctions",
-    classe: "Les bases",
-    utile: "Une fonction associe à chaque nombre une seule image : c'est ce qui permet de prévoir.",
+    paysage: "4e-pythagore-hypotenuse",
+    short: "4e-pythagore-hypotenuse-short",
+    classe: "4e",
+    utile: "Dans un triangle rectangle, le carré de l'hypoténuse est égal à la somme des carrés des deux autres côtés.",
   },
   {
     // Samedi : une vidéo de la playlist CRPE (pour les futurs professeurs des écoles).
@@ -90,10 +95,17 @@ export const EDITION: UneJournal[] = [
     classe: "Terminale",
     utile: "Une courbe sans saut qui passe sous une valeur puis au-dessus la franchit forcément.",
   },
+  // Sortis de la semaine pour faire place à la Diagonale (le tirage les reprendra) :
+  // 974-eau, bases-fonctions — leurs phrases restent dans UNES ci-dessous.
 ];
 
 /** Les phrases « utiles » des Unes sans date (le tirage automatique les reprend). */
 export const UNES: UneJournal[] = [
+  {
+    paysage: "bases-fonctions",
+    classe: "Les bases",
+    utile: "Une fonction associe à chaque nombre une seule image : c'est ce qui permet de prévoir.",
+  },
   {
     paysage: "974-eau",
     short: "974-eau-short-millimetre",

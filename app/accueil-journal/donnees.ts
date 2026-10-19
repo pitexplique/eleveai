@@ -120,7 +120,7 @@ export function donneesDuJournal(jour = jourParis()) {
     // retiré qu'après (il en reste alors 8) : retirer d'abord changeait la
     // longueur de la liste d'un jour à l'autre, et deux jours pouvaient
     // retomber sur le même départ.
-    shorts: fenetre(SHORTS, jour, 9).filter((s) => s.id !== une.short?.id)
+    shorts: fenetre(SHORTS, jour, 9).filter((s) => s.id !== une.short?.id && s.id !== une.p.id)
       .map(video)
       .filter((x): x is VideoJournal => x !== null),
     // Deux par jour, et les deux suivants le lendemain : peu de vidéos « réel »
