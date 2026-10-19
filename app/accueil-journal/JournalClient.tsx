@@ -22,6 +22,7 @@ import {
   Calculator,
   Camera,
   Clapperboard,
+  ClipboardCheck,
   GraduationCap,
   Languages,
   PenLine,
@@ -478,6 +479,16 @@ const AUTRES_MATIERES = [
   { label: "Photo d'un exercice", href: "/photo-exercice", Icone: Camera },
 ];
 
+/** Les entraînements de MATHS hors coach — repris de l'ancien accueil
+ *  (PanneauEvaluation et `LIEN_DANS_ACTIONS`). Routes vérifiées le 19/10. */
+const EXAMENS = [
+  { label: "Évaluation par chapitres", texte: "Coche un chapitre, plusieurs ou tout", href: "/parcours" },
+  { label: "Automatismes", texte: "Brevet et 1re, sans calculatrice", href: "/automatismes-maths" },
+  { label: "Brevet", texte: "Les exercices, notion par notion", href: "/coach-brevet" },
+  { label: "Bac spécialité", texte: "Première et terminale", href: "/coach-bac-spe" },
+  { label: "Évaluations nationales", texte: "6e et 4e, format réel", href: "/evaluation-nationale-college" },
+];
+
 function Coach({ mise }: { mise: Mise }) {
   const t = TON[mise];
   const etroit = mise === "fil";
@@ -510,7 +521,30 @@ function Coach({ mise }: { mise: Mise }) {
             </div>
           ))}
         </div>
-        <div className="mt-5 flex flex-wrap items-center gap-2 border-t border-current/15 pt-4">
+        {/* ⭐ 19/10/2026, Frédéric : « avant on avait automatisme en maths », « et
+            même évaluation ». L'ancien accueil les portait dans sa ligne
+            d'onglets (AccueilMatieres.tsx) ; le journal les avait perdus. */}
+        <div className="mt-5 border-t border-current/15 pt-4">
+          <p className="mb-2 text-sm font-black uppercase tracking-wide opacity-70">Évaluations et examens</p>
+          <div className="flex flex-wrap gap-2">
+            {EXAMENS.map(({ label, texte, href }) => (
+              <Lien
+                key={href}
+                href={href}
+                quoi="coach"
+                mise={mise}
+                className={`inline-flex flex-col rounded-xl px-3 py-2 text-left shadow-sm transition hover:-translate-y-0.5 ${t.bouton}`}
+              >
+                <span className="flex items-center gap-1.5 text-sm font-black">
+                  <ClipboardCheck className="h-4 w-4" aria-hidden="true" />
+                  {label}
+                </span>
+                <span className="text-xs opacity-80">{texte}</span>
+              </Lien>
+            ))}
+          </div>
+        </div>
+        <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-current/15 pt-4">
           <span className="text-sm font-bold opacity-70">Et aussi :</span>
           {AUTRES_MATIERES.map(({ label, href, Icone }) => (
             <Lien
