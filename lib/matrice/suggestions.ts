@@ -379,11 +379,32 @@ export function suggerer(
   }
 
   notes.sort((a, b) => b.note - a.note || a.rang - b.rang);
-  return notes.slice(0, PLAFOND).map(({ s }) => ({
+  const trouvees = notes.slice(0, PLAFOND).map(({ s }) => ({
     id: s.id,
     label: s.label,
     matiereLabel: s.matiereLabel,
     niveauLabel: s.niveauLabel,
     url: s.url,
   }));
+
+  // ⭐ « VIDÉO PYTHAGORE » (19/10/2026). Tous les mots tapés doivent se
+  // retrouver dans une même entrée, et aucune ne porte à la fois « vidéo » et
+  // « pythagore » : la liste restait vide. Quand la saisie parle de vidéo ET
+  // d'autre chose, la première ligne ouvre la galerie déjà filtrée sur le reste.
+  const motVideo = (m: string) => /^(vid|youtube|short)/.test(m);
+  const reste = mots.filter((m) => !motVideo(m));
+  if (mots.some(motVideo) && reste.length > 0) {
+    const q = reste.join(" ");
+    return [
+      {
+        id: `videos-${q}`,
+        label: `Les vidéos : « ${q} »`,
+        matiereLabel: "EleveAI",
+        niveauLabel: "Vidéo",
+        url: `/video?q=${encodeURIComponent(q)}`,
+      },
+      ...trouvees.slice(0, PLAFOND - 1),
+    ];
+  }
+  return trouvees;
 }

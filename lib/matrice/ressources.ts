@@ -1639,6 +1639,26 @@ export const RESSOURCES: RessourceEleveAI[] = [
     statut: "validee",
   },
   {
+    /**
+     * ⭐ TOUTES LES VIDÉOS (19/10/2026). Frédéric : « dans la barre de
+     * recherche si je tape vidéo rien ne s'affiche, il doit aller sur le
+     * répertoire vidéo ». La galerie /video (R2, façon Netflix) n'avait pas de
+     * mots-clés, donc pas de place dans la recherche d'en-tête.
+     * « vidéo pythagore » est traité à part dans suggestions.ts (→ /video?q=).
+     */
+    id: "videos",
+    titre: "Toutes les vidéos EleveAI",
+    promesse: "Les leçons en vidéo et les shorts, rangés par classe, avec une recherche.",
+    url: "/video",
+    motsCles: ["video", "videos", "youtube", "regarder", "short", "shorts", "film", "lecon en video"],
+    niveaux: ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale", "prof", "parent"],
+    matiere: "transversal",
+    notions: ["*"],
+    intentions: ["comprendre"],
+    type: "video",
+    statut: "validee",
+  },
+  {
     id: "dico",
     titre: "Le dico des mots et des gestes",
     promesse: "Le mot de la consigne qu'on n'a pas compris.",

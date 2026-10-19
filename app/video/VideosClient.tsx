@@ -110,8 +110,12 @@ export default function VideosClient({
 
   // Lecture puis écriture de ?classe= sans recharger la page.
   useEffect(() => {
-    const c = new URLSearchParams(window.location.search).get("classe");
+    const p = new URLSearchParams(window.location.search);
+    const c = p.get("classe");
     if (c) setClasse(c);
+    // ?q= : posé par la recherche de l'en-tête (« vidéo pythagore », 19/10).
+    const q = p.get("q");
+    if (q) setRecherche(q);
   }, []);
   const choisir = (c: string) => {
     setClasse(c);
