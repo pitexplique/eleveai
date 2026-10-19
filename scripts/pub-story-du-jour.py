@@ -14,6 +14,7 @@
 # Usage : python scripts/pub-story-du-jour.py [décalage]   (0 = aujourd'hui, 1 = demain)
 #   → pub/instagram/stories/AAAA-MM-JJ/{1-defi,2-reponse}.jpg + a-faire.txt
 
+import html
 import json
 import subprocess
 import sys
@@ -283,19 +284,56 @@ if __name__ == "__main__":
     une = jour["une"]
     lignes_choix = "\n".join(f"{LETTRES[i]}. {c}" for i, c in enumerate(d["choix"]))
     apprendre = f"\n📺 Aujourd'hui sur eleveai.fr ({une['classe']}) : {une['utile']}\n" if une.get("utile") else ""
+    textes = [
+        ("Sur la 1 (le défi) — outil « Aa »",
+         f"Défi niveau {d['classe']} : A, B ou C ? Réponse demain 🦎"),
+        ("Sur la 2 (la réponse) — outil « Aa »",
+         "Tu avais trouvé ? 👉 eleveai.fr"),
+        ("Légende longue — publication, Facebook, WhatsApp",
+         f"🦎 Le défi du jour de Ti Margo — niveau {d['classe']}\n\n"
+         f"{d['question']}\n\n"
+         f"{lignes_choix}\n\n"
+         "💬 Ta réponse en commentaire : A, B ou C ? La correction demain, en story.\n"
+         f"{apprendre}\n"
+         "👉 Des exercices et des vidéos gratuits, du CP à la Terminale : eleveai.fr\n\n"
+         "#maths #défidujour #collège #lycée #LaRéunion #974 #eleveai"),
+    ]
     (dossier / "legende.txt").write_text(
-        "TEXTE COURT (outil « Aa » de la story, sur la 1) :\n"
-        f"Défi niveau {d['classe']} : A, B ou C ? Réponse demain 🦎\n\n"
-        "TEXTE COURT (sur la 2) :\n"
-        "Tu avais trouvé ? 👉 eleveai.fr\n\n"
-        "LÉGENDE LONGUE (publication, Facebook, WhatsApp) :\n\n"
-        f"🦎 Le défi du jour de Ti Margo — niveau {d['classe']}\n\n"
-        f"{d['question']}\n\n"
-        f"{lignes_choix}\n\n"
-        "💬 Ta réponse en commentaire : A, B ou C ? La correction demain, en story.\n"
-        f"{apprendre}\n"
-        "👉 Des exercices et des vidéos gratuits, du CP à la Terminale : eleveai.fr\n\n"
-        "#maths #défidujour #collège #lycée #LaRéunion #974 #eleveai\n",
+        "\n\n".join(f"{titre.upper()} :\n{texte}" for titre, texte in textes) + "\n",
         encoding="utf-8-sig",
+    )
+    # 19/10 : « mets une icône copier » → la même chose en page, un bouton par texte.
+    blocs = "".join(
+        f'<section><h2>{html.escape(titre)}</h2><pre id="t{i}">{html.escape(texte)}</pre>'
+        f'<button onclick="copier({i}, this)">📋 Copier</button></section>'
+        for i, (titre, texte) in enumerate(textes)
+    )
+    (dossier / "legende.html").write_text(
+        f"""<!doctype html><html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Légende du {html.escape(jour['date'])}</title>
+<style>
+body{{margin:0;padding:24px 16px;background:#fff7e6;color:#0f172a;font:17px/1.45 Arial,sans-serif}}
+main{{max-width:640px;margin:auto}} h1{{font-size:22px;color:#ea580c}}
+section{{background:#fff;border-radius:16px;padding:16px;margin:16px 0;box-shadow:0 2px 10px #0f172a14}}
+h2{{font-size:15px;color:#475569;margin:0 0 8px}} pre{{white-space:pre-wrap;font:inherit;margin:0 0 12px}}
+button{{font:bold 17px Arial;border:0;border-radius:999px;padding:10px 20px;background:#fbbf24;color:#041b33;cursor:pointer}}
+button.ok{{background:#16a34a;color:#fff}}
+</style></head><body><main><h1>Story du {html.escape(jour['date'])}</h1>
+<p>Quiz : bonne réponse <b>{LETTRES[d['bonne']]}. {html.escape(d['choix'][d['bonne']])}</b></p>{blocs}</main>
+<script>
+function copier(i, b) {{
+  const t = document.getElementById("t" + i).innerText;
+  const fini = () => {{ b.textContent = "✅ Copié !"; b.className = "ok";
+    setTimeout(() => {{ b.textContent = "📋 Copier"; b.className = ""; }}, 1800); }};
+  if (navigator.clipboard) navigator.clipboard.writeText(t).then(fini, () => secours(t, fini));
+  else secours(t, fini);
+}}
+function secours(t, fini) {{
+  const z = document.createElement("textarea"); z.value = t; document.body.appendChild(z);
+  z.select(); document.execCommand("copy"); z.remove(); fini();
+}}
+</script></body></html>""",
+        encoding="utf-8",
     )
     print(dossier)
