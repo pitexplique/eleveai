@@ -1,0 +1,13 @@
+{
+  "00-garde": "Un jeu est-il équitable ? L'espérance répond.",
+  "01-situation": "Une roue : on paie 1 euro pour jouer. Avec une probabilité de 0,2, on reçoit 5 euros. Sinon, rien.",
+  "02-gain": "On regarde le gain NET, X : ce qu'on reçoit moins ce qu'on a payé. Si on gagne : 5 moins 1, égale 4 euros. Si on perd : moins 1 euro.",
+  "03-calcul": "L'espérance : 4 fois 0,2, égale 0,8. Moins 1 fois 0,8, égale moins 0,8. E de X égale 0,8 moins 0,8, égale 0.",
+  "04-equitable": "Une espérance nulle : en moyenne, on ne gagne rien et on ne perd rien. Le jeu est équitable.",
+  "05-variante": "Et si la roue ne rendait que 4 euros ? Gain net : 3 euros. 3 fois 0,2, égale 0,6. 0,6 moins 0,8, égale moins 0,2. Espérance négative : le jeu est défavorable au joueur. Il perd 20 centimes par partie, en moyenne.",
+  "06-piege": "Le piège : oublier la mise. Avec 5 euros reçus, 5 fois 0,2, égale 1 : on croirait gagner 1 euro par partie. Mais on a payé 1 euro pour jouer ! On calcule toujours le gain NET.",
+  "07-defi": "À toi de jouer. Mise de 1 euro, une chance sur 10 de gagner. Combien la roue doit-elle rendre pour que le jeu soit équitable ? Mets pause, et cherche !",
+  "07b-correction": "Correction. On appelle g le gain net quand on gagne. g fois 0,1, moins 1 fois 0,9, égale 0. Donc g égale 9 euros de gain net : la roue doit rendre 10 euros.",
+  "08-finale": "Ce que tu as appris. On calcule l'espérance du gain NET, mise retirée. Nulle : jeu équitable. Négative : défavorable au joueur. Positive : favorable au joueur. Prochaine vidéo : l'espérance, une moyenne à long terme.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

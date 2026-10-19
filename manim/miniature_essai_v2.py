@@ -1480,6 +1480,21 @@ for _cl, _bd in (("stmg", "STMG"), ("premiere-commun", "1RE")):
             "dossier": f"{_cl}/maths/probabilites/{_dos}",
         }
 
+# 19/10/2026 — lot 5 : variables aléatoires, communes STMG / 1re SPÉ.
+for _cl, _dosc, _bd in (("stmg", "stmg", "STMG"), ("premiere", "premiere", "1RE SPÉ")):
+    for _k, _dos, _titre, _haut, _bas in (
+        ("va-notation", "23-va-notation", ["COMPRENDRE", "X = a ET X ≤ a"], "X ≤ 2, c'est X = 2 ?", "non : 0 ET 2 !"),
+        ("va-loi", "24-va-loi", ["DRESSER LA LOI", "D'UNE VARIABLE ALÉATOIRE"], "0, 1, 2 piles : 1/3 chacun ?", "non : 0,25 · 0,5 · 0,25"),
+        ("va-esperance", "25-va-esperance", ["COMPRENDRE", "L'ESPÉRANCE"], "(0 + 2 + 10) ÷ 3 = 4 ?", "FAUX : E(X) = 1,6 !"),
+        ("va-equitable", "26-va-equitable", ["UN JEU", "EST-IL ÉQUITABLE ?"], "5 × 0,2 = 1 € de gain ?", "non : la mise !"),
+        ("va-moyenne", "27-va-moyenne", ["L'ESPÉRANCE,", "UNE MOYENNE"], "1,6 € à chaque partie ?", "non : à long terme !"),
+    ):
+        ESSAIS[f"eleveai-maths-{_cl}-proba-{_k}"] = {
+            "badge": f"MATHS · {_bd}", "duree": "EN 3 MIN", "titre": _titre,
+            "accroche": _piege_test("bleue", _haut, _bas),
+            "dossier": f"{_dosc}/maths/probabilites/{_dos}",
+        }
+
 # 19/10/2026 — lot 4 : Bernoulli et répétitions (STMG / 1re).
 for _cl, _bd in (("stmg", "STMG"), ("premiere-commun", "1RE")):
     for _k, _dos, _titre, _haut, _bas, _c in (

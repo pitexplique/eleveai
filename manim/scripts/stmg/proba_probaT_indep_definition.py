@@ -542,3 +542,8 @@ class ProbaIndepDefinitionSTMG(ProbaIndepDefinitionBase):
 
 class ProbaIndepDefinitionPremiere(ProbaIndepDefinitionBase):
     identite = "Maths 1re — EleveAI"
+
+
+# 19/10 : la même vidéo pour la 1re SPÉ (micro jumelle, pack par classe).
+class ProbaIndepDefinitionPremiereSpe(ProbaIndepDefinitionBase):
+    identite = "Maths 1re spé — EleveAI"

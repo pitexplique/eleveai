@@ -1,0 +1,12 @@
+{
+  "00-garde": "Une variable aléatoire : lire X égale a, et X inférieur ou égal à a.",
+  "01-situation": "À la kermesse, une roue fait gagner 0, 2 ou 10 euros. On appelle X le gain : X est une variable aléatoire, un nombre qui dépend du hasard.",
+  "02-valeurs": "X peut prendre trois valeurs : 0, 2 et 10.",
+  "03-egal": "« X égale 10 », c'est l'événement « on gagne 10 euros ». Sa probabilité s'écrit P de X égale 10. Ici, 0,1.",
+  "04-inferieur": "« X inférieur ou égal à 2 », c'est « on gagne 2 euros ou moins » : 0 ou 2. Sur cette roue, P de X égale 0, c'est 0,6, et P de X égale 2, c'est 0,3. Donc P de X inférieur ou égal à 2 égale 0,6 plus 0,3, égale 0,9.",
+  "05-piege": "Le piège : lire « X inférieur ou égal à 2 » comme « X égale 2 ». Inférieur ou égal, ce sont toutes les valeurs jusqu'à 2, le 2 compris : ici, 0 et 2.",
+  "06-defi": "À toi de jouer. Que veut dire « X supérieur ou égal à 2 » ? Et quelle est sa probabilité ? Mets pause, et cherche !",
+  "06b-correction": "Correction. « On gagne 2 euros ou plus » : 2 ou 10. P de X supérieur ou égal à 2 égale 0,3 plus 0,1, égale 0,4.",
+  "07-finale": "Ce que tu as appris. Une variable aléatoire est un nombre qui dépend du hasard. X égale a : X prend exactement la valeur a. X inférieur ou égal à a : toutes les valeurs jusqu'à a, a compris. Prochaine vidéo : la loi de probabilité.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -597,3 +597,8 @@ class ProbaIndepIncompatibleSTMG(ProbaIndepIncompatibleBase):
 
 class ProbaIndepIncompatiblePremiere(ProbaIndepIncompatibleBase):
     identite = "Maths 1re — EleveAI"
+
+
+# 19/10 : la même vidéo pour la 1re SPÉ (micro jumelle, pack par classe).
+class ProbaIndepIncompatiblePremiereSpe(ProbaIndepIncompatibleBase):
+    identite = "Maths 1re spé — EleveAI"

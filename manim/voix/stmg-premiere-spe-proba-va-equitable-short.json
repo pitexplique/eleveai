@@ -1,0 +1,5 @@
+{
+  "00-accroche": "À la roulette, tu mises 1 euro sur le rouge. 18 cases rouges sur 37. Tu gagnes 1 euro, ou tu perds ta mise. Jeu équitable ?",
+  "01-image": "Gagner : 18 sur 37. Perdre : 19 sur 37, à cause du zéro vert ! Espérance : 18 sur 37 moins 19 sur 37, égale moins 1 sur 37. Environ moins 3 centimes par euro misé. Le casino gagne toujours.",
+  "02-question": "Si tu mises 100 euros en tout, combien le casino garde-t-il en moyenne ? Réponds en commentaire !"
+}

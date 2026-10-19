@@ -1,0 +1,12 @@
+{
+  "00-garde": "L'espérance, c'est la moyenne… sur un très grand nombre de parties.",
+  "01-situation": "La roue de la kermesse : l'espérance du gain vaut 1,6 euro. Mais à chaque partie, on gagne 0, 2 ou 10 euros. Jamais 1,6 !",
+  "02-dix": "Jouons 10 parties. Les gains : 0, 2, 0, 0, 10, 0, 2, 0, 0, 2. Total : 16 euros. Moyenne : 1,6. Coup de chance !",
+  "03-autre": "Encore 10 parties : cette fois, aucun 10. Total : 4 euros, moyenne 0,4. Sur 10 parties, la moyenne bouge beaucoup.",
+  "04-mille": "Sur 1 000 parties, la moyenne se rapproche de 1,6. Plus on joue, plus la moyenne des gains se rapproche de l'espérance.",
+  "05-piege": "Le piège : attendre 1,6 euro à chaque partie. L'espérance ne dit rien d'une seule partie : elle dit ce qui se passe en moyenne, à long terme.",
+  "06-defi": "À toi de jouer. L'organisateur prévoit 500 parties à la kermesse. Combien d'euros de gains doit-il prévoir, environ ? Mets pause, et cherche !",
+  "06b-correction": "Correction. 500 fois 1,6, égale 800 euros, environ. C'est à ça que sert l'espérance : prévoir sur un grand nombre.",
+  "07-finale": "Ce que tu as appris. L'espérance est la moyenne des gains sur un très grand nombre de parties. Sur peu de parties, la moyenne varie beaucoup. Sur beaucoup, elle se rapproche de l'espérance.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

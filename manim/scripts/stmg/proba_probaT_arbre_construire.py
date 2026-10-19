@@ -702,3 +702,8 @@ class ProbaArbreConstruireSTMG(ProbaArbreConstruireBase):
 
 class ProbaArbreConstruirePremiere(ProbaArbreConstruireBase):
     identite = "Maths 1re — EleveAI"
+
+
+# 19/10 : la même vidéo pour la 1re SPÉ (micro jumelle, pack par classe).
+class ProbaArbreConstruirePremiereSpe(ProbaArbreConstruireBase):
+    identite = "Maths 1re spé — EleveAI"

@@ -17358,6 +17358,988 @@
         "ceinture jaune",
         "Shorts"
       ]
+    },
+    {
+      "id": "stmg-proba-va-notation",
+      "notionId": "va_loi_probabilite",
+      "microId": "va_ecritures",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/23-va-notation/eleveai-maths-stmg-proba-va-notation.mp4",
+      "miniature": "stmg/maths/probabilites/23-va-notation/eleveai-maths-stmg-proba-va-notation.png",
+      "titre": "X ≤ 2, ce n'est PAS X = 2 ! — Lire une variable aléatoire · Maths 1re spé · STMG",
+      "accroche": "À la kermesse, une roue fait gagner 0, 2 ou 10 euros. X, le gain, est une variable aléatoire : un nombre qui dépend du hasard.\n\nDans cette vidéo :\n• les valeurs de X : 0, 2 et 10\n• « X = 10 » : on gagne 10 euros, P(X = 10) = 0,1\n• « X inférieur ou égal à 2 » : 0 ou 2, P = 0,6 + 0,3 = 0,9\n• le piège : « inférieur ou égal à 2 » n'est pas « égal à 2 »\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : que veut dire « X supérieur ou égal à 2 », et quelle est sa probabilité ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_loi_probabilite&microId=va_ecritures&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Une variable aléatoire"
+        ],
+        [
+          "00:06",
+          "La roue de la kermesse"
+        ],
+        [
+          "00:18",
+          "Les valeurs de X"
+        ],
+        [
+          "00:23",
+          "X = 10"
+        ],
+        [
+          "00:35",
+          "X inférieur ou égal à 2"
+        ],
+        [
+          "00:58",
+          "Le piège"
+        ],
+        [
+          "01:12",
+          "À toi de jouer"
+        ],
+        [
+          "01:24",
+          "Correction"
+        ],
+        [
+          "01:38",
+          "Ce que tu as appris"
+        ],
+        [
+          "01:57",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "variable aléatoire",
+        "notation",
+        "kermesse",
+        "jeu",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-va-notation-short",
+      "notionId": "va_loi_probabilite",
+      "microId": "va_ecritures",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-va-notation",
+      "fichier": "stmg/maths/probabilites/23-va-notation/eleveai-maths-stmg-proba-va-notation-short.mp4",
+      "miniature": "stmg/maths/probabilites/23-va-notation/eleveai-maths-stmg-proba-va-notation-short.png",
+      "titre": "X inférieur ou égal à 5 : 5 € pile ? NON ! 🎡 #Shorts",
+      "accroche": "À un jeu, tu gagnes 0, 5 ou 20 euros. « X inférieur ou égal à 5 », c'est 5 euros OU MOINS : 0 ou 5. Le signe ramasse toutes les valeurs jusqu'à 5, le 5 compris.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : et « X strictement inférieur à 5 », quelles valeurs reste-t-il ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_loi_probabilite&microId=va_ecritures&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "variable aléatoire",
+        "notation",
+        "jeu",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-proba-va-notation",
+      "notionId": "variables_aleatoires",
+      "microId": "va_notation",
+      "classe": "premiere-spe",
+      "ceinture": "bleue",
+      "serie": "Maths 1re spé",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-va-notation",
+      "fichier": "premiere/maths/probabilites/23-va-notation/eleveai-maths-premiere-proba-va-notation.mp4",
+      "miniature": "premiere/maths/probabilites/23-va-notation/eleveai-maths-premiere-proba-va-notation.png",
+      "titre": "X ≤ 2, ce n'est PAS X = 2 ! — Lire une variable aléatoire · Maths 1re spé · STMG",
+      "accroche": "À la kermesse, une roue fait gagner 0, 2 ou 10 euros. X, le gain, est une variable aléatoire : un nombre qui dépend du hasard.\n\nDans cette vidéo :\n• les valeurs de X : 0, 2 et 10\n• « X = 10 » : on gagne 10 euros, P(X = 10) = 0,1\n• « X inférieur ou égal à 2 » : 0 ou 2, P = 0,6 + 0,3 = 0,9\n• le piège : « inférieur ou égal à 2 » n'est pas « égal à 2 »\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : que veut dire « X supérieur ou égal à 2 », et quelle est sa probabilité ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_notation&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Une variable aléatoire"
+        ],
+        [
+          "00:06",
+          "La roue de la kermesse"
+        ],
+        [
+          "00:18",
+          "Les valeurs de X"
+        ],
+        [
+          "00:23",
+          "X = 10"
+        ],
+        [
+          "00:35",
+          "X inférieur ou égal à 2"
+        ],
+        [
+          "00:58",
+          "Le piège"
+        ],
+        [
+          "01:12",
+          "À toi de jouer"
+        ],
+        [
+          "01:24",
+          "Correction"
+        ],
+        [
+          "01:38",
+          "Ce que tu as appris"
+        ],
+        [
+          "01:57",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "variable aléatoire",
+        "notation",
+        "kermesse",
+        "jeu",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-proba-va-notation-short",
+      "notionId": "variables_aleatoires",
+      "microId": "va_notation",
+      "classe": "premiere-spe",
+      "ceinture": "jaune",
+      "serie": "Maths 1re spé",
+      "type": "short",
+      "renvoie_vers": "premiere-proba-va-notation",
+      "meme_video_que": "stmg-proba-va-notation-short",
+      "fichier": "premiere/maths/probabilites/23-va-notation/eleveai-maths-premiere-proba-va-notation-short.mp4",
+      "miniature": "premiere/maths/probabilites/23-va-notation/eleveai-maths-premiere-proba-va-notation-short.png",
+      "titre": "X inférieur ou égal à 5 : 5 € pile ? NON ! 🎡 #Shorts",
+      "accroche": "À un jeu, tu gagnes 0, 5 ou 20 euros. « X inférieur ou égal à 5 », c'est 5 euros OU MOINS : 0 ou 5. Le signe ramasse toutes les valeurs jusqu'à 5, le 5 compris.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : et « X strictement inférieur à 5 », quelles valeurs reste-t-il ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_notation&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "variable aléatoire",
+        "notation",
+        "jeu",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "stmg-proba-va-loi",
+      "notionId": "va_loi_probabilite",
+      "microId": "va_dresser_loi",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/24-va-loi/eleveai-maths-stmg-proba-va-loi.mp4",
+      "miniature": "stmg/maths/probabilites/24-va-loi/eleveai-maths-stmg-proba-va-loi.png",
+      "titre": "0, 1 ou 2 piles : PAS un tiers chacun ! — Dresser une loi de probabilité · Maths 1re spé · STMG",
+      "accroche": "On lance deux pièces équilibrées ; X est le nombre de piles.\n\nDans cette vidéo :\n• étape 1 : les valeurs, 0, 1 et 2\n• étape 2 : les 4 issues, chacune 0,25\n• étape 3 : les probabilités, 0,25, 0,5 et 0,25\n• le tableau de la loi, et la somme qui fait 1\n• le piège : croire à un tiers chacun\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : on lance trois pièces : quelle est la probabilité d'obtenir exactement 3 piles ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_loi_probabilite&microId=va_dresser_loi&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Dresser une loi"
+        ],
+        [
+          "00:05",
+          "Deux pièces, X = nombre de piles"
+        ],
+        [
+          "00:11",
+          "Étape 1 : les valeurs"
+        ],
+        [
+          "00:21",
+          "Étape 2 : les 4 issues"
+        ],
+        [
+          "00:33",
+          "Étape 3 : les probabilités"
+        ],
+        [
+          "00:55",
+          "Le tableau de la loi"
+        ],
+        [
+          "01:10",
+          "La somme fait 1"
+        ],
+        [
+          "01:22",
+          "Le piège : un tiers chacun ?"
+        ],
+        [
+          "01:34",
+          "À toi de jouer"
+        ],
+        [
+          "01:47",
+          "Correction"
+        ],
+        [
+          "02:01",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:16",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "variable aléatoire",
+        "loi de probabilité",
+        "pile ou face",
+        "tableau",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-va-loi-short",
+      "notionId": "va_loi_probabilite",
+      "microId": "va_dresser_loi",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-va-loi",
+      "fichier": "stmg/maths/probabilites/24-va-loi/eleveai-maths-stmg-proba-va-loi-short.mp4",
+      "miniature": "stmg/maths/probabilites/24-va-loi/eleveai-maths-stmg-proba-va-loi-short.png",
+      "titre": "Somme 2 ou somme 7 : même chance ? 🎲 #Shorts",
+      "accroche": "Deux dés. Somme 2 : un seul cas, 1 et 1. Somme 7 : six cas, de 1 et 6 jusqu'à 6 et 1. Sur 36, le 7 est six fois plus probable que le 2.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : et la somme 12, combien de cas sur 36 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_loi_probabilite&microId=va_dresser_loi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "dés",
+        "loi de probabilité",
+        "somme",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-proba-va-loi",
+      "notionId": "variables_aleatoires",
+      "microId": "va_loi",
+      "classe": "premiere-spe",
+      "ceinture": "bleue",
+      "serie": "Maths 1re spé",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-va-loi",
+      "fichier": "premiere/maths/probabilites/24-va-loi/eleveai-maths-premiere-proba-va-loi.mp4",
+      "miniature": "premiere/maths/probabilites/24-va-loi/eleveai-maths-premiere-proba-va-loi.png",
+      "titre": "0, 1 ou 2 piles : PAS un tiers chacun ! — Dresser une loi de probabilité · Maths 1re spé · STMG",
+      "accroche": "On lance deux pièces équilibrées ; X est le nombre de piles.\n\nDans cette vidéo :\n• étape 1 : les valeurs, 0, 1 et 2\n• étape 2 : les 4 issues, chacune 0,25\n• étape 3 : les probabilités, 0,25, 0,5 et 0,25\n• le tableau de la loi, et la somme qui fait 1\n• le piège : croire à un tiers chacun\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : on lance trois pièces : quelle est la probabilité d'obtenir exactement 3 piles ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_loi&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Dresser une loi"
+        ],
+        [
+          "00:05",
+          "Deux pièces, X = nombre de piles"
+        ],
+        [
+          "00:11",
+          "Étape 1 : les valeurs"
+        ],
+        [
+          "00:21",
+          "Étape 2 : les 4 issues"
+        ],
+        [
+          "00:33",
+          "Étape 3 : les probabilités"
+        ],
+        [
+          "00:55",
+          "Le tableau de la loi"
+        ],
+        [
+          "01:10",
+          "La somme fait 1"
+        ],
+        [
+          "01:22",
+          "Le piège : un tiers chacun ?"
+        ],
+        [
+          "01:34",
+          "À toi de jouer"
+        ],
+        [
+          "01:47",
+          "Correction"
+        ],
+        [
+          "02:01",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:16",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "variable aléatoire",
+        "loi de probabilité",
+        "pile ou face",
+        "tableau",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-proba-va-loi-short",
+      "notionId": "variables_aleatoires",
+      "microId": "va_loi",
+      "classe": "premiere-spe",
+      "ceinture": "jaune",
+      "serie": "Maths 1re spé",
+      "type": "short",
+      "renvoie_vers": "premiere-proba-va-loi",
+      "meme_video_que": "stmg-proba-va-loi-short",
+      "fichier": "premiere/maths/probabilites/24-va-loi/eleveai-maths-premiere-proba-va-loi-short.mp4",
+      "miniature": "premiere/maths/probabilites/24-va-loi/eleveai-maths-premiere-proba-va-loi-short.png",
+      "titre": "Somme 2 ou somme 7 : même chance ? 🎲 #Shorts",
+      "accroche": "Deux dés. Somme 2 : un seul cas, 1 et 1. Somme 7 : six cas, de 1 et 6 jusqu'à 6 et 1. Sur 36, le 7 est six fois plus probable que le 2.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : et la somme 12, combien de cas sur 36 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_loi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "dés",
+        "loi de probabilité",
+        "somme",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "stmg-proba-va-esperance",
+      "notionId": "va_esperance",
+      "microId": "va_esp_calculer",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/25-va-esperance/eleveai-maths-stmg-proba-va-esperance.mp4",
+      "miniature": "stmg/maths/probabilites/25-va-esperance/eleveai-maths-stmg-proba-va-esperance.png",
+      "titre": "(0 + 2 + 10) ÷ 3 = 4 ? FAUX ! — L'espérance, le gain moyen · Maths 1re spé · STMG",
+      "accroche": "La roue de la kermesse : X vaut 0 € avec 0,6, 2 € avec 0,3 et 10 € avec 0,1.\n\nDans cette vidéo :\n• la formule de E(X) : chaque valeur fois sa probabilité, puis la somme\n• le calcul : 0 + 0,6 + 1 = 1,6\n• le sens : en moyenne 1,60 € par partie\n• le piège : la simple moyenne des valeurs, 4\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : une autre roue : 0 € avec 0,5, 4 € avec 0,5. Quelle est l'espérance ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_esperance&microId=va_esp_calculer&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "L'espérance : le gain moyen"
+        ],
+        [
+          "00:04",
+          "La roue de la kermesse"
+        ],
+        [
+          "00:17",
+          "La formule de E(X)"
+        ],
+        [
+          "00:25",
+          "Le calcul pas à pas"
+        ],
+        [
+          "00:47",
+          "Ça veut dire quoi ?"
+        ],
+        [
+          "00:56",
+          "Le piège"
+        ],
+        [
+          "01:13",
+          "À toi de jouer"
+        ],
+        [
+          "01:29",
+          "Correction"
+        ],
+        [
+          "01:42",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:00",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "espérance",
+        "variable aléatoire",
+        "kermesse",
+        "moyenne",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-va-esperance-short",
+      "notionId": "va_esperance",
+      "microId": "va_esp_calculer",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-va-esperance",
+      "fichier": "stmg/maths/probabilites/25-va-esperance/eleveai-maths-stmg-proba-va-esperance-short.mp4",
+      "miniature": "stmg/maths/probabilites/25-va-esperance/eleveai-maths-stmg-proba-va-esperance-short.png",
+      "titre": "Le dé paie 3,50 € en moyenne… aucune face ne donne 3,5 ! 🎲 #Shorts",
+      "accroche": "Tu lances un dé et tu gagnes autant d'euros que le nombre affiché. 1 + 2 + 3 + 4 + 5 + 6 = 21, et 21 ÷ 6 = 3,5. En moyenne, 3,50 euros… alors qu'aucune face ne donne 3,5 !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : si on payait 4 euros pour jouer, gagnerais-tu de l'argent à long terme ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_esperance&microId=va_esp_calculer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "dé",
+        "espérance",
+        "jeu",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-proba-va-esperance",
+      "notionId": "variables_aleatoires",
+      "microId": "va_esperance",
+      "classe": "premiere-spe",
+      "ceinture": "bleue",
+      "serie": "Maths 1re spé",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-va-esperance",
+      "fichier": "premiere/maths/probabilites/25-va-esperance/eleveai-maths-premiere-proba-va-esperance.mp4",
+      "miniature": "premiere/maths/probabilites/25-va-esperance/eleveai-maths-premiere-proba-va-esperance.png",
+      "titre": "(0 + 2 + 10) ÷ 3 = 4 ? FAUX ! — L'espérance, le gain moyen · Maths 1re spé · STMG",
+      "accroche": "La roue de la kermesse : X vaut 0 € avec 0,6, 2 € avec 0,3 et 10 € avec 0,1.\n\nDans cette vidéo :\n• la formule de E(X) : chaque valeur fois sa probabilité, puis la somme\n• le calcul : 0 + 0,6 + 1 = 1,6\n• le sens : en moyenne 1,60 € par partie\n• le piège : la simple moyenne des valeurs, 4\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : une autre roue : 0 € avec 0,5, 4 € avec 0,5. Quelle est l'espérance ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_esperance&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "L'espérance : le gain moyen"
+        ],
+        [
+          "00:04",
+          "La roue de la kermesse"
+        ],
+        [
+          "00:17",
+          "La formule de E(X)"
+        ],
+        [
+          "00:25",
+          "Le calcul pas à pas"
+        ],
+        [
+          "00:47",
+          "Ça veut dire quoi ?"
+        ],
+        [
+          "00:56",
+          "Le piège"
+        ],
+        [
+          "01:13",
+          "À toi de jouer"
+        ],
+        [
+          "01:29",
+          "Correction"
+        ],
+        [
+          "01:42",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:00",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "espérance",
+        "variable aléatoire",
+        "kermesse",
+        "moyenne",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-proba-va-esperance-short",
+      "notionId": "variables_aleatoires",
+      "microId": "va_esperance",
+      "classe": "premiere-spe",
+      "ceinture": "jaune",
+      "serie": "Maths 1re spé",
+      "type": "short",
+      "renvoie_vers": "premiere-proba-va-esperance",
+      "meme_video_que": "stmg-proba-va-esperance-short",
+      "fichier": "premiere/maths/probabilites/25-va-esperance/eleveai-maths-premiere-proba-va-esperance-short.mp4",
+      "miniature": "premiere/maths/probabilites/25-va-esperance/eleveai-maths-premiere-proba-va-esperance-short.png",
+      "titre": "Le dé paie 3,50 € en moyenne… aucune face ne donne 3,5 ! 🎲 #Shorts",
+      "accroche": "Tu lances un dé et tu gagnes autant d'euros que le nombre affiché. 1 + 2 + 3 + 4 + 5 + 6 = 21, et 21 ÷ 6 = 3,5. En moyenne, 3,50 euros… alors qu'aucune face ne donne 3,5 !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : si on payait 4 euros pour jouer, gagnerais-tu de l'argent à long terme ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_esperance&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "dé",
+        "espérance",
+        "jeu",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "stmg-proba-va-equitable",
+      "notionId": "va_esperance",
+      "microId": "va_esp_jeu_equitable",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/26-va-equitable/eleveai-maths-stmg-proba-va-equitable.mp4",
+      "miniature": "stmg/maths/probabilites/26-va-equitable/eleveai-maths-stmg-proba-va-equitable.png",
+      "titre": "5 × 0,2 = 1 € de gain ? FAUX : la mise ! — Un jeu est-il équitable ? · Maths 1re spé · STMG",
+      "accroche": "Une roue : on paie 1 € pour jouer ; avec une probabilité de 0,2, on reçoit 5 €, sinon rien.\n\nDans cette vidéo :\n• le gain NET : 5 − 1 = 4 €, ou −1 €\n• l'espérance : 4 × 0,2 − 1 × 0,8 = 0, le jeu est équitable\n• si la roue rend 4 € : 0,6 − 0,8 = −0,2, défavorable au joueur\n• le piège : oublier la mise\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : mise de 1 €, une chance sur 10 de gagner : combien la roue doit-elle rendre pour que le jeu soit équitable ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_esperance&microId=va_esp_jeu_equitable&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Un jeu équitable ?"
+        ],
+        [
+          "00:05",
+          "La roue de la kermesse"
+        ],
+        [
+          "00:17",
+          "Le gain net"
+        ],
+        [
+          "00:30",
+          "L'espérance du gain net"
+        ],
+        [
+          "00:46",
+          "Équitable : la balance"
+        ],
+        [
+          "00:54",
+          "Et si la roue rendait 4 € ?"
+        ],
+        [
+          "01:19",
+          "Le piège : oublier la mise"
+        ],
+        [
+          "01:35",
+          "À toi de jouer"
+        ],
+        [
+          "01:49",
+          "Correction"
+        ],
+        [
+          "02:05",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:26",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "espérance",
+        "jeu équitable",
+        "gain net",
+        "mise",
+        "kermesse",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-va-equitable-short",
+      "notionId": "va_esperance",
+      "microId": "va_esp_jeu_equitable",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-va-equitable",
+      "fichier": "stmg/maths/probabilites/26-va-equitable/eleveai-maths-stmg-proba-va-equitable-short.mp4",
+      "miniature": "stmg/maths/probabilites/26-va-equitable/eleveai-maths-stmg-proba-va-equitable-short.png",
+      "titre": "La roulette : pourquoi le casino gagne TOUJOURS 🎰 #Shorts",
+      "accroche": "À la roulette, tu mises 1 euro sur le rouge : 18 cases rouges sur 37. Gagner : 18 sur 37. Perdre : 19 sur 37, à cause du zéro vert ! Espérance : moins 1 sur 37, environ moins 3 centimes par euro misé.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : si tu mises 100 euros en tout, combien le casino garde-t-il en moyenne ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_esperance&microId=va_esp_jeu_equitable&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "roulette",
+        "casino",
+        "espérance",
+        "jeu équitable",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-proba-va-equitable",
+      "notionId": "variables_aleatoires",
+      "microId": "va_esperance_probleme",
+      "classe": "premiere-spe",
+      "ceinture": "bleue",
+      "serie": "Maths 1re spé",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-va-equitable",
+      "fichier": "premiere/maths/probabilites/26-va-equitable/eleveai-maths-premiere-proba-va-equitable.mp4",
+      "miniature": "premiere/maths/probabilites/26-va-equitable/eleveai-maths-premiere-proba-va-equitable.png",
+      "titre": "5 × 0,2 = 1 € de gain ? FAUX : la mise ! — Un jeu est-il équitable ? · Maths 1re spé · STMG",
+      "accroche": "Une roue : on paie 1 € pour jouer ; avec une probabilité de 0,2, on reçoit 5 €, sinon rien.\n\nDans cette vidéo :\n• le gain NET : 5 − 1 = 4 €, ou −1 €\n• l'espérance : 4 × 0,2 − 1 × 0,8 = 0, le jeu est équitable\n• si la roue rend 4 € : 0,6 − 0,8 = −0,2, défavorable au joueur\n• le piège : oublier la mise\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : mise de 1 €, une chance sur 10 de gagner : combien la roue doit-elle rendre pour que le jeu soit équitable ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_esperance_probleme&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Un jeu équitable ?"
+        ],
+        [
+          "00:05",
+          "La roue de la kermesse"
+        ],
+        [
+          "00:17",
+          "Le gain net"
+        ],
+        [
+          "00:30",
+          "L'espérance du gain net"
+        ],
+        [
+          "00:46",
+          "Équitable : la balance"
+        ],
+        [
+          "00:54",
+          "Et si la roue rendait 4 € ?"
+        ],
+        [
+          "01:19",
+          "Le piège : oublier la mise"
+        ],
+        [
+          "01:35",
+          "À toi de jouer"
+        ],
+        [
+          "01:49",
+          "Correction"
+        ],
+        [
+          "02:05",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:26",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "espérance",
+        "jeu équitable",
+        "gain net",
+        "mise",
+        "kermesse",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-proba-va-equitable-short",
+      "notionId": "variables_aleatoires",
+      "microId": "va_esperance_probleme",
+      "classe": "premiere-spe",
+      "ceinture": "jaune",
+      "serie": "Maths 1re spé",
+      "type": "short",
+      "renvoie_vers": "premiere-proba-va-equitable",
+      "meme_video_que": "stmg-proba-va-equitable-short",
+      "fichier": "premiere/maths/probabilites/26-va-equitable/eleveai-maths-premiere-proba-va-equitable-short.mp4",
+      "miniature": "premiere/maths/probabilites/26-va-equitable/eleveai-maths-premiere-proba-va-equitable-short.png",
+      "titre": "La roulette : pourquoi le casino gagne TOUJOURS 🎰 #Shorts",
+      "accroche": "À la roulette, tu mises 1 euro sur le rouge : 18 cases rouges sur 37. Gagner : 18 sur 37. Perdre : 19 sur 37, à cause du zéro vert ! Espérance : moins 1 sur 37, environ moins 3 centimes par euro misé.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : si tu mises 100 euros en tout, combien le casino garde-t-il en moyenne ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_esperance_probleme&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "roulette",
+        "casino",
+        "espérance",
+        "jeu équitable",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "stmg-proba-va-moyenne",
+      "notionId": "va_esperance",
+      "microId": "va_esp_interpreter",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/27-va-moyenne/eleveai-maths-stmg-proba-va-moyenne.mp4",
+      "miniature": "stmg/maths/probabilites/27-va-moyenne/eleveai-maths-stmg-proba-va-moyenne.png",
+      "titre": "E(X) = 1,6 €… mais on ne gagne JAMAIS 1,6 € ! — L'espérance, une moyenne à long terme · Maths 1re spé · STMG",
+      "accroche": "La roue de la kermesse a une espérance de 1,6 €, mais à chaque partie on gagne 0, 2 ou 10 €.\n\nDans cette vidéo :\n• 10 parties : moyenne 1,6, un coup de chance\n• 10 autres parties : moyenne 0,4\n• sur 1 000 parties, la moyenne se rapproche de 1,6\n• le piège : attendre 1,6 € à chaque partie\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : l'organisateur prévoit 500 parties : combien d'euros de gains doit-il prévoir, environ ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_esperance&microId=va_esp_interpreter&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "L'espérance, c'est la moyenne"
+        ],
+        [
+          "00:06",
+          "La roue de la kermesse"
+        ],
+        [
+          "00:18",
+          "Jouons 10 parties"
+        ],
+        [
+          "00:33",
+          "Encore 10 parties"
+        ],
+        [
+          "00:45",
+          "Sur 1 000 parties"
+        ],
+        [
+          "00:55",
+          "Le piège"
+        ],
+        [
+          "01:07",
+          "À toi de jouer"
+        ],
+        [
+          "01:22",
+          "Correction"
+        ],
+        [
+          "01:34",
+          "Ce que tu as appris"
+        ],
+        [
+          "01:49",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "espérance",
+        "moyenne",
+        "loi des grands nombres",
+        "échantillon",
+        "kermesse",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-va-moyenne-short",
+      "notionId": "va_esperance",
+      "microId": "va_esp_interpreter",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-va-moyenne",
+      "fichier": "stmg/maths/probabilites/27-va-moyenne/eleveai-maths-stmg-proba-va-moyenne-short.mp4",
+      "miniature": "stmg/maths/probabilites/27-va-moyenne/eleveai-maths-stmg-proba-va-moyenne-short.png",
+      "titre": "6, 6, 5, 6, 6 : le dé est truqué ? 🎲 #Shorts",
+      "accroche": "Un dé : la moyenne théorique est 3,5. Tu lances 5 fois : 6, 6, 5, 6, 6, moyenne 5,8. Pas forcément truqué ! Sur 5 lancers, la moyenne bouge énormément ; sur 1 000, elle se rapprocherait de 3,5.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : sur 10 000 lancers d'un dé normal, la moyenne serait-elle plus proche de 3 ou de 3,5 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_esperance&microId=va_esp_interpreter&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "dé",
+        "moyenne",
+        "espérance",
+        "hasard",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-proba-va-moyenne",
+      "notionId": "variables_aleatoires",
+      "microId": "va_echantillon",
+      "classe": "premiere-spe",
+      "ceinture": "bleue",
+      "serie": "Maths 1re spé",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-va-moyenne",
+      "fichier": "premiere/maths/probabilites/27-va-moyenne/eleveai-maths-premiere-proba-va-moyenne.mp4",
+      "miniature": "premiere/maths/probabilites/27-va-moyenne/eleveai-maths-premiere-proba-va-moyenne.png",
+      "titre": "E(X) = 1,6 €… mais on ne gagne JAMAIS 1,6 € ! — L'espérance, une moyenne à long terme · Maths 1re spé · STMG",
+      "accroche": "La roue de la kermesse a une espérance de 1,6 €, mais à chaque partie on gagne 0, 2 ou 10 €.\n\nDans cette vidéo :\n• 10 parties : moyenne 1,6, un coup de chance\n• 10 autres parties : moyenne 0,4\n• sur 1 000 parties, la moyenne se rapproche de 1,6\n• le piège : attendre 1,6 € à chaque partie\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : l'organisateur prévoit 500 parties : combien d'euros de gains doit-il prévoir, environ ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_echantillon&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "L'espérance, c'est la moyenne"
+        ],
+        [
+          "00:06",
+          "La roue de la kermesse"
+        ],
+        [
+          "00:18",
+          "Jouons 10 parties"
+        ],
+        [
+          "00:33",
+          "Encore 10 parties"
+        ],
+        [
+          "00:45",
+          "Sur 1 000 parties"
+        ],
+        [
+          "00:55",
+          "Le piège"
+        ],
+        [
+          "01:07",
+          "À toi de jouer"
+        ],
+        [
+          "01:22",
+          "Correction"
+        ],
+        [
+          "01:34",
+          "Ce que tu as appris"
+        ],
+        [
+          "01:49",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "espérance",
+        "moyenne",
+        "loi des grands nombres",
+        "échantillon",
+        "kermesse",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-proba-va-moyenne-short",
+      "notionId": "variables_aleatoires",
+      "microId": "va_echantillon",
+      "classe": "premiere-spe",
+      "ceinture": "jaune",
+      "serie": "Maths 1re spé",
+      "type": "short",
+      "renvoie_vers": "premiere-proba-va-moyenne",
+      "meme_video_que": "stmg-proba-va-moyenne-short",
+      "fichier": "premiere/maths/probabilites/27-va-moyenne/eleveai-maths-premiere-proba-va-moyenne-short.mp4",
+      "miniature": "premiere/maths/probabilites/27-va-moyenne/eleveai-maths-premiere-proba-va-moyenne-short.png",
+      "titre": "6, 6, 5, 6, 6 : le dé est truqué ? 🎲 #Shorts",
+      "accroche": "Un dé : la moyenne théorique est 3,5. Tu lances 5 fois : 6, 6, 5, 6, 6, moyenne 5,8. Pas forcément truqué ! Sur 5 lancers, la moyenne bouge énormément ; sur 1 000, elle se rapprocherait de 3,5.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : sur 10 000 lancers d'un dé normal, la moyenne serait-elle plus proche de 3 ou de 3,5 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_echantillon&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "dé",
+        "moyenne",
+        "espérance",
+        "hasard",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
     }
   ]
 }

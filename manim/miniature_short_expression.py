@@ -346,6 +346,28 @@ for _cl, _bd in (("stmg", "STMG"), ("premiere-commun", "1RE")):
         }
         CEINTURE_SHORT[_nom] = "jaune"
 
+# 19/10/2026 — lot 5 : variables aléatoires, shorts communs STMG / 1re SPÉ (jaune).
+for _cl, _bd in (("stmg", "STMG"), ("premiere", "1RE SPÉ")):
+    for _ep, _dos, _titre, _sous, _lg in (
+        ("va-notation", "23-va-notation", ["X ≤ 5 :", "5 € PILE ?"], "un jeu à 0, 5 ou 20 €",
+         [("5 € pile ?", 90, ROUGE), ("5 € OU MOINS", 84, BLEU), ("0 et 5 !", 100, VERT)]),
+        ("va-loi", "24-va-loi", ["SOMME 2", "OU SOMME 7 ?"], "deux dés",
+         [("même chance ?", 84, ROUGE), ("somme 2 : 1 cas", 80, BLEU), ("somme 7 : 6 cas !", 80, VERT)]),
+        ("va-esperance", "25-va-esperance", ["LE DÉ", "QUI PAIE"], "gain = le nombre affiché",
+         [("3 € en moyenne ?", 80, ROUGE), ("21 ÷ 6", 96, BLEU), ("= 3,50 € !", 100, VERT)]),
+        ("va-equitable", "26-va-equitable", ["LA ROULETTE", "EST-ELLE JUSTE ?"], "1 € sur le rouge",
+         [("18 rouges sur 37", 76, BLEU), ("le zéro vert…", 84, ORANGE), ("− 3 cts par euro !", 72, ROUGE)]),
+        ("va-moyenne", "27-va-moyenne", ["5,8 DE MOYENNE", "LE DÉ EST TRUQUÉ ?"], "6, 6, 5, 6, 6",
+         [("5 lancers : ça bouge", 72, BLEU), ("1 000 lancers…", 84, ORANGE), ("→ 3,5 !", 110, VERT)]),
+    ):
+        _nom = f"eleveai-maths-{_cl}-proba-{_ep}-short"
+        SHORTS[_nom] = {
+            "badge": f"PROBABILITÉS · {_bd}", "titre": _titre, "taille": 76 if _ep in ("va-equitable", "va-moyenne") else 88,
+            "sous": _sous, "taille_sous": 44, "couleur_sous": ORANGE, "accroche": _acc(_lg),
+            "dossier": f"{_cl}/maths/fr", "sortie": f"{_cl}/maths/probabilites/{_dos}",
+        }
+        CEINTURE_SHORT[_nom] = "jaune"
+
 # 19/10/2026 — lot 4 : Bernoulli et répétitions, shorts communs STMG / 1re (jaune).
 for _cl, _bd in (("stmg", "STMG"), ("premiere-commun", "1RE")):
     for _ep, _dos, _titre, _sous, _lg in (

@@ -1,0 +1,5 @@
+{
+  "00-accroche": "Deux dés. La somme 2 et la somme 7 : même chance ?",
+  "01-image": "Somme 2 : un seul cas, 1 et 1. Somme 7 : 1 et 6, 2 et 5, 3 et 4, 4 et 3, 5 et 2, 6 et 1. Six cas ! Sur 36, le 7 est six fois plus probable que le 2.",
+  "02-question": "Et la somme 12, combien de cas sur 36 ? Réponds en commentaire !"
+}

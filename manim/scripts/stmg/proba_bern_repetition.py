@@ -551,3 +551,8 @@ class ProbaBernRepetitionSTMG(ProbaBernRepetitionBase):
 
 class ProbaBernRepetitionPremiere(ProbaBernRepetitionBase):
     identite = "Maths 1re — EleveAI"
+
+
+# 19/10 : la même vidéo pour la 1re SPÉ (micro jumelle, pack par classe).
+class ProbaBernRepetitionPremiereSpe(ProbaBernRepetitionBase):
+    identite = "Maths 1re spé — EleveAI"

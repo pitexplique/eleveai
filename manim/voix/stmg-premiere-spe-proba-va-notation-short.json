@@ -1,0 +1,5 @@
+{
+  "00-accroche": "À un jeu, tu gagnes 0, 5 ou 20 euros. « X inférieur ou égal à 5 » : tu gagnes 5 euros pile ?",
+  "01-image": "Non ! « Inférieur ou égal à 5 », c'est 5 euros OU MOINS : 0 ou 5. Le signe « inférieur ou égal » ramasse toutes les valeurs jusqu'à 5, le 5 compris.",
+  "02-question": "Et « X strictement inférieur à 5 », quelles valeurs reste-t-il ? Réponds en commentaire !"
+}

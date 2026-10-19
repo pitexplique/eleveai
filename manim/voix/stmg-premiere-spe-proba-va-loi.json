@@ -1,0 +1,14 @@
+{
+  "00-garde": "Dresser la loi de probabilité d'une variable aléatoire.",
+  "01-situation": "On lance deux pièces équilibrées. X est le nombre de piles obtenus.",
+  "02-valeurs": "Étape 1 : les valeurs possibles. 0 pile, 1 pile ou 2 piles. X prend les valeurs 0, 1 et 2.",
+  "03-issues": "Étape 2 : les issues. Pile pile, pile face, face pile, face face : 4 issues, chacune avec une probabilité de 0,25.",
+  "04-probas": "Étape 3 : les probabilités. X égale 2 : pile pile, 0,25. X égale 0 : face face, 0,25. X égale 1 : pile face ou face pile, 0,25 plus 0,25, égale 0,5.",
+  "05-tableau": "On range tout dans un tableau : les valeurs 0, 1, 2 sur la première ligne ; les probabilités 0,25, 0,5 et 0,25 sur la deuxième. C'est la loi de X.",
+  "06-verif": "On vérifie : 0,25 plus 0,5 plus 0,25, égale 1. Une loi de probabilité fait toujours 1 au total.",
+  "07-piege": "Le piège : croire que 0, 1 et 2 piles ont la même chance, un tiers chacun. Non ! Un seul pile peut arriver de deux façons : il est deux fois plus probable.",
+  "08-defi": "À toi de jouer. On lance trois pièces. Quelle est la probabilité d'obtenir exactement 3 piles ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 8 issues équiprobables, et une seule donne 3 piles : pile, pile, pile. P de X égale 3 égale 1 sur 8, soit 0,125.",
+  "09-finale": "Ce que tu as appris. Pour dresser une loi : les valeurs, puis la probabilité de chaque valeur, dans un tableau. Et on vérifie que le total fait 1. Prochaine vidéo : l'espérance.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}
