@@ -52,7 +52,13 @@ export type UneJournal = {
   chiffre?: ChiffreDuJour;
 };
 
-export type ChiffreDuJour = { chiffre: string; texte: string; theme?: Theme };
+export type ChiffreDuJour = {
+  chiffre: string;
+  texte: string;
+  theme?: Theme;
+  /** Un dessin maison au-dessus du chiffre (components/accueil/dessins/). */
+  dessin?: "arrivee-diagonale";
+};
 
 /** L'ÉDITION DE LA SEMAINE : les Unes datées, la plus récente semaine en tête. */
 export const EDITION: UneJournal[] = [
@@ -77,6 +83,7 @@ export const EDITION: UneJournal[] = [
     },
     chiffre: {
       chiffre: "10 200 m",
+      dessin: "arrivee-diagonale",
       texte: "La montée totale de la Diagonale des Fous 2026 : plus que la hauteur de l'Everest (8 849 m) au-dessus de la mer. Hugo Deck, le vainqueur, l'a avalée en 22 h 54 min 24 s.",
     },
   },

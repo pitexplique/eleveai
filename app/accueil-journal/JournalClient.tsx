@@ -33,7 +33,8 @@ import {
   Trophy,
   Users,
 } from "lucide-react";
-import type { Metier } from "@/lib/accueil/journal";
+import type { ChiffreDuJour, Metier } from "@/lib/accueil/journal";
+import ArriveeDiagonale from "@/components/accueil/dessins/ArriveeDiagonale";
 import { genererDefi, type DefiGenere, type Theme } from "@/lib/accueil/defis";
 import RechercheEntete from "@/components/accueil/RechercheEntete";
 import BanniereCrpe from "@/components/accueil/BanniereCrpe";
@@ -481,10 +482,16 @@ function RendezVous({
   );
 }
 
-function Chiffre({ mise, chiffre }: { mise: Mise; chiffre: { chiffre: string; texte: string } }) {
+function Chiffre({ mise, chiffre }: { mise: Mise; chiffre: ChiffreDuJour }) {
   const t = TON[mise];
   return (
     <Bloc mise={mise} quoi="chiffre" rubrique="Le chiffre du jour">
+      {chiffre.dessin === "arrivee-diagonale" && (
+        <figure className="mb-3">
+          <ArriveeDiagonale className={mise === "quotidien" ? "" : "rounded-xl"} />
+          <figcaption className="mt-1 text-xs italic opacity-70">Dessin EleveAI : l&rsquo;arrivée, sous le chrono.</figcaption>
+        </figure>
+      )}
       <p className={`${t.titre} text-5xl leading-none`}>{chiffre.chiffre}</p>
       <p className={`${t.texte} mt-3 leading-snug`}>{chiffre.texte}</p>
     </Bloc>
@@ -845,7 +852,7 @@ export default function JournalClient(props: {
   defi: DefiGenere;
   theme: Theme | null;
   hier: { question: string; reponse: string };
-  chiffre: { chiffre: string; texte: string };
+  chiffre: ChiffreDuJour;
   metier: Metier;
   shorts: VideoJournal[];
   reel: VideoJournal[];
