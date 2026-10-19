@@ -42,7 +42,10 @@ def ti_margo():
     im = degrade().convert("RGBA")
     tm = Image.open(RACINE / "public" / "cahier-vacances" / "ti-margo.png").convert("RGBA")
     tm = tm.crop(tm.getbbox())  # l'image a des marges transparentes : on les rogne
-    h = 760  # le rond coupe les coins : on reste dans le cercle inscrit
+    # 19/10 : à 760 px, Frédéric : « elle est trop haute » au téléchargement —
+    # Instagram recadre plus serré que le rond inscrit. 600 px laisse de la marge
+    # tout autour (crayon, pieds, queue compris).
+    h = 600
     tm = tm.resize((int(tm.width * h / tm.height), h), Image.LANCZOS)
     im.paste(tm, ((T - tm.width) // 2, (T - h) // 2), tm)
     return im.convert("RGB")
