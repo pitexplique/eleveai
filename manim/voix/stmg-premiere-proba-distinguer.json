@@ -1,0 +1,13 @@
+{
+  "00-garde": "P de A inter B, P indice A de B, P indice B de A : trois nombres à ne pas confondre.",
+  "01-situation": "Une boutique de vêtements de seconde main a 500 clients. 300 achètent sur leur téléphone. 200 sont des clients fidèles. Et 120 sont les deux à la fois.",
+  "02-tableau": "Rangeons-les dans un tableau. Ligne M : « achète sur mobile ». Colonne F : « client fidèle ». La case du croisement : 120.",
+  "03-inter": "Première phrase : « 24 % des clients achètent sur mobile ET sont fidèles. » « Et », sans « parmi » : on divise par tous les clients. 120 sur 500, égale 0,24. C'est P de M inter F.",
+  "04-sachant-m": "Deuxième phrase : « parmi les clients sur mobile, 40 % sont fidèles. » On allume la ligne M : 120 sur 300, égale 0,4. C'est P indice M de F.",
+  "05-sachant-f": "Troisième phrase : « parmi les clients fidèles, 60 % achètent sur mobile. » On allume la colonne F : 120 sur 200, égale 0,6. C'est P indice F de M.",
+  "06-piege": "Le piège : le même 120 en haut, et trois nombres différents. Ce qui change, c'est le bas de la fraction. Pour le trouver, cherche le mot « parmi » : il te dit dans quel groupe tu te places.",
+  "07-defi": "À toi de jouer. Quelle est la probabilité qu'un client fidèle n'achète pas sur mobile ? Mets pause, et cherche !",
+  "07b-correction": "Correction. On allume la colonne F : 200 clients fidèles, dont 120 sur mobile. Donc 80 n'achètent pas sur mobile. 80 sur 200, égale 0,4. C'est P indice F de M barre.",
+  "08-finale": "Ce que tu as appris. Le haut de la fraction est souvent le même. Le bas décide : tout le monde pour P de A inter B, le groupe A pour P indice A de B, le groupe B pour P indice B de A. Prochaine vidéo : dire une probabilité conditionnelle par une phrase.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

@@ -1,0 +1,12 @@
+{
+  "00-garde": "Dire une probabilité conditionnelle par une phrase.",
+  "01-situation": "Dans une commune, 40 % des maisons ont des panneaux solaires. On regarde si leur facture d'électricité a baissé cette année.",
+  "02-arbre": "Voici l'arbre. Première branche : S, « la maison a des panneaux », 0,4. Sinon, S barre, 0,6. Puis, après S : B, « la facture a baissé », 0,75. Après S barre : B, 0,5.",
+  "03-phrase": "Que veut dire le 0,75 ? Il est après S : c'est P indice S de B. En phrase : « parmi les maisons équipées de panneaux, 75 % ont vu leur facture baisser. » La phrase commence par le groupe : « parmi les maisons équipées ».",
+  "04-et": "Et 0,4 fois 0,75, égale 0,3 ? C'est le chemin S puis B : P de S inter B. En phrase : « 30 % des maisons ont des panneaux ET une facture en baisse. » Pas de « parmi » : on parle de toutes les maisons.",
+  "05-piege": "Le piège : retourner la phrase. « 75 % des maisons dont la facture a baissé ont des panneaux » ? Faux ! La facture a baissé pour 0,3 plus 0,6 fois 0,5, égale 0,6 des maisons. Parmi elles, celles qui ont des panneaux : 0,3 sur 0,6, égale 0,5. Une sur deux, pas 75 %.",
+  "06-defi": "À toi de jouer. Écris en phrase le 0,5 de la branche qui va de S barre à B. Mets pause, et cherche !",
+  "06b-correction": "Correction. C'est P indice S barre de B. « Parmi les maisons sans panneaux solaires, la moitié ont vu leur facture baisser. »",
+  "07-finale": "Ce que tu as appris. P indice A de B se dit : « parmi les A, la proportion de B ». Le groupe vient en premier. P de A inter B se dit : « A et B à la fois », sur tout le monde. Prochaine vidéo : les tests de dépistage, et le piège des faux positifs.",
+  "08-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

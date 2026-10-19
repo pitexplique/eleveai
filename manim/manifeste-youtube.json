@@ -13364,6 +13364,822 @@
         "ceinture jaune",
         "Shorts"
       ]
+    },
+    {
+      "id": "stmg-proba-tableau",
+      "notionId": "proba_conditionnelle_tableau",
+      "microId": "probaC_calculer_tableau",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/03-tableau/eleveai-maths-stmg-proba-tableau.mp4",
+      "miniature": "stmg/maths/probabilites/03-tableau/eleveai-maths-stmg-proba-tableau.png",
+      "titre": "48 sur 200 ? NON : la ligne D ! — Probabilité conditionnelle et tableau croisé · Maths 1re · STMG",
+      "accroche": "Une entreprise de 200 salariés : qui pourrait venir travailler à vélo ? On croise deux questions : habites-tu à moins de 5 km ? Viens-tu à vélo ?\n\nDans cette vidéo :\n• « sachant D » : on allume la ligne D, P_D(V) = 48 sur 80 = 0,6\n• dans l'autre sens : la colonne V, P_V(D) = 48 sur 60 = 0,8\n• le piège : 48 sur 200 = 0,24, c'est P(D ∩ V), pas une probabilité conditionnelle\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : parmi les salariés qui viennent en voiture, quelle est la probabilité d'habiter à moins de 5 km ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_conditionnelle_tableau&microId=probaC_calculer_tableau&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Probabilité conditionnelle et tableau croisé"
+        ],
+        [
+          "00:05",
+          "200 salariés, deux questions"
+        ],
+        [
+          "00:18",
+          "Le tableau croisé"
+        ],
+        [
+          "00:34",
+          "Sachant D : la ligne D"
+        ],
+        [
+          "00:53",
+          "48 sur 80 = 0,6"
+        ],
+        [
+          "01:06",
+          "L'autre sens : la colonne V"
+        ],
+        [
+          "01:25",
+          "Le piège : diviser par 200"
+        ],
+        [
+          "01:44",
+          "À toi de jouer"
+        ],
+        [
+          "01:57",
+          "Correction"
+        ],
+        [
+          "02:12",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:33",
+          "Le coach et l'abonnement"
+        ]
+      ],
+      "tags": [
+        "probabilité conditionnelle",
+        "tableau croisé",
+        "sachant",
+        "vélo",
+        "mobilité",
+        "écologie",
+        "probabilités",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-tableau-short",
+      "notionId": "proba_conditionnelle_tableau",
+      "microId": "probaC_calculer_tableau",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-tableau",
+      "fichier": "stmg/maths/probabilites/03-tableau/eleveai-maths-stmg-proba-tableau-short.mp4",
+      "miniature": "stmg/maths/probabilites/03-tableau/eleveai-maths-stmg-proba-tableau-short.png",
+      "titre": "150 trient, 80 trient… et pourtant le bus gagne ! 🚌 #Shorts",
+      "accroche": "Un festival : 400 festivaliers. 100 sont venus en bus : 80 trient leurs gobelets. 300 sont venus en voiture : 150 trient. On allume la ligne Bus : 80 sur 100 = 0,8. La ligne Voiture : 150 sur 300 = 0,5. Le bus gagne !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : parmi les 230 festivaliers qui trient, quelle est la probabilité d'être venu en bus ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_conditionnelle_tableau&microId=probaC_calculer_tableau&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilité conditionnelle",
+        "festival",
+        "tri",
+        "gobelets",
+        "tableau croisé",
+        "probabilités",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-tableau",
+      "notionId": "alea_conditionnelle",
+      "microId": "alea_cond_tableau",
+      "classe": "premiere",
+      "ceinture": "bleue",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-tableau",
+      "fichier": "premiere-commun/maths/probabilites/03-tableau/eleveai-maths-premiere-commun-proba-tableau.mp4",
+      "miniature": "premiere-commun/maths/probabilites/03-tableau/eleveai-maths-premiere-commun-proba-tableau.png",
+      "titre": "48 sur 200 ? NON : la ligne D ! — Probabilité conditionnelle et tableau croisé · Maths 1re · STMG",
+      "accroche": "Une entreprise de 200 salariés : qui pourrait venir travailler à vélo ? On croise deux questions : habites-tu à moins de 5 km ? Viens-tu à vélo ?\n\nDans cette vidéo :\n• « sachant D » : on allume la ligne D, P_D(V) = 48 sur 80 = 0,6\n• dans l'autre sens : la colonne V, P_V(D) = 48 sur 60 = 0,8\n• le piège : 48 sur 200 = 0,24, c'est P(D ∩ V), pas une probabilité conditionnelle\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : parmi les salariés qui viennent en voiture, quelle est la probabilité d'habiter à moins de 5 km ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_conditionnelle&microId=alea_cond_tableau&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Probabilité conditionnelle et tableau croisé"
+        ],
+        [
+          "00:05",
+          "200 salariés, deux questions"
+        ],
+        [
+          "00:18",
+          "Le tableau croisé"
+        ],
+        [
+          "00:34",
+          "Sachant D : la ligne D"
+        ],
+        [
+          "00:53",
+          "48 sur 80 = 0,6"
+        ],
+        [
+          "01:06",
+          "L'autre sens : la colonne V"
+        ],
+        [
+          "01:25",
+          "Le piège : diviser par 200"
+        ],
+        [
+          "01:44",
+          "À toi de jouer"
+        ],
+        [
+          "01:57",
+          "Correction"
+        ],
+        [
+          "02:12",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:33",
+          "Le coach et l'abonnement"
+        ]
+      ],
+      "tags": [
+        "probabilité conditionnelle",
+        "tableau croisé",
+        "sachant",
+        "vélo",
+        "mobilité",
+        "écologie",
+        "probabilités",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-tableau-short",
+      "notionId": "alea_conditionnelle",
+      "microId": "alea_cond_tableau",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-commun-proba-tableau",
+      "meme_video_que": "stmg-proba-tableau-short",
+      "fichier": "premiere-commun/maths/probabilites/03-tableau/eleveai-maths-premiere-commun-proba-tableau-short.mp4",
+      "miniature": "premiere-commun/maths/probabilites/03-tableau/eleveai-maths-premiere-commun-proba-tableau-short.png",
+      "titre": "150 trient, 80 trient… et pourtant le bus gagne ! 🚌 #Shorts",
+      "accroche": "Un festival : 400 festivaliers. 100 sont venus en bus : 80 trient leurs gobelets. 300 sont venus en voiture : 150 trient. On allume la ligne Bus : 80 sur 100 = 0,8. La ligne Voiture : 150 sur 300 = 0,5. Le bus gagne !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : parmi les 230 festivaliers qui trient, quelle est la probabilité d'être venu en bus ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_conditionnelle&microId=alea_cond_tableau&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilité conditionnelle",
+        "festival",
+        "tri",
+        "gobelets",
+        "tableau croisé",
+        "probabilités",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "stmg-proba-distinguer",
+      "notionId": "proba_conditionnelle_distinguer",
+      "microId": "probaC_distinguer",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/04-distinguer/eleveai-maths-stmg-proba-distinguer.mp4",
+      "miniature": "stmg/maths/probabilites/04-distinguer/eleveai-maths-stmg-proba-distinguer.png",
+      "titre": "Même 120 en haut… trois réponses ! — P(A ∩ B), P_A(B) ou P_B(A) · Maths 1re · STMG",
+      "accroche": "Une boutique de vêtements de seconde main : 500 clients, 300 achètent sur leur téléphone, 200 sont fidèles, 120 sont les deux à la fois.\n\nDans cette vidéo :\n• « et », sans « parmi » : 120 sur 500 = 0,24, c'est P(M ∩ F)\n• « parmi les clients sur mobile » : 120 sur 300 = 0,4, c'est P_M(F)\n• « parmi les clients fidèles » : 120 sur 200 = 0,6, c'est P_F(M)\n• le piège : le haut est le même, c'est le bas qui décide\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : quelle est la probabilité qu'un client fidèle n'achète pas sur mobile ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_conditionnelle_distinguer&microId=probaC_distinguer&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Trois nombres à ne pas confondre"
+        ],
+        [
+          "00:07",
+          "La boutique de seconde main"
+        ],
+        [
+          "00:21",
+          "Le tableau"
+        ],
+        [
+          "00:34",
+          "Première phrase : P(M ∩ F)"
+        ],
+        [
+          "00:51",
+          "Deuxième phrase : P_M(F)"
+        ],
+        [
+          "01:06",
+          "Troisième phrase : P_F(M)"
+        ],
+        [
+          "01:22",
+          "Le piège"
+        ],
+        [
+          "01:36",
+          "À toi de jouer"
+        ],
+        [
+          "01:47",
+          "Correction"
+        ],
+        [
+          "02:06",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:26",
+          "Le coach et l'abonnement"
+        ]
+      ],
+      "tags": [
+        "probabilité conditionnelle",
+        "intersection",
+        "parmi",
+        "seconde main",
+        "commerce",
+        "business",
+        "probabilités",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-distinguer-short",
+      "notionId": "proba_conditionnelle_distinguer",
+      "microId": "probaC_distinguer",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-distinguer",
+      "fichier": "stmg/maths/probabilites/04-distinguer/eleveai-maths-stmg-proba-distinguer-short.mp4",
+      "miniature": "stmg/maths/probabilites/04-distinguer/eleveai-maths-stmg-proba-distinguer-short.png",
+      "titre": "90 % dans un sens… 30 % dans l'autre ! 🍿 #Shorts",
+      "accroche": "Au cinéma, 90 % des clients qui prennent du pop-corn prennent aussi une boisson. Donc 90 % des clients qui prennent une boisson prennent du pop-corn ? 100 clients prennent du pop-corn, dont 90 une boisson. Mais 300 clients prennent une boisson : 90 sur 300 = 0,3. Pas 0,9 !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : ce soir-là, 1 000 clients sont venus : quelle est la probabilité qu'un client prenne pop-corn ET boisson ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_conditionnelle_distinguer&microId=probaC_distinguer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilité conditionnelle",
+        "cinéma",
+        "pop-corn",
+        "intersection",
+        "parmi",
+        "probabilités",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-distinguer",
+      "notionId": "auto_proba_lecture",
+      "microId": "auto_proba_distinguer",
+      "classe": "premiere",
+      "ceinture": "bleue",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-distinguer",
+      "fichier": "premiere-commun/maths/probabilites/04-distinguer/eleveai-maths-premiere-commun-proba-distinguer.mp4",
+      "miniature": "premiere-commun/maths/probabilites/04-distinguer/eleveai-maths-premiere-commun-proba-distinguer.png",
+      "titre": "Même 120 en haut… trois réponses ! — P(A ∩ B), P_A(B) ou P_B(A) · Maths 1re · STMG",
+      "accroche": "Une boutique de vêtements de seconde main : 500 clients, 300 achètent sur leur téléphone, 200 sont fidèles, 120 sont les deux à la fois.\n\nDans cette vidéo :\n• « et », sans « parmi » : 120 sur 500 = 0,24, c'est P(M ∩ F)\n• « parmi les clients sur mobile » : 120 sur 300 = 0,4, c'est P_M(F)\n• « parmi les clients fidèles » : 120 sur 200 = 0,6, c'est P_F(M)\n• le piège : le haut est le même, c'est le bas qui décide\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : quelle est la probabilité qu'un client fidèle n'achète pas sur mobile ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_proba_lecture&microId=auto_proba_distinguer&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Trois nombres à ne pas confondre"
+        ],
+        [
+          "00:07",
+          "La boutique de seconde main"
+        ],
+        [
+          "00:21",
+          "Le tableau"
+        ],
+        [
+          "00:34",
+          "Première phrase : P(M ∩ F)"
+        ],
+        [
+          "00:51",
+          "Deuxième phrase : P_M(F)"
+        ],
+        [
+          "01:06",
+          "Troisième phrase : P_F(M)"
+        ],
+        [
+          "01:22",
+          "Le piège"
+        ],
+        [
+          "01:36",
+          "À toi de jouer"
+        ],
+        [
+          "01:47",
+          "Correction"
+        ],
+        [
+          "02:06",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:26",
+          "Le coach et l'abonnement"
+        ]
+      ],
+      "tags": [
+        "probabilité conditionnelle",
+        "intersection",
+        "parmi",
+        "seconde main",
+        "commerce",
+        "business",
+        "probabilités",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-distinguer-short",
+      "notionId": "auto_proba_lecture",
+      "microId": "auto_proba_distinguer",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-commun-proba-distinguer",
+      "meme_video_que": "stmg-proba-distinguer-short",
+      "fichier": "premiere-commun/maths/probabilites/04-distinguer/eleveai-maths-premiere-commun-proba-distinguer-short.mp4",
+      "miniature": "premiere-commun/maths/probabilites/04-distinguer/eleveai-maths-premiere-commun-proba-distinguer-short.png",
+      "titre": "90 % dans un sens… 30 % dans l'autre ! 🍿 #Shorts",
+      "accroche": "Au cinéma, 90 % des clients qui prennent du pop-corn prennent aussi une boisson. Donc 90 % des clients qui prennent une boisson prennent du pop-corn ? 100 clients prennent du pop-corn, dont 90 une boisson. Mais 300 clients prennent une boisson : 90 sur 300 = 0,3. Pas 0,9 !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : ce soir-là, 1 000 clients sont venus : quelle est la probabilité qu'un client prenne pop-corn ET boisson ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_proba_lecture&microId=auto_proba_distinguer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilité conditionnelle",
+        "cinéma",
+        "pop-corn",
+        "intersection",
+        "parmi",
+        "probabilités",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "stmg-proba-interpreter",
+      "notionId": "proba_conditionnelle_distinguer",
+      "microId": "probaC_interpreter_phrase",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/05-interpreter/eleveai-maths-stmg-proba-interpreter.mp4",
+      "miniature": "stmg/maths/probabilites/05-interpreter/eleveai-maths-stmg-proba-interpreter.png",
+      "titre": "75 % dans l'autre sens ? NON : une sur deux ! — Dire une proba conditionnelle en phrase · Maths 1re · STMG",
+      "accroche": "Dans une commune, 40 % des maisons ont des panneaux solaires. Leur facture d'électricité a-t-elle baissé ?\n\nDans cette vidéo :\n• l'arbre pondéré : S 0,4, puis B 0,75 après S et 0,5 après S barre\n• P_S(B) = 0,75 se dit « parmi les maisons équipées, 75 % ont vu leur facture baisser »\n• un chemin : 0,4 × 0,75 = 0,3 = P(S ∩ B), « avec panneaux ET facture en baisse »\n• le piège : retourner la phrase, 0,3 sur 0,6 = 0,5, une maison sur deux\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : écris en phrase le 0,5 de la branche qui va de S barre à B.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_conditionnelle_distinguer&microId=probaC_interpreter_phrase&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Dire une proba conditionnelle en phrase"
+        ],
+        [
+          "00:04",
+          "Les panneaux solaires"
+        ],
+        [
+          "00:15",
+          "L'arbre pondéré"
+        ],
+        [
+          "00:36",
+          "Le 0,75 en phrase : « parmi »"
+        ],
+        [
+          "00:55",
+          "Un chemin : « et »"
+        ],
+        [
+          "01:15",
+          "Le piège : retourner la phrase"
+        ],
+        [
+          "01:45",
+          "À toi de jouer"
+        ],
+        [
+          "01:56",
+          "Correction"
+        ],
+        [
+          "02:05",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:26",
+          "Le coach et l'abonnement"
+        ]
+      ],
+      "tags": [
+        "probabilité conditionnelle",
+        "arbre pondéré",
+        "interpréter",
+        "panneaux solaires",
+        "énergie",
+        "écologie",
+        "probabilités",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-interpreter-short",
+      "notionId": "proba_conditionnelle_distinguer",
+      "microId": "probaC_interpreter_phrase",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-interpreter",
+      "fichier": "stmg/maths/probabilites/05-interpreter/eleveai-maths-stmg-proba-interpreter-short.mp4",
+      "miniature": "stmg/maths/probabilites/05-interpreter/eleveai-maths-stmg-proba-interpreter-short.png",
+      "titre": "9 accidents sur 10 près de chez soi : DANGER ? 🚗 #Shorts",
+      "accroche": "« 9 accidents sur 10 ont lieu à moins de 10 km de chez soi. » Alors, rouler près de chez soi, c'est dangereux ? Lis bien : « parmi les accidents, 90 % sont près de chez soi », c'est P_accident(près). Or presque tous nos trajets se font près de chez soi ! La phrase ne dit rien du risque d'un trajet près de chez soi : P_près(accident).\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : si 95 % des trajets se font près de chez soi, ces trajets sont-ils plus dangereux ou moins dangereux que les autres ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_conditionnelle_distinguer&microId=probaC_interpreter_phrase&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilité conditionnelle",
+        "accidents",
+        "sécurité routière",
+        "interpréter",
+        "parmi",
+        "probabilités",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-interpreter",
+      "notionId": "alea_conditionnelle_calcul",
+      "microId": "alea_cond_interpreter",
+      "classe": "premiere",
+      "ceinture": "bleue",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-interpreter",
+      "fichier": "premiere-commun/maths/probabilites/05-interpreter/eleveai-maths-premiere-commun-proba-interpreter.mp4",
+      "miniature": "premiere-commun/maths/probabilites/05-interpreter/eleveai-maths-premiere-commun-proba-interpreter.png",
+      "titre": "75 % dans l'autre sens ? NON : une sur deux ! — Dire une proba conditionnelle en phrase · Maths 1re · STMG",
+      "accroche": "Dans une commune, 40 % des maisons ont des panneaux solaires. Leur facture d'électricité a-t-elle baissé ?\n\nDans cette vidéo :\n• l'arbre pondéré : S 0,4, puis B 0,75 après S et 0,5 après S barre\n• P_S(B) = 0,75 se dit « parmi les maisons équipées, 75 % ont vu leur facture baisser »\n• un chemin : 0,4 × 0,75 = 0,3 = P(S ∩ B), « avec panneaux ET facture en baisse »\n• le piège : retourner la phrase, 0,3 sur 0,6 = 0,5, une maison sur deux\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : écris en phrase le 0,5 de la branche qui va de S barre à B.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_conditionnelle_calcul&microId=alea_cond_interpreter&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Dire une proba conditionnelle en phrase"
+        ],
+        [
+          "00:04",
+          "Les panneaux solaires"
+        ],
+        [
+          "00:15",
+          "L'arbre pondéré"
+        ],
+        [
+          "00:36",
+          "Le 0,75 en phrase : « parmi »"
+        ],
+        [
+          "00:55",
+          "Un chemin : « et »"
+        ],
+        [
+          "01:15",
+          "Le piège : retourner la phrase"
+        ],
+        [
+          "01:45",
+          "À toi de jouer"
+        ],
+        [
+          "01:56",
+          "Correction"
+        ],
+        [
+          "02:05",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:26",
+          "Le coach et l'abonnement"
+        ]
+      ],
+      "tags": [
+        "probabilité conditionnelle",
+        "arbre pondéré",
+        "interpréter",
+        "panneaux solaires",
+        "énergie",
+        "écologie",
+        "probabilités",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-interpreter-short",
+      "notionId": "alea_conditionnelle_calcul",
+      "microId": "alea_cond_interpreter",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-commun-proba-interpreter",
+      "meme_video_que": "stmg-proba-interpreter-short",
+      "fichier": "premiere-commun/maths/probabilites/05-interpreter/eleveai-maths-premiere-commun-proba-interpreter-short.mp4",
+      "miniature": "premiere-commun/maths/probabilites/05-interpreter/eleveai-maths-premiere-commun-proba-interpreter-short.png",
+      "titre": "9 accidents sur 10 près de chez soi : DANGER ? 🚗 #Shorts",
+      "accroche": "« 9 accidents sur 10 ont lieu à moins de 10 km de chez soi. » Alors, rouler près de chez soi, c'est dangereux ? Lis bien : « parmi les accidents, 90 % sont près de chez soi », c'est P_accident(près). Or presque tous nos trajets se font près de chez soi ! La phrase ne dit rien du risque d'un trajet près de chez soi : P_près(accident).\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : si 95 % des trajets se font près de chez soi, ces trajets sont-ils plus dangereux ou moins dangereux que les autres ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_conditionnelle_calcul&microId=alea_cond_interpreter&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilité conditionnelle",
+        "accidents",
+        "sécurité routière",
+        "interpréter",
+        "parmi",
+        "probabilités",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "stmg-proba-faux-positifs",
+      "notionId": "proba_conditionnelle_distinguer",
+      "microId": "probaC_test_diagnostique",
+      "classe": "stmg",
+      "ceinture": "marron",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/06-faux-positifs/eleveai-maths-stmg-proba-faux-positifs.mp4",
+      "miniature": "stmg/maths/probabilites/06-faux-positifs/eleveai-maths-stmg-proba-faux-positifs.png",
+      "titre": "Le détecteur sonne… défectueux ? Seulement 0,16 ! — Les faux positifs · Maths 1re · STMG",
+      "accroche": "Une usine fabrique des panneaux solaires : 2 % sont défectueux. Un détecteur « fiable » repère 95 % des défectueux et laisse passer 90 % des bons. Quand il sonne, le panneau est-il vraiment défectueux ?\n\nDans cette vidéo :\n• le tableau sur 10 000 panneaux : 190 vrais positifs, 10 faux négatifs, 980 faux positifs\n• la colonne « sonne » : 190 sur 1 170, environ 0,16\n• le piège : 95 %, c'est P_D(S), pas P_S(D)\n• les mots du métier : sensibilité et spécificité\n\n🥋 Ceinture marron.\nUn défi en fin de vidéo, avec sa correction : le détecteur ne sonne pas : quelle est la probabilité que le panneau soit quand même défectueux ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_conditionnelle_distinguer&microId=probaC_test_diagnostique&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Les faux positifs"
+        ],
+        [
+          "00:05",
+          "L'usine de panneaux solaires"
+        ],
+        [
+          "00:23",
+          "Le tableau sur 10 000 panneaux"
+        ],
+        [
+          "00:40",
+          "Les faux positifs (980)"
+        ],
+        [
+          "00:53",
+          "Il sonne : est-il défectueux ?"
+        ],
+        [
+          "01:17",
+          "Le piège : P_D(S) ou P_S(D)"
+        ],
+        [
+          "01:40",
+          "Sensibilité et spécificité"
+        ],
+        [
+          "01:56",
+          "À toi de jouer"
+        ],
+        [
+          "02:09",
+          "Correction"
+        ],
+        [
+          "02:29",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:47",
+          "Le coach et l'abonnement"
+        ]
+      ],
+      "tags": [
+        "probabilité conditionnelle",
+        "faux positifs",
+        "test de dépistage",
+        "sensibilité",
+        "spécificité",
+        "contrôle qualité",
+        "probabilités",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-faux-positifs-short",
+      "notionId": "proba_conditionnelle_distinguer",
+      "microId": "probaC_test_diagnostique",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-faux-positifs",
+      "fichier": "stmg/maths/probabilites/06-faux-positifs/eleveai-maths-stmg-proba-faux-positifs-short.mp4",
+      "miniature": "stmg/maths/probabilites/06-faux-positifs/eleveai-maths-stmg-proba-faux-positifs-short.png",
+      "titre": "Test positif à 99 %… malade à MÊME PAS 10 % ! 🧪 #Shorts",
+      "accroche": "Une maladie touche 1 personne sur 1 000. Sur 100 000 personnes : 100 malades, et 99 positifs. Mais le test se trompe chez 1 % des 99 900 autres : 999 faux positifs. Positifs : 99 + 999 = 1 098. Vrais malades : 99 sur 1 098, environ 0,09.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : et si la maladie touchait 1 personne sur 10 : quelle est la probabilité d'être malade quand le test est positif ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_conditionnelle_distinguer&microId=probaC_test_diagnostique&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilité conditionnelle",
+        "test médical",
+        "faux positifs",
+        "dépistage",
+        "surprise",
+        "probabilités",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-faux-positifs",
+      "notionId": "alea_conditionnelle_calcul",
+      "microId": "alea_cond_faux_positifs",
+      "classe": "premiere",
+      "ceinture": "marron",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-faux-positifs",
+      "fichier": "premiere-commun/maths/probabilites/06-faux-positifs/eleveai-maths-premiere-commun-proba-faux-positifs.mp4",
+      "miniature": "premiere-commun/maths/probabilites/06-faux-positifs/eleveai-maths-premiere-commun-proba-faux-positifs.png",
+      "titre": "Le détecteur sonne… défectueux ? Seulement 0,16 ! — Les faux positifs · Maths 1re · STMG",
+      "accroche": "Une usine fabrique des panneaux solaires : 2 % sont défectueux. Un détecteur « fiable » repère 95 % des défectueux et laisse passer 90 % des bons. Quand il sonne, le panneau est-il vraiment défectueux ?\n\nDans cette vidéo :\n• le tableau sur 10 000 panneaux : 190 vrais positifs, 10 faux négatifs, 980 faux positifs\n• la colonne « sonne » : 190 sur 1 170, environ 0,16\n• le piège : 95 %, c'est P_D(S), pas P_S(D)\n• les mots du métier : sensibilité et spécificité\n\n🥋 Ceinture marron.\nUn défi en fin de vidéo, avec sa correction : le détecteur ne sonne pas : quelle est la probabilité que le panneau soit quand même défectueux ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_conditionnelle_calcul&microId=alea_cond_faux_positifs&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Les faux positifs"
+        ],
+        [
+          "00:05",
+          "L'usine de panneaux solaires"
+        ],
+        [
+          "00:23",
+          "Le tableau sur 10 000 panneaux"
+        ],
+        [
+          "00:40",
+          "Les faux positifs (980)"
+        ],
+        [
+          "00:53",
+          "Il sonne : est-il défectueux ?"
+        ],
+        [
+          "01:17",
+          "Le piège : P_D(S) ou P_S(D)"
+        ],
+        [
+          "01:40",
+          "Sensibilité et spécificité"
+        ],
+        [
+          "01:56",
+          "À toi de jouer"
+        ],
+        [
+          "02:09",
+          "Correction"
+        ],
+        [
+          "02:29",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:47",
+          "Le coach et l'abonnement"
+        ]
+      ],
+      "tags": [
+        "probabilité conditionnelle",
+        "faux positifs",
+        "test de dépistage",
+        "sensibilité",
+        "spécificité",
+        "contrôle qualité",
+        "probabilités",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-faux-positifs-short",
+      "notionId": "alea_conditionnelle_calcul",
+      "microId": "alea_cond_faux_positifs",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-commun-proba-faux-positifs",
+      "meme_video_que": "stmg-proba-faux-positifs-short",
+      "fichier": "premiere-commun/maths/probabilites/06-faux-positifs/eleveai-maths-premiere-commun-proba-faux-positifs-short.mp4",
+      "miniature": "premiere-commun/maths/probabilites/06-faux-positifs/eleveai-maths-premiere-commun-proba-faux-positifs-short.png",
+      "titre": "Test positif à 99 %… malade à MÊME PAS 10 % ! 🧪 #Shorts",
+      "accroche": "Une maladie touche 1 personne sur 1 000. Sur 100 000 personnes : 100 malades, et 99 positifs. Mais le test se trompe chez 1 % des 99 900 autres : 999 faux positifs. Positifs : 99 + 999 = 1 098. Vrais malades : 99 sur 1 098, environ 0,09.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : et si la maladie touchait 1 personne sur 10 : quelle est la probabilité d'être malade quand le test est positif ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_conditionnelle_calcul&microId=alea_cond_faux_positifs&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilité conditionnelle",
+        "test médical",
+        "faux positifs",
+        "dépistage",
+        "surprise",
+        "probabilités",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
     }
   ]
 }

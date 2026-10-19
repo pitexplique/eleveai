@@ -1,0 +1,5 @@
+{
+  "00-accroche": "Au cinéma, 90 % des clients qui prennent du pop-corn prennent aussi une boisson. Donc 90 % des clients qui prennent une boisson prennent du pop-corn ?",
+  "01-image": "Comptons. 100 clients prennent du pop-corn, dont 90 une boisson. Mais 300 clients prennent une boisson. Parmi eux, 90 ont du pop-corn : 90 sur 300, égale 0,3. Pas 0,9 !",
+  "02-question": "Ce soir-là, 1 000 clients sont venus. Quelle est la probabilité qu'un client prenne pop-corn ET boisson ? Réponds en commentaire !"
+}

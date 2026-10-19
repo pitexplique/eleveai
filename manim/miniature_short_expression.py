@@ -326,6 +326,26 @@ for _t in _PROBA_TEST_2:
     }
     CEINTURE_SHORT[_nom] = _c
 
+# 19/10/2026 — lycée, bloc A, lot 1 : 4 shorts COMMUNS à la STMG et à la 1re (jaune).
+for _cl, _bd in (("stmg", "STMG"), ("premiere-commun", "1RE")):
+    for _ep, _dos, _titre, _sous, _lg in (
+        ("tableau", "03-tableau", ["QUI TRIE", "LE MIEUX ?"], "bus ou voiture ?",
+         [("150 trient, 80 trient…", 64, ROUGE), ("80 sur 100 = 0,8", 84, BLEU), ("le bus gagne !", 96, VERT)]),
+        ("distinguer", "04-distinguer", ["90 %", "POP-CORN…"], "…donc 90 % dans l'autre sens ?",
+         [("pop-corn : 90 % boisson", 64, BLEU), ("boisson : 90 % pop-corn ?", 64, ORANGE), ("non : 0,3 !", 100, VERT)]),
+        ("interpreter", "05-interpreter", ["9 ACCIDENTS", "SUR 10"], "près de chez soi : danger ?",
+         [("parmi les accidents", 76, BLEU), ("≠ risque d'un trajet", 76, ROUGE), ("parmi QUI ?", 100, VERT)]),
+        ("faux-positifs", "06-faux-positifs", ["TEST", "POSITIF"], "fiable à 99 %…",
+         [("malade à 99 % ?", 90, ROUGE), ("99 sur 1 098", 90, BLEU), ("≈ 0,09 !", 110, VERT)]),
+    ):
+        _nom = f"eleveai-maths-{_cl}-proba-{_ep}-short"
+        SHORTS[_nom] = {
+            "badge": f"PROBABILITÉS · {_bd}", "titre": _titre, "taille": 88, "sous": _sous,
+            "taille_sous": 44, "couleur_sous": ORANGE, "accroche": _acc(_lg), "dossier": f"{_cl}/maths/fr",
+            "sortie": f"{_cl}/maths/probabilites/{_dos}",
+        }
+        CEINTURE_SHORT[_nom] = "jaune"
+
 # 18/10/2026 — même TEST, suite : CM1 et CM2, épisodes 3, 4, 5 (comparer, roue, défis).
 _PROBA_TEST_3 = [
     ("cm1", "CM1", "cm1/maths/probabilites/03-comparer", "comparer", "blanche", ["5 FRAISES", "OU 2 ?"],

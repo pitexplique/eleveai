@@ -1,0 +1,13 @@
+{
+  "00-garde": "Faux positifs : quand un test sonne, est-ce vraiment grave ?",
+  "01-situation": "Une usine fabrique des panneaux solaires. 2 % sont défectueux. Un détecteur les contrôle tous. On le dit fiable : il repère 95 % des panneaux défectueux, et il laisse passer 90 % des bons panneaux.",
+  "02-tableau": "Prenons 10 000 panneaux. 2 %, ça fait 200 défectueux et 9 800 bons. Le détecteur sonne pour 95 % des 200 : 190. Il ne sonne pas pour 10 d'entre eux : ce sont les faux négatifs.",
+  "03-faux-positifs": "Les 9 800 bons : il en laisse passer 90 %, soit 8 820. Il sonne donc pour 980 bons panneaux : ce sont les faux positifs.",
+  "04-question": "Le détecteur sonne. Quelle est la probabilité que le panneau soit vraiment défectueux ? On allume la colonne « sonne » : 190 plus 980, égale 1 170 panneaux. Parmi eux, 190 défectueux. 190 sur 1 170, environ 0,16.",
+  "05-piege": "Le piège : croire que c'est 95 %. 95 %, c'est P indice D de S : parmi les défectueux, la part qui fait sonner. Nous cherchions P indice S de D : parmi ceux qui font sonner, la part de défectueux. Comme les défectueux sont rares, les faux positifs sont plus nombreux que les vrais.",
+  "06-vocabulaire": "Les mots du métier. La sensibilité, 95 % : la part des défectueux que le test repère. La spécificité, 90 % : la part des bons panneaux qu'il laisse passer.",
+  "07-defi": "À toi de jouer. Le détecteur ne sonne pas. Quelle est la probabilité que le panneau soit quand même défectueux ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Il ne sonne pas pour 10 plus 8 820, égale 8 830 panneaux. Parmi eux, 10 défectueux. 10 sur 8 830, environ 0,001. Quand il ne sonne pas, on peut lui faire confiance.",
+  "08-finale": "Ce que tu as appris. Un test fiable peut sonner souvent à tort quand ce qu'il cherche est rare. Pour le voir, on prend 10 000 cas, on remplit le tableau, et on allume la colonne « sonne ». P indice D de S n'est pas P indice S de D.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

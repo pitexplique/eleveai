@@ -1,0 +1,13 @@
+{
+  "00-garde": "Calculer une probabilité conditionnelle avec un tableau croisé.",
+  "01-situation": "Une entreprise de 200 salariés veut savoir qui pourrait venir travailler à vélo. Elle croise deux questions : habites-tu à moins de 5 kilomètres ? Viens-tu à vélo ?",
+  "02-tableau": "Voici le tableau. 80 salariés habitent à moins de 5 kilomètres, 120 plus loin. 60 viennent à vélo, 140 en voiture. Et 48 habitent près et viennent à vélo.",
+  "03-sachant": "On choisit un salarié au hasard. D : « il habite à moins de 5 kilomètres ». V : « il vient à vélo ». Sachant qu'il habite près, quelle est la probabilité qu'il vienne à vélo ? « Sachant D » : on allume la ligne D, et on oublie le reste du tableau.",
+  "04-calcul": "Sur cette ligne, 80 salariés. Parmi eux, 48 à vélo. P indice D de V égale 48 sur 80, égale 0,6.",
+  "05-autre-sens": "Et dans l'autre sens ? Sachant qu'il vient à vélo, quelle est la probabilité qu'il habite près ? On allume la colonne V : 60 salariés, dont 48 habitent près. P indice V de D égale 48 sur 60, égale 0,8.",
+  "06-piege": "Le piège : diviser par 200. 48 sur 200, égale 0,24 : c'est P de D inter V, habiter près ET venir à vélo. Avec « sachant », on ne divise jamais par le total : on divise par la ligne ou la colonne allumée.",
+  "07-defi": "À toi de jouer. Parmi les salariés qui viennent en voiture, quelle est la probabilité d'habiter à moins de 5 kilomètres ? Mets pause, et cherche !",
+  "07b-correction": "Correction. On allume la colonne Voiture : 140 salariés, dont 32 habitent près. 32 sur 140, égale 8 sur 35, environ 0,23.",
+  "08-finale": "Ce que tu as appris. « Sachant D » : on allume la ligne ou la colonne de D. Le bas de la fraction, c'est le total de cette ligne ou de cette colonne, jamais le total général. Prochaine vidéo : ne plus confondre P de A inter B, P indice A de B et P indice B de A.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

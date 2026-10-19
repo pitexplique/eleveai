@@ -1,0 +1,5 @@
+{
+  "00-accroche": "Un festival : 400 festivaliers. Qui trie le mieux ses gobelets : ceux venus en bus, ou ceux venus en voiture ?",
+  "01-image": "100 sont venus en bus : 80 trient. 300 sont venus en voiture : 150 trient. 150, c'est plus que 80. Mais on allume la ligne Bus : 80 sur 100, égale 0,8. La ligne Voiture : 150 sur 300, égale 0,5. Le bus gagne !",
+  "02-question": "Et parmi les 230 festivaliers qui trient, quelle est la probabilité d'être venu en bus ? Réponds en commentaire !"
+}

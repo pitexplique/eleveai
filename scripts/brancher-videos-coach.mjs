@@ -92,6 +92,13 @@ for (const r of existant) {
 
 // ── Le manifeste ─────────────────────────────────────────────────────────────
 const manifeste = JSON.parse(readFileSync(option("--manifeste") ?? "manim/manifeste-youtube.json", "utf8"));
+// Une micro commune à deux classes (STMG / 1re…) n'est publiée qu'UNE fois :
+// l'entrée jumelle porte `meme_video_que` et reprend l'URL de l'autre.
+const parIdManifeste = new Map(manifeste.videos.map((v) => [v.id, v]));
+for (const v of manifeste.videos) {
+  if (!v.url && v.meme_video_que) v.url = parIdManifeste.get(v.meme_video_que)?.url;
+}
+
 const deja = [], ecartees = [], occupees = [], nouvelles = [];
 for (const v of manifeste.videos) {
   if (!v.url || !v.notionId) continue;
@@ -99,15 +106,18 @@ for (const v of manifeste.videos) {
   if (F_NOTION && v.notionId !== F_NOTION) continue;
   const short = v.type === "short" || estShort(v.url);
 
-  // Déjà en base, où que ce soit (y compris les shorts branchés à la main
-  // dont le manifeste n'a pas retenu la micro) : on n'y touche pas.
-  const enPlace = parId.get(idYoutube(v.url));
-  if (enPlace) {
+  // Déjà en base POUR SA CLASSE (y compris les shorts branchés à la main dont
+  // le manifeste n'a pas retenu la micro) : on n'y touche pas. Par classe, car
+  // une vidéo commune (STMG / 1re) a une ligne dans chacune ; classe inconnue :
+  // n'importe quelle ligne suffit.
+  const classe = classeDe(v);
+  const lignes = parId.get(idYoutube(v.url)) ?? [];
+  const enPlace = classe ? lignes.filter((r) => r.classe === classe) : lignes;
+  if (enPlace.length) {
     if (!F_CLASSE || enPlace.some((r) => r.classe === F_CLASSE)) deja.push({ v, short, enPlace });
     continue;
   }
 
-  const classe = classeDe(v);
   if (F_CLASSE && classe !== F_CLASSE) continue;
   const raison =
     !classe ? "classe introuvable (ajouter « classe » au manifeste)"

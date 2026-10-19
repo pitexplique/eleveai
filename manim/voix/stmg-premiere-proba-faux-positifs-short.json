@@ -1,0 +1,5 @@
+{
+  "00-accroche": "Un test fiable à 99 % te dit : positif. Tu es malade à 99 % ? Même pas à 10 % !",
+  "01-image": "Une maladie touche 1 personne sur 1 000. Sur 100 000 personnes : 100 malades, et 99 positifs. Mais le test se trompe chez 1 % des 99 900 autres : 999 faux positifs. Positifs : 99 plus 999, égale 1 098. Vrais malades : 99 sur 1 098, environ 0,09.",
+  "02-question": "Et si la maladie touchait 1 personne sur 10 ? Calcule la probabilité d'être malade quand le test est positif, et réponds en commentaire !"
+}

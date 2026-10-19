@@ -1461,6 +1461,25 @@ ESSAIS.update({
     },
 })
 
+# 19/10/2026 — lycée, bloc A, lot 1 : 4 micros COMMUNES à la STMG et à la 1re
+# tronc commun (une voix, deux rendus, une miniature par classe).
+for _cl, _bd in (("stmg", "STMG"), ("premiere-commun", "1RE")):
+    for _k, _dos, _titre, _haut, _bas, _c in (
+        ("tableau", "03-tableau", ["COMPRENDRE LES PROBAS", "AVEC UN TABLEAU"],
+         "48 sur 200 ?", "non : 48 sur 80, la ligne D !", "bleue"),
+        ("distinguer", "04-distinguer", ["NE PLUS CONFONDRE", "TROIS PROBABILITÉS"],
+         "Même 120 en haut…", "trois réponses : 0,24 · 0,4 · 0,6", "bleue"),
+        ("interpreter", "05-interpreter", ["COMPRENDRE UNE PROBA", "CONDITIONNELLE EN PHRASE"],
+         "75 % dans l'autre sens ?", "non : une maison sur deux !", "bleue"),
+        ("faux-positifs", "06-faux-positifs", ["COMPRENDRE", "LES FAUX POSITIFS"],
+         "Le détecteur sonne…", "défectueux ? seulement 0,16 !", "marron"),
+    ):
+        ESSAIS[f"eleveai-maths-{_cl}-proba-{_k}"] = {
+            "badge": f"MATHS · {_bd}", "duree": "EN 3 MIN", "titre": _titre,
+            "accroche": _piege_test(_c, _haut, _bas),
+            "dossier": f"{_cl}/maths/probabilites/{_dos}",
+        }
+
 
 # 17/10/2026 — Grand Raid, Diagonale des Fous : les marches de 25 cm (6e, verte).
 ESSAIS["eleveai-maths-6e-aire-longueur-convertir-diagonale"] = {
