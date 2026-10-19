@@ -417,7 +417,9 @@ export function suggerer(
   // se place en DEUXIÈME, juste sous la meilleure notion du coach.
   // ⚠️ Les classes courtes (« 6e ») ne comptent pas dans le test : la galerie
   // les retrouve dans l'identifiant de la vidéo, pas dans son titre.
-  const aVerifier = mots.filter((m) => !CLASSES_COURTES.has(m));
+  // ⚠️ L'index ne garde que les mots de 4 lettres et plus : « des », « les »
+  // n'y sont pas, et « diagonale des fous » ne trouvait plus rien (19/10).
+  const aVerifier = mots.filter((m) => !CLASSES_COURTES.has(m) && m.length >= 4);
   const ilYAUneVideo =
     aVerifier.length > 0 && aVerifier.every((q) => MOTS_VIDEOS.some((m) => m.startsWith(q)));
   if (ilYAUneVideo) {
