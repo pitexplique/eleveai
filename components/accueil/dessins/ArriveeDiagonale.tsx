@@ -87,9 +87,17 @@ export default function ArriveeDiagonale({ className = "" }: { className?: strin
         <path d="M240 205 L256 244" />
       </g>
       <rect x="229" y="165" width="22" height="44" rx="9" fill="#facc15" />
-      <text x="240" y="192" textAnchor="middle" fontSize="9" fontWeight="900" fill="#1e293b" fontFamily="system-ui, sans-serif">
+      <text x="240" y="197" textAnchor="middle" fontSize="9" fontWeight="900" fill="#1e293b" fontFamily="system-ui, sans-serif">
         1
       </text>
+      {/* Les trois barres façon Adidas sur la poitrine. Frédéric, 19/10, après
+          avoir pesé la neutralité commerciale : « laisse le logo adidas », « ça
+          pourrait donner des idées ». Pour le retirer : supprimer ce groupe. */}
+      <g fill="#111827">
+        <path d="M233.5 182 L236.5 182 L234.5 176.5 L231.5 176.5 Z" />
+        <path d="M238.5 182 L241.5 182 L238.5 173.5 L235.5 173.5 Z" />
+        <path d="M243.5 182 L246.5 182 L242.5 170.5 L239.5 170.5 Z" />
+      </g>
       {/* La tête, et un BEAU SOURIRE (Frédéric : « mets-lui un beau sourire ») */}
       <circle cx="240" cy="151" r="14" fill="#fcd9b6" />
       <path d="M226 147 Q240 128 254 147 Z" fill="#0ea5e9" />
@@ -100,9 +108,9 @@ export default function ArriveeDiagonale({ className = "" }: { className?: strin
       <circle cx="231" cy="156" r="2.2" fill="#fb7185" opacity="0.5" />
       <circle cx="249" cy="156" r="2.2" fill="#fb7185" opacity="0.5" />
 
-      {/* Son nom, en gros (Frédéric : « Hugo Deck en gros »). ⛔ Pas de marque
+      {/* Son nom, en gros (Frédéric : « Hugo Deck en gros »). J'avais d'abord écarté la marque
           sur le maillot (il a proposé Adidas) : un logo déposé laisserait
-          croire à un partenariat. */}
+          croire à un partenariat — il a tranché ensuite : voir le logo plus haut. */}
       <rect x="120" y="262" width="240" height="32" rx="8" fill="#0f172a" opacity="0.85" />
       <text x="240" y="287" textAnchor="middle" fontSize="26" fontWeight="900" fill="#facc15" fontFamily="system-ui, sans-serif" letterSpacing="3">
         HUGO DECK
