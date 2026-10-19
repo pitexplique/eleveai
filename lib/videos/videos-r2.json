@@ -3847,6 +3847,166 @@
   "short": true,
   "youtube": null
  },
+ "premiere-commun-proba-arbre-completer": {
+  "fichier": "premiere-commun/maths/probabilites/08-arbre-completer/eleveai-maths-premiere-commun-proba-arbre-completer.mp4",
+  "poster": "premiere-commun/maths/probabilites/08-arbre-completer/eleveai-maths-premiere-commun-proba-arbre-completer.png",
+  "vignette": "premiere-commun/maths/probabilites/08-arbre-completer/eleveai-maths-premiere-commun-proba-arbre-completer.vignette.webp",
+  "titre": "0,3 sur la branche ? NON : 0,75 ! — Compléter un arbre pondéré · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-commun-proba-arbre-completer-short": {
+  "fichier": "premiere-commun/maths/probabilites/08-arbre-completer/eleveai-maths-premiere-commun-proba-arbre-completer-short.mp4",
+  "poster": "premiere-commun/maths/probabilites/08-arbre-completer/eleveai-maths-premiere-commun-proba-arbre-completer-short.png",
+  "vignette": "premiere-commun/maths/probabilites/08-arbre-completer/eleveai-maths-premiere-commun-proba-arbre-completer-short.vignette.webp",
+  "titre": "La branche effacée : tu la retrouves ? 🦆 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "premiere-commun-proba-arbre-construire": {
+  "fichier": "premiere-commun/maths/probabilites/09-arbre-construire/eleveai-maths-premiere-commun-proba-arbre-construire.mp4",
+  "poster": "premiere-commun/maths/probabilites/09-arbre-construire/eleveai-maths-premiere-commun-proba-arbre-construire.png",
+  "vignette": "premiere-commun/maths/probabilites/09-arbre-construire/eleveai-maths-premiere-commun-proba-arbre-construire.vignette.webp",
+  "titre": "Croissant ou matin : qui va en premier ? — Construire un arbre pondéré · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-commun-proba-arbre-construire-short": {
+  "fichier": "premiere-commun/maths/probabilites/09-arbre-construire/eleveai-maths-premiere-commun-proba-arbre-construire-short.mp4",
+  "poster": "premiere-commun/maths/probabilites/09-arbre-construire/eleveai-maths-premiere-commun-proba-arbre-construire-short.png",
+  "vignette": "premiere-commun/maths/probabilites/09-arbre-construire/eleveai-maths-premiere-commun-proba-arbre-construire-short.vignette.webp",
+  "titre": "Entraînement ou arrivée : qui passe en premier ? ⛰️ #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "premiere-commun-proba-arbre-lire": {
+  "fichier": "premiere-commun/maths/probabilites/07-arbre-lire/eleveai-maths-premiere-commun-proba-arbre-lire.mp4",
+  "poster": "premiere-commun/maths/probabilites/07-arbre-lire/eleveai-maths-premiere-commun-proba-arbre-lire.png",
+  "vignette": "premiere-commun/maths/probabilites/07-arbre-lire/eleveai-maths-premiere-commun-proba-arbre-lire.vignette.webp",
+  "titre": "Le 0,6 de l'arbre = P(A) ? NON ! — Lire un arbre pondéré · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-commun-proba-arbre-lire-short": {
+  "fichier": "premiere-commun/maths/probabilites/07-arbre-lire/eleveai-maths-premiere-commun-proba-arbre-lire-short.mp4",
+  "poster": "premiere-commun/maths/probabilites/07-arbre-lire/eleveai-maths-premiere-commun-proba-arbre-lire-short.png",
+  "vignette": "premiere-commun/maths/probabilites/07-arbre-lire/eleveai-maths-premiere-commun-proba-arbre-lire-short.vignette.webp",
+  "titre": "90 % de ketchup… mais sur QUELLE branche ? 🍟 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "premiere-commun-proba-arbre-tableau": {
+  "fichier": "premiere-commun/maths/probabilites/12-arbre-tableau/eleveai-maths-premiere-commun-proba-arbre-tableau.mp4",
+  "poster": "premiere-commun/maths/probabilites/12-arbre-tableau/eleveai-maths-premiere-commun-proba-arbre-tableau.png",
+  "vignette": "premiere-commun/maths/probabilites/12-arbre-tableau/eleveai-maths-premiere-commun-proba-arbre-tableau.vignette.webp",
+  "titre": "360 sur 510 : nulle part sur l'arbre ! — De l'arbre au tableau croisé · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-commun-proba-arbre-tableau-short": {
+  "fichier": "premiere-commun/maths/probabilites/12-arbre-tableau/eleveai-maths-premiere-commun-proba-arbre-tableau-short.mp4",
+  "poster": "premiere-commun/maths/probabilites/12-arbre-tableau/eleveai-maths-premiere-commun-proba-arbre-tableau-short.png",
+  "vignette": "premiere-commun/maths/probabilites/12-arbre-tableau/eleveai-maths-premiere-commun-proba-arbre-tableau-short.vignette.webp",
+  "titre": "Un chemin de l'arbre = une case du tableau 😴 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "premiere-commun-proba-au-moins-un": {
+  "fichier": "premiere-commun/maths/probabilites/22-au-moins-un/eleveai-maths-premiere-commun-proba-au-moins-un.mp4",
+  "poster": "premiere-commun/maths/probabilites/22-au-moins-un/eleveai-maths-premiere-commun-proba-au-moins-un.png",
+  "vignette": "premiere-commun/maths/probabilites/22-au-moins-un/eleveai-maths-premiere-commun-proba-au-moins-un.vignette.webp",
+  "titre": "3 tickets à 10 % : 30 % de chances ? FAUX ! — « Au moins un » et le contraire · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-commun-proba-au-moins-un-short": {
+  "fichier": "premiere-commun/maths/probabilites/22-au-moins-un/eleveai-maths-premiere-commun-proba-au-moins-un-short.mp4",
+  "poster": "premiere-commun/maths/probabilites/22-au-moins-un/eleveai-maths-premiere-commun-proba-au-moins-un-short.png",
+  "vignette": "premiere-commun/maths/probabilites/22-au-moins-un/eleveai-maths-premiere-commun-proba-au-moins-un-short.vignette.webp",
+  "titre": "10 parties à 10 % = 100 % ? NON ! 🎮 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "premiere-commun-proba-bern-arbre": {
+  "fichier": "premiere-commun/maths/probabilites/20-bern-arbre/eleveai-maths-premiere-commun-proba-bern-arbre.mp4",
+  "poster": "premiere-commun/maths/probabilites/20-bern-arbre/eleveai-maths-premiere-commun-proba-bern-arbre.png",
+  "vignette": "premiere-commun/maths/probabilites/20-bern-arbre/eleveai-maths-premiere-commun-proba-bern-arbre.vignette.webp",
+  "titre": "2 graines sur 3 : un seul chemin ? NON, 3 ! — L'arbre de trois épreuves · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-commun-proba-bern-arbre-short": {
+  "fichier": "premiere-commun/maths/probabilites/20-bern-arbre/eleveai-maths-premiere-commun-proba-bern-arbre-short.mp4",
+  "poster": "premiere-commun/maths/probabilites/20-bern-arbre/eleveai-maths-premiere-commun-proba-bern-arbre-short.png",
+  "vignette": "premiere-commun/maths/probabilites/20-bern-arbre/eleveai-maths-premiere-commun-proba-bern-arbre-short.vignette.webp",
+  "titre": "2 buts sur 3 tirs : une seule façon ? ⚽ #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "premiere-commun-proba-bern-calculer": {
+  "fichier": "premiere-commun/maths/probabilites/21-bern-calculer/eleveai-maths-premiere-commun-proba-bern-calculer.mp4",
+  "poster": "premiere-commun/maths/probabilites/21-bern-calculer/eleveai-maths-premiere-commun-proba-bern-calculer.png",
+  "vignette": "premiere-commun/maths/probabilites/21-bern-calculer/eleveai-maths-premiere-commun-proba-bern-calculer.vignette.webp",
+  "titre": "Exactement deux : 0,128 ? NON, 0,384 ! — Calculer sur une répétition · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-commun-proba-bern-calculer-short": {
+  "fichier": "premiere-commun/maths/probabilites/21-bern-calculer/eleveai-maths-premiere-commun-proba-bern-calculer-short.mp4",
+  "poster": "premiere-commun/maths/probabilites/21-bern-calculer/eleveai-maths-premiere-commun-proba-bern-calculer-short.png",
+  "vignette": "premiere-commun/maths/probabilites/21-bern-calculer/eleveai-maths-premiere-commun-proba-bern-calculer-short.vignette.webp",
+  "titre": "8 penaltys sur 10… mais 3 de suite ? ⚽ #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "premiere-commun-proba-bern-epreuve": {
+  "fichier": "premiere-commun/maths/probabilites/18-bern-epreuve/eleveai-maths-premiere-commun-proba-bern-epreuve.mp4",
+  "poster": "premiere-commun/maths/probabilites/18-bern-epreuve/eleveai-maths-premiere-commun-proba-bern-epreuve.png",
+  "vignette": "premiere-commun/maths/probabilites/18-bern-epreuve/eleveai-maths-premiere-commun-proba-bern-epreuve.vignette.webp",
+  "titre": "Un dé a 6 faces… et c'est une épreuve de Bernoulli ! — L'épreuve de Bernoulli · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-commun-proba-bern-epreuve-short": {
+  "fichier": "premiere-commun/maths/probabilites/18-bern-epreuve/eleveai-maths-premiere-commun-proba-bern-epreuve-short.mp4",
+  "poster": "premiere-commun/maths/probabilites/18-bern-epreuve/eleveai-maths-premiere-commun-proba-bern-epreuve-short.png",
+  "vignette": "premiere-commun/maths/probabilites/18-bern-epreuve/eleveai-maths-premiere-commun-proba-bern-epreuve-short.vignette.webp",
+  "titre": "Un dé qui devient pile ou face ? 🎲 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "premiere-commun-proba-bern-repetition": {
+  "fichier": "premiere-commun/maths/probabilites/19-bern-repetition/eleveai-maths-premiere-commun-proba-bern-repetition.mp4",
+  "poster": "premiere-commun/maths/probabilites/19-bern-repetition/eleveai-maths-premiere-commun-proba-bern-repetition.png",
+  "vignette": "premiere-commun/maths/probabilites/19-bern-repetition/eleveai-maths-premiere-commun-proba-bern-repetition.vignette.webp",
+  "titre": "0,7 puis 0,5 : ce n'est PLUS une répétition ! — Répéter une épreuve · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-commun-proba-bern-repetition-short": {
+  "fichier": "premiere-commun/maths/probabilites/19-bern-repetition/eleveai-maths-premiere-commun-proba-bern-repetition-short.mp4",
+  "poster": "premiere-commun/maths/probabilites/19-bern-repetition/eleveai-maths-premiere-commun-proba-bern-repetition-short.png",
+  "vignette": "premiere-commun/maths/probabilites/19-bern-repetition/eleveai-maths-premiere-commun-proba-bern-repetition-short.vignette.webp",
+  "titre": "3 lancers de pièce : 6 résultats ? NON ! 🪙 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "premiere-commun-proba-chemin": {
+  "fichier": "premiere-commun/maths/probabilites/10-chemin/eleveai-maths-premiere-commun-proba-chemin.mp4",
+  "poster": "premiere-commun/maths/probabilites/10-chemin/eleveai-maths-premiere-commun-proba-chemin.png",
+  "vignette": "premiere-commun/maths/probabilites/10-chemin/eleveai-maths-premiere-commun-proba-chemin.vignette.webp",
+  "titre": "0,6 + 0,7 = 1,3 ? IMPOSSIBLE ! — La probabilité d'un chemin · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-commun-proba-chemin-short": {
+  "fichier": "premiere-commun/maths/probabilites/10-chemin/eleveai-maths-premiere-commun-proba-chemin-short.mp4",
+  "poster": "premiere-commun/maths/probabilites/10-chemin/eleveai-maths-premiere-commun-proba-chemin-short.png",
+  "vignette": "premiere-commun/maths/probabilites/10-chemin/eleveai-maths-premiere-commun-proba-chemin-short.vignette.webp",
+  "titre": "Deux feux verts : 0,5 + 0,8 ? 🚦 #Shorts",
+  "short": true,
+  "youtube": null
+ },
  "premiere-commun-proba-contraire": {
   "fichier": "premiere-commun/maths/probabilites/02-contraire/eleveai-maths-premiere-commun-proba-contraire.mp4",
   "poster": "premiere-commun/maths/probabilites/02-contraire/eleveai-maths-premiere-commun-proba-contraire.png",
@@ -3863,6 +4023,22 @@
   "short": true,
   "youtube": null
  },
+ "premiere-commun-proba-distinguer": {
+  "fichier": "premiere-commun/maths/probabilites/04-distinguer/eleveai-maths-premiere-commun-proba-distinguer.mp4",
+  "poster": "premiere-commun/maths/probabilites/04-distinguer/eleveai-maths-premiere-commun-proba-distinguer.png",
+  "vignette": "premiere-commun/maths/probabilites/04-distinguer/eleveai-maths-premiere-commun-proba-distinguer.vignette.webp",
+  "titre": "Même 120 en haut… trois réponses ! — P(A ∩ B), P_A(B) ou P_B(A) · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-commun-proba-distinguer-short": {
+  "fichier": "premiere-commun/maths/probabilites/04-distinguer/eleveai-maths-premiere-commun-proba-distinguer-short.mp4",
+  "poster": "premiere-commun/maths/probabilites/04-distinguer/eleveai-maths-premiere-commun-proba-distinguer-short.png",
+  "vignette": "premiere-commun/maths/probabilites/04-distinguer/eleveai-maths-premiere-commun-proba-distinguer-short.vignette.webp",
+  "titre": "90 % dans un sens… 30 % dans l'autre ! 🍿 #Shorts",
+  "short": true,
+  "youtube": null
+ },
  "premiere-commun-proba-encadrement": {
   "fichier": "premiere-commun/maths/probabilites/01-entre-0-et-1/eleveai-maths-premiere-commun-proba-encadrement.mp4",
   "poster": "premiere-commun/maths/probabilites/01-entre-0-et-1/eleveai-maths-premiere-commun-proba-encadrement.png",
@@ -3876,6 +4052,150 @@
   "poster": "premiere-commun/maths/probabilites/01-entre-0-et-1/eleveai-maths-premiere-commun-proba-encadrement-short.png",
   "vignette": "premiere-commun/maths/probabilites/01-entre-0-et-1/eleveai-maths-premiere-commun-proba-encadrement-short.vignette.webp",
   "titre": "120 % de chances d'être rentable : tu signes ? ☀️ — 1re #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "premiere-commun-proba-faux-positifs": {
+  "fichier": "premiere-commun/maths/probabilites/06-faux-positifs/eleveai-maths-premiere-commun-proba-faux-positifs.mp4",
+  "poster": "premiere-commun/maths/probabilites/06-faux-positifs/eleveai-maths-premiere-commun-proba-faux-positifs.png",
+  "vignette": "premiere-commun/maths/probabilites/06-faux-positifs/eleveai-maths-premiere-commun-proba-faux-positifs.vignette.webp",
+  "titre": "Le détecteur sonne… défectueux ? Seulement 0,16 ! — Les faux positifs · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-commun-proba-faux-positifs-short": {
+  "fichier": "premiere-commun/maths/probabilites/06-faux-positifs/eleveai-maths-premiere-commun-proba-faux-positifs-short.mp4",
+  "poster": "premiere-commun/maths/probabilites/06-faux-positifs/eleveai-maths-premiere-commun-proba-faux-positifs-short.png",
+  "vignette": "premiere-commun/maths/probabilites/06-faux-positifs/eleveai-maths-premiere-commun-proba-faux-positifs-short.vignette.webp",
+  "titre": "Test positif à 99 %… malade à MÊME PAS 10 % ! 🧪 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "premiere-commun-proba-indep-definition": {
+  "fichier": "premiere-commun/maths/probabilites/13-indep-definition/eleveai-maths-premiere-commun-proba-indep-definition.mp4",
+  "poster": "premiere-commun/maths/probabilites/13-indep-definition/eleveai-maths-premiere-commun-proba-indep-definition.png",
+  "vignette": "premiere-commun/maths/probabilites/13-indep-definition/eleveai-maths-premiere-commun-proba-indep-definition.vignette.webp",
+  "titre": "Indépendants = sans rapport ? NON ! — Deux événements indépendants · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-commun-proba-indep-definition-short": {
+  "fichier": "premiere-commun/maths/probabilites/13-indep-definition/eleveai-maths-premiere-commun-proba-indep-definition-short.mp4",
+  "poster": "premiere-commun/maths/probabilites/13-indep-definition/eleveai-maths-premiere-commun-proba-indep-definition-short.png",
+  "vignette": "premiere-commun/maths/probabilites/13-indep-definition/eleveai-maths-premiere-commun-proba-indep-definition-short.vignette.webp",
+  "titre": "5 fois pile… et face au prochain lancer ? 🪙 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "premiere-commun-proba-indep-incompatible": {
+  "fichier": "premiere-commun/maths/probabilites/16-indep-incompatible/eleveai-maths-premiere-commun-proba-indep-incompatible.mp4",
+  "poster": "premiere-commun/maths/probabilites/16-indep-incompatible/eleveai-maths-premiere-commun-proba-indep-incompatible.png",
+  "vignette": "premiere-commun/maths/probabilites/16-indep-incompatible/eleveai-maths-premiere-commun-proba-indep-incompatible.vignette.webp",
+  "titre": "Incompatibles = indépendants ? Presque le CONTRAIRE ! — Indépendants ou incompatibles · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-commun-proba-indep-incompatible-short": {
+  "fichier": "premiere-commun/maths/probabilites/16-indep-incompatible/eleveai-maths-premiere-commun-proba-indep-incompatible-short.mp4",
+  "poster": "premiere-commun/maths/probabilites/16-indep-incompatible/eleveai-maths-premiere-commun-proba-indep-incompatible-short.png",
+  "vignette": "premiere-commun/maths/probabilites/16-indep-incompatible/eleveai-maths-premiere-commun-proba-indep-incompatible-short.vignette.webp",
+  "titre": "Pile et face : indépendants ? Beaucoup disent oui… 🪙 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "premiere-commun-proba-indep-justifier": {
+  "fichier": "premiere-commun/maths/probabilites/15-indep-justifier/eleveai-maths-premiere-commun-proba-indep-justifier.mp4",
+  "poster": "premiere-commun/maths/probabilites/15-indep-justifier/eleveai-maths-premiere-commun-proba-indep-justifier.png",
+  "vignette": "premiere-commun/maths/probabilites/15-indep-justifier/eleveai-maths-premiere-commun-proba-indep-justifier.vignette.webp",
+  "titre": "Un seul nombre ne prouve RIEN ! — Prouver que deux événements sont indépendants · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-commun-proba-indep-justifier-short": {
+  "fichier": "premiere-commun/maths/probabilites/15-indep-justifier/eleveai-maths-premiere-commun-proba-indep-justifier-short.mp4",
+  "poster": "premiere-commun/maths/probabilites/15-indep-justifier/eleveai-maths-premiere-commun-proba-indep-justifier-short.png",
+  "vignette": "premiere-commun/maths/probabilites/15-indep-justifier/eleveai-maths-premiere-commun-proba-indep-justifier-short.vignette.webp",
+  "titre": "Avoir un chat rend-il meilleur en maths ? 🐱 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "premiere-commun-proba-indep-produit": {
+  "fichier": "premiere-commun/maths/probabilites/14-indep-produit/eleveai-maths-premiere-commun-proba-indep-produit.mp4",
+  "poster": "premiere-commun/maths/probabilites/14-indep-produit/eleveai-maths-premiere-commun-proba-indep-produit.png",
+  "vignette": "premiere-commun/maths/probabilites/14-indep-produit/eleveai-maths-premiere-commun-proba-indep-produit.vignette.webp",
+  "titre": "P(A ∩ B) = P(A) × P(B)… SEULEMENT si indépendants ! — La règle du produit · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-commun-proba-indep-produit-short": {
+  "fichier": "premiere-commun/maths/probabilites/14-indep-produit/eleveai-maths-premiere-commun-proba-indep-produit-short.mp4",
+  "poster": "premiere-commun/maths/probabilites/14-indep-produit/eleveai-maths-premiere-commun-proba-indep-produit-short.png",
+  "vignette": "premiere-commun/maths/probabilites/14-indep-produit/eleveai-maths-premiere-commun-proba-indep-produit-short.vignette.webp",
+  "titre": "2 réveils à 90 % : les deux sonnent ? 81 % seulement ! ⏰ #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "premiere-commun-proba-interpreter": {
+  "fichier": "premiere-commun/maths/probabilites/05-interpreter/eleveai-maths-premiere-commun-proba-interpreter.mp4",
+  "poster": "premiere-commun/maths/probabilites/05-interpreter/eleveai-maths-premiere-commun-proba-interpreter.png",
+  "vignette": "premiere-commun/maths/probabilites/05-interpreter/eleveai-maths-premiere-commun-proba-interpreter.vignette.webp",
+  "titre": "75 % dans l'autre sens ? NON : une sur deux ! — Dire une proba conditionnelle en phrase · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-commun-proba-interpreter-short": {
+  "fichier": "premiere-commun/maths/probabilites/05-interpreter/eleveai-maths-premiere-commun-proba-interpreter-short.mp4",
+  "poster": "premiere-commun/maths/probabilites/05-interpreter/eleveai-maths-premiere-commun-proba-interpreter-short.png",
+  "vignette": "premiere-commun/maths/probabilites/05-interpreter/eleveai-maths-premiere-commun-proba-interpreter-short.vignette.webp",
+  "titre": "9 accidents sur 10 près de chez soi : DANGER ? 🚗 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "premiere-commun-proba-remise": {
+  "fichier": "premiere-commun/maths/probabilites/17-remise/eleveai-maths-premiere-commun-proba-remise.mp4",
+  "poster": "premiere-commun/maths/probabilites/17-remise/eleveai-maths-premiere-commun-proba-remise.png",
+  "vignette": "premiere-commun/maths/probabilites/17-remise/eleveai-maths-premiere-commun-proba-remise.vignette.webp",
+  "titre": "Sans remise, 0,3 × 0,3 est FAUX ! — Tirage avec ou sans remise · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-commun-proba-remise-short": {
+  "fichier": "premiere-commun/maths/probabilites/17-remise/eleveai-maths-premiere-commun-proba-remise-short.mp4",
+  "poster": "premiere-commun/maths/probabilites/17-remise/eleveai-maths-premiere-commun-proba-remise-short.png",
+  "vignette": "premiere-commun/maths/probabilites/17-remise/eleveai-maths-premiere-commun-proba-remise-short.vignette.webp",
+  "titre": "2 noires, 2 blanches : une paire, 1 chance sur 2 ? 🧦 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "premiere-commun-proba-somme-chemins": {
+  "fichier": "premiere-commun/maths/probabilites/11-somme-chemins/eleveai-maths-premiere-commun-proba-somme-chemins.mp4",
+  "poster": "premiere-commun/maths/probabilites/11-somme-chemins/eleveai-maths-premiere-commun-proba-somme-chemins.png",
+  "vignette": "premiere-commun/maths/probabilites/11-somme-chemins/eleveai-maths-premiere-commun-proba-somme-chemins.vignette.webp",
+  "titre": "(0,1 + 0,4) ÷ 2 ? FAUX ! — Plusieurs chemins : on additionne · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-commun-proba-somme-chemins-short": {
+  "fichier": "premiere-commun/maths/probabilites/11-somme-chemins/eleveai-maths-premiere-commun-proba-somme-chemins-short.mp4",
+  "poster": "premiere-commun/maths/probabilites/11-somme-chemins/eleveai-maths-premiere-commun-proba-somme-chemins-short.png",
+  "vignette": "premiere-commun/maths/probabilites/11-somme-chemins/eleveai-maths-premiere-commun-proba-somme-chemins-short.vignette.webp",
+  "titre": "La moyenne, 0,3 ? Non : 0,18 ! 🎡 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "premiere-commun-proba-tableau": {
+  "fichier": "premiere-commun/maths/probabilites/03-tableau/eleveai-maths-premiere-commun-proba-tableau.mp4",
+  "poster": "premiere-commun/maths/probabilites/03-tableau/eleveai-maths-premiere-commun-proba-tableau.png",
+  "vignette": "premiere-commun/maths/probabilites/03-tableau/eleveai-maths-premiere-commun-proba-tableau.vignette.webp",
+  "titre": "48 sur 200 ? NON : la ligne D ! — Probabilité conditionnelle et tableau croisé · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-commun-proba-tableau-short": {
+  "fichier": "premiere-commun/maths/probabilites/03-tableau/eleveai-maths-premiere-commun-proba-tableau-short.mp4",
+  "poster": "premiere-commun/maths/probabilites/03-tableau/eleveai-maths-premiere-commun-proba-tableau-short.png",
+  "vignette": "premiere-commun/maths/probabilites/03-tableau/eleveai-maths-premiere-commun-proba-tableau-short.vignette.webp",
+  "titre": "150 trient, 80 trient… et pourtant le bus gagne ! 🚌 #Shorts",
   "short": true,
   "youtube": null
  },
@@ -3916,6 +4236,86 @@
   "poster": "premiere/maths/probabilites/02-parmi-sachant/eleveai-maths-premiere-proba-registres-short.png",
   "vignette": "premiere/maths/probabilites/02-parmi-sachant/eleveai-maths-premiere-proba-registres-short.vignette.webp",
   "titre": "60 % des retards sous la pluie… donc ? 🚌 — 1re spé #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "premiere-proba-va-equitable": {
+  "fichier": "premiere/maths/probabilites/26-va-equitable/eleveai-maths-premiere-proba-va-equitable.mp4",
+  "poster": "premiere/maths/probabilites/26-va-equitable/eleveai-maths-premiere-proba-va-equitable.png",
+  "vignette": "premiere/maths/probabilites/26-va-equitable/eleveai-maths-premiere-proba-va-equitable.vignette.webp",
+  "titre": "5 × 0,2 = 1 € de gain ? FAUX : la mise ! — Un jeu est-il équitable ? · Maths 1re spé · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-proba-va-equitable-short": {
+  "fichier": "premiere/maths/probabilites/26-va-equitable/eleveai-maths-premiere-proba-va-equitable-short.mp4",
+  "poster": "premiere/maths/probabilites/26-va-equitable/eleveai-maths-premiere-proba-va-equitable-short.png",
+  "vignette": "premiere/maths/probabilites/26-va-equitable/eleveai-maths-premiere-proba-va-equitable-short.vignette.webp",
+  "titre": "La roulette : pourquoi le casino gagne TOUJOURS 🎰 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "premiere-proba-va-esperance": {
+  "fichier": "premiere/maths/probabilites/25-va-esperance/eleveai-maths-premiere-proba-va-esperance.mp4",
+  "poster": "premiere/maths/probabilites/25-va-esperance/eleveai-maths-premiere-proba-va-esperance.png",
+  "vignette": "premiere/maths/probabilites/25-va-esperance/eleveai-maths-premiere-proba-va-esperance.vignette.webp",
+  "titre": "(0 + 2 + 10) ÷ 3 = 4 ? FAUX ! — L'espérance, le gain moyen · Maths 1re spé · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-proba-va-esperance-short": {
+  "fichier": "premiere/maths/probabilites/25-va-esperance/eleveai-maths-premiere-proba-va-esperance-short.mp4",
+  "poster": "premiere/maths/probabilites/25-va-esperance/eleveai-maths-premiere-proba-va-esperance-short.png",
+  "vignette": "premiere/maths/probabilites/25-va-esperance/eleveai-maths-premiere-proba-va-esperance-short.vignette.webp",
+  "titre": "Le dé paie 3,50 € en moyenne… aucune face ne donne 3,5 ! 🎲 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "premiere-proba-va-loi": {
+  "fichier": "premiere/maths/probabilites/24-va-loi/eleveai-maths-premiere-proba-va-loi.mp4",
+  "poster": "premiere/maths/probabilites/24-va-loi/eleveai-maths-premiere-proba-va-loi.png",
+  "vignette": "premiere/maths/probabilites/24-va-loi/eleveai-maths-premiere-proba-va-loi.vignette.webp",
+  "titre": "0, 1 ou 2 piles : PAS un tiers chacun ! — Dresser une loi de probabilité · Maths 1re spé · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-proba-va-loi-short": {
+  "fichier": "premiere/maths/probabilites/24-va-loi/eleveai-maths-premiere-proba-va-loi-short.mp4",
+  "poster": "premiere/maths/probabilites/24-va-loi/eleveai-maths-premiere-proba-va-loi-short.png",
+  "vignette": "premiere/maths/probabilites/24-va-loi/eleveai-maths-premiere-proba-va-loi-short.vignette.webp",
+  "titre": "Somme 2 ou somme 7 : même chance ? 🎲 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "premiere-proba-va-moyenne": {
+  "fichier": "premiere/maths/probabilites/27-va-moyenne/eleveai-maths-premiere-proba-va-moyenne.mp4",
+  "poster": "premiere/maths/probabilites/27-va-moyenne/eleveai-maths-premiere-proba-va-moyenne.png",
+  "vignette": "premiere/maths/probabilites/27-va-moyenne/eleveai-maths-premiere-proba-va-moyenne.vignette.webp",
+  "titre": "E(X) = 1,6 €… mais on ne gagne JAMAIS 1,6 € ! — L'espérance, une moyenne à long terme · Maths 1re spé · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-proba-va-moyenne-short": {
+  "fichier": "premiere/maths/probabilites/27-va-moyenne/eleveai-maths-premiere-proba-va-moyenne-short.mp4",
+  "poster": "premiere/maths/probabilites/27-va-moyenne/eleveai-maths-premiere-proba-va-moyenne-short.png",
+  "vignette": "premiere/maths/probabilites/27-va-moyenne/eleveai-maths-premiere-proba-va-moyenne-short.vignette.webp",
+  "titre": "6, 6, 5, 6, 6 : le dé est truqué ? 🎲 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "premiere-proba-va-notation": {
+  "fichier": "premiere/maths/probabilites/23-va-notation/eleveai-maths-premiere-proba-va-notation.mp4",
+  "poster": "premiere/maths/probabilites/23-va-notation/eleveai-maths-premiere-proba-va-notation.png",
+  "vignette": "premiere/maths/probabilites/23-va-notation/eleveai-maths-premiere-proba-va-notation.vignette.webp",
+  "titre": "X ≤ 2, ce n'est PAS X = 2 ! — Lire une variable aléatoire · Maths 1re spé · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-proba-va-notation-short": {
+  "fichier": "premiere/maths/probabilites/23-va-notation/eleveai-maths-premiere-proba-va-notation-short.mp4",
+  "poster": "premiere/maths/probabilites/23-va-notation/eleveai-maths-premiere-proba-va-notation-short.png",
+  "vignette": "premiere/maths/probabilites/23-va-notation/eleveai-maths-premiere-proba-va-notation-short.vignette.webp",
+  "titre": "X inférieur ou égal à 5 : 5 € pile ? NON ! 🎡 #Shorts",
   "short": true,
   "youtube": null
  },
@@ -4159,6 +4559,278 @@
   "short": true,
   "youtube": null
  },
+ "stmg-proba-arbre-completer": {
+  "fichier": "stmg/maths/probabilites/08-arbre-completer/eleveai-maths-stmg-proba-arbre-completer.mp4",
+  "poster": "stmg/maths/probabilites/08-arbre-completer/eleveai-maths-stmg-proba-arbre-completer.png",
+  "vignette": "stmg/maths/probabilites/08-arbre-completer/eleveai-maths-stmg-proba-arbre-completer.vignette.webp",
+  "titre": "0,3 sur la branche ? NON : 0,75 ! — Compléter un arbre pondéré · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-arbre-completer-short": {
+  "fichier": "stmg/maths/probabilites/08-arbre-completer/eleveai-maths-stmg-proba-arbre-completer-short.mp4",
+  "poster": "stmg/maths/probabilites/08-arbre-completer/eleveai-maths-stmg-proba-arbre-completer-short.png",
+  "vignette": "stmg/maths/probabilites/08-arbre-completer/eleveai-maths-stmg-proba-arbre-completer-short.vignette.webp",
+  "titre": "La branche effacée : tu la retrouves ? 🦆 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-arbre-construire": {
+  "fichier": "stmg/maths/probabilites/09-arbre-construire/eleveai-maths-stmg-proba-arbre-construire.mp4",
+  "poster": "stmg/maths/probabilites/09-arbre-construire/eleveai-maths-stmg-proba-arbre-construire.png",
+  "vignette": "stmg/maths/probabilites/09-arbre-construire/eleveai-maths-stmg-proba-arbre-construire.vignette.webp",
+  "titre": "Croissant ou matin : qui va en premier ? — Construire un arbre pondéré · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-arbre-construire-short": {
+  "fichier": "stmg/maths/probabilites/09-arbre-construire/eleveai-maths-stmg-proba-arbre-construire-short.mp4",
+  "poster": "stmg/maths/probabilites/09-arbre-construire/eleveai-maths-stmg-proba-arbre-construire-short.png",
+  "vignette": "stmg/maths/probabilites/09-arbre-construire/eleveai-maths-stmg-proba-arbre-construire-short.vignette.webp",
+  "titre": "Entraînement ou arrivée : qui passe en premier ? ⛰️ #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-arbre-lire": {
+  "fichier": "stmg/maths/probabilites/07-arbre-lire/eleveai-maths-stmg-proba-arbre-lire.mp4",
+  "poster": "stmg/maths/probabilites/07-arbre-lire/eleveai-maths-stmg-proba-arbre-lire.png",
+  "vignette": "stmg/maths/probabilites/07-arbre-lire/eleveai-maths-stmg-proba-arbre-lire.vignette.webp",
+  "titre": "Le 0,6 de l'arbre = P(A) ? NON ! — Lire un arbre pondéré · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-arbre-lire-short": {
+  "fichier": "stmg/maths/probabilites/07-arbre-lire/eleveai-maths-stmg-proba-arbre-lire-short.mp4",
+  "poster": "stmg/maths/probabilites/07-arbre-lire/eleveai-maths-stmg-proba-arbre-lire-short.png",
+  "vignette": "stmg/maths/probabilites/07-arbre-lire/eleveai-maths-stmg-proba-arbre-lire-short.vignette.webp",
+  "titre": "90 % de ketchup… mais sur QUELLE branche ? 🍟 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-arbre-tableau": {
+  "fichier": "stmg/maths/probabilites/12-arbre-tableau/eleveai-maths-stmg-proba-arbre-tableau.mp4",
+  "poster": "stmg/maths/probabilites/12-arbre-tableau/eleveai-maths-stmg-proba-arbre-tableau.png",
+  "vignette": "stmg/maths/probabilites/12-arbre-tableau/eleveai-maths-stmg-proba-arbre-tableau.vignette.webp",
+  "titre": "360 sur 510 : nulle part sur l'arbre ! — De l'arbre au tableau croisé · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-arbre-tableau-short": {
+  "fichier": "stmg/maths/probabilites/12-arbre-tableau/eleveai-maths-stmg-proba-arbre-tableau-short.mp4",
+  "poster": "stmg/maths/probabilites/12-arbre-tableau/eleveai-maths-stmg-proba-arbre-tableau-short.png",
+  "vignette": "stmg/maths/probabilites/12-arbre-tableau/eleveai-maths-stmg-proba-arbre-tableau-short.vignette.webp",
+  "titre": "Un chemin de l'arbre = une case du tableau 😴 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-au-moins-un": {
+  "fichier": "stmg/maths/probabilites/22-au-moins-un/eleveai-maths-stmg-proba-au-moins-un.mp4",
+  "poster": "stmg/maths/probabilites/22-au-moins-un/eleveai-maths-stmg-proba-au-moins-un.png",
+  "vignette": "stmg/maths/probabilites/22-au-moins-un/eleveai-maths-stmg-proba-au-moins-un.vignette.webp",
+  "titre": "3 tickets à 10 % : 30 % de chances ? FAUX ! — « Au moins un » et le contraire · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-au-moins-un-short": {
+  "fichier": "stmg/maths/probabilites/22-au-moins-un/eleveai-maths-stmg-proba-au-moins-un-short.mp4",
+  "poster": "stmg/maths/probabilites/22-au-moins-un/eleveai-maths-stmg-proba-au-moins-un-short.png",
+  "vignette": "stmg/maths/probabilites/22-au-moins-un/eleveai-maths-stmg-proba-au-moins-un-short.vignette.webp",
+  "titre": "10 parties à 10 % = 100 % ? NON ! 🎮 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-bern-arbre": {
+  "fichier": "stmg/maths/probabilites/20-bern-arbre/eleveai-maths-stmg-proba-bern-arbre.mp4",
+  "poster": "stmg/maths/probabilites/20-bern-arbre/eleveai-maths-stmg-proba-bern-arbre.png",
+  "vignette": "stmg/maths/probabilites/20-bern-arbre/eleveai-maths-stmg-proba-bern-arbre.vignette.webp",
+  "titre": "2 graines sur 3 : un seul chemin ? NON, 3 ! — L'arbre de trois épreuves · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-bern-arbre-short": {
+  "fichier": "stmg/maths/probabilites/20-bern-arbre/eleveai-maths-stmg-proba-bern-arbre-short.mp4",
+  "poster": "stmg/maths/probabilites/20-bern-arbre/eleveai-maths-stmg-proba-bern-arbre-short.png",
+  "vignette": "stmg/maths/probabilites/20-bern-arbre/eleveai-maths-stmg-proba-bern-arbre-short.vignette.webp",
+  "titre": "2 buts sur 3 tirs : une seule façon ? ⚽ #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-bern-calculer": {
+  "fichier": "stmg/maths/probabilites/21-bern-calculer/eleveai-maths-stmg-proba-bern-calculer.mp4",
+  "poster": "stmg/maths/probabilites/21-bern-calculer/eleveai-maths-stmg-proba-bern-calculer.png",
+  "vignette": "stmg/maths/probabilites/21-bern-calculer/eleveai-maths-stmg-proba-bern-calculer.vignette.webp",
+  "titre": "Exactement deux : 0,128 ? NON, 0,384 ! — Calculer sur une répétition · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-bern-calculer-short": {
+  "fichier": "stmg/maths/probabilites/21-bern-calculer/eleveai-maths-stmg-proba-bern-calculer-short.mp4",
+  "poster": "stmg/maths/probabilites/21-bern-calculer/eleveai-maths-stmg-proba-bern-calculer-short.png",
+  "vignette": "stmg/maths/probabilites/21-bern-calculer/eleveai-maths-stmg-proba-bern-calculer-short.vignette.webp",
+  "titre": "8 penaltys sur 10… mais 3 de suite ? ⚽ #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-bern-epreuve": {
+  "fichier": "stmg/maths/probabilites/18-bern-epreuve/eleveai-maths-stmg-proba-bern-epreuve.mp4",
+  "poster": "stmg/maths/probabilites/18-bern-epreuve/eleveai-maths-stmg-proba-bern-epreuve.png",
+  "vignette": "stmg/maths/probabilites/18-bern-epreuve/eleveai-maths-stmg-proba-bern-epreuve.vignette.webp",
+  "titre": "Un dé a 6 faces… et c'est une épreuve de Bernoulli ! — L'épreuve de Bernoulli · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-bern-epreuve-short": {
+  "fichier": "stmg/maths/probabilites/18-bern-epreuve/eleveai-maths-stmg-proba-bern-epreuve-short.mp4",
+  "poster": "stmg/maths/probabilites/18-bern-epreuve/eleveai-maths-stmg-proba-bern-epreuve-short.png",
+  "vignette": "stmg/maths/probabilites/18-bern-epreuve/eleveai-maths-stmg-proba-bern-epreuve-short.vignette.webp",
+  "titre": "Un dé qui devient pile ou face ? 🎲 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-bern-repetition": {
+  "fichier": "stmg/maths/probabilites/19-bern-repetition/eleveai-maths-stmg-proba-bern-repetition.mp4",
+  "poster": "stmg/maths/probabilites/19-bern-repetition/eleveai-maths-stmg-proba-bern-repetition.png",
+  "vignette": "stmg/maths/probabilites/19-bern-repetition/eleveai-maths-stmg-proba-bern-repetition.vignette.webp",
+  "titre": "0,7 puis 0,5 : ce n'est PLUS une répétition ! — Répéter une épreuve · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-bern-repetition-short": {
+  "fichier": "stmg/maths/probabilites/19-bern-repetition/eleveai-maths-stmg-proba-bern-repetition-short.mp4",
+  "poster": "stmg/maths/probabilites/19-bern-repetition/eleveai-maths-stmg-proba-bern-repetition-short.png",
+  "vignette": "stmg/maths/probabilites/19-bern-repetition/eleveai-maths-stmg-proba-bern-repetition-short.vignette.webp",
+  "titre": "3 lancers de pièce : 6 résultats ? NON ! 🪙 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-chemin": {
+  "fichier": "stmg/maths/probabilites/10-chemin/eleveai-maths-stmg-proba-chemin.mp4",
+  "poster": "stmg/maths/probabilites/10-chemin/eleveai-maths-stmg-proba-chemin.png",
+  "vignette": "stmg/maths/probabilites/10-chemin/eleveai-maths-stmg-proba-chemin.vignette.webp",
+  "titre": "0,6 + 0,7 = 1,3 ? IMPOSSIBLE ! — La probabilité d'un chemin · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-chemin-short": {
+  "fichier": "stmg/maths/probabilites/10-chemin/eleveai-maths-stmg-proba-chemin-short.mp4",
+  "poster": "stmg/maths/probabilites/10-chemin/eleveai-maths-stmg-proba-chemin-short.png",
+  "vignette": "stmg/maths/probabilites/10-chemin/eleveai-maths-stmg-proba-chemin-short.vignette.webp",
+  "titre": "Deux feux verts : 0,5 + 0,8 ? 🚦 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-distinguer": {
+  "fichier": "stmg/maths/probabilites/04-distinguer/eleveai-maths-stmg-proba-distinguer.mp4",
+  "poster": "stmg/maths/probabilites/04-distinguer/eleveai-maths-stmg-proba-distinguer.png",
+  "vignette": "stmg/maths/probabilites/04-distinguer/eleveai-maths-stmg-proba-distinguer.vignette.webp",
+  "titre": "Même 120 en haut… trois réponses ! — P(A ∩ B), P_A(B) ou P_B(A) · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-distinguer-short": {
+  "fichier": "stmg/maths/probabilites/04-distinguer/eleveai-maths-stmg-proba-distinguer-short.mp4",
+  "poster": "stmg/maths/probabilites/04-distinguer/eleveai-maths-stmg-proba-distinguer-short.png",
+  "vignette": "stmg/maths/probabilites/04-distinguer/eleveai-maths-stmg-proba-distinguer-short.vignette.webp",
+  "titre": "90 % dans un sens… 30 % dans l'autre ! 🍿 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-faux-positifs": {
+  "fichier": "stmg/maths/probabilites/06-faux-positifs/eleveai-maths-stmg-proba-faux-positifs.mp4",
+  "poster": "stmg/maths/probabilites/06-faux-positifs/eleveai-maths-stmg-proba-faux-positifs.png",
+  "vignette": "stmg/maths/probabilites/06-faux-positifs/eleveai-maths-stmg-proba-faux-positifs.vignette.webp",
+  "titre": "Le détecteur sonne… défectueux ? Seulement 0,16 ! — Les faux positifs · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-faux-positifs-short": {
+  "fichier": "stmg/maths/probabilites/06-faux-positifs/eleveai-maths-stmg-proba-faux-positifs-short.mp4",
+  "poster": "stmg/maths/probabilites/06-faux-positifs/eleveai-maths-stmg-proba-faux-positifs-short.png",
+  "vignette": "stmg/maths/probabilites/06-faux-positifs/eleveai-maths-stmg-proba-faux-positifs-short.vignette.webp",
+  "titre": "Test positif à 99 %… malade à MÊME PAS 10 % ! 🧪 #Shorts",
+  "short": true,
+  "youtube": "z2_FvJL1vzs"
+ },
+ "stmg-proba-indep-definition": {
+  "fichier": "stmg/maths/probabilites/13-indep-definition/eleveai-maths-stmg-proba-indep-definition.mp4",
+  "poster": "stmg/maths/probabilites/13-indep-definition/eleveai-maths-stmg-proba-indep-definition.png",
+  "vignette": "stmg/maths/probabilites/13-indep-definition/eleveai-maths-stmg-proba-indep-definition.vignette.webp",
+  "titre": "Indépendants = sans rapport ? NON ! — Deux événements indépendants · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-indep-definition-short": {
+  "fichier": "stmg/maths/probabilites/13-indep-definition/eleveai-maths-stmg-proba-indep-definition-short.mp4",
+  "poster": "stmg/maths/probabilites/13-indep-definition/eleveai-maths-stmg-proba-indep-definition-short.png",
+  "vignette": "stmg/maths/probabilites/13-indep-definition/eleveai-maths-stmg-proba-indep-definition-short.vignette.webp",
+  "titre": "5 fois pile… et face au prochain lancer ? 🪙 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-indep-incompatible": {
+  "fichier": "stmg/maths/probabilites/16-indep-incompatible/eleveai-maths-stmg-proba-indep-incompatible.mp4",
+  "poster": "stmg/maths/probabilites/16-indep-incompatible/eleveai-maths-stmg-proba-indep-incompatible.png",
+  "vignette": "stmg/maths/probabilites/16-indep-incompatible/eleveai-maths-stmg-proba-indep-incompatible.vignette.webp",
+  "titre": "Incompatibles = indépendants ? Presque le CONTRAIRE ! — Indépendants ou incompatibles · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-indep-incompatible-short": {
+  "fichier": "stmg/maths/probabilites/16-indep-incompatible/eleveai-maths-stmg-proba-indep-incompatible-short.mp4",
+  "poster": "stmg/maths/probabilites/16-indep-incompatible/eleveai-maths-stmg-proba-indep-incompatible-short.png",
+  "vignette": "stmg/maths/probabilites/16-indep-incompatible/eleveai-maths-stmg-proba-indep-incompatible-short.vignette.webp",
+  "titre": "Pile et face : indépendants ? Beaucoup disent oui… 🪙 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-indep-justifier": {
+  "fichier": "stmg/maths/probabilites/15-indep-justifier/eleveai-maths-stmg-proba-indep-justifier.mp4",
+  "poster": "stmg/maths/probabilites/15-indep-justifier/eleveai-maths-stmg-proba-indep-justifier.png",
+  "vignette": "stmg/maths/probabilites/15-indep-justifier/eleveai-maths-stmg-proba-indep-justifier.vignette.webp",
+  "titre": "Un seul nombre ne prouve RIEN ! — Prouver que deux événements sont indépendants · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-indep-justifier-short": {
+  "fichier": "stmg/maths/probabilites/15-indep-justifier/eleveai-maths-stmg-proba-indep-justifier-short.mp4",
+  "poster": "stmg/maths/probabilites/15-indep-justifier/eleveai-maths-stmg-proba-indep-justifier-short.png",
+  "vignette": "stmg/maths/probabilites/15-indep-justifier/eleveai-maths-stmg-proba-indep-justifier-short.vignette.webp",
+  "titre": "Avoir un chat rend-il meilleur en maths ? 🐱 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-indep-produit": {
+  "fichier": "stmg/maths/probabilites/14-indep-produit/eleveai-maths-stmg-proba-indep-produit.mp4",
+  "poster": "stmg/maths/probabilites/14-indep-produit/eleveai-maths-stmg-proba-indep-produit.png",
+  "vignette": "stmg/maths/probabilites/14-indep-produit/eleveai-maths-stmg-proba-indep-produit.vignette.webp",
+  "titre": "P(A ∩ B) = P(A) × P(B)… SEULEMENT si indépendants ! — La règle du produit · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-indep-produit-short": {
+  "fichier": "stmg/maths/probabilites/14-indep-produit/eleveai-maths-stmg-proba-indep-produit-short.mp4",
+  "poster": "stmg/maths/probabilites/14-indep-produit/eleveai-maths-stmg-proba-indep-produit-short.png",
+  "vignette": "stmg/maths/probabilites/14-indep-produit/eleveai-maths-stmg-proba-indep-produit-short.vignette.webp",
+  "titre": "2 réveils à 90 % : les deux sonnent ? 81 % seulement ! ⏰ #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-interpreter": {
+  "fichier": "stmg/maths/probabilites/05-interpreter/eleveai-maths-stmg-proba-interpreter.mp4",
+  "poster": "stmg/maths/probabilites/05-interpreter/eleveai-maths-stmg-proba-interpreter.png",
+  "vignette": "stmg/maths/probabilites/05-interpreter/eleveai-maths-stmg-proba-interpreter.vignette.webp",
+  "titre": "75 % dans l'autre sens ? NON : une sur deux ! — Dire une proba conditionnelle en phrase · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-interpreter-short": {
+  "fichier": "stmg/maths/probabilites/05-interpreter/eleveai-maths-stmg-proba-interpreter-short.mp4",
+  "poster": "stmg/maths/probabilites/05-interpreter/eleveai-maths-stmg-proba-interpreter-short.png",
+  "vignette": "stmg/maths/probabilites/05-interpreter/eleveai-maths-stmg-proba-interpreter-short.vignette.webp",
+  "titre": "9 accidents sur 10 près de chez soi : DANGER ? 🚗 #Shorts",
+  "short": true,
+  "youtube": null
+ },
  "stmg-proba-notation": {
   "fichier": "stmg/maths/probabilites/02-notation/eleveai-maths-stmg-proba-notation.mp4",
   "poster": "stmg/maths/probabilites/02-notation/eleveai-maths-stmg-proba-notation.png",
@@ -4188,6 +4860,134 @@
   "poster": "stmg/maths/probabilites/01-reconnaitre/eleveai-maths-stmg-proba-reconnaitre-short.png",
   "vignette": "stmg/maths/probabilites/01-reconnaitre/eleveai-maths-stmg-proba-reconnaitre-short.vignette.webp",
   "titre": "80 % des bien triés = 80 % du plastique ? ♻️ — STMG #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-remise": {
+  "fichier": "stmg/maths/probabilites/17-remise/eleveai-maths-stmg-proba-remise.mp4",
+  "poster": "stmg/maths/probabilites/17-remise/eleveai-maths-stmg-proba-remise.png",
+  "vignette": "stmg/maths/probabilites/17-remise/eleveai-maths-stmg-proba-remise.vignette.webp",
+  "titre": "Sans remise, 0,3 × 0,3 est FAUX ! — Tirage avec ou sans remise · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-remise-short": {
+  "fichier": "stmg/maths/probabilites/17-remise/eleveai-maths-stmg-proba-remise-short.mp4",
+  "poster": "stmg/maths/probabilites/17-remise/eleveai-maths-stmg-proba-remise-short.png",
+  "vignette": "stmg/maths/probabilites/17-remise/eleveai-maths-stmg-proba-remise-short.vignette.webp",
+  "titre": "2 noires, 2 blanches : une paire, 1 chance sur 2 ? 🧦 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-somme-chemins": {
+  "fichier": "stmg/maths/probabilites/11-somme-chemins/eleveai-maths-stmg-proba-somme-chemins.mp4",
+  "poster": "stmg/maths/probabilites/11-somme-chemins/eleveai-maths-stmg-proba-somme-chemins.png",
+  "vignette": "stmg/maths/probabilites/11-somme-chemins/eleveai-maths-stmg-proba-somme-chemins.vignette.webp",
+  "titre": "(0,1 + 0,4) ÷ 2 ? FAUX ! — Plusieurs chemins : on additionne · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-somme-chemins-short": {
+  "fichier": "stmg/maths/probabilites/11-somme-chemins/eleveai-maths-stmg-proba-somme-chemins-short.mp4",
+  "poster": "stmg/maths/probabilites/11-somme-chemins/eleveai-maths-stmg-proba-somme-chemins-short.png",
+  "vignette": "stmg/maths/probabilites/11-somme-chemins/eleveai-maths-stmg-proba-somme-chemins-short.vignette.webp",
+  "titre": "La moyenne, 0,3 ? Non : 0,18 ! 🎡 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-tableau": {
+  "fichier": "stmg/maths/probabilites/03-tableau/eleveai-maths-stmg-proba-tableau.mp4",
+  "poster": "stmg/maths/probabilites/03-tableau/eleveai-maths-stmg-proba-tableau.png",
+  "vignette": "stmg/maths/probabilites/03-tableau/eleveai-maths-stmg-proba-tableau.vignette.webp",
+  "titre": "48 sur 200 ? NON : la ligne D ! — Probabilité conditionnelle et tableau croisé · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-tableau-short": {
+  "fichier": "stmg/maths/probabilites/03-tableau/eleveai-maths-stmg-proba-tableau-short.mp4",
+  "poster": "stmg/maths/probabilites/03-tableau/eleveai-maths-stmg-proba-tableau-short.png",
+  "vignette": "stmg/maths/probabilites/03-tableau/eleveai-maths-stmg-proba-tableau-short.vignette.webp",
+  "titre": "150 trient, 80 trient… et pourtant le bus gagne ! 🚌 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-va-equitable": {
+  "fichier": "stmg/maths/probabilites/26-va-equitable/eleveai-maths-stmg-proba-va-equitable.mp4",
+  "poster": "stmg/maths/probabilites/26-va-equitable/eleveai-maths-stmg-proba-va-equitable.png",
+  "vignette": "stmg/maths/probabilites/26-va-equitable/eleveai-maths-stmg-proba-va-equitable.vignette.webp",
+  "titre": "5 × 0,2 = 1 € de gain ? FAUX : la mise ! — Un jeu est-il équitable ? · Maths 1re spé · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-va-equitable-short": {
+  "fichier": "stmg/maths/probabilites/26-va-equitable/eleveai-maths-stmg-proba-va-equitable-short.mp4",
+  "poster": "stmg/maths/probabilites/26-va-equitable/eleveai-maths-stmg-proba-va-equitable-short.png",
+  "vignette": "stmg/maths/probabilites/26-va-equitable/eleveai-maths-stmg-proba-va-equitable-short.vignette.webp",
+  "titre": "La roulette : pourquoi le casino gagne TOUJOURS 🎰 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-va-esperance": {
+  "fichier": "stmg/maths/probabilites/25-va-esperance/eleveai-maths-stmg-proba-va-esperance.mp4",
+  "poster": "stmg/maths/probabilites/25-va-esperance/eleveai-maths-stmg-proba-va-esperance.png",
+  "vignette": "stmg/maths/probabilites/25-va-esperance/eleveai-maths-stmg-proba-va-esperance.vignette.webp",
+  "titre": "(0 + 2 + 10) ÷ 3 = 4 ? FAUX ! — L'espérance, le gain moyen · Maths 1re spé · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-va-esperance-short": {
+  "fichier": "stmg/maths/probabilites/25-va-esperance/eleveai-maths-stmg-proba-va-esperance-short.mp4",
+  "poster": "stmg/maths/probabilites/25-va-esperance/eleveai-maths-stmg-proba-va-esperance-short.png",
+  "vignette": "stmg/maths/probabilites/25-va-esperance/eleveai-maths-stmg-proba-va-esperance-short.vignette.webp",
+  "titre": "Le dé paie 3,50 € en moyenne… aucune face ne donne 3,5 ! 🎲 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-va-loi": {
+  "fichier": "stmg/maths/probabilites/24-va-loi/eleveai-maths-stmg-proba-va-loi.mp4",
+  "poster": "stmg/maths/probabilites/24-va-loi/eleveai-maths-stmg-proba-va-loi.png",
+  "vignette": "stmg/maths/probabilites/24-va-loi/eleveai-maths-stmg-proba-va-loi.vignette.webp",
+  "titre": "0, 1 ou 2 piles : PAS un tiers chacun ! — Dresser une loi de probabilité · Maths 1re spé · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-va-loi-short": {
+  "fichier": "stmg/maths/probabilites/24-va-loi/eleveai-maths-stmg-proba-va-loi-short.mp4",
+  "poster": "stmg/maths/probabilites/24-va-loi/eleveai-maths-stmg-proba-va-loi-short.png",
+  "vignette": "stmg/maths/probabilites/24-va-loi/eleveai-maths-stmg-proba-va-loi-short.vignette.webp",
+  "titre": "Somme 2 ou somme 7 : même chance ? 🎲 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-va-moyenne": {
+  "fichier": "stmg/maths/probabilites/27-va-moyenne/eleveai-maths-stmg-proba-va-moyenne.mp4",
+  "poster": "stmg/maths/probabilites/27-va-moyenne/eleveai-maths-stmg-proba-va-moyenne.png",
+  "vignette": "stmg/maths/probabilites/27-va-moyenne/eleveai-maths-stmg-proba-va-moyenne.vignette.webp",
+  "titre": "E(X) = 1,6 €… mais on ne gagne JAMAIS 1,6 € ! — L'espérance, une moyenne à long terme · Maths 1re spé · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-va-moyenne-short": {
+  "fichier": "stmg/maths/probabilites/27-va-moyenne/eleveai-maths-stmg-proba-va-moyenne-short.mp4",
+  "poster": "stmg/maths/probabilites/27-va-moyenne/eleveai-maths-stmg-proba-va-moyenne-short.png",
+  "vignette": "stmg/maths/probabilites/27-va-moyenne/eleveai-maths-stmg-proba-va-moyenne-short.vignette.webp",
+  "titre": "6, 6, 5, 6, 6 : le dé est truqué ? 🎲 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-va-notation": {
+  "fichier": "stmg/maths/probabilites/23-va-notation/eleveai-maths-stmg-proba-va-notation.mp4",
+  "poster": "stmg/maths/probabilites/23-va-notation/eleveai-maths-stmg-proba-va-notation.png",
+  "vignette": "stmg/maths/probabilites/23-va-notation/eleveai-maths-stmg-proba-va-notation.vignette.webp",
+  "titre": "X ≤ 2, ce n'est PAS X = 2 ! — Lire une variable aléatoire · Maths 1re spé · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-va-notation-short": {
+  "fichier": "stmg/maths/probabilites/23-va-notation/eleveai-maths-stmg-proba-va-notation-short.mp4",
+  "poster": "stmg/maths/probabilites/23-va-notation/eleveai-maths-stmg-proba-va-notation-short.png",
+  "vignette": "stmg/maths/probabilites/23-va-notation/eleveai-maths-stmg-proba-va-notation-short.vignette.webp",
+  "titre": "X inférieur ou égal à 5 : 5 € pile ? NON ! 🎡 #Shorts",
   "short": true,
   "youtube": null
  },
