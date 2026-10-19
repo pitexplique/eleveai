@@ -10,5 +10,10 @@
 - `youtube-chaine/` — la bannière et l'avatar de la chaîne, même principe
   (raccourci vers `manim/chaine/`).
 
-Les deux raccourcis YouTube restent sur ce poste (ignorés par git, comme leur
-cible). Les pubs Instagram, elles, sont gardées dans le dépôt.
+- `instagram/profil/` — les photos de profil (`scripts/pub-photo-profil.py`).
+- `instagram/stories/AAAA-MM-JJ/` — la story du jour, Ti Margo + le défi de
+  l'accueil (`python scripts/pub-story-du-jour.py`).
+
+⛔ Comme pour manim (19/10/2026) : les IMAGES de `pub/` ne vont ni sur GitHub ni
+sur Vercel. Elles restent sur ce poste et se refont avec leur script. Seul le
+texte (ce fichier, les légendes) est suivi.

@@ -103,12 +103,23 @@ manim/sorties/**/*.mp4
 manim/miniatures/
 manim/chaine/
 manim/sorties/
-# 15/10/2026 — `pub/` rassemble les visuels de promotion. Les pubs elles-mêmes
-# (instagram/…) sont suivies ; les deux dossiers YouTube ne sont que des
-# JONCTIONS Windows vers manim/miniatures et manim/chaine (les scripts de
-# publication y écrivent), donc ignorées comme leur cible.
+# 15/10/2026 — `pub/` rassemble les visuels de promotion ; les deux dossiers
+# YouTube ne sont que des JONCTIONS Windows vers manim/miniatures et
+# manim/chaine (les scripts de publication y écrivent), donc ignorées comme
+# leur cible.
+# 19/10/2026, Frédéric : « on ne met pas cela sur GitHub, ni sur Vercel, c'est
+# comme manim ». Les IMAGES de pub/ sont des rendus, refaits par leurs scripts
+# (scripts/pub-*.py) : elles restent sur ce poste. Le texte (LISEZ-MOI,
+# légendes) reste suivi.
 /pub/youtube-miniatures
 /pub/youtube-chaine
+pub/**/*.png
+pub/**/*.jpg
+pub/**/*.jpeg
+pub/**/*.webp
+pub/**/*.gif
+pub/**/*.mp4
+pub/instagram/stories/
 /public/sons/
 # … et la même règle portée à l'EXTENSION, pas au dossier : le dossier de
 # sortie d'aujourd'hui n'est pas celui de demain, et une règle qui nomme des

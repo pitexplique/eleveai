@@ -14,6 +14,10 @@
 
 manim/
 
+# Les visuels de promotion non plus (Frédéric, 19/10/2026 : « ni sur Vercel ») :
+# le site n'importe rien de pub/.
+pub/
+
 # Les outils de production locale : Python et PowerShell n'ont rien à faire
 # dans un build Next.js.
 scripts/*.py
