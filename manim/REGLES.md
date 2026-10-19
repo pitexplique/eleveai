@@ -3,6 +3,14 @@
 Une notion = une banque (source de vérité) = une fiche = **une vidéo**.
 Cette procédure est la jumelle de la procédure fiches : même point de départ (la banque), même nommage (le notionId), même standard qualité (montrer, pas raconter).
 
+## ⛔ La phrase de fin (Frédéric, 19/10/2026, depuis la nouvelle page d'accueil)
+
+Toute NOUVELLE voix finit par la clé `…-abonne` exactement ainsi :
+
+> « Entraîne-toi sur éleveai point f r. Et abonne-toi ! »
+
+L'écran de fin écrit ce que dit la voix : « Entraîne-toi sur » + « eleveai.fr » (encadré), puis « Abonne-toi ! » + « @eleveai974 ». Plus de « va sur le coach » : l'accueil mène à tout (exercices, vidéos, coach). Les vidéos rendues avant le 19/10 gardent leur ancienne fin (pas de re-rendu pour ça).
+
 ---
 
 ## La procédure (dans l'ordre, à suivre à la lettre)
