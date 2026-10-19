@@ -34,7 +34,7 @@ import {
   Users,
 } from "lucide-react";
 import type { Metier } from "@/lib/accueil/journal";
-import { genererDefi } from "@/lib/accueil/defis";
+import { genererDefi, type DefiGenere, type Theme } from "@/lib/accueil/defis";
 import RechercheEntete from "@/components/accueil/RechercheEntete";
 import BanniereCrpe from "@/components/accueil/BanniereCrpe";
 
@@ -341,13 +341,23 @@ function Une({ mise, une }: { mise: Mise; une: UneProps }) {
   );
 }
 
-function DefiDuJour({ mise, jour }: { mise: Mise; jour: number }) {
+function DefiDuJour({
+  mise,
+  jour,
+  defi,
+  theme,
+}: {
+  mise: Mise;
+  jour: number;
+  defi: DefiGenere;
+  theme: Theme | null;
+}) {
   const t = TON[mise];
-  // Le défi du JOUR est celui de la graine `jour` ; « Un autre défi » avance la
-  // graine. Généré (lib/accueil/defis.ts) : jamais le même deux jours de suite.
+  // Le défi du JOUR vient du serveur : lié à la Une (écrit pour elle, ou généré
+  // sur son thème). « Un autre défi » en fabrique d'autres SUR LE MÊME THÈME.
   const [i, setI] = useState(jour);
   const [choisi, setChoisi] = useState<number | null>(null);
-  const d = useMemo(() => genererDefi(i), [i]);
+  const d = useMemo(() => (i === jour ? defi : genererDefi(i * 31 + 7, theme)), [i, jour, defi, theme]);
   const ordre = d.choix.map((_, j) => j);
   const juste = choisi === d.bonne;
 
@@ -420,9 +430,19 @@ function DefiDuJour({ mise, jour }: { mise: Mise; jour: number }) {
    commodité, elle peut repartir à zéro (navigation privée, autre appareil). */
 const CLE_SERIE = "eleveai.journal.serie";
 
-function RendezVous({ mise, jour, demain }: { mise: Mise; jour: number; demain: { titre: string; classe: string } }) {
+function RendezVous({
+  mise,
+  jour,
+  demain,
+  hier,
+}: {
+  mise: Mise;
+  jour: number;
+  demain: { titre: string; classe: string };
+  /** Le défi d'hier tel qu'il a été posé (lié à la Une d'hier). */
+  hier: { question: string; reponse: string };
+}) {
   const t = TON[mise];
-  const hier = useMemo(() => genererDefi(jour - 1), [jour]);
   const [serie, setSerie] = useState<number | null>(null);
 
   useEffect(() => {
@@ -446,7 +466,7 @@ function RendezVous({ mise, jour, demain }: { mise: Mise; jour: number; demain: 
         <div>
           <p className="text-xs font-black uppercase tracking-wide opacity-70">La réponse du défi d&rsquo;hier</p>
           <p className={`${t.texte} mt-1 leading-snug`}>
-            {hier.question} <span className="font-black">Réponse : {hier.choix[hier.bonne]}.</span>
+            {hier.question} <span className="font-black">Réponse : {hier.reponse}.</span>
           </p>
         </div>
         {serie !== null && (
@@ -822,6 +842,9 @@ export default function JournalClient(props: {
   une: UneProps;
   jour: number;
   demain: { titre: string; classe: string };
+  defi: DefiGenere;
+  theme: Theme | null;
+  hier: { question: string; reponse: string };
   chiffre: { chiffre: string; texte: string };
   metier: Metier;
   shorts: VideoJournal[];
@@ -859,12 +882,12 @@ export default function JournalClient(props: {
   }
 
   const t = TON[mise];
-  const { date, numero, jour, une, demain, chiffre, metier, shorts, reel } = props;
+  const { date, numero, jour, une, demain, defi, theme, hier, chiffre, metier, shorts, reel } = props;
 
   const blocs = {
     une: <Une mise={mise} une={une} />,
-    defi: <DefiDuJour mise={mise} jour={jour} />,
-    rdv: <RendezVous mise={mise} jour={jour} demain={demain} />,
+    defi: <DefiDuJour mise={mise} jour={jour} defi={defi} theme={theme} />,
+    rdv: <RendezVous mise={mise} jour={jour} demain={demain} hier={hier} />,
     chiffre: <Chiffre mise={mise} chiffre={chiffre} />,
     metier: <MetierDuJour mise={mise} metier={metier} />,
     coach: <Coach mise={mise} />,

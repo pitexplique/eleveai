@@ -18,6 +18,11 @@
 // ⛔ La rotation se fait au JOUR, calculée côté serveur (la page est régénérée
 // toutes les heures) : pas de `new Date()` dans le rendu client.
 //
+// ⭐⭐ LA VIDÉO, LE DÉFI ET LE CHIFFRE DU JOUR SONT LIÉS (Frédéric, 19/10 :
+// « les deux doivent toujours être liées », « la vidéo, le défi et le chiffre
+// du jour liés »). Une Une de l'édition peut porter son `defi` et son `chiffre`
+// écrits ; sinon ils suivent le thème de la vidéo.
+//
 // ⭐⭐ LE RITUEL DE LA SEMAINE (Frédéric, 19/10 : « on la mettra à jour tous les
 // lundis matins ou dimanche soir »). Chaque semaine, on ajoute EN TÊTE de
 // `EDITION` les 7 Unes datées de la semaine qui vient, avec leur phrase « Ce que
@@ -25,6 +30,8 @@
 // Un jour sans Une datée n'est PAS vide : app/accueil-journal/donnees.ts tire
 // alors une paysage de tout le catalogue. Le journal change donc chaque jour même
 // si une semaine est oubliée.
+
+import type { DefiEcrit, Theme } from "./defis";
 
 export type UneJournal = {
   /** « AAAA-MM-JJ » : le jour où cette Une passe en tête. Sans date, l'entrée
@@ -37,7 +44,15 @@ export type UneJournal = {
   classe: string;
   /** « Ce que tu vas apprendre » : UNE phrase, vraie, sans formule. */
   utile: string;
+  /** Le défi du jour ÉCRIT pour cette Une. Sans lui, le défi est généré sur
+   *  le thème de la vidéo (themeDe, lib/accueil/defis.ts). */
+  defi?: DefiEcrit;
+  /** Le chiffre du jour lié à cette Une. Sans lui, on prend un chiffre de la
+   *  banque sur le même thème, sinon celui de la rotation. */
+  chiffre?: ChiffreDuJour;
 };
+
+export type ChiffreDuJour = { chiffre: string; texte: string; theme?: Theme };
 
 /** L'ÉDITION DE LA SEMAINE : les Unes datées, la plus récente semaine en tête. */
 export const EDITION: UneJournal[] = [
@@ -51,6 +66,19 @@ export const EDITION: UneJournal[] = [
     short: "6e-aire-longueur-short-diagonale",
     classe: "Diagonale des Fous · 6e",
     utile: "Pour passer des mètres aux centimètres, on multiplie par 100 : 1 000 m de montée, c'est 100 000 cm.",
+    defi: {
+      classe: "6e",
+      coach: "6e",
+      question:
+        "Hugo Deck a remporté la Diagonale des Fous 2026 : il a grimpé 10 200 m de montée. Ça fait combien de kilomètres ?",
+      juste: "10,2 km",
+      faux: ["102 km", "1,02 km"],
+      explication: "1 km = 1 000 m. Donc 10 200 m = 10 200 ÷ 1 000 = 10,2 km : chaque chiffre prend une valeur mille fois plus petite.",
+    },
+    chiffre: {
+      chiffre: "10 200 m",
+      texte: "La montée totale de la Diagonale des Fous 2026 : plus que la hauteur de l'Everest (8 849 m) au-dessus de la mer. Hugo Deck, le vainqueur, l'a avalée en 22 h 54 min 24 s.",
+    },
   },
   {
     // Une SHORT en Une : le dessin animé Ti Margo (« j'adore », 15/10).
@@ -59,6 +87,10 @@ export const EDITION: UneJournal[] = [
     short: "5e-relatif-nombre-short-montees-cachees",
     classe: "Diagonale des Fous · 5e",
     utile: "On compte les montées en + et les descentes en − : après 10 200 m de montée, l'arrivée n'est que 47 m plus haut que le départ.",
+    chiffre: {
+      chiffre: "+ 47 m",
+      texte: "Ce qui reste de la Diagonale des Fous une fois les montées (+) et les descentes (−) additionnées : l'arrivée n'est que 47 m plus haut que le départ.",
+    },
   },
   {
     date: "2026-10-21",
@@ -66,6 +98,10 @@ export const EDITION: UneJournal[] = [
     short: "bases-pourcentages-calcul-mental-short",
     classe: "Les bases",
     utile: "Pour calculer 30 % de tête, on calcule d'abord 10 % (on divise par 10), puis on multiplie par 3.",
+    chiffre: {
+      chiffre: "10 %",
+      texte: "La clé de tous les pourcentages de tête : 10 % d'un nombre, c'est ce nombre divisé par 10. 10 % de 250, c'est 25.",
+    },
   },
   {
     date: "2026-10-22",
@@ -73,6 +109,10 @@ export const EDITION: UneJournal[] = [
     short: "6e-decimal-nombre-short-zero",
     classe: "6e",
     utile: "0,7 est plus grand que 0,65 : on compare d'abord les dixièmes, pas le nombre de chiffres.",
+    chiffre: {
+      chiffre: "0,999… = 1",
+      texte: "Un zéro virgule suivi d'une infinité de 9 vaut exactement 1. Un tiers fait 0,333…, trois tiers font 0,999… et aussi 1.",
+    },
   },
   {
     date: "2026-10-23",
@@ -80,6 +120,10 @@ export const EDITION: UneJournal[] = [
     short: "4e-pythagore-hypotenuse-short",
     classe: "4e",
     utile: "Dans un triangle rectangle, le carré de l'hypoténuse est égal à la somme des carrés des deux autres côtés.",
+    chiffre: {
+      chiffre: "3, 4, 5",
+      texte: "Le plus célèbre triangle rectangle : 3² + 4² = 9 + 16 = 25 = 5². Les maçons s'en servent encore pour tracer un angle droit.",
+    },
   },
   {
     // Samedi : une vidéo de la playlist CRPE (pour les futurs professeurs des écoles).
@@ -88,12 +132,30 @@ export const EDITION: UneJournal[] = [
     short: "3e-proba-vocabulaire-short",
     classe: "3e · CRPE",
     utile: "Peu probable ne veut pas dire impossible : seul un événement impossible a une probabilité de 0.",
+    chiffre: {
+      chiffre: "23",
+      texte: "Dans un groupe de 23 personnes, il y a plus d'une chance sur deux que deux d'entre elles aient le même anniversaire. Peu probable ? Non : probable.",
+    },
   },
   {
     date: "2026-10-25",
     paysage: "terminale-continuite-tvi",
     classe: "Terminale",
     utile: "Une courbe sans saut qui passe sous une valeur puis au-dessus la franchit forcément.",
+    defi: {
+      classe: "Terminale",
+      coach: "terminale-spe",
+      question:
+        "f est continue sur [0 ; 2], avec f(0) = −3 et f(2) = 5. L'équation f(x) = 0 a-t-elle une solution entre 0 et 2 ?",
+      juste: "Oui, au moins une",
+      faux: ["Non, aucune", "On ne peut pas savoir"],
+      explication:
+        "f est continue et 0 est compris entre f(0) = −3 et f(2) = 5 : d'après le théorème des valeurs intermédiaires, f prend la valeur 0 au moins une fois entre 0 et 2.",
+    },
+    chiffre: {
+      chiffre: "1 500 m",
+      texte: "Du lagon au sommet du Piton des Neiges (3 070 m), on passe forcément par 1 500 m d'altitude, quel que soit le sentier : c'est le théorème des valeurs intermédiaires.",
+    },
   },
   // Sortis de la semaine pour faire place à la Diagonale (le tirage les reprendra) :
   // 974-eau, bases-fonctions — leurs phrases restent dans UNES ci-dessous.
@@ -173,32 +235,32 @@ export const MATHS_REEL = [
    Repris de lib/chiffre-du-jour.ts (supprimé le 14/08, `git show 03aec7ac`).
    Règle d'authenticité de Frédéric : QUE des chiffres vérifiés ; dans le doute,
    « environ ». ⛔ Retiré au passage : « 0 pub » (on ne parle pas d'argent). */
-export const CHIFFRES: { chiffre: string; texte: string }[] = [
-  { chiffre: "1 825 mm", texte: "La pluie tombée en 24 heures à Foc-Foc, sur les pentes du volcan, en janvier 1966. Record du monde, toujours invaincu." },
+export const CHIFFRES: ChiffreDuJour[] = [
+  { chiffre: "1 825 mm", theme: "longueurs", texte: "La pluie tombée en 24 heures à Foc-Foc, sur les pentes du volcan, en janvier 1966. Record du monde, toujours invaincu." },
   { chiffre: "3 070 m", texte: "Le Piton des Neiges, plus haut sommet de tout l'océan Indien. L'île entière est son œuvre." },
   { chiffre: "8 000 km", texte: "Le voyage des baleines à bosse depuis l'Antarctique jusqu'aux eaux chaudes de La Réunion, chaque hiver austral. Sans GPS." },
   { chiffre: "118 km/h", texte: "Le seuil de vent qui fait d'une tempête un cyclone tropical." },
   { chiffre: "300 000 km/s", texte: "La vitesse de la lumière. Le rayon de soleil qui te réchauffe a quitté le Soleil il y a un peu plus de 8 minutes." },
   { chiffre: "384 400 km", texte: "La distance moyenne entre la Terre et la Lune : environ 9,6 fois le tour de la Terre." },
-  { chiffre: "11 jours et demi", texte: "Ce que dure UN MILLION de secondes. Et un milliard de secondes ? Presque 32 ans. Voilà la différence entre million et milliard." },
-  { chiffre: "142 857", texte: "Multiplie-le par 2, 3, 4, 5 ou 6 : les mêmes chiffres reviennent, dans le même ordre, juste décalés. Multiplie-le par 7 : 999 999. Essaie." },
-  { chiffre: "1 024", texte: "2 multiplié par lui-même 10 fois. C'est pour ça qu'un « kilo-octet » n'est pas exactement mille octets : l'informatique compte en puissances de 2." },
-  { chiffre: "≈ 165 km", texte: "La Diagonale des Fous : traverser La Réunion à pied avec près de 10 000 m de dénivelé. Les plus rapides le font en moins de 24 heures." },
+  { chiffre: "11 jours et demi", theme: "durees", texte: "Ce que dure UN MILLION de secondes. Et un milliard de secondes ? Presque 32 ans. Voilà la différence entre million et milliard." },
+  { chiffre: "142 857", theme: "multiplication", texte: "Multiplie-le par 2, 3, 4, 5 ou 6 : les mêmes chiffres reviennent, dans le même ordre, juste décalés. Multiplie-le par 7 : 999 999. Essaie." },
+  { chiffre: "1 024", theme: "puissances", texte: "2 multiplié par lui-même 10 fois. C'est pour ça qu'un « kilo-octet » n'est pas exactement mille octets : l'informatique compte en puissances de 2." },
+  { chiffre: "≈ 165 km", theme: "longueurs", texte: "La Diagonale des Fous : traverser La Réunion à pied avec près de 10 000 m de dénivelé. Les plus rapides le font en moins de 24 heures." },
   { chiffre: "2 200 m", texte: "L'altitude du Maïdo. En bas, on se baigne à 28 °C ; là-haut, certains matins d'hiver, il gèle." },
   { chiffre: "200 litres", texte: "Le lait que boit un baleineau chaque jour. Il grossit d'environ 45 kg par jour." },
   // 19/10 : la banque passe de 12 à 26 chiffres, pour ne pas revenir avant un mois.
-  { chiffre: "86 400", texte: "Le nombre de secondes dans une journée : 24 × 60 × 60. Celle-ci vient de commencer." },
+  { chiffre: "86 400", theme: "durees", texte: "Le nombre de secondes dans une journée : 24 × 60 × 60. Celle-ci vient de commencer." },
   { chiffre: "5 050", texte: "La somme 1 + 2 + 3 + … + 100. Le petit Gauss l'aurait trouvée en quelques secondes : 50 paires qui font chacune 101." },
-  { chiffre: "23", texte: "Dans un groupe de 23 personnes, il y a plus d'une chance sur deux que deux d'entre elles aient le même anniversaire. Surprenant, mais vrai." },
+  { chiffre: "23", theme: "probabilites", texte: "Dans un groupe de 23 personnes, il y a plus d'une chance sur deux que deux d'entre elles aient le même anniversaire. Surprenant, mais vrai." },
   { chiffre: "25", texte: "Le nombre de nombres premiers entre 1 et 100 : 2, 3, 5, 7, 11… jusqu'à 97." },
   { chiffre: "3,14159…", texte: "Le nombre π : le tour d'un cercle divisé par son diamètre. Ses chiffres après la virgule ne s'arrêtent jamais." },
   { chiffre: "1 litre", texte: "Le volume d'un cube de 10 cm de côté. Un litre, c'est exactement un décimètre cube." },
   { chiffre: "≈ 30 km/s", texte: "La vitesse de la Terre autour du Soleil. Tu ne sens rien, et pourtant tu as parcouru plus de 1 000 km depuis une minute." },
-  { chiffre: "64", texte: "Les cases d'un échiquier. Un grain de riz sur la première, 2 sur la deuxième, 4 sur la troisième… sur la dernière, il en faudrait plus de 9 milliards de milliards." },
+  { chiffre: "64", theme: "puissances", texte: "Les cases d'un échiquier. Un grain de riz sur la première, 2 sur la deuxième, 4 sur la troisième… sur la dernière, il en faudrait plus de 9 milliards de milliards." },
   { chiffre: "1,414…", texte: "Le rapport entre la longueur et la largeur d'une feuille A4. Plie-la en deux : la moitié garde exactement la même forme." },
-  { chiffre: "0,999… = 1", texte: "Un zéro virgule suivi d'une infinité de 9 vaut exactement 1. Un tiers fait 0,333…, trois tiers font 0,999… et aussi 1." },
+  { chiffre: "0,999… = 1", theme: "decimaux", texte: "Un zéro virgule suivi d'une infinité de 9 vaut exactement 1. Un tiers fait 0,333…, trois tiers font 0,999… et aussi 1." },
   { chiffre: "6 côtés", texte: "Les alvéoles des abeilles sont des hexagones : la forme qui pave le plan avec le moins de cire pour le plus de place." },
-  { chiffre: "31 536 000", texte: "Le nombre de secondes dans une année de 365 jours. Ton prochain anniversaire est quelque part dedans." },
+  { chiffre: "31 536 000", theme: "durees", texte: "Le nombre de secondes dans une année de 365 jours. Ton prochain anniversaire est quelque part dedans." },
   { chiffre: "100 000", texte: "À peu près le nombre de battements de ton cœur en une journée, à environ 70 battements par minute." },
   { chiffre: "12", texte: "Le nombre de faces d'un dodécaèdre, l'un des cinq solides de Platon. Il n'en existe que cinq, et on sait le démontrer." },
 ];

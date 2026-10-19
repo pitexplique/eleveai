@@ -221,18 +221,91 @@ const GENERATEURS: ((r: Tirage) => Brut)[] = [
   },
 ];
 
+/* ⭐ LE DÉFI EST LIÉ À LA UNE (19/10/2026). Frédéric : « les deux doivent
+   toujours être liées », puis « la vidéo, le défi et le chiffre du jour liés ».
+   Chaque thème désigne les générateurs (leur rang dans GENERATEURS) qui
+   portent sur la même notion que la vidéo. */
+export type Theme =
+  | "addition" | "multiplication" | "durees" | "fractions" | "decimaux" | "longueurs"
+  | "relatifs" | "priorites" | "pythagore" | "pourcentages" | "probabilites" | "puissances";
+
+const THEMES: Record<Theme, number[]> = {
+  addition: [0],
+  multiplication: [1, 2],
+  durees: [3],
+  fractions: [4],
+  decimaux: [6, 5],
+  longueurs: [7],
+  relatifs: [8],
+  priorites: [9],
+  pythagore: [10],
+  pourcentages: [11],
+  probabilites: [12],
+  puissances: [13],
+};
+
+/** Le thème d'une vidéo, lu dans son titre et son identifiant. L'ordre compte :
+ *  « décimaux » avant « calcul », « longueur » avant « aire ». */
+const MOTS_THEME: [RegExp, Theme][] = [
+  [/pythagore|hypotenuse/, "pythagore"],
+  [/pourcent/, "pourcentages"],
+  [/relatif/, "relatifs"],
+  [/decima/, "decimaux"],
+  [/proba|frequence|issue|hasard/, "probabilites"],
+  [/fraction/, "fractions"],
+  [/longueur|convert|conversion/, "longueurs"],
+  [/duree|horaire/, "durees"],
+  [/multiplication|division|table/, "multiplication"],
+  [/puissance/, "puissances"],
+  [/expression|litteral|priorit/, "priorites"],
+];
+
+export function themeDe(texte: string): Theme | null {
+  const t = texte.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+  for (const [re, theme] of MOTS_THEME) if (re.test(t)) return theme;
+  return null;
+}
+
+/** Un défi ÉCRIT À LA MAIN pour une Une précise (lib/accueil/journal.ts). */
+export type DefiEcrit = {
+  classe: string;
+  coach: string;
+  question: string;
+  juste: string;
+  faux: [string, string];
+  explication: string;
+};
+
+/** Met un défi écrit dans la forme commune ; l'ordre des choix suit la graine. */
+export function depuisEcrit(d: DefiEcrit, graine: number): DefiGenere {
+  const tous = [d.juste, ...d.faux];
+  const r = hasard(graine * 104729);
+  const ordre = [0, 1, 2].sort(() => r() - 0.5);
+  return {
+    classe: d.classe,
+    coach: d.coach,
+    question: d.question,
+    explication: d.explication,
+    choix: ordre.map((i) => tous[i]),
+    bonne: ordre.indexOf(0),
+  };
+}
+
 /** L'ordre des types, mélangé une fois pour toutes : les niveaux alternent
  *  (pas trois défis de primaire d'affilée). */
 const ORDRE = [1, 10, 5, 8, 3, 13, 6, 11, 0, 9, 4, 12, 7, 2];
 
 /** Le défi d'une graine. La bonne réponse n'est jamais à une place fixe. */
-export function genererDefi(graine: number): DefiGenere {
+export function genererDefi(graine: number, theme?: Theme | null): DefiGenere {
+  const duTheme = theme ? THEMES[theme] : null;
   for (let essai = 0; essai < 20; essai++) {
     const r = hasard(graine * 7919 + essai);
     // Le TYPE tourne : les 14 sortes de défi passent toutes avant qu'une revienne
     // (la simulation du 19/10 donnait deux conversions de mètres en trois jours).
     // Seuls les nombres sont tirés au hasard.
-    const brut = GENERATEURS[ORDRE[((graine % ORDRE.length) + ORDRE.length) % ORDRE.length]](r);
+    // Avec un thème (celui de la Une), on reste sur ses générateurs.
+    const liste = duTheme ?? ORDRE;
+    const brut = GENERATEURS[liste[((graine % liste.length) + liste.length) % liste.length]](r);
     const tous = [brut.juste, ...brut.faux];
     // ⛔ Jamais deux choix de même texte (ni de même valeur affichée).
     if (new Set(tous).size !== tous.length) continue;

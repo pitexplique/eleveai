@@ -16,6 +16,7 @@
 // son id). Une vidéo publiée demain s'insère sans bouleverser les autres.
 import { toutesLesVideos, urlR2, type VideoR2 } from "@/lib/videos/r2";
 import { CHIFFRES, EDITION, JOUR_DU_NUMERO_1, METIERS, UNES, jourParis } from "@/lib/accueil/journal";
+import { depuisEcrit, genererDefi, themeDe } from "@/lib/accueil/defis";
 import type { VideoJournal } from "./JournalClient";
 
 /** Hachage FNV-1a : une place stable par id. */
@@ -89,7 +90,32 @@ function uneDuJour(jour: number) {
   const short =
     (ecrite?.short && publiees.find((v) => v.id === ecrite.short)) ||
     SHORTS.find((s) => s.id.startsWith(`${p.id}-short`));
-  return { p, short, classe: ecrite?.classe ?? classeDe(p), utile: ecrite?.utile ?? null };
+  return {
+    p,
+    short,
+    classe: ecrite?.classe ?? classeDe(p),
+    utile: ecrite?.utile ?? null,
+    ecrite,
+    theme: themeDe(`${p.titre} ${p.id}`),
+  };
+}
+
+/* ⭐ LA VIDÉO, LE DÉFI ET LE CHIFFRE DU JOUR SONT LIÉS (Frédéric, 19/10).
+   Le défi : celui écrit pour la Une, sinon un défi généré sur son thème,
+   sinon (vidéo sans thème reconnu) la rotation des 14 types. */
+function defiDuJour(jour: number) {
+  const u = uneDuJour(jour);
+  return u.ecrite?.defi ? depuisEcrit(u.ecrite.defi, jour) : genererDefi(jour, u.theme);
+}
+
+/* Le chiffre : celui écrit pour la Une, sinon un chiffre de la banque sur le
+   thème de la vidéo, sinon la rotation. */
+function chiffreDuJour(jour: number) {
+  const u = uneDuJour(jour);
+  if (u.ecrite?.chiffre) return u.ecrite.chiffre;
+  const memeTheme = u.theme ? CHIFFRES.filter((c) => c.theme === u.theme) : [];
+  if (memeTheme.length) return memeTheme[jour % memeTheme.length];
+  return CHIFFRES[jour % CHIFFRES.length];
 }
 
 /** Le contenu du journal d'un jour donné (défaut : aujourd'hui, à Paris). */
@@ -114,7 +140,15 @@ export function donneesDuJournal(jour = jourParis()) {
       utile: une.utile,
     },
     demain: { titre: demain.p.titre, classe: demain.classe },
-    chiffre: CHIFFRES[jour % CHIFFRES.length],
+    chiffre: chiffreDuJour(jour),
+    // Le défi d'aujourd'hui, son thème (pour « Un autre défi », qui reste sur
+    // la notion de la Une), et celui d'HIER pour la réponse des rendez-vous.
+    defi: defiDuJour(jour),
+    theme: une.theme,
+    hier: (() => {
+      const d = defiDuJour(jour - 1);
+      return { question: d.question, reponse: d.choix[d.bonne] };
+    })(),
     metier: METIERS[jour % METIERS.length],
     // ⚠️ La fenêtre se prend sur la liste ENTIÈRE, et le short de la Une n'est
     // retiré qu'après (il en reste alors 8) : retirer d'abord changeait la

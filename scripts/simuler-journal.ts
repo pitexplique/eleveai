@@ -11,12 +11,13 @@ const n = Number(process.argv[2] ?? 7);
 const vus = new Map<string, number>();
 for (let k = 0; k < n; k++) {
   const d = donneesDuJournal(j0 + k);
-  const def = genererDefi(d.jour);
+  const def = d.defi;
   if (n <= 14) {
     console.log(`\n=== ${d.date} · N° ${d.numero}`);
     console.log(`UNE [${d.une.classe}] ${d.une.paysage?.titre}${d.une.short ? "  + short " + d.une.short.id : ""}`);
     console.log(`   utile : ${d.une.utile ?? "(tirage, pas de phrase)"}`);
     console.log(`DÉFI [${def.classe}] ${def.question}  choix=${def.choix.join(" | ")}  → ${def.choix[def.bonne]}`);
+    console.log(`HIER ${d.hier.reponse}`);
     console.log(`CHIFFRE ${d.chiffre.chiffre}  ·  MÉTIER ${d.metier.nom}`);
     console.log(`SHORTS ${d.shorts.slice(0, 3).map((s) => s.id).join(", ")}…`);
     console.log(`RÉEL ${d.reel.map((s) => s.id).join(", ")}`);
