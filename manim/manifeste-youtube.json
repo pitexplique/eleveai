@@ -12094,6 +12094,35 @@
       "url": "https://youtube.com/shorts/ai3qedWj4nM"
     },
     {
+      "id": "6e-duree-temps-short-hugo-deck-diagonale",
+      "notionId": "duree_temps",
+      "serie": "Maths 6e",
+      "type": "short",
+      "fichier": "6e/maths/shorts/fr/duree-temps/eleveai-maths-6e-duree-temps-short-hugo-deck-diagonale.mp4",
+      "miniature": "6e/maths/shorts/fr/duree-temps/eleveai-maths-6e-duree-temps-short-hugo-deck-diagonale.png",
+      "titre": "Hugo Deck gagne la Diagonale des Fous en 22 h 54 min 24 s : combien de secondes ? (Grand Raid 2026)",
+      "accroche": "Grand Raid 2026, Saint-Denis, stade de La Redoute : Hugo Deck gagne la Diagonale des Fous, la première fois qu'il la court !\nSon chrono : 22 h 54 min 24 s, sans dormir. Et en secondes, ça fait combien ?\n1 min = 60 s. 1 h = 60 min = 60 × 60 = 3600 s.\n22 h : 22 × 3600 = 79 200 s.\n54 min : 54 × 60 = 3240 s.\n79 200 + 3240 + 24 = 82 464 s !\n\nÀ toi : en 2025, le vainqueur a mis 23 h 31 min 54 s. Combien de secondes plus vite va Hugo Deck ? Réponds en commentaire !\n\nEntraîne-toi sur https://www.eleveai.fr\nLes durées au coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=duree_temps&microId=duree_convertir&display=simple\n\n#GrandRaid #DiagonaleDesFous #HugoDeck",
+      "tags": [
+        "Diagonale des Fous",
+        "Grand Raid",
+        "Grand Raid 2026",
+        "Grand Raid Réunion",
+        "Hugo Deck",
+        "trail",
+        "ultra-trail",
+        "La Réunion",
+        "durées",
+        "convertir des durées",
+        "heures minutes secondes",
+        "maths",
+        "6e",
+        "collège",
+        "Shorts"
+      ],
+      "microId": "duree_convertir",
+      "ceinture": "jaune"
+    },
+    {
       "id": "cm1-proba-comparer",
       "notionId": "probabilite",
       "microId": "probabilite_comparer",

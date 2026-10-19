@@ -502,6 +502,17 @@ SHORTS["eleveai-maths-6e-aire-longueur-short-diagonale"] = {
 CEINTURE_SHORT["eleveai-maths-6e-aire-longueur-short-diagonale"] = "jaune"
 
 
+# 19/10/2026 — Hugo Deck gagne la Diagonale des Fous en 22 h 54 min 24 s : combien de secondes ? (6e, jaune).
+SHORTS["eleveai-maths-6e-duree-temps-short-hugo-deck-diagonale"] = {
+    "badge": "GRAND RAID · 6E", "titre": ["HUGO DECK", "22 H 54 MIN 24 S"], "taille": 80,
+    "sous": "combien de secondes ?", "taille_sous": 50, "couleur_sous": ORANGE,
+    "accroche": lambda d: (badge_ceinture(d), lignes(d, [("22:54:24", 120, BLEU), ("= ? s", 120, VERT)],
+                                                     y0=720, pas=170)),
+    "dossier": "6e/maths/fr", "sortie": "6e/maths/shorts/fr/duree-temps",
+}
+CEINTURE_SHORT["eleveai-maths-6e-duree-temps-short-hugo-deck-diagonale"] = "jaune"
+
+
 def main():
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     filtre = sys.argv[1] if len(sys.argv) > 1 else ""
