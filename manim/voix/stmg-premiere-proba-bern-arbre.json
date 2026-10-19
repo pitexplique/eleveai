@@ -1,0 +1,13 @@
+{
+  "00-garde": "L'arbre de trois épreuves de Bernoulli.",
+  "01-situation": "On plante trois graines. Chacune germe avec une probabilité de 0,8, indépendamment des autres.",
+  "02-niveau1": "Première graine : G, elle germe, 0,8 ; G barre, elle ne germe pas, 0,2.",
+  "03-niveaux": "Deuxième graine : après chaque branche, encore 0,8 et 0,2. Troisième graine : pareil. L'arbre a 3 niveaux et 8 chemins.",
+  "04-lire": "Chaque chemin raconte une histoire. G, G, G barre : les deux premières germent, pas la troisième.",
+  "05-compter": "Combien de chemins donnent exactement 2 graines qui germent ? G G G barre, G G barre G, G barre G G : 3 chemins.",
+  "06-piege": "Le piège : n'en trouver qu'un, G G G barre, en oubliant l'ordre. La graine qui ne germe pas peut être la première, la deuxième ou la troisième.",
+  "07-defi": "À toi de jouer. Combien de chemins donnent exactement 1 graine qui germe ? Mets pause, et cherche !",
+  "07b-correction": "Correction. G G barre G barre, G barre G G barre, G barre G barre G : 3 chemins. La graine qui germe peut être la première, la deuxième ou la troisième.",
+  "08-finale": "Ce que tu as appris. Pour n épreuves, l'arbre a n niveaux, avec les mêmes branches à chaque niveau. Chaque chemin est une suite de succès et d'échecs. Pour compter les chemins à k succès, on n'oublie aucun ordre. Prochaine vidéo : calculer leurs probabilités.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

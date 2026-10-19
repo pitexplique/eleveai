@@ -1,0 +1,5 @@
+{
+  "00-accroche": "Trois lancers de pièce. Combien de résultats possibles ? 6 ?",
+  "01-image": "Premier lancer : 2 branches. Chacune se dédouble au deuxième : 4. Puis encore au troisième : 8 ! Pile pile pile, pile pile face… jusqu'à face face face.",
+  "02-question": "Et avec quatre lancers, combien de chemins sur l'arbre ? Réponds en commentaire !"
+}

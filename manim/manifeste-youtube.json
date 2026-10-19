@@ -16390,6 +16390,974 @@
         "ceinture jaune",
         "Shorts"
       ]
+    },
+    {
+      "id": "stmg-proba-bern-epreuve",
+      "notionId": "va_bernoulli",
+      "microId": "va_bern_reconnaitre",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/18-bern-epreuve/eleveai-maths-stmg-proba-bern-epreuve.mp4",
+      "miniature": "stmg/maths/probabilites/18-bern-epreuve/eleveai-maths-stmg-proba-bern-epreuve.png",
+      "titre": "Un dé a 6 faces… et c'est une épreuve de Bernoulli ! — L'épreuve de Bernoulli · Maths 1re · STMG",
+      "accroche": "Au basket, une joueuse réussit son lancer franc avec une probabilité de 0,7. Deux issues : succès ou échec.\n\nDans cette vidéo :\n• succès S, échec S barre\n• le paramètre p : ici 0,7, et l'échec 1 − 0,7 = 0,3\n• d'autres épreuves de Bernoulli : un client achète ou pas, une graine germe ou pas\n• le piège : un dé a six faces, mais « 6 ou pas 6 » n'a que deux issues\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : on tire une carte dans un jeu de 32 ; succès : « la carte est un cœur ». Quel est le paramètre p ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_bernoulli&microId=va_bern_reconnaitre&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "L'épreuve de Bernoulli"
+        ],
+        [
+          "00:05",
+          "Le lancer franc"
+        ],
+        [
+          "00:15",
+          "Deux issues : succès S, échec S barre"
+        ],
+        [
+          "00:28",
+          "Le paramètre p"
+        ],
+        [
+          "00:46",
+          "D'autres épreuves de Bernoulli"
+        ],
+        [
+          "00:59",
+          "Le piège : le dé à six faces"
+        ],
+        [
+          "01:17",
+          "À toi de jouer"
+        ],
+        [
+          "01:32",
+          "Correction"
+        ],
+        [
+          "01:46",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:06",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "Bernoulli",
+        "épreuve de Bernoulli",
+        "succès",
+        "échec",
+        "basket",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-bern-epreuve-short",
+      "notionId": "va_bernoulli",
+      "microId": "va_bern_reconnaitre",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-bern-epreuve",
+      "fichier": "stmg/maths/probabilites/18-bern-epreuve/eleveai-maths-stmg-proba-bern-epreuve-short.mp4",
+      "miniature": "stmg/maths/probabilites/18-bern-epreuve/eleveai-maths-stmg-proba-bern-epreuve-short.png",
+      "titre": "Un dé qui devient pile ou face ? 🎲 #Shorts",
+      "accroche": "Un dé a six faces. Pourtant, on peut en faire un pile ou face ! On ne pose qu'une question : « est-ce un 6 ? ». Oui : succès, 1 chance sur 6. Non : échec, 5 chances sur 6. Deux issues : c'est une épreuve de Bernoulli.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : avec un dé, succès : « le nombre est pair ». Quel est le paramètre p ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_bernoulli&microId=va_bern_reconnaitre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "dé",
+        "Bernoulli",
+        "pile ou face",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-bern-epreuve",
+      "notionId": "alea_bernoulli",
+      "microId": "alea_bern_epreuve",
+      "classe": "premiere",
+      "ceinture": "bleue",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-bern-epreuve",
+      "fichier": "premiere-commun/maths/probabilites/18-bern-epreuve/eleveai-maths-premiere-commun-proba-bern-epreuve.mp4",
+      "miniature": "premiere-commun/maths/probabilites/18-bern-epreuve/eleveai-maths-premiere-commun-proba-bern-epreuve.png",
+      "titre": "Un dé a 6 faces… et c'est une épreuve de Bernoulli ! — L'épreuve de Bernoulli · Maths 1re · STMG",
+      "accroche": "Au basket, une joueuse réussit son lancer franc avec une probabilité de 0,7. Deux issues : succès ou échec.\n\nDans cette vidéo :\n• succès S, échec S barre\n• le paramètre p : ici 0,7, et l'échec 1 − 0,7 = 0,3\n• d'autres épreuves de Bernoulli : un client achète ou pas, une graine germe ou pas\n• le piège : un dé a six faces, mais « 6 ou pas 6 » n'a que deux issues\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : on tire une carte dans un jeu de 32 ; succès : « la carte est un cœur ». Quel est le paramètre p ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_bernoulli&microId=alea_bern_epreuve&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "L'épreuve de Bernoulli"
+        ],
+        [
+          "00:05",
+          "Le lancer franc"
+        ],
+        [
+          "00:15",
+          "Deux issues : succès S, échec S barre"
+        ],
+        [
+          "00:28",
+          "Le paramètre p"
+        ],
+        [
+          "00:46",
+          "D'autres épreuves de Bernoulli"
+        ],
+        [
+          "00:59",
+          "Le piège : le dé à six faces"
+        ],
+        [
+          "01:17",
+          "À toi de jouer"
+        ],
+        [
+          "01:32",
+          "Correction"
+        ],
+        [
+          "01:46",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:06",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "Bernoulli",
+        "épreuve de Bernoulli",
+        "succès",
+        "échec",
+        "basket",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-bern-epreuve-short",
+      "notionId": "alea_bernoulli",
+      "microId": "alea_bern_epreuve",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-commun-proba-bern-epreuve",
+      "meme_video_que": "stmg-proba-bern-epreuve-short",
+      "fichier": "premiere-commun/maths/probabilites/18-bern-epreuve/eleveai-maths-premiere-commun-proba-bern-epreuve-short.mp4",
+      "miniature": "premiere-commun/maths/probabilites/18-bern-epreuve/eleveai-maths-premiere-commun-proba-bern-epreuve-short.png",
+      "titre": "Un dé qui devient pile ou face ? 🎲 #Shorts",
+      "accroche": "Un dé a six faces. Pourtant, on peut en faire un pile ou face ! On ne pose qu'une question : « est-ce un 6 ? ». Oui : succès, 1 chance sur 6. Non : échec, 5 chances sur 6. Deux issues : c'est une épreuve de Bernoulli.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : avec un dé, succès : « le nombre est pair ». Quel est le paramètre p ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_bernoulli&microId=alea_bern_epreuve&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "dé",
+        "Bernoulli",
+        "pile ou face",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "stmg-proba-bern-repetition",
+      "notionId": "proba_epreuves_independantes",
+      "microId": "probaI_arbre_deux_epreuves",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/19-bern-repetition/eleveai-maths-stmg-proba-bern-repetition.mp4",
+      "miniature": "stmg/maths/probabilites/19-bern-repetition/eleveai-maths-stmg-proba-bern-repetition.png",
+      "titre": "0,7 puis 0,5 : ce n'est PLUS une répétition ! — Répéter une épreuve · Maths 1re · STMG",
+      "accroche": "Une joueuse tire deux lancers francs, et réussit chacun avec une probabilité de 0,7.\n\nDans cette vidéo :\n• deux conditions : épreuves identiques et indépendantes\n• l'arbre se répète : les mêmes branches 0,7 et 0,3 à chaque niveau\n• les 4 chemins au bout\n• le piège : si la probabilité change ou si le tirage est sans remise, ce n'est plus une répétition\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : on lance trois fois une pièce équilibrée : combien de chemins compte l'arbre ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_epreuves_independantes&microId=probaI_arbre_deux_epreuves&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Répéter une épreuve"
+        ],
+        [
+          "00:05",
+          "Deux lancers francs"
+        ],
+        [
+          "00:15",
+          "Deux conditions : identiques, indépendantes"
+        ],
+        [
+          "00:29",
+          "L'arbre qui se répète"
+        ],
+        [
+          "00:50",
+          "Les 4 chemins"
+        ],
+        [
+          "00:57",
+          "Le piège"
+        ],
+        [
+          "01:15",
+          "À toi de jouer"
+        ],
+        [
+          "01:27",
+          "Correction : 2 × 2 × 2 = 8"
+        ],
+        [
+          "01:37",
+          "Ce que tu as appris"
+        ],
+        [
+          "01:55",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "Bernoulli",
+        "répétition",
+        "épreuves indépendantes",
+        "arbre pondéré",
+        "basket",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-bern-repetition-short",
+      "notionId": "proba_epreuves_independantes",
+      "microId": "probaI_arbre_deux_epreuves",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-bern-repetition",
+      "fichier": "stmg/maths/probabilites/19-bern-repetition/eleveai-maths-stmg-proba-bern-repetition-short.mp4",
+      "miniature": "stmg/maths/probabilites/19-bern-repetition/eleveai-maths-stmg-proba-bern-repetition-short.png",
+      "titre": "3 lancers de pièce : 6 résultats ? NON ! 🪙 #Shorts",
+      "accroche": "Trois lancers de pièce : combien de résultats possibles ? Premier lancer : 2 branches. Chacune se dédouble au deuxième : 4. Puis encore au troisième : 8 !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : et avec quatre lancers, combien de chemins sur l'arbre ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_epreuves_independantes&microId=probaI_arbre_deux_epreuves&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "pile ou face",
+        "arbre",
+        "dénombrement",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-bern-repetition",
+      "notionId": "alea_bernoulli",
+      "microId": "alea_bern_repetition",
+      "classe": "premiere",
+      "ceinture": "bleue",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-bern-repetition",
+      "fichier": "premiere-commun/maths/probabilites/19-bern-repetition/eleveai-maths-premiere-commun-proba-bern-repetition.mp4",
+      "miniature": "premiere-commun/maths/probabilites/19-bern-repetition/eleveai-maths-premiere-commun-proba-bern-repetition.png",
+      "titre": "0,7 puis 0,5 : ce n'est PLUS une répétition ! — Répéter une épreuve · Maths 1re · STMG",
+      "accroche": "Une joueuse tire deux lancers francs, et réussit chacun avec une probabilité de 0,7.\n\nDans cette vidéo :\n• deux conditions : épreuves identiques et indépendantes\n• l'arbre se répète : les mêmes branches 0,7 et 0,3 à chaque niveau\n• les 4 chemins au bout\n• le piège : si la probabilité change ou si le tirage est sans remise, ce n'est plus une répétition\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : on lance trois fois une pièce équilibrée : combien de chemins compte l'arbre ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_bernoulli&microId=alea_bern_repetition&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Répéter une épreuve"
+        ],
+        [
+          "00:05",
+          "Deux lancers francs"
+        ],
+        [
+          "00:15",
+          "Deux conditions : identiques, indépendantes"
+        ],
+        [
+          "00:29",
+          "L'arbre qui se répète"
+        ],
+        [
+          "00:50",
+          "Les 4 chemins"
+        ],
+        [
+          "00:57",
+          "Le piège"
+        ],
+        [
+          "01:15",
+          "À toi de jouer"
+        ],
+        [
+          "01:27",
+          "Correction : 2 × 2 × 2 = 8"
+        ],
+        [
+          "01:37",
+          "Ce que tu as appris"
+        ],
+        [
+          "01:55",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "Bernoulli",
+        "répétition",
+        "épreuves indépendantes",
+        "arbre pondéré",
+        "basket",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-bern-repetition-short",
+      "notionId": "alea_bernoulli",
+      "microId": "alea_bern_repetition",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-commun-proba-bern-repetition",
+      "meme_video_que": "stmg-proba-bern-repetition-short",
+      "fichier": "premiere-commun/maths/probabilites/19-bern-repetition/eleveai-maths-premiere-commun-proba-bern-repetition-short.mp4",
+      "miniature": "premiere-commun/maths/probabilites/19-bern-repetition/eleveai-maths-premiere-commun-proba-bern-repetition-short.png",
+      "titre": "3 lancers de pièce : 6 résultats ? NON ! 🪙 #Shorts",
+      "accroche": "Trois lancers de pièce : combien de résultats possibles ? Premier lancer : 2 branches. Chacune se dédouble au deuxième : 4. Puis encore au troisième : 8 !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : et avec quatre lancers, combien de chemins sur l'arbre ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_bernoulli&microId=alea_bern_repetition&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "pile ou face",
+        "arbre",
+        "dénombrement",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "stmg-proba-bern-arbre",
+      "notionId": "proba_epreuves_independantes",
+      "microId": "probaI_bernoulli_repetition",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/20-bern-arbre/eleveai-maths-stmg-proba-bern-arbre.mp4",
+      "miniature": "stmg/maths/probabilites/20-bern-arbre/eleveai-maths-stmg-proba-bern-arbre.png",
+      "titre": "2 graines sur 3 : un seul chemin ? NON, 3 ! — L'arbre de trois épreuves · Maths 1re · STMG",
+      "accroche": "On plante trois graines ; chacune germe avec une probabilité de 0,8, indépendamment des autres.\n\nDans cette vidéo :\n• l'arbre pousse : 3 niveaux, 8 chemins, les mêmes branches à chaque niveau\n• chaque chemin raconte une histoire\n• exactement 2 graines qui germent : 3 chemins\n• le piège : oublier l'ordre\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : combien de chemins donnent exactement 1 graine qui germe ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_epreuves_independantes&microId=probaI_bernoulli_repetition&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "L'arbre de trois épreuves"
+        ],
+        [
+          "00:04",
+          "Trois graines"
+        ],
+        [
+          "00:13",
+          "Première graine"
+        ],
+        [
+          "00:22",
+          "L'arbre pousse : 3 niveaux, 8 chemins"
+        ],
+        [
+          "00:35",
+          "Chaque chemin raconte une histoire"
+        ],
+        [
+          "00:44",
+          "Exactement 2 graines qui germent"
+        ],
+        [
+          "00:54",
+          "Le piège : oublier l'ordre"
+        ],
+        [
+          "01:06",
+          "À toi de jouer"
+        ],
+        [
+          "01:16",
+          "Correction"
+        ],
+        [
+          "01:30",
+          "Ce que tu as appris"
+        ],
+        [
+          "01:50",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "Bernoulli",
+        "arbre pondéré",
+        "répétition",
+        "graines",
+        "jardin",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-bern-arbre-short",
+      "notionId": "proba_epreuves_independantes",
+      "microId": "probaI_bernoulli_repetition",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-bern-arbre",
+      "fichier": "stmg/maths/probabilites/20-bern-arbre/eleveai-maths-stmg-proba-bern-arbre-short.mp4",
+      "miniature": "stmg/maths/probabilites/20-bern-arbre/eleveai-maths-stmg-proba-bern-arbre-short.png",
+      "titre": "2 buts sur 3 tirs : une seule façon ? ⚽ #Shorts",
+      "accroche": "Trois tirs au but, exactement deux réussis. Réussi, réussi, raté. Réussi, raté, réussi. Raté, réussi, réussi. Trois chemins sur l'arbre ! Le tir raté peut être le premier, le deuxième ou le troisième.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : avec quatre tirs, combien de chemins donnent exactement trois tirs réussis ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_epreuves_independantes&microId=probaI_bernoulli_repetition&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "football",
+        "tirs au but",
+        "arbre",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-bern-arbre",
+      "notionId": "alea_bernoulli_calcul",
+      "microId": "alea_bern_arbre",
+      "classe": "premiere",
+      "ceinture": "bleue",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-bern-arbre",
+      "fichier": "premiere-commun/maths/probabilites/20-bern-arbre/eleveai-maths-premiere-commun-proba-bern-arbre.mp4",
+      "miniature": "premiere-commun/maths/probabilites/20-bern-arbre/eleveai-maths-premiere-commun-proba-bern-arbre.png",
+      "titre": "2 graines sur 3 : un seul chemin ? NON, 3 ! — L'arbre de trois épreuves · Maths 1re · STMG",
+      "accroche": "On plante trois graines ; chacune germe avec une probabilité de 0,8, indépendamment des autres.\n\nDans cette vidéo :\n• l'arbre pousse : 3 niveaux, 8 chemins, les mêmes branches à chaque niveau\n• chaque chemin raconte une histoire\n• exactement 2 graines qui germent : 3 chemins\n• le piège : oublier l'ordre\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : combien de chemins donnent exactement 1 graine qui germe ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_bernoulli_calcul&microId=alea_bern_arbre&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "L'arbre de trois épreuves"
+        ],
+        [
+          "00:04",
+          "Trois graines"
+        ],
+        [
+          "00:13",
+          "Première graine"
+        ],
+        [
+          "00:22",
+          "L'arbre pousse : 3 niveaux, 8 chemins"
+        ],
+        [
+          "00:35",
+          "Chaque chemin raconte une histoire"
+        ],
+        [
+          "00:44",
+          "Exactement 2 graines qui germent"
+        ],
+        [
+          "00:54",
+          "Le piège : oublier l'ordre"
+        ],
+        [
+          "01:06",
+          "À toi de jouer"
+        ],
+        [
+          "01:16",
+          "Correction"
+        ],
+        [
+          "01:30",
+          "Ce que tu as appris"
+        ],
+        [
+          "01:50",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "Bernoulli",
+        "arbre pondéré",
+        "répétition",
+        "graines",
+        "jardin",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-bern-arbre-short",
+      "notionId": "alea_bernoulli_calcul",
+      "microId": "alea_bern_arbre",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-commun-proba-bern-arbre",
+      "meme_video_que": "stmg-proba-bern-arbre-short",
+      "fichier": "premiere-commun/maths/probabilites/20-bern-arbre/eleveai-maths-premiere-commun-proba-bern-arbre-short.mp4",
+      "miniature": "premiere-commun/maths/probabilites/20-bern-arbre/eleveai-maths-premiere-commun-proba-bern-arbre-short.png",
+      "titre": "2 buts sur 3 tirs : une seule façon ? ⚽ #Shorts",
+      "accroche": "Trois tirs au but, exactement deux réussis. Réussi, réussi, raté. Réussi, raté, réussi. Raté, réussi, réussi. Trois chemins sur l'arbre ! Le tir raté peut être le premier, le deuxième ou le troisième.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : avec quatre tirs, combien de chemins donnent exactement trois tirs réussis ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_bernoulli_calcul&microId=alea_bern_arbre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "football",
+        "tirs au but",
+        "arbre",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "stmg-proba-bern-calculer",
+      "notionId": "proba_epreuves_independantes",
+      "microId": "probaI_produit",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/21-bern-calculer/eleveai-maths-stmg-proba-bern-calculer.mp4",
+      "miniature": "stmg/maths/probabilites/21-bern-calculer/eleveai-maths-stmg-proba-bern-calculer.png",
+      "titre": "Exactement deux : 0,128 ? NON, 0,384 ! — Calculer sur une répétition · Maths 1re · STMG",
+      "accroche": "Trois graines germent chacune avec une probabilité de 0,8, indépendamment.\n\nDans cette vidéo :\n• les trois germent : 0,8 × 0,8 × 0,8 = 0,512\n• exactement deux : trois chemins de 0,128 chacun\n• on additionne : 3 × 0,128 = 0,384\n• le piège : ne calculer qu'un seul ordre\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : quelle est la probabilité qu'aucune graine ne germe ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_epreuves_independantes&microId=probaI_produit&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Calculer sur une répétition"
+        ],
+        [
+          "00:05",
+          "Trois graines"
+        ],
+        [
+          "00:16",
+          "Le chemin G G G"
+        ],
+        [
+          "00:30",
+          "Exactement deux germent"
+        ],
+        [
+          "00:43",
+          "On additionne les chemins"
+        ],
+        [
+          "00:55",
+          "Le piège : un seul chemin"
+        ],
+        [
+          "01:09",
+          "À toi de jouer"
+        ],
+        [
+          "01:19",
+          "Correction"
+        ],
+        [
+          "01:33",
+          "Ce que tu as appris"
+        ],
+        [
+          "01:52",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "Bernoulli",
+        "répétition",
+        "calcul",
+        "arbre pondéré",
+        "graines",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-bern-calculer-short",
+      "notionId": "proba_epreuves_independantes",
+      "microId": "probaI_produit",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-bern-calculer",
+      "fichier": "stmg/maths/probabilites/21-bern-calculer/eleveai-maths-stmg-proba-bern-calculer-short.mp4",
+      "miniature": "stmg/maths/probabilites/21-bern-calculer/eleveai-maths-stmg-proba-bern-calculer-short.png",
+      "titre": "8 penaltys sur 10… mais 3 de suite ? ⚽ #Shorts",
+      "accroche": "Un tireur marque ses penaltys 8 fois sur 10. Trois de suite ? On multiplie : 0,8 × 0,8 × 0,8 = 0,512. À peine une chance sur deux !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : et cinq penaltys de suite, à 0,8 chacun : plus ou moins d'une chance sur trois ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_epreuves_independantes&microId=probaI_produit&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "penalty",
+        "football",
+        "règle du produit",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-bern-calculer",
+      "notionId": "alea_bernoulli_calcul",
+      "microId": "alea_bern_calculer",
+      "classe": "premiere",
+      "ceinture": "bleue",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-bern-calculer",
+      "fichier": "premiere-commun/maths/probabilites/21-bern-calculer/eleveai-maths-premiere-commun-proba-bern-calculer.mp4",
+      "miniature": "premiere-commun/maths/probabilites/21-bern-calculer/eleveai-maths-premiere-commun-proba-bern-calculer.png",
+      "titre": "Exactement deux : 0,128 ? NON, 0,384 ! — Calculer sur une répétition · Maths 1re · STMG",
+      "accroche": "Trois graines germent chacune avec une probabilité de 0,8, indépendamment.\n\nDans cette vidéo :\n• les trois germent : 0,8 × 0,8 × 0,8 = 0,512\n• exactement deux : trois chemins de 0,128 chacun\n• on additionne : 3 × 0,128 = 0,384\n• le piège : ne calculer qu'un seul ordre\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : quelle est la probabilité qu'aucune graine ne germe ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_bernoulli_calcul&microId=alea_bern_calculer&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Calculer sur une répétition"
+        ],
+        [
+          "00:05",
+          "Trois graines"
+        ],
+        [
+          "00:16",
+          "Le chemin G G G"
+        ],
+        [
+          "00:30",
+          "Exactement deux germent"
+        ],
+        [
+          "00:43",
+          "On additionne les chemins"
+        ],
+        [
+          "00:55",
+          "Le piège : un seul chemin"
+        ],
+        [
+          "01:09",
+          "À toi de jouer"
+        ],
+        [
+          "01:19",
+          "Correction"
+        ],
+        [
+          "01:33",
+          "Ce que tu as appris"
+        ],
+        [
+          "01:52",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "Bernoulli",
+        "répétition",
+        "calcul",
+        "arbre pondéré",
+        "graines",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-bern-calculer-short",
+      "notionId": "alea_bernoulli_calcul",
+      "microId": "alea_bern_calculer",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-commun-proba-bern-calculer",
+      "meme_video_que": "stmg-proba-bern-calculer-short",
+      "fichier": "premiere-commun/maths/probabilites/21-bern-calculer/eleveai-maths-premiere-commun-proba-bern-calculer-short.mp4",
+      "miniature": "premiere-commun/maths/probabilites/21-bern-calculer/eleveai-maths-premiere-commun-proba-bern-calculer-short.png",
+      "titre": "8 penaltys sur 10… mais 3 de suite ? ⚽ #Shorts",
+      "accroche": "Un tireur marque ses penaltys 8 fois sur 10. Trois de suite ? On multiplie : 0,8 × 0,8 × 0,8 = 0,512. À peine une chance sur deux !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : et cinq penaltys de suite, à 0,8 chacun : plus ou moins d'une chance sur trois ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_bernoulli_calcul&microId=alea_bern_calculer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "penalty",
+        "football",
+        "règle du produit",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "stmg-proba-au-moins-un",
+      "notionId": "va_binomiale_calcul",
+      "microId": "vaT_bin_reunion",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/22-au-moins-un/eleveai-maths-stmg-proba-au-moins-un.mp4",
+      "miniature": "stmg/maths/probabilites/22-au-moins-un/eleveai-maths-stmg-proba-au-moins-un.png",
+      "titre": "3 tickets à 10 % : 30 % de chances ? FAUX ! — « Au moins un » et le contraire · Maths 1re · STMG",
+      "accroche": "Un ticket à gratter gagne avec une probabilité de 0,1. On en achète trois. Quelle est la probabilité d'avoir au moins un ticket gagnant ?\n\nDans cette vidéo :\n• « au moins un » : 7 chemins, trop long\n• l'astuce : le contraire, « aucun gagnant », un seul chemin\n• 0,9 × 0,9 × 0,9 = 0,729, donc 1 − 0,729 = 0,271\n• le piège : additionner 0,1 trois fois\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : avec quatre tickets, quelle est la probabilité d'avoir au moins un gagnant ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_binomiale_calcul&microId=vaT_bin_reunion&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "« Au moins un »"
+        ],
+        [
+          "00:04",
+          "Trois tickets à gratter"
+        ],
+        [
+          "00:17",
+          "7 chemins : trop long"
+        ],
+        [
+          "00:25",
+          "L'astuce : le contraire"
+        ],
+        [
+          "00:36",
+          "Un seul calcul : 1 − 0,729"
+        ],
+        [
+          "00:52",
+          "Le piège : additionner"
+        ],
+        [
+          "01:08",
+          "À toi de jouer"
+        ],
+        [
+          "01:19",
+          "Correction"
+        ],
+        [
+          "01:37",
+          "Ce que tu as appris"
+        ],
+        [
+          "01:52",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "au moins un",
+        "événement contraire",
+        "Bernoulli",
+        "ticket à gratter",
+        "jeu",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-au-moins-un-short",
+      "notionId": "va_binomiale_calcul",
+      "microId": "vaT_bin_reunion",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-au-moins-un",
+      "fichier": "stmg/maths/probabilites/22-au-moins-un/eleveai-maths-stmg-proba-au-moins-un-short.mp4",
+      "miniature": "stmg/maths/probabilites/22-au-moins-un/eleveai-maths-stmg-proba-au-moins-un-short.png",
+      "titre": "10 parties à 10 % = 100 % ? NON ! 🎮 #Shorts",
+      "accroche": "10 % de chances de gagner à chaque partie. Dix parties, et tu gagnes à coup sûr ? Non ! Perdre les dix : 0,9 puissance 10, environ 0,35. Donc gagner au moins une fois : environ 0,65. Loin de 100 % !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : combien de parties faut-il pour dépasser une chance sur deux de gagner au moins une fois ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_binomiale_calcul&microId=vaT_bin_reunion&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "jeu vidéo",
+        "au moins un",
+        "contraire",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-au-moins-un",
+      "notionId": "alea_bernoulli_calcul",
+      "microId": "alea_bern_au_moins_un",
+      "classe": "premiere",
+      "ceinture": "bleue",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-au-moins-un",
+      "fichier": "premiere-commun/maths/probabilites/22-au-moins-un/eleveai-maths-premiere-commun-proba-au-moins-un.mp4",
+      "miniature": "premiere-commun/maths/probabilites/22-au-moins-un/eleveai-maths-premiere-commun-proba-au-moins-un.png",
+      "titre": "3 tickets à 10 % : 30 % de chances ? FAUX ! — « Au moins un » et le contraire · Maths 1re · STMG",
+      "accroche": "Un ticket à gratter gagne avec une probabilité de 0,1. On en achète trois. Quelle est la probabilité d'avoir au moins un ticket gagnant ?\n\nDans cette vidéo :\n• « au moins un » : 7 chemins, trop long\n• l'astuce : le contraire, « aucun gagnant », un seul chemin\n• 0,9 × 0,9 × 0,9 = 0,729, donc 1 − 0,729 = 0,271\n• le piège : additionner 0,1 trois fois\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : avec quatre tickets, quelle est la probabilité d'avoir au moins un gagnant ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_bernoulli_calcul&microId=alea_bern_au_moins_un&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "« Au moins un »"
+        ],
+        [
+          "00:04",
+          "Trois tickets à gratter"
+        ],
+        [
+          "00:17",
+          "7 chemins : trop long"
+        ],
+        [
+          "00:25",
+          "L'astuce : le contraire"
+        ],
+        [
+          "00:36",
+          "Un seul calcul : 1 − 0,729"
+        ],
+        [
+          "00:52",
+          "Le piège : additionner"
+        ],
+        [
+          "01:08",
+          "À toi de jouer"
+        ],
+        [
+          "01:19",
+          "Correction"
+        ],
+        [
+          "01:37",
+          "Ce que tu as appris"
+        ],
+        [
+          "01:52",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "au moins un",
+        "événement contraire",
+        "Bernoulli",
+        "ticket à gratter",
+        "jeu",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-au-moins-un-short",
+      "notionId": "alea_bernoulli_calcul",
+      "microId": "alea_bern_au_moins_un",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-commun-proba-au-moins-un",
+      "meme_video_que": "stmg-proba-au-moins-un-short",
+      "fichier": "premiere-commun/maths/probabilites/22-au-moins-un/eleveai-maths-premiere-commun-proba-au-moins-un-short.mp4",
+      "miniature": "premiere-commun/maths/probabilites/22-au-moins-un/eleveai-maths-premiere-commun-proba-au-moins-un-short.png",
+      "titre": "10 parties à 10 % = 100 % ? NON ! 🎮 #Shorts",
+      "accroche": "10 % de chances de gagner à chaque partie. Dix parties, et tu gagnes à coup sûr ? Non ! Perdre les dix : 0,9 puissance 10, environ 0,35. Donc gagner au moins une fois : environ 0,65. Loin de 100 % !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : combien de parties faut-il pour dépasser une chance sur deux de gagner au moins une fois ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_bernoulli_calcul&microId=alea_bern_au_moins_un&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "jeu vidéo",
+        "au moins un",
+        "contraire",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
     }
   ]
 }

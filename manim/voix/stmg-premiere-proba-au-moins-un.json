@@ -1,0 +1,12 @@
+{
+  "00-garde": "« Au moins un » : l'astuce de l'événement contraire.",
+  "01-situation": "Un ticket à gratter gagne avec une probabilité de 0,1. On en achète trois, indépendants. Quelle est la probabilité d'avoir au moins un ticket gagnant ?",
+  "02-long": "« Au moins un », c'est un, deux ou trois gagnants : 7 chemins sur l'arbre ! Trop long.",
+  "03-contraire": "L'astuce : le contraire de « au moins un gagnant », c'est « aucun gagnant ». Un seul chemin : perdu, perdu, perdu.",
+  "04-calcul": "Aucun gagnant : 0,9 fois 0,9 fois 0,9, égale 0,729. Donc au moins un : 1 moins 0,729, égale 0,271.",
+  "05-piege": "Le piège : additionner 0,1 trois fois, 0,3. Faux ! Ce calcul compte en double les cas où plusieurs tickets gagnent. Le bon résultat est 0,271.",
+  "06-defi": "À toi de jouer. Avec quatre tickets, quelle est la probabilité d'avoir au moins un gagnant ? Mets pause, et cherche !",
+  "06b-correction": "Correction. Aucun gagnant : 0,9 puissance 4, égale 0,6561. Au moins un : 1 moins 0,6561, égale 0,3439.",
+  "07-finale": "Ce que tu as appris. Pour « au moins un », on calcule le contraire, « aucun » : un seul chemin. Puis on fait 1 moins ce nombre. Et on n'additionne jamais les probabilités de chaque tirage.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

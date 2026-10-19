@@ -1,0 +1,12 @@
+{
+  "00-garde": "L'épreuve de Bernoulli : deux issues, succès ou échec.",
+  "01-situation": "Au basket, une joueuse tire un lancer franc. Elle le réussit avec une probabilité de 0,7.",
+  "02-deux": "Deux issues seulement : le panier est réussi, ou il est raté. On appelle « succès » l'issue qui nous intéresse, notée S. L'autre, c'est l'échec, S barre.",
+  "03-p": "La probabilité du succès s'appelle p. Ici, p égale 0,7. L'échec : 1 moins 0,7, égale 0,3. Une expérience à deux issues, succès et échec, c'est une épreuve de Bernoulli de paramètre p.",
+  "04-exemples": "D'autres épreuves de Bernoulli : un client achète, ou pas. Une graine germe, ou pas. Un dé tombe sur 6, ou pas : succès, 1 chance sur 6.",
+  "05-piege": "Le piège : croire qu'il faut exactement deux issues dans l'expérience. Un dé en a six ! Mais si on ne regarde que « 6 » ou « pas 6 », on en fait une épreuve de Bernoulli. C'est la question posée qui crée les deux issues.",
+  "06-defi": "À toi de jouer. On tire une carte dans un jeu de 32 cartes. Succès : « la carte est un cœur ». Quel est le paramètre p ? Mets pause, et cherche !",
+  "06b-correction": "Correction. Il y a 8 cœurs sur 32 cartes. p égale 8 sur 32, égale 0,25. L'échec : 0,75.",
+  "07-finale": "Ce que tu as appris. Une épreuve de Bernoulli : deux issues, succès et échec. Son paramètre p est la probabilité du succès, l'échec vaut 1 moins p. Et c'est la question posée qui choisit le succès. Prochaine vidéo : répéter une épreuve.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

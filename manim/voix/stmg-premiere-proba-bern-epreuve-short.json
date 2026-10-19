@@ -1,0 +1,5 @@
+{
+  "00-accroche": "Un dé a six faces. Pourtant, on peut en faire un pile ou face ! Comment ?",
+  "01-image": "On ne pose qu'une question : « est-ce un 6 ? ». Oui : succès, 1 chance sur 6. Non : échec, 5 chances sur 6. Deux issues : c'est une épreuve de Bernoulli.",
+  "02-question": "Avec un dé, succès : « le nombre est pair ». Quel est le paramètre p ? Réponds en commentaire !"
+}

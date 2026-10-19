@@ -1,0 +1,5 @@
+{
+  "00-accroche": "10 % de chances de gagner à chaque partie. Dix parties, et tu gagnes à coup sûr : 10 fois 10 %, 100 % ?",
+  "01-image": "Non ! Perdre les dix : 0,9 puissance 10, environ 0,35. Donc gagner au moins une fois : 1 moins 0,35, environ 0,65. Loin de 100 % !",
+  "02-question": "Combien de parties faut-il pour dépasser une chance sur deux de gagner au moins une fois ? Réponds en commentaire !"
+}
