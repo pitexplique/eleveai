@@ -1,18 +1,18 @@
 # LA STORY INSTAGRAM DU JOUR (19/10/2026), 1080x1920.
 #
-# Sa fille : « une story publiée par jour » — les élèves n'ont pas tous la même
+# Sa fille : Â« une story publiÃ©e par jour Â» â€” les Ã©lÃ¨ves n'ont pas tous la mÃªme
 # heure, et une story reste 24 h : chacun la voit quand il ouvre Instagram.
-# ⛔ PAS LA TÊTE DE FRÉDÉRIC : c'est TI MARGO qui parle (conseil de sa fille).
+# â›” PAS LA TÃŠTE DE FRÃ‰DÃ‰RIC : c'est TI MARGO qui parle (conseil de sa fille).
 #
-# Le contenu est celui du Journal de l'accueil ce jour-là (même défi, même Une) :
+# Le contenu est celui du Journal de l'accueil ce jour-lÃ  (mÃªme dÃ©fi, mÃªme Une) :
 # la story renvoie au site, le site confirme la story.
-#   1-defi.png    le défi du jour, Ti Margo le pose ; on ajoute À LA MAIN le
-#                 sticker « Quiz » d'Instagram (A, B, C) à droite de Ti Margo.
-#   2-reponse.png la réponse du défi d'HIER + la Une du jour (« ce que tu vas
-#                 apprendre ») → on revient le lendemain pour savoir.
+#   1-defi.jpg    le dÃ©fi du jour, Ti Margo le pose ; on ajoute Ã€ LA MAIN le
+#                 sticker Â« Quiz Â» d'Instagram (A, B, C) Ã  droite de Ti Margo.
+#   2-reponse.jpg la rÃ©ponse du dÃ©fi d'HIER + la Une du jour (Â« ce que tu vas
+#                 apprendre Â») â†’ on revient le lendemain pour savoir.
 #
-# Usage : python scripts/pub-story-du-jour.py [décalage]   (0 = aujourd'hui, 1 = demain)
-#   → pub/instagram/stories/AAAA-MM-JJ/{1-defi,2-reponse}.png + a-faire.txt
+# Usage : python scripts/pub-story-du-jour.py [dÃ©calage]   (0 = aujourd'hui, 1 = demain)
+#   â†’ pub/instagram/stories/AAAA-MM-JJ/{1-defi,2-reponse}.png + a-faire.txt
 
 import json
 import subprocess
@@ -28,11 +28,11 @@ FONTS = Path("C:/Windows/Fonts")
 TI_MARGO = RACINE / "public" / "cahier-vacances" / "ti-margo.png"
 
 W, H = 1080, 1920
-# Instagram couvre le haut (~220 px : barre, nom) et le bas (~260 px : réponse).
+# Instagram couvre le haut (~220 px : barre, nom) et le bas (~260 px : rÃ©ponse).
 HAUT_SUR, BAS_SUR = 230, 1640
-# 19/10, Frédéric : « quand je télécharge, il ne montre pas toute la photo ».
-# Sur un téléphone plus allongé que 9:16, Instagram remplit la hauteur et rogne
-# les CÔTÉS (jusqu'à ~135 px de chaque bord) : tout le contenu tient entre G et D.
+# 19/10, FrÃ©dÃ©ric : Â« quand je tÃ©lÃ©charge, il ne montre pas toute la photo Â».
+# Sur un tÃ©lÃ©phone plus allongÃ© que 9:16, Instagram remplit la hauteur et rogne
+# les CÃ”TÃ‰S (jusqu'Ã  ~135 px de chaque bord) : tout le contenu tient entre G et D.
 G, D = 150, W - 150
 NAVY = (4, 27, 51)
 ENCRE = (15, 23, 42)
@@ -62,7 +62,7 @@ def donnees(decalage):
 
 
 def fond():
-    """Le dégradé chaud des pubs (ambre → rose → bleu ciel), avec trois halos."""
+    """Le dÃ©gradÃ© chaud des pubs (ambre â†’ rose â†’ bleu ciel), avec trois halos."""
     haut, milieu, bas = (255, 247, 230), (255, 238, 240), (232, 244, 255)
     im = Image.new("RGB", (W, H))
     d = ImageDraw.Draw(im)
@@ -82,9 +82,9 @@ def fond():
 
 def couper(d, texte, f, largeur_max):
     """Coupe le texte en lignes qui tiennent dans largeur_max."""
-    # Un calcul ne se coupe pas au milieu : « 3 × 7 » reste sur une ligne.
-    for signe in "×÷=":
-        texte = texte.replace(f" {signe} ", f" {signe} ")
+    # Un calcul ne se coupe pas au milieu : Â« 3 Ã— 7 Â» reste sur une ligne.
+    for signe in "Ã—Ã·=":
+        texte = texte.replace(f" {signe} ", f"Â {signe}Â ")
     lignes, ligne = [], ""
     for mot in texte.split(" "):
         essai = f"{ligne} {mot}".strip()
@@ -130,7 +130,7 @@ def bulle(im, boite, texte, f, pointe_vers):
 
 def entete(d, donnee):
     f = GRAS(34)
-    texte = f"LE JOURNAL D'ELEVEAI  ·  N° {donnee['numero']}"
+    texte = f"LE JOURNAL D'ELEVEAI  Â·  NÂ° {donnee['numero']}"
     d.text(((W - d.textlength(texte, font=f)) / 2, HAUT_SUR), texte, font=f, fill=ORANGE)
     f2 = GRAS(32)
     d.text(((W - d.textlength(donnee["date"], font=f2)) / 2, HAUT_SUR + 48), donnee["date"], font=f2, fill=GRIS)
@@ -151,10 +151,10 @@ def story_defi(donnee):
     entete(d, donnee)
     defi = donnee["defi"]
 
-    # Ti Margo à gauche, sa bulle à droite.
+    # Ti Margo Ã  gauche, sa bulle Ã  droite.
     tm = ti_margo(420)
     im.paste(tm, (G, 370), tm)
-    bulle(im, (G + 330, 390, D, 600), "Le défi\ndu jour !", NOIR(62), (G + 290, 560))
+    bulle(im, (G + 330, 390, D, 600), "Le dÃ©fi\ndu jour !", NOIR(62), (G + 290, 560))
     d = ImageDraw.Draw(im)
 
     # La classe, puis la question en grand dans une carte blanche.
@@ -180,7 +180,7 @@ def story_defi(donnee):
         y += 114
 
     fr = GRAS(38)
-    texte = "La réponse demain, dans la story !"
+    texte = "La rÃ©ponse demain, dans la story !"
     d.text(((W - d.textlength(texte, font=fr)) / 2, y + 16), texte, font=fr, fill=ORANGE)
     pied(d)
     return im.convert("RGB"), y
@@ -191,7 +191,7 @@ def vignette(url):
         requete = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})  # R2 refuse Python nu
         with urllib.request.urlopen(requete, timeout=20) as r:
             return Image.open(BytesIO(r.read())).convert("RGB")
-    except Exception as e:  # pas de réseau : la story se fait sans l'image
+    except Exception as e:  # pas de rÃ©seau : la story se fait sans l'image
         print(f"  (vignette absente : {e})")
         return None
 
@@ -204,7 +204,7 @@ def story_reponse(hier, donnee):
 
     tm = ti_margo(300, miroir=True)
     im.paste(tm, (D - tm.width, 340), tm)
-    bulle(im, (G, 360, G + 520, 540), "La réponse\nd'hier !", NOIR(56), (D - tm.width + 30, 480))
+    bulle(im, (G, 360, G + 520, 540), "La rÃ©ponse\nd'hier !", NOIR(56), (D - tm.width + 30, 480))
     d = ImageDraw.Draw(im)
 
     y = 690
@@ -227,7 +227,7 @@ def story_reponse(hier, donnee):
     if v:
         lv = D - G
         hv = int(v.height * lv / v.width)
-        if y + hv > BAS_SUR - 40:  # trop haute : on la réduit
+        if y + hv > BAS_SUR - 40:  # trop haute : on la rÃ©duit
             hv = BAS_SUR - 40 - y
             lv = int(v.width * hv / v.height)
         v = v.resize((lv, hv), Image.LANCZOS)
@@ -245,19 +245,22 @@ if __name__ == "__main__":
     dossier = RACINE / "pub" / "instagram" / "stories" / jour["iso"]
     dossier.mkdir(parents=True, exist_ok=True)
     defi_img, bas_defi = story_defi(jour)
-    defi_img.save(dossier / "1-defi.png", optimize=True)
-    story_reponse(hier, jour).save(dossier / "2-reponse.png", optimize=True)
+    # JPG : le format qu'Instagram attend pour une story (PNG gardÃ© un temps : 19/10).
+    for vieux in dossier.glob("*.png"):
+        vieux.unlink()
+    defi_img.save(dossier / "1-defi.jpg", quality=92)
+    story_reponse(hier, jour).save(dossier / "2-reponse.jpg", quality=92)
     d = jour["defi"]
     (dossier / "a-faire.txt").write_text(
         f"STORY DU {jour['date'].upper()}\n\n"
-        "1. Publier 1-defi.png, puis ajouter le sticker « Quiz » avec juste A, B, C\n"
-        "   (les choix sont déjà écrits sur l'image) ; le poser dans le vide à droite\n"
+        "1. Publier 1-defi.jpg, puis ajouter le sticker Â« Quiz Â» avec juste A, B, C\n"
+        "   (les choix sont dÃ©jÃ  Ã©crits sur l'image) ; le poser dans le vide Ã  droite\n"
         "   de Ti Margo, sous sa bulle.\n"
-        f"   Bonne réponse : {LETTRES[d['bonne']]}. {d['choix'][d['bonne']]}\n"
-        "2. Publier 2-reponse.png (la réponse d'hier + la Une du jour).\n"
-        "3. Option : sticker « Lien » vers eleveai.fr sur la 2.\n",
+        f"   Bonne rÃ©ponse : {LETTRES[d['bonne']]}. {d['choix'][d['bonne']]}\n"
+        "2. Publier 2-reponse.jpg (la rÃ©ponse d'hier + la Une du jour).\n"
+        "3. Option : sticker Â« Lien Â» vers eleveai.fr sur la 2.\n",
         encoding="utf-8",
     )
     print(dossier)
     if bas_defi > BAS_SUR:
-        print(f"  ⚠️ les choix descendent à {bas_defi} px : la barre d'Instagram peut les couvrir")
+        print(f"  âš ï¸ les choix descendent Ã  {bas_defi} px : la barre d'Instagram peut les couvrir")
