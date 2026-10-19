@@ -1,0 +1,13 @@
+{
+  "00-garde": "Avec remise ou sans remise : ça change tout.",
+  "01-situation": "Un sachet contient 10 bonbons : 3 à la coco et 7 à la menthe. On en prend un au hasard, puis un deuxième.",
+  "02-avec": "Avec remise : on remet le premier bonbon dans le sachet avant de reprendre. Le sachet est le même à chaque fois : 3 coco sur 10, puis encore 3 sur 10. Les deux tirages sont indépendants.",
+  "03-avec-calcul": "Deux bonbons coco : 0,3 fois 0,3, égale 0,09.",
+  "04-sans": "Sans remise : on mange le premier bonbon. S'il était à la coco, il n'en reste que 2 sur 9. Le deuxième tirage dépend du premier : ils ne sont pas indépendants.",
+  "05-sans-calcul": "Deux bonbons coco : 3 sur 10, fois 2 sur 9, égale 6 sur 90, soit 1 sur 15, environ 0,07.",
+  "06-piege": "Le piège : multiplier 0,3 par 0,3 dans un tirage sans remise. Sur l'arbre, la deuxième branche change selon la première : après coco, 2 sur 9 ; après menthe, 3 sur 9.",
+  "07-defi": "À toi de jouer. Sans remise, quelle est la probabilité de prendre deux bonbons à la menthe ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 7 sur 10, puis il reste 6 menthes sur 9. 7 sur 10 fois 6 sur 9, égale 42 sur 90, soit 7 sur 15, environ 0,47.",
+  "08-finale": "Ce que tu as appris. Avec remise : le sachet ne change pas, les tirages sont indépendants, on multiplie les mêmes probabilités. Sans remise : le sachet change, la deuxième branche dépend de la première.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -1,0 +1,13 @@
+{
+  "00-garde": "Indépendants ou incompatibles : deux mots qu'on confond.",
+  "01-situation": "Une roue a 10 cases, numérotées de 1 à 10, toutes de même taille. On la fait tourner une fois.",
+  "02-incompatibles": "Incompatibles, ça veut dire : ils ne peuvent pas arriver ensemble. A : « le numéro est pair ». C : « le numéro est 1 ou 3 ». Aucun numéro n'est dans les deux : A inter C est vide. P de A inter C égale 0.",
+  "03-independants": "Indépendants, c'est autre chose : savoir l'un ne change pas la probabilité de l'autre. A : « pair », 0,5. B : « 4 ou moins », 0,4. A inter B : les numéros 2 et 4, soit 0,2. Et 0,5 fois 0,4, égale 0,2. A et B sont indépendants.",
+  "04-ensemble": "Et A et C ? Ils sont incompatibles. Sont-ils aussi indépendants ? P de A fois P de C : 0,5 fois 0,2, égale 0,1. Mais P de A inter C égale 0. 0 n'est pas 0,1 : ils ne sont pas indépendants !",
+  "05-pourquoi": "Normal : si la roue tombe sur un nombre pair, on SAIT que ce n'est ni 1 ni 3. Savoir A change tout pour C. Des événements incompatibles se renseignent l'un l'autre : ils ne sont pas indépendants.",
+  "06-piege": "Le piège : penser qu'incompatible veut dire indépendant, parce que les deux sonnent comme « sans lien ». C'est presque le contraire ! Incompatibles : P de A inter B égale 0. Indépendants : P de A inter B égale P de A fois P de B.",
+  "07-defi": "À toi de jouer. Sur la même roue, D : « le numéro est 10 ». A, pair, et D sont-ils incompatibles ? Indépendants ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 10 est pair : A et D peuvent arriver ensemble, ils ne sont pas incompatibles. P de A inter D égale 0,1. P de A fois P de D : 0,5 fois 0,1, égale 0,05. Ils ne sont pas indépendants non plus.",
+  "08-finale": "Ce que tu as appris. Incompatibles : impossible ensemble, P de A inter B égale 0. Indépendants : savoir l'un ne change rien, P de A inter B égale P de A fois P de B. Deux événements incompatibles, de probabilités non nulles, ne sont jamais indépendants.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

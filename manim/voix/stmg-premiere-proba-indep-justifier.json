@@ -1,0 +1,13 @@
+{
+  "00-garde": "Prouver que deux événements sont indépendants… ou pas.",
+  "01-situation": "Une entreprise de 500 salariés. 200 font du télétravail. 300 se disent satisfaits de leur travail. Et 120 font du télétravail ET sont satisfaits.",
+  "02-trois": "On calcule trois probabilités. P de T : 200 sur 500, égale 0,4. P de S : 300 sur 500, égale 0,6. P de T inter S : 120 sur 500, égale 0,24.",
+  "03-test": "Le test : on compare P de T inter S avec P de T fois P de S. 0,4 fois 0,6, égale 0,24. Les deux sont égaux : T et S sont indépendants.",
+  "04-phrase": "On rédige : « P de T fois P de S égale 0,24, et P de T inter S égale 0,24. Ces deux nombres sont égaux, donc T et S sont indépendants. »",
+  "05-autre": "Une autre entreprise : toujours 200 en télétravail et 300 satisfaits, mais 150 sont les deux à la fois. P de T inter S : 150 sur 500, égale 0,3. Et P de T fois P de S vaut toujours 0,24. 0,3 n'est pas 0,24 : T et S ne sont pas indépendants.",
+  "06-piege": "Le piège : conclure avec un seul nombre. « P de T inter S égale 0,3, donc ils sont indépendants » ne veut rien dire. Il faut toujours DEUX nombres à comparer.",
+  "07-defi": "À toi de jouer. P de A égale 0,5, P de B égale 0,2, et P de A inter B égale 0,15. A et B sont-ils indépendants ? Mets pause, et cherche !",
+  "07b-correction": "Correction. P de A fois P de B : 0,5 fois 0,2, égale 0,1. Et P de A inter B égale 0,15. 0,15 n'est pas 0,1 : A et B ne sont pas indépendants.",
+  "08-finale": "Ce que tu as appris. Pour justifier : calculer P de A fois P de B, calculer P de A inter B, et comparer. Égaux : indépendants. Différents : pas indépendants. Prochaine vidéo : ne plus confondre indépendants et incompatibles.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

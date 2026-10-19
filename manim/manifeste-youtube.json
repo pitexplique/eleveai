@@ -15392,6 +15392,1004 @@
         "ceinture jaune",
         "Shorts"
       ]
+    },
+    {
+      "id": "stmg-proba-indep-definition",
+      "notionId": "proba_independance",
+      "microId": "probaT_indep_definition",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/13-indep-definition/eleveai-maths-stmg-proba-indep-definition.mp4",
+      "miniature": "stmg/maths/probabilites/13-indep-definition/eleveai-maths-stmg-proba-indep-definition.png",
+      "titre": "Indépendants = sans rapport ? NON ! — Deux événements indépendants · Maths 1re · STMG",
+      "accroche": "Une épicerie a 200 clients : 50 viennent à vélo, 80 ont la carte de fidélité, et parmi eux 20 viennent à vélo. Savoir qu'un client a la carte change-t-il la probabilité qu'il vienne à vélo ?\n\nDans cette vidéo :\n• P(V) = 50 sur 200 = 0,25\n• sachant F, la ligne F : 20 sur 80 = 0,25\n• même nombre : F et V sont indépendants, P_F(V) = P(V)\n• l'épicerie d'à côté : 40 sur 80 = 0,5, pas indépendants\n• le piège : « indépendants » ne veut pas dire « sans rapport dans la vie »\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : P(A) = 0,3 et P_B(A) = 0,3 : A et B sont-ils indépendants ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_independance&microId=probaT_indep_definition&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Deux événements indépendants"
+        ],
+        [
+          "00:05",
+          "L'épicerie du quartier"
+        ],
+        [
+          "00:16",
+          "P(V) = 0,25"
+        ],
+        [
+          "00:27",
+          "Sachant F : 20 sur 80"
+        ],
+        [
+          "00:37",
+          "Même nombre : P_F(V) = P(V)"
+        ],
+        [
+          "00:51",
+          "L'épicerie d'à côté : 0,5 et 0,25"
+        ],
+        [
+          "01:14",
+          "Le piège"
+        ],
+        [
+          "01:27",
+          "À toi de jouer"
+        ],
+        [
+          "01:41",
+          "Correction"
+        ],
+        [
+          "01:53",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:11",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "indépendance",
+        "événements indépendants",
+        "tableau croisé",
+        "épicerie",
+        "vélo",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-indep-definition-short",
+      "notionId": "proba_independance",
+      "microId": "probaT_indep_definition",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-indep-definition",
+      "fichier": "stmg/maths/probabilites/13-indep-definition/eleveai-maths-stmg-proba-indep-definition-short.mp4",
+      "miniature": "stmg/maths/probabilites/13-indep-definition/eleveai-maths-stmg-proba-indep-definition-short.png",
+      "titre": "5 fois pile… et face au prochain lancer ? 🪙 #Shorts",
+      "accroche": "La pièce vient de tomber 5 fois sur pile. Au prochain lancer, face a plus de chances ? Non ! La pièce n'a pas de mémoire : les lancers sont indépendants. Face : toujours 0,5.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : au loto, le 7 n'est pas sorti depuis 20 tirages : a-t-il plus de chances de sortir au prochain ? Oui ou non ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_independance&microId=probaT_indep_definition&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "pile ou face",
+        "loto",
+        "indépendance",
+        "hasard",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-indep-definition",
+      "notionId": "alea_independance",
+      "microId": "alea_indep_definition",
+      "classe": "premiere",
+      "ceinture": "bleue",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-indep-definition",
+      "fichier": "premiere-commun/maths/probabilites/13-indep-definition/eleveai-maths-premiere-commun-proba-indep-definition.mp4",
+      "miniature": "premiere-commun/maths/probabilites/13-indep-definition/eleveai-maths-premiere-commun-proba-indep-definition.png",
+      "titre": "Indépendants = sans rapport ? NON ! — Deux événements indépendants · Maths 1re · STMG",
+      "accroche": "Une épicerie a 200 clients : 50 viennent à vélo, 80 ont la carte de fidélité, et parmi eux 20 viennent à vélo. Savoir qu'un client a la carte change-t-il la probabilité qu'il vienne à vélo ?\n\nDans cette vidéo :\n• P(V) = 50 sur 200 = 0,25\n• sachant F, la ligne F : 20 sur 80 = 0,25\n• même nombre : F et V sont indépendants, P_F(V) = P(V)\n• l'épicerie d'à côté : 40 sur 80 = 0,5, pas indépendants\n• le piège : « indépendants » ne veut pas dire « sans rapport dans la vie »\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : P(A) = 0,3 et P_B(A) = 0,3 : A et B sont-ils indépendants ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_independance&microId=alea_indep_definition&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Deux événements indépendants"
+        ],
+        [
+          "00:05",
+          "L'épicerie du quartier"
+        ],
+        [
+          "00:16",
+          "P(V) = 0,25"
+        ],
+        [
+          "00:27",
+          "Sachant F : 20 sur 80"
+        ],
+        [
+          "00:37",
+          "Même nombre : P_F(V) = P(V)"
+        ],
+        [
+          "00:51",
+          "L'épicerie d'à côté : 0,5 et 0,25"
+        ],
+        [
+          "01:14",
+          "Le piège"
+        ],
+        [
+          "01:27",
+          "À toi de jouer"
+        ],
+        [
+          "01:41",
+          "Correction"
+        ],
+        [
+          "01:53",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:11",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "indépendance",
+        "événements indépendants",
+        "tableau croisé",
+        "épicerie",
+        "vélo",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-indep-definition-short",
+      "notionId": "alea_independance",
+      "microId": "alea_indep_definition",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-commun-proba-indep-definition",
+      "meme_video_que": "stmg-proba-indep-definition-short",
+      "fichier": "premiere-commun/maths/probabilites/13-indep-definition/eleveai-maths-premiere-commun-proba-indep-definition-short.mp4",
+      "miniature": "premiere-commun/maths/probabilites/13-indep-definition/eleveai-maths-premiere-commun-proba-indep-definition-short.png",
+      "titre": "5 fois pile… et face au prochain lancer ? 🪙 #Shorts",
+      "accroche": "La pièce vient de tomber 5 fois sur pile. Au prochain lancer, face a plus de chances ? Non ! La pièce n'a pas de mémoire : les lancers sont indépendants. Face : toujours 0,5.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : au loto, le 7 n'est pas sorti depuis 20 tirages : a-t-il plus de chances de sortir au prochain ? Oui ou non ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_independance&microId=alea_indep_definition&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "pile ou face",
+        "loto",
+        "indépendance",
+        "hasard",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "stmg-proba-indep-produit",
+      "notionId": "proba_independance",
+      "microId": "probaT_indep_produit",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/14-indep-produit/eleveai-maths-stmg-proba-indep-produit.mp4",
+      "miniature": "stmg/maths/probabilites/14-indep-produit/eleveai-maths-stmg-proba-indep-produit.png",
+      "titre": "P(A ∩ B) = P(A) × P(B)… SEULEMENT si indépendants ! — La règle du produit · Maths 1re · STMG",
+      "accroche": "Une maison produit son électricité avec des panneaux solaires et une petite éolienne. Soleil : 0,7. Vent : 0,4. Soleil et vent sont indépendants.\n\nDans cette vidéo :\n• l'arbre : la branche vers V vaut 0,4 après S comme après S barre\n• soleil ET vent : 0,7 × 0,4 = 0,28\n• pourquoi : indépendants, P_S(V) = P(V)\n• le piège : la règle ne marche QUE pour des événements indépendants\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : quelle est la probabilité qu'il n'y ait ni soleil ni vent ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_independance&microId=probaT_indep_produit&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Indépendants : la règle du produit"
+        ],
+        [
+          "00:05",
+          "La maison solaire"
+        ],
+        [
+          "00:25",
+          "L'arbre : 0,4 après S comme après S barre"
+        ],
+        [
+          "00:43",
+          "Soleil ET vent : 0,7 × 0,4 = 0,28"
+        ],
+        [
+          "00:58",
+          "Pourquoi : P_S(V) = P(V)"
+        ],
+        [
+          "01:14",
+          "Le piège : seulement si indépendants"
+        ],
+        [
+          "01:27",
+          "À toi de jouer"
+        ],
+        [
+          "01:37",
+          "Correction : 0,3 × 0,6 = 0,18"
+        ],
+        [
+          "01:58",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:20",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "indépendance",
+        "règle du produit",
+        "énergie solaire",
+        "éolienne",
+        "écologie",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-indep-produit-short",
+      "notionId": "proba_independance",
+      "microId": "probaT_indep_produit",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-indep-produit",
+      "fichier": "stmg/maths/probabilites/14-indep-produit/eleveai-maths-stmg-proba-indep-produit-short.mp4",
+      "miniature": "stmg/maths/probabilites/14-indep-produit/eleveai-maths-stmg-proba-indep-produit-short.png",
+      "titre": "2 réveils à 90 % : les deux sonnent ? 81 % seulement ! ⏰ #Shorts",
+      "accroche": "Deux alarmes pour te réveiller, chacune sonne 9 fois sur 10. Elles sont indépendantes. Les deux sonnent : 0,9 × 0,9 = 0,81. Mais aucune ne sonne : 0,1 × 0,1 = 0,01, une chance sur cent d'être en retard.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : avec trois alarmes indépendantes qui sonnent 9 fois sur 10, quelle est la probabilité qu'aucune ne sonne ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_independance&microId=probaT_indep_produit&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "réveil",
+        "alarme",
+        "règle du produit",
+        "indépendance",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-indep-produit",
+      "notionId": "alea_independance",
+      "microId": "alea_indep_produit",
+      "classe": "premiere",
+      "ceinture": "bleue",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-indep-produit",
+      "fichier": "premiere-commun/maths/probabilites/14-indep-produit/eleveai-maths-premiere-commun-proba-indep-produit.mp4",
+      "miniature": "premiere-commun/maths/probabilites/14-indep-produit/eleveai-maths-premiere-commun-proba-indep-produit.png",
+      "titre": "P(A ∩ B) = P(A) × P(B)… SEULEMENT si indépendants ! — La règle du produit · Maths 1re · STMG",
+      "accroche": "Une maison produit son électricité avec des panneaux solaires et une petite éolienne. Soleil : 0,7. Vent : 0,4. Soleil et vent sont indépendants.\n\nDans cette vidéo :\n• l'arbre : la branche vers V vaut 0,4 après S comme après S barre\n• soleil ET vent : 0,7 × 0,4 = 0,28\n• pourquoi : indépendants, P_S(V) = P(V)\n• le piège : la règle ne marche QUE pour des événements indépendants\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : quelle est la probabilité qu'il n'y ait ni soleil ni vent ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_independance&microId=alea_indep_produit&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Indépendants : la règle du produit"
+        ],
+        [
+          "00:05",
+          "La maison solaire"
+        ],
+        [
+          "00:25",
+          "L'arbre : 0,4 après S comme après S barre"
+        ],
+        [
+          "00:43",
+          "Soleil ET vent : 0,7 × 0,4 = 0,28"
+        ],
+        [
+          "00:58",
+          "Pourquoi : P_S(V) = P(V)"
+        ],
+        [
+          "01:14",
+          "Le piège : seulement si indépendants"
+        ],
+        [
+          "01:27",
+          "À toi de jouer"
+        ],
+        [
+          "01:37",
+          "Correction : 0,3 × 0,6 = 0,18"
+        ],
+        [
+          "01:58",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:20",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "indépendance",
+        "règle du produit",
+        "énergie solaire",
+        "éolienne",
+        "écologie",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-indep-produit-short",
+      "notionId": "alea_independance",
+      "microId": "alea_indep_produit",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-commun-proba-indep-produit",
+      "meme_video_que": "stmg-proba-indep-produit-short",
+      "fichier": "premiere-commun/maths/probabilites/14-indep-produit/eleveai-maths-premiere-commun-proba-indep-produit-short.mp4",
+      "miniature": "premiere-commun/maths/probabilites/14-indep-produit/eleveai-maths-premiere-commun-proba-indep-produit-short.png",
+      "titre": "2 réveils à 90 % : les deux sonnent ? 81 % seulement ! ⏰ #Shorts",
+      "accroche": "Deux alarmes pour te réveiller, chacune sonne 9 fois sur 10. Elles sont indépendantes. Les deux sonnent : 0,9 × 0,9 = 0,81. Mais aucune ne sonne : 0,1 × 0,1 = 0,01, une chance sur cent d'être en retard.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : avec trois alarmes indépendantes qui sonnent 9 fois sur 10, quelle est la probabilité qu'aucune ne sonne ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_independance&microId=alea_indep_produit&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "réveil",
+        "alarme",
+        "règle du produit",
+        "indépendance",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "stmg-proba-indep-justifier",
+      "notionId": "proba_independance",
+      "microId": "probaT_indep_justifier",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/15-indep-justifier/eleveai-maths-stmg-proba-indep-justifier.mp4",
+      "miniature": "stmg/maths/probabilites/15-indep-justifier/eleveai-maths-stmg-proba-indep-justifier.png",
+      "titre": "Un seul nombre ne prouve RIEN ! — Prouver que deux événements sont indépendants · Maths 1re · STMG",
+      "accroche": "Une entreprise de 500 salariés : 200 en télétravail, 300 satisfaits, 120 les deux à la fois. Télétravail et satisfaction sont-ils indépendants ?\n\nDans cette vidéo :\n• trois probabilités : 0,4, 0,6 et 0,24\n• le test : P(T ∩ S) contre P(T) × P(S), 0,24 = 0,24, indépendants\n• la rédaction en trois lignes\n• une autre entreprise : 0,3 contre 0,24, pas indépendants\n• le piège : conclure avec un seul nombre\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : P(A) = 0,5, P(B) = 0,2 et P(A ∩ B) = 0,15 : A et B sont-ils indépendants ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_independance&microId=probaT_indep_justifier&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Prouver l'indépendance… ou pas"
+        ],
+        [
+          "00:05",
+          "Une entreprise de 500 salariés"
+        ],
+        [
+          "00:19",
+          "Trois probabilités"
+        ],
+        [
+          "00:39",
+          "Le test : la balance"
+        ],
+        [
+          "00:54",
+          "On rédige en 3 lignes"
+        ],
+        [
+          "01:07",
+          "Une autre entreprise : 0,3 contre 0,24"
+        ],
+        [
+          "01:32",
+          "Le piège : un seul nombre"
+        ],
+        [
+          "01:46",
+          "À toi de jouer"
+        ],
+        [
+          "02:03",
+          "Correction"
+        ],
+        [
+          "02:21",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:41",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "indépendance",
+        "justifier",
+        "télétravail",
+        "entreprise",
+        "business",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-indep-justifier-short",
+      "notionId": "proba_independance",
+      "microId": "probaT_indep_justifier",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-indep-justifier",
+      "fichier": "stmg/maths/probabilites/15-indep-justifier/eleveai-maths-stmg-proba-indep-justifier-short.mp4",
+      "miniature": "stmg/maths/probabilites/15-indep-justifier/eleveai-maths-stmg-proba-indep-justifier-short.png",
+      "titre": "Avoir un chat rend-il meilleur en maths ? 🐱 #Shorts",
+      "accroche": "Dans une classe de 20 élèves : 10 aiment les maths (0,5), 4 ont un chat (0,2), 2 font les deux (0,1). Et 0,5 × 0,2 = 0,1 : égal ! Chat et maths sont indépendants. Désolé pour les chats.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : dans une autre classe, P(maths) = 0,5, P(chat) = 0,2 et P(les deux) = 0,15 : indépendants ou pas ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_independance&microId=probaT_indep_justifier&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "chat",
+        "classe",
+        "indépendance",
+        "humour",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-indep-justifier",
+      "notionId": "alea_independance",
+      "microId": "alea_indep_justifier",
+      "classe": "premiere",
+      "ceinture": "bleue",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-indep-justifier",
+      "fichier": "premiere-commun/maths/probabilites/15-indep-justifier/eleveai-maths-premiere-commun-proba-indep-justifier.mp4",
+      "miniature": "premiere-commun/maths/probabilites/15-indep-justifier/eleveai-maths-premiere-commun-proba-indep-justifier.png",
+      "titre": "Un seul nombre ne prouve RIEN ! — Prouver que deux événements sont indépendants · Maths 1re · STMG",
+      "accroche": "Une entreprise de 500 salariés : 200 en télétravail, 300 satisfaits, 120 les deux à la fois. Télétravail et satisfaction sont-ils indépendants ?\n\nDans cette vidéo :\n• trois probabilités : 0,4, 0,6 et 0,24\n• le test : P(T ∩ S) contre P(T) × P(S), 0,24 = 0,24, indépendants\n• la rédaction en trois lignes\n• une autre entreprise : 0,3 contre 0,24, pas indépendants\n• le piège : conclure avec un seul nombre\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : P(A) = 0,5, P(B) = 0,2 et P(A ∩ B) = 0,15 : A et B sont-ils indépendants ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_independance&microId=alea_indep_justifier&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Prouver l'indépendance… ou pas"
+        ],
+        [
+          "00:05",
+          "Une entreprise de 500 salariés"
+        ],
+        [
+          "00:19",
+          "Trois probabilités"
+        ],
+        [
+          "00:39",
+          "Le test : la balance"
+        ],
+        [
+          "00:54",
+          "On rédige en 3 lignes"
+        ],
+        [
+          "01:07",
+          "Une autre entreprise : 0,3 contre 0,24"
+        ],
+        [
+          "01:32",
+          "Le piège : un seul nombre"
+        ],
+        [
+          "01:46",
+          "À toi de jouer"
+        ],
+        [
+          "02:03",
+          "Correction"
+        ],
+        [
+          "02:21",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:41",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "indépendance",
+        "justifier",
+        "télétravail",
+        "entreprise",
+        "business",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-indep-justifier-short",
+      "notionId": "alea_independance",
+      "microId": "alea_indep_justifier",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-commun-proba-indep-justifier",
+      "meme_video_que": "stmg-proba-indep-justifier-short",
+      "fichier": "premiere-commun/maths/probabilites/15-indep-justifier/eleveai-maths-premiere-commun-proba-indep-justifier-short.mp4",
+      "miniature": "premiere-commun/maths/probabilites/15-indep-justifier/eleveai-maths-premiere-commun-proba-indep-justifier-short.png",
+      "titre": "Avoir un chat rend-il meilleur en maths ? 🐱 #Shorts",
+      "accroche": "Dans une classe de 20 élèves : 10 aiment les maths (0,5), 4 ont un chat (0,2), 2 font les deux (0,1). Et 0,5 × 0,2 = 0,1 : égal ! Chat et maths sont indépendants. Désolé pour les chats.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : dans une autre classe, P(maths) = 0,5, P(chat) = 0,2 et P(les deux) = 0,15 : indépendants ou pas ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_independance&microId=alea_indep_justifier&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "chat",
+        "classe",
+        "indépendance",
+        "humour",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "stmg-proba-indep-incompatible",
+      "notionId": "proba_independance",
+      "microId": "probaT_indep_incompatible",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/16-indep-incompatible/eleveai-maths-stmg-proba-indep-incompatible.mp4",
+      "miniature": "stmg/maths/probabilites/16-indep-incompatible/eleveai-maths-stmg-proba-indep-incompatible.png",
+      "titre": "Incompatibles = indépendants ? Presque le CONTRAIRE ! — Indépendants ou incompatibles · Maths 1re · STMG",
+      "accroche": "Une roue de 10 cases numérotées de 1 à 10. A : « pair ». C : « 1 ou 3 ». B : « 4 ou moins ». Qui est incompatible, qui est indépendant ?\n\nDans cette vidéo :\n• incompatibles : impossible ensemble, P(A ∩ C) = 0\n• indépendants : 0,5 × 0,4 = 0,2 = P(A ∩ B)\n• A et C : 0 et 0,1, pas indépendants\n• pourquoi : savoir A, c'est savoir que ce n'est ni 1 ni 3\n• le piège : confondre les deux mots\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : D : « le numéro est 10 » : A et D sont-ils incompatibles ? indépendants ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_independance&microId=probaT_indep_incompatible&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Indépendants ou incompatibles ?"
+        ],
+        [
+          "00:05",
+          "La roue"
+        ],
+        [
+          "00:14",
+          "Incompatibles : P(A ∩ C) = 0"
+        ],
+        [
+          "00:32",
+          "Indépendants : 0,5 × 0,4 = 0,2"
+        ],
+        [
+          "00:58",
+          "A et C : 0 et 0,1"
+        ],
+        [
+          "01:19",
+          "Pourquoi ? On SAIT"
+        ],
+        [
+          "01:33",
+          "Le piège"
+        ],
+        [
+          "01:52",
+          "À toi de jouer"
+        ],
+        [
+          "02:06",
+          "Correction"
+        ],
+        [
+          "02:28",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:48",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "indépendance",
+        "incompatibles",
+        "roue",
+        "jeu",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-indep-incompatible-short",
+      "notionId": "proba_independance",
+      "microId": "probaT_indep_incompatible",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-indep-incompatible",
+      "fichier": "stmg/maths/probabilites/16-indep-incompatible/eleveai-maths-stmg-proba-indep-incompatible-short.mp4",
+      "miniature": "stmg/maths/probabilites/16-indep-incompatible/eleveai-maths-stmg-proba-indep-incompatible-short.png",
+      "titre": "Pile et face : indépendants ? Beaucoup disent oui… 🪙 #Shorts",
+      "accroche": "Un seul lancer de pièce. Pile et face ne peuvent pas arriver ensemble : ils sont incompatibles. Et si tu sais que c'est pile, tu sais que ce n'est pas face ! Ils ne sont PAS indépendants : 0,5 × 0,5 = 0,25, mais P(pile ∩ face) = 0.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : deux lancers : « pile au premier » et « pile au second ». Indépendants, incompatibles, ou les deux ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_independance&microId=probaT_indep_incompatible&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "pile ou face",
+        "incompatibles",
+        "indépendance",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-indep-incompatible",
+      "notionId": "alea_independance",
+      "microId": "alea_indep_incompatible",
+      "classe": "premiere",
+      "ceinture": "bleue",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-indep-incompatible",
+      "fichier": "premiere-commun/maths/probabilites/16-indep-incompatible/eleveai-maths-premiere-commun-proba-indep-incompatible.mp4",
+      "miniature": "premiere-commun/maths/probabilites/16-indep-incompatible/eleveai-maths-premiere-commun-proba-indep-incompatible.png",
+      "titre": "Incompatibles = indépendants ? Presque le CONTRAIRE ! — Indépendants ou incompatibles · Maths 1re · STMG",
+      "accroche": "Une roue de 10 cases numérotées de 1 à 10. A : « pair ». C : « 1 ou 3 ». B : « 4 ou moins ». Qui est incompatible, qui est indépendant ?\n\nDans cette vidéo :\n• incompatibles : impossible ensemble, P(A ∩ C) = 0\n• indépendants : 0,5 × 0,4 = 0,2 = P(A ∩ B)\n• A et C : 0 et 0,1, pas indépendants\n• pourquoi : savoir A, c'est savoir que ce n'est ni 1 ni 3\n• le piège : confondre les deux mots\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : D : « le numéro est 10 » : A et D sont-ils incompatibles ? indépendants ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_independance&microId=alea_indep_incompatible&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Indépendants ou incompatibles ?"
+        ],
+        [
+          "00:05",
+          "La roue"
+        ],
+        [
+          "00:14",
+          "Incompatibles : P(A ∩ C) = 0"
+        ],
+        [
+          "00:32",
+          "Indépendants : 0,5 × 0,4 = 0,2"
+        ],
+        [
+          "00:58",
+          "A et C : 0 et 0,1"
+        ],
+        [
+          "01:19",
+          "Pourquoi ? On SAIT"
+        ],
+        [
+          "01:33",
+          "Le piège"
+        ],
+        [
+          "01:52",
+          "À toi de jouer"
+        ],
+        [
+          "02:06",
+          "Correction"
+        ],
+        [
+          "02:28",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:48",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "indépendance",
+        "incompatibles",
+        "roue",
+        "jeu",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-indep-incompatible-short",
+      "notionId": "alea_independance",
+      "microId": "alea_indep_incompatible",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-commun-proba-indep-incompatible",
+      "meme_video_que": "stmg-proba-indep-incompatible-short",
+      "fichier": "premiere-commun/maths/probabilites/16-indep-incompatible/eleveai-maths-premiere-commun-proba-indep-incompatible-short.mp4",
+      "miniature": "premiere-commun/maths/probabilites/16-indep-incompatible/eleveai-maths-premiere-commun-proba-indep-incompatible-short.png",
+      "titre": "Pile et face : indépendants ? Beaucoup disent oui… 🪙 #Shorts",
+      "accroche": "Un seul lancer de pièce. Pile et face ne peuvent pas arriver ensemble : ils sont incompatibles. Et si tu sais que c'est pile, tu sais que ce n'est pas face ! Ils ne sont PAS indépendants : 0,5 × 0,5 = 0,25, mais P(pile ∩ face) = 0.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : deux lancers : « pile au premier » et « pile au second ». Indépendants, incompatibles, ou les deux ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_independance&microId=alea_indep_incompatible&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "pile ou face",
+        "incompatibles",
+        "indépendance",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "stmg-proba-remise",
+      "notionId": "proba_epreuves_independantes",
+      "microId": "probaI_avec_sans_remise",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/17-remise/eleveai-maths-stmg-proba-remise.mp4",
+      "miniature": "stmg/maths/probabilites/17-remise/eleveai-maths-stmg-proba-remise.png",
+      "titre": "Sans remise, 0,3 × 0,3 est FAUX ! — Tirage avec ou sans remise · Maths 1re · STMG",
+      "accroche": "Un sachet de 10 bonbons : 3 à la coco, 7 à la menthe. On en prend un, puis un deuxième.\n\nDans cette vidéo :\n• avec remise : le sachet ne change pas, 0,3 × 0,3 = 0,09\n• sans remise : il reste 2 cocos sur 9, 3/10 × 2/9 = 1/15 ≈ 0,07\n• le piège : multiplier 0,3 par 0,3 sans remise\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : sans remise, quelle est la probabilité de prendre deux bonbons à la menthe ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_epreuves_independantes&microId=probaI_avec_sans_remise&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Avec ou sans remise ?"
+        ],
+        [
+          "00:04",
+          "Le sachet de bonbons"
+        ],
+        [
+          "00:13",
+          "Avec remise"
+        ],
+        [
+          "00:29",
+          "Deux cocos avec remise : 0,09"
+        ],
+        [
+          "00:36",
+          "Sans remise"
+        ],
+        [
+          "00:49",
+          "Deux cocos sans remise : 1/15"
+        ],
+        [
+          "01:00",
+          "Le piège"
+        ],
+        [
+          "01:17",
+          "À toi de jouer"
+        ],
+        [
+          "01:28",
+          "Correction"
+        ],
+        [
+          "01:44",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:01",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "avec remise",
+        "sans remise",
+        "tirage",
+        "bonbons",
+        "arbre pondéré",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-remise-short",
+      "notionId": "proba_epreuves_independantes",
+      "microId": "probaI_avec_sans_remise",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-remise",
+      "fichier": "stmg/maths/probabilites/17-remise/eleveai-maths-stmg-proba-remise-short.mp4",
+      "miniature": "stmg/maths/probabilites/17-remise/eleveai-maths-stmg-proba-remise-short.png",
+      "titre": "2 noires, 2 blanches : une paire, 1 chance sur 2 ? 🧦 #Shorts",
+      "accroche": "Dans le noir, tu prends deux chaussettes dans un tiroir : 2 noires et 2 blanches. La première, peu importe. Mais tu ne la remets pas ! Il reste 3 chaussettes, une seule de la même couleur : une paire, 1 chance sur 3.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : si tu remettais la première chaussette avant de reprendre, quelle serait la probabilité d'avoir une paire ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_epreuves_independantes&microId=probaI_avec_sans_remise&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "chaussettes",
+        "sans remise",
+        "paire",
+        "surprise",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-remise",
+      "notionId": "alea_bernoulli",
+      "microId": "alea_bern_avec_sans_remise",
+      "classe": "premiere",
+      "ceinture": "bleue",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-remise",
+      "fichier": "premiere-commun/maths/probabilites/17-remise/eleveai-maths-premiere-commun-proba-remise.mp4",
+      "miniature": "premiere-commun/maths/probabilites/17-remise/eleveai-maths-premiere-commun-proba-remise.png",
+      "titre": "Sans remise, 0,3 × 0,3 est FAUX ! — Tirage avec ou sans remise · Maths 1re · STMG",
+      "accroche": "Un sachet de 10 bonbons : 3 à la coco, 7 à la menthe. On en prend un, puis un deuxième.\n\nDans cette vidéo :\n• avec remise : le sachet ne change pas, 0,3 × 0,3 = 0,09\n• sans remise : il reste 2 cocos sur 9, 3/10 × 2/9 = 1/15 ≈ 0,07\n• le piège : multiplier 0,3 par 0,3 sans remise\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : sans remise, quelle est la probabilité de prendre deux bonbons à la menthe ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_bernoulli&microId=alea_bern_avec_sans_remise&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Avec ou sans remise ?"
+        ],
+        [
+          "00:04",
+          "Le sachet de bonbons"
+        ],
+        [
+          "00:13",
+          "Avec remise"
+        ],
+        [
+          "00:29",
+          "Deux cocos avec remise : 0,09"
+        ],
+        [
+          "00:36",
+          "Sans remise"
+        ],
+        [
+          "00:49",
+          "Deux cocos sans remise : 1/15"
+        ],
+        [
+          "01:00",
+          "Le piège"
+        ],
+        [
+          "01:17",
+          "À toi de jouer"
+        ],
+        [
+          "01:28",
+          "Correction"
+        ],
+        [
+          "01:44",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:01",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "avec remise",
+        "sans remise",
+        "tirage",
+        "bonbons",
+        "arbre pondéré",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-remise-short",
+      "notionId": "alea_bernoulli",
+      "microId": "alea_bern_avec_sans_remise",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-commun-proba-remise",
+      "meme_video_que": "stmg-proba-remise-short",
+      "fichier": "premiere-commun/maths/probabilites/17-remise/eleveai-maths-premiere-commun-proba-remise-short.mp4",
+      "miniature": "premiere-commun/maths/probabilites/17-remise/eleveai-maths-premiere-commun-proba-remise-short.png",
+      "titre": "2 noires, 2 blanches : une paire, 1 chance sur 2 ? 🧦 #Shorts",
+      "accroche": "Dans le noir, tu prends deux chaussettes dans un tiroir : 2 noires et 2 blanches. La première, peu importe. Mais tu ne la remets pas ! Il reste 3 chaussettes, une seule de la même couleur : une paire, 1 chance sur 3.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : si tu remettais la première chaussette avant de reprendre, quelle serait la probabilité d'avoir une paire ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_bernoulli&microId=alea_bern_avec_sans_remise&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "chaussettes",
+        "sans remise",
+        "paire",
+        "surprise",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
     }
   ]
 }

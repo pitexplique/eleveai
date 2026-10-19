@@ -1,0 +1,13 @@
+{
+  "00-garde": "Deux événements indépendants : quand savoir l'un ne change rien.",
+  "01-situation": "Une épicerie a 200 clients. 50 viennent à vélo. 80 ont la carte de fidélité, et parmi eux, 20 viennent à vélo.",
+  "02-proba": "On choisit un client au hasard. V : « il vient à vélo ». P de V égale 50 sur 200, égale 0,25.",
+  "03-sachant": "F : « il a la carte de fidélité ». Sachant F, on allume la ligne F : 20 sur 80, égale 0,25.",
+  "04-meme": "Même nombre ! Savoir que le client a la carte ne change pas la probabilité qu'il vienne à vélo. On dit que F et V sont indépendants : P indice F de V égale P de V.",
+  "05-contre": "Dans l'épicerie d'à côté, 50 clients sur 200 viennent aussi à vélo. Mais parmi les 80 qui ont la carte, 40 viennent à vélo. 40 sur 80, égale 0,5. Ce n'est plus 0,25 : savoir F change tout. Là, F et V ne sont pas indépendants.",
+  "06-piege": "Le piège : croire que « indépendants » veut dire « sans rapport dans la vie ». En maths, on ne devine pas : on compare deux nombres, P indice F de V et P de V.",
+  "07-defi": "À toi de jouer. P de A égale 0,3, et P indice B de A égale 0,3. A et B sont-ils indépendants ? Mets pause, et cherche !",
+  "07b-correction": "Correction. P indice B de A égale P de A : 0,3 et 0,3. Savoir B ne change rien : A et B sont indépendants.",
+  "08-finale": "Ce que tu as appris. A et B sont indépendants quand savoir B ne change pas la probabilité de A : P indice B de A égale P de A. On le vérifie par un calcul, jamais au jugé. Prochaine vidéo : la règle du produit.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

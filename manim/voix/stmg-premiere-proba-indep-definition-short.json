@@ -1,0 +1,5 @@
+{
+  "00-accroche": "La pièce vient de tomber 5 fois sur pile. Au prochain lancer, face a plus de chances, non ?",
+  "01-image": "Non ! La pièce n'a pas de mémoire. Les lancers sont indépendants : savoir les 5 piles ne change rien. Face : toujours 0,5.",
+  "02-question": "Au loto, le 7 n'est pas sorti depuis 20 tirages. A-t-il plus de chances de sortir au prochain ? Oui ou non ? Réponds en commentaire !"
+}

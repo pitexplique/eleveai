@@ -1480,6 +1480,46 @@ for _cl, _bd in (("stmg", "STMG"), ("premiere-commun", "1RE")):
             "dossier": f"{_cl}/maths/probabilites/{_dos}",
         }
 
+# 19/10/2026 — lot 4 : Bernoulli et répétitions (STMG / 1re).
+for _cl, _bd in (("stmg", "STMG"), ("premiere-commun", "1RE")):
+    for _k, _dos, _titre, _haut, _bas, _c in (
+        ("bern-epreuve", "18-bern-epreuve", ["COMPRENDRE", "L'ÉPREUVE DE BERNOULLI"],
+         "Un dé : 6 issues…", "« 6 ou pas 6 » : 2 issues !", "bleue"),
+        ("bern-repetition", "19-bern-repetition", ["RÉPÉTER", "UNE ÉPREUVE"],
+         "3 lancers : 6 résultats ?", "non : 2 × 2 × 2 = 8 !", "bleue"),
+        ("bern-arbre", "20-bern-arbre", ["L'ARBRE DE", "TROIS ÉPREUVES"],
+         "2 graines sur 3 : 1 chemin ?", "non : 3 chemins !", "bleue"),
+        ("bern-calculer", "21-bern-calculer", ["CALCULER SUR", "UNE RÉPÉTITION"],
+         "Exactement 2 : 0,128 ?", "non : 3 × 0,128 = 0,384 !", "bleue"),
+        ("au-moins-un", "22-au-moins-un", ["« AU MOINS UN » :", "L'ASTUCE"],
+         "0,1 + 0,1 + 0,1 ?", "non : 1 − 0,729 = 0,271 !", "bleue"),
+    ):
+        ESSAIS[f"eleveai-maths-{_cl}-proba-{_k}"] = {
+            "badge": f"MATHS · {_bd}", "duree": "EN 3 MIN", "titre": _titre,
+            "accroche": _piege_test(_c, _haut, _bas),
+            "dossier": f"{_cl}/maths/probabilites/{_dos}",
+        }
+
+# 19/10/2026 — lot 3 : indépendance et tirages avec / sans remise (STMG / 1re).
+for _cl, _bd in (("stmg", "STMG"), ("premiere-commun", "1RE")):
+    for _k, _dos, _titre, _haut, _bas, _c in (
+        ("indep-definition", "13-indep-definition", ["COMPRENDRE", "L'INDÉPENDANCE"],
+         "Indépendants = sans rapport ?", "non : 0,25 = 0,25 !", "bleue"),
+        ("indep-produit", "14-indep-produit", ["COMPRENDRE", "LA RÈGLE DU PRODUIT"],
+         "P(A ∩ B) = P(A) × P(B) ?", "SEULEMENT si indépendants !", "bleue"),
+        ("indep-justifier", "15-indep-justifier", ["PROUVER", "L'INDÉPENDANCE"],
+         "Un seul nombre suffit ?", "non : 0,24 contre 0,24 !", "bleue"),
+        ("indep-incompatible", "16-indep-incompatible", ["INDÉPENDANTS OU", "INCOMPATIBLES ?"],
+         "Incompatibles = indépendants ?", "presque le CONTRAIRE !", "bleue"),
+        ("remise", "17-remise", ["AVEC OU", "SANS REMISE"],
+         "0,3 × 0,3 sans remise ?", "FAUX : 3/10 × 2/9 !", "bleue"),
+    ):
+        ESSAIS[f"eleveai-maths-{_cl}-proba-{_k}"] = {
+            "badge": f"MATHS · {_bd}", "duree": "EN 3 MIN", "titre": _titre,
+            "accroche": _piege_test(_c, _haut, _bas),
+            "dossier": f"{_cl}/maths/probabilites/{_dos}",
+        }
+
 # 19/10/2026 — lot 2 : les 6 micros d'ARBRE PONDÉRÉ communes STMG / 1re.
 for _cl, _bd in (("stmg", "STMG"), ("premiere-commun", "1RE")):
     for _k, _dos, _titre, _haut, _bas, _c in (

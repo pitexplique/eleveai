@@ -1,0 +1,5 @@
+{
+  "00-accroche": "Dans le noir, tu prends deux chaussettes dans un tiroir : 2 noires et 2 blanches. Une chance sur deux d'avoir une paire ?",
+  "01-image": "La première, peu importe. Mais tu ne la remets pas ! Il reste 3 chaussettes, et une seule de la même couleur. Une paire : 1 chance sur 3. Sans remise, le tiroir a changé.",
+  "02-question": "Et si tu remettais la première chaussette avant de reprendre, quelle serait la probabilité d'avoir une paire ? Réponds en commentaire !"
+}

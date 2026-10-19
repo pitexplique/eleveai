@@ -346,6 +346,50 @@ for _cl, _bd in (("stmg", "STMG"), ("premiere-commun", "1RE")):
         }
         CEINTURE_SHORT[_nom] = "jaune"
 
+# 19/10/2026 — lot 4 : Bernoulli et répétitions, shorts communs STMG / 1re (jaune).
+for _cl, _bd in (("stmg", "STMG"), ("premiere-commun", "1RE")):
+    for _ep, _dos, _titre, _sous, _lg in (
+        ("bern-epreuve", "18-bern-epreuve", ["UN DÉ EN", "PILE OU FACE ?"], "6 faces… 2 issues ?",
+         [("est-ce un 6 ?", 90, BLEU), ("oui : 1 sur 6", 84, VERT), ("non : 5 sur 6", 84, ROUGE)]),
+        ("bern-repetition", "19-bern-repetition", ["3 LANCERS", "DE PIÈCE"], "combien de résultats ?",
+         [("6 ?", 110, ROUGE), ("2 × 2 × 2", 96, BLEU), ("= 8 !", 110, VERT)]),
+        ("bern-arbre", "20-bern-arbre", ["3 TIRS", "AU BUT"], "exactement 2 réussis",
+         [("une seule façon ?", 80, ROUGE), ("le raté : 1er, 2e ou 3e", 64, BLEU), ("3 chemins !", 96, VERT)]),
+        ("bern-calculer", "21-bern-calculer", ["3 PENALTYS", "DE SUITE"], "8 fois sur 10 chacun",
+         [("presque sûr ?", 84, ROUGE), ("0,8 × 0,8 × 0,8", 76, BLEU), ("= 0,512 !", 100, VERT)]),
+        ("au-moins-un", "22-au-moins-un", ["10 PARTIES", "À 10 %"], "tu gagnes à coup sûr ?",
+         [("10 × 10 % = 100 % ?", 64, ROUGE), ("1 − 0,9 puissance 10", 64, BLEU), ("≈ 0,65 !", 110, VERT)]),
+    ):
+        _nom = f"eleveai-maths-{_cl}-proba-{_ep}-short"
+        SHORTS[_nom] = {
+            "badge": f"PROBABILITÉS · {_bd}", "titre": _titre, "taille": 80 if _ep == "bern-epreuve" else 88,
+            "sous": _sous, "taille_sous": 44, "couleur_sous": ORANGE, "accroche": _acc(_lg),
+            "dossier": f"{_cl}/maths/fr", "sortie": f"{_cl}/maths/probabilites/{_dos}",
+        }
+        CEINTURE_SHORT[_nom] = "jaune"
+
+# 19/10/2026 — lot 3 : indépendance et remise, shorts communs STMG / 1re (jaune).
+for _cl, _bd in (("stmg", "STMG"), ("premiere-commun", "1RE")):
+    for _ep, _dos, _titre, _sous, _lg in (
+        ("indep-definition", "13-indep-definition", ["5 FOIS", "PILE…"], "et face au prochain ?",
+         [("face : plus de chances ?", 64, ROUGE), ("pas de mémoire", 84, BLEU), ("toujours 0,5 !", 96, VERT)]),
+        ("indep-produit", "14-indep-produit", ["DEUX", "ALARMES"], "chacune 9 fois sur 10",
+         [("les deux : 0,9 ?", 84, ROUGE), ("0,9 × 0,9", 96, BLEU), ("= 0,81 !", 110, VERT)]),
+        ("indep-justifier", "15-indep-justifier", ["CHAT", "ET MATHS"], "un chat rend-il meilleur ?",
+         [("0,5 × 0,2", 96, BLEU), ("= 0,1 = P(les deux)", 72, ORANGE), ("indépendants !", 90, VERT)]),
+        ("indep-incompatible", "16-indep-incompatible", ["PILE, FACE :", "INDÉPENDANTS ?"], "beaucoup disent oui…",
+         [("incompatibles", 90, ORANGE), ("savoir l'un change tout", 64, BLEU), ("PAS indépendants !", 80, ROUGE)]),
+        ("remise", "17-remise", ["UNE PAIRE", "DANS LE NOIR"], "2 noires, 2 blanches",
+         [("une chance sur 2 ?", 80, ROUGE), ("sans remise…", 90, BLEU), ("1 chance sur 3 !", 90, VERT)]),
+    ):
+        _nom = f"eleveai-maths-{_cl}-proba-{_ep}-short"
+        SHORTS[_nom] = {
+            "badge": f"PROBABILITÉS · {_bd}", "titre": _titre, "taille": 80 if _ep == "indep-incompatible" else 88, "sous": _sous,
+            "taille_sous": 44, "couleur_sous": ORANGE, "accroche": _acc(_lg), "dossier": f"{_cl}/maths/fr",
+            "sortie": f"{_cl}/maths/probabilites/{_dos}",
+        }
+        CEINTURE_SHORT[_nom] = "jaune"
+
 # 19/10/2026 — lot 2 : 6 shorts d'ARBRE PONDÉRÉ communs STMG / 1re (jaune).
 for _cl, _bd in (("stmg", "STMG"), ("premiere-commun", "1RE")):
     for _ep, _dos, _titre, _sous, _lg in (

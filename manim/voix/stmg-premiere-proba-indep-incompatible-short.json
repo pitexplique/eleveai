@@ -1,0 +1,5 @@
+{
+  "00-accroche": "Un seul lancer de pièce. Pile et face : indépendants ? Beaucoup répondent oui. Et toi ?",
+  "01-image": "Pile et face ne peuvent pas arriver ensemble : ils sont incompatibles. Et si tu sais que c'est pile, tu sais que ce n'est pas face ! Savoir l'un change tout : ils ne sont PAS indépendants. 0,5 fois 0,5, égale 0,25, mais P de pile inter face égale 0.",
+  "02-question": "Deux lancers de pièce : « pile au premier » et « pile au second ». Indépendants, incompatibles, ou les deux ? Réponds en commentaire !"
+}

@@ -1,0 +1,5 @@
+{
+  "00-accroche": "Deux alarmes pour te réveiller. Chacune sonne 9 fois sur 10. Les deux sonnent : 9 fois sur 10 aussi ?",
+  "01-image": "Les deux alarmes sont indépendantes. Les deux sonnent : 0,9 fois 0,9, égale 0,81. Moins que 0,9 ! Mais aucune ne sonne : 0,1 fois 0,1, égale 0,01. Une chance sur cent d'être en retard.",
+  "02-question": "Avec trois alarmes indépendantes qui sonnent 9 fois sur 10, quelle est la probabilité qu'aucune ne sonne ? Réponds en commentaire !"
+}

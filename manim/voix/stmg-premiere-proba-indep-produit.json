@@ -1,0 +1,12 @@
+{
+  "00-garde": "Deux événements indépendants : la règle du produit.",
+  "01-situation": "Une maison produit son électricité avec des panneaux solaires et une petite éolienne. Un jour donné, il fait soleil avec une probabilité de 0,7. Le vent souffle avec une probabilité de 0,4. On admet que soleil et vent sont indépendants.",
+  "02-arbre": "L'arbre. S, soleil : 0,7. S barre : 0,3. Puis V, le vent. Comme S et V sont indépendants, la branche vers V vaut 0,4 après S comme après S barre.",
+  "03-produit": "Soleil ET vent : le chemin S puis V. 0,7 fois 0,4, égale 0,28. Pour deux événements indépendants : P de S inter V égale P de S fois P de V.",
+  "04-pourquoi": "Pourquoi ? Indépendants, ça veut dire P indice S de V égale P de V. Sur la branche, on écrit donc 0,4, la probabilité simple. Et un chemin, c'est le produit de ses branches.",
+  "05-piege": "Le piège : appliquer la règle sans vérifier. Elle ne marche QUE pour des événements indépendants. Sinon, sur la branche, on met P indice A de B, pas P de B.",
+  "06-defi": "À toi de jouer. Quelle est la probabilité qu'il n'y ait ni soleil ni vent ? Mets pause, et cherche !",
+  "06b-correction": "Correction. S barre : 0,3. V barre : 1 moins 0,4, égale 0,6. Ils sont aussi indépendants : 0,3 fois 0,6, égale 0,18. Ce jour-là, la maison ne produit presque rien.",
+  "07-finale": "Ce que tu as appris. Si A et B sont indépendants, P de A inter B égale P de A fois P de B. Sur l'arbre, la même branche se répète après A et après A barre. Et la règle ne vaut que pour des événements indépendants. Prochaine vidéo : prouver que deux événements sont indépendants, ou pas.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}
