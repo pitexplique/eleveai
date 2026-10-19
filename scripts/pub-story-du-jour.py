@@ -277,4 +277,25 @@ if __name__ == "__main__":
         "3. Option : sticker « Lien » vers eleveai.fr sur la 2.\n",
         encoding="utf-8-sig",
     )
+    # La légende (19/10, Frédéric : « ajouter une légende »). Une story n'a pas de
+    # champ légende : le texte court se pose avec l'outil « Aa » ; le texte long
+    # sert si l'image part aussi en publication, sur Facebook ou dans WhatsApp.
+    une = jour["une"]
+    lignes_choix = "\n".join(f"{LETTRES[i]}. {c}" for i, c in enumerate(d["choix"]))
+    apprendre = f"\n📺 Aujourd'hui sur eleveai.fr ({une['classe']}) : {une['utile']}\n" if une.get("utile") else ""
+    (dossier / "legende.txt").write_text(
+        "TEXTE COURT (outil « Aa » de la story, sur la 1) :\n"
+        f"Défi niveau {d['classe']} : A, B ou C ? Réponse demain 🦎\n\n"
+        "TEXTE COURT (sur la 2) :\n"
+        "Tu avais trouvé ? 👉 eleveai.fr\n\n"
+        "LÉGENDE LONGUE (publication, Facebook, WhatsApp) :\n\n"
+        f"🦎 Le défi du jour de Ti Margo — niveau {d['classe']}\n\n"
+        f"{d['question']}\n\n"
+        f"{lignes_choix}\n\n"
+        "💬 Ta réponse en commentaire : A, B ou C ? La correction demain, en story.\n"
+        f"{apprendre}\n"
+        "👉 Des exercices et des vidéos gratuits, du CP à la Terminale : eleveai.fr\n\n"
+        "#maths #défidujour #collège #lycée #LaRéunion #974 #eleveai\n",
+        encoding="utf-8-sig",
+    )
     print(dossier)
