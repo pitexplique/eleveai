@@ -69,7 +69,8 @@ export const EDITION: UneJournal[] = [
   {
     date: "2026-10-19",
     paysage: "6e-aire-longueur-convertir-diagonale",
-    short: "6e-aire-longueur-short-diagonale",
+    // Le short Hugo Deck, publié le soir même (Frédéric : « mets-le ce soir »).
+    short: "6e-duree-temps-short-hugo-deck-diagonale",
     classe: "Diagonale des Fous · 6e",
     utile: "Pour passer des mètres aux centimètres, on multiplie par 100 : 1 000 m de montée, c'est 100 000 cm.",
     defi: {
@@ -91,7 +92,7 @@ export const EDITION: UneJournal[] = [
     // Une SHORT en Une : le dessin animé Ti Margo (« j'adore », 15/10).
     date: "2026-10-20",
     paysage: "5e-relatif-nombre-short-ti-margo-diagonale",
-    short: "6e-duree-temps-short-hugo-deck-diagonale",
+    short: "5e-relatif-nombre-short-montees-cachees",
     classe: "Diagonale des Fous · 5e",
     utile: "On compte les montées en + et les descentes en − : après 10 200 m de montée, l'arrivée n'est que 47 m plus haut que le départ.",
     chiffre: {
