@@ -33,7 +33,8 @@ import {
   Trophy,
   Users,
 } from "lucide-react";
-import { DEFIS, type Metier } from "@/lib/accueil/journal";
+import type { Metier } from "@/lib/accueil/journal";
+import { genererDefi } from "@/lib/accueil/defis";
 import RechercheEntete from "@/components/accueil/RechercheEntete";
 import BanniereCrpe from "@/components/accueil/BanniereCrpe";
 
@@ -102,6 +103,7 @@ const COULEUR_MAGAZINE = {
   rituels: "bg-cyan-100",
   atelier: "bg-red-200",
   grands: "bg-slate-200",
+  rdv: "bg-amber-100",
 } as const;
 
 type Rubrique = keyof typeof COULEUR_MAGAZINE;
@@ -288,7 +290,7 @@ function Manchette({ mise, date, numero }: { mise: Mise; date: string; numero: n
 
 /* ═══ LES RUBRIQUES ═══════════════════════════════════════════════════════ */
 
-type UneProps = { paysage: VideoJournal | null; short: VideoJournal | null; classe: string; utile: string };
+type UneProps = { paysage: VideoJournal | null; short: VideoJournal | null; classe: string; utile: string | null };
 
 function Une({ mise, une }: { mise: Mise; une: UneProps }) {
   const t = TON[mise];
@@ -303,10 +305,14 @@ function Une({ mise, une }: { mise: Mise; une: UneProps }) {
               {une.paysage.titre}
             </Lien>
           </h2>
-          <p className={`${t.texte} mt-3 leading-snug sm:text-lg`}>
-            <span className="font-black">Ce que tu vas apprendre : </span>
-            {une.utile}
-          </p>
+          {/* La phrase n'existe que pour les Unes écrites (l'édition de la
+              semaine) ; un tirage du catalogue n'invente rien. */}
+          {une.utile && (
+            <p className={`${t.texte} mt-3 leading-snug sm:text-lg`}>
+              <span className="font-black">Ce que tu vas apprendre : </span>
+              {une.utile}
+            </p>
+          )}
           <p className="mt-4">
             <Lien href={`/video/${une.paysage.id}`} quoi="une" mise={mise} className={t.lien}>
               Regarder la vidéo
@@ -326,18 +332,14 @@ function Une({ mise, une }: { mise: Mise; une: UneProps }) {
   );
 }
 
-function DefiDuJour({ mise, depart }: { mise: Mise; depart: number }) {
+function DefiDuJour({ mise, jour }: { mise: Mise; jour: number }) {
   const t = TON[mise];
-  const [i, setI] = useState(depart);
+  // Le défi du JOUR est celui de la graine `jour` ; « Un autre défi » avance la
+  // graine. Généré (lib/accueil/defis.ts) : jamais le même deux jours de suite.
+  const [i, setI] = useState(jour);
   const [choisi, setChoisi] = useState<number | null>(null);
-  const d = DEFIS[i % DEFIS.length];
-  // L'ordre affiché tourne avec le défi : la bonne réponse n'est pas toujours
-  // la première. Déterministe, donc identique au serveur et au client.
-  const ordre = useMemo(() => {
-    const k = d.choix.map((_, j) => j);
-    const r = i % k.length;
-    return [...k.slice(r), ...k.slice(0, r)];
-  }, [d, i]);
+  const d = useMemo(() => genererDefi(i), [i]);
+  const ordre = d.choix.map((_, j) => j);
   const juste = choisi === d.bonne;
 
   return (
@@ -360,7 +362,7 @@ function DefiDuJour({ mise, depart }: { mise: Mise; depart: number }) {
               disabled={montre}
               onClick={() => {
                 setChoisi(j);
-                track("journal_defi", { juste: j === d.bonne, classe: d.classe, mise });
+                track("journal_defi", { juste: j === d.bonne, classe: d.classe, mise, du_jour: i === jour });
               }}
               className={`rounded-xl border-2 px-4 py-2.5 text-left text-lg font-bold transition ${etat}`}
             >
@@ -397,6 +399,55 @@ function DefiDuJour({ mise, depart }: { mise: Mise; depart: number }) {
           </div>
         </div>
       )}
+    </Bloc>
+  );
+}
+
+/* ═══ LES RENDEZ-VOUS : DE QUOI REVENIR DEMAIN ══════════════════════════════
+   Frédéric, 19/10 : « les gens doivent revenir chaque jour ». Trois accroches
+   de quotidien : la réponse du défi d'HIER (on revient pour savoir si on avait
+   juste), la Une de DEMAIN (on revient pour la voir), et la SÉRIE de jours.
+   ⚠️ La série vit dans le navigateur (localStorage), sans compte : c'est une
+   commodité, elle peut repartir à zéro (navigation privée, autre appareil). */
+const CLE_SERIE = "eleveai.journal.serie";
+
+function RendezVous({ mise, jour, demain }: { mise: Mise; jour: number; demain: { titre: string; classe: string } }) {
+  const t = TON[mise];
+  const hier = useMemo(() => genererDefi(jour - 1), [jour]);
+  const [serie, setSerie] = useState<number | null>(null);
+
+  useEffect(() => {
+    let n = 1;
+    try {
+      const avant = JSON.parse(localStorage.getItem(CLE_SERIE) ?? "null") as { jour: number; serie: number } | null;
+      if (avant?.jour === jour) n = avant.serie;
+      else if (avant?.jour === jour - 1) n = avant.serie + 1;
+      localStorage.setItem(CLE_SERIE, JSON.stringify({ jour, serie: n }));
+    } catch {}
+    setSerie(n);
+  }, [jour]);
+
+  return (
+    <Bloc mise={mise} quoi="rdv" rubrique="Rendez-vous demain">
+      <div className="space-y-4">
+        <div>
+          <p className="text-xs font-black uppercase tracking-wide opacity-70">Demain à la Une · {demain.classe}</p>
+          <p className={`${t.titre} mt-1 text-lg leading-snug`}>{demain.titre}</p>
+        </div>
+        <div>
+          <p className="text-xs font-black uppercase tracking-wide opacity-70">La réponse du défi d&rsquo;hier</p>
+          <p className={`${t.texte} mt-1 leading-snug`}>
+            {hier.question} <span className="font-black">Réponse : {hier.choix[hier.bonne]}.</span>
+          </p>
+        </div>
+        {serie !== null && (
+          <p className={`${t.texte} rounded-xl bg-white/70 px-3 py-2 font-bold`}>
+            {serie > 1
+              ? `🔥 Ta série : ${serie} jours de suite. Reviens demain pour la faire grandir !`
+              : "🔥 Premier jour de ta série. Reviens demain pour la faire grandir !"}
+          </p>
+        )}
+      </div>
     </Bloc>
   );
 }
@@ -760,7 +811,8 @@ export default function JournalClient(props: {
   date: string;
   numero: number;
   une: UneProps;
-  defiDepart: number;
+  jour: number;
+  demain: { titre: string; classe: string };
   chiffre: { chiffre: string; texte: string };
   metier: Metier;
   shorts: VideoJournal[];
@@ -798,11 +850,12 @@ export default function JournalClient(props: {
   }
 
   const t = TON[mise];
-  const { date, numero, une, defiDepart, chiffre, metier, shorts, reel } = props;
+  const { date, numero, jour, une, demain, chiffre, metier, shorts, reel } = props;
 
   const blocs = {
     une: <Une mise={mise} une={une} />,
-    defi: <DefiDuJour mise={mise} depart={defiDepart} />,
+    defi: <DefiDuJour mise={mise} jour={jour} />,
+    rdv: <RendezVous mise={mise} jour={jour} demain={demain} />,
     chiffre: <Chiffre mise={mise} chiffre={chiffre} />,
     metier: <MetierDuJour mise={mise} metier={metier} />,
     coach: <Coach mise={mise} />,
@@ -842,6 +895,7 @@ export default function JournalClient(props: {
               <aside className="space-y-8 lg:col-span-4 lg:border-l lg:border-stone-300 lg:pl-8">
                 {blocs.defi}
                 {blocs.chiffre}
+                {blocs.rdv}
               </aside>
             </div>
             <div className="grid gap-8 lg:grid-cols-12">
@@ -869,6 +923,7 @@ export default function JournalClient(props: {
             {blocs.metier}
             <div className="lg:col-span-2">{blocs.reel}</div>
             <div className="lg:col-span-3">{blocs.shorts}</div>
+            <div className="lg:col-span-3">{blocs.rdv}</div>
             <div className="lg:col-span-2">{blocs.rituels}</div>
             {blocs.atelier}
             <div className="lg:col-span-3">{blocs.grands}</div>
@@ -881,6 +936,7 @@ export default function JournalClient(props: {
               {blocs.une}
             </div>
             {blocs.defi}
+            {blocs.rdv}
             {blocs.metier}
             {blocs.coach}
             {blocs.shorts}

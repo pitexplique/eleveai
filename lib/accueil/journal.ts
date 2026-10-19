@@ -15,10 +15,21 @@
 // ⛔ LES VIDÉOS SONT DÉSIGNÉES PAR LEUR ID DU MANIFESTE (lib/videos/videos-r2.json),
 // toutes vérifiées publiées le 18/10. Une vidéo absente de la table ne s'affiche
 // pas : la page lit `trouverVideo`, elle n'invente rien.
-// ⛔ La rotation se fait au JOUR DE L'ANNÉE, calculée côté serveur (la page est
-// régénérée toutes les heures) : pas de `new Date()` dans le rendu client.
+// ⛔ La rotation se fait au JOUR, calculée côté serveur (la page est régénérée
+// toutes les heures) : pas de `new Date()` dans le rendu client.
+//
+// ⭐⭐ LE RITUEL DE LA SEMAINE (Frédéric, 19/10 : « on la mettra à jour tous les
+// lundis matins ou dimanche soir »). Chaque semaine, on ajoute EN TÊTE de
+// `EDITION` les 7 Unes datées de la semaine qui vient, avec leur phrase « Ce que
+// tu vas apprendre » ; on peut aussi ajouter des chiffres et des métiers.
+// Un jour sans Une datée n'est PAS vide : app/accueil-journal/donnees.ts tire
+// alors une paysage de tout le catalogue. Le journal change donc chaque jour même
+// si une semaine est oubliée.
 
 export type UneJournal = {
+  /** « AAAA-MM-JJ » : le jour où cette Une passe en tête. Sans date, l'entrée
+   *  ne sert qu'à donner sa phrase « utile » quand le tirage tombe dessus. */
+  date?: string;
   /** La paysage : id du manifeste. */
   paysage: string;
   /** Son short jumeau, s'il existe. */
@@ -28,6 +39,60 @@ export type UneJournal = {
   utile: string;
 };
 
+/** L'ÉDITION DE LA SEMAINE : les Unes datées, la plus récente semaine en tête. */
+export const EDITION: UneJournal[] = [
+  // ── Semaine du lundi 19 au dimanche 25 octobre 2026 ──
+  {
+    date: "2026-10-19",
+    paysage: "6e-decimal-nombre",
+    short: "6e-decimal-nombre-short-zero",
+    classe: "6e",
+    utile: "0,7 est plus grand que 0,65 : on compare d'abord les dixièmes, pas le nombre de chiffres.",
+  },
+  {
+    date: "2026-10-20",
+    paysage: "4e-pythagore-hypotenuse",
+    short: "4e-pythagore-hypotenuse-short",
+    classe: "4e",
+    utile: "Dans un triangle rectangle, le carré de l'hypoténuse est égal à la somme des carrés des deux autres côtés.",
+  },
+  {
+    date: "2026-10-21",
+    paysage: "bases-pourcentages-calcul-mental",
+    short: "bases-pourcentages-calcul-mental-short",
+    classe: "Les bases",
+    utile: "Pour calculer 30 % de tête, on calcule d'abord 10 % (on divise par 10), puis on multiplie par 3.",
+  },
+  {
+    date: "2026-10-22",
+    paysage: "974-eau",
+    short: "974-eau-short-millimetre",
+    classe: "5e",
+    utile: "30 mm de pluie, c'est 30 litres d'eau tombés sur chaque mètre carré.",
+  },
+  {
+    date: "2026-10-23",
+    paysage: "bases-fonctions",
+    classe: "Les bases",
+    utile: "Une fonction associe à chaque nombre une seule image : c'est ce qui permet de prévoir.",
+  },
+  {
+    // Samedi : une vidéo de la playlist CRPE (pour les futurs professeurs des écoles).
+    date: "2026-10-24",
+    paysage: "3e-proba-vocabulaire",
+    short: "3e-proba-vocabulaire-short",
+    classe: "3e · CRPE",
+    utile: "Peu probable ne veut pas dire impossible : seul un événement impossible a une probabilité de 0.",
+  },
+  {
+    date: "2026-10-25",
+    paysage: "terminale-continuite-tvi",
+    classe: "Terminale",
+    utile: "Une courbe sans saut qui passe sous une valeur puis au-dessus la franchit forcément.",
+  },
+];
+
+/** Les phrases « utiles » des Unes sans date (le tirage automatique les reprend). */
 export const UNES: UneJournal[] = [
   {
     paysage: "974-eau",
@@ -90,119 +155,7 @@ export const MATHS_REEL = [
   "terminale-continuite-tvi",
 ];
 
-/* ── LE DÉFI DU JOUR ────────────────────────────────────────────────────────
-   ⛔ Règles du site appliquées ici : jamais deux choix de même valeur
-   (« 32 » ≠ « 32 000 »), « ÷ » et jamais 5/2 hors fractions, ×10 expliqué par
-   la valeur des chiffres, les billes pour la division. La réponse juste est
-   TOUJOURS `choix[bonne]` ; l'ordre affiché est mélangé par la page. */
-export type Defi = {
-  classe: string;
-  /** Ce que le coach attend dans `?classe=`. */
-  coach: string;
-  question: string;
-  choix: string[];
-  bonne: number;
-  explication: string;
-};
-
-export const DEFIS: Defi[] = [
-  {
-    classe: "6e",
-    coach: "6e",
-    question: "Combien font 3,5 × 10 ?",
-    choix: ["35", "3,50", "30,5"],
-    bonne: 0,
-    explication: "Chaque chiffre prend une valeur dix fois plus grande : 3 unités deviennent 3 dizaines, 5 dixièmes deviennent 5 unités. Donc 35.",
-  },
-  {
-    classe: "5e",
-    coach: "5e",
-    question: "Combien vaut 2 + 3 × 4 ?",
-    choix: ["14", "20", "24"],
-    bonne: 0,
-    explication: "La multiplication passe d'abord : 3 × 4 = 12, puis 2 + 12 = 14.",
-  },
-  {
-    classe: "CE2",
-    coach: "ce2",
-    question: "Combien font 12 ÷ 4 ?",
-    choix: ["3", "8", "48"],
-    bonne: 0,
-    explication: "12 billes rangées en 4 colonnes : 3 billes dans chaque colonne, car 3 × 4 = 12.",
-  },
-  {
-    classe: "4e",
-    coach: "4e",
-    question: "Un triangle rectangle a des côtés de l'angle droit de 3 cm et 4 cm. Combien mesure l'hypoténuse ?",
-    choix: ["5 cm", "7 cm", "25 cm"],
-    bonne: 0,
-    explication: "3² + 4² = 9 + 16 = 25, et le nombre positif dont le carré vaut 25 est 5.",
-  },
-  {
-    classe: "5e",
-    coach: "5e",
-    question: "Combien vaut (−3) + 7 ?",
-    choix: ["4", "−4", "10"],
-    bonne: 0,
-    explication: "Tu descends de 3, puis tu remontes de 7 : tu finis 4 au-dessus de zéro.",
-  },
-  {
-    classe: "2de",
-    coach: "seconde",
-    question: "Un prix de 80 € augmente de 25 %. Quel est le nouveau prix ?",
-    choix: ["100 €", "105 €", "85 €"],
-    bonne: 0,
-    explication: "25 %, c'est le quart : le quart de 80 € fait 20 €. 80 + 20 = 100 €.",
-  },
-  {
-    classe: "CM2",
-    coach: "cm2",
-    question: "Combien de minutes dans 1 h 30 ?",
-    choix: ["90", "130", "80"],
-    bonne: 0,
-    explication: "1 heure = 60 minutes, plus 30 minutes : 60 + 30 = 90 minutes.",
-  },
-  {
-    classe: "6e",
-    coach: "6e",
-    question: "Quel nombre est le plus grand ?",
-    choix: ["0,7", "0,65", "0,09"],
-    bonne: 0,
-    explication: "On compare les dixièmes : 7 dixièmes, contre 6 et 0. C'est 0,7 qui gagne, même s'il a moins de chiffres.",
-  },
-  {
-    classe: "3e",
-    coach: "3e",
-    question: "On lance un dé à 6 faces. Quelle est la probabilité d'obtenir un nombre pair ?",
-    choix: ["1 chance sur 2", "1 chance sur 3", "1 chance sur 6"],
-    bonne: 0,
-    explication: "Les pairs sont 2, 4 et 6 : trois faces sur six, soit une chance sur deux.",
-  },
-  {
-    classe: "CE1",
-    coach: "ce1",
-    question: "Combien font 7 + 8 ?",
-    choix: ["15", "14", "16"],
-    bonne: 0,
-    explication: "7 + 3 = 10, puis il reste 5 à ajouter : 10 + 5 = 15.",
-  },
-  {
-    classe: "4e",
-    coach: "4e",
-    question: "Combien vaut 2¹⁰ (2 multiplié par lui-même 10 fois) ?",
-    choix: ["1 024", "20", "100"],
-    bonne: 0,
-    explication: "2, 4, 8, 16, 32, 64, 128, 256, 512, 1 024 : on double dix fois.",
-  },
-  {
-    classe: "CM1",
-    coach: "cm1",
-    question: "Combien font 25 × 4 ?",
-    choix: ["100", "29", "90"],
-    bonne: 0,
-    explication: "Quatre pièces de 25 centimes font 1 euro, c'est-à-dire 100 centimes.",
-  },
-];
+/* ── LE DÉFI DU JOUR : voir lib/accueil/defis.ts (des générateurs, 19/10). ── */
 
 /* ── LE CHIFFRE DU JOUR ─────────────────────────────────────────────────────
    Repris de lib/chiffre-du-jour.ts (supprimé le 14/08, `git show 03aec7ac`).
@@ -221,6 +174,21 @@ export const CHIFFRES: { chiffre: string; texte: string }[] = [
   { chiffre: "≈ 165 km", texte: "La Diagonale des Fous : traverser La Réunion à pied avec près de 10 000 m de dénivelé. Les plus rapides le font en moins de 24 heures." },
   { chiffre: "2 200 m", texte: "L'altitude du Maïdo. En bas, on se baigne à 28 °C ; là-haut, certains matins d'hiver, il gèle." },
   { chiffre: "200 litres", texte: "Le lait que boit un baleineau chaque jour. Il grossit d'environ 45 kg par jour." },
+  // 19/10 : la banque passe de 12 à 26 chiffres, pour ne pas revenir avant un mois.
+  { chiffre: "86 400", texte: "Le nombre de secondes dans une journée : 24 × 60 × 60. Celle-ci vient de commencer." },
+  { chiffre: "5 050", texte: "La somme 1 + 2 + 3 + … + 100. Le petit Gauss l'aurait trouvée en quelques secondes : 50 paires qui font chacune 101." },
+  { chiffre: "23", texte: "Dans un groupe de 23 personnes, il y a plus d'une chance sur deux que deux d'entre elles aient le même anniversaire. Surprenant, mais vrai." },
+  { chiffre: "25", texte: "Le nombre de nombres premiers entre 1 et 100 : 2, 3, 5, 7, 11… jusqu'à 97." },
+  { chiffre: "3,14159…", texte: "Le nombre π : le tour d'un cercle divisé par son diamètre. Ses chiffres après la virgule ne s'arrêtent jamais." },
+  { chiffre: "1 litre", texte: "Le volume d'un cube de 10 cm de côté. Un litre, c'est exactement un décimètre cube." },
+  { chiffre: "≈ 30 km/s", texte: "La vitesse de la Terre autour du Soleil. Tu ne sens rien, et pourtant tu as parcouru plus de 1 000 km depuis une minute." },
+  { chiffre: "64", texte: "Les cases d'un échiquier. Un grain de riz sur la première, 2 sur la deuxième, 4 sur la troisième… sur la dernière, il en faudrait plus de 9 milliards de milliards." },
+  { chiffre: "1,414…", texte: "Le rapport entre la longueur et la largeur d'une feuille A4. Plie-la en deux : la moitié garde exactement la même forme." },
+  { chiffre: "0,999… = 1", texte: "Un zéro virgule suivi d'une infinité de 9 vaut exactement 1. Un tiers fait 0,333…, trois tiers font 0,999… et aussi 1." },
+  { chiffre: "6 côtés", texte: "Les alvéoles des abeilles sont des hexagones : la forme qui pave le plan avec le moins de cire pour le plus de place." },
+  { chiffre: "31 536 000", texte: "Le nombre de secondes dans une année de 365 jours. Ton prochain anniversaire est quelque part dedans." },
+  { chiffre: "100 000", texte: "À peu près le nombre de battements de ton cœur en une journée, à environ 70 battements par minute." },
+  { chiffre: "12", texte: "Le nombre de faces d'un dodécaèdre, l'un des cinq solides de Platon. Il n'en existe que cinq, et on sait le démontrer." },
 ];
 
 /* ── ET PLUS TARD ? LE MÉTIER DU JOUR ───────────────────────────────────────
@@ -294,11 +262,69 @@ export const METIERS: Metier[] = [
     notion: "Aires et longueurs · 6e",
     href: "/coach-ia/maths?classe=6e",
   },
+  // 19/10 : de 8 à 16 métiers.
+  {
+    nom: "Boulanger ou boulangère",
+    fait: "Fait le pain de tout le quartier, avant le lever du soleil.",
+    maths: "Une recette pour 10 baguettes, il en faut 60 : tout se multiplie par 6. C'est de la proportionnalité, tous les matins.",
+    notion: "Proportionnalité · 6e",
+    href: "/coach-ia/maths?classe=6e",
+  },
+  {
+    nom: "Pilote de ligne",
+    fait: "Emmène des centaines de passagers d'un continent à l'autre.",
+    maths: "Distance, vitesse, durée, carburant : avant chaque vol, tout se calcule et se vérifie deux fois.",
+    notion: "Vitesses et durées · 4e",
+    href: "/coach-ia/maths?classe=4e",
+  },
+  {
+    nom: "Agriculteur ou agricultrice",
+    fait: "Cultive la canne, les légumes, les fruits.",
+    maths: "Le rendement se compte en tonnes par hectare, et un champ se mesure en aires : le calcul fait partie du métier.",
+    notion: "Aires · 6e",
+    href: "/coach-ia/maths?classe=6e",
+  },
+  {
+    nom: "Pharmacien ou pharmacienne",
+    fait: "Délivre les médicaments et conseille les patients.",
+    maths: "Une concentration en mg par mL, une dose par kilo : la proportionnalité, encore, et sans droit à l'erreur.",
+    notion: "Proportionnalité · 4e",
+    href: "/coach-ia/maths?classe=4e",
+  },
+  {
+    nom: "Géomètre",
+    fait: "Mesure les terrains et trace les limites des parcelles.",
+    maths: "La hauteur d'un bâtiment ou la largeur d'une ravine, sans la traverser : avec un angle et la trigonométrie.",
+    notion: "Trigonométrie · 3e",
+    href: "/video/3e-trigo-trigonometrie",
+  },
+  {
+    nom: "Comptable",
+    fait: "Tient les comptes des entreprises et des associations.",
+    maths: "Pourcentages, taxes, évolutions : savoir qu'une hausse de 10 % puis une baisse de 10 % ne ramène pas au départ.",
+    notion: "Pourcentages · 4e",
+    href: "/video/4e-prop-pourcentages",
+  },
+  {
+    nom: "Cuisinier ou cuisinière",
+    fait: "Prépare des repas pour 4 personnes… ou pour 200.",
+    maths: "Passer une recette de 4 à 10 personnes, c'est multiplier chaque quantité par 2,5.",
+    notion: "Proportionnalité · 6e",
+    href: "/coach-ia/maths?classe=6e",
+  },
+  {
+    nom: "Chercheur ou chercheuse en IA",
+    fait: "Apprend aux machines à reconnaître, traduire, prévoir.",
+    maths: "Une IA ne « sait » rien : elle calcule des probabilités. Les comprendre, c'est savoir quand lui faire confiance.",
+    notion: "Probabilités · 3e",
+    href: "/video/3e-proba-vocabulaire",
+  },
 ];
 
-/** Le jour de l'année (1 → 366), à l'heure de Paris : sert à faire tourner
- *  les rubriques. Appelé côté SERVEUR seulement. */
-export function jourDeLAnnee(d = new Date()): number {
+/** Le numéro du jour, à l'heure de Paris : nombre de jours depuis le
+ *  1er janvier 1970. Sert à faire tourner TOUTES les rubriques — sans remise à
+ *  zéro au 1er janvier. Appelé côté SERVEUR seulement. */
+export function jourParis(d = new Date()): number {
   const p = new Intl.DateTimeFormat("en-CA", {
     timeZone: "Europe/Paris",
     year: "numeric",
@@ -306,5 +332,8 @@ export function jourDeLAnnee(d = new Date()): number {
     day: "2-digit",
   }).format(d); // « 2026-10-18 »
   const [a, m, j] = p.split("-").map(Number);
-  return Math.round((Date.UTC(a, m - 1, j) - Date.UTC(a, 0, 0)) / 86400000);
+  return Math.round(Date.UTC(a, m - 1, j) / 86400000);
 }
+
+/** Le N° 1 du journal : le 18/10/2026, jour où l'accueil est devenu un journal. */
+export const JOUR_DU_NUMERO_1 = Math.round(Date.UTC(2026, 9, 18) / 86400000);
