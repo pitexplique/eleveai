@@ -56,11 +56,20 @@ const parcourir = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap(
   e.isDirectory()
     ? e.name === "partial_movie_files" || e.name.startsWith("480p") ? [] : parcourir(path.join(dir, e.name))
     : e.name.endsWith(".mp4") ? [path.join(dir, e.name)] : []);
+// Les vidéos publiées AVANT le manifeste, téléchargées depuis YouTube (19/10) :
+// manim/sorties/<classe>/maths/youtube/<ID YouTube>.mp4, titre et format dans
+// manim/youtube-r2.json. Le coach les trouve par leur ID YouTube.
+const DEPUIS_YT = fs.existsSync(path.join(RACINE, "manim", "youtube-r2.json"))
+  ? JSON.parse(fs.readFileSync(path.join(RACINE, "manim", "youtube-r2.json"), "utf8"))
+  : {};
+
 let horsManifeste = 0;
 for (const abs of parcourir(SORTIES)) {
   const rel = path.relative(SORTIES, abs).split(path.sep).join("/");
   if (connus.has(rel)) continue;
-  const id = path.basename(rel, ".mp4").replace(/^eleveai-/, "");
+  const base = path.basename(rel, ".mp4");
+  const yt = /\/youtube\//.test(rel) && /^[\w-]{11}$/.test(base) ? base : null;
+  const id = yt ? `youtube-${yt}` : base.replace(/^eleveai-/, "");
   if (table[id]) continue;
   const voisine = rel.replace(/\.mp4$/, ".png");
   const poster = existe(voisine) ? voisine : null;
@@ -68,9 +77,9 @@ for (const abs of parcourir(SORTIES)) {
     fichier: rel,
     poster,
     vignette: vignetteDe(poster, rel),
-    titre: id.replace(/-/g, " "),
-    short: /\/shorts\//.test(rel) || /-short(-|$)/.test(id),
-    youtube: null,
+    titre: yt ? DEPUIS_YT[yt]?.titre ?? yt : id.replace(/-/g, " "),
+    short: yt ? Boolean(DEPUIS_YT[yt]?.short) : /\/shorts\//.test(rel) || /-short(-|$)/.test(id),
+    youtube: yt,
   };
   horsManifeste++;
 }
