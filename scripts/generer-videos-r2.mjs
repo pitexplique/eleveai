@@ -89,3 +89,6 @@ fs.writeFileSync(SORTIE, JSON.stringify(trie, null, 1) + "\n", "utf8");
 const publiees = Object.values(trie).filter((v) => v.youtube).length;
 console.log(`${Object.keys(trie).length} vidéos → ${path.relative(RACINE, SORTIE)} (${publiees} déjà sur YouTube, ${horsManifeste} hors manifeste)`);
 if (sansFichier) console.log(`${sansFichier} vidéos du manifeste sans MP4 dans manim/sorties`);
+
+// Les mots des titres, pour la recherche de l'en-tête (19/10/2026).
+await import("./generer-mots-videos.mjs");

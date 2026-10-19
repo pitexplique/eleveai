@@ -35,6 +35,7 @@ import { normaliser } from "./normaliser";
 import { PROFILS } from "./profils";
 import { displayParamForClasse } from "@/lib/tutor-v4/displayMode";
 import { PAGES_RECHERCHE, RESSOURCES, STATUTS_PUBLIABLES } from "./ressources";
+import MOTS_VIDEOS from "@/lib/videos/mots-videos.json";
 import type { ProfilId, TypeRessource } from "./types";
 
 export type Suggestion = {
@@ -393,18 +394,35 @@ export function suggerer(
   // d'autre chose, la première ligne ouvre la galerie déjà filtrée sur le reste.
   const motVideo = (m: string) => /^(vid|youtube|short)/.test(m);
   const reste = mots.filter((m) => !motVideo(m));
-  if (mots.some(motVideo) && reste.length > 0) {
-    const q = reste.join(" ");
-    return [
-      {
-        id: `videos-${q}`,
-        label: `Les vidéos : « ${q} »`,
-        matiereLabel: "EleveAI",
-        niveauLabel: "Vidéo",
-        url: `/video?q=${encodeURIComponent(q)}`,
-      },
-      ...trouvees.slice(0, PLAFOND - 1),
-    ];
+  const ligneVideo = (q: string): Suggestion => ({
+    id: `videos-${q}`,
+    label: `Les vidéos : « ${q} »`,
+    matiereLabel: "EleveAI",
+    niveauLabel: "Vidéo",
+    url: `/video?q=${encodeURIComponent(q)}`,
+  });
+  if (mots.some(motVideo)) {
+    // « vidéo » seul : la ligne « Toutes les vidéos » suffit (ressources.ts).
+    if (reste.length === 0) return trouvees;
+    // « vidéo pythagore » : la galerie filtrée d'abord, puis le coach sur le
+    // reste des mots (aucune notion ne porte le mot « vidéo »).
+    const coach = suggerer(reste.join(" "), profil, matiere).filter((x) => !x.id.startsWith("videos-"));
+    return [ligneVideo(reste.join(" ")), ...coach.slice(0, PLAFOND - 1)];
+  }
+
+  // ⭐ « PYTHAGORE » : LE COACH, ET AUSSI LA VIDÉO (19/10/2026). Frédéric :
+  // « quand tu tapes pythagore tu dois voir le coach mais aussi la vidéo ».
+  // La ligne n'apparaît que s'il EXISTE une vidéo publiée sur ces mots (index
+  // léger lib/videos/mots-videos.json, ~5 Ko : les mots des titres), et elle
+  // se place en DEUXIÈME, juste sous la meilleure notion du coach.
+  // ⚠️ Les classes courtes (« 6e ») ne comptent pas dans le test : la galerie
+  // les retrouve dans l'identifiant de la vidéo, pas dans son titre.
+  const aVerifier = mots.filter((m) => !CLASSES_COURTES.has(m));
+  const ilYAUneVideo =
+    aVerifier.length > 0 && aVerifier.every((q) => MOTS_VIDEOS.some((m) => m.startsWith(q)));
+  if (ilYAUneVideo) {
+    const ligne = ligneVideo(mots.join(" "));
+    return [...trouvees.slice(0, 1), ligne, ...trouvees.slice(1, PLAFOND - 1)];
   }
   return trouvees;
 }
