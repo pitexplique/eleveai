@@ -1,0 +1,13 @@
+{
+  "00-garde": "Construire un arbre pondéré à partir d'un énoncé.",
+  "01-enonce": "Lis l'énoncé. Dans une boulangerie, 70 % des clients viennent le matin. Le matin, 40 % des clients achètent un croissant. L'après-midi, seulement 15 %.",
+  "02-lettres": "Étape 1 : nommer les événements. M : « le client vient le matin ». C : « il achète un croissant ».",
+  "03-ordre": "Étape 2 : choisir l'ordre. « Le matin, 40 % achètent un croissant » : on se place d'abord parmi les clients du matin. Donc M au premier niveau, C au deuxième.",
+  "04-premier": "Étape 3 : le premier niveau. M : 0,7. M barre, l'après-midi : 1 moins 0,7, égale 0,3.",
+  "05-deuxieme": "Étape 4 : le deuxième niveau. Après M : C, 0,4, et C barre, 0,6. Après M barre : C, 0,15, et C barre, 0,85.",
+  "06-piege": "Le piège : mettre C au premier niveau. L'énoncé ne dit pas combien de clients achètent un croissant en tout. Il le dit pour le matin, puis pour l'après-midi : c'est le moment de la journée qui vient d'abord.",
+  "07-defi": "À toi de jouer. « 60 % des élèves ont un téléphone récent. Parmi eux, 90 % écoutent de la musique en ligne. Parmi les autres, 50 %. » Quel événement mets-tu au premier niveau ? Mets pause, et cherche !",
+  "07b-correction": "Correction. On se place d'abord parmi les élèves qui ont un téléphone récent. Premier niveau : R, 0,6, et R barre, 0,4. Après R : musique, 0,9. Après R barre : musique, 0,5.",
+  "08-finale": "Ce que tu as appris. Nommer les événements. Choisir l'ordre grâce à « parmi » ou « sachant ». Remplir le premier niveau, puis le deuxième. À chaque point, les branches font 1. Prochaine vidéo : calculer la probabilité d'un chemin.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

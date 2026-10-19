@@ -14180,6 +14180,1218 @@
         "ceinture jaune",
         "Shorts"
       ]
+    },
+    {
+      "id": "stmg-proba-arbre-lire",
+      "notionId": "proba_arbre",
+      "microId": "probaT_arbre_ponderer",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/07-arbre-lire/eleveai-maths-stmg-proba-arbre-lire.mp4",
+      "miniature": "stmg/maths/probabilites/07-arbre-lire/eleveai-maths-stmg-proba-arbre-lire.png",
+      "titre": "Le 0,6 de l'arbre = P(A) ? NON ! — Lire un arbre pondéré · Maths 1re · STMG",
+      "accroche": "Un magasin vend des vélos : 30 % des clients achètent un électrique. Parmi eux, 60 % prennent une assurance ; parmi les autres, 20 %.\n\nDans cette vidéo :\n• le premier niveau : 0,3 et 0,7, les branches d'un même point font 1\n• le deuxième niveau : 0,6 et 0,4 après E, 0,2 et 0,8 après E barre\n• que dit le 0,6 ? P_E(A), la probabilité de prendre l'assurance sachant E\n• le piège : au deuxième niveau, chaque branche est une probabilité conditionnelle\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : que dit le 0,8 ? Écris-le avec la notation P indice.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_arbre&microId=probaT_arbre_ponderer&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Lire un arbre pondéré"
+        ],
+        [
+          "00:05",
+          "Le magasin de vélos"
+        ],
+        [
+          "00:23",
+          "Premier niveau"
+        ],
+        [
+          "00:45",
+          "Deuxième niveau"
+        ],
+        [
+          "01:00",
+          "Que dit le 0,6 ?"
+        ],
+        [
+          "01:15",
+          "Le piège"
+        ],
+        [
+          "01:31",
+          "À toi de jouer"
+        ],
+        [
+          "01:43",
+          "Correction"
+        ],
+        [
+          "01:58",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:18",
+          "Le coach et l'abonnement"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "arbre pondéré",
+        "lire un arbre",
+        "vélo électrique",
+        "assurance",
+        "commerce",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-arbre-lire-short",
+      "notionId": "proba_arbre",
+      "microId": "probaT_arbre_ponderer",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-arbre-lire",
+      "fichier": "stmg/maths/probabilites/07-arbre-lire/eleveai-maths-stmg-proba-arbre-lire-short.mp4",
+      "miniature": "stmg/maths/probabilites/07-arbre-lire/eleveai-maths-stmg-proba-arbre-lire-short.png",
+      "titre": "90 % de ketchup… mais sur QUELLE branche ? 🍟 #Shorts",
+      "accroche": "Au self, 80 % des élèves prennent des frites, et parmi eux, 90 % prennent du ketchup. Premier niveau : frites, 0,8 ; pas de frites, 0,2. Le 90 % ne parle que de ceux qui ont des frites : il va APRÈS la branche frites. Frites, puis ketchup : 0,9, c'est P_F(K).\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : sur la branche juste à côté, frites puis pas de ketchup : quel nombre écris-tu ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_arbre&microId=probaT_arbre_ponderer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "self",
+        "frites",
+        "arbre pondéré",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-arbre-lire",
+      "notionId": "alea_arbre",
+      "microId": "alea_arbre_lire",
+      "classe": "premiere",
+      "ceinture": "bleue",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-arbre-lire",
+      "fichier": "premiere-commun/maths/probabilites/07-arbre-lire/eleveai-maths-premiere-commun-proba-arbre-lire.mp4",
+      "miniature": "premiere-commun/maths/probabilites/07-arbre-lire/eleveai-maths-premiere-commun-proba-arbre-lire.png",
+      "titre": "Le 0,6 de l'arbre = P(A) ? NON ! — Lire un arbre pondéré · Maths 1re · STMG",
+      "accroche": "Un magasin vend des vélos : 30 % des clients achètent un électrique. Parmi eux, 60 % prennent une assurance ; parmi les autres, 20 %.\n\nDans cette vidéo :\n• le premier niveau : 0,3 et 0,7, les branches d'un même point font 1\n• le deuxième niveau : 0,6 et 0,4 après E, 0,2 et 0,8 après E barre\n• que dit le 0,6 ? P_E(A), la probabilité de prendre l'assurance sachant E\n• le piège : au deuxième niveau, chaque branche est une probabilité conditionnelle\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : que dit le 0,8 ? Écris-le avec la notation P indice.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_arbre&microId=alea_arbre_lire&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Lire un arbre pondéré"
+        ],
+        [
+          "00:05",
+          "Le magasin de vélos"
+        ],
+        [
+          "00:23",
+          "Premier niveau"
+        ],
+        [
+          "00:45",
+          "Deuxième niveau"
+        ],
+        [
+          "01:00",
+          "Que dit le 0,6 ?"
+        ],
+        [
+          "01:15",
+          "Le piège"
+        ],
+        [
+          "01:31",
+          "À toi de jouer"
+        ],
+        [
+          "01:43",
+          "Correction"
+        ],
+        [
+          "01:58",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:18",
+          "Le coach et l'abonnement"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "arbre pondéré",
+        "lire un arbre",
+        "vélo électrique",
+        "assurance",
+        "commerce",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-arbre-lire-short",
+      "notionId": "alea_arbre",
+      "microId": "alea_arbre_lire",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-commun-proba-arbre-lire",
+      "meme_video_que": "stmg-proba-arbre-lire-short",
+      "fichier": "premiere-commun/maths/probabilites/07-arbre-lire/eleveai-maths-premiere-commun-proba-arbre-lire-short.mp4",
+      "miniature": "premiere-commun/maths/probabilites/07-arbre-lire/eleveai-maths-premiere-commun-proba-arbre-lire-short.png",
+      "titre": "90 % de ketchup… mais sur QUELLE branche ? 🍟 #Shorts",
+      "accroche": "Au self, 80 % des élèves prennent des frites, et parmi eux, 90 % prennent du ketchup. Premier niveau : frites, 0,8 ; pas de frites, 0,2. Le 90 % ne parle que de ceux qui ont des frites : il va APRÈS la branche frites. Frites, puis ketchup : 0,9, c'est P_F(K).\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : sur la branche juste à côté, frites puis pas de ketchup : quel nombre écris-tu ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_arbre&microId=alea_arbre_lire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "self",
+        "frites",
+        "arbre pondéré",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "stmg-proba-arbre-completer",
+      "notionId": "proba_arbre",
+      "microId": "probaT_arbre_completer",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/08-arbre-completer/eleveai-maths-stmg-proba-arbre-completer.mp4",
+      "miniature": "stmg/maths/probabilites/08-arbre-completer/eleveai-maths-stmg-proba-arbre-completer.png",
+      "titre": "0,3 sur la branche ? NON : 0,75 ! — Compléter un arbre pondéré · Maths 1re · STMG",
+      "accroche": "Une application de covoiturage : 40 % des trajets vont au travail, 90 % des autres arrivent à l'heure, et 30 % de tous les trajets vont au travail ET arrivent à l'heure. L'arbre a des trous : on les remplit.\n\nDans cette vidéo :\n• règle 1 : les branches d'un même point font 1, 1 − 0,4 = 0,6 et 1 − 0,9 = 0,1\n• règle 2 : un chemin est le produit de ses branches, 0,4 × ? = 0,3, donc ? = 0,3 ÷ 0,4 = 0,75\n• le dernier trou : 1 − 0,75 = 0,25\n• le piège : écrire 0,3, le chemin entier, sur la branche\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : P(A) = 0,5 et P(A ∩ B) = 0,2 : quelle probabilité écris-tu sur la branche de A vers B ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_arbre&microId=probaT_arbre_completer&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Compléter un arbre pondéré"
+        ],
+        [
+          "00:03",
+          "Le covoiturage"
+        ],
+        [
+          "00:23",
+          "L'arbre à trous"
+        ],
+        [
+          "00:39",
+          "Règle 1 : les branches d'un point font 1"
+        ],
+        [
+          "00:57",
+          "Règle 2 : un chemin, un produit"
+        ],
+        [
+          "01:16",
+          "Le dernier trou"
+        ],
+        [
+          "01:26",
+          "Le piège : le chemin sur la branche"
+        ],
+        [
+          "01:44",
+          "À toi de jouer"
+        ],
+        [
+          "02:01",
+          "Correction"
+        ],
+        [
+          "02:17",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:38",
+          "Le coach et l'abonnement"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "arbre pondéré",
+        "compléter un arbre",
+        "covoiturage",
+        "mobilité",
+        "écologie",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-arbre-completer-short",
+      "notionId": "proba_arbre",
+      "microId": "probaT_arbre_completer",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-arbre-completer",
+      "fichier": "stmg/maths/probabilites/08-arbre-completer/eleveai-maths-stmg-proba-arbre-completer-short.mp4",
+      "miniature": "stmg/maths/probabilites/08-arbre-completer/eleveai-maths-stmg-proba-arbre-completer-short.png",
+      "titre": "La branche effacée : tu la retrouves ? 🦆 #Shorts",
+      "accroche": "À la pêche aux canards, on gagne avec une probabilité de 0,35. Sur l'arbre, la branche « perdu » est effacée. Les deux branches partent du même point : ensemble, elles font 1. Perdu : 1 − 0,35 = 0,65. Même règle à chaque point de l'arbre !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : après « gagné », la branche « rejoue » vaut 0,8 : que vaut la branche « ne rejoue pas » ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_arbre&microId=probaT_arbre_completer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "pêche aux canards",
+        "fête foraine",
+        "arbre pondéré",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-arbre-completer",
+      "notionId": "alea_arbre",
+      "microId": "alea_arbre_completer",
+      "classe": "premiere",
+      "ceinture": "bleue",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-arbre-completer",
+      "fichier": "premiere-commun/maths/probabilites/08-arbre-completer/eleveai-maths-premiere-commun-proba-arbre-completer.mp4",
+      "miniature": "premiere-commun/maths/probabilites/08-arbre-completer/eleveai-maths-premiere-commun-proba-arbre-completer.png",
+      "titre": "0,3 sur la branche ? NON : 0,75 ! — Compléter un arbre pondéré · Maths 1re · STMG",
+      "accroche": "Une application de covoiturage : 40 % des trajets vont au travail, 90 % des autres arrivent à l'heure, et 30 % de tous les trajets vont au travail ET arrivent à l'heure. L'arbre a des trous : on les remplit.\n\nDans cette vidéo :\n• règle 1 : les branches d'un même point font 1, 1 − 0,4 = 0,6 et 1 − 0,9 = 0,1\n• règle 2 : un chemin est le produit de ses branches, 0,4 × ? = 0,3, donc ? = 0,3 ÷ 0,4 = 0,75\n• le dernier trou : 1 − 0,75 = 0,25\n• le piège : écrire 0,3, le chemin entier, sur la branche\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : P(A) = 0,5 et P(A ∩ B) = 0,2 : quelle probabilité écris-tu sur la branche de A vers B ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_arbre&microId=alea_arbre_completer&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Compléter un arbre pondéré"
+        ],
+        [
+          "00:03",
+          "Le covoiturage"
+        ],
+        [
+          "00:23",
+          "L'arbre à trous"
+        ],
+        [
+          "00:39",
+          "Règle 1 : les branches d'un point font 1"
+        ],
+        [
+          "00:57",
+          "Règle 2 : un chemin, un produit"
+        ],
+        [
+          "01:16",
+          "Le dernier trou"
+        ],
+        [
+          "01:26",
+          "Le piège : le chemin sur la branche"
+        ],
+        [
+          "01:44",
+          "À toi de jouer"
+        ],
+        [
+          "02:01",
+          "Correction"
+        ],
+        [
+          "02:17",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:38",
+          "Le coach et l'abonnement"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "arbre pondéré",
+        "compléter un arbre",
+        "covoiturage",
+        "mobilité",
+        "écologie",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-arbre-completer-short",
+      "notionId": "alea_arbre",
+      "microId": "alea_arbre_completer",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-commun-proba-arbre-completer",
+      "meme_video_que": "stmg-proba-arbre-completer-short",
+      "fichier": "premiere-commun/maths/probabilites/08-arbre-completer/eleveai-maths-premiere-commun-proba-arbre-completer-short.mp4",
+      "miniature": "premiere-commun/maths/probabilites/08-arbre-completer/eleveai-maths-premiere-commun-proba-arbre-completer-short.png",
+      "titre": "La branche effacée : tu la retrouves ? 🦆 #Shorts",
+      "accroche": "À la pêche aux canards, on gagne avec une probabilité de 0,35. Sur l'arbre, la branche « perdu » est effacée. Les deux branches partent du même point : ensemble, elles font 1. Perdu : 1 − 0,35 = 0,65. Même règle à chaque point de l'arbre !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : après « gagné », la branche « rejoue » vaut 0,8 : que vaut la branche « ne rejoue pas » ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_arbre&microId=alea_arbre_completer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "pêche aux canards",
+        "fête foraine",
+        "arbre pondéré",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "stmg-proba-arbre-construire",
+      "notionId": "proba_arbre",
+      "microId": "probaT_arbre_construire",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/09-arbre-construire/eleveai-maths-stmg-proba-arbre-construire.mp4",
+      "miniature": "stmg/maths/probabilites/09-arbre-construire/eleveai-maths-stmg-proba-arbre-construire.png",
+      "titre": "Croissant ou matin : qui va en premier ? — Construire un arbre pondéré · Maths 1re · STMG",
+      "accroche": "Dans une boulangerie, 70 % des clients viennent le matin. Le matin, 40 % achètent un croissant ; l'après-midi, seulement 15 %. Comment dessiner l'arbre ?\n\nDans cette vidéo :\n• étape 1 : nommer les événements, M et C\n• étape 2 : choisir l'ordre grâce à « parmi » ou « sachant »\n• étape 3 : le premier niveau, 0,7 et 1 − 0,7 = 0,3\n• étape 4 : le deuxième niveau, 0,4 et 0,6, puis 0,15 et 0,85\n• le piège : mettre C au premier niveau\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : « 60 % des élèves ont un téléphone récent ; parmi eux, 90 % écoutent de la musique en ligne ; parmi les autres, 50 % » : quel événement au premier niveau ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_arbre&microId=probaT_arbre_construire&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Construire un arbre pondéré"
+        ],
+        [
+          "00:05",
+          "L'énoncé : la boulangerie"
+        ],
+        [
+          "00:20",
+          "Étape 1 : nommer les événements"
+        ],
+        [
+          "00:30",
+          "Étape 2 : choisir l'ordre"
+        ],
+        [
+          "00:44",
+          "Étape 3 : le premier niveau"
+        ],
+        [
+          "00:56",
+          "Étape 4 : le deuxième niveau"
+        ],
+        [
+          "01:13",
+          "Le piège : C au premier niveau"
+        ],
+        [
+          "01:28",
+          "À toi de jouer"
+        ],
+        [
+          "01:49",
+          "Correction"
+        ],
+        [
+          "02:10",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:30",
+          "Le coach et l'abonnement"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "arbre pondéré",
+        "construire un arbre",
+        "énoncé",
+        "boulangerie",
+        "commerce",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-arbre-construire-short",
+      "notionId": "proba_arbre",
+      "microId": "probaT_arbre_construire",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-arbre-construire",
+      "fichier": "stmg/maths/probabilites/09-arbre-construire/eleveai-maths-stmg-proba-arbre-construire-short.mp4",
+      "miniature": "stmg/maths/probabilites/09-arbre-construire/eleveai-maths-stmg-proba-arbre-construire-short.png",
+      "titre": "Entraînement ou arrivée : qui passe en premier ? ⛰️ #Shorts",
+      "accroche": "Au trail, 80 % des coureurs s'entraînent en montagne, et parmi eux, 75 % finissent la course. « Parmi eux » : on se place d'abord parmi les coureurs entraînés. Premier niveau : entraîné, 0,8, ou pas, 0,2. Puis, après « entraîné » : finit, 0,75.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : parmi les coureurs pas entraînés en montagne, 25 % finissent : après quelle branche écris-tu ce 0,25 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_arbre&microId=probaT_arbre_construire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "trail",
+        "montagne",
+        "course",
+        "arbre pondéré",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-arbre-construire",
+      "notionId": "alea_arbre",
+      "microId": "alea_arbre_construire",
+      "classe": "premiere",
+      "ceinture": "bleue",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-arbre-construire",
+      "fichier": "premiere-commun/maths/probabilites/09-arbre-construire/eleveai-maths-premiere-commun-proba-arbre-construire.mp4",
+      "miniature": "premiere-commun/maths/probabilites/09-arbre-construire/eleveai-maths-premiere-commun-proba-arbre-construire.png",
+      "titre": "Croissant ou matin : qui va en premier ? — Construire un arbre pondéré · Maths 1re · STMG",
+      "accroche": "Dans une boulangerie, 70 % des clients viennent le matin. Le matin, 40 % achètent un croissant ; l'après-midi, seulement 15 %. Comment dessiner l'arbre ?\n\nDans cette vidéo :\n• étape 1 : nommer les événements, M et C\n• étape 2 : choisir l'ordre grâce à « parmi » ou « sachant »\n• étape 3 : le premier niveau, 0,7 et 1 − 0,7 = 0,3\n• étape 4 : le deuxième niveau, 0,4 et 0,6, puis 0,15 et 0,85\n• le piège : mettre C au premier niveau\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : « 60 % des élèves ont un téléphone récent ; parmi eux, 90 % écoutent de la musique en ligne ; parmi les autres, 50 % » : quel événement au premier niveau ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_arbre&microId=alea_arbre_construire&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Construire un arbre pondéré"
+        ],
+        [
+          "00:05",
+          "L'énoncé : la boulangerie"
+        ],
+        [
+          "00:20",
+          "Étape 1 : nommer les événements"
+        ],
+        [
+          "00:30",
+          "Étape 2 : choisir l'ordre"
+        ],
+        [
+          "00:44",
+          "Étape 3 : le premier niveau"
+        ],
+        [
+          "00:56",
+          "Étape 4 : le deuxième niveau"
+        ],
+        [
+          "01:13",
+          "Le piège : C au premier niveau"
+        ],
+        [
+          "01:28",
+          "À toi de jouer"
+        ],
+        [
+          "01:49",
+          "Correction"
+        ],
+        [
+          "02:10",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:30",
+          "Le coach et l'abonnement"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "arbre pondéré",
+        "construire un arbre",
+        "énoncé",
+        "boulangerie",
+        "commerce",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-arbre-construire-short",
+      "notionId": "alea_arbre",
+      "microId": "alea_arbre_construire",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-commun-proba-arbre-construire",
+      "meme_video_que": "stmg-proba-arbre-construire-short",
+      "fichier": "premiere-commun/maths/probabilites/09-arbre-construire/eleveai-maths-premiere-commun-proba-arbre-construire-short.mp4",
+      "miniature": "premiere-commun/maths/probabilites/09-arbre-construire/eleveai-maths-premiere-commun-proba-arbre-construire-short.png",
+      "titre": "Entraînement ou arrivée : qui passe en premier ? ⛰️ #Shorts",
+      "accroche": "Au trail, 80 % des coureurs s'entraînent en montagne, et parmi eux, 75 % finissent la course. « Parmi eux » : on se place d'abord parmi les coureurs entraînés. Premier niveau : entraîné, 0,8, ou pas, 0,2. Puis, après « entraîné » : finit, 0,75.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : parmi les coureurs pas entraînés en montagne, 25 % finissent : après quelle branche écris-tu ce 0,25 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_arbre&microId=alea_arbre_construire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "trail",
+        "montagne",
+        "course",
+        "arbre pondéré",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "stmg-proba-chemin",
+      "notionId": "proba_arbre_calcul",
+      "microId": "probaT_chemin",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/10-chemin/eleveai-maths-stmg-proba-chemin.mp4",
+      "miniature": "stmg/maths/probabilites/10-chemin/eleveai-maths-stmg-proba-chemin.png",
+      "titre": "0,6 + 0,7 = 1,3 ? IMPOSSIBLE ! — La probabilité d'un chemin · Maths 1re · STMG",
+      "accroche": "Un centre de tri : 60 % des bouteilles sont en plastique, et parmi elles 70 % sont recyclées. Quelle est la probabilité qu'une bouteille soit en plastique ET recyclée ?\n\nDans cette vidéo :\n• « et » sur un arbre, c'est un chemin : P(P ∩ R)\n• on multiplie les branches : 0,6 × 0,7 = 0,42\n• pourquoi multiplier : sur 100 bouteilles, 70 % de 60, ça fait 42\n• le piège : additionner, 0,6 + 0,7 = 1,3, plus que 1 !\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : quelle est la probabilité qu'une bouteille soit en verre ET recyclée ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_arbre_calcul&microId=probaT_chemin&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "La probabilité d'un chemin"
+        ],
+        [
+          "00:05",
+          "Le centre de tri"
+        ],
+        [
+          "00:22",
+          "L'arbre pondéré"
+        ],
+        [
+          "00:41",
+          "Plastique ET recyclée"
+        ],
+        [
+          "00:54",
+          "On multiplie le long du chemin"
+        ],
+        [
+          "01:05",
+          "Pourquoi multiplier (100 bouteilles)"
+        ],
+        [
+          "01:26",
+          "Le piège : additionner"
+        ],
+        [
+          "01:41",
+          "À toi de jouer"
+        ],
+        [
+          "01:52",
+          "Correction"
+        ],
+        [
+          "02:03",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:22",
+          "Le coach et l'abonnement"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "arbre pondéré",
+        "chemin",
+        "multiplier",
+        "recyclage",
+        "écologie",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-chemin-short",
+      "notionId": "proba_arbre_calcul",
+      "microId": "probaT_chemin",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-chemin",
+      "fichier": "stmg/maths/probabilites/10-chemin/eleveai-maths-stmg-proba-chemin-short.mp4",
+      "miniature": "stmg/maths/probabilites/10-chemin/eleveai-maths-stmg-proba-chemin-short.png",
+      "titre": "Deux feux verts : 0,5 + 0,8 ? 🚦 #Shorts",
+      "accroche": "Deux feux sur ta route. Le premier est vert avec une probabilité de 0,5 ; s'il est vert, le second l'est aussi avec 0,8. Deux feux verts : 0,5 + 0,8 = 1,3 ? Impossible ! On suit le chemin vert, puis vert, et on multiplie : 0,5 × 0,8 = 0,4.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : si le premier est rouge, le second est vert avec 0,3 : quelle est la probabilité d'avoir rouge, puis vert ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_arbre_calcul&microId=probaT_chemin&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "feux tricolores",
+        "route",
+        "chemin",
+        "arbre pondéré",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-chemin",
+      "notionId": "alea_arbre_calcul",
+      "microId": "alea_arbre_chemin",
+      "classe": "premiere",
+      "ceinture": "bleue",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-chemin",
+      "fichier": "premiere-commun/maths/probabilites/10-chemin/eleveai-maths-premiere-commun-proba-chemin.mp4",
+      "miniature": "premiere-commun/maths/probabilites/10-chemin/eleveai-maths-premiere-commun-proba-chemin.png",
+      "titre": "0,6 + 0,7 = 1,3 ? IMPOSSIBLE ! — La probabilité d'un chemin · Maths 1re · STMG",
+      "accroche": "Un centre de tri : 60 % des bouteilles sont en plastique, et parmi elles 70 % sont recyclées. Quelle est la probabilité qu'une bouteille soit en plastique ET recyclée ?\n\nDans cette vidéo :\n• « et » sur un arbre, c'est un chemin : P(P ∩ R)\n• on multiplie les branches : 0,6 × 0,7 = 0,42\n• pourquoi multiplier : sur 100 bouteilles, 70 % de 60, ça fait 42\n• le piège : additionner, 0,6 + 0,7 = 1,3, plus que 1 !\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : quelle est la probabilité qu'une bouteille soit en verre ET recyclée ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_arbre_calcul&microId=alea_arbre_chemin&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "La probabilité d'un chemin"
+        ],
+        [
+          "00:05",
+          "Le centre de tri"
+        ],
+        [
+          "00:22",
+          "L'arbre pondéré"
+        ],
+        [
+          "00:41",
+          "Plastique ET recyclée"
+        ],
+        [
+          "00:54",
+          "On multiplie le long du chemin"
+        ],
+        [
+          "01:05",
+          "Pourquoi multiplier (100 bouteilles)"
+        ],
+        [
+          "01:26",
+          "Le piège : additionner"
+        ],
+        [
+          "01:41",
+          "À toi de jouer"
+        ],
+        [
+          "01:52",
+          "Correction"
+        ],
+        [
+          "02:03",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:22",
+          "Le coach et l'abonnement"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "arbre pondéré",
+        "chemin",
+        "multiplier",
+        "recyclage",
+        "écologie",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-chemin-short",
+      "notionId": "alea_arbre_calcul",
+      "microId": "alea_arbre_chemin",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-commun-proba-chemin",
+      "meme_video_que": "stmg-proba-chemin-short",
+      "fichier": "premiere-commun/maths/probabilites/10-chemin/eleveai-maths-premiere-commun-proba-chemin-short.mp4",
+      "miniature": "premiere-commun/maths/probabilites/10-chemin/eleveai-maths-premiere-commun-proba-chemin-short.png",
+      "titre": "Deux feux verts : 0,5 + 0,8 ? 🚦 #Shorts",
+      "accroche": "Deux feux sur ta route. Le premier est vert avec une probabilité de 0,5 ; s'il est vert, le second l'est aussi avec 0,8. Deux feux verts : 0,5 + 0,8 = 1,3 ? Impossible ! On suit le chemin vert, puis vert, et on multiplie : 0,5 × 0,8 = 0,4.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : si le premier est rouge, le second est vert avec 0,3 : quelle est la probabilité d'avoir rouge, puis vert ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_arbre_calcul&microId=alea_arbre_chemin&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "feux tricolores",
+        "route",
+        "chemin",
+        "arbre pondéré",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "stmg-proba-somme-chemins",
+      "notionId": "proba_arbre_calcul",
+      "microId": "probaT_somme_chemins",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/11-somme-chemins/eleveai-maths-stmg-proba-somme-chemins.mp4",
+      "miniature": "stmg/maths/probabilites/11-somme-chemins/eleveai-maths-stmg-proba-somme-chemins.png",
+      "titre": "(0,1 + 0,4) ÷ 2 ? FAUX ! — Plusieurs chemins : on additionne · Maths 1re · STMG",
+      "accroche": "Une entreprise livre des colis : 70 % partent de Saint-Pierre, 30 % de Saint-Denis. Depuis Saint-Pierre, 10 % arrivent en retard ; depuis Saint-Denis, 40 %. Quelle est la probabilité qu'un colis arrive en retard ?\n\nDans cette vidéo :\n• deux chemins mènent à R\n• on multiplie chaque chemin : 0,7 × 0,1 = 0,07 et 0,3 × 0,4 = 0,12\n• on additionne : 0,07 + 0,12 = 0,19\n• le piège : faire la moyenne, (0,1 + 0,4) ÷ 2 = 0,25\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : quelle est la probabilité qu'un colis arrive à l'heure ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_arbre_calcul&microId=probaT_somme_chemins&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Plusieurs chemins"
+        ],
+        [
+          "00:05",
+          "Les colis et les deux entrepôts"
+        ],
+        [
+          "00:22",
+          "L'arbre pondéré"
+        ],
+        [
+          "00:40",
+          "La question : deux chemins vers R"
+        ],
+        [
+          "00:49",
+          "Chaque chemin : on multiplie"
+        ],
+        [
+          "01:06",
+          "On additionne : 0,19"
+        ],
+        [
+          "01:19",
+          "Le piège de la moyenne"
+        ],
+        [
+          "01:39",
+          "À toi de jouer"
+        ],
+        [
+          "01:49",
+          "Correction"
+        ],
+        [
+          "02:18",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:34",
+          "Le coach et l'abonnement"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "arbre pondéré",
+        "probabilités totales",
+        "somme de chemins",
+        "livraison",
+        "Saint-Pierre",
+        "Saint-Denis",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-somme-chemins-short",
+      "notionId": "proba_arbre_calcul",
+      "microId": "probaT_somme_chemins",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-somme-chemins",
+      "fichier": "stmg/maths/probabilites/11-somme-chemins/eleveai-maths-stmg-proba-somme-chemins-short.mp4",
+      "miniature": "stmg/maths/probabilites/11-somme-chemins/eleveai-maths-stmg-proba-somme-chemins-short.png",
+      "titre": "La moyenne, 0,3 ? Non : 0,18 ! 🎡 #Shorts",
+      "accroche": "La roue tombe sur l'or une fois sur cinq : 0,2. Alors tu pioches dans le sac rouge : 0,5 de gagner. Sinon, dans le sac bleu : 0,1. Ta chance de gagner, la moyenne, 0,3 ? Non ! Or puis gagné : 0,2 × 0,5 = 0,1. Gris puis gagné : 0,8 × 0,1 = 0,08. On additionne : 0,1 + 0,08 = 0,18.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : et si la roue tombait sur l'or une fois sur deux, 0,5 : quelle serait ta chance de gagner ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_arbre_calcul&microId=probaT_somme_chemins&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "roue",
+        "jeu",
+        "sac de billes",
+        "probabilités totales",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-somme-chemins",
+      "notionId": "alea_arbre_calcul",
+      "microId": "alea_arbre_somme_chemins",
+      "classe": "premiere",
+      "ceinture": "bleue",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-somme-chemins",
+      "fichier": "premiere-commun/maths/probabilites/11-somme-chemins/eleveai-maths-premiere-commun-proba-somme-chemins.mp4",
+      "miniature": "premiere-commun/maths/probabilites/11-somme-chemins/eleveai-maths-premiere-commun-proba-somme-chemins.png",
+      "titre": "(0,1 + 0,4) ÷ 2 ? FAUX ! — Plusieurs chemins : on additionne · Maths 1re · STMG",
+      "accroche": "Une entreprise livre des colis : 70 % partent de Saint-Pierre, 30 % de Saint-Denis. Depuis Saint-Pierre, 10 % arrivent en retard ; depuis Saint-Denis, 40 %. Quelle est la probabilité qu'un colis arrive en retard ?\n\nDans cette vidéo :\n• deux chemins mènent à R\n• on multiplie chaque chemin : 0,7 × 0,1 = 0,07 et 0,3 × 0,4 = 0,12\n• on additionne : 0,07 + 0,12 = 0,19\n• le piège : faire la moyenne, (0,1 + 0,4) ÷ 2 = 0,25\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : quelle est la probabilité qu'un colis arrive à l'heure ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_arbre_calcul&microId=alea_arbre_somme_chemins&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Plusieurs chemins"
+        ],
+        [
+          "00:05",
+          "Les colis et les deux entrepôts"
+        ],
+        [
+          "00:22",
+          "L'arbre pondéré"
+        ],
+        [
+          "00:40",
+          "La question : deux chemins vers R"
+        ],
+        [
+          "00:49",
+          "Chaque chemin : on multiplie"
+        ],
+        [
+          "01:06",
+          "On additionne : 0,19"
+        ],
+        [
+          "01:19",
+          "Le piège de la moyenne"
+        ],
+        [
+          "01:39",
+          "À toi de jouer"
+        ],
+        [
+          "01:49",
+          "Correction"
+        ],
+        [
+          "02:18",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:34",
+          "Le coach et l'abonnement"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "arbre pondéré",
+        "probabilités totales",
+        "somme de chemins",
+        "livraison",
+        "Saint-Pierre",
+        "Saint-Denis",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-somme-chemins-short",
+      "notionId": "alea_arbre_calcul",
+      "microId": "alea_arbre_somme_chemins",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-commun-proba-somme-chemins",
+      "meme_video_que": "stmg-proba-somme-chemins-short",
+      "fichier": "premiere-commun/maths/probabilites/11-somme-chemins/eleveai-maths-premiere-commun-proba-somme-chemins-short.mp4",
+      "miniature": "premiere-commun/maths/probabilites/11-somme-chemins/eleveai-maths-premiere-commun-proba-somme-chemins-short.png",
+      "titre": "La moyenne, 0,3 ? Non : 0,18 ! 🎡 #Shorts",
+      "accroche": "La roue tombe sur l'or une fois sur cinq : 0,2. Alors tu pioches dans le sac rouge : 0,5 de gagner. Sinon, dans le sac bleu : 0,1. Ta chance de gagner, la moyenne, 0,3 ? Non ! Or puis gagné : 0,2 × 0,5 = 0,1. Gris puis gagné : 0,8 × 0,1 = 0,08. On additionne : 0,1 + 0,08 = 0,18.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : et si la roue tombait sur l'or une fois sur deux, 0,5 : quelle serait ta chance de gagner ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_arbre_calcul&microId=alea_arbre_somme_chemins&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "roue",
+        "jeu",
+        "sac de billes",
+        "probabilités totales",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "stmg-proba-arbre-tableau",
+      "notionId": "proba_arbre_calcul",
+      "microId": "probaT_arbre_vers_tableau",
+      "classe": "stmg",
+      "ceinture": "marron",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/12-arbre-tableau/eleveai-maths-stmg-proba-arbre-tableau.mp4",
+      "miniature": "stmg/maths/probabilites/12-arbre-tableau/eleveai-maths-stmg-proba-arbre-tableau.png",
+      "titre": "360 sur 510 : nulle part sur l'arbre ! — De l'arbre au tableau croisé · Maths 1re · STMG",
+      "accroche": "À La Réunion, beaucoup de maisons ont un chauffe-eau solaire. Dans une commune, 40 % en ont un ; parmi elles, 90 % ont vu leur facture baisser ; parmi les autres, 25 %.\n\nDans cette vidéo :\n• de l'arbre au tableau : on prend 1 000 maisons, chaque case est un chemin (360, 40, 150, 450)\n• la colonne B : 360 + 150 = 510\n• du tableau à l'arbre : une branche, c'est une case divisée par le total de sa ligne, 360 sur 400 = 0,9\n• le piège : le tableau répond à la question inverse, 360 sur 510 ≈ 0,71\n\n🥋 Ceinture marron.\nUn défi en fin de vidéo, avec sa correction : avec le tableau, quelle est la probabilité qu'une maison sans chauffe-eau solaire n'ait pas vu sa facture baisser ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_arbre_calcul&microId=probaT_arbre_vers_tableau&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "De l'arbre au tableau, et retour"
+        ],
+        [
+          "00:04",
+          "Le chauffe-eau solaire"
+        ],
+        [
+          "00:21",
+          "L'arbre pondéré"
+        ],
+        [
+          "00:38",
+          "On prend 1 000 maisons"
+        ],
+        [
+          "00:50",
+          "Chaque chemin, une case"
+        ],
+        [
+          "01:10",
+          "La colonne B : 510"
+        ],
+        [
+          "01:21",
+          "Du tableau à l'arbre"
+        ],
+        [
+          "01:35",
+          "Le piège : la question inverse"
+        ],
+        [
+          "01:58",
+          "À toi de jouer"
+        ],
+        [
+          "02:12",
+          "Correction"
+        ],
+        [
+          "02:31",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:49",
+          "Le coach et l'abonnement"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "arbre pondéré",
+        "tableau croisé",
+        "chauffe-eau solaire",
+        "La Réunion",
+        "énergie",
+        "écologie",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-arbre-tableau-short",
+      "notionId": "proba_arbre_calcul",
+      "microId": "probaT_arbre_vers_tableau",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-arbre-tableau",
+      "fichier": "stmg/maths/probabilites/12-arbre-tableau/eleveai-maths-stmg-proba-arbre-tableau-short.mp4",
+      "miniature": "stmg/maths/probabilites/12-arbre-tableau/eleveai-maths-stmg-proba-arbre-tableau-short.png",
+      "titre": "Un chemin de l'arbre = une case du tableau 😴 #Shorts",
+      "accroche": "Un arbre, ça se transforme en tableau ? Oui, avec 100 personnes ! 30 % font du sport, et parmi eux, 80 % dorment bien. Sur 100 personnes : 30 font du sport. 80 % de 30, ça fait 24 : sport ET bien dormi. Le chemin de l'arbre devient une case du tableau : 24.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : parmi les 70 autres, 50 % dorment bien : combien de personnes dorment bien en tout ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_arbre_calcul&microId=probaT_arbre_vers_tableau&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "sport",
+        "sommeil",
+        "tableau croisé",
+        "arbre pondéré",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-arbre-tableau",
+      "notionId": "alea_arbre_calcul",
+      "microId": "alea_arbre_vers_tableau",
+      "classe": "premiere",
+      "ceinture": "marron",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-arbre-tableau",
+      "fichier": "premiere-commun/maths/probabilites/12-arbre-tableau/eleveai-maths-premiere-commun-proba-arbre-tableau.mp4",
+      "miniature": "premiere-commun/maths/probabilites/12-arbre-tableau/eleveai-maths-premiere-commun-proba-arbre-tableau.png",
+      "titre": "360 sur 510 : nulle part sur l'arbre ! — De l'arbre au tableau croisé · Maths 1re · STMG",
+      "accroche": "À La Réunion, beaucoup de maisons ont un chauffe-eau solaire. Dans une commune, 40 % en ont un ; parmi elles, 90 % ont vu leur facture baisser ; parmi les autres, 25 %.\n\nDans cette vidéo :\n• de l'arbre au tableau : on prend 1 000 maisons, chaque case est un chemin (360, 40, 150, 450)\n• la colonne B : 360 + 150 = 510\n• du tableau à l'arbre : une branche, c'est une case divisée par le total de sa ligne, 360 sur 400 = 0,9\n• le piège : le tableau répond à la question inverse, 360 sur 510 ≈ 0,71\n\n🥋 Ceinture marron.\nUn défi en fin de vidéo, avec sa correction : avec le tableau, quelle est la probabilité qu'une maison sans chauffe-eau solaire n'ait pas vu sa facture baisser ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_arbre_calcul&microId=alea_arbre_vers_tableau&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "De l'arbre au tableau, et retour"
+        ],
+        [
+          "00:04",
+          "Le chauffe-eau solaire"
+        ],
+        [
+          "00:21",
+          "L'arbre pondéré"
+        ],
+        [
+          "00:38",
+          "On prend 1 000 maisons"
+        ],
+        [
+          "00:50",
+          "Chaque chemin, une case"
+        ],
+        [
+          "01:10",
+          "La colonne B : 510"
+        ],
+        [
+          "01:21",
+          "Du tableau à l'arbre"
+        ],
+        [
+          "01:35",
+          "Le piège : la question inverse"
+        ],
+        [
+          "01:58",
+          "À toi de jouer"
+        ],
+        [
+          "02:12",
+          "Correction"
+        ],
+        [
+          "02:31",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:49",
+          "Le coach et l'abonnement"
+        ]
+      ],
+      "tags": [
+        "probabilités",
+        "arbre pondéré",
+        "tableau croisé",
+        "chauffe-eau solaire",
+        "La Réunion",
+        "énergie",
+        "écologie",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-arbre-tableau-short",
+      "notionId": "alea_arbre_calcul",
+      "microId": "alea_arbre_vers_tableau",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-commun-proba-arbre-tableau",
+      "meme_video_que": "stmg-proba-arbre-tableau-short",
+      "fichier": "premiere-commun/maths/probabilites/12-arbre-tableau/eleveai-maths-premiere-commun-proba-arbre-tableau-short.mp4",
+      "miniature": "premiere-commun/maths/probabilites/12-arbre-tableau/eleveai-maths-premiere-commun-proba-arbre-tableau-short.png",
+      "titre": "Un chemin de l'arbre = une case du tableau 😴 #Shorts",
+      "accroche": "Un arbre, ça se transforme en tableau ? Oui, avec 100 personnes ! 30 % font du sport, et parmi eux, 80 % dorment bien. Sur 100 personnes : 30 font du sport. 80 % de 30, ça fait 24 : sport ET bien dormi. Le chemin de l'arbre devient une case du tableau : 24.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : parmi les 70 autres, 50 % dorment bien : combien de personnes dorment bien en tout ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_arbre_calcul&microId=alea_arbre_vers_tableau&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "sport",
+        "sommeil",
+        "tableau croisé",
+        "arbre pondéré",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
     }
   ]
 }

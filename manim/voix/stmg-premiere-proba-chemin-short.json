@@ -1,0 +1,5 @@
+{
+  "00-accroche": "Deux feux sur ta route. Le premier est vert avec une probabilité de 0,5. S'il est vert, le second l'est aussi avec 0,8. Deux feux verts : 0,5 plus 0,8 ?",
+  "01-image": "Non : 1,3, c'est impossible ! On suit le chemin vert, puis vert, et on multiplie : 0,5 fois 0,8, égale 0,4. Moins d'une chance sur deux.",
+  "02-question": "Si le premier est rouge, le second est vert avec 0,3. Quelle est la probabilité d'avoir rouge, puis vert ? Réponds en commentaire !"
+}

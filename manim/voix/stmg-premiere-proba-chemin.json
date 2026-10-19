@@ -1,0 +1,13 @@
+{
+  "00-garde": "La probabilité d'un chemin : on multiplie les branches.",
+  "01-situation": "Un centre de tri reçoit des bouteilles. 60 % sont en plastique, les autres en verre. Parmi les bouteilles en plastique, 70 % sont recyclées. Parmi celles en verre, 95 %.",
+  "02-arbre": "L'arbre. P : « bouteille en plastique », 0,6. P barre, en verre : 0,4. Après P : R, « recyclée », 0,7. Après P barre : R, 0,95.",
+  "03-question": "On prend une bouteille au hasard. Quelle est la probabilité qu'elle soit en plastique ET recyclée ? C'est P de P inter R : le chemin P, puis R.",
+  "04-produit": "On suit le chemin, et on multiplie ses branches. 0,6 fois 0,7, égale 0,42.",
+  "05-pourquoi": "Pourquoi multiplier ? Prenons 100 bouteilles. 60 sont en plastique. 70 % de ces 60, ça fait 42. 42 sur 100 : 0,42. Prendre 70 % de 60 %, c'est multiplier.",
+  "06-piege": "Le piège : additionner. 0,6 plus 0,7, égale 1,3 : plus que 1, c'est impossible pour une probabilité ! Sur un chemin, on multiplie toujours.",
+  "07-defi": "À toi de jouer. Quelle est la probabilité qu'une bouteille soit en verre ET recyclée ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Le chemin P barre, puis R : 0,4 fois 0,95, égale 0,38.",
+  "08-finale": "Ce que tu as appris. « Et » sur un arbre, c'est un chemin. La probabilité d'un chemin, c'est le produit de ses branches. On n'additionne jamais le long d'un chemin. Prochaine vidéo : quand plusieurs chemins mènent au même événement.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

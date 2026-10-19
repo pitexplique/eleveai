@@ -1480,6 +1480,28 @@ for _cl, _bd in (("stmg", "STMG"), ("premiere-commun", "1RE")):
             "dossier": f"{_cl}/maths/probabilites/{_dos}",
         }
 
+# 19/10/2026 — lot 2 : les 6 micros d'ARBRE PONDÉRÉ communes STMG / 1re.
+for _cl, _bd in (("stmg", "STMG"), ("premiere-commun", "1RE")):
+    for _k, _dos, _titre, _haut, _bas, _c in (
+        ("arbre-lire", "07-arbre-lire", ["COMPRENDRE", "UN ARBRE PONDÉRÉ"],
+         "Le 0,6 de l'arbre = P(A) ?", "non : P sachant E !", "bleue"),
+        ("arbre-completer", "08-arbre-completer", ["COMPLÉTER", "UN ARBRE PONDÉRÉ"],
+         "0,3 sur la branche ?", "non : 0,3 ÷ 0,4 = 0,75 !", "bleue"),
+        ("arbre-construire", "09-arbre-construire", ["CONSTRUIRE", "UN ARBRE PONDÉRÉ"],
+         "Croissant ou matin d'abord ?", "le « parmi » décide !", "bleue"),
+        ("chemin", "10-chemin", ["COMPRENDRE", "LA PROBA D'UN CHEMIN"],
+         "0,6 + 0,7 = 1,3 ?", "IMPOSSIBLE : on multiplie !", "bleue"),
+        ("somme-chemins", "11-somme-chemins", ["COMPRENDRE LES", "PROBAS TOTALES"],
+         "(0,1 + 0,4) ÷ 2 ?", "FAUX : 0,07 + 0,12 = 0,19", "bleue"),
+        ("arbre-tableau", "12-arbre-tableau", ["DE L'ARBRE", "AU TABLEAU"],
+         "360 sur 510 ?", "nulle part sur l'arbre !", "marron"),
+    ):
+        ESSAIS[f"eleveai-maths-{_cl}-proba-{_k}"] = {
+            "badge": f"MATHS · {_bd}", "duree": "EN 3 MIN", "titre": _titre,
+            "accroche": _piege_test(_c, _haut, _bas),
+            "dossier": f"{_cl}/maths/probabilites/{_dos}",
+        }
+
 
 # 17/10/2026 — Grand Raid, Diagonale des Fous : les marches de 25 cm (6e, verte).
 ESSAIS["eleveai-maths-6e-aire-longueur-convertir-diagonale"] = {

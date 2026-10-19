@@ -346,6 +346,30 @@ for _cl, _bd in (("stmg", "STMG"), ("premiere-commun", "1RE")):
         }
         CEINTURE_SHORT[_nom] = "jaune"
 
+# 19/10/2026 — lot 2 : 6 shorts d'ARBRE PONDÉRÉ communs STMG / 1re (jaune).
+for _cl, _bd in (("stmg", "STMG"), ("premiere-commun", "1RE")):
+    for _ep, _dos, _titre, _sous, _lg in (
+        ("arbre-lire", "07-arbre-lire", ["90 %", "DE KETCHUP…"], "…mais sur QUELLE branche ?",
+         [("frites : 0,8", 84, BLEU), ("APRÈS frites : 0,9", 76, ORANGE), ("P sachant F !", 90, VERT)]),
+        ("arbre-completer", "08-arbre-completer", ["BRANCHE", "EFFACÉE !"], "la pêche aux canards",
+         [("gagné : 0,35", 84, BLEU), ("perdu : ?", 96, ROUGE), ("1 − 0,35 = 0,65", 80, VERT)]),
+        ("arbre-construire", "09-arbre-construire", ["QUI PASSE", "EN PREMIER ?"], "l'entraînement ou l'arrivée ?",
+         [("« parmi eux »", 90, BLEU), ("d'abord entraîné", 80, ORANGE), ("puis finit : 0,75", 80, VERT)]),
+        ("chemin", "10-chemin", ["DEUX FEUX", "VERTS ?"], "0,5 + 0,8 ?",
+         [("1,3 : impossible !", 80, ROUGE), ("on multiplie", 90, BLEU), ("0,5 × 0,8 = 0,4", 80, VERT)]),
+        ("somme-chemins", "11-somme-chemins", ["LA ROUE", "ET LES SACS"], "la moyenne, 0,3 ?",
+         [("moyenne : 0,3 ?", 84, ROUGE), ("0,1 + 0,08", 90, BLEU), ("= 0,18 !", 110, VERT)]),
+        ("arbre-tableau", "12-arbre-tableau", ["ARBRE", "→ TABLEAU"], "avec 100 personnes",
+         [("30 font du sport", 80, BLEU), ("80 % de 30", 90, ORANGE), ("une case : 24", 90, VERT)]),
+    ):
+        _nom = f"eleveai-maths-{_cl}-proba-{_ep}-short"
+        SHORTS[_nom] = {
+            "badge": f"PROBABILITÉS · {_bd}", "titre": _titre, "taille": 88, "sous": _sous,
+            "taille_sous": 44, "couleur_sous": ORANGE, "accroche": _acc(_lg), "dossier": f"{_cl}/maths/fr",
+            "sortie": f"{_cl}/maths/probabilites/{_dos}",
+        }
+        CEINTURE_SHORT[_nom] = "jaune"
+
 # 18/10/2026 — même TEST, suite : CM1 et CM2, épisodes 3, 4, 5 (comparer, roue, défis).
 _PROBA_TEST_3 = [
     ("cm1", "CM1", "cm1/maths/probabilites/03-comparer", "comparer", "blanche", ["5 FRAISES", "OU 2 ?"],

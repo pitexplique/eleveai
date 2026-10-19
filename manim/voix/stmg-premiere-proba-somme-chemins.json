@@ -1,0 +1,13 @@
+{
+  "00-garde": "Plusieurs chemins vers le même événement : on additionne.",
+  "01-situation": "Une entreprise livre des colis. 70 % partent de l'entrepôt de Saint-Pierre, les autres de Saint-Denis. Depuis Saint-Pierre, 10 % arrivent en retard. Depuis Saint-Denis, 40 %.",
+  "02-arbre": "L'arbre. S : « part de Saint-Pierre », 0,7. S barre, Saint-Denis : 0,3. Après S : R, « en retard », 0,1. Après S barre : R, 0,4.",
+  "03-question": "Quelle est la probabilité qu'un colis arrive en retard ? Deux chemins mènent à R : S puis R, et S barre puis R.",
+  "04-chemins": "Chaque chemin, on le multiplie. S puis R : 0,7 fois 0,1, égale 0,07. S barre puis R : 0,3 fois 0,4, égale 0,12.",
+  "05-somme": "Puis on additionne les chemins qui mènent à R. 0,07 plus 0,12, égale 0,19. P de R égale 0,19.",
+  "06-piege": "Le piège : faire la moyenne. 0,1 plus 0,4, divisé par 2 : 0,25. Faux ! Saint-Pierre envoie beaucoup plus de colis : son petit retard compte plus. Les branches du premier niveau pèsent sur le résultat.",
+  "07-defi": "À toi de jouer. Quelle est la probabilité qu'un colis arrive à l'heure ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Deux chemins mènent à R barre. 0,7 fois 0,9, égale 0,63. 0,3 fois 0,6, égale 0,18. 0,63 plus 0,18, égale 0,81. On vérifie : 1 moins 0,19, égale 0,81.",
+  "08-finale": "Ce que tu as appris. Pour un événement au bout de plusieurs chemins : on multiplie le long de chaque chemin, puis on additionne les chemins. Jamais de moyenne. Prochaine vidéo : passer de l'arbre au tableau croisé.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

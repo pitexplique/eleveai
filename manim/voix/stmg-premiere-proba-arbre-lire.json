@@ -1,0 +1,12 @@
+{
+  "00-garde": "Lire un arbre pondéré : ce que dit chaque branche.",
+  "01-situation": "Un magasin vend des vélos. 30 % des clients achètent un vélo électrique, les autres un vélo classique. Parmi les clients qui achètent un électrique, 60 % prennent une assurance. Parmi les autres, seulement 20 %.",
+  "02-premier-niveau": "On dessine l'arbre. D'abord, le type de vélo. Une branche vers E, « vélo électrique » : 0,3. Une branche vers E barre, « vélo classique » : 0,7. Les deux branches qui partent du même point font 1 : 0,3 plus 0,7.",
+  "03-deuxieme-niveau": "Puis l'assurance. Après E : A, « prend l'assurance », 0,6, et A barre, 0,4. Après E barre : A, 0,2, et A barre, 0,8.",
+  "04-lire": "Que dit le 0,6 ? Il part de E : on est déjà parmi les clients qui achètent un électrique. C'est P indice E de A : la probabilité de prendre l'assurance sachant qu'on achète un électrique.",
+  "05-piege": "Le piège : croire que 0,6, c'est la probabilité de prendre l'assurance tout court. Non ! Au deuxième niveau, chaque branche est une probabilité conditionnelle : elle dépend de la branche d'où elle part.",
+  "06-defi": "À toi de jouer. Que dit le 0,8 ? Écris-le avec la notation P indice. Mets pause, et cherche !",
+  "06b-correction": "Correction. Le 0,8 part de E barre et va vers A barre. C'est P indice E barre de A barre : parmi les clients qui achètent un vélo classique, 80 % ne prennent pas l'assurance.",
+  "07-finale": "Ce que tu as appris. Au premier niveau, des probabilités simples. Au deuxième niveau, des probabilités conditionnelles : la branche de départ va en indice. Les branches qui partent d'un même point font 1. Prochaine vidéo : compléter un arbre.",
+  "08-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

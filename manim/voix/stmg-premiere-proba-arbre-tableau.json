@@ -1,0 +1,14 @@
+{
+  "00-garde": "De l'arbre au tableau croisé, et retour.",
+  "01-situation": "À La Réunion, beaucoup de maisons ont un chauffe-eau solaire. Dans une commune, 40 % en ont un. Parmi elles, 90 % ont vu leur facture baisser. Parmi les autres, 25 %.",
+  "02-arbre": "L'arbre. S : « chauffe-eau solaire », 0,4 ; S barre, 0,6. Après S : B, « facture en baisse », 0,9. Après S barre : B, 0,25.",
+  "03-mille": "Pour passer au tableau, on prend 1 000 maisons. S : 0,4 fois 1 000, égale 400 maisons. S barre : 600.",
+  "04-cases": "Puis on suit les chemins. S et B : 0,9 fois 400, égale 360. S et B barre : 40. S barre et B : 0,25 fois 600, égale 150. S barre et B barre : 450.",
+  "05-total": "La colonne B : 360 plus 150, égale 510 maisons dont la facture a baissé. Le tableau est rempli.",
+  "06-retour": "Et dans l'autre sens ? Du tableau, on retrouve l'arbre. La branche de S vers B : on allume la ligne S, 360 sur 400, égale 0,9.",
+  "07-piege": "Le piège : croire que le tableau ne dit rien de plus que l'arbre. Il répond à la question inverse ! Parmi les 510 maisons dont la facture a baissé, 360 ont un chauffe-eau solaire : 360 sur 510, environ 0,71. Sur l'arbre, ce nombre n'apparaît nulle part.",
+  "08-defi": "À toi de jouer. Avec le tableau, quelle est la probabilité qu'une maison sans chauffe-eau solaire n'ait pas vu sa facture baisser ? Mets pause, et cherche !",
+  "08b-correction": "Correction. On allume la ligne S barre : 600 maisons, dont 450 sans baisse. 450 sur 600, égale 0,75. C'est P indice S barre de B barre, et c'est bien 1 moins 0,25.",
+  "09-finale": "Ce que tu as appris. De l'arbre au tableau : on prend 1 000, et chaque case est un chemin. Du tableau à l'arbre : une branche, c'est une case divisée par le total de sa ligne. Et le tableau donne aussi les probabilités dans l'autre sens.",
+  "10-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

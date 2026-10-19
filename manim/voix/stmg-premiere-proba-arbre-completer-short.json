@@ -1,0 +1,5 @@
+{
+  "00-accroche": "À la pêche aux canards, on gagne avec une probabilité de 0,35. Sur l'arbre, la branche « perdu » est effacée. Tu la retrouves ?",
+  "01-image": "Les deux branches partent du même point : ensemble, elles font 1. Perdu : 1 moins 0,35, égale 0,65. Même règle à chaque point de l'arbre !",
+  "02-question": "Après « gagné », la branche « rejoue » vaut 0,8. Que vaut la branche « ne rejoue pas » ? Réponds en commentaire !"
+}

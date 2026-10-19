@@ -1,0 +1,5 @@
+{
+  "00-accroche": "La roue tombe sur l'or une fois sur cinq : 0,2. Alors tu pioches dans le sac rouge : 0,5 de gagner. Sinon, dans le sac bleu : 0,1. Ta chance de gagner, c'est la moyenne, 0,3 ?",
+  "01-image": "Non ! Or puis gagné : 0,2 fois 0,5, égale 0,1. Gris puis gagné : 0,8 fois 0,1, égale 0,08. On additionne les deux chemins : 0,1 plus 0,08, égale 0,18. Bien moins que 0,3 !",
+  "02-question": "Et si la roue tombait sur l'or une fois sur deux, 0,5 ? Calcule ta chance de gagner, et réponds en commentaire !"
+}

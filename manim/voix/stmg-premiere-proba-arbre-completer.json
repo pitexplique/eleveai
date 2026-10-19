@@ -1,0 +1,13 @@
+{
+  "00-garde": "Compléter un arbre pondéré.",
+  "01-situation": "Une application de covoiturage. 40 % des trajets vont au travail. Parmi les autres trajets, 90 % arrivent à l'heure. Et 30 % de tous les trajets vont au travail ET arrivent à l'heure. L'arbre a des trous : on va les remplir.",
+  "02-arbre-troue": "Voici l'arbre. T : « le trajet va au travail », 0,4. Puis H : « il arrive à l'heure ». Après T barre, H : 0,9. Il manque quatre nombres.",
+  "03-somme-un": "Première règle : les branches qui partent d'un même point font 1. Après la racine : T barre, 1 moins 0,4, égale 0,6. Après T barre : H barre, 1 moins 0,9, égale 0,1.",
+  "04-chemin": "Deuxième règle : un chemin, c'est le produit de ses branches. T puis H : 0,4 fois la branche manquante égale 0,3. La branche manquante : 0,3 divisé par 0,4, égale 0,75.",
+  "05-dernier": "Il reste H barre après T : 1 moins 0,75, égale 0,25. L'arbre est complet.",
+  "06-piege": "Le piège : écrire 0,3 sur la branche de T vers H. Non ! 0,3, c'est le chemin entier, T ET H. Sur la branche, on met la probabilité sachant T : 0,75.",
+  "07-defi": "À toi de jouer. Dans un autre arbre, P de A égale 0,5 et P de A inter B égale 0,2. Quelle probabilité écris-tu sur la branche de A vers B ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 0,5 fois la branche égale 0,2. La branche : 0,2 divisé par 0,5, égale 0,4. C'est P indice A de B.",
+  "08-finale": "Ce que tu as appris. Deux règles pour compléter un arbre. Un : les branches d'un même point font 1. Deux : un chemin est le produit de ses branches ; une branche, c'est donc le chemin divisé par la branche d'avant. Prochaine vidéo : construire l'arbre à partir d'un énoncé.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}
