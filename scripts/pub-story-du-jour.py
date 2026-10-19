@@ -30,6 +30,10 @@ TI_MARGO = RACINE / "public" / "cahier-vacances" / "ti-margo.png"
 W, H = 1080, 1920
 # Instagram couvre le haut (~220 px : barre, nom) et le bas (~260 px : réponse).
 HAUT_SUR, BAS_SUR = 230, 1640
+# 19/10, Frédéric : « quand je télécharge, il ne montre pas toute la photo ».
+# Sur un téléphone plus allongé que 9:16, Instagram remplit la hauteur et rogne
+# les CÔTÉS (jusqu'à ~135 px de chaque bord) : tout le contenu tient entre G et D.
+G, D = 150, W - 150
 NAVY = (4, 27, 51)
 ENCRE = (15, 23, 42)
 GRIS = (71, 85, 105)
@@ -148,32 +152,32 @@ def story_defi(donnee):
     defi = donnee["defi"]
 
     # Ti Margo à gauche, sa bulle à droite.
-    tm = ti_margo(470)
-    im.paste(tm, (40, 360), tm)
-    bulle(im, (440, 380, 1030, 610), "Le défi\ndu jour !", NOIR(72), (330, 560))
+    tm = ti_margo(420)
+    im.paste(tm, (G, 370), tm)
+    bulle(im, (G + 330, 390, D, 600), "Le défi\ndu jour !", NOIR(62), (G + 290, 560))
     d = ImageDraw.Draw(im)
 
     # La classe, puis la question en grand dans une carte blanche.
-    y = 860
+    y = 830
     fc = GRAS(36)
     etiquette = f"Niveau {defi['classe']}"
     wc = d.textlength(etiquette, font=fc)
-    d.rounded_rectangle((70, y, 70 + wc + 52, y + 62), radius=31, fill=NAVY)
-    d.text((96, y + 11), etiquette, font=fc, fill=BLANC)
+    d.rounded_rectangle((G, y, G + wc + 52, y + 62), radius=31, fill=NAVY)
+    d.text((G + 26, y + 11), etiquette, font=fc, fill=BLANC)
     y += 90
-    fq = NOIR(50) if len(defi["question"]) < 90 else NOIR(44)
-    hauteur_q = len(couper(d, defi["question"], fq, W - 220)) * int(fq.size * 1.22)
-    d.rounded_rectangle((60, y, W - 60, y + hauteur_q + 70), radius=40, fill=BLANC)
-    y = paragraphe(d, 110, y + 34, defi["question"], fq, ENCRE, W - 220) + 70
+    fq = NOIR(44) if len(defi["question"]) < 90 else NOIR(38)
+    hauteur_q = len(couper(d, defi["question"], fq, D - G - 80)) * int(fq.size * 1.22)
+    d.rounded_rectangle((G, y, D, y + hauteur_q + 60), radius=36, fill=BLANC)
+    y = paragraphe(d, G + 40, y + 30, defi["question"], fq, ENCRE, D - G - 80) + 60
 
     # Les trois choix, A B C.
-    fl, fch = NOIR(46), GRAS(48)
+    fl, fch = NOIR(42), GRAS(44)
     for i, choix in enumerate(defi["choix"]):
-        d.rounded_rectangle((60, y, W - 60, y + 104), radius=52, fill=BLANC, outline=COULEURS[i], width=5)
-        d.ellipse((76, y + 14, 152, y + 90), fill=COULEURS[i])
-        d.text((114 - d.textlength(LETTRES[i], font=fl) / 2, y + 22), LETTRES[i], font=fl, fill=BLANC)
-        d.text((182, y + 26), choix, font=fch, fill=ENCRE)
-        y += 124
+        d.rounded_rectangle((G, y, D, y + 96), radius=48, fill=BLANC, outline=COULEURS[i], width=5)
+        d.ellipse((G + 14, y + 12, G + 86, y + 84), fill=COULEURS[i])
+        d.text((G + 50 - d.textlength(LETTRES[i], font=fl) / 2, y + 20), LETTRES[i], font=fl, fill=BLANC)
+        d.text((G + 112, y + 24), choix, font=fch, fill=ENCRE)
+        y += 114
 
     fr = GRAS(38)
     texte = "La réponse demain, dans la story !"
@@ -198,30 +202,30 @@ def story_reponse(hier, donnee):
     entete(d, donnee)
     defi = hier["defi"]
 
-    tm = ti_margo(340, miroir=True)
-    im.paste(tm, (W - tm.width - 50, 330), tm)
-    bulle(im, (60, 350, 700, 540), "La réponse\nd'hier !", NOIR(64), (W - tm.width - 10, 480))
+    tm = ti_margo(300, miroir=True)
+    im.paste(tm, (D - tm.width, 340), tm)
+    bulle(im, (G, 360, G + 520, 540), "La réponse\nd'hier !", NOIR(56), (D - tm.width + 30, 480))
     d = ImageDraw.Draw(im)
 
-    y = 700
-    fq = GRAS(36)
-    y = paragraphe(d, 70, y, defi["question"], fq, GRIS, W - 140) + 24
+    y = 690
+    fq = GRAS(34)
+    y = paragraphe(d, G, y, defi["question"], fq, GRIS, D - G) + 24
     bonne = defi["choix"][defi["bonne"]]
-    d.rounded_rectangle((60, y, W - 60, y + 110), radius=55, fill=VERT)
+    d.rounded_rectangle((G, y, D, y + 104), radius=52, fill=VERT)
     texte = f"{LETTRES[defi['bonne']]}.  {bonne}"
-    fb = NOIR(52)
+    fb = NOIR(48)
     d.text(((W - d.textlength(texte, font=fb)) / 2, y + 22), texte, font=fb, fill=BLANC)
-    y = paragraphe(d, 70, y + 140, defi["explication"], GRAS(38), ENCRE, W - 140) + 50
+    y = paragraphe(d, G, y + 130, defi["explication"], GRAS(36), ENCRE, D - G) + 46
 
     # La Une du jour : ce que tu vas apprendre aujourd'hui.
     une = donnee["une"]
-    d.text((70, y), "AUJOURD'HUI SUR ELEVEAI.FR", font=GRAS(34), fill=ORANGE)
-    y += 54
+    d.text((G, y), "AUJOURD'HUI SUR ELEVEAI.FR", font=GRAS(32), fill=ORANGE)
+    y += 50
     if une.get("utile"):
-        y = paragraphe(d, 70, y, une["utile"], GRAS(40), ENCRE, W - 140) + 24
+        y = paragraphe(d, G, y, une["utile"], GRAS(36), ENCRE, D - G) + 24
     v = vignette(une["vignette"]) if une.get("vignette") else None
     if v:
-        lv = W - 140
+        lv = D - G
         hv = int(v.height * lv / v.width)
         if y + hv > BAS_SUR - 40:  # trop haute : on la réduit
             hv = BAS_SUR - 40 - y
