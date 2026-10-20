@@ -32,6 +32,28 @@ const vignetteDe = (poster, fichier) => {
   return null;
 };
 
+// ⭐ 20/10/2026 — Frédéric : « relier, sous les vidéos, un lien vers le coach ».
+// La série du coach de la micro (ou de la notion) de la vidéo, si le coach la
+// connaît : classe du manifeste, sinon celle de son dossier (« premiere » → 1re
+// ou 1re spé selon la classe qui connaît la notion).
+const KNOW = path.join(RACINE, "lib", "tutor-v4", "knowledge", "maths");
+const CLASSES = fs.readdirSync(KNOW, { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name);
+const texte = {};
+const connait = (c, id) => {
+  texte[c] ??= fs.readdirSync(path.join(KNOW, c)).filter((f) => /\.(ts|json)$/.test(f))
+    .map((f) => fs.readFileSync(path.join(KNOW, c, f), "utf8")).join("\n");
+  return new RegExp(`["'\`]${id}["'\`]`).test(texte[c]);
+};
+function lienCoach(v) {
+  if (!v.notionId) return null;
+  const dossier = v.fichier.split("/")[0].replace(/-commun$/, "");
+  const pool = v.classe ? [v.classe] : CLASSES.filter((c) => c === dossier || c.startsWith(dossier + "-"));
+  const ok = pool.filter((c) => CLASSES.includes(c) && connait(c, v.notionId));
+  if (ok.length !== 1) return null;
+  const micro = v.microId && connait(ok[0], v.microId) ? `&microId=${v.microId}` : "";
+  return `/coach/serie?classe=${ok[0]}&matiere=maths&notion=${v.notionId}${micro}&display=simple`;
+}
+
 const table = {};
 let sansFichier = 0;
 for (const v of manifeste.videos) {
@@ -46,6 +68,7 @@ for (const v of manifeste.videos) {
     titre: v.titre,
     short: v.type === "short",
     youtube: ytId(v.url),
+    coach: lienCoach(v),
   };
 }
 
@@ -82,6 +105,31 @@ for (const abs of parcourir(SORTIES)) {
     youtube: yt,
   };
   horsManifeste++;
+}
+
+// Les vidéos sans entrée de manifeste (publiées avant lui, téléchargées depuis
+// YouTube) : leur place au coach se lit dans notion_ressources, par ID YouTube.
+try {
+  for (const l of fs.readFileSync(path.join(RACINE, ".env.local"), "utf8").split(/\r?\n/)) {
+    const m = l.match(/^([A-Z_]+)=(.*)$/);
+    if (m && !process.env[m[1]]) process.env[m[1]] = m[2].replace(/^["']|["']$/g, "");
+  }
+  const { createClient } = await import("@supabase/supabase-js");
+  const db = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
+  const { data, error } = await db.from("notion_ressources")
+    .select("classe, notion_id, micro_id, url").eq("matiere", "maths").eq("type", "video");
+  if (error) throw error;
+  const place = new Map();
+  for (const r of data) {
+    const y = ytId(r.url);
+    if (!y || (place.has(y) && !r.micro_id)) continue; // une micro plutôt qu'une notion
+    place.set(y, `/coach/serie?classe=${r.classe}&matiere=maths&notion=${r.notion_id}${r.micro_id ? `&microId=${r.micro_id}` : ""}&display=simple`);
+  }
+  let n = 0;
+  for (const v of Object.values(table)) if (!v.coach && v.youtube && place.has(v.youtube)) { v.coach = place.get(v.youtube); n++; }
+  console.log(`${n} liens coach retrouvés par ID YouTube (notion_ressources)`);
+} catch (e) {
+  console.log("notion_ressources illisible : liens coach du manifeste seulement —", e.message);
 }
 
 const trie = Object.fromEntries(Object.entries(table).sort(([a], [b]) => a.localeCompare(b)));

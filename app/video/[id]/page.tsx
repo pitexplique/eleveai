@@ -11,9 +11,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, BookOpen, Dumbbell, PencilLine } from "lucide-react";
 import { trouverVideo, urlR2 } from "@/lib/videos/r2";
 import LecteurVideo from "@/components/LecteurVideo";
+import { ficheExercicesHrefPourCoach } from "@/lib/fiches-exercices/registre";
+import { ficheHrefPourCoach } from "@/lib/fiches/registre";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -33,6 +35,12 @@ export default async function PageVideo({ params }: Props) {
     if (ID_YOUTUBE.test(id)) redirect(`https://www.youtube.com/watch?v=${id}`);
     notFound();
   }
+
+  // La fiche d'exercices de la notion (« les élèves adorent les fiches
+  // d'exercices avec résumé de cours », 20/10), lue dans le lien du coach.
+  const q = v.coach ? new URLSearchParams(v.coach.split("?")[1]) : null;
+  const exercices = q ? ficheExercicesHrefPourCoach("maths", q.get("classe") ?? "", q.get("notion") ?? "") : null;
+  const cours = q ? ficheHrefPourCoach("maths", q.get("classe") ?? "", q.get("notion") ?? "") : null;
 
   return (
     <main className="min-h-screen bg-slate-950 px-4 py-6 text-white">
@@ -66,6 +74,40 @@ export default async function PageVideo({ params }: Props) {
           </a>
           .
         </LecteurVideo>
+
+        {/* ⭐ 20/10/2026 — Frédéric : « relier, sous les vidéos, un lien vers
+            le coach ». Après la vidéo, l'exercice de la même micro. */}
+        {v.coach || exercices || cours ? (
+          <div className="mt-5 grid gap-3 sm:grid-cols-3">
+            {cours ? (
+              <Link
+                href={cours}
+                className="flex items-center justify-center gap-2 rounded-2xl bg-sky-400 px-5 py-3 text-base font-black text-slate-950 shadow-lg transition hover:bg-sky-300"
+              >
+                <BookOpen className="h-5 w-5" />
+                La fiche de cours
+              </Link>
+            ) : null}
+            {exercices ? (
+              <Link
+                href={exercices}
+                className="flex items-center justify-center gap-2 rounded-2xl bg-amber-400 px-5 py-3 text-base font-black text-slate-950 shadow-lg transition hover:bg-amber-300"
+              >
+                <PencilLine className="h-5 w-5" />
+                Les exercices
+              </Link>
+            ) : null}
+            {v.coach ? (
+              <Link
+                href={v.coach}
+                className="flex items-center justify-center gap-2 rounded-2xl bg-emerald-500 px-5 py-3 text-base font-black text-slate-950 shadow-lg transition hover:bg-emerald-400"
+              >
+                <Dumbbell className="h-5 w-5" />
+                Je m&apos;entraîne sur le coach
+              </Link>
+            ) : null}
+          </div>
+        ) : null}
 
         {/* ⛔ 20/10/2026 — Frédéric : « on enlève commenter sur YouTube ».
             Les élèves restent sur le lecteur du site : aucun lien vers YouTube. */}

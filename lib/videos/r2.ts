@@ -16,6 +16,8 @@ export type VideoR2 = {
   titre: string;
   short: boolean;
   youtube: string | null;
+  /** La série du coach de sa micro (ou notion), si le coach la connaît. */
+  coach?: string | null;
 };
 
 // r2.dev est l'adresse de test (bridée) ; videos.eleveai.fr la remplacera.
