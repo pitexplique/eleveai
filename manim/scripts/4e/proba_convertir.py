@@ -79,12 +79,12 @@ def gouttes_qui_tombent(haut, larg, chute, n=7, s=1.0):
             g.add(Line(P(x, y), P(x - 0.06 * s, y - 0.22 * s), color=PLUIE, stroke_width=4))
         return g
 
-    holder = VGroup(faire(0))
+    holder = faire(0)
 
+    # ⛔ 20/10 : `become` et non remove/add (l'ancien enfant restait dessiné sous le nouveau pendant un `play`).
     def maj(m, dt):
         etat["t"] += dt
-        m.remove(*m.submobjects)
-        m.add(faire(etat["t"]))
+        m.become(faire(etat["t"]))
 
     holder.add_updater(maj)
     return holder
@@ -101,23 +101,27 @@ def ballon(r=0.45):
 def piece_qui_tourne(centre, r=0.75):
     """Une pièce qui tourne sur elle-même : PILE, puis FACE, puis PILE…"""
     etat = {"t": 0.0}
+    # ⛔ 20/10 : structure FIXE (disque + « PILE » + « FACE », on n'allume que le bon mot)
+    # redessinée par `become` : remove/add laissait une 2e pièce dessinée pendant un `play`.
+    mot_pile = Text("PILE", font_size=int(r * 34), color=BLACK, weight=BOLD)
+    mot_face = Text("FACE", font_size=int(r * 34), color=BLACK, weight=BOLD)
 
     def faire(t):
         c = math.cos(t * 5)
         pile = c >= 0
         disque = Circle(radius=r, fill_color=JAUNE_TITRE if pile else ORANGE_RETENUE, fill_opacity=1,
                         stroke_color=WHITE, stroke_width=3)
-        mot = Text("PILE" if pile else "FACE", font_size=int(r * 34), color=BLACK, weight=BOLD)
-        g = VGroup(disque, mot.move_to(disque))
+        mp = mot_pile.copy().move_to(disque).set_opacity(1 if pile else 0)
+        mf = mot_face.copy().move_to(disque).set_opacity(0 if pile else 1)
+        g = VGroup(disque, mp, mf)
         g.stretch(max(abs(c), 0.05), 0)
         return g.move_to(centre + UP * 0.25 * abs(math.sin(t * 2.5)))
 
-    holder = VGroup(faire(0))
+    holder = faire(0)
 
     def maj(m, dt):
         etat["t"] += dt
-        m.remove(*m.submobjects)
-        m.add(faire(etat["t"]))
+        m.become(faire(etat["t"]))
 
     holder.add_updater(maj)
     return holder

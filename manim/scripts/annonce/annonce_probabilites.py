@@ -97,9 +97,10 @@ def de_qui_roule(centre, cote=1.2, periode=0.22, faces=None):
     return holder
 
 
-def piece_qui_tourne(centre, r=0.75):
-    """Une pièce qui tourne sur elle-même : PILE, puis FACE, puis PILE…"""
-    etat = {"t": 0.0}
+def piece_qui_tourne(centre, r=0.75, phase=0.0, vitesse=1.0):
+    """Une pièce qui tourne sur elle-même : PILE, puis FACE, puis PILE…
+    `phase` / `vitesse` : décaler plusieurs pièces pour qu'elles ne tournent pas en même temps."""
+    etat = {"t": phase}
     # ⛔ 20/10 : structure FIXE (disque + « PILE » + « FACE », on n'allume que le bon
     # mot) redessinée par `become`. L'ancienne version remplaçait les enfants dans
     # l'updater : pendant un `play`, l'ancien enfant restait dessiné sous le nouveau
@@ -118,10 +119,10 @@ def piece_qui_tourne(centre, r=0.75):
         g.stretch(max(abs(c), 0.05), 0)
         return g.move_to(centre + UP * 0.25 * abs(math.sin(t * 2.5)))
 
-    holder = faire(0)
+    holder = faire(phase)
 
     def maj(m, dt):
-        etat["t"] += dt
+        etat["t"] += dt * vitesse
         m.become(faire(etat["t"]))
 
     holder.add_updater(maj)

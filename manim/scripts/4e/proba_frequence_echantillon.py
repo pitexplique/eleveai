@@ -357,7 +357,9 @@ class ProbaFrequenceEchantillon4e(Histogramme, DessinsEchantillon, Notion4e):
         self.play(Write(self.t("À toi de jouer", 46, JAUNE_TITRE).to_edge(UP)))
         xs = [-3.8, 1.4]
         self.au_mot("Une pièce")
-        pcs = [piece_qui_tourne(P(x, 1.3), 0.7) for x in xs]
+        # phase / vitesse : les deux pièces ne montrent pas la même face en même temps
+        pcs = [piece_qui_tourne(P(x, 1.3), 0.7, phase=ph, vitesse=v)
+               for x, ph, v in zip(xs, [0.0, 0.37], [1.0, 1.13])]
         noms = VGroup(*[self.t(n, 30, BLEU_CALCUL).move_to(P(x, 2.45)) for n, x in zip(["1er élève", "2e élève"], xs)])
         self.add(*pcs)
         self.play(FadeIn(noms), run_time=0.4)

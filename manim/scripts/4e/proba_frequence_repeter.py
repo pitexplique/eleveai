@@ -421,8 +421,9 @@ class ProbaFrequenceRepeter4e(Histogramme, Notion4e):
 
     # ── 07 : défi ───────────────────────────────────────────────────────────
 
-    def colonne(self, x, nom, lancers, freq, y=1.35, r=0.55, font=34):
-        pc = piece_qui_tourne(P(x, y), r)
+    def colonne(self, x, nom, lancers, freq, y=1.35, r=0.55, font=34, phase=0.0, vitesse=1.0):
+        # phase / vitesse : les pièces des élèves ne montrent pas la même face en même temps
+        pc = piece_qui_tourne(P(x, y), r, phase=phase, vitesse=vitesse)
         n = self.t(nom, 28, BLEU_CALCUL).move_to(P(x, y + r + 0.45))
         f = self.ligne([("pile :", WHITE), (freq, JAUNE_TITRE)], font, 0.18).move_to(P(x, y - r - 0.5))
         l = self.ligne([(lancers, JAUNE_TITRE), ("lancers", WHITE)], font - 4, 0.15).move_to(P(x, y - r - 1.15))
@@ -434,8 +435,9 @@ class ProbaFrequenceRepeter4e(Histogramme, Notion4e):
         self.dire("07-defi")
         self.play(Write(self.t("À toi de jouer", 46, JAUNE_TITRE).to_edge(UP)))
         xs = [-4.6, -1.2, 2.2]
-        cols = [self.colonne(x, nm, la, fr) for x, nm, la, fr in
-                zip(xs, ["1er élève", "2e élève", "3e élève"], ["10", "100", "1 000"], ["0,7", "0,55", "0,51"])]
+        cols = [self.colonne(x, nm, la, fr, phase=ph, vitesse=v) for x, nm, la, fr, ph, v in
+                zip(xs, ["1er élève", "2e élève", "3e élève"], ["10", "100", "1 000"], ["0,7", "0,55", "0,51"],
+                    [0.0, 0.37, 0.81], [1.0, 1.13, 0.91])]
         self.au_mot("Trois élèves lancent une pièce")
         for pc, n, f, l in cols:
             self.add(pc)
@@ -466,8 +468,9 @@ class ProbaFrequenceRepeter4e(Histogramme, Notion4e):
         self.dire("07b-correction")
         self.titre_ecran("Correction")
         xs = [-4.6, -1.2, 2.2]
-        cols = [self.colonne(x, nm, la, fr, y=1.75, r=0.4, font=30) for x, nm, la, fr in
-                zip(xs, ["1er élève", "2e élève", "3e élève"], ["10", "100", "1 000"], ["0,7", "0,55", "0,51"])]
+        cols = [self.colonne(x, nm, la, fr, y=1.75, r=0.4, font=30, phase=ph, vitesse=v) for x, nm, la, fr, ph, v in
+                zip(xs, ["1er élève", "2e élève", "3e élève"], ["10", "100", "1 000"], ["0,7", "0,55", "0,51"],
+                    [0.0, 0.37, 0.81], [1.0, 1.13, 0.91])]
         for c in cols:
             self.add(*c)
         self.au_mot("1 000 lancers")

@@ -73,12 +73,12 @@ def piece_tournante(ancre, r=0.6, vitesse=7.0, phase=0.0):
         g.stretch(max(abs(c), 0.06), 0)
         return g.move_to(ancre.get_center())
 
-    holder = VGroup(faire(phase))
+    holder = faire(phase)
 
+    # ⛔ 20/10 : `become` et non remove/add (l'ancien enfant restait dessiné sous le nouveau pendant un `play`).
     def maj(m, dt):
         etat["t"] += dt
-        m.remove(*m.submobjects)
-        m.add(faire(etat["t"]))
+        m.become(faire(etat["t"]))
 
     holder.add_updater(maj)
     return holder

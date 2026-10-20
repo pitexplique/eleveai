@@ -106,12 +106,12 @@ def gouttes_qui_tombent(centre, larg=1.3, haut=1.1, n=9, s=1.0):
                        stroke_width=4 * s))
         return g
 
-    holder = VGroup(faire())
+    holder = faire()
 
+    # ⛔ 20/10 : `become` et non remove/add (l'ancien enfant restait dessiné sous le nouveau pendant un `play`).
     def maj(m, dt):
         etat["t"] += dt
-        m.remove(*m.submobjects)
-        m.add(faire())
+        m.become(faire())
 
     holder.add_updater(maj)
     return holder
