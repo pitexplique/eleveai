@@ -1717,6 +1717,23 @@ for _nom, _dos, _titre, _haut, _bas, _duree in [
     }
 
 
+# 20/10/2026 — même TEST, fin : PROBABILITÉS 2de épisodes 13 à 16 (échantillonnage, paysages bleues).
+for _nom, _dos, _titre, _haut, _bas, _duree in [
+    ("fluctuation", "13-fluctuation", ["COMPRENDRE LA", "FLUCTUATION"], "29 % au lieu de 25 % : il ment ?",
+     "non : 0,29 est dans [0,15 ; 0,35]", "EN 2 MIN"),
+    ("grands-nombres", "14-grands-nombres", ["LA LOI DES", "GRANDS NOMBRES"], "0,604 : la probabilité exacte ?",
+     "non : elle s'en approche", "EN 2 MIN"),
+    ("simulation", "15-simulation", ["SIMULER LE HASARD", "AVEC PYTHON"], "Probabilité 0,3 : random() > 0.3 ?",
+     "non : random() < 0.3 !", "EN 2 MIN"),
+    ("interpreter", "16-interpreter", ["NORMAL", "OU SUSPECT ?"], "80 ratées sur 400 : déréglée ?",
+     "0,2 hors de [0,05 ; 0,15] : on doute", "EN 2 MIN"),
+]:
+    ESSAIS[f"eleveai-maths-seconde-proba-{_nom}"] = {
+        "badge": "MATHS · 2DE", "duree": _duree, "titre": _titre,
+        "accroche": _piege_test("bleue", _haut, _bas), "dossier": "seconde/maths/probabilites/" + _dos,
+    }
+
+
 def construire(nom, spec):
     img = fond()
     d = ImageDraw.Draw(img)

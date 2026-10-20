@@ -570,6 +570,26 @@ for _t in _PROBA_TEST_2DE:
     CEINTURE_SHORT[_nom] = _c
 
 
+# 20/10/2026 — même TEST, fin : PROBABILITÉS 2de, shorts des épisodes 13 à 16 (échantillonnage, jaunes).
+for _t in [
+    ("seconde", "2DE", "seconde/maths/probabilites/13-fluctuation", "fluctuation", "jaune", ["29 SUR 100…", "IL MENT ?"],
+     "25 % de letchis sucrés, dit-il", [("25 % ± 0,1", 100, BLEU), ("0,15 à 0,35", 100, ORANGE), ("normal !", 110, VERT)]),
+    ("seconde", "2DE", "seconde/maths/probabilites/14-grands-nombres", "grands-nombres", "jaune", ["POINTE", "EN HAUT ?"],
+     "une punaise lancée 1 000 fois", [("10 : 0,7", 110, ROUGE), ("100 : 0,62", 100, ORANGE), ("1 000 : 0,604", 90, VERT)]),
+    ("seconde", "2DE", "seconde/maths/probabilites/15-simulation", "simulation", "jaune", ["1 000 LANCERS", "EN 1 SECONDE"],
+     "avec Python !", [("random() < 0.5", 80, BLEU), ("0,507", 110, ORANGE), ("0,493 !", 110, VERT)], 84),
+    ("seconde", "2DE", "seconde/maths/probabilites/16-interpreter", "interpreter", "jaune", ["10 % ANNONCÉS", "20 % TROUVÉS"],
+     "tu le crois ?", [("80 sur 400 = 0,2", 84, BLEU), ("normal : 0,05 à 0,15", 66, ORANGE), ("suspect !", 110, ROUGE)], 84),
+]:
+    _cl, _bd, _sortie, _ep, _c, _titre, _sous, _lg = _t[:8]
+    _nom = f"eleveai-maths-{_cl}-proba-{_ep}-short"
+    SHORTS[_nom] = {
+        "badge": f"PROBABILITÉS · {_bd}", "titre": _titre, "taille": _t[8] if len(_t) > 8 else 92, "sous": _sous,
+        "taille_sous": 44, "couleur_sous": ORANGE, "accroche": _acc(_lg), "dossier": f"{_cl}/maths/fr", "sortie": _sortie,
+    }
+    CEINTURE_SHORT[_nom] = _c
+
+
 def main():
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     filtre = sys.argv[1] if len(sys.argv) > 1 else ""

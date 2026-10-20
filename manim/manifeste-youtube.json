@@ -19667,6 +19667,361 @@
         "ceinture orange",
         "Shorts"
       ]
+    },
+    {
+      "id": "seconde-proba-fluctuation",
+      "notionId": "echantillonnage_simulation",
+      "microId": "echantillon_fluctuation",
+      "classe": "seconde",
+      "ceinture": "bleue",
+      "serie": "Maths 2de",
+      "type": "longue",
+      "fichier": "seconde/maths/probabilites/13-fluctuation/eleveai-maths-seconde-proba-fluctuation.mp4",
+      "miniature": "seconde/maths/probabilites/13-fluctuation/eleveai-maths-seconde-proba-fluctuation.png",
+      "titre": "29 % AU LIEU DE 25 % : LE VENDEUR MENT ? — Fluctuation d'échantillonnage — épisode 13 · Maths 2de",
+      "accroche": "Au marché, un vendeur affirme que 25 % de ses letchis sont très sucrés. Trois clients en goûtent chacun 100 : ils trouvent 22, 29 et 24 letchis très sucrés. Le vendeur ment-il ?\n\nDans cette vidéo :\n• trois échantillons, trois fréquences différentes : 0,22 ; 0,29 ; 0,24\n• c'est normal : d'un échantillon à l'autre, la fréquence change, c'est la fluctuation d'échantillonnage\n• pour un échantillon de taille n, la fréquence tombe le plus souvent entre p − 1/√n et p + 1/√n\n• avec n = 100 : 1/√100 = 0,1, donc entre 0,15 et 0,35\n• le piège : croire que 0,29 prouve que le vendeur ment ; 0,29 est dans l'intervalle\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : avec des échantillons de 400 letchis, entre quelles valeurs tombe le plus souvent la fréquence ?\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/seconde/echantillonnage-simulation\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=echantillonnage_simulation&microId=echantillon_fluctuation&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "La fluctuation : au marché, 25 % de letchis très sucrés"
+        ],
+        [
+          "00:16",
+          "Trois échantillons, trois fréquences"
+        ],
+        [
+          "00:35",
+          "C'est normal : la fluctuation, et l'intervalle p ± 1/√n"
+        ],
+        [
+          "01:03",
+          "Avec les letchis : [0,15 ; 0,35]"
+        ],
+        [
+          "01:15",
+          "Le piège : 0,29, il ment ?"
+        ],
+        [
+          "01:26",
+          "Défi : 400 letchis"
+        ],
+        [
+          "01:39",
+          "Correction : [0,20 ; 0,30]"
+        ],
+        [
+          "01:52",
+          "Ce que tu as appris, et entraîne-toi"
+        ]
+      ],
+      "tags": [
+        "fluctuation d'échantillonnage",
+        "échantillon",
+        "intervalle de fluctuation",
+        "p plus ou moins 1 sur racine de n",
+        "fréquence",
+        "letchis",
+        "échantillonnage",
+        "probabilités",
+        "maths",
+        "seconde",
+        "2de",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "seconde-proba-fluctuation-short",
+      "notionId": "echantillonnage_simulation",
+      "microId": "echantillon_fluctuation",
+      "classe": "seconde",
+      "ceinture": "jaune",
+      "serie": "Maths 2de",
+      "type": "short",
+      "renvoie_vers": "seconde-proba-fluctuation",
+      "fichier": "seconde/maths/probabilites/13-fluctuation/eleveai-maths-seconde-proba-fluctuation-short.mp4",
+      "miniature": "seconde/maths/probabilites/13-fluctuation/eleveai-maths-seconde-proba-fluctuation-short.png",
+      "titre": "29 sur 100… il ment ? 🍒 — 2de #Shorts",
+      "accroche": "25 % de letchis très sucrés, dit le vendeur. Tu en goûtes 100 et tu en trouves 29. Il ment ? Pas forcément ! Sur 100 letchis, la fréquence bouge de plus ou moins 0,1 : entre 0,15 et 0,35, c'est normal.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : si tu en trouvais 40 sur 100, tu le croirais encore ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=echantillonnage_simulation&microId=echantillon_fluctuation&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #seconde #lycée",
+      "tags": [
+        "fluctuation",
+        "échantillon",
+        "letchis",
+        "probabilités",
+        "maths seconde",
+        "seconde",
+        "lycée",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "seconde-proba-grands-nombres",
+      "notionId": "echantillonnage_simulation",
+      "microId": "echantillon_loi_grands_nombres",
+      "classe": "seconde",
+      "ceinture": "bleue",
+      "serie": "Maths 2de",
+      "type": "longue",
+      "fichier": "seconde/maths/probabilites/14-grands-nombres/eleveai-maths-seconde-proba-grands-nombres.mp4",
+      "miniature": "seconde/maths/probabilites/14-grands-nombres/eleveai-maths-seconde-proba-grands-nombres.png",
+      "titre": "1 000 lancers : 0,604… la probabilité vaut-elle 0,604 ? — Grands nombres — épisode 14 · Maths 2de",
+      "accroche": "Une punaise tombe pointe en haut ou pointe en bas. Personne ne connaît la probabilité. Comment l'estimer ?\n\nDans cette vidéo :\n• on la lance beaucoup : 10 lancers, 0,7 ; 100 lancers, 0,62 ; 1 000 lancers, 0,604\n• plus le nombre de lancers est grand, plus la fréquence se stabilise : c'est la loi des grands nombres\n• estimer : la probabilité vaut environ 0,6\n• prévoir : sur 5 000 lancers, environ 0,6 × 5 000 = 3 000 fois pointe en haut\n• le piège : la fréquence s'approche de la probabilité, mais ne finit pas par la valoir exactement\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : sur 2 000 naissances dans une maternité de Saint-Pierre, 1 030 filles. Estime la probabilité qu'un bébé soit une fille.\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/seconde/echantillonnage-simulation\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=echantillonnage_simulation&microId=echantillon_loi_grands_nombres&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "La loi des grands nombres : une punaise"
+        ],
+        [
+          "00:14",
+          "On répète : 10, 100, 1 000 lancers"
+        ],
+        [
+          "00:29",
+          "La loi des grands nombres"
+        ],
+        [
+          "00:39",
+          "Estimer environ 0,6, et prévoir 3 000 sur 5 000"
+        ],
+        [
+          "00:57",
+          "Le piège"
+        ],
+        [
+          "01:08",
+          "Défi : la maternité de Saint-Pierre"
+        ],
+        [
+          "01:24",
+          "Correction, ce que tu as appris, et entraîne-toi"
+        ]
+      ],
+      "tags": [
+        "loi des grands nombres",
+        "estimer une probabilité",
+        "fréquence",
+        "punaise",
+        "Saint-Pierre",
+        "échantillonnage",
+        "probabilités",
+        "maths",
+        "seconde",
+        "2de",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "seconde-proba-grands-nombres-short",
+      "notionId": "echantillonnage_simulation",
+      "microId": "echantillon_loi_grands_nombres",
+      "classe": "seconde",
+      "ceinture": "jaune",
+      "serie": "Maths 2de",
+      "type": "short",
+      "renvoie_vers": "seconde-proba-grands-nombres",
+      "fichier": "seconde/maths/probabilites/14-grands-nombres/eleveai-maths-seconde-proba-grands-nombres-short.mp4",
+      "miniature": "seconde/maths/probabilites/14-grands-nombres/eleveai-maths-seconde-proba-grands-nombres-short.png",
+      "titre": "Pointe en haut : 7 sur 10 ? Lance-la 1 000 fois ! 📌 — 2de #Shorts",
+      "accroche": "Une punaise : pointe en haut ou en bas ? Personne ne connaît la réponse. 10 lancers : 0,7. 100 lancers : 0,62. 1 000 lancers : 0,604. La fréquence se stabilise autour de 0,6 !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : sur 5 000 lancers, combien de fois pointe en haut environ ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=echantillonnage_simulation&microId=echantillon_loi_grands_nombres&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #seconde #lycée",
+      "tags": [
+        "loi des grands nombres",
+        "punaise",
+        "fréquence",
+        "probabilités",
+        "maths seconde",
+        "seconde",
+        "lycée",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "seconde-proba-simulation",
+      "notionId": "echantillonnage_simulation",
+      "microId": "simulation_frequence",
+      "classe": "seconde",
+      "ceinture": "bleue",
+      "serie": "Maths 2de",
+      "type": "longue",
+      "fichier": "seconde/maths/probabilites/15-simulation/eleveai-maths-seconde-proba-simulation.mp4",
+      "miniature": "seconde/maths/probabilites/15-simulation/eleveai-maths-seconde-proba-simulation.png",
+      "titre": "Probabilité 0,3 : tester « plus grand que 0,3 » ? Le piège ! — Simulation — épisode 15 · Maths 2de",
+      "accroche": "On veut lancer une pièce 1 000 fois. À la main, c'est long. Un ordinateur le fait en une seconde, avec quelques lignes de Python.\n\nDans cette vidéo :\n• random() donne un nombre au hasard entre 0 et 1 ; s'il est plus petit que 0,5, on dit « pile »\n• le programme : un compteur à 0, on répète 1 000 fois, on ajoute 1 quand random() est plus petit que 0,5, puis on divise par 1 000\n• on lance : 0,507, puis 0,493, toujours une fréquence proche de 0,5\n• pour une probabilité de 0,3, on teste random() plus petit que 0,3\n• le piège : tester random() plus grand que 0,3, ce qui arrive 7 fois sur 10\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : pour simuler un dé, on utilise randint(1, 6). Quel test compte les 6 ?\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/seconde/echantillonnage-simulation\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=echantillonnage_simulation&microId=simulation_frequence&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Simuler le hasard : 1 000 lancers de pièce"
+        ],
+        [
+          "00:13",
+          "random() : un nombre au hasard"
+        ],
+        [
+          "00:25",
+          "Le programme"
+        ],
+        [
+          "00:39",
+          "On lance : 0,507 puis 0,493"
+        ],
+        [
+          "00:53",
+          "Une autre probabilité"
+        ],
+        [
+          "01:03",
+          "Le piège"
+        ],
+        [
+          "01:16",
+          "Défi : simuler un dé"
+        ],
+        [
+          "01:29",
+          "Correction"
+        ],
+        [
+          "01:39",
+          "Ce que tu as appris, et entraîne-toi"
+        ]
+      ],
+      "tags": [
+        "simulation",
+        "Python",
+        "random",
+        "randint",
+        "fréquence",
+        "programme",
+        "algorithmique",
+        "échantillonnage",
+        "probabilités",
+        "maths",
+        "seconde",
+        "2de",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "seconde-proba-simulation-short",
+      "notionId": "echantillonnage_simulation",
+      "microId": "simulation_frequence",
+      "classe": "seconde",
+      "ceinture": "jaune",
+      "serie": "Maths 2de",
+      "type": "short",
+      "renvoie_vers": "seconde-proba-simulation",
+      "fichier": "seconde/maths/probabilites/15-simulation/eleveai-maths-seconde-proba-simulation-short.mp4",
+      "miniature": "seconde/maths/probabilites/15-simulation/eleveai-maths-seconde-proba-simulation-short.png",
+      "titre": "1 000 lancers de pièce en 1 seconde avec Python ! 🐍 — 2de #Shorts",
+      "accroche": "1 000 lancers de pièce en une seconde ? Facile, avec Python ! random() plus petit que 0,5 : pile. On compte, on divise par 1 000. Résultat : 0,507. Puis 0,493. Toujours près de 0,5.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : quel test écrire pour un événement de probabilité 0,3 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=echantillonnage_simulation&microId=simulation_frequence&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #seconde #lycée",
+      "tags": [
+        "simulation",
+        "Python",
+        "random",
+        "probabilités",
+        "maths seconde",
+        "seconde",
+        "lycée",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "seconde-proba-interpreter",
+      "notionId": "echantillonnage_simulation",
+      "microId": "echantillon_interpreter",
+      "classe": "seconde",
+      "ceinture": "bleue",
+      "serie": "Maths 2de",
+      "type": "longue",
+      "fichier": "seconde/maths/probabilites/16-interpreter/eleveai-maths-seconde-proba-interpreter.mp4",
+      "miniature": "seconde/maths/probabilites/16-interpreter/eleveai-maths-seconde-proba-interpreter.png",
+      "titre": "80 bouteilles ratées sur 400 : la machine est-elle déréglée ? — Échantillon — épisode 16 · Maths 2de",
+      "accroche": "Une machine remplit des bouteilles de jus de goyave. Le fabricant annonce 10 % de bouteilles mal remplies. Un contrôleur en prélève 400. Normal, ou suspect ?\n\nDans cette vidéo :\n• l'intervalle : avec n = 400, 1/√400 = 0,05, donc entre 0,05 et 0,15\n• 52 bouteilles mal remplies : 52/400 = 0,13, dans l'intervalle, rien d'anormal\n• 80 bouteilles : 80/400 = 0,2, en dehors, c'est suspect, la machine est peut-être déréglée\n• attention : en dehors de l'intervalle, ce n'est pas une preuve ; c'est rare, donc on doute et on vérifie\n• le piège : oublier la taille de l'échantillon ; sur 25 bouteilles, 1/√25 = 0,2, l'intervalle est bien plus large\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : sur 400 bouteilles, 30 mal remplies. Normal ou suspect ?\nC'est le dernier épisode de la série Probabilités de seconde : bravo, tu l'as finie !\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/seconde/echantillonnage-simulation\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=echantillonnage_simulation&microId=echantillon_interpreter&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Normal ou suspect ? Le jus de goyave"
+        ],
+        [
+          "00:17",
+          "L'intervalle"
+        ],
+        [
+          "00:31",
+          "52 bouteilles : normal"
+        ],
+        [
+          "00:42",
+          "80 bouteilles : suspect"
+        ],
+        [
+          "00:55",
+          "Pas une preuve, et le piège de la taille de l'échantillon"
+        ],
+        [
+          "01:17",
+          "À toi de jouer"
+        ],
+        [
+          "01:29",
+          "Correction"
+        ],
+        [
+          "01:41",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "interpréter un échantillon",
+        "intervalle de fluctuation",
+        "prise de décision",
+        "fluctuation",
+        "jus de goyave",
+        "échantillonnage",
+        "probabilités",
+        "maths",
+        "seconde",
+        "2de",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "seconde-proba-interpreter-short",
+      "notionId": "echantillonnage_simulation",
+      "microId": "echantillon_interpreter",
+      "classe": "seconde",
+      "ceinture": "jaune",
+      "serie": "Maths 2de",
+      "type": "short",
+      "renvoie_vers": "seconde-proba-interpreter",
+      "fichier": "seconde/maths/probabilites/16-interpreter/eleveai-maths-seconde-proba-interpreter-short.mp4",
+      "miniature": "seconde/maths/probabilites/16-interpreter/eleveai-maths-seconde-proba-interpreter-short.png",
+      "titre": "10 % annoncés… tu en trouves 20 % : tu le crois ? 🧃 — 2de #Shorts",
+      "accroche": "10 % de bouteilles mal remplies, dit le fabricant. Sur 400, tu en trouves 80. Tu le crois ? 80 sur 400, c'est 0,2. L'intervalle normal va de 0,05 à 0,15. 0,2 est dehors : c'est suspect !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : sur 400 bouteilles, combien en trouverais-tu au maximum sans douter ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=echantillonnage_simulation&microId=echantillon_interpreter&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #seconde #lycée",
+      "tags": [
+        "échantillon",
+        "intervalle de fluctuation",
+        "suspect",
+        "probabilités",
+        "maths seconde",
+        "seconde",
+        "lycée",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
     }
   ]
 }
