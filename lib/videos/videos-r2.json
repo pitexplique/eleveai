@@ -4647,6 +4647,22 @@
   "short": true,
   "youtube": null
  },
+ "seconde-proba-fluctuation": {
+  "fichier": "seconde/maths/probabilites/13-fluctuation/eleveai-maths-seconde-proba-fluctuation.mp4",
+  "poster": "seconde/maths/probabilites/13-fluctuation/eleveai-maths-seconde-proba-fluctuation.png",
+  "vignette": "seconde/maths/probabilites/13-fluctuation/eleveai-maths-seconde-proba-fluctuation.vignette.webp",
+  "titre": "29 % AU LIEU DE 25 % : LE VENDEUR MENT ? — Fluctuation d'échantillonnage — épisode 13 · Maths 2de",
+  "short": false,
+  "youtube": null
+ },
+ "seconde-proba-fluctuation-short": {
+  "fichier": "seconde/maths/probabilites/13-fluctuation/eleveai-maths-seconde-proba-fluctuation-short.mp4",
+  "poster": "seconde/maths/probabilites/13-fluctuation/eleveai-maths-seconde-proba-fluctuation-short.png",
+  "vignette": "seconde/maths/probabilites/13-fluctuation/eleveai-maths-seconde-proba-fluctuation-short.vignette.webp",
+  "titre": "29 sur 100… il ment ? 🍒 — 2de #Shorts",
+  "short": true,
+  "youtube": null
+ },
  "seconde-proba-formule-union": {
   "fichier": "seconde/maths/probabilites/06-formule-union/eleveai-maths-seconde-proba-formule-union.mp4",
   "poster": "seconde/maths/probabilites/06-formule-union/eleveai-maths-seconde-proba-formule-union.png",
@@ -4660,6 +4676,38 @@
   "poster": "seconde/maths/probabilites/06-formule-union/eleveai-maths-seconde-proba-formule-union-short.png",
   "vignette": "seconde/maths/probabilites/06-formule-union/eleveai-maths-seconde-proba-formule-union-short.vignette.webp",
   "titre": "Sport ou musique : 90 % ? 🎵 — 2de #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "seconde-proba-grands-nombres": {
+  "fichier": "seconde/maths/probabilites/14-grands-nombres/eleveai-maths-seconde-proba-grands-nombres.mp4",
+  "poster": "seconde/maths/probabilites/14-grands-nombres/eleveai-maths-seconde-proba-grands-nombres.png",
+  "vignette": "seconde/maths/probabilites/14-grands-nombres/eleveai-maths-seconde-proba-grands-nombres.vignette.webp",
+  "titre": "1 000 lancers : 0,604… la probabilité vaut-elle 0,604 ? — Grands nombres — épisode 14 · Maths 2de",
+  "short": false,
+  "youtube": null
+ },
+ "seconde-proba-grands-nombres-short": {
+  "fichier": "seconde/maths/probabilites/14-grands-nombres/eleveai-maths-seconde-proba-grands-nombres-short.mp4",
+  "poster": "seconde/maths/probabilites/14-grands-nombres/eleveai-maths-seconde-proba-grands-nombres-short.png",
+  "vignette": "seconde/maths/probabilites/14-grands-nombres/eleveai-maths-seconde-proba-grands-nombres-short.vignette.webp",
+  "titre": "Pointe en haut : 7 sur 10 ? Lance-la 1 000 fois ! 📌 — 2de #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "seconde-proba-interpreter": {
+  "fichier": "seconde/maths/probabilites/16-interpreter/eleveai-maths-seconde-proba-interpreter.mp4",
+  "poster": "seconde/maths/probabilites/16-interpreter/eleveai-maths-seconde-proba-interpreter.png",
+  "vignette": "seconde/maths/probabilites/16-interpreter/eleveai-maths-seconde-proba-interpreter.vignette.webp",
+  "titre": "80 bouteilles ratées sur 400 : la machine est-elle déréglée ? — Échantillon — épisode 16 · Maths 2de",
+  "short": false,
+  "youtube": null
+ },
+ "seconde-proba-interpreter-short": {
+  "fichier": "seconde/maths/probabilites/16-interpreter/eleveai-maths-seconde-proba-interpreter-short.mp4",
+  "poster": "seconde/maths/probabilites/16-interpreter/eleveai-maths-seconde-proba-interpreter-short.png",
+  "vignette": "seconde/maths/probabilites/16-interpreter/eleveai-maths-seconde-proba-interpreter-short.vignette.webp",
+  "titre": "10 % annoncés… tu en trouves 20 % : tu le crois ? 🧃 — 2de #Shorts",
   "short": true,
   "youtube": null
  },
@@ -4692,6 +4740,22 @@
   "poster": "seconde/maths/probabilites/05-reunion-intersection/eleveai-maths-seconde-proba-reunion-short.png",
   "vignette": "seconde/maths/probabilites/05-reunion-intersection/eleveai-maths-seconde-proba-reunion-short.vignette.webp",
   "titre": "20 cartes ? NON : 17 ! 🃏 — 2de #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "seconde-proba-simulation": {
+  "fichier": "seconde/maths/probabilites/15-simulation/eleveai-maths-seconde-proba-simulation.mp4",
+  "poster": "seconde/maths/probabilites/15-simulation/eleveai-maths-seconde-proba-simulation.png",
+  "vignette": "seconde/maths/probabilites/15-simulation/eleveai-maths-seconde-proba-simulation.vignette.webp",
+  "titre": "Probabilité 0,3 : tester « plus grand que 0,3 » ? Le piège ! — Simulation — épisode 15 · Maths 2de",
+  "short": false,
+  "youtube": null
+ },
+ "seconde-proba-simulation-short": {
+  "fichier": "seconde/maths/probabilites/15-simulation/eleveai-maths-seconde-proba-simulation-short.mp4",
+  "poster": "seconde/maths/probabilites/15-simulation/eleveai-maths-seconde-proba-simulation-short.png",
+  "vignette": "seconde/maths/probabilites/15-simulation/eleveai-maths-seconde-proba-simulation-short.vignette.webp",
+  "titre": "1 000 lancers de pièce en 1 seconde avec Python ! 🐍 — 2de #Shorts",
   "short": true,
   "youtube": null
  },
