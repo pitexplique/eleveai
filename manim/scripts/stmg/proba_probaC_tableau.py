@@ -110,6 +110,7 @@ DITES = {(0, 0), (0, 2), (1, 2), (2, 0), (2, 1), (2, 2)}   # tout sauf le 32 (di
 
 
 class ProbaTableauBase(Notion6e):
+    ceinture = "bleue"  # 20/10 : la 1re spé passe en marron (sous-classe)
     nom_voix = "stmg-premiere-proba-tableau"
     identite = "Maths — EleveAI"
 
@@ -181,7 +182,7 @@ class ProbaTableauBase(Notion6e):
         titre = self.t("Calculer une probabilité conditionnelle", 48, JAUNE_TITRE).to_edge(UP, buff=0.55)
         sous = self.t("avec un tableau croisé", 40, BLEU_CALCUL).next_to(titre, DOWN, buff=0.2)
         identite = self.t(self.identite, 28).next_to(sous, DOWN, buff=0.22)
-        ech = echelle_ceintures("bleue").move_to(P(-0.6, -2.75))
+        ech = echelle_ceintures(self.ceinture).move_to(P(-0.6, -2.75))
         tb, _, _ = self.tableau(P(-0.6, -0.35), 0.58, montres=(), lettres=False)
         self.play(Write(titre), FadeIn(identite, shift=DOWN * 0.2), FadeIn(ech), FadeIn(tb, shift=UP * 0.2),
                   run_time=1.0)
@@ -491,3 +492,4 @@ class ProbaTableauPremiere(ProbaTableauBase):
 # 19/10 : la même vidéo pour la 1re SPÉ (micro jumelle, pack par classe).
 class ProbaTableauPremiereSpe(ProbaTableauBase):
     identite = "Maths 1re spé — EleveAI"
+    ceinture = "marron"

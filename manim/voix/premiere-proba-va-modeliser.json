@@ -1,0 +1,14 @@
+{
+  "00-garde": "Modéliser une situation avec une variable aléatoire.",
+  "01-situation": "Pour les tortues marines, une association vend des tickets à gratter à 2 euros. Un ticket gagne avec la probabilité 0,2 : alors, 20 euros avec la probabilité 0,25, sinon 5 euros.",
+  "02-definir": "Étape 1 : définir X. X est le gain net du joueur : ce que rapporte le ticket, moins la mise de 2 euros.",
+  "03-valeurs": "Étape 2 : ses valeurs. Gros lot : 20 moins 2, 18. Petit lot : 5 moins 2, 3. Perdant : 0 moins 2, moins 2.",
+  "04-arbre": "Étape 3 : l'arbre. Gagnant, 0,2 ; perdant, 0,8. Puis gros lot, 0,25 ; petit lot, 0,75.",
+  "05-chemins": "P de X égale 18 : gagnant puis gros lot, 0,2 fois 0,25 : 0,05. P de X égale 3 : 0,2 fois 0,75 : 0,15. P de X égale moins 2 : 0,8.",
+  "06-tableau": "La loi de X. Moins 2 : 0,8. 3 : 0,15. 18 : 0,05. La somme fait bien 1.",
+  "07-piege": "Le piège : oublier la mise. 20, 5 et 0, c'est ce que rapporte le ticket. Mais les 2 euros sont payés dans tous les cas, même quand on gagne.",
+  "08-defi": "À toi de jouer. Une recyclerie vend des billets de tombola à 3 euros. Un billet rapporte 10 euros avec la probabilité 0,1, sinon rien. La loi du gain net ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Gagnant : 10 moins 3, 7, probabilité 0,1. Perdant : moins 3, probabilité 0,9.",
+  "09-finale": "Ce que tu as appris. X, le gain net : gain moins mise. Ses valeurs, leurs probabilités avec l'arbre. Et la somme fait 1.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

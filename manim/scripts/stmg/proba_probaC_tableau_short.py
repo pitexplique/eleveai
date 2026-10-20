@@ -80,6 +80,7 @@ def foule(n_lig=3, n_col=14):
 
 
 class ShortProbaTableau(Short6e):
+    ceinture = "jaune"
     nom_voix = "stmg-premiere-proba-tableau-short"
 
     def t(self, texte, font_size=30, color=WHITE, largeur=LARGEUR_MAX):
@@ -98,7 +99,7 @@ class ShortProbaTableau(Short6e):
         # ── 00 : l'accroche : le festival, les gobelets, bus ou voiture ? ──
         self.dire("00-accroche")
         titre = self.grand("Le festival", font_size=46, color=JAUNE_TITRE).move_to(P(0, 3.4))
-        badge = echelle_ceintures("jaune").scale_to_fit_width(config.frame_width * 0.7).move_to(P(0, 2.55))
+        badge = echelle_ceintures(self.ceinture).scale_to_fit_width(config.frame_width * 0.7).move_to(P(0, 2.55))
         sc = scene_festival()
         self.play(Write(titre), FadeIn(badge, shift=DOWN * 0.2), FadeIn(sc, shift=UP * 0.3), run_time=0.8)
         self.au_mot("400 festivaliers")
@@ -214,3 +215,9 @@ class ShortProbaTableau(Short6e):
         self.play(appel.animate.scale(1.08), run_time=0.25)
         self.play(appel.animate.scale(1 / 1.08), run_time=0.25)
         self.attendre_voix(marge=1.5)
+
+
+# 20/10 : la 1re SPÉ, même voix, ceinture ORANGE.
+class ShortProbaTableauPremiereSpe(ShortProbaTableau):
+    identite = "Maths 1re spé — EleveAI"
+    ceinture = "orange"

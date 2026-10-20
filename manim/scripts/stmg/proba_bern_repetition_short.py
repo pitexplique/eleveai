@@ -39,6 +39,7 @@ CLAIR = "#CBD5E1"
 
 class ShortProbaBernRepetitionBase(Short6e):
     nom_voix = "stmg-premiere-proba-bern-repetition-short"
+    ceinture = "jaune"
 
     def t(self, texte, font_size=30, color=WHITE, largeur=LARGEUR_MAX):
         t = Text(texte, font_size=font_size, color=color)
@@ -68,7 +69,7 @@ class ShortProbaBernRepetitionBase(Short6e):
 
         # ── 00 : trois lancers ; combien de résultats ? 6 ? ──
         self.dire("00-accroche")
-        badge = echelle_ceintures("jaune").scale_to_fit_width(config.frame_width * 0.7).move_to(P(0, 2.3))
+        badge = echelle_ceintures(self.ceinture).scale_to_fit_width(config.frame_width * 0.7).move_to(P(0, 2.3))
         pc = piece(0.45).move_to(P(-0.95, 1.3))
         self.play(FadeIn(badge, shift=DOWN * 0.2), FadeIn(pc, scale=0.5), run_time=0.6)
         trois = suite(self.t("3", 40, JAUNE_TITRE), self.t("lancers", 30), buff=0.15).move_to(P(-0.95, 0.5))
@@ -152,3 +153,9 @@ class ShortProbaBernRepetitionSTMG(ShortProbaBernRepetitionBase):
 
 class ShortProbaBernRepetitionPremiere(ShortProbaBernRepetitionBase):
     identite = "Maths 1re — EleveAI"
+
+
+# 20/10 : le même short pour la 1re SPÉ (ceinture orange).
+class ShortProbaBernRepetitionPremiereSpe(ShortProbaBernRepetitionBase):
+    identite = "Maths 1re spé — EleveAI"
+    ceinture = "orange"

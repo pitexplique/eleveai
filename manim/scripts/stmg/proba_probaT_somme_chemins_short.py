@@ -71,6 +71,7 @@ def sac(couleur, gagnants, centre):
 
 
 class ShortProbaSommeCheminsBase(Short6e):
+    ceinture = "jaune"
     nom_voix = "stmg-premiere-proba-somme-chemins-short"
 
     def t(self, texte, font_size=30, color=WHITE, largeur=LARGEUR_MAX):
@@ -119,7 +120,7 @@ class ShortProbaSommeCheminsBase(Short6e):
         # ── 00 : l'accroche : la roue, les deux sacs, « la moyenne, 0,3 ? » ──
         self.dire("00-accroche")
         titre = self.grand("La roue et les sacs", font_size=40, color=JAUNE_TITRE).move_to(P(0, 3.4))
-        badge = echelle_ceintures("jaune").scale_to_fit_width(config.frame_width * 0.7).move_to(P(0, 2.3))
+        badge = echelle_ceintures(self.ceinture).scale_to_fit_width(config.frame_width * 0.7).move_to(P(0, 2.3))
         roue = secteurs(0.2)
         fl = fleche_roue()
         rouge = sac(ROUGE_SAC, 5, P(0.55, 0.75))
@@ -244,3 +245,9 @@ class ShortProbaSommeCheminsSTMG(ShortProbaSommeCheminsBase):
 
 class ShortProbaSommeCheminsPremiere(ShortProbaSommeCheminsBase):
     identite = "Maths 1re — EleveAI"
+
+
+# 20/10 : la 1re SPÉ, même voix, ceinture ORANGE.
+class ShortProbaSommeCheminsPremiereSpe(ShortProbaSommeCheminsBase):
+    identite = "Maths 1re spé — EleveAI"
+    ceinture = "orange"

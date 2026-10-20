@@ -1,0 +1,15 @@
+{
+  "00-garde": "L'écart-type : mesurer le risque.",
+  "01-rappel": "La roue de la kermesse : variance 8,64. Mais 8,64 quoi ? Des euros au carré ! Ça ne se lit pas.",
+  "02-formule": "L'écart-type, sigma de X, c'est la racine de la variance. Racine de 8,64 : environ 2,94 euros. En euros, comme X.",
+  "03-situation": "Karim, conseiller en placements, compare pour un client deux placements sur un an. A : gagner 20 ou 40 euros. B : perdre 60, ou gagner 120 euros. À chaque fois, une chance sur deux : 0,5.",
+  "04-esperance": "A : 0,5 fois 20, plus 0,5 fois 40 : 30. B : 0,5 fois moins 60, plus 0,5 fois 120 : 30. Même espérance !",
+  "05-sigma-a": "Pour A, les écarts à 30 : moins 10 et 10. Au carré : 100. V égale 100, sigma égale 10 euros.",
+  "06-sigma-b": "Pour B : moins 90 et 90. Au carré : 8100. V égale 8100, sigma égale 90 euros.",
+  "07-interpreter": "Même gain moyen, mais un écart-type 9 fois plus grand : B s'éloigne beaucoup plus de 30 euros. B est plus risqué. En économie, l'écart-type mesure le risque.",
+  "08-piege": "Le piège : oublier la racine. Le risque de B, 8100 euros ? Faux ! 8100, ce sont des euros au carré. L'écart-type, c'est 90 euros.",
+  "09-defi": "À toi de jouer. Placement C : perdre 10 ou gagner 70 euros, une chance sur deux. Espérance : 30. Son écart-type ? Mets pause, et cherche !",
+  "09b-correction": "Correction. Écarts : moins 40 et 40. Au carré : 1600. V égale 1600, sigma égale 40 euros : entre A et B.",
+  "10-finale": "Ce que tu as appris. L'écart-type, c'est la racine de la variance, dans l'unité de X. À espérance égale, le plus grand écart-type est le plus risqué.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

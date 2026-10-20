@@ -109,6 +109,7 @@ def ondes(centre, color=ROUGE_ERREUR, r=0.3):
 
 
 class ProbaFauxPositifsBase(Notion6e):
+    ceinture = "marron"  # 20/10 : la 1re spé passe en marron (sous-classe)
     nom_voix = "stmg-premiere-proba-faux-positifs"
     identite = "Maths — EleveAI"
 
@@ -176,7 +177,7 @@ class ProbaFauxPositifsBase(Notion6e):
         self.dire("00-garde")
         titre = self.t("Les faux positifs", 56, JAUNE_TITRE).to_edge(UP, buff=0.55)
         identite = self.t(self.identite, 28).next_to(titre, DOWN, buff=0.22)
-        ech = echelle_ceintures("marron").move_to(P(-0.6, -2.8))
+        ech = echelle_ceintures(self.ceinture).move_to(P(-0.6, -2.8))
         port = portique(0.85).move_to(P(-0.6, 0.45))
         pan = panneau(1.0).move_to(P(-3.2, -0.08))
         self.play(Write(titre), FadeIn(identite, shift=DOWN * 0.2), FadeIn(ech), FadeIn(port), FadeIn(pan),
@@ -543,3 +544,4 @@ class ProbaFauxPositifsPremiere(ProbaFauxPositifsBase):
 # 19/10 : la même vidéo pour la 1re SPÉ (micro jumelle, pack par classe).
 class ProbaFauxPositifsPremiereSpe(ProbaFauxPositifsBase):
     identite = "Maths 1re spé — EleveAI"
+    ceinture = "marron"

@@ -4094,54 +4094,6 @@
   "short": false,
   "youtube": null
  },
- "maths-premiere-proba-indep-incompatible": {
-  "fichier": "premiere/maths/probabilites/34-indep-incompatible/eleveai-maths-premiere-proba-indep-incompatible.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths premiere proba indep incompatible",
-  "short": false,
-  "youtube": null
- },
- "maths-premiere-proba-indep-incompatible-short": {
-  "fichier": "premiere/maths/probabilites/34-indep-incompatible/eleveai-maths-premiere-proba-indep-incompatible-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths premiere proba indep incompatible short",
-  "short": true,
-  "youtube": null
- },
- "maths-premiere-proba-independance": {
-  "fichier": "premiere/maths/probabilites/33-independance/eleveai-maths-premiere-proba-independance.mp4",
-  "poster": null,
-  "vignette": "premiere/maths/probabilites/33-independance/eleveai-maths-premiere-proba-independance.vignette.webp",
-  "titre": "maths premiere proba independance",
-  "short": false,
-  "youtube": null
- },
- "maths-premiere-proba-independance-short": {
-  "fichier": "premiere/maths/probabilites/33-independance/eleveai-maths-premiere-proba-independance-short.mp4",
-  "poster": null,
-  "vignette": "premiere/maths/probabilites/33-independance/eleveai-maths-premiere-proba-independance-short.vignette.webp",
-  "titre": "maths premiere proba independance short",
-  "short": true,
-  "youtube": null
- },
- "maths-premiere-proba-succession": {
-  "fichier": "premiere/maths/probabilites/35-succession/eleveai-maths-premiere-proba-succession.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths premiere proba succession",
-  "short": false,
-  "youtube": null
- },
- "maths-premiere-proba-succession-short": {
-  "fichier": "premiere/maths/probabilites/35-succession/eleveai-maths-premiere-proba-succession-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths premiere proba succession short",
-  "short": true,
-  "youtube": null
- },
  "maths-premiere-second-degre-equation": {
   "fichier": "premiere/maths/paysage/fr/second-degre-equation/eleveai-maths-premiere-second-degre-equation.mp4",
   "poster": "premiere/maths/paysage/fr/second-degre-equation/eleveai-maths-premiere-second-degre-equation.png",
@@ -4746,6 +4698,42 @@
   "youtube": null,
   "coach": "/coach/serie?classe=premiere&matiere=maths&notion=quad_racines_signe&display=simple"
  },
+ "premiere-proba-arbre": {
+  "fichier": "premiere/maths/probabilites/31-arbre/eleveai-maths-premiere-proba-arbre.mp4",
+  "poster": "premiere/maths/probabilites/31-arbre/eleveai-maths-premiere-proba-arbre.png",
+  "vignette": "premiere/maths/probabilites/31-arbre/eleveai-maths-premiere-proba-arbre.vignette.webp",
+  "titre": "(0,1 + 0,4) ÷ 2 ? FAUX ! — Plusieurs chemins : on additionne · Maths 1re spé · STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_arbre&display=simple"
+ },
+ "premiere-proba-arbre-construire": {
+  "fichier": "premiere/maths/probabilites/30-arbre-construire/eleveai-maths-premiere-proba-arbre-construire.mp4",
+  "poster": "premiere/maths/probabilites/30-arbre-construire/eleveai-maths-premiere-proba-arbre-construire.png",
+  "vignette": "premiere/maths/probabilites/30-arbre-construire/eleveai-maths-premiere-proba-arbre-construire.vignette.webp",
+  "titre": "Croissant ou matin : qui va en premier ? — Construire un arbre pondéré · Maths 1re spé · STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_arbre_construire&display=simple"
+ },
+ "premiere-proba-arbre-construire-short": {
+  "fichier": "premiere/maths/probabilites/30-arbre-construire/eleveai-maths-premiere-proba-arbre-construire-short.mp4",
+  "poster": "premiere/maths/probabilites/30-arbre-construire/eleveai-maths-premiere-proba-arbre-construire-short.png",
+  "vignette": "premiere/maths/probabilites/30-arbre-construire/eleveai-maths-premiere-proba-arbre-construire-short.vignette.webp",
+  "titre": "Entraînement ou arrivée : qui passe en premier ? ⛰️ #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_arbre_construire&display=simple"
+ },
+ "premiere-proba-arbre-short": {
+  "fichier": "premiere/maths/probabilites/31-arbre/eleveai-maths-premiere-proba-arbre-short.mp4",
+  "poster": "premiere/maths/probabilites/31-arbre/eleveai-maths-premiere-proba-arbre-short.png",
+  "vignette": "premiere/maths/probabilites/31-arbre/eleveai-maths-premiere-proba-arbre-short.vignette.webp",
+  "titre": "La moyenne, 0,3 ? Non : 0,18 ! 🎡 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_arbre&display=simple"
+ },
  "premiere-proba-conditionnelle": {
   "fichier": "premiere/maths/probabilites/01-conditionnelle/eleveai-maths-premiere-proba-conditionnelle.mp4",
   "poster": "premiere/maths/probabilites/01-conditionnelle/eleveai-maths-premiere-proba-conditionnelle.png",
@@ -4763,6 +4751,78 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_conditionnelle&display=simple"
+ },
+ "premiere-proba-indep-incompatible": {
+  "fichier": "premiere/maths/probabilites/34-indep-incompatible/eleveai-maths-premiere-proba-indep-incompatible.mp4",
+  "poster": "premiere/maths/probabilites/34-indep-incompatible/eleveai-maths-premiere-proba-indep-incompatible.png",
+  "vignette": "premiere/maths/probabilites/34-indep-incompatible/eleveai-maths-premiere-proba-indep-incompatible.vignette.webp",
+  "titre": "Incompatibles = indépendants ? NON ! — Indépendants ou incompatibles · Maths 1re spé · STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_independance_incompatible&display=simple"
+ },
+ "premiere-proba-indep-incompatible-short": {
+  "fichier": "premiere/maths/probabilites/34-indep-incompatible/eleveai-maths-premiere-proba-indep-incompatible-short.mp4",
+  "poster": "premiere/maths/probabilites/34-indep-incompatible/eleveai-maths-premiere-proba-indep-incompatible-short.png",
+  "vignette": "premiere/maths/probabilites/34-indep-incompatible/eleveai-maths-premiere-proba-indep-incompatible-short.vignette.webp",
+  "titre": "Pile et face : indépendants ? Beaucoup disent oui… 🪙 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_independance_incompatible&display=simple"
+ },
+ "premiere-proba-independance": {
+  "fichier": "premiere/maths/probabilites/33-independance/eleveai-maths-premiere-proba-independance.mp4",
+  "poster": "premiere/maths/probabilites/33-independance/eleveai-maths-premiere-proba-independance.png",
+  "vignette": "premiere/maths/probabilites/33-independance/eleveai-maths-premiere-proba-independance.vignette.webp",
+  "titre": "Indépendants = sans rapport ? NON ! — Deux événements indépendants · Maths 1re spé · STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_independance&display=simple"
+ },
+ "premiere-proba-independance-short": {
+  "fichier": "premiere/maths/probabilites/33-independance/eleveai-maths-premiere-proba-independance-short.mp4",
+  "poster": "premiere/maths/probabilites/33-independance/eleveai-maths-premiere-proba-independance-short.png",
+  "vignette": "premiere/maths/probabilites/33-independance/eleveai-maths-premiere-proba-independance-short.vignette.webp",
+  "titre": "5 fois pile… et face au prochain lancer ? 🪙 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_independance&display=simple"
+ },
+ "premiere-proba-inverser": {
+  "fichier": "premiere/maths/probabilites/32-inverser/eleveai-maths-premiere-proba-inverser.mp4",
+  "poster": "premiere/maths/probabilites/32-inverser/eleveai-maths-premiere-proba-inverser.png",
+  "vignette": "premiere/maths/probabilites/32-inverser/eleveai-maths-premiere-proba-inverser.vignette.webp",
+  "titre": "Le détecteur sonne… défectueux ? Seulement 0,16 ! — Les faux positifs · Maths 1re spé · STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_inverser&display=simple"
+ },
+ "premiere-proba-inverser-short": {
+  "fichier": "premiere/maths/probabilites/32-inverser/eleveai-maths-premiere-proba-inverser-short.mp4",
+  "poster": "premiere/maths/probabilites/32-inverser/eleveai-maths-premiere-proba-inverser-short.png",
+  "vignette": "premiere/maths/probabilites/32-inverser/eleveai-maths-premiere-proba-inverser-short.vignette.webp",
+  "titre": "Test positif à 99 %… malade à MÊME PAS 10 % ! 🧪 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_inverser&display=simple"
+ },
+ "premiere-proba-partition": {
+  "fichier": "premiere/maths/probabilites/37-partition/eleveai-maths-premiere-proba-partition.mp4",
+  "poster": "premiere/maths/probabilites/37-partition/eleveai-maths-premiere-proba-partition.png",
+  "vignette": "premiere/maths/probabilites/37-partition/eleveai-maths-premiere-proba-partition.vignette.webp",
+  "titre": "Incompatibles… et ça ne suffit pas ! — Reconnaître une partition · Maths 1re spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_partition&display=simple"
+ },
+ "premiere-proba-partition-short": {
+  "fichier": "premiere/maths/probabilites/37-partition/eleveai-maths-premiere-proba-partition-short.mp4",
+  "poster": "premiere/maths/probabilites/37-partition/eleveai-maths-premiere-proba-partition-short.png",
+  "vignette": "premiere/maths/probabilites/37-partition/eleveai-maths-premiere-proba-partition-short.vignette.webp",
+  "titre": "Pair contre multiple de 3 : qui gagne sur le 6 ? 🎲 — 1re spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_partition&display=simple"
  },
  "premiere-proba-registres": {
   "fichier": "premiere/maths/probabilites/02-parmi-sachant/eleveai-maths-premiere-proba-registres.mp4",
@@ -4782,6 +4842,42 @@
   "youtube": null,
   "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_registres&display=simple"
  },
+ "premiere-proba-succession": {
+  "fichier": "premiere/maths/probabilites/35-succession/eleveai-maths-premiere-proba-succession.mp4",
+  "poster": "premiere/maths/probabilites/35-succession/eleveai-maths-premiere-proba-succession.png",
+  "vignette": "premiere/maths/probabilites/35-succession/eleveai-maths-premiere-proba-succession.vignette.webp",
+  "titre": "0,7 puis 0,5 : ce n'est PLUS une répétition ! — Répéter une épreuve · Maths 1re spé · STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_succession&display=simple"
+ },
+ "premiere-proba-succession-short": {
+  "fichier": "premiere/maths/probabilites/35-succession/eleveai-maths-premiere-proba-succession-short.mp4",
+  "poster": "premiere/maths/probabilites/35-succession/eleveai-maths-premiere-proba-succession-short.png",
+  "vignette": "premiere/maths/probabilites/35-succession/eleveai-maths-premiere-proba-succession-short.vignette.webp",
+  "titre": "3 lancers de pièce : 6 résultats ? NON ! 🪙 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_succession&display=simple"
+ },
+ "premiere-proba-tableau": {
+  "fichier": "premiere/maths/probabilites/29-tableau/eleveai-maths-premiere-proba-tableau.mp4",
+  "poster": "premiere/maths/probabilites/29-tableau/eleveai-maths-premiere-proba-tableau.png",
+  "vignette": "premiere/maths/probabilites/29-tableau/eleveai-maths-premiere-proba-tableau.vignette.webp",
+  "titre": "48 sur 200 ? NON : la ligne D ! — Proba conditionnelle et tableau croisé · Maths 1re spé · STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_tableau&display=simple"
+ },
+ "premiere-proba-tableau-short": {
+  "fichier": "premiere/maths/probabilites/29-tableau/eleveai-maths-premiere-proba-tableau-short.mp4",
+  "poster": "premiere/maths/probabilites/29-tableau/eleveai-maths-premiere-proba-tableau-short.png",
+  "vignette": "premiere/maths/probabilites/29-tableau/eleveai-maths-premiere-proba-tableau-short.vignette.webp",
+  "titre": "150 trient, 80 trient… et pourtant le bus gagne ! 🚌 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_tableau&display=simple"
+ },
  "premiere-proba-totales": {
   "fichier": "premiere/maths/probabilites/28-probabilites-totales/eleveai-maths-premiere-proba-totales.mp4",
   "poster": "premiere/maths/probabilites/28-probabilites-totales/eleveai-maths-premiere-proba-totales.png",
@@ -4799,6 +4895,42 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_totales&display=simple"
+ },
+ "premiere-proba-va-definition": {
+  "fichier": "premiere/maths/probabilites/38-va-definition/eleveai-maths-premiere-proba-va-definition.mp4",
+  "poster": "premiere/maths/probabilites/38-va-definition/eleveai-maths-premiere-proba-va-definition.png",
+  "vignette": "premiere/maths/probabilites/38-va-definition/eleveai-maths-premiere-proba-va-definition.vignette.webp",
+  "titre": "X = 2, ce n'est PAS une probabilité ! — Une variable aléatoire, c'est quoi ? · Maths 1re spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_definition&display=simple"
+ },
+ "premiere-proba-va-definition-short": {
+  "fichier": "premiere/maths/probabilites/38-va-definition/eleveai-maths-premiere-proba-va-definition-short.mp4",
+  "poster": "premiere/maths/probabilites/38-va-definition/eleveai-maths-premiere-proba-va-definition-short.png",
+  "vignette": "premiere/maths/probabilites/38-va-definition/eleveai-maths-premiere-proba-va-definition-short.vignette.webp",
+  "titre": "4 issues… mais seulement 3 valeurs ? 🪙 — 1re spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_definition&display=simple"
+ },
+ "premiere-proba-va-ecart-type": {
+  "fichier": "premiere/maths/probabilites/41-va-ecart-type/eleveai-maths-premiere-proba-va-ecart-type.mp4",
+  "poster": "premiere/maths/probabilites/41-va-ecart-type/eleveai-maths-premiere-proba-va-ecart-type.png",
+  "vignette": "premiere/maths/probabilites/41-va-ecart-type/eleveai-maths-premiere-proba-va-ecart-type.vignette.webp",
+  "titre": "Même gain moyen, risque 9 fois plus grand — L'écart-type · Maths 1re spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_ecart_type&display=simple"
+ },
+ "premiere-proba-va-ecart-type-short": {
+  "fichier": "premiere/maths/probabilites/41-va-ecart-type/eleveai-maths-premiere-proba-va-ecart-type-short.mp4",
+  "poster": "premiere/maths/probabilites/41-va-ecart-type/eleveai-maths-premiere-proba-va-ecart-type-short.png",
+  "vignette": "premiere/maths/probabilites/41-va-ecart-type/eleveai-maths-premiere-proba-va-ecart-type-short.vignette.webp",
+  "titre": "30 € en moyenne… mais lequel est risqué ? 💶 — 1re spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_ecart_type&display=simple"
  },
  "premiere-proba-va-equitable": {
   "fichier": "premiere/maths/probabilites/26-va-equitable/eleveai-maths-premiere-proba-va-equitable.mp4",
@@ -4854,6 +4986,24 @@
   "youtube": null,
   "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_loi&display=simple"
  },
+ "premiere-proba-va-modeliser": {
+  "fichier": "premiere/maths/probabilites/39-va-modeliser/eleveai-maths-premiere-proba-va-modeliser.mp4",
+  "poster": "premiere/maths/probabilites/39-va-modeliser/eleveai-maths-premiere-proba-va-modeliser.png",
+  "vignette": "premiere/maths/probabilites/39-va-modeliser/eleveai-maths-premiere-proba-va-modeliser.vignette.webp",
+  "titre": "Tu as gagné 20 € ? NON, 18 ! — Modéliser avec une variable aléatoire · Maths 1re spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_modeliser&display=simple"
+ },
+ "premiere-proba-va-modeliser-short": {
+  "fichier": "premiere/maths/probabilites/39-va-modeliser/eleveai-maths-premiere-proba-va-modeliser-short.mp4",
+  "poster": "premiere/maths/probabilites/39-va-modeliser/eleveai-maths-premiere-proba-va-modeliser-short.png",
+  "vignette": "premiere/maths/probabilites/39-va-modeliser/eleveai-maths-premiere-proba-va-modeliser-short.vignette.webp",
+  "titre": "5 € gagnés… vraiment ? 🐢 — 1re spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_modeliser&display=simple"
+ },
  "premiere-proba-va-moyenne": {
   "fichier": "premiere/maths/probabilites/27-va-moyenne/eleveai-maths-premiere-proba-va-moyenne.mp4",
   "poster": "premiere/maths/probabilites/27-va-moyenne/eleveai-maths-premiere-proba-va-moyenne.png",
@@ -4889,6 +5039,42 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_notation&display=simple"
+ },
+ "premiere-proba-va-simulation": {
+  "fichier": "premiere/maths/probabilites/36-va-simulation/eleveai-maths-premiere-proba-va-simulation.mp4",
+  "poster": "premiere/maths/probabilites/36-va-simulation/eleveai-maths-premiere-proba-va-simulation.png",
+  "vignette": "premiere/maths/probabilites/36-va-simulation/eleveai-maths-premiere-proba-va-simulation.vignette.webp",
+  "titre": "0,34 au lieu de 0,3 : le site ment ? — Simuler des échantillons avec Python · Maths 1re spé · STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_simulation&display=simple"
+ },
+ "premiere-proba-va-simulation-short": {
+  "fichier": "premiere/maths/probabilites/36-va-simulation/eleveai-maths-premiere-proba-va-simulation-short.mp4",
+  "poster": "premiere/maths/probabilites/36-va-simulation/eleveai-maths-premiere-proba-va-simulation-short.png",
+  "vignette": "premiere/maths/probabilites/36-va-simulation/eleveai-maths-premiere-proba-va-simulation-short.vignette.webp",
+  "titre": "100 échantillons en 1 seconde ! 🐍 — 1re spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_simulation&display=simple"
+ },
+ "premiere-proba-va-variance": {
+  "fichier": "premiere/maths/probabilites/40-va-variance/eleveai-maths-premiere-proba-va-variance.mp4",
+  "poster": "premiere/maths/probabilites/40-va-variance/eleveai-maths-premiere-proba-va-variance.png",
+  "vignette": "premiere/maths/probabilites/40-va-variance/eleveai-maths-premiere-proba-va-variance.vignette.webp",
+  "titre": "Sans le carré, tu trouves toujours 0 ! — Calculer une variance · Maths 1re spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_variance&display=simple"
+ },
+ "premiere-proba-va-variance-short": {
+  "fichier": "premiere/maths/probabilites/40-va-variance/eleveai-maths-premiere-proba-va-variance-short.mp4",
+  "poster": "premiere/maths/probabilites/40-va-variance/eleveai-maths-premiere-proba-va-variance-short.png",
+  "vignette": "premiere/maths/probabilites/40-va-variance/eleveai-maths-premiere-proba-va-variance-short.vignette.webp",
+  "titre": "L'écart moyen ? Toujours 0 ! 🎡 — 1re spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_variance&display=simple"
  },
  "puissances": {
   "fichier": "seconde/maths/paysage/fr/puissances/eleveai-maths-seconde-puissances.mp4",

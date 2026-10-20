@@ -1,0 +1,13 @@
+{
+  "00-garde": "Reconnaître une partition de l'univers.",
+  "01-situation": "Inès est responsable du tri au Sakifo, le festival de musique de Saint-Pierre. Trois bacs : jaune pour les emballages, vert pour le verre, gris pour le reste. Un déchet au hasard. E : il va dans le jaune. V : dans le vert. R : dans le gris.",
+  "02-definition": "Les trois bacs forment une partition de l'univers. Un : aucun déchet ne va dans deux bacs. E, V et R sont incompatibles deux à deux. Deux : chaque déchet a son bac. Leur réunion, c'est tout l'univers, oméga.",
+  "03-exemple": "Avec un dé. A : 1 ou 2. B : 3 ou 4. C : 5 ou 6. Chaque face est dans un seul événement, aucune n'est oubliée : c'est une partition.",
+  "04-contre-exemple": "Maintenant : « pair », et « multiple de 3 ». Le 6 est dans les deux : ça se chevauche. Le 1 et le 5 ne sont dans aucun : oubliés. Ce n'est pas une partition.",
+  "05-piege": "Le piège : croire qu'incompatibles, ça suffit. Sans le bac gris, jaune et vert ne se chevauchent pas. Mais la peau de banane n'a plus de bac ! Il ne faut rien oublier.",
+  "06-utile": "À quoi ça sert ? P de E, plus P de V, plus P de R, égale 1. Et chaque bac devient une branche d'arbre : le départ des probabilités totales.",
+  "07-defi": "À toi de jouer. On lance un dé. A : obtenir au plus 3. B : obtenir au moins 3. A et B forment-ils une partition ? Mets pause, et cherche !",
+  "07b-correction": "Correction. A, c'est 1, 2, 3. B, c'est 3, 4, 5, 6. Le 3 est dans les deux : pas incompatibles. Ce n'est pas une partition. Avec « au moins 4 », ce serait bon.",
+  "08-finale": "Ce que tu as appris. Une partition : des événements incompatibles deux à deux, dont la réunion est l'univers. Ni chevauchement, ni oubli. Et la somme de leurs probabilités fait 1.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

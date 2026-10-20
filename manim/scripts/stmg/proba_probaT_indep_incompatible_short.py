@@ -48,6 +48,7 @@ def piece(r=0.64, fs=28):
 
 class ShortProbaIndepIncompatibleBase(Short6e):
     nom_voix = "stmg-premiere-proba-indep-incompatible-short"
+    ceinture = "jaune"
 
     def t(self, texte, font_size=30, color=WHITE, largeur=LARGEUR_MAX, weight=NORMAL):
         t = Text(texte, font_size=font_size, color=color, weight=weight)
@@ -88,7 +89,7 @@ class ShortProbaIndepIncompatibleBase(Short6e):
         # ── 00 : l'accroche : une pièce, pile et face : indépendants ? ──
         self.dire("00-accroche")
         titre = self.grand("Pile et face", font_size=42, color=JAUNE_TITRE).move_to(P(0, 3.4))
-        badge = echelle_ceintures("jaune").scale_to_fit_width(config.frame_width * 0.7).move_to(P(0, 2.3))
+        badge = echelle_ceintures(self.ceinture).scale_to_fit_width(config.frame_width * 0.7).move_to(P(0, 2.3))
         pc = piece().move_to(P(0, 0.6))
         self.play(Write(titre), FadeIn(badge, shift=DOWN * 0.2), FadeIn(pc, scale=0.5), run_time=0.7)
         self.lancer(pc, 6, "face")
@@ -185,3 +186,9 @@ class ShortProbaIndepIncompatibleSTMG(ShortProbaIndepIncompatibleBase):
 
 class ShortProbaIndepIncompatiblePremiere(ShortProbaIndepIncompatibleBase):
     identite = "Maths 1re — EleveAI"
+
+
+# 20/10 : le même short pour la 1re SPÉ (ceinture orange).
+class ShortProbaIndepIncompatiblePremiereSpe(ShortProbaIndepIncompatibleBase):
+    identite = "Maths 1re spé — EleveAI"
+    ceinture = "orange"

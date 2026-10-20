@@ -22232,6 +22232,1108 @@
         "ceinture orange",
         "Shorts"
       ]
+    },
+    {
+      "id": "premiere-proba-tableau",
+      "notionId": "probabilites_conditionnelles",
+      "microId": "pc_tableau",
+      "classe": "premiere-spe",
+      "ceinture": "marron",
+      "serie": "Maths 1re spé",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-tableau",
+      "fichier": "premiere/maths/probabilites/29-tableau/eleveai-maths-premiere-proba-tableau.mp4",
+      "miniature": "premiere/maths/probabilites/29-tableau/eleveai-maths-premiere-proba-tableau.png",
+      "titre": "48 sur 200 ? NON : la ligne D ! — Proba conditionnelle et tableau croisé · Maths 1re spé · STMG",
+      "accroche": "Une entreprise de 200 salariés : qui pourrait venir travailler à vélo ? On croise deux questions : habites-tu à moins de 5 km ? Viens-tu à vélo ?\n\nDans cette vidéo :\n• « sachant D » : on allume la ligne D, P_D(V) = 48 sur 80 = 0,6\n• dans l'autre sens : la colonne V, P_V(D) = 48 sur 60 = 0,8\n• le piège : 48 sur 200 = 0,24, c'est P(D ∩ V), pas une probabilité conditionnelle\n\n🥋 Ceinture marron.\nUn défi en fin de vidéo, avec sa correction : parmi les salariés qui viennent en voiture, quelle est la probabilité d'habiter à moins de 5 km ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_tableau&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "tags": [
+        "probabilité conditionnelle",
+        "tableau croisé",
+        "sachant",
+        "vélo",
+        "mobilité",
+        "écologie",
+        "probabilités",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI",
+        "1re spé"
+      ],
+      "chapitres": [
+        [
+          "00:00",
+          "Probabilité conditionnelle et tableau croisé"
+        ],
+        [
+          "00:05",
+          "200 salariés, deux questions"
+        ],
+        [
+          "00:18",
+          "Le tableau croisé"
+        ],
+        [
+          "00:34",
+          "Sachant D : la ligne D"
+        ],
+        [
+          "00:53",
+          "48 sur 80 = 0,6"
+        ],
+        [
+          "01:06",
+          "L'autre sens : la colonne V"
+        ],
+        [
+          "01:25",
+          "Le piège : diviser par 200"
+        ],
+        [
+          "01:44",
+          "À toi de jouer"
+        ],
+        [
+          "01:57",
+          "Correction"
+        ],
+        [
+          "02:12",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:33",
+          "Le coach et l'abonnement"
+        ]
+      ]
+    },
+    {
+      "id": "premiere-proba-tableau-short",
+      "notionId": "probabilites_conditionnelles",
+      "microId": "pc_tableau",
+      "classe": "premiere-spe",
+      "ceinture": "orange",
+      "serie": "Maths 1re spé",
+      "type": "short",
+      "renvoie_vers": "premiere-proba-tableau",
+      "meme_video_que": "stmg-proba-tableau-short",
+      "fichier": "premiere/maths/probabilites/29-tableau/eleveai-maths-premiere-proba-tableau-short.mp4",
+      "miniature": "premiere/maths/probabilites/29-tableau/eleveai-maths-premiere-proba-tableau-short.png",
+      "titre": "150 trient, 80 trient… et pourtant le bus gagne ! 🚌 #Shorts",
+      "accroche": "Un festival : 400 festivaliers. 100 sont venus en bus : 80 trient leurs gobelets. 300 sont venus en voiture : 150 trient. On allume la ligne Bus : 80 sur 100 = 0,8. La ligne Voiture : 150 sur 300 = 0,5. Le bus gagne !\n\n🥋 Ceinture orange : un calcul, et un piège à éviter.\n👉 À toi : parmi les 230 festivaliers qui trient, quelle est la probabilité d'être venu en bus ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_tableau&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilité conditionnelle",
+        "festival",
+        "tri",
+        "gobelets",
+        "tableau croisé",
+        "probabilités",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "1re spé",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-proba-arbre-construire",
+      "notionId": "probabilites_conditionnelles",
+      "microId": "pc_arbre_construire",
+      "classe": "premiere-spe",
+      "ceinture": "marron",
+      "serie": "Maths 1re spé",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-arbre-construire",
+      "fichier": "premiere/maths/probabilites/30-arbre-construire/eleveai-maths-premiere-proba-arbre-construire.mp4",
+      "miniature": "premiere/maths/probabilites/30-arbre-construire/eleveai-maths-premiere-proba-arbre-construire.png",
+      "titre": "Croissant ou matin : qui va en premier ? — Construire un arbre pondéré · Maths 1re spé · STMG",
+      "accroche": "Dans une boulangerie, 70 % des clients viennent le matin. Le matin, 40 % achètent un croissant ; l'après-midi, seulement 15 %. Comment dessiner l'arbre ?\n\nDans cette vidéo :\n• étape 1 : nommer les événements, M et C\n• étape 2 : choisir l'ordre grâce à « parmi » ou « sachant »\n• étape 3 : le premier niveau, 0,7 et 1 − 0,7 = 0,3\n• étape 4 : le deuxième niveau, 0,4 et 0,6, puis 0,15 et 0,85\n• le piège : mettre C au premier niveau\n\n🥋 Ceinture marron.\nUn défi en fin de vidéo, avec sa correction : « 60 % des élèves ont un téléphone récent ; parmi eux, 90 % écoutent de la musique en ligne ; parmi les autres, 50 % » : quel événement au premier niveau ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_arbre_construire&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "tags": [
+        "probabilités",
+        "arbre pondéré",
+        "construire un arbre",
+        "énoncé",
+        "boulangerie",
+        "commerce",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI",
+        "1re spé"
+      ],
+      "chapitres": [
+        [
+          "00:00",
+          "Construire un arbre pondéré"
+        ],
+        [
+          "00:05",
+          "L'énoncé : la boulangerie"
+        ],
+        [
+          "00:20",
+          "Étape 1 : nommer les événements"
+        ],
+        [
+          "00:30",
+          "Étape 2 : choisir l'ordre"
+        ],
+        [
+          "00:44",
+          "Étape 3 : le premier niveau"
+        ],
+        [
+          "00:56",
+          "Étape 4 : le deuxième niveau"
+        ],
+        [
+          "01:13",
+          "Le piège : C au premier niveau"
+        ],
+        [
+          "01:28",
+          "À toi de jouer"
+        ],
+        [
+          "01:49",
+          "Correction"
+        ],
+        [
+          "02:10",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:30",
+          "Le coach et l'abonnement"
+        ]
+      ]
+    },
+    {
+      "id": "premiere-proba-arbre-construire-short",
+      "notionId": "probabilites_conditionnelles",
+      "microId": "pc_arbre_construire",
+      "classe": "premiere-spe",
+      "ceinture": "orange",
+      "serie": "Maths 1re spé",
+      "type": "short",
+      "renvoie_vers": "premiere-proba-arbre-construire",
+      "meme_video_que": "stmg-proba-arbre-construire-short",
+      "fichier": "premiere/maths/probabilites/30-arbre-construire/eleveai-maths-premiere-proba-arbre-construire-short.mp4",
+      "miniature": "premiere/maths/probabilites/30-arbre-construire/eleveai-maths-premiere-proba-arbre-construire-short.png",
+      "titre": "Entraînement ou arrivée : qui passe en premier ? ⛰️ #Shorts",
+      "accroche": "Au trail, 80 % des coureurs s'entraînent en montagne, et parmi eux, 75 % finissent la course. « Parmi eux » : on se place d'abord parmi les coureurs entraînés. Premier niveau : entraîné, 0,8, ou pas, 0,2. Puis, après « entraîné » : finit, 0,75.\n\n🥋 Ceinture orange : un calcul, et un piège à éviter.\n👉 À toi : parmi les coureurs pas entraînés en montagne, 25 % finissent : après quelle branche écris-tu ce 0,25 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_arbre_construire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "trail",
+        "montagne",
+        "course",
+        "arbre pondéré",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "1re spé",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-proba-arbre",
+      "notionId": "probabilites_conditionnelles",
+      "microId": "pc_arbre",
+      "classe": "premiere-spe",
+      "ceinture": "marron",
+      "serie": "Maths 1re spé",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-somme-chemins",
+      "fichier": "premiere/maths/probabilites/31-arbre/eleveai-maths-premiere-proba-arbre.mp4",
+      "miniature": "premiere/maths/probabilites/31-arbre/eleveai-maths-premiere-proba-arbre.png",
+      "titre": "(0,1 + 0,4) ÷ 2 ? FAUX ! — Plusieurs chemins : on additionne · Maths 1re spé · STMG",
+      "accroche": "Une entreprise livre des colis : 70 % partent de Saint-Pierre, 30 % de Saint-Denis. Depuis Saint-Pierre, 10 % arrivent en retard ; depuis Saint-Denis, 40 %. Quelle est la probabilité qu'un colis arrive en retard ?\n\nDans cette vidéo :\n• deux chemins mènent à R\n• on multiplie chaque chemin : 0,7 × 0,1 = 0,07 et 0,3 × 0,4 = 0,12\n• on additionne : 0,07 + 0,12 = 0,19\n• le piège : faire la moyenne, (0,1 + 0,4) ÷ 2 = 0,25\n\n🥋 Ceinture marron.\nUn défi en fin de vidéo, avec sa correction : quelle est la probabilité qu'un colis arrive à l'heure ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_arbre&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "tags": [
+        "probabilités",
+        "arbre pondéré",
+        "probabilités totales",
+        "somme de chemins",
+        "livraison",
+        "Saint-Pierre",
+        "Saint-Denis",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI",
+        "1re spé"
+      ],
+      "chapitres": [
+        [
+          "00:00",
+          "Plusieurs chemins"
+        ],
+        [
+          "00:05",
+          "Les colis et les deux entrepôts"
+        ],
+        [
+          "00:22",
+          "L'arbre pondéré"
+        ],
+        [
+          "00:40",
+          "La question : deux chemins vers R"
+        ],
+        [
+          "00:49",
+          "Chaque chemin : on multiplie"
+        ],
+        [
+          "01:06",
+          "On additionne : 0,19"
+        ],
+        [
+          "01:19",
+          "Le piège de la moyenne"
+        ],
+        [
+          "01:39",
+          "À toi de jouer"
+        ],
+        [
+          "01:49",
+          "Correction"
+        ],
+        [
+          "02:18",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:34",
+          "Le coach et l'abonnement"
+        ]
+      ]
+    },
+    {
+      "id": "premiere-proba-arbre-short",
+      "notionId": "probabilites_conditionnelles",
+      "microId": "pc_arbre",
+      "classe": "premiere-spe",
+      "ceinture": "orange",
+      "serie": "Maths 1re spé",
+      "type": "short",
+      "renvoie_vers": "premiere-proba-arbre",
+      "meme_video_que": "stmg-proba-somme-chemins-short",
+      "fichier": "premiere/maths/probabilites/31-arbre/eleveai-maths-premiere-proba-arbre-short.mp4",
+      "miniature": "premiere/maths/probabilites/31-arbre/eleveai-maths-premiere-proba-arbre-short.png",
+      "titre": "La moyenne, 0,3 ? Non : 0,18 ! 🎡 #Shorts",
+      "accroche": "La roue tombe sur l'or une fois sur cinq : 0,2. Alors tu pioches dans le sac rouge : 0,5 de gagner. Sinon, dans le sac bleu : 0,1. Ta chance de gagner, la moyenne, 0,3 ? Non ! Or puis gagné : 0,2 × 0,5 = 0,1. Gris puis gagné : 0,8 × 0,1 = 0,08. On additionne : 0,1 + 0,08 = 0,18.\n\n🥋 Ceinture orange : un calcul, et un piège à éviter.\n👉 À toi : et si la roue tombait sur l'or une fois sur deux, 0,5 : quelle serait ta chance de gagner ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_arbre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "roue",
+        "jeu",
+        "sac de billes",
+        "probabilités totales",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "1re spé",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-proba-inverser",
+      "notionId": "probabilites_conditionnelles",
+      "microId": "pc_inverser",
+      "classe": "premiere-spe",
+      "ceinture": "marron",
+      "serie": "Maths 1re spé",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-faux-positifs",
+      "fichier": "premiere/maths/probabilites/32-inverser/eleveai-maths-premiere-proba-inverser.mp4",
+      "miniature": "premiere/maths/probabilites/32-inverser/eleveai-maths-premiere-proba-inverser.png",
+      "titre": "Le détecteur sonne… défectueux ? Seulement 0,16 ! — Les faux positifs · Maths 1re spé · STMG",
+      "accroche": "Une usine fabrique des panneaux solaires : 2 % sont défectueux. Un détecteur « fiable » repère 95 % des défectueux et laisse passer 90 % des bons. Quand il sonne, le panneau est-il vraiment défectueux ?\n\nDans cette vidéo :\n• le tableau sur 10 000 panneaux : 190 vrais positifs, 10 faux négatifs, 980 faux positifs\n• la colonne « sonne » : 190 sur 1 170, environ 0,16\n• le piège : 95 %, c'est P_D(S), pas P_S(D)\n• les mots du métier : sensibilité et spécificité\n\n🥋 Ceinture marron.\nUn défi en fin de vidéo, avec sa correction : le détecteur ne sonne pas : quelle est la probabilité que le panneau soit quand même défectueux ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_inverser&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "tags": [
+        "probabilité conditionnelle",
+        "faux positifs",
+        "test de dépistage",
+        "sensibilité",
+        "spécificité",
+        "contrôle qualité",
+        "probabilités",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI",
+        "1re spé"
+      ],
+      "chapitres": [
+        [
+          "00:00",
+          "Les faux positifs"
+        ],
+        [
+          "00:05",
+          "L'usine de panneaux solaires"
+        ],
+        [
+          "00:23",
+          "Le tableau sur 10 000 panneaux"
+        ],
+        [
+          "00:40",
+          "Les faux positifs (980)"
+        ],
+        [
+          "00:53",
+          "Il sonne : est-il défectueux ?"
+        ],
+        [
+          "01:17",
+          "Le piège : P_D(S) ou P_S(D)"
+        ],
+        [
+          "01:40",
+          "Sensibilité et spécificité"
+        ],
+        [
+          "01:56",
+          "À toi de jouer"
+        ],
+        [
+          "02:09",
+          "Correction"
+        ],
+        [
+          "02:29",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:47",
+          "Le coach et l'abonnement"
+        ]
+      ]
+    },
+    {
+      "id": "premiere-proba-inverser-short",
+      "notionId": "probabilites_conditionnelles",
+      "microId": "pc_inverser",
+      "classe": "premiere-spe",
+      "ceinture": "orange",
+      "serie": "Maths 1re spé",
+      "type": "short",
+      "renvoie_vers": "premiere-proba-inverser",
+      "meme_video_que": "stmg-proba-faux-positifs-short",
+      "fichier": "premiere/maths/probabilites/32-inverser/eleveai-maths-premiere-proba-inverser-short.mp4",
+      "miniature": "premiere/maths/probabilites/32-inverser/eleveai-maths-premiere-proba-inverser-short.png",
+      "titre": "Test positif à 99 %… malade à MÊME PAS 10 % ! 🧪 #Shorts",
+      "accroche": "Une maladie touche 1 personne sur 1 000. Sur 100 000 personnes : 100 malades, et 99 positifs. Mais le test se trompe chez 1 % des 99 900 autres : 999 faux positifs. Positifs : 99 + 999 = 1 098. Vrais malades : 99 sur 1 098, environ 0,09.\n\n🥋 Ceinture orange : un calcul, et un piège à éviter.\n👉 À toi : et si la maladie touchait 1 personne sur 10 : quelle est la probabilité d'être malade quand le test est positif ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_inverser&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilité conditionnelle",
+        "test médical",
+        "faux positifs",
+        "dépistage",
+        "surprise",
+        "probabilités",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "1re spé",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-proba-independance",
+      "notionId": "probabilites_conditionnelles",
+      "microId": "pc_independance",
+      "classe": "premiere-spe",
+      "ceinture": "marron",
+      "serie": "Maths 1re spé",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-indep-definition",
+      "fichier": "premiere/maths/probabilites/33-independance/eleveai-maths-premiere-proba-independance.mp4",
+      "miniature": "premiere/maths/probabilites/33-independance/eleveai-maths-premiere-proba-independance.png",
+      "titre": "Indépendants = sans rapport ? NON ! — Deux événements indépendants · Maths 1re spé · STMG",
+      "accroche": "Une épicerie a 200 clients : 50 viennent à vélo, 80 ont la carte de fidélité, et parmi eux 20 viennent à vélo. Savoir qu'un client a la carte change-t-il la probabilité qu'il vienne à vélo ?\n\nDans cette vidéo :\n• P(V) = 50 sur 200 = 0,25\n• sachant F, la ligne F : 20 sur 80 = 0,25\n• même nombre : F et V sont indépendants, P_F(V) = P(V)\n• l'épicerie d'à côté : 40 sur 80 = 0,5, pas indépendants\n• le piège : « indépendants » ne veut pas dire « sans rapport dans la vie »\n\n🥋 Ceinture marron.\nUn défi en fin de vidéo, avec sa correction : P(A) = 0,3 et P_B(A) = 0,3 : A et B sont-ils indépendants ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_independance&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "tags": [
+        "probabilités",
+        "indépendance",
+        "événements indépendants",
+        "tableau croisé",
+        "épicerie",
+        "vélo",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI",
+        "1re spé"
+      ],
+      "chapitres": [
+        [
+          "00:00",
+          "Deux événements indépendants"
+        ],
+        [
+          "00:05",
+          "L'épicerie du quartier"
+        ],
+        [
+          "00:16",
+          "P(V) = 0,25"
+        ],
+        [
+          "00:27",
+          "Sachant F : 20 sur 80"
+        ],
+        [
+          "00:37",
+          "Même nombre : P_F(V) = P(V)"
+        ],
+        [
+          "00:51",
+          "L'épicerie d'à côté : 0,5 et 0,25"
+        ],
+        [
+          "01:14",
+          "Le piège"
+        ],
+        [
+          "01:27",
+          "À toi de jouer"
+        ],
+        [
+          "01:41",
+          "Correction"
+        ],
+        [
+          "01:53",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:11",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ]
+    },
+    {
+      "id": "premiere-proba-independance-short",
+      "notionId": "probabilites_conditionnelles",
+      "microId": "pc_independance",
+      "classe": "premiere-spe",
+      "ceinture": "orange",
+      "serie": "Maths 1re spé",
+      "type": "short",
+      "renvoie_vers": "premiere-proba-independance",
+      "meme_video_que": "stmg-proba-indep-definition-short",
+      "fichier": "premiere/maths/probabilites/33-independance/eleveai-maths-premiere-proba-independance-short.mp4",
+      "miniature": "premiere/maths/probabilites/33-independance/eleveai-maths-premiere-proba-independance-short.png",
+      "titre": "5 fois pile… et face au prochain lancer ? 🪙 #Shorts",
+      "accroche": "La pièce vient de tomber 5 fois sur pile. Au prochain lancer, face a plus de chances ? Non ! La pièce n'a pas de mémoire : les lancers sont indépendants. Face : toujours 0,5.\n\n🥋 Ceinture orange : un calcul, et un piège à éviter.\n👉 À toi : au loto, le 7 n'est pas sorti depuis 20 tirages : a-t-il plus de chances de sortir au prochain ? Oui ou non ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_independance&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "pile ou face",
+        "loto",
+        "indépendance",
+        "hasard",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "1re spé",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-proba-indep-incompatible",
+      "notionId": "probabilites_conditionnelles",
+      "microId": "pc_independance_incompatible",
+      "classe": "premiere-spe",
+      "ceinture": "marron",
+      "serie": "Maths 1re spé",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-indep-incompatible",
+      "fichier": "premiere/maths/probabilites/34-indep-incompatible/eleveai-maths-premiere-proba-indep-incompatible.mp4",
+      "miniature": "premiere/maths/probabilites/34-indep-incompatible/eleveai-maths-premiere-proba-indep-incompatible.png",
+      "titre": "Incompatibles = indépendants ? NON ! — Indépendants ou incompatibles · Maths 1re spé · STMG",
+      "accroche": "Une roue de 10 cases numérotées de 1 à 10. A : « pair ». C : « 1 ou 3 ». B : « 4 ou moins ». Qui est incompatible, qui est indépendant ?\n\nDans cette vidéo :\n• incompatibles : impossible ensemble, P(A ∩ C) = 0\n• indépendants : 0,5 × 0,4 = 0,2 = P(A ∩ B)\n• A et C : 0 et 0,1, pas indépendants\n• pourquoi : savoir A, c'est savoir que ce n'est ni 1 ni 3\n• le piège : confondre les deux mots\n\n🥋 Ceinture marron.\nUn défi en fin de vidéo, avec sa correction : D : « le numéro est 10 » : A et D sont-ils incompatibles ? indépendants ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_independance_incompatible&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "tags": [
+        "probabilités",
+        "indépendance",
+        "incompatibles",
+        "roue",
+        "jeu",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI",
+        "1re spé"
+      ],
+      "chapitres": [
+        [
+          "00:00",
+          "Indépendants ou incompatibles ?"
+        ],
+        [
+          "00:05",
+          "La roue"
+        ],
+        [
+          "00:14",
+          "Incompatibles : P(A ∩ C) = 0"
+        ],
+        [
+          "00:32",
+          "Indépendants : 0,5 × 0,4 = 0,2"
+        ],
+        [
+          "00:58",
+          "A et C : 0 et 0,1"
+        ],
+        [
+          "01:19",
+          "Pourquoi ? On SAIT"
+        ],
+        [
+          "01:33",
+          "Le piège"
+        ],
+        [
+          "01:52",
+          "À toi de jouer"
+        ],
+        [
+          "02:06",
+          "Correction"
+        ],
+        [
+          "02:28",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:48",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ]
+    },
+    {
+      "id": "premiere-proba-indep-incompatible-short",
+      "notionId": "probabilites_conditionnelles",
+      "microId": "pc_independance_incompatible",
+      "classe": "premiere-spe",
+      "ceinture": "orange",
+      "serie": "Maths 1re spé",
+      "type": "short",
+      "renvoie_vers": "premiere-proba-indep-incompatible",
+      "meme_video_que": "stmg-proba-indep-incompatible-short",
+      "fichier": "premiere/maths/probabilites/34-indep-incompatible/eleveai-maths-premiere-proba-indep-incompatible-short.mp4",
+      "miniature": "premiere/maths/probabilites/34-indep-incompatible/eleveai-maths-premiere-proba-indep-incompatible-short.png",
+      "titre": "Pile et face : indépendants ? Beaucoup disent oui… 🪙 #Shorts",
+      "accroche": "Un seul lancer de pièce. Pile et face ne peuvent pas arriver ensemble : ils sont incompatibles. Et si tu sais que c'est pile, tu sais que ce n'est pas face ! Ils ne sont PAS indépendants : 0,5 × 0,5 = 0,25, mais P(pile ∩ face) = 0.\n\n🥋 Ceinture orange : un calcul, et un piège à éviter.\n👉 À toi : deux lancers : « pile au premier » et « pile au second ». Indépendants, incompatibles, ou les deux ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_independance_incompatible&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "pile ou face",
+        "incompatibles",
+        "indépendance",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "1re spé",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-proba-succession",
+      "notionId": "probabilites_conditionnelles",
+      "microId": "pc_succession",
+      "classe": "premiere-spe",
+      "ceinture": "marron",
+      "serie": "Maths 1re spé",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-bern-repetition",
+      "fichier": "premiere/maths/probabilites/35-succession/eleveai-maths-premiere-proba-succession.mp4",
+      "miniature": "premiere/maths/probabilites/35-succession/eleveai-maths-premiere-proba-succession.png",
+      "titre": "0,7 puis 0,5 : ce n'est PLUS une répétition ! — Répéter une épreuve · Maths 1re spé · STMG",
+      "accroche": "Une joueuse tire deux lancers francs, et réussit chacun avec une probabilité de 0,7.\n\nDans cette vidéo :\n• deux conditions : épreuves identiques et indépendantes\n• l'arbre se répète : les mêmes branches 0,7 et 0,3 à chaque niveau\n• les 4 chemins au bout\n• le piège : si la probabilité change ou si le tirage est sans remise, ce n'est plus une répétition\n\n🥋 Ceinture marron.\nUn défi en fin de vidéo, avec sa correction : on lance trois fois une pièce équilibrée : combien de chemins compte l'arbre ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_succession&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "tags": [
+        "probabilités",
+        "Bernoulli",
+        "répétition",
+        "épreuves indépendantes",
+        "arbre pondéré",
+        "basket",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI",
+        "1re spé"
+      ],
+      "chapitres": [
+        [
+          "00:00",
+          "Répéter une épreuve"
+        ],
+        [
+          "00:05",
+          "Deux lancers francs"
+        ],
+        [
+          "00:15",
+          "Deux conditions : identiques, indépendantes"
+        ],
+        [
+          "00:29",
+          "L'arbre qui se répète"
+        ],
+        [
+          "00:50",
+          "Les 4 chemins"
+        ],
+        [
+          "00:57",
+          "Le piège"
+        ],
+        [
+          "01:15",
+          "À toi de jouer"
+        ],
+        [
+          "01:27",
+          "Correction : 2 × 2 × 2 = 8"
+        ],
+        [
+          "01:37",
+          "Ce que tu as appris"
+        ],
+        [
+          "01:55",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ]
+    },
+    {
+      "id": "premiere-proba-succession-short",
+      "notionId": "probabilites_conditionnelles",
+      "microId": "pc_succession",
+      "classe": "premiere-spe",
+      "ceinture": "orange",
+      "serie": "Maths 1re spé",
+      "type": "short",
+      "renvoie_vers": "premiere-proba-succession",
+      "meme_video_que": "stmg-proba-bern-repetition-short",
+      "fichier": "premiere/maths/probabilites/35-succession/eleveai-maths-premiere-proba-succession-short.mp4",
+      "miniature": "premiere/maths/probabilites/35-succession/eleveai-maths-premiere-proba-succession-short.png",
+      "titre": "3 lancers de pièce : 6 résultats ? NON ! 🪙 #Shorts",
+      "accroche": "Trois lancers de pièce : combien de résultats possibles ? Premier lancer : 2 branches. Chacune se dédouble au deuxième : 4. Puis encore au troisième : 8 !\n\n🥋 Ceinture orange : un calcul, et un piège à éviter.\n👉 À toi : et avec quatre lancers, combien de chemins sur l'arbre ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_succession&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "pile ou face",
+        "arbre",
+        "dénombrement",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "1re spé",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-proba-va-simulation",
+      "notionId": "variables_aleatoires",
+      "microId": "va_simulation",
+      "classe": "premiere-spe",
+      "ceinture": "marron",
+      "serie": "Maths 1re spé",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-bern-simuler",
+      "fichier": "premiere/maths/probabilites/36-va-simulation/eleveai-maths-premiere-proba-va-simulation.mp4",
+      "miniature": "premiere/maths/probabilites/36-va-simulation/eleveai-maths-premiere-proba-va-simulation.png",
+      "titre": "0,34 au lieu de 0,3 : le site ment ? — Simuler des échantillons avec Python · Maths 1re spé · STMG",
+      "accroche": "Un site de vente en ligne affirme : 30 % des visiteurs achètent. Que donnent des échantillons de 50 visiteurs ? On les simule avec Python.\n\nDans cette vidéo :\n• la fonction echantillon : un compteur à 0 ; 50 fois, si random() est plus petit que 0,3, on ajoute 1 ; on renvoie le compteur divisé par 50\n• on répète 100 fois : 100 fréquences, 0,28, 0,34, 0,26, 0,32…\n• elles changent d'un échantillon à l'autre, mais tournent toutes autour de 0,3\n• le piège : un seul échantillon ne suffit pas ; 0,34 ne prouve pas que le site ment\n\n🥋 Ceinture marron.\nUn défi en fin de vidéo, avec sa correction : que se passe-t-il avec des échantillons de 500 visiteurs au lieu de 50 ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_simulation&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "tags": [
+        "simulation",
+        "Python",
+        "random",
+        "échantillon",
+        "fréquence",
+        "loi de Bernoulli",
+        "algorithmique",
+        "vente en ligne",
+        "probabilités",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI",
+        "1re spé"
+      ],
+      "chapitres": [
+        [
+          "00:00",
+          "Simuler avec Python : le site de vente, 30 % achètent"
+        ],
+        [
+          "00:14",
+          "La fonction echantillon"
+        ],
+        [
+          "00:28",
+          "On répète 100 fois : autour de 0,3"
+        ],
+        [
+          "00:47",
+          "Le piège : un seul échantillon"
+        ],
+        [
+          "00:59",
+          "Défi : 500 visiteurs, et correction"
+        ],
+        [
+          "01:20",
+          "Ce que tu as appris"
+        ]
+      ]
+    },
+    {
+      "id": "premiere-proba-va-simulation-short",
+      "notionId": "variables_aleatoires",
+      "microId": "va_simulation",
+      "classe": "premiere-spe",
+      "ceinture": "orange",
+      "serie": "Maths 1re spé",
+      "type": "short",
+      "renvoie_vers": "premiere-proba-va-simulation",
+      "meme_video_que": "stmg-proba-bern-simuler-short",
+      "fichier": "premiere/maths/probabilites/36-va-simulation/eleveai-maths-premiere-proba-va-simulation-short.mp4",
+      "miniature": "premiere/maths/probabilites/36-va-simulation/eleveai-maths-premiere-proba-va-simulation-short.png",
+      "titre": "100 échantillons en 1 seconde ! 🐍 — 1re spé #Shorts",
+      "accroche": "100 échantillons de 50 clients, en une seconde, avec Python ! 0,28, 0,34, 0,26, 0,32… Les fréquences bougent, mais tournent toutes autour de 0,3.\n\n🥋 Ceinture orange : un calcul, et un piège à éviter.\n👉 À toi : avec 500 clients par échantillon, les fréquences bougent-elles plus ou moins ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_simulation&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "simulation",
+        "Python",
+        "échantillon",
+        "probabilités",
+        "maths STMG",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "1re spé",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-proba-partition",
+      "notionId": "probabilites_conditionnelles",
+      "microId": "pc_partition",
+      "classe": "premiere-spe",
+      "ceinture": "marron",
+      "serie": "Maths 1re spé",
+      "type": "longue",
+      "fichier": "premiere/maths/probabilites/37-partition/eleveai-maths-premiere-proba-partition.mp4",
+      "miniature": "premiere/maths/probabilites/37-partition/eleveai-maths-premiere-proba-partition.png",
+      "titre": "Incompatibles… et ça ne suffit pas ! — Reconnaître une partition · Maths 1re spé",
+      "accroche": "Inès est responsable du tri au Sakifo, le festival de musique de Saint-Pierre : trois bacs, jaune, vert et gris. Une partition de l'univers : des événements incompatibles deux à deux, dont la réunion est l'univers. Un exemple avec un dé, le contre-exemple « pair / multiple de 3 », et le piège : incompatibles ne suffit pas.\n\n🥋 Ceinture marron.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_partition&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "tags": [
+        "partition",
+        "univers",
+        "incompatibles",
+        "festival",
+        "tri des déchets",
+        "probabilités",
+        "maths",
+        "première",
+        "1re spé",
+        "spécialité maths",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-proba-partition-short",
+      "notionId": "probabilites_conditionnelles",
+      "microId": "pc_partition",
+      "classe": "premiere-spe",
+      "ceinture": "orange",
+      "serie": "Maths 1re spé",
+      "type": "short",
+      "renvoie_vers": "premiere-proba-partition",
+      "fichier": "premiere/maths/probabilites/37-partition/eleveai-maths-premiere-proba-partition-short.mp4",
+      "miniature": "premiere/maths/probabilites/37-partition/eleveai-maths-premiere-proba-partition-short.png",
+      "titre": "Pair contre multiple de 3 : qui gagne sur le 6 ? 🎲 — 1re spé #Shorts",
+      "accroche": "Pari sur un dé. Pair : je gagne. Multiple de 3 : tu gagnes. Toujours un seul gagnant ? Non ! Sur le 6, on gagne tous les deux. Sur le 1 et le 5, personne !\n\n🥋 Ceinture orange.\n👉 À toi : « pair » contre « premier » (2, 3 ou 5) : quelle face fait gagner les deux ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_partition&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #première #lycée",
+      "tags": [
+        "partition",
+        "univers",
+        "incompatibles",
+        "festival",
+        "tri des déchets",
+        "piège",
+        "probabilités",
+        "maths",
+        "première",
+        "1re spé",
+        "spécialité maths",
+        "lycée",
+        "EleveAI",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-proba-va-definition",
+      "notionId": "variables_aleatoires",
+      "microId": "va_definition",
+      "classe": "premiere-spe",
+      "ceinture": "marron",
+      "serie": "Maths 1re spé",
+      "type": "longue",
+      "fichier": "premiere/maths/probabilites/38-va-definition/eleveai-maths-premiere-proba-va-definition.mp4",
+      "miniature": "premiere/maths/probabilites/38-va-definition/eleveai-maths-premiere-proba-va-definition.png",
+      "titre": "X = 2, ce n'est PAS une probabilité ! — Une variable aléatoire, c'est quoi ? · Maths 1re spé",
+      "accroche": "En 1654, Pascal et Fermat s'écrivent sur les jeux de hasard ; Fermat est magistrat le jour, mathématicien le soir. Deux pièces, quatre issues : X compte les piles. Une variable aléatoire est une fonction de l'univers vers les réels ; plusieurs issues peuvent donner le même nombre. Le gain G en écus, et le piège : X n'est pas une probabilité.\n\n🥋 Ceinture marron.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_definition&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "tags": [
+        "variable aléatoire",
+        "fonction",
+        "univers",
+        "Pascal",
+        "Fermat",
+        "histoire des maths",
+        "probabilités",
+        "maths",
+        "première",
+        "1re spé",
+        "spécialité maths",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-proba-va-definition-short",
+      "notionId": "variables_aleatoires",
+      "microId": "va_definition",
+      "classe": "premiere-spe",
+      "ceinture": "orange",
+      "serie": "Maths 1re spé",
+      "type": "short",
+      "renvoie_vers": "premiere-proba-va-definition",
+      "fichier": "premiere/maths/probabilites/38-va-definition/eleveai-maths-premiere-proba-va-definition-short.mp4",
+      "miniature": "premiere/maths/probabilites/38-va-definition/eleveai-maths-premiere-proba-va-definition-short.png",
+      "titre": "4 issues… mais seulement 3 valeurs ? 🪙 — 1re spé #Shorts",
+      "accroche": "Deux pièces, quatre issues. Le nombre de piles prend donc quatre valeurs ? Non ! Pile pile, 2. Pile face, 1. Face pile, 1. Face face, 0. Trois valeurs seulement !\n\n🥋 Ceinture orange.\n👉 À toi : avec trois pièces, huit issues : combien de valeurs pour le nombre de piles ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_definition&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #première #lycée",
+      "tags": [
+        "variable aléatoire",
+        "fonction",
+        "univers",
+        "Pascal",
+        "Fermat",
+        "histoire des maths",
+        "piège",
+        "probabilités",
+        "maths",
+        "première",
+        "1re spé",
+        "spécialité maths",
+        "lycée",
+        "EleveAI",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-proba-va-modeliser",
+      "notionId": "variables_aleatoires",
+      "microId": "va_modeliser",
+      "classe": "premiere-spe",
+      "ceinture": "marron",
+      "serie": "Maths 1re spé",
+      "type": "longue",
+      "fichier": "premiere/maths/probabilites/39-va-modeliser/eleveai-maths-premiere-proba-va-modeliser.mp4",
+      "miniature": "premiere/maths/probabilites/39-va-modeliser/eleveai-maths-premiere-proba-va-modeliser.png",
+      "titre": "Tu as gagné 20 € ? NON, 18 ! — Modéliser avec une variable aléatoire · Maths 1re spé",
+      "accroche": "Pour les tortues marines, une association vend des tickets à gratter à 2 euros. X, le gain net : gain moins mise. Ses valeurs 18, 3 et −2, leurs probabilités 0,05, 0,15 et 0,8 avec l'arbre, la loi de X. Le piège : oublier la mise.\n\n🥋 Ceinture marron.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_modeliser&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "tags": [
+        "variable aléatoire",
+        "modéliser",
+        "gain net",
+        "mise",
+        "tortues marines",
+        "association",
+        "probabilités",
+        "maths",
+        "première",
+        "1re spé",
+        "spécialité maths",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-proba-va-modeliser-short",
+      "notionId": "variables_aleatoires",
+      "microId": "va_modeliser",
+      "classe": "premiere-spe",
+      "ceinture": "orange",
+      "serie": "Maths 1re spé",
+      "type": "short",
+      "renvoie_vers": "premiere-proba-va-modeliser",
+      "fichier": "premiere/maths/probabilites/39-va-modeliser/eleveai-maths-premiere-proba-va-modeliser-short.mp4",
+      "miniature": "premiere/maths/probabilites/39-va-modeliser/eleveai-maths-premiere-proba-va-modeliser-short.png",
+      "titre": "5 € gagnés… vraiment ? 🐢 — 1re spé #Shorts",
+      "accroche": "Ticket à gratter à 2 euros, pour les tortues. Tu grattes : 5 euros ! Tu as gagné 5 euros ? Non ! Tu avais payé 2 euros. Gain net : 5 moins 2, 3 euros.\n\n🥋 Ceinture orange.\n👉 À toi : et le gros lot de 20 euros : ton gain net ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_modeliser&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #première #lycée",
+      "tags": [
+        "variable aléatoire",
+        "modéliser",
+        "gain net",
+        "mise",
+        "tortues marines",
+        "association",
+        "piège",
+        "probabilités",
+        "maths",
+        "première",
+        "1re spé",
+        "spécialité maths",
+        "lycée",
+        "EleveAI",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-proba-va-variance",
+      "notionId": "variables_aleatoires",
+      "microId": "va_variance",
+      "classe": "premiere-spe",
+      "ceinture": "marron",
+      "serie": "Maths 1re spé",
+      "type": "longue",
+      "fichier": "premiere/maths/probabilites/40-va-variance/eleveai-maths-premiere-proba-va-variance.mp4",
+      "miniature": "premiere/maths/probabilites/40-va-variance/eleveai-maths-premiere-proba-va-variance.png",
+      "titre": "Sans le carré, tu trouves toujours 0 ! — Calculer une variance · Maths 1re spé",
+      "accroche": "Inès, organisatrice de kermesse, doit prévoir l'argent de la caisse. Sa roue : 0, 2 ou 10 euros, espérance 1,6. La variance : les écarts au carré, fois les probabilités, puis la somme : V(X) = 8,64. Les deux pièges : oublier le carré (on trouve 0) ou les probabilités.\n\n🥋 Ceinture marron.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_variance&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "tags": [
+        "variance",
+        "dispersion",
+        "espérance",
+        "kermesse",
+        "probabilités",
+        "maths",
+        "première",
+        "1re spé",
+        "spécialité maths",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-proba-va-variance-short",
+      "notionId": "variables_aleatoires",
+      "microId": "va_variance",
+      "classe": "premiere-spe",
+      "ceinture": "orange",
+      "serie": "Maths 1re spé",
+      "type": "short",
+      "renvoie_vers": "premiere-proba-va-variance",
+      "fichier": "premiere/maths/probabilites/40-va-variance/eleveai-maths-premiere-proba-va-variance-short.mp4",
+      "miniature": "premiere/maths/probabilites/40-va-variance/eleveai-maths-premiere-proba-va-variance-short.png",
+      "titre": "L'écart moyen ? Toujours 0 ! 🎡 — 1re spé #Shorts",
+      "accroche": "Sa roue paie 0, 2 ou 10 euros, 1,6 en moyenne. De combien s'en écarte-t-on ? Écarts fois probabilités : −0,96 + 0,12 + 0,84… égale 0 ! Ça se compense toujours.\n\n🥋 Ceinture orange.\n👉 À toi : une roue qui paie 2 euros à tous les coups : quelle est sa variance ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_variance&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #première #lycée",
+      "tags": [
+        "variance",
+        "dispersion",
+        "espérance",
+        "kermesse",
+        "piège",
+        "probabilités",
+        "maths",
+        "première",
+        "1re spé",
+        "spécialité maths",
+        "lycée",
+        "EleveAI",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-proba-va-ecart-type",
+      "notionId": "variables_aleatoires",
+      "microId": "va_ecart_type",
+      "classe": "premiere-spe",
+      "ceinture": "marron",
+      "serie": "Maths 1re spé",
+      "type": "longue",
+      "fichier": "premiere/maths/probabilites/41-va-ecart-type/eleveai-maths-premiere-proba-va-ecart-type.mp4",
+      "miniature": "premiere/maths/probabilites/41-va-ecart-type/eleveai-maths-premiere-proba-va-ecart-type.png",
+      "titre": "Même gain moyen, risque 9 fois plus grand — L'écart-type · Maths 1re spé",
+      "accroche": "Karim, conseiller en placements, compare deux placements de même espérance, 30 euros. L'écart-type, racine de la variance, dans l'unité de X : 10 euros pour A, 90 euros pour B. À espérance égale, le plus grand écart-type est le plus risqué. Le piège : oublier la racine.\n\n🥋 Ceinture marron.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_ecart_type&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "tags": [
+        "écart-type",
+        "variance",
+        "risque",
+        "placement",
+        "conseiller financier",
+        "probabilités",
+        "maths",
+        "première",
+        "1re spé",
+        "spécialité maths",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-proba-va-ecart-type-short",
+      "notionId": "variables_aleatoires",
+      "microId": "va_ecart_type",
+      "classe": "premiere-spe",
+      "ceinture": "orange",
+      "serie": "Maths 1re spé",
+      "type": "short",
+      "renvoie_vers": "premiere-proba-va-ecart-type",
+      "fichier": "premiere/maths/probabilites/41-va-ecart-type/eleveai-maths-premiere-proba-va-ecart-type-short.mp4",
+      "miniature": "premiere/maths/probabilites/41-va-ecart-type/eleveai-maths-premiere-proba-va-ecart-type-short.png",
+      "titre": "30 € en moyenne… mais lequel est risqué ? 💶 — 1re spé #Shorts",
+      "accroche": "Deux placements, même gain moyen, 30 euros. A : 20 ou 40 euros. B : −60 ou 120 euros. Écart-type de A : 10 euros. De B : 90 euros !\n\n🥋 Ceinture orange.\n👉 À toi : C : 0 ou 60 euros, une chance sur deux. Son écart-type ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_ecart_type&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #première #lycée",
+      "tags": [
+        "écart-type",
+        "variance",
+        "risque",
+        "placement",
+        "conseiller financier",
+        "piège",
+        "probabilités",
+        "maths",
+        "première",
+        "1re spé",
+        "spécialité maths",
+        "lycée",
+        "EleveAI",
+        "ceinture orange",
+        "Shorts"
+      ]
     }
   ]
 }

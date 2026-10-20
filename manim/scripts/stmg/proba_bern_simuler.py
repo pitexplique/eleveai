@@ -203,6 +203,7 @@ class ProbaBernSimulerBase(Notion6e):
 
     nom_voix = "stmg-proba-bern-simuler"
     identite = "Maths — EleveAI"
+    ceinture = "bleue"
 
     # ── petits outils ───────────────────────────────────────────────────────
 
@@ -225,7 +226,7 @@ class ProbaBernSimulerBase(Notion6e):
         titre = self.t("Simuler des échantillons", 54, JAUNE_TITRE).to_edge(UP, buff=0.55)
         sous = self.t("avec Python", 42, BLEU_CALCUL).next_to(titre, DOWN, buff=0.2)
         identite = self.t(self.identite, 28).next_to(sous, DOWN, buff=0.22)
-        ech = echelle_ceintures("bleue").move_to(P(-0.6, -2.75))
+        ech = echelle_ceintures(self.ceinture).move_to(P(-0.6, -2.75))
         ed = Editeur(1, 5.6, P(-1.3, -0.55), fs=36)
         self.play(Write(titre), FadeIn(identite, shift=DOWN * 0.2), FadeIn(ech), FadeIn(ed), run_time=1.0)
         self.au_mot("avec Python")
@@ -534,3 +535,9 @@ class ProbaBernSimulerBase(Notion6e):
 
 class ProbaBernSimulerSTMG(ProbaBernSimulerBase):
     identite = "Maths STMG — EleveAI"
+
+
+# 20/10 : la même vidéo pour la 1re SPÉ (ceinture marron).
+class ProbaBernSimulerPremiereSpe(ProbaBernSimulerBase):
+    identite = "Maths 1re spé — EleveAI"
+    ceinture = "marron"

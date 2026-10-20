@@ -53,6 +53,7 @@ def boule_loto(n="7", r=0.95):
 
 class ShortProbaIndepDefinition(Short6e):
     nom_voix = "stmg-premiere-proba-indep-definition-short"
+    ceinture = "jaune"
 
     def t(self, texte, font_size=30, color=WHITE, largeur=LARGEUR_MAX):
         t = Text(texte, font_size=font_size, color=color)
@@ -78,7 +79,7 @@ class ShortProbaIndepDefinition(Short6e):
         # ── 00 : l'accroche : 5 fois pile ──
         self.dire("00-accroche")
         titre = self.grand("Pile ou face ?", font_size=46, color=JAUNE_TITRE).move_to(P(0, 3.4))
-        badge = echelle_ceintures("jaune").scale_to_fit_width(config.frame_width * 0.7).move_to(P(0, 2.55))
+        badge = echelle_ceintures(self.ceinture).scale_to_fit_width(config.frame_width * 0.7).move_to(P(0, 2.55))
         p = piece().move_to(P(0, 1.0))
         self.play(Write(titre), FadeIn(badge, shift=DOWN * 0.2), FadeIn(p, scale=0.5), run_time=0.7)
         compteur = VGroup(*[piece(r=0.28).move_to(P(-1.4 + 0.7 * k, -0.45)) for k in range(5)])
@@ -160,3 +161,9 @@ class ShortProbaIndepDefinition(Short6e):
         self.play(appel.animate.scale(1.08), run_time=0.25)
         self.play(appel.animate.scale(1 / 1.08), run_time=0.25)
         self.attendre_voix(marge=1.5)
+
+
+# 20/10 : le même short pour la 1re SPÉ (ceinture orange).
+class ShortProbaIndepDefinitionPremiereSpe(ShortProbaIndepDefinition):
+    identite = "Maths 1re spé — EleveAI"
+    ceinture = "orange"

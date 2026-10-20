@@ -1,0 +1,12 @@
+{
+  "00-garde": "Une variable aléatoire : une fonction définie sur l'univers.",
+  "01-situation": "En 1654, Pascal et Fermat s'écrivent sur les jeux de hasard. Fermat est magistrat le jour, et mathématicien le soir. Un jeu : on lance deux fois une pièce. Quatre issues : pile pile, pile face, face pile, face face. C'est l'univers, oméga.",
+  "02-fleches": "On compte les piles. Pile pile donne 2. Pile face donne 1. Face pile, 1 aussi. Face face, 0. À chaque issue, une flèche vers un nombre. Cette règle s'appelle X : c'est une variable aléatoire.",
+  "03-fonction": "X est une fonction. Elle part de l'univers, et arrive dans les nombres réels. Chaque issue a une seule flèche. Mais deux issues peuvent arriver sur le même nombre : ici, 1.",
+  "04-gain": "Même univers, autre règle : le gain G, en écus. La partie coûte 2 écus, et chaque pile rapporte 3 écus. Pile pile : 6 moins 2, 4. Une seule pile : 3 moins 2, 1. Face face : moins 2.",
+  "05-piege": "Le piège : X n'est pas une probabilité. X égale 2 : deux piles. La probabilité que X égale 2, c'est une issue sur quatre : 0,25. Et G vaut 4, ou moins 2 : jamais une probabilité !",
+  "06-defi": "À toi de jouer. On lance un dé. On gagne 10 euros si on fait 6, et on perd 2 euros sinon. G est le gain. Où vont les flèches ? Et combien de valeurs prend G ? Mets pause, et cherche !",
+  "06b-correction": "Correction. Les faces 1, 2, 3, 4 et 5 vont sur moins 2. La face 6 va sur 10. Six issues, mais seulement deux valeurs : moins 2 et 10.",
+  "07-finale": "Ce que tu as appris. Une variable aléatoire associe un nombre réel à chaque issue : c'est une fonction de l'univers vers les réels. Plusieurs issues peuvent donner le même nombre. Et X n'est pas une probabilité.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

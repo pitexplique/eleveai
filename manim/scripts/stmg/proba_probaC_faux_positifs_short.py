@@ -50,6 +50,7 @@ def cassette(s=1.0):
 
 
 class ShortFauxPositifsBase(Short6e):
+    ceinture = "jaune"
     nom_voix = "stmg-premiere-proba-faux-positifs-short"
 
     def t(self, texte, font_size=30, color=WHITE, largeur=LARGEUR_MAX):
@@ -76,7 +77,7 @@ class ShortFauxPositifsBase(Short6e):
         # ── 00 : l'accroche : positif… malade à 99 % ? Même pas à 10 % ! ──
         self.dire("00-accroche")
         titre = self.grand("Le test médical", font_size=44, color=JAUNE_TITRE).move_to(P(0, 3.4))
-        badge = echelle_ceintures("jaune").scale_to_fit_width(config.frame_width * 0.7).move_to(P(0, 2.3))
+        badge = echelle_ceintures(self.ceinture).scale_to_fit_width(config.frame_width * 0.7).move_to(P(0, 2.3))
         cas = cassette(1.15).move_to(P(0, 1.2))
         self.play(Write(titre), FadeIn(badge, shift=DOWN * 0.2), FadeIn(cas, shift=UP * 0.3), run_time=0.8)
         self.au_mot("fiable à 99 %")
@@ -198,3 +199,9 @@ class ShortFauxPositifsSTMG(ShortFauxPositifsBase):
 
 class ShortFauxPositifsPremiere(ShortFauxPositifsBase):
     pass
+
+
+# 20/10 : la 1re SPÉ, même voix, ceinture ORANGE.
+class ShortFauxPositifsPremiereSpe(ShortFauxPositifsBase):
+    identite = "Maths 1re spé — EleveAI"
+    ceinture = "orange"

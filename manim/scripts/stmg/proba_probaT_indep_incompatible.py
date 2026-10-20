@@ -162,6 +162,7 @@ class ProbaIndepIncompatibleBase(Notion6e):
 
     nom_voix = "stmg-premiere-proba-indep-incompatible"
     identite = "Maths — EleveAI"
+    ceinture = "bleue"
 
     def t(self, texte, font_size=36, color=WHITE, weight=NORMAL):
         return Text(texte, font_size=font_size, color=color, weight=weight)
@@ -201,7 +202,7 @@ class ProbaIndepIncompatibleBase(Notion6e):
             titre.scale_to_fit_width(12.6)
         titre.to_edge(UP, buff=0.6)
         identite = self.t(self.identite, 28).next_to(titre, DOWN, buff=0.22)
-        ech = echelle_ceintures("bleue").move_to(P(-0.6, -2.75))
+        ech = echelle_ceintures(self.ceinture).move_to(P(-0.6, -2.75))
         self.play(Write(titre), FadeIn(identite, shift=DOWN * 0.2), FadeIn(ech), run_time=1.0)
         g1 = self.t("Indépendants", 52, COUL_B, BOLD).move_to(P(-3.3, 0.3))
         g2 = self.t("Incompatibles", 52, COUL_C, BOLD).move_to(P(3.0, 0.3))
@@ -602,3 +603,4 @@ class ProbaIndepIncompatiblePremiere(ProbaIndepIncompatibleBase):
 # 19/10 : la même vidéo pour la 1re SPÉ (micro jumelle, pack par classe).
 class ProbaIndepIncompatiblePremiereSpe(ProbaIndepIncompatibleBase):
     identite = "Maths 1re spé — EleveAI"
+    ceinture = "marron"

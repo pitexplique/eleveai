@@ -689,6 +689,38 @@ for _cl, _bd, _dos, _ep, _c in [
     CEINTURE_SHORT[_nom] = _c
 
 
+# 20/10/2026 — lot PROBABILITÉS 1re SPÉ (29-41) : shorts. Jumelles = la miniature STMG, badge 1RE SPÉ, ceinture orange.
+for _dos, _k, _stmg in [
+    ("29-tableau", "tableau", "tableau"), ("30-arbre-construire", "arbre-construire", "arbre-construire"),
+    ("31-arbre", "arbre", "somme-chemins"), ("32-inverser", "inverser", "faux-positifs"),
+    ("33-independance", "independance", "indep-definition"), ("34-indep-incompatible", "indep-incompatible", "indep-incompatible"),
+    ("35-succession", "succession", "bern-repetition"), ("36-va-simulation", "va-simulation", "bern-simuler"),
+]:
+    _nom = f"eleveai-maths-premiere-proba-{_k}-short"
+    SHORTS[_nom] = {**SHORTS[f"eleveai-maths-stmg-proba-{_stmg}-short"], "badge": "PROBABILITÉS · 1RE SPÉ",
+                    "dossier": "premiere/maths/fr", "sortie": f"premiere/maths/probabilites/{_dos}"}
+    CEINTURE_SHORT[_nom] = "orange"
+for _dos, _k, _titre, _sous, _lg, _tt in [
+    ("37-partition", "partition", ["PAIR CONTRE", "MULTIPLE DE 3"], "toujours un seul gagnant ?",
+     [("le 6 : les deux !", 84, ORANGE), ("1 et 5 : personne", 80, BLEU), ("pas une partition !", 76, ROUGE)], 88),
+    ("38-va-definition", "va-definition", ["2 PIÈCES,", "4 ISSUES"], "combien de valeurs ?",
+     [("PP → 2", 100, BLEU), ("PF, FP → 1", 96, ORANGE), ("3 valeurs !", 100, VERT)], 84),
+    ("39-va-modeliser", "va-modeliser", ["5 € GAGNÉS…", "VRAIMENT ?"], "ticket à 2 € pour les tortues",
+     [("tu as payé 2 €", 84, ROUGE), ("5 − 2", 120, BLEU), ("= 3 € net !", 100, VERT)], 92),
+    ("40-va-variance", "va-variance", ["L'ÉCART", "MOYEN ?"], "la roue de la kermesse",
+     [("−0,96 + 0,12 + 0,84", 64, BLEU), ("= 0 !", 130, ROUGE), ("ça se compense", 80, ORANGE)], 86),
+    ("41-va-ecart-type", "va-ecart-type", ["30 € EN MOYENNE", "LEQUEL EST RISQUÉ ?"], "deux placements",
+     [("A : σ = 10 €", 90, VERT), ("B : σ = 90 €", 90, ROUGE), ("B, 9 fois plus !", 80, ORANGE)], 70),
+]:
+    _nom = f"eleveai-maths-premiere-proba-{_k}-short"
+    SHORTS[_nom] = {
+        "badge": "PROBABILITÉS · 1RE SPÉ", "titre": _titre, "taille": _tt, "sous": _sous,
+        "taille_sous": 44, "couleur_sous": ORANGE, "accroche": _acc(_lg), "dossier": "premiere/maths/fr",
+        "sortie": f"premiere/maths/probabilites/{_dos}",
+    }
+    CEINTURE_SHORT[_nom] = "orange"
+
+
 def main():
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     filtre = sys.argv[1] if len(sys.argv) > 1 else ""

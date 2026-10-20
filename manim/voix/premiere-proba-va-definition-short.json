@@ -1,0 +1,6 @@
+{
+  "00-accroche": "Deux pièces, quatre issues. Le nombre de piles prend donc quatre valeurs ?",
+  "01-surprise": "Non ! Pile pile, 2. Pile face, 1. Face pile, 1. Face face, 0. Trois valeurs seulement !",
+  "02-question": "Et avec trois pièces, huit issues : combien de valeurs pour le nombre de piles ? Réponds en commentaire !",
+  "03-fin": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

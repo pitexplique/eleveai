@@ -1,0 +1,12 @@
+{
+  "00-garde": "Calculer une variance.",
+  "01-situation": "Inès, organisatrice de kermesse, doit prévoir l'argent de la caisse. Sa roue : X, le gain, vaut 0 euro avec une probabilité de 0,6, 2 euros avec 0,3, et 10 euros avec 0,1. Espérance : 1,6 euro.",
+  "02-idee": "Les gains s'écartent de 1,6 : un peu, ou beaucoup. La variance mesure cette dispersion.",
+  "03-formule": "La recette : l'écart, x moins E. Au carré. Fois la probabilité. Puis la somme : c'est V de X.",
+  "04-tableau": "Les écarts à 1,6 : moins 1,6, 0,4 et 8,4. Au carré : 2,56, 0,16 et 70,56. Fois les probabilités : 1,536, 0,048 et 7,056. La somme : 8,64. V de X égale 8,64.",
+  "05-piege": "Premier piège : oublier le carré. Écarts fois probabilités : moins 0,96, plus 0,12, plus 0,84 : 0 ! Les écarts se compensent. Deuxième piège : oublier les probabilités. 2,56 plus 0,16 plus 70,56 : 73,28. Bien trop grand !",
+  "06-defi": "À toi de jouer. Une autre roue : 0 euro ou 4 euros, avec une probabilité de 0,5 chacun. Espérance : 2. Calcule la variance. Mets pause, et cherche !",
+  "06b-correction": "Correction. Les écarts : moins 2 et 2. Au carré : 4 et 4. 0,5 fois 4, plus 0,5 fois 4 : V de X égale 4.",
+  "07-finale": "Ce que tu as appris. La variance : les écarts au carré, fois les probabilités, puis la somme. Sans le carré, on trouverait 0. Prochaine vidéo : l'écart-type.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -315,6 +315,7 @@ MUSIQUE = [
 
 
 class ProbaArbreConstruireBase(Notion6e):
+    ceinture = "bleue"  # 20/10 : la 1re spé passe en marron (sous-classe)
     """Toutes les scènes ; les sous-classes ne changent que l'identité."""
 
     nom_voix = "stmg-premiere-proba-arbre-construire"
@@ -379,7 +380,7 @@ class ProbaArbreConstruireBase(Notion6e):
         self.dire("00-garde")
         titre = self.t("Construire un arbre pondéré", 50, JAUNE_TITRE).to_edge(UP, buff=0.6)
         identite = self.t(self.identite, 28).next_to(titre, DOWN, buff=0.22)
-        ech = echelle_ceintures("bleue").move_to(P(-0.6, -2.6))
+        ech = echelle_ceintures(self.ceinture).move_to(P(-0.6, -2.6))
         feuille = Rectangle(width=2.0, height=2.5, fill_color=WHITE, fill_opacity=1, stroke_color=BORD,
                             stroke_width=2).move_to(P(-4.3, 0.15))
         lignes = VGroup(*[Line(P(-0.7, 0), P(0.7 - 0.35 * (k % 2), 0), color="#94A3B8", stroke_width=4)
@@ -707,3 +708,4 @@ class ProbaArbreConstruirePremiere(ProbaArbreConstruireBase):
 # 19/10 : la même vidéo pour la 1re SPÉ (micro jumelle, pack par classe).
 class ProbaArbreConstruirePremiereSpe(ProbaArbreConstruireBase):
     identite = "Maths 1re spé — EleveAI"
+    ceinture = "marron"

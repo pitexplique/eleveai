@@ -32,6 +32,7 @@ LARGEUR_MAX = 4.1
 
 class ShortProbaBernSimuler(Short6e):
     nom_voix = "stmg-proba-bern-simuler-short"
+    ceinture = "jaune"
 
     def t(self, texte, font_size=30, color=WHITE, largeur=LARGEUR_MAX):
         t = Text(texte, font_size=font_size, color=color)
@@ -49,7 +50,7 @@ class ShortProbaBernSimuler(Short6e):
         # ── 00 : l'accroche : 100 échantillons en une seconde ──
         self.dire("00-accroche")
         titre = self.grand("Simuler avec Python", font_size=40, color=JAUNE_TITRE).move_to(P(0, 3.4))
-        badge = echelle_ceintures("jaune").scale_to_fit_width(config.frame_width * 0.7).move_to(P(0, 2.3))
+        badge = echelle_ceintures(self.ceinture).scale_to_fit_width(config.frame_width * 0.7).move_to(P(0, 2.3))
         ed = Editeur(2, 4.3, P(0, 0.8), fs=22, pas=0.5)
         ed.poser(0, "for k in range(100):")
         ed.poser(1, "    echantillon(50, 0.3)")
@@ -123,3 +124,9 @@ class ShortProbaBernSimuler(Short6e):
         self.play(appel.animate.scale(1.08), run_time=0.25)
         self.play(appel.animate.scale(1 / 1.08), run_time=0.25)
         self.attendre_voix(marge=1.5)
+
+
+# 20/10 : le même short pour la 1re SPÉ (ceinture orange).
+class ShortProbaBernSimulerPremiereSpe(ShortProbaBernSimuler):
+    identite = "Maths 1re spé — EleveAI"
+    ceinture = "orange"

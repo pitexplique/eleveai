@@ -179,6 +179,7 @@ class ArbreSR(VGroup):
 
 
 class ProbaSommeCheminsBase(Notion6e):
+    ceinture = "bleue"  # 20/10 : la 1re spé passe en marron (sous-classe)
     """Toutes les scènes ; les sous-classes ne changent que l'identité."""
 
     nom_voix = "stmg-premiere-proba-somme-chemins"
@@ -218,7 +219,7 @@ class ProbaSommeCheminsBase(Notion6e):
             titre.scale_to_fit_width(12.6)
         titre.to_edge(UP, buff=0.6)
         identite = self.t(self.identite, 28).next_to(titre, DOWN, buff=0.22)
-        ech = echelle_ceintures("bleue").move_to(P(-0.6, -2.75))
+        ech = echelle_ceintures(self.ceinture).move_to(P(-0.6, -2.75))
         a = self.arbre(P(-3.2, -0.1), 0.62, nombres=False)
         for k in range(6):
             a.lab[k].set_opacity(1)
@@ -604,3 +605,4 @@ class ProbaSommeCheminsPremiere(ProbaSommeCheminsBase):
 # 19/10 : la même vidéo pour la 1re SPÉ (micro jumelle, pack par classe).
 class ProbaSommeCheminsPremiereSpe(ProbaSommeCheminsBase):
     identite = "Maths 1re spé — EleveAI"
+    ceinture = "marron"

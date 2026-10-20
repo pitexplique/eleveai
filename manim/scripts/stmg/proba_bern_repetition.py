@@ -150,6 +150,7 @@ class ProbaBernRepetitionBase(Notion6e):
 
     nom_voix = "stmg-premiere-proba-bern-repetition"
     identite = "Maths — EleveAI"
+    ceinture = "bleue"
 
     def t(self, texte, font_size=36, color=WHITE):
         return Text(texte, font_size=font_size, color=color)
@@ -186,7 +187,7 @@ class ProbaBernRepetitionBase(Notion6e):
         self.dire("00-garde")
         titre = self.t("Répéter une épreuve", 52, JAUNE_TITRE).to_edge(UP, buff=0.6)
         identite = self.t(self.identite, 28).next_to(titre, DOWN, buff=0.22)
-        ech = echelle_ceintures("bleue").move_to(P(-0.6, -2.75))
+        ech = echelle_ceintures(self.ceinture).move_to(P(-0.6, -2.75))
         a = ArbrePR(a="S", b="S").scale(0.72).move_to(P(-3.3, 0.05))
         e1 = etiquette("identique", VERT_OK, 40).move_to(P(2.6, 0.75))
         e2 = etiquette("indépendante", BLEU_CALCUL, 40).move_to(P(2.6, -0.55))
@@ -556,3 +557,4 @@ class ProbaBernRepetitionPremiere(ProbaBernRepetitionBase):
 # 19/10 : la même vidéo pour la 1re SPÉ (micro jumelle, pack par classe).
 class ProbaBernRepetitionPremiereSpe(ProbaBernRepetitionBase):
     identite = "Maths 1re spé — EleveAI"
+    ceinture = "marron"

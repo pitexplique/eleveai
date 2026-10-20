@@ -1814,6 +1814,28 @@ for _cl, _dos, _k, _bd, _c, _duree, _titre, _haut, _bas in [
     }
 
 
+# 20/10/2026 — lot PROBABILITÉS 1re SPÉ (29-41) : paysages (jumelles STMG 29-36 + nouveaux 37-41).
+for _dos, _k, _duree, _titre, _haut, _bas in [
+    ("29-tableau", "tableau", "EN 3 MIN", ["COMPRENDRE LES PROBAS", "AVEC UN TABLEAU"], "48 sur 200 ?", "non : 48 sur 80, la ligne D !"),
+    ("30-arbre-construire", "arbre-construire", "EN 3 MIN", ["CONSTRUIRE", "UN ARBRE PONDÉRÉ"], "Croissant ou matin d'abord ?", "le « parmi » décide !"),
+    ("31-arbre", "arbre", "EN 3 MIN", ["PRODUIT ET SOMME", "SUR UN ARBRE"], "(0,1 + 0,4) ÷ 2 ?", "FAUX : 0,07 + 0,12 = 0,19"),
+    ("32-inverser", "inverser", "EN 3 MIN", ["COMPRENDRE", "LES FAUX POSITIFS"], "Le détecteur sonne…", "défectueux ? seulement 0,16 !"),
+    ("33-independance", "independance", "EN 3 MIN", ["COMPRENDRE", "L'INDÉPENDANCE"], "Indépendants = sans rapport ?", "non : 0,25 = 0,25 !"),
+    ("34-indep-incompatible", "indep-incompatible", "EN 3 MIN", ["INDÉPENDANTS OU", "INCOMPATIBLES ?"], "Incompatibles = indépendants ?", "presque le CONTRAIRE !"),
+    ("35-succession", "succession", "EN 2 MIN", ["RÉPÉTER", "UNE ÉPREUVE"], "3 lancers : 6 résultats ?", "non : 2 × 2 × 2 = 8 !"),
+    ("36-va-simulation", "va-simulation", "EN 2 MIN", ["SIMULER", "AVEC PYTHON"], "0,34 au lieu de 0,3 : il ment ?", "non : 100 échantillons, autour de 0,3"),
+    ("37-partition", "partition", "EN 2 MIN", ["RECONNAÎTRE", "UNE PARTITION"], "Incompatibles…", "et ça ne suffit pas !"),
+    ("38-va-definition", "va-definition", "EN 2 MIN", ["UNE VARIABLE ALÉATOIRE,", "C'EST QUOI ?"], "X = 2, une probabilité ?", "NON : un nombre de piles !"),
+    ("39-va-modeliser", "va-modeliser", "EN 3 MIN", ["MODÉLISER AVEC", "UNE VARIABLE ALÉATOIRE"], "Tu as gagné 20 € ?", "NON : 18 € ! (la mise)"),
+    ("40-va-variance", "va-variance", "EN 3 MIN", ["CALCULER", "UNE VARIANCE"], "Sans le carré…", "tu trouves toujours 0 !"),
+    ("41-va-ecart-type", "va-ecart-type", "EN 3 MIN", ["L'ÉCART-TYPE :", "MESURER LE RISQUE"], "Même gain moyen…", "risque 9 fois plus grand !"),
+]:
+    ESSAIS[f"eleveai-maths-premiere-proba-{_k}"] = {
+        "badge": "MATHS · 1RE SPÉ", "duree": _duree, "titre": _titre,
+        "accroche": _piege_test("marron", _haut, _bas), "dossier": f"premiere/maths/probabilites/{_dos}",
+    }
+
+
 def construire(nom, spec):
     img = fond()
     d = ImageDraw.Draw(img)

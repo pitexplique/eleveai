@@ -76,6 +76,7 @@ def arche():
 
 
 class ShortProbaArbreConstruireBase(Short6e):
+    ceinture = "jaune"
     nom_voix = "stmg-premiere-proba-arbre-construire-short"
 
     def t(self, texte, font_size=30, color=WHITE, largeur=LARGEUR_MAX):
@@ -102,7 +103,7 @@ class ShortProbaArbreConstruireBase(Short6e):
         # ── 00 : l'accroche : la montagne, 80 %, 75 % ──
         self.dire("00-accroche")
         titre = self.grand("Le trail", font_size=46, color=JAUNE_TITRE).move_to(P(0, 3.4))
-        badge = echelle_ceintures("jaune").scale_to_fit_width(config.frame_width * 0.7).move_to(P(0, 2.3))
+        badge = echelle_ceintures(self.ceinture).scale_to_fit_width(config.frame_width * 0.7).move_to(P(0, 2.3))
         mont = montagne()
         couleurs = [ENTRAINE, ENTRAINE, AUTRE, ENTRAINE, ENTRAINE, ENTRAINE, AUTRE, ENTRAINE, ENTRAINE, ENTRAINE]
         gens = VGroup()
@@ -216,3 +217,9 @@ class ShortProbaArbreConstruireSTMG(ShortProbaArbreConstruireBase):
 
 class ShortProbaArbreConstruirePremiere(ShortProbaArbreConstruireBase):
     identite = "Maths 1re — EleveAI"
+
+
+# 20/10 : la 1re SPÉ, même voix, ceinture ORANGE.
+class ShortProbaArbreConstruirePremiereSpe(ShortProbaArbreConstruireBase):
+    identite = "Maths 1re spé — EleveAI"
+    ceinture = "orange"
