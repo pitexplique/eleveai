@@ -13,6 +13,7 @@
 // Un épisode de plus = une entrée de plus dans DEVOIRS.
 
 import { QRCodeSVG } from "qrcode.react";
+import { lienVideoAbsolu } from "@/lib/videos/lienVideo";
 import type { ReactNode } from "react";
 import ModeClasse, { type ClasseSlide } from "@/components/fiches/ModeClasse";
 import { insecables } from "@/lib/fiches/typographie";
@@ -262,7 +263,7 @@ function slidesDuDevoir(d: Devoir): ClasseSlide[] {
         ? {
             schema: (
               <div className="flex justify-center rounded-3xl bg-white p-6">
-                <QRCodeSVG value={d.video} size={260} aria-label={`QR code vers l'épisode ${d.numero}`} />
+                <QRCodeSVG value={lienVideoAbsolu(d.video)} size={260} aria-label={`QR code vers l'épisode ${d.numero}`} />
               </div>
             ),
           }
@@ -313,7 +314,7 @@ function BlocDevoir({ d }: { d: Devoir }) {
         <div className="flex shrink-0 gap-3">
           {d.video && (
             <figure className="text-center">
-              <QRCodeSVG value={d.video} size={72} className="qr" aria-label={`QR code vers l'épisode ${d.numero}`} />
+              <QRCodeSVG value={lienVideoAbsolu(d.video)} size={72} className="qr" aria-label={`QR code vers l'épisode ${d.numero}`} />
               <figcaption className="mt-1 text-[10px] font-bold text-slate-600">l'épisode</figcaption>
             </figure>
           )}

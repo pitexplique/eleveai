@@ -37,6 +37,9 @@ const option = (nom) => {
   return i >= 0 ? args[i + 1] : null;
 };
 const ECRIRE = args.includes("--ecrire");
+// --remplacer : une micro occupée par la vidéo YouTube d'une AUTRE classe (ex. la
+// 4e sur la micro de 6e) reçoit la vidéo R2 faite pour SA classe, à sa ceinture.
+const REMPLACER = args.includes("--remplacer");
 const TOUT = args.includes("--tout");
 const F_CLASSE = option("--classe");
 const F_NOTION = option("--notion");
@@ -68,7 +71,7 @@ function classeDe(v) {
 
 const idYoutube = (url) =>
   url?.match(/(?:youtu\.be\/|shorts\/|[?&]v=|embed\/)([\w-]{11})/)?.[1] ?? url;
-const estShort = (url) => /\/shorts\//.test(url ?? "");
+const estShort = (url) => /\/shorts\/|[?&]format=short\b/.test(url ?? "");
 
 
 // ── La base d'abord : ce qui est déjà branché, par ID YouTube ────────────────
@@ -95,7 +98,21 @@ const manifeste = JSON.parse(readFileSync(option("--manifeste") ?? "manim/manife
 // Une micro commune à deux classes (STMG / 1re…) n'est publiée qu'UNE fois :
 // l'entrée jumelle porte `meme_video_que` et reprend l'URL de l'autre.
 const parIdManifeste = new Map(manifeste.videos.map((v) => [v.id, v]));
+// ⛔ 20/10/2026 — Frédéric : « dans le coach les vidéos R2 doivent apparaître et
+// remplacer les vidéos YouTube, car mes élèves sont dispersés avec YouTube ;
+// YouTube ne sert qu'à la pub ». Une vidéo PAS publiée mais présente sur R2
+// (lib/videos/videos-r2.json) est branchée sur le lecteur du site, sous son id
+// du manifeste ; un short porte ?format=short (la case verticale du coach).
+// Une jumelle (meme_video_que) a son PROPRE rendu, à sa ceinture : on prend
+// le sien sur R2 avant l'URL YouTube de l'autre classe.
+const R2 = JSON.parse(readFileSync("lib/videos/videos-r2.json", "utf8"));
+// ID YouTube → dossier de classe de la vidéo (premier segment de son fichier).
+const classeYoutube = new Map(Object.values(R2).filter((x) => x.youtube).map((x) => [x.youtube, x.fichier.split("/")[0]]));
 for (const v of manifeste.videos) {
+  if (!v.url && R2[v.id]) {
+    v.url = `https://www.eleveai.fr/video/${v.id}${v.type === "short" ? "?format=short" : ""}`;
+    v._r2 = true;
+  }
   if (!v.url && v.meme_video_que) v.url = parIdManifeste.get(v.meme_video_que)?.url;
 }
 // ⭐ 20/10 : `aussi` = la même vidéo branchée sur d'AUTRES micros (même classe ou
@@ -142,8 +159,15 @@ for (const v of manifeste.videos) {
     notion_id: v.notionId, micro_id: v.microId || "",
     url: v.url, titre: v.titre,
   };
-  const rivale = ligne.micro_id && (parPlace.get(cle(ligne)) ?? []).find((u) => estShort(u) === short);
-  if (rivale) { occupees.push({ v, short, ligne, rivale }); continue; }
+  // Une vidéo R2 seule ne s'ajoute pas non plus à une NOTION qui a déjà sa
+  // vidéo du même genre (sinon doublon dans l'en-tête et sur la fiche).
+  const rivale = (ligne.micro_id || v._r2) && (parPlace.get(cle(ligne)) ?? []).find((u) => estShort(u) === short);
+  if (rivale) {
+    const autre = classeYoutube.get(idYoutube(rivale));
+    const remplacable = v._r2 && autre && autre !== (v.fichier ?? "").split("/")[0];
+    occupees.push({ v, short, ligne, rivale, remplacable, autre });
+    continue;
+  }
   nouvelles.push({ v, short, ligne });
 }
 
@@ -160,7 +184,19 @@ async function rendreCompte() {
   }
   if (occupees.length) {
     console.log("\n⚠ micro déjà occupée par une autre vidéo du même genre (le coach n'en montre qu'une) — non touchée :");
-    for (const b of occupees) console.log(`  ${genre(b)}  ${place(b.ligne)}  ${b.v.id}  (en place : ${b.rivale})`);
+    for (const b of occupees) console.log(`  ${b.remplacable ? "↻" : " "} ${genre(b)}  ${place(b.ligne)}  ${b.v.id}  (en place : ${b.rivale}${b.autre ? ", vidéo " + b.autre : ""})`);
+    const aRemplacer = occupees.filter((b) => b.remplacable);
+    if (aRemplacer.length) console.log(`  ↻ = vidéo d'une autre classe, remplaçable par la vidéo R2 de la classe (${aRemplacer.length}) : --remplacer`);
+    if (REMPLACER && ECRIRE) {
+      for (const b of aRemplacer) {
+        const { error: e } = await db.from("notion_ressources")
+          .update({ url: b.ligne.url, titre: b.ligne.titre })
+          .eq("matiere", "maths").eq("type", "video").eq("classe", b.ligne.classe)
+          .eq("notion_id", b.ligne.notion_id).eq("micro_id", b.ligne.micro_id).eq("url", b.rivale);
+        if (e) throw e;
+      }
+      console.log(`  ✓ ${aRemplacer.length} remplacées.`);
+    }
   }
   if (ecartees.length) {
     console.log("\n✗ écartées :");

@@ -30,7 +30,7 @@ import { useEleve } from "@/context/EleveContext";
 import Link from "next/link";
 import { BookOpen, Camera, ChevronRight, PencilLine, Play } from "lucide-react";
 import { ficheExercicesHrefPourCoach } from "@/lib/fiches-exercices/registre";
-import { lienVideo } from "@/lib/videos/lienVideo";
+import { estShortVideo, lienVideo } from "@/lib/videos/lienVideo";
 import { ficheClasseSource, ficheHrefPourCoach, libelleClasse } from "@/lib/fiches/registre";
 import { useNotionsPliees } from "@/components/coach/useNotionsPliees";
 import { track } from "@vercel/analytics";
@@ -1170,8 +1170,8 @@ export default function CoachIA() {
                                 // bouton « Vidéo » ; le short a sa petite case
                                 // verticale, le format d'un téléphone.
                                 (() => {
-                                  const paysage = microVideos.find((v) => !v.url.includes("/shorts/"));
-                                  const short = microVideos.find((v) => v.url.includes("/shorts/"));
+                                  const paysage = microVideos.find((v) => !estShortVideo(v.url));
+                                  const short = microVideos.find((v) => estShortVideo(v.url));
                                   return (
                                     <span className="flex shrink-0 items-center gap-1 self-center">
                                       {paysage ? (

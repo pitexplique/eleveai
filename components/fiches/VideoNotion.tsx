@@ -23,6 +23,7 @@
 import { useEffect, useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import { PlayCircle } from "lucide-react";
+import { lienVideoAbsolu } from "@/lib/videos/lienVideo";
 
 export default function VideoNotion({
   matiere,
@@ -51,7 +52,10 @@ export default function VideoNotion({
       .then((res) => res.json())
       .then((data) => {
         if (annule) return;
-        setVideos(data?.videos?.[notionId] ?? []);
+        // ⛔ 20/10/2026 : le QR mène au lecteur du site (vidéo sur R2), plus à
+        // YouTube — « mes élèves sont dispersés avec YouTube ».
+        const liste: { url: string; titre: string | null }[] = data?.videos?.[notionId] ?? [];
+        setVideos(liste.map((v) => ({ ...v, url: lienVideoAbsolu(v.url) })));
       })
       .catch(() => {
         /* hors-ligne : repli chaîne */
