@@ -166,8 +166,10 @@ def _piece_a(t, centre, r):
     pile = c >= 0
     disque = Circle(radius=r, fill_color=PILE_C if pile else FACE_C, fill_opacity=1,
                     stroke_color=WHITE, stroke_width=3)
-    mot = Text("PILE" if pile else "FACE", font_size=int(r * 34), color=BLACK, weight=BOLD)
-    g = VGroup(disque, mot.move_to(disque))
+    # structure FIXE : disque + « PILE » + « FACE », on n'allume que le bon mot (pour `become`)
+    mp = Text("PILE", font_size=int(r * 34), color=BLACK, weight=BOLD).move_to(disque).set_opacity(1 if pile else 0)
+    mf = Text("FACE", font_size=int(r * 34), color=BLACK, weight=BOLD).move_to(disque).set_opacity(0 if pile else 1)
+    g = VGroup(disque, mp, mf)
     g.stretch(max(abs(c), 0.05), 0)
     return g.move_to(centre + UP * 0.25 * abs(math.sin(t * 2.5)))
 

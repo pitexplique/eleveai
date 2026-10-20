@@ -1,0 +1,12 @@
+{
+  "00-garde": "A inter B, A union B : et, ou.",
+  "01-situation": "On tire une carte dans un jeu de 32 cartes. A : « la carte est un cœur ». B : « la carte est une figure » : valet, dame ou roi.",
+  "02-inter": "A inter B : un cœur ET une figure. Valet, dame et roi de cœur : 3 cartes. P de A inter B égale 3 sur 32.",
+  "03-union": "A union B : un cœur OU une figure, ou les deux. 8 cœurs, plus les 9 figures qui ne sont pas des cœurs : 17 cartes. 17 sur 32.",
+  "04-ou": "En maths, « ou » est inclusif : la dame de cœur est dans A union B, même si elle est dans les deux.",
+  "05-piege": "Le piège : additionner 8 et 12 pour A union B. 20, c'est trop : les 3 figures de cœur sont comptées deux fois.",
+  "06-defi": "À toi de jouer. Même jeu. C : « la carte est rouge ». Combien de cartes dans C inter B ? Mets pause, et cherche !",
+  "06b-correction": "Correction. Les figures rouges : cœur et carreau, 3 chacun. 6 cartes, 6 sur 32.",
+  "07-finale": "Ce que tu as appris. Inter, c'est ET : les deux à la fois. Union, c'est OU : l'un, l'autre, ou les deux. On ne compte jamais deux fois la même issue. L'épisode 6 t'attend : la formule de la réunion.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

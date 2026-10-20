@@ -60,12 +60,13 @@ def piece_muette(centre, r=0.42):
         g.stretch(max(abs(c), 0.06), 0)
         return g.move_to(centre + UP * 0.18 * abs(math.sin(t * 2.5)))
 
-    holder = VGroup(faire(0))
+    holder = faire(0)
 
+    # ⛔ 20/10 : `become` et non remove/add — remplacer les enfants dans l'updater laissait,
+    # pendant un `play`, l'ancien enfant dessiné sous le nouveau (pièce ou dé EN DOUBLE).
     def maj(m, dt):
         etat["t"] += dt
-        m.remove(*m.submobjects)
-        m.add(faire(etat["t"]))
+        m.become(faire(etat["t"]))
 
     holder.add_updater(maj)
     return holder

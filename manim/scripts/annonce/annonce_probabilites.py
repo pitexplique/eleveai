@@ -69,19 +69,29 @@ def de(face, cote=1.2):
     return VGroup(corps, pts)
 
 
+def _de_6_points(face, cote=1.2):
+    """Le même dé, mais TOUJOURS 6 points (ceux en trop sont invisibles) : une
+    structure fixe, pour que `become` marche pendant un `play`."""
+    d = de(face, cote)
+    while len(d[1]) < 6:
+        d[1].add(Dot(d[0].get_center(), radius=cote * 0.085).set_opacity(0))
+    return d
+
+
 def de_qui_roule(centre, cote=1.2, periode=0.22, faces=None):
     """Un dé qui roule SANS FIN (updater) : la face change, il tangue."""
     faces = faces or [3, 5, 2, 6, 1, 4]
     etat = {"t": 0.0, "k": 0}
-    holder = VGroup(de(faces[0], cote).move_to(centre))
+    holder = _de_6_points(faces[0], cote).move_to(centre)
 
+    # ⛔ 20/10 : `become` et non remove/add — remplacer les enfants dans l'updater laissait,
+    # pendant un `play`, l'ancien enfant dessiné sous le nouveau (pièce ou dé EN DOUBLE).
     def maj(m, dt):
         etat["t"] += dt
         k = int(etat["t"] / periode)
         ang = 0.35 * math.sin(etat["t"] * 9)
         saut = 0.12 * abs(math.sin(etat["t"] * 9))
-        m.remove(*m.submobjects)
-        m.add(de(faces[k % len(faces)], cote).rotate(ang).move_to(centre + UP * saut))
+        m.become(_de_6_points(faces[k % len(faces)], cote).rotate(ang).move_to(centre + UP * saut))
 
     holder.add_updater(maj)
     return holder
@@ -90,23 +100,29 @@ def de_qui_roule(centre, cote=1.2, periode=0.22, faces=None):
 def piece_qui_tourne(centre, r=0.75):
     """Une pièce qui tourne sur elle-même : PILE, puis FACE, puis PILE…"""
     etat = {"t": 0.0}
+    # ⛔ 20/10 : structure FIXE (disque + « PILE » + « FACE », on n'allume que le bon
+    # mot) redessinée par `become`. L'ancienne version remplaçait les enfants dans
+    # l'updater : pendant un `play`, l'ancien enfant restait dessiné sous le nouveau
+    # (deux pièces superposées, vu sur les vidéos 3e, CM1, CM2, 6e).
+    mot_pile = Text("PILE", font_size=int(r * 34), color=BLACK, weight=BOLD)
+    mot_face = Text("FACE", font_size=int(r * 34), color=BLACK, weight=BOLD)
 
     def faire(t):
         c = math.cos(t * 5)
         pile = c >= 0
         disque = Circle(radius=r, fill_color=JAUNE_TITRE if pile else ORANGE_RETENUE, fill_opacity=1,
                         stroke_color=WHITE, stroke_width=3)
-        mot = Text("PILE" if pile else "FACE", font_size=int(r * 34), color=BLACK, weight=BOLD)
-        g = VGroup(disque, mot.move_to(disque))
+        mp = mot_pile.copy().move_to(disque).set_opacity(1 if pile else 0)
+        mf = mot_face.copy().move_to(disque).set_opacity(0 if pile else 1)
+        g = VGroup(disque, mp, mf)
         g.stretch(max(abs(c), 0.05), 0)
         return g.move_to(centre + UP * 0.25 * abs(math.sin(t * 2.5)))
 
-    holder = VGroup(faire(0))
+    holder = faire(0)
 
     def maj(m, dt):
         etat["t"] += dt
-        m.remove(*m.submobjects)
-        m.add(faire(etat["t"]))
+        m.become(faire(etat["t"]))
 
     holder.add_updater(maj)
     return holder

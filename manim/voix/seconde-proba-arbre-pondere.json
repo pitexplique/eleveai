@@ -1,0 +1,13 @@
+{
+  "00-garde": "L'arbre pondéré : lire et construire.",
+  "01-situation": "Au trail de Cilaos, 70 % des coureurs viennent de La Réunion. Parmi eux, 90 % finissent la course. Parmi les autres, 80 % finissent.",
+  "02-premier": "Premier niveau : R, réunionnais, 0,7, et R barre, 0,3. Les deux branches font 1.",
+  "03-second": "Deuxième niveau : F, finit la course. Après R : 0,9 et 0,1. Après R barre : 0,8 et 0,2.",
+  "04-lire": "Les branches du deuxième niveau sont des probabilités conditionnelles. 0,9, c'est P indice R de F.",
+  "05-construire": "Pour construire un arbre : d'abord ce qu'on connaît sans condition, puis ce qui est dit « parmi ».",
+  "06-piege": "Le piège : mettre 0,8 sur une branche qui part de R. 0,8 concerne les autres coureurs : il part de R barre.",
+  "07-defi": "À toi de jouer. Que vaut P indice R barre de F barre ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Après R barre, les branches font 1. 1 moins 0,8 : 0,2.",
+  "08-finale": "Ce que tu as appris. Au premier niveau, les probabilités simples. Au second, les probabilités conditionnelles. Les branches d'un même nœud font 1. L'épisode 10 t'attend : les chemins de l'arbre.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

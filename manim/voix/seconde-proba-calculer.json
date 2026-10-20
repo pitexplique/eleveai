@@ -1,0 +1,13 @@
+{
+  "00-garde": "Calculer une probabilité : additionner les issues.",
+  "01-situation": "Une roue de kermesse, mais ses parts ne sont pas égales. Rouge : 0,4. Bleu : 0,25. Vert : 0,2. Jaune : 0,15.",
+  "02-regle": "Les issues ne sont pas équiprobables. Alors on ne compte pas les parts : on additionne leurs probabilités.",
+  "03-calcul": "L'événement A : « tomber sur une couleur chaude », rouge ou jaune. P de A égale 0,4 plus 0,15, soit 0,55.",
+  "04-verifier": "On vérifie la loi : 0,4 plus 0,25 plus 0,2 plus 0,15, égale 1. La loi est correcte.",
+  "05-equiprobable": "Et si les issues sont équiprobables ? Chacune vaut 1 sur n. Additionner, c'est alors compter : favorables sur possibles. C'est un cas particulier.",
+  "06-piege": "Le piège : dire 2 sur 4 parce que 2 couleurs sur 4 sont chaudes. Faux : les parts n'ont pas la même taille. Ici, c'est 0,55.",
+  "07-defi": "À toi de jouer. Avec la même roue, quelle est la probabilité de ne pas tomber sur le bleu ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Rouge, vert et jaune : 0,4 plus 0,2 plus 0,15, soit 0,75.",
+  "08-finale": "Ce que tu as appris. La probabilité d'un événement, c'est la somme des probabilités de ses issues. Compter ne marche que si les issues sont équiprobables. L'épisode 4 t'attend : l'événement contraire.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

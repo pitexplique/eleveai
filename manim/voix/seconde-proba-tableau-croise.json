@@ -1,0 +1,13 @@
+{
+  "00-garde": "Le tableau croisé : lire une probabilité conditionnelle.",
+  "01-situation": "Un vendeur de letchis du marché trie 200 barquettes : 120 viennent de Saint-André, les autres de Saint-Paul. 30 barquettes de Saint-André ont des fruits abîmés, et 20 de Saint-Paul.",
+  "02-tableau": "Le tableau : en ligne, Saint-André et Saint-Paul. En colonne, abîmée ou correcte. Totaux : 120 et 80 ; 50 et 150 ; total 200.",
+  "03-ligne": "Sachant que la barquette vient de Saint-André : on lit sa ligne. 30 sur 120, soit 0,25.",
+  "04-colonne": "Sachant que la barquette est abîmée : on lit sa colonne. 30 sur 50, soit 0,6. 60 % des barquettes abîmées viennent de Saint-André.",
+  "05-case": "Et une case seule, sur le total : 30 sur 200, c'est P de A inter B, sans condition.",
+  "06-piege": "Le piège : confondre la ligne et la colonne. 0,25 et 0,6 répondent à deux questions différentes.",
+  "07-defi": "À toi de jouer. Parmi les barquettes de Saint-Paul, quelle proportion est abîmée ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Ligne de Saint-Paul : 20 sur 80, soit 0,25.",
+  "08-finale": "Ce que tu as appris. Sachant une ligne, on divise par le total de la ligne. Sachant une colonne, par le total de la colonne. Une case sur le grand total : c'est une intersection. L'épisode 12 t'attend : les faux positifs.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

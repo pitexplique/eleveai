@@ -1,0 +1,13 @@
+{
+  "00-garde": "Les chemins de l'arbre : multiplier, puis additionner.",
+  "01-situation": "Le même trail de Cilaos : R, 0,7 ; puis F, 0,9. R barre, 0,3 ; puis F, 0,8.",
+  "02-chemin": "Un chemin, c'est une intersection. R puis F : 0,7 fois 0,9, soit 0,63. C'est P de R inter F.",
+  "03-somme": "P de F, la probabilité de finir : deux chemins mènent à F. 0,63 plus 0,3 fois 0,8. 0,63 plus 0,24 : 0,87.",
+  "04-verifier": "On vérifie : les quatre chemins ensemble font 1. 0,63 plus 0,07 plus 0,24 plus 0,06 : 1.",
+  "05-sens": "87 % des coureurs finissent la course.",
+  "06-piege": "Le piège : additionner 0,9 et 0,8. Ces branches n'ont pas le même poids : on multiplie d'abord par 0,7 et 0,3.",
+  "07-defi": "À toi de jouer. Quelle est la probabilité qu'un coureur abandonne ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Deux chemins vers F barre : 0,7 fois 0,1 plus 0,3 fois 0,2. 0,07 plus 0,06 : 0,13. Ou 1 moins 0,87.",
+  "08-finale": "Ce que tu as appris. Un chemin : on multiplie les branches. Un événement : on additionne ses chemins. Les quatre chemins font 1. L'épisode 11 t'attend : le tableau croisé.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

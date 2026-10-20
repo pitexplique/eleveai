@@ -1,0 +1,13 @@
+{
+  "00-garde": "L'événement contraire : le chemin le plus court.",
+  "01-situation": "On lance deux dés et on additionne. Quelle est la probabilité que le total soit différent de 12 ?",
+  "02-long": "On pourrait compter les 35 cases du tableau qui ne font pas 12. C'est long.",
+  "03-contraire": "Le contraire de « différent de 12 », c'est « égal à 12 ». On le note A barre. Une seule case : 6 et 6. P de A barre égale 1 sur 36.",
+  "04-formule": "Un événement et son contraire ont des probabilités qui font 1. P de A égale 1 moins P de A barre. 1 moins 1 sur 36 : 35 sur 36.",
+  "05-au-moins": "C'est l'outil des « au moins un ». Au moins un 6 avec deux dés ? Le contraire : aucun 6. 25 cases sur 36. Donc au moins un 6 : 11 sur 36.",
+  "06-piege": "Le piège : le contraire de « au moins un 6 », ce n'est pas « deux 6 ». C'est « aucun 6 ».",
+  "07-defi": "À toi de jouer. Avec deux dés, quelle est la probabilité que le total soit au moins 3 ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Le contraire : total égal à 2, une seule case. 1 moins 1 sur 36 : 35 sur 36.",
+  "08-finale": "Ce que tu as appris. P de A égale 1 moins P de A barre. Quand A est long à compter, on compte son contraire. Le contraire de « au moins un », c'est « aucun ». L'épisode 5 t'attend : réunion et intersection.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

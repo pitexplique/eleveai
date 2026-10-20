@@ -98,12 +98,13 @@ def euro_qui_tourne(centre, valeur, r=0.6, vitesse=6.0, phase=0.0):
         g.stretch(max(abs(c), 0.06), 0)
         return g.move_to(centre + UP * 0.2 * abs(math.sin(t * 2.5)))
 
-    holder = VGroup(faire(phase))
+    holder = faire(phase)
 
+    # ⛔ 20/10 : `become` (même structure anneau + cœur + texte à chaque image) et non
+    # remove/add — remplacer les enfants laissait, pendant un `play`, l'ancienne pièce dessinée dessous.
     def maj(m, dt):
         etat["t"] += dt
-        m.remove(*m.submobjects)
-        m.add(faire(etat["t"]))
+        m.become(faire(etat["t"]))
 
     holder.add_updater(maj)
     return holder

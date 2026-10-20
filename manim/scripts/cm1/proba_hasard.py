@@ -204,19 +204,30 @@ def soleil(r=0.5):
     return VGroup(rayons, disque)
 
 
+def _face_6_points(face, cote=1.2):
+    """La même face, mais TOUJOURS 6 points (ceux en trop sont invisibles) : une
+    structure fixe, pour que `become` marche pendant un `play`."""
+    d = face_coach(face, cote)
+    while len(d[2]) < 6:
+        d[2].add(Dot(d[1].get_center(), radius=0.06 * cote).set_opacity(0))
+    return d
+
+
 def de_coach_qui_roule(centre, cote=1.2, periode=0.2, faces=None):
     """Le dé du coach qui roule SANS FIN (updater) : la face change, il tangue."""
     faces = faces or [3, 5, 2, 6, 1, 4]
     etat = {"t": 0.0}
-    holder = VGroup(face_coach(faces[0], cote).move_to(centre))
+    holder = _face_6_points(faces[0], cote).move_to(centre)
+
+    # ⛔ 20/10 : `become` et non remove/add — remplacer les enfants dans l'updater laissait,
+    # pendant un `play`, l'ancien enfant dessiné sous le nouveau (dé EN DOUBLE).
 
     def maj(m, dt):
         etat["t"] += dt
         k = int(etat["t"] / periode)
         ang = 0.35 * math.sin(etat["t"] * 9)
         saut = 0.12 * abs(math.sin(etat["t"] * 9))
-        m.remove(*m.submobjects)
-        m.add(face_coach(faces[k % len(faces)], cote).rotate(ang).move_to(centre + UP * saut))
+        m.become(_face_6_points(faces[k % len(faces)], cote).rotate(ang).move_to(centre + UP * saut))
 
     holder.add_updater(maj)
     return holder

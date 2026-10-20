@@ -57,7 +57,37 @@ from gabarit_sixieme import Notion6e  # noqa: E402
 from signes_expression_2de import echelle_ceintures  # noqa: E402
 from annonce_probabilites import piece_qui_tourne  # noqa: E402
 
-de_coach_qui_roule = _hasard.de_coach_qui_roule
+
+
+def _de_coach_6_points(face, cote):
+    """La face du coach (cm2/proba_hasard), mais TOUJOURS 6 points (ceux en trop
+    sont invisibles) : une structure fixe, pour que `become` marche pendant un `play`."""
+    d = _hasard.de_coach(face, cote)
+    while len(d[1]) < 6:
+        d[1].add(Dot(d[0].get_center(), radius=cote * 0.07).set_opacity(0))
+    return d
+
+
+def de_coach_qui_roule(centre, cote=1.2, periode=0.16, faces=None):
+    """La face du coach qui roule SANS FIN (updater).
+    ⛔ 20/10 : copie locale de cm2/proba_hasard redessinée par `become` sur une structure
+    FIXE — l'originale remplaçait ses enfants dans l'updater et laissait, pendant un `play`,
+    l'ancien dé dessiné sous le nouveau (dé EN DOUBLE)."""
+    faces = faces or [3, 5, 2, 6, 1, 4]
+    etat = {"t": 0.0}
+    holder = _de_coach_6_points(faces[0], cote).move_to(centre)
+
+    def maj(m, dt):
+        etat["t"] += dt
+        k = int(etat["t"] / periode)
+        ang = 0.35 * math.sin(etat["t"] * 9)
+        saut = 0.12 * abs(math.sin(etat["t"] * 9))
+        m.become(_de_coach_6_points(faces[k % len(faces)], cote).rotate(ang).move_to(centre + UP * saut))
+
+    holder.add_updater(maj)
+    return holder
+
+
 piece = _hasard.piece
 carte_de = _vocab.carte_de
 surligner = _vocab.surligner

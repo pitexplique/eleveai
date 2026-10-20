@@ -1,0 +1,13 @@
+{
+  "00-garde": "Organiser une expérience : un tableau ou un arbre.",
+  "01-situation": "Au marché de Saint-Paul, un stand propose deux jeux : on lance une pièce, puis on tire une boule dans une urne avec 1 boule rouge et 2 boules blanches.",
+  "02-arbre": "L'arbre : d'abord la pièce, pile ou face, un demi chacun. Puis l'urne : rouge 1 sur 3, blanche 2 sur 3.",
+  "03-chemin": "Pile puis rouge : on suit le chemin, on multiplie. Un demi fois 1 sur 3 : 1 sur 6.",
+  "04-tableau": "Avec deux dés, on préfère un tableau : 6 lignes, 6 colonnes. Chaque case est une issue, 1 sur 36.",
+  "05-choisir": "Pour deux épreuves l'une après l'autre : un arbre. Pour deux dés ou deux critères qui se croisent : un tableau.",
+  "06-piege": "Le piège : additionner sur un chemin. Sur un chemin, on multiplie. On additionne seulement des chemins différents.",
+  "07-defi": "À toi de jouer. Avec la pièce et l'urne, quelle est la probabilité de tirer une boule blanche ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Deux chemins : pile puis blanche, un demi fois 2 sur 3, 1 sur 3. Face puis blanche, 1 sur 3. 1 sur 3 plus 1 sur 3 : 2 sur 3.",
+  "08-finale": "Ce que tu as appris. Un arbre pour des épreuves successives, un tableau pour des critères croisés. Sur un chemin, on multiplie ; entre les chemins, on additionne. L'épisode 8 t'attend : les probabilités conditionnelles.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

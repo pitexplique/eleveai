@@ -1,0 +1,13 @@
+{
+  "00-garde": "Les faux positifs : quand un test se trompe.",
+  "01-situation": "Un portique de sécurité à l'aéroport. 1 % des bagages contiennent un objet interdit. Le portique sonne pour 99 % d'entre eux, mais aussi pour 5 % des bagages sans objet interdit.",
+  "02-arbre": "L'arbre : I, objet interdit, 0,01 ; puis S, sonne, 0,99. I barre, 0,99 ; puis S, 0,05.",
+  "03-sonne": "P de S : 0,01 fois 0,99 plus 0,99 fois 0,05. 0,0099 plus 0,0495 : 0,0594.",
+  "04-question": "Le portique sonne. Le bagage contient-il vraiment un objet interdit ? Sur 0,0594, seulement 0,0099 viennent d'un vrai objet interdit. Environ 1 sur 6.",
+  "05-pourquoi": "Pourquoi si peu ? Parce que les bagages sans objet interdit sont très nombreux : même 5 % d'entre eux, ça fait beaucoup de fausses alertes.",
+  "06-piege": "Le piège : croire que le portique a raison 99 fois sur 100 quand il sonne. 99 %, c'est P indice I de S, pas P indice S de I.",
+  "07-defi": "À toi de jouer. Sur 10 000 bagages, combien font sonner le portique ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 0,0594 fois 10 000 : 594 bagages. Dont seulement 99 contiennent un objet interdit.",
+  "08-finale": "Ce que tu as appris. Un test peut sonner à tort : ce sont les faux positifs. P indice I de S n'est pas P indice S de I. Quand l'événement est rare, la plupart des alertes sont fausses. Bravo, tu as fini les probabilités conditionnelles de seconde !",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

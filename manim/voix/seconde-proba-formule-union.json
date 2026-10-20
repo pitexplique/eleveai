@@ -1,0 +1,13 @@
+{
+  "00-garde": "La formule de la réunion : ne rien compter deux fois.",
+  "01-situation": "Dans une classe de seconde, 60 % des élèves font du sport, 30 % jouent d'un instrument, 20 % font les deux.",
+  "02-formule": "P de A union B égale P de A plus P de B moins P de A inter B. On enlève ce qui a été compté deux fois.",
+  "03-calcul": "Sport ou instrument : 0,6 plus 0,3 moins 0,2. 0,7. 70 % des élèves.",
+  "04-sens": "Et ni l'un ni l'autre ? C'est le contraire : 1 moins 0,7, soit 0,3. 30 % des élèves.",
+  "05-incompatibles": "Si A et B ne peuvent pas arriver en même temps, ils sont incompatibles : P de A inter B vaut 0. Alors P de A union B égale P de A plus P de B.",
+  "06-piege": "Le piège : additionner 0,6 et 0,3 et oublier d'enlever 0,2. On trouverait 0,9 : trop.",
+  "07-defi": "À toi de jouer. P de A égale 0,5, P de B égale 0,4, P de A union B égale 0,7. Que vaut P de A inter B ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 0,7 égale 0,5 plus 0,4 moins P de A inter B. Donc P de A inter B vaut 0,2.",
+  "08-finale": "Ce que tu as appris. P de A union B égale P de A plus P de B moins P de A inter B. Si A et B sont incompatibles, on additionne simplement. L'épisode 7 t'attend : tableaux et arbres.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}
