@@ -918,6 +918,12 @@ export default function JournalClient(props: {
             <BanniereCrpe place="colonnes" />
           </div>
         )}
+        {/* ⭐⭐ LE COACH EN PREMIER (Frédéric, 20/10/2026 : « il faut mettre en
+            premier la section S'entraîner avec le coach : tu es en quelle
+            classe, évaluation, examen et les matières, car c'est le cœur
+            d'EleveAI », puis « juste en dessous de la pub pour le CRPE »). Sous la
+            bande CRPE, avant la Une, dans les trois mises en page. */}
+        <div className={mise === "fil" ? "mt-4" : "mt-6"}>{blocs.coach}</div>
 
         {mise === "quotidien" && (
           <div className="mt-6 space-y-8">
@@ -933,7 +939,6 @@ export default function JournalClient(props: {
               <div className="lg:col-span-4">{blocs.metier}</div>
               <div className="lg:col-span-8 lg:border-l lg:border-stone-300 lg:pl-8">{blocs.reel}</div>
             </div>
-            {blocs.coach}
             {blocs.shorts}
             <div className="grid gap-8 md:grid-cols-12">
               <div className="md:col-span-7">{blocs.rituels}</div>
@@ -950,7 +955,6 @@ export default function JournalClient(props: {
             </div>
             {blocs.defi}
             {blocs.chiffre}
-            <div className="lg:col-span-3">{blocs.coach}</div>
             {blocs.metier}
             <div className="lg:col-span-2">{blocs.reel}</div>
             <div className="lg:col-span-3">{blocs.shorts}</div>
@@ -969,7 +973,6 @@ export default function JournalClient(props: {
             {blocs.defi}
             {blocs.rdv}
             {blocs.metier}
-            {blocs.coach}
             {blocs.shorts}
             {blocs.chiffre}
             {blocs.reel}
