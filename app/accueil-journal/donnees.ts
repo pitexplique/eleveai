@@ -45,12 +45,25 @@ const PAS_EN_UNE = new Set(["annonce-probabilites", "bases-atelier-video"]);
 const REEL = /974|diagonale|grand raid|réunion|maïdo|saint-gilles|maths réel|sondages|instituts/i;
 
 const publiees = toutesLesVideos().filter((v) => v.youtube && v.vignette);
-const PAYSAGES = melange(publiees.filter((v) => !v.short && !PAS_EN_UNE.has(v.id)), "une");
-const SHORTS = melange(publiees.filter((v) => v.short), "short");
+/* ⛔ 20/10/2026 : une vidéo SANS MINIATURE (poster) a une vignette tirée de sa
+   première image — souvent un écran noir. Sur l'accueil (Une tirée, bande de la
+   chaîne, Maths Réel), on ne montre que des vidéos qui ont leur miniature. */
+const avecMiniature = (v: VideoR2) => Boolean(v.poster);
+const PAYSAGES = melange(publiees.filter((v) => !v.short && !PAS_EN_UNE.has(v.id) && avecMiniature(v)), "une");
+/* ⭐ LA VIDÉOTHÈQUE (20/10/2026) : Frédéric veut « en annonce la page vidéo,
+   style YouTube » sur l'accueil. 4 paysages par jour, dans un AUTRE ordre que la
+   Une (sinon la bande montrerait les Unes des jours suivants), et le nombre de
+   vidéos de la galerie /video (tout R2, publiées ou non sur YouTube). */
+const VIDEOTHEQUE = melange(PAYSAGES, "videotheque");
+const TOTAL_GALERIE = toutesLesVideos().filter(
+  (v) => v.vignette && !v.fichier.startsWith("atelier-video-essais"),
+).length;
+const SHORTS = melange(publiees.filter((v) => v.short && avecMiniature(v)), "short");
 const REELS = melange(PAYSAGES.filter((v) => REEL.test(v.id) || REEL.test(v.titre)), "reel");
 const UTILE = new Map([...UNES, ...EDITION].map((u) => [u.paysage, u]));
 const PAR_ID = new Map(publiees.map((v) => [v.id, v]));
 const iso = (jour: number) => new Date(jour * 86400000).toISOString().slice(0, 10);
+const jourDe = (date: string) => Math.round(Date.parse(`${date}T00:00:00Z`) / 86400000);
 
 function video(v: VideoR2 | undefined): VideoJournal | null {
   if (!v || !v.vignette) return null;
@@ -90,7 +103,14 @@ function uneDuJour(jour: number) {
     (u) => u.date === iso(jour) && PAR_ID.has(u.paysage) && !PAR_ID.get(u.paysage)!.short,
   );
   // 2. Sinon le tirage dans tout le catalogue.
-  const p = datee ? PAR_ID.get(datee.paysage)! : PAYSAGES[jour % PAYSAGES.length];
+  // Le tirage écarte les Unes de l'édition datées à moins de 60 jours : une
+  // vidéo vue lundi en Une ne revient pas trois semaines plus tard (simulation
+  // du 20/10).
+  const recentes = new Set(
+    EDITION.filter((u) => u.date && Math.abs(jourDe(u.date) - jour) <= 60).map((u) => u.paysage),
+  );
+  const pool = PAYSAGES.filter((v) => !recentes.has(v.id));
+  const p = datee ? PAR_ID.get(datee.paysage)! : pool[jour % pool.length];
   const ecrite = datee ?? UTILE.get(p.id);
   const short =
     (ecrite?.short && publiees.find((v) => v.id === ecrite.short)) ||
@@ -164,6 +184,15 @@ export function donneesDuJournal(jour = jourParis()) {
       .filter((x): x is VideoJournal => x !== null),
     // Deux par jour, et les deux suivants le lendemain : peu de vidéos « réel »
     // (une demi-douzaine), on les fait défiler plutôt que de répéter les mêmes.
+    videotheque: {
+      videos: fenetre(VIDEOTHEQUE, jour, 6, 4)
+        .filter((v) => v.id !== une.p.id)
+        .slice(0, 4)
+        .map((v) => ({ ...video(v)!, classe: classeDe(v) })),
+      // « plus de 800 » : arrondi à la centaine, pour ne pas mentir d'un jour à
+      // l'autre quand des vidéos arrivent.
+      total: Math.floor(TOTAL_GALERIE / 100) * 100,
+    },
     reel: fenetre(REELS, jour, 3, 2)
       .filter((r) => r.id !== une.p.id)
       .slice(0, 2)

@@ -105,6 +105,7 @@ const COULEUR_MAGAZINE = {
   atelier: "bg-red-200",
   grands: "bg-slate-200",
   rdv: "bg-amber-100",
+  videotheque: "bg-white",
 } as const;
 
 type Rubrique = keyof typeof COULEUR_MAGAZINE;
@@ -568,7 +569,7 @@ const EXAMENS = [
   { label: "Évaluations nationales", texte: "6e et 4e, format réel", href: "/evaluation-nationale-college" },
 ];
 
-function Coach({ mise }: { mise: Mise }) {
+function Coach({ mise, totalVideos }: { mise: Mise; totalVideos: number }) {
   const t = TON[mise];
   const etroit = mise === "fil";
   return (
@@ -631,6 +632,29 @@ function Coach({ mise }: { mise: Mise }) {
             ))}
           </div>
         </div>
+        {/* ⭐ LA RANGÉE « VIDÉOS » (Frédéric, 20/10 : « il y a s'entraîner avec le
+            coach, puis s'entraîner à l'examen : il faut rajouter une section
+            vidéos pour accéder à la chaîne », « ça doit se voir à la page
+            d'accueil »). Le rouge de YouTube : on reconnaît une chaîne. */}
+        <div className="mt-4 border-t border-current/15 pt-4">
+          <p className="mb-2 text-sm font-black uppercase tracking-wide opacity-70">Vidéos</p>
+          <Lien
+            href="/video"
+            quoi="coach"
+            mise={mise}
+            className="inline-flex items-center gap-3 rounded-xl bg-red-600 px-4 py-2.5 text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-red-700"
+          >
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-red-600" aria-hidden="true">
+              <Play className="ml-0.5 h-4 w-4" fill="currentColor" />
+            </span>
+            <span className="text-left">
+              <span className="block text-base font-black leading-tight">La chaîne vidéo EleveAI</span>
+              <span className="block text-xs font-semibold opacity-90">
+                {totalVideos > 0 ? `Plus de ${totalVideos} vidéos, ` : ""}du CP au lycée
+              </span>
+            </span>
+          </Lien>
+        </div>
         <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-current/15 pt-4">
           <span className="text-sm font-bold opacity-70">Et aussi :</span>
           {AUTRES_MATIERES.map(({ label, href, Icone }) => (
@@ -648,6 +672,73 @@ function Coach({ mise }: { mise: Mise }) {
         </div>
       </Bloc>
     </div>
+  );
+}
+
+/* ═══ LA VIDÉOTHÈQUE, FAÇON YOUTUBE (20/10/2026) ════════════════════════════
+   Frédéric : « sur la page d'accueil j'aimerais avoir en annonce la page vidéo
+   style YouTube ». Placée juste sous la Une : on vient de voir LA vidéo du jour,
+   on découvre qu'il y en a des centaines. Le style est celui de YouTube dans les
+   trois mises en page (fond blanc, vignettes arrondies, titre gras sur deux
+   lignes, pastille de chaîne) : c'est une vitrine qu'on reconnaît d'un coup d'œil.
+   ⛔ Les vignettes mènent à /video/<id> (lecteur EleveAI en pause), pas à
+   YouTube. */
+type VideoVitrine = VideoJournal & { classe: string };
+
+function Videotheque({ mise, videos, total }: { mise: Mise; videos: VideoVitrine[]; total: number }) {
+  if (videos.length === 0) return null;
+  return (
+    <section
+      aria-label="La chaîne vidéo EleveAI"
+      className="rounded-2xl bg-white p-4 font-sans text-slate-900 shadow-sm ring-1 ring-slate-200 sm:p-5"
+    >
+      <div className="flex items-center justify-between gap-3">
+        <h2 className="flex items-center gap-2 text-base font-black sm:text-xl">
+          <span className="flex h-7 w-10 items-center justify-center rounded-lg bg-red-600 text-white" aria-hidden="true">
+            <Play className="ml-0.5 h-4 w-4" fill="currentColor" />
+          </span>
+          La chaîne vidéo EleveAI
+          {total > 0 && <span className="hidden text-sm font-semibold text-slate-500 sm:inline">· plus de {total}</span>}
+        </h2>
+        <Lien
+          href="/video"
+          quoi="videotheque"
+          mise={mise}
+          className="shrink-0 rounded-full bg-slate-900 px-4 py-2 text-sm font-bold text-white transition hover:bg-slate-700"
+        >
+          Tout voir →
+        </Lien>
+      </div>
+      <div className={`mt-4 grid grid-cols-2 gap-x-3 gap-y-4 sm:gap-x-4 ${mise === "fil" ? "" : "lg:grid-cols-4"}`}>
+        {videos.map((v) => (
+          <Lien key={v.id} href={`/video/${v.id}`} quoi="videotheque" mise={mise} className="group block" label={`Regarder : ${v.titre}`}>
+            <span className="relative block aspect-video overflow-hidden rounded-xl bg-slate-900">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={v.vignette}
+                alt=""
+                loading="lazy"
+                className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+              />
+              <span className="absolute bottom-1.5 right-1.5 rounded bg-black/80 px-1.5 py-0.5 text-[11px] font-bold text-white">
+                {v.classe}
+              </span>
+            </span>
+            <span className="mt-2 flex gap-2.5">
+              <span className="hidden h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-emerald-100 ring-1 ring-emerald-200 sm:flex">
+                <Image src="/cahier-vacances/ti-margo.png" alt="" width={28} height={35} className="h-7 w-auto" />
+              </span>
+              <span className="min-w-0">
+                <span className="line-clamp-2 text-sm font-bold leading-snug text-slate-900 group-hover:text-red-700">
+                  {v.titre}
+                </span>
+                <span className="mt-0.5 block text-xs text-slate-500">EleveAI · {v.classe}</span>
+              </span>
+            </span>
+          </Lien>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -856,6 +947,7 @@ export default function JournalClient(props: {
   metier: Metier;
   shorts: VideoJournal[];
   reel: VideoJournal[];
+  videotheque: { videos: VideoVitrine[]; total: number };
   /** Monté par /accueil : le Quotidien, sans sélecteur (son choix du 18/10). */
   accueil?: boolean;
 }) {
@@ -889,15 +981,16 @@ export default function JournalClient(props: {
   }
 
   const t = TON[mise];
-  const { date, numero, jour, une, demain, defi, theme, hier, chiffre, metier, shorts, reel } = props;
+  const { date, numero, jour, une, demain, defi, theme, hier, chiffre, metier, shorts, reel, videotheque } = props;
 
   const blocs = {
     une: <Une mise={mise} une={une} />,
     defi: <DefiDuJour mise={mise} jour={jour} defi={defi} theme={theme} />,
+    videotheque: <Videotheque mise={mise} videos={videotheque.videos} total={videotheque.total} />,
     rdv: <RendezVous mise={mise} jour={jour} demain={demain} hier={hier} />,
     chiffre: <Chiffre mise={mise} chiffre={chiffre} />,
     metier: <MetierDuJour mise={mise} metier={metier} />,
-    coach: <Coach mise={mise} />,
+    coach: <Coach mise={mise} totalVideos={videotheque.total} />,
     shorts: <Shorts mise={mise} shorts={shorts} />,
     reel: <Reel mise={mise} reel={reel} />,
     rituels: <Rituels mise={mise} />,
@@ -932,6 +1025,9 @@ export default function JournalClient(props: {
             d'EleveAI », puis « juste en dessous de la pub pour le CRPE »). Sous la
             bande CRPE, avant la Une, dans les trois mises en page. */}
         <div className={mise === "fil" ? "mt-4" : "mt-6"}>{blocs.coach}</div>
+        {/* ⭐ LA CHAÎNE VIDÉO, JUSTE SOUS LE COACH (Frédéric, 20/10 : « tu peux
+            monter vidéo », « ça doit l'envoyer sur la chaîne vidéo »). */}
+        <div className={mise === "fil" ? "mt-4" : "mt-6"}>{blocs.videotheque}</div>
 
         {mise === "quotidien" && (
           <div className="mt-6 space-y-8">
