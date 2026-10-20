@@ -4143,6 +4143,22 @@
   "short": true,
   "youtube": null
  },
+ "premiere-commun-proba-equiprobabilite": {
+  "fichier": "premiere-commun/maths/probabilites/26-equiprobabilite/eleveai-maths-premiere-commun-proba-equiprobabilite.mp4",
+  "poster": "premiere-commun/maths/probabilites/26-equiprobabilite/eleveai-maths-premiere-commun-proba-equiprobabilite.png",
+  "vignette": "premiere-commun/maths/probabilites/26-equiprobabilite/eleveai-maths-premiere-commun-proba-equiprobabilite.vignette.webp",
+  "titre": "Card(A) / Card(Ω)… seulement si tout est équiprobable ! — L'équiprobabilité · Maths 1re",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-commun-proba-equiprobabilite-short": {
+  "fichier": "premiere-commun/maths/probabilites/26-equiprobabilite/eleveai-maths-premiere-commun-proba-equiprobabilite-short.mp4",
+  "poster": "premiere-commun/maths/probabilites/26-equiprobabilite/eleveai-maths-premiere-commun-proba-equiprobabilite-short.png",
+  "vignette": "premiere-commun/maths/probabilites/26-equiprobabilite/eleveai-maths-premiere-commun-proba-equiprobabilite-short.vignette.webp",
+  "titre": "12 bio sur 40 : tes chances ? 🌿 — 1re #Shorts",
+  "short": true,
+  "youtube": null
+ },
  "premiere-commun-proba-faux-positifs": {
   "fichier": "premiere-commun/maths/probabilites/06-faux-positifs/eleveai-maths-premiere-commun-proba-faux-positifs.mp4",
   "poster": "premiere-commun/maths/probabilites/06-faux-positifs/eleveai-maths-premiere-commun-proba-faux-positifs.png",
@@ -4239,6 +4255,38 @@
   "short": true,
   "youtube": null
  },
+ "premiere-commun-proba-notation": {
+  "fichier": "premiere-commun/maths/probabilites/24-notation/eleveai-maths-premiere-commun-proba-notation.mp4",
+  "poster": "premiere-commun/maths/probabilites/24-notation/eleveai-maths-premiere-commun-proba-notation.png",
+  "vignette": "premiere-commun/maths/probabilites/24-notation/eleveai-maths-premiere-commun-proba-notation.vignette.webp",
+  "titre": "P_R(T) ou P_T(R) ? Ne te trompe plus d'indice — La notation P_A(B) — épisode 2 · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-commun-proba-notation-short": {
+  "fichier": "premiere-commun/maths/probabilites/24-notation/eleveai-maths-premiere-commun-proba-notation-short.mp4",
+  "poster": "premiere-commun/maths/probabilites/24-notation/eleveai-maths-premiere-commun-proba-notation-short.png",
+  "vignette": "premiere-commun/maths/probabilites/24-notation/eleveai-maths-premiere-commun-proba-notation-short.vignette.webp",
+  "titre": "60 % des clients avec un avis reviennent : comment l'écrire ? 🛒 — 1re · STMG #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "premiere-commun-proba-reconnaitre": {
+  "fichier": "premiere-commun/maths/probabilites/23-reconnaitre/eleveai-maths-premiere-commun-proba-reconnaitre.mp4",
+  "poster": "premiere-commun/maths/probabilites/23-reconnaitre/eleveai-maths-premiere-commun-proba-reconnaitre.png",
+  "vignette": "premiere-commun/maths/probabilites/23-reconnaitre/eleveai-maths-premiere-commun-proba-reconnaitre.vignette.webp",
+  "titre": "150 sur 200 ou sur 500 ? — Reconnaître une probabilité conditionnelle — épisode 1 · Maths 1re · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-commun-proba-reconnaitre-short": {
+  "fichier": "premiere-commun/maths/probabilites/23-reconnaitre/eleveai-maths-premiere-commun-proba-reconnaitre-short.mp4",
+  "poster": "premiere-commun/maths/probabilites/23-reconnaitre/eleveai-maths-premiere-commun-proba-reconnaitre-short.png",
+  "vignette": "premiere-commun/maths/probabilites/23-reconnaitre/eleveai-maths-premiere-commun-proba-reconnaitre-short.vignette.webp",
+  "titre": "80 % des bien triés = 80 % du plastique ? ♻️ — 1re · STMG #Shorts",
+  "short": true,
+  "youtube": null
+ },
  "premiere-commun-proba-remise": {
   "fichier": "premiere-commun/maths/probabilites/17-remise/eleveai-maths-premiere-commun-proba-remise.mp4",
   "poster": "premiere-commun/maths/probabilites/17-remise/eleveai-maths-premiere-commun-proba-remise.png",
@@ -4268,6 +4316,22 @@
   "poster": "premiere-commun/maths/probabilites/11-somme-chemins/eleveai-maths-premiere-commun-proba-somme-chemins-short.png",
   "vignette": "premiere-commun/maths/probabilites/11-somme-chemins/eleveai-maths-premiere-commun-proba-somme-chemins-short.vignette.webp",
   "titre": "La moyenne, 0,3 ? Non : 0,18 ! 🎡 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "premiere-commun-proba-somme-issues": {
+  "fichier": "premiere-commun/maths/probabilites/25-somme-issues/eleveai-maths-premiere-commun-proba-somme-issues.mp4",
+  "poster": "premiere-commun/maths/probabilites/25-somme-issues/eleveai-maths-premiere-commun-proba-somme-issues.png",
+  "vignette": "premiere-commun/maths/probabilites/25-somme-issues/eleveai-maths-premiere-commun-proba-somme-issues.vignette.webp",
+  "titre": "2 notes sur 5 = 40 % ? FAUX : on additionne ! — La somme des issues · Maths 1re",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-commun-proba-somme-issues-short": {
+  "fichier": "premiere-commun/maths/probabilites/25-somme-issues/eleveai-maths-premiere-commun-proba-somme-issues-short.mp4",
+  "poster": "premiere-commun/maths/probabilites/25-somme-issues/eleveai-maths-premiere-commun-proba-somme-issues-short.png",
+  "vignette": "premiere-commun/maths/probabilites/25-somme-issues/eleveai-maths-premiere-commun-proba-somme-issues-short.vignette.webp",
+  "titre": "Au moins 4 étoiles : 40 % ou 70 % ? ⭐ — 1re #Shorts",
   "short": true,
   "youtube": null
  },
@@ -4324,6 +4388,22 @@
   "poster": "premiere/maths/probabilites/02-parmi-sachant/eleveai-maths-premiere-proba-registres-short.png",
   "vignette": "premiere/maths/probabilites/02-parmi-sachant/eleveai-maths-premiere-proba-registres-short.vignette.webp",
   "titre": "60 % des retards sous la pluie… donc ? 🚌 — 1re spé #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "premiere-proba-totales": {
+  "fichier": "premiere/maths/probabilites/28-probabilites-totales/eleveai-maths-premiere-proba-totales.mp4",
+  "poster": "premiere/maths/probabilites/28-probabilites-totales/eleveai-maths-premiere-proba-totales.png",
+  "vignette": "premiere/maths/probabilites/28-probabilites-totales/eleveai-maths-premiere-proba-totales.vignette.webp",
+  "titre": "2 %, 4 %, 5 % de défauts… donc 3,7 % ? FAUX ! — Les probabilités totales · Maths 1re spé · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "premiere-proba-totales-short": {
+  "fichier": "premiere/maths/probabilites/28-probabilites-totales/eleveai-maths-premiere-proba-totales-short.mp4",
+  "poster": "premiere/maths/probabilites/28-probabilites-totales/eleveai-maths-premiere-proba-totales-short.png",
+  "vignette": "premiere/maths/probabilites/28-probabilites-totales/eleveai-maths-premiere-proba-totales-short.vignette.webp",
+  "titre": "3,7 % ? Non : 3,2 % ! ☀️ #Shorts",
   "short": true,
   "youtube": null
  },
@@ -4999,6 +5079,22 @@
   "short": true,
   "youtube": null
  },
+ "stmg-proba-bern-esperance": {
+  "fichier": "stmg/maths/probabilites/31-bern-esperance/eleveai-maths-stmg-proba-bern-esperance.mp4",
+  "poster": "stmg/maths/probabilites/31-bern-esperance/eleveai-maths-stmg-proba-bern-esperance.png",
+  "vignette": "stmg/maths/probabilites/31-bern-esperance/eleveai-maths-stmg-proba-bern-esperance.vignette.webp",
+  "titre": "Un succès vaut 1… donc E = 1 ? NON ! — L'espérance d'une loi de Bernoulli · Maths STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-bern-esperance-short": {
+  "fichier": "stmg/maths/probabilites/31-bern-esperance/eleveai-maths-stmg-proba-bern-esperance-short.mp4",
+  "poster": "stmg/maths/probabilites/31-bern-esperance/eleveai-maths-stmg-proba-bern-esperance-short.png",
+  "vignette": "stmg/maths/probabilites/31-bern-esperance/eleveai-maths-stmg-proba-bern-esperance-short.vignette.webp",
+  "titre": "1 client sur 5 : combien sur 300 ? 🛒 — STMG #Shorts",
+  "short": true,
+  "youtube": null
+ },
  "stmg-proba-bern-repetition": {
   "fichier": "stmg/maths/probabilites/19-bern-repetition/eleveai-maths-stmg-proba-bern-repetition.mp4",
   "poster": "stmg/maths/probabilites/19-bern-repetition/eleveai-maths-stmg-proba-bern-repetition.png",
@@ -5012,6 +5108,38 @@
   "poster": "stmg/maths/probabilites/19-bern-repetition/eleveai-maths-stmg-proba-bern-repetition-short.png",
   "vignette": "stmg/maths/probabilites/19-bern-repetition/eleveai-maths-stmg-proba-bern-repetition-short.vignette.webp",
   "titre": "3 lancers de pièce : 6 résultats ? NON ! 🪙 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-bern-representer": {
+  "fichier": "stmg/maths/probabilites/33-bern-representer/eleveai-maths-stmg-proba-bern-representer.mp4",
+  "poster": "stmg/maths/probabilites/33-bern-representer/eleveai-maths-stmg-proba-bern-representer.png",
+  "vignette": "stmg/maths/probabilites/33-bern-representer/eleveai-maths-stmg-proba-bern-representer.vignette.webp",
+  "titre": "Un point à 0,46… et alors ? Lis le NUAGE ! — Nuage de points et histogramme · Maths STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-bern-representer-short": {
+  "fichier": "stmg/maths/probabilites/33-bern-representer/eleveai-maths-stmg-proba-bern-representer-short.mp4",
+  "poster": "stmg/maths/probabilites/33-bern-representer/eleveai-maths-stmg-proba-bern-representer-short.png",
+  "vignette": "stmg/maths/probabilites/33-bern-representer/eleveai-maths-stmg-proba-bern-representer-short.vignette.webp",
+  "titre": "100 échantillons, un seul à 0,46 : le site a menti ? 📊 — STMG #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-bern-simuler": {
+  "fichier": "stmg/maths/probabilites/32-bern-simuler/eleveai-maths-stmg-proba-bern-simuler.mp4",
+  "poster": "stmg/maths/probabilites/32-bern-simuler/eleveai-maths-stmg-proba-bern-simuler.png",
+  "vignette": "stmg/maths/probabilites/32-bern-simuler/eleveai-maths-stmg-proba-bern-simuler.vignette.webp",
+  "titre": "0,34 au lieu de 0,3 : le site ment ? — Simuler des échantillons avec Python · Maths STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-bern-simuler-short": {
+  "fichier": "stmg/maths/probabilites/32-bern-simuler/eleveai-maths-stmg-proba-bern-simuler-short.mp4",
+  "poster": "stmg/maths/probabilites/32-bern-simuler/eleveai-maths-stmg-proba-bern-simuler-short.png",
+  "vignette": "stmg/maths/probabilites/32-bern-simuler/eleveai-maths-stmg-proba-bern-simuler-short.vignette.webp",
+  "titre": "100 échantillons en 1 seconde ! 🐍 — STMG #Shorts",
   "short": true,
   "youtube": null
  },
@@ -5044,6 +5172,70 @@
   "poster": "stmg/maths/probabilites/04-distinguer/eleveai-maths-stmg-proba-distinguer-short.png",
   "vignette": "stmg/maths/probabilites/04-distinguer/eleveai-maths-stmg-proba-distinguer-short.vignette.webp",
   "titre": "90 % dans un sens… 30 % dans l'autre ! 🍿 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-ech-distance": {
+  "fichier": "stmg/maths/probabilites/35-ech-distance/eleveai-maths-stmg-proba-ech-distance.mp4",
+  "poster": "stmg/maths/probabilites/35-ech-distance/eleveai-maths-stmg-proba-ech-distance.png",
+  "vignette": "stmg/maths/probabilites/35-ech-distance/eleveai-maths-stmg-proba-ech-distance.vignette.webp",
+  "titre": "0,02 et 0,05 : la distance vaut 0,03, pas −0,03 ! — La distance entre f et p · Maths STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-ech-distance-short": {
+  "fichier": "stmg/maths/probabilites/35-ech-distance/eleveai-maths-stmg-proba-ech-distance-short.mp4",
+  "poster": "stmg/maths/probabilites/35-ech-distance/eleveai-maths-stmg-proba-ech-distance-short.png",
+  "vignette": "stmg/maths/probabilites/35-ech-distance/eleveai-maths-stmg-proba-ech-distance-short.vignette.webp",
+  "titre": "8 % de colis abîmés au lieu de 5 % : tu réclames ? 📦 — STMG #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-ech-fluctuation": {
+  "fichier": "stmg/maths/probabilites/34-ech-fluctuation/eleveai-maths-stmg-proba-ech-fluctuation.mp4",
+  "poster": "stmg/maths/probabilites/34-ech-fluctuation/eleveai-maths-stmg-proba-ech-fluctuation.png",
+  "vignette": "stmg/maths/probabilites/34-ech-fluctuation/eleveai-maths-stmg-proba-ech-fluctuation.vignette.webp",
+  "titre": "0,12 au lieu de 0,10 : la marque ment ? — La fluctuation d'échantillonnage · Maths STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-ech-fluctuation-short": {
+  "fichier": "stmg/maths/probabilites/34-ech-fluctuation/eleveai-maths-stmg-proba-ech-fluctuation-short.mp4",
+  "poster": "stmg/maths/probabilites/34-ech-fluctuation/eleveai-maths-stmg-proba-ech-fluctuation-short.png",
+  "vignette": "stmg/maths/probabilites/34-ech-fluctuation/eleveai-maths-stmg-proba-ech-fluctuation-short.vignette.webp",
+  "titre": "12 % au lieu de 10 % : elle ment ? 📱 — STMG #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-ech-rare": {
+  "fichier": "stmg/maths/probabilites/36-ech-rare/eleveai-maths-stmg-proba-ech-rare.mp4",
+  "poster": "stmg/maths/probabilites/36-ech-rare/eleveai-maths-stmg-proba-ech-rare.png",
+  "vignette": "stmg/maths/probabilites/36-ech-rare/eleveai-maths-stmg-proba-ech-rare.vignette.webp",
+  "titre": "51 % au lieu de 60 % : l'enseigne ment-elle ? — Fréquent ou rare · Maths STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-ech-rare-short": {
+  "fichier": "stmg/maths/probabilites/36-ech-rare/eleveai-maths-stmg-proba-ech-rare-short.mp4",
+  "poster": "stmg/maths/probabilites/36-ech-rare/eleveai-maths-stmg-proba-ech-rare-short.png",
+  "vignette": "stmg/maths/probabilites/36-ech-rare/eleveai-maths-stmg-proba-ech-rare-short.vignette.webp",
+  "titre": "60 % annoncés, 51 % vus… tu la crois ? 🛍️ — STMG #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-ech-taille": {
+  "fichier": "stmg/maths/probabilites/37-ech-taille/eleveai-maths-stmg-proba-ech-taille.mp4",
+  "poster": "stmg/maths/probabilites/37-ech-taille/eleveai-maths-stmg-proba-ech-taille.png",
+  "vignette": "stmg/maths/probabilites/37-ech-taille/eleveai-maths-stmg-proba-ech-taille.vignette.webp",
+  "titre": "2 fois plus précis ? Pas 2 fois plus de monde : 4 fois ! — La taille de l'échantillon · Maths STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-ech-taille-short": {
+  "fichier": "stmg/maths/probabilites/37-ech-taille/eleveai-maths-stmg-proba-ech-taille-short.mp4",
+  "poster": "stmg/maths/probabilites/37-ech-taille/eleveai-maths-stmg-proba-ech-taille-short.png",
+  "vignette": "stmg/maths/probabilites/37-ech-taille/eleveai-maths-stmg-proba-ech-taille-short.vignette.webp",
+  "titre": "800 personnes ? Non : 1 600 ! 📋 — STMG #Shorts",
   "short": true,
   "youtube": null
  },
@@ -5220,6 +5412,54 @@
   "poster": "stmg/maths/probabilites/03-tableau/eleveai-maths-stmg-proba-tableau-short.png",
   "vignette": "stmg/maths/probabilites/03-tableau/eleveai-maths-stmg-proba-tableau-short.vignette.webp",
   "titre": "150 trient, 80 trient… et pourtant le bus gagne ! 🚌 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-totales": {
+  "fichier": "stmg/maths/probabilites/28-probabilites-totales/eleveai-maths-stmg-proba-totales.mp4",
+  "poster": "stmg/maths/probabilites/28-probabilites-totales/eleveai-maths-stmg-proba-totales.png",
+  "vignette": "stmg/maths/probabilites/28-probabilites-totales/eleveai-maths-stmg-proba-totales.vignette.webp",
+  "titre": "2 %, 4 %, 5 % de défauts… donc 3,7 % ? FAUX ! — Les probabilités totales · Maths 1re spé · STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-totales-short": {
+  "fichier": "stmg/maths/probabilites/28-probabilites-totales/eleveai-maths-stmg-proba-totales-short.mp4",
+  "poster": "stmg/maths/probabilites/28-probabilites-totales/eleveai-maths-stmg-proba-totales-short.png",
+  "vignette": "stmg/maths/probabilites/28-probabilites-totales/eleveai-maths-stmg-proba-totales-short.vignette.webp",
+  "titre": "3,7 % ? Non : 3,2 % ! ☀️ #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-va-calculer": {
+  "fichier": "stmg/maths/probabilites/29-va-calculer/eleveai-maths-stmg-proba-va-calculer.mp4",
+  "poster": "stmg/maths/probabilites/29-va-calculer/eleveai-maths-stmg-proba-va-calculer.png",
+  "vignette": "stmg/maths/probabilites/29-va-calculer/eleveai-maths-stmg-proba-va-calculer.vignette.webp",
+  "titre": "P(X ≤ 1) : 0,3 ? NON, 0,8 ! — Calculer avec une loi de probabilité · Maths STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-va-calculer-short": {
+  "fichier": "stmg/maths/probabilites/29-va-calculer/eleveai-maths-stmg-proba-va-calculer-short.mp4",
+  "poster": "stmg/maths/probabilites/29-va-calculer/eleveai-maths-stmg-proba-va-calculer-short.png",
+  "vignette": "stmg/maths/probabilites/29-va-calculer/eleveai-maths-stmg-proba-va-calculer-short.vignette.webp",
+  "titre": "Au plus 1 retard : 0,3 ? 🚲 — STMG #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-va-decision": {
+  "fichier": "stmg/maths/probabilites/30-va-decision/eleveai-maths-stmg-proba-va-decision.mp4",
+  "poster": "stmg/maths/probabilites/30-va-decision/eleveai-maths-stmg-proba-va-decision.png",
+  "vignette": "stmg/maths/probabilites/30-va-decision/eleveai-maths-stmg-proba-va-decision.vignette.webp",
+  "titre": "2 000 € possibles… et pourtant 600 € en moyenne ! — Choisir avec l'espérance · Maths STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-va-decision-short": {
+  "fichier": "stmg/maths/probabilites/30-va-decision/eleveai-maths-stmg-proba-va-decision-short.mp4",
+  "poster": "stmg/maths/probabilites/30-va-decision/eleveai-maths-stmg-proba-va-decision-short.png",
+  "vignette": "stmg/maths/probabilites/30-va-decision/eleveai-maths-stmg-proba-va-decision-short.vignette.webp",
+  "titre": "500 € sûrs ou 2 000 € à 30 % ? 💶 — STMG #Shorts",
   "short": true,
   "youtube": null
  },
