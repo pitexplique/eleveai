@@ -1,0 +1,12 @@
+{
+  "00-garde": "Choisir avec l'espérance.",
+  "01-situation": "Un commerçant choisit un contrat d'électricité verte. Contrat A : une économie sûre de 500 euros par an. Contrat B : 2 000 euros d'économie avec une probabilité de 0,3, rien sinon.",
+  "02-esperance": "L'espérance de B : 2 000 fois 0,3, plus 0 fois 0,7. 600 euros.",
+  "03-comparer": "A rapporte 500, B rapporte en moyenne 600. Sur de nombreuses années, B est plus intéressant.",
+  "04-risque": "Mais B est risqué : 7 années sur 10, on ne gagne rien. L'espérance dit ce qui se passe en moyenne, pas chaque année.",
+  "05-piege": "Le piège : choisir la plus grosse somme possible, 2 000 euros. Ce qui compte, c'est la somme multipliée par sa probabilité.",
+  "06-defi": "À toi de jouer. Contrat C : 1 000 euros avec une probabilité de 0,6, et une perte de 200 euros sinon. Quelle est son espérance ? Mets pause, et cherche !",
+  "06b-correction": "Correction. 1 000 fois 0,6, moins 200 fois 0,4. 600 moins 80 : 520 euros. B reste le meilleur en moyenne.",
+  "07-finale": "Ce que tu as appris. Pour comparer deux options, on compare leurs espérances. L'espérance donne le gain moyen sur le long terme, pas le gain sûr.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

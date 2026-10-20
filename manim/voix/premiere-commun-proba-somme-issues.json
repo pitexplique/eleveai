@@ -1,0 +1,12 @@
+{
+  "00-garde": "La probabilité d'un événement : la somme de ses issues.",
+  "01-situation": "Une appli de livraison de paniers bio demande une note de 1 à 5 étoiles. Sa loi : 5 étoiles, 0,4. 4 étoiles, 0,3. 3 étoiles, 0,15. 2 étoiles, 0,1. 1 étoile, 0,05.",
+  "02-regle": "Un événement est réalisé par plusieurs issues. Sa probabilité, c'est la somme des probabilités de ces issues.",
+  "03-calcul": "A : « au moins 4 étoiles ». A est réalisé par 4 et 5 étoiles. P de A égale 0,3 plus 0,4, soit 0,7.",
+  "04-verifier": "On vérifie d'abord la loi : 0,4 plus 0,3 plus 0,15 plus 0,1 plus 0,05, égale 1.",
+  "05-piege": "Le piège : dire 2 issues sur 5, donc 0,4. Faux : les issues n'ont pas la même probabilité. On additionne, on ne compte pas.",
+  "06-defi": "À toi de jouer. Quelle est la probabilité d'une note de moins de 3 étoiles ? Mets pause, et cherche !",
+  "06b-correction": "Correction. 1 ou 2 étoiles : 0,05 plus 0,1, soit 0,15.",
+  "07-finale": "Ce que tu as appris. P d'un événement, c'est la somme des probabilités de ses issues. On vérifie que la loi fait 1. On ne compte les issues que si elles sont équiprobables.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

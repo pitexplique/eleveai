@@ -1,0 +1,13 @@
+{
+  "00-garde": "Pour être deux fois plus précis, combien de données ?",
+  "01-situation": "Un institut de sondage interroge 400 personnes sur les énergies renouvelables. Sa marge de fluctuation : 1 sur racine de 400, soit 0,05.",
+  "02-question": "Il veut une marge deux fois plus petite : 0,025. Faut-il interroger deux fois plus de personnes ?",
+  "03-calcul": "1 sur racine de n égale 0,025 : racine de n égale 40. Donc n égale 1 600. Quatre fois plus, pas deux fois plus.",
+  "04-regle": "Pour diviser la marge par k, il faut multiplier la taille de l'échantillon par k au carré.",
+  "05-exemple": "Diviser par 3 la marge : 9 fois plus de personnes. 400 fois 9 : 3 600.",
+  "06-piege": "Le piège : croire que doubler l'échantillon divise la marge par 2. Doubler ne la divise que par environ 1,4.",
+  "07-defi": "À toi de jouer. Un sondage sur 100 personnes a une marge de 0,1. Combien de personnes pour une marge de 0,02 ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Diviser par 5 : multiplier par 25. 100 fois 25 : 2 500 personnes.",
+  "08-finale": "Ce que tu as appris. La marge vaut 1 sur racine de n. Pour la diviser par k, on multiplie n par k au carré. La précision coûte cher !",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

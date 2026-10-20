@@ -98,6 +98,15 @@ const parIdManifeste = new Map(manifeste.videos.map((v) => [v.id, v]));
 for (const v of manifeste.videos) {
   if (!v.url && v.meme_video_que) v.url = parIdManifeste.get(v.meme_video_que)?.url;
 }
+// ⭐ 20/10 : `aussi` = la même vidéo branchée sur d'AUTRES micros (même classe ou
+// non), sans nouvelle entrée ni nouveau fichier : [{ classe, notionId, microId }].
+// Ex. la paysage « tableau croisé » de 1re sert aussi la micro d'automatisme
+// « lire une probabilité conditionnelle dans un tableau ».
+for (const v of [...manifeste.videos]) {
+  for (const a of v.aussi ?? []) {
+    manifeste.videos.push({ ...v, ...a, id: `${v.id}@${a.microId}`, aussi: undefined, _alias: true });
+  }
+}
 
 const deja = [], ecartees = [], occupees = [], nouvelles = [];
 for (const v of manifeste.videos) {
@@ -112,7 +121,8 @@ for (const v of manifeste.videos) {
   // n'importe quelle ligne suffit.
   const classe = classeDe(v);
   const lignes = parId.get(idYoutube(v.url)) ?? [];
-  const enPlace = classe ? lignes.filter((r) => r.classe === classe) : lignes;
+  const enPlace = (classe ? lignes.filter((r) => r.classe === classe) : lignes)
+    .filter((r) => !v._alias || r.micro_id === (v.microId || ""));
   if (enPlace.length) {
     if (!F_CLASSE || enPlace.some((r) => r.classe === F_CLASSE)) deja.push({ v, short, enPlace });
     continue;

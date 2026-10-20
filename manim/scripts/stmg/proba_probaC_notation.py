@@ -1,5 +1,5 @@
 # proba_probaC_notation.py
-# EleveAI — Maths STMG — série « Probabilités conditionnelles », épisode 2 :
+# EleveAI — Maths STMG ET Maths 1re (tronc commun) — série « Probabilités conditionnelles », épisode 2 :
 # la notation P_A(B) (micro : probaC_notation), AVEC VOIX. Paysage 16:9,
 # CEINTURE BLEUE. Short jumeau : proba_probaC_notation_short.py (jaune).
 #
@@ -18,6 +18,12 @@
 #
 # Voix : manim/voix/stmg-proba-notation.json (débit −7).
 # Rendu : python -m manim render -qh --disable_caching manim/scripts/stmg/proba_probaC_notation.py ProbaNotationSTMG -o eleveai-maths-stmg-proba-notation --media_dir manim/scripts/stmg/media
+# ⭐ UNE voix, UN script, DEUX rendus (comme proba_bern_epreuve.py) : la micro
+# 1re tronc commun alea_cond_notation est identique ; ProbaNotationPremiere
+# ne change que l'identité (« Maths 1re — EleveAI »). La voix ne cite aucune classe.
+# python -m manim render -qh --disable_caching manim/scripts/stmg/proba_probaC_notation.py ProbaNotationPremiere -o eleveai-maths-premiere-commun-proba-notation --media_dir manim/scripts/stmg/media-notation-1re
+# Puis copier dans manim/sorties/premiere-commun/maths/probabilites/24-notation/ (le short
+# n'affiche aucune classe : le short STMG y est copié sous le nom …-premiere-commun-…-short.mp4).
 # Puis copier le mp4 dans manim/sorties/stmg/maths/probabilites/02-notation/.
 
 import sys
@@ -468,3 +474,9 @@ class ProbaNotationSTMG(NotionSTMG):
         self.ecran_correction()
         self.ecran_finale()
         self.page_abonnement(voix="08-abonne")
+
+
+class ProbaNotationPremiere(ProbaNotationSTMG):
+    """Même vidéo pour la 1re tronc commun : seule l'identité change."""
+
+    identite = "Maths 1re — EleveAI"

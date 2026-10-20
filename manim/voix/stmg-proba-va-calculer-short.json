@@ -1,0 +1,5 @@
+{
+  "00-accroche": "Au plus 1 colis en retard : c'est 0,3 ?",
+  "01-image": "Non ! Au plus 1, c'est 0 OU 1 retard. 0,5 plus 0,3 : 0,8. On additionne les cases.",
+  "02-question": "Et toi : 2 retards, 0,15 ; 3 retards, 0,05. Au moins 2 retards, ça fait combien ? Réponds en commentaire !"
+}

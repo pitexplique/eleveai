@@ -1,0 +1,13 @@
+{
+  "00-garde": "Calculer avec une loi : P de X égale a, P de X inférieur ou égal à a.",
+  "01-situation": "X, c'est le nombre de colis livrés en retard par jour par un livreur à vélo. Sa loi : 0 retard, 0,5. 1 retard, 0,3. 2 retards, 0,15. 3 retards, 0,05.",
+  "02-somme": "D'abord, on vérifie : 0,5 plus 0,3 plus 0,15 plus 0,05, égale 1. C'est bien une loi de probabilité.",
+  "03-egal": "P de X égale 1 : on lit directement la case. 0,3.",
+  "04-inferieur": "P de X inférieur ou égal à 1 : 0 ou 1 retard. 0,5 plus 0,3, soit 0,8.",
+  "05-superieur": "P de X supérieur ou égal à 2 : 2 ou 3 retards. 0,15 plus 0,05, soit 0,2. C'est aussi 1 moins 0,8.",
+  "06-piege": "Le piège : confondre inférieur et inférieur ou égal. P de X strictement inférieur à 1, c'est seulement 0 retard : 0,5.",
+  "07-defi": "À toi de jouer. Que vaut P de X inférieur ou égal à 2 ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 0,5 plus 0,3 plus 0,15 : 0,95. Ou 1 moins 0,05.",
+  "08-finale": "Ce que tu as appris. Une loi fait 1. P de X égale a : une case. P de X inférieur ou égal à a : on additionne les cases jusqu'à a. Attention au « ou égal ».",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -1,0 +1,13 @@
+{
+  "00-garde": "La formule des probabilités totales.",
+  "01-situation": "Une entreprise achète ses panneaux solaires chez trois fournisseurs. A : 50 %. B : 30 %. C : 20 %. Les taux de défaut : 2 % chez A, 4 % chez B, 5 % chez C.",
+  "02-partition": "A, B et C forment une partition : chaque panneau vient d'un seul fournisseur, et les trois ensemble, c'est tout.",
+  "03-arbre": "L'arbre : trois branches, 0,5, 0,3 et 0,2. Puis D, défaut : 0,02, 0,04 et 0,05.",
+  "04-formule": "P de D égale la somme des trois chemins. 0,5 fois 0,02, plus 0,3 fois 0,04, plus 0,2 fois 0,05.",
+  "05-calcul": "0,01 plus 0,012 plus 0,01 : 0,032. 3,2 % des panneaux ont un défaut.",
+  "06-piege": "Le piège : faire la moyenne des taux, 2, 4 et 5. Ça ferait environ 3,7 %. Faux : les fournisseurs n'ont pas le même poids.",
+  "07-defi": "À toi de jouer. Quelle est la probabilité qu'un panneau n'ait pas de défaut ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 1 moins 0,032 : 0,968.",
+  "08-finale": "Ce que tu as appris. Si A, B, C forment une partition, P de D est la somme des P de A fois P indice A de D. Chaque chemin pèse selon sa branche.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

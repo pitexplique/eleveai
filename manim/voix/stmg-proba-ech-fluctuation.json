@@ -1,0 +1,13 @@
+{
+  "00-garde": "La fluctuation d'échantillonnage.",
+  "01-situation": "Une marque de cosmétiques bio annonce : 10 % des personnes qui voient sa publicité cliquent dessus. On observe des échantillons de 400 personnes.",
+  "02-simuler": "On simule 100 échantillons de 400 personnes. Les fréquences de clic changent : 0,09, 0,12, 0,10, 0,08…",
+  "03-intervalle": "La marge de fluctuation : 1 sur racine de n. Racine de 400, c'est 20 : la marge vaut 0,05.",
+  "04-proportion": "Au moins 95 % des fréquences tombent entre p moins 0,05 et p plus 0,05 : entre 0,05 et 0,15. Ici, presque toutes.",
+  "05-sens": "C'est la fluctuation d'échantillonnage : d'un échantillon à l'autre, la fréquence bouge, mais rarement de plus de 1 sur racine de n.",
+  "06-piege": "Le piège : croire qu'une fréquence hors de l'intervalle est impossible. C'est rare, au plus une fois sur vingt, mais ça peut arriver.",
+  "07-defi": "À toi de jouer. Avec des échantillons de 2 500 personnes, quelle est la marge 1 sur racine de n ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Racine de 2 500, c'est 50. 1 sur 50 : 0,02.",
+  "08-finale": "Ce que tu as appris. La fréquence fluctue d'un échantillon à l'autre. Au moins 95 % des fréquences sont à moins de 1 sur racine de n de p.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

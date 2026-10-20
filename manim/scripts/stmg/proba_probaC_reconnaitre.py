@@ -1,5 +1,5 @@
 # proba_probaC_reconnaitre.py
-# EleveAI — Maths STMG — série « Probabilités conditionnelles », épisode 1 :
+# EleveAI — Maths STMG ET Maths 1re (tronc commun) — série « Probabilités conditionnelles », épisode 1 :
 # RECONNAÎTRE une probabilité conditionnelle (micro : probaC_reconnaitre),
 # AVEC VOIX. Paysage 16:9, CEINTURE BLEUE.
 # Short jumeau : proba_probaC_reconnaitre_short.py (ceinture jaune, les déchets triés).
@@ -21,6 +21,12 @@
 #
 # Voix : manim/voix/stmg-proba-reconnaitre.json (Julie, débit −7).
 # Rendu : python -m manim render -qh --disable_caching manim/scripts/stmg/proba_probaC_reconnaitre.py ProbaReconnaitreSTMG -o eleveai-maths-stmg-proba-reconnaitre --media_dir manim/scripts/stmg/media
+# ⭐ UNE voix, UN script, DEUX rendus (comme proba_bern_epreuve.py) : la micro
+# 1re tronc commun alea_cond_reconnaitre est identique ; ProbaReconnaitrePremiere
+# ne change que l'identité (« Maths 1re — EleveAI »). La voix ne cite aucune classe.
+# python -m manim render -qh --disable_caching manim/scripts/stmg/proba_probaC_reconnaitre.py ProbaReconnaitrePremiere -o eleveai-maths-premiere-commun-proba-reconnaitre --media_dir manim/scripts/stmg/media-reconnaitre-1re
+# Puis copier dans manim/sorties/premiere-commun/maths/probabilites/23-reconnaitre/ (le short
+# n'affiche aucune classe : le short STMG y est copié sous le nom …-premiere-commun-…-short.mp4).
 # Puis copier le mp4 dans manim/sorties/stmg/maths/probabilites/01-reconnaitre/.
 
 import sys
@@ -454,3 +460,9 @@ class ProbaReconnaitreSTMG(NotionSTMG):
         self.ecran_correction()
         self.ecran_finale()
         self.page_abonnement(voix="09-abonne")
+
+
+class ProbaReconnaitrePremiere(ProbaReconnaitreSTMG):
+    """Même vidéo pour la 1re tronc commun : seule l'identité change."""
+
+    identite = "Maths 1re — EleveAI"

@@ -1,0 +1,12 @@
+{
+  "00-garde": "Simuler des échantillons avec Python.",
+  "01-situation": "Un site de vente en ligne affirme : 30 % des visiteurs achètent. On veut voir ce que donnent des échantillons de 50 visiteurs.",
+  "02-fonction": "La fonction échantillon : un compteur à 0. 50 fois : si random est plus petit que 0,3, on ajoute 1. On renvoie le compteur divisé par 50.",
+  "03-repeter": "On répète 100 fois : on obtient 100 fréquences. Par exemple 0,28, 0,34, 0,26, 0,32…",
+  "04-observer": "Elles changent d'un échantillon à l'autre, mais elles tournent toutes autour de 0,3.",
+  "05-piege": "Le piège : croire qu'un seul échantillon suffit. 0,34 ne prouve pas que le site ment : il faut regarder beaucoup d'échantillons.",
+  "06-defi": "À toi de jouer. Que se passe-t-il si on prend des échantillons de 500 visiteurs au lieu de 50 ? Mets pause, et cherche !",
+  "06b-correction": "Correction. Les fréquences se resserrent autour de 0,3 : plus l'échantillon est grand, moins elles fluctuent.",
+  "07-finale": "Ce que tu as appris. random plus petit que p simule un succès. Une boucle simule un échantillon, une autre boucle répète les échantillons. Les fréquences fluctuent autour de p.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

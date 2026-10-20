@@ -1,0 +1,13 @@
+{
+  "00-garde": "Représenter des fréquences : nuage de points et histogramme.",
+  "01-situation": "On a simulé 100 échantillons de 50 visiteurs d'un site, avec p égale 0,3. On obtient 100 fréquences.",
+  "02-nuage": "Le nuage de points : en abscisse, le numéro de l'échantillon, de 1 à 100. En ordonnée, sa fréquence. On trace la droite y égale 0,3.",
+  "03-lire-nuage": "Les points se dispersent autour de la droite. La plupart restent entre 0,2 et 0,4.",
+  "04-histogramme": "L'histogramme : on compte combien de fréquences tombent dans chaque intervalle. La barre la plus haute est autour de 0,3.",
+  "05-sens": "Les deux graphiques disent la même chose : les fréquences fluctuent, mais se concentrent autour de p.",
+  "06-piege": "Le piège : lire un point isolé. Un échantillon à 0,46 existe, mais il est rare : on regarde l'ensemble du nuage.",
+  "07-defi": "À toi de jouer. Sur l'histogramme, 92 fréquences sur 100 sont entre 0,2 et 0,4. Quelle proportion des échantillons est-ce ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 92 sur 100 : 92 % des échantillons.",
+  "08-finale": "Ce que tu as appris. Nuage de points ou histogramme, on visualise la fluctuation. Les fréquences se concentrent autour de p. On regarde l'ensemble, pas un point isolé.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

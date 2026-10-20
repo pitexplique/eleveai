@@ -1,0 +1,5 @@
+{
+  "00-accroche": "100 échantillons de 50 clients, en une seconde, avec Python !",
+  "01-image": "0,28, 0,34, 0,26, 0,32… Les fréquences bougent, mais tournent toutes autour de 0,3.",
+  "02-question": "Et toi : avec 500 clients par échantillon, elles bougent plus ou moins ? Réponds en commentaire !"
+}

@@ -1,0 +1,13 @@
+{
+  "00-garde": "La distance entre la fréquence et p.",
+  "01-situation": "Un fournisseur garantit 5 % de colis abîmés. Sur 400 colis, on en trouve 32 abîmés.",
+  "02-frequence": "La fréquence observée : 32 sur 400, soit 0,08.",
+  "03-distance": "La distance à p : la différence entre 0,08 et 0,05, sans signe. 0,03.",
+  "04-comparer": "On la compare à la marge 1 sur racine de 400 : 0,05. 0,03 est plus petit que 0,05 : la distance est normale.",
+  "05-sens": "Une petite distance, c'est la fluctuation. Une grande distance, plus grande que la marge, c'est rare.",
+  "06-piege": "Le piège : oublier la valeur absolue. Si on trouve 0,02, la distance à 0,05 vaut aussi 0,03, pas moins 0,03.",
+  "07-defi": "À toi de jouer. Sur 400 colis, 48 abîmés. Quelle est la distance à 0,05 ? Est-elle normale ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 48 sur 400, c'est 0,12. Distance : 0,07. Plus grande que 0,05 : ce n'est pas normal.",
+  "08-finale": "Ce que tu as appris. La distance, c'est l'écart entre f et p, sans signe. On la compare à 1 sur racine de n : plus petite, c'est normal ; plus grande, c'est rare.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}
