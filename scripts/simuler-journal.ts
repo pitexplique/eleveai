@@ -5,7 +5,9 @@
 // défis générés (jamais deux choix identiques).
 import { donneesDuJournal } from "../app/accueil-journal/donnees";
 import { genererDefi } from "../lib/accueil/defis";
-import { jourParis } from "../lib/accueil/journal";
+import { EDITION, jourParis } from "../lib/accueil/journal";
+import { toutesLesVideos } from "../lib/videos/r2";
+const PAR_SHORT = new Set(toutesLesVideos().filter((v) => v.short).map((v) => v.id));
 const j0 = jourParis();
 const n = Number(process.argv[2] ?? 7);
 const vus = new Map<string, number>();
@@ -23,6 +25,8 @@ for (let k = 0; k < n; k++) {
     console.log(`RÉEL ${d.reel.map((s) => s.id).join(", ")}`);
     console.log(`DEMAIN ${d.demain.titre}`);
   }
+  if (d.une.paysage?.short) console.log(`⛔ UNE EN SHORT le ${d.date}`);
+  for (const u of EDITION) if (u.date && PAR_SHORT.has(u.paysage)) console.log(`⛔ EDITION ${u.date} : ${u.paysage} est un short`);
   const id = d.une.paysage!.id;
   if (vus.has(id) && k - vus.get(id)! < 60) console.log(`REDITE Une ${id} à ${k - vus.get(id)!} jours`);
   vus.set(id, k);

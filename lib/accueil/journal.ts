@@ -89,10 +89,12 @@ export const EDITION: UneJournal[] = [
     },
   },
   {
-    // Une SHORT en Une : le dessin animé Ti Margo (« j'adore », 15/10).
+    // ⛔ La Une est TOUJOURS une PAYSAGE (Frédéric, 20/10 : « sur la page
+    // d'accueil, avec ton format, il faut un format paysage »). Le dessin animé
+    // Ti Margo (« j'adore », 15/10) passe donc à côté, en short.
     date: "2026-10-20",
-    paysage: "5e-relatif-nombre-short-ti-margo-diagonale",
-    short: "5e-relatif-nombre-short-montees-cachees",
+    paysage: "5e-relatif-nombre",
+    short: "5e-relatif-nombre-short-ti-margo-diagonale",
     classe: "Diagonale des Fous · 5e",
     utile: "On compte les montées en + et les descentes en − : après 10 200 m de montée, l'arrivée n'est que 47 m plus haut que le départ.",
     chiffre: {

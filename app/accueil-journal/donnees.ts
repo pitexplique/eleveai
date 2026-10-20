@@ -83,7 +83,12 @@ function fenetre<T>(liste: T[], jour: number, n: number, pas = n): T[] {
 
 function uneDuJour(jour: number) {
   // 1. L'édition de la semaine, si ce jour a sa Une écrite (et publiée).
-  const datee = EDITION.find((u) => u.date === iso(jour) && PAR_ID.has(u.paysage));
+  // ⛔ Jamais un SHORT en Une (20/10/2026 : un short vertical y laissait une
+  // colonne étroite à bandes noires) : une entrée datée qui en désignerait un
+  // est ignorée, et le tirage prend le relais.
+  const datee = EDITION.find(
+    (u) => u.date === iso(jour) && PAR_ID.has(u.paysage) && !PAR_ID.get(u.paysage)!.short,
+  );
   // 2. Sinon le tirage dans tout le catalogue.
   const p = datee ? PAR_ID.get(datee.paysage)! : PAYSAGES[jour % PAYSAGES.length];
   const ecrite = datee ?? UTILE.get(p.id);
