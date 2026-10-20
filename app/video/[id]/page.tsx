@@ -67,18 +67,8 @@ export default async function PageVideo({ params }: Props) {
           .
         </LecteurVideo>
 
-        {v.youtube ? (
-          // Les shorts finissent par une question à laquelle répondre en
-          // commentaire : les commentaires, eux, sont sur YouTube.
-          <a
-            href={v.short ? `https://youtube.com/shorts/${v.youtube}` : `https://youtu.be/${v.youtube}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 inline-block text-sm font-bold text-rose-300 transition hover:text-rose-200"
-          >
-            Commenter sur YouTube →
-          </a>
-        ) : null}
+        {/* ⛔ 20/10/2026 — Frédéric : « on enlève commenter sur YouTube ».
+            Les élèves restent sur le lecteur du site : aucun lien vers YouTube. */}
       </div>
     </main>
   );
