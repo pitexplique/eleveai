@@ -1,0 +1,5 @@
+{
+  "00-accroche": "4 ampoules défectueuses sur 20. On en prend 3, sans les remettre. Loi binomiale ?",
+  "01-image": "Non ! Après une défectueuse, il n'en reste que 3 sur 19. La probabilité change : pas de loi binomiale.",
+  "02-question": "Et toi : et si on remettait chaque ampoule avant de tirer la suivante ? Réponds en commentaire !"
+}

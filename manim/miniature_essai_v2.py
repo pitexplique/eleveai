@@ -1773,6 +1773,47 @@ for _cl, _dos, _k, _bd, _c, _duree, _titre, _haut, _bas in [
     }
 
 
+# 20/10/2026 — lot LOI BINOMIALE STMG (38-47) et Tle spé (11-16) : paysages.
+for _cl, _dos, _k, _bd, _c, _duree, _titre, _haut, _bas in [
+    ("stmg", "38-bin-reconnaitre", "bin-reconnaitre", "STMG", "bleue", "EN 2 MIN", ["RECONNAÎTRE UNE", "LOI BINOMIALE"],
+     "Le 1er appel qui vend…", "PAS une loi binomiale !"),
+    ("terminale", "11-bin-reconnaitre", "bin-reconnaitre", "TLE SPÉ", "noire", "EN 2 MIN", ["RECONNAÎTRE UNE", "LOI BINOMIALE"],
+     "Le 1er appel qui vend…", "PAS une loi binomiale !"),
+    ("stmg", "39-bin-remise", "bin-remise", "STMG", "bleue", "EN 2 MIN", ["AVEC OU", "SANS REMISE ?"],
+     "3 tirages… donc binomiale ?", "sans remise : NON !"),
+    ("terminale", "12-bin-schema", "bin-remise", "TLE SPÉ", "noire", "EN 2 MIN", ["AVEC OU", "SANS REMISE ?"],
+     "3 tirages… donc binomiale ?", "sans remise : NON !"),
+    ("stmg", "40-bin-calculer", "bin-calculer", "STMG", "bleue", "EN 2 MIN", ["CALCULER", "P(X = k)"],
+     "0,3² × 0,7² ?", "il manque 6 chemins !"),
+    ("terminale", "13-bin-calculer", "bin-calculer", "TLE SPÉ", "noire", "EN 2 MIN", ["CALCULER", "P(X = k)"],
+     "0,3² × 0,7² ?", "il manque 6 chemins !"),
+    ("stmg", "41-bin-parametres", "bin-parametres", "STMG", "bleue", "EN 2 MIN", ["TROUVER", "n ET p"],
+     "80 % germent… donc p = 0,8 ?", "non : X compte l'échec, p = 0,2 !"),
+    ("stmg", "42-coef-definition", "coef-definition", "STMG", "bleue", "EN 2 MIN", ["LE COEFFICIENT", "BINOMIAL"],
+     "« 2 parmi 3 » = 2 × 3 ?", "NON : 3 chemins !"),
+    ("stmg", "43-triangle-pascal", "triangle-pascal", "STMG", "bleue", "EN 2 MIN", ["LE TRIANGLE", "DE PASCAL"],
+     "Un arbre à 32 chemins ?", "non : le triangle compte pour toi !"),
+    ("stmg", "44-formule-pascal", "formule-pascal", "STMG", "bleue", "EN 2 MIN", ["LA FORMULE", "DE PASCAL"],
+     "4 + 6 = 10…", "et c'est une formule de probas !"),
+    ("stmg", "45-coef-denombrer", "coef-denombrer", "STMG", "bleue", "EN 2 MIN", ["DÉNOMBRER", "LES CHEMINS"],
+     "2 bien triés sur 4 : 4 cas ?", "non : 6 !"),
+    ("stmg", "46-bin-extremes", "bin-extremes", "STMG", "bleue", "EN 2 MIN", ["LES CAS", "EXTRÊMES"],
+     "1 panne : 0,1 × 0,9⁴ ?", "FAUX : il y a 5 chemins !"),
+    ("stmg", "47-bin-esperance", "bin-esperance", "STMG", "bleue", "EN 2 MIN", ["L'ESPÉRANCE", "n × p"],
+     "200 appels à 15 % : 30 pile ?", "NON : 30 EN MOYENNE !"),
+    ("terminale", "14-bin-esperance-variance", "bin-esperance-variance", "TLE SPÉ", "noire", "EN 2 MIN", ["ESPÉRANCE", "ET ÉCART-TYPE"],
+     "ÉCART-TYPE : 21 ou √21 ?", "√21 ≈ 4,6 : n'oublie pas la racine !"),
+    ("terminale", "15-bin-intervalle", "bin-intervalle", "TLE SPÉ", "noire", "EN 2 MIN", ["PROBABILITÉ", "D'UN INTERVALLE"],
+     "P(4 ≤ X ≤ 8) : − P(X ≤ 4) ?", "PERDU : − P(X ≤ 3) !"),
+    ("terminale", "16-bin-defi", "bin-defi", "TLE SPÉ", "noire", "EN 3 MIN", ["SUJET TYPE BAC :", "LOI BINOMIALE"],
+     "AU MOINS 2 sur 50 panneaux…", "n'oublie pas le cas X = 0 !"),
+]:
+    ESSAIS[f"eleveai-maths-{_cl}-proba-{_k}"] = {
+        "badge": f"MATHS · {_bd}", "duree": _duree, "titre": _titre,
+        "accroche": _piege_test(_c, _haut, _bas), "dossier": f"{_cl}/maths/probabilites/{_dos}",
+    }
+
+
 def construire(nom, spec):
     img = fond()
     d = ImageDraw.Draw(img)

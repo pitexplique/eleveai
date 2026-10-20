@@ -1,0 +1,13 @@
+{
+  "00-garde": "Espérance, variance et écart-type d'une loi binomiale.",
+  "01-situation": "Une basketteuse réussit chaque lancer franc avec la probabilité 0,7. À l'entraînement, elle en tire 100. X compte les réussites : X suit B de 100 virgule 0,7.",
+  "02-esperance": "L'espérance : n fois p. 100 fois 0,7 : 70 réussites en moyenne.",
+  "03-variance": "La variance : n fois p fois 1 moins p. 100 fois 0,7 fois 0,3 : 21.",
+  "04-ecart-type": "L'écart-type : la racine de la variance. Racine de 21 : environ 4,58.",
+  "05-sens": "Le plus souvent, elle réussit à peu près 70 lancers, à quelques lancers près : l'écart-type mesure cette dispersion autour de 70.",
+  "06-piege": "Le piège : oublier la racine. L'écart-type, c'est racine de 21, pas 21.",
+  "07-defi": "À toi de jouer. Une pièce équilibrée lancée 400 fois. X compte les piles. Calcule E de X, V de X et l'écart-type. Mets pause, et cherche !",
+  "07b-correction": "Correction. E égale 400 fois 0,5 : 200. V égale 400 fois 0,5 fois 0,5 : 100. L'écart-type : racine de 100, 10.",
+  "08-finale": "Ce que tu as appris. Si X suit B de n virgule p : E de X égale n p, V de X égale n p, fois 1 moins p, et l'écart-type est la racine de la variance.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

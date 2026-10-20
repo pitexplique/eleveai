@@ -1,0 +1,12 @@
+{
+  "00-garde": "Les paramètres d'une loi binomiale : n et p.",
+  "01-situation": "Un livreur dépose 12 colis. Chaque colis arrive abîmé avec la probabilité 0,05, indépendamment. X compte les colis abîmés.",
+  "02-n": "n, c'est le nombre d'épreuves répétées : ici, 12 colis. n égale 12.",
+  "03-p": "p, c'est la probabilité du succès, le succès étant ce que X compte : ici, un colis abîmé. p égale 0,05.",
+  "04-loi": "X suit la loi binomiale B de 12 virgule 0,05.",
+  "05-piege": "Le piège : si X comptait les colis intacts, le succès serait « intact », et p vaudrait 0,95. p dépend de ce que X compte.",
+  "06-defi": "À toi de jouer. On sème 30 graines de vanille. 80 % germent. X compte les graines qui ne germent pas. Quels sont n et p ? Mets pause, et cherche !",
+  "06b-correction": "Correction. n égale 30. Le succès, c'est « ne germe pas » : p égale 0,2.",
+  "07-finale": "Ce que tu as appris. n est le nombre d'épreuves. p est la probabilité de ce que X compte. Change ce qu'on compte, et p devient 1 moins p.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -1,0 +1,5 @@
+{
+  "00-accroche": "Un triangle de nombres qui compte les chemins tout seul ?",
+  "01-image": "1. 1, 1. 1, 2, 1. 1, 3, 3, 1. 1, 4, 6, 4, 1. Chaque nombre est la somme des deux au-dessus. Magique !",
+  "02-question": "Et toi : quelle est la ligne suivante ? Réponds en commentaire !"
+}

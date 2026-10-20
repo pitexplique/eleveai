@@ -1,0 +1,13 @@
+{
+  "00-garde": "Le coefficient binomial : compter les chemins.",
+  "01-situation": "Un client passe 3 commandes en ligne. Chacune est livrée à l'heure, succès, ou en retard, échec. On fait l'arbre à 3 niveaux : 8 chemins.",
+  "02-chemins": "Combien de chemins ont exactement 2 succès ? Succès, succès, échec. Succès, échec, succès. Échec, succès, succès. 3 chemins.",
+  "03-notation": "Ce nombre s'appelle le coefficient binomial « 2 parmi 3 ». On l'écrit 3 au-dessus de 2, entre parenthèses. Il vaut 3.",
+  "04-autres": "« 3 parmi 3 » : un seul chemin, tout en succès. « 0 parmi 3 » : un seul chemin, tout en échec. « 1 parmi 3 » : 3 chemins.",
+  "05-total": "1 plus 3 plus 3 plus 1 : 8. On retrouve les 8 chemins de l'arbre.",
+  "06-piege": "Le piège : confondre « 2 parmi 3 » et 2 fois 3. Ce n'est pas un produit : c'est un nombre de chemins.",
+  "07-defi": "À toi de jouer. Avec 2 commandes, combien de chemins ont exactement 1 succès ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Succès-échec et échec-succès : « 1 parmi 2 » vaut 2.",
+  "08-finale": "Ce que tu as appris. « k parmi n », c'est le nombre de chemins de l'arbre à n niveaux qui ont exactement k succès. La somme de tous ces coefficients donne le nombre total de chemins.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

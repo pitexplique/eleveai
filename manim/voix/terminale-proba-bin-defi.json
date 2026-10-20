@@ -1,0 +1,13 @@
+{
+  "00-garde": "Un exercice type bac avec la loi binomiale.",
+  "01-situation": "Une usine fabrique des panneaux solaires. 3 % sont défectueux. On prélève 50 panneaux, le stock est assez grand pour assimiler le prélèvement à des tirages avec remise. X compte les panneaux défectueux.",
+  "02-loi": "Question 1 : la loi de X. 50 épreuves identiques et indépendantes, succès « défectueux », p égale 0,03. X suit B de 50 virgule 0,03.",
+  "03-zero": "Question 2 : aucun panneau défectueux. P de X égale 0 : 0,97 puissance 50, environ 0,218.",
+  "04-au-moins-deux": "Question 3 : au moins deux défectueux. On passe par le contraire : 1 moins P de X inférieur ou égal à 1. P de X égale 1 : 50 fois 0,03 fois 0,97 puissance 49, environ 0,337. Donc 1 moins 0,218 moins 0,337 : environ 0,445.",
+  "05-esperance": "Question 4 : l'espérance. 50 fois 0,03 : 1,5 panneau défectueux en moyenne par lot.",
+  "06-piege": "Le piège de la question 3 : calculer 1 moins P de X égale 1. On oublierait le cas X égale 0.",
+  "07-defi": "À toi de jouer. Quelle est la probabilité qu'au moins un panneau soit défectueux ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Le contraire d'au moins un : aucun. 1 moins 0,218 : environ 0,782.",
+  "08-finale": "Ce que tu as appris. Justifier la loi avec les trois conditions. Aucun : 1 moins p puissance n. Au moins : passer par le contraire. Et l'espérance : n fois p.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

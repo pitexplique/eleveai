@@ -1,0 +1,12 @@
+{
+  "00-garde": "Reconnaître une loi binomiale.",
+  "01-situation": "Un centre d'appels vend des panneaux solaires. Chaque appel aboutit à une vente avec une probabilité de 0,2, quel que soit l'appel précédent. Un conseiller passe 10 appels. X compte le nombre de ventes.",
+  "02-conditions": "Trois conditions. Une même épreuve à deux issues : vente ou pas, avec p égale 0,2. Répétée 10 fois, de façon indépendante. Et X compte le nombre de succès.",
+  "03-conclusion": "Les trois sont réunies : X suit la loi binomiale de paramètres 10 et 0,2. On écrit X suit B de 10 virgule 0,2.",
+  "04-arbre": "L'arbre a 10 niveaux, avec à chaque fois la même branche : succès 0,2, échec 0,8. C'est un schéma de Bernoulli.",
+  "05-piege": "Le piège : X, le numéro du premier appel qui aboutit à une vente. Ce n'est pas un nombre de succès : ce n'est pas une loi binomiale.",
+  "06-defi": "À toi de jouer. On lance 5 fois un dé équilibré. X compte le nombre de 6. Quelle loi suit X ? Mets pause, et cherche !",
+  "06b-correction": "Correction. 5 épreuves identiques et indépendantes, succès : obtenir 6, avec p égale 1 sur 6. X suit B de 5 virgule 1 sur 6.",
+  "07-finale": "Ce que tu as appris. Même épreuve de Bernoulli, répétée n fois, indépendante, et X compte les succès : X suit la loi binomiale B de n virgule p.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

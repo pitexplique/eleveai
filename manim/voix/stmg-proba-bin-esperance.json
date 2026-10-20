@@ -1,0 +1,12 @@
+{
+  "00-garde": "L'espérance d'une loi binomiale : n fois p.",
+  "01-situation": "Une association passe 200 appels pour recruter des bénévoles. Chaque appel aboutit avec la probabilité 0,15. X compte les recrues : X suit B de 200 virgule 0,15.",
+  "02-formule": "L'espérance d'une loi binomiale : E de X égale n fois p. 200 fois 0,15 : 30.",
+  "03-sens": "En moyenne, sur un grand nombre de campagnes de 200 appels, on recrute 30 bénévoles.",
+  "04-pourquoi": "Pourquoi n fois p ? Chaque appel rapporte en moyenne p recrue : l'espérance d'une Bernoulli. 200 appels : 200 fois p.",
+  "05-piege": "Le piège : croire qu'on recrutera exactement 30 bénévoles. Ce sera parfois 25, parfois 34 : 30, c'est la moyenne.",
+  "06-defi": "À toi de jouer. Une enquête : 50 clients, chacun satisfait avec la probabilité 0,4. Combien de clients satisfaits en moyenne ? Mets pause, et cherche !",
+  "06b-correction": "Correction. 50 fois 0,4 : 20 clients satisfaits en moyenne.",
+  "07-finale": "Ce que tu as appris. Si X suit B de n virgule p, E de X égale n fois p. C'est une moyenne sur le long terme, pas une certitude.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

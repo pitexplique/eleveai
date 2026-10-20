@@ -1,0 +1,13 @@
+{
+  "00-garde": "Calculer P de X égale k avec la loi binomiale.",
+  "01-situation": "Dans une boutique de vélos, chaque client qui entre achète un antivol avec la probabilité 0,3, indépendamment des autres. 4 clients entrent. X compte les antivols vendus : X suit B de 4 virgule 0,3.",
+  "02-chemin": "Un chemin avec exactement 2 succès : succès, succès, échec, échec. Sa probabilité : 0,3 au carré fois 0,7 au carré. 0,09 fois 0,49 : 0,0441.",
+  "03-compter": "Combien de chemins ont exactement 2 succès ? C'est le coefficient binomial « 2 parmi 4 » : 6 chemins.",
+  "04-formule": "P de X égale 2, c'est 6 fois 0,0441, soit 0,2646. La formule : k parmi n, fois p puissance k, fois 1 moins p puissance n moins k.",
+  "05-calculatrice": "À la calculatrice, la loi binomiale donne directement 0,2646.",
+  "06-piege": "Le piège : oublier le coefficient binomial. 0,0441, c'est un seul chemin. Il y en a 6.",
+  "07-defi": "À toi de jouer. Calcule P de X égale 1. Mets pause, et cherche !",
+  "07b-correction": "Correction. « 1 parmi 4 » : 4 chemins. 4 fois 0,3 fois 0,7 au cube. 0,7 au cube : 0,343. 4 fois 0,3 fois 0,343 : 0,4116.",
+  "08-finale": "Ce que tu as appris. P de X égale k : le nombre de chemins, k parmi n, fois la probabilité d'un chemin, p puissance k fois 1 moins p puissance n moins k.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -1,0 +1,13 @@
+{
+  "00-garde": "Le triangle de Pascal : les coefficients sans calcul.",
+  "01-situation": "Pour une loi binomiale avec 5 épreuves, il faut « 2 parmi 5 ». Dessiner l'arbre à 32 chemins ? Trop long.",
+  "02-construire": "On écrit 1 en haut. Chaque ligne commence et finit par 1. Chaque autre nombre est la somme des deux nombres au-dessus de lui.",
+  "03-lignes": "Ligne 1 : 1, 1. Ligne 2 : 1, 2, 1. Ligne 3 : 1, 3, 3, 1. Ligne 4 : 1, 4, 6, 4, 1. Ligne 5 : 1, 5, 10, 10, 5, 1.",
+  "04-lire": "« k parmi n » se lit sur la ligne n, à la place k, en comptant à partir de 0. « 2 parmi 5 » : ligne 5, place 2 : 10.",
+  "05-symetrie": "Chaque ligne est symétrique : « 2 parmi 5 » égale « 3 parmi 5 ». Avoir 2 succès ou 2 échecs, c'est le même nombre de chemins.",
+  "06-piege": "Le piège : compter les places à partir de 1. La première place, c'est la place 0 : « 0 parmi 5 » vaut 1.",
+  "07-defi": "À toi de jouer. Construis la ligne 6 et trouve « 2 parmi 6 ». Mets pause, et cherche !",
+  "07b-correction": "Correction. Ligne 6 : 1, 6, 15, 20, 15, 6, 1. « 2 parmi 6 » vaut 15.",
+  "08-finale": "Ce que tu as appris. Dans le triangle de Pascal, chaque nombre est la somme des deux au-dessus. « k parmi n » se lit ligne n, place k, en partant de 0.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

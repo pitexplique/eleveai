@@ -1,0 +1,12 @@
+{
+  "00-garde": "La formule de Pascal.",
+  "01-situation": "Dans le triangle de Pascal, 4 et 6 sont côte à côte sur la ligne 4. Juste en dessous, sur la ligne 5 : 10.",
+  "02-formule": "C'est la formule de Pascal : « k parmi n » plus « k plus 1 parmi n » égale « k plus 1 parmi n plus 1 ». Ici : « 1 parmi 4 » plus « 2 parmi 4 », 4 plus 6, égale « 2 parmi 5 », 10.",
+  "03-pourquoi": "Pourquoi ? Dans l'arbre à 5 niveaux, un chemin avec 2 succès commence par un succès ou par un échec. S'il commence par un succès, il reste 1 succès sur 4 niveaux : « 1 parmi 4 ». Sinon, 2 succès sur 4 niveaux : « 2 parmi 4 ».",
+  "04-utiliser": "On l'utilise pour calculer une ligne à partir de la précédente, sans arbre.",
+  "05-piege": "Le piège : additionner deux nombres qui ne sont pas côte à côte. « 1 parmi 4 » plus « 3 parmi 4 » ne donne rien d'utile.",
+  "06-defi": "À toi de jouer. Sachant que « 2 parmi 5 » et « 3 parmi 5 » valent 10, combien vaut « 3 parmi 6 » ? Mets pause, et cherche !",
+  "06b-correction": "Correction. « 2 parmi 5 » plus « 3 parmi 5 » : 10 plus 10, 20. Donc « 3 parmi 6 » vaut 20.",
+  "07-finale": "Ce que tu as appris. Deux voisins d'une ligne s'additionnent pour donner le nombre en dessous : c'est la formule de Pascal. Elle se comprend avec le premier niveau de l'arbre.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

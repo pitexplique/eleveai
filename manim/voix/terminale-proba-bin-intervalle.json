@@ -1,0 +1,13 @@
+{
+  "00-garde": "La probabilité d'un intervalle avec la loi binomiale.",
+  "01-situation": "Dans un lycée, 30 % des élèves viennent en car. On en interroge 20 au hasard. X compte ceux qui viennent en car : X suit B de 20 virgule 0,3.",
+  "02-question": "Quelle est la probabilité que entre 4 et 8 élèves, bornes comprises, viennent en car ? On cherche P de 4 inférieur ou égal à X inférieur ou égal à 8.",
+  "03-methode": "La calculatrice donne les probabilités cumulées, P de X inférieur ou égal à k. On écrit : P de X inférieur ou égal à 8, moins P de X inférieur ou égal à 3.",
+  "04-calcul": "P de X inférieur ou égal à 8 : environ 0,887. P de X inférieur ou égal à 3 : environ 0,107. La différence : environ 0,780.",
+  "05-pourquoi": "On enlève 3, et pas 4 : sinon, on enlèverait aussi X égale 4, qui fait partie de l'intervalle.",
+  "06-piege": "Le piège : calculer P de X inférieur ou égal à 8 moins P de X inférieur ou égal à 4. On perdrait le cas X égale 4.",
+  "07-defi": "À toi de jouer. Calcule P de X supérieur ou égal à 5, sachant que P de X inférieur ou égal à 4 vaut environ 0,238. Mets pause, et cherche !",
+  "07b-correction": "Correction. Le contraire de X supérieur ou égal à 5, c'est X inférieur ou égal à 4. 1 moins 0,238 : environ 0,762.",
+  "08-finale": "Ce que tu as appris. P de a inférieur ou égal à X inférieur ou égal à b, c'est P de X inférieur ou égal à b moins P de X inférieur ou égal à a moins 1. Et P de X supérieur ou égal à a, c'est 1 moins P de X inférieur ou égal à a moins 1.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -1,0 +1,5 @@
+{
+  "00-accroche": "10 appels, 20 % de chances de vendre à chaque fois. Combien de ventes ?",
+  "01-image": "Même épreuve, répétée 10 fois, indépendante, et on compte les ventes : c'est une loi binomiale, B de 10 virgule 0,2 !",
+  "02-question": "Et toi : le numéro du premier appel qui vend, c'est aussi une loi binomiale ? Réponds en commentaire !"
+}

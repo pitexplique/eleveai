@@ -632,6 +632,63 @@ for _cl, _bd, _dos, _ep, _c, _titre, _sous, _lg, _tt in [
     CEINTURE_SHORT[_nom] = _c
 
 
+# 20/10/2026 — lot LOI BINOMIALE STMG (38-47) et Tle spé (11-16) : shorts.
+_BIN = {
+    "bin-reconnaitre": (["10 APPELS", "20 % DE VENTES"], "quelle loi ?",
+        [("même épreuve, 10 fois", 72, BLEU), ("indépendantes", 90, ORANGE), ("B(10 ; 0,2) !", 100, VERT)], 84),
+    "bin-remise": (["4 SUR 20", "DÉFECTUEUSES"], "on en prend 3, sans remise",
+        [("4/20 puis 3/19", 96, BLEU), ("la proba change", 84, ORANGE), ("pas binomiale !", 90, ROUGE)], 92),
+    "bin-calculer": (["2 VENTES", "SUR 4 CLIENTS"], "30 % achètent un antivol",
+        [("un chemin : 0,0441", 72, ROUGE), ("6 chemins", 100, BLEU), ("= 0,2646 !", 100, VERT)], 92),
+    "bin-parametres": (["80 % DES GRAINES", "GERMENT"], "X compte celles qui ne germent pas",
+        [("p = 0,8 ?", 110, ROUGE), ("succès = ce que X compte", 60, BLEU), ("p = 0,2 !", 110, VERT)], 76),
+    "coef-definition": (["3 COMMANDES", "2 À L'HEURE"], "combien de façons ?",
+        [("SSE · SES · ESS", 84, BLEU), ("3 façons", 100, ORANGE), ("« 2 parmi 3 » !", 90, VERT)], 88),
+    "triangle-pascal": (["UN TRIANGLE", "MAGIQUE"], "qui compte les chemins tout seul",
+        [("1 · 3 · 3 · 1", 100, BLEU), ("1 · 4 · 6 · 4 · 1", 84, ORANGE), ("somme des 2 du dessus", 60, VERT)], 96),
+    "formule-pascal": (["4 + 6", "= 10"], "une formule de probabilités ?",
+        [("deux voisins", 96, BLEU), ("donnent celui du dessous", 60, ORANGE), ("« 2 parmi 5 » = 10 !", 76, VERT)], 88),
+    "coef-denombrer": (["4 CONTENEURS", "2 BIEN TRIÉS"], "tu paries sur 4 ?",
+        [("SSEE · SESE · SEES", 72, BLEU), ("ESSE · ESES · EESS", 72, BLEU), ("6 possibilités !", 90, VERT)], 88),
+    "bin-extremes": (["5 PANNEAUX", "SOLAIRES"], "aucune panne : tes chances ?",
+        [("10 % de panne chacun", 72, BLEU), ("0,9⁵", 120, ORANGE), ("≈ 0,59 !", 110, VERT)], 92),
+    "bin-esperance": (["200 APPELS", "15 % DE RÉUSSITE"], "combien de recrues ?",
+        [("200 × 0,15", 100, BLEU), ("= 30 en moyenne", 80, VERT), ("pas à chaque fois !", 72, ROUGE)], 84),
+    "bin-esperance-variance": (["100 LANCERS", "FRANCS"], "70 % de réussite : pile 70 ?",
+        [("70 en moyenne", 90, BLEU), ("écart-type √21 ≈ 4,6", 64, ORANGE), ("ça bouge !", 100, VERT)], 96),
+    "bin-intervalle": (["ENTRE 4 ET 8", "SUR 20 ÉLÈVES"], "tu enlèves quoi ?",
+        [("− P(X ≤ 4) ?", 96, ROUGE), ("X = 4 est dedans !", 72, ORANGE), ("− P(X ≤ 3) !", 96, VERT)], 88),
+    "bin-defi": (["50 PANNEAUX", "3 % DÉFECTUEUX"], "aucun défaut : tu paries ?",
+        [("0,97 × 0,97 × …", 76, BLEU), ("≈ 0,22", 120, ORANGE), ("1 chance sur 5 !", 84, VERT)], 88),
+}
+for _cl, _bd, _dos, _ep, _c in [
+    ("stmg", "STMG", "38-bin-reconnaitre", "bin-reconnaitre", "jaune"),
+    ("terminale", "TLE SPÉ", "11-bin-reconnaitre", "bin-reconnaitre", "orange"),
+    ("stmg", "STMG", "39-bin-remise", "bin-remise", "jaune"),
+    ("terminale", "TLE SPÉ", "12-bin-schema", "bin-remise", "orange"),
+    ("stmg", "STMG", "40-bin-calculer", "bin-calculer", "jaune"),
+    ("terminale", "TLE SPÉ", "13-bin-calculer", "bin-calculer", "orange"),
+    ("stmg", "STMG", "41-bin-parametres", "bin-parametres", "jaune"),
+    ("stmg", "STMG", "42-coef-definition", "coef-definition", "jaune"),
+    ("stmg", "STMG", "43-triangle-pascal", "triangle-pascal", "jaune"),
+    ("stmg", "STMG", "44-formule-pascal", "formule-pascal", "jaune"),
+    ("stmg", "STMG", "45-coef-denombrer", "coef-denombrer", "jaune"),
+    ("stmg", "STMG", "46-bin-extremes", "bin-extremes", "jaune"),
+    ("stmg", "STMG", "47-bin-esperance", "bin-esperance", "jaune"),
+    ("terminale", "TLE SPÉ", "14-bin-esperance-variance", "bin-esperance-variance", "orange"),
+    ("terminale", "TLE SPÉ", "15-bin-intervalle", "bin-intervalle", "orange"),
+    ("terminale", "TLE SPÉ", "16-bin-defi", "bin-defi", "orange"),
+]:
+    _titre, _sous, _lg, _tt = _BIN[_ep]
+    _nom = f"eleveai-maths-{_cl}-proba-{_ep}-short"
+    SHORTS[_nom] = {
+        "badge": f"PROBABILITÉS · {_bd}", "titre": _titre, "taille": _tt, "sous": _sous,
+        "taille_sous": 44, "couleur_sous": ORANGE, "accroche": _acc(_lg), "dossier": f"{_cl}/maths/fr",
+        "sortie": f"{_cl}/maths/probabilites/{_dos}",
+    }
+    CEINTURE_SHORT[_nom] = _c
+
+
 def main():
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     filtre = sys.argv[1] if len(sys.argv) > 1 else ""

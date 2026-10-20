@@ -5143,6 +5143,102 @@
   "short": true,
   "youtube": null
  },
+ "stmg-proba-bin-calculer": {
+  "fichier": "stmg/maths/probabilites/40-bin-calculer/eleveai-maths-stmg-proba-bin-calculer.mp4",
+  "poster": "stmg/maths/probabilites/40-bin-calculer/eleveai-maths-stmg-proba-bin-calculer.png",
+  "vignette": "stmg/maths/probabilites/40-bin-calculer/eleveai-maths-stmg-proba-bin-calculer.vignette.webp",
+  "titre": "0,3² × 0,7² ? Il manque 6 chemins ! — Calculer P(X = k) · Maths STMG · Tle spé",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-bin-calculer-short": {
+  "fichier": "stmg/maths/probabilites/40-bin-calculer/eleveai-maths-stmg-proba-bin-calculer-short.mp4",
+  "poster": "stmg/maths/probabilites/40-bin-calculer/eleveai-maths-stmg-proba-bin-calculer-short.png",
+  "vignette": "stmg/maths/probabilites/40-bin-calculer/eleveai-maths-stmg-proba-bin-calculer-short.vignette.webp",
+  "titre": "2 ventes sur 4 : 0,0441 ? Presque ! 🚲 — STMG · Tle spé #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-bin-esperance": {
+  "fichier": "stmg/maths/probabilites/47-bin-esperance/eleveai-maths-stmg-proba-bin-esperance.mp4",
+  "poster": "stmg/maths/probabilites/47-bin-esperance/eleveai-maths-stmg-proba-bin-esperance.png",
+  "vignette": "stmg/maths/probabilites/47-bin-esperance/eleveai-maths-stmg-proba-bin-esperance.vignette.webp",
+  "titre": "200 appels à 15 % : exactement 30 recrues ? NON ! — L'espérance n × p · Maths STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-bin-esperance-short": {
+  "fichier": "stmg/maths/probabilites/47-bin-esperance/eleveai-maths-stmg-proba-bin-esperance-short.mp4",
+  "poster": "stmg/maths/probabilites/47-bin-esperance/eleveai-maths-stmg-proba-bin-esperance-short.png",
+  "vignette": "stmg/maths/probabilites/47-bin-esperance/eleveai-maths-stmg-proba-bin-esperance-short.vignette.webp",
+  "titre": "200 appels, 15 % : combien de recrues ? 📞 — STMG #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-bin-extremes": {
+  "fichier": "stmg/maths/probabilites/46-bin-extremes/eleveai-maths-stmg-proba-bin-extremes.mp4",
+  "poster": "stmg/maths/probabilites/46-bin-extremes/eleveai-maths-stmg-proba-bin-extremes.png",
+  "vignette": "stmg/maths/probabilites/46-bin-extremes/eleveai-maths-stmg-proba-bin-extremes.vignette.webp",
+  "titre": "1 panne : 0,1 × 0,9⁴ ? FAUX, il y a 5 chemins ! — Les cas extrêmes · Maths STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-bin-extremes-short": {
+  "fichier": "stmg/maths/probabilites/46-bin-extremes/eleveai-maths-stmg-proba-bin-extremes-short.mp4",
+  "poster": "stmg/maths/probabilites/46-bin-extremes/eleveai-maths-stmg-proba-bin-extremes-short.png",
+  "vignette": "stmg/maths/probabilites/46-bin-extremes/eleveai-maths-stmg-proba-bin-extremes-short.vignette.webp",
+  "titre": "Zéro panne sur 5 panneaux : 59 % ! ☀️ — STMG #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-bin-parametres": {
+  "fichier": "stmg/maths/probabilites/41-bin-parametres/eleveai-maths-stmg-proba-bin-parametres.mp4",
+  "poster": "stmg/maths/probabilites/41-bin-parametres/eleveai-maths-stmg-proba-bin-parametres.png",
+  "vignette": "stmg/maths/probabilites/41-bin-parametres/eleveai-maths-stmg-proba-bin-parametres.vignette.webp",
+  "titre": "80 % germent… donc p = 0,8 ? NON ! — Trouver n et p · Maths STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-bin-parametres-short": {
+  "fichier": "stmg/maths/probabilites/41-bin-parametres/eleveai-maths-stmg-proba-bin-parametres-short.mp4",
+  "poster": "stmg/maths/probabilites/41-bin-parametres/eleveai-maths-stmg-proba-bin-parametres-short.png",
+  "vignette": "stmg/maths/probabilites/41-bin-parametres/eleveai-maths-stmg-proba-bin-parametres-short.vignette.webp",
+  "titre": "80 % germent… p = 0,8 ? 🌱 — STMG #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-bin-reconnaitre": {
+  "fichier": "stmg/maths/probabilites/38-bin-reconnaitre/eleveai-maths-stmg-proba-bin-reconnaitre.mp4",
+  "poster": "stmg/maths/probabilites/38-bin-reconnaitre/eleveai-maths-stmg-proba-bin-reconnaitre.png",
+  "vignette": "stmg/maths/probabilites/38-bin-reconnaitre/eleveai-maths-stmg-proba-bin-reconnaitre.vignette.webp",
+  "titre": "Le 1er appel qui vend : PAS binomiale ! — Reconnaître une loi binomiale · Maths STMG · Tle spé",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-bin-reconnaitre-short": {
+  "fichier": "stmg/maths/probabilites/38-bin-reconnaitre/eleveai-maths-stmg-proba-bin-reconnaitre-short.mp4",
+  "poster": "stmg/maths/probabilites/38-bin-reconnaitre/eleveai-maths-stmg-proba-bin-reconnaitre-short.png",
+  "vignette": "stmg/maths/probabilites/38-bin-reconnaitre/eleveai-maths-stmg-proba-bin-reconnaitre-short.vignette.webp",
+  "titre": "10 appels, 20 % de ventes : quelle loi ? 📞 — STMG · Tle spé #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-bin-remise": {
+  "fichier": "stmg/maths/probabilites/39-bin-remise/eleveai-maths-stmg-proba-bin-remise.mp4",
+  "poster": "stmg/maths/probabilites/39-bin-remise/eleveai-maths-stmg-proba-bin-remise.png",
+  "vignette": "stmg/maths/probabilites/39-bin-remise/eleveai-maths-stmg-proba-bin-remise.vignette.webp",
+  "titre": "3 tirages… mais PAS une loi binomiale ! — Avec ou sans remise · Maths STMG · Tle spé",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-bin-remise-short": {
+  "fichier": "stmg/maths/probabilites/39-bin-remise/eleveai-maths-stmg-proba-bin-remise-short.mp4",
+  "poster": "stmg/maths/probabilites/39-bin-remise/eleveai-maths-stmg-proba-bin-remise-short.png",
+  "vignette": "stmg/maths/probabilites/39-bin-remise/eleveai-maths-stmg-proba-bin-remise-short.vignette.webp",
+  "titre": "4/20 puis 3/19 : binomiale ? 💡 — STMG · Tle spé #Shorts",
+  "short": true,
+  "youtube": null
+ },
  "stmg-proba-chemin": {
   "fichier": "stmg/maths/probabilites/10-chemin/eleveai-maths-stmg-proba-chemin.mp4",
   "poster": "stmg/maths/probabilites/10-chemin/eleveai-maths-stmg-proba-chemin.png",
@@ -5156,6 +5252,38 @@
   "poster": "stmg/maths/probabilites/10-chemin/eleveai-maths-stmg-proba-chemin-short.png",
   "vignette": "stmg/maths/probabilites/10-chemin/eleveai-maths-stmg-proba-chemin-short.vignette.webp",
   "titre": "Deux feux verts : 0,5 + 0,8 ? 🚦 #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-coef-definition": {
+  "fichier": "stmg/maths/probabilites/42-coef-definition/eleveai-maths-stmg-proba-coef-definition.mp4",
+  "poster": "stmg/maths/probabilites/42-coef-definition/eleveai-maths-stmg-proba-coef-definition.png",
+  "vignette": "stmg/maths/probabilites/42-coef-definition/eleveai-maths-stmg-proba-coef-definition.vignette.webp",
+  "titre": "« 2 parmi 3 », ce n'est PAS 2 × 3 ! — Le coefficient binomial · Maths STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-coef-definition-short": {
+  "fichier": "stmg/maths/probabilites/42-coef-definition/eleveai-maths-stmg-proba-coef-definition-short.mp4",
+  "poster": "stmg/maths/probabilites/42-coef-definition/eleveai-maths-stmg-proba-coef-definition-short.png",
+  "vignette": "stmg/maths/probabilites/42-coef-definition/eleveai-maths-stmg-proba-coef-definition-short.vignette.webp",
+  "titre": "3 colis, 2 à l'heure : combien de façons ? 📦 — STMG #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-coef-denombrer": {
+  "fichier": "stmg/maths/probabilites/45-coef-denombrer/eleveai-maths-stmg-proba-coef-denombrer.mp4",
+  "poster": "stmg/maths/probabilites/45-coef-denombrer/eleveai-maths-stmg-proba-coef-denombrer.png",
+  "vignette": "stmg/maths/probabilites/45-coef-denombrer/eleveai-maths-stmg-proba-coef-denombrer.vignette.webp",
+  "titre": "2 bien triés sur 4 : 4 cas ? Non, 6 ! — Dénombrer les chemins · Maths STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-coef-denombrer-short": {
+  "fichier": "stmg/maths/probabilites/45-coef-denombrer/eleveai-maths-stmg-proba-coef-denombrer-short.mp4",
+  "poster": "stmg/maths/probabilites/45-coef-denombrer/eleveai-maths-stmg-proba-coef-denombrer-short.png",
+  "vignette": "stmg/maths/probabilites/45-coef-denombrer/eleveai-maths-stmg-proba-coef-denombrer-short.vignette.webp",
+  "titre": "Tu paries sur 4 ? Il y en a 6 ! ♻️ — STMG #Shorts",
   "short": true,
   "youtube": null
  },
@@ -5254,6 +5382,22 @@
   "titre": "Test positif à 99 %… malade à MÊME PAS 10 % ! 🧪 #Shorts",
   "short": true,
   "youtube": "z2_FvJL1vzs"
+ },
+ "stmg-proba-formule-pascal": {
+  "fichier": "stmg/maths/probabilites/44-formule-pascal/eleveai-maths-stmg-proba-formule-pascal.mp4",
+  "poster": "stmg/maths/probabilites/44-formule-pascal/eleveai-maths-stmg-proba-formule-pascal.png",
+  "vignette": "stmg/maths/probabilites/44-formule-pascal/eleveai-maths-stmg-proba-formule-pascal.vignette.webp",
+  "titre": "4 + 6 = 10… et c'est une formule de probas ! — La formule de Pascal · Maths STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-formule-pascal-short": {
+  "fichier": "stmg/maths/probabilites/44-formule-pascal/eleveai-maths-stmg-proba-formule-pascal-short.mp4",
+  "poster": "stmg/maths/probabilites/44-formule-pascal/eleveai-maths-stmg-proba-formule-pascal-short.png",
+  "vignette": "stmg/maths/probabilites/44-formule-pascal/eleveai-maths-stmg-proba-formule-pascal-short.vignette.webp",
+  "titre": "4 + 6 = 10 : une formule de probas ? 🔺 — STMG #Shorts",
+  "short": true,
+  "youtube": null
  },
  "stmg-proba-indep-definition": {
   "fichier": "stmg/maths/probabilites/13-indep-definition/eleveai-maths-stmg-proba-indep-definition.mp4",
@@ -5428,6 +5572,22 @@
   "poster": "stmg/maths/probabilites/28-probabilites-totales/eleveai-maths-stmg-proba-totales-short.png",
   "vignette": "stmg/maths/probabilites/28-probabilites-totales/eleveai-maths-stmg-proba-totales-short.vignette.webp",
   "titre": "3,7 % ? Non : 3,2 % ! ☀️ #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "stmg-proba-triangle-pascal": {
+  "fichier": "stmg/maths/probabilites/43-triangle-pascal/eleveai-maths-stmg-proba-triangle-pascal.mp4",
+  "poster": "stmg/maths/probabilites/43-triangle-pascal/eleveai-maths-stmg-proba-triangle-pascal.png",
+  "vignette": "stmg/maths/probabilites/43-triangle-pascal/eleveai-maths-stmg-proba-triangle-pascal.vignette.webp",
+  "titre": "Un arbre à 32 chemins ? Le triangle compte pour toi ! — Le triangle de Pascal · Maths STMG",
+  "short": false,
+  "youtube": null
+ },
+ "stmg-proba-triangle-pascal-short": {
+  "fichier": "stmg/maths/probabilites/43-triangle-pascal/eleveai-maths-stmg-proba-triangle-pascal-short.mp4",
+  "poster": "stmg/maths/probabilites/43-triangle-pascal/eleveai-maths-stmg-proba-triangle-pascal-short.png",
+  "vignette": "stmg/maths/probabilites/43-triangle-pascal/eleveai-maths-stmg-proba-triangle-pascal-short.vignette.webp",
+  "titre": "Un triangle qui compte les chemins tout seul 🔺 — STMG #Shorts",
   "short": true,
   "youtube": null
  },
@@ -5606,6 +5766,102 @@
   "titre": "Il arrête 25 % des tirs ? Pas si vite ! ⚽ — Tle spé #Shorts",
   "short": true,
   "youtube": "ipFC4CsntgY"
+ },
+ "terminale-proba-bin-calculer": {
+  "fichier": "terminale/maths/probabilites/13-bin-calculer/eleveai-maths-terminale-proba-bin-calculer.mp4",
+  "poster": "terminale/maths/probabilites/13-bin-calculer/eleveai-maths-terminale-proba-bin-calculer.png",
+  "vignette": "terminale/maths/probabilites/13-bin-calculer/eleveai-maths-terminale-proba-bin-calculer.vignette.webp",
+  "titre": "0,3² × 0,7² ? Il manque 6 chemins ! — Calculer P(X = k) · Maths STMG · Tle spé",
+  "short": false,
+  "youtube": null
+ },
+ "terminale-proba-bin-calculer-short": {
+  "fichier": "terminale/maths/probabilites/13-bin-calculer/eleveai-maths-terminale-proba-bin-calculer-short.mp4",
+  "poster": "terminale/maths/probabilites/13-bin-calculer/eleveai-maths-terminale-proba-bin-calculer-short.png",
+  "vignette": "terminale/maths/probabilites/13-bin-calculer/eleveai-maths-terminale-proba-bin-calculer-short.vignette.webp",
+  "titre": "2 ventes sur 4 : 0,0441 ? Presque ! 🚲 — STMG · Tle spé #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "terminale-proba-bin-defi": {
+  "fichier": "terminale/maths/probabilites/16-bin-defi/eleveai-maths-terminale-proba-bin-defi.mp4",
+  "poster": "terminale/maths/probabilites/16-bin-defi/eleveai-maths-terminale-proba-bin-defi.png",
+  "vignette": "terminale/maths/probabilites/16-bin-defi/eleveai-maths-terminale-proba-bin-defi.vignette.webp",
+  "titre": "Au moins 2 : n'oublie pas le cas X = 0 ! — Exercice type bac · Maths Tle spé",
+  "short": false,
+  "youtube": null
+ },
+ "terminale-proba-bin-defi-short": {
+  "fichier": "terminale/maths/probabilites/16-bin-defi/eleveai-maths-terminale-proba-bin-defi-short.mp4",
+  "poster": "terminale/maths/probabilites/16-bin-defi/eleveai-maths-terminale-proba-bin-defi-short.png",
+  "vignette": "terminale/maths/probabilites/16-bin-defi/eleveai-maths-terminale-proba-bin-defi-short.vignette.webp",
+  "titre": "0 défaut sur 50 ? Tu paries ? ☀️ — Tle spé #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "terminale-proba-bin-esperance-variance": {
+  "fichier": "terminale/maths/probabilites/14-bin-esperance-variance/eleveai-maths-terminale-proba-bin-esperance-variance.mp4",
+  "poster": "terminale/maths/probabilites/14-bin-esperance-variance/eleveai-maths-terminale-proba-bin-esperance-variance.png",
+  "vignette": "terminale/maths/probabilites/14-bin-esperance-variance/eleveai-maths-terminale-proba-bin-esperance-variance.vignette.webp",
+  "titre": "Écart-type : 21 ou √21 ? — Espérance, variance, écart-type · Maths Tle spé",
+  "short": false,
+  "youtube": null
+ },
+ "terminale-proba-bin-esperance-variance-short": {
+  "fichier": "terminale/maths/probabilites/14-bin-esperance-variance/eleveai-maths-terminale-proba-bin-esperance-variance-short.mp4",
+  "poster": "terminale/maths/probabilites/14-bin-esperance-variance/eleveai-maths-terminale-proba-bin-esperance-variance-short.png",
+  "vignette": "terminale/maths/probabilites/14-bin-esperance-variance/eleveai-maths-terminale-proba-bin-esperance-variance-short.vignette.webp",
+  "titre": "70 % de réussite… exactement 70 ? 🏀 — Tle spé #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "terminale-proba-bin-intervalle": {
+  "fichier": "terminale/maths/probabilites/15-bin-intervalle/eleveai-maths-terminale-proba-bin-intervalle.mp4",
+  "poster": "terminale/maths/probabilites/15-bin-intervalle/eleveai-maths-terminale-proba-bin-intervalle.png",
+  "vignette": "terminale/maths/probabilites/15-bin-intervalle/eleveai-maths-terminale-proba-bin-intervalle.vignette.webp",
+  "titre": "P(4 ≤ X ≤ 8) : tu enlèves P(X ≤ 4) ? PERDU ! — Probabilité d'un intervalle · Maths Tle spé",
+  "short": false,
+  "youtube": null
+ },
+ "terminale-proba-bin-intervalle-short": {
+  "fichier": "terminale/maths/probabilites/15-bin-intervalle/eleveai-maths-terminale-proba-bin-intervalle-short.mp4",
+  "poster": "terminale/maths/probabilites/15-bin-intervalle/eleveai-maths-terminale-proba-bin-intervalle-short.png",
+  "vignette": "terminale/maths/probabilites/15-bin-intervalle/eleveai-maths-terminale-proba-bin-intervalle-short.vignette.webp",
+  "titre": "Entre 4 et 8 : tu enlèves quoi ? 🚌 — Tle spé #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "terminale-proba-bin-reconnaitre": {
+  "fichier": "terminale/maths/probabilites/11-bin-reconnaitre/eleveai-maths-terminale-proba-bin-reconnaitre.mp4",
+  "poster": "terminale/maths/probabilites/11-bin-reconnaitre/eleveai-maths-terminale-proba-bin-reconnaitre.png",
+  "vignette": "terminale/maths/probabilites/11-bin-reconnaitre/eleveai-maths-terminale-proba-bin-reconnaitre.vignette.webp",
+  "titre": "Le 1er appel qui vend : PAS binomiale ! — Reconnaître une loi binomiale · Maths STMG · Tle spé",
+  "short": false,
+  "youtube": null
+ },
+ "terminale-proba-bin-reconnaitre-short": {
+  "fichier": "terminale/maths/probabilites/11-bin-reconnaitre/eleveai-maths-terminale-proba-bin-reconnaitre-short.mp4",
+  "poster": "terminale/maths/probabilites/11-bin-reconnaitre/eleveai-maths-terminale-proba-bin-reconnaitre-short.png",
+  "vignette": "terminale/maths/probabilites/11-bin-reconnaitre/eleveai-maths-terminale-proba-bin-reconnaitre-short.vignette.webp",
+  "titre": "10 appels, 20 % de ventes : quelle loi ? 📞 — STMG · Tle spé #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "terminale-proba-bin-remise": {
+  "fichier": "terminale/maths/probabilites/12-bin-schema/eleveai-maths-terminale-proba-bin-remise.mp4",
+  "poster": "terminale/maths/probabilites/12-bin-schema/eleveai-maths-terminale-proba-bin-remise.png",
+  "vignette": "terminale/maths/probabilites/12-bin-schema/eleveai-maths-terminale-proba-bin-remise.vignette.webp",
+  "titre": "3 tirages… mais PAS une loi binomiale ! — Avec ou sans remise · Maths STMG · Tle spé",
+  "short": false,
+  "youtube": null
+ },
+ "terminale-proba-bin-remise-short": {
+  "fichier": "terminale/maths/probabilites/12-bin-schema/eleveai-maths-terminale-proba-bin-remise-short.mp4",
+  "poster": "terminale/maths/probabilites/12-bin-schema/eleveai-maths-terminale-proba-bin-remise-short.png",
+  "vignette": "terminale/maths/probabilites/12-bin-schema/eleveai-maths-terminale-proba-bin-remise-short.vignette.webp",
+  "titre": "4/20 puis 3/19 : binomiale ? 💡 — STMG · Tle spé #Shorts",
+  "short": true,
+  "youtube": null
  },
  "terminale-proba-formule": {
   "fichier": "terminale/maths/probabilites/02-formule-et-inversion/eleveai-maths-terminale-proba-formule.mp4",

@@ -1,0 +1,13 @@
+{
+  "00-garde": "Dénombrer les chemins à k succès.",
+  "01-situation": "Une équipe de recyclage contrôle 4 conteneurs. Chacun est bien trié, succès, ou mal trié, échec. Combien de résultats donnent exactement 2 conteneurs bien triés ?",
+  "02-methode": "On choisit les places des 2 succès parmi les 4 conteneurs, et on écrit chaque chemin avec S pour succès et E pour échec.",
+  "03-liste": "S S E E. S E S E. S E E S. E S S E. E S E S. E E S S. 6 chemins.",
+  "04-coefficient": "6, c'est « 2 parmi 4 ». On retrouve la ligne 4 du triangle de Pascal : 1, 4, 6, 4, 1.",
+  "05-ordre": "Pour ne rien oublier, on range : d'abord les chemins qui commencent par S S, puis S E, puis E.",
+  "06-piege": "Le piège : compter deux fois le même chemin, ou en oublier un. Avec une méthode rangée, on n'en oublie aucun.",
+  "07-defi": "À toi de jouer. Combien de chemins ont exactement 3 succès sur 4 conteneurs ? Mets pause, et cherche !",
+  "07b-correction": "Correction. S S S E, S S E S, S E S S, E S S S : 4 chemins. « 3 parmi 4 » vaut 4.",
+  "08-finale": "Ce que tu as appris. Pour n petit, on liste les chemins à k succès avec une méthode rangée. Leur nombre est « k parmi n ».",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}
