@@ -1,0 +1,13 @@
+{
+  "00-garde": "Expérience aléatoire, issue, événement : les mots des probabilités.",
+  "01-situation": "À la kermesse, on tire un papier dans une boîte. Sur chaque papier, une lettre du mot MAFATE. On ne regarde pas.",
+  "02-experience": "C'est une expérience aléatoire : on connaît tous les résultats possibles, mais on ne sait pas lequel va sortir.",
+  "03-issues": "Les résultats possibles s'appellent les issues. Ici, 6 papiers : M, A, F, A, T, E. 6 issues.",
+  "04-evenement": "Un événement, c'est une phrase qui sera vraie ou fausse après le tirage. « Tirer une voyelle » : il est réalisé par A, A et E. 3 issues sur 6.",
+  "05-echelle": "Sa probabilité se place entre 0 et 1. Tirer une lettre du mot MAFATE : certain, 1. Tirer un Z : impossible, 0.",
+  "06-piege": "Le piège : la lettre A est écrite deux fois. Il y a 6 issues, pas 5. On compte les papiers, pas les lettres différentes.",
+  "07-defi": "À toi de jouer. Même boîte. L'événement « tirer une consonne » : quelles issues le réalisent ? Combien ? Mets pause, et cherche !",
+  "07b-correction": "Correction. M, F et T : 3 issues sur 6.",
+  "08-finale": "Ce que tu as appris. Une expérience aléatoire a des issues connues et un résultat imprévisible. Un événement est réalisé par certaines issues. On compte les issues, pas les valeurs différentes. L'épisode 2 t'attend : lister les issues.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

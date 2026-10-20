@@ -1,0 +1,12 @@
+{
+  "00-garde": "Calculer une probabilité : favorables sur possibles.",
+  "01-situation": "Une roue de kermesse de 8 parts égales : 3 rouges, 4 bleues, 1 dorée. La dorée fait gagner le gros lot.",
+  "02-regle": "Les issues sont équiprobables. Alors la probabilité d'un événement, c'est le nombre d'issues favorables divisé par le nombre d'issues possibles.",
+  "03-calcul": "Gagner le gros lot : 1 part dorée sur 8. La probabilité est 1 sur 8. Tomber sur le bleu : 4 sur 8, c'est un demi.",
+  "04-ecritures": "On peut l'écrire en fraction, en décimal ou en pourcentage. 1 sur 8, c'est 0,125, soit 12,5 %.",
+  "05-piege": "Le piège : appliquer la règle quand ce n'est pas équiprobable. Si la part dorée était deux fois plus grande, 1 sur 8 serait faux. Il faut des parts égales.",
+  "06-defi": "À toi de jouer. Une boîte de 20 bonbons : 5 au coco, le reste à la fraise. Quelle est la probabilité de tirer un bonbon au coco ? Mets pause, et cherche !",
+  "06b-correction": "Correction. 5 favorables sur 20 : 5 sur 20, c'est 1 sur 4, soit 0,25.",
+  "07-finale": "Ce que tu as appris. Si les issues sont équiprobables, la probabilité, c'est favorables sur possibles. On simplifie la fraction, et on peut l'écrire en décimal. L'épisode 5 t'attend : le défi.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

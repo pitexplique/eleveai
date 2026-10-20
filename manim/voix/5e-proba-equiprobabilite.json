@@ -1,0 +1,12 @@
+{
+  "00-garde": "Équiprobable : toutes les issues ont la même chance ?",
+  "01-situation": "Un dé bien équilibré. Chaque face a la même chance de sortir : 1 sur 6.",
+  "02-definition": "Quand toutes les issues ont la même probabilité, on dit qu'elles sont équiprobables.",
+  "03-exemples": "Une pièce équilibrée : pile, un demi ; face, un demi. Équiprobable. Une roue de 4 parts égales : chaque part, 1 sur 4. Équiprobable.",
+  "04-contre-exemple": "Mais une roue avec une grande part rouge, la moitié de la roue, et deux petites parts bleue et verte ? Rouge, un demi. Les autres, moins. Pas équiprobable.",
+  "05-piege": "Le piège : un dé truqué, ou une punaise qui tombe. Deux issues, pointe en haut ou pointe en bas, mais pas forcément la même chance. Deux issues ne veut pas dire un demi chacune.",
+  "06-defi": "À toi de jouer. Dans un sac, 3 billes rouges et 1 bille bleue. On tire une bille. Les issues « rouge » et « bleue » sont-elles équiprobables ? Mets pause, et cherche !",
+  "06b-correction": "Correction. Non. Rouge : 3 sur 4. Bleue : 1 sur 4. Mais chaque bille, elle, a 1 chance sur 4 : ce sont les 4 billes qui sont équiprobables.",
+  "07-finale": "Ce que tu as appris. Équiprobable : toutes les issues ont la même chance. Dé, pièce, parts égales : oui. Parts inégales, dé truqué : non. L'épisode 4 t'attend : calculer une probabilité.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

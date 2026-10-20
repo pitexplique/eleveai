@@ -1,0 +1,12 @@
+{
+  "00-garde": "Lister toutes les issues, sans en oublier.",
+  "01-situation": "On lance deux pièces : une pièce de 1 euro et une pièce de 2 euros. Que peut-il arriver ?",
+  "02-arbre": "On fait un arbre. Première pièce : pile ou face. Puis, pour chacune, la deuxième pièce : pile ou face.",
+  "03-liste": "On lit les chemins : pile-pile, pile-face, face-pile, face-face. 4 issues.",
+  "04-tableau": "Avec deux dés, un tableau est plus pratique : 6 lignes, 6 colonnes, 36 cases. 36 issues.",
+  "05-piege": "Le piège : croire qu'il y a 3 issues avec deux pièces : deux piles, deux faces, ou une de chaque. « Une de chaque », c'est 2 chemins : pile-face et face-pile.",
+  "06-defi": "À toi de jouer. On lance deux pièces. Combien d'issues donnent exactement un pile ? Mets pause, et cherche !",
+  "06b-correction": "Correction. Pile-face et face-pile : 2 issues sur 4.",
+  "07-finale": "Ce que tu as appris. Pour lister les issues de deux épreuves : un arbre ou un tableau. On lit tous les chemins, ou toutes les cases. « Une de chaque » compte deux fois. L'épisode 3 t'attend : l'équiprobabilité.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

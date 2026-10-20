@@ -1,0 +1,12 @@
+{
+  "00-garde": "Les défis des probabilités de 5e !",
+  "01-situation": "Trois défis. À chaque fois, mets pause et cherche avant la réponse.",
+  "02-defi1": "Défi 1. Les lettres du mot CILAOS, une par papier. Quelle est la probabilité de tirer une voyelle ? Mets pause, et cherche !",
+  "02b-correction1": "Correction. C, I, L, A, O, S : 6 papiers. Voyelles : I, A, O, trois. 3 sur 6, un demi.",
+  "03-defi2": "Défi 2. On lance deux pièces. Quelle est la probabilité d'obtenir au moins un pile ? Mets pause, et cherche !",
+  "03b-correction2": "Correction. 4 issues : pile-pile, pile-face, face-pile, face-face. Au moins un pile : les 3 premières. 3 sur 4.",
+  "04-defi3": "Défi 3. Un sac de 12 billes : 6 rouges, 4 bleues, 2 vertes. Quelle couleur est la plus probable, et avec quelle probabilité ? Mets pause, et cherche !",
+  "04b-correction3": "Correction. Le rouge : 6 sur 12, un demi.",
+  "05-finale": "Ce que tu as appris. Compter les issues, avec un arbre si besoin. Vérifier l'équiprobabilité. Puis favorables sur possibles. Bravo, tu as fini la série des probabilités de 5e !",
+  "06-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}
