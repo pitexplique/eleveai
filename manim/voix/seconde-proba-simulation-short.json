@@ -1,0 +1,5 @@
+{
+  "00-accroche": "1 000 lancers de pièce en une seconde ? Facile, avec Python !",
+  "01-image": "random plus petit que 0,5 : pile. On compte, on divise par 1 000. Résultat : 0,507. Puis 0,493. Toujours près de 0,5.",
+  "02-question": "Et toi : quel test écrire pour un événement de probabilité 0,3 ? Réponds en commentaire !"
+}

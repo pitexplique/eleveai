@@ -1,0 +1,13 @@
+{
+  "00-garde": "Simuler le hasard avec un programme.",
+  "01-situation": "On veut lancer une pièce 1 000 fois. À la main, c'est long. Un ordinateur le fait en une seconde.",
+  "02-random": "En Python, random de parenthèses donne un nombre au hasard entre 0 et 1. Si ce nombre est plus petit que 0,5, on dit « pile ».",
+  "03-programme": "Le programme : un compteur à 0. On répète 1 000 fois : si random est plus petit que 0,5, on ajoute 1 au compteur. À la fin, on divise le compteur par 1 000.",
+  "04-resultat": "On lance le programme : 0,507. On le relance : 0,493. Chaque simulation donne une fréquence proche de 0,5.",
+  "05-autre-p": "Pour un événement de probabilité 0,3, on teste random plus petit que 0,3.",
+  "06-piege": "Le piège : écrire random plus grand que 0,3 pour une probabilité de 0,3. Plus grand que 0,3, ça arrive 7 fois sur 10.",
+  "07-defi": "À toi de jouer. Pour simuler un dé, on utilise randint de 1 virgule 6. Quel test compte les 6 ? Mets pause, et cherche !",
+  "07b-correction": "Correction. On teste si randint de 1 virgule 6 est égal à 6. La fréquence doit tourner autour de 1 sur 6.",
+  "08-finale": "Ce que tu as appris. random donne un nombre entre 0 et 1 ; random plus petit que p simule un événement de probabilité p. On compte, on divise par le nombre d'essais : on obtient une fréquence. L'épisode 16 t'attend : interpréter un échantillon.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

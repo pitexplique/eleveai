@@ -1,0 +1,13 @@
+{
+  "00-garde": "La loi des grands nombres : plus on répète, plus on s'approche.",
+  "01-situation": "Une punaise tombe pointe en haut ou pointe en bas. Personne ne connaît la probabilité. Comment l'estimer ?",
+  "02-repeter": "On la lance beaucoup. 10 lancers : 7 fois pointe en haut, 0,7. 100 lancers : 0,62. 1 000 lancers : 0,604.",
+  "03-loi": "Plus le nombre de lancers est grand, plus la fréquence se stabilise. Elle s'approche de la probabilité : c'est la loi des grands nombres.",
+  "04-estimer": "On estime donc la probabilité par la fréquence d'un grand nombre d'essais. Ici, environ 0,6.",
+  "05-prevoir": "Et on peut prévoir : sur 5 000 lancers, environ 0,6 fois 5 000, soit 3 000 fois pointe en haut.",
+  "06-piege": "Le piège : croire que la fréquence finit par valoir exactement la probabilité. Elle s'en approche, mais elle continue de fluctuer un peu.",
+  "07-defi": "À toi de jouer. Sur 2 000 naissances dans une maternité de Saint-Pierre, 1 030 filles. Estime la probabilité qu'un bébé soit une fille. Mets pause, et cherche !",
+  "07b-correction": "Correction. 1 030 sur 2 000 : environ 0,515.",
+  "08-finale": "Ce que tu as appris. Quand on répète beaucoup une expérience, la fréquence se rapproche de la probabilité. On peut alors estimer une probabilité inconnue, et prévoir un effectif. L'épisode 15 t'attend : simuler.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

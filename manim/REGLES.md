@@ -190,3 +190,7 @@ Réutiliser tels quels d'un épisode à l'autre (présents dans `lait_reunion.py
 - [ ] Défi à 2 étapes, ancré 974, réponse dans la correction
 - [ ] Miniature registre + margouillat sur chaque écran + couleurs `charte.py`
 - [ ] URL collée dans `MathsEtReunion.tsx` (PAS dans `maths_974` — marque séparée)
+
+## Code Python à l'écran (20/10)
+- Police `font="Consolas"` (testée : bien plus lisible que Courier New, 0 barré).
+- ⚠️ `Text` supprime les espaces de début de ligne : l'indentation disparaît. Une ligne = un Text, aligné à gauche, puis décalé de (nombre d'espaces) × la largeur d'un caractère Consolas.

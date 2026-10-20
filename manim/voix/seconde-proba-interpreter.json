@@ -1,0 +1,13 @@
+{
+  "00-garde": "Interpréter un échantillon : normal, ou suspect ?",
+  "01-situation": "Une machine remplit des bouteilles de jus de goyave. Le fabricant annonce : 10 % de bouteilles mal remplies. Un contrôleur en prélève 400.",
+  "02-intervalle": "Avec n égale 400 : 1 sur racine de 400, c'est 0,05. La fréquence tombe le plus souvent entre 0,05 et 0,15.",
+  "03-cas1": "Il trouve 52 bouteilles mal remplies : 52 sur 400, 0,13. C'est dans l'intervalle : rien d'anormal.",
+  "04-cas2": "Un autre jour, 80 bouteilles mal remplies : 80 sur 400, 0,2. C'est en dehors : c'est suspect. La machine est peut-être déréglée.",
+  "05-prudence": "Attention : en dehors de l'intervalle, ce n'est pas une preuve. C'est rare, donc on doute, et on vérifie.",
+  "06-piege": "Le piège : oublier la taille de l'échantillon. Sur 25 bouteilles, l'intervalle est beaucoup plus large : 1 sur racine de 25, c'est 0,2.",
+  "07-defi": "À toi de jouer. Sur 400 bouteilles, 30 mal remplies. Normal ou suspect ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 30 sur 400, c'est 0,075. Entre 0,05 et 0,15 : normal.",
+  "08-finale": "Ce que tu as appris. On calcule l'intervalle p plus ou moins 1 sur racine de n. Dedans : fluctuation normale. Dehors : on doute. Bravo, tu as fini les probabilités de seconde !",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

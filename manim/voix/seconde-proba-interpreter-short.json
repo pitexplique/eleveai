@@ -1,0 +1,5 @@
+{
+  "00-accroche": "10 % de bouteilles mal remplies, dit le fabricant. Sur 400, tu en trouves 80. Tu le crois ?",
+  "01-image": "80 sur 400, c'est 0,2. L'intervalle normal va de 0,05 à 0,15. 0,2 est dehors : c'est suspect !",
+  "02-question": "Et toi : sur 400 bouteilles, combien en trouverais-tu au maximum sans douter ? Réponds en commentaire !"
+}
