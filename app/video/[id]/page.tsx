@@ -13,6 +13,7 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { trouverVideo, urlR2 } from "@/lib/videos/r2";
+import LecteurVideo from "@/components/LecteurVideo";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -46,8 +47,9 @@ export default async function PageVideo({ params }: Props) {
 
         <h1 className="mt-3 text-xl font-black leading-tight sm:text-2xl">{v.titre}</h1>
 
-        <video
+        <LecteurVideo
           key={v.id}
+          videoId={v.id}
           src={urlR2(v.fichier)}
           poster={v.poster ? urlR2(v.poster) : undefined}
           controls
@@ -63,7 +65,7 @@ export default async function PageVideo({ params }: Props) {
             Télécharger le fichier
           </a>
           .
-        </video>
+        </LecteurVideo>
 
         {v.youtube ? (
           // Les shorts finissent par une question à laquelle répondre en

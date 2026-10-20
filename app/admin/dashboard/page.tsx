@@ -118,6 +118,17 @@ export default async function AdminDashboardPage() {
         </Link>
 
         <Link
+          href="/admin/videos"
+          className="block rounded-xl border border-rose-700 bg-rose-900/30 p-4 transition hover:bg-rose-900/50"
+        >
+          <p className="font-bold text-rose-300">▶ Vues des vidéos</p>
+          <p className="mt-1 text-sm text-slate-400">
+            Combien de fois chaque vidéo a été lue dans le lecteur du site (R2) :
+            aujourd&apos;hui, sur 7 jours, depuis le début, et par classe.
+          </p>
+        </Link>
+
+        <Link
           href="/admin/signalements"
           className="block rounded-xl border border-sky-700 bg-sky-900/30 p-4 transition hover:bg-sky-900/50"
         >

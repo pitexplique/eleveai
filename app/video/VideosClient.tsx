@@ -11,6 +11,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { Search, X } from "lucide-react";
+import LecteurVideo from "@/components/LecteurVideo";
 
 export type VideoListe = {
   id: string;
@@ -43,7 +44,8 @@ const ordre = (a: VideoListe, b: VideoListe) => Number(a.short) - Number(b.short
 function LecteurUne({ v, short }: { v: VideoUne; short?: boolean }) {
   return (
     <figure className="min-w-0">
-      <video
+      <LecteurVideo
+        videoId={v.id}
         src={v.src}
         poster={v.poster ?? undefined}
         controls
