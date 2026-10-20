@@ -576,10 +576,27 @@ function Coach({ mise, totalVideos }: { mise: Mise; totalVideos: number }) {
     <div id="entrainer" className="scroll-mt-24">
       <Bloc mise={mise} quoi="coach" rubrique="S'entraîner avec le coach">
         <h2 className={`${t.titre} text-2xl leading-tight sm:text-3xl`}>Tu es en quelle classe ?</h2>
-        <p className={`${t.texte} mt-1`}>
-          Un clic, et le coach te pose des questions de maths à ta mesure, corrigées pas à pas. Il se lit et
-          s&rsquo;écoute.
-        </p>
+        {/* ⭐ PAR OÙ COMMENCER (20/10/2026). Sa fille : « il y a trop de choses, et
+            les élèves qui galèrent, il faut [leur dire] par où je commence ».
+            Frédéric : « sans tout refondre l'accueil ». Le premier geste est
+            UN : la classe. Trois étapes numérotées, rien d'autre ne bouge. */}
+        <ol className="mt-3 grid gap-2 sm:grid-cols-3" aria-label="Par où commencer">
+          {[
+            "Clique sur ta classe.",
+            "Le coach te pose une question à la fois, à ton niveau, et corrige pas à pas.",
+            "Tu bloques ? Le bouton Vidéo t'explique, en se lisant et en s'écoutant.",
+          ].map((etape, i) => (
+            <li key={i} className="flex items-start gap-2.5 rounded-xl bg-white/70 px-3 py-2 ring-1 ring-current/10">
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-sm font-black text-white" aria-hidden="true">
+                {i + 1}
+              </span>
+              <span className={`${t.texte} text-sm leading-snug`}>
+                {i === 0 && <span className="font-black">Par où commencer ? </span>}
+                {etape}
+              </span>
+            </li>
+          ))}
+        </ol>
         {/* ⭐ SUR ORDINATEUR, LES TROIS CYCLES SUR UNE SEULE LIGNE, séparés par
             un filet vertical (Frédéric, 20/10 : « essaie de tout mettre sur une
             ligne, réduis les espaces entre lycée, collège et primaire, ou mets
