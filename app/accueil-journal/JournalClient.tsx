@@ -579,11 +579,19 @@ function Coach({ mise }: { mise: Mise }) {
           Un clic, et le coach te pose des questions de maths à ta mesure, corrigées pas à pas. Il se lit et
           s&rsquo;écoute.
         </p>
-        <div className={`mt-4 grid gap-4 ${etroit ? "" : "md:grid-cols-3"}`}>
-          {CYCLES.map((c) => (
-            <div key={c.titre}>
+        {/* ⭐ SUR ORDINATEUR, LES TROIS CYCLES SUR UNE SEULE LIGNE, séparés par
+            un filet vertical (Frédéric, 20/10 : « essaie de tout mettre sur une
+            ligne, réduis les espaces entre lycée, collège et primaire, ou mets
+            une barre verticale — sur ordinateur, pas téléphone »). Au téléphone
+            (et dans le Fil), les cycles restent empilés. */}
+        <div className={`mt-4 flex flex-col gap-4 ${etroit ? "" : "lg:flex-row lg:items-start lg:gap-0"}`}>
+          {CYCLES.map((c, i) => (
+            <div
+              key={c.titre}
+              className={etroit ? "" : `lg:px-4 ${i === 0 ? "lg:pl-0" : "lg:border-l-2 lg:border-current/15"}`}
+            >
               <p className="mb-2 text-sm font-black uppercase tracking-wide opacity-70">{c.titre}</p>
-              <div className="flex flex-wrap gap-2">
+              <div className={`flex flex-wrap gap-2 ${etroit ? "" : "lg:flex-nowrap lg:gap-1.5"}`}>
                 {c.classes.map(([id, label]) => (
                   <Lien
                     key={id}
@@ -591,7 +599,7 @@ function Coach({ mise }: { mise: Mise }) {
                     quoi="coach"
                     mise={mise}
                     label={`Coach de maths, ${label}`}
-                    className={`min-w-14 rounded-xl px-3 py-2.5 text-center text-base font-black shadow-sm transition hover:-translate-y-0.5 ${c.couleur}`}
+                    className={`min-w-14 whitespace-nowrap rounded-xl px-3 py-2.5 text-center text-base font-black shadow-sm transition hover:-translate-y-0.5 ${etroit ? "" : "lg:min-w-0 lg:px-2.5 lg:py-2"} ${c.couleur}`}
                   >
                     {label}
                   </Lien>
