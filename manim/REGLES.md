@@ -194,3 +194,9 @@ Réutiliser tels quels d'un épisode à l'autre (présents dans `lait_reunion.py
 ## Code Python à l'écran (20/10)
 - Police `font="Consolas"` (testée : bien plus lisible que Courier New, 0 barré).
 - ⚠️ `Text` supprime les espaces de début de ligne : l'indentation disparaît. Une ligne = un Text, aligné à gauche, puis décalé de (nombre d'espaces) × la largeur d'un caractère Consolas.
+
+## ⭐⭐ Les mathématiques sont TRANSVERSALES (Frédéric, 20/10/2026 — « je le répète »)
+- Chaque vidéo montre que ces maths servent AILLEURS : musique, cinéma, culture, géographie, histoire, sport, santé, écologie, économie, numérique, sciences, agriculture, transports, La Réunion.
+- Un MÉTIER porte la situation (évoquer des vocations), filles et garçons : ingénieure du son, monteur, géographe, historienne, vétérinaire, technicien, data analyst…
+- Un domaine, un métier et une problématique DIFFÉRENTS d'un épisode à l'autre dans un même lot (décider, prévoir, contrôler, choisir, juger une affirmation, évaluer un risque).
+- **DONNER ENVIE** (le but, 20/10/2026) : beaucoup de jeunes doutent de leur avenir. Chaque vidéo ouvre une porte : un métier réel et accessible, des gens qui leur ressemblent, d'ici, et des maths qui servent à quelque chose qui compte. Ton concret, respectueux et plein d'élan, jamais moralisateur.
