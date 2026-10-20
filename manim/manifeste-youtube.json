@@ -13571,6 +13571,13 @@
         "première",
         "lycée",
         "EleveAI"
+      ],
+      "aussi": [
+        {
+          "classe": "premiere",
+          "notionId": "auto_proba_lecture",
+          "microId": "auto_proba_conditionnelle_lecture"
+        }
       ]
     },
     {
@@ -13601,6 +13608,13 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
+      ],
+      "aussi": [
+        {
+          "classe": "premiere",
+          "notionId": "auto_proba_lecture",
+          "microId": "auto_proba_conditionnelle_lecture"
+        }
       ]
     },
     {
@@ -13777,6 +13791,13 @@
         "première",
         "lycée",
         "EleveAI"
+      ],
+      "aussi": [
+        {
+          "classe": "premiere",
+          "notionId": "auto_proba_lecture",
+          "microId": "auto_proba_intersection_tableau"
+        }
       ]
     },
     {
@@ -13807,6 +13828,13 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
+      ],
+      "aussi": [
+        {
+          "classe": "premiere",
+          "notionId": "auto_proba_lecture",
+          "microId": "auto_proba_intersection_tableau"
+        }
       ]
     },
     {
@@ -14280,6 +14308,13 @@
         "première",
         "lycée",
         "EleveAI"
+      ],
+      "aussi": [
+        {
+          "classe": "stmg",
+          "notionId": "proba_arbre",
+          "microId": "probaT_arbre_interpreter"
+        }
       ]
     },
     {
@@ -14307,6 +14342,13 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
+      ],
+      "aussi": [
+        {
+          "classe": "stmg",
+          "notionId": "proba_arbre",
+          "microId": "probaT_arbre_interpreter"
+        }
       ]
     },
     {
@@ -14979,6 +15021,13 @@
         "première",
         "lycée",
         "EleveAI"
+      ],
+      "aussi": [
+        {
+          "classe": "premiere",
+          "notionId": "alea_conditionnelle_calcul",
+          "microId": "alea_cond_intersection"
+        }
       ]
     },
     {
@@ -15008,6 +15057,13 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
+      ],
+      "aussi": [
+        {
+          "classe": "premiere",
+          "notionId": "alea_conditionnelle_calcul",
+          "microId": "alea_cond_intersection"
+        }
       ]
     },
     {
@@ -20019,6 +20075,1294 @@
         "lycée",
         "eleveai",
         "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-reconnaitre",
+      "notionId": "alea_conditionnelle",
+      "microId": "alea_cond_reconnaitre",
+      "classe": "premiere",
+      "ceinture": "bleue",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-reconnaitre",
+      "fichier": "premiere-commun/maths/probabilites/23-reconnaitre/eleveai-maths-premiere-commun-proba-reconnaitre.mp4",
+      "miniature": "premiere-commun/maths/probabilites/23-reconnaitre/eleveai-maths-premiere-commun-proba-reconnaitre.png",
+      "titre": "150 sur 200 ou sur 500 ? — Reconnaître une probabilité conditionnelle — épisode 1 · Maths 1re · STMG",
+      "accroche": "Une boutique de vélos électriques fait son bilan : 500 clients, 200 ont acheté un vélo électrique, et parmi eux 150 s'en servent pour aller au travail. 150 sur 200, ou 150 sur 500 ?\n\nDans cette vidéo :\n• le tableau croisé des 500 clients\n• proportion simple : on regarde tout le tableau, 200 sur 500\n• parmi les acheteurs : on ne regarde plus que leur ligne, 150 sur 200\n• les mots qui la signalent : parmi, sachant que, chez les, si\n• le piège du « et » : pas de groupe de référence, c'est 150 sur 500\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : « chez les clients qui vont au travail à vélo, quelle proportion a acheté un vélo électrique ? » Conditionnelle ou pas ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_conditionnelle&microId=alea_cond_reconnaitre&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Probabilité conditionnelle : le bilan de la boutique"
+        ],
+        [
+          "00:20",
+          "Le tableau croisé"
+        ],
+        [
+          "00:34",
+          "Première question : 200 sur 500"
+        ],
+        [
+          "00:48",
+          "Deuxième question : parmi les acheteurs"
+        ],
+        [
+          "01:04",
+          "Les mots qui la signalent"
+        ],
+        [
+          "01:16",
+          "Le piège du « ET »"
+        ],
+        [
+          "01:29",
+          "À toi de jouer"
+        ],
+        [
+          "01:46",
+          "Correction"
+        ],
+        [
+          "01:56",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:16",
+          "Entraîne-toi sur le coach"
+        ]
+      ],
+      "tags": [
+        "probabilité conditionnelle",
+        "parmi",
+        "sachant que",
+        "tableau croisé",
+        "vélo électrique",
+        "business",
+        "probabilités",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-reconnaitre-short",
+      "notionId": "alea_conditionnelle",
+      "microId": "alea_cond_reconnaitre",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-commun-proba-reconnaitre",
+      "meme_video_que": "stmg-proba-reconnaitre-short",
+      "fichier": "premiere-commun/maths/probabilites/23-reconnaitre/eleveai-maths-premiere-commun-proba-reconnaitre-short.mp4",
+      "miniature": "premiere-commun/maths/probabilites/23-reconnaitre/eleveai-maths-premiere-commun-proba-reconnaitre-short.png",
+      "titre": "80 % des bien triés = 80 % du plastique ? ♻️ — 1re · STMG #Shorts",
+      "accroche": "80 % des déchets bien triés sont du plastique. Donc 80 % du plastique est bien trié ? Non ! Ça, c'est parmi les déchets bien triés. Parmi le plastique, c'est peut-être 40 %. Le mot qui compte : parmi QUI ?\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : « 70 % des entreprises qui recyclent font des bénéfices » : probabilité conditionnelle ou pas ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_conditionnelle&microId=alea_cond_reconnaitre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilité conditionnelle",
+        "parmi",
+        "tri des déchets",
+        "recyclage",
+        "écologie",
+        "probabilités",
+        "maths STMG",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-notation",
+      "notionId": "alea_conditionnelle",
+      "microId": "alea_cond_notation",
+      "classe": "premiere",
+      "ceinture": "bleue",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-notation",
+      "fichier": "premiere-commun/maths/probabilites/24-notation/eleveai-maths-premiere-commun-proba-notation.mp4",
+      "miniature": "premiere-commun/maths/probabilites/24-notation/eleveai-maths-premiere-commun-proba-notation.png",
+      "titre": "P_R(T) ou P_T(R) ? Ne te trompe plus d'indice — La notation P_A(B) — épisode 2 · Maths 1re · STMG",
+      "accroche": "Une entreprise trie ses déchets. R : « le déchet est recyclable », T : « il est bien trié ». « Parmi les déchets recyclables, 70 % sont bien triés » : comment l'écrire ?\n\nDans cette vidéo :\n• on se place dans R : R va en indice, P_R(T) = 0,7\n• lire la notation : probabilité de T sachant R\n• dans l'autre sens : P_T(R) = 0,8\n• le piège : P_R(T) n'est pas P_T(R), deux groupes, deux nombres\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : une épicerie bio, « parmi les clients qui achètent bio, 40 % viennent à vélo » : comment l'écrire ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_conditionnelle&microId=alea_cond_notation&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "La notation P_A(B) : le tri des déchets"
+        ],
+        [
+          "00:14",
+          "On se place dans R"
+        ],
+        [
+          "00:28",
+          "Lire la notation"
+        ],
+        [
+          "00:41",
+          "Dans l'autre sens"
+        ],
+        [
+          "00:55",
+          "Le piège"
+        ],
+        [
+          "01:07",
+          "À toi de jouer"
+        ],
+        [
+          "01:27",
+          "Correction"
+        ],
+        [
+          "01:37",
+          "Ce que tu as appris"
+        ],
+        [
+          "01:56",
+          "Le coach et l'abonnement"
+        ]
+      ],
+      "tags": [
+        "probabilité conditionnelle",
+        "notation",
+        "sachant",
+        "tri des déchets",
+        "recyclage",
+        "écologie",
+        "probabilités",
+        "maths",
+        "STMG",
+        "première",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-notation-short",
+      "notionId": "alea_conditionnelle",
+      "microId": "alea_cond_notation",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-commun-proba-notation",
+      "meme_video_que": "stmg-proba-notation-short",
+      "fichier": "premiere-commun/maths/probabilites/24-notation/eleveai-maths-premiere-commun-proba-notation-short.mp4",
+      "miniature": "premiere-commun/maths/probabilites/24-notation/eleveai-maths-premiere-commun-proba-notation-short.png",
+      "titre": "60 % des clients avec un avis reviennent : comment l'écrire ? 🛒 — 1re · STMG #Shorts",
+      "accroche": "Une boutique en ligne : 60 % des clients qui ont laissé un avis reviennent acheter. A : « laisse un avis », R : « revient acheter ». On se place parmi ceux qui ont laissé un avis : A en indice. P_A(R) = 0,6.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : « parmi les clients qui reviennent, 30 % ont laissé un avis » : P_A(R) ou P_R(A) ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_conditionnelle&microId=alea_cond_notation&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilité conditionnelle",
+        "notation",
+        "boutique en ligne",
+        "business",
+        "probabilités",
+        "maths STMG",
+        "STMG",
+        "première",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-somme-issues",
+      "notionId": "auto_proba_base",
+      "microId": "auto_proba_somme_issues",
+      "classe": "premiere",
+      "ceinture": "bleue",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "fichier": "premiere-commun/maths/probabilites/25-somme-issues/eleveai-maths-premiere-commun-proba-somme-issues.mp4",
+      "miniature": "premiere-commun/maths/probabilites/25-somme-issues/eleveai-maths-premiere-commun-proba-somme-issues.png",
+      "titre": "2 notes sur 5 = 40 % ? FAUX : on additionne ! — La somme des issues · Maths 1re",
+      "accroche": "Une appli de livraison de paniers bio demande une note de 1 à 5 étoiles. Sa loi : 5 étoiles 0,4 ; 4 étoiles 0,3 ; 3 étoiles 0,15 ; 2 étoiles 0,1 ; 1 étoile 0,05. Quelle est la probabilité d'avoir au moins 4 étoiles ?\n\nDans cette vidéo :\n• la règle : la probabilité d'un événement, c'est la somme des probabilités de ses issues\n• au moins 4 étoiles : 0,3 + 0,4 = 0,7\n• on vérifie la loi : 0,4 + 0,3 + 0,15 + 0,1 + 0,05 = 1\n• le piège : dire 2 issues sur 5, donc 0,4 ; les issues n'ont pas la même probabilité, on additionne, on ne compte pas\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : quelle est la probabilité d'une note de moins de 3 étoiles ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_proba_base&microId=auto_proba_somme_issues&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "La somme des issues : l'appli des paniers bio"
+        ],
+        [
+          "00:28",
+          "La règle : au moins 4 étoiles"
+        ],
+        [
+          "00:50",
+          "On vérifie la loi"
+        ],
+        [
+          "01:02",
+          "Le piège : 2 issues sur 5"
+        ],
+        [
+          "01:14",
+          "À toi de jouer, et correction"
+        ],
+        [
+          "01:34",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "somme des issues",
+        "loi de probabilité",
+        "au moins",
+        "notes",
+        "étoiles",
+        "panier bio",
+        "automatismes",
+        "probabilités",
+        "maths",
+        "première",
+        "1re",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-somme-issues-short",
+      "notionId": "auto_proba_base",
+      "microId": "auto_proba_somme_issues",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-commun-proba-somme-issues",
+      "fichier": "premiere-commun/maths/probabilites/25-somme-issues/eleveai-maths-premiere-commun-proba-somme-issues-short.mp4",
+      "miniature": "premiere-commun/maths/probabilites/25-somme-issues/eleveai-maths-premiere-commun-proba-somme-issues-short.png",
+      "titre": "Au moins 4 étoiles : 40 % ou 70 % ? ⭐ — 1re #Shorts",
+      "accroche": "Au moins 4 étoiles : 2 notes sur 5, donc 40 % ? Non ! 4 étoiles, c'est 0,3. 5 étoiles, 0,4. 0,3 + 0,4 : 70 % des clients !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : avec 0,1 pour 2 étoiles et 0,05 pour 1 étoile, quelle est la probabilité d'une mauvaise note ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_proba_base&microId=auto_proba_somme_issues&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #première #lycée",
+      "tags": [
+        "somme des issues",
+        "notes",
+        "étoiles",
+        "piège",
+        "probabilités",
+        "maths première",
+        "1re",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-equiprobabilite",
+      "notionId": "auto_proba_base",
+      "microId": "auto_proba_equiprobabilite",
+      "classe": "premiere",
+      "ceinture": "bleue",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "fichier": "premiere-commun/maths/probabilites/26-equiprobabilite/eleveai-maths-premiere-commun-proba-equiprobabilite.mp4",
+      "miniature": "premiere-commun/maths/probabilites/26-equiprobabilite/eleveai-maths-premiere-commun-proba-equiprobabilite.png",
+      "titre": "Card(A) / Card(Ω)… seulement si tout est équiprobable ! — L'équiprobabilité · Maths 1re",
+      "accroche": "Une coopérative de vanille compte 40 producteurs, dont 12 en agriculture bio. On choisit un producteur au hasard pour un contrôle : quelle est la probabilité qu'il soit bio ?\n\nDans cette vidéo :\n• au hasard : chaque producteur a la même chance, les issues sont équiprobables\n• Card(Ω) = 40 issues, Card(A) = 12 producteurs bio\n• P(A) = Card(A) / Card(Ω) = 12/40 = 0,3\n• le piège : utiliser la formule quand les issues ne sont pas équiprobables, par exemple en tirant un sac de vanille au hasard\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : une ville a 25 bus, dont 5 électriques ; on en choisit un au hasard : quelle est la probabilité qu'il soit électrique ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_proba_base&microId=auto_proba_equiprobabilite&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "L'équiprobabilité : la coopérative de vanille"
+        ],
+        [
+          "00:17",
+          "Au hasard = équiprobable : Card(Ω) et Card(A)"
+        ],
+        [
+          "00:37",
+          "La formule 12/40 = 0,3, et le piège"
+        ],
+        [
+          "00:59",
+          "Défi : les bus, et correction"
+        ],
+        [
+          "01:22",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "équiprobabilité",
+        "cardinal",
+        "Card(A)",
+        "issues équiprobables",
+        "vanille",
+        "agriculture bio",
+        "automatismes",
+        "probabilités",
+        "maths",
+        "première",
+        "1re",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-commun-proba-equiprobabilite-short",
+      "notionId": "auto_proba_base",
+      "microId": "auto_proba_equiprobabilite",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-commun-proba-equiprobabilite",
+      "fichier": "premiere-commun/maths/probabilites/26-equiprobabilite/eleveai-maths-premiere-commun-proba-equiprobabilite-short.mp4",
+      "miniature": "premiere-commun/maths/probabilites/26-equiprobabilite/eleveai-maths-premiere-commun-proba-equiprobabilite-short.png",
+      "titre": "12 bio sur 40 : tes chances ? 🌿 — 1re #Shorts",
+      "accroche": "12 producteurs bio sur 40. On en tire un au hasard : tes chances qu'il soit bio ? Chaque producteur a la même chance : 12 sur 40, soit 0,3. Card(A) sur Card(Ω) !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : 5 bus électriques sur 25, quelle probabilité ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_proba_base&microId=auto_proba_equiprobabilite&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #première #lycée",
+      "tags": [
+        "équiprobabilité",
+        "cardinal",
+        "vanille",
+        "probabilités",
+        "maths première",
+        "1re",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "stmg-proba-totales",
+      "notionId": "proba_arbre_calcul",
+      "microId": "probaT_probabilites_totales",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/28-probabilites-totales/eleveai-maths-stmg-proba-totales.mp4",
+      "miniature": "stmg/maths/probabilites/28-probabilites-totales/eleveai-maths-stmg-proba-totales.png",
+      "titre": "2 %, 4 %, 5 % de défauts… donc 3,7 % ? FAUX ! — Les probabilités totales · Maths 1re spé · STMG",
+      "accroche": "Une entreprise achète ses panneaux solaires chez trois fournisseurs : A 50 %, B 30 %, C 20 %. Les taux de défaut : 2 % chez A, 4 % chez B, 5 % chez C. Quelle part des panneaux a un défaut ?\n\nDans cette vidéo :\n• A, B et C forment une partition : chaque panneau vient d'un seul fournisseur\n• l'arbre pondéré : 0,5, 0,3 et 0,2, puis le défaut D : 0,02, 0,04 et 0,05\n• P(D) = somme des trois chemins : 0,5 × 0,02 + 0,3 × 0,04 + 0,2 × 0,05\n• 0,01 + 0,012 + 0,01 = 0,032 : 3,2 % des panneaux ont un défaut\n• le piège : la moyenne des taux, environ 3,7 % ; les fournisseurs n'ont pas le même poids\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : quelle est la probabilité qu'un panneau n'ait pas de défaut ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_arbre_calcul&microId=probaT_probabilites_totales&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Les probabilités totales : trois fournisseurs de panneaux solaires"
+        ],
+        [
+          "00:23",
+          "A, B, C : une partition, et l'arbre pondéré"
+        ],
+        [
+          "00:46",
+          "La somme des trois chemins"
+        ],
+        [
+          "01:02",
+          "Le calcul : 3,2 %"
+        ],
+        [
+          "01:14",
+          "Le piège : la moyenne"
+        ],
+        [
+          "01:26",
+          "À toi de jouer, et correction"
+        ],
+        [
+          "01:45",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "probabilités totales",
+        "formule des probabilités totales",
+        "partition",
+        "arbre pondéré",
+        "panneaux solaires",
+        "énergie",
+        "première",
+        "probabilités",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-totales-short",
+      "notionId": "proba_arbre_calcul",
+      "microId": "probaT_probabilites_totales",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-totales",
+      "fichier": "stmg/maths/probabilites/28-probabilites-totales/eleveai-maths-stmg-proba-totales-short.mp4",
+      "miniature": "stmg/maths/probabilites/28-probabilites-totales/eleveai-maths-stmg-proba-totales-short.png",
+      "titre": "3,7 % ? Non : 3,2 % ! ☀️ #Shorts",
+      "accroche": "Trois fournisseurs : 2 %, 4 %, 5 % de défauts. Donc environ 3,7 % en tout ? Non ! A fournit la moitié des panneaux. 0,5 × 0,02 + 0,3 × 0,04 + 0,2 × 0,05 : 3,2 %.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : si A fournissait 80 % des panneaux, le taux de défaut serait-il plus haut ou plus bas ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_arbre_calcul&microId=probaT_probabilites_totales&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités totales",
+        "arbre pondéré",
+        "panneaux solaires",
+        "piège",
+        "première",
+        "probabilités",
+        "maths STMG",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "premiere-proba-totales",
+      "notionId": "probabilites_conditionnelles",
+      "microId": "pc_totales",
+      "classe": "premiere-spe",
+      "ceinture": "marron",
+      "serie": "Maths 1re spé",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-totales",
+      "fichier": "premiere/maths/probabilites/28-probabilites-totales/eleveai-maths-premiere-proba-totales.mp4",
+      "miniature": "premiere/maths/probabilites/28-probabilites-totales/eleveai-maths-premiere-proba-totales.png",
+      "titre": "2 %, 4 %, 5 % de défauts… donc 3,7 % ? FAUX ! — Les probabilités totales · Maths 1re spé · STMG",
+      "accroche": "Une entreprise achète ses panneaux solaires chez trois fournisseurs : A 50 %, B 30 %, C 20 %. Les taux de défaut : 2 % chez A, 4 % chez B, 5 % chez C. Quelle part des panneaux a un défaut ?\n\nDans cette vidéo :\n• A, B et C forment une partition : chaque panneau vient d'un seul fournisseur\n• l'arbre pondéré : 0,5, 0,3 et 0,2, puis le défaut D : 0,02, 0,04 et 0,05\n• P(D) = somme des trois chemins : 0,5 × 0,02 + 0,3 × 0,04 + 0,2 × 0,05\n• 0,01 + 0,012 + 0,01 = 0,032 : 3,2 % des panneaux ont un défaut\n• le piège : la moyenne des taux, environ 3,7 % ; les fournisseurs n'ont pas le même poids\n\n🥋 Ceinture marron.\nUn défi en fin de vidéo, avec sa correction : quelle est la probabilité qu'un panneau n'ait pas de défaut ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_totales&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Les probabilités totales : trois fournisseurs de panneaux solaires"
+        ],
+        [
+          "00:23",
+          "A, B, C : une partition, et l'arbre pondéré"
+        ],
+        [
+          "00:46",
+          "La somme des trois chemins"
+        ],
+        [
+          "01:02",
+          "Le calcul : 3,2 %"
+        ],
+        [
+          "01:14",
+          "Le piège : la moyenne"
+        ],
+        [
+          "01:26",
+          "À toi de jouer, et correction"
+        ],
+        [
+          "01:45",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "probabilités totales",
+        "formule des probabilités totales",
+        "partition",
+        "arbre pondéré",
+        "panneaux solaires",
+        "énergie",
+        "première",
+        "probabilités",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "premiere-proba-totales-short",
+      "notionId": "probabilites_conditionnelles",
+      "microId": "pc_totales",
+      "classe": "premiere-spe",
+      "ceinture": "orange",
+      "serie": "Maths 1re spé",
+      "type": "short",
+      "renvoie_vers": "premiere-proba-totales",
+      "meme_video_que": "stmg-proba-totales-short",
+      "fichier": "premiere/maths/probabilites/28-probabilites-totales/eleveai-maths-premiere-proba-totales-short.mp4",
+      "miniature": "premiere/maths/probabilites/28-probabilites-totales/eleveai-maths-premiere-proba-totales-short.png",
+      "titre": "3,7 % ? Non : 3,2 % ! ☀️ #Shorts",
+      "accroche": "Trois fournisseurs : 2 %, 4 %, 5 % de défauts. Donc environ 3,7 % en tout ? Non ! A fournit la moitié des panneaux. 0,5 × 0,02 + 0,3 × 0,04 + 0,2 × 0,05 : 3,2 %.\n\n🥋 Ceinture orange : un calcul, et un piège à éviter.\n👉 À toi : si A fournissait 80 % des panneaux, le taux de défaut serait-il plus haut ou plus bas ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=probabilites_conditionnelles&microId=pc_totales&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités totales",
+        "arbre pondéré",
+        "panneaux solaires",
+        "piège",
+        "première",
+        "probabilités",
+        "maths STMG",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "stmg-proba-va-calculer",
+      "notionId": "va_loi_probabilite",
+      "microId": "va_calculer_probabilites",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/29-va-calculer/eleveai-maths-stmg-proba-va-calculer.mp4",
+      "miniature": "stmg/maths/probabilites/29-va-calculer/eleveai-maths-stmg-proba-va-calculer.png",
+      "titre": "P(X ≤ 1) : 0,3 ? NON, 0,8 ! — Calculer avec une loi de probabilité · Maths STMG",
+      "accroche": "X est le nombre de colis livrés en retard par jour par un livreur à vélo. Sa loi : 0 retard 0,5 ; 1 retard 0,3 ; 2 retards 0,15 ; 3 retards 0,05.\n\nDans cette vidéo :\n• on vérifie : 0,5 + 0,3 + 0,15 + 0,05 = 1, c'est bien une loi de probabilité\n• P(X = 1) : une seule case, 0,3\n• P(X ≤ 1) : 0 ou 1 retard, 0,5 + 0,3 = 0,8\n• P(X ≥ 2) : 0,15 + 0,05 = 0,2, c'est aussi 1 − 0,8\n• le piège : strictement ou pas ; P(X strictement inférieur à 1), c'est seulement 0 retard, 0,5\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : que vaut P(X ≤ 2) ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_loi_probabilite&microId=va_calculer_probabilites&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Calculer avec une loi : le livreur à vélo"
+        ],
+        [
+          "00:27",
+          "La loi fait 1"
+        ],
+        [
+          "00:40",
+          "P(X = 1) : une case, puis P(X ≤ 1)"
+        ],
+        [
+          "00:58",
+          "P(X ≥ 2)"
+        ],
+        [
+          "01:12",
+          "Le piège : strictement ou pas"
+        ],
+        [
+          "01:24",
+          "Défi"
+        ],
+        [
+          "01:34",
+          "Correction"
+        ],
+        [
+          "01:46",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "variable aléatoire",
+        "loi de probabilité",
+        "P(X ≤ a)",
+        "au plus",
+        "au moins",
+        "livreur à vélo",
+        "probabilités",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ],
+      "aussi": [
+        {
+          "classe": "stmg",
+          "notionId": "va_loi_probabilite",
+          "microId": "va_somme_un"
+        }
+      ]
+    },
+    {
+      "id": "stmg-proba-va-calculer-short",
+      "notionId": "va_loi_probabilite",
+      "microId": "va_calculer_probabilites",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-va-calculer",
+      "fichier": "stmg/maths/probabilites/29-va-calculer/eleveai-maths-stmg-proba-va-calculer-short.mp4",
+      "miniature": "stmg/maths/probabilites/29-va-calculer/eleveai-maths-stmg-proba-va-calculer-short.png",
+      "titre": "Au plus 1 retard : 0,3 ? 🚲 — STMG #Shorts",
+      "accroche": "Au plus 1 colis en retard : c'est 0,3 ? Non ! Au plus 1, c'est 0 OU 1 retard. 0,5 + 0,3 : 0,8. On additionne les cases.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : 2 retards 0,15 ; 3 retards 0,05. Au moins 2 retards, ça fait combien ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_loi_probabilite&microId=va_calculer_probabilites&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "variable aléatoire",
+        "au plus",
+        "livraison",
+        "piège",
+        "probabilités",
+        "maths STMG",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ],
+      "aussi": [
+        {
+          "classe": "stmg",
+          "notionId": "va_loi_probabilite",
+          "microId": "va_somme_un"
+        }
+      ]
+    },
+    {
+      "id": "stmg-proba-va-decision",
+      "notionId": "va_esperance",
+      "microId": "va_esp_decision",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/30-va-decision/eleveai-maths-stmg-proba-va-decision.mp4",
+      "miniature": "stmg/maths/probabilites/30-va-decision/eleveai-maths-stmg-proba-va-decision.png",
+      "titre": "2 000 € possibles… et pourtant 600 € en moyenne ! — Choisir avec l'espérance · Maths STMG",
+      "accroche": "Un commerçant choisit un contrat d'électricité verte. Contrat A : une économie sûre de 500 € par an. Contrat B : 2 000 € d'économie avec une probabilité de 0,3, rien sinon. Lequel choisir ?\n\nDans cette vidéo :\n• l'espérance de B : 2 000 × 0,3 + 0 × 0,7 = 600 €\n• comparer : A rapporte 500 €, B rapporte 600 € en moyenne\n• le risque de B : 7 années sur 10, on ne gagne rien\n• le piège : choisir la plus grosse somme possible ; ce qui compte, c'est la somme multipliée par sa probabilité\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : contrat C : 1 000 € avec une probabilité de 0,6, et une perte de 200 € sinon. Quelle est son espérance ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_esperance&microId=va_esp_decision&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Choisir avec l'espérance : deux contrats"
+        ],
+        [
+          "00:19",
+          "L'espérance de B, et comparer"
+        ],
+        [
+          "00:37",
+          "Le risque de B"
+        ],
+        [
+          "00:47",
+          "Le piège"
+        ],
+        [
+          "00:57",
+          "À toi de jouer"
+        ],
+        [
+          "01:13",
+          "Correction"
+        ],
+        [
+          "01:28",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "espérance",
+        "décision",
+        "comparer",
+        "risque",
+        "électricité verte",
+        "contrat",
+        "business",
+        "probabilités",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-va-decision-short",
+      "notionId": "va_esperance",
+      "microId": "va_esp_decision",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-va-decision",
+      "fichier": "stmg/maths/probabilites/30-va-decision/eleveai-maths-stmg-proba-va-decision-short.mp4",
+      "miniature": "stmg/maths/probabilites/30-va-decision/eleveai-maths-stmg-proba-va-decision-short.png",
+      "titre": "500 € sûrs ou 2 000 € à 30 % ? 💶 — STMG #Shorts",
+      "accroche": "500 € sûrs, ou 2 000 € avec 30 % de chances. Tu choisis quoi ? En moyenne, le pari rapporte 2 000 × 0,3 : 600 €. Plus que 500… mais 7 fois sur 10, rien !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : tu prends les 500 € sûrs ou le pari ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_esperance&microId=va_esp_decision&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "espérance",
+        "décision",
+        "pari",
+        "risque",
+        "probabilités",
+        "maths STMG",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "stmg-proba-bern-esperance",
+      "notionId": "va_bernoulli",
+      "microId": "va_bern_esperance",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/31-bern-esperance/eleveai-maths-stmg-proba-bern-esperance.mp4",
+      "miniature": "stmg/maths/probabilites/31-bern-esperance/eleveai-maths-stmg-proba-bern-esperance.png",
+      "titre": "Un succès vaut 1… donc E = 1 ? NON ! — L'espérance d'une loi de Bernoulli · Maths STMG",
+      "accroche": "Dans une épicerie, un client sur cinq achète un produit éco-responsable. On note X : 1 si le client en achète, 0 sinon.\n\nDans cette vidéo :\n• X suit une loi de Bernoulli de paramètre 0,2 : X = 1 avec 0,2, X = 0 avec 0,8\n• E(X) = 1 × 0,2 + 0 × 0,8 = 0,2 : l'espérance d'une loi de Bernoulli, c'est p\n• sur 300 clients : environ 300 × 0,2 = 60 achats\n• le piège : croire que E = 1 parce qu'un succès vaut 1 ; on pondère par la probabilité\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : 35 % des clients paient sans contact. Sur 200 clients, combien en moyenne ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_bernoulli&microId=va_bern_esperance&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "L'espérance d'une loi de Bernoulli : à l'épicerie"
+        ],
+        [
+          "00:15",
+          "La loi de X"
+        ],
+        [
+          "00:28",
+          "Le calcul : E(X) = p"
+        ],
+        [
+          "00:40",
+          "Sur 300 clients, et le piège"
+        ],
+        [
+          "00:57",
+          "Défi : sans contact"
+        ],
+        [
+          "01:10",
+          "Correction"
+        ],
+        [
+          "01:21",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "loi de Bernoulli",
+        "espérance",
+        "E(X) = p",
+        "épicerie",
+        "éco-responsable",
+        "probabilités",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-bern-esperance-short",
+      "notionId": "va_bernoulli",
+      "microId": "va_bern_esperance",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-bern-esperance",
+      "fichier": "stmg/maths/probabilites/31-bern-esperance/eleveai-maths-stmg-proba-bern-esperance-short.mp4",
+      "miniature": "stmg/maths/probabilites/31-bern-esperance/eleveai-maths-stmg-proba-bern-esperance-short.png",
+      "titre": "1 client sur 5 : combien sur 300 ? 🛒 — STMG #Shorts",
+      "accroche": "Un client sur cinq achète éco-responsable. Sur 300 clients, combien ? L'espérance d'une Bernoulli, c'est p : 0,2. 300 × 0,2 : environ 60 clients.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : avec 35 % de paiements sans contact, combien sur 200 clients ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_bernoulli&microId=va_bern_esperance&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "loi de Bernoulli",
+        "espérance",
+        "épicerie",
+        "probabilités",
+        "maths STMG",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "stmg-proba-bern-simuler",
+      "notionId": "va_bernoulli",
+      "microId": "va_bern_simuler",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/32-bern-simuler/eleveai-maths-stmg-proba-bern-simuler.mp4",
+      "miniature": "stmg/maths/probabilites/32-bern-simuler/eleveai-maths-stmg-proba-bern-simuler.png",
+      "titre": "0,34 au lieu de 0,3 : le site ment ? — Simuler des échantillons avec Python · Maths STMG",
+      "accroche": "Un site de vente en ligne affirme : 30 % des visiteurs achètent. Que donnent des échantillons de 50 visiteurs ? On les simule avec Python.\n\nDans cette vidéo :\n• la fonction echantillon : un compteur à 0 ; 50 fois, si random() est plus petit que 0,3, on ajoute 1 ; on renvoie le compteur divisé par 50\n• on répète 100 fois : 100 fréquences, 0,28, 0,34, 0,26, 0,32…\n• elles changent d'un échantillon à l'autre, mais tournent toutes autour de 0,3\n• le piège : un seul échantillon ne suffit pas ; 0,34 ne prouve pas que le site ment\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : que se passe-t-il avec des échantillons de 500 visiteurs au lieu de 50 ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_bernoulli&microId=va_bern_simuler&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Simuler avec Python : le site de vente, 30 % achètent"
+        ],
+        [
+          "00:14",
+          "La fonction echantillon"
+        ],
+        [
+          "00:28",
+          "On répète 100 fois : autour de 0,3"
+        ],
+        [
+          "00:47",
+          "Le piège : un seul échantillon"
+        ],
+        [
+          "00:59",
+          "Défi : 500 visiteurs, et correction"
+        ],
+        [
+          "01:20",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "simulation",
+        "Python",
+        "random",
+        "échantillon",
+        "fréquence",
+        "loi de Bernoulli",
+        "algorithmique",
+        "vente en ligne",
+        "probabilités",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-bern-simuler-short",
+      "notionId": "va_bernoulli",
+      "microId": "va_bern_simuler",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-bern-simuler",
+      "fichier": "stmg/maths/probabilites/32-bern-simuler/eleveai-maths-stmg-proba-bern-simuler-short.mp4",
+      "miniature": "stmg/maths/probabilites/32-bern-simuler/eleveai-maths-stmg-proba-bern-simuler-short.png",
+      "titre": "100 échantillons en 1 seconde ! 🐍 — STMG #Shorts",
+      "accroche": "100 échantillons de 50 clients, en une seconde, avec Python ! 0,28, 0,34, 0,26, 0,32… Les fréquences bougent, mais tournent toutes autour de 0,3.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : avec 500 clients par échantillon, les fréquences bougent-elles plus ou moins ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_bernoulli&microId=va_bern_simuler&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "simulation",
+        "Python",
+        "échantillon",
+        "probabilités",
+        "maths STMG",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "stmg-proba-bern-representer",
+      "notionId": "va_bernoulli",
+      "microId": "va_bern_representer",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/33-bern-representer/eleveai-maths-stmg-proba-bern-representer.mp4",
+      "miniature": "stmg/maths/probabilites/33-bern-representer/eleveai-maths-stmg-proba-bern-representer.png",
+      "titre": "Un point à 0,46… et alors ? Lis le NUAGE ! — Nuage de points et histogramme · Maths STMG",
+      "accroche": "On a simulé 100 échantillons de 50 visiteurs d'un site, avec p = 0,3. On obtient 100 fréquences : comment les représenter, et que lire ?\n\nDans cette vidéo :\n• le nuage de points : le numéro de l'échantillon en abscisse, sa fréquence en ordonnée, et la droite y = 0,3\n• lire le nuage : les points se dispersent autour de la droite, la plupart entre 0,2 et 0,4\n• l'histogramme : combien de fréquences dans chaque intervalle ; la barre la plus haute est autour de 0,3\n• deux graphiques, un même message : les fréquences fluctuent, mais se concentrent autour de p\n• le piège : lire un point isolé ; un échantillon à 0,46 existe, mais il est rare\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : 92 fréquences sur 100 sont entre 0,2 et 0,4 : quelle proportion des échantillons est-ce ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_bernoulli&microId=va_bern_representer&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Représenter des fréquences : 100 échantillons de 50 visiteurs"
+        ],
+        [
+          "00:15",
+          "Le nuage de points"
+        ],
+        [
+          "00:29",
+          "Lire le nuage"
+        ],
+        [
+          "00:39",
+          "L'histogramme : deux graphiques, un même message"
+        ],
+        [
+          "00:56",
+          "Le piège : le point isolé"
+        ],
+        [
+          "01:07",
+          "À toi de jouer, et correction : 92 %"
+        ],
+        [
+          "01:30",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "nuage de points",
+        "histogramme",
+        "fluctuation",
+        "échantillon",
+        "fréquence",
+        "simulation",
+        "statistiques",
+        "probabilités",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-bern-representer-short",
+      "notionId": "va_bernoulli",
+      "microId": "va_bern_representer",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-bern-representer",
+      "fichier": "stmg/maths/probabilites/33-bern-representer/eleveai-maths-stmg-proba-bern-representer-short.mp4",
+      "miniature": "stmg/maths/probabilites/33-bern-representer/eleveai-maths-stmg-proba-bern-representer-short.png",
+      "titre": "100 échantillons, un seul à 0,46 : le site a menti ? 📊 — STMG #Shorts",
+      "accroche": "100 échantillons. Un seul donne 0,46. Le site a menti ? Regarde le nuage : la plupart des points sont entre 0,2 et 0,4, autour de 0,3. 0,46, c'est un point rare, pas une preuve.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : sur le nuage, combien de points vois-tu au-dessus de 0,4 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_bernoulli&microId=va_bern_representer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "nuage de points",
+        "fluctuation",
+        "échantillon",
+        "probabilités",
+        "maths STMG",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "stmg-proba-ech-distance",
+      "notionId": "va_echantillonnage",
+      "microId": "va_ech_distance",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/35-ech-distance/eleveai-maths-stmg-proba-ech-distance.mp4",
+      "miniature": "stmg/maths/probabilites/35-ech-distance/eleveai-maths-stmg-proba-ech-distance.png",
+      "titre": "0,02 et 0,05 : la distance vaut 0,03, pas −0,03 ! — La distance entre f et p · Maths STMG",
+      "accroche": "Un fournisseur garantit 5 % de colis abîmés. Sur 400 colis, on en trouve 32 abîmés. Faut-il réclamer ?\n\nDans cette vidéo :\n• la fréquence observée : 32 sur 400 = 0,08\n• la distance à p : l'écart entre 0,08 et 0,05, sans signe, 0,03\n• on la compare à la marge 1 sur racine de 400 = 0,05 : 0,03 est plus petit, la distance est normale\n• petite distance : la fluctuation ; plus grande que la marge : c'est rare\n• le piège : oublier la valeur absolue ; avec 0,02, la distance à 0,05 vaut aussi 0,03\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : sur 400 colis, 48 abîmés : quelle est la distance à 0,05 ? Est-elle normale ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_echantillonnage&microId=va_ech_distance&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "La distance entre f et p : les colis du fournisseur"
+        ],
+        [
+          "00:13",
+          "La fréquence observée et la distance à p"
+        ],
+        [
+          "00:33",
+          "Comparer à la marge : petite ou grande distance ?"
+        ],
+        [
+          "00:56",
+          "Le piège : la valeur absolue"
+        ],
+        [
+          "01:10",
+          "À toi de jouer"
+        ],
+        [
+          "01:25",
+          "Correction"
+        ],
+        [
+          "01:40",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "distance",
+        "valeur absolue",
+        "fréquence observée",
+        "marge de fluctuation",
+        "échantillonnage",
+        "colis",
+        "fournisseur",
+        "probabilités",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-ech-distance-short",
+      "notionId": "va_echantillonnage",
+      "microId": "va_ech_distance",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-ech-distance",
+      "fichier": "stmg/maths/probabilites/35-ech-distance/eleveai-maths-stmg-proba-ech-distance-short.mp4",
+      "miniature": "stmg/maths/probabilites/35-ech-distance/eleveai-maths-stmg-proba-ech-distance-short.png",
+      "titre": "8 % de colis abîmés au lieu de 5 % : tu réclames ? 📦 — STMG #Shorts",
+      "accroche": "5 % de colis abîmés garantis. Tu en trouves 8 % sur 400. Écart trop grand ? Distance : 0,08 − 0,05 = 0,03. La marge pour 400 colis : 0,05. 0,03, c'est dans la marge !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : 12 % sur 400 colis, tu réclames ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_echantillonnage&microId=va_ech_distance&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "distance",
+        "marge",
+        "colis",
+        "probabilités",
+        "maths STMG",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "stmg-proba-ech-rare",
+      "notionId": "va_echantillonnage",
+      "microId": "va_ech_rare_ou_frequent",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/36-ech-rare/eleveai-maths-stmg-proba-ech-rare.mp4",
+      "miniature": "stmg/maths/probabilites/36-ech-rare/eleveai-maths-stmg-proba-ech-rare.png",
+      "titre": "51 % au lieu de 60 % : l'enseigne ment-elle ? — Fréquent ou rare · Maths STMG",
+      "accroche": "Une enseigne affirme : 60 % de ses clients rapportent leurs sacs réutilisables. Un étudiant observe 400 clients : 204 les rapportent.\n\nDans cette vidéo :\n• la fréquence observée : 204 sur 400 = 0,51\n• si l'annonce est vraie, la fréquence est dans 95 % des cas entre 0,6 − 0,05 et 0,6 + 0,05 : dans [0,55 ; 0,65]\n• 0,51 est en dehors : c'est rare si le modèle est vrai, on doute de l'annonce\n• douter n'est pas prouver : une observation rare peut arriver, environ une fois sur vingt\n• le piège : conclure sur un tout petit échantillon ; sur 25 clients, la marge serait 0,2\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : sur 400 clients, 228 rapportent leurs sacs : fréquent ou rare ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_echantillonnage&microId=va_ech_rare_ou_frequent&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Fréquent ou rare ? L'enseigne et les sacs"
+        ],
+        [
+          "00:17",
+          "La fréquence 0,51 et l'intervalle [0,55 ; 0,65]"
+        ],
+        [
+          "00:41",
+          "En dehors : rare ; douter n'est pas prouver"
+        ],
+        [
+          "00:56",
+          "Le piège : 25 clients"
+        ],
+        [
+          "01:08",
+          "Défi : 228 sur 400"
+        ],
+        [
+          "01:21",
+          "Correction : fréquent"
+        ],
+        [
+          "01:36",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "échantillonnage",
+        "fréquent ou rare",
+        "intervalle de fluctuation",
+        "prise de décision",
+        "sacs réutilisables",
+        "écologie",
+        "probabilités",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-ech-rare-short",
+      "notionId": "va_echantillonnage",
+      "microId": "va_ech_rare_ou_frequent",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-ech-rare",
+      "fichier": "stmg/maths/probabilites/36-ech-rare/eleveai-maths-stmg-proba-ech-rare-short.mp4",
+      "miniature": "stmg/maths/probabilites/36-ech-rare/eleveai-maths-stmg-proba-ech-rare-short.png",
+      "titre": "60 % annoncés, 51 % vus… tu la crois ? 🛍️ — STMG #Shorts",
+      "accroche": "60 % des clients rapportent leurs sacs, dit l'enseigne. Sur 400, tu en vois 51 %. Tu la crois ? Normal entre 55 % et 65 %. 51 %, c'est en dehors : c'est rare. On a le droit de douter !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : avec 57 % observés, tu doutes encore ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_echantillonnage&microId=va_ech_rare_ou_frequent&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "échantillonnage",
+        "rare",
+        "sacs réutilisables",
+        "probabilités",
+        "maths STMG",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "stmg-proba-ech-taille",
+      "notionId": "va_echantillonnage",
+      "microId": "va_ech_taille",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/37-ech-taille/eleveai-maths-stmg-proba-ech-taille.mp4",
+      "miniature": "stmg/maths/probabilites/37-ech-taille/eleveai-maths-stmg-proba-ech-taille.png",
+      "titre": "2 fois plus précis ? Pas 2 fois plus de monde : 4 fois ! — La taille de l'échantillon · Maths STMG",
+      "accroche": "Un institut de sondage interroge 400 personnes sur les énergies renouvelables. Sa marge : 1 sur racine de 400 = 0,05. Il veut une marge deux fois plus petite : faut-il interroger deux fois plus de personnes ?\n\nDans cette vidéo :\n• 1 sur racine de n = 0,025 : racine de n = 40, donc n = 1 600, quatre fois plus\n• la règle : pour diviser la marge par k, on multiplie la taille de l'échantillon par k²\n• diviser la marge par 3 : 9 fois plus de personnes, 400 × 9 = 3 600\n• le piège : doubler l'échantillon ne divise la marge que par environ 1,4\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : un sondage sur 100 personnes a une marge de 0,1 : combien de personnes pour une marge de 0,02 ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_echantillonnage&microId=va_ech_taille&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Un sondage sur 400 personnes"
+        ],
+        [
+          "00:18",
+          "Deux fois plus précis ?"
+        ],
+        [
+          "00:28",
+          "Le calcul : 1 600 personnes"
+        ],
+        [
+          "00:41",
+          "La règle : × k², diviser la marge par 3"
+        ],
+        [
+          "00:58",
+          "Le piège"
+        ],
+        [
+          "01:08",
+          "À toi de jouer"
+        ],
+        [
+          "01:23",
+          "Correction"
+        ],
+        [
+          "01:33",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "taille de l'échantillon",
+        "marge de fluctuation",
+        "sondage",
+        "précision",
+        "énergies renouvelables",
+        "échantillonnage",
+        "probabilités",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-ech-taille-short",
+      "notionId": "va_echantillonnage",
+      "microId": "va_ech_taille",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-ech-taille",
+      "fichier": "stmg/maths/probabilites/37-ech-taille/eleveai-maths-stmg-proba-ech-taille-short.mp4",
+      "miniature": "stmg/maths/probabilites/37-ech-taille/eleveai-maths-stmg-proba-ech-taille-short.png",
+      "titre": "800 personnes ? Non : 1 600 ! 📋 — STMG #Shorts",
+      "accroche": "Un sondage sur 400 personnes. Pour être deux fois plus précis, 800 personnes ? Non : 1 600 ! Pour diviser la marge par 2, il faut 2², 4 fois plus de personnes.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : pour être trois fois plus précis, combien de personnes ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_echantillonnage&microId=va_ech_taille&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "taille de l'échantillon",
+        "sondage",
+        "précision",
+        "probabilités",
+        "maths STMG",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "stmg-proba-ech-fluctuation",
+      "notionId": "va_echantillonnage",
+      "microId": "va_ech_fluctuation",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/probabilites/34-ech-fluctuation/eleveai-maths-stmg-proba-ech-fluctuation.mp4",
+      "miniature": "stmg/maths/probabilites/34-ech-fluctuation/eleveai-maths-stmg-proba-ech-fluctuation.png",
+      "titre": "0,12 au lieu de 0,10 : la marque ment ? — La fluctuation d'échantillonnage · Maths STMG",
+      "accroche": "Une marque de cosmétiques bio annonce : 10 % des personnes qui voient sa publicité cliquent dessus. On observe des échantillons de 400 personnes.\n\nDans cette vidéo :\n• on simule 100 échantillons de 400 personnes : les fréquences de clic changent, 0,09, 0,12, 0,10, 0,08…\n• la marge de fluctuation : 1 sur racine de n ; racine de 400 = 20, la marge vaut 0,05\n• au moins 95 % des fréquences tombent entre p − 0,05 et p + 0,05 : entre 0,05 et 0,15\n• le piège : une fréquence hors de l'intervalle n'est pas impossible ; c'est rare, au plus une fois sur vingt\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : avec des échantillons de 2 500 personnes, quelle est la marge 1 sur racine de n ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_echantillonnage&microId=va_ech_fluctuation&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "La fluctuation : la marque de cosmétiques bio"
+        ],
+        [
+          "00:18",
+          "On simule 100 échantillons de 400 personnes"
+        ],
+        [
+          "00:37",
+          "La marge 1 sur racine de n, et au moins 95 %"
+        ],
+        [
+          "01:02",
+          "La fluctuation d'échantillonnage, et le piège"
+        ],
+        [
+          "01:21",
+          "À toi de jouer"
+        ],
+        [
+          "01:34",
+          "Correction"
+        ],
+        [
+          "01:44",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "fluctuation d'échantillonnage",
+        "marge de fluctuation",
+        "1 sur racine de n",
+        "échantillon",
+        "fréquence",
+        "cosmétiques bio",
+        "publicité",
+        "probabilités",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "stmg-proba-ech-fluctuation-short",
+      "notionId": "va_echantillonnage",
+      "microId": "va_ech_fluctuation",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-proba-ech-fluctuation",
+      "fichier": "stmg/maths/probabilites/34-ech-fluctuation/eleveai-maths-stmg-proba-ech-fluctuation-short.mp4",
+      "miniature": "stmg/maths/probabilites/34-ech-fluctuation/eleveai-maths-stmg-proba-ech-fluctuation-short.png",
+      "titre": "12 % au lieu de 10 % : elle ment ? 📱 — STMG #Shorts",
+      "accroche": "10 % de clics annoncés. Sur 400 personnes, tu trouves 12 %. La marque ment ? Pas forcément : la marge, c'est 1 sur racine de 400, 0,05. Entre 5 % et 15 %, c'est normal.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : 16 % de clics sur 400 personnes, c'est normal ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_echantillonnage&microId=va_ech_fluctuation&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "fluctuation",
+        "marge",
+        "échantillon",
+        "publicité",
+        "probabilités",
+        "maths STMG",
+        "STMG",
+        "lycée",
+        "eleveai",
         "ceinture jaune",
         "Shorts"
       ]

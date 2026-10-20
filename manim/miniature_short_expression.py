@@ -590,6 +590,48 @@ for _t in [
     CEINTURE_SHORT[_nom] = _c
 
 
+# 20/10/2026 — lot PROBABILITÉS 1re tronc commun (23-26), STMG (28-37) et 1re spé (28) : shorts.
+for _cl, _bd, _dos, _ep, _c, _titre, _sous, _lg, _tt in [
+    ("premiere-commun", "1RE", "23-reconnaitre", "reconnaitre", "jaune", ["80 % DES", "BIEN TRIÉS…"],
+     "…donc 80 % du plastique est bien trié ?", [("bien triés : 80 % plastique", 64, BLEU), ("plastique : 40 % trié ?", 72, ORANGE), ("parmi QUI ?", 100, VERT)], 88),
+    ("premiere-commun", "1RE", "24-notation", "notation", "jaune", ["60 %", "REVIENNENT…"],
+     "…parmi ceux qui ont laissé un avis", [("parmi les avis", 90, BLEU), ("A en indice", 96, ORANGE), ("R sachant A = 0,6", 80, VERT)], 88),
+    ("premiere-commun", "1RE", "25-somme-issues", "somme-issues", "jaune", ["AU MOINS", "4 ÉTOILES"],
+     "40 % ou 70 % ?", [("2 notes sur 5 = 40 % ?", 64, ROUGE), ("0,3 + 0,4", 100, BLEU), ("= 70 % !", 110, VERT)], 88),
+    ("premiere-commun", "1RE", "26-equiprobabilite", "equiprobabilite", "jaune", ["12 BIO", "SUR 40"],
+     "on en tire un au hasard : tes chances ?", [("tous la même chance", 72, BLEU), ("12 sur 40", 110, ORANGE), ("= 0,3 !", 110, VERT)], 92),
+    ("stmg", "STMG", "28-probabilites-totales", "totales", "jaune", ["3 FOURNISSEURS", "DE PANNEAUX"],
+     "2 %, 4 %, 5 % de défauts", [("moyenne : 3,7 % ?", 80, ROUGE), ("chacun son poids", 84, BLEU), ("3,2 % !", 120, VERT)], 80),
+    ("premiere", "1RE SPÉ", "28-probabilites-totales", "totales", "orange", ["3 FOURNISSEURS", "DE PANNEAUX"],
+     "2 %, 4 %, 5 % de défauts", [("moyenne : 3,7 % ?", 80, ROUGE), ("chacun son poids", 84, BLEU), ("3,2 % !", 120, VERT)], 80),
+    ("stmg", "STMG", "29-va-calculer", "va-calculer", "jaune", ["AU PLUS", "1 RETARD"],
+     "le livreur à vélo", [("0,3 ?", 120, ROUGE), ("0 OU 1 retard", 90, BLEU), ("0,5 + 0,3 = 0,8 !", 76, VERT)], 92),
+    ("stmg", "STMG", "30-va-decision", "va-decision", "jaune", ["500 € SÛRS", "OU LE PARI ?"],
+     "2 000 € avec 30 % de chances", [("2 000 × 0,3", 96, BLEU), ("= 600 € en moyenne", 72, VERT), ("7 fois sur 10 : rien !", 64, ROUGE)], 88),
+    ("stmg", "STMG", "31-bern-esperance", "bern-esperance", "jaune", ["1 CLIENT", "SUR 5"],
+     "combien sur 300 clients ?", [("E(X) = p = 0,2", 84, BLEU), ("300 × 0,2", 100, ORANGE), ("≈ 60 clients !", 90, VERT)], 92),
+    ("stmg", "STMG", "32-bern-simuler", "bern-simuler", "jaune", ["100 ÉCHANTILLONS", "EN 1 SECONDE"],
+     "avec Python !", [("random() < 0.3", 80, BLEU), ("0,28 · 0,34 · 0,26", 70, ORANGE), ("autour de 0,3 !", 90, VERT)], 76),
+    ("stmg", "STMG", "33-bern-representer", "bern-representer", "jaune", ["UN POINT", "À 0,46…"],
+     "le site a menti ?", [("1 point sur 100", 84, ROUGE), ("le nuage : 0,2 à 0,4", 72, BLEU), ("rare, pas une preuve !", 64, VERT)], 92),
+    ("stmg", "STMG", "34-ech-fluctuation", "ech-fluctuation", "jaune", ["12 % AU LIEU", "DE 10 %"],
+     "la marque ment ?", [("marge : 0,05", 96, BLEU), ("normal : 5 % à 15 %", 72, ORANGE), ("pas forcément !", 84, VERT)], 88),
+    ("stmg", "STMG", "35-ech-distance", "ech-distance", "jaune", ["8 % AU LIEU", "DE 5 %"],
+     "tu réclames ?", [("distance : 0,03", 88, BLEU), ("marge : 0,05", 96, ORANGE), ("c'est normal !", 96, VERT)], 92),
+    ("stmg", "STMG", "36-ech-rare", "ech-rare", "jaune", ["60 % ANNONCÉS", "51 % VUS"],
+     "tu la crois ?", [("normal : 55 % à 65 %", 68, BLEU), ("51 % : en dehors", 80, ORANGE), ("on peut douter !", 88, ROUGE)], 84),
+    ("stmg", "STMG", "37-ech-taille", "ech-taille", "jaune", ["2 FOIS PLUS", "PRÉCIS ?"],
+     "un sondage sur 400 personnes", [("800 personnes ?", 84, ROUGE), ("2² = 4 fois plus", 84, BLEU), ("1 600 !", 120, VERT)], 92),
+]:
+    _nom = f"eleveai-maths-{_cl}-proba-{_ep}-short"
+    SHORTS[_nom] = {
+        "badge": f"PROBABILITÉS · {_bd}", "titre": _titre, "taille": _tt, "sous": _sous,
+        "taille_sous": 44, "couleur_sous": ORANGE, "accroche": _acc(_lg), "dossier": f"{_cl}/maths/fr",
+        "sortie": f"{_cl}/maths/probabilites/{_dos}",
+    }
+    CEINTURE_SHORT[_nom] = _c
+
+
 def main():
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     filtre = sys.argv[1] if len(sys.argv) > 1 else ""

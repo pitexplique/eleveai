@@ -1734,6 +1734,45 @@ for _nom, _dos, _titre, _haut, _bas, _duree in [
     }
 
 
+# 20/10/2026 — lot PROBABILITÉS 1re tronc commun (23-26), STMG (28-37) et 1re spé (28) : paysages.
+for _cl, _dos, _k, _bd, _c, _duree, _titre, _haut, _bas in [
+    ("premiere-commun", "23-reconnaitre", "reconnaitre", "1RE", "bleue", "EN 3 MIN", ["COMPRENDRE LES PROBAS", "CONDITIONNELLES"],
+     "150 sur 200 ou sur 500 ?", "tout dépend du mot PARMI"),
+    ("premiere-commun", "24-notation", "notation", "1RE", "bleue", "EN 2 MIN", ["ÉCRIRE UNE PROBA", "CONDITIONNELLE"],
+     "T sachant R = R sachant T ?", "non : 0,7 et 0,8, deux groupes !"),
+    ("premiere-commun", "25-somme-issues", "somme-issues", "1RE", "bleue", "EN 2 MIN", ["CALCULER UNE PROBA :", "LA SOMME DES ISSUES"],
+     "2 notes sur 5 = 40 % ?", "FAUX : 0,3 + 0,4 = 70 % !"),
+    ("premiere-commun", "26-equiprobabilite", "equiprobabilite", "1RE", "bleue", "EN 2 MIN", ["COMPRENDRE", "L'ÉQUIPROBABILITÉ"],
+     "Card(A) sur Card(Ω) ?", "seulement si tout est équiprobable !"),
+    ("stmg", "28-probabilites-totales", "totales", "STMG", "bleue", "EN 2 MIN", ["LA FORMULE DES", "PROBABILITÉS TOTALES"],
+     "2 %, 4 %, 5 %… donc 3,7 % ?", "FAUX : 3,2 % !"),
+    ("premiere", "28-probabilites-totales", "totales", "1RE SPÉ", "marron", "EN 2 MIN", ["LA FORMULE DES", "PROBABILITÉS TOTALES"],
+     "2 %, 4 %, 5 %… donc 3,7 % ?", "FAUX : 3,2 % !"),
+    ("stmg", "29-va-calculer", "va-calculer", "STMG", "bleue", "EN 2 MIN", ["CALCULER", "AVEC UNE LOI"],
+     "P(X ≤ 1) = 0,3 ?", "NON : 0,5 + 0,3 = 0,8 !"),
+    ("stmg", "30-va-decision", "va-decision", "STMG", "bleue", "EN 2 MIN", ["CHOISIR AVEC", "L'ESPÉRANCE"],
+     "2 000 € possibles…", "et pourtant 600 € en moyenne !"),
+    ("stmg", "31-bern-esperance", "bern-esperance", "STMG", "bleue", "EN 2 MIN", ["L'ESPÉRANCE", "D'UNE BERNOULLI"],
+     "Un succès vaut 1… donc E = 1 ?", "NON : E(X) = p = 0,2 !"),
+    ("stmg", "32-bern-simuler", "bern-simuler", "STMG", "bleue", "EN 2 MIN", ["SIMULER", "AVEC PYTHON"],
+     "0,34 au lieu de 0,3 : il ment ?", "non : 100 échantillons, autour de 0,3"),
+    ("stmg", "33-bern-representer", "bern-representer", "STMG", "bleue", "EN 2 MIN", ["NUAGE DE POINTS", "ET HISTOGRAMME"],
+     "Un point à 0,46… et alors ?", "lis le NUAGE, pas un point !"),
+    ("stmg", "34-ech-fluctuation", "ech-fluctuation", "STMG", "bleue", "EN 2 MIN", ["COMPRENDRE LA", "FLUCTUATION"],
+     "0,12 au lieu de 0,10 : elle ment ?", "non : 0,12 est dans [0,05 ; 0,15]"),
+    ("stmg", "35-ech-distance", "ech-distance", "STMG", "bleue", "EN 2 MIN", ["LA DISTANCE", "ENTRE f ET p"],
+     "0,02 et 0,05 : distance −0,03 ?", "non : 0,03, sans signe !"),
+    ("stmg", "36-ech-rare", "ech-rare", "STMG", "bleue", "EN 2 MIN", ["FRÉQUENT", "OU RARE ?"],
+     "51 % au lieu de 60 % : elle ment ?", "hors de [0,55 ; 0,65] : on doute"),
+    ("stmg", "37-ech-taille", "ech-taille", "STMG", "bleue", "EN 2 MIN", ["LA TAILLE", "DE L'ÉCHANTILLON"],
+     "2 fois plus précis : 800 ?", "non : 4 fois plus, 1 600 !"),
+]:
+    ESSAIS[f"eleveai-maths-{_cl}-proba-{_k}"] = {
+        "badge": f"MATHS · {_bd}", "duree": _duree, "titre": _titre,
+        "accroche": _piege_test(_c, _haut, _bas), "dossier": f"{_cl}/maths/probabilites/{_dos}",
+    }
+
+
 def construire(nom, spec):
     img = fond()
     d = ImageDraw.Draw(img)
