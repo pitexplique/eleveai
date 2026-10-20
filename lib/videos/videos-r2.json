@@ -1039,6 +1039,86 @@
   "short": true,
   "youtube": "YaeUd2bWUJo"
  },
+ "5e-proba-calculer": {
+  "fichier": "5e/maths/probabilites/04-calculer/eleveai-maths-5e-proba-calculer.mp4",
+  "poster": "5e/maths/probabilites/04-calculer/eleveai-maths-5e-proba-calculer.png",
+  "vignette": "5e/maths/probabilites/04-calculer/eleveai-maths-5e-proba-calculer.vignette.webp",
+  "titre": "1 part sur 8… mais si la part est plus grande ? — Calculer une probabilité — épisode 4 · Maths 5e",
+  "short": false,
+  "youtube": null
+ },
+ "5e-proba-calculer-short": {
+  "fichier": "5e/maths/probabilites/04-calculer/eleveai-maths-5e-proba-calculer-short.mp4",
+  "poster": "5e/maths/probabilites/04-calculer/eleveai-maths-5e-proba-calculer-short.png",
+  "vignette": "5e/maths/probabilites/04-calculer/eleveai-maths-5e-proba-calculer-short.vignette.webp",
+  "titre": "Le gros lot : 12,5 % de chances ? 🎡 — 5e #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "5e-proba-defi": {
+  "fichier": "5e/maths/probabilites/05-defis/eleveai-maths-5e-proba-defi.mp4",
+  "poster": "5e/maths/probabilites/05-defis/eleveai-maths-5e-proba-defi.png",
+  "vignette": "5e/maths/probabilites/05-defis/eleveai-maths-5e-proba-defi.vignette.webp",
+  "titre": "Deux pièces : au moins un pile, ce n'est PAS 1 sur 2 — Les défis — épisode 5 · Maths 5e",
+  "short": false,
+  "youtube": null
+ },
+ "5e-proba-defi-short": {
+  "fichier": "5e/maths/probabilites/05-defis/eleveai-maths-5e-proba-defi-short.mp4",
+  "poster": "5e/maths/probabilites/05-defis/eleveai-maths-5e-proba-defi-short.png",
+  "vignette": "5e/maths/probabilites/05-defis/eleveai-maths-5e-proba-defi-short.vignette.webp",
+  "titre": "Au moins un pile… tu paries ? 🪙 — 5e #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "5e-proba-equiprobabilite": {
+  "fichier": "5e/maths/probabilites/03-equiprobabilite/eleveai-maths-5e-proba-equiprobabilite.mp4",
+  "poster": "5e/maths/probabilites/03-equiprobabilite/eleveai-maths-5e-proba-equiprobabilite.png",
+  "vignette": "5e/maths/probabilites/03-equiprobabilite/eleveai-maths-5e-proba-equiprobabilite.vignette.webp",
+  "titre": "2 issues = 1/2 chacune ? FAUX ! — L'équiprobabilité — épisode 3 · Maths 5e",
+  "short": false,
+  "youtube": null
+ },
+ "5e-proba-equiprobabilite-short": {
+  "fichier": "5e/maths/probabilites/03-equiprobabilite/eleveai-maths-5e-proba-equiprobabilite-short.mp4",
+  "poster": "5e/maths/probabilites/03-equiprobabilite/eleveai-maths-5e-proba-equiprobabilite-short.png",
+  "vignette": "5e/maths/probabilites/03-equiprobabilite/eleveai-maths-5e-proba-equiprobabilite-short.vignette.webp",
+  "titre": "Une punaise : pointe en haut ou en bas, 1/2 chacune ? 📌 — 5e #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "5e-proba-issue": {
+  "fichier": "5e/maths/probabilites/02-issues/eleveai-maths-5e-proba-issue.mp4",
+  "poster": "5e/maths/probabilites/02-issues/eleveai-maths-5e-proba-issue.png",
+  "vignette": "5e/maths/probabilites/02-issues/eleveai-maths-5e-proba-issue.vignette.webp",
+  "titre": "Deux pièces : 3 issues ? Non, 4 ! — Lister toutes les issues — épisode 2 · Maths 5e",
+  "short": false,
+  "youtube": null
+ },
+ "5e-proba-issue-short": {
+  "fichier": "5e/maths/probabilites/02-issues/eleveai-maths-5e-proba-issue-short.mp4",
+  "poster": "5e/maths/probabilites/02-issues/eleveai-maths-5e-proba-issue-short.png",
+  "vignette": "5e/maths/probabilites/02-issues/eleveai-maths-5e-proba-issue-short.vignette.webp",
+  "titre": "Une de chaque = 1 chance sur 3 ? FAUX 🪙 — 5e #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "5e-proba-vocabulaire": {
+  "fichier": "5e/maths/probabilites/01-vocabulaire/eleveai-maths-5e-proba-vocabulaire.mp4",
+  "poster": "5e/maths/probabilites/01-vocabulaire/eleveai-maths-5e-proba-vocabulaire.png",
+  "vignette": "5e/maths/probabilites/01-vocabulaire/eleveai-maths-5e-proba-vocabulaire.vignette.webp",
+  "titre": "MAFATE : 5 lettres… mais 6 issues ! — Les mots des probabilités — épisode 1 · Maths 5e",
+  "short": false,
+  "youtube": null
+ },
+ "5e-proba-vocabulaire-short": {
+  "fichier": "5e/maths/probabilites/01-vocabulaire/eleveai-maths-5e-proba-vocabulaire-short.mp4",
+  "poster": "5e/maths/probabilites/01-vocabulaire/eleveai-maths-5e-proba-vocabulaire-short.png",
+  "vignette": "5e/maths/probabilites/01-vocabulaire/eleveai-maths-5e-proba-vocabulaire-short.vignette.webp",
+  "titre": "MAFATE dans une boîte : combien d'issues ? 📦 — 5e #Shorts",
+  "short": true,
+  "youtube": null
+ },
  "5e-relatif-nombre": {
   "fichier": "5e/maths/paysage/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre.mp4",
   "poster": "5e/maths/paysage/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre.png",
@@ -4471,6 +4551,118 @@
   "short": false,
   "youtube": "j-vrDltO9vA"
  },
+ "seconde-proba-arbre-chemins": {
+  "fichier": "seconde/maths/probabilites/10-arbre-chemins/eleveai-maths-seconde-proba-arbre-chemins.mp4",
+  "poster": "seconde/maths/probabilites/10-arbre-chemins/eleveai-maths-seconde-proba-arbre-chemins.png",
+  "vignette": "seconde/maths/probabilites/10-arbre-chemins/eleveai-maths-seconde-proba-arbre-chemins.vignette.webp",
+  "titre": "90 % + 80 % ? FAUX : 0,7 × 0,9 + 0,3 × 0,8 — Les chemins de l'arbre — épisode 10 · Maths 2de",
+  "short": false,
+  "youtube": null
+ },
+ "seconde-proba-arbre-chemins-short": {
+  "fichier": "seconde/maths/probabilites/10-arbre-chemins/eleveai-maths-seconde-proba-arbre-chemins-short.mp4",
+  "poster": "seconde/maths/probabilites/10-arbre-chemins/eleveai-maths-seconde-proba-arbre-chemins-short.png",
+  "vignette": "seconde/maths/probabilites/10-arbre-chemins/eleveai-maths-seconde-proba-arbre-chemins-short.vignette.webp",
+  "titre": "90 % et 80 % finissent… donc 85 % ? 🏃 — 2de #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "seconde-proba-arbre-pondere": {
+  "fichier": "seconde/maths/probabilites/09-arbre-pondere/eleveai-maths-seconde-proba-arbre-pondere.mp4",
+  "poster": "seconde/maths/probabilites/09-arbre-pondere/eleveai-maths-seconde-proba-arbre-pondere.png",
+  "vignette": "seconde/maths/probabilites/09-arbre-pondere/eleveai-maths-seconde-proba-arbre-pondere.vignette.webp",
+  "titre": "0,8 APRÈS R ? LE PIÈGE DE L'ARBRE — L'arbre pondéré — épisode 9 · Maths 2de",
+  "short": false,
+  "youtube": null
+ },
+ "seconde-proba-arbre-pondere-short": {
+  "fichier": "seconde/maths/probabilites/09-arbre-pondere/eleveai-maths-seconde-proba-arbre-pondere-short.mp4",
+  "poster": "seconde/maths/probabilites/09-arbre-pondere/eleveai-maths-seconde-proba-arbre-pondere-short.png",
+  "vignette": "seconde/maths/probabilites/09-arbre-pondere/eleveai-maths-seconde-proba-arbre-pondere-short.vignette.webp",
+  "titre": "90 % des Réunionnais finissent… et l'inverse ? 🏃 — 2de #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "seconde-proba-calculer": {
+  "fichier": "seconde/maths/probabilites/03-calculer/eleveai-maths-seconde-proba-calculer.mp4",
+  "poster": "seconde/maths/probabilites/03-calculer/eleveai-maths-seconde-proba-calculer.png",
+  "vignette": "seconde/maths/probabilites/03-calculer/eleveai-maths-seconde-proba-calculer.vignette.webp",
+  "titre": "2 couleurs sur 4… pourtant pas 1 chance sur 2 ! — Calculer une probabilité — épisode 3 · Maths 2de",
+  "short": false,
+  "youtube": null
+ },
+ "seconde-proba-calculer-short": {
+  "fichier": "seconde/maths/probabilites/03-calculer/eleveai-maths-seconde-proba-calculer-short.mp4",
+  "poster": "seconde/maths/probabilites/03-calculer/eleveai-maths-seconde-proba-calculer-short.png",
+  "vignette": "seconde/maths/probabilites/03-calculer/eleveai-maths-seconde-proba-calculer-short.vignette.webp",
+  "titre": "1 chance sur 2 ? Cette roue triche ! 🎡 — 2de #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "seconde-proba-conditionnelle": {
+  "fichier": "seconde/maths/probabilites/08-conditionnelle/eleveai-maths-seconde-proba-conditionnelle.mp4",
+  "poster": "seconde/maths/probabilites/08-conditionnelle/eleveai-maths-seconde-proba-conditionnelle.png",
+  "vignette": "seconde/maths/probabilites/08-conditionnelle/eleveai-maths-seconde-proba-conditionnelle.vignette.webp",
+  "titre": "40 en retard sur 400… mais 160 au car ! — Probabilité conditionnelle — épisode 8 · Maths 2de",
+  "short": false,
+  "youtube": null
+ },
+ "seconde-proba-conditionnelle-short": {
+  "fichier": "seconde/maths/probabilites/08-conditionnelle/eleveai-maths-seconde-proba-conditionnelle-short.mp4",
+  "poster": "seconde/maths/probabilites/08-conditionnelle/eleveai-maths-seconde-proba-conditionnelle-short.png",
+  "vignette": "seconde/maths/probabilites/08-conditionnelle/eleveai-maths-seconde-proba-conditionnelle-short.vignette.webp",
+  "titre": "40 sur 400 = 10 % ? NON ! 🚌 — 2de #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "seconde-proba-contraire": {
+  "fichier": "seconde/maths/probabilites/04-contraire/eleveai-maths-seconde-proba-contraire.mp4",
+  "poster": "seconde/maths/probabilites/04-contraire/eleveai-maths-seconde-proba-contraire.png",
+  "vignette": "seconde/maths/probabilites/04-contraire/eleveai-maths-seconde-proba-contraire.vignette.webp",
+  "titre": "Le contraire de « au moins un 6 » n'est PAS « deux 6 » — Événement contraire — épisode 4 · Maths 2de",
+  "short": false,
+  "youtube": null
+ },
+ "seconde-proba-contraire-short": {
+  "fichier": "seconde/maths/probabilites/04-contraire/eleveai-maths-seconde-proba-contraire-short.mp4",
+  "poster": "seconde/maths/probabilites/04-contraire/eleveai-maths-seconde-proba-contraire-short.png",
+  "vignette": "seconde/maths/probabilites/04-contraire/eleveai-maths-seconde-proba-contraire-short.vignette.webp",
+  "titre": "Au moins un 6 avec deux dés : plus ou moins de 1 chance sur 3 ? 🎲 — 2de #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "seconde-proba-faux-positifs": {
+  "fichier": "seconde/maths/probabilites/12-faux-positifs/eleveai-maths-seconde-proba-faux-positifs.mp4",
+  "poster": "seconde/maths/probabilites/12-faux-positifs/eleveai-maths-seconde-proba-faux-positifs.png",
+  "vignette": "seconde/maths/probabilites/12-faux-positifs/eleveai-maths-seconde-proba-faux-positifs.vignette.webp",
+  "titre": "Il sonne : 99 % de chances que ce soit grave ? NON, 1 sur 6 — Faux positifs — épisode 12 · Maths 2de",
+  "short": false,
+  "youtube": null
+ },
+ "seconde-proba-faux-positifs-short": {
+  "fichier": "seconde/maths/probabilites/12-faux-positifs/eleveai-maths-seconde-proba-faux-positifs-short.mp4",
+  "poster": "seconde/maths/probabilites/12-faux-positifs/eleveai-maths-seconde-proba-faux-positifs-short.png",
+  "vignette": "seconde/maths/probabilites/12-faux-positifs/eleveai-maths-seconde-proba-faux-positifs-short.vignette.webp",
+  "titre": "Le portique sonne… grave ? 🛄 — 2de #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "seconde-proba-formule-union": {
+  "fichier": "seconde/maths/probabilites/06-formule-union/eleveai-maths-seconde-proba-formule-union.mp4",
+  "poster": "seconde/maths/probabilites/06-formule-union/eleveai-maths-seconde-proba-formule-union.png",
+  "vignette": "seconde/maths/probabilites/06-formule-union/eleveai-maths-seconde-proba-formule-union.vignette.webp",
+  "titre": "60 % + 30 % = 90 % ? FAUX ! — La formule de la réunion — épisode 6 · Maths 2de",
+  "short": false,
+  "youtube": null
+ },
+ "seconde-proba-formule-union-short": {
+  "fichier": "seconde/maths/probabilites/06-formule-union/eleveai-maths-seconde-proba-formule-union-short.mp4",
+  "poster": "seconde/maths/probabilites/06-formule-union/eleveai-maths-seconde-proba-formule-union-short.png",
+  "vignette": "seconde/maths/probabilites/06-formule-union/eleveai-maths-seconde-proba-formule-union-short.vignette.webp",
+  "titre": "Sport ou musique : 90 % ? 🎵 — 2de #Shorts",
+  "short": true,
+  "youtube": null
+ },
  "seconde-proba-modele": {
   "fichier": "seconde/maths/probabilites/02-loi-de-probabilite/eleveai-maths-seconde-proba-modele.mp4",
   "poster": "seconde/maths/probabilites/02-loi-de-probabilite/eleveai-maths-seconde-proba-modele.png",
@@ -4484,6 +4676,54 @@
   "poster": "seconde/maths/probabilites/02-loi-de-probabilite/eleveai-maths-seconde-proba-modele-short.png",
   "vignette": "seconde/maths/probabilites/02-loi-de-probabilite/eleveai-maths-seconde-proba-modele-short.vignette.webp",
   "titre": "Le 6 sort 2 fois plus : 1 chance sur 6 ? 🎲 — 2de #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "seconde-proba-reunion": {
+  "fichier": "seconde/maths/probabilites/05-reunion-intersection/eleveai-maths-seconde-proba-reunion.mp4",
+  "poster": "seconde/maths/probabilites/05-reunion-intersection/eleveai-maths-seconde-proba-reunion.png",
+  "vignette": "seconde/maths/probabilites/05-reunion-intersection/eleveai-maths-seconde-proba-reunion.vignette.webp",
+  "titre": "Cœur OU figure : 8 + 12 = 20 ? FAUX ! — Réunion et intersection — épisode 5 · Maths 2de",
+  "short": false,
+  "youtube": null
+ },
+ "seconde-proba-reunion-short": {
+  "fichier": "seconde/maths/probabilites/05-reunion-intersection/eleveai-maths-seconde-proba-reunion-short.mp4",
+  "poster": "seconde/maths/probabilites/05-reunion-intersection/eleveai-maths-seconde-proba-reunion-short.png",
+  "vignette": "seconde/maths/probabilites/05-reunion-intersection/eleveai-maths-seconde-proba-reunion-short.vignette.webp",
+  "titre": "20 cartes ? NON : 17 ! 🃏 — 2de #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "seconde-proba-tableau-arbre": {
+  "fichier": "seconde/maths/probabilites/07-tableau-arbre/eleveai-maths-seconde-proba-tableau-arbre.mp4",
+  "poster": "seconde/maths/probabilites/07-tableau-arbre/eleveai-maths-seconde-proba-tableau-arbre.png",
+  "vignette": "seconde/maths/probabilites/07-tableau-arbre/eleveai-maths-seconde-proba-tableau-arbre.vignette.webp",
+  "titre": "Pile puis rouge : 1/2 + 1/3 ? FAUX, on multiplie ! — Tableau ou arbre — épisode 7 · Maths 2de",
+  "short": false,
+  "youtube": null
+ },
+ "seconde-proba-tableau-arbre-short": {
+  "fichier": "seconde/maths/probabilites/07-tableau-arbre/eleveai-maths-seconde-proba-tableau-arbre-short.mp4",
+  "poster": "seconde/maths/probabilites/07-tableau-arbre/eleveai-maths-seconde-proba-tableau-arbre-short.png",
+  "vignette": "seconde/maths/probabilites/07-tableau-arbre/eleveai-maths-seconde-proba-tableau-arbre-short.vignette.webp",
+  "titre": "Pile puis rouge : 1/2 + 1/3 ? 🪙 — 2de #Shorts",
+  "short": true,
+  "youtube": null
+ },
+ "seconde-proba-tableau-croise": {
+  "fichier": "seconde/maths/probabilites/11-tableau-croise/eleveai-maths-seconde-proba-tableau-croise.mp4",
+  "poster": "seconde/maths/probabilites/11-tableau-croise/eleveai-maths-seconde-proba-tableau-croise.png",
+  "vignette": "seconde/maths/probabilites/11-tableau-croise/eleveai-maths-seconde-proba-tableau-croise.vignette.webp",
+  "titre": "0,25 ou 0,6 ? LIGNE OU COLONNE — Le tableau croisé — épisode 11 · Maths 2de",
+  "short": false,
+  "youtube": null
+ },
+ "seconde-proba-tableau-croise-short": {
+  "fichier": "seconde/maths/probabilites/11-tableau-croise/eleveai-maths-seconde-proba-tableau-croise-short.mp4",
+  "poster": "seconde/maths/probabilites/11-tableau-croise/eleveai-maths-seconde-proba-tableau-croise-short.png",
+  "vignette": "seconde/maths/probabilites/11-tableau-croise/eleveai-maths-seconde-proba-tableau-croise-short.vignette.webp",
+  "titre": "25 % des abîmées ? NON ! 🍒 — 2de #Shorts",
   "short": true,
   "youtube": null
  },
