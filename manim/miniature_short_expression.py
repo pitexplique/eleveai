@@ -513,6 +513,29 @@ SHORTS["eleveai-maths-6e-duree-temps-short-hugo-deck-diagonale"] = {
 CEINTURE_SHORT["eleveai-maths-6e-duree-temps-short-hugo-deck-diagonale"] = "jaune"
 
 
+# 20/10/2026 — même TEST, suite : la série PROBABILITÉS 5e, ses 5 shorts (1 et 3 blanche, 2, 4, 5 jaune).
+_PROBA_TEST_5E = [
+    ("5e", "5E", "5e/maths/probabilites/01-vocabulaire", "vocabulaire", "blanche", ["MAFATE", "DANS UNE BOÎTE"],
+     "combien d'issues ?", [("5 lettres…", 100, BLEU), ("A : 2 papiers", 96, ORANGE), ("6 issues !", 110, VERT)], 88),
+    ("5e", "5E", "5e/maths/probabilites/02-issues", "issue", "jaune", ["UNE DE CHAQUE", "= 1 SUR 3 ?"],
+     "deux pièces", [("1 sur 3 ?", 110, ROUGE), ("PF et FP", 100, BLEU), ("2 sur 4 !", 110, VERT)], 84),
+    ("5e", "5E", "5e/maths/probabilites/03-equiprobabilite", "equiprobabilite", "blanche", ["UNE", "PUNAISE"],
+     "pointe en haut ou en bas ?", [("2 issues…", 100, BLEU), ("1/2 chacune ?", 96, ROUGE), ("pas forcément !", 90, VERT)], 100),
+    ("5e", "5E", "5e/maths/probabilites/04-calculer", "calculer", "jaune", ["LE GROS LOT", "1 PART SUR 8"],
+     "tes chances en % ?", [("1/8", 120, BLEU), ("= 0,125", 110, ORANGE), ("= 12,5 % !", 110, VERT)], 88),
+    ("5e", "5E", "5e/maths/probabilites/05-defis", "defi", "jaune", ["AU MOINS", "UN PILE ?"],
+     "deux pièces : tu paries ?", [("4 issues", 110, BLEU), ("FF : sans pile", 96, ORANGE), ("3 sur 4 !", 110, VERT)], 96),
+]
+for _t in _PROBA_TEST_5E:
+    _cl, _bd, _sortie, _ep, _c, _titre, _sous, _lg = _t[:8]
+    _nom = f"eleveai-maths-{_cl}-proba-{_ep}-short"
+    SHORTS[_nom] = {
+        "badge": f"PROBABILITÉS · {_bd}", "titre": _titre, "taille": _t[8] if len(_t) > 8 else 92, "sous": _sous,
+        "taille_sous": 44, "couleur_sous": ORANGE, "accroche": _acc(_lg), "dossier": f"{_cl}/maths/fr", "sortie": _sortie,
+    }
+    CEINTURE_SHORT[_nom] = _c
+
+
 def main():
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     filtre = sys.argv[1] if len(sys.argv) > 1 else ""

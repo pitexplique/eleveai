@@ -18373,6 +18373,432 @@
         "ceinture jaune",
         "Shorts"
       ]
+    },
+    {
+      "id": "5e-proba-vocabulaire",
+      "notionId": "proba_experience",
+      "microId": "proba_vocabulaire",
+      "classe": "5e",
+      "ceinture": "jaune",
+      "serie": "Maths 5e",
+      "type": "longue",
+      "fichier": "5e/maths/probabilites/01-vocabulaire/eleveai-maths-5e-proba-vocabulaire.mp4",
+      "miniature": "5e/maths/probabilites/01-vocabulaire/eleveai-maths-5e-proba-vocabulaire.png",
+      "titre": "MAFATE : 5 lettres… mais 6 issues ! — Les mots des probabilités — épisode 1 · Maths 5e",
+      "accroche": "À la kermesse, on tire un papier dans une boîte. Sur chaque papier, une lettre du mot MAFATE. Expérience aléatoire, issue, événement : les mots des probabilités.\n\nDans cette vidéo :\n• une expérience aléatoire : on connaît tous les résultats possibles, mais pas celui qui va sortir\n• les issues : les résultats possibles ; ici 6 papiers, M, A, F, A, T, E, donc 6 issues\n• un événement : « tirer une voyelle », réalisé par A, A et E, 3 issues sur 6\n• certain, c'est 1 ; impossible, c'est 0\n• le piège : le A est écrit deux fois ; on compte les papiers, pas les lettres différentes\n\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : même boîte, l'événement « tirer une consonne » : quelles issues le réalisent, et combien ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/proba-experience\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/proba-experience\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=proba_experience&microId=proba_vocabulaire&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "À la kermesse : les mots des probabilités"
+        ],
+        [
+          "00:18",
+          "Une expérience aléatoire, les issues"
+        ],
+        [
+          "00:38",
+          "Un événement"
+        ],
+        [
+          "00:49",
+          "Certain ou impossible"
+        ],
+        [
+          "01:00",
+          "Le piège : 6 issues, pas 5"
+        ],
+        [
+          "01:11",
+          "À toi de jouer"
+        ],
+        [
+          "01:25",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/5e/proba-experience",
+      "tags": [
+        "expérience aléatoire",
+        "issue",
+        "événement",
+        "certain",
+        "impossible",
+        "MAFATE",
+        "La Réunion",
+        "probabilités",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "5e-proba-vocabulaire-short",
+      "notionId": "proba_experience",
+      "microId": "proba_vocabulaire",
+      "classe": "5e",
+      "ceinture": "blanche",
+      "serie": "Maths 5e",
+      "type": "short",
+      "renvoie_vers": "5e-proba-vocabulaire",
+      "fichier": "5e/maths/probabilites/01-vocabulaire/eleveai-maths-5e-proba-vocabulaire-short.mp4",
+      "miniature": "5e/maths/probabilites/01-vocabulaire/eleveai-maths-5e-proba-vocabulaire-short.png",
+      "titre": "MAFATE dans une boîte : combien d'issues ? 📦 — 5e #Shorts",
+      "accroche": "Les lettres du mot MAFATE dans une boîte, une par papier. Combien d'issues ? 5 lettres différentes… mais 6 papiers ! Le A est là deux fois : 6 issues.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : avec les lettres du mot CILAOS, combien de chances de tirer une voyelle ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=proba_experience&microId=proba_vocabulaire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #5e #collège",
+      "tags": [
+        "issues",
+        "MAFATE",
+        "piège",
+        "probabilités",
+        "maths 5e",
+        "5e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "5e-proba-issue",
+      "notionId": "proba_experience",
+      "microId": "proba_issue",
+      "classe": "5e",
+      "ceinture": "jaune",
+      "serie": "Maths 5e",
+      "type": "longue",
+      "fichier": "5e/maths/probabilites/02-issues/eleveai-maths-5e-proba-issue.mp4",
+      "miniature": "5e/maths/probabilites/02-issues/eleveai-maths-5e-proba-issue.png",
+      "titre": "Deux pièces : 3 issues ? Non, 4 ! — Lister toutes les issues — épisode 2 · Maths 5e",
+      "accroche": "On lance deux pièces : une pièce de 1 euro et une pièce de 2 euros. Que peut-il arriver ? On liste toutes les issues, sans en oublier.\n\nDans cette vidéo :\n• un arbre : la première pièce, pile ou face, puis pour chacune la deuxième pièce\n• on lit les chemins : pile-pile, pile-face, face-pile, face-face, 4 issues\n• avec deux dés, un tableau : 6 lignes, 6 colonnes, 36 issues\n• le piège : « une de chaque », c'est 2 chemins, pile-face et face-pile\n\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : on lance deux pièces : combien d'issues donnent exactement un pile ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/proba-experience\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/proba-experience\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=proba_experience&microId=proba_issue&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Deux pièces : lister toutes les issues"
+        ],
+        [
+          "00:12",
+          "On fait un arbre, on lit les chemins"
+        ],
+        [
+          "00:31",
+          "Deux dés : un tableau"
+        ],
+        [
+          "00:41",
+          "Le piège : « une de chaque »"
+        ],
+        [
+          "00:53",
+          "À toi de jouer"
+        ],
+        [
+          "01:05",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/5e/proba-experience",
+      "tags": [
+        "issues",
+        "arbre",
+        "tableau",
+        "deux pièces",
+        "deux dés",
+        "pile ou face",
+        "probabilités",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "5e-proba-issue-short",
+      "notionId": "proba_experience",
+      "microId": "proba_issue",
+      "classe": "5e",
+      "ceinture": "jaune",
+      "serie": "Maths 5e",
+      "type": "short",
+      "renvoie_vers": "5e-proba-issue",
+      "fichier": "5e/maths/probabilites/02-issues/eleveai-maths-5e-proba-issue-short.mp4",
+      "miniature": "5e/maths/probabilites/02-issues/eleveai-maths-5e-proba-issue-short.png",
+      "titre": "Une de chaque = 1 chance sur 3 ? FAUX 🪙 — 5e #Shorts",
+      "accroche": "Deux pièces. Deux piles, deux faces, ou une de chaque : 1 chance sur 3 chacun ? Non ! L'arbre donne 4 chemins. « Une de chaque », c'est pile-face ET face-pile : 2 sur 4, un demi !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : avec deux pièces, deux faces, c'est combien sur 4 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=proba_experience&microId=proba_issue&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #5e #collège",
+      "tags": [
+        "arbre",
+        "deux pièces",
+        "piège",
+        "probabilités",
+        "maths 5e",
+        "5e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "5e-proba-equiprobabilite",
+      "notionId": "proba_experience",
+      "microId": "proba_equiprobabilite",
+      "classe": "5e",
+      "ceinture": "jaune",
+      "serie": "Maths 5e",
+      "type": "longue",
+      "fichier": "5e/maths/probabilites/03-equiprobabilite/eleveai-maths-5e-proba-equiprobabilite.mp4",
+      "miniature": "5e/maths/probabilites/03-equiprobabilite/eleveai-maths-5e-proba-equiprobabilite.png",
+      "titre": "2 issues = 1/2 chacune ? FAUX ! — L'équiprobabilité — épisode 3 · Maths 5e",
+      "accroche": "Un dé bien équilibré : chaque face a la même chance de sortir, 1 sur 6. Mais toutes les issues ont-elles toujours la même chance ?\n\nDans cette vidéo :\n• équiprobable : toutes les issues ont la même probabilité\n• une pièce équilibrée, une roue de 4 parts égales : équiprobable\n• une roue avec une grande part rouge, la moitié de la roue : pas équiprobable\n• le piège : un dé truqué, une punaise ; deux issues ne veut pas dire un demi chacune\n\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : un sac de 3 billes rouges et 1 bille bleue : les issues « rouge » et « bleue » sont-elles équiprobables ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/proba-experience\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/proba-experience\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=proba_experience&microId=proba_equiprobabilite&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Le dé bien équilibré : équiprobable ?"
+        ],
+        [
+          "00:13",
+          "La définition ; pièce et roue à parts égales"
+        ],
+        [
+          "00:33",
+          "Des parts inégales"
+        ],
+        [
+          "00:46",
+          "Le piège : dé truqué, punaise"
+        ],
+        [
+          "01:00",
+          "Défi : le sac"
+        ],
+        [
+          "01:16",
+          "Correction"
+        ],
+        [
+          "01:31",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/5e/proba-experience",
+      "tags": [
+        "équiprobabilité",
+        "équiprobable",
+        "dé équilibré",
+        "roue",
+        "punaise",
+        "dé truqué",
+        "probabilités",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "5e-proba-equiprobabilite-short",
+      "notionId": "proba_experience",
+      "microId": "proba_equiprobabilite",
+      "classe": "5e",
+      "ceinture": "blanche",
+      "serie": "Maths 5e",
+      "type": "short",
+      "renvoie_vers": "5e-proba-equiprobabilite",
+      "fichier": "5e/maths/probabilites/03-equiprobabilite/eleveai-maths-5e-proba-equiprobabilite-short.mp4",
+      "miniature": "5e/maths/probabilites/03-equiprobabilite/eleveai-maths-5e-proba-equiprobabilite-short.png",
+      "titre": "Une punaise : pointe en haut ou en bas, 1/2 chacune ? 📌 — 5e #Shorts",
+      "accroche": "Une punaise : pointe en haut, ou pointe en bas. Un demi chacune ? Pas forcément ! Deux issues, mais pas la même chance. On ne le sait qu'en lançant beaucoup de fois.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : d'après toi, la punaise tombe plus souvent pointe en haut ou pointe en bas ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=proba_experience&microId=proba_equiprobabilite&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #5e #collège",
+      "tags": [
+        "équiprobable",
+        "punaise",
+        "piège",
+        "probabilités",
+        "maths 5e",
+        "5e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "5e-proba-calculer",
+      "notionId": "proba_experience",
+      "microId": "proba_calculer",
+      "classe": "5e",
+      "ceinture": "jaune",
+      "serie": "Maths 5e",
+      "type": "longue",
+      "fichier": "5e/maths/probabilites/04-calculer/eleveai-maths-5e-proba-calculer.mp4",
+      "miniature": "5e/maths/probabilites/04-calculer/eleveai-maths-5e-proba-calculer.png",
+      "titre": "1 part sur 8… mais si la part est plus grande ? — Calculer une probabilité — épisode 4 · Maths 5e",
+      "accroche": "Une roue de kermesse de 8 parts égales : 3 rouges, 4 bleues, 1 dorée. La dorée fait gagner le gros lot. Quelles sont tes chances ?\n\nDans cette vidéo :\n• si les issues sont équiprobables : favorables divisé par possibles\n• le gros lot : 1 part dorée sur 8, c'est 1/8 ; le bleu : 4 sur 8, un demi\n• trois écritures : 1/8, 0,125 ou 12,5 %\n• le piège : si la part dorée était deux fois plus grande, 1/8 serait faux ; il faut des parts égales\n\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : une boîte de 20 bonbons, dont 5 au coco : quelle est la probabilité de tirer un bonbon au coco ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/proba-experience\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/proba-experience\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=proba_experience&microId=proba_calculer&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "La roue de kermesse : calculer une probabilité"
+        ],
+        [
+          "00:17",
+          "La règle : favorables sur possibles"
+        ],
+        [
+          "00:28",
+          "On calcule : 1/8 et 1/2"
+        ],
+        [
+          "00:41",
+          "Fraction, décimal, pourcentage"
+        ],
+        [
+          "00:53",
+          "Le piège : des parts égales"
+        ],
+        [
+          "01:05",
+          "Défi : les bonbons au coco"
+        ],
+        [
+          "01:20",
+          "Correction"
+        ],
+        [
+          "01:30",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/5e/proba-experience",
+      "tags": [
+        "calculer une probabilité",
+        "favorables sur possibles",
+        "fraction",
+        "pourcentage",
+        "roue",
+        "kermesse",
+        "probabilités",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "5e-proba-calculer-short",
+      "notionId": "proba_experience",
+      "microId": "proba_calculer",
+      "classe": "5e",
+      "ceinture": "jaune",
+      "serie": "Maths 5e",
+      "type": "short",
+      "renvoie_vers": "5e-proba-calculer",
+      "fichier": "5e/maths/probabilites/04-calculer/eleveai-maths-5e-proba-calculer-short.mp4",
+      "miniature": "5e/maths/probabilites/04-calculer/eleveai-maths-5e-proba-calculer-short.png",
+      "titre": "Le gros lot : 12,5 % de chances ? 🎡 — 5e #Shorts",
+      "accroche": "Le gros lot : 1 part dorée sur 8. Tes chances, en pourcentage ? 1 sur 8, c'est 0,125 : 12,5 %. Et le bleu, 4 parts sur 8 : 50 % !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : 3 parts rouges sur 8, c'est combien en pourcentage ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=proba_experience&microId=proba_calculer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #5e #collège",
+      "tags": [
+        "pourcentage",
+        "roue",
+        "gros lot",
+        "probabilités",
+        "maths 5e",
+        "5e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "5e-proba-defi",
+      "notionId": "proba_experience",
+      "microId": "proba_defi",
+      "classe": "5e",
+      "ceinture": "jaune",
+      "serie": "Maths 5e",
+      "type": "longue",
+      "fichier": "5e/maths/probabilites/05-defis/eleveai-maths-5e-proba-defi.mp4",
+      "miniature": "5e/maths/probabilites/05-defis/eleveai-maths-5e-proba-defi.png",
+      "titre": "Deux pièces : au moins un pile, ce n'est PAS 1 sur 2 — Les défis — épisode 5 · Maths 5e",
+      "accroche": "Les défis des probabilités de 5e : trois défis. À chaque fois, mets pause et cherche avant la réponse !\n\nDans cette vidéo :\n• défi 1 : les lettres du mot CILAOS, une par papier : la probabilité de tirer une voyelle ?\n• défi 2 : deux pièces, la probabilité d'obtenir au moins un pile ?\n• défi 3 : un sac de 12 billes, 6 rouges, 4 bleues, 2 vertes : la couleur la plus probable ?\n• compter les issues, avec un arbre si besoin, vérifier l'équiprobabilité, puis favorables sur possibles\n\n🥋 Ceinture jaune.\nTrois défis, chacun avec sa correction.\nC'est le dernier épisode : la fin de la série Probabilités de la 5e !\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/proba-experience\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/proba-experience\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=proba_experience&microId=proba_defi&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Les défis des probabilités : trois défis"
+        ],
+        [
+          "00:10",
+          "Défi 1 : les lettres de CILAOS"
+        ],
+        [
+          "00:24",
+          "Correction 1"
+        ],
+        [
+          "00:37",
+          "Défi 2 : deux pièces, au moins un pile"
+        ],
+        [
+          "00:49",
+          "Correction 2 : l'arbre"
+        ],
+        [
+          "01:04",
+          "Défi 3 : le sac de 12 billes"
+        ],
+        [
+          "01:19",
+          "Correction 3 et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/5e/proba-experience",
+      "tags": [
+        "défi",
+        "au moins un",
+        "arbre",
+        "deux pièces",
+        "sac de billes",
+        "CILAOS",
+        "probabilités",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "5e-proba-defi-short",
+      "notionId": "proba_experience",
+      "microId": "proba_defi",
+      "classe": "5e",
+      "ceinture": "jaune",
+      "serie": "Maths 5e",
+      "type": "short",
+      "renvoie_vers": "5e-proba-defi",
+      "fichier": "5e/maths/probabilites/05-defis/eleveai-maths-5e-proba-defi-short.mp4",
+      "miniature": "5e/maths/probabilites/05-defis/eleveai-maths-5e-proba-defi-short.png",
+      "titre": "Au moins un pile… tu paries ? 🪙 — 5e #Shorts",
+      "accroche": "Deux pièces. Au moins un pile : tu paries ? 4 issues, une seule sans pile : face-face. Donc au moins un pile : 3 sur 4. C'est très probable !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : avec trois pièces, au moins un pile, c'est combien sur 8 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=proba_experience&microId=proba_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #5e #défi",
+      "tags": [
+        "défi",
+        "au moins un",
+        "pile ou face",
+        "probabilités",
+        "maths 5e",
+        "5e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
     }
   ]
 }

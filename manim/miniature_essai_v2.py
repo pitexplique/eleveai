@@ -1657,6 +1657,37 @@ ESSAIS.update({
 })
 
 
+# 20/10/2026 — même TEST, suite : la série PROBABILITÉS 5e, 5 épisodes (paysages jaunes).
+_P5 = "5e/maths/probabilites/"
+ESSAIS.update({
+    "eleveai-maths-5e-proba-vocabulaire": {
+        "badge": "MATHS · 5E", "duree": "EN 2 MIN", "titre": ["LES MOTS DES", "PROBABILITÉS"],
+        "accroche": _piege_test("jaune", "MAFATE : 5 lettres…", "non : 6 papiers, 6 issues !", 76),
+        "dossier": _P5 + "01-vocabulaire",
+    },
+    "eleveai-maths-5e-proba-issue": {
+        "badge": "MATHS · 5E", "duree": "EN 2 MIN", "titre": ["LISTER", "LES ISSUES"],
+        "accroche": _piege_test("jaune", "Deux pièces : 3 issues ?", "non : l'arbre en donne 4 !"),
+        "dossier": _P5 + "02-issues",
+    },
+    "eleveai-maths-5e-proba-equiprobabilite": {
+        "badge": "MATHS · 5E", "duree": "EN 2 MIN", "titre": ["COMPRENDRE", "L'ÉQUIPROBABILITÉ"],
+        "accroche": _piege_test("jaune", "2 issues = 1/2 chacune ?", "non : pas la punaise !"),
+        "dossier": _P5 + "03-equiprobabilite",
+    },
+    "eleveai-maths-5e-proba-calculer": {
+        "badge": "MATHS · 5E", "duree": "EN 2 MIN", "titre": ["CALCULER UNE", "PROBABILITÉ"],
+        "accroche": _piege_test("jaune", "1 part sur 8 = 1/8 ?", "oui… si les parts sont égales !"),
+        "dossier": _P5 + "04-calculer",
+    },
+    "eleveai-maths-5e-proba-defi": {
+        "badge": "MATHS · 5E", "duree": "EN 2 MIN", "titre": ["LES DÉFIS", "DES PROBABILITÉS"],
+        "accroche": _piege_test("jaune", "Au moins un pile : 1 sur 2 ?", "non : 3 sur 4 !"),
+        "dossier": _P5 + "05-defis",
+    },
+})
+
+
 def construire(nom, spec):
     img = fond()
     d = ImageDraw.Draw(img)
