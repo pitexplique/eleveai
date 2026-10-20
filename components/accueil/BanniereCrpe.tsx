@@ -23,6 +23,12 @@
 // bannière défile, l'en-tête reste. Sur les autres pages, rien ne change.
 // ⚠️ Campagne datée (1re séance le 24/10) : quand le groupe est complet,
 // retirer la ligne <BanniereCrpe /> du layout suffit.
+//
+// ⭐ 20/10/2026 : AUCUN INSCRIT au samedi de Saint-Pierre. Frédéric : « je
+// pense qu'à terme je proposerai en visio », « cours en visio oui ». La bande ne
+// promet donc plus le samedi : les deux tests, le suivi au quotidien, et la
+// visio annoncée SANS DATE (« en préparation »). ⛔ Le mot « gratuit » ne décrit
+// pas l'offre (règle du 22/08) : la chose se dit par le verbe.
 
 import Image from "next/image";
 import Link from "next/link";
@@ -38,7 +44,8 @@ export default function BanniereCrpe({ place }: { place: "haut" | "colonnes" }) 
     // commits tu avais fait une bannière d'une bonne hauteur en fond bleu
     // foncé ». Retour à la BANDE BLEU NUIT du 16/10 (commit 05755453), en plus
     // serrée : Ti Margo plus petit, et sur grand écran les boutons À DROITE du
-    // texte au lieu d'en dessous. Le contenu (deux tests, samedi, suivi) reste.
+    // texte au lieu d'en dessous. Le contenu : deux tests et le suivi (le samedi
+    // est retiré le 20/10, voir en tête de fichier).
     // ⭐ 17/10 encore : « ce qui me dérange, c'est la couleur ». Le bleu nuit
     // part : la bande prend les tons CHAUDS DES PUBS (ambre → rose pâle, texte
     // bleu nuit, boutons orange), la hauteur compacte reste.
@@ -66,11 +73,11 @@ export default function BanniereCrpe({ place }: { place: "haut" | "colonnes" }) 
               {/* ⚠️ Deux longueurs : la phrase entière doublerait la hauteur sur
                   un téléphone. */}
               <span className="sm:hidden">
-                Tests gratuits, puis le samedi (dès le 24/10) ou un suivi au quotidien.
+                Deux tests pour se situer, un suivi au quotidien. Cours en visio en préparation.
               </span>
               <span className="hidden sm:inline">
-                Tests gratuits en maths et en orthographe, puis préparation le
-                samedi matin à Saint-Pierre (dès le 24 octobre) ou suivi au quotidien.
+                Deux tests pour se situer en maths et en orthographe (personne ne
+                paie), un suivi au quotidien, et des cours en visio en préparation.
               </span>
             </p>
           </div>
@@ -90,14 +97,6 @@ export default function BanniereCrpe({ place }: { place: "haut" | "colonnes" }) 
               className="rounded-full bg-orange-500 px-3 py-1 text-xs font-black text-white transition hover:bg-orange-400"
             >
               Test d&apos;orthographe
-            </Link>
-            <Link
-              prefetch={false}
-              href="/formation-crpe?from=accueil"
-              onClick={() => track("accueil_bande_crpe", { lien: "formation" })}
-              className="rounded-full bg-white px-3 py-1 text-xs font-black text-[#041B33] ring-1 ring-slate-300 transition hover:bg-slate-50"
-            >
-              Le samedi →
             </Link>
             <Link
               prefetch={false}
