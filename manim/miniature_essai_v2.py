@@ -1688,6 +1688,35 @@ ESSAIS.update({
 })
 
 
+# 20/10/2026 — même TEST, suite : PROBABILITÉS 2de, épisodes 3 à 12 (paysages bleues).
+_P2 = "seconde/maths/probabilites/"
+for _nom, _dos, _titre, _haut, _bas, _duree in [
+    ("calculer", "03-calculer", ["CALCULER UNE", "PROBABILITÉ"], "2 couleurs sur 4 = 1/2 ?", "non : 0,4 + 0,15 = 0,55", "EN 2 MIN"),
+    ("contraire", "04-contraire", ["COMPRENDRE L'ÉVÉNEMENT", "CONTRAIRE"], "Contraire d'« au moins un 6 » ?",
+     "« aucun 6 », pas « deux 6 » !", "EN 2 MIN"),
+    ("reunion", "05-reunion-intersection", ["COMPRENDRE", "INTER ET UNION"], "Cœur OU figure : 8 + 12 = 20 ?",
+     "non : 17, on ne compte pas 2 fois", "EN 2 MIN"),
+    ("formule-union", "06-formule-union", ["LA FORMULE", "DE LA RÉUNION"], "60 % + 30 % = 90 % ?",
+     "non : 60 + 30 − 20 = 70 %", "EN 2 MIN"),
+    ("tableau-arbre", "07-tableau-arbre", ["TABLEAU", "OU ARBRE ?"], "Pile puis rouge : 1/2 + 1/3 ?",
+     "non : 1/2 × 1/3 = 1/6", "EN 2 MIN"),
+    ("conditionnelle", "08-conditionnelle", ["COMPRENDRE LES PROBAS", "CONDITIONNELLES"], "40 retards sur 400 = 10 % ?",
+     "non : 40 sur 160 = 25 %", "EN 2 MIN"),
+    ("arbre-pondere", "09-arbre-pondere", ["COMPRENDRE", "L'ARBRE PONDÉRÉ"], "0,8 sur une branche après R ?",
+     "non : 0,8, ce sont les autres !", "EN 2 MIN"),
+    ("arbre-chemins", "10-arbre-chemins", ["LES CHEMINS", "DE L'ARBRE"], "90 % et 80 % : donc 85 % ?",
+     "non : 0,7 × 0,9 + 0,3 × 0,8", "EN 2 MIN"),
+    ("tableau-croise", "11-tableau-croise", ["LIRE UN", "TABLEAU CROISÉ"], "0,25 ou 0,6 ?",
+     "ligne ou colonne : pas pareil !", "EN 2 MIN"),
+    ("faux-positifs", "12-faux-positifs", ["COMPRENDRE LES", "FAUX POSITIFS"], "Il sonne : grave à 99 % ?",
+     "non : 1 chance sur 6 !", "EN 3 MIN"),
+]:
+    ESSAIS[f"eleveai-maths-seconde-proba-{_nom}"] = {
+        "badge": "MATHS · 2DE", "duree": _duree, "titre": _titre,
+        "accroche": _piege_test("bleue", _haut, _bas), "dossier": _P2 + _dos,
+    }
+
+
 def construire(nom, spec):
     img = fond()
     d = ImageDraw.Draw(img)

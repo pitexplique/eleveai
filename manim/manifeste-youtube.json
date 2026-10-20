@@ -18799,6 +18799,874 @@
         "ceinture jaune",
         "Shorts"
       ]
+    },
+    {
+      "id": "seconde-proba-calculer",
+      "notionId": "probabilites_ensemble_fini",
+      "microId": "proba_calculer",
+      "classe": "seconde",
+      "ceinture": "bleue",
+      "serie": "Maths 2de",
+      "type": "longue",
+      "fichier": "seconde/maths/probabilites/03-calculer/eleveai-maths-seconde-proba-calculer.mp4",
+      "miniature": "seconde/maths/probabilites/03-calculer/eleveai-maths-seconde-proba-calculer.png",
+      "titre": "2 couleurs sur 4… pourtant pas 1 chance sur 2 ! — Calculer une probabilité — épisode 3 · Maths 2de",
+      "accroche": "Une roue de kermesse, mais ses parts ne sont pas égales : rouge 0,4, bleu 0,25, vert 0,2, jaune 0,15. Quelle est la probabilité de tomber sur une couleur chaude ?\n\nDans cette vidéo :\n• les issues ne sont pas équiprobables : on ne compte pas les parts, on additionne leurs probabilités\n• couleur chaude, rouge ou jaune : 0,4 + 0,15 = 0,55\n• on vérifie la loi : 0,4 + 0,25 + 0,2 + 0,15 = 1\n• le cas équiprobable : chaque issue vaut 1 sur n, additionner revient à compter, favorables sur possibles\n• le piège : dire 2 sur 4 parce que 2 couleurs sur 4 sont chaudes\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : avec la même roue, quelle est la probabilité de ne pas tomber sur le bleu ?\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/seconde/probabilites-ensemble-fini\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=probabilites_ensemble_fini&microId=proba_calculer&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Calculer une probabilité : la roue de kermesse"
+        ],
+        [
+          "00:20",
+          "La règle : on additionne ; couleur chaude 0,55"
+        ],
+        [
+          "00:42",
+          "On vérifie la loi"
+        ],
+        [
+          "00:53",
+          "Le cas équiprobable"
+        ],
+        [
+          "01:06",
+          "Le piège « 2 sur 4 »"
+        ],
+        [
+          "01:18",
+          "Défi"
+        ],
+        [
+          "01:29",
+          "Correction"
+        ],
+        [
+          "01:41",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "calculer une probabilité",
+        "somme des issues",
+        "loi de probabilité",
+        "équiprobabilité",
+        "roue",
+        "kermesse",
+        "probabilités",
+        "maths",
+        "seconde",
+        "2de",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "seconde-proba-calculer-short",
+      "notionId": "probabilites_ensemble_fini",
+      "microId": "proba_calculer",
+      "classe": "seconde",
+      "ceinture": "jaune",
+      "serie": "Maths 2de",
+      "type": "short",
+      "renvoie_vers": "seconde-proba-calculer",
+      "fichier": "seconde/maths/probabilites/03-calculer/eleveai-maths-seconde-proba-calculer-short.mp4",
+      "miniature": "seconde/maths/probabilites/03-calculer/eleveai-maths-seconde-proba-calculer-short.png",
+      "titre": "1 chance sur 2 ? Cette roue triche ! 🎡 — 2de #Shorts",
+      "accroche": "2 couleurs chaudes sur 4, donc 1 chance sur 2 ? Pas avec cette roue ! Rouge 0,4, jaune 0,15 : 0,55. On additionne les parts, on ne les compte pas.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : rouge 0,4 ou vert 0,2, ça fait combien ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=probabilites_ensemble_fini&microId=proba_calculer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #seconde #lycée",
+      "tags": [
+        "roue",
+        "somme des issues",
+        "piège",
+        "probabilités",
+        "maths seconde",
+        "seconde",
+        "lycée",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "seconde-proba-contraire",
+      "notionId": "probabilites_ensemble_fini",
+      "microId": "proba_evenement_contraire",
+      "classe": "seconde",
+      "ceinture": "bleue",
+      "serie": "Maths 2de",
+      "type": "longue",
+      "fichier": "seconde/maths/probabilites/04-contraire/eleveai-maths-seconde-proba-contraire.mp4",
+      "miniature": "seconde/maths/probabilites/04-contraire/eleveai-maths-seconde-proba-contraire.png",
+      "titre": "Le contraire de « au moins un 6 » n'est PAS « deux 6 » — Événement contraire — épisode 4 · Maths 2de",
+      "accroche": "On lance deux dés et on additionne. Quelle est la probabilité que le total soit différent de 12 ? Compter 35 cases, c'est long : on passe par le contraire.\n\nDans cette vidéo :\n• le contraire de « différent de 12 », c'est « égal à 12 » : une seule case, 6 et 6, 1 sur 36\n• P(A) = 1 − P(Ā) : 1 − 1/36 = 35/36\n• l'outil des « au moins un » : au moins un 6, le contraire c'est aucun 6, 25 cases sur 36, donc 11/36\n• le piège : le contraire de « au moins un 6 », ce n'est pas « deux 6 », c'est « aucun 6 »\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : avec deux dés, quelle est la probabilité que le total soit au moins 3 ?\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/seconde/probabilites-ensemble-fini\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=probabilites_ensemble_fini&microId=proba_evenement_contraire&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "L'événement contraire : deux dés, total différent de 12"
+        ],
+        [
+          "00:21",
+          "Le contraire : une seule case"
+        ],
+        [
+          "00:35",
+          "P(A) = 1 − P(Ā)"
+        ],
+        [
+          "00:48",
+          "Au moins un 6"
+        ],
+        [
+          "01:03",
+          "Le piège"
+        ],
+        [
+          "01:13",
+          "Défi : total au moins 3"
+        ],
+        [
+          "01:25",
+          "Correction"
+        ],
+        [
+          "01:36",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "événement contraire",
+        "au moins un",
+        "deux dés",
+        "1 moins P",
+        "complémentaire",
+        "probabilités",
+        "maths",
+        "seconde",
+        "2de",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "seconde-proba-contraire-short",
+      "notionId": "probabilites_ensemble_fini",
+      "microId": "proba_evenement_contraire",
+      "classe": "seconde",
+      "ceinture": "jaune",
+      "serie": "Maths 2de",
+      "type": "short",
+      "renvoie_vers": "seconde-proba-contraire",
+      "fichier": "seconde/maths/probabilites/04-contraire/eleveai-maths-seconde-proba-contraire-short.mp4",
+      "miniature": "seconde/maths/probabilites/04-contraire/eleveai-maths-seconde-proba-contraire-short.png",
+      "titre": "Au moins un 6 avec deux dés : plus ou moins de 1 chance sur 3 ? 🎲 — 2de #Shorts",
+      "accroche": "Deux dés. Au moins un 6 : plus ou moins de 1 chance sur 3 ? Compte le contraire : aucun 6, 25 cases sur 36. Donc au moins un 6 : 11 sur 36. Un peu moins de 1 sur 3 !\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : avec deux dés, au moins un 1, c'est combien sur 36 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=probabilites_ensemble_fini&microId=proba_evenement_contraire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #seconde #lycée",
+      "tags": [
+        "événement contraire",
+        "deux dés",
+        "au moins un",
+        "probabilités",
+        "maths seconde",
+        "seconde",
+        "lycée",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "seconde-proba-reunion",
+      "notionId": "probabilites_ensemble_fini",
+      "microId": "proba_reunion_intersection",
+      "classe": "seconde",
+      "ceinture": "bleue",
+      "serie": "Maths 2de",
+      "type": "longue",
+      "fichier": "seconde/maths/probabilites/05-reunion-intersection/eleveai-maths-seconde-proba-reunion.mp4",
+      "miniature": "seconde/maths/probabilites/05-reunion-intersection/eleveai-maths-seconde-proba-reunion.png",
+      "titre": "Cœur OU figure : 8 + 12 = 20 ? FAUX ! — Réunion et intersection — épisode 5 · Maths 2de",
+      "accroche": "On tire une carte dans un jeu de 32 cartes. A : « la carte est un cœur ». B : « la carte est une figure », valet, dame ou roi. Que veulent dire A ∩ B et A ∪ B ?\n\nDans cette vidéo :\n• A ∩ B, c'est ET : valet, dame et roi de cœur, 3 cartes, 3/32\n• A ∪ B, c'est OU : 8 cœurs, plus les 9 figures qui ne sont pas des cœurs, 17 cartes, 17/32\n• en maths, « ou » est inclusif : la dame de cœur est dans A ∪ B, même si elle est dans les deux\n• le piège : 8 + 12 = 20, c'est trop ; les 3 figures de cœur sont comptées deux fois\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : même jeu, C : « la carte est rouge ». Combien de cartes dans C ∩ B ?\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/seconde/probabilites-ensemble-fini\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=probabilites_ensemble_fini&microId=proba_reunion_intersection&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Inter et union : un jeu de 32 cartes"
+        ],
+        [
+          "00:16",
+          "A ∩ B : ET"
+        ],
+        [
+          "00:27",
+          "A ∪ B : OU"
+        ],
+        [
+          "00:39",
+          "Le « ou » des maths, et le piège 8 + 12"
+        ],
+        [
+          "00:55",
+          "Défi : C ∩ B"
+        ],
+        [
+          "01:08",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "réunion",
+        "intersection",
+        "union",
+        "inter",
+        "ou inclusif",
+        "jeu de 32 cartes",
+        "probabilités",
+        "maths",
+        "seconde",
+        "2de",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "seconde-proba-reunion-short",
+      "notionId": "probabilites_ensemble_fini",
+      "microId": "proba_reunion_intersection",
+      "classe": "seconde",
+      "ceinture": "jaune",
+      "serie": "Maths 2de",
+      "type": "short",
+      "renvoie_vers": "seconde-proba-reunion",
+      "fichier": "seconde/maths/probabilites/05-reunion-intersection/eleveai-maths-seconde-proba-reunion-short.mp4",
+      "miniature": "seconde/maths/probabilites/05-reunion-intersection/eleveai-maths-seconde-proba-reunion-short.png",
+      "titre": "20 cartes ? NON : 17 ! 🃏 — 2de #Shorts",
+      "accroche": "Un cœur OU une figure : 8 plus 12, 20 cartes ? Non ! Le valet, la dame et le roi de cœur sont comptés deux fois. 20 moins 3 : 17 cartes.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : une carte rouge OU un as, ça fait combien de cartes sur 32 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=probabilites_ensemble_fini&microId=proba_reunion_intersection&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #seconde #lycée",
+      "tags": [
+        "réunion",
+        "jeu de cartes",
+        "piège",
+        "probabilités",
+        "maths seconde",
+        "seconde",
+        "lycée",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "seconde-proba-formule-union",
+      "notionId": "probabilites_ensemble_fini",
+      "microId": "proba_formule_union",
+      "classe": "seconde",
+      "ceinture": "bleue",
+      "serie": "Maths 2de",
+      "type": "longue",
+      "fichier": "seconde/maths/probabilites/06-formule-union/eleveai-maths-seconde-proba-formule-union.mp4",
+      "miniature": "seconde/maths/probabilites/06-formule-union/eleveai-maths-seconde-proba-formule-union.png",
+      "titre": "60 % + 30 % = 90 % ? FAUX ! — La formule de la réunion — épisode 6 · Maths 2de",
+      "accroche": "Dans une classe de seconde, 60 % des élèves font du sport, 30 % jouent d'un instrument, 20 % font les deux. Quelle part fait l'un ou l'autre ?\n\nDans cette vidéo :\n• P(A ∪ B) = P(A) + P(B) − P(A ∩ B) : on enlève ce qui a été compté deux fois\n• sport ou instrument : 0,6 + 0,3 − 0,2 = 0,7, soit 70 % des élèves\n• ni l'un ni l'autre : le contraire, 1 − 0,7 = 0,3\n• incompatibles : P(A ∩ B) = 0, alors on additionne simplement\n• le piège : oublier d'enlever 0,2 et trouver 0,9\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : P(A) = 0,5, P(B) = 0,4 et P(A ∪ B) = 0,7 : que vaut P(A ∩ B) ?\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/seconde/probabilites-ensemble-fini\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=probabilites_ensemble_fini&microId=proba_formule_union&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "La formule de la réunion : sport, instrument ou les deux"
+        ],
+        [
+          "00:14",
+          "La formule, et le calcul : 0,6 + 0,3 − 0,2"
+        ],
+        [
+          "00:34",
+          "Ni l'un ni l'autre"
+        ],
+        [
+          "00:45",
+          "Des événements incompatibles"
+        ],
+        [
+          "00:56",
+          "Le piège"
+        ],
+        [
+          "01:07",
+          "À toi de jouer"
+        ],
+        [
+          "01:24",
+          "Correction"
+        ],
+        [
+          "01:36",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "formule de la réunion",
+        "P(A ∪ B)",
+        "incompatibles",
+        "réunion",
+        "intersection",
+        "pourcentages",
+        "probabilités",
+        "maths",
+        "seconde",
+        "2de",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "seconde-proba-formule-union-short",
+      "notionId": "probabilites_ensemble_fini",
+      "microId": "proba_formule_union",
+      "classe": "seconde",
+      "ceinture": "jaune",
+      "serie": "Maths 2de",
+      "type": "short",
+      "renvoie_vers": "seconde-proba-formule-union",
+      "fichier": "seconde/maths/probabilites/06-formule-union/eleveai-maths-seconde-proba-formule-union-short.mp4",
+      "miniature": "seconde/maths/probabilites/06-formule-union/eleveai-maths-seconde-proba-formule-union-short.png",
+      "titre": "Sport ou musique : 90 % ? 🎵 — 2de #Shorts",
+      "accroche": "60 % font du sport, 30 % de la musique. Donc 90 % font l'un ou l'autre ? Attention : 20 % font les deux ! Ils sont comptés deux fois. 60 + 30 − 20 : 70 %.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : alors, combien d'élèves ne font ni sport ni musique ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=probabilites_ensemble_fini&microId=proba_formule_union&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #seconde #lycée",
+      "tags": [
+        "formule de la réunion",
+        "pourcentages",
+        "piège",
+        "probabilités",
+        "maths seconde",
+        "seconde",
+        "lycée",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "seconde-proba-tableau-arbre",
+      "notionId": "probabilites_ensemble_fini",
+      "microId": "proba_tableau_arbre",
+      "classe": "seconde",
+      "ceinture": "bleue",
+      "serie": "Maths 2de",
+      "type": "longue",
+      "fichier": "seconde/maths/probabilites/07-tableau-arbre/eleveai-maths-seconde-proba-tableau-arbre.mp4",
+      "miniature": "seconde/maths/probabilites/07-tableau-arbre/eleveai-maths-seconde-proba-tableau-arbre.png",
+      "titre": "Pile puis rouge : 1/2 + 1/3 ? FAUX, on multiplie ! — Tableau ou arbre — épisode 7 · Maths 2de",
+      "accroche": "Au marché de Saint-Paul, un stand propose deux jeux : on lance une pièce, puis on tire une boule dans une urne avec 1 boule rouge et 2 boules blanches. Un arbre ou un tableau ?\n\nDans cette vidéo :\n• l'arbre : la pièce, un demi chacun, puis l'urne, rouge 1/3, blanche 2/3\n• sur un chemin, on multiplie : pile puis rouge, 1/2 × 1/3 = 1/6\n• deux dés : un tableau de 6 lignes et 6 colonnes, chaque case vaut 1/36\n• épreuves successives : un arbre ; critères qui se croisent : un tableau\n• le piège : additionner sur un chemin ; on additionne seulement des chemins différents\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : avec la pièce et l'urne, quelle est la probabilité de tirer une boule blanche ?\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/seconde/probabilites-ensemble-fini\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=probabilites_ensemble_fini&microId=proba_tableau_arbre&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Tableau ou arbre ? Au marché de Saint-Paul"
+        ],
+        [
+          "00:16",
+          "L'arbre : sur un chemin, on multiplie"
+        ],
+        [
+          "00:35",
+          "Deux dés : un tableau"
+        ],
+        [
+          "00:45",
+          "Arbre ou tableau ? Le piège"
+        ],
+        [
+          "01:04",
+          "Défi"
+        ],
+        [
+          "01:16",
+          "Correction"
+        ],
+        [
+          "01:31",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "arbre",
+        "tableau",
+        "deux épreuves",
+        "chemin",
+        "multiplier",
+        "urne",
+        "Saint-Paul",
+        "probabilités",
+        "maths",
+        "seconde",
+        "2de",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "seconde-proba-tableau-arbre-short",
+      "notionId": "probabilites_ensemble_fini",
+      "microId": "proba_tableau_arbre",
+      "classe": "seconde",
+      "ceinture": "jaune",
+      "serie": "Maths 2de",
+      "type": "short",
+      "renvoie_vers": "seconde-proba-tableau-arbre",
+      "fichier": "seconde/maths/probabilites/07-tableau-arbre/eleveai-maths-seconde-proba-tableau-arbre-short.mp4",
+      "miniature": "seconde/maths/probabilites/07-tableau-arbre/eleveai-maths-seconde-proba-tableau-arbre-short.png",
+      "titre": "Pile puis rouge : 1/2 + 1/3 ? 🪙 — 2de #Shorts",
+      "accroche": "Une pièce, puis une urne. Pile puis rouge : un demi plus 1 sur 3 ? Non ! Sur un chemin, on multiplie : un demi fois 1 sur 3, 1 sur 6. On n'additionne que des chemins différents.\n\n🥋 Ceinture jaune : un pas de plus que la blanche.\n👉 À toi : face puis rouge, c'est combien ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=probabilites_ensemble_fini&microId=proba_tableau_arbre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #seconde #lycée",
+      "tags": [
+        "arbre",
+        "chemin",
+        "piège",
+        "probabilités",
+        "maths seconde",
+        "seconde",
+        "lycée",
+        "eleveai",
+        "maths visuel",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "seconde-proba-conditionnelle",
+      "notionId": "probabilites_conditionnelles_2de",
+      "microId": "proba_conditionnelle",
+      "classe": "seconde",
+      "ceinture": "bleue",
+      "serie": "Maths 2de",
+      "type": "longue",
+      "fichier": "seconde/maths/probabilites/08-conditionnelle/eleveai-maths-seconde-proba-conditionnelle.mp4",
+      "miniature": "seconde/maths/probabilites/08-conditionnelle/eleveai-maths-seconde-proba-conditionnelle.png",
+      "titre": "40 en retard sur 400… mais 160 au car ! — Probabilité conditionnelle — épisode 8 · Maths 2de",
+      "accroche": "Un sondage dans un lycée de Saint-Denis : 400 élèves, 160 prennent le car jaune, et parmi eux 40 arrivent souvent en retard. Quelle est la probabilité qu'un usager du car soit souvent en retard ?\n\nDans cette vidéo :\n• on range les effectifs dans un tableau croisé : car jaune ou autre trajet, en retard ou à l'heure\n• sachant C, on se place dans la ligne du car : 40 sur 160\n• la notation : P_C(R) = 40/160 = 0,25\n• ce n'est pas P(R) : sachant C, le total devient 160\n• le piège : 40 sur 400, c'est P(C ∩ R), car ET retard\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : parmi les 240 élèves qui ne prennent pas le car, 24 sont souvent en retard. Calcule P_C̄(R).\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/seconde/probabilites-conditionnelles-2de\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=probabilites_conditionnelles_2de&microId=proba_conditionnelle&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Probabilité conditionnelle : le sondage à Saint-Denis"
+        ],
+        [
+          "00:18",
+          "Le tableau croisé"
+        ],
+        [
+          "00:29",
+          "Sachant C : la ligne du car"
+        ],
+        [
+          "00:42",
+          "La notation P_C(R)"
+        ],
+        [
+          "00:54",
+          "Ce n'est pas P(R)"
+        ],
+        [
+          "01:04",
+          "Le piège : 40 sur 400"
+        ],
+        [
+          "01:18",
+          "Défi"
+        ],
+        [
+          "01:33",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "probabilité conditionnelle",
+        "sachant",
+        "tableau croisé",
+        "P_A(B)",
+        "Saint-Denis",
+        "probabilités conditionnelles",
+        "probabilités",
+        "maths",
+        "seconde",
+        "2de",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "seconde-proba-conditionnelle-short",
+      "notionId": "probabilites_conditionnelles_2de",
+      "microId": "proba_conditionnelle",
+      "classe": "seconde",
+      "ceinture": "orange",
+      "serie": "Maths 2de",
+      "type": "short",
+      "renvoie_vers": "seconde-proba-conditionnelle",
+      "fichier": "seconde/maths/probabilites/08-conditionnelle/eleveai-maths-seconde-proba-conditionnelle-short.mp4",
+      "miniature": "seconde/maths/probabilites/08-conditionnelle/eleveai-maths-seconde-proba-conditionnelle-short.png",
+      "titre": "40 sur 400 = 10 % ? NON ! 🚌 — 2de #Shorts",
+      "accroche": "40 élèves du car jaune sont souvent en retard, sur 400 élèves. Donc 10 % des usagers du car ? Non ! Le car, c'est 160 élèves. Parmi eux, 40 en retard : 40 sur 160, 25 %. On divise par le bon groupe.\n\n🥋 Ceinture orange : un calcul, et un piège à éviter.\n👉 À toi : 24 en retard parmi 240 élèves sans car, c'est combien de pour cent ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=probabilites_conditionnelles_2de&microId=proba_conditionnelle&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #seconde #lycée",
+      "tags": [
+        "probabilité conditionnelle",
+        "sachant",
+        "piège",
+        "probabilités",
+        "maths seconde",
+        "seconde",
+        "lycée",
+        "eleveai",
+        "maths visuel",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "seconde-proba-arbre-pondere",
+      "notionId": "probabilites_conditionnelles_2de",
+      "microId": "proba_arbre_pondere",
+      "classe": "seconde",
+      "ceinture": "bleue",
+      "serie": "Maths 2de",
+      "type": "longue",
+      "fichier": "seconde/maths/probabilites/09-arbre-pondere/eleveai-maths-seconde-proba-arbre-pondere.mp4",
+      "miniature": "seconde/maths/probabilites/09-arbre-pondere/eleveai-maths-seconde-proba-arbre-pondere.png",
+      "titre": "0,8 APRÈS R ? LE PIÈGE DE L'ARBRE — L'arbre pondéré — épisode 9 · Maths 2de",
+      "accroche": "Au trail de Cilaos, 70 % des coureurs viennent de La Réunion. Parmi eux, 90 % finissent la course. Parmi les autres, 80 % finissent. On construit l'arbre pondéré.\n\nDans cette vidéo :\n• premier niveau : R, réunionnais, 0,7, et R̄, 0,3 ; les deux branches font 1\n• deuxième niveau : après R, F 0,9 et F̄ 0,1 ; après R̄, F 0,8 et F̄ 0,2\n• les branches du deuxième niveau sont des probabilités conditionnelles : 0,9, c'est P_R(F)\n• pour construire : d'abord ce qu'on connaît sans condition, puis ce qui est dit « parmi »\n• le piège : mettre 0,8 sur une branche qui part de R ; 0,8 concerne les autres coureurs\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : que vaut P_R̄(F̄) ?\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/seconde/probabilites-conditionnelles-2de\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=probabilites_conditionnelles_2de&microId=proba_arbre_pondere&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "L'arbre pondéré : le trail de Cilaos"
+        ],
+        [
+          "00:19",
+          "Premier niveau"
+        ],
+        [
+          "00:29",
+          "Deuxième niveau"
+        ],
+        [
+          "00:42",
+          "Lire l'arbre"
+        ],
+        [
+          "00:52",
+          "Construire un arbre, et le piège"
+        ],
+        [
+          "01:10",
+          "À toi de jouer, et la correction"
+        ],
+        [
+          "01:29",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "arbre pondéré",
+        "probabilité conditionnelle",
+        "branches",
+        "trail",
+        "Cilaos",
+        "La Réunion",
+        "probabilités conditionnelles",
+        "probabilités",
+        "maths",
+        "seconde",
+        "2de",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "seconde-proba-arbre-pondere-short",
+      "notionId": "probabilites_conditionnelles_2de",
+      "microId": "proba_arbre_pondere",
+      "classe": "seconde",
+      "ceinture": "orange",
+      "serie": "Maths 2de",
+      "type": "short",
+      "renvoie_vers": "seconde-proba-arbre-pondere",
+      "fichier": "seconde/maths/probabilites/09-arbre-pondere/eleveai-maths-seconde-proba-arbre-pondere-short.mp4",
+      "miniature": "seconde/maths/probabilites/09-arbre-pondere/eleveai-maths-seconde-proba-arbre-pondere-short.png",
+      "titre": "90 % des Réunionnais finissent… et l'inverse ? 🏃 — 2de #Shorts",
+      "accroche": "90 % des Réunionnais finissent le trail. Donc 90 % des coureurs qui finissent sont réunionnais ? Non ! 0,9, c'est parmi les Réunionnais : une branche après R. Ce n'est pas la même question.\n\n🥋 Ceinture orange : un calcul, et un piège à éviter.\n👉 À toi : la branche R vaut 0,7. Combien vaut la branche R barre ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=probabilites_conditionnelles_2de&microId=proba_arbre_pondere&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #seconde #lycée",
+      "tags": [
+        "arbre pondéré",
+        "trail de Cilaos",
+        "piège",
+        "probabilités",
+        "maths seconde",
+        "seconde",
+        "lycée",
+        "eleveai",
+        "maths visuel",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "seconde-proba-arbre-chemins",
+      "notionId": "probabilites_conditionnelles_2de",
+      "microId": "proba_arbre_chemins",
+      "classe": "seconde",
+      "ceinture": "bleue",
+      "serie": "Maths 2de",
+      "type": "longue",
+      "fichier": "seconde/maths/probabilites/10-arbre-chemins/eleveai-maths-seconde-proba-arbre-chemins.mp4",
+      "miniature": "seconde/maths/probabilites/10-arbre-chemins/eleveai-maths-seconde-proba-arbre-chemins.png",
+      "titre": "90 % + 80 % ? FAUX : 0,7 × 0,9 + 0,3 × 0,8 — Les chemins de l'arbre — épisode 10 · Maths 2de",
+      "accroche": "Le même trail de Cilaos : R, 0,7, puis F, 0,9 ; R̄, 0,3, puis F, 0,8. Quelle est la probabilité qu'un coureur finisse la course ?\n\nDans cette vidéo :\n• un chemin, c'est une intersection : R puis F, 0,7 × 0,9 = 0,63, c'est P(R ∩ F)\n• P(F) : deux chemins mènent à F, 0,63 + 0,3 × 0,8 = 0,63 + 0,24 = 0,87\n• on vérifie : les quatre chemins font 1, 0,63 + 0,07 + 0,24 + 0,06\n• 87 % des coureurs finissent la course\n• le piège : additionner 0,9 et 0,8 ; ces branches n'ont pas le même poids\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : quelle est la probabilité qu'un coureur abandonne ?\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/seconde/probabilites-conditionnelles-2de\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=probabilites_conditionnelles_2de&microId=proba_arbre_chemins&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Les chemins de l'arbre : le trail de Cilaos"
+        ],
+        [
+          "00:18",
+          "Un chemin = une intersection"
+        ],
+        [
+          "00:31",
+          "P(F) : deux chemins"
+        ],
+        [
+          "00:48",
+          "Les quatre chemins font 1 : 87 % des coureurs"
+        ],
+        [
+          "01:07",
+          "Le piège"
+        ],
+        [
+          "01:20",
+          "À toi de jouer"
+        ],
+        [
+          "01:31",
+          "Correction"
+        ],
+        [
+          "01:50",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "arbre pondéré",
+        "chemins",
+        "probabilités totales",
+        "intersection",
+        "trail",
+        "Cilaos",
+        "probabilités conditionnelles",
+        "probabilités",
+        "maths",
+        "seconde",
+        "2de",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "seconde-proba-arbre-chemins-short",
+      "notionId": "probabilites_conditionnelles_2de",
+      "microId": "proba_arbre_chemins",
+      "classe": "seconde",
+      "ceinture": "orange",
+      "serie": "Maths 2de",
+      "type": "short",
+      "renvoie_vers": "seconde-proba-arbre-chemins",
+      "fichier": "seconde/maths/probabilites/10-arbre-chemins/eleveai-maths-seconde-proba-arbre-chemins-short.mp4",
+      "miniature": "seconde/maths/probabilites/10-arbre-chemins/eleveai-maths-seconde-proba-arbre-chemins-short.png",
+      "titre": "90 % et 80 % finissent… donc 85 % ? 🏃 — 2de #Shorts",
+      "accroche": "90 % et 80 % finissent. Donc 85 % de tous les coureurs ? Pas la moyenne ! 70 % viennent de La Réunion. 0,7 × 0,9 + 0,3 × 0,8 : 0,87. C'est l'arbre qui compte.\n\n🥋 Ceinture orange : un calcul, et un piège à éviter.\n👉 À toi : si 90 % venaient de La Réunion, ce serait combien ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=probabilites_conditionnelles_2de&microId=proba_arbre_chemins&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #seconde #lycée",
+      "tags": [
+        "arbre pondéré",
+        "moyenne pondérée",
+        "piège",
+        "probabilités",
+        "maths seconde",
+        "seconde",
+        "lycée",
+        "eleveai",
+        "maths visuel",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "seconde-proba-tableau-croise",
+      "notionId": "probabilites_conditionnelles_2de",
+      "microId": "proba_tableau_croise",
+      "classe": "seconde",
+      "ceinture": "bleue",
+      "serie": "Maths 2de",
+      "type": "longue",
+      "fichier": "seconde/maths/probabilites/11-tableau-croise/eleveai-maths-seconde-proba-tableau-croise.mp4",
+      "miniature": "seconde/maths/probabilites/11-tableau-croise/eleveai-maths-seconde-proba-tableau-croise.png",
+      "titre": "0,25 ou 0,6 ? LIGNE OU COLONNE — Le tableau croisé — épisode 11 · Maths 2de",
+      "accroche": "Un vendeur de letchis du marché trie 200 barquettes : 120 de Saint-André, 80 de Saint-Paul. 30 barquettes de Saint-André ont des fruits abîmés, et 20 de Saint-Paul.\n\nDans cette vidéo :\n• le tableau : en ligne Saint-André et Saint-Paul, en colonne abîmée ou correcte ; totaux 120 et 80, 50 et 150, 200\n• sachant Saint-André : on lit sa ligne, 30 sur 120, soit 0,25\n• sachant abîmée : on lit sa colonne, 30 sur 50, soit 0,6\n• une case sur le grand total, 30 sur 200 : une intersection, sans condition\n• le piège : confondre la ligne et la colonne ; 0,25 et 0,6 répondent à deux questions différentes\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : parmi les barquettes de Saint-Paul, quelle proportion est abîmée ?\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/seconde/probabilites-conditionnelles-2de\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=probabilites_conditionnelles_2de&microId=proba_tableau_croise&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Le tableau croisé : 200 barquettes de letchis"
+        ],
+        [
+          "00:19",
+          "Remplir le tableau"
+        ],
+        [
+          "00:32",
+          "Sachant une ligne"
+        ],
+        [
+          "00:42",
+          "Sachant une colonne"
+        ],
+        [
+          "00:55",
+          "Une case sur le total, et le piège"
+        ],
+        [
+          "01:13",
+          "À toi de jouer"
+        ],
+        [
+          "01:24",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "tableau croisé",
+        "probabilité conditionnelle",
+        "ligne ou colonne",
+        "letchis",
+        "Saint-André",
+        "Saint-Paul",
+        "probabilités conditionnelles",
+        "probabilités",
+        "maths",
+        "seconde",
+        "2de",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "seconde-proba-tableau-croise-short",
+      "notionId": "probabilites_conditionnelles_2de",
+      "microId": "proba_tableau_croise",
+      "classe": "seconde",
+      "ceinture": "orange",
+      "serie": "Maths 2de",
+      "type": "short",
+      "renvoie_vers": "seconde-proba-tableau-croise",
+      "fichier": "seconde/maths/probabilites/11-tableau-croise/eleveai-maths-seconde-proba-tableau-croise-short.mp4",
+      "miniature": "seconde/maths/probabilites/11-tableau-croise/eleveai-maths-seconde-proba-tableau-croise-short.png",
+      "titre": "25 % des abîmées ? NON ! 🍒 — 2de #Shorts",
+      "accroche": "25 % des barquettes de Saint-André sont abîmées. Donc 25 % des abîmées viennent de Saint-André ? Non ! Dans la colonne des abîmées, 30 sur 50 : 60 %. Ligne ou colonne, ce n'est pas la même question.\n\n🥋 Ceinture orange : un calcul, et un piège à éviter.\n👉 À toi : quelle part des barquettes abîmées vient de Saint-Paul ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=probabilites_conditionnelles_2de&microId=proba_tableau_croise&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #seconde #lycée",
+      "tags": [
+        "tableau croisé",
+        "letchis",
+        "piège",
+        "probabilités",
+        "maths seconde",
+        "seconde",
+        "lycée",
+        "eleveai",
+        "maths visuel",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "seconde-proba-faux-positifs",
+      "notionId": "probabilites_conditionnelles_2de",
+      "microId": "proba_faux_positifs",
+      "classe": "seconde",
+      "ceinture": "bleue",
+      "serie": "Maths 2de",
+      "type": "longue",
+      "fichier": "seconde/maths/probabilites/12-faux-positifs/eleveai-maths-seconde-proba-faux-positifs.mp4",
+      "miniature": "seconde/maths/probabilites/12-faux-positifs/eleveai-maths-seconde-proba-faux-positifs.png",
+      "titre": "Il sonne : 99 % de chances que ce soit grave ? NON, 1 sur 6 — Faux positifs — épisode 12 · Maths 2de",
+      "accroche": "Un portique de sécurité à l'aéroport. 1 % des bagages contiennent un objet interdit. Le portique sonne pour 99 % d'entre eux, mais aussi pour 5 % des bagages sans objet interdit. Il sonne : est-ce grave ?\n\nDans cette vidéo :\n• l'arbre : I, objet interdit, 0,01, puis S, sonne, 0,99 ; Ī, 0,99, puis S, 0,05\n• P(S) : 0,01 × 0,99 + 0,99 × 0,05 = 0,0099 + 0,0495 = 0,0594\n• il sonne : sur 0,0594, seulement 0,0099 viennent d'un vrai objet interdit, environ 1 sur 6\n• pourquoi si peu : les bagages normaux sont très nombreux, même 5 % d'entre eux font beaucoup de fausses alertes\n• le piège : 99 %, c'est P_I(S), pas P_S(I)\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : sur 10 000 bagages, combien font sonner le portique ?\nC'est le dernier épisode des probabilités conditionnelles de seconde !\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/seconde/probabilites-conditionnelles-2de\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=probabilites_conditionnelles_2de&microId=proba_faux_positifs&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Les faux positifs : à l'aéroport"
+        ],
+        [
+          "00:21",
+          "L'arbre"
+        ],
+        [
+          "00:36",
+          "P(S), les deux chemins"
+        ],
+        [
+          "00:56",
+          "Il sonne : vraiment interdit ?"
+        ],
+        [
+          "01:14",
+          "Pourquoi si peu ?"
+        ],
+        [
+          "01:25",
+          "Le piège"
+        ],
+        [
+          "01:37",
+          "Défi"
+        ],
+        [
+          "01:48",
+          "Correction"
+        ],
+        [
+          "02:02",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "faux positifs",
+        "probabilité conditionnelle",
+        "arbre pondéré",
+        "P_S(I)",
+        "fausses alertes",
+        "aéroport",
+        "probabilités conditionnelles",
+        "probabilités",
+        "maths",
+        "seconde",
+        "2de",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "seconde-proba-faux-positifs-short",
+      "notionId": "probabilites_conditionnelles_2de",
+      "microId": "proba_faux_positifs",
+      "classe": "seconde",
+      "ceinture": "orange",
+      "serie": "Maths 2de",
+      "type": "short",
+      "renvoie_vers": "seconde-proba-faux-positifs",
+      "fichier": "seconde/maths/probabilites/12-faux-positifs/eleveai-maths-seconde-proba-faux-positifs-short.mp4",
+      "miniature": "seconde/maths/probabilites/12-faux-positifs/eleveai-maths-seconde-proba-faux-positifs-short.png",
+      "titre": "Le portique sonne… grave ? 🛄 — 2de #Shorts",
+      "accroche": "Le portique détecte 99 % des objets interdits. Il sonne : 99 % de chances que ce soit grave ? Non : environ 1 sur 6 ! Les bagages normaux sont si nombreux que leurs 5 % de fausses alertes l'emportent.\n\n🥋 Ceinture orange : un calcul, et un piège à éviter.\n👉 À toi : si le portique ne sonnait que pour 1 % des bagages normaux, ce serait mieux ou pire ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=probabilites_conditionnelles_2de&microId=proba_faux_positifs&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #seconde #lycée",
+      "tags": [
+        "faux positifs",
+        "portique",
+        "piège",
+        "probabilités",
+        "maths seconde",
+        "seconde",
+        "lycée",
+        "eleveai",
+        "maths visuel",
+        "ceinture orange",
+        "Shorts"
+      ]
     }
   ]
 }

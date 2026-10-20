@@ -536,6 +536,40 @@ for _t in _PROBA_TEST_5E:
     CEINTURE_SHORT[_nom] = _c
 
 
+# 20/10/2026 — même TEST, suite : PROBABILITÉS 2de, shorts des épisodes 3 à 12 (3-7 jaune, 8-12 orange).
+_P2S = "seconde/maths/probabilites/"
+_PROBA_TEST_2DE = [
+    ("seconde", "2DE", _P2S + "03-calculer", "calculer", "jaune", ["CETTE ROUE", "TRICHE !"],
+     "2 couleurs sur 4 : 1 chance sur 2 ?", [("2 sur 4 ?", 110, ROUGE), ("0,4 + 0,15", 100, BLEU), ("= 0,55 !", 110, VERT)]),
+    ("seconde", "2DE", _P2S + "04-contraire", "contraire", "jaune", ["AU MOINS", "UN 6 ?"],
+     "deux dés : plus ou moins de 1 sur 3 ?", [("aucun 6 : 25/36", 86, BLEU), ("1 − 25/36", 100, ORANGE), ("= 11/36 !", 110, VERT)]),
+    ("seconde", "2DE", _P2S + "05-reunion-intersection", "reunion", "jaune", ["CŒUR OU", "FIGURE ?"],
+     "un jeu de 32 cartes", [("8 + 12 = 20 ?", 100, ROUGE), ("3 comptées 2 fois", 80, ORANGE), ("17 cartes !", 110, VERT)]),
+    ("seconde", "2DE", _P2S + "06-formule-union", "formule-union", "jaune", ["SPORT OU", "MUSIQUE ?"],
+     "60 % et 30 % : donc 90 % ?", [("60 + 30 = 90 ?", 96, ROUGE), ("20 % font les deux", 80, ORANGE), ("70 % !", 120, VERT)]),
+    ("seconde", "2DE", _P2S + "07-tableau-arbre", "tableau-arbre", "jaune", ["PILE PUIS", "ROUGE ?"],
+     "une pièce, puis une urne", [("1/2 + 1/3 ?", 100, ROUGE), ("un chemin : ×", 100, BLEU), ("1/6 !", 120, VERT)]),
+    ("seconde", "2DE", _P2S + "08-conditionnelle", "conditionnelle", "orange", ["LE CAR", "EN RETARD"],
+     "40 sur 400 = 10 % ?", [("40 sur 400 ?", 100, ROUGE), ("car : 160 élèves", 86, BLEU), ("40/160 = 25 % !", 86, VERT)]),
+    ("seconde", "2DE", _P2S + "09-arbre-pondere", "arbre-pondere", "orange", ["TRAIL DE", "CILAOS"],
+     "90 % des Réunionnais finissent…", [("0,9 : parmi R", 96, BLEU), ("et l'inverse ?", 96, ROUGE), ("pas pareil !", 100, VERT)]),
+    ("seconde", "2DE", _P2S + "10-arbre-chemins", "arbre-chemins", "orange", ["90 % ET 80 %", "FINISSENT"],
+     "donc 85 % des coureurs ?", [("85 % ?", 110, ROUGE), ("0,7×0,9 + 0,3×0,8", 72, BLEU), ("= 0,87 !", 110, VERT)], 84),
+    ("seconde", "2DE", _P2S + "11-tableau-croise", "tableau-croise", "orange", ["LETCHIS", "ABÎMÉS"],
+     "25 % des abîmées ?", [("ligne : 25 %", 100, BLEU), ("colonne : 30/50", 90, ORANGE), ("60 % !", 120, VERT)]),
+    ("seconde", "2DE", _P2S + "12-faux-positifs", "faux-positifs", "orange", ["LE PORTIQUE", "SONNE…"],
+     "99 % de chances que ce soit grave ?", [("détecte 99 %", 96, BLEU), ("grave à 99 % ?", 90, ROUGE), ("1 sur 6 !", 110, VERT)], 88),
+]
+for _t in _PROBA_TEST_2DE:
+    _cl, _bd, _sortie, _ep, _c, _titre, _sous, _lg = _t[:8]
+    _nom = f"eleveai-maths-{_cl}-proba-{_ep}-short"
+    SHORTS[_nom] = {
+        "badge": f"PROBABILITÉS · {_bd}", "titre": _titre, "taille": _t[8] if len(_t) > 8 else 92, "sous": _sous,
+        "taille_sous": 44, "couleur_sous": ORANGE, "accroche": _acc(_lg), "dossier": f"{_cl}/maths/fr", "sortie": _sortie,
+    }
+    CEINTURE_SHORT[_nom] = _c
+
+
 def main():
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     filtre = sys.argv[1] if len(sys.argv) > 1 else ""
