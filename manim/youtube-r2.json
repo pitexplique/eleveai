@@ -1,162 +1,477 @@
 {
- "Y3gFecuyBTQ": {
-  "titre": "Le calcul posé — Maths 6e : addition, soustraction, multiplication, division - Eleveai",
-  "classe": "6e",
-  "short": false
- },
- "KT6rurM3Q3E": {
-  "titre": "Les fractions — Maths 6e : lire, représenter, comparer",
-  "classe": "6e",
-  "short": false
- },
- "a2zNZzxuo4M": {
-  "titre": "La proportionnalité — Maths 6e : coefficient et passage par l'unité",
-  "classe": "6e",
-  "short": false
- },
- "fi-Xs0v2FoY": {
-  "titre": "Le calcul mental — Maths 6e",
-  "classe": "6e",
-  "short": false
- },
- "rRCG7MQtq3I": {
-  "titre": "Les longueurs — Maths 6e",
-  "classe": "6e",
-  "short": false
- },
- "1CYtvWeV3RM": {
-  "titre": "Les périmètres - Maths 6e",
-  "classe": "6e",
-  "short": false
- },
- "8ouss9DNzN0": {
-  "titre": "Les aires— Maths 6e",
-  "classe": "6e",
-  "short": false
- },
- "owc59Ln0k8s": {
-  "titre": "Les volumes— Maths 6e",
-  "classe": "6e",
-  "short": false
- },
- "46FnrLZLWZo": {
-  "titre": "Les angles— Maths 6e",
-  "classe": "6e",
-  "short": false
- },
- "MLrzaU8B0Og": {
-  "titre": "Les triangles — Maths 6e",
-  "classe": "6e",
-  "short": false
- },
- "pAPkXW4EDsU": {
-  "titre": "Les pourcentages — Maths 6e : comprendre et calculer",
-  "classe": "6e",
-  "short": false
- },
- "zl61iG90AGM": {
-  "titre": "Maths 2de · La racine carrée — EleveAI",
-  "classe": "seconde",
-  "short": false
- },
- "ptquQWJrtuE": {
-  "titre": "Maths 2de · Repère et coordonnées — EleveAI",
-  "classe": "seconde",
-  "short": false
- },
- "RpmhlenzRus": {
-  "titre": "Maths seconde· Les puissances — EleveAI",
-  "classe": "seconde",
-  "short": false
- },
- "VnpCwS8zDiw": {
-  "titre": "Maths seconde · Les identités remarquables — EleveAI",
-  "classe": "seconde",
-  "short": false
- },
- "OT7gGCthbAs": {
-  "titre": "Le second degré (1/2) : discriminant, équation et factorisation | Maths 1re spé",
-  "classe": "premiere-spe",
-  "short": false
- },
- "aIkUwVlopLE": {
-  "titre": "Le signe du trinôme (2/2) : tableau de signes et inéquations | Maths 1re spé",
-  "classe": "premiere-spe",
-  "short": false
- },
- "imdxA7H3Ov8": {
-  "titre": "La fonction exponentielle (1/3) : définition, nombre e et règles de calcul | Maths 1re spé",
-  "classe": "premiere-spe",
-  "short": false
- },
- "9pKucQ-tYYw": {
-  "titre": "Résoudre avec l'exponentielle (2/3) : équations et inéquations | Maths 1re spé",
-  "classe": "premiere-spe",
-  "short": false
- },
- "uIsHrz51lEQ": {
-  "titre": "Dériver et étudier l'exponentielle (3/3) : dérivée, tableau de variations | Maths 1re spé",
-  "classe": "premiere-spe",
-  "short": false
- },
- "iP9bmXGlTJ0": {
-  "titre": "Les suites (1/2) : arithmétique, géométrique et terme général | Maths 1re spé",
-  "classe": "premiere-spe",
-  "short": false
- },
- "CHS_8yj-VrA": {
-  "titre": "Pourquoi il fait 26° à Saint-Gilles et 11° au Maïdo — Maths Réel 974",
-  "classe": "seconde",
-  "short": false
- },
- "mWK-Qm8bPKY": {
-  "titre": "Les fractions : la leçon complète pour ne plus se tromper",
-  "classe": "4e",
-  "short": false
- },
- "Fmg5FNKY-Zs": {
-  "titre": "Maths seconde · Valeur absolue et intervalles — EleveAI",
-  "classe": "seconde",
-  "short": false
- },
- "Luyg-h3m98o": {
-  "titre": "Maths seconde · Développer et factoriser — EleveAI",
-  "classe": "seconde",
-  "short": false
- },
- "XsfMrmyxuak": {
-  "titre": "Maths seconde · Les expressions littérales — EleveAI",
-  "classe": "seconde",
-  "short": false
- },
- "ZZiXPXBTXIQ": {
-  "titre": "Maths seconde · Multiples, diviseurs et nombres premiers — EleveAI",
-  "classe": "seconde",
-  "short": false
- },
- "O8xsaf2bwNc": {
-  "titre": "Maths seconde · Équations et inéquations — EleveAI",
-  "classe": "seconde",
-  "short": false
- },
- "NCagwZFx2Kw": {
-  "titre": "23° et 80 km/h : la recette d'un coup franc en pleine lucarne ⚽ #maths",
-  "classe": "seconde",
-  "short": true
- },
- "5E56e0CbyvQ": {
-  "titre": "Le cercle trigonométrique en 8 min : radian, cosinus, sinus, valeurs remarquables | Maths 1re spé",
-  "classe": "premiere-spe",
-  "short": false
- },
- "dK4uBg8yRiw": {
-  "titre": "10 valeurs de cos et sin à apprendre ? Une seule ligne suffit #shorts",
-  "classe": "premiere-spe",
-  "short": true
- },
- "DHdWUzICcug": {
-  "titre": "Le cosinus est-il positif ou négatif ? Demande au vent 🌬️ #shorts",
-  "classe": "premiere-spe",
-  "short": true
- }
+  "Y3gFecuyBTQ": {
+    "titre": "Le calcul posé — Maths 6e : addition, soustraction, multiplication, division - Eleveai",
+    "classe": "6e",
+    "short": false
+  },
+  "KT6rurM3Q3E": {
+    "titre": "Les fractions — Maths 6e : lire, représenter, comparer",
+    "classe": "6e",
+    "short": false
+  },
+  "a2zNZzxuo4M": {
+    "titre": "La proportionnalité — Maths 6e : coefficient et passage par l'unité",
+    "classe": "6e",
+    "short": false
+  },
+  "fi-Xs0v2FoY": {
+    "titre": "Le calcul mental — Maths 6e",
+    "classe": "6e",
+    "short": false
+  },
+  "rRCG7MQtq3I": {
+    "titre": "Les longueurs — Maths 6e",
+    "classe": "6e",
+    "short": false
+  },
+  "1CYtvWeV3RM": {
+    "titre": "Les périmètres - Maths 6e",
+    "classe": "6e",
+    "short": false
+  },
+  "8ouss9DNzN0": {
+    "titre": "Les aires— Maths 6e",
+    "classe": "6e",
+    "short": false
+  },
+  "owc59Ln0k8s": {
+    "titre": "Les volumes— Maths 6e",
+    "classe": "6e",
+    "short": false
+  },
+  "46FnrLZLWZo": {
+    "titre": "Les angles— Maths 6e",
+    "classe": "6e",
+    "short": false
+  },
+  "MLrzaU8B0Og": {
+    "titre": "Les triangles — Maths 6e",
+    "classe": "6e",
+    "short": false
+  },
+  "pAPkXW4EDsU": {
+    "titre": "Les pourcentages — Maths 6e : comprendre et calculer",
+    "classe": "6e",
+    "short": false
+  },
+  "zl61iG90AGM": {
+    "titre": "Maths 2de · La racine carrée — EleveAI",
+    "classe": "seconde",
+    "short": false
+  },
+  "ptquQWJrtuE": {
+    "titre": "Maths 2de · Repère et coordonnées — EleveAI",
+    "classe": "seconde",
+    "short": false
+  },
+  "RpmhlenzRus": {
+    "titre": "Maths seconde· Les puissances — EleveAI",
+    "classe": "seconde",
+    "short": false
+  },
+  "VnpCwS8zDiw": {
+    "titre": "Maths seconde · Les identités remarquables — EleveAI",
+    "classe": "seconde",
+    "short": false
+  },
+  "OT7gGCthbAs": {
+    "titre": "Le second degré (1/2) : discriminant, équation et factorisation | Maths 1re spé",
+    "classe": "premiere-spe",
+    "short": false
+  },
+  "aIkUwVlopLE": {
+    "titre": "Le signe du trinôme (2/2) : tableau de signes et inéquations | Maths 1re spé",
+    "classe": "premiere-spe",
+    "short": false
+  },
+  "imdxA7H3Ov8": {
+    "titre": "La fonction exponentielle (1/3) : définition, nombre e et règles de calcul | Maths 1re spé",
+    "classe": "premiere-spe",
+    "short": false
+  },
+  "9pKucQ-tYYw": {
+    "titre": "Résoudre avec l'exponentielle (2/3) : équations et inéquations | Maths 1re spé",
+    "classe": "premiere-spe",
+    "short": false
+  },
+  "uIsHrz51lEQ": {
+    "titre": "Dériver et étudier l'exponentielle (3/3) : dérivée, tableau de variations | Maths 1re spé",
+    "classe": "premiere-spe",
+    "short": false
+  },
+  "iP9bmXGlTJ0": {
+    "titre": "Les suites (1/2) : arithmétique, géométrique et terme général | Maths 1re spé",
+    "classe": "premiere-spe",
+    "short": false
+  },
+  "CHS_8yj-VrA": {
+    "titre": "Pourquoi il fait 26° à Saint-Gilles et 11° au Maïdo — Maths Réel 974",
+    "classe": "seconde",
+    "short": false
+  },
+  "mWK-Qm8bPKY": {
+    "titre": "Les fractions : la leçon complète pour ne plus se tromper",
+    "classe": "4e",
+    "short": false
+  },
+  "Fmg5FNKY-Zs": {
+    "titre": "Maths seconde · Valeur absolue et intervalles — EleveAI",
+    "classe": "seconde",
+    "short": false
+  },
+  "Luyg-h3m98o": {
+    "titre": "Maths seconde · Développer et factoriser — EleveAI",
+    "classe": "seconde",
+    "short": false
+  },
+  "XsfMrmyxuak": {
+    "titre": "Maths seconde · Les expressions littérales — EleveAI",
+    "classe": "seconde",
+    "short": false
+  },
+  "ZZiXPXBTXIQ": {
+    "titre": "Maths seconde · Multiples, diviseurs et nombres premiers — EleveAI",
+    "classe": "seconde",
+    "short": false
+  },
+  "O8xsaf2bwNc": {
+    "titre": "Maths seconde · Équations et inéquations — EleveAI",
+    "classe": "seconde",
+    "short": false
+  },
+  "NCagwZFx2Kw": {
+    "titre": "23° et 80 km/h : la recette d'un coup franc en pleine lucarne ⚽ #maths",
+    "classe": "seconde",
+    "short": true
+  },
+  "5E56e0CbyvQ": {
+    "titre": "Le cercle trigonométrique en 8 min : radian, cosinus, sinus, valeurs remarquables | Maths 1re spé",
+    "classe": "premiere-spe",
+    "short": false
+  },
+  "dK4uBg8yRiw": {
+    "titre": "10 valeurs de cos et sin à apprendre ? Une seule ligne suffit #shorts",
+    "classe": "premiere-spe",
+    "short": true
+  },
+  "DHdWUzICcug": {
+    "titre": "Le cosinus est-il positif ou négatif ? Demande au vent 🌬️ #shorts",
+    "classe": "premiere-spe",
+    "short": true
+  },
+  "zCNZSONkjXw": {
+    "titre": "Le niveau baisse, et pourtant 81 % y croient : qui a raison ? — PISA 2025 2026",
+    "classe": "actu",
+    "short": false
+  },
+  "gUfRPpFYqss": {
+    "titre": "Écrire le i en cursive · gaucher — CP #Shorts",
+    "classe": "cp",
+    "short": true
+  },
+  "iIfSjJhbiok": {
+    "titre": "Écrire le i en cursive · droitier — CP #Shorts",
+    "classe": "cp",
+    "short": true
+  },
+  "oHkbtRTc544": {
+    "titre": "Écrire la lettre a en cursive — Français CP · gaucher — EleveAI",
+    "classe": "cp",
+    "short": false
+  },
+  "-0ybi5u05P0": {
+    "titre": "Écrire la lettre a en cursive — Français CP · droitier — EleveAI",
+    "classe": "cp",
+    "short": false
+  },
+  "h2t4Ce0ucfI": {
+    "titre": "Why are bubbles round? (the maths answer) 🫧",
+    "classe": "actu",
+    "short": false
+  },
+  "LglNQebtdGs": {
+    "titre": "Pourquoi les bulles sont rondes ? (la réponse en maths) 🫧",
+    "classe": "actu",
+    "short": false
+  },
+  "1k6HvSr-Rdw": {
+    "titre": "Comment mesurer un corail sans le toucher (Hong Wang · Kakeya)",
+    "classe": "actu",
+    "short": false
+  },
+  "Ax6irc6WFh0": {
+    "titre": "How to measure a coral without touching it (Hong Wang · Kakeya)",
+    "classe": "actu",
+    "short": false
+  },
+  "3Xb55Tl_S-Y": {
+    "titre": "Can you turn around without being seen? Hong Wang, 2026 Fields Medal (Kakeya needle)",
+    "classe": "actu",
+    "short": false
+  },
+  "jhb0HjHO2sg": {
+    "titre": "Piton de la Fournaise   Hong Wang   Medaille Fields 2026 avec defis",
+    "classe": "974",
+    "short": false
+  },
+  "MF7G9VhU07I": {
+    "titre": "La Diagonale des Fous en équation : trop vite, trop lent, ou pile ? — EleveAI",
+    "classe": "974",
+    "short": false
+  },
+  "b7_7UX8D5y4": {
+    "titre": "La Diagonale des Fous en équation : trop vite, trop lent, ou pile ? — EleveAI",
+    "classe": "974",
+    "short": false
+  },
+  "yHCtKaj8TPw": {
+    "titre": "L'eau tombe de 500 m et l'île s'allume — barrage de Takamaka (schéma animé)",
+    "classe": "974",
+    "short": false
+  },
+  "oyjfPzC4sKY": {
+    "titre": "Comment un barrage allume toute une île — Takamaka | La Réunion en vrai",
+    "classe": "974",
+    "short": false
+  },
+  "hH2N0Cvx-AI": {
+    "titre": "Cette canne fabrique du sucre ET de l'électricité — usine du Gol, La Réunion",
+    "classe": "974",
+    "short": false
+  },
+  "3bPBjYsRciA": {
+    "titre": "Requins à La Réunion : faut-il vraiment avoir peur ? (10 vs 100 millions)",
+    "classe": "974",
+    "short": false
+  },
+  "4f2U1RAgk_A": {
+    "titre": "Ce volcan fabrique l'île sous vos pieds — le Piton de la Fournaise (1 100 °C)",
+    "classe": "974",
+    "short": false
+  },
+  "UjblKadInPw": {
+    "titre": "10 litres de lait pour 1 kg de fromage — la Plaine des Cafres, La Réunion",
+    "classe": "974",
+    "short": false
+  },
+  "hiFUDrIMZrU": {
+    "titre": "Les nombres décimaux — Maths 6e : lire, comparer, calculer",
+    "classe": "6e",
+    "short": false
+  },
+  "8DFgt3TCoH8": {
+    "titre": "Les nombres entiers — Maths 6e : lire, comparer, encadrer",
+    "classe": "6e",
+    "short": false
+  },
+  "7zT0TslnJ1U": {
+    "titre": "(AB), [AB), [AB] : mêmes lettres, 3 dessins différents",
+    "classe": "6e",
+    "short": true
+  },
+  "ITZuhk7hvMY": {
+    "titre": "eleveai maths seconde geometrie short enclos",
+    "classe": "seconde",
+    "short": true
+  },
+  "pPQUPDx3aeA": {
+    "titre": "Le chemin le plus court vers une droite, et sa démonstration",
+    "classe": "seconde",
+    "short": true
+  },
+  "eAq_Mpn4kWU": {
+    "titre": "Le plus taxé d'Europe, le moins cher : quelle stratégie sur le prix de l'essence ?",
+    "classe": "actu",
+    "short": true
+  },
+  "J7oUhMcScs0": {
+    "titre": "Le plus taxé d'Europe, le moins cher : quelle stratégie sur le prix de l'essence ?",
+    "classe": "actu",
+    "short": true
+  },
+  "RvgUjvT9fQQ": {
+    "titre": "La baleine saute plus loin… mais le dauphin monte plus haut #Shorts",
+    "classe": "seconde",
+    "short": true
+  },
+  "CF_g14NWtpM": {
+    "titre": "100 vues aujourd'hui, 102 400 dans 10 jours",
+    "classe": "actu",
+    "short": true
+  },
+  "dINqCMrVlVc": {
+    "titre": "Sondage ou urne : où ton avis compte-t-il vraiment ? David Lisnard !",
+    "classe": "actu",
+    "short": true
+  },
+  "QPkEwoHZ26k": {
+    "titre": "Pourquoi on ne divise JAMAIS par zéro",
+    "classe": "6e",
+    "short": true
+  },
+  "BsT5A1Brwxg": {
+    "titre": "1/2 + 1/3 ne fait pas 2/5 — voici pourquoi",
+    "classe": "5e",
+    "short": true
+  },
+  "ixAW26MMVC0": {
+    "titre": "Pourquoi apprendre à résoudre ce que l'IA fait en 1 seconde ?",
+    "classe": "actu",
+    "short": true
+  },
+  "tqVaJy-F_28": {
+    "titre": "On leur dit qu'ils dégringolent, et pourtant 81 % y croient : qui a raison ?",
+    "classe": "actu",
+    "short": true
+  },
+  "97iV1BsV_0g": {
+    "titre": "Parmi les meilleurs du monde, et pourtant la France est moyenne : pourquoi ?",
+    "classe": "actu",
+    "short": true
+  },
+  "RMLjLbbytbg": {
+    "titre": "−16 points en maths, et pourtant l'écart n'a pas bougé : qui a baissé ?",
+    "classe": "actu",
+    "short": true
+  },
+  "4lDcOlVwAk8": {
+    "titre": "Plus près du soleil, et pourtant plus froid : pourquoi ?",
+    "classe": "974",
+    "short": true
+  },
+  "kRpXZ_hC4Eg": {
+    "titre": "À quelle altitude fait-il 20 °C à La Réunion ? #lareunion #maths #science",
+    "classe": "974",
+    "short": true
+  },
+  "x_fuQDxmRew": {
+    "titre": "26° à Saint-Gilles, 11° au Maïdo : pourquoi ?",
+    "classe": "974",
+    "short": true
+  },
+  "uVs9h6561zU": {
+    "titre": "Carré d'une somme : l'erreur la plus fréquente en maths",
+    "classe": "seconde",
+    "short": true
+  },
+  "16Mm-fpOCkc": {
+    "titre": "Comment factoriser une différence de deux carrés",
+    "classe": "seconde",
+    "short": true
+  },
+  "TYBgLzC2KN8": {
+    "titre": "Calculer 99 au carré de tête, en 3 secondes",
+    "classe": "seconde",
+    "short": true
+  },
+  "9ThtdR_7raE": {
+    "titre": "Puissances : (7³)⁴, on additionne ou on multiplie ?",
+    "classe": "seconde",
+    "short": true
+  },
+  "u-KNZWpOZPc": {
+    "titre": "Écrire le l en cursive · droitier — CP #Shorts",
+    "classe": "cp",
+    "short": true
+  },
+  "ZfG9ncOWIqs": {
+    "titre": "Writing cursive l · left-handed #Shorts",
+    "classe": "cp",
+    "short": true
+  },
+  "h8veBP9mtMQ": {
+    "titre": "Pourquoi la racine carrée d'un nombre négatif n'existe pas",
+    "classe": "seconde",
+    "short": true
+  },
+  "b-IFAbW81EE": {
+    "titre": "√50 = 5√2 : comment simplifier une racine carrée",
+    "classe": "seconde",
+    "short": true
+  },
+  "mTJVzuYWoJM": {
+    "titre": "√9 + √16 = √25 ? La faute que presque tout le monde fait",
+    "classe": "actu",
+    "short": true
+  },
+  "lY2prJQXSpc": {
+    "titre": "Écrire le chiffre 1 · droitier — CP #Shorts",
+    "classe": "cp",
+    "short": true
+  },
+  "w0y3ocN82T8": {
+    "titre": "Écrire le chiffre 0 · gaucher — CP #Shorts",
+    "classe": "cp",
+    "short": true
+  },
+  "pTRIiMaJgrs": {
+    "titre": "Écrire le chiffre 0 · droitier — CP #Shorts",
+    "classe": "cp",
+    "short": true
+  },
+  "WjPbGZd4ul4": {
+    "titre": "Écrire le y en cursive · gaucher— CP #Shorts",
+    "classe": "cp",
+    "short": true
+  },
+  "2Plbd8JQ8bk": {
+    "titre": "Écrire le y en cursive · droitier — CP #Shorts",
+    "classe": "cp",
+    "short": true
+  },
+  "K6g2Mw_0E4Q": {
+    "titre": "Écrire le e en cursive · gaucher— CP #Shorts",
+    "classe": "cp",
+    "short": true
+  },
+  "13x-wZq3voA": {
+    "titre": "Écrire le e en cursive · droitier — CP #Shorts",
+    "classe": "cp",
+    "short": true
+  },
+  "y_1APDduTIE": {
+    "titre": "Écrire le u en cursive · gaucher — CP #Shorts",
+    "classe": "cp",
+    "short": true
+  },
+  "NT-Fk0PZTLY": {
+    "titre": "Écrire le u en cursive · droitier — CP #Shorts",
+    "classe": "cp",
+    "short": true
+  },
+  "WPXkpZl1JrY": {
+    "titre": "Écrire le i en cursive · gaucher — CP #Shorts #lareunion #maths #eleveai",
+    "classe": "cp",
+    "short": true
+  },
+  "atgQ3DFPBXY": {
+    "titre": "Écrire le i en cursive · droitier — CP #Shorts",
+    "classe": "cp",
+    "short": true
+  },
+  "v7PNXa82yuQ": {
+    "titre": "Écrire le o en cursive · gaucher — CP #Shorts",
+    "classe": "cp",
+    "short": true
+  },
+  "0d2HVqZPApY": {
+    "titre": "Écrire le o en cursive · droitier — CP #Shorts",
+    "classe": "cp",
+    "short": true
+  },
+  "QHRkEZcwZIM": {
+    "titre": "La lettre a en cursive · gaucher — CP #Shorts",
+    "classe": "cp",
+    "short": true
+  },
+  "I8stjojvTmg": {
+    "titre": "La lettre a en cursive · droitier — CP #Shortseleveai francais cp lettre a droitier portrait",
+    "classe": "cp",
+    "short": true
+  },
+  "0WUIzfICz4o": {
+    "titre": "Le record du monde de pluie est à La Réunion — cyclones (1 692 mm en 24 h)",
+    "classe": "974",
+    "short": false
+  }
 }
