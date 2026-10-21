@@ -1,0 +1,13 @@
+{
+  "00-garde": "Un tableau raconte une histoire. Il faut savoir l'écouter.",
+  "01-situation": "Une boulangère note ce qu'elle vend. Avec son tableau, elle décide combien de pain préparer chaque matin. Trop peu : des clients déçus. Trop : du pain jeté.",
+  "02-remplir": "Les baguettes : 120 le lundi, 110 le mercredi, 180 le samedi, 240 le dimanche. Les croissants : 40, 60, 90 et 150.",
+  "03-max": "Quel jour vend-elle le plus ? Sur la ligne des baguettes, le plus grand nombre est 240 : le dimanche. Pour les croissants, 150 : encore le dimanche.",
+  "04-conclure": "Ce que dit le tableau : le dimanche, c'est le grand jour. Elle doit préparer plus de pâte le dimanche.",
+  "05-comparer": "Le samedi, combien de croissants de plus que le lundi ? 90 moins 40, égale 50.",
+  "06-piege": "Le piège : lire une seule case et conclure trop vite. Le mercredi, elle vend 110 baguettes, moins que le lundi. Mais elle vend plus de croissants : 60 contre 40. Je lis toute la ligne, et toute la colonne.",
+  "07-defi": "À toi de jouer. Le dimanche, combien de baguettes de plus que le samedi ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 240 moins 180, égale 60 baguettes de plus.",
+  "08-finale": "Ce que tu as appris. Pour interpréter un tableau, je lis les lignes et les colonnes, je compare les nombres. Puis je dis, avec une phrase, ce que le tableau m'apprend.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -1,0 +1,13 @@
+{
+  "00-garde": "25 oiseaux notés en vrac. Comment y voir clair ?",
+  "01-situation": "Une ornithologue du Parc national compte les oiseaux d'une ravine. Elle note chaque oiseau qu'elle voit, un par un.",
+  "02-liste": "Sa liste part dans tous les sens : tec-tec, oiseau blanc, tec-tec, merle péi… 25 oiseaux en tout. Illisible !",
+  "03-tableau": "Elle construit un tableau d'effectifs : une case par espèce. Pour chaque oiseau de la liste, un trait dans la bonne case.",
+  "04-compter": "Elle compte les traits. Tec-tec : 7. Oiseau blanc : 9. Merle péi : 5. Papangue : 1. Oiseau de la Vierge : 3.",
+  "05-verifie": "Elle vérifie : 7 plus 9 plus 5 plus 1 plus 3, égale 25. Le total est juste : aucun oiseau oublié.",
+  "06-piege": "Le piège : compter deux fois le même oiseau, ou en oublier un. La somme des effectifs doit toujours retomber sur le total.",
+  "07-defi": "À toi de jouer. Le lendemain, 20 oiseaux : 6 tec-tec, 8 oiseaux blancs, 2 papangues, et des merles péi. Combien de merles ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 6 plus 8 plus 2, égale 16. 20 moins 16, égale 4 merles péi.",
+  "08-finale": "Ce que tu as appris. Pour construire un tableau d'effectifs : une case par catégorie, un trait par donnée, puis on compte. Et on vérifie que la somme des effectifs égale le total.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

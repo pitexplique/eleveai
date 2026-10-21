@@ -1,0 +1,13 @@
+{
+  "00-garde": "Au journal télévisé, un graphique peut tromper. Apprends à le démasquer.",
+  "01-situation": "Une journaliste de données vérifie les chiffres avant qu'on les montre à la télévision. Aujourd'hui, un reportage annonce : « Les inscriptions à la médiathèque explosent ! »",
+  "02-graph": "Sur le graphique du reportage, la barre de 2025 est trois fois plus haute que celle de 2024. Impressionnant !",
+  "03-lire": "Mais la journaliste lit les nombres. 2024 : 1 000 inscrits. 2025 : 1 040 inscrits.",
+  "04-axe": "Et elle regarde l'axe : il ne commence pas à 0. Il commence à 980. On a coupé le bas des barres !",
+  "05-vrai": "Avec un axe qui part de 0, les deux barres sont presque pareilles. 1 040 moins 1 000, égale 40 inscrits de plus. Ça augmente un peu. Ça n'explose pas.",
+  "06-piege": "Le piège : croire la hauteur des barres sans lire les nombres ni le début de l'axe. Interpréter, c'est vérifier avant de conclure.",
+  "07-defi": "À toi de jouer. 500 vélos vendus en janvier, 1 000 en février. Le journal dit : « deux fois plus ». A-t-il raison ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Oui : 500 fois 2, égale 1 000. Cette fois, c'est vraiment deux fois plus. Lire les nombres, c'est aussi savoir quand le titre dit vrai.",
+  "08-finale": "Ce que tu as appris. Pour interpréter un graphique, je lis le titre, les nombres, et le début de l'axe. Je compare les vrais nombres. Et je dis seulement ce que les données montrent.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

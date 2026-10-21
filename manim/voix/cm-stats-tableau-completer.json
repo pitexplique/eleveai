@@ -1,0 +1,13 @@
+{
+  "00-garde": "Une case vide dans un tableau ? On peut la trouver !",
+  "01-situation": "Sur la plage de l'Étang-Salé, deux classes ramassent les déchets avec un technicien de l'environnement. Son métier : protéger la nature, et compter ce qui la salit.",
+  "02-ligne1": "Les bouteilles : 14 pour la première classe, 9 pour la deuxième. Le total, c'est 14 plus 9 : 23.",
+  "03-ligne2": "Les bouchons : 25 et 31. Le total : 25 plus 31, égale 56.",
+  "04-case-vide": "Les canettes : 8 pour la première classe, et le total est 20. Combien pour la deuxième ? Je cherche ce qui manque : 20 moins 8, égale 12.",
+  "05-verifie": "Je vérifie : 8 plus 12, égale 20. C'est juste.",
+  "06-piege": "Le piège : additionner 8 et 20. Ça fait 28, plus que le total ! Une case de la ligne ne peut pas dépasser le total.",
+  "07-defi": "À toi de jouer. Les sacs plastique : 40 en tout. La première classe en a ramassé 23. Combien pour la deuxième ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 40 moins 23, égale 17. Et je vérifie : 23 plus 17, égale 40.",
+  "08-finale": "Ce que tu as appris. Le total, c'est la somme de la ligne. Pour une case vide, je fais : le total, moins ce que je connais. Puis je vérifie avec une addition.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

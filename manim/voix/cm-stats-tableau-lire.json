@@ -1,0 +1,13 @@
+{
+  "00-garde": "Combien de tortues ? Un tableau te le dit en un coup d'œil.",
+  "01-situation": "Une biologiste marine compte les tortues vertes sur trois plages de La Réunion. Son métier : protéger ces tortues. Elle veut savoir où elles viennent le plus.",
+  "02-tableau": "Elle range ses comptages dans un tableau. Les lignes, ce sont les plages : Saint-Leu, L'Hermitage, l'Étang-Salé. Les colonnes, ce sont les mois : janvier, février, mars.",
+  "03-remplir": "Janvier : 8 tortues à Saint-Leu, 5 à L'Hermitage, 3 à l'Étang-Salé. Février : 12, 7 et 4. Mars : 9, 11 et 6.",
+  "04-lire": "Combien de tortues à Saint-Leu en février ? Je prends la ligne Saint-Leu. Je prends la colonne février. Là où elles se croisent, je lis : 12 tortues.",
+  "05-autre": "À l'Étang-Salé en mars ? La ligne Étang-Salé, la colonne mars : 6 tortues.",
+  "06-piege": "Le piège : glisser sur la mauvaise ligne. Le 11, ce n'est pas Saint-Leu : c'est L'Hermitage, en mars. Je suis la ligne avec le doigt, jusqu'au bout.",
+  "07-defi": "À toi de jouer. Combien de tortues à L'Hermitage en février ? Mets pause, et cherche !",
+  "07b-correction": "Correction. La ligne L'Hermitage, la colonne février : 7 tortues.",
+  "08-finale": "Ce que tu as appris. Un tableau a des lignes et des colonnes. Pour lire une case, je prends la bonne ligne, la bonne colonne, et je lis là où elles se croisent.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

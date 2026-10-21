@@ -1,0 +1,13 @@
+{
+  "00-garde": "Un défi avec un tableau : deux étapes, et on trouve tout.",
+  "01-situation": "Un régisseur prépare un festival de musique, avec du maloya et du séga. Il doit savoir combien de personnes viennent chaque jour, pour prévoir la scène, l'eau et la sécurité.",
+  "02-adultes": "Les adultes : 350 le vendredi, 480 le samedi. Le dimanche, la case est vide. Mais le total des adultes est 1 200.",
+  "03-enfants": "Les enfants : 150 le vendredi, 220 le samedi, 130 le dimanche. En tout, 500 enfants.",
+  "04-etape1": "Étape 1 : les adultes du dimanche. 350 plus 480, égale 830. Il manque 1 200 moins 830 : 370 adultes.",
+  "05-etape2": "Étape 2 : tout le monde le dimanche. 370 adultes plus 130 enfants, égale 500 personnes.",
+  "06-piege": "Le piège : faire seulement 1 200 moins 350. Il faut enlever les deux jours connus : le vendredi et le samedi.",
+  "07-defi": "À toi de jouer. Combien de personnes en tout le samedi ? Et quel jour y a-t-il le plus de monde ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Le samedi : 480 plus 220, égale 700. Le vendredi : 350 plus 150, égale 500. Le dimanche : 500. Le samedi gagne avec 700 personnes : la plus grande scène, c'est pour le samedi.",
+  "08-finale": "Ce que tu as appris. Dans un défi, je cherche d'abord la case qui manque, grâce au total. Puis je me sers de ce nombre pour la suite. Une étape après l'autre.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -1,0 +1,13 @@
+{
+  "00-garde": "Ce diagramme raconte la saison des pluies.",
+  "01-situation": "Une prévisionniste météo mesure la pluie dans une ville de l'Est de La Réunion. Son métier : aider les agriculteurs, et prévenir les habitants avant les grosses pluies.",
+  "02-barres": "Janvier : 400 millimètres de pluie. Février : 450. Mars : 350. Avril : 250. Mai : 150. Juin : 100.",
+  "03-max": "Le mois le plus pluvieux ? La barre la plus haute : février, avec 450.",
+  "04-tendance": "Et je vois une histoire : de février à juin, les barres descendent. La pluie diminue. Au début de l'année, c'est l'été à La Réunion : la saison des pluies et des cyclones.",
+  "05-comparer": "En février, il pleut 3 fois plus qu'en mai : 150 fois 3, égale 450.",
+  "06-piege": "Le piège : dire que les barres descendent, donc qu'il ne pleuvra plus. Le diagramme ne montre que six mois. Je ne conclus que sur ce que je vois.",
+  "07-defi": "À toi de jouer. Combien de millimètres de pluie en tout, de janvier à mars ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 400 plus 450 plus 350, égale 1 200 millimètres.",
+  "08-finale": "Ce que tu as appris. Pour interpréter un diagramme, je trouve la barre la plus haute et la plus basse. Je compare. Je regarde si les barres montent ou descendent. Puis je dis ce que ça raconte, sans aller plus loin que les données.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

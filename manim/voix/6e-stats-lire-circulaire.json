@@ -1,0 +1,12 @@
+{
+  "00-garde": "Un diagramme circulaire : un disque coupé en parts.",
+  "01-situation": "Un diététicien aide les gens à bien manger. Pour expliquer une assiette équilibrée, il dessine un disque, comme une assiette.",
+  "02-parts": "La moitié de l'assiette : des légumes. Un quart : des féculents, le riz ou les grains. Un quart : la viande, le poisson ou les œufs.",
+  "03-lire": "Plus la part est grande, plus il y en a. La moitié, c'est la plus grande part : les légumes gagnent.",
+  "04-calcul": "L'assiette pèse 400 grammes. Les légumes, la moitié : 400 divisé par 2, égale 200 grammes. Le riz, un quart : 400 divisé par 4, égale 100 grammes.",
+  "05-piege": "Le piège : croire que trois parts, ce sont trois tiers. Ici, les parts ne sont pas égales : une moitié et deux quarts. Je regarde la taille de chaque part.",
+  "06-defi": "À toi de jouer. Une assiette de 600 grammes. Combien de grammes de légumes ? Et de poisson ? Mets pause, et cherche !",
+  "06b-correction": "Correction. La moitié de 600 : 300 grammes de légumes. Un quart de 600 : 150 grammes de poisson. Et 150 grammes de riz. 300 plus 150 plus 150, égale 600 : tout le disque.",
+  "07-finale": "Ce que tu as appris. Dans un diagramme circulaire, chaque part représente une partie du tout. Je compare la taille des parts : une moitié, un quart. Et toutes les parts ensemble font le disque entier.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

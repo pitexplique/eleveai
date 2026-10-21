@@ -1,0 +1,13 @@
+{
+  "00-garde": "Prélever une information : le bon nombre, au bon endroit.",
+  "01-situation": "Une économiste de l'INSEE suit les prix. Si les prix montent, elle le voit, et elle peut l'expliquer à tout le monde.",
+  "02-titre": "Je lis d'abord le titre : « Prix d'un kilogramme, en euros, au marché ». L'unité compte : c'est le prix d'un kilogramme.",
+  "03-remplir": "Les tomates : 3 euros en janvier 2025, 4 euros en janvier 2026. Les bananes : 2 euros, puis 2 euros. Les mangues : 6 euros, puis 5 euros.",
+  "04-prelever": "Le prix des tomates en 2026 ? La ligne des tomates, la colonne 2026 : 4 euros le kilogramme.",
+  "05-calcul": "Les tomates ont augmenté : 4 moins 3, égale 1 euro de plus. Les mangues, elles, ont baissé de 1 euro.",
+  "06-piege": "Le piège : oublier l'unité. 4 euros, c'est le prix d'un kilogramme de tomates, pas d'une seule tomate.",
+  "07-defi": "À toi de jouer. Combien coûtent 3 kilogrammes de mangues en janvier 2026 ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Je prélève le prix : 5 euros le kilogramme. 3 fois 5, égale 15 euros.",
+  "08-finale": "Ce que tu as appris. Je lis le titre et l'unité. Je trouve la bonne ligne et la bonne colonne. Puis j'utilise le nombre, avec son unité.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -1,0 +1,14 @@
+{
+  "00-garde": "Un défi de cinéma, avec un diagramme en barres.",
+  "01-situation": "Un programmateur de cinéma choisit les films et les séances. Pour décider, il regarde combien de spectateurs viennent chaque jour.",
+  "02-barres": "Le nouveau dessin animé : 120 entrées le mercredi, 80 le jeudi, 150 le vendredi, 300 le samedi, 250 le dimanche. Les nombres vont de 50 en 50.",
+  "03-question": "Le défi : combien d'entrées de plus le week-end que du mercredi au vendredi ?",
+  "04-etape1": "Étape 1, le week-end : 300 plus 250, égale 550.",
+  "05-etape2": "Étape 2, du mercredi au vendredi : 120 plus 80 plus 150, égale 350.",
+  "06-etape3": "Étape 3 : 550 moins 350, égale 200 entrées de plus le week-end. Il ajoute une séance le samedi !",
+  "07-piege": "Le piège : comparer seulement la barre la plus haute et la plus basse. 300 moins 80 ne répond pas à la question. Je relis la question avant de calculer.",
+  "08-defi": "À toi de jouer. Une salle a 100 places. Le samedi, 300 spectateurs. Combien de séances pleines faut-il ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 100, 200, 300 : il faut 3 séances pleines.",
+  "09-finale": "Ce que tu as appris. Dans un défi, je relis la question, je lis les barres utiles, et je calcule étape par étape.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -1,0 +1,12 @@
+{
+  "00-garde": "Sur un graphique, ce sont les nombres qui parlent.",
+  "01-situation": "Une agricultrice cultive des letchis. En décembre, elle pèse sa récolte chaque semaine, pour savoir combien de cueilleurs embaucher.",
+  "02-axes": "Sur le diagramme en barres : en bas, les semaines. Sur le côté, la masse en kilogrammes, de 100 en 100.",
+  "03-lire": "Semaine 1 : 200 kilogrammes. Semaine 2 : 450, au milieu, entre 400 et 500. Semaine 3 : 600. Semaine 4 : 350.",
+  "04-decider": "La barre la plus haute : la semaine 3, avec 600 kilogrammes. C'est la semaine où elle embauchera le plus de cueilleurs.",
+  "05-piege": "Le piège : arrondir à vue. La barre de la semaine 2 s'arrête au milieu, entre deux graduations : c'est 450, pas 400 ni 500.",
+  "06-defi": "À toi de jouer. Combien de kilogrammes de plus en semaine 3 qu'en semaine 2 ? Mets pause, et cherche !",
+  "06b-correction": "Correction. 600 moins 450, égale 150 kilogrammes de plus.",
+  "07-finale": "Ce que tu as appris. Je lis le titre et les axes. Je vérifie de combien en combien vont les graduations. Puis je lis les nombres, avec leur unité.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

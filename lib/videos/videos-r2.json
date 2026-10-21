@@ -1739,6 +1739,186 @@
   "youtube": null,
   "coach": "/coach/serie?classe=6e&matiere=maths&notion=proba_experience&microId=proba_vocabulaire&display=simple"
  },
+ "6e-stats-comparer": {
+  "fichier": "6e/maths/statistiques/08-comparer/eleveai-maths-6e-stats-comparer.mp4",
+  "poster": "6e/maths/statistiques/08-comparer/eleveai-maths-6e-stats-comparer.png",
+  "vignette": "6e/maths/statistiques/08-comparer/eleveai-maths-6e-stats-comparer.vignette.webp",
+  "titre": "Le plus haut sommet, et de combien ? — Comparer des données — épisode 8 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=stat_donnee&microId=stat_donnee_comparer&display=simple"
+ },
+ "6e-stats-comparer-short": {
+  "fichier": "6e/maths/statistiques/08-comparer/eleveai-maths-6e-stats-comparer-short.mp4",
+  "poster": "6e/maths/statistiques/08-comparer/eleveai-maths-6e-stats-comparer-short.png",
+  "vignette": "6e/maths/statistiques/08-comparer/eleveai-maths-6e-stats-comparer-short.vignette.webp",
+  "titre": "L'Everest = combien de Pitons des Neiges ? 🏔️ — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=stat_donnee&microId=stat_donnee_comparer&display=simple"
+ },
+ "6e-stats-construire-tableau": {
+  "fichier": "6e/maths/statistiques/03-construire-tableau/eleveai-maths-6e-stats-construire-tableau.mp4",
+  "poster": "6e/maths/statistiques/03-construire-tableau/eleveai-maths-6e-stats-construire-tableau.png",
+  "vignette": "6e/maths/statistiques/03-construire-tableau/eleveai-maths-6e-stats-construire-tableau.vignette.webp",
+  "titre": "25 oiseaux en vrac : y voir clair — Construire un tableau d'effectifs — épisode 3 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=stat_enquete&microId=stat_construire_tableau&display=simple"
+ },
+ "6e-stats-construire-tableau-short": {
+  "fichier": "6e/maths/statistiques/03-construire-tableau/eleveai-maths-6e-stats-construire-tableau-short.mp4",
+  "poster": "6e/maths/statistiques/03-construire-tableau/eleveai-maths-6e-stats-construire-tableau-short.png",
+  "vignette": "6e/maths/statistiques/03-construire-tableau/eleveai-maths-6e-stats-construire-tableau-short.vignette.webp",
+  "titre": "Le papangue est rare : 1 sur 25 ! 🦅 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=stat_enquete&microId=stat_construire_tableau&display=simple"
+ },
+ "6e-stats-defi": {
+  "fichier": "6e/maths/statistiques/10-defi/eleveai-maths-6e-stats-defi.mp4",
+  "poster": "6e/maths/statistiques/10-defi/eleveai-maths-6e-stats-defi.png",
+  "vignette": "6e/maths/statistiques/10-defi/eleveai-maths-6e-stats-defi.vignette.webp",
+  "titre": "Casser un code avec les stats ! — Le défi : casser un code — épisode 10 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=stat_donnee&microId=stat_donnee_defi&display=simple"
+ },
+ "6e-stats-defi-short": {
+  "fichier": "6e/maths/statistiques/10-defi/eleveai-maths-6e-stats-defi-short.mp4",
+  "poster": "6e/maths/statistiques/10-defi/eleveai-maths-6e-stats-defi-short.png",
+  "vignette": "6e/maths/statistiques/10-defi/eleveai-maths-6e-stats-defi-short.vignette.webp",
+  "titre": "La lettre la plus fréquente en français ? Devine ! 🔐 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=stat_donnee&microId=stat_donnee_defi&display=simple"
+ },
+ "6e-stats-enquete-mesurer": {
+  "fichier": "6e/maths/statistiques/05-enquete-mesurer/eleveai-maths-6e-stats-enquete-mesurer.mp4",
+  "poster": "6e/maths/statistiques/05-enquete-mesurer/eleveai-maths-6e-stats-enquete-mesurer.png",
+  "vignette": "6e/maths/statistiques/05-enquete-mesurer/eleveai-maths-6e-stats-enquete-mesurer.vignette.webp",
+  "titre": "2 minutes… ou 120 ? Une ligne, une même unité ! — Bien noter ses mesures — épisode 5 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=stat_enquete&microId=stat_enquete_mesurer&display=simple"
+ },
+ "6e-stats-enquete-mesurer-short": {
+  "fichier": "6e/maths/statistiques/05-enquete-mesurer/eleveai-maths-6e-stats-enquete-mesurer-short.mp4",
+  "poster": "6e/maths/statistiques/05-enquete-mesurer/eleveai-maths-6e-stats-enquete-mesurer-short.png",
+  "vignette": "6e/maths/statistiques/05-enquete-mesurer/eleveai-maths-6e-stats-enquete-mesurer-short.vignette.webp",
+  "titre": "Qui est le plus grand : 1 m 45 ou 152 ? 📏 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=stat_enquete&microId=stat_enquete_mesurer&display=simple"
+ },
+ "6e-stats-enquete-planifier": {
+  "fichier": "6e/maths/statistiques/04-enquete-planifier/eleveai-maths-6e-stats-enquete-planifier.mp4",
+  "poster": "6e/maths/statistiques/04-enquete-planifier/eleveai-maths-6e-stats-enquete-planifier.png",
+  "vignette": "6e/maths/statistiques/04-enquete-planifier/eleveai-maths-6e-stats-enquete-planifier.vignette.webp",
+  "titre": "180 « oui » sur 200 : tous d'accord ? — Préparer une enquête — épisode 4 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=stat_enquete&microId=stat_enquete_planifier&display=simple"
+ },
+ "6e-stats-enquete-planifier-short": {
+  "fichier": "6e/maths/statistiques/04-enquete-planifier/eleveai-maths-6e-stats-enquete-planifier-short.mp4",
+  "poster": "6e/maths/statistiques/04-enquete-planifier/eleveai-maths-6e-stats-enquete-planifier-short.png",
+  "vignette": "6e/maths/statistiques/04-enquete-planifier/eleveai-maths-6e-stats-enquete-planifier-short.vignette.webp",
+  "titre": "« 9 joueurs sur 10 adorent mon jeu ! » On y croit ? 🎮 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=stat_enquete&microId=stat_enquete_planifier&display=simple"
+ },
+ "6e-stats-interpreter": {
+  "fichier": "6e/maths/statistiques/09-interpreter/eleveai-maths-6e-stats-interpreter.mp4",
+  "poster": "6e/maths/statistiques/09-interpreter/eleveai-maths-6e-stats-interpreter.png",
+  "vignette": "6e/maths/statistiques/09-interpreter/eleveai-maths-6e-stats-interpreter.vignette.webp",
+  "titre": "« Ça explose ! » L'axe ment — Interpréter un graphique — épisode 9 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=stat_donnee&microId=stat_donnee_interpreter&display=simple"
+ },
+ "6e-stats-interpreter-short": {
+  "fichier": "6e/maths/statistiques/09-interpreter/eleveai-maths-6e-stats-interpreter-short.mp4",
+  "poster": "6e/maths/statistiques/09-interpreter/eleveai-maths-6e-stats-interpreter-short.png",
+  "vignette": "6e/maths/statistiques/09-interpreter/eleveai-maths-6e-stats-interpreter-short.vignette.webp",
+  "titre": "« Ça explose ! » Regarde bien l'axe… 📺 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=stat_donnee&microId=stat_donnee_interpreter&display=simple"
+ },
+ "6e-stats-lire-circulaire": {
+  "fichier": "6e/maths/statistiques/07-lire-circulaire/eleveai-maths-6e-stats-lire-circulaire.mp4",
+  "poster": "6e/maths/statistiques/07-lire-circulaire/eleveai-maths-6e-stats-lire-circulaire.png",
+  "vignette": "6e/maths/statistiques/07-lire-circulaire/eleveai-maths-6e-stats-lire-circulaire.vignette.webp",
+  "titre": "3 parts = 3 tiers ? Non ! — Lire un diagramme circulaire — épisode 7 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=stat_donnee&microId=stat_donnee_lire_circulaire&display=simple"
+ },
+ "6e-stats-lire-circulaire-short": {
+  "fichier": "6e/maths/statistiques/07-lire-circulaire/eleveai-maths-6e-stats-lire-circulaire-short.mp4",
+  "poster": "6e/maths/statistiques/07-lire-circulaire/eleveai-maths-6e-stats-lire-circulaire-short.png",
+  "vignette": "6e/maths/statistiques/07-lire-circulaire/eleveai-maths-6e-stats-lire-circulaire-short.vignette.webp",
+  "titre": "Ton assiette de cari : quelle part pour le riz ? 🍛 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=stat_donnee&microId=stat_donnee_lire_circulaire&display=simple"
+ },
+ "6e-stats-lire-graphique": {
+  "fichier": "6e/maths/statistiques/06-lire-graphique/eleveai-maths-6e-stats-lire-graphique.mp4",
+  "poster": "6e/maths/statistiques/06-lire-graphique/eleveai-maths-6e-stats-lire-graphique.png",
+  "vignette": "6e/maths/statistiques/06-lire-graphique/eleveai-maths-6e-stats-lire-graphique.vignette.webp",
+  "titre": "400 ou 500 ? Ni l'un ni l'autre ! — Lire un graphique — épisode 6 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=stat_donnee&microId=stat_donnee_lire_graphique&display=simple"
+ },
+ "6e-stats-lire-graphique-short": {
+  "fichier": "6e/maths/statistiques/06-lire-graphique/eleveai-maths-6e-stats-lire-graphique-short.mp4",
+  "poster": "6e/maths/statistiques/06-lire-graphique/eleveai-maths-6e-stats-lire-graphique-short.png",
+  "vignette": "6e/maths/statistiques/06-lire-graphique/eleveai-maths-6e-stats-lire-graphique-short.vignette.webp",
+  "titre": "Les letchis : récolte × combien en 2 semaines ? 🍒 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=stat_donnee&microId=stat_donnee_lire_graphique&display=simple"
+ },
+ "6e-stats-lire-tableau": {
+  "fichier": "6e/maths/statistiques/01-lire-tableau/eleveai-maths-6e-stats-lire-tableau.mp4",
+  "poster": "6e/maths/statistiques/01-lire-tableau/eleveai-maths-6e-stats-lire-tableau.png",
+  "vignette": "6e/maths/statistiques/01-lire-tableau/eleveai-maths-6e-stats-lire-tableau.vignette.webp",
+  "titre": "Ligne ou colonne ? Lire un tableau sans se tromper — Lire un tableau — épisode 1 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=stat_enquete&microId=stat_donnee_lire_tableau&display=simple"
+ },
+ "6e-stats-lire-tableau-short": {
+  "fichier": "6e/maths/statistiques/01-lire-tableau/eleveai-maths-6e-stats-lire-tableau-short.mp4",
+  "poster": "6e/maths/statistiques/01-lire-tableau/eleveai-maths-6e-stats-lire-tableau-short.png",
+  "vignette": "6e/maths/statistiques/01-lire-tableau/eleveai-maths-6e-stats-lire-tableau-short.vignette.webp",
+  "titre": "À quelle heure le bus est-il plein à craquer ? 🚌 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=stat_enquete&microId=stat_donnee_lire_tableau&display=simple"
+ },
+ "6e-stats-prelever": {
+  "fichier": "6e/maths/statistiques/02-prelever/eleveai-maths-6e-stats-prelever.mp4",
+  "poster": "6e/maths/statistiques/02-prelever/eleveai-maths-6e-stats-prelever.png",
+  "vignette": "6e/maths/statistiques/02-prelever/eleveai-maths-6e-stats-prelever.vignette.webp",
+  "titre": "4 € la tomate ? Non, le kilo ! — Prélever une information — épisode 2 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=stat_donnee&microId=stat_donnee_prelever&display=simple"
+ },
+ "6e-stats-prelever-short": {
+  "fichier": "6e/maths/statistiques/02-prelever/eleveai-maths-6e-stats-prelever-short.mp4",
+  "poster": "6e/maths/statistiques/02-prelever/eleveai-maths-6e-stats-prelever-short.png",
+  "vignette": "6e/maths/statistiques/02-prelever/eleveai-maths-6e-stats-prelever-short.vignette.webp",
+  "titre": "4 € la tomate… ou 4 € le kilo ? 🍅 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=stat_donnee&microId=stat_donnee_prelever&display=simple"
+ },
  "974-antecedent": {
   "fichier": "974/maths/shorts/fr/temperature-altitude/eleveai-maths-974-temperature-altitude-short-antecedent.mp4",
   "poster": null,
@@ -2241,6 +2421,150 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cm1&matiere=maths&notion=probabilite&microId=probabilite_vocabulaire&display=simple"
  },
+ "cm1-stats-graphique-completer": {
+  "fichier": "cm1/maths/statistiques/06-graphique-completer/eleveai-maths-cm1-stats-graphique-completer.mp4",
+  "poster": "cm1/maths/statistiques/06-graphique-completer/eleveai-maths-cm1-stats-graphique-completer.png",
+  "vignette": "cm1/maths/statistiques/06-graphique-completer/eleveai-maths-cm1-stats-graphique-completer.vignette.webp",
+  "titre": "Il manque une barre ! — Compléter un diagramme en barres — épisode 6 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=graphique&microId=graphique_completer&display=simple"
+ },
+ "cm1-stats-graphique-completer-short": {
+  "fichier": "cm1/maths/statistiques/06-graphique-completer/eleveai-maths-cm1-stats-graphique-completer-short.mp4",
+  "poster": "cm1/maths/statistiques/06-graphique-completer/eleveai-maths-cm1-stats-graphique-completer-short.png",
+  "vignette": "cm1/maths/statistiques/06-graphique-completer/eleveai-maths-cm1-stats-graphique-completer-short.vignette.webp",
+  "titre": "La Réunion : 2 fois ou 3 fois plus d'habitants ? 🌋 — CM1 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=graphique&microId=graphique_completer&display=simple"
+ },
+ "cm1-stats-graphique-defi": {
+  "fichier": "cm1/maths/statistiques/08-graphique-defi/eleveai-maths-cm1-stats-graphique-defi.mp4",
+  "poster": "cm1/maths/statistiques/08-graphique-defi/eleveai-maths-cm1-stats-graphique-defi.png",
+  "vignette": "cm1/maths/statistiques/08-graphique-defi/eleveai-maths-cm1-stats-graphique-defi.vignette.webp",
+  "titre": "300 − 80 ? Relis la question ! — Le défi des diagrammes — épisode 8 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=graphique&microId=graphique_defi&display=simple"
+ },
+ "cm1-stats-graphique-defi-short": {
+  "fichier": "cm1/maths/statistiques/08-graphique-defi/eleveai-maths-cm1-stats-graphique-defi-short.mp4",
+  "poster": "cm1/maths/statistiques/08-graphique-defi/eleveai-maths-cm1-stats-graphique-defi-short.png",
+  "vignette": "cm1/maths/statistiques/08-graphique-defi/eleveai-maths-cm1-stats-graphique-defi-short.vignette.webp",
+  "titre": "Seul dans la salle de cinéma ? Quel jour y aller 🎬 — CM1 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=graphique&microId=graphique_defi&display=simple"
+ },
+ "cm1-stats-graphique-interpreter": {
+  "fichier": "cm1/maths/statistiques/07-graphique-interpreter/eleveai-maths-cm1-stats-graphique-interpreter.mp4",
+  "poster": "cm1/maths/statistiques/07-graphique-interpreter/eleveai-maths-cm1-stats-graphique-interpreter.png",
+  "vignette": "cm1/maths/statistiques/07-graphique-interpreter/eleveai-maths-cm1-stats-graphique-interpreter.vignette.webp",
+  "titre": "Ça descend : fini la pluie ? — Interpréter un diagramme en barres — épisode 7 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=graphique&microId=graphique_interpreter&display=simple"
+ },
+ "cm1-stats-graphique-interpreter-short": {
+  "fichier": "cm1/maths/statistiques/07-graphique-interpreter/eleveai-maths-cm1-stats-graphique-interpreter-short.mp4",
+  "poster": "cm1/maths/statistiques/07-graphique-interpreter/eleveai-maths-cm1-stats-graphique-interpreter-short.png",
+  "vignette": "cm1/maths/statistiques/07-graphique-interpreter/eleveai-maths-cm1-stats-graphique-interpreter-short.vignette.webp",
+  "titre": "1 825 mm de pluie en UN jour : record du monde ! 🌧️ — CM1 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=graphique&microId=graphique_interpreter&display=simple"
+ },
+ "cm1-stats-graphique-lire": {
+  "fichier": "cm1/maths/statistiques/05-graphique-lire/eleveai-maths-cm1-stats-graphique-lire.mp4",
+  "poster": "cm1/maths/statistiques/05-graphique-lire/eleveai-maths-cm1-stats-graphique-lire.png",
+  "vignette": "cm1/maths/statistiques/05-graphique-lire/eleveai-maths-cm1-stats-graphique-lire.vignette.webp",
+  "titre": "Paris 2024 : ni 20, ni 24 ! — Lire un diagramme en barres — épisode 5 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=graphique&microId=graphique_lire&display=simple"
+ },
+ "cm1-stats-graphique-lire-short": {
+  "fichier": "cm1/maths/statistiques/05-graphique-lire/eleveai-maths-cm1-stats-graphique-lire-short.mp4",
+  "poster": "cm1/maths/statistiques/05-graphique-lire/eleveai-maths-cm1-stats-graphique-lire-short.png",
+  "vignette": "cm1/maths/statistiques/05-graphique-lire/eleveai-maths-cm1-stats-graphique-lire-short.vignette.webp",
+  "titre": "Plus d'or que d'argent à Paris 2024 ? FAUX ! 🥇 — CM1 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=graphique&microId=graphique_lire&display=simple"
+ },
+ "cm1-stats-tableau-completer": {
+  "fichier": "cm1/maths/statistiques/02-tableau-completer/eleveai-maths-cm1-stats-tableau-completer.mp4",
+  "poster": "cm1/maths/statistiques/02-tableau-completer/eleveai-maths-cm1-stats-tableau-completer.png",
+  "vignette": "cm1/maths/statistiques/02-tableau-completer/eleveai-maths-cm1-stats-tableau-completer.vignette.webp",
+  "titre": "Une case vide : 8 + 20 = 28 ? Non ! — Compléter un tableau — épisode 2 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=tableau&microId=tableau_completer&display=simple"
+ },
+ "cm1-stats-tableau-completer-short": {
+  "fichier": "cm1/maths/statistiques/02-tableau-completer/eleveai-maths-cm1-stats-tableau-completer-short.mp4",
+  "poster": "cm1/maths/statistiques/02-tableau-completer/eleveai-maths-cm1-stats-tableau-completer-short.png",
+  "vignette": "cm1/maths/statistiques/02-tableau-completer/eleveai-maths-cm1-stats-tableau-completer-short.vignette.webp",
+  "titre": "50 bouchons sur la plage… et la 2e classe ? 🏖️ — CM1 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=tableau&microId=tableau_completer&display=simple"
+ },
+ "cm1-stats-tableau-defi": {
+  "fichier": "cm1/maths/statistiques/04-tableau-defi/eleveai-maths-cm1-stats-tableau-defi.mp4",
+  "poster": "cm1/maths/statistiques/04-tableau-defi/eleveai-maths-cm1-stats-tableau-defi.png",
+  "vignette": "cm1/maths/statistiques/04-tableau-defi/eleveai-maths-cm1-stats-tableau-defi.vignette.webp",
+  "titre": "1 200 − 350 ? Le piège du festival de maloya — Le défi des tableaux — épisode 4 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=tableau&microId=tableau_defi&display=simple"
+ },
+ "cm1-stats-tableau-defi-short": {
+  "fichier": "cm1/maths/statistiques/04-tableau-defi/eleveai-maths-cm1-stats-tableau-defi-short.mp4",
+  "poster": "cm1/maths/statistiques/04-tableau-defi/eleveai-maths-cm1-stats-tableau-defi-short.png",
+  "vignette": "cm1/maths/statistiques/04-tableau-defi/eleveai-maths-cm1-stats-tableau-defi-short.vignette.webp",
+  "titre": "1 200 adultes : où sont passés ceux du dimanche ? 🎶 — CM1 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=tableau&microId=tableau_defi&display=simple"
+ },
+ "cm1-stats-tableau-interpreter": {
+  "fichier": "cm1/maths/statistiques/03-tableau-interpreter/eleveai-maths-cm1-stats-tableau-interpreter.mp4",
+  "poster": "cm1/maths/statistiques/03-tableau-interpreter/eleveai-maths-cm1-stats-tableau-interpreter.png",
+  "vignette": "cm1/maths/statistiques/03-tableau-interpreter/eleveai-maths-cm1-stats-tableau-interpreter.vignette.webp",
+  "titre": "Le dimanche, le grand jour du pain ? — Interpréter un tableau — épisode 3 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=tableau&microId=tableau_interpreter&display=simple"
+ },
+ "cm1-stats-tableau-interpreter-short": {
+  "fichier": "cm1/maths/statistiques/03-tableau-interpreter/eleveai-maths-cm1-stats-tableau-interpreter-short.mp4",
+  "poster": "cm1/maths/statistiques/03-tableau-interpreter/eleveai-maths-cm1-stats-tableau-interpreter-short.png",
+  "vignette": "cm1/maths/statistiques/03-tableau-interpreter/eleveai-maths-cm1-stats-tableau-interpreter-short.vignette.webp",
+  "titre": "Pourquoi la boulangère se lève plus tôt le dimanche ? 🥖 — CM1 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=tableau&microId=tableau_interpreter&display=simple"
+ },
+ "cm1-stats-tableau-lire": {
+  "fichier": "cm1/maths/statistiques/01-tableau-lire/eleveai-maths-cm1-stats-tableau-lire.mp4",
+  "poster": "cm1/maths/statistiques/01-tableau-lire/eleveai-maths-cm1-stats-tableau-lire.png",
+  "vignette": "cm1/maths/statistiques/01-tableau-lire/eleveai-maths-cm1-stats-tableau-lire.vignette.webp",
+  "titre": "Le 11, c'est Saint-Leu ? Le piège de la mauvaise ligne — Lire un tableau — épisode 1 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=tableau&microId=tableau_lire&display=simple"
+ },
+ "cm1-stats-tableau-lire-short": {
+  "fichier": "cm1/maths/statistiques/01-tableau-lire/eleveai-maths-cm1-stats-tableau-lire-short.mp4",
+  "poster": "cm1/maths/statistiques/01-tableau-lire/eleveai-maths-cm1-stats-tableau-lire-short.png",
+  "vignette": "cm1/maths/statistiques/01-tableau-lire/eleveai-maths-cm1-stats-tableau-lire-short.vignette.webp",
+  "titre": "Sur quelle plage nagent les tortues ? 🐢 — CM1 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=tableau&microId=tableau_lire&display=simple"
+ },
  "cm2-proba-comparer": {
   "fichier": "cm2/maths/probabilites/03-comparer/eleveai-maths-cm2-proba-comparer.mp4",
   "poster": "cm2/maths/probabilites/03-comparer/eleveai-maths-cm2-proba-comparer.png",
@@ -2330,6 +2654,150 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=probabilite&microId=probabilite_vocabulaire&display=simple"
+ },
+ "cm2-stats-graphique-completer": {
+  "fichier": "cm2/maths/statistiques/06-graphique-completer/eleveai-maths-cm2-stats-graphique-completer.mp4",
+  "poster": "cm2/maths/statistiques/06-graphique-completer/eleveai-maths-cm2-stats-graphique-completer.png",
+  "vignette": "cm2/maths/statistiques/06-graphique-completer/eleveai-maths-cm2-stats-graphique-completer.vignette.webp",
+  "titre": "Il manque une barre ! — Compléter un diagramme en barres — épisode 6 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=graphique&microId=graphique_completer&display=simple"
+ },
+ "cm2-stats-graphique-completer-short": {
+  "fichier": "cm2/maths/statistiques/06-graphique-completer/eleveai-maths-cm2-stats-graphique-completer-short.mp4",
+  "poster": "cm2/maths/statistiques/06-graphique-completer/eleveai-maths-cm2-stats-graphique-completer-short.png",
+  "vignette": "cm2/maths/statistiques/06-graphique-completer/eleveai-maths-cm2-stats-graphique-completer-short.vignette.webp",
+  "titre": "La Réunion : 2 fois ou 3 fois plus d'habitants ? 🌋 — CM2 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=graphique&microId=graphique_completer&display=simple"
+ },
+ "cm2-stats-graphique-defi": {
+  "fichier": "cm2/maths/statistiques/08-graphique-defi/eleveai-maths-cm2-stats-graphique-defi.mp4",
+  "poster": "cm2/maths/statistiques/08-graphique-defi/eleveai-maths-cm2-stats-graphique-defi.png",
+  "vignette": "cm2/maths/statistiques/08-graphique-defi/eleveai-maths-cm2-stats-graphique-defi.vignette.webp",
+  "titre": "300 − 80 ? Relis la question ! — Le défi des diagrammes — épisode 8 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=graphique&microId=graphique_defi&display=simple"
+ },
+ "cm2-stats-graphique-defi-short": {
+  "fichier": "cm2/maths/statistiques/08-graphique-defi/eleveai-maths-cm2-stats-graphique-defi-short.mp4",
+  "poster": "cm2/maths/statistiques/08-graphique-defi/eleveai-maths-cm2-stats-graphique-defi-short.png",
+  "vignette": "cm2/maths/statistiques/08-graphique-defi/eleveai-maths-cm2-stats-graphique-defi-short.vignette.webp",
+  "titre": "Seul dans la salle de cinéma ? Quel jour y aller 🎬 — CM2 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=graphique&microId=graphique_defi&display=simple"
+ },
+ "cm2-stats-graphique-interpreter": {
+  "fichier": "cm2/maths/statistiques/07-graphique-interpreter/eleveai-maths-cm2-stats-graphique-interpreter.mp4",
+  "poster": "cm2/maths/statistiques/07-graphique-interpreter/eleveai-maths-cm2-stats-graphique-interpreter.png",
+  "vignette": "cm2/maths/statistiques/07-graphique-interpreter/eleveai-maths-cm2-stats-graphique-interpreter.vignette.webp",
+  "titre": "Ça descend : fini la pluie ? — Interpréter un diagramme en barres — épisode 7 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=graphique&microId=graphique_interpreter&display=simple"
+ },
+ "cm2-stats-graphique-interpreter-short": {
+  "fichier": "cm2/maths/statistiques/07-graphique-interpreter/eleveai-maths-cm2-stats-graphique-interpreter-short.mp4",
+  "poster": "cm2/maths/statistiques/07-graphique-interpreter/eleveai-maths-cm2-stats-graphique-interpreter-short.png",
+  "vignette": "cm2/maths/statistiques/07-graphique-interpreter/eleveai-maths-cm2-stats-graphique-interpreter-short.vignette.webp",
+  "titre": "1 825 mm de pluie en UN jour : record du monde ! 🌧️ — CM2 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=graphique&microId=graphique_interpreter&display=simple"
+ },
+ "cm2-stats-graphique-lire": {
+  "fichier": "cm2/maths/statistiques/05-graphique-lire/eleveai-maths-cm2-stats-graphique-lire.mp4",
+  "poster": "cm2/maths/statistiques/05-graphique-lire/eleveai-maths-cm2-stats-graphique-lire.png",
+  "vignette": "cm2/maths/statistiques/05-graphique-lire/eleveai-maths-cm2-stats-graphique-lire.vignette.webp",
+  "titre": "Paris 2024 : ni 20, ni 24 ! — Lire un diagramme en barres — épisode 5 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=graphique&microId=graphique_lire&display=simple"
+ },
+ "cm2-stats-graphique-lire-short": {
+  "fichier": "cm2/maths/statistiques/05-graphique-lire/eleveai-maths-cm2-stats-graphique-lire-short.mp4",
+  "poster": "cm2/maths/statistiques/05-graphique-lire/eleveai-maths-cm2-stats-graphique-lire-short.png",
+  "vignette": "cm2/maths/statistiques/05-graphique-lire/eleveai-maths-cm2-stats-graphique-lire-short.vignette.webp",
+  "titre": "Plus d'or que d'argent à Paris 2024 ? FAUX ! 🥇 — CM2 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=graphique&microId=graphique_lire&display=simple"
+ },
+ "cm2-stats-tableau-completer": {
+  "fichier": "cm2/maths/statistiques/02-tableau-completer/eleveai-maths-cm2-stats-tableau-completer.mp4",
+  "poster": "cm2/maths/statistiques/02-tableau-completer/eleveai-maths-cm2-stats-tableau-completer.png",
+  "vignette": "cm2/maths/statistiques/02-tableau-completer/eleveai-maths-cm2-stats-tableau-completer.vignette.webp",
+  "titre": "Une case vide : 8 + 20 = 28 ? Non ! — Compléter un tableau — épisode 2 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=tableau&microId=tableau_completer&display=simple"
+ },
+ "cm2-stats-tableau-completer-short": {
+  "fichier": "cm2/maths/statistiques/02-tableau-completer/eleveai-maths-cm2-stats-tableau-completer-short.mp4",
+  "poster": "cm2/maths/statistiques/02-tableau-completer/eleveai-maths-cm2-stats-tableau-completer-short.png",
+  "vignette": "cm2/maths/statistiques/02-tableau-completer/eleveai-maths-cm2-stats-tableau-completer-short.vignette.webp",
+  "titre": "50 bouchons sur la plage… et la 2e classe ? 🏖️ — CM2 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=tableau&microId=tableau_completer&display=simple"
+ },
+ "cm2-stats-tableau-defi": {
+  "fichier": "cm2/maths/statistiques/04-tableau-defi/eleveai-maths-cm2-stats-tableau-defi.mp4",
+  "poster": "cm2/maths/statistiques/04-tableau-defi/eleveai-maths-cm2-stats-tableau-defi.png",
+  "vignette": "cm2/maths/statistiques/04-tableau-defi/eleveai-maths-cm2-stats-tableau-defi.vignette.webp",
+  "titre": "1 200 − 350 ? Le piège du festival de maloya — Le défi des tableaux — épisode 4 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=tableau&microId=tableau_defi&display=simple"
+ },
+ "cm2-stats-tableau-defi-short": {
+  "fichier": "cm2/maths/statistiques/04-tableau-defi/eleveai-maths-cm2-stats-tableau-defi-short.mp4",
+  "poster": "cm2/maths/statistiques/04-tableau-defi/eleveai-maths-cm2-stats-tableau-defi-short.png",
+  "vignette": "cm2/maths/statistiques/04-tableau-defi/eleveai-maths-cm2-stats-tableau-defi-short.vignette.webp",
+  "titre": "1 200 adultes : où sont passés ceux du dimanche ? 🎶 — CM2 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=tableau&microId=tableau_defi&display=simple"
+ },
+ "cm2-stats-tableau-interpreter": {
+  "fichier": "cm2/maths/statistiques/03-tableau-interpreter/eleveai-maths-cm2-stats-tableau-interpreter.mp4",
+  "poster": "cm2/maths/statistiques/03-tableau-interpreter/eleveai-maths-cm2-stats-tableau-interpreter.png",
+  "vignette": "cm2/maths/statistiques/03-tableau-interpreter/eleveai-maths-cm2-stats-tableau-interpreter.vignette.webp",
+  "titre": "Le dimanche, le grand jour du pain ? — Interpréter un tableau — épisode 3 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=tableau&microId=tableau_interpreter&display=simple"
+ },
+ "cm2-stats-tableau-interpreter-short": {
+  "fichier": "cm2/maths/statistiques/03-tableau-interpreter/eleveai-maths-cm2-stats-tableau-interpreter-short.mp4",
+  "poster": "cm2/maths/statistiques/03-tableau-interpreter/eleveai-maths-cm2-stats-tableau-interpreter-short.png",
+  "vignette": "cm2/maths/statistiques/03-tableau-interpreter/eleveai-maths-cm2-stats-tableau-interpreter-short.vignette.webp",
+  "titre": "Pourquoi la boulangère se lève plus tôt le dimanche ? 🥖 — CM2 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=tableau&microId=tableau_interpreter&display=simple"
+ },
+ "cm2-stats-tableau-lire": {
+  "fichier": "cm2/maths/statistiques/01-tableau-lire/eleveai-maths-cm2-stats-tableau-lire.mp4",
+  "poster": "cm2/maths/statistiques/01-tableau-lire/eleveai-maths-cm2-stats-tableau-lire.png",
+  "vignette": "cm2/maths/statistiques/01-tableau-lire/eleveai-maths-cm2-stats-tableau-lire.vignette.webp",
+  "titre": "Le 11, c'est Saint-Leu ? Le piège de la mauvaise ligne — Lire un tableau — épisode 1 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=tableau&microId=tableau_lire&display=simple"
+ },
+ "cm2-stats-tableau-lire-short": {
+  "fichier": "cm2/maths/statistiques/01-tableau-lire/eleveai-maths-cm2-stats-tableau-lire-short.mp4",
+  "poster": "cm2/maths/statistiques/01-tableau-lire/eleveai-maths-cm2-stats-tableau-lire-short.png",
+  "vignette": "cm2/maths/statistiques/01-tableau-lire/eleveai-maths-cm2-stats-tableau-lire-short.vignette.webp",
+  "titre": "Sur quelle plage nagent les tortues ? 🐢 — CM2 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=tableau&microId=tableau_lire&display=simple"
  },
  "cp-famille-coccinelle": {
   "fichier": "cp/maths/shorts/fr/eleveai-maths-cp-short-famille-coccinelle.mp4",

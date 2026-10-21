@@ -759,6 +759,66 @@ for _dos, _k, _titre, _sous, _lg, _tt in [
     CEINTURE_SHORT[_nom] = "orange"
 
 
+# 21/10/2026 — série STATISTIQUES cycle 3 : shorts. Le short CM est rendu une fois et copié
+# sous cm1 ET cm2 → deux miniatures, badge différent. (sortie, nom, ceinture, titre, sous, lignes, taille)
+_STATS_CM_SHORTS = [
+    ("01-tableau-lire", "tableau-lire", "blanche", ["LES TORTUES", "DE FÉVRIER"], "sur quelle plage nagent-elles le plus ?",
+     [("Saint-Leu : 12", 96, BLEU), ("L'Hermitage : 7", 90, ORANGE), ("Saint-Leu gagne !", 80, VERT)], 88),
+    ("02-tableau-completer", "tableau-completer", "jaune", ["50 BOUCHONS", "SUR LA PLAGE"], "la 1re classe en trouve 30… et la 2e ?",
+     [("50 − 30", 120, BLEU), ("= 20 !", 120, VERT), ("30 + 20 = 50", 90, ORANGE)], 88),
+    ("03-tableau-interpreter", "tableau-interpreter", "jaune", ["LEVÉE PLUS TÔT", "LE DIMANCHE ?"], "le tableau de la boulangère",
+     [("lundi : 120", 100, BLEU), ("dimanche : 240", 96, ORANGE), ("2 fois plus !", 100, VERT)], 84),
+    ("04-tableau-defi", "tableau-defi", "orange", ["1 200", "ADULTES"], "où sont passés ceux du dimanche ?",
+     [("350 + 480 = 830", 90, BLEU), ("1 200 − 830", 100, ORANGE), ("= 370 !", 110, VERT)], 88),
+    ("05-graphique-lire", "graphique-lire", "blanche", ["PLUS D'OR", "QUE D'ARGENT ?"], "Paris 2024, vrai ou faux ?",
+     [("or : 16", 110, BLEU), ("argent : 26", 110, ORANGE), ("faux !", 120, ROUGE)], 88),
+    ("06-graphique-completer", "graphique-completer", "blanche", ["LA RÉUNION", "× 2 OU × 3 ?"], "les habitants, de 1954 à 2010",
+     [("270 000 → 820 000", 76, BLEU), ("270 000 × 3", 96, ORANGE), ("un peu plus de 3 !", 80, VERT)], 88),
+    ("07-graphique-interpreter", "graphique-interpreter", "blanche", ["LA PLUIE", "D'UN SEUL JOUR"], "plus que celle d'un mois ?",
+     [("un mois : 450 mm", 86, BLEU), ("Foc-Foc : 1 825 mm", 80, ROUGE), ("record du monde !", 80, VERT)], 88),
+    ("08-graphique-defi", "graphique-defi", "jaune", ["SEUL", "AU CINÉMA ?"], "quel jour choisir ?",
+     [("samedi : 300", 100, BLEU), ("jeudi : 80", 100, ORANGE), ("le jeudi !", 110, VERT)], 88),
+]
+for _cl in ("cm1", "cm2"):
+    for _dos, _k, _c, _titre, _sous, _lg, _tt in _STATS_CM_SHORTS:
+        _nom = f"eleveai-maths-{_cl}-stats-{_k}-short"
+        SHORTS[_nom] = {
+            "badge": f"STATISTIQUES · {_cl.upper()}", "titre": _titre, "taille": _tt, "sous": _sous,
+            "taille_sous": 44, "couleur_sous": ORANGE, "accroche": _acc(_lg), "dossier": f"{_cl}/maths/fr",
+            "sortie": f"{_cl}/maths/statistiques/{_dos}",
+        }
+        CEINTURE_SHORT[_nom] = _c
+for _dos, _k, _c, _titre, _sous, _lg, _tt in [
+    ("01-lire-tableau", "lire-tableau", "blanche", ["LE BUS", "PLEIN À CRAQUER"], "à quel moment de la journée ?",
+     [("matin : 180", 100, BLEU), ("midi : 60", 100, ORANGE), ("soir : 210 !", 100, VERT)], 84),
+    ("02-prelever", "prelever", "blanche", ["4 € LA TOMATE", "OU LE KILO ?"], "lis le titre du tableau",
+     [("4 € la tomate ?", 96, ROUGE), ("prix d'un kilogramme", 70, BLEU), ("4 € le kilo !", 100, VERT)], 84),
+    ("03-construire-tableau", "construire-tableau", "jaune", ["LE PAPANGUE", "EST RARE"], "sur 25 oiseaux, combien ?",
+     [("oiseaux blancs : 9", 80, BLEU), ("tec-tec : 7", 96, ORANGE), ("papangue : 1 !", 96, VERT)], 86),
+    ("04-enquete-planifier", "enquete-planifier", "blanche", ["9 JOUEURS SUR 10", "ADORENT !"], "mais qui a répondu ?",
+     [("9 sur 10…", 110, BLEU), ("des abonnés !", 100, ROUGE), ("échantillon biaisé", 76, ORANGE)], 76),
+    ("05-enquete-mesurer", "enquete-mesurer", "blanche", ["1 M 45", "OU 152 ?"], "qui est le plus grand ?",
+     [("152 ?", 120, ROUGE), ("152 cm = 1 m 52", 84, BLEU), ("sans unité : rien !", 76, VERT)], 88),
+    ("06-lire-graphique", "lire-graphique", "blanche", ["LES LETCHIS", "× COMBIEN ?"], "en deux semaines de récolte",
+     [("semaine 1 : 200 kg", 80, BLEU), ("semaine 3 : 600 kg", 80, ORANGE), ("3 fois plus !", 100, VERT)], 86),
+    ("07-lire-circulaire", "lire-circulaire", "jaune", ["TON ASSIETTE", "DE CARI"], "quelle part pour le riz ?",
+     [("légumes : la moitié", 76, VERT), ("cari : un quart", 90, ORANGE), ("riz : un quart !", 90, BLEU)], 86),
+    ("08-comparer", "comparer", "blanche", ["L'EVEREST EN", "PITONS DES NEIGES"], "combien faut-il en empiler ?",
+     [("2 pitons : 6 140 m", 80, BLEU), ("3 pitons : 9 210 m", 80, ROUGE), ("presque 3 !", 100, VERT)], 76),
+    ("09-interpreter", "interpreter", "jaune", ["« ÇA EXPLOSE ! »", "VRAIMENT ?"], "regarde bien l'axe…",
+     [("l'axe part de 980", 80, ROUGE), ("1 000 → 1 040", 96, BLEU), ("+ 40 seulement !", 86, VERT)], 84),
+    ("10-defi", "defi", "jaune", ["LA LETTRE", "LA PLUS FRÉQUENTE"], "dans un poème de Victor Hugo",
+     [("E : 19 fois", 100, VERT), ("A : 18 fois", 100, ORANGE), ("de justesse !", 100, BLEU)], 80),
+]:
+    _nom = f"eleveai-maths-6e-stats-{_k}-short"
+    SHORTS[_nom] = {
+        "badge": "STATISTIQUES · 6E", "titre": _titre, "taille": _tt, "sous": _sous,
+        "taille_sous": 44, "couleur_sous": ORANGE, "accroche": _acc(_lg), "dossier": "6e/maths/fr",
+        "sortie": f"6e/maths/statistiques/{_dos}",
+    }
+    CEINTURE_SHORT[_nom] = _c
+
+
 def main():
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     filtre = sys.argv[1] if len(sys.argv) > 1 else ""

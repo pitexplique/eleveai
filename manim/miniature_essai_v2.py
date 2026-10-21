@@ -1860,6 +1860,49 @@ for _dos, _k, _duree, _titre, _haut, _bas in [
     }
 
 
+# 21/10/2026 — série STATISTIQUES cycle 3 : paysages CM1 et CM2 (mêmes épisodes, badge
+# différent) et 6e. Accroche = le piège de l'épisode (voix), ceinture de la PAYSAGE.
+_STATS_CM = [
+    ("01-tableau-lire", "tableau-lire", "jaune", ["LIRE UN", "TABLEAU"], "Le 11 : Saint-Leu ?", "non : L'Hermitage, en mars !"),
+    ("02-tableau-completer", "tableau-completer", "orange", ["COMPLÉTER", "UN TABLEAU"], "Case vide : 8 + 20 = 28 ?", "non : 20 − 8 = 12 !"),
+    ("03-tableau-interpreter", "tableau-interpreter", "orange", ["INTERPRÉTER", "UN TABLEAU"], "Mercredi : 110, moins que lundi…",
+     "mais 60 croissants contre 40 !"),
+    ("04-tableau-defi", "tableau-defi", "verte", ["LE DÉFI", "DES TABLEAUX"], "1 200 − 350 ?", "non : enlève les DEUX jours !"),
+    ("05-graphique-lire", "graphique-lire", "jaune", ["LIRE UN DIAGRAMME", "EN BARRES"], "Entre 20 et 24 : 20 ou 24 ?", "ni l'un ni l'autre : 22 !"),
+    ("06-graphique-completer", "graphique-completer", "jaune", ["COMPLÉTER UN", "DIAGRAMME EN BARRES"], "Un cran = 1 habitant ?",
+     "non : 100 000 !"),
+    ("07-graphique-interpreter", "graphique-interpreter", "jaune", ["INTERPRÉTER UN", "DIAGRAMME EN BARRES"], "Ça descend : fini la pluie ?",
+     "non : 6 mois seulement !"),
+    ("08-graphique-defi", "graphique-defi", "verte", ["LE DÉFI DES", "DIAGRAMMES"], "300 − 80, la réponse ?", "non : relis la question !"),
+]
+# « EN 2 MIN » : durées réelles des mp4 entre 1 min 40 et 2 min 10.
+for _cl in ("cm1", "cm2"):
+    for _dos, _k, _c, _titre, _haut, _bas in _STATS_CM:
+        ESSAIS[f"eleveai-maths-{_cl}-stats-{_k}"] = {
+            "badge": f"MATHS · {_cl.upper()}", "duree": "EN 2 MIN", "titre": _titre,
+            "accroche": _piege_test(_c, _haut, _bas), "dossier": f"{_cl}/maths/statistiques/{_dos}",
+        }
+for _dos, _k, _c, _titre, _haut, _bas in [
+    ("01-lire-tableau", "lire-tableau", "jaune", ["LIRE UN", "TABLEAU"], "Ligne ou colonne ?", "ligne : de gauche à droite !"),
+    ("02-prelever", "prelever", "jaune", ["PRÉLEVER UNE", "INFORMATION"], "4 € la tomate ?", "non : 4 € le kilogramme !"),
+    ("03-construire-tableau", "construire-tableau", "orange", ["CONSTRUIRE UN TABLEAU", "D'EFFECTIFS"], "Un oiseau compté deux fois ?",
+     "la somme doit faire 25 !"),
+    ("04-enquete-planifier", "enquete-planifier", "jaune", ["PRÉPARER", "UNE ENQUÊTE"], "180 oui sur 200 : tous d'accord ?",
+     "non : un échantillon biaisé !"),
+    ("05-enquete-mesurer", "enquete-mesurer", "jaune", ["BIEN NOTER", "SES MESURES"], "2 minutes… ou 120 ?", "une ligne, une même unité !"),
+    ("06-lire-graphique", "lire-graphique", "jaune", ["LIRE UN", "GRAPHIQUE"], "Au milieu : 400 ou 500 ?", "ni l'un ni l'autre : 450 !"),
+    ("07-lire-circulaire", "lire-circulaire", "verte", ["LIRE UN DIAGRAMME", "CIRCULAIRE"], "3 parts = 3 tiers ?", "non : une moitié, deux quarts !"),
+    ("08-comparer", "comparer", "jaune", ["COMPARER", "DES DONNÉES"], "Le plus haut sur la photo ?", "non : compare les nombres !"),
+    ("09-interpreter", "interpreter", "orange", ["INTERPRÉTER", "UN GRAPHIQUE"], "3 fois plus haute : ça explose ?",
+     "non : l'axe part de 980 !"),
+    ("10-defi", "defi", "orange", ["CASSER UN CODE", "AVEC LES STATS"], "19 E contre 18 A : sûr ?", "peu de lettres : prudence !"),
+]:
+    ESSAIS[f"eleveai-maths-6e-stats-{_k}"] = {
+        "badge": "MATHS · 6E", "duree": "EN 2 MIN", "titre": _titre,
+        "accroche": _piege_test(_c, _haut, _bas), "dossier": f"6e/maths/statistiques/{_dos}",
+    }
+
+
 def construire(nom, spec):
     img = fond()
     d = ImageDraw.Draw(img)

@@ -1,0 +1,12 @@
+{
+  "00-garde": "Comparer des données : qui est le plus haut, et de combien ?",
+  "01-situation": "Un cartographe mesure les montagnes pour dessiner les cartes. À La Réunion, il y a trois grands sommets.",
+  "02-donnees": "Le Piton des Neiges : 3 070 mètres. Le Grand Bénare : 2 898 mètres. Le Piton de la Fournaise : 2 632 mètres.",
+  "03-ranger": "Pour comparer, je range dans l'ordre. Le plus haut : le Piton des Neiges. Puis le Grand Bénare. Puis le Piton de la Fournaise.",
+  "04-ecart": "De combien le Piton des Neiges dépasse-t-il le Piton de la Fournaise ? 3 070 moins 2 632, égale 438 mètres.",
+  "05-piege": "Le piège : se fier à une photo. De près, un petit sommet paraît immense. Je compare les nombres, dans la même unité.",
+  "06-defi": "À toi de jouer. De combien de mètres le Grand Bénare dépasse-t-il le Piton de la Fournaise ? Mets pause, et cherche !",
+  "06b-correction": "Correction. 2 898 moins 2 632, égale 266 mètres.",
+  "07-finale": "Ce que tu as appris. Pour comparer, je lis chaque valeur, je les range dans l'ordre, et je calcule l'écart par une soustraction. Toujours dans la même unité.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

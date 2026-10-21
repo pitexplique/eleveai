@@ -1,0 +1,12 @@
+{
+  "00-garde": "Un diagramme en barres : sais-tu le lire ?",
+  "01-situation": "Aux Jeux olympiques de Paris, en 2024, les sportifs français ont gagné des médailles. Une journaliste sportive les montre à la télévision, avec un diagramme en barres.",
+  "02-axes": "En bas, les médailles : or, argent, bronze. Sur le côté, les nombres : 0, 4, 8, 12… Et entre deux nombres, un petit trait. Plus la barre est haute, plus il y a de médailles.",
+  "03-or": "La barre de l'or. Je monte jusqu'en haut de la barre, puis je vais vers les nombres : 16 médailles d'or.",
+  "04-autres": "L'argent : la barre arrive au petit trait entre 24 et 28 : 26. Le bronze : au petit trait entre 20 et 24 : 22.",
+  "05-piege": "Le piège : oublier les petits traits. Les nombres vont de 4 en 4, alors un petit trait, c'est 2 de plus. La barre du bronze ne s'arrête ni à 20, ni à 24 : c'est 22.",
+  "06-defi": "À toi de jouer. Quelle barre est la plus haute ? Et combien de médailles en tout ? Mets pause, et cherche !",
+  "06b-correction": "Correction. La plus haute, c'est l'argent, avec 26. En tout : 16 plus 26 plus 22, égale 64 médailles.",
+  "07-finale": "Ce que tu as appris. Je lis le titre et les catégories en bas. Je monte en haut de la barre, puis je vais vers les nombres. Et je regarde de combien en combien ils avancent.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

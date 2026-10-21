@@ -1,0 +1,14 @@
+{
+  "00-garde": "Un message secret. Pour le casser, il faut des statistiques !",
+  "01-situation": "Une cryptographe protège les messages secrets : ceux des banques, ceux des téléphones. Son arme secrète : compter les lettres.",
+  "02-poeme": "Prenons un poème de Victor Hugo : « Demain, dès l'aube ». Ses quatre premiers vers ont 147 lettres.",
+  "03-tableau": "Je compte les lettres et je les range dans un tableau d'effectifs. Le E : 19 fois. Le A : 18 fois. Le I : 13 fois. Le T : 10 fois.",
+  "04-conclure": "La lettre la plus fréquente, c'est le E. En français, c'est presque toujours le E.",
+  "05-code": "Voici un message codé : chaque lettre a été décalée dans l'alphabet. Dans ce message, la lettre la plus fréquente est le H. Le H remplace sûrement le E !",
+  "06-decalage": "De E à H : E, F, G, H. On a avancé de 3 lettres. Pour décoder, je recule de 3.",
+  "07-piege": "Le piège : conclure avec trop peu de lettres. Ici, le E ne bat le A que de 1 : 19 contre 18. Sur un texte court, le hasard peut tromper. Plus le texte est long, plus le comptage est sûr.",
+  "08-defi": "À toi de jouer. Avec un décalage de 3, décode ce mot : P, D, W, K, V. Mets pause, et cherche !",
+  "08b-correction": "Correction. Je recule de 3 lettres. P donne M. D donne A. W donne T. K donne H. V donne S. Le mot secret : MATHS !",
+  "09-finale": "Ce que tu as appris. Je compte les données, je les range dans un tableau d'effectifs, je cherche la plus fréquente. Et une conclusion est plus sûre quand il y a beaucoup de données.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

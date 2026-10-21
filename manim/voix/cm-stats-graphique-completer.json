@@ -1,0 +1,13 @@
+{
+  "00-garde": "Il manque une barre : à toi de la dessiner !",
+  "01-situation": "Un historien étudie La Réunion. Il compte les habitants à chaque recensement. Ses chiffres viennent de l'INSEE.",
+  "02-tableau": "En 1954 : environ 270 000 habitants. En 1974 : environ 480 000. En 1990 : environ 600 000. En 2010 : environ 820 000.",
+  "03-graduations": "Sur le diagramme, les nombres vont de 100 000 en 100 000. Trois barres sont dessinées. Il manque celle de 2010.",
+  "04-dessiner": "820 000, c'est entre 800 000 et 900 000, un peu au-dessus de 800 000. Je monte la barre jusque-là.",
+  "05-verifie": "Je vérifie avec le tableau : chaque barre arrive à son nombre. Les barres montent : la population a beaucoup grandi.",
+  "06-piege": "Le piège : compter les graduations de 1 en 1, alors qu'elles vont de 100 000 en 100 000. Et une barre plus large tromperait l'œil : toutes les barres ont la même largeur, seule la hauteur compte.",
+  "07-defi": "À toi de jouer. En 1999 : environ 710 000 habitants. Entre quelles graduations s'arrête la barre ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Entre 700 000 et 800 000, juste au-dessus de 700 000.",
+  "08-finale": "Ce que tu as appris. Pour compléter un diagramme, je lis le nombre dans le tableau. Je regarde de combien en combien vont les graduations. Puis je monte la barre jusqu'au bon niveau, avec la même largeur pour toutes.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

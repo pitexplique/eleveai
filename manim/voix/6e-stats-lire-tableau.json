@@ -1,0 +1,13 @@
+{
+  "00-garde": "Ligne, colonne, case : lire un tableau sans se tromper.",
+  "01-situation": "Un régulateur du réseau de bus compte les voyageurs, le matin, le midi et le soir. Avec ces nombres, il décide où ajouter des bus.",
+  "02-titre": "D'abord, je lis le titre : « Voyageurs d'un lundi ». Les lignes du tableau, ce sont les lignes de bus. Les colonnes, ce sont les moments de la journée.",
+  "03-remplir": "Ligne 1 : 180 le matin, 60 le midi, 210 le soir. Ligne 2 : 95, 40 et 120. Ligne 3 : 140, 75 et 160.",
+  "04-lire": "Combien de voyageurs sur la ligne 3, le soir ? Je prends la ligne 3, la colonne du soir : 160.",
+  "05-decider": "Où faut-il un bus de plus ? Le plus grand nombre du tableau : 210. Ligne 1, le soir.",
+  "06-piege": "Le piège : confondre une ligne et une colonne. Une ligne se lit de gauche à droite. Une colonne, de haut en bas.",
+  "07-defi": "À toi de jouer. Combien de voyageurs sur la ligne 2, le midi ? Et quelle ligne a le moins de voyageurs le matin ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Ligne 2, le midi : 40 voyageurs. Le matin, le plus petit nombre est 95 : c'est la ligne 2.",
+  "08-finale": "Ce que tu as appris. Je lis le titre. Je repère la bonne ligne et la bonne colonne. Je lis la case où elles se croisent.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

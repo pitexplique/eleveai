@@ -24403,6 +24403,2116 @@
         "ceinture orange",
         "Shorts"
       ]
+    },
+    {
+      "id": "cm1-stats-tableau-lire",
+      "notionId": "tableau",
+      "microId": "tableau_lire",
+      "classe": "cm1",
+      "ceinture": "jaune",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/statistiques/01-tableau-lire/eleveai-maths-cm1-stats-tableau-lire.mp4",
+      "miniature": "cm1/maths/statistiques/01-tableau-lire/eleveai-maths-cm1-stats-tableau-lire.png",
+      "titre": "Le 11, c'est Saint-Leu ? Le piège de la mauvaise ligne — Lire un tableau — épisode 1 · Maths CM1",
+      "accroche": "Une biologiste marine compte les tortues vertes sur trois plages de La Réunion : Saint-Leu, L'Hermitage et l'Étang-Salé. Son métier : protéger ces tortues. Où viennent-elles le plus ?\n\nDans cette vidéo :\n• un tableau : les lignes sont les plages, les colonnes sont les mois\n• je prends la bonne ligne, la bonne colonne, et je lis là où elles se croisent : 12 tortues\n• un deuxième exemple : l'Étang-Salé en mars\n• le piège : glisser sur la mauvaise ligne ; je suis la ligne avec le doigt, jusqu'au bout\n\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : combien de tortues à L'Hermitage en février ?\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/cm1/tableau\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=tableau&microId=tableau_lire&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Combien de tortues ? La biologiste marine"
+        ],
+        [
+          "00:18",
+          "Les lignes et les colonnes"
+        ],
+        [
+          "00:45",
+          "Lire une case : ligne, colonne, croisement"
+        ],
+        [
+          "01:08",
+          "Le piège : la mauvaise ligne"
+        ],
+        [
+          "01:19",
+          "À toi de jouer, et correction"
+        ],
+        [
+          "01:34",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "lire un tableau",
+        "tableau à double entrée",
+        "ligne et colonne",
+        "tortues",
+        "biologiste marine",
+        "La Réunion",
+        "statistiques",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "cm1-stats-tableau-lire-short",
+      "notionId": "tableau",
+      "microId": "tableau_lire",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-stats-tableau-lire",
+      "fichier": "cm1/maths/statistiques/01-tableau-lire/eleveai-maths-cm1-stats-tableau-lire-short.mp4",
+      "miniature": "cm1/maths/statistiques/01-tableau-lire/eleveai-maths-cm1-stats-tableau-lire-short.png",
+      "titre": "Sur quelle plage nagent les tortues ? 🐢 — CM1 #Shorts",
+      "accroche": "En février, la biologiste a compté : 12 tortues à Saint-Leu, 7 à L'Hermitage, 4 à l'Étang-Salé. Saint-Leu gagne ! Le tableau le dit en un coup d'œil.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : en février, combien de tortues de plus à Saint-Leu qu'à l'Étang-Salé ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=tableau&microId=tableau_lire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #CM1 #école",
+      "tags": [
+        "tableau",
+        "tortues",
+        "Saint-Leu",
+        "statistiques",
+        "maths CM1",
+        "CM1",
+        "école",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "cm1-stats-tableau-completer",
+      "notionId": "tableau",
+      "microId": "tableau_completer",
+      "classe": "cm1",
+      "ceinture": "orange",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/statistiques/02-tableau-completer/eleveai-maths-cm1-stats-tableau-completer.mp4",
+      "miniature": "cm1/maths/statistiques/02-tableau-completer/eleveai-maths-cm1-stats-tableau-completer.png",
+      "titre": "Une case vide : 8 + 20 = 28 ? Non ! — Compléter un tableau — épisode 2 · Maths CM1",
+      "accroche": "Sur la plage de l'Étang-Salé, deux classes ramassent les déchets avec un technicien de l'environnement. Son métier : protéger la nature, et compter ce qui la salit. Mais une case du tableau est vide…\n\nDans cette vidéo :\n• le total, c'est la somme de la ligne : 14 + 9 = 23\n• la case vide : le total moins ce que je connais, 20 − 8 = 12\n• je vérifie avec une addition : 8 + 12 = 20\n• le piège : additionner 8 et 20 ; une case ne peut pas dépasser le total\n\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : les sacs plastique, 40 en tout, dont 23 pour la première classe : combien pour la deuxième ?\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/cm1/tableau\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=tableau&microId=tableau_completer&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Une case vide ? Le technicien de l'environnement"
+        ],
+        [
+          "00:17",
+          "Le total d'une ligne"
+        ],
+        [
+          "00:36",
+          "La case vide : total moins ce que je connais"
+        ],
+        [
+          "00:55",
+          "Le piège : plus que le total"
+        ],
+        [
+          "01:07",
+          "À toi de jouer"
+        ],
+        [
+          "01:21",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "compléter un tableau",
+        "case vide",
+        "total",
+        "soustraction",
+        "plage",
+        "technicien de l'environnement",
+        "La Réunion",
+        "statistiques",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "cm1-stats-tableau-completer-short",
+      "notionId": "tableau",
+      "microId": "tableau_completer",
+      "classe": "cm1",
+      "ceinture": "jaune",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-stats-tableau-completer",
+      "fichier": "cm1/maths/statistiques/02-tableau-completer/eleveai-maths-cm1-stats-tableau-completer-short.mp4",
+      "miniature": "cm1/maths/statistiques/02-tableau-completer/eleveai-maths-cm1-stats-tableau-completer-short.png",
+      "titre": "50 bouchons sur la plage… et la 2e classe ? 🏖️ — CM1 #Shorts",
+      "accroche": "Deux classes ramassent 50 bouchons. La première en trouve 30. Et la deuxième ? 50 − 30 = 20. Je vérifie : 30 + 20 = 50. La case vide est trouvée !\n\n🥋 Ceinture jaune.\n👉 À toi : le total est 75, avec 48 pour la première classe : combien pour la deuxième ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=tableau&microId=tableau_completer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #CM1 #école",
+      "tags": [
+        "tableau",
+        "bouchons",
+        "soustraction",
+        "statistiques",
+        "maths CM1",
+        "CM1",
+        "école",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "cm1-stats-tableau-interpreter",
+      "notionId": "tableau",
+      "microId": "tableau_interpreter",
+      "classe": "cm1",
+      "ceinture": "orange",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/statistiques/03-tableau-interpreter/eleveai-maths-cm1-stats-tableau-interpreter.mp4",
+      "miniature": "cm1/maths/statistiques/03-tableau-interpreter/eleveai-maths-cm1-stats-tableau-interpreter.png",
+      "titre": "Le dimanche, le grand jour du pain ? — Interpréter un tableau — épisode 3 · Maths CM1",
+      "accroche": "Une boulangère note ce qu'elle vend. Avec son tableau, elle décide combien de pain préparer chaque matin. Trop peu : des clients déçus. Trop : du pain jeté.\n\nDans cette vidéo :\n• le plus grand nombre de chaque ligne : 240 baguettes et 150 croissants, le dimanche\n• conclure par une phrase : le dimanche, c'est le grand jour\n• comparer par une soustraction : 90 − 40 = 50 croissants de plus le samedi\n• le piège : lire une seule case et conclure trop vite ; je lis toute la ligne et toute la colonne\n\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : le dimanche, combien de baguettes de plus que le samedi ?\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/cm1/tableau\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=tableau&microId=tableau_interpreter&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Un tableau raconte une histoire : la boulangère"
+        ],
+        [
+          "00:34",
+          "Le plus grand nombre de chaque ligne"
+        ],
+        [
+          "00:46",
+          "Conclure, puis comparer"
+        ],
+        [
+          "01:04",
+          "Le piège : une seule case"
+        ],
+        [
+          "01:22",
+          "À toi de jouer"
+        ],
+        [
+          "01:33",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "interpréter un tableau",
+        "comparer",
+        "conclure",
+        "boulangère",
+        "boulangerie",
+        "métier",
+        "statistiques",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "cm1-stats-tableau-interpreter-short",
+      "notionId": "tableau",
+      "microId": "tableau_interpreter",
+      "classe": "cm1",
+      "ceinture": "jaune",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-stats-tableau-interpreter",
+      "fichier": "cm1/maths/statistiques/03-tableau-interpreter/eleveai-maths-cm1-stats-tableau-interpreter-short.mp4",
+      "miniature": "cm1/maths/statistiques/03-tableau-interpreter/eleveai-maths-cm1-stats-tableau-interpreter-short.png",
+      "titre": "Pourquoi la boulangère se lève plus tôt le dimanche ? 🥖 — CM1 #Shorts",
+      "accroche": "Le tableau de la boulangère : 120 baguettes le lundi, 240 le dimanche. Deux fois plus de pain ! Alors, deux fois plus de pâte à pétrir.\n\n🥋 Ceinture jaune.\n👉 À toi : le samedi, elle vend 180 baguettes : combien de plus que le lundi ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=tableau&microId=tableau_interpreter&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #CM1 #école",
+      "tags": [
+        "tableau",
+        "boulangère",
+        "baguettes",
+        "statistiques",
+        "maths CM1",
+        "CM1",
+        "école",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "cm1-stats-tableau-defi",
+      "notionId": "tableau",
+      "microId": "tableau_defi",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/statistiques/04-tableau-defi/eleveai-maths-cm1-stats-tableau-defi.mp4",
+      "miniature": "cm1/maths/statistiques/04-tableau-defi/eleveai-maths-cm1-stats-tableau-defi.png",
+      "titre": "1 200 − 350 ? Le piège du festival de maloya — Le défi des tableaux — épisode 4 · Maths CM1",
+      "accroche": "Un régisseur prépare un festival de maloya et de séga. Il doit savoir combien de personnes viennent chaque jour, pour prévoir la scène, l'eau et la sécurité. Un défi en deux étapes !\n\nDans cette vidéo :\n• étape 1 : la case qui manque grâce au total, 1 200 − 830 = 370 adultes le dimanche\n• étape 2 : ce nombre sert pour la suite, 370 + 130 = 500 personnes\n• le piège : faire seulement 1 200 − 350 ; il faut enlever les deux jours connus\n• une étape après l'autre\n\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : combien de personnes en tout le samedi ? Et quel jour y a-t-il le plus de monde ?\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/cm1/tableau\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=tableau&microId=tableau_defi&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Un défi en deux étapes : le régisseur"
+        ],
+        [
+          "00:18",
+          "Le tableau : adultes et enfants"
+        ],
+        [
+          "00:41",
+          "Étapes 1 et 2 : la case qui manque, puis la suite"
+        ],
+        [
+          "01:05",
+          "Le piège : un seul jour enlevé"
+        ],
+        [
+          "01:16",
+          "À toi de jouer"
+        ],
+        [
+          "01:27",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "défi",
+        "tableau",
+        "deux étapes",
+        "festival",
+        "maloya",
+        "régisseur",
+        "La Réunion",
+        "statistiques",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "cm1-stats-tableau-defi-short",
+      "notionId": "tableau",
+      "microId": "tableau_defi",
+      "classe": "cm1",
+      "ceinture": "orange",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-stats-tableau-defi",
+      "fichier": "cm1/maths/statistiques/04-tableau-defi/eleveai-maths-cm1-stats-tableau-defi-short.mp4",
+      "miniature": "cm1/maths/statistiques/04-tableau-defi/eleveai-maths-cm1-stats-tableau-defi-short.png",
+      "titre": "1 200 adultes : où sont passés ceux du dimanche ? 🎶 — CM1 #Shorts",
+      "accroche": "Un festival de maloya : 1 200 adultes en trois jours. Vendredi 350, samedi 480 : ensemble 830. Il en manque 370 : ce sont ceux du dimanche !\n\n🥋 Ceinture orange.\n👉 À toi : les enfants : 500 en tout, 150 le vendredi, 220 le samedi. Combien le dimanche ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=tableau&microId=tableau_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #CM1 #école",
+      "tags": [
+        "tableau",
+        "maloya",
+        "festival",
+        "statistiques",
+        "maths CM1",
+        "CM1",
+        "école",
+        "eleveai",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "cm1-stats-graphique-lire",
+      "notionId": "graphique",
+      "microId": "graphique_lire",
+      "classe": "cm1",
+      "ceinture": "jaune",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/statistiques/05-graphique-lire/eleveai-maths-cm1-stats-graphique-lire.mp4",
+      "miniature": "cm1/maths/statistiques/05-graphique-lire/eleveai-maths-cm1-stats-graphique-lire.png",
+      "titre": "Paris 2024 : ni 20, ni 24 ! — Lire un diagramme en barres — épisode 5 · Maths CM1",
+      "accroche": "Aux Jeux olympiques de Paris, en 2024, les sportifs français ont gagné des médailles. Une journaliste sportive les montre à la télévision, avec un diagramme en barres.\n\nDans cette vidéo :\n• en bas les catégories, sur le côté les nombres de 4 en 4, et un petit trait entre deux nombres\n• je monte en haut de la barre, puis je vais vers les nombres : 16 médailles d'or\n• l'argent et le bronze tombent sur un petit trait : 26 et 22\n• le piège : oublier les petits traits ; un petit trait, c'est 2 de plus\n\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : quelle barre est la plus haute ? Et combien de médailles en tout ?\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/cm1/graphique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=graphique&microId=graphique_lire&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Paris 2024 : la journaliste sportive"
+        ],
+        [
+          "00:17",
+          "Les axes et les petits traits"
+        ],
+        [
+          "00:33",
+          "Lire les barres : or, argent, bronze"
+        ],
+        [
+          "00:53",
+          "Le piège : les petits traits"
+        ],
+        [
+          "01:08",
+          "À toi de jouer, et correction"
+        ],
+        [
+          "01:29",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "diagramme en barres",
+        "lire un graphique",
+        "axe gradué",
+        "Paris 2024",
+        "Jeux olympiques",
+        "médailles",
+        "journaliste sportive",
+        "statistiques",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "cm1-stats-graphique-lire-short",
+      "notionId": "graphique",
+      "microId": "graphique_lire",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-stats-graphique-lire",
+      "fichier": "cm1/maths/statistiques/05-graphique-lire/eleveai-maths-cm1-stats-graphique-lire-short.mp4",
+      "miniature": "cm1/maths/statistiques/05-graphique-lire/eleveai-maths-cm1-stats-graphique-lire-short.png",
+      "titre": "Plus d'or que d'argent à Paris 2024 ? FAUX ! 🥇 — CM1 #Shorts",
+      "accroche": "Paris 2024 : la France a gagné plus d'or que d'argent ? Faux ! Regarde les barres : 16 en or, 26 en argent, 22 en bronze. C'est l'argent qui gagne !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : combien de médailles d'argent de plus que de médailles d'or ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=graphique&microId=graphique_lire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #CM1 #école",
+      "tags": [
+        "diagramme en barres",
+        "Paris 2024",
+        "médailles",
+        "statistiques",
+        "maths CM1",
+        "CM1",
+        "école",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "cm1-stats-graphique-completer",
+      "notionId": "graphique",
+      "microId": "graphique_completer",
+      "classe": "cm1",
+      "ceinture": "jaune",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/statistiques/06-graphique-completer/eleveai-maths-cm1-stats-graphique-completer.mp4",
+      "miniature": "cm1/maths/statistiques/06-graphique-completer/eleveai-maths-cm1-stats-graphique-completer.png",
+      "titre": "Il manque une barre ! — Compléter un diagramme en barres — épisode 6 · Maths CM1",
+      "accroche": "Un historien étudie La Réunion. Il compte les habitants à chaque recensement, avec les chiffres de l'INSEE : environ 270 000 en 1954, 820 000 en 2010. Sur son diagramme, une barre manque.\n\nDans cette vidéo :\n• lire le nombre dans le tableau\n• les graduations vont de 100 000 en 100 000\n• 820 000, c'est entre 800 000 et 900 000 : je monte la barre jusque-là\n• le piège : compter de 1 en 1, ou dessiner une barre plus large ; seule la hauteur compte\n\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : en 1999, environ 710 000 habitants : entre quelles graduations s'arrête la barre ?\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/cm1/graphique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=graphique&microId=graphique_completer&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Il manque une barre : l'historien"
+        ],
+        [
+          "00:13",
+          "Le tableau des recensements"
+        ],
+        [
+          "00:32",
+          "Les graduations, puis dessiner la barre"
+        ],
+        [
+          "01:01",
+          "Le piège : graduations et largeur"
+        ],
+        [
+          "01:16",
+          "À toi de jouer"
+        ],
+        [
+          "01:29",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "diagramme en barres",
+        "compléter un graphique",
+        "graduations",
+        "population",
+        "La Réunion",
+        "histoire",
+        "historien",
+        "INSEE",
+        "statistiques",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "cm1-stats-graphique-completer-short",
+      "notionId": "graphique",
+      "microId": "graphique_completer",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-stats-graphique-completer",
+      "fichier": "cm1/maths/statistiques/06-graphique-completer/eleveai-maths-cm1-stats-graphique-completer-short.mp4",
+      "miniature": "cm1/maths/statistiques/06-graphique-completer/eleveai-maths-cm1-stats-graphique-completer-short.png",
+      "titre": "La Réunion : 2 fois ou 3 fois plus d'habitants ? 🌋 — CM1 #Shorts",
+      "accroche": "En 1954, La Réunion avait environ 270 000 habitants. En 2010, environ 820 000. La barre est un peu plus de trois fois plus haute : 270 000 × 3, ça fait seulement 810 000 !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : en 1974, environ 480 000 habitants : combien de plus qu'en 1954 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=graphique&microId=graphique_completer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #CM1 #école",
+      "tags": [
+        "diagramme en barres",
+        "La Réunion",
+        "habitants",
+        "statistiques",
+        "maths CM1",
+        "CM1",
+        "école",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "cm1-stats-graphique-interpreter",
+      "notionId": "graphique",
+      "microId": "graphique_interpreter",
+      "classe": "cm1",
+      "ceinture": "jaune",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/statistiques/07-graphique-interpreter/eleveai-maths-cm1-stats-graphique-interpreter.mp4",
+      "miniature": "cm1/maths/statistiques/07-graphique-interpreter/eleveai-maths-cm1-stats-graphique-interpreter.png",
+      "titre": "Ça descend : fini la pluie ? — Interpréter un diagramme en barres — épisode 7 · Maths CM1",
+      "accroche": "Une prévisionniste météo mesure la pluie dans une ville de l'Est de La Réunion. Son métier : aider les agriculteurs, et prévenir les habitants avant les grosses pluies.\n\nDans cette vidéo :\n• la barre la plus haute : février, avec 450 millimètres\n• la tendance : de février à juin, les barres descendent\n• comparer : en février, il pleut 3 fois plus qu'en mai\n• le piège : conclure au-delà des données ; le diagramme ne montre que six mois\n\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : combien de millimètres de pluie en tout, de janvier à mars ?\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/cm1/graphique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=graphique&microId=graphique_interpreter&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "La saison des pluies : la prévisionniste météo"
+        ],
+        [
+          "00:16",
+          "Lire les barres"
+        ],
+        [
+          "00:33",
+          "Le plus pluvieux, la tendance, comparer"
+        ],
+        [
+          "01:02",
+          "Le piège : aller plus loin que les données"
+        ],
+        [
+          "01:16",
+          "À toi de jouer, et correction"
+        ],
+        [
+          "01:33",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "diagramme en barres",
+        "interpréter un graphique",
+        "tendance",
+        "pluie",
+        "météo",
+        "prévisionniste",
+        "La Réunion",
+        "statistiques",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "cm1-stats-graphique-interpreter-short",
+      "notionId": "graphique",
+      "microId": "graphique_interpreter",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-stats-graphique-interpreter",
+      "fichier": "cm1/maths/statistiques/07-graphique-interpreter/eleveai-maths-cm1-stats-graphique-interpreter-short.mp4",
+      "miniature": "cm1/maths/statistiques/07-graphique-interpreter/eleveai-maths-cm1-stats-graphique-interpreter-short.png",
+      "titre": "1 825 mm de pluie en UN jour : record du monde ! 🌧️ — CM1 #Shorts",
+      "accroche": "Dans une ville de l'Est, en février : 450 millimètres de pluie, en un mois entier. À Foc-Foc, près de Cilaos, en janvier 1966 : 1 825 millimètres en un seul jour ! C'est le record du monde.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 1 825 millimètres, c'est environ combien de fois 450 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=graphique&microId=graphique_interpreter&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #CM1 #école",
+      "tags": [
+        "diagramme en barres",
+        "pluie",
+        "record du monde",
+        "Cilaos",
+        "statistiques",
+        "maths CM1",
+        "CM1",
+        "école",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "cm1-stats-graphique-defi",
+      "notionId": "graphique",
+      "microId": "graphique_defi",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/statistiques/08-graphique-defi/eleveai-maths-cm1-stats-graphique-defi.mp4",
+      "miniature": "cm1/maths/statistiques/08-graphique-defi/eleveai-maths-cm1-stats-graphique-defi.png",
+      "titre": "300 − 80 ? Relis la question ! — Le défi des diagrammes — épisode 8 · Maths CM1",
+      "accroche": "Un programmateur de cinéma choisit les films et les séances. Pour décider, il regarde combien de spectateurs viennent chaque jour voir le nouveau dessin animé. Un défi en trois étapes !\n\nDans cette vidéo :\n• lire cinq barres, de 50 en 50 : 120, 80, 150, 300, 250 entrées\n• étape 1 : le week-end, 300 + 250 = 550\n• étape 2 : du mercredi au vendredi, 350 ; étape 3 : 550 − 350 = 200 de plus\n• le piège : comparer seulement la plus haute et la plus basse ; je relis la question\n\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une salle de 100 places, 300 spectateurs le samedi : combien de séances pleines ?\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/cm1/graphique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=graphique&microId=graphique_defi&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Un défi de cinéma : le programmateur"
+        ],
+        [
+          "00:15",
+          "Lire les barres"
+        ],
+        [
+          "00:29",
+          "Le défi en trois étapes"
+        ],
+        [
+          "01:02",
+          "Le piège : la plus haute moins la plus basse"
+        ],
+        [
+          "01:17",
+          "À toi de jouer"
+        ],
+        [
+          "01:31",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "défi",
+        "diagramme en barres",
+        "problème en étapes",
+        "cinéma",
+        "programmateur de cinéma",
+        "métier",
+        "statistiques",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "cm1-stats-graphique-defi-short",
+      "notionId": "graphique",
+      "microId": "graphique_defi",
+      "classe": "cm1",
+      "ceinture": "jaune",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-stats-graphique-defi",
+      "fichier": "cm1/maths/statistiques/08-graphique-defi/eleveai-maths-cm1-stats-graphique-defi-short.mp4",
+      "miniature": "cm1/maths/statistiques/08-graphique-defi/eleveai-maths-cm1-stats-graphique-defi-short.png",
+      "titre": "Seul dans la salle de cinéma ? Quel jour y aller 🎬 — CM1 #Shorts",
+      "accroche": "Quel jour aller au cinéma pour être presque seul dans la salle ? Samedi, 300 entrées. Dimanche, 250. Et le jeudi, seulement 80 ! Le jeudi, la salle est presque vide.\n\n🥋 Ceinture jaune.\n👉 À toi : combien d'entrées de plus le samedi que le jeudi ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=graphique&microId=graphique_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #CM1 #école",
+      "tags": [
+        "diagramme en barres",
+        "cinéma",
+        "statistiques",
+        "maths CM1",
+        "CM1",
+        "école",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "cm2-stats-tableau-lire",
+      "notionId": "tableau",
+      "microId": "tableau_lire",
+      "classe": "cm2",
+      "ceinture": "jaune",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/statistiques/01-tableau-lire/eleveai-maths-cm2-stats-tableau-lire.mp4",
+      "miniature": "cm2/maths/statistiques/01-tableau-lire/eleveai-maths-cm2-stats-tableau-lire.png",
+      "titre": "Le 11, c'est Saint-Leu ? Le piège de la mauvaise ligne — Lire un tableau — épisode 1 · Maths CM2",
+      "accroche": "Une biologiste marine compte les tortues vertes sur trois plages de La Réunion : Saint-Leu, L'Hermitage et l'Étang-Salé. Son métier : protéger ces tortues. Où viennent-elles le plus ?\n\nDans cette vidéo :\n• un tableau : les lignes sont les plages, les colonnes sont les mois\n• je prends la bonne ligne, la bonne colonne, et je lis là où elles se croisent : 12 tortues\n• un deuxième exemple : l'Étang-Salé en mars\n• le piège : glisser sur la mauvaise ligne ; je suis la ligne avec le doigt, jusqu'au bout\n\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : combien de tortues à L'Hermitage en février ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/cm2/tableau\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/cm2/tableau\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=tableau&microId=tableau_lire&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Combien de tortues ? La biologiste marine"
+        ],
+        [
+          "00:18",
+          "Les lignes et les colonnes"
+        ],
+        [
+          "00:45",
+          "Lire une case : ligne, colonne, croisement"
+        ],
+        [
+          "01:08",
+          "Le piège : la mauvaise ligne"
+        ],
+        [
+          "01:19",
+          "À toi de jouer, et correction"
+        ],
+        [
+          "01:34",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/cm2/tableau",
+      "tags": [
+        "lire un tableau",
+        "tableau à double entrée",
+        "ligne et colonne",
+        "tortues",
+        "biologiste marine",
+        "La Réunion",
+        "statistiques",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "cm2-stats-tableau-lire-short",
+      "notionId": "tableau",
+      "microId": "tableau_lire",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-stats-tableau-lire",
+      "fichier": "cm2/maths/statistiques/01-tableau-lire/eleveai-maths-cm2-stats-tableau-lire-short.mp4",
+      "miniature": "cm2/maths/statistiques/01-tableau-lire/eleveai-maths-cm2-stats-tableau-lire-short.png",
+      "titre": "Sur quelle plage nagent les tortues ? 🐢 — CM2 #Shorts",
+      "accroche": "En février, la biologiste a compté : 12 tortues à Saint-Leu, 7 à L'Hermitage, 4 à l'Étang-Salé. Saint-Leu gagne ! Le tableau le dit en un coup d'œil.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : en février, combien de tortues de plus à Saint-Leu qu'à l'Étang-Salé ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=tableau&microId=tableau_lire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #CM2 #école",
+      "tags": [
+        "tableau",
+        "tortues",
+        "Saint-Leu",
+        "statistiques",
+        "maths CM2",
+        "CM2",
+        "école",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "cm2-stats-tableau-completer",
+      "notionId": "tableau",
+      "microId": "tableau_completer",
+      "classe": "cm2",
+      "ceinture": "orange",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/statistiques/02-tableau-completer/eleveai-maths-cm2-stats-tableau-completer.mp4",
+      "miniature": "cm2/maths/statistiques/02-tableau-completer/eleveai-maths-cm2-stats-tableau-completer.png",
+      "titre": "Une case vide : 8 + 20 = 28 ? Non ! — Compléter un tableau — épisode 2 · Maths CM2",
+      "accroche": "Sur la plage de l'Étang-Salé, deux classes ramassent les déchets avec un technicien de l'environnement. Son métier : protéger la nature, et compter ce qui la salit. Mais une case du tableau est vide…\n\nDans cette vidéo :\n• le total, c'est la somme de la ligne : 14 + 9 = 23\n• la case vide : le total moins ce que je connais, 20 − 8 = 12\n• je vérifie avec une addition : 8 + 12 = 20\n• le piège : additionner 8 et 20 ; une case ne peut pas dépasser le total\n\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : les sacs plastique, 40 en tout, dont 23 pour la première classe : combien pour la deuxième ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/cm2/tableau\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/cm2/tableau\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=tableau&microId=tableau_completer&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Une case vide ? Le technicien de l'environnement"
+        ],
+        [
+          "00:17",
+          "Le total d'une ligne"
+        ],
+        [
+          "00:36",
+          "La case vide : total moins ce que je connais"
+        ],
+        [
+          "00:55",
+          "Le piège : plus que le total"
+        ],
+        [
+          "01:07",
+          "À toi de jouer"
+        ],
+        [
+          "01:21",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/cm2/tableau",
+      "tags": [
+        "compléter un tableau",
+        "case vide",
+        "total",
+        "soustraction",
+        "plage",
+        "technicien de l'environnement",
+        "La Réunion",
+        "statistiques",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "cm2-stats-tableau-completer-short",
+      "notionId": "tableau",
+      "microId": "tableau_completer",
+      "classe": "cm2",
+      "ceinture": "jaune",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-stats-tableau-completer",
+      "fichier": "cm2/maths/statistiques/02-tableau-completer/eleveai-maths-cm2-stats-tableau-completer-short.mp4",
+      "miniature": "cm2/maths/statistiques/02-tableau-completer/eleveai-maths-cm2-stats-tableau-completer-short.png",
+      "titre": "50 bouchons sur la plage… et la 2e classe ? 🏖️ — CM2 #Shorts",
+      "accroche": "Deux classes ramassent 50 bouchons. La première en trouve 30. Et la deuxième ? 50 − 30 = 20. Je vérifie : 30 + 20 = 50. La case vide est trouvée !\n\n🥋 Ceinture jaune.\n👉 À toi : le total est 75, avec 48 pour la première classe : combien pour la deuxième ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=tableau&microId=tableau_completer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #CM2 #école",
+      "tags": [
+        "tableau",
+        "bouchons",
+        "soustraction",
+        "statistiques",
+        "maths CM2",
+        "CM2",
+        "école",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "cm2-stats-tableau-interpreter",
+      "notionId": "tableau",
+      "microId": "tableau_interpreter",
+      "classe": "cm2",
+      "ceinture": "orange",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/statistiques/03-tableau-interpreter/eleveai-maths-cm2-stats-tableau-interpreter.mp4",
+      "miniature": "cm2/maths/statistiques/03-tableau-interpreter/eleveai-maths-cm2-stats-tableau-interpreter.png",
+      "titre": "Le dimanche, le grand jour du pain ? — Interpréter un tableau — épisode 3 · Maths CM2",
+      "accroche": "Une boulangère note ce qu'elle vend. Avec son tableau, elle décide combien de pain préparer chaque matin. Trop peu : des clients déçus. Trop : du pain jeté.\n\nDans cette vidéo :\n• le plus grand nombre de chaque ligne : 240 baguettes et 150 croissants, le dimanche\n• conclure par une phrase : le dimanche, c'est le grand jour\n• comparer par une soustraction : 90 − 40 = 50 croissants de plus le samedi\n• le piège : lire une seule case et conclure trop vite ; je lis toute la ligne et toute la colonne\n\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : le dimanche, combien de baguettes de plus que le samedi ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/cm2/tableau\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/cm2/tableau\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=tableau&microId=tableau_interpreter&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Un tableau raconte une histoire : la boulangère"
+        ],
+        [
+          "00:34",
+          "Le plus grand nombre de chaque ligne"
+        ],
+        [
+          "00:46",
+          "Conclure, puis comparer"
+        ],
+        [
+          "01:04",
+          "Le piège : une seule case"
+        ],
+        [
+          "01:22",
+          "À toi de jouer"
+        ],
+        [
+          "01:33",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/cm2/tableau",
+      "tags": [
+        "interpréter un tableau",
+        "comparer",
+        "conclure",
+        "boulangère",
+        "boulangerie",
+        "métier",
+        "statistiques",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "cm2-stats-tableau-interpreter-short",
+      "notionId": "tableau",
+      "microId": "tableau_interpreter",
+      "classe": "cm2",
+      "ceinture": "jaune",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-stats-tableau-interpreter",
+      "fichier": "cm2/maths/statistiques/03-tableau-interpreter/eleveai-maths-cm2-stats-tableau-interpreter-short.mp4",
+      "miniature": "cm2/maths/statistiques/03-tableau-interpreter/eleveai-maths-cm2-stats-tableau-interpreter-short.png",
+      "titre": "Pourquoi la boulangère se lève plus tôt le dimanche ? 🥖 — CM2 #Shorts",
+      "accroche": "Le tableau de la boulangère : 120 baguettes le lundi, 240 le dimanche. Deux fois plus de pain ! Alors, deux fois plus de pâte à pétrir.\n\n🥋 Ceinture jaune.\n👉 À toi : le samedi, elle vend 180 baguettes : combien de plus que le lundi ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=tableau&microId=tableau_interpreter&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #CM2 #école",
+      "tags": [
+        "tableau",
+        "boulangère",
+        "baguettes",
+        "statistiques",
+        "maths CM2",
+        "CM2",
+        "école",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "cm2-stats-tableau-defi",
+      "notionId": "tableau",
+      "microId": "tableau_defi",
+      "classe": "cm2",
+      "ceinture": "verte",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/statistiques/04-tableau-defi/eleveai-maths-cm2-stats-tableau-defi.mp4",
+      "miniature": "cm2/maths/statistiques/04-tableau-defi/eleveai-maths-cm2-stats-tableau-defi.png",
+      "titre": "1 200 − 350 ? Le piège du festival de maloya — Le défi des tableaux — épisode 4 · Maths CM2",
+      "accroche": "Un régisseur prépare un festival de maloya et de séga. Il doit savoir combien de personnes viennent chaque jour, pour prévoir la scène, l'eau et la sécurité. Un défi en deux étapes !\n\nDans cette vidéo :\n• étape 1 : la case qui manque grâce au total, 1 200 − 830 = 370 adultes le dimanche\n• étape 2 : ce nombre sert pour la suite, 370 + 130 = 500 personnes\n• le piège : faire seulement 1 200 − 350 ; il faut enlever les deux jours connus\n• une étape après l'autre\n\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : combien de personnes en tout le samedi ? Et quel jour y a-t-il le plus de monde ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/cm2/tableau\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/cm2/tableau\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=tableau&microId=tableau_defi&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Un défi en deux étapes : le régisseur"
+        ],
+        [
+          "00:18",
+          "Le tableau : adultes et enfants"
+        ],
+        [
+          "00:41",
+          "Étapes 1 et 2 : la case qui manque, puis la suite"
+        ],
+        [
+          "01:05",
+          "Le piège : un seul jour enlevé"
+        ],
+        [
+          "01:16",
+          "À toi de jouer"
+        ],
+        [
+          "01:27",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/cm2/tableau",
+      "tags": [
+        "défi",
+        "tableau",
+        "deux étapes",
+        "festival",
+        "maloya",
+        "régisseur",
+        "La Réunion",
+        "statistiques",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "cm2-stats-tableau-defi-short",
+      "notionId": "tableau",
+      "microId": "tableau_defi",
+      "classe": "cm2",
+      "ceinture": "orange",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-stats-tableau-defi",
+      "fichier": "cm2/maths/statistiques/04-tableau-defi/eleveai-maths-cm2-stats-tableau-defi-short.mp4",
+      "miniature": "cm2/maths/statistiques/04-tableau-defi/eleveai-maths-cm2-stats-tableau-defi-short.png",
+      "titre": "1 200 adultes : où sont passés ceux du dimanche ? 🎶 — CM2 #Shorts",
+      "accroche": "Un festival de maloya : 1 200 adultes en trois jours. Vendredi 350, samedi 480 : ensemble 830. Il en manque 370 : ce sont ceux du dimanche !\n\n🥋 Ceinture orange.\n👉 À toi : les enfants : 500 en tout, 150 le vendredi, 220 le samedi. Combien le dimanche ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=tableau&microId=tableau_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #CM2 #école",
+      "tags": [
+        "tableau",
+        "maloya",
+        "festival",
+        "statistiques",
+        "maths CM2",
+        "CM2",
+        "école",
+        "eleveai",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "cm2-stats-graphique-lire",
+      "notionId": "graphique",
+      "microId": "graphique_lire",
+      "classe": "cm2",
+      "ceinture": "jaune",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/statistiques/05-graphique-lire/eleveai-maths-cm2-stats-graphique-lire.mp4",
+      "miniature": "cm2/maths/statistiques/05-graphique-lire/eleveai-maths-cm2-stats-graphique-lire.png",
+      "titre": "Paris 2024 : ni 20, ni 24 ! — Lire un diagramme en barres — épisode 5 · Maths CM2",
+      "accroche": "Aux Jeux olympiques de Paris, en 2024, les sportifs français ont gagné des médailles. Une journaliste sportive les montre à la télévision, avec un diagramme en barres.\n\nDans cette vidéo :\n• en bas les catégories, sur le côté les nombres de 4 en 4, et un petit trait entre deux nombres\n• je monte en haut de la barre, puis je vais vers les nombres : 16 médailles d'or\n• l'argent et le bronze tombent sur un petit trait : 26 et 22\n• le piège : oublier les petits traits ; un petit trait, c'est 2 de plus\n\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : quelle barre est la plus haute ? Et combien de médailles en tout ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/cm2/graphique\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/cm2/graphique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=graphique&microId=graphique_lire&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Paris 2024 : la journaliste sportive"
+        ],
+        [
+          "00:17",
+          "Les axes et les petits traits"
+        ],
+        [
+          "00:33",
+          "Lire les barres : or, argent, bronze"
+        ],
+        [
+          "00:53",
+          "Le piège : les petits traits"
+        ],
+        [
+          "01:08",
+          "À toi de jouer, et correction"
+        ],
+        [
+          "01:29",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/cm2/graphique",
+      "tags": [
+        "diagramme en barres",
+        "lire un graphique",
+        "axe gradué",
+        "Paris 2024",
+        "Jeux olympiques",
+        "médailles",
+        "journaliste sportive",
+        "statistiques",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "cm2-stats-graphique-lire-short",
+      "notionId": "graphique",
+      "microId": "graphique_lire",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-stats-graphique-lire",
+      "fichier": "cm2/maths/statistiques/05-graphique-lire/eleveai-maths-cm2-stats-graphique-lire-short.mp4",
+      "miniature": "cm2/maths/statistiques/05-graphique-lire/eleveai-maths-cm2-stats-graphique-lire-short.png",
+      "titre": "Plus d'or que d'argent à Paris 2024 ? FAUX ! 🥇 — CM2 #Shorts",
+      "accroche": "Paris 2024 : la France a gagné plus d'or que d'argent ? Faux ! Regarde les barres : 16 en or, 26 en argent, 22 en bronze. C'est l'argent qui gagne !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : combien de médailles d'argent de plus que de médailles d'or ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=graphique&microId=graphique_lire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #CM2 #école",
+      "tags": [
+        "diagramme en barres",
+        "Paris 2024",
+        "médailles",
+        "statistiques",
+        "maths CM2",
+        "CM2",
+        "école",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "cm2-stats-graphique-completer",
+      "notionId": "graphique",
+      "microId": "graphique_completer",
+      "classe": "cm2",
+      "ceinture": "jaune",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/statistiques/06-graphique-completer/eleveai-maths-cm2-stats-graphique-completer.mp4",
+      "miniature": "cm2/maths/statistiques/06-graphique-completer/eleveai-maths-cm2-stats-graphique-completer.png",
+      "titre": "Il manque une barre ! — Compléter un diagramme en barres — épisode 6 · Maths CM2",
+      "accroche": "Un historien étudie La Réunion. Il compte les habitants à chaque recensement, avec les chiffres de l'INSEE : environ 270 000 en 1954, 820 000 en 2010. Sur son diagramme, une barre manque.\n\nDans cette vidéo :\n• lire le nombre dans le tableau\n• les graduations vont de 100 000 en 100 000\n• 820 000, c'est entre 800 000 et 900 000 : je monte la barre jusque-là\n• le piège : compter de 1 en 1, ou dessiner une barre plus large ; seule la hauteur compte\n\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : en 1999, environ 710 000 habitants : entre quelles graduations s'arrête la barre ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/cm2/graphique\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/cm2/graphique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=graphique&microId=graphique_completer&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Il manque une barre : l'historien"
+        ],
+        [
+          "00:13",
+          "Le tableau des recensements"
+        ],
+        [
+          "00:32",
+          "Les graduations, puis dessiner la barre"
+        ],
+        [
+          "01:01",
+          "Le piège : graduations et largeur"
+        ],
+        [
+          "01:16",
+          "À toi de jouer"
+        ],
+        [
+          "01:29",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/cm2/graphique",
+      "tags": [
+        "diagramme en barres",
+        "compléter un graphique",
+        "graduations",
+        "population",
+        "La Réunion",
+        "histoire",
+        "historien",
+        "INSEE",
+        "statistiques",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "cm2-stats-graphique-completer-short",
+      "notionId": "graphique",
+      "microId": "graphique_completer",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-stats-graphique-completer",
+      "fichier": "cm2/maths/statistiques/06-graphique-completer/eleveai-maths-cm2-stats-graphique-completer-short.mp4",
+      "miniature": "cm2/maths/statistiques/06-graphique-completer/eleveai-maths-cm2-stats-graphique-completer-short.png",
+      "titre": "La Réunion : 2 fois ou 3 fois plus d'habitants ? 🌋 — CM2 #Shorts",
+      "accroche": "En 1954, La Réunion avait environ 270 000 habitants. En 2010, environ 820 000. La barre est un peu plus de trois fois plus haute : 270 000 × 3, ça fait seulement 810 000 !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : en 1974, environ 480 000 habitants : combien de plus qu'en 1954 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=graphique&microId=graphique_completer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #CM2 #école",
+      "tags": [
+        "diagramme en barres",
+        "La Réunion",
+        "habitants",
+        "statistiques",
+        "maths CM2",
+        "CM2",
+        "école",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "cm2-stats-graphique-interpreter",
+      "notionId": "graphique",
+      "microId": "graphique_interpreter",
+      "classe": "cm2",
+      "ceinture": "jaune",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/statistiques/07-graphique-interpreter/eleveai-maths-cm2-stats-graphique-interpreter.mp4",
+      "miniature": "cm2/maths/statistiques/07-graphique-interpreter/eleveai-maths-cm2-stats-graphique-interpreter.png",
+      "titre": "Ça descend : fini la pluie ? — Interpréter un diagramme en barres — épisode 7 · Maths CM2",
+      "accroche": "Une prévisionniste météo mesure la pluie dans une ville de l'Est de La Réunion. Son métier : aider les agriculteurs, et prévenir les habitants avant les grosses pluies.\n\nDans cette vidéo :\n• la barre la plus haute : février, avec 450 millimètres\n• la tendance : de février à juin, les barres descendent\n• comparer : en février, il pleut 3 fois plus qu'en mai\n• le piège : conclure au-delà des données ; le diagramme ne montre que six mois\n\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : combien de millimètres de pluie en tout, de janvier à mars ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/cm2/graphique\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/cm2/graphique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=graphique&microId=graphique_interpreter&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "La saison des pluies : la prévisionniste météo"
+        ],
+        [
+          "00:16",
+          "Lire les barres"
+        ],
+        [
+          "00:33",
+          "Le plus pluvieux, la tendance, comparer"
+        ],
+        [
+          "01:02",
+          "Le piège : aller plus loin que les données"
+        ],
+        [
+          "01:16",
+          "À toi de jouer, et correction"
+        ],
+        [
+          "01:33",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/cm2/graphique",
+      "tags": [
+        "diagramme en barres",
+        "interpréter un graphique",
+        "tendance",
+        "pluie",
+        "météo",
+        "prévisionniste",
+        "La Réunion",
+        "statistiques",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "cm2-stats-graphique-interpreter-short",
+      "notionId": "graphique",
+      "microId": "graphique_interpreter",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-stats-graphique-interpreter",
+      "fichier": "cm2/maths/statistiques/07-graphique-interpreter/eleveai-maths-cm2-stats-graphique-interpreter-short.mp4",
+      "miniature": "cm2/maths/statistiques/07-graphique-interpreter/eleveai-maths-cm2-stats-graphique-interpreter-short.png",
+      "titre": "1 825 mm de pluie en UN jour : record du monde ! 🌧️ — CM2 #Shorts",
+      "accroche": "Dans une ville de l'Est, en février : 450 millimètres de pluie, en un mois entier. À Foc-Foc, près de Cilaos, en janvier 1966 : 1 825 millimètres en un seul jour ! C'est le record du monde.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 1 825 millimètres, c'est environ combien de fois 450 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=graphique&microId=graphique_interpreter&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #CM2 #école",
+      "tags": [
+        "diagramme en barres",
+        "pluie",
+        "record du monde",
+        "Cilaos",
+        "statistiques",
+        "maths CM2",
+        "CM2",
+        "école",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "cm2-stats-graphique-defi",
+      "notionId": "graphique",
+      "microId": "graphique_defi",
+      "classe": "cm2",
+      "ceinture": "verte",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/statistiques/08-graphique-defi/eleveai-maths-cm2-stats-graphique-defi.mp4",
+      "miniature": "cm2/maths/statistiques/08-graphique-defi/eleveai-maths-cm2-stats-graphique-defi.png",
+      "titre": "300 − 80 ? Relis la question ! — Le défi des diagrammes — épisode 8 · Maths CM2",
+      "accroche": "Un programmateur de cinéma choisit les films et les séances. Pour décider, il regarde combien de spectateurs viennent chaque jour voir le nouveau dessin animé. Un défi en trois étapes !\n\nDans cette vidéo :\n• lire cinq barres, de 50 en 50 : 120, 80, 150, 300, 250 entrées\n• étape 1 : le week-end, 300 + 250 = 550\n• étape 2 : du mercredi au vendredi, 350 ; étape 3 : 550 − 350 = 200 de plus\n• le piège : comparer seulement la plus haute et la plus basse ; je relis la question\n\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une salle de 100 places, 300 spectateurs le samedi : combien de séances pleines ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/cm2/graphique\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/cm2/graphique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=graphique&microId=graphique_defi&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Un défi de cinéma : le programmateur"
+        ],
+        [
+          "00:15",
+          "Lire les barres"
+        ],
+        [
+          "00:29",
+          "Le défi en trois étapes"
+        ],
+        [
+          "01:02",
+          "Le piège : la plus haute moins la plus basse"
+        ],
+        [
+          "01:17",
+          "À toi de jouer"
+        ],
+        [
+          "01:31",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/cm2/graphique",
+      "tags": [
+        "défi",
+        "diagramme en barres",
+        "problème en étapes",
+        "cinéma",
+        "programmateur de cinéma",
+        "métier",
+        "statistiques",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "cm2-stats-graphique-defi-short",
+      "notionId": "graphique",
+      "microId": "graphique_defi",
+      "classe": "cm2",
+      "ceinture": "jaune",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-stats-graphique-defi",
+      "fichier": "cm2/maths/statistiques/08-graphique-defi/eleveai-maths-cm2-stats-graphique-defi-short.mp4",
+      "miniature": "cm2/maths/statistiques/08-graphique-defi/eleveai-maths-cm2-stats-graphique-defi-short.png",
+      "titre": "Seul dans la salle de cinéma ? Quel jour y aller 🎬 — CM2 #Shorts",
+      "accroche": "Quel jour aller au cinéma pour être presque seul dans la salle ? Samedi, 300 entrées. Dimanche, 250. Et le jeudi, seulement 80 ! Le jeudi, la salle est presque vide.\n\n🥋 Ceinture jaune.\n👉 À toi : combien d'entrées de plus le samedi que le jeudi ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=graphique&microId=graphique_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #CM2 #école",
+      "tags": [
+        "diagramme en barres",
+        "cinéma",
+        "statistiques",
+        "maths CM2",
+        "CM2",
+        "école",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "6e-stats-lire-tableau",
+      "notionId": "stat_enquete",
+      "microId": "stat_donnee_lire_tableau",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/statistiques/01-lire-tableau/eleveai-maths-6e-stats-lire-tableau.mp4",
+      "miniature": "6e/maths/statistiques/01-lire-tableau/eleveai-maths-6e-stats-lire-tableau.png",
+      "titre": "Ligne ou colonne ? Lire un tableau sans se tromper — Lire un tableau — épisode 1 · Maths 6e",
+      "accroche": "Un régulateur du réseau de bus compte les voyageurs de trois lignes, le matin, le midi et le soir. Avec ces nombres, il décide où ajouter des bus.\n\nDans cette vidéo :\n• d'abord le titre : « Voyageurs d'un lundi »\n• je prends la bonne ligne, la bonne colonne : ligne 3, le soir, 160 voyageurs\n• le plus grand nombre du tableau pour décider : 210, ligne 1, le soir\n• le piège : confondre une ligne (de gauche à droite) et une colonne (de haut en bas)\n\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : combien de voyageurs sur la ligne 2, le midi ? Et quelle ligne a le moins de voyageurs le matin ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/stat-enquete\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/stat-enquete\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=stat_enquete&microId=stat_donnee_lire_tableau&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Ligne, colonne, case : le régulateur des bus"
+        ],
+        [
+          "00:16",
+          "Le titre, les lignes, les colonnes"
+        ],
+        [
+          "00:44",
+          "Lire une case, puis décider"
+        ],
+        [
+          "01:03",
+          "Le piège : ligne ou colonne"
+        ],
+        [
+          "01:15",
+          "À toi de jouer"
+        ],
+        [
+          "01:27",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/stat-enquete",
+      "tags": [
+        "lire un tableau",
+        "tableau à double entrée",
+        "ligne et colonne",
+        "bus",
+        "transports",
+        "régulateur",
+        "statistiques",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "6e-stats-lire-tableau-short",
+      "notionId": "stat_enquete",
+      "microId": "stat_donnee_lire_tableau",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-stats-lire-tableau",
+      "fichier": "6e/maths/statistiques/01-lire-tableau/eleveai-maths-6e-stats-lire-tableau-short.mp4",
+      "miniature": "6e/maths/statistiques/01-lire-tableau/eleveai-maths-6e-stats-lire-tableau-short.png",
+      "titre": "À quelle heure le bus est-il plein à craquer ? 🚌 — 6e #Shorts",
+      "accroche": "Ligne 1 : 180 voyageurs le matin, 60 le midi, 210 le soir. Le bus est plein à craquer le soir : tout le monde rentre en même temps !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : sur la ligne 1, combien de voyageurs en tout dans la journée ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=stat_enquete&microId=stat_donnee_lire_tableau&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #6e #collège",
+      "tags": [
+        "tableau",
+        "bus",
+        "transports",
+        "statistiques",
+        "maths 6e",
+        "6e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "6e-stats-prelever",
+      "notionId": "stat_donnee",
+      "microId": "stat_donnee_prelever",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/statistiques/02-prelever/eleveai-maths-6e-stats-prelever.mp4",
+      "miniature": "6e/maths/statistiques/02-prelever/eleveai-maths-6e-stats-prelever.png",
+      "titre": "4 € la tomate ? Non, le kilo ! — Prélever une information — épisode 2 · Maths 6e",
+      "accroche": "Une économiste de l'INSEE suit les prix du marché. Si les prix montent, elle le voit, et elle peut l'expliquer à tout le monde. Son tableau : le prix d'un kilogramme de tomates, de bananes et de mangues.\n\nDans cette vidéo :\n• je lis d'abord le titre et l'unité : le prix d'un kilogramme, en euros\n• je prélève la bonne case : les tomates en 2026, 4 € le kilogramme\n• je m'en sers : les tomates ont augmenté de 1 €, les mangues ont baissé de 1 €\n• le piège : oublier l'unité ; 4 €, ce n'est pas le prix d'une seule tomate\n\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : combien coûtent 3 kilogrammes de mangues en janvier 2026 ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/stat-donnee\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/stat-donnee\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=stat_donnee&microId=stat_donnee_prelever&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le bon nombre, au bon endroit : l'économiste"
+        ],
+        [
+          "00:14",
+          "Le titre et l'unité"
+        ],
+        [
+          "00:38",
+          "Prélever une case et s'en servir"
+        ],
+        [
+          "00:57",
+          "Le piège : oublier l'unité"
+        ],
+        [
+          "01:08",
+          "À toi de jouer, et correction"
+        ],
+        [
+          "01:26",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/stat-donnee",
+      "tags": [
+        "prélever une information",
+        "lire un tableau",
+        "unité",
+        "prix",
+        "marché",
+        "économiste",
+        "INSEE",
+        "statistiques",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "6e-stats-prelever-short",
+      "notionId": "stat_donnee",
+      "microId": "stat_donnee_prelever",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-stats-prelever",
+      "fichier": "6e/maths/statistiques/02-prelever/eleveai-maths-6e-stats-prelever-short.mp4",
+      "miniature": "6e/maths/statistiques/02-prelever/eleveai-maths-6e-stats-prelever-short.png",
+      "titre": "4 € la tomate… ou 4 € le kilo ? 🍅 — 6e #Shorts",
+      "accroche": "4 euros la tomate ? Le titre du tableau le dit : prix d'un kilogramme. 4 euros, c'est pour un kilo de tomates, pas pour une seule !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : à 4 euros le kilogramme, combien coûtent 2 kilogrammes de tomates ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=stat_donnee&microId=stat_donnee_prelever&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #6e #collège",
+      "tags": [
+        "tableau",
+        "prix",
+        "marché",
+        "unité",
+        "statistiques",
+        "maths 6e",
+        "6e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "6e-stats-construire-tableau",
+      "notionId": "stat_enquete",
+      "microId": "stat_construire_tableau",
+      "classe": "6e",
+      "ceinture": "orange",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/statistiques/03-construire-tableau/eleveai-maths-6e-stats-construire-tableau.mp4",
+      "miniature": "6e/maths/statistiques/03-construire-tableau/eleveai-maths-6e-stats-construire-tableau.png",
+      "titre": "25 oiseaux en vrac : y voir clair — Construire un tableau d'effectifs — épisode 3 · Maths 6e",
+      "accroche": "Une ornithologue du Parc national de La Réunion compte les oiseaux d'une ravine. Elle note chaque oiseau qu'elle voit, un par un : tec-tec, oiseau blanc, merle péi, papangue… Sa liste est illisible !\n\nDans cette vidéo :\n• un tableau d'effectifs : une case par espèce, un trait par oiseau\n• on compte les traits : tec-tec 7, oiseau blanc 9, merle péi 5, papangue 1, oiseau de la Vierge 3\n• on vérifie : la somme des effectifs égale le total, 25\n• le piège : compter deux fois le même oiseau, ou en oublier un\n\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : le lendemain, 20 oiseaux : 6 tec-tec, 8 oiseaux blancs, 2 papangues, et des merles péi. Combien de merles ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/stat-enquete\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/stat-enquete\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=stat_enquete&microId=stat_construire_tableau&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "25 oiseaux en vrac : l'ornithologue"
+        ],
+        [
+          "00:26",
+          "Une case par espèce, un trait par oiseau"
+        ],
+        [
+          "00:37",
+          "Compter les traits"
+        ],
+        [
+          "00:47",
+          "Vérifier la somme ; le piège : compter deux fois"
+        ],
+        [
+          "01:07",
+          "À toi de jouer"
+        ],
+        [
+          "01:22",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/stat-enquete",
+      "tags": [
+        "tableau d'effectifs",
+        "effectif",
+        "construire un tableau",
+        "oiseaux",
+        "papangue",
+        "ornithologue",
+        "Parc national",
+        "La Réunion",
+        "statistiques",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "6e-stats-construire-tableau-short",
+      "notionId": "stat_enquete",
+      "microId": "stat_construire_tableau",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-stats-construire-tableau",
+      "fichier": "6e/maths/statistiques/03-construire-tableau/eleveai-maths-6e-stats-construire-tableau-short.mp4",
+      "miniature": "6e/maths/statistiques/03-construire-tableau/eleveai-maths-6e-stats-construire-tableau-short.png",
+      "titre": "Le papangue est rare : 1 sur 25 ! 🦅 — 6e #Shorts",
+      "accroche": "Le papangue, le rapace de La Réunion, est rare. Sur 25 oiseaux comptés dans une ravine : 9 oiseaux blancs, 7 tec-tec, 5 merles péi, 3 oiseaux de la Vierge… et un seul papangue !\n\n🥋 Ceinture jaune.\n👉 À toi : dans cette ravine, combien d'oiseaux blancs de plus que de tec-tec ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=stat_enquete&microId=stat_construire_tableau&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #6e #collège",
+      "tags": [
+        "tableau d'effectifs",
+        "papangue",
+        "oiseaux",
+        "statistiques",
+        "maths 6e",
+        "6e",
+        "collège",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "6e-stats-enquete-planifier",
+      "notionId": "stat_enquete",
+      "microId": "stat_enquete_planifier",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/statistiques/04-enquete-planifier/eleveai-maths-6e-stats-enquete-planifier.mp4",
+      "miniature": "6e/maths/statistiques/04-enquete-planifier/eleveai-maths-6e-stats-enquete-planifier.png",
+      "titre": "180 « oui » sur 200 : tous d'accord ? — Préparer une enquête — épisode 4 · Maths 6e",
+      "accroche": "Sur un réseau social, un compte demande : faut-il finir les cours à midi ? 180 réponses oui, sur 200. Alors, tout le monde est d'accord ? Une chargée d'études, dont le métier est de préparer des enquêtes justes, répond.\n\nDans cette vidéo :\n• qui a répondu ? Les abonnés du compte : un échantillon biaisé\n• la question exacte : une question précise, dont la réponse est un nombre\n• à qui la poser : 20 élèves de chaque niveau, tirés au hasard\n• le piège : interroger seulement ses amis, ou seulement sa classe\n\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : pour savoir à quelle heure les élèves se couchent, on interroge seulement l'équipe de basket à l'entraînement du soir : bonne idée ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/stat-enquete\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/stat-enquete\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=stat_enquete&microId=stat_enquete_planifier&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "« Tout le monde le pense » : vraiment ?"
+        ],
+        [
+          "00:17",
+          "Qui a répondu ? L'échantillon biaisé"
+        ],
+        [
+          "00:28",
+          "La chargée d'études : la bonne question"
+        ],
+        [
+          "00:49",
+          "À qui la poser ? Le piège : seulement ses amis"
+        ],
+        [
+          "01:09",
+          "À toi de jouer"
+        ],
+        [
+          "01:24",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/stat-enquete",
+      "tags": [
+        "enquête",
+        "sondage",
+        "échantillon",
+        "échantillon biaisé",
+        "réseaux sociaux",
+        "chargée d'études",
+        "esprit critique",
+        "statistiques",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "6e-stats-enquete-planifier-short",
+      "notionId": "stat_enquete",
+      "microId": "stat_enquete_planifier",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-stats-enquete-planifier",
+      "fichier": "6e/maths/statistiques/04-enquete-planifier/eleveai-maths-6e-stats-enquete-planifier-short.mp4",
+      "miniature": "6e/maths/statistiques/04-enquete-planifier/eleveai-maths-6e-stats-enquete-planifier-short.png",
+      "titre": "« 9 joueurs sur 10 adorent mon jeu ! » On y croit ? 🎮 — 6e #Shorts",
+      "accroche": "« 9 joueurs sur 10 adorent mon jeu ! » dit une vidéo. Mais qui a répondu ? 10 abonnés de la chaîne du jeu ! Ce n'est pas tout le monde : c'est un échantillon biaisé.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : pour savoir si les élèves de ton collège aiment ce jeu, qui interroger : tes amis, ou des élèves de chaque classe tirés au hasard ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=stat_enquete&microId=stat_enquete_planifier&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #6e #collège",
+      "tags": [
+        "sondage",
+        "échantillon biaisé",
+        "jeu vidéo",
+        "statistiques",
+        "maths 6e",
+        "6e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "6e-stats-enquete-mesurer",
+      "notionId": "stat_enquete",
+      "microId": "stat_enquete_mesurer",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/statistiques/05-enquete-mesurer/eleveai-maths-6e-stats-enquete-mesurer.mp4",
+      "miniature": "6e/maths/statistiques/05-enquete-mesurer/eleveai-maths-6e-stats-enquete-mesurer.png",
+      "titre": "2 minutes… ou 120 ? Une ligne, une même unité ! — Bien noter ses mesures — épisode 5 · Maths 6e",
+      "accroche": "Un technicien de laboratoire chauffe de l'eau. Toutes les 2 minutes, il mesure sa température avec un thermomètre : 20, 35, 50, 65, 80 degrés. Comment bien noter ses mesures ?\n\nDans cette vidéo :\n• un tableau à deux lignes : le temps et la température\n• l'unité s'écrit une seule fois, dans l'en-tête\n• le tableau montre tout de suite : + 15 degrés toutes les 2 minutes\n• le piège : changer d'unité en route (120 secondes au lieu de 2 minutes)\n\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : un ressort s'allonge de 3 centimètres, puis de 45 millimètres : quel allongement est le plus grand ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/stat-enquete\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/stat-enquete\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=stat_enquete&microId=stat_enquete_mesurer&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Bien noter ses mesures : le technicien de laboratoire"
+        ],
+        [
+          "00:16",
+          "Les mesures"
+        ],
+        [
+          "00:33",
+          "Le tableau, l'unité dans l'en-tête"
+        ],
+        [
+          "00:52",
+          "Le piège : changer d'unité"
+        ],
+        [
+          "01:06",
+          "À toi de jouer"
+        ],
+        [
+          "01:19",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/stat-enquete",
+      "tags": [
+        "mesures",
+        "unités",
+        "tableau",
+        "conversion",
+        "température",
+        "laboratoire",
+        "technicien de laboratoire",
+        "physique",
+        "statistiques",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "6e-stats-enquete-mesurer-short",
+      "notionId": "stat_enquete",
+      "microId": "stat_enquete_mesurer",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-stats-enquete-mesurer",
+      "fichier": "6e/maths/statistiques/05-enquete-mesurer/eleveai-maths-6e-stats-enquete-mesurer-short.mp4",
+      "miniature": "6e/maths/statistiques/05-enquete-mesurer/eleveai-maths-6e-stats-enquete-mesurer-short.png",
+      "titre": "Qui est le plus grand : 1 m 45 ou 152 ? 📏 — 6e #Shorts",
+      "accroche": "Qui est le plus grand : 1 mètre 45, ou 152 ? 152 centimètres, c'est 1 mètre 52 : plus grand ! Sans son unité, un nombre ne veut rien dire.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : qui est le plus long : un serpent de 2 mètres, ou un serpent de 180 centimètres ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=stat_enquete&microId=stat_enquete_mesurer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #6e #collège",
+      "tags": [
+        "mesures",
+        "unités",
+        "centimètres",
+        "statistiques",
+        "maths 6e",
+        "6e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "6e-stats-lire-graphique",
+      "notionId": "stat_donnee",
+      "microId": "stat_donnee_lire_graphique",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/statistiques/06-lire-graphique/eleveai-maths-6e-stats-lire-graphique.mp4",
+      "miniature": "6e/maths/statistiques/06-lire-graphique/eleveai-maths-6e-stats-lire-graphique.png",
+      "titre": "400 ou 500 ? Ni l'un ni l'autre ! — Lire un graphique — épisode 6 · Maths 6e",
+      "accroche": "Une agricultrice cultive des letchis. En décembre, elle pèse sa récolte chaque semaine, pour savoir combien de cueilleurs embaucher. Son diagramme en barres va de 100 en 100.\n\nDans cette vidéo :\n• lire le titre et les axes : les semaines, la masse en kilogrammes\n• lire chaque barre : 200, 450 (au milieu entre 400 et 500), 600, 350\n• décider : la barre la plus haute, la semaine 3\n• le piège : arrondir à vue ; au milieu entre deux graduations, c'est 450\n\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : combien de kilogrammes de plus en semaine 3 qu'en semaine 2 ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/stat-donnee\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/stat-donnee\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=stat_donnee&microId=stat_donnee_lire_graphique&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les nombres parlent : l'agricultrice"
+        ],
+        [
+          "00:15",
+          "Les axes, puis lire les barres et décider"
+        ],
+        [
+          "00:49",
+          "Le piège : arrondir à vue"
+        ],
+        [
+          "01:03",
+          "À toi de jouer, et correction"
+        ],
+        [
+          "01:20",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/stat-donnee",
+      "tags": [
+        "lire un graphique",
+        "diagramme en barres",
+        "axe gradué",
+        "letchis",
+        "agriculture",
+        "agricultrice",
+        "La Réunion",
+        "statistiques",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "6e-stats-lire-graphique-short",
+      "notionId": "stat_donnee",
+      "microId": "stat_donnee_lire_graphique",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-stats-lire-graphique",
+      "fichier": "6e/maths/statistiques/06-lire-graphique/eleveai-maths-6e-stats-lire-graphique-short.mp4",
+      "miniature": "6e/maths/statistiques/06-lire-graphique/eleveai-maths-6e-stats-lire-graphique-short.png",
+      "titre": "Les letchis : récolte × combien en 2 semaines ? 🍒 — 6e #Shorts",
+      "accroche": "Semaine 1 : 200 kilogrammes de letchis. Semaine 3 : 600. 200 × 3 = 600 : trois fois plus ! Les cueilleurs ont du travail.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : en semaine 2, 450 kilogrammes : combien de plus qu'en semaine 1 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=stat_donnee&microId=stat_donnee_lire_graphique&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #6e #collège",
+      "tags": [
+        "diagramme en barres",
+        "letchis",
+        "agriculture",
+        "statistiques",
+        "maths 6e",
+        "6e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "6e-stats-lire-circulaire",
+      "notionId": "stat_donnee",
+      "microId": "stat_donnee_lire_circulaire",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/statistiques/07-lire-circulaire/eleveai-maths-6e-stats-lire-circulaire.mp4",
+      "miniature": "6e/maths/statistiques/07-lire-circulaire/eleveai-maths-6e-stats-lire-circulaire.png",
+      "titre": "3 parts = 3 tiers ? Non ! — Lire un diagramme circulaire — épisode 7 · Maths 6e",
+      "accroche": "Un diététicien aide les gens à bien manger. Pour expliquer une assiette équilibrée, il dessine un disque, comme une assiette : la moitié de légumes, un quart de féculents, un quart de viande, poisson ou œufs.\n\nDans cette vidéo :\n• chaque part représente une partie du tout : plus la part est grande, plus il y en a\n• une moitié, un quart : je compare la taille des parts\n• calculer : la moitié de 400 g, 200 g ; un quart, 100 g\n• le piège : croire que trois parts sont trois tiers ; ici les parts ne sont pas égales\n\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une assiette de 600 grammes : combien de grammes de légumes ? Et de poisson ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/stat-donnee\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/stat-donnee\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=stat_donnee&microId=stat_donnee_lire_circulaire&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Un disque coupé en parts : le diététicien"
+        ],
+        [
+          "00:14",
+          "Les parts de l'assiette"
+        ],
+        [
+          "00:26",
+          "Lire les parts, puis calculer"
+        ],
+        [
+          "00:49",
+          "Le piège : trois parts, trois tiers ?"
+        ],
+        [
+          "01:02",
+          "À toi de jouer"
+        ],
+        [
+          "01:15",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/stat-donnee",
+      "tags": [
+        "diagramme circulaire",
+        "camembert",
+        "moitié",
+        "quart",
+        "alimentation",
+        "diététicien",
+        "santé",
+        "statistiques",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "6e-stats-lire-circulaire-short",
+      "notionId": "stat_donnee",
+      "microId": "stat_donnee_lire_circulaire",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-stats-lire-circulaire",
+      "fichier": "6e/maths/statistiques/07-lire-circulaire/eleveai-maths-6e-stats-lire-circulaire-short.mp4",
+      "miniature": "6e/maths/statistiques/07-lire-circulaire/eleveai-maths-6e-stats-lire-circulaire-short.png",
+      "titre": "Ton assiette de cari : quelle part pour le riz ? 🍛 — 6e #Shorts",
+      "accroche": "Ton assiette de cari : le diététicien la dessine en disque. La moitié en légumes, un quart en riz, un quart en cari de poulet. Le riz, c'est seulement un quart !\n\n🥋 Ceinture jaune.\n👉 À toi : si ton assiette pèse 800 grammes, combien de grammes de riz ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=stat_donnee&microId=stat_donnee_lire_circulaire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #6e #collège",
+      "tags": [
+        "diagramme circulaire",
+        "cari",
+        "alimentation",
+        "statistiques",
+        "maths 6e",
+        "6e",
+        "collège",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "6e-stats-comparer",
+      "notionId": "stat_donnee",
+      "microId": "stat_donnee_comparer",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/statistiques/08-comparer/eleveai-maths-6e-stats-comparer.mp4",
+      "miniature": "6e/maths/statistiques/08-comparer/eleveai-maths-6e-stats-comparer.png",
+      "titre": "Le plus haut sommet, et de combien ? — Comparer des données — épisode 8 · Maths 6e",
+      "accroche": "Un cartographe mesure les montagnes pour dessiner les cartes. À La Réunion, trois grands sommets : le Piton des Neiges (3 070 m), le Grand Bénare (2 898 m) et le Piton de la Fournaise (2 632 m).\n\nDans cette vidéo :\n• lire chaque valeur\n• ranger dans l'ordre : Piton des Neiges, Grand Bénare, Piton de la Fournaise\n• calculer l'écart par une soustraction : 3 070 − 2 632 = 438 mètres\n• le piège : se fier à une photo ; je compare les nombres, dans la même unité\n\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : de combien de mètres le Grand Bénare dépasse-t-il le Piton de la Fournaise ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/stat-donnee\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/stat-donnee\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=stat_donnee&microId=stat_donnee_comparer&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Qui est le plus haut ? Le cartographe"
+        ],
+        [
+          "00:13",
+          "Les trois sommets"
+        ],
+        [
+          "00:27",
+          "Ranger dans l'ordre"
+        ],
+        [
+          "00:38",
+          "L'écart : une soustraction"
+        ],
+        [
+          "00:50",
+          "Le piège : la photo"
+        ],
+        [
+          "01:02",
+          "À toi de jouer"
+        ],
+        [
+          "01:14",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/stat-donnee",
+      "tags": [
+        "comparer des données",
+        "ranger",
+        "écart",
+        "soustraction",
+        "Piton des Neiges",
+        "Piton de la Fournaise",
+        "cartographe",
+        "La Réunion",
+        "statistiques",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "6e-stats-comparer-short",
+      "notionId": "stat_donnee",
+      "microId": "stat_donnee_comparer",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-stats-comparer",
+      "fichier": "6e/maths/statistiques/08-comparer/eleveai-maths-6e-stats-comparer-short.mp4",
+      "miniature": "6e/maths/statistiques/08-comparer/eleveai-maths-6e-stats-comparer-short.png",
+      "titre": "L'Everest = combien de Pitons des Neiges ? 🏔️ — 6e #Shorts",
+      "accroche": "Le Piton des Neiges : 3 070 mètres. L'Everest : 8 849 mètres. Deux Pitons : 6 140. Trois Pitons : 9 210, c'est trop ! Il faut presque 3 Pitons des Neiges.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : de combien de mètres l'Everest dépasse-t-il deux Pitons des Neiges empilés ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=stat_donnee&microId=stat_donnee_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #6e #collège",
+      "tags": [
+        "comparer",
+        "Everest",
+        "Piton des Neiges",
+        "statistiques",
+        "maths 6e",
+        "6e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "6e-stats-interpreter",
+      "notionId": "stat_donnee",
+      "microId": "stat_donnee_interpreter",
+      "classe": "6e",
+      "ceinture": "orange",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/statistiques/09-interpreter/eleveai-maths-6e-stats-interpreter.mp4",
+      "miniature": "6e/maths/statistiques/09-interpreter/eleveai-maths-6e-stats-interpreter.png",
+      "titre": "« Ça explose ! » L'axe ment — Interpréter un graphique — épisode 9 · Maths 6e",
+      "accroche": "Une journaliste de données vérifie les chiffres avant qu'on les montre à la télévision. Un reportage annonce : « Les inscriptions à la médiathèque explosent ! » Sur le graphique, la barre de 2025 est trois fois plus haute…\n\nDans cette vidéo :\n• lire les nombres : 1 000 inscrits en 2024, 1 040 en 2025\n• regarder le début de l'axe : il commence à 980, le bas des barres est coupé\n• avec un axe qui part de 0 : seulement 40 de plus, ça n'explose pas\n• le piège : croire la hauteur des barres sans lire les nombres ni le début de l'axe\n\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : 500 vélos vendus en janvier, 1 000 en février : le journal dit « deux fois plus ». A-t-il raison ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/stat-donnee\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/stat-donnee\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=stat_donnee&microId=stat_donnee_interpreter&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Un graphique peut tromper : la journaliste de données"
+        ],
+        [
+          "00:19",
+          "Trois fois plus haute ? Lire les nombres"
+        ],
+        [
+          "00:39",
+          "L'axe commence à 980"
+        ],
+        [
+          "01:02",
+          "Le piège : la hauteur des barres"
+        ],
+        [
+          "01:14",
+          "À toi de jouer"
+        ],
+        [
+          "01:27",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/stat-donnee",
+      "tags": [
+        "interpréter un graphique",
+        "axe tronqué",
+        "esprit critique",
+        "médias",
+        "journal télévisé",
+        "journaliste de données",
+        "statistiques",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "6e-stats-interpreter-short",
+      "notionId": "stat_donnee",
+      "microId": "stat_donnee_interpreter",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-stats-interpreter",
+      "fichier": "6e/maths/statistiques/09-interpreter/eleveai-maths-6e-stats-interpreter-short.mp4",
+      "miniature": "6e/maths/statistiques/09-interpreter/eleveai-maths-6e-stats-interpreter-short.png",
+      "titre": "« Ça explose ! » Regarde bien l'axe… 📺 — 6e #Shorts",
+      "accroche": "« Ça explose ! » dit le journal. La barre est trois fois plus haute… mais l'axe commence à 980 ! En vrai : 1 000, puis 1 040. Seulement 40 de plus. Le graphique trompe !\n\n🥋 Ceinture jaune.\n👉 À toi : si l'axe partait de 0, la barre de 2025 serait-elle trois fois plus haute ? Oui ou non ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=stat_donnee&microId=stat_donnee_interpreter&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #6e #collège",
+      "tags": [
+        "axe tronqué",
+        "graphique trompeur",
+        "esprit critique",
+        "statistiques",
+        "maths 6e",
+        "6e",
+        "collège",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "6e-stats-defi",
+      "notionId": "stat_donnee",
+      "microId": "stat_donnee_defi",
+      "classe": "6e",
+      "ceinture": "orange",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/statistiques/10-defi/eleveai-maths-6e-stats-defi.mp4",
+      "miniature": "6e/maths/statistiques/10-defi/eleveai-maths-6e-stats-defi.png",
+      "titre": "Casser un code avec les stats ! — Le défi : casser un code — épisode 10 · Maths 6e",
+      "accroche": "Une cryptographe protège les messages secrets : ceux des banques, ceux des téléphones. Son arme secrète : compter les lettres. On compte celles d'un poème de Victor Hugo, « Demain, dès l'aube ».\n\nDans cette vidéo :\n• compter les lettres et les ranger dans un tableau d'effectifs : E 19, A 18, I 13, T 10\n• la plus fréquente : le E\n• un message codé : sa lettre la plus fréquente est le H, donc un décalage de 3\n• le piège : conclure avec trop peu de données ; 19 contre 18, c'est de justesse\n\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : avec un décalage de 3, décode ce mot : P, D, W, K, V.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/stat-donnee\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/stat-donnee\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=stat_donnee&microId=stat_donnee_defi&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Un message secret : la cryptographe"
+        ],
+        [
+          "00:16",
+          "Le poème de Victor Hugo et ses lettres"
+        ],
+        [
+          "00:46",
+          "Le message codé, le décalage"
+        ],
+        [
+          "01:07",
+          "Le piège : trop peu de données"
+        ],
+        [
+          "01:26",
+          "À toi de jouer, et correction"
+        ],
+        [
+          "01:49",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/stat-donnee",
+      "tags": [
+        "défi",
+        "tableau d'effectifs",
+        "fréquence",
+        "code secret",
+        "code de César",
+        "cryptographe",
+        "Victor Hugo",
+        "statistiques",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "6e-stats-defi-short",
+      "notionId": "stat_donnee",
+      "microId": "stat_donnee_defi",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-stats-defi",
+      "fichier": "6e/maths/statistiques/10-defi/eleveai-maths-6e-stats-defi-short.mp4",
+      "miniature": "6e/maths/statistiques/10-defi/eleveai-maths-6e-stats-defi-short.png",
+      "titre": "La lettre la plus fréquente en français ? Devine ! 🔐 — 6e #Shorts",
+      "accroche": "Dans un texte en français, quelle lettre revient le plus souvent ? Dans les quatre premiers vers d'un poème de Victor Hugo : le E, 19 fois. Le A, 18 fois. Le E gagne, de justesse ! Les casseurs de codes s'en servent.\n\n🥋 Ceinture jaune.\n👉 À toi : dans le mot ANANAS, quelle lettre revient le plus, et combien de fois ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=stat_donnee&microId=stat_donnee_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #6e #collège",
+      "tags": [
+        "code secret",
+        "lettres",
+        "Victor Hugo",
+        "statistiques",
+        "maths 6e",
+        "6e",
+        "collège",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
     }
   ]
 }
