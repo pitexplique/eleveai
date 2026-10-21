@@ -132,6 +132,7 @@ export const CHARGEURS_FICHES_EXERCICES: Record<string, () => Promise<FicheExerc
   "maths/4e/grandeur-composee": () => import("@/lib/fiches-exercices/maths-4e-grandeurs-composees").then((m) => m.exercicesGrandeursComposees4e),
   "maths/4e/proba-experience": () => import("@/lib/fiches-exercices/maths-4e-probabilites").then((m) => m.exercicesProbabilites4e),
   "maths/4e/sym-transformation": () => import("@/lib/fiches-exercices/maths-4e-transformations").then((m) => m.exercicesTransformations4e),
+  "maths/4e/stat-donnee": () => import("@/lib/fiches-exercices/maths-4e-stat-donnee").then((m) => m.exercicesStatDonnee4e),
   "maths/4e/stat-statistique": () => import("@/lib/fiches-exercices/maths-4e-statistiques").then((m) => m.exercicesStatistiques4e),
   "maths/4e/aire-perimetre": () => import("@/lib/fiches-exercices/maths-4e-perimetres").then((m) => m.exercicesPerimetres4e),
   "maths/4e/aire-surface": () => import("@/lib/fiches-exercices/maths-4e-aires").then((m) => m.exercicesAires4e),

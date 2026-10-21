@@ -703,6 +703,11 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Symétrie axiale (axe oblique compris), symétrie centrale, translation, rotation, puis ce qu'elles conservent pour justifier et calculer : Tetris, le cavalier des échecs, un cerf-volant, un terrain de handball, la grande roue, un flocon. Chaque image construite sur quadrillage.",
   },
+  "maths/4e/stat-donnee": {
+    titre: "Lire et interpréter des données : 20 exercices corrigés",
+    resume:
+      "Lire un tableau, même à double entrée, lire un diagramme en barres ou en bâtons sur un axe gradué (et se méfier d'un axe tronqué), compter des effectifs, calculer une fréquence en fraction, en décimal et en pourcentage, passer d'un pourcentage à un effectif. Le palmarès du tennis, les départements de France, l'électricité du pays, les 206 os du squelette, les groupes sanguins et les 88 touches du piano.",
+  },
   "maths/4e/stat-statistique": {
     titre: "Moyenne, médiane, étendue : 20 exercices corrigés",
     resume:
