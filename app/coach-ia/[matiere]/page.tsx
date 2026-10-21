@@ -1006,6 +1006,12 @@ export default function CoachIA() {
                         !!searchLower &&
                         !normaliser(libelleNotion(notionId)).includes(searchLower);
                       const ouverte = forceeParLaRecherche || estDepliee(notionId);
+                      // Les vidéos des micros, cachées par le pli : on les
+                      // annonce sur l'étiquette pour donner envie d'ouvrir.
+                      const nbVideosMicros = micros.reduce(
+                        (n, m) => n + (videosParMicro[m]?.length ?? 0),
+                        0
+                      );
                       return (
                       /* ⛔ 15/09/2026 — APERÇUS AU SURVOL DÉBRANCHÉS, TOUTES
                          MATIÈRES. Frédéric : « ça n'apporte rien en fait ».
@@ -1044,20 +1050,44 @@ export default function CoachIA() {
                                 aria-expanded={ouverte}
                                 className="group/pli -ml-1 inline-flex items-center gap-1.5 rounded-lg px-1 py-1 text-left transition hover:bg-slate-100"
                               >
-                                <ChevronRight
+                                {/* ⭐ 21/10/2026 — Frédéric : « l'élève ne
+                                    voit pas qu'il faut cliquer pour déplier
+                                    et voir les vidéos ». Le petit chevron
+                                    gris et le compte gris ne disaient rien :
+                                    le chevron devient une pastille verte, et
+                                    le compte une étiquette qui DIT le geste
+                                    (« Voir les 6 séries · ▶ 3 vidéos »). */}
+                                <span
                                   aria-hidden="true"
-                                  className={[
-                                    "h-4 w-4 shrink-0 text-slate-400 transition-transform group-hover/pli:text-slate-600",
-                                    ouverte ? "rotate-90" : "",
-                                  ].join(" ")}
-                                />
-                                {/* Le compte suit le DERNIER MOT : posé en
-                                    frère du titre, il partait au bord droit
+                                  className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-green-100 text-green-700 transition group-hover/pli:bg-green-600 group-hover/pli:text-white"
+                                >
+                                  <ChevronRight
+                                    className={[
+                                      "h-4 w-4 transition-transform",
+                                      ouverte ? "rotate-90" : "",
+                                    ].join(" ")}
+                                  />
+                                </span>
+                                {/* L'étiquette suit le DERNIER MOT : posée en
+                                    frère du titre, elle partait au bord droit
                                     dès que le titre prenait deux lignes. */}
                                 <span>
                                   <TexteMath>{libelleNotionMath(notionId)}</TexteMath>
-                                  <span className="ml-1.5 text-xs font-semibold text-slate-400">
-                                    {micros.length}
+                                  <span
+                                    className={[
+                                      "ml-2 inline-flex items-center gap-1 whitespace-nowrap rounded-full border px-2 py-0.5 align-middle text-xs font-semibold transition",
+                                      ouverte
+                                        ? "border-slate-200 bg-white text-slate-500"
+                                        : "border-green-300 bg-green-50 text-green-800 group-hover/pli:border-green-500",
+                                    ].join(" ")}
+                                  >
+                                    {ouverte ? "Masquer" : `Voir les ${micros.length} séries`}
+                                    {!ouverte && nbVideosMicros > 0 ? (
+                                      <span className="inline-flex items-center gap-0.5 text-rose-700">
+                                        · <Play className="h-2.5 w-2.5 fill-current" />
+                                        {nbVideosMicros} vidéo{nbVideosMicros > 1 ? "s" : ""}
+                                      </span>
+                                    ) : null}
                                   </span>
                                 </span>
                               </button>
