@@ -89,17 +89,82 @@ function duSujet(sujet: string): string {
   return `de ${sujet}`;
 }
 
-const SERIES = [
-  { x: "Rang de l'année", y: "Chiffre d'affaires", unite: "k€", sujet: "l'évolution du chiffre d'affaires" },
-  { x: "Dépense publicitaire (k€)", y: "Ventes", unite: "milliers d'articles", sujet: "l'effet de la publicité sur les ventes" },
-  { x: "Rang du mois", y: "Nombre d'abonnés", unite: "abonnés", sujet: "la croissance du nombre d'abonnés" },
-  { x: "Température moyenne (°C)", y: "Consommation d'électricité", unite: "MWh", sujet: "la consommation selon la température" },
-  { x: "Ancienneté (années)", y: "Valeur du véhicule", unite: "centaines d'€", sujet: "la décote d'un véhicule" },
-  { x: "Surface de vente (dizaines de m²)", y: "Chiffre d'affaires", unite: "k€", sujet: "le rendement au mètre carré" },
-] as const;
+/**
+ * ⭐ 21/10/2026 — UN MÉTIER, UN SENS, UN ORDRE DE GRANDEUR PAR CONTEXTE.
+ *
+ * Six contextes et des énoncés à phrase fixe : 2 à 24 squelettes par micro,
+ * l'élève revoyait la même question une fois sur deux. Chaque contexte porte
+ * désormais son métier (les maths sont transversales : gestion, marketing,
+ * RH, santé, environnement, sport), le SENS plausible de la relation (« - » :
+ * une voiture ne prend pas de valeur en vieillissant) et les pentes et
+ * ordonnées à l'origine qui donnent des valeurs vraisemblables pour $x$ de $1$
+ * à $7$. Les abscisses restent des rangs ou de petits entiers : tous les
+ * gabarits de ce fichier en dépendent.
+ */
+type Contexte = {
+  metier: string;
+  x: string;
+  y: string;
+  unite: string;
+  sujet: string;
+  sens: "+" | "-" | "±";
+  pentes: readonly number[];
+  base: readonly [number, number];
+};
+
+const SERIES: readonly Contexte[] = [
+  { metier: "Une contrôleuse de gestion", x: "Rang de l'année", y: "Chiffre d'affaires", unite: "k€", sujet: "l'évolution du chiffre d'affaires", sens: "±", pentes: [4, 5, 6, 8, 10], base: [60, 120] },
+  { metier: "Un responsable marketing", x: "Dépense publicitaire (k€)", y: "Ventes", unite: "milliers d'articles", sujet: "l'effet de la publicité sur les ventes", sens: "+", pentes: [2, 3, 4, 5], base: [10, 30] },
+  { metier: "Une community manager", x: "Rang du mois", y: "Nombre d'abonnés", unite: "centaines d'abonnés", sujet: "la croissance du nombre d'abonnés", sens: "+", pentes: [3, 4, 5, 6, 8], base: [10, 40] },
+  { metier: "Un gestionnaire d'énergie", x: "Température extérieure moyenne (°C)", y: "Consommation de chauffage", unite: "MWh", sujet: "la consommation de chauffage selon la température", sens: "-", pentes: [3, 4, 5, 6], base: [60, 90] },
+  { metier: "Une experte en assurance automobile", x: "Ancienneté du véhicule (années)", y: "Valeur du véhicule", unite: "centaines d'euros", sujet: "la décote d'un véhicule", sens: "-", pentes: [8, 10, 12, 15], base: [150, 220] },
+  { metier: "Un directeur de magasin", x: "Surface de vente (centaines de m²)", y: "Chiffre d'affaires", unite: "k€", sujet: "le rendement de la surface de vente", sens: "+", pentes: [10, 12, 15], base: [30, 60] },
+  { metier: "Une responsable des ressources humaines", x: "Heures de formation suivies", y: "Erreurs de saisie par mois", unite: "erreurs", sujet: "l'effet de la formation sur les erreurs de saisie", sens: "-", pentes: [2, 3, 4], base: [40, 60] },
+  { metier: "Un chargé de recrutement", x: "Rang du trimestre", y: "Candidatures reçues", unite: "candidatures", sujet: "le nombre de candidatures reçues", sens: "±", pentes: [5, 6, 8, 10], base: [60, 120] },
+  { metier: "Une cadre de santé", x: "Rang de la semaine", y: "Consultations aux urgences par jour", unite: "consultations", sujet: "la fréquentation des urgences", sens: "±", pentes: [2, 3, 4], base: [40, 80] },
+  { metier: "Une préparatrice physique", x: "Semaines d'entraînement", y: "Charge soulevée au développé couché", unite: "kg", sujet: "la progression d'un athlète en musculation", sens: "+", pentes: [2, 3], base: [40, 60] },
+  { metier: "Une ingénieure environnement", x: "Rang de l'année", y: "Émissions de CO₂ de l'usine", unite: "kilotonnes", sujet: "la baisse des émissions de CO₂ d'une usine", sens: "-", pentes: [3, 4, 5, 6], base: [80, 120] },
+  { metier: "Un responsable logistique", x: "Commandes expédiées (centaines)", y: "Coût de transport", unite: "k€", sujet: "le coût de transport selon le volume expédié", sens: "+", pentes: [3, 4, 5, 6], base: [20, 40] },
+  { metier: "Une gérante de salle de sport", x: "Rang du mois depuis l'ouverture", y: "Nombre d'adhérents", unite: "adhérents", sujet: "la fréquentation d'une salle de sport", sens: "+", pentes: [8, 10, 12, 15], base: [60, 120] },
+  { metier: "Un agronome", x: "Apport d'engrais (dizaines de kg par hectare)", y: "Rendement en blé", unite: "quintaux par hectare", sujet: "le rendement du blé selon l'engrais", sens: "+", pentes: [2, 3, 4], base: [40, 55] },
+  { metier: "Une analyste du tourisme", x: "Rang de l'année", y: "Nuitées d'hôtel", unite: "milliers de nuitées", sujet: "la fréquentation touristique d'une ville", sens: "±", pentes: [3, 4, 5, 6], base: [50, 100] },
+  { metier: "Un conseiller en rénovation énergétique", x: "Rang de l'année depuis les travaux", y: "Facture d'électricité", unite: "dizaines d'euros", sujet: "la facture d'électricité après rénovation", sens: "-", pentes: [2, 3, 4], base: [40, 60] },
+  { metier: "Une chargée d'études de marché", x: "Prix de vente (€)", y: "Quantité vendue", unite: "centaines d'unités", sujet: "la demande selon le prix de vente", sens: "-", pentes: [5, 6, 8, 10], base: [90, 130] },
+  { metier: "Un responsable de la sécurité routière", x: "Rang de l'année", y: "Accidents sur la route départementale", unite: "accidents", sujet: "l'évolution du nombre d'accidents", sens: "-", pentes: [3, 4, 5], base: [50, 80] },
+  { metier: "Une pharmacienne", x: "Rang du mois", y: "Ventes de crème solaire", unite: "centaines de tubes", sujet: "les ventes de crème solaire au printemps", sens: "+", pentes: [4, 5, 6, 8], base: [10, 30] },
+  { metier: "Un trésorier de club de football", x: "Rang de la saison", y: "Recettes de billetterie", unite: "k€", sujet: "les recettes de billetterie du club", sens: "±", pentes: [4, 5, 6, 8], base: [50, 100] },
+  { metier: "Une responsable de plateforme de streaming", x: "Rang du mois", y: "Heures de visionnage", unite: "milliers d'heures", sujet: "l'audience d'une plateforme de streaming", sens: "+", pentes: [5, 6, 8, 10], base: [30, 60] },
+  { metier: "Un gestionnaire de restauration scolaire", x: "Rang de la semaine", y: "Repas gaspillés par jour", unite: "repas", sujet: "la réduction du gaspillage alimentaire", sens: "-", pentes: [3, 4, 5, 6], base: [60, 90] },
+  { metier: "Une gestionnaire immobilière", x: "Rang de l'année", y: "Loyer moyen d'un studio", unite: "dizaines d'euros", sujet: "l'évolution des loyers", sens: "+", pentes: [2, 3], base: [45, 65] },
+  { metier: "Un technicien du tri des déchets", x: "Rang du mois", y: "Déchets triés collectés", unite: "tonnes", sujet: "la collecte des déchets triés", sens: "+", pentes: [3, 4, 5, 6], base: [30, 60] },
+];
+
+/** « Une contrôleuse » → « une contrôleuse », pour glisser le métier dans une phrase. */
+function minuscule(s: string): string {
+  return s.charAt(0).toLowerCase() + s.slice(1);
+}
+
+/** Un contexte compatible avec le sens demandé (aucun : n'importe lequel). */
+function tirerContexte(croissant?: boolean): Contexte {
+  if (croissant === undefined) return pick(SERIES);
+  return pick(SERIES.filter((s) => s.sens === "±" || s.sens === (croissant ? "+" : "-")));
+}
+
+/**
+ * La phrase d'entrée : QUI regarde ces données. Quatre tournures × 24
+ * contextes : c'est elle qui empêche la même phrase de revenir.
+ */
+function amorce(s: Contexte): string {
+  return pick([
+    `${s.metier} étudie ${s.sujet}.`,
+    `${s.metier} a rassemblé des relevés sur ${s.sujet}.`,
+    `Pour un rapport sur ${s.sujet}, ${minuscule(s.metier)} a relevé les données ci-dessous.`,
+    `Dossier « ${s.sujet} », préparé par ${minuscule(s.metier)}.`,
+  ]);
+}
 
 type Nuage = {
-  serie: (typeof SERIES)[number];
+  serie: Contexte;
   xs: number[];
   ys: number[];
   /** Droite « vraie » ayant servi à fabriquer le nuage. */
@@ -115,15 +180,67 @@ type Nuage = {
  * chaque tirage.
  */
 function tirerNuage(options?: { croissant?: boolean; bruit?: number }): Nuage {
-  const serie = pick(SERIES);
-  const croissant = options?.croissant ?? Math.random() < 0.5;
-  const a = (croissant ? 1 : -1) * pick([2, 3, 4, 5, 6, 8, 10] as const);
-  const b = randomInt(20, 60);
-  const bruit = options?.bruit ?? 3;
+  const serie = tirerContexte(options?.croissant);
+  const croissant =
+    options?.croissant ?? (serie.sens === "+" ? true : serie.sens === "-" ? false : Math.random() < 0.5);
+  const pente = pick(serie.pentes);
+  const a = (croissant ? 1 : -1) * pente;
   const n = pick([5, 6, 7] as const);
+  // Décroissant : la valeur la plus basse doit rester nettement positive — une
+  // consommation à $-4$ MWh au dernier relevé ne s'observe pas.
+  const b = croissant
+    ? randomInt(serie.base[0], serie.base[1])
+    : Math.max(randomInt(serie.base[0], serie.base[1]), pente * (n + 1) + 10);
+  const bruit = options?.bruit ?? 3;
   const xs = Array.from({ length: n }, (_, k) => k + 1);
   const ys = xs.map((x) => a * x + b + randomInt(-bruit, bruit));
   return { serie, xs, ys, a, b };
+}
+
+/**
+ * ⭐ LA VRAIE DROITE DES MOINDRES CARRÉS, celle de la calculatrice : on ne
+ * corrige jamais un ajustement avec la droite qui a servi à fabriquer le nuage
+ * — le bruit l'a déplacée. a = cov(x, y) / var(x), b = ȳ − a·x̄.
+ */
+function moindresCarres(xs: readonly number[], ys: readonly number[]) {
+  const n = xs.length;
+  const mx = xs.reduce((s, v) => s + v, 0) / n;
+  const my = ys.reduce((s, v) => s + v, 0) / n;
+  let sxy = 0;
+  let sxx = 0;
+  for (let i = 0; i < n; i++) {
+    sxy += (xs[i] - mx) * (ys[i] - my);
+    sxx += (xs[i] - mx) ** 2;
+  }
+  const a = sxy / sxx;
+  return { a, b: my - a * mx, mx, my };
+}
+
+/** Arrondi à `d` décimales, sans les « 0,30000000004 » du flottant. */
+function arrondi(v: number, d: number): number {
+  const p = 10 ** d;
+  return Math.round(v * p + (v >= 0 ? 1e-9 : -1e-9)) / p;
+}
+
+/** $y = ax + b$ écrit proprement (signe de b, virgule française). */
+function equation(a: number, b: number, lettre = "x"): string {
+  return `$y = ${fr(a)}${lettre} ${b >= 0 ? "+" : "-"} ${fr(Math.abs(b))}$`;
+}
+
+/** Somme des carrés des écarts d'une droite à un nuage. */
+function sce(xs: readonly number[], ys: readonly number[], a: number, b: number): number {
+  return xs.reduce((s, x, i) => s + (ys[i] - (a * x + b)) ** 2, 0);
+}
+
+/**
+ * Une réponse arrondie, avec la TOLÉRANCE ANNONCÉE : un cran de l'arrondi de
+ * part et d'autre (« au dixième » : 4,2 attendu, 4,1 et 4,3 acceptés — la
+ * calculatrice et l'arrondi des coefficients intermédiaires peuvent décaler
+ * d'un cran, jamais de deux).
+ */
+function avecTolerance(v: number, d: number): string[] {
+  const pas = 10 ** -d;
+  return [arrondi(v, d), arrondi(v - pas, d), arrondi(v + pas, d)].map((x) => fr(x));
 }
 
 /** Le nuage, avec éventuellement une droite d'ajustement. */
@@ -159,6 +276,38 @@ function canvasNuage(
   };
 }
 
+/**
+ * Un nuage quelconque — celui d'une variable TRANSFORMÉE (z = 1/x entre 0 et 1,
+ * u = x² jusqu'à 36…) — avec une fenêtre calculée sur les points, et
+ * éventuellement sa droite d'ajustement.
+ */
+function canvasNuagePoints(
+  xs: readonly number[],
+  ys: readonly number[],
+  titre: string,
+  droite?: { a: number; b: number }
+): CanvasFigure {
+  const xmax = Math.max(...xs);
+  const tous = [...ys, ...(droite ? xs.map((x) => droite.a * x + droite.b) : [])];
+  const bas = Math.min(...tous);
+  const haut = Math.max(...tous);
+  const marge = Math.max((haut - bas) * 0.12, 0.1);
+  return {
+    kind: "fonctionGraphique",
+    titre,
+    xmin: 0,
+    xmax: arrondi(xmax * 1.12, 3),
+    ymin: arrondi(Math.max(0, bas - marge), 3),
+    ymax: arrondi(haut + marge, 3),
+    grille: true,
+    courbes: [
+      { id: "nuage", type: "points", points: xs.map((x, k) => ({ x, y: ys[k] })) },
+      ...(droite ? [{ id: "d", type: "affine" as const, a: droite.a, b: droite.b }] : []),
+    ],
+    points: xs.map((x, k) => ({ x, y: ys[k] })),
+  };
+}
+
 /** Le même nuage, en tableau de données. */
 function canvasTableauNuage(nuage: Nuage, titre: string): CanvasFigure {
   return {
@@ -166,6 +315,121 @@ function canvasTableauNuage(nuage: Nuage, titre: string): CanvasFigure {
     title: titre,
     headers: [nuage.serie.x, ...nuage.xs.map((x) => String(x))],
     rows: [{ label: `${nuage.serie.y} (${nuage.serie.unite})`, values: nuage.ys.map((y) => String(y)) }],
+  };
+}
+
+/* ─────────────── changement de variable : trois familles ─────────────── */
+
+/**
+ * ⭐ 21/10/2026 — UN CHANGEMENT DE VARIABLE SE CHOISIT D'APRÈS LA SITUATION.
+ * Le BO cite $u = x^2$, $1/t$ et $\log(y)$ : trois familles de situations, chacune
+ * avec SES contextes. Une décote de voiture n'est pas exponentielle croissante,
+ * et un coût moyen qui partage un coût fixe se linéarise par $1/x$, pas par le
+ * logarithme.
+ */
+/** `p` : les coefficients plausibles (le facteur q pour l'exponentielle, a sinon) ;
+ *  `b` : l'intervalle de la constante (la valeur de départ pour l'exponentielle). */
+type ContexteCV = {
+  metier: string;
+  x: string;
+  y: string;
+  unite: string;
+  sujet: string;
+  p: readonly number[];
+  b: readonly [number, number];
+};
+
+/** y multiplié par un même facteur à chaque pas : on linéarise par z = log(y). */
+const CV_EXPO: readonly ContexteCV[] = [
+  { metier: "Une community manager", x: "Rang du jour", y: "Nombre de vues", unite: "vues", sujet: "la diffusion d'une vidéo virale", p: [1.5, 2, 2.5], b: [1000, 5000] },
+  { metier: "Une biologiste", x: "Heures d'incubation", y: "Nombre de bactéries", unite: "bactéries par mL", sujet: "la croissance d'une culture de bactéries", p: [1.5, 2], b: [200, 900] },
+  { metier: "Un responsable du commerce en ligne", x: "Rang du trimestre", y: "Commandes en ligne", unite: "commandes", sujet: "l'essor des commandes en ligne", p: [1.2, 1.25, 1.3], b: [300, 800] },
+  { metier: "Une conseillère bancaire", x: "Rang de l'année", y: "Valeur d'un placement", unite: "euros", sujet: "un placement à intérêts composés", p: [1.03, 1.04, 1.05], b: [1000, 5000] },
+  { metier: "Un chargé de communication", x: "Rang de la semaine", y: "Abonnés à la lettre d'information", unite: "abonnés", sujet: "le succès d'une lettre d'information", p: [1.2, 1.3, 1.4], b: [200, 600] },
+  { metier: "Une fondatrice d'entreprise", x: "Rang du semestre", y: "Utilisateurs de l'application", unite: "utilisateurs", sujet: "la croissance d'une application", p: [1.5, 1.8, 2], b: [1000, 4000] },
+  { metier: "Un épidémiologiste", x: "Rang du jour", y: "Cas signalés", unite: "cas", sujet: "le début d'une épidémie", p: [1.3, 1.5], b: [10, 40] },
+  { metier: "Une ingénieure informaticienne", x: "Rang de l'année", y: "Volume de données stockées", unite: "téraoctets", sujet: "l'explosion des données stockées", p: [1.4, 1.6], b: [50, 200] },
+  { metier: "Un organisateur de festival", x: "Rang de la semaine de prévente", y: "Billets vendus", unite: "billets", sujet: "les préventes d'un festival", p: [1.3, 1.5], b: [100, 400] },
+  { metier: "Une écologue", x: "Rang de l'année", y: "Couples de fous de Bassan", unite: "couples", sujet: "le retour d'une colonie d'oiseaux protégés", p: [1.1, 1.15, 1.2], b: [40, 120] },
+];
+
+/** Un coût fixe partagé, une tâche répartie : y = a/x + b, on pose z = 1/x. */
+const CV_INVERSE: readonly ContexteCV[] = [
+  { metier: "Un contrôleur de gestion", x: "Quantité produite (centaines)", y: "Coût moyen unitaire", unite: "€", sujet: "le coût moyen de fabrication", p: [400, 800, 1200], b: [8, 20] },
+  { metier: "Une organisatrice de voyages", x: "Nombre de participants (dizaines)", y: "Prix par personne", unite: "€", sujet: "le prix d'un voyage de groupe", p: [240, 320, 400], b: [150, 300] },
+  { metier: "Un éditeur", x: "Tirage (milliers d'exemplaires)", y: "Coût par livre", unite: "€", sujet: "le coût d'impression d'un livre", p: [3, 4, 6], b: [2, 4] },
+  { metier: "Une cheffe de chantier", x: "Nombre d'ouvriers", y: "Durée du chantier", unite: "jours", sujet: "la durée d'un chantier selon l'équipe", p: [40, 60, 80, 120], b: [2, 5] },
+  { metier: "Un viticulteur", x: "Nombre d'équipes de vendangeurs", y: "Durée des vendanges", unite: "jours", sujet: "la durée des vendanges", p: [20, 30, 40], b: [1, 2] },
+  { metier: "Une responsable événementielle", x: "Nombre d'invités (dizaines)", y: "Coût par invité", unite: "€", sujet: "le coût d'une réception", p: [200, 300, 400], b: [25, 45] },
+  { metier: "Un gérant de salle de concert", x: "Spectateurs (centaines)", y: "Coût par spectateur", unite: "€", sujet: "le coût d'un concert par spectateur", p: [50, 80, 120], b: [5, 12] },
+  { metier: "Une responsable d'atelier", x: "Nombre d'opérateurs", y: "Durée de la commande", unite: "heures", sujet: "la durée d'une commande selon l'effectif", p: [24, 40, 60], b: [1, 3] },
+];
+
+/** Une grandeur qui croît comme un carré : y = a·x² + b, on pose u = x². */
+const CV_CARRE: readonly ContexteCV[] = [
+  { metier: "Un moniteur d'auto-école", x: "Vitesse (dizaines de km/h)", y: "Distance de freinage", unite: "m", sujet: "la distance de freinage selon la vitesse", p: [0.5, 0.6, 0.8], b: [0, 4] },
+  { metier: "Une pizzaïola", x: "Diamètre de la pizza (dizaines de cm)", y: "Prix de la pizza", unite: "€", sujet: "le prix d'une pizza selon sa taille", p: [0.5, 0.8, 1], b: [3, 6] },
+  { metier: "Un artisan carreleur", x: "Côté de la pièce carrée (m)", y: "Prix de la pose", unite: "€", sujet: "le prix d'un carrelage", p: [40, 45, 50], b: [80, 150] },
+  { metier: "Une coordinatrice de cascades", x: "Durée de la chute (dixièmes de seconde)", y: "Hauteur de chute", unite: "cm", sujet: "la hauteur d'une chute selon sa durée", p: [4.9], b: [0, 0] },
+  { metier: "Une paysagiste", x: "Rayon du massif circulaire (m)", y: "Coût de la plantation", unite: "€", sujet: "le coût d'un massif fleuri", p: [30, 45, 60], b: [50, 120] },
+  { metier: "Un menuisier", x: "Côté du plateau carré (dm)", y: "Prix du plateau", unite: "€", sujet: "le prix d'un plateau de table", p: [2, 3, 4], b: [20, 40] },
+];
+
+type FamilleCV = "expo" | "inverse" | "carre";
+
+/**
+ * Une série d'une famille, fabriquée à partir de SON modèle :
+ *  · expo    : y = c × q^(x−1), arrondi à l'unité (des relevés, pas des puissances exactes) ;
+ *  · inverse : y = a/x + b sur x ∈ {1, 2, 4, 5, 8, 10} — a/x tombe juste (dénominateurs 2 et 5) ;
+ *  · carre   : y = a·x² + b sur x de 1 à 6.
+ */
+function tirerCV(famille: FamilleCV) {
+  const s = pick(famille === "expo" ? CV_EXPO : famille === "inverse" ? CV_INVERSE : CV_CARRE);
+  const a = pick(s.p);
+  const b = randomInt(s.b[0], s.b[1]);
+  if (famille === "expo") {
+    const xs = Array.from({ length: pick([5, 6] as const) }, (_, k) => k + 1);
+    return { s, xs, ys: xs.map((x) => Math.round(b * a ** (x - 1))), a, b };
+  }
+  if (famille === "inverse") {
+    const xs = [1, 2, 4, 5, 8, 10];
+    return { s, xs, ys: xs.map((x) => arrondi(a / x + b, 3)), a, b };
+  }
+  const xs = [1, 2, 3, 4, 5, 6];
+  return { s, xs, ys: xs.map((x) => arrondi(a * x * x + b, 2)), a, b };
+}
+
+/** « + 4 », « − 4 », rien du tout pour 0 : « y = 4,9u + 0 » ne s'écrit pas. */
+function plusB(b: number): string {
+  return b === 0 ? "" : ` ${b > 0 ? "+" : "-"} ${fr(Math.abs(b))}`;
+}
+
+function amorceCV(s: ContexteCV): string {
+  return pick([
+    `${s.metier} étudie ${s.sujet}.`,
+    `${s.metier} a rassemblé des relevés sur ${s.sujet}.`,
+    `Pour un rapport sur ${s.sujet}, ${minuscule(s.metier)} a relevé les données ci-dessous.`,
+  ]);
+}
+
+/** Un nuage d'une famille donnée, prêt pour les canvas (a, b : ceux du modèle). */
+function nuageCV(s: ContexteCV, xs: number[], ys: number[], a = 0, b = 0): Nuage {
+  return {
+    serie: { metier: s.metier, x: s.x, y: s.y, unite: s.unite, sujet: s.sujet, sens: "+", pentes: [1], base: [0, 0] },
+    xs,
+    ys,
+    a,
+    b,
+  };
+}
+
+/** Le tableau d'une série transformée : x, y, et la ligne de la nouvelle variable. */
+function canvasTableauCV(s: ContexteCV, xs: number[], ys: number[], titre: string, ligne?: { label: string; values: string[] }): CanvasFigure {
+  return {
+    kind: "tableau_donnees",
+    title: titre,
+    headers: [s.x, ...xs.map((x) => fr(x))],
+    rows: [{ label: `${s.y} (${s.unite})`, values: ys.map((y) => fr(y)) }, ...(ligne ? [ligne] : [])],
   };
 }
 
@@ -188,7 +452,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
       const k = randomInt(0, nuage.xs.length - 1);
       return {
         text:
-          `Le tableau donne une série statistique à deux variables sur ${nuage.serie.sujet}. ` +
+          `${amorce(nuage.serie)} Le tableau donne la série statistique à deux variables correspondante. ` +
           `Quelles sont les coordonnées du point du nuage correspondant à la colonne « $${nuage.xs[k]}$ » ?`,
         format: "qcm",
         choices: makeChoices(`$(${nuage.xs[k]}\\,;\\,${nuage.ys[k]})$`, [
@@ -254,7 +518,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
         .join(" ; ");
       return {
         text:
-          `Voici les relevés ${duSujet(nuage.serie.sujet)} — ${nuage.serie.x}, puis ${nuage.serie.y} : ` +
+          `${amorce(nuage.serie)} Voici les relevés — ${nuage.serie.x}, puis ${nuage.serie.y} : ` +
           `${releves}. ` +
           `Un point a été mal reporté sur le nuage. Pour quelle valeur de « ${nuage.serie.x} » ?`,
         format: "short",
@@ -290,7 +554,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
       const k = randomInt(0, nuage.xs.length - 1);
       return {
         text:
-          `Sur ce nuage de points décrivant ${nuage.serie.sujet}, ` +
+          `${amorce(nuage.serie)} Sur le nuage de points obtenu, ` +
           `quelle est la valeur de « ${nuage.serie.y} » pour « ${nuage.serie.x} » $= ${nuage.xs[k]}$ ?`,
         format: "short",
         expected: [String(nuage.ys[k])],
@@ -333,7 +597,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
       const k = randomInt(0, nuage.xs.length - 1);
       return {
         text:
-          `Sur ce nuage décrivant ${nuage.serie.sujet}, ` +
+          `${amorce(nuage.serie)} Sur le nuage obtenu, ` +
           `pour quelle valeur de « ${nuage.serie.x} » relève-t-on ` +
           `« ${nuage.serie.y} » $= ${nuage.ys[k]}$ ${nuage.serie.unite} ?`,
         format: "short",
@@ -367,7 +631,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
       const croissant = Math.random() < 0.5;
       const nuage = tirerNuage({ croissant });
       return {
-        text: `Comment décrire la tendance de ce nuage de points ?`,
+        text: `${amorce(nuage.serie)} Comment décrire la tendance du nuage obtenu ?`,
         format: "qcm",
         choices: shuffle([
           "croissante : les points montent globalement",
@@ -421,7 +685,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
       const bonne =
         `quand « ${s.x} » augmente, « ${s.y} » a tendance à ${croissant ? "augmenter" : "diminuer"}`;
       return {
-        text: `Que peut-on dire de ce nuage décrivant ${s.sujet} ?`,
+        text: `${amorce(s)} Que peut-on dire du nuage obtenu ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
           `quand « ${s.x} » augmente, « ${s.y} » a tendance à ${croissant ? "diminuer" : "augmenter"}`,
@@ -463,7 +727,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
     tags: ["stmg", "maths", "statistiques", "canvas", "template"],
     generate: () => {
       const affine = Math.random() < 0.5;
-      const serie = pick(SERIES);
+      const serie = tirerContexte(true);
       const n = 7;
       const xs = Array.from({ length: n }, (_, k) => k + 1);
       const a = pick([4, 5, 6, 8] as const);
@@ -473,7 +737,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
         : xs.map((x) => Math.round(b * Math.pow(1.45, x - 1)));
       const nuage: Nuage = { serie, xs, ys, a, b };
       return {
-        text: "Un ajustement affine est-il pertinent pour ce nuage ?",
+        text: `${amorce(serie)} Un ajustement affine est-il pertinent pour ce nuage ?`,
         format: "qcm",
         choices: shuffle([
           "oui : les points se répartissent autour d'une droite",
@@ -526,7 +790,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
     tags: ["stmg", "maths", "statistiques", "canvas", "template"],
     generate: () => {
       const affine = Math.random() < 0.5;
-      const serie = pick(SERIES);
+      const serie = tirerContexte(true);
       const n = 6;
       const xs = Array.from({ length: n }, (_, k) => k + 1);
       // ⚠️ LE BRUIT DOIT RESTER PETIT DEVANT LA PENTE. Avec des écarts de $5$ à
@@ -547,7 +811,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
         : "les écarts grossissent d'un relevé à l'autre : un ajustement affine ne convient pas";
       return {
         text:
-          `Voici les relevés ${duSujet(serie.sujet)}. Les écarts entre deux relevés consécutifs valent ` +
+          `${amorce(nuage.serie)} Les écarts entre deux relevés consécutifs valent ` +
           `${ecarts.map((e) => `$${e}$`).join(", ")}. Qu'en conclure ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
@@ -602,7 +866,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
         ? { a: nuage.a, b: nuage.b }
         : { a: nuage.a, b: nuage.b + pick([18, 22, -20, -25] as const) };
       return {
-        text: "La droite tracée constitue-t-elle un ajustement affine acceptable pour ce nuage ?",
+        text: `${amorce(nuage.serie)} La droite tracée constitue-t-elle un ajustement affine acceptable pour ce nuage ?`,
         format: "qcm",
         choices: shuffle(["oui", "non"]),
         expected: [bonne ? "oui" : "non"],
@@ -645,7 +909,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
         `${decalage > 0 ? "diminuer" : "augmenter"} l'ordonnée à l'origine $b$, sans toucher au coefficient directeur`;
       return {
         text:
-          `La droite tracée suit bien la direction du nuage, mais elle passe entièrement ` +
+          `${amorce(nuage.serie)} La droite tracée suit bien la direction du nuage, mais elle passe entièrement ` +
           `${decalage > 0 ? "au-dessus" : "en dessous"} des points — elle est trop ${trop}. ` +
           `Que faut-il modifier dans son équation $y = ${nuage.a}x ${droite.b >= 0 ? "+" : "-"} ${Math.abs(droite.b)}$ ?`,
         format: "qcm",
@@ -702,7 +966,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
         `$y = ${fr(Math.round(p * 100) / 100)}x ${q >= 0 ? "+" : "-"} ${fr(Math.abs(Math.round(q * 100) / 100))}$`;
       return {
         text:
-          `On ajuste ce nuage par la droite passant par le premier et le dernier point, ` +
+          `${amorce(nuage.serie)} On ajuste ce nuage par la droite passant par le premier et le dernier point, ` +
           `soit $(${nuage.xs[i]}\\,;\\,${nuage.ys[i]})$ et $(${nuage.xs[j]}\\,;\\,${nuage.ys[j]})$. ` +
           `Quelle est son équation ?`,
         format: "qcm",
@@ -754,7 +1018,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
         `chaque fois que « ${s.x} » augmente de $1$`;
       return {
         text:
-          `La droite d'ajustement de ce nuage a pour équation $y = ${a}x ${b >= 0 ? "+" : "-"} ${Math.abs(b)}$. ` +
+          `${amorce(nuage.serie)} La droite d'ajustement de ce nuage a pour équation $y = ${a}x ${b >= 0 ? "+" : "-"} ${Math.abs(b)}$. ` +
           `Que signifie le coefficient $${a}$ dans cette situation ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
@@ -787,6 +1051,97 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 3 — LA CALCULATRICE : la droite des moindres carrés, coefficients
+    // arrondis au dixième. Le correcteur la calcule sur les données AFFICHÉES
+    // (moindresCarres), jamais avec la droite qui a fabriqué le nuage.
+    kind: "template",
+    id: "stmg_stat_equation_tpl_3",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "stat_ajustement",
+    microId: "statT_ajust_equation",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Calculatrice : mode statistiques à deux variables, saisis les deux listes, puis « régression linéaire » (ax + b).",
+    tags: ["stmg", "maths", "statistiques", "canvas", "calculatrice", "template"],
+    generate: () => {
+      const nuage = tirerNuage({ bruit: 4 });
+      const { xs, ys } = nuage;
+      const mc = moindresCarres(xs, ys);
+      const a = arrondi(mc.a, 1);
+      const b = arrondi(mc.b, 1);
+      const n = xs.length;
+      const a2 = arrondi((ys[n - 1] - ys[0]) / (xs[n - 1] - xs[0]), 1);
+      const b2 = arrondi(ys[0] - a2 * xs[0], 1);
+      const bonne = equation(a, b);
+      return {
+        text:
+          `${amorce(nuage.serie)} ` +
+          pick([
+            "À l'aide de la calculatrice, détermine une équation de la droite d'ajustement de $y$ en $x$ obtenue par la méthode des moindres carrés.",
+            "Quelle est l'équation de la droite des moindres carrés de ce nuage, donnée par la calculatrice ?",
+            "On ajuste le nuage par la méthode des moindres carrés, à la calculatrice. Quelle équation obtient-on ?",
+          ]) +
+          " (coefficients arrondis au dixième)",
+        format: "qcm",
+        choices: makeChoices(bonne, [equation(a2, b2), equation(b, a), equation(a, -b), equation(arrondi(a + 1.5, 1), b)]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: canvasTableauNuage(nuage, `${nuage.serie.sujet} — relevés`),
+        explanation: exp(
+          "La droite des moindres carrés est la droite $y = ax + b$ qui rend minimale la somme des carrés des écarts verticaux. La calculatrice (ou le tableur) en donne les coefficients.",
+          "On saisit les abscisses dans une liste, les ordonnées dans une autre, puis on lance la régression linéaire et l'on arrondit au dixième.",
+          `Moyennes : $\\bar{x} = ${fr(arrondi(mc.mx, 3))}$ et $\\bar{y} = ${fr(arrondi(mc.my, 3))}$. La calculatrice affiche $a \\approx ${fr(arrondi(mc.a, 4))}$ et $b \\approx ${fr(arrondi(mc.b, 4))}$. ` +
+            `La droite passant par le premier et le dernier point, ${equation(a2, b2)}, n'est PAS celle des moindres carrés : elle ignore les points du milieu.`,
+          `La droite des moindres carrés a pour équation ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          { choice: equation(a2, b2), cause: "c'est la droite qui passe par le premier et le dernier point, pas celle des moindres carrés" },
+          { choice: equation(b, a), cause: "a interverti le coefficient directeur et l'ordonnée à l'origine affichés par la calculatrice" },
+        ],
+      };
+    },
+  },
+
+  {
+    // ANGLE 4 — un coefficient à la fois, réponse libre au centième.
+    kind: "template",
+    id: "stmg_stat_equation_tpl_4",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "stat_ajustement",
+    microId: "statT_ajust_equation",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Régression linéaire à la calculatrice : elle affiche $a$ (le coefficient directeur) et $b$ (l'ordonnée à l'origine).",
+    tags: ["stmg", "maths", "statistiques", "canvas", "calculatrice", "template", "short"],
+    generate: () => {
+      const nuage = tirerNuage({ bruit: 4 });
+      const mc = moindresCarres(nuage.xs, nuage.ys);
+      const quoi = pick(["a", "b"] as const);
+      const v = quoi === "a" ? mc.a : mc.b;
+      return {
+        text:
+          `${amorce(nuage.serie)} La droite d'ajustement de $y$ en $x$ par la méthode des moindres carrés a pour équation $y = ax + b$. ` +
+          (quoi === "a"
+            ? pick(["Donne la valeur du coefficient directeur $a$.", "Que vaut $a$, obtenu à la calculatrice ?"])
+            : pick(["Donne la valeur de l'ordonnée à l'origine $b$.", "Que vaut $b$, obtenu à la calculatrice ?"])) +
+          " (arrondi au centième)",
+        format: "short",
+        expected: avecTolerance(v, 2),
+        comparator: "number_equal",
+        canvas: canvasTableauNuage(nuage, `${nuage.serie.sujet} — relevés`),
+        explanation: exp(
+          "La droite des moindres carrés a pour coefficient directeur $a = \\dfrac{\\mathrm{cov}(x, y)}{V(x)}$ et passe par le point moyen $G(\\bar{x}\\,;\\,\\bar{y})$ ; la calculatrice fait ce calcul.",
+          "On saisit les deux listes, on lance la régression linéaire, on lit le coefficient demandé et on l'arrondit au centième.",
+          `$\\bar{x} = ${fr(arrondi(mc.mx, 3))}$, $\\bar{y} = ${fr(arrondi(mc.my, 3))}$ ; la calculatrice donne $a \\approx ${fr(arrondi(mc.a, 4))}$ et $b \\approx ${fr(arrondi(mc.b, 4))}$.`,
+          `$${quoi} \\approx ${fr(arrondi(v, 2))}$ (un centième d'écart est accepté).`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════════ statT_ajust_calculer ═══════════════════ */
 
   {
@@ -808,7 +1163,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
       const y = a * x + b;
       return {
         text:
-          `La droite d'ajustement de ce nuage a pour équation $y = ${a}x ${b >= 0 ? "+" : "-"} ${Math.abs(b)}$. ` +
+          `${amorce(nuage.serie)} La droite d'ajustement de ce nuage a pour équation $y = ${a}x ${b >= 0 ? "+" : "-"} ${Math.abs(b)}$. ` +
           `Quelle valeur de « ${nuage.serie.y} » prévoit-elle pour « ${nuage.serie.x} » $= ${x}$ ?`,
         format: "short",
         expected: [String(y)],
@@ -849,7 +1204,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
       const cible = a * x + b;
       return {
         text:
-          `La droite d'ajustement de ce nuage a pour équation $y = ${a}x + ${b}$. ` +
+          `${amorce(nuage.serie)} La droite d'ajustement de ce nuage a pour équation $y = ${a}x + ${b}$. ` +
           `Pour quelle valeur de « ${nuage.serie.x} » le modèle prévoit-il ` +
           `« ${nuage.serie.y} » $= ${cible}$ ${nuage.serie.unite} ?`,
         format: "short",
@@ -887,7 +1242,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
       const y = a * x + b;
       return {
         text:
-          `La droite d'ajustement a pour équation $y = ${a}x ${b >= 0 ? "+" : "-"} ${Math.abs(b)}$, ` +
+          `${amorce(nuage.serie)} La droite d'ajustement a pour équation $y = ${a}x ${b >= 0 ? "+" : "-"} ${Math.abs(b)}$, ` +
           `et les relevés vont de $${Math.min(...nuage.xs)}$ à $${Math.max(...nuage.xs)}$. ` +
           `Estime « ${nuage.serie.y} » pour « ${nuage.serie.x} » $= ${fr(x)}$.`,
         format: "short",
@@ -930,7 +1285,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
       const bonne = `« ${s.x} » $= ${fr(dedans)}$`;
       return {
         text:
-          `Les relevés vont de « ${s.x} » $= ${xMin}$ à « ${s.x} » $= ${xMax}$. ` +
+          `${amorce(nuage.serie)} Les relevés vont de « ${s.x} » $= ${xMin}$ à « ${s.x} » $= ${xMax}$. ` +
           `Parmi ces quatre estimations, laquelle est une INTERPOLATION ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
@@ -980,7 +1335,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
       const y = a * x + b;
       return {
         text:
-          `La droite d'ajustement a pour équation $y = ${a}x + ${b}$, et les relevés s'arrêtent à « ${nuage.serie.x} » $= ${xMax}$. ` +
+          `${amorce(nuage.serie)} La droite d'ajustement a pour équation $y = ${a}x + ${b}$, et les relevés s'arrêtent à « ${nuage.serie.x} » $= ${xMax}$. ` +
           `Que prévoit le modèle pour « ${nuage.serie.x} » $= ${x}$ ?`,
         format: "short",
         expected: [String(y)],
@@ -1023,7 +1378,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
       const seuil = a * x + b - 1;
       return {
         text:
-          `La droite d'ajustement a pour équation $y = ${a}x + ${b}$, et les relevés s'arrêtent à ` +
+          `${amorce(nuage.serie)} La droite d'ajustement a pour équation $y = ${a}x + ${b}$, et les relevés s'arrêtent à ` +
           `« ${nuage.serie.x} » $= ${xMax}$. À partir de quelle valeur ENTIÈRE de « ${nuage.serie.x} » ` +
           `le modèle prévoit-il de dépasser $${seuil}$ ${nuage.serie.unite} ?`,
         format: "short",
@@ -1052,32 +1407,38 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
     microId: "statT_limites",
     difficulty: 3,
     theme: "neutral",
-    hint: "Demande-toi si la grandeur peut réellement atteindre la valeur prévue.",
-    tags: ["stmg", "maths", "statistiques", "canvas", "open", "template"],
+    hint: "Cherche le premier entier pour lequel $ax + b$ devient strictement négatif : la grandeur ne peut pas valoir cela.",
+    // ⛔ 21/10/2026 — c'était « Que penses-tu de cette prévision ? », corrigé
+    // au mot-clé. Une question ouverte doit être PRÉCISE : un cas chiffré, une
+    // réponse. La limite de l'extrapolation devient donc un NOMBRE — le rang à
+    // partir duquel le modèle annonce l'impossible.
+    tags: ["stmg", "maths", "statistiques", "canvas", "template", "short"],
     generate: () => {
       const nuage = tirerNuage({ croissant: false, bruit: 2 });
       const a = nuage.a;
       const b = nuage.b;
       const xMax = Math.max(...nuage.xs);
-      // On prolonge assez loin pour que la prévision devienne absurde (négative).
-      const x = Math.ceil((0 - b) / a) + randomInt(1, 4);
-      const y = a * x + b;
+      // Premier entier où a·x + b < 0 (a < 0) : si −b/a est entier, la droite y vaut 0, pas encore négatif.
+      const xNeg = Math.floor(-b / a) + 1;
+      const yNeg = a * xNeg + b;
       return {
         text:
-          `La droite d'ajustement de ce nuage décroissant a pour équation $y = ${a}x + ${b}$, ` +
+          `${amorce(nuage.serie)} La droite d'ajustement de ce nuage décroissant a pour équation $y = ${a}x + ${b}$, ` +
           `et les relevés s'arrêtent à « ${nuage.serie.x} » $= ${xMax}$. ` +
-          `Pour « ${nuage.serie.x} » $= ${x}$, elle prévoit $${y}$ ${nuage.serie.unite}. ` +
-          `Que penses-tu de cette prévision ?`,
-        format: "open",
-        expected: ["negatif", "négatif", "impossible", "absurde", "hors", "au-dela", "au-delà", "limite"],
-        comparator: "contains_keyword",
+          pick([
+            `Le modèle cesse d'avoir un sens dès qu'il prévoit une valeur NÉGATIVE. À partir de quelle valeur entière de « ${nuage.serie.x} » est-ce le cas ?`,
+            `« ${nuage.serie.y} » ne peut pas être négatif. À partir de quelle valeur entière de « ${nuage.serie.x} » la droite annonce-t-elle pourtant une valeur négative ?`,
+          ]),
+        format: "short",
+        expected: [String(xNeg)],
+        comparator: "number_equal",
         canvas: canvasNuage(nuage, `${nuage.serie.sujet}`, { a, b }),
         explanation: exp(
-          "Une extrapolation prolonge une tendance observée sur un intervalle limité : rien ne garantit qu'elle reste valable au-delà, et le résultat peut devenir impossible.",
-          "On confronte la valeur prévue à la réalité de la grandeur : peut-elle être négative ? dépasser un maximum ?",
-          `Ici le modèle prévoit $${y}$ ${nuage.serie.unite}, une valeur négative — impossible pour cette grandeur. ` +
-            `L'extrapolation porte de plus sur $${x - xMax}$ ${unites(x - xMax)} au-delà du dernier relevé.`,
-          `Par exemple : « Cette prévision est absurde : elle est négative, ce qui est impossible pour cette grandeur. L'ajustement affine n'est plus valable si loin des données observées. »`
+          "Une extrapolation prolonge une tendance observée sur un intervalle limité : rien ne garantit qu'elle reste valable au-delà, et le résultat finit par devenir impossible.",
+          "On résout $ax + b < 0$, puis on prend le premier entier qui convient.",
+          `$${a}x + ${b} < 0$ donne $x > \\dfrac{${b}}{${-a}} \\approx ${fr(Math.round((-b / a) * 100) / 100)}$ : le premier entier est $${xNeg}$, ` +
+            `où le modèle annonce $${yNeg}$ ${nuage.serie.unite} — soit $${xNeg - xMax}$ ${unites(xNeg - xMax)} au-delà du dernier relevé.`,
+          `Dès « ${nuage.serie.x} » $= ${xNeg}$, la prévision est impossible : l'ajustement affine ne vaut plus si loin des données.`
         ),
       };
     },
@@ -1110,7 +1471,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
       const bonne = `elle annonce $${y}$ ${nuage.serie.unite}, une valeur NÉGATIVE — impossible pour cette grandeur`;
       return {
         text:
-          `La droite d'ajustement de ce nuage décroissant a pour équation $y = ${a}x + ${b}$, ` +
+          `${amorce(nuage.serie)} La droite d'ajustement de ce nuage décroissant a pour équation $y = ${a}x + ${b}$, ` +
           `et les relevés s'arrêtent à « ${nuage.serie.x} » $= ${xMax}$. ` +
           `Pour « ${nuage.serie.x} » $= ${x}$, elle prévoit $${y}$ ${nuage.serie.unite}. ` +
           `Pourquoi faut-il rejeter cette prévision ?`,
@@ -1160,7 +1521,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
     generate: () => {
       const nuage = tirerNuage({ bruit: 4 });
       return {
-        text: "Que minimise la droite des moindres carrés ?",
+        text: `${amorce(nuage.serie)} Le nuage est ajusté par la méthode des moindres carrés. Que minimise la droite obtenue ?`,
         format: "qcm",
         choices: shuffle([
           "la somme des carrés des écarts verticaux entre les points et la droite",
@@ -1208,7 +1569,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
       const bonne =
         "pour que les écarts au-dessus et en dessous ne se compensent pas, et que les grands écarts pèsent davantage";
       return {
-        text: "Dans la méthode des moindres carrés, pourquoi élève-t-on les écarts au CARRÉ ?",
+        text: `${amorce(nuage.serie)} L'ajustement retenu est celui des moindres carrés. Dans cette méthode, pourquoi élève-t-on les écarts au CARRÉ ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
           "pour que tous les écarts deviennent des nombres entiers",
@@ -1238,6 +1599,53 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 3 — le POINT MOYEN : la droite des moindres carrés passe toujours
+    // par G(x̄ ; ȳ). C'est la seule propriété du critère qu'on utilise à la
+    // main en STMG.
+    kind: "template",
+    id: "stmg_stat_mc_principe_tpl_3",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "stat_moindres_carres",
+    microId: "statT_mc_principe",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Le point moyen a pour abscisse la moyenne des $x_i$ et pour ordonnée la moyenne des $y_i$.",
+    tags: ["stmg", "maths", "statistiques", "canvas", "template"],
+    generate: () => {
+      const nuage = tirerNuage({ bruit: 4 });
+      const { xs, ys } = nuage;
+      const n = xs.length;
+      const mx = arrondi(xs.reduce((s, v) => s + v, 0) / n, 1);
+      const my = arrondi(ys.reduce((s, v) => s + v, 0) / n, 1);
+      const pt = (u: number, v: number) => `$G(${fr(u)}\\,;\\,${fr(v)})$`;
+      const bonne = pt(mx, my);
+      const milieu = arrondi((ys[0] + ys[n - 1]) / 2, 1);
+      return {
+        text:
+          `${amorce(nuage.serie)} La droite des moindres carrés passe par le point moyen $G$ du nuage. ` +
+          pick(["Quelles sont les coordonnées de $G$ ?", "Où se trouve ce point $G$ ?", "Quel est ce point moyen ?"]) +
+          " (coordonnées arrondies au dixième)",
+        format: "qcm",
+        choices: makeChoices(bonne, [pt(my, mx), pt(mx, milieu), pt(n, my), pt(mx, arrondi(my + nuage.a, 1))]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: canvasTableauNuage(nuage, `${nuage.serie.sujet} — relevés`),
+        explanation: exp(
+          "Le point moyen d'un nuage est $G(\\bar{x}\\,;\\,\\bar{y})$. La droite des moindres carrés passe TOUJOURS par lui.",
+          "On fait la moyenne des abscisses, puis celle des ordonnées.",
+          `$\\bar{x} = \\dfrac{${xs.join(" + ")}}{${n}} = ${fr(mx)}$ et $\\bar{y} = \\dfrac{${ys.join(" + ")}}{${n}} \\approx ${fr(my)}$.`,
+          `Le point moyen est ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          { choice: pt(my, mx), cause: "a interverti abscisse et ordonnée" },
+          { choice: pt(mx, milieu), cause: "a pris le milieu du premier et du dernier relevé au lieu de la moyenne de tous" },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ statT_mc_calculer ═══════════════════ */
 
   {
@@ -1253,7 +1661,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
     tags: ["stmg", "maths", "statistiques", "canvas", "template", "short"],
     generate: () => {
       // Un petit nuage à quatre points, pour que la somme se calcule à la main.
-      const serie = pick(SERIES);
+      const serie = tirerContexte(true);
       const a = pick([2, 3, 4, 5] as const);
       const b = randomInt(10, 30);
       const xs = [1, 2, 3, 4];
@@ -1263,7 +1671,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
       const somme = ecarts.reduce((s, e) => s + e * e, 0);
       return {
         text:
-          `Pour la droite d'équation $y = ${a}x + ${b}$, calcule la somme des carrés des écarts ` +
+          `${amorce(nuage.serie)} Pour la droite d'équation $y = ${a}x + ${b}$, calcule la somme des carrés des écarts ` +
           `$\\sum \\left(y_i - (${a}x_i + ${b})\\right)^2$ sur les quatre points du nuage.`,
         format: "short",
         expected: [String(somme)],
@@ -1300,7 +1708,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
     hint: "Le point qui pèse le plus est celui dont l'écart à la droite est le plus grand EN VALEUR ABSOLUE — au-dessus comme en dessous.",
     tags: ["stmg", "maths", "statistiques", "canvas", "template"],
     generate: () => {
-      const serie = pick(SERIES);
+      const serie = tirerContexte(true);
       const a = pick([2, 3, 4, 5] as const);
       const b = randomInt(10, 30);
       const xs = [1, 2, 3, 4];
@@ -1314,7 +1722,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
       const bonne = `le point d'abscisse $${xs[k]}$`;
       return {
         text:
-          `Pour la droite d'équation $y = ${a}x + ${b}$, quel point du nuage contribue LE PLUS ` +
+          `${amorce(nuage.serie)} Pour la droite d'équation $y = ${a}x + ${b}$, quel point du nuage contribue LE PLUS ` +
           `à la somme des carrés des écarts ?`,
         format: "qcm",
         choices: makeChoices(
@@ -1354,7 +1762,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
     hint: "La meilleure droite est celle dont la somme des carrés des écarts est la PLUS PETITE.",
     tags: ["stmg", "maths", "statistiques", "canvas", "template"],
     generate: () => {
-      const serie = pick(SERIES);
+      const serie = tirerContexte(true);
       const a = pick([3, 4, 5, 6] as const);
       const b = randomInt(10, 30);
       const xs = [1, 2, 3, 4, 5];
@@ -1369,7 +1777,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
       }, 0);
       return {
         text:
-          `Deux droites sont proposées pour ce nuage : $D_1 : y = ${a}x + ${b}$ et $D_2 : y = ${a}x + ${b + decalage}$. ` +
+          `${amorce(nuage.serie)} Deux droites sont proposées pour ce nuage : $D_1 : y = ${a}x + ${b}$ et $D_2 : y = ${a}x + ${b + decalage}$. ` +
           `Laquelle ajuste le mieux le nuage ?`,
         format: "qcm",
         choices: shuffle([
@@ -1414,7 +1822,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
     hint: "Un écart de $2$ apporte $4$ ; un écart de $20$ en apporte $400$.",
     tags: ["stmg", "maths", "statistiques", "canvas", "piege", "template"],
     generate: () => {
-      const serie = pick(SERIES);
+      const serie = tirerContexte(true);
       const a = pick([3, 4, 5, 6] as const);
       const b = randomInt(10, 30);
       const xs = [1, 2, 3, 4, 5];
@@ -1435,7 +1843,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
       const bonne = `elle augmente fortement : elle passe de $${sommeAvant}$ à $${sommeApres}$`;
       return {
         text:
-          `Pour la droite $y = ${a}x + ${b}$, la somme des carrés des écarts valait $${sommeAvant}$ sur les cinq premiers relevés. ` +
+          `${amorce(nuage.serie)} Pour la droite $y = ${a}x + ${b}$, la somme des carrés des écarts valait $${sommeAvant}$ sur les cinq premiers relevés. ` +
           `On ajoute un sixième relevé, très éloigné de la droite. Que devient cette somme ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
@@ -1467,9 +1875,78 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
     },
   },
 
+
+  {
+    // ANGLE 3 — la droite des moindres carrés CONTRE la droite des extrêmes :
+    // l'élève calcule les deux sommes (tableur ou calculatrice). La bonne
+    // réponse est décidée par les sommes CALCULÉES, avec les coefficients
+    // arrondis affichés — jamais supposée.
+    kind: "template",
+    id: "stmg_stat_mc_comparer_tpl_3",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "stat_moindres_carres",
+    microId: "statT_mc_comparer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Pour chaque droite : écart de chaque point, au carré, puis la somme. La plus petite somme désigne le meilleur ajustement.",
+    tags: ["stmg", "maths", "statistiques", "canvas", "tableur", "template"],
+    generate: () => {
+      let nuage = tirerNuage({ bruit: 4 });
+      let d1 = { a: 0, b: 0 };
+      let d2 = { a: 0, b: 0 };
+      let s1 = 0;
+      let s2 = 0;
+      for (let essai = 0; essai < 40; essai++) {
+        const mc = moindresCarres(nuage.xs, nuage.ys);
+        const n = nuage.xs.length;
+        d1 = { a: arrondi(mc.a, 1), b: arrondi(mc.b, 1) };
+        const a2 = Math.round((nuage.ys[n - 1] - nuage.ys[0]) / (n - 1));
+        d2 = { a: a2, b: nuage.ys[0] - a2 };
+        s1 = arrondi(sce(nuage.xs, nuage.ys, d1.a, d1.b), 2);
+        s2 = arrondi(sce(nuage.xs, nuage.ys, d2.a, d2.b), 2);
+        // Un écart franc entre les deux sommes : sinon la question est un pari d'arrondi.
+        if (Math.abs(s1 - s2) >= 3) break;
+        nuage = tirerNuage({ bruit: 4 });
+      }
+      const meilleure = s1 < s2 ? "$D_1$" : "$D_2$";
+      const autre = s1 < s2 ? "$D_2$" : "$D_1$";
+      const bonne = `${meilleure} : sa somme des carrés des écarts est la plus petite`;
+      return {
+        text:
+          `${amorce(nuage.serie)} Deux ajustements sont proposés : $D_1$ : ${equation(d1.a, d1.b)} ` +
+          `et $D_2$ : ${equation(d2.a, d2.b)}. ` +
+          pick([
+            "Lequel est le meilleur au sens des moindres carrés ?",
+            "En calculant la somme des carrés des écarts de chacune, laquelle retenir ?",
+          ]),
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `${autre} : sa somme des carrés des écarts est la plus petite`,
+          "$D_2$ : elle passe exactement par deux points du nuage",
+          "aucune : deux droites qui traversent le nuage se valent toujours",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: canvasTableauNuage(nuage, `${nuage.serie.sujet} — relevés`),
+        explanation: exp(
+          "Au sens des moindres carrés, le meilleur ajustement est celui dont la somme $\\sum (y_i - (ax_i + b))^2$ est la plus PETITE.",
+          "Pour chaque droite, on calcule la valeur prévue en chaque $x_i$, l'écart avec $y_i$, son carré, puis la somme (un tableur le fait en une colonne).",
+          `$D_1$ donne une somme d'environ $${fr(s1)}$ ; $D_2$, la droite qui joint le premier et le dernier relevé, environ $${fr(s2)}$.`,
+          `On retient ${meilleure}. Passer par deux points du nuage ne garantit rien : les autres points comptent aussi.`
+        ),
+        choiceDiagnostics: [
+          { choice: "$D_2$ : elle passe exactement par deux points du nuage", cause: "passer par deux points ne dit rien des écarts aux autres points" },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ statT_cv_appliquer ═══════════════════ */
 
   {
+    // z = log(y) sur des relevés RÉELS — plus des puissances exactes de 2 —,
+    // donc à la calculatrice. Arrondi au centième annoncé, un cran toléré.
     kind: "template",
     id: "stmg_stat_cv_appliquer_tpl_1",
     niveau: "stmg",
@@ -1478,39 +1955,42 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
     microId: "statT_cv_appliquer",
     difficulty: 3,
     theme: "neutral",
-    hint: "On applique la transformation à CHAQUE valeur de la variable concernée.",
+    hint: "On applique la transformation à la valeur de $y$ de la colonne demandée : touche « log » de la calculatrice.",
     tags: ["stmg", "maths", "statistiques", "canvas", "template", "short"],
     generate: () => {
-      const serie = pick(SERIES);
-      const xs = [1, 2, 3, 4, 5];
-      const base = pick([2, 3, 4, 5] as const);
-      const ys = xs.map((x) => Math.pow(base, x));
-      const nuage: Nuage = { serie, xs, ys, a: 0, b: 0 };
-      const k = randomInt(0, 4);
+      const { s, xs, ys } = tirerCV("expo");
+      const k = randomInt(0, xs.length - 1);
       const z = Math.log10(ys[k]);
+      const question = pick([
+        `Quelle est la valeur de $z$ pour « ${s.x} » $= ${xs[k]}$ ?`,
+        `Complète la case manquante de la ligne $z$, colonne « $${xs[k]}$ ».`,
+        `Que vaut $z$ lorsque « ${s.y} » vaut $${ys[k]}$ ?`,
+      ]);
       return {
         text:
-          `Le nuage n'est pas linéaire. On pose $z = \\log(y)$ pour le linéariser. ` +
-          `Quelle est la valeur de $z$ pour $x = ${xs[k]}$ ? (arrondi au centième)`,
+          `${amorceCV(s)} Le nuage n'est pas aligné : on pose $z = \\log(y)$ pour le linéariser. ` +
+          `${question} (arrondi au centième)`,
         format: "short",
-        expected: [fr(Math.round(z * 100) / 100)],
+        expected: avecTolerance(z, 2),
         comparator: "number_equal",
-        canvas: canvasTableauNuage(nuage, `${serie.sujet} — données brutes`),
+        canvas: canvasTableauCV(s, xs, ys, `${s.sujet} — données et variable z`, {
+          label: "z = log(y)",
+          values: xs.map((_, i) => (i === k ? "?" : fr(arrondi(Math.log10(ys[i]), 2)))),
+        }),
         explanation: exp(
-          "Un changement de variable transforme un nuage courbe en un nuage aligné, sur lequel l'ajustement affine redevient pertinent.",
-          "On applique la transformation demandée à chaque valeur : ici, le logarithme décimal des ordonnées.",
-          `Pour $x = ${xs[k]}$, on a $y = ${ys[k]}$, donc $z = \\log(${ys[k]}) \\approx ${fr(Math.round(z * 100) / 100)}$.`,
-          `$z \\approx ${fr(Math.round(z * 100) / 100)}$.`
+          "Un changement de variable remplace une variable par une fonction d'elle-même pour rendre le nuage aligné. Ici on transforme les ORDONNÉES par le logarithme décimal.",
+          "On prend la valeur de $y$ de la colonne, puis on calcule son logarithme décimal à la calculatrice ; on arrondit au centième.",
+          `Pour « ${s.x} » $= ${xs[k]}$ : $y = ${ys[k]}$, donc $z = \\log(${ys[k]}) \\approx ${fr(arrondi(z, 3))}$.`,
+          `$z \\approx ${fr(arrondi(z, 2))}$ (une réponse à un centième près est acceptée).`
         ),
       };
     },
   },
 
   {
-    // ANGLE 2 — CHOISIR la transformation, au lieu de l'appliquer. Le premier
-    // item pose $z = \log(y)$ et fait calculer ; celui-ci ne la donne pas. Or
-    // un changement de variable ne s'improvise pas : il se choisit d'après la
-    // FORME du nuage, et se tromper de transformation ne linéarise rien.
+    // ANGLE 2 — CHOISIR la transformation d'après le MODÈLE, pour les trois
+    // familles que cite le BO : log(y), 1/x, x². Se tromper de transformation
+    // ne linéarise rien.
     kind: "template",
     id: "stmg_stat_cv_appliquer_tpl_2",
     niveau: "stmg",
@@ -1519,43 +1999,130 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
     microId: "statT_cv_appliquer",
     difficulty: 2,
     theme: "neutral",
-    hint: "Le nuage est multiplié par un même facteur à chaque pas : c'est le logarithme qui ramène une multiplication à une addition.",
+    hint: "Regarde ce qui empêche le modèle d'être affine : une puissance, un quotient, un carré. C'est cette partie-là qu'on renomme.",
     tags: ["stmg", "maths", "statistiques", "canvas", "template"],
     generate: () => {
-      const serie = pick(SERIES);
-      const xs = [1, 2, 3, 4, 5, 6];
-      const facteur = pick([2, 3] as const);
-      const depart = pick([5, 8, 10] as const);
-      const ys = xs.map((x) => depart * Math.pow(facteur, x - 1));
-      const nuage: Nuage = { serie, xs, ys, a: 0, b: 0 };
-      const bonne = "$z = \\log(y)$ — on transforme les ORDONNÉES";
+      const famille = pick(["expo", "inverse", "carre"] as const);
+      const { s, xs, ys } = tirerCV(famille);
+      const LOG = "$z = \\log(y)$ — on transforme les ORDONNÉES";
+      const INV = "$z = \\dfrac{1}{x}$ — on prend l'inverse des ABSCISSES";
+      const CAR = "$u = x^2$ — on élève les ABSCISSES au carré";
+      const bonne = famille === "expo" ? LOG : famille === "inverse" ? INV : CAR;
+      const modele =
+        famille === "expo" ? "$y = c \\times q^{x}$" : famille === "inverse" ? "$y = \\dfrac{a}{x} + b$" : "$y = ax^2 + b$";
+      const justif =
+        famille === "expo"
+          ? "le logarithme transforme le produit $c \\times q^x$ en somme : $\\log(y) = \\log(c) + x\\log(q)$, affine en $x$"
+          : famille === "inverse"
+            ? "en posant $z = \\dfrac{1}{x}$, le modèle devient $y = az + b$, affine en $z$"
+            : "en posant $u = x^2$, le modèle devient $y = au + b$, affine en $u$";
       return {
         text:
-          `Ce nuage est multiplié par $${facteur}$ à chaque pas : il n'est pas aligné. ` +
-          `Quelle transformation permet de le linéariser ?`,
+          `${amorceCV(s)} Le nuage n'est pas aligné ; la situation suggère un modèle de la forme ${modele}. ` +
+          pick([
+            "Quel changement de variable rend le nuage aligné ?",
+            "Quelle transformation permet d'utiliser ensuite un ajustement affine ?",
+            "Quelle nouvelle variable faut-il poser ?",
+          ]),
         format: "qcm",
-        choices: makeChoices(bonne, [
-          "$z = \\log(x)$ — on transforme les abscisses",
-          "$z = y^2$ — on élève les ordonnées au carré",
-          "$z = \\dfrac{1}{y}$ — on prend l'inverse des ordonnées",
-        ]),
+        choices: makeChoices(bonne, [LOG, INV, CAR, "$z = y^2$ — on élève les ORDONNÉES au carré"]),
         expected: [bonne],
         comparator: "mcq_exact",
-        canvas: canvasNuage(nuage, `${serie.sujet} — nuage non aligné`),
+        canvas: canvasNuage(nuageCV(s, xs, ys), `${s.sujet} — nuage non aligné`),
         explanation: exp(
-          "Un changement de variable remplace l'une des deux variables par une fonction d'elle-même, pour rendre le nuage aligné. Le choix de la fonction dépend de la forme du nuage.",
-          "Ici les ordonnées sont MULTIPLIÉES par un même facteur à chaque pas. Or le logarithme transforme un produit en somme : les $\\log$ des ordonnées, eux, s'ajouteront d'une constante à chaque pas.",
-          `$y$ passe de $${ys[0]}$ à $${ys[1]}$, puis à $${ys[2]}$ : à chaque fois $\\times ${facteur}$. ` +
-            `En posant $z = \\log(y)$, on ajoute $\\log(${facteur}) \\approx ${fr(Math.round(Math.log10(facteur) * 1000) / 1000)}$ à chaque pas — ` +
-            `un pas constant, donc un nuage aligné.`,
-          `C'est $z = \\log(y)$ qui linéarise : ce sont les ordonnées qu'il faut transformer.`
+          "Un changement de variable remplace l'une des variables par une fonction d'elle-même pour rendre le nuage aligné. Le choix dépend de la FORME du modèle.",
+          "On cherche la partie du modèle qui n'est pas affine, et on lui donne un nom : le modèle devient alors affine en la nouvelle variable.",
+          `Pour ${modele}, ${justif}.`,
+          `Il faut poser ${bonne.split(" — ")[0]}.`
         ),
-        choiceDiagnostics: [
-          {
-            choice: "$z = \\log(x)$ — on transforme les abscisses",
-            cause: "ce sont les ordonnées qui sont multipliées ; les abscisses, elles, avancent déjà d'un pas constant",
-          },
-        ],
+      };
+    },
+  },
+
+  {
+    // ANGLE 3 — z = 1/x : le coût fixe qui se partage. Les abscisses choisies
+    // (1, 2, 4, 5, 8, 10) donnent des inverses DÉCIMAUX exacts : pas d'arrondi.
+    kind: "template",
+    id: "stmg_stat_cv_appliquer_tpl_3",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "stat_changement_variable",
+    microId: "statT_cv_appliquer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "$z = \\dfrac{1}{x}$ : on divise $1$ par l'abscisse de la colonne. Ce sont les ABSCISSES qu'on transforme.",
+    tags: ["stmg", "maths", "statistiques", "canvas", "template", "short"],
+    generate: () => {
+      const { s, xs, ys } = tirerCV("inverse");
+      const k = randomInt(1, xs.length - 1);
+      const z = 1 / xs[k];
+      return {
+        text:
+          `${amorceCV(s)} Pour linéariser le nuage, on pose $z = \\dfrac{1}{x}$. ` +
+          pick([
+            `Quelle valeur de $z$ correspond à « ${s.x} » $= ${xs[k]}$ ?`,
+            `Complète la case manquante de la ligne $z$, colonne « $${xs[k]}$ ».`,
+            `Que vaut $z$ pour la colonne où « ${s.y} » vaut $${fr(ys[k])}$ ?`,
+          ]) +
+          ` (valeur exacte)`,
+        format: "short",
+        expected: [fr(z)],
+        comparator: "number_equal",
+        canvas: canvasTableauCV(s, xs, ys, `${s.sujet} — données et variable z`, {
+          label: "z = 1/x",
+          values: xs.map((x, i) => (i === k ? "?" : fr(1 / x))),
+        }),
+        explanation: exp(
+          "Quand une grandeur se partage — un coût fixe entre des unités, un travail entre des personnes —, elle varie comme $\\dfrac{1}{x}$. En posant $z = \\dfrac{1}{x}$, le nuage $(z\\,;\\,y)$ devient aligné.",
+          "On prend l'abscisse de la colonne et l'on calcule son inverse.",
+          `$z = \\dfrac{1}{${xs[k]}} = ${fr(z)}$.`,
+          `$z = ${fr(z)}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 4 — u = x² : la distance de freinage, le prix d'une surface.
+    kind: "template",
+    id: "stmg_stat_cv_appliquer_tpl_4",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "stat_changement_variable",
+    microId: "statT_cv_appliquer",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "$u = x^2$ : on multiplie l'abscisse par elle-même.",
+    tags: ["stmg", "maths", "statistiques", "canvas", "template", "short"],
+    generate: () => {
+      const { s, xs, ys } = tirerCV("carre");
+      // Une abscisse décimale de temps en temps : 2,5² = 6,25 se calcule, et
+      // « 2,5 × 2 » est l'erreur qu'on veut voir.
+      const decimale = Math.random() < 0.4;
+      const k = randomInt(0, xs.length - 1);
+      const x = decimale ? xs[k] + 0.5 : xs[k];
+      const u = arrondi(x * x, 2);
+      return {
+        text:
+          `${amorceCV(s)} Pour linéariser le nuage, on pose $u = x^2$. ` +
+          pick([
+            `Quelle valeur de $u$ correspond à « ${s.x} » $= ${fr(x)}$ ?`,
+            `Calcule $u$ pour « ${s.x} » $= ${fr(x)}$.`,
+            `Un nouveau relevé est fait pour « ${s.x} » $= ${fr(x)}$. Quelle est sa valeur de $u$ ?`,
+          ]),
+        format: "short",
+        expected: [fr(u)],
+        comparator: "number_equal",
+        canvas: canvasTableauCV(s, xs, ys, `${s.sujet} — données`, {
+          label: "u = x²",
+          values: xs.map((v) => fr(v * v)),
+        }),
+        explanation: exp(
+          "Quand une grandeur croît comme un CARRÉ — la distance de freinage avec la vitesse, une surface avec un côté —, le nuage $(x\\,;\\,y)$ est courbe et le nuage $(x^2\\,;\\,y)$ aligné.",
+          "On élève l'abscisse au carré : $x^2 = x \\times x$, et non $2 \\times x$.",
+          `$u = ${fr(x)}^2 = ${fr(x)} \\times ${fr(x)} = ${fr(u)}$.`,
+          `$u = ${fr(u)}$.`
+        ),
       };
     },
   },
@@ -1563,6 +2130,8 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
   /* ═══════════════════ statT_cv_lire ═══════════════════ */
 
   {
+    // Le nuage TRANSFORMÉ est aligné : quelle relation entre les variables
+    // initiales ? Trois familles, une seule bonne lecture à chaque fois.
     kind: "template",
     id: "stmg_stat_cv_lire_tpl_1",
     niveau: "stmg",
@@ -1571,51 +2140,58 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
     microId: "statT_cv_lire",
     difficulty: 3,
     theme: "neutral",
-    hint: "Si le nuage transformé est aligné, la relation entre les variables initiales n'était pas affine.",
+    hint: "Si le nuage transformé est aligné, c'est la NOUVELLE variable qui est affine — pas la relation de départ.",
     tags: ["stmg", "maths", "statistiques", "canvas", "template"],
     generate: () => {
-      const serie = pick(SERIES);
-      const xs = [1, 2, 3, 4, 5, 6];
-      const base = pick([1.5, 2, 2.5, 3] as const);
-      const c = pick([10, 20, 40] as const);
-      const zs = xs.map((x) => Math.round(Math.log10(c * Math.pow(base, x)) * 100) / 100);
-      const nuage: Nuage = { serie, xs, ys: zs, a: 0, b: 0 };
+      const famille = pick(["expo", "inverse", "carre"] as const);
+      const { s, xs, ys } = tirerCV(famille);
+      const EXPO = "« y » est une fonction exponentielle de « x » : $y = c \\times q^{x}$";
+      const AFF = "« y » est une fonction affine de « x » : $y = ax + b$";
+      const INV = "« y » est de la forme $y = \\dfrac{a}{x} + b$";
+      const CAR = "« y » est de la forme $y = ax^2 + b$";
+      const bonne = famille === "expo" ? EXPO : famille === "inverse" ? INV : CAR;
+      const transfo =
+        famille === "expo"
+          ? "$z = \\log(y)$, le nuage $(x\\,;\\,z)$"
+          : famille === "inverse"
+            ? "$z = \\dfrac{1}{x}$, le nuage $(z\\,;\\,y)$"
+            : "$u = x^2$, le nuage $(u\\,;\\,y)$";
+      const px = famille === "expo" ? xs : famille === "inverse" ? xs.map((x) => 1 / x) : xs.map((x) => x * x);
+      const py = famille === "expo" ? ys.map((y) => arrondi(Math.log10(y), 2)) : ys;
       return {
         text:
-          `Après le changement de variable $z = \\log(y)$, le nuage $(x\\,;\\,z)$ apparaît aligné. ` +
-          `Que peut-on en conclure sur la relation entre $x$ et $y$ ?`,
+          `${amorceCV(s)} Après le changement de variable ${transfo} apparaît aligné. ` +
+          pick([
+            "Que peut-on en conclure sur la relation entre « x » et « y » ?",
+            "Quel modèle relie alors les deux variables de départ ?",
+            "Quelle relation entre « x » et « y » peut-on conjecturer ?",
+          ]),
         format: "qcm",
-        choices: shuffle([
-          "la relation entre $x$ et $y$ est exponentielle",
-          "la relation entre $x$ et $y$ est affine",
-          "la relation entre $x$ et $y$ est inverse",
-          "il n'y a aucune relation entre $x$ et $y$",
-        ]),
-        expected: ["la relation entre $x$ et $y$ est exponentielle"],
+        choices: makeChoices(bonne, [EXPO, AFF, INV, CAR]),
+        expected: [bonne],
         comparator: "mcq_exact",
-        canvas: canvasNuage(nuage, `Nuage transformé (x ; z) avec z = log(y)`),
+        canvas: canvasNuagePoints(px, py, `Nuage transformé — ${s.sujet}`),
         explanation: exp(
-          "Un nuage $(x\\,;\\,\\log y)$ aligné signifie que $\\log y$ est une fonction affine de $x$, donc que $y$ est une fonction exponentielle de $x$.",
-          "On lit l'alignement sur le nuage transformé, puis on remonte à la relation initiale.",
-          `Si $\\log(y) = ax + b$, alors $y = 10^{ax + b}$, c'est-à-dire une exponentielle de base $10^a$.`,
-          "La relation entre $x$ et $y$ est exponentielle."
+          "Un nuage transformé aligné signifie que la relation est AFFINE entre les variables transformées. On remonte ensuite à la relation de départ en défaisant la transformation.",
+          "On écrit la relation affine avec la nouvelle variable, puis on y remplace la nouvelle variable par sa définition.",
+          famille === "expo"
+            ? "$\\log(y) = ax + b$ donne $y = 10^{ax+b} = 10^{b} \\times (10^{a})^{x}$ : une exponentielle de raison $q = 10^a$."
+            : famille === "inverse"
+              ? "$y = az + b$ avec $z = \\dfrac{1}{x}$ donne $y = \\dfrac{a}{x} + b$."
+              : "$y = au + b$ avec $u = x^2$ donne $y = ax^2 + b$.",
+          `${bonne.charAt(0).toUpperCase()}${bonne.slice(1)}. La relation entre « x » et « y », elle, n'est PAS affine.`
         ),
         choiceDiagnostics: [
-          {
-            choice: "la relation entre $x$ et $y$ est affine",
-            cause: "c'est la relation entre x et z = log(y) qui est affine, pas celle entre x et y",
-          },
+          { choice: AFF, cause: "c'est la relation avec la variable TRANSFORMÉE qui est affine, pas la relation de départ" },
         ],
       };
     },
   },
 
   {
-    // ANGLE 2 — lire le TAUX caché dans la pente. Le premier item conclut « la
-    // relation est exponentielle » ; celui-ci va au bout : de combien $y$ est-il
-    // multiplié à chaque pas ? La réponse est $10^a$, et c'est ce nombre-là qui
-    // intéresse — il rejoint le coefficient multiplicateur du chapitre des
-    // évolutions.
+    // ANGLE 2 — le facteur caché dans la pente, sur un VRAI ajustement : la
+    // droite des moindres carrés du nuage (x ; log y) est calculée sur les
+    // données affichées, coefficients arrondis au millième.
     kind: "template",
     id: "stmg_stat_cv_lire_tpl_2",
     niveau: "stmg",
@@ -1627,30 +2203,71 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
     hint: "Si $\\log(y) = ax + b$, alors $y = 10^{ax+b}$ : quand $x$ avance de $1$, $y$ est multiplié par $10^a$.",
     tags: ["stmg", "maths", "statistiques", "canvas", "template", "short"],
     generate: () => {
-      const serie = pick(SERIES);
-      // On part du FACTEUR voulu, puis on en déduit la pente : le nombre
-      // affiché est un arrondi, mais il retombe bien sur un facteur entier.
-      const facteur = pick([2, 3, 4, 5] as const);
-      const a = Math.round(Math.log10(facteur) * 1000) / 1000;
-      const b = pick([1, 1.5, 2] as const);
-      const xs = [1, 2, 3, 4, 5, 6];
-      const zs = xs.map((x) => Math.round((a * x + b) * 100) / 100);
-      const nuage: Nuage = { serie, xs, ys: zs, a, b };
+      const { s, xs, ys } = tirerCV("expo");
+      const zs = ys.map((y) => Math.log10(y));
+      const mc = moindresCarres(xs, zs);
+      const a = arrondi(mc.a, 3);
+      const b = arrondi(mc.b, 3);
+      const facteur = 10 ** a;
+      const evolution = pick([true, false]);
+      const cible = evolution ? (facteur - 1) * 100 : facteur;
       return {
         text:
-          `Après le changement de variable $z = \\log(y)$, l'ajustement du nuage transformé donne ` +
-          `$z = ${fr(a)}x + ${fr(b)}$. Par quel facteur « ${serie.y} » est-il multiplié ` +
-          `chaque fois que « ${serie.x} » augmente de $1$ ? (arrondi à l'unité)`,
+          `${amorceCV(s)} On pose $z = \\log(y)$ ; la droite des moindres carrés du nuage $(x\\,;\\,z)$ a pour équation ` +
+          `$z = ${fr(a)}x ${b >= 0 ? "+" : "-"} ${fr(Math.abs(b))}$ (coefficients arrondis au millième). ` +
+          (evolution
+            ? `D'après ce modèle, de quel pourcentage « ${s.y} » augmente-t-il chaque fois que « ${s.x} » augmente de $1$ ? (arrondi à l'unité)`
+            : `Par quel facteur « ${s.y} » est-il multiplié chaque fois que « ${s.x} » augmente de $1$ ? (arrondi au centième)`),
         format: "short",
-        expected: [String(facteur)],
+        expected: avecTolerance(cible, evolution ? 0 : 2),
         comparator: "number_equal",
-        canvas: canvasNuage(nuage, `Nuage transformé (x ; z) et son ajustement`, { a, b }),
+        canvas: canvasNuagePoints(xs, zs.map((z) => arrondi(z, 2)), `Nuage (x ; z = log y) et son ajustement`, { a, b }),
         explanation: exp(
-          "Si $\\log(y)$ est une fonction affine de $x$, alors $y$ est une fonction exponentielle de $x$ : $y = 10^{ax + b}$. Son coefficient multiplicateur est $10^a$.",
-          "On passe de $x$ à $x + 1$ et l'on forme le quotient des deux valeurs de $y$ : tout ce qui ne dépend pas du pas disparaît.",
-          `$\\dfrac{10^{a(x+1) + b}}{10^{ax + b}} = 10^{a} = 10^{${fr(a)}} \\approx ${facteur}$. ` +
-            `La pente du nuage transformé ne se lit donc pas comme une augmentation de « ${serie.y} », mais comme une MULTIPLICATION.`,
-          `« ${serie.y} » est multiplié par environ $${facteur}$ à chaque unité de « ${serie.x} ».`
+          "Si $\\log(y)$ est une fonction affine de $x$, alors $y = 10^{ax+b}$ : quand $x$ augmente de $1$, $y$ est MULTIPLIÉ par $10^{a}$.",
+          "On forme le quotient de deux valeurs consécutives : $\\dfrac{10^{a(x+1)+b}}{10^{ax+b}} = 10^{a}$. Puis, si l'on veut un pourcentage, $t = 10^{a} - 1$.",
+          `$10^{${fr(a)}} \\approx ${fr(arrondi(facteur, 4))}$` +
+            (evolution ? `, soit une hausse d'environ $${fr(arrondi(cible, 1))}\\,\\%$ à chaque pas.` : "."),
+          evolution
+            ? `« ${s.y} » augmente d'environ $${fr(arrondi(cible, 0))}\\,\\%$ par unité de « ${s.x} ».`
+            : `« ${s.y} » est multiplié par environ $${fr(arrondi(facteur, 2))}$ par unité de « ${s.x} ».`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 3 — z = 1/x : ce que dit la constante quand x devient grand.
+    kind: "template",
+    id: "stmg_stat_cv_lire_tpl_3",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "stat_changement_variable",
+    microId: "statT_cv_lire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Quand $x$ devient très grand, $z = \\dfrac{1}{x}$ se rapproche de $0$ : que reste-t-il de $y = az + b$ ?",
+    tags: ["stmg", "maths", "statistiques", "canvas", "template", "short"],
+    generate: () => {
+      const { s, xs, ys } = tirerCV("inverse");
+      const mc = moindresCarres(xs.map((x) => 1 / x), ys);
+      const a = arrondi(mc.a, 1);
+      const b = arrondi(mc.b, 1);
+      return {
+        text:
+          `${amorceCV(s)} Avec $z = \\dfrac{1}{x}$, le nuage $(z\\,;\\,y)$ est aligné et s'ajuste par $y = ${fr(a)}z ${b >= 0 ? "+" : "-"} ${fr(Math.abs(b))}$. ` +
+          pick([
+            `Vers quelle valeur « ${s.y} » se rapproche-t-il quand « ${s.x} » devient très grand ?`,
+            `Quand « ${s.x} » devient très grand, de quelle valeur « ${s.y} » s'approche-t-il d'après ce modèle ?`,
+          ]),
+        format: "short",
+        expected: [fr(b)],
+        comparator: "number_equal",
+        canvas: canvasNuagePoints(xs.map((x) => 1 / x), ys, `Nuage (z = 1/x ; y) — ${s.sujet}`, { a, b }),
+        explanation: exp(
+          "Le modèle $y = \\dfrac{a}{x} + b$ décrit une part qui se PARTAGE ($\\dfrac{a}{x}$) et une part fixe par unité ($b$).",
+          "Quand $x$ devient très grand, $z = \\dfrac{1}{x}$ tend vers $0$, donc $az$ aussi : il ne reste que $b$.",
+          `$y = ${fr(a)} \\times \\dfrac{1}{x} ${b >= 0 ? "+" : "-"} ${fr(Math.abs(b))}$ ; pour $x$ très grand, $\\dfrac{${fr(a)}}{x}$ devient négligeable.`,
+          `« ${s.y} » se rapproche de $${fr(b)}$ ${s.unite}.`
         ),
       };
     },
@@ -1659,6 +2276,9 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
   /* ═══════════════════ statT_cv_revenir ═══════════════════ */
 
   {
+    // log(y) : la droite des moindres carrés du nuage transformé (calculée sur
+    // les données, coefficients arrondis au centième et ANNONCÉS), puis le
+    // retour à y par la puissance de dix.
     kind: "template",
     id: "stmg_stat_cv_revenir_tpl_1",
     niveau: "stmg",
@@ -1670,39 +2290,40 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
     hint: "Si $z = \\log(y)$ et $z = ax + b$, alors $y = 10^{ax+b}$.",
     tags: ["stmg", "maths", "statistiques", "canvas", "template", "short"],
     generate: () => {
-      const serie = pick(SERIES);
-      const a = pick([0.1, 0.2, 0.25, 0.3, 0.5] as const);
-      const b = pick([1, 1.5, 2, 2.5] as const);
-      const x = randomInt(2, 8);
-      const z = a * x + b;
-      const y = Math.pow(10, z);
-      const xs = [1, 2, 3, 4, 5];
-      const zs = xs.map((v) => Math.round((a * v + b) * 100) / 100);
-      const nuage: Nuage = { serie, xs, ys: zs, a, b };
+      const { s, xs, ys } = tirerCV("expo");
+      const zs = ys.map((y) => Math.log10(y));
+      const mc = moindresCarres(xs, zs);
+      const a = arrondi(mc.a, 2);
+      const b = arrondi(mc.b, 2);
+      const x = Math.max(...xs) + randomInt(1, 2);
+      const z = arrondi(a * x + b, 2);
+      const y = 10 ** z;
       return {
         text:
-          `Après le changement de variable $z = \\log(y)$, l'ajustement donne $z = ${fr(a)}x + ${fr(b)}$. ` +
-          `Quelle valeur de $y$ le modèle prévoit-il pour $x = ${x}$ ? (arrondi à l'unité)`,
+          `${amorceCV(s)} Avec $z = \\log(y)$, l'ajustement du nuage $(x\\,;\\,z)$ par la méthode des moindres carrés donne ` +
+          `$z = ${fr(a)}x ${b >= 0 ? "+" : "-"} ${fr(Math.abs(b))}$ (coefficients arrondis au centième). ` +
+          pick([
+            `Quelle valeur de « ${s.y} » ce modèle prévoit-il pour « ${s.x} » $= ${x}$ ?`,
+            `Estime « ${s.y} » pour « ${s.x} » $= ${x}$ à l'aide de ce modèle.`,
+            `Que prévoit ce modèle pour « ${s.y} » lorsque « ${s.x} » vaut $${x}$ ?`,
+          ]) +
+          " (arrondi à l'unité)",
         format: "short",
-        expected: [fr(Math.round(y))],
+        expected: avecTolerance(y, 0),
         comparator: "number_equal",
-        canvas: canvasNuage(nuage, `Nuage transformé (x ; z) et son ajustement`, { a, b }),
+        canvas: canvasNuagePoints(xs, zs.map((v) => arrondi(v, 2)), `Nuage (x ; z = log y) et son ajustement`, { a, b }),
         explanation: exp(
           "Revenir à la variable initiale, c'est défaire la transformation : de $z = \\log(y)$ on tire $y = 10^{z}$.",
           "On calcule d'abord $z$ avec l'ajustement, puis on remonte à $y$ par la puissance de dix.",
-          `$z = ${fr(a)} \\times ${x} + ${fr(b)} = ${fr(Math.round(z * 100) / 100)}$, donc ` +
-            `$y = 10^{${fr(Math.round(z * 100) / 100)}} \\approx ${fr(Math.round(y))}$.`,
-          `Le modèle prévoit environ $${fr(Math.round(y))}$ ${serie.unite}.`
+          `$z = ${fr(a)} \\times ${x} ${b >= 0 ? "+" : "-"} ${fr(Math.abs(b))} = ${fr(z)}$, donc $y = 10^{${fr(z)}} \\approx ${fr(arrondi(y, 1))}$.`,
+          `Le modèle prévoit environ $${fr(arrondi(y, 0))}$ ${s.unite}.`
         ),
       };
     },
   },
 
   {
-    // ANGLE 2 — DIAGNOSTIQUER le retour raté. Le premier item fait le chemin
-    // correctement ; celui-ci met sous les yeux l'erreur qui se commet
-    // réellement : écrire $10 \times z$ au lieu de $10^z$. Le calcul est
-    // superbe jusque-là, et le résultat est faux d'un facteur cent.
+    // ANGLE 2 — DIAGNOSTIQUER le retour raté : « 10 × z » au lieu de « 10^z ».
     kind: "template",
     id: "stmg_stat_cv_revenir_tpl_2",
     niveau: "stmg",
@@ -1714,22 +2335,22 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
     hint: "$z = \\log(y)$ se défait avec une PUISSANCE de dix, pas avec une multiplication par dix.",
     tags: ["stmg", "maths", "statistiques", "canvas", "piege", "template"],
     generate: () => {
-      const serie = pick(SERIES);
-      const a = pick([0.1, 0.2, 0.25, 0.3] as const);
-      const b = pick([1, 1.5, 2] as const);
-      const x = randomInt(3, 8);
-      const z = Math.round((a * x + b) * 100) / 100;
-      const juste = Math.round(Math.pow(10, z));
-      const faux = Math.round(10 * z);
-      const xs = [1, 2, 3, 4, 5];
-      const zs = xs.map((v) => Math.round((a * v + b) * 100) / 100);
-      const nuage: Nuage = { serie, xs, ys: zs, a, b };
+      const { s, xs, ys } = tirerCV("expo");
+      const zs = ys.map((y) => Math.log10(y));
+      const mc = moindresCarres(xs, zs);
+      const a = arrondi(mc.a, 2);
+      const b = arrondi(mc.b, 2);
+      const x = randomInt(2, Math.max(...xs));
+      const z = arrondi(a * x + b, 2);
+      const juste = Math.round(10 ** z);
+      const faux = arrondi(10 * z, 1);
+      const eleve = pick(["Un élève", "Une élève", "Un stagiaire", "Une stagiaire"]);
       const bonne = "il faut élever $10$ à la PUISSANCE $z$, et non multiplier $10$ par $z$";
       return {
         text:
-          `Après le changement de variable $z = \\log(y)$, l'ajustement donne $z = ${fr(a)}x + ${fr(b)}$. ` +
-          `Pour $x = ${x}$, un élève calcule $z = ${fr(z)}$, puis écrit ` +
-          `« $y = 10 \\times ${fr(z)} = ${faux}$ ». Où est l'erreur ?`,
+          `${amorceCV(s)} Avec $z = \\log(y)$, l'ajustement donne $z = ${fr(a)}x ${b >= 0 ? "+" : "-"} ${fr(Math.abs(b))}$. ` +
+          `Pour « ${s.x} » $= ${x}$, ${minuscule(eleve)} calcule $z = ${fr(z)}$, puis écrit « $y = 10 \\times ${fr(z)} = ${fr(faux)}$ ». ` +
+          pick(["Où est l'erreur ?", "Qu'est-ce qui est faux dans ce calcul ?"]),
         format: "qcm",
         choices: makeChoices(bonne, [
           "il faut multiplier par $100$ au lieu de $10$",
@@ -1738,25 +2359,103 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
         ]),
         expected: [bonne],
         comparator: "mcq_exact",
-        canvas: canvasNuage(nuage, `Nuage transformé (x ; z) et son ajustement`, { a, b }),
+        canvas: canvasNuagePoints(xs, zs.map((v) => arrondi(v, 2)), `Nuage (x ; z = log y) et son ajustement`, { a, b }),
         explanation: exp(
           "Le logarithme décimal et la puissance de dix se défont l'un l'autre : $\\log(y) = z$ équivaut à $y = 10^{z}$. Aucune multiplication n'intervient.",
           "On calcule $z$ avec l'ajustement, puis on remonte à $y$ en élevant $10$ à cette puissance.",
-          `$z = ${fr(a)} \\times ${x} + ${fr(b)} = ${fr(z)}$ — jusqu'ici, tout est juste. ` +
-            `Mais $y = 10^{${fr(z)}} \\approx ${juste}$, et non $10 \\times ${fr(z)} = ${faux}$. ` +
-            `L'écart n'est pas un détail : le résultat est faux d'un facteur ${Math.round((juste / Math.max(1, faux)) * 10) / 10}.`,
-          `L'erreur est d'avoir multiplié par $10$ au lieu d'élever $10$ à la puissance $z$ : la valeur prévue est $${juste}$.`
+          `$z = ${fr(z)}$ est juste. Mais $y = 10^{${fr(z)}} \\approx ${juste}$, et non $10 \\times ${fr(z)} = ${fr(faux)}$.`,
+          `L'erreur est d'avoir multiplié par $10$ au lieu d'élever $10$ à la puissance $z$ : la valeur prévue est environ $${juste}$ ${s.unite}.`
         ),
         choiceDiagnostics: [
-          {
-            choice: "il faut reprendre le logarithme de $z$ pour revenir à $y$",
-            cause: "le logarithme a déjà été appliqué pour obtenir z : on le DÉFAIT, on ne le réapplique pas",
-          },
-          {
-            choice: "il n'y a pas d'erreur : le calcul est juste",
-            cause: `le calcul de z est juste, le retour à y ne l'est pas : $${juste}$ au lieu de $${faux}$`,
-          },
+          { choice: "il faut reprendre le logarithme de $z$ pour revenir à $y$", cause: "le logarithme a déjà été appliqué pour obtenir z : on le DÉFAIT, on ne le réapplique pas" },
+          { choice: "il n'y a pas d'erreur : le calcul est juste", cause: `le calcul de z est juste, le retour à y ne l'est pas : environ ${juste} et non ${fr(faux)}` },
         ],
+      };
+    },
+  },
+
+  {
+    // ANGLE 3 — z = 1/x : on remplace z par 1/x AVANT de calculer y.
+    kind: "template",
+    id: "stmg_stat_cv_revenir_tpl_3",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "stat_changement_variable",
+    microId: "statT_cv_revenir",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "L'ajustement est écrit en $z$ : commence par calculer $z = \\dfrac{1}{x}$ pour la valeur de $x$ demandée.",
+    tags: ["stmg", "maths", "statistiques", "canvas", "template", "short"],
+    generate: () => {
+      const { s, xs, ys } = tirerCV("inverse");
+      const mc = moindresCarres(xs.map((x) => 1 / x), ys);
+      const a = arrondi(mc.a, 1);
+      const b = arrondi(mc.b, 1);
+      // Des abscisses hors du tableau, d'inverse décimal exact.
+      const x = pick([3, 6, 12, 16, 20, 25, 40] as const);
+      const y = a / x + b;
+      return {
+        text:
+          `${amorceCV(s)} Avec $z = \\dfrac{1}{x}$, l'ajustement affine du nuage $(z\\,;\\,y)$ donne $y = ${fr(a)}z ${b >= 0 ? "+" : "-"} ${fr(Math.abs(b))}$. ` +
+          pick([
+            `Quelle valeur de « ${s.y} » ce modèle prévoit-il pour « ${s.x} » $= ${x}$ ?`,
+            `Estime « ${s.y} » pour « ${s.x} » $= ${x}$.`,
+          ]) +
+          " (arrondi au centième)",
+        format: "short",
+        expected: avecTolerance(y, 2),
+        comparator: "number_equal",
+        canvas: canvasNuagePoints(xs.map((v) => 1 / v), ys, `Nuage (z = 1/x ; y) et son ajustement`, { a, b }),
+        explanation: exp(
+          "Revenir à la variable initiale, c'est remplacer la variable transformée par sa définition : ici $z = \\dfrac{1}{x}$, donc $y = \\dfrac{a}{x} + b$.",
+          "On calcule $z$ pour la valeur de $x$ demandée, puis on l'injecte dans l'ajustement.",
+          `$z = \\dfrac{1}{${x}} \\approx ${fr(arrondi(1 / x, 4))}$, donc $y = ${fr(a)} \\times \\dfrac{1}{${x}} ${b >= 0 ? "+" : "-"} ${fr(Math.abs(b))} \\approx ${fr(arrondi(y, 3))}$.`,
+          `Le modèle prévoit environ $${fr(arrondi(y, 2))}$ ${s.unite}.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 4 — u = x² : on élève au carré avant de remplacer.
+    kind: "template",
+    id: "stmg_stat_cv_revenir_tpl_4",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "stat_changement_variable",
+    microId: "statT_cv_revenir",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "L'ajustement est écrit en $u$ : calcule d'abord $u = x^2$, puis remplace.",
+    tags: ["stmg", "maths", "statistiques", "canvas", "template", "short"],
+    generate: () => {
+      const { s, xs, ys, a: a0 } = tirerCV("carre");
+      // Un léger bruit, puis le VRAI ajustement du nuage (u ; y), arrondi au centième.
+      const ysB = ys.map((y) => arrondi(y + (Math.random() - 0.5) * Math.max(0.4, a0), 1));
+      const mc = moindresCarres(xs.map((x) => x * x), ysB);
+      const a = arrondi(mc.a, 2);
+      const b = arrondi(mc.b, 2);
+      const x = pick([7, 8, 9] as const);
+      const y = a * x * x + b;
+      return {
+        text:
+          `${amorceCV(s)} Avec $u = x^2$, l'ajustement du nuage $(u\\,;\\,y)$ par la méthode des moindres carrés donne ` +
+          `$y = ${fr(a)}u${plusB(b)}$ (coefficients arrondis au centième). ` +
+          pick([
+            `Quelle valeur de « ${s.y} » ce modèle prévoit-il pour « ${s.x} » $= ${x}$ ?`,
+            `Estime « ${s.y} » pour « ${s.x} » $= ${x}$.`,
+          ]) +
+          " (arrondi au dixième)",
+        format: "short",
+        expected: avecTolerance(y, 1),
+        comparator: "number_equal",
+        canvas: canvasNuagePoints(xs.map((v) => v * v), ysB, `Nuage (u = x² ; y) et son ajustement`, { a, b }),
+        explanation: exp(
+          "Revenir à la variable initiale, c'est remplacer $u$ par sa définition : $u = x^2$, donc $y = ax^2 + b$.",
+          "On calcule $u = x^2$ pour la valeur demandée, puis on l'injecte dans l'ajustement.",
+          `$u = ${x}^2 = ${x * x}$, donc $y = ${fr(a)} \\times ${x * x}${plusB(b)} = ${fr(arrondi(y, 4))}$.`,
+          `Le modèle prévoit environ $${fr(arrondi(y, 1))}$ ${s.unite}.`
+        ),
       };
     },
   },

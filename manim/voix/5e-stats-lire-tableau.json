@@ -1,0 +1,13 @@
+{
+  "00-garde": "Une ligne, une colonne, une case : sais-tu lire un tableau à double entrée ?",
+  "01-situation": "À l'aéroport de La Réunion, une planificatrice organise les vols. Combien d'avions partent chaque semaine, et vers où ? Avec ces nombres, elle prévoit les équipes au sol.",
+  "02-titre": "D'abord, je lis le titre : « Vols par semaine ». En haut, les destinations : Paris, Maurice, Mayotte, Madagascar. À gauche, deux mois. En avril : 28, 21, 12 et 9 vols. En décembre : 42, 24, 15 et 9.",
+  "03-case": "En décembre, combien de vols vers Maurice ? Je prends la ligne de décembre, puis la colonne de Maurice. La case où elles se croisent : 24 vols.",
+  "04-total": "Combien de vols en tout, en décembre ? J'additionne la ligne : 42 plus 24 plus 15 plus 9, égale 90. C'est l'effectif total du mois.",
+  "05-comparer": "Et vers Paris ? 28 vols en avril, 42 en décembre. 42 moins 28, égale 14 vols de plus. Ce sont les vacances de Noël !",
+  "06-piege": "Le piège : prendre la bonne ligne, mais la mauvaise colonne. 15, c'est Mayotte, pas Maurice ! Un doigt sur la ligne, un doigt sur la colonne, et je lis la case du croisement.",
+  "07-defi": "À toi de jouer. En avril, il y a 70 vols en tout. Combien vont à Madagascar ? Et en décembre, combien de vols ne vont pas à Paris ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Madagascar, en avril : 70 moins 28, moins 21, moins 12, égale 9 vols. En décembre : 90 moins 42, égale 48 vols qui ne vont pas à Paris.",
+  "08-finale": "Ce que tu as appris. Je lis le titre, les lignes et les colonnes. Je lis la case où la ligne et la colonne se croisent. Pour un total, j'additionne ; pour une case manquante, j'enlève au total.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

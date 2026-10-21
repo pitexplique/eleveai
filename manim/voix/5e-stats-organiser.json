@@ -1,0 +1,13 @@
+{
+  "00-garde": "Une liste de nombres en désordre : comment l'organiser ?",
+  "01-situation": "Au Piton de la Fournaise, une volcanologue surveille le volcan. Chaque jour, des capteurs comptent les petits séismes sous la montagne. S'ils se multiplient, une éruption se prépare peut-être.",
+  "02-liste": "Voici ses relevés de deux semaines : 2, 0, 3, 1, 2, 2, 4, 1, 0, 2, 3, 2, 1, 2. C'est une série statistique. En désordre, on n'y voit rien !",
+  "03-tableau": "Je prépare un tableau. En haut, les valeurs : 0, 1, 2, 3, 4 séismes. En dessous, je compterai les jours de chaque valeur.",
+  "04-compter": "Je prends les nombres un par un. 2 : je fais un trait sous le 2, et je barre le nombre. 0 : un trait sous le 0. 3 : un trait sous le 3. Et ainsi de suite, jusqu'au dernier.",
+  "05-effectifs": "Je compte les traits. 0 séisme : 2 jours. 1 séisme : 3 jours. 2 séismes : 6 jours. 3 séismes : 2 jours. 4 séismes : 1 jour. Ce nombre de jours, c'est l'effectif de la valeur.",
+  "06-piege": "Le piège : oublier un nombre, ou le compter deux fois. Alors je vérifie : 2 plus 3 plus 6 plus 2 plus 1, égale 14. L'effectif total, 14, est bien le nombre de relevés.",
+  "07-defi": "À toi de jouer. Quelle valeur apparaît le plus souvent ? Et combien de jours ont eu au moins 3 séismes ? Mets pause, et cherche !",
+  "07b-correction": "Correction. La valeur la plus fréquente est 2 : elle apparaît 6 fois. Au moins 3 séismes, c'est 3 ou 4 : 2 plus 1, égale 3 jours.",
+  "08-finale": "Ce que tu as appris. Je range les valeurs dans un tableau. Je compte chaque donnée une seule fois, en la barrant. Et je vérifie que l'effectif total est égal au nombre de données.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

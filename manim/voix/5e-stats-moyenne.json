@@ -1,0 +1,13 @@
+{
+  "00-garde": "Une moyenne : comment la calculer, et que veut-elle dire ?",
+  "01-situation": "Une analyste de données travaille pour un club de football. Elle étudie les buteurs. Aujourd'hui : Kylian Mbappé, avec l'équipe de France, dans les grands tournois.",
+  "02-donnees": "Coupe du monde 2018 : 4 buts. Euro 2020 : 0 but. Coupe du monde 2022 : 8 buts. Euro 2024 : 1 but.",
+  "03-somme": "Pour calculer la moyenne, j'additionne toutes les valeurs : 4 plus 0 plus 8 plus 1, égale 13 buts.",
+  "04-diviser": "Puis je divise par le nombre de valeurs : 4 tournois. 13 divisé par 4, égale 3,25. En moyenne, 3,25 buts par tournoi.",
+  "05-sens": "Que veut dire 3,25 ? Si on partageait les 13 buts de façon égale entre les 4 tournois, chacun en aurait 3,25. On égalise les barres !",
+  "06-piege": "Le piège : oublier le 0. L'Euro 2020 compte aussi : sans lui, on diviserait par 3, et la moyenne serait fausse. Et personne n'a marqué 3,25 buts : une moyenne n'est pas forcément une des valeurs.",
+  "07-defi": "À toi de jouer. Imagine un cinquième tournoi. Combien de buts faudrait-il marquer pour avoir une moyenne de 4 buts sur les 5 tournois ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Une moyenne de 4 sur 5 tournois, c'est un total de 4 fois 5, égale 20 buts. Il en a déjà 13 : 20 moins 13, égale 7 buts.",
+  "08-finale": "Ce que tu as appris. J'additionne toutes les valeurs, même les 0. Je divise par le nombre de valeurs. La moyenne, c'est le partage égal du total.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

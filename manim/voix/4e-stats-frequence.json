@@ -1,0 +1,13 @@
+{
+  "00-garde": "Calculer une fréquence. Comment comparer des groupes de tailles différentes ?",
+  "01-situation": "Un infirmier de l'Établissement français du sang organise une collecte. Ce jour-là, 200 donneurs sont venus. Pour les malades, il veut savoir quelle part des donneurs a le groupe O, très demandé à l'hôpital.",
+  "02-tableau": "Il note les groupes dans un tableau. Groupe A : 92 donneurs. Groupe O : 82. Groupe B : 18. Groupe AB : 8. L'effectif total est 200.",
+  "03-calcul": "La fréquence du groupe O, c'est son effectif divisé par l'effectif total. 82 divisé par 200, égale 0,41.",
+  "04-pourcent": "0,41, c'est 41 centièmes. Sur 100 donneurs, 41 sont du groupe O. On écrit aussi 41 %.",
+  "05-france": "Et dans toute la France ? D'après l'Établissement français du sang, environ 42 % des gens sont du groupe O. Notre collecte donne 41 % : c'est très proche ! En France, 45 % pour A, 42 % pour O, 9 % pour B, 4 % pour AB. Ensemble, 100 %.",
+  "06-piege": "Le piège : comparer des effectifs. Au lycée, sur 50 donneurs, 6 sont du groupe B. En ville, 18 sur 200. 18, c'est plus que 6. Mais les groupes n'ont pas la même taille ! Je calcule les fréquences. 6 divisé par 50, égale 0,12, soit 12 %. 18 divisé par 200, égale 0,09, soit 9 %. Le groupe B est plus fréquent au lycée !",
+  "07-defi": "À toi de jouer. Une petite collecte, sur un diagramme en barres. Groupe A : 11 donneurs. Groupe O : 10. Groupe B : 3. Groupe AB : 1. Quelle est la fréquence du groupe A, en nombre décimal, puis en pourcentage ? Mets pause, et cherche !",
+  "07b-correction": "Correction. D'abord, l'effectif total : 11 plus 10 plus 3 plus 1, égale 25. Puis 11 divisé par 25, égale 0,44, soit 44 %. Sans le total, pas de fréquence !",
+  "08-finale": "Ce que tu as appris. La fréquence, c'est l'effectif divisé par l'effectif total. Elle est entre 0 et 1, ou entre 0 et 100 %. Et pour comparer des groupes de tailles différentes, je compare les fréquences, pas les effectifs.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -1,0 +1,14 @@
+{
+  "00-garde": "Déterminer un effectif. Combien de fois une valeur revient-elle ?",
+  "01-situation": "Une vétérinaire soigne les animaux, et elle suit leur santé avec des chiffres. Cette année, sa clinique a suivi 12 portées de chiots labradors. Pour préparer les visites et les vaccins, elle veut savoir combien de chiots il y a, le plus souvent, dans une portée.",
+  "02-brut": "Sur chaque fiche, elle a noté le nombre de chiots : 7, 6, 8, 7, 5, 6, 9, 7, 6, 8, 5, 7. Ce sont les données brutes : 12 fiches, en vrac.",
+  "03-compter": "Combien de portées de 7 chiots ? Je cherche les 7, et je les compte : 1, 2, 3, 4. La valeur 7 a un effectif de 4. L'effectif, c'est le nombre de fois où la valeur apparaît.",
+  "04-tableau": "Je fais pareil pour chaque valeur, et je range tout dans un tableau. 5 chiots : 2 portées. 6 chiots : 3 portées. 8 chiots : 2 portées. 9 chiots : 1 portée. En haut, les valeurs. En dessous, les effectifs.",
+  "05-total": "Combien de portées en tout ? J'additionne les effectifs : 2 plus 3 plus 4 plus 2 plus 1, égale 12. L'effectif total est 12 : on retrouve bien les 12 fiches. Sur le diagramme en bâtons, c'est la somme des hauteurs.",
+  "06-piege": "Le piège : additionner les valeurs. 5 plus 6 plus 7 plus 8 plus 9, égale 35. 35 portées ? Impossible, il n'y a que 12 fiches ! On additionne les effectifs, jamais les valeurs.",
+  "07-aumoins": "Combien de portées ont au moins 8 chiots ? Au moins 8, c'est 8 ou plus : 8 et 9. J'additionne leurs effectifs : 2 plus 1, égale 3 portées.",
+  "08-defi": "À toi de jouer. Une autre clinique a suivi 20 portées, mais une case de son tableau est effacée. 5 chiots : 3. 6 chiots : on ne sait pas. 7 chiots : 6. 8 chiots : 4. 9 chiots : 2. Combien de portées de 6 chiots ? Et combien ont au moins 8 chiots ? Mets pause, et cherche !",
+  "08b-correction": "Correction. J'additionne les effectifs connus : 3 plus 6 plus 4 plus 2, égale 15. Il manque 20 moins 15, égale 5 portées de 6 chiots. Au moins 8 chiots : 4 plus 2, égale 6 portées.",
+  "09-finale": "Ce que tu as appris. L'effectif d'une valeur, c'est le nombre de fois où elle apparaît. L'effectif total, c'est la somme des effectifs, pas des valeurs. Et avec le total, je retrouve une case effacée.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

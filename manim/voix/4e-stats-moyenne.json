@@ -1,0 +1,13 @@
+{
+  "00-garde": "Calculer une moyenne : combien d'étoiles filantes par heure ?",
+  "01-situation": "À La Réunion, l'observatoire des Makes, à Saint-Louis, scrute le ciel. Un astronome y compte les étoiles filantes : ce sont des poussières qui brûlent en entrant dans l'atmosphère. Chaque nuit, il note combien il en voit en une heure. Sa question : combien d'étoiles filantes par heure, en moyenne ?",
+  "02-serie": "Ses relevés, nuit après nuit : 12, 8, 15, 20, 10, 6 et 13 étoiles filantes. Le nombre change d'une nuit à l'autre. Un seul nombre peut-il les résumer ?",
+  "03-calcul": "Oui : la moyenne. J'additionne toutes les valeurs : 12 plus 8 plus 15 plus 20 plus 10 plus 6 plus 13, égale 84. Puis je divise par le nombre de nuits : 84 divisé par 7, égale 12. En moyenne, 12 étoiles filantes par heure.",
+  "04-partage": "Que veut dire ce 12 ? Imagine qu'on partage les 84 étoiles filantes également entre les 7 nuits. Les grandes barres donnent aux petites, et toutes les barres arrivent à 12. La moyenne, c'est la part de chacun, si on partageait tout de façon égale.",
+  "05-tableau": "Pendant 20 nuits, il compte aussi les météores très brillants, les bolides, et range tout dans un tableau d'effectifs. 0 bolide : 2 nuits. 1 bolide : 5 nuits. 2 bolides : 8 nuits. 3 bolides : 3 nuits. 4 bolides : 2 nuits. Chaque valeur compte autant de fois que son effectif : 0 fois 2, plus 1 fois 5, plus 2 fois 8, plus 3 fois 3, plus 4 fois 2, égale 38. L'effectif total : 2 plus 5 plus 8 plus 3 plus 2, égale 20. 38 divisé par 20, égale 1,9. C'est une moyenne pondérée.",
+  "06-piege": "Le piège : diviser par 5, parce que le tableau a 5 colonnes. 38 divisé par 5, égale 7,6 : faux ! 7,6 bolides par nuit, alors qu'il n'y en a jamais plus de 4 ? Impossible. On divise toujours par l'effectif total.",
+  "07-defi": "À toi de jouer. La semaine suivante, ses relevés sont : 9, 14, 11, 7, 16, 12 et 10 étoiles filantes par heure. Quelle est la moyenne, arrondie au dixième ? Et est-ce plus que 12 ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 9 plus 14 plus 11 plus 7 plus 16 plus 12 plus 10, égale 79. 79 divisé par 7, environ 11,3. C'est moins que 12 : cette semaine-là, le ciel a été un peu moins généreux.",
+  "08-finale": "Ce que tu as appris. La moyenne, c'est la somme des valeurs divisée par leur nombre. Dans un tableau, chaque valeur compte autant de fois que son effectif. Et on divise par l'effectif total, jamais par le nombre de colonnes.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

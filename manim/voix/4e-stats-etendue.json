@@ -1,0 +1,12 @@
+{
+  "00-garde": "Calculer une étendue : sur quel écart la série s'étale-t-elle ?",
+  "01-situation": "À Saint-Malo, en Bretagne, la mer monte et descend deux fois par jour : c'est la marée. Un hydrographe mesure la hauteur de l'eau, pour que les bateaux ne touchent pas le fond à marée basse. Les marins ont un mot pour l'écart entre la mer haute et la mer basse : le marnage. Les statisticiens, eux, disent : l'étendue.",
+  "02-serie": "Un jour de grande marée, toutes les 2 heures, il relève la hauteur de l'eau, en mètres : 11,5 ; 8 ; 4 ; 1,5 ; 4,5 ; 9 ; et 12,5.",
+  "03-calcul": "L'étendue, c'est la plus grande valeur moins la plus petite. Le point le plus haut : 12,5 mètres. Le point le plus bas : 1,5 mètre. 12,5 moins 1,5, égale 11. L'étendue est de 11 mètres.",
+  "04-piege": "Le piège : faire la dernière valeur moins la première. 12,5 moins 11,5, égale 1 : faux ! La mer a bougé de bien plus d'un mètre. On cherche le maximum et le minimum dans toute la série.",
+  "05-comparer": "Le même jour, à La Réunion, au port de la Pointe des Galets, l'eau va seulement de 0,2 à 0,7 mètre. Étendue : 0,7 moins 0,2, égale 0,5 mètre. 11 mètres contre 0,5 : à Saint-Malo, la série est beaucoup plus dispersée. L'étendue mesure la dispersion.",
+  "06-defi": "À toi de jouer. Au large, une capitaine note la hauteur des vagues pendant 20 jours. 1 mètre : 4 jours. 2 mètres : 9 jours. 3 mètres : 5 jours. 6 mètres : 2 jours. Quelle est l'étendue des hauteurs de vagues ? Mets pause, et cherche !",
+  "06b-correction": "Correction. L'étendue porte sur les valeurs, la première ligne : 6 moins 1, égale 5 mètres. Attention : 9 moins 2, égale 7, ce sont des jours. Ce n'est pas l'étendue.",
+  "07-finale": "Ce que tu as appris. L'étendue, c'est la plus grande valeur moins la plus petite. On cherche le maximum et le minimum dans toute la série, pas la dernière et la première. Plus l'étendue est grande, plus la série est dispersée.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

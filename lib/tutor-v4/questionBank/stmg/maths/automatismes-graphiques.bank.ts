@@ -256,6 +256,114 @@ const CATEGORIES = [
   { titre: "Origine des réclamations", labels: ["Délai", "Produit", "Facturation", "Livraison"] },
 ] as const;
 
+/* ─────────── données chiffrées : contextes des micros auto_stat_* ─────────── */
+
+/**
+ * ⭐ 21/10/2026 — UN MÉTIER PAR DIAGRAMME. Quatre catégories et des consignes
+ * fixes : 7 à 32 squelettes, l'élève revoyait la même question une fois sur
+ * deux. Chaque contexte dit QUI lit le diagramme (gestion, santé, sport,
+ * environnement, culture), l'unité de ce qu'on compte, une phrase pour donner
+ * le total, et le PAS de graduation qui rend les valeurs lisibles.
+ */
+type ContexteStat = {
+  metier: string;
+  titre: string;
+  labels: readonly [string, string, string, string];
+  unite: string;
+  phraseTotal: string;
+  pas: number;
+};
+
+const STAT_CONTEXTES: readonly ContexteStat[] = [
+  { metier: "Un chef de rayon", titre: "Chiffre d'affaires par rayon (k€)", labels: ["Frais", "Épicerie", "Boissons", "Entretien"], unite: "k€", phraseTotal: "Le chiffre d'affaires total du mois s'élève à", pas: 5 },
+  { metier: "Une responsable commerciale", titre: "Ventes par canal de distribution", labels: ["Magasin", "En ligne", "Téléphone", "Marché"], unite: "ventes", phraseTotal: "L'entreprise a enregistré au total", pas: 10 },
+  { metier: "Une responsable des ressources humaines", titre: "Salariés par service", labels: ["Production", "Commercial", "Administratif", "Logistique"], unite: "salariés", phraseTotal: "L'entreprise emploie au total", pas: 5 },
+  { metier: "Un responsable du service client", titre: "Réclamations par motif", labels: ["Délai", "Produit", "Facturation", "Livraison"], unite: "réclamations", phraseTotal: "Le service client a reçu au total", pas: 10 },
+  { metier: "Une cadre de santé", titre: "Passages aux urgences par motif", labels: ["Traumatisme", "Fièvre", "Douleur", "Malaise"], unite: "passages", phraseTotal: "Les urgences ont accueilli au total", pas: 20 },
+  { metier: "Un agent de développement touristique", titre: "Visiteurs par saison (centaines)", labels: ["Hiver", "Printemps", "Été", "Automne"], unite: "centaines de visiteurs", phraseTotal: "L'office de tourisme a compté au total", pas: 5 },
+  { metier: "Une technicienne de la collecte des déchets", titre: "Déchets collectés par type (tonnes)", labels: ["Verre", "Papier", "Plastique", "Biodéchets"], unite: "tonnes", phraseTotal: "La collectivité a collecté au total", pas: 10 },
+  { metier: "Un entraîneur de basket", titre: "Points marqués par quart-temps sur la saison", labels: ["1er quart", "2e quart", "3e quart", "4e quart"], unite: "points", phraseTotal: "Sur la saison, l'équipe a marqué au total", pas: 20 },
+  { metier: "Une bibliothécaire", titre: "Prêts par type de document", labels: ["Romans", "Bandes dessinées", "Documentaires", "Magazines"], unite: "prêts", phraseTotal: "La médiathèque a enregistré au total", pas: 10 },
+  { metier: "Un gestionnaire de restauration scolaire", titre: "Repas servis par jour", labels: ["Lundi", "Mardi", "Jeudi", "Vendredi"], unite: "repas", phraseTotal: "La cantine a servi au total", pas: 20 },
+  { metier: "Une agricultrice", titre: "Surface cultivée par culture (hectares)", labels: ["Blé", "Maïs", "Colza", "Prairie"], unite: "hectares", phraseTotal: "L'exploitation cultive au total", pas: 5 },
+  { metier: "Un conseiller en énergie", titre: "Consommation d'énergie par usage (MWh)", labels: ["Chauffage", "Eau chaude", "Éclairage", "Appareils"], unite: "MWh", phraseTotal: "Le bâtiment a consommé au total", pas: 5 },
+  { metier: "Une organisatrice de salon", titre: "Exposants par secteur", labels: ["Artisanat", "Alimentation", "Numérique", "Tourisme"], unite: "exposants", phraseTotal: "Le salon accueille au total", pas: 5 },
+  { metier: "Un directeur de cinéma", titre: "Entrées par genre de film (centaines)", labels: ["Comédie", "Animation", "Action", "Drame"], unite: "centaines d'entrées", phraseTotal: "Le cinéma a enregistré au total", pas: 10 },
+  { metier: "Une dirigeante de club sportif", titre: "Licenciés par catégorie d'âge", labels: ["Jeunes", "Juniors", "Seniors", "Vétérans"], unite: "licenciés", phraseTotal: "Le club compte au total", pas: 10 },
+  { metier: "Un analyste en mobilité", titre: "Salariés par mode de transport", labels: ["Voiture", "Transports en commun", "Vélo", "Marche"], unite: "salariés", phraseTotal: "L'enquête a interrogé au total", pas: 20 },
+];
+
+function minusculeStat(s: string): string {
+  return s.charAt(0).toLowerCase() + s.slice(1);
+}
+
+/** Qui lit ce diagramme : trois tournures × seize contextes. */
+function amorceStat(c: ContexteStat): string {
+  return pick([
+    `${c.metier} présente ce diagramme : « ${c.titre} ».`,
+    `Dans son rapport, ${minusculeStat(c.metier)} a représenté les données « ${c.titre} ».`,
+    `${c.metier} analyse le diagramme « ${c.titre} ».`,
+  ]);
+}
+
+/** Un diagramme en barres (ou bâtons) gradué : une graduation tous les deux pas. */
+function canvasBarres(
+  c: ContexteStat,
+  valeurs: readonly number[],
+  options?: { valeurs?: boolean; batons?: boolean }
+): CanvasFigure {
+  return {
+    kind: "stat_graph",
+    graphType: options?.batons ? "batons" : "barres",
+    title: c.titre,
+    data: c.labels.map((label, i) => ({ label, value: valeurs[i] })),
+    display: { showLabels: true, showValues: options?.valeurs ?? false, showAxis: true, step: c.pas * 2 },
+  };
+}
+
+/** Séries résumées par un diagramme en boîte : qui, quoi, unité, pas des cinq nombres. */
+type ContexteBoite = {
+  metier: string;
+  serie: string;
+  unite: string;
+  pas: number;
+  debut: readonly [number, number];
+  groupes: readonly [string, string];
+};
+
+const BOITE_CONTEXTES: readonly ContexteBoite[] = [
+  { metier: "Un responsable logistique", serie: "les temps de livraison", unite: "minutes", pas: 5, debut: [10, 30], groupes: ["Livreur A", "Livreur B"] },
+  { metier: "Une professeure d'EPS", serie: "les temps de course d'endurance de la classe", unite: "secondes", pas: 10, debut: [200, 260], groupes: ["Filles", "Garçons"] },
+  { metier: "Un responsable de centre d'appels", serie: "les durées d'attente au téléphone", unite: "secondes", pas: 10, debut: [20, 60], groupes: ["Matin", "Après-midi"] },
+  { metier: "Une agente immobilière", serie: "les loyers des studios du quartier", unite: "€", pas: 20, debut: [380, 460], groupes: ["Centre-ville", "Périphérie"] },
+  { metier: "Un chef de rayon", serie: "les montants des paniers en caisse", unite: "€", pas: 5, debut: [5, 15], groupes: ["Semaine", "Week-end"] },
+  { metier: "Une infirmière scolaire", serie: "les tailles des élèves de seconde", unite: "cm", pas: 2, debut: [150, 158], groupes: ["Classe A", "Classe B"] },
+  { metier: "Un météorologue", serie: "les précipitations mensuelles", unite: "mm", pas: 10, debut: [10, 40], groupes: ["Station côtière", "Station de montagne"] },
+  { metier: "Une gestionnaire de paie", serie: "les salaires mensuels nets de l'atelier", unite: "€", pas: 50, debut: [1400, 1600], groupes: ["Atelier", "Bureaux"] },
+  { metier: "Un entraîneur de football", serie: "les ballons touchés par match", unite: "ballons", pas: 5, debut: [20, 40], groupes: ["Milieux", "Défenseurs"] },
+  { metier: "Une responsable de restaurant", serie: "les durées de repas des clients", unite: "minutes", pas: 5, debut: [30, 45], groupes: ["Midi", "Soir"] },
+  { metier: "Un technicien de maintenance", serie: "les durées des interventions", unite: "minutes", pas: 10, debut: [20, 40], groupes: ["Équipe de jour", "Équipe de nuit"] },
+  { metier: "Une analyste du trafic web", serie: "les durées de visite du site", unite: "secondes", pas: 15, debut: [30, 60], groupes: ["Sur mobile", "Sur ordinateur"] },
+];
+
+/** Cinq nombres STRICTEMENT croissants, multiples du pas : la boîte a une largeur, la médiane se voit. */
+function cinqNombresBoite(c: ContexteBoite) {
+  const min = Math.round(randomInt(c.debut[0], c.debut[1]) / c.pas) * c.pas;
+  const q1 = min + randomInt(2, 4) * c.pas;
+  const mediane = q1 + randomInt(1, 3) * c.pas;
+  const q3 = mediane + randomInt(1, 3) * c.pas;
+  const max = q3 + randomInt(2, 5) * c.pas;
+  return { min, q1, mediane, q3, max };
+}
+
+function amorceBoite(c: ContexteBoite): string {
+  return pick([
+    `${c.metier} résume ${c.serie} par un diagramme en boîte.`,
+    `${c.metier} étudie ${c.serie}, en ${c.unite}.`,
+    `Pour son bilan, ${minusculeStat(c.metier)} a tracé le diagramme en boîte ${c.serie.replace(/^les /, "des ")}.`,
+  ]);
+}
+
 export const automatismesGraphiquesBank: TutorBankItemV4[] = [
   /* ═══════════════ auto_fct_image_antecedent ═══════════════ */
 
@@ -1549,9 +1657,12 @@ export const automatismesGraphiquesBank: TutorBankItemV4[] = [
     },
   },
 
+
   /* ═══════════════ auto_stat_lire_graphique ═══════════════ */
 
   {
+    // Lire UNE barre sur l'axe gradué (valeurs non écrites) : les hauteurs
+    // tombent sur des graduations, c'est l'étoile 1.
     kind: "template",
     id: "stmg_stat_lire_tpl_1",
     niveau: "stmg",
@@ -1560,40 +1671,38 @@ export const automatismesGraphiquesBank: TutorBankItemV4[] = [
     microId: "auto_stat_lire_graphique",
     difficulty: 1,
     theme: "neutral",
-    hint: "Repère la barre demandée, puis suis sa hauteur jusqu'à la graduation.",
+    hint: "Repère la barre demandée, puis suis son sommet horizontalement jusqu'à l'axe gradué.",
     tags: ["stmg", "maths", "statistiques", "canvas", "template", "short"],
     generate: () => {
-      const cat = pick(CATEGORIES);
-      const valeurs = cat.labels.map(() => randomInt(2, 20) * 5);
-      const k = randomInt(0, cat.labels.length - 1);
+      const c = pick(STAT_CONTEXTES);
+      const valeurs = c.labels.map(() => randomInt(2, 9) * 2 * c.pas);
+      const k = randomInt(0, 3);
       return {
-        text: `D'après le diagramme, quelle est la valeur de la catégorie « ${cat.labels[k]} » ?`,
+        text:
+          `${amorceStat(c)} ` +
+          pick([
+            `Quelle est la valeur de la catégorie « ${c.labels[k]} » ?`,
+            `Lis sur l'axe la hauteur de la barre « ${c.labels[k]} ».`,
+            `Combien la barre « ${c.labels[k]} » représente-t-elle ?`,
+          ]) +
+          ` (en ${c.unite})`,
         format: "short",
         expected: [fr(valeurs[k])],
         comparator: "number_equal",
-        canvas: {
-          kind: "stat_graph",
-          graphType: "barres",
-          title: cat.titre,
-          data: cat.labels.map((label, i) => ({ label, value: valeurs[i] })),
-          display: { showLabels: true },
-        },
+        canvas: canvasBarres(c, valeurs),
         explanation: exp(
-          "Lire un diagramme en barres suppose d'avoir repéré l'origine et les graduations de l'axe vertical.",
-          "On identifie la barre demandée, puis on lit sa hauteur.",
-          `La barre « ${cat.labels[k]} » atteint $${fr(valeurs[k])}$.`,
-          `La valeur de « ${cat.labels[k]} » est $${fr(valeurs[k])}$.`
+          "Lire un diagramme en barres, c'est d'abord repérer l'origine et le PAS des graduations de l'axe vertical.",
+          `On repère la barre demandée, puis on suit son sommet jusqu'à l'axe : ici une graduation vaut $${fr(2 * c.pas)}$.`,
+          `La barre « ${c.labels[k]} » s'arrête sur la graduation $${fr(valeurs[k])}$.`,
+          `La valeur de « ${c.labels[k]} » est $${fr(valeurs[k])}$ ${c.unite}.`
         ),
       };
     },
   },
 
   {
-    // ANGLE 2 — lire CONTRE une graduation, au lieu de lire une barre. Le
-    // premier item demande la hauteur d'une barre désignée ; celui-ci ne
-    // désigne rien et impose de placer soi-même l'horizontale de l'objectif.
-    // ⚠️ Les valeurs ne sont PAS affichées sur le diagramme : sinon il n'y
-    // aurait plus de graduation à lire, seulement des nombres à comparer.
+    // ANGLE 2 — lire CONTRE une graduation : combien de barres dépassent
+    // l'objectif ? L'objectif tombe entre deux valeurs, jamais SUR une barre.
     kind: "template",
     id: "stmg_stat_lire_tpl_2",
     niveau: "stmg",
@@ -1605,34 +1714,110 @@ export const automatismesGraphiquesBank: TutorBankItemV4[] = [
     hint: "Repère la hauteur de l'objectif sur l'axe vertical, puis compte les barres qui la dépassent.",
     tags: ["stmg", "maths", "statistiques", "canvas", "seuil", "template", "short"],
     generate: () => {
-      const cat = pick(CATEGORIES);
-      // Multiples de 20, deux à deux distincts : l'objectif tombe à mi-chemin
-      // entre deux valeurs consécutives, donc jamais SUR une barre.
-      const valeurs = shuffle([20, 40, 60, 80, 100, 120, 140, 160]).slice(0, 4);
+      const c = pick(STAT_CONTEXTES);
+      const g = 2 * c.pas;
+      const valeurs = shuffle([2, 3, 4, 5, 6, 7, 8, 9]).slice(0, 4).map((m) => m * g);
       const triees = [...valeurs].sort((u, v) => u - v);
       const rang = randomInt(1, 3);
       const objectif = (triees[rang - 1] + triees[rang]) / 2;
       const combien = 4 - rang;
       return {
         text:
-          `L'objectif fixé était de $${fr(objectif)}$ pour chaque catégorie. ` +
-          `D'après le diagramme, combien de catégories l'ont dépassé ?`,
+          `${amorceStat(c)} L'objectif était de $${fr(objectif)}$ ${c.unite} par catégorie. ` +
+          pick([
+            "D'après le diagramme, combien de catégories l'ont dépassé ?",
+            "Combien de barres dépassent cet objectif ?",
+            "Combien de catégories ont fait mieux que l'objectif ?",
+          ]),
         format: "short",
         expected: [String(combien)],
         comparator: "number_equal",
-        canvas: {
-          kind: "stat_graph",
-          graphType: "barres",
-          title: cat.titre,
-          data: cat.labels.map((label, i) => ({ label, value: valeurs[i] })),
-          display: { showLabels: true },
-        },
+        canvas: canvasBarres(c, valeurs),
         explanation: exp(
           "Lire un diagramme, c'est d'abord savoir ce que vaut une graduation de l'axe vertical.",
           "On repère la hauteur de l'objectif sur cet axe, on la suit horizontalement, puis on compte les barres qui la dépassent.",
-          `Les quatre barres valent ${triees.map((v) => fr(v)).join(", ")}. ` +
-            `Au-dessus de $${fr(objectif)}$, il y en a ${combien}.`,
+          `Les quatre barres valent ${triees.map((v) => `$${fr(v)}$`).join(", ")}. Au-dessus de $${fr(objectif)}$, il y en a ${combien}.`,
           `${combien} catégorie${combien > 1 ? "s ont" : " a"} dépassé l'objectif.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 3 — comparer sans rien lire : la plus haute ou la plus basse.
+    kind: "template",
+    id: "stmg_stat_lire_tpl_3",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_donnees_graphiques",
+    microId: "auto_stat_lire_graphique",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Compare les hauteurs des barres : la plus haute porte la plus grande valeur.",
+    tags: ["stmg", "maths", "statistiques", "canvas", "template"],
+    generate: () => {
+      const c = pick(STAT_CONTEXTES);
+      const valeurs = shuffle([2, 3, 4, 5, 6, 7, 8, 9]).slice(0, 4).map((m) => m * 2 * c.pas);
+      const plus = Math.random() < 0.5;
+      const v = plus ? Math.max(...valeurs) : Math.min(...valeurs);
+      const bonne = c.labels[valeurs.indexOf(v)];
+      return {
+        text:
+          `${amorceStat(c)} ` +
+          (plus
+            ? pick(["Quelle catégorie a la plus grande valeur ?", "Quelle barre est la plus haute ?"])
+            : pick(["Quelle catégorie a la plus petite valeur ?", "Quelle barre est la plus basse ?"])),
+        format: "qcm",
+        choices: shuffle([...c.labels]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: canvasBarres(c, valeurs),
+        explanation: exp(
+          "Dans un diagramme en barres, la hauteur de chaque barre est proportionnelle à la valeur qu'elle représente.",
+          "On compare les hauteurs, sans avoir besoin de lire les valeurs exactes.",
+          `« ${bonne} » vaut $${fr(v)}$ ${c.unite} ; les autres vont de $${fr(Math.min(...valeurs.filter((x) => x !== v)))}$ à $${fr(Math.max(...valeurs.filter((x) => x !== v)))}$.`,
+          `C'est « ${bonne} ».`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 4 — l'ÉCART entre deux barres : deux lectures, une soustraction.
+    kind: "template",
+    id: "stmg_stat_lire_tpl_4",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_donnees_graphiques",
+    microId: "auto_stat_lire_graphique",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Lis les deux hauteurs sur l'axe, puis fais la différence.",
+    tags: ["stmg", "maths", "statistiques", "canvas", "template", "short"],
+    generate: () => {
+      const c = pick(STAT_CONTEXTES);
+      const valeurs = shuffle([2, 3, 4, 5, 6, 7, 8, 9]).slice(0, 4).map((m) => m * 2 * c.pas);
+      const [i, j] = shuffle([0, 1, 2, 3]).slice(0, 2);
+      const haut = valeurs[i] > valeurs[j] ? i : j;
+      const bas = haut === i ? j : i;
+      const ecart = valeurs[haut] - valeurs[bas];
+      return {
+        text:
+          `${amorceStat(c)} ` +
+          pick([
+            `De combien la valeur de « ${c.labels[haut]} » dépasse-t-elle celle de « ${c.labels[bas]} » ?`,
+            `Quel est l'écart entre les barres « ${c.labels[haut]} » et « ${c.labels[bas]} » ?`,
+          ]) +
+          ` (en ${c.unite})`,
+        format: "short",
+        expected: [fr(ecart)],
+        comparator: "number_equal",
+        canvas: canvasBarres(c, valeurs),
+        explanation: exp(
+          "Un écart entre deux catégories se calcule sur les VALEURS lues, pas en comptant des carreaux sans savoir ce qu'ils valent.",
+          `On lit chaque barre sur l'axe (une graduation vaut $${fr(2 * c.pas)}$), puis on soustrait.`,
+          `« ${c.labels[haut]} » : $${fr(valeurs[haut])}$ ; « ${c.labels[bas]} » : $${fr(valeurs[bas])}$. Écart : $${fr(valeurs[haut])} - ${fr(valeurs[bas])} = ${fr(ecart)}$.`,
+          `L'écart est de $${fr(ecart)}$ ${c.unite}.`
         ),
       };
     },
@@ -1652,39 +1837,41 @@ export const automatismesGraphiquesBank: TutorBankItemV4[] = [
     hint: "Dans un diagramme circulaire, c'est l'angle du secteur qui porte l'information, pas sa couleur.",
     tags: ["stmg", "maths", "statistiques", "canvas", "camembert", "template"],
     generate: () => {
-      const cat = pick(CATEGORIES);
-      // Parts deux à deux distinctes, de somme 100 : la plus grande est unique.
+      const c = pick(STAT_CONTEXTES);
+      // Parts deux à deux distinctes, de somme 100 : la plus grande (et la plus petite) est unique.
       const valeurs: number[] = shuffle(pick(PARTS_100));
-      const maxi = Math.max(...valeurs);
-      const iMax = valeurs.indexOf(maxi);
+      const plus = Math.random() < 0.6;
+      const v = plus ? Math.max(...valeurs) : Math.min(...valeurs);
+      const bonne = c.labels[valeurs.indexOf(v)];
       return {
-        text: `D'après ce diagramme circulaire, quelle catégorie représente la plus grande part ?`,
+        text:
+          `${amorceStat(c)} ` +
+          (plus
+            ? pick(["D'après ce diagramme circulaire, quelle catégorie représente la plus grande part ?", "Quel secteur du diagramme circulaire est le plus important ?"])
+            : pick(["D'après ce diagramme circulaire, quelle catégorie représente la plus petite part ?", "Quel secteur du diagramme circulaire est le moins important ?"])),
         format: "qcm",
-        choices: shuffle([...cat.labels]),
-        expected: [cat.labels[iMax]],
+        choices: shuffle([...c.labels]),
+        expected: [bonne],
         comparator: "mcq_exact",
         canvas: {
           kind: "stat_graph",
           graphType: "camembert",
-          title: `${cat.titre} (en %)`,
-          data: cat.labels.map((label, i) => ({ label, value: valeurs[i] })),
+          title: `${c.titre} (en %)`,
+          data: c.labels.map((label, i) => ({ label, value: valeurs[i] })),
           display: { showValues: true, showLabels: true },
         },
         explanation: exp(
           "Dans un diagramme circulaire, l'angle de chaque secteur est proportionnel à l'effectif ou à la fréquence qu'il représente.",
-          "On compare les secteurs : le plus large correspond à la plus grande part.",
-          `Le secteur « ${cat.labels[iMax]} » représente $${fr(maxi)}\\,\\%$, contre au plus $${fr(Math.max(...valeurs.filter((_, i) => i !== iMax)))}\\,\\%$ pour les autres.`,
-          `La plus grande part revient à « ${cat.labels[iMax]} ».`
+          `On compare les secteurs : le plus ${plus ? "large" : "étroit"} correspond à la plus ${plus ? "grande" : "petite"} part.`,
+          `Le secteur « ${bonne} » représente $${fr(v)}\\,\\%$ ; les autres vont de $${fr(Math.min(...valeurs.filter((x) => x !== v)))}\\,\\%$ à $${fr(Math.max(...valeurs.filter((x) => x !== v)))}\\,\\%$.`,
+          `La plus ${plus ? "grande" : "petite"} part revient à « ${bonne} ».`
         ),
       };
     },
   },
 
   {
-    // ANGLE 2 — du POURCENTAGE à l'effectif. Le premier item compare des
-    // secteurs entre eux ; celui-ci sort du diagramme : une part de 25 % ne dit
-    // rien tant qu'on ne connaît pas le total. C'est l'aller-retour que demande
-    // le programme, et la question que pose un chef de rayon.
+    // ANGLE 2 — du POURCENTAGE à l'effectif : une part ne dit rien sans le total.
     kind: "template",
     id: "stmg_stat_diagrammes_tpl_2",
     niveau: "stmg",
@@ -1696,41 +1883,138 @@ export const automatismesGraphiquesBank: TutorBankItemV4[] = [
     hint: "Un pourcentage se lit sur le diagramme ; l'effectif s'obtient en l'appliquant au total.",
     tags: ["stmg", "maths", "statistiques", "canvas", "camembert", "template", "short"],
     generate: () => {
-      const rep = pick(REPARTITIONS);
-      // Parts deux à deux distinctes, de somme 100. Le total est un multiple de
-      // 20 et les parts des multiples de 5 : chaque part tombe alors sur un
-      // effectif ENTIER — un pourcentage rond n'y suffirait pas.
+      const c = pick(STAT_CONTEXTES);
+      // Total multiple de 20, parts multiples de 5 : l'effectif tombe toujours juste.
       const valeurs: number[] = shuffle(pick(PARTS_100));
-      const total = pick([400, 600, 800, 1000] as const);
+      const total = pick([400, 600, 800, 1000, 1200, 2000] as const);
       const k = randomInt(0, 3);
-      const pct = valeurs[k];
-      const effectif = (total * pct) / 100;
+      const effectif = (total * valeurs[k]) / 100;
       return {
         text:
-          `Le diagramme donne une répartition en pourcentages. ` +
-          `${rep.phraseTotal} $${total}$ ${rep.unite}. ` +
-          `Quelle quantité la catégorie « ${rep.labels[k]} » représente-t-elle ?`,
+          `${amorceStat(c)} Le diagramme donne la répartition en pourcentages. ${c.phraseTotal} $${total}$ ${c.unite}. ` +
+          pick([
+            `Quelle quantité la catégorie « ${c.labels[k]} » représente-t-elle ?`,
+            `Combien cela fait-il pour « ${c.labels[k]} » ?`,
+            `Quel est l'effectif de « ${c.labels[k]} » ?`,
+          ]),
         format: "short",
         expected: [fr(effectif)],
         comparator: "number_equal",
         canvas: {
           kind: "stat_graph",
           graphType: "camembert",
-          title: `${rep.titre} (en %)`,
-          data: rep.labels.map((label, i) => ({ label, value: valeurs[i] })),
+          title: `${c.titre} (en %)`,
+          data: c.labels.map((label, i) => ({ label, value: valeurs[i] })),
           display: { showValues: true, showLabels: true },
         },
         explanation: exp(
-          "Un diagramme circulaire donne des parts, pas des effectifs : la même part de $25\\,\\%$ ne représente pas la même chose selon le total.",
+          "Un diagramme circulaire donne des parts, pas des effectifs : la même part ne représente pas la même chose selon le total.",
           "On lit le pourcentage de la catégorie, puis on l'applique au total.",
-          `« ${rep.labels[k]} » pèse $${fr(pct)}\\,\\%$, donc $${total} \\times ${fr(pct / 100)} = ${fr(effectif)}$.`,
-          `« ${rep.labels[k]} » représente $${fr(effectif)}$ ${rep.unite}.`
+          `« ${c.labels[k]} » pèse $${fr(valeurs[k])}\\,\\%$, donc $${total} \\times ${fr(valeurs[k] / 100)} = ${fr(effectif)}$.`,
+          `« ${c.labels[k]} » représente $${fr(effectif)}$ ${c.unite}.`
         ),
       };
     },
   },
 
+  {
+    // ANGLE 3 — l'ANGLE du secteur : 100 % font 360°, donc 1 % fait 3,6°.
+    kind: "template",
+    id: "stmg_stat_diagrammes_tpl_3",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_donnees_graphiques",
+    microId: "auto_stat_diagrammes_usuels",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le disque entier, $100\\,\\%$, fait $360°$ : un secteur de $p\\,\\%$ a un angle de $p \\times 3{,}6°$.",
+    tags: ["stmg", "maths", "statistiques", "canvas", "camembert", "template", "short"],
+    generate: () => {
+      const c = pick(STAT_CONTEXTES);
+      const valeurs: number[] = shuffle(pick(PARTS_100));
+      const k = randomInt(0, 3);
+      const angle = Math.round(valeurs[k] * 36) / 10;
+      return {
+        text:
+          `${amorceStat(c)} ` +
+          pick([
+            `Quel est l'angle du secteur « ${c.labels[k]} » dans ce diagramme circulaire ?`,
+            `Pour tracer le secteur « ${c.labels[k]} », quel angle faut-il mesurer au rapporteur ?`,
+          ]) +
+          " (en degrés)",
+        format: "short",
+        expected: [fr(angle)],
+        comparator: "number_equal",
+        canvas: {
+          kind: "stat_graph",
+          graphType: "camembert",
+          title: `${c.titre} (en %)`,
+          data: c.labels.map((label, i) => ({ label, value: valeurs[i] })),
+          display: { showValues: true, showLabels: true },
+        },
+        explanation: exp(
+          "Dans un diagramme circulaire, l'angle d'un secteur est proportionnel à sa part : $100\\,\\%$ correspondent à $360°$.",
+          "On multiplie le pourcentage par $\\dfrac{360}{100} = 3{,}6$.",
+          `$${fr(valeurs[k])} \\times 3{,}6 = ${fr(angle)}$.`,
+          `Le secteur « ${c.labels[k]} » a un angle de $${fr(angle)}°$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 4 — DEUX secteurs ensemble : les parts s'additionnent.
+    kind: "template",
+    id: "stmg_stat_diagrammes_tpl_4",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_donnees_graphiques",
+    microId: "auto_stat_diagrammes_usuels",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Deux catégories réunies : on additionne leurs pourcentages.",
+    tags: ["stmg", "maths", "statistiques", "canvas", "camembert", "template"],
+    generate: () => {
+      const c = pick(STAT_CONTEXTES);
+      const valeurs: number[] = shuffle(pick(PARTS_100));
+      const [i, j] = shuffle([0, 1, 2, 3]).slice(0, 2);
+      const somme = valeurs[i] + valeurs[j];
+      const p = (v: number) => `$${fr(v)}\\,\\%$`;
+      const bonne = p(somme);
+      return {
+        text:
+          `${amorceStat(c)} ` +
+          pick([
+            `Quelle part représentent ensemble « ${c.labels[i]} » et « ${c.labels[j]} » ?`,
+            `Si l'on regroupe « ${c.labels[i]} » et « ${c.labels[j]} », quel pourcentage obtient-on ?`,
+          ]),
+        format: "qcm",
+        choices: makeChoices(bonne, [p(100 - somme), p(Math.abs(valeurs[i] - valeurs[j])), p(valeurs[i] * 2), p(somme / 2)]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: {
+          kind: "stat_graph",
+          graphType: "camembert",
+          title: `${c.titre} (en %)`,
+          data: c.labels.map((label, i2) => ({ label, value: valeurs[i2] })),
+          display: { showValues: true, showLabels: true },
+        },
+        explanation: exp(
+          "Les parts d'un diagramme circulaire se rapportent au même total : celles de deux catégories distinctes s'additionnent.",
+          "On lit les deux pourcentages, puis on les ajoute.",
+          `$${fr(valeurs[i])} + ${fr(valeurs[j])} = ${fr(somme)}$.`,
+          `Ensemble, elles représentent ${bonne}.`
+        ),
+        choiceDiagnostics: somme === 50 ? [] : [{ choice: p(100 - somme), cause: "a calculé la part des deux AUTRES catégories" }],
+      };
+    },
+  },
+
   /* ═══════════════════ auto_stat_boite ═══════════════════ */
+  //
+  // ⭐ 21/10/2026 — la VRAIE boîte à moustaches (canvas `diagramme_boite`),
+  // plus le tableau des cinq nombres : « lire un diagramme en boîte » se fait
+  // sur le dessin.
 
   {
     kind: "template",
@@ -1741,50 +2025,37 @@ export const automatismesGraphiquesBank: TutorBankItemV4[] = [
     microId: "auto_stat_boite",
     difficulty: 2,
     theme: "neutral",
-    hint: "Dans un diagramme en boîte, la boîte va du premier au troisième quartile, et le trait intérieur est la médiane.",
-    tags: ["stmg", "maths", "statistiques", "canvas", "boite", "template"],
+    hint: "La boîte va de $Q_1$ à $Q_3$, le trait intérieur est la médiane, les moustaches vont jusqu'au minimum et au maximum.",
+    tags: ["stmg", "maths", "statistiques", "canvas", "boite", "template", "short"],
     generate: () => {
-      const mini = randomInt(2, 6) * 5;
-      const q1 = mini + randomInt(2, 4) * 5;
-      const med = q1 + randomInt(2, 4) * 5;
-      const q3 = med + randomInt(2, 4) * 5;
-      const maxi = q3 + randomInt(2, 4) * 5;
-      const question = pick(["médiane", "premier quartile", "troisième quartile", "étendue"] as const);
-      const reponse =
-        question === "médiane" ? med : question === "premier quartile" ? q1 : question === "troisième quartile" ? q3 : maxi - mini;
+      const c = pick(BOITE_CONTEXTES);
+      const b = cinqNombresBoite(c);
+      const cas = pick([
+        { nom: "la médiane", v: b.mediane, calc: `La médiane est le trait intérieur de la boîte : $${fr(b.mediane)}$.` },
+        { nom: "le premier quartile $Q_1$", v: b.q1, calc: `$Q_1$ est le bord gauche de la boîte : $${fr(b.q1)}$.` },
+        { nom: "le troisième quartile $Q_3$", v: b.q3, calc: `$Q_3$ est le bord droit de la boîte : $${fr(b.q3)}$.` },
+        { nom: "l'étendue", v: b.max - b.min, calc: `Étendue $= \\max - \\min = ${fr(b.max)} - ${fr(b.min)} = ${fr(b.max - b.min)}$.` },
+        { nom: "l'écart interquartile", v: b.q3 - b.q1, calc: `Écart interquartile $= Q_3 - Q_1 = ${fr(b.q3)} - ${fr(b.q1)} = ${fr(b.q3 - b.q1)}$.` },
+      ]);
       return {
-        text:
-          `Le tableau résume les cinq valeurs d'un diagramme en boîte des temps de livraison, en minutes. ` +
-          `Quelle est ${question === "étendue" ? "l'étendue" : `la ${question}`} de la série ?`,
+        text: `${amorceBoite(c)} ${pick(["Détermine", "Lis ou calcule", "Donne"])} ${cas.nom} de la série (en ${c.unite}).`,
         format: "short",
-        expected: [fr(reponse)],
+        expected: [fr(cas.v)],
         comparator: "number_equal",
-        canvas: {
-          kind: "tableau_donnees",
-          title: "Temps de livraison (minutes)",
-          headers: ["Minimum", "Q1", "Médiane", "Q3", "Maximum"],
-          rows: [{ label: "Valeurs", values: [mini, q1, med, q3, maxi] }],
-        },
+        canvas: { kind: "diagramme_boite", titre: `${c.serie} (${c.unite})`, series: [b], size: { width: 320 } },
         explanation: exp(
           "Un diagramme en boîte se lit sur cinq nombres : minimum, premier quartile, médiane, troisième quartile, maximum.",
-          "L'étendue est la différence entre le maximum et le minimum ; les quartiles et la médiane se lisent directement.",
-          question === "étendue"
-            ? `$${maxi} - ${mini} = ${maxi - mini}$.`
-            : `La valeur cherchée se lit directement dans le tableau : $${reponse}$.`,
-          `${question === "étendue" ? "L'étendue" : `La ${question}`} vaut $${fr(reponse)}$ minutes.`
+          "Les quartiles et la médiane se lisent sur la boîte ; l'étendue et l'écart interquartile sont des DIFFÉRENCES.",
+          cas.calc,
+          `${cas.nom.charAt(0).toUpperCase()}${cas.nom.slice(1)} vaut $${fr(cas.v)}$ ${c.unite}.`
         ),
       };
     },
   },
 
   {
-    // ANGLE 2 — ce que le nombre VEUT DIRE. Le premier item fait relever une
-    // valeur du résumé ; celui-ci part de la phrase — « le quart des livraisons
-    // les plus longues » — et demande quel nombre la porte. Un élève peut lire
-    // Q3 sans savoir ce qu'il partage, et c'est cette lecture-là qu'on attend
-    // de lui au bac.
-    // ⚠️ Le résumé est donné en tableau, comme dans le premier item : le coach
-    // ne sait pas encore dessiner une boîte à moustaches.
+    // ANGLE 2 — ce que le nombre VEUT DIRE : « le quart des valeurs les plus
+    // basses », et quel nombre la porte.
     kind: "template",
     id: "stmg_stat_boite_tpl_2",
     niveau: "stmg",
@@ -1796,39 +2067,126 @@ export const automatismesGraphiquesBank: TutorBankItemV4[] = [
     hint: "Le premier quartile laisse un quart des valeurs en dessous de lui, le troisième en laisse trois quarts.",
     tags: ["stmg", "maths", "statistiques", "canvas", "boite", "quartiles", "template"],
     generate: () => {
-      const mini = randomInt(2, 6) * 5;
-      const q1 = mini + randomInt(2, 4) * 5;
-      const med = q1 + randomInt(2, 4) * 5;
-      const q3 = med + randomInt(2, 4) * 5;
-      const maxi = q3 + randomInt(2, 4) * 5;
+      const c = pick(BOITE_CONTEXTES);
+      const b = cinqNombresBoite(c);
       const cas = pick([
-        { question: "sépare le quart des livraisons les plus rapides du reste de la série", valeur: q1 },
-        { question: "partage la série en deux moitiés", valeur: med },
-        { question: "sépare le quart des livraisons les plus longues du reste de la série", valeur: q3 },
-      ] as const);
-      const ecrire = (v: number) => `$${fr(v)}$ minutes`;
+        { question: "sépare le quart des valeurs les plus basses du reste de la série", valeur: b.q1 },
+        { question: "partage la série en deux moitiés de même effectif", valeur: b.mediane },
+        { question: "sépare le quart des valeurs les plus hautes du reste de la série", valeur: b.q3 },
+        { question: "est dépassée par environ trois quarts des valeurs", valeur: b.q1 },
+        { question: "est dépassée par environ un quart des valeurs seulement", valeur: b.q3 },
+      ]);
+      const ecrire = (v: number) => `$${fr(v)}$ ${c.unite}`;
       return {
-        text:
-          `Le tableau résume les temps de livraison, en minutes. ` +
-          `Quelle valeur ${cas.question} ?`,
+        text: `${amorceBoite(c)} Quelle valeur ${cas.question} ?`,
         format: "qcm",
-        // Les quatre valeurs sont strictement croissantes par construction :
-        // aucune ne peut en désigner une autre.
-        choices: shuffle([ecrire(q1), ecrire(med), ecrire(q3), ecrire(maxi)]),
+        // Quatre valeurs strictement croissantes par construction : jamais deux choix égaux.
+        choices: shuffle([ecrire(b.q1), ecrire(b.mediane), ecrire(b.q3), ecrire(b.max)]),
         expected: [ecrire(cas.valeur)],
         comparator: "mcq_exact",
-        canvas: {
-          kind: "tableau_donnees",
-          title: "Temps de livraison (minutes)",
-          headers: ["Minimum", "Q1", "Médiane", "Q3", "Maximum"],
-          rows: [{ label: "Valeurs", values: [mini, q1, med, q3, maxi] }],
-        },
+        canvas: { kind: "diagramme_boite", titre: `${c.serie} (${c.unite})`, series: [b], size: { width: 320 } },
         explanation: exp(
           "Les quartiles découpent une série ordonnée en quatre groupes de même effectif : un quart des valeurs sont inférieures à $Q_1$, la moitié à la médiane, trois quarts à $Q_3$.",
-          "On traduit la phrase en proportion, puis on va chercher le nombre qui porte cette proportion dans le résumé.",
-          `Ici $Q_1 = ${fr(q1)}$, médiane $= ${fr(med)}$, $Q_3 = ${fr(q3)}$, maximum $= ${fr(maxi)}$. ` +
-            `Le maximum, lui, ne sépare rien : toutes les livraisons sont en dessous.`,
+          "On traduit la phrase en proportion, puis on va chercher le nombre qui porte cette proportion sur la boîte.",
+          `Ici $Q_1 = ${fr(b.q1)}$, médiane $= ${fr(b.mediane)}$, $Q_3 = ${fr(b.q3)}$, maximum $= ${fr(b.max)}$. Le maximum ne sépare rien : toutes les valeurs sont en dessous.`,
           `La valeur cherchée est ${ecrire(cas.valeur)}.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 3 — le POURCENTAGE porté par un quartile, sur un cas chiffré.
+    kind: "template",
+    id: "stmg_stat_boite_tpl_3",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_donnees_graphiques",
+    microId: "auto_stat_boite",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Repère la valeur sur la boîte : est-ce $Q_1$, la médiane ou $Q_3$ ? Chacun coupe la série en quarts.",
+    tags: ["stmg", "maths", "statistiques", "canvas", "boite", "quartiles", "template", "short"],
+    generate: () => {
+      const c = pick(BOITE_CONTEXTES);
+      const b = cinqNombresBoite(c);
+      const cas = pick([
+        { phrase: `supérieures ou égales à $${fr(b.q3)}$`, p: 25, pourquoi: `$${fr(b.q3)}$ est $Q_3$ : un quart des valeurs au moins l'atteignent ou le dépassent.` },
+        { phrase: `inférieures ou égales à $${fr(b.q3)}$`, p: 75, pourquoi: `$${fr(b.q3)}$ est $Q_3$ : trois quarts des valeurs au moins sont en dessous.` },
+        { phrase: `inférieures ou égales à $${fr(b.q1)}$`, p: 25, pourquoi: `$${fr(b.q1)}$ est $Q_1$ : un quart des valeurs au moins sont en dessous.` },
+        { phrase: `inférieures ou égales à $${fr(b.mediane)}$`, p: 50, pourquoi: `$${fr(b.mediane)}$ est la médiane : la moitié des valeurs au moins sont en dessous.` },
+        { phrase: `comprises entre $${fr(b.q1)}$ et $${fr(b.q3)}$`, p: 50, pourquoi: `De $Q_1$ à $Q_3$ : la boîte contient la moitié centrale des valeurs.` },
+      ]);
+      return {
+        text: `${amorceBoite(c)} Environ quel pourcentage des valeurs sont ${cas.phrase} ${c.unite} ?`,
+        format: "short",
+        expected: [String(cas.p)],
+        comparator: "number_equal",
+        canvas: { kind: "diagramme_boite", titre: `${c.serie} (${c.unite})`, series: [b], size: { width: 320 } },
+        explanation: exp(
+          "Les quartiles et la médiane coupent la série en quatre parts d'environ $25\\,\\%$ chacune.",
+          "On identifie la valeur sur la boîte, puis on compte les quarts concernés.",
+          cas.pourquoi,
+          `Environ $${cas.p}\\,\\%$ des valeurs.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 4 — COMPARER deux séries : médiane ou dispersion.
+    kind: "template",
+    id: "stmg_stat_boite_tpl_4",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_donnees_graphiques",
+    microId: "auto_stat_boite",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "La médiane est le trait intérieur ; la dispersion se lit sur la LARGEUR de la boîte (l'écart interquartile).",
+    tags: ["stmg", "maths", "statistiques", "canvas", "boite", "template"],
+    generate: () => {
+      const c = pick(BOITE_CONTEXTES);
+      let b1 = cinqNombresBoite(c);
+      let b2 = cinqNombresBoite(c);
+      const critere = pick(["médiane", "écart"] as const);
+      const val = (b: typeof b1) => (critere === "médiane" ? b.mediane : b.q3 - b.q1);
+      for (let essai = 0; essai < 40 && val(b1) === val(b2); essai++) b2 = cinqNombresBoite(c);
+      if (val(b1) === val(b2)) {
+        // Repli : on écarte les deux séries d'un pas, sur le critère demandé.
+        const d = c.pas;
+        b1 =
+          critere === "médiane"
+            ? { min: b1.min + d, q1: b1.q1 + d, mediane: b1.mediane + d, q3: b1.q3 + d, max: b1.max + d }
+            : { ...b1, q3: b1.q3 + d, max: b1.max + d };
+      }
+      const [g1, g2] = c.groupes;
+      const bonne = val(b1) > val(b2) ? g1 : g2;
+      return {
+        text:
+          `${amorceBoite(c)} Deux groupes sont comparés : « ${g1} » et « ${g2} ». ` +
+          (critere === "médiane"
+            ? "Quel groupe a la plus grande médiane ?"
+            : "Quel groupe a les valeurs les plus DISPERSÉES, au sens de l'écart interquartile ?"),
+        format: "qcm",
+        choices: shuffle([g1, g2, "les deux groupes sont à égalité"]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: {
+          kind: "diagramme_boite",
+          titre: `${c.serie} (${c.unite})`,
+          series: [{ label: g1, ...b1 }, { label: g2, ...b2, couleur: "#059669" }],
+          size: { width: 320 },
+        },
+        explanation: exp(
+          critere === "médiane"
+            ? "La médiane partage chaque série en deux moitiés : c'est le trait intérieur de chaque boîte."
+            : "L'écart interquartile $Q_3 - Q_1$ mesure la dispersion de la moitié centrale : c'est la largeur de la boîte.",
+          "On lit la grandeur sur chaque boîte, puis on compare.",
+          critere === "médiane"
+            ? `« ${g1} » : $${fr(b1.mediane)}$ ; « ${g2} » : $${fr(b2.mediane)}$.`
+            : `« ${g1} » : $${fr(b1.q3)} - ${fr(b1.q1)} = ${fr(b1.q3 - b1.q1)}$ ; « ${g2} » : $${fr(b2.q3)} - ${fr(b2.q1)} = ${fr(b2.q3 - b2.q1)}$.`,
+          `C'est « ${bonne} ».`
         ),
       };
     },
@@ -1845,29 +2203,30 @@ export const automatismesGraphiquesBank: TutorBankItemV4[] = [
     microId: "auto_stat_graphique_donnees",
     difficulty: 2,
     theme: "neutral",
-    hint: "Additionne les hauteurs de toutes les barres.",
+    hint: "Relève la valeur de chaque bâton, puis additionne-les.",
     tags: ["stmg", "maths", "statistiques", "canvas", "template", "short"],
     generate: () => {
-      const cat = pick(CATEGORIES);
-      const valeurs = cat.labels.map(() => randomInt(2, 15) * 10);
+      const c = pick(STAT_CONTEXTES);
+      const valeurs = c.labels.map(() => randomInt(2, 15) * c.pas);
       const total = valeurs.reduce((s, v) => s + v, 0);
       return {
-        text: `D'après le diagramme, quel est le total, toutes catégories confondues ?`,
+        text:
+          `${amorceStat(c)} ` +
+          pick([
+            "D'après le diagramme, quel est le total, toutes catégories confondues ?",
+            "Quel total faut-il écrire dans la dernière case du tableau des données ?",
+            "En reprenant le diagramme sous forme de tableau, quel est l'effectif total ?",
+          ]) +
+          ` (en ${c.unite})`,
         format: "short",
         expected: [fr(total)],
         comparator: "number_equal",
-        canvas: {
-          kind: "stat_graph",
-          graphType: "batons",
-          title: cat.titre,
-          data: cat.labels.map((label, i) => ({ label, value: valeurs[i] })),
-          display: { showValues: true, showLabels: true },
-        },
+        canvas: canvasBarres(c, valeurs, { valeurs: true, batons: true }),
         explanation: exp(
           "Passer du graphique aux données, c'est relever chaque valeur pour reconstituer le tableau.",
-          "On lit la hauteur de chaque barre, puis on additionne.",
-          `$${valeurs.join(" + ")} = ${fr(total)}$.`,
-          `Le total vaut $${fr(total)}$.`
+          "On lit la valeur de chaque bâton, puis on additionne.",
+          `$${valeurs.map((v) => fr(v)).join(" + ")} = ${fr(total)}$.`,
+          `Le total vaut $${fr(total)}$ ${c.unite}.`
         ),
       };
     },
@@ -1885,44 +2244,83 @@ export const automatismesGraphiquesBank: TutorBankItemV4[] = [
     hint: "Rapporte la valeur de la catégorie au total de toutes les catégories.",
     tags: ["stmg", "maths", "statistiques", "canvas", "template"],
     generate: () => {
-      const cat = pick(CATEGORIES);
+      const c = pick(STAT_CONTEXTES);
       // Un total de 200 rend le pourcentage calculable de tête.
       const parts = shuffle([10, 20, 30, 40, 50, 60, 70]).slice(0, 3);
-      const somme = parts.reduce((s, v) => s + v, 0);
-      const valeurs = [...parts, 200 - somme];
+      const valeurs = [...parts, 200 - parts.reduce((s, v) => s + v, 0)];
       const k = randomInt(0, 3);
-      const pct = (valeurs[k] / 200) * 100;
+      const pct = valeurs[k] / 2;
       return {
-        text: `D'après le diagramme, quel pourcentage du total représente la catégorie « ${cat.labels[k]} » ?`,
+        text:
+          `${amorceStat(c)} ` +
+          pick([
+            `Quel pourcentage du total représente la catégorie « ${c.labels[k]} » ?`,
+            `Dans un tableau de fréquences tiré de ce diagramme, quel pourcentage faut-il écrire pour « ${c.labels[k]} » ?`,
+          ]),
         format: "qcm",
         choices: makeChoices(`$${fr(pct)}\\,\\%$`, [
           `$${fr(valeurs[k])}\\,\\%$`,
           `$${fr(100 - pct)}\\,\\%$`,
-          `$${fr(pct * 2)}\\,\\%$`,
+          `$${fr(pct * 2 + 5)}\\,\\%$`,
           `$${fr(pct / 2)}\\,\\%$`,
-          `$${fr(Math.round((200 / valeurs[k]) * 10) / 10)}\\,\\%$`,
         ]),
         expected: [`$${fr(pct)}\\,\\%$`],
         comparator: "mcq_exact",
-        canvas: {
-          kind: "stat_graph",
-          graphType: "barres",
-          title: cat.titre,
-          data: cat.labels.map((label, i) => ({ label, value: valeurs[i] })),
-          display: { showValues: true, showLabels: true },
-        },
+        canvas: canvasBarres(c, valeurs, { valeurs: true }),
         explanation: exp(
           "Une part se calcule en divisant l'effectif de la catégorie par l'effectif total.",
           "On relève toutes les valeurs sur le graphique, on fait le total, puis on rapporte la catégorie à ce total.",
           `Total : $${valeurs.join(" + ")} = 200$. Puis $\\dfrac{${valeurs[k]}}{200} = ${fr(pct / 100)}$, soit $${fr(pct)}\\,\\%$.`,
-          `« ${cat.labels[k]} » représente $${fr(pct)}\\,\\%$ du total.`
+          `« ${c.labels[k]} » représente $${fr(pct)}\\,\\%$ du total.`
         ),
-        choiceDiagnostics: [
-          {
-            choice: `$${fr(valeurs[k])}\\,\\%$`,
-            cause: "a lu l'effectif comme un pourcentage, sans le rapporter au total",
-          },
-        ],
+        choiceDiagnostics:
+          valeurs[k] === pct ? [] : [{ choice: `$${fr(valeurs[k])}\\,\\%$`, cause: "a lu l'effectif comme un pourcentage, sans le rapporter au total" }],
+      };
+    },
+  },
+
+  {
+    // ANGLE 3 — des DONNÉES au graphique : à quelle hauteur monter la barre,
+    // sur un axe gradué de pas en pas.
+    kind: "template",
+    id: "stmg_stat_graphique_donnees_tpl_3",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_donnees_graphiques",
+    microId: "auto_stat_graphique_donnees",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Divise la valeur de la catégorie par ce que vaut UNE graduation.",
+    tags: ["stmg", "maths", "statistiques", "canvas", "template", "short"],
+    generate: () => {
+      const c = pick(STAT_CONTEXTES);
+      const pas = c.pas * pick([1, 2] as const);
+      const valeurs = c.labels.map(() => randomInt(2, 12) * pas);
+      const k = randomInt(0, 3);
+      const crans = valeurs[k] / pas;
+      return {
+        text:
+          `${c.metier} veut tracer le diagramme en barres « ${c.titre} » à partir du tableau. ` +
+          `L'axe vertical part de $0$ et chaque graduation vaut $${fr(pas)}$ ${c.unite}. ` +
+          pick([
+            `Jusqu'à combien de graduations la barre « ${c.labels[k]} » doit-elle monter ?`,
+            `Combien de graduations la barre « ${c.labels[k]} » doit-elle couvrir ?`,
+          ]),
+        format: "short",
+        expected: [String(crans)],
+        comparator: "number_equal",
+        canvas: {
+          kind: "tableau_donnees",
+          title: c.titre,
+          headers: ["Catégorie", ...c.labels],
+          rows: [{ label: `Valeur (${c.unite})`, values: valeurs.map((v) => fr(v)) }],
+        },
+        explanation: exp(
+          "Dans un diagramme en barres, la hauteur d'une barre est PROPORTIONNELLE à la valeur : on la mesure en graduations.",
+          "On divise la valeur de la catégorie par la valeur d'une graduation.",
+          `$${fr(valeurs[k])} \\div ${fr(pas)} = ${crans}$.`,
+          `La barre « ${c.labels[k]} » monte jusqu'à la ${crans}${crans === 1 ? "re" : "e"} graduation.`
+        ),
       };
     },
   },

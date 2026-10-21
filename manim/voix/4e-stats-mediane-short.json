@@ -1,0 +1,5 @@
+{
+  "00-accroche": "Sept jours de soleil sur un toit. Quelle production est pile au milieu ? Pas si simple !",
+  "01-image": "La production, en kilowattheures : 14, 9, 16, 12, 15, 6, 13. On range du plus petit au plus grand… 6, 9, 12, 13, 14, 15, 16. Au milieu : 13 ! 3 jours en dessous, 3 jours au-dessus : c'est la médiane.",
+  "02-question": "Et si un huitième jour produit 20 kilowattheures, quelle est la nouvelle médiane ? Réponds en commentaire !"
+}

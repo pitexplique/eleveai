@@ -1,0 +1,12 @@
+{
+  "00-garde": "Effectif ou fréquence : lequel permet de comparer deux groupes ?",
+  "01-situation": "Une designer industrielle dessine des ciseaux pour gauchers. Combien faut-il en fabriquer ? Elle a besoin de savoir quelle part des élèves est gauchère.",
+  "02-effectif": "Dans une classe de 25 élèves, 3 sont gauchers. 3, c'est l'effectif des gauchers. 25, c'est l'effectif total.",
+  "03-frequence": "La fréquence, c'est l'effectif divisé par l'effectif total. 3 divisé par 25, égale 0,12. En pourcentage : 0,12, c'est 12 %.",
+  "04-comparer": "Dans le club de judo, il y a 4 gauchers sur 40. 4, c'est plus que 3. Mais 4 divisé par 40, égale 0,1, soit 10 %. En proportion, il y en a moins qu'en classe !",
+  "05-piege": "Le piège : comparer les effectifs de deux groupes de tailles différentes. Pour comparer, je compare les fréquences : 12 % contre 10 %. Et une fréquence est toujours comprise entre 0 et 1.",
+  "06-defi": "À toi de jouer. Le collège compte 300 élèves, et la fréquence des gauchers est 0,1. Combien de paires de ciseaux pour gauchers faut-il ? Et quelle est la fréquence de 6 gauchers sur 50 élèves ? Mets pause, et cherche !",
+  "06b-correction": "Correction. 300 fois 0,1, égale 30 paires de ciseaux. Et 6 divisé par 50, égale 0,12, soit 12 %.",
+  "07-finale": "Ce que tu as appris. L'effectif, c'est un nombre d'individus. La fréquence, c'est l'effectif divisé par l'effectif total, en nombre décimal ou en pourcentage. Pour comparer deux groupes, je compare les fréquences.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

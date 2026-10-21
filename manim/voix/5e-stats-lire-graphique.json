@@ -1,0 +1,13 @@
+{
+  "00-garde": "Un diagramme en barres, avec des petits traits sur l'axe : sais-tu le lire ?",
+  "01-situation": "Une game designer crée un jeu vidéo de cinq niveaux. Elle veut savoir où les joueurs abandonnent. Le jeu compte les abandons à chaque niveau, et les montre dans un diagramme.",
+  "02-axes": "En bas, les niveaux, de 1 à 5. Sur le côté, le nombre de joueurs : 0, 10, 20, 30… Entre deux nombres, un petit trait : il vaut 5.",
+  "03-lire": "Niveau 2 : je monte en haut de la barre, puis je vais vers les nombres : 20 joueurs. Niveau 1 : la barre s'arrête au petit trait entre 30 et 40 : 35 joueurs.",
+  "04-max": "Quelle barre est la plus haute ? Celle du niveau 3 : au petit trait entre 70 et 80, donc 75 abandons. Ce niveau est trop difficile : la game designer va le corriger !",
+  "05-total": "Combien d'abandons en tout ? Je lis chaque barre : 35, 20, 75, 15 et 5. J'additionne : 35 plus 20 plus 75 plus 15 plus 5, égale 150.",
+  "06-piege": "Le piège : compter les carreaux de la grille comme des joueurs. Un carreau, ce n'est pas 1 joueur : c'est 10 ! Je lis toujours les nombres de l'axe.",
+  "07-defi": "À toi de jouer. Combien d'abandons de plus au niveau 3 qu'au niveau 1 ? Et combien au niveau 4 ou au niveau 5 ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 75 moins 35, égale 40 abandons de plus. Niveau 4 ou niveau 5 : 15 plus 5, égale 20 abandons.",
+  "08-finale": "Ce que tu as appris. Je lis le titre, les catégories et l'axe. Je monte en haut de la barre, puis je vais vers les nombres. Et je regarde ce que vaut un petit trait.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

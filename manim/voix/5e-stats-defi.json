@@ -1,0 +1,13 @@
+{
+  "00-garde": "Un problème de statistiques en plusieurs étapes : es-tu prêt pour le défi ?",
+  "01-situation": "Une cheffe de centre de pompiers prépare ses équipes. Combien d'interventions par jour, en moyenne ? Elle a relevé 20 jours.",
+  "02-diagramme": "Voici le diagramme en bâtons. En bas, le nombre d'interventions dans la journée. La hauteur, le nombre de jours. 1 intervention : 4 jours. 2 interventions : 6 jours. 3 : 8 jours. 4 : 2 jours.",
+  "03-total": "D'abord, l'effectif total : 4 plus 6 plus 8 plus 2, égale 20 jours. C'est bien le nombre de jours relevés.",
+  "04-somme": "Ensuite, le nombre total d'interventions. 4 jours à 1 intervention : 4 fois 1. Puis 6 fois 2, 8 fois 3, et 2 fois 4. 4 plus 12 plus 24 plus 8, égale 48 interventions.",
+  "05-moyenne": "Enfin, la moyenne : 48 divisé par 20, égale 2,4 interventions par jour.",
+  "06-piege": "Le piège : faire la moyenne de 1, 2, 3 et 4, sans tenir compte des effectifs. Ça donnerait 2,5 : c'est faux ! Chaque valeur compte autant de fois que son effectif.",
+  "07-defi": "À toi de jouer. Le 21e jour, un feu de forêt : 15 interventions ! Quelle est la nouvelle moyenne sur les 21 jours ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Nouveau total : 48 plus 15, égale 63 interventions. 63 divisé par 21, égale 3. Un seul jour extrême, et la moyenne passe de 2,4 à 3 !",
+  "08-finale": "Ce que tu as appris. Avec un diagramme, je multiplie chaque valeur par son effectif. Je divise par l'effectif total. Et une valeur extrême peut tirer la moyenne.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -74,6 +74,9 @@ function exp(definition: string, methode: string, calcul: string, conclusion: st
 
 type Contexte = {
   sujet: string;
+  /** QUI a mené l'étude — un métier, pour que les maths se voient servir
+   *  (21/10/2026 : les énoncés sans contexte revenaient mot pour mot). */
+  auteur: string;
   /** Les deux modalités du caractère en LIGNE. */
   lignes: [string, string];
   /**
@@ -122,6 +125,7 @@ function ceuxQui(ctx: Contexte): string {
 const CONTEXTES: readonly Contexte[] = [
   {
     sujet: "Contrôle qualité à la réception",
+    auteur: "Un responsable qualité",
     lignes: ["Fournisseur A", "Fournisseur B"],
     colonnes: ["Lot conforme", "Lot non conforme"],
     individu: "lots",
@@ -129,6 +133,7 @@ const CONTEXTES: readonly Contexte[] = [
   },
   {
     sujet: "Satisfaction de la clientèle",
+    auteur: "Une chargée de relation client",
     lignes: ["Achat en ligne", "Achat en magasin"],
     colonnes: ["Client satisfait", "Client insatisfait"],
     individu: "clients",
@@ -136,6 +141,7 @@ const CONTEXTES: readonly Contexte[] = [
   },
   {
     sujet: "Ponctualité des livraisons",
+    auteur: "Un responsable logistique",
     lignes: ["Transporteur Nord", "Transporteur Sud"],
     colonnes: ["Livraison à l'heure", "Livraison en retard"],
     individu: "livraisons",
@@ -143,6 +149,7 @@ const CONTEXTES: readonly Contexte[] = [
   },
   {
     sujet: "Organisation du travail",
+    auteur: "Une responsable des ressources humaines",
     lignes: ["Cadres", "Employés"],
     colonnes: ["Télétravaille", "Ne télétravaille pas"],
     individu: "salariés",
@@ -150,6 +157,7 @@ const CONTEXTES: readonly Contexte[] = [
   },
   {
     sujet: "Conditionnement en fromagerie",
+    auteur: "Un technicien de production",
     lignes: ["Chaîne 1", "Chaîne 2"],
     colonnes: ["Poids conforme", "Poids hors tolérance"],
     individu: "camemberts",
@@ -157,6 +165,7 @@ const CONTEXTES: readonly Contexte[] = [
   },
   {
     sujet: "Contrôle des conteneurs au port",
+    auteur: "Une inspectrice sanitaire",
     lignes: ["Navire du matin", "Navire du soir"],
     colonnes: ["Chaîne du froid tenue", "Chaîne du froid rompue"],
     individu: "conteneurs",
@@ -164,12 +173,48 @@ const CONTEXTES: readonly Contexte[] = [
   },
   {
     sujet: "Renouvellement des abonnements",
+    auteur: "Un chargé de fidélisation",
     lignes: ["Abonnement mensuel", "Abonnement annuel"],
     colonnes: ["A renouvelé", "N'a pas renouvelé"],
     individu: "abonnés",
     genre: "m",
   },
+  // ⭐ 21/10/2026 — quinze contextes de plus (santé, RH, environnement, sport,
+  // culture, marketing) : à sept, la même phrase revenait une fois sur deux.
+  { sujet: "Vaccination contre la grippe", auteur: "Un médecin de santé publique", lignes: ["Moins de 65 ans", "65 ans et plus"], colonnes: ["Vacciné", "Non vacciné"], individu: "patients", genre: "m" },
+  { sujet: "Trajets domicile-travail", auteur: "Une chargée de mobilité durable", lignes: ["Moins de 10 km", "10 km ou plus"], colonnes: ["Vient à vélo", "Ne vient pas à vélo"], individu: "salariés", genre: "m" },
+  { sujet: "Tri des déchets à la cantine", auteur: "Un responsable environnement", lignes: ["Service du midi", "Service du soir"], colonnes: ["Plateau trié", "Plateau non trié"], individu: "plateaux", genre: "m" },
+  { sujet: "Résultats à l'examen du permis", auteur: "Une gérante d'auto-école", lignes: ["Conduite accompagnée", "Formation classique"], colonnes: ["Reçu", "Ajourné"], individu: "candidats", genre: "m" },
+  { sujet: "Renouvellement des licences", auteur: "Un dirigeant de club de handball", lignes: ["Licence loisir", "Licence compétition"], colonnes: ["A repris sa licence", "N'a pas repris sa licence"], individu: "licenciés", genre: "m" },
+  { sujet: "Retours des colis vendus en ligne", auteur: "Une responsable du service après-vente", lignes: ["Vêtements", "Chaussures"], colonnes: ["Colis gardé", "Colis retourné"], individu: "colis", genre: "m" },
+  { sujet: "Paiement des factures", auteur: "Un comptable", lignes: ["Clients particuliers", "Clients professionnels"], colonnes: ["Payée à temps", "Payée en retard"], individu: "factures", genre: "f" },
+  { sujet: "Recrutement des stagiaires", auteur: "Une chargée de recrutement", lignes: ["Candidature spontanée", "Réponse à une offre"], colonnes: ["Retenue", "Non retenue"], individu: "candidatures", genre: "f" },
+  { sujet: "Isolation des logements", auteur: "Un conseiller en rénovation énergétique", lignes: ["Maison", "Appartement"], colonnes: ["Logement isolé", "Logement non isolé"], individu: "logements", genre: "m" },
+  { sujet: "Visites d'un musée", auteur: "Une médiatrice culturelle", lignes: ["Visiteurs français", "Visiteurs étrangers"], colonnes: ["A pris l'audioguide", "N'a pas pris l'audioguide"], individu: "visiteurs", genre: "m" },
+  { sujet: "Réservations d'un hôtel", auteur: "Une directrice d'hôtel", lignes: ["Réservation en ligne", "Réservation par téléphone"], colonnes: ["Séjour maintenu", "Séjour annulé"], individu: "réservations", genre: "f" },
+  { sujet: "Ventes d'une concession automobile", auteur: "Un chef des ventes", lignes: ["Voiture électrique", "Voiture thermique"], colonnes: ["Payée comptant", "Payée à crédit"], individu: "ventes", genre: "f" },
+  { sujet: "Campagne publicitaire en ligne", auteur: "Une chargée de marketing numérique", lignes: ["Publicité vue sur mobile", "Publicité vue sur ordinateur"], colonnes: ["A cliqué", "N'a pas cliqué"], individu: "internautes", genre: "m" },
+  { sujet: "Suivi des formations", auteur: "Un responsable de la formation", lignes: ["Formation en présentiel", "Formation à distance"], colonnes: ["Formation terminée", "Formation abandonnée"], individu: "inscrits", genre: "m" },
+  { sujet: "Venue des festivaliers", auteur: "Une organisatrice de festival", lignes: ["Billet en prévente", "Billet sur place"], colonnes: ["Venu en transport en commun", "Venu en voiture"], individu: "festivaliers", genre: "m" },
 ] as const;
+
+/** « Un responsable qualité » → « un responsable qualité ». */
+function minuscule(s: string): string {
+  return s.charAt(0).toLowerCase() + s.slice(1);
+}
+
+/**
+ * La phrase d'entrée : qui a mené l'étude, et sur quoi. Trois tournures × 22
+ * contextes, devant des consignes qui étaient FIXES (« Une case du tableau a été
+ * effacée… ») : c'est elle qui empêche la même phrase de revenir.
+ */
+function amorce(ctx: Contexte): string {
+  return pick([
+    `${ctx.auteur} a dressé ce tableau croisé : « ${ctx.sujet} ».`,
+    `${ctx.auteur} présente une étude intitulée « ${ctx.sujet} ».`,
+    `Étude « ${ctx.sujet} », menée par ${minuscule(ctx.auteur)}.`,
+  ]);
+}
 
 /** Un tableau croisé complet : 2 lignes, 2 colonnes, plus les marges. */
 type Tableau = {
@@ -546,7 +591,7 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
         cle === "a" ? t.b : cle === "b" ? t.a : cle === "c" ? t.d : t.c;
       const nomLigne = cle === "a" || cle === "b" ? t.ctx.lignes[0] : t.ctx.lignes[1];
       return {
-        text: "Une case du tableau a été effacée. Quelle valeur doit y figurer ?",
+        text: `${amorce(t.ctx)} ${pick(["Une case du tableau a été effacée.", "Une case du tableau est illisible.", "Une valeur manque dans le tableau."])} ${pick(["Quelle valeur doit y figurer ?", "Retrouve la valeur manquante.", "Quel nombre faut-il y écrire ?"])}`,
         format: "short",
         expected: [String(valeur)],
         comparator: "number_equal",
@@ -597,7 +642,7 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
               `Puis, sur la ligne « ${t.ctx.lignes[1]} » : $${t.ligne2} - ${t.c} = ${t.d}$.`;
       return {
         text:
-          `Trois cases du tableau ont été effacées, mais toutes les marges sont connues. ` +
+          `${amorce(t.ctx)} Trois cases du tableau ont été effacées, mais toutes les marges sont connues. ` +
           `Quelle valeur doit figurer au croisement de « ${nomLigne} » et « ${nomColonne} » ?`,
         format: "short",
         expected: [String(valeur)],
@@ -630,7 +675,7 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
       const t = tirerTableau();
       return {
         text:
-          `Une étude porte sur $${t.total}$ ${t.ctx.individu}. ` +
+          `${amorce(t.ctx)} L'étude porte sur $${t.total}$ ${t.ctx.individu}. ` +
           `$${t.ligne1}$ relèvent de « ${t.ctx.lignes[0]} », et parmi ${ceuxLa(t.ctx)} $${t.a}$ relèvent de « ${t.ctx.colonnes[0]} ». ` +
           `Par ailleurs, $${t.col1}$ ${t.ctx.individu} au total relèvent de « ${t.ctx.colonnes[0]} ». ` +
           `Combien ${de(t.ctx.individu)} relèvent à la fois de « ${t.ctx.lignes[1]} » et de « ${t.ctx.colonnes[1]} » ?`,
@@ -670,7 +715,7 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
       const t = tirerTableau();
       return {
         text:
-          `Une étude porte sur $${t.total}$ ${t.ctx.individu}. ` +
+          `${amorce(t.ctx)} L'étude porte sur $${t.total}$ ${t.ctx.individu}. ` +
           `$${t.ligne1}$ relèvent de « ${t.ctx.lignes[0]} », et parmi ${ceuxLa(t.ctx)} $${t.a}$ relèvent de « ${t.ctx.colonnes[0]} ». ` +
           `Parmi ${ceuxQui(t.ctx)} qui relèvent de « ${t.ctx.lignes[1]} », $${t.c}$ relèvent de « ${t.ctx.colonnes[0]} ». ` +
           `Au total, combien ${de(t.ctx.individu)} relèvent de « ${t.ctx.colonnes[1]} » ?`,
@@ -687,6 +732,64 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
           `Colonne « ${t.ctx.colonnes[0]} » : $${t.a} + ${t.c} = ${t.col1}$. ` +
             `Colonne « ${t.ctx.colonnes[1]} » : $${t.total} - ${t.col1} = ${t.col2}$.`,
           `$${t.col2}$ ${t.ctx.individu} relèvent de « ${t.ctx.colonnes[1]} ».`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 3 — les DONNÉES BRUTES, comme le dit l'intitulé : une liste
+    // d'individus avec leurs deux caractères, qu'il faut dépouiller soi-même.
+    kind: "template",
+    id: "stmg_don_tab_dresser_tpl_3",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "donnees_tableau_croise",
+    microId: "don_tab_dresser",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Dépouille la liste ligne par ligne : une coche dans la case du tableau croisé qui correspond aux DEUX caractères de chaque individu.",
+    tags: ["stmg", "maths", "donnees", "canvas", "template", "short"],
+    generate: () => {
+      const ctx = pick(CONTEXTES);
+      const n = randomInt(12, 16);
+      const liste = Array.from({ length: n }, () => ({ l: randomInt(0, 1), c: randomInt(0, 1) }));
+      const i = randomInt(0, 1);
+      const j = randomInt(0, 1);
+      const quoi = pick(["case", "ligne", "colonne"] as const);
+      const compte =
+        quoi === "case"
+          ? liste.filter((p) => p.l === i && p.c === j).length
+          : quoi === "ligne"
+            ? liste.filter((p) => p.l === i).length
+            : liste.filter((p) => p.c === j).length;
+      const question =
+        quoi === "case"
+          ? `Combien ${de(ctx.individu)} relèvent à la fois de « ${ctx.lignes[i]} » et de « ${ctx.colonnes[j]} » ?`
+          : quoi === "ligne"
+            ? `Quel est l'effectif total de la ligne « ${ctx.lignes[i]} » du tableau croisé ?`
+            : `Quel est l'effectif total de la colonne « ${ctx.colonnes[j]} » du tableau croisé ?`;
+      return {
+        text:
+          // Pas l'amorce commune : « a dressé ce tableau croisé » contredirait la consigne.
+          `${pick([`${ctx.auteur} a recueilli les données brutes de l'étude « ${ctx.sujet} ».`, `Étude « ${ctx.sujet} », menée par ${minuscule(ctx.auteur)} : voici les relevés bruts.`])} ` +
+          `La liste donne $${n}$ ${ctx.individu}, avec leurs deux caractères. ` +
+          `On veut en dresser le tableau croisé. ${question}`,
+        format: "short",
+        expected: [String(compte)],
+        comparator: "number_equal",
+        canvas: {
+          kind: "tableau_donnees",
+          title: `${ctx.sujet} — données brutes`,
+          headers: ["N°", "Premier caractère", "Second caractère"],
+          rows: liste.map((p, k) => ({ label: String(k + 1), values: [ctx.lignes[p.l], ctx.colonnes[p.c]] })),
+        },
+        explanation: exp(
+          "Dresser un tableau croisé à partir de données brutes, c'est compter, pour chaque couple de modalités, les individus qui les présentent toutes les deux.",
+          "On parcourt la liste une seule fois et l'on range chaque individu dans la case de son couple ; les marges s'obtiennent ensuite par addition.",
+          `Dans la liste, on compte $${compte}$ ${ctx.individu} qui conviennent` +
+            (quoi === "case" ? "." : ` (les deux cases de la ${quoi} réunies).`),
+          `La réponse est $${compte}$.`
         ),
       };
     },
@@ -720,8 +823,13 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
       const f = eff / t.total;
       return {
         text:
-          `Quelle est la fréquence marginale des ${t.ctx.individu} relevant de « ${libelle} », ` +
-          `en pourcentage arrondi au dixième ?`,
+          `${amorce(t.ctx)} ` +
+          pick([
+            `Quelle est la fréquence marginale des ${t.ctx.individu} relevant de « ${libelle} » ?`,
+            `Quelle part de l'ensemble des ${t.ctx.individu} relève de « ${libelle} » ?`,
+            `Sur l'ensemble de l'étude, quelle proportion des ${t.ctx.individu} relève de « ${libelle} » ?`,
+          ]) +
+          ` (en pourcentage arrondi au dixième)`,
         format: "short",
         expected: [pct(f)],
         comparator: "number_equal",
@@ -758,13 +866,19 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
       let t = tirerTableau();
       for (let essai = 0; essai < 60; essai++) {
         const p = [t.col1 / t.total, t.a / t.total, t.col1 / t.ligne1, t.a / t.col1].map(pct);
-        if (new Set(p).size === 4) break;
+        // … et le quotient « par la ligne » ne doit pas dépasser 100 % : un
+        // leurre à $129\,\%$ s'élimine sans réfléchir.
+        if (new Set(p).size === 4 && t.col1 < t.ligne1) break;
         t = tirerTableau();
       }
       const bonne = `$${pct(t.col1 / t.total)}\\,\\%$`;
       return {
         text:
-          `Quelle est la fréquence marginale des ${t.ctx.individu} relevant de « ${t.ctx.colonnes[0]} » ? ` +
+          `${amorce(t.ctx)} ` +
+          pick([
+            `Quelle est la fréquence marginale des ${t.ctx.individu} relevant de « ${t.ctx.colonnes[0]} » ? `,
+            `Quelle part de l'ensemble des ${t.ctx.individu} relève de « ${t.ctx.colonnes[0]} » ? `,
+          ]) +
           `(en pourcentage arrondi au dixième)`,
         format: "qcm",
         choices: makeChoices(bonne, [
@@ -974,9 +1088,9 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
       };
       return {
         text:
-          `Le tableau est incomplet. On sait que, parmi les ${ctx.individu} relevant de « ${ctx.lignes[0]} », ` +
+          `${amorce(ctx)} Le tableau est incomplet. On sait que, parmi les ${ctx.individu} relevant de « ${ctx.lignes[0]} », ` +
           `$${p1}\\,\\%$ relèvent de « ${ctx.colonnes[0]} ». ` +
-          `Combien cela représente-t-il ${de(ctx.individu)} ?`,
+          pick([`Combien cela représente-t-il ${de(ctx.individu)} ?`, `Quel effectif faut-il écrire dans la case manquante ?`, `Combien ${de(ctx.individu)} cela fait-il ?`]),
         format: "short",
         expected: [String(a)],
         comparator: "number_equal",
@@ -1036,7 +1150,7 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
       };
       return {
         text:
-          `Parmi les ${ctx.individu} relevant de « ${ctx.lignes[0]} », $${p}\\,\\%$ relèvent de ` +
+          `${amorce(ctx)} Parmi les ${ctx.individu} relevant de « ${ctx.lignes[0]} », $${p}\\,\\%$ relèvent de ` +
           `« ${ctx.colonnes[0]} » — soit $${a}$ ${ctx.individu}. ` +
           `Combien ${de(ctx.individu)} relèvent de « ${ctx.lignes[0]} » ?`,
         format: "short",
@@ -1080,7 +1194,7 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
           ? `l'ensemble des ${t.ctx.individu} relevant de « ${t.ctx.lignes[0]} »`
           : `l'ensemble des ${t.ctx.individu} relevant de « ${t.ctx.colonnes[0]} »`;
       return {
-        text: `Un journal écrit : ${phrase}\n\nSur quelle population ce pourcentage a-t-il été calculé ?`,
+        text: `${amorce(t.ctx)} ${pick(["Un journal en tire", "Un communiqué en tire", "Une infographie en tire", "Un rapport annuel en tire"])} cette phrase : ${phrase}\n\n${pick(["Sur quelle population ce pourcentage a-t-il été calculé ?", "Quelle est la population de référence de ce pourcentage ?", "Ce pourcentage est calculé parmi quels individus ?"])}`,
         format: "qcm",
         choices: makeChoices(bonne, [
           sens === "ligne"
@@ -1152,7 +1266,7 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
       const marginale =
         `$${pLigne}\\,\\%$ de l'ensemble des ${t.ctx.individu} relèvent de « ${t.ctx.colonnes[0]} ».`;
       return {
-        text: "D'après ce tableau, laquelle de ces quatre phrases est EXACTE ?",
+        text: `${amorce(t.ctx)} ${pick(["D'après ce tableau, laquelle de ces quatre phrases est EXACTE ?", "Quelle phrase, reprise dans un article, décrit correctement ce tableau ?", "Parmi ces quatre formulations, laquelle est juste ?"])}`,
         format: "qcm",
         choices: makeChoices(bonne, [inversee, mauvaisNombre, marginale]),
         expected: [bonne],
@@ -1164,7 +1278,7 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
           `Case croisée : $${t.a}$. Rapportée à la ligne « ${t.ctx.lignes[0]} » ($${t.ligne1}$) : $${pLigne}\\,\\%$. ` +
             `Rapportée à la colonne « ${t.ctx.colonnes[0]} » ($${t.col1}$) : $${pColonne}\\,\\%$. ` +
             `La fréquence marginale de la colonne, elle, vaut $${pMarginale}\\,\\%$.`,
-          `Seule la première formulation dit vrai : $${pLigne}\\,\\%$ se rapporte bien à « ${t.ctx.lignes[0]} ».`
+          `La phrase exacte est « ${bonne} » : $${pLigne}\\,\\%$ se rapporte bien à « ${t.ctx.lignes[0]} ».`
         ),
         choiceDiagnostics: [
           {

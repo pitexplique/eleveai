@@ -1,0 +1,13 @@
+{
+  "00-garde": "Interpréter des indicateurs : la moyenne dit-elle toute la vérité ?",
+  "01-situation": "Inès cherche son premier emploi. Sa conseillère emploi l'aide à lire les annonces avec un regard de statisticienne. Une entreprise affiche : « Chez nous, le salaire moyen est de 2 600 euros ! » Faut-il la croire ?",
+  "02-serie": "Voici les 7 salaires mensuels, en euros : 1 800, 1 900, 1 900, 2 000, 2 100, 2 300, et 6 200 pour le patron. La moyenne est bien de 2 600 : le total, 18 200, divisé par 7.",
+  "03-mediane": "Mais regarde la médiane. La série est rangée : la valeur du milieu est la quatrième, 2 000 euros. Au moins la moitié des salariés gagne 2 000 euros ou moins. Et 6 salariés sur 7 gagnent moins que la moyenne !",
+  "04-extreme": "Pourquoi ? Une seule valeur extrême, 6 200, tire la moyenne vers le haut. Sans le patron, la moyenne tombe à 12 000 divisé par 6, égale 2 000. La médiane, elle, passe seulement à 1 950. La médiane résiste aux valeurs extrêmes.",
+  "05-insee": "C'est vrai aussi pour toute la France. En 2023, d'après l'Insee, dans le secteur privé, le salaire net moyen est de 2 735 euros par mois, mais le salaire médian n'est que de 2 183 euros. Les très hauts salaires tirent la moyenne.",
+  "06-comparer": "Une autre entreprise a, elle aussi, une moyenne de 2 600 euros : 2 400, 2 500, 2 600, 2 600, 2 600, 2 700, 2 800. Même moyenne, mais son étendue n'est que de 400 euros, contre 4 400 pour la première. Ses salaires sont bien plus réguliers, et sa médiane vaut 2 600.",
+  "07-defi": "À toi de jouer. Une entreprise de 40 salariés annonce un salaire médian de 2 100 euros et un salaire moyen de 2 500 euros. Au moins combien de salariés gagnent 2 100 euros ou moins ? Et combien l'entreprise verse-t-elle en tout, chaque mois ? Mets pause, et cherche !",
+  "07b-correction": "Correction. La médiane coupe les 40 salariés en deux moitiés de 20 : au moins 20 salariés gagnent 2 100 euros ou moins. Le total, c'est la moyenne fois l'effectif : 2 500 fois 40, égale 100 000 euros par mois.",
+  "08-finale": "Ce que tu as appris. Une valeur extrême tire la moyenne, pas la médiane. La médiane dit : au moins la moitié en dessous, au moins la moitié au-dessus. Et à moyenne égale, l'étendue montre quelle série est la plus régulière.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

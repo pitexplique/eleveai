@@ -1,0 +1,12 @@
+{
+  "00-garde": "Défis sur les données. Une barre effacée, des catégories à regrouper : sauras-tu tout retrouver ?",
+  "01-situation": "Une linguiste étudie comment vivent les langues. Dans un collège de La Réunion, elle a demandé à 200 élèves quelle langue ils parlent le plus souvent à la maison. Mais sur son diagramme, une barre a été effacée !",
+  "02-efface": "Les barres qui restent : créole, 70 élèves. Les deux langues, 80. Une autre langue, 10. La barre du français a disparu.",
+  "03-retrouver": "Le total, lui, est connu : 200 élèves. J'additionne les barres visibles : 70 plus 80 plus 10, égale 160. Il manque 200 moins 160, égale 40. La barre du français monte à 40.",
+  "04-regrouper": "Quelle part des élèves parle créole à la maison, seul ou avec le français ? Je regroupe deux barres : 70 plus 80, égale 150. Puis je divise par le total : 150 divisé par 200, égale 0,75, soit 75 %.",
+  "05-piege": "Le piège : de combien la plus haute barre dépasse-t-elle la plus basse ? Pas 80 : ça, c'est la plus haute ! L'écart, c'est 80 moins 10, égale 70 élèves.",
+  "06-defi": "À toi de jouer. Dans tout le département, 600 élèves ont répondu. Le diagramme circulaire donne : créole, 35 %. Les deux langues, 45 %. Français, 15 %. Autre, 5 %. Combien d'élèves parlent les deux langues ? Mets pause, et cherche !",
+  "06b-correction": "Correction. 45 % de 600 : je cherche d'abord 1 % de 600. 600 divisé par 100, égale 6. Puis 45 fois 6, égale 270 élèves. Attention : 45, c'est le pourcentage, pas le nombre d'élèves !",
+  "07-finale": "Ce que tu as appris. Avec le total, je retrouve une barre effacée. Pour une fréquence, je divise toujours par le total. Et un pourcentage du total redonne un effectif.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

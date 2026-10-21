@@ -1,0 +1,13 @@
+{
+  "00-garde": "Interpréter des indicateurs. Que disent vraiment la moyenne, la médiane et l'étendue ?",
+  "01-situation": "Une analyste de données travaille pour un club de football. Elle résume la carrière des joueurs avec quelques nombres, pour aider le club à décider. Son exemple du jour : Kylian Mbappé, ses buts en championnat avec le PSG, saison par saison.",
+  "02-donnees": "De 2018 à 2024 : 33 buts, puis 18, 27, 28, 29 et 27. En tout, 162 buts en 6 saisons.",
+  "03-moyenne": "La moyenne : 162 divisé par 6, égale 27 buts par saison. Attention : il n'a pas marqué 27 buts chaque saison ! La moyenne, c'est ce qu'il aurait marqué si on partageait le total également.",
+  "04-mediane": "La médiane : je range les saisons. 18, 27, 27, 28, 29, 33. Il y en a 6 : la médiane est au milieu, entre 27 et 28. C'est 27,5. 3 saisons en dessous, 3 saisons au-dessus.",
+  "05-etendue": "L'étendue : 33 moins 18, égale 15 buts. C'est l'écart entre sa meilleure saison et sa moins bonne.",
+  "06-piege": "Mais pourquoi seulement 18 buts ? En mars 2020, le championnat s'est arrêté à cause du Covid : moins de matchs, donc moins de buts. Sans cette saison, la moyenne monte à 28,8. La médiane, elle, bouge à peine : 28. Une valeur à part tire la moyenne, beaucoup moins la médiane.",
+  "07-defi": "À toi de jouer. Lamine Yamal, au FC Barcelone, a marqué en championnat 5 buts, puis 9, puis 16, sur trois saisons. Calcule la moyenne et l'étendue. Puis, vrai ou faux : « il marque environ 10 buts chaque saison » ? Mets pause, et cherche !",
+  "07b-correction": "Correction. La moyenne : 5 plus 9 plus 16, égale 30. 30 divisé par 3, égale 10. L'étendue : 16 moins 5, égale 11. Alors, 10 buts chaque saison ? Faux ! L'étendue est grande : il progresse, de 5 à 16. La moyenne seule cache cette progression.",
+  "08-finale": "Ce que tu as appris. La moyenne partage le total également : ce n'est pas chaque valeur. La médiane coupe la série rangée en deux moitiés. L'étendue mesure l'écart entre les extrêmes. Et je regarde toujours les valeurs avant de conclure.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

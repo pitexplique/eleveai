@@ -1,0 +1,11 @@
+{
+  "00-garde": "Défi statistiques : décider avec des chiffres.",
+  "01-situation": "Dans une usine de vélos électriques, une ingénieure qualité contrôle les batteries. Avant d'envoyer un lot, elle en teste 25 : combien de kilomètres chacune tient-elle ? Sa règle : le lot part si la moyenne dépasse 80 kilomètres, et si au moins la moitié des batteries tient 80 kilomètres ou plus.",
+  "02-moyenne": "Ses résultats : 60 kilomètres : 2 batteries. 70 : 5. 80 : 9. 90 : 6. 100 : 3. Étape 1 : la moyenne pondérée. 60 fois 2, plus 70 fois 5, plus 80 fois 9, plus 90 fois 6, plus 100 fois 3, égale 2 030. Divisé par 25 : 81,2 kilomètres. C'est plus que 80 : premier critère validé.",
+  "03-mediane": "Étape 2 : la médiane. Avec 25 batteries, la médiane est la treizième valeur. Effectifs cumulés : 2, puis 7, puis 16. La treizième tombe dans la colonne 80 : la médiane est 80. Au moins la moitié des batteries tient 80 kilomètres ou plus : deuxième critère validé. Le lot peut partir !",
+  "04-objectif": "Étape 3 : la cheffe d'atelier veut une moyenne de 82 kilomètres avec une vingt-sixième batterie. Combien doit-elle tenir, au minimum ? La somme visée : 82 fois 26, égale 2 132. Il manque 2 132 moins 2 030, égale 102 kilomètres. La dernière batterie doit tenir au moins 102 kilomètres.",
+  "05-defi": "À toi de jouer. L'usine a deux chaînes de montage. Chaîne A : 30 batteries, avec une moyenne de 85 kilomètres. Les deux chaînes ensemble : 50 batteries, avec une moyenne de 82 kilomètres. Quelle est la moyenne de la chaîne B ? Mets pause, et cherche !",
+  "05b-correction": "Correction. La chaîne B a 50 moins 30, soit 20 batteries. Le total des 50 batteries : 82 fois 50, égale 4 100. Celui de la chaîne A : 85 fois 30, égale 2 550. Il reste 4 100 moins 2 550, égale 1 550 kilomètres pour 20 batteries. 1 550 divisé par 20, égale 77,5 kilomètres. Le piège, c'était de répondre 79, comme si les deux chaînes avaient le même nombre de batteries.",
+  "06-finale": "Ce que tu as appris. Pour décider, on combine les indicateurs : la moyenne pondérée, et la médiane par les effectifs cumulés. La somme, c'est la moyenne fois l'effectif : elle retrouve une valeur manquante. Et deux groupes de tailles différentes ne se moyennent pas comme deux nombres.",
+  "07-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

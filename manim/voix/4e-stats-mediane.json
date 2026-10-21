@@ -1,0 +1,14 @@
+{
+  "00-garde": "Déterminer une médiane : quelle est la valeur du milieu ?",
+  "01-situation": "À La Réunion, le soleil donne de l'énergie. Sur ce toit, des panneaux solaires produisent de l'électricité. Une technicienne en énergie solaire surveille leur production, en kilowattheures. Elle cherche un nombre qui coupe ses relevés en deux : la moitié des jours en dessous, la moitié au-dessus. C'est la médiane.",
+  "02-serie": "Cette semaine, voici la production de chaque jour : 14, 9, 16, 12, 15, 6 et 13 kilowattheures. Cela fait 7 valeurs.",
+  "03-ranger": "D'abord, je range les valeurs dans l'ordre croissant : 6, 9, 12, 13, 14, 15, 16. Puis je cherche le milieu : 3 valeurs à gauche, 3 valeurs à droite. La médiane est 13.",
+  "04-sens": "Sur la droite graduée, 13 coupe la série en deux. Au moins la moitié des jours, le toit a produit 13 kilowattheures ou moins. Et au moins la moitié des jours, 13 ou plus.",
+  "05-piege": "Le piège : prendre le milieu sans ranger. Dans la liste du début, le nombre du milieu est 12 : faux ! On range toujours d'abord.",
+  "06-pair": "Et avec un nombre pair de valeurs ? Le huitième jour, le toit produit 17. Je range : 6, 9, 12, 13, 14, 15, 16, 17. Au milieu, il y a deux valeurs : 13 et 14. La médiane est entre les deux : 13 plus 14, divisé par 2, égale 13,5.",
+  "07-tableau": "Sur un mois de 30 jours, la technicienne range tout dans un tableau d'effectifs. 10 kilowattheures : 2 jours. 12 : 3 jours. 13 : 6 jours. 14 : 12 jours. 15 : 7 jours. Avec 30 valeurs, la médiane est entre la quinzième et la seizième. J'additionne les effectifs au fur et à mesure : 2, puis 5, puis 11, puis 23. La quinzième et la seizième valeur tombent dans la colonne 14 : la médiane est 14.",
+  "08-defi": "À toi de jouer. Une autre semaine, sur six jours : 11, 15, 8, 14, 10 et 16 kilowattheures. Quelle est la médiane ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Je range : 8, 10, 11, 14, 15, 16. 6 valeurs, c'est pair : au milieu, 11 et 14. 11 plus 14, divisé par 2, égale 12,5. La médiane est 12,5 kilowattheures.",
+  "09-finale": "Ce que tu as appris. La médiane coupe la série rangée en deux groupes de même effectif. On range toujours d'abord. Avec un nombre pair de valeurs, on prend le milieu des deux valeurs centrales.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}
