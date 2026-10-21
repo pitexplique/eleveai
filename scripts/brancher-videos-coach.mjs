@@ -125,6 +125,21 @@ for (const v of [...manifeste.videos]) {
   }
 }
 
+// ⭐ 21/10 : les vidéos de R2 HORS manifeste (téléchargées depuis YouTube, rendus
+// locaux) rattachées à la main dans manim/rattachements-videos.json. Une vidéo du
+// manifeste dont la notion n'est pas au coach y gagne une place de plus (alias).
+const RATTACHEMENTS = JSON.parse(readFileSync("manim/rattachements-videos.json", "utf8"));
+for (const [id, r] of Object.entries(RATTACHEMENTS)) {
+  if (id.startsWith("_") || !R2[id]) continue;
+  const m = parIdManifeste.get(id);
+  if (m) { manifeste.videos.push({ ...m, ...r, id: `${id}@${r.microId ?? r.notionId}`, aussi: undefined, _alias: true }); continue; }
+  const x = R2[id];
+  const url = x.youtube
+    ? (x.short ? `https://youtube.com/shorts/${x.youtube}` : `https://youtu.be/${x.youtube}`)
+    : `https://www.eleveai.fr/video/${id}${x.short ? "?format=short" : ""}`;
+  manifeste.videos.push({ id, ...r, type: x.short ? "short" : "longue", fichier: x.fichier, titre: x.titre, url, _r2: true }); // _r2 : pas de 2e vidéo sur une notion déjà servie
+}
+
 const deja = [], ecartees = [], occupees = [], nouvelles = [];
 for (const v of manifeste.videos) {
   if (!v.url || !v.notionId) continue;
@@ -169,6 +184,9 @@ for (const v of manifeste.videos) {
     continue;
   }
   nouvelles.push({ v, short, ligne });
+  // La même place ne reçoit pas deux vidéos dans un même passage (rendu R2 + copie YouTube).
+  if (!parPlace.has(cle(ligne))) parPlace.set(cle(ligne), []);
+  parPlace.get(cle(ligne)).push(ligne.url);
 }
 
 // ── Le compte rendu ──────────────────────────────────────────────────────────

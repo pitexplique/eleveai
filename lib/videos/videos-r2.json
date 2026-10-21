@@ -694,7 +694,7 @@
   "titre": "+5 % : on multiplie par 0,05 ? (le piège)",
   "short": true,
   "youtube": "QkZlppTzY-c",
-  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_pourcentages&display=simple"
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_pourcentages&microId=prop_coeff_multiplicateur&display=simple"
  },
  "4e-prop-pourcentages-short-defi": {
   "fichier": "4e/maths/shorts/fr/prop-pourcentages/eleveai-maths-4e-prop-pourcentages-short-defi.mp4",
@@ -703,7 +703,7 @@
   "titre": "+10 % puis −10 % : on revient au départ ? (le piège)",
   "short": true,
   "youtube": "TNm2mseiY5g",
-  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_pourcentages&display=simple"
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_pourcentages&microId=prop_pourcentage_defi&display=simple"
  },
  "4e-prop-pourcentages-short-diagonale": {
   "fichier": "4e/maths/shorts/fr/prop-pourcentages/eleveai-maths-4e-prop-pourcentages-short-diagonale.mp4",
@@ -721,7 +721,7 @@
   "titre": "800 → 1 000 abonnés : +20 % ou +25 % ?",
   "short": true,
   "youtube": "nH0yOds7v_k",
-  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_pourcentages&display=simple"
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_pourcentages&microId=prop_evolution&display=simple"
  },
  "4e-prop-pourcentages-short-mental": {
   "fichier": "4e/maths/shorts/fr/prop-pourcentages/eleveai-maths-4e-prop-pourcentages-short-mental.mp4",
@@ -730,7 +730,7 @@
   "titre": "30 % de 70 € de tête en 5 secondes",
   "short": true,
   "youtube": "Use--vaY24o",
-  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_pourcentages&display=simple"
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_pourcentages&microId=prop_pourcentage_mental&display=simple"
  },
  "4e-prop-pourcentages-short-taux": {
   "fichier": "4e/maths/shorts/fr/prop-pourcentages/eleveai-maths-4e-prop-pourcentages-short-taux.mp4",
@@ -739,7 +739,7 @@
   "titre": "18 sur 25 : combien de pour cent ? (pas 18 % !)",
   "short": true,
   "youtube": "Vr30yjvQnsY",
-  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_pourcentages&display=simple"
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_pourcentages&microId=prop_pourcentage&display=simple"
  },
  "4e-prop-proportionnalite": {
   "fichier": "4e/maths/paysage/fr/prop-proportionnalite/eleveai-maths-4e-prop-proportionnalite.mp4",
@@ -757,7 +757,7 @@
   "titre": "6 L pour 100 km, combien pour 250 km ? (produit en croix)",
   "short": true,
   "youtube": "XkyTzWf1e_c",
-  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&display=simple"
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&microId=prop_quatrieme&display=simple"
  },
  "4e-prop-proportionnalite-short-defi": {
   "fichier": "4e/maths/shorts/fr/prop-proportionnalite/eleveai-maths-4e-prop-proportionnalite-short-defi.mp4",
@@ -766,7 +766,7 @@
   "titre": "6 peintres : 12 heures ? Le piège du produit en croix",
   "short": true,
   "youtube": "Qqtg7zymoJY",
-  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&display=simple"
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&microId=prop_defi&display=simple"
  },
  "4e-prop-proportionnalite-short-graphique": {
   "fichier": "4e/maths/shorts/fr/prop-proportionnalite/eleveai-maths-4e-prop-proportionnalite-short-graphique.mp4",
@@ -775,7 +775,7 @@
   "titre": "Une droite, donc c'est proportionnel ? Pas si vite !",
   "short": true,
   "youtube": "bAthxPRGQSw",
-  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&display=simple"
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&microId=prop_graphique&display=simple"
  },
  "4e-prop-proportionnalite-short-probleme": {
   "fichier": "4e/maths/shorts/fr/prop-proportionnalite/eleveai-maths-4e-prop-proportionnalite-short-probleme.mp4",
@@ -784,7 +784,7 @@
   "titre": "Un marathon en 70 minutes ? Quand le produit en croix ment",
   "short": true,
   "youtube": "VvUHbMV0dfo",
-  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&display=simple"
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&microId=prop_probleme&display=simple"
  },
  "4e-prop-proportionnalite-short-reconnaitre": {
   "fichier": "4e/maths/shorts/fr/prop-proportionnalite/eleveai-maths-4e-prop-proportionnalite-short-reconnaitre.mp4",
@@ -793,7 +793,7 @@
   "titre": "+10 € chaque mois : c'est proportionnel ? (le piège)",
   "short": true,
   "youtube": "HjNFbv4z4v8",
-  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&display=simple"
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&microId=prop_reconnaitre&display=simple"
  },
  "4e-prop-proportionnalite-short-relation": {
   "fichier": "4e/maths/shorts/fr/prop-proportionnalite/eleveai-maths-4e-prop-proportionnalite-short-relation.mp4",
@@ -802,7 +802,7 @@
   "titre": "y = x + 4 ? Le piège de la relation",
   "short": true,
   "youtube": "w87__1livUQ",
-  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&display=simple"
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&microId=prop_relation&display=simple"
  },
  "4e-prop-proportionnalite-short-tableau": {
   "fichier": "4e/maths/shorts/fr/prop-proportionnalite/eleveai-maths-4e-prop-proportionnalite-short-tableau.mp4",
@@ -811,7 +811,7 @@
   "titre": "3 cookies 6 €, 5 cookies 8 € ? (le piège du tableau)",
   "short": true,
   "youtube": "DOHZhMrfW4M",
-  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&display=simple"
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&microId=prop_table&display=simple"
  },
  "4e-prop-proportionnalite-short-unite": {
   "fichier": "4e/maths/shorts/fr/prop-proportionnalite/eleveai-maths-4e-prop-proportionnalite-short-unite.mp4",
@@ -820,7 +820,7 @@
   "titre": "5 croissants 6 €, combien pour 8 ? (passer par l'unité)",
   "short": true,
   "youtube": "Xco1oGJUsjo",
-  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&display=simple"
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&microId=prop_coeff&display=simple"
  },
  "4e-prop-ratio": {
   "fichier": "4e/maths/paysage/fr/prop-ratio/eleveai-maths-4e-prop-ratio.mp4",
@@ -838,7 +838,7 @@
   "titre": "5 filles de plus : combien en tout ? (ratio 4 : 3)",
   "short": true,
   "youtube": "zXY8w-h23O8",
-  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_ratio&display=simple"
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_ratio&microId=prop_ratio_defi&display=simple"
  },
  "4e-prop-ratio-short-partager": {
   "fichier": "4e/maths/shorts/fr/prop-ratio/eleveai-maths-4e-prop-ratio-short-partager.mp4",
@@ -847,7 +847,7 @@
   "titre": "60 € selon le ratio 2 : 3 : 30 € chacun ?",
   "short": true,
   "youtube": "GpHNJgvSxYE",
-  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_ratio&display=simple"
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_ratio&microId=prop_ratio_partager&display=simple"
  },
  "4e-prop-ratio-short-quotients": {
   "fichier": "4e/maths/shorts/fr/prop-ratio/eleveai-maths-4e-prop-ratio-short-quotients.mp4",
@@ -856,7 +856,7 @@
   "titre": "40 kg de ciment : combien de sable ? (ratio 2 : 5)",
   "short": true,
   "youtube": "vSGg0SkHwk8",
-  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_ratio&display=simple"
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_ratio&microId=prop_ratio_quotients&display=simple"
  },
  "4e-prop-ratio-short-simplifier": {
   "fichier": "4e/maths/shorts/fr/prop-ratio/eleveai-maths-4e-prop-ratio-short-simplifier.mp4",
@@ -865,7 +865,7 @@
   "titre": "2 pour 10 ou 1 pour 5 : lequel est le plus sucré ?",
   "short": true,
   "youtube": "QXMugfqoiaM",
-  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_ratio&display=simple"
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_ratio&microId=prop_rapport&display=simple"
  },
  "4e-prop-ratio-short-trois": {
   "fichier": "4e/maths/shorts/fr/prop-ratio/eleveai-maths-4e-prop-ratio-short-trois.mp4",
@@ -874,7 +874,7 @@
   "titre": "Un ratio à trois nombres : un seul suffit",
   "short": true,
   "youtube": "jPp_eBkzxg8",
-  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_ratio&display=simple"
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_ratio&microId=prop_ratio_trois&display=simple"
  },
  "4e-pythagore-carre-racine": {
   "fichier": "4e/maths/pythagore/02-carre-racine/eleveai-maths-4e-pythagore-carre-racine.mp4",
@@ -1107,7 +1107,7 @@
   "titre": "x = 2 : 3x, ça fait 32 ? 🤔 Le piège — 5e #Shorts",
   "short": true,
   "youtube": "hScDu96gAh8",
-  "coach": "/coach/serie?classe=5e&matiere=maths&notion=litteral_calcul&display=simple"
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=litteral_calcul&microId=litteral_expression_comprendre&display=simple"
  },
  "5e-litteral-calcul-short-defi": {
   "fichier": "5e/maths/expression-litterale/07-defi/eleveai-maths-5e-litteral-calcul-short-defi.mp4",
@@ -1269,7 +1269,7 @@
   "titre": "−10 ou −2 : lequel est le plus grand ? (le piège)",
   "short": true,
   "youtube": "MSTZ4Ab1M9Q",
-  "coach": "/coach/serie?classe=5e&matiere=maths&notion=relatif_nombre&display=simple"
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=relatif_nombre&microId=relatif_comparer&display=simple"
  },
  "5e-relatif-nombre-short-defi": {
   "fichier": "5e/maths/shorts/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre-short-defi.mp4",
@@ -1278,7 +1278,7 @@
   "titre": "A à −4, B à +1 : quelle distance ? (le piège)",
   "short": true,
   "youtube": "pUNdh4HZzZ8",
-  "coach": "/coach/serie?classe=5e&matiere=maths&notion=relatif_nombre&display=simple"
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=relatif_nombre&microId=relatif_defi&display=simple"
  },
  "5e-relatif-nombre-short-diagonale": {
   "fichier": "5e/maths/shorts/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre-short-diagonale.mp4",
@@ -1296,7 +1296,7 @@
   "titre": "La distance à zéro de −8, c'est −8 ? (le piège)",
   "short": true,
   "youtube": "spEDvkvoD04",
-  "coach": "/coach/serie?classe=5e&matiere=maths&notion=relatif_nombre&display=simple"
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=relatif_nombre&microId=relatif_valeur_absolue&display=simple"
  },
  "5e-relatif-nombre-short-lire": {
   "fichier": "5e/maths/shorts/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre-short-lire.mp4",
@@ -1305,7 +1305,7 @@
   "titre": "3 degrés sous zéro : ça s'écrit comment ?",
   "short": true,
   "youtube": "F30wf64B-W0",
-  "coach": "/coach/serie?classe=5e&matiere=maths&notion=relatif_nombre&display=simple"
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=relatif_nombre&microId=relatif_lire&display=simple"
  },
  "5e-relatif-nombre-short-montees-cachees": {
   "fichier": "5e/maths/shorts/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre-short-montees-cachees.mp4",
@@ -1323,7 +1323,7 @@
   "titre": "L'opposé de −6, c'est quoi ?",
   "short": true,
   "youtube": "QRzZjnhyess",
-  "coach": "/coach/serie?classe=5e&matiere=maths&notion=relatif_nombre&display=simple"
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=relatif_nombre&microId=relatif_oppose&display=simple"
  },
  "5e-relatif-nombre-short-placer": {
   "fichier": "5e/maths/shorts/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre-short-placer.mp4",
@@ -1332,7 +1332,7 @@
   "titre": "Où placer −2,5 sur la droite graduée ? (le piège)",
   "short": true,
   "youtube": "8c_uYXQZ0rM",
-  "coach": "/coach/serie?classe=5e&matiere=maths&notion=relatif_nombre&display=simple"
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=relatif_nombre&microId=relatif_placer&display=simple"
  },
  "5e-relatif-nombre-short-signe": {
   "fichier": "5e/maths/shorts/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre-short-signe.mp4",
@@ -1341,7 +1341,7 @@
   "titre": "Zéro : positif ou négatif ? (le piège)",
   "short": true,
   "youtube": "KGivh0oalwI",
-  "coach": "/coach/serie?classe=5e&matiere=maths&notion=relatif_nombre&display=simple"
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=relatif_nombre&microId=relatif_signe&display=simple"
  },
  "5e-relatif-nombre-short-ti-margo-diagonale": {
   "fichier": "5e/maths/shorts/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre-short-ti-margo-diagonale.mp4",
@@ -1386,7 +1386,7 @@
   "titre": "Multiplier, ça rend toujours plus grand ? 250 × 0,1",
   "short": true,
   "youtube": "VgM8dIxG4JY",
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&display=simple"
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&microId=decimal_multiplier_par_01&display=simple"
  },
  "6e-decimal-calcul-short-addition": {
   "fichier": "6e/maths/shorts/fr/decimal-calcul/eleveai-maths-6e-decimal-calcul-short-addition.mp4",
@@ -1395,7 +1395,7 @@
   "titre": "2,8 + 1,35 : le piège de l'addition des décimaux",
   "short": true,
   "youtube": "8sgbhGVCCP0",
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&display=simple"
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&microId=decimal_additionner&display=simple"
  },
  "6e-decimal-calcul-short-defi": {
   "fichier": "6e/maths/shorts/fr/decimal-calcul/eleveai-maths-6e-decimal-calcul-short-defi.mp4",
@@ -1404,7 +1404,7 @@
   "titre": "3,7 × 2,9 = 107,3 ? Impossible, sans poser le calcul",
   "short": true,
   "youtube": "B2rjuK1PNcU",
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&display=simple"
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&microId=decimal_calcul_defi&display=simple"
  },
  "6e-decimal-calcul-short-dixieme": {
   "fichier": "6e/maths/shorts/fr/decimal-calcul/eleveai-maths-6e-decimal-calcul-short-dixieme.mp4",
@@ -1413,7 +1413,7 @@
   "titre": "0,1 × 0,1 = 0,2 ? Faux !",
   "short": true,
   "youtube": "Qize3OaCyH4",
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&display=simple"
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&microId=decimal_multiplier&display=simple"
  },
  "6e-decimal-calcul-short-partage": {
   "fichier": "6e/maths/shorts/fr/decimal-calcul/eleveai-maths-6e-decimal-calcul-short-partage.mp4",
@@ -1422,7 +1422,7 @@
   "titre": "4,80 € pour 4 amis : combien pour chacun ?",
   "short": true,
   "youtube": "rh1ecggp2YE",
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&display=simple"
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&microId=decimal_diviser_par_entier&display=simple"
  },
  "6e-decimal-nombre": {
   "fichier": "6e/maths/paysage/fr/decimal-nombre/eleveai-maths-6e-decimal-nombre.mp4",
@@ -1440,7 +1440,7 @@
   "titre": "12 cm et un petit bout : d'où viennent les nombres décimaux ?",
   "short": true,
   "youtube": "TuEu0TscWSw",
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&display=simple"
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&microId=decimal_lire_ecrire&display=simple"
  },
  "6e-decimal-nombre-short-zero": {
   "fichier": "6e/maths/shorts/fr/decimal-nombre/eleveai-maths-6e-decimal-nombre-short-zero.mp4",
@@ -1449,7 +1449,7 @@
   "titre": "0,45 ou 0,5 : lequel est le plus grand ? (le piège)",
   "short": true,
   "youtube": "27goai4IrnQ",
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&display=simple"
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&microId=decimal_comparer&display=simple"
  },
  "6e-demi-droite-graduee": {
   "fichier": "6e/maths/paysage/fr/demi-droite-graduee/eleveai-maths-6e-demi-droite-graduee.mp4",
@@ -1467,7 +1467,7 @@
   "titre": "5/4, plus petit que 1 ? Une fraction sur la droite graduée",
   "short": true,
   "youtube": "09qk9kgFvlI",
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=demi_droite_graduee&display=simple"
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=demi_droite_graduee&microId=abscisse_fraction&display=simple"
  },
  "6e-demi-droite-short-graduer": {
   "fichier": "6e/maths/shorts/fr/demi-droite-graduee/eleveai-maths-6e-demi-droite-short-graduer.mp4",
@@ -1476,7 +1476,7 @@
   "titre": "4 parts égales = 4 traits ? Graduer un segment",
   "short": true,
   "youtube": "vrjK4sStALk",
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=demi_droite_graduee&display=simple"
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=demi_droite_graduee&microId=abscisse_graduer&display=simple"
  },
  "6e-demi-droite-short-lire": {
   "fichier": "6e/maths/shorts/fr/demi-droite-graduee/eleveai-maths-6e-demi-droite-short-lire.mp4",
@@ -1485,7 +1485,7 @@
   "titre": "Sur le 3e trait, c'est 3 ? Le piège de la droite graduée",
   "short": true,
   "youtube": "tVTsxylPvSY",
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=demi_droite_graduee&display=simple"
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=demi_droite_graduee&microId=abscisse_lire&display=simple"
  },
  "6e-demi-droite-short-placer": {
   "fichier": "6e/maths/shorts/fr/demi-droite-graduee/eleveai-maths-6e-demi-droite-short-placer.mp4",
@@ -1494,7 +1494,7 @@
   "titre": "Où placer 1,7 sur une droite graduée ?",
   "short": true,
   "youtube": "vmRelEjM4PI",
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=demi_droite_graduee&display=simple"
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=demi_droite_graduee&microId=abscisse_placer&display=simple"
  },
  "6e-duree-temps-short-diagonale": {
   "fichier": "6e/maths/shorts/fr/duree-temps/eleveai-maths-6e-duree-temps-short-diagonale.mp4",
@@ -1530,7 +1530,7 @@
   "titre": "Un zéro, ça ne vaut rien… alors pourquoi on ne peut pas l'enlever ?",
   "short": true,
   "youtube": "fiW-WXNsnFI",
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&display=simple"
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_lire_ecrire&display=simple"
  },
  "6e-fraction-calcul": {
   "fichier": "6e/maths/paysage/fr/fraction-calcul/eleveai-maths-6e-fraction-calcul.mp4",
@@ -1548,7 +1548,7 @@
   "titre": "1/2 + 1/3 = 2/5 ? Faux !",
   "short": true,
   "youtube": "jnTNhYXlMs8",
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=fraction_calcul&display=simple"
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=fraction_calcul&microId=fraction_additionner&display=simple"
  },
  "6e-fraction-calcul-short-defi": {
   "fichier": "6e/maths/shorts/fr/fraction-calcul/eleveai-maths-6e-fraction-calcul-short-defi.mp4",
@@ -1557,7 +1557,7 @@
   "titre": "Un quart, puis un sixième du gâteau : il reste quoi ?",
   "short": true,
   "youtube": "EVJxCPQ633Y",
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=fraction_calcul&display=simple"
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=fraction_calcul&microId=fraction_calcul_defi&display=simple"
  },
  "6e-fraction-calcul-short-multiplier": {
   "fichier": "6e/maths/shorts/fr/fraction-calcul/eleveai-maths-6e-fraction-calcul-short-multiplier.mp4",
@@ -1566,7 +1566,7 @@
   "titre": "3 × 2/5 = 6/15 ? Faux !",
   "short": true,
   "youtube": "Z35rFaQ2KXE",
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=fraction_calcul&display=simple"
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=fraction_calcul&microId=fraction_multiplier_entier&display=simple"
  },
  "6e-fraction-calcul-short-quantite": {
   "fichier": "6e/maths/shorts/fr/fraction-calcul/eleveai-maths-6e-fraction-calcul-short-quantite.mp4",
@@ -1575,7 +1575,7 @@
   "titre": "Les 2/3 de 18 bonbons : combien ?",
   "short": true,
   "youtube": "ut-oUPh3hjc",
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=fraction_calcul&display=simple"
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=fraction_calcul&microId=fraction_quantite&display=simple"
  },
  "6e-proba-comparer": {
   "fichier": "6e/maths/probabilites/02-comparer/eleveai-maths-6e-proba-comparer.mp4",
@@ -1926,7 +1926,7 @@
   "titre": "À quelle altitude fait-il 20 °C à La Réunion ?",
   "short": true,
   "youtube": null,
-  "coach": null
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=fonction_vocabulaire_2de&microId=fonction_antecedent&display=simple"
  },
  "974-diagonale-trajet-2026": {
   "fichier": "974/eleveai-974-diagonale-trajet-2026.mp4",
@@ -1961,7 +1961,7 @@
   "titre": "26° à Saint-Gilles, 11° au Maïdo : pourquoi ?",
   "short": true,
   "youtube": null,
-  "coach": null
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=fonctions_affines_2de&microId=affine_forme&display=simple"
  },
  "974-pourquoi": {
   "fichier": "974/maths/shorts/fr/temperature-altitude/eleveai-maths-974-temperature-altitude-short-pourquoi.mp4",
@@ -1997,7 +1997,7 @@
   "titre": "Pourquoi il fait 26° à Saint-Gilles et 11° au Maïdo — Les maths en vrai",
   "short": false,
   "youtube": null,
-  "coach": null
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=fonctions_affines_2de&display=simple"
  },
  "annonce-probabilites": {
   "fichier": "annonce/probabilites/eleveai-annonce-probabilites.mp4",
@@ -2113,7 +2113,7 @@
   "titre": "Les fractions : la leçon complète pour ne plus se tromper",
   "short": false,
   "youtube": null,
-  "coach": null
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=fraction_calcul&display=simple"
  },
  "bases-fractions-additionner": {
   "fichier": "bases/maths/shorts/fr/fractions/eleveai-maths-bases-fractions-short-additionner.mp4",
@@ -2122,7 +2122,7 @@
   "titre": "1/2 + 1/3 ne fait pas 2/5 — voici pourquoi",
   "short": true,
   "youtube": null,
-  "coach": null
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=fraction_calcul&microId=fraction_additionner&display=simple"
  },
  "bases-fractions-definition": {
   "fichier": "bases/maths/shorts/fr/fractions/eleveai-maths-bases-fractions-short-definition.mp4",
@@ -2140,7 +2140,7 @@
   "titre": "1/5 = 0,2 = 20 % : le même nombre, trois écritures",
   "short": true,
   "youtube": null,
-  "coach": null
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=fraction_nombre&microId=fraction_rationnel&display=simple"
  },
  "bases-fractions-egales": {
   "fichier": "bases/maths/shorts/fr/fractions/eleveai-maths-bases-fractions-short-egales.mp4",
@@ -2158,7 +2158,7 @@
   "titre": "Multiplier deux fractions : le calcul le plus facile",
   "short": true,
   "youtube": null,
-  "coach": null
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=fraction_calcul&microId=fraction_multiplier&display=simple"
  },
  "bases-fractions-ordre": {
   "fichier": "bases/maths/shorts/fr/fractions/eleveai-maths-bases-fractions-short-ordre.mp4",
@@ -2176,7 +2176,7 @@
   "titre": "Comment simplifier une fraction (et le piège à éviter)",
   "short": true,
   "youtube": null,
-  "coach": null
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=fraction_nombre&microId=fraction_simplifier&display=simple"
  },
  "bases-fractions-zero": {
   "fichier": "bases/maths/shorts/fr/fractions/eleveai-maths-bases-fractions-short-zero.mp4",
@@ -2257,7 +2257,7 @@
   "titre": "Les notations en géométrie : (AB), [AB), [AB] et les autres",
   "short": false,
   "youtube": "sXMWOSLZ8Wo",
-  "coach": null
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=distance_segment&microId=distance_definition&display=simple"
  },
  "bases-notations-geometrie-short": {
   "fichier": "bases/maths/shorts/fr/notations-geometrie/eleveai-maths-bases-notations-geometrie-short.mp4",
@@ -2266,7 +2266,7 @@
   "titre": "(AB), [AB), [AB] : mêmes lettres, 3 dessins différents",
   "short": true,
   "youtube": null,
-  "coach": null
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=distance_segment&microId=distance_definition&display=simple"
  },
  "bases-pourcentages-calcul-mental": {
   "fichier": "bases/maths/paysage/fr/pourcentages-calcul-mental/eleveai-maths-bases-pourcentages-calcul-mental.mp4",
@@ -2275,7 +2275,7 @@
   "titre": "Calculer un pourcentage de tête : la méthode des 10 %",
   "short": false,
   "youtube": "CVswyp89x84",
-  "coach": null
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_pourcentages&microId=prop_pourcentage_mental&display=simple"
  },
  "bases-pourcentages-calcul-mental-short": {
   "fichier": "bases/maths/shorts/fr/pourcentages/eleveai-maths-bases-pourcentages-short-calcul-mental.mp4",
@@ -2284,7 +2284,7 @@
   "titre": "10 %, 20 %, 30 % de tête : le truc que tout le monde devrait connaître",
   "short": true,
   "youtube": "dF4coGok0uQ",
-  "coach": null
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_pourcentages&microId=prop_pourcentage_mental&display=simple"
  },
  "bases-pourcentages-tablette": {
   "fichier": "bases/maths/shorts/fr/pourcentages/eleveai-maths-bases-pourcentages-short-tablette.mp4",
@@ -4544,7 +4544,8 @@
   "vignette": "premiere/maths/paysage/fr/exponentielle-calculer/eleveai-maths-premiere-exponentielle-calculer.vignette.webp",
   "titre": "maths premiere exponentielle calculer",
   "short": false,
-  "youtube": null
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=exponentielle&display=simple"
  },
  "maths-premiere-exponentielle-etude": {
   "fichier": "premiere/maths/paysage/fr/exponentielle-etude/eleveai-maths-premiere-exponentielle-etude.mp4",
@@ -4552,7 +4553,8 @@
   "vignette": "premiere/maths/paysage/fr/exponentielle-etude/eleveai-maths-premiere-exponentielle-etude.vignette.webp",
   "titre": "maths premiere exponentielle etude",
   "short": false,
-  "youtube": null
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=exponentielle&display=simple"
  },
  "maths-premiere-exponentielle-resoudre": {
   "fichier": "premiere/maths/paysage/fr/exponentielle-resoudre/eleveai-maths-premiere-exponentielle-resoudre.mp4",
@@ -4560,7 +4562,8 @@
   "vignette": "premiere/maths/paysage/fr/exponentielle-resoudre/eleveai-maths-premiere-exponentielle-resoudre.vignette.webp",
   "titre": "maths premiere exponentielle resoudre",
   "short": false,
-  "youtube": null
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=exponentielle&display=simple"
  },
  "maths-premiere-second-degre-equation": {
   "fichier": "premiere/maths/paysage/fr/second-degre-equation/eleveai-maths-premiere-second-degre-equation.mp4",
@@ -4568,7 +4571,8 @@
   "vignette": "premiere/maths/paysage/fr/second-degre-equation/eleveai-maths-premiere-second-degre-equation.vignette.webp",
   "titre": "maths premiere second degre equation",
   "short": false,
-  "youtube": null
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=second_degre&display=simple"
  },
  "maths-premiere-second-degre-signe": {
   "fichier": "premiere/maths/paysage/fr/second-degre-signe/eleveai-maths-premiere-second-degre-signe.mp4",
@@ -4576,7 +4580,8 @@
   "vignette": "premiere/maths/paysage/fr/second-degre-signe/eleveai-maths-premiere-second-degre-signe.vignette.webp",
   "titre": "maths premiere second degre signe",
   "short": false,
-  "youtube": null
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=second_degre&display=simple"
  },
  "maths-premiere-suites-arith-geo": {
   "fichier": "premiere/maths/paysage/fr/suites-arith-geo/eleveai-maths-premiere-suites-arith-geo.mp4",
@@ -4584,7 +4589,8 @@
   "vignette": "premiere/maths/paysage/fr/suites-arith-geo/eleveai-maths-premiere-suites-arith-geo.vignette.webp",
   "titre": "maths premiere suites arith geo",
   "short": false,
-  "youtube": null
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=suites&display=simple"
  },
  "maths-premiere-trigonometrie-cercle": {
   "fichier": "premiere/maths/paysage/fr/trigonometrie-cercle/eleveai-maths-premiere-trigonometrie-cercle.mp4",
@@ -4592,7 +4598,8 @@
   "vignette": "premiere/maths/paysage/fr/trigonometrie-cercle/eleveai-maths-premiere-trigonometrie-cercle.vignette.webp",
   "titre": "maths premiere trigonometrie cercle",
   "short": false,
-  "youtube": null
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=trigonometrie&display=simple"
  },
  "maths-premiere-trigonometrie-rouge-vert": {
   "fichier": "premiere/maths/paysage/fr/trigonometrie-rouge-vert/eleveai-maths-premiere-trigonometrie-rouge-vert.mp4",
@@ -4600,7 +4607,8 @@
   "vignette": "premiere/maths/paysage/fr/trigonometrie-rouge-vert/eleveai-maths-premiere-trigonometrie-rouge-vert.vignette.webp",
   "titre": "maths premiere trigonometrie rouge vert",
   "short": false,
-  "youtube": null
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=trigonometrie&display=simple"
  },
  "maths-premiere-trigonometrie-short-valeurs": {
   "fichier": "premiere/maths/shorts/fr/trigonometrie/eleveai-maths-premiere-trigonometrie-short-valeurs.mp4",
@@ -4608,7 +4616,8 @@
   "vignette": "premiere/maths/shorts/fr/trigonometrie/eleveai-maths-premiere-trigonometrie-short-valeurs.vignette.webp",
   "titre": "maths premiere trigonometrie short valeurs",
   "short": true,
-  "youtube": null
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=trigonometrie&microId=trig_valeurs&display=simple"
  },
  "maths-premiere-trigonometrie-short-vent": {
   "fichier": "premiere/maths/shorts/fr/trigonometrie/eleveai-maths-premiere-trigonometrie-short-vent.mp4",
@@ -4616,7 +4625,8 @@
   "vignette": "premiere/maths/shorts/fr/trigonometrie/eleveai-maths-premiere-trigonometrie-short-vent.vignette.webp",
   "titre": "maths premiere trigonometrie short vent",
   "short": true,
-  "youtube": null
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=trigonometrie&microId=trig_cos_sin&display=simple"
  },
  "maths-seconde-second-degre-short-lucarne": {
   "fichier": "maths-en-vrai/maths/shorts/fr/second-degre-lucarne/eleveai-maths-seconde-second-degre-short-lucarne.mp4",
@@ -4624,7 +4634,8 @@
   "vignette": "maths-en-vrai/maths/shorts/fr/second-degre-lucarne/eleveai-maths-seconde-second-degre-short-lucarne.vignette.webp",
   "titre": "maths seconde second degre short lucarne",
   "short": true,
-  "youtube": null
+  "youtube": null,
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=developpement_factorisation_2de&microId=devfac_choisir_forme&display=simple"
  },
  "mimolette-moyenne-ecart-type": {
   "fichier": "actu/maths/shorts/fr/mimolette/eleveai-maths-actu-mimolette-short.mp4",
@@ -7418,7 +7429,8 @@
   "vignette": "seconde/maths/youtube/16Mm-fpOCkc.vignette.webp",
   "titre": "Comment factoriser une différence de deux carrés",
   "short": true,
-  "youtube": "16Mm-fpOCkc"
+  "youtube": "16Mm-fpOCkc",
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=identites_remarquables_2de&microId=ir_difference_carres&display=simple"
  },
  "youtube-1CYtvWeV3RM": {
   "fichier": "6e/maths/youtube/1CYtvWeV3RM.mp4",
@@ -7501,7 +7513,8 @@
   "vignette": "6e/maths/youtube/7zT0TslnJ1U.vignette.webp",
   "titre": "(AB), [AB), [AB] : mêmes lettres, 3 dessins différents",
   "short": true,
-  "youtube": "7zT0TslnJ1U"
+  "youtube": "7zT0TslnJ1U",
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=distance_segment&microId=distance_definition&display=simple"
  },
  "youtube-8DFgt3TCoH8": {
   "fichier": "6e/maths/youtube/8DFgt3TCoH8.mp4",
@@ -7509,7 +7522,8 @@
   "vignette": "6e/maths/youtube/8DFgt3TCoH8.vignette.webp",
   "titre": "Les nombres entiers — Maths 6e : lire, comparer, encadrer",
   "short": false,
-  "youtube": "8DFgt3TCoH8"
+  "youtube": "8DFgt3TCoH8",
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&display=simple"
  },
  "youtube-8ouss9DNzN0": {
   "fichier": "6e/maths/youtube/8ouss9DNzN0.mp4",
@@ -7543,7 +7557,8 @@
   "vignette": "seconde/maths/youtube/9ThtdR_7raE.vignette.webp",
   "titre": "Puissances : (7³)⁴, on additionne ou on multiplie ?",
   "short": true,
-  "youtube": "9ThtdR_7raE"
+  "youtube": "9ThtdR_7raE",
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=puissances_2de&microId=puiss_puissance_puissance&display=simple"
  },
  "youtube-a2zNZzxuo4M": {
   "fichier": "6e/maths/youtube/a2zNZzxuo4M.mp4",
@@ -7585,7 +7600,8 @@
   "vignette": "seconde/maths/youtube/b-IFAbW81EE.vignette.webp",
   "titre": "√50 = 5√2 : comment simplifier une racine carrée",
   "short": true,
-  "youtube": "b-IFAbW81EE"
+  "youtube": "b-IFAbW81EE",
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=racine_carree_2de&microId=racine_simplification&display=simple"
  },
  "youtube-b7_7UX8D5y4": {
   "fichier": "974/maths/youtube/b7_7UX8D5y4.mp4",
@@ -7601,7 +7617,8 @@
   "vignette": "5e/maths/youtube/BsT5A1Brwxg.vignette.webp",
   "titre": "1/2 + 1/3 ne fait pas 2/5 — voici pourquoi",
   "short": true,
-  "youtube": "BsT5A1Brwxg"
+  "youtube": "BsT5A1Brwxg",
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=fraction_calcul&microId=fraction_additionner&display=simple"
  },
  "youtube-CF_g14NWtpM": {
   "fichier": "actu/maths/youtube/CF_g14NWtpM.mp4",
@@ -7694,7 +7711,8 @@
   "vignette": "seconde/maths/youtube/h8veBP9mtMQ.vignette.webp",
   "titre": "Pourquoi la racine carrée d'un nombre négatif n'existe pas",
   "short": true,
-  "youtube": "h8veBP9mtMQ"
+  "youtube": "h8veBP9mtMQ",
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=racine_carree_2de&microId=racine_domaine&display=simple"
  },
  "youtube-hH2N0Cvx-AI": {
   "fichier": "974/maths/youtube/hH2N0Cvx-AI.mp4",
@@ -7710,7 +7728,8 @@
   "vignette": "6e/maths/youtube/hiFUDrIMZrU.vignette.webp",
   "titre": "Les nombres décimaux — Maths 6e : lire, comparer, calculer",
   "short": false,
-  "youtube": "hiFUDrIMZrU"
+  "youtube": "hiFUDrIMZrU",
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&display=simple"
  },
  "youtube-I8stjojvTmg": {
   "fichier": "cp/maths/youtube/I8stjojvTmg.mp4",
@@ -7752,7 +7771,8 @@
   "vignette": "seconde/maths/youtube/ITZuhk7hvMY.vignette.webp",
   "titre": "eleveai maths seconde geometrie short enclos",
   "short": true,
-  "youtube": "ITZuhk7hvMY"
+  "youtube": "ITZuhk7hvMY",
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=geometrie_problemes_plan&microId=geo_optimisation&display=simple"
  },
  "youtube-ixAW26MMVC0": {
   "fichier": "actu/maths/youtube/ixAW26MMVC0.mp4",
@@ -7792,7 +7812,8 @@
   "vignette": "974/maths/youtube/kRpXZ_hC4Eg.vignette.webp",
   "titre": "À quelle altitude fait-il 20 °C à La Réunion ? #lareunion #maths #science",
   "short": true,
-  "youtube": "kRpXZ_hC4Eg"
+  "youtube": "kRpXZ_hC4Eg",
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=fonction_vocabulaire_2de&microId=fonction_antecedent&display=simple"
  },
  "youtube-KT6rurM3Q3E": {
   "fichier": "6e/maths/youtube/KT6rurM3Q3E.mp4",
@@ -7851,7 +7872,8 @@
   "vignette": "actu/maths/youtube/mTJVzuYWoJM.vignette.webp",
   "titre": "√9 + √16 = √25 ? La faute que presque tout le monde fait",
   "short": true,
-  "youtube": "mTJVzuYWoJM"
+  "youtube": "mTJVzuYWoJM",
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=racine_carree_2de&microId=racine_somme&display=simple"
  },
  "youtube-mWK-Qm8bPKY": {
   "fichier": "4e/maths/youtube/mWK-Qm8bPKY.mp4",
@@ -7937,7 +7959,8 @@
   "vignette": "seconde/maths/youtube/pPQUPDx3aeA.vignette.webp",
   "titre": "Le chemin le plus court vers une droite, et sa démonstration",
   "short": true,
-  "youtube": "pPQUPDx3aeA"
+  "youtube": "pPQUPDx3aeA",
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=geometrie_problemes_plan&microId=geo_projete_orthogonal&display=simple"
  },
  "youtube-ptquQWJrtuE": {
   "fichier": "seconde/maths/youtube/ptquQWJrtuE.mp4",
@@ -8020,7 +8043,8 @@
   "vignette": "seconde/maths/youtube/TYBgLzC2KN8.vignette.webp",
   "titre": "Calculer 99 au carré de tête, en 3 secondes",
   "short": true,
-  "youtube": "TYBgLzC2KN8"
+  "youtube": "TYBgLzC2KN8",
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=identites_remarquables_2de&microId=ir_calcul_mental&display=simple"
  },
  "youtube-u-KNZWpOZPc": {
   "fichier": "cp/maths/youtube/u-KNZWpOZPc.mp4",
@@ -8053,7 +8077,8 @@
   "vignette": "seconde/maths/youtube/uVs9h6561zU.vignette.webp",
   "titre": "Carré d'une somme : l'erreur la plus fréquente en maths",
   "short": true,
-  "youtube": "uVs9h6561zU"
+  "youtube": "uVs9h6561zU",
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=identites_remarquables_2de&microId=ir_carre_somme&display=simple"
  },
  "youtube-v7PNXa82yuQ": {
   "fichier": "cp/maths/youtube/v7PNXa82yuQ.mp4",
@@ -8102,7 +8127,8 @@
   "vignette": "974/maths/youtube/x_fuQDxmRew.vignette.webp",
   "titre": "26° à Saint-Gilles, 11° au Maïdo : pourquoi ?",
   "short": true,
-  "youtube": "x_fuQDxmRew"
+  "youtube": "x_fuQDxmRew",
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=fonctions_affines_2de&microId=affine_forme&display=simple"
  },
  "youtube-XsfMrmyxuak": {
   "fichier": "seconde/maths/youtube/XsfMrmyxuak.mp4",

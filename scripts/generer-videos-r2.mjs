@@ -107,6 +107,16 @@ for (const abs of parcourir(SORTIES)) {
   horsManifeste++;
 }
 
+// ⭐ 21/10/2026 : les rattachements posés à la main (manim/rattachements-videos.json),
+// pour les vidéos hors manifeste ou dont la notion n'est pas au coach.
+const RATTACHEMENTS = JSON.parse(fs.readFileSync(path.join(RACINE, "manim", "rattachements-videos.json"), "utf8"));
+for (const [id, r] of Object.entries(RATTACHEMENTS)) {
+  if (id.startsWith("_") || !table[id] || table[id].coach) continue;
+  if (!connait(r.classe, r.notionId)) { console.log(`rattachement ${id} : notion ${r.notionId} inconnue du coach ${r.classe}`); continue; }
+  const micro = r.microId && connait(r.classe, r.microId) ? `&microId=${r.microId}` : "";
+  table[id].coach = `/coach/serie?classe=${r.classe}&matiere=maths&notion=${r.notionId}${micro}&display=simple`;
+}
+
 // Les vidéos sans entrée de manifeste (publiées avant lui, téléchargées depuis
 // YouTube) : leur place au coach se lit dans notion_ressources, par ID YouTube.
 try {
