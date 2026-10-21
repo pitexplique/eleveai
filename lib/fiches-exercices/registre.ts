@@ -185,6 +185,26 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Lire un programme Scratch dans l'ordre, faire avancer et tourner le lutin, utiliser une boucle « répéter », tracer un carré, un rectangle ou un triangle équilatéral. Un robot qui sème, une course d'orientation, une ruche, une chasse au trésor.",
   },
+  "maths/cm1/tableau": {
+    titre: "Lire et compléter un tableau : 20 exercices corrigés",
+    resume:
+      "Lire une case, croiser une ligne et une colonne, calculer un total, une case vide ou un écart, vérifier qu'un total est juste, résoudre un petit défi. De la musique, une piscine, des abeilles, un cinéma, des tortues, un tournoi, un bus et un festival.",
+  },
+  "maths/cm1/graphique": {
+    titre: "Lire un graphique : 20 exercices corrigés",
+    resume:
+      "Lire une barre sur un axe gradué, lire un diagramme circulaire, compléter une barre effacée, comparer, calculer un écart ou un total. Une mangeoire, une bibliothèque, des étoiles filantes, une kermesse, un vivarium, la météo et la cantine.",
+  },
+  "maths/cm2/tableau": {
+    titre: "Lire, compléter et interpréter un tableau : 20 exercices corrigés",
+    resume:
+      "Lire une case au croisement d'une ligne et d'une colonne, retrouver une case effacée grâce au total, comparer, calculer un écart, vérifier un total de deux façons. Un cinéma, un car scolaire, un château fort, une kermesse, le Piton de la Fournaise, un refuge, une bibliothèque et les médailles des Jeux de Paris 2024.",
+  },
+  "maths/cm2/graphique": {
+    titre: "Lire un graphique : 20 exercices corrigés",
+    resume:
+      "Lire une barre sur un axe gradué, même au milieu de deux graduations, lire une courbe qui monte et qui descend, lire un diagramme circulaire avec la moitié et le quart, compléter une barre, trouver une erreur, vérifier un total. Des animaux soignés, la marée, du miel, de la neige, les Jeux olympiques, une rivière en crue et la durée du jour.",
+  },
   "maths/6e/stat-enquete": {
     titre: "Mener une enquête : 20 exercices corrigés",
     resume:
