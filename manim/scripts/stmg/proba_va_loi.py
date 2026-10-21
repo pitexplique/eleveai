@@ -170,6 +170,7 @@ X_DE = {"PP": 2, "PF": 1, "FP": 1, "FF": 0}
 
 
 class ProbaVaLoiBase(Notion6e):
+    ceinture = "bleue"
     nom_voix = "stmg-premiere-spe-proba-va-loi"
     identite = "Maths — EleveAI"
 
@@ -215,7 +216,7 @@ class ProbaVaLoiBase(Notion6e):
         titre = self.t("Dresser la loi de probabilité", 50, JAUNE_TITRE).to_edge(UP, buff=0.55)
         sous = self.t("d'une variable aléatoire", 40, BLEU_CALCUL).next_to(titre, DOWN, buff=0.2)
         identite = self.t(self.identite, 28).next_to(sous, DOWN, buff=0.22)
-        ech = echelle_ceintures("bleue").move_to(P(-0.6, -2.75))
+        ech = echelle_ceintures(self.ceinture).move_to(P(-0.6, -2.75))
         tb = self.tableau(P(-0.6, -0.55), 0.9)
         self.play(Write(titre), FadeIn(identite, shift=DOWN * 0.2), FadeIn(ech), FadeIn(tb, shift=UP * 0.2),
                   run_time=1.0)
@@ -593,3 +594,8 @@ class ProbaVaLoiSTMG(ProbaVaLoiBase):
 
 class ProbaVaLoiPremiereSpe(ProbaVaLoiBase):
     identite = "Maths 1re spé — EleveAI"
+
+
+class ProbaVaLoiTerminale(ProbaVaLoiBase):
+    identite = "Maths Tle spé — EleveAI"
+    ceinture = "noire"

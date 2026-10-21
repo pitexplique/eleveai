@@ -1,0 +1,6 @@
+{
+  "00-accroche": "60 % des joueurs finissent le niveau. Sur 500, pile 300 : tu paries ?",
+  "01-image": "Mauvaise idée : une probabilité d'environ 0,036 ! Dix tirages en Python : 283, 305, 293, 301… jamais 300. Mais tous restent proches.",
+  "02-question": "Et toi : variance 0,24, delta égale 0,02 : combien de joueurs pour une borne au plus 0,05 ? Réponds en commentaire !",
+  "03-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

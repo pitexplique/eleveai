@@ -1,0 +1,13 @@
+{
+  "00-garde": "Un exercice type bac sur l'inégalité de concentration.",
+  "01-situation": "Lina est data analyst dans un studio de jeux vidéo : ses mesures disent si un niveau est trop dur. 60 % des joueurs finissent le premier niveau. Lina en observe n égale 500, au hasard. X i vaut 1 si le joueur i finit le niveau, 0 sinon, et M n est la moyenne des X i.",
+  "02-q1": "Question 1. Chaque X i suit une loi de Bernoulli de paramètre 0,6 : espérance 0,6, variance 0,6 fois 0,4, soit 0,24. Donc E de M n égale 0,6, et V de M n égale 0,24 sur 500 : 0,00048.",
+  "03-q2": "Question 2 : minorer la probabilité que M n soit strictement entre 0,55 et 0,65, c'est-à-dire à moins de 0,05 de 0,6. Par l'inégalité de concentration, la probabilité d'un écart d'au moins 0,05 est au plus 0,00048 sur 0,05 au carré : 0,192. Donc la probabilité cherchée vaut au moins 1 moins 0,192 : 0,808.",
+  "04-tirage": "Le vrai tirage, en Python : 305 joueurs sur 500, M n égale 0,61. Bien dans l'intervalle.",
+  "05-q3": "Question 3 : combien de joueurs pour que cette probabilité d'écart soit au plus 0,05 ? On veut 0,24 sur n fois 0,0025 inférieur ou égal à 0,05. Donc n supérieur ou égal à 0,24 sur 0,05 fois 0,0025 : 1 920 joueurs.",
+  "06-piege": "Le piège : oublier le carré de delta. 0,05 au carré, c'est 0,0025. Sans le carré, on trouverait 96 joueurs : vingt fois trop peu.",
+  "07-defi": "À toi de jouer. Même question, avec un écart delta égale 0,1. Combien de joueurs ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 0,1 au carré : 0,01. n supérieur ou égal à 0,24 sur 0,05 fois 0,01 : 480 joueurs.",
+  "08-finale": "Ce que tu as appris. E de M n égale mu, V de M n égale sigma carré sur n. La borne : sigma carré sur n delta carré. Et pour trouver n, on résout l'inégalité, sans oublier le carré.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

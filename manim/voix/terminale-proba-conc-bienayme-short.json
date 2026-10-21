@@ -1,0 +1,6 @@
+{
+  "00-accroche": "Un cinéma : 120 entrées en moyenne, variance 400. Le risque de s'écarter de 50 entrées ? Bienaymé-Tchebychev dit : au plus 0,16.",
+  "01-image": "Mais sur 300 séances simulées, seulement 8 sortent : moins de 3 % ! La borne est un majorant, souvent large.",
+  "02-question": "Et toi : pour un écart de 100 entrées, que vaut la borne ? Réponds en commentaire !",
+  "03-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

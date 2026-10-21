@@ -1,0 +1,13 @@
+{
+  "00-garde": "Un exercice type bac avec une variable aléatoire.",
+  "01-situation": "Théo est ingénieur du son : il produit un jeune groupe de maloya et négocie leurs contrats. Leur nouveau titre sort en streaming. X : ce qu'il rapporte la première année, selon ses écoutes.",
+  "02-loi": "Question 1 : la loi de X. Peu d'écoutes : 500 euros, avec 0,5. Écoutes correctes : 800 euros, 0,25. Beaucoup : 1 000 euros, 0,2. Un tube : 4 000 euros, 0,05. Somme des probabilités : 1.",
+  "03-esperance": "Question 2 : l'espérance. Chaque valeur fois sa probabilité : 250, 200, 200 et 200. On additionne : E de X égale 850 euros.",
+  "04-variance": "Question 3 : la variance. V de X égale E de X carré, moins E de X au carré. E de X carré : 0,5 fois 500 au carré, plus 0,25 fois 800 au carré, plus 0,2 fois 1 000 au carré, plus 0,05 fois 4 000 au carré : 1 285 000. Moins 850 au carré : V de X égale 562 500. L'écart-type, sa racine : 750 euros.",
+  "05-contrats": "Question 4 : deux contrats. Un label rachète le titre 700 euros, sûrs. Ou le streaming : 850 euros en moyenne, mais un écart-type de 750, et une fois sur deux, 500 euros seulement. Besoin d'argent tout de suite : le contrat sûr. Beaucoup de titres à venir : la moyenne joue pour eux, le streaming.",
+  "06-piege": "Le piège : faire la moyenne des valeurs. 500 plus 800 plus 1 000 plus 4 000, divisé par 4 : 1 575 euros. Faux ! Le tube est rare : il ne pèse que 0,05.",
+  "07-defi": "À toi de jouer. Le titre passe à la radio : tous les revenus doublent. Quels sont l'espérance et l'écart-type de 2 X ? Mets pause, et cherche !",
+  "07b-correction": "Correction. E de 2 X égale 2 fois 850 : 1 700 euros. La variance est multipliée par 4, donc l'écart-type par 2 : 1 500 euros.",
+  "08-finale": "Ce que tu as appris. La loi : des probabilités de somme 1. L'espérance : la somme des valeurs fois leurs probabilités. L'écart-type : la racine de la variance, il mesure le risque. Pour choisir : l'espérance et le risque.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

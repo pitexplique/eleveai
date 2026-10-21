@@ -581,3 +581,9 @@ class ProbaTotalesSTMG(ProbaTotalesBase):
 class ProbaTotalesPremiereSpe(ProbaTotalesBase):
     identite = "Maths 1re spé — EleveAI"
     ceinture = "marron"
+
+
+# 20/10 : la Tle SPÉ, même voix, ceinture NOIRE.
+class ProbaTotalesTerminale(ProbaTotalesBase):
+    identite = "Maths Tle spé — EleveAI"
+    ceinture = "noire"

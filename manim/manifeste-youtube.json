@@ -23334,6 +23334,1075 @@
         "ceinture orange",
         "Shorts"
       ]
+    },
+    {
+      "id": "terminale-proba-totales",
+      "notionId": "probabilite_conditionnelle",
+      "microId": "proba_totales",
+      "classe": "terminale-spe",
+      "ceinture": "noire",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-totales",
+      "fichier": "terminale/maths/probabilites/03-totales/eleveai-maths-terminale-proba-totales.mp4",
+      "miniature": "terminale/maths/probabilites/03-totales/eleveai-maths-terminale-proba-totales.png",
+      "titre": "2 %, 4 %, 5 % de défauts… donc 3,7 % ? FAUX ! — Les probabilités totales · Maths Tle spé",
+      "accroche": "Une entreprise achète ses panneaux solaires chez trois fournisseurs : A 50 %, B 30 %, C 20 %. Les taux de défaut : 2 % chez A, 4 % chez B, 5 % chez C. Quelle part des panneaux a un défaut ?\n\nDans cette vidéo :\n• A, B et C forment une partition : chaque panneau vient d'un seul fournisseur\n• l'arbre pondéré : 0,5, 0,3 et 0,2, puis le défaut D : 0,02, 0,04 et 0,05\n• P(D) = somme des trois chemins : 0,5 × 0,02 + 0,3 × 0,04 + 0,2 × 0,05\n• 0,01 + 0,012 + 0,01 = 0,032 : 3,2 % des panneaux ont un défaut\n• le piège : la moyenne des taux, environ 3,7 % ; les fournisseurs n'ont pas le même poids\n\n🥋 Ceinture noire.\nUn défi en fin de vidéo, avec sa correction : quelle est la probabilité qu'un panneau n'ait pas de défaut ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=probabilite_conditionnelle&microId=proba_totales&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "tags": [
+        "probabilités totales",
+        "formule des probabilités totales",
+        "partition",
+        "arbre pondéré",
+        "panneaux solaires",
+        "énergie",
+        "probabilités",
+        "maths",
+        "lycée",
+        "EleveAI",
+        "terminale"
+      ],
+      "chapitres": [
+        [
+          "00:00",
+          "Les probabilités totales : trois fournisseurs de panneaux solaires"
+        ],
+        [
+          "00:23",
+          "A, B, C : une partition, et l'arbre pondéré"
+        ],
+        [
+          "00:46",
+          "La somme des trois chemins"
+        ],
+        [
+          "01:02",
+          "Le calcul : 3,2 %"
+        ],
+        [
+          "01:14",
+          "Le piège : la moyenne"
+        ],
+        [
+          "01:26",
+          "À toi de jouer, et correction"
+        ],
+        [
+          "01:45",
+          "Ce que tu as appris"
+        ]
+      ]
+    },
+    {
+      "id": "terminale-proba-totales-short",
+      "notionId": "probabilite_conditionnelle",
+      "microId": "proba_totales",
+      "classe": "terminale-spe",
+      "ceinture": "orange",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-proba-totales",
+      "meme_video_que": "stmg-proba-totales-short",
+      "fichier": "terminale/maths/probabilites/03-totales/eleveai-maths-terminale-proba-totales-short.mp4",
+      "miniature": "terminale/maths/probabilites/03-totales/eleveai-maths-terminale-proba-totales-short.png",
+      "titre": "3,7 % ? Non : 3,2 % ! ☀️ — Tle spé #Shorts",
+      "accroche": "Trois fournisseurs : 2 %, 4 %, 5 % de défauts. Donc environ 3,7 % en tout ? Non ! A fournit la moitié des panneaux. 0,5 × 0,02 + 0,3 × 0,04 + 0,2 × 0,05 : 3,2 %.\n\n🥋 Ceinture orange : un calcul, et un piège à éviter.\n👉 À toi : si A fournissait 80 % des panneaux, le taux de défaut serait-il plus haut ou plus bas ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=probabilite_conditionnelle&microId=proba_totales&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités totales",
+        "arbre pondéré",
+        "panneaux solaires",
+        "piège",
+        "probabilités",
+        "maths STMG",
+        "lycée",
+        "eleveai",
+        "terminale",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "terminale-proba-bayes",
+      "notionId": "probabilite_conditionnelle",
+      "microId": "proba_inverse_bayes",
+      "classe": "terminale-spe",
+      "ceinture": "noire",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-faux-positifs",
+      "fichier": "terminale/maths/probabilites/04-bayes/eleveai-maths-terminale-proba-bayes.mp4",
+      "miniature": "terminale/maths/probabilites/04-bayes/eleveai-maths-terminale-proba-bayes.png",
+      "titre": "Le détecteur sonne… défectueux ? Seulement 0,16 ! — Les faux positifs · Maths Tle spé",
+      "accroche": "Une usine fabrique des panneaux solaires : 2 % sont défectueux. Un détecteur « fiable » repère 95 % des défectueux et laisse passer 90 % des bons. Quand il sonne, le panneau est-il vraiment défectueux ?\n\nDans cette vidéo :\n• le tableau sur 10 000 panneaux : 190 vrais positifs, 10 faux négatifs, 980 faux positifs\n• la colonne « sonne » : 190 sur 1 170, environ 0,16\n• le piège : 95 %, c'est P_D(S), pas P_S(D)\n• les mots du métier : sensibilité et spécificité\n\n🥋 Ceinture noire.\nUn défi en fin de vidéo, avec sa correction : le détecteur ne sonne pas : quelle est la probabilité que le panneau soit quand même défectueux ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=probabilite_conditionnelle&microId=proba_inverse_bayes&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "tags": [
+        "probabilité conditionnelle",
+        "faux positifs",
+        "test de dépistage",
+        "sensibilité",
+        "spécificité",
+        "contrôle qualité",
+        "probabilités",
+        "maths",
+        "lycée",
+        "EleveAI",
+        "terminale"
+      ],
+      "chapitres": [
+        [
+          "00:00",
+          "Les faux positifs"
+        ],
+        [
+          "00:05",
+          "L'usine de panneaux solaires"
+        ],
+        [
+          "00:23",
+          "Le tableau sur 10 000 panneaux"
+        ],
+        [
+          "00:40",
+          "Les faux positifs (980)"
+        ],
+        [
+          "00:53",
+          "Il sonne : est-il défectueux ?"
+        ],
+        [
+          "01:17",
+          "Le piège : P_D(S) ou P_S(D)"
+        ],
+        [
+          "01:40",
+          "Sensibilité et spécificité"
+        ],
+        [
+          "01:56",
+          "À toi de jouer"
+        ],
+        [
+          "02:09",
+          "Correction"
+        ],
+        [
+          "02:29",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:47",
+          "Le coach et l'abonnement"
+        ]
+      ]
+    },
+    {
+      "id": "terminale-proba-bayes-short",
+      "notionId": "probabilite_conditionnelle",
+      "microId": "proba_inverse_bayes",
+      "classe": "terminale-spe",
+      "ceinture": "orange",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-proba-bayes",
+      "meme_video_que": "stmg-proba-faux-positifs-short",
+      "fichier": "terminale/maths/probabilites/04-bayes/eleveai-maths-terminale-proba-bayes-short.mp4",
+      "miniature": "terminale/maths/probabilites/04-bayes/eleveai-maths-terminale-proba-bayes-short.png",
+      "titre": "Test positif à 99 %… malade à MÊME PAS 10 % ! 🧪 — Tle spé #Shorts",
+      "accroche": "Une maladie touche 1 personne sur 1 000. Sur 100 000 personnes : 100 malades, et 99 positifs. Mais le test se trompe chez 1 % des 99 900 autres : 999 faux positifs. Positifs : 99 + 999 = 1 098. Vrais malades : 99 sur 1 098, environ 0,09.\n\n🥋 Ceinture orange : un calcul, et un piège à éviter.\n👉 À toi : et si la maladie touchait 1 personne sur 10 : quelle est la probabilité d'être malade quand le test est positif ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=probabilite_conditionnelle&microId=proba_inverse_bayes&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilité conditionnelle",
+        "test médical",
+        "faux positifs",
+        "dépistage",
+        "surprise",
+        "probabilités",
+        "maths",
+        "lycée",
+        "eleveai",
+        "terminale",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "terminale-proba-va-definition",
+      "notionId": "variable_aleatoire",
+      "microId": "va_definition",
+      "classe": "terminale-spe",
+      "ceinture": "noire",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "meme_video_que": "premiere-proba-va-definition",
+      "fichier": "terminale/maths/probabilites/21-va-definition/eleveai-maths-terminale-proba-va-definition.mp4",
+      "miniature": "terminale/maths/probabilites/21-va-definition/eleveai-maths-terminale-proba-va-definition.png",
+      "titre": "X = 2, ce n'est PAS une probabilité ! — Une variable aléatoire, c'est quoi ? · Maths Tle spé",
+      "accroche": "En 1654, Pascal et Fermat s'écrivent sur les jeux de hasard ; Fermat est magistrat le jour, mathématicien le soir. Deux pièces, quatre issues : X compte les piles. Une variable aléatoire est une fonction de l'univers vers les réels ; plusieurs issues peuvent donner le même nombre. Le gain G en écus, et le piège : X n'est pas une probabilité.\n\n🥋 Ceinture noire.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=variable_aleatoire&microId=va_definition&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "tags": [
+        "variable aléatoire",
+        "fonction",
+        "univers",
+        "Pascal",
+        "Fermat",
+        "histoire des maths",
+        "probabilités",
+        "maths",
+        "spécialité maths",
+        "lycée",
+        "EleveAI",
+        "terminale"
+      ]
+    },
+    {
+      "id": "terminale-proba-va-definition-short",
+      "notionId": "variable_aleatoire",
+      "microId": "va_definition",
+      "classe": "terminale-spe",
+      "ceinture": "orange",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-proba-va-definition",
+      "meme_video_que": "premiere-proba-va-definition-short",
+      "fichier": "terminale/maths/probabilites/21-va-definition/eleveai-maths-terminale-proba-va-definition-short.mp4",
+      "miniature": "terminale/maths/probabilites/21-va-definition/eleveai-maths-terminale-proba-va-definition-short.png",
+      "titre": "4 issues… mais seulement 3 valeurs ? 🪙 — Tle spé #Shorts",
+      "accroche": "Deux pièces, quatre issues. Le nombre de piles prend donc quatre valeurs ? Non ! Pile pile, 2. Pile face, 1. Face pile, 1. Face face, 0. Trois valeurs seulement !\n\n🥋 Ceinture orange.\n👉 À toi : avec trois pièces, huit issues : combien de valeurs pour le nombre de piles ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=variable_aleatoire&microId=va_definition&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #première #lycée",
+      "tags": [
+        "variable aléatoire",
+        "fonction",
+        "univers",
+        "Pascal",
+        "Fermat",
+        "histoire des maths",
+        "piège",
+        "probabilités",
+        "maths",
+        "spécialité maths",
+        "lycée",
+        "EleveAI",
+        "terminale",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "terminale-proba-va-loi",
+      "notionId": "variable_aleatoire",
+      "microId": "va_loi_probabilite",
+      "classe": "terminale-spe",
+      "ceinture": "noire",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-va-loi",
+      "fichier": "terminale/maths/probabilites/22-va-loi/eleveai-maths-terminale-proba-va-loi.mp4",
+      "miniature": "terminale/maths/probabilites/22-va-loi/eleveai-maths-terminale-proba-va-loi.png",
+      "titre": "0, 1 ou 2 piles : PAS un tiers chacun ! — Dresser une loi de probabilité · Maths Tle spé",
+      "accroche": "On lance deux pièces équilibrées ; X est le nombre de piles.\n\nDans cette vidéo :\n• étape 1 : les valeurs, 0, 1 et 2\n• étape 2 : les 4 issues, chacune 0,25\n• étape 3 : les probabilités, 0,25, 0,5 et 0,25\n• le tableau de la loi, et la somme qui fait 1\n• le piège : croire à un tiers chacun\n\n🥋 Ceinture noire.\nUn défi en fin de vidéo, avec sa correction : on lance trois pièces : quelle est la probabilité d'obtenir exactement 3 piles ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=variable_aleatoire&microId=va_loi_probabilite&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "tags": [
+        "probabilités",
+        "variable aléatoire",
+        "loi de probabilité",
+        "pile ou face",
+        "tableau",
+        "maths",
+        "lycée",
+        "EleveAI",
+        "terminale"
+      ],
+      "chapitres": [
+        [
+          "00:00",
+          "Dresser une loi"
+        ],
+        [
+          "00:05",
+          "Deux pièces, X = nombre de piles"
+        ],
+        [
+          "00:11",
+          "Étape 1 : les valeurs"
+        ],
+        [
+          "00:21",
+          "Étape 2 : les 4 issues"
+        ],
+        [
+          "00:33",
+          "Étape 3 : les probabilités"
+        ],
+        [
+          "00:55",
+          "Le tableau de la loi"
+        ],
+        [
+          "01:10",
+          "La somme fait 1"
+        ],
+        [
+          "01:22",
+          "Le piège : un tiers chacun ?"
+        ],
+        [
+          "01:34",
+          "À toi de jouer"
+        ],
+        [
+          "01:47",
+          "Correction"
+        ],
+        [
+          "02:01",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:16",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ]
+    },
+    {
+      "id": "terminale-proba-va-loi-short",
+      "notionId": "variable_aleatoire",
+      "microId": "va_loi_probabilite",
+      "classe": "terminale-spe",
+      "ceinture": "orange",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-proba-va-loi",
+      "meme_video_que": "stmg-proba-va-loi-short",
+      "fichier": "terminale/maths/probabilites/22-va-loi/eleveai-maths-terminale-proba-va-loi-short.mp4",
+      "miniature": "terminale/maths/probabilites/22-va-loi/eleveai-maths-terminale-proba-va-loi-short.png",
+      "titre": "Somme 2 ou somme 7 : même chance ? 🎲 — Tle spé #Shorts",
+      "accroche": "Deux dés. Somme 2 : un seul cas, 1 et 1. Somme 7 : six cas, de 1 et 6 jusqu'à 6 et 1. Sur 36, le 7 est six fois plus probable que le 2.\n\n🥋 Ceinture orange : un calcul, et un piège à éviter.\n👉 À toi : et la somme 12, combien de cas sur 36 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=variable_aleatoire&microId=va_loi_probabilite&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "dés",
+        "loi de probabilité",
+        "somme",
+        "maths",
+        "lycée",
+        "eleveai",
+        "terminale",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "terminale-proba-va-esperance",
+      "notionId": "variable_aleatoire",
+      "microId": "va_esperance",
+      "classe": "terminale-spe",
+      "ceinture": "noire",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-va-esperance",
+      "fichier": "terminale/maths/probabilites/23-va-esperance/eleveai-maths-terminale-proba-va-esperance.mp4",
+      "miniature": "terminale/maths/probabilites/23-va-esperance/eleveai-maths-terminale-proba-va-esperance.png",
+      "titre": "(0 + 2 + 10) ÷ 3 = 4 ? FAUX ! — L'espérance, le gain moyen · Maths Tle spé",
+      "accroche": "La roue de la kermesse : X vaut 0 € avec 0,6, 2 € avec 0,3 et 10 € avec 0,1.\n\nDans cette vidéo :\n• la formule de E(X) : chaque valeur fois sa probabilité, puis la somme\n• le calcul : 0 + 0,6 + 1 = 1,6\n• le sens : en moyenne 1,60 € par partie\n• le piège : la simple moyenne des valeurs, 4\n\n🥋 Ceinture noire.\nUn défi en fin de vidéo, avec sa correction : une autre roue : 0 € avec 0,5, 4 € avec 0,5. Quelle est l'espérance ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=variable_aleatoire&microId=va_esperance&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "tags": [
+        "probabilités",
+        "espérance",
+        "variable aléatoire",
+        "kermesse",
+        "moyenne",
+        "maths",
+        "lycée",
+        "EleveAI",
+        "terminale"
+      ],
+      "chapitres": [
+        [
+          "00:00",
+          "L'espérance : le gain moyen"
+        ],
+        [
+          "00:04",
+          "La roue de la kermesse"
+        ],
+        [
+          "00:17",
+          "La formule de E(X)"
+        ],
+        [
+          "00:25",
+          "Le calcul pas à pas"
+        ],
+        [
+          "00:47",
+          "Ça veut dire quoi ?"
+        ],
+        [
+          "00:56",
+          "Le piège"
+        ],
+        [
+          "01:13",
+          "À toi de jouer"
+        ],
+        [
+          "01:29",
+          "Correction"
+        ],
+        [
+          "01:42",
+          "Ce que tu as appris"
+        ],
+        [
+          "02:00",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ]
+    },
+    {
+      "id": "terminale-proba-va-esperance-short",
+      "notionId": "variable_aleatoire",
+      "microId": "va_esperance",
+      "classe": "terminale-spe",
+      "ceinture": "orange",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-proba-va-esperance",
+      "meme_video_que": "stmg-proba-va-esperance-short",
+      "fichier": "terminale/maths/probabilites/23-va-esperance/eleveai-maths-terminale-proba-va-esperance-short.mp4",
+      "miniature": "terminale/maths/probabilites/23-va-esperance/eleveai-maths-terminale-proba-va-esperance-short.png",
+      "titre": "Le dé paie 3,50 € en moyenne… aucune face ne donne 3,5 ! 🎲 — Tle spé #Shorts",
+      "accroche": "Tu lances un dé et tu gagnes autant d'euros que le nombre affiché. 1 + 2 + 3 + 4 + 5 + 6 = 21, et 21 ÷ 6 = 3,5. En moyenne, 3,50 euros… alors qu'aucune face ne donne 3,5 !\n\n🥋 Ceinture orange : un calcul, et un piège à éviter.\n👉 À toi : si on payait 4 euros pour jouer, gagnerais-tu de l'argent à long terme ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=variable_aleatoire&microId=va_esperance&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "dé",
+        "espérance",
+        "jeu",
+        "maths",
+        "lycée",
+        "eleveai",
+        "terminale",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "terminale-proba-va-ecart-type",
+      "notionId": "variable_aleatoire",
+      "microId": "va_variance_ecart_type",
+      "classe": "terminale-spe",
+      "ceinture": "noire",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "meme_video_que": "premiere-proba-va-ecart-type",
+      "fichier": "terminale/maths/probabilites/24-va-ecart-type/eleveai-maths-terminale-proba-va-ecart-type.mp4",
+      "miniature": "terminale/maths/probabilites/24-va-ecart-type/eleveai-maths-terminale-proba-va-ecart-type.png",
+      "titre": "Même gain moyen, risque 9 fois plus grand — L'écart-type · Maths Tle spé",
+      "accroche": "Karim, conseiller en placements, compare deux placements de même espérance, 30 euros. L'écart-type, racine de la variance, dans l'unité de X : 10 euros pour A, 90 euros pour B. À espérance égale, le plus grand écart-type est le plus risqué. Le piège : oublier la racine.\n\n🥋 Ceinture noire.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=variable_aleatoire&microId=va_variance_ecart_type&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "tags": [
+        "écart-type",
+        "variance",
+        "risque",
+        "placement",
+        "conseiller financier",
+        "probabilités",
+        "maths",
+        "spécialité maths",
+        "lycée",
+        "EleveAI",
+        "terminale"
+      ]
+    },
+    {
+      "id": "terminale-proba-va-ecart-type-short",
+      "notionId": "variable_aleatoire",
+      "microId": "va_variance_ecart_type",
+      "classe": "terminale-spe",
+      "ceinture": "orange",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-proba-va-ecart-type",
+      "meme_video_que": "premiere-proba-va-ecart-type-short",
+      "fichier": "terminale/maths/probabilites/24-va-ecart-type/eleveai-maths-terminale-proba-va-ecart-type-short.mp4",
+      "miniature": "terminale/maths/probabilites/24-va-ecart-type/eleveai-maths-terminale-proba-va-ecart-type-short.png",
+      "titre": "30 € en moyenne… mais lequel est risqué ? 💶 — Tle spé #Shorts",
+      "accroche": "Deux placements, même gain moyen, 30 euros. A : 20 ou 40 euros. B : −60 ou 120 euros. Écart-type de A : 10 euros. De B : 90 euros !\n\n🥋 Ceinture orange.\n👉 À toi : C : 0 ou 60 euros, une chance sur deux. Son écart-type ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=variable_aleatoire&microId=va_variance_ecart_type&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #première #lycée",
+      "tags": [
+        "écart-type",
+        "variance",
+        "risque",
+        "placement",
+        "conseiller financier",
+        "piège",
+        "probabilités",
+        "maths",
+        "spécialité maths",
+        "lycée",
+        "EleveAI",
+        "terminale",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "terminale-proba-va-interpreter",
+      "notionId": "variable_aleatoire",
+      "microId": "va_interpreter",
+      "classe": "terminale-spe",
+      "ceinture": "noire",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "meme_video_que": "stmg-proba-va-moyenne",
+      "fichier": "terminale/maths/probabilites/25-va-interpreter/eleveai-maths-terminale-proba-va-interpreter.mp4",
+      "miniature": "terminale/maths/probabilites/25-va-interpreter/eleveai-maths-terminale-proba-va-interpreter.png",
+      "titre": "E(X) = 1,6 €… mais on ne gagne JAMAIS 1,6 € ! — L'espérance, une moyenne · Maths Tle spé",
+      "accroche": "La roue de la kermesse a une espérance de 1,6 €, mais à chaque partie on gagne 0, 2 ou 10 €.\n\nDans cette vidéo :\n• 10 parties : moyenne 1,6, un coup de chance\n• 10 autres parties : moyenne 0,4\n• sur 1 000 parties, la moyenne se rapproche de 1,6\n• le piège : attendre 1,6 € à chaque partie\n\n🥋 Ceinture noire.\nUn défi en fin de vidéo, avec sa correction : l'organisateur prévoit 500 parties : combien d'euros de gains doit-il prévoir, environ ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=variable_aleatoire&microId=va_interpreter&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "tags": [
+        "probabilités",
+        "espérance",
+        "moyenne",
+        "loi des grands nombres",
+        "échantillon",
+        "kermesse",
+        "maths",
+        "lycée",
+        "EleveAI",
+        "terminale"
+      ],
+      "chapitres": [
+        [
+          "00:00",
+          "L'espérance, c'est la moyenne"
+        ],
+        [
+          "00:06",
+          "La roue de la kermesse"
+        ],
+        [
+          "00:18",
+          "Jouons 10 parties"
+        ],
+        [
+          "00:33",
+          "Encore 10 parties"
+        ],
+        [
+          "00:45",
+          "Sur 1 000 parties"
+        ],
+        [
+          "00:55",
+          "Le piège"
+        ],
+        [
+          "01:07",
+          "À toi de jouer"
+        ],
+        [
+          "01:22",
+          "Correction"
+        ],
+        [
+          "01:34",
+          "Ce que tu as appris"
+        ],
+        [
+          "01:49",
+          "Entraîne-toi et abonne-toi"
+        ]
+      ]
+    },
+    {
+      "id": "terminale-proba-va-interpreter-short",
+      "notionId": "variable_aleatoire",
+      "microId": "va_interpreter",
+      "classe": "terminale-spe",
+      "ceinture": "orange",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-proba-va-interpreter",
+      "meme_video_que": "stmg-proba-va-moyenne-short",
+      "fichier": "terminale/maths/probabilites/25-va-interpreter/eleveai-maths-terminale-proba-va-interpreter-short.mp4",
+      "miniature": "terminale/maths/probabilites/25-va-interpreter/eleveai-maths-terminale-proba-va-interpreter-short.png",
+      "titre": "6, 6, 5, 6, 6 : le dé est truqué ? 🎲 — Tle spé #Shorts",
+      "accroche": "Un dé : la moyenne théorique est 3,5. Tu lances 5 fois : 6, 6, 5, 6, 6, moyenne 5,8. Pas forcément truqué ! Sur 5 lancers, la moyenne bouge énormément ; sur 1 000, elle se rapprocherait de 3,5.\n\n🥋 Ceinture orange : un calcul, et un piège à éviter.\n👉 À toi : sur 10 000 lancers d'un dé normal, la moyenne serait-elle plus proche de 3 ou de 3,5 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=variable_aleatoire&microId=va_interpreter&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #STMG #lycée",
+      "tags": [
+        "probabilités",
+        "dé",
+        "moyenne",
+        "espérance",
+        "hasard",
+        "maths",
+        "lycée",
+        "eleveai",
+        "terminale",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "terminale-proba-cond-defi",
+      "notionId": "probabilite_conditionnelle",
+      "microId": "proba_conditionnelle_defi",
+      "classe": "terminale-spe",
+      "ceinture": "noire",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/probabilites/05-cond-defi/eleveai-maths-terminale-proba-cond-defi.mp4",
+      "miniature": "terminale/maths/probabilites/05-cond-defi/eleveai-maths-terminale-proba-cond-defi.png",
+      "titre": "80 % après l'alerte… 57 % dans l'autre sens ! — Sujet type bac, probas conditionnelles · Tle spé",
+      "accroche": "Maëlle est prévisionniste à Météo-France La Réunion : à l'approche d'un cyclone, elle décide de l'alerte fortes pluies. Un exercice type bac en 4 questions : l'arbre pondéré, la probabilité d'un chemin (0,2), les probabilités totales (P(F) = 0,35), puis inverser la condition (P_F(A) ≈ 0,571). Le piège : confondre P_A(F) et P_F(A).\n\n🥋 Ceinture noire.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=probabilite_conditionnelle&microId=proba_conditionnelle_defi&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "tags": [
+        "probabilité conditionnelle",
+        "arbre pondéré",
+        "probabilités totales",
+        "météo",
+        "cyclone",
+        "La Réunion",
+        "probabilités",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "terminale-proba-cond-defi-short",
+      "notionId": "probabilite_conditionnelle",
+      "microId": "proba_conditionnelle_defi",
+      "classe": "terminale-spe",
+      "ceinture": "orange",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-proba-cond-defi",
+      "fichier": "terminale/maths/probabilites/05-cond-defi/eleveai-maths-terminale-proba-cond-defi-short.mp4",
+      "miniature": "terminale/maths/probabilites/05-cond-defi/eleveai-maths-terminale-proba-cond-defi-short.png",
+      "titre": "Il pleut 8 fois sur 10 après l'alerte… et dans l'autre sens ? 🌀 — Tle spé #Shorts",
+      "accroche": "Après son alerte fortes pluies, il pleut 8 fois sur 10. Donc quand il pleut, l'alerte était là 8 fois sur 10 ? Pas du tout ! Sur 100 jours : 25 alertes, dont 20 sous la pluie, et 15 jours de pluie sans alerte. 20 sur 35 : 57 % seulement !\n\n🥋 Ceinture orange.\n👉 À toi : alerte 0,25 ; pluie après alerte 0,8 ; sans alerte 0,2. S'il n'a pas plu, quelle probabilité qu'il y ait eu une alerte ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=probabilite_conditionnelle&microId=proba_conditionnelle_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #terminale #bac",
+      "tags": [
+        "probabilité conditionnelle",
+        "arbre pondéré",
+        "probabilités totales",
+        "météo",
+        "cyclone",
+        "La Réunion",
+        "piège",
+        "probabilités",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "terminale-proba-va-defi",
+      "notionId": "variable_aleatoire",
+      "microId": "va_defi",
+      "classe": "terminale-spe",
+      "ceinture": "noire",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/probabilites/26-va-defi/eleveai-maths-terminale-proba-va-defi.mp4",
+      "miniature": "terminale/maths/probabilites/26-va-defi/eleveai-maths-terminale-proba-va-defi.png",
+      "titre": "700 € sûrs ou 850 € en moyenne ? — Sujet type bac, variable aléatoire · Tle spé",
+      "accroche": "Théo est ingénieur du son : il produit un jeune groupe de maloya. X, ce que rapporte leur titre en streaming la première année. Un exercice type bac : la loi, l'espérance (850 €), la variance et l'écart-type (750 €), puis le choix entre un contrat sûr et le streaming. Le piège : faire la moyenne des valeurs (1 575 €).\n\n🥋 Ceinture noire.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=variable_aleatoire&microId=va_defi&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "tags": [
+        "variable aléatoire",
+        "espérance",
+        "écart-type",
+        "musique",
+        "maloya",
+        "streaming",
+        "probabilités",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "terminale-proba-va-defi-short",
+      "notionId": "variable_aleatoire",
+      "microId": "va_defi",
+      "classe": "terminale-spe",
+      "ceinture": "orange",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-proba-va-defi",
+      "fichier": "terminale/maths/probabilites/26-va-defi/eleveai-maths-terminale-proba-va-defi-short.mp4",
+      "miniature": "terminale/maths/probabilites/26-va-defi/eleveai-maths-terminale-proba-va-defi-short.png",
+      "titre": "Un tube à 4 000 €… et pourtant 850 € en moyenne ! 🎶 — Tle spé #Shorts",
+      "accroche": "Le titre du groupe de maloya rapportera 500, 800, 1 000 ou 4 000 euros. En moyenne, 1 575 ? Raté ! Le tube n'arrive qu'une fois sur 20. Espérance : 850 euros. Et une fois sur deux, seulement 500 !\n\n🥋 Ceinture orange.\n👉 À toi : 500 euros, 0,5 ; 800, 0,25 ; 1 000, 0,2 ; 4 000, 0,05. Probabilité de toucher plus de 900 euros ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=variable_aleatoire&microId=va_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #terminale #bac",
+      "tags": [
+        "variable aléatoire",
+        "espérance",
+        "écart-type",
+        "musique",
+        "maloya",
+        "streaming",
+        "piège",
+        "probabilités",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "terminale-proba-conc-moyenne",
+      "notionId": "concentration_echantillonnage",
+      "microId": "concentration_echantillon_moyenne",
+      "classe": "terminale-spe",
+      "ceinture": "noire",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/probabilites/31-conc-moyenne/eleveai-maths-terminale-proba-conc-moyenne.mp4",
+      "miniature": "terminale/maths/probabilites/31-conc-moyenne/eleveai-maths-terminale-proba-conc-moyenne.png",
+      "titre": "V(M) = 9 ? FAUX : c'est V ÷ n ! — La moyenne d'un échantillon · Tle spé",
+      "accroche": "Clarisse est agricultrice de vanille à Saint-André : elle prévoit la masse de ses gousses. La moyenne M de 9 gousses : E(M) = E(X) = 15 g, V(M) = V(X) ÷ n = 1. Un vrai tirage, puis 40 : les moyennes se serrent. Le piège : garder la variance d'une seule gousse.\n\n🥋 Ceinture noire.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=concentration_echantillonnage&microId=concentration_echantillon_moyenne&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "tags": [
+        "moyenne d'un échantillon",
+        "variance",
+        "concentration",
+        "vanille",
+        "agriculture",
+        "La Réunion",
+        "probabilités",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "terminale-proba-conc-moyenne-short",
+      "notionId": "concentration_echantillonnage",
+      "microId": "concentration_echantillon_moyenne",
+      "classe": "terminale-spe",
+      "ceinture": "orange",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-proba-conc-moyenne",
+      "fichier": "terminale/maths/probabilites/31-conc-moyenne/eleveai-maths-terminale-proba-conc-moyenne-short.mp4",
+      "miniature": "terminale/maths/probabilites/31-conc-moyenne/eleveai-maths-terminale-proba-conc-moyenne-short.png",
+      "titre": "3 g → 1 g : la magie de la moyenne 🌿 — Tle spé #Shorts",
+      "accroche": "Une gousse de vanille pèse 15 grammes, avec un écart-type de 3 grammes. Et la moyenne de 9 gousses ? Surprise : son écart-type tombe à 1 gramme ! La variance, 9, est divisée par 9.\n\n🥋 Ceinture orange.\n👉 À toi : avec 100 gousses, quelle est la variance de la moyenne ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=concentration_echantillonnage&microId=concentration_echantillon_moyenne&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #terminale #bac",
+      "tags": [
+        "moyenne d'un échantillon",
+        "variance",
+        "concentration",
+        "vanille",
+        "agriculture",
+        "La Réunion",
+        "piège",
+        "probabilités",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "terminale-proba-conc-bienayme",
+      "notionId": "concentration_echantillonnage",
+      "microId": "concentration_inegalite_bienayme",
+      "classe": "terminale-spe",
+      "ceinture": "noire",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/probabilites/32-conc-bienayme/eleveai-maths-terminale-proba-conc-bienayme.mp4",
+      "miniature": "terminale/maths/probabilites/32-conc-bienayme/eleveai-maths-terminale-proba-conc-bienayme.png",
+      "titre": "16 % ? NON : un majorant ! — L'inégalité de Bienaymé-Tchebychev · Tle spé",
+      "accroche": "Malik est exploitant de cinéma : 120 entrées en moyenne à la séance de 20 h, variance 400. Le risque de sortir de 70 à 170 spectateurs ? Bienaymé-Tchebychev : au plus 400 ÷ 50² = 0,16. Mais 300 séances simulées : 8 sorties, environ 0,027. Le piège : la borne est un majorant, pas la probabilité.\n\n🥋 Ceinture noire.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=concentration_echantillonnage&microId=concentration_inegalite_bienayme&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "tags": [
+        "Bienaymé-Tchebychev",
+        "inégalité",
+        "majorant",
+        "variance",
+        "cinéma",
+        "probabilités",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "terminale-proba-conc-bienayme-short",
+      "notionId": "concentration_echantillonnage",
+      "microId": "concentration_inegalite_bienayme",
+      "classe": "terminale-spe",
+      "ceinture": "orange",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-proba-conc-bienayme",
+      "fichier": "terminale/maths/probabilites/32-conc-bienayme/eleveai-maths-terminale-proba-conc-bienayme-short.mp4",
+      "miniature": "terminale/maths/probabilites/32-conc-bienayme/eleveai-maths-terminale-proba-conc-bienayme-short.png",
+      "titre": "La borne dit 16 %… la réalité 3 % 🎬 — Tle spé #Shorts",
+      "accroche": "Un cinéma : 120 entrées en moyenne, variance 400. Le risque de s'écarter de 50 entrées ? Bienaymé-Tchebychev dit : au plus 0,16. Mais sur 300 séances simulées, seulement 8 sortent : moins de 3 % !\n\n🥋 Ceinture orange.\n👉 À toi : pour un écart de 100 entrées, que vaut la borne ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=concentration_echantillonnage&microId=concentration_inegalite_bienayme&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #terminale #bac",
+      "tags": [
+        "Bienaymé-Tchebychev",
+        "inégalité",
+        "majorant",
+        "variance",
+        "cinéma",
+        "piège",
+        "probabilités",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "terminale-proba-conc-inegalite",
+      "notionId": "concentration_echantillonnage",
+      "microId": "concentration_inegalite_concentration",
+      "classe": "terminale-spe",
+      "ceinture": "noire",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/probabilites/33-conc-inegalite/eleveai-maths-terminale-proba-conc-inegalite.mp4",
+      "miniature": "terminale/maths/probabilites/33-conc-inegalite/eleveai-maths-terminale-proba-conc-inegalite.png",
+      "titre": "2 fois plus précis = 4 fois plus de mesures — L'inégalité de concentration · Tle spé",
+      "accroche": "Aïcha est pharmacienne, responsable qualité : chaque comprimé doit avoir la bonne dose. L'inégalité de concentration sur la moyenne de n comprimés : V ÷ (n δ²). Avec 50 comprimés, au plus 12,5 % ; pour au plus 5 %, n ≥ 125. Le piège : oublier le carré de δ.\n\n🥋 Ceinture noire.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=concentration_echantillonnage&microId=concentration_inegalite_concentration&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "tags": [
+        "inégalité de concentration",
+        "taille d'échantillon",
+        "contrôle qualité",
+        "pharmacie",
+        "santé",
+        "probabilités",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "terminale-proba-conc-inegalite-short",
+      "notionId": "concentration_echantillonnage",
+      "microId": "concentration_inegalite_concentration",
+      "classe": "terminale-spe",
+      "ceinture": "orange",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-proba-conc-inegalite",
+      "fichier": "terminale/maths/probabilites/33-conc-inegalite/eleveai-maths-terminale-proba-conc-inegalite-short.mp4",
+      "miniature": "terminale/maths/probabilites/33-conc-inegalite/eleveai-maths-terminale-proba-conc-inegalite-short.png",
+      "titre": "250 comprimés ? NON, 500 ! 💊 — Tle spé #Shorts",
+      "accroche": "Avec 125 comprimés pesés, on connaît la masse moyenne à 2 milligrammes près. Pour 1 milligramme près, il en faut 250 ? Non ! Il en faut 500, quatre fois plus. Delta est au carré.\n\n🥋 Ceinture orange.\n👉 À toi : pour être 10 fois plus précis, combien de fois plus de comprimés ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=concentration_echantillonnage&microId=concentration_inegalite_concentration&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #terminale #bac",
+      "tags": [
+        "inégalité de concentration",
+        "taille d'échantillon",
+        "contrôle qualité",
+        "pharmacie",
+        "santé",
+        "piège",
+        "probabilités",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "terminale-proba-conc-lgn",
+      "notionId": "concentration_echantillonnage",
+      "microId": "concentration_loi_grands_nombres",
+      "classe": "terminale-spe",
+      "ceinture": "noire",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/probabilites/34-conc-lgn/eleveai-maths-terminale-proba-conc-lgn.mp4",
+      "miniature": "terminale/maths/probabilites/34-conc-lgn/eleveai-maths-terminale-proba-conc-lgn.png",
+      "titre": "Le hasard ne compense pas : il dilue — La loi des grands nombres · Tle spé",
+      "accroche": "Au XVIIIe siècle, le naturaliste Buffon lance une pièce 4 040 fois : 2 048 piles. Un vrai tirage en Python : la fréquence oscille puis se stabilise autour de 0,5. Jacques Bernoulli démontre la loi en 1713. Le piège : croire que le hasard compense — le retard n'est pas rattrapé, il est noyé.\n\n🥋 Ceinture noire.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=concentration_echantillonnage&microId=concentration_loi_grands_nombres&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "tags": [
+        "loi des grands nombres",
+        "fréquence",
+        "Buffon",
+        "Bernoulli",
+        "histoire des sciences",
+        "probabilités",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "terminale-proba-conc-lgn-short",
+      "notionId": "concentration_echantillonnage",
+      "microId": "concentration_loi_grands_nombres",
+      "classe": "terminale-spe",
+      "ceinture": "orange",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-proba-conc-lgn",
+      "fichier": "terminale/maths/probabilites/34-conc-lgn/eleveai-maths-terminale-proba-conc-lgn-short.mp4",
+      "miniature": "terminale/maths/probabilites/34-conc-lgn/eleveai-maths-terminale-proba-conc-lgn-short.png",
+      "titre": "7 faces de suite… pile, enfin dû ? 🪙 — Tle spé #Shorts",
+      "accroche": "Sept faces de suite. Au prochain lancer, tu paries sur pile ? Il n'a pas plus de chances : la pièce n'a pas de mémoire. Le naturaliste Buffon, lui, a lancé 4 040 fois : 2 048 piles, environ 0,507 !\n\n🥋 Ceinture orange.\n👉 À toi : 2 048 piles sur 4 040 lancers, combien de plus que la moitié ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=concentration_echantillonnage&microId=concentration_loi_grands_nombres&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #terminale #bac",
+      "tags": [
+        "loi des grands nombres",
+        "fréquence",
+        "Buffon",
+        "Bernoulli",
+        "histoire des sciences",
+        "piège",
+        "probabilités",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "terminale-proba-conc-fluctuation",
+      "notionId": "concentration_echantillonnage",
+      "microId": "concentration_fluctuation",
+      "classe": "terminale-spe",
+      "ceinture": "noire",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/probabilites/35-conc-fluctuation/eleveai-maths-terminale-proba-conc-fluctuation.mp4",
+      "miniature": "terminale/maths/probabilites/35-conc-fluctuation/eleveai-maths-terminale-proba-conc-fluctuation.png",
+      "titre": "11 sur 20 : un match raté, est-ce grave ? — La fluctuation d'échantillonnage · Tle spé",
+      "accroche": "Enzo est analyste de données d'un club de handball : une joueuse réussit 70 % de ses tirs. Dix matchs simulés : la fréquence fluctue. L'inégalité de concentration : au plus 0,47 pour un écart de 0,15 sur 20 tirs, 0,023 sur une saison de 400. Le piège : un majorant n'est pas la probabilité (environ 0,22).\n\n🥋 Ceinture noire.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=concentration_echantillonnage&microId=concentration_fluctuation&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "tags": [
+        "fluctuation d'échantillonnage",
+        "fréquence",
+        "inégalité de concentration",
+        "handball",
+        "sport",
+        "data",
+        "probabilités",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "terminale-proba-conc-fluctuation-short",
+      "notionId": "concentration_echantillonnage",
+      "microId": "concentration_fluctuation",
+      "classe": "terminale-spe",
+      "ceinture": "orange",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-proba-conc-fluctuation",
+      "fichier": "terminale/maths/probabilites/35-conc-fluctuation/eleveai-maths-terminale-proba-conc-fluctuation-short.mp4",
+      "miniature": "terminale/maths/probabilites/35-conc-fluctuation/eleveai-maths-terminale-proba-conc-fluctuation-short.png",
+      "titre": "70 % de réussite… et 11 sur 20 ce soir ? 🤾 — Tle spé #Shorts",
+      "accroche": "Elle réussit 70 % de ses tirs. Ce soir : 11 sur 20. Elle a baissé ? Pas forcément ! Dix matchs simulés en Python : 14, 15, 11, 13… Sur 20 tirs, la fréquence saute de 0,55 à 0,85.\n\n🥋 Ceinture orange.\n👉 À toi : avec p = 0,7, n = 400 et δ = 0,1, que vaut p(1 − p) ÷ (n δ²) ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=concentration_echantillonnage&microId=concentration_fluctuation&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #terminale #bac",
+      "tags": [
+        "fluctuation d'échantillonnage",
+        "fréquence",
+        "inégalité de concentration",
+        "handball",
+        "sport",
+        "data",
+        "piège",
+        "probabilités",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "terminale-proba-conc-defi",
+      "notionId": "concentration_echantillonnage",
+      "microId": "concentration_defi",
+      "classe": "terminale-spe",
+      "ceinture": "noire",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/probabilites/36-conc-defi/eleveai-maths-terminale-proba-conc-defi.mp4",
+      "miniature": "terminale/maths/probabilites/36-conc-defi/eleveai-maths-terminale-proba-conc-defi.png",
+      "titre": "Oublier le carré de δ : 20 fois trop peu ! — Sujet type bac, concentration · Tle spé",
+      "accroche": "Lina est data analyst dans un studio de jeux vidéo : 60 % des joueurs finissent le premier niveau. Un exercice type bac : E et V de la moyenne, minorer la probabilité d'être à moins de 0,05 de 0,6 (au moins 0,808), puis trouver la taille n (1 920 joueurs). Le piège : oublier le carré de δ.\n\n🥋 Ceinture noire.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=concentration_echantillonnage&microId=concentration_defi&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "tags": [
+        "inégalité de concentration",
+        "exercice type bac",
+        "jeux vidéo",
+        "data analyst",
+        "numérique",
+        "probabilités",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "terminale-proba-conc-defi-short",
+      "notionId": "concentration_echantillonnage",
+      "microId": "concentration_defi",
+      "classe": "terminale-spe",
+      "ceinture": "orange",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-proba-conc-defi",
+      "fichier": "terminale/maths/probabilites/36-conc-defi/eleveai-maths-terminale-proba-conc-defi-short.mp4",
+      "miniature": "terminale/maths/probabilites/36-conc-defi/eleveai-maths-terminale-proba-conc-defi-short.png",
+      "titre": "500 joueurs, pile 300 ? Seulement 3,6 % 🎮 — Tle spé #Shorts",
+      "accroche": "60 % des joueurs finissent le niveau. Sur 500, pile 300 : tu paries ? Mauvaise idée : une probabilité d'environ 0,036 ! Dix tirages en Python : 283, 305, 293, 301… jamais 300. Mais tous restent proches.\n\n🥋 Ceinture orange.\n👉 À toi : variance 0,24, δ = 0,02 : combien de joueurs pour une borne au plus 0,05 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=concentration_echantillonnage&microId=concentration_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #terminale #bac",
+      "tags": [
+        "inégalité de concentration",
+        "exercice type bac",
+        "jeux vidéo",
+        "data analyst",
+        "numérique",
+        "piège",
+        "probabilités",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI",
+        "ceinture orange",
+        "Shorts"
+      ]
     }
   ]
 }

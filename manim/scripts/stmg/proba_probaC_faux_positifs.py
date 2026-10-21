@@ -545,3 +545,9 @@ class ProbaFauxPositifsPremiere(ProbaFauxPositifsBase):
 class ProbaFauxPositifsPremiereSpe(ProbaFauxPositifsBase):
     identite = "Maths 1re spé — EleveAI"
     ceinture = "marron"
+
+
+# 20/10 : la Tle SPÉ, même voix, ceinture NOIRE.
+class ProbaFauxPositifsTerminale(ProbaFauxPositifsBase):
+    identite = "Maths Tle spé — EleveAI"
+    ceinture = "noire"

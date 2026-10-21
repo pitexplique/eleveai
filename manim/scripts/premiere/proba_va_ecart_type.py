@@ -98,6 +98,7 @@ class CartePlacement(BatonsReels):
 
 
 class ProbaVaEcartTypeBase(ProbaVaVarianceBase):
+    ceinture = "marron"
     nom_voix = "premiere-proba-va-ecart-type"
     fichier_marques = "proba_va_ecart_type_marques.json"
     identite = "Maths 1re spé — EleveAI"
@@ -127,7 +128,7 @@ class ProbaVaEcartTypeBase(ProbaVaVarianceBase):
         self.dire("00-garde")
         titre = self.t("L'écart-type : mesurer le risque", 48, JAUNE_TITRE).to_edge(UP, buff=0.6)
         identite = self.t(self.identite, 28).next_to(titre, DOWN, buff=0.22)
-        ech = echelle_ceintures("marron").move_to(P(-0.6, -2.85))
+        ech = echelle_ceintures(self.ceinture).move_to(P(-0.6, -2.85))
         self.play(Write(titre), FadeIn(identite, shift=DOWN * 0.2), FadeIn(ech), run_time=1.0)
         a = CartePlacement("A", [20, 40], COUL_A, P(-0.6, 0.55), larg=6.4, haut=1.9)
         b = CartePlacement("B", [-60, 120], COUL_B, P(-0.6, -1.05) + DOWN * 0.0, larg=6.4, haut=1.9)
@@ -495,3 +496,8 @@ class ProbaVaEcartTypeBase(ProbaVaVarianceBase):
 
 class ProbaVaEcartTypePremiereSpe(ProbaVaEcartTypeBase):
     identite = "Maths 1re spé — EleveAI"
+
+
+class ProbaVaEcartTypeTerminale(ProbaVaEcartTypeBase):
+    identite = "Maths Tle spé — EleveAI"
+    ceinture = "noire"

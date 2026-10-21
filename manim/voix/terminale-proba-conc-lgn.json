@@ -1,0 +1,13 @@
+{
+  "00-garde": "La loi des grands nombres, racontée par deux savants.",
+  "01-buffon": "Au dix-huitième siècle, Buffon est naturaliste : il dirige le Jardin du roi, à Paris, et décrit plantes et animaux. Un jour, il s'intéresse au hasard. Il lance une pièce 4 040 fois, et compte 2 048 piles.",
+  "02-frequence": "Sa fréquence de piles : 2 048 sur 4 040, environ 0,507. Tout près de 0,5, la probabilité d'obtenir pile.",
+  "03-simulation": "Refaisons l'expérience, avec un vrai tirage en Python. Après 10 lancers : 2 piles, fréquence 0,2. Après 100 lancers : 0,46. Après 4 040 lancers : 0,494. La courbe oscille d'abord, puis elle se stabilise autour de 0,5.",
+  "04-bernoulli": "Pourquoi ? Le mathématicien Jacques Bernoulli l'a démontré. Son livre, publié en 1713, énonce la loi des grands nombres. Aujourd'hui, les data scientists s'en servent chaque jour.",
+  "05-loi": "En terminale : M n est la moyenne de n variables aléatoires indépendantes, de même loi, d'espérance mu. Pour tout écart delta strictement positif, la probabilité que M n s'écarte de mu d'au moins delta tend vers 0 quand n tend vers plus l'infini. Pour la pièce, M n est la fréquence de piles, et mu vaut 0,5.",
+  "06-piege": "Le piège : croire que le hasard compense. Notre tirage commence par sept faces de suite. Au huitième lancer, pile n'est pas « dû » : sa probabilité reste 0,5. Après 100 lancers, il manque 4 piles pour faire la moitié. Après 4 040 lancers, il en manque 23 ! Le retard n'est pas rattrapé : il est noyé dans le nombre de lancers.",
+  "07-defi": "À toi de jouer. On lance un dé équilibré un très grand nombre de fois. De quel nombre se rapproche la moyenne des résultats ? Mets pause, et cherche !",
+  "07b-correction": "Correction. L'espérance du dé : 1 plus 2 plus 3 plus 4 plus 5 plus 6, sur 6. 21 sur 6 : 3,5. La moyenne se rapproche de 3,5.",
+  "08-finale": "Ce que tu as appris. La fréquence se stabilise autour de la probabilité. La moyenne M n se rapproche de l'espérance mu. Et le hasard n'a pas de mémoire : il ne compense pas, il dilue.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

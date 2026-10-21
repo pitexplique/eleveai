@@ -205,3 +205,9 @@ class ShortFauxPositifsPremiere(ShortFauxPositifsBase):
 class ShortFauxPositifsPremiereSpe(ShortFauxPositifsBase):
     identite = "Maths 1re spé — EleveAI"
     ceinture = "orange"
+
+
+# 20/10 : la Tle SPÉ, même voix, ceinture ORANGE.
+class ShortFauxPositifsTerminale(ShortFauxPositifsBase):
+    identite = "Maths Tle spé — EleveAI"
+    ceinture = "orange"

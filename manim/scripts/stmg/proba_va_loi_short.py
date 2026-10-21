@@ -76,6 +76,7 @@ class Grille(VGroup):
 
 
 class ShortProbaVaLoi(Short6e):
+    ceinture = "jaune"
     nom_voix = "stmg-premiere-spe-proba-va-loi-short"
 
     def t(self, texte, font_size=30, color=WHITE, largeur=LARGEUR_MAX, weight=NORMAL):
@@ -108,7 +109,7 @@ class ShortProbaVaLoi(Short6e):
         # ── 00 : l'accroche : deux dés, 2 et 7 même chance ? ──
         self.dire("00-accroche")
         titre = self.grand("Deux dés", font_size=52, color=JAUNE_TITRE).move_to(P(0, 3.4))
-        badge = echelle_ceintures("jaune").scale_to_fit_width(config.frame_width * 0.7).move_to(P(0, 2.3))
+        badge = echelle_ceintures(self.ceinture).scale_to_fit_width(config.frame_width * 0.7).move_to(P(0, 2.3))
         d1 = de(3, 1.15, "#FECACA").move_to(P(-0.85, 0.85))
         d2 = de(5, 1.15, "#BFDBFE").move_to(P(0.85, 0.85))
         self.play(Write(titre), FadeIn(badge, shift=DOWN * 0.2), FadeIn(d1, shift=LEFT), FadeIn(d2, shift=RIGHT),
@@ -193,3 +194,8 @@ class ShortProbaVaLoi(Short6e):
         self.play(appel.animate.scale(1.08), run_time=0.25)
         self.play(appel.animate.scale(1 / 1.08), run_time=0.25)
         self.attendre_voix(marge=1.5)
+
+
+class ShortProbaVaLoiTerminale(ShortProbaVaLoi):
+    identite = "Maths Tle spé — EleveAI"
+    ceinture = "orange"

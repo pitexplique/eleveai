@@ -1,0 +1,13 @@
+{
+  "00-garde": "L'inégalité de concentration.",
+  "01-situation": "Aïcha est pharmacienne, responsable qualité dans un laboratoire : grâce à elle, chaque comprimé contient la bonne dose. La masse X d'un comprimé a pour espérance 500 milligrammes et pour variance 25. Pour contrôler un lot, Aïcha pèse n comprimés et calcule leur moyenne, M n.",
+  "02-inegalite": "L'inégalité de concentration : P de valeur absolue de M n moins mu, supérieure ou égale à delta, est inférieure ou égale à V sur n delta au carré. C'est Bienaymé-Tchebychev, appliquée à la moyenne, dont la variance est V sur n.",
+  "03-calcul": "Aïcha pèse 50 comprimés, et veut leur moyenne à 2 milligrammes près. 25 sur 50 fois 2 au carré : 25 sur 200, soit 0,125. Le risque de s'écarter de 2 milligrammes ou plus est d'au plus 12,5 %.",
+  "04-trouver-n": "C'est trop. Elle veut un risque d'au plus 0,05. Il faut 25 sur 4 n, inférieur ou égal à 0,05. Donc 4 n supérieur ou égal à 500, et n supérieur ou égal à 125. Elle pèsera 125 comprimés.",
+  "05-verif": "Vérifions avec 40 vrais lots de 125 comprimés. Les 40 moyennes tombent toutes entre 498 et 502 milligrammes. La garantie est tenue.",
+  "06-piege": "Le piège : oublier le carré de delta. Viser 1 milligramme au lieu de 2, ce n'est pas deux fois plus de comprimés. 25 sur n, inférieur ou égal à 0,05 : n supérieur ou égal à 500. Quatre fois plus !",
+  "07-defi": "À toi de jouer. Toujours à 2 milligrammes près, Aïcha veut un risque d'au plus 0,01. Combien de comprimés doit-elle peser ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 25 sur 4 n, inférieur ou égal à 0,01. Donc 4 n supérieur ou égal à 2500, et n supérieur ou égal à 625. Elle pèsera 625 comprimés.",
+  "08-finale": "Ce que tu as appris. L'inégalité de concentration : V sur n delta au carré. Pour trouver n, on pose la borne inférieure ou égale au risque, et on isole n. Deux fois plus précis : quatre fois plus de mesures.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

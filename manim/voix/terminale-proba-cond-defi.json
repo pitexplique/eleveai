@@ -1,0 +1,13 @@
+{
+  "00-garde": "Un exercice type bac avec les probabilités conditionnelles.",
+  "01-situation": "Maëlle est prévisionniste à Météo-France La Réunion. À l'approche d'un cyclone, elle décide de l'alerte fortes pluies, et les écoles ferment ou non. L'alerte tombe un jour sur quatre. Après une alerte, il pleut fortement 80 % du temps ; sans alerte, 20 %.",
+  "02-arbre": "Question 1 : l'arbre. A : l'alerte est donnée, 0,25 ; A barre, 0,75. Puis F : il pleut fortement. Après A : 0,8 ; F barre, 0,2. Après A barre : F, 0,2 ; F barre, 0,8.",
+  "03-chemin": "Question 2 : l'alerte est donnée et il pleut fortement. P de A inter F : c'est le chemin A puis F. On multiplie les branches : 0,25 fois 0,8, égale 0,2.",
+  "04-totales": "Question 3 : la probabilité qu'il pleuve fortement. Deux chemins mènent à F. A, F : 0,2. A barre, F : 0,75 fois 0,2, égale 0,15. Probabilités totales : P de F égale 0,2 plus 0,15, égale 0,35.",
+  "05-inversion": "Question 4 : il a plu fortement. Probabilité que l'alerte ait été donnée ? On cherche P indice F de A : on se place sur les deux chemins vers F. P de A inter F, divisé par P de F : 0,2 divisé par 0,35, environ 0,571.",
+  "06-piege": "Le piège : confondre P indice A de F et P indice F de A. P indice A de F, 0,8 : après une alerte, il pleut. P indice F de A, environ 0,571 : quand il pleut, l'alerte était là. Inverser la condition change le nombre.",
+  "07-defi": "À toi de jouer. Une fausse alerte : l'alerte est donnée, mais il ne pleut pas fortement. Quelle est sa probabilité ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Le chemin A puis F barre : 0,25 fois 0,2, égale 0,05. Une fausse alerte, seulement 5 % des jours.",
+  "08-finale": "Ce que tu as appris. Un chemin : on multiplie. Les probabilités totales : on additionne les chemins. Inverser : P de A inter F, divisé par P de F. Et ne pas confondre P indice A de F et P indice F de A.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

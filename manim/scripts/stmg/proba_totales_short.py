@@ -168,3 +168,9 @@ class ShortProbaTotalesSTMG(ShortProbaTotalesBase):
 class ShortProbaTotalesPremiereSpe(ShortProbaTotalesBase):
     identite = "Maths 1re spé — EleveAI"
     ceinture = "orange"
+
+
+# 20/10 : la Tle SPÉ, même voix, ceinture ORANGE.
+class ShortProbaTotalesTerminale(ShortProbaTotalesBase):
+    identite = "Maths Tle spé — EleveAI"
+    ceinture = "orange"

@@ -228,6 +228,7 @@ LOI = [["0", "2", "10"], ["0,6", "0,3", "0,1"], ["0", "0,6", "1"]]
 
 
 class ProbaVaEsperanceBase(Notion6e):
+    ceinture = "bleue"
     """Toutes les scènes ; les sous-classes ne changent que l'identité."""
 
     nom_voix = "stmg-premiere-spe-proba-va-esperance"
@@ -260,7 +261,7 @@ class ProbaVaEsperanceBase(Notion6e):
         self.dire("00-garde")
         titre = self.t("L'espérance : le gain moyen", 50, JAUNE_TITRE).to_edge(UP, buff=0.6)
         identite = self.t(self.identite, 28).next_to(titre, DOWN, buff=0.22)
-        ech = echelle_ceintures("bleue").move_to(P(-0.6, -2.85))
+        ech = echelle_ceintures(self.ceinture).move_to(P(-0.6, -2.85))
         self.play(Write(titre), FadeIn(identite, shift=DOWN * 0.2), FadeIn(ech), run_time=1.0)
         r = RoueKermesse(ROUE, centre=P(-0.6, -0.15), r=1.05, fs=24, carte=False)
         self.play(FadeIn(r, scale=0.6), run_time=0.5)
@@ -571,3 +572,8 @@ class ProbaVaEsperanceSTMG(ProbaVaEsperanceBase):
 
 class ProbaVaEsperancePremiereSpe(ProbaVaEsperanceBase):
     identite = "Maths 1re spé — EleveAI"
+
+
+class ProbaVaEsperanceTerminale(ProbaVaEsperanceBase):
+    identite = "Maths Tle spé — EleveAI"
+    ceinture = "noire"

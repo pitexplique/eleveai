@@ -1,0 +1,13 @@
+{
+  "00-garde": "La moyenne d'un échantillon : son espérance et sa variance.",
+  "01-situation": "À Saint-André, Clarisse est agricultrice : elle cultive la vanille. Avant la récolte, elle veut prévoir la masse de ses gousses vertes, car c'est elle qui fixe son revenu. La masse X d'une gousse a pour espérance 15 grammes et pour variance 9. Peser toute la récolte ? Impossible. Elle tire 9 gousses au hasard.",
+  "02-tirage": "Voici un vrai tirage. Les 9 masses varient : de 10,4 grammes à 20,5 grammes. Clarisse calcule leur moyenne M : la somme des 9 masses, divisée par 9. Ici, M vaut 16,1 grammes.",
+  "03-esperance": "Si elle recommence, M change : c'est une variable aléatoire. Première propriété : E de M égale E de X. La moyenne de l'échantillon est centrée sur 15 grammes, comme une gousse seule.",
+  "04-variance": "Deuxième propriété : V de M égale V de X divisé par n. Ici, 9 divisé par 9 : la variance de M vaut 1. L'écart-type passe de 3 grammes pour une gousse à 1 gramme pour la moyenne.",
+  "05-sens": "Regarde 40 vrais tirages. En haut, 40 gousses seules : elles s'étalent loin de 15. En bas, 40 moyennes de 9 gousses : elles se serrent autour de 15. Faire la moyenne concentre.",
+  "06-piege": "Le piège : écrire V de M égale 9, la variance d'une seule gousse. Faux ! La moyenne varie beaucoup moins qu'une gousse. On divise par n : 9 divisé par 9, 1.",
+  "07-defi": "À toi de jouer. Clarisse pèse maintenant 36 gousses. Quelle est la variance de leur moyenne ? Mets pause, et cherche !",
+  "07b-correction": "Correction. V de M égale 9 divisé par 36 : 0,25. Et l'espérance ne bouge pas : 15 grammes. Agricultrice, c'est aussi prévoir avec des chiffres.",
+  "08-finale": "Ce que tu as appris. L'espérance de la moyenne : celle de X. Sa variance : V de X divisé par n. Et plus n est grand, plus la moyenne se concentre autour de l'espérance.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

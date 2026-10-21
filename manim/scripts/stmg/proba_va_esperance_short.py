@@ -46,6 +46,7 @@ def de(n, cote=1.2):
 
 
 class ShortProbaVaEsperanceBase(Short6e):
+    ceinture = "jaune"
     nom_voix = "stmg-premiere-spe-proba-va-esperance-short"
 
     def t(self, texte, font_size=30, color=WHITE, largeur=LARGEUR_MAX, weight=NORMAL):
@@ -79,7 +80,7 @@ class ShortProbaVaEsperanceBase(Short6e):
         # ── 00 : l'accroche : un dé qui paie ; en moyenne, 3 € ? ──
         self.dire("00-accroche")
         titre = self.grand("Le dé qui paie", font_size=44, color=JAUNE_TITRE).move_to(P(0, 3.4))
-        badge = echelle_ceintures("jaune").scale_to_fit_width(config.frame_width * 0.7).move_to(P(0, 2.3))
+        badge = echelle_ceintures(self.ceinture).scale_to_fit_width(config.frame_width * 0.7).move_to(P(0, 2.3))
         d = de(5, 1.5).move_to(P(0, 0.6))
         self.play(Write(titre), FadeIn(badge, shift=DOWN * 0.2), FadeIn(d, scale=0.5), run_time=0.7)
         self.rouler(d, [2, 6, 1, 4, 3], 5)
@@ -169,3 +170,8 @@ class ShortProbaVaEsperanceSTMG(ShortProbaVaEsperanceBase):
 
 class ShortProbaVaEsperancePremiereSpe(ShortProbaVaEsperanceBase):
     identite = "Maths 1re spé — EleveAI"
+
+
+class ShortProbaVaEsperanceTerminale(ShortProbaVaEsperanceBase):
+    identite = "Maths Tle spé — EleveAI"
+    ceinture = "orange"

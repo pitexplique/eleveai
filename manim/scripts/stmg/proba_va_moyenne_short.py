@@ -59,6 +59,7 @@ def moyennes_de(n=1000, graine=232):
 
 
 class ShortProbaVaMoyenne(Short6e):
+    ceinture = "jaune"
     nom_voix = "stmg-premiere-spe-proba-va-moyenne-short"
 
     def dire(self, nom, dossier=None):
@@ -123,7 +124,7 @@ class ShortProbaVaMoyenne(Short6e):
         # ── 00 : l'accroche : 6, 6, 5, 6, 6 ──
         self.dire("00-accroche")
         titre = self.grand("Un dé truqué ?", font_size=46, color=JAUNE_TITRE).move_to(P(0, 3.4))
-        badge = echelle_ceintures("jaune").scale_to_fit_width(config.frame_width * 0.7).move_to(P(0, 2.3))
+        badge = echelle_ceintures(self.ceinture).scale_to_fit_width(config.frame_width * 0.7).move_to(P(0, 2.3))
         d = de(6).move_to(P(0, 1.1))
         self.play(Write(titre), FadeIn(badge, shift=DOWN * 0.2), FadeIn(d, scale=0.5), run_time=0.7)
         self.au_mot("théorique est 3,5")
@@ -203,3 +204,8 @@ class ShortProbaVaMoyenne(Short6e):
         self.play(appel.animate.scale(1.08), run_time=0.25)
         self.play(appel.animate.scale(1 / 1.08), run_time=0.25)
         self.attendre_voix(marge=1.5)
+
+
+class ShortProbaVaMoyenneTerminale(ShortProbaVaMoyenne):
+    identite = "Maths Tle spé — EleveAI"
+    ceinture = "orange"

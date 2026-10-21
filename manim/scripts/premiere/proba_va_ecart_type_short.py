@@ -74,6 +74,7 @@ class CarteUnAxe(VGroup):
 
 
 class ShortProbaVaEcartTypeBase(ShortProbaVaVarianceBase):
+    ceinture = "orange"
     nom_voix = "premiere-proba-va-ecart-type-short"
     fichier_marques = "proba_va_ecart_type_short_marques.json"
 
@@ -83,7 +84,7 @@ class ShortProbaVaEcartTypeBase(ShortProbaVaVarianceBase):
         # ── 00 : deux placements, même gain moyen : lequel est risqué ? ──
         self.dire("00-accroche")
         titre = self.grand("Le plus risqué ?", font_size=46, color=JAUNE_TITRE).move_to(P(0, 3.4))
-        badge = echelle_ceintures("orange").scale_to_fit_width(config.frame_width * 0.7).move_to(P(0, 2.3))
+        badge = echelle_ceintures(self.ceinture).scale_to_fit_width(config.frame_width * 0.7).move_to(P(0, 2.3))
         tirelires = VGroup()
         for nom, coul in [("A", COUL_A), ("B", COUL_B)]:
             boite = RoundedRectangle(width=1.5, height=1.5, corner_radius=0.25, fill_color=coul, fill_opacity=1,
@@ -173,3 +174,8 @@ class ShortProbaVaEcartTypeBase(ShortProbaVaVarianceBase):
 
 class ShortProbaVaEcartTypePremiereSpe(ShortProbaVaEcartTypeBase):
     identite = "Maths 1re spé — EleveAI"
+
+
+class ShortProbaVaEcartTypeTerminale(ShortProbaVaEcartTypeBase):
+    identite = "Maths Tle spé — EleveAI"
+    ceinture = "orange"

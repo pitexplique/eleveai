@@ -1,0 +1,14 @@
+{
+  "00-garde": "Fluctuation d'échantillonnage : un match raté, est-ce grave ?",
+  "01-situation": "Enzo est analyste de données dans un club de handball. Ses chiffres aident l'entraîneur à composer l'équipe. Il suit une joueuse qui réussit 70 % de ses tirs : p égale 0,7. À chaque match, elle tire 20 fois.",
+  "02-fluctue": "Dix matchs, simulés en Python. 14 tirs réussis sur 20, puis 15, puis 11… La fréquence change d'un match à l'autre : c'est la fluctuation d'échantillonnage.",
+  "03-ecart": "Au troisième match : 11 sur 20, fréquence 0,55. L'écart à p : 0,7 moins 0,55, soit 0,15. L'entraîneur s'inquiète. Enzo, lui, calcule.",
+  "04-inegalite": "F n, la fréquence sur n tirs, a pour espérance p, et pour variance p fois 1 moins p, sur n. L'inégalité de concentration majore la probabilité d'un écart d'au moins delta : p fois 1 moins p, sur n delta carré.",
+  "05-calcul": "Ici, p fois 1 moins p : 0,7 fois 0,3, soit 0,21. Avec n égale 20 et delta égale 0,15 : 0,21 sur 20 fois 0,0225, environ 0,47. Un tel écart n'est pas exclu : un match raté peut être un simple hasard.",
+  "06-taille": "Et sur une saison de 400 tirs ? Même écart : 0,21 sur 400 fois 0,0225, environ 0,023. Dix saisons simulées : les fréquences se serrent autour de 0,7.",
+  "07-piege": "Le piège : lire 0,47 comme la probabilité de l'écart. Ce n'est qu'un majorant. La vraie probabilité, calculée avec la loi binomiale, vaut environ 0,22.",
+  "08-defi": "À toi de jouer. Sur 400 tirs, majore la probabilité d'un écart d'au moins 0,05 entre la fréquence et 0,7. Mets pause, et cherche !",
+  "08b-correction": "Correction. 0,05 au carré : 0,0025. 0,21 sur 400 fois 0,0025 : 0,21. Au plus 0,21.",
+  "09-finale": "Ce que tu as appris. La fréquence fluctue d'un échantillon à l'autre. Espérance p, variance p fois 1 moins p sur n. Et plus n est grand, plus elle se concentre autour de p.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -1,0 +1,13 @@
+{
+  "00-garde": "L'inégalité de Bienaymé-Tchebychev.",
+  "01-situation": "Malik est exploitant de cinéma : il choisit les films et remplit les salles. Chaque soir, il prévoit le personnel et le pop-corn. X, le nombre d'entrées à la séance de 20 heures, a pour espérance 120 et pour variance 400. Malik s'organise pour 70 à 170 spectateurs. Quel risque de sortir de cette fourchette ?",
+  "02-ecart": "Sortir de la fourchette, c'est s'écarter de 120 d'au moins 50 entrées. On l'écrit : valeur absolue de X moins 120, supérieure ou égale à 50. L'écart delta vaut 50.",
+  "03-inegalite": "L'inégalité de Bienaymé-Tchebychev dit : P de valeur absolue de X moins mu, supérieure ou égale à delta, est inférieure ou égale à V de X sur delta au carré. Ici, 400 sur 50 au carré : 400 sur 2500, soit 0,16. Le risque est d'au plus 16 %.",
+  "04-simulation": "Est-ce vraiment 16 % ? Simulons 300 séances, avec un modèle qui a cette espérance et cette variance. Seulement 8 séances sortent de la fourchette : 8 sur 300, environ 0,027. Bien moins que 0,16.",
+  "05-piege": "Le piège : dire que la probabilité vaut 0,16. Non : c'est un majorant, la vraie probabilité peut être bien plus petite. Avec un écart de 10, la borne vaut 400 sur 100 : 4. Une probabilité ne dépasse jamais 1 : cette borne ne dit rien.",
+  "06-utile": "Alors pourquoi l'utiliser ? Parce qu'elle marche sans connaître la loi de X : l'espérance et la variance suffisent. Malik a une garantie : au moins 84 % des séances restent dans sa fourchette.",
+  "07-defi": "À toi de jouer. Malik s'organise maintenant pour 80 à 160 spectateurs. Quel majorant donne l'inégalité pour le risque d'en sortir ? Mets pause, et cherche !",
+  "07b-correction": "Correction. L'écart delta vaut 40. 400 sur 40 au carré : 400 sur 1600, soit 0,25. Le risque est d'au plus 25 %.",
+  "08-finale": "Ce que tu as appris. Repérer l'espérance et l'écart delta. Calculer V de X sur delta au carré. Et retenir : c'est un majorant, pas la probabilité.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

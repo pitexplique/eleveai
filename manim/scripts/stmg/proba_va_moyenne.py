@@ -191,6 +191,7 @@ X0 = -2.1   # le bord gauche de la colonne des calculs (la roue occupe la gauche
 
 
 class ProbaVaMoyenneBase(Notion6e):
+    ceinture = "bleue"
     """Toutes les scènes ; les sous-classes ne changent que l'identité."""
 
     nom_voix = "stmg-premiere-spe-proba-va-moyenne"
@@ -242,7 +243,7 @@ class ProbaVaMoyenneBase(Notion6e):
         self.dire("00-garde")
         titre = self.t("L'espérance, c'est la moyenne", 50, JAUNE_TITRE).to_edge(UP, buff=0.6)
         identite = self.t(self.identite, 28).next_to(titre, DOWN, buff=0.22)
-        ech = echelle_ceintures("bleue").move_to(P(-0.6, -2.85))
+        ech = echelle_ceintures(self.ceinture).move_to(P(-0.6, -2.85))
         self.play(Write(titre), FadeIn(identite, shift=DOWN * 0.2), FadeIn(ech), run_time=1.0)
         r = RoueKermesse(ROUE, centre=P(-0.6, -0.2), r=1.0, fs=22, carte=False)
         r.etiq = VGroup()                       # pas de nombres : la voix n'en dit pas
@@ -563,3 +564,8 @@ class ProbaVaMoyenneSTMG(ProbaVaMoyenneBase):
 
 class ProbaVaMoyennePremiereSpe(ProbaVaMoyenneBase):
     identite = "Maths 1re spé — EleveAI"
+
+
+class ProbaVaMoyenneTerminale(ProbaVaMoyenneBase):
+    identite = "Maths Tle spé — EleveAI"
+    ceinture = "noire"

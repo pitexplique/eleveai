@@ -721,6 +721,44 @@ for _dos, _k, _titre, _sous, _lg, _tt in [
     CEINTURE_SHORT[_nom] = "orange"
 
 
+# 21/10/2026 — lot PROBABILITÉS TERMINALE SPÉ (03-36) : shorts. Jumelles = miniature source, badge TLE SPÉ, orange.
+for _dos, _k, _src in [
+    ("03-totales", "totales", "stmg-proba-totales"), ("04-bayes", "bayes", "stmg-proba-faux-positifs"),
+    ("21-va-definition", "va-definition", "premiere-proba-va-definition"), ("22-va-loi", "va-loi", "stmg-proba-va-loi"),
+    ("23-va-esperance", "va-esperance", "stmg-proba-va-esperance"), ("24-va-ecart-type", "va-ecart-type", "premiere-proba-va-ecart-type"),
+    ("25-va-interpreter", "va-interpreter", "stmg-proba-va-moyenne"),
+]:
+    _nom = f"eleveai-maths-terminale-proba-{_k}-short"
+    SHORTS[_nom] = {**SHORTS[f"eleveai-maths-{_src}-short"], "badge": "PROBABILITÉS · TLE SPÉ",
+                    "dossier": "terminale/maths/fr", "sortie": f"terminale/maths/probabilites/{_dos}"}
+    CEINTURE_SHORT[_nom] = "orange"
+for _dos, _k, _titre, _sous, _lg, _tt in [
+    ("05-cond-defi", "cond-defi", ["ALERTE", "FORTES PLUIES"], "il pleut 8 fois sur 10 après l'alerte…",
+     [("et dans l'autre sens ?", 76, BLEU), ("20 sur 35", 110, ORANGE), ("57 % seulement !", 90, ROUGE)], 80),
+    ("26-va-defi", "va-defi", ["UN TUBE", "À 4 000 € ?"], "un groupe de maloya en streaming",
+     [("moyenne : 1 575 € ?", 76, ROUGE), ("le tube : 1 fois sur 20", 64, BLEU), ("E = 850 € !", 100, VERT)], 80),
+    ("31-conc-moyenne", "conc-moyenne", ["9 GOUSSES", "DE VANILLE"], "écart-type d'une gousse : 3 g",
+     [("et leur moyenne ?", 84, BLEU), ("variance ÷ 9", 96, ORANGE), ("1 g seulement !", 96, VERT)], 80),
+    ("32-conc-bienayme", "conc-bienayme", ["LA BORNE", "DIT 16 %…"], "au cinéma, 300 séances simulées",
+     [("8 sorties sur 300", 80, BLEU), ("moins de 3 % !", 96, VERT), ("un majorant, large", 76, ORANGE)], 80),
+    ("33-conc-inegalite", "conc-inegalite", ["2 FOIS", "PLUS PRÉCIS ?"], "125 comprimés pour 2 mg près",
+     [("250 comprimés ?", 90, ROUGE), ("δ est au carré", 90, BLEU), ("500 : 4 fois plus !", 80, VERT)], 84),
+    ("34-conc-lgn", "conc-lgn", ["7 FACES", "DE SUITE…"], "pile est enfin « dû » ?",
+     [("pas de mémoire", 90, BLEU), ("toujours 0,5", 100, ORANGE), ("Buffon : 4 040 lancers", 64, VERT)], 84),
+    ("35-conc-fluctuation", "conc-fluctuation", ["70 % DE RÉUSSITE", "11 SUR 20 CE SOIR"], "elle a baissé ?",
+     [("14, 15, 11, 13…", 84, BLEU), ("ça fluctue", 100, ORANGE), ("pas forcément !", 90, VERT)], 60),
+    ("36-conc-defi", "conc-defi", ["500 JOUEURS", "PILE 300 ?"], "60 % finissent le niveau",
+     [("283, 305, 293, 301…", 72, BLEU), ("jamais 300 !", 100, ROUGE), ("seulement 3,6 %", 90, ORANGE)], 80),
+]:
+    _nom = f"eleveai-maths-terminale-proba-{_k}-short"
+    SHORTS[_nom] = {
+        "badge": "PROBABILITÉS · TLE SPÉ", "titre": _titre, "taille": _tt, "sous": _sous,
+        "taille_sous": 44, "couleur_sous": ORANGE, "accroche": _acc(_lg), "dossier": "terminale/maths/fr",
+        "sortie": f"terminale/maths/probabilites/{_dos}",
+    }
+    CEINTURE_SHORT[_nom] = "orange"
+
+
 def main():
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     filtre = sys.argv[1] if len(sys.argv) > 1 else ""

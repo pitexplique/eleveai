@@ -1836,6 +1836,30 @@ for _dos, _k, _duree, _titre, _haut, _bas in [
     }
 
 
+# 21/10/2026 — lot PROBABILITÉS TERMINALE SPÉ (03-36) : paysages (jumelles + nouveaux).
+for _dos, _k, _duree, _titre, _haut, _bas in [
+    ("03-totales", "totales", "EN 2 MIN", ["LA FORMULE DES", "PROBABILITÉS TOTALES"], "2 %, 4 %, 5 %… donc 3,7 % ?", "FAUX : 3,2 % !"),
+    ("04-bayes", "bayes", "EN 3 MIN", ["COMPRENDRE", "LES FAUX POSITIFS"], "Le détecteur sonne…", "défectueux ? seulement 0,16 !"),
+    ("05-cond-defi", "cond-defi", "EN 3 MIN", ["SUJET TYPE BAC :", "PROBAS CONDITIONNELLES"], "80 % après une alerte…", "mais 57 % dans l'autre sens !"),
+    ("21-va-definition", "va-definition", "EN 2 MIN", ["UNE VARIABLE ALÉATOIRE,", "C'EST QUOI ?"], "X = 2, une probabilité ?", "NON : un nombre de piles !"),
+    ("22-va-loi", "va-loi", "EN 2 MIN", ["DRESSER LA LOI", "D'UNE VARIABLE ALÉATOIRE"], "0, 1, 2 piles : 1/3 chacun ?", "non : 0,25 · 0,5 · 0,25"),
+    ("23-va-esperance", "va-esperance", "EN 2 MIN", ["COMPRENDRE", "L'ESPÉRANCE"], "(0 + 2 + 10) ÷ 3 = 4 ?", "FAUX : E(X) = 1,6 !"),
+    ("24-va-ecart-type", "va-ecart-type", "EN 3 MIN", ["VARIANCE ET ÉCART-TYPE :", "MESURER LE RISQUE"], "Même gain moyen…", "risque 9 fois plus grand !"),
+    ("25-va-interpreter", "va-interpreter", "EN 2 MIN", ["L'ESPÉRANCE,", "UNE MOYENNE"], "1,6 € à chaque partie ?", "non : à long terme !"),
+    ("26-va-defi", "va-defi", "EN 3 MIN", ["SUJET TYPE BAC :", "VARIABLE ALÉATOIRE"], "700 € sûrs ou 850 € en moyenne ?", "pas la moyenne des valeurs !"),
+    ("31-conc-moyenne", "conc-moyenne", "EN 3 MIN", ["LA MOYENNE", "D'UN ÉCHANTILLON"], "V(M) = 9 ?", "FAUX : c'est V ÷ n !"),
+    ("32-conc-bienayme", "conc-bienayme", "EN 3 MIN", ["L'INÉGALITÉ DE", "BIENAYMÉ-TCHEBYCHEV"], "Le risque vaut 16 % ?", "NON : au plus 16 %, un majorant"),
+    ("33-conc-inegalite", "conc-inegalite", "EN 3 MIN", ["L'INÉGALITÉ", "DE CONCENTRATION"], "2 fois plus précis…", "= 4 fois plus de mesures !"),
+    ("34-conc-lgn", "conc-lgn", "EN 3 MIN", ["LA LOI DES", "GRANDS NOMBRES"], "7 faces : pile est « dû » ?", "le hasard ne compense pas !"),
+    ("35-conc-fluctuation", "conc-fluctuation", "EN 3 MIN", ["LA FLUCTUATION", "D'ÉCHANTILLONNAGE"], "11 tirs sur 20 : elle a baissé ?", "pas forcément : ça fluctue !"),
+    ("36-conc-defi", "conc-defi", "EN 3 MIN", ["SUJET TYPE BAC :", "CONCENTRATION"], "Oublier le carré de δ…", "= 20 fois trop peu de joueurs !"),
+]:
+    ESSAIS[f"eleveai-maths-terminale-proba-{_k}"] = {
+        "badge": "MATHS · TLE SPÉ", "duree": _duree, "titre": _titre,
+        "accroche": _piege_test("noire", _haut, _bas), "dossier": f"terminale/maths/probabilites/{_dos}",
+    }
+
+
 def construire(nom, spec):
     img = fond()
     d = ImageDraw.Draw(img)

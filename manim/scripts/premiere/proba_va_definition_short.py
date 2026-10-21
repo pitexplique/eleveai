@@ -43,6 +43,15 @@ class ShortProbaVaDefinitionPremiere(MotsCales, Short6e):
     identite = "Maths 1re spé — EleveAI"
     ceinture = "orange"
 
+    def _marques(self):
+        # MotsCales cherche les marques à côté de proba_bin_defi.py (terminale/) :
+        # celles de cet épisode sont ici, dans premiere/ → calage mot à mot réel.
+        if not hasattr(self, "_cache_marques"):
+            import json
+            ch = Path(__file__).resolve().parent / self.fichier_marques
+            self._cache_marques = json.loads(ch.read_text(encoding="utf-8"))
+        return self._cache_marques
+
     def t(self, texte, font_size=30, color=WHITE, largeur=LARGEUR_MAX):
         t = Text(texte, font_size=font_size, color=color)
         if t.width > largeur:
@@ -142,3 +151,9 @@ class ShortProbaVaDefinitionPremiere(MotsCales, Short6e):
         self.play(FadeIn(abonne, shift=UP * 0.15), GrowFromCenter(poignee), run_time=0.5)
         self.play(Indicate(poignee, color=VERT_OK, scale_factor=1.15))
         self.attendre_voix(marge=1.0)
+
+
+# 20/10 : la Tle SPÉ, même voix, ceinture ORANGE.
+class ShortProbaVaDefinitionTerminale(ShortProbaVaDefinitionPremiere):
+    identite = "Maths Tle spé — EleveAI"
+    ceinture = "orange"

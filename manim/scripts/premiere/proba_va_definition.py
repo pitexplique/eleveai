@@ -137,7 +137,26 @@ class ProbaVaDefinitionPremiere(MotsCales, Notion6e):
     nom_voix = "premiere-proba-va-definition"
     identite = "Maths 1re spé — EleveAI"
     ceinture = "marron"
+    fs_regle = 26         # écran 04 : la règle du jeu (à 32, « 3 écus par pile » sortait du cadre)
+    entree_fleches = 0.15  # écran 02 : entrée du diagramme, rapide pour rester calé au mot
     XD = 0.6   # le bord gauche de la colonne de droite
+
+    def _marques(self):
+        # MotsCales cherche les marques à côté de proba_bin_defi.py (terminale/) :
+        # celles de cet épisode sont ici, dans premiere/ → calage mot à mot réel.
+        if not hasattr(self, "_cache_marques"):
+            import json
+            ch = Path(__file__).resolve().parent / self.fichier_marques
+            self._cache_marques = json.loads(ch.read_text(encoding="utf-8"))
+        return self._cache_marques
+
+    def titre_ecran(self, texte, font_size=40):
+        # Titre en fondu court, pour que la figure suive la voix au mot
+        # (avec les vraies marques, le Write d'1 s faisait arriver « 1654 »,
+        # « On compte les piles »… jusqu'à 2,7 s après la voix).
+        t = Text(texte, font_size=font_size, color=JAUNE_TITRE).to_edge(UP)
+        self.play(FadeIn(t), run_time=0.2)
+        return t
 
     def t(self, texte, font_size=34, color=WHITE, largeur=None):
         t = Text(texte, font_size=font_size, color=color)
@@ -235,7 +254,7 @@ class ProbaVaDefinitionPremiere(MotsCales, Notion6e):
         self.titre_ecran("Une flèche par issue")
         s = self.diagramme_x(complet=False)
         self.play(FadeIn(s.patate), FadeIn(s.omega), LaggedStart(*[FadeIn(o) for o in s.objets], lag_ratio=0.15),
-                  run_time=0.8)
+                  run_time=self.entree_fleches)
         self.au_mot("On compte les piles")
         self.play(GrowArrow(s.axe), FadeIn(s.reels), run_time=0.6)
         for k, (m1, v) in enumerate((("Pile pile donne 2", 2), ("Pile face donne 1", 1), ("Face pile, 1", 1),
@@ -307,11 +326,11 @@ class ProbaVaDefinitionPremiere(MotsCales, Notion6e):
         g = self.t("G", 72, VERT_OK).move_to(P(-2.35, 1.95))
         self.play(FadeIn(g, scale=2), run_time=0.5)
         self.au_mot("coûte 2 écus")
-        regle = suite(self.t("2 écus la partie", 32, ROUGE_ERREUR), self.t(",", 32), buff=0.05)
+        regle = suite(self.t("2 écus la partie", self.fs_regle, ROUGE_ERREUR), self.t(",", self.fs_regle), buff=0.05)
         regle.move_to(P(self.XD, 1.95), aligned_edge=LEFT)
         self.play(FadeIn(regle, shift=DOWN * 0.1), run_time=0.4)
         self.au_mot("rapporte 3 écus")
-        r2 = self.t("3 écus par pile", 32, COUL_P).next_to(regle, RIGHT, buff=0.25)
+        r2 = self.t("3 écus par pile", self.fs_regle, COUL_P).next_to(regle, RIGHT, buff=0.25)
         self.play(FadeIn(r2, shift=DOWN * 0.1), run_time=0.4)
         lignes = {}
         etapes = (
@@ -493,3 +512,9 @@ class ProbaVaDefinitionPremiere(MotsCales, Notion6e):
         self.ecran_correction()
         self.ecran_finale()
         self.page_abonnement()
+
+
+# 20/10 : la Tle SPÉ, même voix, ceinture NOIRE.
+class ProbaVaDefinitionTerminale(ProbaVaDefinitionPremiere):
+    identite = "Maths Tle spé — EleveAI"
+    ceinture = "noire"

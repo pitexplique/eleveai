@@ -1,0 +1,6 @@
+{
+  "00-accroche": "Elle réussit 70 % de ses tirs. Ce soir : 11 sur 20. Elle a baissé ?",
+  "01-image": "Pas forcément ! Dix matchs simulés en Python : 14, 15, 11, 13… Sur 20 tirs, la fréquence saute de 0,55 à 0,85.",
+  "02-question": "Et toi : avec p égale 0,7, n égale 400 et delta égale 0,1, que vaut p fois 1 moins p, sur n delta carré ? Réponds en commentaire !",
+  "03-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}
