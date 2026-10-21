@@ -201,7 +201,13 @@ export type NumberLineCanvasData = {
   };
 };
 
-export type StatGraphKind = "barres" | "batons" | "camembert";
+/**
+ * - `barres`, `batons`, `camembert` : une série d'effectifs par catégorie.
+ * - `histogramme` (20/10/2026) : des classes de valeurs, barres JOINTIVES ;
+ *   `bornes` donne les n + 1 bornes écrites sous l'axe (sinon, les étiquettes).
+ * - `courbe` (20/10/2026) : une évolution (mois, années), points reliés.
+ */
+export type StatGraphKind = "barres" | "batons" | "camembert" | "histogramme" | "courbe";
 
 export type StatGraphCanvasData = {
   kind: "stat_graph";
@@ -213,10 +219,28 @@ export type StatGraphCanvasData = {
     value: number;
     color?: string;
   }[];
+  /** Histogramme : les n + 1 bornes des classes, écrites aux jointures. */
+  bornes?: number[];
   display?: {
     showValues?: boolean;
     showLabels?: boolean;
     highlightIndex?: number;
+    /** L'axe vertical gradué (et sa grille légère). Sans valeurs écrites sur
+     *  les barres, c'est lui qui permet de LIRE le graphique. */
+    showAxis?: boolean;
+    /** Pas de graduation ; omis, un pas rond (1, 2, 5, 10, 20, 50…). */
+    step?: number;
+    /** Départ de l'axe vertical (0 par défaut). Un départ > 0 = l'axe
+     *  TRONQUÉ des journaux télévisés : à montrer, pour le dénoncer. */
+    yMin?: number;
+    /** Camembert : écrire la valeur de CHAQUE part (sinon, seulement le total,
+     *  comme avant le 20/10/2026 : beaucoup de questions demandent de la lire). */
+    valeursParts?: boolean;
+    /** Camembert, avec `valeursParts` : la part en % (arrondis dont la somme
+     *  fait 100) plutôt que l'effectif. */
+    pourcentages?: boolean;
+    /** Nom de l'axe vertical (« effectif », « mm de pluie »). */
+    axeY?: string;
   };
 };
 

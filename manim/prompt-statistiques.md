@@ -49,6 +49,27 @@ Les vidéos vont sur R2 et sur la micro du coach ; YouTube reçoit seulement une
 - Corriger TOUT défaut vu sur les planches PyAV : chevauchement, débordement, texte qui se brouille (utiliser des fondus), nombre trop petit pour un téléphone.
 - Chapitres mesurés par dry run : départ à 00:00, au moins 3, chacun de 10 s minimum.
 
+## Les CANVAS de la série (recensés le 20/10/2026)
+
+Les vidéos et les feuilles reprennent les figures du coach (`lib/canvas/`, catalogue `lib/canvas/CATALOGUE.md`).
+
+| Canvas | Ce qu'il montre | Classes |
+|---|---|---|
+| `tableau_donnees` | Tableau simple ou à double entrée ; ligne, colonne, case surlignées | CP → STMG |
+| `stat_graph` `barres` / `batons` | Effectifs par catégorie ou par valeur ; ⭐ axe GRADUÉ (`showAxis`, `step`, `axeY`) pour LIRE sans valeur écrite | CP → 1re |
+| `stat_graph` `camembert` | Parts d'un tout, en couleurs ; `valeursParts`, `pourcentages` (somme = 100) | CM1 → 1re |
+| `stat_graph` `courbe` ⭐ nouveau | Une évolution : pluie par mois, population par année | CM2 → 1re |
+| `stat_graph` `histogramme` ⭐ nouveau | Classes de valeurs, barres jointives, `bornes` | 3e, 2de |
+| `stat_graph` + `yMin` ⭐ nouveau | L'axe TRONQUÉ du JT, pour le dénoncer | 6e → 1re |
+| `diagramme_boite` | Min, Q1, médiane, Q3, max ; plusieurs séries empilées | 2de → 1re |
+| `fonctionGraphique` (type `points`) | Nuage de points, droite d'ajustement | 1re, STMG |
+| `number_line` | Valeurs sur un axe : étendue, médiane qui coupe la série | 5e → 2de |
+| `probabilites`, `arbre_proba` | Lien fréquence ↔ probabilité, tableau croisé ↔ arbre | 5e → 1re |
+| `objets` | Collecter et trier (pictogrammes, cycle 2) | CP → CE2 |
+
+⛔ Il manque encore : le diagramme figuratif (pictogrammes : 1 dessin = 10), le polygone des effectifs cumulés (2de) et le diagramme en barres GROUPÉES (comparer deux groupes). À créer quand une micro les demande.
+Côté Manim, un seul module partagé, `manim/canvas_stats.py`, redessine ces canvas dans le même style (à créer avec le premier épisode, puis importé par tous).
+
 ## Les pièges statistiques à montrer (le regard du statisticien)
 
 - Moyenne contre médiane : quand quelques valeurs extrêmes tirent la moyenne (salaires, vues).

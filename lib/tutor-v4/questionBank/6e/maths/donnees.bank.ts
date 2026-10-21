@@ -101,6 +101,8 @@ type CtxStat = {
   /** ⛔ 07/10 : « effectif » seulement quand on compte des personnes ou des objets ;
    *  sinon la grandeur (« la distance », « le nombre de jours de pluie »). */
   grandeur?: { mot: string; fem: boolean };
+  /** Le nom de l'axe vertical gradué (sinon, l'unité). */
+  axeY?: string;
 };
 
 const SPORTS = [
@@ -268,21 +270,212 @@ const CTX_STAT: CtxStat[] = [
   },
 ];
 
-type Support = "tableau" | "barres" | "batons" | "camembert";
+type Support = "tableau" | "barres" | "batons" | "camembert" | "courbe";
 const NOM_SUPPORT: Record<Support, string> = {
   tableau: "le tableau",
   barres: "le diagramme en barres",
   batons: "le diagramme en bâtons",
   camembert: "le diagramme circulaire",
+  courbe: "la courbe",
 };
-type Serie = { ctx: CtxStat; p: Prenom; cats: Cat[]; v: number[]; support: Support };
+/** ⭐ 21/10/2026 — L'AXE GRADUÉ. Avec `axe`, les valeurs ne sont plus écrites sur
+ *  les barres : l'élève les LIT sur l'axe vertical (pas `step`). `milieu` : une
+ *  partie des valeurs tombe au milieu de deux graduations (pas de 2 → impaire,
+ *  pas de 10 → « 35 »), et l'explication le dit. */
+type Axe = { step: number; milieu: boolean };
+type Serie = { ctx: CtxStat; p: Prenom; cats: Cat[]; v: number[]; support: Support; axe?: Axe };
+
+/** Redessine la série sur un axe gradué : valeurs multiples du pas (ou de son
+ *  demi-pas si `milieu`), 4 à 10 graduations, nombres ronds. Sans pas qui
+ *  convienne, la série reste telle quelle (valeurs écrites). */
+function graduer(s: Serie, milieu: boolean): Serie {
+  if (s.support !== "barres" && s.support !== "batons" && s.support !== "courbe") return s;
+  const n = s.v.length;
+  for (const step of milieu ? [20, 10, 2] : [50, 20, 10, 5, 2]) {
+    const hi = Math.ceil(s.ctx.max / step) * step;
+    const grads = hi / step;
+    const u = milieu ? step / 2 : step;
+    const lo = Math.max(u, Math.ceil(s.ctx.min / u) * u);
+    const cands: number[] = [];
+    for (let x = lo; x <= hi; x += u) cands.push(x);
+    if (grads < 4 || grads > 10 || cands.length < n + 1) continue;
+    const v = shuffle(cands).slice(0, n);
+    if (milieu && !v.some((x) => x % step)) {
+      const libres = cands.filter((x) => x % step && !v.includes(x));
+      v[entre(0, n - 1)] = pick(libres);
+    }
+    return { ...s, v, axe: { step, milieu } };
+  }
+  return milieu ? graduer(s, false) : s;
+}
+/** Une série de barres ou de bâtons : axe gradué deux fois sur trois (6e) ;
+ *  avec `milieu` (étoiles hautes), une fois sur deux une valeur au milieu de deux graduations. */
+function serieLue(n: number, support: Support, ctx?: CtxStat, milieu = false): Serie {
+  const s = tirerSerie(n, support, ctx);
+  return Math.random() < 2 / 3 ? graduer(s, milieu && Math.random() < 0.5) : s;
+}
+
+/* ───── ⭐ 21/10/2026 — COURBES (programme du cycle 3 : « lire et interpréter des
+   courbes »). Une évolution dans le temps, portée par un MÉTIER. Ordres de
+   grandeur vraisemblables : à Saint-Denis, la saison des pluies va de janvier à
+   mars ; les baleines à bosse passent de juin à octobre, au plus fort en
+   août-septembre. Valeurs ≤ 100 (le correcteur les juge plausibles). ───── */
+type CtxCourbe = CtxStat & {
+  grandeur: { mot: string; fem: boolean };
+  /** Valeurs typiques, alignées sur `cats` (l'ordre du temps). */
+  base: number[];
+  /** Nombre de points tirés d'affilée. */
+  n: number;
+  /** Pas de l'axe ; `stepMilieu` : pas dont le milieu tombe sur un entier rond. */
+  step: number;
+  stepMilieu: number;
+  /** La courbe ne fait que monter (une plante qui pousse). */
+  croissante?: boolean;
+};
+const MOIS = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+const moisCat = (m: string) => cat(m, `en ${m.toLowerCase()}`);
+const CTX_COURBE: CtxCourbe[] = [
+  {
+    titre: "Jours de pluie à Saint-Denis", entete: "Jours de pluie", unite: "jours", quel: "Quel mois", axeY: "jours de pluie",
+    grandeur: { mot: "nombre de jours de pluie", fem: false },
+    intro: (p) => `${p.nom} veut devenir météorologue. ${Il(p)} relève les jours de pluie à Saint-Denis, à La Réunion, mois après mois.`,
+    combien: (c) => `combien de jours de pluie y a-t-il eu ${c.gn}`,
+    tout: () => "combien de jours de pluie y a-t-il eu",
+    cats: MOIS.map(moisCat), min: 2, max: 18,
+    base: [13, 14, 15, 10, 8, 7, 8, 7, 5, 5, 6, 9], n: 6, step: 2, stepMilieu: 2,
+  },
+  {
+    titre: "Baleines observées au large de Saint-Gilles", entete: "Baleines observées", unite: "baleines", quel: "Quel mois", axeY: "baleines",
+    grandeur: { mot: "nombre de baleines observées", fem: false },
+    intro: (p) => `${p.nom} accompagne une biologiste marine en mer. Elle compte les baleines à bosse observées chaque mois au large de Saint-Gilles.`,
+    combien: (c) => `combien de baleines ont été observées ${c.gn}`,
+    tout: () => "combien de baleines ont été observées",
+    cats: ["Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre"].map(moisCat), min: 5, max: 100,
+    base: [10, 40, 70, 80, 40, 10], n: 6, step: 10, stepMilieu: 10,
+  },
+  {
+    titre: "Visiteurs de Kélonia heure par heure", entete: "Visiteurs", unite: "visiteurs", quel: "À quelle heure", axeY: "visiteurs",
+    grandeur: { mot: "nombre de visiteurs", fem: false },
+    intro: (p) => `${p.nom} fait un stage avec la responsable de l’accueil de Kélonia, le centre des tortues marines de Saint-Leu. ${Il(p)} compte les visiteurs qui entrent à chaque heure.`,
+    combien: (c) => `combien de visiteurs sont entrés ${c.gn}`,
+    tout: () => "combien de visiteurs sont entrés",
+    cats: ["9 h", "10 h", "11 h", "12 h", "14 h", "15 h"].map((h) => cat(h, `à ${h}`)), min: 10, max: 100,
+    base: [30, 50, 70, 30, 80, 60], n: 6, step: 10, stepMilieu: 10,
+  },
+  {
+    titre: "Température à Cilaos un jour d’hiver", entete: "Température (°C)", unite: "°C", quel: "À quelle heure", axeY: "°C",
+    grandeur: { mot: "température", fem: true },
+    intro: (p) => `${p.nom} part en randonnée à Cilaos avec une guide de montagne. Elle note la température toutes les deux heures.`,
+    combien: (c) => `quelle température, en °C, fait-il ${c.gn}`,
+    tout: () => "",
+    cats: ["8 h", "10 h", "12 h", "14 h", "16 h"].map((h) => cat(h, `à ${h}`)), min: 4, max: 20,
+    base: [8, 12, 16, 18, 14], n: 5, step: 2, stepMilieu: 2,
+  },
+  {
+    titre: "Taille d’un plant de tomate", entete: "Taille (cm)", unite: "cm", quel: "Quelle semaine", axeY: "cm",
+    grandeur: { mot: "taille", fem: true },
+    intro: (p) => `${p.nom} aide une maraîchère de la Plaine des Cafres. Chaque semaine, ${il(p)} mesure la hauteur d’un plant de tomate.`,
+    combien: (c) => `quelle taille, en cm, mesure le plant ${c.gn}`,
+    tout: () => "",
+    cats: [1, 2, 3, 4, 5, 6].map((k) => cat(`Semaine ${k}`, `à la semaine ${k}`)), min: 5, max: 50,
+    base: [5, 10, 20, 25, 35, 40], n: 6, step: 5, stepMilieu: 10, croissante: true,
+  },
+];
+
+/** Une courbe tirée autour des valeurs typiques, posée sur son axe gradué. */
+function tirerCourbe(C: CtxCourbe = pick(CTX_COURBE), milieu = false): Serie {
+  const step = milieu ? C.stepMilieu : C.step;
+  const u = milieu ? step / 2 : step;
+  for (;;) {
+    const d = entre(0, C.cats.length - C.n);
+    const cats = C.cats.slice(d, d + C.n);
+    const v = C.base.slice(d, d + C.n).map((b) => Math.max(u, Math.round((b + entre(-1, 1) * u) / u) * u));
+    const M = Math.max(...v);
+    const m = Math.min(...v);
+    if (v.filter((x) => x === M).length > 1 || v.filter((x) => x === m).length > 1) continue;
+    if (C.croissante && v.some((x, k) => k > 0 && x <= v[k - 1])) continue;
+    if (milieu && !v.some((x) => x % step)) continue;
+    return { ctx: C, p: pick(PRENOMS), cats, v, support: "courbe", axe: { step, milieu } };
+  }
+}
+
+/** Sur une courbe : le point le plus haut ou le plus bas (QCM), ou de combien la
+ *  valeur monte ou descend entre deux moments (l'écart). Lire une valeur : qLire. */
+function qCourbe(s: Serie, mode: "max" | "min" | "ecart"): Q {
+  const C = s.ctx as CtxCourbe;
+  const g = C.grandeur;
+  const L = s.cats.map((c) => c.label);
+  const quand = (k: number) => L[k].toLowerCase();
+  const lues = s.cats.map((c, k) => `${c.label} ${s.v[k]}`).join(", ");
+  if (mode === "ecart") {
+    const [a, b] = shuffle(L.map((_, k) => k)).slice(0, 2).sort((x, y) => x - y);
+    const d = Math.abs(s.v[b] - s.v[a]);
+    if (d === 0) return qCourbe(s, "max");
+    const monte = s.v[b] > s.v[a];
+    const sens = monte ? "augmenté" : "baissé";
+    const enU = /°C|cm/.test(s.ctx.unite) ? `en ${s.ctx.unite}` : `en nombre ${deMot(s.ctx.unite)}`;
+    const text = pick([
+      () => `${s.ctx.intro(s.p)} Entre ${quand(a)} et ${quand(b)}, de combien ${g.fem ? "la" : "le"} ${g.mot} a-t-${g.fem ? "elle" : "il"} ${sens} ? Calcule l’écart, ${enU}.`,
+      () => `${maj(supp(s))} s’intitule « ${s.ctx.titre} ». Lis les deux points sur l’axe gradué, puis calcule l’écart entre ${quand(a)} et ${quand(b)}, ${enU}.`,
+    ])();
+    return {
+      text,
+      format: "short",
+      expected: [`${d} ${s.ctx.unite}`],
+      comparator: "number_equal",
+      explanation: se(
+        "sur une courbe, l’écart entre deux moments est la différence de leurs valeurs.",
+        "on lit chaque point sur l’axe gradué, puis on soustrait la plus petite valeur de la plus grande.",
+        `Pour ${L[a]}, ${commentLire(s, s.v[a])}. Pour ${L[b]}, ${commentLire(s, s.v[b])}. ${Math.max(s.v[a], s.v[b])} − ${Math.min(s.v[a], s.v[b])} = ${d}.`,
+        `entre ${quand(a)} et ${quand(b)}, ${g.fem ? "la" : "le"} ${g.mot} a ${sens} de ${d} ${s.ctx.unite}.`,
+      ),
+      canvas: figure(s),
+    };
+  }
+  const max = mode === "max";
+  const k = s.v.indexOf(max ? Math.max(...s.v) : Math.min(...s.v));
+  const gm = `${g.fem ? "la" : "le"} plus ${max ? "grand" : "petit"}${g.fem ? "e" : ""} ${g.mot}`;
+  const text = pick([
+    () => `${s.ctx.intro(s.p)} ${s.ctx.quel} ${L[0].match(/^\d/) ? "relève-t-on" : "compte"} ${gm} ? Cherche le point le plus ${max ? "haut" : "bas"} de la courbe.`,
+    () => `${maj(supp(s))} s’intitule « ${s.ctx.titre} ». ${s.ctx.quel} correspond ${gm.replace(/^le /, "au ").replace(/^la /, "à la ")} ?`,
+  ])();
+  return {
+    text,
+    format: "qcm",
+    choices: shuffle([k, ...shuffle(L.map((_, j) => j).filter((j) => j !== k)).slice(0, 3)].map((j) => L[j])),
+    expected: [L[k]],
+    comparator: "mcq_exact",
+    explanation: se(
+      `sur une courbe, ${gm} est le point le plus ${max ? "haut" : "bas"}.`,
+      "on repère ce point, puis on descend jusqu’à l’axe horizontal pour lire le moment.",
+      `Les valeurs lues sur l’axe sont ${lues}. La plus ${max ? "grande" : "petite"} est ${s.v[k]}.`,
+      `la réponse est « ${L[k]} ».`,
+    ),
+    canvas: figure(s),
+  };
+}
 
 function tirerSerie(n: number, support: Support, ctx: CtxStat = pick(CTX_STAT)): Serie {
   return { ctx, p: pick(PRENOMS), cats: tirerSans(ctx.cats, n), v: valeursDistinctes(n, ctx.min, ctx.max), support };
 }
 
 /** Le tableau ou le diagramme, avec EXACTEMENT les nombres de la série. */
-function figure(s: Serie, opts: { cache?: number; surligne?: number } = {}): Q["canvas"] {
+/** Camembert (21/10/2026) : la valeur de chaque part est écrite (`valeursParts`),
+ *  SAUF quand la question est de lire une part (`lirePart` : on la retrouve avec
+ *  le total, la moitié ou le quart du disque) ; `sansTotal` quand on demande le total. */
+function figure(s: Serie, opts: { cache?: number; surligne?: number; lirePart?: boolean; sansTotal?: boolean } = {}): Q["canvas"] {
+  if (s.support === "camembert")
+    return statGraphCanvas({
+      graphType: "camembert",
+      title: s.ctx.titre,
+      data: s.cats.map((c, i) => ({ label: c.label, value: s.v[i] })),
+      display: {
+        showLabels: true,
+        showValues: !opts.sansTotal,
+        ...(opts.lirePart ? {} : { valeursParts: true }),
+        ...(opts.surligne !== undefined ? { highlightIndex: opts.surligne } : {}),
+      },
+    });
   if (s.support === "tableau")
     return tableauDonneesCanvas({
       title: s.ctx.titre,
@@ -295,8 +488,26 @@ function figure(s: Serie, opts: { cache?: number; surligne?: number } = {}): Q["
     graphType: s.support,
     title: s.ctx.titre,
     data: s.cats.map((c, i) => ({ label: c.label, value: s.v[i] })),
-    display: { showLabels: true, showValues: true, ...(opts.surligne !== undefined ? { highlightIndex: opts.surligne } : {}) },
+    display: {
+      showLabels: true,
+      showValues: !s.axe,
+      ...(s.axe ? { showAxis: true, step: s.axe.step, axeY: s.ctx.axeY ?? s.ctx.unite } : {}),
+      ...(opts.surligne !== undefined ? { highlightIndex: opts.surligne } : {}),
+    },
   });
+}
+
+/** « je pars du haut de la barre, je suis la ligne jusqu'à l'axe, je lis 14 » —
+ *  et, au milieu de deux graduations, lesquelles. */
+function commentLire(s: Serie, x: number): string {
+  if (!s.axe) return `on lit ${x}`;
+  const st = s.axe.step;
+  const haut = s.support === "courbe" ? "du point" : s.support === "batons" ? "du haut du bâton" : "du haut de la barre";
+  const debut = `je pars ${haut}, je suis la ligne jusqu’à l’axe gradué (de ${st} en ${st})`;
+  if (x % st === 0) return `${debut} : je tombe sur la graduation ${x}`;
+  const a = x - (x % st);
+  const sujet = s.support === "courbe" ? "le point est" : s.support === "batons" ? "le bâton s’arrête" : "la barre s’arrête";
+  return `${debut} : ${sujet} au milieu, entre ${a} et ${a + st}. Je lis ${x}`;
 }
 
 const somme = (v: number[]) => v.reduce((a, b) => a + b, 0);
@@ -318,30 +529,66 @@ function amorce(s: Serie): string {
 }
 
 /** K1 — lire une valeur. */
-function qLire(s: Serie, i = entre(0, s.cats.length - 1)): Q {
+function qLire(s: Serie, i?: number): Q {
+  // Au milieu de deux graduations, c'est cette valeur-là qu'on demande.
+  if (i === undefined) {
+    const milieux = s.axe?.milieu ? s.v.map((_, k) => k).filter((k) => s.v[k] % s.axe!.step) : [];
+    i = milieux.length ? pick(milieux) : entre(0, s.cats.length - 1);
+  }
   const c = s.cats[i];
   const q = s.ctx.combien(c, s.p);
-  const text = pick([
-    () => `${amorce(s)} ${maj(q)} ?`,
-    () => `${amorce(s)} D’après ${supp(s)}, ${q} ?`,
-    () => `${amorce(s)} Lis ${supp(s)}. ${maj(q)} ?`,
-    () => `${amorce(s)} Regarde ${supp(s)}. ${maj(q)} ?`,
-  ])();
+  const text = s.axe
+    ? pick([
+        () => `${amorce(s)} Lis ${supp(s)} sur son axe gradué. ${maj(q)} ?`,
+        () => `${amorce(s)} Les nombres ne sont pas écrits : sers-toi de l’axe gradué. ${maj(q)} ?`,
+        () => `${amorce(s)} Regarde ${supp(s)} et son axe gradué de ${s.axe!.step} en ${s.axe!.step}. ${maj(q)} ?`,
+      ])()
+    : pick([
+        () => `${amorce(s)} ${maj(q)} ?`,
+        () => `${amorce(s)} D’après ${supp(s)}, ${q} ?`,
+        () => `${amorce(s)} Lis ${supp(s)}. ${maj(q)} ?`,
+        () => `${amorce(s)} Regarde ${supp(s)}. ${maj(q)} ?`,
+      ])();
   // « Combien de merles… ? » : la réponse se compte en merles, pas en « oiseaux ».
   const u = s.ctx.unite === "oiseaux" && !/oiseaux/.test(text) ? c.gn : s.ctx.unite;
-  return {
+  const x = s.v[i];
+  const st = s.axe?.step ?? 0;
+  // Le piège : la graduation voisine, ou le pas lu à la place de la valeur.
+  const piege = !s.axe || x === st
+    ? ""
+    : x % st
+      ? ` Attention : ni ${x - (x % st)} ni ${x - (x % st) + st}, ce sont les graduations voisines.`
+      : ` Attention : ${st} est le pas de l’axe, pas la valeur.`;
+  const r: Q = {
     text,
     format: "short",
-    expected: [`${s.v[i]} ${u}`],
+    expected: [`${x} ${u}`],
     comparator: "number_equal",
     explanation: se(
       "lire une donnée, c’est repérer la bonne catégorie et le nombre qui lui correspond.",
-      `on cherche « ${c.label} » dans ${supp(s)}, puis on lit le nombre associé.`,
-      `En face de « ${c.label} », on lit ${s.v[i]}.`,
-      `la réponse est ${s.v[i]} ${u}.`,
+      s.axe
+        ? `on cherche « ${c.label} », puis on lit sa hauteur sur l’axe gradué.`
+        : `on cherche « ${c.label} » dans ${supp(s)}, puis on lit le nombre associé.`,
+      s.axe ? `Pour « ${c.label} », ${commentLire(s, x)}.${piege}` : `En face de « ${c.label} », on lit ${x}.`,
+      `la réponse est ${x} ${u}.`,
     ),
     canvas: figure(s, { surligne: s.support === "tableau" && Math.random() < 0.5 ? i : undefined }),
   };
+  // Camembert : la part ne s'écrit pas, elle se LIT — la moitié ou le quart du disque, et le total.
+  const t = somme(s.v);
+  const div = 2 * x === t ? 2 : 4 * x === t ? 4 : 0;
+  if (s.support === "camembert" && div) {
+    const mot = div === 2 ? "la moitié" : "le quart";
+    r.text = `${r.text} Le total est écrit sous le disque.`;
+    r.explanation = se(
+      "dans un diagramme circulaire, la taille du secteur montre la part du total.",
+      `on regarde quelle part du disque occupe « ${c.label} », puis on prend cette part du total.`,
+      `Le secteur « ${c.label} » occupe ${mot} du disque. Le total est ${t} : ${t} ÷ ${div} = ${x}.`,
+      `la réponse est ${x} ${u}.`,
+    );
+    r.canvas = figure(s, { lirePart: true, surligne: i });
+  }
+  return r;
 }
 
 /** K3 — l'effectif total. */
@@ -364,7 +611,7 @@ function qTotal(s: Serie): Q {
       `${s.v.join(" + ")} = ${t}.`,
       `il y a ${t} ${s.ctx.unite} en tout.`,
     ),
-    canvas: figure(s),
+    canvas: figure(s, { sansTotal: true }),
   };
 }
 
@@ -390,7 +637,7 @@ function qDiff(s: Serie): Q {
     explanation: se(
       "comparer deux effectifs, c’est calculer leur différence.",
       "on lit les deux valeurs, puis on soustrait la plus petite de la plus grande.",
-      `« ${A} » : ${s.v[i]} ; « ${B} » : ${s.v[j]}. ${s.v[i]} − ${s.v[j]} = ${d}.`,
+      `${s.axe ? "Sur l’axe gradué, on lit " : ""}« ${A} » : ${s.v[i]} ; « ${B} » : ${s.v[j]}. ${s.v[i]} − ${s.v[j]} = ${d}.`,
       `l’écart est de ${d} ${u}.`,
     ),
     canvas: figure(s),
@@ -417,7 +664,7 @@ function qSomme2(s: Serie): Q {
     explanation: se(
       "réunir deux catégories, c’est additionner leurs effectifs.",
       "on lit les deux valeurs, puis on les additionne.",
-      `${s.v[i]} + ${s.v[j]} = ${t}.`,
+      `${s.axe ? `Sur l’axe gradué, on lit ${A} : ${s.v[i]} et ${B} : ${s.v[j]}. ` : ""}${s.v[i]} + ${s.v[j]} = ${t}.`,
       `cela fait ${t} ${u}.`,
     ),
     canvas: figure(s),
@@ -454,7 +701,7 @@ function qExtreme(s: Serie, max = Math.random() < 0.6): Q {
     explanation: se(
       "comparer des effectifs, c’est chercher la plus grande ou la plus petite valeur.",
       "on lit toutes les valeurs, puis on les compare.",
-      `Les valeurs sont ${s.cats.map((c, i) => `${c.label} ${s.v[i]}`).join(", ")}. La ${max ? "plus grande" : "plus petite"} est ${s.v[k]}.`,
+      `Les valeurs${s.axe ? " lues sur l’axe gradué" : ""} sont ${s.cats.map((c, i) => `${c.label} ${s.v[i]}`).join(", ")}. La ${max ? "plus grande" : "plus petite"} est ${s.v[k]}.`,
       `la réponse est « ${s.cats[k].label} ».`,
     ),
     canvas: figure(s),
@@ -477,7 +724,7 @@ function qEcartExtremes(s: Serie): Q {
     explanation: se(
       "l’écart entre deux effectifs est leur différence.",
       "on repère la plus grande et la plus petite valeur, puis on soustrait.",
-      `Le plus grand effectif est ${M}, le plus petit ${m} : ${M} − ${m} = ${M - m}.`,
+      `${s.axe ? "Sur l’axe gradué, le" : "Le"} plus grand effectif est ${M}, le plus petit ${m} : ${M} − ${m} = ${M - m}.`,
       `l’écart est de ${M - m} ${s.ctx.unite}.`,
     ),
     canvas: figure(s),
@@ -500,8 +747,12 @@ function qInverse(s: Serie, k = entre(0, s.cats.length - 1)): Q {
     comparator: "mcq_exact",
     explanation: se(
       "on peut lire un tableau ou un diagramme dans les deux sens.",
-      `on cherche la valeur ${s.v[k]}, puis on lit la catégorie qui lui correspond.`,
-      `La valeur ${s.v[k]} est celle de « ${s.cats[k].label} ».`,
+      s.axe
+        ? `on cherche ${s.v[k]} sur l’axe gradué, on suit la ligne vers la droite jusqu’à ${s.support === "batons" ? "un bâton" : "une barre"} qui s’arrête juste là.`
+        : `on cherche la valeur ${s.v[k]}, puis on lit la catégorie qui lui correspond.`,
+      s.axe && s.v[k] % s.axe.step
+        ? `${s.v[k]} est au milieu, entre ${s.v[k] - (s.v[k] % s.axe.step)} et ${s.v[k] - (s.v[k] % s.axe.step) + s.axe.step} : c’est la hauteur de « ${s.cats[k].label} ».`
+        : `La valeur ${s.v[k]} est celle de « ${s.cats[k].label} ».`,
       `la réponse est « ${s.cats[k].label} ».`,
     ),
     canvas: figure(s),
@@ -554,7 +805,7 @@ function qVrai(s: Serie, modeles: ("plusQue" | "max" | "min" | "total" | "ecart"
       if (m === "plusQue") (s.v[a] > s.v[b] ? vraies : fausses).push(`${L(a)} a plus ${M} ${que(L(b))}.`);
       if (m === "ecart") {
         const d = s.v[a] - s.v[b];
-        if (d > 0) {
+        if (d > 1) {
           vraies.push(`${L(a)} a ${d} ${u} de plus ${que(L(b))}.`);
           fausses.push(`${L(a)} a ${d + pick([1, 2, 3])} ${u} de plus ${que(L(b))}.`);
           fausses.push(`${L(b)} a ${d} ${u} de plus ${que(L(a))}.`);
@@ -592,7 +843,7 @@ function qVrai(s: Serie, modeles: ("plusQue" | "max" | "min" | "total" | "ecart"
     explanation: se(
       "interpréter des données, c’est vérifier chaque phrase avec les nombres.",
       "on lit toutes les valeurs, puis on teste chaque phrase.",
-      `Les valeurs sont ${s.cats.map((c, i) => `${c.label} ${s.v[i]}`).join(", ")} (total ${t}). Seule la phrase « ${juste} » est vérifiée.`,
+      `Les valeurs${s.axe ? " lues sur l’axe gradué" : ""} sont ${s.cats.map((c, i) => `${c.label} ${s.v[i]}`).join(", ")} (total ${t}). Seule la phrase « ${juste} » est vérifiée.`,
       `on garde « ${juste} ».`,
     ),
     canvas: figure(s),
@@ -600,7 +851,8 @@ function qVrai(s: Serie, modeles: ("plusQue" | "max" | "min" | "total" | "ecart"
 }
 
 /** K12 — la catégorie qui fait la moitié (ou le quart) du total, sur un diagramme circulaire. */
-function qPart(quart = Math.random() < 0.4): Q {
+/** Un diagramme circulaire dont UN secteur fait exactement la moitié (ou le quart) du total. */
+function tirerSeriePart(quart: boolean): { s: Serie; k: number } {
   const ctx = pick(CTX_STAT);
   const n = quart ? 4 : pick([3, 4]);
   const cats = tirerSans(ctx.cats, n);
@@ -622,7 +874,12 @@ function qPart(quart = Math.random() < 0.4): Q {
     v.splice(k, 0, part);
     break;
   }
-  const s: Serie = { ctx, p: pick(PRENOMS), cats, v: v!, support: "camembert" };
+  return { s: { ctx, p: pick(PRENOMS), cats, v: v!, support: "camembert" }, k: k! };
+}
+
+function qPart(quart = Math.random() < 0.4): Q {
+  const { s, k } = tirerSeriePart(quart);
+  const cats = s.cats;
   const mot = quart ? "le quart" : "la moitié";
   const text = pick([
     () => `${amorce(s)} Quelle catégorie représente ${mot} du total ?`,
@@ -642,7 +899,7 @@ function qPart(quart = Math.random() < 0.4): Q {
       `Total : ${s.v.join(" + ")} = ${t}. ${t} ÷ ${quart ? 4 : 2} = ${t / (quart ? 4 : 2)} : c’est « ${cats[k!].label} ».`,
       `« ${cats[k!].label} » représente ${mot} du total.`,
     ),
-    canvas: figure(s),
+    canvas: figure(s, { lirePart: true }),
   };
 }
 
@@ -1283,33 +1540,35 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "stat_donnee_lire_graphique",
     difficulty: 1,
     theme: "neutral",
-    text: "Sur le graphique, combien d’élèves ont choisi la lecture ?",
+    // ⭐ 21/10/2026 : les nombres ne sont plus écrits, on les lit sur l'axe gradué (de 5 en 5).
+    text: "Sur le graphique, combien d’élèves ont choisi la lecture ? Lis l’axe gradué.",
     format: "short",
-    expected: ["9"],
+    expected: ["10"],
     comparator: "number_equal",
-    hint: "Lis la hauteur du bâton Lecture.",
+    hint: "Pars du haut du bâton Lecture et suis la ligne jusqu’à l’axe.",
     explanation:
       "Définition : lire un graphique, c’est repérer une catégorie et la valeur associée.\n\n" +
-      "Méthode : on cherche le bâton Lecture, puis on lit sa hauteur.\n\n" +
-      "Observation : le bâton Lecture correspond à 9 élèves.\n\n" +
-      "Conclusion : 9 élèves ont choisi la lecture.",
-    tags: ["stat_donnee", "graphique", "lecture", "canvas"],
+      "Méthode : on cherche le bâton Lecture, puis on lit sa hauteur sur l’axe gradué (de 5 en 5).\n\n" +
+      "Observation : je pars du haut du bâton Lecture, je suis la ligne jusqu’à l’axe : je tombe sur la graduation 10. Attention : 5 est le pas de l’axe, pas la valeur.\n\n" +
+      "Conclusion : 10 élèves ont choisi la lecture.",
+    tags: ["stat_donnee", "graphique", "lecture", "axe_gradue", "canvas"],
     canvas: statGraphCanvas({
       graphType: "batons",
       data: [
-        { label: "Sport", value: 12 },
-        { label: "Lecture", value: 9 },
-        { label: "Jeux", value: 15 },
+        { label: "Sport", value: 15 },
+        { label: "Lecture", value: 10 },
+        { label: "Jeux", value: 20 },
       ],
-      display: { showLabels: true, showValues: true, highlightIndex: 1 },
+      display: { showLabels: true, showValues: false, showAxis: true, step: 5, axeY: "élèves", highlightIndex: 1 },
     }),
   },
 
   gab(
     "6e_stat_stat_stat_donnee_lire_graphique_tpl_1", "stat_donnee", "stat_donnee_lire_graphique", 2,
-    "Lis la valeur au-dessus de la barre demandée.",
-    ["stat_donnee", "graphique", "template", "canvas"],
-    () => qLire(tirerSerie(entre(4, 5), pick(["barres", "batons"] as const))),
+    "Pars du haut de la barre (ou du point), suis la ligne jusqu’à l’axe gradué et lis le nombre.",
+    ["stat_donnee", "graphique", "axe_gradue", "courbe", "template", "canvas"],
+    // ⭐ 21/10 : une fois sur quatre, une COURBE (sur les graduations).
+    () => (Math.random() < 0.25 ? qLire(tirerCourbe()) : qLire(serieLue(entre(4, 5), pick(["barres", "batons"] as const)))),
   ),
 
   {
@@ -1453,7 +1712,7 @@ export const donneesBank: TutorBankItemV4[] = [
     "6e_stat_stat_stat_donnee_comparer_tpl_1", "stat_donnee", "stat_donnee_comparer", 3,
     "Compare toutes les valeurs avant de choisir.",
     ["stat_donnee", "comparer", "graphique", "template", "canvas"],
-    () => qExtreme(tirerSerie(5, pick(["barres", "batons"] as const))),
+    () => qExtreme(serieLue(5, pick(["barres", "batons"] as const))),
   ),
 
   {
@@ -1529,7 +1788,11 @@ export const donneesBank: TutorBankItemV4[] = [
     "6e_stat_stat_stat_donnee_interpreter_tpl_1", "stat_donnee", "stat_donnee_interpreter", 4,
     "Vérifie chaque phrase avec les nombres : une seule tient.",
     ["stat_donnee", "interpreter", "template", "canvas"],
-    () => qVrai(tirerSerie(4, pick(["barres", "batons", "tableau"] as const)), pick([["total", "ecart", "plusQue"], ["ecart", "total", "max"]] as const).slice()),
+    // ⭐ 21/10 : une fois sur trois, l'évolution d'une COURBE (de combien elle monte ou descend).
+    () =>
+      Math.random() < 1 / 3
+        ? qCourbe(tirerCourbe(undefined, Math.random() < 0.5), "ecart")
+        : qVrai(serieLue(4, pick(["barres", "batons", "tableau"] as const), undefined, true), pick([["total", "ecart", "plusQue"], ["ecart", "total", "max"]] as const).slice()),
   ),
 
   {
@@ -1807,9 +2070,13 @@ export const donneesBank: TutorBankItemV4[] = [
 
   gab(
     "6e_stat_stat_stat_donnee_lire_graphique_tpl_2_plus_petit", "stat_donnee", "stat_donnee_lire_graphique", 3,
-    "Compare les hauteurs des barres, puis vérifie avec les nombres.",
-    ["stat_donnee", "graphique", "minimum", "template", "canvas"],
-    () => qExtreme(tirerSerie(entre(4, 5), pick(["barres", "batons"] as const))),
+    "Compare les hauteurs des barres (ou des points), puis vérifie sur l’axe gradué.",
+    ["stat_donnee", "graphique", "minimum", "axe_gradue", "courbe", "template", "canvas"],
+    // ⭐ 21/10 : une fois sur trois, le point le plus haut ou le plus bas d'une courbe.
+    () =>
+      Math.random() < 1 / 3
+        ? qCourbe(tirerCourbe(pick(CTX_COURBE.filter((c) => !c.croissante)), Math.random() < 0.5), pick(["max", "min"] as const))
+        : qExtreme(serieLue(entre(4, 5), pick(["barres", "batons"] as const), undefined, true)),
   ),
 
   {
@@ -1867,7 +2134,7 @@ export const donneesBank: TutorBankItemV4[] = [
     "6e_stat_stat_stat_donnee_comparer_tpl_3_ecart_graphique", "stat_donnee", "stat_donnee_comparer", 4,
     "L’écart se calcule avec une soustraction.",
     ["stat_donnee", "comparer", "ecart", "template", "canvas"],
-    () => (Math.random() < 0.6 ? qEcartExtremes(tirerSerie(5, pick(["barres", "batons"] as const))) : qDiff(tirerSerie(5, pick(["barres", "batons"] as const)))),
+    () => (Math.random() < 0.6 ? qEcartExtremes(serieLue(5, pick(["barres", "batons"] as const), undefined, true)) : qDiff(serieLue(5, pick(["barres", "batons"] as const), undefined, true))),
   ),
 
   {
@@ -1978,11 +2245,11 @@ export const donneesBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["10"],
     comparator: "number_equal",
-    hint: "Repère le secteur « Bus » et lis sa valeur.",
+    hint: "Le secteur « Bus » occupe quelle part du disque ? Le total est écrit dessous.",
     explanation:
       "Définition : un diagramme circulaire partage un disque en secteurs, un par catégorie.\n\n" +
-      "Méthode : on repère le secteur demandé, puis on lit la valeur indiquée.\n\n" +
-      "Observation : le secteur « Bus » indique 10 élèves.\n\n" +
+      "Méthode : on regarde quelle part du disque occupe le secteur demandé, puis on prend cette part du total.\n\n" +
+      "Observation : le secteur « Bus » occupe la moitié du disque. Le total est 20 : 20 ÷ 2 = 10.\n\n" +
       "Conclusion : 10 élèves viennent en bus.",
     tags: ["stat_donnee", "circulaire", "camembert", "lecture", "canvas"],
     canvas: statGraphCanvas({
@@ -2127,7 +2394,8 @@ export const donneesBank: TutorBankItemV4[] = [
         { label: "Français", value: 9 },
         { label: "Sport", value: 6 },
       ],
-      display: { showLabels: true, showValues: true },
+      // 21/10 : la valeur de chaque part est écrite, le total NON (c'est la réponse).
+      display: { showLabels: true, showValues: false, valeursParts: true },
     }),
   },
 
@@ -2165,9 +2433,13 @@ export const donneesBank: TutorBankItemV4[] = [
 
   gab(
     "6e_stat_stat_donnee_lire_circulaire_tpl_1_lire_secteur", "stat_donnee", "stat_donnee_lire_circulaire", 1,
-    "Repère le secteur demandé et lis sa valeur.",
+    "Le secteur fait-il la moitié ou le quart du disque ? Prends cette part du total.",
     ["stat_donnee", "circulaire", "camembert", "lecture", "template", "canvas"],
-    () => qLire(tirerSerie(entre(3, 4), "camembert")),
+    // ⭐ 21/10 : la part demandée fait la moitié ou le quart du disque ; seul le total est écrit.
+    () => {
+      const { s, k } = tirerSeriePart(Math.random() < 0.35);
+      return qLire(s, k);
+    },
   ),
   gab(
     "6e_stat_stat_donnee_lire_circulaire_tpl_2_plus_grand", "stat_donnee", "stat_donnee_lire_circulaire", 2,
@@ -2256,18 +2528,51 @@ export const donneesBank: TutorBankItemV4[] = [
     }),
   },
 
+  /* ⭐ 21/10/2026 — LE GRAPHIQUE TROMPEUR : l'axe tronqué (`yMin`), montré pour le
+     dénoncer. Le seul endroit de la 6e où l'axe ne part pas de 0. */
+  {
+    kind: "fixed",
+    id: "6e_stat_interpreter_axe_tronque_1",
+    niveau: "6e", matiere: "maths", notionId: "stat_donnee", microId: "stat_donnee_interpreter",
+    difficulty: 4, theme: "reunion",
+    text: "Un journaliste publie ce graphique sur les cornets de glace vendus à Saint-Pierre. La barre Chocolat paraît trois fois plus haute que la barre Vanille. Regarde où commence l’axe. Que faut-il en penser ?",
+    format: "qcm",
+    choices: [
+      "L’axe commence à 50 : 52 et 56 cornets, c’est presque pareil",
+      "Il s’est vendu trois fois plus de cornets au chocolat",
+      "Il s’est vendu trois fois plus de cornets à la vanille",
+      "On ne peut lire aucun nombre sur ce graphique",
+    ],
+    expected: ["L’axe commence à 50 : 52 et 56 cornets, c’est presque pareil"],
+    comparator: "mcq_exact",
+    hint: "Lis le premier nombre de l’axe : est-ce 0 ?",
+    explanation: se(
+      "un graphique honnête fait partir son axe de 0 ; sinon, les hauteurs des barres trompent.",
+      "on lit d’abord le bas de l’axe, puis chaque barre sur l’axe gradué (de 2 en 2).",
+      "L’axe commence à 50, pas à 0. Vanille : 52 cornets ; Chocolat : 56 cornets. 56 n’est pas le triple de 52 : l’écart n’est que de 4 cornets.",
+      "le graphique exagère la différence : les ventes sont presque égales.",
+    ),
+    tags: ["stat_donnee", "interpreter", "graphique_trompeur", "axe_tronque", "esprit_critique", "canvas"],
+    canvas: statGraphCanvas({
+      graphType: "barres",
+      title: "Cornets vendus samedi",
+      data: [{ label: "Vanille", value: 52 }, { label: "Chocolat", value: 56 }],
+      display: { showLabels: true, showValues: false, showAxis: true, step: 2, yMin: 50, axeY: "cornets" },
+    }),
+  },
+
   /* ========================= TOP-UP — STAT_DONNEE_LIRE_GRAPHIQUE ========================= */
   {
     kind: "fixed",
     id: "6e_stat_lire_graphique_topup_1",
     niveau: "6e", matiere: "maths", notionId: "stat_donnee", microId: "stat_donnee_lire_graphique",
     difficulty: 1, theme: "neutral",
-    text: "Dans le graphique, combien d’élèves préfèrent les jeux ?",
+    text: "Dans le graphique, combien d’élèves préfèrent les jeux ? Les nombres ne sont pas écrits : lis l’axe gradué.",
     format: "short", expected: ["15"], comparator: "number_equal",
-    hint: "Lis la hauteur de la barre Jeux.",
-    explanation: se("un graphique en barres représente chaque catégorie par une hauteur.", "on repère la barre Jeux et on lit sa valeur.", "la barre Jeux vaut 15.", "15 élèves préfèrent les jeux."),
-    tags: ["stat_donnee", "graphique", "lecture", "canvas"],
-    canvas: statGraphCanvas({ graphType: "batons", title: "Loisir préféré", data: [{ label: "Sport", value: 12 }, { label: "Lecture", value: 9 }, { label: "Jeux", value: 15 }], display: { showLabels: true, showValues: true, highlightIndex: 2 } }),
+    hint: "Pars du haut du bâton Jeux, suis la ligne jusqu’à l’axe gradué.",
+    explanation: se("un diagramme en bâtons représente chaque catégorie par une hauteur.", "on repère le bâton Jeux et on lit sa hauteur sur l’axe gradué, de 5 en 5.", "je pars du haut du bâton Jeux, je suis la ligne jusqu’à l’axe : je tombe sur la graduation 15 (pas 10, la graduation voisine).", "15 élèves préfèrent les jeux."),
+    tags: ["stat_donnee", "graphique", "lecture", "axe_gradue", "canvas"],
+    canvas: statGraphCanvas({ graphType: "batons", title: "Loisir préféré", data: [{ label: "Sport", value: 10 }, { label: "Lecture", value: 5 }, { label: "Jeux", value: 15 }], display: { showLabels: true, showValues: false, showAxis: true, step: 5, axeY: "élèves", highlightIndex: 2 } }),
   },
   {
     kind: "fixed",
@@ -2310,12 +2615,12 @@ export const donneesBank: TutorBankItemV4[] = [
     id: "6e_stat_lire_graphique_topup_5",
     niveau: "6e", matiere: "maths", notionId: "stat_donnee", microId: "stat_donnee_lire_graphique",
     difficulty: 1, theme: "neutral",
-    text: "Dans le graphique, combien d’élèves font du sport ?",
-    format: "short", expected: ["12"], comparator: "number_equal",
-    hint: "Lis la barre Sport.",
-    explanation: se("on lit la hauteur d’une barre.", "on repère la barre Sport.", "la barre Sport vaut 12.", "12 élèves font du sport."),
-    tags: ["stat_donnee", "graphique", "lecture", "canvas"],
-    canvas: statGraphCanvas({ graphType: "barres", title: "Loisir préféré", data: [{ label: "Sport", value: 12 }, { label: "Lecture", value: 9 }, { label: "Jeux", value: 15 }], display: { showLabels: true, showValues: true, highlightIndex: 0 } }),
+    text: "Dans le graphique, combien d’élèves font du sport ? Lis l’axe gradué.",
+    format: "short", expected: ["20"], comparator: "number_equal",
+    hint: "Pars du haut de la barre Sport, suis la ligne jusqu’à l’axe gradué.",
+    explanation: se("on lit la hauteur d’une barre sur l’axe gradué.", "on repère la barre Sport ; l’axe va de 5 en 5.", "je pars du haut de la barre Sport, je suis la ligne jusqu’à l’axe : je tombe sur la graduation 20.", "20 élèves font du sport."),
+    tags: ["stat_donnee", "graphique", "lecture", "axe_gradue", "canvas"],
+    canvas: statGraphCanvas({ graphType: "barres", title: "Loisir préféré", data: [{ label: "Sport", value: 20 }, { label: "Lecture", value: 10 }, { label: "Jeux", value: 25 }], display: { showLabels: true, showValues: false, showAxis: true, step: 5, axeY: "élèves", highlightIndex: 0 } }),
   },
 
   /* ========================= TOP-UP — STAT_DONNEE_PRELEVER ========================= */
@@ -2898,15 +3203,21 @@ export const donneesBank: TutorBankItemV4[] = [
   ),
   gab(
     "6e_stat_lire_graphique_tpl_e1", "stat_donnee", "stat_donnee_lire_graphique", 1,
-    "Repère la barre demandée et lis le nombre écrit au-dessus.",
-    ["stat_donnee", "graphique", "lecture", "template", "canvas"],
-    () => qLire(tirerSerie(3, pick(["barres", "batons"] as const))),
+    "Repère la barre demandée : lis le nombre écrit au-dessus, ou suis la ligne jusqu’à l’axe gradué.",
+    ["stat_donnee", "graphique", "lecture", "axe_gradue", "template", "canvas"],
+    () => qLire(serieLue(3, pick(["barres", "batons"] as const))),
   ),
   gab(
     "6e_stat_lire_graphique_tpl_e4", "stat_donnee", "stat_donnee_lire_graphique", 4,
-    "Cherche le nombre, puis remonte à sa barre.",
-    ["stat_donnee", "graphique", "lecture", "template", "canvas"],
-    () => (Math.random() < 0.5 ? qInverse(tirerSerie(entre(4, 5), pick(["barres", "batons"] as const))) : qSomme2(tirerSerie(entre(4, 5), pick(["barres", "batons"] as const)))),
+    "Cherche le nombre sur l’axe gradué, puis la barre (ou le point) qui s’arrête à cette hauteur.",
+    ["stat_donnee", "graphique", "lecture", "axe_gradue", "courbe", "template", "canvas"],
+    () => {
+      const r = Math.random();
+      // ⭐ 21/10 : un écart lu entre deux points d'une courbe, parfois au milieu de deux graduations.
+      if (r < 0.3) return qCourbe(tirerCourbe(undefined, Math.random() < 0.5), "ecart");
+      const sup = pick(["barres", "batons"] as const);
+      return r < 0.65 ? qInverse(serieLue(entre(4, 5), sup, undefined, true)) : qSomme2(serieLue(entre(4, 5), sup, undefined, true));
+    },
   ),
   gab(
     "6e_stat_prelever_tpl_e4", "stat_donnee", "stat_donnee_prelever", 4,
@@ -2930,13 +3241,17 @@ export const donneesBank: TutorBankItemV4[] = [
     "6e_stat_interpreter_tpl_e2", "stat_donnee", "stat_donnee_interpreter", 2,
     "Vérifie chaque phrase avec les nombres.",
     ["stat_donnee", "interpreter", "template", "canvas"],
-    () => qVrai(tirerSerie(3, pick(["barres", "batons", "tableau"] as const)), [pick(["max", "min", "plusQue"] as const), "plusQue", "max", "min"]),
+    () => qVrai(serieLue(3, pick(["barres", "batons", "tableau"] as const)), [pick(["max", "min", "plusQue"] as const), "plusQue", "max", "min"]),
   ),
   gab(
     "6e_stat_interpreter_tpl_e3", "stat_donnee", "stat_donnee_interpreter", 3,
     "Vérifie chaque phrase avec les nombres : une seule tient.",
     ["stat_donnee", "interpreter", "template", "canvas"],
-    () => qVrai(tirerSerie(4, pick(["barres", "batons", "tableau", "camembert"] as const)), [pick(["ecart", "plusQue"] as const), "plusQue", "max", "min", "ecart"]),
+    // ⭐ 21/10 : une fois sur trois, les phrases portent sur une COURBE mensuelle (pluie, baleines).
+    () =>
+      Math.random() < 1 / 3
+        ? qVrai(tirerCourbe(pick(CTX_COURBE.filter((c) => c.quel === "Quel mois")), Math.random() < 0.5), [pick(["ecart", "plusQue", "max", "min"] as const), "plusQue", "max", "min", "ecart"])
+        : qVrai(serieLue(4, pick(["barres", "batons", "tableau", "camembert"] as const), undefined, true), [pick(["ecart", "plusQue"] as const), "plusQue", "max", "min", "ecart"]),
   ),
   gab(
     "6e_stat_interpreter_tpl_e5", "stat_donnee", "stat_donnee_interpreter", 5,

@@ -59,8 +59,11 @@ const STAT_COLORS = {
 // HELPERS CANVAS
 // ============================================================
 
+/** `axe` (21/10/2026) : aucune valeur écrite, un axe gradué de 2 en 2.
+ *  Foot 12 et Basket 10 tombent sur une graduation ; Danse 9 et Nage 7 au milieu. */
 function graphiqueActivitesCanvas(
-  highlightIndex?: number
+  highlightIndex?: number,
+  axe = false,
 ): StatGraphCanvasData {
   return statGraphCanvas({
     graphType: "barres",
@@ -70,11 +73,9 @@ function graphiqueActivitesCanvas(
       { label: "Nage", value: 7, color: STAT_COLORS.vert },
       { label: "Basket", value: 10, color: STAT_COLORS.jaune },
     ],
-    display: {
-      showLabels: true,
-      showValues: true,
-      highlightIndex,
-    },
+    display: axe
+      ? { showLabels: true, showValues: false, showAxis: true, step: 2, axeY: "élèves", highlightIndex }
+      : { showLabels: true, showValues: true, highlightIndex },
   });
 }
 
@@ -116,8 +117,10 @@ function graphiqueLivresCanvas(
   });
 }
 
+/** `axe` (21/10/2026) : aucune valeur écrite, un axe gradué de 2 en 2 (toutes sur une graduation). */
 function graphiqueCantineCanvas(
-  highlightIndex?: number
+  highlightIndex?: number,
+  axe = false,
 ): StatGraphCanvasData {
   return statGraphCanvas({
     graphType: "barres",
@@ -127,11 +130,9 @@ function graphiqueCantineCanvas(
       { label: "Salade", value: 8, color: STAT_COLORS.vert },
       { label: "Sandwich", value: 12, color: STAT_COLORS.bleu },
     ],
-    display: {
-      showLabels: true,
-      showValues: true,
-      highlightIndex,
-    },
+    display: axe
+      ? { showLabels: true, showValues: false, showAxis: true, step: 2, axeY: "élèves", highlightIndex }
+      : { showLabels: true, showValues: true, highlightIndex },
   });
 }
 
@@ -168,9 +169,1842 @@ function graphiqueCamembertGoutsCanvas(
     display: {
       showLabels: true,
       showValues: true,
+      // Les questions lisent la valeur d'une part (« Vanille : 10 ») : on l'écrit.
+      valeursParts: true,
       highlightIndex,
     },
   });
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ⭐ 20/10/2026 — DES SITUATIONS, PAS UN SEUL DÉCOR (robustesse des stats).
+   Mesuré avant : 24 à 28 squelettes par micro, jusqu'à 18 répétitions sur 20
+   (les mêmes « activités », « fruits », « livres » revenaient sans cesse).
+   Chaque gabarit ci-dessous croise une SITUATION (une trentaine de relevés :
+   sport, marché, pluie, oiseaux, tortues, déchets d'une plage, musique,
+   cinéma, histoire, car jaune…) × une TOURNURE × des nombres tirés, et dessine
+   le graphique avec EXACTEMENT les nombres de l'énoncé (multiples de 1, 2, 5
+   ou 10 pour une lecture facile). Un cran au-dessus du CM1 : écarts, totaux,
+   regroupements, valeur manquante, « double », « moitié », « quart ».
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+type GCat = { label: string; gn: string; f?: boolean };
+const gc = (label: string, gn: string, f?: boolean): GCat => ({ label, gn, f });
+
+type GSit = {
+  /** Phrase de situation, posée en tête d'énoncé. */
+  intro: string;
+  /** Titre du graphique. */
+  titre: string;
+  /** Ce que l'on compte (« élèves », « kilos »). */
+  unite: string;
+  combien: (c: GCat) => string;
+  qMax: string;
+  qMin: string;
+  cats: GCat[];
+  pas: number;
+  min: number;
+  max: number;
+};
+
+const MOIS = [
+  gc("Janv.", "janvier"), gc("Févr.", "février"), gc("Mars", "mars"),
+  gc("Avril", "avril"), gc("Mai", "mai"), gc("Juin", "juin"),
+];
+const JOURS = [
+  gc("Lundi", "lundi"), gc("Mardi", "mardi"), gc("Merc.", "mercredi"),
+  gc("Jeudi", "jeudi"), gc("Vendr.", "vendredi"), gc("Samedi", "samedi"),
+];
+const CLASSES = [gc("CP", "CP"), gc("CE1", "CE1"), gc("CE2", "CE2"), gc("CM1", "CM1"), gc("CM2", "CM2")];
+const ENFANTS_F = [gc("Léa", "Léa"), gc("Inès", "Inès"), gc("Zoé", "Zoé"), gc("Maëlys", "Maëlys"), gc("Jade", "Jade"), gc("Nora", "Nora")];
+const ENFANTS = [
+  gc("Léa", "Léa"), gc("Noé", "Noé"), gc("Inès", "Inès"), gc("Tom", "Tom"),
+  gc("Zoé", "Zoé"), gc("Enzo", "Enzo"), gc("Maëlys", "Maëlys"), gc("Kylian", "Kylian"),
+];
+
+const G_SITS: GSit[] = [
+  {
+    intro: "Les élèves de CM2 ont voté pour leur sport préféré.",
+    titre: "Sport préféré", unite: "élèves",
+    combien: (c) => `Combien d’élèves ont choisi ${c.gn} ?`,
+    qMax: "Quel sport a été le plus choisi ?", qMin: "Quel sport a été le moins choisi ?",
+    cats: [gc("Foot", "le foot"), gc("Danse", "la danse"), gc("Nage", "la natation"), gc("Basket", "le basket"), gc("Judo", "le judo"), gc("Rugby", "le rugby")],
+    pas: 1, min: 3, max: 20,
+  },
+  {
+    intro: "Au marché de Saint-Pierre, un marchand note les kilos de fruits vendus.",
+    titre: "Fruits vendus (kg)", unite: "kilos",
+    combien: (c) => `Combien de kilos ${c.gn} ont été vendus ?`,
+    qMax: "Quel fruit a été le plus vendu ?", qMin: "Quel fruit a été le moins vendu ?",
+    cats: [gc("Ananas", "d’ananas"), gc("Bananes", "de bananes"), gc("Mangues", "de mangues"), gc("Letchis", "de letchis"), gc("Papayes", "de papayes"), gc("Goyaves", "de goyaves")],
+    pas: 5, min: 10, max: 60,
+  },
+  {
+    intro: "La bibliothécaire compte les livres empruntés dans chaque rayon.",
+    titre: "Livres empruntés", unite: "livres",
+    combien: (c) => `Combien de livres du rayon « ${c.label} » ont été empruntés ?`,
+    qMax: "Quel rayon a eu le plus d’emprunts ?", qMin: "Quel rayon a eu le moins d’emprunts ?",
+    cats: [gc("Romans", ""), gc("BD", ""), gc("Mangas", ""), gc("Contes", ""), gc("Docs", ""), gc("Poésie", "")],
+    pas: 1, min: 4, max: 30,
+  },
+  {
+    intro: "Une météorologue relève le nombre de jours de pluie à Saint-Denis.",
+    titre: "Jours de pluie", unite: "jours de pluie",
+    combien: (c) => `Combien de jours de pluie y a-t-il eu en ${c.gn} ?`,
+    qMax: "Quel mois a été le plus pluvieux ?", qMin: "Quel mois a été le moins pluvieux ?",
+    cats: MOIS, pas: 1, min: 3, max: 22,
+  },
+  {
+    intro: "Une ornithologue compte les oiseaux venus dans le jardin de l’école.",
+    titre: "Oiseaux observés", unite: "oiseaux",
+    combien: (c) => `Combien de ${c.gn} ont été comptés ?`,
+    qMax: "Quel oiseau a été le plus observé ?", qMin: "Quel oiseau a été le moins observé ?",
+    cats: [gc("Merles", "merles"), gc("Moineaux", "moineaux"), gc("Martins", "martins"), gc("Bulbuls", "bulbuls"), gc("Cardinaux", "cardinaux"), gc("Pigeons", "pigeons")],
+    pas: 1, min: 2, max: 18,
+  },
+  {
+    intro: "Des bénévoles nettoient une plage de Saint-Leu et comptent les déchets.",
+    titre: "Déchets ramassés", unite: "déchets",
+    combien: (c) => `Combien de déchets « ${c.label} » ont été ramassés ?`,
+    qMax: "Quel déchet a été le plus ramassé ?", qMin: "Quel déchet a été le moins ramassé ?",
+    cats: [gc("Bouteilles", ""), gc("Canettes", ""), gc("Bouchons", ""), gc("Mégots", ""), gc("Sacs", ""), gc("Filets", "")],
+    pas: 5, min: 10, max: 80,
+  },
+  {
+    intro: "Une biologiste de Kélonia compte les tortues marines vues chaque mois.",
+    titre: "Tortues observées", unite: "tortues",
+    combien: (c) => `Combien de tortues ont été vues en ${c.gn} ?`,
+    qMax: "Quel mois a compté le plus de tortues ?", qMin: "Quel mois a compté le moins de tortues ?",
+    cats: MOIS, pas: 2, min: 4, max: 30,
+  },
+  {
+    intro: "L’école de musique compte ses élèves par instrument.",
+    titre: "Instruments joués", unite: "élèves",
+    combien: (c) => `Combien d’élèves jouent ${c.gn} ?`,
+    qMax: "Quel instrument a le plus d’élèves ?", qMin: "Quel instrument a le moins d’élèves ?",
+    cats: [gc("Guitare", "de la guitare"), gc("Piano", "du piano"), gc("Batterie", "de la batterie"), gc("Violon", "du violon"), gc("Flûte", "de la flûte"), gc("Kayamb", "du kayamb")],
+    pas: 1, min: 3, max: 20,
+  },
+  {
+    intro: "Un cinéma compte les spectateurs de la journée pour chaque genre de film.",
+    titre: "Spectateurs par genre", unite: "spectateurs",
+    combien: (c) => `Combien de spectateurs pour le genre « ${c.label} » ?`,
+    qMax: "Quel genre a attiré le plus de spectateurs ?", qMin: "Quel genre a attiré le moins de spectateurs ?",
+    cats: [gc("Animation", ""), gc("Aventure", ""), gc("Comédie", ""), gc("Policier", ""), gc("Docu", ""), gc("SF", "")],
+    pas: 10, min: 20, max: 150,
+  },
+  {
+    intro: "Le directeur demande aux élèves comment ils viennent à l’école.",
+    titre: "Venir à l’école", unite: "élèves",
+    combien: (c) => `Combien d’élèves viennent ${c.gn} ?`,
+    qMax: "Quel moyen de transport est le plus utilisé ?", qMin: "Quel moyen de transport est le moins utilisé ?",
+    cats: [gc("À pied", "à pied"), gc("Bus", "en bus"), gc("Car", "en car jaune"), gc("Vélo", "à vélo"), gc("Voiture", "en voiture")],
+    pas: 1, min: 2, max: 20,
+  },
+  {
+    intro: "À la cantine, le cuisinier note le plat choisi par chaque élève.",
+    titre: "Plats choisis", unite: "élèves",
+    combien: (c) => `Combien d’élèves ont choisi ${c.gn} ?`,
+    qMax: "Quel plat a été le plus choisi ?", qMin: "Quel plat a été le moins choisi ?",
+    cats: [gc("Cari", "le cari"), gc("Rougail", "le rougail"), gc("Pâtes", "les pâtes"), gc("Pizza", "la pizza"), gc("Salade", "la salade"), gc("Poisson", "le poisson")],
+    pas: 2, min: 6, max: 40,
+  },
+  {
+    intro: "À la kermesse, on compte les glaces vendues pour chaque parfum.",
+    titre: "Glaces vendues", unite: "glaces",
+    combien: (c) => `Combien de glaces ${c.gn} ont été vendues ?`,
+    qMax: "Quel parfum a été le plus vendu ?", qMin: "Quel parfum a été le moins vendu ?",
+    cats: [gc("Vanille", "à la vanille"), gc("Chocolat", "au chocolat"), gc("Fraise", "à la fraise"), gc("Coco", "à la coco"), gc("Mangue", "à la mangue"), gc("Citron", "au citron")],
+    pas: 5, min: 10, max: 60,
+  },
+  {
+    intro: "Pour la tombola de l’école, chaque classe a vendu des tickets.",
+    titre: "Tickets de tombola", unite: "tickets",
+    combien: (c) => `Combien de tickets la classe de ${c.gn} a-t-elle vendus ?`,
+    qMax: "Quelle classe a vendu le plus de tickets ?", qMin: "Quelle classe a vendu le moins de tickets ?",
+    cats: CLASSES, pas: 5, min: 15, max: 70,
+  },
+  {
+    intro: "À la récréation, des enfants comptent leurs billes.",
+    titre: "Billes de chacun", unite: "billes",
+    combien: (c) => `Combien de billes possède ${c.gn} ?`,
+    qMax: "Qui possède le plus de billes ?", qMin: "Qui possède le moins de billes ?",
+    cats: ENFANTS, pas: 2, min: 4, max: 40,
+  },
+  {
+    intro: "Une entraîneuse de basket note les points marqués par ses joueuses.",
+    titre: "Points marqués", unite: "points",
+    combien: (c) => `Combien de points pour ${c.gn} ?`,
+    qMax: "Quelle joueuse a marqué le plus de points ?", qMin: "Quelle joueuse a marqué le moins de points ?",
+    cats: ENFANTS_F, pas: 2, min: 2, max: 30,
+  },
+  {
+    intro: "Un guide compte les randonneurs montés au Piton de la Fournaise.",
+    titre: "Randonneurs au volcan", unite: "randonneurs",
+    combien: (c) => `Combien de randonneurs sont montés au volcan ${c.gn} ?`,
+    qMax: "Quel jour a eu le plus de randonneurs ?", qMin: "Quel jour a eu le moins de randonneurs ?",
+    cats: JOURS, pas: 10, min: 30, max: 150,
+  },
+  {
+    intro: "En sciences, la classe a semé des graines dans des pots.",
+    titre: "Graines germées", unite: "graines",
+    combien: (c) => `Combien de graines ont germé dans le ${c.gn} ?`,
+    qMax: "Quel pot a le plus de graines germées ?", qMin: "Quel pot a le moins de graines germées ?",
+    cats: [gc("Pot A", "pot A"), gc("Pot B", "pot B"), gc("Pot C", "pot C"), gc("Pot D", "pot D"), gc("Pot E", "pot E")],
+    pas: 1, min: 2, max: 20,
+  },
+  {
+    intro: "En histoire, chaque élève choisit une époque pour son exposé.",
+    titre: "Sujets d’exposé", unite: "élèves",
+    combien: (c) => `Combien d’élèves ont choisi ${c.gn} ?`,
+    qMax: "Quel sujet a été le plus choisi ?", qMin: "Quel sujet a été le moins choisi ?",
+    cats: [gc("Égypte", "l’Égypte"), gc("Romains", "les Romains"), gc("Gaulois", "les Gaulois"), gc("Vikings", "les Vikings"), gc("Châteaux", "les châteaux forts"), gc("Pirates", "les pirates")],
+    pas: 1, min: 2, max: 15,
+  },
+  {
+    intro: "Une animatrice radio demande aux élèves leur musique préférée.",
+    titre: "Musique préférée", unite: "élèves",
+    combien: (c) => `Combien d’élèves préfèrent ${c.gn} ?`,
+    qMax: "Quelle musique est la plus aimée ?", qMin: "Quelle musique est la moins aimée ?",
+    cats: [gc("Maloya", "le maloya"), gc("Séga", "le séga"), gc("Rap", "le rap"), gc("Pop", "la pop"), gc("Rock", "le rock"), gc("Jazz", "le jazz")],
+    pas: 1, min: 2, max: 20,
+  },
+  {
+    intro: "Une famille compte les vidéos regardées en un mois, par thème.",
+    titre: "Vidéos regardées", unite: "vidéos",
+    combien: (c) => `Combien de vidéos du thème « ${c.label} » ont été regardées ?`,
+    qMax: "Quel thème a été le plus regardé ?", qMin: "Quel thème a été le moins regardé ?",
+    cats: [gc("Sport", ""), gc("Jeux", ""), gc("Animaux", ""), gc("Cuisine", ""), gc("Sciences", ""), gc("Musique", "")],
+    pas: 5, min: 5, max: 60,
+  },
+  {
+    intro: "Une vétérinaire demande aux élèves quel animal ils ont à la maison.",
+    titre: "Animaux de compagnie", unite: "élèves",
+    combien: (c) => `Combien d’élèves ont ${c.gn} ?`,
+    qMax: "Quel animal est le plus présent ?", qMin: "Quel animal est le moins présent ?",
+    cats: [gc("Chien", "un chien"), gc("Chat", "un chat"), gc("Poisson", "un poisson"), gc("Lapin", "un lapin"), gc("Oiseau", "un oiseau"), gc("Tortue", "une tortue")],
+    pas: 1, min: 2, max: 18,
+  },
+  {
+    intro: "Des amis comptent leurs victoires au jeu de l’oie pendant les vacances.",
+    titre: "Parties gagnées", unite: "victoires",
+    combien: (c) => `Combien de victoires pour ${c.gn} ?`,
+    qMax: "Qui a gagné le plus de parties ?", qMin: "Qui a gagné le moins de parties ?",
+    cats: ENFANTS, pas: 1, min: 1, max: 15,
+  },
+  {
+    intro: "La ludothèque demande aux enfants leur jeu de société préféré.",
+    titre: "Jeu préféré", unite: "enfants",
+    combien: (c) => `Combien d’enfants préfèrent ${c.gn} ?`,
+    qMax: "Quel jeu est le plus aimé ?", qMin: "Quel jeu est le moins aimé ?",
+    cats: [gc("Uno", "le Uno"), gc("Dames", "les dames"), gc("Échecs", "les échecs"), gc("Dominos", "les dominos"), gc("Memory", "le Memory"), gc("Oie", "le jeu de l’oie")],
+    pas: 1, min: 2, max: 20,
+  },
+  {
+    intro: "Léo note les pages lues dans son roman chaque jour.",
+    titre: "Pages lues par Léo", unite: "pages",
+    combien: (c) => `Combien de pages Léo a-t-il lues ${c.gn} ?`,
+    qMax: "Quel jour Léo a-t-il lu le plus de pages ?", qMin: "Quel jour Léo a-t-il lu le moins de pages ?",
+    cats: JOURS, pas: 5, min: 5, max: 50,
+  },
+  {
+    intro: "Le chauffeur du car jaune compte les voyageurs montés à chaque arrêt.",
+    titre: "Voyageurs du car jaune", unite: "voyageurs",
+    combien: (c) => `Combien de voyageurs sont montés ${c.gn} ?`,
+    qMax: "À quel arrêt sont montés le plus de voyageurs ?", qMin: "À quel arrêt sont montés le moins de voyageurs ?",
+    cats: [gc("Cilaos", "à Cilaos"), gc("Salazie", "à Salazie"), gc("Tampon", "au Tampon"), gc("St-Leu", "à Saint-Leu"), gc("St-Paul", "à Saint-Paul"), gc("Ilet", "à l’îlet")],
+    pas: 5, min: 5, max: 50,
+  },
+  {
+    intro: "Un loueur de vélos de Saint-Gilles compte ses locations de la semaine.",
+    titre: "Vélos loués", unite: "vélos",
+    combien: (c) => `Combien de vélos ont été loués ${c.gn} ?`,
+    qMax: "Quel jour a eu le plus de locations ?", qMin: "Quel jour a eu le moins de locations ?",
+    cats: JOURS, pas: 5, min: 10, max: 60,
+  },
+  {
+    intro: "Aux Jeux des îles de l’océan Indien, on compte les médailles de chaque île.",
+    titre: "Médailles gagnées", unite: "médailles",
+    combien: (c) => `Combien de médailles pour ${c.gn} ?`,
+    qMax: "Quelle île a gagné le plus de médailles ?", qMin: "Quelle île a gagné le moins de médailles ?",
+    cats: [gc("Réunion", "La Réunion"), gc("Maurice", "Maurice"), gc("Madagascar", "Madagascar"), gc("Seychelles", "les Seychelles"), gc("Comores", "les Comores"), gc("Mayotte", "Mayotte")],
+    pas: 2, min: 4, max: 60,
+  },
+  {
+    intro: "Pour la planète, chaque classe de l’école a planté des arbres.",
+    titre: "Arbres plantés", unite: "arbres",
+    combien: (c) => `Combien d’arbres la classe de ${c.gn} a-t-elle plantés ?`,
+    qMax: "Quelle classe a planté le plus d’arbres ?", qMin: "Quelle classe a planté le moins d’arbres ?",
+    cats: CLASSES, pas: 2, min: 4, max: 30,
+  },
+  {
+    intro: "À Cilaos, un agriculteur mesure l’eau de pluie récoltée dans sa cuve.",
+    titre: "Eau récoltée (litres)", unite: "litres",
+    combien: (c) => `Combien de litres d’eau ont été récoltés en ${c.gn} ?`,
+    qMax: "Quel mois a donné le plus d’eau ?", qMin: "Quel mois a donné le moins d’eau ?",
+    cats: MOIS, pas: 10, min: 20, max: 120,
+  },
+  {
+    intro: "Une plongeuse compte les poissons du lagon de l’Ermitage par espèce.",
+    titre: "Poissons du lagon", unite: "poissons",
+    combien: (c) => `Combien de poissons de l’espèce « ${c.label} » ont été comptés ?`,
+    qMax: "Quelle espèce a été la plus comptée ?", qMin: "Quelle espèce a été la moins comptée ?",
+    cats: [gc("Clowns", ""), gc("Mérous", ""), gc("Balistes", ""), gc("Perroquets", ""), gc("Chirurgiens", ""), gc("Demoiselles", "")],
+    pas: 2, min: 4, max: 40,
+  },
+  {
+    intro: "La classe élit ses délégués. On compte les voix de chaque candidat.",
+    titre: "Élection des délégués", unite: "voix",
+    combien: (c) => `Combien de voix pour ${c.gn} ?`,
+    qMax: "Qui a obtenu le plus de voix ?", qMin: "Qui a obtenu le moins de voix ?",
+    cats: ENFANTS, pas: 1, min: 1, max: 14,
+  },
+  {
+    intro: "Au stand de la kermesse, on compte les douceurs vendues.",
+    titre: "Douceurs vendues", unite: "douceurs",
+    combien: (c) => `Combien de ${c.gn} ont été vendu${c.f ? "es" : "s"} ?`,
+    qMax: "Quelle douceur a été la plus vendue ?", qMin: "Quelle douceur a été la moins vendue ?",
+    cats: [gc("Crêpes", "crêpes", true), gc("Gaufres", "gaufres", true), gc("Beignets", "beignets"), gc("Samoussas", "samoussas"), gc("Bouchons", "bouchons"), gc("Cookies", "cookies")],
+    pas: 5, min: 10, max: 70,
+  },
+  {
+    intro: "Nina vide son sachet de bonbons et les trie par couleur.",
+    titre: "Bonbons du sachet", unite: "bonbons",
+    combien: (c) => `Combien de bonbons ${c.gn} y a-t-il ?`,
+    qMax: "Quelle couleur de bonbon est la plus nombreuse ?", qMin: "Quelle couleur de bonbon est la moins nombreuse ?",
+    cats: [gc("Rouges", "rouges"), gc("Verts", "verts"), gc("Jaunes", "jaunes"), gc("Bleus", "bleus"), gc("Orange", "orange"), gc("Violets", "violets")],
+    pas: 1, min: 3, max: 20,
+  },
+  {
+    intro: "La fermière compte les œufs ramassés au poulailler.",
+    titre: "Œufs ramassés", unite: "œufs",
+    combien: (c) => `Combien d’œufs ont été ramassés ${c.gn} ?`,
+    qMax: "Quel jour a donné le plus d’œufs ?", qMin: "Quel jour a donné le moins d’œufs ?",
+    cats: JOURS, pas: 1, min: 4, max: 20,
+  },
+  {
+    intro: "Un club de foot compte les buts marqués par ses joueurs dans la saison.",
+    titre: "Buts marqués", unite: "buts",
+    combien: (c) => `Combien de buts pour ${c.gn} ?`,
+    qMax: "Qui a marqué le plus de buts ?", qMin: "Qui a marqué le moins de buts ?",
+    cats: ENFANTS, pas: 1, min: 1, max: 16,
+  },
+];
+
+const G_COULEURS = Object.values(STAT_COLORS);
+
+/** `n` éléments distincts, dans l'ordre d'origine (les mois restent dans l'ordre). */
+function gSans<T>(arr: readonly T[], n: number): T[] {
+  return shuffle(arr.map((_, i) => i))
+    .slice(0, n)
+    .sort((x, y) => x - y)
+    .map((i) => arr[i]);
+}
+
+function gMultiples(s: GSit): number[] {
+  const out: number[] = [];
+  for (let v = Math.ceil(s.min / s.pas) * s.pas; v <= s.max; v += s.pas) out.push(v);
+  return out;
+}
+
+type GTirage = { s: GSit; cats: GCat[]; vals: number[] };
+
+/** Une situation, `n` catégories, `n` valeurs DISTINCTES (un seul maximum, un seul minimum). */
+function gTirer(n = 4, s: GSit = randomChoice(G_SITS)): GTirage {
+  const k = Math.min(n, s.cats.length);
+  const cats = gSans(s.cats, k);
+  const vals = shuffle(gMultiples(s)).slice(0, k);
+  return { s, cats, vals };
+}
+
+function gCanvas(
+  t: GTirage,
+  opts: { type?: "barres" | "batons" | "camembert"; hi?: number; sans?: number; axe?: number } = {},
+): StatGraphCanvasData {
+  const type = opts.type ?? randomChoice(["barres", "batons"] as const);
+  const data = t.cats
+    .map((c, i) => ({ label: c.label, value: t.vals[i], color: G_COULEURS[i % G_COULEURS.length] }))
+    .filter((_, i) => i !== opts.sans);
+  // ⭐ 20/10/2026 — `axe` (le pas) : AUCUN nombre écrit sur les barres, un axe
+  // gradué à la place. Lire, c'est suivre la ligne jusqu'à l'axe.
+  if (opts.axe && type !== "camembert") {
+    return statGraphCanvas({
+      graphType: type,
+      title: t.s.titre,
+      data,
+      display: {
+        showLabels: true, showValues: false, showAxis: true, step: opts.axe,
+        axeY: t.s.unite, highlightIndex: opts.hi,
+      },
+    });
+  }
+  return statGraphCanvas({
+    graphType: type,
+    title: t.s.titre,
+    data,
+    // Camembert : depuis le 20/10/2026, sans `valeursParts`, seul le total est
+    // écrit. Ces questions lisent la valeur d'une part : on l'écrit.
+    display: { showLabels: true, showValues: true, highlightIndex: opts.hi, valeursParts: type === "camembert" ? true : undefined },
+  });
+}
+
+/* ─── LIRE SUR UN AXE GRADUÉ (20/10/2026) ──────────────────────────────────
+   Le pas de l'axe est un nombre rond (1, 2, 5, 10, 20, 50) : au plus 10
+   graduations, et assez de graduations dans [min ; max] pour n barres.
+   Les valeurs tombent SUR une graduation. `milieu` : UNE barre s'arrête au
+   milieu de deux graduations (pas pair seulement : 13 entre 12 et 14). */
+function gPasAxe(s: GSit, n: number): number {
+  for (const A of [1, 2, 5, 10, 20, 50]) {
+    if (Math.ceil(s.max / A) > 10) continue;
+    let k = 0;
+    for (let v = Math.ceil(s.min / A) * A; v <= s.max; v += A) if (v > 0) k++;
+    if (k >= n) return A;
+  }
+  // ⚠️ 21/10/2026 — aucun pas ne convient (« jours de pluie », 3 à 22, pour
+  // cinq barres : pas de 5 → seulement 5, 10, 15, 20). Avant, on rendait 50 et
+  // AUCUNE valeur : des barres « undefined ». gTirerAxe change de situation.
+  return 0;
+}
+
+type GTirageAxe = GTirage & { A: number };
+
+function gTirerAxe(n = 4, s0?: GSit): GTirageAxe {
+  let s = s0 ?? randomChoice(G_SITS);
+  for (let essai = 0; !s0 && essai < 50 && !gPasAxe(s, Math.min(n, s.cats.length)); essai++) s = randomChoice(G_SITS);
+  const k = Math.min(n, s.cats.length);
+  const A = gPasAxe(s, k) || s.pas;
+  const mult: number[] = [];
+  for (let v = Math.ceil(s.min / A) * A; v <= s.max; v += A) if (v > 0) mult.push(v);
+  return { s, cats: gSans(s.cats, k), vals: shuffle(mult).slice(0, k), A };
+}
+
+/** La barre i s'arrête au milieu de deux graduations (si le pas est pair). */
+function gMettreAuMilieu(t: GTirageAxe, i: number): boolean {
+  if (t.A % 2 !== 0) return false;
+  const h = t.A / 2;
+  const cands: number[] = [];
+  for (let v = h; v < Math.ceil(t.s.max / t.A) * t.A; v += t.A) if (v >= t.s.min && v > t.A) cands.push(v);
+  if (!cands.length) return false;
+  t.vals[i] = randomChoice(cands);
+  return true;
+}
+
+/** Comment on lit : du haut de la barre jusqu'à l'axe. */
+function gCommentLire(t: GTirageAxe, i: number, obj = "la barre"): string {
+  const v = t.vals[i];
+  const c = t.cats[i];
+  if (v % t.A === 0) {
+    return `Je pars du haut de ${obj} ${gGuil(c)}, je suis la ligne jusqu’à l’axe, je lis ${v}.`;
+  }
+  const bas = v - t.A / 2, haut = v + t.A / 2;
+  return `Je pars du haut de ${obj} ${gGuil(c)}, je suis la ligne jusqu’à l’axe. ${obj === "le bâton" ? "Il" : "Elle"} s’arrête au milieu, entre ${bas} et ${haut} : je lis ${v}.`;
+}
+
+/** Leurres de lecture : les graduations voisines, et le pas lu à la place de la valeur. */
+function gLeurresAxe(t: GTirageAxe, i: number): number[] {
+  const v = t.vals[i];
+  // Exactement trois leurres quand c'est possible : makeChoices les garde tous.
+  const voisins = (v % t.A === 0 ? [v - t.A, v + t.A] : [v - t.A / 2, v + t.A / 2]).filter((x) => x > 0);
+  const autres = [t.A, ...t.vals.filter((_, k) => k !== i)].filter((x) => x > 0 && x !== v && !voisins.includes(x));
+  return Array.from(new Set([...voisins, ...shuffle(autres)])).slice(0, 3);
+}
+
+/** Choix numériques : la bonne réponse + de vrais leurres, jamais deux fois la même valeur. */
+function gNum(correct: number, wrongs: number[], pas = 1): string[] {
+  const w = wrongs.filter((x) => x >= 0 && x !== correct);
+  for (const d of [pas, -pas, 2 * pas, -2 * pas, 1, -1, 10, -10]) {
+    if (new Set(w).size >= 3) break;
+    const x = correct + d;
+    if (x >= 0 && x !== correct) w.push(x);
+  }
+  return makeChoices(String(correct), w.map(String));
+}
+
+const gSomme = (xs: number[]) => xs.reduce((a, b) => a + b, 0);
+const gGuil = (c: GCat) => `« ${c.label} »`;
+const gListe = (t: GTirage, idx: number[] = t.cats.map((_, i) => i)) =>
+  idx.map((i) => `${gGuil(t.cats[i])} : ${t.vals[i]}`).join(", ");
+const gIdxMax = (vals: number[]) => vals.indexOf(Math.max(...vals));
+const gIdxMin = (vals: number[]) => vals.indexOf(Math.min(...vals));
+/** Deux indices distincts, le premier de plus grande valeur. */
+function gPaire(t: GTirage): [number, number] {
+  const [i, j] = shuffle(t.cats.map((_, k) => k)).slice(0, 2);
+  return t.vals[i] > t.vals[j] ? [i, j] : [j, i];
+}
+
+const G_PRENOMS = [
+  { n: "Léa", f: true }, { n: "Noé", f: false }, { n: "Inès", f: true }, { n: "Tom", f: false },
+  { n: "Zoé", f: true }, { n: "Enzo", f: false }, { n: "Maëlys", f: true }, { n: "Kylian", f: false },
+  { n: "Jade", f: true }, { n: "Ilyes", f: false },
+];
+
+function gGab(
+  id: string,
+  microId: string,
+  difficulty: 1 | 2 | 3 | 4 | 5,
+  hint: string,
+  tags: string[],
+  generate: () => any,
+): TutorBankItemV4 {
+  return {
+    kind: "template", id, niveau: "cm2", matiere: "maths", notionId: "graphique", microId,
+    difficulty, theme: "neutral", hint, tags: ["cm2", "graphique", ...tags, "template", "qcm", "canvas"],
+    generate,
+  } as TutorBankItemV4;
+}
+
+const gObj = (type: string) => (type === "barres" ? "la barre" : type === "batons" ? "le bâton" : "la part");
+
+/* ─── LES COURBES (21/10/2026) ─────────────────────────────────────────────
+   Programme du cycle 3 : « lire et interpréter des courbes ». Une évolution
+   (mois, heures, semaines, années), six points reliés, un axe gradué, AUCUNE
+   valeur écrite. Chaque relevé est porté par un MÉTIER. Les valeurs sont des
+   multiples du pas (`A`) ; la `forme` garde un relevé vraisemblable :
+   « monte » (une plante pousse), « cloche » (la pluie de la saison des pluies,
+   la chaleur d'une journée), « libre ». Ordres de grandeur de La Réunion :
+   saison des pluies de janvier à mars (Saint-Denis, plus de 200 mm par mois),
+   baleines à bosse de juin à octobre, au plus fort en août-septembre. */
+type GCourbe = {
+  intro: string;
+  titre: string;
+  /** Nom de l'axe vertical et unité des réponses. */
+  unite: string;
+  points: GCat[];
+  /** Le pas de l'axe. */
+  A: number;
+  forme: "monte" | "cloche" | "libre";
+  /** Cloche : le sommet tombe sur l'un de ces rangs. */
+  sommet?: number[];
+  /** Bornes des valeurs, en nombre de pas (1 à 10 : au plus 10 graduations). */
+  bas: number;
+  haut: number;
+  valeur: (c: GCat) => string;
+  qMax: string;
+  qMin: string;
+};
+
+const G_COURBES: GCourbe[] = [
+  {
+    intro: "Une météorologue de Météo-France relève la pluie tombée à Saint-Denis, mois par mois.",
+    titre: "Pluie à Saint-Denis (mm)", unite: "mm",
+    points: MOIS, A: 50, forme: "cloche", sommet: [0, 1, 2], bas: 1, haut: 7,
+    valeur: (c) => `Combien de millimètres de pluie sont tombés en ${c.gn} ?`,
+    qMax: "Quel mois a été le plus pluvieux ?", qMin: "Quel mois a été le moins pluvieux ?",
+  },
+  {
+    intro: "Au Maïdo, un guide de montagne relève la température toutes les deux heures.",
+    titre: "Température au Maïdo (°C)", unite: "°C",
+    points: [gc("6 h", "à 6 h"), gc("8 h", "à 8 h"), gc("10 h", "à 10 h"), gc("12 h", "à 12 h"), gc("14 h", "à 14 h"), gc("16 h", "à 16 h")],
+    A: 2, forme: "cloche", sommet: [3, 4], bas: 2, haut: 10,
+    valeur: (c) => `Quelle température fait-il ${c.gn} ?`,
+    qMax: "À quelle heure fait-il le plus chaud ?", qMin: "À quelle heure fait-il le plus froid ?",
+  },
+  {
+    intro: "Une jardinière mesure un plant de tomate chaque semaine (S1 : semaine 1).",
+    titre: "Taille du plant (cm)", unite: "cm",
+    points: [gc("S1", "la semaine 1"), gc("S2", "la semaine 2"), gc("S3", "la semaine 3"), gc("S4", "la semaine 4"), gc("S5", "la semaine 5"), gc("S6", "la semaine 6")],
+    A: 2, forme: "monte", bas: 1, haut: 10,
+    valeur: (c) => `Combien mesure le plant ${c.gn} ?`,
+    qMax: "Quelle semaine le plant est-il le plus grand ?", qMin: "Quelle semaine le plant est-il le plus petit ?",
+  },
+  {
+    intro: "Une guide de la Cité du Volcan compte les visiteurs du musée, mois par mois.",
+    titre: "Visiteurs du musée", unite: "visiteurs",
+    points: [gc("Juil.", "juillet"), gc("Août", "août"), gc("Sept.", "septembre"), gc("Oct.", "octobre"), gc("Nov.", "novembre"), gc("Déc.", "décembre")],
+    A: 100, forme: "libre", bas: 2, haut: 9,
+    valeur: (c) => `Combien de visiteurs sont venus en ${c.gn} ?`,
+    qMax: "Quel mois a eu le plus de visiteurs ?", qMin: "Quel mois a eu le moins de visiteurs ?",
+  },
+  {
+    intro: "Un urbaniste étudie la population d’une commune de La Réunion, tous les dix ans.",
+    titre: "Population (milliers d’habitants)", unite: "milliers d’habitants",
+    points: [gc("1970", "en 1970"), gc("1980", "en 1980"), gc("1990", "en 1990"), gc("2000", "en 2000"), gc("2010", "en 2010"), gc("2020", "en 2020")],
+    A: 10, forme: "monte", bas: 2, haut: 10,
+    valeur: (c) => `Combien de milliers d’habitants la commune compte-t-elle ${c.gn} ?`,
+    qMax: "En quelle année la commune compte-t-elle le plus d’habitants ?", qMin: "En quelle année la commune compte-t-elle le moins d’habitants ?",
+  },
+  {
+    intro: "Une cétologue compte les baleines à bosse vues au large de Saint-Gilles, mois par mois.",
+    titre: "Baleines observées", unite: "baleines",
+    points: [gc("Juin", "juin"), gc("Juil.", "juillet"), gc("Août", "août"), gc("Sept.", "septembre"), gc("Oct.", "octobre"), gc("Nov.", "novembre")],
+    A: 5, forme: "cloche", sommet: [2, 3], bas: 1, haut: 10,
+    valeur: (c) => `Combien de baleines ont été vues en ${c.gn} ?`,
+    qMax: "Quel mois a compté le plus de baleines ?", qMin: "Quel mois a compté le moins de baleines ?",
+  },
+  {
+    intro: "Une boulangère du Tampon note les baguettes vendues chaque jour.",
+    titre: "Baguettes vendues", unite: "baguettes",
+    points: JOURS, A: 20, forme: "libre", bas: 2, haut: 10,
+    valeur: (c) => `Combien de baguettes ont été vendues ${c.gn} ?`,
+    qMax: "Quel jour a-t-on vendu le plus de baguettes ?", qMin: "Quel jour a-t-on vendu le moins de baguettes ?",
+  },
+];
+
+type GTirageCourbe = { c: GCourbe; vals: number[] };
+
+/** Six valeurs DISTINCTES (un seul point le plus haut, un seul le plus bas), selon la forme. */
+function gTirerCourbe(c: GCourbe = randomChoice(G_COURBES)): GTirageCourbe {
+  const n = c.points.length;
+  for (let essai = 0; essai < 200; essai++) {
+    let k: number[] = [];
+    if (c.forme === "libre") {
+      k = Array.from({ length: n }, () => randomInt(c.bas, c.haut));
+    } else if (c.forme === "monte") {
+      k = [randomInt(c.bas, c.bas + 2)];
+      for (let i = 1; i < n; i++) k.push(k[i - 1] + randomChoice([1, 1, 2]));
+    } else {
+      const p = randomChoice(c.sommet ?? [2]);
+      k = new Array(n).fill(0);
+      k[p] = randomInt(Math.max(c.bas + 2, c.haut - 2), c.haut);
+      for (let i = p - 1; i >= 0; i--) k[i] = k[i + 1] - randomChoice([1, 1, 2]);
+      for (let i = p + 1; i < n; i++) k[i] = k[i - 1] - randomChoice([1, 2]);
+    }
+    if (k.some((x) => x < c.bas || x > c.haut)) continue;
+    if (new Set(k).size !== n) continue;
+    return { c, vals: k.map((x) => x * c.A) };
+  }
+  // Repli sûr : une montée régulière d'un pas.
+  return { c, vals: c.points.map((_, i) => (c.bas + i) * c.A) };
+}
+
+/** Le point i passe au milieu de deux graduations (pas pair seulement). */
+function gCourbeMilieu(t: GTirageCourbe, i: number): boolean {
+  const h = t.c.A / 2;
+  if (t.c.A % 2 !== 0) return false;
+  const sens = randomChoice([-1, 1]);
+  for (const s of [sens, -sens]) {
+    const v = t.vals[i] + s * h;
+    if (v > t.c.A && v < t.c.haut * t.c.A) { t.vals[i] = v; return true; }
+  }
+  return false;
+}
+
+function gCourbeCanvas(t: GTirageCourbe, hi?: number): StatGraphCanvasData {
+  return statGraphCanvas({
+    graphType: "courbe",
+    title: t.c.titre,
+    data: t.c.points.map((p, i) => ({ label: p.label, value: t.vals[i] })),
+    display: { showLabels: true, showValues: false, showAxis: true, step: t.c.A, axeY: t.c.unite, highlightIndex: hi },
+  });
+}
+
+/** Comment on lit un point : de lui, on suit la ligne vers la gauche jusqu'à l'axe. */
+function gCourbeLire(t: GTirageCourbe, i: number): string {
+  const v = t.vals[i], A = t.c.A;
+  const debut = `Je pars du point ${gGuil(t.c.points[i])}, je suis la ligne vers la gauche jusqu’à l’axe`;
+  if (v % A === 0) return `${debut}, je lis ${v}.`;
+  return `${debut}. Le point est au milieu, entre ${v - A / 2} et ${v + A / 2} : je lis ${v}.`;
+}
+
+/** Leurres de lecture d'un point : les graduations voisines, le pas. */
+function gCourbeLeurres(t: GTirageCourbe, i: number): number[] {
+  const v = t.vals[i], A = t.c.A;
+  const voisins = (v % A === 0 ? [v - A, v + A] : [v - A / 2, v + A / 2]).filter((x) => x > 0);
+  const autres = [A, ...t.vals.filter((_, k) => k !== i)].filter((x) => x > 0 && x !== v && !voisins.includes(x));
+  return Array.from(new Set([...voisins, ...shuffle(autres)])).slice(0, 3);
+}
+
+// ─── GRAPHIQUE_LIRE ─────────────────────────────────────────────────────────
+const G_LIRE: TutorBankItemV4[] = [
+  gGab("cm2_graphique_lire_gen_1_valeur", "graphique_lire", 1,
+    "Trouve l’étiquette sous le graphique, puis lis le nombre en haut.",
+    ["lire", "valeur"],
+    () => {
+      const type = randomChoice(["barres", "batons"] as const);
+      const obj = gObj(type);
+      // ⭐ 20/10/2026 — deux fois sur trois, l'axe gradué : on LIT, on ne recopie pas.
+      if (Math.random() < 0.67) {
+        const t = gTirerAxe(4);
+        const i = randomInt(0, 3);
+        const c = t.cats[i];
+        const v = t.vals[i];
+        const q = randomChoice([
+          t.s.combien(c),
+          `Suis le haut ${obj === "le bâton" ? "du bâton" : "de la barre"} ${gGuil(c)} jusqu’à l’axe. Quel nombre lis-tu ?`,
+          `Lis sur l’axe gradué la valeur de ${gGuil(c)}.`,
+          `Que vaut ${obj} ${gGuil(c)} ? Aide-toi de l’axe.`,
+        ]);
+        return {
+          text: `${t.s.intro} ${q}`,
+          format: "qcm",
+          choices: gNum(v, gLeurresAxe(t, i), t.A),
+          expected: [String(v)],
+          comparator: "mcq_exact",
+          explanation: `${gCommentLire(t, i, obj)} L’axe compte de ${t.A} en ${t.A}. Réponse : ${v} ${t.s.unite}.`,
+          canvas: gCanvas(t, { type, hi: i, axe: t.A }),
+        };
+      }
+      const t = gTirer(4);
+      const i = randomInt(0, 3);
+      const c = t.cats[i];
+      const v = t.vals[i];
+      const q = randomChoice([
+        t.s.combien(c),
+        `Que vaut ${obj} ${gGuil(c)} ?`,
+        `Lis le graphique : quel nombre correspond à ${gGuil(c)} ?`,
+        `Quel nombre est écrit en haut ${obj === "le bâton" ? "du bâton" : "de la barre"} ${gGuil(c)} ?`,
+      ]);
+      return {
+        text: `${t.s.intro} ${q}`,
+        format: "qcm",
+        choices: gNum(v, [...t.vals.filter((_, k) => k !== i), v + t.s.pas], t.s.pas),
+        expected: [String(v)],
+        comparator: "mcq_exact",
+        explanation: `On cherche l’étiquette ${gGuil(c)} sous le graphique, puis on lit le nombre en haut ${obj === "le bâton" ? "du bâton" : "de la barre"} : ${v}. Réponse : ${v} ${t.s.unite}.`,
+        canvas: gCanvas(t, { type, hi: i }),
+      };
+    }),
+
+  gGab("cm2_graphique_lire_gen_2_etiquette", "graphique_lire", 1,
+    "Cherche le nombre demandé en haut des barres, puis lis l’étiquette dessous.",
+    ["lire", "etiquette"],
+    () => {
+      if (Math.random() < 0.67) {
+        const t = gTirerAxe(4);
+        const i = randomInt(0, 3);
+        const c = t.cats[i];
+        const v = t.vals[i];
+        const q = randomChoice([
+          `Quelle barre monte jusqu’à ${v} ?`,
+          `Sur l’axe, trouve la graduation ${v}. Quelle barre s’arrête à cette hauteur ?`,
+          `Quelle étiquette correspond à ${v} ${t.s.unite} ?`,
+          `Le graphique indique ${v} ${t.s.unite}. Pour quelle étiquette ?`,
+        ]);
+        return {
+          text: `${t.s.intro} ${q}`,
+          format: "qcm",
+          choices: shuffle(t.cats.map((x) => x.label)),
+          expected: [c.label],
+          comparator: "mcq_exact",
+          explanation: `Je trouve ${v} sur l’axe, puis je suis la ligne vers la droite : elle touche le haut de ${gGuil(c)}. Réponse : ${gGuil(c)}.`,
+          canvas: gCanvas(t, { type: "barres", axe: t.A }),
+        };
+      }
+      const t = gTirer(4);
+      const i = randomInt(0, 3);
+      const c = t.cats[i];
+      const v = t.vals[i];
+      const q = randomChoice([
+        `Quelle étiquette correspond à ${v} ${t.s.unite} ?`,
+        `Sur le graphique, quelle étiquette porte le nombre ${v} ?`,
+        `Le graphique indique ${v} ${t.s.unite}. Pour quelle étiquette ?`,
+        `Quelle catégorie a la valeur ${v} ?`,
+      ]);
+      return {
+        text: `${t.s.intro} ${q}`,
+        format: "qcm",
+        choices: shuffle(t.cats.map((x) => x.label)),
+        expected: [c.label],
+        comparator: "mcq_exact",
+        explanation: `On cherche le nombre ${v} en haut des barres : il est sur ${gGuil(c)}. Les valeurs sont : ${gListe(t)}.`,
+        canvas: gCanvas(t),
+      };
+    }),
+
+  gGab("cm2_graphique_lire_gen_3_deux_valeurs", "graphique_lire", 2,
+    "Lis les deux valeurs une par une, sans les inverser.",
+    ["lire", "deux_valeurs"],
+    () => {
+      const axe = Math.random() < 0.67;
+      const ta = gTirerAxe(randomChoice([4, 5]));
+      const t: GTirage = axe ? ta : gTirer(randomChoice([4, 5]));
+      const [i, j] = shuffle(t.cats.map((_, k) => k)).slice(0, 2);
+      const a = t.cats[i], b = t.cats[j];
+      if (axe) {
+        // Une graduation d'écart : le leurre typique de la lecture sur l'axe.
+        const ok = `${a.label} : ${t.vals[i]} et ${b.label} : ${t.vals[j]}`;
+        const wrongs = [
+          `${a.label} : ${t.vals[j]} et ${b.label} : ${t.vals[i]}`,
+          `${a.label} : ${t.vals[i] + ta.A} et ${b.label} : ${t.vals[j]}`,
+          `${a.label} : ${t.vals[i]} et ${b.label} : ${t.vals[j] - ta.A}`,
+          `${a.label} : ${t.vals[i] - ta.A} et ${b.label} : ${t.vals[j] + ta.A}`,
+        ];
+        return {
+          text: `${t.s.intro} ${randomChoice([
+            `Lis sur l’axe les valeurs de ${gGuil(a)} et de ${gGuil(b)}.`,
+            `Quelle lecture de l’axe est juste pour ${gGuil(a)} et ${gGuil(b)} ?`,
+            `Suis le haut de ${gGuil(a)}, puis de ${gGuil(b)}, jusqu’à l’axe. Que lis-tu ?`,
+          ])}`,
+          format: "qcm",
+          choices: makeChoices(ok, wrongs),
+          expected: [ok],
+          comparator: "mcq_exact",
+          explanation: `${gCommentLire(ta, i)} ${gCommentLire(ta, j)} L’axe compte de ${ta.A} en ${ta.A} : une graduation de trop, et la lecture est fausse.`,
+          canvas: gCanvas(t, { type: "barres", axe: ta.A }),
+        };
+      }
+      const ok = `${a.label} : ${t.vals[i]} et ${b.label} : ${t.vals[j]}`;
+      const autre = t.vals.find((_, k) => k !== i && k !== j) ?? t.vals[i] + t.s.pas;
+      const wrongs = [
+        `${a.label} : ${t.vals[j]} et ${b.label} : ${t.vals[i]}`,
+        `${a.label} : ${t.vals[i]} et ${b.label} : ${autre}`,
+        `${a.label} : ${autre} et ${b.label} : ${t.vals[j]}`,
+        `${a.label} : ${t.vals[i] + t.s.pas} et ${b.label} : ${t.vals[j]}`,
+      ];
+      const q = randomChoice([
+        `Quelles sont les valeurs de ${gGuil(a)} et de ${gGuil(b)} ?`,
+        `Lis le graphique pour ${gGuil(a)} puis pour ${gGuil(b)}.`,
+        `Quelle lecture du graphique est juste pour ${gGuil(a)} et ${gGuil(b)} ?`,
+      ]);
+      return {
+        text: `${t.s.intro} ${q}`,
+        format: "qcm",
+        choices: makeChoices(ok, wrongs),
+        expected: [ok],
+        comparator: "mcq_exact",
+        explanation: `On lit ${gGuil(a)} : ${t.vals[i]} ${t.s.unite}. Puis ${gGuil(b)} : ${t.vals[j]} ${t.s.unite}. Attention à ne pas inverser les deux.`,
+        canvas: gCanvas(t),
+      };
+    }),
+
+  gGab("cm2_graphique_lire_gen_4_cinq_barres", "graphique_lire", 2,
+    "Avec cinq barres, suis bien l’étiquette demandée jusqu’en haut.",
+    ["lire", "valeur"],
+    () => {
+      if (Math.random() < 0.67) {
+        const t = gTirerAxe(5);
+        const i = randomInt(0, t.cats.length - 1);
+        // Une fois sur deux, la barre s'arrête entre deux graduations.
+        const milieu = Math.random() < 0.5 && gMettreAuMilieu(t, i);
+        const c = t.cats[i];
+        const v = t.vals[i];
+        const q = randomChoice([
+          t.s.combien(c),
+          `Lis sur l’axe la valeur de ${gGuil(c)}.`,
+          `Jusqu’à quel nombre monte la barre ${gGuil(c)} ?`,
+        ]);
+        return {
+          text: `${t.s.intro} ${q}${milieu ? " Regarde bien où s’arrête la barre." : ""}`,
+          format: "qcm",
+          choices: gNum(v, gLeurresAxe(t, i), t.A),
+          expected: [String(v)],
+          comparator: "mcq_exact",
+          explanation: `${gCommentLire(t, i)} Réponse : ${v} ${t.s.unite}.`,
+          canvas: gCanvas(t, { type: "barres", axe: t.A }),
+        };
+      }
+      const t = gTirer(5);
+      const i = randomInt(0, t.cats.length - 1);
+      const c = t.cats[i];
+      const v = t.vals[i];
+      const q = randomChoice([
+        t.s.combien(c),
+        `Combien indique le graphique pour ${gGuil(c)} ?`,
+        `Quelle est la valeur de ${gGuil(c)} sur le graphique ?`,
+      ]);
+      const voisins = [t.vals[i - 1], t.vals[i + 1]].filter((x) => x !== undefined) as number[];
+      return {
+        text: `${t.s.intro} ${q}`,
+        format: "qcm",
+        choices: gNum(v, [...voisins, ...t.vals.filter((_, k) => k !== i)], t.s.pas),
+        expected: [String(v)],
+        comparator: "mcq_exact",
+        explanation: `L’étiquette ${gGuil(c)} indique ${v}. Réponse : ${v} ${t.s.unite}. Les barres voisines (${voisins.join(" et ")}) sont un piège.`,
+        canvas: gCanvas(t),
+      };
+    }),
+
+  gGab("cm2_graphique_lire_gen_5_camembert", "graphique_lire", 3,
+    "Dans un diagramme circulaire, chaque part porte son nombre ; le total est écrit dessous.",
+    ["lire", "camembert"],
+    () => {
+      const t = gTirer(4);
+      const i = randomInt(0, 3);
+      const c = t.cats[i];
+      const v = t.vals[i];
+      const total = gSomme(t.vals);
+      const mode = randomInt(0, 2);
+      if (mode === 0) {
+        return {
+          text: `${t.s.intro} Dans le diagramme circulaire, quel est le total écrit sous le diagramme ?`,
+          format: "qcm",
+          choices: gNum(total, [Math.max(...t.vals), total - v, total + t.s.pas], t.s.pas),
+          expected: [String(total)],
+          comparator: "mcq_exact",
+          explanation: `Le total est écrit sous le diagramme : ${total}. On peut vérifier : ${t.vals.join(" + ")} = ${total} ${t.s.unite}.`,
+          canvas: gCanvas(t, { type: "camembert" }),
+        };
+      }
+      if (mode === 1) {
+        return {
+          text: `${t.s.intro} Dans le diagramme circulaire : ${t.s.combien(c).charAt(0).toLowerCase()}${t.s.combien(c).slice(1)}`,
+          format: "qcm",
+          choices: gNum(v, [...t.vals.filter((_, k) => k !== i), total], t.s.pas),
+          expected: [String(v)],
+          comparator: "mcq_exact",
+          explanation: `La part ${gGuil(c)} porte le nombre ${v}. Le total (${total}) n’est pas la réponse : il compte toutes les parts. Réponse : ${v} ${t.s.unite}.`,
+          canvas: gCanvas(t, { type: "camembert", hi: i }),
+        };
+      }
+      return {
+        text: `${t.s.intro} Dans le diagramme circulaire, quelle part vaut ${v} ?`,
+        format: "qcm",
+        choices: shuffle(t.cats.map((x) => x.label)),
+        expected: [c.label],
+        comparator: "mcq_exact",
+        explanation: `On cherche la part qui porte ${v} : c’est ${gGuil(c)}. Les parts sont : ${gListe(t)}.`,
+        canvas: gCanvas(t, { type: "camembert" }),
+      };
+    }),
+
+  gGab("cm2_graphique_lire_gen_6_vrai_faux", "graphique_lire", 3,
+    "Vérifie sur le graphique : lis toi-même la bonne barre.",
+    ["lire", "erreur", "vrai_faux"],
+    () => {
+      if (Math.random() < 0.67) {
+        const t = gTirerAxe(randomChoice([4, 5]));
+        const i = randomInt(0, t.cats.length - 1);
+        const milieu = Math.random() < 0.5 && gMettreAuMilieu(t, i);
+        const c = t.cats[i];
+        const v = t.vals[i];
+        const p = randomChoice(G_PRENOMS);
+        const pas = milieu ? t.A / 2 : t.A;
+        const mode = randomInt(0, 3);
+        // 0 : juste ; 1 : la graduation voisine ; 2 : celle d'en dessous ; 3 : le pas.
+        const dit = mode === 0 ? v : mode === 1 ? v + pas : mode === 2 ? v - pas : t.A;
+        const juste = dit === v;
+        const q = randomChoice([
+          `${p.n} lit l’axe et dit : « ${c.label} vaut ${dit}. » A-t-${p.f ? "elle" : "il"} raison ?`,
+          `${p.n} suit le haut de la barre ${gGuil(c)} jusqu’à l’axe et lit ${dit}. A-t-${p.f ? "elle" : "il"} raison ?`,
+        ]);
+        return {
+          text: `${t.s.intro} ${q}`,
+          format: "qcm",
+          choices: ["oui", "non"],
+          expected: [juste ? "oui" : "non"],
+          comparator: "mcq_exact",
+          explanation: juste
+            ? `Oui. ${gCommentLire(t, i)}`
+            : `Non. ${gCommentLire(t, i)}${dit === t.A && mode === 3 ? ` ${dit}, c’est le pas de l’axe, pas la valeur de la barre.` : ` ${dit} est une graduation voisine.`}`,
+          canvas: gCanvas(t, { type: "barres", axe: t.A }),
+        };
+      }
+      const t = gTirer(randomChoice([4, 5]));
+      const i = randomInt(0, t.cats.length - 1);
+      const c = t.cats[i];
+      const v = t.vals[i];
+      const p = randomChoice(G_PRENOMS);
+      const voisin = t.vals[i + 1] ?? t.vals[i - 1];
+      const mode = randomInt(0, 2);
+      const dit = mode === 0 ? v : mode === 1 ? voisin : v + randomChoice([t.s.pas, -t.s.pas, 2 * t.s.pas]);
+      const juste = dit === v;
+      const q = randomChoice([
+        `${p.n} dit : « ${c.label} vaut ${dit}. » A-t-${p.f ? "elle" : "il"} raison ?`,
+        `${p.n} lit ${dit} ${t.s.unite} pour ${gGuil(c)}. Sa lecture est-elle juste ?`,
+      ]);
+      const oui = q.includes("raison") ? "oui" : "oui, elle est juste";
+      const non = q.includes("raison") ? "non" : "non, elle est fausse";
+      return {
+        text: `${t.s.intro} ${q}`,
+        format: "qcm",
+        choices: [oui, non],
+        expected: [juste ? oui : non],
+        comparator: "mcq_exact",
+        explanation: juste
+          ? `Oui. Sur le graphique, ${gGuil(c)} vaut bien ${v}.`
+          : `Non. Sur le graphique, ${gGuil(c)} vaut ${v}, pas ${dit}.${dit === voisin ? " Ce nombre est celui de la barre voisine." : ""}`,
+        canvas: gCanvas(t),
+      };
+    }),
+
+  // ⭐ 21/10/2026 — LIRE UNE COURBE : un point, une valeur, sur l'axe gradué.
+  gGab("cm2_graphique_lire_gen_7_courbe", "graphique_lire", 3,
+    "Pars du point, suis la ligne vers la gauche jusqu’à l’axe, puis lis le nombre.",
+    ["lire", "courbe", "axe_gradue"],
+    () => {
+      const t = gTirerCourbe();
+      const n = t.c.points.length;
+      const i = randomInt(0, n - 1);
+      const p = t.c.points[i];
+      if (Math.random() < 0.65) {
+        // Une fois sur trois, le point tombe au milieu de deux graduations.
+        const milieu = Math.random() < 0.35 && gCourbeMilieu(t, i);
+        const v = t.vals[i];
+        const q = randomChoice([
+          t.c.valeur(p),
+          `Lis sur la courbe la valeur du point ${gGuil(p)}.`,
+          `Le point ${gGuil(p)} est en orange. Quelle valeur lis-tu sur l’axe ?`,
+        ]);
+        return {
+          text: `${t.c.intro} ${q}${milieu ? " Regarde bien où se trouve le point." : ""}`,
+          format: "qcm",
+          choices: gNum(v, gCourbeLeurres(t, i), t.c.A),
+          expected: [String(v)],
+          comparator: "mcq_exact",
+          explanation: `${gCourbeLire(t, i)} L’axe compte de ${t.c.A} en ${t.c.A}. Réponse : ${v} ${t.c.unite}.`,
+          canvas: gCourbeCanvas(t, i),
+        };
+      }
+      // Le chemin inverse : une valeur sur l'axe, on cherche le moment.
+      const v = t.vals[i];
+      const autres = shuffle(t.c.points.filter((_, k) => k !== i)).slice(0, 3).map((x) => x.label);
+      return {
+        text: `${t.c.intro} ${randomChoice([
+          `Sur l’axe, trouve ${v}. À quel moment la courbe passe-t-elle par ${v} ?`,
+          `Quel point de la courbe est à la hauteur de ${v} ${t.c.unite} ?`,
+        ])}`,
+        format: "qcm",
+        choices: shuffle([p.label, ...autres]),
+        expected: [p.label],
+        comparator: "mcq_exact",
+        explanation: `Je trouve ${v} sur l’axe, je suis la ligne vers la droite : elle touche le point ${gGuil(p)}. Réponse : ${gGuil(p)}.`,
+        canvas: gCourbeCanvas(t),
+      };
+    }),
+];
+
+// ─── GRAPHIQUE_COMPLETER ────────────────────────────────────────────────────
+const G_COMPLETER: TutorBankItemV4[] = [
+  gGab("cm2_graphique_completer_gen_1_hauteur", "graphique_completer", 1,
+    "Cherche dans le relevé le nombre de la barre qui manque.",
+    ["completer", "barre_manquante"],
+    () => {
+      const t = gTirer(4);
+      const m = randomInt(0, 3);
+      const c = t.cats[m];
+      const v = t.vals[m];
+      const q = randomChoice([
+        `La barre ${gGuil(c)} n’est pas encore tracée. Quelle hauteur doit-elle avoir ?`,
+        `Il manque ${gGuil(c)} sur le graphique. Quel nombre faut-il écrire en haut de sa barre ?`,
+        `Pour finir le graphique, jusqu’à quelle valeur faut-il monter la barre ${gGuil(c)} ?`,
+      ]);
+      return {
+        text: `${t.s.intro} Le relevé donne : ${gListe(t)}. ${q}`,
+        format: "qcm",
+        choices: gNum(v, [...t.vals.filter((_, k) => k !== m), v + t.s.pas], t.s.pas),
+        expected: [String(v)],
+        comparator: "mcq_exact",
+        explanation: `Dans le relevé, ${gGuil(c)} vaut ${v}. La barre ${gGuil(c)} doit donc monter jusqu’à ${v}.`,
+        canvas: gCanvas(t, { type: "barres", sans: m }),
+      };
+    }),
+
+  gGab("cm2_graphique_completer_gen_2_etiquette", "graphique_completer", 1,
+    "Compare le relevé et le graphique : quelle donnée n’est pas encore dessinée ?",
+    ["completer", "etiquette"],
+    () => {
+      const t = gTirer(4);
+      const m = randomInt(0, 3);
+      const c = t.cats[m];
+      const v = t.vals[m];
+      const q = randomChoice([
+        `On ajoute une barre de hauteur ${v}. Quelle étiquette faut-il écrire dessous ?`,
+        `Une nouvelle barre monte jusqu’à ${v}. Quel nom porte-t-elle ?`,
+        `Quelle étiquette manque-t-il sur le graphique ?`,
+      ]);
+      return {
+        text: `${t.s.intro} Le relevé donne : ${gListe(t)}. ${q}`,
+        format: "qcm",
+        choices: shuffle(t.cats.map((x) => x.label)),
+        expected: [c.label],
+        comparator: "mcq_exact",
+        explanation: `Le graphique montre déjà ${t.cats.filter((_, k) => k !== m).map(gGuil).join(", ")}. Il manque ${gGuil(c)}, qui vaut ${v} dans le relevé.`,
+        canvas: gCanvas(t, { type: "barres", sans: m }),
+      };
+    }),
+
+  gGab("cm2_graphique_completer_gen_3_de_plus_de_moins", "graphique_completer", 2,
+    "« De plus » : on ajoute. « De moins » : on enlève.",
+    ["completer", "relation", "barre_manquante"],
+    () => {
+      // Deux fois sur trois, la barre de référence se LIT sur l'axe gradué.
+      const ta = Math.random() < 0.67 ? gTirerAxe(4) : null;
+      const t: GTirage = ta ?? gTirer(4);
+      const [m, r] = shuffle([0, 1, 2, 3]).slice(0, 2);
+      const c = t.cats[m], cr = t.cats[r];
+      const v = t.vals[m], vr = t.vals[r];
+      const d = Math.abs(v - vr);
+      const lu = ta ? `${gCommentLire(ta, r)} ` : "";
+      const plus = v > vr;
+      const rel = plus ? `${d} ${t.s.unite} de plus que` : `${d} ${t.s.unite} de moins que`;
+      const q = randomChoice([
+        `La barre ${gGuil(c)} manque. On sait que ${gGuil(c)} a ${rel} ${gGuil(cr)}. Quelle hauteur faut-il tracer ?`,
+        `Il faut ajouter la barre ${gGuil(c)} : ${gGuil(c)} a ${rel} ${gGuil(cr)}. Quel nombre écrire en haut de cette barre ?`,
+      ]);
+      const faux = plus ? vr - d : vr + d;
+      return {
+        text: `${t.s.intro} ${q}`,
+        format: "qcm",
+        choices: gNum(v, [faux, vr, d, v + t.s.pas], t.s.pas),
+        expected: [String(v)],
+        comparator: "mcq_exact",
+        explanation: `${lu}${gGuil(cr)} vaut ${vr} sur le graphique. ${plus ? `On ajoute : ${vr} + ${d} = ${v}` : `On enlève : ${vr} - ${d} = ${v}`}. La barre ${gGuil(c)} monte jusqu’à ${v}.`,
+        canvas: gCanvas(t, { type: "barres", sans: m, axe: ta?.A }),
+      };
+    }),
+
+  gGab("cm2_graphique_completer_gen_4_tableau", "graphique_completer", 2,
+    "Lis la barre sur le graphique et recopie son nombre dans le tableau.",
+    ["completer", "tableau"],
+    () => {
+      if (Math.random() < 0.67) {
+        const t = gTirerAxe(5);
+        const i = randomInt(0, t.cats.length - 1);
+        const milieu = Math.random() < 0.4 && gMettreAuMilieu(t, i);
+        const c = t.cats[i];
+        const v = t.vals[i];
+        const q = randomChoice([
+          `On remplit un tableau à partir du graphique. Quel nombre écrire dans la case ${gGuil(c)} ?`,
+          `Le tableau a une case vide : ${gGuil(c)}. Lis l’axe : quel nombre faut-il y écrire ?`,
+          `Pour compléter le tableau, lis sur l’axe la valeur de ${gGuil(c)}.`,
+        ]);
+        return {
+          text: `${t.s.intro} ${q}${milieu ? " Attention : la barre s’arrête entre deux graduations." : ""}`,
+          format: "qcm",
+          choices: gNum(v, gLeurresAxe(t, i), t.A),
+          expected: [String(v)],
+          comparator: "mcq_exact",
+          explanation: `${gCommentLire(t, i)} On écrit ${v} dans la case ${gGuil(c)}.`,
+          canvas: gCanvas(t, { type: "barres", axe: t.A }),
+        };
+      }
+      const t = gTirer(5);
+      const i = randomInt(0, t.cats.length - 1);
+      const c = t.cats[i];
+      const v = t.vals[i];
+      const q = randomChoice([
+        `On remplit un tableau à partir du graphique. Quel nombre écrire dans la case ${gGuil(c)} ?`,
+        `Le tableau a une case vide : ${gGuil(c)}. Quel nombre faut-il y recopier ?`,
+        `Pour compléter le tableau, que vaut ${gGuil(c)} ?`,
+      ]);
+      return {
+        text: `${t.s.intro} ${q}`,
+        format: "qcm",
+        choices: gNum(v, t.vals.filter((_, k) => k !== i), t.s.pas),
+        expected: [String(v)],
+        comparator: "mcq_exact",
+        explanation: `Sur le graphique, ${gGuil(c)} vaut ${v}. On écrit ${v} dans la case ${gGuil(c)}.`,
+        canvas: gCanvas(t),
+      };
+    }),
+
+  gGab("cm2_graphique_completer_gen_5_total", "graphique_completer", 3,
+    "Additionne TOUTES les barres, sans en oublier une.",
+    ["completer", "total"],
+    () => {
+      const t = gTirer(randomChoice([4, 5]));
+      const total = gSomme(t.vals);
+      const oubli = total - t.vals[randomInt(0, t.vals.length - 1)];
+      const q = randomChoice([
+        "Quel total faut-il écrire sous le graphique ?",
+        `Il faut écrire le nombre total de ${t.s.unite} sous le graphique. Lequel ?`,
+        `Pour compléter la légende « Total : … », quel nombre écrire ?`,
+      ]);
+      return {
+        text: `${t.s.intro} ${q}`,
+        format: "qcm",
+        choices: gNum(total, [oubli, total + t.s.pas, total - t.s.pas, Math.max(...t.vals) * t.vals.length], t.s.pas),
+        expected: [String(total)],
+        comparator: "mcq_exact",
+        explanation: `On additionne toutes les barres : ${t.vals.join(" + ")} = ${total}. Le total est ${total} ${t.s.unite}.`,
+        canvas: gCanvas(t),
+      };
+    }),
+
+  gGab("cm2_graphique_completer_gen_6_double_moitie", "graphique_completer", 3,
+    "Le double : on multiplie par 2. La moitié : on divise par 2.",
+    ["completer", "double", "moitie", "barre_manquante"],
+    () => {
+      let t = gTirer(4);
+      let m = 0, r = 1, double = true;
+      for (let essai = 0; essai < 40; essai++) {
+        t = gTirer(4);
+        [m, r] = shuffle([0, 1, 2, 3]).slice(0, 2);
+        double = Math.random() < 0.5;
+        const vr = t.vals[r];
+        const v = double ? 2 * vr : vr / 2;
+        if (!Number.isInteger(v) || v <= 0 || v % t.s.pas !== 0) continue;
+        if (t.vals.some((x, k) => k !== m && x === v)) continue;
+        t.vals[m] = v;
+        break;
+      }
+      if (t.vals[m] !== (double ? 2 * t.vals[r] : t.vals[r] / 2)) {
+        double = true;
+        t.vals[m] = 2 * t.vals[r];
+      }
+      const c = t.cats[m], cr = t.cats[r];
+      const v = t.vals[m], vr = t.vals[r];
+      const rel = double ? "le double de" : "la moitié de";
+      const q = randomChoice([
+        `La barre ${gGuil(c)} manque. ${gGuil(c)} vaut ${rel} ${gGuil(cr)}. Quelle hauteur faut-il tracer ?`,
+        `On sait que ${gGuil(c)} représente ${rel} ${gGuil(cr)}. Quel nombre écrire en haut de la barre ${gGuil(c)} ?`,
+      ]);
+      return {
+        text: `${t.s.intro} ${q}`,
+        format: "qcm",
+        choices: gNum(v, double ? [vr + 2, vr, vr / 2] : [vr * 2, vr, vr - 2], t.s.pas),
+        expected: [String(v)],
+        comparator: "mcq_exact",
+        explanation: double
+          ? `${gGuil(cr)} vaut ${vr}. Le double, c’est ${vr} × 2 = ${v}. La barre ${gGuil(c)} monte jusqu’à ${v}.`
+          : `${gGuil(cr)} vaut ${vr}. La moitié, c’est ${vr} ÷ 2 = ${v}. La barre ${gGuil(c)} monte jusqu’à ${v}.`,
+        canvas: gCanvas(t, { type: "barres", sans: m }),
+      };
+    }),
+
+  gGab("cm2_graphique_completer_gen_7_manquante_total", "graphique_completer", 4,
+    "Additionne les barres tracées, puis retire ce nombre du total.",
+    ["completer", "valeur_manquante", "total"],
+    () => {
+      const t = gTirer(randomChoice([4, 5]));
+      const m = randomInt(0, t.cats.length - 1);
+      const c = t.cats[m];
+      const v = t.vals[m];
+      const total = gSomme(t.vals);
+      const connus = total - v;
+      const q = randomChoice([
+        `En tout, il y a ${total} ${t.s.unite}. La barre ${gGuil(c)} a été effacée. Quelle hauteur avait-elle ?`,
+        `Le total est ${total} ${t.s.unite}, mais il manque la barre ${gGuil(c)}. Quel nombre faut-il écrire en haut ?`,
+        `Il manque ${gGuil(c)} sur le graphique. On sait qu’il y a ${total} ${t.s.unite} au total. Combien pour ${gGuil(c)} ?`,
+      ]);
+      return {
+        text: `${t.s.intro} ${q}`,
+        format: "qcm",
+        choices: gNum(v, [connus, total, v + t.s.pas, v - t.s.pas], t.s.pas),
+        expected: [String(v)],
+        comparator: "mcq_exact",
+        explanation: `Les barres tracées font ${t.vals.filter((_, k) => k !== m).join(" + ")} = ${connus}. Il manque ${total} - ${connus} = ${v}. La barre ${gGuil(c)} monte jusqu’à ${v}.`,
+        canvas: gCanvas(t, { type: "barres", sans: m }),
+      };
+    }),
+
+  gGab("cm2_graphique_completer_gen_8_ensemble", "graphique_completer", 4,
+    "Ensemble, c’est une addition : on retire la barre connue.",
+    ["completer", "valeur_manquante", "regrouper"],
+    () => {
+      const ta = Math.random() < 0.67 ? gTirerAxe(4) : null;
+      const t: GTirage = ta ?? gTirer(4);
+      const [m, r] = shuffle([0, 1, 2, 3]).slice(0, 2);
+      const c = t.cats[m], cr = t.cats[r];
+      const v = t.vals[m], vr = t.vals[r];
+      const n = v + vr;
+      const lu = ta ? `${gCommentLire(ta, r)} ` : "";
+      const q = randomChoice([
+        `${gGuil(c)} et ${gGuil(cr)} ensemble font ${n} ${t.s.unite}. La barre ${gGuil(c)} manque. Quelle hauteur lui donner ?`,
+        `À eux deux, ${gGuil(cr)} et ${gGuil(c)} comptent ${n} ${t.s.unite}. Quel nombre écrire en haut de la barre ${gGuil(c)} ?`,
+      ]);
+      return {
+        text: `${t.s.intro} ${q}`,
+        format: "qcm",
+        choices: gNum(v, [n + vr, n, vr, v + t.s.pas], t.s.pas),
+        expected: [String(v)],
+        comparator: "mcq_exact",
+        explanation: `${lu}Sur le graphique, ${gGuil(cr)} vaut ${vr}. Il reste ${n} - ${vr} = ${v} pour ${gGuil(c)}.`,
+        canvas: gCanvas(t, { type: "barres", sans: m, axe: ta?.A }),
+      };
+    }),
+];
+
+// ─── GRAPHIQUE_INTERPRETER ──────────────────────────────────────────────────
+const G_INTERPRETER: TutorBankItemV4[] = [
+  gGab("cm2_graphique_interpreter_gen_1_max_min", "graphique_interpreter", 1,
+    "Le plus : la barre la plus haute. Le moins : la plus basse.",
+    ["interpreter", "maximum", "minimum"],
+    () => {
+      // ⭐ 21/10/2026 — une fois sur deux, l'axe gradué : on compare les HAUTEURS.
+      const ta = Math.random() < 0.5 ? gTirerAxe(randomChoice([4, 5])) : null;
+      const t: GTirage = ta ?? gTirer(randomChoice([4, 5]));
+      const max = Math.random() < 0.5;
+      const i = max ? gIdxMax(t.vals) : gIdxMin(t.vals);
+      return {
+        text: `${t.s.intro} ${max ? t.s.qMax : t.s.qMin}`,
+        format: "qcm",
+        choices: makeChoices(t.cats[i].label, t.cats.map((x) => x.label)),
+        expected: [t.cats[i].label],
+        comparator: "mcq_exact",
+        explanation: ta
+          ? `Je cherche la barre la plus ${max ? "haute" : "basse"} : c’est ${gGuil(t.cats[i])}. ${gCommentLire(ta, i)}`
+          : `On compare : ${gListe(t)}. La ${max ? "plus grande" : "plus petite"} valeur est ${t.vals[i]}, pour ${gGuil(t.cats[i])}.`,
+        canvas: ta ? gCanvas(t, { type: "barres", axe: ta.A }) : gCanvas(t),
+      };
+    }),
+
+  gGab("cm2_graphique_interpreter_gen_2_qui_plus", "graphique_interpreter", 1,
+    "Compare la hauteur des deux barres demandées.",
+    ["interpreter", "comparer"],
+    () => {
+      // ⭐ 21/10/2026 — une fois sur deux, l'axe gradué (sans nombres sur les barres).
+      const ta = Math.random() < 0.5 ? gTirerAxe(4) : null;
+      const t: GTirage = ta ?? gTirer(4);
+      const [i, j] = gPaire(t);
+      const [a, b] = shuffle([i, j]);
+      const plus = Math.random() < 0.5;
+      const rep = plus ? i : j;
+      const q = plus
+        ? `Quelle barre est la plus haute : ${gGuil(t.cats[a])} ou ${gGuil(t.cats[b])} ?`
+        : `Quelle barre est la plus basse : ${gGuil(t.cats[a])} ou ${gGuil(t.cats[b])} ?`;
+      return {
+        text: `${t.s.intro} ${q}`,
+        format: "qcm",
+        choices: [t.cats[a].label, t.cats[b].label],
+        expected: [t.cats[rep].label],
+        comparator: "mcq_exact",
+        explanation: ta
+          ? `${gCommentLire(ta, i)} ${gCommentLire(ta, j)} ${t.vals[i]} > ${t.vals[j]}, donc la réponse est ${gGuil(t.cats[rep])}.`
+          : `${gGuil(t.cats[i])} vaut ${t.vals[i]} et ${gGuil(t.cats[j])} vaut ${t.vals[j]}. ${t.vals[i]} > ${t.vals[j]}, donc la réponse est ${gGuil(t.cats[rep])}.`,
+        canvas: gCanvas(t, { type: "barres", axe: ta?.A }),
+      };
+    }),
+
+  gGab("cm2_graphique_interpreter_gen_3_ecart", "graphique_interpreter", 2,
+    "Pour un écart, on soustrait la petite valeur à la grande.",
+    ["interpreter", "difference"],
+    () => {
+      // Une fois sur deux, les deux valeurs se LISENT d'abord sur l'axe.
+      const ta = Math.random() < 0.5 ? gTirerAxe(4) : null;
+      const t: GTirage = ta ?? gTirer(4);
+      const [i, j] = gPaire(t);
+      const d = t.vals[i] - t.vals[j];
+      const u = t.s.unite;
+      if (ta) {
+        return {
+          text: `${t.s.intro} ${randomChoice([
+            `Lis sur l’axe ${gGuil(t.cats[i])} et ${gGuil(t.cats[j])}. Quel est l’écart entre les deux ?`,
+            `Combien de ${u} de plus pour ${gGuil(t.cats[i])} que pour ${gGuil(t.cats[j])} ? Lis d’abord l’axe.`,
+          ])}`,
+          format: "qcm",
+          choices: gNum(d, [t.vals[i] + t.vals[j], d + ta.A, d - ta.A, t.vals[i]], ta.A),
+          expected: [String(d)],
+          comparator: "mcq_exact",
+          explanation: `${gCommentLire(ta, i)} ${gCommentLire(ta, j)} L’écart est ${t.vals[i]} - ${t.vals[j]} = ${d} ${u}.`,
+          canvas: gCanvas(t, { type: "barres", axe: ta.A }),
+        };
+      }
+      const q = randomChoice([
+        `Combien de ${u} de plus pour ${gGuil(t.cats[i])} que pour ${gGuil(t.cats[j])} ?`,
+        `Combien de ${u} de moins pour ${gGuil(t.cats[j])} que pour ${gGuil(t.cats[i])} ?`,
+        `Quel est l’écart entre ${gGuil(t.cats[i])} et ${gGuil(t.cats[j])} ?`,
+      ]);
+      return {
+        text: `${t.s.intro} ${q}`,
+        format: "qcm",
+        choices: gNum(d, [t.vals[i] + t.vals[j], d + t.s.pas, d - t.s.pas, t.vals[i]], t.s.pas),
+        expected: [String(d)],
+        comparator: "mcq_exact",
+        explanation: `${gGuil(t.cats[i])} vaut ${t.vals[i]} et ${gGuil(t.cats[j])} vaut ${t.vals[j]}. L’écart est ${t.vals[i]} - ${t.vals[j]} = ${d} ${u}.`,
+        canvas: gCanvas(t),
+      };
+    }),
+
+  gGab("cm2_graphique_interpreter_gen_4_etendue", "graphique_interpreter", 2,
+    "Trouve la plus grande et la plus petite valeur, puis soustrais.",
+    ["interpreter", "ecart", "max_min"],
+    () => {
+      const t = gTirer(randomChoice([4, 5]));
+      const hi = Math.max(...t.vals), lo = Math.min(...t.vals);
+      const ihi = gIdxMax(t.vals), ilo = gIdxMin(t.vals);
+      const d = hi - lo;
+      const q = randomChoice([
+        "Quel est l’écart entre la plus grande et la plus petite valeur ?",
+        `Combien de ${t.s.unite} séparent la barre la plus haute de la plus basse ?`,
+      ]);
+      return {
+        text: `${t.s.intro} ${q}`,
+        format: "qcm",
+        choices: gNum(d, [hi + lo, hi, t.cats.length, d + t.s.pas], t.s.pas),
+        expected: [String(d)],
+        comparator: "mcq_exact",
+        explanation: `La plus haute est ${gGuil(t.cats[ihi])} (${hi}), la plus basse ${gGuil(t.cats[ilo])} (${lo}). L’écart est ${hi} - ${lo} = ${d} ${t.s.unite}.`,
+        canvas: gCanvas(t),
+      };
+    }),
+
+  gGab("cm2_graphique_interpreter_gen_5_total_regroupe", "graphique_interpreter", 3,
+    "Additionne seulement les barres demandées.",
+    ["interpreter", "total", "regrouper"],
+    () => {
+      const t = gTirer(randomChoice([4, 5]));
+      const u = t.s.unite;
+      if (Math.random() < 0.4) {
+        const total = gSomme(t.vals);
+        return {
+          text: `${t.s.intro} ${randomChoice([`Combien de ${u} en tout sur le graphique ?`, `Quel est le nombre total de ${u} ?`])}`,
+          format: "qcm",
+          choices: gNum(total, [total - t.vals[0], total + t.s.pas, Math.max(...t.vals)], t.s.pas),
+          expected: [String(total)],
+          comparator: "mcq_exact",
+          explanation: `On additionne toutes les barres : ${t.vals.join(" + ")} = ${total} ${u}.`,
+          canvas: gCanvas(t),
+        };
+      }
+      const [i, j] = shuffle(t.cats.map((_, k) => k)).slice(0, 2);
+      const n = t.vals[i] + t.vals[j];
+      const q = randomChoice([
+        `Combien de ${u} pour ${gGuil(t.cats[i])} et ${gGuil(t.cats[j])} réunis ?`,
+        `Si on regroupe ${gGuil(t.cats[i])} et ${gGuil(t.cats[j])}, combien de ${u} obtient-on ?`,
+      ]);
+      return {
+        text: `${t.s.intro} ${q}`,
+        format: "qcm",
+        choices: gNum(n, [Math.abs(t.vals[i] - t.vals[j]), gSomme(t.vals), n + t.s.pas], t.s.pas),
+        expected: [String(n)],
+        comparator: "mcq_exact",
+        explanation: `${gGuil(t.cats[i])} vaut ${t.vals[i]} et ${gGuil(t.cats[j])} vaut ${t.vals[j]}. Réunis : ${t.vals[i]} + ${t.vals[j]} = ${n} ${u}.`,
+        canvas: gCanvas(t),
+      };
+    }),
+
+  gGab("cm2_graphique_interpreter_gen_6_combien_depassent", "graphique_interpreter", 3,
+    "Compare chaque barre au nombre donné, une par une.",
+    ["interpreter", "seuil", "compter"],
+    () => {
+      const t = gTirer(5);
+      const tri = [...t.vals].sort((a, b) => a - b);
+      // Seuil strictement entre deux valeurs : aucune barre ne lui est égale.
+      const k = randomInt(1, tri.length - 1);
+      let seuil = Math.floor((tri[k - 1] + tri[k]) / 2);
+      if (seuil <= tri[k - 1]) seuil = tri[k - 1] + 1;
+      if (seuil >= tri[k]) seuil = tri[k - 1];
+      const plus = Math.random() < 0.6;
+      const n = plus ? t.vals.filter((x) => x > seuil).length : t.vals.filter((x) => x < seuil).length;
+      const q = plus
+        ? `Combien de barres dépassent ${seuil} ${t.s.unite} ?`
+        : `Combien de barres sont en dessous de ${seuil} ${t.s.unite} ?`;
+      const lesquelles = t.cats.filter((_, i) => (plus ? t.vals[i] > seuil : t.vals[i] < seuil)).map(gGuil);
+      return {
+        text: `${t.s.intro} ${q}`,
+        format: "qcm",
+        choices: gNum(n, [t.cats.length - n, n + 1, n - 1, t.cats.length]),
+        expected: [String(n)],
+        comparator: "mcq_exact",
+        explanation: `Les valeurs sont : ${gListe(t)}. ${plus ? "Plus de" : "Moins de"} ${seuil} : ${lesquelles.join(", ") || "aucune"}. Cela fait ${n} barre${n > 1 ? "s" : ""}.`,
+        canvas: gCanvas(t, { type: "barres" }),
+      };
+    }),
+
+  gGab("cm2_graphique_interpreter_gen_7_fois_plus", "graphique_interpreter", 4,
+    "« Combien de fois plus » : on cherche par combien multiplier la petite valeur.",
+    ["interpreter", "fois_plus", "multiplication"],
+    () => {
+      // On fabrique la grande valeur comme un multiple EXACT de la petite.
+      let t = gTirer(4);
+      let i = 0, j = 1, k = 2;
+      for (let essai = 0; essai < 60; essai++) {
+        t = gTirer(4);
+        [i, j] = shuffle([0, 1, 2, 3]).slice(0, 2);
+        k = randomChoice([2, 3, 4]);
+        const big = k * t.vals[j];
+        if (big > t.s.max * 2 || t.vals.some((x, q) => q !== i && x === big)) continue;
+        t.vals[i] = big;
+        break;
+      }
+      if (t.vals[i] !== k * t.vals[j]) { k = 2; t.vals[i] = 2 * t.vals[j]; }
+      const a = t.cats[i], b = t.cats[j];
+      const q = randomChoice([
+        `Combien de fois plus de ${t.s.unite} pour ${gGuil(a)} que pour ${gGuil(b)} ?`,
+        `${gGuil(a)} vaut combien de fois ${gGuil(b)} ?`,
+        `Par combien faut-il multiplier ${gGuil(b)} pour obtenir ${gGuil(a)} ?`,
+      ]);
+      const ecart = t.vals[i] - t.vals[j];
+      return {
+        text: `${t.s.intro} ${q}`,
+        format: "qcm",
+        choices: makeChoices(String(k), [String(k + 1), String(k - 1 || 5), String(ecart), String(k * 10)]),
+        expected: [String(k)],
+        comparator: "mcq_exact",
+        explanation: `${gGuil(a)} vaut ${t.vals[i]} et ${gGuil(b)} vaut ${t.vals[j]}. ${t.vals[j]} × ${k} = ${t.vals[i]}, donc ${k} fois plus. (L’écart ${t.vals[i]} - ${t.vals[j]} = ${ecart} ne répond pas à « combien de fois ».)`,
+        canvas: gCanvas(t),
+      };
+    }),
+
+  gGab("cm2_graphique_interpreter_gen_8_affirmation", "graphique_interpreter", 4,
+    "Vérifie l’affirmation avec les nombres du graphique.",
+    ["interpreter", "erreur", "vrai_faux"],
+    () => {
+      const t = gTirer(4);
+      const p = randomChoice(G_PRENOMS);
+      const u = t.s.unite;
+      const [i, j] = gPaire(t);
+      const d = t.vals[i] - t.vals[j];
+      const total = gSomme(t.vals);
+      const imax = gIdxMax(t.vals);
+      const second = t.vals.indexOf([...t.vals].sort((x, y) => y - x)[1]);
+      const cas = randomChoice([
+        { dit: `Il y a ${d} ${u} de plus pour ${gGuil(t.cats[i])} que pour ${gGuil(t.cats[j])}.`.replace(/[«»] ?| ?»/g, ""), vrai: true, pourquoi: `${t.vals[i]} - ${t.vals[j]} = ${d}.` },
+        { dit: `Il y a ${d + t.s.pas} ${u} de plus pour ${gGuil(t.cats[i])} que pour ${gGuil(t.cats[j])}.`.replace(/[«»] ?| ?»/g, ""), vrai: false, pourquoi: `${t.vals[i]} - ${t.vals[j]} = ${d}, pas ${d + t.s.pas}.` },
+        { dit: `Il y a ${total} ${u} en tout.`.replace(/[«»] ?| ?»/g, ""), vrai: true, pourquoi: `${t.vals.join(" + ")} = ${total}.` },
+        { dit: `Il y a ${total - t.vals[j]} ${u} en tout.`.replace(/[«»] ?| ?»/g, ""), vrai: false, pourquoi: `${t.vals.join(" + ")} = ${total} : ${gGuil(t.cats[j])} a été oublié.` },
+        { dit: `${gGuil(t.cats[imax])} a la plus grande valeur.`.replace(/[«»] ?| ?»/g, ""), vrai: true, pourquoi: `${gGuil(t.cats[imax])} vaut ${t.vals[imax]}, c’est le maximum.` },
+        { dit: `${gGuil(t.cats[second])} a la plus grande valeur.`.replace(/[«»] ?| ?»/g, ""), vrai: false, pourquoi: `${gGuil(t.cats[second])} vaut ${t.vals[second]}, mais ${gGuil(t.cats[imax])} vaut ${t.vals[imax]}.` },
+      ]);
+      return {
+        text: `${t.s.intro} ${p.n} affirme : « ${cas.dit} » A-t-${p.f ? "elle" : "il"} raison ?`,
+        format: "qcm",
+        choices: ["oui", "non"],
+        expected: [cas.vrai ? "oui" : "non"],
+        comparator: "mcq_exact",
+        explanation: `${cas.vrai ? "Oui" : "Non"}. ${cas.pourquoi}`,
+        canvas: gCanvas(t),
+      };
+    }),
+
+  // ⭐ 21/10/2026 — INTERPRÉTER UNE COURBE : le plus haut, le plus bas, quand ça
+  // monte, quand ça descend, de combien.
+  gGab("cm2_graphique_interpreter_gen_9_courbe", "graphique_interpreter", 3,
+    "La courbe monte : la valeur augmente. Elle descend : la valeur diminue.",
+    ["interpreter", "courbe", "evolution", "axe_gradue"],
+    () => {
+      const t = gTirerCourbe();
+      const P = t.c.points, V = t.vals, u = t.c.unite;
+      const n = P.length;
+      const mode = randomInt(0, 3);
+      if (mode === 0) {
+        const max = Math.random() < 0.5;
+        const i = max ? gIdxMax(V) : gIdxMin(V);
+        return {
+          text: `${t.c.intro} ${max ? t.c.qMax : t.c.qMin}`,
+          format: "qcm",
+          choices: makeChoices(P[i].label, P.map((x) => x.label)),
+          expected: [P[i].label],
+          comparator: "mcq_exact",
+          explanation: `Je cherche le point le plus ${max ? "haut" : "bas"} de la courbe : c’est ${gGuil(P[i])}. ${gCourbeLire(t, i)}`,
+          canvas: gCourbeCanvas(t),
+        };
+      }
+      if (mode === 1) {
+        // Entre deux points qui se suivent : la courbe monte ou descend ?
+        const i = randomInt(0, n - 2);
+        const monte = V[i + 1] > V[i];
+        const q = `Entre ${gGuil(P[i])} et ${gGuil(P[i + 1])}, que fait la courbe ?`;
+        return {
+          text: `${t.c.intro} ${q}`,
+          format: "qcm",
+          choices: ["elle monte", "elle descend"],
+          expected: [monte ? "elle monte" : "elle descend"],
+          comparator: "mcq_exact",
+          explanation: `${gGuil(P[i])} : ${V[i]}. ${gGuil(P[i + 1])} : ${V[i + 1]}. ${V[i + 1]} ${monte ? ">" : "<"} ${V[i]} : la valeur ${monte ? "augmente, la courbe monte" : "diminue, la courbe descend"}.`,
+          canvas: gCourbeCanvas(t),
+        };
+      }
+      if (mode === 2) {
+        // De combien entre deux points ?
+        const [a, b] = shuffle(P.map((_, k) => k)).slice(0, 2).sort((x, y) => x - y);
+        const d = Math.abs(V[b] - V[a]);
+        const monte = V[b] > V[a];
+        return {
+          text: `${t.c.intro} De ${gGuil(P[a])} à ${gGuil(P[b])}, la courbe ${monte ? "monte" : "descend"}. De combien de ${u} ?`,
+          format: "qcm",
+          choices: gNum(d, [V[a] + V[b], d + t.c.A, d - t.c.A, V[b]], t.c.A),
+          expected: [String(d)],
+          comparator: "mcq_exact",
+          explanation: `${gCourbeLire(t, a)} ${gCourbeLire(t, b)} ${monte ? `${V[b]} - ${V[a]}` : `${V[a]} - ${V[b]}`} = ${d} ${u}.`,
+          canvas: gCourbeCanvas(t),
+        };
+      }
+      // La plus forte hausse (ou baisse) entre deux points qui se suivent.
+      const ecarts = P.slice(1).map((_, k) => V[k + 1] - V[k]);
+      const hausse = ecarts.some((e) => e > 0) && (ecarts.every((e) => e > 0) || Math.random() < 0.5);
+      const cible = hausse ? Math.max(...ecarts) : Math.min(...ecarts);
+      if (ecarts.filter((e) => e === cible).length !== 1) {
+        const i = gIdxMax(V);
+        return {
+          text: `${t.c.intro} ${t.c.qMax}`,
+          format: "qcm",
+          choices: makeChoices(P[i].label, P.map((x) => x.label)),
+          expected: [P[i].label],
+          comparator: "mcq_exact",
+          explanation: `Je cherche le point le plus haut de la courbe : c’est ${gGuil(P[i])}. ${gCourbeLire(t, i)}`,
+          canvas: gCourbeCanvas(t),
+        };
+      }
+      const k = ecarts.indexOf(cible);
+      const lib = (j: number) => `entre ${P[j].label} et ${P[j + 1].label}`;
+      const ok = lib(k);
+      return {
+        text: `${t.c.intro} Entre deux points qui se suivent, quand la courbe ${hausse ? "monte-t" : "descend"}-elle le plus ?`,
+        format: "qcm",
+        choices: makeChoices(ok, P.slice(1).map((_, j) => lib(j))),
+        expected: [ok],
+        comparator: "mcq_exact",
+        explanation: `Je compare les écarts d’un point au suivant : ${ecarts.map((e, j) => `${lib(j)} ${e > 0 ? "+" : ""}${e}`).join(" ; ")}. La plus forte ${hausse ? "hausse" : "baisse"} est ${ok} (${hausse ? "+" : ""}${cible} ${u}) : c’est là que la ligne est la plus raide.`,
+        canvas: gCourbeCanvas(t),
+      };
+    }),
+];
+
+// ─── GRAPHIQUE_DEFI ─────────────────────────────────────────────────────────
+const G_DEFI: TutorBankItemV4[] = [
+  gGab("cm2_graphique_defi_gen_1_conclusion", "graphique_defi", 4,
+    "Vérifie chaque phrase avec un calcul : une seule est vraie.",
+    ["defi", "conclusion"],
+    () => {
+      const t = gTirer(4);
+      const u = t.s.unite;
+      const [i, j] = gPaire(t);
+      const d = t.vals[i] - t.vals[j];
+      const total = gSomme(t.vals);
+      const imax = gIdxMax(t.vals), imin = gIdxMin(t.vals);
+      const second = t.vals.indexOf([...t.vals].sort((x, y) => y - x)[1]);
+      const vraies = [
+        { s: `Il y a ${d} ${u} de plus pour ${t.cats[i].label} que pour ${t.cats[j].label}.`, e: `${t.vals[i]} - ${t.vals[j]} = ${d}` },
+        { s: `Il y a ${total} ${u} en tout.`, e: `${t.vals.join(" + ")} = ${total}` },
+        { s: `${t.cats[imax].label} a la plus grande valeur et ${t.cats[imin].label} la plus petite.`, e: `${t.cats[imax].label} vaut ${t.vals[imax]} et ${t.cats[imin].label} vaut ${t.vals[imin]}` },
+        { s: `${t.cats[i].label} et ${t.cats[j].label} réunis font ${t.vals[i] + t.vals[j]} ${u}.`, e: `${t.vals[i]} + ${t.vals[j]} = ${t.vals[i] + t.vals[j]}` },
+      ];
+      const vraie = randomChoice(vraies);
+      const fausses = [
+        `Il y a ${t.vals[i] + t.vals[j]} ${u} de plus pour ${t.cats[i].label} que pour ${t.cats[j].label}.`,
+        `Il y a ${total - Math.min(...t.vals)} ${u} en tout.`,
+        `${t.cats[second].label} a la plus grande valeur.`,
+        `Il y a ${d} ${u} de plus pour ${t.cats[j].label} que pour ${t.cats[i].label}.`,
+        `${t.cats[i].label} et ${t.cats[j].label} réunis font ${t.vals[i] + t.vals[j] + t.s.pas} ${u}.`,
+      ];
+      return {
+        text: `${t.s.intro} ${randomChoice(["Quelle phrase est vraie ?", "Quelle conclusion peut-on tirer du graphique ?", "Une seule de ces phrases est juste. Laquelle ?"])}`,
+        format: "qcm",
+        choices: makeChoices(vraie.s, fausses),
+        expected: [vraie.s],
+        comparator: "mcq_exact",
+        explanation: `On vérifie avec les nombres : ${vraie.e}. Valeurs du graphique : ${gListe(t)}.`,
+        canvas: gCanvas(t),
+      };
+    }),
+
+  gGab("cm2_graphique_defi_gen_2_moitie_rang", "graphique_defi", 4,
+    "La moitié du total : total ÷ 2. Range les barres de la plus haute à la plus basse.",
+    ["defi", "moitie", "rang"],
+    () => {
+      const t = gTirer(4);
+      const u = t.s.unite;
+      if (Math.random() < 0.5) {
+        // Plus de la moitié ? On évite le cas d'égalité exacte.
+        const total = gSomme(t.vals);
+        const pairs: [number, number][] = [[0, 1], [0, 2], [0, 3], [1, 2], [1, 3], [2, 3]];
+        const [i, j] = randomChoice(pairs.filter(([a, b]) => 2 * (t.vals[a] + t.vals[b]) !== total));
+        const n = t.vals[i] + t.vals[j];
+        const vrai = 2 * n > total;
+        return {
+          text: `${t.s.intro} ${gGuil(t.cats[i])} et ${gGuil(t.cats[j])} réunis font-ils plus de la moitié du total ?`,
+          format: "qcm",
+          choices: ["oui", "non"],
+          expected: [vrai ? "oui" : "non"],
+          comparator: "mcq_exact",
+          explanation: `Total : ${t.vals.join(" + ")} = ${total}. Réunis : ${t.vals[i]} + ${t.vals[j]} = ${n}. Le double de ${n} est ${2 * n}, ${vrai ? "plus" : "moins"} que ${total} : ${vrai ? "oui, c’est plus" : "non, c’est moins"} de la moitié.`,
+          canvas: gCanvas(t),
+        };
+      }
+      const ordre = t.vals.map((_, k) => k).sort((a, b) => t.vals[b] - t.vals[a]);
+      const rang = randomChoice([1, 2] as const);
+      const rep = t.cats[ordre[rang]];
+      const mot = rang === 1 ? "deuxième" : "troisième";
+      return {
+        text: `${t.s.intro} On range les barres de la plus haute à la plus basse. Quelle est la ${mot} ?`,
+        format: "qcm",
+        choices: shuffle(t.cats.map((x) => x.label)),
+        expected: [rep.label],
+        comparator: "mcq_exact",
+        explanation: `Rangement : ${ordre.map((k) => `${t.cats[k].label} (${t.vals[k]})`).join(" > ")}. La ${mot} est ${gGuil(rep)}.`,
+        canvas: gCanvas(t),
+      };
+    }),
+
+  gGab("cm2_graphique_defi_gen_3_deux_etapes", "graphique_defi", 5,
+    "Deux étapes : d’abord un premier calcul avec le graphique, puis le second.",
+    ["defi", "probleme", "deux_etapes"],
+    () => {
+      const t = gTirer(4);
+      const u = t.s.unite;
+      const total = gSomme(t.vals);
+      const mode = randomInt(0, 2);
+      if (mode === 0) {
+        const i = randomInt(0, 3);
+        const rep = total - t.vals[i];
+        return {
+          text: `${t.s.intro} Combien de ${u} en tout, sans compter ${gGuil(t.cats[i])} ?`,
+          format: "qcm",
+          choices: gNum(rep, [total, t.vals[i], rep + t.s.pas, rep - t.s.pas], t.s.pas),
+          expected: [String(rep)],
+          comparator: "mcq_exact",
+          explanation: `Total : ${t.vals.join(" + ")} = ${total}. Sans ${gGuil(t.cats[i])} : ${total} - ${t.vals[i]} = ${rep} ${u}.`,
+          canvas: gCanvas(t),
+        };
+      }
+      if (mode === 1) {
+        // Combien faut-il ajouter à la plus petite pour égaler deux autres réunies ?
+        const ordre = t.vals.map((_, k) => k).sort((a, b) => t.vals[a] - t.vals[b]);
+        const lo = ordre[0];
+        const [a, b] = shuffle(ordre.slice(1)).slice(0, 2);
+        const cible = t.vals[a] + t.vals[b];
+        const rep = cible - t.vals[lo];
+        return {
+          text: `${t.s.intro} Combien de ${u} faudrait-il ajouter à ${gGuil(t.cats[lo])} pour égaler ${gGuil(t.cats[a])} et ${gGuil(t.cats[b])} réunis ?`,
+          format: "qcm",
+          choices: gNum(rep, [cible, cible + t.vals[lo], Math.abs(t.vals[a] - t.vals[lo]), rep + t.s.pas], t.s.pas),
+          expected: [String(rep)],
+          comparator: "mcq_exact",
+          explanation: `Réunis : ${t.vals[a]} + ${t.vals[b]} = ${cible}. ${gGuil(t.cats[lo])} vaut ${t.vals[lo]}. Il faut ajouter ${cible} - ${t.vals[lo]} = ${rep} ${u}.`,
+          canvas: gCanvas(t),
+        };
+      }
+      const m = randomInt(0, 3);
+      const [r] = shuffle([0, 1, 2, 3].filter((k) => k !== m));
+      const v = t.vals[m];
+      const d = Math.abs(v - t.vals[r]);
+      const plus = v > t.vals[r];
+      return {
+        text: `${t.s.intro} En tout, il y a ${total} ${u}, mais la barre ${gGuil(t.cats[m])} a été effacée. Quel est l’écart entre ${gGuil(t.cats[m])} et ${gGuil(t.cats[r])} ?`,
+        format: "qcm",
+        choices: gNum(d, [v, total - t.vals[r], d + t.s.pas, v + t.vals[r]], t.s.pas),
+        expected: [String(d)],
+        comparator: "mcq_exact",
+        explanation: `D’abord la barre effacée : ${total} - (${t.vals.filter((_, k) => k !== m).join(" + ")}) = ${total} - ${total - v} = ${v}. Puis l’écart : ${plus ? `${v} - ${t.vals[r]}` : `${t.vals[r]} - ${v}`} = ${d} ${u}.`,
+        canvas: gCanvas(t, { type: "barres", sans: m }),
+      };
+    }),
+
+  gGab("cm2_graphique_defi_gen_4_quart_moitie", "graphique_defi", 5,
+    "Le quart : total ÷ 4. La moitié : total ÷ 2. Calcule le total d’abord.",
+    ["defi", "quart", "moitie", "camembert"],
+    () => {
+      // On FABRIQUE une part égale à la moitié ou au quart du total exact.
+      const s = randomChoice(G_SITS);
+      const moitie = Math.random() < 0.5;
+      const cats = gSans(s.cats, 4);
+      const mult = gMultiples(s);
+      let vals: number[] = [];
+      for (let essai = 0; essai < 200; essai++) {
+        const [a, b] = shuffle(mult).slice(0, 2);
+        const x = randomChoice(mult);
+        // moitié : x = a + b + c ; quart : 3x = a + b + c.
+        const c = (moitie ? x : 3 * x) - a - b;
+        const cand = [x, a, b, c];
+        if (c <= 0 || c % s.pas !== 0 || new Set(cand).size !== 4) continue;
+        vals = cand;
+        break;
+      }
+      if (!vals.length) {
+        const p = s.pas;
+        vals = moitie ? [6 * p, p, 2 * p, 3 * p] : [4 * p, 2 * p, 3 * p, 7 * p];
+      }
+      // La part cherchée prend une place au hasard.
+      const ordre = shuffle([0, 1, 2, 3]);
+      const t: GTirage = { s, cats, vals: ordre.map((k) => vals[k]) };
+      const ix = ordre.indexOf(0);
+      const total = gSomme(t.vals);
+      const part = moitie ? total / 2 : total / 4;
+      const type = Math.random() < 0.5 ? "camembert" : "barres";
+      return {
+        text: `${s.intro} Quelle étiquette représente exactement ${moitie ? "la moitié" : "le quart"} du total ?`,
+        format: "qcm",
+        choices: shuffle(cats.map((c) => c.label)),
+        expected: [cats[ix].label],
+        comparator: "mcq_exact",
+        explanation: `Total : ${t.vals.join(" + ")} = ${total}. ${moitie ? `La moitié : ${total} ÷ 2` : `Le quart : ${total} ÷ 4`} = ${part}. C’est la valeur de ${gGuil(cats[ix])}.`,
+        canvas: gCanvas(t, { type }),
+      };
+    }),
+
+  // ⭐ 21/10/2026 — UNE COURBE, DEUX ÉTAPES : lire deux points, puis calculer.
+  gGab("cm2_graphique_defi_gen_5_courbe", "graphique_defi", 5,
+    "Lis d’abord les points utiles sur l’axe, puis fais le calcul.",
+    ["defi", "courbe", "evolution", "axe_gradue"],
+    () => {
+      const t = gTirerCourbe();
+      const P = t.c.points, V = t.vals, u = t.c.unite;
+      const mode = randomInt(0, 2);
+      if (mode === 0) {
+        const ih = gIdxMax(V), ib = gIdxMin(V);
+        const d = V[ih] - V[ib];
+        return {
+          text: `${t.c.intro} ${randomChoice([
+            "Quel est l’écart entre le point le plus haut et le point le plus bas de la courbe ?",
+            `Combien de ${u} séparent le point le plus haut du point le plus bas ?`,
+          ])}`,
+          format: "qcm",
+          choices: gNum(d, [V[ih], V[ih] + V[ib], d + t.c.A, d - t.c.A], t.c.A),
+          expected: [String(d)],
+          comparator: "mcq_exact",
+          explanation: `Le plus haut : ${gGuil(P[ih])}. ${gCourbeLire(t, ih)} Le plus bas : ${gGuil(P[ib])}. ${gCourbeLire(t, ib)} L’écart : ${V[ih]} - ${V[ib]} = ${d} ${u}.`,
+          canvas: gCourbeCanvas(t),
+        };
+      }
+      if (mode === 1) {
+        // Combien de fois la courbe descend-elle (ou monte-t-elle) d'un point au suivant ?
+        const ecarts = P.slice(1).map((_, k) => V[k + 1] - V[k]);
+        const monte = Math.random() < 0.5;
+        const r = ecarts.filter((e) => (monte ? e > 0 : e < 0)).length;
+        const lesquels = P.slice(1)
+          .map((_, k) => k)
+          .filter((k) => (monte ? ecarts[k] > 0 : ecarts[k] < 0))
+          .map((k) => `entre ${P[k].label} et ${P[k + 1].label}`);
+        return {
+          text: `${t.c.intro} D’un point au suivant, combien de fois la courbe ${monte ? "monte-t" : "descend"}-elle ?`,
+          format: "qcm",
+          choices: gNum(r, [ecarts.length - r, r + 1, Math.max(0, r - 1), ecarts.length]),
+          expected: [String(r)],
+          comparator: "mcq_exact",
+          explanation: `Il y a ${P.length} points, donc ${ecarts.length} passages d’un point au suivant. La courbe ${monte ? "monte" : "descend"} ${r} fois${r ? ` : ${lesquels.join(" ; ")}` : ""}`,
+          canvas: gCourbeCanvas(t),
+        };
+      }
+      // Un seuil SUR une graduation, qu'aucun point n'atteint exactement : combien
+      // de points au-dessus ? (Une somme n'aurait pas de sens pour des °C ou des cm.)
+      const lo = Math.min(...V), hi = Math.max(...V);
+      const seuils: number[] = [];
+      for (let g = Math.ceil((lo + 1) / t.c.A) * t.c.A; g < hi; g += t.c.A) if (!V.includes(g)) seuils.push(g);
+      const S = seuils.length ? randomChoice(seuils) : Math.round((lo + hi) / 2);
+      const dessus = Math.random() < 0.6;
+      const qui = P.filter((_, k) => (dessus ? V[k] > S : V[k] < S));
+      const r = qui.length;
+      return {
+        text: `${t.c.intro} Combien de points de la courbe sont ${dessus ? "au-dessus" : "en dessous"} de ${S} ${u} ?`,
+        format: "qcm",
+        choices: gNum(r, [P.length - r, r + 1, Math.max(0, r - 1), P.length]),
+        expected: [String(r)],
+        comparator: "mcq_exact",
+        explanation: `Je trouve ${S} sur l’axe et j’imagine une ligne droite à cette hauteur. Les points ${dessus ? "au-dessus" : "en dessous"} : ${qui.map(gGuil).join(", ") || "aucun"}. Cela fait ${r} point${r > 1 ? "s" : ""}.`,
+        canvas: gCourbeCanvas(t),
+      };
+    }),
+];
+
+/** Total d'un graphique tiré au hasard (sert aux anciens gabarits « total »). */
+function gQTotal() {
+  const t = gTirer(randomChoice([4, 5]));
+  const total = gSomme(t.vals);
+  return {
+    text: `${t.s.intro} ${randomChoice(["Quel est le total du graphique ?", `Combien de ${t.s.unite} au total ?`])}`,
+    format: "qcm" as const,
+    choices: gNum(total, [total - t.vals[1], total + t.s.pas, Math.max(...t.vals)], t.s.pas),
+    expected: [String(total)],
+    comparator: "mcq_exact" as const,
+    explanation: `On additionne toutes les barres : ${t.vals.join(" + ")} = ${total} ${t.s.unite}.`,
+    canvas: gCanvas(t),
+  };
+}
+
+/** Lecture d'une valeur sur un graphique tiré au hasard. */
+function gQValeur(completer: boolean) {
+  // ⭐ 20/10/2026 : axe gradué, aucune valeur écrite sur les barres.
+  const t = gTirerAxe(4);
+  const i = randomInt(0, 3);
+  const c = t.cats[i];
+  const v = t.vals[i];
+  return {
+    text: `${t.s.intro} ${completer ? `On recopie le graphique dans un tableau. Quel nombre faut-il écrire pour ${gGuil(c)} ? Lis l’axe.` : t.s.combien(c)}`,
+    format: "qcm" as const,
+    choices: gNum(v, gLeurresAxe(t, i), t.A),
+    expected: [String(v)],
+    comparator: "mcq_exact" as const,
+    explanation: `${gCommentLire(t, i)} Réponse : ${v} ${t.s.unite}.`,
+    canvas: gCanvas(t, { type: "barres", hi: i, axe: t.A }),
+  };
+}
+
+/** Écart entre deux barres d'un graphique tiré au hasard. */
+function gQEcart() {
+  const t = gTirer(4);
+  const [i, j] = gPaire(t);
+  const d = t.vals[i] - t.vals[j];
+  return {
+    text: `${t.s.intro} Combien de ${t.s.unite} de plus pour ${gGuil(t.cats[i])} que pour ${gGuil(t.cats[j])} ?`,
+    format: "qcm" as const,
+    choices: gNum(d, [t.vals[i] + t.vals[j], d + t.s.pas, t.vals[j]], t.s.pas),
+    expected: [String(d)],
+    comparator: "mcq_exact" as const,
+    explanation: `${gGuil(t.cats[i])} vaut ${t.vals[i]} et ${gGuil(t.cats[j])} vaut ${t.vals[j]}. ${t.vals[i]} - ${t.vals[j]} = ${d} ${t.s.unite}.`,
+    canvas: gCanvas(t),
+  };
 }
 
 // ============================================================
@@ -245,11 +2079,11 @@ export const graphiquesBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["12"],
     comparator: "number_equal",
-    hint: "Lis la valeur au-dessus de la barre “Foot”.",
+    hint: "Pars du haut de la barre “Foot” et suis la ligne jusqu’à l’axe.",
     explanation:
-      "La barre “Foot” indique 12. Donc 12 élèves ont choisi le football.",
-    tags: ["cm2", "graphique", "lire", "barres", "sport", "short", "canvas"],
-    canvas: graphiqueActivitesCanvas(0),
+      "Je pars du haut de la barre “Foot”, je suis la ligne jusqu’à l’axe, je lis 12. L’axe compte de 2 en 2. Donc 12 élèves ont choisi le football.",
+    tags: ["cm2", "graphique", "lire", "barres", "sport", "short", "canvas", "axe_gradue"],
+    canvas: graphiqueActivitesCanvas(0, true),
   },
 
   {
@@ -263,14 +2097,14 @@ export const graphiquesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Combien d’élèves ont choisi la danse ?",
     format: "qcm",
-    choices: ["9", "7", "10", "12"],
+    choices: ["9", "8", "10", "2"],
     expected: ["9"],
     comparator: "mcq_exact",
-    hint: "Regarde la barre “Danse”.",
+    hint: "La barre “Danse” s’arrête entre deux graduations : regarde bien lesquelles.",
     explanation:
-      "La barre “Danse” indique 9. La bonne réponse est donc 9 élèves.",
-    tags: ["cm2", "graphique", "lire", "barres", "sport", "qcm", "canvas"],
-    canvas: graphiqueActivitesCanvas(1),
+      "Je pars du haut de la barre “Danse”, je suis la ligne jusqu’à l’axe. Elle s’arrête au milieu, entre 8 et 10 : je lis 9. La bonne réponse est donc 9 élèves.",
+    tags: ["cm2", "graphique", "lire", "barres", "sport", "qcm", "canvas", "axe_gradue", "milieu"],
+    canvas: graphiqueActivitesCanvas(1, true),
   },
 
   {
@@ -286,11 +2120,11 @@ export const graphiquesBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["7"],
     comparator: "number_equal",
-    hint: "Sur le graphique, la natation est notée “Nage”.",
+    hint: "Sur le graphique, la natation est notée “Nage”. Sa barre s’arrête entre deux graduations.",
     explanation:
-      "La barre “Nage” indique 7. Donc 7 élèves ont choisi la natation.",
-    tags: ["cm2", "graphique", "lire", "barres", "sport", "short", "canvas"],
-    canvas: graphiqueActivitesCanvas(2),
+      "Je pars du haut de la barre “Nage”, je suis la ligne jusqu’à l’axe. Elle s’arrête au milieu, entre 6 et 8 : je lis 7. Donc 7 élèves ont choisi la natation.",
+    tags: ["cm2", "graphique", "lire", "barres", "sport", "short", "canvas", "axe_gradue", "milieu"],
+    canvas: graphiqueActivitesCanvas(2, true),
   },
 
   {
@@ -388,11 +2222,11 @@ export const graphiquesBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["14"],
     comparator: "number_equal",
-    hint: "Lis la barre “Rougail”.",
+    hint: "Pars du haut de la barre “Rougail” et suis la ligne jusqu’à l’axe.",
     explanation:
-      "La barre “Rougail” indique 14. Donc 14 élèves ont choisi le rougail.",
-    tags: ["cm2", "graphique", "lire", "cantine", "reunion", "short", "canvas"],
-    canvas: graphiqueCantineCanvas(1),
+      "Je pars du haut de la barre “Rougail”, je suis la ligne jusqu’à l’axe, je lis 14. L’axe compte de 2 en 2. Donc 14 élèves ont choisi le rougail.",
+    tags: ["cm2", "graphique", "lire", "cantine", "reunion", "short", "canvas", "axe_gradue"],
+    canvas: graphiqueCantineCanvas(1, true),
   },
 
   {
@@ -491,11 +2325,11 @@ export const graphiquesBank: TutorBankItemV4[] = [
     choices: ["non", "oui"],
     expected: ["non"],
     comparator: "mcq_exact",
-    hint: "Lis la valeur écrite au-dessus de la barre “Foot”.",
+    hint: "Suis le haut de la barre “Foot” jusqu’à l’axe : quelle graduation touches-tu ?",
     explanation:
-      "Non. La barre “Foot” indique 12, pas 10.",
-    tags: ["cm2", "graphique", "lire", "erreur", "valeur", "qcm", "canvas"],
-    canvas: graphiqueActivitesCanvas(0),
+      "Non. Je pars du haut de la barre “Foot”, je suis la ligne jusqu’à l’axe, je lis 12. 10 est la graduation juste en dessous.",
+    tags: ["cm2", "graphique", "lire", "erreur", "valeur", "qcm", "canvas", "axe_gradue"],
+    canvas: graphiqueActivitesCanvas(0, true),
   },
 
   {
@@ -548,6 +2382,8 @@ export const graphiquesBank: TutorBankItemV4[] = [
     hint: "Lis la valeur au-dessus de la barre demandée.",
     tags: ["cm2", "graphique", "lire", "activites", "template", "qcm", "canvas"],
     generate: () => {
+      // ⭐ 20/10/2026 : trois fois sur quatre, une situation tirée parmi une trentaine.
+      if (Math.random() < 0.75) return gQValeur(false);
       const items = [
         { label: "Foot", value: 12, index: 0 },
         { label: "Danse", value: 9, index: 1 },
@@ -558,14 +2394,16 @@ export const graphiquesBank: TutorBankItemV4[] = [
       const item = randomChoice(items);
 
       return {
-        text: `Quelle valeur correspond à “${item.label}” ?`,
+        text: `Quelle valeur correspond à “${item.label}” ? Lis l’axe gradué.`,
         format: "qcm",
-        choices: makeChoices(String(item.value), ["7", "9", "10", "12", "14"]),
+        choices: makeChoices(String(item.value), [String(item.value - 1), String(item.value + 1), String(item.value + 2), "2"]),
         expected: [String(item.value)],
         comparator: "mcq_exact",
-        explanation:
-          `On repère la barre “${item.label}”. La valeur indiquée est ${item.value}.`,
-        canvas: graphiqueActivitesCanvas(item.index),
+        // ⭐ 21/10/2026 — axe de 2 en 2 : 9 et 7 sont au milieu de deux graduations.
+        explanation: item.value % 2 === 0
+          ? `Je pars du haut de la barre “${item.label}”, je suis la ligne jusqu’à l’axe, je lis ${item.value}.`
+          : `Je pars du haut de la barre “${item.label}”, je suis la ligne jusqu’à l’axe. Elle s’arrête au milieu, entre ${item.value - 1} et ${item.value + 1} : je lis ${item.value}.`,
+        canvas: graphiqueActivitesCanvas(item.index, true),
       };
     },
   },
@@ -582,6 +2420,8 @@ export const graphiquesBank: TutorBankItemV4[] = [
     hint: "Cherche la barre du fruit demandé.",
     tags: ["cm2", "graphique", "lire", "fruits", "reunion", "template", "short", "canvas"],
     generate: () => {
+      // ⭐ 20/10/2026 : trois fois sur quatre, une situation tirée parmi une trentaine.
+      if (Math.random() < 0.75) return gQValeur(false);
       const items = [
         { label: "Ananas", value: 24, index: 0 },
         { label: "Bananes", value: 28, index: 1 },
@@ -615,6 +2455,8 @@ export const graphiquesBank: TutorBankItemV4[] = [
     hint: "Lis la valeur du bâton demandé.",
     tags: ["cm2", "graphique", "lire", "livres", "template", "qcm", "canvas"],
     generate: () => {
+      // ⭐ 20/10/2026 : trois fois sur quatre, une situation tirée parmi une trentaine.
+      if (Math.random() < 0.75) return gQValeur(false);
       const items = [
         { label: "Romans", value: 14, index: 0 },
         { label: "BD", value: 22, index: 1 },
@@ -703,11 +2545,11 @@ export const graphiquesBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["12"],
     comparator: "number_equal",
-    hint: "Lis la barre “Foot”.",
+    hint: "Lis la barre “Foot” sur l’axe gradué.",
     explanation:
-      "La barre “Foot” correspond à 12 élèves. Il faut donc écrire 12.",
-    tags: ["cm2", "graphique", "completer", "activites", "short", "canvas"],
-    canvas: graphiqueActivitesCanvas(0),
+      "Je pars du haut de la barre “Foot”, je suis la ligne jusqu’à l’axe, je lis 12. Il faut donc écrire 12.",
+    tags: ["cm2", "graphique", "completer", "activites", "short", "canvas", "axe_gradue"],
+    canvas: graphiqueActivitesCanvas(0, true),
   },
 
   {
@@ -721,14 +2563,14 @@ export const graphiquesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Pour compléter le graphique, quelle valeur faut-il écrire pour “Basket” ?",
     format: "qcm",
-    choices: ["10", "7", "9", "12"],
+    choices: ["10", "8", "12", "2"],
     expected: ["10"],
     comparator: "mcq_exact",
-    hint: "Regarde la barre “Basket”.",
+    hint: "Suis le haut de la barre “Basket” jusqu’à l’axe.",
     explanation:
-      "La barre “Basket” indique 10. Il faut donc écrire 10.",
-    tags: ["cm2", "graphique", "completer", "activites", "qcm", "canvas"],
-    canvas: graphiqueActivitesCanvas(3),
+      "Je pars du haut de la barre “Basket”, je suis la ligne jusqu’à l’axe, je lis 10. Il faut donc écrire 10. (2 est le pas de l’axe, pas la valeur.)",
+    tags: ["cm2", "graphique", "completer", "activites", "qcm", "canvas", "axe_gradue"],
+    canvas: graphiqueActivitesCanvas(3, true),
   },
 
   {
@@ -866,11 +2708,11 @@ export const graphiquesBank: TutorBankItemV4[] = [
     choices: ["non", "oui"],
     expected: ["non"],
     comparator: "mcq_exact",
-    hint: "Relis la valeur de la barre “Foot”.",
+    hint: "Relis la barre “Foot” sur l’axe gradué.",
     explanation:
-      "Non. La barre “Foot” vaut 12. Écrire 10 ne correspond pas à la donnée.",
-    tags: ["cm2", "graphique", "completer", "erreur", "activites", "qcm", "canvas"],
-    canvas: graphiqueActivitesCanvas(0),
+      "Non. Je pars du haut de la barre “Foot”, je suis la ligne jusqu’à l’axe, je lis 12. 10 est la graduation voisine : elle ne correspond pas à la donnée.",
+    tags: ["cm2", "graphique", "completer", "erreur", "activites", "qcm", "canvas", "axe_gradue"],
+    canvas: graphiqueActivitesCanvas(0, true),
   },
 
   {
@@ -943,6 +2785,8 @@ export const graphiquesBank: TutorBankItemV4[] = [
     hint: "Regarde la barre demandée.",
     tags: ["cm2", "graphique", "completer", "activites", "template", "qcm", "canvas"],
     generate: () => {
+      // ⭐ 20/10/2026 : trois fois sur quatre, une situation tirée parmi une trentaine.
+      if (Math.random() < 0.75) return gQValeur(true);
       const items = [
         { label: "Foot", value: 12, index: 0 },
         { label: "Danse", value: 9, index: 1 },
@@ -953,14 +2797,16 @@ export const graphiquesBank: TutorBankItemV4[] = [
       const item = randomChoice(items);
 
       return {
-        text: `Quelle valeur faut-il écrire pour compléter la barre “${item.label}” ?`,
+        text: `Quelle valeur faut-il écrire en haut de la barre “${item.label}” ? Lis l’axe gradué.`,
         format: "qcm",
-        choices: makeChoices(String(item.value), ["7", "9", "10", "12", "14"]),
+        choices: makeChoices(String(item.value), [String(item.value - 1), String(item.value + 1), String(item.value - 2), "2"]),
         expected: [String(item.value)],
         comparator: "mcq_exact",
-        explanation:
-          `La barre “${item.label}” correspond à ${item.value}. Il faut donc écrire ${item.value}.`,
-        canvas: graphiqueActivitesCanvas(item.index),
+        // ⭐ 21/10/2026 — axe de 2 en 2 : 9 et 7 sont au milieu de deux graduations.
+        explanation: item.value % 2 === 0
+          ? `Je pars du haut de la barre “${item.label}”, je suis la ligne jusqu’à l’axe, je lis ${item.value}. Il faut donc écrire ${item.value}.`
+          : `Je pars du haut de la barre “${item.label}”, je suis la ligne jusqu’à l’axe. Elle s’arrête au milieu, entre ${item.value - 1} et ${item.value + 1} : je lis ${item.value}. Il faut donc écrire ${item.value}.`,
+        canvas: graphiqueActivitesCanvas(item.index, true),
       };
     },
   },
@@ -977,6 +2823,8 @@ export const graphiquesBank: TutorBankItemV4[] = [
     hint: "Lis la valeur du fruit demandé.",
     tags: ["cm2", "graphique", "completer", "fruits", "reunion", "template", "short", "canvas"],
     generate: () => {
+      // ⭐ 20/10/2026 : trois fois sur quatre, une situation tirée parmi une trentaine.
+      if (Math.random() < 0.75) return gQValeur(true);
       const items = [
         { label: "Ananas", value: 24, index: 0 },
         { label: "Bananes", value: 28, index: 1 },
@@ -1010,6 +2858,8 @@ export const graphiquesBank: TutorBankItemV4[] = [
     hint: "Additionne toutes les valeurs du graphique.",
     tags: ["cm2", "graphique", "completer", "total", "template", "short", "canvas"],
     generate: () => {
+      // ⭐ 20/10/2026 : trois fois sur quatre, une situation tirée parmi une trentaine.
+      if (Math.random() < 0.75) return gQTotal();
       const item = randomChoice([
         {
           text: "Quel total faut-il écrire pour les activités ?",
@@ -1059,20 +2909,28 @@ export const graphiquesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Additionne les valeurs connues puis retire-les au total.",
     tags: ["cm2", "graphique", "completer", "valeur_manquante", "template", "short"],
+    // ⭐ 20/10/2026 : une situation tirée au lieu d'une seule phrase (même
+    // calcul : total - valeurs connues), sans graphique, données dans le texte.
     generate: () => {
-      const total = randomChoice([30, 40, 50]);
-      const a = randomInt(6, 12);
-      const b = randomInt(6, 12);
-      const c = randomInt(5, 10);
-      const missing = total - a - b - c;
+      const t = gTirer(4);
+      const m = randomInt(0, 3);
+      const total = gSomme(t.vals);
+      const connus = total - t.vals[m];
+      const missing = t.vals[m];
+      const autres = t.cats.map((_, k) => k).filter((k) => k !== m);
+      const q = randomChoice([
+        `Le graphique doit représenter ${total} ${t.s.unite} en tout. On connaît ${gListe(t, autres)}. Quelle valeur manque-t-il pour ${gGuil(t.cats[m])} ?`,
+        `Total : ${total} ${t.s.unite}. Valeurs déjà tracées : ${gListe(t, autres)}. Quelle hauteur pour la barre ${gGuil(t.cats[m])} ?`,
+      ]);
 
       return {
-        text: `Un graphique représente ${total} réponses. Trois valeurs sont ${a}, ${b} et ${c}. Quelle valeur manque-t-il ?`,
-        format: "short",
+        text: `${t.s.intro} ${q}`,
+        format: "qcm",
+        choices: gNum(missing, [connus, total, missing + t.s.pas, missing - t.s.pas], t.s.pas),
         expected: [String(missing)],
-        comparator: "number_equal",
+        comparator: "mcq_exact",
         explanation:
-          `On additionne les valeurs connues : ${a} + ${b} + ${c} = ${a + b + c}. Puis on calcule ${total} - ${a + b + c} = ${missing}.`,
+          `On additionne les valeurs connues : ${autres.map((k) => t.vals[k]).join(" + ")} = ${connus}. Puis on calcule ${total} - ${connus} = ${missing}.`,
       };
     },
   },
@@ -1544,6 +3402,8 @@ export const graphiquesBank: TutorBankItemV4[] = [
     hint: "Additionne toutes les valeurs du graphique.",
     tags: ["cm2", "graphique", "interpreter", "total", "template", "short", "canvas"],
     generate: () => {
+      // ⭐ 20/10/2026 : trois fois sur quatre, une situation tirée parmi une trentaine.
+      if (Math.random() < 0.75) return gQTotal();
       const item = randomChoice([
         {
           text: "Quel est le total des activités ?",
@@ -1598,6 +3458,8 @@ export const graphiquesBank: TutorBankItemV4[] = [
     hint: "Pour trouver un écart, on soustrait.",
     tags: ["cm2", "graphique", "interpreter", "difference", "template", "short", "canvas"],
     generate: () => {
+      // ⭐ 20/10/2026 : trois fois sur quatre, une situation tirée parmi une trentaine.
+      if (Math.random() < 0.75) return gQEcart();
       const item = randomChoice([
         {
           text: "Combien d’élèves de plus ont choisi Foot que Nage ?",
@@ -2221,4 +4083,9 @@ export const graphiquesBank: TutorBankItemV4[] = [
       };
     },
   },
+  // ⭐ 20/10/2026 — les générateurs situation × tournure (voir plus haut).
+  ...G_LIRE,
+  ...G_COMPLETER,
+  ...G_INTERPRETER,
+  ...G_DEFI,
 ];

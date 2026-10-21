@@ -3,6 +3,7 @@
 import type {
   TutorBankItemV4,
   TableauDonneesCanvasData,
+  TutorGeneratedQuestionV4,
 } from "@/lib/tutor-v4/types";
 
 function randomChoice<T>(arr: readonly T[]): T {
@@ -157,6 +158,1076 @@ function tableauCantineCanvas(
       striped: true,
     },
   });
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ⭐ 20/10/2026 — DES SITUATIONS × DES TOURNURES, À CHAQUE ÉTOILE.
+   Mesuré avant : 23 à 31 squelettes par micro, jusqu'à 18 répétitions sur 20
+   (quatre tableaux figés : fruits, sport, livres, cantine). Chaque gabarit
+   tire maintenant une SITUATION (une trentaine de relevés, chacun porté par
+   un MÉTIER : biologiste, chauffeuse de car, météorologue, bibliothécaire…),
+   un TABLEAU À DOUBLE ENTRÉE aux nombres tirés (lignes × colonnes choisies
+   dans la situation), puis une TOURNURE. Le canvas montre exactement les
+   nombres de l'énoncé. Un cran au-dessus du CM1 : double entrée dès ★1,
+   cases « ? » à retrouver par différence, totaux de lignes ET de colonnes.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+type Q = TutorGeneratedQuestionV4;
+type Cat = { label: string; gn: string };
+type Nom = { mot: string; f: boolean };
+type Sit = {
+  titre: string;
+  caption: string;
+  /** Une phrase courte, portée par un métier. */
+  intro: string;
+  theme: "reunion" | "neutral";
+  /** « de tortues », « d’élèves » : après « Combien » et « le plus ». */
+  de: string;
+  /** Le mot écrit après le nombre (« 24 tortues »). */
+  unite: string;
+  /** « ont été vues » : « Combien de tortues ont été vues à Saint-Leu en mars ? » */
+  verbe: string;
+  lNom: Nom;
+  cNom: Nom;
+  lignes: Cat[];
+  colonnes: Cat[];
+  min: number;
+  max: number;
+  pas: number;
+};
+
+const cat = (label: string, gn: string): Cat => ({ label, gn });
+const nom = (mot: string, f = false): Nom => ({ mot, f });
+const maj = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+const quel = (n: Nom) => (n.f ? "quelle" : "quel");
+const Quel = (n: Nom) => maj(quel(n));
+const guil = (s: string) => `« ${s} »`;
+const pluriel = (m: string) => (/[sx]$/.test(m) ? m : /eu$/.test(m) ? `${m}x` : `${m}s`);
+
+const PRENOMS: { p: string; f: boolean }[] = [
+  { p: "Léa", f: true }, { p: "Noah", f: false }, { p: "Maëlys", f: true }, { p: "Kylian", f: false },
+  { p: "Inaya", f: true }, { p: "Enzo", f: false }, { p: "Soane", f: true }, { p: "Ilan", f: false },
+  { p: "Lina", f: true }, { p: "Timéo", f: false }, { p: "Anaïs", f: true }, { p: "Mathis", f: false },
+  { p: "Zoé", f: true }, { p: "Rayan", f: false }, { p: "Jade", f: true }, { p: "Nathan", f: false },
+];
+
+const MOIS = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin"].map((m) => cat(m, `en ${m.toLowerCase()}`));
+const JOURS = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"].map((j) => cat(j, `le ${j.toLowerCase()}`));
+const JOURS_ECOLE = ["Lundi", "Mardi", "Jeudi", "Vendredi"].map((j) => cat(j, `le ${j.toLowerCase()}`));
+const MOMENTS = [cat("Matin", "le matin"), cat("Midi", "à midi"), cat("Après-midi", "l’après-midi"), cat("Soir", "le soir")];
+const SEMAINES = [
+  cat("Semaine 1", "la 1re semaine"), cat("Semaine 2", "la 2e semaine"),
+  cat("Semaine 3", "la 3e semaine"), cat("Semaine 4", "la 4e semaine"),
+];
+const NUITS = ["lundi", "mardi", "mercredi", "jeudi", "vendredi"].map((j) => cat(`Nuit du ${j}`, `la nuit du ${j}`));
+
+const SITS: Sit[] = [
+  {
+    titre: "Tortues vues sur les plages", caption: "Nombre de tortues vues", theme: "reunion",
+    intro: "Une biologiste marine compte les tortues vues près des plages.",
+    de: "de tortues", unite: "tortues", verbe: "ont été vues", lNom: nom("plage", true), cNom: nom("mois"),
+    lignes: [cat("Saint-Leu", "à Saint-Leu"), cat("L’Hermitage", "à L’Hermitage"), cat("Étang-Salé", "à l’Étang-Salé"), cat("Boucan Canot", "à Boucan Canot"), cat("Saint-Pierre", "à Saint-Pierre")],
+    colonnes: MOIS, min: 2, max: 40, pas: 1,
+  },
+  {
+    titre: "Voyageurs du car jaune", caption: "Nombre de voyageurs montés", theme: "reunion",
+    intro: "Une chauffeuse de car jaune compte les voyageurs qui montent.",
+    de: "de voyageurs", unite: "voyageurs", verbe: "sont montés", lNom: nom("ligne", true), cNom: nom("jour"),
+    lignes: [cat("Ligne des Hauts", "sur la ligne des Hauts"), cat("Ligne du littoral", "sur la ligne du littoral"), cat("Ligne de la gare", "sur la ligne de la gare"), cat("Ligne de l’école", "sur la ligne de l’école"), cat("Ligne du marché", "sur la ligne du marché")],
+    colonnes: JOURS, min: 20, max: 90, pas: 1,
+  },
+  {
+    titre: "Livres empruntés à la BCD", caption: "Nombre de livres empruntés", theme: "neutral",
+    intro: "Le bibliothécaire de l’école note les livres empruntés.",
+    de: "de livres", unite: "livres", verbe: "ont été empruntés", lNom: nom("classe", true), cNom: nom("mois"),
+    lignes: [cat("CP", "par les CP"), cat("CE1", "par les CE1"), cat("CE2", "par les CE2"), cat("CM1", "par les CM1"), cat("CM2", "par les CM2")],
+    colonnes: MOIS, min: 5, max: 40, pas: 1,
+  },
+  {
+    titre: "Pluie tombée (en mm)", caption: "Hauteur de pluie en millimètres", theme: "reunion",
+    intro: "Un météorologue relève la pluie tombée dans plusieurs villes.",
+    de: "de millimètres de pluie", unite: "mm", verbe: "sont tombés", lNom: nom("ville", true), cNom: nom("mois"),
+    lignes: [cat("Cilaos", "à Cilaos"), cat("Saint-Denis", "à Saint-Denis"), cat("Le Tampon", "au Tampon"), cat("Sainte-Rose", "à Sainte-Rose"), cat("Saint-Gilles", "à Saint-Gilles")],
+    colonnes: MOIS, min: 20, max: 450, pas: 10,
+  },
+  {
+    titre: "Repas servis à la cantine", caption: "Nombre de repas servis", theme: "reunion",
+    intro: "Un cuisinier de la cantine compte les repas servis.",
+    de: "de repas", unite: "repas", verbe: "ont été servis", lNom: nom("école", true), cNom: nom("jour"),
+    lignes: [cat("École des Avirons", "à l’école des Avirons"), cat("École du Port", "à l’école du Port"), cat("École de Bras-Panon", "à l’école de Bras-Panon"), cat("École de l’Entre-Deux", "à l’école de l’Entre-Deux"), cat("École de Salazie", "à l’école de Salazie")],
+    colonnes: JOURS_ECOLE, min: 80, max: 200, pas: 5,
+  },
+  {
+    titre: "Oiseaux comptés en forêt", caption: "Nombre d’oiseaux comptés", theme: "reunion",
+    intro: "Une garde forestière compte les oiseaux à plusieurs moments de la journée.",
+    de: "d’oiseaux", unite: "oiseaux", verbe: "ont été comptés", lNom: nom("site"), cNom: nom("moment"),
+    lignes: [cat("Roche Écrite", "à la Roche Écrite"), cat("Forêt de Bélouve", "dans la forêt de Bélouve"), cat("Plaine des Cafres", "dans la plaine des Cafres"), cat("Mafate", "à Mafate"), cat("Grand Étang", "au Grand Étang")],
+    colonnes: MOMENTS, min: 3, max: 45, pas: 1,
+  },
+  {
+    titre: "Déchets ramassés sur les plages", caption: "Nombre de déchets ramassés", theme: "reunion",
+    intro: "Une écologue organise le ramassage des déchets sur les plages.",
+    de: "de déchets", unite: "déchets", verbe: "ont été ramassés", lNom: nom("plage", true), cNom: nom("mois"),
+    lignes: [cat("Saint-Paul", "à Saint-Paul"), cat("Grande Anse", "à Grande Anse"), cat("Manapany", "à Manapany"), cat("Terre-Sainte", "à Terre-Sainte"), cat("Étang-Salé", "à l’Étang-Salé")],
+    colonnes: MOIS, min: 10, max: 90, pas: 1,
+  },
+  {
+    titre: "Spectateurs au cinéma", caption: "Nombre de spectateurs", theme: "neutral",
+    intro: "Un projectionniste compte les spectateurs de chaque film.",
+    de: "de spectateurs", unite: "spectateurs", verbe: "sont venus", lNom: nom("film"), cNom: nom("jour"),
+    lignes: [cat("Dessin animé", "pour le dessin animé"), cat("Film d’aventure", "pour le film d’aventure"), cat("Documentaire", "pour le documentaire"), cat("Comédie", "pour la comédie"), cat("Science-fiction", "pour le film de science-fiction")],
+    colonnes: JOURS, min: 20, max: 120, pas: 1,
+  },
+  {
+    titre: "Inscrits à l’école de musique", caption: "Nombre d’élèves inscrits", theme: "reunion",
+    intro: "Une professeure de musique compte les élèves inscrits.",
+    de: "d’élèves", unite: "élèves", verbe: "sont inscrits", lNom: nom("instrument"), cNom: nom("ville", true),
+    lignes: [cat("Guitare", "en guitare"), cat("Piano", "en piano"), cat("Violon", "en violon"), cat("Batterie", "en batterie"), cat("Flûte", "en flûte")],
+    colonnes: [cat("Saint-Benoît", "à Saint-Benoît"), cat("Saint-Louis", "à Saint-Louis"), cat("Le Port", "au Port"), cat("Saint-André", "à Saint-André"), cat("La Possession", "à La Possession")],
+    min: 5, max: 40, pas: 1,
+  },
+  {
+    titre: "Licenciés du club omnisports", caption: "Nombre de licenciés", theme: "neutral",
+    intro: "Un entraîneur compte les licenciés de son club.",
+    de: "de licenciés", unite: "licenciés", verbe: "sont inscrits", lNom: nom("sport"), cNom: nom("catégorie", true),
+    lignes: [cat("Football", "au football"), cat("Basket", "au basket"), cat("Natation", "à la natation"), cat("Judo", "au judo"), cat("Handball", "au handball")],
+    colonnes: [cat("Poussins", "chez les poussins"), cat("Benjamins", "chez les benjamins"), cat("Minimes", "chez les minimes"), cat("Cadets", "chez les cadets")],
+    min: 8, max: 60, pas: 1,
+  },
+  {
+    titre: "Barquettes de letchis vendues", caption: "Nombre de barquettes vendues", theme: "reunion",
+    intro: "Une maraîchère vend ses letchis sur plusieurs marchés en décembre.",
+    de: "de barquettes", unite: "barquettes", verbe: "ont été vendues", lNom: nom("marché"), cNom: nom("semaine", true),
+    lignes: [cat("Saint-Paul", "au marché de Saint-Paul"), cat("Le Chaudron", "au marché du Chaudron"), cat("Saint-Pierre", "au marché de Saint-Pierre"), cat("Saint-André", "au marché de Saint-André"), cat("Le Tampon", "au marché du Tampon")],
+    colonnes: SEMAINES, min: 15, max: 95, pas: 1,
+  },
+  {
+    titre: "Animaux soignés", caption: "Nombre d’animaux soignés", theme: "neutral",
+    intro: "Une vétérinaire compte les animaux soignés dans ses cliniques.",
+    de: "d’animaux", unite: "animaux", verbe: "ont été soignés", lNom: nom("clinique", true), cNom: nom("mois"),
+    lignes: [cat("Clinique du port", "à la clinique du port"), cat("Clinique des Hauts", "à la clinique des Hauts"), cat("Clinique du centre", "à la clinique du centre"), cat("Clinique de la plage", "à la clinique de la plage")],
+    colonnes: MOIS, min: 10, max: 70, pas: 1,
+  },
+  {
+    titre: "Baguettes vendues", caption: "Nombre de baguettes vendues", theme: "neutral",
+    intro: "Un boulanger compte les baguettes vendues dans ses boutiques.",
+    de: "de baguettes", unite: "baguettes", verbe: "ont été vendues", lNom: nom("boutique", true), cNom: nom("moment"),
+    lignes: [cat("Boutique du centre", "à la boutique du centre"), cat("Boutique de la plage", "à la boutique de la plage"), cat("Boutique du marché", "à la boutique du marché"), cat("Boutique de la gare", "à la boutique de la gare")],
+    colonnes: MOMENTS, min: 40, max: 150, pas: 5,
+  },
+  {
+    titre: "Randonneurs au volcan", caption: "Nombre de randonneurs", theme: "reunion",
+    intro: "Un guide du Piton de la Fournaise compte les randonneurs.",
+    de: "de randonneurs", unite: "randonneurs", verbe: "sont passés", lNom: nom("site"), cNom: nom("jour"),
+    lignes: [cat("Pas de Bellecombe", "au Pas de Bellecombe"), cat("Cratère Dolomieu", "au cratère Dolomieu"), cat("Formica Leo", "au Formica Leo"), cat("Plaine des Sables", "à la plaine des Sables")],
+    colonnes: JOURS, min: 20, max: 120, pas: 1,
+  },
+  {
+    titre: "Pots de miel remplis", caption: "Nombre de pots remplis", theme: "reunion",
+    intro: "Une apicultrice compte les pots de miel remplis dans ses ruchers.",
+    de: "de pots", unite: "pots", verbe: "ont été remplis", lNom: nom("rucher"), cNom: nom("mois"),
+    lignes: [cat("Rucher des Hauts", "au rucher des Hauts"), cat("Rucher du littoral", "au rucher du littoral"), cat("Rucher de la forêt", "au rucher de la forêt"), cat("Rucher du jardin", "au rucher du jardin")],
+    colonnes: MOIS, min: 10, max: 60, pas: 1,
+  },
+  {
+    titre: "Poisson débarqué (en kg)", caption: "Masse de poisson en kilos", theme: "reunion",
+    intro: "Un pêcheur note les kilos de poisson débarqués dans les ports.",
+    de: "de kilos de poisson", unite: "kg", verbe: "ont été débarqués", lNom: nom("port"), cNom: nom("jour"),
+    lignes: [cat("Saint-Gilles", "au port de Saint-Gilles"), cat("Saint-Pierre", "au port de Saint-Pierre"), cat("Sainte-Marie", "au port de Sainte-Marie"), cat("Le Port", "au port de la Pointe des Galets")],
+    colonnes: JOURS, min: 20, max: 150, pas: 5,
+  },
+  {
+    titre: "Plants mis en terre", caption: "Nombre de plants", theme: "neutral",
+    intro: "Un jardinier compte les plants mis en terre dans les jardins.",
+    de: "de plants", unite: "plants", verbe: "ont été plantés", lNom: nom("jardin"), cNom: nom("mois"),
+    lignes: [cat("Jardin de l’école", "dans le jardin de l’école"), cat("Jardin partagé", "dans le jardin partagé"), cat("Potager du collège", "dans le potager du collège"), cat("Jardin de la mairie", "dans le jardin de la mairie")],
+    colonnes: MOIS, min: 5, max: 50, pas: 1,
+  },
+  {
+    titre: "Parties jouées à la ludothèque", caption: "Nombre de parties", theme: "neutral",
+    intro: "Une ludothécaire compte les parties jouées à chaque jeu.",
+    de: "de parties", unite: "parties", verbe: "ont été jouées", lNom: nom("jeu"), cNom: nom("jour"),
+    lignes: [cat("Petits chevaux", "aux petits chevaux"), cat("Jeu de l’oie", "au jeu de l’oie"), cat("Dames", "aux dames"), cat("Dominos", "aux dominos"), cat("Mémory", "au mémory")],
+    colonnes: JOURS, min: 5, max: 40, pas: 1,
+  },
+  {
+    titre: "Tickets de la kermesse", caption: "Nombre de tickets donnés", theme: "neutral",
+    intro: "Une organisatrice de la kermesse compte les tickets de chaque stand.",
+    de: "de tickets", unite: "tickets", verbe: "ont été donnés", lNom: nom("stand"), cNom: nom("moment"),
+    lignes: [cat("Pêche à la ligne", "à la pêche à la ligne"), cat("Chamboule-tout", "au chamboule-tout"), cat("Tombola", "à la tombola"), cat("Maquillage", "au stand de maquillage"), cat("Course en sac", "à la course en sac")],
+    colonnes: MOMENTS, min: 10, max: 80, pas: 1,
+  },
+  {
+    titre: "Visiteurs des musées", caption: "Nombre de visiteurs", theme: "reunion",
+    intro: "Une historienne compte les visiteurs des musées de l’île.",
+    de: "de visiteurs", unite: "visiteurs", verbe: "sont venus", lNom: nom("musée"), cNom: nom("mois"),
+    lignes: [cat("Stella Matutina", "au musée Stella Matutina"), cat("Villèle", "au musée de Villèle"), cat("Cité du Volcan", "à la Cité du Volcan"), cat("Kélonia", "à Kélonia"), cat("Muséum", "au muséum")],
+    colonnes: MOIS, min: 50, max: 300, pas: 10,
+  },
+];
+
+SITS.push(
+  {
+    titre: "Vues des vidéos de l’école", caption: "Nombre de vues", theme: "neutral",
+    intro: "Une vidéaste suit les vues des vidéos de l’école.",
+    de: "de vues", unite: "vues", verbe: "ont été comptées", lNom: nom("vidéo", true), cNom: nom("jour"),
+    lignes: [cat("Le volcan", "pour la vidéo sur le volcan"), cat("Les tortues", "pour la vidéo sur les tortues"), cat("La cuisine", "pour la vidéo de cuisine"), cat("Le sport", "pour la vidéo de sport")],
+    colonnes: JOURS, min: 20, max: 150, pas: 5,
+  },
+  {
+    titre: "Sorties des pompiers", caption: "Nombre d’interventions", theme: "reunion",
+    intro: "Une pompière compte les interventions de chaque caserne.",
+    de: "d’interventions", unite: "interventions", verbe: "ont eu lieu", lNom: nom("caserne", true), cNom: nom("mois"),
+    lignes: [cat("Saint-Benoît", "à la caserne de Saint-Benoît"), cat("Saint-Joseph", "à la caserne de Saint-Joseph"), cat("Le Port", "à la caserne du Port"), cat("Saint-Leu", "à la caserne de Saint-Leu")],
+    colonnes: MOIS, min: 10, max: 80, pas: 1,
+  },
+  {
+    titre: "Lettres distribuées", caption: "Nombre de lettres", theme: "neutral",
+    intro: "Une factrice compte les lettres distribuées dans chaque quartier.",
+    de: "de lettres", unite: "lettres", verbe: "ont été distribuées", lNom: nom("quartier"), cNom: nom("jour"),
+    lignes: [cat("Les Camélias", "dans le quartier des Camélias"), cat("Le Butor", "dans le quartier du Butor"), cat("La Source", "dans le quartier de la Source"), cat("Le Chaudron", "dans le quartier du Chaudron")],
+    colonnes: JOURS, min: 30, max: 150, pas: 5,
+  },
+  {
+    titre: "Tours de piste en EPS", caption: "Nombre de tours de piste", theme: "neutral",
+    intro: "Un professeur d’EPS compte les tours de piste de chaque classe.",
+    de: "de tours", unite: "tours", verbe: "ont été courus", lNom: nom("classe", true), cNom: nom("jour"),
+    lignes: [cat("CM2 A", "par les CM2 A"), cat("CM2 B", "par les CM2 B"), cat("CM1 A", "par les CM1 A"), cat("CM1 B", "par les CM1 B")],
+    colonnes: JOURS_ECOLE, min: 20, max: 90, pas: 1,
+  },
+  {
+    titre: "Œufs ramassés à la ferme", caption: "Nombre d’œufs", theme: "neutral",
+    intro: "Une agricultrice compte les œufs de chaque poulailler.",
+    de: "d’œufs", unite: "œufs", verbe: "ont été ramassés", lNom: nom("poulailler"), cNom: nom("jour"),
+    lignes: [cat("Poulailler du haut", "dans le poulailler du haut"), cat("Poulailler du bas", "dans le poulailler du bas"), cat("Poulailler du verger", "dans le poulailler du verger"), cat("Poulailler de la mare", "dans le poulailler de la mare")],
+    colonnes: JOURS, min: 10, max: 60, pas: 1,
+  },
+  {
+    titre: "Nageurs à la piscine", caption: "Nombre de nageurs", theme: "reunion",
+    intro: "Un maître-nageur compte les nageurs de chaque piscine.",
+    de: "de nageurs", unite: "nageurs", verbe: "sont venus", lNom: nom("piscine", true), cNom: nom("moment"),
+    lignes: [cat("Le Butor", "à la piscine du Butor"), cat("Saint-Paul", "à la piscine de Saint-Paul"), cat("Saint-Pierre", "à la piscine de Saint-Pierre"), cat("Le Tampon", "à la piscine du Tampon")],
+    colonnes: MOMENTS, min: 10, max: 90, pas: 1,
+  },
+  {
+    titre: "Orchidées en fleur", caption: "Nombre d’orchidées en fleur", theme: "reunion",
+    intro: "Une botaniste compte les orchidées en fleur dans les forêts.",
+    de: "d’orchidées", unite: "orchidées", verbe: "ont été comptées", lNom: nom("forêt", true), cNom: nom("mois"),
+    lignes: [cat("Bébour", "dans la forêt de Bébour"), cat("Bélouve", "dans la forêt de Bélouve"), cat("Mare-Longue", "dans la forêt de Mare-Longue"), cat("Tévelave", "dans la forêt du Tévelave")],
+    colonnes: MOIS, min: 5, max: 60, pas: 1,
+  },
+  {
+    titre: "Étoiles filantes", caption: "Nombre d’étoiles filantes", theme: "reunion",
+    intro: "Une astronome compte les étoiles filantes depuis plusieurs lieux.",
+    de: "d’étoiles filantes", unite: "étoiles filantes", verbe: "ont été vues", lNom: nom("lieu"), cNom: nom("nuit", true),
+    lignes: [cat("Maïdo", "au Maïdo"), cat("Plaine des Cafres", "à la Plaine des Cafres"), cat("Les Makes", "aux Makes"), cat("Grand Coude", "à Grand Coude")],
+    colonnes: NUITS, min: 2, max: 40, pas: 1,
+  },
+  {
+    titre: "Glaces vendues", caption: "Nombre de glaces vendues", theme: "neutral",
+    intro: "Un glacier compte les glaces vendues dans ses kiosques.",
+    de: "de glaces", unite: "glaces", verbe: "ont été vendues", lNom: nom("kiosque"), cNom: nom("jour"),
+    lignes: [cat("Kiosque de la plage", "au kiosque de la plage"), cat("Kiosque du parc", "au kiosque du parc"), cat("Kiosque du port", "au kiosque du port"), cat("Kiosque de la gare", "au kiosque de la gare")],
+    colonnes: JOURS, min: 20, max: 150, pas: 5,
+  },
+  {
+    titre: "Naissances à la maternité", caption: "Nombre de bébés nés", theme: "reunion",
+    intro: "Une sage-femme compte les naissances dans les maternités.",
+    de: "de bébés", unite: "bébés", verbe: "sont nés", lNom: nom("maternité", true), cNom: nom("mois"),
+    lignes: [cat("Saint-Pierre", "à la maternité de Saint-Pierre"), cat("Saint-Denis", "à la maternité de Saint-Denis"), cat("Saint-Benoît", "à la maternité de Saint-Benoît"), cat("Saint-Paul", "à la maternité de Saint-Paul")],
+    colonnes: MOIS, min: 10, max: 60, pas: 1,
+  },
+);
+
+/** `n` éléments distincts, dans l'ordre d'origine (les mois restent dans l'ordre). */
+function tirerSans<T>(arr: readonly T[], n: number): T[] {
+  return shuffle(arr.map((_, i) => i))
+    .slice(0, n)
+    .sort((x, y) => x - y)
+    .map((i) => arr[i]);
+}
+
+/** Choix d'un QCM numérique : la bonne réponse + 3 pièges distincts, positifs. */
+function choixNombres(correct: number, pieges: number[], pas = 1): string[] {
+  const out = new Set<number>();
+  for (const p of shuffle(pieges)) {
+    if (out.size >= 3) break;
+    if (p !== correct && p >= 0 && Number.isInteger(p)) out.add(p);
+  }
+  for (const d of [pas, -pas, 2 * pas, -2 * pas, 10, -10, 3 * pas]) {
+    if (out.size >= 3) break;
+    const v = correct + d;
+    if (v !== correct && v >= 0) out.add(v);
+  }
+  return shuffle([String(correct), ...[...out].slice(0, 3).map(String)]);
+}
+
+type Tab = { sit: Sit; L: Cat[]; C: Cat[]; v: number[][] };
+
+/** Tire un tableau nl × nc : toutes les valeurs DISTINCTES (un plus grand unique). */
+function tirerTab(sit: Sit, nl: number, nc: number): Tab {
+  const L = tirerSans(sit.lignes, nl);
+  const C = tirerSans(sit.colonnes, nc);
+  const pool: number[] = [];
+  for (let x = sit.min; x <= sit.max; x += sit.pas) pool.push(x);
+  const vals = shuffle(pool).slice(0, nl * nc);
+  const v = L.map((_, i) => vals.slice(i * nc, (i + 1) * nc));
+  return { sit, L, C, v };
+}
+
+const somme = (xs: number[]) => xs.reduce((a, b) => a + b, 0);
+const ligneDe = (t: Tab, i: number) => t.v[i];
+const colDe = (t: Tab, j: number) => t.v.map((r) => r[j]);
+
+/** Le canvas : exactement les nombres de l'énoncé, cases « ? » comprises. */
+function canvasTab(
+  t: Tab,
+  opts: {
+    highlight?: TableauDonneesCanvasData["highlight"];
+    cache?: { i: number; j: number }[];
+    totalLigne?: boolean;
+    totalCol?: boolean;
+    cacheTotal?: { ligne?: number; col?: number; general?: boolean };
+  } = {},
+): TableauDonneesCanvasData {
+  const cache = opts.cache ?? [];
+  const estCache = (i: number, j: number) => cache.some((k) => k.i === i && k.j === j);
+  const headers = [...t.C.map((x) => x.label), ...(opts.totalLigne ? ["Total"] : [])];
+  const rows: TableauDonneesCanvasData["rows"] = t.L.map((l, i) => ({
+    label: l.label,
+    values: [
+      ...t.v[i].map((x, j) => (estCache(i, j) ? "?" : x)),
+      ...(opts.totalLigne ? [opts.cacheTotal?.ligne === i ? "?" : somme(t.v[i])] : []),
+    ],
+  }));
+  if (opts.totalCol) {
+    rows.push({
+      label: "Total",
+      values: [
+        ...t.C.map((_, j) => (opts.cacheTotal?.col === j ? "?" : somme(colDe(t, j)))),
+        ...(opts.totalLigne ? [opts.cacheTotal?.general ? "?" : somme(t.v.flat())] : []),
+      ],
+    });
+  }
+  return tableauCanvas({
+    title: t.sit.titre,
+    headers,
+    rows,
+    highlight: opts.highlight,
+    caption: t.sit.caption,
+    display: { compact: t.C.length + (opts.totalLigne ? 1 : 0) > 4, striped: true },
+  });
+}
+
+const sitAuHasard = () => randomChoice(SITS);
+const combien = (t: Tab, i: number, j: number) =>
+  `Combien ${t.sit.de} ${t.sit.verbe} ${t.L[i].gn} ${t.C[j].gn} ?`;
+const nb = (t: Tab, x: number) => `${x} ${t.sit.unite}`;
+const lc = (t: Tab, i: number, j: number) =>
+  `la ligne ${guil(t.L[i].label)} et la colonne ${guil(t.C[j].label)}`;
+/** « qu’en mars », « que le lundi ». */
+const que = (gn: string) => (/^[aeiouéèêàâ]/i.test(gn) ? `qu’${gn}` : `que ${gn}`);
+/** Début de phrase pour une ligne : « À Saint-Leu, … » ou « Sur la ligne « CM2 A », … ». */
+const debutLigne = (t: Tab, i: number) =>
+  t.L[i].gn.startsWith("par ") || Math.random() < 0.3 ? `Sur la ligne ${guil(t.L[i].label)}` : maj(t.L[i].gn);
+const autre = (n: number, k: number) => (k + 1 + randomInt(0, n - 2)) % n;
+
+// ------------------------------------------------------------
+// TABLEAU_LIRE
+// ------------------------------------------------------------
+
+/** ★1 — lire une case d'un tableau à double entrée (3 × 3). */
+function genLireCase(): Q {
+  const t = tirerTab(sitAuHasard(), 3, 3);
+  const i = randomInt(0, 2);
+  const j = randomInt(0, 2);
+  const x = t.v[i][j];
+  const i2 = autre(3, i);
+  const j2 = autre(3, j);
+  const text = randomChoice([
+    () => `${t.sit.intro} ${combien(t, i, j)}`,
+    () => `Lis le tableau. ${maj(t.C[j].gn)}, combien ${t.sit.de} ${t.sit.verbe} ${t.L[i].gn} ?`,
+    () => `${t.sit.intro} Quel nombre lis-tu au croisement de ${lc(t, i, j)} ?`,
+  ])();
+  return {
+    text,
+    format: "qcm",
+    choices: choixNombres(x, [t.v[i][j2], t.v[i2][j], t.v[i2][j2]], t.sit.pas),
+    expected: [String(x)],
+    comparator: "mcq_exact",
+    explanation: `On cherche la ligne ${guil(t.L[i].label)}, puis la colonne ${guil(t.C[j].label)}. La case du croisement indique ${x}. Donc ${nb(t, x)} ${t.sit.verbe} ${t.L[i].gn} ${t.C[j].gn}.`,
+    canvas: canvasTab(t),
+  };
+}
+
+/** ★1 — quelle ligne ou quelle colonne lire pour une information. */
+function genLireQuoi(): Q {
+  const t = tirerTab(sitAuHasard(), 3, 3);
+  const i = randomInt(0, 2);
+  const j = randomInt(0, 2);
+  const ligne = Math.random() < 0.5;
+  const bon = ligne ? `la ligne ${guil(t.L[i].label)}` : `la colonne ${guil(t.C[j].label)}`;
+  const pieges = ligne
+    ? [`la colonne ${guil(t.C[j].label)}`, `la ligne ${guil(t.L[autre(3, i)].label)}`, `la colonne ${guil(t.C[autre(3, j)].label)}`]
+    : [`la ligne ${guil(t.L[i].label)}`, `la colonne ${guil(t.C[autre(3, j)].label)}`, `la ligne ${guil(t.L[autre(3, i)].label)}`];
+  const quoi = ligne
+    ? `combien ${t.sit.de} ${t.sit.verbe} ${t.L[i].gn}, pour chaque ${t.sit.cNom.mot}`
+    : `combien ${t.sit.de} ${t.sit.verbe} ${t.C[j].gn}, pour chaque ${t.sit.lNom.mot}`;
+  const text = randomChoice([
+    () => `${t.sit.intro} Que faut-il lire pour savoir ${quoi} ?`,
+    () => `Tu veux savoir ${quoi}. Que lis-tu dans le tableau ?`,
+  ])();
+  return {
+    text,
+    format: "qcm",
+    choices: makeChoices(bon, pieges),
+    expected: [bon],
+    comparator: "mcq_exact",
+    explanation: ligne
+      ? `Les lignes portent le nom de chaque ${t.sit.lNom.mot} ; les colonnes, celui de chaque ${t.sit.cNom.mot}. Pour le savoir, on lit ${bon} : ${t.v[i].join(", ")}.`
+      : `Les colonnes portent le nom de chaque ${t.sit.cNom.mot} ; les lignes, celui de chaque ${t.sit.lNom.mot}. Pour le savoir, on lit ${bon} : ${colDe(t, j).join(", ")}.`,
+    canvas: canvasTab(t),
+  };
+}
+
+/** ★2 — lecture inverse : on donne le nombre, on cherche la ligne ou la colonne. */
+function genLireInverse(): Q {
+  const t = tirerTab(sitAuHasard(), 4, 4);
+  const i = randomInt(0, 3);
+  const j = randomInt(0, 3);
+  const x = t.v[i][j];
+  if (Math.random() < 0.5) {
+    const bon = t.C[j].label;
+    return {
+      text: `${t.sit.intro} ${debutLigne(t, i)}, ${quel(t.sit.cNom)} ${t.sit.cNom.mot} a ${nb(t, x)} ?`,
+      format: "qcm",
+      choices: makeChoices(bon, t.C.map((k) => k.label)),
+      expected: [bon],
+      comparator: "mcq_exact",
+      explanation: `On lit seulement la ligne ${guil(t.L[i].label)} : ${t.v[i].join(", ")}. Le nombre ${x} est dans la colonne ${guil(bon)}.`,
+      canvas: canvasTab(t, { highlight: { row: i } }),
+    };
+  }
+  const bon = t.L[i].label;
+  return {
+    text: `${t.sit.intro} ${maj(t.C[j].gn)}, ${quel(t.sit.lNom)} ${t.sit.lNom.mot} a ${nb(t, x)} ?`,
+    format: "qcm",
+    choices: makeChoices(bon, t.L.map((k) => k.label)),
+    expected: [bon],
+    comparator: "mcq_exact",
+    explanation: `On lit seulement la colonne ${guil(t.C[j].label)} : ${colDe(t, j).join(", ")}. Le nombre ${x} est dans la ligne ${guil(bon)}.`,
+    canvas: canvasTab(t, { highlight: { col: j } }),
+  };
+}
+
+/** ★2 — lire une case d'un tableau plus grand, ou une case « Total ». */
+function genLireGrandOuTotal(): Q {
+  const t = tirerTab(sitAuHasard(), 4, 4);
+  const i = randomInt(0, 3);
+  const j = randomInt(0, 3);
+  if (Math.random() < 0.5) {
+    const x = t.v[i][j];
+    return {
+      text: `${t.sit.intro} ${combien(t, i, j)}`,
+      format: "qcm",
+      choices: choixNombres(x, [t.v[j][i], t.v[i][autre(4, j)], t.v[autre(4, i)][j]], t.sit.pas),
+      expected: [String(x)],
+      comparator: "mcq_exact",
+      explanation: `Ligne ${guil(t.L[i].label)}, colonne ${guil(t.C[j].label)} : la case indique ${x}. Donc ${nb(t, x)} ${t.sit.verbe} ${t.L[i].gn} ${t.C[j].gn}.`,
+      canvas: canvasTab(t),
+    };
+  }
+  const tot = somme(t.v[i]);
+  return {
+    text: `${t.sit.intro} Lis la colonne ${guil("Total")}. Combien ${t.sit.de} ${t.sit.verbe} ${t.L[i].gn} en tout ?`,
+    format: "qcm",
+    choices: choixNombres(tot, [somme(t.v[autre(4, i)]), Math.max(...t.v[i]), tot - t.v[i][j]], t.sit.pas),
+    expected: [String(tot)],
+    comparator: "mcq_exact",
+    explanation: `La colonne ${guil("Total")} donne le total de chaque ligne. Sur la ligne ${guil(t.L[i].label)}, on lit ${tot} (${t.v[i].join(" + ")} = ${tot}).`,
+    canvas: canvasTab(t, { totalLigne: true }),
+  };
+}
+
+/** ★3 — un camarade lit le tableau : a-t-il raison ? (erreur de ligne ou de colonne) */
+function genLireErreur(): Q {
+  const t = tirerTab(sitAuHasard(), 4, 4);
+  const i = randomInt(0, 3);
+  const j = randomInt(0, 3);
+  const pr = randomChoice(PRENOMS);
+  const elle = pr.f ? "elle" : "il";
+  const juste = Math.random() < 0.4;
+  const erreurColonne = Math.random() < 0.5;
+  const jFaux = autre(4, j);
+  const iFaux = autre(4, i);
+  const lu = juste ? t.v[i][j] : erreurColonne ? t.v[i][jFaux] : t.v[iFaux][j];
+  const ou = erreurColonne
+    ? `la colonne ${guil(t.C[jFaux].label)} au lieu de ${guil(t.C[j].label)}`
+    : `la ligne ${guil(t.L[iFaux].label)} au lieu de ${guil(t.L[i].label)}`;
+  return {
+    text: `${t.sit.intro} ${pr.p} dit : « ${nb(t, lu)} ${t.sit.verbe} ${t.L[i].gn} ${t.C[j].gn}. » A-t-${elle} raison ?`,
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: [juste ? "oui" : "non"],
+    comparator: "mcq_exact",
+    explanation: juste
+      ? `Oui. Au croisement de ${lc(t, i, j)}, on lit bien ${t.v[i][j]}.`
+      : `Non. Au croisement de ${lc(t, i, j)}, on lit ${t.v[i][j]}, pas ${lu}. ${maj(elle)} a lu ${ou}.`,
+    canvas: canvasTab(t),
+  };
+}
+
+/** ★3 — où se trouve ce nombre dans tout le tableau ? */
+function genLireOu(): Q {
+  const t = tirerTab(sitAuHasard(), 4, 4);
+  const i = randomInt(0, 3);
+  const j = randomInt(0, 3);
+  const x = t.v[i][j];
+  const rep = (a: number, b: number) => `${t.L[a].label} et ${t.C[b].label}`;
+  const bon = rep(i, j);
+  return {
+    text: `${t.sit.intro} Dans quelle case lit-on ${x} ? Donne sa ligne et sa colonne.`,
+    format: "qcm",
+    choices: makeChoices(bon, [rep(autre(4, i), j), rep(i, autre(4, j)), rep(autre(4, i), autre(4, j))]),
+    expected: [bon],
+    comparator: "mcq_exact",
+    explanation: `On parcourt le tableau : ${x} est au croisement de ${lc(t, i, j)}. Cela veut dire que ${nb(t, x)} ${t.sit.verbe} ${t.L[i].gn} ${t.C[j].gn}.`,
+    canvas: canvasTab(t),
+  };
+}
+
+// ------------------------------------------------------------
+// TABLEAU_COMPLETER
+// ------------------------------------------------------------
+
+/** ★1 — placer une information de l'énoncé dans la bonne case (deux « ? »). */
+function genCompleterPlacer(): Q {
+  const t = tirerTab(sitAuHasard(), 3, 3);
+  const i = randomInt(0, 2);
+  const j = randomInt(0, 2);
+  const i2 = autre(3, i);
+  const j2 = autre(3, j);
+  const x = t.v[i][j];
+  const pos = (a: number, b: number) => `ligne ${guil(t.L[a].label)}, colonne ${guil(t.C[b].label)}`;
+  const bon = pos(i, j);
+  if (Math.random() < 0.5) {
+    return {
+      text: `${t.sit.intro} Deux cases sont vides. On sait que ${nb(t, x)} ${t.sit.verbe} ${t.L[i].gn} ${t.C[j].gn}. Dans quelle case écrire ${x} ?`,
+      format: "qcm",
+      choices: makeChoices(bon, [pos(i2, j2), pos(i, j2), pos(i2, j)]),
+      expected: [bon],
+      comparator: "mcq_exact",
+      explanation: `${maj(t.L[i].gn)} : c'est la ligne ${guil(t.L[i].label)}. ${maj(t.C[j].gn)} : c'est la colonne ${guil(t.C[j].label)}. On écrit ${x} au croisement.`,
+      canvas: canvasTab(t, { cache: [{ i, j }, { i: i2, j: j2 }] }),
+    };
+  }
+  return {
+    text: `${t.sit.intro} Une case est vide. On sait que ${nb(t, x)} ${t.sit.verbe} ${t.L[i].gn} ${t.C[j].gn}. Quel nombre faut-il écrire à la place du « ? » ?`,
+    format: "qcm",
+    choices: choixNombres(x, [t.v[i][j2], t.v[i2][j], t.v[i2][j2]], t.sit.pas),
+    expected: [String(x)],
+    comparator: "mcq_exact",
+    explanation: `Le « ? » est au croisement de ${lc(t, i, j)}. L'énoncé le dit : ${nb(t, x)} ${t.sit.verbe} ${t.L[i].gn} ${t.C[j].gn}. On écrit ${x}.`,
+    canvas: canvasTab(t, { cache: [{ i, j }] }),
+  };
+}
+
+/** ★1 — que représente la case « ? » ? */
+function genCompleterSens(): Q {
+  const t = tirerTab(sitAuHasard(), 3, 3);
+  const i = randomInt(0, 2);
+  const j = randomInt(0, 2);
+  const i2 = autre(3, i);
+  const j2 = autre(3, j);
+  const sens = (a: number, b: number) => `le nombre ${t.sit.de} ${t.L[a].gn} ${t.C[b].gn}`;
+  const bon = sens(i, j);
+  return {
+    text: `${t.sit.intro} Que faut-il écrire à la place du « ? » ?`,
+    format: "qcm",
+    choices: makeChoices(bon, [sens(i2, j), sens(i, j2), sens(i2, j2)]),
+    expected: [bon],
+    comparator: "mcq_exact",
+    explanation: `Le « ? » est au croisement de ${lc(t, i, j)}. Il faut donc y écrire ${bon}.`,
+    canvas: canvasTab(t, { cache: [{ i, j }] }),
+  };
+}
+
+/** ★2 — case manquante d'une ligne dont le total est connu. */
+function genCompleterParTotal(): Q {
+  const t = tirerTab(sitAuHasard(), 3, 3);
+  const i = randomInt(0, 2);
+  const j = randomInt(0, 2);
+  const x = t.v[i][j];
+  const tot = somme(t.v[i]);
+  const autres = t.v[i].filter((_, k) => k !== j);
+  const so = somme(autres);
+  return {
+    text: `${t.sit.intro} Sur la ligne ${guil(t.L[i].label)}, le total est ${tot}. Quel nombre manque à la place du « ? » ?`,
+    format: "qcm",
+    choices: choixNombres(x, [tot + so, so, tot - autres[0]], t.sit.pas),
+    expected: [String(x)],
+    comparator: "mcq_exact",
+    explanation: `On additionne les cases connues : ${autres.join(" + ")} = ${so}. Puis on retire au total : ${tot} − ${so} = ${x}. Vérification : ${t.v[i].join(" + ")} = ${tot}.`,
+    canvas: canvasTab(t, { cache: [{ i, j }], totalLigne: true }),
+  };
+}
+
+/** ★2 — case manquante décrite par une phrase (« de plus », « de moins »). */
+function genCompleterPhrase(): Q {
+  const t = tirerTab(sitAuHasard(), 3, 3);
+  const i = randomInt(0, 2);
+  const j = randomInt(0, 2);
+  const j2 = autre(3, j);
+  const x = t.v[i][j];
+  const ref = t.v[i][j2];
+  const d = Math.abs(x - ref);
+  const plus = x > ref;
+  return {
+    text: `${t.sit.intro} ${debutLigne(t, i)}, il y en a ${d} de ${plus ? "plus" : "moins"} ${t.C[j].gn} ${que(t.C[j2].gn)}. Quel nombre faut-il écrire à la place du « ? » ?`,
+    format: "qcm",
+    choices: choixNombres(x, [plus ? ref - d : ref + d, d, ref], t.sit.pas),
+    expected: [String(x)],
+    comparator: "mcq_exact",
+    explanation: `${maj(t.C[j2].gn)}, on lit ${ref}. ${plus ? `${d} de plus : ${ref} + ${d} = ${x}` : `${d} de moins : ${ref} − ${d} = ${x}`}. On écrit ${x}.`,
+    canvas: canvasTab(t, { cache: [{ i, j }] }),
+  };
+}
+
+/** ★3 — compléter une case « Total » de ligne ou de colonne (3 ou 4 nombres). */
+function genCompleterTotal(): Q {
+  const nl = randomInt(3, 4);
+  const nc = randomInt(3, 4);
+  const t = tirerTab(sitAuHasard(), nl, nc);
+  const ligne = Math.random() < 0.5;
+  const k = ligne ? randomInt(0, nl - 1) : randomInt(0, nc - 1);
+  const xs = ligne ? ligneDe(t, k) : colDe(t, k);
+  const tot = somme(xs);
+  const nomCase = ligne ? `ligne ${guil(t.L[k].label)}` : `colonne ${guil(t.C[k].label)}`;
+  const quoi = ligne ? t.L[k].gn : t.C[k].gn;
+  return {
+    text: `${t.sit.intro} Quel total faut-il écrire pour la ${nomCase} ? C'est le nombre ${t.sit.de} ${quoi} en tout.`,
+    format: "qcm",
+    choices: choixNombres(tot, [tot - xs[xs.length - 1], tot + 10, tot - 10, Math.max(...xs)], t.sit.pas),
+    expected: [String(tot)],
+    comparator: "mcq_exact",
+    explanation: `On additionne toutes les cases de la ${nomCase} : ${xs.join(" + ")} = ${tot}. On écrit ${tot}.`,
+    canvas: canvasTab(t, ligne
+      ? { totalLigne: true, cacheTotal: { ligne: k } }
+      : { totalCol: true, cacheTotal: { col: k } }),
+  };
+}
+
+/** ★3 — le total général, à partir des totaux de lignes. */
+function genCompleterTotalGeneral(): Q {
+  const t = tirerTab(sitAuHasard(), 3, 3);
+  const tl = t.v.map(somme);
+  const g = somme(tl);
+  return {
+    text: `${t.sit.intro} Les totaux des lignes sont écrits. Quel nombre faut-il écrire dans la case « ? » du total général ?`,
+    format: "qcm",
+    choices: choixNombres(g, [tl[0] + tl[1], g - 10, g + 10, Math.max(...tl)], t.sit.pas),
+    expected: [String(g)],
+    comparator: "mcq_exact",
+    explanation: `Le total général, c'est tout le tableau. On additionne les totaux des lignes : ${tl.join(" + ")} = ${g}. On peut vérifier avec les totaux des colonnes : ${t.C.map((_, j) => somme(colDe(t, j))).join(" + ")} = ${g}.`,
+    canvas: canvasTab(t, { totalLigne: true, totalCol: true, cacheTotal: { general: true } }),
+  };
+}
+
+/** ★4 — case manquante par le total de COLONNE (4 lignes), deux tournures. */
+function genCompleterColonne(): Q {
+  const t = tirerTab(sitAuHasard(), 4, 3);
+  const i = randomInt(0, 3);
+  const j = randomInt(0, 2);
+  const x = t.v[i][j];
+  const xs = colDe(t, j);
+  const tot = somme(xs);
+  const autres = xs.filter((_, k) => k !== i);
+  const so = somme(autres);
+  const text = randomChoice([
+    () => `${t.sit.intro} ${maj(t.C[j].gn)}, le total est ${tot}. Combien ${t.sit.de} ${t.sit.verbe} ${t.L[i].gn} ${t.C[j].gn} ?`,
+    () => `${t.sit.intro} Une case de la colonne ${guil(t.C[j].label)} est effacée. Le total de cette colonne est ${tot}. Quel nombre manque ?`,
+  ])();
+  return {
+    text,
+    format: "qcm",
+    choices: choixNombres(x, [tot + so, so, tot - autres[0] - autres[1]], t.sit.pas),
+    expected: [String(x)],
+    comparator: "mcq_exact",
+    explanation: `Cases connues de la colonne ${guil(t.C[j].label)} : ${autres.join(" + ")} = ${so}. Il manque ${tot} − ${so} = ${x}.`,
+    canvas: canvasTab(t, { cache: [{ i, j }], totalCol: true }),
+  };
+}
+
+/** ★4 — deux étapes : la case « ? » par sa colonne, puis le total de sa ligne. */
+function genCompleterDeuxEtapes(): Q {
+  const t = tirerTab(sitAuHasard(), 3, 3);
+  const i = randomInt(0, 2);
+  const j = randomInt(0, 2);
+  const x = t.v[i][j];
+  const totC = somme(colDe(t, j));
+  const totL = somme(t.v[i]);
+  const autresC = colDe(t, j).filter((_, k) => k !== i);
+  const autresL = t.v[i].filter((_, k) => k !== j);
+  return {
+    text: `${t.sit.intro} Deux cases sont effacées sur la ligne ${guil(t.L[i].label)} : une case et son total. Quel est le total de la ligne ${guil(t.L[i].label)} ?`,
+    format: "qcm",
+    choices: choixNombres(totL, [somme(autresL), x, totC, totL + 10], t.sit.pas),
+    expected: [String(totL)],
+    comparator: "mcq_exact",
+    explanation: `Étape 1 : la colonne ${guil(t.C[j].label)} a pour total ${totC}. Donc la case effacée vaut ${totC} − ${autresC.join(" − ")} = ${x}. Étape 2 : total de la ligne : ${t.v[i].join(" + ")} = ${totL}.`,
+    canvas: canvasTab(t, { cache: [{ i, j }], totalLigne: true, totalCol: true, cacheTotal: { ligne: i } }),
+  };
+}
+
+// ------------------------------------------------------------
+// TABLEAU_INTERPRETER
+// ------------------------------------------------------------
+
+/** ★1 — le plus / le moins sur UNE ligne (lire puis comparer). */
+function genInterpMaxLigne(): Q {
+  const t = tirerTab(sitAuHasard(), 3, 4);
+  const i = randomInt(0, 2);
+  const xs = t.v[i];
+  const plus = Math.random() < 0.5;
+  const cible = plus ? Math.max(...xs) : Math.min(...xs);
+  const bon = t.C[xs.indexOf(cible)].label;
+  return {
+    text: `${t.sit.intro} ${debutLigne(t, i)}, ${quel(t.sit.cNom)} ${t.sit.cNom.mot} a le ${plus ? "plus" : "moins"} ${t.sit.de} ?`,
+    format: "qcm",
+    choices: makeChoices(bon, t.C.map((k) => k.label)),
+    expected: [bon],
+    comparator: "mcq_exact",
+    explanation: `Ligne ${guil(t.L[i].label)} : ${t.C.map((k, j) => `${k.label} ${xs[j]}`).join(", ")}. Le ${plus ? "plus grand" : "plus petit"} nombre est ${cible}, dans la colonne ${guil(bon)}.`,
+    canvas: canvasTab(t, { highlight: { row: i } }),
+  };
+}
+
+/** ★1 — comparer deux cases d'une même colonne. */
+function genInterpComparer(): Q {
+  const t = tirerTab(sitAuHasard(), 3, 3);
+  const j = randomInt(0, 2);
+  const i = randomInt(0, 2);
+  const i2 = autre(3, i);
+  const a = t.v[i][j];
+  const b = t.v[i2][j];
+  const bon = a > b ? t.L[i].label : t.L[i2].label;
+  return {
+    text: `${t.sit.intro} ${maj(t.C[j].gn)}, où y a-t-il le plus ${t.sit.de} : ${guil(t.L[i].label)} ou ${guil(t.L[i2].label)} ?`,
+    format: "qcm",
+    choices: makeChoices(bon, [t.L[i].label, t.L[i2].label, "Autant aux deux"]),
+    expected: [bon],
+    comparator: "mcq_exact",
+    explanation: `Colonne ${guil(t.C[j].label)} : ${t.L[i].label} ${a}, ${t.L[i2].label} ${b}. Comme ${Math.max(a, b)} > ${Math.min(a, b)}, la réponse est ${guil(bon)}.`,
+    canvas: canvasTab(t, { highlight: { col: j } }),
+  };
+}
+
+/** ★2 — « combien de plus » entre deux cases d'une même ligne ou colonne. */
+function genInterpEcart(): Q {
+  const t = tirerTab(sitAuHasard(), 3, 4);
+  const ligne = Math.random() < 0.5;
+  let a: number, b: number, text: string, ctx: string;
+  if (ligne) {
+    const i = randomInt(0, 2);
+    const [j1, j2] = shuffle([0, 1, 2, 3]).slice(0, 2);
+    a = Math.max(t.v[i][j1], t.v[i][j2]);
+    b = Math.min(t.v[i][j1], t.v[i][j2]);
+    const jg = t.v[i][j1] > t.v[i][j2] ? j1 : j2;
+    const jp = jg === j1 ? j2 : j1;
+    ctx = `${t.C[jg].label} ${a}, ${t.C[jp].label} ${b}`;
+    text = `${t.sit.intro} ${debutLigne(t, i)}, combien ${t.sit.de} de plus ${t.C[jg].gn} ${que(t.C[jp].gn)} ?`;
+  } else {
+    const j = randomInt(0, 3);
+    const [i1, i2] = shuffle([0, 1, 2]).slice(0, 2);
+    a = Math.max(t.v[i1][j], t.v[i2][j]);
+    b = Math.min(t.v[i1][j], t.v[i2][j]);
+    const ig = t.v[i1][j] > t.v[i2][j] ? i1 : i2;
+    const ip = ig === i1 ? i2 : i1;
+    ctx = `${t.L[ig].label} ${a}, ${t.L[ip].label} ${b}`;
+    text = `${t.sit.intro} ${maj(t.C[j].gn)}, combien ${t.sit.de} de plus ${t.L[ig].gn} ${que(t.L[ip].gn)} ?`;
+  }
+  const d = a - b;
+  return {
+    text,
+    format: "qcm",
+    choices: choixNombres(d, [a + b, a, b, d + 10], t.sit.pas),
+    expected: [String(d)],
+    comparator: "mcq_exact",
+    explanation: `On lit : ${ctx}. Pour savoir combien de plus, on soustrait : ${a} − ${b} = ${d}.`,
+    canvas: canvasTab(t),
+  };
+}
+
+/** ★2 — le plus / le moins sur UNE colonne (4 lignes). */
+function genInterpMaxColonne(): Q {
+  const t = tirerTab(sitAuHasard(), 4, 3);
+  const j = randomInt(0, 2);
+  const xs = colDe(t, j);
+  const plus = Math.random() < 0.5;
+  const cible = plus ? Math.max(...xs) : Math.min(...xs);
+  const bon = t.L[xs.indexOf(cible)].label;
+  return {
+    text: `${t.sit.intro} ${maj(t.C[j].gn)}, ${quel(t.sit.lNom)} ${t.sit.lNom.mot} a le ${plus ? "plus" : "moins"} ${t.sit.de} ?`,
+    format: "qcm",
+    choices: makeChoices(bon, t.L.map((k) => k.label)),
+    expected: [bon],
+    comparator: "mcq_exact",
+    explanation: `Colonne ${guil(t.C[j].label)} : ${t.L.map((k, i) => `${k.label} ${xs[i]}`).join(", ")}. Le ${plus ? "plus grand" : "plus petit"} nombre est ${cible} : c'est ${guil(bon)}.`,
+    canvas: canvasTab(t),
+  };
+}
+
+/** ★3 — un total à calculer (ligne ou colonne), sans colonne « Total ». */
+function genInterpTotal(): Q {
+  const t = tirerTab(sitAuHasard(), 3, 4);
+  const ligne = Math.random() < 0.5;
+  const k = ligne ? randomInt(0, 2) : randomInt(0, 3);
+  const xs = ligne ? t.v[k] : colDe(t, k);
+  const tot = somme(xs);
+  const gn = ligne ? t.L[k].gn : t.C[k].gn;
+  const text = randomChoice([
+    () => `${t.sit.intro} Combien ${t.sit.de} ${t.sit.verbe} ${gn} en tout ?`,
+    () => `${t.sit.intro} ${maj(gn)}, quel est le nombre total ${t.sit.de} ?`,
+  ])();
+  return {
+    text,
+    format: "qcm",
+    choices: choixNombres(tot, [tot - xs[0], tot + 10, tot - 10, Math.max(...xs)], t.sit.pas),
+    expected: [String(tot)],
+    comparator: "mcq_exact",
+    explanation: `On additionne la ${ligne ? `ligne ${guil(t.L[k].label)}` : `colonne ${guil(t.C[k].label)}`} : ${xs.join(" + ")} = ${tot}. Donc ${nb(t, tot)} en tout.`,
+    canvas: canvasTab(t, ligne ? { highlight: { row: k } } : { highlight: { col: k } }),
+  };
+}
+
+/** ★3 — écart entre deux cases qui ne sont ni sur la même ligne ni sur la même colonne. */
+function genInterpEcartCroise(): Q {
+  const t = tirerTab(sitAuHasard(), 3, 3);
+  const i1 = randomInt(0, 2);
+  const i2 = autre(3, i1);
+  const j1 = randomInt(0, 2);
+  const j2 = autre(3, j1);
+  const x1 = t.v[i1][j1];
+  const x2 = t.v[i2][j2];
+  const [ig, jg, ip, jp] = x1 > x2 ? [i1, j1, i2, j2] : [i2, j2, i1, j1];
+  const a = t.v[ig][jg];
+  const b = t.v[ip][jp];
+  const d = a - b;
+  return {
+    text: `${t.sit.intro} Combien ${t.sit.de} de plus ${t.L[ig].gn} ${t.C[jg].gn} ${que(t.L[ip].gn)} ${t.C[jp].gn} ?`,
+    format: "qcm",
+    choices: choixNombres(d, [a + b, Math.abs(t.v[ig][jp] - b), Math.abs(a - t.v[ip][jg]), d + 10], t.sit.pas),
+    expected: [String(d)],
+    comparator: "mcq_exact",
+    explanation: `${maj(t.L[ig].gn)} ${t.C[jg].gn} : ${a}. ${maj(t.L[ip].gn)} ${t.C[jp].gn} : ${b}. Écart : ${a} − ${b} = ${d}.`,
+    canvas: canvasTab(t),
+  };
+}
+
+/** Tire un tableau dont les totaux de lignes (ou de colonnes) sont tous différents. */
+function tirerTabTotauxDistincts(nl: number, nc: number, parLigne: boolean): Tab {
+  for (let essai = 0; essai < 50; essai++) {
+    const t = tirerTab(sitAuHasard(), nl, nc);
+    const tots = parLigne ? t.v.map(somme) : t.C.map((_, j) => somme(colDe(t, j)));
+    if (new Set(tots).size === tots.length) return t;
+  }
+  return tirerTab(sitAuHasard(), nl, nc);
+}
+
+/** ★4 — vrai ou faux : une affirmation qui demande de calculer deux totaux. */
+function genInterpVraiFaux(): Q {
+  const t = tirerTabTotauxDistincts(3, 3, true);
+  const i1 = randomInt(0, 2);
+  const i2 = autre(3, i1);
+  const s1 = somme(t.v[i1]);
+  const s2 = somme(t.v[i2]);
+  const pr = randomChoice(PRENOMS);
+  const elle = pr.f ? "elle" : "il";
+  const vrai = s1 > s2;
+  return {
+    text: `${t.sit.intro} ${pr.p} dit : « En tout, il y en a plus ${t.L[i1].gn} ${que(t.L[i2].gn)}. » A-t-${elle} raison ?`,
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: [vrai ? "oui" : "non"],
+    comparator: "mcq_exact",
+    explanation: `On calcule les deux totaux. ${t.L[i1].label} : ${t.v[i1].join(" + ")} = ${s1}. ${t.L[i2].label} : ${t.v[i2].join(" + ")} = ${s2}. ${vrai ? `${s1} > ${s2} : oui, ${elle} a raison.` : `${s1} < ${s2} : non, ${elle} se trompe.`}`,
+    canvas: canvasTab(t),
+  };
+}
+
+/** ★4 — quelle ligne a le plus grand TOTAL (le piège : la plus grande case). */
+function genInterpMeilleurTotal(): Q {
+  let t = tirerTabTotauxDistincts(4, 3, true);
+  for (let essai = 0; essai < 30; essai++) {
+    const tots = t.v.map(somme);
+    const iTot = tots.indexOf(Math.max(...tots));
+    const iCase = t.v.findIndex((r) => r.includes(Math.max(...t.v.flat())));
+    if (iTot !== iCase) break;
+    t = tirerTabTotauxDistincts(4, 3, true);
+  }
+  const tots = t.v.map(somme);
+  const plus = Math.random() < 0.6;
+  const cible = plus ? Math.max(...tots) : Math.min(...tots);
+  const bon = t.L[tots.indexOf(cible)].label;
+  return {
+    text: `${t.sit.intro} En tout, ${quel(t.sit.lNom)} ${t.sit.lNom.mot} a le ${plus ? "plus" : "moins"} ${t.sit.de} ?`,
+    format: "qcm",
+    choices: makeChoices(bon, t.L.map((k) => k.label)),
+    expected: [bon],
+    comparator: "mcq_exact",
+    explanation: `On calcule le total de chaque ligne : ${t.L.map((k, i) => `${k.label} ${t.v[i].join(" + ")} = ${tots[i]}`).join(" ; ")}. Le ${plus ? "plus grand" : "plus petit"} total est ${cible} : ${guil(bon)}.${plus ? " Attention : la plus grande case seule ne suffit pas." : ""}`,
+    canvas: canvasTab(t),
+  };
+}
+
+// ------------------------------------------------------------
+// TABLEAU_DEFI
+// ------------------------------------------------------------
+
+/** ★4 — le total de tout le tableau (3 × 3). */
+function genDefiTotalGeneral(): Q {
+  const t = tirerTab(sitAuHasard(), 3, 3);
+  const tl = t.v.map(somme);
+  const g = somme(tl);
+  return {
+    text: `${t.sit.intro} Combien ${t.sit.de} en tout dans le tableau ?`,
+    format: "qcm",
+    choices: choixNombres(g, [tl[0] + tl[1], g - 10, g + 10, tl[2] * 3], t.sit.pas),
+    expected: [String(g)],
+    comparator: "mcq_exact",
+    explanation: `On calcule le total de chaque ligne : ${t.L.map((k, i) => `${k.label} ${t.v[i].join(" + ")} = ${tl[i]}`).join(" ; ")}. Puis ${tl.join(" + ")} = ${g}.`,
+    canvas: canvasTab(t),
+  };
+}
+
+/** ★4 — quelle colonne a le plus grand total ? (piège : la plus grande case) */
+function genDefiMeilleureColonne(): Q {
+  let t = tirerTabTotauxDistincts(3, 4, false);
+  for (let essai = 0; essai < 30; essai++) {
+    const tots = t.C.map((_, j) => somme(colDe(t, j)));
+    const jTot = tots.indexOf(Math.max(...tots));
+    const big = Math.max(...t.v.flat());
+    const jCase = t.v.map((r) => r.indexOf(big)).find((x) => x >= 0) ?? -1;
+    if (jTot !== jCase) break;
+    t = tirerTabTotauxDistincts(3, 4, false);
+  }
+  const tots = t.C.map((_, j) => somme(colDe(t, j)));
+  const g = Math.max(...tots);
+  const bon = t.C[tots.indexOf(g)].label;
+  return {
+    text: `${t.sit.intro} En additionnant chaque colonne, ${quel(t.sit.cNom)} ${t.sit.cNom.mot} a le plus ${t.sit.de} en tout ?`,
+    format: "qcm",
+    choices: makeChoices(bon, t.C.map((k) => k.label)),
+    expected: [bon],
+    comparator: "mcq_exact",
+    explanation: `On calcule le total de chaque colonne : ${t.C.map((k, j) => `${k.label} ${colDe(t, j).join(" + ")} = ${tots[j]}`).join(" ; ")}. Le plus grand total est ${g} : ${guil(bon)}. La plus grande case seule ne suffit pas.`,
+    canvas: canvasTab(t),
+  };
+}
+
+/** ★4 — un objectif à atteindre : combien en manque-t-il ? */
+// Un objectif n'a de sens que pour ce qu'on cherche à atteindre (ventes, ramassage…),
+// pas pour la pluie, les naissances ou les tortues.
+const SANS_OBJECTIF = ["tortues", "mm", "oiseaux", "animaux", "interventions", "orchidées", "étoiles filantes", "bébés"];
+function genDefiObjectif(): Q {
+  const t = tirerTab(randomChoice(SITS.filter((x) => !SANS_OBJECTIF.includes(x.unite))), 3, 3);
+  const i = randomInt(0, 2);
+  const tot = somme(t.v[i]);
+  const palier = tot < 100 ? 10 : 50;
+  const obj = (Math.floor(tot / palier) + randomInt(1, 3)) * palier;
+  const manque = obj - tot;
+  return {
+    text: `${t.sit.intro} ${debutLigne(t, i)}, on voulait atteindre ${nb(t, obj)} en tout sur ces trois ${pluriel(t.sit.cNom.mot)}. Combien en manque-t-il ?`,
+    format: "qcm",
+    choices: choixNombres(manque, [obj + tot, tot, manque + 10, obj - Math.max(...t.v[i])], t.sit.pas),
+    expected: [String(manque)],
+    comparator: "mcq_exact",
+    explanation: `Étape 1 : total ${t.L[i].gn} : ${t.v[i].join(" + ")} = ${tot}. Étape 2 : ${obj} − ${tot} = ${manque}. Il en manque ${manque}.`,
+    canvas: canvasTab(t),
+  };
+}
+
+/** ★5 — deux cases « ? » sur une ligne : l'une par sa colonne, l'autre par la ligne. */
+function genDefiDeuxInconnues(): Q {
+  const t = tirerTab(sitAuHasard(), 3, 3);
+  const i = randomInt(0, 2);
+  const [ja, jb] = shuffle([0, 1, 2]).slice(0, 2);
+  const totCa = somme(colDe(t, ja));
+  const autresCa = colDe(t, ja).filter((_, k) => k !== i);
+  const xa = t.v[i][ja];
+  const xb = t.v[i][jb];
+  const totL = somme(t.v[i]);
+  const jc = 3 - ja - jb;
+  return {
+    text: `${t.sit.intro} Sur la ligne ${guil(t.L[i].label)}, deux cases sont effacées. Quel nombre faut-il écrire dans la colonne ${guil(t.C[jb].label)} ?`,
+    format: "qcm",
+    choices: choixNombres(xb, [xa, totL - t.v[i][jc], totL - xa, xb + 10], t.sit.pas),
+    expected: [String(xb)],
+    comparator: "mcq_exact",
+    explanation: `Étape 1 : colonne ${guil(t.C[ja].label)}, total ${totCa}. La case effacée vaut ${totCa} − ${autresCa.join(" − ")} = ${xa}. Étape 2 : ligne ${guil(t.L[i].label)}, total ${totL}. La case cherchée vaut ${totL} − ${xa} − ${t.v[i][jc]} = ${xb}.`,
+    canvas: (() => {
+      const cv = canvasTab(t, { cache: [{ i, j: ja }, { i, j: jb }], totalLigne: true, totalCol: true });
+      // La colonne de la 2e case n'a pas de total : sinon une seule étape suffit.
+      cv.rows[cv.rows.length - 1].values[jb] = "?";
+      return cv;
+    })(),
+  };
+}
+
+/** ★5 — écart entre deux TOTAUX (deux lignes ou deux colonnes). */
+function genDefiEcartTotaux(): Q {
+  const ligne = Math.random() < 0.5;
+  const t = tirerTabTotauxDistincts(3, 3, ligne);
+  const tots = ligne ? t.v.map(somme) : t.C.map((_, j) => somme(colDe(t, j)));
+  const [k1, k2] = shuffle([0, 1, 2]).slice(0, 2);
+  const [g, p] = tots[k1] > tots[k2] ? [k1, k2] : [k2, k1];
+  const d = tots[g] - tots[p];
+  const gnG = ligne ? t.L[g].gn : t.C[g].gn;
+  const gnP = ligne ? t.L[p].gn : t.C[p].gn;
+  const xsG = ligne ? t.v[g] : colDe(t, g);
+  const xsP = ligne ? t.v[p] : colDe(t, p);
+  return {
+    text: `${t.sit.intro} En tout, combien ${t.sit.de} de plus ${gnG} ${que(gnP)} ?`,
+    format: "qcm",
+    choices: choixNombres(d, [tots[g] + tots[p], tots[g], Math.abs(xsG[0] - xsP[0]), d + 10], t.sit.pas),
+    expected: [String(d)],
+    comparator: "mcq_exact",
+    explanation: `Étape 1 : ${xsG.join(" + ")} = ${tots[g]} et ${xsP.join(" + ")} = ${tots[p]}. Étape 2 : ${tots[g]} − ${tots[p]} = ${d}.`,
+    canvas: canvasTab(t),
+  };
+}
+
+/** ★5 — regrouper quatre cases (deux lignes × deux colonnes). */
+function genDefiRegrouper(): Q {
+  const t = tirerTab(sitAuHasard(), 3, 4);
+  const [i1, i2] = shuffle([0, 1, 2]).slice(0, 2).sort();
+  const [j1, j2] = shuffle([0, 1, 2, 3]).slice(0, 2).sort();
+  const xs = [t.v[i1][j1], t.v[i1][j2], t.v[i2][j1], t.v[i2][j2]];
+  const s = somme(xs);
+  return {
+    text: `${t.sit.intro} Combien ${t.sit.de} ${t.L[i1].gn} et ${t.L[i2].gn}, ${t.C[j1].gn} et ${t.C[j2].gn}, en tout ?`,
+    format: "qcm",
+    choices: choixNombres(s, [xs[0] + xs[1], xs[0] + xs[2], s + 10, s - xs[3]], t.sit.pas),
+    expected: [String(s)],
+    comparator: "mcq_exact",
+    explanation: `On prend les quatre cases : ${t.L[i1].label} (${xs[0]} et ${xs[1]}) et ${t.L[i2].label} (${xs[2]} et ${xs[3]}). ${xs.join(" + ")} = ${s}.`,
+    canvas: canvasTab(t),
+  };
+}
+
+/** Un gabarit de la notion « tableau » (CM2). */
+function tpl(
+  id: string,
+  microId: string,
+  difficulty: 1 | 2 | 3 | 4 | 5,
+  hint: string,
+  tags: string[],
+  generate: () => Q,
+): TutorBankItemV4 {
+  return {
+    kind: "template", id, niveau: "cm2", matiere: "maths", notionId: "tableau", microId, difficulty,
+    theme: "neutral", hint, tags: ["cm2", "tableau", ...tags, "template", "qcm", "canvas"], generate,
+  };
 }
 
 // ============================================================
@@ -560,34 +1631,9 @@ export const tableauxBank: TutorBankItemV4[] = [
     microId: "tableau_lire",
     difficulty: 2,
     theme: "neutral",
-    hint: "Lis la valeur sous l’activité demandée.",
+    hint: "Lis seulement la ligne (ou la colonne) donnée, et cherche le nombre.",
     tags: ["cm2", "tableau", "lire", "sport", "template", "qcm", "canvas"],
-    generate: () => {
-      const data = [
-        { label: "Football", value: 12, col: 0 },
-        { label: "Danse", value: 9, col: 1 },
-        { label: "Natation", value: 7, col: 2 },
-        { label: "Basket", value: 10, col: 3 },
-      ];
-
-      const item = randomChoice(data);
-
-      return {
-        text: `Combien d’élèves ont choisi ${item.label.toLowerCase()} ?`,
-        format: "qcm",
-        choices: makeChoices(String(item.value), ["7", "9", "10", "12", "14"]),
-        expected: [String(item.value)],
-        comparator: "mcq_exact",
-        explanation:
-          `On lit la colonne “${item.label}”. La valeur indiquée est ${item.value}.`,
-        canvas: tableauSportCanvas({
-          cell: {
-            row: 0,
-            col: item.col,
-          },
-        }),
-      };
-    },
+    generate: genLireInverse,
   },
 
   {
@@ -599,38 +1645,9 @@ export const tableauxBank: TutorBankItemV4[] = [
     microId: "tableau_lire",
     difficulty: 2,
     theme: "reunion",
-    hint: "Cherche d’abord le fruit, puis le jour.",
+    hint: "Repère la ligne, puis la colonne : la réponse est au croisement.",
     tags: ["cm2", "tableau", "lire", "fruits", "reunion", "template", "short", "canvas"],
-    generate: () => {
-      const items = [
-        { fruit: "ananas", row: 0, jour: "lundi", col: 0, value: 18 },
-        { fruit: "ananas", row: 0, jour: "mardi", col: 1, value: 24 },
-        { fruit: "ananas", row: 0, jour: "mercredi", col: 2, value: 20 },
-        { fruit: "bananes", row: 1, jour: "lundi", col: 0, value: 30 },
-        { fruit: "bananes", row: 1, jour: "mardi", col: 1, value: 28 },
-        { fruit: "bananes", row: 1, jour: "mercredi", col: 2, value: 35 },
-        { fruit: "mangues", row: 2, jour: "lundi", col: 0, value: 12 },
-        { fruit: "mangues", row: 2, jour: "mardi", col: 1, value: 15 },
-        { fruit: "mangues", row: 2, jour: "mercredi", col: 2, value: 18 },
-      ];
-
-      const item = randomChoice(items);
-
-      return {
-        text: `Combien de ${item.fruit} ont été vendues ${item.jour} ?`,
-        format: "short",
-        expected: [String(item.value)],
-        comparator: "number_equal",
-        explanation:
-          `On croise la ligne “${item.fruit}” avec la colonne “${item.jour}”. La valeur est ${item.value}.`,
-        canvas: tableauFruitsReunionCanvas({
-          cell: {
-            row: item.row,
-            col: item.col,
-          },
-        }),
-      };
-    },
+    generate: genLireGrandOuTotal,
   },
 
   {
@@ -642,27 +1659,9 @@ export const tableauxBank: TutorBankItemV4[] = [
     microId: "tableau_lire",
     difficulty: 3,
     theme: "neutral",
-    hint: "Une ligne se lit horizontalement ; une colonne se lit verticalement.",
+    hint: "Une ligne se lit de gauche à droite ; une colonne de haut en bas.",
     tags: ["cm2", "tableau", "lire", "ligne", "colonne", "template", "qcm", "canvas"],
-    generate: () => {
-      const askLine = Math.random() < 0.5;
-
-      return {
-        text: askLine
-          ? "Dans le tableau des fruits, que faut-il lire pour connaître toutes les ventes de bananes ?"
-          : "Dans le tableau des fruits, que faut-il lire pour connaître toutes les ventes du mardi ?",
-        format: "qcm",
-        choices: askLine
-          ? ["la ligne Bananes", "la colonne Mardi", "la ligne Ananas", "la colonne Mercredi"]
-          : ["la colonne Mardi", "la ligne Bananes", "la colonne Lundi", "la ligne Mangues"],
-        expected: [askLine ? "la ligne Bananes" : "la colonne Mardi"],
-        comparator: "mcq_exact",
-        explanation: askLine
-          ? "Pour connaître toutes les ventes de bananes, on lit la ligne “Bananes”."
-          : "Pour connaître toutes les ventes du mardi, on lit la colonne “Mardi”.",
-        canvas: tableauFruitsReunionCanvas(askLine ? { row: 1 } : { col: 1 }),
-      };
-    },
+    generate: genLireErreur,
   },
     // ============================================================
   // TABLEAU_COMPLETER
@@ -1036,38 +2035,9 @@ export const tableauxBank: TutorBankItemV4[] = [
     microId: "tableau_completer",
     difficulty: 2,
     theme: "reunion",
-    hint: "Croise la ligne du fruit avec la colonne du jour.",
+    hint: "Additionne les cases connues, puis retire-les au total.",
     tags: ["cm2", "tableau", "completer", "fruits", "template", "short", "canvas"],
-    generate: () => {
-      const items = [
-        { fruit: "ananas", row: 0, jour: "lundi", col: 0, value: 18 },
-        { fruit: "ananas", row: 0, jour: "mardi", col: 1, value: 24 },
-        { fruit: "ananas", row: 0, jour: "mercredi", col: 2, value: 20 },
-        { fruit: "bananes", row: 1, jour: "lundi", col: 0, value: 30 },
-        { fruit: "bananes", row: 1, jour: "mardi", col: 1, value: 28 },
-        { fruit: "bananes", row: 1, jour: "mercredi", col: 2, value: 35 },
-        { fruit: "mangues", row: 2, jour: "lundi", col: 0, value: 12 },
-        { fruit: "mangues", row: 2, jour: "mardi", col: 1, value: 15 },
-        { fruit: "mangues", row: 2, jour: "mercredi", col: 2, value: 18 },
-      ];
-
-      const item = randomChoice(items);
-
-      return {
-        text: `Une case est manquante : ${item.fruit} vendues ${item.jour}. Quelle valeur faut-il écrire ?`,
-        format: "short",
-        expected: [String(item.value)],
-        comparator: "number_equal",
-        explanation:
-          `On croise la ligne “${item.fruit}” avec la colonne “${item.jour}”. La valeur à écrire est ${item.value}.`,
-        canvas: tableauFruitsReunionCanvas({
-          cell: {
-            row: item.row,
-            col: item.col,
-          },
-        }),
-      };
-    },
+    generate: genCompleterParTotal,
   },
 
   {
@@ -1079,34 +2049,9 @@ export const tableauxBank: TutorBankItemV4[] = [
     microId: "tableau_completer",
     difficulty: 2,
     theme: "neutral",
-    hint: "Lis la colonne de l’activité demandée.",
+    hint: "Lis la case voisine, puis ajoute ou retire l'écart.",
     tags: ["cm2", "tableau", "completer", "sport", "template", "qcm", "canvas"],
-    generate: () => {
-      const items = [
-        { label: "Football", value: 12, col: 0 },
-        { label: "Danse", value: 9, col: 1 },
-        { label: "Natation", value: 7, col: 2 },
-        { label: "Basket", value: 10, col: 3 },
-      ];
-
-      const item = randomChoice(items);
-
-      return {
-        text: `Quelle valeur faut-il écrire pour l’activité “${item.label}” ?`,
-        format: "qcm",
-        choices: makeChoices(String(item.value), ["7", "9", "10", "12", "14"]),
-        expected: [String(item.value)],
-        comparator: "mcq_exact",
-        explanation:
-          `Dans la colonne “${item.label}”, la valeur à écrire est ${item.value}.`,
-        canvas: tableauSportCanvas({
-          cell: {
-            row: 0,
-            col: item.col,
-          },
-        }),
-      };
-    },
+    generate: genCompleterPhrase,
   },
 
   {
@@ -1118,45 +2063,9 @@ export const tableauxBank: TutorBankItemV4[] = [
     microId: "tableau_completer",
     difficulty: 3,
     theme: "neutral",
-    hint: "Un total s’obtient en additionnant les valeurs.",
+    hint: "Un total s'obtient en additionnant toutes les cases de la ligne ou de la colonne.",
     tags: ["cm2", "tableau", "completer", "total", "template", "short", "canvas"],
-    generate: () => {
-      const item = randomChoice([
-        {
-          text: "Quel total faut-il écrire pour les activités choisies ?",
-          values: [12, 9, 7, 10],
-          total: 38,
-          canvas: tableauSportCanvas,
-          explanation:
-            "On additionne les activités : 12 + 9 + 7 + 10 = 38.",
-        },
-        {
-          text: "Quel total faut-il écrire pour les livres lus ?",
-          values: [14, 22, 18, 9],
-          total: 63,
-          canvas: tableauBibliothequeCanvas,
-          explanation:
-            "On additionne les livres : 14 + 22 + 18 + 9 = 63.",
-        },
-        {
-          text: "Quel total faut-il écrire pour les menus choisis à la cantine ?",
-          values: [16, 14, 8, 12],
-          total: 50,
-          canvas: tableauCantineCanvas,
-          explanation:
-            "On additionne les menus : 16 + 14 + 8 + 12 = 50.",
-        },
-      ]);
-
-      return {
-        text: item.text,
-        format: "short",
-        expected: [String(item.total)],
-        comparator: "number_equal",
-        explanation: item.explanation,
-        canvas: item.canvas(),
-      };
-    },
+    generate: genCompleterTotal,
   },
 
   {
@@ -1168,24 +2077,9 @@ export const tableauxBank: TutorBankItemV4[] = [
     microId: "tableau_completer",
     difficulty: 4,
     theme: "neutral",
-    hint: "Additionne les valeurs connues, puis soustrais au total.",
+    hint: "Additionne les cases connues de la colonne, puis retire-les au total.",
     tags: ["cm2", "tableau", "completer", "difference", "template", "short"],
-    generate: () => {
-      const total = randomChoice([40, 45, 50]);
-      const a = randomInt(8, 14);
-      const b = randomInt(7, 12);
-      const c = randomInt(6, 10);
-      const missing = total - a - b - c;
-
-      return {
-        text: `Une enquête compte ${total} élèves. Trois choix ont déjà ${a}, ${b} et ${c} élèves. Combien d’élèves manque-t-il pour compléter le tableau ?`,
-        format: "short",
-        expected: [String(missing)],
-        comparator: "number_equal",
-        explanation:
-          `On additionne les valeurs connues : ${a} + ${b} + ${c} = ${a + b + c}. Puis on calcule ${total} - ${a + b + c} = ${missing}. Il manque donc ${missing} élèves.`,
-      };
-    },
+    generate: genCompleterColonne,
   },
     // ============================================================
   // TABLEAU_INTERPRETER
@@ -1609,23 +2503,9 @@ export const tableauxBank: TutorBankItemV4[] = [
     microId: "tableau_interpreter",
     difficulty: 2,
     theme: "neutral",
-    hint: "Cherche le plus grand nombre.",
+    hint: "Lis toute la colonne, puis compare les nombres.",
     tags: ["cm2", "tableau", "interpreter", "maximum", "template", "qcm", "canvas"],
-    generate: () => ({
-      text: "Quelle activité a été choisie par le plus d’élèves ?",
-      format: "qcm",
-      choices: shuffle(["Football", "Danse", "Natation", "Basket"]),
-      expected: ["Football"],
-      comparator: "mcq_exact",
-      explanation:
-        "On compare les valeurs : 12, 9, 7 et 10. Le plus grand nombre est 12, donc la réponse est Football.",
-      canvas: tableauSportCanvas({
-        cell: {
-          row: 0,
-          col: 0,
-        },
-      }),
-    }),
+    generate: genInterpMaxColonne,
   },
 
   {
@@ -1637,42 +2517,9 @@ export const tableauxBank: TutorBankItemV4[] = [
     microId: "tableau_interpreter",
     difficulty: 3,
     theme: "reunion",
-    hint: "Additionne les valeurs de la colonne demandée.",
+    hint: "Additionne toutes les cases de la ligne ou de la colonne.",
     tags: ["cm2", "tableau", "interpreter", "total", "fruits", "reunion", "template", "short", "canvas"],
-    generate: () => {
-      const item = randomChoice([
-        {
-          jour: "lundi",
-          col: 0,
-          values: [18, 30, 12],
-          total: 60,
-        },
-        {
-          jour: "mardi",
-          col: 1,
-          values: [24, 28, 15],
-          total: 67,
-        },
-        {
-          jour: "mercredi",
-          col: 2,
-          values: [20, 35, 18],
-          total: 73,
-        },
-      ]);
-
-      return {
-        text: `Combien de fruits ont été vendus au total ${item.jour} ?`,
-        format: "short",
-        expected: [String(item.total)],
-        comparator: "number_equal",
-        explanation:
-          `On additionne les valeurs de la colonne “${item.jour}” : ${item.values.join(" + ")} = ${item.total}.`,
-        canvas: tableauFruitsReunionCanvas({
-          col: item.col,
-        }),
-      };
-    },
+    generate: genInterpTotal,
   },
 
   {
@@ -1684,46 +2531,9 @@ export const tableauxBank: TutorBankItemV4[] = [
     microId: "tableau_interpreter",
     difficulty: 3,
     theme: "neutral",
-    hint: "Pour comparer deux valeurs, on peut soustraire.",
+    hint: "Lis les deux cases, puis soustrais la plus petite à la plus grande.",
     tags: ["cm2", "tableau", "interpreter", "difference", "template", "short", "canvas"],
-    generate: () => {
-      const item = randomChoice([
-        {
-          aName: "Football",
-          a: 12,
-          bName: "Natation",
-          b: 7,
-          diff: 5,
-          canvas: tableauSportCanvas,
-        },
-        {
-          aName: "BD",
-          a: 22,
-          bName: "Documentaires",
-          b: 9,
-          diff: 13,
-          canvas: tableauBibliothequeCanvas,
-        },
-        {
-          aName: "Cari",
-          a: 16,
-          bName: "Salade",
-          b: 8,
-          diff: 8,
-          canvas: tableauCantineCanvas,
-        },
-      ]);
-
-      return {
-        text: `Combien y a-t-il de différence entre ${item.aName} et ${item.bName} ?`,
-        format: "short",
-        expected: [String(item.diff)],
-        comparator: "number_equal",
-        explanation:
-          `On calcule la différence : ${item.a} - ${item.b} = ${item.diff}.`,
-        canvas: item.canvas(),
-      };
-    },
+    generate: genInterpEcartCroise,
   },
 
   {
@@ -1735,43 +2545,9 @@ export const tableauxBank: TutorBankItemV4[] = [
     microId: "tableau_interpreter",
     difficulty: 4,
     theme: "neutral",
-    hint: "Vérifie la lecture ou le calcul.",
+    hint: "Calcule les deux totaux avant de répondre.",
     tags: ["cm2", "tableau", "interpreter", "erreur", "template", "qcm", "canvas"],
-    generate: () => {
-      const item = randomChoice([
-        {
-          text: "Un élève dit que la natation est l’activité la plus choisie. A-t-il raison ?",
-          expected: "non",
-          explanation:
-            "Non. La natation a 7 élèves, alors que le football en a 12.",
-          canvas: tableauSportCanvas,
-        },
-        {
-          text: "Un élève dit que les BD sont les livres les plus lus. A-t-il raison ?",
-          expected: "oui",
-          explanation:
-            "Oui. Les BD ont la valeur 22, qui est la plus grande du tableau.",
-          canvas: tableauBibliothequeCanvas,
-        },
-        {
-          text: "Un élève dit que le menu Salade est le plus choisi. A-t-il raison ?",
-          expected: "non",
-          explanation:
-            "Non. Salade a 8 élèves, alors que Cari en a 16.",
-          canvas: tableauCantineCanvas,
-        },
-      ]);
-
-      return {
-        text: item.text,
-        format: "qcm",
-        choices: ["oui", "non"],
-        expected: [item.expected],
-        comparator: "mcq_exact",
-        explanation: item.explanation,
-        canvas: item.canvas(),
-      };
-    },
+    generate: genInterpVraiFaux,
   },
   // ============================================================
   // TABLEAU_DEFI
@@ -2060,45 +2836,9 @@ export const tableauxBank: TutorBankItemV4[] = [
     microId: "tableau_defi",
     difficulty: 4,
     theme: "reunion",
-    hint: "Additionne les valeurs de la ligne ou de la colonne demandée.",
+    hint: "Calcule le total de chaque ligne, puis additionne ces totaux.",
     tags: ["cm2", "tableau", "defi", "fruits", "total", "template", "short", "canvas"],
-    generate: () => {
-      const item = randomChoice([
-        {
-          text: "Combien d’ananas ont été vendus au total ?",
-          total: 62,
-          highlight: { row: 0 },
-          explanation: "On additionne la ligne Ananas : 18 + 24 + 20 = 62.",
-        },
-        {
-          text: "Combien de bananes ont été vendues au total ?",
-          total: 93,
-          highlight: { row: 1 },
-          explanation: "On additionne la ligne Bananes : 30 + 28 + 35 = 93.",
-        },
-        {
-          text: "Combien de fruits ont été vendus mardi ?",
-          total: 67,
-          highlight: { col: 1 },
-          explanation: "On additionne la colonne Mardi : 24 + 28 + 15 = 67.",
-        },
-        {
-          text: "Combien de fruits ont été vendus mercredi ?",
-          total: 73,
-          highlight: { col: 2 },
-          explanation: "On additionne la colonne Mercredi : 20 + 35 + 18 = 73.",
-        },
-      ]);
-
-      return {
-        text: item.text,
-        format: "short",
-        expected: [String(item.total)],
-        comparator: "number_equal",
-        explanation: item.explanation,
-        canvas: tableauFruitsReunionCanvas(item.highlight),
-      };
-    },
+    generate: genDefiTotalGeneral,
   },
 
   {
@@ -2110,50 +2850,9 @@ export const tableauxBank: TutorBankItemV4[] = [
     microId: "tableau_defi",
     difficulty: 4,
     theme: "neutral",
-    hint: "Compare les valeurs du tableau.",
+    hint: "Calcule le total de chaque colonne avant de comparer.",
     tags: ["cm2", "tableau", "defi", "maximum", "minimum", "template", "qcm", "canvas"],
-    generate: () => {
-      const item = randomChoice([
-        {
-          text: "Dans le tableau des activités, quelle activité est la plus choisie ?",
-          correct: "Football",
-          choices: ["Football", "Danse", "Natation", "Basket"],
-          explanation: "Le football a la plus grande valeur : 12.",
-          canvas: tableauSportCanvas({ cell: { row: 0, col: 0 } }),
-        },
-        {
-          text: "Dans le tableau des activités, quelle activité est la moins choisie ?",
-          correct: "Natation",
-          choices: ["Football", "Danse", "Natation", "Basket"],
-          explanation: "La natation a la plus petite valeur : 7.",
-          canvas: tableauSportCanvas({ cell: { row: 0, col: 2 } }),
-        },
-        {
-          text: "Dans le tableau des livres, quel type de livre est le plus lu ?",
-          correct: "BD",
-          choices: ["Romans", "BD", "Mangas", "Documentaires"],
-          explanation: "Les BD ont la plus grande valeur : 22.",
-          canvas: tableauBibliothequeCanvas({ cell: { row: 0, col: 1 } }),
-        },
-        {
-          text: "Dans le tableau de la cantine, quel menu est le moins choisi ?",
-          correct: "Salade",
-          choices: ["Cari", "Rougail", "Salade", "Sandwich"],
-          explanation: "La salade a la plus petite valeur : 8.",
-          canvas: tableauCantineCanvas({ cell: { row: 0, col: 2 } }),
-        },
-      ]);
-
-      return {
-        text: item.text,
-        format: "qcm",
-        choices: shuffle(item.choices),
-        expected: [item.correct],
-        comparator: "mcq_exact",
-        explanation: item.explanation,
-        canvas: item.canvas,
-      };
-    },
+    generate: genDefiMeilleureColonne,
   },
 
   {
@@ -2165,45 +2864,9 @@ export const tableauxBank: TutorBankItemV4[] = [
     microId: "tableau_defi",
     difficulty: 5,
     theme: "neutral",
-    hint: "Pour trouver un écart, on soustrait la plus petite valeur à la plus grande.",
+    hint: "Calcule les deux totaux, puis leur écart.",
     tags: ["cm2", "tableau", "defi", "difference", "template", "short", "canvas"],
-    generate: () => {
-      const item = randomChoice([
-        {
-          text: "Combien d’élèves de plus ont choisi le football que la danse ?",
-          expected: 3,
-          explanation: "Football : 12, Danse : 9. La différence est 12 - 9 = 3.",
-          canvas: tableauSportCanvas(),
-        },
-        {
-          text: "Combien de BD de plus que de romans ont été lues ?",
-          expected: 8,
-          explanation: "BD : 22, Romans : 14. La différence est 22 - 14 = 8.",
-          canvas: tableauBibliothequeCanvas(),
-        },
-        {
-          text: "Combien d’élèves de plus ont choisi le cari que le rougail ?",
-          expected: 2,
-          explanation: "Cari : 16, Rougail : 14. La différence est 16 - 14 = 2.",
-          canvas: tableauCantineCanvas(),
-        },
-        {
-          text: "Quel est l’écart entre la température de jeudi et celle de lundi ?",
-          expected: 3,
-          explanation: "Jeudi : 28°C, lundi : 25°C. L’écart est 28 - 25 = 3°C.",
-          canvas: tableauMeteoCanvas(),
-        },
-      ]);
-
-      return {
-        text: item.text,
-        format: "short",
-        expected: [String(item.expected)],
-        comparator: "number_equal",
-        explanation: item.explanation,
-        canvas: item.canvas,
-      };
-    },
+    generate: genDefiEcartTotaux,
   },
 
   {
@@ -2215,45 +2878,25 @@ export const tableauxBank: TutorBankItemV4[] = [
     microId: "tableau_defi",
     difficulty: 5,
     theme: "neutral",
-    hint: "Relis la donnée du tableau ou refais le calcul.",
+    hint: "Commence par la colonne dont le total est connu.",
     tags: ["cm2", "tableau", "defi", "erreur", "template", "qcm", "canvas"],
-    generate: () => {
-      const item = randomChoice([
-        {
-          text: "Un élève dit : “La natation est l’activité la plus choisie.” A-t-il raison ?",
-          expected: "non",
-          explanation: "Non. La natation a 7 élèves, alors que le football en a 12.",
-          canvas: tableauSportCanvas(),
-        },
-        {
-          text: "Un élève dit : “Les BD sont les livres les plus lus.” A-t-il raison ?",
-          expected: "oui",
-          explanation: "Oui. Les BD ont la plus grande valeur : 22.",
-          canvas: tableauBibliothequeCanvas(),
-        },
-        {
-          text: "Un élève dit : “Il y a 50 élèves dans l’enquête de cantine.” A-t-il raison ?",
-          expected: "oui",
-          explanation: "Oui. Le total est 16 + 14 + 8 + 12 = 50.",
-          canvas: tableauCantineCanvas(),
-        },
-        {
-          text: "Un élève dit : “Le total des activités est 28.” A-t-il raison ?",
-          expected: "non",
-          explanation: "Non. Le total correct est 12 + 9 + 7 + 10 = 38.",
-          canvas: tableauSportCanvas(),
-        },
-      ]);
-
-      return {
-        text: item.text,
-        format: "qcm",
-        choices: ["oui", "non"],
-        expected: [item.expected],
-        comparator: "mcq_exact",
-        explanation: item.explanation,
-        canvas: item.canvas,
-      };
-    },
+    generate: genDefiDeuxInconnues,
   },
+
+  // ============================================================
+  // ⭐ 20/10/2026 — GÉNÉRATEURS AJOUTÉS (situation × tournure à chaque étoile)
+  // ============================================================
+  tpl("cm2_tableau_lire_tpl_4_case", "tableau_lire", 1, "Repère la ligne, puis la colonne : la réponse est au croisement.", ["lire", "cellule"], genLireCase),
+  tpl("cm2_tableau_lire_tpl_5_quoi", "tableau_lire", 1, "Une ligne se lit de gauche à droite ; une colonne de haut en bas.", ["lire", "ligne", "colonne"], genLireQuoi),
+  tpl("cm2_tableau_lire_tpl_6_ou", "tableau_lire", 3, "Parcours le tableau case par case.", ["lire", "inverse"], genLireOu),
+  tpl("cm2_tableau_completer_tpl_5_placer", "tableau_completer", 1, "Le titre de la ligne et celui de la colonne te guident.", ["completer", "placer"], genCompleterPlacer),
+  tpl("cm2_tableau_completer_tpl_6_sens", "tableau_completer", 1, "Regarde le titre de la ligne et celui de la colonne du « ? ».", ["completer", "sens"], genCompleterSens),
+  tpl("cm2_tableau_completer_tpl_7_total_general", "tableau_completer", 3, "Le total général, c'est tout le tableau.", ["completer", "total"], genCompleterTotalGeneral),
+  tpl("cm2_tableau_completer_tpl_8_deux_etapes", "tableau_completer", 4, "Trouve d'abord la case effacée grâce au total de sa colonne.", ["completer", "deux_etapes"], genCompleterDeuxEtapes),
+  tpl("cm2_tableau_interpreter_tpl_5_max_ligne", "tableau_interpreter", 1, "Lis toute la ligne, puis compare les nombres.", ["interpreter", "maximum", "minimum"], genInterpMaxLigne),
+  tpl("cm2_tableau_interpreter_tpl_6_comparer", "tableau_interpreter", 1, "Lis les deux cases de la colonne, puis compare.", ["interpreter", "comparer"], genInterpComparer),
+  tpl("cm2_tableau_interpreter_tpl_7_ecart", "tableau_interpreter", 2, "« Combien de plus » : on soustrait.", ["interpreter", "difference"], genInterpEcart),
+  tpl("cm2_tableau_interpreter_tpl_8_meilleur_total", "tableau_interpreter", 4, "Calcule le total de chaque ligne avant de comparer.", ["interpreter", "total", "maximum"], genInterpMeilleurTotal),
+  tpl("cm2_tableau_defi_tpl_5_objectif", "tableau_defi", 4, "Calcule le total, puis ce qui manque pour l'objectif.", ["defi", "deux_etapes"], genDefiObjectif),
+  tpl("cm2_tableau_defi_tpl_6_regrouper", "tableau_defi", 5, "Repère les quatre cases, puis additionne-les.", ["defi", "regrouper"], genDefiRegrouper),
 ];

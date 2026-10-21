@@ -1,6 +1,10 @@
 // lib/tutor-v4/question-banks/maths/cm1/tableaux.bank.ts
 
-import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type {
+  TutorBankItemV4,
+  TutorGeneratedQuestionV4,
+  DifficultyLevel,
+} from "@/lib/tutor-v4/types";
 
 type CellValue = string | number;
 
@@ -87,6 +91,754 @@ const CONTEXTES_ECOLE = [
   ["CM1 A", "CM1 B", "CM1 C"],
   ["Groupe 1", "Groupe 2", "Groupe 3"],
   ["Lundi", "Mardi", "Mercredi"],
+];
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ⭐ 20/10/2026 — DES SITUATIONS, PAS UNE PHRASE (robustesse des statistiques).
+   Mesuré avant : lire 53 squelettes (★2 7,0 répétitions sur 20), compléter 11
+   (★2 13,1 · ★3 16,0), interpréter 34 (★3 10,5), défi 13 (★3 15,0 · ★4 12,5).
+   Chaque gabarit ci-dessous croise une SITUATION (un relevé tiré d'un domaine :
+   biologie, météo, écologie, musique, cinéma, sport, cantine, jeux…) × une
+   TOURNURE × des nombres tirés, et dessine le tableau avec les MÊMES nombres.
+   Les maths sont transversales : on lit des tableaux partout.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+type Q = TutorGeneratedQuestionV4;
+
+type Situation = {
+  titre: string;
+  /** Phrase courte qui pose le décor (sans point final). */
+  intro: string;
+  /** Ce qu'on compte, au pluriel : « nids », « élèves ». */
+  unite: string;
+  /** Étiquette de la ligne unique. */
+  ligne: string;
+  /** Étiquettes des deux lignes d'un tableau à double entrée. */
+  lignes: [string, string];
+  /** Au moins 5 colonnes possibles ; on en tire 3 ou 4. */
+  cats: string[];
+  min: number;
+  max: number;
+  /** Pas des nombres (1, 5 ou 10) : nombres ronds pour les grands relevés. */
+  pas: number;
+};
+
+const SITUATIONS: Situation[] = [
+  { titre: "Nids de tortues", intro: "Une biologiste compte les nids de tortues sur les plages", unite: "nids", ligne: "Nids", lignes: ["Janvier", "Février"], cats: ["Saint-Leu", "L'Hermitage", "Étang-Salé", "Boucan Canot", "Grande Anse"], min: 3, max: 25, pas: 1 },
+  { titre: "Jours de pluie", intro: "Une météorologue note les jours de pluie du mois", unite: "jours de pluie", ligne: "Jours", lignes: ["Janvier", "Juillet"], cats: ["Saint-Denis", "Saint-Pierre", "Cilaos", "Le Port", "Salazie"], min: 2, max: 25, pas: 1 },
+  { titre: "Déchets de la plage", intro: "Des enfants ramassent les déchets d'une plage", unite: "déchets", ligne: "Déchets", lignes: ["Samedi", "Dimanche"], cats: ["Bouteilles", "Bouchons", "Canettes", "Sacs", "Filets"], min: 5, max: 40, pas: 1 },
+  { titre: "Oiseaux observés", intro: "Un ornithologue compte les oiseaux d'une forêt", unite: "oiseaux", ligne: "Oiseaux", lignes: ["Matin", "Soir"], cats: ["Tec-tec", "Paille-en-queue", "Martin", "Bulbul", "Oiseau-lunettes"], min: 4, max: 30, pas: 1 },
+  { titre: "Livres empruntés", intro: "La bibliothécaire compte les livres empruntés", unite: "livres", ligne: "Livres", lignes: ["Lundi", "Jeudi"], cats: ["BD", "Contes", "Romans", "Mangas", "Documentaires"], min: 5, max: 35, pas: 1 },
+  { titre: "Plats de la cantine", intro: "Le cuisinier de la cantine compte les assiettes servies", unite: "assiettes", ligne: "Assiettes", lignes: ["Mardi", "Vendredi"], cats: ["Carry", "Rougail", "Pâtes", "Poisson", "Lentilles"], min: 10, max: 60, pas: 1 },
+  { titre: "Passagers du car jaune", intro: "Le chauffeur du car jaune compte les passagers à chaque arrêt", unite: "passagers", ligne: "Passagers", lignes: ["Aller", "Retour"], cats: ["Gare", "Mairie", "École", "Plage", "Marché"], min: 3, max: 30, pas: 1 },
+  { titre: "Instruments choisis", intro: "Le professeur de musique note les instruments choisis", unite: "élèves", ligne: "Élèves", lignes: ["Filles", "Garçons"], cats: ["Guitare", "Piano", "Kayamb", "Flûte", "Batterie"], min: 2, max: 15, pas: 1 },
+  { titre: "Entrées au cinéma", intro: "La caissière du cinéma compte les entrées par film", unite: "entrées", ligne: "Entrées", lignes: ["Samedi", "Dimanche"], cats: ["Dessin animé", "Aventure", "Comédie", "Documentaire", "Policier"], min: 20, max: 90, pas: 1 },
+  { titre: "Buts du tournoi", intro: "L'arbitre note les buts marqués par chaque équipe", unite: "buts", ligne: "Buts", lignes: ["Match aller", "Match retour"], cats: ["Les Requins", "Les Tigres", "Les Margouillats", "Les Dauphins", "Les Cardinaux"], min: 1, max: 12, pas: 1 },
+  { titre: "Tickets de la kermesse", intro: "À la kermesse, on compte les tickets de chaque stand", unite: "tickets", ligne: "Tickets", lignes: ["Matin", "Après-midi"], cats: ["Pêche à la ligne", "Chamboule-tout", "Tombola", "Maquillage", "Crêpes"], min: 10, max: 50, pas: 1 },
+  { titre: "Billes par couleur", intro: "Deux amis comptent leurs billes par couleur", unite: "billes", ligne: "Billes", lignes: ["Sac de Léa", "Sac de Tom"], cats: ["Rouges", "Bleues", "Vertes", "Jaunes", "Noires"], min: 3, max: 25, pas: 1 },
+  { titre: "Bonbons du paquet", intro: "Un confiseur trie les bonbons par parfum", unite: "bonbons", ligne: "Bonbons", lignes: ["Paquet 1", "Paquet 2"], cats: ["Fraise", "Citron", "Menthe", "Cola", "Orange"], min: 4, max: 30, pas: 1 },
+  { titre: "Visiteurs du volcan", intro: "Un guide compte les visiteurs du Piton de la Fournaise", unite: "visiteurs", ligne: "Visiteurs", lignes: ["Samedi", "Dimanche"], cats: ["Pas de Bellecombe", "Formica Léo", "Cratère Dolomieu", "Plaine des Sables", "Piton Partage"], min: 100, max: 600, pas: 10 },
+  { titre: "Potager de l'école", intro: "Le jardinier de l'école compte les plants du potager", unite: "plants", ligne: "Plants", lignes: ["Carré A", "Carré B"], cats: ["Tomates", "Salades", "Carottes", "Piments", "Brèdes"], min: 5, max: 30, pas: 1 },
+  { titre: "Œufs ramassés", intro: "Une fermière ramasse les œufs chaque jour", unite: "œufs", ligne: "Œufs", lignes: ["Poulailler A", "Poulailler B"], cats: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"], min: 6, max: 30, pas: 1 },
+  { titre: "Poissons pêchés", intro: "Un pêcheur de Saint-Gilles note ses poissons", unite: "poissons", ligne: "Poissons", lignes: ["Semaine 1", "Semaine 2"], cats: ["Thons", "Dorades", "Capitaines", "Vivaneaux", "Espadons"], min: 2, max: 20, pas: 1 },
+  { titre: "Visiteurs du musée", intro: "Une guide de musée compte les visiteurs de chaque salle", unite: "visiteurs", ligne: "Visiteurs", lignes: ["Matin", "Après-midi"], cats: ["Préhistoire", "Égypte", "Moyen Âge", "Volcans", "Océans"], min: 20, max: 80, pas: 1 },
+  { titre: "Bouteilles recyclées", intro: "L'école compte les bouteilles recyclées par classe", unite: "bouteilles", ligne: "Bouteilles", lignes: ["Septembre", "Octobre"], cats: ["CP", "CE1", "CE2", "CM1", "CM2"], min: 10, max: 60, pas: 1 },
+  { titre: "Tours de piste", intro: "La coach d'athlétisme note les tours de piste", unite: "tours", ligne: "Tours", lignes: ["Lundi", "Jeudi"], cats: ["Léa", "Noah", "Inès", "Hugo", "Maya"], min: 3, max: 15, pas: 1 },
+  { titre: "Pages lues", intro: "Des enfants notent les pages lues dans la semaine", unite: "pages", ligne: "Pages", lignes: ["Semaine 1", "Semaine 2"], cats: ["Jade", "Enzo", "Lina", "Sacha", "Nour"], min: 10, max: 60, pas: 1 },
+  { titre: "Bouquets vendus", intro: "Une fleuriste compte ses bouquets vendus", unite: "bouquets", ligne: "Bouquets", lignes: ["Vendredi", "Samedi"], cats: ["Roses", "Anthuriums", "Orchidées", "Tulipes", "Lys"], min: 4, max: 25, pas: 1 },
+  { titre: "Animaux de la ferme", intro: "Un vétérinaire compte les animaux de deux fermes", unite: "animaux", ligne: "Animaux", lignes: ["Ferme du haut", "Ferme du bas"], cats: ["Vaches", "Cabris", "Moutons", "Cochons", "Lapins"], min: 3, max: 30, pas: 1 },
+  { titre: "Longueurs nagées", intro: "Le maître-nageur note les longueurs de chaque nageur", unite: "longueurs", ligne: "Longueurs", lignes: ["Mardi", "Vendredi"], cats: ["Zoé", "Rayan", "Emma", "Adam", "Chloé"], min: 4, max: 20, pas: 1 },
+  { titre: "Billets de tombola", intro: "Chaque classe vend des billets de tombola", unite: "billets", ligne: "Billets", lignes: ["Semaine 1", "Semaine 2"], cats: ["CM1 A", "CM1 B", "CM2 A", "CM2 B", "CE2"], min: 10, max: 50, pas: 1 },
+  { titre: "Lettres distribuées", intro: "La factrice compte les lettres de chaque rue", unite: "lettres", ligne: "Lettres", lignes: ["Lundi", "Mardi"], cats: ["Rue des Letchis", "Rue du Port", "Rue de l'École", "Rue des Fleurs", "Rue du Marché"], min: 5, max: 40, pas: 1 },
+  { titre: "Ventes de la boulangerie", intro: "Le boulanger compte ce qu'il a vendu", unite: "produits", ligne: "Produits", lignes: ["Matin", "Soir"], cats: ["Baguettes", "Croissants", "Pains au chocolat", "Samoussas", "Bouchons"], min: 10, max: 70, pas: 1 },
+  { titre: "Insectes du jardin", intro: "Une entomologiste compte les insectes du jardin", unite: "insectes", ligne: "Insectes", lignes: ["Matin", "Après-midi"], cats: ["Papillons", "Coccinelles", "Abeilles", "Fourmis", "Libellules"], min: 3, max: 30, pas: 1 },
+  { titre: "Élection des délégués", intro: "On compte les voix pour chaque candidat", unite: "voix", ligne: "Voix", lignes: ["CM1", "CM2"], cats: ["Lou", "Ilyes", "Manon", "Timéo", "Sarah"], min: 1, max: 15, pas: 1 },
+  { titre: "Jeux de société", intro: "La ludothécaire note les jeux préférés des enfants", unite: "enfants", ligne: "Enfants", lignes: ["Filles", "Garçons"], cats: ["Petits chevaux", "Jeu de l'oie", "Dominos", "Cartes", "Dames"], min: 2, max: 15, pas: 1 },
+  { titre: "Fruits du marché", intro: "Une marchande du marché de Saint-Paul compte ses fruits", unite: "fruits", ligne: "Fruits", lignes: ["Matin", "Après-midi"], cats: ["Mangues", "Letchis", "Ananas", "Papayes", "Bananes"], min: 10, max: 50, pas: 1 },
+  { titre: "Randonneurs des cirques", intro: "Un garde du parc compte les randonneurs", unite: "randonneurs", ligne: "Randonneurs", lignes: ["Samedi", "Dimanche"], cats: ["Cilaos", "Mafate", "Salazie", "Maïdo", "Bélouve"], min: 20, max: 90, pas: 1 },
+  { titre: "Arbres plantés", intro: "Un forestier compte les arbres plantés", unite: "arbres", ligne: "Arbres", lignes: ["Année 1", "Année 2"], cats: ["Tamarins", "Bois de couleur", "Manguiers", "Filaos", "Benjoins"], min: 10, max: 60, pas: 1 },
+  { titre: "Glaces vendues", intro: "Un glacier de la plage compte ses glaces", unite: "glaces", ligne: "Glaces", lignes: ["Samedi", "Dimanche"], cats: ["Vanille", "Chocolat", "Coco", "Fraise", "Mangue"], min: 10, max: 60, pas: 1 },
+  { titre: "Vélos du garage", intro: "Le gardien compte les vélos du garage par couleur", unite: "vélos", ligne: "Vélos", lignes: ["Garage A", "Garage B"], cats: ["Rouges", "Bleus", "Noirs", "Verts", "Blancs"], min: 2, max: 20, pas: 1 },
+  { titre: "Spectateurs du concert", intro: "L'organisatrice compte les spectateurs de chaque concert", unite: "spectateurs", ligne: "Spectateurs", lignes: ["Vendredi", "Samedi"], cats: ["Maloya", "Séga", "Rock", "Jazz", "Reggae"], min: 50, max: 300, pas: 10 },
+  { titre: "Médailles des jeux", intro: "Un journaliste sportif compte les médailles des écoles", unite: "médailles", ligne: "Médailles", lignes: ["Course", "Natation"], cats: ["École du Tampon", "École de Saint-Leu", "École du Port", "École de Sainte-Rose", "École de Bras-Panon"], min: 1, max: 12, pas: 1 },
+  { titre: "Dauphins observés", intro: "Une guide en mer compte les dauphins observés", unite: "dauphins", ligne: "Dauphins", lignes: ["Matin", "Après-midi"], cats: ["Saint-Gilles", "Saint-Leu", "Le Port", "Saint-Paul", "Étang-Salé"], min: 2, max: 25, pas: 1 },
+];
+
+/** « d'élèves », « de livres », « d'œufs ». */
+const deMot = (mot: string) => (/^[aeiouéèêhœ]/i.test(mot) ? `d'${mot}` : `de ${mot}`);
+
+/** Un nombre de la situation (dans [min, max], multiple du pas). */
+function tirerNombre(s: Situation): number {
+  const k0 = Math.ceil(s.min / s.pas);
+  const k1 = Math.floor(s.max / s.pas);
+  return randomInt(k0, k1) * s.pas;
+}
+
+/** `n` nombres DISTINCTS de la situation. */
+function nombresDistincts(s: Situation, n: number): number[] {
+  const set = new Set<number>();
+  while (set.size < n) set.add(tirerNombre(s));
+  return shuffle([...set]);
+}
+
+/** `n` colonnes de la situation, dans l'ordre d'origine. */
+function colonnes(s: Situation, n: number): string[] {
+  return shuffle(s.cats.map((_, i) => i))
+    .slice(0, n)
+    .sort((a, b) => a - b)
+    .map((i) => s.cats[i]);
+}
+
+const somme = (xs: number[]) => xs.reduce((a, b) => a + b, 0);
+
+function gab(
+  id: string,
+  microId: string,
+  difficulty: DifficultyLevel,
+  hint: string,
+  tags: string[],
+  generate: () => Q,
+): TutorBankItemV4 {
+  return {
+    kind: "template",
+    id,
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "tableau",
+    microId,
+    difficulty,
+    theme: "neutral",
+    hint,
+    tags: ["cm1", "tableau", microId, "template", "canvas", ...tags],
+    generate,
+  };
+}
+
+// ─── TABLEAU_LIRE ───────────────────────────────────────────────────────────
+
+const GEN_LIRE: TutorBankItemV4[] = [
+  // ★1 — une ligne, lire la case d'une colonne (QCM : leurres = cases voisines, total).
+  gab("cm1_tableau_lire_gen_1_une_ligne", "tableau_lire", 1, "Trouve la bonne colonne, puis lis le nombre dessous.", ["qcm", "situations"], () => {
+    const s = randomChoice(SITUATIONS);
+    const cols = colonnes(s, 3);
+    const vals = nombresDistincts(s, 3);
+    const c = randomInt(0, 2);
+    const cat = cols[c];
+    const correct = String(vals[c]);
+    const text = randomChoice([
+      `${s.intro}. Combien ${deMot(s.unite)} pour « ${cat} » ?`,
+      `Lis le tableau « ${s.titre} ». Quel nombre est écrit sous « ${cat} » ?`,
+      `${s.intro}. Que vaut la case « ${cat} » ?`,
+      `Tableau « ${s.titre} » : combien ${deMot(s.unite)} pour « ${cat} » ?`,
+      `${s.intro}. Regarde la colonne « ${cat} ». Quel nombre lis-tu ?`,
+    ]);
+    return {
+      text,
+      format: "qcm",
+      choices: makeChoices(correct, [
+        String(vals[(c + 1) % 3]),
+        String(vals[(c + 2) % 3]),
+        String(somme(vals)),
+      ]),
+      expected: [correct],
+      comparator: "mcq_exact",
+      explanation: exp(
+        "Un tableau range les nombres en colonnes.",
+        `On cherche la colonne « ${cat} », puis on lit le nombre dessous.`,
+        `Sous « ${cat} », on lit ${correct}.`,
+        `Il y a ${correct} ${s.unite} pour « ${cat} ».`,
+      ),
+      canvas: tableauCanvas({
+        title: s.titre,
+        headers: cols,
+        rows: [{ label: s.ligne, values: vals }],
+        highlight: { cell: { row: 0, col: c } },
+        questionLabel: `« ${cat} » ?`,
+      }),
+    };
+  }),
+
+  // ★2 — deux lignes : croiser une ligne et une colonne (réponse libre).
+  gab("cm1_tableau_lire_gen_2_croiser", "tableau_lire", 2, "Trouve d'abord la ligne, puis la colonne : le nombre est à leur croisement.", ["short", "deux_lignes", "situations"], () => {
+    const s = randomChoice(SITUATIONS);
+    const cols = colonnes(s, 3);
+    const vals = [nombresDistincts(s, 3), nombresDistincts(s, 3)];
+    const r = randomInt(0, 1);
+    const c = randomInt(0, 2);
+    const ligne = s.lignes[r];
+    const cat = cols[c];
+    const correct = String(vals[r][c]);
+    const text = randomChoice([
+      `${s.intro}. Combien ${deMot(s.unite)} pour « ${cat} », ligne « ${ligne} » ?`,
+      `Tableau « ${s.titre} » : lis la case de la ligne « ${ligne} » et de la colonne « ${cat} ».`,
+      `${s.intro}. Ligne « ${ligne} », colonne « ${cat} » : quel nombre lis-tu ?`,
+      `Dans le tableau « ${s.titre} », quel nombre est au croisement de « ${ligne} » et de « ${cat} » ?`,
+      `${s.intro}. Pour « ${ligne} », combien ${deMot(s.unite)} dans la colonne « ${cat} » ?`,
+    ]);
+    return {
+      text,
+      format: "short",
+      expected: [correct],
+      comparator: "number_equal",
+      explanation: exp(
+        "Dans un tableau à double entrée, une case est le croisement d'une ligne et d'une colonne.",
+        `On suit la ligne « ${ligne} » jusqu'à la colonne « ${cat} ».`,
+        `Au croisement, on lit ${correct}. (Attention : l'autre ligne donne ${vals[1 - r][c]}.)`,
+        `La réponse est ${correct} ${s.unite}.`,
+      ),
+      canvas: tableauCanvas({
+        title: s.titre,
+        headers: cols,
+        rows: [
+          { label: s.lignes[0], values: vals[0] },
+          { label: s.lignes[1], values: vals[1] },
+        ],
+        questionLabel: `${ligne} — ${cat} ?`,
+      }),
+    };
+  }),
+
+  // ★2 — lecture à l'envers : dans quelle colonne est ce nombre ? (QCM de colonnes)
+  gab("cm1_tableau_lire_gen_3_quelle_colonne", "tableau_lire", 2, "Suis la bonne ligne et cherche le nombre : regarde ensuite le haut de sa colonne.", ["qcm", "deux_lignes", "situations"], () => {
+    const s = randomChoice(SITUATIONS);
+    const cols = colonnes(s, 4);
+    // Les 8 cases toutes différentes : une seule colonne peut contenir le nombre.
+    const tout = nombresDistincts(s, 8);
+    const vals = [tout.slice(0, 4), tout.slice(4, 8)];
+    const r = randomInt(0, 1);
+    const c = randomInt(0, 3);
+    const ligne = s.lignes[r];
+    const n = vals[r][c];
+    const correct = cols[c];
+    const text = randomChoice([
+      `${s.intro}. Sur la ligne « ${ligne} », quelle colonne contient ${n} ?`,
+      `Tableau « ${s.titre} » : ligne « ${ligne} », où lis-tu le nombre ${n} ?`,
+      `${s.intro}. On a compté ${n} ${s.unite} pour « ${ligne} ». Dans quelle colonne ?`,
+      `Dans le tableau « ${s.titre} », le nombre ${n} est sur la ligne « ${ligne} ». Sous quel titre ?`,
+    ]);
+    return {
+      text,
+      format: "qcm",
+      choices: makeChoices(correct, cols.filter((x) => x !== correct)),
+      expected: [correct],
+      comparator: "mcq_exact",
+      explanation: exp(
+        "Chaque nombre d'un tableau a une ligne et une colonne.",
+        `On suit la ligne « ${ligne} » jusqu'à trouver ${n}, puis on remonte en haut de la colonne.`,
+        `Ligne « ${ligne} » : ${cols.map((x, i) => `${x} → ${vals[r][i]}`).join(", ")}.`,
+        `${n} est dans la colonne « ${correct} ».`,
+      ),
+      canvas: tableauCanvas({
+        title: s.titre,
+        headers: cols,
+        rows: [
+          { label: s.lignes[0], values: vals[0] },
+          { label: s.lignes[1], values: vals[1] },
+        ],
+        highlight: { row: r },
+        questionLabel: `Où est ${n} ?`,
+      }),
+    };
+  }),
+];
+
+// ─── TABLEAU_COMPLETER ──────────────────────────────────────────────────────
+
+const GEN_COMPLETER: TutorBankItemV4[] = [
+  // ★2 — la case « Total » d'une ligne de 3 ou 4 colonnes.
+  gab("cm1_tableau_completer_gen_1_case_total", "tableau_completer", 2, "Le total, c'est la somme de toutes les cases de la ligne.", ["short", "total", "situations"], () => {
+    const s = randomChoice(SITUATIONS);
+    const k = randomChoice([3, 3, 4]);
+    const cols = colonnes(s, k);
+    const vals = nombresDistincts(s, k);
+    const total = somme(vals);
+    const text = randomChoice([
+      `${s.intro}. Quel nombre faut-il écrire dans la case « Total » ?`,
+      `Tableau « ${s.titre} » : complète la case « Total ».`,
+      `${s.intro}. Combien ${deMot(s.unite)} en tout ? Écris le total.`,
+      `Complète le tableau « ${s.titre} » : que vaut la case « Total » ?`,
+      `${s.intro}. Le tableau a ${k} colonnes et une case « Total » vide. Que faut-il y écrire ?`,
+    ]);
+    return {
+      text,
+      format: "short",
+      expected: [String(total)],
+      comparator: "number_equal",
+      explanation: exp(
+        "La case « Total » regroupe toutes les cases de la ligne.",
+        "On additionne tous les nombres de la ligne.",
+        `${vals.join(" + ")} = ${total}.`,
+        `On écrit ${total} dans la case « Total ».`,
+      ),
+      canvas: tableauCanvas({
+        title: s.titre,
+        headers: [...cols, "Total"],
+        rows: [{ label: s.ligne, values: [...vals, "?"] }],
+        highlight: { cell: { row: 0, col: k } },
+        questionLabel: "Total ?",
+      }),
+    };
+  }),
+
+  // ★2 — deux colonnes et le total : retrouver la case vide.
+  gab("cm1_tableau_completer_gen_2_deux_cases", "tableau_completer", 2, "Le total moins la case connue donne la case vide.", ["short", "valeur_manquante", "situations"], () => {
+    const s = randomChoice(SITUATIONS);
+    const cols = colonnes(s, 2);
+    const vals = nombresDistincts(s, 2);
+    const total = somme(vals);
+    const m = randomInt(0, 1);
+    const cat = cols[m];
+    const connu = vals[1 - m];
+    const text = randomChoice([
+      `${s.intro}. Le total est ${total}. Combien ${deMot(s.unite)} pour « ${cat} » ?`,
+      `Tableau « ${s.titre} » : il y a ${total} ${s.unite} en tout. Quel nombre manque sous « ${cat} » ?`,
+      `${s.intro}. La case « ${cat} » est vide. Le total vaut ${total}. Complète-la.`,
+      `Complète la case « ${cat} » du tableau « ${s.titre} ». Le total est ${total}.`,
+    ]);
+    return {
+      text,
+      format: "short",
+      expected: [String(vals[m])],
+      comparator: "number_equal",
+      explanation: exp(
+        "Le total est la somme des cases de la ligne.",
+        "Pour trouver la case vide, on enlève la case connue au total.",
+        `${total} − ${connu} = ${vals[m]}. Vérification : ${vals[0]} + ${vals[1]} = ${total}.`,
+        `Il y a ${vals[m]} ${s.unite} pour « ${cat} ».`,
+      ),
+      canvas: tableauCanvas({
+        title: s.titre,
+        headers: [...cols, "Total"],
+        rows: [{ label: s.ligne, values: m === 0 ? ["?", connu, total] : [connu, "?", total] }],
+        highlight: { cell: { row: 0, col: m } },
+        questionLabel: `« ${cat} » ?`,
+      }),
+    };
+  }),
+
+  // ★3 — trois ou quatre colonnes, une case vide, le total connu.
+  gab("cm1_tableau_completer_gen_3_case_vide", "tableau_completer", 3, "Additionne les cases connues, puis enlève ce résultat au total.", ["short", "valeur_manquante", "situations"], () => {
+    const s = randomChoice(SITUATIONS);
+    const k = randomChoice([3, 4]);
+    const cols = colonnes(s, k);
+    const vals = nombresDistincts(s, k);
+    const total = somme(vals);
+    const m = randomInt(0, k - 1);
+    const cat = cols[m];
+    const connus = vals.filter((_, i) => i !== m);
+    const sc = somme(connus);
+    const text = randomChoice([
+      `${s.intro}. Le total est ${total}. Combien ${deMot(s.unite)} pour « ${cat} » ?`,
+      `Tableau « ${s.titre} » : la case « ${cat} » s'est effacée. Le total vaut ${total}. Retrouve-la.`,
+      `${s.intro}. Il y a ${total} ${s.unite} en tout. Quel nombre manque dans la colonne « ${cat} » ?`,
+      `Complète le tableau « ${s.titre} » : que vaut la case « ${cat} » ?`,
+      `${s.intro}. Une case est vide : « ${cat} ». Quel nombre faut-il écrire ?`,
+    ]);
+    const values: CellValue[] = vals.map((v, i) => (i === m ? "?" : v));
+    return {
+      text,
+      format: "short",
+      expected: [String(vals[m])],
+      comparator: "number_equal",
+      explanation: exp(
+        "Le total est la somme de toutes les cases de la ligne.",
+        "On additionne les cases connues, puis on enlève ce résultat au total.",
+        `${connus.join(" + ")} = ${sc}, puis ${total} − ${sc} = ${vals[m]}.`,
+        `La case « ${cat} » vaut ${vals[m]}.`,
+      ),
+      canvas: tableauCanvas({
+        title: s.titre,
+        headers: [...cols, "Total"],
+        rows: [{ label: s.ligne, values: [...values, total] }],
+        highlight: { cell: { row: 0, col: m } },
+        questionLabel: `« ${cat} » ?`,
+      }),
+    };
+  }),
+
+  // ★3 — tableau à deux lignes + ligne « Total » : retrouver une case d'une colonne.
+  gab("cm1_tableau_completer_gen_4_ligne_total", "tableau_completer", 3, "Dans une colonne, le total moins l'autre ligne donne la case vide.", ["short", "valeur_manquante", "deux_lignes", "situations"], () => {
+    const s = randomChoice(SITUATIONS);
+    const cols = colonnes(s, 3);
+    const vals = [nombresDistincts(s, 3), nombresDistincts(s, 3)];
+    const tot = [0, 1, 2].map((j) => vals[0][j] + vals[1][j]);
+    const r = randomInt(0, 1);
+    const c = randomInt(0, 2);
+    const ligne = s.lignes[r];
+    const cat = cols[c];
+    const autre = vals[1 - r][c];
+    const text = randomChoice([
+      `${s.intro}. Colonne « ${cat} », le total est ${tot[c]}. Combien pour « ${ligne} » ?`,
+      `Tableau « ${s.titre} » : la case « ${ligne} » / « ${cat} » est vide. Complète-la avec la ligne « Total ».`,
+      `${s.intro}. Il y a ${tot[c]} ${s.unite} en tout pour « ${cat} ». Combien pour « ${ligne} » ?`,
+      `Dans le tableau « ${s.titre} », retrouve la case vide de la colonne « ${cat} ».`,
+    ]);
+    const lignesVal: CellValue[][] = vals.map((row, i) => row.map((v, j) => (i === r && j === c ? "?" : v)));
+    return {
+      text,
+      format: "short",
+      expected: [String(vals[r][c])],
+      comparator: "number_equal",
+      explanation: exp(
+        "La ligne « Total » additionne les deux lignes de chaque colonne.",
+        `Dans la colonne « ${cat} », on enlève l'autre ligne au total.`,
+        `${tot[c]} − ${autre} = ${vals[r][c]}. Vérification : ${vals[0][c]} + ${vals[1][c]} = ${tot[c]}.`,
+        `La case vide vaut ${vals[r][c]}.`,
+      ),
+      canvas: tableauCanvas({
+        title: s.titre,
+        headers: cols,
+        rows: [
+          { label: s.lignes[0], values: lignesVal[0] },
+          { label: s.lignes[1], values: lignesVal[1] },
+          { label: "Total", values: tot },
+        ],
+        highlight: { cell: { row: r, col: c } },
+        questionLabel: `${ligne} — ${cat} ?`,
+      }),
+    };
+  }),
+];
+
+// ─── TABLEAU_INTERPRETER ────────────────────────────────────────────────────
+
+const GEN_INTERPRETER: TutorBankItemV4[] = [
+  // ★2 — le plus / le moins dans une ligne (QCM de colonnes).
+  gab("cm1_tableau_interpreter_gen_1_plus_moins", "tableau_interpreter", 2, "Compare les nombres de la ligne : cherche le plus grand ou le plus petit.", ["qcm", "comparer", "situations"], () => {
+    const s = randomChoice(SITUATIONS);
+    const k = randomChoice([3, 4]);
+    const cols = colonnes(s, k);
+    const vals = nombresDistincts(s, k);
+    const plus = Math.random() < 0.5;
+    const cible = plus ? Math.max(...vals) : Math.min(...vals);
+    const c = vals.indexOf(cible);
+    const correct = cols[c];
+    const mot = plus ? "le plus" : "le moins";
+    const text = randomChoice([
+      `${s.intro}. Quelle colonne a ${mot} ${deMot(s.unite)} ?`,
+      `Tableau « ${s.titre} » : où y a-t-il ${mot} ${deMot(s.unite)} ?`,
+      `${s.intro}. Parmi ${cols.map((x) => `« ${x} »`).join(", ")}, quelle colonne a ${mot} ${deMot(s.unite)} ?`,
+      `Lis le tableau « ${s.titre} ». Quelle case a ${plus ? "le plus grand" : "le plus petit"} nombre ?`,
+      `${s.intro}. ${plus ? "Le record" : "Le plus faible"} : quelle colonne ?`,
+    ]);
+    const autres = cols.filter((x) => x !== correct);
+    return {
+      text,
+      format: "qcm",
+      choices: makeChoices(correct, autres),
+      expected: [correct],
+      comparator: "mcq_exact",
+      explanation: exp(
+        "Interpréter un tableau, c'est comparer ses nombres.",
+        `On cherche ${plus ? "le plus grand" : "le plus petit"} nombre de la ligne.`,
+        `${cols.map((x, i) => `${x} : ${vals[i]}`).join(" ; ")}. ${plus ? "Le plus grand" : "Le plus petit"} est ${cible}.`,
+        `C'est « ${correct} » qui a ${mot} ${deMot(s.unite)}.`,
+      ),
+      canvas: tableauCanvas({
+        title: s.titre,
+        headers: cols,
+        rows: [{ label: s.ligne, values: vals }],
+        questionLabel: plus ? "Le plus ?" : "Le moins ?",
+      }),
+    };
+  }),
+
+  // ★2 — dans une colonne, quelle ligne l'emporte ? (QCM de lignes)
+  gab("cm1_tableau_interpreter_gen_2_quelle_ligne", "tableau_interpreter", 2, "Regarde seulement la colonne demandée et compare ses deux nombres.", ["qcm", "comparer", "deux_lignes", "situations"], () => {
+    const s = randomChoice(SITUATIONS);
+    const cols = colonnes(s, 3);
+    const c = randomInt(0, 2);
+    const paire = nombresDistincts(s, 2);
+    const vals = [nombresDistincts(s, 3), nombresDistincts(s, 3)];
+    vals[0][c] = paire[0];
+    vals[1][c] = paire[1];
+    const cat = cols[c];
+    const plus = Math.random() < 0.6;
+    const r = plus ? (paire[0] > paire[1] ? 0 : 1) : (paire[0] < paire[1] ? 0 : 1);
+    const correct = s.lignes[r];
+    const mot = plus ? "le plus" : "le moins";
+    const text = randomChoice([
+      `${s.intro}. Pour « ${cat} », quelle ligne a ${mot} ${deMot(s.unite)} ?`,
+      `Tableau « ${s.titre} » : colonne « ${cat} », où y a-t-il ${mot} ${deMot(s.unite)} ?`,
+      `${s.intro}. Regarde « ${cat} ». Entre « ${s.lignes[0]} » et « ${s.lignes[1]} », quelle ligne a ${mot} ${deMot(s.unite)} ?`,
+    ]);
+    return {
+      text,
+      format: "qcm",
+      choices: makeChoices(correct, [s.lignes[1 - r], "Autant pour les deux", "On ne peut pas savoir"]),
+      expected: [correct],
+      comparator: "mcq_exact",
+      explanation: exp(
+        "On compare deux cases de la même colonne.",
+        `On lit la colonne « ${cat} » sur les deux lignes.`,
+        `${s.lignes[0]} : ${paire[0]} ; ${s.lignes[1]} : ${paire[1]}.`,
+        `« ${correct} » a ${mot} ${deMot(s.unite)} pour « ${cat} ».`,
+      ),
+      canvas: tableauCanvas({
+        title: s.titre,
+        headers: cols,
+        rows: [
+          { label: s.lignes[0], values: vals[0] },
+          { label: s.lignes[1], values: vals[1] },
+        ],
+        highlight: { col: c },
+        questionLabel: `${cat} : quelle ligne ?`,
+      }),
+    };
+  }),
+
+  // ★3 — l'écart entre deux colonnes (soustraction).
+  gab("cm1_tableau_interpreter_gen_3_ecart", "tableau_interpreter", 3, "Pour trouver « combien de plus », fais une soustraction : le grand moins le petit.", ["short", "difference", "situations"], () => {
+    const s = randomChoice(SITUATIONS);
+    const cols = colonnes(s, 3);
+    const vals = nombresDistincts(s, 3);
+    const [i, j] = shuffle([0, 1, 2]).slice(0, 2);
+    const g = vals[i] > vals[j] ? i : j;
+    const p = g === i ? j : i;
+    const diff = vals[g] - vals[p];
+    const text = randomChoice([
+      `${s.intro}. Combien ${deMot(s.unite)} de plus pour « ${cols[g]} » que pour « ${cols[p]} » ?`,
+      `Tableau « ${s.titre} » : quel est l'écart entre « ${cols[g]} » et « ${cols[p]} » ?`,
+      `${s.intro}. Combien ${deMot(s.unite)} de moins pour « ${cols[p]} » que pour « ${cols[g]} » ?`,
+      `Lis le tableau « ${s.titre} ». De combien la case « ${cols[g]} » dépasse-t-elle la case « ${cols[p]} » ?`,
+    ]);
+    return {
+      text,
+      format: "short",
+      expected: [String(diff)],
+      comparator: "number_equal",
+      explanation: exp(
+        "« Combien de plus » ou « combien de moins » : c'est un écart.",
+        "On enlève le plus petit nombre au plus grand.",
+        `« ${cols[g]} » : ${vals[g]}, « ${cols[p]} » : ${vals[p]}. ${vals[g]} − ${vals[p]} = ${diff}.`,
+        `L'écart est de ${diff} ${s.unite}.`,
+      ),
+      canvas: tableauCanvas({
+        title: s.titre,
+        headers: cols,
+        rows: [{ label: s.ligne, values: vals }],
+        questionLabel: `${cols[g]} − ${cols[p]} ?`,
+      }),
+    };
+  }),
+
+  // ★3 — total d'une ligne ou d'une colonne d'un tableau à double entrée.
+  gab("cm1_tableau_interpreter_gen_4_total_ligne_colonne", "tableau_interpreter", 3, "Additionne seulement les cases de la ligne (ou de la colonne) demandée.", ["short", "total_ligne", "deux_lignes", "situations"], () => {
+    const s = randomChoice(SITUATIONS);
+    const cols = colonnes(s, 3);
+    const vals = [nombresDistincts(s, 3), nombresDistincts(s, 3)];
+    const parLigne = Math.random() < 0.5;
+    let text: string, termes: number[], quoi: string;
+    if (parLigne) {
+      const r = randomInt(0, 1);
+      quoi = `la ligne « ${s.lignes[r]} »`;
+      termes = vals[r];
+      text = randomChoice([
+        `${s.intro}. Combien ${deMot(s.unite)} en tout pour « ${s.lignes[r]} » ?`,
+        `Tableau « ${s.titre} » : quel est le total de la ligne « ${s.lignes[r]} » ?`,
+        `${s.intro}. Additionne la ligne « ${s.lignes[r]} ». Combien trouves-tu ?`,
+      ]);
+    } else {
+      const c = randomInt(0, 2);
+      quoi = `la colonne « ${cols[c]} »`;
+      termes = [vals[0][c], vals[1][c]];
+      text = randomChoice([
+        `${s.intro}. Combien ${deMot(s.unite)} en tout pour « ${cols[c]} », sur les deux lignes ?`,
+        `Tableau « ${s.titre} » : quel est le total de la colonne « ${cols[c]} » ?`,
+        `${s.intro}. « ${s.lignes[0]} » et « ${s.lignes[1]} » réunis : combien pour « ${cols[c]} » ?`,
+      ]);
+    }
+    const total = somme(termes);
+    return {
+      text,
+      format: "short",
+      expected: [String(total)],
+      comparator: "number_equal",
+      explanation: exp(
+        "Le total d'une ligne ou d'une colonne est la somme de ses cases.",
+        `On additionne seulement les cases de ${quoi}.`,
+        `${termes.join(" + ")} = ${total}.`,
+        `Le total de ${quoi} est ${total} ${s.unite}.`,
+      ),
+      canvas: tableauCanvas({
+        title: s.titre,
+        headers: cols,
+        rows: [
+          { label: s.lignes[0], values: vals[0] },
+          { label: s.lignes[1], values: vals[1] },
+        ],
+        questionLabel: `Total de ${quoi} ?`,
+      }),
+    };
+  }),
+];
+
+// ─── TABLEAU_DEFI ───────────────────────────────────────────────────────────
+
+const GEN_DEFI: TutorBankItemV4[] = [
+  // ★3 — total général, ou total de deux colonnes sur les deux lignes.
+  gab("cm1_tableau_defi_gen_1_total_general", "tableau_defi", 3, "Additionne toutes les cases demandées, ligne par ligne.", ["short", "total_general", "deux_lignes", "situations"], () => {
+    const s = randomChoice(SITUATIONS);
+    const cols = colonnes(s, 3);
+    const vals = [nombresDistincts(s, 3), nombresDistincts(s, 3)];
+    const tout = Math.random() < 0.5;
+    let text: string, termes: number[], quoi: string;
+    if (tout) {
+      termes = [...vals[0], ...vals[1]];
+      quoi = "tout le tableau";
+      text = randomChoice([
+        `${s.intro}. Combien ${deMot(s.unite)} en tout dans le tableau ?`,
+        `Tableau « ${s.titre} » : quel est le total de toutes les cases ?`,
+        `${s.intro}. « ${s.lignes[0]} » et « ${s.lignes[1]} » réunis : combien ${deMot(s.unite)} au total ?`,
+      ]);
+    } else {
+      const [a, b] = shuffle([0, 1, 2]).slice(0, 2).sort((x, y) => x - y);
+      termes = [vals[0][a], vals[0][b], vals[1][a], vals[1][b]];
+      quoi = `« ${cols[a]} » et « ${cols[b]} »`;
+      text = randomChoice([
+        `${s.intro}. Combien ${deMot(s.unite)} en tout pour « ${cols[a]} » et « ${cols[b]} », sur les deux lignes ?`,
+        `Tableau « ${s.titre} » : additionne les colonnes « ${cols[a]} » et « ${cols[b]} ». Combien trouves-tu ?`,
+        `${s.intro}. On réunit « ${cols[a]} » et « ${cols[b]} ». Combien ${deMot(s.unite)} cela fait-il ?`,
+      ]);
+    }
+    const total = somme(termes);
+    return {
+      text,
+      format: "short",
+      expected: [String(total)],
+      comparator: "number_equal",
+      explanation: exp(
+        "Un défi demande d'utiliser plusieurs cases du tableau.",
+        `On additionne toutes les cases de ${quoi}.`,
+        `${termes.join(" + ")} = ${total}.`,
+        `Il y a ${total} ${s.unite} en tout.`,
+      ),
+      canvas: tableauCanvas({
+        title: s.titre,
+        headers: cols,
+        rows: [
+          { label: s.lignes[0], values: vals[0] },
+          { label: s.lignes[1], values: vals[1] },
+        ],
+        questionLabel: "Total ?",
+      }),
+    };
+  }),
+
+  // ★3 — un objectif à atteindre : total, puis ce qui manque.
+  gab("cm1_tableau_defi_gen_2_objectif", "tableau_defi", 3, "Calcule d'abord le total de la ligne, puis ce qu'il manque pour l'objectif.", ["short", "objectif", "situations"], () => {
+    const s = randomChoice(SITUATIONS);
+    const cols = colonnes(s, 3);
+    const vals = nombresDistincts(s, 3);
+    const total = somme(vals);
+    // Objectif rond, au-dessus du total.
+    const rond = s.pas >= 10 ? 100 : 10;
+    const objectif = (Math.floor(total / rond) + randomInt(1, 3)) * rond;
+    const manque = objectif - total;
+    const text = randomChoice([
+      `${s.intro}. L'objectif était ${objectif} ${s.unite}. Combien en manque-t-il ?`,
+      `Tableau « ${s.titre} » : on voulait atteindre ${objectif}. Combien ${deMot(s.unite)} manque-t-il ?`,
+      `${s.intro}. Il en faudrait ${objectif} en tout. Combien ${deMot(s.unite)} faut-il encore ?`,
+      `Avec le tableau « ${s.titre} », combien manque-t-il pour arriver à ${objectif} ${s.unite} ?`,
+    ]);
+    return {
+      text,
+      format: "short",
+      expected: [String(manque)],
+      comparator: "number_equal",
+      explanation: exp(
+        "Ce défi se fait en deux étapes : le total, puis ce qui manque.",
+        "On additionne la ligne, puis on enlève ce total à l'objectif.",
+        `${vals.join(" + ")} = ${total}, puis ${objectif} − ${total} = ${manque}.`,
+        `Il manque ${manque} ${s.unite}.`,
+      ),
+      canvas: tableauCanvas({
+        title: s.titre,
+        headers: cols,
+        rows: [{ label: s.ligne, values: vals }],
+        questionLabel: `Objectif : ${objectif}`,
+      }),
+    };
+  }),
+
+  // ★4 — comparer les totaux de deux lignes (QCM de lignes).
+  gab("cm1_tableau_defi_gen_3_comparer_totaux", "tableau_defi", 4, "Calcule le total de chaque ligne, puis compare les deux totaux.", ["qcm", "comparer_totaux", "deux_lignes", "situations"], () => {
+    const s = randomChoice(SITUATIONS);
+    const cols = colonnes(s, 3);
+    let vals = [nombresDistincts(s, 3), nombresDistincts(s, 3)];
+    // Le plus grand nombre ne doit pas suffire : les totaux diffèrent.
+    while (somme(vals[0]) === somme(vals[1])) vals = [nombresDistincts(s, 3), nombresDistincts(s, 3)];
+    const t = [somme(vals[0]), somme(vals[1])];
+    const plus = Math.random() < 0.6;
+    const r = plus ? (t[0] > t[1] ? 0 : 1) : (t[0] < t[1] ? 0 : 1);
+    const correct = s.lignes[r];
+    const mot = plus ? "le plus" : "le moins";
+    const text = randomChoice([
+      `${s.intro}. En tout, quelle ligne a ${mot} ${deMot(s.unite)} ?`,
+      `Tableau « ${s.titre} » : « ${s.lignes[0]} » ou « ${s.lignes[1]} », laquelle a ${mot} ${deMot(s.unite)} au total ?`,
+      `${s.intro}. Compare les totaux : quelle ligne a ${mot} ${deMot(s.unite)} ?`,
+    ]);
+    return {
+      text,
+      format: "qcm",
+      choices: makeChoices(correct, [s.lignes[1 - r], "Autant pour les deux", "On ne peut pas savoir"]),
+      expected: [correct],
+      comparator: "mcq_exact",
+      explanation: exp(
+        "Pour comparer deux lignes, on calcule d'abord le total de chacune.",
+        "On additionne chaque ligne, puis on compare les deux totaux.",
+        `${s.lignes[0]} : ${vals[0].join(" + ")} = ${t[0]}. ${s.lignes[1]} : ${vals[1].join(" + ")} = ${t[1]}.`,
+        `« ${correct} » a ${mot} ${deMot(s.unite)} au total.`,
+      ),
+      canvas: tableauCanvas({
+        title: s.titre,
+        headers: cols,
+        rows: [
+          { label: s.lignes[0], values: vals[0] },
+          { label: s.lignes[1], values: vals[1] },
+        ],
+        questionLabel: "Quelle ligne ?",
+      }),
+    };
+  }),
+
+  // ★4 — écart entre les totaux de deux lignes.
+  gab("cm1_tableau_defi_gen_4_ecart_totaux", "tableau_defi", 4, "Deux étapes : le total de chaque ligne, puis la soustraction.", ["short", "difference_totaux", "deux_lignes", "situations"], () => {
+    const s = randomChoice(SITUATIONS);
+    const cols = colonnes(s, 3);
+    let vals = [nombresDistincts(s, 3), nombresDistincts(s, 3)];
+    while (somme(vals[0]) === somme(vals[1])) vals = [nombresDistincts(s, 3), nombresDistincts(s, 3)];
+    const t = [somme(vals[0]), somme(vals[1])];
+    const g = t[0] > t[1] ? 0 : 1;
+    const p = 1 - g;
+    const diff = t[g] - t[p];
+    const text = randomChoice([
+      `${s.intro}. Combien ${deMot(s.unite)} de plus pour « ${s.lignes[g]} » que pour « ${s.lignes[p]} », en tout ?`,
+      `Tableau « ${s.titre} » : quel est l'écart entre le total de « ${s.lignes[g]} » et celui de « ${s.lignes[p]} » ?`,
+      `${s.intro}. En tout, combien ${deMot(s.unite)} de moins pour « ${s.lignes[p]} » que pour « ${s.lignes[g]} » ?`,
+    ]);
+    return {
+      text,
+      format: "short",
+      expected: [String(diff)],
+      comparator: "number_equal",
+      explanation: exp(
+        "Ce défi demande deux étapes : totaliser, puis comparer.",
+        "On calcule le total de chaque ligne, puis on enlève le petit total au grand.",
+        `${s.lignes[g]} : ${vals[g].join(" + ")} = ${t[g]}. ${s.lignes[p]} : ${vals[p].join(" + ")} = ${t[p]}. ${t[g]} − ${t[p]} = ${diff}.`,
+        `L'écart est de ${diff} ${s.unite}.`,
+      ),
+      canvas: tableauCanvas({
+        title: s.titre,
+        headers: cols,
+        rows: [
+          { label: s.lignes[0], values: vals[0] },
+          { label: s.lignes[1], values: vals[1] },
+        ],
+        questionLabel: "Écart des totaux ?",
+      }),
+    };
+  }),
 ];
 
 export const tableauxBank: TutorBankItemV4[] = [
@@ -514,18 +1266,18 @@ export const tableauxBank: TutorBankItemV4[] = [
     hint: "Pour trouver un total, additionne toutes les valeurs.",
     tags: ["cm1", "tableau", "completer", "total", "template", "canvas"],
     generate: () => {
-      const headers = randomChoice([
-        ...CONTEXTES_SPORTS,
-        ...CONTEXTES_FRUITS,
-      ]);
-
-      const a = randomInt(5, 20);
-      const b = randomInt(5, 20);
-      const c = randomInt(5, 20);
+      // 20/10/2026 : décor tiré parmi les SITUATIONS (la phrase revenait à l'identique).
+      const s = randomChoice(SITUATIONS);
+      const headers = colonnes(s, 3);
+      const [a, b, c] = [tirerNombre(s), tirerNombre(s), tirerNombre(s)];
       const total = a + b + c;
 
       return {
-        text: `Complète le total du tableau : ${a} + ${b} + ${c} = ?`,
+        text: randomChoice([
+          `${s.intro}. Complète le total : ${a} + ${b} + ${c} = ?`,
+          `Tableau « ${s.titre} » : ${a} + ${b} + ${c}. Quel total écris-tu ?`,
+          `${s.intro}. Calcule la case « Total » : ${a} + ${b} + ${c}.`,
+        ]),
         format: "short",
         expected: [String(total)],
         comparator: "number_equal",
@@ -536,11 +1288,11 @@ export const tableauxBank: TutorBankItemV4[] = [
           `Le total est ${total}.`
         ),
         canvas: tableauCanvas({
-          title: "Compléter le total",
+          title: s.titre,
           headers: [...headers, "Total"],
           rows: [
             {
-              label: "Quantité",
+              label: s.ligne,
               values: [a, b, c, "?"],
             },
           ],
@@ -565,14 +1317,12 @@ export const tableauxBank: TutorBankItemV4[] = [
     hint: "Additionne les valeurs connues, puis soustrais au total.",
     tags: ["cm1", "tableau", "completer", "valeur_manquante", "template", "canvas"],
     generate: () => {
-      const headers = randomChoice([
-        ...CONTEXTES_FRUITS,
-        ...CONTEXTES_SPORTS,
-      ]);
-
-      const a = randomInt(8, 18);
-      const b = randomInt(8, 18);
-      const missing = randomInt(8, 18);
+      // 20/10/2026 : décor tiré parmi les SITUATIONS (la phrase revenait à l'identique).
+      const s = randomChoice(SITUATIONS);
+      const headers = colonnes(s, 3);
+      const a = tirerNombre(s);
+      const b = tirerNombre(s);
+      const missing = tirerNombre(s);
       const total = a + b + missing;
 
       const missingCol = randomInt(0, 2);
@@ -586,22 +1336,22 @@ export const tableauxBank: TutorBankItemV4[] = [
       const knownSum = total - missing;
 
       return {
-        text: `Le total est ${total}. Quelle valeur manque dans le tableau ?`,
+        text: randomChoice([`${s.intro}. Le total est ${total}. Quelle valeur manque dans le tableau ?`, `Tableau « ${s.titre} » : le total vaut ${total}. Retrouve la case effacée.`, `${s.intro}. Il y a ${total} ${s.unite} en tout. Quel nombre manque ?`]),
         format: "short",
         expected: [String(missing)],
         comparator: "number_equal",
         explanation: exp(
           "Pour retrouver une valeur manquante, on utilise le total.",
           "On additionne les valeurs connues, puis on soustrait au total.",
-          `${total} - ${knownSum} = ${missing}.`,
+          `${a} + ${b} = ${knownSum}, puis ${total} − ${knownSum} = ${missing}.`,
           `La valeur manquante est ${missing}.`
         ),
         canvas: tableauCanvas({
-          title: "Valeur manquante",
+          title: s.titre,
           headers: [...headers, "Total"],
           rows: [
             {
-              label: "Quantité",
+              label: s.ligne,
               values,
             },
           ],
@@ -1036,18 +1786,24 @@ export const tableauxBank: TutorBankItemV4[] = [
     hint: "Additionne toutes les cases du tableau.",
     tags: ["cm1", "tableau", "defi", "total_general", "template", "canvas"],
     generate: () => {
-      const headers = randomChoice(CONTEXTES_FRUITS);
-      const rows = ["Matin", "Après-midi"];
+      // 20/10/2026 : décor tiré parmi les SITUATIONS (la phrase revenait à l'identique).
+      const s = randomChoice(SITUATIONS);
+      const headers = colonnes(s, 3);
+      const rows = s.lignes;
 
       const values = [
-        [randomInt(5, 18), randomInt(5, 18), randomInt(5, 18)],
-        [randomInt(5, 18), randomInt(5, 18), randomInt(5, 18)],
+        [tirerNombre(s), tirerNombre(s), tirerNombre(s)],
+        [tirerNombre(s), tirerNombre(s), tirerNombre(s)],
       ];
 
       const total = values.flat().reduce((a, b) => a + b, 0);
 
       return {
-        text: "Quel est le total de toutes les valeurs du tableau ?",
+        text: randomChoice([
+          `${s.intro}. Quel est le total de toutes les valeurs du tableau ?`,
+          `Tableau « ${s.titre} » : additionne les six cases. Quel total trouves-tu ?`,
+          `${s.intro}. Combien ${deMot(s.unite)} sur toute la grille ?`,
+        ]),
         format: "short",
         expected: [String(total)],
         comparator: "number_equal",
@@ -1058,7 +1814,7 @@ export const tableauxBank: TutorBankItemV4[] = [
           `Le total général est ${total}.`
         ),
         canvas: tableauCanvas({
-          title: "Total général",
+          title: s.titre,
           headers,
           rows: [
             {
@@ -1088,43 +1844,42 @@ export const tableauxBank: TutorBankItemV4[] = [
     hint: "Calcule le total de chaque ligne, puis compare.",
     tags: ["cm1", "tableau", "defi", "comparer_lignes", "template", "canvas"],
     generate: () => {
-      const headers = randomChoice(CONTEXTES_SPORTS);
-      const rowLabels = ["Groupe A", "Groupe B"];
+      // 20/10/2026 : décor tiré parmi les SITUATIONS ; le surlignage qui
+      // montrait la bonne ligne est retiré (il donnait la réponse).
+      const s = randomChoice(SITUATIONS);
+      const headers = colonnes(s, 3);
+      const rowLabels = s.lignes;
 
-      const a1 = randomInt(5, 15);
-      const a2 = randomInt(5, 15);
-      const a3 = randomInt(5, 15);
-
-      const b1 = randomInt(5, 15);
-      const b2 = randomInt(5, 15);
-      const b3 = randomInt(5, 15);
+      const [a1, a2, a3] = [tirerNombre(s), tirerNombre(s), tirerNombre(s)];
+      const [b1, b2, b3] = [tirerNombre(s), tirerNombre(s), tirerNombre(s)];
 
       const totalA = a1 + a2 + a3;
       const totalB = b1 + b2 + b3;
 
+      const egalite = "Autant pour les deux";
       const correct =
-        totalA > totalB
-          ? "Groupe A"
-          : totalB > totalA
-            ? "Groupe B"
-            : "égalité";
+        totalA > totalB ? rowLabels[0] : totalB > totalA ? rowLabels[1] : egalite;
 
       return {
-        text: "Quel groupe a le plus grand total ?",
+        text: randomChoice([
+          `${s.intro}. Quelle ligne a le plus grand total ?`,
+          `Tableau « ${s.titre} » : « ${rowLabels[0]} » ou « ${rowLabels[1]} », laquelle a le plus ${deMot(s.unite)} en tout ?`,
+          `${s.intro}. Calcule les deux totaux : quelle ligne gagne ?`,
+        ]),
         format: "qcm",
-        choices: ["Groupe A", "Groupe B", "égalité"],
+        choices: [rowLabels[0], rowLabels[1], egalite],
         expected: [correct],
         comparator: "mcq_exact",
         explanation: exp(
           "Pour comparer deux lignes, on calcule le total de chaque ligne.",
-          "On additionne les valeurs de chaque groupe.",
-          `Groupe A : ${a1} + ${a2} + ${a3} = ${totalA}. Groupe B : ${b1} + ${b2} + ${b3} = ${totalB}.`,
-          correct === "égalité"
-            ? "Les deux groupes ont le même total."
-            : `Le plus grand total est celui du ${correct}.`
+          "On additionne les valeurs de chaque ligne.",
+          `${rowLabels[0]} : ${a1} + ${a2} + ${a3} = ${totalA}. ${rowLabels[1]} : ${b1} + ${b2} + ${b3} = ${totalB}.`,
+          correct === egalite
+            ? "Les deux lignes ont le même total."
+            : `Le plus grand total est celui de « ${correct} ».`
         ),
         canvas: tableauCanvas({
-          title: "Comparer deux lignes",
+          title: s.titre,
           headers,
           rows: [
             {
@@ -1136,13 +1891,7 @@ export const tableauxBank: TutorBankItemV4[] = [
               values: [b1, b2, b3],
             },
           ],
-          highlight:
-            correct === "Groupe A"
-              ? { row: 0 }
-              : correct === "Groupe B"
-                ? { row: 1 }
-                : undefined,
-          questionLabel: "Quel groupe a le plus grand total ?",
+          questionLabel: "Quelle ligne a le plus grand total ?",
         }),
       };
     },
@@ -1789,4 +2538,10 @@ export const tableauxBank: TutorBankItemV4[] = [
       questionLabel: "Total général ?",
     }),
   },
+
+  // ⭐ 20/10/2026 — générateurs situation × tournure (voir SITUATIONS).
+  ...GEN_LIRE,
+  ...GEN_COMPLETER,
+  ...GEN_INTERPRETER,
+  ...GEN_DEFI,
 ];

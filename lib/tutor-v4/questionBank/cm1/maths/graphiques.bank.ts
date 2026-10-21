@@ -56,47 +56,127 @@ function statGraphCanvas(
 // CONTEXTES ROBUSTES
 // ============================================================
 
-const GRAPH_CONTEXTES_ROBUSTES = [
-  {
-    title: "Activités sportives",
-    theme: "sport" as const,
-    labels: ["Football", "Danse", "Natation", "Basket"],
-    unit: "élèves",
-  },
-  {
-    title: "Fruits au marché",
-    theme: "reunion" as const,
-    labels: ["Mangues", "Ananas", "Bananes", "Letchis"],
-    unit: "fruits",
-  },
-  {
-    title: "Livres empruntés",
-    theme: "neutral" as const,
-    labels: ["Romans", "BD", "Documentaires", "Albums"],
-    unit: "livres",
-  },
-  {
-    title: "Défis de calcul",
-    theme: "neutral" as const,
-    labels: ["Équipe A", "Équipe B", "Équipe C", "Équipe D"],
-    unit: "points",
-  },
-  {
-    title: "Randonnée à La Réunion",
-    theme: "reunion" as const,
-    labels: ["Eau", "Fruits", "Sandwichs", "Casquettes"],
-    unit: "objets",
-  },
-  {
-    title: "Jardin de l’école",
-    theme: "neutral" as const,
-    labels: ["Tomates", "Salades", "Carottes", "Fleurs"],
-    unit: "plants",
-  },
+// ⭐ 20/10/2026 — Les maths sont TRANSVERSALES : chaque situation vient d'un
+// autre domaine (sport, biologie, météo, écologie, musique, cinéma, cantine,
+// transports…) et elle est portée par un MÉTIER. L'intro est écrite dans
+// l'énoncé : c'est elle qui fait varier les questions d'un tirage à l'autre.
+type GraphCtx = {
+  intro: string;
+  title: string;
+  theme: "neutral" | "reunion" | "sport" | "cuisine";
+  labels: string[];
+  unit: string;
+};
+
+const JOURS = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"];
+const PRENOMS = ["Inès", "Noah", "Lina", "Tom", "Zoé", "Enzo"];
+
+const GRAPH_CONTEXTES_ROBUSTES: GraphCtx[] = [
+  { intro: "Le professeur d'EPS note le sport préféré des élèves.", title: "Sports préférés", theme: "sport", labels: ["Football", "Danse", "Natation", "Basket", "Judo"], unit: "élèves" },
+  { intro: "Une marchande du marché de Saint-Paul compte ses fruits vendus.", title: "Fruits vendus", theme: "reunion", labels: ["Mangues", "Ananas", "Bananes", "Letchis"], unit: "fruits" },
+  { intro: "La bibliothécaire compte les livres empruntés.", title: "Livres empruntés", theme: "neutral", labels: ["Romans", "BD", "Documentaires", "Albums", "Contes"], unit: "livres" },
+  { intro: "Une biologiste de Kélonia compte les tortues vues en mer.", title: "Tortues observées", theme: "reunion", labels: ["Janvier", "Février", "Mars", "Avril"], unit: "tortues" },
+  { intro: "Un ornithologue compte les oiseaux d'un parc.", title: "Oiseaux du parc", theme: "neutral", labels: ["Merles", "Moineaux", "Martins", "Tourterelles"], unit: "oiseaux" },
+  { intro: "Des bénévoles ramassent les déchets d'une plage.", title: "Déchets de la plage", theme: "reunion", labels: ["Bouteilles", "Canettes", "Sacs", "Bouchons"], unit: "déchets" },
+  { intro: "Une météorologue mesure la pluie tombée à Cilaos.", title: "Pluie à Cilaos (mm)", theme: "reunion", labels: JOURS, unit: "millimètres" },
+  { intro: "Le cuisinier de la cantine compte les desserts choisis.", title: "Desserts choisis", theme: "cuisine", labels: ["Yaourts", "Fruits", "Gâteaux", "Compotes"], unit: "desserts" },
+  { intro: "Le chauffeur du car jaune compte ses passagers.", title: "Passagers du car jaune", theme: "reunion", labels: JOURS, unit: "passagers" },
+  { intro: "Le cinéma du quartier compte les places vendues.", title: "Places vendues", theme: "neutral", labels: ["Dessin animé", "Aventure", "Comédie", "Documentaire"], unit: "places" },
+  { intro: "La professeure de musique note l'instrument préféré.", title: "Instruments préférés", theme: "neutral", labels: ["Guitare", "Piano", "Batterie", "Violon", "Kayamb"], unit: "élèves" },
+  { intro: "À la kermesse, on compte les tickets vendus par stand.", title: "Tickets de la kermesse", theme: "neutral", labels: ["Pêche à la ligne", "Chamboule-tout", "Maquillage", "Tombola"], unit: "tickets" },
+  { intro: "Un animateur note le jeu de société préféré.", title: "Jeux préférés", theme: "neutral", labels: ["Petits chevaux", "Jeu de l'oie", "Dames", "Cartes"], unit: "votes" },
+  { intro: "Dans la cour, des enfants comptent leurs billes.", title: "Billes de chaque enfant", theme: "neutral", labels: PRENOMS, unit: "billes" },
+  { intro: "Une confiseuse compte les bonbons d'un bocal.", title: "Bonbons du bocal", theme: "cuisine", labels: ["Fraise", "Citron", "Menthe", "Coco"], unit: "bonbons" },
+  { intro: "Une guide du Piton de la Fournaise compte ses randonneurs.", title: "Randonneurs au volcan", theme: "reunion", labels: JOURS, unit: "randonneurs" },
+  { intro: "Le jardinier de l'école compte ses plants.", title: "Plants du jardin", theme: "neutral", labels: ["Tomates", "Salades", "Carottes", "Brèdes"], unit: "plants" },
+  { intro: "Une vétérinaire compte les animaux soignés.", title: "Animaux soignés", theme: "neutral", labels: ["Chiens", "Chats", "Lapins", "Perruches"], unit: "animaux" },
+  { intro: "Un boulanger compte ses viennoiseries vendues.", title: "Viennoiseries vendues", theme: "cuisine", labels: ["Croissants", "Brioches", "Beignets", "Chaussons"], unit: "viennoiseries" },
+  { intro: "Une journaliste demande le parfum de glace préféré.", title: "Glaces préférées", theme: "cuisine", labels: ["Vanille", "Chocolat", "Fraise", "Coco"], unit: "personnes" },
+  { intro: "La directrice note comment les élèves viennent à l'école.", title: "Trajet vers l'école", theme: "neutral", labels: ["À pied", "En car", "En voiture", "À vélo"], unit: "élèves" },
+  { intro: "Une pompière compte les sorties de sa caserne.", title: "Sorties des pompiers", theme: "neutral", labels: JOURS, unit: "sorties" },
+  { intro: "Un pêcheur de Saint-Gilles compte ses poissons.", title: "Poissons pêchés", theme: "reunion", labels: ["Thons", "Dorades", "Capitaines", "Bonites"], unit: "poissons" },
+  { intro: "Une fleuriste compte les fleurs vendues.", title: "Fleurs vendues", theme: "neutral", labels: ["Roses", "Tulipes", "Orchidées", "Anthuriums"], unit: "fleurs" },
+  { intro: "L'entraîneuse compte les tours de piste de chaque coureur.", title: "Tours de piste", theme: "sport", labels: PRENOMS, unit: "tours" },
+  { intro: "Un soigneur de l'aquarium compte les poissons des bassins.", title: "Poissons des bassins", theme: "neutral", labels: ["Bassin rouge", "Bassin bleu", "Bassin vert", "Bassin jaune"], unit: "poissons" },
+  { intro: "Une astronome compte les étoiles filantes chaque nuit.", title: "Étoiles filantes", theme: "neutral", labels: JOURS, unit: "étoiles filantes" },
+  { intro: "Une éleveuse compte les œufs pondus.", title: "Œufs pondus", theme: "neutral", labels: JOURS, unit: "œufs" },
+  { intro: "Le gardien de l'école compte les sacs de tri.", title: "Sacs de tri", theme: "neutral", labels: ["Papier", "Plastique", "Verre", "Compost"], unit: "sacs" },
+  { intro: "La maîtresse note la couleur préférée de la classe.", title: "Couleurs préférées", theme: "neutral", labels: ["Bleu", "Rouge", "Vert", "Jaune", "Violet"], unit: "élèves" },
+  { intro: "Une arbitre note les points de chaque joueuse de basket.", title: "Points marqués", theme: "sport", labels: ["Léa", "Maya", "Sarah", "Jade", "Nora"], unit: "points" },
+  { intro: "Un dentiste compte ses patients de la semaine.", title: "Patients du dentiste", theme: "neutral", labels: JOURS, unit: "patients" },
+  { intro: "La classe vote pour choisir son délégué.", title: "Vote du délégué", theme: "neutral", labels: PRENOMS, unit: "voix" },
+  { intro: "Une guide en mer compte les baleines vues.", title: "Baleines observées", theme: "reunion", labels: ["Juin", "Juillet", "Août", "Septembre"], unit: "baleines" },
+  { intro: "Une libraire compte les mangas vendus.", title: "Mangas vendus", theme: "neutral", labels: JOURS, unit: "mangas" },
+  { intro: "Un apiculteur compte ses ruches dans chaque champ.", title: "Ruches par champ", theme: "reunion", labels: ["Letchis", "Baies roses", "Goyaviers", "Fleurs"], unit: "ruches" },
+  { intro: "Une infirmière scolaire compte ses visites.", title: "Visites à l'infirmerie", theme: "neutral", labels: JOURS, unit: "visites" },
+  { intro: "Une chanteuse compte les chansons de chaque album.", title: "Chansons par album", theme: "neutral", labels: ["Album bleu", "Album rouge", "Album vert", "Album or"], unit: "chansons" },
+  { intro: "Un garde forestier compte les arbres plantés.", title: "Arbres plantés", theme: "reunion", labels: ["Tamarins", "Bois de couleur", "Palmistes", "Filaos"], unit: "arbres" },
+  { intro: "Un club de natation compte les longueurs nagées.", title: "Longueurs nagées", theme: "sport", labels: PRENOMS, unit: "longueurs" },
 ];
 
 function randomContext() {
   return randomChoice(GRAPH_CONTEXTES_ROBUSTES);
+}
+
+/** « de » ou « d' » devant le nom de l'unité (d'élèves, d'œufs, de billes). */
+function de(unit: string) {
+  return /^[aeiouyéèêàâîôœh]/i.test(unit) ? `d'${unit}` : `de ${unit}`;
+}
+
+/** Valeurs distinctes, multiples d'un pas (2, 5 ou 10) : lecture sur des nombres ronds. */
+function roundValues(count: number, pas: number, minK: number, maxK: number) {
+  return uniqueValues(count, minK, maxK).map((k) => k * pas);
+}
+
+/** Tirage d'une situation : contexte, 3 ou 4 catégories, valeurs rondes. */
+function tirerSituation(n = 4, pas = randomChoice([1, 2, 5])) {
+  const ctx = randomContext();
+  const labels = shuffle(ctx.labels).slice(0, n);
+  const maxK = pas === 1 ? 30 : pas === 2 ? 15 : 10;
+  const values = roundValues(labels.length, pas, pas === 1 ? 3 : 2, maxK);
+  return { ctx, labels, values, pas };
+}
+
+// ⭐ 20/10/2026 — LIRE sur l'AXE GRADUÉ. Avant, la valeur était écrite sur la
+// barre : « lire » revenait à recopier un nombre. Ici, la valeur est cachée et
+// l'élève suit la ligne jusqu'à l'axe. CM1 : un pas de 1, 2, 5 ou 10, six
+// graduations utiles au plus, et la barre s'arrête TOUJOURS sur une graduation.
+
+/** Situation à lire sur l'axe : valeurs = 1 à 6 fois le pas, distinctes. */
+function tirerSituationAxe(n = 4, pas = randomChoice([2, 2, 5, 5, 10, 10, 1])) {
+  const ctx = randomContext();
+  const labels = shuffle(ctx.labels).slice(0, n);
+  const values = roundValues(labels.length, pas, 1, 6);
+  return { ctx, labels, values, pas };
+}
+
+/** Affichage « axe gradué » : pas de nombre sur les barres, un axe et sa grille. */
+function displayAxe(pas: number, unit: string, highlightIndex?: number) {
+  return {
+    showLabels: true,
+    showValues: false,
+    showAxis: true,
+    step: pas,
+    axeY: unit,
+    ...(highlightIndex === undefined ? {} : { highlightIndex }),
+  };
+}
+
+/** Comment on lit, en phrases courtes. */
+function lectureAxe(label: string, v: number, pas: number) {
+  return `Je pars du haut de la barre « ${label} ». Je suis la ligne jusqu'à l'axe. Une graduation vaut ${pas} : je lis ${v}.`;
+}
+
+/** Leurres de lecture : la graduation voisine, et le pas lu à la place de la valeur. */
+function leurresAxe(v: number, pas: number, autres: number[] = []) {
+  return leurres(v, [v - pas, v + pas, pas, ...autres]);
+}
+
+const HINT_AXE = "Pars du haut de la barre. Suis la ligne jusqu'à l'axe, puis lis le nombre.";
+
+/** Leurres numériques distincts et positifs autour d'une valeur. */
+function leurres(correct: number, candidats: number[]) {
+  return Array.from(new Set(candidats.filter((v) => v > 0 && v !== correct))).map(String);
 }
 
 function uniqueValues(count: number, min: number, max: number) {
@@ -254,16 +334,16 @@ export const graphiquesBank: TutorBankItemV4[] = [
     microId: "graphique_lire",
     difficulty: 1,
     theme: "sport",
-    text: "Dans le graphique, combien d’élèves ont choisi la natation ?",
+    text: "Le professeur d'EPS note l'activité choisie. Lis l'axe : combien d’élèves ont choisi la natation ?",
     format: "qcm",
-    choices: ["10", "8", "12", "30"],
+    choices: ["10", "8", "12", "2"],
     expected: ["10"],
     comparator: "mcq_exact",
-    hint: "Cherche la barre Natation.",
+    hint: "Pars du haut de la barre Natation. Suis la ligne jusqu'à l'axe.",
     explanation: exp(
-      "Un graphique permet de représenter des données avec des barres ou des bâtons.",
-      "On repère la catégorie demandée, puis on lit sa valeur.",
-      "La barre Natation correspond à 10.",
+      "Un graphique représente des données avec des barres. L'axe gradué donne la hauteur.",
+      "On part du haut de la barre Natation, on suit la ligne jusqu'à l'axe.",
+      "Une graduation vaut 2. La barre s'arrête sur la graduation 10.",
       "10 élèves ont choisi la natation."
     ),
     tags: ["cm1", "graphique", "lire", "qcm", "canvas"],
@@ -275,11 +355,7 @@ export const graphiquesBank: TutorBankItemV4[] = [
         { label: "Danse", value: 8 },
         { label: "Natation", value: 10 },
       ],
-      display: {
-        showLabels: true,
-        showValues: true,
-        highlightIndex: 2,
-      },
+      display: displayAxe(2, "élèves", 2),
     }),
   },
 
@@ -292,31 +368,27 @@ export const graphiquesBank: TutorBankItemV4[] = [
     microId: "graphique_lire",
     difficulty: 1,
     theme: "reunion",
-    text: "Dans le graphique, combien de mangues ont été vendues ?",
+    text: "Une marchande du marché de Saint-Paul compte ses fruits. Lis l'axe : combien de mangues a-t-elle vendues ?",
     format: "short",
-    expected: ["18"],
+    expected: ["20"],
     comparator: "number_equal",
-    hint: "Lis la valeur de la barre Mangues.",
+    hint: "Pars du haut du bâton Mangues. Suis la ligne jusqu'à l'axe.",
     explanation: exp(
-      "Lire un graphique, c’est retrouver une valeur représentée visuellement.",
-      "On cherche la catégorie Mangues.",
-      "La valeur indiquée pour Mangues est 18.",
-      "18 mangues ont été vendues."
+      "Lire un graphique, c'est trouver la hauteur d'un bâton sur l'axe gradué.",
+      "On part du haut du bâton Mangues, on suit la ligne jusqu'à l'axe.",
+      "Une graduation vaut 5. Le bâton s'arrête sur la graduation 20 (pas 15, ni 25).",
+      "20 mangues ont été vendues."
     ),
-    tags: ["cm1", "graphique", "lire", "reunion", "short", "canvas"],
+    tags: ["cm1", "graphique", "lire", "reunion", "short", "canvas", "axe_gradue"],
     canvas: statGraphCanvas({
       graphType: "batons",
       title: "Fruits vendus au marché",
       data: [
-        { label: "Mangues", value: 18 },
-        { label: "Ananas", value: 12 },
+        { label: "Mangues", value: 20 },
+        { label: "Ananas", value: 10 },
         { label: "Bananes", value: 25 },
       ],
-      display: {
-        showLabels: true,
-        showValues: true,
-        highlightIndex: 0,
-      },
+      display: displayAxe(5, "fruits", 0),
     }),
   },
 
@@ -371,6 +443,38 @@ export const graphiquesBank: TutorBankItemV4[] = [
     hint: "Repère la catégorie demandée, puis lis la valeur.",
     tags: ["cm1", "graphique", "lire", "template", "robuste", "canvas"],
     generate: () => {
+      // Une fois sur deux : la valeur est cachée, on la lit sur l'axe gradué.
+      if (randomChoice([true, false])) {
+        const { ctx, labels, values, pas } = tirerSituationAxe(randomChoice([3, 4]));
+        const index = randomInt(0, labels.length - 1);
+        const v = values[index];
+        const correct = String(v);
+        return {
+          theme: ctx.theme,
+          hint: HINT_AXE,
+          text: `${ctx.intro} ${randomChoice([
+            `Lis l'axe : combien ${de(ctx.unit)} pour « ${labels[index]} » ?`,
+            `Suis la ligne jusqu'à l'axe. Combien ${de(ctx.unit)} pour « ${labels[index]} » ?`,
+            `La barre « ${labels[index]} » monte jusqu'à quelle graduation ?`,
+          ])}`,
+          format: "short",
+          expected: [correct],
+          comparator: "number_equal",
+          explanation: exp(
+            "Lire un graphique, c'est trouver la hauteur d'une barre sur l'axe gradué.",
+            "On part du haut de la barre, on suit la ligne jusqu'à l'axe, on lit le nombre.",
+            lectureAxe(labels[index], v, pas),
+            `La réponse est ${v} ${ctx.unit}.`
+          ),
+          canvas: statGraphCanvas({
+            graphType: randomGraphType(),
+            title: ctx.title,
+            data: makeData(labels, values),
+            display: displayAxe(pas, ctx.unit, index),
+          }),
+        };
+      }
+
       const ctx = randomContext();
       const labels = shuffle(ctx.labels).slice(0, 4);
       const values = uniqueValues(labels.length, 5, 28);
@@ -379,13 +483,17 @@ export const graphiquesBank: TutorBankItemV4[] = [
 
       return {
         theme: ctx.theme,
-        text: `Dans le graphique, quelle est la valeur pour "${labels[index]}" ?`,
+        text: `${ctx.intro} ${randomChoice([
+          `Dans le graphique, quelle est la valeur pour « ${labels[index]} » ?`,
+          `Quel nombre est écrit sur la barre « ${labels[index]} » ?`,
+          `Combien ${de(ctx.unit)} pour « ${labels[index]} » ?`,
+        ])}`,
         format: "short",
         expected: [correct],
         comparator: "number_equal",
         explanation: exp(
           "Lire un graphique, c’est retrouver une valeur représentée.",
-          "On cherche la catégorie demandée, puis on lit le nombre associé.",
+          "On cherche la catégorie demandée, puis on lit le nombre écrit sur sa barre.",
           `La catégorie ${labels[index]} a pour valeur ${correct}.`,
           `La réponse est ${correct}.`
         ),
@@ -412,41 +520,38 @@ export const graphiquesBank: TutorBankItemV4[] = [
     microId: "graphique_lire",
     difficulty: 1,
     theme: "neutral",
-    hint: "La réponse est écrite au-dessus ou à côté de la bonne barre.",
-    tags: ["cm1", "graphique", "lire", "qcm", "template", "robuste", "canvas"],
+    hint: HINT_AXE,
+    tags: ["cm1", "graphique", "lire", "qcm", "template", "robuste", "canvas", "axe_gradue"],
     generate: () => {
-      const ctx = randomContext();
-      const labels = shuffle(ctx.labels).slice(0, 4);
-      const values = uniqueValues(labels.length, 6, 30);
+      // Toujours sur l'axe gradué : les leurres sont la graduation voisine et le pas.
+      const { ctx, labels, values, pas } = tirerSituationAxe(4);
       const index = randomInt(0, labels.length - 1);
-
-      const correct = String(values[index]);
-      const wrongs = values
-        .filter((_, i) => i !== index)
-        .map(String);
+      const v = values[index];
+      const correct = String(v);
+      const autres = values.filter((_, i) => i !== index);
 
       return {
         theme: ctx.theme,
-        text: `Quelle est la valeur de "${labels[index]}" ?`,
+        text: `${ctx.intro} ${randomChoice([
+          `Lis l'axe gradué. Quelle est la valeur de « ${labels[index]} » ?`,
+          `Combien ${de(ctx.unit)} pour « ${labels[index]} » ? Suis la ligne jusqu'à l'axe.`,
+          `Jusqu'où monte la barre « ${labels[index]} » sur l'axe ?`,
+        ])}`,
         format: "qcm",
-        choices: makeChoices(correct, wrongs),
+        choices: makeChoices(correct, leurresAxe(v, pas, autres)),
         expected: [correct],
         comparator: "mcq_exact",
         explanation: exp(
-          "Un graphique permet de lire rapidement une donnée.",
-          "On repère la bonne catégorie sur l’axe ou sous la barre.",
-          `Pour ${labels[index]}, on lit ${correct}.`,
-          `La bonne réponse est ${correct}.`
+          "Un graphique permet de lire une donnée grâce à son axe gradué.",
+          "On part du haut de la barre, on suit la ligne jusqu'à l'axe. On ne lit pas la graduation voisine.",
+          lectureAxe(labels[index], v, pas),
+          `La bonne réponse est ${v}.`
         ),
         canvas: statGraphCanvas({
           graphType: randomGraphType(),
           title: ctx.title,
           data: makeData(labels, values),
-          display: {
-            showLabels: true,
-            showValues: true,
-            highlightIndex: index,
-          },
+          display: displayAxe(pas, ctx.unit, index),
         }),
       };
     },
@@ -472,11 +577,15 @@ export const graphiquesBank: TutorBankItemV4[] = [
 
       return {
         theme: ctx.theme,
-        text: `Dans le diagramme, quelle est la valeur de "${labels[index]}" ?`,
+        text: `${ctx.intro} ${randomChoice([
+          `Dans le diagramme, combien ${de(ctx.unit)} pour « ${labels[index]} » ?`,
+          `Quelle valeur est écrite sur la part « ${labels[index]} » ?`,
+          `Lis la part « ${labels[index]} » : combien ${de(ctx.unit)} ?`,
+        ])}`,
         format: "qcm",
         choices: makeChoices(
           correct,
-          values.filter((_, i) => i !== index).map(String)
+          [...values.filter((_, i) => i !== index).map(String), String(total(values))]
         ),
         expected: [correct],
         comparator: "mcq_exact",
@@ -490,11 +599,120 @@ export const graphiquesBank: TutorBankItemV4[] = [
           graphType: "camembert",
           title: ctx.title,
           data: makeData(labels, values),
+          // valeursParts : depuis le 20/10/2026, le camembert n'écrit que le total par défaut.
           display: {
             showLabels: true,
             showValues: true,
+            valeursParts: true,
             highlightIndex: index,
           },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "cm1_graphique_lire_tpl_4_quelle_categorie",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "graphique",
+    microId: "graphique_lire",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Cherche le nombre demandé sur le graphique, puis regarde sous quelle barre il est écrit.",
+    tags: ["cm1", "graphique", "lire", "lecture_inverse", "template", "robuste", "canvas"],
+    generate: () => {
+      const graphType = randomChoice<GraphType>(["barres", "batons", "camembert"]);
+      // Barres et bâtons : une fois sur deux, sur l'axe gradué (pas de nombre écrit).
+      const surAxe = graphType !== "camembert" && randomChoice([true, false]);
+      const { ctx, labels, values, pas } = surAxe ? tirerSituationAxe(4) : tirerSituation(4);
+      const index = randomInt(0, labels.length - 1);
+      const v = values[index];
+      const correct = labels[index];
+      const question = randomChoice([
+        `Quelle barre monte jusqu'à ${v} ?`,
+        `Pour quelle catégorie lit-on ${v} ${ctx.unit} ?`,
+        `Quelle catégorie a exactement ${v} ${ctx.unit} ?`,
+        `Le nombre ${v} est lu pour quelle catégorie ?`,
+      ]);
+      const methode = surAxe
+        ? `On trouve ${v} sur l'axe (une graduation vaut ${pas}). On suit la ligne de ${v} : elle touche le haut d'une seule barre.`
+        : `On cherche le nombre ${v} sur le graphique, puis on lit le nom écrit sous la barre (ou sur la part).`;
+      return {
+        theme: ctx.theme,
+        ...(surAxe ? { hint: "Trouve le nombre sur l'axe. Suis sa ligne : quelle barre s'arrête juste là ?" } : {}),
+        text: `${ctx.intro} ${question}`,
+        format: "qcm",
+        choices: makeChoices(correct, labels.filter((_, i) => i !== index)),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Lire un graphique, c'est relier un nombre à sa catégorie.",
+          methode,
+          `${labels.map((l, i) => `${l} : ${values[i]}`).join(" ; ")}. Seule « ${correct} » vaut ${v}.`,
+          `La réponse est « ${correct} ».`
+        ),
+        canvas: statGraphCanvas({
+          graphType,
+          title: ctx.title,
+          data: makeData(labels, values),
+          display: surAxe
+            ? displayAxe(pas, ctx.unit)
+            : { showLabels: true, showValues: true, ...(graphType === "camembert" ? { valeursParts: true } : {}) },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "cm1_graphique_lire_tpl_5_comparer_lecture",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "graphique",
+    microId: "graphique_lire",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Lis la valeur de chaque barre, puis compare-la au nombre donné.",
+    tags: ["cm1", "graphique", "lire", "compter_barres", "template", "robuste", "canvas"],
+    generate: () => {
+      const { ctx, labels, values } = tirerSituation(4, randomChoice([2, 5]));
+      const sorted = [...values].sort((a, b) => a - b);
+      // Seuil strictement entre deux valeurs : aucune égalité possible.
+      const k = randomInt(0, 2);
+      const seuil = Math.floor((sorted[k] + sorted[k + 1]) / 2);
+      const plus = randomChoice([true, false]);
+      const count = values.filter((v) => (plus ? v > seuil : v < seuil)).length;
+      const question = plus
+        ? randomChoice([
+            `Combien de barres dépassent ${seuil} ?`,
+            `Combien de catégories ont plus de ${seuil} ${ctx.unit} ?`,
+          ])
+        : randomChoice([
+            `Combien de barres restent sous ${seuil} ?`,
+            `Combien de catégories ont moins de ${seuil} ${ctx.unit} ?`,
+          ]);
+      const retenues = labels.filter((_, i) => (plus ? values[i] > seuil : values[i] < seuil));
+      const correct = String(count);
+      return {
+        theme: ctx.theme,
+        text: `${ctx.intro} ${question}`,
+        format: "qcm",
+        choices: makeChoices(correct, ["0", "1", "2", "3", "4"].filter((c) => c !== correct)),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "On lit chaque valeur, puis on la compare au nombre donné.",
+          `On garde les catégories ${plus ? "au-dessus de" : "en dessous de"} ${seuil}.`,
+          `${labels.map((l, i) => `${l} : ${values[i]}`).join(" ; ")}. Retenues : ${retenues.join(", ")}.`,
+          `Il y en a ${count}.`
+        ),
+        canvas: statGraphCanvas({
+          graphType: randomChoice<GraphType>(["barres", "batons"]),
+          title: ctx.title,
+          data: makeData(labels, values),
+          display: { showLabels: true, showValues: true },
         }),
       };
     },
@@ -514,31 +732,28 @@ export const graphiquesBank: TutorBankItemV4[] = [
     microId: "graphique_completer",
     difficulty: 2,
     theme: "reunion",
-    text: "Le total est 40 fruits. Il y a 15 mangues et 10 ananas. Combien manque-t-il pour les bananes ?",
+    text: "Le total est 40 fruits. La barre des bananes a été effacée. Lis les deux autres barres sur l'axe. Combien de bananes ?",
     format: "short",
     expected: ["15"],
     comparator: "number_equal",
-    hint: "Additionne les fruits connus, puis complète jusqu’à 40.",
+    hint: "Lis Mangues et Ananas sur l'axe. Additionne, puis complète jusqu'à 40.",
     explanation: exp(
       "Compléter un graphique peut demander de retrouver une valeur manquante.",
-      "On additionne les valeurs connues, puis on soustrait au total.",
-      "15 + 10 = 25, puis 40 - 25 = 15.",
-      "Il manque 15 bananes."
+      "Je lis chaque barre sur l'axe (une graduation vaut 5) : Mangues 15, Ananas 10. Puis j'additionne et je complète jusqu'au total.",
+      "15 + 10 = 25, puis 40 − 25 = 15.",
+      "Il y a 15 bananes : la barre doit monter jusqu'à 15."
     ),
-    tags: ["cm1", "graphique", "completer", "total", "reunion", "canvas"],
+    tags: ["cm1", "graphique", "completer", "total", "reunion", "canvas", "axe_gradue"],
+    // La barre effacée vaut 0 : elle n'est pas dessinée, son nom reste sous l'axe.
     canvas: statGraphCanvas({
       graphType: "barres",
       title: "Fruits vendus",
       data: [
         { label: "Mangues", value: 15 },
         { label: "Ananas", value: 10 },
-        { label: "Bananes", value: 15 },
+        { label: "Bananes", value: 0 },
       ],
-      display: {
-        showLabels: true,
-        showValues: false,
-        highlightIndex: 2,
-      },
+      display: displayAxe(5, "fruits", 2),
     }),
   },
 
@@ -597,7 +812,11 @@ export const graphiquesBank: TutorBankItemV4[] = [
 
       return {
         theme: ctx.theme,
-        text: `Quel est le total des ${ctx.unit} représentés dans le graphique ?`,
+        text: `${ctx.intro} ${randomChoice([
+          `Combien ${de(ctx.unit)} en tout sur le graphique ?`,
+          `Quel est le total ${de(ctx.unit)} ?`,
+          `On ajoute toutes les barres : combien ${de(ctx.unit)} ?`,
+        ])}`,
         format: "short",
         expected: [String(result)],
         comparator: "number_equal",
@@ -632,6 +851,49 @@ export const graphiquesBank: TutorBankItemV4[] = [
     hint: "Additionne les valeurs connues, puis soustrais au total.",
     tags: ["cm1", "graphique", "completer", "valeur_manquante", "template", "robuste", "canvas"],
     generate: () => {
+      // Une fois sur deux : les barres connues se LISENT sur l'axe gradué,
+      // la barre cherchée est effacée (valeur 0, son nom reste sous l'axe).
+      if (randomChoice([true, false])) {
+        const { ctx, labels, values, pas } = tirerSituationAxe(3);
+        // La barre effacée n'est jamais la plus haute : l'axe (qui s'arrête à la
+        // plus haute barre dessinée) doit permettre de la tracer.
+        const plusHaute = maxIndex(values);
+        const missingIndex = randomChoice(values.map((_, i) => i).filter((i) => i !== plusHaute));
+        const missingValue = values[missingIndex];
+        const result = total(values);
+        const connus = values.filter((_, i) => i !== missingIndex);
+        const nomsConnus = labels.filter((_, i) => i !== missingIndex);
+        const knownSum = result - missingValue;
+        const correct = String(missingValue);
+        const dessin = values.map((v, i) => (i === missingIndex ? 0 : v));
+        return {
+          theme: ctx.theme,
+          hint: "Lis les barres sur l'axe. Additionne-les, puis complète jusqu'au total.",
+          text: `${ctx.intro} ${randomChoice([
+            `En tout, il y a ${result} ${ctx.unit}. La barre « ${labels[missingIndex]} » a été effacée. Combien pour « ${labels[missingIndex]} » ?`,
+            `Le total est ${result}. Lis les autres barres sur l'axe. Quelle valeur pour « ${labels[missingIndex]} » ?`,
+            `Il manque la barre « ${labels[missingIndex]} ». Le total est ${result} ${ctx.unit}. Jusqu'où faut-il la tracer ?`,
+          ])}`,
+          format: "qcm",
+          // Leurres : la graduation voisine, la somme des barres connues, le total.
+          choices: makeChoices(correct, leurres(missingValue, [missingValue - pas, missingValue + pas, knownSum, result])),
+          expected: [correct],
+          comparator: "mcq_exact",
+          explanation: exp(
+            "Pour retrouver une valeur manquante, on utilise le total.",
+            `${lectureAxe(nomsConnus[0], connus[0], pas)} ${lectureAxe(nomsConnus[1], connus[1], pas)}`,
+            `${connus[0]} + ${connus[1]} = ${knownSum}, puis ${result} − ${knownSum} = ${missingValue}.`,
+            `La barre « ${labels[missingIndex]} » doit monter jusqu'à ${missingValue}.`
+          ),
+          canvas: statGraphCanvas({
+            graphType: "barres",
+            title: ctx.title,
+            data: makeData(labels, dessin),
+            display: displayAxe(pas, ctx.unit, missingIndex),
+          }),
+        };
+      }
+
       const ctx = randomContext();
       const labels = shuffle(ctx.labels).slice(0, 3);
       const values = uniqueValues(labels.length, 6, 18);
@@ -679,6 +941,43 @@ export const graphiquesBank: TutorBankItemV4[] = [
     hint: "Cherche combien il manque pour atteindre la valeur demandée.",
     tags: ["cm1", "graphique", "completer", "complement", "template", "canvas"],
     generate: () => {
+      // Une fois sur deux : la barre de départ se LIT sur l'axe gradué.
+      if (randomChoice([true, false])) {
+        const { ctx, labels, values, pas } = tirerSituationAxe(3);
+        const index = randomInt(0, labels.length - 1);
+        const current = values[index];
+        // Ce qui manque : un nombre entier de graduations, la cible reste ronde.
+        const missing = pas * randomInt(1, 4);
+        const target = current + missing;
+        const correct = String(missing);
+        return {
+          theme: ctx.theme,
+          hint: "Lis d'abord la barre sur l'axe. Puis cherche ce qui manque jusqu'au nombre visé.",
+          text: `${ctx.intro} ${randomChoice([
+            `Lis la barre « ${labels[index]} » sur l'axe. Combien faut-il ajouter pour atteindre ${target} ?`,
+            `On veut que « ${labels[index]} » monte jusqu'à ${target}. Combien ${de(ctx.unit)} faut-il ajouter ?`,
+            `Objectif : ${target} ${ctx.unit} pour « ${labels[index]} ». Combien en manque-t-il ?`,
+          ])}`,
+          format: "qcm",
+          // Leurres : la graduation voisine lue au départ, la valeur de départ, la cible.
+          choices: makeChoices(correct, leurres(missing, [missing - pas, missing + pas, current, target])),
+          expected: [correct],
+          comparator: "mcq_exact",
+          explanation: exp(
+            "Compléter une valeur, c'est chercher ce qui manque.",
+            lectureAxe(labels[index], current, pas),
+            `${target} − ${current} = ${missing}.`,
+            `Il faut ajouter ${missing} ${ctx.unit}.`
+          ),
+          canvas: statGraphCanvas({
+            graphType: randomGraphType(),
+            title: ctx.title,
+            data: makeData(labels, values),
+            display: displayAxe(pas, ctx.unit, index),
+          }),
+        };
+      }
+
       const ctx = randomContext();
       const labels = shuffle(ctx.labels).slice(0, 3);
 
@@ -710,6 +1009,139 @@ export const graphiquesBank: TutorBankItemV4[] = [
             showValues: true,
             highlightIndex: 0,
           },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "cm1_graphique_completer_tpl_4_barre_effacee",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "graphique",
+    microId: "graphique_completer",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Lis la barre qui sert de repère, puis ajoute, enlève ou double.",
+    tags: ["cm1", "graphique", "completer", "barre_manquante", "template", "robuste", "canvas"],
+    generate: () => {
+      const ctx = randomContext();
+      const labels = shuffle(ctx.labels).slice(0, 4);
+      const relation = randomChoice(["plus", "moins", "double"] as const);
+      // Repère et écart ronds, la barre cherchée reste positive et distincte des autres.
+      // 20/10/2026 : la barre repère se LIT sur l'axe gradué (pas de nombre écrit).
+      // Repère sur une graduation, écart = un nombre entier de graduations.
+      const pas = randomChoice([1, 2, 2, 5, 5, 10, 10]);
+      let values: number[] = [];
+      let ref = 0;
+      let ecart = 0;
+      let cible = 0;
+      for (let essai = 0; essai < 100; essai++) {
+        values = roundValues(3, pas, 1, 6);
+        ref = values[randomInt(0, 2)];
+        ecart = pas * randomInt(1, 3);
+        cible = relation === "plus" ? ref + ecart : relation === "moins" ? ref - ecart : ref * 2;
+        if (cible > 0 && !values.includes(cible)) break;
+      }
+      const refLabel = labels[values.indexOf(ref)];
+      const missing = labels[3];
+      const phrase =
+        relation === "plus"
+          ? `« ${missing} » a ${ecart} ${ctx.unit} de plus que « ${refLabel} ».`
+          : relation === "moins"
+            ? `« ${missing} » a ${ecart} ${ctx.unit} de moins que « ${refLabel} ».`
+            : `« ${missing} » a deux fois plus ${de(ctx.unit)} que « ${refLabel} ».`;
+      const question = randomChoice([
+        `La barre « ${missing} » a été effacée. ${phrase} À quelle hauteur faut-il la tracer ?`,
+        `Il manque la barre « ${missing} ». ${phrase} Quelle valeur faut-il dessiner ?`,
+        `${phrase} Complète le graphique : combien pour « ${missing} » ?`,
+      ]);
+      const calcul =
+        relation === "plus"
+          ? `${ref} + ${ecart} = ${cible}`
+          : relation === "moins"
+            ? `${ref} − ${ecart} = ${cible}`
+            : `${ref} × 2 = ${cible}`;
+      const correct = String(cible);
+      // Leurres : le repère lui-même, l'écart, le mauvais sens, et la graduation
+      // voisine du repère (lu à côté) reportée dans le calcul.
+      const voisin = ref + pas;
+      const wrongs =
+        relation === "double"
+          ? leurres(cible, [ref, voisin * 2, ref + 2, cible + pas])
+          : leurres(cible, [
+              ref,
+              ecart,
+              relation === "plus" ? ref - ecart : ref + ecart,
+              relation === "plus" ? voisin + ecart : voisin - ecart,
+              cible + pas,
+            ]);
+      return {
+        theme: ctx.theme,
+        hint: "Lis d'abord la barre repère sur l'axe. Puis ajoute, enlève ou double.",
+        text: `${ctx.intro} ${question}`,
+        format: "qcm",
+        choices: makeChoices(correct, wrongs),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Compléter un graphique, c'est tracer la barre qui manque avec la bonne hauteur.",
+          `${lectureAxe(refLabel, ref, pas)} Puis on ${relation === "plus" ? "ajoute" : relation === "moins" ? "enlève" : "double"}.`,
+          `${calcul}.`,
+          `La barre « ${missing} » doit monter jusqu'à ${cible}.`
+        ),
+        canvas: statGraphCanvas({
+          graphType: "barres",
+          title: ctx.title,
+          data: makeData(labels.slice(0, 3), values),
+          display: displayAxe(pas, ctx.unit),
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "cm1_graphique_completer_tpl_5_carreaux",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "graphique",
+    microId: "graphique_completer",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Chaque carreau vaut le même nombre : cherche combien de fois il tient dans la valeur.",
+    tags: ["cm1", "graphique", "completer", "graduation", "template", "robuste", "canvas"],
+    generate: () => {
+      const pas = randomChoice([2, 5, 10]);
+      const { ctx, labels, values } = tirerSituation(4, pas);
+      const index = randomInt(0, labels.length - 1);
+      const v = values[index];
+      const carreaux = v / pas;
+      const question = randomChoice([
+        `Sur la feuille, un carreau vaut ${pas} ${ctx.unit}. Combien de carreaux faut-il colorier pour « ${labels[index]} » ?`,
+        `Tom trace la barre « ${labels[index]} ». Un carreau = ${pas} ${ctx.unit}. Combien de carreaux de haut ?`,
+        `Pour tracer « ${labels[index]} », chaque carreau compte pour ${pas}. Combien de carreaux faut-il ?`,
+      ]);
+      const correct = String(carreaux);
+      return {
+        theme: ctx.theme,
+        text: `${ctx.intro} ${question}`,
+        format: "qcm",
+        choices: makeChoices(correct, leurres(carreaux, [v, carreaux + 1, carreaux - 1, v + pas, v * pas])),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Pour tracer une barre, on compte combien de carreaux il faut.",
+          `La valeur est ${v} et un carreau vaut ${pas} : on cherche combien de fois ${pas} dans ${v}.`,
+          `${carreaux} × ${pas} = ${v}, donc ${v} ÷ ${pas} = ${carreaux}.`,
+          `Il faut colorier ${carreaux} carreaux.`
+        ),
+        canvas: statGraphCanvas({
+          graphType: "barres",
+          title: ctx.title,
+          data: makeData(labels, values),
+          display: { showLabels: true, showValues: true, highlightIndex: index },
         }),
       };
     },
@@ -909,36 +1341,63 @@ export const graphiquesBank: TutorBankItemV4[] = [
     hint: "Pour trouver une différence, fais une soustraction.",
     tags: ["cm1", "graphique", "interpreter", "difference", "template", "robuste", "canvas"],
     generate: () => {
-      const ctx = randomContext();
-      const labels = shuffle(ctx.labels).slice(0, 3);
-
-      const small = randomInt(6, 15);
-      const diff = randomInt(3, 12);
-      const big = small + diff;
-      const other = randomInt(5, 25);
-
-      const values = [small, big, other];
+      // Une fois sur deux, les deux valeurs se LISENT sur l'axe gradué.
+      const surAxe = randomChoice([true, false]);
+      let ctx = randomContext();
+      let labels = shuffle(ctx.labels).slice(0, 3);
+      let pas = 1;
+      let small: number;
+      let big: number;
+      let values: number[];
+      if (surAxe) {
+        const s = tirerSituationAxe(3);
+        ({ ctx, labels, pas } = s);
+        const [a, b, c] = s.values;
+        small = Math.min(a, b);
+        big = Math.max(a, b);
+        values = [small, big, c];
+      } else {
+        small = randomInt(6, 15);
+        big = small + randomInt(3, 12);
+        let other = randomInt(5, 25);
+        while (other === small || other === big) other = randomInt(5, 25);
+        values = [small, big, other];
+      }
+      const diff = big - small;
+      const lecture = surAxe
+        ? `${lectureAxe(labels[1], big, pas)} ${lectureAxe(labels[0], small, pas)} `
+        : "";
 
       return {
         theme: ctx.theme,
-        text: `Quelle est la différence entre "${labels[1]}" et "${labels[0]}" ?`,
+        ...(surAxe ? { hint: "Lis les deux barres sur l'axe, puis fais une soustraction." } : {}),
+        text: `${ctx.intro} ${randomChoice([
+          `Quelle est la différence entre « ${labels[1]} » et « ${labels[0]} » ?`,
+          `Combien ${de(ctx.unit)} de plus pour « ${labels[1]} » que pour « ${labels[0]} » ?`,
+          `Combien ${de(ctx.unit)} de moins pour « ${labels[0]} » que pour « ${labels[1]} » ?`,
+          `Quel écart entre la barre « ${labels[1]} » et la barre « ${labels[0]} » ?`,
+        ])}`,
         format: "short",
         expected: [String(diff)],
         comparator: "number_equal",
         explanation: exp(
           "Une différence est l’écart entre deux valeurs.",
-          "On soustrait la plus petite valeur à la plus grande.",
-          `${big} - ${small} = ${diff}.`,
+          surAxe
+            ? "On lit les deux barres sur l'axe, puis on soustrait la plus petite valeur à la plus grande."
+            : "On soustrait la plus petite valeur à la plus grande.",
+          `${lecture}${big} - ${small} = ${diff}.`,
           `La différence est ${diff}.`
         ),
         canvas: statGraphCanvas({
           graphType: randomGraphType(),
           title: ctx.title,
           data: makeData(labels, values),
-          display: {
-            showLabels: true,
-            showValues: true,
-          },
+          display: surAxe
+            ? displayAxe(pas, ctx.unit)
+            : {
+                showLabels: true,
+                showValues: true,
+              },
         }),
       };
     },
@@ -963,7 +1422,11 @@ export const graphiquesBank: TutorBankItemV4[] = [
 
       return {
         theme: ctx.theme,
-        text: `Combien y a-t-il de ${ctx.unit} en tout ?`,
+        text: `${ctx.intro} ${randomChoice([
+          `Combien y a-t-il ${de(ctx.unit)} en tout ?`,
+          `Quel est le nombre total ${de(ctx.unit)} ?`,
+          `Si on réunit toutes les catégories, combien ${de(ctx.unit)} ?`,
+        ])}`,
         format: "short",
         expected: [String(result)],
         comparator: "number_equal",
@@ -981,6 +1444,107 @@ export const graphiquesBank: TutorBankItemV4[] = [
             showLabels: true,
             showValues: true,
           },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "cm1_graphique_interpreter_tpl_5_classement",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "graphique",
+    microId: "graphique_interpreter",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Range les valeurs de la plus grande à la plus petite.",
+    tags: ["cm1", "graphique", "interpreter", "classement", "template", "robuste", "canvas"],
+    generate: () => {
+      const { ctx, labels, values } = tirerSituation(4);
+      const ordre = labels.map((_, i) => i).sort((a, b) => values[b] - values[a]);
+      const rang = randomChoice([1, 2] as const); // 2e ou 3e place
+      const cible = ordre[rang];
+      const correct = labels[cible];
+      const nom = rang === 1 ? "deuxième" : "troisième";
+      const question = randomChoice([
+        `On range les barres de la plus haute à la plus basse. Quelle catégorie est ${nom} ?`,
+        `Quelle catégorie arrive en ${nom} position, de la plus grande valeur à la plus petite ?`,
+        `Sur le podium des valeurs, qui est ${nom} ?`,
+      ]);
+      return {
+        theme: ctx.theme,
+        text: `${ctx.intro} ${question}`,
+        format: "qcm",
+        choices: makeChoices(correct, labels.filter((_, i) => i !== cible)),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Interpréter un graphique, c'est comparer les barres entre elles.",
+          "On range les valeurs de la plus grande à la plus petite.",
+          ordre.map((i) => `${labels[i]} (${values[i]})`).join(" > ") + ".",
+          `La ${nom} est « ${correct} ».`
+        ),
+        canvas: statGraphCanvas({
+          graphType: randomChoice<GraphType>(["barres", "batons"]),
+          title: ctx.title,
+          data: makeData(labels, values),
+          display: { showLabels: true, showValues: true },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "cm1_graphique_interpreter_tpl_6_deux_ensemble",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "graphique",
+    microId: "graphique_interpreter",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Additionne les deux barres, puis compare avec la troisième.",
+    tags: ["cm1", "graphique", "interpreter", "comparer_somme", "template", "robuste", "canvas"],
+    generate: () => {
+      const ctx = randomContext();
+      const labels = shuffle(ctx.labels).slice(0, 3);
+      const pas = randomChoice([1, 2, 5]);
+      // Une fois sur deux « plus », une fois sur deux « moins » : la réponse ne se devine pas.
+      const veutPlus = randomChoice([true, false]);
+      let values: number[] = [];
+      for (let essai = 0; essai < 200; essai++) {
+        values = roundValues(3, pas, 2, pas === 1 ? 30 : pas === 2 ? 15 : 10);
+        const s = values[0] + values[1];
+        if (s !== values[2] && s > values[2] === veutPlus) break;
+      }
+      const [a, b, c] = values;
+      const somme = a + b;
+      const plus = somme > c;
+      const correct = plus ? "plus" : "moins";
+      const question = randomChoice([
+        `Ensemble, les barres « ${labels[0]} » et « ${labels[1]} » font-elles plus ou moins que la barre « ${labels[2]} » ?`,
+        `Si on réunit « ${labels[0]} » et « ${labels[1]} », obtient-on plus ou moins que « ${labels[2]} » ?`,
+        `« ${labels[0]} » + « ${labels[1]} » : est-ce plus ou moins que « ${labels[2]} » ?`,
+      ]);
+      return {
+        theme: ctx.theme,
+        text: `${ctx.intro} ${question}`,
+        format: "qcm",
+        choices: makeChoices(correct, [plus ? "moins" : "plus", "autant"]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "On peut comparer deux barres réunies avec une autre barre.",
+          `On additionne « ${labels[0]} » et « ${labels[1]} », puis on compare avec « ${labels[2]} ».`,
+          `${a} + ${b} = ${somme}, et ${somme} ${plus ? ">" : "<"} ${c}.`,
+          `Ensemble, les deux barres font ${correct} que « ${labels[2]} ».`
+        ),
+        canvas: statGraphCanvas({
+          graphType: "barres",
+          title: ctx.title,
+          data: makeData(labels, values),
+          display: { showLabels: true, showValues: true },
         }),
       };
     },
@@ -1119,7 +1683,12 @@ export const graphiquesBank: TutorBankItemV4[] = [
 
       return {
         theme: ctx.theme,
-        text: `Quel est le total des ${ctx.unit} représentés par ce graphique ?`,
+        text: `${ctx.intro} ${randomChoice([
+          `Combien ${de(ctx.unit)} au total sur les quatre barres ?`,
+          `Quel est le total ${de(ctx.unit)} de ce graphique ?`,
+          `Elle veut le total pour son rapport : combien ${de(ctx.unit)} ?`,
+          `Additionne toutes les barres : combien ${de(ctx.unit)} en tout ?`,
+        ])}`,
         format: "short",
         expected: [String(result)],
         comparator: "number_equal",
@@ -1154,39 +1723,49 @@ export const graphiquesBank: TutorBankItemV4[] = [
     hint: "Cherche le plus grand nombre, le plus petit nombre, puis soustrais.",
     tags: ["cm1", "graphique", "defi", "ecart_extremes", "template", "robuste", "canvas"],
     generate: () => {
-      const ctx = randomContext();
-      const labels = shuffle(ctx.labels).slice(0, 4);
-      const values = shuffle([
-        randomInt(4, 8),
-        randomInt(9, 13),
-        randomInt(14, 18),
-        randomInt(19, 25),
-      ]);
+      // Une fois sur deux, les valeurs se LISENT sur l'axe gradué.
+      const surAxe = randomChoice([true, false]);
+      const axe = tirerSituationAxe(4);
+      const ctx = surAxe ? axe.ctx : randomContext();
+      const labels = surAxe ? axe.labels : shuffle(ctx.labels).slice(0, 4);
+      const values = surAxe
+        ? axe.values
+        : shuffle([randomInt(4, 8), randomInt(9, 13), randomInt(14, 18), randomInt(19, 25)]);
 
       const max = Math.max(...values);
       const min = Math.min(...values);
       const diff = max - min;
+      const lecture = surAxe
+        ? `${lectureAxe(labels[values.indexOf(max)], max, axe.pas)} ${lectureAxe(labels[values.indexOf(min)], min, axe.pas)} `
+        : "";
 
       return {
         theme: ctx.theme,
-        text: "Quelle est la différence entre la plus grande valeur et la plus petite valeur ?",
+        ...(surAxe ? { hint: "Lis la barre la plus haute et la plus basse sur l'axe, puis soustrais." } : {}),
+        text: `${ctx.intro} ${randomChoice([
+          "Quelle est la différence entre la plus grande valeur et la plus petite valeur ?",
+          `Combien ${de(ctx.unit)} d'écart entre la barre la plus haute et la plus basse ?`,
+          "De combien la plus haute barre dépasse-t-elle la plus basse ?",
+        ])}`,
         format: "short",
         expected: [String(diff)],
         comparator: "number_equal",
         explanation: exp(
           "La différence entre les extrêmes se calcule avec une soustraction.",
           "On repère d’abord la plus grande valeur et la plus petite valeur.",
-          `${max} - ${min} = ${diff}.`,
+          `${lecture}${max} - ${min} = ${diff}.`,
           `La différence est ${diff}.`
         ),
         canvas: statGraphCanvas({
           graphType: randomGraphType(),
           title: ctx.title,
           data: makeData(labels, values),
-          display: {
-            showLabels: true,
-            showValues: true,
-          },
+          display: surAxe
+            ? displayAxe(axe.pas, ctx.unit)
+            : {
+                showLabels: true,
+                showValues: true,
+              },
         }),
       };
     },
@@ -1204,37 +1783,247 @@ export const graphiquesBank: TutorBankItemV4[] = [
     hint: "Compare les deux valeurs demandées.",
     tags: ["cm1", "graphique", "defi", "comparer_categories", "template", "robuste", "canvas"],
     generate: () => {
-      const ctx = randomContext();
-      const labels = shuffle(ctx.labels).slice(0, 4);
-
-      const a = randomInt(8, 18);
-      const diff = randomInt(3, 10);
-      const b = a + diff;
-      const c = randomInt(5, 25);
-      const d = randomInt(5, 25);
-
-      const values = [a, b, c, d];
+      // Une fois sur deux, les deux barres se LISENT sur l'axe gradué.
+      const surAxe = randomChoice([true, false]);
+      const axe = tirerSituationAxe(4);
+      const ctx = surAxe ? axe.ctx : randomContext();
+      const labels = surAxe ? axe.labels : shuffle(ctx.labels).slice(0, 4);
+      let a: number;
+      let b: number;
+      let values: number[];
+      if (surAxe) {
+        const [x, y, c, d] = axe.values;
+        a = Math.min(x, y);
+        b = Math.max(x, y);
+        values = [a, b, c, d];
+      } else {
+        a = randomInt(8, 18);
+        b = a + randomInt(3, 10);
+        values = [a, b, randomInt(5, 25), randomInt(5, 25)];
+      }
+      const diff = b - a;
+      const lecture = surAxe
+        ? `${lectureAxe(labels[1], b, axe.pas)} ${lectureAxe(labels[0], a, axe.pas)} `
+        : "";
 
       return {
         theme: ctx.theme,
-        text: `Combien y a-t-il de plus pour "${labels[1]}" que pour "${labels[0]}" ?`,
+        ...(surAxe ? { hint: "Lis les deux barres sur l'axe, puis fais une soustraction." } : {}),
+        text: `${ctx.intro} ${randomChoice([
+          `Combien y a-t-il ${de(ctx.unit)} de plus pour « ${labels[1]} » que pour « ${labels[0]} » ?`,
+          `« ${labels[1]} » dépasse « ${labels[0]} » de combien ?`,
+          `Combien faudrait-il ajouter à « ${labels[0]} » pour égaler « ${labels[1]} » ?`,
+        ])}`,
         format: "short",
         expected: [String(diff)],
         comparator: "number_equal",
         explanation: exp(
           "Pour savoir combien il y a de plus, on calcule une différence.",
           "On soustrait la plus petite valeur à la plus grande.",
-          `${b} - ${a} = ${diff}.`,
+          `${lecture}${b} - ${a} = ${diff}.`,
           `Il y a ${diff} de plus pour ${labels[1]}.`
         ),
         canvas: statGraphCanvas({
           graphType: randomGraphType(),
           title: ctx.title,
           data: makeData(labels, values),
-          display: {
-            showLabels: true,
-            showValues: true,
-          },
+          display: surAxe
+            ? displayAxe(axe.pas, ctx.unit)
+            : {
+                showLabels: true,
+                showValues: true,
+              },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "cm1_graphique_defi_tpl_4_objectif",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "graphique",
+    microId: "graphique_defi",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Calcule d'abord le total, puis cherche ce qui manque pour atteindre l'objectif.",
+    tags: ["cm1", "graphique", "defi", "objectif", "deux_etapes", "template", "robuste", "canvas"],
+    generate: () => {
+      const { ctx, labels, values } = tirerSituation(randomChoice([3, 4]), randomChoice([2, 5]));
+      const somme = total(values);
+      const manque = randomChoice([5, 10, 15, 20, 25, 30]);
+      const objectif = somme + manque;
+      const question = randomChoice([
+        `L'objectif était ${objectif} ${ctx.unit}. Combien en manque-t-il ?`,
+        `Il en faudrait ${objectif} en tout. Combien manque-t-il encore ?`,
+        `Pour atteindre ${objectif} ${ctx.unit}, combien faut-il en ajouter ?`,
+      ]);
+      const correct = String(manque);
+      return {
+        theme: ctx.theme,
+        text: `${ctx.intro} ${question}`,
+        format: "qcm",
+        choices: makeChoices(correct, leurres(manque, [somme, objectif, manque + 10, objectif - values[0]])),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un défi en deux étapes : d'abord le total, puis ce qui manque.",
+          "On additionne toutes les barres, puis on soustrait ce total à l'objectif.",
+          `${values.join(" + ")} = ${somme} ; ${objectif} − ${somme} = ${manque}.`,
+          `Il manque ${manque} ${ctx.unit}.`
+        ),
+        canvas: statGraphCanvas({
+          graphType: randomGraphType(),
+          title: ctx.title,
+          data: makeData(labels, values),
+          display: { showLabels: true, showValues: true },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "cm1_graphique_defi_tpl_5_deux_contre_une",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "graphique",
+    microId: "graphique_defi",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Additionne les deux barres, puis soustrais la troisième.",
+    tags: ["cm1", "graphique", "defi", "somme_puis_difference", "template", "robuste", "canvas"],
+    generate: () => {
+      const ctx = randomContext();
+      const labels = shuffle(ctx.labels).slice(0, 3);
+      const pas = randomChoice([1, 2, 5]);
+      const maxK = pas === 1 ? 25 : pas === 2 ? 12 : 8;
+      let values: number[] = [];
+      for (let essai = 0; essai < 200; essai++) {
+        values = roundValues(3, pas, 2, maxK);
+        if (values[0] + values[1] > values[2]) break;
+      }
+      const [a, b, c] = values;
+      const res = a + b - c;
+      const question = randomChoice([
+        `Ensemble, « ${labels[0]} » et « ${labels[1]} » font combien de plus que « ${labels[2]} » ?`,
+        `On réunit « ${labels[0]} » et « ${labels[1]} ». Combien de plus que « ${labels[2]} » ?`,
+        `De combien les barres « ${labels[0]} » et « ${labels[1]} » réunies dépassent-elles « ${labels[2]} » ?`,
+      ]);
+      return {
+        theme: ctx.theme,
+        text: `${ctx.intro} ${question}`,
+        format: "short",
+        expected: [String(res)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Un défi en deux étapes : une addition, puis une soustraction.",
+          `On additionne « ${labels[0]} » et « ${labels[1]} », puis on enlève « ${labels[2]} ».`,
+          `${a} + ${b} = ${a + b} ; ${a + b} − ${c} = ${res}.`,
+          `Ensemble, les deux barres font ${res} de plus.`
+        ),
+        canvas: statGraphCanvas({
+          graphType: randomGraphType(),
+          title: ctx.title,
+          data: makeData(labels, values),
+          display: { showLabels: true, showValues: true },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "cm1_graphique_defi_tpl_6_deux_groupes",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "graphique",
+    microId: "graphique_defi",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Fais le total de chaque groupe, puis compare les deux totaux.",
+    tags: ["cm1", "graphique", "defi", "deux_groupes", "template", "robuste", "canvas"],
+    generate: () => {
+      // Pas d'égalité entre les deux groupes : on retire tant qu'ils sont égaux.
+      let tirage = tirerSituation(4, randomChoice([1, 2, 5]));
+      for (let essai = 0; essai < 50 && tirage.values[0] + tirage.values[1] === tirage.values[2] + tirage.values[3]; essai++) {
+        tirage = tirerSituation(4, randomChoice([1, 2, 5]));
+      }
+      const { ctx, labels, values } = tirage;
+      const s1 = values[0] + values[1];
+      const s2 = values[2] + values[3];
+      const grand = Math.max(s1, s2);
+      const petit = Math.min(s1, s2);
+      const res = grand - petit;
+      const A = `« ${labels[0]} » et « ${labels[1]} »`;
+      const B = `« ${labels[2]} » et « ${labels[3]} »`;
+      const question = randomChoice([
+        `On forme deux groupes : ${A}, puis ${B}. Quel écart entre les deux groupes ?`,
+        `Groupe 1 : ${A}. Groupe 2 : ${B}. Combien ${de(ctx.unit)} d'écart entre les deux ?`,
+        `Compare ${A} réunis avec ${B} réunis. Quelle est la différence ?`,
+      ]);
+      return {
+        theme: ctx.theme,
+        text: `${ctx.intro} ${question}`,
+        format: "short",
+        expected: [String(res)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Un défi en trois calculs : deux totaux, puis une différence.",
+          "On additionne chaque groupe, puis on soustrait le plus petit total au plus grand.",
+          `${values[0]} + ${values[1]} = ${s1} ; ${values[2]} + ${values[3]} = ${s2} ; ${grand} − ${petit} = ${res}.`,
+          `L'écart entre les deux groupes est ${res}.`
+        ),
+        canvas: statGraphCanvas({
+          graphType: randomGraphType(),
+          title: ctx.title,
+          data: makeData(labels, values),
+          display: { showLabels: true, showValues: true },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "cm1_graphique_defi_tpl_7_ajout_chaque_barre",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "graphique",
+    microId: "graphique_defi",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Fais le total actuel, puis ajoute le même nombre pour chaque barre.",
+    tags: ["cm1", "graphique", "defi", "ajout_constant", "template", "robuste", "canvas"],
+    generate: () => {
+      const n = randomChoice([3, 4]);
+      const { ctx, labels, values } = tirerSituation(n, randomChoice([2, 5]));
+      const ajout = randomChoice([2, 3, 5, 10]);
+      const somme = total(values);
+      const res = somme + n * ajout;
+      const question = randomChoice([
+        `La semaine suivante, chaque barre gagne ${ajout}. Quel sera le nouveau total ?`,
+        `On ajoute ${ajout} ${ctx.unit} à chaque catégorie. Combien en tout, après l'ajout ?`,
+        `Chaque barre monte de ${ajout}. Combien ${de(ctx.unit)} au total ensuite ?`,
+      ]);
+      return {
+        theme: ctx.theme,
+        text: `${ctx.intro} ${question}`,
+        format: "short",
+        expected: [String(res)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Un défi en deux étapes : le total, puis l'ajout sur chaque barre.",
+          `Il y a ${n} barres : on ajoute ${n} fois ${ajout}.`,
+          `${values.join(" + ")} = ${somme} ; ${n} × ${ajout} = ${n * ajout} ; ${somme} + ${n * ajout} = ${res}.`,
+          `Le nouveau total est ${res}.`
+        ),
+        canvas: statGraphCanvas({
+          graphType: randomGraphType(),
+          title: ctx.title,
+          data: makeData(labels, values),
+          display: { showLabels: true, showValues: true },
         }),
       };
     },
@@ -1253,28 +2042,29 @@ export const graphiquesBank: TutorBankItemV4[] = [
     microId: "graphique_lire",
     difficulty: 1,
     theme: "sport",
-    text: "Dans le graphique, combien d’élèves font du basket ?",
+    text: "L'entraîneur du club note les activités. Lis l'axe : combien d’élèves font du basket ?",
     format: "short",
-    expected: ["14"],
+    expected: ["12"],
     comparator: "number_equal",
-    hint: "Lis la valeur de la barre Basket.",
+    hint: "Pars du haut de la barre Basket. Suis la ligne jusqu'à l'axe.",
     explanation: exp(
-      "Un graphique associe chaque catégorie à une hauteur de barre.",
-      "On repère la barre Basket et on lit sa valeur.",
-      "La barre Basket vaut 14.",
-      "14 élèves font du basket."
+      "Un graphique associe chaque catégorie à une hauteur de barre. L'axe gradué donne cette hauteur.",
+      "On part du haut de la barre Basket, on suit la ligne jusqu'à l'axe.",
+      "Une graduation vaut 2. La barre s'arrête sur la graduation 12 (pas 10, la graduation d'en dessous).",
+      "12 élèves font du basket."
     ),
-    tags: ["cm1", "graphique", "lire", "sport", "short", "canvas"],
+    tags: ["cm1", "graphique", "lire", "sport", "short", "canvas", "axe_gradue"],
+    // 21/10/2026 : 14 demandait 7 graduations ; au CM1, 6 au plus (12 = 6 × 2).
     canvas: statGraphCanvas({
       graphType: "barres",
       title: "Activités sportives",
       data: [
-        { label: "Football", value: 12 },
-        { label: "Danse", value: 8 },
+        { label: "Football", value: 8 },
+        { label: "Danse", value: 4 },
         { label: "Natation", value: 10 },
-        { label: "Basket", value: 14 },
+        { label: "Basket", value: 12 },
       ],
-      display: { showLabels: true, showValues: true, highlightIndex: 3 },
+      display: displayAxe(2, "élèves", 3),
     }),
   },
 
@@ -1287,29 +2077,29 @@ export const graphiquesBank: TutorBankItemV4[] = [
     microId: "graphique_lire",
     difficulty: 1,
     theme: "neutral",
-    text: "Combien de plants de tomates y a-t-il dans le jardin ?",
+    text: "Le jardinier de l'école compte ses plants. Lis l'axe : combien de plants de tomates ?",
     format: "qcm",
-    choices: ["10", "7", "12", "5"],
+    choices: ["10", "8", "12", "2"],
     expected: ["10"],
     comparator: "mcq_exact",
-    hint: "Cherche la barre Tomates.",
+    hint: "Pars du haut de la barre Tomates. Suis la ligne jusqu'à l'axe.",
     explanation: exp(
-      "Chaque barre représente une catégorie du jardin.",
-      "On repère la barre Tomates.",
-      "La barre Tomates vaut 10.",
+      "Chaque barre représente une catégorie du jardin. L'axe gradué donne sa hauteur.",
+      "On part du haut de la barre Tomates, on suit la ligne jusqu'à l'axe.",
+      "Une graduation vaut 2. La barre s'arrête sur la graduation 10. Attention : 2, c'est le pas, pas la valeur.",
       "Il y a 10 plants de tomates."
     ),
-    tags: ["cm1", "graphique", "lire", "qcm", "canvas"],
+    tags: ["cm1", "graphique", "lire", "qcm", "canvas", "axe_gradue"],
     canvas: statGraphCanvas({
       graphType: "barres",
       title: "Jardin de l’école",
       data: [
         { label: "Tomates", value: 10 },
-        { label: "Salades", value: 7 },
+        { label: "Salades", value: 6 },
         { label: "Carottes", value: 12 },
-        { label: "Fleurs", value: 5 },
+        { label: "Fleurs", value: 4 },
       ],
-      display: { showLabels: true, showValues: true, highlightIndex: 0 },
+      display: displayAxe(2, "plants", 0),
     }),
   },
 
@@ -1377,7 +2167,7 @@ export const graphiquesBank: TutorBankItemV4[] = [
         { label: "Équipe B", value: 15 },
         { label: "Équipe C", value: 8 },
       ],
-      display: { showLabels: true, showValues: true, highlightIndex: 1 },
+      display: { showLabels: true, showValues: true, valeursParts: true, highlightIndex: 1 },
     }),
   },
 

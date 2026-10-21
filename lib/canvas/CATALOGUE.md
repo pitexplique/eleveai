@@ -58,7 +58,7 @@ se pose sur `figure.schema`, `propriete.schema`, `exemple.schema`, `formule.sche
 
 | `kind` | Ce qu'il montre | ⛔ Pas pour |
 |---|---|---|
-| `stat_graph` | Barres, bâtons, camembert — la série mise en image | Un tableau de valeurs |
+| `stat_graph` | Barres, bâtons, camembert, **histogramme** (classes jointives), **courbe** (une évolution) — la série mise en image ; axe vertical **gradué** en option, axe **tronqué** pour le dénoncer | Un tableau de valeurs ; un nuage de points (→ `fonctionGraphique`) |
 | `diagramme_boite` | Le diagramme en boîte : min, Q1, médiane (en rouge), Q3, max, l'accolade Q3 − Q1 en option. Plusieurs séries s'empilent pour se comparer | Les effectifs d'une série : c'est `stat_graph` |
 | `tableau_donnees` | Un tableau (croisé compris), colonnes ou cellules surlignables | Un graphique |
 | `probabilites` | Le matériel de l'expérience : dé, roue, urne de billes, tableau à double entrée | Un enchaînement de deux épreuves |
@@ -68,6 +68,40 @@ se pose sur `figure.schema`, `propriete.schema`, `exemple.schema`, `formule.sche
 | `tableau_signes` | Le tableau de signes : 1 à 3 facteurs, produit **ou quotient**. Chaque ligne porte un signe par intervalle et une marque sur les bornes intérieures — `0` si le facteur s'annule, `\|\|` si la valeur est **interdite** | Les variations : c'est `tableau_variations` |
 | `tableau_variations` | Le tableau de variations : les flèches, avec sa ligne `f ′(x)` facultative | Le signe d'un produit ou d'un quotient |
 
+
+### `stat_graph` — axe gradué, histogramme, courbe (20/10/2026)
+
+Trouvé en lançant la série Statistiques : les barres du coach portaient leur
+valeur ÉCRITE au-dessus, et l'axe vertical n'avait aucune graduation. « Lire un
+graphique » revenait à recopier un nombre ; et quand la valeur était cachée
+(`showValues: false`), il n'y avait plus rien à lire du tout.
+
+```ts
+{
+  kind: "stat_graph",
+  graphType: "barres",            // ou "batons", "camembert", "histogramme", "courbe"
+  data: [{ label: "Lun", value: 12 }, { label: "Mar", value: 8 }],
+  display: {
+    showValues: false,            // la valeur n'est plus écrite…
+    showAxis: true,               // …elle se LIT sur l'axe gradué (et sa grille)
+    step: 2,                      // omis : un pas rond (1, 2, 5, 10, 20, 50…)
+    axeY: "élèves",               // le nom de l'axe, en haut à gauche
+    highlightIndex: 0,
+  },
+}
+```
+
+- **`histogramme`** : barres jointives ; `bornes` (n + 1 nombres) s'écrivent aux
+  jointures, sinon les étiquettes au milieu.
+- **`courbe`** : les points reliés (mois, années) ; le point surligné tire un
+  pointillé jusqu'à l'axe.
+- **`yMin`** : l'axe démarre ailleurs qu'à 0 — l'axe TRONQUÉ des journaux
+  télévisés. À n'utiliser que pour le montrer et le dénoncer.
+- **Camembert** : en couleurs franches (les six gris ne se distinguaient pas) ;
+  un nom long ou une petite part s'écrit dehors. `valeursParts` écrit la valeur
+  de chaque part — ⛔ jamais par défaut : `showValues: true` ne montrait que le
+  total, et beaucoup de questions demandent justement de lire les parts.
+  `pourcentages` (avec `valeursParts`) : arrondis à l'unité dont la somme fait 100.
 
 ### `diagramme_boite` — ajouté le 11/09/2026
 
