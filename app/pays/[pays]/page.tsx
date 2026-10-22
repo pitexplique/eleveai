@@ -11,6 +11,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Play } from "lucide-react";
 import SelecteurPays from "@/components/SelecteurPays";
+import RessourcesMicro from "@/components/pays/RessourcesMicro";
+import { ficheExercicesHrefPourCoach } from "@/lib/fiches-exercices/registre";
+import { ficheHrefPourCoach } from "@/lib/fiches/registre";
 import { getMicroLabelMap, getNotionMicroMap, type Classe } from "@/lib/tutor-v4/catalog";
 import { displayParamForClasse } from "@/lib/tutor-v4/displayMode";
 import { CLASSES_PAYS, infoPays, programmesDuPays } from "@/lib/programmes-pays/pays";
@@ -42,13 +45,18 @@ const BADGE: Record<Couverture, { texte: string; cls: string }> = {
   "hors-coach": { texte: "Travail de classe", cls: "border-sky-200 bg-sky-50 text-sky-700" },
 };
 
-function lienMicro(r: RenvoiMicro): { href: string; label: string } | null {
+function lienMicro(
+  r: RenvoiMicro,
+): { href: string; label: string; notion: string; ficheHref: string | null; exercicesHref: string | null } | null {
   const classe = r.classe as Classe;
   const notion = Object.entries(getNotionMicroMap(classe)).find(([, ms]) => ms.includes(r.micro))?.[0];
   if (!notion) return null;
   return {
     href: `/coach/serie?classe=${classe}&matiere=maths&notion=${notion}&microId=${r.micro}&${displayParamForClasse(classe)}`,
     label: getMicroLabelMap(classe)[r.micro] ?? r.micro,
+    notion,
+    ficheHref: ficheHrefPourCoach("maths", classe, notion) ?? null,
+    exercicesHref: ficheExercicesHrefPourCoach("maths", classe, notion) ?? null,
   };
 }
 
@@ -78,11 +86,11 @@ function Contenu({ c }: { c: ContenuPays }) {
             const lien = lienMicro(r);
             if (!lien) return null;
             return (
-              <li key={`${r.classe}-${r.micro}`}>
+              <li key={`${r.classe}-${r.micro}`} className="flex flex-wrap items-center gap-1">
                 <Link
                   prefetch={false}
                   href={lien.href}
-                  className="group flex items-center gap-2 rounded-xl px-2 py-1.5 text-sm text-slate-700 transition hover:bg-slate-50"
+                  className="group flex min-w-0 flex-1 items-center gap-2 rounded-xl px-2 py-1.5 text-sm text-slate-700 transition hover:bg-slate-50"
                 >
                   <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-green-600 px-2.5 py-1 text-xs font-black tracking-wide text-white shadow-sm transition group-hover:bg-green-700">
                     GO
@@ -93,6 +101,13 @@ function Contenu({ c }: { c: ContenuPays }) {
                   </span>
                   <span>{lien.label}</span>
                 </Link>
+                <RessourcesMicro
+                  classe={r.classe}
+                  notion={lien.notion}
+                  micro={r.micro}
+                  ficheHref={lien.ficheHref}
+                  exercicesHref={lien.exercicesHref}
+                />
               </li>
             );
           })}
