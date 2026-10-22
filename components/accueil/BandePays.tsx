@@ -13,10 +13,22 @@ export default function BandePays() {
       aria-label="Le coach dans ton pays"
       className="flex flex-wrap items-center gap-2 rounded-2xl border border-sky-200 bg-sky-50 px-4 py-2 text-sm text-[#041B33]"
     >
-      <span className="font-bold">Pas en France&nbsp;? Le coach suit le programme de ton pays&nbsp;:</span>
+      <span className="font-bold">Le coach suit le programme de ton pays&nbsp;:</span>
       {/* ⭐ Les drapeaux en IMAGES (22/10) : les drapeaux emoji ne s'affichent
           pas sous Windows, on y lisait « CA ». Fichiers dans public/drapeaux
           (flag-icons, licence MIT ; Ontario et Québec : la feuille d'érable, à la demande de Frédéric). */}
+      {/* ⭐ LA FRANCE D'ABORD, ET PAR DÉFAUT (Frédéric, 22/10 : « tu dois
+          rajouter France par défaut ») : pastille pleine, elle mène au coach
+          habituel. */}
+      <Link
+        prefetch={false}
+        href="/coach-ia/maths"
+        className="inline-flex items-center gap-1.5 rounded-full bg-teal-700 py-1 pl-1.5 pr-3 text-xs font-black text-white ring-1 ring-teal-700 transition hover:bg-teal-800"
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/drapeaux/france.svg" alt="" width={20} height={15} className="h-[15px] w-5 rounded-[3px] object-cover shadow-sm" />
+        France
+      </Link>
       {PAYS.map((p) => (
         <Link
           key={p.slug}
