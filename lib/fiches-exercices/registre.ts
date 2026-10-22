@@ -1245,6 +1245,11 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Les écarts verticaux, la somme des carrés des écarts calculée à la main dans un tableau, comparer deux droites, utiliser la droite de la calculatrice (qui passe par G), mesurer l'effet d'un point isolé. Les abonnés de Spotify, l'eau d'un hôtel, le coût de production d'une usine, l'attente aux caisses d'un supermarché.",
   },
+  "maths/stmg/donnees-filtres": {
+    titre: "Filtrer des données, ET, OU, NON : 20 exercices corrigés",
+    resume:
+      "Garder les lignes d'un fichier qui répondent à un critère, combiner deux critères avec ET et avec OU sans compter deux fois, prendre le contraire avec NON, sur un extrait de tableur ou un tableau croisé. Fichier du personnel, épicerie, logements, paiements par carte, fichier clients ; les planètes, les régions de France, le calendrier 2026.",
+  },
 };
 
 export function hrefFicheExercices(matiere: string, classe: string, notion: string) {
