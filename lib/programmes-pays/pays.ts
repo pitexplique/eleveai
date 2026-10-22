@@ -11,6 +11,7 @@ export type InfoPays = { slug: SlugPays; nom: string; drapeau: string };
 /** Madagascar attend sa réforme 2026-2027 : pas proposé tant qu'il n'a pas de matrice. */
 export const PAYS: InfoPays[] = [
   { slug: "ontario", nom: "Ontario (Canada)", drapeau: "🇨🇦" },
+  { slug: "quebec", nom: "Québec (Canada)", drapeau: "🇨🇦" },
   { slug: "maroc", nom: "Maroc", drapeau: "🇲🇦" },
   { slug: "etats-unis", nom: "États-Unis", drapeau: "🇺🇸" },
 ];
@@ -29,6 +30,12 @@ export const CLASSES_PAYS: Record<SlugPays, { titre: string; classes: ClassePays
       classes: ["1re", "2e", "3e", "4e", "5e", "6e", "7e", "8e"].map((c) => ({ cle: c, court: c })),
     },
     { titre: "Secondaire", classes: ["9e", "10e", "11e", "12e"].map((c) => ({ cle: c, court: c })) },
+  ],
+  // Québec (22/10, à remplir) : primaire en 3 cycles de 2 ans, secondaire 1 à 5
+  // (16-17 ans), puis le cégep — pas de Terminale. Programme : PFEQ.
+  quebec: [
+    { titre: "Primaire", classes: [1, 2, 3, 4, 5, 6].map((n) => ({ cle: `${n}e-annee`, court: `${n}${n === 1 ? "re" : "e"}` })) },
+    { titre: "Secondaire", classes: [1, 2, 3, 4, 5].map((n) => ({ cle: `sec-${n}`, court: `Sec ${n}` })) },
   ],
   maroc: [
     { titre: "Primaire", classes: [1, 2, 3, 4, 5, 6].map((n) => ({ cle: `${n}aep`, court: `${n}AEP` })) },
