@@ -1260,6 +1260,9 @@ const ORDRE_CLASSES = [
   "cp", "ce1", "ce2", "cm1", "cm2",
   "6e", "5e", "4e", "3e",
   "seconde", "premiere", "premiere-spe", "terminale-spe",
+  // 22/10/2026 : la STMG (1re et terminale, une seule classe au coach), après
+  // la voie générale.
+  "stmg",
 ];
 
 /** Toutes les fiches d'exercices, triées par matière, niveau puis titre —

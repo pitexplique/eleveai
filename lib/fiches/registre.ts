@@ -1739,6 +1739,8 @@ export function libelleClasse(classe: string) {
   const table: Record<string, string> = {
     cp: "CP", ce1: "CE1", ce2: "CE2", cm1: "CM1", cm2: "CM2",
     seconde: "2nde", premiere: "1re", "premiere-spe": "1re spé", "terminale-spe": "Tale spé",
+    // 22/10/2026 : la voie techno (1re et terminale STMG, une seule classe au coach).
+    stmg: "STMG",
   };
   return table[c] ?? classe;
 }
