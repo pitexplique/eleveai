@@ -45,7 +45,7 @@ const num = (c) => (typeof c === "number" ? c : null);
 // sous la forme « ligne « Total » » ou « colonne « Total » » : elles doivent
 // être fausses, et elles seules.
 export function ouvrirStmg(fichier, notionId, { ecartsAttendus = [] } = {}) {
-  const f = ouvrir(fichier, notionId, ["barres", "camembert", "grille", "croise"], "stmg");
+  const f = ouvrir(fichier, notionId, ["barres", "camembert", "grille", "croise", "intervalle"], "stmg");
   const { vrai, appels, feuille } = f;
 
   for (const { args } of appels("barres").filter((a) => a.args)) {
@@ -61,6 +61,13 @@ export function ouvrirStmg(fichier, notionId, { ecartsAttendus = [] } = {}) {
       vrai("barres graduées : chaque valeur sur une graduation ou au milieu", data.every((d) => Math.abs(demi(d) - Math.round(demi(d))) < 1e-9 && d.value >= debut));
     }
     if (o.batons) vrai("bâtons : des valeurs numériques en bas", data.every((d) => /^[\d,]+$/.test(d.label)));
+  }
+  for (const { args } of appels("intervalle").filter((a) => a.args)) {
+    const [min, max, pas, o = {}] = args;
+    const n = Math.round((max - min) / pas);
+    vrai(`intervalle [${min} ; ${max}] : ${n} pas, 10 au plus, pas exact`, n <= 10 && Math.abs((max - min) / pas - n) < 1e-9);
+    for (const pt of o.points ?? []) vrai(`intervalle : point ${pt.value} dans le cadre`, pt.value >= min && pt.value <= max);
+    if (o.e !== undefined) vrai(`intervalle : bande [${o.p - o.e} ; ${o.p + o.e}] dans le cadre`, o.p - o.e >= min - 1e-9 && o.p + o.e <= max + 1e-9);
   }
   for (const { args } of appels("camembert").filter((a) => a.args)) {
     const [data, , pourcent = false] = args;

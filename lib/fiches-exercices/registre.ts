@@ -1265,6 +1265,11 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Linéariser un nuage qui se courbe par u = x², z = 1/x ou Y = log y, vérifier que le nuage transformé est presque aligné, utiliser la droite de la calculatrice, puis revenir aux variables de départ pour estimer. Le prix des pizzas, l'électricité solaire en France, le freinage, les bactéries, la loi de Moore, une navette partagée.",
   },
+  "maths/stmg/va-echantillonnage": {
+    titre: "La fluctuation d'échantillonnage : 20 exercices corrigés",
+    resume:
+      "Observer la fluctuation sur des simulations, calculer 1 ÷ √n et l'intervalle où tombent environ 95 % des fréquences, décider si une observation est fréquente ou rare, choisir la taille d'un échantillon. Contrôle qualité, sondages, banque, e-commerce ; le don du sang, les naissances, la présidentielle de 2022, la roulette du casino.",
+  },
 };
 
 export function hrefFicheExercices(matiere: string, classe: string, notion: string) {

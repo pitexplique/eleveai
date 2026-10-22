@@ -246,3 +246,60 @@ export const croise = (entetes: string[], lignes: (string | number)[][], surlign
     </div>
   );
 };
+
+/**
+ * L'INTERVALLE DE FLUCTUATION sur l'axe des fréquences (22/10/2026, feuille
+ * d'échantillonnage) : une droite graduée de `min` à `max` (pas `pas`, dix
+ * graduations au plus), la bande verte [p − e ; p + e] si `e` est donné, la
+ * proportion p du modèle (trait rouge) et des fréquences OBSERVÉES (points
+ * orange, nommés au-dessus). Sans `e`, on ne dessine que l'axe et les points :
+ * l'élève trace la bande lui-même.
+ * ⛔ Texte NU dans `label` (SVG). Le script relit tous les nombres.
+ */
+export const intervalle = (
+  min: number,
+  max: number,
+  pas: number,
+  opts: { p?: number; e?: number; points?: Barre[] } = {},
+) => {
+  const [G, D, Y] = [22, 278, 70];
+  const x = (v: number) => G + ((v - min) / (max - min)) * (D - G);
+  const n = Math.round((max - min) / pas);
+  const ticks = Array.from({ length: n + 1 }, (_, k) => Math.round((min + k * pas) * 1e6) / 1e6);
+  const { p, e, points = [] } = opts;
+  return (
+    <div className="mx-auto w-full max-w-[20rem] print:max-w-[14rem]">
+      <svg viewBox="0 0 300 110" className="block h-auto w-full" role="img" aria-label="Fréquences sur une droite graduée">
+        <rect x="0" y="0" width="300" height="110" rx="10" fill="#fff" />
+        {p !== undefined && e !== undefined ? (
+          <rect x={x(p - e)} y={Y - 12} width={x(p + e) - x(p - e)} height="24" rx="4" fill="#bbf7d0" stroke="#16a34a" strokeWidth="1.5" />
+        ) : null}
+        <line x1={G - 8} y1={Y} x2={D + 8} y2={Y} stroke="#0f172a" strokeWidth="1.5" />
+        {ticks.map((t) => (
+          <g key={t}>
+            <line x1={x(t)} y1={Y - 5} x2={x(t)} y2={Y + 5} stroke="#0f172a" strokeWidth="1.2" />
+            <text x={x(t)} y={Y + 24} textAnchor="middle" fontSize="13" fontWeight="700" fill="#334155">
+              {fr(t)}
+            </text>
+          </g>
+        ))}
+        {p !== undefined ? (
+          <g>
+            <line x1={x(p)} y1={Y - 16} x2={x(p)} y2={Y + 16} stroke="#dc2626" strokeWidth="2.5" />
+            <text x={x(p)} y={Y + 40} textAnchor="middle" fontSize="13" fontWeight="800" fill="#dc2626">
+              p
+            </text>
+          </g>
+        ) : null}
+        {points.map((pt, i) => (
+          <g key={i}>
+            <circle cx={x(pt.value)} cy={Y} r="5" fill={ORANGE} stroke="#fff" strokeWidth="1.5" />
+            <text x={x(pt.value)} y={Y - 20 - (i % 2) * 14} textAnchor="middle" fontSize="13" fontWeight="800" fill="#9a3412" stroke="#fff" strokeWidth="3" paintOrder="stroke">
+              {pt.label}
+            </text>
+          </g>
+        ))}
+      </svg>
+    </div>
+  );
+};
