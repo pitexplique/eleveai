@@ -38,6 +38,7 @@ import ArriveeDiagonale from "@/components/accueil/dessins/ArriveeDiagonale";
 import { genererDefi, type DefiGenere, type Theme } from "@/lib/accueil/defis";
 import RechercheEntete from "@/components/accueil/RechercheEntete";
 import BanniereCrpe from "@/components/accueil/BanniereCrpe";
+import BandePays from "@/components/accueil/BandePays";
 
 export type VideoJournal = { id: string; titre: string; short: boolean; vignette: string };
 
@@ -1034,6 +1035,12 @@ export default function JournalClient(props: {
         {accueil && (
           <div className="mt-4">
             <BanniereCrpe place="colonnes" />
+          </div>
+        )}
+        {/* Les programmes des autres pays (22/10/2026), voir BandePays. */}
+        {accueil && (
+          <div className="mt-3">
+            <BandePays />
           </div>
         )}
         {/* ⭐⭐ LE COACH EN PREMIER (Frédéric, 20/10/2026 : « il faut mettre en
