@@ -28,6 +28,7 @@ import FloatingCoach from "@/components/FloatingCoach";
 import BoiteAOutils from "@/components/BoiteAOutils";
 import { useEleve } from "@/context/EleveContext";
 import Link from "next/link";
+import SelecteurPays from "@/components/SelecteurPays";
 import { BookOpen, Camera, ChevronRight, PencilLine, Play } from "lucide-react";
 import { ficheExercicesHrefPourCoach } from "@/lib/fiches-exercices/registre";
 import { estShortVideo, lienVideo } from "@/lib/videos/lienVideo";
@@ -755,6 +756,11 @@ export default function CoachIA() {
                 >
                   {tousDeplies ? "Tout replier" : "Tout déplier"}
                 </button>
+                {/* ⭐ 22/10/2026 — LE PROGRAMME D'UN AUTRE PAYS (version
+                    d'étude). Frédéric : adapter le site aux pays francophones
+                    plutôt que le traduire ; « le sélecteur doit venir du
+                    coach ». Maths seulement : la matrice ne couvre qu'elles. */}
+                {matiere === "maths" ? <SelecteurPays paysActuel="france" /> : null}
                 {matiere === "francais" ? (
                   <span className="rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-sm font-semibold text-sky-700">
                     CP a 3e ouverts
