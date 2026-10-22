@@ -16,6 +16,7 @@ const m = (classe: Classe, ...micros: string[]): RenvoiMicro[] =>
 
 export const ETATS_UNIS_GRADE_8: ProgrammePays = {
   pays: "etats-unis",
+  cle: "grade-8",
   niveau: "Grade 8",
   codeCours: "CCSS Math 8",
   equivalentFrance: "4e",

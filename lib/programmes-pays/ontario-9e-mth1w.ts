@@ -12,6 +12,7 @@ const m = (classe: Classe, ...micros: string[]): RenvoiMicro[] =>
 
 export const ONTARIO_9E_MTH1W: ProgrammePays = {
   pays: "ontario",
+  cle: "9e",
   niveau: "9e année",
   codeCours: "MTH1W",
   equivalentFrance: "3e",

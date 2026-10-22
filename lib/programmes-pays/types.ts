@@ -35,6 +35,8 @@ export type ContenuPays = {
 
 export type ProgrammePays = {
   pays: "ontario" | "maroc" | "madagascar" | "etats-unis";
+  /** Identifiant de l'année dans l'URL et la colonne des classes (« 9e »). */
+  cle: string;
   /** Nom de l'année dans le pays (« 9e année »). */
   niveau: string;
   /** Code de cours quand il existe (« MTH1W »). */

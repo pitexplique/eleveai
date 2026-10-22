@@ -15,6 +15,41 @@ export const PAYS: InfoPays[] = [
   { slug: "etats-unis", nom: "États-Unis", drapeau: "🇺🇸" },
 ];
 
+/** Une classe du pays dans la colonne de gauche du coach. */
+export type ClassePays = { cle: string; court: string };
+
+/**
+ * Les classes de chaque pays, groupées comme la colonne du coach France
+ * (« Primaire », « Collège »…). Une classe sans matrice s'affiche grisée.
+ */
+export const CLASSES_PAYS: Record<SlugPays, { titre: string; classes: ClassePays[] }[]> = {
+  ontario: [
+    {
+      titre: "Élémentaire",
+      classes: ["1re", "2e", "3e", "4e", "5e", "6e", "7e", "8e"].map((c) => ({ cle: c, court: c })),
+    },
+    { titre: "Secondaire", classes: ["9e", "10e", "11e", "12e"].map((c) => ({ cle: c, court: c })) },
+  ],
+  maroc: [
+    { titre: "Primaire", classes: [1, 2, 3, 4, 5, 6].map((n) => ({ cle: `${n}aep`, court: `${n}AEP` })) },
+    { titre: "Collège", classes: [1, 2, 3].map((n) => ({ cle: `${n}ac`, court: `${n}AC` })) },
+    {
+      titre: "Lycée",
+      classes: [
+        { cle: "tc", court: "TC" },
+        { cle: "1bac", court: "1re Bac" },
+        { cle: "2bac", court: "2e Bac" },
+      ],
+    },
+  ],
+  "etats-unis": [
+    { titre: "Elementary", classes: [1, 2, 3, 4, 5].map((n) => ({ cle: `grade-${n}`, court: `G${n}` })) },
+    { titre: "Middle", classes: [6, 7, 8].map((n) => ({ cle: `grade-${n}`, court: `G${n}` })) },
+    { titre: "High", classes: [9, 10, 11, 12].map((n) => ({ cle: `grade-${n}`, court: `G${n}` })) },
+  ],
+  madagascar: [],
+};
+
 /** Clé du pays choisi dans le navigateur (préférence du visiteur, rien de plus). */
 export const CLE_PAYS = "eleveai-pays";
 

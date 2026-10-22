@@ -14,6 +14,7 @@ const m = (classe: Classe, ...micros: string[]): RenvoiMicro[] =>
 
 export const MAROC_3AC: ProgrammePays = {
   pays: "maroc",
+  cle: "3ac",
   niveau: "3e année collège (3AC)",
   equivalentFrance: "3e",
   source: "https://www.alloschool.com/course/mathematiques-3eme-annee-college",
