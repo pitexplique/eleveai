@@ -98,6 +98,65 @@ function Carte({ v, rangee }: { v: VideoListe; rangee?: boolean }) {
   );
 }
 
+// 24 : se range juste en 2, 3, 4 ou 6 colonnes.
+const PAR_PAGE = 24;
+// Une rangée Netflix s'arrête là ; « Tout voir » ouvre la classe entière.
+const PAR_RANGEE = 20;
+
+// Les numéros à afficher : le premier, le dernier, et deux de chaque côté de
+// la page courante ; null = « … ».
+function numeros(page: number, total: number): (number | null)[] {
+  const n: (number | null)[] = [];
+  for (let i = 1; i <= total; i++) {
+    if (i === 1 || i === total || Math.abs(i - page) <= 2) n.push(i);
+    else if (n[n.length - 1] !== null) n.push(null);
+  }
+  return n;
+}
+
+function Pagination({ page, total, aller }: { page: number; total: number; aller: (p: number) => void }) {
+  if (total <= 1) return null;
+  const bouton = "min-w-9 rounded-lg border px-2.5 py-1.5 text-sm font-bold transition";
+  const normal = "border-slate-200 bg-white text-slate-700 hover:border-rose-300 hover:text-rose-700";
+  return (
+    <nav aria-label="Pages" className="mt-5 flex flex-wrap items-center justify-center gap-1.5">
+      <button
+        type="button"
+        onClick={() => aller(page - 1)}
+        disabled={page === 1}
+        className={`${bouton} ${normal} disabled:opacity-40`}
+      >
+        ← Précédente
+      </button>
+      {numeros(page, total).map((p, i) =>
+        p === null ? (
+          <span key={`e${i}`} className="px-1 text-slate-400">
+            …
+          </span>
+        ) : (
+          <button
+            key={p}
+            type="button"
+            onClick={() => aller(p)}
+            aria-current={p === page ? "page" : undefined}
+            className={`${bouton} ${p === page ? "border-rose-500 bg-rose-500 text-white" : normal}`}
+          >
+            {p}
+          </button>
+        ),
+      )}
+      <button
+        type="button"
+        onClick={() => aller(page + 1)}
+        disabled={page === total}
+        className={`${bouton} ${normal} disabled:opacity-40`}
+      >
+        Suivante →
+      </button>
+    </nav>
+  );
+}
+
 export default function VideosClient({
   videos,
   paysage,
@@ -167,10 +226,29 @@ export default function VideosClient({
   const paysages = filtrees.filter((v) => !v.short);
   const shorts = filtrees.filter((v) => v.short);
 
+  // Une page pour les paysages, une pour les shorts ; on repart de la
+  // première dès qu'on change de classe ou de recherche.
+  const [pageP, setPageP] = useState(1);
+  const [pageS, setPageS] = useState(1);
+  useEffect(() => {
+    setPageP(1);
+    setPageS(1);
+  }, [classe, recherche]);
+  const totalP = Math.max(1, Math.ceil(paysages.length / PAR_PAGE));
+  const totalS = Math.max(1, Math.ceil(shorts.length / PAR_PAGE));
+  const tranche = (l: VideoListe[], p: number) => l.slice((p - 1) * PAR_PAGE, p * PAR_PAGE);
+  // Changer de page remonte en haut de la section (sous la barre collante).
+  const allerA = (id: string, set: (p: number) => void, total: number) => (p: number) => {
+    set(Math.min(Math.max(1, p), total));
+    const el = document.getElementById(id);
+    const barre = document.getElementById("barre-videos")?.getBoundingClientRect().bottom ?? 190;
+    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - barre - 8 });
+  };
+
   return (
     <>
       {/* top-16 : sous l'en-tête du site, collant lui aussi (~62 px). */}
-      <div className="sticky top-16 z-10 -mx-4 mt-4 bg-[#f5f8ff]/95 px-4 pb-3 pt-2 backdrop-blur">
+      <div id="barre-videos" className="sticky top-16 z-10 -mx-4 mt-4 bg-[#f5f8ff]/95 px-4 pb-3 pt-2 backdrop-blur">
         <div className="flex gap-2 overflow-x-auto pb-1">
           <button type="button" onClick={() => choisir("")} className={pastille(!classe)}>
             Toutes
@@ -237,9 +315,18 @@ export default function VideosClient({
               </div>
               {/* items-start : les shorts, plus hauts, ne tirent pas les paysages. */}
               <div className="-mx-4 mt-2 flex snap-x items-start gap-3 overflow-x-auto scroll-px-4 px-4 pb-2">
-                {liste.map((v) => (
+                {liste.slice(0, PAR_RANGEE).map((v) => (
                   <Carte key={v.id} v={v} rangee />
                 ))}
+                {liste.length > PAR_RANGEE ? (
+                  <button
+                    type="button"
+                    onClick={() => choisir(c)}
+                    className="flex aspect-video w-40 shrink-0 snap-start items-center justify-center rounded-xl border-2 border-dashed border-rose-200 text-sm font-black text-rose-600 hover:border-rose-400"
+                  >
+                    + {liste.length - PAR_RANGEE} autres →
+                  </button>
+                ) : null}
               </div>
             </section>
           ))}
@@ -251,28 +338,30 @@ export default function VideosClient({
           ) : null}
 
           {paysages.length ? (
-            <section className="mt-4">
+            <section id="paysages" className="mt-4">
               <h2 className="text-lg font-black text-slate-800">
                 Vidéos <span className="text-sm font-bold text-slate-400">({paysages.length})</span>
               </h2>
               <div className="mt-2 grid grid-cols-1 gap-x-4 gap-y-5 min-[480px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                {paysages.map((v) => (
+                {tranche(paysages, pageP).map((v) => (
                   <Carte key={v.id} v={v} />
                 ))}
               </div>
+              <Pagination page={pageP} total={totalP} aller={allerA("paysages", setPageP, totalP)} />
             </section>
           ) : null}
 
           {shorts.length ? (
-            <section className="mt-8">
+            <section id="shorts" className="mt-8">
               <h2 className="text-lg font-black text-slate-800">
                 Shorts <span className="text-sm font-bold text-slate-400">({shorts.length})</span>
               </h2>
-              <div className="mt-2 grid grid-cols-3 gap-x-3 gap-y-5 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
-                {shorts.map((v) => (
+              <div className="mt-2 grid grid-cols-3 gap-x-3 gap-y-5 sm:grid-cols-4 md:grid-cols-6">
+                {tranche(shorts, pageS).map((v) => (
                   <Carte key={v.id} v={v} />
                 ))}
               </div>
+              <Pagination page={pageS} total={totalS} aller={allerA("shorts", setPageS, totalS)} />
             </section>
           ) : null}
         </>
