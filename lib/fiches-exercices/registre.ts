@@ -1250,6 +1250,11 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Garder les lignes d'un fichier qui répondent à un critère, combiner deux critères avec ET et avec OU sans compter deux fois, prendre le contraire avec NON, sur un extrait de tableur ou un tableau croisé. Fichier du personnel, épicerie, logements, paiements par carte, fichier clients ; les planètes, les régions de France, le calendrier 2026.",
   },
+  "maths/stmg/stat-interpoler": {
+    titre: "Interpoler et extrapoler : 20 exercices corrigés",
+    resume:
+      "Estimer une valeur avec une droite d'ajustement, par le calcul ou sur le graphique, dire si c'est une interpolation ou une extrapolation, trouver à partir de quand un seuil est franchi, et juger les limites d'une extrapolation. La taille des enfants, la population mondiale, le record du 100 m, une droite d'étalonnage de laboratoire, la fonte d'un glacier.",
+  },
 };
 
 export function hrefFicheExercices(matiere: string, classe: string, notion: string) {

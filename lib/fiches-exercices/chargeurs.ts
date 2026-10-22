@@ -233,4 +233,5 @@ export const CHARGEURS_FICHES_EXERCICES: Record<string, () => Promise<FicheExerc
   "maths/stmg/donnees-frequences": () => import("@/lib/fiches-exercices/maths-stmg-donnees-frequences").then((m) => m.exercicesDonneesFrequencesStmg),
   "maths/stmg/stat-moindres-carres": () => import("@/lib/fiches-exercices/maths-stmg-stat-moindres-carres").then((m) => m.exercicesStatMoindresCarresStmg),
   "maths/stmg/donnees-filtres": () => import("@/lib/fiches-exercices/maths-stmg-donnees-filtres").then((m) => m.exercicesDonneesFiltresStmg),
+  "maths/stmg/stat-interpoler": () => import("@/lib/fiches-exercices/maths-stmg-stat-interpoler").then((m) => m.exercicesStatInterpolerStmg),
 };

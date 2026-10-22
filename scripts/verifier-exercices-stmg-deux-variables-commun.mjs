@@ -121,7 +121,7 @@ export function ouvrirStmg(fichier, notionId) {
     if (morceaux.length !== 2) throw new Error(`exercice ${k} : pas de liste « ${nom} : » (ou plusieurs)`);
     const seg = morceaux[1].split("\\n")[0].split(/\.(?:\s|$)/)[0];
     const parts = seg.includes(" ; ") ? seg.split(" ; ") : seg.split(", ");
-    return parts.map((s) => Number(s.trim().replace(",", ".")));
+    return parts.map((s) => parseFloat(s.trim().replace(",", ".")));
   };
   /** Deux listes égales (à 1e-9 près). */
   const memes = (a, b) => a.length === b.length && a.every((x, i) => Math.abs(x - b[i]) < 1e-9);
