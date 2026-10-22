@@ -42,10 +42,24 @@ export const CLASSES_PAYS: Record<SlugPays, { titre: string; classes: ClassePays
       ],
     },
   ],
+  // ⭐ Le découpage d'IXL, la référence de Frédéric pour les États-Unis (22/10) :
+  // des grades jusqu'au 8, puis le lycée par COURS, pas par année.
   "etats-unis": [
-    { titre: "Elementary", classes: [1, 2, 3, 4, 5].map((n) => ({ cle: `grade-${n}`, court: `G${n}` })) },
+    {
+      titre: "Elementary",
+      classes: [{ cle: "grade-k", court: "K" }, ...[1, 2, 3, 4, 5].map((n) => ({ cle: `grade-${n}`, court: `G${n}` }))],
+    },
     { titre: "Middle", classes: [6, 7, 8].map((n) => ({ cle: `grade-${n}`, court: `G${n}` })) },
-    { titre: "High", classes: [9, 10, 11, 12].map((n) => ({ cle: `grade-${n}`, court: `G${n}` })) },
+    {
+      titre: "High",
+      classes: [
+        { cle: "algebra-1", court: "Alg 1" },
+        { cle: "geometry", court: "Geom" },
+        { cle: "algebra-2", court: "Alg 2" },
+        { cle: "precalculus", court: "Precalc" },
+        { cle: "calculus", court: "Calc" },
+      ],
+    },
   ],
   madagascar: [],
 };
