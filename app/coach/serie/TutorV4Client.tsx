@@ -91,6 +91,7 @@ import {
 // `fixed` et rendait mal. En attendant de revoir le principe, l'aide passe par
 // l'explication IA proposée sur l'écran d'erreur (`CoachErrorHelp`).
 import TutorSimpleView from "./TutorSimpleView";
+import BoutonVideoCompetence from "./BoutonVideoCompetence";
 
 const CYCLE_2_COACH = new Set(["cp", "ce1", "ce2"]);
 import {
@@ -2217,7 +2218,14 @@ function handleInputKeyDown(
                   </p>
                 </div>
 
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap items-center gap-2">
+                  <BoutonVideoCompetence
+                    matiere={matiere}
+                    classe={classe}
+                    microId={currentQuestion.microId}
+                    notionId={currentQuestion.notionId}
+                    className="h-8 w-8"
+                  />
                   <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-900">
                     {stars(currentQuestion.meta.starLevel)}
                   </span>

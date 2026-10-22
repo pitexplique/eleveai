@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import Link from "next/link";
-import { Video } from "lucide-react";
 import AudioBoost from "@/components/AudioBoost";
 import { MarkdownMath } from "@/components/MarkdownMath";
 import {
@@ -13,7 +12,7 @@ import {
 } from "./ListenButton";
 import type { Classe, Matiere } from "@/lib/tutor-v4/catalog";
 import type { TutorMode, TutorQuestionOption } from "@/lib/tutor-v4/types";
-import { buildLearningVideoHref } from "@/lib/videoSearch";
+import BoutonVideoCompetence from "./BoutonVideoCompetence";
 
 type TutorSimpleViewProps = {
   classe: Classe;
@@ -133,18 +132,6 @@ export default function TutorSimpleView({
   saveMessage,
   onSave,
 }: TutorSimpleViewProps) {
-  const learningVideoHref = currentQuestion
-    ? buildLearningVideoHref({
-        matiere: matiereLabel(matiere),
-        niveau: classLabel(classe),
-        notionLabel,
-        microLabel,
-        notionId: currentQuestion.notionId,
-        microId: currentQuestion.microId,
-        questionText: currentQuestion.text,
-        type: currentQuestion.format,
-      })
-    : null;
 
   // Tailles agrandies en « affichage classe » (projection sans zoom).
   const boardQuestionClass = classBoard
@@ -342,7 +329,7 @@ export default function TutorSimpleView({
             {/* La leçon écrite est retirée le temps d'en revoir le principe :
                 elle se construisait sur les items `fixed`. Reste la vidéo, et
                 l’explication IA quand l'élève se trompe. */}
-            {learningVideoHref ? (
+            {currentQuestion ? (
               /* ⚠️ HORS APERÇU (27/08/2026) — scripts/capturer-apercus-coach.ts
                  retire cette pastille avant de photographier. Elle reste sur le
                  site : c'est un raccourci utile QUAND ON TRAVAILLE. Mais dans un
@@ -350,17 +337,8 @@ export default function TutorSimpleView({
                  notion et l'énoncé, où il ne se lit ni comme un bouton ni comme
                  un dessin — juste comme une tache. Frédéric, 27/08 : « il faut
                  juste enlever une icône que je vois sur la 3e ligne ». */
-              <div className="mb-5 flex justify-center gap-2" data-hors-apercu="">
-                <a
-                  href={learningVideoHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title="Regarder une video d&apos;explication"
-                  aria-label="Regarder une video d&apos;explication"
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-sky-600 text-white shadow-sm hover:bg-sky-500"
-                >
-                  <Video aria-hidden="true" size={18} strokeWidth={2.5} />
-                </a>
+              <div className="mb-5 flex justify-center gap-2 empty:hidden" data-hors-apercu="">
+                <BoutonVideoCompetence matiere={matiere} classe={classe} microId={currentQuestion.microId} notionId={currentQuestion.notionId} />
               </div>
             ) : null}
 
