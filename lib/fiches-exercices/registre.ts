@@ -1230,6 +1230,11 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Lire une case et une marge, calculer les marges, compléter un tableau, le dresser à partir de données brutes, trouver l'erreur. Clients d'une enseigne, salariés d'une PME, colis en retard, crédits d'une banque, festival ; le jeu de 52 cartes, les planètes, les régions de France, le calendrier 2026, les médailles de Paris 2024.",
   },
+  "maths/stmg/stat-ajustement": {
+    titre: "Ajustement affine : 20 exercices corrigés",
+    resume:
+      "Juger si un ajustement affine est pertinent, tracer une droite au jugé par le point moyen, trouver son équation par deux points ou par G, calculer une valeur de y ou de x, et critiquer le modèle (nuage qui se courbe, point isolé, valeur absurde). Le CO₂ de Mauna Loa, un food truck, la masse salariale d'une PME, un festival, une voiture électrique.",
+  },
 };
 
 export function hrefFicheExercices(matiere: string, classe: string, notion: string) {
