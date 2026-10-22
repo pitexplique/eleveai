@@ -25096,6 +25096,7 @@
       "ceinture": "jaune",
       "serie": "Maths CM2",
       "type": "longue",
+      "meme_video_que": "cm1-stats-tableau-lire",
       "fichier": "cm2/maths/statistiques/01-tableau-lire/eleveai-maths-cm2-stats-tableau-lire.mp4",
       "miniature": "cm2/maths/statistiques/01-tableau-lire/eleveai-maths-cm2-stats-tableau-lire.png",
       "titre": "Le 11, c'est Saint-Leu ? Le piège de la mauvaise ligne — Lire un tableau — épisode 1 · Maths CM2",
@@ -25151,6 +25152,7 @@
       "serie": "Maths CM2",
       "type": "short",
       "renvoie_vers": "cm2-stats-tableau-lire",
+      "meme_video_que": "cm1-stats-tableau-lire-short",
       "fichier": "cm2/maths/statistiques/01-tableau-lire/eleveai-maths-cm2-stats-tableau-lire-short.mp4",
       "miniature": "cm2/maths/statistiques/01-tableau-lire/eleveai-maths-cm2-stats-tableau-lire-short.png",
       "titre": "Sur quelle plage nagent les tortues ? 🐢 — CM2 #Shorts",
@@ -25177,6 +25179,7 @@
       "ceinture": "orange",
       "serie": "Maths CM2",
       "type": "longue",
+      "meme_video_que": "cm1-stats-tableau-completer",
       "fichier": "cm2/maths/statistiques/02-tableau-completer/eleveai-maths-cm2-stats-tableau-completer.mp4",
       "miniature": "cm2/maths/statistiques/02-tableau-completer/eleveai-maths-cm2-stats-tableau-completer.png",
       "titre": "Une case vide : 8 + 20 = 28 ? Non ! — Compléter un tableau — épisode 2 · Maths CM2",
@@ -25233,6 +25236,7 @@
       "serie": "Maths CM2",
       "type": "short",
       "renvoie_vers": "cm2-stats-tableau-completer",
+      "meme_video_que": "cm1-stats-tableau-completer-short",
       "fichier": "cm2/maths/statistiques/02-tableau-completer/eleveai-maths-cm2-stats-tableau-completer-short.mp4",
       "miniature": "cm2/maths/statistiques/02-tableau-completer/eleveai-maths-cm2-stats-tableau-completer-short.png",
       "titre": "50 bouchons sur la plage… et la 2e classe ? 🏖️ — CM2 #Shorts",
@@ -25258,6 +25262,7 @@
       "ceinture": "orange",
       "serie": "Maths CM2",
       "type": "longue",
+      "meme_video_que": "cm1-stats-tableau-interpreter",
       "fichier": "cm2/maths/statistiques/03-tableau-interpreter/eleveai-maths-cm2-stats-tableau-interpreter.mp4",
       "miniature": "cm2/maths/statistiques/03-tableau-interpreter/eleveai-maths-cm2-stats-tableau-interpreter.png",
       "titre": "Le dimanche, le grand jour du pain ? — Interpréter un tableau — épisode 3 · Maths CM2",
@@ -25313,6 +25318,7 @@
       "serie": "Maths CM2",
       "type": "short",
       "renvoie_vers": "cm2-stats-tableau-interpreter",
+      "meme_video_que": "cm1-stats-tableau-interpreter-short",
       "fichier": "cm2/maths/statistiques/03-tableau-interpreter/eleveai-maths-cm2-stats-tableau-interpreter-short.mp4",
       "miniature": "cm2/maths/statistiques/03-tableau-interpreter/eleveai-maths-cm2-stats-tableau-interpreter-short.png",
       "titre": "Pourquoi la boulangère se lève plus tôt le dimanche ? 🥖 — CM2 #Shorts",
@@ -25338,6 +25344,7 @@
       "ceinture": "verte",
       "serie": "Maths CM2",
       "type": "longue",
+      "meme_video_que": "cm1-stats-tableau-defi",
       "fichier": "cm2/maths/statistiques/04-tableau-defi/eleveai-maths-cm2-stats-tableau-defi.mp4",
       "miniature": "cm2/maths/statistiques/04-tableau-defi/eleveai-maths-cm2-stats-tableau-defi.png",
       "titre": "1 200 − 350 ? Le piège du festival de maloya — Le défi des tableaux — épisode 4 · Maths CM2",
@@ -25394,6 +25401,7 @@
       "serie": "Maths CM2",
       "type": "short",
       "renvoie_vers": "cm2-stats-tableau-defi",
+      "meme_video_que": "cm1-stats-tableau-defi-short",
       "fichier": "cm2/maths/statistiques/04-tableau-defi/eleveai-maths-cm2-stats-tableau-defi-short.mp4",
       "miniature": "cm2/maths/statistiques/04-tableau-defi/eleveai-maths-cm2-stats-tableau-defi-short.png",
       "titre": "1 200 adultes : où sont passés ceux du dimanche ? 🎶 — CM2 #Shorts",
@@ -25419,6 +25427,7 @@
       "ceinture": "jaune",
       "serie": "Maths CM2",
       "type": "longue",
+      "meme_video_que": "cm1-stats-graphique-lire",
       "fichier": "cm2/maths/statistiques/05-graphique-lire/eleveai-maths-cm2-stats-graphique-lire.mp4",
       "miniature": "cm2/maths/statistiques/05-graphique-lire/eleveai-maths-cm2-stats-graphique-lire.png",
       "titre": "Paris 2024 : ni 20, ni 24 ! — Lire un diagramme en barres — épisode 5 · Maths CM2",
@@ -25475,6 +25484,7 @@
       "serie": "Maths CM2",
       "type": "short",
       "renvoie_vers": "cm2-stats-graphique-lire",
+      "meme_video_que": "cm1-stats-graphique-lire-short",
       "fichier": "cm2/maths/statistiques/05-graphique-lire/eleveai-maths-cm2-stats-graphique-lire-short.mp4",
       "miniature": "cm2/maths/statistiques/05-graphique-lire/eleveai-maths-cm2-stats-graphique-lire-short.png",
       "titre": "Plus d'or que d'argent à Paris 2024 ? FAUX ! 🥇 — CM2 #Shorts",
@@ -25501,6 +25511,7 @@
       "ceinture": "jaune",
       "serie": "Maths CM2",
       "type": "longue",
+      "meme_video_que": "cm1-stats-graphique-completer",
       "fichier": "cm2/maths/statistiques/06-graphique-completer/eleveai-maths-cm2-stats-graphique-completer.mp4",
       "miniature": "cm2/maths/statistiques/06-graphique-completer/eleveai-maths-cm2-stats-graphique-completer.png",
       "titre": "Il manque une barre ! — Compléter un diagramme en barres — épisode 6 · Maths CM2",
@@ -25558,6 +25569,7 @@
       "serie": "Maths CM2",
       "type": "short",
       "renvoie_vers": "cm2-stats-graphique-completer",
+      "meme_video_que": "cm1-stats-graphique-completer-short",
       "fichier": "cm2/maths/statistiques/06-graphique-completer/eleveai-maths-cm2-stats-graphique-completer-short.mp4",
       "miniature": "cm2/maths/statistiques/06-graphique-completer/eleveai-maths-cm2-stats-graphique-completer-short.png",
       "titre": "La Réunion : 2 fois ou 3 fois plus d'habitants ? 🌋 — CM2 #Shorts",
@@ -25584,6 +25596,7 @@
       "ceinture": "jaune",
       "serie": "Maths CM2",
       "type": "longue",
+      "meme_video_que": "cm1-stats-graphique-interpreter",
       "fichier": "cm2/maths/statistiques/07-graphique-interpreter/eleveai-maths-cm2-stats-graphique-interpreter.mp4",
       "miniature": "cm2/maths/statistiques/07-graphique-interpreter/eleveai-maths-cm2-stats-graphique-interpreter.png",
       "titre": "Ça descend : fini la pluie ? — Interpréter un diagramme en barres — épisode 7 · Maths CM2",
@@ -25640,6 +25653,7 @@
       "serie": "Maths CM2",
       "type": "short",
       "renvoie_vers": "cm2-stats-graphique-interpreter",
+      "meme_video_que": "cm1-stats-graphique-interpreter-short",
       "fichier": "cm2/maths/statistiques/07-graphique-interpreter/eleveai-maths-cm2-stats-graphique-interpreter-short.mp4",
       "miniature": "cm2/maths/statistiques/07-graphique-interpreter/eleveai-maths-cm2-stats-graphique-interpreter-short.png",
       "titre": "1 825 mm de pluie en UN jour : record du monde ! 🌧️ — CM2 #Shorts",
@@ -25667,6 +25681,7 @@
       "ceinture": "verte",
       "serie": "Maths CM2",
       "type": "longue",
+      "meme_video_que": "cm1-stats-graphique-defi",
       "fichier": "cm2/maths/statistiques/08-graphique-defi/eleveai-maths-cm2-stats-graphique-defi.mp4",
       "miniature": "cm2/maths/statistiques/08-graphique-defi/eleveai-maths-cm2-stats-graphique-defi.png",
       "titre": "300 − 80 ? Relis la question ! — Le défi des diagrammes — épisode 8 · Maths CM2",
@@ -25722,6 +25737,7 @@
       "serie": "Maths CM2",
       "type": "short",
       "renvoie_vers": "cm2-stats-graphique-defi",
+      "meme_video_que": "cm1-stats-graphique-defi-short",
       "fichier": "cm2/maths/statistiques/08-graphique-defi/eleveai-maths-cm2-stats-graphique-defi-short.mp4",
       "miniature": "cm2/maths/statistiques/08-graphique-defi/eleveai-maths-cm2-stats-graphique-defi-short.png",
       "titre": "Seul dans la salle de cinéma ? Quel jour y aller 🎬 — CM2 #Shorts",
@@ -26553,6 +26569,2387 @@
         "collège",
         "eleveai",
         "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "5e-stats-organiser",
+      "notionId": "stat_statistique",
+      "microId": "stat_donnee_organiser",
+      "classe": "5e",
+      "ceinture": "jaune",
+      "serie": "Maths 5e",
+      "type": "longue",
+      "fichier": "5e/maths/statistiques/01-organiser/eleveai-maths-5e-stats-organiser.mp4",
+      "miniature": "5e/maths/statistiques/01-organiser/eleveai-maths-5e-stats-organiser.png",
+      "titre": "14 nombres en vrac : y voir clair — Organiser des données — épisode 1 · Maths 5e",
+      "accroche": "Au Piton de la Fournaise, une volcanologue surveille le volcan. Chaque jour, des capteurs comptent les petits séismes sous la montagne. S'ils se multiplient, une éruption se prépare peut-être. Ses relevés de deux semaines sont en désordre…\n\nDans cette vidéo :\n• une série statistique : 14 nombres en vrac\n• un tableau : les valeurs en haut, les jours en dessous\n• compter un par un, en barrant : les effectifs 2, 3, 6, 2, 1\n• le piège : oublier un nombre ou le compter deux fois ; l'effectif total doit faire 14\n\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : quelle valeur apparaît le plus souvent ? Et combien de jours ont eu au moins 3 séismes ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/stat-statistique\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/stat-statistique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_donnee_organiser&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Une liste en désordre : la volcanologue"
+        ],
+        [
+          "00:19",
+          "La série statistique"
+        ],
+        [
+          "00:34",
+          "Le tableau des valeurs"
+        ],
+        [
+          "00:46",
+          "Compter un par un, en barrant"
+        ],
+        [
+          "01:01",
+          "Les effectifs"
+        ],
+        [
+          "01:21",
+          "Le piège : un oubli, un double"
+        ],
+        [
+          "01:39",
+          "À toi de jouer"
+        ],
+        [
+          "01:51",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/5e/stat-statistique",
+      "tags": [
+        "organiser des données",
+        "série statistique",
+        "effectif",
+        "tableau",
+        "Piton de la Fournaise",
+        "volcanologue",
+        "La Réunion",
+        "statistiques",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "5e-stats-organiser-short",
+      "notionId": "stat_statistique",
+      "microId": "stat_donnee_organiser",
+      "classe": "5e",
+      "ceinture": "blanche",
+      "serie": "Maths 5e",
+      "type": "short",
+      "renvoie_vers": "5e-stats-organiser",
+      "fichier": "5e/maths/statistiques/01-organiser/eleveai-maths-5e-stats-organiser-short.mp4",
+      "miniature": "5e/maths/statistiques/01-organiser/eleveai-maths-5e-stats-organiser-short.png",
+      "titre": "Le volcan tremble : combien de séismes ? 🌋 — 5e #Shorts",
+      "accroche": "Sous le Piton de la Fournaise, le sol tremble un peu chaque jour. 14 jours, 14 nombres : je les range ! 0 séisme : 2 jours. 1 : 3 jours. 2 : 6 jours. 3 : 2 jours. 4 : 1 jour. Le champion, c'est 2 !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : combien de jours la volcanologue a-t-elle compté au moins 2 séismes ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_donnee_organiser&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #5e #collège",
+      "tags": [
+        "effectif",
+        "volcan",
+        "Piton de la Fournaise",
+        "statistiques",
+        "maths 5e",
+        "5e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "5e-stats-lire-tableau",
+      "notionId": "stat_statistique",
+      "microId": "stat_lire_tableau",
+      "classe": "5e",
+      "ceinture": "orange",
+      "serie": "Maths 5e",
+      "type": "longue",
+      "fichier": "5e/maths/statistiques/02-lire-tableau/eleveai-maths-5e-stats-lire-tableau.mp4",
+      "miniature": "5e/maths/statistiques/02-lire-tableau/eleveai-maths-5e-stats-lire-tableau.png",
+      "titre": "Maurice en décembre : 15 ? Non ! — Lire un tableau à double entrée — épisode 2 · Maths 5e",
+      "accroche": "À l'aéroport de La Réunion, une planificatrice organise les vols. Combien d'avions partent chaque semaine, et vers où (Paris, Maurice, Mayotte, Madagascar) ? Avec ces nombres, elle prévoit les équipes au sol.\n\nDans cette vidéo :\n• d'abord le titre, les lignes (les mois) et les colonnes (les destinations)\n• lire une case : la ligne de décembre, la colonne de Maurice, 24 vols\n• le total d'une ligne : 90 vols en décembre ; comparer : 14 vols de plus vers Paris\n• le piège : la bonne ligne, mais la mauvaise colonne ; 15, c'est Mayotte\n\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : en avril, 70 vols en tout : combien vont à Madagascar ? Et en décembre, combien ne vont pas à Paris ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/stat-statistique\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/stat-statistique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_lire_tableau&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Ligne, colonne, case : la planificatrice"
+        ],
+        [
+          "00:20",
+          "Le titre, les lignes, les colonnes"
+        ],
+        [
+          "00:41",
+          "Lire une case"
+        ],
+        [
+          "00:54",
+          "Le total d'une ligne"
+        ],
+        [
+          "01:09",
+          "Comparer avril et décembre"
+        ],
+        [
+          "01:20",
+          "Le piège : la mauvaise colonne"
+        ],
+        [
+          "01:36",
+          "À toi de jouer"
+        ],
+        [
+          "01:51",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/5e/stat-statistique",
+      "tags": [
+        "tableau à double entrée",
+        "lire un tableau",
+        "effectif total",
+        "aéroport",
+        "vols",
+        "planificatrice",
+        "La Réunion",
+        "statistiques",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "5e-stats-lire-tableau-short",
+      "notionId": "stat_statistique",
+      "microId": "stat_lire_tableau",
+      "classe": "5e",
+      "ceinture": "blanche",
+      "serie": "Maths 5e",
+      "type": "short",
+      "renvoie_vers": "5e-stats-lire-tableau",
+      "fichier": "5e/maths/statistiques/02-lire-tableau/eleveai-maths-5e-stats-lire-tableau-short.mp4",
+      "miniature": "5e/maths/statistiques/02-lire-tableau/eleveai-maths-5e-stats-lire-tableau-short.png",
+      "titre": "À Noël, les vols vers Paris doublent ? FAUX ! ✈️ — 5e #Shorts",
+      "accroche": "À Noël, tout le monde prend l'avion ! Les vols de La Réunion vers Paris doublent-ils en décembre ? Faux ! En avril : 28 vols par semaine. En décembre : 42. C'est 14 de plus, pas le double.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : pour doubler, combien de vols vers Paris faudrait-il en décembre ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_lire_tableau&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #5e #collège",
+      "tags": [
+        "tableau",
+        "avion",
+        "vols",
+        "statistiques",
+        "maths 5e",
+        "5e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "5e-stats-lire-graphique",
+      "notionId": "stat_statistique",
+      "microId": "stat_lire_graphique",
+      "classe": "5e",
+      "ceinture": "orange",
+      "serie": "Maths 5e",
+      "type": "longue",
+      "fichier": "5e/maths/statistiques/03-lire-graphique/eleveai-maths-5e-stats-lire-graphique.mp4",
+      "miniature": "5e/maths/statistiques/03-lire-graphique/eleveai-maths-5e-stats-lire-graphique.png",
+      "titre": "Un carreau = 1 joueur ? Non, 10 ! — Lire un diagramme en barres — épisode 3 · Maths 5e",
+      "accroche": "Une game designer crée un jeu vidéo de cinq niveaux. Elle veut savoir où les joueurs abandonnent, pour corriger le niveau trop dur. Le jeu compte les abandons à chaque niveau et les montre dans un diagramme en barres.\n\nDans cette vidéo :\n• les axes : les niveaux en bas, les joueurs de 10 en 10, un petit trait vaut 5\n• lire une barre : 20 joueurs au niveau 2, 35 au niveau 1\n• la barre la plus haute : 75 abandons au niveau 3 ; le total : 150\n• le piège : compter les carreaux comme des joueurs ; un carreau, c'est 10\n\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : combien d'abandons de plus au niveau 3 qu'au niveau 1 ? Et combien au niveau 4 ou au niveau 5 ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/stat-statistique\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/stat-statistique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_lire_graphique&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Où abandonnent les joueurs ? La game designer"
+        ],
+        [
+          "00:19",
+          "Les axes et les petits traits"
+        ],
+        [
+          "00:32",
+          "Lire une barre"
+        ],
+        [
+          "00:45",
+          "La barre la plus haute"
+        ],
+        [
+          "01:00",
+          "Le total"
+        ],
+        [
+          "01:16",
+          "Le piège : les carreaux"
+        ],
+        [
+          "01:30",
+          "À toi de jouer"
+        ],
+        [
+          "01:42",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/5e/stat-statistique",
+      "tags": [
+        "diagramme en barres",
+        "lire un graphique",
+        "axe gradué",
+        "jeu vidéo",
+        "game designer",
+        "métier",
+        "statistiques",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "5e-stats-lire-graphique-short",
+      "notionId": "stat_statistique",
+      "microId": "stat_lire_graphique",
+      "classe": "5e",
+      "ceinture": "blanche",
+      "serie": "Maths 5e",
+      "type": "short",
+      "renvoie_vers": "5e-stats-lire-graphique",
+      "fichier": "5e/maths/statistiques/03-lire-graphique/eleveai-maths-5e-stats-lire-graphique-short.mp4",
+      "miniature": "5e/maths/statistiques/03-lire-graphique/eleveai-maths-5e-stats-lire-graphique-short.png",
+      "titre": "Le niveau où tout le monde abandonne 🎮 — 5e #Shorts",
+      "accroche": "Un jeu vidéo de cinq niveaux : où les joueurs abandonnent-ils le plus ? Niveau 1 : 35. Niveau 2 : 20. Niveau 3 : 75 ! Niveau 4 : 15. Niveau 5 : 5. Le niveau 3 est un vrai mur !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : au niveau 3, combien d'abandons de plus qu'au niveau 2 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_lire_graphique&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #5e #collège",
+      "tags": [
+        "diagramme en barres",
+        "jeu vidéo",
+        "statistiques",
+        "maths 5e",
+        "5e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "5e-stats-effectif-frequence",
+      "notionId": "stat_statistique",
+      "microId": "stat_effectif_frequence",
+      "classe": "5e",
+      "ceinture": "verte",
+      "serie": "Maths 5e",
+      "type": "longue",
+      "fichier": "5e/maths/statistiques/04-effectif-frequence/eleveai-maths-5e-stats-effectif-frequence.mp4",
+      "miniature": "5e/maths/statistiques/04-effectif-frequence/eleveai-maths-5e-stats-effectif-frequence.png",
+      "titre": "4 gauchers, plus que 3… et pourtant ! — Effectif et fréquence — épisode 4 · Maths 5e",
+      "accroche": "Une designer industrielle dessine des ciseaux pour gauchers. Combien faut-il en fabriquer ? Elle a besoin de savoir quelle part des élèves est gauchère : environ 1 personne sur 10 dans le monde.\n\nDans cette vidéo :\n• l'effectif : 3 gauchers ; l'effectif total : 25 élèves\n• la fréquence : 3 ÷ 25 = 0,12, soit 12 %\n• comparer deux groupes : le club de judo, 4 sur 40 = 10 %\n• le piège : comparer les effectifs de groupes de tailles différentes ; on compare les fréquences\n\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 300 élèves et une fréquence de 0,1 : combien de paires de ciseaux pour gauchers ? Et la fréquence de 6 gauchers sur 50 ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/stat-statistique\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/stat-statistique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_effectif_frequence&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Effectif ou fréquence ? La designer"
+        ],
+        [
+          "00:17",
+          "L'effectif"
+        ],
+        [
+          "00:28",
+          "La fréquence"
+        ],
+        [
+          "00:43",
+          "Comparer deux groupes"
+        ],
+        [
+          "01:00",
+          "Le piège : comparer les effectifs"
+        ],
+        [
+          "01:17",
+          "À toi de jouer"
+        ],
+        [
+          "01:35",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/5e/stat-statistique",
+      "tags": [
+        "effectif",
+        "fréquence",
+        "pourcentage",
+        "comparer",
+        "gauchers",
+        "designer industrielle",
+        "métier",
+        "statistiques",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "5e-stats-effectif-frequence-short",
+      "notionId": "stat_statistique",
+      "microId": "stat_effectif_frequence",
+      "classe": "5e",
+      "ceinture": "jaune",
+      "serie": "Maths 5e",
+      "type": "short",
+      "renvoie_vers": "5e-stats-effectif-frequence",
+      "fichier": "5e/maths/statistiques/04-effectif-frequence/eleveai-maths-5e-stats-effectif-frequence-short.mp4",
+      "miniature": "5e/maths/statistiques/04-effectif-frequence/eleveai-maths-5e-stats-effectif-frequence-short.png",
+      "titre": "3 gauchers sur 25 ou 4 sur 40 : où y en a-t-il le plus ? ✂️ — 5e #Shorts",
+      "accroche": "3 gauchers dans une classe de 25. 4 gauchers dans un club de 40. On dirait le club… Mais compare les parts ! Classe : 12 %. Club : 10 %. C'est la classe qui gagne !\n\n🥋 Ceinture jaune.\n👉 À toi : dans un groupe de 20, avec 2 gauchers, quelle est la fréquence des gauchers ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_effectif_frequence&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #5e #collège",
+      "tags": [
+        "fréquence",
+        "pourcentage",
+        "gauchers",
+        "statistiques",
+        "maths 5e",
+        "5e",
+        "collège",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "5e-stats-representer",
+      "notionId": "stat_statistique",
+      "microId": "stat_representer",
+      "classe": "5e",
+      "ceinture": "verte",
+      "serie": "Maths 5e",
+      "type": "longue",
+      "fichier": "5e/maths/statistiques/05-representer/eleveai-maths-5e-stats-representer.mp4",
+      "miniature": "5e/maths/statistiques/05-representer/eleveai-maths-5e-stats-representer.png",
+      "titre": "Un disque qui déborde ? Vérifie 360° ! — Représenter des données — épisode 5 · Maths 5e",
+      "accroche": "Un architecte dessine une maison de 120 mètres carrés. Pour montrer à ses clients la place de chaque pièce (séjour, chambres, cuisine, salle de bain), il transforme son tableau en diagrammes.\n\nDans cette vidéo :\n• un diagramme en barres : 1 cm pour 5 m², le séjour fait 8 cm\n• un diagramme circulaire : 360° pour 120 m², donc 3° par m²\n• les angles : 120°, 135°, 60° et 45°\n• le piège : un disque qui ne fait pas le tour complet ; la somme doit faire 360°\n\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : avec 1 cm pour 5 m², quelle hauteur pour la cuisine (20 m²) ? Et un secteur de 90° représente combien de m² ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/stat-statistique\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/stat-statistique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_representer&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Du tableau au diagramme : l'architecte"
+        ],
+        [
+          "00:15",
+          "Le tableau des surfaces"
+        ],
+        [
+          "00:30",
+          "Les barres : l'échelle"
+        ],
+        [
+          "00:49",
+          "Le disque : les angles"
+        ],
+        [
+          "01:16",
+          "Le piège : 360°"
+        ],
+        [
+          "01:34",
+          "À toi de jouer"
+        ],
+        [
+          "01:50",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/5e/stat-statistique",
+      "tags": [
+        "représenter des données",
+        "diagramme circulaire",
+        "diagramme en barres",
+        "angle",
+        "échelle",
+        "architecte",
+        "métier",
+        "statistiques",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "5e-stats-representer-short",
+      "notionId": "stat_statistique",
+      "microId": "stat_representer",
+      "classe": "5e",
+      "ceinture": "jaune",
+      "serie": "Maths 5e",
+      "type": "short",
+      "renvoie_vers": "5e-stats-representer",
+      "fichier": "5e/maths/statistiques/05-representer/eleveai-maths-5e-stats-representer-short.mp4",
+      "miniature": "5e/maths/statistiques/05-representer/eleveai-maths-5e-stats-representer-short.png",
+      "titre": "Le séjour en camembert : quel angle ? 🏠 — 5e #Shorts",
+      "accroche": "Une maison de 120 m², dessinée en camembert. Le séjour fait 40 m² : 40 sur 120, c'est un tiers ! Un tiers du tour complet : 360 ÷ 3 = 120 degrés.\n\n🥋 Ceinture jaune.\n👉 À toi : les chambres font 45 m² : quel angle pour leur secteur ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_representer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #5e #collège",
+      "tags": [
+        "diagramme circulaire",
+        "angles",
+        "maison",
+        "statistiques",
+        "maths 5e",
+        "5e",
+        "collège",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "5e-stats-choisir-representation",
+      "notionId": "stat_statistique",
+      "microId": "stat_representation_choisir",
+      "classe": "5e",
+      "ceinture": "verte",
+      "serie": "Maths 5e",
+      "type": "longue",
+      "fichier": "5e/maths/statistiques/06-choisir-representation/eleveai-maths-5e-stats-choisir-representation.mp4",
+      "miniature": "5e/maths/statistiques/06-choisir-representation/eleveai-maths-5e-stats-choisir-representation.png",
+      "titre": "Des mois en camembert ? Raté ! — Choisir une représentation — épisode 6 · Maths 5e",
+      "accroche": "Une créatrice de mode lance sa marque de robes. Elle se pose trois questions : ses ventes augmentent-elles ? Quelle part pour chaque tissu (coton, lin, madras) ? Quelle taille se vend le plus ? Pour chacune, il faut le bon graphique.\n\nDans cette vidéo :\n• une évolution dans le temps : une courbe (20, 25, 35, 30, 45, 60 robes)\n• des parts d'un tout : un diagramme circulaire (coton la moitié, lin un quart)\n• des catégories à comparer : un diagramme en barres (la taille M gagne)\n• le piège : un disque pour une évolution ; les mois ne sont pas les parts d'un tout\n\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : pour suivre la température de l'atelier heure par heure, quel graphique ? Et quel pourcentage pour le lin ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/stat-statistique\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/stat-statistique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_representation_choisir&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Quel graphique ? La créatrice de mode"
+        ],
+        [
+          "00:15",
+          "Une évolution : la courbe"
+        ],
+        [
+          "00:34",
+          "Des parts : le disque"
+        ],
+        [
+          "00:53",
+          "Comparer : les barres"
+        ],
+        [
+          "01:10",
+          "Le piège : un disque pour une évolution"
+        ],
+        [
+          "01:27",
+          "À toi de jouer"
+        ],
+        [
+          "01:43",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/5e/stat-statistique",
+      "tags": [
+        "choisir un graphique",
+        "courbe",
+        "diagramme circulaire",
+        "diagramme en barres",
+        "mode",
+        "créatrice de mode",
+        "statistiques",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "5e-stats-choisir-representation-short",
+      "notionId": "stat_statistique",
+      "microId": "stat_representation_choisir",
+      "classe": "5e",
+      "ceinture": "jaune",
+      "serie": "Maths 5e",
+      "type": "short",
+      "renvoie_vers": "5e-stats-choisir-representation",
+      "fichier": "5e/maths/statistiques/06-choisir-representation/eleveai-maths-5e-stats-choisir-representation-short.mp4",
+      "miniature": "5e/maths/statistiques/06-choisir-representation/eleveai-maths-5e-stats-choisir-representation-short.png",
+      "titre": "Des ventes en camembert ?! Raté ! 👗 — 5e #Shorts",
+      "accroche": "Les ventes d'une créatrice de mode, de janvier à juin… dessinées en camembert ! Raté : un camembert montre les parts d'un tout. Pour une évolution, il faut une courbe : 20, 25, 35, 30, 45, 60. Là, on voit que ça monte !\n\n🥋 Ceinture jaune.\n👉 À toi : en avril, les ventes ont baissé : de combien de robes ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_representation_choisir&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #5e #collège",
+      "tags": [
+        "graphique",
+        "courbe",
+        "camembert",
+        "mode",
+        "statistiques",
+        "maths 5e",
+        "5e",
+        "collège",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "5e-stats-moyenne",
+      "notionId": "stat_statistique",
+      "microId": "stat_moyenne",
+      "classe": "5e",
+      "ceinture": "verte",
+      "serie": "Maths 5e",
+      "type": "longue",
+      "fichier": "5e/maths/statistiques/07-moyenne/eleveai-maths-5e-stats-moyenne.mp4",
+      "miniature": "5e/maths/statistiques/07-moyenne/eleveai-maths-5e-stats-moyenne.png",
+      "titre": "Mbappé : oublier le 0 ? Non ! — Calculer une moyenne — épisode 7 · Maths 5e",
+      "accroche": "Une analyste de données travaille pour un club de football. Elle étudie les buteurs. Aujourd'hui : Kylian Mbappé avec l'équipe de France, dans les grands tournois (données réelles : 4 buts en 2018, 0 à l'Euro 2020, 8 en 2022, 1 à l'Euro 2024).\n\nDans cette vidéo :\n• additionner toutes les valeurs : 4 + 0 + 8 + 1 = 13 buts\n• diviser par le nombre de valeurs : 13 ÷ 4 = 3,25\n• le sens : le partage égal des 13 buts entre les 4 tournois\n• le piège : oublier le 0 ; et une moyenne n'est pas forcément une des valeurs\n\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : combien de buts faudrait-il marquer à un cinquième tournoi pour une moyenne de 4 ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/stat-statistique\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/stat-statistique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_moyenne&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "La moyenne : l'analyste de données"
+        ],
+        [
+          "00:18",
+          "Les buts de Mbappé"
+        ],
+        [
+          "00:31",
+          "Additionner, puis diviser"
+        ],
+        [
+          "00:53",
+          "Le sens : le partage égal"
+        ],
+        [
+          "01:07",
+          "Le piège : oublier le 0"
+        ],
+        [
+          "01:25",
+          "À toi de jouer"
+        ],
+        [
+          "01:38",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/5e/stat-statistique",
+      "tags": [
+        "moyenne",
+        "partage égal",
+        "football",
+        "Kylian Mbappé",
+        "équipe de France",
+        "analyste de données",
+        "statistiques",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "5e-stats-moyenne-short",
+      "notionId": "stat_statistique",
+      "microId": "stat_moyenne",
+      "classe": "5e",
+      "ceinture": "jaune",
+      "serie": "Maths 5e",
+      "type": "short",
+      "renvoie_vers": "5e-stats-moyenne",
+      "fichier": "5e/maths/statistiques/07-moyenne/eleveai-maths-5e-stats-moyenne-short.mp4",
+      "miniature": "5e/maths/statistiques/07-moyenne/eleveai-maths-5e-stats-moyenne-short.png",
+      "titre": "Mbappé en grands tournois : combien de buts en moyenne ? ⚽ — 5e #Shorts",
+      "accroche": "Kylian Mbappé, en équipe de France, dans les grands tournois : 4 buts en 2018, 0 à l'Euro 2020, 8 en 2022, 1 en 2024. Je partage les 13 buts en 4 parts égales : 3,25 buts par tournoi !\n\n🥋 Ceinture jaune.\n👉 À toi : avec un tournoi de plus à 7 buts, quelle serait sa nouvelle moyenne ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_moyenne&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #5e #collège",
+      "tags": [
+        "moyenne",
+        "Mbappé",
+        "football",
+        "statistiques",
+        "maths 5e",
+        "5e",
+        "collège",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "5e-stats-defi",
+      "notionId": "stat_statistique",
+      "microId": "stat_defi",
+      "classe": "5e",
+      "ceinture": "bleue",
+      "serie": "Maths 5e",
+      "type": "longue",
+      "fichier": "5e/maths/statistiques/08-defi/eleveai-maths-5e-stats-defi.mp4",
+      "miniature": "5e/maths/statistiques/08-defi/eleveai-maths-5e-stats-defi.png",
+      "titre": "(1 + 2 + 3 + 4) ÷ 4 ? Le piège ! — Les défis des statistiques — épisode 8 · Maths 5e",
+      "accroche": "Une cheffe de centre de pompiers prépare ses équipes. Combien d'interventions par jour, en moyenne ? Elle a relevé 20 jours dans un diagramme en bâtons. Un problème en plusieurs étapes !\n\nDans cette vidéo :\n• l'effectif total : 4 + 6 + 8 + 2 = 20 jours\n• le total des interventions : chaque valeur fois son effectif, 48\n• la moyenne : 48 ÷ 20 = 2,4 interventions par jour\n• le piège : la moyenne de 1, 2, 3 et 4 sans les effectifs (2,5) ; c'est faux\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : le 21e jour, un feu de forêt : 15 interventions. Quelle est la nouvelle moyenne sur 21 jours ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/stat-statistique\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/stat-statistique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_defi&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Un défi en étapes : la cheffe de centre"
+        ],
+        [
+          "00:17",
+          "Le diagramme en bâtons"
+        ],
+        [
+          "00:37",
+          "L'effectif total"
+        ],
+        [
+          "00:47",
+          "Le total des interventions, puis la moyenne"
+        ],
+        [
+          "01:13",
+          "Le piège : oublier les effectifs"
+        ],
+        [
+          "01:30",
+          "À toi de jouer"
+        ],
+        [
+          "01:42",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/5e/stat-statistique",
+      "tags": [
+        "défi",
+        "moyenne pondérée",
+        "diagramme en bâtons",
+        "valeur extrême",
+        "pompiers",
+        "cheffe de centre",
+        "statistiques",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "5e-stats-defi-short",
+      "notionId": "stat_statistique",
+      "microId": "stat_defi",
+      "classe": "5e",
+      "ceinture": "verte",
+      "serie": "Maths 5e",
+      "type": "short",
+      "renvoie_vers": "5e-stats-defi",
+      "fichier": "5e/maths/statistiques/08-defi/eleveai-maths-5e-stats-defi-short.mp4",
+      "miniature": "5e/maths/statistiques/08-defi/eleveai-maths-5e-stats-defi-short.png",
+      "titre": "Un feu de forêt, et la moyenne s'envole ! 🚒 — 5e #Shorts",
+      "accroche": "20 jours chez les pompiers : en moyenne, 2,4 interventions par jour. Et puis… un feu de forêt ! 15 interventions en un seul jour. Le total passe de 48 à 63 : sur 21 jours, la moyenne saute à 3.\n\n🥋 Ceinture verte.\n👉 À toi : si ce jour-là il y avait eu 36 interventions, quelle serait la moyenne ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #5e #collège",
+      "tags": [
+        "moyenne",
+        "pompiers",
+        "feu de forêt",
+        "statistiques",
+        "maths 5e",
+        "5e",
+        "collège",
+        "eleveai",
+        "ceinture verte",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "4e-stats-lire-tableau",
+      "notionId": "stat_donnee",
+      "microId": "stat_lire_tableau",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "meme_video_que": "5e-stats-lire-tableau",
+      "fichier": "4e/maths/statistiques/01-lire-tableau/eleveai-maths-4e-stats-lire-tableau.mp4",
+      "miniature": "4e/maths/statistiques/01-lire-tableau/eleveai-maths-4e-stats-lire-tableau.png",
+      "titre": "Maurice en décembre : 15 ? Non ! — Lire un tableau à double entrée — épisode 1 · Maths 4e",
+      "accroche": "À l'aéroport de La Réunion, une planificatrice organise les vols. Combien d'avions partent chaque semaine, et vers où (Paris, Maurice, Mayotte, Madagascar) ? Avec ces nombres, elle prévoit les équipes au sol.\n\nDans cette vidéo :\n• d'abord le titre, les lignes (les mois) et les colonnes (les destinations)\n• lire une case : la ligne de décembre, la colonne de Maurice, 24 vols\n• le total d'une ligne : 90 vols en décembre ; comparer : 14 vols de plus vers Paris\n• le piège : la bonne ligne, mais la mauvaise colonne ; 15, c'est Mayotte\n\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : en avril, 70 vols en tout : combien vont à Madagascar ? Et en décembre, combien ne vont pas à Paris ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/stat-donnee\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/stat-donnee\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=stat_donnee&microId=stat_lire_tableau&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Ligne, colonne, case : la planificatrice"
+        ],
+        [
+          "00:20",
+          "Le titre, les lignes, les colonnes"
+        ],
+        [
+          "00:41",
+          "Lire une case"
+        ],
+        [
+          "00:54",
+          "Le total d'une ligne"
+        ],
+        [
+          "01:09",
+          "Comparer avril et décembre"
+        ],
+        [
+          "01:20",
+          "Le piège : la mauvaise colonne"
+        ],
+        [
+          "01:36",
+          "À toi de jouer"
+        ],
+        [
+          "01:51",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/stat-donnee",
+      "tags": [
+        "tableau à double entrée",
+        "lire un tableau",
+        "effectif total",
+        "aéroport",
+        "vols",
+        "planificatrice",
+        "La Réunion",
+        "statistiques",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "4e-stats-lire-tableau-short",
+      "notionId": "stat_donnee",
+      "microId": "stat_lire_tableau",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-stats-lire-tableau",
+      "meme_video_que": "5e-stats-lire-tableau-short",
+      "fichier": "4e/maths/statistiques/01-lire-tableau/eleveai-maths-4e-stats-lire-tableau-short.mp4",
+      "miniature": "4e/maths/statistiques/01-lire-tableau/eleveai-maths-4e-stats-lire-tableau-short.png",
+      "titre": "À Noël, les vols vers Paris doublent ? FAUX ! ✈️ — 4e #Shorts",
+      "accroche": "À Noël, tout le monde prend l'avion ! Les vols de La Réunion vers Paris doublent-ils en décembre ? Faux ! En avril : 28 vols par semaine. En décembre : 42. C'est 14 de plus, pas le double.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : pour doubler, combien de vols vers Paris faudrait-il en décembre ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=stat_donnee&microId=stat_lire_tableau&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #4e #collège",
+      "tags": [
+        "tableau",
+        "avion",
+        "vols",
+        "statistiques",
+        "maths 4e",
+        "4e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "4e-stats-lire-graphique",
+      "notionId": "stat_donnee",
+      "microId": "stat_lire_graphique",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "meme_video_que": "5e-stats-lire-graphique",
+      "fichier": "4e/maths/statistiques/02-lire-graphique/eleveai-maths-4e-stats-lire-graphique.mp4",
+      "miniature": "4e/maths/statistiques/02-lire-graphique/eleveai-maths-4e-stats-lire-graphique.png",
+      "titre": "Un carreau = 1 joueur ? Non, 10 ! — Lire un diagramme en barres — épisode 2 · Maths 4e",
+      "accroche": "Une game designer crée un jeu vidéo de cinq niveaux. Elle veut savoir où les joueurs abandonnent, pour corriger le niveau trop dur. Le jeu compte les abandons à chaque niveau et les montre dans un diagramme en barres.\n\nDans cette vidéo :\n• les axes : les niveaux en bas, les joueurs de 10 en 10, un petit trait vaut 5\n• lire une barre : 20 joueurs au niveau 2, 35 au niveau 1\n• la barre la plus haute : 75 abandons au niveau 3 ; le total : 150\n• le piège : compter les carreaux comme des joueurs ; un carreau, c'est 10\n\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : combien d'abandons de plus au niveau 3 qu'au niveau 1 ? Et combien au niveau 4 ou au niveau 5 ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/stat-donnee\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/stat-donnee\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=stat_donnee&microId=stat_lire_graphique&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Où abandonnent les joueurs ? La game designer"
+        ],
+        [
+          "00:19",
+          "Les axes et les petits traits"
+        ],
+        [
+          "00:32",
+          "Lire une barre"
+        ],
+        [
+          "00:45",
+          "La barre la plus haute"
+        ],
+        [
+          "01:00",
+          "Le total"
+        ],
+        [
+          "01:16",
+          "Le piège : les carreaux"
+        ],
+        [
+          "01:30",
+          "À toi de jouer"
+        ],
+        [
+          "01:42",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/stat-donnee",
+      "tags": [
+        "diagramme en barres",
+        "lire un graphique",
+        "axe gradué",
+        "jeu vidéo",
+        "game designer",
+        "métier",
+        "statistiques",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "4e-stats-lire-graphique-short",
+      "notionId": "stat_donnee",
+      "microId": "stat_lire_graphique",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-stats-lire-graphique",
+      "meme_video_que": "5e-stats-lire-graphique-short",
+      "fichier": "4e/maths/statistiques/02-lire-graphique/eleveai-maths-4e-stats-lire-graphique-short.mp4",
+      "miniature": "4e/maths/statistiques/02-lire-graphique/eleveai-maths-4e-stats-lire-graphique-short.png",
+      "titre": "Le niveau où tout le monde abandonne 🎮 — 4e #Shorts",
+      "accroche": "Un jeu vidéo de cinq niveaux : où les joueurs abandonnent-ils le plus ? Niveau 1 : 35. Niveau 2 : 20. Niveau 3 : 75 ! Niveau 4 : 15. Niveau 5 : 5. Le niveau 3 est un vrai mur !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : au niveau 3, combien d'abandons de plus qu'au niveau 2 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=stat_donnee&microId=stat_lire_graphique&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #4e #collège",
+      "tags": [
+        "diagramme en barres",
+        "jeu vidéo",
+        "statistiques",
+        "maths 4e",
+        "4e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "4e-stats-effectif",
+      "notionId": "stat_donnee",
+      "microId": "stat_effectif",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/statistiques/03-effectif/eleveai-maths-4e-stats-effectif.mp4",
+      "miniature": "4e/maths/statistiques/03-effectif/eleveai-maths-4e-stats-effectif.png",
+      "titre": "35 portées ? Il n'y a que 12 fiches ! — Déterminer un effectif — épisode 3 · Maths 4e",
+      "accroche": "Une vétérinaire suit la santé des animaux avec des chiffres. Sa clinique a suivi 12 portées de chiots labradors. Pour préparer les visites et les vaccins, elle veut savoir combien de chiots il y a, le plus souvent, dans une portée.\n\nDans cette vidéo :\n• les données brutes : 12 fiches en vrac\n• l'effectif d'une valeur : le nombre de fois où elle apparaît (7 chiots : 4 fois)\n• le tableau des effectifs et l'effectif total, 12 ; « au moins 8 chiots » : 3 portées\n• le piège : additionner les valeurs (35) au lieu des effectifs\n\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : 20 portées, une case effacée : combien de portées de 6 chiots ? Et combien ont au moins 8 chiots ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/stat-donnee\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/stat-donnee\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=stat_donnee&microId=stat_effectif&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Combien de fois ? La vétérinaire"
+        ],
+        [
+          "00:25",
+          "Les données brutes"
+        ],
+        [
+          "00:41",
+          "L'effectif d'une valeur"
+        ],
+        [
+          "00:56",
+          "Le tableau des effectifs"
+        ],
+        [
+          "01:17",
+          "L'effectif total"
+        ],
+        [
+          "01:34",
+          "Le piège : additionner les valeurs"
+        ],
+        [
+          "01:53",
+          "Au moins 8 chiots"
+        ],
+        [
+          "02:07",
+          "À toi de jouer"
+        ],
+        [
+          "02:30",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/stat-donnee",
+      "tags": [
+        "effectif",
+        "effectif total",
+        "tableau d'effectifs",
+        "diagramme en bâtons",
+        "chiots",
+        "vétérinaire",
+        "métier",
+        "statistiques",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "4e-stats-effectif-short",
+      "notionId": "stat_donnee",
+      "microId": "stat_effectif",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-stats-effectif",
+      "fichier": "4e/maths/statistiques/03-effectif/eleveai-maths-4e-stats-effectif-short.mp4",
+      "miniature": "4e/maths/statistiques/03-effectif/eleveai-maths-4e-stats-effectif-short.png",
+      "titre": "Quiz : combien de portées ont 7 chiots ? 🐶 — 4e #Shorts",
+      "accroche": "Quiz ! Une vétérinaire a suivi 12 portées de chiots. 5 chiots : 2 portées. 6 chiots : 3. 7 chiots : 4, le plus haut ! 8 chiots : 2. 9 chiots : 1. Et 2 + 3 + 4 + 2 + 1 = 12 : le compte est bon !\n\n🥋 Ceinture jaune.\n👉 À toi : combien de portées ont au moins 7 chiots ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=stat_donnee&microId=stat_effectif&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #4e #collège",
+      "tags": [
+        "effectif",
+        "chiots",
+        "quiz",
+        "statistiques",
+        "maths 4e",
+        "4e",
+        "collège",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "4e-stats-frequence",
+      "notionId": "stat_donnee",
+      "microId": "stat_frequence",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/statistiques/04-frequence/eleveai-maths-4e-stats-frequence.mp4",
+      "miniature": "4e/maths/statistiques/04-frequence/eleveai-maths-4e-stats-frequence.png",
+      "titre": "18 donneurs, plus que 6… mais 9 % ! — Calculer une fréquence — épisode 4 · Maths 4e",
+      "accroche": "Un infirmier de l'Établissement français du sang organise une collecte : 200 donneurs. Pour les malades, il veut savoir quelle part des donneurs a le groupe O, très demandé à l'hôpital.\n\nDans cette vidéo :\n• la fréquence : l'effectif divisé par l'effectif total, 82 ÷ 200 = 0,41\n• en pourcentage : 41 %\n• et en France, d'après l'EFS : environ 45 % A, 42 % O, 9 % B, 4 % AB\n• le piège : comparer des effectifs ; 6 sur 50 (12 %) bat 18 sur 200 (9 %)\n\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une collecte de 11 A, 10 O, 3 B et 1 AB : quelle est la fréquence du groupe A, en décimal puis en pourcentage ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/stat-donnee\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/stat-donnee\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=stat_donnee&microId=stat_frequence&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le don du sang : l'infirmier"
+        ],
+        [
+          "00:22",
+          "Le tableau des groupes"
+        ],
+        [
+          "00:37",
+          "Calculer la fréquence"
+        ],
+        [
+          "00:48",
+          "En pourcentage"
+        ],
+        [
+          "01:00",
+          "Et dans toute la France ?"
+        ],
+        [
+          "01:24",
+          "Le piège : comparer les effectifs"
+        ],
+        [
+          "02:01",
+          "À toi de jouer"
+        ],
+        [
+          "02:23",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/stat-donnee",
+      "tags": [
+        "fréquence",
+        "pourcentage",
+        "effectif",
+        "don du sang",
+        "groupe sanguin",
+        "infirmier",
+        "EFS",
+        "statistiques",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "4e-stats-frequence-short",
+      "notionId": "stat_donnee",
+      "microId": "stat_frequence",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-stats-frequence",
+      "fichier": "4e/maths/statistiques/04-frequence/eleveai-maths-4e-stats-frequence-short.mp4",
+      "miniature": "4e/maths/statistiques/04-frequence/eleveai-maths-4e-stats-frequence-short.png",
+      "titre": "Le groupe sanguin le plus rare en France ? 🩸 — 4e #Shorts",
+      "accroche": "Quel est le groupe sanguin le plus rare en France ? Sur 100 cases (une case = 1 % des Français) : groupe A, 45 cases. Groupe O, 42. Groupe B, 9. Il reste 4 cases pour le groupe AB : c'est le plus rare !\n\n🥋 Ceinture orange.\n👉 À toi : une collecte reçoit 200 donneurs : combien seront du groupe AB, environ ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=stat_donnee&microId=stat_frequence&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #4e #collège",
+      "tags": [
+        "fréquence",
+        "groupe sanguin",
+        "pourcentage",
+        "statistiques",
+        "maths 4e",
+        "4e",
+        "collège",
+        "eleveai",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "4e-stats-donnee-defi",
+      "notionId": "stat_donnee",
+      "microId": "stat_donnee_defi",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/statistiques/05-donnee-defi/eleveai-maths-4e-stats-donnee-defi.mp4",
+      "miniature": "4e/maths/statistiques/05-donnee-defi/eleveai-maths-4e-stats-donnee-defi.png",
+      "titre": "Une barre a disparu : retrouve-la ! — Défis sur les données — épisode 5 · Maths 4e",
+      "accroche": "Une linguiste étudie comment vivent les langues à La Réunion. Dans un collège, elle a demandé à 200 élèves quelle langue ils parlent le plus souvent à la maison. Mais sur son diagramme, une barre a été effacée !\n\nDans cette vidéo :\n• retrouver la barre effacée grâce au total : 200 − 160 = 40\n• regrouper deux barres : créole seul ou avec le français, 150 ÷ 200 = 75 %\n• un pourcentage du total redonne un effectif\n• le piège : l'écart entre deux barres, ce n'est pas la plus haute ; 80 − 10 = 70\n\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 600 élèves, 45 % parlent les deux langues : combien d'élèves ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/stat-donnee\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/stat-donnee\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=stat_donnee&microId=stat_donnee_defi&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Une barre effacée : la linguiste"
+        ],
+        [
+          "00:23",
+          "Les barres qui restent"
+        ],
+        [
+          "00:36",
+          "Retrouver la barre grâce au total"
+        ],
+        [
+          "00:55",
+          "Regrouper deux barres"
+        ],
+        [
+          "01:16",
+          "Le piège : l'écart"
+        ],
+        [
+          "01:32",
+          "À toi de jouer"
+        ],
+        [
+          "01:56",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/stat-donnee",
+      "tags": [
+        "défi",
+        "diagramme en barres",
+        "fréquence",
+        "pourcentage",
+        "langues",
+        "créole",
+        "linguiste",
+        "La Réunion",
+        "statistiques",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "4e-stats-donnee-defi-short",
+      "notionId": "stat_donnee",
+      "microId": "stat_donnee_defi",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-stats-donnee-defi",
+      "fichier": "4e/maths/statistiques/05-donnee-defi/eleveai-maths-4e-stats-donnee-defi-short.mp4",
+      "miniature": "4e/maths/statistiques/05-donnee-defi/eleveai-maths-4e-stats-donnee-defi-short.png",
+      "titre": "Une barre a disparu ! Retrouve-la 🗣️ — 4e #Shorts",
+      "accroche": "Une barre a disparu ! 200 élèves ont dit quelle langue ils parlent à la maison. Créole : 70. Les deux langues : 80. Autre : 10. Les barres visibles font 160 : il manque 40, la barre du français pousse jusqu'à 40 !\n\n🥋 Ceinture orange.\n👉 À toi : sur ces 200 élèves, quel pourcentage parle français à la maison ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=stat_donnee&microId=stat_donnee_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #4e #collège",
+      "tags": [
+        "diagramme en barres",
+        "créole",
+        "langues",
+        "statistiques",
+        "maths 4e",
+        "4e",
+        "collège",
+        "eleveai",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "4e-stats-moyenne",
+      "notionId": "stat_statistique",
+      "microId": "stat_moyenne",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/statistiques/06-moyenne/eleveai-maths-4e-stats-moyenne.mp4",
+      "miniature": "4e/maths/statistiques/06-moyenne/eleveai-maths-4e-stats-moyenne.png",
+      "titre": "38 ÷ 5 colonnes = 7,6 ? Non ! — Calculer une moyenne — épisode 6 · Maths 4e",
+      "accroche": "À La Réunion, l'observatoire des Makes, à Saint-Louis, scrute le ciel. Un astronome y compte les étoiles filantes, nuit après nuit : 12, 8, 15, 20, 10, 6 et 13 en une heure. Un seul nombre peut-il les résumer ?\n\nDans cette vidéo :\n• la moyenne : 84 ÷ 7 = 12 étoiles filantes par heure\n• le sens : le partage égal, toutes les barres arrivent à 12\n• la moyenne pondérée d'un tableau d'effectifs : 38 ÷ 20 = 1,9 bolide par nuit\n• le piège : diviser par le nombre de colonnes au lieu de l'effectif total\n\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 9, 14, 11, 7, 16, 12 et 10 étoiles filantes : quelle moyenne, arrondie au dixième ? Plus que 12 ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/stat-statistique\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/stat-statistique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=stat_statistique&microId=stat_moyenne&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Étoiles filantes : l'astronome des Makes"
+        ],
+        [
+          "00:27",
+          "La série"
+        ],
+        [
+          "00:41",
+          "Calculer la moyenne"
+        ],
+        [
+          "01:02",
+          "Le sens : le partage égal"
+        ],
+        [
+          "01:21",
+          "La moyenne pondérée"
+        ],
+        [
+          "02:05",
+          "Le piège : diviser par les colonnes"
+        ],
+        [
+          "02:29",
+          "À toi de jouer"
+        ],
+        [
+          "02:50",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/stat-statistique",
+      "tags": [
+        "moyenne",
+        "moyenne pondérée",
+        "partage égal",
+        "étoiles filantes",
+        "astronome",
+        "observatoire des Makes",
+        "La Réunion",
+        "statistiques",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "4e-stats-moyenne-short",
+      "notionId": "stat_statistique",
+      "microId": "stat_moyenne",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-stats-moyenne",
+      "fichier": "4e/maths/statistiques/06-moyenne/eleveai-maths-4e-stats-moyenne-short.mp4",
+      "miniature": "4e/maths/statistiques/06-moyenne/eleveai-maths-4e-stats-moyenne-short.png",
+      "titre": "Une pluie d'étoiles filantes : combien en moyenne ? 🌠 — 4e #Shorts",
+      "accroche": "Une pluie d'étoiles filantes ! Un astronome compte, nuit après nuit : 12, 8, 15, 20, 10, 6, 13. Les grandes nuits donnent leurs étoiles aux petites… et toutes en ont 12. La moyenne, c'est 12 : 84 étoiles partagées entre 7 nuits.\n\n🥋 Ceinture jaune.\n👉 À toi : pour une moyenne de 15 étoiles filantes par nuit, sur 7 nuits, combien faut-il en voir en tout ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=stat_statistique&microId=stat_moyenne&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #4e #collège",
+      "tags": [
+        "moyenne",
+        "étoiles filantes",
+        "astronomie",
+        "statistiques",
+        "maths 4e",
+        "4e",
+        "collège",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "4e-stats-mediane",
+      "notionId": "stat_statistique",
+      "microId": "stat_mediane",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/statistiques/07-mediane/eleveai-maths-4e-stats-mediane.mp4",
+      "miniature": "4e/maths/statistiques/07-mediane/eleveai-maths-4e-stats-mediane.png",
+      "titre": "Le milieu de la liste : 12 ? Range ! — Déterminer une médiane — épisode 7 · Maths 4e",
+      "accroche": "À La Réunion, des panneaux solaires produisent de l'électricité sur un toit. Une technicienne en énergie solaire surveille leur production, en kilowattheures. Elle cherche un nombre qui coupe ses relevés en deux : la médiane.\n\nDans cette vidéo :\n• ranger d'abord, puis le milieu : 6, 9, 12, 13, 14, 15, 16, la médiane est 13\n• le sens : au moins la moitié des jours en dessous, au moins la moitié au-dessus\n• un nombre pair de valeurs : le milieu des deux valeurs centrales, 13,5\n• avec un tableau d'effectifs : les effectifs cumulés ; le piège : prendre le milieu sans ranger\n\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 11, 15, 8, 14, 10 et 16 kWh sur six jours : quelle est la médiane ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/stat-statistique\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/stat-statistique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=stat_statistique&microId=stat_mediane&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "La valeur du milieu : la technicienne solaire"
+        ],
+        [
+          "00:28",
+          "La série"
+        ],
+        [
+          "00:40",
+          "Ranger, puis le milieu"
+        ],
+        [
+          "00:57",
+          "Le sens de la médiane"
+        ],
+        [
+          "01:10",
+          "Le piège : sans ranger"
+        ],
+        [
+          "01:21",
+          "Un nombre pair de valeurs"
+        ],
+        [
+          "01:47",
+          "Avec un tableau d'effectifs"
+        ],
+        [
+          "02:26",
+          "À toi de jouer"
+        ],
+        [
+          "02:41",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/stat-statistique",
+      "tags": [
+        "médiane",
+        "ranger une série",
+        "effectifs cumulés",
+        "énergie solaire",
+        "panneaux solaires",
+        "technicienne",
+        "La Réunion",
+        "statistiques",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "4e-stats-mediane-short",
+      "notionId": "stat_statistique",
+      "microId": "stat_mediane",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-stats-mediane",
+      "fichier": "4e/maths/statistiques/07-mediane/eleveai-maths-4e-stats-mediane-short.mp4",
+      "miniature": "4e/maths/statistiques/07-mediane/eleveai-maths-4e-stats-mediane-short.png",
+      "titre": "Quelle production est pile au milieu ? ☀️ — 4e #Shorts",
+      "accroche": "Sept jours de soleil sur un toit : 14, 9, 16, 12, 15, 6, 13 kWh. On range du plus petit au plus grand : 6, 9, 12, 13, 14, 15, 16. Au milieu : 13 ! 3 jours en dessous, 3 jours au-dessus : c'est la médiane.\n\n🥋 Ceinture jaune.\n👉 À toi : et si un huitième jour produit 20 kWh, quelle est la nouvelle médiane ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=stat_statistique&microId=stat_mediane&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #4e #collège",
+      "tags": [
+        "médiane",
+        "énergie solaire",
+        "statistiques",
+        "maths 4e",
+        "4e",
+        "collège",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "4e-stats-etendue",
+      "notionId": "stat_statistique",
+      "microId": "stat_etendue",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/statistiques/08-etendue/eleveai-maths-4e-stats-etendue.mp4",
+      "miniature": "4e/maths/statistiques/08-etendue/eleveai-maths-4e-stats-etendue.png",
+      "titre": "Dernière − première ? Non : max − min — Calculer une étendue — épisode 8 · Maths 4e",
+      "accroche": "À Saint-Malo, la mer monte et descend deux fois par jour. Un hydrographe mesure la hauteur de l'eau, pour que les bateaux ne touchent pas le fond. Les marins appellent l'écart entre mer haute et mer basse le marnage ; les statisticiens disent : l'étendue.\n\nDans cette vidéo :\n• l'étendue : la plus grande valeur moins la plus petite, 12,5 − 1,5 = 11 m\n• le piège : la dernière valeur moins la première (1 m) ; on cherche dans toute la série\n• comparer : 0,5 m seulement à la Pointe des Galets, à La Réunion\n• l'étendue mesure la dispersion\n\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : vagues de 1, 2, 3 et 6 mètres pendant 4, 9, 5 et 2 jours : quelle est l'étendue des hauteurs ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/stat-statistique\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/stat-statistique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=stat_statistique&microId=stat_etendue&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "La marée : l'hydrographe"
+        ],
+        [
+          "00:28",
+          "La série"
+        ],
+        [
+          "00:42",
+          "Calculer l'étendue"
+        ],
+        [
+          "01:01",
+          "Le piège : dernière moins première"
+        ],
+        [
+          "01:18",
+          "Comparer : Saint-Malo et La Réunion"
+        ],
+        [
+          "01:44",
+          "À toi de jouer"
+        ],
+        [
+          "02:08",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/stat-statistique",
+      "tags": [
+        "étendue",
+        "dispersion",
+        "marée",
+        "Saint-Malo",
+        "hydrographe",
+        "mer",
+        "statistiques",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "4e-stats-etendue-short",
+      "notionId": "stat_statistique",
+      "microId": "stat_etendue",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-stats-etendue",
+      "fichier": "4e/maths/statistiques/08-etendue/eleveai-maths-4e-stats-etendue-short.mp4",
+      "miniature": "4e/maths/statistiques/08-etendue/eleveai-maths-4e-stats-etendue-short.png",
+      "titre": "La mer monte de plus de 10 m en 6 heures ! 🌊 — 4e #Shorts",
+      "accroche": "À Saint-Malo, toutes les 2 heures, on mesure l'eau : 11,5 ; 8 ; 4 ; 1,5 ; 4,5 ; 9 ; 12,5 mètres. Le plus haut : 12,5. Le plus bas : 1,5. L'écart, 11 mètres, c'est l'étendue !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : à La Réunion, la mer va seulement de 0,2 à 0,7 mètre : quelle est l'étendue ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=stat_statistique&microId=stat_etendue&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #4e #collège",
+      "tags": [
+        "étendue",
+        "marée",
+        "Saint-Malo",
+        "statistiques",
+        "maths 4e",
+        "4e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "4e-stats-interpreter",
+      "notionId": "stat_statistique",
+      "microId": "stat_interpreter",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/statistiques/09-interpreter/eleveai-maths-4e-stats-interpreter.mp4",
+      "miniature": "4e/maths/statistiques/09-interpreter/eleveai-maths-4e-stats-interpreter.png",
+      "titre": "Mbappé : 27 buts chaque saison ? — Interpréter des indicateurs — épisode 9 · Maths 4e",
+      "accroche": "Une analyste de données résume la carrière des joueurs avec quelques nombres, pour aider son club à décider. Son exemple : les buts de Kylian Mbappé en championnat avec le PSG, de 2018 à 2024 (données réelles : 33, 18, 27, 28, 29, 27).\n\nDans cette vidéo :\n• la moyenne : 162 ÷ 6 = 27 buts, le partage égal, pas chaque saison\n• la médiane : 27,5, trois saisons en dessous, trois au-dessus\n• l'étendue : 33 − 18 = 15 buts\n• le piège : la saison du Covid (18 buts) tire la moyenne, beaucoup moins la médiane\n\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Lamine Yamal : 5, 9 puis 16 buts. Moyenne, étendue, et « environ 10 buts chaque saison » : vrai ou faux ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/stat-statistique\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/stat-statistique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=stat_statistique&microId=stat_interpreter&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Résumer une carrière : l'analyste"
+        ],
+        [
+          "00:26",
+          "Les buts de Mbappé"
+        ],
+        [
+          "00:39",
+          "La moyenne"
+        ],
+        [
+          "00:55",
+          "La médiane et l'étendue"
+        ],
+        [
+          "01:26",
+          "Le piège : la saison du Covid"
+        ],
+        [
+          "01:51",
+          "À toi de jouer"
+        ],
+        [
+          "02:12",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/stat-statistique",
+      "tags": [
+        "moyenne",
+        "médiane",
+        "étendue",
+        "interpréter",
+        "football",
+        "Kylian Mbappé",
+        "analyste de données",
+        "statistiques",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "4e-stats-interpreter-short",
+      "notionId": "stat_statistique",
+      "microId": "stat_interpreter",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-stats-interpreter",
+      "fichier": "4e/maths/statistiques/09-interpreter/eleveai-maths-4e-stats-interpreter-short.mp4",
+      "miniature": "4e/maths/statistiques/09-interpreter/eleveai-maths-4e-stats-interpreter-short.png",
+      "titre": "Mbappé : 162 buts en 6 saisons, combien par saison ? ⚽ — 4e #Shorts",
+      "accroche": "Kylian Mbappé : 162 buts en championnat avec le PSG, en 6 saisons : 33, 18, 27, 28, 29, 27. 162 ÷ 6 = 27 buts par saison en moyenne. Mais regarde la saison à 18 : c'est celle du Covid, arrêtée en mars !\n\n🥋 Ceinture orange.\n👉 À toi : sans la saison du Covid, quelle est la moyenne des 5 autres saisons ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=stat_statistique&microId=stat_interpreter&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #4e #collège",
+      "tags": [
+        "moyenne",
+        "Mbappé",
+        "PSG",
+        "statistiques",
+        "maths 4e",
+        "4e",
+        "collège",
+        "eleveai",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "4e-stats-probleme",
+      "notionId": "stat_statistique",
+      "microId": "stat_probleme",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/statistiques/10-probleme/eleveai-maths-4e-stats-probleme.mp4",
+      "miniature": "4e/maths/statistiques/10-probleme/eleveai-maths-4e-stats-probleme.png",
+      "titre": "Le toit solaire suffira-t-il ? — Résoudre un problème statistique — épisode 10 · Maths 4e",
+      "accroche": "Une technicienne installe des panneaux solaires à Saint-Pierre. Une famille consomme 20 kWh par jour : son toit va-t-il produire assez ? Elle relève la production pendant une semaine.\n\nDans cette vidéo :\n• la moyenne de la semaine : 140 ÷ 7 = 20 kWh\n• les jours au-dessus de la moyenne : 4\n• un orage ajoute un jour à 4 kWh : 144 ÷ 8 = 18, et l'étendue passe à 20\n• le piège : diviser encore par 7, ou faire la moyenne de 20 et de 4\n\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 12 kWh pendant 2 jours, 20 pendant 3 jours, 25 pendant 5 jours : quelle production moyenne ? Le toit suffit-il ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/stat-statistique\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/stat-statistique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=stat_statistique&microId=stat_probleme&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le toit suffira-t-il ? La technicienne"
+        ],
+        [
+          "00:20",
+          "La semaine"
+        ],
+        [
+          "00:42",
+          "La moyenne"
+        ],
+        [
+          "00:58",
+          "Au-dessus de la moyenne"
+        ],
+        [
+          "01:14",
+          "L'orage : nouvelle moyenne"
+        ],
+        [
+          "01:42",
+          "Le piège : diviser par 7"
+        ],
+        [
+          "01:58",
+          "À toi de jouer"
+        ],
+        [
+          "02:18",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/stat-statistique",
+      "tags": [
+        "problème",
+        "moyenne",
+        "étendue",
+        "moyenne pondérée",
+        "énergie solaire",
+        "technicienne",
+        "La Réunion",
+        "statistiques",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "4e-stats-probleme-short",
+      "notionId": "stat_statistique",
+      "microId": "stat_probleme",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-stats-probleme",
+      "fichier": "4e/maths/statistiques/10-probleme/eleveai-maths-4e-stats-probleme-short.mp4",
+      "miniature": "4e/maths/statistiques/10-probleme/eleveai-maths-4e-stats-probleme-short.png",
+      "titre": "Un orage, et la moyenne plonge ! ⛈️ — 4e #Shorts",
+      "accroche": "Une semaine de soleil sur un toit de Saint-Pierre : en moyenne, 20 kWh par jour. Et puis l'orage ! Il n'apporte que 4 : 140 + 4 = 144, divisé par 8 jours, égale 18. Une seule journée fait plonger la moyenne !\n\n🥋 Ceinture orange.\n👉 À toi : si le 8e jour avait produit 28 kWh, quelle serait la nouvelle moyenne ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=stat_statistique&microId=stat_probleme&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #4e #collège",
+      "tags": [
+        "moyenne",
+        "énergie solaire",
+        "orage",
+        "statistiques",
+        "maths 4e",
+        "4e",
+        "collège",
+        "eleveai",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "4e-stats-defi",
+      "notionId": "stat_statistique",
+      "microId": "stat_defi",
+      "classe": "4e",
+      "ceinture": "bleue",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/statistiques/11-defi/eleveai-maths-4e-stats-defi.mp4",
+      "miniature": "4e/maths/statistiques/11-defi/eleveai-maths-4e-stats-defi.png",
+      "titre": "Michael Olise : combien de buts cachés ? — Défis sur les indicateurs — épisode 11 · Maths 4e",
+      "accroche": "Un recruteur parcourt les stades pour repérer les talents : son métier, juger un joueur avec des chiffres. Il étudie Michael Olise, le joueur français du Bayern Munich (données réelles : 2, 2, 10 puis 12 buts en championnat).\n\nDans cette vidéo :\n• la moyenne de 4 saisons : 26 ÷ 4 = 6,5 buts\n• la clé : la somme, c'est la moyenne fois le nombre de valeurs\n• une 5e saison et une moyenne de 8,2 : 8,2 × 5 − 26 = 15 buts cachés\n• le piège : la moyenne de 6,5 et de 15 (10,75) ; on passe toujours par les sommes\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : ses 5 saisons font 41 buts : combien en marquer la suivante pour une moyenne de 10 sur 6 saisons ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/stat-statistique\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/stat-statistique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=stat_statistique&microId=stat_defi&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Un nombre caché : le recruteur"
+        ],
+        [
+          "00:23",
+          "Les buts de Michael Olise"
+        ],
+        [
+          "00:37",
+          "La moyenne"
+        ],
+        [
+          "00:50",
+          "La clé : somme = moyenne × nombre"
+        ],
+        [
+          "01:03",
+          "La saison cachée"
+        ],
+        [
+          "01:27",
+          "Le piège : la moyenne de deux moyennes"
+        ],
+        [
+          "01:45",
+          "À toi de jouer"
+        ],
+        [
+          "01:59",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/stat-statistique",
+      "tags": [
+        "défi",
+        "moyenne",
+        "somme",
+        "valeur cachée",
+        "football",
+        "Michael Olise",
+        "recruteur",
+        "statistiques",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "4e-stats-defi-short",
+      "notionId": "stat_statistique",
+      "microId": "stat_defi",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-stats-defi",
+      "fichier": "4e/maths/statistiques/11-defi/eleveai-maths-4e-stats-defi-short.mp4",
+      "miniature": "4e/maths/statistiques/11-defi/eleveai-maths-4e-stats-defi-short.png",
+      "titre": "Michael Olise : combien de buts cachés ? ⚽ — 4e #Shorts",
+      "accroche": "Michael Olise, 4 saisons : 2, 2, 10 et 12 buts. Moyenne : 6,5. Après une 5e saison, la moyenne grimpe à 8,2. Les sommes parlent : 8,2 × 5 = 41, moins les 26 premiers buts : 15 buts ! C'est exactement ce qu'il a marqué.\n\n🥋 Ceinture verte.\n👉 À toi : si sa moyenne sur 6 saisons montait à 9, combien de buts en 6e saison ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=stat_statistique&microId=stat_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #4e #collège",
+      "tags": [
+        "moyenne",
+        "Michael Olise",
+        "football",
+        "statistiques",
+        "maths 4e",
+        "4e",
+        "collège",
+        "eleveai",
+        "ceinture verte",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "3e-stats-lire-tableau",
+      "notionId": "stat_statistique",
+      "microId": "stat_lire_tableau",
+      "classe": "3e",
+      "ceinture": "blanche",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "meme_video_que": "5e-stats-lire-tableau",
+      "fichier": "3e/maths/statistiques/01-lire-tableau/eleveai-maths-3e-stats-lire-tableau.mp4",
+      "miniature": "3e/maths/statistiques/01-lire-tableau/eleveai-maths-3e-stats-lire-tableau.png",
+      "titre": "Maurice en décembre : 15 ? Non ! — Lire un tableau à double entrée — épisode 1 · Maths 3e",
+      "accroche": "À l'aéroport de La Réunion, une planificatrice organise les vols. Combien d'avions partent chaque semaine, et vers où (Paris, Maurice, Mayotte, Madagascar) ? Avec ces nombres, elle prévoit les équipes au sol.\n\nDans cette vidéo :\n• d'abord le titre, les lignes (les mois) et les colonnes (les destinations)\n• lire une case : la ligne de décembre, la colonne de Maurice, 24 vols\n• le total d'une ligne : 90 vols en décembre ; comparer : 14 vols de plus vers Paris\n• le piège : la bonne ligne, mais la mauvaise colonne ; 15, c'est Mayotte\n\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : en avril, 70 vols en tout : combien vont à Madagascar ? Et en décembre, combien ne vont pas à Paris ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/stat-statistique\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/3e/stat-statistique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_lire_tableau&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Ligne, colonne, case : la planificatrice"
+        ],
+        [
+          "00:20",
+          "Le titre, les lignes, les colonnes"
+        ],
+        [
+          "00:41",
+          "Lire une case"
+        ],
+        [
+          "00:54",
+          "Le total d'une ligne"
+        ],
+        [
+          "01:09",
+          "Comparer avril et décembre"
+        ],
+        [
+          "01:20",
+          "Le piège : la mauvaise colonne"
+        ],
+        [
+          "01:36",
+          "À toi de jouer"
+        ],
+        [
+          "01:51",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/3e/stat-statistique",
+      "tags": [
+        "tableau à double entrée",
+        "lire un tableau",
+        "effectif total",
+        "aéroport",
+        "vols",
+        "planificatrice",
+        "La Réunion",
+        "statistiques",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "3e-stats-lire-tableau-short",
+      "notionId": "stat_statistique",
+      "microId": "stat_lire_tableau",
+      "classe": "3e",
+      "ceinture": "blanche",
+      "serie": "Maths 3e",
+      "type": "short",
+      "renvoie_vers": "3e-stats-lire-tableau",
+      "meme_video_que": "5e-stats-lire-tableau-short",
+      "fichier": "3e/maths/statistiques/01-lire-tableau/eleveai-maths-3e-stats-lire-tableau-short.mp4",
+      "miniature": "3e/maths/statistiques/01-lire-tableau/eleveai-maths-3e-stats-lire-tableau-short.png",
+      "titre": "À Noël, les vols vers Paris doublent ? FAUX ! ✈️ — 3e #Shorts",
+      "accroche": "À Noël, tout le monde prend l'avion ! Les vols de La Réunion vers Paris doublent-ils en décembre ? Faux ! En avril : 28 vols par semaine. En décembre : 42. C'est 14 de plus, pas le double.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : pour doubler, combien de vols vers Paris faudrait-il en décembre ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_lire_tableau&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #3e #collège",
+      "tags": [
+        "tableau",
+        "avion",
+        "vols",
+        "statistiques",
+        "maths 3e",
+        "3e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "3e-stats-lire-graphique",
+      "notionId": "stat_statistique",
+      "microId": "stat_lire_graphique",
+      "classe": "3e",
+      "ceinture": "blanche",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "meme_video_que": "5e-stats-lire-graphique",
+      "fichier": "3e/maths/statistiques/02-lire-graphique/eleveai-maths-3e-stats-lire-graphique.mp4",
+      "miniature": "3e/maths/statistiques/02-lire-graphique/eleveai-maths-3e-stats-lire-graphique.png",
+      "titre": "Un carreau = 1 joueur ? Non, 10 ! — Lire un diagramme en barres — épisode 2 · Maths 3e",
+      "accroche": "Une game designer crée un jeu vidéo de cinq niveaux. Elle veut savoir où les joueurs abandonnent, pour corriger le niveau trop dur. Le jeu compte les abandons à chaque niveau et les montre dans un diagramme en barres.\n\nDans cette vidéo :\n• les axes : les niveaux en bas, les joueurs de 10 en 10, un petit trait vaut 5\n• lire une barre : 20 joueurs au niveau 2, 35 au niveau 1\n• la barre la plus haute : 75 abandons au niveau 3 ; le total : 150\n• le piège : compter les carreaux comme des joueurs ; un carreau, c'est 10\n\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : combien d'abandons de plus au niveau 3 qu'au niveau 1 ? Et combien au niveau 4 ou au niveau 5 ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/stat-statistique\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/3e/stat-statistique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_lire_graphique&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Où abandonnent les joueurs ? La game designer"
+        ],
+        [
+          "00:19",
+          "Les axes et les petits traits"
+        ],
+        [
+          "00:32",
+          "Lire une barre"
+        ],
+        [
+          "00:45",
+          "La barre la plus haute"
+        ],
+        [
+          "01:00",
+          "Le total"
+        ],
+        [
+          "01:16",
+          "Le piège : les carreaux"
+        ],
+        [
+          "01:30",
+          "À toi de jouer"
+        ],
+        [
+          "01:42",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/3e/stat-statistique",
+      "tags": [
+        "diagramme en barres",
+        "lire un graphique",
+        "axe gradué",
+        "jeu vidéo",
+        "game designer",
+        "métier",
+        "statistiques",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "3e-stats-lire-graphique-short",
+      "notionId": "stat_statistique",
+      "microId": "stat_lire_graphique",
+      "classe": "3e",
+      "ceinture": "blanche",
+      "serie": "Maths 3e",
+      "type": "short",
+      "renvoie_vers": "3e-stats-lire-graphique",
+      "meme_video_que": "5e-stats-lire-graphique-short",
+      "fichier": "3e/maths/statistiques/02-lire-graphique/eleveai-maths-3e-stats-lire-graphique-short.mp4",
+      "miniature": "3e/maths/statistiques/02-lire-graphique/eleveai-maths-3e-stats-lire-graphique-short.png",
+      "titre": "Le niveau où tout le monde abandonne 🎮 — 3e #Shorts",
+      "accroche": "Un jeu vidéo de cinq niveaux : où les joueurs abandonnent-ils le plus ? Niveau 1 : 35. Niveau 2 : 20. Niveau 3 : 75 ! Niveau 4 : 15. Niveau 5 : 5. Le niveau 3 est un vrai mur !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : au niveau 3, combien d'abandons de plus qu'au niveau 2 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_lire_graphique&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #3e #collège",
+      "tags": [
+        "diagramme en barres",
+        "jeu vidéo",
+        "statistiques",
+        "maths 3e",
+        "3e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "3e-stats-effectif-frequence",
+      "notionId": "stat_statistique",
+      "microId": "stat_effectif_frequence",
+      "classe": "3e",
+      "ceinture": "jaune",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "meme_video_que": "5e-stats-effectif-frequence",
+      "fichier": "3e/maths/statistiques/03-effectif-frequence/eleveai-maths-3e-stats-effectif-frequence.mp4",
+      "miniature": "3e/maths/statistiques/03-effectif-frequence/eleveai-maths-3e-stats-effectif-frequence.png",
+      "titre": "4 gauchers, plus que 3… et pourtant ! — Effectif et fréquence — épisode 3 · Maths 3e",
+      "accroche": "Une designer industrielle dessine des ciseaux pour gauchers. Combien faut-il en fabriquer ? Elle a besoin de savoir quelle part des élèves est gauchère : environ 1 personne sur 10 dans le monde.\n\nDans cette vidéo :\n• l'effectif : 3 gauchers ; l'effectif total : 25 élèves\n• la fréquence : 3 ÷ 25 = 0,12, soit 12 %\n• comparer deux groupes : le club de judo, 4 sur 40 = 10 %\n• le piège : comparer les effectifs de groupes de tailles différentes ; on compare les fréquences\n\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : 300 élèves et une fréquence de 0,1 : combien de paires de ciseaux pour gauchers ? Et la fréquence de 6 gauchers sur 50 ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/stat-statistique\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/3e/stat-statistique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_effectif_frequence&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Effectif ou fréquence ? La designer"
+        ],
+        [
+          "00:17",
+          "L'effectif"
+        ],
+        [
+          "00:28",
+          "La fréquence"
+        ],
+        [
+          "00:43",
+          "Comparer deux groupes"
+        ],
+        [
+          "01:00",
+          "Le piège : comparer les effectifs"
+        ],
+        [
+          "01:17",
+          "À toi de jouer"
+        ],
+        [
+          "01:35",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/3e/stat-statistique",
+      "tags": [
+        "effectif",
+        "fréquence",
+        "pourcentage",
+        "comparer",
+        "gauchers",
+        "designer industrielle",
+        "métier",
+        "statistiques",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "3e-stats-effectif-frequence-short",
+      "notionId": "stat_statistique",
+      "microId": "stat_effectif_frequence",
+      "classe": "3e",
+      "ceinture": "jaune",
+      "serie": "Maths 3e",
+      "type": "short",
+      "renvoie_vers": "3e-stats-effectif-frequence",
+      "meme_video_que": "5e-stats-effectif-frequence-short",
+      "fichier": "3e/maths/statistiques/03-effectif-frequence/eleveai-maths-3e-stats-effectif-frequence-short.mp4",
+      "miniature": "3e/maths/statistiques/03-effectif-frequence/eleveai-maths-3e-stats-effectif-frequence-short.png",
+      "titre": "3 gauchers sur 25 ou 4 sur 40 : où y en a-t-il le plus ? ✂️ — 3e #Shorts",
+      "accroche": "3 gauchers dans une classe de 25. 4 gauchers dans un club de 40. On dirait le club… Mais compare les parts ! Classe : 12 %. Club : 10 %. C'est la classe qui gagne !\n\n🥋 Ceinture jaune.\n👉 À toi : dans un groupe de 20, avec 2 gauchers, quelle est la fréquence des gauchers ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_effectif_frequence&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #3e #collège",
+      "tags": [
+        "fréquence",
+        "pourcentage",
+        "gauchers",
+        "statistiques",
+        "maths 3e",
+        "3e",
+        "collège",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "3e-stats-moyenne",
+      "notionId": "stat_statistique",
+      "microId": "stat_moyenne",
+      "classe": "3e",
+      "ceinture": "orange",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "meme_video_que": "4e-stats-moyenne",
+      "fichier": "3e/maths/statistiques/04-moyenne/eleveai-maths-3e-stats-moyenne.mp4",
+      "miniature": "3e/maths/statistiques/04-moyenne/eleveai-maths-3e-stats-moyenne.png",
+      "titre": "38 ÷ 5 colonnes = 7,6 ? Non ! — Calculer une moyenne — épisode 4 · Maths 3e",
+      "accroche": "À La Réunion, l'observatoire des Makes, à Saint-Louis, scrute le ciel. Un astronome y compte les étoiles filantes, nuit après nuit : 12, 8, 15, 20, 10, 6 et 13 en une heure. Un seul nombre peut-il les résumer ?\n\nDans cette vidéo :\n• la moyenne : 84 ÷ 7 = 12 étoiles filantes par heure\n• le sens : le partage égal, toutes les barres arrivent à 12\n• la moyenne pondérée d'un tableau d'effectifs : 38 ÷ 20 = 1,9 bolide par nuit\n• le piège : diviser par le nombre de colonnes au lieu de l'effectif total\n\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : 9, 14, 11, 7, 16, 12 et 10 étoiles filantes : quelle moyenne, arrondie au dixième ? Plus que 12 ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/stat-statistique\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/3e/stat-statistique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_moyenne&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Étoiles filantes : l'astronome des Makes"
+        ],
+        [
+          "00:27",
+          "La série"
+        ],
+        [
+          "00:41",
+          "Calculer la moyenne"
+        ],
+        [
+          "01:02",
+          "Le sens : le partage égal"
+        ],
+        [
+          "01:21",
+          "La moyenne pondérée"
+        ],
+        [
+          "02:05",
+          "Le piège : diviser par les colonnes"
+        ],
+        [
+          "02:29",
+          "À toi de jouer"
+        ],
+        [
+          "02:50",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/3e/stat-statistique",
+      "tags": [
+        "moyenne",
+        "moyenne pondérée",
+        "partage égal",
+        "étoiles filantes",
+        "astronome",
+        "observatoire des Makes",
+        "La Réunion",
+        "statistiques",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "3e-stats-moyenne-short",
+      "notionId": "stat_statistique",
+      "microId": "stat_moyenne",
+      "classe": "3e",
+      "ceinture": "jaune",
+      "serie": "Maths 3e",
+      "type": "short",
+      "renvoie_vers": "3e-stats-moyenne",
+      "meme_video_que": "4e-stats-moyenne-short",
+      "fichier": "3e/maths/statistiques/04-moyenne/eleveai-maths-3e-stats-moyenne-short.mp4",
+      "miniature": "3e/maths/statistiques/04-moyenne/eleveai-maths-3e-stats-moyenne-short.png",
+      "titre": "Une pluie d'étoiles filantes : combien en moyenne ? 🌠 — 3e #Shorts",
+      "accroche": "Une pluie d'étoiles filantes ! Un astronome compte, nuit après nuit : 12, 8, 15, 20, 10, 6, 13. Les grandes nuits donnent leurs étoiles aux petites… et toutes en ont 12. La moyenne, c'est 12 : 84 étoiles partagées entre 7 nuits.\n\n🥋 Ceinture jaune.\n👉 À toi : pour une moyenne de 15 étoiles filantes par nuit, sur 7 nuits, combien faut-il en voir en tout ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_moyenne&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #3e #collège",
+      "tags": [
+        "moyenne",
+        "étoiles filantes",
+        "astronomie",
+        "statistiques",
+        "maths 3e",
+        "3e",
+        "collège",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "3e-stats-mediane",
+      "notionId": "stat_statistique",
+      "microId": "stat_mediane",
+      "classe": "3e",
+      "ceinture": "orange",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "meme_video_que": "4e-stats-mediane",
+      "fichier": "3e/maths/statistiques/05-mediane/eleveai-maths-3e-stats-mediane.mp4",
+      "miniature": "3e/maths/statistiques/05-mediane/eleveai-maths-3e-stats-mediane.png",
+      "titre": "Le milieu de la liste : 12 ? Range ! — Déterminer une médiane — épisode 5 · Maths 3e",
+      "accroche": "À La Réunion, des panneaux solaires produisent de l'électricité sur un toit. Une technicienne en énergie solaire surveille leur production, en kilowattheures. Elle cherche un nombre qui coupe ses relevés en deux : la médiane.\n\nDans cette vidéo :\n• ranger d'abord, puis le milieu : 6, 9, 12, 13, 14, 15, 16, la médiane est 13\n• le sens : au moins la moitié des jours en dessous, au moins la moitié au-dessus\n• un nombre pair de valeurs : le milieu des deux valeurs centrales, 13,5\n• avec un tableau d'effectifs : les effectifs cumulés ; le piège : prendre le milieu sans ranger\n\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : 11, 15, 8, 14, 10 et 16 kWh sur six jours : quelle est la médiane ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/stat-statistique\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/3e/stat-statistique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_mediane&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "La valeur du milieu : la technicienne solaire"
+        ],
+        [
+          "00:28",
+          "La série"
+        ],
+        [
+          "00:40",
+          "Ranger, puis le milieu"
+        ],
+        [
+          "00:57",
+          "Le sens de la médiane"
+        ],
+        [
+          "01:10",
+          "Le piège : sans ranger"
+        ],
+        [
+          "01:21",
+          "Un nombre pair de valeurs"
+        ],
+        [
+          "01:47",
+          "Avec un tableau d'effectifs"
+        ],
+        [
+          "02:26",
+          "À toi de jouer"
+        ],
+        [
+          "02:41",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/3e/stat-statistique",
+      "tags": [
+        "médiane",
+        "ranger une série",
+        "effectifs cumulés",
+        "énergie solaire",
+        "panneaux solaires",
+        "technicienne",
+        "La Réunion",
+        "statistiques",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "3e-stats-mediane-short",
+      "notionId": "stat_statistique",
+      "microId": "stat_mediane",
+      "classe": "3e",
+      "ceinture": "jaune",
+      "serie": "Maths 3e",
+      "type": "short",
+      "renvoie_vers": "3e-stats-mediane",
+      "meme_video_que": "4e-stats-mediane-short",
+      "fichier": "3e/maths/statistiques/05-mediane/eleveai-maths-3e-stats-mediane-short.mp4",
+      "miniature": "3e/maths/statistiques/05-mediane/eleveai-maths-3e-stats-mediane-short.png",
+      "titre": "Quelle production est pile au milieu ? ☀️ — 3e #Shorts",
+      "accroche": "Sept jours de soleil sur un toit : 14, 9, 16, 12, 15, 6, 13 kWh. On range du plus petit au plus grand : 6, 9, 12, 13, 14, 15, 16. Au milieu : 13 ! 3 jours en dessous, 3 jours au-dessus : c'est la médiane.\n\n🥋 Ceinture jaune.\n👉 À toi : et si un huitième jour produit 20 kWh, quelle est la nouvelle médiane ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_mediane&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #3e #collège",
+      "tags": [
+        "médiane",
+        "énergie solaire",
+        "statistiques",
+        "maths 3e",
+        "3e",
+        "collège",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "3e-stats-etendue",
+      "notionId": "stat_statistique",
+      "microId": "stat_etendue",
+      "classe": "3e",
+      "ceinture": "jaune",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "meme_video_que": "4e-stats-etendue",
+      "fichier": "3e/maths/statistiques/06-etendue/eleveai-maths-3e-stats-etendue.mp4",
+      "miniature": "3e/maths/statistiques/06-etendue/eleveai-maths-3e-stats-etendue.png",
+      "titre": "Dernière − première ? Non : max − min — Calculer une étendue — épisode 6 · Maths 3e",
+      "accroche": "À Saint-Malo, la mer monte et descend deux fois par jour. Un hydrographe mesure la hauteur de l'eau, pour que les bateaux ne touchent pas le fond. Les marins appellent l'écart entre mer haute et mer basse le marnage ; les statisticiens disent : l'étendue.\n\nDans cette vidéo :\n• l'étendue : la plus grande valeur moins la plus petite, 12,5 − 1,5 = 11 m\n• le piège : la dernière valeur moins la première (1 m) ; on cherche dans toute la série\n• comparer : 0,5 m seulement à la Pointe des Galets, à La Réunion\n• l'étendue mesure la dispersion\n\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : vagues de 1, 2, 3 et 6 mètres pendant 4, 9, 5 et 2 jours : quelle est l'étendue des hauteurs ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/stat-statistique\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/3e/stat-statistique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_etendue&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "La marée : l'hydrographe"
+        ],
+        [
+          "00:28",
+          "La série"
+        ],
+        [
+          "00:42",
+          "Calculer l'étendue"
+        ],
+        [
+          "01:01",
+          "Le piège : dernière moins première"
+        ],
+        [
+          "01:18",
+          "Comparer : Saint-Malo et La Réunion"
+        ],
+        [
+          "01:44",
+          "À toi de jouer"
+        ],
+        [
+          "02:08",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/3e/stat-statistique",
+      "tags": [
+        "étendue",
+        "dispersion",
+        "marée",
+        "Saint-Malo",
+        "hydrographe",
+        "mer",
+        "statistiques",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "3e-stats-etendue-short",
+      "notionId": "stat_statistique",
+      "microId": "stat_etendue",
+      "classe": "3e",
+      "ceinture": "blanche",
+      "serie": "Maths 3e",
+      "type": "short",
+      "renvoie_vers": "3e-stats-etendue",
+      "meme_video_que": "4e-stats-etendue-short",
+      "fichier": "3e/maths/statistiques/06-etendue/eleveai-maths-3e-stats-etendue-short.mp4",
+      "miniature": "3e/maths/statistiques/06-etendue/eleveai-maths-3e-stats-etendue-short.png",
+      "titre": "La mer monte de plus de 10 m en 6 heures ! 🌊 — 3e #Shorts",
+      "accroche": "À Saint-Malo, toutes les 2 heures, on mesure l'eau : 11,5 ; 8 ; 4 ; 1,5 ; 4,5 ; 9 ; 12,5 mètres. Le plus haut : 12,5. Le plus bas : 1,5. L'écart, 11 mètres, c'est l'étendue !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : à La Réunion, la mer va seulement de 0,2 à 0,7 mètre : quelle est l'étendue ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_etendue&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #3e #collège",
+      "tags": [
+        "étendue",
+        "marée",
+        "Saint-Malo",
+        "statistiques",
+        "maths 3e",
+        "3e",
+        "collège",
+        "eleveai",
+        "maths visuel",
+        "ceinture blanche",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "3e-stats-interpreter",
+      "notionId": "stat_statistique",
+      "microId": "stat_interpreter",
+      "classe": "3e",
+      "ceinture": "verte",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "fichier": "3e/maths/statistiques/07-interpreter/eleveai-maths-3e-stats-interpreter.mp4",
+      "miniature": "3e/maths/statistiques/07-interpreter/eleveai-maths-3e-stats-interpreter.png",
+      "titre": "Salaire moyen 2 600 € : on y croit ? — Interpréter des indicateurs — épisode 7 · Maths 3e",
+      "accroche": "Inès cherche son premier emploi. Sa conseillère emploi l'aide à lire les annonces avec un regard de statisticienne. Une entreprise affiche : « Chez nous, le salaire moyen est de 2 600 euros ! » Faut-il la croire ?\n\nDans cette vidéo :\n• la moyenne est juste : 18 200 ÷ 7 = 2 600 €, mais 6 salariés sur 7 gagnent moins\n• la médiane : 2 000 € ; une valeur extrême tire la moyenne, pas la médiane\n• en France, d'après l'Insee (2023) : salaire net moyen 2 735 €, médian 2 183 €\n• à moyenne égale, l'étendue montre quelle série est la plus régulière\n\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 40 salariés, médiane 2 100 €, moyenne 2 500 € : au moins combien gagnent 2 100 € ou moins ? Et le total versé ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/stat-statistique\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/3e/stat-statistique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_interpreter&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Salaire moyen 2 600 € ? La conseillère emploi"
+        ],
+        [
+          "00:22",
+          "Les 7 salaires"
+        ],
+        [
+          "00:42",
+          "La médiane"
+        ],
+        [
+          "00:59",
+          "La valeur extrême"
+        ],
+        [
+          "01:20",
+          "En France, d'après l'Insee"
+        ],
+        [
+          "01:39",
+          "Même moyenne, autre étendue"
+        ],
+        [
+          "02:08",
+          "À toi de jouer"
+        ],
+        [
+          "02:30",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/3e/stat-statistique",
+      "tags": [
+        "moyenne",
+        "médiane",
+        "étendue",
+        "valeur extrême",
+        "salaires",
+        "Insee",
+        "conseillère emploi",
+        "statistiques",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "3e-stats-interpreter-short",
+      "notionId": "stat_statistique",
+      "microId": "stat_interpreter",
+      "classe": "3e",
+      "ceinture": "orange",
+      "serie": "Maths 3e",
+      "type": "short",
+      "renvoie_vers": "3e-stats-interpreter",
+      "fichier": "3e/maths/statistiques/07-interpreter/eleveai-maths-3e-stats-interpreter-short.mp4",
+      "miniature": "3e/maths/statistiques/07-interpreter/eleveai-maths-3e-stats-interpreter-short.png",
+      "titre": "Et si le patron entrait ? La moyenne bondit ! 💼 — 3e #Shorts",
+      "accroche": "Six salariés gagnent entre 1 800 et 2 300 euros : salaire moyen 2 000 euros. Le patron arrive, avec 6 200 euros… La moyenne grimpe à 2 600 ! La médiane, elle, passe seulement de 1 950 à 2 000.\n\n🥋 Ceinture orange.\n👉 À toi : et si un footballeur à 100 000 euros entrait aussi, quelle serait la médiane des 8 salaires ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_interpreter&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #3e #collège",
+      "tags": [
+        "moyenne",
+        "médiane",
+        "salaires",
+        "statistiques",
+        "maths 3e",
+        "3e",
+        "collège",
+        "eleveai",
+        "ceinture orange",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "3e-stats-defi",
+      "notionId": "stat_statistique",
+      "microId": "stat_defi",
+      "classe": "3e",
+      "ceinture": "bleue",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "fichier": "3e/maths/statistiques/08-defi/eleveai-maths-3e-stats-defi.mp4",
+      "miniature": "3e/maths/statistiques/08-defi/eleveai-maths-3e-stats-defi.png",
+      "titre": "Le lot de batteries peut-il partir ? — Défis statistiques — épisode 8 · Maths 3e",
+      "accroche": "Dans une usine de vélos électriques, une ingénieure qualité teste 25 batteries avant d'envoyer un lot. Sa règle : la moyenne doit dépasser 80 km, et au moins la moitié des batteries doit tenir 80 km ou plus.\n\nDans cette vidéo :\n• étape 1 : la moyenne pondérée, 2 030 ÷ 25 = 81,2 km\n• étape 2 : la médiane par les effectifs cumulés, la 13e valeur, 80 km\n• étape 3 : l'objectif, une 26e batterie d'au moins 102 km pour une moyenne de 82\n• le piège : moyenner deux groupes de tailles différentes comme deux nombres\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : chaîne A : 30 batteries, moyenne 85 km ; les deux chaînes : 50 batteries, moyenne 82 km. Moyenne de la chaîne B ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/stat-statistique\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/3e/stat-statistique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_defi&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Décider avec des chiffres : l'ingénieure qualité"
+        ],
+        [
+          "00:26",
+          "Étape 1 : la moyenne pondérée"
+        ],
+        [
+          "01:03",
+          "Étape 2 : la médiane"
+        ],
+        [
+          "01:28",
+          "Étape 3 : l'objectif"
+        ],
+        [
+          "01:56",
+          "À toi de jouer"
+        ],
+        [
+          "02:18",
+          "Correction et ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/3e/stat-statistique",
+      "tags": [
+        "défi",
+        "moyenne pondérée",
+        "médiane",
+        "effectifs cumulés",
+        "brevet",
+        "vélo électrique",
+        "ingénieure qualité",
+        "statistiques",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ]
+    },
+    {
+      "id": "3e-stats-defi-short",
+      "notionId": "stat_statistique",
+      "microId": "stat_defi",
+      "classe": "3e",
+      "ceinture": "verte",
+      "serie": "Maths 3e",
+      "type": "short",
+      "renvoie_vers": "3e-stats-defi",
+      "fichier": "3e/maths/statistiques/08-defi/eleveai-maths-3e-stats-defi-short.mp4",
+      "miniature": "3e/maths/statistiques/08-defi/eleveai-maths-3e-stats-defi-short.png",
+      "titre": "Course de batteries : jusqu'où ira la moyenne ? 🚲 — 3e #Shorts",
+      "accroche": "Course de batteries ! Chaque vélo électrique roule jusqu'à la panne : 78, 84, 80 et 82 km. Total : 324. Divisé par 4 : une moyenne de 81 km.\n\n🥋 Ceinture verte.\n👉 À toi : combien de kilomètres le cinquième vélo doit-il tenir pour que la moyenne des 5 monte à 82 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #3e #collège",
+      "tags": [
+        "moyenne",
+        "vélo électrique",
+        "batteries",
+        "statistiques",
+        "maths 3e",
+        "3e",
+        "collège",
+        "eleveai",
+        "ceinture verte",
         "Shorts"
       ]
     }

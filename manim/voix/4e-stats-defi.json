@@ -1,0 +1,13 @@
+{
+  "00-garde": "Défis sur les indicateurs. Retrouver un nombre caché grâce à la moyenne.",
+  "01-situation": "Un recruteur parcourt les stades pour repérer les talents. Son métier : juger un joueur avec des chiffres, pas seulement avec ses yeux. Aujourd'hui, il étudie Michael Olise, le joueur français du Bayern Munich.",
+  "02-donnees": "Ses buts en championnat, sur quatre saisons : 2, puis 2, puis 10, puis 12. Cette dernière saison, il est aussi le meilleur passeur du championnat d'Allemagne, avec 15 passes décisives.",
+  "03-moyenne": "La moyenne de ces 4 saisons : 2 plus 2 plus 10 plus 12, égale 26. Puis 26 divisé par 4, égale 6,5 buts par saison.",
+  "04-cle": "La clé des défis : la somme, c'est la moyenne fois le nombre de valeurs. Ici, 6,5 fois 4, égale 26. On retrouve bien le total !",
+  "05-ajout": "Défi : après une cinquième saison, sa moyenne passe à 8,2. Combien de buts a-t-il marqués cette saison-là ? Nouvelle somme : 8,2 fois 5, égale 41. Ancienne somme : 26. Donc 41 moins 26, égale 15 buts. C'est exactement ce qu'il a marqué !",
+  "06-piege": "Le piège : faire la moyenne de 6,5 et de 15. Ça donnerait 10,75 : faux ! La nouvelle saison n'est qu'une valeur parmi 5. On passe toujours par les sommes.",
+  "07-defi": "À toi de jouer. Ses 5 saisons font 41 buts. Pour que sa moyenne sur 6 saisons atteigne 10 buts, combien devrait-il marquer la saison suivante ? Mets pause, et cherche !",
+  "07b-correction": "Correction. La somme qu'il faut atteindre : 10 fois 6, égale 60. Il en a déjà 41. Il lui manque 60 moins 41, égale 19 buts. Un vrai défi, même pour lui !",
+  "08-finale": "Ce que tu as appris. La somme, c'est la moyenne fois le nombre de valeurs. Pour retrouver une valeur cachée, je compare deux sommes. Et je ne fais jamais la moyenne de deux moyennes.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

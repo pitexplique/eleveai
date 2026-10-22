@@ -1903,6 +1903,55 @@ for _dos, _k, _c, _titre, _haut, _bas in [
     }
 
 
+# 22/10/2026 — série STATISTIQUES cycle 4 : paysages 5e, 4e, 3e. Épisode commun = même
+# piège, ceinture de SA classe (page de garde de son rendu). « EN N MIN » = durée du mp4.
+_STATS_C4 = {  # slug : (titre, haut, bas)
+    "organiser": (["ORGANISER", "DES DONNÉES"], "14 nombres en vrac…", "un oubli ? vérifie : total 14 !"),
+    "lire-tableau": (["LIRE UN TABLEAU", "À DOUBLE ENTRÉE"], "Maurice en décembre : 15 ?", "non : 15, c'est Mayotte !"),
+    "lire-graphique": (["LIRE UN DIAGRAMME", "EN BARRES"], "Un carreau = 1 joueur ?", "non : 10 ! lis l'axe"),
+    "effectif-frequence": (["EFFECTIF", "OU FRÉQUENCE ?"], "4 gauchers, plus que 3…", "mais 10 % contre 12 % !"),
+    "representer": (["REPRÉSENTER", "DES DONNÉES"], "Un disque qui déborde ?", "les angles font 360° !"),
+    "choisir-representation": (["CHOISIR", "LE BON GRAPHIQUE"], "Des mois en camembert ?", "non : une évolution = une courbe"),
+    "moyenne-5e": (["CALCULER", "UNE MOYENNE"], "4, 0, 8, 1 : diviser par 3 ?", "non : le 0 compte, 13 ÷ 4 !"),
+    "defi-5e": (["LE DÉFI DES", "STATISTIQUES"], "(1 + 2 + 3 + 4) ÷ 4 = 2,5 ?", "non : avec les effectifs, 2,4 !"),
+    "effectif": (["DÉTERMINER", "UN EFFECTIF"], "5 + 6 + 7 + 8 + 9 = 35 portées ?", "non : on additionne les effectifs !"),
+    "frequence": (["CALCULER", "UNE FRÉQUENCE"], "18 donneurs B, plus que 6…", "9 % contre 12 % : le lycée gagne !"),
+    "donnee-defi": (["DÉFIS SUR", "LES DONNÉES"], "L'écart : 80 élèves ?", "non : 80 − 10 = 70 !"),
+    "moyenne": (["CALCULER", "UNE MOYENNE"], "38 ÷ 5 colonnes = 7,6 ?", "non : ÷ 20 nuits = 1,9 !"),
+    "mediane": (["DÉTERMINER", "UNE MÉDIANE"], "Le milieu de la liste : 12 ?", "non : on range d'abord, 13 !"),
+    "etendue": (["CALCULER", "UNE ÉTENDUE"], "Dernière − première = 1 m ?", "non : max − min = 11 m !"),
+    "interpreter-4e": (["INTERPRÉTER", "LES INDICATEURS"], "Mbappé : 27 buts chaque saison ?", "non : c'est une moyenne !"),
+    "probleme": (["RÉSOUDRE UN PROBLÈME", "STATISTIQUE"], "Moyenne de 20 et de 4 ?", "non : refais le total, ÷ 8 !"),
+    "interpreter-3e": (["INTERPRÉTER", "LES INDICATEURS"], "Salaire moyen : 2 600 € ?", "6 salariés sur 7 gagnent moins !"),
+    "defi-3e": (["DÉFI", "STATISTIQUES"], "Chaîne B : moyenne 79 ?", "non : 77,5, les tailles comptent !"),
+    "defi-4e": (["DÉFIS SUR", "LES INDICATEURS"], "(6,5 + 15) ÷ 2 = 10,75 ?", "non : passe par les sommes !"),
+}
+for _cl, _dos, _k, _cle, _c, _duree in [
+    ("5e", "01-organiser", "organiser", "organiser", "jaune", 2), ("5e", "02-lire-tableau", "lire-tableau", "lire-tableau", "orange", 3),
+    ("5e", "03-lire-graphique", "lire-graphique", "lire-graphique", "orange", 2),
+    ("5e", "04-effectif-frequence", "effectif-frequence", "effectif-frequence", "verte", 2),
+    ("5e", "05-representer", "representer", "representer", "verte", 2),
+    ("5e", "06-choisir-representation", "choisir-representation", "choisir-representation", "verte", 2),
+    ("5e", "07-moyenne", "moyenne", "moyenne-5e", "verte", 2), ("5e", "08-defi", "defi", "defi-5e", "bleue", 2),
+    ("4e", "01-lire-tableau", "lire-tableau", "lire-tableau", "jaune", 3), ("4e", "02-lire-graphique", "lire-graphique", "lire-graphique", "jaune", 2),
+    ("4e", "03-effectif", "effectif", "effectif", "orange", 3), ("4e", "04-frequence", "frequence", "frequence", "verte", 3),
+    ("4e", "05-donnee-defi", "donnee-defi", "donnee-defi", "verte", 3), ("4e", "06-moyenne", "moyenne", "moyenne", "verte", 4),
+    ("4e", "07-mediane", "mediane", "mediane", "verte", 3), ("4e", "08-etendue", "etendue", "etendue", "orange", 3),
+    ("4e", "09-interpreter", "interpreter", "interpreter-4e", "verte", 3), ("4e", "10-probleme", "probleme", "probleme", "verte", 3),
+    ("4e", "11-defi", "defi", "defi-4e", "bleue", 3),
+    ("3e", "01-lire-tableau", "lire-tableau", "lire-tableau", "blanche", 3), ("3e", "02-lire-graphique", "lire-graphique", "lire-graphique", "blanche", 2),
+    ("3e", "03-effectif-frequence", "effectif-frequence", "effectif-frequence", "jaune", 2),
+    ("3e", "04-moyenne", "moyenne", "moyenne", "orange", 4), ("3e", "05-mediane", "mediane", "mediane", "orange", 3),
+    ("3e", "06-etendue", "etendue", "etendue", "jaune", 3), ("3e", "07-interpreter", "interpreter", "interpreter-3e", "verte", 3),
+    ("3e", "08-defi", "defi", "defi-3e", "bleue", 3),
+]:
+    _titre, _haut, _bas = _STATS_C4[_cle]
+    ESSAIS[f"eleveai-maths-{_cl}-stats-{_k}"] = {
+        "badge": f"MATHS · {_cl.upper()}", "duree": f"EN {_duree} MIN", "titre": _titre,
+        "accroche": _piege_test(_c, _haut, _bas), "dossier": f"{_cl}/maths/statistiques/{_dos}",
+    }
+
+
 def construire(nom, spec):
     img = fond()
     d = ImageDraw.Draw(img)

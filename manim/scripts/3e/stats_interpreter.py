@@ -324,7 +324,7 @@ class StatsInterpreterBase(PaysageF):
             self.au_mot(m, n)
             self.play(FadeIn(axB.ronds[i], shift=DOWN * 0.3), run_time=0.2)
         self.au_mot("Même moyenne")
-        mm = self.col(self.t("Même moyenne !", 36, C_MOY), 0.0, xl=XR)
+        mm = self.col(self.t("Même moyenne !", 36, C_MOY), 0.3, xl=XR)
         self.play(Create(mB[0]), FadeIn(mm), run_time=0.5)
         self.au_mot("son étendue")
         eB = axB.accolade(2400, 2800, "", couleur=AMBRE, dessous=True)[0]
@@ -338,7 +338,7 @@ class StatsInterpreterBase(PaysageF):
         reg = self.col(self.t("bien plus réguliers", 36, VERT_OK), -2.05, xl=XR)
         self.play(FadeIn(reg, shift=LEFT * 0.2), Indicate(axB.ronds, color=VERT_OK), run_time=0.6)
         self.au_mot("sa médiane vaut 2 600")
-        med = self.col(self.ligne([("médiane :", C_MED), ("2 600 €", C_MED)], 36), -2.75, xl=XR)
+        med = self.col(self.ligne([("médiane :", C_MED), ("2 600 €", C_MED)], 36), -0.5, xl=XR)
         self.play(FadeIn(med, shift=UP * 0.2), Indicate(axB.ronds[3], color=C_MED, scale_factor=2), run_time=0.5)
         self.attendre_voix()
 

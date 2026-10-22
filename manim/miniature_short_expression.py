@@ -819,6 +819,74 @@ for _dos, _k, _c, _titre, _sous, _lg, _tt in [
     CEINTURE_SHORT[_nom] = _c
 
 
+# 22/10/2026 — série STATISTIQUES cycle 4 : shorts 5e, 4e, 3e. Un short commun est rendu une fois
+# et copié sous chaque classe → une miniature par classe, badge différent.
+_STATS_C4_SHORTS = {  # clé : (ceinture, titre, sous, lignes, taille)
+    "organiser": ("blanche", ["LE VOLCAN", "TREMBLE"], "combien de séismes, le plus souvent ?",
+                  [("14 jours en vrac", 86, BLEU), ("on range !", 100, ORANGE), ("le champion : 2", 90, VERT)], 96),
+    "lire-tableau": ("blanche", ["À NOËL, LES VOLS", "DOUBLENT ?"], "La Réunion → Paris",
+                     [("avril : 28", 100, BLEU), ("décembre : 42", 96, ORANGE), ("+ 14, pas × 2 !", 90, ROUGE)], 80),
+    "lire-graphique": ("blanche", ["LE NIVEAU", "QUI FAIT CRAQUER"], "où les joueurs abandonnent-ils ?",
+                       [("niveau 1 : 35", 96, BLEU), ("niveau 3 : 75 !", 96, ROUGE), ("un vrai mur !", 100, VERT)], 84),
+    "effectif-frequence": ("jaune", ["3 GAUCHERS", "OU 4 ?"], "une classe de 25, un club de 40",
+                           [("4, plus que 3…", 96, BLEU), ("12 % contre 10 %", 84, ORANGE), ("la classe gagne !", 84, VERT)], 92),
+    "representer": ("jaune", ["LE SÉJOUR", "EN CAMEMBERT"], "40 m² sur 120 : quelle part ?",
+                    [("40 sur 120", 100, BLEU), ("= un tiers", 100, ORANGE), ("120° !", 120, VERT)], 88),
+    "choisir-representation": ("jaune", ["DES VENTES", "EN CAMEMBERT ?!"], "ce graphique est-il bien choisi ?",
+                               [("raté !", 120, ROUGE), ("une évolution :", 90, BLEU), ("une courbe !", 100, VERT)], 84),
+    "moyenne-5e": ("jaune", ["MBAPPÉ", "EN MOYENNE ?"], "ses buts en grands tournois",
+                   [("4, 0, 8, 1", 110, BLEU), ("13 ÷ 4", 110, ORANGE), ("= 3,25 buts !", 96, VERT)], 92),
+    "defi-5e": ("verte", ["UN FEU", "DE FORÊT !"], "et la moyenne des pompiers ?",
+                [("20 jours : 2,4", 96, BLEU), ("+ 15 interventions", 76, ROUGE), ("elle saute à 3 !", 90, VERT)], 92),
+    "effectif": ("jaune", ["QUIZ :", "LES CHIOTS"], "combien de portées ont 7 chiots ?",
+                 [("12 portées", 100, BLEU), ("7 chiots : 4 fois", 90, ORANGE), ("le plus haut !", 96, VERT)], 92),
+    "frequence": ("orange", ["LE GROUPE SANGUIN", "LE PLUS RARE"], "une case = 1 % des Français",
+                  [("A : 45 %   O : 42 %", 76, BLEU), ("B : 9 %", 100, ORANGE), ("AB : 4 % !", 110, ROUGE)], 76),
+    "donnee-defi": ("orange", ["UNE BARRE", "A DISPARU !"], "200 élèves : quelle langue à la maison ?",
+                    [("70 + 80 + 10 = 160", 76, BLEU), ("200 − 160", 100, ORANGE), ("français : 40 !", 90, VERT)], 92),
+    "moyenne": ("jaune", ["PLUIE D'ÉTOILES", "FILANTES"], "combien par nuit, en moyenne ?",
+                [("84 étoiles", 100, BLEU), ("÷ 7 nuits", 100, ORANGE), ("= 12 !", 120, VERT)], 84),
+    "mediane": ("jaune", ["PILE", "AU MILIEU ?"], "sept jours de soleil sur un toit",
+                [("on range d'abord", 86, BLEU), ("6 9 12 13 14 15 16", 70, ORANGE), ("médiane : 13 !", 96, VERT)], 92),
+    "etendue": ("blanche", ["+ 10 MÈTRES", "EN 6 HEURES"], "la marée à Saint-Malo",
+                [("haut : 12,5 m", 96, BLEU), ("bas : 1,5 m", 96, ORANGE), ("étendue : 11 m !", 90, VERT)], 92),
+    "interpreter-4e": ("orange", ["MBAPPÉ :", "162 BUTS"], "combien par saison ?",
+                       [("162 ÷ 6 = 27", 96, BLEU), ("une saison à 18…", 84, ROUGE), ("le Covid !", 110, ORANGE)], 92),
+    "interpreter-3e": ("orange", ["ET SI LE PATRON", "ENTRAIT ?"], "salaire moyen : 2 000 €",
+                       [("moyenne : 2 600 € !", 76, ROUGE), ("médiane : 2 000 €", 80, BLEU), ("elle résiste !", 96, VERT)], 84),
+    "defi-3e": ("verte", ["COURSE DE", "BATTERIES !"], "jusqu'où ira la moyenne ?",
+                [("78, 84, 80, 82", 90, BLEU), ("324 ÷ 4", 110, ORANGE), ("= 81 km !", 110, VERT)], 92),
+    "probleme": ("orange", ["UN ORAGE", "SUR LE TOIT !"], "20 kWh par jour en moyenne…",
+                 [("140 + 4 = 144", 90, BLEU), ("÷ 8 jours", 100, ORANGE), ("= 18 !", 120, ROUGE)], 92),
+    "defi-4e": ("verte", ["COMBIEN DE", "BUTS CACHÉS ?"], "Michael Olise, 5 saisons",
+                [("8,2 × 5 = 41", 96, BLEU), ("41 − 26", 110, ORANGE), ("= 15 buts !", 100, VERT)], 92),
+}
+for _cl, _dos, _k, _cle in [
+    ("5e", "01-organiser", "organiser", "organiser"), ("5e", "02-lire-tableau", "lire-tableau", "lire-tableau"),
+    ("5e", "03-lire-graphique", "lire-graphique", "lire-graphique"), ("5e", "04-effectif-frequence", "effectif-frequence", "effectif-frequence"),
+    ("5e", "05-representer", "representer", "representer"), ("5e", "06-choisir-representation", "choisir-representation", "choisir-representation"),
+    ("5e", "07-moyenne", "moyenne", "moyenne-5e"), ("5e", "08-defi", "defi", "defi-5e"),
+    ("4e", "01-lire-tableau", "lire-tableau", "lire-tableau"), ("4e", "02-lire-graphique", "lire-graphique", "lire-graphique"),
+    ("4e", "03-effectif", "effectif", "effectif"), ("4e", "04-frequence", "frequence", "frequence"),
+    ("4e", "05-donnee-defi", "donnee-defi", "donnee-defi"), ("4e", "06-moyenne", "moyenne", "moyenne"),
+    ("4e", "07-mediane", "mediane", "mediane"), ("4e", "08-etendue", "etendue", "etendue"),
+    ("4e", "09-interpreter", "interpreter", "interpreter-4e"), ("4e", "10-probleme", "probleme", "probleme"),
+    ("4e", "11-defi", "defi", "defi-4e"),
+    ("3e", "01-lire-tableau", "lire-tableau", "lire-tableau"), ("3e", "02-lire-graphique", "lire-graphique", "lire-graphique"),
+    ("3e", "03-effectif-frequence", "effectif-frequence", "effectif-frequence"), ("3e", "04-moyenne", "moyenne", "moyenne"),
+    ("3e", "05-mediane", "mediane", "mediane"), ("3e", "06-etendue", "etendue", "etendue"),
+    ("3e", "07-interpreter", "interpreter", "interpreter-3e"), ("3e", "08-defi", "defi", "defi-3e"),
+]:
+    _c, _titre, _sous, _lg, _tt = _STATS_C4_SHORTS[_cle]
+    _nom = f"eleveai-maths-{_cl}-stats-{_k}-short"
+    SHORTS[_nom] = {
+        "badge": f"STATISTIQUES · {_cl.upper()}", "titre": _titre, "taille": _tt, "sous": _sous,
+        "taille_sous": 44, "couleur_sous": ORANGE, "accroche": _acc(_lg), "dossier": f"{_cl}/maths/fr",
+        "sortie": f"{_cl}/maths/statistiques/{_dos}",
+    }
+    CEINTURE_SHORT[_nom] = _c
+
+
 def main():
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     filtre = sys.argv[1] if len(sys.argv) > 1 else ""

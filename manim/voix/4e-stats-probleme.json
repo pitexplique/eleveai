@@ -1,0 +1,13 @@
+{
+  "00-garde": "Résoudre un problème statistique. Le toit solaire suffira-t-il ?",
+  "01-situation": "Une technicienne installe des panneaux solaires sur les toits, à Saint-Pierre. Une famille consomme 20 kilowattheures par jour. Elle veut savoir si son toit va produire assez d'électricité.",
+  "02-semaine": "Elle relève la production pendant une semaine. Lundi : 22 kilowattheures. Mardi : 18. Mercredi : 24. Jeudi, un jour nuageux : 12. Vendredi : 20. Samedi : 23. Dimanche : 21.",
+  "03-moyenne": "La moyenne : j'additionne les 7 jours, ça fait 140. Puis 140 divisé par 7, égale 20. En moyenne, le toit produit 20 kilowattheures par jour : juste ce que consomme la famille.",
+  "04-dessus": "Combien de jours dépassent la moyenne ? Je compare chaque jour à 20. Lundi, mercredi, samedi et dimanche : 4 jours au-dessus. Mardi et jeudi : en dessous. Vendredi : pile 20.",
+  "05-orage": "Le lundi suivant, un orage : seulement 4 kilowattheures. Il y a maintenant 8 jours. Le total devient 140 plus 4, égale 144. Et 144 divisé par 8, égale 18. Une seule mauvaise journée fait passer la moyenne sous 20 ! L'étendue change aussi : 24 moins 4, égale 20, au lieu de 12.",
+  "06-piege": "Le piège : diviser encore par 7, ou faire la moyenne de 20 et de 4. Non ! Je refais le total de tous les jours, et je divise par le nouveau nombre de jours : 8.",
+  "07-defi": "À toi de jouer. Sur 10 jours, voici le diagramme en bâtons : 12 kilowattheures pendant 2 jours, 20 pendant 3 jours, 25 pendant 5 jours. Quelle est la production moyenne ? Le toit suffit-il pour 20 kilowattheures par jour ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Chaque valeur compte autant de fois que son nombre de jours. 12 fois 2, égale 24. 20 fois 3, égale 60. 25 fois 5, égale 125. Total : 209. Puis 209 divisé par 10 jours, égale 20,9. Oui, le toit suffit ! Attention : 12 plus 20 plus 25, divisé par 3, donnerait 19. C'est faux, et ça ferait prendre la mauvaise décision.",
+  "08-finale": "Ce que tu as appris. Une moyenne, c'est le total divisé par le nombre de valeurs. Si une valeur s'ajoute, je refais le total, et je divise par le nouveau nombre. Et avec des effectifs, chaque valeur compte autant de fois que son effectif.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

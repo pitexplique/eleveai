@@ -127,7 +127,7 @@ class StatsMoyenneBase(Paysage5):
         self.play(Rotate(b, -PI), run_time=0.5)
         self.au_mot("Elle étudie les buteurs")
         ecran = RoundedRectangle(width=3.0, height=2.0, corner_radius=0.12, fill_color="#0b1220", fill_opacity=1,
-                                 stroke_color="#38bdf8", stroke_width=4).move_to(P(0.5, 1.9))
+                                 stroke_color="#38bdf8", stroke_width=4).move_to(P(1.3, 1.9))
         mini = Barres(["", "", "", ""], BUTS, pas=2, maxi=8, couleurs=COUL, largeur=1.8, hauteur=1.0, fs=14,
                       centre=ecran.get_center())
         self.play(FadeIn(ecran), FadeIn(mini.fond), mini.pousser(run_time=0.6), run_time=0.7)

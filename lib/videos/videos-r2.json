@@ -319,6 +319,150 @@
   "youtube": "db8qvhoqW-M",
   "coach": "/coach/serie?classe=3e&matiere=maths&notion=pythagore_theoreme&microId=pythagore_solide&display=simple"
  },
+ "3e-stats-defi": {
+  "fichier": "3e/maths/statistiques/08-defi/eleveai-maths-3e-stats-defi.mp4",
+  "poster": "3e/maths/statistiques/08-defi/eleveai-maths-3e-stats-defi.png",
+  "vignette": "3e/maths/statistiques/08-defi/eleveai-maths-3e-stats-defi.vignette.webp",
+  "titre": "Le lot de batteries peut-il partir ? — Défis statistiques — épisode 8 · Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_defi&display=simple"
+ },
+ "3e-stats-defi-short": {
+  "fichier": "3e/maths/statistiques/08-defi/eleveai-maths-3e-stats-defi-short.mp4",
+  "poster": "3e/maths/statistiques/08-defi/eleveai-maths-3e-stats-defi-short.png",
+  "vignette": "3e/maths/statistiques/08-defi/eleveai-maths-3e-stats-defi-short.vignette.webp",
+  "titre": "Course de batteries : jusqu'où ira la moyenne ? 🚲 — 3e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_defi&display=simple"
+ },
+ "3e-stats-effectif-frequence": {
+  "fichier": "3e/maths/statistiques/03-effectif-frequence/eleveai-maths-3e-stats-effectif-frequence.mp4",
+  "poster": "3e/maths/statistiques/03-effectif-frequence/eleveai-maths-3e-stats-effectif-frequence.png",
+  "vignette": "3e/maths/statistiques/03-effectif-frequence/eleveai-maths-3e-stats-effectif-frequence.vignette.webp",
+  "titre": "4 gauchers, plus que 3… et pourtant ! — Effectif et fréquence — épisode 3 · Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_effectif_frequence&display=simple"
+ },
+ "3e-stats-effectif-frequence-short": {
+  "fichier": "3e/maths/statistiques/03-effectif-frequence/eleveai-maths-3e-stats-effectif-frequence-short.mp4",
+  "poster": "3e/maths/statistiques/03-effectif-frequence/eleveai-maths-3e-stats-effectif-frequence-short.png",
+  "vignette": "3e/maths/statistiques/03-effectif-frequence/eleveai-maths-3e-stats-effectif-frequence-short.vignette.webp",
+  "titre": "3 gauchers sur 25 ou 4 sur 40 : où y en a-t-il le plus ? ✂️ — 3e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_effectif_frequence&display=simple"
+ },
+ "3e-stats-etendue": {
+  "fichier": "3e/maths/statistiques/06-etendue/eleveai-maths-3e-stats-etendue.mp4",
+  "poster": "3e/maths/statistiques/06-etendue/eleveai-maths-3e-stats-etendue.png",
+  "vignette": "3e/maths/statistiques/06-etendue/eleveai-maths-3e-stats-etendue.vignette.webp",
+  "titre": "Dernière − première ? Non : max − min — Calculer une étendue — épisode 6 · Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_etendue&display=simple"
+ },
+ "3e-stats-etendue-short": {
+  "fichier": "3e/maths/statistiques/06-etendue/eleveai-maths-3e-stats-etendue-short.mp4",
+  "poster": "3e/maths/statistiques/06-etendue/eleveai-maths-3e-stats-etendue-short.png",
+  "vignette": "3e/maths/statistiques/06-etendue/eleveai-maths-3e-stats-etendue-short.vignette.webp",
+  "titre": "La mer monte de plus de 10 m en 6 heures ! 🌊 — 3e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_etendue&display=simple"
+ },
+ "3e-stats-interpreter": {
+  "fichier": "3e/maths/statistiques/07-interpreter/eleveai-maths-3e-stats-interpreter.mp4",
+  "poster": "3e/maths/statistiques/07-interpreter/eleveai-maths-3e-stats-interpreter.png",
+  "vignette": "3e/maths/statistiques/07-interpreter/eleveai-maths-3e-stats-interpreter.vignette.webp",
+  "titre": "Salaire moyen 2 600 € : on y croit ? — Interpréter des indicateurs — épisode 7 · Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_interpreter&display=simple"
+ },
+ "3e-stats-interpreter-short": {
+  "fichier": "3e/maths/statistiques/07-interpreter/eleveai-maths-3e-stats-interpreter-short.mp4",
+  "poster": "3e/maths/statistiques/07-interpreter/eleveai-maths-3e-stats-interpreter-short.png",
+  "vignette": "3e/maths/statistiques/07-interpreter/eleveai-maths-3e-stats-interpreter-short.vignette.webp",
+  "titre": "Et si le patron entrait ? La moyenne bondit ! 💼 — 3e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_interpreter&display=simple"
+ },
+ "3e-stats-lire-graphique": {
+  "fichier": "3e/maths/statistiques/02-lire-graphique/eleveai-maths-3e-stats-lire-graphique.mp4",
+  "poster": "3e/maths/statistiques/02-lire-graphique/eleveai-maths-3e-stats-lire-graphique.png",
+  "vignette": "3e/maths/statistiques/02-lire-graphique/eleveai-maths-3e-stats-lire-graphique.vignette.webp",
+  "titre": "Un carreau = 1 joueur ? Non, 10 ! — Lire un diagramme en barres — épisode 2 · Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_lire_graphique&display=simple"
+ },
+ "3e-stats-lire-graphique-short": {
+  "fichier": "3e/maths/statistiques/02-lire-graphique/eleveai-maths-3e-stats-lire-graphique-short.mp4",
+  "poster": "3e/maths/statistiques/02-lire-graphique/eleveai-maths-3e-stats-lire-graphique-short.png",
+  "vignette": "3e/maths/statistiques/02-lire-graphique/eleveai-maths-3e-stats-lire-graphique-short.vignette.webp",
+  "titre": "Le niveau où tout le monde abandonne 🎮 — 3e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_lire_graphique&display=simple"
+ },
+ "3e-stats-lire-tableau": {
+  "fichier": "3e/maths/statistiques/01-lire-tableau/eleveai-maths-3e-stats-lire-tableau.mp4",
+  "poster": "3e/maths/statistiques/01-lire-tableau/eleveai-maths-3e-stats-lire-tableau.png",
+  "vignette": "3e/maths/statistiques/01-lire-tableau/eleveai-maths-3e-stats-lire-tableau.vignette.webp",
+  "titre": "Maurice en décembre : 15 ? Non ! — Lire un tableau à double entrée — épisode 1 · Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_lire_tableau&display=simple"
+ },
+ "3e-stats-lire-tableau-short": {
+  "fichier": "3e/maths/statistiques/01-lire-tableau/eleveai-maths-3e-stats-lire-tableau-short.mp4",
+  "poster": "3e/maths/statistiques/01-lire-tableau/eleveai-maths-3e-stats-lire-tableau-short.png",
+  "vignette": "3e/maths/statistiques/01-lire-tableau/eleveai-maths-3e-stats-lire-tableau-short.vignette.webp",
+  "titre": "À Noël, les vols vers Paris doublent ? FAUX ! ✈️ — 3e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_lire_tableau&display=simple"
+ },
+ "3e-stats-mediane": {
+  "fichier": "3e/maths/statistiques/05-mediane/eleveai-maths-3e-stats-mediane.mp4",
+  "poster": "3e/maths/statistiques/05-mediane/eleveai-maths-3e-stats-mediane.png",
+  "vignette": "3e/maths/statistiques/05-mediane/eleveai-maths-3e-stats-mediane.vignette.webp",
+  "titre": "Le milieu de la liste : 12 ? Range ! — Déterminer une médiane — épisode 5 · Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_mediane&display=simple"
+ },
+ "3e-stats-mediane-short": {
+  "fichier": "3e/maths/statistiques/05-mediane/eleveai-maths-3e-stats-mediane-short.mp4",
+  "poster": "3e/maths/statistiques/05-mediane/eleveai-maths-3e-stats-mediane-short.png",
+  "vignette": "3e/maths/statistiques/05-mediane/eleveai-maths-3e-stats-mediane-short.vignette.webp",
+  "titre": "Quelle production est pile au milieu ? ☀️ — 3e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_mediane&display=simple"
+ },
+ "3e-stats-moyenne": {
+  "fichier": "3e/maths/statistiques/04-moyenne/eleveai-maths-3e-stats-moyenne.mp4",
+  "poster": "3e/maths/statistiques/04-moyenne/eleveai-maths-3e-stats-moyenne.png",
+  "vignette": "3e/maths/statistiques/04-moyenne/eleveai-maths-3e-stats-moyenne.vignette.webp",
+  "titre": "38 ÷ 5 colonnes = 7,6 ? Non ! — Calculer une moyenne — épisode 4 · Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_moyenne&display=simple"
+ },
+ "3e-stats-moyenne-short": {
+  "fichier": "3e/maths/statistiques/04-moyenne/eleveai-maths-3e-stats-moyenne-short.mp4",
+  "poster": "3e/maths/statistiques/04-moyenne/eleveai-maths-3e-stats-moyenne-short.png",
+  "vignette": "3e/maths/statistiques/04-moyenne/eleveai-maths-3e-stats-moyenne-short.vignette.webp",
+  "titre": "Une pluie d'étoiles filantes : combien en moyenne ? 🌠 — 3e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&microId=stat_moyenne&display=simple"
+ },
  "3e-trigo-trigonometrie": {
   "fichier": "3e/maths/paysage/fr/trigo-trigonometrie/eleveai-maths-3e-trigo-trigonometrie.mp4",
   "poster": "3e/maths/paysage/fr/trigo-trigonometrie/eleveai-maths-3e-trigo-trigonometrie.png",
@@ -1020,6 +1164,204 @@
   "youtube": "nQNFxJqmOFQ",
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=pythagore_theoreme&microId=pythagore_reciproque_verifier&display=simple"
  },
+ "4e-stats-defi": {
+  "fichier": "4e/maths/statistiques/11-defi/eleveai-maths-4e-stats-defi.mp4",
+  "poster": "4e/maths/statistiques/11-defi/eleveai-maths-4e-stats-defi.png",
+  "vignette": "4e/maths/statistiques/11-defi/eleveai-maths-4e-stats-defi.vignette.webp",
+  "titre": "Michael Olise : combien de buts cachés ? — Défis sur les indicateurs — épisode 11 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=stat_statistique&microId=stat_defi&display=simple"
+ },
+ "4e-stats-defi-short": {
+  "fichier": "4e/maths/statistiques/11-defi/eleveai-maths-4e-stats-defi-short.mp4",
+  "poster": "4e/maths/statistiques/11-defi/eleveai-maths-4e-stats-defi-short.png",
+  "vignette": "4e/maths/statistiques/11-defi/eleveai-maths-4e-stats-defi-short.vignette.webp",
+  "titre": "Michael Olise : combien de buts cachés ? ⚽ — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=stat_statistique&microId=stat_defi&display=simple"
+ },
+ "4e-stats-donnee-defi": {
+  "fichier": "4e/maths/statistiques/05-donnee-defi/eleveai-maths-4e-stats-donnee-defi.mp4",
+  "poster": "4e/maths/statistiques/05-donnee-defi/eleveai-maths-4e-stats-donnee-defi.png",
+  "vignette": "4e/maths/statistiques/05-donnee-defi/eleveai-maths-4e-stats-donnee-defi.vignette.webp",
+  "titre": "Une barre a disparu : retrouve-la ! — Défis sur les données — épisode 5 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=stat_donnee&microId=stat_donnee_defi&display=simple"
+ },
+ "4e-stats-donnee-defi-short": {
+  "fichier": "4e/maths/statistiques/05-donnee-defi/eleveai-maths-4e-stats-donnee-defi-short.mp4",
+  "poster": "4e/maths/statistiques/05-donnee-defi/eleveai-maths-4e-stats-donnee-defi-short.png",
+  "vignette": "4e/maths/statistiques/05-donnee-defi/eleveai-maths-4e-stats-donnee-defi-short.vignette.webp",
+  "titre": "Une barre a disparu ! Retrouve-la 🗣️ — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=stat_donnee&microId=stat_donnee_defi&display=simple"
+ },
+ "4e-stats-effectif": {
+  "fichier": "4e/maths/statistiques/03-effectif/eleveai-maths-4e-stats-effectif.mp4",
+  "poster": "4e/maths/statistiques/03-effectif/eleveai-maths-4e-stats-effectif.png",
+  "vignette": "4e/maths/statistiques/03-effectif/eleveai-maths-4e-stats-effectif.vignette.webp",
+  "titre": "35 portées ? Il n'y a que 12 fiches ! — Déterminer un effectif — épisode 3 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=stat_donnee&microId=stat_effectif&display=simple"
+ },
+ "4e-stats-effectif-short": {
+  "fichier": "4e/maths/statistiques/03-effectif/eleveai-maths-4e-stats-effectif-short.mp4",
+  "poster": "4e/maths/statistiques/03-effectif/eleveai-maths-4e-stats-effectif-short.png",
+  "vignette": "4e/maths/statistiques/03-effectif/eleveai-maths-4e-stats-effectif-short.vignette.webp",
+  "titre": "Quiz : combien de portées ont 7 chiots ? 🐶 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=stat_donnee&microId=stat_effectif&display=simple"
+ },
+ "4e-stats-etendue": {
+  "fichier": "4e/maths/statistiques/08-etendue/eleveai-maths-4e-stats-etendue.mp4",
+  "poster": "4e/maths/statistiques/08-etendue/eleveai-maths-4e-stats-etendue.png",
+  "vignette": "4e/maths/statistiques/08-etendue/eleveai-maths-4e-stats-etendue.vignette.webp",
+  "titre": "Dernière − première ? Non : max − min — Calculer une étendue — épisode 8 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=stat_statistique&microId=stat_etendue&display=simple"
+ },
+ "4e-stats-etendue-short": {
+  "fichier": "4e/maths/statistiques/08-etendue/eleveai-maths-4e-stats-etendue-short.mp4",
+  "poster": "4e/maths/statistiques/08-etendue/eleveai-maths-4e-stats-etendue-short.png",
+  "vignette": "4e/maths/statistiques/08-etendue/eleveai-maths-4e-stats-etendue-short.vignette.webp",
+  "titre": "La mer monte de plus de 10 m en 6 heures ! 🌊 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=stat_statistique&microId=stat_etendue&display=simple"
+ },
+ "4e-stats-frequence": {
+  "fichier": "4e/maths/statistiques/04-frequence/eleveai-maths-4e-stats-frequence.mp4",
+  "poster": "4e/maths/statistiques/04-frequence/eleveai-maths-4e-stats-frequence.png",
+  "vignette": "4e/maths/statistiques/04-frequence/eleveai-maths-4e-stats-frequence.vignette.webp",
+  "titre": "18 donneurs, plus que 6… mais 9 % ! — Calculer une fréquence — épisode 4 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=stat_donnee&microId=stat_frequence&display=simple"
+ },
+ "4e-stats-frequence-short": {
+  "fichier": "4e/maths/statistiques/04-frequence/eleveai-maths-4e-stats-frequence-short.mp4",
+  "poster": "4e/maths/statistiques/04-frequence/eleveai-maths-4e-stats-frequence-short.png",
+  "vignette": "4e/maths/statistiques/04-frequence/eleveai-maths-4e-stats-frequence-short.vignette.webp",
+  "titre": "Le groupe sanguin le plus rare en France ? 🩸 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=stat_donnee&microId=stat_frequence&display=simple"
+ },
+ "4e-stats-interpreter": {
+  "fichier": "4e/maths/statistiques/09-interpreter/eleveai-maths-4e-stats-interpreter.mp4",
+  "poster": "4e/maths/statistiques/09-interpreter/eleveai-maths-4e-stats-interpreter.png",
+  "vignette": "4e/maths/statistiques/09-interpreter/eleveai-maths-4e-stats-interpreter.vignette.webp",
+  "titre": "Mbappé : 27 buts chaque saison ? — Interpréter des indicateurs — épisode 9 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=stat_statistique&microId=stat_interpreter&display=simple"
+ },
+ "4e-stats-interpreter-short": {
+  "fichier": "4e/maths/statistiques/09-interpreter/eleveai-maths-4e-stats-interpreter-short.mp4",
+  "poster": "4e/maths/statistiques/09-interpreter/eleveai-maths-4e-stats-interpreter-short.png",
+  "vignette": "4e/maths/statistiques/09-interpreter/eleveai-maths-4e-stats-interpreter-short.vignette.webp",
+  "titre": "Mbappé : 162 buts en 6 saisons, combien par saison ? ⚽ — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=stat_statistique&microId=stat_interpreter&display=simple"
+ },
+ "4e-stats-lire-graphique": {
+  "fichier": "4e/maths/statistiques/02-lire-graphique/eleveai-maths-4e-stats-lire-graphique.mp4",
+  "poster": "4e/maths/statistiques/02-lire-graphique/eleveai-maths-4e-stats-lire-graphique.png",
+  "vignette": "4e/maths/statistiques/02-lire-graphique/eleveai-maths-4e-stats-lire-graphique.vignette.webp",
+  "titre": "Un carreau = 1 joueur ? Non, 10 ! — Lire un diagramme en barres — épisode 2 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=stat_donnee&microId=stat_lire_graphique&display=simple"
+ },
+ "4e-stats-lire-graphique-short": {
+  "fichier": "4e/maths/statistiques/02-lire-graphique/eleveai-maths-4e-stats-lire-graphique-short.mp4",
+  "poster": "4e/maths/statistiques/02-lire-graphique/eleveai-maths-4e-stats-lire-graphique-short.png",
+  "vignette": "4e/maths/statistiques/02-lire-graphique/eleveai-maths-4e-stats-lire-graphique-short.vignette.webp",
+  "titre": "Le niveau où tout le monde abandonne 🎮 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=stat_donnee&microId=stat_lire_graphique&display=simple"
+ },
+ "4e-stats-lire-tableau": {
+  "fichier": "4e/maths/statistiques/01-lire-tableau/eleveai-maths-4e-stats-lire-tableau.mp4",
+  "poster": "4e/maths/statistiques/01-lire-tableau/eleveai-maths-4e-stats-lire-tableau.png",
+  "vignette": "4e/maths/statistiques/01-lire-tableau/eleveai-maths-4e-stats-lire-tableau.vignette.webp",
+  "titre": "Maurice en décembre : 15 ? Non ! — Lire un tableau à double entrée — épisode 1 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=stat_donnee&microId=stat_lire_tableau&display=simple"
+ },
+ "4e-stats-lire-tableau-short": {
+  "fichier": "4e/maths/statistiques/01-lire-tableau/eleveai-maths-4e-stats-lire-tableau-short.mp4",
+  "poster": "4e/maths/statistiques/01-lire-tableau/eleveai-maths-4e-stats-lire-tableau-short.png",
+  "vignette": "4e/maths/statistiques/01-lire-tableau/eleveai-maths-4e-stats-lire-tableau-short.vignette.webp",
+  "titre": "À Noël, les vols vers Paris doublent ? FAUX ! ✈️ — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=stat_donnee&microId=stat_lire_tableau&display=simple"
+ },
+ "4e-stats-mediane": {
+  "fichier": "4e/maths/statistiques/07-mediane/eleveai-maths-4e-stats-mediane.mp4",
+  "poster": "4e/maths/statistiques/07-mediane/eleveai-maths-4e-stats-mediane.png",
+  "vignette": "4e/maths/statistiques/07-mediane/eleveai-maths-4e-stats-mediane.vignette.webp",
+  "titre": "Le milieu de la liste : 12 ? Range ! — Déterminer une médiane — épisode 7 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=stat_statistique&microId=stat_mediane&display=simple"
+ },
+ "4e-stats-mediane-short": {
+  "fichier": "4e/maths/statistiques/07-mediane/eleveai-maths-4e-stats-mediane-short.mp4",
+  "poster": "4e/maths/statistiques/07-mediane/eleveai-maths-4e-stats-mediane-short.png",
+  "vignette": "4e/maths/statistiques/07-mediane/eleveai-maths-4e-stats-mediane-short.vignette.webp",
+  "titre": "Quelle production est pile au milieu ? ☀️ — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=stat_statistique&microId=stat_mediane&display=simple"
+ },
+ "4e-stats-moyenne": {
+  "fichier": "4e/maths/statistiques/06-moyenne/eleveai-maths-4e-stats-moyenne.mp4",
+  "poster": "4e/maths/statistiques/06-moyenne/eleveai-maths-4e-stats-moyenne.png",
+  "vignette": "4e/maths/statistiques/06-moyenne/eleveai-maths-4e-stats-moyenne.vignette.webp",
+  "titre": "38 ÷ 5 colonnes = 7,6 ? Non ! — Calculer une moyenne — épisode 6 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=stat_statistique&microId=stat_moyenne&display=simple"
+ },
+ "4e-stats-moyenne-short": {
+  "fichier": "4e/maths/statistiques/06-moyenne/eleveai-maths-4e-stats-moyenne-short.mp4",
+  "poster": "4e/maths/statistiques/06-moyenne/eleveai-maths-4e-stats-moyenne-short.png",
+  "vignette": "4e/maths/statistiques/06-moyenne/eleveai-maths-4e-stats-moyenne-short.vignette.webp",
+  "titre": "Une pluie d'étoiles filantes : combien en moyenne ? 🌠 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=stat_statistique&microId=stat_moyenne&display=simple"
+ },
+ "4e-stats-probleme": {
+  "fichier": "4e/maths/statistiques/10-probleme/eleveai-maths-4e-stats-probleme.mp4",
+  "poster": "4e/maths/statistiques/10-probleme/eleveai-maths-4e-stats-probleme.png",
+  "vignette": "4e/maths/statistiques/10-probleme/eleveai-maths-4e-stats-probleme.vignette.webp",
+  "titre": "Le toit solaire suffira-t-il ? — Résoudre un problème statistique — épisode 10 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=stat_statistique&microId=stat_probleme&display=simple"
+ },
+ "4e-stats-probleme-short": {
+  "fichier": "4e/maths/statistiques/10-probleme/eleveai-maths-4e-stats-probleme-short.mp4",
+  "poster": "4e/maths/statistiques/10-probleme/eleveai-maths-4e-stats-probleme-short.png",
+  "vignette": "4e/maths/statistiques/10-probleme/eleveai-maths-4e-stats-probleme-short.vignette.webp",
+  "titre": "Un orage, et la moyenne plonge ! ⛈️ — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=stat_statistique&microId=stat_probleme&display=simple"
+ },
  "4e-trigo-cosinus": {
   "fichier": "4e/maths/paysage/fr/trigo-cosinus/eleveai-maths-4e-trigo-cosinus.mp4",
   "poster": "4e/maths/paysage/fr/trigo-cosinus/eleveai-maths-4e-trigo-cosinus.png",
@@ -1351,6 +1693,150 @@
   "short": true,
   "youtube": "rquoZjtF1Yw",
   "coach": "/coach/serie?classe=5e&matiere=maths&notion=relatif_operation&microId=relatif_addition&display=simple"
+ },
+ "5e-stats-choisir-representation": {
+  "fichier": "5e/maths/statistiques/06-choisir-representation/eleveai-maths-5e-stats-choisir-representation.mp4",
+  "poster": "5e/maths/statistiques/06-choisir-representation/eleveai-maths-5e-stats-choisir-representation.png",
+  "vignette": "5e/maths/statistiques/06-choisir-representation/eleveai-maths-5e-stats-choisir-representation.vignette.webp",
+  "titre": "Des mois en camembert ? Raté ! — Choisir une représentation — épisode 6 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_representation_choisir&display=simple"
+ },
+ "5e-stats-choisir-representation-short": {
+  "fichier": "5e/maths/statistiques/06-choisir-representation/eleveai-maths-5e-stats-choisir-representation-short.mp4",
+  "poster": "5e/maths/statistiques/06-choisir-representation/eleveai-maths-5e-stats-choisir-representation-short.png",
+  "vignette": "5e/maths/statistiques/06-choisir-representation/eleveai-maths-5e-stats-choisir-representation-short.vignette.webp",
+  "titre": "Des ventes en camembert ?! Raté ! 👗 — 5e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_representation_choisir&display=simple"
+ },
+ "5e-stats-defi": {
+  "fichier": "5e/maths/statistiques/08-defi/eleveai-maths-5e-stats-defi.mp4",
+  "poster": "5e/maths/statistiques/08-defi/eleveai-maths-5e-stats-defi.png",
+  "vignette": "5e/maths/statistiques/08-defi/eleveai-maths-5e-stats-defi.vignette.webp",
+  "titre": "(1 + 2 + 3 + 4) ÷ 4 ? Le piège ! — Les défis des statistiques — épisode 8 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_defi&display=simple"
+ },
+ "5e-stats-defi-short": {
+  "fichier": "5e/maths/statistiques/08-defi/eleveai-maths-5e-stats-defi-short.mp4",
+  "poster": "5e/maths/statistiques/08-defi/eleveai-maths-5e-stats-defi-short.png",
+  "vignette": "5e/maths/statistiques/08-defi/eleveai-maths-5e-stats-defi-short.vignette.webp",
+  "titre": "Un feu de forêt, et la moyenne s'envole ! 🚒 — 5e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_defi&display=simple"
+ },
+ "5e-stats-effectif-frequence": {
+  "fichier": "5e/maths/statistiques/04-effectif-frequence/eleveai-maths-5e-stats-effectif-frequence.mp4",
+  "poster": "5e/maths/statistiques/04-effectif-frequence/eleveai-maths-5e-stats-effectif-frequence.png",
+  "vignette": "5e/maths/statistiques/04-effectif-frequence/eleveai-maths-5e-stats-effectif-frequence.vignette.webp",
+  "titre": "4 gauchers, plus que 3… et pourtant ! — Effectif et fréquence — épisode 4 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_effectif_frequence&display=simple"
+ },
+ "5e-stats-effectif-frequence-short": {
+  "fichier": "5e/maths/statistiques/04-effectif-frequence/eleveai-maths-5e-stats-effectif-frequence-short.mp4",
+  "poster": "5e/maths/statistiques/04-effectif-frequence/eleveai-maths-5e-stats-effectif-frequence-short.png",
+  "vignette": "5e/maths/statistiques/04-effectif-frequence/eleveai-maths-5e-stats-effectif-frequence-short.vignette.webp",
+  "titre": "3 gauchers sur 25 ou 4 sur 40 : où y en a-t-il le plus ? ✂️ — 5e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_effectif_frequence&display=simple"
+ },
+ "5e-stats-lire-graphique": {
+  "fichier": "5e/maths/statistiques/03-lire-graphique/eleveai-maths-5e-stats-lire-graphique.mp4",
+  "poster": "5e/maths/statistiques/03-lire-graphique/eleveai-maths-5e-stats-lire-graphique.png",
+  "vignette": "5e/maths/statistiques/03-lire-graphique/eleveai-maths-5e-stats-lire-graphique.vignette.webp",
+  "titre": "Un carreau = 1 joueur ? Non, 10 ! — Lire un diagramme en barres — épisode 3 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_lire_graphique&display=simple"
+ },
+ "5e-stats-lire-graphique-short": {
+  "fichier": "5e/maths/statistiques/03-lire-graphique/eleveai-maths-5e-stats-lire-graphique-short.mp4",
+  "poster": "5e/maths/statistiques/03-lire-graphique/eleveai-maths-5e-stats-lire-graphique-short.png",
+  "vignette": "5e/maths/statistiques/03-lire-graphique/eleveai-maths-5e-stats-lire-graphique-short.vignette.webp",
+  "titre": "Le niveau où tout le monde abandonne 🎮 — 5e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_lire_graphique&display=simple"
+ },
+ "5e-stats-lire-tableau": {
+  "fichier": "5e/maths/statistiques/02-lire-tableau/eleveai-maths-5e-stats-lire-tableau.mp4",
+  "poster": "5e/maths/statistiques/02-lire-tableau/eleveai-maths-5e-stats-lire-tableau.png",
+  "vignette": "5e/maths/statistiques/02-lire-tableau/eleveai-maths-5e-stats-lire-tableau.vignette.webp",
+  "titre": "Maurice en décembre : 15 ? Non ! — Lire un tableau à double entrée — épisode 2 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_lire_tableau&display=simple"
+ },
+ "5e-stats-lire-tableau-short": {
+  "fichier": "5e/maths/statistiques/02-lire-tableau/eleveai-maths-5e-stats-lire-tableau-short.mp4",
+  "poster": "5e/maths/statistiques/02-lire-tableau/eleveai-maths-5e-stats-lire-tableau-short.png",
+  "vignette": "5e/maths/statistiques/02-lire-tableau/eleveai-maths-5e-stats-lire-tableau-short.vignette.webp",
+  "titre": "À Noël, les vols vers Paris doublent ? FAUX ! ✈️ — 5e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_lire_tableau&display=simple"
+ },
+ "5e-stats-moyenne": {
+  "fichier": "5e/maths/statistiques/07-moyenne/eleveai-maths-5e-stats-moyenne.mp4",
+  "poster": "5e/maths/statistiques/07-moyenne/eleveai-maths-5e-stats-moyenne.png",
+  "vignette": "5e/maths/statistiques/07-moyenne/eleveai-maths-5e-stats-moyenne.vignette.webp",
+  "titre": "Mbappé : oublier le 0 ? Non ! — Calculer une moyenne — épisode 7 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_moyenne&display=simple"
+ },
+ "5e-stats-moyenne-short": {
+  "fichier": "5e/maths/statistiques/07-moyenne/eleveai-maths-5e-stats-moyenne-short.mp4",
+  "poster": "5e/maths/statistiques/07-moyenne/eleveai-maths-5e-stats-moyenne-short.png",
+  "vignette": "5e/maths/statistiques/07-moyenne/eleveai-maths-5e-stats-moyenne-short.vignette.webp",
+  "titre": "Mbappé en grands tournois : combien de buts en moyenne ? ⚽ — 5e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_moyenne&display=simple"
+ },
+ "5e-stats-organiser": {
+  "fichier": "5e/maths/statistiques/01-organiser/eleveai-maths-5e-stats-organiser.mp4",
+  "poster": "5e/maths/statistiques/01-organiser/eleveai-maths-5e-stats-organiser.png",
+  "vignette": "5e/maths/statistiques/01-organiser/eleveai-maths-5e-stats-organiser.vignette.webp",
+  "titre": "14 nombres en vrac : y voir clair — Organiser des données — épisode 1 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_donnee_organiser&display=simple"
+ },
+ "5e-stats-organiser-short": {
+  "fichier": "5e/maths/statistiques/01-organiser/eleveai-maths-5e-stats-organiser-short.mp4",
+  "poster": "5e/maths/statistiques/01-organiser/eleveai-maths-5e-stats-organiser-short.png",
+  "vignette": "5e/maths/statistiques/01-organiser/eleveai-maths-5e-stats-organiser-short.vignette.webp",
+  "titre": "Le volcan tremble : combien de séismes ? 🌋 — 5e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_donnee_organiser&display=simple"
+ },
+ "5e-stats-representer": {
+  "fichier": "5e/maths/statistiques/05-representer/eleveai-maths-5e-stats-representer.mp4",
+  "poster": "5e/maths/statistiques/05-representer/eleveai-maths-5e-stats-representer.png",
+  "vignette": "5e/maths/statistiques/05-representer/eleveai-maths-5e-stats-representer.vignette.webp",
+  "titre": "Un disque qui déborde ? Vérifie 360° ! — Représenter des données — épisode 5 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_representer&display=simple"
+ },
+ "5e-stats-representer-short": {
+  "fichier": "5e/maths/statistiques/05-representer/eleveai-maths-5e-stats-representer-short.mp4",
+  "poster": "5e/maths/statistiques/05-representer/eleveai-maths-5e-stats-representer-short.png",
+  "vignette": "5e/maths/statistiques/05-representer/eleveai-maths-5e-stats-representer-short.vignette.webp",
+  "titre": "Le séjour en camembert : quel angle ? 🏠 — 5e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_representer&display=simple"
  },
  "6e-aire-longueur-convertir-diagonale": {
   "fichier": "6e/maths/paysage/fr/aire-longueur-convertir/eleveai-maths-6e-aire-longueur-convertir-diagonale.mp4",

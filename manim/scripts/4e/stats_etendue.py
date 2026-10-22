@@ -400,7 +400,7 @@ class StatsEtendueBase(PaysageF):
         self.play(Write(tit), FadeIn(tab), run_time=0.6)
         self.au_mot("porte sur les valeurs")
         cadre_v = SurroundingRectangle(VGroup(*tab.tetes), color=VERT_OK, buff=0.05, stroke_width=7)
-        lv = self.t("les valeurs", 34, VERT_OK).next_to(cadre_v, RIGHT, buff=0.25)
+        lv = self.t("les valeurs", 34, VERT_OK).next_to(tab, RIGHT, buff=0.25).set_y(cadre_v.get_y())
         self.play(Create(cadre_v), FadeIn(lv), run_time=0.5)
         c = self.ligne([("6", VERT_OK), ("−", WHITE), ("1", VERT_OK), ("=", WHITE), ("5 m", VERT_OK)], 54)
         c.move_to(P(-0.6, -0.15))
