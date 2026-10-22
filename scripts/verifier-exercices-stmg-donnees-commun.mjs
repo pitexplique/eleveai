@@ -132,15 +132,18 @@ export function ouvrirStmg(fichier, notionId, { ecartsAttendus = [] } = {}) {
  * sinon « $54 \\div 193 \\approx 0{,}2798$, soit environ 28,0 % » (quatre
  * décimales, puis le pourcentage au dixième).
  */
+// Un quotient JUSTE dont le pourcentage a deux décimales (0,5625) s'écrit « = »,
+// puis « soit environ 56,3 % » : l'arrondi au dixième reste la règle.
 export const quotient = (a, b) => {
   const q = a / b;
   const juste = Math.abs(q * 10000 - Math.round(q * 10000)) < 1e-9;
-  return juste
-    ? `$${tx(a)} \\div ${tx(b)} = ${tx(q)}$, soit ${plat(q * 100)} %`
-    : `$${tx(a)} \\div ${tx(b)} \\approx ${txA(q, 4)}$, soit environ ${pcA(q, 1)} %`;
+  const dixieme = Math.abs(q * 1000 - Math.round(q * 1000)) < 1e-9;
+  if (juste && dixieme) return `$${tx(a)} \\div ${tx(b)} = ${tx(q)}$, soit ${plat(q * 100)} %`;
+  if (juste) return `$${tx(a)} \\div ${tx(b)} = ${tx(q)}$, soit environ ${pcA(q, 1)} %`;
+  return `$${tx(a)} \\div ${tx(b)} \\approx ${txA(q, 4)}$, soit environ ${pcA(q, 1)} %`;
 };
 /** Le pourcentage seul, tel que la ligne « Réponse » l'écrit : « 30 % » ou « environ 28,0 % ». */
 export const pourcent = (a, b) => {
   const q = a / b;
-  return Math.abs(q * 10000 - Math.round(q * 10000)) < 1e-9 ? `${plat(q * 100)} %` : `environ ${pcA(q, 1)} %`;
+  return Math.abs(q * 1000 - Math.round(q * 1000)) < 1e-9 ? `${plat(q * 100)} %` : `environ ${pcA(q, 1)} %`;
 };

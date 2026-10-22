@@ -230,4 +230,5 @@ export const CHARGEURS_FICHES_EXERCICES: Record<string, () => Promise<FicheExerc
   "maths/stmg/stat-nuage": () => import("@/lib/fiches-exercices/maths-stmg-stat-nuage").then((m) => m.exercicesStatNuageStmg),
   "maths/stmg/donnees-tableau-croise": () => import("@/lib/fiches-exercices/maths-stmg-donnees-tableau-croise").then((m) => m.exercicesDonneesTableauCroiseStmg),
   "maths/stmg/stat-ajustement": () => import("@/lib/fiches-exercices/maths-stmg-stat-ajustement").then((m) => m.exercicesStatAjustementStmg),
+  "maths/stmg/donnees-frequences": () => import("@/lib/fiches-exercices/maths-stmg-donnees-frequences").then((m) => m.exercicesDonneesFrequencesStmg),
 };
