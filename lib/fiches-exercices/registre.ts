@@ -1255,6 +1255,11 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Estimer une valeur avec une droite d'ajustement, par le calcul ou sur le graphique, dire si c'est une interpolation ou une extrapolation, trouver à partir de quand un seuil est franchi, et juger les limites d'une extrapolation. La taille des enfants, la population mondiale, le record du 100 m, une droite d'étalonnage de laboratoire, la fonte d'un glacier.",
   },
+  "maths/stmg/auto-donnees-graphiques": {
+    titre: "Lire des données chiffrées et des graphiques : 20 exercices corrigés",
+    resume:
+      "Automatismes : origine et pas d'un axe, axe tronqué, diagramme en barres, en bâtons, circulaire, diagramme en boîte (médiane, quartiles), passer du graphique au tableau et inversement. Boulangerie, budget d'association, salaires, chiffre d'affaires, publicité trompeuse ; les régions de France, la Coupe du monde 2026, les plus hautes tours.",
+  },
 };
 
 export function hrefFicheExercices(matiere: string, classe: string, notion: string) {
