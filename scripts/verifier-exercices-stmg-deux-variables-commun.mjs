@@ -70,7 +70,7 @@ export function ouvrirStmg(fichier, notionId) {
     const nom = `nuage [${xmin} ; ${xmax}] × [${ymin} ; ${ymax}]`;
     const nx = (xmax - xmin) / px, ny = (ymax - ymin) / py;
     vrai(`${nom} : graduations entières (${nx}, ${ny})`, Math.abs(nx - Math.round(nx)) < 1e-9 && Math.abs(ny - Math.round(ny)) < 1e-9);
-    vrai(`${nom} : 10 intervalles au plus en x (${nx}), 8 en y (${ny})`, nx <= 10 && ny <= 8 && nx >= 2 && ny >= 2);
+    vrai(`${nom} : 10 intervalles au plus en x (${nx}), 8 en y (${ny})`, Math.round(nx) <= 10 && Math.round(ny) <= 8 && Math.round(nx) >= 2 && Math.round(ny) >= 2);
     const dedans = (x, y) => x >= xmin - 1e-9 && x <= xmax + 1e-9 && y >= ymin - 1e-9 && y <= ymax + 1e-9;
     for (const p of points) vrai(`${nom} : point (${p.x} ; ${p.y}) dans le cadre`, dedans(p.x, p.y));
     if (o.moyen) vrai(`${nom} : G dans le cadre`, dedans(...o.moyen));

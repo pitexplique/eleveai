@@ -235,4 +235,5 @@ export const CHARGEURS_FICHES_EXERCICES: Record<string, () => Promise<FicheExerc
   "maths/stmg/donnees-filtres": () => import("@/lib/fiches-exercices/maths-stmg-donnees-filtres").then((m) => m.exercicesDonneesFiltresStmg),
   "maths/stmg/stat-interpoler": () => import("@/lib/fiches-exercices/maths-stmg-stat-interpoler").then((m) => m.exercicesStatInterpolerStmg),
   "maths/stmg/auto-donnees-graphiques": () => import("@/lib/fiches-exercices/maths-stmg-auto-donnees-graphiques").then((m) => m.exercicesAutoDonneesGraphiquesStmg),
+  "maths/stmg/stat-changement-variable": () => import("@/lib/fiches-exercices/maths-stmg-stat-changement-variable").then((m) => m.exercicesStatChangementVariableStmg),
 };

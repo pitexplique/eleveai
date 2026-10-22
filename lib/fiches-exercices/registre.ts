@@ -1260,6 +1260,11 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Automatismes : origine et pas d'un axe, axe tronqué, diagramme en barres, en bâtons, circulaire, diagramme en boîte (médiane, quartiles), passer du graphique au tableau et inversement. Boulangerie, budget d'association, salaires, chiffre d'affaires, publicité trompeuse ; les régions de France, la Coupe du monde 2026, les plus hautes tours.",
   },
+  "maths/stmg/stat-changement-variable": {
+    titre: "Changement de variable : 20 exercices corrigés",
+    resume:
+      "Linéariser un nuage qui se courbe par u = x², z = 1/x ou Y = log y, vérifier que le nuage transformé est presque aligné, utiliser la droite de la calculatrice, puis revenir aux variables de départ pour estimer. Le prix des pizzas, l'électricité solaire en France, le freinage, les bactéries, la loi de Moore, une navette partagée.",
+  },
 };
 
 export function hrefFicheExercices(matiere: string, classe: string, notion: string) {
