@@ -1224,6 +1224,12 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Lire un point d'un nuage, construire le nuage d'un tableau (même sur un axe qui ne part pas de 0), calculer et placer le point moyen G, décrire la tendance et repérer un point isolé. Le SMIC, les abonnés de Netflix, les entrées au cinéma, la population mondiale, la taille des enfants et les records du marathon.",
   },
+  // ─── STMG : données, croisement de deux variables, échantillonnage (1re, 22/10/2026) ───
+  "maths/stmg/donnees-tableau-croise": {
+    titre: "Le tableau croisé d'effectifs : 20 exercices corrigés",
+    resume:
+      "Lire une case et une marge, calculer les marges, compléter un tableau, le dresser à partir de données brutes, trouver l'erreur. Clients d'une enseigne, salariés d'une PME, colis en retard, crédits d'une banque, festival ; le jeu de 52 cartes, les planètes, les régions de France, le calendrier 2026, les médailles de Paris 2024.",
+  },
 };
 
 export function hrefFicheExercices(matiere: string, classe: string, notion: string) {
