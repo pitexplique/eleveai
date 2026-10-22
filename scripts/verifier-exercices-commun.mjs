@@ -732,7 +732,7 @@ export function controlesCommuns(v, source, { notionId, classe = "seconde", mati
     "utf8",
   );
   const deLaNotion = [
-    ...microSkills.matchAll(new RegExp(`\\{\\s*id: "([a-z0-9_]+)",\\s*label: "(?:[^"\\\\]|\\\\.)*",\\s*notionId: "${notionId}"`, "g")),
+    ...microSkills.matchAll(new RegExp(`\\{\\s*id: "([A-Za-z0-9_]+)",\\s*label: "(?:[^"\\\\]|\\\\.)*",\\s*notionId: "${notionId}"`, "g")),
   ].map((m) => m[1]);
   const inconnues = [...cites].filter((id) => !microSkills.includes(`id: "${id}"`));
   v.ok(`${cites.size} micros citées, toutes connues du coach`, inconnues.length === 0, inconnues.join(", "));

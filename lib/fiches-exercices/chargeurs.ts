@@ -227,4 +227,5 @@ export const CHARGEURS_FICHES_EXERCICES: Record<string, () => Promise<FicheExerc
   "maths/premiere/der-polynome": () => import("@/lib/fiches-exercices/maths-premiere-der-polynome").then((m) => m.exercicesDerPolynomePremiere),
   "maths/premiere/der-signe": () => import("@/lib/fiches-exercices/maths-premiere-der-signe").then((m) => m.exercicesDerSignePremiere),
   "maths/premiere/der-variations": () => import("@/lib/fiches-exercices/maths-premiere-der-variations").then((m) => m.exercicesDerVariationsPremiere),
+  "maths/stmg/stat-nuage": () => import("@/lib/fiches-exercices/maths-stmg-stat-nuage").then((m) => m.exercicesStatNuageStmg),
 };

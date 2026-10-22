@@ -1218,6 +1218,12 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Déduire les variations du signe de f′, dresser le tableau, trouver un maximum ou un minimum (bornes comprises), optimiser, prévoir. Un four, une plongeuse, un freinage, une étape du Tour, une épidémie, un festival, le gel des abricotiers.",
   },
+  // ─── STMG : séries statistiques à deux variables (Tle, 22/10/2026) ───
+  "maths/stmg/stat-nuage": {
+    titre: "Nuage de points et point moyen : 20 exercices corrigés",
+    resume:
+      "Lire un point d'un nuage, construire le nuage d'un tableau (même sur un axe qui ne part pas de 0), calculer et placer le point moyen G, décrire la tendance et repérer un point isolé. Le SMIC, les abonnés de Netflix, les entrées au cinéma, la population mondiale, la taille des enfants et les records du marathon.",
+  },
 };
 
 export function hrefFicheExercices(matiere: string, classe: string, notion: string) {
