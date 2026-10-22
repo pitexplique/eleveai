@@ -21,7 +21,7 @@ export const memes = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 export const pgcd = (a, b) => (b ? pgcd(b, a % b) : a);
 export const arrondi = (x, n = 6) => Math.round(x * 10 ** n) / 10 ** n;
 const grouper = (e, sep) => (Math.abs(Number(e)) >= 10000 ? e.replace(/\B(?=(\d{3})+(?!\d))/g, sep) : e);
-/** Un nombre exact dans une formule : 0.375 → « 0{,}375 » ; 12450 → « 12\,450 ». */
+/** Un nombre exact dans une formule : 0.375 → « 0{,}375 » ; 12450 → « 12\\,450 ». */
 export const tx = (x) => {
   const [e, d] = String(arrondi(x)).split(".");
   return d ? `${grouper(e, "\\,")}{,}${d}` : grouper(e, "\\,");
@@ -35,7 +35,8 @@ export const plat = (x) => {
 export const txA = (x, n) => tx(arrondi(Number(x.toFixed(n)), n));
 export const platA = (x, n) => plat(arrondi(Number(x.toFixed(n)), n));
 /** Un pourcentage arrondi à n décimales, dans le texte : 0.3456, 1 → « 34,6 ». */
-export const pcA = (x, n = 1) => platA(x * 100, n);
+// ⚠️ Le zéro final se GARDE : « 28,0 % » quand l'énoncé demande le dixième.
+export const pcA = (x, n = 1) => (x * 100).toFixed(n).replace(".", ",");
 export const frac = (a, b) => `\\dfrac{${a}}{${b}}`;
 export const plus = (xs) => xs.map(tx).join(" + ");
 const num = (c) => (typeof c === "number" ? c : null);
@@ -103,6 +104,12 @@ export function ouvrirStmg(fichier, notionId, { ecartsAttendus = [] } = {}) {
   }
   for (const cle of ecartsAttendus) vrai(`la marge fausse exprès « ${cle} » est bien fausse`, vus.includes(cle));
 
+  // ⛔ 22/10 : un antislash SEUL dans une chaîne de la feuille (« \times », « \div »)
+  // devient une tabulation ou disparaît à l'affichage. Seuls « \n » et « \\ » sont permis.
+  const chaines = [...feuille.series.matchAll(/"((?:[^"\\]|\\.)*)"/g)].map((m) => m[1]);
+  const seuls = chaines.filter((s) => /\\[^n"]/.test(s.replace(/\\\\/g, "")));
+  vrai(`aucun antislash seul dans les chaînes (${seuls.length})`, seuls.length === 0, (seuls[0] ?? "").slice(0, 100));
+
   const textes = feuille.textes.join(" ");
   vrai("pas de « évidemment »", !/évidemment/i.test(textes));
   vrai("pas de « / » comme division", !/\d ?\/ ?\d/.test(textes));
@@ -118,3 +125,22 @@ export function ouvrirStmg(fichier, notionId, { ecartsAttendus = [] } = {}) {
   };
   return { ...f, lire };
 }
+
+/**
+ * L'écriture d'une fréquence dans les corrigés, recalculée : « $90 \\div 300 =
+ * 0{,}3$, soit 30 % » quand le quotient tombe juste (4 décimales au plus),
+ * sinon « $54 \\div 193 \\approx 0{,}2798$, soit environ 28,0 % » (quatre
+ * décimales, puis le pourcentage au dixième).
+ */
+export const quotient = (a, b) => {
+  const q = a / b;
+  const juste = Math.abs(q * 10000 - Math.round(q * 10000)) < 1e-9;
+  return juste
+    ? `$${tx(a)} \\div ${tx(b)} = ${tx(q)}$, soit ${plat(q * 100)} %`
+    : `$${tx(a)} \\div ${tx(b)} \\approx ${txA(q, 4)}$, soit environ ${pcA(q, 1)} %`;
+};
+/** Le pourcentage seul, tel que la ligne « Réponse » l'écrit : « 30 % » ou « environ 28,0 % ». */
+export const pourcent = (a, b) => {
+  const q = a / b;
+  return Math.abs(q * 10000 - Math.round(q * 10000)) < 1e-9 ? `${plat(q * 100)} %` : `environ ${pcA(q, 1)} %`;
+};
