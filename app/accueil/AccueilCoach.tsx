@@ -20,6 +20,7 @@ import {
   ArrowRight,
   Backpack,
   Building2,
+  Camera,
   Compass,
   Eye,
   Play,
@@ -314,6 +315,17 @@ export default function AccueilNouveau(props: {
               >
                 <Play className="h-4 w-4" fill="currentColor" aria-hidden="true" /> Ou commencer par une vidéo
               </a>
+              {/* ⭐ LA TROISIÈME PORTE (Frédéric, 23/10 : « il manque : commence en
+                  prenant une photo »). Elle mène à /photo-exercice (la feuille → les
+                  séries du coach), qui marche aujourd'hui. ⏳ À élargir à la photo du
+                  COURS (mémoire : photo-du-cours-et-suivi-du-cahier). */}
+              <Lien
+                href="/photo-exercice"
+                bloc="porte-photo"
+                className="inline-flex items-center gap-2 rounded-full px-5 py-3 font-black text-teal-700 ring-2 ring-teal-700 hover:bg-teal-50"
+              >
+                <Camera className="h-4 w-4" aria-hidden="true" /> Ou prendre ton exercice en photo
+              </Lien>
               {profil === "parent" && (
                 <Lien href="/parents" bloc="parents" className="text-sm font-bold text-teal-700 hover:underline">
                   Suivre les progrès de votre enfant →
