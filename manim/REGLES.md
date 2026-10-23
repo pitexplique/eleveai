@@ -207,3 +207,6 @@ Pourquoi : dans deux ans, une IA produira des vidéos en masse. EleveAI se disti
 - **Short : 1 question-pause** au milieu (jeu, surprise), en plus de la question en commentaire à la fin.
 - **Manifeste** : chaque vidéo porte un champ `questions` = `[{ "t": "MM:SS" (début de l'écran question), "question": "…", "choix": ["…","…","…"], "reponse": 0|1|2, "explication": "…" }]`. Plus tard, le lecteur du site (R2) s'arrêtera tout seul à `t`, posera la question en boutons et enregistrera la réponse dans le suivi de l'élève : c'est ce qui rendra nos vidéos différentes d'une vidéo d'IA.
 - Les questions reprennent les erreurs typiques de la micro (`microSkills.ts`) et le vocabulaire du coach : la vidéo prépare la série d'exercices.
+
+## ⭐ La FICHE YOUTUBE à côté des vidéos (Frédéric, 23/10/2026)
+Chaque dossier d'épisode de `manim/sorties/` contient `fiche-youtube.md` (paysage puis short : fichier, miniature, titre, description avec chapitres, tags), générée depuis le manifeste par `python scripts/fiches-youtube.py [filtre]`. À relancer dans la passe finale de chaque lot (après le manifeste) : plus besoin de refaire titre, description et tags au moment de publier.
