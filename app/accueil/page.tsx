@@ -60,9 +60,26 @@
 // ⚠️ Les liens portent toujours `?from=accueil` : la mesure des départs
 // continue. Les clics se lisent aussi dans l'événement Vercel `journal_clic`
 // {rubrique, page: "accueil"}.
+// ⭐⭐⭐ REFONTE DU 23/10/2026 — « LE COACH QUI SUIT TON PROGRAMME ET TES PROGRÈS ».
+// Après le business plan, Frédéric : « propose une page d'accueil valable dans
+// 2 ans », « comme si les 3 500 vidéos étaient déjà faites ». Maquette sur
+// /accueil-nouveau, puis : « on avait appelé ça le Journal d'EleveAI, il faut
+// le renommer, ça n'a plus rien à voir », et « tu remplaces carrément la page
+// accueil ». Dans deux ans, l'explication sera offerte par toutes les IA :
+// l'accueil vend le PROGRAMME DU PAYS, des vidéos VÉRIFIÉES PAR UN PROFESSEUR
+// et un coach qui SUIT l'élève. Le journal se plie en trois cases (Une, défi,
+// métier) — mêmes données que lui, donc il change toujours chaque jour.
+// 👉 RETOUR ARRIÈRE = UNE LIGNE : `<JournalClient {...donneesDuJournal()} accueil />`
+// (le journal reste aussi en maquette sur /accueil-journal).
+// ⭐ Les compteurs sont CALCULÉS : « 900+ vidéos » aujourd'hui, « 3 500 » le
+// jour où elles seront sur R2, sans retoucher la page.
+// ⛔ Fond blanc forcé dans AccueilCoach : en mode sombre, sans fond posé, le
+// navigateur peignait la page en noir (Frédéric, 23/10 : « on voit rien »).
 import AccueilMatieres from "./AccueilMatieres";
 import JournalClient from "../accueil-journal/JournalClient";
 import { donneesDuJournal } from "../accueil-journal/donnees";
+import AccueilCoach, { type VideoVitrine } from "./AccueilCoach";
+import { toutesLesVideos, urlR2, type VideoR2 } from "@/lib/videos/r2";
 
 // ⭐ LES MÉTADONNÉES VIVENT DANS ./metadata.ts, ET NULLE PART AILLEURS.
 // Elles étaient écrites ici en dur pendant qu'un fichier metadata.ts existait à
@@ -74,6 +91,58 @@ export { metadata } from "./metadata";
 
 export const revalidate = 3600;
 
+/** Le dossier de R2 → la classe du coach (`/coach-ia/maths?classe=…`). */
+const CLASSE_DU_DOSSIER: Record<string, string> = {
+  terminale: "terminale-spe",
+  premiere: "premiere-spe",
+  "premiere-commun": "premiere",
+  seconde: "seconde",
+  stmg: "stmg",
+  "3e": "3e",
+  "4e": "4e",
+  "5e": "5e",
+  "6e": "6e",
+  cm2: "cm2",
+  cm1: "cm1",
+  cp: "cp",
+};
+const DEHORS = new Set(["974", "maths-en-vrai"]);
+
+/* Comme sur le journal : seulement des paysages AVEC miniature (sinon la
+   vignette est souvent un écran noir). */
+const vitrine = (v: VideoR2): VideoVitrine => ({ id: v.id, titre: v.titre, vignette: urlR2(v.vignette!) });
+const montrable = (v: VideoR2) => !v.short && Boolean(v.poster) && Boolean(v.vignette);
+
+/** `n` vidéos qui avancent chaque jour dans la liste, en boucle. */
+function duJour(liste: VideoR2[], jour: number, n: number): VideoVitrine[] {
+  if (liste.length === 0) return [];
+  const debut = (jour * n) % liste.length;
+  return Array.from({ length: Math.min(n, liste.length) }, (_, i) => vitrine(liste[(debut + i) % liste.length]));
+}
+
 export default function AccueilPage() {
-  return <JournalClient {...donneesDuJournal()} accueil />;
+  const journal = donneesDuJournal();
+  const toutes = toutesLesVideos();
+  const parClasse: Record<string, VideoVitrine[]> = {};
+  for (const [dossier, classe] of Object.entries(CLASSE_DU_DOSSIER)) {
+    const liste = toutes.filter((v) => v.fichier.split("/")[0] === dossier && montrable(v));
+    parClasse[classe] = duJour(liste, journal.jour, 4);
+  }
+  const dehors = duJour(
+    toutes.filter((v) => DEHORS.has(v.fichier.split("/")[0]) && montrable(v)),
+    journal.jour,
+    4,
+  );
+  const totalVideos = toutes.filter((v) => v.vignette && !v.fichier.startsWith("atelier-video-essais")).length;
+
+  return (
+    <AccueilCoach
+      totalVideos={totalVideos}
+      parClasse={parClasse}
+      dehors={dehors}
+      une={journal.une.paysage ? { ...journal.une.paysage, classe: journal.une.classe } : null}
+      defi={journal.defi}
+      metier={journal.metier}
+    />
+  );
 }

@@ -47,8 +47,11 @@ const TITRE = "EleveAI — exercices, coach et cahiers gratuits, du CP au Bac";
 // ⚠️ L'ÉCONOMIE N'Y EST PAS, et c'est une place, pas un oubli : la liste des
 // six matières porte la phrase à 158 signes, donc au-delà de la coupe. Les cinq
 // nommées sont celles qui portent les requêtes.
+// ⭐ 23/10/2026 : nouvel accueil, nouveau <h1> (« Toutes les maths de ton
+// programme, expliquées en vidéo et vérifiées par un professeur ») → la
+// promesse le suit, selon la règle ci-dessus.
 const PROMESSE =
-  "EleveAI propose des exercices corrigés et un coach en maths, français, anglais, espagnol et IA. Choisis ta classe, puis la notion. Du CP à la Terminale.";
+  "EleveAI : toutes les maths de ton programme, expliquées en vidéo et vérifiées par un professeur. Du CP à la Terminale, un coach qui suit tes progrès.";
 
 export const metadata: Metadata = {
   // ⭐ `absolute` ET NON une simple chaîne. Le layout applique le gabarit

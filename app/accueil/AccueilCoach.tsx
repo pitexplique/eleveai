@@ -1,7 +1,7 @@
 "use client";
 
-// L'ACCUEIL « VALABLE DANS DEUX ANS » (maquette du 23/10/2026) — voir page.tsx
-// pour le pourquoi. Sept blocs, dans l'ordre de la maquette validée :
+// L'ACCUEIL « LE COACH QUI SUIT TON PROGRAMME ET TES PROGRÈS » (23/10/2026) —
+// voir page.tsx pour le pourquoi. Sept blocs, dans l'ordre de la maquette validée :
 //   1. la promesse (le programme du pays, vérifié par un professeur) ;
 //   2. qui es-tu (élève, parent, prof), ton pays, ta classe → le coach ;
 //   3. les preuves (compteurs calculés) ;
@@ -35,7 +35,7 @@ import { PAYS } from "@/lib/programmes-pays/pays";
 export type VideoVitrine = { id: string; titre: string; vignette: string };
 
 type Profil = "eleve" | "parent" | "prof";
-const CLE = "eleveai.accueil-nouveau";
+const CLE = "eleveai.accueil";
 
 /* Les classes du coach France, dans l'ordre de l'accueil (lycée d'abord). */
 const CYCLES = [
@@ -62,9 +62,9 @@ function Lien({ href, bloc, className, children, label }: { href: string; bloc: 
   return (
     <Link
       prefetch={false}
-      href={`${href}${sep}from=accueil-nouveau`}
+      href={`${href}${sep}from=accueil`}
       aria-label={label}
-      onClick={() => track("accueil_nouveau_clic", { bloc })}
+      onClick={() => track("accueil_clic", { bloc })}
       className={className}
     >
       {children}
@@ -133,7 +133,7 @@ function Defi({ defi }: { defi: DefiGenere }) {
               disabled={choisi !== null}
               onClick={() => {
                 setChoisi(j);
-                track("accueil_nouveau_defi", { juste: j === defi.bonne });
+                track("accueil_defi", { juste: j === defi.bonne });
               }}
               className={`rounded-lg border-2 px-3 py-1.5 text-sm font-bold transition ${etat}`}
             >
@@ -311,15 +311,14 @@ export default function AccueilNouveau(props: {
       </section>
 
       {/* 3. LES PREUVES */}
-      <section aria-label="EleveAI en chiffres" className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <section aria-label="EleveAI en chiffres" className="mt-6 grid grid-cols-3 gap-3">
         {[
           [`${videosParCent.toLocaleString("fr-FR")}+`, "vidéos relues par un professeur"],
           ["CP → Tle", "toutes les classes"],
           [String(PAYS.length + 1), "programmes de pays"],
-          ["Jamais", "l'élève ne paie"],
         ].map(([n, t]) => (
-          <div key={t} className="rounded-xl bg-slate-50 px-4 py-3">
-            <p className="text-2xl font-black text-slate-900">{n}</p>
+          <div key={t} className="rounded-xl bg-slate-50 px-3 py-3 sm:px-4">
+            <p className="text-xl font-black text-slate-900 sm:text-2xl">{n}</p>
             <p className="text-sm text-slate-600">{t}</p>
           </div>
         ))}
