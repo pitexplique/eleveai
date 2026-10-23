@@ -17,6 +17,9 @@ Génère les WAV : `powershell -NoProfile -File scripts/generer-voix.ps1 -Fichie
 ## ⭐ Footballeurs (demande de Frédéric, 21/10)
 Dans un ou deux épisodes par lot (pas tous), prends en exemple des footballeurs que les élèves adorent : Kylian Mbappé, Lamine Yamal, Michael Olise (métier : analyste de données d'un club, journaliste sportive, recruteur…). ⛔ Chiffres RÉELS vérifiés par WebSearch, source et date dans l'en-tête ; faits stables (Coupe du monde 2018/2022, Euro 2024, saison terminée) ; un chiffre douteux ne s'utilise pas.
 
+## ⭐⭐ Questions-pauses (règle du 23/10, `manim/REGLES.md`)
+Chaque NOUVELLE paysage a 2 ou 3 questions-pauses (écran « ⏸ Question ! », 3 choix A/B/C, compte à rebours 5 s, réponse + une phrase), le short en a 1 ; le manifeste porte le champ `questions` (t, question, choix, reponse, explication).
+
 ## Épisodes communs (une voix, un script, deux rendus)
 Quand la même micro existe dans deux classes, UNE voix (nommée pour la classe la plus basse) et UN script avec une sous-classe par classe qui ne change que l'identité (« Maths 5e — EleveAI » / « Maths 4e — EleveAI ») et la ceinture. La voix ne cite aucune classe. Le short est rendu une fois et copié sous les deux noms.
 

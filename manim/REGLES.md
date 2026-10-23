@@ -200,3 +200,10 @@ Réutiliser tels quels d'un épisode à l'autre (présents dans `lait_reunion.py
 - Un MÉTIER porte la situation (évoquer des vocations), filles et garçons : ingénieure du son, monteur, géographe, historienne, vétérinaire, technicien, data analyst…
 - Un domaine, un métier et une problématique DIFFÉRENTS d'un épisode à l'autre dans un même lot (décider, prévoir, contrôler, choisir, juger une affirmation, évaluer un risque).
 - **DONNER ENVIE** (le but, 20/10/2026) : beaucoup de jeunes doutent de leur avenir. Chaque vidéo ouvre une porte : un métier réel et accessible, des gens qui leur ressemblent, d'ici, et des maths qui servent à quelque chose qui compte. Ton concret, respectueux et plein d'élan, jamais moralisateur.
+
+## ⭐⭐ Les QUESTIONS-PAUSES (Frédéric, 23/10/2026 — pour TOUTES les nouvelles vidéos)
+Pourquoi : dans deux ans, une IA produira des vidéos en masse. EleveAI se distinguera par des vidéos qui font AGIR l'élève et qui sont reliées à son coach. On commence maintenant, avec chaque nouvelle vidéo.
+- **Paysage : 2 ou 3 questions-pauses** réparties dans la vidéo (après la méthode, après le piège), EN PLUS de « À toi de jouer ». Chacune : un écran « ⏸ Question ! » avec la question courte et 3 choix A / B / C (un seul juste, les leurres = les erreurs typiques de la micro), la voix dit la question puis « Mets pause, et choisis ! », un compte à rebours visible de 5 s, puis la bonne réponse s'allume (agrandir puis rétrécir) avec UNE phrase d'explication. Voix = écrit, comme toujours.
+- **Short : 1 question-pause** au milieu (jeu, surprise), en plus de la question en commentaire à la fin.
+- **Manifeste** : chaque vidéo porte un champ `questions` = `[{ "t": "MM:SS" (début de l'écran question), "question": "…", "choix": ["…","…","…"], "reponse": 0|1|2, "explication": "…" }]`. Plus tard, le lecteur du site (R2) s'arrêtera tout seul à `t`, posera la question en boutons et enregistrera la réponse dans le suivi de l'élève : c'est ce qui rendra nos vidéos différentes d'une vidéo d'IA.
+- Les questions reprennent les erreurs typiques de la micro (`microSkills.ts`) et le vocabulaire du coach : la vidéo prépare la série d'exercices.
