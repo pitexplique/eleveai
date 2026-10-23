@@ -191,6 +191,10 @@ export default function AccueilNouveau(props: {
   const videosParCent = Math.floor(props.totalVideos / 100) * 100;
 
   return (
+    /* ⛔ FOND BLANC EXPLICITE (Frédéric, 23/10 : « entre le fond noir avec le
+       vert et le bleu, on voit rien du tout »). Sans fond posé, un navigateur en
+       mode sombre peignait la page en noir sous un texte bleu nuit. */
+    <div className="min-h-screen bg-white [color-scheme:light]">
     <main className="mx-auto max-w-5xl px-4 pb-16 pt-6 text-slate-900">
       {/* 1. LA PROMESSE */}
       {/* ⭐ LE TITRE (Frédéric, 23/10 : « on l'avait appelé le Journal d'EleveAI, il
@@ -393,5 +397,6 @@ export default function AccueilNouveau(props: {
         </p>
       </section>
     </main>
+    </div>
   );
 }
