@@ -311,11 +311,15 @@ export default function AccueilNouveau(props: {
       </section>
 
       {/* 3. LES PREUVES */}
-      <section aria-label="EleveAI en chiffres" className="mt-6 grid grid-cols-3 gap-3">
+      <section aria-label="EleveAI en chiffres" className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
         {[
           [`${videosParCent.toLocaleString("fr-FR")}+`, "vidéos relues par un professeur"],
           ["CP → Tle", "toutes les classes"],
           [String(PAYS.length + 1), "programmes de pays"],
+          // ⭐ 23/10, Frédéric : « change l'élève ne paie jamais par des ressources
+          // gratuites » (une offre famille à 4,95 € viendra peut-être : le suivi
+          // coûte des API). Il lève ici, à sa demande, le mot « gratuit ».
+          ["Gratuites", "les ressources : fiches, exercices, vidéos"],
         ].map(([n, t]) => (
           <div key={t} className="rounded-xl bg-slate-50 px-3 py-3 sm:px-4">
             <p className="text-xl font-black text-slate-900 sm:text-2xl">{n}</p>
