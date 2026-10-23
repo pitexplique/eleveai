@@ -31,6 +31,7 @@ import {
 import type { Metier } from "@/lib/accueil/journal";
 import type { DefiGenere } from "@/lib/accueil/defis";
 import { PAYS } from "@/lib/programmes-pays/pays";
+import RechercheEntete from "@/components/accueil/RechercheEntete";
 
 export type VideoVitrine = { id: string; titre: string; vignette: string };
 
@@ -195,6 +196,13 @@ export default function AccueilNouveau(props: {
        vert et le bleu, on voit rien du tout »). Sans fond posé, un navigateur en
        mode sombre peignait la page en noir sous un texte bleu nuit. */
     <div className="min-h-screen bg-white [color-scheme:light]">
+      {/* ⛔ LA RECHERCHE DES TÉLÉPHONES (Frédéric, 23/10 : « tu as enlevé la barre
+          de recherche, il faut la remettre »). Sous 640 px, l'en-tête masque la
+          sienne (components/Header.tsx, `rechercheAuCentre`) : le Journal
+          l'ajoutait lui-même, et elle était partie avec lui. */}
+      <div className="border-b border-slate-200 bg-white px-3 py-2 sm:hidden">
+        <RechercheEntete variante="page" />
+      </div>
     <main className="mx-auto max-w-5xl px-4 pb-16 pt-6 text-slate-900">
       {/* 1. LA PROMESSE */}
       {/* ⭐ LE TITRE (Frédéric, 23/10 : « on l'avait appelé le Journal d'EleveAI, il
