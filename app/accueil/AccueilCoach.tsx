@@ -90,15 +90,16 @@ function Vignette({ v, bloc }: { v: VideoVitrine; bloc: string }) {
   );
 }
 
-function Rangee({ titre, lien, videos, bloc }: { titre: string; lien: { href: string; label: string }; videos: VideoVitrine[]; bloc: string }) {
+function Rangee({ titre, lien, videos, bloc, id, sous }: { titre: string; lien: { href: string; label: string }; videos: VideoVitrine[]; bloc: string; id?: string; sous?: string }) {
   return (
-    <section className="mt-8">
+    <section id={id} className="mt-8 scroll-mt-24">
       <div className="mb-3 flex items-baseline justify-between gap-3">
         <h2 className="text-lg font-black text-slate-900">{titre}</h2>
         <Lien href={lien.href} bloc={bloc} className="shrink-0 text-sm font-bold text-teal-700 hover:underline">
           {lien.label} →
         </Lien>
       </div>
+      {sous && <p className="-mt-2 mb-3 text-sm text-slate-600">{sous}</p>}
       {videos.length > 0 ? (
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           {videos.map((v) => (
@@ -303,6 +304,16 @@ export default function AccueilNouveau(props: {
               >
                 {appel} <ArrowRight className="h-5 w-5" aria-hidden="true" />
               </Lien>
+              {/* ⭐ DEUX PORTES D'ENTRÉE (Frédéric, 23/10 : « soit l'élève commence
+                  avec le coach, soit avec la vidéo, car quand il regarde la vidéo,
+                  la fiche d'exercices, le cours et le coach sont proposés »). */}
+              <a
+                href="#videos-classe"
+                onClick={() => track("accueil_clic", { bloc: "porte-video" })}
+                className="inline-flex items-center gap-2 rounded-full px-5 py-3 font-black text-teal-700 ring-2 ring-teal-700 hover:bg-teal-50"
+              >
+                <Play className="h-4 w-4" fill="currentColor" aria-hidden="true" /> Ou commencer par une vidéo
+              </a>
               {profil === "parent" && (
                 <Lien href="/parents" bloc="parents" className="text-sm font-bold text-teal-700 hover:underline">
                   Suivre les progrès de votre enfant →
@@ -357,6 +368,8 @@ export default function AccueilNouveau(props: {
           lien={{ href: "/video", label: "Toute la bibliothèque" }}
           videos={props.parClasse[classe] ?? []}
           bloc="videos-classe"
+          id="videos-classe"
+          sous="Chaque vidéo te mène à sa fiche d'exercices, à son cours et au coach."
         />
       )}
       <Rangee titre="Les maths dehors" lien={{ href: "/maths-974", label: "Toutes" }} videos={props.dehors} bloc="dehors" />
