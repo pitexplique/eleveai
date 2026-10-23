@@ -26,7 +26,7 @@ Ce fichier complète la règle « les mathématiques sont TRANSVERSALES » de `R
 
 ## 3. Sujets communs aux pays qui enseignent en français, avec leur touche locale
 
-⭐ Frédéric, 23/10/2026 : « je préfère me concentrer sur tous les pays qui enseignent en français ». Les États-Unis sortent de la liste ; l'Ontario reste pour ses écoles de langue française.
+⭐ Frédéric, 23/10/2026 : « je préfère me concentrer sur tous les pays qui enseignent en français ». L'Ontario reste pour ses écoles de langue française. Puis : « on continue les États-Unis pour test » → les États-Unis restent EN TEST, hors tableau : touche locale = basketball, baseball, pancakes, dollar américain, parcs nationaux ; ⚠️ pieds, livres et °F à convertir.
 
 | Sujet universel | France et DROM | Maroc, Tunisie | Québec, Ontario francophone | Belgique, Suisse, Luxembourg | Afrique de l'Ouest et centrale, Madagascar |
 |---|---|---|---|---|---|
