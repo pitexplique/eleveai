@@ -200,7 +200,7 @@ Réutiliser tels quels d'un épisode à l'autre (présents dans `lait_reunion.py
 - Un MÉTIER porte la situation (évoquer des vocations), filles et garçons : ingénieure du son, monteur, géographe, historienne, vétérinaire, technicien, data analyst…
 - Un domaine, un métier et une problématique DIFFÉRENTS d'un épisode à l'autre dans un même lot (décider, prévoir, contrôler, choisir, juger une affirmation, évaluer un risque).
 - **DONNER ENVIE** (le but, 20/10/2026) : beaucoup de jeunes doutent de leur avenir. Chaque vidéo ouvre une porte : un métier réel et accessible, des gens qui leur ressemblent, d'ici, et des maths qui servent à quelque chose qui compte. Ton concret, respectueux et plein d'élan, jamais moralisateur.
-- **QUEL DÉCOR POUR QUEL ÂGE ET QUEL PAYS** (23/10/2026) : la réserve de sujets est dans `manim/centres-interet-par-age.md` (tranches d'âge, sujets communs France / Maroc / Québec / Ontario / États-Unis, touche locale en variable, ce qu'on évite).
+- **QUEL DÉCOR POUR QUEL ÂGE ET QUEL PAYS** (23/10/2026) : la réserve de sujets est dans `manim/centres-interet-par-age.md` (tranches d'âge, sujets communs aux pays qui enseignent en français, touche locale en variable, ce qu'on évite).
 
 ## ⭐⭐ Les QUESTIONS-PAUSES (Frédéric, 23/10/2026 — pour TOUTES les nouvelles vidéos)
 Pourquoi : dans deux ans, une IA produira des vidéos en masse. EleveAI se distinguera par des vidéos qui font AGIR l'élève et qui sont reliées à son coach. On commence maintenant, avec chaque nouvelle vidéo.
