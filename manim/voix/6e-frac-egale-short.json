@@ -1,0 +1,10 @@
+{
+  "00-accroche": "Malik, pizzaïolo, sert trois pizzas de la même taille. Qui en a mangé le plus ?",
+  "01-leo": "Léo coupe sa pizza en 4 parts. Il en mange 2.",
+  "02-ines": "Inès coupe la sienne en 8 parts. Elle en mange 4.",
+  "03-zoe": "Zoé coupe en 12 parts. Elle en mange 6.",
+  "04-surprise": "Surprise : les barres s'arrêtent au même endroit ! 2 quarts, 4 huitièmes, 6 douzièmes : c'est toujours 1 demi.",
+  "05-question": "Question ! Laquelle n'est pas égale à 1 demi ? A : 3 sixièmes. B : 4 sixièmes. C : 5 dixièmes. Mets pause !",
+  "05b-reponse": "Réponse B. La moitié de 6, c'est 3, pas 4.",
+  "06-question": "À toi : 15 vingtièmes, c'est combien de quarts ? Réponds en commentaire !"
+}

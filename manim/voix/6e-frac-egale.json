@@ -1,0 +1,23 @@
+{
+  "00-garde": "Fractions égales, simplifier. Deux fractions différentes peuvent-elles dire la même chose ?",
+  "01-situation": "Voici Inès, pâtissière. Pour sa crème, la recette dit : lait, 6 huitièmes de litre. Mais son verre doseur est gradué en quarts de litre. Combien de quarts doit-elle verser ?",
+  "02-barre": "Dessinons 6 huitièmes. Une barre coupée en 8 parts égales : ce sont des huitièmes. On en colorie 6.",
+  "03-regrouper": "Maintenant, on regroupe les parts 2 par 2. Il reste 4 grandes parts : des quarts. Les parts bleues font 3 quarts. Regarde : la longueur bleue n'a pas bougé ! 6 huitièmes égale 3 quarts.",
+  "04-regle": "Regarde les nombres. 6 divisé par 2, égale 3. 8 divisé par 2, égale 4. On divise le numérateur ET le dénominateur par le même nombre. C'est ça, simplifier.",
+  "05-reponse": "Inès verse donc 3 quarts de litre de lait. C'est la même quantité, écrite plus simplement.",
+  "06-multiplier": "Ça marche aussi dans l'autre sens : on peut multiplier. 3 quarts, c'est combien de douzièmes ? 4 fois 3, égale 12. Alors 3 fois 3, égale 9. Sur la barre, chaque quart est coupé en 3 : 3 quarts égale 9 douzièmes.",
+  "07-question": "Question ! 7 tiers égale combien de sixièmes ? A : 10. B : 14. C : 7. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. 3 fois 2, égale 6. Donc 7 fois 2, égale 14. 7 tiers égale 14 sixièmes.",
+  "08-grille": "Autre exemple : 15 vingtièmes. Sur cette grille de 20 cases, 15 sont bleues. 15 et 20 sont dans la table de 5. 15 divisé par 5, égale 3. 20 divisé par 5, égale 4. Chaque ligne de 5 cases est un quart : 15 vingtièmes égale 3 quarts !",
+  "09-jusquau-bout": "Et 12 dix-huitièmes ? On divise par 2 : 6 neuvièmes. Peut-on encore simplifier ? Oui : 6 et 9 sont dans la table de 3. On divise par 3 : 2 tiers. 2 et 3 ne se divisent plus par un même nombre, à part 1. On s'arrête : la fraction ne se simplifie plus.",
+  "10-question": "Question ! Laquelle ne se simplifie plus ? A : 4 sixièmes. B : 3 cinquièmes. C : 9 douzièmes. Mets pause, et choisis !",
+  "10b-reponse": "Réponse B. 3 et 5 ne se divisent pas par un même nombre, à part 1. 4 sixièmes se divise par 2, et 9 douzièmes par 3.",
+  "11-piege": "Attention au piège ! Certains enlèvent 2 en haut et en bas : 6 huitièmes deviendrait 4 sixièmes. Faux ! Regarde : 4 sixièmes, c'est moins long. D'autres divisent seulement le haut : 3 huitièmes. Faux aussi : c'est 2 fois moins ! On divise en haut ET en bas, par le même nombre.",
+  "12-question": "Question ! Simplifie 10 quinzièmes. A : 2 tiers. B : 8 treizièmes. C : 2 quinzièmes. Mets pause, et choisis !",
+  "12b-reponse": "Réponse A. 10 divisé par 5, égale 2. 15 divisé par 5, égale 3. Les deux autres réponses tombent dans le piège.",
+  "13-defi": "À toi de jouer ! Inès a coupé sa tarte en 12 parts égales. On en a mangé 8. Quelle fraction de la tarte a-t-on mangée ? Simplifie-la au maximum. Mets pause, et cherche !",
+  "13b-correction": "Correction. On a mangé 8 douzièmes. 8 et 12 sont dans la table de 4. 8 divisé par 4, égale 2. 12 divisé par 4, égale 3. On a mangé 2 tiers de la tarte. Si tu as trouvé 4 sixièmes, continue : divise encore par 2 !",
+  "14-chaine": "Et ce n'est qu'un début. 3 quarts, c'est aussi 3 divisé par 4, égale 0,75. Et 0,75, c'est 75 %. Simplifier, puis le nombre décimal, puis le pourcentage : ce sont les prochaines vidéos.",
+  "15-finale": "Ce que tu as appris. Deux fractions égales couvrent la même longueur. On multiplie ou on divise le numérateur et le dénominateur par le même nombre. Pour simplifier, on divise jusqu'à ne plus pouvoir. Et on ne soustrait jamais.",
+  "16-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}
