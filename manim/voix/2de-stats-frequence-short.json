@@ -1,0 +1,7 @@
+{
+  "00-accroche": "Un message secret de 113 lettres. Une lettre revient sans arrêt : le H, 23 fois ! Quelle lettre se cache derrière ? Devine !",
+  "01-image": "23 sur 113, c'est environ 20 % : une lettre sur cinq ! En français, la lettre la plus fréquente, c'est le E. Le code de César décale chaque lettre de 3 : E devient H. Donc le H, c'est un E. Message décodé !",
+  "02-question": "Question ! Dans un texte de 500 lettres, 60 sont des E. Quelle est la fréquence du E ? A : 60 %. B : 12 %. C : 8,3 %. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B : 60 divisé par 500, égale 0,12, soit 12 % ; 60 %, c'est l'effectif pris pour un pourcentage.",
+  "03-commentaire": "À toi : à 12 %, combien de E attend-on dans un texte de 2 500 lettres ? Réponds en commentaire !"
+}

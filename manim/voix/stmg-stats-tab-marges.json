@@ -1,0 +1,17 @@
+{
+  "00-garde": "Calculer les marges d'un tableau croisé. Le tableau arrive sans ses totaux : à toi de les retrouver.",
+  "01-situation": "En 2025, pour la première fois, la France compte un peu plus de femmes que d'hommes parmi ses médecins. Une directrice d'hôpital veut le vérifier. Son tableau croise deux caractères : la spécialité, et le sexe. Les effectifs sont en milliers, mais les marges manquent.",
+  "02-regle": "Les marges sont les totaux. La marge d'une ligne : j'additionne toute la ligne. La marge d'une colonne : je descends toute la colonne. Et le total général, dans le coin, est la somme de toutes les cases.",
+  "03-ligne": "La ligne des généralistes : 52 plus 48, égale 100. Il y a 100 milliers de médecins généralistes.",
+  "04-colonne": "La colonne des femmes : je descends. 52 plus 67, égale 119. Il y a 119 milliers de femmes médecins.",
+  "05-question": "Question ! Quel calcul donne la marge de la colonne des hommes ? A : 48 plus 70. B : 67 plus 70. C : 52 plus 48. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A : je descends la colonne des hommes : 48 plus 70, égale 118. B et C additionnent une ligne : c'est l'erreur la plus fréquente.",
+  "06-total": "Le total général : 52 plus 48, plus 67, plus 70, égale 237 milliers de médecins. Je contrôle par les marges : 119 plus 118, égale 237. Les deux calculs sont d'accord.",
+  "07-piege": "Alors, plus de femmes ? 119 milliers contre 118 : oui, de justesse ! Le piège serait de regarder une seule ligne : chez les spécialistes, les hommes sont plus nombreux, 70 contre 67. Une ligne n'est pas une marge.",
+  "08-question": "Question ! Quel est le total général du tableau ? A : 237. B : 474. C : 219. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A : la somme des quatre cases, 237. B additionne les cases et les marges, et C ajoute une ligne et une colonne.",
+  "09-defi": "À toi de jouer ! Un : quelle est la marge de la ligne des spécialistes ? Deux : contrôle : le total général moins cette marge redonne-t-il les généralistes ? Mets pause, et cherche !",
+  "09b-correction": "Un : 67 plus 70, égale 137 milliers. Deux : 237 moins 137, égale 100 : c'est bien la marge des généralistes.",
+  "10-finale": "Ce que tu as appris. La marge d'une ligne : j'additionne la ligne. La marge d'une colonne : je descends la colonne. Et le total général se contrôle dans les deux sens.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

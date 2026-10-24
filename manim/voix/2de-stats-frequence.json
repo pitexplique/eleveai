@@ -1,0 +1,19 @@
+{
+  "00-garde": "Calculer une fréquence. Comment casser un code secret ?",
+  "01-situation": "Sofia est cryptanalyste : elle protège les messages secrets, et elle sait aussi les casser. Son arme : la fréquence des lettres. Un code secret change les lettres, mais pas leurs fréquences. Sa question : dans un texte, quelle part des lettres sont des E ?",
+  "02-texte": "Son texte d'entraînement : l'article premier de la Déclaration des droits de l'homme, de 1789. « Les hommes naissent et demeurent libres et égaux en droits. Les distinctions sociales ne peuvent être fondées que sur l'utilité commune. » 113 lettres en tout.",
+  "03-effectifs": "Elle compte les lettres, accents compris. 23 E, 13 S, 11 T, 10 N, et 9 I. Le E est de loin la lettre la plus fréquente.",
+  "04-methode": "La fréquence d'une valeur, c'est son effectif divisé par l'effectif total. Pour le E : 23 divisé par 113, environ 0,204. En pourcentage, on multiplie par 100 : environ 20,4 %. Une lettre sur cinq est un E !",
+  "05-question": "Question ! Quelle est la fréquence du S, 13 lettres sur 113, en pourcentage, au dixième ? A : 13 %. B : 11,5 %. C : 8,7 %. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B : 13 divisé par 113, fois 100, environ 11,5 % ; 13 % confond l'effectif et le pourcentage, et 8,7 divise à l'envers.",
+  "06-piege": "Le piège : comparer des effectifs quand les totaux sont différents. La première phrase seule compte 49 lettres, dont 11 E : moins que 23. Mais en fréquence, 11 divisé par 49, environ 22,4 % : plus que 20,4 % ! Pour comparer, on compare les fréquences.",
+  "07-question": "Question ! En français, environ 12 % des lettres sont des E. Dans un texte de 2 000 lettres, combien de E peut-on attendre ? A : 12. B : 240. C : 167. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B : 12 % de 2 000, c'est 0,12 fois 2 000, égale 240 ; 12, c'est le pourcentage lui-même, et 167, c'est environ 2 000 divisé par 12.",
+  "08-code": "Maintenant, le code secret de Jules César : chaque lettre est décalée de 3 rangs. E devient H, S devient V, T devient W. Les effectifs ne bougent pas : dans le message codé, le H est la lettre la plus fréquente. Sofia devine aussitôt : H, c'est un E. Le code est cassé !",
+  "09-question": "Question ! Dans un message codé, le H apparaît 30 fois, soit 15 % des lettres. Combien de lettres compte le message ? A : 200. B : 45. C : 4,5. Mets pause, et choisis !",
+  "09b-reponse": "Réponse A : l'effectif total, c'est l'effectif divisé par la fréquence, 30 divisé par 0,15, égale 200 ; 45 additionne, et 4,5 multiplie.",
+  "10-defi": "À toi de jouer. Dans le texte de Sofia, il y a 3 A, 23 E, 9 I, 6 O et 7 U. Quelle est la fréquence des voyelles, en pourcentage, au dixième ? Mets pause, et cherche !",
+  "10b-correction": "Correction. Effectif des voyelles : 3 plus 23 plus 9 plus 6 plus 7, égale 48. Fréquence : 48 divisé par 113, environ 0,425, soit environ 42,5 %. Presque une lettre sur deux !",
+  "11-finale": "Ce que tu as appris. La fréquence, c'est l'effectif divisé par l'effectif total. En pourcentage, je multiplie par 100. Pour comparer des groupes de tailles différentes, je compare les fréquences. Et l'effectif, c'est la fréquence fois l'effectif total.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

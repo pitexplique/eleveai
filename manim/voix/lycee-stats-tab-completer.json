@@ -1,0 +1,16 @@
+{
+  "00-garde": "Compléter un tableau croisé. Des cases ont disparu : peut-on les retrouver ?",
+  "01-situation": "En 2024, 261 fusées ont tenté d'aller en orbite, un record. Une ingénieure spatiale, à Kourou, compare les lancements réussis et ratés, pays par pays. Mais dans son tableau, des cases manquent.",
+  "02-regle": "La règle d'or : dans un tableau croisé, les marges sont des sommes. Chaque ligne s'additionne jusqu'à son total, et chaque colonne aussi. Une case manquante se retrouve donc par une soustraction.",
+  "03-case": "Les autres pays : 20 lancements en tout, dont 4 ratés. Les réussis : 20 moins 4, égale 16.",
+  "04-marge": "Le total des réussis est une somme : 155 plus 65, plus 17, plus 16, égale 253. Et je contrôle par l'autre sens : 261 moins 8, égale 253. Les deux calculs sont d'accord.",
+  "05-question": "Question ! Combien de lancements ratés pour la Chine ? A : 3. B : 4. C : 7. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A : la ligne Chine a deux cases vides, alors je passe par la colonne des ratés : 8 moins 1, moins 0, moins 4, égale 3. C n'a retiré que les États-Unis, et B que les autres pays.",
+  "06-piege": "Le piège : additionner tout le tableau, marges comprises. On compterait chaque lancement deux fois ! Le total général, c'est 253 plus 8, égale 261. Et par les lignes : 156 plus 68, plus 17, plus 20, égale encore 261.",
+  "07-question": "Question ! Combien de lancements au total pour la Chine ? A : 68. B : 62. C : 65. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A : 65 plus 3, égale 68. B soustrait au lieu d'additionner, et C oublie les ratés.",
+  "08-defi": "À toi de jouer ! Deux autres cases ont disparu. Un : combien de lancements réussis pour les États-Unis ? Deux : combien de lancements pour la Russie, en tout ? Mets pause, et cherche !",
+  "08b-correction": "Un : la ligne des États-Unis : 156 moins 1, égale 155. Deux : la colonne des totaux : 261 moins 156, moins 68, moins 20, égale 17. Contrôle par la ligne : 17 plus 0, égale 17.",
+  "09-finale": "Ce que tu as appris. Les marges sont des sommes : par ligne et par colonne. Une case manquante : le total moins les cases connues. Et quand une ligne a deux trous, je passe par la colonne.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

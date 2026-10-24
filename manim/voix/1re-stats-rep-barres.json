@@ -1,0 +1,17 @@
+{
+  "00-garde": "Lire un diagramme en barres qui croise deux caractères. Que dit vraiment la hauteur d'une barre ?",
+  "01-situation": "En juin 2025, 4 145 personnes ont répondu au Baromètre du numérique. Une des questions : utilisez-vous une IA générative, comme ChatGPT, chaque jour ? Une sociologue du numérique étudie les réponses selon l'âge. Deux caractères se croisent : l'âge, et l'usage quotidien.",
+  "02-reperes": "Chaque barre est un groupe d'âge. Sa hauteur, c'est la part des utilisateurs quotidiens dans ce groupe, en pourcentage. L'axe est gradué de 10 en 10, et le petit trait vaut 5 de plus.",
+  "03-lire": "Je lis les 18 à 24 ans. Je monte en haut de la barre, puis je vais vers l'axe : juste au-dessus de 50. L'étude donne 51 %. Donc 51 % des 18 à 24 ans utilisent une IA chaque jour.",
+  "04-complement": "Et les autres ? Dans ce groupe, on utilise l'IA chaque jour, ou pas : les deux parts font 100 %. 100 moins 51, égale 49 %. 49 % des 18 à 24 ans ne l'utilisent pas chaque jour.",
+  "05-question": "Question ! La barre des 12 à 17 ans monte à 26 %. Quelle part des 12 à 17 ans n'utilise pas l'IA chaque jour ? A : 74 %. B : 26 %. C : 49 %. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A : 100 moins 26, égale 74 %. B relit la barre, et C prend le complément d'un autre groupe.",
+  "06-effectif": "Maintenant, un effectif. Imagine un lycée de 800 élèves, tous âgés de 12 à 17 ans. Le pourcentage s'applique à ce groupe : 26 % de 800, c'est 800 fois 0,26, égale 208 élèves.",
+  "07-piege": "Le piège : lire une barre comme une part de toute la population. 51 %, ce n'est pas : 51 % des utilisateurs ont entre 18 et 24 ans. C'est 51 % des 18 à 24 ans. La preuve : additionne les barres. 26 plus 51, plus 46, plus 27, plus 17, égale 167 %. Plus de 100 % : ce ne sont pas les parts d'un même tout !",
+  "08-question": "Question ! Que dit la barre des 60 ans et plus ? A : 17 % des plus de 60 ans utilisent l'IA chaque jour. B : 17 % des utilisateurs ont plus de 60 ans. C : 17 personnes de plus de 60 ans l'utilisent. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A : la barre donne une part dans le groupe des plus de 60 ans. B renverse le groupe, et C prend un pourcentage pour un effectif.",
+  "09-defi": "À toi de jouer ! Un : quelle part des 40 à 59 ans n'utilise pas l'IA chaque jour ? Deux : on interroge 300 personnes de 25 à 39 ans. Combien, environ, l'utilisent chaque jour ? Mets pause, et cherche !",
+  "09b-correction": "Un : la barre des 40 à 59 ans monte à 27 %. 100 moins 27, égale 73 %. Deux : la barre des 25 à 39 ans monte à 46 %. 300 fois 0,46, égale 138 personnes, environ.",
+  "10-finale": "Ce que tu as appris. Chaque barre est un groupe : sa hauteur est une part dans ce groupe. L'autre part, c'est 100 moins la barre. Et pour un effectif, j'applique le pourcentage à l'effectif du groupe.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

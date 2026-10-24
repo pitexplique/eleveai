@@ -1,0 +1,17 @@
+{
+  "00-garde": "Interpréter des indicateurs. Que veut vraiment dire « le salaire moyen » ?",
+  "01-situation": "Clara est data-journaliste. Sur un réseau social, une vidéo affirme : « En France, on gagne 2 735 euros par mois en moyenne, donc la plupart des gens gagnent ça. » Clara vérifie avec les chiffres de l'Insee : le secteur privé, en 2023, en salaires nets par mois, en équivalent temps plein.",
+  "02-indicateurs": "Le salaire moyen : 2 735 euros. Le salaire médian : 2 183 euros. La médiane partage les salariés en deux : la moitié gagne moins de 2 183 euros, l'autre moitié gagne plus.",
+  "03-question": "Question ! Quelle phrase est juste ? A : La plupart gagnent 2 735 euros. B : La moitié gagne exactement 2 183 euros. C : La moitié gagne moins de 2 183 euros. Mets pause, et choisis !",
+  "03b-reponse": "Réponse C : c'est le sens de la médiane ; la moyenne n'est pas le salaire de la plupart des gens, et presque personne ne gagne exactement la médiane.",
+  "04-asymetrie": "Pourquoi la moyenne est-elle plus haute ? Regarde l'axe. Un salarié sur dix gagne moins de 1 512 euros. Un sur dix gagne plus de 4 302 euros. Et un sur cent, plus de 10 222 euros. Ces très hauts salaires tirent la moyenne vers le haut. La médiane, elle, ne regarde que le milieu.",
+  "05-question": "Question ! Si les plus hauts salaires doublaient, sans rien changer aux autres, que se passerait-il ? A : La moyenne augmente, la médiane ne bouge pas. B : Les deux augmentent. C : La médiane augmente, pas la moyenne. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A : la somme des salaires augmente, donc la moyenne aussi ; mais le salarié du milieu gagne toujours autant, donc la médiane reste à 2 183 euros.",
+  "06-comparer": "Comparons les femmes et les hommes. Salaire moyen : 2 508 euros pour les femmes, 2 898 pour les hommes. Salaire médian : 2 069 euros contre 2 275. Les deux indicateurs vont dans le même sens : en moyenne, les femmes gagnent 13,5 % de moins.",
+  "07-question": "Question ! Quelle conclusion est juste ? A : Toutes les femmes gagnent moins que tous les hommes. B : Le niveau des femmes est plus bas, en moyenne et en médiane. C : On ne peut rien comparer. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B : la moyenne et la médiane sont plus basses ; mais un indicateur résume un groupe, il ne dit rien de chaque personne.",
+  "08-defi": "À toi de jouer. En commentaire, Hugo écrit : « Je gagne 2 300 euros, moins que la moyenne : je fais donc partie de la moitié la moins payée. » Vrai ou faux ? Mets pause, et cherche !",
+  "08b-correction": "Correction. La moitié la moins payée gagne moins de 2 183 euros, la médiane. Or 2 300, c'est plus que 2 183. Hugo est sous la moyenne, mais dans la moitié la mieux payée : c'est faux ! Clara publie sa vérification.",
+  "09-finale": "Ce que tu as appris. La moyenne utilise toutes les valeurs : les valeurs extrêmes la tirent vers elles. La médiane partage la série en deux moitiés, et bouge peu. Quand la moyenne dépasse nettement la médiane, quelques très grandes valeurs tirent vers le haut. Et un indicateur résume un groupe, pas chaque personne.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

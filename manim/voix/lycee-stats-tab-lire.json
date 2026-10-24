@@ -1,0 +1,16 @@
+{
+  "00-garde": "Lire un tableau croisé. Une case, une ligne, une colonne : qui compte quoi ?",
+  "01-situation": "Depuis 1901, les prix Nobel récompensent les grandes découvertes. Un journaliste scientifique prépare un podcast sur les femmes Nobel en sciences : de 1901 à 2025, 27 prix leur ont été remis. Il les range dans un tableau croisé.",
+  "02-structure": "Un tableau croisé croise deux caractères. En ligne, la discipline : physique, chimie, médecine. En colonne, la période : de 1901 à 1999, puis de 2000 à 2025. Et sur les bords, les totaux : ce sont les marges.",
+  "03-case": "Combien de femmes Nobel de chimie depuis 2000 ? Je prends la ligne chimie, puis la colonne 2000 à 2025. La case du croisement vaut 5 : 5 prix de chimie remis à des femmes depuis 2000.",
+  "04-marge": "Et en médecine, combien en tout ? C'est le total de la ligne, au bout : 14. 6 avant 2000, plus 8 depuis, égale 14. Et dans le coin, en bas à droite : le total général, 27.",
+  "05-question": "Question ! Combien de femmes Nobel de physique avant 2000 ? A : 2. B : 5. C : 11. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A : la case physique, 1901 à 1999, vaut 2. 5, c'est le total de la ligne, et 11, celui de la colonne.",
+  "06-piege": "Le piège : se tromper de ligne ou de colonne. Regarde : le nombre 3 apparaît deux fois ! Une fois pour la physique depuis 2000, une fois pour la chimie avant 2000. Pour savoir ce que dit un nombre, je monte à sa colonne, puis je reviens au début de sa ligne.",
+  "07-question": "Question ! Le nombre 6, c'est… A : la médecine avant 2000. B : la médecine depuis 2000. C : toute la médecine. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A : 6 est dans la ligne médecine, et dans la colonne 1901 à 1999. Depuis 2000, c'est 8, et toute la médecine, c'est le total, 14.",
+  "08-defi": "À toi de jouer ! Un : combien de femmes Nobel de médecine depuis 2000 ? Deux : combien de prix scientifiques remis à des femmes depuis 2000, toutes disciplines confondues ? Mets pause, et cherche !",
+  "08b-correction": "Un : ligne médecine, colonne 2000 à 2025 : 8. Deux : c'est le total de la colonne : 3 plus 5 plus 8, égale 16. Plus en un quart de siècle que pendant tout le siècle d'avant !",
+  "09-finale": "Ce que tu as appris. Une case : je croise sa ligne et sa colonne. Au bout d'une ligne, ou en bas d'une colonne : les totaux, les marges. Et pour lire un nombre, je monte à sa colonne, puis je reviens à sa ligne.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -1,0 +1,7 @@
+{
+  "00-accroche": "Marathon Hunger Games : 5 films, 141 minutes en moyenne. Et si on ajoute les bandes-annonces ? Devine !",
+  "01-image": "Chaque bande, c'est un film. J'ajoute 20 minutes de bandes-annonces au début de chacune. Toutes les bandes grandissent de 20… et la ligne de la moyenne monte de 20, elle aussi.",
+  "02-question": "Question ! La nouvelle moyenne ? A : 241. B : 161. C : 141. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B : 141 plus 20, égale 161 ; 241 ajoute 20 cinq fois.",
+  "03-commentaire": "À toi : si chaque film durait 2 fois plus longtemps, quelle serait la durée moyenne ? Réponds en commentaire !"
+}

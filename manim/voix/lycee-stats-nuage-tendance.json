@@ -1,0 +1,17 @@
+{
+  "00-garde": "Décrire la tendance d'un nuage. Les points montent-ils, descendent-ils, ou partent-ils dans tous les sens ?",
+  "01-situation": "Un géographe prépare un atlas des pays où l'on parle français. Sa question : la température moyenne d'une ville dépend-elle de sa distance à l'équateur, c'est-à-dire de sa latitude ?",
+  "02-donnees": "Il relève 9 villes, de Libreville, sur l'équateur, à Bruxelles, à 51 degrés de latitude. En abscisse : la latitude, en degrés, au nord ou au sud. En ordonnée : la température moyenne de l'année, en degrés Celsius.",
+  "03-tendance": "Je regarde le nuage de gauche à droite, dans son ensemble. Libreville : 25,9 degrés. Bruxelles : 10,5 degrés. Globalement, les points descendent : la tendance est décroissante. Quand la latitude augmente, la température a tendance à diminuer.",
+  "04-vocabulaire": "Trois cas possibles. Les points montent : tendance croissante. Ils descendent : tendance décroissante. Ils partent dans tous les sens : pas de tendance nette.",
+  "05-question": "Question ! Quelle phrase décrit ce nuage ? A : la tendance est croissante. B : la tendance est décroissante. C : les points sont exactement alignés. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. Les points descendent globalement, mais ils ne sont pas alignés : une tendance n'est pas une droite parfaite.",
+  "06-ecarts": "Justement, regarde Montréal : 46 degrés de latitude, mais seulement 7 degrés Celsius, bien plus froid que Marseille, à 43 degrés. Et Antananarivo, perchée à près de 1 300 mètres d'altitude, est fraîche pour sa latitude. Un point isolé ne casse pas la tendance : on décrit l'allure générale.",
+  "07-piege": "Le piège : conclure à une cause. Le nuage montre que la latitude et la température varient ensemble. Il ne dit pas, à lui seul, ce qui cause quoi : l'altitude, l'océan ou les vents comptent aussi. Une tendance décrit, elle ne prouve pas.",
+  "08-question": "Question ! Tunis est à 37 degrés de latitude. D'après la tendance, quelle température moyenne est la plus plausible ? A : 26 degrés. B : 18 degrés. C : 8 degrés. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B : en vrai, 18,4 degrés. 26, c'est la chaleur de l'équateur, et 8 serait plus froid que Paris, pourtant plus au nord.",
+  "09-defi": "À toi de jouer ! Un : Kinshasa est à 4 degrés de latitude, Ottawa à 45. D'après la tendance, laquelle est probablement la plus chaude ? Deux : vrai ou faux, ce nuage prouve que la latitude est la seule cause de la température ? Mets pause, et cherche !",
+  "09b-correction": "Correction. Un : Kinshasa, bien plus près de l'équateur ; la tendance la donne plus chaude. En vrai : 25,3 degrés, contre 6,8 à Ottawa. Deux : faux ! Une tendance montre ce qui varie ensemble, pas la seule cause. Antananarivo le prouve : c'est son altitude qui la rafraîchit.",
+  "10-finale": "Ce que tu as appris. Pour décrire un nuage, je regarde son allure générale, de gauche à droite : croissante, décroissante, ou pas de tendance. Les points ne sont pas forcément alignés, et un point isolé ne change pas la tendance. Enfin, une tendance décrit un lien ; elle ne prouve pas une cause.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -1,0 +1,21 @@
+{
+  "00-garde": "Lire une série statistique. Que racontent les 64 matchs d'une Coupe du monde ?",
+  "01-situation": "Inès est analyste de données sportives pour une chaîne de télévision. Avant chaque grand tournoi, elle prépare les chiffres que les commentateurs diront à l'antenne. Sa source : la Coupe du monde 2022, au Qatar. 64 matchs, 172 buts. Sa question : combien de buts voit-on dans un match ?",
+  "02-serie": "Chaque match est un individu. Le caractère étudié : le nombre de buts du match, prolongations comprises. Les valeurs vont de 0 à 8. Et pour chaque valeur, l'effectif : le nombre de matchs. 0 but : 7 matchs. 1 but : 10. 2 buts : 17. 3 buts : 14. 4 buts : 4. 5 buts : 6. 6 buts : 3. 7 buts : 2. Et 8 buts : 1 seul match.",
+  "03-effectif": "Lire un effectif. Combien de matchs ont fini avec 3 buts ? Je repère la valeur 3, dans la ligne du haut. Je descends dans sa colonne : 14. L'effectif de la valeur 3, c'est 14 matchs.",
+  "04-diagramme": "La même série, en diagramme en barres : les valeurs en bas, les effectifs sur l'axe. Pour la valeur 3, je pars du haut de la barre et je suis la ligne jusqu'à l'axe : 14, comme dans le tableau. Dans l'autre sens : quelle valeur a pour effectif 6 ? Je cherche la barre qui arrive à 6 : c'est celle de 5 buts. La réponse est une valeur, 5, pas l'effectif 6.",
+  "05-question": "Question ! Sur ce diagramme, quelle est la valeur la plus fréquente ? A : 17. B : 8. C : 2. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C : 2 buts, la valeur de la barre la plus haute ; 17 n'est que son effectif, et 8 est la plus grande valeur.",
+  "06-total": "Combien de matchs en tout ? L'effectif total, c'est la somme des effectifs : 7 plus 10 plus 17 plus 14 plus 4 plus 6 plus 3 plus 2 plus 1, égale 64. On retrouve bien les 64 matchs du tournoi.",
+  "07-piege": "Le piège : additionner les valeurs. 0 plus 1 plus 2, et ainsi de suite jusqu'à 8, égale 36 : ça ne compte rien du tout ! Et les 172 buts ? C'est le total des buts marqués, pas le nombre de matchs. Il servira pour la moyenne, dans le prochain épisode.",
+  "08-etendue": "L'étendue mesure l'écart entre les deux extrêmes : la plus grande valeur moins la plus petite. Le plus grand score : 8 buts, Angleterre contre Iran, 6 à 2. Le plus petit : 0 but, dans 7 matchs. Étendue : 8 moins 0, égale 8 buts.",
+  "09-question": "Question ! On retire le match Angleterre contre Iran, celui des 8 buts. Quelle est alors l'étendue ? A : 7. B : 8. C : 16. Mets pause, et choisis !",
+  "09b-reponse": "Réponse A : sans ce match, le plus grand score devient 7 buts, donc 7 moins 0 égale 7 ; 8 oublie le match retiré, et 16, c'est 17 moins 1, une différence d'effectifs.",
+  "10-condition": "Combien de matchs ont fini avec au moins 3 buts ? « Au moins 3 », c'est 3 buts, ou plus. Je garde les valeurs de 3 à 8, et j'additionne leurs effectifs : 14 plus 4 plus 6 plus 3 plus 2 plus 1, égale 30 matchs. Attention : « plus de 3 buts », ce n'est pas pareil.",
+  "11-question": "Question ! Combien de matchs ont fini avec plus de 3 buts ? A : 30. B : 16. C : 14. Mets pause, et choisis !",
+  "11b-reponse": "Réponse B : « plus de 3 » ne compte pas la valeur 3, donc 30 moins 14, égale 16 ; 30 comptait le 3, et 14 n'est que l'effectif du 3.",
+  "12-defi": "À toi de jouer. Inès veut annoncer à l'antenne : « Plus de la moitié des matchs ont fini avec au plus 2 buts. » A-t-elle raison ? Mets pause, et cherche !",
+  "12b-correction": "Correction. « Au plus 2 buts », c'est 0, 1 ou 2 buts : 7 plus 10 plus 17, égale 34 matchs. La moitié des 64 matchs, c'est 32. 34, c'est plus que 32 : Inès a raison, elle peut le dire à l'antenne !",
+  "13-finale": "Ce que tu as appris. Une valeur et son effectif, ce n'est pas la même chose. L'effectif total est la somme des effectifs. L'étendue, c'est la plus grande valeur moins la plus petite. Et « au moins 3 » compte le 3, quand « plus de 3 » ne le compte pas.",
+  "14-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

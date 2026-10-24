@@ -1,0 +1,16 @@
+{
+  "00-garde": "Choisir la bonne représentation. Camembert, barres, courbe ou nuage : lequel montre vraiment ce que je veux dire ?",
+  "01-situation": "Une chargée d'études du jeu vidéo prépare le bilan du marché français. En 2024, il pèse 5,7 milliards d'euros. Pour chaque message, elle doit choisir le bon graphique.",
+  "02-intentions": "La règle : d'abord l'intention, ensuite le dessin. Une répartition : un diagramme circulaire. Une comparaison : des barres. Une évolution dans le temps : une courbe. Un lien entre deux nombres : un nuage de points.",
+  "03-repartition": "Message un : comment se partage le marché ? Console : 45 %. Mobile : 28 %. PC : 27 %. Ce sont les parts d'un même tout, qui font 100 % : un diagramme circulaire.",
+  "04-comparer": "Message deux : classer les écosystèmes, du plus gros au plus petit. En milliards d'euros : console, 2,554 ; mobile, 1,604 ; PC, 1,519. Mobile et PC sont très proches : des barres les départagent mieux que des secteurs.",
+  "05-question": "Question ! Elle veut montrer le chiffre d'affaires du marché, année après année, depuis 2019. Quel graphique ? A : un diagramme circulaire. B : une courbe. C : un nuage de points. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B : une évolution se lit sur l'axe du temps, les points reliés dans l'ordre. A ne montre pas le temps, et C sert à relier deux caractères.",
+  "06-piege": "Le piège : une enquête où l'on peut cocher plusieurs réponses. Sur quel support jouez-vous ? Smartphone : 56 %. Console de salon : 45 %. Ordinateur : 38 %. Console portable : 23 %. Tablette : 22 %. Additionne : 184 % ! Un joueur utilise 2,2 supports en moyenne. Ces parts ne partagent pas un tout : pas de camembert, mais des barres.",
+  "07-question": "Question ! Elle veut savoir si les joueurs qui jouent plus longtemps ont un meilleur score. Quel graphique ? A : un nuage de points. B : un diagramme en barres. C : un diagramme circulaire. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A : chaque joueur a deux nombres, son temps de jeu et son score : il devient un point. B et C ne relient pas deux nombres.",
+  "08-defi": "À toi de jouer ! Quel graphique pour chaque message ? Un : la part de chaque genre de jeu dans les ventes, cinq genres qui font 100 %. Deux : les ventes de consoles, mois par mois, en 2024. Mets pause, et cherche !",
+  "08b-correction": "Un : des parts d'un tout, et cinq secteurs seulement : un diagramme circulaire. Deux : une évolution dans le temps : une courbe.",
+  "09-finale": "Ce que tu as appris. D'abord l'intention : une répartition, une comparaison, une évolution ou un lien. Le camembert, seulement si les parts font 100 %. Et deux nombres par individu : un nuage de points.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

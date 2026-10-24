@@ -1,0 +1,7 @@
+{
+  "00-accroche": "Le salaire minimum, en Europe, va de 551 à 2 638 euros par mois ! Et la France, où se place-t-elle ?",
+  "01-image": "Voici la boîte des 22 pays. La médiane : 1 007,5 euros. Et Q3 : 1 802 euros, pile le salaire minimum français.",
+  "02-question": "Question ! Quelle part des pays paie au moins autant que la France ? A : environ un quart. B : environ la moitié. C : environ trois quarts. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A : 1 802, c'est Q3. Environ un quart des pays sont au-dessus.",
+  "03-question": "Q1 vaut 826 euros. Quel est l'écart interquartile, Q3 moins Q1 ? Réponds en commentaire !"
+}

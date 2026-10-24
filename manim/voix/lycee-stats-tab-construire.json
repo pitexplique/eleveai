@@ -1,0 +1,17 @@
+{
+  "00-garde": "Dresser un tableau croisé. Une liste en vrac : comment la ranger ?",
+  "01-situation": "Un chroniqueur musical prépare une émission sur l'Eurovision. Il relève les 8 vainqueurs, de 2017 à 2025 : le concours n'a pas eu lieu en 2020. Pour chacun, deux caractères : la langue de la chanson, et le format, en solo ou en groupe.",
+  "02-structure": "D'abord, le tableau vide. En ligne, la langue : anglais, ou autre langue. En colonne, le format : solo, ou groupe. 2 lignes fois 2 colonnes : 4 cases d'effectifs. Avec la ligne et la colonne des totaux : 3 fois 3, égale 9 cases.",
+  "03-depouiller": "Puis je dépouille la liste, une ligne à la fois. 2017, Salvador Sobral : portugais, en solo. Une coche dans la case autre langue, solo. 2018, Netta : anglais, solo. 2019, Duncan Laurence : anglais, solo. 2021, Måneskin : italien, en groupe. 2022, Kalush Orchestra : ukrainien, en groupe. Puis Loreen, Nemo et J J : anglais, en solo.",
+  "04-question": "Question ! Combien de coches dans la case anglais, solo ? A : 5. B : 6. C : 8. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A : Netta, Duncan Laurence, Loreen, Nemo et J J. 6, c'est tous les solos, et 8, tous les vainqueurs.",
+  "05-compter": "Je compte les coches. Anglais et solo : 5. Anglais et groupe : personne, j'écris 0. Autre langue et solo : 1. Autre langue et groupe : 2.",
+  "06-marges": "Enfin, les marges. Anglais : 5 plus 0, égale 5. Autre langue : 1 plus 2, égale 3. Solo : 5 plus 1, égale 6. Groupe : 0 plus 2, égale 2. Et le total : 8, comme les 8 vainqueurs de la liste. Personne n'est oublié.",
+  "07-piege": "Le piège : la case vide. Anglais et groupe : personne ! On écrit 0, sinon le lecteur croit à un oubli. Et on contrôle toujours : le total général doit redonner le nombre de lignes de la liste.",
+  "08-question": "Question ! Loreen avait déjà gagné en 2012, en anglais et en solo. Si on ajoute 2012, que devient la case anglais, solo ? A : 6. B : 5. C : 9. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A : 5 plus 1, égale 6. B oublie la nouvelle coche, et 9, c'est le nouveau total général.",
+  "09-defi": "À toi de jouer ! On croise maintenant la langue avec trois formats : solo, duo, ou groupe. Un : combien de cases d'effectifs, sans les totaux ? Deux : et avec la ligne et la colonne des totaux ? Mets pause, et cherche !",
+  "09b-correction": "Un : 2 lignes fois 3 colonnes, égale 6 cases. Deux : 3 lignes fois 4 colonnes, égale 12 cases.",
+  "10-finale": "Ce que tu as appris. D'abord le tableau vide : une ligne, une colonne par modalité. Puis une coche par individu, dans la case de ses deux caractères. Enfin les marges, et le contrôle : le total redonne le nombre d'individus.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

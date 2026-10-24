@@ -1,0 +1,17 @@
+{
+  "00-garde": "Fréquence conditionnelle. Parmi qui ? C'est toute la question.",
+  "01-situation": "En France, le football compte plus de 2 millions de licences, le handball environ 600 000. Un analyste de données de la fédération de handball se pose une question : quel sport attire le plus les filles et les femmes ?",
+  "02-tableau": "Voici son tableau croisé, en milliers de licences. Au football : 249 femmes, sur 2 372 licences. Au handball : 240 femmes, sur 602.",
+  "03-piege": "Premier réflexe : le football a plus de licenciées, 249 contre 240. Il serait donc plus féminin ? Attention ! Les deux sports n'ont pas du tout la même taille. Il faut comparer des parts, pas des effectifs.",
+  "04-methode": "Parmi les licences de football, quelle part de femmes ? Le mot « parmi » donne la population de référence : la ligne football, 2 372. C'est le dénominateur. Le numérateur : la case qui croise football et femmes, 249. 249 divisé par 2 372, égale 10,5 %. C'est une fréquence conditionnelle.",
+  "05-question": "Question ! Parmi les licences de handball, quelle part de femmes ? A : 49,1 %. B : 39,9 %. C : 8,1 %. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B : 240 divisé par 602, la ligne handball. A a divisé par toutes les femmes : c'est l'autre sens. Et C a divisé par le total : c'est le mauvais dénominateur.",
+  "06-verdict": "Verdict : 10,5 % de femmes au football, 39,9 % au handball. Le handball est presque quatre fois plus féminin, avec pourtant moins de licenciées !",
+  "07-sens": "Attention au sens. Parmi les femmes, quelle part joue au football ? Cette fois, la population de référence, c'est la colonne femmes : 489. 249 divisé par 489, égale 50,9 %. Même case, autre dénominateur, autre phrase !",
+  "08-question": "Question ! Parmi les hommes, quelle part joue au handball ? Quel est le dénominateur ? A : 602. B : 2 485. C : 2 974. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B : parmi les hommes, donc la colonne hommes, 2 485. 362 divisé par 2 485, égale 14,6 %. A a pris la ligne handball : c'est l'autre sens.",
+  "09-defi": "À toi de jouer ! Un : parmi les licences de football, quelle part d'hommes ? Deux : parmi les femmes, quelle part joue au handball ? Mets pause, et cherche !",
+  "09b-correction": "Un : 2 123 divisé par 2 372, égale 89,5 %. Et 89,5 plus 10,5 font bien 100. Deux : 240 divisé par 489, égale 49,1 %.",
+  "10-finale": "Ce que tu as appris. Une fréquence conditionnelle se calcule dans une sous-population. Ce qui suit « parmi » donne le dénominateur. Et pour comparer deux groupes de tailles différentes, je compare des fréquences, jamais des effectifs.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

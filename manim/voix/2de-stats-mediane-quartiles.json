@@ -1,0 +1,19 @@
+{
+  "00-garde": "Médiane et quartiles. Combien dure une chanson typique d'un album ?",
+  "01-situation": "Théo est ingénieur du son. Il prépare la tournée d'un album : Multitude, de Stromae, 12 titres. Pour construire le spectacle, il lui faut une durée repère. Sa question : quelle durée partage les titres en deux moitiés ?",
+  "02-donnees": "Les 12 durées, en secondes. 2 minutes 5, c'est 125 secondes. Puis 191, 182, 195, 189, 162, 162, 201, 172, 184, 187, et 192.",
+  "03-ranger": "Première étape, obligatoire : ranger les valeurs dans l'ordre croissant. 125, 162, 162, 172, 182, 184, 187, 189, 191, 192, 195, 201.",
+  "04-mediane": "12 valeurs, c'est un nombre pair : la médiane est entre la 6e et la 7e valeur, 184 et 187. Médiane : 184 plus 187, divisé par 2, égale 185,5 secondes. 6 titres durent moins, 6 titres durent plus.",
+  "05-question": "Question ! On retire Bonne journée, 192 secondes : il reste 11 titres. Quelle est la nouvelle médiane ? A : 185,5. B : 184. C : 162. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B : avec 11 valeurs, la médiane est la 6e de la série rangée, 184 ; 185,5 oublie le retrait, et 162 est le milieu de la liste non rangée.",
+  "06-quartiles": "Les quartiles coupent l'effectif en quatre. Q1 : rang 12 divisé par 4, égale 3. C'est la 3e valeur, 162 secondes. Q3 : rang 3 fois 12 divisé par 4, égale 9. C'est la 9e valeur, 191 secondes. Au moins un quart des titres durent 162 secondes ou moins, au moins trois quarts, 191 secondes ou moins.",
+  "07-question": "Question ! Une série de 30 valeurs rangées. Quel est le rang de Q1 ? A : 7. B : 7,5. C : 8. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C : 30 divisé par 4, égale 7,5, et on prend l'entier juste au-dessus, 8 ; 7 arrondit dans le mauvais sens, et 7,5 n'est pas un rang.",
+  "08-boite": "Tout tient dans un diagramme en boîte. Les moustaches vont du minimum, 125, au maximum, 201. La boîte va de Q1, 162, à Q3, 191. Le trait à l'intérieur, c'est la médiane, 185,5.",
+  "09-question": "Question ! D'après la boîte, au moins 75 % des titres durent… A : 191 secondes ou moins. B : 191 secondes ou plus. C : 162 secondes ou moins. Mets pause, et choisis !",
+  "09b-reponse": "Réponse A : 191, c'est Q3, au moins 75 % des valeurs sont inférieures ou égales ; 191 ou plus, ce n'est qu'un quart au moins, et 162, c'est Q1.",
+  "10-defi": "À toi de jouer. Pour le concert, Théo allonge Riez : 201 secondes deviennent 240. Que deviennent la médiane, et la moyenne ? Mets pause, et cherche !",
+  "10b-correction": "Correction. Riez reste à la fin de la série rangée : la 6e et la 7e valeur ne bougent pas, la médiane reste 185,5 secondes. La somme passe de 2 142 à 2 181 secondes : la moyenne passe de 178,5 à 181,75 secondes. La médiane résiste aux valeurs extrêmes ; la moyenne, non.",
+  "11-finale": "Ce que tu as appris. D'abord, je range la série. La médiane la partage en deux moitiés. Q1 a pour rang n divisé par 4, Q3 a pour rang 3 n divisé par 4, arrondis à l'entier au-dessus. Et le diagramme en boîte résume tout : minimum, Q1, médiane, Q3, maximum.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

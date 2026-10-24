@@ -12,6 +12,11 @@ Les épisodes du cycle 4 (`manim/scripts/{5e,4e,3e}/stats_*.py`, sorties `manim/
 4. **Rien de rogné** : marge ≥ 3 % sur les 4 côtés (cartes avec leurs coins, textes, boutons) ; après CHAQUE rendu, `python scripts/verifier-bords-video.py <mp4>` → « 0 instants ». L'écran de fin « Entraîne-toi sur eleveai.fr » est parfait : n'y touche pas.
 5. Données RÉELLES vérifiées par WebSearch (source + date dans l'en-tête du script) ; un métier différent par épisode, filles et garçons ; footballeurs ou autres idoles possibles (chiffres vérifiés).
 
+## Économie (Frédéric, 24/10 : 24 % du quota hebdo en une journée)
+- Brouillons : planches de 8 images, en basse définition. La HD une seule fois, à la fin.
+- Rendu final : planche de 12 images + images rapprochées sur les écrans chargés (question-pause, correction, « Ce que tu as appris »). Cette vérification-là ne baisse jamais.
+- Rapport court : la voix reste dans son JSON (ne pas la recopier) ; donner fichiers, durées, décor/métier/source, centres, ceintures, `questions` (t mesuré) et soucis restants.
+
 ## Passe finale (chef d'orchestre)
 Après le manifeste : `python scripts/fiches-youtube.py -stats-` → `fiche-youtube.md` dans CHAQUE dossier d'épisode (titre, description, chapitres, tags, chemins) : Frédéric ne doit plus jamais redemander ces infos.
 

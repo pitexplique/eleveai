@@ -1,0 +1,16 @@
+{
+  "00-garde": "Du graphique aux données. Derrière chaque graphique, il y a un tableau : sais-tu le retrouver ?",
+  "01-situation": "Coupe du monde 2022 : l'équipe de France marque 16 buts en sept matchs. Une analyste de données du football prépare son rapport. Toute la journée, elle passe du graphique au tableau, et du tableau au graphique.",
+  "02-tableau": "Voici les buts, dans un diagramme en bâtons. L'axe avance de 2 en 2. Mbappé : 8 buts. Giroud : 4 buts. Les autres joueurs : 4 buts. Je recopie ces valeurs dans un tableau, et j'ajoute le total : 8 plus 4 plus 4, égale 16.",
+  "03-parts": "Pour un diagramme circulaire, je calcule la part de chacun : l'effectif divisé par le total. Mbappé : 8 divisé par 16, égale 0,5, soit 50 %. Giroud : 4 divisé par 16, égale 0,25, soit 25 %. Et les autres joueurs : 25 % aussi.",
+  "04-angles": "Puis l'angle : la part, fois 360 degrés. Mbappé : 0,5 fois 360, égale 180 degrés, la moitié du disque. Giroud, et les autres joueurs : 0,25 fois 360, égale 90 degrés chacun, un quart du disque.",
+  "05-question": "Question ! Dans le camembert, que vaut le secteur de Giroud ? A : 4 %. B : 25 %. C : 90 %. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B : 4 divisé par 16, égale 25 %. A prend l'effectif pour un pourcentage, et C confond 90 degrés avec 90 %.",
+  "06-piege": "Dans l'autre sens, attention au piège ! Pour tracer la barre de Mbappé, je monte de 8 graduations ? Non : une graduation vaut 2 buts. 8 divisé par 2, égale 4 graduations. La hauteur, c'est la valeur divisée par ce que vaut une graduation.",
+  "07-question": "Question ! Si une graduation valait 4 buts, de combien de graduations monterait la barre de Mbappé ? A : 8. B : 4. C : 2. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C : 8 divisé par 4, égale 2 graduations. A oublie de diviser, et B garde l'ancienne graduation de 2.",
+  "08-defi": "À toi de jouer ! En 2018, la France a marqué 14 buts, dont 4 pour Mbappé. Un : quelle part pour Mbappé, en pourcentage ? Deux : quel angle pour son secteur ? Mets pause, et cherche !",
+  "08b-correction": "Un : 4 divisé par 14, égale environ 0,286, soit environ 28,6 %. Deux : 4 divisé par 14, fois 360, égale environ 103 degrés.",
+  "09-finale": "Ce que tu as appris. Du graphique au tableau : je relève chaque valeur, puis le total. Du tableau au graphique : la part, c'est l'effectif divisé par le total, et l'angle, c'est la part fois 360 degrés. Et une barre monte de sa valeur divisée par une graduation.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

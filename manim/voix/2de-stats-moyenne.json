@@ -1,0 +1,18 @@
+{
+  "00-garde": "Calculer une moyenne. Combien de temps dure une sortie dans l'espace ?",
+  "01-situation": "Malik est ingénieur au centre spatial de Toulouse. Il prépare les sorties des astronautes hors de la station spatiale : dans le vide, chaque minute se planifie. Son modèle : Thomas Pesquet. 6 sorties dans l'espace, 39 heures et 54 minutes en tout. Sa question : combien dure une sortie, en moyenne ?",
+  "02-donnees": "Les 6 sorties, en minutes. 5 heures 58, c'est 5 fois 60, plus 58 : 358 minutes. Puis 394, 435, 388, 405, et 414 minutes.",
+  "03-methode": "La moyenne, c'est la somme des valeurs divisée par le nombre de valeurs. Somme : 358 plus 394 plus 435 plus 388 plus 405 plus 414, égale 2 394 minutes. Divisé par 6 : 399 minutes, soit 6 heures et 39 minutes par sortie. Sur la ligne de la moyenne, les grandes barres compensent les petites.",
+  "04-question": "Question ! Ses deux sorties de 2017 ont duré 358 et 394 minutes. Quelle est leur moyenne ? A : 752. B : 376. C : 36. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B : 752 divisé par 2, égale 376 ; 752, c'est la somme qu'on a oublié de diviser, et 36, l'écart entre les deux.",
+  "05-cle": "Retourne la formule : la somme, c'est la moyenne fois le nombre de valeurs. 399 fois 6, égale 2 394 minutes. On retrouve bien ses 39 heures et 54 minutes dans l'espace !",
+  "06-question": "Question ! Une astronaute a fait 4 sorties, de 390 minutes en moyenne. Combien de minutes en tout ? A : 97,5. B : 394. C : 1 560. Mets pause, et choisis !",
+  "06b-reponse": "Réponse C : 390 fois 4, égale 1 560 ; 97,5, c'est 390 divisé par 4, et 394, c'est 390 plus 4.",
+  "07-piege": "Le piège : ajouter une valeur. Imagine une septième sortie de 8 heures, 480 minutes. Faux : 399 plus 480, divisé par 2, égale 439,5. Juste : la nouvelle somme, 2 394 plus 480, égale 2 874, divisée par 7 : environ 410,6 minutes. La nouvelle sortie ne compte que pour une valeur sur 7.",
+  "08-question": "Question ! On retire la sortie la plus courte, 358 minutes. Quelle est la moyenne des 5 autres ? A : 399. B : 407,2. C : 339,3. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B : 2 394 moins 358, égale 2 036, divisé par 5, égale 407,2 ; 399 oublie le retrait, et 339,3 divise encore par 6.",
+  "09-defi": "À toi de jouer. Pour atteindre une moyenne de 7 heures, soit 420 minutes, sur 7 sorties, combien de temps devrait durer une septième sortie ? Mets pause, et cherche !",
+  "10-correction": "Correction. La somme qu'il faut : 420 fois 7, égale 2 940 minutes. Il en a déjà 2 394. Il manque 2 940 moins 2 394, égale 546 minutes : 9 heures et 6 minutes. C'est exactement le record du monde, établi en décembre 2024 par deux astronautes chinois. Un vrai défi !",
+  "11-finale": "Ce que tu as appris. La moyenne, c'est la somme divisée par le nombre de valeurs. La somme, c'est la moyenne fois le nombre de valeurs. Pour ajouter ou retirer une valeur, je repasse par la somme. Et jamais la moyenne entre l'ancienne moyenne et la nouvelle valeur !",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

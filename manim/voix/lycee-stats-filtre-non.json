@@ -1,0 +1,17 @@
+{
+  "00-garde": "Filtrer avec NON. Garder tout ce qui ne vérifie pas un critère.",
+  "01-situation": "Une ingénieure d'une agence spatiale prépare de futures missions vers les 8 planètes du système solaire. Elle filtre ses données pour choisir ses cibles.",
+  "02-fichier": "Son fichier : une ligne par planète, de Mercure à Neptune. Pour chacune : son diamètre en kilomètres, son type, rocheuse ou gazeuse, et si elle a au moins une lune.",
+  "03-non": "Le filtre NON, Type égale Gazeuse, garde toutes les planètes qui ne sont pas gazeuses : Mercure, Vénus, la Terre et Mars. 4 planètes. NON, c'est le contraire : le complémentaire.",
+  "04-total": "On peut aussi compter par le total : 8 planètes, moins les 4 gazeuses, égale 4. Et sur un nombre, le contraire de supérieur ou égal, c'est strictement inférieur.",
+  "05-question": "Question ! Avec le filtre NON, Diamètre supérieur ou égal à 10 000, combien de planètes restent ? A : 6. B : 2. C : 8. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B : diamètre inférieur à 10 000, Mercure et Mars. 6 oublie le NON, et 8, c'est tout le fichier.",
+  "06-croise": "Le tableau croisé résume le fichier : le type, et les lunes. NON, Lune égale Oui, c'est la colonne Non : 2 planètes, Mercure et Vénus. Ou bien le total moins la colonne Oui : 8 moins 6, égale 2.",
+  "07-piege": "Le piège : nier un ET. NON, Gazeuse ET Lune égale Oui, écarte seulement la case commune, les 4 géantes : 8 moins 4, égale 4. Ce n'est pas ni l'un ni l'autre : ça, c'est la case opposée, Mercure et Vénus, 2 planètes.",
+  "08-question": "Question ! Combien de planètes vérifient NON, Rocheuse ET Lune égale Non ? A : 2. B : 6. C : 4. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B : on retire la seule case Rocheuse et Non, Mercure et Vénus. 8 moins 2, égale 6. 2, c'est la case elle-même, et 4, ni l'un ni l'autre.",
+  "09-defi": "À toi de jouer ! Un : combien de planètes vérifient NON, Diamètre inférieur à 50 000 ? Deux : et NON, Type égale Rocheuse ? Mets pause, et cherche !",
+  "09b-correction": "Correction. Un : le contraire d'inférieur à 50 000, c'est supérieur ou égal à 50 000 : Jupiter, Saturne et Uranus. 3 planètes ; Neptune, 49 528 kilomètres, reste juste en dessous. Deux : NON Rocheuse, c'est Gazeuse : 4 planètes, soit 8 moins 4.",
+  "10-finale": "Ce que tu as appris. NON garde tout ce qui ne vérifie pas le critère : le total, moins ceux qui le vérifient. Le contraire de supérieur ou égal, c'est strictement inférieur. Et NON d'un ET écarte une seule case, pas une ligne entière.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

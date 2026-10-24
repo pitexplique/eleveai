@@ -1,0 +1,16 @@
+{
+  "00-garde": "L'écart type. Même moyenne, même climat ?",
+  "01-situation": "Lucas est conseiller en voyages. Une cliente cherche une ville où il ne fait jamais trop froid, ni trop chaud. Il hésite entre Brest et Strasbourg. D'après Météo-France, la température moyenne sur l'année : 11,7 degrés à Brest, 11,4 degrés à Strasbourg. Presque pareil ! Alors, même climat ?",
+  "02-courbes": "Regarde les 12 mois. À Brest, de 7,1 degrés en janvier à 17,1 en août. À Strasbourg, de 2,5 en janvier à 20,6 en juillet. Presque la même moyenne, mais Strasbourg s'éloigne bien plus de la sienne.",
+  "03-methode": "L'écart type, noté sigma, mesure de combien les valeurs s'écartent de la moyenne. Pour chaque mois, on prend l'écart à la moyenne. On élève chaque écart au carré. On fait la moyenne de ces carrés : c'est la variance. Puis on prend la racine carrée : c'est l'écart type.",
+  "04-calculatrice": "La calculatrice fait ce calcul : sigma vaut environ 3,7 degrés à Brest, et 6,5 degrés à Strasbourg.",
+  "05-question": "Question ! Quelle ville a la température la plus régulière ? A : Strasbourg. B : Brest. C : Les deux, même moyenne. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B : Brest a le plus petit écart type, 3,7 ; même moyenne ne veut pas dire même dispersion.",
+  "06-intervalle": "Avec la moyenne et l'écart type, on forme un intervalle : de x barre moins sigma, à x barre plus sigma. À Brest : 11,7 moins 3,7, égale 8 ; 11,7 plus 3,7, égale 15,4. C'est la zone des températures proches de la moyenne.",
+  "07-question": "Question ! À Strasbourg, x barre vaut 11,4 et sigma vaut 6,5. Que vaut x barre plus sigma ? A : 17,9. B : 4,9. C : 24,4. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A : 11,4 plus 6,5, égale 17,9 ; 4,9, c'est x barre moins sigma, et 24,4 ajoute deux fois sigma.",
+  "08-defi": "À toi de jouer. Combien de mois de Strasbourg ont une température entre 4,9 et 17,9 degrés ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Mars, 7,4. Avril, 11,3. Mai, 15,5. Septembre, 16,1. Octobre, 11,5. Novembre, 6,3. 6 mois sur 12 : seulement la moitié de l'année. Lucas conseille Brest, la ville la plus régulière.",
+  "09-finale": "Ce que tu as appris. L'écart type mesure la dispersion autour de la moyenne. Plus il est petit, plus la série est régulière. Deux séries de même moyenne peuvent avoir des écarts types très différents. Et l'intervalle de x barre moins sigma à x barre plus sigma entoure la moyenne.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

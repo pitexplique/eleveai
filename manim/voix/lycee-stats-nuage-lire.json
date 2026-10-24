@@ -1,0 +1,17 @@
+{
+  "00-garde": "Lire un nuage de points. Un point, c'est deux nombres : lesquels, et dans quel ordre ?",
+  "01-situation": "Dans un club de football, une analyste de la performance transforme chaque match en données. Son sujet du jour : Kylian Mbappé, et ses 7 saisons de championnat au Paris Saint-Germain, de 2017 à 2024.",
+  "02-repere": "Chaque saison devient un point. En abscisse, sur l'axe horizontal : les matchs joués. En ordonnée, sur l'axe vertical : les buts marqués. Attention : les axes commencent à 15 et à 10, pas à 0. Et un carreau vaut 1.",
+  "03-lire": "Lisons le point de la saison 2021-2022. Je descends jusqu'à l'axe horizontal : 35 matchs. Puis je vais vers l'axe vertical : 28 buts. Ses coordonnées : 35 point-virgule 28. L'abscisse d'abord, l'ordonnée ensuite.",
+  "04-abscisse": "On peut aussi partir d'une valeur. Pour 20 matchs, je monte depuis l'axe horizontal jusqu'au point, puis je lis à gauche : 18 buts. C'est la saison 2019-2020, arrêtée en mars à cause du Covid.",
+  "05-question": "Question ! Quelle est l'ordonnée du point d'abscisse 27 ? A : 13. B : 27. C : 33. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A : 13 buts. 27, c'est l'abscisse elle-même, et 33 est l'ordonnée d'un autre point.",
+  "06-envers": "Et dans l'autre sens ? Pour 33 buts, je pars de l'axe vertical, je vais jusqu'au point, puis je descends : 29 matchs. C'est son record, en 2018-2019. Mais regarde : à 29 matchs, il y a deux points ! Deux saisons, l'une à 33 buts, l'autre à 27. Une abscisse peut cacher plusieurs points.",
+  "07-piege": "Le piège : inverser les deux nombres. 35 point-virgule 28, ce n'est pas 28 point-virgule 35 ! Ce point-là dirait 35 buts en 28 matchs : il n'existe pas. L'abscisse s'écrit toujours en premier.",
+  "08-question": "Question ! Quelles sont les coordonnées du point de la saison 2022-2023 ? A : 29 point-virgule 34. B : 34 point-virgule 29. C : 34 point-virgule 27. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B : 34 matchs, puis 29 buts. La réponse A inverse les deux nombres, et la C prend l'ordonnée d'un point voisin.",
+  "09-defi": "À toi de jouer ! Un : combien de saisons à plus de 25 buts ? Deux : la saison où il a marqué le moins, combien de matchs a-t-il joués ? Mets pause, et cherche !",
+  "09b-correction": "Correction. Un : je trace la ligne des 25 buts. 5 points sont au-dessus : 5 saisons. Deux : le point le plus bas est à 13 buts. Je descends : 27 matchs. C'était sa première saison au club.",
+  "10-finale": "Ce que tu as appris. Un point, ce sont deux nombres : l'abscisse, sur l'axe horizontal, puis l'ordonnée, sur l'axe vertical. Je peux partir d'un axe ou de l'autre. Et je regarde toujours où commencent les axes, et ce que vaut un carreau.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

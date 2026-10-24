@@ -1,0 +1,17 @@
+{
+  "00-garde": "Compléter un tableau avec des fréquences. Un pourcentage peut-il redonner un effectif ?",
+  "01-situation": "En 2024, 1 755 000 voitures neuves ont été immatriculées en France. Une responsable des ventes, dans une concession automobile, veut savoir combien étaient électriques. Mais elle n'a que des pourcentages.",
+  "02-tableau": "Voici son tableau, en milliers de voitures. Les totaux sont connus : 1 817 en 2023, 1 755 en 2024. Les cases sont vides. Mais elle sait que 16,8 % des voitures de 2024 sont électriques.",
+  "03-methode": "Parmi les voitures de 2024 : la population de référence, c'est la colonne 2024, 1 755. J'applique le pourcentage : 1 755 fois 0,168, égale environ 295. Effectif égale fréquence fois effectif de référence. Environ 295 000 voitures électriques.",
+  "04-difference": "La case du dessous se complète par une soustraction : 1 755 moins 295, égale 1 460 voitures non électriques.",
+  "05-question": "Question ! En 2023, 16,7 % des 1 817 milliers de voitures étaient électriques. Combien ? A : environ 303. B : environ 10 880. C : environ 30 344. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A : 1 817 fois 0,167, égale environ 303. B a divisé au lieu de multiplier, et C a oublié de diviser par 100.",
+  "06-statisticien": "Le conseil du statisticien : le ministère a compté en vrai 303 900 et 295 600 voitures électriques. Notre calcul donne un peu moins, car le pourcentage était arrondi au dixième. Le résultat est un effectif approché.",
+  "07-inverse": "Et dans l'autre sens ? Si 303,9 milliers, c'est 16,7 %, combien de voitures en tout ? Cette fois, je divise : 303,9 divisé par 0,167, égale environ 1 820. On retrouve presque les 1 817 milliers.",
+  "08-question": "Question ! En 2024, 295,6 milliers de voitures électriques, soit 16,8 % des ventes. Combien de voitures neuves en tout ? A : environ 1 760. B : environ 50. C : environ 312. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A : 295,6 divisé par 0,168, égale environ 1 760. B a multiplié : un total ne peut pas être plus petit que sa partie ! Et C a ajouté le pourcentage.",
+  "09-defi": "À toi de jouer ! La colonne 2023 est complète : 1 817 moins 303, égale 1 514. Complète la colonne Total. Un : le total des voitures électriques. Deux : le total des autres voitures. Mets pause, et cherche !",
+  "09b-correction": "Un : 303 plus 295, égale 598. Deux : 1 514 plus 1 460, égale 2 974. Contrôle : 598 plus 2 974, égale 3 572, le total général.",
+  "10-finale": "Ce que tu as appris. Effectif égale fréquence fois effectif de référence. Pour retrouver la population, je divise l'effectif par la fréquence. Et un pourcentage arrondi donne un effectif approché.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

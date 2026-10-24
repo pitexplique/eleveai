@@ -1,0 +1,16 @@
+{
+  "00-garde": "Interpréter une fréquence dans la presse. « 92 % des… » : 92 % de qui ?",
+  "01-situation": "En 2023, 706 personnes sont mortes à deux-roues motorisé, moto ou scooter, sur les routes de France métropolitaine. Un journaliste de données relit un titre : « 92 % des tués à deux-roues motorisé sont des hommes ». Que dit exactement ce pourcentage ? Bien lire ces chiffres, c'est aussi mieux protéger.",
+  "02-tableau": "Voici son tableau croisé, avec les chiffres de la Sécurité routière. En ligne, le véhicule : deux-roues motorisé ou voiture. En colonne : hommes ou femmes. À deux-roues : 650 hommes et 56 femmes.",
+  "03-methode": "La règle : dans « 92 % des A sont des B », les A forment la population de référence. Ici, les A, ce sont les tués à deux-roues : la ligne, 706. C'est le dénominateur. 650 divisé par 706, égale 92,1 %. Le titre est juste.",
+  "04-question": "Question ! Un autre titre : « 71 % des automobilistes tués sont des hommes ». Quelle est la population de référence ? A : les hommes tués. B : les automobilistes tués. C : tous les tués. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B : ce qui suit « des » : les automobilistes tués, 1 512. 1 074 divisé par 1 512, égale 71 %. A inverse les rôles, et C prend le total : ce serait une fréquence marginale.",
+  "05-piege": "Le piège : retourner la phrase. « 92 % des hommes tués étaient à deux-roues » ? Faux ! Parmi les hommes tués, c'est la colonne : 1 724. 650 divisé par 1 724, égale 37,7 %. Même case, autre population, autre nombre.",
+  "06-question": "Question ! Quelle phrase est exacte ? A : 37,7 % des tués à deux-roues sont des hommes. B : 37,7 % des hommes tués étaient à deux-roues. C : 37,7 % des tués sont des hommes. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B : 37,7 %, c'est 650 sur 1 724, les hommes tués. A échange les deux populations, et C transforme une fréquence conditionnelle en fréquence marginale.",
+  "07-marginale": "Et la phrase « 78 % des tués sont des hommes » ? Cette fois, la référence, ce sont tous les tués : c'est une fréquence marginale. Dans notre tableau : 1 724 divisé par 2 218, égale 77,7 %, près de 78 %.",
+  "08-defi": "À toi de jouer ! Un : calcule 56 divisé par 494, et écris la phrase juste. Deux : parmi les tués à deux-roues, quelle part de femmes ? Mets pause, et cherche !",
+  "08b-correction": "Un : 56 divisé par 494, égale 11,3 % : 11,3 % des femmes tuées étaient à deux-roues motorisé. Deux : 56 divisé par 706, égale 7,9 % de femmes parmi les tués à deux-roues.",
+  "09-finale": "Ce que tu as appris. Dans « p % des A sont des B », les A sont la population de référence : c'est le dénominateur. Retourner la phrase change le nombre. Et une part de tous les individus, c'est une fréquence marginale.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

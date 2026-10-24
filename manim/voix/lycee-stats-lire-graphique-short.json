@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Ce graphique fait peur : la barre de 2023 est trois fois plus haute que celle de 1980 ! Le C O 2 de l'air a-t-il été multiplié par 3 ?",
+  "01-image": "Regarde l'axe : il commence à 300, pas à 0 ! 1980 : 340. 2023 : 420.",
+  "02-question": "Question ! Le C O 2 a… A : été multiplié par 3. B : augmenté de 80. C : augmenté de 420. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B : 420 moins 340, égale 80. Les hauteurs trompent quand l'axe ne part pas de 0.",
+  "03-zero": "Redessinée depuis 0, la barre de 2023 n'est pas trois fois plus haute. La hausse est réelle : lis-la sur l'axe !",
+  "04-question": "En 2010, la barre était à 390. De combien le C O 2 a-t-il augmenté entre 2010 et 2023 ? Réponds en commentaire !"
+}

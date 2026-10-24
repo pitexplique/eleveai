@@ -1,0 +1,17 @@
+{
+  "00-garde": "Lire un diagramme en boîte. Cinq nombres, et toute une série tient dans un seul dessin.",
+  "01-situation": "En janvier 2025, 22 pays de l'Union européenne ont un salaire minimum. Le plus bas : 551 euros par mois, en Bulgarie. Le plus haut : 2 638 euros, au Luxembourg. Un économiste résume ces 22 salaires par un diagramme en boîte.",
+  "02-cinq": "Le diagramme en boîte se lit sur cinq nombres. Le bout gauche : le minimum. Le bord gauche de la boîte : le premier quartile, Q1. Le trait rouge : la médiane. Le bord droit : le troisième quartile, Q3. Le bout droit : le maximum.",
+  "03-lire": "Ici : le minimum, 551 euros. Q1 : 826. La médiane : 1 007,5. Q3 : 1 802, c'est le salaire minimum de la France ! Le maximum : 2 638.",
+  "04-sens": "Ce que disent ces nombres : un quart des pays environ ont un salaire minimum inférieur ou égal à 826 euros. La moitié, à 1 007,5 euros. Les trois quarts, à 1 802 euros. La boîte contient la moitié centrale des pays.",
+  "05-question": "Question ! Environ quelle part des pays ont un salaire minimum d'au moins 1 802 euros ? A : 25 %. B : 75 %. C : 50 %. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A : 1 802, c'est Q3 : environ un quart des pays sont au-dessus. B donne la part en dessous, et C confond Q3 avec la médiane.",
+  "06-ecarts": "Deux écarts se calculent. L'étendue : le maximum moins le minimum, 2 638 moins 551, égale 2 087 euros. L'écart interquartile : Q3 moins Q1, 1 802 moins 826, égale 976 euros. C'est la largeur de la boîte.",
+  "07-piege": "Le piège : croire qu'une partie plus longue contient plus de pays. La moustache de droite est très longue, celle de gauche est courte. Pourtant, chacune contient environ un quart des pays ! Une partie longue, ce sont des valeurs étalées, pas plus nombreuses.",
+  "08-question": "Question ! Où y a-t-il le plus de pays : entre Q1 et la médiane, ou entre Q3 et le maximum ? A : entre Q3 et le maximum. B : entre Q1 et la médiane. C : à peu près autant. Mets pause, et choisis !",
+  "08b-reponse": "Réponse C : chaque partie contient environ un quart des pays. A croit que long veut dire nombreux, et B croit l'inverse.",
+  "09-defi": "À toi de jouer ! Un : environ quelle part des pays ont un salaire minimum entre 826 et 1 802 euros ? Deux : de combien d'euros le maximum dépasse-t-il la médiane ? Mets pause, et cherche !",
+  "09b-correction": "Un : de Q1 à Q3, c'est la boîte : environ 50 % des pays. Deux : 2 638 moins 1 007,5, égale 1 630,5 euros.",
+  "10-finale": "Ce que tu as appris. La boîte se lit sur cinq nombres : minimum, Q1, médiane, Q3, maximum. Chaque partie contient environ un quart des valeurs. Et l'étendue et l'écart interquartile sont des différences.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

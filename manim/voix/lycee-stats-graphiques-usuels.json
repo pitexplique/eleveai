@@ -1,0 +1,17 @@
+{
+  "00-garde": "Les diagrammes usuels. Un camembert, des barres : que disent-ils vraiment ?",
+  "01-situation": "En 2024, les cinémas français ont vendu 181,3 millions d'entrées. Un programmateur de cinéma choisit les films de ses salles : il doit savoir ce que le public va voir. Voici la répartition des entrées, dans un diagramme circulaire.",
+  "02-camembert": "Chaque secteur est une part du même total. Les films français : 44,4 %. Les films américains : 36,7 %. Les autres films : 18,9 %. Et le disque entier fait 100 %.",
+  "03-angle": "Le disque entier, c'est 360 degrés pour 100 %. Donc 1 %, c'est 3,6 degrés. Le secteur des films français mesure 44,4 fois 3,6 : environ 160 degrés.",
+  "04-question": "Question ! Quelle part font, ensemble, les films français et les autres films ? A : 63,3 %. B : 25,5 %. C : 36,7 %. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A : 44,4 plus 18,9, égale 63,3 %. B soustrait au lieu d'additionner, et C donne la part qui reste, celle des films américains.",
+  "05-effectif": "Une part ne dit rien sans le total. Les films français, c'est 44,4 % de 181,3 millions : 181,3 fois 0,444, égale environ 80,5 millions d'entrées.",
+  "06-barres": "Pour comparer deux années, on passe aux barres. En 2023, les films américains menaient : 41,2 % contre 40,1 %. En 2024, les films français passent devant : 44,4 % contre 36,7 %.",
+  "07-piege": "Le piège : dire que la part des films français a augmenté de 4,3 %. Faux ! 44,4 moins 40,1, égale 4,3 points. Une différence de deux pourcentages se compte en points. En pourcentage, la hausse est de 4,3 divisé par 40,1 : environ 10,7 %.",
+  "08-question": "Question ! De 2023 à 2024, la part des films américains… A : a baissé de 4,5 points. B : a baissé de 4,5 %. C : a augmenté de 4,5 points. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A : 41,2 moins 36,7, égale 4,5 points. B confond points et pourcentage, et C se trompe de sens : la part a baissé.",
+  "09-defi": "À toi de jouer ! Un : en 2024, combien d'entrées pour les films américains ? Deux : quel angle pour le secteur des autres films ? Mets pause, et cherche !",
+  "09b-correction": "Un : 181,3 fois 0,367, égale environ 66,5 millions d'entrées. Deux : 18,9 fois 3,6, égale environ 68 degrés.",
+  "10-finale": "Ce que tu as appris. Les parts d'un camembert viennent du même total : elles s'additionnent, et 1 % fait 3,6 degrés. Pour un effectif, j'applique la part au total. Et l'écart de deux pourcentages se compte en points.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

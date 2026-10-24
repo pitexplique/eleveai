@@ -1,0 +1,7 @@
+{
+  "00-accroche": "Les 12 titres de Multitude, l'album de Stromae. Quelle durée coupe l'album en deux moitiés ? Devine !",
+  "01-image": "On range les titres, du plus court au plus long : de 125 secondes à 201. 6 titres d'un côté, 6 de l'autre. Au milieu, entre 184 et 187 : la médiane, 185,5 secondes.",
+  "02-question": "Question ! On ajoute un bonus de 10 minutes, 600 secondes. La médiane… A : explose. B : bouge peu. C : double. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B : avec 13 titres, la médiane devient le 7e, 187 secondes ; une valeur extrême ne la tire presque pas.",
+  "03-commentaire": "À toi : dans cet album, quel est le troisième quartile, Q3, en secondes ? Réponds en commentaire !"
+}

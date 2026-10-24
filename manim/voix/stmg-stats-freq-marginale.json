@@ -1,0 +1,16 @@
+{
+  "00-garde": "Fréquence marginale. Sur toutes les nuits passées à l'hôtel ou au camping, quelle part vient de l'étranger ?",
+  "01-situation": "En 2023, les hôtels et les campings d'Auvergne-Rhône-Alpes ont compté 38,2 millions de nuitées. Une nuitée, c'est une personne qui dort une nuit sur place. Une chargée d'études de l'observatoire du tourisme veut savoir quelle part de ces nuitées vient de touristes qui vivent à l'étranger.",
+  "02-tableau": "Voici son tableau croisé, en millions de nuitées. En ligne, l'hébergement : hôtel ou camping. En colonne, où vit le client : en France, ou à l'étranger. Les marges sont les totaux : 10,9 millions de nuitées de clients venus de l'étranger, sur 38,2 millions en tout.",
+  "03-methode": "Une fréquence marginale compare une marge au total général. Le numérateur : la marge de l'étranger, 10,9. Le dénominateur : l'effectif total, 38,2. 10,9 divisé par 38,2, égale environ 0,285, soit 28,5 %. Plus d'une nuitée sur quatre vient de l'étranger.",
+  "04-question": "Question ! Sur toutes les nuitées, quelle part a lieu en camping ? A : 35,9 %. B : 24,1 %. C : 41,3 %. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A : la marge des campings, 13,7, divisée par le total, 38,2. B n'a pris qu'une case, les clients de France en camping. Et C a divisé par les nuitées de l'étranger : c'est une autre question.",
+  "05-complement": "Et les clients qui vivent en France ? Pas besoin de tout recalculer : les fréquences marginales d'un même caractère font 100 %. 100 moins 28,5, égale 71,5 %. Je vérifie : 27,3 divisé par 38,2, égale bien 71,5 %.",
+  "06-piege": "Le piège : le mauvais dénominateur. 10,9 divisé par 24,5, le total des hôtels ? Non ! On obtient 44,5 %, un nombre qui ne veut rien dire ici. Pour une fréquence marginale, je divise toujours par le total général, en bas à droite du tableau.",
+  "07-question": "Question ! Un stagiaire calcule 6,4 divisé par 10,9. Qu'a-t-il calculé ? A : la part des hôtels, sur toutes les nuitées. B : la part des hôtels, parmi les nuitées de l'étranger. C : la part de l'étranger, sur toutes les nuitées. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B : il a divisé par 10,9, les nuitées de l'étranger seulement. C'est une fréquence conditionnelle, la notion du prochain épisode. Pour A comme pour C, il fallait diviser par 38,2.",
+  "08-defi": "À toi de jouer ! Un : quelle est la fréquence marginale des nuitées d'hôtel ? Deux : vérifie ta réponse avec celle des campings. Mets pause, et cherche !",
+  "08b-correction": "Un : 24,5 divisé par 38,2, égale environ 64,1 %. Deux : 64,1 plus 35,9, égale 100 %. C'est juste !",
+  "09-finale": "Ce que tu as appris. Une fréquence marginale, c'est une marge divisée par le total général. Le dénominateur est toujours l'effectif total, jamais le total d'une ligne. Et les fréquences marginales d'un même caractère font 100 %.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

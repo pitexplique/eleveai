@@ -1,0 +1,18 @@
+{
+  "00-garde": "Construire un nuage de points. Du tableau au dessin : où va chaque point ?",
+  "01-situation": "Une ingénieure des transports étudie le métro de Paris. Sa question : une ligne plus longue a-t-elle plus de stations ? Pour le voir d'un coup d'œil, elle construit un nuage de points.",
+  "02-tableau": "Voici 8 lignes. Pour chacune : sa longueur, au kilomètre près, et son nombre de stations. La ligne 3 bis : 1 kilomètre, 4 stations. La ligne 13 : 24 kilomètres, 32 stations. Une colonne du tableau, c'est une ligne de métro, donc un point.",
+  "03-axes": "On étudie les stations en fonction de la longueur. La longueur va en abscisse, de 0 à 25 kilomètres. Les stations vont en ordonnée, de 0 à 40. Un carreau vaut 1.",
+  "04-placer": "Plaçons la ligne 4 : 14 kilomètres, 29 stations. J'avance de 14 sur l'axe horizontal, je monte jusqu'à 29, et je place le point : 14 point-virgule 29. Puis la ligne 1 : 17 point-virgule 25.",
+  "05-tous": "Et ainsi de suite, colonne par colonne : chaque ligne de métro devient un point. 8 colonnes, 8 points.",
+  "06-question": "Question ! Où placer la ligne 9 : 20 kilomètres, 37 stations ? A : 37 point-virgule 20. B : 20 point-virgule 37. C : 20 point-virgule 27. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B : la longueur d'abord, en abscisse. A inverse les deux nombres, et C s'arrête 10 stations trop bas.",
+  "07-piege": "Le piège : inverser. Si je place la ligne 4 en 29 point-virgule 14, le point sort même du graphique : l'axe horizontal s'arrête à 25 ! La colonne se lit de haut en bas : l'abscisse, puis l'ordonnée.",
+  "08-controle": "Un stagiaire a tracé le même nuage, mais un point est faux. Je vérifie colonne par colonne. La ligne 13 doit être en 24 point-virgule 32 ; il l'a placée en 24 point-virgule 23. C'est ce point-là qui est mal placé.",
+  "09-question": "Question ! Quelle ligne représente le point 17 point-virgule 25 ? A : la ligne 12. B : la ligne 1. C : la ligne 4. Mets pause, et choisis !",
+  "09b-reponse": "Réponse B : la ligne 1. La ligne 12 a aussi 17 kilomètres, mais 31 stations : il faut les deux nombres à la fois.",
+  "10-defi": "À toi de jouer ! Place deux nouvelles lignes. La ligne 5 : 15 kilomètres, 22 stations. La ligne 8 : 23 kilomètres, 38 stations. Mets pause, et place-les !",
+  "10b-correction": "Correction. La ligne 5 : j'avance de 15, je monte à 22 : le point 15 point-virgule 22. La ligne 8 : 23 point-virgule 38, tout en haut à droite. Et regarde le nuage : en général, plus une ligne est longue, plus elle a de stations.",
+  "11-finale": "Ce que tu as appris. Une colonne du tableau donne un point. Le caractère en fonction duquel on étudie l'autre va en abscisse. Je place l'abscisse d'abord, puis l'ordonnée. Et je vérifie chaque point avec sa colonne.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

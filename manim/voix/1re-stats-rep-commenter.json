@@ -1,0 +1,17 @@
+{
+  "00-garde": "Commenter un graphique. Une phrase sur des données : vraie ou fausse ? On la vérifie par un calcul.",
+  "01-situation": "Un journaliste sportif prépare un article sur les licences sportives en France, en 2025. Avant d'écrire une phrase, il la vérifie sur les nombres. C'est ça, commenter un graphique.",
+  "02-methode": "La méthode : je lis les valeurs, puis je teste chaque affirmation par un calcul : une comparaison, une somme, une moitié.",
+  "03-lecture": "Le football : 2 372 milliers de licences. Le tennis : 1 229. Le basket : 631. L'équitation : 625. La natation : 403.",
+  "04-moitie": "Première phrase : le football a plus de la moitié des licences du graphique. Le total : 5 260 milliers. La moitié : 2 630. Or 2 372 est plus petit : c'est faux.",
+  "05-question": "Question ! Le football a-t-il au moins deux fois plus de licences que le tennis ? A : oui. B : non. C : on ne peut pas savoir. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B : 2 fois 1 229, égale 2 458, c'est plus que 2 372. A juge à l'œil, et C oublie qu'on peut calculer.",
+  "06-croise": "Deuxième graphique : la part des femmes parmi les licenciés. Football : 10,5 %. Basket : 35 %. Équitation : 86 %. Chaque part se lit dans son sport.",
+  "07-piege": "Le piège : plus de filles ne veut pas dire une plus grande part. Au football : 10,5 % de 2 372 milliers, environ 249 milliers de licenciées. Au basket : 35 % de 631, environ 221 milliers. Il y a plus de filles au football, mais leur part est plus de trois fois plus faible !",
+  "08-question": "Question ! Quelle phrase est vraie ? A : la part des filles est plus forte au football qu'au basket. B : il y a plus de licenciées au basket qu'au football. C : il y a plus de licenciées au football qu'au basket. Mets pause, et choisis !",
+  "08b-reponse": "Réponse C : environ 249 milliers, contre 221. A croit qu'un grand nombre fait une grande part, et B regarde la part au lieu de l'effectif.",
+  "09-defi": "À toi de jouer ! Vrai ou faux ? Un : le basket et l'équitation réunis dépassent le tennis. Deux : il y a plus de licenciées en équitation qu'au football. Mets pause, et cherche !",
+  "09b-correction": "Un : 631 plus 625, égale 1 256, plus que 1 229 : vrai. Deux : 86 % de 625, environ 538 milliers, contre 249 au football : vrai aussi.",
+  "10-finale": "Ce que tu as appris. Une phrase sur un graphique se vérifie par un calcul. Moitié, double, somme : je calcule, je ne juge pas à l'œil. Et plus d'individus ne veut pas dire une plus grande part.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

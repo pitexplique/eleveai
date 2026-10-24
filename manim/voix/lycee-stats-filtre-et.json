@@ -1,0 +1,17 @@
+{
+  "00-garde": "Filtrer avec ET. Deux critères à la fois : qui reste ?",
+  "01-situation": "Une volcanologue prépare une mission sur les volcans de la planète. Elle cherche des volcans très hauts, et toujours actifs : entrés en éruption depuis 2000.",
+  "02-fichier": "Son fichier compte 10 volcans, du Piton de la Fournaise, à La Réunion, au Kilimandjaro. Pour chacun : son altitude en mètres, son hémisphère, et s'il est entré en éruption depuis 2000.",
+  "03-premier": "Premier critère : Altitude, supérieure ou égale à 3 000. Il reste 6 volcans.",
+  "04-et": "Deuxième critère, en même temps : Éruption égale Oui. Parmi les 6, on ne garde que ceux qui le vérifient aussi : le Mauna Loa, l'Erebus et le Nyiragongo. Avec ET, il reste 3 volcans : les deux critères à la fois.",
+  "05-question": "Question ! Avec le filtre Hémisphère égale Sud ET Éruption égale Oui, combien de volcans restent ? A : 3. B : 7. C : 4. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A : la Fournaise, l'Erebus et le Nyiragongo. 4, c'est le seul critère Sud, et 7, c'est un OU.",
+  "06-croise": "Le tableau croisé résume le fichier : éruption ou non, Nord ou Sud. Le ET se lit dans une seule case, à la croisée de la ligne Oui et de la colonne Sud : 3.",
+  "07-piege": "Le piège : additionner. La ligne Oui fait 6, la colonne Sud fait 4. 6 plus 4, égale 10 : c'est tout le fichier ! Avec ET, on ne prend que la case commune.",
+  "08-question": "Question ! Combien de volcans vérifient Hémisphère égale Sud ET NON Éruption égale Oui ? A : 1. B : 3. C : 4. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A : NON Oui, c'est Non. La case Sud et Non : le Kilimandjaro, tout seul. 3 oublie le NON, et 4 prend toute la colonne.",
+  "09-defi": "À toi de jouer ! Un : combien de volcans vérifient Hémisphère égale Nord ET Éruption égale Non ? Deux : et le filtre Altitude supérieure ou égale à 4 000 ET Éruption égale Non ? Mets pause, et cherche !",
+  "09b-correction": "Correction. Un : la case Nord et Non du tableau croisé : 3 volcans, le Fuji, le Vésuve et le Teide. Deux : 2 volcans dépassent 4 000 mètres, le Mauna Loa et le Kilimandjaro ; seul le Kilimandjaro n'est pas entré en éruption. 1 seul volcan.",
+  "10-finale": "Ce que tu as appris. Avec ET, une ligne n'est gardée que si elle vérifie les deux critères à la fois. Je filtre sur le premier, puis, parmi ceux qui restent, sur le second. Dans un tableau croisé, un ET, c'est une seule case, jamais une somme.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

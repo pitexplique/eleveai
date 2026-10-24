@@ -1,0 +1,7 @@
+{
+  "00-accroche": "Les 8 planètes du système solaire. Filtre NON, Lune égale Oui : qui n'a aucune lune ?",
+  "01-image": "Mercure et Vénus ! Seulement 2 planètes sur 8 : 8 moins 6.",
+  "02-question": "Question ! NON, Type égale Gazeuse : combien de planètes ? A : 4. B : 8. C : 0. Mets pause, et choisis !",
+  "02b-reponse": "A : les 4 rocheuses ! 8 moins 4.",
+  "03-question": "À toi : combien de planètes vérifient NON, Diamètre supérieur ou égal à 10 000 ? Réponds en commentaire !"
+}

@@ -1,0 +1,17 @@
+{
+  "00-garde": "Filtrer des données avec un critère. Dans un tableur, que garde un filtre ?",
+  "01-situation": "Un programmateur de cinéma prépare une soirée spéciale films longs. Sa base : les 10 films les plus vus en France en 2024, d'après le CNC, le Centre national du cinéma.",
+  "02-fichier": "Dans le tableur, une ligne, c'est un film. Pour chacun : sa durée en minutes, s'il s'agit d'un film d'animation, et s'il est français.",
+  "03-filtre-duree": "Il applique le filtre Durée, supérieure ou égale à 140. Le tableur parcourt la colonne et garde Le Comte de Monte-Cristo, 178 minutes, L'Amour ouf, Dune, Gladiator 2 et La Planète des singes. 5 films. Les autres lignes sont masquées, pas effacées.",
+  "04-filtre-animation": "Un filtre peut aussi porter sur une colonne de texte. Animation égale Oui : il reste Vice-versa 2, Vaiana 2, et Moi, moche et méchant 4. 3 films.",
+  "05-question": "Question ! Avec le filtre Durée inférieure à 100, combien de lignes restent ? A : 4. B : 3. C : 6. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A : 99, 93, 90 et 95 minutes. 3 oublie le film de 99 minutes, et 6 compte les lignes masquées.",
+  "06-croise": "Le tableau croisé résume le même fichier : animation ou non, français ou non. Un filtre à un seul critère garde une ligne entière, ou une colonne entière. Français égale Oui : toute la colonne, 0 plus 3, égale 3.",
+  "07-piege": "Le piège : ne lire qu'une case. Animation égale Non, ce n'est pas seulement les 4 films étrangers : c'est toute la ligne, 3 plus 4, égale 7 films. Un filtre à un seul critère donne un total.",
+  "08-question": "Question ! Un collègue a filtré le fichier sur un seul critère : il reste 5 lignes. Quel filtre a-t-il appliqué ? A : Animation égale Oui. B : Durée supérieure ou égale à 140. C : Français égale Oui. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. Les filtres A et C ne gardent que 3 films chacun.",
+  "09-defi": "À toi de jouer ! Un : combien de films vérifient Français égale Non ? Deux : et le filtre Durée supérieure ou égale à 150 ? Mets pause, et cherche !",
+  "09b-correction": "Correction. Un : toute la colonne Non du tableau croisé, 3 plus 4, égale 7 films. Deux : je parcours la colonne Durée : 178, 161 et 166. 3 films seulement.",
+  "10-finale": "Ce que tu as appris. Un filtre garde les lignes qui vérifient le critère ; les autres sont masquées, pas effacées. Sur un nombre, on compare au seuil ; sur un texte, on teste l'égalité. Et dans un tableau croisé, un critère seul donne le total d'une ligne ou d'une colonne.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

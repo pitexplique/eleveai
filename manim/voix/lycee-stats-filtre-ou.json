@@ -1,0 +1,17 @@
+{
+  "00-garde": "Filtrer avec OU. Au moins un des deux critères : combien de lignes ?",
+  "01-situation": "Un architecte prépare une exposition sur les gratte-ciel. Il veut montrer les tours de 500 mètres ou plus, OU celles d'Amérique, pour les comparer.",
+  "02-fichier": "Son fichier : 10 gratte-ciel, du Burj Khalifa, 828 mètres, à l'Empire State Building. Pour chacun : la hauteur au mètre près, le continent, et l'année d'achèvement.",
+  "03-ou": "Le filtre Hauteur, supérieure ou égale à 500, OU Continent égale Amérique, garde une tour dès qu'elle vérifie l'un des deux critères. 6 tours de 500 mètres ou plus. 4 tours d'Amérique.",
+  "04-double": "Mais attention : One World Trade Center, à New York, vérifie les deux ! Je ne le compte qu'une fois. 6 plus 4, moins 1, égale 9 tours.",
+  "05-question": "Question ! Avec le filtre Continent égale Asie OU Année inférieure à 2000, combien de tours restent ? A : 9. B : 8. C : 1. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B : 6 plus 3, moins les tours Petronas, comptées deux fois. 9 les compte deux fois, et 1, c'est un ET.",
+  "06-croise": "Le tableau croisé résume le fichier : le continent, et la hauteur. Le OU se lit en ajoutant une ligne et une colonne : la ligne Amérique, 4, et la colonne 500 mètres ou plus, 6.",
+  "07-piege": "Le piège : la case commune est dans la ligne ET dans la colonne. 4 plus 6, égale 10 : c'est trop ! On retire une fois la case commune, 1. 10 moins 1, égale 9.",
+  "08-question": "Question ! Combien de tours vérifient Continent égale Amérique OU Hauteur inférieure à 500 ? A : 8. B : 5. C : 3. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B : 4 plus 4, moins les 3 de la case commune, égale 5. 8 compte la case deux fois, et 3, c'est un ET.",
+  "09-defi": "À toi de jouer ! Un : combien de tours vérifient Continent égale Asie OU Hauteur inférieure à 500 ? Deux : un stagiaire écrit Asie OU Amérique, 6 plus 4, égale 10. A-t-il raison ? Mets pause, et cherche !",
+  "09b-correction": "Correction. Un : 6 plus 4, moins la case commune, 1 : 9 tours. Deux : oui, il a raison ! Une tour ne peut pas être en Asie et en Amérique : la case commune est vide, il n'y a rien à retirer.",
+  "10-finale": "Ce que tu as appris. Avec OU, une ligne est gardée dès qu'elle vérifie au moins un des critères, et les deux aussi. Pour compter, j'additionne, puis je retire une fois ceux qui vérifient les deux. Si les deux critères ne peuvent pas être vrais ensemble, il n'y a rien à retirer.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -1,0 +1,17 @@
+{
+  "00-garde": "La linéarité de la moyenne. Faut-il tout recalculer quand toutes les valeurs changent ?",
+  "01-situation": "Jade est programmatrice dans un cinéma : elle choisit les films et prépare les horaires des séances. Ce week-end, un marathon de la saga Hunger Games : 5 films. Leurs durées : 142, 146, 123, 137 et 157 minutes.",
+  "02-moyenne": "La durée moyenne d'un film : 142 plus 146 plus 123 plus 137 plus 157, égale 705 minutes. 705 divisé par 5, égale 141 minutes.",
+  "03-ajout": "Avant chaque film, 20 minutes de bandes-annonces. Chaque séance dure donc 20 minutes de plus que son film. La durée moyenne d'une séance ? Pas besoin de tout refaire : si on ajoute 20 à chaque valeur, on ajoute 20 à la moyenne. 141 plus 20, égale 161 minutes.",
+  "04-verif": "Vérifions : 162, 166, 143, 157 et 177. Leur somme : 805. 805 divisé par 5, égale 161. C'est bien la même !",
+  "05-question": "Question ! Avec 30 minutes de bandes-annonces avant chaque film, quelle serait la durée moyenne d'une séance ? A : 171. B : 291. C : 141. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A : 141 plus 30, égale 171 ; 291 ajoute 30 cinq fois, alors que la moyenne n'augmente qu'une fois de 30, et 141 oublie les bandes-annonces.",
+  "06-mult": "Le projecteur compte en secondes. Chaque durée est multipliée par 60. Alors la moyenne aussi est multipliée par 60 : 141 fois 60, égale 8 460 secondes.",
+  "07-question": "Question ! Sur un DVD européen, les films défilent un peu plus vite : chaque durée est multipliée par 0,96. Que devient la durée moyenne ? A : 141,96. B : 140,04. C : 135,36. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C : 0,96 fois 141, égale 135,36 minutes ; 141,96 ajoute 0,96 au lieu de multiplier, c'est l'erreur classique, et 140,04 le retire.",
+  "08-regle": "La règle : si chaque valeur x devient a fois x, plus b, alors la moyenne devient a fois la moyenne, plus b. On multiplie, puis on ajoute.",
+  "09-defi": "À toi de jouer. Jade veut la durée moyenne d'une séance en secondes, bandes-annonces comprises : chaque film, plus 20 minutes, le tout fois 60. Combien ? Mets pause, et cherche !",
+  "09b-correction": "Correction. Ici, on ajoute d'abord, puis on multiplie : 141 plus 20, égale 161 ; 161 fois 60, égale 9 660 secondes. Attention à l'ordre : 141 fois 60, plus 20, donnerait 8 480, c'est faux !",
+  "10-finale": "Ce que tu as appris. Ajouter b à chaque valeur ajoute b à la moyenne. Multiplier chaque valeur par a multiplie la moyenne par a. Si chaque x devient a x plus b, la moyenne devient a fois la moyenne, plus b. Et l'ordre des opérations compte !",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

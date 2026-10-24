@@ -1,0 +1,7 @@
+{
+  "00-accroche": "Mission volcans : 3 000 mètres ou plus, ET une éruption depuis 2000. Sur 10 volcans, combien passent le double filtre ?",
+  "01-image": "Premier filtre : 6 volcans. Deuxième filtre, en même temps : il en reste 3 ! Le Mauna Loa, l'Erebus et le Nyiragongo.",
+  "02-question": "Question ! Avec ET, le nombre de lignes peut-il augmenter ? A : oui. B : non, jamais. C : ça dépend du tableur. Mets pause, et choisis !",
+  "02b-reponse": "B ! ET ajoute une condition : on ne fait que retirer des lignes.",
+  "03-question": "À toi : combien de volcans vérifient Altitude inférieure à 3 000 ET Éruption égale Oui ? Réponds en commentaire !"
+}

@@ -1,0 +1,7 @@
+{
+  "00-accroche": "Coupe du monde 2022 : 64 matchs. Combien de buts voit-on le plus souvent dans un match ? Devine !",
+  "01-image": "Chaque ballon est un match, rangé selon son nombre de buts. 0 but : 7 matchs. 1 but : 10. 2 buts : 17. 3 buts : 14. Puis 4, 6, 3, 2… et un seul match à 8 buts !",
+  "02-question": "Question ! Quelle est la valeur la plus fréquente ? A : 17. B : 2. C : 8. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B : 2 buts, la plus haute pile ; 17, c'est son effectif, le nombre de matchs.",
+  "03-commentaire": "À toi : combien de matchs ont fini avec au moins 5 buts ? Réponds en commentaire !"
+}

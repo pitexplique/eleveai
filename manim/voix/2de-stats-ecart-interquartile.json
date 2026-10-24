@@ -1,0 +1,18 @@
+{
+  "00-garde": "L'écart interquartile. La pluie tombe-t-elle de façon régulière, d'un mois à l'autre ?",
+  "01-situation": "Noé est hydrologue : il étudie l'eau, et il aide à choisir la taille des réservoirs. Il compare deux villes : Paris, et Saint-Denis, à La Réunion. Pour chacune, Météo-France donne la pluie moyenne de chaque mois, sur 30 ans. Sa question : où la pluie est-elle la plus régulière ?",
+  "02-paris": "Paris d'abord, en millimètres de pluie. Je range les 12 mois, du plus sec au plus pluvieux : 42, 45, 45, 46, 48, 51, 54, 55, 58, 59, 62 et 69.",
+  "03-quartiles": "Le premier quartile, Q1 : 12 divisé par 4, égale 3. C'est la 3e valeur : 45. Le troisième quartile, Q3 : 3 fois 12, divisé par 4, égale 9. C'est la 9e valeur : 58.",
+  "04-question": "Question ! Avec ces quartiles, que vaut l'écart interquartile de Paris ? A : 27. B : 13. C : 5,5. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B : Q3 moins Q1, 58 moins 45, égale 13 ; 27, c'est l'étendue, 69 moins 42, et 5,5, c'est Q3 moins la médiane.",
+  "05-eiq": "L'écart interquartile, c'est donc Q3 moins Q1. Entre les deux, on trouve la moitié centrale des mois : à Paris, elle tient dans 13 millimètres. La pluie y est très régulière.",
+  "06-reunion": "À Saint-Denis, maintenant. Rangés : 43, 49, 51, 55, 63, 67, 96, 133, 160, 265, 270 et 279. Q1, la 3e valeur : 51. Q3, la 9e valeur : 160. Écart interquartile : 160 moins 51, égale 109 millimètres.",
+  "07-boites": "Les deux diagrammes en boîte, sur le même axe. La largeur de la boîte, c'est l'écart interquartile : 13 pour Paris, 109 pour Saint-Denis. À La Réunion, l'été austral apporte les grosses pluies : la pluie y est bien moins régulière.",
+  "08-piege": "Le piège : confondre la boîte et les moustaches. L'étendue va d'un bout à l'autre des moustaches : 279 moins 43, égale 236. L'écart interquartile, lui, ne regarde que la boîte.",
+  "09-question": "Question ! Un cyclone : un mois de janvier reçoit 1 000 millimètres au lieu de 270. Que devient l'écart interquartile de Saint-Denis ? A : 839. B : 957. C : 109. Mets pause, et choisis !",
+  "09b-reponse": "Réponse C : 1 000 reste tout en haut du classement, Q1 et Q3 ne bougent pas, donc 109 ; 957, c'est la nouvelle étendue, et 839 ajoute la pluie en plus.",
+  "10-defi": "À toi de jouer. Noé écrit dans son rapport : « À Saint-Denis, l'écart interquartile est plus de 8 fois celui de Paris. » A-t-il raison ? Mets pause, et cherche !",
+  "10b-correction": "Correction. 8 fois 13, égale 104. Et 109, c'est plus que 104 : Noé a raison ! À Saint-Denis, il prévoit de grands réservoirs, remplis l'été pour passer la saison sèche.",
+  "11-finale": "Ce que tu as appris. Pour les quartiles, on range la série : Q1 au rang n divisé par 4, Q3 au rang 3 n divisé par 4, arrondis à l'entier au-dessus. L'écart interquartile, c'est Q3 moins Q1 : la largeur de la boîte. Il mesure la dispersion de la moitié centrale, et une valeur extrême ne le change pas.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

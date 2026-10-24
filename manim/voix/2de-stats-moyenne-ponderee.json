@@ -1,0 +1,19 @@
+{
+  "00-garde": "Calculer une moyenne pondérée. Comment résumer toute une carrière en un seul nombre ?",
+  "01-situation": "Maya est journaliste sportive, spécialiste des données. Ce soir, elle présente Victor Wembanyama, le géant français du basket américain. Il a joué trois saisons. Sa question : combien de points marque-t-il par match, sur toute sa carrière ?",
+  "02-donnees": "Voici ses trois saisons. La première : 71 matchs, et 21,4 points par match. La deuxième, écourtée par une blessure : 46 matchs, et 24,3 points. La troisième : 64 matchs, et 25 points par match.",
+  "03-piege": "Le piège : faire la moyenne des trois moyennes. 21,4 plus 24,3 plus 25, divisé par 3 : environ 23,6. Faux ! La deuxième saison n'a que 46 matchs : elle compterait autant que les autres.",
+  "04-methode": "La bonne méthode : chaque saison pèse selon son nombre de matchs. Ses points de la première saison : 21,4 fois 71, égale 1 519,4. Puis 24,3 fois 46, égale 1 117,8. Et 25 fois 64, égale 1 600. En tout : 4 237,2 points.",
+  "05-total": "Je divise par le nombre total de matchs : 71 plus 46 plus 64, égale 181. 4 237,2 divisé par 181 : environ 23,4 points par match. C'est exactement le chiffre officiel de sa carrière !",
+  "06-question": "Question ! Un joueur fait 10 matchs à 20 points de moyenne, puis 30 matchs à 10 points. Quelle est sa moyenne sur les 40 matchs ? A : 15. B : 12,5. C : 500. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B : 200 plus 300, égale 500 points, divisé par 40, égale 12,5 ; 15 oublie les effectifs, et 500 oublie de diviser.",
+  "07-balance": "Une image pour s'en souvenir : une balance. Chaque saison est un poids, aussi lourd que son nombre de matchs. La moyenne pondérée, 23,4, c'est le point d'équilibre. Il penche vers les saisons les plus chargées.",
+  "08-question": "Question ! Sur 10 paniers : 6 paniers à 2 points, et 4 paniers à 3 points. Combien de points par panier, en moyenne ? A : 2,5. B : 24. C : 2,4. Mets pause, et choisis !",
+  "08b-reponse": "Réponse C : 6 fois 2, plus 4 fois 3, égale 24 points, divisé par 10, égale 2,4 ; 2,5 ne pèse pas les paniers, et 24 oublie de diviser.",
+  "09-question": "Question ! Ses deux premières saisons : 71 matchs à 21,4 points, et 46 matchs à 24,3. Sa moyenne sur les deux est… A : exactement 22,85. B : plus proche de 21,4. C : plus proche de 24,3. Mets pause, et choisis !",
+  "09b-reponse": "Réponse B : la première saison a plus de matchs, elle tire la moyenne vers elle, environ 22,5 ; 22,85, c'est la moyenne simple, qui ne pèse rien.",
+  "10-defi": "À toi de jouer. En 2026, il joue aussi 22 matchs de séries éliminatoires, à 23,8 points par match. Quelle est sa moyenne sur tous ses matchs ? Arrondis au dixième. Mets pause, et cherche !",
+  "10b-correction": "Correction. Points des séries : 23,8 fois 22, égale 523,6. Total : 4 237,2 plus 523,6, égale 4 760,8 points. Matchs : 181 plus 22, égale 203. 4 760,8 divisé par 203 : environ 23,5 points par match.",
+  "11-finale": "Ce que tu as appris. La moyenne pondérée, c'est la somme des valeurs fois leurs effectifs, divisée par l'effectif total. Chaque valeur pèse selon son effectif. Et jamais la moyenne simple des moyennes quand les effectifs sont différents.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

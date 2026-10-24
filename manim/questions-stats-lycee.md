@@ -89,3 +89,70 @@ Les épisodes communs 1re ⇄ STMG ont les MÊMES temps dans les deux classes.
 ## En cours au moment de la coupure (rapports perdus si la session change)
 G2 (2de 06-09), I1 (1re 07-10 + 18, STMG 03 boîte + 06 marges), I2 (STMG 09-12 fréquences) :
 relever centres et questions dans leurs scripts/voix (`manim/voix/*.json`, clés « question ») et mesurer les t sur le rendu.
+
+## 2de (lot G2) — débit −10, paysages verte, shorts orange
+- 06 ecart-interquartile — [meteo-climat, nature-ecologie]
+  - 01:09 | Avec ces quartiles, que vaut l'écart interquartile de Paris ? | [27 ; 13 ; 5,5] → 1 | Q3 − Q1 = 58 − 45 = 13 ; 27 = étendue, 5,5 = Q3 − médiane.
+  - 03:07 | Un cyclone : janvier reçoit 1 000 mm au lieu de 270. L'écart interquartile de Saint-Denis ? | [839 ; 957 ; 109] → 2 | Q1 et Q3 ne bougent pas ; 957 = nouvelle étendue.
+  - short 00:22 | Quelle est la largeur de la boîte ? | [236 ; 109 ; 211] → 1 | (commentaire : Paris Q1 45, Q3 58 → 13)
+- 07 linearite-moyenne — [cinema-series, technologie-ia]
+  - 01:25 | Avec 30 min de bandes-annonces, la durée moyenne d'une séance ? | [171 ; 291 ; 141] → 0 | 141 + 30 ; 291 ajoute 30 cinq fois.
+  - 02:19 | DVD européen : chaque durée × 0,96. La durée moyenne ? | [141,96 ; 140,04 ; 135,36] → 2 | 0,96 × 141 ; 141,96 ajoute au lieu de multiplier.
+  - short 00:22 | La nouvelle moyenne des séances ? | [241 ; 161 ; 141] → 1 | (commentaire : films 2 fois plus longs → 282)
+- 08 ecart-type — [transports, histoire-geographie]
+  - 01:20 | Quelle ville a la température la plus régulière ? | [Strasbourg ; Brest ; Les deux, même moyenne] → 1 | Plus petit σ (3,7) ; même moyenne ≠ même dispersion.
+  - 02:11 | À Strasbourg, x̄ = 11,4 et σ = 6,5. Que vaut x̄ + σ ? | [17,9 ; 4,9 ; 24,4] → 0 | 4,9 = x̄ − σ ; 24,4 ajoute 2σ.
+  - short 00:25 | Quelle ville a le plus grand écart type ? | [Brest ; Strasbourg ; Pareil] → 1 | (commentaire : 11,7 − 3,7 → 8)
+- 09 interpreter — [argent-budget, reseaux-sociaux]
+  - 00:47 | Quelle phrase est juste ? | [La plupart gagnent 2 735 € ; La moitié gagne exactement 2 183 € ; La moitié gagne moins de 2 183 €] → 2 | Sens de la médiane.
+  - 01:48 | Si les plus hauts salaires doublaient, sans rien changer aux autres ? | [La moyenne augmente, la médiane ne bouge pas ; Les deux augmentent ; La médiane augmente, pas la moyenne] → 0 | La somme augmente ; le salarié du milieu ne bouge pas.
+  - 02:49 | Quelle conclusion est juste ? | [Toutes les femmes gagnent moins que tous les hommes ; Le niveau des femmes est plus bas, en moyenne et en médiane ; On ne peut rien comparer] → 1 | Un indicateur résume un groupe, pas chaque personne.
+  - short 00:31 | Lequel veut dire « la moitié gagne moins » ? | [2 735 € ; 4 302 € ; 2 183 €] → 2 | (commentaire : 1 sur 10 sur 30 salariés → 3)
+
+## Lot I1 — débit −7 (1re seule + STMG seule)
+- 1re 07 rep-barres — [technologie-ia] — paysage orange, short jaune
+  - 01:20 | Part des 12-17 ans qui ne s'en sert pas chaque jour ? | [74 % ; 26 % ; 49 %] → 0 | 100 − 26 = 74 %.
+  - 02:47 | Que dit la barre des 60 ans et plus ? | [17 % des 60 ans et + s'en servent ; 17 % des usagers ont 60 ans et + ; 17 personnes de 60 ans et +] → 0 | Une part DANS le groupe.
+  - short 00:17 | 12-17 ans : qui ne s'en sert pas ? | [74 % ; 26 % ; 49 %] → 0 | (commentaire : 17 % de 200 → 34)
+- 1re 08 rep-circulaire — [nature-ecologie, sciences] — verte, short orange
+  - 01:17 | L'éolien mesure 32,4°. Quelle part ? | [9 % ; 32,4 % ; 90 %] → 0 | 32,4 ÷ 3,6 = 9 %.
+  - 02:44 | Demi-disque : l'angle de l'hydraulique ? | [25,2° ; 50,4° ; 14°] → 0 | 14 × 1,8 = 25,2°.
+  - short 00:17 | Nucléaire : 241,2°. Quelle part ? | [67 % ; 241 % ; 33 %] → 0 | (commentaire : 50,4° → 14 %)
+- 1re 09 rep-choisir — [jeux-video, argent-budget] — verte, short orange
+  - 01:23 | Le chiffre d'affaires, année après année ? | [diagramme circulaire ; courbe ; nuage de points] → 1 | Une évolution : l'axe du temps.
+  - 02:35 | Jouer plus longtemps, est-ce mieux scorer ? | [nuage de points ; diagramme en barres ; diagramme circulaire] → 0 | 2 nombres par joueur : un point.
+  - short 00:18 | Peut-on en faire un camembert ? | [oui ; non : plus de 100 % ; oui, en arrondissant] → 1 | (commentaire : total des 5 supports → 184 %)
+- 1re 10 rep-commenter — [sport, corps-sante] — bleue, short verte
+  - 01:10 | Foot : au moins 2 fois plus que le tennis ? | [oui ; non ; on ne peut pas savoir] → 1 | 2 × 1 229 = 2 458 > 2 372.
+  - 02:27 | Quelle phrase est vraie ? | [part des filles : foot > basket ; plus de licenciées au basket ; plus de licenciées au foot] → 2 | ≈ 249 milliers contre 221.
+  - short 00:21 | Où y a-t-il le plus de licenciées ? | [au foot ; au basket ; autant] → 0 | (commentaire : handball 602 × 39,8 % → ≈ 240 milliers)
+- 1re 18 filtre-effectif — [histoire-geographie, art-design] — bleue, short verte
+  - 01:14 | Naturel OU en péril : combien de biens ? | [282 ; 294 ; 12] → 0 | 240 + 54 − 12.
+  - 02:17 | Le tableur affiche 1 219 biens. Quel filtre ? | [NON En péril ; NON Culturel ; Culturel ET Hors péril] → 0 | 1 273 − 54.
+  - short 00:16 | Naturel OU en péril ? | [294 ; 282 ; 12] → 1 | (commentaire : 991 − 42 → 949)
+- STMG 03 boite — [argent-budget, histoire-geographie] — jaune, short blanche
+  - 01:28 | Part des pays à au moins 1 802 € ? | [25 % ; 75 % ; 50 %] → 0 | 1 802 = Q3 : ≈ 1/4 au-dessus.
+  - 02:44 | Où y a-t-il le plus de pays ? | [Q3 → max ; Q1 → médiane ; à peu près autant] → 2 | ≈ 1/4 dans chaque partie.
+  - short 00:22 | Part des pays qui paient au moins autant ? | [≈ un quart ; ≈ la moitié ; ≈ trois quarts] → 0 | (commentaire : Q3 − Q1 → 976 €)
+- STMG 06 tab-marges — [corps-sante] — jaune, short blanche
+  - 01:05 | Marge de la colonne « Hommes » : le calcul ? | [48 + 70 ; 67 + 70 ; 52 + 48] → 0 | Je descends la colonne.
+  - 02:20 | Le total général du tableau ? | [237 ; 474 ; 219] → 0 | La somme des 4 cases.
+  - short 00:13 | Combien de femmes médecins en tout ? | [119 milliers ; 100 milliers ; 52 milliers] → 0 | (commentaire : 48 + 70 → 118 milliers)
+
+## STMG fréquences (lot I2) — débit −7, paysages verte, shorts orange
+- 09 freq-marginale — [histoire-geographie, transports]
+  - 01:19 | Sur toutes les nuitées, quelle part a lieu en camping ? | [35,9 % ; 24,1 % ; 41,3 %] → 0 | 13,7 ÷ 38,2 ; B ne prend qu'une case, C divise par 10,9.
+  - 02:47 | Un stagiaire calcule 6,4 ÷ 10,9. Qu'a-t-il calculé ? | [la part des hôtels, sur toutes les nuitées ; la part des hôtels, parmi les nuitées de l'étranger ; la part de l'étranger, sur toutes les nuitées] → 1 | Il a divisé par l'étranger seulement : fréquence conditionnelle.
+  - short 00:21 | Part de l'étranger ? | [10,9 % ; 28,5 % ; 38,2 %] → 1 | (commentaire : campings 13,7 / 38,2 → 35,9 %)
+- 10 freq-conditionnelle — [sport, corps-sante]
+  - 01:27 | Parmi les licences de handball, quelle part de femmes ? | [49,1 % ; 39,9 % ; 8,1 %] → 1 | 240 ÷ 602 ; A = l'autre sens, C = le total.
+  - 02:43 | Parmi les hommes, quelle part joue au handball : quel dénominateur ? | [602 ; 2 485 ; 2 974] → 1 | La colonne hommes.
+  - short 00:20 | Le plus féminin ? | [le football ; le handball ; pareil] → 1 | (commentaire : rugby 59 / 420 → 14 %)
+- 11 freq-completer — [transports, technologie-ia]
+  - 01:25 | 2023 : 16,7 % des 1 817 milliers. Combien ? | [≈ 303 ; ≈ 10 880 ; ≈ 30 344] → 0 | 1 817 × 0,167 ; B divise, C oublie ÷ 100.
+  - 02:48 | 2024 : 295,6 milliers d'électriques = 16,8 %. Combien en tout ? | [≈ 1 760 milliers ; ≈ 50 milliers ; ≈ 312 milliers] → 0 | 295,6 ÷ 0,168.
+  - short 00:12 | Combien d'électriques ? | [≈ 168 000 ; ≈ 295 000 ; ≈ 16 800] → 1 | (commentaire : 16,7 % de 1 817 000 → ≈ 303 000)
+- 12 freq-interpreter — [corps-sante, transports]
+  - 01:15 | « 71 % des automobilistes tués sont des hommes » : population de référence ? | [les hommes tués ; les automobilistes tués ; tous les tués] → 1 | 1 074 ÷ 1 512.
+  - 02:23 | Quelle phrase est exacte ? | [37,7 % des tués à deux-roues sont des hommes. ; 37,7 % des hommes tués étaient à deux-roues. ; 37,7 % des tués sont des hommes.] → 1 | 650 ÷ 1 724, les hommes tués.
+  - short 00:21 | Parmi les hommes tués, quelle part était à deux-roues ? | [92,1 % ; 37,7 % ; 29,3 %] → 1 | (commentaire : femmes 56 / 494 → 11,3 %)

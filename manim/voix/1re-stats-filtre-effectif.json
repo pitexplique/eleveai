@@ -1,0 +1,17 @@
+{
+  "00-garde": "Retrouver l'effectif d'un filtre dans un tableau croisé. Sans recompter les lignes une à une !",
+  "01-situation": "Le patrimoine mondial de l'Unesco compte 1 273 biens. Une guide-conférencière prépare une visite sur les sites menacés. Son fichier a une ligne par bien : son type, et s'il est en péril. Le tableau croisé résume tout le fichier.",
+  "02-regle": "La règle : chaque filtre est une zone du tableau. ET, c'est une case. OU, c'est une ligne plus une colonne, moins leur case commune. NON, c'est le total moins la zone.",
+  "03-et": "Premier filtre : naturel ET en péril. C'est la case à la croisée de la ligne Naturel et de la colonne En péril : 12 biens.",
+  "04-ou": "Deuxième filtre : culturel OU en péril. La ligne Culturel : 991. La colonne En péril : 54. Mais les 42 biens culturels en péril sont dans les deux : on les retire une fois. 991 plus 54, moins 42, égale 1 003.",
+  "05-question": "Question ! Combien de biens pour le filtre naturel OU en péril ? A : 282. B : 294. C : 12. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A : 240 plus 54, moins 12, égale 282. B compte deux fois les 12 biens naturels en péril, et C a fait un ET.",
+  "06-non": "Troisième filtre : NON, culturel ET en péril. C'est tout le tableau, sauf une case : 1 273 moins 42, égale 1 231.",
+  "07-piege": "Le piège : traduire la phrase. Les biens à la fois naturels et menacés : c'est ET. Les biens naturels, ou bien menacés, l'un au moins : c'est OU. Un seul mot change, et l'effectif passe de 12 à 282 !",
+  "08-question": "Question ! Le tableur affiche 1 219 biens. Quel filtre a été appliqué ? A : NON en péril. B : NON culturel. C : culturel ET hors péril. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A : 1 273 moins 54, égale 1 219. B donnerait 282, et C donnerait 949.",
+  "09-defi": "À toi de jouer ! Un : combien de biens pour le filtre mixte OU en péril ? Deux : combien pour NON naturel ? Mets pause, et cherche !",
+  "09b-correction": "Un : 42 plus 54, moins 0, égale 96 : aucun bien mixte n'est en péril. Deux : 1 273 moins 240, égale 1 033.",
+  "10-finale": "Ce que tu as appris. ET, c'est une case. OU, c'est la ligne plus la colonne, moins la case commune. Et NON, c'est le total moins la zone.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

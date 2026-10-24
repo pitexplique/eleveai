@@ -1,0 +1,7 @@
+{
+  "00-accroche": "Thomas Pesquet : 6 sorties dans le vide, 39 heures et 54 minutes en tout. Combien dure une sortie, en moyenne ? Devine !",
+  "01-image": "Ses sorties, en minutes : 358, 394, 435, 388, 405, 414. Les longues sorties donnent des minutes aux courtes… et hop ! Toutes durent 399 minutes. C'est la moyenne : 6 heures et 39 minutes.",
+  "02-question": "Question ! 6 sorties de 399 minutes, ça fait combien en tout ? A : 405. B : 2 394. C : 66,5. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B : 399 fois 6, égale 2 394, ses 39 heures et 54 minutes ; 405, c'est 399 plus 6.",
+  "03-commentaire": "À toi : avec une septième sortie de 546 minutes, quelle serait sa nouvelle moyenne ? Réponds en commentaire !"
+}

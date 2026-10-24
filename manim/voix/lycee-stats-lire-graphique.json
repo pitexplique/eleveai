@@ -1,0 +1,16 @@
+{
+  "00-garde": "Lire un graphique. Un graphique dit-il toujours ce qu'il semble dire ?",
+  "01-situation": "Sur le volcan Mauna Loa, à Hawaï, des scientifiques mesurent le C O 2 de l'air depuis 1958. Une climatologue présente ces mesures dans une conférence, avec un diagramme en barres. Son métier : comprendre le climat avec des données.",
+  "02-reperes": "Avant de lire une seule barre, trois réflexes. Un : le titre et l'unité. Ici, le C O 2 en p p m, des parties par million. Deux : l'origine. L'axe ne commence pas à 0 : il commence à 300 ! Trois : le pas. De 300 à 320, l'axe avance de 20. Et le petit trait, au milieu, vaut 10 de plus.",
+  "03-lire": "Je lis 1980. Je monte en haut de la barre, puis je vais vers l'axe : la barre arrive sur 340. En 1980, l'air contenait environ 340 p p m de C O 2.",
+  "04-milieu": "Et en 2000 ? Le haut de la barre tombe entre 360 et 380, sur le petit trait. Le petit trait, c'est la moitié du pas : 360 plus 10, égale 370.",
+  "05-question": "Question ! Que vaut la barre de 2010 ? A : 380. B : 390. C : 400. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B : 390. 380 ou 400, c'est oublier le petit trait : il est au milieu, 10 de plus que 380.",
+  "06-piege": "Le piège, maintenant. Regarde 1980 et 2023 : la barre de 2023 paraît trois fois plus haute ! Mais l'axe commence à 300. Je lis les valeurs : 340, puis 420. Redessinée depuis 0, elle ne dépasse celle de 1980 que d'un quart environ. La hausse est réelle, mais elle se lit sur l'axe, pas à l'œil.",
+  "07-question": "Question ! De 1980 à 2023, le C O 2 a… A : été multiplié par 3. B : augmenté de 80 p p m. C : augmenté de 420 p p m. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B : 420 moins 340, égale 80 p p m. A compare des hauteurs sur un axe qui ne part pas de 0, et C oublie de retirer 340.",
+  "08-defi": "À toi de jouer ! Un : de combien le C O 2 a-t-il augmenté entre 2000 et 2023 ? Deux : combien d'années du graphique dépassent 350 p p m ? Mets pause, et cherche !",
+  "08b-correction": "Un : en 2000, 370 ; en 2023, 420. 420 moins 370, égale 50 p p m. Deux : je trace la ligne de 350, sur le petit trait entre 340 et 360. 2000, 2010 et 2023 la dépassent : 3 années.",
+  "09-finale": "Ce que tu as appris. Avant de lire : le titre, l'unité, l'origine et le pas. Pour lire : je monte en haut de la barre, puis je vais vers l'axe. Et pour comparer, je calcule l'écart des valeurs, jamais celui des hauteurs.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}
