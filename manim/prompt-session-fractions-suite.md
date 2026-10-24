@@ -1,0 +1,37 @@
+Prompt — série FRACTIONS, suite (après le 24/10/2026 soir)
+
+Colle ceci dans une nouvelle session :
+
+---
+
+Réponds toujours en français. Ne me pose pas de questions : tranche, avance, et liste tes choix à la fin. Occupe-toi UNIQUEMENT des fractions (pas de STMG, pas des autres sessions).
+
+**Règles** :
+- Committe PAR CHEMIN : jamais `git add -A`, jamais `manim/scripts/*/media-*` ni `mb*`. Ne committe pas `lib/fiches-exercices/chargeurs.ts` ni `registre.ts` (modifiés par une autre session).
+- Pas de push sans mon signal (1 à 2 fois par jour). La story Instagram n'est jamais poussée.
+- Ne lance jamais la lecture d'une vidéo. La qualité passe avant tout.
+- Change de session à 60 % de contexte (mémoire `changer-de-session-a-65-pourcent.md`).
+
+## Où on en est
+Lis la mémoire `serie-fractions-cm1-terminale.md` (ses erreurs : SIMPLIFIER, puis fraction → DÉCIMAL → POURCENTAGE ; contextes et centres ; ses énigmes du gâteau).
+- Coach fractions 6e (fraction_nombre, fraction_calcul, pourcentage_nombre) et 4e (fraction_nombre, fraction_calcul) : TOUT VERT au seuil des squelettes.
+- Nouvelle micro 6e `fraction_egale` « Fractions égales, simplifier » : commit `835a6802` (coach, correcteurs, fiche de cours, exercice 9 de la feuille).
+- Feuilles d'exercices des 5 notions : existent (20 exercices corrigés chacune).
+- Consigne vidéo : `manim/consigne-videos-fractions.md` (numérotation 6e 01-13, 4e 01-12, sorties `manim/sorties/<classe>/maths/fractions/`). Questions et centres à recopier au fil des rapports dans `manim/questions-fractions.md`.
+- PILOTE : 6e 03-egale + module commun `manim/canvas_fractions.py` → état ci-dessous.
+
+État du pilote au moment de la bascule : EN COURS dans l'ancienne session. Vérifie ce qui existe : `manim/canvas_fractions.py`, `manim/scripts/6e/frac_egale*.py`, `manim/voix/6e-frac-egale*.json`, `manim/sorties/6e/maths/fractions/03-egale/*.mp4`. S'il manque quelque chose (ou si `tasklist | grep -i -E "manim|python"` montre un rendu frac_egale qui tourne encore, attends-le), relance UN agent pour finir ce morceau seulement, avec la consigne.
+
+## À faire, dans l'ordre
+1. Vérifier le pilote (planche PyAV de 12 images sur la paysage et le short, `python scripts/verifier-bords-video.py <mp4>` → 0 instants), recopier ses `questions`/`centres` dans `manim/questions-fractions.md`, committer par chemin (module, scripts, voix json, marques, `public/sons/6e-frac-egale*`).
+2. Lots de vidéos, 3 agents à la fois au plus, chacun avec la consigne `manim/consigne-videos-fractions.md` + l'API du module (en-tête de `manim/canvas_fractions.py`) + le pilote comme modèle :
+   - Lot 6e A : 01-lire-ecrire, 02-representer (short = gâteau en 6 au compas, l'hexagone de triangles équilatéraux), 04-decimal.
+   - Lot 6e B : 05-comparer, 06-mixte, 07-defi.
+   - Lot 6e C : 08-quantite, 09-additionner, 10-multiplier-entier, 11-calcul-defi (PAYSAGES seulement), 12-pourcentage-fraction, 13-pourcentage-decimal.
+   - Puis 4e : 01 à 05 (fraction_nombre), puis 06 à 12 (fraction_calcul ; 10-quantite a le short du gâteau CARRÉ en 5).
+3. Après chaque lot : vérifier (planches, bords), recopier questions/centres, committer par chemin.
+4. Passe finale quand la 6e est complète : miniatures (`manim/miniature_essai_v2.py`, `manim/miniature_short_expression.py`) et entrées du manifeste `manim/manifeste-youtube.json` (ids `<classe>-frac-<slug>[-short]`, `microId`, `notionId`, `questions`, `centres`, chapitres mesurés par dry run — imiter les entrées stats), puis `python scripts/fiches-youtube.py -frac-`, R2 (`powershell -NoProfile -ExecutionPolicy Bypass -File scripts/r2-videos.ps1 -Envoyer > log 2>&1` lancé depuis Bash), `node scripts/generer-videos-r2.mjs`, `node scripts/brancher-videos-coach.mjs --id <ids> --ecrire`, commit par chemin. Push seulement sur mon signal.
+5. Mettre à jour la mémoire `serie-fractions-cm1-terminale.md` à chaque étape.
+
+## Plus tard
+Après la 6e et la 4e : 5e, puis CM1-CM2, 3e et lycée (fractions_rationnel 3e, rappels au lycée). Puis la proportionnalité.
