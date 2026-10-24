@@ -16,6 +16,17 @@ Ce fichier complète la règle « les mathématiques sont TRANSVERSALES » de `R
 
 ## 2. Par tranche d'âge
 
+⭐ 24/10/2026 : la liste OFFICIELLE des centres d'intérêt (18, avec leurs identifiants et leurs tranches d'âge) est dans `lib/videos/centres-interet.ts`. Chaque NOUVELLE vidéo en déclare 1 à 3 dans le manifeste (`"centres"`). Les vidéos déjà publiées ne sont pas étiquetées. Le tableau ci-dessous aide à choisir le décor.
+
+| Tranche | Centres d'intérêt qui marchent le mieux |
+|---|---|
+| **6-8 ans** (CP-CE2) | animaux, nature-ecologie, espace, jeux-defis, cuisine, art-design |
+| **9-11 ans** (CM1-6e) | tous sauf réseaux sociaux, cinéma et argent : sport, musique, animaux, nature-ecologie, meteo-climat, espace, jeux-video, jeux-defis, technologie-ia, cuisine, corps-sante, transports, histoire-geographie, art-design, sciences |
+| **12-14 ans** (5e-3e) | les 18 : en plus, reseaux-sociaux, cinema-series, argent-budget |
+| **15-18 ans** (lycée) | tous sauf animaux et cuisine : sport, musique, nature-ecologie, meteo-climat, espace, jeux-video, jeux-defis, reseaux-sociaux, technologie-ia, cinema-series, corps-sante, argent-budget, transports, histoire-geographie, art-design, sciences |
+| **Adultes** (CRPE, reprise) | sport, jeux-defis, technologie-ia, cuisine, cinema-series, corps-sante, argent-budget, transports, histoire-geographie |
+
+
 | Âge (classes) | Ce qui les intéresse | Décors qui marchent | Métiers à évoquer | Ton |
 |---|---|---|---|---|
 | **6-8 ans** (CP-CE2) | animaux, dinosaures, jeux de cour, goûter, dessins animés, la famille, les saisons, les jouets à construire | la ferme, le zoo, le marché, la cour de récré, l'anniversaire, le jardin | vétérinaire, boulanger, pompière, maraîchère, conducteur de bus | jeu, histoire, personnage (Ti Margo), une seule idée |
