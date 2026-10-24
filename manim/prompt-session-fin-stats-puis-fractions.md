@@ -1,4 +1,4 @@
-Prompt — fin de la série STATISTIQUES, puis série FRACTIONS (24/10/2026 soir)
+Prompt — fin de la série STATISTIQUES, (24/10/2026 soir) — la série fractions tourne dans une autre session
 
 Colle ceci dans une nouvelle session :
 
@@ -47,26 +47,8 @@ Enchaîne ensuite, dans cet ordre :
 
 **Mesure de consommation** : départ le 24/10 à 08 h 27, quota hebdomadaire à 0 %. Note le quota hebdomadaire actuel et donne à Frédéric le bilan de la série lycée (118 vidéos).
 
-## 2. Puis : la série FRACTIONS, du CM1 à la Terminale
-Lis d'abord la mémoire `serie-fractions-cm1-terminale.md`. Elle contient :
-- **Ses erreurs sur les copies** : SIMPLIFIER, puis fraction → DÉCIMAL → POURCENTAGE.
-- **Les contextes et centres d'intérêt par erreur.**
-- **Son énigme du gâteau** : en 6 parts au compas pour la 6e, en 5 parts dans un gâteau carré pour la 5e et la 4e.
-
-Méthode, comme pour les statistiques, en commençant par SES classes, la 6e puis la 4e :
-1. **Coach robuste** : `npx --yes tsx@4 scripts/mesurer-squelettes-coach.ts <classe> <notions…>`. Seuil : 30 squelettes au moins, et au plus 4 répétitions sur 20 à chaque étoile. Répare ce qui est sous le seuil.
-2. **Feuilles d'exercices** : vérifie celles qui existent (`lib/fiches-exercices/`, `registre.ts`) et complète celles qui manquent.
-3. **Inventaire des vidéos de fractions déjà faites** (manifeste, `lib/videos/videos-r2.json`), pour ne rien refaire. La 6e « fractions, calcul » existe déjà, rendue le 05/10.
-4. **Consigne vidéo** `manim/consigne-videos-fractions.md`, sur le modèle de `manim/consigne-videos-stats-lycee.md` :
-   - une paysage et un short par micro ;
-   - questions-pauses : 2 ou 3 par paysage (5 s), 1 par short (3 s) ; les leurres viennent de SES erreurs (simplifier en soustrayant, 3/4 = 3,4, 0,75 = 0,75 %) ;
-   - centres d'intérêt : 1 à 3 par vidéo, pris dans `lib/videos/centres-interet.ts` (cuisine et animaux permis jusqu'à la 3e) ;
-   - « Ce que tu as appris » en haut et centré ;
-   - marge de 3 % ;
-   - synchro voix/écrit à 0 s d'avance (`manim/REGLES.md`) ;
-   - économie : brouillons à 8 images, final à 12, rapports courts ;
-   - modules communs réutilisés d'un lot à l'autre, épisodes communs entre classes.
-5. Lots de vidéos : 3 agents à la fois au plus. Écris les questions et les centres de chaque rapport dans `manim/questions-fractions.md` au fur et à mesure.
+## 2. La série FRACTIONS : NE PAS la lancer ici
+Frédéric l'a lancée dans une AUTRE session (24/10). Ne touche à aucun fichier de fractions (coach, feuilles, vidéos).
 
 Push : 1 ou 2 fois par jour au plus, sur son signal (sauf l'autorisation de la partie 1).
 
