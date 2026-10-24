@@ -260,6 +260,25 @@ export default function AccueilNouveau(props: {
           ))}
         </div>
 
+        {/* ⭐ 24/10/2026 — Frédéric : « sous ton pays, affiche une map monde avec
+            en rouge mes pays ». SVG statique (public/carte-pays.svg, 74 Ko, Natural
+            Earth 110m) : un point rouge pour le Québec, la Suisse et la Belgique,
+            trop petits à cette échelle. Pleine largeur de la carte, 680 px au plus. */}
+        <figure className="mx-auto mt-4 max-w-[680px]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/carte-pays.svg"
+            alt="Carte du monde : en rouge, la France, la Suisse, la Belgique, le Maroc, le Québec, la Côte d'Ivoire et le Sénégal"
+            width={960}
+            height={426}
+            loading="lazy"
+            className="h-auto w-full"
+          />
+          <figcaption className="mt-1 text-center text-xs text-slate-500">
+            En rouge, nos pays : France, Suisse, Belgique, Maroc, Québec, Côte d&apos;Ivoire, Sénégal.
+          </figcaption>
+        </figure>
+
         {autrePays ? (
           <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl bg-sky-50 px-4 py-3">
             <p className="text-sm text-slate-700">
