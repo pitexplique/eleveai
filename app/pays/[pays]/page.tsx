@@ -182,7 +182,7 @@ export default async function PaysPage({
               Maths {p?.niveau ?? courtCourant ?? ""}
             </h1>
             <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 sm:text-base">
-              Programme {info.nom === "Maroc" ? "du Maroc" : info.nom === "États-Unis" ? "des États-Unis" : "de l'Ontario"} : séries
+              Programme {info.slug === "maroc" ? "du Maroc" : "du Québec"} : séries
               d&apos;exercices avec correction et score&nbsp;!
             </p>
             <div className="mt-3 flex flex-wrap items-center gap-2">

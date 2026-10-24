@@ -8,12 +8,15 @@ export type SlugPays = ProgrammePays["pays"];
 
 export type InfoPays = { slug: SlugPays; nom: string; drapeau: string };
 
-/** Madagascar attend sa réforme 2026-2027 : pas proposé tant qu'il n'a pas de matrice. */
+/**
+ * Madagascar attend sa réforme 2026-2027 : pas proposé tant qu'il n'a pas de matrice.
+ * ⛔ 24/10/2026 — Frédéric : « USA enlève », « Ontario enlève ». Leurs matrices
+ * restent dans lib/programmes-pays, mais ils ne sont plus proposés. Ses pays :
+ * France, Suisse romande, Belgique, Maroc, Québec, Côte d'Ivoire.
+ */
 export const PAYS: InfoPays[] = [
-  { slug: "ontario", nom: "Ontario (Canada)", drapeau: "🇨🇦" },
   { slug: "quebec", nom: "Québec (Canada)", drapeau: "🇨🇦" },
   { slug: "maroc", nom: "Maroc", drapeau: "🇲🇦" },
-  { slug: "etats-unis", nom: "États-Unis", drapeau: "🇺🇸" },
 ];
 
 /** Une classe du pays dans la colonne de gauche du coach. */
