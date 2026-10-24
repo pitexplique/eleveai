@@ -212,3 +212,6 @@ Pourquoi : dans deux ans, une IA produira des vidéos en masse. EleveAI se disti
 
 ## ⭐ La FICHE YOUTUBE à côté des vidéos (Frédéric, 23/10/2026)
 Chaque dossier d'épisode de `manim/sorties/` contient `fiche-youtube.md` (paysage puis short : fichier, miniature, titre, description avec chapitres, tags), générée depuis le manifeste par `python scripts/fiches-youtube.py [filtre]`. À relancer dans la passe finale de chaque lot (après le manifeste) : plus besoin de refaire titre, description et tags au moment de publier.
+
+## ⛔ « Ce que tu as appris » : titre EN HAUT ET CENTRÉ, toujours (Frédéric, 24/10/2026 : « ça sera toujours pareil »)
+Dans toutes les vidéos (paysages et shorts), l'écran « Ce que tu as appris » a son titre en haut de l'écran, centré ; les points viennent dessous. Rien à moitié effacé ne traîne sur cet écran.
