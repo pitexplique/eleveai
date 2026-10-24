@@ -10,7 +10,7 @@
 // phrases courtes, une idée par phrase, un dessin sur CHAQUE bloc, Ti Margo en
 // mode classe (champ `tiMargo`). Les dessins justes de juin sont gardés.
 //
-// Micro-compétences 6/6 (le champ `micros` de chaque bloc fait foi) :
+// Micro-compétences 7/7 (le champ `micros` de chaque bloc fait foi) :
 // - fraction_lire_ecrire → définition + figure (disque 3/4), propriété 1 (2/5),
 //                          réflexe 1, usage 1 (gâteau 2/8), exemple 1 (5/6),
 //                          entraînement 1
@@ -24,6 +24,10 @@
 //                          entraînements 2 et 5 (1/3 de 12 biscuits)
 // - fraction_mixte       → propriété 6 (7/4), réflexe 3 (3/4 et 5/4 autour de 1),
 //                          usage 2 (5/4 · 3/2 · 7/4), entraînement 3 (8/5)
+// - fraction_egale       → propriété 7 (6/8 = 3/4, 7/3 = 14/6), réflexe 4
+//                          (12/18 en deux étapes), piège 4 (6/8 n'est pas 4/6),
+//                          entraînement 6 (20/30). Ajoutée le 24/10/2026 :
+//                          Frédéric voit que ses 6e ne savent pas simplifier.
 // Tous les nombres sortent de la banque. ⛔ Aucun exemple commun avec la feuille
 // `lib/fiches-exercices/maths-6e-fraction-nombre.tsx` (elle évite les nôtres).
 //
@@ -133,6 +137,29 @@ const compare1224 = legende(
   "La même longueur : 2/4 = 1/2"
 );
 
+// PROPRIÉTÉ 7 : simplifier, c'est diviser le haut ET le bas (6/8 = 3/4).
+const compare6834 = legende(
+  comparer({ numerator: 6, denominator: 8 }, { numerator: 3, denominator: 4 }),
+  "La même longueur : 6/8 = 3/4"
+);
+
+// RÉFLEXE 4 : je divise, puis je recommence tant que c'est possible.
+const simplifier1218 = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "Simplifier 12/18",
+      headers: ["Fraction", "Je divise"],
+      rows: [
+        { values: ["12/18", "÷ 2 en haut et en bas"] },
+        { values: ["6/9", "÷ 3 en haut et en bas"] },
+        { values: ["2/3", "fini : plus rien"] },
+      ],
+      highlight: { col: 0 },
+    }}
+  />
+);
+
 // PROPRIÉTÉ 6 : 7/4 dépasse 1, coincé entre 1 et 2.
 const septQuartsEncadre = legende(
   droite(0, 3, 1, [
@@ -225,12 +252,14 @@ const pieges = [
   "Mettre en haut les parts du partage. 3/4 n'est pas 4/3.",
   "Croire que 1/5 est plus grand que 1/3. Plus on coupe, plus les parts sont petites.",
   "Chercher 7/4 près de 7. Il est entre 1 et 2.",
+  "Simplifier en enlevant le même nombre. 6/8 n'est pas 4/6 : on divise, on ne soustrait pas.",
 ];
 
 const aRetenir = [
   "En bas : les parts du partage. En haut : les parts prises.",
   "Pas de parts égales, pas de fraction.",
   "Le haut dépasse le bas : la fraction dépasse 1.",
+  "Simplifier : diviser le haut ET le bas par le même nombre.",
 ];
 
 export const ficheFractions6e: FicheCoursData = {
@@ -291,6 +320,12 @@ export const ficheFractions6e: FicheCoursData = {
       texte: "Quand le haut dépasse le bas, la fraction dépasse 1. 7/4, c'est 1 entier et 3/4.",
       schema: septQuartsEncadre,
     },
+    {
+      titre: "Simplifier",
+      micros: ["fraction_egale"],
+      texte: "Je divise le haut ET le bas par le même nombre. 6/8 = 3/4 : j'ai divisé 6 et 8 par 2. Je peux aussi multiplier : 7/3 = 14/6.",
+      schema: compare6834,
+    },
   ],
   reel: {
     texte:
@@ -318,6 +353,12 @@ export const ficheFractions6e: FicheCoursData = {
       micros: ["fraction_mixte"],
       texte: "Le haut est plus petit que le bas : la fraction est avant 1. Le haut est plus grand : elle dépasse 1.",
       schema: autourDeUn,
+    },
+    {
+      titre: "Je simplifie jusqu'au bout",
+      micros: ["fraction_egale"],
+      texte: "Je divise le haut et le bas par 2, 3, 5 ou 10. Puis je recommence. J'arrête quand plus rien ne divise les deux.",
+      schema: simplifier1218,
     },
   ],
   usages: [
@@ -401,6 +442,11 @@ export const ficheFractions6e: FicheCoursData = {
       question: "Dans une boîte de 12 biscuits, Léa mange 1/3 de la boîte. Combien de biscuits mange-t-elle ?",
       correction: "Je coupe 12 en 3 parts égales : 12 ÷ 3 = 4. Léa mange 4 biscuits.",
       micros: ["fraction_defi"],
+    },
+    {
+      question: "Simplifie au maximum : 20/30.",
+      correction: "20 et 30 sont dans la table de 10 : 20 ÷ 10 = 2 et 30 ÷ 10 = 3. Plus rien ne divise 2 et 3. Donc 20/30 = 2/3.",
+      micros: ["fraction_egale"],
     },
   ],
   tiMargo: {

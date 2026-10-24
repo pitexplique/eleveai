@@ -273,6 +273,38 @@ function attendusFraction(n: number, d: number): string[] {
   return out;
 }
 
+/* ─── FRACTION_EGALE (24/10/2026) : fractions égales, simplifier ───────────
+   Niveau 6e : ni nombre premier ni PGCD nommé. On multiplie ou on divise le
+   haut ET le bas par 2, 3, 4, 5 ou 10, et on recommence tant que c'est possible. */
+/** Une fraction irréductible p/q (q de 2 à `qMax`) ; plus grande que 1 si `sup1` (7/3). */
+function fractionIrreductible(qMax = 9, sup1 = false): [number, number] {
+  for (;;) {
+    const q = entierMixte(2, qMax);
+    const p = sup1 ? entierMixte(q + 1, 3 * q - 1) : entierMixte(1, q - 1);
+    if (gcd(p, q) === 1) return [p, q];
+  }
+}
+/** « Simplifie au maximum » : SEULE la fraction irréductible est acceptée (6/8 ne vaut pas 3/4 ici). */
+const attendusIrreductible = (p: number, q: number) => [`${p}/${q}`, `${p} / ${q}`];
+/** Les gestes de 6e pour simplifier n/d : on divise par 10, 5, 4, 3 ou 2 tant que c'est possible.
+ *  `null` si la fraction garde un diviseur commun que ces gestes ne trouvent pas (14/21). */
+function simplifierPasAPas(n: number, d: number): { p: number; q: number; chaine: string; gestes: string[] } | null {
+  let [a, b] = [n, d];
+  const chaine = [`${n}/${d}`];
+  const gestes: string[] = [];
+  for (;;) {
+    const k = [10, 5, 4, 3, 2].find((x) => a % x === 0 && b % x === 0);
+    if (!k) break;
+    gestes.push(`${a} ÷ ${k} = ${a / k} et ${b} ÷ ${k} = ${b / k}`);
+    a /= k;
+    b /= k;
+    chaine.push(`${a}/${b}`);
+  }
+  return gcd(a, b) === 1 ? { p: a, q: b, chaine: chaine.join(" = "), gestes } : null;
+}
+const DEFINITION_EGALE =
+  "Définition : deux fractions sont égales quand on passe de l’une à l’autre en multipliant, ou en divisant, le numérateur ET le dénominateur par le MÊME nombre.\n\n";
+
 // Partagés avec fractions-calcul.bank.ts (même chantier, même vocabulaire).
 export type { Prenom, Partage };
 export {
@@ -2738,6 +2770,557 @@ export const fractionsBank: TutorBankItemV4[] = [
           "\n\nConclusion : " +
           c.conclusion,
       };
+    },
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // FRACTION_EGALE — Fractions égales, simplifier (ajoutée le 24/10/2026)
+  //
+  // ⛔ POURQUOI. Frédéric voit sur les copies de ses 6e qu'ils NE SAVENT PAS
+  // SIMPLIFIER une fraction ; et l'objectif 6e-N-fractions-6 « Établir des
+  // égalités de fractions » n'était couvert que de loin par
+  // `fraction_representer`, qui n'énonce jamais la règle.
+  //
+  // ⭐ LA RÈGLE, ET RIEN QU'ELLE : on multiplie OU on divise le numérateur ET le
+  // dénominateur par le MÊME nombre (7/3 = 14/6, l'exemple du BO). Puis on
+  // complète une égalité à trou, on simplifie (6/8 = 3/4, 12/18 = 2/3), on
+  // reconnaît une fraction qui ne se simplifie plus.
+  //
+  // ⚠️ LES LEURRES SONT SES ERREURS RÉELLES : simplifier en SOUSTRAYANT (6/8 →
+  // 4/6 en ôtant 2), ne diviser que le numérateur, diviser le haut et le bas par
+  // deux nombres différents, ajouter le même nombre en haut et en bas.
+  // « Simplifie au maximum » n'accepte QUE la fraction irréductible (exact_text).
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    kind: "fixed",
+    id: "fraction_egale_fixed_bo",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_egale",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Rayan écrit : 7/3 = 14/6. A-t-il raison ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
+    hint: "Par quel nombre passe-t-on de 7 à 14 ? Et de 3 à 6 ?",
+    explanation:
+      DEFINITION_EGALE +
+      "Méthode : on regarde si le haut et le bas ont été multipliés par le même nombre.\n\n" +
+      "Calcul : 7 × 2 = 14 et 3 × 2 = 6. Le haut et le bas sont multipliés par 2.\n\n" +
+      "Conclusion : oui, 7/3 = 14/6.",
+    tags: ["fraction_nombre", "egalite", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "fraction_egale_tpl_regle",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_egale",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Le haut ET le bas sont multipliés par le même nombre.",
+    tags: ["fraction_nombre", "egalite", "template", "qcm"],
+    generate: () => {
+      const sup = Math.random() < 0.25;
+      const [a, b] = sup ? fractionIrreductible(4, true) : fractionIrreductible(6);
+      const k = tirer([2, 3, 4, 5]);
+      const m = tirer([2, 3, 4, 5].filter((v) => v !== k));
+      const bonne = `${a * k}/${b * k}`;
+      // Les erreurs de copie : ajouter le même nombre, ne multiplier que le haut
+      // (ou que le bas), multiplier le haut et le bas par deux nombres différents.
+      const pieges = shuffle(
+        Array.from(new Set([`${a + k}/${b + k}`, `${a * k}/${b}`, `${a}/${b * k}`, `${a * k}/${b * m}`, `${a * m}/${b * k}`])).filter(
+          (c) => {
+            const [u, v] = c.split("/").map(Number);
+            return c !== bonne && u * b !== v * a;
+          },
+        ),
+      ).slice(0, 3);
+      const x = tirer(PRENOMS);
+      const s = tirer(PARTAGES);
+      const tournures = [
+        `Quelle fraction est égale à ${a}/${b} ?`,
+        `${x.p} cherche une fraction égale à ${a}/${b}. Laquelle choisit-${il(x)} ?`,
+        `${x.p} multiplie le numérateur et le dénominateur de ${a}/${b} par le même nombre. Quelle fraction peut-${il(x)} obtenir ?`,
+        `Au tableau, ${x.p} doit écrire une fraction égale à ${a}/${b}. Laquelle est juste ?`,
+        ...(sup ? [] : [`${x.p} a ${s.pp} ${a}/${b} ${s.du}. Quelle fraction dit la même quantité ?`]),
+      ];
+      return {
+        text: tirer(tournures),
+        format: "qcm",
+        choices: shuffle([bonne, ...pieges]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation:
+          DEFINITION_EGALE +
+          `Méthode : on multiplie ${a} et ${b} par le même nombre, ici ${k}.\n\n` +
+          `Calcul : ${a} × ${k} = ${a * k} et ${b} × ${k} = ${b * k}. Attention : ajouter ${k} en haut et en bas donne ${a + k}/${b + k}, qui n’est pas égale à ${a}/${b}.\n\n` +
+          `Conclusion : ${a}/${b} = ${bonne}.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "fraction_egale_tpl_multiplier",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_egale",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Cherche par combien on a multiplié, puis fais pareil de l’autre côté.",
+    tags: ["fraction_nombre", "egalite", "template"],
+    generate: () => {
+      const sup = Math.random() < 0.25;
+      const [a, b] = sup ? fractionIrreductible(4, true) : fractionIrreductible(6);
+      let k = tirer([2, 3, 4, 5, 10]);
+      if (b * k > 60 || a * k > 60) k = 2;
+      const trouEnBas = Math.random() < 0.4;
+      const egalite = trouEnBas ? `${a}/${b} = ${a * k}/…` : `${a}/${b} = …/${b * k}`;
+      const rep = trouEnBas ? b * k : a * k;
+      const [x, y] = deuxPrenoms();
+      const parts = PARTAGES.filter((p) => p.dMax >= b * k);
+      const s = parts.length ? tirer(parts) : null;
+      const tournures = [
+        // ⚠️ L'égalité finit par « … » : elle va en fin de ligne, sans point après.
+        `Complète : ${egalite}`,
+        `${x.p} complète une égalité de fractions. Quel nombre écrit-${il(x)} ?
+${egalite}`,
+        `Aide ${x.p} : quel nombre manque ?
+${egalite}`,
+        `${x.p} multiplie le haut et le bas par ${k}. Quel nombre manque ?
+${egalite}`,
+        ...(s && !sup && !trouEnBas
+          ? [
+              `${x.p} a ${s.pp} ${a}/${b} ${s.du}. ${y.p} veut la même quantité, mais ${s.f ? "sa" : "son"} ${s.le.replace(/^(la|le) /, "")} a ${b * k} ${s.unite} ${egales(s)}. Combien ${deU(s)} lui faut-il ? (${egalite})`,
+            ]
+          : []),
+      ];
+      const [avant, apres] = trouEnBas ? [a, a * k] : [b, b * k];
+      return {
+        text: tirer(tournures),
+        format: "short",
+        expected: [String(rep)],
+        comparator: "number_equal",
+        explanation:
+          DEFINITION_EGALE +
+          `Méthode : pour passer de ${avant} à ${apres}, on multiplie par ${k} (${avant} × ${k} = ${apres}). On multiplie l’autre nombre par ${k} aussi.\n\n` +
+          `Calcul : ${trouEnBas ? `${b} × ${k} = ${b * k}` : `${a} × ${k} = ${a * k}`}.\n\n` +
+          `Conclusion : ${a}/${b} = ${a * k}/${b * k}.`,
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "fraction_egale_fixed_15_20",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_egale",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Complète : 15/20 = 3/…",
+    format: "short",
+    expected: ["4"],
+    comparator: "number_equal",
+    hint: "Par quel nombre passe-t-on de 15 à 3 ?",
+    explanation:
+      DEFINITION_EGALE +
+      "Méthode : on passe de 15 à 3 en divisant par 5 (15 ÷ 5 = 3). On divise donc aussi 20 par 5.\n\n" +
+      "Calcul : 20 ÷ 5 = 4.\n\n" +
+      "Conclusion : 15/20 = 3/4.",
+    tags: ["fraction_nombre", "egalite", "simplifier", "short"],
+  },
+  {
+    kind: "template",
+    id: "fraction_egale_tpl_diviser",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_egale",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Cherche par combien on a divisé, puis fais pareil de l’autre côté.",
+    tags: ["fraction_nombre", "egalite", "simplifier", "template"],
+    generate: () => {
+      const [p, q] = fractionIrreductible(9);
+      let k = tirer([2, 3, 4, 5, 10]);
+      if (q * k > 60) k = tirer([2, 3, 4, 5]);
+      const [n, d] = [p * k, q * k];
+      const trouEnBas = Math.random() < 0.5;
+      const egalite = trouEnBas ? `${n}/${d} = ${p}/…` : `${n}/${d} = …/${q}`;
+      const rep = trouEnBas ? q : p;
+      const x = tirer(PRENOMS);
+      const tournures = [
+        `Complète : ${egalite}`,
+        `${x.p} divise le haut et le bas par ${k}. Quel nombre manque ?
+${egalite}`,
+        `${x.p} simplifie une fraction. Quel nombre manque ?
+${egalite}`,
+        // Des situations seulement quand le tout est plausible (pas une BD de 4 pages).
+        ...(d >= 8 ? [`Dans un morceau de ${d} mesures, le refrain en occupe ${n}. ${x.p}, ${x.f ? "pianiste" : "guitariste"}, l’écrit en fraction. Quel nombre manque ?
+${egalite}`] : []),
+        ...(d >= 20 ? [`${x.p} a lu ${n} pages d’une BD de ${d} pages. ${Il(x)} simplifie la fraction lue. Quel nombre manque ?
+${egalite}`] : []),
+        ...(d >= 20 ? [`Un entraînement de ${d} minutes compte ${n} minutes de course. ${x.p}, ${x.f ? "l’entraîneuse" : "l’entraîneur"}, l’écrit en fraction. Quel nombre manque ?
+${egalite}`] : []),
+      ];
+      const [avant, apres] = trouEnBas ? [n, p] : [d, q];
+      return {
+        text: tirer(tournures),
+        format: "short",
+        expected: [String(rep)],
+        comparator: "number_equal",
+        explanation:
+          DEFINITION_EGALE +
+          `Méthode : pour passer de ${avant} à ${apres}, on divise par ${k} (${avant} ÷ ${k} = ${apres}). On divise l’autre nombre par ${k} aussi.\n\n` +
+          `Calcul : ${trouEnBas ? `${d} ÷ ${k} = ${q}` : `${n} ÷ ${k} = ${p}`}.\n\n` +
+          `Conclusion : ${n}/${d} = ${p}/${q}.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "fraction_egale_tpl_figure",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_egale",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Compare les longueurs coloriées des deux barres.",
+    tags: ["fraction_nombre", "egalite", "canvas", "template", "qcm"],
+    generate: () => {
+      const b = entierMixte(2, 6);
+      const a = entierMixte(1, b - 1);
+      const k = b <= 3 ? tirer([2, 3, 4]) : 2;
+      const d = b * k;
+      // Trois cas : égales ; « j'ajoute le même nombre en haut et en bas »
+      // (1/2 → 3/4) ; un numérateur décalé d'une part.
+      const cas = tirer(["egal", "egal", "ajoute", "decale"] as const);
+      let c = a * k;
+      if (cas === "ajoute") c = a + (d - b);
+      if (cas === "decale") c = a * k + 1 < d ? a * k + 1 : a * k - 1;
+      const oui = c * b === a * d;
+      const [x, y] = deuxPrenoms();
+      const ils = x.f && y.f ? "elles" : "ils";
+      const tournures = [
+        `Regarde les barres. ${a}/${b} et ${c}/${d} sont-elles égales ?`,
+        `${x.p} colorie ${a}/${b} d’une bande. ${y.p} colorie ${c}/${d} d’une bande identique. Ont-${ils} colorié la même longueur ?`,
+        `${x.p} dit : « ${a}/${b} = ${c}/${d} ». Regarde les barres : a-t-${il(x)} raison ?`,
+        `Les barres ${deP(x)} montrent ${a}/${b} et ${c}/${d}. Ces deux fractions sont-elles égales ?`,
+        ...(cas === "ajoute"
+          ? [`${x.p} ajoute ${d - b} en haut et en bas de ${a}/${b} et trouve ${c}/${d}. Les barres montrent-elles la même quantité ?`]
+          : []),
+      ];
+      return {
+        text: tirer(tournures),
+        format: "qcm",
+        choices: shuffle(["oui", "non"]),
+        expected: [oui ? "oui" : "non"],
+        comparator: "mcq_exact",
+        explanation:
+          DEFINITION_EGALE +
+          `Méthode : on cherche si on passe de ${b} à ${d} et de ${a} à ${c} en multipliant par le même nombre.\n\n` +
+          (oui
+            ? `Calcul : ${b} × ${k} = ${d} et ${a} × ${k} = ${c}. Les deux barres ont la même longueur coloriée.\n\n`
+            : `Calcul : ${b} × ${k} = ${d}, mais ${a} × ${k} = ${a * k}, pas ${c}. Les longueurs coloriées ne sont pas les mêmes.${cas === "ajoute" ? " Ajouter le même nombre en haut et en bas ne donne jamais une fraction égale." : ""}\n\n`) +
+          `Conclusion : ${oui ? `oui, ${a}/${b} = ${c}/${d}` : `non, ${a}/${b} ≠ ${c}/${d}`}.`,
+        canvas: fractionCanvas({
+          model: "compare",
+          fractions: [
+            { numerator: a, denominator: b, label: `${a}/${b}` },
+            { numerator: c, denominator: d, label: `${c}/${d}` },
+          ],
+        }),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "fraction_egale_fixed_soustraire",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_egale",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Hugo simplifie 6/8 : il enlève 2 en haut et en bas, et trouve 4/6. Quelle est la bonne simplification de 6/8 ?",
+    format: "qcm",
+    choices: ["3/4", "4/6", "1/2", "3/8"],
+    expected: ["3/4"],
+    comparator: "mcq_exact",
+    hint: "Pour simplifier, on DIVISE le haut et le bas par le même nombre.",
+    explanation:
+      DEFINITION_EGALE +
+      "Méthode : on ne soustrait jamais pour simplifier : on divise le haut et le bas par le même nombre. 6 et 8 sont tous les deux dans la table de 2.\n\n" +
+      "Calcul : 6 ÷ 2 = 3 et 8 ÷ 2 = 4. L’erreur de Hugo : 4/6 n’est pas égale à 6/8.\n\n" +
+      "Conclusion : 6/8 = 3/4.",
+    tags: ["fraction_nombre", "simplifier", "piege", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "fraction_egale_tpl_simplifier",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_egale",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Divise le haut et le bas par 2, 3, 5 ou 10… et recommence tant que c’est possible.",
+    tags: ["fraction_nombre", "simplifier", "template"],
+    generate: () => {
+      const sup = Math.random() < 0.2;
+      const [p, q] = sup ? fractionIrreductible(4, true) : fractionIrreductible(9);
+      let k = tirer([2, 3, 4, 5, 10]);
+      if (q * k > 60 || p * k > 60) k = tirer([2, 3]);
+      const [n, d] = [p * k, q * k];
+      const s = simplifierPasAPas(n, d)!;
+      const x = tirer(PRENOMS);
+      const tournures = [
+        `Simplifie au maximum : ${n}/${d}.`,
+        `${x.p} doit simplifier ${n}/${d} au maximum. Qu’écrit-${il(x)} ?`,
+        `Écris ${n}/${d} sous la forme d’une fraction simplifiée au maximum. Aide ${x.p}.`,
+        `Dans son cahier, ${x.p} trouve ${n}/${d}. Simplifie cette fraction au maximum.`,
+        `${x.p} divise le haut et le bas de ${n}/${d} par le même nombre, autant de fois que possible. Quelle fraction obtient-${il(x)} ? (simplifiée au maximum)`,
+      ];
+      return {
+        text: tirer(tournures),
+        format: "short",
+        expected: attendusIrreductible(p, q),
+        comparator: "exact_text",
+        explanation:
+          DEFINITION_EGALE +
+          "Méthode : on divise le haut et le bas par le même nombre (2, 3, 5, 10…), et on recommence tant que c’est possible.\n\n" +
+          `Calcul : ${s.gestes.join(" ; ")}. Donc ${s.chaine}. ${p} et ${q} n’ont plus de diviseur commun autre que 1 : on ne peut plus simplifier.\n\n` +
+          `Conclusion : ${n}/${d} simplifiée au maximum, c’est ${p}/${q}.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "fraction_egale_tpl_simplifier_qcm",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_egale",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On divise le haut ET le bas par le MÊME nombre. On ne soustrait jamais.",
+    tags: ["fraction_nombre", "simplifier", "piege", "template", "qcm"],
+    generate: () => {
+      const [p, q] = fractionIrreductible(9);
+      let k = tirer([2, 3, 4, 5, 10]);
+      if (q * k > 60) k = tirer([2, 3, 4, 5]);
+      const [n, d] = [p * k, q * k];
+      const bonne = `${p}/${q}`;
+      const s = tirer([2, k, n - p].filter((v) => v >= 1 && v < n));
+      // Un autre diviseur du bas, pour « diviser par deux nombres différents ».
+      const k2 = [2, 3, 4, 5, 10].find((v) => v !== k && d % v === 0 && d / v !== q);
+      const candidats = [
+        `${n - s}/${d - s}`, // ⛔ son erreur n° 1 : soustraire (6/8 → 4/6)
+        `${p}/${d}`, // ne diviser que le numérateur
+        `${n}/${q}`, // ne diviser que le dénominateur
+        ...(k2 ? [`${p}/${d / k2}`] : []), // diviser par deux nombres différents
+        `${p + 1}/${q}`,
+        `${p}/${q + 1}`,
+      ];
+      const pieges = Array.from(new Set(candidats))
+        .filter((c) => {
+          const [u, v] = c.split("/").map(Number);
+          return c !== bonne && u >= 1 && v >= 2 && u * q !== v * p;
+        })
+        .slice(0, 3);
+      const [x, y] = deuxPrenoms();
+      const tournures = [
+        `Quelle est la fraction ${n}/${d} simplifiée au maximum ?`,
+        `${x.p} simplifie ${n}/${d} au maximum. Quel résultat doit-${il(x)} trouver ?`,
+        `Parmi ces fractions, laquelle est ${n}/${d} simplifiée au maximum ? Aide ${x.p}.`,
+        `${x.p} et ${y.p} ne trouvent pas la même chose en simplifiant ${n}/${d} au maximum. Quelle est la bonne réponse ?`,
+      ];
+      const etapes = simplifierPasAPas(n, d)!;
+      return {
+        text: tirer(tournures),
+        format: "qcm",
+        choices: shuffle([bonne, ...pieges]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation:
+          DEFINITION_EGALE +
+          "Méthode : on divise le haut et le bas par le même nombre, tant que c’est possible. On ne soustrait jamais : enlever le même nombre en haut et en bas change la fraction.\n\n" +
+          `Calcul : ${etapes.gestes.join(" ; ")}. Donc ${etapes.chaine}.\n\n` +
+          `Conclusion : ${n}/${d} simplifiée au maximum, c’est ${bonne}.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "fraction_egale_tpl_irreductible",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_egale",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Cherche un nombre (2, 3, 5…) qui divise à la fois le haut et le bas.",
+    tags: ["fraction_nombre", "simplifier", "template", "qcm"],
+    generate: () => {
+      const simplifiable = Math.random() < 0.5;
+      let n: number, d: number, k = 1;
+      if (simplifiable) {
+        const [p, q] = fractionIrreductible(7);
+        k = tirer([2, 3, 3, 5]); // ⚠️ 3 et 5 surtout : 9/15, 15/25 ont un haut et un bas impairs
+        [n, d] = [p * k, q * k];
+      } else [n, d] = fractionIrreductible(20);
+      const x = tirer(PRENOMS);
+      const peutOn = Math.random() < 0.7;
+      const tournures = peutOn
+        ? [
+            `Peut-on encore simplifier ${n}/${d} ?`,
+            `${x.p} a trouvé ${n}/${d}. Peut-${il(x)} encore simplifier cette fraction ?`,
+            `${x.p} veut diviser le haut et le bas de ${n}/${d} par un même nombre autre que 1. Est-ce possible ?`,
+            `Le résultat ${deP(x)} est ${n}/${d}. Peut-on le simplifier encore ?`,
+          ]
+        : [`${n}/${d} est-elle simplifiée au maximum ?`, `${x.p} dit que ${n}/${d} est simplifiée au maximum. A-t-${il(x)} raison ?`];
+      const bon = peutOn === simplifiable ? "oui" : "non";
+      return {
+        text: tirer(tournures),
+        format: "qcm",
+        choices: shuffle(["oui", "non"]),
+        expected: [bon],
+        comparator: "mcq_exact",
+        explanation:
+          DEFINITION_EGALE +
+          "Méthode : on cherche un nombre autre que 1 qui divise à la fois le numérateur et le dénominateur.\n\n" +
+          (simplifiable
+            ? `Calcul : ${n} et ${d} sont tous les deux dans la table de ${k} : ${n} ÷ ${k} = ${n / k} et ${d} ÷ ${k} = ${d / k}. On peut encore simplifier : ${n}/${d} = ${n / k}/${d / k}.\n\n`
+            : `Calcul : aucun nombre autre que 1 ne divise à la fois ${n} et ${d}. La fraction ${n}/${d} est simplifiée au maximum.\n\n`) +
+          `Conclusion : la réponse est ${bon}.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "fraction_egale_tpl_erreur",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_egale",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Refais le calcul : par quoi a-t-on divisé en haut ? Et en bas ?",
+    tags: ["fraction_nombre", "simplifier", "piege", "template", "qcm"],
+    // Les trois erreurs que Frédéric voit sur les copies, plus le calcul juste.
+    generate: () => {
+      const x = tirer(PRENOMS);
+      const IL = Il(x);
+      const CHOIX = {
+        juste: "C’est juste.",
+        soustrait: `${IL} a soustrait au lieu de diviser.`,
+        numerateur: `${IL} n’a divisé que le numérateur.`,
+        differents: `${IL} a divisé par deux nombres différents.`,
+      };
+      for (;;) {
+        const [p, q] = fractionIrreductible(9);
+        let k = tirer([2, 3, 4, 5]);
+        if (q * k > 60) k = 2;
+        const [n, d] = [p * k, q * k];
+        const cas = tirer(["juste", "soustrait", "soustrait", "numerateur", "differents"] as const);
+        let n2 = p, d2 = q;
+        if (cas === "soustrait") {
+          const s = tirer([2, k, n - p].filter((v) => v >= 1 && v < n));
+          [n2, d2] = [n - s, d - s];
+        } else if (cas === "numerateur") [n2, d2] = [p, d];
+        else if (cas === "differents") {
+          const k2 = [2, 3, 4, 5, 10].find((v) => v !== k && d % v === 0);
+          if (!k2) continue;
+          [n2, d2] = [p, d / k2];
+        }
+        // Le cas doit se lire sans ambiguïté sur le calcul écrit.
+        const memeValeur = n2 * d === d2 * n;
+        if ((cas === "juste") !== memeValeur) continue;
+        if (cas !== "soustrait" && n - n2 === d - d2) continue;
+        if (d2 < 2 || n2 < 1) continue;
+        const ecrit = `${n}/${d} = ${n2}/${d2}`;
+        const tournures = [
+          `${x.p} simplifie ${n}/${d} et écrit : ${ecrit}. Que penses-tu de son calcul ?`,
+          `Au tableau, ${x.p} écrit : ${ecrit}. Qu’en dis-tu ?`,
+          `${x.p} veut une fraction plus simple que ${n}/${d}. ${IL} écrit : ${ecrit}. Que penses-tu de sa réponse ?`,
+          `Vérifie le calcul ${deP(x)} : ${ecrit}.`,
+        ];
+        const bonne = CHOIX[cas];
+        const raison = {
+          juste: `${n} ÷ ${k} = ${p} et ${d} ÷ ${k} = ${q} : le haut et le bas sont divisés par ${k}. C’est juste.`,
+          soustrait: `${IL} a enlevé ${n - n2} en haut et en bas. Soustraire change la fraction : il faut diviser. ${n} ÷ ${k} = ${p} et ${d} ÷ ${k} = ${q}, donc ${n}/${d} = ${p}/${q}.`,
+          numerateur: `${n} ÷ ${k} = ${p}, mais le dénominateur ${d} n’a pas été divisé. Il faut diviser le haut ET le bas : ${d} ÷ ${k} = ${q}, donc ${n}/${d} = ${p}/${q}.`,
+          differents: `En haut, ${n} ÷ ${k} = ${p} ; en bas, ${d} ÷ ${d / d2} = ${d2}. Ce ne sont pas les mêmes nombres. Avec ${k} des deux côtés : ${n}/${d} = ${p}/${q}.`,
+        }[cas];
+        return {
+          text: tirer(tournures),
+          format: "qcm",
+          choices: shuffle(Object.values(CHOIX)),
+          expected: [bonne],
+          comparator: "mcq_exact",
+          explanation:
+            DEFINITION_EGALE +
+            "Méthode : on refait le calcul : par quel nombre a-t-on divisé le haut ? Et le bas ?\n\n" +
+            `Calcul : ${raison}\n\n` +
+            `Conclusion : ${bonne}`,
+        };
+      }
+    },
+  },
+  {
+    kind: "template",
+    id: "fraction_egale_tpl_probleme",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_egale",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Écris d’abord la fraction « partie sur tout », puis simplifie-la.",
+    tags: ["fraction_nombre", "simplifier", "probleme", "template"],
+    // Les maths sont TRANSVERSALES : chaque situation a un décor et souvent un
+    // métier, au féminin comme au masculin.
+    generate: () => {
+      type Situation = { totaux: number[]; texte: (x: Prenom, n: number, d: number) => string };
+      const SITUATIONS: Situation[] = [
+        { totaux: [40, 48, 60, 80, 90], texte: (x, n, d) => `${x.p} a joué ${n} minutes d’un match de ${d} minutes. Quelle fraction du match a-t-${il(x)} jouée ? Simplifie-la au maximum.` },
+        { totaux: [4, 6, 8, 10, 12], texte: (x, n, d) => `Une recette est prévue pour ${d} personnes. ${x.p} la prépare pour ${n} personnes. Quelle fraction de la recette prépare-t-${il(x)} ? Simplifie-la au maximum.` },
+        { totaux: [16, 24, 32, 48], texte: (x, n, d) => `Un morceau compte ${d} mesures. ${x.p}, ${x.f ? "la batteuse" : "le batteur"}, joue pendant ${n} mesures. Quelle fraction du morceau joue-t-${il(x)} ? Simplifie-la au maximum.` },
+        { totaux: [20, 24, 25, 28, 30], texte: (x, n, d) => `Dans la classe ${deP(x)}, ${n} élèves sur ${d} viennent à vélo. Quelle fraction de la classe vient à vélo ? Simplifie-la au maximum.` },
+        { totaux: [20, 30, 40, 50, 60], texte: (x, n, d) => `${x.p}, ${x.f ? "boulangère" : "boulanger"}, cuit ${d} baguettes. À midi, ${il(x)} en a vendu ${n}. Quelle fraction des baguettes a-t-${il(x)} vendue ? Simplifie-la au maximum.` },
+        { totaux: [60, 80, 90, 100, 120], texte: (x, n, d) => `Un film dure ${d} minutes. ${x.p} en a regardé ${n} minutes. Quelle fraction du film a-t-${il(x)} regardée ? Simplifie-la au maximum.` },
+        { totaux: [12, 15, 18, 20, 24, 30], texte: (x, n, d) => `${x.p}, paysagiste, doit planter ${d} arbres. ${Il(x)} en a planté ${n}. Quelle fraction des arbres a-t-${il(x)} plantée ? Simplifie-la au maximum.` },
+        { totaux: [6, 8, 10, 12], texte: (x, n, d) => `Une pizza est coupée en ${d} parts égales. ${x.p} en mange ${n}. Quelle fraction de la pizza a-t-${il(x)} mangée ? Simplifie-la au maximum.` },
+        { totaux: [8, 12, 16, 20], texte: (x, n, d) => `Une course de natation fait ${d} longueurs. ${x.p} en a déjà nagé ${n}. Quelle fraction de la course a-t-${il(x)} nagée ? Simplifie-la au maximum.` },
+        { totaux: [10, 12, 15, 18, 20, 24], texte: (x, n, d) => `Un roman a ${d} chapitres. ${x.p} en a lu ${n}. Quelle fraction du roman a-t-${il(x)} lue ? Simplifie-la au maximum.` },
+        { totaux: [20, 24, 30, 36, 40], texte: (x, n, d) => `${x.p}, vétérinaire, a ${d} rendez-vous cette semaine. ${n} sont pour des chats. Quelle fraction des rendez-vous est pour des chats ? Simplifie-la au maximum.` },
+      ];
+      for (;;) {
+        const sit = tirer(SITUATIONS);
+        const d = tirer(sit.totaux);
+        const n = entierMixte(1, d - 1);
+        const s = simplifierPasAPas(n, d);
+        if (!s || s.p === n || s.q > 12) continue;
+        const x = tirer(PRENOMS);
+        return {
+          text: sit.texte(x, n, d),
+          format: "short",
+          expected: attendusIrreductible(s.p, s.q),
+          comparator: "exact_text",
+          explanation:
+            "Définition : une fraction « partie sur tout » s’écrit avec la partie en haut et le tout en bas. On la simplifie en divisant le haut ET le bas par le même nombre.\n\n" +
+            `Méthode : la partie est ${n}, le tout est ${d} : on écrit ${n}/${d}, puis on simplifie tant que c’est possible.\n\n` +
+            `Calcul : ${s.gestes.join(" ; ")}. Donc ${s.chaine}.\n\n` +
+            `Conclusion : la fraction simplifiée au maximum est ${s.p}/${s.q}.`,
+        };
+      }
     },
   },
 ];

@@ -12,14 +12,16 @@
 // fraction ; fractions DÉCIMALES (dixièmes, centièmes) et 1/2, 1/5 en décimal ;
 // comparer à même dénominateur, à même numérateur, à 1, et en redécoupant
 // quand un dénominateur est multiple de l'autre ; encadrer entre deux entiers
-// et l'écriture « entier + fraction » ; fractions égales (2/8 = 1/4). Aucun
+// et l'écriture « entier + fraction » ; fractions égales (2/8 = 1/4) et
+// simplifier au maximum avec 2, 3, 5 (micro fraction_egale, 24/10/2026). Aucun
 // calcul de fractions (c'est la feuille `fraction-calcul`), ni fraction d'une
 // quantité (micro fraction_quantite, passée sous fraction_calcul le 22/08),
-// ni nombre négatif, ni simplification systématique.
+// ni nombre négatif.
 // ⛔ Aucun exemple de la fiche de cours n'est repris (le disque 3/4, le gâteau
 // 5/6, la grille 3/4, 1/3 contre 1/5, 3/5 contre 4/5, 1/4 · 1/2 · 3/4 sur la
 // droite, 7/4, 4/6, la pizza 3/8, 2/4 = 1/2, 2/3 contre 3/4, les 15 billes, les
-// 12 biscuits), ni de la feuille de 5e (2/3 = 8/12, la famille de 3/8, 7 ÷ 4,
+// 12 biscuits, 6/8 = 3/4 et son piège 4/6, 7/3 = 14/6, 12/18 en deux étapes,
+// 20/30), ni de la feuille de 5e (2/3 = 8/12, la famille de 3/8, 7 ÷ 4,
 // 17/4, les tirs au but, le jardin, les fractions de l'heure, la fraction
 // mystère en douzièmes).
 //
@@ -27,7 +29,8 @@
 // échangés (2), colorier le dénominateur (3), des parts inégales (4), des
 // centièmes lus comme des dixièmes (5, 14, 15), oublier l'unité de 1,7 (6), un
 // grand dénominateur pris pour une grande fraction (7, 15), « une fraction est
-// toujours plus petite que 1 » (8, 15), ajouter au lieu de multiplier (9),
+// toujours plus petite que 1 » (8, 15), ajouter ou ENLEVER au lieu de
+// multiplier ou diviser (9 : Noé, 6/9 → 3/6, l'erreur des copies de 6e),
 // comparer les numérateurs sans redécouper (10, 11, 16, 20), lire « 2 + 1/5 »
 // comme un produit (12), compter les traits au lieu des sauts (13), rapporter
 // une part à une autre part (19), « le plus de voix » pris pour « plus de la
@@ -49,7 +52,8 @@
 // Micro-compétences : fraction_lire_ecrire (1, 2, 17, 19),
 // fraction_representer (3, 4, 13, 19), fraction_decimal (5, 6, 11, 14, 16, 17,
 // 18, 20), fraction_comparer (7, 10, 11, 12, 15, 16, 17, 18, 19, 20),
-// fraction_mixte (8, 12, 13, 18), fraction_defi (4, 9, 14, 15, 17, 19, 20). 6/6.
+// fraction_mixte (8, 12, 13, 18), fraction_egale (9, 19),
+// fraction_defi (4, 9, 14, 15, 17, 19, 20). 7/7.
 
 import type { ReactNode } from "react";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
@@ -298,7 +302,7 @@ export const exercicesFractionNombre6e: FicheExercicesData = {
   notion: "fraction-nombre",
   titre: "Les fractions",
   accroche:
-    "Vingt exercices, du geste seul au problème : lire et écrire une fraction, la dessiner, passer d'une fraction décimale à un nombre à virgule, comparer et ranger, placer une fraction plus grande que 1 entre deux entiers. Des barres, une tablette de chocolat, des gourdes, une élection de délégué, un sentier de randonnée, un vitrail et une fraction qui se cache. Un rappel de cours avant chaque niveau. Cherche d'abord au brouillon, puis ouvre la correction : étape par étape, avec le pourquoi, le piège nommé, et les parts dessinées.",
+    "Vingt exercices, du geste seul au problème : lire et écrire une fraction, la dessiner, trouver des fractions égales et simplifier, passer d'une fraction décimale à un nombre à virgule, comparer et ranger, placer une fraction plus grande que 1 entre deux entiers. Des barres, une tablette de chocolat, des gourdes, une élection de délégué, un sentier de randonnée, un vitrail et une fraction qui se cache. Un rappel de cours avant chaque niveau. Cherche d'abord au brouillon, puis ouvre la correction : étape par étape, avec le pourquoi, le piège nommé, et les parts dessinées.",
 
   fichesCours: [{ href: "/fiches-cours/maths/6e/fraction-nombre", titre: "Les fractions" }],
   coachHref: "/coach-ia/maths?classe=6e",
@@ -414,15 +418,15 @@ export const exercicesFractionNombre6e: FicheExercicesData = {
       titre: "Type devoir",
       consigne: "Plusieurs étapes. Je dessine les parts au brouillon avant de comparer.",
       rappel: [
-        "Deux fractions sont égales quand je multiplie le haut ET le bas par le même nombre : $\\dfrac{1}{2} = \\dfrac{3}{6}$.",
+        "Deux fractions sont égales quand je multiplie, ou je divise, le haut ET le bas par le même nombre : $\\dfrac{1}{2} = \\dfrac{3}{6}$. Simplifier, c'est diviser.",
         "Pour comparer, je veux des parts de même taille : je redécoupe, puis je compare les numérateurs.",
         "Quand le numérateur dépasse le dénominateur, la fraction dépasse $1$ : $\\dfrac{7}{5} = 1 + \\dfrac{2}{5}$.",
       ],
       exercices: [
         {
-          enonce: "a) Complète : $\\dfrac{1}{3} = \\dfrac{2}{\\ldots} = \\dfrac{\\ldots}{9} = \\dfrac{4}{\\ldots}$\nb) Trouve une fraction égale à $\\dfrac{1}{3}$ avec le dénominateur $30$.\nc) $\\dfrac{5}{15}$ est-elle égale à $\\dfrac{1}{3}$ ?",
+          enonce: "a) Complète : $\\dfrac{1}{3} = \\dfrac{2}{\\ldots} = \\dfrac{\\ldots}{9} = \\dfrac{4}{\\ldots}$\nb) Simplifie au maximum : $\\dfrac{10}{15}$, puis $\\dfrac{18}{24}$.\nc) Noé simplifie $\\dfrac{6}{9}$ : il enlève $3$ en haut et en bas, et trouve $\\dfrac{3}{6}$. A-t-il raison ?",
           correction:
-            "Deux fractions sont égales quand je multiplie le haut ET le bas par le même nombre.\na) En haut, $1 \\times 2 = 2$ ; donc en bas, $3 \\times 2 = 6$ : $\\dfrac{2}{6}$.\nEn bas, $3 \\times 3 = 9$ ; donc en haut, $1 \\times 3 = 3$ : $\\dfrac{3}{9}$.\nEn haut, $1 \\times 4 = 4$ ; donc en bas, $3 \\times 4 = 12$ : $\\dfrac{4}{12}$.\nb) $3 \\times 10 = 30$ ; donc en haut, $1 \\times 10 = 10$ : $\\dfrac{10}{30}$.\nc) $1 \\times 5 = 5$ et $3 \\times 5 = 15$ : oui, $\\dfrac{5}{15} = \\dfrac{1}{3}$.\n⛔ Le piège : AJOUTER. En ajoutant $1$ en haut et en bas, on obtient $\\dfrac{2}{4}$ : c'est la moitié, pas le tiers.\nRéponse : a) $\\dfrac{1}{3} = \\dfrac{2}{6} = \\dfrac{3}{9} = \\dfrac{4}{12}$ ; b) $\\dfrac{10}{30}$ ; c) oui.",
+            "Deux fractions sont égales quand je multiplie, ou je divise, le haut ET le bas par le même nombre.\na) En haut, $1 \\times 2 = 2$ ; donc en bas, $3 \\times 2 = 6$ : $\\dfrac{2}{6}$.\nEn bas, $3 \\times 3 = 9$ ; donc en haut, $1 \\times 3 = 3$ : $\\dfrac{3}{9}$.\nEn haut, $1 \\times 4 = 4$ ; donc en bas, $3 \\times 4 = 12$ : $\\dfrac{4}{12}$.\nb) $10$ et $15$ sont dans la table de $5$ : $10 \\div 5 = 2$ et $15 \\div 5 = 3$. Donc $\\dfrac{10}{15} = \\dfrac{2}{3}$.\n$18$ et $24$ sont pairs : $\\dfrac{18}{24} = \\dfrac{9}{12}$. Puis $9$ et $12$ sont dans la table de $3$ : $\\dfrac{9}{12} = \\dfrac{3}{4}$. Plus rien ne divise à la fois $3$ et $4$ : c'est fini.\nc) Non. Enlever $3$ en haut et en bas change la fraction : $\\dfrac{3}{6}$, c'est la moitié. Il faut diviser : $6 \\div 3 = 2$ et $9 \\div 3 = 3$, donc $\\dfrac{6}{9} = \\dfrac{2}{3}$.\n⛔ Le piège : AJOUTER ou ENLEVER le même nombre en haut et en bas. Ça ne donne jamais une fraction égale. Je multiplie ou je divise.\nRéponse : a) $\\dfrac{1}{3} = \\dfrac{2}{6} = \\dfrac{3}{9} = \\dfrac{4}{12}$ ; b) $\\dfrac{2}{3}$ et $\\dfrac{3}{4}$ ; c) non, $\\dfrac{6}{9} = \\dfrac{2}{3}$.",
           schema: ecranSeulement(
             barres([
               { d: 3, label: "1/3", parts: [1] },
@@ -430,7 +434,7 @@ export const exercicesFractionNombre6e: FicheExercicesData = {
               { d: 12, label: "4/12", parts: [4] },
             ]),
           ),
-          micros: ["fraction_defi"],
+          micros: ["fraction_egale", "fraction_defi"],
         },
         {
           enonce: "Compare en redécoupant.\na) $\\dfrac{3}{5}$ et $\\dfrac{7}{10}$\nb) $\\dfrac{5}{8}$ et $\\dfrac{1}{2}$\nc) $\\dfrac{2}{3}$ et $\\dfrac{5}{6}$",
@@ -559,7 +563,7 @@ export const exercicesFractionNombre6e: FicheExercicesData = {
           ], "blanc"),
           correction:
             "a) $24 - 8 - 6 = 10$ carreaux blancs.\nb) Le tout, ce sont les $24$ carreaux. Bleu : $\\dfrac{8}{24}$ ; jaune : $\\dfrac{6}{24}$ ; blanc : $\\dfrac{10}{24}$.\nc) $\\dfrac{1}{3} = \\dfrac{1 \\times 8}{3 \\times 8} = \\dfrac{8}{24}$ : un carreau sur trois est bleu.\n$\\dfrac{1}{4} = \\dfrac{1 \\times 6}{4 \\times 6} = \\dfrac{6}{24}$ : un carreau sur quatre est jaune.\nd) La moitié de $24$, c'est $12$. Or $10 < 12$ : moins de la moitié.\n⛔ Le piège : écrire $\\dfrac{8}{6}$ pour le bleu, en comparant au jaune. Une fraction du vitrail se rapporte au TOUT : les $24$ carreaux.\nRéponse : a) $10$ ; b) $\\dfrac{8}{24}$, $\\dfrac{6}{24}$, $\\dfrac{10}{24}$ ; c) $\\dfrac{1}{3}$ et $\\dfrac{1}{4}$ ; d) moins de la moitié.",
-          micros: ["fraction_lire_ecrire", "fraction_representer", "fraction_defi", "fraction_comparer"],
+          micros: ["fraction_lire_ecrire", "fraction_representer", "fraction_egale", "fraction_defi", "fraction_comparer"],
         },
         {
           titre: "Qui suis-je ?",

@@ -1,5 +1,6 @@
 import type { CorrecteursMaths } from "./types";
 import type { TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
+import { compareAnswer } from "@/lib/tutor/evaluation/comparators";
 
 // Les correcteurs de fractions.bank.ts (06/10/2026, voir types.ts).
 // Chacun relit les nombres DANS LE TEXTE vu par l'élève et refait le calcul,
@@ -171,7 +172,152 @@ function quantiteEnMots(q: TutorGeneratedQuestionV4, qcm: boolean): string[] {
   return [...p, ...(qcm ? verifierQcm(q, t / d) : verifierAttendu(q, t / d))];
 }
 
+// ---------- fraction_egale (24/10/2026) ----------
+
+const pgcd = (a: number, b: number): number => (b ? pgcd(b, a % b) : Math.abs(a));
+
+/** « a/b = …/D » ou « a/b = N/… » : l'égalité à trou, recalculée. */
+function egaliteATrou(q: TutorGeneratedQuestionV4, sens: "multiplier" | "diviser"): string[] {
+  const m = q.text.match(/(\d+)\/(\d+) = (…|\d+)\/(…|\d+)/);
+  if (!m) return ["égalité à trou introuvable"];
+  const [a, b] = [Number(m[1]), Number(m[2])];
+  const trouEnHaut = m[3] === "…";
+  if (trouEnHaut === (m[4] === "…")) return ["il faut exactement un trou"];
+  const connu = Number(trouEnHaut ? m[4] : m[3]);
+  const p: string[] = [];
+  let rep: number;
+  if (trouEnHaut) {
+    // a/b = …/connu
+    if (sens === "multiplier" ? connu % b : b % connu) return [`${b} et ${connu} : pas de facteur entier`];
+    rep = (a * connu) / b;
+  } else {
+    if (sens === "multiplier" ? connu % a : a % connu) return [`${a} et ${connu} : pas de facteur entier`];
+    rep = (b * connu) / a;
+  }
+  if (!Number.isInteger(rep)) p.push("le nombre qui manque n'est pas entier");
+  const facteur = sens === "multiplier" ? (trouEnHaut ? connu / b : connu / a) : trouEnHaut ? b / connu : a / connu;
+  if (facteur < 2) p.push("facteur 1 : l'égalité ne change rien");
+  const par = q.text.match(/par (\d+)\./);
+  if (par && Number(par[1]) !== facteur) p.push(`le texte dit « par ${par[1]} », le facteur est ${facteur}`);
+  // Une situation (« un morceau de 24 mesures… ») doit redire la fraction de gauche.
+  const reste = entiersDe(q.text.replace(m[0], " ").replace(/par \d+/, " "));
+  if (!reste.every((v) => v === a || v === b || v === connu)) p.push(`la situation (${reste.join(", ")}) ne redit pas l'égalité`);
+  if (reste.length === 2 && (Math.min(...reste) !== a || Math.max(...reste) !== b)) p.push(`la situation (${reste.join(", ")}) ne redit pas ${a}/${b}`);
+  if (sens === "diviser" && a >= b) p.push("fraction à simplifier plus grande que 1");
+  return [...p, ...verifierAttendu(q, rep)];
+}
+
+/** « Simplifie au maximum » : la seule réponse acceptée est irréductible, et la fraction de départ est refusée. */
+function simplifieAuMaximum(q: TutorGeneratedQuestionV4, n: number, d: number): string[] {
+  const p: string[] = [];
+  if (!/au maximum/.test(q.text)) p.push("la consigne doit dire « au maximum »");
+  const g = pgcd(n, d);
+  if (g === 1) return [...p, `${n}/${d} ne se simplifie pas`];
+  const bon = `${n / g}/${d / g}`;
+  if (String(q.expected[0]) !== bon) p.push(`réponse ${q.expected[0]} au lieu de ${bon}`);
+  for (const e of q.expected) {
+    const f = fractionsDe(String(e));
+    if (f.length !== 1 || pgcd(f[0][0], f[0][1]) !== 1 || !egal(f[0][0] / f[0][1], n / d)) p.push(`écriture acceptée non irréductible ou fausse : ${e}`);
+  }
+  // Ni la fraction de départ, ni une simplification à moitié faite.
+  const refusees = [`${n}/${d}`];
+  for (const k of [2, 3, 5]) if (g % k === 0 && k !== g) refusees.push(`${n / k}/${d / k}`);
+  for (const r of refusees)
+    if (compareAnswer({ comparator: q.comparator, answer: r, expected: q.expected })) p.push(`${r} est accepté alors qu'il n'est pas simplifié au maximum`);
+  if (q.comparator !== "exact_text") p.push("comparateur exact_text attendu");
+  return p;
+}
+
+/** Le calcul écrit « n/d = n2/d2 » : juste, soustraction, numérateur seul, ou deux diviseurs. */
+function natureDuCalcul(n: number, d: number, n2: number, d2: number): "juste" | "soustrait" | "numerateur" | "differents" | null {
+  if (n * d2 === d * n2) return "juste";
+  if (n - n2 === d - d2 && n2 < n) return "soustrait";
+  if (d2 === d && n2 < n && n % n2 === 0) return "numerateur";
+  if (n % n2 === 0 && d % d2 === 0 && n / n2 !== d / d2) return "differents";
+  return null;
+}
+
 export const CORRECTEURS: CorrecteursMaths = {
+  fraction_egale_tpl_regle: (q) => {
+    const fr = fractionsDe(q.text);
+    if (fr.length !== 1) return ["une seule fraction attendue dans l'énoncé"];
+    const [a, b] = fr[0];
+    const p: string[] = [];
+    if ((q.choices ?? []).length < 3) p.push("au moins trois choix");
+    if (String(q.expected[0]) === `${a}/${b}`) p.push("la bonne réponse recopie l'énoncé");
+    for (const c of q.choices ?? []) if (fractionsDe(c).length !== 1) p.push(`choix qui n'est pas une fraction : ${c}`);
+    return [...p, ...verifierQcm(q, a / b)];
+  },
+  fraction_egale_tpl_multiplier: (q) => egaliteATrou(q, "multiplier"),
+  fraction_egale_tpl_diviser: (q) => egaliteATrou(q, "diviser"),
+  fraction_egale_tpl_figure: (q) => {
+    const fr = fractionsDe(q.text);
+    if (fr.length !== 2) return ["deux fractions attendues"];
+    const [[a, b], [c, d]] = fr;
+    const p: string[] = [];
+    const f = (q.canvas as any)?.fractions;
+    if ((q.canvas as any)?.model !== "compare" || f?.length !== 2) p.push("deux barres attendues");
+    else if (f[0].numerator !== a || f[0].denominator !== b || f[1].numerator !== c || f[1].denominator !== d) p.push("les barres ne montrent pas les fractions du texte");
+    if (Math.max(b, d) > 12) p.push("trop de parts pour une barre");
+    const bon = egal(a / b, c / d) ? "oui" : "non";
+    if (q.expected[0] !== bon) p.push(`réponse ${q.expected[0]} au lieu de ${bon}`);
+    const ajoute = q.text.match(/ajoute (\d+) en haut et en bas/);
+    if (ajoute && (c !== a + Number(ajoute[1]) || d !== b + Number(ajoute[1]))) p.push("l'ajout annoncé ne donne pas la seconde fraction");
+    return p;
+  },
+  fraction_egale_tpl_simplifier: (q) => {
+    const fr = fractionsDe(q.text);
+    if (fr.length !== 1) return ["une seule fraction attendue"];
+    return simplifieAuMaximum(q, fr[0][0], fr[0][1]);
+  },
+  fraction_egale_tpl_simplifier_qcm: (q) => {
+    const fr = fractionsDe(q.text);
+    if (fr.length !== 1) return ["une seule fraction attendue"];
+    const [n, d] = fr[0];
+    const g = pgcd(n, d);
+    const p: string[] = [];
+    if (!/au maximum/.test(q.text)) p.push("la consigne doit dire « au maximum »");
+    if (g === 1) p.push("fraction déjà irréductible");
+    if (q.expected[0] !== `${n / g}/${d / g}`) p.push(`réponse ${q.expected[0]} au lieu de ${n / g}/${d / g}`);
+    if ((q.choices ?? []).length !== 4) p.push("quatre choix attendus");
+    return [...p, ...verifierQcm(q, n / d)];
+  },
+  fraction_egale_tpl_irreductible: (q) => {
+    const fr = fractionsDe(q.text);
+    if (fr.length !== 1) return ["une seule fraction attendue"];
+    const [n, d] = fr[0];
+    const simplifiable = pgcd(n, d) > 1;
+    const auMax = /simplifiée au maximum/.test(q.text);
+    const bon = auMax ? (simplifiable ? "non" : "oui") : simplifiable ? "oui" : "non";
+    const p: string[] = [];
+    if (q.expected[0] !== bon) p.push(`réponse ${q.expected[0]} au lieu de ${bon}`);
+    if (n >= d) p.push("fraction plus grande que 1");
+    return p;
+  },
+  fraction_egale_tpl_erreur: (q) => {
+    const m = q.text.match(/(\d+)\/(\d+) = (\d+)\/(\d+)/);
+    if (!m) return ["calcul écrit introuvable"];
+    const [n, d, n2, d2] = m.slice(1).map(Number);
+    const nature = natureDuCalcul(n, d, n2, d2);
+    if (!nature) return [`calcul ${m[0]} : erreur non reconnue`];
+    const mot = { juste: "juste", soustrait: "soustrait", numerateur: "que le numérateur", differents: "deux nombres différents" }[nature];
+    const p: string[] = [];
+    const ch = q.choices ?? [];
+    const bons = ch.filter((c) => c.includes(mot));
+    if (bons.length !== 1 || q.expected[0] !== bons[0]) p.push(`attendu le choix « ${mot} », lu ${q.expected[0]}`);
+    if (ch.length !== 4 || new Set(ch).size !== 4) p.push("quatre choix distincts attendus");
+    if (pgcd(n, d) === 1) p.push("fraction de départ non simplifiable");
+    return p;
+  },
+  fraction_egale_tpl_probleme: (q) => {
+    if (fractionsDe(q.text).length) return ["la fraction ne doit pas être écrite dans l'énoncé"];
+    const nb = entiersDe(q.text);
+    if (nb.length !== 2) return [`deux nombres attendus (partie et tout), lus : ${nb.join(", ")}`];
+    const [n, d] = [Math.min(...nb), Math.max(...nb)];
+    const p: string[] = [];
+    if (n === d) p.push("la partie égale le tout");
+    return [...p, ...simplifieAuMaximum(q, n, d)];
+  },
   fraction_quantite_tpl_1: (q) => quantiteEnMots(q, false),
   fraction_quantite_qcm_tpl_1: (q) => quantiteEnMots(q, true),
   fraction_quantite_tpl_2: quantite,

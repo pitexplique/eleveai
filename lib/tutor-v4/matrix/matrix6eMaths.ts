@@ -42,6 +42,8 @@ const supportLinks: Record<string, string[]> = {
   // =========================
   fraction_decimal: ["decimal_comparer", "decimal_lire_ecrire"],
   fraction_comparer: ["decimal_comparer", "fraction_quantite"],
+  // 24/10/2026 : simplifier, c'est diviser — les tables servent.
+  fraction_egale: ["entier_multiplication_mentale", "entier_division_mentale"],
 
   pourcentage_decimal: ["decimal_multiplier", "fraction_decimal"],
   pourcentage_calcul_simple: [

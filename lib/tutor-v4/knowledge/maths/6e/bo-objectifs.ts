@@ -267,8 +267,8 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     chapitre: "Les fractions",
     objectif: "Établir des égalités de fractions.",
     page: 6,
-    micros: ["fraction_representer"],
-    note: "⚠️ Couverture faible : 7/3 = 14/6 se joue sur la règle « on multiplie numérateur et dénominateur par le même nombre », que `fraction_representer` n'énonce pas.",
+    micros: ["fraction_egale", "fraction_representer"],
+    note: "La couverture était faible : 7/3 = 14/6 se joue sur la règle « on multiplie numérateur et dénominateur par le même nombre », que `fraction_representer` n'énonce pas. `fraction_egale` l'a ouverte le 24/10/2026 : la règle, les égalités à trou, simplifier au maximum (6/8 = 3/4, 12/18 = 2/3), et les erreurs des copies (soustraire, ne diviser que le haut, deux diviseurs différents).",
   },
   {
     id: "6e-N-fractions-7",

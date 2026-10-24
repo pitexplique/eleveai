@@ -179,6 +179,17 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "fraction_nombre",
     prerequis: ["fraction_lire_ecrire"],
   },
+  // ⛔ AJOUTÉE LE 24/10/2026 (6e-N-fractions-6, « Établir des égalités de
+  // fractions »). Frédéric voit sur les copies de ses 6e qu'ils NE SAVENT PAS
+  // SIMPLIFIER ; `fraction_representer` n'énonce jamais la règle « on multiplie
+  // ou on divise le haut ET le bas par le même nombre ». Elle précède la
+  // comparaison, qui redécoupe (3/5 = 6/10 pour comparer à 7/10).
+  {
+    id: "fraction_egale",
+    label: "Fractions égales, simplifier",
+    notionId: "fraction_nombre",
+    prerequis: ["fraction_representer"],
+  },
   {
     // ⛔ PASSÉE SOUS « Calculer avec les fractions » le 22/08/2026. « La moitié
     // de 10 », « le quart de 20 » : c'est déjà la fraction comme OPÉRATEUR
@@ -199,7 +210,7 @@ export const microSkills: MicroSkillSource[] = [
     id: "fraction_comparer",
     label: "Comparer des fractions",
     notionId: "fraction_nombre",
-    prerequis: ["fraction_lire_ecrire"],
+    prerequis: ["fraction_lire_ecrire", "fraction_egale"],
   },
   // ⛔ AJOUTÉE LE 23/08/2026 (6e-N-fractions-8). `fraction_comparer` s'arrêtait
   // aux fractions inférieures à 1 : ordonner une liste mêlant fractions et

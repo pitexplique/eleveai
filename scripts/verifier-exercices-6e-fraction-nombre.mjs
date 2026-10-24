@@ -148,10 +148,18 @@ essai("9", () => {
   chaine.forEach((x) => vrai(`9a. ${x} égale à 1/3`, egal(F(...x), base)));
   const trous = /\$\\dfrac\{1\}\{3\} = \\dfrac\{2\}\{\\ldots\} = \\dfrac\{\\ldots\}\{9\} = \\dfrac\{4\}\{\\ldots\}\$/.test(e(9));
   vrai("9a. l'énoncé porte les trous 2/…, …/9, 4/…", trous);
-  dit(9, `Réponse : a) $${chaine.map((x) => brut(...x)).join(" = ")}$ ; b) $${brut(10, 30)}$ ; c) oui.`);
-  vrai("9b. 10/30 = 1/3", egal(F(10, 30), base));
-  vrai("9c. 5/15 = 1/3", egal(F(5, 15), base));
-  vrai("9. le piège : 2/4 n'est pas 1/3", !egal(F(2, 4), base) && c(9).includes(brut(2, 4)));
+  // 24/10/2026 (micro fraction_egale) : b) simplifier au maximum, c) le piège
+  // de la soustraction, l'erreur que Frédéric voit sur les copies.
+  const [f1, f2] = couples(lignes(9)[1]);
+  const [g, h] = couples(lignes(9)[2]);
+  vrai("9b. deux fractions qui se simplifient", [f1, f2].every((x) => F(...x).d !== BigInt(x[1])));
+  dit(9, `$${brut(...f1)} = ${texFrac(F(...f1))}$`);
+  dit(9, `$${brut(9, 12)} = ${texFrac(F(...f2))}$`);
+  vrai("9b. 18/24 = 9/12 (÷ 2)", egal(F(18, 24), F(9, 12)) && f2[0] === 18 && f2[1] === 24);
+  vrai("9c. Noé enlève le même nombre en haut et en bas", g[0] - h[0] === g[1] - h[1] && g[0] > h[0]);
+  vrai("9c. et sa fraction n'est pas égale", !egal(F(...g), F(...h)));
+  dit(9, `$${brut(...g)} = ${texFrac(F(...g))}$`);
+  dit(9, `Réponse : a) $${chaine.map((x) => brut(...x)).join(" = ")}$ ; b) $${texFrac(F(...f1))}$ et $${texFrac(F(...f2))}$ ; c) non, $${brut(...g)} = ${texFrac(F(...g))}$.`);
   const [liste] = dessin("barres", 9);
   vrai("9. les barres : trois écritures de 1/3", liste.every((b) => egal(F(b.parts[0], b.d), base) && egal(deLabel(b.label), F(b.parts[0], b.d))));
 });
