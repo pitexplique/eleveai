@@ -156,3 +156,60 @@ relever centres et questions dans leurs scripts/voix (`manim/voix/*.json`, clés
   - 01:15 | « 71 % des automobilistes tués sont des hommes » : population de référence ? | [les hommes tués ; les automobilistes tués ; tous les tués] → 1 | 1 074 ÷ 1 512.
   - 02:23 | Quelle phrase est exacte ? | [37,7 % des tués à deux-roues sont des hommes. ; 37,7 % des hommes tués étaient à deux-roues. ; 37,7 % des tués sont des hommes.] → 1 | 650 ÷ 1 724, les hommes tués.
   - short 00:21 | Parmi les hommes tués, quelle part était à deux-roues ? | [92,1 % ; 37,7 % ; 29,3 %] → 1 | (commentaire : femmes 56 / 494 → 11,3 %)
+
+## STMG moindres carrés + changement de variable (lot J2) — débit −7
+- 27 mc-principe — [argent-budget, technologie-ia] — paysage verte, short orange
+  - 01:38 | Que rend la plus petite possible la droite des moindres carrés ? | [la somme des écarts ; la somme des carrés des écarts ; le nombre de points au-dessus] → 1 | La somme des écarts peut valoir 0 pour une très mauvaise droite.
+  - 02:47 | Coordonnées du point moyen G ? | [(3 ; 82,92) ; (82,92 ; 3) ; (3 ; 84,15)] → 0 | B inverse ; 84,15 = milieu des extrêmes.
+  - short 00:26 | Un écart de 5 pèse combien ? | [5 ; 10 ; 25] → 2 | (commentaire : 3² + (−3)² → 18)
+- 28 mc-calculer — [corps-sante] — verte, short orange
+  - 01:19 | 2018 : observé 759, prévu 763, écart ? | [−4 ; +4 ; 16] → 0 | 759 − 763 = −4, sous la droite.
+  - 02:26 | Quel point pèse le plus ? | [2016 ; 2017 ; 2018] → 2 | 2018, carré 16.
+  - 02:56 | Écarts 2, −1, −2 : somme des carrés ? | [−1 ; 9 ; 5] → 1 | 4 + 1 + 4 = 9.
+  - short 00:20 | (−3)² ? | [−9 ; 9 ; −6] → 1 | (commentaire : 2, −2, 1, 0 → 9)
+- 29 mc-comparer — [transports] — verte, short orange
+  - 01:41 | Quelle droite ajuste le mieux ? | [D1, somme 1,54 ; D2, somme 1,91 ; aucune, trop proches] → 0 | La plus petite somme gagne.
+  - 02:52 | Avec ce 6e point, la somme des carrés de D1… | [change à peine ; diminue ; explose, plus de 6 116] → 2 | Un grand écart pèse énormément.
+  - short 00:22 | Sommes 1,54 et 1,91 : laquelle garder ? | [1,54 ; 1,91 ; peu importe] → 0 | (commentaire : (−10)² → 100)
+- 30 cv-appliquer — [argent-budget, transports] — verte, short orange
+  - 01:22 | Course de 20 km : z = 1/x ? | [20 ; 0,05 ; 400] → 1 | 1 ÷ 20 ; 400 = x².
+  - 02:26 | Coût d'un car scolaire partagé : quel changement de variable ? | [z = 1/x ; u = x² ; z = log(y)] → 0 | Un coût fixe partagé varie comme 1/x.
+  - short 00:24 | 10 km : z ? | [0,1 ; 10 ; 100] → 0 | (commentaire : 8 km → 0,125)
+- 31 cv-lire — [technologie-ia, sciences] — bleue, short verte
+  - 01:12 | Nuage (x ; log y) aligné : que conjecturer ? | [y affine ; y × le même nombre chaque année ; y = a/x + b] → 1 | C'est log(y) qui est affine.
+  - 02:15 | Pente 0,145 : facteur annuel ? | [0,145 ; 1,145 ; 1,40] → 2 | 10 puissance 0,145.
+  - short 00:22 | y est donc… | [affine ; exponentiel ; constant] → 1 | (commentaire : ×2 tous les 2 ans, en 10 ans → 32)
+- 32 cv-revenir — [histoire-geographie] — bleue, short verte
+  - 01:12 | x = 7 : z ? | [3,259 ; 0,805 ; 2,569] → 0 | B oublie b, C oublie × 7.
+  - 02:18 | z = 3,259 : y ? | [32,59 ; environ 1 816 ; log(3,259)] → 1 | 10 puissance z, pas 10 × z.
+  - short 00:24 | z = 2 : y ? | [20 ; 100 ; 2] → 1 | (commentaire : z = 3 → 1 000)
+
+## STMG ajustement (lot J1) — débit −7 — t mesurés sur les rendus finaux
+- 20 ajust-pertinence — [musique, transports] — verte / short orange
+  - 01:03 | Ces écarts (12, 11, 13, 12) : ajustement affine pertinent ? | [oui : écarts voisins ; non : pas tous égaux ; impossible sans graphique] → 0 | Des écarts voisins suffisent.
+  - 02:35 | Écarts 5, 10, 20, 40 ? | [oui : il est croissant ; non : les écarts doublent ; oui, toujours] → 1 | Croissant ne veut pas dire affine.
+  - short 00:28 | Lequel se résume par une droite ? | [Spotify ; les voitures électriques ; les deux] → 0 | (commentaire : 268 + 28 → en vrai 293)
+- 21 ajust-au-juge — [argent-budget, technologie-ia] — verte / short jaune
+  - 00:59 | Une droite au-dessus de tous les points est-elle un bon ajustement ? | [oui : bonne direction ; non : au-dessus de tous ; oui : près d'un point] → 1 | Elle doit passer au milieu du nuage.
+  - 02:09 | Bonne direction mais en dessous : que modifier ? | [augmenter b ; changer a ; rien] → 0 | On remonte la droite sans changer sa pente.
+  - short 00:20 | Une droite au-dessus de tous les points convient-elle ? | [oui ; non ; oui si bonne pente] → 1 | (commentaire : (2014 ; 55) et (2019 ; 102) → 9,4 par an)
+- 22 ajust-equation — [corps-sante, sciences] — bleue / short orange
+  - 01:43 | Coefficient directeur de la droite par (2 ; 30) et (6 ; 50) ? | [5 ; 0,2 ; 20] → 0 | 20 ÷ 4.
+  - 02:52 | Que signifie 0,22 ? | [× 0,22 chaque année ; + 0,22 an environ par an ; 0,22 an en 1950] → 1 | Le coefficient directeur est un gain par an.
+  - short 00:20 | +11 ans en 50 ans : combien par an ? | [0,22 ; 4,5 ; 11] → 0 | (commentaire : en 10 ans → 2,2 ans)
+- 23 ajust-calculer — [nature-ecologie, sciences] — verte / short orange
+  - 01:08 | y = 1,5x + 11,8 : que prévoit-elle pour x = 6 ? | [20,8 ; 19,3 ; 26,7] → 0 | 1,5 × 6 + 11,8.
+  - 02:29 | Pour quel x la droite atteint-elle 23,8 ? | [8 ; 47,5 ; 15,9] → 0 | (23,8 − 11,8) ÷ 1,5.
+  - short 00:26 | 1,5 × 8 + 11,8 ? | [23,8 ; 21,3 ; 29,7] → 0 | (commentaire : dépasse 30 GW → 2029)
+- 24 interpoler — [histoire-geographie] — verte / short orange
+  - 01:28 | Relevés 2000-2020 : laquelle est une interpolation ? | [2012 ; 2030 ; 1995] → 0 | Entre les relevés.
+  - 02:25 | Population en 2018 ? | [67,1 ; 767,1 ; 61,15 millions] → 0 | Le vrai chiffre est 67 millions.
+  - short 00:23 | Interpoler, c'est estimer une valeur… | [entre les relevés ; après le dernier ; avant le premier] → 0 | (commentaire : 2007 → ≈ 63,3)
+- 25 extrapoler — [transports, nature-ecologie] — verte / short orange
+  - 01:29 | Relevés 2012-2020 : laquelle est une extrapolation ? | [2015 ; 2023 ; 2019] → 1 | Après le dernier relevé.
+  - 02:58 | Le modèle annonce −26 % en 2030 : que conclure ? | [calcul faux ; trop loin, modèle dépassé ; moins de 0 voiture diesel] → 1 | Une extrapolation lointaine n'a plus de sens.
+  - short 00:24 | −5,5 × 12 + 73 ? | [7 % ; 139 % ; 67,5 %] → 0 | (commentaire : 2030 → −26 %, impossible)
+- 26 limites — [reseaux-sociaux, technologie-ia] — bleue / short orange
+  - 01:08 | À partir de quel rang entier la droite dépasse-t-elle 100 % ? | [8 ; 9 ; 100] → 1 | Une part ne dépasse jamais 100 %.
+  - 02:21 | 2022 : la droite dit 123,7 %, la réalité 87 % : pourquoi ? | [la calculatrice s'est trompée ; la tendance a changé ; le baromètre a mal compté] → 1 | Un modèle affine ne vaut que tant que la tendance tient.
+  - short 00:24 | 104,5 % de Français équipés, c'est… | [possible ; impossible ; possible : 2 smartphones] → 1 | (commentaire : écart en 2020 → 20,5 points)
