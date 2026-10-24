@@ -9,7 +9,8 @@ Les épisodes du cycle 4 (`manim/scripts/{5e,4e,3e}/stats_*.py`, sorties `manim/
 1. **Questions-pauses** : chaque paysage a 2 ou 3 écrans « ⏸ Question ! » (3 choix A/B/C, leurres = erreurs typiques de la micro, la voix dit la question puis « Mets pause, et choisis ! », compte à rebours visible 5 s (3 s dans le short), la bonne réponse s'allume avec UNE phrase), en plus de « À toi de jouer » ; le short en a 1. Note pour chaque vidéo la liste `questions` (t "MM:SS" mesuré sur le rendu, question, choix, reponse 0/1/2, explication) dans ton rapport.
 2. **Centres d'intérêt** : avant d'écrire la voix, choisis 1 à 3 centres dans la liste FERMÉE `lib/videos/centres-interet.ts`, pour la tranche 15-18 ans (tous sauf animaux et cuisine) ; varie-les d'un épisode à l'autre ; aide-toi de `manim/centres-interet-par-age.md` (sujets universels, touche locale en variable). Note-les dans ton rapport (`centres`).
 3. **« Ce que tu as appris »** (Frédéric, 24/10) : le titre EN HAUT ET CENTRÉ ; rien à moitié effacé qui traîne sur l'écran.
-4. Données RÉELLES vérifiées par WebSearch (source + date dans l'en-tête du script) ; un métier différent par épisode, filles et garçons ; footballeurs ou autres idoles possibles (chiffres vérifiés).
+4. **Rien de rogné** : marge ≥ 3 % sur les 4 côtés (cartes avec leurs coins, textes, boutons) ; après CHAQUE rendu, `python scripts/verifier-bords-video.py <mp4>` → « 0 instants ». L'écran de fin « Entraîne-toi sur eleveai.fr » est parfait : n'y touche pas.
+5. Données RÉELLES vérifiées par WebSearch (source + date dans l'en-tête du script) ; un métier différent par épisode, filles et garçons ; footballeurs ou autres idoles possibles (chiffres vérifiés).
 
 ## Passe finale (chef d'orchestre)
 Après le manifeste : `python scripts/fiches-youtube.py -stats-` → `fiche-youtube.md` dans CHAQUE dossier d'épisode (titre, description, chapitres, tags, chemins) : Frédéric ne doit plus jamais redemander ces infos.

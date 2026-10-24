@@ -215,3 +215,7 @@ Chaque dossier d'épisode de `manim/sorties/` contient `fiche-youtube.md` (paysa
 
 ## ⛔ « Ce que tu as appris » : titre EN HAUT ET CENTRÉ, toujours (Frédéric, 24/10/2026 : « ça sera toujours pareil »)
 Dans toutes les vidéos (paysages et shorts), l'écran « Ce que tu as appris » a son titre en haut de l'écran, centré ; les points viennent dessous. Rien à moitié effacé ne traîne sur cet écran.
+
+## ⛔ RIEN NE DOIT ÊTRE ROGNÉ (Frédéric, 24/10/2026 : « relis bien tes écrans pour ne pas rogner »)
+Marge d'au moins 3 % de la largeur sur les QUATRE côtés pour tout ce qui est dessiné : cartes des figures (leurs coins arrondis compris), textes, boutons des questions, Ti-Margo. Contrôle obligatoire après chaque rendu : `python scripts/verifier-bords-video.py <video.mp4>` doit afficher « 0 instants qui touchent un bord » (le fondu noir ne compte pas). Le premier épisode lycée avait la carte du graphique collée au bord gauche (coins coupés).
+L'écran de fin « Entraîne-toi sur eleveai.fr » est PARFAIT (24/10) : on n'y touche pas.
