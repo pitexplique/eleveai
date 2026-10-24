@@ -260,7 +260,6 @@ function canvasNuage(
     ymax: Math.ceil(Math.max(...tous) + 8),
     grille: true,
     courbes: [
-      { id: "nuage", type: "points", points: nuage.xs.map((x, k) => ({ x, y: nuage.ys[k] })) },
       ...(droite ? [{ id: "d", type: "affine" as const, a: droite.a, b: droite.b }] : []),
     ],
     points: nuage.xs.map((x, k) => ({ x, y: nuage.ys[k] })),
@@ -301,7 +300,6 @@ function canvasNuagePoints(
     ymax: arrondi(haut + marge, 3),
     grille: true,
     courbes: [
-      { id: "nuage", type: "points", points: xs.map((x, k) => ({ x, y: ys[k] })) },
       ...(droite ? [{ id: "d", type: "affine" as const, a: droite.a, b: droite.b }] : []),
     ],
     points: xs.map((x, k) => ({ x, y: ys[k] })),
