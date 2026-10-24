@@ -205,8 +205,8 @@ Réutiliser tels quels d'un épisode à l'autre (présents dans `lait_reunion.py
 
 ## ⭐⭐ Les QUESTIONS-PAUSES (Frédéric, 23/10/2026 — pour TOUTES les nouvelles vidéos)
 Pourquoi : dans deux ans, une IA produira des vidéos en masse. EleveAI se distinguera par des vidéos qui font AGIR l'élève et qui sont reliées à son coach. On commence maintenant, avec chaque nouvelle vidéo.
-- **Paysage : 2 ou 3 questions-pauses** réparties dans la vidéo (après la méthode, après le piège), EN PLUS de « À toi de jouer ». Chacune : un écran « ⏸ Question ! » avec la question courte et 3 choix A / B / C (un seul juste, les leurres = les erreurs typiques de la micro), la voix dit la question puis « Mets pause, et choisis ! », un compte à rebours visible de 5 s, puis la bonne réponse s'allume (agrandir puis rétrécir) avec UNE phrase d'explication. Voix = écrit, comme toujours.
-- **Short : 1 question-pause** au milieu (jeu, surprise), en plus de la question en commentaire à la fin.
+- **Paysage : 2 ou 3 questions-pauses** réparties dans la vidéo (après la méthode, après le piège), EN PLUS de « À toi de jouer ». Chacune : un écran « ⏸ Question ! » avec la question courte et 3 choix A / B / C (un seul juste, les leurres = les erreurs typiques de la micro), la voix dit la question puis « Mets pause, et choisis ! », un compte à rebours visible de 5 s (3 s dans un short, décidé le 24/10), puis la bonne réponse s'allume (agrandir puis rétrécir) avec UNE phrase d'explication. Voix = écrit, comme toujours.
+- **Short : 1 question-pause** au milieu (jeu, surprise), compte à rebours de 3 s, en plus de la question en commentaire à la fin.
 - **Manifeste** : chaque vidéo porte un champ `questions` = `[{ "t": "MM:SS" (début de l'écran question), "question": "…", "choix": ["…","…","…"], "reponse": 0|1|2, "explication": "…" }]`. Plus tard, le lecteur du site (R2) s'arrêtera tout seul à `t`, posera la question en boutons et enregistrera la réponse dans le suivi de l'élève : c'est ce qui rendra nos vidéos différentes d'une vidéo d'IA.
 - Les questions reprennent les erreurs typiques de la micro (`microSkills.ts`) et le vocabulaire du coach : la vidéo prépare la série d'exercices.
 

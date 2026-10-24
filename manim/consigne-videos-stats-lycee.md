@@ -6,9 +6,12 @@
 Les épisodes du cycle 4 (`manim/scripts/{5e,4e,3e}/stats_*.py`, sorties `manim/sorties/{5e,4e,3e}/maths/statistiques/`) et, pour le style lycée, la paysage TVI qu'il adore (mémoire « paysage-tvi-modele-qui-plait » : accroche sans formule, situation réelle, rédaction en 4 lignes).
 
 ## ⭐⭐ Nouvelles règles du 23-24/10 (OBLIGATOIRES)
-1. **Questions-pauses** : chaque paysage a 2 ou 3 écrans « ⏸ Question ! » (3 choix A/B/C, leurres = erreurs typiques de la micro, la voix dit la question puis « Mets pause, et choisis ! », compte à rebours visible 5 s, la bonne réponse s'allume avec UNE phrase), en plus de « À toi de jouer » ; le short en a 1. Note pour chaque vidéo la liste `questions` (t "MM:SS" mesuré sur le rendu, question, choix, reponse 0/1/2, explication) dans ton rapport.
+1. **Questions-pauses** : chaque paysage a 2 ou 3 écrans « ⏸ Question ! » (3 choix A/B/C, leurres = erreurs typiques de la micro, la voix dit la question puis « Mets pause, et choisis ! », compte à rebours visible 5 s (3 s dans le short), la bonne réponse s'allume avec UNE phrase), en plus de « À toi de jouer » ; le short en a 1. Note pour chaque vidéo la liste `questions` (t "MM:SS" mesuré sur le rendu, question, choix, reponse 0/1/2, explication) dans ton rapport.
 2. **Centres d'intérêt** : avant d'écrire la voix, choisis 1 à 3 centres dans la liste FERMÉE `lib/videos/centres-interet.ts`, pour la tranche 15-18 ans (tous sauf animaux et cuisine) ; varie-les d'un épisode à l'autre ; aide-toi de `manim/centres-interet-par-age.md` (sujets universels, touche locale en variable). Note-les dans ton rapport (`centres`).
 3. Données RÉELLES vérifiées par WebSearch (source + date dans l'en-tête du script) ; un métier différent par épisode, filles et garçons ; footballeurs ou autres idoles possibles (chiffres vérifiés).
+
+## Passe finale (chef d'orchestre)
+Après le manifeste : `python scripts/fiches-youtube.py -stats-` → `fiche-youtube.md` dans CHAQUE dossier d'épisode (titre, description, chapitres, tags, chemins) : Frédéric ne doit plus jamais redemander ces infos.
 
 ## Épisodes communs 1re / STMG (une voix, un script, deux rendus)
 Même micro dans les deux classes → UNE voix nommée `lycee-stats-<slug>.json` (+ `-short`), UN script dans `manim/scripts/stmg/stats_<slug>.py`, une sous-classe par classe (« Maths 1re — EleveAI » / « Maths STMG — EleveAI », ceinture propre à chaque classe). La voix ne cite aucune classe. Le short est rendu une fois et copié sous les deux noms. Les banques des deux classes font foi (`lib/tutor-v4/questionBank/premiere/maths/information-chiffree.bank.ts` + `automatismes-proportions-stats.bank.ts` ; `lib/tutor-v4/questionBank/stmg/maths/donnees-croisees.bank.ts`, `automatismes-graphiques.bank.ts`, `statistique-deux-variables.bank.ts`).
