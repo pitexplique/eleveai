@@ -219,3 +219,10 @@ Dans toutes les vidéos (paysages et shorts), l'écran « Ce que tu as appris »
 ## ⛔ RIEN NE DOIT ÊTRE ROGNÉ (Frédéric, 24/10/2026 : « relis bien tes écrans pour ne pas rogner »)
 Marge d'au moins 3 % de la largeur sur les QUATRE côtés pour tout ce qui est dessiné : cartes des figures (leurs coins arrondis compris), textes, boutons des questions, Ti-Margo. Contrôle obligatoire après chaque rendu : `python scripts/verifier-bords-video.py <video.mp4>` doit afficher « 0 instants qui touchent un bord » (le fondu noir ne compte pas). Le premier épisode lycée avait la carte du graphique collée au bord gauche (coins coupés).
 L'écran de fin « Entraîne-toi sur eleveai.fr » est PARFAIT (24/10) : on n'y touche pas.
+
+## ⛔ SYNCHRO VOIX / ÉCRIT : 0 s D'AVANCE (Frédéric, 24/10/2026 : « pour plus tard, ne dépasse pas 0 »)
+- Un nombre, une étiquette ou un mot n'apparaît JAMAIS avant que la voix le dise : avance tolérée = **0 s**. Les écarts relevés le 24/10 (étiquettes ~1 s en avance dans le lot J2) ne doivent plus exister.
+- Retard toléré après le mot dit : **0,4 s au plus** (cas relevés : 0,3-0,4 s dans le lot G2).
+- Pas de chevauchement, même bref (0,4 s dans un fondu du short 09 de 2de) : 0 s.
+- Exception : les données d'une figure qu'on LIT (tableau, axes) peuvent être affichées d'un bloc — mais pas une réponse ou un résultat.
+- Contrôle : le dry run ne doit signaler aucun RETARD ; vérifier sur la planche les écrans où un nombre apparaît.
