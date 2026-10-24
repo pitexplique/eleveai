@@ -1888,7 +1888,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
         ]),
         comparator: "mcq_exact",
         explanation: exp(
-          "La fluctuation d'échantillonnage diminue quand la taille augmente : l'écart-type des fréquences observées est de l'ordre de $\\dfrac{1}{\\sqrt{n}}$.",
+          "La fluctuation d'échantillonnage diminue quand la taille augmente : environ 95 % des fréquences observées s'écartent de la proportion de moins de $\\dfrac{1}{\\sqrt{n}}$.",
           "On compare les deux tailles : c'est la plus grande qui resserre les fréquences autour de la proportion du modèle.",
           `Pour $n = ${petit}$ : $\\dfrac{1}{\\sqrt{${petit}}} \\approx ${fr(Math.round((1 / Math.sqrt(petit)) * 1000) / 1000)}$. ` +
             `Pour $n = ${grand}$ : $\\dfrac{1}{\\sqrt{${grand}}} \\approx ${fr(Math.round((1 / Math.sqrt(grand)) * 1000) / 1000)}$. ` +
@@ -1910,7 +1910,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     microId: "va_ech_distance",
     difficulty: 3,
     theme: "neutral",
-    hint: "L'écart-type des fréquences observées est de l'ordre de $\\frac{1}{\\sqrt{n}}$.",
+    hint: "Environ 95 % des fréquences observées s'écartent de la proportion de moins de $\\frac{1}{\\sqrt{n}}$.",
     tags: ["stmg", "maths", "probabilites", "template", "short"],
     generate: () => {
       const n = pick([
@@ -1919,8 +1919,8 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       const ordre = 1 / Math.sqrt(n);
       const ep = pick(EPREUVES);
       const q = pick([
-        "Quel est l'ordre de grandeur de l'écart-type des fréquences observées ?",
-        "De combien, typiquement, une fréquence observée s'écarte-t-elle de la proportion ?",
+        "De combien, au plus, s'écartent de la proportion environ 95 % des fréquences observées ?",
+        "Quel est l'ordre de grandeur de la fluctuation des fréquences observées ?",
         "Quel ordre de grandeur peut-on donner à la dispersion des fréquences obtenues ?",
       ]);
       return {
@@ -1931,17 +1931,17 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
         expected: [fr(Math.round(ordre * 1000) / 1000)],
         comparator: "number_equal",
         explanation: exp(
-          "Sur des simulations, la série des fréquences observées dans $N$ échantillons de taille $n$ a un écart-type de l'ordre de $\\dfrac{1}{\\sqrt{n}}$.",
+          "Sur des simulations d'échantillons de taille $n$, environ 95 % des fréquences observées s'écartent de la proportion de moins de $\\dfrac{1}{\\sqrt{n}}$ : la fluctuation est de l'ordre de $\\dfrac{1}{\\sqrt{n}}$.",
           "On calcule la racine carrée de la taille, puis son inverse.",
           `$\\sqrt{${n}} = ${fr(Math.sqrt(n))}$, donc $\\dfrac{1}{\\sqrt{${n}}} \\approx ${fr(Math.round(ordre * 1000) / 1000)}$.`,
-          `L'écart-type est de l'ordre de $${fr(Math.round(ordre * 1000) / 1000)}$.`
+          `Environ 95 % des fréquences s'écartent de la proportion de moins de $${fr(Math.round(ordre * 1000) / 1000)}$.`
         ),
       };
     },
   },
 
   {
-    // ANGLE 2 — l'INTERVALLE attendu, pas le seul écart-type. Le premier item
+    // ANGLE 2 — l'INTERVALLE attendu, pas la seule marge. Le premier item
     // calcule $\frac{1}{\sqrt{n}}$ ; celui-ci s'en sert pour dire où l'on
     // attend les fréquences. C'est la forme sous laquelle la notion revient
     // ensuite — un intervalle autour de $p$ —, et elle demande d'ajouter ET de
@@ -1965,14 +1965,14 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       const bonne = `$[${fr(bas)}\\,;\\,${fr(haut)}]$`;
       const ep = pick(EPREUVES);
       const q = pick([
-        "Dans quel intervalle attend-on la plupart des fréquences observées, à un écart-type près ?",
-        "Entre quelles valeurs se situent, à un écart-type près, la plupart des fréquences observées ?",
-        "Quel intervalle, centré sur la proportion, contient la plupart des fréquences à un écart-type près ?",
+        "Dans quel intervalle attend-on environ 95 % des fréquences observées ?",
+        "Entre quelles valeurs se situent environ 95 % des fréquences observées ?",
+        "Quel intervalle, centré sur la proportion, contient environ 95 % des fréquences observées ?",
       ]);
       return {
         text:
           `La proportion ${de(ep.nom)} ${ep.qualite} vaut $${fr(p)}$ ; on prélève des échantillons de $${n}$ ${ep.nom}. ` +
-          `L'écart-type des fréquences observées est de l'ordre de $\\dfrac{1}{\\sqrt{${n}}}$. ${q}`,
+          `La marge de fluctuation vaut $\\dfrac{1}{\\sqrt{${n}}}$. ${q}`,
         format: "qcm",
         ...qcmT(bonne, [
           `$[${fr(p)}\\,;\\,${fr(haut)}]$`,
@@ -1981,11 +1981,11 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
         ]),
         comparator: "mcq_exact",
         explanation: exp(
-          "La distance d'une fréquence observée à la proportion $p$ du modèle se mesure en écarts-types, dont l'ordre de grandeur est $\\dfrac{1}{\\sqrt{n}}$. À un écart-type près, on attend les fréquences dans $\\left[p - \\dfrac{1}{\\sqrt{n}}\\,;\\,p + \\dfrac{1}{\\sqrt{n}}\\right]$.",
-          "On calcule l'écart-type, puis on l'ajoute et on le retranche à $p$ — l'intervalle est SYMÉTRIQUE autour de $p$.",
+          "Environ 95 % des fréquences observées s'écartent de la proportion $p$ du modèle de moins de $\\dfrac{1}{\\sqrt{n}}$ : on les attend dans $\\left[p - \\dfrac{1}{\\sqrt{n}}\\,;\\,p + \\dfrac{1}{\\sqrt{n}}\\right]$.",
+          "On calcule $\\dfrac{1}{\\sqrt{n}}$, puis on l'ajoute et on le retranche à $p$ — l'intervalle est SYMÉTRIQUE autour de $p$.",
           `$\\dfrac{1}{\\sqrt{${n}}} = ${fr(Math.round(s * 1000) / 1000)}$, donc l'intervalle va de ` +
             `$${fr(p)} - ${fr(Math.round(s * 1000) / 1000)} = ${fr(bas)}$ à $${fr(p)} + ${fr(Math.round(s * 1000) / 1000)} = ${fr(haut)}$.`,
-          `On attend la plupart des fréquences dans ${bonne}.`
+          `On attend environ 95 % des fréquences dans ${bonne}.`
         ),
         choiceDiagnostics: [
           {
@@ -2008,13 +2008,16 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     microId: "va_ech_rare_ou_frequent",
     difficulty: 3,
     theme: "neutral",
-    hint: "Un écart de plus de deux écarts-types est rare ; un écart d'un écart-type est banal.",
+    hint: "Environ 95 % des fréquences s'écartent de $p$ de moins de $\\frac{1}{\\sqrt{n}}$ : un écart plus grand est rare.",
     tags: ["stmg", "maths", "probabilites", "template"],
     generate: () => {
       const p = pick([0.2, 0.3, 0.4, 0.5, 0.6] as const);
       const n = pick([100, 400, 900, 2500] as const);
+      // s = 1/√n : la MARGE (≈ 95 % des fréquences à moins de s de p), PAS
+      // l'écart-type des fréquences, qui vaut √(p(1 − p)/n) ≤ s/2.
       const s = 1 / Math.sqrt(n);
-      const kAbs = pick([1, 3] as const);
+      // 0,5 : franchement dans la marge ; 3 : franchement en dehors.
+      const kAbs = pick([0.5, 3] as const);
       // L'écart peut être au-dessus ou en dessous, tant que la fréquence reste positive.
       const signe = p - 3 * s > 0.02 && Math.random() < 0.5 ? -1 : 1;
       const k = kAbs;
@@ -2028,27 +2031,30 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       return {
         text:
           `La proportion ${de(ep.nom)} ${ep.qualite} vaut $${fr(p)}$. Sur un échantillon de $${n}$ ${ep.nom}, on observe une fréquence de $${fr(f)}$. ` +
-          `L'écart-type des fréquences est de l'ordre de $${fr(Math.round(s * 1000) / 1000)}$. ${q}`,
+          `Environ 95 % des fréquences observées s'écartent de $${fr(p)}$ de moins de $\\dfrac{1}{\\sqrt{${n}}} \\approx ${fr(Math.round(s * 1000) / 1000)}$. ${q}`,
         format: "qcm",
         choices: shuffle([
-          "courante : l'écart reste de l'ordre d'un écart-type",
-          "rare : l'écart dépasse deux écarts-types",
+          "courante : l'écart est plus petit que la marge de fluctuation",
+          "rare : l'écart dépasse largement la marge de fluctuation",
           "impossible dans ce modèle",
           "on ne peut pas se prononcer",
         ]),
         expected: [
-          k === 1
-            ? "courante : l'écart reste de l'ordre d'un écart-type"
-            : "rare : l'écart dépasse deux écarts-types",
+          k < 1
+            ? "courante : l'écart est plus petit que la marge de fluctuation"
+            : "rare : l'écart dépasse largement la marge de fluctuation",
         ],
         comparator: "mcq_exact",
         explanation: exp(
-          "En comparant l'écart observé à l'écart-type des fréquences, on juge si une observation est banale ou surprenante — sans développer de théorie des tests, ce que le programme exclut.",
-          "On calcule l'écart à la proportion du modèle, puis on le divise par l'écart-type.",
-          `Écart : $|${fr(f)} - ${fr(p)}| = ${fr(Math.round(Math.abs(f - p) * 1000) / 1000)}$, soit environ $${k}$ ${accorde(k, "écart-type", "écarts-types")} de $${fr(Math.round(s * 1000) / 1000)}$.`,
-          k === 1
-            ? "Un écart d'un écart-type est tout à fait courant."
-            : "Un écart de trois écarts-types est rare : l'observation interroge le modèle."
+          "Environ 95 % des fréquences observées s'écartent de la proportion de moins de $\\dfrac{1}{\\sqrt{n}}$. En comparant l'écart observé à cette marge, on juge si une observation est banale ou surprenante — sans développer de théorie des tests, ce que le programme exclut.",
+          "On calcule l'écart à la proportion du modèle, puis on le compare à $\\dfrac{1}{\\sqrt{n}}$.",
+          `Écart : $|${fr(f)} - ${fr(p)}| = ${fr(Math.round(Math.abs(f - p) * 1000) / 1000)}$, ` +
+            (k < 1
+              ? `plus petit que $${fr(Math.round(s * 1000) / 1000)}$ : la fréquence est dans l'intervalle $\\left[p - \\dfrac{1}{\\sqrt{n}}\\,;\\,p + \\dfrac{1}{\\sqrt{n}}\\right]$.`
+              : `soit environ trois fois $${fr(Math.round(s * 1000) / 1000)}$ : la fréquence est loin en dehors de l'intervalle $\\left[p - \\dfrac{1}{\\sqrt{n}}\\,;\\,p + \\dfrac{1}{\\sqrt{n}}\\right]$.`),
+          k < 1
+            ? "Un écart plus petit que la marge se produit dans la plupart des échantillons : l'observation est courante."
+            : "Un écart trois fois plus grand que la marge est rare : l'observation interroge le modèle."
         ),
       };
     },
@@ -2068,12 +2074,14 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     microId: "va_ech_rare_ou_frequent",
     difficulty: 3,
     theme: "neutral",
-    hint: "Compare l'écart observé à l'écart-type : au-delà de trois, l'annonce devient difficile à soutenir.",
+    hint: "Compare l'écart observé à $\\frac{1}{\\sqrt{n}}$ : trois fois plus loin, l'annonce devient difficile à soutenir.",
     tags: ["stmg", "maths", "probabilites", "gestion", "template"],
     generate: () => {
-      // Les couples $(p\,;\,n)$ sont appariés pour que l'écart-type reste petit
-      // devant $p$ : sinon un écart de trois écarts-types donnait une fréquence
+      // Les couples $(p\,;\,n)$ sont appariés pour que la marge 1/√n reste petite
+      // devant $p$ : sinon un écart de trois fois la marge donnait une fréquence
       // absurde — 45 % de pièces défectueuses pour une annonce à 5 %.
+      // ⚠️ 1/√n n'est PAS l'écart-type des fréquences (√(p(1 − p)/n), au plus
+      // la moitié) : c'est la marge qui contient environ 95 % des fréquences.
       const cas = pick([
         { p: 0.05, n: 2500 },
         { p: 0.1, n: 2500 },
@@ -2084,35 +2092,37 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
         { p: 0.3, n: 400 },
       ] as const);
       const s = 1 / Math.sqrt(cas.n);
-      const k = pick([0.5, 1, 3, 4] as const);
+      // 0,5 et 0,75 : dans la marge ; 3 et 4 : loin en dehors (jamais pile sur
+      // la borne, où « courante » ou « rare » se discuterait).
+      const k = pick([0.5, 0.75, 3, 4] as const);
       const f = Math.round((cas.p + k * s) * 1000) / 1000;
       const douteux = k >= 3;
       const ep = pick(EPREUVES);
       const bonne = douteux
-        ? "oui : l'écart dépasse trois écarts-types, une telle observation est très improbable si l'annonce est exacte"
-        : "non : l'écart ne dépasse pas un écart-type, c'est une fluctuation banale";
+        ? "oui : l'écart vaut au moins trois fois la marge de fluctuation, une telle observation est très improbable si l'annonce est exacte"
+        : "non : l'écart reste plus petit que la marge de fluctuation, c'est une fluctuation banale";
       return {
         text:
           // « Une publicité affirme qu'il y a une proportion de 0,3 de mangues
           // trop mûres » : aucune publicité ne dit cela (15/10/2026).
           `${pick(["Une étude annonce", "Un rapport officiel annonce", "Le responsable annonce"])} que la proportion ${de(ep.nom)} ${ep.qualite} vaut $${fr(cas.p)}$. ` +
           `Un contrôle sur $${cas.n}$ ${ep.nom} donne une fréquence de $${fr(f)}$. ` +
-          `L'écart-type des fréquences est de l'ordre de $${fr(Math.round(s * 1000) / 1000)}$. ` +
+          `Si l'annonce est exacte, environ 95 % des contrôles de cette taille donnent une fréquence à moins de $\\dfrac{1}{\\sqrt{${cas.n}}} = ${fr(Math.round(s * 1000) / 1000)}$ de $${fr(cas.p)}$. ` +
           pick(["Peut-on douter de l'annonce ?", "Ce contrôle remet-il l'annonce en cause ?", "Ce résultat permet-il de douter de l'annonce ?"]),
         format: "qcm",
         choices: shuffle([
-          "oui : l'écart dépasse trois écarts-types, une telle observation est très improbable si l'annonce est exacte",
-          "non : l'écart ne dépasse pas un écart-type, c'est une fluctuation banale",
+          "oui : l'écart vaut au moins trois fois la marge de fluctuation, une telle observation est très improbable si l'annonce est exacte",
+          "non : l'écart reste plus petit que la marge de fluctuation, c'est une fluctuation banale",
           "oui : dès que la fréquence observée diffère de l'annonce, celle-ci est fausse",
           "non : un échantillon ne permet jamais de se prononcer sur une population",
         ]),
         expected: [bonne],
         comparator: "mcq_exact",
         explanation: exp(
-          "On compare l'écart entre la fréquence observée et la proportion annoncée à l'écart-type des fréquences, de l'ordre de $\\dfrac{1}{\\sqrt{n}}$. Un écart d'un écart-type est banal ; un écart de trois est rare.",
-          "On calcule l'écart, on le divise par l'écart-type, puis on conclut — sans théorie des tests, que le programme exclut.",
+          "Environ 95 % des fréquences observées s'écartent de la proportion annoncée de moins de $\\dfrac{1}{\\sqrt{n}}$. Un écart plus petit que cette marge est banal ; un écart trois fois plus grand est rare.",
+          "On calcule l'écart, on le compare à $\\dfrac{1}{\\sqrt{n}}$, puis on conclut — sans théorie des tests, que le programme exclut.",
           `Écart : $${fr(f)} - ${fr(cas.p)} = ${fr(Math.round((f - cas.p) * 1000) / 1000)}$, ` +
-            `soit $${fr(k)}$ ${accorde(k, "écart-type", "écarts-types")} de $${fr(Math.round(s * 1000) / 1000)}$. ` +
+            `soit $${fr(k)}$ fois la marge $${fr(Math.round(s * 1000) / 1000)}$. ` +
             (douteux
               ? `Une telle observation est très improbable si la proportion annoncée est la bonne.`
               : `Un tel écart se produit constamment : il ne dit rien contre l'annonce.`),
@@ -2139,7 +2149,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     microId: "va_ech_taille",
     difficulty: 3,
     theme: "neutral",
-    hint: "L'écart-type varie comme $\\frac{1}{\\sqrt{n}}$ : diviser par 2 demande de multiplier $n$ par 4.",
+    hint: "La fluctuation varie comme $\\frac{1}{\\sqrt{n}}$ : diviser par 2 demande de multiplier $n$ par 4.",
     tags: ["stmg", "maths", "probabilites", "fixed"],
     text:
       "Un sondage sur $1\\,000$ personnes donne une précision jugée insuffisante. " +
@@ -2150,7 +2160,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     expected: ["par 9"],
     comparator: "mcq_exact",
     explanation: exp(
-      "L'écart-type des fréquences observées est de l'ordre de $\\dfrac{1}{\\sqrt{n}}$ : il ne diminue pas proportionnellement à la taille, mais à sa RACINE.",
+      "La fluctuation des fréquences observées est de l'ordre de $\\dfrac{1}{\\sqrt{n}}$ : elle ne diminue pas proportionnellement à la taille, mais à sa RACINE.",
       "Pour diviser la dispersion par $k$, il faut multiplier la taille par $k^2$.",
       "Pour $k = 3$ : $\\dfrac{1}{\\sqrt{9n}} = \\dfrac{1}{3\\sqrt{n}}$. Il faut donc passer de $1\\,000$ à $9\\,000$ personnes.",
       "Il faut multiplier la taille par $9$ — et c'est pour cela que les grands sondages coûtent si cher : gagner en précision se paie au carré."
@@ -2181,7 +2191,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       const kMots = k === 2 ? "deux" : k === 3 ? "trois" : k === 4 ? "quatre" : k === 5 ? "cinq" : "dix";
       const q = pick([
         `Quelle taille d'échantillon faut-il atteindre pour diviser par ${kMots} la dispersion des fréquences observées ?`,
-        `Combien ${de(ep.nom)} faut-il observer pour que l'écart-type des fréquences soit ${kMots} fois plus petit ?`,
+        `Combien ${de(ep.nom)} faut-il observer pour que la marge de fluctuation des fréquences soit ${kMots} fois plus petite ?`,
         `Pour rendre l'estimation ${kMots} fois plus précise, quelle taille d'échantillon faut-il prévoir ?`,
       ]);
       return {
@@ -2191,7 +2201,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
         expected: [String(n * k * k)],
         comparator: "number_equal",
         explanation: exp(
-          "L'écart-type des fréquences observées est de l'ordre de $\\dfrac{1}{\\sqrt{n}}$ : pour le diviser par $k$, il faut multiplier $n$ par $k^2$.",
+          "Environ 95 % des fréquences observées s'écartent de la proportion de moins de $\\dfrac{1}{\\sqrt{n}}$ : pour diviser cette marge par $k$, il faut multiplier $n$ par $k^2$.",
           "On élève le facteur de réduction au carré, puis on l'applique à la taille.",
           `$${k}^2 = ${k * k}$, donc $${n} \\times ${k * k} = ${n * k * k}$.`,
           `Il faut un échantillon de $${n * k * k}$ individus.`

@@ -87,6 +87,18 @@ type Contexte = {
    * une double négation que personne ne démêle en STMG.
    */
   colonnes: [string, string];
+  /**
+   * ⭐ 24/10/2026 — la FORME VERBALE de chaque modalité, au pluriel, pour les
+   * phrases : « les clients qui ONT ACHETÉ EN LIGNE », « Combien de clients
+   * SONT SATISFAITS ? ». Les libellés bruts (« Achat en ligne ») restent dans
+   * la figure ; glissés dans une phrase, ils donnaient « 67,9 % des clients
+   * relevant de "Achat en ligne" relèvent de "Client satisfait" » —
+   * du jargon de tableur, pas du français.
+   * ⚠️ Chaque forme doit pouvoir suivre « les {individu} qui … » ET
+   * « Combien de {individu} … ? », et s'enchaîner par « et ».
+   */
+  lignesQui: [string, string];
+  colonnesQui: [string, string];
   individu: string;
   /**
    * Le GENRE du nom d'individu. « livraisons » est féminin, tous les autres
@@ -117,9 +129,19 @@ function ceuxLa(ctx: Contexte): string {
   return ctx.genre === "f" ? "celles-là" : "ceux-là";
 }
 
-/** « ceux qui relèvent » / « celles qui relèvent ». */
+/** « ceux qui ont… » / « celles qui ont… ». */
 function ceuxQui(ctx: Contexte): string {
   return ctx.genre === "f" ? "celles" : "ceux";
+}
+
+/** « aux clients » / « aux livraisons ». */
+function aux(ctx: Contexte): string {
+  return `aux ${ctx.individu}`;
+}
+
+/** « les clients qui ont acheté en ligne ». */
+function lesQui(ctx: Contexte, forme: string): string {
+  return `les ${ctx.individu} qui ${forme}`;
 }
 
 const CONTEXTES: readonly Contexte[] = [
@@ -128,6 +150,8 @@ const CONTEXTES: readonly Contexte[] = [
     auteur: "Un responsable qualité",
     lignes: ["Fournisseur A", "Fournisseur B"],
     colonnes: ["Lot conforme", "Lot non conforme"],
+    lignesQui: ["viennent du fournisseur A", "viennent du fournisseur B"],
+    colonnesQui: ["sont conformes", "ne sont pas conformes"],
     individu: "lots",
     genre: "m",
   },
@@ -136,6 +160,8 @@ const CONTEXTES: readonly Contexte[] = [
     auteur: "Une chargée de relation client",
     lignes: ["Achat en ligne", "Achat en magasin"],
     colonnes: ["Client satisfait", "Client insatisfait"],
+    lignesQui: ["ont acheté en ligne", "ont acheté en magasin"],
+    colonnesQui: ["sont satisfaits", "sont insatisfaits"],
     individu: "clients",
     genre: "m",
   },
@@ -144,6 +170,8 @@ const CONTEXTES: readonly Contexte[] = [
     auteur: "Un responsable logistique",
     lignes: ["Transporteur Nord", "Transporteur Sud"],
     colonnes: ["Livraison à l'heure", "Livraison en retard"],
+    lignesQui: ["ont été faites par le transporteur Nord", "ont été faites par le transporteur Sud"],
+    colonnesQui: ["sont arrivées à l'heure", "sont arrivées en retard"],
     individu: "livraisons",
     genre: "f",
   },
@@ -152,6 +180,8 @@ const CONTEXTES: readonly Contexte[] = [
     auteur: "Une responsable des ressources humaines",
     lignes: ["Cadres", "Employés"],
     colonnes: ["Télétravaille", "Ne télétravaille pas"],
+    lignesQui: ["sont cadres", "sont employés"],
+    colonnesQui: ["télétravaillent", "ne télétravaillent pas"],
     individu: "salariés",
     genre: "m",
   },
@@ -160,6 +190,8 @@ const CONTEXTES: readonly Contexte[] = [
     auteur: "Un technicien de production",
     lignes: ["Chaîne 1", "Chaîne 2"],
     colonnes: ["Poids conforme", "Poids hors tolérance"],
+    lignesQui: ["sortent de la chaîne 1", "sortent de la chaîne 2"],
+    colonnesQui: ["ont un poids conforme", "ont un poids hors tolérance"],
     individu: "camemberts",
     genre: "m",
   },
@@ -168,6 +200,8 @@ const CONTEXTES: readonly Contexte[] = [
     auteur: "Une inspectrice sanitaire",
     lignes: ["Navire du matin", "Navire du soir"],
     colonnes: ["Chaîne du froid tenue", "Chaîne du froid rompue"],
+    lignesQui: ["sont arrivés par le navire du matin", "sont arrivés par le navire du soir"],
+    colonnesQui: ["ont gardé la chaîne du froid", "ont subi une rupture de la chaîne du froid"],
     individu: "conteneurs",
     genre: "m",
   },
@@ -176,26 +210,28 @@ const CONTEXTES: readonly Contexte[] = [
     auteur: "Un chargé de fidélisation",
     lignes: ["Abonnement mensuel", "Abonnement annuel"],
     colonnes: ["A renouvelé", "N'a pas renouvelé"],
+    lignesQui: ["avaient un abonnement mensuel", "avaient un abonnement annuel"],
+    colonnesQui: ["ont renouvelé", "n'ont pas renouvelé"],
     individu: "abonnés",
     genre: "m",
   },
   // ⭐ 21/10/2026 — quinze contextes de plus (santé, RH, environnement, sport,
   // culture, marketing) : à sept, la même phrase revenait une fois sur deux.
-  { sujet: "Vaccination contre la grippe", auteur: "Un médecin de santé publique", lignes: ["Moins de 65 ans", "65 ans et plus"], colonnes: ["Vacciné", "Non vacciné"], individu: "patients", genre: "m" },
-  { sujet: "Trajets domicile-travail", auteur: "Une chargée de mobilité durable", lignes: ["Moins de 10 km", "10 km ou plus"], colonnes: ["Vient à vélo", "Ne vient pas à vélo"], individu: "salariés", genre: "m" },
-  { sujet: "Tri des déchets à la cantine", auteur: "Un responsable environnement", lignes: ["Service du midi", "Service du soir"], colonnes: ["Plateau trié", "Plateau non trié"], individu: "plateaux", genre: "m" },
-  { sujet: "Résultats à l'examen du permis", auteur: "Une gérante d'auto-école", lignes: ["Conduite accompagnée", "Formation classique"], colonnes: ["Reçu", "Ajourné"], individu: "candidats", genre: "m" },
-  { sujet: "Renouvellement des licences", auteur: "Un dirigeant de club de handball", lignes: ["Licence loisir", "Licence compétition"], colonnes: ["A repris sa licence", "N'a pas repris sa licence"], individu: "licenciés", genre: "m" },
-  { sujet: "Retours des colis vendus en ligne", auteur: "Une responsable du service après-vente", lignes: ["Vêtements", "Chaussures"], colonnes: ["Colis gardé", "Colis retourné"], individu: "colis", genre: "m" },
-  { sujet: "Paiement des factures", auteur: "Un comptable", lignes: ["Clients particuliers", "Clients professionnels"], colonnes: ["Payée à temps", "Payée en retard"], individu: "factures", genre: "f" },
-  { sujet: "Recrutement des stagiaires", auteur: "Une chargée de recrutement", lignes: ["Candidature spontanée", "Réponse à une offre"], colonnes: ["Retenue", "Non retenue"], individu: "candidatures", genre: "f" },
-  { sujet: "Isolation des logements", auteur: "Un conseiller en rénovation énergétique", lignes: ["Maison", "Appartement"], colonnes: ["Logement isolé", "Logement non isolé"], individu: "logements", genre: "m" },
-  { sujet: "Visites d'un musée", auteur: "Une médiatrice culturelle", lignes: ["Visiteurs français", "Visiteurs étrangers"], colonnes: ["A pris l'audioguide", "N'a pas pris l'audioguide"], individu: "visiteurs", genre: "m" },
-  { sujet: "Réservations d'un hôtel", auteur: "Une directrice d'hôtel", lignes: ["Réservation en ligne", "Réservation par téléphone"], colonnes: ["Séjour maintenu", "Séjour annulé"], individu: "réservations", genre: "f" },
-  { sujet: "Ventes d'une concession automobile", auteur: "Un chef des ventes", lignes: ["Voiture électrique", "Voiture thermique"], colonnes: ["Payée comptant", "Payée à crédit"], individu: "ventes", genre: "f" },
-  { sujet: "Campagne publicitaire en ligne", auteur: "Une chargée de marketing numérique", lignes: ["Publicité vue sur mobile", "Publicité vue sur ordinateur"], colonnes: ["A cliqué", "N'a pas cliqué"], individu: "internautes", genre: "m" },
-  { sujet: "Suivi des formations", auteur: "Un responsable de la formation", lignes: ["Formation en présentiel", "Formation à distance"], colonnes: ["Formation terminée", "Formation abandonnée"], individu: "inscrits", genre: "m" },
-  { sujet: "Venue des festivaliers", auteur: "Une organisatrice de festival", lignes: ["Billet en prévente", "Billet sur place"], colonnes: ["Venu en transport en commun", "Venu en voiture"], individu: "festivaliers", genre: "m" },
+  { sujet: "Vaccination contre la grippe", auteur: "Un médecin de santé publique", lignes: ["Moins de 65 ans", "65 ans et plus"], colonnes: ["Vacciné", "Non vacciné"], lignesQui: ["ont moins de 65 ans", "ont 65 ans ou plus"], colonnesQui: ["sont vaccinés", "ne sont pas vaccinés"], individu: "patients", genre: "m" },
+  { sujet: "Trajets domicile-travail", auteur: "Une chargée de mobilité durable", lignes: ["Moins de 10 km", "10 km ou plus"], colonnes: ["Vient à vélo", "Ne vient pas à vélo"], lignesQui: ["habitent à moins de 10 km", "habitent à 10 km ou plus"], colonnesQui: ["viennent à vélo", "ne viennent pas à vélo"], individu: "salariés", genre: "m" },
+  { sujet: "Tri des déchets à la cantine", auteur: "Un responsable environnement", lignes: ["Service du midi", "Service du soir"], colonnes: ["Plateau trié", "Plateau non trié"], lignesQui: ["ont été servis le midi", "ont été servis le soir"], colonnesQui: ["ont été triés", "n'ont pas été triés"], individu: "plateaux", genre: "m" },
+  { sujet: "Résultats à l'examen du permis", auteur: "Une gérante d'auto-école", lignes: ["Conduite accompagnée", "Formation classique"], colonnes: ["Reçu", "Ajourné"], lignesQui: ["ont suivi la conduite accompagnée", "ont suivi la formation classique"], colonnesQui: ["ont été reçus", "ont été ajournés"], individu: "candidats", genre: "m" },
+  { sujet: "Renouvellement des licences", auteur: "Un dirigeant de club de handball", lignes: ["Licence loisir", "Licence compétition"], colonnes: ["A repris sa licence", "N'a pas repris sa licence"], lignesQui: ["avaient une licence loisir", "avaient une licence compétition"], colonnesQui: ["ont repris leur licence", "n'ont pas repris leur licence"], individu: "licenciés", genre: "m" },
+  { sujet: "Retours des colis vendus en ligne", auteur: "Une responsable du service après-vente", lignes: ["Vêtements", "Chaussures"], colonnes: ["Colis gardé", "Colis retourné"], lignesQui: ["contenaient des vêtements", "contenaient des chaussures"], colonnesQui: ["ont été gardés", "ont été retournés"], individu: "colis", genre: "m" },
+  { sujet: "Paiement des factures", auteur: "Un comptable", lignes: ["Clients particuliers", "Clients professionnels"], colonnes: ["Payée à temps", "Payée en retard"], lignesQui: ["concernent des particuliers", "concernent des professionnels"], colonnesQui: ["ont été payées à temps", "ont été payées en retard"], individu: "factures", genre: "f" },
+  { sujet: "Recrutement des stagiaires", auteur: "Une chargée de recrutement", lignes: ["Candidature spontanée", "Réponse à une offre"], colonnes: ["Retenue", "Non retenue"], lignesQui: ["sont spontanées", "répondent à une offre"], colonnesQui: ["ont été retenues", "n'ont pas été retenues"], individu: "candidatures", genre: "f" },
+  { sujet: "Isolation des logements", auteur: "Un conseiller en rénovation énergétique", lignes: ["Maison", "Appartement"], colonnes: ["Logement isolé", "Logement non isolé"], lignesQui: ["sont des maisons", "sont des appartements"], colonnesQui: ["sont isolés", "ne sont pas isolés"], individu: "logements", genre: "m" },
+  { sujet: "Visites d'un musée", auteur: "Une médiatrice culturelle", lignes: ["Visiteurs français", "Visiteurs étrangers"], colonnes: ["A pris l'audioguide", "N'a pas pris l'audioguide"], lignesQui: ["sont français", "sont étrangers"], colonnesQui: ["ont pris l'audioguide", "n'ont pas pris l'audioguide"], individu: "visiteurs", genre: "m" },
+  { sujet: "Réservations d'un hôtel", auteur: "Une directrice d'hôtel", lignes: ["Réservation en ligne", "Réservation par téléphone"], colonnes: ["Séjour maintenu", "Séjour annulé"], lignesQui: ["ont été faites en ligne", "ont été faites par téléphone"], colonnesQui: ["ont été maintenues", "ont été annulées"], individu: "réservations", genre: "f" },
+  { sujet: "Ventes d'une concession automobile", auteur: "Un chef des ventes", lignes: ["Voiture électrique", "Voiture thermique"], colonnes: ["Payée comptant", "Payée à crédit"], lignesQui: ["concernent une voiture électrique", "concernent une voiture thermique"], colonnesQui: ["ont été payées comptant", "ont été payées à crédit"], individu: "ventes", genre: "f" },
+  { sujet: "Campagne publicitaire en ligne", auteur: "Une chargée de marketing numérique", lignes: ["Publicité vue sur mobile", "Publicité vue sur ordinateur"], colonnes: ["A cliqué", "N'a pas cliqué"], lignesQui: ["ont vu la publicité sur mobile", "ont vu la publicité sur ordinateur"], colonnesQui: ["ont cliqué", "n'ont pas cliqué"], individu: "internautes", genre: "m" },
+  { sujet: "Suivi des formations", auteur: "Un responsable de la formation", lignes: ["Formation en présentiel", "Formation à distance"], colonnes: ["Formation terminée", "Formation abandonnée"], lignesQui: ["suivent la formation en présentiel", "suivent la formation à distance"], colonnesQui: ["ont terminé leur formation", "ont abandonné leur formation"], individu: "inscrits", genre: "m" },
+  { sujet: "Venue des festivaliers", auteur: "Une organisatrice de festival", lignes: ["Billet en prévente", "Billet sur place"], colonnes: ["Venu en transport en commun", "Venu en voiture"], lignesQui: ["ont acheté leur billet en prévente", "ont acheté leur billet sur place"], colonnesQui: ["sont venus en transport en commun", "sont venus en voiture"], individu: "festivaliers", genre: "m" },
 ] as const;
 
 /** « Un responsable qualité » → « un responsable qualité ». */
@@ -373,8 +409,8 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
       const k = pick(cases);
       return {
         text:
-          `Combien ${de(t.ctx.individu)} relèvent à la fois de « ${t.ctx.lignes[k.i]} » ` +
-          `et de « ${t.ctx.colonnes[k.j]} » ?`,
+          `Combien ${de(t.ctx.individu)} ${t.ctx.lignesQui[k.i]} ` +
+          `et ${t.ctx.colonnesQui[k.j]} ?`,
         format: "short",
         expected: [String(k.val)],
         comparator: "number_equal",
@@ -383,7 +419,7 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
           "Dans un tableau croisé, chaque case donne l'effectif des individus qui possèdent SIMULTANÉMENT la modalité de la ligne et celle de la colonne.",
           "On repère la ligne, puis la colonne, et l'on lit la case à leur croisement — pas dans la colonne « Total ».",
           `À l'intersection de « ${t.ctx.lignes[k.i]} » et « ${t.ctx.colonnes[k.j]} » se trouve l'effectif $${k.val}$.`,
-          `$${k.val}$ ${t.ctx.individu} sont concernés.`
+          `$${k.val}$ ${t.ctx.individu} ${t.ctx.lignesQui[k.i]} et ${t.ctx.colonnesQui[k.j]}.`
         ),
       };
     },
@@ -432,7 +468,7 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
           "Chaque case d'un tableau croisé porte deux étiquettes : celle de sa ligne et celle de sa colonne.",
           "On repère la case qui contient le nombre cherché, puis on remonte à gauche pour lire la ligne, et en haut pour lire la colonne.",
           `L'effectif $${k.val}$ occupe la ligne « ${t.ctx.lignes[k.i]} » et la colonne « ${t.ctx.colonnes[k.j]} ».`,
-          `Ces $${k.val}$ ${t.ctx.individu} relèvent de ${bonne}.`
+          `Ces $${k.val}$ ${t.ctx.individu} ${t.ctx.lignesQui[k.i]} et ${t.ctx.colonnesQui[k.j]} : la case ${bonne}.`
         ),
         choiceDiagnostics: [
           {
@@ -466,20 +502,22 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
       const quoi = pick(["ligne1", "ligne2", "col1", "col2", "total"] as const);
       const valeur =
         quoi === "ligne1" ? t.ligne1 : quoi === "ligne2" ? t.ligne2 : quoi === "col1" ? t.col1 : quoi === "col2" ? t.col2 : t.total;
-      const libelle =
+      const forme =
         quoi === "ligne1"
-          ? `« ${t.ctx.lignes[0]} »`
+          ? t.ctx.lignesQui[0]
           : quoi === "ligne2"
-            ? `« ${t.ctx.lignes[1]} »`
+            ? t.ctx.lignesQui[1]
             : quoi === "col1"
-              ? `« ${t.ctx.colonnes[0]} »`
+              ? t.ctx.colonnesQui[0]
               : quoi === "col2"
-                ? `« ${t.ctx.colonnes[1]} »`
-                : "l'ensemble";
+                ? t.ctx.colonnesQui[1]
+                : null;
       return {
         text:
           `Le tableau est donné SANS ses marges. ` +
-          `Combien ${de(t.ctx.individu)} relèvent de ${libelle} ?`,
+          (forme === null
+            ? `Combien ${de(t.ctx.individu)} y a-t-il en tout ?`
+            : `Combien ${de(t.ctx.individu)} ${forme} ?`),
         format: "short",
         expected: [String(valeur)],
         comparator: "number_equal",
@@ -676,9 +714,9 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
       return {
         text:
           `${amorce(t.ctx)} L'étude porte sur $${t.total}$ ${t.ctx.individu}. ` +
-          `$${t.ligne1}$ relèvent de « ${t.ctx.lignes[0]} », et parmi ${ceuxLa(t.ctx)} $${t.a}$ relèvent de « ${t.ctx.colonnes[0]} ». ` +
-          `Par ailleurs, $${t.col1}$ ${t.ctx.individu} au total relèvent de « ${t.ctx.colonnes[0]} ». ` +
-          `Combien ${de(t.ctx.individu)} relèvent à la fois de « ${t.ctx.lignes[1]} » et de « ${t.ctx.colonnes[1]} » ?`,
+          `$${t.ligne1}$ ${t.ctx.lignesQui[0]}, et parmi ${ceuxLa(t.ctx)} $${t.a}$ ${t.ctx.colonnesQui[0]}. ` +
+          `Par ailleurs, en tout, $${t.col1}$ ${t.ctx.individu} ${t.ctx.colonnesQui[0]}. ` +
+          `Combien ${de(t.ctx.individu)} ${t.ctx.lignesQui[1]} et ${t.ctx.colonnesQui[1]} ?`,
         format: "short",
         expected: [String(t.d)],
         comparator: "number_equal",
@@ -689,7 +727,7 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
           `Ligne « ${t.ctx.lignes[1]} » : $${t.total} - ${t.ligne1} = ${t.ligne2}$. ` +
             `Case « ${t.ctx.lignes[1]} » × « ${t.ctx.colonnes[0]} » : $${t.col1} - ${t.a} = ${t.c}$. ` +
             `Donc la case cherchée vaut $${t.ligne2} - ${t.c} = ${t.d}$.`,
-          `$${t.d}$ ${t.ctx.individu} relèvent des deux.`
+          `$${t.d}$ ${t.ctx.individu} ${t.ctx.lignesQui[1]} et ${t.ctx.colonnesQui[1]}.`
         ),
       };
     },
@@ -716,9 +754,9 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
       return {
         text:
           `${amorce(t.ctx)} L'étude porte sur $${t.total}$ ${t.ctx.individu}. ` +
-          `$${t.ligne1}$ relèvent de « ${t.ctx.lignes[0]} », et parmi ${ceuxLa(t.ctx)} $${t.a}$ relèvent de « ${t.ctx.colonnes[0]} ». ` +
-          `Parmi ${ceuxQui(t.ctx)} qui relèvent de « ${t.ctx.lignes[1]} », $${t.c}$ relèvent de « ${t.ctx.colonnes[0]} ». ` +
-          `Au total, combien ${de(t.ctx.individu)} relèvent de « ${t.ctx.colonnes[1]} » ?`,
+          `$${t.ligne1}$ ${t.ctx.lignesQui[0]}, et parmi ${ceuxLa(t.ctx)} $${t.a}$ ${t.ctx.colonnesQui[0]}. ` +
+          `Parmi ${ceuxQui(t.ctx)} qui ${t.ctx.lignesQui[1]}, $${t.c}$ ${t.ctx.colonnesQui[0]}. ` +
+          `En tout, combien ${de(t.ctx.individu)} ${t.ctx.colonnesQui[1]} ?`,
         format: "short",
         expected: [String(t.col2)],
         comparator: "number_equal",
@@ -731,7 +769,7 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
           "On place les effectifs croisés donnés, on complète la colonne qu'ils remplissent, puis on retire ce total de l'effectif total pour obtenir l'autre colonne.",
           `Colonne « ${t.ctx.colonnes[0]} » : $${t.a} + ${t.c} = ${t.col1}$. ` +
             `Colonne « ${t.ctx.colonnes[1]} » : $${t.total} - ${t.col1} = ${t.col2}$.`,
-          `$${t.col2}$ ${t.ctx.individu} relèvent de « ${t.ctx.colonnes[1]} ».`
+          `En tout, $${t.col2}$ ${t.ctx.individu} ${t.ctx.colonnesQui[1]}.`
         ),
       };
     },
@@ -765,7 +803,7 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
             : liste.filter((p) => p.c === j).length;
       const question =
         quoi === "case"
-          ? `Combien ${de(ctx.individu)} relèvent à la fois de « ${ctx.lignes[i]} » et de « ${ctx.colonnes[j]} » ?`
+          ? `Combien ${de(ctx.individu)} ${ctx.lignesQui[i]} et ${ctx.colonnesQui[j]} ?`
           : quoi === "ligne"
             ? `Quel est l'effectif total de la ligne « ${ctx.lignes[i]} » du tableau croisé ?`
             : `Quel est l'effectif total de la colonne « ${ctx.colonnes[j]} » du tableau croisé ?`;
@@ -812,22 +850,22 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
       const t = tirerTableau();
       const quoi = pick(["ligne1", "col2", "col1", "ligne2"] as const);
       const eff = quoi === "ligne1" ? t.ligne1 : quoi === "ligne2" ? t.ligne2 : quoi === "col1" ? t.col1 : t.col2;
-      const libelle =
+      const forme =
         quoi === "ligne1"
-          ? t.ctx.lignes[0]
+          ? t.ctx.lignesQui[0]
           : quoi === "ligne2"
-            ? t.ctx.lignes[1]
+            ? t.ctx.lignesQui[1]
             : quoi === "col1"
-              ? t.ctx.colonnes[0]
-              : t.ctx.colonnes[1];
+              ? t.ctx.colonnesQui[0]
+              : t.ctx.colonnesQui[1];
       const f = eff / t.total;
       return {
         text:
           `${amorce(t.ctx)} ` +
           pick([
-            `Quelle est la fréquence marginale des ${t.ctx.individu} relevant de « ${libelle} » ?`,
-            `Quelle part de l'ensemble des ${t.ctx.individu} relève de « ${libelle} » ?`,
-            `Sur l'ensemble de l'étude, quelle proportion des ${t.ctx.individu} relève de « ${libelle} » ?`,
+            `Quelle est la fréquence marginale des ${t.ctx.individu} qui ${forme} ?`,
+            `Sur tous les ${t.ctx.individu} de l'étude, quelle part ${forme} ?`,
+            `Dans toute l'étude, quelle proportion des ${t.ctx.individu} ${forme} ?`,
           ]) +
           ` (en pourcentage arrondi au dixième)`,
         format: "short",
@@ -876,8 +914,8 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
         text:
           `${amorce(t.ctx)} ` +
           pick([
-            `Quelle est la fréquence marginale des ${t.ctx.individu} relevant de « ${t.ctx.colonnes[0]} » ? `,
-            `Quelle part de l'ensemble des ${t.ctx.individu} relève de « ${t.ctx.colonnes[0]} » ? `,
+            `Quelle est la fréquence marginale des ${t.ctx.individu} qui ${t.ctx.colonnesQui[0]} ? `,
+            `Sur tous les ${t.ctx.individu} de l'étude, quelle part ${t.ctx.colonnesQui[0]} ? `,
           ]) +
           `(en pourcentage arrondi au dixième)`,
         format: "qcm",
@@ -934,12 +972,13 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
       const numerateur = i === 0 ? (j === 0 ? t.a : t.b) : j === 0 ? t.c : t.d;
       const denominateur = sens === "ligne" ? (i === 0 ? t.ligne1 : t.ligne2) : j === 0 ? t.col1 : t.col2;
       const reference = sens === "ligne" ? t.ctx.lignes[i] : t.ctx.colonnes[j];
-      const cible = sens === "ligne" ? t.ctx.colonnes[j] : t.ctx.lignes[i];
+      const referenceQui = sens === "ligne" ? t.ctx.lignesQui[i] : t.ctx.colonnesQui[j];
+      const cibleQui = sens === "ligne" ? t.ctx.colonnesQui[j] : t.ctx.lignesQui[i];
       const f = numerateur / denominateur;
       return {
         text:
-          `Parmi les ${t.ctx.individu} relevant de « ${reference} », ` +
-          `quelle est la fréquence de ceux qui relèvent de « ${cible} » ? ` +
+          `Parmi ${lesQui(t.ctx, referenceQui)}, ` +
+          `quelle est la fréquence de ${ceuxQui(t.ctx)} qui ${cibleQui} ? ` +
           `(en pourcentage arrondi au dixième)`,
         format: "short",
         expected: [pct(f)],
@@ -948,7 +987,7 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
         explanation: exp(
           "Une fréquence conditionnelle se calcule DANS une sous-population : le dénominateur n'est plus l'effectif total, mais celui de la population de référence.",
           "On repère le mot « parmi » : ce qui le suit donne le dénominateur. Le numérateur est la case qui croise les deux caractères.",
-          `Population de référence : « ${reference} », soit $${denominateur}$ ${t.ctx.individu}. ` +
+          `Population de référence : ${lesQui(t.ctx, referenceQui)} (${sens === "ligne" ? "ligne" : "colonne"} « ${reference} »), soit $${denominateur}$ ${t.ctx.individu}. ` +
             `Effectif croisé : $${numerateur}$. Donc $\\dfrac{${numerateur}}{${denominateur}} = ${pct(f)}\\,\\%$.`,
           `La fréquence conditionnelle vaut $${pct(f)}\\,\\%$.`
         ),
@@ -1009,16 +1048,18 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
         col2: b + d,
         total: ligne1 + ligne2,
       };
-      const bonne = `« ${ctx.lignes[1]} »`;
+      const groupe1 = lesQui(ctx, ctx.lignesQui[0]);
+      const groupe2 = lesQui(ctx, ctx.lignesQui[1]);
+      const bonne = groupe2;
       return {
         text:
-          `Pour laquelle des deux catégories la part des ${ctx.individu} relevant de ` +
-          `« ${ctx.colonnes[1]} » est-elle la plus FORTE ?`,
+          `Dans quel groupe la part ${de(ctx.individu)} qui ${ctx.colonnesQui[1]} est-elle la plus FORTE : ` +
+          `${groupe1}, ou ${ceuxQui(ctx)} qui ${ctx.lignesQui[1]} ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
-          `« ${ctx.lignes[0]} »`,
-          "les deux au même niveau",
-          "on ne peut pas comparer : les deux catégories n'ont pas le même effectif",
+          groupe1,
+          "la part est la même dans les deux groupes",
+          "on ne peut pas comparer : les deux groupes n'ont pas le même effectif",
         ]),
         expected: [bonne],
         comparator: "mcq_exact",
@@ -1029,15 +1070,15 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
           `« ${ctx.lignes[0]} » : $\\dfrac{${b}}{${ligne1}} = ${p1}\\,\\%$. ` +
             `« ${ctx.lignes[1]} » : $\\dfrac{${d}}{${ligne2}} = ${p2}\\,\\%$. ` +
             `En effectifs bruts, $${b}$ dépasse pourtant $${d}$ : c'est le piège.`,
-          `La part est plus forte pour « ${ctx.lignes[1]} », avec $${p2}\\,\\%$ contre $${p1}\\,\\%$.`
+          `La part est plus forte chez ${groupe2}, avec $${p2}\\,\\%$ contre $${p1}\\,\\%$.`
         ),
         choiceDiagnostics: [
           {
-            choice: `« ${ctx.lignes[0]} »`,
+            choice: groupe1,
             cause: `a comparé les effectifs bruts ($${b}$ contre $${d}$) sans les rapporter à leur ligne`,
           },
           {
-            choice: "on ne peut pas comparer : les deux catégories n'ont pas le même effectif",
+            choice: "on ne peut pas comparer : les deux groupes n'ont pas le même effectif",
             cause: "des effectifs différents n'empêchent pas la comparaison — c'est justement à cela que servent les fréquences",
           },
         ],
@@ -1088,8 +1129,8 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
       };
       return {
         text:
-          `${amorce(ctx)} Le tableau est incomplet. On sait que, parmi les ${ctx.individu} relevant de « ${ctx.lignes[0]} », ` +
-          `$${p1}\\,\\%$ relèvent de « ${ctx.colonnes[0]} ». ` +
+          `${amorce(ctx)} Le tableau est incomplet. On sait que, parmi ${lesQui(ctx, ctx.lignesQui[0])}, ` +
+          `$${p1}\\,\\%$ ${ctx.colonnesQui[0]}. ` +
           pick([`Combien cela représente-t-il ${de(ctx.individu)} ?`, `Quel effectif faut-il écrire dans la case manquante ?`, `Combien ${de(ctx.individu)} cela fait-il ?`]),
         format: "short",
         expected: [String(a)],
@@ -1150,9 +1191,9 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
       };
       return {
         text:
-          `${amorce(ctx)} Parmi les ${ctx.individu} relevant de « ${ctx.lignes[0]} », $${p}\\,\\%$ relèvent de ` +
-          `« ${ctx.colonnes[0]} » — soit $${a}$ ${ctx.individu}. ` +
-          `Combien ${de(ctx.individu)} relèvent de « ${ctx.lignes[0]} » ?`,
+          `${amorce(ctx)} Parmi ${lesQui(ctx, ctx.lignesQui[0])}, $${p}\\,\\%$ ${ctx.colonnesQui[0]} ` +
+          `— soit $${a}$ ${ctx.individu}. ` +
+          `Combien ${de(ctx.individu)} ${ctx.lignesQui[0]} ?`,
         format: "short",
         expected: [String(ligne1)],
         comparator: "number_equal",
@@ -1161,7 +1202,7 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
           "Une fréquence conditionnelle relie trois nombres : la population de référence, le pourcentage, et l'effectif obtenu. Deux d'entre eux donnent toujours le troisième.",
           "On connaît le pourcentage et l'effectif : la population de référence s'obtient en DIVISANT l'effectif par la fréquence.",
           `$${a} \\div ${fr(p / 100)} = ${ligne1}$ — autrement dit, $${p}\\,\\%$ de $${ligne1}$ font bien $${a}$.`,
-          `$${ligne1}$ ${ctx.individu} relèvent de « ${ctx.lignes[0]} ».`
+          `$${ligne1}$ ${ctx.individu} ${ctx.lignesQui[0]}.`
         ),
       };
     },
@@ -1187,22 +1228,22 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
       const sens = pick(["ligne", "colonne"] as const);
       const phrase =
         sens === "ligne"
-          ? `« $${pct(fLigne)}\\,\\%$ des ${t.ctx.individu} relevant de « ${t.ctx.lignes[0]} » relèvent aussi de « ${t.ctx.colonnes[0]} ». »`
-          : `« $${pct(fColonne)}\\,\\%$ des ${t.ctx.individu} relevant de « ${t.ctx.colonnes[0]} » relèvent aussi de « ${t.ctx.lignes[0]} ». »`;
+          ? `« $${pct(fLigne)}\\,\\%$ des ${t.ctx.individu} qui ${t.ctx.lignesQui[0]} ${t.ctx.colonnesQui[0]}. »`
+          : `« $${pct(fColonne)}\\,\\%$ des ${t.ctx.individu} qui ${t.ctx.colonnesQui[0]} ${t.ctx.lignesQui[0]}. »`;
       const bonne =
         sens === "ligne"
-          ? `l'ensemble des ${t.ctx.individu} relevant de « ${t.ctx.lignes[0]} »`
-          : `l'ensemble des ${t.ctx.individu} relevant de « ${t.ctx.colonnes[0]} »`;
+          ? `tous ${lesQui(t.ctx, t.ctx.lignesQui[0])}`
+          : `tous ${lesQui(t.ctx, t.ctx.colonnesQui[0])}`;
       return {
         text: `${amorce(t.ctx)} ${pick(["Un journal en tire", "Un communiqué en tire", "Une infographie en tire", "Un rapport annuel en tire"])} cette phrase : ${phrase}\n\n${pick(["Sur quelle population ce pourcentage a-t-il été calculé ?", "Quelle est la population de référence de ce pourcentage ?", "Ce pourcentage est calculé parmi quels individus ?"])}`,
         format: "qcm",
         choices: makeChoices(bonne, [
           sens === "ligne"
-            ? `l'ensemble des ${t.ctx.individu} relevant de « ${t.ctx.colonnes[0]} »`
-            : `l'ensemble des ${t.ctx.individu} relevant de « ${t.ctx.lignes[0]} »`,
-          `l'ensemble des $${t.total}$ ${t.ctx.individu} de l'étude`,
-          `l'ensemble des ${t.ctx.individu} relevant de « ${t.ctx.lignes[1]} »`,
-          `l'ensemble des ${t.ctx.individu} relevant de « ${t.ctx.colonnes[1]} »`,
+            ? `tous ${lesQui(t.ctx, t.ctx.colonnesQui[0])}`
+            : `tous ${lesQui(t.ctx, t.ctx.lignesQui[0])}`,
+          `les $${t.total}$ ${t.ctx.individu} de l'étude, en tout`,
+          `tous ${lesQui(t.ctx, t.ctx.lignesQui[1])}`,
+          `tous ${lesQui(t.ctx, t.ctx.colonnesQui[1])}`,
         ]),
         expected: [bonne],
         comparator: "mcq_exact",
@@ -1216,7 +1257,7 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
         ),
         choiceDiagnostics: [
           {
-            choice: `l'ensemble des $${t.total}$ ${t.ctx.individu} de l'étude`,
+            choice: `les $${t.total}$ ${t.ctx.individu} de l'étude, en tout`,
             cause: "a pris l'effectif total : ce serait une fréquence marginale, pas conditionnelle",
           },
         ],
@@ -1258,13 +1299,13 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
       const pColonne = pct(t.a / t.col1);
       const pMarginale = pct(t.col1 / t.total);
       const bonne =
-        `$${pLigne}\\,\\%$ des ${t.ctx.individu} relevant de « ${t.ctx.lignes[0]} » relèvent de « ${t.ctx.colonnes[0]} ».`;
+        `$${pLigne}\\,\\%$ des ${t.ctx.individu} qui ${t.ctx.lignesQui[0]} ${t.ctx.colonnesQui[0]}.`;
       const inversee =
-        `$${pLigne}\\,\\%$ des ${t.ctx.individu} relevant de « ${t.ctx.colonnes[0]} » relèvent de « ${t.ctx.lignes[0]} ».`;
+        `$${pLigne}\\,\\%$ des ${t.ctx.individu} qui ${t.ctx.colonnesQui[0]} ${t.ctx.lignesQui[0]}.`;
       const mauvaisNombre =
-        `$${pColonne}\\,\\%$ des ${t.ctx.individu} relevant de « ${t.ctx.lignes[0]} » relèvent de « ${t.ctx.colonnes[0]} ».`;
+        `$${pColonne}\\,\\%$ des ${t.ctx.individu} qui ${t.ctx.lignesQui[0]} ${t.ctx.colonnesQui[0]}.`;
       const marginale =
-        `$${pLigne}\\,\\%$ de l'ensemble des ${t.ctx.individu} relèvent de « ${t.ctx.colonnes[0]} ».`;
+        `$${pLigne}\\,\\%$ des ${t.ctx.individu}, en tout, ${t.ctx.colonnesQui[0]}.`;
       return {
         text: `${amorce(t.ctx)} ${pick(["D'après ce tableau, laquelle de ces quatre phrases est EXACTE ?", "Quelle phrase, reprise dans un article, décrit correctement ce tableau ?", "Parmi ces quatre formulations, laquelle est juste ?"])}`,
         format: "qcm",
@@ -1278,7 +1319,7 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
           `Case croisée : $${t.a}$. Rapportée à la ligne « ${t.ctx.lignes[0]} » ($${t.ligne1}$) : $${pLigne}\\,\\%$. ` +
             `Rapportée à la colonne « ${t.ctx.colonnes[0]} » ($${t.col1}$) : $${pColonne}\\,\\%$. ` +
             `La fréquence marginale de la colonne, elle, vaut $${pMarginale}\\,\\%$.`,
-          `La phrase exacte est « ${bonne} » : $${pLigne}\\,\\%$ se rapporte bien à « ${t.ctx.lignes[0]} ».`
+          `La phrase exacte est « ${bonne} » : $${pLigne}\\,\\%$ se rapporte bien ${aux(t.ctx)} qui ${t.ctx.lignesQui[0]}.`
         ),
         choiceDiagnostics: [
           {
@@ -1317,8 +1358,10 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
       const eff = quoi === "ligne1" ? t.ligne1 : quoi === "ligne2" ? t.ligne2 : quoi === "col1" ? t.col1 : t.col2;
       const libelle =
         quoi === "ligne1" ? t.ctx.lignes[0] : quoi === "ligne2" ? t.ctx.lignes[1] : quoi === "col1" ? t.ctx.colonnes[0] : t.ctx.colonnes[1];
+      const forme =
+        quoi === "ligne1" ? t.ctx.lignesQui[0] : quoi === "ligne2" ? t.ctx.lignesQui[1] : quoi === "col1" ? t.ctx.colonnesQui[0] : t.ctx.colonnesQui[1];
       return {
-        text: `Combien ${de(t.ctx.individu)} le filtre « ${libelle} » sélectionne-t-il ?`,
+        text: `Sur le tableur, on applique le filtre « ${libelle} » : il garde ${lesQui(t.ctx, forme)}. Combien ${de(t.ctx.individu)} sélectionne-t-il ?`,
         format: "short",
         expected: [String(eff)],
         comparator: "number_equal",
@@ -1406,7 +1449,8 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
       const valeur = i === 0 ? (j === 0 ? t.a : t.b) : j === 0 ? t.c : t.d;
       return {
         text:
-          `Combien ${de(t.ctx.individu)} le filtre « ${t.ctx.lignes[i]} » ET « ${t.ctx.colonnes[j]} » sélectionne-t-il ?`,
+          `Combien ${de(t.ctx.individu)} le filtre « ${t.ctx.lignes[i]} » ET « ${t.ctx.colonnes[j]} » sélectionne-t-il ? ` +
+          `Autrement dit, combien ${t.ctx.lignesQui[i]} et ${t.ctx.colonnesQui[j]} ?`,
         format: "short",
         expected: [String(valeur)],
         comparator: "number_equal",
@@ -1494,6 +1538,7 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
       return {
         text:
           `Combien ${de(t.ctx.individu)} le filtre « ${t.ctx.lignes[i]} » OU « ${t.ctx.colonnes[j]} » sélectionne-t-il ? ` +
+          `Autrement dit, combien ${t.ctx.lignesQui[i]} ou ${t.ctx.colonnesQui[j]} ? ` +
           `(le « ou » mathématique n'est pas exclusif)`,
         format: "short",
         expected: [String(valeur)],
@@ -1535,7 +1580,7 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
       const bonne = `retirer une fois les $${inter}$ ${t.ctx.individu} qui vérifient les DEUX critères`;
       return {
         text:
-          `Pour compter les ${t.ctx.individu} relevant de « ${t.ctx.lignes[i]} » OU « ${t.ctx.colonnes[j]} », ` +
+          `Pour compter ${lesQui(t.ctx, t.ctx.lignesQui[i])} OU ${t.ctx.colonnesQui[j]}, ` +
           `un stagiaire additionne le total de la ligne et le total de la colonne : ` +
           `$${ligne} + ${colonne} = ${ligne + colonne}$. Que faut-il corriger ?`,
         format: "qcm",
@@ -1583,7 +1628,9 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
     tags: ["stmg", "maths", "donnees", "canvas", "template", "short"],
     generate: () => {
       const t = tirerTableau();
-      const quoi = pick(["ligne1", "ligne2", "col1", "col2"] as const);
+      // Jamais NON sur la seconde colonne : « NON « N'a pas pris l'audioguide » »
+      // est une double négation (voir le type `Contexte`).
+      const quoi = pick(["ligne1", "ligne2", "col1"] as const);
       const eff = quoi === "ligne1" ? t.ligne1 : quoi === "ligne2" ? t.ligne2 : quoi === "col1" ? t.col1 : t.col2;
       const libelle =
         quoi === "ligne1" ? t.ctx.lignes[0] : quoi === "ligne2" ? t.ctx.lignes[1] : quoi === "col1" ? t.ctx.colonnes[0] : t.ctx.colonnes[1];
@@ -1627,8 +1674,8 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
       const autre = i === 0 ? (j === 0 ? t.d : t.c) : j === 0 ? t.b : t.a;
       return {
         text:
-          `Combien ${de(t.ctx.individu)} ne relèvent PAS à la fois de « ${t.ctx.lignes[i]} » ` +
-          `et de « ${t.ctx.colonnes[j]} » ?`,
+          `On écarte seulement ${lesQui(t.ctx, t.ctx.lignesQui[i])} ET ${t.ctx.colonnesQui[j]}, les deux à la fois. ` +
+          `Combien ${de(t.ctx.individu)} reste-t-il ?`,
         format: "short",
         expected: [String(t.total - inter)],
         comparator: "number_equal",
@@ -1638,7 +1685,7 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
           "On repère la case qui croise les deux critères, et on la retire de l'effectif total. Une seule case, pas une ligne entière.",
           `La case commune vaut $${inter}$, donc $${t.total} - ${inter} = ${t.total - inter}$. ` +
             `Attention : « ni l'un ni l'autre » aurait désigné la seule case opposée, soit $${autre}$ — un tout autre nombre.`,
-          `$${t.total - inter}$ ${t.ctx.individu} ne relèvent pas des deux à la fois.`
+          `Il reste $${t.total - inter}$ ${t.ctx.individu}.`
         ),
       };
     },
