@@ -45,7 +45,7 @@ if ($Rclone) {
 
 $commun = @(
   "copy", (Join-Path $racine "manim\sorties"), $bucket,
-  "--filter", "- **/partial_movie_files/**", "--filter", "- **/480p*/**",
+  "--filter", "- _avant-marges/**", "--filter", "- **/partial_movie_files/**", "--filter", "- **/480p*/**",
   "--filter", "+ *.mp4", "--filter", "+ *.png", "--filter", "+ *.jpg", "--filter", "+ *.webp", "--filter", "- *",
   "--transfers", "16", "--checkers", "32", "--fast-list",
   "--s3-chunk-size", "16M", "--stats-one-line", "--stats", "10s"
