@@ -1,0 +1,18 @@
+{
+  "00-garde": "Pourcentages et nombres décimaux. 0,75, c'est combien de pour cent ?",
+  "01-situation": "Voici Léa, océanographe : elle étudie les océans. Son logiciel affiche la part de la Terre couverte d'eau : 0,71. Mais dans son article, elle doit écrire un pourcentage. Que doit-elle écrire ?",
+  "02-centiemes": "0,71, c'est 71 centièmes. Sur une grille de 100 cases, ça fait 71 cases. 71 sur 100 : c'est 71 %. Environ 71 % de la surface de la Terre est couverte d'eau.",
+  "03-methode": "La méthode : on multiplie par 100. Dans le tableau, chaque chiffre glisse de deux rangs vers la gauche. Le 7 des dixièmes devient 7 dizaines. Le 1 des centièmes devient 1 unité. 0,71 fois 100, égale 71. Donc 0,71 égale 71 %.",
+  "04-corps": "Autre exemple : le corps d'un adulte contient environ 0,6 de son poids en eau. 0,6, c'est 0,60 : 60 centièmes. 0,6 fois 100, égale 60. Le corps contient donc environ 60 % d'eau.",
+  "05-question": "Question ! 0,5, c'est combien de pour cent ? A : 5 %. B : 50 %. C : 0,5 %. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 0,5 égale 0,50 : 50 centièmes. 0,5 fois 100, égale 50 : c'est 50 %.",
+  "06-piege": "Attention au piège ! 0,75, ce n'est pas 0,75 %. 0,75 %, c'est moins d'une case sur 100 : minuscule ! 0,75, c'est 75 cases sur 100 : 75 %. On ne colle pas le signe pour cent : on multiplie par 100.",
+  "07-inverse": "Dans l'autre sens, on divise par 100. 25 %, c'est 25 centièmes : 0,25. Et 8 %, c'est 8 centièmes : 0,08. Le zéro garde la place des dixièmes.",
+  "08-question": "Question ! 5 %, c'est quel nombre décimal ? A : 0,5. B : 0,05. C : 5,0. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. 5 %, c'est 5 centièmes : 0,05. Et 0,5, ce serait 50 %.",
+  "09-chaine": "Toute la chaîne, maintenant. 6 huitièmes : on simplifie, 3 quarts. 3 divisé par 4, égale 0,75. Et 0,75 fois 100, égale 75 : 75 %.",
+  "10-defi": "À toi de jouer ! Sur une plage, Léa mesure la part couverte d'algues : 0,4. Sur une autre plage : 0,04. Écris ces deux nombres en pourcentage. Mets pause, et cherche !",
+  "10b-correction": "Correction. 0,4 égale 0,40 : 40 centièmes, donc 40 %. 0,04, c'est 4 centièmes : 4 %. Un zéro de plus, et c'est 10 fois moins !",
+  "11-finale": "Ce que tu as appris. Pour écrire un décimal en pourcentage, on multiplie par 100 : 0,75, c'est 75 %, jamais 0,75 %. Pour écrire un pourcentage en décimal, on divise par 100 : 8 %, c'est 0,08. Et 0,6, c'est 60 %, pas 6 %.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

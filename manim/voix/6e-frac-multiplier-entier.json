@@ -1,0 +1,18 @@
+{
+  "00-garde": "Multiplier une fraction par un nombre entier. 4 fois 3 huitièmes, ça fait combien ?",
+  "01-situation": "Voici Lisa, soigneuse animalière dans un refuge. À chaque repas, un chat mange 3 huitièmes d'une boîte de pâtée. Il y a 4 chats. Combien de boîtes faut-il pour un repas ?",
+  "02-ajouter": "4 fois 3 huitièmes, c'est 3 huitièmes, 4 fois de suite. On compte les parts : 3 plus 3 plus 3 plus 3, égale 12. Ça fait 12 huitièmes.",
+  "03-regle": "La règle : on multiplie le numérateur. 4 fois 3, égale 12. Le dénominateur ne bouge pas : les parts gardent leur taille. 4 fois 3 huitièmes égale 12 huitièmes.",
+  "04-plus-que-un": "12 huitièmes, c'est plus qu'une boîte ! 8 huitièmes font 1 boîte entière. Il reste 4 huitièmes : une demi-boîte. Lisa ouvre 1 boîte et demie.",
+  "05-question": "Question ! Combien font 5 fois 2 neuvièmes ? A : 10 quarante-cinquièmes. B : 10 neuvièmes. C : 7 neuvièmes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. On multiplie seulement le haut : 5 fois 2, égale 10. Le bas reste 9.",
+  "06-simplifier": "On simplifie le résultat. 12 et 8 sont dans la table de 4. 12 divisé par 4, égale 3. 8 divisé par 4, égale 2. 12 huitièmes égale 3 demis : 3 demi-boîtes.",
+  "07-ordre": "Et l'ordre ne compte pas : 3 huitièmes fois 4, ça fait aussi 12 huitièmes.",
+  "08-piege": "Attention au piège ! Certains multiplient aussi le dénominateur : 12 trente-deuxièmes. Faux ! 12 trente-deuxièmes, c'est 3 huitièmes : la part d'un seul chat. 4 chats mangent plus qu'un seul !",
+  "09-question": "Question ! 3 fois 1 tiers, ça fait combien ? A : 3 neuvièmes. B : 1. C : 4 tiers. Mets pause, et choisis !",
+  "09b-reponse": "Réponse B. 3 fois 1 tiers égale 3 tiers. Et 3 tiers, c'est un entier : 1.",
+  "10-defi": "À toi de jouer ! Au refuge, chaque chien boit 3 quarts de litre d'eau par jour. Il y a 6 chiens. Combien de litres d'eau faut-il chaque jour ? Mets pause, et cherche !",
+  "10b-correction": "Correction. 6 fois 3, égale 18 : 18 quarts. On simplifie par 2 : 9 demis. Et 9 divisé par 2, égale 4,5. Il faut 4,5 litres d'eau par jour.",
+  "11-finale": "Ce que tu as appris. Pour multiplier une fraction par un entier, on multiplie le numérateur. Le dénominateur ne change pas. L'ordre ne compte pas. Et on simplifie le résultat.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

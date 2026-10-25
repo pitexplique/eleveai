@@ -1,0 +1,18 @@
+{
+  "00-garde": "Additionner des fractions. 1 huitième plus 3 huitièmes, ça fait combien ?",
+  "01-situation": "Voici Chloé, chimiste. Dans un flacon, elle verse 1 huitième de litre d'eau, puis 3 huitièmes de litre d'alcool. Combien de liquide y a-t-il dans le flacon ?",
+  "02-meme": "Ce sont des parts de même taille : des huitièmes. On les compte : 1 plus 3, égale 4. Ça fait 4 huitièmes de litre. On ajoute les numérateurs. Le dénominateur ne change pas.",
+  "03-simplifier": "Et 4 huitièmes, ça se simplifie ! On divise par 4 : 1 demi. Chloé a un demi-litre dans son flacon.",
+  "04-multiple": "Et si les parts sont différentes ? 1 demi plus 1 quart. 4 est dans la table de 2 : on écrit 1 demi en quarts. 1 demi égale 2 quarts. 2 quarts plus 1 quart, égale 3 quarts.",
+  "05-question": "Question ! Combien font 3 dixièmes plus 1 cinquième ? A : 4 quinzièmes. B : 5 dixièmes. C : 4 dixièmes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 1 cinquième égale 2 dixièmes. 3 dixièmes plus 2 dixièmes, égale 5 dixièmes.",
+  "06-quelconque": "Et 1 tiers plus 1 quart ? On cherche un nombre dans la table de 3 et dans la table de 4 : 12. 1 tiers égale 4 douzièmes. 1 quart égale 3 douzièmes. 4 douzièmes plus 3 douzièmes, égale 7 douzièmes.",
+  "07-piege": "Attention au piège ! On n'ajoute jamais les dénominateurs. 1 tiers plus 1 quart, ce n'est pas 2 septièmes. Regarde : 2 septièmes, c'est moins qu'1 tiers tout seul. Impossible !",
+  "08-soustraire": "Pour soustraire, c'est pareil. Chloé a 5 sixièmes de litre. Elle en utilise 1 tiers. 1 tiers égale 2 sixièmes. 5 sixièmes moins 2 sixièmes, égale 3 sixièmes : un demi-litre.",
+  "09-question": "Question ! Combien font 2 cinquièmes plus 2 cinquièmes ? A : 4 dixièmes. B : 4 cinquièmes. C : 2 cinquièmes. Mets pause, et choisis !",
+  "09b-reponse": "Réponse B. Des parts de même taille : 2 plus 2, égale 4. 4 cinquièmes. Le dénominateur ne change pas.",
+  "10-defi": "À toi de jouer ! Chloé mélange 2 tiers de litre d'une solution et 1 quart de litre d'une autre. Combien de litres a-t-elle ? Est-ce que ça tient dans un flacon d'1 litre ? Mets pause, et cherche !",
+  "10b-correction": "Correction. On écrit tout en douzièmes. 2 tiers égale 8 douzièmes. 1 quart égale 3 douzièmes. 8 plus 3, égale 11 : 11 douzièmes de litre. C'est moins que 12 douzièmes, moins d'1 litre : ça tient !",
+  "11-finale": "Ce que tu as appris. Avec des parts de même taille, on ajoute les numérateurs : le dénominateur ne change pas. Sinon, on écrit d'abord les fractions avec le même dénominateur. On simplifie le résultat. Et on n'ajoute jamais les dénominateurs.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

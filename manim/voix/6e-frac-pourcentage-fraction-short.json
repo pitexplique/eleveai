@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Awa, entraîneuse de basket, cherche le meilleur tireur aux lancers francs. Qui tire le mieux ?",
+  "01-noa": "Noa réussit 3 lancers sur 4.",
+  "02-lina": "Lina en réussit 7 sur 10.",
+  "03-sacha": "Sacha en réussit 18 sur 25. C'est lui qui en marque le plus !",
+  "04-cent": "Mais ils n'ont pas tiré le même nombre de fois. Alors on coupe chaque barre en 100 : on compte tout sur 100.",
+  "05-pourcents": "3 sur 4, c'est 75 %. 7 sur 10, c'est 70 %. 18 sur 25, c'est 72 %.",
+  "06-surprise": "Surprise : le meilleur tireur, c'est Noa, avec 75 % !",
+  "07-question": "Question ! 1 sur 2, c'est combien de pour cent ? A : 12 %. B : 2 %. C : 50 %. Mets pause !",
+  "07b-reponse": "Réponse C. 1 sur 2, c'est la moitié : 50 sur 100.",
+  "08-question": "À toi : 4 lancers réussis sur 5, c'est combien de pour cent ? Réponds en commentaire !"
+}

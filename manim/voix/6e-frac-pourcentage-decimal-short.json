@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Sami, vendeur, écrit l'affiche des soldes : moins 0,25 %, sur des baskets à 100 €. Bonne affaire ?",
+  "01-vrai": "0,25 %, c'est 0,25 € sur 100 € : 25 centimes de remise ! Les baskets coûtent encore 99,75 €.",
+  "02-voulu": "Sami voulait une remise de 0,25 du prix. 0,25 fois 100, égale 25 : c'est 25 %.",
+  "03-bon": "Avec moins 25 %, on économise 25 € : les baskets coûtent 75 €. Un seul signe, et tout change !",
+  "04-question": "Question ! 0,1, c'est combien de pour cent ? A : 1 %. B : 0,1 %. C : 10 %. Mets pause !",
+  "04b-reponse": "Réponse C. 0,1 fois 100, égale 10 : 10 %.",
+  "05-question": "À toi : 0,3 du prix, c'est combien de pour cent ? Réponds en commentaire !"
+}

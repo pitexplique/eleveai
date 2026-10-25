@@ -1,0 +1,19 @@
+{
+  "00-garde": "Pourcentages et fractions. 1 quart, c'est combien de pour cent ?",
+  "01-situation": "Voici Yasmine, développeuse de jeux vidéo. Dans son jeu, la barre de chargement compte 100 petites cases. Le jeu a chargé 1 quart. Que doit afficher la barre ?",
+  "02-pourcent": "D'abord, que veut dire pour cent ? Voici 100 cases. 25 %, c'est 25 cases sur 100. On l'écrit 25 sur 100 : une fraction. Pour cent veut dire : sur 100.",
+  "03-quart": "Et 1 quart ? On coupe les 100 cases en 4 parts égales. Chaque part a 25 cases. 1 quart, c'est donc 25 cases sur 100 : 25 %.",
+  "04-methode": "Avec les nombres. 1 quart égale combien de centièmes ? 4 fois 25, égale 100. Alors 1 fois 25, égale 25. 1 quart égale 25 centièmes : 25 %. Yasmine affiche 25 % sur la barre.",
+  "05-reperes": "Retiens les fractions du quotidien. 1 demi, c'est 50 %. 3 quarts, c'est 75 %. 1 dixième, c'est 10 %. Et 1 cinquième, c'est 20 %.",
+  "06-question": "Question ! 1 vingtième, c'est combien de pour cent ? A : 20 %. B : 5 %. C : 1 %. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. 20 fois 5, égale 100. Donc 1 vingtième égale 5 centièmes : 5 %.",
+  "07-inverse": "Dans l'autre sens. Le jeu affiche 40 %. 40 %, c'est 40 sur 100. On simplifie : on divise par 10, en haut et en bas. 4 dixièmes. Puis on divise par 2 : 2 cinquièmes. 40 %, c'est 2 cinquièmes du jeu.",
+  "08-piege": "Attention au piège ! 1 quart, ce n'est pas 4 %. 4 %, c'est 4 cases sur 100 : tout petit ! 1 quart, c'est 25 cases. Le pourcentage compte toujours sur 100.",
+  "09-question": "Question ! 30 %, c'est quelle fraction ? A : 30 sur 10. B : 3 sur 100. C : 30 sur 100. Mets pause, et choisis !",
+  "09b-reponse": "Réponse C. 30 % veut dire 30 sur 100. Et 30 sur 10, ce serait 3 entiers !",
+  "10-defi": "À toi de jouer ! Le jeu de Yasmine a 20 niveaux. Tu en as fini 7. Quel pourcentage du jeu as-tu fini ? Mets pause, et cherche !",
+  "10b-correction": "Correction. Tu as fini 7 vingtièmes du jeu. 20 fois 5, égale 100. Alors 7 fois 5, égale 35. 7 vingtièmes égale 35 centièmes : tu as fini 35 % du jeu.",
+  "11-chaine": "Et le nombre décimal ? 1 quart, c'est aussi 1 divisé par 4, égale 0,25. Et 0,25, c'est 25 centièmes : 25 %. Fraction, nombre décimal, pourcentage : trois écritures du même nombre.",
+  "12-finale": "Ce que tu as appris. Pour cent veut dire sur 100. Pour écrire une fraction en pourcentage, on cherche la fraction égale sur 100. 1 demi, c'est 50 %. 1 quart, 25 %. 3 quarts, 75 %. Et 1 quart, ce n'est jamais 4 %.",
+  "13-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

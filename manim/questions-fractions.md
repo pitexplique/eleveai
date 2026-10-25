@@ -86,4 +86,21 @@ Recopié des rapports des agents au fil des lots (consigne : `manim/consigne-vid
   [{"t":"00:33","question":"Laquelle est égale à 1/3 ?","choix":["4/12","3/4","2/5"],"reponse":0,"explication":"4 ÷ 4 = 1 et 12 ÷ 4 = 3."}]
   ```
 
+### 08 à 13 — lot C, 25/10 (08-11 : paysage seulement, les shorts `6e-fraction-calcul-short-*` existent)
+- 08-quantite `6e-frac-quantite` (3:33, verte, Nathan producteur de musique : 2/5 de 60 s = 24 s ; simplifier avant : 4/6 de 30 → 2/3 de 30 ; défi 7/10 de 250 = 175, 0,7 = 70 %). Centres `["musique"]`.
+  `[{"t":"00:57","question":"Les 3/10 de 50 ?","choix":["5","15","150"],"reponse":1,"explication":"50 ÷ 10 = 5, puis 3 × 5 = 15."},{"t":"02:05","question":"Les 3/4 de 40 ?","choix":["30","10","120"],"reponse":0,"explication":"40 ÷ 4 = 10, puis 3 × 10 = 30."}]`
+- 09-additionner `6e-frac-additionner` (3:57, verte, Chloé chimiste : 1/3 + 1/4 = 7/12 ; piège 2/7 ; défi 2/3 + 1/4 = 11/12 L). Centres `["sciences"]`.
+  `[{"t":"01:02","question":"3/10 + 1/5 ?","choix":["4/15","5/10","4/10"],"reponse":1,"explication":"1/5 = 2/10, donc 3/10 + 2/10 = 5/10."},{"t":"02:22","question":"2/5 + 2/5 ?","choix":["4/10","4/5","2/5"],"reponse":1,"explication":"Parts de même taille : 2 + 2 = 4, le dénominateur ne change pas."}]`
+- 10-multiplier-entier `6e-frac-multiplier-entier` (3:36, verte, Lisa soigneuse dans un refuge : 4 × 3/8 = 3/2 ; piège 12/32 ; défi 6 × 3/4 = 4,5 L). Centres `["animaux"]`.
+  `[{"t":"01:04","question":"5 × 2/9 ?","choix":["10/45","10/9","7/9"],"reponse":1,"explication":"On multiplie seulement le haut : 5 × 2 = 10, le bas reste 9."},{"t":"02:13","question":"3 × 1/3 ?","choix":["3/9","1","4/3"],"reponse":1,"explication":"3 × 1/3 = 3/3, un entier : 1."}]`
+- 11-calcul-defi `6e-frac-calcul-defi` (3:43, verte, Sarah guide de montagne : 3/8 puis 1/4 de 24 km, reste 9 km ; bonus 18/40 = 45 %). Centres `["sport","histoire-geographie"]`.
+  `[{"t":"01:05","question":"3/8 + 1/4 ?","choix":["4/12","5/8","4/8"],"reponse":1,"explication":"1/4 = 2/8, donc 3 + 2 = 5 : 5/8."},{"t":"01:53","question":"3 × 5/4 : plus grand ou plus petit que 3 ?","choix":["plus petit","égal","plus grand"],"reponse":2,"explication":"5/4 est plus grand que 1, donc 3 × 5/4 > 3 (15/4)."}]`
+- 12-pourcentage-fraction : paysage `6e-frac-pourcentage-fraction` (4:24, verte, Yasmine développeuse de jeux vidéo, barre de chargement ; défi 7/20 = 35 %), centres `["jeux-video"]` ; short (1:19, blanche, Awa entraîneuse de basket : 75 %, 70 %, 72 %), centres `["sport","jeux-defis"]`, commentaire « 4 sur 5, combien de pour cent ? » (80).
+  paysage `[{"t":"01:27","question":"1/20, c'est combien de pour cent ?","choix":["20 %","5 %","1 %"],"reponse":1,"explication":"20 × 5 = 100, donc 1/20 = 5/100 = 5 %."},{"t":"02:33","question":"30 %, c'est quelle fraction ?","choix":["30/10","3/100","30/100"],"reponse":2,"explication":"30 % veut dire 30 sur 100 ; 30/10 ferait 3 entiers."}]`
+  short `[{"t":"00:47","question":"1 sur 2, c'est combien de pour cent ?","choix":["12 %","2 %","50 %"],"reponse":2,"explication":"La moitié : 50 sur 100."}]`
+- 13-pourcentage-decimal : paysage `6e-frac-pourcentage-decimal` (4:48, verte, Léa océanographe : 71 % de la Terre couverte d'eau, ≈ 60 % d'eau dans le corps — USGS Water Science School, à confirmer sur usgs.gov avant publication ; piège 0,75 ≠ 0,75 %), centres `["nature-ecologie","corps-sante"]` ; short (1:16, blanche, Sami vendeur : « −0,25 % » sur des baskets à 100 €), centres `["argent-budget","jeux-defis"]`, commentaire « 0,3 du prix, combien de pour cent ? » (30).
+  paysage `[{"t":"01:29","question":"0,5, c'est combien de pour cent ?","choix":["5 %","50 %","0,5 %"],"reponse":1,"explication":"0,5 = 0,50 = 50 centièmes, donc 50 %."},{"t":"02:46","question":"5 %, c'est quel nombre décimal ?","choix":["0,5","0,05","5,0"],"reponse":1,"explication":"5 % = 5 centièmes = 0,05 ; 0,5 serait 50 %."}]`
+  short `[{"t":"00:44","question":"0,1, c'est combien de pour cent ?","choix":["1 %","0,1 %","10 %"],"reponse":2,"explication":"0,1 × 100 = 10 : 10 %."}]`
+- Soucis restants lot C : 08 « 60 ÷ 2 » 1,5 s après « 60 » (piège) et étiquettes « 25 » serrées sous la barre ; short 12 « La moitié : » brièvement couvert par la carte qui grossit.
+
 ## 4e

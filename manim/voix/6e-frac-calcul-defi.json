@@ -1,0 +1,18 @@
+{
+  "00-garde": "Défis de calcul avec les fractions. Combien de kilomètres reste-t-il à marcher ?",
+  "01-situation": "Voici Sarah, guide de montagne. Sa randonnée fait 24 kilomètres. Le matin, le groupe marche les 3 huitièmes du parcours. L'après-midi, encore 1 quart. Combien de kilomètres reste-t-il pour le lendemain ?",
+  "02-plan": "Un défi se fait étape par étape. Méthode 1 : on calcule chaque partie en kilomètres.",
+  "03-matin": "Le matin : les 3 huitièmes de 24. 24 divisé par 8, égale 3. 3 fois 3, égale 9. 9 kilomètres.",
+  "04-apres-midi": "L'après-midi : 1 quart de 24. 24 divisé par 4, égale 6. 6 kilomètres.",
+  "05-reste": "Ils ont marché 9 plus 6, égale 15 kilomètres. Il reste 24 moins 15, égale 9 kilomètres.",
+  "06-question": "Question ! Combien font 3 huitièmes plus 1 quart ? A : 4 douzièmes. B : 5 huitièmes. C : 4 huitièmes. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. 1 quart égale 2 huitièmes. 3 plus 2, égale 5 : 5 huitièmes.",
+  "07-methode2": "Méthode 2, avec les fractions. Ils ont marché 5 huitièmes du parcours. Le parcours entier, c'est 8 huitièmes. Il reste 8 moins 5 : 3 huitièmes. Et 3 huitièmes de 24, c'est 9 kilomètres. Les deux méthodes donnent 9 !",
+  "08-question": "Question ! 3 fois 5 quarts : plus grand ou plus petit que 3 ? A : plus petit. B : égal. C : plus grand. Mets pause, et choisis !",
+  "08b-reponse": "Réponse C. 5 quarts, c'est plus qu'1. Donc 3 fois 5 quarts, c'est plus que 3 : 15 quarts.",
+  "09-defi": "À toi de jouer ! Le groupe compte 40 randonneurs. 1 quart sont des enfants. 3 dixièmes sont des ados. Les autres sont des adultes. Combien y a-t-il d'adultes ? Mets pause, et cherche !",
+  "09b-correction": "Correction. 1 quart de 40 : 40 divisé par 4, égale 10 enfants. 3 dixièmes de 40 : 40 divisé par 10, égale 4. 3 fois 4, égale 12 ados. 10 plus 12, égale 22. Il reste 40 moins 22 : 18 adultes.",
+  "10-chaine": "Bonus : 18 adultes sur 40, quel pourcentage ? On simplifie par 2 : 9 vingtièmes. On multiplie par 5 : 45 centièmes. 0,45, c'est 45 %.",
+  "11-finale": "Ce que tu as appris. Un défi se fait étape par étape. On calcule chaque part en nombre, ou on travaille avec les fractions. Et on vérifie : les deux méthodes donnent le même résultat.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}
