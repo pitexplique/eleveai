@@ -39,7 +39,7 @@ const LIBELLE_CLASSE: Record<string, string> = {
 };
 
 /** « Programme du … » : l'article de chaque pays. */
-const DU_PAYS: Record<string, string> = { maroc: "du Maroc", quebec: "du Québec", senegal: "du Sénégal" };
+const DU_PAYS: Record<string, string> = { maroc: "du Maroc", quebec: "du Québec", senegal: "du Sénégal", belgique: "de la Fédération Wallonie-Bruxelles" };
 
 const BADGE: Record<Couverture, { texte: string; cls: string }> = {
   complete: { texte: "Couvert", cls: "border-green-300 bg-green-50 text-green-800" },

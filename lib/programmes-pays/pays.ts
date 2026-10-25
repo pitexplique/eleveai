@@ -15,9 +15,12 @@ export type InfoPays = { slug: SlugPays; nom: string; drapeau: string };
  * France, Suisse romande, Belgique, Maroc, Québec, Côte d'Ivoire.
  */
 export const PAYS: InfoPays[] = [
+  { slug: "suisse", nom: "Suisse romande", drapeau: "🇨🇭" },
+  { slug: "belgique", nom: "Belgique (Fédération Wallonie-Bruxelles)", drapeau: "🇧🇪" },
   { slug: "quebec", nom: "Québec (Canada)", drapeau: "🇨🇦" },
   { slug: "maroc", nom: "Maroc", drapeau: "🇲🇦" },
   { slug: "senegal", nom: "Sénégal", drapeau: "🇸🇳" },
+  { slug: "cote-divoire", nom: "Côte d'Ivoire", drapeau: "🇨🇮" },
 ];
 
 /** Une classe du pays dans la colonne de gauche du coach. */
@@ -84,6 +87,39 @@ export const CLASSES_PAYS: Record<SlugPays, { titre: string; classes: ClassePays
         { cle: "2nde", court: "2nde" },
         { cle: "1re", court: "1re" },
         { cle: "tle", court: "Tle" },
+      ],
+    },
+  ],
+  // 25/10/2026 : à remplir par les matrices (classes grisées tant qu'elles n'existent pas).
+  // Suisse romande (PER, CIIP) : HarmoS 1-8 (primaire), 9-11 (cycle 3), puis le secondaire II.
+  // Le PER ne distingue les années qu'au cycle 3 ; avant, il va par paires
+  // (1-2H, 3-4H, 5-6H, 7-8H). Matrices : suisse-romande-cycle1/2/3.ts ; 1-2H
+  // (école enfantine) reste grisé.
+  suisse: [
+    { titre: "Primaire", classes: ["1-2", "3-4", "5-6", "7-8"].map((a) => ({ cle: `${a}h`, court: `${a}H` })) },
+    { titre: "Secondaire I", classes: [9, 10, 11].map((n) => ({ cle: `${n}h`, court: `${n}H` })) },
+    // Secondaire II : le PEC national (CDIP 2024) ne découpe pas le gymnase en années.
+    { titre: "Secondaire II", classes: [{ cle: "gymnase", court: "Gymnase" }] },
+  ],
+  // Belgique, Fédération Wallonie-Bruxelles : primaire P1-P6, secondaire S1-S6.
+  // Tronc commun P1 → S3 (référentiel 2022) : belgique-primaire.ts, belgique-secondaire.ts ;
+  // S4-S6 (humanités) : belgique-humanites.ts.
+  belgique: [
+    { titre: "Primaire", classes: [1, 2, 3, 4, 5, 6].map((n) => ({ cle: `p${n}`, court: `P${n}` })) },
+    { titre: "Tronc commun", classes: [1, 2, 3].map((n) => ({ cle: `s${n}`, court: `S${n}` })) },
+    { titre: "Humanités", classes: [4, 5, 6].map((n) => ({ cle: `s${n}`, court: `S${n}` })) },
+  ],
+  // Côte d'Ivoire (MENA) : primaire CP1 → CM2, collège 6e → 3e (BEPC), lycée
+  // 2nde C → Tle D (bac). Matrices : cote-divoire-primaire/college/lycee.ts.
+  "cote-divoire": [
+    { titre: "Primaire", classes: ["CP1", "CP2", "CE1", "CE2", "CM1", "CM2"].map((c) => ({ cle: c.toLowerCase(), court: c })) },
+    { titre: "Collège", classes: ["6e", "5e", "4e", "3e"].map((c) => ({ cle: c, court: c })) },
+    {
+      titre: "Lycée",
+      classes: [
+        { cle: "2nde", court: "2nde C" },
+        { cle: "1re", court: "1re D" },
+        { cle: "tle", court: "Tle D" },
       ],
     },
   ],
