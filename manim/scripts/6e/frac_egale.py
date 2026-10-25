@@ -28,7 +28,7 @@
 #
 # Voix : manim/voix/6e-frac-egale.json (débit −10), WAV dans
 # public/sons/6e-frac-egale/ ; calage mot à mot :
-# manim/scripts/6e/frac_egale_marques.json (marques_dump.ps1 + cues2marques.py).
+# manim/scripts/6e/frac_egale_marques.json (scripts/marques_dump.ps1 + scripts/cues2marques.py).
 # Figures : manim/canvas_fractions.py ; bases : manim/scripts/6e/frac_commun.py.
 # python -m manim render -qh --disable_caching manim/scripts/6e/frac_egale.py FracEgale6e -o eleveai-maths-6e-frac-egale --media_dir manim/scripts/6e/media-frac-egale
 # Sortie : manim/sorties/6e/maths/fractions/03-egale/eleveai-maths-6e-frac-egale.mp4
