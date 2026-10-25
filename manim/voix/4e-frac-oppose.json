@@ -1,0 +1,17 @@
+{
+  "00-garde": "L'opposé d'une fraction. De l'autre côté du zéro ?",
+  "01-situation": "Voici Manon, capitaine de port. Elle surveille l'échelle de marée : le 0, c'est le niveau moyen de la mer. Ce matin, à marée haute, l'eau est à 3 quarts de mètre au-dessus du 0. Ce soir, à marée basse, elle est à 3 quarts de mètre au-dessous. Comment l'écrire ?",
+  "02-signe": "Au-dessus du 0, on écrit 3 quarts. Au-dessous, moins 3 quarts. Même distance au 0, mais de l'autre côté : 3 quarts et moins 3 quarts sont des nombres opposés.",
+  "03-droite": "Couchons l'échelle : c'est une droite graduée. 3 quarts et moins 3 quarts sont symétriques par rapport au 0. L'opposé de 3 quarts, c'est moins 3 quarts. Et l'opposé de moins 3 quarts, c'est 3 quarts. On change seulement le signe.",
+  "04-somme": "La mer monte de 3 quarts, puis redescend de 3 quarts : elle revient au 0. 3 quarts plus moins 3 quarts, égale 0. La somme de deux opposés vaut toujours 0.",
+  "05-question": "Question ! Quel est l'opposé de moins 5 neuvièmes ? A : 9 cinquièmes. B : 5 neuvièmes. C : moins 5 neuvièmes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. On change seulement le signe : moins 5 neuvièmes devient 5 neuvièmes. Leur somme vaut 0.",
+  "06-signes": "Sur la tablette de Manon, le signe moins peut se placer en haut, ou en bas. Moins 3 divisé par 4, égale moins 0,75. 3 divisé par moins 4, égale aussi moins 0,75. Les trois écritures sont égales : un seul signe moins suffit. Et avec 2 signes moins, en haut et en bas ? Ils s'annulent : c'est 3 quarts.",
+  "07-piege": "Attention au piège ! L'opposé n'est pas l'inverse. L'opposé de 3 quarts, c'est moins 3 quarts : leur somme vaut 0. L'inverse de 3 quarts, c'est 4 tiers : on retourne la fraction, et le produit vaut 1. Retourner la fraction ne donne pas l'opposé !",
+  "08-question": "Question ! Quel est l'opposé de 2 sur moins 7 ? A : moins 2 septièmes. B : 2 septièmes. C : 7 demis. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. D'abord, 2 sur moins 7 égale moins 2 septièmes. Son opposé, c'est 2 septièmes.",
+  "09-defi": "À toi de jouer ! Au lever du jour, la tablette affiche moins 6 quinzièmes de mètre. À midi, l'eau est au niveau opposé. Quel est ce niveau, en nombre décimal ? Simplifie d'abord ! Mets pause, et cherche !",
+  "09b-correction": "Correction. 6 et 15 sont dans la table de 3 : moins 6 quinzièmes égale moins 2 cinquièmes. L'opposé, c'est 2 cinquièmes. Et 2 divisé par 5, égale 0,4. À midi, l'eau est à 0,4 mètre au-dessus du 0 : 40 centimètres !",
+  "10-finale": "Ce que tu as appris. L'opposé d'une fraction a la même distance à 0, de l'autre côté : on change seulement le signe. Un nombre plus son opposé, égale 0. Et l'opposé n'est pas l'inverse.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

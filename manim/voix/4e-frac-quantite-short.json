@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Lina, cheffe de cuisine, a un gâteau carré. Elle doit le couper en 5 parts égales. En 4, c'est facile. Mais en 5 ?",
+  "01-tour": "Son astuce : le tour du gâteau. Le côté mesure 20 centimètres. 4 côtés : 4 fois 20, égale 80 centimètres de tour. Chaque part prend 1 cinquième du tour : 80 divisé par 5, égale 16 centimètres de bord.",
+  "02-coupes": "Elle part d'un coin, et marque un point tous les 16 centimètres. Puis elle coupe depuis le centre, jusqu'à chaque point.",
+  "03-formes": "Surprise : les parts n'ont pas la même forme ! 2 triangles, et 3 morceaux à 4 côtés. Sont-elles vraiment égales ?",
+  "04-aire": "Une part triangle : 16 de base, et 10 de hauteur, du centre au bord. 16 fois 10 divisé par 2, égale 80 centimètres carrés.",
+  "05-coin": "Une part qui passe un coin ? On la coupe en 2 triangles, de hauteur 10 tous les deux. 4 fois 10 divisé par 2, égale 20. 12 fois 10 divisé par 2, égale 60. 20 plus 60, égale 80 : pareil !",
+  "06-question": "Question ! La part du milieu a 8 centimètres de bord avant le coin, et 8 après. Son aire ? A : 64. B : 80. C : 160. Mets pause !",
+  "06b-reponse": "Réponse B. 8 fois 10 divisé par 2, égale 40. 40 plus 40, égale 80.",
+  "07-fraction": "Le gâteau entier : 20 fois 20, égale 400 centimètres carrés. Une part : 80 sur 400. On simplifie par 80 : 1 cinquième. 1 divisé par 5, égale 0,2 : c'est 20 % du gâteau !",
+  "08-question": "À toi : pour 8 personnes, combien de centimètres de bord par part ? Réponds en commentaire !"
+}

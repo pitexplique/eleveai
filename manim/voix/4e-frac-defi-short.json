@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Yanis, journaliste, vérifie les infos qui circulent. Ce post fait le buzz : 1 demi plus 1 tiers, égale 2 cinquièmes. Vrai, ou faux ?",
+  "01-voir": "Regardons. 1 demi d'une barre, plus 1 tiers. Ensemble, ça dépasse la moitié !",
+  "02-faux": "Et 2 cinquièmes ? 2 divisé par 5, égale 0,4 : 40 %. Moins que la moitié ! Le post est faux.",
+  "03-vrai": "Le bon calcul : on coupe en sixièmes. 1 demi égale 3 sixièmes. 1 tiers égale 2 sixièmes. 3 sixièmes plus 2 sixièmes, égale 5 sixièmes. 5 divisé par 6 : environ 0,83, à peu près 83 %.",
+  "04-question": "Question ! 1 quart plus 1 quart, égale ? A : 2 huitièmes. B : 1 demi. C : 1 huitième. Mets pause !",
+  "04b-reponse": "Réponse B. 2 quarts, c'est 1 demi. On n'additionne pas les dénominateurs !",
+  "05-question": "À toi : 1 tiers plus 1 sixième, quel pourcentage ? Réponds en commentaire !"
+}

@@ -1,0 +1,18 @@
+{
+  "00-garde": "Défis sur les fractions. Prêt pour une enquête en trois étapes ?",
+  "01-situation": "Voici Amina, infirmière scolaire. Elle mène une enquête sur le sommeil dans une classe de 4e. Sur 24 élèves, 18 dorment moins de 9 heures par nuit. Pour l'affiche du collège, elle veut un pourcentage. Trois étapes : simplifier, passer au décimal, puis au pourcentage.",
+  "02-simplifier": "Étape 1 : simplifier 18 sur 24. Le piège : enlever 6 en haut et en bas. 12 sur 18, ce n'est pas la même part ! On divise par le même nombre : 18 et 24 sont dans la table de 6. 18 divisé par 6, égale 3. 24 divisé par 6, égale 4. 18 sur 24 égale 3 quarts.",
+  "03-question": "Question ! Simplifie 16 sur 20. A : 12 sur 16. B : 4 cinquièmes. C : 4 sur 20. Mets pause, et choisis !",
+  "03b-reponse": "Réponse B. 16 divisé par 4, égale 4. 20 divisé par 4, égale 5. Enlever 4, ou ne diviser que le haut : ce sont les pièges.",
+  "04-decimal": "Étape 2 : le décimal. 3 quarts, c'est 3 divisé par 4. On pose la division : 3 divisé par 4, égale 0,75. Attention : 3 quarts, ce n'est pas 3,4 !",
+  "05-pourcentage": "Étape 3 : le pourcentage. 0,75, c'est 75 centièmes : 75 cases sur 100. Donc 75 %. Et pas 0,75 % : ça ne ferait même pas 1 case !",
+  "06-question": "Question ! 0,08, en pourcentage, c'est combien ? A : 80 %. B : 8 %. C : 0,08 %. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. 0,08, c'est 8 centièmes : 8 %.",
+  "07-reste": "Amina va plus loin. Ceux qui dorment 9 heures ou plus : 1 moins 3 quarts, égale 1 quart, soit 25 %. Et parmi les 3 quarts qui dorment peu, 2 tiers ont un écran dans la chambre. 2 tiers de 3 quarts : 2 tiers fois 3 quarts, égale 6 douzièmes, qui se simplifie en 1 demi. La moitié de la classe : 50 %, soit 12 élèves.",
+  "08-question": "Question ! Un élève écrit : 1 quart plus 1 demi, égale 2 sixièmes. Quelle est la bonne somme ? A : 2 sixièmes. B : 3 quarts. C : 2 quarts. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. 1 demi, c'est 2 quarts. 1 quart plus 2 quarts, égale 3 quarts. On n'additionne jamais les dénominateurs !",
+  "09-defi": "À toi de jouer ! Dans tout le collège, 210 élèves sur 600 se couchent après 22 heures. Écris la fraction simplifiée, puis le pourcentage. Mets pause, et cherche !",
+  "09b-correction": "Correction. 210 sur 600 : on divise par 10, en haut et en bas : 21 sur 60. Puis par 3 : 7 vingtièmes. Ensuite, 7 divisé par 20, égale 0,35. Et 0,35, c'est 35 %. Toute la chaîne, sans erreur !",
+  "10-finale": "Ce que tu as appris. Pour simplifier, on divise en haut et en bas par le même nombre. Une fraction, c'est une division : 3 quarts égale 0,75. Et 0,75, c'est 75 %. Simplifier, décimal, pourcentage : la chaîne !",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}
