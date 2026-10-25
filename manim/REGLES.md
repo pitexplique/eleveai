@@ -226,3 +226,5 @@ L'écran de fin « Entraîne-toi sur eleveai.fr » est PARFAIT (24/10) : on n'y 
 - Pas de chevauchement, même bref (0,4 s dans un fondu du short 09 de 2de) : 0 s.
 - Exception : les données d'une figure qu'on LIT (tableau, axes) peuvent être affichées d'un bloc — mais pas une réponse ou un résultat.
 - Contrôle : le dry run ne doit signaler aucun RETARD ; vérifier sur la planche les écrans où un nombre apparaît.
+- ⛔ PRÉVENIR AVANT DE RENDRE (Frédéric, 25/10 : « ça coûte beaucoup d'argent, les erreurs au départ ») : AVANT tout rendu HD, lancer l'audit automatique de synchro en dry run (modèle : section « AUDIT » de `manim/scripts/stmg/stats_lycee_j1_commun.py`, lancé par `AUDIT=1 python -m manim render --dry_run …`). Il doit afficher 0 ligne `AUDIT-AVANCE`. Chaque nouveau module commun (fractions, etc.) reprend cet audit dès le premier épisode. Corriger en brouillon coûte une minute ; refaire un rendu HD en coûte dix.
+- Ordre de travail de chaque vidéo : voix + calage → dry run (0 RETARD, 0 AUDIT-AVANCE, BORDS=1 sans alerte) → planche basse définition → UN SEUL rendu HD → `verifier-bords-video.py` → planche finale.
