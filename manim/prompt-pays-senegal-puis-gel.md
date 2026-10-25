@@ -26,7 +26,7 @@ Réponds toujours en français. Ne me pose pas de questions, sauf pour me montre
 ## Étape 2 — Retirer les pays de l'ACCUEIL (après que j'ai vu le Sénégal)
 Dans `app/accueil/AccueilCoach.tsx` :
 - retirer la ligne « Ton pays : » (les boutons France, Québec, Maroc, Sénégal) ;
-- retirer la carte du monde (`public/carte-pays.svg`) et sa légende ;
+- ⭐ GARDER une carte, mais transformée (Frédéric, 25/10 : « intéressant pédagogiquement de voir la carte des pays où on enseigne les maths en français ») : « Les maths en français dans le monde », PLUS BAS dans la page (pas dans le bloc « commencer »), deux teintes : rouge foncé = programme sur EleveAI (France, Maroc, Québec, Sénégal) ; rouge clair = pays où les maths s'enseignent en français (liste VÉRIFIÉE par WebSearch : OIF, ministères ; ne colorier que les cas sûrs, ex. Belgique, Suisse, Luxembourg, Monaco, Haïti, Côte d'Ivoire, Mali, Burkina Faso, Niger, Guinée, Bénin, Togo, Cameroun, Gabon, Congo, RDC, Tchad, Centrafrique, Madagascar, Djibouti, Comores, Burundi, Tunisie au lycée…). Légende courte et juste (nombre de francophones selon l'OIF, chiffre et année vérifiés). Régénérer le SVG avec le script du scratchpad `carte/carte.mjs` (d3-geo, Natural Earth 110 m) en y ajoutant la seconde teinte. Pas de sélecteur de pays : la carte est un repère culturel, pas une entrée du coach ;
 - retirer le bloc « Le coach suit le programme officiel… » ;
 - dans les compteurs, remplacer « N programmes de pays » par un autre chiffre vrai (par exemple « 24 000+ exercices » si on peut le mesurer, sinon « CP → Tle » déjà présent : choisis un compteur juste) ;
 - retirer la porte « Écoles et pays » des portes des adultes.
