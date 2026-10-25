@@ -1,5 +1,6 @@
-// Québec, secondaire 1 à 3 — « Progression des apprentissages au secondaire,
-// Mathématique » (PFEQ, ministère de l'Éducation du Québec, 2016).
+// Québec, secondaire 1 à 5 — « Progression des apprentissages au secondaire,
+// Mathématique » (PFEQ, ministère de l'Éducation du Québec, août 2016, avec la
+// mise à jour de la séquence CST de 5e secondaire).
 // Relevé le 22/10/2026 sur le PDF officiel. Les années y sont marquées par des
 // symboles (→ l'élève l'apprend avec l'enseignant, ★ il le fait seul en fin
 // d'année) : un contenu figure dans Sec N s'il a → ou ★ en colonne N. Beaucoup
@@ -9,7 +10,19 @@
 // OPR = opérations, PRO = proportionnalité, ALG = expressions et équations,
 // DEP = liens de dépendance, PRB = probabilités, STA = statistique,
 // GEO = figures géométriques, MES = mesures.
-// Âges : Sec 1 ≈ notre 5e, Sec 2 ≈ 4e, Sec 3 ≈ 3e.
+// Âges : Sec 1 ≈ notre 5e, Sec 2 ≈ 4e, Sec 3 ≈ 3e, Sec 4 ≈ 2de, Sec 5 ≈ 1re.
+//
+// ⭐ SEC 4 ET 5 = SÉQUENCE CST (25/10/2026). Au 2e cycle, l'élève suit l'une
+// de trois séquences : CST (Culture, société et technique, la plus suivie), TS
+// (Technico-sciences) ou SN (Sciences naturelles). La PDA n'a pas de tronc
+// commun suffisant (les lignes sont cochées séquence par séquence) : on retient
+// CST. Un contenu entre dans Sec 4 ou Sec 5 s'il est coché pour TOUTES les
+// séquences (ligne sans étiquette) ou pour la ligne CST. Les contenus propres
+// à TS ou SN (polynômes, coniques, vecteurs, cercle trigonométrique, matrices…)
+// ne sont pas repris. Relevé le 25/10/2026 : symboles lus par leur position
+// dans le PDF, lignes CST/TS/SN vérifiées sur les pages rendues en image.
+// GAN = géométrie analytique, GRA = graphes, CHS = choix social,
+// FIN = mathématiques financières.
 
 import type { Classe } from "@/lib/tutor-v4/catalog";
 import type { ContenuPays, ProgrammePays, RenvoiMicro } from "./types";
@@ -17,7 +30,8 @@ import type { ContenuPays, ProgrammePays, RenvoiMicro } from "./types";
 const m = (classe: Classe, ...micros: string[]): RenvoiMicro[] =>
   micros.map((micro) => ({ classe, micro }));
 
-type ContenuQuebec = ContenuPays & { annees: (1 | 2 | 3)[] };
+type Annee = 1 | 2 | 3 | 4 | 5;
+type ContenuQuebec = ContenuPays & { annees: Annee[] };
 
 const AR = "Arithmétique";
 const AL = "Algèbre";
@@ -25,6 +39,9 @@ const PR = "Probabilités";
 const ST = "Statistique";
 const GE = "Géométrie";
 const ME = "Mesure";
+const GA = "Géométrie analytique";
+const MD = "Mathématiques discrètes";
+const MF = "Mathématiques financières";
 
 const CONTENUS: ContenuQuebec[] = [
   // ── Arithmétique ──────────────────────────────────────────────────────────
@@ -33,7 +50,7 @@ const CONTENUS: ContenuQuebec[] = [
   { code: "SNR 7", domaine: AR, annees: [1], texte: "Faire une approximation : estimation, arrondissement, troncature.", couverture: "partielle", micros: m("4e", "ordre_estimer"), note: "Arrondir et tronquer n'ont pas de micro dédiée." },
   { code: "SNR 8", domaine: AR, annees: [3], texte: "Distinguer nombres naturels, entiers, rationnels, irrationnels et réels.", couverture: "complete", micros: [...m("seconde", "reels_ensembles"), ...m("3e", "fraction_rationnel_reconnaitre")] },
   { code: "SNR 9", domaine: AR, annees: [3], texte: "Sous-ensembles de réels : intervalle, extension, droite numérique.", couverture: "complete", micros: m("seconde", "intervalle_representer", "intervalle_appartenance", "reels_droite_graduee") },
-  { code: "SNR 10", domaine: AR, annees: [1, 2, 3], texte: "La valeur absolue en contexte (écart, distance entre deux points).", couverture: "complete", micros: [...m("5e", "relatif_valeur_absolue"), ...m("seconde", "valeur_absolue_distance")] },
+  { code: "SNR 10", domaine: AR, annees: [1, 2, 3, 4], texte: "La valeur absolue en contexte (écart, distance entre deux points).", couverture: "complete", micros: [...m("5e", "relatif_valeur_absolue"), ...m("seconde", "valeur_absolue_distance")] },
   { code: "SNR 11b", domaine: AR, annees: [1, 2], texte: "Carrés et racines carrées.", couverture: "complete", micros: [...m("3e", "entier_racine_carre_parfait", "entier_racine_calculer"), ...m("4e", "pythagore_carre_racine")] },
   { code: "SNR 11c", domaine: AR, annees: [1, 2], texte: "Notation exponentielle (exposant entier).", couverture: "complete", micros: m("4e", "puissance_comprendre", "puissance_calculer", "puissance_exposant_negatif") },
   { code: "SNR 11d", domaine: AR, annees: [3], texte: "Notation scientifique.", couverture: "complete", micros: [...m("4e", "puissance_notation_scientifique"), ...m("3e", "entier_puissance_ecriture_scientifique")] },
@@ -79,7 +96,7 @@ const CONTENUS: ContenuQuebec[] = [
   { code: "DEP A4-A5", domaine: AL, annees: [3], texte: "Variables dépendante et indépendante ; relations, fonctions et réciproques.", couverture: "partielle", micros: [...m("4e", "fonction_reconnaitre"), ...m("3e", "fonction_vocabulaire")], note: "La réciproque d'une fonction n'a pas de micro." },
   { code: "DEP B-a", domaine: AL, annees: [3], texte: "Fonctions polynomiales de degré 0 ou 1 : modéliser, règle, paramètres, propriétés.", couverture: "complete", micros: m("3e", "affine_reconnaitre", "affine_expression", "affine_graphique", "affine_probleme") },
   { code: "DEP B-d", domaine: AL, annees: [3], texte: "Fonction rationnelle f(x) = k/x (xy = k).", couverture: "complete", micros: m("seconde", "reference_inverse") },
-  { code: "DEP B-g", domaine: AL, annees: [3], texte: "Fonctions définies par parties (initiation).", couverture: "absente", micros: [] },
+  { code: "DEP B-g", domaine: AL, annees: [3, 4], texte: "Fonctions définies par parties (initiation en Sec 3, étude en CST 4).", couverture: "partielle", micros: m("premiere", "lin_affine_par_morceaux"), note: "Seule la lecture d'une affine par morceaux (barème, tarif progressif) existe, en 1re." },
 
   // ── Probabilités ──────────────────────────────────────────────────────────
   { code: "PRB A7", domaine: PR, annees: [1, 2], texte: "Expériences aléatoires à une ou plusieurs étapes (avec ou sans remise, avec ou sans ordre).", couverture: "partielle", micros: m("4e", "proba_issue"), note: "Les expériences à deux étapes (arbre, avec ou sans remise) sont chez nous en seconde." },
@@ -88,7 +105,7 @@ const CONTENUS: ContenuQuebec[] = [
   { code: "PRB B3", domaine: PR, annees: [1, 2], texte: "Distinguer probabilité théorique et probabilité fréquentielle.", couverture: "complete", micros: m("4e", "proba_frequence_comparer", "proba_frequence_repeter") },
   { code: "PRB B4 / B9", domaine: PR, annees: [1, 2], texte: "Calculer la probabilité d'un événement, l'interpréter et décider.", couverture: "complete", micros: m("4e", "proba_calculer_fraction", "proba_convertir", "proba_comparer") },
   { code: "PRB A8", domaine: PR, annees: [3], texte: "Variable aléatoire discrète ou continue.", couverture: "absente", micros: [] },
-  { code: "PRB B5", domaine: PR, annees: [3], texte: "Arrangements, permutations, combinaisons (par raisonnement).", couverture: "absente", micros: [], note: "Le dénombrement n'est pas au programme français avant la Terminale spé." },
+  { code: "PRB B5", domaine: PR, annees: [3, 5], texte: "Probabilités avec arrangements, permutations, combinaisons (par raisonnement, sans formule).", couverture: "partielle", micros: [...m("terminale-spe", "denombrement_reconnaitre", "denombrement_arrangement_combinaison"), ...m("stmg", "vaT_coef_denombrer")], note: "Le dénombrement n'est au programme français qu'en Terminale : micros de ce niveau." },
   { code: "PRB A9c / B7", domaine: PR, annees: [3], texte: "Probabilités géométriques (aires, longueurs) et contextes de mesure.", couverture: "absente", micros: [] },
 
   // ── Statistique ───────────────────────────────────────────────────────────
@@ -125,12 +142,75 @@ const CONTENUS: ContenuQuebec[] = [
   { code: "MES F3-F4", domaine: ME, annees: [3], texte: "Unités de volume et de capacité.", couverture: "complete", micros: [...m("3e", "volume_unite"), ...m("5e", "volume_unite")] },
   { code: "MES F5-F7", domaine: ME, annees: [3], texte: "Volumes : prismes, cylindres, pyramides, cônes, boules, solides décomposables, similitude.", couverture: "partielle", micros: m("3e", "volume_prisme", "volume_cylindre", "volume_boule", "volume_agrandissement_reduction"), note: "Volume d'une pyramide ou d'un cône absent — le trou commun à tous les pays." },
   { code: "MES G2a", domaine: ME, annees: [3], texte: "Relation de Pythagore : mesures manquantes et justification.", couverture: "complete", micros: m("4e", "pythagore_calculer_hypotenuse", "pythagore_calculer_cote", "pythagore_reciproque_conclure", "pythagore_rediger") },
+  // ── Secondaire 4 et 5 : séquence CST (2e cycle) ───────────────────────────
+  // Arithmétique
+  { code: "SNR 12", domaine: AR, annees: [4], texte: "Apprécier la valeur d'une puissance selon sa base (entre 0 et 1, supérieure à 1) et son exposant (positif, négatif, entier, fractionnaire).", couverture: "partielle", micros: [...m("seconde", "puiss_exposant_negatif"), ...m("premiere", "expo_fct_reconnaitre", "expo_fct_graphique")], note: "Les exposants fractionnaires n'ont pas de micro." },
+  { code: "SNR 11h / OPR 14c", domaine: AR, annees: [5], texte: "Notation logarithmique (log_a x = n ⇔ a^n = x) : définition et changement de base.", couverture: "partielle", micros: [...m("stmg", "logT_resoudre_exponentielle", "logT_sens_variation"), ...m("terminale-spe", "ln_definition")], note: "Le changement de base d'un logarithme n'a pas de micro ; chez nous le logarithme arrive en Terminale." },
+  { code: "OPR 14b", domaine: AR, annees: [5], texte: "Expressions numériques avec des puissances : propriétés des exposants, changement de base (8^x = 2^(3x)).", couverture: "partielle", micros: m("seconde", "puiss_produit_quotient", "puiss_puissance_puissance", "puiss_expression_composee"), note: "Réécrire une puissance dans une autre base n'a pas de micro dédiée." },
+
+  // Algèbre
+  { code: "ALG D3b", domaine: AL, annees: [4], texte: "Résoudre un système d'équations du premier degré à deux variables (méthode au choix) ; valider et interpréter la solution.", couverture: "complete", micros: m("seconde", "droite_systeme", "droite_intersection") },
+  { code: "DEP B 1-9", domaine: AL, annees: [4], texte: "Modéliser une situation par une fonction ; décrire ses propriétés à partir du graphique (domaine, image, variation, signe, extrémums) ; interpoler, extrapoler, comparer, décider.", couverture: "complete", micros: m("seconde", "fonction_tableau_graphique", "fonction_resolution_graphique", "fonction_comparer_courbes", "fonction_domaine") },
+  { code: "DEP B-b-i", domaine: AL, annees: [4], texte: "Fonction polynomiale du second degré f(x) = ax².", couverture: "complete", micros: [...m("seconde", "reference_carre"), ...m("premiere", "quad_role_a", "quad_associer_parabole")] },
+  { code: "DEP B-e-i", domaine: AL, annees: [4], texte: "Fonction exponentielle f(x) = a·c^x (la manipuler, sans rechercher la règle).", couverture: "complete", micros: m("premiere", "expo_fct_reconnaitre", "expo_fct_calculer", "expo_fct_graphique", "expo_modele_reconnaitre") },
+  { code: "DEP B-i", domaine: AL, annees: [4], texte: "Fonctions en escalier (tarif postal, stationnement).", couverture: "absente", micros: [], note: "Rien chez nous : la fonction constante par paliers n'est pas travaillée." },
+  { code: "DEP B-k-i", domaine: AL, annees: [4], texte: "Fonctions modélisant un phénomène périodique (marée, son) : analyse à partir du graphique, sans règle.", couverture: "partielle", micros: m("premiere-spe", "trig_courbes"), note: "Lire une période et une amplitude sur un graphique de marée n'a pas de micro." },
+  { code: "ALG C11b", domaine: AL, annees: [5], texte: "Résoudre une équation exponentielle ou logarithmique à une variable (définition du logarithme, changement de base).", couverture: "complete", micros: [...m("stmg", "logT_resoudre_exponentielle"), ...m("premiere", "expo_seuil_calcul"), ...m("terminale-spe", "ln_equation_inequation")] },
+  { code: "ALG C14a / GAN B3b", domaine: AL, annees: [5], texte: "Inéquation du premier degré à deux variables : demi-plan, région-solution (graphiquement et algébriquement).", couverture: "absente", micros: [], note: "Les demi-plans ne sont pas au programme français (même trou qu'au Sénégal)." },
+  { code: "ALG D1b-D4a", domaine: AL, annees: [5], texte: "Traduire une situation par un système d'inéquations du premier degré à deux variables et le résoudre.", couverture: "absente", micros: [] },
+  { code: "ALG E", domaine: AL, annees: [5], texte: "Programmation linéaire : polygone de contraintes, sommets, fonction à optimiser, solution optimale et décision.", couverture: "absente", micros: [], note: "Hors programme français : une série entière à écrire." },
+
+  // Probabilités
+  { code: "PRB A12", domaine: PR, annees: [5], texte: "Distinguer événements mutuellement exclusifs ou non, dépendants ou indépendants.", couverture: "partielle", micros: m("seconde", "proba_reunion_intersection", "proba_formule_union"), note: "L'indépendance de deux événements n'a pas de micro." },
+  { code: "PRB A16", domaine: PR, annees: [5], texte: "Notation factorielle (facultative en CST).", couverture: "partielle", micros: m("terminale-spe", "denombrement_arrangement_combinaison"), note: "Pas de micro sur n! lui-même." },
+  { code: "PRB A17 / B6", domaine: PR, annees: [5], texte: "Types de probabilités : fréquentielle, théorique, subjective ; associer le type à une situation.", couverture: "partielle", micros: m("4e", "proba_frequence_comparer", "proba_calculer_fraction"), note: "La probabilité subjective n'est pas travaillée." },
+  { code: "PRB B8", domaine: PR, annees: [5], texte: "Calculer des probabilités conditionnelles.", couverture: "complete", micros: [...m("seconde", "proba_conditionnelle", "proba_arbre_pondere", "proba_tableau_croise"), ...m("premiere", "alea_cond_formule")] },
+  { code: "PRB A18 / B10-B12", domaine: PR, annees: [5], texte: "Chances pour et chances contre : définir, calculer, interpréter, choisir entre chance et probabilité.", couverture: "absente", micros: [], note: "La notion de cote (« 3 contre 1 ») n'existe pas dans le programme français." },
+  { code: "PRB A19 / B13-B15", domaine: PR, annees: [5], texte: "Espérance mathématique : la calculer, rendre un jeu équitable, décider.", couverture: "complete", micros: [...m("premiere-spe", "va_esperance", "va_esperance_probleme"), ...m("stmg", "va_esp_calculer")] },
+
+  // Statistique
+  { code: "STA A6d", domaine: ST, annees: [4], texte: "Diagramme à tige et à feuilles.", couverture: "absente", micros: [] },
+  { code: "STA A11b-iii", domaine: ST, annees: [4], texte: "Écart moyen.", couverture: "absente", micros: [], note: "Le coach a l'écart type (seconde), pas l'écart moyen." },
+  { code: "STA A11c-ii", domaine: ST, annees: [4], texte: "Rang centile (et la donnée correspondant à un rang centile).", couverture: "partielle", micros: m("seconde", "stat_mediane_quartiles"), note: "Seuls la médiane et les quartiles existent." },
+  { code: "STA B2", domaine: ST, annees: [4], texte: "Représenter des données par un nuage de points ou un tableau à double entrée.", couverture: "complete", micros: m("premiere", "info_nuage_construire", "info_nuage_lire") },
+  { code: "STA B3a / B7", domaine: ST, annees: [4], texte: "Associer à un nuage de points le modèle du premier degré le mieux ajusté et tracer la courbe.", couverture: "complete", micros: m("premiere", "info_ajust_pertinence", "info_ajust_determiner") },
+  { code: "STA B4-B6", domaine: ST, annees: [4], texte: "Décrire le lien entre deux variables ; apprécier qualitativement la corrélation ; approximer et interpréter le coefficient de corrélation linéaire.", couverture: "partielle", micros: m("premiere", "info_nuage_tendance"), note: "Le coefficient de corrélation n'est pas au programme français : aucune micro." },
+  { code: "STA B8", domaine: ST, annees: [4], texte: "Droite de régression : tracé à main levée, droite médiane-médiane, droite de Mayer.", couverture: "complete", micros: [...m("stmg", "statT_ajust_au_juge", "statT_ajust_equation"), ...m("premiere", "info_point_moyen_droite")] },
+  { code: "STA B9a", domaine: ST, annees: [4], texte: "Interpoler ou extrapoler à l'aide de la droite de régression.", couverture: "complete", micros: m("premiere", "info_ajust_interpoler", "info_ajust_extrapoler") },
+  { code: "STA B10", domaine: ST, annees: [4], texte: "Comparer des distributions à deux caractères.", couverture: "partielle", micros: m("premiere", "info_nuage_tendance"), note: "Comparer deux nuages entre eux n'a pas de micro." },
+
+  // Géométrie et mesure
+  { code: "GEO D5-D6", domaine: GE, annees: [4], texte: "Conditions minimales d'isométrie ou de similitude de triangles ; démontrer, chercher des mesures manquantes.", couverture: "complete", micros: m("4e", "triangle_egalite", "triangle_semblable", "thales_calculer_longueur") },
+  { code: "MES G2a-ii", domaine: ME, annees: [4], texte: "Relations métriques dans le triangle rectangle (moyenne proportionnelle, hauteur issue de l'angle droit).", couverture: "absente", micros: [], note: "Hors programme français." },
+  { code: "MES G2a-iii", domaine: ME, annees: [4], texte: "Rapports trigonométriques (sinus, cosinus, tangente) dans le triangle rectangle.", couverture: "complete", micros: m("3e", "trigo_sinus", "trigo_cosinus", "trigo_tangente", "trigo_calculer_longueur", "trigo_calculer_angle") },
+  { code: "MES G2b-i", domaine: ME, annees: [4], texte: "Mesures manquantes dans un triangle quelconque : loi des sinus.", couverture: "absente", micros: [], note: "La loi des sinus n'est pas au programme français." },
+  { code: "MES G2b-iii / G3", domaine: ME, annees: [4], texte: "Aire d'un triangle quelconque : formule de Héron, ou un angle et deux côtés.", couverture: "absente", micros: [] },
+  { code: "MES G2b-ii", domaine: ME, annees: [5], texte: "Mesures manquantes dans un triangle quelconque : loi des cosinus.", couverture: "complete", micros: m("premiere-spe", "ps_alkashi"), note: "C'est la formule d'Al-Kashi, en 1re spécialité chez nous." },
+  { code: "GEO D7 / MES D5d-F6d", domaine: GE, annees: [5], texte: "Figures équivalentes (même aire ou même volume) : reconnaître, chercher des mesures manquantes, optimiser.", couverture: "absente", micros: [] },
+
+  // Géométrie analytique (relevée le 25/10 : elle complète aussi Sec 3)
+  { code: "GAN B1a", domaine: GA, annees: [3, 4], texte: "Distance entre deux points du plan cartésien.", couverture: "complete", micros: m("seconde", "repere_distance") },
+  { code: "GAN B1b", domaine: GA, annees: [4], texte: "Coordonnées d'un point de partage selon un rapport donné (dont le point milieu).", couverture: "partielle", micros: m("seconde", "repere_milieu"), note: "Seul le milieu existe ; le point au tiers ou aux 2/5 n'a pas de micro." },
+  { code: "GAN B1c", domaine: GA, annees: [3, 4], texte: "Calculer et interpréter une pente (taux de variation).", couverture: "complete", micros: [...m("3e", "affine_coeff_directeur"), ...m("seconde", "droite_pente_ordonne")] },
+  { code: "GAN B2 / B3c", domaine: GA, annees: [3, 4], texte: "Position relative de deux droites selon leurs pentes (sécantes, parallèles, perpendiculaires).", couverture: "complete", micros: [...m("seconde", "droite_parallelisme"), ...m("premiere-spe", "gr_droites")] },
+  { code: "GAN B3a / B4", domaine: GA, annees: [3, 4], texte: "Modéliser par une droite ; équation d'une droite à partir de la pente et d'un point ou de deux points.", couverture: "complete", micros: [...m("seconde", "droite_equation_reduite", "droite_equation_cartesienne"), ...m("stmg", "auto_fct_equation_deux_points")] },
+  { code: "GAN B5", domaine: GA, annees: [4], texte: "Équation d'une droite parallèle ou perpendiculaire à une autre.", couverture: "complete", micros: m("premiere-spe", "gr_droites", "gr_equation_droite") },
+
+  // Mathématiques discrètes (CST 5)
+  { code: "GRA A1-A4", domaine: MD, annees: [5], texte: "Graphes : degré, distance, chaîne, cycle ; chaînes et cycles eulériens ou hamiltoniens ; graphes orientés, valués, colorés, arbres.", couverture: "absente", micros: [], note: "Les graphes ne sont au programme français qu'en maths expertes : rien dans le coach." },
+  { code: "GRA B1-B4", domaine: MD, annees: [5], texte: "Modéliser une situation par un graphe et l'optimiser : chemin critique, chaîne la plus courte, arbre de valeur minimale, nombre chromatique.", couverture: "absente", micros: [] },
+  { code: "CHS 1", domaine: MD, annees: [5], texte: "Théorie du choix social : comparer des procédures de vote (majorité, pluralité, Borda, Condorcet, assentiment, élimination).", couverture: "absente", micros: [] },
+
+  // Mathématiques financières (CST 5, mise à jour 2016)
+  { code: "FIN 1-2", domaine: MF, annees: [5], texte: "Intérêt simple et composé, période, actualisation, capitalisation ; modéliser une situation financière.", couverture: "complete", micros: [...m("stmg", "suite_mod_capital", "suite_geo_taux"), ...m("premiere", "auto_evo_valeur_finale")] },
+  { code: "FIN 3-4", domaine: MF, annees: [5], texte: "Capitalisation Cn = C0(1 + i)^n et actualisation C0 = Cn(1 + i)^(−n).", couverture: "complete", micros: [...m("stmg", "suite_mod_capital", "suiteT_geo_explicite"), ...m("premiere", "expo_suite_terme_rang")] },
+  { code: "FIN 5-7", domaine: MF, annees: [5], texte: "Déterminer une valeur par la résolution d'équations ; comparer des situations financières ; décider.", couverture: "partielle", micros: [...m("stmg", "logT_resoudre_exponentielle"), ...m("premiere", "expo_taux_moyen_calculer")], note: "Comparer deux placements ou deux emprunts n'a pas de micro dédiée." },
 ];
 
 const SOURCE =
   "https://cdn-contenu.quebec.ca/cdn-contenu/education/pfeq/secondaire/progressions-apprentissages/PFEQ-progression-apprentissages-mathematique-secondaire.pdf";
 
-function annee(n: 1 | 2 | 3, equivalentFrance: Classe): ProgrammePays {
+function annee(n: Annee, equivalentFrance: Classe): ProgrammePays {
   return {
     pays: "quebec",
     cle: `sec-${n}`,
@@ -145,3 +225,6 @@ function annee(n: 1 | 2 | 3, equivalentFrance: Classe): ProgrammePays {
 export const QUEBEC_SEC_1 = annee(1, "5e");
 export const QUEBEC_SEC_2 = annee(2, "4e");
 export const QUEBEC_SEC_3 = annee(3, "3e");
+/** Sec 4 et 5 : séquence CST (voir l'en-tête). */
+export const QUEBEC_SEC_4 = annee(4, "seconde");
+export const QUEBEC_SEC_5 = annee(5, "premiere");

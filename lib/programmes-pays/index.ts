@@ -3,7 +3,15 @@ import { ETATS_UNIS_GRADE_8 } from "./etats-unis-grade-8";
 import { MAROC_3AC } from "./maroc-3ac";
 import { MAROC_1AC, MAROC_2AC } from "./maroc-college";
 import { ONTARIO_9E_MTH1W } from "./ontario-9e-mth1w";
-import { QUEBEC_SEC_1, QUEBEC_SEC_2, QUEBEC_SEC_3 } from "./quebec-secondaire";
+import {
+  QUEBEC_1E_ANNEE,
+  QUEBEC_2E_ANNEE,
+  QUEBEC_3E_ANNEE,
+  QUEBEC_4E_ANNEE,
+  QUEBEC_5E_ANNEE,
+  QUEBEC_6E_ANNEE,
+} from "./quebec-primaire";
+import { QUEBEC_SEC_1, QUEBEC_SEC_2, QUEBEC_SEC_3, QUEBEC_SEC_4, QUEBEC_SEC_5 } from "./quebec-secondaire";
 import { SENEGAL_3E, SENEGAL_4E, SENEGAL_5E, SENEGAL_6E } from "./senegal-moyen";
 import type { ProgrammePays } from "./types";
 
@@ -12,6 +20,15 @@ export const PROGRAMMES_PAYS: ProgrammePays[] = [
   QUEBEC_SEC_1,
   QUEBEC_SEC_2,
   QUEBEC_SEC_3,
+  QUEBEC_SEC_4,
+  QUEBEC_SEC_5,
+  // Le primaire après le secondaire : /pays/quebec sans classe ouvre toujours Sec 1.
+  QUEBEC_1E_ANNEE,
+  QUEBEC_2E_ANNEE,
+  QUEBEC_3E_ANNEE,
+  QUEBEC_4E_ANNEE,
+  QUEBEC_5E_ANNEE,
+  QUEBEC_6E_ANNEE,
   MAROC_1AC,
   MAROC_2AC,
   MAROC_3AC,
