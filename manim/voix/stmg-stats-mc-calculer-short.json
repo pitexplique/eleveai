@@ -1,0 +1,7 @@
+{
+  "00-accroche": "Quatre points, une droite. Les écarts : plus 1, moins 3, moins 4 et 0. Lequel pèse le plus ?",
+  "01-image": "Au carré, ils deviennent 1, 9, 16 et 0. Le moins 4 pèse 16 à lui seul : plus de la moitié de la somme, 26 !",
+  "02-question": "Question ! Un écart de moins 3, au carré, ça fait ? A : moins 9. B : 9. C : moins 6. Mets pause, et choisis !",
+  "02b-reponse": "B ! Un carré n'est jamais négatif.",
+  "03-question": "À toi : les écarts sont 2, moins 2, 1 et 0. Quelle est la somme des carrés ? Réponds en commentaire !"
+}

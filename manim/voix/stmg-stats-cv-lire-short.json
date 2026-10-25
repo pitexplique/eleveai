@@ -1,0 +1,7 @@
+{
+  "00-accroche": "2 300 transistors en 1971. 291 millions en 2006. Sur un graphique ordinaire, la courbe s'envole d'un coup.",
+  "01-image": "Mais avec z égale log de y, les points s'alignent ! Une droite, donc le même facteur chaque année : environ 1,40.",
+  "02-question": "Question ! Le nuage x, log de y est aligné. y est donc… A : affine. B : exponentiel. C : constant. Mets pause, et choisis !",
+  "02b-reponse": "B ! C'est log de y qui est affine.",
+  "03-question": "À toi : si y est multiplié par 2 tous les deux ans, par combien est-il multiplié en 10 ans ? Réponds en commentaire !"
+}

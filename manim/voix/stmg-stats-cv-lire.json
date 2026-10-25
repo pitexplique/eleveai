@@ -1,0 +1,18 @@
+{
+  "00-garde": "Lire un nuage transformé. Si le nuage transformé est aligné, que dit-il de la relation de départ ?",
+  "01-situation": "Une ingénieure en microélectronique conçoit des puces. Elle étudie la loi de Moore : le nombre de transistors dans un processeur Intel. 2 300 en 1971 ; 291 millions en 2006.",
+  "02-nuage": "En abscisse : les années depuis 1970. En ordonnée : le nombre de transistors. Le nuage reste écrasé au sol, puis s'envole : il n'est pas aligné.",
+  "03-log": "On pose z égale log de y. Pour 2 300 : 3,36. Pour 291 millions : 8,46. Avec z en ordonnée, le nuage est presque aligné !",
+  "04-sens": "Lire ce nuage, c'est conclure : log de y est une fonction affine de x. Donc y, lui, n'est pas affine : c'est une exponentielle. Le nombre de transistors est multiplié par le même nombre chaque année.",
+  "05-question": "Question ! Le nuage x, log de y est aligné. Que peut-on conjecturer ? A : y est une fonction affine de x. B : y est multiplié par le même nombre chaque année. C : y est de la forme a sur x plus b. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. C'est log de y qui est affine, pas y : la relation de départ est exponentielle.",
+  "06-droite": "La droite des moindres carrés du nuage x, z : z égale 0,145 x plus 3,248, coefficients arrondis au millième. Quand x augmente de 1, z augmente de 0,145.",
+  "07-facteur": "Et y ? Il est multiplié par 10 puissance 0,145, environ 1,40. Chaque année, 40 % de transistors en plus !",
+  "08-question": "Question ! Avec cette pente de 0,145, par combien y est-il multiplié chaque année ? A : par 0,145. B : par 1,145. C : par 1,40. Mets pause, et choisis !",
+  "08b-reponse": "Réponse C : 10 puissance 0,145, environ 1,40. A et B confondent la pente de z avec le facteur de y.",
+  "09-piege": "Le piège : lire la pente de z comme une hausse de y. 0,145, ce n'est pas plus 14,5 %. Il faut d'abord calculer 10 puissance la pente.",
+  "10-defi": "À toi de jouer ! Un : en 2 ans, de combien z augmente-t-il ? Deux : par combien y est-il alors multiplié ? Mets pause, et cherche !",
+  "10b-correction": "Correction. Un : 2 fois 0,145, 0,29. Deux : 10 puissance 0,29, environ 1,95 : presque 2. Le nombre de transistors double environ tous les deux ans : c'est la loi de Moore !",
+  "11-finale": "Ce que tu as appris. Si le nuage transformé est aligné, c'est la nouvelle variable qui est affine, pas la relation de départ. Avec z égale log de y, la relation est exponentielle. Et si z augmente de a, y est multiplié par 10 puissance a.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

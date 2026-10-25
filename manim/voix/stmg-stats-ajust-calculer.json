@@ -1,0 +1,16 @@
+{
+  "00-garde": "Calculer avec une droite d'ajustement. Une équation, et tu prévois !",
+  "01-situation": "Un chargé de mission énergie travaille pour une région. Il suit les éoliennes installées en France : la puissance totale du parc, en gigawatts, d'après RTE, le gestionnaire du réseau électrique.",
+  "02-donnees": "En abscisse, le rang de l'année : 1 pour 2017, jusqu'à 7 pour 2023. En ordonnée, la puissance éolienne installée : 13,5 gigawatts en 2017, et 22,5 en 2023. La calculatrice donne la droite d'ajustement : y égale 1,5 x plus 11,8.",
+  "03-calculer": "Combien de gigawatts la droite prévoit-elle en 2020, au rang 4 ? Je remplace x par 4. 1,5 fois 4, 6, plus 11,8 : 17,8 gigawatts. Sur le graphique, je monte de 4 jusqu'à la droite, puis je file vers l'axe : 17,8.",
+  "04-question": "Question ! Avec y égale 1,5 x plus 11,8, que prévoit la droite pour x égale 6 ? A : 20,8. B : 19,3. C : 26,7. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. 1,5 fois 6, 9, plus 11,8 : 20,8. B additionne 1,5 au lieu de multiplier ; C multiplie tout par 1,5.",
+  "05-piege": "Le piège : prendre l'estimation pour la valeur observée. En 2020, la droite donne 17,8, mais le relevé réel est 17,5. La droite résume la tendance ; elle ne passe pas exactement par chaque point.",
+  "06-remonter": "Et dans l'autre sens ? Quand le parc atteindra-t-il 26,8 gigawatts ? Cette fois, je connais y, et je cherche x. 1,5 x plus 11,8 égale 26,8. J'enlève 11,8 : 1,5 x égale 15. Je divise par 1,5 : x égale 10, c'est-à-dire en 2026.",
+  "07-question": "Question ! Pour quelle valeur de x la droite atteint-elle 23,8 gigawatts ? A : x égale 8. B : x égale 47,5. C : x égale 15,9. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 23,8 moins 11,8, 12, divisé par 1,5 : 8. B calcule y au lieu de chercher x ; C oublie d'enlever 11,8.",
+  "08-defi": "À toi de jouer ! Un : quelle puissance la droite prévoit-elle en 2025, au rang 9 ? Deux : à partir de quel rang entier la droite dépasse-t-elle 35 gigawatts ? Et en quelle année ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Un : 1,5 fois 9, 13,5, plus 11,8 : 25,3 gigawatts. Deux : 35 moins 11,8, 23,2, divisé par 1,5 : environ 15,5. Le premier rang entier est 16 : en 2032, si la tendance se poursuit.",
+  "09-finale": "Ce que tu as appris. Pour prévoir y, je remplace x dans l'équation. Pour savoir quand y atteint une valeur, je résous l'équation : j'enlève b, puis je divise par a. Et le résultat est une estimation, pas une valeur observée.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -1,0 +1,7 @@
+{
+  "00-accroche": "Cette droite traverse le nuage pile au milieu : ses écarts s'annulent, leur somme fait 0. Est-ce la meilleure ?",
+  "01-image": "Non ! Élève chaque écart au carré : un écart de 18 compte 18 fois 18, soit 324. Sa somme des carrés : environ 958,6. La droite des moindres carrés, elle, n'a qu'environ 6.",
+  "02-question": "Question ! Un écart de 5 pèse combien dans la somme des carrés ? A : 5. B : 10. C : 25. Mets pause, et choisis !",
+  "02b-reponse": "C ! 5 fois 5, 25.",
+  "03-question": "À toi : un écart de 3 et un écart de moins 3. Que vaut la somme de leurs carrés ? Réponds en commentaire !"
+}

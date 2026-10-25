@@ -1,0 +1,18 @@
+{
+  "00-garde": "Revenir aux variables de départ. On a ajusté le nuage transformé : comment prévoir la vraie valeur ?",
+  "01-situation": "Un urbaniste prépare des écoles et des logements pour les villes d'Afrique. Selon l'ONU, le continent comptait 284 millions d'habitants en 1960, et 1 381 millions en 2020.",
+  "02-donnees": "En abscisse, x : le rang de la décennie, 0 pour 1960, 6 pour 2020. La population est multipliée à peu près par le même nombre à chaque décennie : on a posé z égale log de y, et le nuage x, z est aligné.",
+  "03-ajustement": "La droite des moindres carrés du nuage x, z : z égale 0,115 x plus 2,454, coefficients arrondis au millième. Mais attention : elle donne z, pas la population.",
+  "04-etape1": "Prévoyons 2030, donc x égale 7. Étape 1 : je calcule z. 0,115 fois 7, plus 2,454 : z égale 3,259.",
+  "05-question": "Question ! Pour x égale 7, combien vaut z ? A : 3,259. B : 0,805. C : 2,569. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. B oublie d'ajouter 2,454 ; C oublie de multiplier 0,115 par 7.",
+  "06-etape2": "Étape 2 : je reviens à y. Si z égale log de y, alors y égale 10 puissance z. 10 puissance 3,259 : environ 1 816 millions d'habitants, soit 1,8 milliard.",
+  "07-piege": "Le piège : écrire 10 fois z. 10 fois 3,259, 32,59 millions : absurde, moins qu'en 1960 ! Le log se défait par une puissance de 10, pas par une multiplication.",
+  "08-question": "Question ! On a trouvé z égale 3,259. Que vaut y ? A : 32,59. B : environ 1 816. C : log de 3,259. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B : 10 puissance 3,259. A multiplie par 10 ; C reprend le logarithme au lieu de le défaire.",
+  "09-limites": "L'ONU, elle, prévoit 1 727 millions en 2030 : la croissance ralentit. Un modèle prolonge le passé ; l'urbaniste garde une marge.",
+  "10-defi": "À toi de jouer ! Avec le même modèle, prévois la population de l'Afrique en 2040, donc pour x égale 8. Mets pause, et cherche !",
+  "10b-correction": "Correction. z égale 0,115 fois 8, plus 2,454 : 3,374. Puis y égale 10 puissance 3,374 : environ 2 366 millions, soit près de 2,4 milliards.",
+  "11-finale": "Ce que tu as appris. L'ajustement donne la variable transformée. Pour revenir à y, je calcule d'abord z, puis je défais la transformation : avec z égale log de y, y égale 10 puissance z. Jamais 10 fois z.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

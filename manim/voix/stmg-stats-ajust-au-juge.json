@@ -1,0 +1,16 @@
+{
+  "00-garde": "Tracer une droite d'ajustement au jugé. Où poser la règle ?",
+  "01-situation": "Un responsable e-commerce prépare le budget de sa boutique en ligne. Sa donnée : ce que les Français dépensent sur internet chaque année, d'après la Fevad, la fédération du e-commerce.",
+  "02-donnees": "De 2014 à 2019 : 56,8 milliards d'euros, puis 64,9, 72, 81,7, 92,6, et 103,4 milliards. Les points montent, presque alignés : un ajustement affine est pertinent.",
+  "03-methode": "Je pose ma règle dans la direction du nuage. Trop haut : tous les points sont dessous. Trop bas : tous sont dessus. Je la fais glisser jusqu'au milieu : des points des deux côtés, et tous au plus près. Voilà une droite d'ajustement, tracée au jugé.",
+  "04-question": "Question ! Cette droite est-elle un bon ajustement du nuage ? A : oui, elle a la bonne direction. B : non, elle passe au-dessus de tous les points. C : oui, elle touche presque le dernier point. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. La bonne direction ne suffit pas : une droite d'ajustement passe au milieu des points, pas à côté.",
+  "05-corriger": "Pour corriger une droite, deux réglages. Sa direction, c'est son coefficient directeur, a : il la fait tourner. Sa hauteur, c'est son ordonnée à l'origine, b : elle la fait monter ou descendre, sans la tourner. Une droite trop haute, mais bien orientée ? Je baisse seulement b.",
+  "06-piege": "Le piège : relier le premier et le dernier point. Ici, cette droite passe au-dessus de tous les points du milieu : elle ne passe pas au milieu du nuage. Une droite d'ajustement n'a pas besoin de toucher un seul point.",
+  "07-question": "Question ! Une droite a la bonne direction, mais passe entièrement en dessous des points. Que faut-il modifier ? A : augmenter b. B : changer a. C : rien, elle est parallèle au nuage. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. La direction est bonne, donc a ne bouge pas : on remonte la droite en augmentant b.",
+  "08-defi": "À toi de jouer ! Trois droites sur le même nuage : la rouge, la verte et la violette. Un : laquelle est un bon ajustement ? Deux : pour chacune des deux autres, que faut-il changer, a ou b ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Un : la verte, au milieu, avec des points des deux côtés. Deux : la rouge monte trop vite : il faut changer sa direction, a. La violette a la bonne direction mais elle est trop basse : il faut augmenter b.",
+  "09-finale": "Ce que tu as appris. Une droite d'ajustement au jugé suit la direction du nuage et passe en son milieu, avec des points des deux côtés, au plus près. Pour la corriger : a règle la direction, b règle la hauteur. Et elle n'a pas besoin de passer par les points.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

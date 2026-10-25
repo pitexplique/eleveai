@@ -1,0 +1,16 @@
+{
+  "00-garde": "Ajustement affine : est-il pertinent ? Ce nuage se résume-t-il par une droite, ou pas ?",
+  "01-situation": "Une analyste financière conseille des investisseurs. Elle compare deux marchés qui grandissent : le streaming musical et la voiture électrique. Avant tout calcul, sa question : chaque nuage suit-il une droite ?",
+  "02-spotify": "Premier nuage : les abonnés payants de Spotify, au premier trimestre de chaque année, de 2019 à 2025. De 100 millions à 268 millions. À l'œil, les points se rangent le long d'une droite.",
+  "03-ecarts": "Pour le vérifier, je calcule les écarts d'une année à l'autre : 130 moins 100, 30. Puis 28, 24, 28, 29 et 29. Ils restent voisins, autour de 28 : chaque année, on ajoute à peu près la même quantité. Un ajustement affine est pertinent.",
+  "04-question": "Question ! Un autre nuage a pour écarts successifs 12, 11, 13 et 12. Un ajustement affine est-il pertinent ? A : oui, les écarts restent voisins. B : non, les écarts ne sont pas tous égaux. C : impossible à dire sans le graphique. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. Des écarts voisins suffisent : un nuage réel n'est jamais parfaitement aligné, et les nombres disent la même chose que le graphique.",
+  "05-electrique": "Deuxième nuage : les voitures électriques neuves vendues en France, de 2015 à 2020, en milliers. 17,3 en 2015, 42,8 en 2019, puis 110,9 en 2020. Les écarts : 4,5, puis 3,1, 6,2, 11,7, et soudain 68,1. Ils grossissent : les points suivent une courbe qui se redresse. Un ajustement affine n'est pas pertinent.",
+  "06-piege": "Le piège : croire qu'une droite convient toujours. La calculatrice trace une droite pour n'importe quel nuage, même courbe ! Ici, elle passe au-dessus des points du milieu, puis loin sous celui de 2020. C'est à toi de juger la forme, avant tout calcul.",
+  "07-question": "Question ! Un nuage monte, et ses écarts valent 5, 10, 20 puis 40. Un ajustement affine est-il pertinent ? A : oui, car la tendance est croissante. B : non, car les écarts doublent. C : oui, toujours. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Croissant ne veut pas dire affine : ici, les écarts doublent, la croissance s'emballe, comme pour les voitures électriques.",
+  "08-defi": "À toi de jouer ! Un : au premier trimestre 2026, Spotify compte 293 millions d'abonnés payants. Quel est l'écart avec 2025 ? Le nuage reste-t-il proche d'une droite ? Deux : vrai ou faux, dès qu'un nuage est croissant, un ajustement affine est pertinent ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Un : 293 moins 268, 25. C'est voisin des autres écarts : le nuage reste proche d'une droite. Deux : faux ! Les voitures électriques montent, mais leurs écarts grossissent : une courbe, pas une droite.",
+  "09-finale": "Ce que tu as appris. Avant tout ajustement, je regarde la forme du nuage : des points autour d'une droite, ou une courbe ? Je le confirme par les écarts successifs : voisins, l'ajustement affine est pertinent ; de plus en plus grands, il ne l'est pas. Et la calculatrice trace toujours une droite : c'est moi qui juge.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

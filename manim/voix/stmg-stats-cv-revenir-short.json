@@ -1,0 +1,7 @@
+{
+  "00-accroche": "Afrique, 2030 : le modèle donne z égale 3,259, avec z égale log de y. Combien d'habitants ?",
+  "01-image": "10 fois 3,259 ? 32,59 millions : absurde ! Il faut 10 puissance 3,259 : environ 1 816 millions.",
+  "02-question": "Question ! z égale 2, avec z égale log de y. Que vaut y ? A : 20. B : 100. C : 2. Mets pause, et choisis !",
+  "02b-reponse": "B ! 10 puissance 2, 100.",
+  "03-question": "À toi : z égale 3, avec z égale log de y. Que vaut y ? Réponds en commentaire !"
+}

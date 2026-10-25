@@ -1,0 +1,16 @@
+{
+  "00-garde": "Interpoler : estimer une valeur entre deux relevés. Que se passait-il entre les points ?",
+  "01-situation": "Une urbaniste prépare les écoles, les logements et les transports de demain. Elle a besoin de la population de la France, mais les chiffres qu'elle a sous la main ne donnent qu'un relevé tous les 5 ans.",
+  "02-donnees": "Au 1er janvier, d'après l'Insee : 60,5 millions d'habitants en 2000, puis 62,7, 64,6, 66,4, et 67,4 millions en 2020. En abscisse, le nombre d'années depuis 2000. La droite d'ajustement : y égale 0,35 x plus 60,8.",
+  "03-interpoler": "Combien d'habitants en 2012 ? Il n'y a pas de relevé, mais 2012 est entre 2000 et 2020 : estimer une valeur à l'intérieur des relevés, c'est interpoler. Je remplace x par 12. 0,35 fois 12, 4,2, plus 60,8 : 65 millions.",
+  "04-verifier": "Vérifions avec le vrai chiffre de l'Insee : 65,2 millions en 2012. Notre estimation n'est qu'à 0,2 million près. Entre les relevés, la tendance est bien connue : l'interpolation est l'estimation la plus fiable.",
+  "05-question": "Question ! Les relevés vont de 2000 à 2020. Laquelle de ces estimations est une interpolation ? A : la population en 2012. B : la population en 2030. C : la population en 1995. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 2012 est entre les relevés. 2030 est après le dernier, et 1995 avant le premier : avant aussi, on sort des données.",
+  "06-piege": "Le piège : remplacer x par l'année. Ici, x compte les années depuis 2000. Pour 2012, x vaut 12, pas 2012. Avec 2012, on trouverait 765 millions d'habitants : absurde !",
+  "07-question": "Question ! Avec y égale 0,35 x plus 60,8, quelle population estimer en 2018 ? A : 67,1 millions. B : 767,1 millions. C : 61,15 millions. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. En 2018, x vaut 18 : 0,35 fois 18, 6,3, plus 60,8 : 67,1. B remplace x par l'année, C oublie de multiplier. Le vrai chiffre : 67 millions.",
+  "08-defi": "À toi de jouer ! Un : estime la population en 2017. Deux : estimer la population en 2030, est-ce une interpolation ou une extrapolation ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Un : x vaut 17. 0,35 fois 17, 5,95, plus 60,8 : environ 66,8 millions. Le vrai chiffre : 66,8 millions ! Deux : 2030 est après le dernier relevé : c'est une extrapolation.",
+  "09-finale": "Ce que tu as appris. Interpoler, c'est estimer une valeur entre le premier et le dernier relevé. Je remplace x par la bonne valeur, pas forcément l'année. Et c'est l'estimation la plus fiable, car on reste dans les données.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

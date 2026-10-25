@@ -1,0 +1,16 @@
+{
+  "00-garde": "Les limites d'une extrapolation. Une droite peut-elle prévoir l'avenir pour toujours ?",
+  "01-situation": "Une chargée d'études marketing travaille pour un opérateur de téléphonie. En 2016, on lui demande : combien de Français auront un smartphone dans quelques années ?",
+  "02-donnees": "D'après le baromètre du numérique : 17 % des Français avaient un smartphone en 2011, puis 28, 39, 46, 58, et 65 % en 2016. Presque une droite ! La droite d'ajustement : y égale 9,6 x plus 18,1, avec x le nombre d'années depuis 2011.",
+  "03-prevision": "Elle extrapole. Pour 2020, x vaut 9. 9,6 fois 9, 86,4, plus 18,1 : 104,5 %. Plus de 100 % des Français ? Impossible ! Une part de la population ne dépasse jamais 100 %.",
+  "04-question": "Question ! À partir de quel rang entier la droite dépasse-t-elle 100 % ? A : 8. B : 9. C : 100. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 100 moins 18,1, 81,9, divisé par 9,6 : environ 8,5. Au rang 8, la droite donne 94,9 ; au rang 9, déjà 104,5.",
+  "05-realite": "Et en vrai ? Le baromètre a continué : 77 % en 2019, 84 % en 2020, 87 % en 2022. Les points s'aplatissent : quand presque tout le monde est équipé, il reste peu de nouveaux acheteurs. La tendance a changé : la droite ne vaut plus.",
+  "06-piege": "Le piège : croire qu'une tendance dure toujours. Une droite monte sans fin, mais la réalité a des plafonds, comme 100 %, et des planchers, comme zéro. Plus on prolonge loin des données, plus le risque d'erreur grandit.",
+  "07-question": "Question ! Pour 2022, la droite annonce 123,7 % ; la réalité est de 87 %. Pourquoi cet écart ? A : la calculatrice s'est trompée. B : la tendance a changé, on a extrapolé trop loin. C : le baromètre a mal compté. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Le calcul est juste, les relevés aussi : c'est la tendance qui a changé après 2016.",
+  "08-defi": "À toi de jouer ! Un : que prévoit la droite pour 2019 ? Compare avec la réalité, 77 %. Deux : en 2022, de combien de points la droite se trompe-t-elle ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Un : x vaut 8. 76,8 plus 18,1 : 94,9 %, contre 77 % en vrai : presque 18 points d'écart. Deux : 123,7 moins 87 : 36,7 points ! Plus on s'éloigne de 2016, plus l'erreur grandit.",
+  "09-finale": "Ce que tu as appris. Une extrapolation suppose que la tendance continue, et rien ne le garantit. Je vérifie que le résultat est possible : ni négatif, ni au-delà d'un maximum comme 100 %. Et plus je vais loin des données, moins je fais confiance au modèle.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

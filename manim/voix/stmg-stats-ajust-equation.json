@@ -1,0 +1,17 @@
+{
+  "00-garde": "Trouver l'équation d'une droite d'ajustement. Deux points, et c'est parti !",
+  "01-situation": "Une actuaire calcule les pensions de retraite et les contrats d'assurance. Pour cela, elle doit prévoir combien de temps on vit. Ses données : l'espérance de vie des femmes en France, d'après l'Insee.",
+  "02-donnees": "En abscisse, le nombre d'années depuis 1950 : 10 pour 1960, 60 pour 2010. En ordonnée, l'espérance de vie à la naissance, en années : 73,6 en 1960, puis 75,9, 78,4, 81, 82,8, et 84,6 en 2010. Les points sont presque alignés.",
+  "03-coef": "Elle ajuste le nuage par la droite qui passe par le premier et le dernier point : 10 ; 73,6 et 60 ; 84,6. D'abord le coefficient directeur : a, c'est la différence des y divisée par la différence des x. 84,6 moins 73,6, 11, divisé par 60 moins 10, 50. a égale 0,22.",
+  "04-ordonnee": "Ensuite l'ordonnée à l'origine. La droite passe par le premier point, donc 73,6 égale 0,22 fois 10, plus b. b égale 73,6 moins 2,2 : 71,4. L'équation : y égale 0,22 x plus 71,4.",
+  "05-question": "Question ! Une droite passe par les points 2 ; 30 et 6 ; 50. Que vaut son coefficient directeur ? A : 5. B : 0,2. C : 20. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 50 moins 30, 20, divisé par 6 moins 2, 4 : 5. B renverse la fraction, C oublie de diviser.",
+  "06-sens": "Que veut dire 0,22 ? Quand x augmente de 1, donc chaque année, l'espérance de vie gagne environ 0,22 an : un peu plus de 2 mois et demi par an ! Une quantité qui s'ajoute, année après année.",
+  "07-calculatrice": "Et la calculatrice ? En mode statistiques, avec la régression linéaire, elle donne la droite des moindres carrés : y égale 0,22 x plus 71,55. Presque la même droite, mais elle tient compte de tous les points, pas seulement de deux.",
+  "08-question": "Question ! Dans y égale 0,22 x plus 71,4, que signifie 0,22 ? A : l'espérance de vie est multipliée par 0,22 chaque année. B : elle augmente d'environ 0,22 an chaque année. C : elle vaut 0,22 an en 1950. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. Un ajustement affine ajoute, il ne multiplie pas ; et la valeur pour x égale 0, c'est b.",
+  "09-defi": "À toi de jouer ! Chez les hommes : 67 ans en 1960, 78 ans en 2010. Un : trouve le coefficient directeur de la droite qui passe par ces deux points. Deux : trouve son ordonnée à l'origine. Mets pause, et cherche !",
+  "09b-correction": "Correction. Un : 78 moins 67, 11, divisé par 50 : a égale 0,22, le même rythme que les femmes ! Deux : b égale 67 moins 0,22 fois 10, soit 64,8. L'équation : y égale 0,22 x plus 64,8.",
+  "10-finale": "Ce que tu as appris. Avec deux points, a, c'est la différence des y divisée par la différence des x. Puis je remplace un point dans y égale a x plus b pour trouver b. Et a se lit dans la situation : ce que y gagne quand x augmente de 1.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -1,0 +1,18 @@
+{
+  "00-garde": "Effectuer un changement de variable. Quand un nuage n'est pas aligné, comment le redresser ?",
+  "01-situation": "Un contrôleur de gestion travaille pour une compagnie de taxis. Il étudie le prix d'une course, au kilomètre. En 2026, le tarif maximal est de 4,48 euros de prise en charge, plus 1,30 euro par kilomètre.",
+  "02-donnees": "Pour une course de 4 kilomètres, le kilomètre revient à 2,42 euros. Pour 25 kilomètres : 1,48 euro. Plus la course est longue, moins le kilomètre coûte cher : la prise en charge se partage. Mais le nuage est courbe : pas de droite possible.",
+  "03-idee": "L'idée : une part fixe partagée entre x kilomètres varie comme 1 sur x. Je pose donc une nouvelle variable : z égale 1 sur x. On transforme les abscisses ; les prix, eux, ne changent pas.",
+  "04-calcul": "Je calcule z, colonne par colonne. Pour x égale 4 : 1 divisé par 4, 0,25. Pour 5 : 0,2. Pour 8 : 0,125. Pour 10 : 0,1.",
+  "05-question": "Question ! Pour une course de 20 kilomètres, que vaut z ? A : 20. B : 0,05. C : 400. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B : 1 divisé par 20, 0,05. 20, c'est x sans transformation ; 400, c'est x au carré.",
+  "06-nuage": "Pour 25 kilomètres, z vaut 0,04. Je place les points de coordonnées z et y : cette fois, ils sont alignés ! Le changement de variable a redressé le nuage.",
+  "07-familles": "Le choix de la nouvelle variable dépend de la situation. Une part fixe qui se partage : z égale 1 sur x. Une surface, qui grandit comme un carré : u égale x au carré. Une quantité multipliée par le même nombre à chaque pas : z égale log de y.",
+  "08-question": "Question ! Le coût d'un car scolaire se partage entre les élèves. Quel changement de variable choisir ? A : z égale 1 sur x. B : u égale x au carré. C : z égale log de y. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. Un coût fixe partagé varie comme 1 sur x ; le carré, c'est pour une surface.",
+  "09-piege": "Le piège : x au carré, ce n'est pas 2 fois x. Pour x égale 2,5 : 2,5 fois 2,5, 6,25, et non 5.",
+  "10-defi": "À toi de jouer ! Un : pour une course de 16 kilomètres, calcule z. Deux : pour un carré de côté 1,5 mètre, calcule u égale x au carré. Mets pause, et cherche !",
+  "10b-correction": "Correction. Un : 1 divisé par 16, 0,0625. Deux : 1,5 fois 1,5, 2,25, et non 3.",
+  "11-finale": "Ce que tu as appris. Un changement de variable remplace x ou y par une fonction de lui-même, pour aligner le nuage. Je le choisis d'après la situation : 1 sur x, x au carré, ou log de y. Puis je calcule la nouvelle ligne du tableau, case par case.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

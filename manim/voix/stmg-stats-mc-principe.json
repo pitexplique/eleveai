@@ -1,0 +1,18 @@
+{
+  "00-garde": "La droite des moindres carrés. Parmi toutes les droites qui passent près d'un nuage, laquelle est la meilleure ?",
+  "01-situation": "Une responsable logistique travaille pour un grand site de vente en ligne. Pour prévoir la taille de ses entrepôts, elle étudie le chiffre d'affaires du commerce en ligne en France, publié par la Fevad.",
+  "02-donnees": "De 2015 à 2019, il passe de 64,9 à 103,4 milliards d'euros. En abscisse : le rang de l'année, de 1 à 5. En ordonnée : le chiffre d'affaires, en milliards d'euros. Les points sont presque alignés.",
+  "03-ecart": "Je trace une droite. Pour chaque point, l'écart, c'est la distance verticale entre le point et la droite : la valeur observée moins la valeur prévue. Au-dessus de la droite, l'écart est positif ; en dessous, il est négatif.",
+  "04-piege": "Le piège : additionner les écarts. Cette droite horizontale passe au milieu du nuage, à 82,92. Ses écarts au-dessus et en dessous se compensent : leur somme vaut 0. Pourtant, elle est très mauvaise !",
+  "05-carres": "La solution : élever chaque écart au carré. Un carré n'est jamais négatif, donc rien ne se compense. Et les grands écarts pèsent plus : un écart de 2 compte 4, un écart de 4 compte 16. Pour la droite horizontale, la somme des carrés vaut environ 958,6.",
+  "06-question": "Question ! Que rend la plus petite possible la droite des moindres carrés ? A : la somme des écarts. B : la somme des carrés des écarts. C : le nombre de points au-dessus de la droite. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. La somme des écarts peut valoir 0 pour une très mauvaise droite ; la somme des carrés, non.",
+  "07-droite": "La droite des moindres carrés, c'est celle dont la somme des carrés des écarts est la plus petite. La calculatrice la donne : y égale 9,76 x plus 53,64. Sa somme des carrés vaut environ 6 : aucune autre droite ne fait mieux.",
+  "08-point-moyen": "Elle passe toujours par le point moyen G. Son abscisse est la moyenne des rangs : 3. Son ordonnée, la moyenne des chiffres d'affaires : 82,92. G a pour coordonnées 3 et 82,92.",
+  "09-question": "Question ! Quelles sont les coordonnées du point moyen G ? A : 3 et 82,92. B : 82,92 et 3. C : 3 et 84,15. Mets pause, et choisis !",
+  "09b-reponse": "Réponse A. B inverse l'abscisse et l'ordonnée ; 84,15 est le milieu du premier et du dernier relevé, pas la moyenne des cinq.",
+  "10-defi": "À toi de jouer ! Vrai ou faux ? Un : une droite dont la somme des écarts vaut 0 est forcément la meilleure. Deux : un écart de 3 pèse 9 fois plus qu'un écart de 1. Mets pause, et cherche !",
+  "10b-correction": "Correction. Un : faux ! La droite horizontale a une somme des écarts nulle, et pourtant une somme des carrés de 958,6. Deux : vrai ! 3 au carré fait 9, et 1 au carré fait 1.",
+  "11-finale": "Ce que tu as appris. L'écart d'un point, c'est la valeur observée moins la valeur prévue par la droite. La droite des moindres carrés rend la plus petite possible la somme des carrés des écarts : rien ne se compense, et les grands écarts pèsent plus. Elle passe par le point moyen G.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

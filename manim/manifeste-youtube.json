@@ -35696,6 +35696,1901 @@
         "espace",
         "sciences"
       ]
+    },
+    {
+      "id": "stmg-stats-ajust-pertinence",
+      "notionId": "stat_ajustement",
+      "microId": "statT_ajust_pertinence",
+      "classe": "stmg",
+      "ceinture": "verte",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/statistiques/20-ajust-pertinence/eleveai-maths-stmg-stats-ajust-pertinence.mp4",
+      "miniature": "stmg/maths/statistiques/20-ajust-pertinence/eleveai-maths-stmg-stats-ajust-pertinence.png",
+      "titre": "Spotify ou voiture électrique : une droite ? — Ajustement pertinent ? — épisode 20 · Maths STMG",
+      "accroche": "Une analyste financière conseille des investisseurs. Elle compare deux marchés qui grandissent : le streaming musical, avec les abonnés payants de Spotify, et la voiture électrique en France. Avant tout calcul, sa question : chaque nuage suit-il une droite ?\n\nDans cette vidéo :\n• regarder la forme du nuage : des points autour d'une droite, ou une courbe ?\n• les écarts successifs de Spotify : voisins, autour de 28 millions par an\n• les voitures électriques : 4,5, 3,1… puis 68,1, une courbe qui se redresse\n• le piège : la calculatrice trace une droite pour n'importe quel nuage\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : en 2026, Spotify compte 293 millions d'abonnés : le nuage reste-t-il proche d'une droite ? Vrai ou faux : dès qu'un nuage est croissant, un ajustement affine est pertinent ?\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/stmg/stat-ajustement\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=stat_ajustement&microId=statT_ajust_pertinence&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Une droite, ou pas ?"
+        ],
+        [
+          "00:24",
+          "Le nuage de Spotify"
+        ],
+        [
+          "00:40",
+          "Les écarts successifs"
+        ],
+        [
+          "01:03",
+          "Question : des écarts voisins ?"
+        ],
+        [
+          "01:41",
+          "Les voitures électriques : une courbe"
+        ],
+        [
+          "02:15",
+          "Le piège : une droite convient toujours ?"
+        ],
+        [
+          "02:35",
+          "Question : des écarts qui doublent"
+        ],
+        [
+          "03:11",
+          "À toi de jouer"
+        ],
+        [
+          "03:37",
+          "Correction"
+        ],
+        [
+          "03:57",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "ajustement affine",
+        "nuage de points",
+        "écarts successifs",
+        "pertinence",
+        "Spotify",
+        "voiture électrique",
+        "analyste financière",
+        "statistiques",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:03",
+          "question": "Un autre nuage a pour écarts successifs 12, 11, 13 et 12. Un ajustement affine est-il pertinent ?",
+          "choix": [
+            "oui : écarts voisins",
+            "non : pas tous égaux",
+            "impossible sans graphique"
+          ],
+          "reponse": 0,
+          "explication": "Des écarts voisins suffisent."
+        },
+        {
+          "t": "02:35",
+          "question": "Un nuage monte, et ses écarts valent 5, 10, 20 puis 40. Un ajustement affine est-il pertinent ?",
+          "choix": [
+            "oui : il est croissant",
+            "non : les écarts doublent",
+            "oui, toujours"
+          ],
+          "reponse": 1,
+          "explication": "Croissant ne veut pas dire affine."
+        }
+      ],
+      "centres": [
+        "musique",
+        "transports"
+      ]
+    },
+    {
+      "id": "stmg-stats-ajust-pertinence-short",
+      "notionId": "stat_ajustement",
+      "microId": "statT_ajust_pertinence",
+      "classe": "stmg",
+      "ceinture": "orange",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-stats-ajust-pertinence",
+      "fichier": "stmg/maths/statistiques/20-ajust-pertinence/eleveai-maths-stmg-stats-ajust-pertinence-short.mp4",
+      "miniature": "stmg/maths/statistiques/20-ajust-pertinence/eleveai-maths-stmg-stats-ajust-pertinence-short.png",
+      "titre": "Spotify ou voiture électrique : lequel suit une droite ? 🎧 — STMG #Shorts",
+      "accroche": "Deux marchés grandissent. Lequel suit une droite ? Spotify : de 100 millions d'abonnés en 2019 à 268 millions en 2025, à peu près 28 de plus chaque année. Les voitures électriques en France : 17,3 milliers en 2015, 42,8 en 2019… et 110,9 en 2020 ! Les écarts explosent : une courbe.\n\n🥋 Ceinture orange.\n👉 À toi : si Spotify garde ses 28 millions de plus par an, combien d'abonnés en 2026 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=stat_ajustement&microId=statT_ajust_pertinence&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #STMG #lycée",
+      "tags": [
+        "ajustement affine",
+        "Spotify",
+        "voiture électrique",
+        "nuage de points",
+        "statistiques",
+        "maths",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture orange",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:28",
+          "question": "Lequel se résume par une droite ?",
+          "choix": [
+            "Spotify",
+            "les voitures électriques",
+            "les deux"
+          ],
+          "reponse": 0,
+          "explication": "Des écarts voisins : une droite. Des écarts qui explosent : une courbe."
+        }
+      ],
+      "centres": [
+        "musique",
+        "transports"
+      ]
+    },
+    {
+      "id": "stmg-stats-ajust-au-juge",
+      "notionId": "stat_ajustement",
+      "microId": "statT_ajust_au_juge",
+      "classe": "stmg",
+      "ceinture": "verte",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/statistiques/21-ajust-au-juge/eleveai-maths-stmg-stats-ajust-au-juge.mp4",
+      "miniature": "stmg/maths/statistiques/21-ajust-au-juge/eleveai-maths-stmg-stats-ajust-au-juge.png",
+      "titre": "Achats en ligne : où poser la règle ? — Droite d'ajustement au jugé — épisode 21 · Maths STMG",
+      "accroche": "Un responsable e-commerce prépare le budget de sa boutique en ligne. Sa donnée : ce que les Français dépensent sur internet chaque année, d'après la Fevad, la fédération du e-commerce. De 56,8 milliards d'euros en 2014 à 103,4 milliards en 2019.\n\nDans cette vidéo :\n• poser la règle dans la direction du nuage\n• la faire glisser jusqu'au milieu : des points des deux côtés, au plus près\n• corriger une droite : a règle la direction, b règle la hauteur\n• le piège : relier le premier et le dernier point\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : trois droites sur le même nuage : laquelle est un bon ajustement ? Pour les deux autres, faut-il changer a ou b ?\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/stmg/stat-ajustement\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=stat_ajustement&microId=statT_ajust_au_juge&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Où poser la règle ?"
+        ],
+        [
+          "00:19",
+          "Les dépenses en ligne des Français"
+        ],
+        [
+          "00:40",
+          "La règle au milieu du nuage"
+        ],
+        [
+          "00:59",
+          "Question : au-dessus de tous les points ?"
+        ],
+        [
+          "01:31",
+          "Corriger : a pour la direction, b pour la hauteur"
+        ],
+        [
+          "01:54",
+          "Le piège : relier les deux extrêmes"
+        ],
+        [
+          "02:09",
+          "Question : une droite trop basse"
+        ],
+        [
+          "02:41",
+          "À toi de jouer"
+        ],
+        [
+          "03:00",
+          "Correction"
+        ],
+        [
+          "03:16",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "droite d'ajustement",
+        "au jugé",
+        "nuage de points",
+        "coefficient directeur",
+        "ordonnée à l'origine",
+        "e-commerce",
+        "Fevad",
+        "responsable e-commerce",
+        "statistiques",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:59",
+          "question": "Cette droite est-elle un bon ajustement du nuage ?",
+          "choix": [
+            "oui : bonne direction",
+            "non : au-dessus de tous",
+            "oui : près d'un point"
+          ],
+          "reponse": 1,
+          "explication": "Elle doit passer au milieu du nuage."
+        },
+        {
+          "t": "02:09",
+          "question": "Une droite a la bonne direction, mais passe entièrement en dessous des points. Que faut-il modifier ?",
+          "choix": [
+            "augmenter b",
+            "changer a",
+            "rien"
+          ],
+          "reponse": 0,
+          "explication": "On remonte la droite sans changer sa pente."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "stmg-stats-ajust-au-juge-short",
+      "notionId": "stat_ajustement",
+      "microId": "statT_ajust_au_juge",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-stats-ajust-au-juge",
+      "fichier": "stmg/maths/statistiques/21-ajust-au-juge/eleveai-maths-stmg-stats-ajust-au-juge-short.mp4",
+      "miniature": "stmg/maths/statistiques/21-ajust-au-juge/eleveai-maths-stmg-stats-ajust-au-juge-short.png",
+      "titre": "Où poser la règle sur ce nuage ? 📏 — STMG #Shorts",
+      "accroche": "Les Français dépensent de plus en plus en ligne : 56,8 milliards d'euros en 2014, 103,4 en 2019. Où poser la règle ? Trop haut ! Trop bas ! Trop penché ! Là : pile au milieu, des points des deux côtés.\n\n🥋 Ceinture jaune.\n👉 À toi : ma droite passe par 55 milliards en 2014 et 102 milliards en 2019. De combien monte-t-elle chaque année ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=stat_ajustement&microId=statT_ajust_au_juge&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #STMG #lycée",
+      "tags": [
+        "droite d'ajustement",
+        "au jugé",
+        "e-commerce",
+        "nuage de points",
+        "statistiques",
+        "maths",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:20",
+          "question": "Une droite passe au-dessus de tous les points. Convient-elle ?",
+          "choix": [
+            "oui",
+            "non",
+            "oui si bonne pente"
+          ],
+          "reponse": 1,
+          "explication": "Elle doit passer au milieu des points : il faut la descendre."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "stmg-stats-ajust-equation",
+      "notionId": "stat_ajustement",
+      "microId": "statT_ajust_equation",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/statistiques/22-ajust-equation/eleveai-maths-stmg-stats-ajust-equation.mp4",
+      "miniature": "stmg/maths/statistiques/22-ajust-equation/eleveai-maths-stmg-stats-ajust-equation.png",
+      "titre": "Espérance de vie : 0,22 an par an — Équation d'une droite d'ajustement — épisode 22 · Maths STMG",
+      "accroche": "Une actuaire calcule les pensions de retraite et les contrats d'assurance. Pour cela, elle doit prévoir combien de temps on vit. Ses données : l'espérance de vie des femmes en France, d'après l'Insee, de 73,6 ans en 1960 à 84,6 ans en 2010.\n\nDans cette vidéo :\n• le coefficient directeur : différence des y ÷ différence des x, 11 ÷ 50 = 0,22\n• l'ordonnée à l'origine : je remplace un point, b = 71,4\n• le sens de a : environ 0,22 an gagné chaque année\n• la calculatrice : la droite des moindres carrés, y = 0,22x + 71,55\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : chez les hommes, 67 ans en 1960 et 78 ans en 2010 : trouve le coefficient directeur, puis l'ordonnée à l'origine.\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/stmg/stat-ajustement\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=stat_ajustement&microId=statT_ajust_equation&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Deux points, une équation"
+        ],
+        [
+          "00:21",
+          "L'espérance de vie des femmes"
+        ],
+        [
+          "00:51",
+          "Le coefficient directeur a"
+        ],
+        [
+          "01:19",
+          "L'ordonnée à l'origine b"
+        ],
+        [
+          "01:43",
+          "Question : un coefficient directeur"
+        ],
+        [
+          "02:15",
+          "Que veut dire 0,22 ?"
+        ],
+        [
+          "02:32",
+          "Et la calculatrice ?"
+        ],
+        [
+          "02:52",
+          "Question : le sens de 0,22"
+        ],
+        [
+          "03:34",
+          "À toi de jouer"
+        ],
+        [
+          "03:55",
+          "Correction"
+        ],
+        [
+          "04:20",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "équation de droite",
+        "droite d'ajustement",
+        "coefficient directeur",
+        "ordonnée à l'origine",
+        "espérance de vie",
+        "Insee",
+        "actuaire",
+        "statistiques",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:43",
+          "question": "Une droite passe par les points (2 ; 30) et (6 ; 50). Que vaut son coefficient directeur ?",
+          "choix": [
+            "5",
+            "0,2",
+            "20"
+          ],
+          "reponse": 0,
+          "explication": "20 ÷ 4."
+        },
+        {
+          "t": "02:52",
+          "question": "Dans y = 0,22x + 71,4, que signifie 0,22 ?",
+          "choix": [
+            "× 0,22 chaque année",
+            "+ 0,22 an environ par an",
+            "0,22 an en 1950"
+          ],
+          "reponse": 1,
+          "explication": "Le coefficient directeur est un gain par an."
+        }
+      ],
+      "centres": [
+        "corps-sante",
+        "sciences"
+      ]
+    },
+    {
+      "id": "stmg-stats-ajust-equation-short",
+      "notionId": "stat_ajustement",
+      "microId": "statT_ajust_equation",
+      "classe": "stmg",
+      "ceinture": "orange",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-stats-ajust-equation",
+      "fichier": "stmg/maths/statistiques/22-ajust-equation/eleveai-maths-stmg-stats-ajust-equation-short.mp4",
+      "miniature": "stmg/maths/statistiques/22-ajust-equation/eleveai-maths-stmg-stats-ajust-equation-short.png",
+      "titre": "Espérance de vie : combien d'années de plus chaque année ? ⏳ — STMG #Shorts",
+      "accroche": "En France, l'espérance de vie des femmes : 73,6 ans en 1960, 84,6 ans en 2010. 11 ans de plus, en 50 ans. 11 ÷ 50 = 0,22 an par an : plus de 2 mois et demi chaque année !\n\n🥋 Ceinture orange.\n👉 À toi : à ce rythme de 0,22 an par an, combien d'années d'espérance de vie gagne-t-on en 10 ans ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=stat_ajustement&microId=statT_ajust_equation&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #STMG #lycée",
+      "tags": [
+        "coefficient directeur",
+        "espérance de vie",
+        "droite d'ajustement",
+        "Insee",
+        "statistiques",
+        "maths",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture orange",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:20",
+          "question": "Combien gagne-t-on par an ?",
+          "choix": [
+            "0,22",
+            "4,5",
+            "11"
+          ],
+          "reponse": 0,
+          "explication": "11 ÷ 50 : 0,22 an, plus de 2 mois et demi par an !"
+        }
+      ],
+      "centres": [
+        "corps-sante",
+        "sciences"
+      ]
+    },
+    {
+      "id": "stmg-stats-ajust-calculer",
+      "notionId": "stat_ajustement",
+      "microId": "statT_ajust_calculer",
+      "classe": "stmg",
+      "ceinture": "verte",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/statistiques/23-ajust-calculer/eleveai-maths-stmg-stats-ajust-calculer.mp4",
+      "miniature": "stmg/maths/statistiques/23-ajust-calculer/eleveai-maths-stmg-stats-ajust-calculer.png",
+      "titre": "Éoliennes : quelle puissance en 2026 ? — Calculer avec un ajustement — épisode 23 · Maths STMG",
+      "accroche": "Un chargé de mission énergie travaille pour une région. Il suit les éoliennes installées en France : la puissance totale du parc, en gigawatts, d'après RTE, le gestionnaire du réseau électrique. 13,5 gigawatts en 2017, 22,5 en 2023.\n\nDans cette vidéo :\n• prévoir y : je remplace x dans y = 1,5x + 11,8\n• au rang 4, en 2020 : 17,8 gigawatts\n• le piège : l'estimation n'est pas la valeur observée, 17,5\n• dans l'autre sens : 1,5x + 11,8 = 26,8, donc x = 10, en 2026\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : quelle puissance la droite prévoit-elle en 2025, au rang 9 ? À partir de quel rang entier dépasse-t-elle 35 gigawatts ?\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/stmg/stat-ajustement\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=stat_ajustement&microId=statT_ajust_calculer&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Une équation, et tu prévois"
+        ],
+        [
+          "00:21",
+          "Le parc éolien français"
+        ],
+        [
+          "00:45",
+          "Prévoir y : remplacer x"
+        ],
+        [
+          "01:08",
+          "Question : pour x = 6"
+        ],
+        [
+          "01:46",
+          "Le piège : estimé ou observé ?"
+        ],
+        [
+          "02:03",
+          "Dans l'autre sens : chercher x"
+        ],
+        [
+          "02:29",
+          "Question : quand 23,8 gigawatts ?"
+        ],
+        [
+          "03:06",
+          "À toi de jouer"
+        ],
+        [
+          "03:25",
+          "Correction"
+        ],
+        [
+          "03:51",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "droite d'ajustement",
+        "équation",
+        "prévision",
+        "éoliennes",
+        "énergie",
+        "RTE",
+        "chargé de mission",
+        "statistiques",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:08",
+          "question": "Avec y = 1,5x + 11,8, que prévoit la droite pour x = 6 ?",
+          "choix": [
+            "20,8",
+            "19,3",
+            "26,7"
+          ],
+          "reponse": 0,
+          "explication": "1,5 × 6 + 11,8."
+        },
+        {
+          "t": "02:29",
+          "question": "Pour quelle valeur de x la droite atteint-elle 23,8 gigawatts ?",
+          "choix": [
+            "8",
+            "47,5",
+            "15,9"
+          ],
+          "reponse": 0,
+          "explication": "(23,8 − 11,8) ÷ 1,5."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "sciences"
+      ]
+    },
+    {
+      "id": "stmg-stats-ajust-calculer-short",
+      "notionId": "stat_ajustement",
+      "microId": "statT_ajust_calculer",
+      "classe": "stmg",
+      "ceinture": "orange",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-stats-ajust-calculer",
+      "fichier": "stmg/maths/statistiques/23-ajust-calculer/eleveai-maths-stmg-stats-ajust-calculer-short.mp4",
+      "miniature": "stmg/maths/statistiques/23-ajust-calculer/eleveai-maths-stmg-stats-ajust-calculer-short.png",
+      "titre": "Les éoliennes en 2024 : que prévoit la droite ? 🌬️ — STMG #Shorts",
+      "accroche": "Les éoliennes de France : 13,5 gigawatts en 2017, 22,5 en 2023. La droite d'ajustement : y = 1,5x + 11,8, avec x le rang de l'année. En 2024, au rang 8 : 1,5 × 8 + 11,8 = 23,8. Et en vrai, fin 2024, le parc a dépassé 24 gigawatts !\n\n🥋 Ceinture orange.\n👉 À toi : en quelle année la droite dépassera-t-elle 30 gigawatts ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=stat_ajustement&microId=statT_ajust_calculer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #STMG #lycée",
+      "tags": [
+        "droite d'ajustement",
+        "éoliennes",
+        "prévision",
+        "énergie",
+        "statistiques",
+        "maths",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture orange",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:26",
+          "question": "1,5 × 8 + 11,8, ça fait…",
+          "choix": [
+            "23,8",
+            "21,3",
+            "29,7"
+          ],
+          "reponse": 0,
+          "explication": "12 + 11,8 : 23,8. Et en vrai, fin 2024, le parc a dépassé 24 gigawatts !"
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "sciences"
+      ]
+    },
+    {
+      "id": "stmg-stats-interpoler",
+      "notionId": "stat_interpoler",
+      "microId": "statT_interpoler",
+      "classe": "stmg",
+      "ceinture": "verte",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/statistiques/24-interpoler/eleveai-maths-stmg-stats-interpoler.mp4",
+      "miniature": "stmg/maths/statistiques/24-interpoler/eleveai-maths-stmg-stats-interpoler.png",
+      "titre": "La France en 2012, sans relevé : interpolons ! — Interpoler — épisode 24 · Maths STMG",
+      "accroche": "Une urbaniste prépare les écoles, les logements et les transports de demain. Elle a besoin de la population de la France, mais ses chiffres de l'Insee ne donnent qu'un relevé tous les 5 ans : 60,5 millions d'habitants en 2000, 67,4 millions en 2020.\n\nDans cette vidéo :\n• interpoler : estimer une valeur entre le premier et le dernier relevé\n• en 2012, x = 12 : 0,35 × 12 + 60,8 = 65 millions\n• le vrai chiffre de l'Insee : 65,2 millions, l'estimation la plus fiable\n• le piège : remplacer x par l'année, et trouver 765 millions\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : estime la population en 2017. Estimer celle de 2030, est-ce une interpolation ou une extrapolation ?\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/stmg/stat-interpoler\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=stat_interpoler&microId=statT_interpoler&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Entre deux relevés"
+        ],
+        [
+          "00:20",
+          "Un relevé tous les 5 ans"
+        ],
+        [
+          "00:47",
+          "Interpoler : la France en 2012"
+        ],
+        [
+          "01:10",
+          "Vérifions avec l'Insee"
+        ],
+        [
+          "01:28",
+          "Question : laquelle est une interpolation ?"
+        ],
+        [
+          "02:07",
+          "Le piège : x n'est pas l'année"
+        ],
+        [
+          "02:25",
+          "Question : la population en 2018"
+        ],
+        [
+          "03:14",
+          "À toi de jouer"
+        ],
+        [
+          "03:30",
+          "Correction"
+        ],
+        [
+          "03:54",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "interpolation",
+        "ajustement affine",
+        "estimation",
+        "population",
+        "France",
+        "Insee",
+        "urbaniste",
+        "statistiques",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:28",
+          "question": "Les relevés vont de 2000 à 2020. Laquelle de ces estimations est une interpolation ?",
+          "choix": [
+            "2012",
+            "2030",
+            "1995"
+          ],
+          "reponse": 0,
+          "explication": "Entre les relevés."
+        },
+        {
+          "t": "02:25",
+          "question": "Avec y = 0,35x + 60,8, quelle population estimer en 2018 ?",
+          "choix": [
+            "67,1",
+            "767,1",
+            "61,15 millions"
+          ],
+          "reponse": 0,
+          "explication": "Le vrai chiffre est 67 millions."
+        }
+      ],
+      "centres": [
+        "histoire-geographie"
+      ]
+    },
+    {
+      "id": "stmg-stats-interpoler-short",
+      "notionId": "stat_interpoler",
+      "microId": "statT_interpoler",
+      "classe": "stmg",
+      "ceinture": "orange",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-stats-interpoler",
+      "fichier": "stmg/maths/statistiques/24-interpoler/eleveai-maths-stmg-stats-interpoler-short.mp4",
+      "miniature": "stmg/maths/statistiques/24-interpoler/eleveai-maths-stmg-stats-interpoler-short.png",
+      "titre": "Combien d'habitants en France en 2012 ? 🗺️ — STMG #Shorts",
+      "accroche": "La France, un relevé tous les 5 ans : 60,5 millions d'habitants en 2000, 67,4 millions en 2020. Et en 2012 ? La droite, entre les points : environ 65 millions. Le vrai chiffre de l'Insee : 65,2 ! Bien vu.\n\n🥋 Ceinture orange.\n👉 À toi : avec y = 0,35x + 60,8, et x le nombre d'années depuis 2000, combien d'habitants en 2007 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=stat_interpoler&microId=statT_interpoler&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #STMG #lycée",
+      "tags": [
+        "interpolation",
+        "population",
+        "France",
+        "Insee",
+        "statistiques",
+        "maths",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture orange",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:23",
+          "question": "Interpoler, c'est estimer une valeur…",
+          "choix": [
+            "entre les relevés",
+            "après le dernier",
+            "avant le premier"
+          ],
+          "reponse": 0,
+          "explication": "Entre les relevés : c'est là que l'estimation est la plus sûre."
+        }
+      ],
+      "centres": [
+        "histoire-geographie"
+      ]
+    },
+    {
+      "id": "stmg-stats-extrapoler",
+      "notionId": "stat_interpoler",
+      "microId": "statT_extrapoler",
+      "classe": "stmg",
+      "ceinture": "verte",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/statistiques/25-extrapoler/eleveai-maths-stmg-stats-extrapoler.mp4",
+      "miniature": "stmg/maths/statistiques/25-extrapoler/eleveai-maths-stmg-stats-extrapoler.png",
+      "titre": "Le diesel en 2024 : prévision réussie… et en 2030 ? — Extrapoler — épisode 25 · Maths STMG",
+      "accroche": "Un responsable des ventes chez un constructeur automobile doit choisir quels moteurs produire. D'après le comité des constructeurs français, 73 % des voitures neuves étaient diesel en 2012, et 30,6 % en 2020. Sa question : la part du diesel va-t-elle continuer de baisser ?\n\nDans cette vidéo :\n• extrapoler : prolonger la droite au-delà des relevés\n• en 2024, x = 12 : −5,5 × 12 + 73 = 7 %, et c'est le vrai chiffre\n• un seuil : sous 10 % à partir du rang 12, en 2024\n• le piège : prolonger trop loin, −26 % en 2030\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : que prévoit la droite pour 2022 ? À partir de quelle année entière annonce-t-elle un pourcentage négatif ?\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/stmg/stat-interpoler\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=stat_interpoler&microId=statT_extrapoler&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Jusqu'où peut-on prévoir ?"
+        ],
+        [
+          "00:20",
+          "La part du diesel, de 2012 à 2020"
+        ],
+        [
+          "00:50",
+          "Extrapoler : 2024"
+        ],
+        [
+          "01:13",
+          "Et en vrai ?"
+        ],
+        [
+          "01:29",
+          "Question : laquelle est une extrapolation ?"
+        ],
+        [
+          "02:07",
+          "Quand passe-t-on sous 10 % ?"
+        ],
+        [
+          "02:35",
+          "Le piège : prolonger trop loin"
+        ],
+        [
+          "02:58",
+          "Question : −26 % en 2030"
+        ],
+        [
+          "03:32",
+          "À toi de jouer"
+        ],
+        [
+          "03:48",
+          "Correction"
+        ],
+        [
+          "04:12",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "extrapolation",
+        "ajustement affine",
+        "prévision",
+        "diesel",
+        "automobile",
+        "voitures neuves",
+        "responsable des ventes",
+        "statistiques",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:29",
+          "question": "Les relevés vont de 2012 à 2020. Laquelle de ces prévisions est une extrapolation ?",
+          "choix": [
+            "2015",
+            "2023",
+            "2019"
+          ],
+          "reponse": 1,
+          "explication": "Après le dernier relevé."
+        },
+        {
+          "t": "02:58",
+          "question": "Le modèle annonce −26 % de diesel en 2030. Que conclure ?",
+          "choix": [
+            "calcul faux",
+            "trop loin, modèle dépassé",
+            "moins de 0 voiture diesel"
+          ],
+          "reponse": 1,
+          "explication": "Une extrapolation lointaine n'a plus de sens."
+        }
+      ],
+      "centres": [
+        "transports",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "stmg-stats-extrapoler-short",
+      "notionId": "stat_interpoler",
+      "microId": "statT_extrapoler",
+      "classe": "stmg",
+      "ceinture": "orange",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-stats-extrapoler",
+      "fichier": "stmg/maths/statistiques/25-extrapoler/eleveai-maths-stmg-stats-extrapoler-short.mp4",
+      "miniature": "stmg/maths/statistiques/25-extrapoler/eleveai-maths-stmg-stats-extrapoler-short.png",
+      "titre": "Le diesel en 2024 : la droite avait-elle raison ? 🚗 — STMG #Shorts",
+      "accroche": "Le diesel dans les voitures neuves : 73 % en 2012, 30,6 % en 2020. La droite d'ajustement : y = −5,5x + 73. Je la prolonge au-delà du dernier point : c'est extrapoler. En 2024, x = 12 : −5,5 × 12 + 73 = 7 %. Et en vrai : 7 % ! Prévision réussie.\n\n🥋 Ceinture orange.\n👉 À toi : que prévoit la même droite pour 2030, avec x = 18 ? Et est-ce possible ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=stat_interpoler&microId=statT_extrapoler&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #STMG #lycée",
+      "tags": [
+        "extrapolation",
+        "diesel",
+        "voitures",
+        "prévision",
+        "statistiques",
+        "maths",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture orange",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:24",
+          "question": "−5,5 × 12 + 73, ça fait…",
+          "choix": [
+            "7 %",
+            "139 %",
+            "67,5 %"
+          ],
+          "reponse": 0,
+          "explication": "7 %. Et en vrai, en 2024 : 7 % ! Prévision réussie."
+        }
+      ],
+      "centres": [
+        "transports",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "stmg-stats-limites",
+      "notionId": "stat_interpoler",
+      "microId": "statT_limites",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/statistiques/26-limites/eleveai-maths-stmg-stats-limites.mp4",
+      "miniature": "stmg/maths/statistiques/26-limites/eleveai-maths-stmg-stats-limites.png",
+      "titre": "104,5 % de Français avec un smartphone ? — Limites d'une extrapolation — épisode 26 · Maths STMG",
+      "accroche": "Une chargée d'études marketing travaille pour un opérateur de téléphonie. En 2016, on lui demande : combien de Français auront un smartphone dans quelques années ? D'après le baromètre du numérique, 17 % en étaient équipés en 2011, et 65 % en 2016.\n\nDans cette vidéo :\n• la droite y = 9,6x + 18,1 prévoit 104,5 % en 2020 : impossible\n• dès le rang 9, elle dépasse 100 %\n• la réalité : 84 % en 2020, 87 % en 2022, les points s'aplatissent\n• le piège : croire qu'une tendance dure toujours\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : que prévoit la droite pour 2019, contre 77 % en vrai ? En 2022, de combien de points se trompe-t-elle ?\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/stmg/stat-interpoler\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=stat_interpoler&microId=statT_limites&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Une droite pour toujours ?"
+        ],
+        [
+          "00:19",
+          "Les Français équipés d'un smartphone"
+        ],
+        [
+          "00:45",
+          "La prévision : 104,5 % !"
+        ],
+        [
+          "01:08",
+          "Question : quand dépasse-t-elle 100 % ?"
+        ],
+        [
+          "01:42",
+          "Et en vrai ?"
+        ],
+        [
+          "02:05",
+          "Le piège : une tendance éternelle"
+        ],
+        [
+          "02:21",
+          "Question : pourquoi cet écart ?"
+        ],
+        [
+          "03:00",
+          "À toi de jouer"
+        ],
+        [
+          "03:20",
+          "Correction"
+        ],
+        [
+          "03:46",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "extrapolation",
+        "limites d'un modèle",
+        "ajustement affine",
+        "smartphone",
+        "baromètre du numérique",
+        "chargée d'études marketing",
+        "statistiques",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:08",
+          "question": "À partir de quel rang entier la droite dépasse-t-elle 100 % ?",
+          "choix": [
+            "8",
+            "9",
+            "100"
+          ],
+          "reponse": 1,
+          "explication": "Une part ne dépasse jamais 100 %."
+        },
+        {
+          "t": "02:21",
+          "question": "Pour 2022, la droite annonce 123,7 % ; la réalité est de 87 %. Pourquoi cet écart ?",
+          "choix": [
+            "la calculatrice s'est trompée",
+            "la tendance a changé",
+            "le baromètre a mal compté"
+          ],
+          "reponse": 1,
+          "explication": "Un modèle affine ne vaut que tant que la tendance tient."
+        }
+      ],
+      "centres": [
+        "reseaux-sociaux",
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "stmg-stats-limites-short",
+      "notionId": "stat_interpoler",
+      "microId": "statT_limites",
+      "classe": "stmg",
+      "ceinture": "orange",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-stats-limites",
+      "fichier": "stmg/maths/statistiques/26-limites/eleveai-maths-stmg-stats-limites-short.mp4",
+      "miniature": "stmg/maths/statistiques/26-limites/eleveai-maths-stmg-stats-limites-short.png",
+      "titre": "104,5 % de Français avec un smartphone ? 📱 — STMG #Shorts",
+      "accroche": "Les Français équipés d'un smartphone : 17 % en 2011, 65 % en 2016. Presque une droite ! Prolongeons-la… En 2020, elle annonce 104,5 % ! Et en vrai ? 84 %. Les points s'aplatissent, la droite file dans le mur.\n\n🥋 Ceinture orange.\n👉 À toi : en 2020, la droite annonce 104,5 % et la réalité, 84 %. De combien de points se trompe-t-elle ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=stat_interpoler&microId=statT_limites&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #STMG #lycée",
+      "tags": [
+        "extrapolation",
+        "smartphone",
+        "limites",
+        "prévision",
+        "statistiques",
+        "maths",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture orange",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:24",
+          "question": "104,5 % des Français équipés, c'est…",
+          "choix": [
+            "possible",
+            "impossible",
+            "possible : 2 smartphones"
+          ],
+          "reponse": 1,
+          "explication": "On compte des personnes équipées : jamais plus de 100 %."
+        }
+      ],
+      "centres": [
+        "reseaux-sociaux",
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "stmg-stats-mc-principe",
+      "notionId": "stat_moindres_carres",
+      "microId": "statT_mc_principe",
+      "classe": "stmg",
+      "ceinture": "verte",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/statistiques/27-mc-principe/eleveai-maths-stmg-stats-mc-principe.mp4",
+      "miniature": "stmg/maths/statistiques/27-mc-principe/eleveai-maths-stmg-stats-mc-principe.png",
+      "titre": "Des écarts nuls… et une très mauvaise droite ! — Les moindres carrés — épisode 27 · Maths STMG",
+      "accroche": "Une responsable logistique travaille pour un grand site de vente en ligne. Pour prévoir la taille de ses entrepôts, elle étudie le chiffre d'affaires du commerce en ligne en France, publié par la Fevad : de 64,9 milliards d'euros en 2015 à 103,4 milliards en 2019.\n\nDans cette vidéo :\n• l'écart d'un point : valeur observée moins valeur prévue\n• le piège : les écarts se compensent, leur somme peut valoir 0\n• les carrés : rien ne se compense, et les grands écarts pèsent plus\n• la droite des moindres carrés, y = 9,76x + 53,64, passe par le point moyen G (3 ; 82,92)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : vrai ou faux : une droite dont la somme des écarts vaut 0 est forcément la meilleure ? Un écart de 3 pèse 9 fois plus qu'un écart de 1 ?\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/stmg/stat-moindres-carres\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=stat_moindres_carres&microId=statT_mc_principe&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Laquelle est la meilleure ?"
+        ],
+        [
+          "00:22",
+          "Le chiffre d'affaires du e-commerce"
+        ],
+        [
+          "00:41",
+          "L'écart d'un point"
+        ],
+        [
+          "00:58",
+          "Le piège : additionner les écarts"
+        ],
+        [
+          "01:16",
+          "La solution : les carrés"
+        ],
+        [
+          "01:38",
+          "Question : que minimise-t-elle ?"
+        ],
+        [
+          "02:10",
+          "La droite des moindres carrés"
+        ],
+        [
+          "02:30",
+          "Le point moyen G"
+        ],
+        [
+          "02:47",
+          "Question : les coordonnées de G"
+        ],
+        [
+          "03:22",
+          "À toi de jouer"
+        ],
+        [
+          "03:39",
+          "Correction"
+        ],
+        [
+          "03:56",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "moindres carrés",
+        "somme des carrés des écarts",
+        "point moyen",
+        "droite d'ajustement",
+        "e-commerce",
+        "Fevad",
+        "responsable logistique",
+        "statistiques",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:38",
+          "question": "Que rend la plus petite possible la droite des moindres carrés ?",
+          "choix": [
+            "la somme des écarts",
+            "la somme des carrés des écarts",
+            "le nombre de points au-dessus"
+          ],
+          "reponse": 1,
+          "explication": "La somme des écarts peut valoir 0 pour une très mauvaise droite."
+        },
+        {
+          "t": "02:47",
+          "question": "Quelles sont les coordonnées du point moyen G ?",
+          "choix": [
+            "(3 ; 82,92)",
+            "(82,92 ; 3)",
+            "(3 ; 84,15)"
+          ],
+          "reponse": 0,
+          "explication": "B inverse ; 84,15 = milieu des extrêmes."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "stmg-stats-mc-principe-short",
+      "notionId": "stat_moindres_carres",
+      "microId": "statT_mc_principe",
+      "classe": "stmg",
+      "ceinture": "orange",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-stats-mc-principe",
+      "fichier": "stmg/maths/statistiques/27-mc-principe/eleveai-maths-stmg-stats-mc-principe-short.mp4",
+      "miniature": "stmg/maths/statistiques/27-mc-principe/eleveai-maths-stmg-stats-mc-principe-short.png",
+      "titre": "Des écarts qui s'annulent : la meilleure droite ? 📉 — STMG #Shorts",
+      "accroche": "Cette droite traverse le nuage pile au milieu : ses écarts s'annulent, leur somme fait 0. Est-ce la meilleure ? Non ! Élève chaque écart au carré : un écart de 18 compte 18 × 18 = 324. Sa somme des carrés : environ 958,6. La droite des moindres carrés, elle, n'a qu'environ 6.\n\n🥋 Ceinture orange.\n👉 À toi : un écart de 3 et un écart de −3. Que vaut la somme de leurs carrés ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=stat_moindres_carres&microId=statT_mc_principe&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #STMG #lycée",
+      "tags": [
+        "moindres carrés",
+        "écarts",
+        "carrés",
+        "droite d'ajustement",
+        "statistiques",
+        "maths",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture orange",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:26",
+          "question": "Un écart de 5 pèse combien dans la somme des carrés ?",
+          "choix": [
+            "5",
+            "10",
+            "25"
+          ],
+          "reponse": 2,
+          "explication": "5 × 5, 25."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "stmg-stats-mc-calculer",
+      "notionId": "stat_moindres_carres",
+      "microId": "statT_mc_calculer",
+      "classe": "stmg",
+      "ceinture": "verte",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/statistiques/28-mc-calculer/eleveai-maths-stmg-stats-mc-calculer.mp4",
+      "miniature": "stmg/maths/statistiques/28-mc-calculer/eleveai-maths-stmg-stats-mc-calculer.png",
+      "titre": "Naissances : la droite colle-t-elle ? — Somme des carrés des écarts — épisode 28 · Maths STMG",
+      "accroche": "Un sage-femme dirige une maternité. Pour prévoir ses lits, il suit les naissances en France, publiées par l'Insee : 784 milliers en 2016, 770 en 2017, 759 en 2018, et 753 en 2019. Un stagiaire propose une droite : est-elle bonne ?\n\nDans cette vidéo :\n• la valeur prévue : je remplace x dans y = −10x + 793\n• l'écart : observé moins prévu, toujours dans cet ordre\n• les carrés 1, 9, 16 et 0 : la somme vaut 26\n• le piège : oublier les carrés, et (−3)² = +9\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une collègue propose y = −11x + 794 : calcule sa somme des carrés des écarts. Laquelle des deux droites colle le mieux ?\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/stmg/stat-moindres-carres\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=stat_moindres_carres&microId=statT_mc_calculer&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Un seul nombre pour juger une droite"
+        ],
+        [
+          "00:30",
+          "La droite du stagiaire"
+        ],
+        [
+          "00:46",
+          "La valeur prévue"
+        ],
+        [
+          "01:03",
+          "L'écart : observé moins prévu"
+        ],
+        [
+          "01:19",
+          "Question : l'écart de 2018"
+        ],
+        [
+          "01:53",
+          "Les carrés, et leur somme"
+        ],
+        [
+          "02:11",
+          "Le piège : oublier les carrés"
+        ],
+        [
+          "02:26",
+          "Question : quel point pèse le plus ?"
+        ],
+        [
+          "02:56",
+          "Question : une autre somme"
+        ],
+        [
+          "03:24",
+          "À toi de jouer"
+        ],
+        [
+          "03:43",
+          "Correction"
+        ],
+        [
+          "04:08",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "somme des carrés des écarts",
+        "moindres carrés",
+        "écart",
+        "naissances",
+        "Insee",
+        "maternité",
+        "sage-femme",
+        "statistiques",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:19",
+          "question": "En 2018, on a observé 759 et prévu 763. Quel est l'écart ?",
+          "choix": [
+            "−4",
+            "+4",
+            "16"
+          ],
+          "reponse": 0,
+          "explication": "759 − 763 = −4, sous la droite."
+        },
+        {
+          "t": "02:26",
+          "question": "Quel point pèse le plus dans cette somme ?",
+          "choix": [
+            "2016",
+            "2017",
+            "2018"
+          ],
+          "reponse": 2,
+          "explication": "2018, carré 16."
+        },
+        {
+          "t": "02:56",
+          "question": "Pour une autre droite, les écarts sont 2, −1 et −2. Quelle est la somme des carrés ?",
+          "choix": [
+            "−1",
+            "9",
+            "5"
+          ],
+          "reponse": 1,
+          "explication": "4 + 1 + 4 = 9."
+        }
+      ],
+      "centres": [
+        "corps-sante"
+      ]
+    },
+    {
+      "id": "stmg-stats-mc-calculer-short",
+      "notionId": "stat_moindres_carres",
+      "microId": "statT_mc_calculer",
+      "classe": "stmg",
+      "ceinture": "orange",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-stats-mc-calculer",
+      "fichier": "stmg/maths/statistiques/28-mc-calculer/eleveai-maths-stmg-stats-mc-calculer-short.mp4",
+      "miniature": "stmg/maths/statistiques/28-mc-calculer/eleveai-maths-stmg-stats-mc-calculer-short.png",
+      "titre": "Quel écart pèse le plus dans la somme des carrés ? 🧮 — STMG #Shorts",
+      "accroche": "Quatre points, une droite. Les écarts : +1, −3, −4 et 0. Lequel pèse le plus ? Au carré, ils deviennent 1, 9, 16 et 0. Le −4 pèse 16 à lui seul : plus de la moitié de la somme, 26 !\n\n🥋 Ceinture orange.\n👉 À toi : les écarts sont 2, −2, 1 et 0. Quelle est la somme des carrés ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=stat_moindres_carres&microId=statT_mc_calculer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #STMG #lycée",
+      "tags": [
+        "somme des carrés",
+        "écarts",
+        "moindres carrés",
+        "carré d'un nombre",
+        "statistiques",
+        "maths",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture orange",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:20",
+          "question": "Un écart de −3, au carré, ça fait ?",
+          "choix": [
+            "−9",
+            "9",
+            "−6"
+          ],
+          "reponse": 1,
+          "explication": "Un carré n'est jamais négatif."
+        }
+      ],
+      "centres": [
+        "corps-sante"
+      ]
+    },
+    {
+      "id": "stmg-stats-mc-comparer",
+      "notionId": "stat_moindres_carres",
+      "microId": "statT_mc_comparer",
+      "classe": "stmg",
+      "ceinture": "verte",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/statistiques/29-mc-comparer/eleveai-maths-stmg-stats-mc-comparer.mp4",
+      "miniature": "stmg/maths/statistiques/29-mc-comparer/eleveai-maths-stmg-stats-mc-comparer.png",
+      "titre": "Aéroports de Paris : quelle droite garder ? — Comparer deux ajustements — épisode 29 · Maths STMG",
+      "accroche": "Une analyste du trafic aérien prépare l'avenir des aéroports de Paris. Le Groupe ADP y a compté 95,4 millions de passagers en 2015, puis 97,2, 101,5, 105,3, et 108 millions en 2019. Deux droites passent tout près du nuage : laquelle garder ?\n\nDans cette vidéo :\n• le juge : la somme des carrés des écarts, calculée au tableur\n• D1 : 1,54 ; D2 : 1,91 ; la plus petite somme gagne\n• un seul grand écart fait perdre D2 : −1,3 pèse 1,69\n• le point aberrant de 2020 : un carré d'environ 6 115, qui se discute avant de se calculer\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une troisième droite, D3, a pour écarts 0,4, −0,8, 0,5, 1,3 et 1 : calcule sa somme des carrés. Fait-elle mieux que D1 ?\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/stmg/stat-moindres-carres\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=stat_moindres_carres&microId=statT_mc_comparer&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Deux droites : laquelle garder ?"
+        ],
+        [
+          "00:27",
+          "Les deux droites proposées"
+        ],
+        [
+          "00:53",
+          "Au tableur : la somme pour D1"
+        ],
+        [
+          "01:19",
+          "La somme pour D2"
+        ],
+        [
+          "01:41",
+          "Question : la meilleure droite"
+        ],
+        [
+          "02:16",
+          "La règle : la plus petite somme"
+        ],
+        [
+          "02:33",
+          "2020 : un point aberrant"
+        ],
+        [
+          "02:52",
+          "Question : avec ce sixième point"
+        ],
+        [
+          "03:26",
+          "Le piège : calculer sans réfléchir"
+        ],
+        [
+          "03:42",
+          "À toi de jouer"
+        ],
+        [
+          "04:07",
+          "Correction"
+        ],
+        [
+          "04:28",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "moindres carrés",
+        "somme des carrés des écarts",
+        "comparer",
+        "point aberrant",
+        "tableur",
+        "trafic aérien",
+        "aéroports de Paris",
+        "analyste",
+        "statistiques",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:41",
+          "question": "Quelle droite ajuste le mieux le nuage ?",
+          "choix": [
+            "D1, somme 1,54",
+            "D2, somme 1,91",
+            "aucune, trop proches"
+          ],
+          "reponse": 0,
+          "explication": "La plus petite somme gagne."
+        },
+        {
+          "t": "02:52",
+          "question": "Avec ce sixième point, la somme des carrés de D1…",
+          "choix": [
+            "change à peine",
+            "diminue",
+            "explose, plus de 6 116"
+          ],
+          "reponse": 2,
+          "explication": "Un grand écart pèse énormément."
+        }
+      ],
+      "centres": [
+        "transports"
+      ]
+    },
+    {
+      "id": "stmg-stats-mc-comparer-short",
+      "notionId": "stat_moindres_carres",
+      "microId": "statT_mc_comparer",
+      "classe": "stmg",
+      "ceinture": "orange",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-stats-mc-comparer",
+      "fichier": "stmg/maths/statistiques/29-mc-comparer/eleveai-maths-stmg-stats-mc-comparer-short.mp4",
+      "miniature": "stmg/maths/statistiques/29-mc-comparer/eleveai-maths-stmg-stats-mc-comparer-short.png",
+      "titre": "2020 aux aéroports de Paris : un seul point écrase tout ✈️ — STMG #Shorts",
+      "accroche": "Cinq années de passagers aux aéroports de Paris : la droite colle, sa somme des carrés ne fait que 1,54. Arrive 2020 : 33,1 millions seulement. L'écart : −78,2. Au carré : environ 6 115 ! Un seul point écrase tout.\n\n🥋 Ceinture orange.\n👉 À toi : un écart de −10. Combien pèse-t-il dans la somme des carrés ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=stat_moindres_carres&microId=statT_mc_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #STMG #lycée",
+      "tags": [
+        "moindres carrés",
+        "point aberrant",
+        "aéroport",
+        "avion",
+        "statistiques",
+        "maths",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture orange",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:22",
+          "question": "Deux droites : l'une a une somme de 1,54, l'autre de 1,91. Laquelle garder ?",
+          "choix": [
+            "1,54",
+            "1,91",
+            "peu importe"
+          ],
+          "reponse": 0,
+          "explication": "La plus petite somme gagne."
+        }
+      ],
+      "centres": [
+        "transports"
+      ]
+    },
+    {
+      "id": "stmg-stats-cv-appliquer",
+      "notionId": "stat_changement_variable",
+      "microId": "statT_cv_appliquer",
+      "classe": "stmg",
+      "ceinture": "verte",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/statistiques/30-cv-appliquer/eleveai-maths-stmg-stats-cv-appliquer.mp4",
+      "miniature": "stmg/maths/statistiques/30-cv-appliquer/eleveai-maths-stmg-stats-cv-appliquer.png",
+      "titre": "Taxi : pourquoi le kilomètre baisse-t-il ? — Changement de variable — épisode 30 · Maths STMG",
+      "accroche": "Un contrôleur de gestion travaille pour une compagnie de taxis. Il étudie le prix d'une course, au kilomètre. En 2026, le tarif maximal est de 4,48 euros de prise en charge, plus 1,30 euro par kilomètre : 2,42 euros le kilomètre pour 4 kilomètres, 1,48 euro pour 25.\n\nDans cette vidéo :\n• un nuage courbe : pas de droite possible\n• une part fixe partagée varie comme 1/x : je pose z = 1/x\n• je calcule z case par case, 0,25, 0,2, 0,125, 0,1… et le nuage s'aligne\n• choisir d'après la situation, 1/x, x² ou log(y) ; et x², ce n'est pas 2x\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : pour une course de 16 kilomètres, calcule z = 1/x. Pour un carré de côté 1,5 mètre, calcule u = x².\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/stmg/stat-changement-variable\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=stat_changement_variable&microId=statT_cv_appliquer&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Redresser un nuage courbe"
+        ],
+        [
+          "00:26",
+          "Le prix du kilomètre en taxi"
+        ],
+        [
+          "00:48",
+          "L'idée : z = 1/x"
+        ],
+        [
+          "01:03",
+          "Calculer z, case par case"
+        ],
+        [
+          "01:22",
+          "Question : une course de 20 km"
+        ],
+        [
+          "01:52",
+          "Le nuage redressé"
+        ],
+        [
+          "02:07",
+          "Quel changement de variable ?"
+        ],
+        [
+          "02:26",
+          "Question : le car scolaire"
+        ],
+        [
+          "02:57",
+          "Le piège : x², ce n'est pas 2x"
+        ],
+        [
+          "03:11",
+          "À toi de jouer"
+        ],
+        [
+          "03:27",
+          "Correction"
+        ],
+        [
+          "03:40",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "changement de variable",
+        "nuage de points",
+        "fonction inverse",
+        "carré",
+        "logarithme",
+        "taxi",
+        "prix",
+        "contrôleur de gestion",
+        "statistiques",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:22",
+          "question": "Pour une course de 20 kilomètres, que vaut z ?",
+          "choix": [
+            "20",
+            "0,05",
+            "400"
+          ],
+          "reponse": 1,
+          "explication": "1 ÷ 20 ; 400 = x²."
+        },
+        {
+          "t": "02:26",
+          "question": "Le coût d'un car scolaire se partage entre les élèves. Quel changement de variable choisir ?",
+          "choix": [
+            "z = 1/x",
+            "u = x²",
+            "z = log(y)"
+          ],
+          "reponse": 0,
+          "explication": "Un coût fixe partagé varie comme 1/x."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "transports"
+      ]
+    },
+    {
+      "id": "stmg-stats-cv-appliquer-short",
+      "notionId": "stat_changement_variable",
+      "microId": "statT_cv_appliquer",
+      "classe": "stmg",
+      "ceinture": "orange",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-stats-cv-appliquer",
+      "fichier": "stmg/maths/statistiques/30-cv-appliquer/eleveai-maths-stmg-stats-cv-appliquer-short.mp4",
+      "miniature": "stmg/maths/statistiques/30-cv-appliquer/eleveai-maths-stmg-stats-cv-appliquer-short.png",
+      "titre": "En taxi, pourquoi le kilomètre coûte moins cher sur une longue course ? 🚕 — STMG #Shorts",
+      "accroche": "En taxi, le kilomètre coûte 2,42 euros pour une course de 4 kilomètres, mais 1,48 euro pour 25 kilomètres. Pourquoi ? La prise en charge, 4,48 euros, se partage entre les kilomètres ! Le nuage est courbe… mais avec z = 1/x, il devient tout droit.\n\n🥋 Ceinture orange.\n👉 À toi : pour une course de 8 kilomètres, que vaut z = 1/x ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=stat_changement_variable&microId=statT_cv_appliquer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #STMG #lycée",
+      "tags": [
+        "changement de variable",
+        "taxi",
+        "prix",
+        "fonction inverse",
+        "statistiques",
+        "maths",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture orange",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:24",
+          "question": "Pour 10 kilomètres, que vaut z ?",
+          "choix": [
+            "0,1",
+            "10",
+            "100"
+          ],
+          "reponse": 0,
+          "explication": "1 ÷ 10."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "transports"
+      ]
+    },
+    {
+      "id": "stmg-stats-cv-lire",
+      "notionId": "stat_changement_variable",
+      "microId": "statT_cv_lire",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/statistiques/31-cv-lire/eleveai-maths-stmg-stats-cv-lire.mp4",
+      "miniature": "stmg/maths/statistiques/31-cv-lire/eleveai-maths-stmg-stats-cv-lire.png",
+      "titre": "Loi de Moore : + 40 % de transistors par an — Lire un nuage transformé — épisode 31 · Maths STMG",
+      "accroche": "Une ingénieure en microélectronique conçoit des puces. Elle étudie la loi de Moore : le nombre de transistors dans un processeur Intel, 2 300 en 1971, 291 millions en 2006. Le nuage reste écrasé au sol, puis s'envole.\n\nDans cette vidéo :\n• avec z = log(y), le nuage devient presque aligné\n• conclure : log(y) est affine, donc y est exponentiel\n• la droite z = 0,145x + 3,248 : quand x augmente de 1, z augmente de 0,145\n• le piège : la pente n'est pas une hausse de 14,5 %, y est multiplié par 10 puissance 0,145, environ 1,40\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : en 2 ans, de combien z augmente-t-il ? Par combien y est-il alors multiplié ?\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/stmg/stat-changement-variable\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=stat_changement_variable&microId=statT_cv_lire&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Que dit un nuage transformé ?"
+        ],
+        [
+          "00:26",
+          "Le nuage des transistors"
+        ],
+        [
+          "00:40",
+          "Avec z = log(y)"
+        ],
+        [
+          "00:55",
+          "Lire le nuage : y est exponentiel"
+        ],
+        [
+          "01:12",
+          "Question : que conjecturer ?"
+        ],
+        [
+          "01:45",
+          "La droite du nuage transformé"
+        ],
+        [
+          "02:02",
+          "Le facteur annuel : 1,40"
+        ],
+        [
+          "02:15",
+          "Question : par combien chaque année ?"
+        ],
+        [
+          "02:52",
+          "Le piège : la pente de z"
+        ],
+        [
+          "03:05",
+          "À toi de jouer"
+        ],
+        [
+          "03:19",
+          "Correction"
+        ],
+        [
+          "03:39",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "changement de variable",
+        "logarithme",
+        "exponentielle",
+        "nuage transformé",
+        "loi de Moore",
+        "transistors",
+        "ingénieure en microélectronique",
+        "statistiques",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:12",
+          "question": "Le nuage x, log(y) est aligné. Que peut-on conjecturer ?",
+          "choix": [
+            "y affine",
+            "y × le même nombre chaque année",
+            "y = a/x + b"
+          ],
+          "reponse": 1,
+          "explication": "C'est log(y) qui est affine."
+        },
+        {
+          "t": "02:15",
+          "question": "Avec cette pente de 0,145, par combien y est-il multiplié chaque année ?",
+          "choix": [
+            "0,145",
+            "1,145",
+            "1,40"
+          ],
+          "reponse": 2,
+          "explication": "10 puissance 0,145."
+        }
+      ],
+      "centres": [
+        "technologie-ia",
+        "sciences"
+      ]
+    },
+    {
+      "id": "stmg-stats-cv-lire-short",
+      "notionId": "stat_changement_variable",
+      "microId": "statT_cv_lire",
+      "classe": "stmg",
+      "ceinture": "verte",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-stats-cv-lire",
+      "fichier": "stmg/maths/statistiques/31-cv-lire/eleveai-maths-stmg-stats-cv-lire-short.mp4",
+      "miniature": "stmg/maths/statistiques/31-cv-lire/eleveai-maths-stmg-stats-cv-lire-short.png",
+      "titre": "La loi de Moore : des transistors qui s'envolent 💻 — STMG #Shorts",
+      "accroche": "2 300 transistors en 1971. 291 millions en 2006. Sur un graphique ordinaire, la courbe s'envole d'un coup. Mais avec z = log(y), les points s'alignent ! Une droite, donc le même facteur chaque année : environ 1,40.\n\n🥋 Ceinture verte.\n👉 À toi : si y est multiplié par 2 tous les deux ans, par combien est-il multiplié en 10 ans ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=stat_changement_variable&microId=statT_cv_lire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #STMG #lycée",
+      "tags": [
+        "loi de Moore",
+        "logarithme",
+        "exponentielle",
+        "transistors",
+        "statistiques",
+        "maths",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture verte",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:22",
+          "question": "Le nuage x, log(y) est aligné. y est donc…",
+          "choix": [
+            "affine",
+            "exponentiel",
+            "constant"
+          ],
+          "reponse": 1,
+          "explication": "C'est log(y) qui est affine."
+        }
+      ],
+      "centres": [
+        "technologie-ia",
+        "sciences"
+      ]
+    },
+    {
+      "id": "stmg-stats-cv-revenir",
+      "notionId": "stat_changement_variable",
+      "microId": "statT_cv_revenir",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/statistiques/32-cv-revenir/eleveai-maths-stmg-stats-cv-revenir.mp4",
+      "miniature": "stmg/maths/statistiques/32-cv-revenir/eleveai-maths-stmg-stats-cv-revenir.png",
+      "titre": "Afrique 2030 : défaire le logarithme — Revenir aux variables de départ — épisode 32 · Maths STMG",
+      "accroche": "Un urbaniste prépare des écoles et des logements pour les villes d'Afrique. Selon l'ONU, le continent comptait 284 millions d'habitants en 1960, et 1 381 millions en 2020. La population est multipliée à peu près par le même nombre à chaque décennie.\n\nDans cette vidéo :\n• l'ajustement du nuage transformé, z = 0,115x + 2,454, donne z, pas la population\n• étape 1 : je calcule z ; pour 2030, z = 3,259\n• étape 2 : je reviens à y, y = 10 puissance z, environ 1 816 millions\n• le piège : écrire 10 × z, et trouver 32,59 millions\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : avec le même modèle, prévois la population de l'Afrique en 2040, pour x = 8.\n\nPour s'entraîner :\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/stmg/stat-changement-variable\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=stat_changement_variable&microId=statT_cv_revenir&display=simple\n\n📊 Cette vidéo fait partie de la série Statistiques d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Prévoir la vraie valeur"
+        ],
+        [
+          "00:24",
+          "L'Afrique, décennie par décennie"
+        ],
+        [
+          "00:42",
+          "La droite donne z, pas y"
+        ],
+        [
+          "00:57",
+          "Étape 1 : calculer z"
+        ],
+        [
+          "01:12",
+          "Question : z pour 2030"
+        ],
+        [
+          "01:45",
+          "Étape 2 : revenir à y"
+        ],
+        [
+          "02:01",
+          "Le piège : 10 × z"
+        ],
+        [
+          "02:18",
+          "Question : que vaut y ?"
+        ],
+        [
+          "02:54",
+          "Et l'ONU ?"
+        ],
+        [
+          "03:06",
+          "À toi de jouer"
+        ],
+        [
+          "03:20",
+          "Correction"
+        ],
+        [
+          "03:42",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "changement de variable",
+        "logarithme",
+        "puissance de 10",
+        "prévision",
+        "population",
+        "Afrique",
+        "ONU",
+        "urbaniste",
+        "statistiques",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:12",
+          "question": "Pour x = 7, combien vaut z ?",
+          "choix": [
+            "3,259",
+            "0,805",
+            "2,569"
+          ],
+          "reponse": 0,
+          "explication": "B oublie b, C oublie × 7."
+        },
+        {
+          "t": "02:18",
+          "question": "On a trouvé z = 3,259. Que vaut y ?",
+          "choix": [
+            "32,59",
+            "environ 1 816",
+            "log(3,259)"
+          ],
+          "reponse": 1,
+          "explication": "10 puissance z, pas 10 × z."
+        }
+      ],
+      "centres": [
+        "histoire-geographie"
+      ]
+    },
+    {
+      "id": "stmg-stats-cv-revenir-short",
+      "notionId": "stat_changement_variable",
+      "microId": "statT_cv_revenir",
+      "classe": "stmg",
+      "ceinture": "verte",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-stats-cv-revenir",
+      "fichier": "stmg/maths/statistiques/32-cv-revenir/eleveai-maths-stmg-stats-cv-revenir-short.mp4",
+      "miniature": "stmg/maths/statistiques/32-cv-revenir/eleveai-maths-stmg-stats-cv-revenir-short.png",
+      "titre": "L'Afrique en 2030 : combien d'habitants ? 🌍 — STMG #Shorts",
+      "accroche": "Afrique, 2030 : le modèle donne z = 3,259, avec z = log(y). Combien d'habitants ? 10 × 3,259 ? 32,59 millions : absurde ! Il faut 10 puissance 3,259 : environ 1 816 millions.\n\n🥋 Ceinture verte.\n👉 À toi : z = 3, avec z = log(y). Que vaut y ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=stat_changement_variable&microId=statT_cv_revenir&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #statistiques #STMG #lycée",
+      "tags": [
+        "logarithme",
+        "puissance de 10",
+        "Afrique",
+        "population",
+        "statistiques",
+        "maths",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture verte",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:24",
+          "question": "z = 2, avec z = log(y). Que vaut y ?",
+          "choix": [
+            "20",
+            "100",
+            "2"
+          ],
+          "reponse": 1,
+          "explication": "10 puissance 2, 100."
+        }
+      ],
+      "centres": [
+        "histoire-geographie"
+      ]
     }
   ]
 }

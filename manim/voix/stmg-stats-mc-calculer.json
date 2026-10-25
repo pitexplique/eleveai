@@ -1,0 +1,19 @@
+{
+  "00-garde": "Calculer la somme des carrés des écarts. Comment dire, avec un seul nombre, si une droite colle bien à un nuage ?",
+  "01-situation": "Un sage-femme dirige une maternité. Pour prévoir ses lits, il suit les naissances en France, publiées par l'Insee : 784 milliers en 2016, 770 en 2017, 759 en 2018, et 753 en 2019.",
+  "02-droite": "Un stagiaire propose la droite y égale moins 10 x plus 793, avec x, le rang de l'année, de 1 à 4. Est-elle bonne ? On calcule sa somme des carrés des écarts, colonne par colonne.",
+  "03-prevu": "D'abord, la valeur prévue. Pour x égale 1 : moins 10 fois 1, plus 793, cela donne 783. Puis 773, 763 et 753.",
+  "04-ecart": "Ensuite, l'écart : observé moins prévu, toujours dans cet ordre. 784 moins 783 : plus 1. 770 moins 773 : moins 3.",
+  "05-question": "Question ! En 2018, on a observé 759 et prévu 763. Quel est l'écart ? A : moins 4. B : plus 4. C : 16. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. Observé moins prévu : 759 moins 763, moins 4. Le point est sous la droite.",
+  "06-carres": "En 2019 : 753 moins 753, 0 : le point est sur la droite. Enfin, j'élève chaque écart au carré : 1, 9, 16 et 0. Puis j'additionne : la somme des carrés des écarts vaut 26.",
+  "07-piege": "Le piège : oublier les carrés. 1, moins 3, moins 4 et 0 font moins 6 : un nombre négatif ne mesure rien. Autre piège : moins 3 au carré fait plus 9, pas moins 9.",
+  "08-question": "Question ! Quel point pèse le plus dans cette somme ? A : 2016. B : 2017. C : 2018. Mets pause, et choisis !",
+  "08b-reponse": "Réponse C : 2018, avec un carré de 16. Son écart, moins 4, est le plus grand, en dessous comme au-dessus.",
+  "09-question": "Question ! Pour une autre droite, les écarts sont 2, moins 1 et moins 2. Quelle est la somme des carrés ? A : moins 1. B : 9. C : 5. Mets pause, et choisis !",
+  "09b-reponse": "Réponse B : 4 plus 1 plus 4, 9. Moins 1 oublie les carrés ; 5 additionne les écarts sans leur signe.",
+  "10-defi": "À toi de jouer ! Une collègue propose la droite y égale moins 11 x plus 794. Calcule sa somme des carrés des écarts. Laquelle des deux droites colle le mieux ? Mets pause, et cherche !",
+  "10b-correction": "Correction. Prévu : 783, 772, 761 et 750. Écarts : plus 1, moins 2, moins 2 et plus 3. Carrés : 1, 4, 4 et 9. Somme : 18. 18 est plus petit que 26 : la droite de la collègue colle mieux.",
+  "11-finale": "Ce que tu as appris. Pour chaque point, je calcule la valeur prévue, puis l'écart : observé moins prévu. J'élève chaque écart au carré, et j'additionne. Plus la somme est petite, mieux la droite colle au nuage.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

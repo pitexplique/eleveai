@@ -1,0 +1,7 @@
+{
+  "00-accroche": "La France, un relevé tous les 5 ans : 60,5 millions d'habitants en 2000, 67,4 millions en 2020. Et en 2012 ?",
+  "01-image": "La droite, entre les points : en 2012, environ 65 millions. Le vrai chiffre de l'Insee : 65,2 ! Bien vu.",
+  "02-question": "Question ! Interpoler, c'est estimer une valeur… A : entre les relevés. B : après le dernier relevé. C : avant le premier. Mets pause, et choisis !",
+  "02b-reponse": "A ! Entre les relevés : c'est là que l'estimation est la plus sûre.",
+  "03-question": "À toi : avec y égale 0,35 x plus 60,8, et x le nombre d'années depuis 2000, combien d'habitants en 2007 ? Réponds en commentaire !"
+}

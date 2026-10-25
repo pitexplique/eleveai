@@ -1,0 +1,7 @@
+{
+  "00-accroche": "Les éoliennes de France : 13,5 gigawatts en 2017, 22,5 en 2023. La droite d'ajustement : y égale 1,5 x plus 11,8, avec x le rang de l'année.",
+  "01-image": "En 2024, au rang 8, que prévoit-elle ? Je remplace x par 8, je monte jusqu'à la droite, je file vers l'axe.",
+  "02-question": "Question ! 1,5 fois 8, plus 11,8, ça fait… A : 23,8. B : 21,3. C : 29,7. Mets pause, et choisis !",
+  "02b-reponse": "A ! 12 plus 11,8 : 23,8. Et en vrai, fin 2024, le parc a dépassé 24 gigawatts !",
+  "03-question": "À toi : en quelle année la droite dépassera-t-elle 30 gigawatts ? Réponds en commentaire !"
+}

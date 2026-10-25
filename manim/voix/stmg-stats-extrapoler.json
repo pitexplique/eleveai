@@ -1,0 +1,17 @@
+{
+  "00-garde": "Extrapoler : prolonger la tendance au-delà des relevés. Jusqu'où peut-on prévoir ?",
+  "01-situation": "Un responsable des ventes chez un constructeur automobile doit choisir quels moteurs produire. Sa question : la part du diesel dans les voitures neuves va-t-elle continuer de baisser ?",
+  "02-donnees": "D'après le comité des constructeurs français : 73 % des voitures neuves étaient diesel en 2012, 52,1 % en 2016, 39 % en 2018, 34,1 % en 2019 et 30,6 % en 2020. En abscisse, le nombre d'années depuis 2012. La droite d'ajustement : y égale moins 5,5 x plus 73.",
+  "03-extrapoler": "Que prévoir pour 2024 ? Les relevés s'arrêtent en 2020 : 2024 est au-delà. Prolonger la droite au-delà des données, c'est extrapoler. En 2024, x vaut 12. Moins 5,5 fois 12, moins 66, plus 73 : 7 %.",
+  "04-verifier": "Et en vrai ? En 2024, le diesel ne représentait plus que 7 % des voitures neuves. Prévision réussie ! Mais 4 ans après le dernier relevé, c'était un pari plus risqué qu'une interpolation.",
+  "05-question": "Question ! Les relevés vont de 2012 à 2020. Laquelle de ces prévisions est une extrapolation ? A : la part du diesel en 2015. B : la part du diesel en 2023. C : la part du diesel en 2019. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 2023 est après le dernier relevé : on prolonge la tendance. 2015 est entre les relevés, et 2019 en est un.",
+  "06-seuil": "Autre question d'entreprise : à partir de quelle année le modèle prévoit-il moins de 10 % ? Je cherche quand la droite vaut 10 : moins 5,5 x plus 73 égale 10, donc x égale 63 divisé par 5,5, environ 11,5. La droite descend : elle passe sous 10 juste après. Le premier rang entier est 12 : en 2024.",
+  "07-piege": "Le piège : prolonger trop loin. Pour 2030, x vaut 18. Moins 5,5 fois 18, moins 99, plus 73 : moins 26 % ! Un pourcentage négatif, c'est impossible. Plus on s'éloigne des relevés, moins on peut croire la droite.",
+  "08-question": "Question ! Le modèle annonce moins 26 % de diesel en 2030. Que conclure ? A : le calcul est faux. B : on est allé trop loin, la droite ne vaut plus. C : il y aura moins de zéro voiture diesel. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. Le calcul est juste : c'est le modèle qui ne tient plus, si loin des données.",
+  "09-defi": "À toi de jouer ! Un : que prévoit la droite pour 2022 ? Deux : à partir de quelle année entière la droite annonce-t-elle un pourcentage négatif ? Mets pause, et cherche !",
+  "09b-correction": "Correction. Un : x vaut 10. Moins 55, plus 73 : 18 %. Deux : la droite atteint 0 pour x égale 73 divisé par 5,5, environ 13,3. Dès le rang 14, en 2026, elle annonce moins 4 % : impossible.",
+  "10-finale": "Ce que tu as appris. Extrapoler, c'est prolonger la droite au-delà des relevés, avant le premier ou après le dernier. Le calcul est le même : je remplace x. Mais la confiance baisse avec la distance, et un résultat impossible montre qu'on est allé trop loin.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

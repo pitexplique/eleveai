@@ -8743,6 +8743,78 @@
   "youtube": null,
   "coach": "/coach/serie?classe=stmg&matiere=maths&notion=va_loi_probabilite&microId=va_ecritures&display=simple"
  },
+ "stmg-stats-ajust-au-juge": {
+  "fichier": "stmg/maths/statistiques/21-ajust-au-juge/eleveai-maths-stmg-stats-ajust-au-juge.mp4",
+  "poster": "stmg/maths/statistiques/21-ajust-au-juge/eleveai-maths-stmg-stats-ajust-au-juge.png",
+  "vignette": null,
+  "titre": "Achats en ligne : où poser la règle ? — Droite d'ajustement au jugé — épisode 21 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=stat_ajustement&microId=statT_ajust_au_juge&display=simple"
+ },
+ "stmg-stats-ajust-au-juge-short": {
+  "fichier": "stmg/maths/statistiques/21-ajust-au-juge/eleveai-maths-stmg-stats-ajust-au-juge-short.mp4",
+  "poster": "stmg/maths/statistiques/21-ajust-au-juge/eleveai-maths-stmg-stats-ajust-au-juge-short.png",
+  "vignette": null,
+  "titre": "Où poser la règle sur ce nuage ? 📏 — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=stat_ajustement&microId=statT_ajust_au_juge&display=simple"
+ },
+ "stmg-stats-ajust-calculer": {
+  "fichier": "stmg/maths/statistiques/23-ajust-calculer/eleveai-maths-stmg-stats-ajust-calculer.mp4",
+  "poster": "stmg/maths/statistiques/23-ajust-calculer/eleveai-maths-stmg-stats-ajust-calculer.png",
+  "vignette": null,
+  "titre": "Éoliennes : quelle puissance en 2026 ? — Calculer avec un ajustement — épisode 23 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=stat_ajustement&microId=statT_ajust_calculer&display=simple"
+ },
+ "stmg-stats-ajust-calculer-short": {
+  "fichier": "stmg/maths/statistiques/23-ajust-calculer/eleveai-maths-stmg-stats-ajust-calculer-short.mp4",
+  "poster": "stmg/maths/statistiques/23-ajust-calculer/eleveai-maths-stmg-stats-ajust-calculer-short.png",
+  "vignette": null,
+  "titre": "Les éoliennes en 2024 : que prévoit la droite ? 🌬️ — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=stat_ajustement&microId=statT_ajust_calculer&display=simple"
+ },
+ "stmg-stats-ajust-equation": {
+  "fichier": "stmg/maths/statistiques/22-ajust-equation/eleveai-maths-stmg-stats-ajust-equation.mp4",
+  "poster": "stmg/maths/statistiques/22-ajust-equation/eleveai-maths-stmg-stats-ajust-equation.png",
+  "vignette": null,
+  "titre": "Espérance de vie : 0,22 an par an — Équation d'une droite d'ajustement — épisode 22 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=stat_ajustement&microId=statT_ajust_equation&display=simple"
+ },
+ "stmg-stats-ajust-equation-short": {
+  "fichier": "stmg/maths/statistiques/22-ajust-equation/eleveai-maths-stmg-stats-ajust-equation-short.mp4",
+  "poster": "stmg/maths/statistiques/22-ajust-equation/eleveai-maths-stmg-stats-ajust-equation-short.png",
+  "vignette": null,
+  "titre": "Espérance de vie : combien d'années de plus chaque année ? ⏳ — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=stat_ajustement&microId=statT_ajust_equation&display=simple"
+ },
+ "stmg-stats-ajust-pertinence": {
+  "fichier": "stmg/maths/statistiques/20-ajust-pertinence/eleveai-maths-stmg-stats-ajust-pertinence.mp4",
+  "poster": "stmg/maths/statistiques/20-ajust-pertinence/eleveai-maths-stmg-stats-ajust-pertinence.png",
+  "vignette": null,
+  "titre": "Spotify ou voiture électrique : une droite ? — Ajustement pertinent ? — épisode 20 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=stat_ajustement&microId=statT_ajust_pertinence&display=simple"
+ },
+ "stmg-stats-ajust-pertinence-short": {
+  "fichier": "stmg/maths/statistiques/20-ajust-pertinence/eleveai-maths-stmg-stats-ajust-pertinence-short.mp4",
+  "poster": "stmg/maths/statistiques/20-ajust-pertinence/eleveai-maths-stmg-stats-ajust-pertinence-short.png",
+  "vignette": null,
+  "titre": "Spotify ou voiture électrique : lequel suit une droite ? 🎧 — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=stat_ajustement&microId=statT_ajust_pertinence&display=simple"
+ },
  "stmg-stats-boite": {
   "fichier": "stmg/maths/statistiques/03-boite/eleveai-maths-stmg-stats-boite.mp4",
   "poster": "stmg/maths/statistiques/03-boite/eleveai-maths-stmg-stats-boite.png",
@@ -8761,6 +8833,60 @@
   "youtube": null,
   "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_donnees_graphiques&microId=auto_stat_boite&display=simple"
  },
+ "stmg-stats-cv-appliquer": {
+  "fichier": "stmg/maths/statistiques/30-cv-appliquer/eleveai-maths-stmg-stats-cv-appliquer.mp4",
+  "poster": "stmg/maths/statistiques/30-cv-appliquer/eleveai-maths-stmg-stats-cv-appliquer.png",
+  "vignette": null,
+  "titre": "Taxi : pourquoi le kilomètre baisse-t-il ? — Changement de variable — épisode 30 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=stat_changement_variable&microId=statT_cv_appliquer&display=simple"
+ },
+ "stmg-stats-cv-appliquer-short": {
+  "fichier": "stmg/maths/statistiques/30-cv-appliquer/eleveai-maths-stmg-stats-cv-appliquer-short.mp4",
+  "poster": "stmg/maths/statistiques/30-cv-appliquer/eleveai-maths-stmg-stats-cv-appliquer-short.png",
+  "vignette": null,
+  "titre": "En taxi, pourquoi le kilomètre coûte moins cher sur une longue course ? 🚕 — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=stat_changement_variable&microId=statT_cv_appliquer&display=simple"
+ },
+ "stmg-stats-cv-lire": {
+  "fichier": "stmg/maths/statistiques/31-cv-lire/eleveai-maths-stmg-stats-cv-lire.mp4",
+  "poster": "stmg/maths/statistiques/31-cv-lire/eleveai-maths-stmg-stats-cv-lire.png",
+  "vignette": null,
+  "titre": "Loi de Moore : + 40 % de transistors par an — Lire un nuage transformé — épisode 31 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=stat_changement_variable&microId=statT_cv_lire&display=simple"
+ },
+ "stmg-stats-cv-lire-short": {
+  "fichier": "stmg/maths/statistiques/31-cv-lire/eleveai-maths-stmg-stats-cv-lire-short.mp4",
+  "poster": "stmg/maths/statistiques/31-cv-lire/eleveai-maths-stmg-stats-cv-lire-short.png",
+  "vignette": null,
+  "titre": "La loi de Moore : des transistors qui s'envolent 💻 — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=stat_changement_variable&microId=statT_cv_lire&display=simple"
+ },
+ "stmg-stats-cv-revenir": {
+  "fichier": "stmg/maths/statistiques/32-cv-revenir/eleveai-maths-stmg-stats-cv-revenir.mp4",
+  "poster": "stmg/maths/statistiques/32-cv-revenir/eleveai-maths-stmg-stats-cv-revenir.png",
+  "vignette": null,
+  "titre": "Afrique 2030 : défaire le logarithme — Revenir aux variables de départ — épisode 32 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=stat_changement_variable&microId=statT_cv_revenir&display=simple"
+ },
+ "stmg-stats-cv-revenir-short": {
+  "fichier": "stmg/maths/statistiques/32-cv-revenir/eleveai-maths-stmg-stats-cv-revenir-short.mp4",
+  "poster": "stmg/maths/statistiques/32-cv-revenir/eleveai-maths-stmg-stats-cv-revenir-short.png",
+  "vignette": null,
+  "titre": "L'Afrique en 2030 : combien d'habitants ? 🌍 — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=stat_changement_variable&microId=statT_cv_revenir&display=simple"
+ },
  "stmg-stats-diagrammes-usuels": {
   "fichier": "stmg/maths/statistiques/02-diagrammes-usuels/eleveai-maths-stmg-stats-diagrammes-usuels.mp4",
   "poster": "stmg/maths/statistiques/02-diagrammes-usuels/eleveai-maths-stmg-stats-diagrammes-usuels.png",
@@ -8778,6 +8904,24 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_donnees_graphiques&microId=auto_stat_diagrammes_usuels&display=simple"
+ },
+ "stmg-stats-extrapoler": {
+  "fichier": "stmg/maths/statistiques/25-extrapoler/eleveai-maths-stmg-stats-extrapoler.mp4",
+  "poster": "stmg/maths/statistiques/25-extrapoler/eleveai-maths-stmg-stats-extrapoler.png",
+  "vignette": null,
+  "titre": "Le diesel en 2024 : prévision réussie… et en 2030 ? — Extrapoler — épisode 25 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=stat_interpoler&microId=statT_extrapoler&display=simple"
+ },
+ "stmg-stats-extrapoler-short": {
+  "fichier": "stmg/maths/statistiques/25-extrapoler/eleveai-maths-stmg-stats-extrapoler-short.mp4",
+  "poster": "stmg/maths/statistiques/25-extrapoler/eleveai-maths-stmg-stats-extrapoler-short.png",
+  "vignette": null,
+  "titre": "Le diesel en 2024 : la droite avait-elle raison ? 🚗 — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=stat_interpoler&microId=statT_extrapoler&display=simple"
  },
  "stmg-stats-filtre-et": {
   "fichier": "stmg/maths/statistiques/14-filtre-et/eleveai-maths-stmg-stats-filtre-et.mp4",
@@ -8941,6 +9085,42 @@
   "youtube": null,
   "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_donnees_graphiques&microId=auto_stat_graphique_donnees&display=simple"
  },
+ "stmg-stats-interpoler": {
+  "fichier": "stmg/maths/statistiques/24-interpoler/eleveai-maths-stmg-stats-interpoler.mp4",
+  "poster": "stmg/maths/statistiques/24-interpoler/eleveai-maths-stmg-stats-interpoler.png",
+  "vignette": null,
+  "titre": "La France en 2012, sans relevé : interpolons ! — Interpoler — épisode 24 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=stat_interpoler&microId=statT_interpoler&display=simple"
+ },
+ "stmg-stats-interpoler-short": {
+  "fichier": "stmg/maths/statistiques/24-interpoler/eleveai-maths-stmg-stats-interpoler-short.mp4",
+  "poster": "stmg/maths/statistiques/24-interpoler/eleveai-maths-stmg-stats-interpoler-short.png",
+  "vignette": null,
+  "titre": "Combien d'habitants en France en 2012 ? 🗺️ — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=stat_interpoler&microId=statT_interpoler&display=simple"
+ },
+ "stmg-stats-limites": {
+  "fichier": "stmg/maths/statistiques/26-limites/eleveai-maths-stmg-stats-limites.mp4",
+  "poster": "stmg/maths/statistiques/26-limites/eleveai-maths-stmg-stats-limites.png",
+  "vignette": null,
+  "titre": "104,5 % de Français avec un smartphone ? — Limites d'une extrapolation — épisode 26 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=stat_interpoler&microId=statT_limites&display=simple"
+ },
+ "stmg-stats-limites-short": {
+  "fichier": "stmg/maths/statistiques/26-limites/eleveai-maths-stmg-stats-limites-short.mp4",
+  "poster": "stmg/maths/statistiques/26-limites/eleveai-maths-stmg-stats-limites-short.png",
+  "vignette": null,
+  "titre": "104,5 % de Français avec un smartphone ? 📱 — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=stat_interpoler&microId=statT_limites&display=simple"
+ },
  "stmg-stats-lire-graphique": {
   "fichier": "stmg/maths/statistiques/01-lire-graphique/eleveai-maths-stmg-stats-lire-graphique.mp4",
   "poster": "stmg/maths/statistiques/01-lire-graphique/eleveai-maths-stmg-stats-lire-graphique.png",
@@ -8958,6 +9138,60 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_donnees_graphiques&microId=auto_stat_lire_graphique&display=simple"
+ },
+ "stmg-stats-mc-calculer": {
+  "fichier": "stmg/maths/statistiques/28-mc-calculer/eleveai-maths-stmg-stats-mc-calculer.mp4",
+  "poster": "stmg/maths/statistiques/28-mc-calculer/eleveai-maths-stmg-stats-mc-calculer.png",
+  "vignette": null,
+  "titre": "Naissances : la droite colle-t-elle ? — Somme des carrés des écarts — épisode 28 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=stat_moindres_carres&microId=statT_mc_calculer&display=simple"
+ },
+ "stmg-stats-mc-calculer-short": {
+  "fichier": "stmg/maths/statistiques/28-mc-calculer/eleveai-maths-stmg-stats-mc-calculer-short.mp4",
+  "poster": "stmg/maths/statistiques/28-mc-calculer/eleveai-maths-stmg-stats-mc-calculer-short.png",
+  "vignette": null,
+  "titre": "Quel écart pèse le plus dans la somme des carrés ? 🧮 — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=stat_moindres_carres&microId=statT_mc_calculer&display=simple"
+ },
+ "stmg-stats-mc-comparer": {
+  "fichier": "stmg/maths/statistiques/29-mc-comparer/eleveai-maths-stmg-stats-mc-comparer.mp4",
+  "poster": "stmg/maths/statistiques/29-mc-comparer/eleveai-maths-stmg-stats-mc-comparer.png",
+  "vignette": null,
+  "titre": "Aéroports de Paris : quelle droite garder ? — Comparer deux ajustements — épisode 29 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=stat_moindres_carres&microId=statT_mc_comparer&display=simple"
+ },
+ "stmg-stats-mc-comparer-short": {
+  "fichier": "stmg/maths/statistiques/29-mc-comparer/eleveai-maths-stmg-stats-mc-comparer-short.mp4",
+  "poster": "stmg/maths/statistiques/29-mc-comparer/eleveai-maths-stmg-stats-mc-comparer-short.png",
+  "vignette": null,
+  "titre": "2020 aux aéroports de Paris : un seul point écrase tout ✈️ — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=stat_moindres_carres&microId=statT_mc_comparer&display=simple"
+ },
+ "stmg-stats-mc-principe": {
+  "fichier": "stmg/maths/statistiques/27-mc-principe/eleveai-maths-stmg-stats-mc-principe.mp4",
+  "poster": "stmg/maths/statistiques/27-mc-principe/eleveai-maths-stmg-stats-mc-principe.png",
+  "vignette": null,
+  "titre": "Des écarts nuls… et une très mauvaise droite ! — Les moindres carrés — épisode 27 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=stat_moindres_carres&microId=statT_mc_principe&display=simple"
+ },
+ "stmg-stats-mc-principe-short": {
+  "fichier": "stmg/maths/statistiques/27-mc-principe/eleveai-maths-stmg-stats-mc-principe-short.mp4",
+  "poster": "stmg/maths/statistiques/27-mc-principe/eleveai-maths-stmg-stats-mc-principe-short.png",
+  "vignette": null,
+  "titre": "Des écarts qui s'annulent : la meilleure droite ? 📉 — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=stat_moindres_carres&microId=statT_mc_principe&display=simple"
  },
  "stmg-stats-nuage-lire": {
   "fichier": "stmg/maths/statistiques/18-nuage-lire/eleveai-maths-stmg-stats-nuage-lire.mp4",
