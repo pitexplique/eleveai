@@ -31,11 +31,16 @@ Points à améliorer dans les lots : lignes de réponse qui arrivent 1 à 3 s ap
 - PAS ENCORE LANCÉ : lot 4e E (06-additionner, 07-multiplier, 08-inverse, 09-diviser).
 - Modèles pour tout nouveau lot : `manim/scripts/6e/frac_lotb_commun.py` (lignes au mot, correctif « Et 3 ») + `frac_comparer.py`, le pilote `frac_egale.py`, `frac_representer_short.py` (gâteau en 6).
 
-(Si la session précédente a fini ces lots, ils sont commités : `git log --oneline -10 -- manim/scripts/6e manim/scripts/4e`. Sinon, ce qui est rendu mais non commité est dans `git status --short manim`. Un rendu qui tourne encore : `tasklist | grep -i -E "manim|python"`, attends-le.)
+⛔ AGENTS ARRÊTÉS le 25/10 (limite de contexte), travail 4e NON COMMITÉ, à reprendre :
+- **6e 08-quantite, correction demandée par Frédéric** : « 60 ÷ 2 » s'affiche 1,5 s après « 60 » sur l'écran du piège → « 60 » au mot « 60 », « ÷ 2 » au mot « divisent par 2 » ; écarter les étiquettes « 25 » sous la barre (correction du défi). `manim/scripts/6e/frac_quantite.py` est MODIFIÉ (correction commencée, rendu HD interrompu) : relire le diff, finir, re-rendre, bords, commit.
+- **Lot 4e D** (base `manim/scripts/4e/frac_lotd_commun.py`) : 02-simplifier RENDU (paysage + short dans `manim/sorties/4e/maths/fractions/02-simplifier/`, à vérifier : bords, planche) ; 03-decimal scripts + voix écrits, pas rendu ; 01-egale script + voix, dry run interrompu ; 04-rationnel et 05-comparer pas commencés.
+- **Lot 4e F** (base `manim/scripts/4e/frac_lotf_commun.py`) : 10-quantite (script paysage + voix + marques ; short gâteau CARRÉ : voix + marques, script à écrire), 11-oppose et 12-defi (voix + marques seulement).
+- Les questions/centres des épisodes 4e ne sont pas encore dans `manim/questions-fractions.md` : les relever dans les scripts/voix.
+- Ne jamais committer les `*.cues.tsv` ni `media-*`.
 
 ## À faire, dans l'ordre
 1. Pour chaque lot non commité : vérifier ce qui existe (`manim/sorties/{6e,4e}/maths/fractions/*/`), `python scripts/verifier-bords-video.py <mp4>` → 0 instants, planche PyAV de 12 images sur 1 ou 2 vidéos par lot (écrans chargés : questions, corrections, « Ce que tu as appris » titre en haut et centré, étiquettes jamais collées). Les `questions`/`centres` sont dans les en-têtes des scripts et dans les voix : les recopier dans `manim/questions-fractions.md`. Committer par chemin (scripts `frac_*`, `*_marques.json`, voix `manim/voix/<classe>-frac-*.json` ; jamais `media-*`, jamais les `*.cues.tsv`).
-2. Lancer le lot 4e E (06 à 09) avec la consigne et les modèles ci-dessus ; 3 agents au plus.
+2. Relancer UN agent par lot interrompu (4e D, 4e F) en lui donnant l'état ci-dessus, puis le lot 4e E (06 à 09) avec la consigne et les modèles ci-dessus ; 3 agents au plus.
 3. Passe finale quand la 6e est complète (puis la 4e) : miniatures (`manim/miniature_essai_v2.py`, `manim/miniature_short_expression.py`) et entrées du manifeste `manim/manifeste-youtube.json` (ids `<classe>-frac-<slug>[-short]`, `microId`, `notionId`, `questions`, `centres`, chapitres mesurés par dry run — imiter les entrées stats), puis `python scripts/fiches-youtube.py -frac-`, R2 (`powershell -NoProfile -ExecutionPolicy Bypass -File scripts/r2-videos.ps1 -Envoyer > log 2>&1` lancé depuis Bash), `node scripts/generer-videos-r2.mjs`, `node scripts/brancher-videos-coach.mjs --id <ids> --ecrire`, commit par chemin. Push seulement sur mon signal.
 4. Mettre à jour la mémoire `serie-fractions-cm1-terminale.md` à chaque étape.
 
