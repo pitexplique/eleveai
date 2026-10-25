@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Jules, fleuriste, a 3 mètres de ruban. Pour chaque bouquet, il coupe 1 quart de mètre.",
+  "01-couper": "Combien de bouquets ? 3 divisé par 1 quart. Dans 1 mètre, il y a 4 quarts. Dans 3 mètres : 3 fois 4, égale 12 bouquets !",
+  "02-surprise": "Surprise : on a divisé 3, et on trouve 12, plus grand ! Diviser par 1 quart, c'est multiplier par 4.",
+  "03-question": "Question ! Combien font 2 divisé par 1 tiers ? A : 2 tiers. B : 6. C : 1 sixième. Mets pause !",
+  "03b-reponse": "Réponse B. Dans 1 mètre, il y a 3 tiers. 2 fois 3, égale 6.",
+  "04-question": "À toi : 5 divisé par 1 demi, ça fait combien ? Réponds en commentaire !"
+}

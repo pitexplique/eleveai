@@ -1,0 +1,18 @@
+{
+  "00-garde": "Additionner des fractions. 2 tiers plus 3 quarts, ça fait combien ?",
+  "01-situation": "Voici Mila, apicultrice. Sa ruche est posée sur une balance connectée. Lundi, la ruche gagne 2 tiers de kilo de miel. Mardi, elle gagne 3 quarts de kilo. Combien en deux jours ?",
+  "02-commun": "2 tiers plus 3 quarts : les parts n'ont pas la même taille. On cherche un nombre dans la table de 3 et dans la table de 4 : 12. 2 tiers égale 8 douzièmes. 3 quarts égale 9 douzièmes.",
+  "03-somme": "Maintenant, les parts ont la même taille. 8 plus 9, égale 17 : 17 douzièmes de kilo. C'est plus que 12 douzièmes : plus d'1 kilo de miel !",
+  "04-question": "Question ! Combien font 1 sixième plus 3 quarts ? A : 4 dixièmes. B : 11 douzièmes. C : 4 douzièmes. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 1 sixième égale 2 douzièmes. 3 quarts égale 9 douzièmes. 2 plus 9, égale 11.",
+  "05-piege": "Attention au piège ! On n'ajoute jamais les dénominateurs. 2 tiers plus 3 quarts, ce n'est pas 5 septièmes. Regarde : 5 septièmes, c'est moins que 3 quarts tout seul. Impossible !",
+  "06-simplifier": "Mila remplit un pot d'1 kilo. Elle verse 7 douzièmes de kilo, puis 1 sixième. 1 sixième égale 2 douzièmes. 7 plus 2, égale 9 : 9 douzièmes. Ce n'est pas fini : on simplifie ! On divise par 3 en haut et en bas : 3 quarts.",
+  "07-chaine": "Et 3 quarts, c'est 3 divisé par 4 : 0,75. Le pot est plein à 75 %.",
+  "08-relatifs": "Avec des nombres relatifs, c'est pareil. Un jour de pluie, les abeilles mangent leurs réserves : la ruche perd 5 sixièmes de kilo. Le lendemain, elle gagne 1 quart. Moins 5 sixièmes égale moins 10 douzièmes. 1 quart égale 3 douzièmes. Moins 10 plus 3, égale moins 7 : moins 7 douzièmes de kilo.",
+  "09-question": "Question ! Combien font moins 1 demi plus 1 tiers ? A : 0. B : moins 1 sixième. C : 1 sixième. Mets pause, et choisis !",
+  "09b-reponse": "Réponse B. Moins 1 demi égale moins 3 sixièmes. 1 tiers égale 2 sixièmes. Moins 3 plus 2, égale moins 1.",
+  "10-defi": "À toi de jouer ! En trois jours, la ruche gagne 3 quarts de kilo, perd 1 tiers, puis gagne 1 douzième. A-t-elle gagné ou perdu, et combien ? Mets pause, et cherche !",
+  "10b-correction": "Correction. On écrit tout en douzièmes. 3 quarts égale 9 douzièmes. 1 tiers égale 4 douzièmes. 9 moins 4 plus 1, égale 6 : 6 douzièmes. On simplifie par 6 : 1 demi. La ruche a gagné un demi-kilo !",
+  "11-finale": "Ce que tu as appris. On écrit les fractions avec le même dénominateur, puis on ajoute les numérateurs. Avec des relatifs, on garde les signes. On simplifie toujours le résultat. Et on n'ajoute jamais les dénominateurs.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

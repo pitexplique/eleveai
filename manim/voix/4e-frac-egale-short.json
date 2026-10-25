@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Aïcha, décoratrice, prépare un rose : 2 pots de rouge sur 5 pots en tout. Pour un grand mur, elle double tout. La couleur va-t-elle changer ?",
+  "01-double": "4 pots de rouge sur 10. Même rose, exactement ! 2 cinquièmes égale 4 dixièmes.",
+  "02-piege": "Son apprenti, lui, ajoute 1 pot de rouge et 1 pot de blanc : 3 sur 6. Surprise : le rose est plus foncé ! 3 sixièmes, c'est la moitié : plus que 2 cinquièmes.",
+  "03-question": "Question ! Quel mélange donne le même rose que 2 sur 5 ? A : 6 sur 15. B : 3 sur 6. C : 4 sur 7. Mets pause !",
+  "03b-reponse": "Réponse A. 2 fois 3, égale 6. 5 fois 3, égale 15.",
+  "04-question": "À toi : pour le même rose, combien de pots de rouge sur 25 pots ? Réponds en commentaire !"
+}

@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Noé, concepteur de jouets, construit un mur de 12 petites briques. 9 sont rouges. Peut-il faire le même mur avec moins de briques ?",
+  "01-grosses": "Il remplace 3 petites briques par 1 grosse brique, de la même longueur. 12 divisé par 3 : 4 grosses briques. 9 divisé par 3 : 3 rouges. Le mur n'a pas changé : 9 douzièmes égale 3 quarts !",
+  "02-piege": "Et avec des briques de 4 ? 12 divisé par 4, ça marche : 3 briques. Mais 9 divisé par 4, non ! Une brique serait rouge et blanche à la fois. Impossible !",
+  "03-question": "Question ! Un mur de 10 briques, dont 4 rouges. On les regroupe 2 par 2. Combien de grosses briques rouges ? A : 2. B : 4. C : 5. Mets pause !",
+  "03b-reponse": "Réponse A. 4 divisé par 2, égale 2 : le mur fait 2 cinquièmes.",
+  "04-question": "À toi : un mur de 18 briques, dont 12 rouges. Avec le moins de briques possible, combien de briques rouges ? Réponds en commentaire !"
+}

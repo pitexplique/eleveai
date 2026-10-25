@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Yanis, community manager, lance un sondage en story : escalade ou kayak ? Les votes arrivent !",
+  "01-votes": "20 votes en tout. 13 pour l'escalade, 7 pour le kayak. L'escalade a 13 vingtièmes des votes.",
+  "02-surprise": "Mais comment l'appli trouve son pourcentage ? 13 divisé par 20, égale 0,65. Et 0,65, c'est 65 %. Le kayak a le reste : 35 %.",
+  "03-question": "Question ! 3 votes sur 20 : qu'affiche l'appli ? A : 3,2 %. B : 15 %. C : 0,15 %. Mets pause !",
+  "03b-reponse": "Réponse B. 3 divisé par 20, égale 0,15 : 15 %.",
+  "04-question": "À toi : 12 votes sur 25. Quel pourcentage ? Réponds en commentaire !"
+}

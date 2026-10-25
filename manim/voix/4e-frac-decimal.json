@@ -1,0 +1,20 @@
+{
+  "00-garde": "Fraction, nombre décimal, pourcentage. Comment passer de l'un à l'autre ?",
+  "01-situation": "Voici Sofia, prévisionniste météo. Pour mesurer les nuages, les météorologues partagent le ciel en 8 parts égales : des octas. Ce matin, les nuages couvrent 3 huitièmes du ciel. Mais son logiciel veut un nombre décimal. 3 huitièmes, c'est combien ?",
+  "02-quotient": "Une fraction, c'est une division. 3 huitièmes, c'est 3 divisé par 8. Jamais 3,8 : entre les deux nombres, il y a une division, pas une virgule.",
+  "03-poser": "Posons la division. En 3, combien de fois 8 ? 0 fois. On écrit 0, une virgule, et on abaisse un zéro. En 30, 3 fois 8, égale 24, reste 6. En 60, 7 fois 8, égale 56, reste 4. En 40, 5 fois 8, égale 40, reste 0 : c'est fini. 3 divisé par 8, égale 0,375.",
+  "04-pourcentage": "Et en pourcentage ? On multiplie par 100 : 0,375 fois 100, égale 37,5. Les nuages couvrent 37,5 % du ciel.",
+  "05-question": "Question ! L'après-midi, 5 huitièmes du ciel sont couverts. Quel est le nombre décimal ? A : 5,8. B : 0,625. C : 0,58. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 5 divisé par 8, égale 0,625. 5,8 et 0,58 collent les deux nombres : faux !",
+  "06-sur-100": "Parfois, il y a plus rapide : écrire la fraction sur 100. 7 vingtièmes : 20 fois 5, égale 100. On multiplie en haut et en bas par 5 : 35 centièmes. Donc 0,35, soit 35 %.",
+  "07-piege": "Attention au piège du pourcentage ! 0,75, c'est 75 centièmes : 75 cases sur 100, donc 75 %. Ce n'est pas 0,75 % : 0,75 %, ça ne fait même pas 1 case !",
+  "08-question": "Question ! Comment s'écrit 0,4 en pourcentage ? A : 0,4 %. B : 4 %. C : 40 %. Mets pause, et choisis !",
+  "08b-reponse": "Réponse C. 0,4 fois 100, égale 40 : 40 %. 4 %, ce serait 0,04.",
+  "09-retour": "Dans l'autre sens : 0,35, c'est 35 centièmes. 35 et 100 sont dans la table de 5 : on simplifie par 5. 7 vingtièmes. Et voilà la fraction irréductible !",
+  "10-question": "Question ! Quelle fraction irréductible est égale à 0,24 ? A : 24 dixièmes. B : 6 vingt-cinquièmes. C : 12 cinquantièmes. Mets pause, et choisis !",
+  "10b-reponse": "Réponse B. 0,24, c'est 24 centièmes. On divise en haut et en bas par 4 : 6 vingt-cinquièmes. 12 cinquantièmes se simplifie encore, et 24 dixièmes, c'est 2,4.",
+  "11-defi": "À toi de jouer ! Sur 25 jours, Sofia a noté 9 jours de brouillard. Écris cette part en fraction, puis en nombre décimal, puis en pourcentage. Mets pause, et cherche !",
+  "11b-correction": "Correction. 9 jours sur 25 : 9 vingt-cinquièmes. 25 fois 4, égale 100 : on multiplie en haut et en bas par 4. 36 centièmes. Donc 0,36, soit 36 % des jours.",
+  "12-finale": "Ce que tu as appris. Une fraction est une division : on divise le numérateur par le dénominateur. On peut aussi l'écrire sur 100. Pour le pourcentage, on multiplie par 100. Et jamais de virgule entre les deux nombres.",
+  "13-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -1,0 +1,19 @@
+{
+  "00-garde": "Les nombres rationnels. Quels nombres peuvent s'écrire comme une fraction ?",
+  "01-situation": "Voici Nadia, analyste de données dans un club de football. Elle étudie Kylian Mbappé à la Coupe du monde 2022 : 8 buts en 7 matchs. Combien de buts par match ? 8 septièmes.",
+  "02-division": "8 divisé par 7, égale 1,142857… puis les chiffres 1 4 2 8 5 7 reviennent, encore et encore. La division ne s'arrête jamais : 8 septièmes n'est pas un nombre décimal. Nadia l'arrondit : environ 1,14 but par match. Mais 8 septièmes est bien un quotient de deux entiers : c'est un nombre rationnel.",
+  "03-definition": "Un nombre rationnel s'écrit a sur b, avec a et b entiers, et b différent de 0. Le dénominateur n'est jamais 0 : on ne divise jamais par 0 !",
+  "04-tous": "Beaucoup de nombres sont rationnels. Un entier : 5 égale 5 sur 1. Un nombre négatif, comme une différence de buts : moins 3 égale moins 3 sur 1. Un décimal : 0,25 égale 25 centièmes, soit 1 quart.",
+  "05-question": "Question ! Quelle écriture est égale à moins 1,3 ? A : moins 13 dixièmes. B : 13 dixièmes. C : moins 1 tiers. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 1,3, c'est 13 dixièmes, et le signe moins reste : moins 13 dixièmes. 13 dixièmes a perdu son signe.",
+  "06-decimal": "Pour écrire un décimal en fraction, on compte les chiffres après la virgule. 2,5 : un chiffre, donc sur 10. 25 dixièmes. On simplifie par 5 : 5 demis.",
+  "07-question": "Question ! Lequel de ces nombres n'est pas rationnel ? A : moins 7. B : 4 sur 0. C : 0,5. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. 4 sur 0 n'a pas de sens : on ne divise jamais par 0. Moins 7, c'est moins 7 sur 1. Et 0,5, c'est 1 demi.",
+  "08-piege": "Attention : un rationnel n'est pas toujours décimal ! 1 tiers égale 0,333… : les 3 ne s'arrêtent jamais. 0,33 n'est qu'une valeur approchée : 3 fois 0,33, égale 0,99, pas 1. 1 tiers est rationnel, mais pas décimal.",
+  "09-question": "Question ! 8 septièmes est-il un nombre décimal ? A : oui, c'est 1,14. B : non, mais il est rationnel. C : non, il n'est pas rationnel. Mets pause, et choisis !",
+  "09b-reponse": "Réponse B. 8 divisé par 7 ne s'arrête jamais : ce n'est pas un décimal, et 1,14 n'est qu'un arrondi. Mais c'est un quotient d'entiers : il est rationnel.",
+  "10-defi": "À toi de jouer ! Une joueuse du club marque 12 buts en 8 matchs. Écris ses buts par match en fraction irréductible. Est-ce aussi un nombre décimal ? Mets pause, et cherche !",
+  "10b-correction": "Correction. 12 huitièmes. On simplifie par 4 : 3 demis. 3 divisé par 2, égale 1,5 : la division s'arrête. 3 demis est rationnel, et aussi décimal.",
+  "11-finale": "Ce que tu as appris. Un nombre rationnel s'écrit a sur b, avec b différent de 0. Les entiers, les négatifs et les décimaux sont rationnels. Certains rationnels, comme 1 tiers, ne sont pas décimaux. Et on ne divise jamais par 0.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

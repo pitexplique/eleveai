@@ -1,0 +1,18 @@
+{
+  "00-garde": "Multiplier des fractions. 2 tiers fois 3 quarts, ça fait combien ?",
+  "01-situation": "Voici Ibrahim, installateur de panneaux solaires. Sur un toit, il a un carré d'1 mètre de côté. Son panneau prend 2 tiers de la largeur, et 3 quarts de la hauteur. Quelle part du mètre carré couvre-t-il ?",
+  "02-grille": "On coupe la largeur en 3, et la hauteur en 4 : 3 fois 4, égale 12 petits rectangles. Le panneau en couvre 2 fois 3, égale 6. C'est 6 douzièmes du mètre carré.",
+  "03-regle": "C'est la règle, pour 2 tiers fois 3 quarts. On multiplie les numérateurs entre eux : 2 fois 3, égale 6. Et les dénominateurs entre eux : 3 fois 4, égale 12. Puis on simplifie : 6 douzièmes, on divise par 6 : 1 demi. Un demi-mètre carré !",
+  "04-question": "Question ! Combien font 3 cinquièmes fois 2 septièmes ? A : 5 douzièmes. B : 6 trente-cinquièmes. C : 6 douzièmes. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. En haut, 3 fois 2, égale 6. En bas, 5 fois 7, égale 35.",
+  "05-piege": "Attention, ne mélange pas avec l'addition ! Pour multiplier, on ne cherche pas de dénominateur commun. Et 2 tiers fois 3 quarts, ce n'est pas 5 septièmes : on multiplie en haut, on multiplie en bas.",
+  "06-avant": "Encore mieux : on simplifie avant de multiplier. 4 neuvièmes fois 3 huitièmes. En haut, 4 fois 3. En bas, 9 fois 8. 4 et 8 se divisent par 4 : 1 et 2. 3 et 9 se divisent par 3 : 1 et 3. Il reste 1 fois 1, sur 3 fois 2 : 1 sixième. Pas besoin de calculer 72 !",
+  "07-relatifs": "Avec des relatifs, on applique la règle des signes. Moins 2 cinquièmes fois 5 sixièmes : moins fois plus, ça donne moins. 2 fois 5, égale 10. 5 fois 6, égale 30. Moins 10 trentièmes. On simplifie par 10 : moins 1 tiers.",
+  "08-question": "Question ! Combien font moins 3 quarts fois moins 2 tiers ? A : moins 1 demi. B : 1 demi. C : moins 5 septièmes. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. Moins fois moins, ça donne plus. 3 fois 2, égale 6. 4 fois 3, égale 12. 6 douzièmes, c'est 1 demi.",
+  "09-chaine": "Revenons au panneau. 1 demi, c'est 1 divisé par 2 : 0,5. Le panneau couvre 50 % du mètre carré.",
+  "10-defi": "À toi de jouer ! Un toit est couvert de tuiles sur 3 quarts de sa surface. Ibrahim pose des panneaux sur 4 cinquièmes de ces tuiles. Quelle fraction du toit reçoit des panneaux ? Mets pause, et cherche !",
+  "10b-correction": "Correction. 4 cinquièmes de 3 quarts, c'est 4 cinquièmes fois 3 quarts. On simplifie avant : 4 en haut, 4 en bas, ça fait 1. Il reste 3 cinquièmes du toit. Et 3 cinquièmes, c'est 0,6 : 60 % du toit.",
+  "11-finale": "Ce que tu as appris. On multiplie les numérateurs entre eux, et les dénominateurs entre eux. On simplifie avant de multiplier : c'est plus facile. On applique la règle des signes. Et prendre une fraction de, c'est multiplier.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

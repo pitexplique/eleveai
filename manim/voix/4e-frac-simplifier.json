@@ -1,0 +1,19 @@
+{
+  "00-garde": "Simplifier une fraction. Comment écrire la même fraction avec les plus petits nombres possibles ?",
+  "01-situation": "Voici Léna, technicienne dans un centre de tri. Ce matin, un camion apporte 120 kilos de déchets. Dedans, il y a 48 kilos de plastique. Quelle fraction des déchets est en plastique ? 48 sur 120 : 48 cent-vingtièmes. Des nombres bien trop grands !",
+  "02-caisses": "Léna range les déchets en caisses de 12 kilos. 120 divisé par 12, égale 10 caisses. 48 divisé par 12, égale 4 caisses de plastique. 48 cent-vingtièmes égale 4 dixièmes : on a divisé en haut et en bas par 12.",
+  "03-encore": "Encore plus simple ? 4 et 10 sont pairs : on divise par 2, en haut et en bas. 2 cinquièmes. Sur la barre, on regroupe les caisses 2 par 2 : la part de plastique ne bouge pas. 2 et 5 n'ont plus de diviseur commun, à part 1 : la fraction est irréductible.",
+  "04-criteres": "Pour trouver un diviseur commun, utilise les critères. Par 2 : le nombre est pair. Par 5 : il finit par 0 ou par 5. Par 3, ou par 9 : la somme de ses chiffres est dans la table de 3, ou de 9. Pour 48 et 120 : 4 plus 8, égale 12 ; 1 plus 2 plus 0, égale 3. Les deux sont dans la table de 3 !",
+  "05-etapes": "On peut aussi avancer pas à pas. 48 cent-vingtièmes, divisé par 2 : 24 soixantièmes. Encore par 2 : 12 trentièmes. Encore par 2 : 6 quinzièmes. Puis par 3 : 2 cinquièmes. En une seule étape, on divise par 24 : le plus grand diviseur commun de 48 et 120.",
+  "06-question": "Question ! Pour simplifier 36 quarante-huitièmes en une seule étape, par quel nombre divise-t-on ? A : 2. B : 6. C : 12. Mets pause, et choisis !",
+  "06b-reponse": "Réponse C. 36 égale 12 fois 3, et 48 égale 12 fois 4. Donc 36 quarante-huitièmes égale 3 quarts. Avec 6, on trouve 6 huitièmes : ce n'est pas fini !",
+  "07-piege": "Attention aux pièges ! Premier piège : soustraire. 15 vingtièmes, moins 5 en haut et en bas : 10 quinzièmes. Faux ! Les barres n'ont pas la même longueur. Deuxième piège : diviser un seul des deux nombres. 15 divisé par 5, mais 20 reste en bas : 3 vingtièmes. Faux aussi ! On divise en haut ET en bas, par le même nombre.",
+  "08-question": "Question ! Simplifie 45 soixantièmes au maximum. A : 9 douzièmes. B : 3 quarts. C : 40 cinquante-cinquièmes. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. 45 égale 15 fois 3, et 60 égale 15 fois 4 : 3 quarts. 9 douzièmes, c'est s'arrêter trop tôt : on divise encore par 3. Et 40 cinquante-cinquièmes : on a soustrait 5 !",
+  "09-question": "Question ! Laquelle de ces fractions est irréductible ? A : 15 vingt-et-unièmes. B : 9 quatorzièmes. C : 22 trente-troisièmes. Mets pause, et choisis !",
+  "09b-reponse": "Réponse B. 9 égale 3 fois 3, et 14 égale 2 fois 7 : pas de diviseur commun, à part 1. 15 et 21 sont dans la table de 3. 22 et 33, dans la table de 11.",
+  "10-defi": "À toi de jouer ! Le lendemain, Léna reçoit 90 kilos de déchets, dont 27 kilos de verre. Quelle fraction des déchets est en verre ? Simplifie-la au maximum. Mets pause, et cherche !",
+  "10b-correction": "Correction. 27 quatre-vingt-dixièmes. 2 plus 7, égale 9, et 9 plus 0, égale 9 : 27 et 90 sont dans la table de 9. 27 divisé par 9, égale 3. 90 divisé par 9, égale 10. 3 dixièmes : irréductible. Et 3 dixièmes, c'est 0,3, soit 30 % : la prochaine vidéo !",
+  "11-finale": "Ce que tu as appris. Simplifier, c'est diviser le numérateur et le dénominateur par le même nombre. On continue jusqu'à la fraction irréductible. En une seule étape, on divise par le plus grand diviseur commun. Et on ne soustrait jamais.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Années 1980, aux États-Unis. Une chaîne de fast-food lance un steak d'1 tiers de livre, au même prix que le célèbre quart de livre. C'est un échec ! Pourquoi ?",
+  "01-erreur": "Beaucoup de clients pensaient qu'1 tiers était plus petit qu'1 quart. Parce que 3 est plus petit que 4 !",
+  "02-surprise": "Faux ! Coupe un steak en 3, et un autre en 4 : la part d'1 tiers est plus grosse. 1 tiers, c'est environ 0,33. 1 quart, c'est 0,25.",
+  "03-question": "Question ! Quel steak est le plus gros ? A : 1 cinquième de livre. B : 1 sixième. C : 1 huitième. Mets pause !",
+  "03b-reponse": "Réponse A. Même numérateur : plus le dénominateur est petit, plus la part est grosse.",
+  "04-question": "En 2021, la chaîne a relancé son steak… en 3 neuvièmes de livre ! À toi : 3 neuvièmes, c'est plus, moins, ou autant qu'1 tiers ? Réponds en commentaire !"
+}

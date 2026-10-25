@@ -1,0 +1,17 @@
+{
+  "00-garde": "Diviser des fractions. 3 quarts divisé par 1 huitième, ça fait combien ?",
+  "01-situation": "Voici Amina, préparatrice en pharmacie. Elle a 3 quarts de litre de sirop. Elle le verse dans des flacons d'1 huitième de litre. Combien de flacons peut-elle remplir ?",
+  "02-compter": "On compte les huitièmes dans 3 quarts. 3 quarts, c'est 6 huitièmes. Dans 6 huitièmes, il y a 6 fois 1 huitième : 6 flacons !",
+  "03-regle": "La règle : diviser par une fraction, c'est multiplier par son inverse. 3 quarts divisé par 1 huitième, égale 3 quarts fois 8. 3 fois 8, égale 24 : 24 quarts. On simplifie par 4 : 6. On retrouve 6 flacons !",
+  "04-question": "Question ! Combien font 2 tiers divisé par 4 cinquièmes ? A : 8 quinzièmes. B : 5 sixièmes. C : 6 cinquièmes. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. On multiplie par l'inverse de 4 cinquièmes : 5 quarts. 2 fois 5, égale 10. 3 fois 4, égale 12. 10 douzièmes, on simplifie par 2 : 5 sixièmes.",
+  "05-piege": "Attention au piège ! Pour 2 tiers divisé par 4 cinquièmes, on retourne seulement la deuxième fraction : 5 quarts. Si on retourne la première, 3 demis fois 4 cinquièmes, on trouve 6 cinquièmes : c'est faux !",
+  "06-entier": "Et diviser par un entier ? 4 cinquièmes divisé par 2. 2, c'est 2 sur 1 : son inverse est 1 demi. 4 cinquièmes fois 1 demi, égale 4 dixièmes : on simplifie, 2 cinquièmes. Diviser par 2, c'est prendre la moitié. Et 2 cinquièmes, c'est 0,4 : 40 %.",
+  "07-relatifs": "Avec des relatifs : moins 3 cinquièmes divisé par 9 dixièmes, égale moins 3 cinquièmes fois 10 neuvièmes. Moins fois plus, ça donne moins. 3 fois 10, égale 30. 5 fois 9, égale 45. Moins 30 quarante-cinquièmes : on simplifie par 15, moins 2 tiers.",
+  "08-question": "Question ! Combien font 1 demi divisé par 1 quart ? A : 1 huitième. B : 2. C : 1 demi. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. 1 demi fois 4, égale 4 demis : 2. Dans 1 demi, il y a 2 quarts !",
+  "09-defi": "À toi de jouer ! Amina a 6 litres de solution. Elle remplit des flacons de 3 quarts de litre. Combien de flacons ? Mets pause, et cherche !",
+  "10-correction": "Correction. 6 divisé par 3 quarts, égale 6 fois 4 tiers. 6 fois 4, égale 24 : 24 tiers. On simplifie par 3 : 8. Amina remplit 8 flacons !",
+  "11-finale": "Ce que tu as appris. Diviser par une fraction, c'est multiplier par son inverse. On retourne seulement la deuxième fraction. On applique la règle des signes, et on simplifie. Et diviser par une fraction plus petite qu'1, ça donne plus grand !",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

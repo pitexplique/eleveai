@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Yuna, artiste en origami, plie une feuille en 2. Il reste 1 demi de la feuille.",
+  "01-plis": "Encore en 2 : 1 demi de 1 demi, c'est 1 quart. Et encore : 1 demi de 1 quart, c'est 1 huitième. Chaque pli multiplie par 1 demi !",
+  "02-question": "Question ! Elle plie en 2, puis en 3. Quelle fraction de la feuille ? A : 1 cinquième. B : 1 sixième. C : 2 tiers. Mets pause !",
+  "02b-reponse": "Réponse B. 1 demi fois 1 tiers, égale 1 sixième : la feuille en 6 morceaux.",
+  "03-surprise": "Surprise : après 7 plis en 2, un morceau ne fait plus que 1 cent-vingt-huitième de la feuille. Et le papier a 128 épaisseurs !",
+  "04-question": "À toi : Yuna plie en 3, puis encore en 3. 1 tiers fois 1 tiers, quelle fraction de la feuille ? Réponds en commentaire !"
+}

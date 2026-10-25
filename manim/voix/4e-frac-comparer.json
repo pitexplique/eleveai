@@ -1,0 +1,19 @@
+{
+  "00-garde": "Comparer des fractions. Comment savoir quelle fraction est la plus grande ?",
+  "01-situation": "Voici Lucie, pilote de drone : elle photographie des champs vus du ciel. Le drone A a encore 5 huitièmes de batterie. Le drone B, 7 douzièmes. Lequel peut voler le plus longtemps ?",
+  "02-meme-den": "Commençons simple. 3 huitièmes et 5 huitièmes : les parts ont la même taille. 5 parts, c'est plus que 3 parts. Donc 5 huitièmes est plus grand que 3 huitièmes.",
+  "03-meme-num": "Et à numérateur égal ? 3 quarts et 3 septièmes : 3 parts dans les deux cas. Mais un quart est plus grand qu'un septième. Donc 3 quarts est plus grand : plus le dénominateur est petit, plus les parts sont grandes.",
+  "04-question": "Question ! Quelle fraction est la plus grande : 2 neuvièmes, ou 2 cinquièmes ? A : 2 neuvièmes. B : 2 cinquièmes. C : elles sont égales. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. Même numérateur : les cinquièmes sont plus grands que les neuvièmes. 9 est plus grand que 5, mais 2 neuvièmes est plus petit !",
+  "05-meme-den-commun": "Revenons aux drones : 5 huitièmes et 7 douzièmes. On les met au même dénominateur, 24. 5 huitièmes égale 15 vingt-quatrièmes. 7 douzièmes égale 14 vingt-quatrièmes. 15 est plus grand que 14 : le drone A a plus de batterie !",
+  "06-croix": "Autre méthode : les produits en croix. 5 fois 12, égale 60. 7 fois 8, égale 56. 60 est plus grand que 56 : 5 huitièmes est plus grand que 7 douzièmes.",
+  "07-question": "Question ! Quel signe entre 4 septièmes et 3 cinquièmes ? A : plus petit. B : égal. C : plus grand. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 4 fois 5, égale 20. 3 fois 7, égale 21. 20 est plus petit que 21 : 4 septièmes est plus petit que 3 cinquièmes.",
+  "08-decimal": "Avec un nombre décimal, on transforme la fraction : 3 cinquièmes, c'est 3 divisé par 5, égale 0,6. Et 0,6 est plus grand que 0,58. Et 5 quarts ? Le numérateur est plus grand que le dénominateur : 5 quarts est plus grand que 1.",
+  "09-question": "Question ! Lequel est le plus grand : 7 huitièmes ou 0,9 ? A : 7 huitièmes. B : 0,9. C : ils sont égaux. Mets pause, et choisis !",
+  "09b-reponse": "Réponse B. 7 divisé par 8, égale 0,875. Et 0,875 est plus petit que 0,9.",
+  "10-defi": "À toi de jouer ! Trois drones ont 2 tiers, 3 quarts et 5 sixièmes de batterie. Range-les du plus petit au plus grand. Mets pause, et cherche !",
+  "10b-correction": "Correction. Même dénominateur : 12. 2 tiers égale 8 douzièmes. 3 quarts égale 9 douzièmes. 5 sixièmes égale 10 douzièmes. Donc 2 tiers, puis 3 quarts, puis 5 sixièmes.",
+  "11-finale": "Ce que tu as appris. Même dénominateur : on compare les numérateurs. Même numérateur : le plus petit dénominateur gagne. Sinon, on met au même dénominateur, ou on calcule les produits en croix. Et avec un décimal, on divise.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

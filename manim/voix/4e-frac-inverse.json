@@ -1,0 +1,17 @@
+{
+  "00-garde": "L'inverse d'une fraction. Par quoi multiplier 5 tiers pour obtenir 1 ?",
+  "01-situation": "Voici Clara, photographe. Elle agrandit une photo de 6 centimètres de large : fois 5 tiers. La photo fait maintenant 10 centimètres. Comment revenir à 6 centimètres ?",
+  "02-retour": "On multiplie par 3 cinquièmes : 10 fois 3 cinquièmes, égale 6. Pourquoi ? 5 tiers fois 3 cinquièmes, égale 15 quinzièmes : 1. Et multiplier par 1, ça ne change rien !",
+  "03-definition": "3 cinquièmes est l'inverse de 5 tiers : leur produit vaut 1. Pour trouver l'inverse d'une fraction, on la retourne : le numérateur passe en bas, le dénominateur passe en haut.",
+  "04-question": "Question ! Quel est l'inverse de 4 septièmes ? A : 7 quarts. B : moins 4 septièmes. C : 4 septièmes. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. On retourne la fraction : 7 quarts. Et 4 septièmes fois 7 quarts, égale 28 vingt-huitièmes : 1.",
+  "05-entiers": "Et un nombre entier ? 5, c'est 5 sur 1. Son inverse, c'est 1 cinquième. Et l'inverse d'1 huitième, c'est 8 sur 1 : 8.",
+  "06-piege": "Attention au piège : l'inverse n'est pas l'opposé ! L'opposé de 2 tiers, c'est moins 2 tiers : on change le signe. L'inverse de 2 tiers, c'est 3 demis : on retourne. Et l'inverse garde le signe : l'inverse de moins 2 tiers, c'est moins 3 demis.",
+  "07-question": "Question ! Quel est l'inverse de moins 3 quarts ? A : 3 quarts. B : moins 4 tiers. C : 4 tiers. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. On retourne, et on garde le signe : moins 4 tiers. Moins fois moins, ça donne plus : le produit vaut 1.",
+  "08-zero": "Et 0 ? 0 fois 5, ça fait 0. 0 fois n'importe quel nombre, ça fait 0, jamais 1. 0 n'a pas d'inverse.",
+  "09-defi": "À toi de jouer ! Clara réduit une photo à 80 %. Quel zoom doit-elle choisir pour revenir à la taille de départ ? Mets pause, et cherche !",
+  "10-correction": "Correction. 80 %, c'est 80 centièmes. On simplifie par 20 : 4 cinquièmes. L'inverse de 4 cinquièmes, c'est 5 quarts. Et 5 quarts, c'est 5 divisé par 4 : 1,25. Le zoom, c'est 125 % !",
+  "11-finale": "Ce que tu as appris. L'inverse d'un nombre, c'est le nombre qui, multiplié par lui, donne 1. Pour une fraction, on la retourne. L'inverse garde le signe : ce n'est pas l'opposé. Et 0 n'a pas d'inverse.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

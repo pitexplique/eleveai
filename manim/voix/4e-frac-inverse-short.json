@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Noé, magicien, montre une carte : 2 tiers. Il la retourne : 3 demis !",
+  "01-magie": "Et voici le tour : 2 tiers fois 3 demis, égale 6 sixièmes : 1 ! Une fraction fois sa carte retournée, ça fait toujours 1.",
+  "02-autre": "Une autre carte : 5 huitièmes. Retournée : 8 cinquièmes. 5 huitièmes fois 8 cinquièmes, égale 40 quarantièmes : encore 1 !",
+  "03-question": "Question ! Noé montre la carte 5. Que cache son dos ? A : 1 cinquième. B : moins 5. C : 5. Mets pause !",
+  "03b-reponse": "Réponse A. 5, c'est 5 sur 1. Retournée : 1 cinquième. Et 5 fois 1 cinquième, égale 1.",
+  "04-question": "À toi : quel nombre est égal à son propre inverse ? Réponds en commentaire !"
+}
