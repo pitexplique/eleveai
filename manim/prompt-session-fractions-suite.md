@@ -25,18 +25,11 @@ Lis la mémoire `serie-fractions-cm1-terminale.md` (ses erreurs : SIMPLIFIER, pu
 ⚠️ Les outils de calage mot à mot (`marques_dump.ps1`, `cues2marques.py`) sont dans un scratchpad, pas dans le dépôt : cherche-les (`find C:/Users/FRED/AppData/Local/Temp/claude -name cues2marques.py`) et range-les dans `scripts/` au début de la session.
 Points à améliorer dans les lots : lignes de réponse qui arrivent 1 à 3 s après leur premier nombre (viser 0,4 s), étiquettes de flèches trop proches ; paysage un peu longue (5:36) — rester ≤ 5 min si possible.
 
-## État au 25/10 (fin de la session « fraction »)
-- 6e COMMITÉS : 03-egale (pilote `01dc0c3d`), lot A 01/02/04 (`c3468f67`), lot B 05/06/07 (`f0e298ae`). Outils de calage dans `scripts/` (`85683fe5`).
-- ✅ 6e COMPLÈTE : lot C 08-13 commité (`df4ca05e`). EN COURS au moment de la bascule : lot 4e D (01-05), lot 4e F (10-quantite avec le gâteau CARRÉ en 5, 11-oppose, 12-defi). Voir LOTS_ETAT ci-dessous.
-- PAS ENCORE LANCÉ : lot 4e E (06-additionner, 07-multiplier, 08-inverse, 09-diviser).
-- Modèles pour tout nouveau lot : `manim/scripts/6e/frac_lotb_commun.py` (lignes au mot, correctif « Et 3 ») + `frac_comparer.py`, le pilote `frac_egale.py`, `frac_representer_short.py` (gâteau en 6).
-
-⛔ AGENTS ARRÊTÉS le 25/10 (limite de contexte), travail 4e NON COMMITÉ, à reprendre :
-- **6e 08-quantite, correction demandée par Frédéric** : « 60 ÷ 2 » s'affiche 1,5 s après « 60 » sur l'écran du piège → « 60 » au mot « 60 », « ÷ 2 » au mot « divisent par 2 » ; écarter les étiquettes « 25 » sous la barre (correction du défi). `manim/scripts/6e/frac_quantite.py` est MODIFIÉ (correction commencée, rendu HD interrompu) : relire le diff, finir, re-rendre, bords, commit.
-- **Lot 4e D** (base `manim/scripts/4e/frac_lotd_commun.py`) : 02-simplifier RENDU (paysage + short dans `manim/sorties/4e/maths/fractions/02-simplifier/`, à vérifier : bords, planche) ; 03-decimal scripts + voix écrits, pas rendu ; 01-egale script + voix, dry run interrompu ; 04-rationnel et 05-comparer pas commencés.
-- **Lot 4e F** (base `manim/scripts/4e/frac_lotf_commun.py`) : 10-quantite (script paysage + voix + marques ; short gâteau CARRÉ : voix + marques, script à écrire), 11-oppose et 12-defi (voix + marques seulement).
-- Les questions/centres des épisodes 4e ne sont pas encore dans `manim/questions-fractions.md` : les relever dans les scripts/voix.
-- Ne jamais committer les `*.cues.tsv` ni `media-*`.
+## État au 25/10 après-midi
+- ✅ VIDÉOS 6e COMPLÈTES (13 épisodes, 22 vidéos neuves) et 4e COMPLÈTES (12 épisodes, 24 vidéos), toutes commitées (dernier : `fd535325`) ; bords 0 instants partout ; questions et centres de TOUTES dans `manim/questions-fractions.md`.
+- ⏳ PASSE FINALE lancée le 25/10 (agent) : miniatures, manifeste, fiches-youtube, R2, branchement coach. Vérifier ce qui est fait : `git log --oneline -5`, ids `6e-frac-`/`4e-frac-` dans `manim/manifeste-youtube.json`.
+- À confirmer avant publication YouTube : chiffres USGS de 6e 13 (71 % d'eau sur Terre, ~60 % dans le corps) ; short 4e 05 (steak d'1/3 de livre, Snopes).
+- PUSH : Frédéric pousse le soir du 25/10 (vérifier la story avant).
 
 ## À faire, dans l'ordre
 1. Pour chaque lot non commité : vérifier ce qui existe (`manim/sorties/{6e,4e}/maths/fractions/*/`), `python scripts/verifier-bords-video.py <mp4>` → 0 instants, planche PyAV de 12 images sur 1 ou 2 vidéos par lot (écrans chargés : questions, corrections, « Ce que tu as appris » titre en haut et centré, étiquettes jamais collées). Les `questions`/`centres` sont dans les en-têtes des scripts et dans les voix : les recopier dans `manim/questions-fractions.md`. Committer par chemin (scripts `frac_*`, `*_marques.json`, voix `manim/voix/<classe>-frac-*.json` ; jamais `media-*`, jamais les `*.cues.tsv`).
