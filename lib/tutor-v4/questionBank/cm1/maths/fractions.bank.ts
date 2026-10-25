@@ -1,6 +1,12 @@
 // lib/tutor-v4/question-banks/maths/cm1/fractions.bank.ts
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+// ⭐ 25/10/2026 — les GÉNÉRATEURS qui varient la phrase (mesure des squelettes) :
+import { fractionsGabaritsA } from "./fractions-gabarits-a";
+import { fractionsGabaritsB } from "./fractions-gabarits-b";
+import { fractionsGabaritsC } from "./fractions-gabarits-c";
+import { fractionsGabaritsD } from "./fractions-gabarits-d";
+import { debut, egaux, e, figure, il, MAJ, nomSeul, objet, rang, tIl, tournure } from "./fractions-gabarits-outils";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -24,9 +30,22 @@ function makeChoices(correct: string, wrongs: readonly string[]) {
   // pièges : à cinq pièges écrits, le mélange pouvait la laisser au fond et
   // le découpage à quatre l'emportait. L'élève voyait alors quatre pièges et
   // rien d'autre. On la met de côté, on tire trois distracteurs, on mélange.
-  const distracteurs = shuffle(
-    Array.from(new Set(wrongs)).filter((w) => w !== correct),
-  ).slice(0, 3);
+  // ⛔ 25/10/2026 — et jamais deux choix de même VALEUR (4/2 et 2/1, 1,1 et
+  // 1,10) : voir la mémoire « QCM corrigés au texte exact ».
+  const valeurDe = (t: string) => {
+    const f = t.trim().match(/^(\d+)\/(\d+)$/);
+    if (f) return (Number(f[1]) / Number(f[2])).toFixed(9);
+    return /^\d+(,\d+)?$/.test(t.trim()) ? Number(t.replace(",", ".")).toFixed(9) : t;
+  };
+  const vues = new Set([valeurDe(correct)]);
+  const distracteurs = shuffle(Array.from(new Set(wrongs)).filter((w) => w !== correct))
+    .filter((w) => {
+      const v = valeurDe(w);
+      if (vues.has(v)) return false;
+      vues.add(v);
+      return true;
+    })
+    .slice(0, 3);
   return shuffle([correct, ...distracteurs]);
 }
 
@@ -131,7 +150,11 @@ function droiteGradueeFractionCanvas(data: {
     min: 0,
     max: 1,
     step: 1 / data.denominator,
+    // ⚠️ 25/10/2026 : les valeurs des graduations écrivaient « 0,3333333333 »
+    // pour un tiers (et 0,75 soufflait 3/4). Plus de valeurs : 0 et 1 en repères.
     points: [
+      { value: 0, label: "0", color: "#475569" },
+      ...(data.numerator === data.denominator ? [] : [{ value: 1, label: "1", color: "#475569" }]),
       {
         value: data.numerator / data.denominator,
         label: data.label ?? "?",
@@ -140,7 +163,7 @@ function droiteGradueeFractionCanvas(data: {
     ],
     display: {
       showTicks: true,
-      showValues: true,
+      showValues: false,
       showPoints: true,
       showPointLabels: data.showPointLabel ?? true,
       showZero: true,
@@ -279,10 +302,18 @@ export const fractionsBank: TutorBankItemV4[] = [
       const numerator = randomInt(1, denominator - 1);
 
       return {
-        text: `Dans la fraction ${numerator}/${denominator}, quel est le numérateur ?`,
+        text: tournure(
+          () => `Dans la fraction ${numerator}/${denominator}, quel est le numérateur ?`,
+          (x) => `${x.p} écrit ${numerator}/${denominator} sur son ardoise. Quel est le numérateur de cette fraction ?`,
+          (x) => `${debut()}${x.p} mange ${numerator}/${denominator} ${objet().du}. Quel est le numérateur de cette fraction ?`,
+          (x) => `${x.p} lit « ${numerator}/${denominator} de litre de lait » dans une recette. Quel est le numérateur de cette fraction ?`,
+          (x) => `${x.p} colorie ${numerator}/${denominator} ${objet(false).du}. Quel nombre de cette fraction est le numérateur ?`,
+        ),
         format: "short",
         expected: [String(numerator)],
         comparator: "number_equal",
+        // 25/10/2026 : la fraction dessinée (disque, barre ou rectangle).
+        canvas: figure(numerator, denominator),
         explanation: exp(
           "Le numérateur est le nombre placé au-dessus de la barre de fraction.",
           "On regarde le nombre du haut.",
@@ -309,10 +340,18 @@ export const fractionsBank: TutorBankItemV4[] = [
       const numerator = randomInt(1, denominator - 1);
 
       return {
-        text: `Dans la fraction ${numerator}/${denominator}, quel est le dénominateur ?`,
+        text: tournure(
+          () => `Dans la fraction ${numerator}/${denominator}, quel est le dénominateur ?`,
+          (x) => `${x.p} écrit ${numerator}/${denominator} sur son ardoise. Quel est le dénominateur de cette fraction ?`,
+          (x) => `${debut()}${x.p} mange ${numerator}/${denominator} ${objet().du}. Quel est le dénominateur de cette fraction ?`,
+          (x) => `${x.p} lit « ${numerator}/${denominator} de litre de lait » dans une recette. Quel est le dénominateur de cette fraction ?`,
+          (x) => `${x.p} colorie ${numerator}/${denominator} ${objet(false).du}. Quel nombre de cette fraction est le dénominateur ?`,
+        ),
         format: "short",
         expected: [String(denominator)],
         comparator: "number_equal",
+        // 25/10/2026 : la fraction dessinée (disque, barre ou rectangle).
+        canvas: figure(numerator, denominator),
         explanation: exp(
           "Le dénominateur est le nombre placé sous la barre de fraction.",
           "On regarde le nombre du bas.",
@@ -343,11 +382,18 @@ export const fractionsBank: TutorBankItemV4[] = [
       const value = askNumerator ? numerator : denominator;
 
       return {
-        text: `Dans la fraction ${numerator}/${denominator}, comment s’appelle le nombre ${value} ?`,
+        text: tournure(
+          () => `Dans la fraction ${numerator}/${denominator}, comment s’appelle le nombre ${value} ?`,
+          (x) => `${x.p} montre le nombre ${value} dans la fraction ${numerator}/${denominator}. Comment s’appelle ce nombre ?`,
+          (x) => `Au tableau, ${x.p} a écrit ${numerator}/${denominator}. Quel est le nom du nombre ${value} ?`,
+          (x) => `${debut()}${x.p} a pris ${numerator}/${denominator} ${objet().du}. Comment s’appelle le nombre ${value} dans cette fraction ?`,
+        ),
         format: "qcm",
         choices: ["numérateur", "dénominateur"],
         expected: [correct],
         comparator: "mcq_exact",
+        // 25/10/2026 : la fraction dessinée (disque, barre ou rectangle).
+        canvas: figure(numerator, denominator),
         explanation: exp(
           "Dans une fraction, chaque nombre a un rôle.",
           "Le nombre du haut est le numérateur ; le nombre du bas est le dénominateur.",
@@ -505,7 +551,12 @@ export const fractionsBank: TutorBankItemV4[] = [
       const correct = `${numerator}/${denominator}`;
 
       return {
-        text: `Une bande est partagée en ${denominator} parts égales. On colorie ${numerator} parts. Quelle fraction est représentée ?`,
+        text: tournure(
+          () => `Une bande est partagée en ${denominator} parts égales. On colorie ${numerator} parts. Quelle fraction est représentée ?`,
+          (x) => { const o = objet(false); return `${x.p} partage ${o.un} en ${denominator} ${o.parts} ${egaux(o)} et en colorie ${numerator}. Quelle fraction ${o.du} est coloriée ?`; },
+          (x) => { const o = objet(false); return `${debut()}${x.p} coupe ${o.un} en ${denominator} ${o.parts} ${egaux(o)} et en mange ${numerator}. Quelle fraction ${o.du} a-${tIl(x)} mangée ?`; },
+          (x) => { const o = objet(false); return `${MAJ(o.un)} a ${denominator} ${o.parts} ${egaux(o)}. ${x.p} en peint ${numerator}. Quelle fraction ${o.du} est peinte ?`; },
+        ),
         format: "qcm",
         choices: makeChoices(correct, [
           `${denominator}/${numerator}`,
@@ -547,7 +598,12 @@ export const fractionsBank: TutorBankItemV4[] = [
       const correct = `${numerator}/${denominator}`;
 
       return {
-        text: `Un disque est partagé en ${denominator} parts égales. ${numerator} parts sont coloriées. Quelle fraction est représentée ?`,
+        text: tournure(
+          () => `Un disque est partagé en ${denominator} parts égales. ${numerator} parts sont coloriées. Quelle fraction est représentée ?`,
+          (x) => { const o = objet(true); return `${x.p} coupe ${o.un} en ${denominator} ${o.parts} ${egaux(o)} et en prend ${numerator}. Quelle fraction ${o.du} a-${tIl(x)} prise ?`; },
+          (x) => { const o = objet(true); return `${debut()}${x.p} partage ${o.un} en ${denominator} ${o.parts} ${egaux(o)} et en mange ${numerator}. Quelle fraction ${o.du} a-${tIl(x)} mangée ?`; },
+          (x, y) => { const o = objet(true); return `${MAJ(o.le)} de ${x.p} a ${denominator} ${o.parts} ${egaux(o)}. ${y.p} en reçoit ${numerator}. Quelle fraction ${o.du} reçoit ${y.p} ?`; },
+        ),
         format: "qcm",
         choices: makeChoices(correct, [
           `${denominator}/${numerator}`,
@@ -591,7 +647,13 @@ export const fractionsBank: TutorBankItemV4[] = [
       const correct = `${shaded}/${total}`;
 
       return {
-        text: `Une grille contient ${total} cases. ${shaded} cases sont coloriées. Quelle fraction est représentée ?`,
+        text: tournure(
+          () => `Une grille contient ${total} cases. ${shaded} cases sont coloriées. Quelle fraction est représentée ?`,
+          (x) => `${x.p} a un damier de ${total} cases égales et en colorie ${shaded}. Quelle fraction du damier est coloriée ?`,
+          (x) => `Le potager de l’école a ${total} carrés égaux. ${x.p} en a planté ${shaded}. Quelle fraction du potager est plantée ?`,
+          (x) => `Sur le cahier de ${x.p}, un rectangle a ${total} carreaux égaux ; ${x.p} en colorie ${shaded}. Quelle fraction du rectangle est coloriée ?`,
+          (x) => `${debut()}${x.p} carrelle un mur de ${total} carreaux égaux et en pose ${shaded} en bleu. Quelle fraction du mur est bleue ?`,
+        ),
         format: "qcm",
         choices: makeChoices(correct, [
           `${total}/${shaded}`,
@@ -790,7 +852,12 @@ export const fractionsBank: TutorBankItemV4[] = [
       const correct = `${denominator}/${denominator}`;
 
       return {
-        text: `Une unité est partagée en ${denominator} parts égales. Quelle fraction représente l’unité entière ?`,
+        text: tournure(
+          () => `Une unité est partagée en ${denominator} parts égales. Quelle fraction représente l’unité entière ?`,
+          () => { const o = objet(); return `${MAJ(o.un)} est partagé${e(o)} en ${denominator} ${o.parts} ${egaux(o)}. Quelle fraction représente ${o.entier} ?`; },
+          (x) => { const o = objet(); return `${x.p} coupe ${o.un} en ${denominator} ${o.parts} ${egaux(o)}. Quelle fraction faut-il prendre pour avoir ${o.entier} ?`; },
+          (x) => { const o = objet(); return `${debut()}${x.p} veut manger ${o.entier}, coupé${e(o)} en ${denominator} ${o.parts} ${egaux(o)}. Quelle fraction ${o.du} doit-${il(x)} manger ?`; },
+        ),
         format: "qcm",
         choices: makeChoices(correct, [
           `1/${denominator}`,
@@ -831,7 +898,14 @@ export const fractionsBank: TutorBankItemV4[] = [
       const correct = `${denominator}/${denominator}`;
 
       return {
-        text: "Quelle fraction est égale à 1 ?",
+        text: tournure(
+          () => "Quelle fraction est égale à 1 ?",
+          (x) => `${x.p} cherche la fraction qui vaut exactement une unité entière. Laquelle est-ce ?`,
+          () => `Parmi ces fractions, laquelle représente ${objet().entier} ?`,
+          (x) => `${x.p} veut colorier toute une bande, sans rien laisser. Quelle fraction de la bande va-t-${il(x)} colorier ?`,
+          () => "Laquelle de ces fractions vaut exactement 1 ?",
+          (x) => `${debut()}${x.p} mange une crêpe entière. Quelle fraction de la crêpe a-${tIl(x)} mangée ?`,
+        ),
         format: "qcm",
         choices: makeChoices(correct, [
           `${denominator - 1}/${denominator}`,
@@ -872,7 +946,12 @@ export const fractionsBank: TutorBankItemV4[] = [
       const correct = isUnit ? "oui" : "non";
 
       return {
-        text: `La fraction ${fraction} représente-t-elle une unité entière ?`,
+        text: tournure(
+          () => `La fraction ${fraction} représente-t-elle une unité entière ?`,
+          (x) => { const o = objet(); return `${x.p} a pris ${fraction} ${o.du}. A-${tIl(x)} pris ${o.entier} ?`; },
+          (x) => `${x.p} affirme : « ${fraction}, c’est une unité entière. » A-${tIl(x)} raison ?`,
+          (x) => { const o = objet(); return `${debut()}${x.p} a colorié ${fraction} ${o.du}. A-${tIl(x)} colorié ${o.entier} ?`; },
+        ),
         format: "qcm",
         choices: ["oui", "non"],
         expected: [correct],
@@ -1051,7 +1130,13 @@ export const fractionsBank: TutorBankItemV4[] = [
       const correct = `${numerator}/${denominator}`;
 
       return {
-        text: "Quelle fraction est supérieure à 1 ?",
+        text: tournure(
+          () => "Quelle fraction est supérieure à 1 ?",
+          (x) => `${x.p} cherche une fraction plus grande que 1. Laquelle doit-${il(x)} choisir ?`,
+          () => "Laquelle de ces fractions dépasse une unité entière ?",
+          (x) => `Dans le jeu de cartes de ${x.p}, quelle fraction est plus grande que 1 ?`,
+          (x) => `${x.p} veut plus d’une pizza entière. Quelle fraction de pizza doit-${il(x)} demander ?`,
+        ),
         format: "qcm",
         choices: makeChoices(correct, [
           `${denominator - 1}/${denominator}`,
@@ -1096,7 +1181,13 @@ export const fractionsBank: TutorBankItemV4[] = [
       const correct = type === "superieure" ? "oui" : "non";
 
       return {
-        text: `La fraction ${fraction} est-elle supérieure à 1 ?`,
+        text: tournure(
+          () => `La fraction ${fraction} est-elle supérieure à 1 ?`,
+          (x) => `${x.p} a mangé ${fraction} de pizza, avec des pizzas toutes pareilles. A-${tIl(x)} mangé plus d’une pizza entière ?`,
+          (x) => `${x.p} dit : « ${fraction} est plus grand que 1. » A-${tIl(x)} raison ?`,
+          (x) => `${x.p} a couru ${fraction} du tour de piste. A-${tIl(x)} couru plus d’un tour entier ?`,
+          (x) => `${debut()}${x.p} a bu ${fraction} de bouteille d’eau. A-${tIl(x)} bu plus d’une bouteille entière ?`,
+        ),
         format: "qcm",
         choices: ["oui", "non"],
         expected: [correct],
@@ -1130,7 +1221,11 @@ export const fractionsBank: TutorBankItemV4[] = [
       const correct = `${partsMangees}/${partsParUnite}`;
 
       return {
-        text: `Un gâteau entier contient ${partsParUnite} parts égales. On mange ${partsMangees} parts. Quelle fraction de gâteau a été mangée ?`,
+        text: tournure(
+          () => `Un gâteau entier contient ${partsParUnite} parts égales. On mange ${partsMangees} parts. Quelle fraction de gâteau a été mangée ?`,
+          (x) => { const o = objet(); return `Chaque ${nomSeul(o)} est coupé${e(o)} en ${partsParUnite} ${o.parts} ${egaux(o)}. ${x.p} et ses amis en mangent ${partsMangees}. Quelle fraction de ${nomSeul(o)} ont-ils mangée ?`; },
+          (x) => { const o = objet(); return `${debut()}${x.p} partage des ${o.parts} : chaque ${nomSeul(o)} en compte ${partsParUnite}, et ${il(x)} en distribue ${partsMangees}. Quelle fraction de ${nomSeul(o)} a-${tIl(x)} distribuée ?`; },
+        ),
         format: "qcm",
         choices: makeChoices(correct, [
           `${partsParUnite}/${partsMangees}`,
@@ -1192,7 +1287,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Sur une droite de 0 à 1 partagée en 2 parts égales, le point placé au milieu correspond à quelle fraction ?",
     format: "qcm",
-    choices: ["1/2", "2/1", "1/1", "2/2"],
+    choices: ["1/2", "2/1", "1/1", "1/4"],
     expected: ["1/2"],
     comparator: "mcq_exact",
     hint: "Le milieu entre 0 et 1 correspond à une moitié.",
@@ -1335,10 +1430,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_droite",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi 3/8 se place au 3e trait après 0 sur une droite partagée en 8 parts égales.",
-    format: "open",
-    expected: ["3", "8", "trait", "parts", "0"],
-    comparator: "contains_keyword",
+    text: "Sur une droite de 0 à 1 partagée en 8 parts égales, à quel trait après 0 se place 3/8 ?",
+    format: "short",
+    expected: ["3"],
+    comparator: "number_equal",
     hint: "Le numérateur indique combien de parts on avance depuis 0.",
     explanation: exp(
       "Sur une droite graduée, une fraction indique une position.",
@@ -1351,7 +1446,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       numerator: 3,
       label: "?",
     }),
-    tags: ["cm1", "fraction", "droite", "open", "expliquer", "canvas"],
+    tags: ["cm1", "fraction", "droite", "short", "expliquer", "canvas"],
   },
 
   {
@@ -1363,10 +1458,11 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_droite",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi le point 1 correspond à 5/5 sur une droite partagée en 5 parts égales.",
-    format: "open",
-    expected: ["1", "5", "5/5", "unité", "parts"],
-    comparator: "contains_keyword",
+    text: "Une droite de 0 à 1 est partagée en 5 parts égales. Quelle fraction correspond au point 1 ?",
+    format: "qcm",
+    choices: ["5/5", "1/5", "4/5", "5/1"],
+    expected: ["5/5"],
+    comparator: "mcq_exact",
     hint: "Le point 1 représente toute l’unité.",
     explanation: exp(
       "Le point 1 représente une unité entière.",
@@ -1379,7 +1475,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       numerator: 5,
       label: "1",
     }),
-    tags: ["cm1", "fraction", "droite", "open", "unite", "canvas"],
+    tags: ["cm1", "fraction", "droite", "qcm", "unite", "canvas"],
   },
 
   {
@@ -1399,7 +1495,13 @@ export const fractionsBank: TutorBankItemV4[] = [
       const correct = `${numerator}/${denominator}`;
 
       return {
-        text: `Une droite de 0 à 1 est partagée en ${denominator} parts égales. Le point est au ${numerator}e trait après 0. Quelle fraction représente-t-il ?`,
+        text: tournure(
+          () => `Une droite de 0 à 1 est partagée en ${denominator} parts égales. Le point est au ${rang(numerator)} trait après 0. Quelle fraction représente-t-il ?`,
+          (x) => `La piste de ${x.p} va du départ (0) à l’arrivée (1), partagée en ${denominator} parts égales. ${x.p} s’arrête au ${rang(numerator)} trait après 0. Quelle fraction de la piste a-${tIl(x)} parcourue ?`,
+          (x) => `Sur la règle de ${x.p}, l’unité est partagée en ${denominator} parts égales. Un point est au ${rang(numerator)} trait après 0. Quelle fraction représente-t-il ?`,
+          (x) => `${x.p} trace une droite graduée de 0 à 1 en ${denominator} parts égales et place un point au ${rang(numerator)} trait après 0. Quelle fraction ce point représente-t-il ?`,
+          (x) => `Le sentier de randonnée de ${x.p} va de 0 à 1, avec ${denominator} étapes égales. ${x.p} pique-nique au ${rang(numerator)} trait après 0. À quelle fraction du sentier est-${il(x)} ?`,
+        ),
         format: "qcm",
         choices: makeChoices(correct, [
           `${denominator}/${numerator}`,
@@ -1437,15 +1539,21 @@ export const fractionsBank: TutorBankItemV4[] = [
     generate: () => {
       const denominator = randomChoice([4, 5, 6, 8, 10]);
       const numerator = randomInt(1, denominator - 1);
-      const correct = `${numerator}e trait`;
+      const correct = `${rang(numerator)} trait`;
 
       return {
-        text: `Sur une droite de 0 à 1 partagée en ${denominator} parts égales, à quel trait après 0 se place ${numerator}/${denominator} ?`,
+        text: tournure(
+          () => `Sur une droite de 0 à 1 partagée en ${denominator} parts égales, à quel trait après 0 se place ${numerator}/${denominator} ?`,
+          (x) => `${x.p} veut placer ${numerator}/${denominator} sur une droite de 0 à 1 partagée en ${denominator} parts égales. À quel trait après 0 doit-${il(x)} le placer ?`,
+          (x) => `Sur la piste de course de ${x.p}, de 0 à 1, il y a ${denominator} parts égales. À quel trait après 0 ${x.p} a-${tIl(x)} couru ${numerator}/${denominator} de la piste ?`,
+          (x) => `${debut()}${x.p} gradue une ficelle de 0 à 1 en ${denominator} parts égales. À quel trait après 0 attache-t-${il(x)} l’étiquette ${numerator}/${denominator} ?`,
+        ),
         format: "qcm",
         choices: makeChoices(correct, [
-          `${denominator}e trait`,
+          `${rang(denominator)} trait`,
           "1er trait",
-          `${Math.max(1, denominator - numerator)}e trait`,
+          `${rang(Math.max(1, denominator - numerator))} trait`,
+          `${rang(numerator + 1)} trait`,
         ]),
         expected: [correct],
         comparator: "mcq_exact",
@@ -1453,7 +1561,7 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Sur une droite graduée, le numérateur indique combien de parts on avance depuis 0.",
           "On lit la fraction et on repère le nombre du haut.",
           `${numerator}/${denominator} signifie ${numerator} parts sur ${denominator}.`,
-          `Le point se place au ${numerator}e trait après 0.`
+          `Le point se place au ${rang(numerator)} trait après 0.`
         ),
         canvas: droiteGradueeFractionCanvas({
           denominator,
@@ -1478,19 +1586,26 @@ export const fractionsBank: TutorBankItemV4[] = [
     generate: () => {
       const denominator = randomChoice([5, 6, 8, 10]);
       const numerator = randomInt(2, denominator - 2);
-      const wrongTrait = numerator + randomChoice([-1, 1]);
+      // 25/10/2026 : la réponse était TOUJOURS « non ». Une fois sur trois, l'élève a raison.
+      const juste = Math.random() < 1 / 3;
+      const wrongTrait = juste ? numerator : numerator + randomChoice([-1, 1]);
 
       return {
-        text: `Une droite de 0 à 1 est partagée en ${denominator} parts égales. Un élève place ${numerator}/${denominator} au ${wrongTrait}e trait après 0. A-t-il raison ?`,
+        text: tournure(
+          () => `Une droite de 0 à 1 est partagée en ${denominator} parts égales. Un élève place ${numerator}/${denominator} au ${rang(wrongTrait)} trait après 0. A-t-il raison ?`,
+          (x) => `Une droite de 0 à 1 est partagée en ${denominator} parts égales. ${x.p} place ${numerator}/${denominator} au ${rang(wrongTrait)} trait après 0. A-${tIl(x)} raison ?`,
+          (x) => `${x.p} affirme : « Sur une droite de 0 à 1 en ${denominator} parts égales, ${numerator}/${denominator} est au ${rang(wrongTrait)} trait après 0. » A-${tIl(x)} raison ?`,
+          (x, y) => `${y.p} a gradué une droite de 0 à 1 en ${denominator} parts égales. ${x.p} y colle ${numerator}/${denominator} au ${rang(wrongTrait)} trait après 0. A-${tIl(x)} raison ?`,
+        ),
         format: "qcm",
         choices: ["oui", "non"],
-        expected: ["non"],
+        expected: [juste ? "oui" : "non"],
         comparator: "mcq_exact",
         explanation: exp(
           "Pour placer une fraction sur une droite, on compte les traits depuis 0.",
           "Le numérateur indique le bon numéro du trait.",
-          `${numerator}/${denominator} se place au ${numerator}e trait, pas au ${wrongTrait}e.`,
-          "L’élève n’a pas raison."
+          juste ? `${numerator}/${denominator} se place bien au ${rang(numerator)} trait.` : `${numerator}/${denominator} se place au ${rang(numerator)} trait, pas au ${rang(wrongTrait)}.`,
+          juste ? "Oui, c’est juste." : "Non, ce n’est pas juste."
         ),
         canvas: droiteGradueeFractionCanvas({
           denominator,
@@ -1517,7 +1632,12 @@ export const fractionsBank: TutorBankItemV4[] = [
       const correct = `${denominator}/${denominator}`;
 
       return {
-        text: `Sur une droite de 0 à 1 partagée en ${denominator} parts égales, quelle fraction correspond au point 1 ?`,
+        text: tournure(
+          () => `Sur une droite de 0 à 1 partagée en ${denominator} parts égales, quelle fraction correspond au point 1 ?`,
+          (x) => `${x.p} gradue une droite de 0 à 1 en ${denominator} parts égales. Quelle fraction écrit-${il(x)} sous le point 1 ?`,
+          (x) => `La course de ${x.p} va de 0 (départ) à 1 (arrivée), en ${denominator} parts égales. Quelle fraction correspond à l’arrivée ?`,
+          (x) => `${debut()}${x.p} avance de ${denominator} graduations sur une droite de 0 à 1 partagée en ${denominator} parts égales. Il arrive au point 1 : quelle fraction est-ce ?`,
+        ),
         format: "qcm",
         choices: makeChoices(correct, [
           `1/${denominator}`,
@@ -1724,10 +1844,11 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_comparer",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi 5/8 est plus grand que 3/8.",
-    format: "open",
-    expected: ["même", "dénominateur", "8", "5", "3"],
-    comparator: "contains_keyword",
+    text: "5/8 et 3/8 ont le même dénominateur. Pourquoi 5/8 est-elle plus grande que 3/8 ?",
+    format: "qcm",
+    choices: ["On prend 5 parts au lieu de 3, et les parts ont la même taille.", "Parce que 8 est plus grand que 5.", "Parce que 3 est plus petit que 8.", "On ne peut pas les comparer."],
+    expected: ["On prend 5 parts au lieu de 3, et les parts ont la même taille."],
+    comparator: "mcq_exact",
     hint: "Les deux fractions ont le même dénominateur.",
     explanation: exp(
       "Quand deux fractions ont le même dénominateur, les parts ont la même taille.",
@@ -1740,7 +1861,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       b: { numerator: 3, denominator: 8, label: "3/8" },
       showFraction: false,
     }),
-    tags: ["cm1", "fraction", "comparer", "open", "meme_denominateur", "canvas"],
+    tags: ["cm1", "fraction", "comparer", "qcm", "meme_denominateur", "canvas"],
   },
 
   {
@@ -1752,10 +1873,11 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_comparer",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi 1/4 est plus grand que 1/8.",
-    format: "open",
-    expected: ["4", "8", "parts", "plus", "grand"],
-    comparator: "contains_keyword",
+    text: "Pourquoi 1/4 est-elle plus grande que 1/8 ?",
+    format: "qcm",
+    choices: ["Partagée en 4, chaque part est plus grande que partagée en 8.", "Parce que 4 est plus grand que 8.", "Parce que 1/8 a plus de parts prises.", "Parce que les numérateurs sont différents."],
+    expected: ["Partagée en 4, chaque part est plus grande que partagée en 8."],
+    comparator: "mcq_exact",
     hint: "Quand on partage en 4 parts, chaque part est plus grande que lorsqu’on partage en 8 parts.",
     explanation: exp(
       "Quand le numérateur est le même, on compare la taille des parts.",
@@ -1768,7 +1890,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       b: { numerator: 1, denominator: 8, label: "1/8" },
       showFraction: false,
     }),
-    tags: ["cm1", "fraction", "comparer", "open", "meme_numerateur", "canvas"],
+    tags: ["cm1", "fraction", "comparer", "qcm", "meme_numerateur", "canvas"],
   },
 
   {
@@ -1789,7 +1911,12 @@ export const fractionsBank: TutorBankItemV4[] = [
       const correct = `${b}/${denominator}`;
 
       return {
-        text: `Quelle fraction est la plus grande : ${a}/${denominator} ou ${b}/${denominator} ?`,
+        text: tournure(
+          () => `Quelle fraction est la plus grande : ${a}/${denominator} ou ${b}/${denominator} ?`,
+          (x, y) => `${x.p} a mangé ${a}/${denominator} d’une tarte, ${y.p} ${b}/${denominator} d’une tarte identique. Quelle fraction est la plus grande ?`,
+          (x) => `${x.p} a peint ${a}/${denominator} d’un mur le matin et ${b}/${denominator} d’un mur pareil l’après-midi. Quelle fraction est la plus grande ?`,
+          (x) => `${debut()}${x.p} compare ${a}/${denominator} et ${b}/${denominator}. Laquelle est la plus grande ?`,
+        ),
         format: "qcm",
         choices: makeChoices(correct, [
           `${a}/${denominator}`,
@@ -1836,7 +1963,12 @@ export const fractionsBank: TutorBankItemV4[] = [
       const correct = a < b ? "<" : ">";
 
       return {
-        text: `Complète : ${a}/${denominator} ... ${b}/${denominator}`,
+        text: tournure(
+          () => `Complète : ${a}/${denominator} ... ${b}/${denominator}`,
+          (x) => `${x.p} compare ${a}/${denominator} et ${b}/${denominator}. Quel signe écrit-${il(x)} : ${a}/${denominator} ... ${b}/${denominator} ?`,
+          (x) => `Sur l’ardoise de ${x.p} : ${a}/${denominator} ... ${b}/${denominator}. Quel signe complète ?`,
+          (x, y) => `${x.p} a lu ${a}/${denominator} d’un livre, ${y.p} ${b}/${denominator} du même livre. Complète : ${a}/${denominator} ... ${b}/${denominator}`,
+        ),
         format: "qcm",
         choices: ["<", ">", "="],
         expected: [correct],
@@ -1869,7 +2001,12 @@ export const fractionsBank: TutorBankItemV4[] = [
       const correct = `${numerator}/${smallDenominator}`;
 
       return {
-        text: `Quelle fraction est la plus grande : ${numerator}/${smallDenominator} ou ${numerator}/${bigDenominator} ?`,
+        text: tournure(
+          () => `Quelle fraction est la plus grande : ${numerator}/${smallDenominator} ou ${numerator}/${bigDenominator} ?`,
+          (x, y) => `${x.p} reçoit ${numerator}/${smallDenominator} d’un gâteau, ${y.p} ${numerator}/${bigDenominator} d’un gâteau identique. Quelle fraction est la plus grande ?`,
+          (x) => `${x.p} hésite entre ${numerator}/${smallDenominator} et ${numerator}/${bigDenominator} d’une pizza. Quelle fraction est la plus grande ?`,
+          (x) => `${debut()}${x.p} compare ${numerator}/${smallDenominator} et ${numerator}/${bigDenominator} d’un même ruban. Laquelle est la plus grande ?`,
+        ),
         format: "qcm",
         choices: makeChoices(correct, [
           `${numerator}/${bigDenominator}`,
@@ -1925,7 +2062,12 @@ export const fractionsBank: TutorBankItemV4[] = [
             : "supérieure à 1";
 
       return {
-        text: `La fraction ${fraction} est-elle inférieure, égale ou supérieure à 1 ?`,
+        text: tournure(
+          () => `La fraction ${fraction} est-elle inférieure, égale ou supérieure à 1 ?`,
+          (x) => `${x.p} a bu ${fraction} de bouteille de jus. Comparée à 1 bouteille, cette fraction est-elle inférieure, égale ou supérieure à 1 ?`,
+          (x) => `${x.p} a nagé ${fraction} de la longueur du bassin. Cette fraction est-elle inférieure, égale ou supérieure à 1 ?`,
+          (x) => `${debut()}${x.p} écrit ${fraction}. Cette fraction est-elle inférieure, égale ou supérieure à 1 ?`,
+        ),
         format: "qcm",
         choices: ["inférieure à 1", "égale à 1", "supérieure à 1"],
         expected: [correct],
@@ -1957,7 +2099,11 @@ export const fractionsBank: TutorBankItemV4[] = [
       const correct = "non";
 
       return {
-        text: `Un élève dit que 1/${bigDenominator} est plus grand que 1/${smallDenominator} car ${bigDenominator} est plus grand que ${smallDenominator}. A-t-il raison ?`,
+        text: tournure(
+          () => `Un élève dit que 1/${bigDenominator} est plus grand que 1/${smallDenominator} car ${bigDenominator} est plus grand que ${smallDenominator}. A-t-il raison ?`,
+          (x) => `${x.p} dit que 1/${bigDenominator} d’une pizza est plus grand que 1/${smallDenominator} de la même pizza, car ${bigDenominator} est plus grand que ${smallDenominator}. A-${tIl(x)} raison ?`,
+          (x) => `${x.p} préfère 1/${bigDenominator} du gâteau à 1/${smallDenominator} : « ${bigDenominator}, c’est plus que ${smallDenominator}, donc la part est plus grosse. » A-${tIl(x)} raison ?`,
+        ),
         format: "qcm",
         choices: ["oui", "non"],
         expected: [correct],
@@ -2132,7 +2278,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Dans une grille de 10 cases, 5 cases sont coloriées. Quelle fraction équivalente simple peut-on reconnaître ?",
     format: "qcm",
-    choices: ["1/2", "1/5", "5/5", "2/10"],
+    choices: ["1/2", "1/5", "5/5", "1/10"],
     expected: ["1/2"],
     comparator: "mcq_exact",
     hint: "5 cases sur 10, c’est la moitié.",
@@ -2159,10 +2305,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_equivalente",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi 2/4 est équivalente à 1/2.",
-    format: "open",
-    expected: ["2", "4", "moitié", "même", "équivalente"],
-    comparator: "contains_keyword",
+    text: "2 parts sur 4, c’est la moitié : 1/2 = …/4. Quel nombre manque ?",
+    format: "short",
+    expected: ["2"],
+    comparator: "number_equal",
     hint: "Deux parts sur quatre représentent la moitié.",
     explanation: exp(
       "Deux fractions sont équivalentes si elles représentent la même quantité.",
@@ -2175,7 +2321,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       b: { numerator: 1, denominator: 2, label: "1/2" },
       showFraction: false,
     }),
-    tags: ["cm1", "fraction", "equivalente", "open", "moitie", "canvas"],
+    tags: ["cm1", "fraction", "equivalente", "short", "moitie", "canvas"],
   },
 
   {
@@ -2187,10 +2333,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_equivalente",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique comment obtenir une fraction équivalente à 2/3.",
-    format: "open",
-    expected: ["multiplier", "numérateur", "dénominateur", "même", "nombre"],
-    comparator: "contains_keyword",
+    text: "On multiplie le haut et le bas de 2/3 par 2 : 2/3 = …/6. Quel nombre manque ?",
+    format: "short",
+    expected: ["4"],
+    comparator: "number_equal",
     hint: "On peut multiplier le haut et le bas par le même nombre.",
     explanation: exp(
       "Pour obtenir une fraction équivalente, on transforme le numérateur et le dénominateur de la même façon.",
@@ -2198,7 +2344,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Par exemple, 2 × 2 = 4 et 3 × 2 = 6.",
       "Une fraction équivalente à 2/3 est 4/6."
     ),
-    tags: ["cm1", "fraction", "equivalente", "open", "methode"],
+    tags: ["cm1", "fraction", "equivalente", "short", "methode"],
   },
 
   {
@@ -2218,7 +2364,13 @@ export const fractionsBank: TutorBankItemV4[] = [
       const correct = `${numerator}/${denominator}`;
 
       return {
-        text: "Quelle fraction est équivalente à 1/2 ?",
+        text: tournure(
+          () => "Quelle fraction est équivalente à 1/2 ?",
+          (x) => `${x.p} a mangé la moitié (1/2) de sa tablette. Quelle autre fraction dit la même quantité ?`,
+          (x) => `${x.p} cherche une fraction qui vaut autant que 1/2. Laquelle ?`,
+          (x) => `${debut()}${x.p} a bu la moitié de sa gourde. Quelle fraction est équivalente à 1/2 ?`,
+          () => "Quelle fraction est égale à 1/2 ?",
+        ),
         format: "qcm",
         choices: makeChoices(correct, [
           `1/${denominator}`,
@@ -2266,7 +2418,12 @@ export const fractionsBank: TutorBankItemV4[] = [
       const original = `${base.n}/${base.d}`;
 
       return {
-        text: `Quelle fraction est équivalente à ${original} ?`,
+        text: tournure(
+          () => `Quelle fraction est équivalente à ${original} ?`,
+          (x) => `${x.p} a colorié ${original} d’une bande. Quelle fraction représente la même longueur ?`,
+          (x) => `${x.p} cherche une fraction égale à ${original}. Laquelle ?`,
+          (x) => `${debut()}${x.p} mange ${original} d’une pizza. Quelle fraction dit la même quantité ?`,
+        ),
         format: "qcm",
         choices: makeChoices(correct, [
           `${base.n + factor}/${base.d + factor}`,
@@ -2310,7 +2467,12 @@ export const fractionsBank: TutorBankItemV4[] = [
       const item = randomChoice(pairs);
 
       return {
-        text: `Les fractions ${item.a} et ${item.b} sont-elles équivalentes ?`,
+        text: tournure(
+          () => `Les fractions ${item.a} et ${item.b} sont-elles équivalentes ?`,
+          (x) => `${x.p} dit que ${item.a} et ${item.b} représentent la même quantité. A-${tIl(x)} raison ?`,
+          (x, y) => `${x.p} colorie ${item.a} d’une bande, ${y.p} ${item.b} d’une bande identique. Les deux longueurs coloriées sont-elles égales ?`,
+          (x) => `${debut()}${x.p} se demande si ${item.a} = ${item.b}. Est-ce vrai ?`,
+        ),
         format: "qcm",
         choices: ["oui", "non"],
         expected: [item.correct],
@@ -2349,7 +2511,12 @@ export const fractionsBank: TutorBankItemV4[] = [
       const item = randomChoice(options);
 
       return {
-        text: `Une grille représente ${item.represented}. Quelle fraction simple équivalente peut-on reconnaître ?`,
+        text: tournure(
+          () => `Une grille représente ${item.represented}. Quelle fraction simple équivalente peut-on reconnaître ?`,
+          (x) => `${x.p} a colorié ${item.represented} de son quadrillage. Quelle fraction plus simple dit la même chose ?`,
+          (x) => `Sur le carrelage de ${x.p}, ${item.represented} des carreaux sont bleus. Quelle fraction simple est égale ?`,
+          (x) => `${debut()}${x.p} regarde la grille coloriée (${item.represented}). Quelle fraction simple reconnaît-${il(x)} ?`,
+        ),
         format: "qcm",
         choices: makeChoices(item.correct, ["1/3", "3/4", "2/3"]),
         expected: [item.correct],
@@ -2538,10 +2705,11 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_decimale",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi 37/100 est une fraction décimale.",
-    format: "open",
-    expected: ["100", "dénominateur", "fraction", "décimale"],
-    comparator: "contains_keyword",
+    text: "Pourquoi 37/100 est-elle une fraction décimale ?",
+    format: "qcm",
+    choices: ["Son dénominateur est 100.", "Son numérateur est 37.", "37 est plus petit que 100.", "Elle est plus petite que 1."],
+    expected: ["Son dénominateur est 100."],
+    comparator: "mcq_exact",
     hint: "Regarde le nombre sous la barre de fraction.",
     explanation: exp(
       "Une fraction décimale est une fraction dont le dénominateur est 10, 100, 1 000...",
@@ -2549,7 +2717,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Dans 37/100, le dénominateur est 100.",
       "Donc 37/100 est une fraction décimale."
     ),
-    tags: ["cm1", "fraction", "decimale", "open", "definition"],
+    tags: ["cm1", "fraction", "decimale", "qcm", "definition"],
   },
 
   {
@@ -2561,10 +2729,11 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_decimale",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi 100/7 n’est pas une fraction décimale.",
-    format: "open",
-    expected: ["7", "dénominateur", "pas", "10", "100"],
-    comparator: "contains_keyword",
+    text: "100/7 est-elle une fraction décimale ?",
+    format: "qcm",
+    choices: ["oui, car son numérateur est 100", "non, car son dénominateur est 7"],
+    expected: ["non, car son dénominateur est 7"],
+    comparator: "mcq_exact",
     hint: "Ce n’est pas le numérateur qui compte, mais le dénominateur.",
     explanation: exp(
       "Pour reconnaître une fraction décimale, on regarde le dénominateur.",
@@ -2572,7 +2741,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Dans 100/7, le dénominateur est 7.",
       "Donc 100/7 n’est pas une fraction décimale."
     ),
-    tags: ["cm1", "fraction", "decimale", "open", "piege"],
+    tags: ["cm1", "fraction", "decimale", "qcm", "piege"],
   },
 
   {
@@ -2592,7 +2761,12 @@ export const fractionsBank: TutorBankItemV4[] = [
       const correct = `${numerator}/${decimalDenominator}`;
 
       return {
-        text: "Quelle fraction est une fraction décimale ?",
+        text: tournure(
+          () => "Quelle fraction est une fraction décimale ?",
+          (x) => `${x.p} cherche une fraction décimale (dénominateur 10, 100, 1 000…). Laquelle choisir ?`,
+          () => "Laquelle de ces fractions est décimale ?",
+          (x) => `Dans le jeu de cartes de ${x.p}, quelle fraction est une fraction décimale ?`,
+        ),
         format: "qcm",
         choices: makeChoices(correct, [
           `${randomInt(1, 9)}/3`,
@@ -2633,7 +2807,12 @@ export const fractionsBank: TutorBankItemV4[] = [
       const correct = isDecimal ? "oui" : "non";
 
       return {
-        text: `La fraction ${fraction} est-elle une fraction décimale ?`,
+        text: tournure(
+          () => `La fraction ${fraction} est-elle une fraction décimale ?`,
+          (x) => `${x.p} dit que ${fraction} est une fraction décimale. A-${tIl(x)} raison ?`,
+          (x) => `${x.p} trouve ${fraction} dans son cahier. Est-ce une fraction décimale ?`,
+          (x) => `${debut()}${x.p} écrit ${fraction} au tableau. Est-ce une fraction décimale ?`,
+        ),
         format: "qcm",
         choices: ["oui", "non"],
         expected: [correct],
@@ -2667,7 +2846,12 @@ export const fractionsBank: TutorBankItemV4[] = [
       const correct = `${numerator}/10`;
 
       return {
-        text: `Quelle fraction décimale correspond à ${decimalText} ?`,
+        text: tournure(
+          () => `Quelle fraction décimale correspond à ${decimalText} ?`,
+          (x) => `Le ruban de ${x.p} mesure ${decimalText} m. Quelle fraction décimale correspond à ${decimalText} ?`,
+          (x) => `${x.p} a couru ${decimalText} km. Quelle fraction décimale correspond à ${decimalText} ?`,
+          (x) => `${debut()}${x.p} verse ${decimalText} L d’eau. Quelle fraction décimale correspond à ${decimalText} ?`,
+        ),
         format: "qcm",
         choices: makeChoices(correct, [
           `${numerator}/100`,
@@ -2709,7 +2893,12 @@ export const fractionsBank: TutorBankItemV4[] = [
       const correct = `${numerator}/100`;
 
       return {
-        text: `Quelle fraction décimale correspond à ${decimalText} ?`,
+        text: tournure(
+          () => `Quelle fraction décimale correspond à ${decimalText} ?`,
+          (x) => `La plante de ${x.p} a poussé de ${decimalText} m. Quelle fraction décimale correspond à ${decimalText} ?`,
+          (x) => `${x.p} pèse ${decimalText} kg de cerises. Quelle fraction décimale correspond à ${decimalText} ?`,
+          (x) => `${debut()}${x.p} lit ${decimalText} sur la balance. Quelle fraction décimale correspond à ${decimalText} ?`,
+        ),
         format: "qcm",
         choices: makeChoices(correct, [
           `${numerator}/10`,
@@ -2745,7 +2934,12 @@ export const fractionsBank: TutorBankItemV4[] = [
       const correct = `${intrusNumerator}/${intrusDenominator}`;
 
       return {
-        text: "Quelle fraction n’est pas une fraction décimale ?",
+        text: tournure(
+          () => "Quelle fraction n’est pas une fraction décimale ?",
+          (x) => `${x.p} a glissé un intrus parmi des fractions décimales. Lequel n’est pas une fraction décimale ?`,
+          () => "Laquelle de ces fractions n’est pas décimale ?",
+          (x) => `Dans la liste de ${x.p}, quelle fraction n’est pas une fraction décimale ?`,
+        ),
         format: "qcm",
         choices: makeChoices(correct, [
           `${randomInt(1, 9)}/10`,
@@ -3007,10 +3201,10 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique comment trouver la fraction restante si on mange 3 parts d’un gâteau partagé en 8 parts égales.",
-    format: "open",
-    expected: ["8", "3", "reste", "5", "parts"],
-    comparator: "contains_keyword",
+    text: "On mange 3 parts d’un gâteau partagé en 8 parts égales. Quelle fraction du gâteau reste-t-il ?",
+    format: "short",
+    expected: ["5/8"],
+    comparator: "exact_text",
     hint: "Calcule combien de parts ne sont pas mangées.",
     explanation: exp(
       "Pour trouver une fraction restante, on cherche les parts qui ne sont pas utilisées.",
@@ -3024,7 +3218,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       model: "circle",
       showFraction: false,
     }),
-    tags: ["cm1", "fraction", "defi", "open", "partage", "canvas"],
+    tags: ["cm1", "fraction", "defi", "short", "partage", "canvas"],
   },
 
   {
@@ -3036,10 +3230,11 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi 6/10 est plus grand que 4/10.",
-    format: "open",
-    expected: ["même", "dénominateur", "10", "6", "4"],
-    comparator: "contains_keyword",
+    text: "Complète avec <, > ou = : 6/10 … 4/10",
+    format: "qcm",
+    choices: ["<", ">", "="],
+    expected: [">"],
+    comparator: "mcq_exact",
     hint: "Les deux fractions ont le même dénominateur.",
     explanation: exp(
       "Quand deux fractions ont le même dénominateur, les parts ont la même taille.",
@@ -3052,7 +3247,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       b: { numerator: 4, denominator: 10, label: "4/10" },
       showFraction: false,
     }),
-    tags: ["cm1", "fraction", "defi", "open", "comparer", "canvas"],
+    tags: ["cm1", "fraction", "defi", "qcm", "comparer", "canvas"],
   },
 
   {
@@ -3073,7 +3268,12 @@ export const fractionsBank: TutorBankItemV4[] = [
       const correct = `${remaining}/${denominator}`;
 
       return {
-        text: `Un gâteau est partagé en ${denominator} parts égales. On mange ${eaten} parts. Quelle fraction du gâteau reste-t-il ?`,
+        text: tournure(
+          () => `Un gâteau est partagé en ${denominator} parts égales. On mange ${eaten} parts. Quelle fraction du gâteau reste-t-il ?`,
+          (x) => `${debut()}${x.p} partage une pizza en ${denominator} parts égales. Ses amis en mangent ${eaten}. Quelle fraction de la pizza reste-t-il ?`,
+          (x) => `${x.p} coupe une galette en ${denominator} parts égales et en distribue ${eaten}. Quelle fraction de la galette reste-t-il ?`,
+          (x) => `La tablette de ${x.p} a ${denominator} carrés égaux. ${x.p} en mange ${eaten}. Quelle fraction de la tablette reste-t-il ?`,
+        ),
         format: "qcm",
         choices: makeChoices(correct, [
           `${eaten}/${denominator}`,
@@ -3117,7 +3317,12 @@ export const fractionsBank: TutorBankItemV4[] = [
       const correct = `${total}/${denominator}`;
 
       return {
-        text: `À La Réunion, une mangue est coupée en ${denominator} parts égales. Maé mange ${a} parts et Ana mange ${b} parts. Quelle fraction de la mangue ont-elles mangée ensemble ?`,
+        text: tournure(
+          () => `À La Réunion, une mangue est coupée en ${denominator} parts égales. Maé mange ${a} parts et Ana mange ${b} parts. Quelle fraction de la mangue ont-elles mangée ensemble ?`,
+          (x, y) => `Une pastèque est coupée en ${denominator} tranches égales. ${x.p} en mange ${a} et ${y.p} en mange ${b}. Quelle fraction de la pastèque a été mangée en tout ?`,
+          (x, y) => `Une pizza est coupée en ${denominator} parts égales. ${x.p} en prend ${a}, ${y.p} en prend ${b}. Quelle fraction de la pizza a été prise en tout ?`,
+          (x, y) => `${x.p} et ${y.p} peignent une frise de ${denominator} cases égales : ${a} case${a > 1 ? "s" : ""} pour ${x.p}, ${b} pour ${y.p}. Quelle fraction de la frise est peinte en tout ?`,
+        ),
         format: "qcm",
         choices: makeChoices(correct, [
           `${a}/${denominator}`,
@@ -3159,7 +3364,11 @@ export const fractionsBank: TutorBankItemV4[] = [
       const correct = `${numerator}/${denominator}`;
 
       return {
-        text: `Sur une droite de 0 à 1 partagée en ${denominator} parts égales, un point est placé au ${numerator}e trait après 0. Quelle fraction représente-t-il ?`,
+        text: tournure(
+          () => `Sur une droite de 0 à 1 partagée en ${denominator} parts égales, un point est placé au ${rang(numerator)} trait après 0. Quelle fraction représente-t-il ?`,
+          (x) => `${x.p} fait une course de 0 à 1, partagée en ${denominator} parts égales. ${MAJ(il(x))} s’arrête au ${rang(numerator)} trait après 0. Quelle fraction de la course a-${tIl(x)} faite ?`,
+          (x) => `Sur la droite graduée de ${x.p} (0 à 1, ${denominator} parts égales), le point est au ${rang(numerator)} trait après 0. Quelle fraction représente-t-il ?`,
+        ),
         format: "qcm",
         choices: makeChoices(correct, [
           `${denominator}/${numerator}`,
@@ -3201,7 +3410,11 @@ export const fractionsBank: TutorBankItemV4[] = [
       const correct = `${b}/${denominator}`;
 
       return {
-        text: `Quelle fraction est la plus grande : ${a}/${denominator} ou ${b}/${denominator} ?`,
+        text: tournure(
+          () => `Quelle fraction est la plus grande : ${a}/${denominator} ou ${b}/${denominator} ?`,
+          (x, y) => `${x.p} a lu ${a}/${denominator} de son livre, ${y.p} ${b}/${denominator} du même livre. Quelle fraction est la plus grande ?`,
+          (x, y) => `${x.p} a fait ${a}/${denominator} du puzzle, ${y.p} ${b}/${denominator} d’un puzzle identique. Quelle fraction est la plus grande ?`,
+        ),
         format: "qcm",
         choices: makeChoices(correct, [
           `${a}/${denominator}`,
@@ -3241,7 +3454,12 @@ export const fractionsBank: TutorBankItemV4[] = [
       const correct = `0,${numerator}`;
 
       return {
-        text: `Quelle écriture décimale correspond à ${numerator}/10 ?`,
+        text: tournure(
+          () => `Quelle écriture décimale correspond à ${numerator}/10 ?`,
+          (x) => `Le ruban de ${x.p} mesure ${numerator}/10 de mètre. Quelle écriture décimale correspond à ${numerator}/10 ?`,
+          (x) => `${x.p} a bu ${numerator}/10 de litre de jus. Quelle écriture à virgule correspond à ${numerator}/10 ?`,
+          (x) => `${debut()}${x.p} a couru ${numerator}/10 de kilomètre. Écris ${numerator}/10 avec une virgule : quelle écriture est la bonne ?`,
+        ),
         format: "qcm",
         choices: makeChoices(correct, [
           `0,0${numerator}`,
@@ -3282,7 +3500,12 @@ export const fractionsBank: TutorBankItemV4[] = [
       const item = randomChoice(pairs);
 
       return {
-        text: `Quelle fraction est équivalente à ${item.a} ?`,
+        text: tournure(
+          () => `Quelle fraction est équivalente à ${item.a} ?`,
+          (x) => `${x.p} a colorié ${item.a} d’une bande. Quelle fraction représente la même longueur ?`,
+          (x) => `${debut()}${x.p} mange ${item.a} d’une galette. Quelle fraction dit la même quantité ?`,
+          (x) => `${x.p} cherche une fraction égale à ${item.a}. Laquelle ?`,
+        ),
         format: "qcm",
         choices: makeChoices(item.correct, item.wrongs),
         expected: [item.correct],
@@ -3467,7 +3690,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Quelle fraction est égale à 1 (une unité entière) ?",
     format: "qcm",
-    choices: ["5/5", "3/4", "2/5", "6/8"],
+    choices: ["5/5", "3/4", "2/5", "5/8"],
     expected: ["5/5"],
     comparator: "mcq_exact",
     hint: "Une fraction vaut 1 quand le numérateur est égal au dénominateur.",
@@ -3556,4 +3779,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     ),
     tags: ["cm1", "fraction", "superieure_1", "oui_non", "qcm"],
   },
+  // ⭐ 25/10/2026 — générateurs (personnage × objet × situation × tournure).
+  ...fractionsGabaritsA,
+  ...fractionsGabaritsB,
+  ...fractionsGabaritsC,
+  ...fractionsGabaritsD,
 ];
