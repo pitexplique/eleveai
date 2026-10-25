@@ -25,16 +25,19 @@ Lis la mémoire `serie-fractions-cm1-terminale.md` (ses erreurs : SIMPLIFIER, pu
 ⚠️ Les outils de calage mot à mot (`marques_dump.ps1`, `cues2marques.py`) sont dans un scratchpad, pas dans le dépôt : cherche-les (`find C:/Users/FRED/AppData/Local/Temp/claude -name cues2marques.py`) et range-les dans `scripts/` au début de la session.
 Points à améliorer dans les lots : lignes de réponse qui arrivent 1 à 3 s après leur premier nombre (viser 0,4 s), étiquettes de flèches trop proches ; paysage un peu longue (5:36) — rester ≤ 5 min si possible.
 
+## État au 25/10 (fin de la session « fraction »)
+- 6e COMMITÉS : 03-egale (pilote `01dc0c3d`), lot A 01/02/04 (`c3468f67`), lot B 05/06/07 (`f0e298ae`). Outils de calage dans `scripts/` (`85683fe5`).
+- EN COURS au moment de la bascule (agents de l'ancienne session) : lot 6e C (08-11 paysages, 12-13 paysage + short), lot 4e D (01-05), lot 4e F (10-quantite avec le gâteau CARRÉ en 5, 11-oppose, 12-defi). Voir LOTS_ETAT ci-dessous.
+- PAS ENCORE LANCÉ : lot 4e E (06-additionner, 07-multiplier, 08-inverse, 09-diviser).
+- Modèles pour tout nouveau lot : `manim/scripts/6e/frac_lotb_commun.py` (lignes au mot, correctif « Et 3 ») + `frac_comparer.py`, le pilote `frac_egale.py`, `frac_representer_short.py` (gâteau en 6).
+
+(Si la session précédente a fini ces lots, ils sont commités : `git log --oneline -10 -- manim/scripts/6e manim/scripts/4e`. Sinon, ce qui est rendu mais non commité est dans `git status --short manim`. Un rendu qui tourne encore : `tasklist | grep -i -E "manim|python"`, attends-le.)
+
 ## À faire, dans l'ordre
-1. Vérifier le pilote (planche PyAV de 12 images sur la paysage et le short, `python scripts/verifier-bords-video.py <mp4>` → 0 instants), recopier ses `questions`/`centres` dans `manim/questions-fractions.md`, committer par chemin (module, scripts, voix json, marques, `public/sons/6e-frac-egale*`).
-2. Lots de vidéos, 3 agents à la fois au plus, chacun avec la consigne `manim/consigne-videos-fractions.md` + l'API du module (en-tête de `manim/canvas_fractions.py`) + le pilote comme modèle :
-   - Lot 6e A : 01-lire-ecrire, 02-representer (short = gâteau en 6 au compas, l'hexagone de triangles équilatéraux), 04-decimal.
-   - Lot 6e B : 05-comparer, 06-mixte, 07-defi.
-   - Lot 6e C : 08-quantite, 09-additionner, 10-multiplier-entier, 11-calcul-defi (PAYSAGES seulement), 12-pourcentage-fraction, 13-pourcentage-decimal.
-   - Puis 4e : 01 à 05 (fraction_nombre), puis 06 à 12 (fraction_calcul ; 10-quantite a le short du gâteau CARRÉ en 5).
-3. Après chaque lot : vérifier (planches, bords), recopier questions/centres, committer par chemin.
-4. Passe finale quand la 6e est complète : miniatures (`manim/miniature_essai_v2.py`, `manim/miniature_short_expression.py`) et entrées du manifeste `manim/manifeste-youtube.json` (ids `<classe>-frac-<slug>[-short]`, `microId`, `notionId`, `questions`, `centres`, chapitres mesurés par dry run — imiter les entrées stats), puis `python scripts/fiches-youtube.py -frac-`, R2 (`powershell -NoProfile -ExecutionPolicy Bypass -File scripts/r2-videos.ps1 -Envoyer > log 2>&1` lancé depuis Bash), `node scripts/generer-videos-r2.mjs`, `node scripts/brancher-videos-coach.mjs --id <ids> --ecrire`, commit par chemin. Push seulement sur mon signal.
-5. Mettre à jour la mémoire `serie-fractions-cm1-terminale.md` à chaque étape.
+1. Pour chaque lot non commité : vérifier ce qui existe (`manim/sorties/{6e,4e}/maths/fractions/*/`), `python scripts/verifier-bords-video.py <mp4>` → 0 instants, planche PyAV de 12 images sur 1 ou 2 vidéos par lot (écrans chargés : questions, corrections, « Ce que tu as appris » titre en haut et centré, étiquettes jamais collées). Les `questions`/`centres` sont dans les en-têtes des scripts et dans les voix : les recopier dans `manim/questions-fractions.md`. Committer par chemin (scripts `frac_*`, `*_marques.json`, voix `manim/voix/<classe>-frac-*.json` ; jamais `media-*`, jamais les `*.cues.tsv`).
+2. Lancer le lot 4e E (06 à 09) avec la consigne et les modèles ci-dessus ; 3 agents au plus.
+3. Passe finale quand la 6e est complète (puis la 4e) : miniatures (`manim/miniature_essai_v2.py`, `manim/miniature_short_expression.py`) et entrées du manifeste `manim/manifeste-youtube.json` (ids `<classe>-frac-<slug>[-short]`, `microId`, `notionId`, `questions`, `centres`, chapitres mesurés par dry run — imiter les entrées stats), puis `python scripts/fiches-youtube.py -frac-`, R2 (`powershell -NoProfile -ExecutionPolicy Bypass -File scripts/r2-videos.ps1 -Envoyer > log 2>&1` lancé depuis Bash), `node scripts/generer-videos-r2.mjs`, `node scripts/brancher-videos-coach.mjs --id <ids> --ecrire`, commit par chemin. Push seulement sur mon signal.
+4. Mettre à jour la mémoire `serie-fractions-cm1-terminale.md` à chaque étape.
 
 ## Plus tard
 Après la 6e et la 4e : 5e, puis CM1-CM2, 3e et lycée (fractions_rationnel 3e, rappels au lycée). Puis la proportionnalité.
