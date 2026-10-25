@@ -237,11 +237,14 @@ class FracQuantiteBase(PaysageLotC):
         b, bornes = piste(5, 0, largeur=4.0, hauteur=0.6, centre=P(-4.1, 1.4), fs=26)
         self.au_mot("Pour les 2 cinquièmes de 60")
         self.play(b.apparaitre(0.5), FadeIn(bornes), run_time=0.5)
-        self.au_mot("divisent par 2")
-        l1 = self.ligne([("60 ÷ 2", WHITE)], 44).move_to(P(3.3, 1.7))
-        l1[0].sans_synchro = True
-        self.play(FadeIn(l1, shift=RIGHT * 0.2), run_time=0.3)
-        self.au_mot("multiplient par 5")
+        l1 = self.ligne([("60", WHITE), ("÷ 2", WHITE)], 44).move_to(P(3.3, 1.7))
+        for m in l1:
+            m.sans_synchro = True
+        self.au_mot("60, certains")
+        self.play(FadeIn(l1[0], shift=RIGHT * 0.2), run_time=0.3)
+        self.au_mot("2, puis")
+        self.play(FadeIn(l1[1], shift=RIGHT * 0.2), run_time=0.3)
+        self.au_mot("5. Ils")
         l2 = self.ligne([("× 5", WHITE)], 44).next_to(l1, RIGHT, buff=0.2)
         l2[0].sans_synchro = True
         self.play(FadeIn(l2, shift=RIGHT * 0.2), run_time=0.3)
@@ -317,14 +320,14 @@ class FracQuantiteBase(PaysageLotC):
         tit = self.col(self.t("Correction", 50, JAUNE_TITRE), 3.0)
         self.play(Write(tit), run_time=0.5)
         self.au_mot("250 divisé par 10")
-        e = VGroup(*[Text("25", font_size=24, color=AMBRE).next_to(p, DOWN, buff=0.3) for p in b.parts])
+        e = VGroup(*[Text("25", font_size=19, color=NUIT, weight=BOLD).move_to(p) for p in b.parts])
         self.calc([("250 ÷ 10 =", WHITE), ("25", VERT_OK)], 1.9, 46,
                   avec=[LaggedStart(*[FadeIn(t) for t in e], lag_ratio=0.08, run_time=0.6)])
         self.au_mot("7 fois 25")
         self.calc([("7 × 25 =", WHITE), ("175", VERT_OK)], 1.0, 46)
         self.au_mot("175 places")
         r = self.col(self.t("175 places vendues", 46, VERT_OK), 0.0)
-        acc = b.accolade(None, couleur=REFRAIN, dessus=False).shift(DOWN * 0.55)
+        acc = b.accolade(None, couleur=REFRAIN, dessus=False).shift(DOWN * 0.15)
         a175 = self.t("175", 38, REFRAIN).next_to(acc, DOWN, buff=0.1)
         self.play(FadeIn(r, scale=1.2), GrowFromCenter(acc), FadeIn(a175), run_time=0.5)
         self.play(Create(self.encadrer(r)), run_time=0.3)
