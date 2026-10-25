@@ -38,6 +38,9 @@ const LIBELLE_CLASSE: Record<string, string> = {
   seconde: "2de", premiere: "1re", stmg: "Tle STMG",
 };
 
+/** « Programme du … » : l'article de chaque pays. */
+const DU_PAYS: Record<string, string> = { maroc: "du Maroc", quebec: "du Québec", senegal: "du Sénégal" };
+
 const BADGE: Record<Couverture, { texte: string; cls: string }> = {
   complete: { texte: "Couvert", cls: "border-green-300 bg-green-50 text-green-800" },
   partielle: { texte: "En partie", cls: "border-orange-300 bg-orange-50 text-orange-700" },
@@ -182,7 +185,7 @@ export default async function PaysPage({
               Maths {p?.niveau ?? courtCourant ?? ""}
             </h1>
             <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 sm:text-base">
-              Programme {info.slug === "maroc" ? "du Maroc" : "du Québec"} : séries
+              Programme {DU_PAYS[info.slug] ?? `de ${info.nom}`} : séries
               d&apos;exercices avec correction et score&nbsp;!
             </p>
             <div className="mt-3 flex flex-wrap items-center gap-2">

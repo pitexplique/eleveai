@@ -34,7 +34,7 @@ export type ContenuPays = {
 };
 
 export type ProgrammePays = {
-  pays: "ontario" | "quebec" | "maroc" | "madagascar" | "etats-unis";
+  pays: "ontario" | "quebec" | "maroc" | "madagascar" | "etats-unis" | "senegal";
   /** Identifiant de l'année dans l'URL et la colonne des classes (« 9e »). */
   cle: string;
   /** Nom de l'année dans le pays (« 9e année »). */

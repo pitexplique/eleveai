@@ -3,6 +3,7 @@ import { ETATS_UNIS_GRADE_8 } from "./etats-unis-grade-8";
 import { MAROC_3AC } from "./maroc-3ac";
 import { ONTARIO_9E_MTH1W } from "./ontario-9e-mth1w";
 import { QUEBEC_SEC_1, QUEBEC_SEC_2, QUEBEC_SEC_3 } from "./quebec-secondaire";
+import { SENEGAL_3E, SENEGAL_4E, SENEGAL_5E, SENEGAL_6E } from "./senegal-moyen";
 import type { ProgrammePays } from "./types";
 
 export const PROGRAMMES_PAYS: ProgrammePays[] = [
@@ -12,6 +13,10 @@ export const PROGRAMMES_PAYS: ProgrammePays[] = [
   QUEBEC_SEC_3,
   MAROC_3AC,
   ETATS_UNIS_GRADE_8,
+  SENEGAL_6E,
+  SENEGAL_5E,
+  SENEGAL_4E,
+  SENEGAL_3E,
 ];
 
 export type { ProgrammePays, ContenuPays, Couverture, RenvoiMicro } from "./types";

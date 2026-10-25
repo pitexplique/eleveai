@@ -17,6 +17,7 @@ export type InfoPays = { slug: SlugPays; nom: string; drapeau: string };
 export const PAYS: InfoPays[] = [
   { slug: "quebec", nom: "Québec (Canada)", drapeau: "🇨🇦" },
   { slug: "maroc", nom: "Maroc", drapeau: "🇲🇦" },
+  { slug: "senegal", nom: "Sénégal", drapeau: "🇸🇳" },
 ];
 
 /** Une classe du pays dans la colonne de gauche du coach. */
@@ -68,6 +69,20 @@ export const CLASSES_PAYS: Record<SlugPays, { titre: string; classes: ClassePays
         { cle: "algebra-2", court: "Alg 2" },
         { cle: "precalculus", court: "Precalc" },
         { cle: "calculus", court: "Calc" },
+      ],
+    },
+  ],
+  // Sénégal (25/10) : élémentaire CI → CM2, moyen 6e → 3e (BFEM), secondaire
+  // 2nde → Tle (bac). Matrice du moyen seule : lib/programmes-pays/senegal-moyen.ts.
+  senegal: [
+    { titre: "Élémentaire", classes: ["CI", "CP", "CE1", "CE2", "CM1", "CM2"].map((c) => ({ cle: c.toLowerCase(), court: c })) },
+    { titre: "Moyen", classes: ["6e", "5e", "4e", "3e"].map((c) => ({ cle: c, court: c })) },
+    {
+      titre: "Secondaire",
+      classes: [
+        { cle: "2nde", court: "2nde" },
+        { cle: "1re", court: "1re" },
+        { cle: "tle", court: "Tle" },
       ],
     },
   ],
