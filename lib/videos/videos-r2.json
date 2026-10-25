@@ -561,6 +561,222 @@
   "youtube": "Zbnwg-0cKE0",
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_expression&microId=litteral_expression_traduire&display=simple"
  },
+ "4e-frac-additionner": {
+  "fichier": "4e/maths/fractions/06-additionner/eleveai-maths-4e-frac-additionner.mp4",
+  "poster": "4e/maths/fractions/06-additionner/eleveai-maths-4e-frac-additionner.png",
+  "vignette": "4e/maths/fractions/06-additionner/eleveai-maths-4e-frac-additionner.vignette.webp",
+  "titre": "La ruche de Mila : 2/3 + 3/4 de kilo de miel — Additionner des fractions — épisode 6 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=fraction_calcul&microId=fraction_additionner&display=simple"
+ },
+ "4e-frac-additionner-short": {
+  "fichier": "4e/maths/fractions/06-additionner/eleveai-maths-4e-frac-additionner-short.mp4",
+  "poster": "4e/maths/fractions/06-additionner/eleveai-maths-4e-frac-additionner-short.png",
+  "vignette": "4e/maths/fractions/06-additionner/eleveai-maths-4e-frac-additionner-short.vignette.webp",
+  "titre": "Le blé des scribes égyptiens : 1/2 + 1/4 + 1/8… 🌾 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=fraction_calcul&microId=fraction_additionner&display=simple"
+ },
+ "4e-frac-comparer": {
+  "fichier": "4e/maths/fractions/05-comparer/eleveai-maths-4e-frac-comparer.mp4",
+  "poster": "4e/maths/fractions/05-comparer/eleveai-maths-4e-frac-comparer.png",
+  "vignette": "4e/maths/fractions/05-comparer/eleveai-maths-4e-frac-comparer.vignette.webp",
+  "titre": "Drones : 5/8 ou 7/12 de batterie ? — Comparer des fractions — épisode 5 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=fraction_nombre&microId=fraction_comparer&display=simple"
+ },
+ "4e-frac-comparer-short": {
+  "fichier": "4e/maths/fractions/05-comparer/eleveai-maths-4e-frac-comparer-short.mp4",
+  "poster": "4e/maths/fractions/05-comparer/eleveai-maths-4e-frac-comparer-short.png",
+  "vignette": "4e/maths/fractions/05-comparer/eleveai-maths-4e-frac-comparer-short.vignette.webp",
+  "titre": "Le steak d'1/3 de livre qui a fait un flop 🍔 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=fraction_nombre&microId=fraction_comparer&display=simple"
+ },
+ "4e-frac-decimal": {
+  "fichier": "4e/maths/fractions/03-decimal/eleveai-maths-4e-frac-decimal.mp4",
+  "poster": "4e/maths/fractions/03-decimal/eleveai-maths-4e-frac-decimal.png",
+  "vignette": "4e/maths/fractions/03-decimal/eleveai-maths-4e-frac-decimal.vignette.webp",
+  "titre": "3/8 du ciel nuageux : combien en % ? — Fraction, décimal, pourcentage — épisode 3 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=fraction_nombre&microId=fraction_decimal&display=simple"
+ },
+ "4e-frac-decimal-short": {
+  "fichier": "4e/maths/fractions/03-decimal/eleveai-maths-4e-frac-decimal-short.mp4",
+  "poster": "4e/maths/fractions/03-decimal/eleveai-maths-4e-frac-decimal-short.png",
+  "vignette": "4e/maths/fractions/03-decimal/eleveai-maths-4e-frac-decimal-short.vignette.webp",
+  "titre": "Escalade ou kayak : comment l'appli trouve 65 % ? 📱 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=fraction_nombre&microId=fraction_decimal&display=simple"
+ },
+ "4e-frac-defi": {
+  "fichier": "4e/maths/fractions/12-defi/eleveai-maths-4e-frac-defi.mp4",
+  "poster": "4e/maths/fractions/12-defi/eleveai-maths-4e-frac-defi.png",
+  "vignette": "4e/maths/fractions/12-defi/eleveai-maths-4e-frac-defi.vignette.webp",
+  "titre": "Enquête sommeil : de 18/24 à 75 %, toute la chaîne — Défis sur les fractions — épisode 12 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=fraction_calcul&microId=fraction_defi&display=simple"
+ },
+ "4e-frac-defi-short": {
+  "fichier": "4e/maths/fractions/12-defi/eleveai-maths-4e-frac-defi-short.mp4",
+  "poster": "4e/maths/fractions/12-defi/eleveai-maths-4e-frac-defi-short.png",
+  "vignette": "4e/maths/fractions/12-defi/eleveai-maths-4e-frac-defi-short.vignette.webp",
+  "titre": "1/2 + 1/3 = 2/5 : le post viral dit-il vrai ? 📰 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=fraction_calcul&microId=fraction_defi&display=simple"
+ },
+ "4e-frac-diviser": {
+  "fichier": "4e/maths/fractions/09-diviser/eleveai-maths-4e-frac-diviser.mp4",
+  "poster": "4e/maths/fractions/09-diviser/eleveai-maths-4e-frac-diviser.png",
+  "vignette": "4e/maths/fractions/09-diviser/eleveai-maths-4e-frac-diviser.vignette.webp",
+  "titre": "Le sirop d'Amina : 3/4 de litre en flacons d'1/8 — Diviser des fractions — épisode 9 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=fraction_calcul&microId=fraction_diviser&display=simple"
+ },
+ "4e-frac-diviser-short": {
+  "fichier": "4e/maths/fractions/09-diviser/eleveai-maths-4e-frac-diviser-short.mp4",
+  "poster": "4e/maths/fractions/09-diviser/eleveai-maths-4e-frac-diviser-short.png",
+  "vignette": "4e/maths/fractions/09-diviser/eleveai-maths-4e-frac-diviser-short.vignette.webp",
+  "titre": "Diviser… et ça grossit ! 3 ÷ 1/4 = 12 💐 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=fraction_calcul&microId=fraction_diviser&display=simple"
+ },
+ "4e-frac-egale": {
+  "fichier": "4e/maths/fractions/01-egale/eleveai-maths-4e-frac-egale.mp4",
+  "poster": "4e/maths/fractions/01-egale/eleveai-maths-4e-frac-egale.png",
+  "vignette": "4e/maths/fractions/01-egale/eleveai-maths-4e-frac-egale.vignette.webp",
+  "titre": "16/9 ou 1920 sur 1080 : le même format d'image ? — Fractions égales — épisode 1 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=fraction_nombre&microId=fraction_egale&display=simple"
+ },
+ "4e-frac-egale-short": {
+  "fichier": "4e/maths/fractions/01-egale/eleveai-maths-4e-frac-egale-short.mp4",
+  "poster": "4e/maths/fractions/01-egale/eleveai-maths-4e-frac-egale-short.png",
+  "vignette": "4e/maths/fractions/01-egale/eleveai-maths-4e-frac-egale-short.vignette.webp",
+  "titre": "Doubler la peinture : le rose va-t-il changer ? 🎨 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=fraction_nombre&microId=fraction_egale&display=simple"
+ },
+ "4e-frac-inverse": {
+  "fichier": "4e/maths/fractions/08-inverse/eleveai-maths-4e-frac-inverse.mp4",
+  "poster": "4e/maths/fractions/08-inverse/eleveai-maths-4e-frac-inverse.png",
+  "vignette": "4e/maths/fractions/08-inverse/eleveai-maths-4e-frac-inverse.vignette.webp",
+  "titre": "Agrandir puis réduire une photo : l'inverse de 5/3 — L'inverse d'une fraction — épisode 8 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=fraction_calcul&microId=fraction_inverse&display=simple"
+ },
+ "4e-frac-inverse-short": {
+  "fichier": "4e/maths/fractions/08-inverse/eleveai-maths-4e-frac-inverse-short.mp4",
+  "poster": "4e/maths/fractions/08-inverse/eleveai-maths-4e-frac-inverse-short.png",
+  "vignette": "4e/maths/fractions/08-inverse/eleveai-maths-4e-frac-inverse-short.vignette.webp",
+  "titre": "La carte retournée : le tour de magie des fractions 🃏 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=fraction_calcul&microId=fraction_inverse&display=simple"
+ },
+ "4e-frac-multiplier": {
+  "fichier": "4e/maths/fractions/07-multiplier/eleveai-maths-4e-frac-multiplier.mp4",
+  "poster": "4e/maths/fractions/07-multiplier/eleveai-maths-4e-frac-multiplier.png",
+  "vignette": "4e/maths/fractions/07-multiplier/eleveai-maths-4e-frac-multiplier.vignette.webp",
+  "titre": "Panneau solaire : 2/3 × 3/4 de mètre carré — Multiplier des fractions — épisode 7 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=fraction_calcul&microId=fraction_multiplier&display=simple"
+ },
+ "4e-frac-multiplier-short": {
+  "fichier": "4e/maths/fractions/07-multiplier/eleveai-maths-4e-frac-multiplier-short.mp4",
+  "poster": "4e/maths/fractions/07-multiplier/eleveai-maths-4e-frac-multiplier-short.png",
+  "vignette": "4e/maths/fractions/07-multiplier/eleveai-maths-4e-frac-multiplier-short.vignette.webp",
+  "titre": "Plier une feuille 7 fois : quelle fraction reste ? 📄 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=fraction_calcul&microId=fraction_multiplier&display=simple"
+ },
+ "4e-frac-oppose": {
+  "fichier": "4e/maths/fractions/11-oppose/eleveai-maths-4e-frac-oppose.mp4",
+  "poster": "4e/maths/fractions/11-oppose/eleveai-maths-4e-frac-oppose.png",
+  "vignette": "4e/maths/fractions/11-oppose/eleveai-maths-4e-frac-oppose.vignette.webp",
+  "titre": "La marée monte et descend : l'opposé de 3/4 — L'opposé d'une fraction — épisode 11 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=fraction_calcul&microId=fraction_oppose&display=simple"
+ },
+ "4e-frac-oppose-short": {
+  "fichier": "4e/maths/fractions/11-oppose/eleveai-maths-4e-frac-oppose-short.mp4",
+  "poster": "4e/maths/fractions/11-oppose/eleveai-maths-4e-frac-oppose-short.png",
+  "vignette": "4e/maths/fractions/11-oppose/eleveai-maths-4e-frac-oppose-short.vignette.webp",
+  "titre": "Tir à la corde : où est l'opposé du ruban ? 💪 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=fraction_calcul&microId=fraction_oppose&display=simple"
+ },
+ "4e-frac-quantite": {
+  "fichier": "4e/maths/fractions/10-quantite/eleveai-maths-4e-frac-quantite.mp4",
+  "poster": "4e/maths/fractions/10-quantite/eleveai-maths-4e-frac-quantite.png",
+  "vignette": "4e/maths/fractions/10-quantite/eleveai-maths-4e-frac-quantite.vignette.webp",
+  "titre": "Avant-première : 3/8 des 240 places — Une fraction d'une quantité — épisode 10 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=fraction_calcul&microId=fraction_quantite&display=simple"
+ },
+ "4e-frac-quantite-short": {
+  "fichier": "4e/maths/fractions/10-quantite/eleveai-maths-4e-frac-quantite-short.mp4",
+  "poster": "4e/maths/fractions/10-quantite/eleveai-maths-4e-frac-quantite-short.png",
+  "vignette": "4e/maths/fractions/10-quantite/eleveai-maths-4e-frac-quantite-short.vignette.webp",
+  "titre": "Couper un gâteau CARRÉ en 5 parts égales : l'astuce 🎂 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=fraction_calcul&microId=fraction_quantite&display=simple"
+ },
+ "4e-frac-rationnel": {
+  "fichier": "4e/maths/fractions/04-rationnel/eleveai-maths-4e-frac-rationnel.mp4",
+  "poster": "4e/maths/fractions/04-rationnel/eleveai-maths-4e-frac-rationnel.png",
+  "vignette": "4e/maths/fractions/04-rationnel/eleveai-maths-4e-frac-rationnel.vignette.webp",
+  "titre": "Mbappé, 8 buts en 7 matchs : un nombre décimal ? — Les nombres rationnels — épisode 4 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=fraction_nombre&microId=fraction_rationnel&display=simple"
+ },
+ "4e-frac-rationnel-short": {
+  "fichier": "4e/maths/fractions/04-rationnel/eleveai-maths-4e-frac-rationnel-short.mp4",
+  "poster": "4e/maths/fractions/04-rationnel/eleveai-maths-4e-frac-rationnel-short.png",
+  "vignette": "4e/maths/fractions/04-rationnel/eleveai-maths-4e-frac-rationnel-short.vignette.webp",
+  "titre": "1 ÷ 7 : les chiffres qui tournent en rond 🎩 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=fraction_nombre&microId=fraction_rationnel&display=simple"
+ },
+ "4e-frac-simplifier": {
+  "fichier": "4e/maths/fractions/02-simplifier/eleveai-maths-4e-frac-simplifier.mp4",
+  "poster": "4e/maths/fractions/02-simplifier/eleveai-maths-4e-frac-simplifier.png",
+  "vignette": "4e/maths/fractions/02-simplifier/eleveai-maths-4e-frac-simplifier.vignette.webp",
+  "titre": "Centre de tri : simplifier 48 kg sur 120 — Simplifier une fraction — épisode 2 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=fraction_nombre&microId=fraction_simplifier&display=simple"
+ },
+ "4e-frac-simplifier-short": {
+  "fichier": "4e/maths/fractions/02-simplifier/eleveai-maths-4e-frac-simplifier-short.mp4",
+  "poster": "4e/maths/fractions/02-simplifier/eleveai-maths-4e-frac-simplifier-short.png",
+  "vignette": "4e/maths/fractions/02-simplifier/eleveai-maths-4e-frac-simplifier-short.vignette.webp",
+  "titre": "Le même mur avec moins de briques ? 🧱 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=fraction_nombre&microId=fraction_simplifier&display=simple"
+ },
  "4e-grandeur-composee-short-diagonale": {
   "fichier": "4e/maths/shorts/fr/grandeur-composee/eleveai-maths-4e-grandeur-composee-short-diagonale.mp4",
   "poster": "4e/maths/shorts/fr/grandeur-composee/eleveai-maths-4e-grandeur-composee-short-diagonale.png",
@@ -2017,6 +2233,204 @@
   "short": true,
   "youtube": "fiW-WXNsnFI",
   "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_lire_ecrire&display=simple"
+ },
+ "6e-frac-additionner": {
+  "fichier": "6e/maths/fractions/09-additionner/eleveai-maths-6e-frac-additionner.mp4",
+  "poster": "6e/maths/fractions/09-additionner/eleveai-maths-6e-frac-additionner.png",
+  "vignette": "6e/maths/fractions/09-additionner/eleveai-maths-6e-frac-additionner.vignette.webp",
+  "titre": "Le flacon de Chloé : 1/8 + 3/8 de litre — Additionner des fractions — épisode 9 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=fraction_calcul&microId=fraction_additionner&display=simple"
+ },
+ "6e-frac-calcul-defi": {
+  "fichier": "6e/maths/fractions/11-calcul-defi/eleveai-maths-6e-frac-calcul-defi.mp4",
+  "poster": "6e/maths/fractions/11-calcul-defi/eleveai-maths-6e-frac-calcul-defi.png",
+  "vignette": "6e/maths/fractions/11-calcul-defi/eleveai-maths-6e-frac-calcul-defi.vignette.webp",
+  "titre": "Rando de 24 km : combien reste-t-il ? — Défis de calcul avec les fractions — épisode 11 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=fraction_calcul&microId=fraction_calcul_defi&display=simple"
+ },
+ "6e-frac-comparer": {
+  "fichier": "6e/maths/fractions/05-comparer/eleveai-maths-6e-frac-comparer.mp4",
+  "poster": "6e/maths/fractions/05-comparer/eleveai-maths-6e-frac-comparer.png",
+  "vignette": "6e/maths/fractions/05-comparer/eleveai-maths-6e-frac-comparer.vignette.webp",
+  "titre": "Deux trains : 3/5 ou 7/10, qui est devant ? — Comparer des fractions — épisode 5 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_comparer&display=simple"
+ },
+ "6e-frac-comparer-short": {
+  "fichier": "6e/maths/fractions/05-comparer/eleveai-maths-6e-frac-comparer-short.mp4",
+  "poster": "6e/maths/fractions/05-comparer/eleveai-maths-6e-frac-comparer-short.png",
+  "vignette": "6e/maths/fractions/05-comparer/eleveai-maths-6e-frac-comparer-short.vignette.webp",
+  "titre": "1/3 ou 1/5 d'un lingot d'or : lequel prendre ? 💰 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_comparer&display=simple"
+ },
+ "6e-frac-decimal": {
+  "fichier": "6e/maths/fractions/04-decimal/eleveai-maths-6e-frac-decimal.mp4",
+  "poster": "6e/maths/fractions/04-decimal/eleveai-maths-6e-frac-decimal.png",
+  "vignette": "6e/maths/fractions/04-decimal/eleveai-maths-6e-frac-decimal.vignette.webp",
+  "titre": "3 lancers sur 4 : la fraction avec une virgule — Fraction et nombre décimal — épisode 4 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_decimal&display=simple"
+ },
+ "6e-frac-decimal-short": {
+  "fichier": "6e/maths/fractions/04-decimal/eleveai-maths-6e-frac-decimal-short.mp4",
+  "poster": "6e/maths/fractions/04-decimal/eleveai-maths-6e-frac-decimal-short.png",
+  "vignette": "6e/maths/fractions/04-decimal/eleveai-maths-6e-frac-decimal-short.vignette.webp",
+  "titre": "3 minutes sur 4 : que doit afficher l'appli ? 🎵 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_decimal&display=simple"
+ },
+ "6e-frac-defi": {
+  "fichier": "6e/maths/fractions/07-defi/eleveai-maths-6e-frac-defi.mp4",
+  "poster": "6e/maths/fractions/07-defi/eleveai-maths-6e-frac-defi.png",
+  "vignette": "6e/maths/fractions/07-defi/eleveai-maths-6e-frac-defi.vignette.webp",
+  "titre": "Mission Mars : les défis de fractions du rover — Défis sur les fractions — épisode 7 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_defi&display=simple"
+ },
+ "6e-frac-defi-short": {
+  "fichier": "6e/maths/fractions/07-defi/eleveai-maths-6e-frac-defi-short.mp4",
+  "poster": "6e/maths/fractions/07-defi/eleveai-maths-6e-frac-defi-short.png",
+  "vignette": "6e/maths/fractions/07-defi/eleveai-maths-6e-frac-defi-short.vignette.webp",
+  "titre": "France, Maurice, Thaïlande : quel drapeau a le plus de bleu ? 🎨 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_defi&display=simple"
+ },
+ "6e-frac-egale": {
+  "fichier": "6e/maths/fractions/03-egale/eleveai-maths-6e-frac-egale.mp4",
+  "poster": "6e/maths/fractions/03-egale/eleveai-maths-6e-frac-egale.png",
+  "vignette": "6e/maths/fractions/03-egale/eleveai-maths-6e-frac-egale.vignette.webp",
+  "titre": "6/8 de litre : combien de quarts ? — Fractions égales, simplifier — épisode 3 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_egale&display=simple"
+ },
+ "6e-frac-egale-short": {
+  "fichier": "6e/maths/fractions/03-egale/eleveai-maths-6e-frac-egale-short.mp4",
+  "poster": "6e/maths/fractions/03-egale/eleveai-maths-6e-frac-egale-short.png",
+  "vignette": "6e/maths/fractions/03-egale/eleveai-maths-6e-frac-egale-short.vignette.webp",
+  "titre": "3 pizzas, 3 découpes : qui en a mangé le plus ? 🍕 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_egale&display=simple"
+ },
+ "6e-frac-lire-ecrire": {
+  "fichier": "6e/maths/fractions/01-lire-ecrire/eleveai-maths-6e-frac-lire-ecrire.mp4",
+  "poster": "6e/maths/fractions/01-lire-ecrire/eleveai-maths-6e-frac-lire-ecrire.png",
+  "vignette": "6e/maths/fractions/01-lire-ecrire/eleveai-maths-6e-frac-lire-ecrire.vignette.webp",
+  "titre": "3/8 du potager : que disent les deux nombres ? — Lire et écrire une fraction — épisode 1 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_lire_ecrire&display=simple"
+ },
+ "6e-frac-lire-ecrire-short": {
+  "fichier": "6e/maths/fractions/01-lire-ecrire/eleveai-maths-6e-frac-lire-ecrire-short.mp4",
+  "poster": "6e/maths/fractions/01-lire-ecrire/eleveai-maths-6e-frac-lire-ecrire-short.png",
+  "vignette": "6e/maths/fractions/01-lire-ecrire/eleveai-maths-6e-frac-lire-ecrire-short.vignette.webp",
+  "titre": "Il reste 3 cœurs sur 5 : quelle fraction de vie ? 🎮 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_lire_ecrire&display=simple"
+ },
+ "6e-frac-mixte": {
+  "fichier": "6e/maths/fractions/06-mixte/eleveai-maths-6e-frac-mixte.mp4",
+  "poster": "6e/maths/fractions/06-mixte/eleveai-maths-6e-frac-mixte.png",
+  "vignette": "6e/maths/fractions/06-mixte/eleveai-maths-6e-frac-mixte.vignette.webp",
+  "titre": "7/4 de mesure : plus ou moins que 1 ? — Encadrer, ranger, écriture mixte — épisode 6 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_mixte&display=simple"
+ },
+ "6e-frac-mixte-short": {
+  "fichier": "6e/maths/fractions/06-mixte/eleveai-maths-6e-frac-mixte-short.mp4",
+  "poster": "6e/maths/fractions/06-mixte/eleveai-maths-6e-frac-mixte-short.png",
+  "vignette": "6e/maths/fractions/06-mixte/eleveai-maths-6e-frac-mixte-short.vignette.webp",
+  "titre": "9 sauts d'1/4 de mètre : où est la grenouille ? 🐸 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_mixte&display=simple"
+ },
+ "6e-frac-multiplier-entier": {
+  "fichier": "6e/maths/fractions/10-multiplier-entier/eleveai-maths-6e-frac-multiplier-entier.mp4",
+  "poster": "6e/maths/fractions/10-multiplier-entier/eleveai-maths-6e-frac-multiplier-entier.png",
+  "vignette": "6e/maths/fractions/10-multiplier-entier/eleveai-maths-6e-frac-multiplier-entier.vignette.webp",
+  "titre": "4 chats, 3/8 de boîte chacun — Multiplier une fraction par un entier — épisode 10 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=fraction_calcul&microId=fraction_multiplier_entier&display=simple"
+ },
+ "6e-frac-pourcentage-decimal": {
+  "fichier": "6e/maths/fractions/13-pourcentage-decimal/eleveai-maths-6e-frac-pourcentage-decimal.mp4",
+  "poster": "6e/maths/fractions/13-pourcentage-decimal/eleveai-maths-6e-frac-pourcentage-decimal.png",
+  "vignette": "6e/maths/fractions/13-pourcentage-decimal/eleveai-maths-6e-frac-pourcentage-decimal.vignette.webp",
+  "titre": "71 % de la Terre sous l'eau : 0,71 en % — Pourcentages et nombres décimaux — épisode 13 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=pourcentage_nombre&microId=pourcentage_decimal&display=simple"
+ },
+ "6e-frac-pourcentage-decimal-short": {
+  "fichier": "6e/maths/fractions/13-pourcentage-decimal/eleveai-maths-6e-frac-pourcentage-decimal-short.mp4",
+  "poster": "6e/maths/fractions/13-pourcentage-decimal/eleveai-maths-6e-frac-pourcentage-decimal-short.png",
+  "vignette": "6e/maths/fractions/13-pourcentage-decimal/eleveai-maths-6e-frac-pourcentage-decimal-short.vignette.webp",
+  "titre": "Soldes à −0,25 % : la bonne affaire ? 👟 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=pourcentage_nombre&microId=pourcentage_decimal&display=simple"
+ },
+ "6e-frac-pourcentage-fraction": {
+  "fichier": "6e/maths/fractions/12-pourcentage-fraction/eleveai-maths-6e-frac-pourcentage-fraction.mp4",
+  "poster": "6e/maths/fractions/12-pourcentage-fraction/eleveai-maths-6e-frac-pourcentage-fraction.png",
+  "vignette": "6e/maths/fractions/12-pourcentage-fraction/eleveai-maths-6e-frac-pourcentage-fraction.vignette.webp",
+  "titre": "Barre de chargement : 1/4, combien de % ? — Pourcentages et fractions — épisode 12 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=pourcentage_nombre&microId=pourcentage_fraction&display=simple"
+ },
+ "6e-frac-pourcentage-fraction-short": {
+  "fichier": "6e/maths/fractions/12-pourcentage-fraction/eleveai-maths-6e-frac-pourcentage-fraction-short.mp4",
+  "poster": "6e/maths/fractions/12-pourcentage-fraction/eleveai-maths-6e-frac-pourcentage-fraction-short.png",
+  "vignette": "6e/maths/fractions/12-pourcentage-fraction/eleveai-maths-6e-frac-pourcentage-fraction-short.vignette.webp",
+  "titre": "3 sur 4, 7 sur 10, 18 sur 25 : qui tire le mieux ? 🏀 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=pourcentage_nombre&microId=pourcentage_fraction&display=simple"
+ },
+ "6e-frac-quantite": {
+  "fichier": "6e/maths/fractions/08-quantite/eleveai-maths-6e-frac-quantite.mp4",
+  "poster": "6e/maths/fractions/08-quantite/eleveai-maths-6e-frac-quantite.png",
+  "vignette": "6e/maths/fractions/08-quantite/eleveai-maths-6e-frac-quantite.vignette.webp",
+  "titre": "Le refrain : les 2/5 de 60 secondes — Prendre une fraction d'un nombre — épisode 8 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=fraction_calcul&microId=fraction_quantite&display=simple"
+ },
+ "6e-frac-representer": {
+  "fichier": "6e/maths/fractions/02-representer/eleveai-maths-6e-frac-representer.mp4",
+  "poster": "6e/maths/fractions/02-representer/eleveai-maths-6e-frac-representer.png",
+  "vignette": "6e/maths/fractions/02-representer/eleveai-maths-6e-frac-representer.vignette.webp",
+  "titre": "La fresque de Maëlys : peindre les 3/4 d'un mur — Représenter une fraction — épisode 2 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_representer&display=simple"
+ },
+ "6e-frac-representer-short": {
+  "fichier": "6e/maths/fractions/02-representer/eleveai-maths-6e-frac-representer-short.mp4",
+  "poster": "6e/maths/fractions/02-representer/eleveai-maths-6e-frac-representer-short.png",
+  "vignette": "6e/maths/fractions/02-representer/eleveai-maths-6e-frac-representer-short.vignette.webp",
+  "titre": "Couper un gâteau en 6 parts égales… avec un compas ! 🎂 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_representer&display=simple"
  },
  "6e-fraction-calcul": {
   "fichier": "6e/maths/paysage/fr/fraction-calcul/eleveai-maths-6e-fraction-calcul.mp4",

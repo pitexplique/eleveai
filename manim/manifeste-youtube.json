@@ -37591,6 +37591,3704 @@
       "centres": [
         "histoire-geographie"
       ]
+    },
+    {
+      "id": "6e-frac-lire-ecrire",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_lire_ecrire",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/fractions/01-lire-ecrire/eleveai-maths-6e-frac-lire-ecrire.mp4",
+      "miniature": "6e/maths/fractions/01-lire-ecrire/eleveai-maths-6e-frac-lire-ecrire.png",
+      "titre": "3/8 du potager : que disent les deux nombres ? — Lire et écrire une fraction — épisode 1 · Maths 6e",
+      "accroche": "Lucas est maraîcher : il cultive des légumes. Son potager est partagé en 8 carrés égaux, et il plante des tomates dans 3 carrés. Quelle part du potager a-t-il plantée ?\n\nDans cette vidéo :\n• le dénominateur, en bas, compte toutes les parts ; le numérateur, en haut, les parts prises : 3/8\n• lire une fraction : demis, tiers, quarts, puis cinquièmes, huitièmes, dixièmes\n• écrire 7 dixièmes : 10 en bas, 7 en haut\n• le piège : le 8 en haut, ou compter les carrés vides (5/8, c'est ce qui reste)\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Lucas plante 3 carrés de salades et sa sœur Nina 4 carrés de fraises, sur 10 carrés : quelle fraction du potager reste vide ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/fraction-nombre\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/fraction-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_lire_ecrire&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Que disent les deux nombres ?"
+        ],
+        [
+          "00:21",
+          "Numérateur et dénominateur"
+        ],
+        [
+          "00:39",
+          "Lire : demis, tiers, quarts…"
+        ],
+        [
+          "01:01",
+          "Question : que dit le 8 ?"
+        ],
+        [
+          "01:30",
+          "Toutes les formes"
+        ],
+        [
+          "01:45",
+          "Écrire une fraction"
+        ],
+        [
+          "01:56",
+          "Question : écrire 5 sixièmes"
+        ],
+        [
+          "02:27",
+          "Le piège"
+        ],
+        [
+          "02:42",
+          "Question : la barre coloriée"
+        ],
+        [
+          "03:11",
+          "À toi de jouer"
+        ],
+        [
+          "03:30",
+          "Correction"
+        ],
+        [
+          "03:52",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/fraction-nombre",
+      "tags": [
+        "lire une fraction",
+        "écrire une fraction",
+        "numérateur",
+        "dénominateur",
+        "potager",
+        "maraîcher",
+        "fractions",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:01",
+          "question": "Dans 3/8 du potager, que dit le 8 ?",
+          "choix": [
+            "8 carrés en tout",
+            "8 carrés plantés",
+            "8 carrés vides"
+          ],
+          "reponse": 0,
+          "explication": "Le 8, en bas, compte tous les carrés ; les carrés plantés, c'est le 3."
+        },
+        {
+          "t": "01:56",
+          "question": "Comment s'écrit 5 sixièmes ?",
+          "choix": [
+            "6/5",
+            "5/6",
+            "5,6"
+          ],
+          "reponse": 1,
+          "explication": "6 parts en tout en bas, 5 parts prises en haut ; 5,6 est un nombre décimal."
+        },
+        {
+          "t": "02:42",
+          "question": "Quelle fraction de la barre est coloriée ?",
+          "choix": [
+            "7/4",
+            "3/7",
+            "4/7"
+          ],
+          "reponse": 2,
+          "explication": "7 parts en tout en bas, 4 coloriées en haut ; 3/7 est la partie blanche."
+        }
+      ],
+      "centres": [
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "6e-frac-lire-ecrire-short",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_lire_ecrire",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-frac-lire-ecrire",
+      "fichier": "6e/maths/fractions/01-lire-ecrire/eleveai-maths-6e-frac-lire-ecrire-short.mp4",
+      "miniature": "6e/maths/fractions/01-lire-ecrire/eleveai-maths-6e-frac-lire-ecrire-short.png",
+      "titre": "Il reste 3 cœurs sur 5 : quelle fraction de vie ? 🎮 — 6e #Shorts",
+      "accroche": "Jade crée des jeux vidéo. Son héros a une barre de 5 cœurs ; il en perd 2 : il lui reste 3 cœurs sur 5, 3/5 de vie. Contre le boss, la barre a 10 cœurs, il en perd 3 : 7/10 de vie. En bas, tous les cœurs ; en haut, ceux qui restent.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : le héros a 6 cœurs, il en perd 1. Quelle fraction de vie lui reste-t-il ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_lire_ecrire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #6e #collège",
+      "tags": [
+        "lire une fraction",
+        "jeux vidéo",
+        "barre de vie",
+        "créatrice de jeux vidéo",
+        "fractions",
+        "maths",
+        "6e",
+        "collège",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:29",
+          "question": "Il reste 2 cœurs sur 8. Quelle fraction de vie ?",
+          "choix": [
+            "8/2",
+            "2/8",
+            "6/8"
+          ],
+          "reponse": 1,
+          "explication": "8 cœurs en tout en bas, 2 qui restent en haut."
+        }
+      ],
+      "centres": [
+        "jeux-video",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-frac-representer",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_representer",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/fractions/02-representer/eleveai-maths-6e-frac-representer.mp4",
+      "miniature": "6e/maths/fractions/02-representer/eleveai-maths-6e-frac-representer.png",
+      "titre": "La fresque de Maëlys : peindre les 3/4 d'un mur — Représenter une fraction — épisode 2 · Maths 6e",
+      "accroche": "Maëlys est artiste : elle peint des fresques sur les murs de la ville. Pour sa nouvelle fresque, elle doit peindre en bleu les 3/4 d'un mur. Où met-elle la peinture ?\n\nDans cette vidéo :\n• le dénominateur dit en combien de parts égales on partage, le numérateur combien on en colorie\n• toutes les formes : 2/3 d'un disque, 5/8 d'une grille\n• le piège : des parts inégales, et ce n'est plus une fraction\n• 2/3 d'un mur de 12 carreaux : 12 ÷ 3 = 4, puis 2 × 4 = 8 carreaux\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une fresque a 15 carreaux égaux, Maëlys en peint les 3/5 en jaune : combien de carreaux ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/fraction-nombre\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/fraction-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_representer&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Dessiner une fraction"
+        ],
+        [
+          "00:20",
+          "La méthode : partager, colorier"
+        ],
+        [
+          "00:37",
+          "Toutes les formes"
+        ],
+        [
+          "00:52",
+          "Question : combien de parts ?"
+        ],
+        [
+          "01:19",
+          "Le piège : des parts égales"
+        ],
+        [
+          "01:34",
+          "2/3 de 12 carreaux"
+        ],
+        [
+          "01:50",
+          "Question : la moitié de 10 carreaux"
+        ],
+        [
+          "02:13",
+          "À toi de jouer"
+        ],
+        [
+          "02:27",
+          "Correction"
+        ],
+        [
+          "02:52",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/fraction-nombre",
+      "tags": [
+        "représenter une fraction",
+        "parts égales",
+        "fresque",
+        "street art",
+        "artiste",
+        "fractions",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:52",
+          "question": "Pour représenter 4/6, en combien de parts égales partager ?",
+          "choix": [
+            "4",
+            "6",
+            "10"
+          ],
+          "reponse": 1,
+          "explication": "Le dénominateur, 6, donne le nombre de parts ; puis on en colorie 4."
+        },
+        {
+          "t": "01:50",
+          "question": "Un mur a 10 carreaux. Combien en peindre pour 1/2 ?",
+          "choix": [
+            "2",
+            "5",
+            "1"
+          ],
+          "reponse": 1,
+          "explication": "10 ÷ 2 = 5 : la moitié des carreaux."
+        }
+      ],
+      "centres": [
+        "art-design"
+      ]
+    },
+    {
+      "id": "6e-frac-representer-short",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_representer",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-frac-representer",
+      "fichier": "6e/maths/fractions/02-representer/eleveai-maths-6e-frac-representer-short.mp4",
+      "miniature": "6e/maths/fractions/02-representer/eleveai-maths-6e-frac-representer-short.png",
+      "titre": "Couper un gâteau en 6 parts égales… avec un compas ! 🎂 — 6e #Shorts",
+      "accroche": "Rayan, boulanger, doit couper un gâteau rond en 6 parts égales, sans rapporteur. Son astuce : un compas ouvert de la longueur du rayon, reporté 6 fois sur le bord. Il retombe pile au départ ! Les 6 points font un hexagone : 6 triangles équilatéraux, de 60° chacun, et 6 × 60 = 360. 2 parts sur 6 = 1/3, 3 parts sur 6 = 1/2. Et 1/6 = 1 ÷ 6 = 0,1666… : environ 16,7 %.\n\n🥋 Ceinture jaune.\n👉 À toi : 2 parts sur 6, quel pourcentage du gâteau ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_representer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #6e #collège",
+      "tags": [
+        "fraction",
+        "partager en 6",
+        "compas",
+        "hexagone",
+        "triangle équilatéral",
+        "gâteau",
+        "boulanger",
+        "énigme",
+        "fractions",
+        "maths",
+        "6e",
+        "collège",
+        "CRPE",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "01:02",
+          "question": "4 parts sur 6, c'est combien de tiers ?",
+          "choix": [
+            "4/3",
+            "2/3",
+            "1/3"
+          ],
+          "reponse": 1,
+          "explication": "4/6 : ÷ 2 en haut et en bas → 2/3."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-frac-egale",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_egale",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/fractions/03-egale/eleveai-maths-6e-frac-egale.mp4",
+      "miniature": "6e/maths/fractions/03-egale/eleveai-maths-6e-frac-egale.png",
+      "titre": "6/8 de litre : combien de quarts ? — Fractions égales, simplifier — épisode 3 · Maths 6e",
+      "accroche": "Inès est pâtissière. Pour sa crème, la recette dit : 6/8 de litre de lait. Mais son verre doseur est gradué en quarts de litre. Combien de quarts doit-elle verser ?\n\nDans cette vidéo :\n• regrouper les parts 2 par 2 : 6/8 = 3/4, la longueur bleue ne bouge pas\n• la règle : diviser, ou multiplier, en haut ET en bas par le même nombre\n• simplifier jusqu'au bout : 12/18 = 6/9 = 2/3\n• le piège : soustraire (6/8 → 4/6) ou ne diviser que le haut (3/8)\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : la tarte d'Inès est coupée en 12 parts égales, on en a mangé 8 : quelle fraction, simplifiée au maximum ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/fraction-nombre\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/fraction-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_egale&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Deux fractions, la même chose ?"
+        ],
+        [
+          "00:23",
+          "La barre de 6/8"
+        ],
+        [
+          "00:49",
+          "La règle : ÷ en haut et en bas"
+        ],
+        [
+          "01:13",
+          "Multiplier aussi"
+        ],
+        [
+          "01:33",
+          "Question : 7/3 en sixièmes"
+        ],
+        [
+          "02:01",
+          "15/20 sur une grille"
+        ],
+        [
+          "02:24",
+          "Simplifier jusqu'au bout"
+        ],
+        [
+          "02:47",
+          "Question : ne se simplifie plus"
+        ],
+        [
+          "03:16",
+          "Le piège : soustraire"
+        ],
+        [
+          "03:39",
+          "Question : simplifie 10/15"
+        ],
+        [
+          "04:09",
+          "À toi de jouer"
+        ],
+        [
+          "04:26",
+          "Correction"
+        ],
+        [
+          "04:49",
+          "Vers le décimal et le pourcentage"
+        ],
+        [
+          "05:10",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/fraction-nombre",
+      "tags": [
+        "fractions égales",
+        "simplifier une fraction",
+        "fraction irréductible",
+        "pâtissière",
+        "cuisine",
+        "recette",
+        "fractions",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:33",
+          "question": "7/3 = combien de sixièmes ?",
+          "choix": [
+            "10",
+            "14",
+            "7"
+          ],
+          "reponse": 1,
+          "explication": "3 × 2 = 6, donc 7 × 2 = 14 : 7/3 = 14/6."
+        },
+        {
+          "t": "02:47",
+          "question": "Laquelle ne se simplifie plus ?",
+          "choix": [
+            "4/6",
+            "3/5",
+            "9/12"
+          ],
+          "reponse": 1,
+          "explication": "3 et 5 ne se divisent pas par un même nombre, à part 1."
+        },
+        {
+          "t": "03:39",
+          "question": "Simplifie 10/15.",
+          "choix": [
+            "2/3",
+            "8/13",
+            "2/15"
+          ],
+          "reponse": 0,
+          "explication": "10 ÷ 5 = 2 et 15 ÷ 5 = 3 ; les autres réponses tombent dans le piège."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "6e-frac-egale-short",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_egale",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-frac-egale",
+      "fichier": "6e/maths/fractions/03-egale/eleveai-maths-6e-frac-egale-short.mp4",
+      "miniature": "6e/maths/fractions/03-egale/eleveai-maths-6e-frac-egale-short.png",
+      "titre": "3 pizzas, 3 découpes : qui en a mangé le plus ? 🍕 — 6e #Shorts",
+      "accroche": "Malik, pizzaïolo, sert trois pizzas de la même taille. Léo coupe la sienne en 4 et mange 2 parts, Inès coupe en 8 et en mange 4, Zoé coupe en 12 et en mange 6. Surprise : les barres s'arrêtent au même endroit ! 2/4, 4/8 et 6/12, c'est toujours 1/2.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 15/20, c'est combien de quarts ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_egale&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #6e #collège",
+      "tags": [
+        "fractions égales",
+        "moitié",
+        "pizza",
+        "pizzaïolo",
+        "fractions",
+        "maths",
+        "6e",
+        "collège",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:31",
+          "question": "Laquelle n'est pas égale à 1/2 ?",
+          "choix": [
+            "3/6",
+            "4/6",
+            "5/10"
+          ],
+          "reponse": 1,
+          "explication": "La moitié de 6, c'est 3, pas 4."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-frac-decimal",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_decimal",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/fractions/04-decimal/eleveai-maths-6e-frac-decimal.mp4",
+      "miniature": "6e/maths/fractions/04-decimal/eleveai-maths-6e-frac-decimal.png",
+      "titre": "3 lancers sur 4 : la fraction avec une virgule — Fraction et nombre décimal — épisode 4 · Maths 6e",
+      "accroche": "Kenza est entraîneuse de basket. Au dernier match, Lou a marqué 3 lancers francs sur 4. Kenza veut l'écrire sur sa tablette, avec une virgule. Comment faire ?\n\nDans cette vidéo :\n• une fraction, c'est une division : on pose 3 ÷ 4 = 0,75\n• à connaître par cœur : 1/2 = 0,5 ; 1/4 = 0,25 ; 3/4 = 0,75 ; 1/5 = 0,2 ; 1/10 = 0,1\n• le piège : 3/4 n'est pas 3,4, jamais de virgule entre les deux nombres\n• 0,75 = 75 centièmes = 75 %\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Lou marque 4 lancers francs sur 5 : écris-le en fraction, en nombre décimal, puis en pourcentage.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/fraction-nombre\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/fraction-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_decimal&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Une fraction avec une virgule ?"
+        ],
+        [
+          "00:22",
+          "Une fraction, c'est une division"
+        ],
+        [
+          "00:33",
+          "Poser 3 ÷ 4"
+        ],
+        [
+          "01:05",
+          "Sur la droite graduée"
+        ],
+        [
+          "01:18",
+          "Question : 1/4 en décimal"
+        ],
+        [
+          "01:47",
+          "Le piège : 3/4 = 3,4 ?"
+        ],
+        [
+          "02:07",
+          "À connaître par cœur"
+        ],
+        [
+          "02:29",
+          "Question : 2/5 en décimal"
+        ],
+        [
+          "03:02",
+          "7/4 : plus que 1"
+        ],
+        [
+          "03:15",
+          "Vers le pourcentage"
+        ],
+        [
+          "03:32",
+          "Question : 0,75 en pourcentage"
+        ],
+        [
+          "04:09",
+          "À toi de jouer"
+        ],
+        [
+          "04:26",
+          "Correction"
+        ],
+        [
+          "04:46",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/fraction-nombre",
+      "tags": [
+        "fraction et décimal",
+        "écriture décimale",
+        "quotient",
+        "pourcentage",
+        "basket",
+        "entraîneuse",
+        "lancers francs",
+        "fractions",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:18",
+          "question": "Quelle est l'écriture décimale de 1/4 ?",
+          "choix": [
+            "1,4",
+            "0,25",
+            "4,1"
+          ],
+          "reponse": 1,
+          "explication": "1 ÷ 4 = 0,25 ; 1,4 colle les deux nombres : faux."
+        },
+        {
+          "t": "02:29",
+          "question": "Quelle est l'écriture décimale de 2/5 ?",
+          "choix": [
+            "2,5",
+            "0,4",
+            "0,2"
+          ],
+          "reponse": 1,
+          "explication": "2 ÷ 5 = 0,4 (ou 1/5 = 0,2 donc 2/5 = 0,4)."
+        },
+        {
+          "t": "03:32",
+          "question": "0,75 en pourcentage, c'est combien ?",
+          "choix": [
+            "0,75 %",
+            "7,5 %",
+            "75 %"
+          ],
+          "reponse": 2,
+          "explication": "0,75 = 75 centièmes = 75 % ; 0,75 % ne fait même pas 1 case sur 100."
+        }
+      ],
+      "centres": [
+        "sport"
+      ]
+    },
+    {
+      "id": "6e-frac-decimal-short",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_decimal",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-frac-decimal",
+      "fichier": "6e/maths/fractions/04-decimal/eleveai-maths-6e-frac-decimal-short.mp4",
+      "miniature": "6e/maths/fractions/04-decimal/eleveai-maths-6e-frac-decimal-short.png",
+      "titre": "3 minutes sur 4 : que doit afficher l'appli ? 🎵 — 6e #Shorts",
+      "accroche": "Hugo, ingénieur du son, crée une appli de musique. Sa chanson dure 4 minutes, on en a écouté 3 : 3/4 de la chanson. L'appli, elle, calcule 3 ÷ 4 = 0,75… et affiche 75 % !\n\n🥋 Ceinture jaune.\n👉 À toi : tu as écouté 1 minute sur 4. Quel pourcentage affiche l'appli ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_decimal&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #6e #collège",
+      "tags": [
+        "fraction et décimal",
+        "pourcentage",
+        "barre de lecture",
+        "musique",
+        "ingénieur du son",
+        "fractions",
+        "maths",
+        "6e",
+        "collège",
+        "CRPE",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:29",
+          "question": "À la moitié de la chanson, l'appli affiche :",
+          "choix": [
+            "12 %",
+            "50 %",
+            "0,5 %"
+          ],
+          "reponse": 1,
+          "explication": "1/2 = 0,5 = 50 %."
+        }
+      ],
+      "centres": [
+        "musique",
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "6e-frac-comparer",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_comparer",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/fractions/05-comparer/eleveai-maths-6e-frac-comparer.mp4",
+      "miniature": "6e/maths/fractions/05-comparer/eleveai-maths-6e-frac-comparer.png",
+      "titre": "Deux trains : 3/5 ou 7/10, qui est devant ? — Comparer des fractions — épisode 5 · Maths 6e",
+      "accroche": "Yasmine est régulatrice du trafic ferroviaire. Deux trains roulent sur la même ligne : l'écran du train de Sami affiche 3/5 du trajet, celui de Nora 7/10. Qui est devant ?\n\nDans cette vidéo :\n• même dénominateur : on compare les numérateurs\n• même numérateur : plus on coupe, plus les parts sont petites (1/5 est plus petit que 1/3)\n• redécouper : 3/5 = 6/10, 6/10 est plus petit que 7/10, Nora est devant\n• le piège : enlever le même nombre en haut et en bas ; en pourcentages, 60 % contre 70 %\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : le train de Sami a parcouru 3/4 du trajet, celui de Nora 5/8 : qui est devant ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/fraction-nombre\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/fraction-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_comparer&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Laquelle est la plus grande ?"
+        ],
+        [
+          "00:22",
+          "Même dénominateur"
+        ],
+        [
+          "00:40",
+          "Même numérateur : le piège"
+        ],
+        [
+          "01:01",
+          "Question : la plus grande"
+        ],
+        [
+          "01:25",
+          "Redécouper : 3/5 = 6/10"
+        ],
+        [
+          "01:53",
+          "Question : 2/3 et 5/6"
+        ],
+        [
+          "02:24",
+          "À toi de jouer"
+        ],
+        [
+          "02:40",
+          "Correction"
+        ],
+        [
+          "03:04",
+          "En pourcentages"
+        ],
+        [
+          "03:35",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/fraction-nombre",
+      "tags": [
+        "comparer des fractions",
+        "ranger des fractions",
+        "même dénominateur",
+        "train",
+        "régulatrice",
+        "transports",
+        "fractions",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:01",
+          "question": "Laquelle est la plus grande ?",
+          "choix": [
+            "1/8",
+            "1/4",
+            "1/6"
+          ],
+          "reponse": 1,
+          "explication": "1/4 : on coupe en 4 seulement, ce sont les plus grandes parts."
+        },
+        {
+          "t": "01:53",
+          "question": "Compare 2/3 et 5/6.",
+          "choix": [
+            "2/3 < 5/6",
+            "2/3 = 5/6",
+            "2/3 > 5/6"
+          ],
+          "reponse": 0,
+          "explication": "2/3 = 4/6 et 4/6 < 5/6 ; enlever 3 en haut et en bas, c'est le piège."
+        }
+      ],
+      "centres": [
+        "transports"
+      ]
+    },
+    {
+      "id": "6e-frac-comparer-short",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_comparer",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-frac-comparer",
+      "fichier": "6e/maths/fractions/05-comparer/eleveai-maths-6e-frac-comparer-short.mp4",
+      "miniature": "6e/maths/fractions/05-comparer/eleveai-maths-6e-frac-comparer-short.png",
+      "titre": "1/3 ou 1/5 d'un lingot d'or : lequel prendre ? 💰 — 6e #Shorts",
+      "accroche": "Sacha, créateur d'escape games, cache deux lingots d'or identiques. Tu as le choix : 1/3 du premier, ou 1/5 du second. 5 est plus grand que 3… mais 1/5 est plus petit que 1/3 ! Plus on coupe, plus les parts sont petites : prends le tiers.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : range du plus petit au plus grand 1/2, 1/9 et 1/5. Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #6e #collège",
+      "tags": [
+        "comparer des fractions",
+        "escape game",
+        "lingot d'or",
+        "énigme",
+        "fractions",
+        "maths",
+        "6e",
+        "collège",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:37",
+          "question": "Laquelle est la plus grande ?",
+          "choix": [
+            "1/10",
+            "1/2",
+            "1/7"
+          ],
+          "reponse": 1,
+          "explication": "Couper en 2 donne les plus grosses parts."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "6e-frac-mixte",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_mixte",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/fractions/06-mixte/eleveai-maths-6e-frac-mixte.mp4",
+      "miniature": "6e/maths/fractions/06-mixte/eleveai-maths-6e-frac-mixte.png",
+      "titre": "7/4 de mesure : plus ou moins que 1 ? — Encadrer, ranger, écriture mixte — épisode 6 · Maths 6e",
+      "accroche": "Awa est productrice de musique. Dans son logiciel, une mesure dure 4 temps ; son effet sonore dure 7 temps : 7/4 de mesure. Où se termine-t-il ?\n\nDans cette vidéo :\n• comparer à 1 : 4/4 = 1, donc 7/4 dépasse 1, et 3/4 non\n• l'écriture mixte : 7/4 = 1 + 3/4\n• comparer à 1/2 : on double le numérateur (2 × 2 = 4, moins que 5 : 2/5 est plus petit que 1/2)\n• le piège : 7/4 n'est pas près de 7, il est entre 1 et 2\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : range dans l'ordre croissant : 3/2, 5/4 et 1 + 3/4.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/fraction-nombre\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/fraction-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_mixte&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Plus ou moins que 1 ?"
+        ],
+        [
+          "00:21",
+          "Sur la demi-droite"
+        ],
+        [
+          "00:39",
+          "Comparer à 1"
+        ],
+        [
+          "00:57",
+          "L'écriture mixte"
+        ],
+        [
+          "01:10",
+          "Le piège : près de 7 ?"
+        ],
+        [
+          "01:23",
+          "Question : encadrer 7/3"
+        ],
+        [
+          "01:52",
+          "Comparer à 1/2"
+        ],
+        [
+          "02:17",
+          "Ranger sans calcul"
+        ],
+        [
+          "02:39",
+          "Question : plus petite que 1/2"
+        ],
+        [
+          "03:06",
+          "À toi de jouer"
+        ],
+        [
+          "03:18",
+          "Correction"
+        ],
+        [
+          "03:40",
+          "7/4 = 1,75"
+        ],
+        [
+          "03:57",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/fraction-nombre",
+      "tags": [
+        "encadrer une fraction",
+        "écriture mixte",
+        "comparer à 1",
+        "ranger des fractions",
+        "musique",
+        "productrice",
+        "fractions",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:23",
+          "question": "Entre quels entiers se trouve 7/3 ?",
+          "choix": [
+            "entre 2 et 3",
+            "entre 7 et 8",
+            "entre 1 et 2"
+          ],
+          "reponse": 0,
+          "explication": "6/3 = 2 et 9/3 = 3 ; 7 est entre 6 et 9, donc 7/3 = 2 + 1/3."
+        },
+        {
+          "t": "02:39",
+          "question": "Laquelle est plus petite que 1/2 ?",
+          "choix": [
+            "3/5",
+            "4/9",
+            "5/8"
+          ],
+          "reponse": 1,
+          "explication": "2 × 4 = 8, moins que 9 : 4/9 < 1/2."
+        }
+      ],
+      "centres": [
+        "musique",
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "6e-frac-mixte-short",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_mixte",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-frac-mixte",
+      "fichier": "6e/maths/fractions/06-mixte/eleveai-maths-6e-frac-mixte-short.mp4",
+      "miniature": "6e/maths/fractions/06-mixte/eleveai-maths-6e-frac-mixte-short.png",
+      "titre": "9 sauts d'1/4 de mètre : où est la grenouille ? 🐸 — 6e #Shorts",
+      "accroche": "Lou, biologiste, étudie une grenouille : à chaque saut, elle avance d'1/4 de mètre. Après 9 sauts ? On compte les quarts : 4 quarts, 1 mètre ; 8 quarts, 2 mètres ; et 9. Surprise : 9/4, ce n'est pas vers 9 ! 9/4 = 2 + 1/4, entre 2 et 3.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 11/3, c'est entre quels entiers ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_mixte&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #6e #collège",
+      "tags": [
+        "écriture mixte",
+        "encadrer une fraction",
+        "grenouille",
+        "biologiste",
+        "animaux",
+        "fractions",
+        "maths",
+        "6e",
+        "collège",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:32",
+          "question": "5/2, c'est entre quels entiers ?",
+          "choix": [
+            "entre 1 et 2",
+            "entre 2 et 3",
+            "entre 5 et 6"
+          ],
+          "reponse": 1,
+          "explication": "4/2 = 2, donc 5/2 = 2 + 1/2."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "sciences"
+      ]
+    },
+    {
+      "id": "6e-frac-defi",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_defi",
+      "classe": "6e",
+      "ceinture": "orange",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/fractions/07-defi/eleveai-maths-6e-frac-defi.mp4",
+      "miniature": "6e/maths/fractions/07-defi/eleveai-maths-6e-frac-defi.png",
+      "titre": "Mission Mars : les défis de fractions du rover — Défis sur les fractions — épisode 7 · Maths 6e",
+      "accroche": "Inaya est ingénieure spatiale : elle prépare un rover pour Mars. Avant le départ, elle a 5 défis de fractions à relever : la batterie, les panneaux solaires, le trajet, les réservoirs et l'oxygène.\n\nDans cette vidéo :\n• 4/8 de batterie, la moitié ? on regroupe : 4/8 = 1/2\n• 1/4 de 24 panneaux solaires : 24 ÷ 4 = 6\n• 2/8 du trajet = 1/4 (le piège : 1/7, on a enlevé 1)\n• 2/3 ou 3/4 d'un réservoir : environ 0,67 contre 0,75\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : le réservoir d'oxygène est rempli aux 9/12 ; Inaya dit : c'est 75 %. A-t-elle raison ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/fraction-nombre\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/fraction-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_defi&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Mission Mars"
+        ],
+        [
+          "00:18",
+          "Défi 1 : la batterie"
+        ],
+        [
+          "00:34",
+          "Question : les panneaux solaires"
+        ],
+        [
+          "01:04",
+          "Question : le trajet"
+        ],
+        [
+          "01:37",
+          "Question : les réservoirs"
+        ],
+        [
+          "02:07",
+          "Comparer en décimal"
+        ],
+        [
+          "02:30",
+          "À toi de jouer : l'oxygène"
+        ],
+        [
+          "02:51",
+          "Correction"
+        ],
+        [
+          "03:20",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/fraction-nombre",
+      "tags": [
+        "défi",
+        "simplifier une fraction",
+        "fraction et décimal",
+        "pourcentage",
+        "Mars",
+        "rover",
+        "ingénieure spatiale",
+        "espace",
+        "fractions",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:34",
+          "question": "24 panneaux, 1/4 couvert de poussière : combien à nettoyer ?",
+          "choix": [
+            "6",
+            "4",
+            "20"
+          ],
+          "reponse": 0,
+          "explication": "24 ÷ 4 = 6 : une rangée sur 4."
+        },
+        {
+          "t": "01:04",
+          "question": "2/8 du trajet : quelle fraction plus simple ?",
+          "choix": [
+            "1/4",
+            "1/7",
+            "2/4"
+          ],
+          "reponse": 0,
+          "explication": "÷ 2 en haut ET en bas : 2/8 = 1/4 ; 1/7, c'est le piège (on a enlevé 1)."
+        },
+        {
+          "t": "01:37",
+          "question": "Lequel est le plus rempli ?",
+          "choix": [
+            "2/3",
+            "3/4",
+            "ils sont pareils"
+          ],
+          "reponse": 1,
+          "explication": "3/4 = 0,75 et 2/3 ≈ 0,67."
+        }
+      ],
+      "centres": [
+        "espace",
+        "sciences"
+      ]
+    },
+    {
+      "id": "6e-frac-defi-short",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_defi",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-frac-defi",
+      "fichier": "6e/maths/fractions/07-defi/eleveai-maths-6e-frac-defi-short.mp4",
+      "miniature": "6e/maths/fractions/07-defi/eleveai-maths-6e-frac-defi-short.png",
+      "titre": "France, Maurice, Thaïlande : quel drapeau a le plus de bleu ? 🎨 — 6e #Shorts",
+      "accroche": "Moussa, graphiste, dessine des drapeaux. La France : 3 bandes égales, le bleu fait 1/3. L'île Maurice : 4 bandes, le bleu fait 1/4. La Thaïlande : 6 parts égales, le bleu en prend 2, 2/6. Surprise : 2/6 = 1/3, la France et la Thaïlande ont autant de bleu ! Maurice en a le moins.\n\n🥋 Ceinture jaune.\n👉 À toi : le drapeau de la Colombie est jaune sur la moitié. Combien de huitièmes de jaune ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #6e #collège",
+      "tags": [
+        "fractions égales",
+        "drapeaux",
+        "France",
+        "île Maurice",
+        "Thaïlande",
+        "graphiste",
+        "géographie",
+        "fractions",
+        "maths",
+        "6e",
+        "collège",
+        "CRPE",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:33",
+          "question": "Laquelle est égale à 1/3 ?",
+          "choix": [
+            "4/12",
+            "3/4",
+            "2/5"
+          ],
+          "reponse": 0,
+          "explication": "4 ÷ 4 = 1 et 12 ÷ 4 = 3."
+        }
+      ],
+      "centres": [
+        "histoire-geographie",
+        "art-design"
+      ]
+    },
+    {
+      "id": "6e-frac-quantite",
+      "notionId": "fraction_calcul",
+      "microId": "fraction_quantite",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/fractions/08-quantite/eleveai-maths-6e-frac-quantite.mp4",
+      "miniature": "6e/maths/fractions/08-quantite/eleveai-maths-6e-frac-quantite.png",
+      "titre": "Le refrain : les 2/5 de 60 secondes — Prendre une fraction d'un nombre — épisode 8 · Maths 6e",
+      "accroche": "Nathan est producteur de musique. Son morceau dure 60 secondes, et le refrain en occupe les 2/5. Combien de secondes dure le refrain ?\n\nDans cette vidéo :\n• couper en 5 parts égales : 60 ÷ 5 = 12 s, puis prendre 2 parts : 2 × 12 = 24 s\n• la méthode : je divise par le dénominateur, puis je multiplie par le numérateur\n• simplifier avant : les 4/6 de 30, ce sont les 2/3 de 30 = 20\n• le piège : ÷ 2 puis × 5 donne 150 s, plus que tout le morceau\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : la salle du concert a 250 places, les 7/10 sont vendues : combien de places ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/fraction-calcul\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/fraction-calcul\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=fraction_calcul&microId=fraction_quantite&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les 2/5 de 60 ?"
+        ],
+        [
+          "00:20",
+          "Couper en 5"
+        ],
+        [
+          "00:34",
+          "Prendre 2 parts"
+        ],
+        [
+          "00:57",
+          "Question : les 3/10 de 50"
+        ],
+        [
+          "01:26",
+          "Simplifier avant"
+        ],
+        [
+          "01:47",
+          "Le piège : 150 secondes ?"
+        ],
+        [
+          "02:05",
+          "Question : les 3/4 de 40"
+        ],
+        [
+          "02:32",
+          "À toi de jouer"
+        ],
+        [
+          "02:49",
+          "Correction"
+        ],
+        [
+          "03:09",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/fraction-calcul",
+      "tags": [
+        "fraction d'un nombre",
+        "fraction d'une quantité",
+        "musique",
+        "producteur de musique",
+        "refrain",
+        "fractions",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:57",
+          "question": "Les 3/10 de 50 ?",
+          "choix": [
+            "5",
+            "15",
+            "150"
+          ],
+          "reponse": 1,
+          "explication": "50 ÷ 10 = 5, puis 3 × 5 = 15."
+        },
+        {
+          "t": "02:05",
+          "question": "Les 3/4 de 40 ?",
+          "choix": [
+            "30",
+            "10",
+            "120"
+          ],
+          "reponse": 0,
+          "explication": "40 ÷ 4 = 10, puis 3 × 10 = 30."
+        }
+      ],
+      "centres": [
+        "musique"
+      ]
+    },
+    {
+      "id": "6e-frac-additionner",
+      "notionId": "fraction_calcul",
+      "microId": "fraction_additionner",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/fractions/09-additionner/eleveai-maths-6e-frac-additionner.mp4",
+      "miniature": "6e/maths/fractions/09-additionner/eleveai-maths-6e-frac-additionner.png",
+      "titre": "Le flacon de Chloé : 1/8 + 3/8 de litre — Additionner des fractions — épisode 9 · Maths 6e",
+      "accroche": "Chloé est chimiste. Dans un flacon, elle verse 1/8 de litre d'eau, puis 3/8 de litre d'alcool. Combien de liquide y a-t-il dans le flacon ?\n\nDans cette vidéo :\n• parts de même taille : on ajoute les numérateurs, 1/8 + 3/8 = 4/8 = 1/2\n• parts différentes : 1/2 + 1/4 = 2/4 + 1/4 = 3/4\n• 1/3 + 1/4 : tout en douzièmes, 4/12 + 3/12 = 7/12\n• le piège : ajouter les dénominateurs (2/7) ; et pour soustraire, c'est pareil\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Chloé mélange 2/3 de litre et 1/4 de litre : combien de litres ? Ça tient dans un flacon d'1 litre ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/fraction-calcul\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/fraction-calcul\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=fraction_calcul&microId=fraction_additionner&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "1/8 + 3/8 ?"
+        ],
+        [
+          "00:20",
+          "Parts de même taille"
+        ],
+        [
+          "00:36",
+          "Simplifier le résultat"
+        ],
+        [
+          "00:46",
+          "1/2 + 1/4"
+        ],
+        [
+          "01:02",
+          "Question : 3/10 + 1/5"
+        ],
+        [
+          "01:31",
+          "1/3 + 1/4"
+        ],
+        [
+          "01:49",
+          "Le piège : 2/7 ?"
+        ],
+        [
+          "02:05",
+          "Soustraire"
+        ],
+        [
+          "02:22",
+          "Question : 2/5 + 2/5"
+        ],
+        [
+          "02:53",
+          "À toi de jouer"
+        ],
+        [
+          "03:11",
+          "Correction"
+        ],
+        [
+          "03:30",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/fraction-calcul",
+      "tags": [
+        "additionner des fractions",
+        "soustraire des fractions",
+        "même dénominateur",
+        "chimiste",
+        "sciences",
+        "fractions",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:02",
+          "question": "3/10 + 1/5 ?",
+          "choix": [
+            "4/15",
+            "5/10",
+            "4/10"
+          ],
+          "reponse": 1,
+          "explication": "1/5 = 2/10, donc 3/10 + 2/10 = 5/10."
+        },
+        {
+          "t": "02:22",
+          "question": "2/5 + 2/5 ?",
+          "choix": [
+            "4/10",
+            "4/5",
+            "2/5"
+          ],
+          "reponse": 1,
+          "explication": "Parts de même taille : 2 + 2 = 4, le dénominateur ne change pas."
+        }
+      ],
+      "centres": [
+        "sciences"
+      ]
+    },
+    {
+      "id": "6e-frac-multiplier-entier",
+      "notionId": "fraction_calcul",
+      "microId": "fraction_multiplier_entier",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/fractions/10-multiplier-entier/eleveai-maths-6e-frac-multiplier-entier.mp4",
+      "miniature": "6e/maths/fractions/10-multiplier-entier/eleveai-maths-6e-frac-multiplier-entier.png",
+      "titre": "4 chats, 3/8 de boîte chacun — Multiplier une fraction par un entier — épisode 10 · Maths 6e",
+      "accroche": "Lisa est soigneuse animalière dans un refuge. À chaque repas, un chat mange 3/8 d'une boîte de pâtée, et il y a 4 chats. Combien de boîtes faut-il pour un repas ?\n\nDans cette vidéo :\n• 4 × 3/8, c'est 3/8 quatre fois de suite : 12/8\n• la règle : on multiplie le numérateur, le dénominateur ne bouge pas\n• 12/8 = 3/2 : une boîte et demie\n• le piège : multiplier aussi le bas, 12/32, la part d'un seul chat\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : chaque chien du refuge boit 3/4 de litre d'eau par jour, et il y a 6 chiens : combien de litres ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/fraction-calcul\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/fraction-calcul\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=fraction_calcul&microId=fraction_multiplier_entier&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "4 × 3/8 ?"
+        ],
+        [
+          "00:22",
+          "3/8, quatre fois"
+        ],
+        [
+          "00:36",
+          "La règle"
+        ],
+        [
+          "00:51",
+          "Plus qu'une boîte"
+        ],
+        [
+          "01:04",
+          "Question : 5 × 2/9"
+        ],
+        [
+          "01:33",
+          "Simplifier le résultat"
+        ],
+        [
+          "01:56",
+          "Le piège : 12/32 ?"
+        ],
+        [
+          "02:13",
+          "Question : 3 × 1/3"
+        ],
+        [
+          "02:39",
+          "À toi de jouer"
+        ],
+        [
+          "02:55",
+          "Correction"
+        ],
+        [
+          "03:13",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/fraction-calcul",
+      "tags": [
+        "multiplier une fraction",
+        "fraction et entier",
+        "refuge",
+        "soigneuse animalière",
+        "animaux",
+        "fractions",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:04",
+          "question": "5 × 2/9 ?",
+          "choix": [
+            "10/45",
+            "10/9",
+            "7/9"
+          ],
+          "reponse": 1,
+          "explication": "On multiplie seulement le haut : 5 × 2 = 10, le bas reste 9."
+        },
+        {
+          "t": "02:13",
+          "question": "3 × 1/3 ?",
+          "choix": [
+            "3/9",
+            "1",
+            "4/3"
+          ],
+          "reponse": 1,
+          "explication": "3 × 1/3 = 3/3, un entier : 1."
+        }
+      ],
+      "centres": [
+        "animaux"
+      ]
+    },
+    {
+      "id": "6e-frac-calcul-defi",
+      "notionId": "fraction_calcul",
+      "microId": "fraction_calcul_defi",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/fractions/11-calcul-defi/eleveai-maths-6e-frac-calcul-defi.mp4",
+      "miniature": "6e/maths/fractions/11-calcul-defi/eleveai-maths-6e-frac-calcul-defi.png",
+      "titre": "Rando de 24 km : combien reste-t-il ? — Défis de calcul avec les fractions — épisode 11 · Maths 6e",
+      "accroche": "Sarah est guide de montagne. Sa randonnée fait 24 km : le matin, le groupe marche les 3/8 du parcours, l'après-midi encore 1/4. Combien de kilomètres reste-t-il pour le lendemain ?\n\nDans cette vidéo :\n• méthode 1, en kilomètres : 3/8 de 24 = 9 km, 1/4 de 24 = 6 km, il reste 9 km\n• méthode 2, avec les fractions : 3/8 + 1/4 = 5/8, il reste 3/8 de 24 = 9 km\n• 3 × 5/4 : plus grand que 3, car 5/4 est plus grand que 1\n• le bonus : 18 adultes sur 40 = 9/20 = 45/100 = 45 %\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 40 randonneurs : 1/4 d'enfants, 3/10 d'ados, les autres sont des adultes. Combien d'adultes ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/fraction-calcul\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/fraction-calcul\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=fraction_calcul&microId=fraction_calcul_defi&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Combien reste-t-il ?"
+        ],
+        [
+          "00:33",
+          "Le matin : 3/8 de 24 km"
+        ],
+        [
+          "00:46",
+          "L'après-midi : 1/4 de 24 km"
+        ],
+        [
+          "01:05",
+          "Question : 3/8 + 1/4"
+        ],
+        [
+          "01:32",
+          "Méthode 2 : avec les fractions"
+        ],
+        [
+          "01:53",
+          "Question : 3 × 5/4"
+        ],
+        [
+          "02:21",
+          "À toi de jouer"
+        ],
+        [
+          "02:40",
+          "Correction"
+        ],
+        [
+          "03:04",
+          "Bonus : en pourcentage"
+        ],
+        [
+          "03:21",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/fraction-calcul",
+      "tags": [
+        "défi",
+        "problème à étapes",
+        "fraction d'un nombre",
+        "additionner des fractions",
+        "randonnée",
+        "guide de montagne",
+        "sport",
+        "fractions",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:05",
+          "question": "3/8 + 1/4 ?",
+          "choix": [
+            "4/12",
+            "5/8",
+            "4/8"
+          ],
+          "reponse": 1,
+          "explication": "1/4 = 2/8, donc 3 + 2 = 5 : 5/8."
+        },
+        {
+          "t": "01:53",
+          "question": "3 × 5/4 : plus grand ou plus petit que 3 ?",
+          "choix": [
+            "plus petit",
+            "égal",
+            "plus grand"
+          ],
+          "reponse": 2,
+          "explication": "5/4 est plus grand que 1, donc 3 × 5/4 > 3 (15/4)."
+        }
+      ],
+      "centres": [
+        "sport",
+        "histoire-geographie"
+      ]
+    },
+    {
+      "id": "6e-frac-pourcentage-fraction",
+      "notionId": "pourcentage_nombre",
+      "microId": "pourcentage_fraction",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/fractions/12-pourcentage-fraction/eleveai-maths-6e-frac-pourcentage-fraction.mp4",
+      "miniature": "6e/maths/fractions/12-pourcentage-fraction/eleveai-maths-6e-frac-pourcentage-fraction.png",
+      "titre": "Barre de chargement : 1/4, combien de % ? — Pourcentages et fractions — épisode 12 · Maths 6e",
+      "accroche": "Yasmine est développeuse de jeux vidéo. Dans son jeu, la barre de chargement compte 100 petites cases, et le jeu a chargé 1/4. Que doit afficher la barre ?\n\nDans cette vidéo :\n• pour cent veut dire sur 100 : 25 % = 25/100\n• 1/4 des 100 cases : 25 cases, donc 25 %\n• les repères : 1/2 = 50 %, 3/4 = 75 %, 1/10 = 10 %, 1/5 = 20 %\n• le piège : 1/4 n'est pas 4 % ; et dans l'autre sens, 40 % = 40/100 = 2/5\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : le jeu de Yasmine a 20 niveaux, tu en as fini 7 : quel pourcentage du jeu as-tu fini ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/pourcentage-nombre\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/pourcentage-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=pourcentage_nombre&microId=pourcentage_fraction&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "1/4, combien de pour cent ?"
+        ],
+        [
+          "00:20",
+          "Pour cent = sur 100"
+        ],
+        [
+          "00:36",
+          "1/4 des 100 cases"
+        ],
+        [
+          "00:50",
+          "Avec les nombres"
+        ],
+        [
+          "01:11",
+          "Les repères"
+        ],
+        [
+          "01:27",
+          "Question : 1/20 en pourcentage"
+        ],
+        [
+          "01:55",
+          "Dans l'autre sens : 40 %"
+        ],
+        [
+          "02:17",
+          "Le piège : 1/4 = 4 % ?"
+        ],
+        [
+          "02:33",
+          "Question : 30 % en fraction"
+        ],
+        [
+          "03:01",
+          "À toi de jouer"
+        ],
+        [
+          "03:15",
+          "Correction"
+        ],
+        [
+          "03:32",
+          "Et le nombre décimal"
+        ],
+        [
+          "03:52",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/pourcentage-nombre",
+      "tags": [
+        "pourcentage",
+        "fraction",
+        "sur 100",
+        "barre de chargement",
+        "jeux vidéo",
+        "développeuse",
+        "fractions",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:27",
+          "question": "1/20, c'est combien de pour cent ?",
+          "choix": [
+            "20 %",
+            "5 %",
+            "1 %"
+          ],
+          "reponse": 1,
+          "explication": "20 × 5 = 100, donc 1/20 = 5/100 = 5 %."
+        },
+        {
+          "t": "02:33",
+          "question": "30 %, c'est quelle fraction ?",
+          "choix": [
+            "30/10",
+            "3/100",
+            "30/100"
+          ],
+          "reponse": 2,
+          "explication": "30 % veut dire 30 sur 100 ; 30/10 ferait 3 entiers."
+        }
+      ],
+      "centres": [
+        "jeux-video"
+      ]
+    },
+    {
+      "id": "6e-frac-pourcentage-fraction-short",
+      "notionId": "pourcentage_nombre",
+      "microId": "pourcentage_fraction",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-frac-pourcentage-fraction",
+      "fichier": "6e/maths/fractions/12-pourcentage-fraction/eleveai-maths-6e-frac-pourcentage-fraction-short.mp4",
+      "miniature": "6e/maths/fractions/12-pourcentage-fraction/eleveai-maths-6e-frac-pourcentage-fraction-short.png",
+      "titre": "3 sur 4, 7 sur 10, 18 sur 25 : qui tire le mieux ? 🏀 — 6e #Shorts",
+      "accroche": "Awa, entraîneuse de basket, cherche son meilleur tireur. Noa réussit 3 lancers francs sur 4, Lina 7 sur 10, Sacha 18 sur 25 : c'est lui qui en marque le plus ! Mais ils n'ont pas tiré autant de fois : on compte tout sur 100. 3 sur 4 = 75 %, 7 sur 10 = 70 %, 18 sur 25 = 72 %. Surprise : le meilleur tireur, c'est Noa !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 4 lancers réussis sur 5, c'est combien de pour cent ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=pourcentage_nombre&microId=pourcentage_fraction&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #6e #collège",
+      "tags": [
+        "pourcentage",
+        "fraction",
+        "basket",
+        "lancers francs",
+        "entraîneuse",
+        "fractions",
+        "maths",
+        "6e",
+        "collège",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:47",
+          "question": "1 sur 2, c'est combien de pour cent ?",
+          "choix": [
+            "12 %",
+            "2 %",
+            "50 %"
+          ],
+          "reponse": 2,
+          "explication": "La moitié : 50 sur 100."
+        }
+      ],
+      "centres": [
+        "sport",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-frac-pourcentage-decimal",
+      "notionId": "pourcentage_nombre",
+      "microId": "pourcentage_decimal",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/fractions/13-pourcentage-decimal/eleveai-maths-6e-frac-pourcentage-decimal.mp4",
+      "miniature": "6e/maths/fractions/13-pourcentage-decimal/eleveai-maths-6e-frac-pourcentage-decimal.png",
+      "titre": "71 % de la Terre sous l'eau : 0,71 en % — Pourcentages et nombres décimaux — épisode 13 · Maths 6e",
+      "accroche": "Léa est océanographe : elle étudie les océans. Son logiciel affiche la part de la Terre couverte d'eau : 0,71. Mais dans son article, elle doit écrire un pourcentage. Que doit-elle écrire ?\n\nDans cette vidéo :\n• 0,71 = 71 centièmes = 71 cases sur 100 = 71 %\n• la méthode : × 100, les chiffres glissent de deux rangs ; le corps d'un adulte, environ 0,6 d'eau, soit 60 %\n• le piège : 0,75 n'est pas 0,75 %\n• dans l'autre sens, ÷ 100 : 25 % = 0,25 et 8 % = 0,08\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : deux plages couvertes d'algues, à 0,4 et à 0,04 : écris ces deux nombres en pourcentage.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/pourcentage-nombre\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/pourcentage-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=pourcentage_nombre&microId=pourcentage_decimal&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "0,75, combien de pour cent ?"
+        ],
+        [
+          "00:25",
+          "71 centièmes"
+        ],
+        [
+          "00:44",
+          "La méthode : × 100"
+        ],
+        [
+          "01:09",
+          "L'eau du corps"
+        ],
+        [
+          "01:29",
+          "Question : 0,5 en pourcentage"
+        ],
+        [
+          "02:03",
+          "Le piège : 0,75 % ?"
+        ],
+        [
+          "02:29",
+          "Dans l'autre sens : ÷ 100"
+        ],
+        [
+          "02:46",
+          "Question : 5 % en décimal"
+        ],
+        [
+          "03:18",
+          "Toute la chaîne"
+        ],
+        [
+          "03:37",
+          "À toi de jouer"
+        ],
+        [
+          "03:56",
+          "Correction"
+        ],
+        [
+          "04:13",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/pourcentage-nombre",
+      "tags": [
+        "pourcentage",
+        "nombre décimal",
+        "multiplier par 100",
+        "océanographe",
+        "océans",
+        "eau",
+        "corps humain",
+        "fractions",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:29",
+          "question": "0,5, c'est combien de pour cent ?",
+          "choix": [
+            "5 %",
+            "50 %",
+            "0,5 %"
+          ],
+          "reponse": 1,
+          "explication": "0,5 = 0,50 = 50 centièmes, donc 50 %."
+        },
+        {
+          "t": "02:46",
+          "question": "5 %, c'est quel nombre décimal ?",
+          "choix": [
+            "0,5",
+            "0,05",
+            "5,0"
+          ],
+          "reponse": 1,
+          "explication": "5 % = 5 centièmes = 0,05 ; 0,5 serait 50 %."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "corps-sante"
+      ]
+    },
+    {
+      "id": "6e-frac-pourcentage-decimal-short",
+      "notionId": "pourcentage_nombre",
+      "microId": "pourcentage_decimal",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-frac-pourcentage-decimal",
+      "fichier": "6e/maths/fractions/13-pourcentage-decimal/eleveai-maths-6e-frac-pourcentage-decimal-short.mp4",
+      "miniature": "6e/maths/fractions/13-pourcentage-decimal/eleveai-maths-6e-frac-pourcentage-decimal-short.png",
+      "titre": "Soldes à −0,25 % : la bonne affaire ? 👟 — 6e #Shorts",
+      "accroche": "Sami, vendeur, écrit l'affiche des soldes : −0,25 % sur des baskets à 100 €. 0,25 %, c'est 25 centimes de remise : les baskets coûtent encore 99,75 € ! Il voulait une remise de 0,25 du prix : 0,25 × 100 = 25, soit −25 %, et les baskets à 75 €. Un seul signe, et tout change !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 0,3 du prix, c'est combien de pour cent ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=pourcentage_nombre&microId=pourcentage_decimal&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #6e #collège",
+      "tags": [
+        "pourcentage",
+        "nombre décimal",
+        "soldes",
+        "remise",
+        "vendeur",
+        "argent",
+        "fractions",
+        "maths",
+        "6e",
+        "collège",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:44",
+          "question": "0,1, c'est combien de pour cent ?",
+          "choix": [
+            "1 %",
+            "0,1 %",
+            "10 %"
+          ],
+          "reponse": 2,
+          "explication": "0,1 × 100 = 10 : 10 %."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "4e-frac-egale",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_egale",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/fractions/01-egale/eleveai-maths-4e-frac-egale.mp4",
+      "miniature": "4e/maths/fractions/01-egale/eleveai-maths-4e-frac-egale.png",
+      "titre": "16/9 ou 1920 sur 1080 : le même format d'image ? — Fractions égales — épisode 1 · Maths 4e",
+      "accroche": "Enzo est monteur vidéo. Son film est au format 16/9 : 16 de large pour 9 de haut. Sa caméra filme en 1920 sur 1080. Est-ce le même format, ou faut-il couper l'image ?\n\nDans cette vidéo :\n• fractions égales : on multiplie ou on divise en haut et en bas par le même nombre (16 × 120 = 1920, 9 × 120 = 1080)\n• les produits en croix : 16 × 720 = 9 × 1280 = 11 520\n• 4/3 contre 16/9 : 36 et 48, des formats différents ; trouver le nombre manquant de 9/16 = …/1920\n• le piège : ajouter le même nombre en haut et en bas (1/2 ne devient pas 2/3)\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une vidéo en 2560 sur 1440 : est-ce le format 16/9 ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/fraction-nombre\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/fraction-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=fraction_nombre&microId=fraction_egale&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Deux fractions égales ?"
+        ],
+        [
+          "00:23",
+          "La règle : × en haut et en bas"
+        ],
+        [
+          "00:44",
+          "Les produits en croix"
+        ],
+        [
+          "01:07",
+          "Question : 4/3 et 1440/1080"
+        ],
+        [
+          "01:41",
+          "4/3 contre 16/9"
+        ],
+        [
+          "02:04",
+          "Le nombre manquant"
+        ],
+        [
+          "02:26",
+          "Question : 3/5 en quarantièmes"
+        ],
+        [
+          "02:58",
+          "Le piège : ajouter"
+        ],
+        [
+          "03:20",
+          "Question : égale à 6/8"
+        ],
+        [
+          "03:54",
+          "À toi de jouer"
+        ],
+        [
+          "04:08",
+          "Correction"
+        ],
+        [
+          "04:35",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/fraction-nombre",
+      "tags": [
+        "fractions égales",
+        "produits en croix",
+        "format d'image",
+        "16/9",
+        "monteur vidéo",
+        "cinéma",
+        "fractions",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:07",
+          "question": "4/3 et 1440/1080 sont-elles égales ?",
+          "choix": [
+            "oui",
+            "non",
+            "on ne peut pas savoir"
+          ],
+          "reponse": 0,
+          "explication": "4 × 1080 = 4 320 et 3 × 1440 = 4 320 : produits en croix égaux."
+        },
+        {
+          "t": "02:26",
+          "question": "3/5 = combien de quarantièmes ?",
+          "choix": [
+            "24",
+            "38",
+            "15"
+          ],
+          "reponse": 0,
+          "explication": "5 × 8 = 40, donc 3 × 8 = 24 ; 38, c'est avoir ajouté 35."
+        },
+        {
+          "t": "03:20",
+          "question": "Laquelle est égale à 6/8 ?",
+          "choix": [
+            "9/12",
+            "7/9",
+            "8/6"
+          ],
+          "reponse": 0,
+          "explication": "6 × 12 = 8 × 9 = 72 ; 7/9 : on a ajouté 1 ; 8/6 est renversée."
+        }
+      ],
+      "centres": [
+        "cinema-series",
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "4e-frac-egale-short",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_egale",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-frac-egale",
+      "fichier": "4e/maths/fractions/01-egale/eleveai-maths-4e-frac-egale-short.mp4",
+      "miniature": "4e/maths/fractions/01-egale/eleveai-maths-4e-frac-egale-short.png",
+      "titre": "Doubler la peinture : le rose va-t-il changer ? 🎨 — 4e #Shorts",
+      "accroche": "Aïcha, décoratrice, prépare un rose : 2 pots de rouge sur 5 pots en tout. Pour un grand mur, elle double tout : 4 sur 10, le même rose, 2/5 = 4/10. Son apprenti, lui, ajoute 1 pot de rouge et 1 de blanc : 3 sur 6. Surprise : le rose est plus foncé ! 3/6, c'est la moitié, plus que 2/5.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : pour le même rose, combien de pots de rouge sur 25 pots ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=fraction_nombre&microId=fraction_egale&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #4e #collège",
+      "tags": [
+        "fractions égales",
+        "peinture",
+        "mélange",
+        "décoratrice",
+        "fractions",
+        "maths",
+        "4e",
+        "collège",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:34",
+          "question": "Quel mélange donne le même rose que 2 sur 5 ?",
+          "choix": [
+            "6 sur 15",
+            "3 sur 6",
+            "4 sur 7"
+          ],
+          "reponse": 0,
+          "explication": "2 × 3 = 6 et 5 × 3 = 15."
+        }
+      ],
+      "centres": [
+        "art-design"
+      ]
+    },
+    {
+      "id": "4e-frac-simplifier",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_simplifier",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/fractions/02-simplifier/eleveai-maths-4e-frac-simplifier.mp4",
+      "miniature": "4e/maths/fractions/02-simplifier/eleveai-maths-4e-frac-simplifier.png",
+      "titre": "Centre de tri : simplifier 48 kg sur 120 — Simplifier une fraction — épisode 2 · Maths 4e",
+      "accroche": "Léna est technicienne dans un centre de tri. Ce matin, un camion apporte 120 kg de déchets, dont 48 kg de plastique : 48/120 des déchets. Des nombres bien trop grands !\n\nDans cette vidéo :\n• des caisses de 12 kg : 48/120 = 4/10, puis 2/5, la fraction irréductible\n• les critères de divisibilité par 2, 5, 3 et 9 pour trouver un diviseur commun\n• pas à pas (÷ 2, ÷ 2, ÷ 2, ÷ 3) ou en une étape, par le plus grand diviseur commun : 24\n• les pièges : soustraire (15/20 → 10/15) ou ne diviser qu'un seul des deux nombres\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 90 kg de déchets, dont 27 kg de verre : quelle fraction, simplifiée au maximum ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/fraction-nombre\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/fraction-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=fraction_nombre&microId=fraction_simplifier&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "La même fraction, en plus simple"
+        ],
+        [
+          "00:30",
+          "Des caisses de 12 kg"
+        ],
+        [
+          "00:49",
+          "Encore plus simple : irréductible"
+        ],
+        [
+          "01:09",
+          "Les critères de divisibilité"
+        ],
+        [
+          "01:36",
+          "Pas à pas, ou en une étape"
+        ],
+        [
+          "02:00",
+          "Question : 36/48 en une étape"
+        ],
+        [
+          "02:34",
+          "Les pièges"
+        ],
+        [
+          "03:03",
+          "Question : simplifie 45/60"
+        ],
+        [
+          "03:40",
+          "Question : laquelle est irréductible ?"
+        ],
+        [
+          "04:17",
+          "À toi de jouer"
+        ],
+        [
+          "04:35",
+          "Correction"
+        ],
+        [
+          "05:05",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/fraction-nombre",
+      "tags": [
+        "simplifier une fraction",
+        "fraction irréductible",
+        "critères de divisibilité",
+        "diviseur commun",
+        "centre de tri",
+        "recyclage",
+        "fractions",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "02:00",
+          "question": "Pour simplifier 36/48 en une seule étape, on divise par :",
+          "choix": [
+            "2",
+            "6",
+            "12"
+          ],
+          "reponse": 2,
+          "explication": "36 = 12 × 3 et 48 = 12 × 4 : 3/4 ; avec 6 on obtient 6/8, pas fini."
+        },
+        {
+          "t": "03:03",
+          "question": "Simplifie 45/60 au maximum.",
+          "choix": [
+            "9/12",
+            "3/4",
+            "40/55"
+          ],
+          "reponse": 1,
+          "explication": "÷ 15 : 3/4 ; 9/12, c'est s'arrêter trop tôt ; 40/55, on a soustrait 5."
+        },
+        {
+          "t": "03:40",
+          "question": "Laquelle de ces fractions est irréductible ?",
+          "choix": [
+            "15/21",
+            "9/14",
+            "22/33"
+          ],
+          "reponse": 1,
+          "explication": "9 = 3 × 3 et 14 = 2 × 7 : rien en commun."
+        }
+      ],
+      "centres": [
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "4e-frac-simplifier-short",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_simplifier",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-frac-simplifier",
+      "fichier": "4e/maths/fractions/02-simplifier/eleveai-maths-4e-frac-simplifier-short.mp4",
+      "miniature": "4e/maths/fractions/02-simplifier/eleveai-maths-4e-frac-simplifier-short.png",
+      "titre": "Le même mur avec moins de briques ? 🧱 — 4e #Shorts",
+      "accroche": "Noé, concepteur de jouets, construit un mur de 12 petites briques, dont 9 rouges. Il remplace 3 petites briques par 1 grosse : 4 grosses briques, dont 3 rouges. Le mur n'a pas changé : 9/12 = 3/4 ! Et avec des briques de 4 ? 9 ÷ 4 ne tombe pas juste : une brique serait rouge et blanche à la fois, impossible.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un mur de 18 briques, dont 12 rouges. Avec le moins de briques possible, combien de briques rouges ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=fraction_nombre&microId=fraction_simplifier&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #4e #collège",
+      "tags": [
+        "simplifier une fraction",
+        "briques",
+        "jouets",
+        "concepteur de jouets",
+        "fractions",
+        "maths",
+        "4e",
+        "collège",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:43",
+          "question": "10 briques, dont 4 rouges, regroupées 2 par 2 : combien de rouges ?",
+          "choix": [
+            "2",
+            "4",
+            "5"
+          ],
+          "reponse": 0,
+          "explication": "4 ÷ 2 = 2 : le mur fait 2/5."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "art-design"
+      ]
+    },
+    {
+      "id": "4e-frac-decimal",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_decimal",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/fractions/03-decimal/eleveai-maths-4e-frac-decimal.mp4",
+      "miniature": "4e/maths/fractions/03-decimal/eleveai-maths-4e-frac-decimal.png",
+      "titre": "3/8 du ciel nuageux : combien en % ? — Fraction, décimal, pourcentage — épisode 3 · Maths 4e",
+      "accroche": "Sofia est prévisionniste météo. Les météorologues partagent le ciel en 8 parts égales, les octas. Ce matin, les nuages couvrent 3/8 du ciel, mais son logiciel veut un nombre décimal. 3/8, c'est combien ?\n\nDans cette vidéo :\n• une fraction est une division : 3/8 = 3 ÷ 8 = 0,375, jamais 3,8\n• en pourcentage : 0,375 × 100 = 37,5 %\n• plus rapide, écrire sur 100 : 7/20 = 35/100 = 0,35 = 35 %\n• le piège : 0,75 n'est pas 0,75 % ; et dans l'autre sens, 0,24 = 24/100 = 6/25\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 9 jours de brouillard sur 25 : écris cette part en fraction, en nombre décimal, puis en pourcentage.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/fraction-nombre\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/fraction-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=fraction_nombre&microId=fraction_decimal&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Fraction, décimal, pourcentage"
+        ],
+        [
+          "00:28",
+          "Une fraction, c'est une division"
+        ],
+        [
+          "00:42",
+          "Poser 3 ÷ 8"
+        ],
+        [
+          "01:16",
+          "En pourcentage"
+        ],
+        [
+          "01:31",
+          "Question : 5/8 en décimal"
+        ],
+        [
+          "02:07",
+          "Écrire sur 100"
+        ],
+        [
+          "02:26",
+          "Le piège : 0,75 %"
+        ],
+        [
+          "02:47",
+          "Question : 0,4 en pourcentage"
+        ],
+        [
+          "03:19",
+          "Dans l'autre sens"
+        ],
+        [
+          "03:35",
+          "Question : 0,24 en fraction"
+        ],
+        [
+          "04:13",
+          "À toi de jouer"
+        ],
+        [
+          "04:30",
+          "Correction"
+        ],
+        [
+          "04:49",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/fraction-nombre",
+      "tags": [
+        "fraction et décimal",
+        "écriture décimale",
+        "pourcentage",
+        "fraction irréductible",
+        "météo",
+        "octas",
+        "prévisionniste",
+        "fractions",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:31",
+          "question": "5/8 du ciel couverts : quel nombre décimal ?",
+          "choix": [
+            "5,8",
+            "0,625",
+            "0,58"
+          ],
+          "reponse": 1,
+          "explication": "5 ÷ 8 = 0,625 ; 5,8 et 0,58 collent les nombres."
+        },
+        {
+          "t": "02:47",
+          "question": "Comment s'écrit 0,4 en pourcentage ?",
+          "choix": [
+            "0,4 %",
+            "4 %",
+            "40 %"
+          ],
+          "reponse": 2,
+          "explication": "0,4 × 100 = 40 : 40 % ; 4 % = 0,04."
+        },
+        {
+          "t": "03:35",
+          "question": "Quelle fraction irréductible est égale à 0,24 ?",
+          "choix": [
+            "24/10",
+            "6/25",
+            "12/50"
+          ],
+          "reponse": 1,
+          "explication": "0,24 = 24/100, ÷ 4 : 6/25 ; 12/50 se simplifie encore."
+        }
+      ],
+      "centres": [
+        "meteo-climat",
+        "sciences"
+      ]
+    },
+    {
+      "id": "4e-frac-decimal-short",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_decimal",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-frac-decimal",
+      "fichier": "4e/maths/fractions/03-decimal/eleveai-maths-4e-frac-decimal-short.mp4",
+      "miniature": "4e/maths/fractions/03-decimal/eleveai-maths-4e-frac-decimal-short.png",
+      "titre": "Escalade ou kayak : comment l'appli trouve 65 % ? 📱 — 4e #Shorts",
+      "accroche": "Yanis, community manager, lance un sondage en story : escalade ou kayak ? 20 votes : 13 pour l'escalade, 7 pour le kayak. L'escalade a 13/20 des votes. L'appli calcule 13 ÷ 20 = 0,65, soit 65 %. Le kayak a le reste : 35 %.\n\n🥋 Ceinture jaune.\n👉 À toi : 12 votes sur 25. Quel pourcentage ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=fraction_nombre&microId=fraction_decimal&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #4e #collège",
+      "tags": [
+        "pourcentage",
+        "fraction et décimal",
+        "sondage",
+        "story",
+        "réseaux sociaux",
+        "community manager",
+        "fractions",
+        "maths",
+        "4e",
+        "collège",
+        "CRPE",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:34",
+          "question": "3 votes sur 20 : qu'affiche l'appli ?",
+          "choix": [
+            "3,2 %",
+            "15 %",
+            "0,15 %"
+          ],
+          "reponse": 1,
+          "explication": "3 ÷ 20 = 0,15 = 15 %."
+        }
+      ],
+      "centres": [
+        "reseaux-sociaux"
+      ]
+    },
+    {
+      "id": "4e-frac-rationnel",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_rationnel",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/fractions/04-rationnel/eleveai-maths-4e-frac-rationnel.mp4",
+      "miniature": "4e/maths/fractions/04-rationnel/eleveai-maths-4e-frac-rationnel.png",
+      "titre": "Mbappé, 8 buts en 7 matchs : un nombre décimal ? — Les nombres rationnels — épisode 4 · Maths 4e",
+      "accroche": "Nadia est analyste de données dans un club de football. Elle étudie Kylian Mbappé à la Coupe du monde 2022 : 8 buts en 7 matchs. Combien de buts par match ? 8/7.\n\nDans cette vidéo :\n• 8 ÷ 7 = 1,142857… la division ne s'arrête jamais : 8/7 n'est pas décimal, mais il est rationnel\n• un nombre rationnel s'écrit a/b, avec a et b entiers et b différent de 0\n• les entiers, les négatifs et les décimaux sont rationnels : 5 = 5/1, −1,3 = −13/10, 2,5 = 5/2\n• le piège : 1/3 = 0,333…, et 0,33 n'est qu'une valeur approchée\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une joueuse marque 12 buts en 8 matchs : écris ses buts par match en fraction irréductible. Est-ce aussi un nombre décimal ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/fraction-nombre\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/fraction-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=fraction_nombre&microId=fraction_rationnel&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Quels nombres sont des fractions ?"
+        ],
+        [
+          "00:21",
+          "8 ÷ 7 ne s'arrête pas"
+        ],
+        [
+          "00:47",
+          "Un nombre rationnel"
+        ],
+        [
+          "00:58",
+          "Entiers, négatifs, décimaux"
+        ],
+        [
+          "01:17",
+          "Question : −1,3 en fraction"
+        ],
+        [
+          "01:48",
+          "Un décimal en fraction"
+        ],
+        [
+          "02:03",
+          "Question : lequel n'est pas rationnel ?"
+        ],
+        [
+          "02:36",
+          "Le piège : 1/3 = 0,33 ?"
+        ],
+        [
+          "02:59",
+          "Question : 8/7 est-il décimal ?"
+        ],
+        [
+          "03:33",
+          "À toi de jouer"
+        ],
+        [
+          "03:50",
+          "Correction"
+        ],
+        [
+          "04:06",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/fraction-nombre",
+      "tags": [
+        "nombre rationnel",
+        "nombre décimal",
+        "quotient",
+        "football",
+        "Mbappé",
+        "Coupe du monde",
+        "analyste de données",
+        "fractions",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:17",
+          "question": "Quelle écriture est égale à −1,3 ?",
+          "choix": [
+            "−13/10",
+            "13/10",
+            "−1/3"
+          ],
+          "reponse": 0,
+          "explication": "1,3 = 13/10 et le signe reste."
+        },
+        {
+          "t": "02:03",
+          "question": "Lequel de ces nombres n'est pas rationnel ?",
+          "choix": [
+            "−7",
+            "4/0",
+            "0,5"
+          ],
+          "reponse": 1,
+          "explication": "4/0 n'a pas de sens : on ne divise jamais par 0."
+        },
+        {
+          "t": "02:59",
+          "question": "8/7 est-il un nombre décimal ?",
+          "choix": [
+            "oui : 1,14",
+            "non, mais rationnel",
+            "non, pas rationnel"
+          ],
+          "reponse": 1,
+          "explication": "8 ÷ 7 ne s'arrête pas, mais c'est un quotient d'entiers."
+        }
+      ],
+      "centres": [
+        "sport"
+      ]
+    },
+    {
+      "id": "4e-frac-rationnel-short",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_rationnel",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-frac-rationnel",
+      "fichier": "4e/maths/fractions/04-rationnel/eleveai-maths-4e-frac-rationnel-short.mp4",
+      "miniature": "4e/maths/fractions/04-rationnel/eleveai-maths-4e-frac-rationnel-short.png",
+      "titre": "1 ÷ 7 : les chiffres qui tournent en rond 🎩 — 4e #Shorts",
+      "accroche": "Lina, magicienne des nombres, tape 1 ÷ 7 : 0,142857… puis encore 1, 4, 2, 8, 5, 7. Les mêmes 6 chiffres, sans fin, comme sur une roue ! Et 2/7 = 0,285714…, 3/7 = 0,428571… : les mêmes chiffres, qui partent d'ailleurs sur la roue. Magique !\n\n🥋 Ceinture jaune.\n👉 À toi : dans 1/7, quel est le 7e chiffre après la virgule ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=fraction_nombre&microId=fraction_rationnel&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #4e #collège",
+      "tags": [
+        "nombre rationnel",
+        "écriture décimale",
+        "un septième",
+        "magie",
+        "énigme",
+        "fractions",
+        "maths",
+        "4e",
+        "collège",
+        "CRPE",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:39",
+          "question": "1/3 en nombre décimal ?",
+          "choix": [
+            "0,3",
+            "0,333… sans fin",
+            "1,3"
+          ],
+          "reponse": 1,
+          "explication": "Il reste toujours 1 : les 3 ne s'arrêtent jamais."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "4e-frac-comparer",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_comparer",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/fractions/05-comparer/eleveai-maths-4e-frac-comparer.mp4",
+      "miniature": "4e/maths/fractions/05-comparer/eleveai-maths-4e-frac-comparer.png",
+      "titre": "Drones : 5/8 ou 7/12 de batterie ? — Comparer des fractions — épisode 5 · Maths 4e",
+      "accroche": "Lucie est pilote de drone : elle photographie des champs vus du ciel. Le drone A a encore 5/8 de batterie, le drone B 7/12. Lequel peut voler le plus longtemps ?\n\nDans cette vidéo :\n• même dénominateur, on compare les numérateurs ; même numérateur, le plus petit dénominateur gagne\n• au même dénominateur : 5/8 = 15/24 et 7/12 = 14/24\n• les produits en croix : 5 × 12 = 60 et 7 × 8 = 56\n• avec un décimal, on divise : 7/8 = 0,875, plus petit que 0,9\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : trois drones ont 2/3, 3/4 et 5/6 de batterie : range-les du plus petit au plus grand.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/fraction-nombre\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/fraction-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=fraction_nombre&microId=fraction_comparer&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Laquelle est la plus grande ?"
+        ],
+        [
+          "00:22",
+          "Même dénominateur"
+        ],
+        [
+          "00:36",
+          "Même numérateur"
+        ],
+        [
+          "00:52",
+          "Question : 2/9 ou 2/5"
+        ],
+        [
+          "01:24",
+          "Au même dénominateur"
+        ],
+        [
+          "01:44",
+          "Les produits en croix"
+        ],
+        [
+          "02:01",
+          "Question : 4/7 et 3/5"
+        ],
+        [
+          "02:33",
+          "Avec un nombre décimal"
+        ],
+        [
+          "02:55",
+          "Question : 7/8 ou 0,9"
+        ],
+        [
+          "03:28",
+          "À toi de jouer"
+        ],
+        [
+          "03:42",
+          "Correction"
+        ],
+        [
+          "04:00",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/fraction-nombre",
+      "tags": [
+        "comparer des fractions",
+        "même dénominateur",
+        "produits en croix",
+        "drone",
+        "pilote de drone",
+        "technologie",
+        "fractions",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:52",
+          "question": "La plus grande : 2/9 ou 2/5 ?",
+          "choix": [
+            "2/9",
+            "2/5",
+            "elles sont égales"
+          ],
+          "reponse": 1,
+          "explication": "Même numérateur : les cinquièmes sont plus grands."
+        },
+        {
+          "t": "02:01",
+          "question": "Quel signe entre 4/7 et 3/5 ?",
+          "choix": [
+            "<",
+            "=",
+            ">"
+          ],
+          "reponse": 0,
+          "explication": "4 × 5 = 20 et 3 × 7 = 21 : 20 < 21."
+        },
+        {
+          "t": "02:55",
+          "question": "Le plus grand : 7/8 ou 0,9 ?",
+          "choix": [
+            "7/8",
+            "0,9",
+            "ils sont égaux"
+          ],
+          "reponse": 1,
+          "explication": "7 ÷ 8 = 0,875 < 0,9."
+        }
+      ],
+      "centres": [
+        "technologie-ia",
+        "transports"
+      ]
+    },
+    {
+      "id": "4e-frac-comparer-short",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_comparer",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-frac-comparer",
+      "fichier": "4e/maths/fractions/05-comparer/eleveai-maths-4e-frac-comparer-short.mp4",
+      "miniature": "4e/maths/fractions/05-comparer/eleveai-maths-4e-frac-comparer-short.png",
+      "titre": "Le steak d'1/3 de livre qui a fait un flop 🍔 — 4e #Shorts",
+      "accroche": "Années 1980, aux États-Unis : une chaîne de fast-food lance un steak d'1/3 de livre, au même prix que le célèbre quart de livre. C'est un échec ! Beaucoup de clients pensaient qu'1/3 était plus petit qu'1/4, parce que 3 est plus petit que 4. Faux : coupe un steak en 3, un autre en 4, la part d'1/3 est plus grosse. 1/3, c'est environ 0,33 ; 1/4, c'est 0,25.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : en 2021, la chaîne a relancé son steak en 3/9 de livre. 3/9, c'est plus, moins, ou autant qu'1/3 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=fraction_nombre&microId=fraction_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #4e #collège",
+      "tags": [
+        "comparer des fractions",
+        "fast-food",
+        "quart de livre",
+        "histoire",
+        "marketing",
+        "fractions",
+        "maths",
+        "4e",
+        "collège",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:38",
+          "question": "Quel steak est le plus gros ?",
+          "choix": [
+            "1/5 de livre",
+            "1/6 de livre",
+            "1/8 de livre"
+          ],
+          "reponse": 0,
+          "explication": "Même numérateur : plus le dénominateur est petit, plus la part est grosse."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "4e-frac-additionner",
+      "notionId": "fraction_calcul",
+      "microId": "fraction_additionner",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/fractions/06-additionner/eleveai-maths-4e-frac-additionner.mp4",
+      "miniature": "4e/maths/fractions/06-additionner/eleveai-maths-4e-frac-additionner.png",
+      "titre": "La ruche de Mila : 2/3 + 3/4 de kilo de miel — Additionner des fractions — épisode 6 · Maths 4e",
+      "accroche": "Mila est apicultrice. Sa ruche est posée sur une balance connectée : lundi, elle gagne 2/3 de kilo de miel ; mardi, 3/4 de kilo. Combien en deux jours ?\n\nDans cette vidéo :\n• le même dénominateur : 12, dans la table de 3 et de 4 ; 8/12 + 9/12 = 17/12\n• simplifier le résultat : 7/12 + 2/12 = 9/12 = 3/4, soit 75 %\n• avec des relatifs : −5/6 + 1/4 = −10/12 + 3/12 = −7/12\n• le piège : ajouter les dénominateurs (5/7)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : en trois jours, la ruche gagne 3/4 de kilo, perd 1/3, puis gagne 1/12 : a-t-elle gagné ou perdu, et combien ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/fraction-calcul\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/fraction-calcul\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=fraction_calcul&microId=fraction_additionner&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "2/3 + 3/4 ?"
+        ],
+        [
+          "00:23",
+          "Le même dénominateur"
+        ],
+        [
+          "00:38",
+          "La somme : 17/12"
+        ],
+        [
+          "00:51",
+          "Question : 1/6 + 3/4"
+        ],
+        [
+          "01:20",
+          "Le piège : 5/7 ?"
+        ],
+        [
+          "01:37",
+          "Simplifier le résultat"
+        ],
+        [
+          "02:08",
+          "Avec des nombres relatifs"
+        ],
+        [
+          "02:32",
+          "Question : −1/2 + 1/3"
+        ],
+        [
+          "03:02",
+          "À toi de jouer"
+        ],
+        [
+          "03:17",
+          "Correction"
+        ],
+        [
+          "03:38",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/fraction-calcul",
+      "tags": [
+        "additionner des fractions",
+        "dénominateur commun",
+        "nombres relatifs",
+        "apicultrice",
+        "abeilles",
+        "miel",
+        "fractions",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:51",
+          "question": "1/6 + 3/4 ?",
+          "choix": [
+            "4/10",
+            "11/12",
+            "4/12"
+          ],
+          "reponse": 1,
+          "explication": "1/6 = 2/12 et 3/4 = 9/12 : 2 + 9 = 11, donc 11/12."
+        },
+        {
+          "t": "02:32",
+          "question": "−1/2 + 1/3 ?",
+          "choix": [
+            "0",
+            "−1/6",
+            "1/6"
+          ],
+          "reponse": 1,
+          "explication": "−3/6 + 2/6 = −1/6."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "4e-frac-additionner-short",
+      "notionId": "fraction_calcul",
+      "microId": "fraction_additionner",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-frac-additionner",
+      "fichier": "4e/maths/fractions/06-additionner/eleveai-maths-4e-frac-additionner-short.mp4",
+      "miniature": "4e/maths/fractions/06-additionner/eleveai-maths-4e-frac-additionner-short.png",
+      "titre": "Le blé des scribes égyptiens : 1/2 + 1/4 + 1/8… 🌾 — 4e #Shorts",
+      "accroche": "Nour, égyptologue, étudie des tablettes de bois vieilles de 4 000 ans : les scribes y partageaient le blé en moitiés. Une mesure de blé, 1 hekat : 1/2 + 1/4 + 1/8 + 1/16 + 1/32 + 1/64. Tout en soixante-quatrièmes : 32 + 16 + 8 + 4 + 2 + 1 = 63. Surprise : 63/64 ! Il manque 1/64 pour faire un hekat entier.\n\n🥋 Ceinture jaune.\n👉 À toi : 1/2 + 1/4 + 1/8, ça fait combien ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=fraction_calcul&microId=fraction_additionner&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #4e #collège",
+      "tags": [
+        "additionner des fractions",
+        "Égypte ancienne",
+        "scribes",
+        "hekat",
+        "égyptologue",
+        "histoire",
+        "fractions",
+        "maths",
+        "4e",
+        "collège",
+        "CRPE",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:25",
+          "question": "1/2 + 1/4 ?",
+          "choix": [
+            "2/6",
+            "3/4",
+            "1/3"
+          ],
+          "reponse": 1,
+          "explication": "1/2 = 2/4, donc 2/4 + 1/4 = 3/4."
+        }
+      ],
+      "centres": [
+        "histoire-geographie",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "4e-frac-multiplier",
+      "notionId": "fraction_calcul",
+      "microId": "fraction_multiplier",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/fractions/07-multiplier/eleveai-maths-4e-frac-multiplier.mp4",
+      "miniature": "4e/maths/fractions/07-multiplier/eleveai-maths-4e-frac-multiplier.png",
+      "titre": "Panneau solaire : 2/3 × 3/4 de mètre carré — Multiplier des fractions — épisode 7 · Maths 4e",
+      "accroche": "Ibrahim est installateur de panneaux solaires. Sur un toit, il a un carré d'1 mètre de côté ; son panneau prend 2/3 de la largeur et 3/4 de la hauteur. Quelle part du mètre carré couvre-t-il ?\n\nDans cette vidéo :\n• la grille : 3 × 4 = 12 petits rectangles, le panneau en couvre 2 × 3 = 6, soit 6/12\n• la règle : les numérateurs entre eux, les dénominateurs entre eux, puis on simplifie : 1/2\n• simplifier avant de multiplier : 4/9 × 3/8 = 1/6\n• la règle des signes : −2/5 × 5/6 = −1/3 ; le piège : chercher un dénominateur commun\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : un toit est couvert de tuiles sur 3/4 de sa surface, et Ibrahim pose des panneaux sur 4/5 de ces tuiles : quelle fraction du toit ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/fraction-calcul\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/fraction-calcul\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=fraction_calcul&microId=fraction_multiplier&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "2/3 × 3/4 ?"
+        ],
+        [
+          "00:23",
+          "La grille : 6/12"
+        ],
+        [
+          "00:38",
+          "La règle"
+        ],
+        [
+          "00:59",
+          "Question : 3/5 × 2/7"
+        ],
+        [
+          "01:29",
+          "Ne pas mélanger avec l'addition"
+        ],
+        [
+          "01:45",
+          "Simplifier avant de multiplier"
+        ],
+        [
+          "02:12",
+          "Avec des relatifs"
+        ],
+        [
+          "02:34",
+          "Question : −3/4 × (−2/3)"
+        ],
+        [
+          "03:07",
+          "En pourcentage"
+        ],
+        [
+          "03:18",
+          "À toi de jouer"
+        ],
+        [
+          "03:36",
+          "Correction"
+        ],
+        [
+          "03:57",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/fraction-calcul",
+      "tags": [
+        "multiplier des fractions",
+        "produit de fractions",
+        "règle des signes",
+        "panneaux solaires",
+        "énergie",
+        "installateur",
+        "fractions",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:59",
+          "question": "3/5 × 2/7 ?",
+          "choix": [
+            "5/12",
+            "6/35",
+            "6/12"
+          ],
+          "reponse": 1,
+          "explication": "En haut 3 × 2 = 6, en bas 5 × 7 = 35."
+        },
+        {
+          "t": "02:34",
+          "question": "−3/4 × (−2/3) ?",
+          "choix": [
+            "−1/2",
+            "1/2",
+            "−5/7"
+          ],
+          "reponse": 1,
+          "explication": "Moins fois moins donne plus : 6/12 = 1/2."
+        }
+      ],
+      "centres": [
+        "sciences",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "4e-frac-multiplier-short",
+      "notionId": "fraction_calcul",
+      "microId": "fraction_multiplier",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-frac-multiplier",
+      "fichier": "4e/maths/fractions/07-multiplier/eleveai-maths-4e-frac-multiplier-short.mp4",
+      "miniature": "4e/maths/fractions/07-multiplier/eleveai-maths-4e-frac-multiplier-short.png",
+      "titre": "Plier une feuille 7 fois : quelle fraction reste ? 📄 — 4e #Shorts",
+      "accroche": "Yuna, artiste en origami, plie une feuille en 2 : 1/2. Encore en 2 : 1/2 de 1/2, 1/4. Puis 1/8. Chaque pli multiplie par 1/2 ! Après 7 plis en 2, un morceau ne fait plus que 1/128 de la feuille, et le papier a 128 épaisseurs.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Yuna plie en 3, puis encore en 3. 1/3 × 1/3 : quelle fraction de la feuille ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=fraction_calcul&microId=fraction_multiplier&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #4e #collège",
+      "tags": [
+        "multiplier des fractions",
+        "origami",
+        "pliage",
+        "art",
+        "fractions",
+        "maths",
+        "4e",
+        "collège",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:18",
+          "question": "En 2, puis en 3 : quelle fraction ?",
+          "choix": [
+            "1/5",
+            "1/6",
+            "2/3"
+          ],
+          "reponse": 1,
+          "explication": "1/2 × 1/3 = 1/6."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "4e-frac-inverse",
+      "notionId": "fraction_calcul",
+      "microId": "fraction_inverse",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/fractions/08-inverse/eleveai-maths-4e-frac-inverse.mp4",
+      "miniature": "4e/maths/fractions/08-inverse/eleveai-maths-4e-frac-inverse.png",
+      "titre": "Agrandir puis réduire une photo : l'inverse de 5/3 — L'inverse d'une fraction — épisode 8 · Maths 4e",
+      "accroche": "Clara est photographe. Elle agrandit une photo de 6 cm de large en la multipliant par 5/3 : la photo fait maintenant 10 cm. Comment revenir à 6 cm ?\n\nDans cette vidéo :\n• multiplier par 3/5 : 5/3 × 3/5 = 15/15 = 1, et multiplier par 1 ne change rien\n• l'inverse d'une fraction : on la retourne ; l'inverse de 5, c'est 1/5\n• le piège : l'inverse n'est pas l'opposé ; l'inverse de −2/3, c'est −3/2\n• 0 n'a pas d'inverse\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Clara réduit une photo à 80 % : quel zoom doit-elle choisir pour revenir à la taille de départ ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/fraction-calcul\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/fraction-calcul\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=fraction_calcul&microId=fraction_inverse&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Par quoi multiplier pour obtenir 1 ?"
+        ],
+        [
+          "00:22",
+          "Revenir à 6 cm"
+        ],
+        [
+          "00:37",
+          "L'inverse : on retourne"
+        ],
+        [
+          "00:50",
+          "Question : l'inverse de 4/7"
+        ],
+        [
+          "01:20",
+          "L'inverse d'un entier"
+        ],
+        [
+          "01:33",
+          "Le piège : inverse ou opposé ?"
+        ],
+        [
+          "01:52",
+          "Question : l'inverse de −3/4"
+        ],
+        [
+          "02:22",
+          "0 n'a pas d'inverse"
+        ],
+        [
+          "02:35",
+          "À toi de jouer"
+        ],
+        [
+          "02:49",
+          "Correction"
+        ],
+        [
+          "03:11",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/fraction-calcul",
+      "tags": [
+        "inverse d'une fraction",
+        "produit égal à 1",
+        "opposé",
+        "photographe",
+        "zoom",
+        "photo",
+        "fractions",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:50",
+          "question": "L'inverse de 4/7 ?",
+          "choix": [
+            "7/4",
+            "−4/7",
+            "4/7"
+          ],
+          "reponse": 0,
+          "explication": "On retourne : 4/7 × 7/4 = 28/28 = 1."
+        },
+        {
+          "t": "01:52",
+          "question": "L'inverse de −3/4 ?",
+          "choix": [
+            "3/4",
+            "−4/3",
+            "4/3"
+          ],
+          "reponse": 1,
+          "explication": "On retourne et le signe reste : −4/3."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "reseaux-sociaux"
+      ]
+    },
+    {
+      "id": "4e-frac-inverse-short",
+      "notionId": "fraction_calcul",
+      "microId": "fraction_inverse",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-frac-inverse",
+      "fichier": "4e/maths/fractions/08-inverse/eleveai-maths-4e-frac-inverse-short.mp4",
+      "miniature": "4e/maths/fractions/08-inverse/eleveai-maths-4e-frac-inverse-short.png",
+      "titre": "La carte retournée : le tour de magie des fractions 🃏 — 4e #Shorts",
+      "accroche": "Noé, magicien, montre une carte : 2/3. Il la retourne : 3/2 ! Et voici le tour : 2/3 × 3/2 = 6/6 = 1. Une autre carte : 5/8, retournée 8/5, et 5/8 × 8/5 = 40/40 : encore 1 ! Une fraction fois sa carte retournée, ça fait toujours 1.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : quel nombre est égal à son propre inverse ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=fraction_calcul&microId=fraction_inverse&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #4e #collège",
+      "tags": [
+        "inverse d'une fraction",
+        "magie",
+        "tour de cartes",
+        "magicien",
+        "fractions",
+        "maths",
+        "4e",
+        "collège",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:29",
+          "question": "La carte 5 : que cache son dos ?",
+          "choix": [
+            "1/5",
+            "−5",
+            "5"
+          ],
+          "reponse": 0,
+          "explication": "5 = 5/1, retournée : 1/5."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "cinema-series"
+      ]
+    },
+    {
+      "id": "4e-frac-diviser",
+      "notionId": "fraction_calcul",
+      "microId": "fraction_diviser",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/fractions/09-diviser/eleveai-maths-4e-frac-diviser.mp4",
+      "miniature": "4e/maths/fractions/09-diviser/eleveai-maths-4e-frac-diviser.png",
+      "titre": "Le sirop d'Amina : 3/4 de litre en flacons d'1/8 — Diviser des fractions — épisode 9 · Maths 4e",
+      "accroche": "Amina est préparatrice en pharmacie. Elle a 3/4 de litre de sirop, qu'elle verse dans des flacons d'1/8 de litre. Combien de flacons peut-elle remplir ?\n\nDans cette vidéo :\n• compter les huitièmes : 3/4 = 6/8, donc 6 flacons\n• la règle : diviser par une fraction, c'est multiplier par son inverse ; 3/4 × 8 = 24/4 = 6\n• le piège : retourner la première fraction (6/5 au lieu de 5/6)\n• diviser par 2, c'est prendre la moitié : 4/5 ÷ 2 = 2/5 = 40 % ; avec des relatifs, −3/5 ÷ 9/10 = −2/3\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Amina a 6 litres de solution et remplit des flacons de 3/4 de litre : combien de flacons ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/fraction-calcul\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/fraction-calcul\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=fraction_calcul&microId=fraction_diviser&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "3/4 ÷ 1/8 ?"
+        ],
+        [
+          "00:21",
+          "Compter les huitièmes"
+        ],
+        [
+          "00:33",
+          "La règle : × l'inverse"
+        ],
+        [
+          "00:54",
+          "Question : 2/3 ÷ 4/5"
+        ],
+        [
+          "01:31",
+          "Le piège : quelle fraction retourner ?"
+        ],
+        [
+          "01:49",
+          "Diviser par un entier"
+        ],
+        [
+          "02:14",
+          "Avec des relatifs"
+        ],
+        [
+          "02:37",
+          "Question : 1/2 ÷ 1/4"
+        ],
+        [
+          "03:02",
+          "À toi de jouer"
+        ],
+        [
+          "03:16",
+          "Correction"
+        ],
+        [
+          "03:33",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/fraction-calcul",
+      "tags": [
+        "diviser des fractions",
+        "inverse",
+        "quotient de fractions",
+        "pharmacie",
+        "préparatrice en pharmacie",
+        "santé",
+        "fractions",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:54",
+          "question": "2/3 ÷ 4/5 ?",
+          "choix": [
+            "8/15",
+            "5/6",
+            "6/5"
+          ],
+          "reponse": 1,
+          "explication": "2/3 × 5/4 = 10/12 = 5/6."
+        },
+        {
+          "t": "02:37",
+          "question": "1/2 ÷ 1/4 ?",
+          "choix": [
+            "1/8",
+            "2",
+            "1/2"
+          ],
+          "reponse": 1,
+          "explication": "1/2 × 4 = 4/2 = 2 : dans 1/2, il y a 2 quarts."
+        }
+      ],
+      "centres": [
+        "corps-sante",
+        "sciences"
+      ]
+    },
+    {
+      "id": "4e-frac-diviser-short",
+      "notionId": "fraction_calcul",
+      "microId": "fraction_diviser",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-frac-diviser",
+      "fichier": "4e/maths/fractions/09-diviser/eleveai-maths-4e-frac-diviser-short.mp4",
+      "miniature": "4e/maths/fractions/09-diviser/eleveai-maths-4e-frac-diviser-short.png",
+      "titre": "Diviser… et ça grossit ! 3 ÷ 1/4 = 12 💐 — 4e #Shorts",
+      "accroche": "Jules, fleuriste, a 3 mètres de ruban, et coupe 1/4 de mètre par bouquet. Combien de bouquets ? 3 ÷ 1/4 : dans 1 mètre, il y a 4 quarts ; dans 3 mètres, 3 × 4 = 12 bouquets ! Surprise : on a divisé 3, et on trouve 12, plus grand. Diviser par 1/4, c'est multiplier par 4.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 5 ÷ 1/2, ça fait combien ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=fraction_calcul&microId=fraction_diviser&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #4e #collège",
+      "tags": [
+        "diviser par une fraction",
+        "fleuriste",
+        "ruban",
+        "bouquets",
+        "fractions",
+        "maths",
+        "4e",
+        "collège",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:29",
+          "question": "2 ÷ 1/3 ?",
+          "choix": [
+            "2/3",
+            "6",
+            "1/6"
+          ],
+          "reponse": 1,
+          "explication": "3 tiers dans 1 m : 2 × 3 = 6."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "art-design"
+      ]
+    },
+    {
+      "id": "4e-frac-quantite",
+      "notionId": "fraction_calcul",
+      "microId": "fraction_quantite",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/fractions/10-quantite/eleveai-maths-4e-frac-quantite.mp4",
+      "miniature": "4e/maths/fractions/10-quantite/eleveai-maths-4e-frac-quantite.png",
+      "titre": "Avant-première : 3/8 des 240 places — Une fraction d'une quantité — épisode 10 · Maths 4e",
+      "accroche": "Karim est programmateur dans un cinéma. Sa grande salle compte 240 places ; pour l'avant-première de ce soir, 3/8 des places sont déjà réservées. Combien de places, exactement ?\n\nDans cette vidéo :\n• 240 ÷ 8 = 30 places par part, puis 3 × 30 = 90 places\n• prendre une fraction d'un nombre, c'est multiplier : 240 × 3/8 ; diviser d'abord garde des petits nombres\n• le piège : ÷ 3 puis × 8 donne 640 places, plus que la salle entière\n• remonter au tout : 45 places = 3/4, donc 60 places ; et 90/240 = 3/8 = 0,375 = 37,5 %\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 5/6 des 240 places sont vendues, et 3/4 des spectateurs sont des enfants : combien d'enfants ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/fraction-calcul\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/fraction-calcul\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=fraction_calcul&microId=fraction_quantite&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Combien, exactement ?"
+        ],
+        [
+          "00:23",
+          "Couper en 8, prendre 3"
+        ],
+        [
+          "00:43",
+          "Une fraction de, c'est multiplier"
+        ],
+        [
+          "01:16",
+          "Question : 2/5 de 35"
+        ],
+        [
+          "01:46",
+          "Le piège : 640 places ?"
+        ],
+        [
+          "02:17",
+          "Remonter au tout"
+        ],
+        [
+          "02:44",
+          "Question : 2/3 = 40 places"
+        ],
+        [
+          "03:14",
+          "Simplifier, décimal, pourcentage"
+        ],
+        [
+          "03:47",
+          "À toi de jouer"
+        ],
+        [
+          "04:07",
+          "Correction"
+        ],
+        [
+          "04:33",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/fraction-calcul",
+      "tags": [
+        "fraction d'une quantité",
+        "fraction d'un nombre",
+        "remonter au tout",
+        "cinéma",
+        "programmateur",
+        "avant-première",
+        "fractions",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:16",
+          "question": "Combien font 2/5 de 35 ?",
+          "choix": [
+            "7",
+            "14",
+            "17,5"
+          ],
+          "reponse": 1,
+          "explication": "35 ÷ 5 = 7, puis 7 × 2 = 14 ; 7, ce n'est que 1/5."
+        },
+        {
+          "t": "02:44",
+          "question": "2/3 d'une salle = 40 places. Combien de places en tout ?",
+          "choix": [
+            "80",
+            "20",
+            "60"
+          ],
+          "reponse": 2,
+          "explication": "40 ÷ 2 = 20 : c'est 1/3 ; puis 20 × 3 = 60."
+        }
+      ],
+      "centres": [
+        "cinema-series"
+      ]
+    },
+    {
+      "id": "4e-frac-quantite-short",
+      "notionId": "fraction_calcul",
+      "microId": "fraction_quantite",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-frac-quantite",
+      "fichier": "4e/maths/fractions/10-quantite/eleveai-maths-4e-frac-quantite-short.mp4",
+      "miniature": "4e/maths/fractions/10-quantite/eleveai-maths-4e-frac-quantite-short.png",
+      "titre": "Couper un gâteau CARRÉ en 5 parts égales : l'astuce 🎂 — 4e #Shorts",
+      "accroche": "Lina, cheffe de cuisine, doit couper un gâteau carré en 5 parts égales. En 4, c'est facile… mais en 5 ? Son astuce : le tour du gâteau. Côté 20 cm, tour 80 cm : chaque part prend 80 ÷ 5 = 16 cm de bord, et elle coupe depuis le centre. Surprise : 2 triangles et 3 morceaux à 4 côtés… et pourtant chaque part fait 16 × 10 ÷ 2 = 80 cm², sur 400 cm² : 1/5 = 0,2 = 20 % du gâteau !\n\n🥋 Ceinture jaune.\n👉 À toi : pour 8 personnes, combien de centimètres de bord par part ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=fraction_calcul&microId=fraction_quantite&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #4e #collège",
+      "tags": [
+        "fraction",
+        "partager en 5",
+        "aire",
+        "périmètre",
+        "gâteau carré",
+        "cheffe de cuisine",
+        "énigme",
+        "fractions",
+        "maths",
+        "4e",
+        "collège",
+        "CRPE",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "01:21",
+          "question": "Part du milieu : 8 cm + 8 cm de bord. Son aire ?",
+          "choix": [
+            "64 cm²",
+            "80 cm²",
+            "160 cm²"
+          ],
+          "reponse": 1,
+          "explication": "8 × 10 ÷ 2 = 40, et 40 + 40 = 80."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "4e-frac-oppose",
+      "notionId": "fraction_calcul",
+      "microId": "fraction_oppose",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/fractions/11-oppose/eleveai-maths-4e-frac-oppose.mp4",
+      "miniature": "4e/maths/fractions/11-oppose/eleveai-maths-4e-frac-oppose.png",
+      "titre": "La marée monte et descend : l'opposé de 3/4 — L'opposé d'une fraction — épisode 11 · Maths 4e",
+      "accroche": "Manon est capitaine de port. Elle surveille l'échelle de marée : le 0, c'est le niveau moyen de la mer. Ce matin, l'eau est à 3/4 de mètre au-dessus du 0 ; ce soir, à 3/4 de mètre au-dessous. Comment l'écrire ?\n\nDans cette vidéo :\n• 3/4 et −3/4 : même distance au 0, de chaque côté, ce sont des opposés\n• la somme de deux opposés vaut 0\n• le signe moins en haut, en bas ou devant : −3/4 = (−3)/4 = 3/(−4)\n• le piège : l'opposé n'est pas l'inverse (−3/4 et 4/3)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : la tablette affiche −6/15 de mètre ; à midi, l'eau est au niveau opposé : quel est ce niveau, en nombre décimal ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/fraction-calcul\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/fraction-calcul\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=fraction_calcul&microId=fraction_oppose&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "De l'autre côté du zéro"
+        ],
+        [
+          "00:27",
+          "Au-dessus, au-dessous"
+        ],
+        [
+          "00:40",
+          "Sur la droite graduée"
+        ],
+        [
+          "00:59",
+          "La somme vaut 0"
+        ],
+        [
+          "01:13",
+          "Question : l'opposé de −5/9"
+        ],
+        [
+          "01:42",
+          "Où placer le signe moins ?"
+        ],
+        [
+          "02:10",
+          "Le piège : opposé ou inverse ?"
+        ],
+        [
+          "02:30",
+          "Question : l'opposé de 2/(−7)"
+        ],
+        [
+          "02:58",
+          "À toi de jouer"
+        ],
+        [
+          "03:18",
+          "Correction"
+        ],
+        [
+          "03:40",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/fraction-calcul",
+      "tags": [
+        "opposé d'une fraction",
+        "nombres relatifs",
+        "droite graduée",
+        "marée",
+        "capitaine de port",
+        "mer",
+        "fractions",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:13",
+          "question": "Quel est l'opposé de −5/9 ?",
+          "choix": [
+            "9/5",
+            "5/9",
+            "−5/9"
+          ],
+          "reponse": 1,
+          "explication": "On change seulement le signe : −5/9 devient 5/9 ; leur somme vaut 0."
+        },
+        {
+          "t": "02:30",
+          "question": "Quel est l'opposé de cette fraction ? (2/(−7))",
+          "choix": [
+            "−2/7",
+            "2/7",
+            "7/2"
+          ],
+          "reponse": 1,
+          "explication": "2/(−7) = −2/7, son opposé est 2/7."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "sciences"
+      ]
+    },
+    {
+      "id": "4e-frac-oppose-short",
+      "notionId": "fraction_calcul",
+      "microId": "fraction_oppose",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-frac-oppose",
+      "fichier": "4e/maths/fractions/11-oppose/eleveai-maths-4e-frac-oppose-short.mp4",
+      "miniature": "4e/maths/fractions/11-oppose/eleveai-maths-4e-frac-oppose-short.png",
+      "titre": "Tir à la corde : où est l'opposé du ruban ? 💪 — 4e #Shorts",
+      "accroche": "Aïcha, professeure d'EPS, organise un tir à la corde ; au sol, la ligne du milieu, c'est le 0. Les bleus tirent : le ruban part à 3/5 de mètre à droite. Les rouges ripostent : 3/5 de l'autre côté, −3/5. Même distance au 0, comme dans un miroir : ce sont des opposés. Et 3/5 + (−3/5) = 0 : égalité !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : les rouges ont tiré le ruban à −5/8 de mètre. De combien les bleus doivent-ils tirer pour le ramener au 0 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=fraction_calcul&microId=fraction_oppose&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #4e #collège",
+      "tags": [
+        "opposé d'une fraction",
+        "nombres relatifs",
+        "tir à la corde",
+        "EPS",
+        "sport",
+        "fractions",
+        "maths",
+        "4e",
+        "collège",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:54",
+          "question": "Le ruban est à −2/7. Où est son opposé ?",
+          "choix": [
+            "2/7",
+            "−7/2",
+            "7/2"
+          ],
+          "reponse": 0,
+          "explication": "On change seulement le signe : 2/7, de l'autre côté du 0."
+        }
+      ],
+      "centres": [
+        "sport",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "4e-frac-defi",
+      "notionId": "fraction_calcul",
+      "microId": "fraction_defi",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/fractions/12-defi/eleveai-maths-4e-frac-defi.mp4",
+      "miniature": "4e/maths/fractions/12-defi/eleveai-maths-4e-frac-defi.png",
+      "titre": "Enquête sommeil : de 18/24 à 75 %, toute la chaîne — Défis sur les fractions — épisode 12 · Maths 4e",
+      "accroche": "Amina est infirmière scolaire. Elle mène une enquête sur le sommeil dans une classe de 4e : sur 24 élèves, 18 dorment moins de 9 heures par nuit. Pour l'affiche du collège, elle veut un pourcentage, en trois étapes.\n\nDans cette vidéo :\n• étape 1, simplifier : 18/24 = 3/4 (le piège : enlever 6, 12/18)\n• étape 2, le décimal : 3 ÷ 4 = 0,75, pas 3,4\n• étape 3, le pourcentage : 0,75 = 75 %, pas 0,75 %\n• plus loin : 1 − 3/4 = 1/4, et les 2/3 de 3/4 = 1/2, soit 12 élèves\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : dans tout le collège, 210 élèves sur 600 se couchent après 22 heures : écris la fraction simplifiée, puis le pourcentage.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/fraction-calcul\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/fraction-calcul\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=fraction_calcul&microId=fraction_defi&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Une enquête en trois étapes"
+        ],
+        [
+          "00:29",
+          "Étape 1 : simplifier"
+        ],
+        [
+          "00:57",
+          "Question : simplifie 16/20"
+        ],
+        [
+          "01:28",
+          "Étape 2 : le décimal"
+        ],
+        [
+          "01:46",
+          "Étape 3 : le pourcentage"
+        ],
+        [
+          "02:05",
+          "Question : 0,08 en pourcentage"
+        ],
+        [
+          "02:33",
+          "Plus loin : 1/4, puis 2/3 de 3/4"
+        ],
+        [
+          "03:00",
+          "Question : 1/4 + 1/2"
+        ],
+        [
+          "03:33",
+          "À toi de jouer"
+        ],
+        [
+          "03:50",
+          "Correction"
+        ],
+        [
+          "04:14",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/fraction-calcul",
+      "tags": [
+        "défi",
+        "simplifier une fraction",
+        "fraction et décimal",
+        "pourcentage",
+        "sommeil",
+        "infirmière scolaire",
+        "santé",
+        "fractions",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:57",
+          "question": "Simplifie 16/20.",
+          "choix": [
+            "12/16",
+            "4/5",
+            "4/20"
+          ],
+          "reponse": 1,
+          "explication": "16 ÷ 4 = 4 et 20 ÷ 4 = 5 ; enlever 4, ou ne diviser que le haut : ce sont les pièges."
+        },
+        {
+          "t": "02:05",
+          "question": "0,08, en pourcentage, c'est combien ?",
+          "choix": [
+            "80 %",
+            "8 %",
+            "0,08 %"
+          ],
+          "reponse": 1,
+          "explication": "0,08 = 8 centièmes = 8 %."
+        },
+        {
+          "t": "03:00",
+          "question": "Un élève écrit : 1/4 + 1/2 = 2/6. La bonne somme ?",
+          "choix": [
+            "2/6",
+            "3/4",
+            "2/4"
+          ],
+          "reponse": 1,
+          "explication": "1/2 = 2/4, et 1/4 + 2/4 = 3/4 ; on n'additionne jamais les dénominateurs."
+        }
+      ],
+      "centres": [
+        "corps-sante",
+        "sciences"
+      ]
+    },
+    {
+      "id": "4e-frac-defi-short",
+      "notionId": "fraction_calcul",
+      "microId": "fraction_defi",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-frac-defi",
+      "fichier": "4e/maths/fractions/12-defi/eleveai-maths-4e-frac-defi-short.mp4",
+      "miniature": "4e/maths/fractions/12-defi/eleveai-maths-4e-frac-defi-short.png",
+      "titre": "1/2 + 1/3 = 2/5 : le post viral dit-il vrai ? 📰 — 4e #Shorts",
+      "accroche": "Yanis, journaliste, vérifie les infos qui circulent. Ce post fait le buzz : 1/2 + 1/3 = 2/5. Sur une barre, 1/2 + 1/3 dépasse la moitié… or 2/5 = 0,4 = 40 %, moins que la moitié : le post est faux ! Le bon calcul, en sixièmes : 3/6 + 2/6 = 5/6, environ 83 %.\n\n🥋 Ceinture jaune.\n👉 À toi : 1/3 + 1/6, quel pourcentage ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=fraction_calcul&microId=fraction_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #4e #collège",
+      "tags": [
+        "additionner des fractions",
+        "fake news",
+        "vérifier une info",
+        "journaliste",
+        "réseaux sociaux",
+        "fractions",
+        "maths",
+        "4e",
+        "collège",
+        "CRPE",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:53",
+          "question": "1/4 + 1/4 = ?",
+          "choix": [
+            "2/8",
+            "1/2",
+            "1/8"
+          ],
+          "reponse": 1,
+          "explication": "2/4 = 1/2 ; on n'additionne pas les dénominateurs."
+        }
+      ],
+      "centres": [
+        "reseaux-sociaux",
+        "jeux-defis"
+      ]
     }
   ]
 }
