@@ -337,6 +337,153 @@ function corrigerVersFraction(q: Q): string[] {
   return p;
 }
 
+/* ── Fraction ↔ décimal ↔ pourcentage (25/10/2026) ───────────────────────────
+   Refait par un AUTRE chemin que le générateur : la division posée chiffre après
+   chiffre, la valeur relue dans le texte. Et ses erreurs doivent être REFUSÉES :
+   3/4 = 3,4 ; 0,75 = 0,75 % ; 1/4 = 4 % ; 75/100 quand on demande l'irréductible ;
+   la troncature à la place de l'arrondi. */
+const virguleC = (x: number) => String(Math.round(x * 1e6) / 1e6).replace(".", ",");
+const lirePourcent = (s: string): number | null => {
+  const m = String(s).trim().match(/^(-?\d+(?:,\d+)?) ?%$/);
+  return m ? Number(m[1].replace(",", ".")) : null;
+};
+/** Les nombres entre dollars de l'énoncé : tous la même valeur, sinon null. */
+function valeurDesFormules(t: string): number | null {
+  const vs = [...t.matchAll(/\$([^$]+)\$/g)].map((m) => val(m[1]));
+  if (!vs.length || vs.some((v) => v == null || !Number.isFinite(v))) return null;
+  return vs.every((v) => egalRel(v!, vs[0]!)) ? vs[0]! : null;
+}
+const accepte = (q: Q, answer: string) => compareAnswer({ comparator: q.comparator, answer, expected: q.expected });
+/** Les réponses d'élève qui DOIVENT être refusées. */
+function refusees(q: Q, fausses: string[]): string[] {
+  return fausses.filter((f) => accepte(q, f)).map((f) => `l'erreur « ${f} » est acceptée`);
+}
+
+/** Fraction (ou décimal) de l'énoncé → pourcentage : valeur, unicité en QCM, ses erreurs refusées. */
+function corrigerPourcentage(q: Q): string[] {
+  const v = valeurDesFormules(q.text);
+  if (v == null) return ILLISIBLE(q.text);
+  const cible = 100 * v;
+  const p: string[] = [];
+  const e = lirePourcent(String(q.expected[0]));
+  if (e == null || !egalRel(e, cible)) p.push(`attendu « ${q.expected[0]} », le texte donne ${cible} %`);
+  if (q.format === "qcm") {
+    const lus = (q.choices ?? []).map(lirePourcent);
+    if (lus.some((w) => w == null)) p.push(`proposition illisible : ${(q.choices ?? []).join(" | ")}`);
+    const bons = lus.filter((w) => w != null && egalRel(w, cible));
+    if (bons.length !== 1) p.push(`${bons.length} propositions valent ${cible} %`);
+    if (new Set(lus.map(String)).size !== lus.length) p.push("deux propositions de même valeur");
+  } else {
+    if (!accepte(q, virguleC(cible)) || !accepte(q, `${virguleC(cible)}%`)) p.push("le pourcentage tapé sans espace ou sans % est refusé");
+    const fs = fractionsDe(q.text);
+    p.push(...refusees(q, [`${virguleC(v)} %`, virguleC(v), ...(fs.length ? [`${fs[0][1]} %`] : [])].filter((f) => !egalRel(lirePourcent(f) ?? Number(f.replace(",", ".")), cible))));
+  }
+  return p;
+}
+
+/** Fraction de l'énoncé → écriture décimale tapée : la valeur, et « 3,4 » / l'oubli du signe refusés. */
+function corrigerDecimalTape(q: Q): string[] {
+  const fs = fractionsDe(q.text);
+  if (fs.length < 1 || fs.some((f) => !egalRel(valeurF(f), valeurF(fs[0])))) return ILLISIBLE(q.text);
+  const [n, d] = fs[0];
+  const v = n / d;
+  const p = verifierValeur(q, v);
+  if (!divisionFinie(d)) p.push(`${n}/${d} n'a pas d'écriture décimale exacte`);
+  p.push(...refusees(q, [virguleC(Number(`${Math.abs(n)}.${d}`)), ...(v < 0 ? [virguleC(-v)] : [])].filter((f) => !egalRel(Number(f.replace(",", ".")), v))));
+  return p;
+}
+
+/** Le dénominateur réduit n'a que des 2 et des 5. */
+function divisionFinie(d: number): boolean {
+  let r = Math.abs(d);
+  while (r % 2 === 0) r /= 2;
+  while (r % 5 === 0) r /= 5;
+  return r === 1;
+}
+/** n ÷ d posée chiffre à chiffre (n ≥ 0) : `k` décimales et « … » si un reste subsiste. */
+function posee(n: number, d: number, k: number): string {
+  let s = `${Math.floor(n / d)}`;
+  let r = n % d;
+  if (r === 0) return s;
+  s += ",";
+  for (let i = 0; i < k && r !== 0; i++) {
+    r *= 10;
+    s += String(Math.floor(r / d));
+    r -= Math.floor(r / d) * d;
+  }
+  return r !== 0 ? `${s}…` : s;
+}
+
+/** La fraction de l'énoncé, ou à défaut la division écrite « 2 ÷ 3 ». */
+function fractionOuDivision(t: string): [number, number][] {
+  const fs = fractionsDe(t);
+  if (fs.length) return fs;
+  const m = t.match(/(\d+) ÷ (\d+)/);
+  return m ? [[Number(m[1]), Number(m[2])]] : [];
+}
+
+/** L'arrondi au dixième / centième / millième d'une fraction non décimale. */
+function corrigerArrondi(q: Q): string[] {
+  const fs = fractionOuDivision(q.text);
+  const m = q.text.match(/arrondi (au dixième|au centième|au millième)/);
+  if (!fs.length || !m) return ILLISIBLE(q.text);
+  const [n, d] = fs[0];
+  if (divisionFinie(d / pgcd(n, d))) return [`${n}/${d} tombe juste : pas d'arrondi à demander`];
+  const k = { "au dixième": 1, "au centième": 2, "au millième": 3 }[m[1] as "au dixième"];
+  // L'arrondi par la division posée : k + 1 chiffres, le dernier décide.
+  const chiffres = posee(n, d, k + 1).split(",")[1].replace("…", "");
+  const garde = Number(`${Math.floor(n / d)}${chiffres.slice(0, k)}`);
+  const arr = (Number(chiffres[k]) >= 5 ? garde + 1 : garde) / 10 ** k;
+  const tronc = garde / 10 ** k;
+  const p = verifierValeur(q, arr);
+  if (!egalRel(tronc, arr)) p.push(...refusees(q, [virguleC(tronc)]));
+  p.push(...refusees(q, [virguleC(Number(`${n}.${d}`))]));
+  return p;
+}
+
+/** L'écriture décimale illimitée (QCM) : six décimales et « … ». */
+function corrigerPeriodique(q: Q): string[] {
+  const fs = fractionOuDivision(q.text);
+  if (!fs.length) return ILLISIBLE(q.text);
+  const [n, d] = fs[0];
+  if (divisionFinie(d / pgcd(n, d))) return [`${n}/${d} tombe juste`];
+  const juste = posee(n, d, 6);
+  const p: string[] = [];
+  if (q.expected[0] !== juste) p.push(`attendu « ${q.expected[0]} », la division posée donne ${juste}`);
+  const bons = (q.choices ?? []).filter((c) => c === juste);
+  if (bons.length !== 1) p.push(`${bons.length} propositions écrivent ${juste}`);
+  // Un leurre qui ne serait qu'une autre écriture du bon nombre : même début, sans fin.
+  for (const c of q.choices ?? []) if (c !== juste && c.replace("…", "").startsWith(juste.replace("…", ""))) p.push(`leurre trop proche : ${c}`);
+  return p;
+}
+
+/** Pourcentage de l'énoncé (« 45 % ») → fraction irréductible tapée. */
+function corrigerPourcentVersFraction(q: Q): string[] {
+  const m = q.text.match(/(\d+(?:,\d+)?) %/);
+  if (!m) return ILLISIBLE(q.text);
+  const P = Number(m[1].replace(",", "."));
+  const p = verifierValeur(q, P / 100);
+  if (!irreductible(String(q.expected[0]))) p.push("réponse non irréductible");
+  if (Number.isInteger(P) && pgcd(P, 100) > 1) p.push(...refusees(q, [`${P}/100`]));
+  p.push(...refusees(q, [virguleC(P / 100), `${P}`]));
+  return p;
+}
+
+/** Décimal → fraction irréductible TAPÉE : en plus du QCM, la fraction sur 10, 100, 1 000 refusée. */
+function corrigerVersFractionTapee(q: Q): string[] {
+  const p = corrigerVersFraction(q);
+  const t = plain(q.text);
+  const m = t.match(/-?\d+,\d+/);
+  if (!m) return p;
+  const [ent, dec] = m[0].replace("-", "").split(",");
+  const signe = m[0].startsWith("-") ? "-" : "";
+  const brut = `${signe}${Number(ent + dec)}/${10 ** dec.length}`;
+  const f = lireFraction(brut)!;
+  if (pgcd(f[0], f[1]) > 1) p.push(...refusees(q, [brut]));
+  if (signe) p.push(...refusees(q, [String(q.expected[0]).replace(/^-/, "")]));
+  return p;
+}
+
 function corrigerRationnelOuiNon(q: Q): string[] {
   const zero = /\\frac\{-?\d+\}\{0\}/.test(q.text);
   const juste = /rationnel|quotient de deux entiers/.test(q.text) ? (zero ? "non" : "oui") : null;
@@ -438,6 +585,17 @@ export const CORRECTEURS: CorrecteursMaths = {
   fraction_decimal_tpl_4: corrigerVersDecimal,
   fraction_decimal_tpl_6: corrigerVersDecimal,
   fraction_decimal_tpl_5: corrigerVersFraction,
+  // 25/10/2026 : fraction → décimal → pourcentage
+  fraction_decimal_tpl_7: corrigerPourcentage,
+  fraction_decimal_tpl_8: corrigerDecimalTape,
+  fraction_decimal_tpl_9: corrigerPourcentage,
+  fraction_decimal_tpl_10: corrigerPourcentage,
+  fraction_decimal_tpl_11: corrigerDecimalTape,
+  fraction_decimal_tpl_12: corrigerArrondi,
+  fraction_decimal_tpl_13: corrigerPeriodique,
+  fraction_decimal_tpl_14: corrigerVersFractionTapee,
+  fraction_decimal_tpl_15: corrigerPourcentVersFraction,
+  fraction_decimal_tpl_16: corrigerPourcentage,
   fraction_rationnel_tpl_3: corrigerVersFraction,
   fraction_rationnel_tpl_4: corrigerVersFraction,
   fraction_rationnel_tpl_2: corrigerRationnelOuiNon,

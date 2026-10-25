@@ -341,6 +341,21 @@ const MESURES: { s: (x: string) => string; nom: string; unite: string; deUnite: 
   { s: (x) => `Une rampe d'accès monte de ${x} m.`, nom: "cette hauteur", unite: "mètres", deUnite: "de mètre" },
   { s: (x) => `Un cycliste roule pendant ${x} h.`, nom: "cette durée", unite: "heures", deUnite: "d'heure" },
   { s: (x) => `On verse ${x} L d'huile dans le moteur d'une tondeuse.`, nom: "cette quantité", unite: "litres", deUnite: "de litre" },
+  // 25/10/2026 : d'autres domaines, chacun porté par un métier (sport, météo, transports, jeux vidéo…).
+  { s: (x) => `Une pilote de rallye parcourt une spéciale de ${x} km.`, nom: "cette distance", unite: "kilomètres", deUnite: "de kilomètre" },
+  { s: (x) => `Un météorologue relève ${x} cm de pluie tombée en une heure.`, nom: "cette hauteur", unite: "centimètres", deUnite: "de centimètre" },
+  { s: (x) => `Une boulangère utilise ${x} kg de beurre pour ses croissants.`, nom: "cette masse", unite: "kilogrammes", deUnite: "de kilogramme" },
+  { s: (x) => `Un chauffeur de bus fait une pause de ${x} h.`, nom: "cette durée", unite: "heures", deUnite: "d'heure" },
+  { s: (x) => `Une infirmière prépare ${x} L de sérum.`, nom: "cette quantité", unite: "litres", deUnite: "de litre" },
+  { s: (x) => `Un joueur télécharge la mise à jour d'un jeu vidéo : elle pèse ${x} Go.`, nom: "cette taille", unite: "gigaoctets", deUnite: "de gigaoctet" },
+  { s: (x) => `Une électricienne tire un câble de ${x} km.`, nom: "cette longueur", unite: "kilomètres", deUnite: "de kilomètre" },
+  { s: (x) => `Un DJ enchaîne deux morceaux avec un fondu de ${x} min.`, nom: "cette durée", unite: "minutes", deUnite: "de minute" },
+  { s: (x) => `Une jardinière arrose un massif avec ${x} L d'eau.`, nom: "cette quantité", unite: "litres", deUnite: "de litre" },
+  { s: (x) => `Un marathonien boit ${x} L d'eau pendant la course.`, nom: "cette quantité", unite: "litres", deUnite: "de litre" },
+  { s: (x) => `Un tramway parcourt ${x} km entre deux stations.`, nom: "cette distance", unite: "kilomètres", deUnite: "de kilomètre" },
+  { s: (x) => `Une géologue mesure qu'une faille s'est ouverte de ${x} m.`, nom: "cette largeur", unite: "mètres", deUnite: "de mètre" },
+  { s: (x) => `Un fromager affine une meule de ${x} kg.`, nom: "cette masse", unite: "kilogrammes", deUnite: "de kilogramme" },
+  { s: (x) => `Une entraîneuse fait courir son équipe pendant ${x} h.`, nom: "cette durée", unite: "heures", deUnite: "d'heure" },
 ];
 
 /** Un nombre relatif en situation. */
@@ -768,7 +783,7 @@ function explVersDecimal(x: Q) {
     "une fraction est un quotient : $\\frac{a}{b} = a \\div b$.",
     "on divise le numérateur par le dénominateur (ou on écrit une fraction égale sur 10, 100 ou 1 000).",
     `$${tf(x.n, x.d)} = ${x.n} \\div ${x.d} = ${tv(v)}$.`,
-    `l'écriture décimale est ${virgule(v)}.`,
+    `l'écriture décimale est ${virgule(v)}. Attention : $${tf(x.n, x.d)}$ ne s'écrit pas ${virgule(Number(`${x.n}.${x.d}`))} ; la barre de fraction veut dire « divisé par ».`,
   );
 }
 
@@ -776,6 +791,8 @@ function explVersDecimal(x: Q) {
 function piegesDecimaux(x: Q): string[] {
   const v = x.n / x.d;
   const bruts = [
+    // ⛔ 25/10/2026 : SON erreur sur les copies, 3/4 = 3,4 (les chiffres de part et d'autre de la virgule).
+    Number(`${x.n}.${x.d}`),
     Number(`0.${x.n}${x.d}`),
     x.d / x.n,
     v * 10,
@@ -791,7 +808,9 @@ function piegesDecimaux(x: Q): string[] {
 function genVersDecimalQcm(niveau: 1 | 2 | 3): Genere {
   const x = randomChoice(DECIMAUX_PAR_NIVEAU[niveau]);
   const bonne = virgule(x.n / x.d);
-  const { choices, expected } = qcmTextes(bonne, shuffle(piegesDecimaux(x)), ["0,3", "1,5", "2,5", "0,15"]);
+  // Le piège « 3,4 » (SON erreur la plus fréquente) est toujours proposé ; les deux autres changent.
+  const [colle, ...autres] = piegesDecimaux(x);
+  const { choices, expected } = qcmTextes(bonne, [colle, ...shuffle(autres)], ["0,3", "1,5", "2,5", "0,15"]);
   return {
     text: randomChoice(enoncesVersDecimal($m(tf(x.n, x.d)), x)),
     format: "qcm",
@@ -866,6 +885,504 @@ function genVersFraction(): Genere {
       `on écrit ${D} sur ${puissance}, puis on simplifie.`,
       `$${tv(v)} = \\frac{${brut.n}}{${puissance}} = ${tq(x)}$.`,
       `la fraction irréductible est $${tq(x)}$.`,
+    ),
+  };
+}
+
+/* ---------------------------------------------------------------------------
+   FRACTION_DECIMAL RENFORCÉE (25/10/2026).
+   ⛔ SA DEUXIÈME ERREUR SUR LES COPIES (Frédéric, 4e) : passer d'une fraction à
+   l'écriture décimale (3/4 = 3 ÷ 4 = 0,75), puis au pourcentage (0,75 = 75 %).
+   Mesure avant : 6 gabarits, 97 squelettes, ★1 3.4 ★2 2.8 ★3 1.9 répétitions.
+   ⚠️ LES LEURRES SONT SES ERREURS : 3/4 = 3,4 (les chiffres de part et d'autre
+   de la virgule) ; 0,75 = 0,75 % (le signe % collé sans multiplier par 100) ;
+   1/4 = 4 % (le dénominateur pris pour un pourcentage) ; une fraction NON
+   SIMPLIFIÉE (75/100) quand on demande l'irréductible — refusée en réponse
+   tapée (exact_text), jamais proposée en QCM : ce serait une deuxième réponse
+   de même valeur. Et 1/3 = 0,3 (on croit que la division s'arrête).
+   Les situations portent un MÉTIER et changent de domaine : sport, météo,
+   budget, sciences, santé, transports, jeux vidéo, musique, cinéma…
+   ⚠️ Aucun chiffre dans les situations : les correcteurs lisent le premier
+   nombre de l'énoncé.
+--------------------------------------------------------------------------- */
+
+/** Une part d'un tout, portée par un métier. `F` : la fraction, entre dollars. */
+const SITUATIONS_PART: ((F: string) => string)[] = [
+  (F) => `Une entraîneuse de basket compte que son équipe a réussi ${F} de ses lancers francs.`,
+  (F) => `Un météorologue annonce que ${F} du ciel sera couvert de nuages demain matin.`,
+  (F) => `Une conseillère bancaire calcule que le loyer représente ${F} du budget d'une famille.`,
+  (F) => `Dans un jeu vidéo, le héros n'a plus que ${F} de sa barre de vie.`,
+  (F) => `Une biologiste observe que ${F} des graines de son expérience ont germé.`,
+  (F) => `Un chauffeur de bus constate que ${F} des places de son bus sont occupées.`,
+  (F) => `Une ingénieure du son règle le volume d'une enceinte sur ${F} du maximum.`,
+  (F) => `Un pilote de ligne a déjà parcouru ${F} du trajet entre Paris et La Réunion.`,
+  (F) => `Une libraire a vendu ${F} de son stock de mangas.`,
+  (F) => `L'analyste vidéo d'un club de football note que l'équipe a gagné ${F} de ses duels.`,
+  (F) => `Une géographe indique que la forêt couvre ${F} de la surface d'une île.`,
+  (F) => `Un cuisinier de cantine a utilisé ${F} d'un sac de riz.`,
+  (F) => `Une créatrice de jeux vidéo a terminé ${F} des niveaux de son jeu.`,
+  (F) => `Un technicien constate qu'une batterie de trottinette électrique est chargée à ${F}.`,
+  (F) => `Une chanteuse a déjà enregistré ${F} des morceaux de son album.`,
+  (F) => `Un planteur a récolté ${F} de son champ de canne à sucre.`,
+  (F) => `Une maître-nageuse note qu'un élève a nagé ${F} de la distance prévue.`,
+  (F) => `Un architecte a dessiné ${F} des plans d'un nouveau collège.`,
+  (F) => `Une infirmière scolaire a déjà vacciné ${F} des élèves du collège.`,
+  (F) => `Un réalisateur a tourné ${F} des scènes de son film.`,
+  (F) => `Une archiviste a classé ${F} des documents d'une mairie.`,
+  (F) => `Un livreur à vélo a déjà effectué ${F} de sa tournée.`,
+  (F) => `Une astronome a pu observer le ciel pendant ${F} des nuits du mois.`,
+  (F) => `Une joueuse d'échecs a gagné ${F} de ses parties cette saison.`,
+  (F) => `Une sociologue trouve que ${F} des jeunes interrogés font du sport chaque semaine.`,
+  (F) => `Un garde forestier estime que ${F} des arbres d'une parcelle sont des pins.`,
+  (F) => `Une contrôleuse de train a vérifié ${F} des billets des voyageurs.`,
+  (F) => `Un vidéaste a atteint ${F} de son objectif d'abonnés.`,
+  (F) => `Une pharmacienne a rangé ${F} d'une livraison de médicaments.`,
+  (F) => `Un volcanologue a installé ${F} des capteurs prévus sur le Piton de la Fournaise.`,
+  (F) => `Une cheffe de chantier a fait couler ${F} du béton d'une dalle.`,
+  (F) => `Un DJ a déjà joué ${F} de sa playlist de la soirée.`,
+];
+
+/** Un nombre décimal entre 0 et 1, ou un pourcentage (« 35 % »), en situation. */
+const SITUATIONS_DEC: ((X: string) => string)[] = [
+  (X) => `Une météorologue annonce une probabilité de pluie de ${X} pour demain.`,
+  (X) => `Un réparateur de téléphones constate qu'une batterie est chargée à ${X} de sa capacité.`,
+  (X) => `Un entraîneur de basket calcule le taux de réussite aux tirs de son meneur : ${X}.`,
+  (X) => `Une vendeuse applique une remise de ${X} du prix sur un jean.`,
+  (X) => `Un ingénieur agronome mesure que ${X} de la récolte de mangues est abîmée.`,
+  (X) => `Dans un jeu vidéo, une game designer donne à un personnage une probabilité d'esquive de ${X}.`,
+  (X) => `Une infirmière note que ${X} des patients de la journée avaient de la fièvre.`,
+  (X) => `Une journaliste indique que ${X} des élèves d'un collège viennent à pied.`,
+  (X) => `Une biologiste mesure que ${X} de l'eau d'un bassin s'est évaporée pendant l'été.`,
+  (X) => `Un chauffeur de taxi a passé ${X} de sa journée dans les bouchons.`,
+  (X) => `Une analyste de football calcule qu'une joueuse a réussi ${X} de ses passes.`,
+  (X) => `Un garagiste indique que le réservoir d'une voiture est rempli à ${X}.`,
+  (X) => `Une chimiste prépare un mélange dont ${X} du volume est de l'eau.`,
+  (X) => `Un vidéaste remarque que ${X} de ses spectateurs regardent ses vidéos sur téléphone.`,
+  (X) => `Un éleveur note que ${X} de ses poules ont pondu ce matin.`,
+  (X) => `Une urbaniste calcule que les espaces verts occupent ${X} de la surface d'un quartier.`,
+  (X) => `Un ingénieur des transports mesure que ${X} des trains sont arrivés à l'heure.`,
+  (X) => `Une musicienne remarque que ${X} des écoutes de son titre viennent de l'étranger.`,
+];
+
+/** Un nombre NÉGATIF en situation (fraction ou décimal). */
+const SITUATIONS_NEG: ((X: string) => string)[] = [
+  (X) => `Une météorologue relève une température de ${X} °C une nuit d'hiver dans les Alpes.`,
+  (X) => `Une glaciologue mesure que l'épaisseur d'un glacier a varié de ${X} m en un an.`,
+  (X) => `Un océanographe pilote un sous-marin de recherche à l'altitude ${X} km.`,
+  (X) => `Une économiste note que le prix d'un ticket de bus a varié de ${X} € en un an.`,
+  (X) => `Après un séisme, un sismologue mesure un déplacement vertical du sol de ${X} m.`,
+  (X) => `Une hydrologue observe que le niveau d'un lac a varié de ${X} m en une semaine.`,
+  (X) => `Un frigoriste règle une chambre froide à ${X} °C.`,
+  (X) => `Sur une droite graduée, une professeure place le point A d'abscisse ${X}.`,
+  (X) => `Une archéologue trouve une poterie à l'altitude ${X} m par rapport au sol du site.`,
+  (X) => `Dans un jeu vidéo, la vitesse d'un personnage varie de ${X} m par seconde quand il marche dans la boue.`,
+  (X) => `Un comptable inscrit une variation de ${X} million d'euros dans le bilan d'une entreprise.`,
+  (X) => `Un électricien mesure une tension de ${X} V aux bornes d'une pile branchée à l'envers.`,
+  (X) => `Un spéléologue est descendu à l'altitude ${X} km par rapport à l'entrée de la grotte.`,
+  (X) => `Une coach sportive note que la masse d'un athlète a varié de ${X} kg en un mois.`,
+  (X) => `Une analyste financière observe que le cours d'une action a varié de ${X} € en une heure.`,
+  (X) => `Une climatologue relève qu'en Antarctique la température a varié de ${X} °C en une heure.`,
+];
+
+/** Chaque situation, suivie de chaque question. */
+const enSituations = (sits: ((x: string) => string)[], X: string, questions: string[]) =>
+  sits.flatMap((s) => questions.map((qu) => `${s(X)} ${qu}`));
+
+/** Le dénominateur réduit n'a que des 2 et des 5 : la division tombe juste. */
+function divisionFinie(d: number): boolean {
+  for (const p of [2, 5]) while (d % p === 0) d /= p;
+  return d === 1;
+}
+
+/** La division posée de n par d (n ≥ 0) : `k` décimales, « … » si elle ne s'arrête pas. */
+function divisionPosee(n: number, d: number, k = 6) {
+  const ent = Math.floor(n / d);
+  let r = n % d;
+  let chiffres = "";
+  for (let i = 0; i < k && r !== 0; i++) {
+    r *= 10;
+    chiffres += Math.floor(r / d);
+    r %= d;
+  }
+  return { texte: chiffres ? `${ent},${chiffres}${r !== 0 ? "…" : ""}` : String(ent), chiffres, ent };
+}
+
+const pourcent = (v: number) => `${virgule(v)} %`;
+
+/** Les consignes nues « fraction → pourcentage ». */
+const enoncesPourcent = (F: string) => [
+  `Écris ${F} sous forme de pourcentage.`,
+  `Quel pourcentage est égal à ${F} ?`,
+  `Convertis ${F} en pourcentage.`,
+  `${F} représente quel pourcentage ?`,
+  `Exprime la fraction ${F} en pourcentage.`,
+  `Combien de pour cent font ${F} ?`,
+  `Traduis ${F} en pourcentage.`,
+  `À quel pourcentage correspond ${F} ?`,
+];
+
+/** ★1 — une fraction sur 100 (ou sur 10) → pourcentage, réponse tapée. */
+function genSurCentVersPourcent(): Genere {
+  const sur10 = Math.random() < 0.3;
+  const d = sur10 ? 10 : 100;
+  const n = sur10 ? randomInt(1, 9) : randomInt(1, 99);
+  const p = sur10 ? n * 10 : n;
+  const F = $m(tf(n, d));
+  const textes = [
+    ...enoncesPourcent(F),
+    ...enSituations(SITUATIONS_PART, F, [
+      "Quel pourcentage cela représente-t-il ?",
+      "Écris cette part sous forme de pourcentage.",
+      "Exprime cette fraction en pourcentage.",
+      "Combien cela fait-il en pourcentage ?",
+      "Traduis cette part en pourcentage.",
+    ]),
+  ];
+  return {
+    text: randomChoice(textes),
+    format: "short",
+    // `number_equal` accepte « 37 », « 37 % », « 37% » ; refuse « 0,37 » et « 0,37 % ».
+    expected: [pourcent(p)],
+    comparator: "number_equal",
+    explanation: expl(
+      `un pourcentage est une fraction de dénominateur 100 : ${p} % veut dire $${tf(p, 100)}$.`,
+      sur10
+        ? "on écrit d'abord la fraction sur 100 : on multiplie le numérateur ET le dénominateur par 10."
+        : "la fraction est déjà sur 100 : son numérateur donne le pourcentage.",
+      sur10 ? `$${tf(n, 10)} = ${tf(p, 100)}$, soit ${p} %.` : `$${tf(n, 100)}$, c'est ${n} sur cent, soit ${n} %.`,
+      `${F} = ${p} %. Attention : ce n'est pas ${pourcent(n / d)} ; ${virgule(n / d)} est l'écriture décimale, et ${virgule(n / d)} = ${p} %.`,
+    ),
+  };
+}
+
+/** ★1 — fraction → écriture décimale, en situation, réponse tapée. */
+const DECIMAUX_SITUATION: Q[] = [
+  ...DECIMAUX_PAR_NIVEAU[1].filter((x) => x.n < x.d),
+  { n: 1, d: 20 }, { n: 3, d: 20 }, { n: 9, d: 20 }, { n: 1, d: 25 }, { n: 4, d: 25 }, { n: 1, d: 50 },
+];
+function genFractionVersDecimalSituation(): Genere {
+  const x = randomChoice(DECIMAUX_SITUATION);
+  const F = $m(tf(x.n, x.d));
+  const textes = enSituations(SITUATIONS_PART, F, [
+    "Écris cette fraction sous forme décimale.",
+    `Quel nombre décimal est égal à ${F} ?`,
+    "Donne l'écriture décimale de cette part.",
+    `Calcule ${x.n} ÷ ${x.d} pour écrire cette part avec une virgule.`,
+  ]);
+  return {
+    text: randomChoice(textes),
+    format: "short",
+    expected: [virgule(x.n / x.d)],
+    comparator: "number_equal",
+    explanation: explVersDecimal(x),
+  };
+}
+
+/** Fractions dont le pourcentage tombe juste : ★2 dénominateur diviseur de 100, ★3 au-delà (3/8 = 37,5 %). */
+const POURCENT_PAR_NIVEAU: Record<2 | 3, Q[]> = {
+  2: [
+    { n: 1, d: 2 }, { n: 1, d: 4 }, { n: 3, d: 4 }, { n: 1, d: 5 }, { n: 2, d: 5 }, { n: 3, d: 5 }, { n: 4, d: 5 },
+    { n: 1, d: 10 }, { n: 3, d: 10 }, { n: 7, d: 10 }, { n: 9, d: 10 }, { n: 1, d: 20 }, { n: 3, d: 20 },
+    { n: 7, d: 20 }, { n: 9, d: 20 }, { n: 11, d: 20 }, { n: 13, d: 20 }, { n: 17, d: 20 }, { n: 19, d: 20 },
+    { n: 1, d: 25 }, { n: 2, d: 25 }, { n: 3, d: 25 }, { n: 6, d: 25 }, { n: 7, d: 25 }, { n: 1, d: 50 },
+    { n: 3, d: 50 }, { n: 7, d: 50 }, { n: 9, d: 50 }, { n: 11, d: 50 },
+  ],
+  3: [
+    { n: 1, d: 8 }, { n: 3, d: 8 }, { n: 5, d: 8 }, { n: 7, d: 8 }, { n: 1, d: 40 }, { n: 3, d: 40 },
+    { n: 7, d: 40 }, { n: 9, d: 40 }, { n: 11, d: 40 }, { n: 1, d: 16 }, { n: 3, d: 16 }, { n: 5, d: 16 },
+    { n: 1, d: 200 }, { n: 3, d: 200 },
+  ],
+};
+
+/** Ses pièges de pourcentage, « 0,75 % » en premier. */
+function piegesPourcent(x: Q): string[] {
+  const v = x.n / x.d;
+  const bruts = [
+    v, // 0,75 % : le signe % collé sans multiplier par 100
+    Number(`${x.n}.${x.d}`), // 3,4 % : les chiffres de la fraction autour de la virgule
+    x.d, // 4 % : le dénominateur pris pour le pourcentage (1/4 = 4 %)
+    Number(`${x.n}${x.d}`), // 34 % : les chiffres collés
+    v * 10, // 7,5 % : multiplié par 10 seulement
+    v * 1000, // 750 % : multiplié par 1 000
+    (100 * x.d) / x.n, // le quotient à l'envers
+  ];
+  const vus = new Set<string>([pourcent(100 * v)]);
+  const out: string[] = [];
+  for (const w of bruts) {
+    if (!(w > 0) || !estDecimal(w)) continue;
+    const s = pourcent(w);
+    if (!vus.has(s)) out.push(s);
+    vus.add(s);
+  }
+  return out;
+}
+
+/** ★2 / ★3 — fraction → pourcentage, en QCM. */
+function genFractionVersPourcentQcm(niveau: 2 | 3): Genere {
+  const x = randomChoice(POURCENT_PAR_NIVEAU[niveau]);
+  const v = x.n / x.d;
+  const F = $m(tf(x.n, x.d));
+  const [p0, ...autres] = piegesPourcent(x);
+  const { choices, expected } = qcmTextes(pourcent(100 * v), [p0, ...shuffle(autres)], ["1 %", "10 %", "50 %", "25 %"]);
+  const questions =
+    niveau === 2
+      ? ["Quel est le bon pourcentage ?", "Quelle écriture en pourcentage est juste ?", "Quel pourcentage doit-on annoncer ?", "Cette part vaut quel pourcentage ?"]
+      : [
+          "Calcule d'abord l'écriture décimale, puis donne le pourcentage.",
+          "Passe par l'écriture décimale : quel pourcentage obtiens-tu ?",
+          "Quel pourcentage correspond exactement à cette part ?",
+        ];
+  return {
+    text: randomChoice([...enoncesPourcent(F), ...enSituations(SITUATIONS_PART, F, questions)]),
+    format: "qcm",
+    choices,
+    expected,
+    comparator: "mcq_exact",
+    explanation: expl(
+      "un pourcentage est une fraction de dénominateur 100.",
+      "on calcule l'écriture décimale (numérateur ÷ dénominateur), puis on la multiplie par 100 : chaque chiffre prend une valeur cent fois plus grande.",
+      `$${tf(x.n, x.d)} = ${x.n} \\div ${x.d} = ${tv(v)}$ et $${tv(v)} \\times 100 = ${tv(100 * v)}$, soit ${pourcent(100 * v)}.`,
+      `${F} = ${pourcent(100 * v)}. Attention : ${pourcent(v)} est cent fois trop petit, et le dénominateur ${x.d} n'est pas un pourcentage.`,
+    ),
+  };
+}
+
+/** ★2 — nombre décimal → pourcentage, en QCM (0,35 = 35 %, pas 0,35 %). */
+const DECIMAUX_POURCENT = [
+  0.02, 0.04, 0.05, 0.06, 0.08, 0.1, 0.12, 0.15, 0.18, 0.2, 0.24, 0.25, 0.3, 0.32, 0.35, 0.4, 0.45, 0.48, 0.5,
+  0.55, 0.6, 0.64, 0.65, 0.7, 0.72, 0.75, 0.8, 0.85, 0.9, 0.95, 0.125, 0.375, 0.025, 0.075, 0.875,
+];
+function genDecimalVersPourcentQcm(): Genere {
+  const v = randomChoice(DECIMAUX_POURCENT);
+  const D = $m(tv(v));
+  const bonne = pourcent(100 * v);
+  // Ses erreurs : le % collé (0,35 %), ×10 au lieu de ×100 (3,5 %), ×1 000 (350 %).
+  const [p0, ...autres] = [v, v * 10, v * 1000, v / 10].filter(estDecimal).map(pourcent);
+  const { choices, expected } = qcmTextes(bonne, [p0, ...shuffle(autres)], ["1 %", "10 %", "50 %"]);
+  const textes = [
+    `Écris ${D} sous forme de pourcentage.`,
+    `Quel pourcentage est égal à ${D} ?`,
+    `Convertis ${D} en pourcentage.`,
+    `${D} correspond à quel pourcentage ?`,
+    `Exprime le nombre ${D} en pourcentage.`,
+    `Pour écrire ${D} en pourcentage, on le multiplie par cent. Quel pourcentage obtient-on ?`,
+    ...enSituations(SITUATIONS_DEC, D, [
+      "Quel pourcentage cela représente-t-il ?",
+      "Écris ce nombre en pourcentage.",
+      "Quel pourcentage faut-il afficher ?",
+      "Exprime cette valeur en pourcentage.",
+    ]),
+  ];
+  return {
+    text: randomChoice(textes),
+    format: "qcm",
+    choices,
+    expected,
+    comparator: "mcq_exact",
+    explanation: expl(
+      `un pourcentage est une fraction de dénominateur 100 : ${bonne} veut dire « ${virgule(100 * v)} pour cent ».`,
+      "on multiplie le nombre décimal par 100 : chaque chiffre prend une valeur cent fois plus grande.",
+      `$${tv(v)} \\times 100 = ${tv(100 * v)}$, soit ${bonne}.`,
+      `${D} = ${bonne}. Attention : ${pourcent(v)} vaut cent fois moins que ${D}.`,
+    ),
+  };
+}
+
+/** ★2 — une fraction NÉGATIVE → écriture décimale, réponse tapée. */
+function genNegatifVersDecimal(): Genere {
+  const x = randomChoice([...DECIMAUX_PAR_NIVEAU[1], ...DECIMAUX_PAR_NIVEAU[2]]);
+  const v = -x.n / x.d;
+  const F = $m(tf(-x.n, x.d));
+  const textes = [
+    `Écris ${F} sous forme décimale.`,
+    `Donne l'écriture décimale de ${F}.`,
+    `Quel est le nombre décimal égal à ${F} ?`,
+    `Convertis ${F} en nombre décimal, sans oublier le signe.`,
+    `Que vaut ${F} écrit avec une virgule ?`,
+    `Quelle est la valeur décimale du nombre négatif ${F} ?`,
+    ...enSituations(SITUATIONS_NEG, F, [
+      "Écris ce nombre sous forme décimale.",
+      `Quel nombre décimal est égal à ${F} ?`,
+      "Donne l'écriture décimale de ce nombre, avec son signe.",
+      "Écris cette valeur avec une virgule.",
+    ]),
+  ];
+  return {
+    text: randomChoice(textes),
+    format: "short",
+    expected: [virgule(v)],
+    comparator: "number_equal",
+    explanation: expl(
+      "une fraction est un quotient ; le signe « − » devant la fraction reste devant le résultat.",
+      `on calcule ${x.n} ÷ ${x.d}, puis on remet le signe « − ».`,
+      `$${x.n} \\div ${x.d} = ${tv(x.n / x.d)}$, donc $${tf(-x.n, x.d)} = ${tv(v)}$.`,
+      `l'écriture décimale est ${virgule(v)}. Attention au signe : ${virgule(-v)} est l'opposé de ${F}.`,
+    ),
+  };
+}
+
+/** Fractions dont la division ne s'arrête jamais (1/3 = 0,333…). */
+function tirerFractionNonDecimale(): Q {
+  for (;;) {
+    const d = randomChoice([3, 6, 7, 9, 11, 12, 15]);
+    const n = randomInt(1, d - 1);
+    if (pgcd(n, d) === 1 && !divisionFinie(d)) return { n, d };
+  }
+}
+
+const PRECISIONS: { mot: string; k: number }[] = [
+  { mot: "au dixième", k: 1 },
+  { mot: "au centième", k: 2 },
+  { mot: "au millième", k: 3 },
+];
+
+/** ★3 — la division posée ne s'arrête pas : l'arrondi demandé, réponse tapée. */
+function genArrondiQuotient(): Genere {
+  const x = tirerFractionNonDecimale();
+  const { mot, k } = randomChoice(PRECISIONS);
+  const F = $m(tf(x.n, x.d));
+  const v = x.n / x.d;
+  const arr = Math.round(v * 10 ** k + 1e-9) / 10 ** k;
+  const dp = divisionPosee(x.n, x.d, k + 1);
+  const suivant = Number(dp.chiffres[k]);
+  const textes = [
+    `Donne l'arrondi ${mot} de ${F}.`,
+    `Pose la division ${x.n} ÷ ${x.d}. Quel est l'arrondi ${mot} du quotient ?`,
+    `La division ${x.n} ÷ ${x.d} ne s'arrête pas. Donne son arrondi ${mot}.`,
+    `Quel est l'arrondi ${mot} de l'écriture décimale de ${F} ?`,
+    ...enSituations(SITUATIONS_PART, F, [
+      `Pose la division ${x.n} ÷ ${x.d} et donne l'arrondi ${mot} de cette part.`,
+      `Donne l'arrondi ${mot} de ${F}.`,
+      `Avec la division posée, quel est l'arrondi ${mot} de cette fraction ?`,
+    ]),
+  ];
+  return {
+    text: randomChoice(textes),
+    format: "short",
+    expected: [virgule(arr)],
+    comparator: "number_equal",
+    explanation: expl(
+      "une fraction est un quotient ; quand la division posée ne s'arrête pas, on donne un arrondi.",
+      `on pose ${x.n} ÷ ${x.d} jusqu'au chiffre qui suit celui que l'on garde : s'il vaut 5 ou plus, on augmente le dernier chiffre gardé de 1.`,
+      `$${x.n} \\div ${x.d} = ${dp.texte.replace(",", "{,}").replace("…", "\\ldots")}$ ; le chiffre suivant est ${suivant}, ${suivant >= 5 ? "on arrondit au-dessus" : "on garde le chiffre"}.`,
+      `l'arrondi ${mot} de ${F} est ${virgule(arr)}.`,
+    ),
+  };
+}
+
+/** ★3 — l'écriture décimale illimitée (2/3 = 0,666…), en QCM. Leurres : 2,3 ; 0,23 ; 0,6 ; 3 ÷ 2. */
+function genEcriturePeriodique(): Genere {
+  const x = tirerFractionNonDecimale();
+  const F = $m(tf(x.n, x.d));
+  const dp = divisionPosee(x.n, x.d);
+  const premier = dp.chiffres.search(/[1-9]/);
+  const pieges = [
+    virgule(Number(`${x.n}.${x.d}`)), // 2,3 : les chiffres autour de la virgule
+    `${dp.ent},${dp.chiffres.slice(0, premier + 1)}`, // 0,6 : on croit que la division s'arrête
+    divisionPosee(x.d, x.n).texte, // le quotient à l'envers
+    virgule(Number(`0.${x.n}${x.d}`)), // 0,23 : les chiffres collés
+  ];
+  const { choices, expected } = qcmTextes(dp.texte, shuffle(pieges), ["1,5", "0,5", "3,333333…"]);
+  const textes = [
+    `Pose la division ${x.n} ÷ ${x.d}. Quelle écriture décimale obtiens-tu ?`,
+    `Quelle est l'écriture décimale de ${F} ?`,
+    `La division ${x.n} ÷ ${x.d} ne s'arrête jamais. Quelle écriture décimale de ${F} est juste ?`,
+    `Quel nombre décimal illimité est égal à ${F} ?`,
+    ...enSituations(SITUATIONS_PART, F, [
+      `Pose la division ${x.n} ÷ ${x.d} : quelle est l'écriture décimale de cette part ?`,
+      "Quelle écriture décimale de cette part trouve-t-on avec la division posée ?",
+      `Quelle écriture décimale correspond à ${F} ?`,
+    ]),
+  ];
+  return {
+    text: randomChoice(textes),
+    format: "qcm",
+    choices,
+    expected,
+    comparator: "mcq_exact",
+    explanation: expl(
+      "une fraction est un quotient ; quand un reste revient dans la division posée, les mêmes chiffres reviennent sans fin.",
+      `on pose ${x.n} ÷ ${x.d} et on regarde les restes : dès qu'un reste revient, les chiffres se répètent.`,
+      `$${x.n} \\div ${x.d} = ${dp.texte.replace(",", "{,}").replace("…", "\\ldots")}$ (la division ne s'arrête jamais).`,
+      `${F} = ${dp.texte}. Attention : ${pieges[1]} n'est qu'un début, la division continue.`,
+    ),
+  };
+}
+
+/** ★3 — décimal (positif ou négatif) → fraction irréductible, réponse tapée. 75/100 est refusé. */
+function genDecimalVersFractionTapee(): Genere {
+  const src = randomChoice([...DECIMAUX_PAR_NIVEAU[1], ...DECIMAUX_PAR_NIVEAU[2], ...DECIMAUX_PAR_NIVEAU[3]]);
+  const negatif = Math.random() < 0.35;
+  const x = q(negatif ? -src.n : src.n, src.d);
+  const v = x.n / x.d;
+  const D = $m(tv(v));
+  const puissance = [10, 100, 1000].find((p) => Math.abs(v * p - Math.round(v * p)) < 1e-9) ?? 1000;
+  const brut = Math.round(v * puissance);
+  const g = pgcd(Math.abs(brut), puissance);
+  const questions = [
+    "Écris ce nombre sous forme de fraction irréductible.",
+    "Quelle fraction irréductible est égale à ce nombre ?",
+    "Donne ce nombre en fraction, simplifiée au maximum.",
+  ];
+  const situations = negatif
+    ? enSituations(SITUATIONS_NEG, D, questions)
+    : v < 1
+      ? enSituations(SITUATIONS_DEC, D, questions)
+      : MESURES.map((me) => `${me.s(D)} Écris ${me.nom} sous forme de fraction irréductible.`);
+  const textes = [
+    `Écris ${D} sous forme de fraction irréductible.`,
+    `Quelle fraction irréductible est égale à ${D} ?`,
+    `Transforme ${D} en fraction, puis simplifie-la au maximum.`,
+    `Convertis ${D} en fraction irréductible.`,
+    ...situations,
+  ];
+  return {
+    text: randomChoice(textes),
+    format: "short",
+    // « irréductible » : SEULE la fraction simplifiée passe (exact_text), pas 75/100.
+    expected: reponsesTapees(x),
+    comparator: "exact_text",
+    explanation: expl(
+      "un nombre décimal s'écrit comme une fraction de dénominateur 10, 100, 1 000… ; on la simplifie ensuite.",
+      `on écrit ${virgule(v)} sur ${puissance}, puis on divise le numérateur ET le dénominateur par ${g}.`,
+      g > 1 ? `$${tv(v)} = ${tf(brut, puissance)} = ${tq(x)}$.` : `$${tv(v)} = ${tq(x)}$, déjà irréductible.`,
+      `la fraction irréductible est $${tq(x)}$.${g > 1 ? ` Attention : $${tf(brut, puissance)}$ est juste, mais pas irréductible.` : ""}`,
+    ),
+  };
+}
+
+/** ★3 — pourcentage → fraction irréductible, réponse tapée (45 % = 9/20 ; 45/100 refusé). */
+const POURCENTS_SIMPLIFIABLES = [
+  2, 4, 5, 6, 8, 10, 12, 15, 16, 20, 24, 25, 28, 30, 32, 35, 36, 40, 44, 45, 48, 50, 52, 55, 56, 60, 64, 65, 68, 70,
+  72, 75, 76, 80, 84, 85, 88, 90, 92, 95,
+];
+function genPourcentVersFraction(): Genere {
+  const P = randomChoice(POURCENTS_SIMPLIFIABLES);
+  const x = q(P, 100);
+  const g = 100 / x.d;
+  const PT = `${P} %`;
+  const textes = [
+    `Écris ${PT} sous forme de fraction irréductible.`,
+    `Quelle fraction irréductible est égale à ${PT} ?`,
+    `Transforme ${PT} en fraction, puis simplifie-la au maximum.`,
+    `Convertis ${PT} en fraction irréductible.`,
+    `Un pourcentage est une fraction sur cent : quelle fraction irréductible est égale à ${PT} ?`,
+    ...enSituations(SITUATIONS_DEC, PT, [
+      "Écris ce pourcentage sous forme de fraction irréductible.",
+      "Quelle fraction irréductible correspond à ce pourcentage ?",
+      "Donne ce pourcentage en fraction, simplifiée au maximum.",
+    ]),
+  ];
+  return {
+    text: randomChoice(textes),
+    format: "short",
+    expected: reponsesTapees(x),
+    comparator: "exact_text",
+    explanation: expl(
+      `un pourcentage est une fraction de dénominateur 100 : ${PT} = $${tf(P, 100)}$.`,
+      `on divise le numérateur ET le dénominateur par ${g}, leur plus grand diviseur commun.`,
+      `$${tf(P, 100)} = ${tq(x)}$ (${P} ÷ ${g} = ${x.n} et 100 ÷ ${g} = ${x.d}).`,
+      `${PT} = $${tq(x)}$. Attention : $${tf(P, 100)}$ est juste, mais pas irréductible.`,
     ),
   };
 }
@@ -4469,6 +4986,141 @@ export const fractionsBank: TutorBankItemV4[] = [
     hint: "Une fraction est un quotient : divise le numérateur par le dénominateur.",
     tags: ["fraction_nombre", "decimal", "qcm", "template"],
     generate: () => genVersDecimalQcm(1),
+  },
+
+  // ---------- FRACTION_DECIMAL, RENFORCÉE LE 25/10/2026 ----------
+  // ⛔ SA DEUXIÈME ERREUR SUR LES COPIES : fraction → décimal → pourcentage.
+  // Leurres = ses erreurs (3/4 = 3,4 ; 0,75 = 0,75 % ; 1/4 = 4 % ; 75/100 non
+  // simplifié refusé). Voir le bloc « FRACTION_DECIMAL RENFORCÉE » plus haut.
+  {
+    kind: "template",
+    id: "fraction_decimal_tpl_7",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_decimal",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Un pourcentage, c'est une fraction sur 100 : 37 sur 100, c'est 37 %.",
+    tags: ["fraction_nombre", "decimal", "pourcentage", "contexte", "template"],
+    generate: () => genSurCentVersPourcent(),
+  },
+  {
+    kind: "template",
+    id: "fraction_decimal_tpl_8",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_decimal",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "La barre de fraction veut dire « divisé par » : calcule le numérateur ÷ le dénominateur.",
+    tags: ["fraction_nombre", "decimal", "contexte", "template"],
+    generate: () => genFractionVersDecimalSituation(),
+  },
+  {
+    kind: "template",
+    id: "fraction_decimal_tpl_9",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_decimal",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Calcule d'abord l'écriture décimale, puis multiplie-la par 100.",
+    tags: ["fraction_nombre", "decimal", "pourcentage", "qcm", "contexte", "template"],
+    generate: () => genFractionVersPourcentQcm(2),
+  },
+  {
+    kind: "template",
+    id: "fraction_decimal_tpl_10",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_decimal",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Pour écrire un décimal en pourcentage, on le multiplie par 100.",
+    tags: ["fraction_nombre", "decimal", "pourcentage", "qcm", "contexte", "template"],
+    generate: () => genDecimalVersPourcentQcm(),
+  },
+  {
+    kind: "template",
+    id: "fraction_decimal_tpl_11",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_decimal",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Divise sans le signe, puis remets le « − » devant le résultat.",
+    tags: ["fraction_nombre", "decimal", "negatif", "contexte", "template"],
+    generate: () => genNegatifVersDecimal(),
+  },
+  {
+    kind: "template",
+    id: "fraction_decimal_tpl_12",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_decimal",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Pose la division un chiffre plus loin que demandé : ce chiffre décide de l'arrondi.",
+    tags: ["fraction_nombre", "decimal", "arrondi", "division_posee", "contexte", "template"],
+    generate: () => genArrondiQuotient(),
+  },
+  {
+    kind: "template",
+    id: "fraction_decimal_tpl_13",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_decimal",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Pose la division et regarde les restes : quand un reste revient, les chiffres se répètent.",
+    tags: ["fraction_nombre", "decimal", "division_posee", "qcm", "contexte", "template"],
+    generate: () => genEcriturePeriodique(),
+  },
+  {
+    kind: "template",
+    id: "fraction_decimal_tpl_14",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_decimal",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Écris le nombre sur 10, 100 ou 1 000, puis simplifie jusqu'au bout. Tape ta fraction avec /, par exemple 3/4.",
+    tags: ["fraction_nombre", "decimal", "reciproque", "simplifier", "contexte", "template"],
+    generate: () => genDecimalVersFractionTapee(),
+  },
+  {
+    kind: "template",
+    id: "fraction_decimal_tpl_15",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_decimal",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un pourcentage est une fraction sur 100 : simplifie-la jusqu'au bout. Tape ta fraction avec /, par exemple 3/4.",
+    tags: ["fraction_nombre", "pourcentage", "reciproque", "simplifier", "contexte", "template"],
+    generate: () => genPourcentVersFraction(),
+  },
+  {
+    kind: "template",
+    id: "fraction_decimal_tpl_16",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_decimal",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Pose la division numérateur ÷ dénominateur, puis multiplie le résultat par 100.",
+    tags: ["fraction_nombre", "decimal", "pourcentage", "qcm", "contexte", "template"],
+    generate: () => genFractionVersPourcentQcm(3),
   },
   {
     kind: "template",
