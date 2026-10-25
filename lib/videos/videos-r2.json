@@ -1649,6 +1649,168 @@
   "youtube": "I0az4rv-xfk",
   "coach": "/coach/serie?classe=5e&matiere=maths&notion=litteral_calcul&microId=litteral_traduire&display=simple"
  },
+ "5e-frac-additionner": {
+  "fichier": "5e/maths/fractions/07-additionner/eleveai-maths-5e-frac-additionner.mp4",
+  "poster": "5e/maths/fractions/07-additionner/eleveai-maths-5e-frac-additionner.png",
+  "vignette": "5e/maths/fractions/07-additionner/eleveai-maths-5e-frac-additionner.vignette.webp",
+  "titre": "Une blanche et une noire : 1/2 + 1/4 de la mesure — Additionner des fractions — épisode 7 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=fraction_calcul&microId=fraction_additionner&display=simple"
+ },
+ "5e-frac-additionner-short": {
+  "fichier": "5e/maths/fractions/07-additionner/eleveai-maths-5e-frac-additionner-short.mp4",
+  "poster": "5e/maths/fractions/07-additionner/eleveai-maths-5e-frac-additionner-short.png",
+  "vignette": "5e/maths/fractions/07-additionner/eleveai-maths-5e-frac-additionner-short.vignette.webp",
+  "titre": "Les 7 pièces du tangram : quelle fraction du carré ? 🧩 — 5e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=fraction_calcul&microId=fraction_additionner&display=simple"
+ },
+ "5e-frac-calcul-defi": {
+  "fichier": "5e/maths/fractions/10-calcul-defi/eleveai-maths-5e-frac-calcul-defi.mp4",
+  "poster": "5e/maths/fractions/10-calcul-defi/eleveai-maths-5e-frac-calcul-defi.png",
+  "vignette": "5e/maths/fractions/10-calcul-defi/eleveai-maths-5e-frac-calcul-defi.vignette.webp",
+  "titre": "Voyage scolaire : de 18/20 à 90 % — Défi : calculer avec les fractions — épisode 10 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=fraction_calcul&microId=fraction_calcul_defi&display=simple"
+ },
+ "5e-frac-calcul-defi-short": {
+  "fichier": "5e/maths/fractions/10-calcul-defi/eleveai-maths-5e-frac-calcul-defi-short.mp4",
+  "poster": "5e/maths/fractions/10-calcul-defi/eleveai-maths-5e-frac-calcul-defi-short.png",
+  "vignette": "5e/maths/fractions/10-calcul-defi/eleveai-maths-5e-frac-calcul-defi-short.vignette.webp",
+  "titre": "12 victoires sur 20 ou 7 sur 10 : qui gagne le trophée ? 🏆 — 5e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=fraction_calcul&microId=fraction_calcul_defi&display=simple"
+ },
+ "5e-frac-comparer": {
+  "fichier": "5e/maths/fractions/04-comparer/eleveai-maths-5e-frac-comparer.mp4",
+  "poster": "5e/maths/fractions/04-comparer/eleveai-maths-5e-frac-comparer.png",
+  "vignette": "5e/maths/fractions/04-comparer/eleveai-maths-5e-frac-comparer.vignette.webp",
+  "titre": "Bébés tortues : 5/6 ou 7/12 du chemin, qui mène ? — Comparer des fractions — épisode 4 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=fraction_nombre&microId=fraction_comparer&display=simple"
+ },
+ "5e-frac-comparer-short": {
+  "fichier": "5e/maths/fractions/04-comparer/eleveai-maths-5e-frac-comparer-short.mp4",
+  "poster": "5e/maths/fractions/04-comparer/eleveai-maths-5e-frac-comparer-short.png",
+  "vignette": "5e/maths/fractions/04-comparer/eleveai-maths-5e-frac-comparer-short.vignette.webp",
+  "titre": "Course d'escargots : 2/3 ou 7/12, qui mène ? 🐌 — 5e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=fraction_nombre&microId=fraction_comparer&display=simple"
+ },
+ "5e-frac-egale": {
+  "fichier": "5e/maths/fractions/01-egale/eleveai-maths-5e-frac-egale.mp4",
+  "poster": "5e/maths/fractions/01-egale/eleveai-maths-5e-frac-egale.png",
+  "vignette": "5e/maths/fractions/01-egale/eleveai-maths-5e-frac-egale.vignette.webp",
+  "titre": "3/4 de botte en 8 tranches : 6/8 pour la girafe ? — Fractions égales — épisode 1 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=fraction_nombre&microId=fraction_egale&display=simple"
+ },
+ "5e-frac-egale-short": {
+  "fichier": "5e/maths/fractions/01-egale/eleveai-maths-5e-frac-egale-short.mp4",
+  "poster": "5e/maths/fractions/01-egale/eleveai-maths-5e-frac-egale-short.png",
+  "vignette": "5e/maths/fractions/01-egale/eleveai-maths-5e-frac-egale-short.vignette.webp",
+  "titre": "Une demi-heure : de combien de façons l'écrire ? ⏰ — 5e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=fraction_nombre&microId=fraction_egale&display=simple"
+ },
+ "5e-frac-multiplier": {
+  "fichier": "5e/maths/fractions/08-multiplier/eleveai-maths-5e-frac-multiplier.mp4",
+  "poster": "5e/maths/fractions/08-multiplier/eleveai-maths-5e-frac-multiplier.png",
+  "vignette": "5e/maths/fractions/08-multiplier/eleveai-maths-5e-frac-multiplier.vignette.webp",
+  "titre": "La cour du collège : les 2/3 des 3/5 en arbres — Multiplier des fractions — épisode 8 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=fraction_calcul&microId=fraction_multiplier&display=simple"
+ },
+ "5e-frac-multiplier-short": {
+  "fichier": "5e/maths/fractions/08-multiplier/eleveai-maths-5e-frac-multiplier-short.mp4",
+  "poster": "5e/maths/fractions/08-multiplier/eleveai-maths-5e-frac-multiplier-short.png",
+  "vignette": "5e/maths/fractions/08-multiplier/eleveai-maths-5e-frac-multiplier-short.vignette.webp",
+  "titre": "1/4 de 1/3 de la tablette : combien de carrés ? 🍫 — 5e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=fraction_calcul&microId=fraction_multiplier&display=simple"
+ },
+ "5e-frac-oppose": {
+  "fichier": "5e/maths/fractions/05-oppose/eleveai-maths-5e-frac-oppose.mp4",
+  "poster": "5e/maths/fractions/05-oppose/eleveai-maths-5e-frac-oppose.png",
+  "vignette": "5e/maths/fractions/05-oppose/eleveai-maths-5e-frac-oppose.vignette.webp",
+  "titre": "Le volcan monte de 2/5 cm, puis redescend — L'opposé d'une fraction — épisode 5 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=fraction_nombre&microId=fraction_oppose&display=simple"
+ },
+ "5e-frac-oppose-short": {
+  "fichier": "5e/maths/fractions/05-oppose/eleveai-maths-5e-frac-oppose-short.mp4",
+  "poster": "5e/maths/fractions/05-oppose/eleveai-maths-5e-frac-oppose-short.png",
+  "vignette": "5e/maths/fractions/05-oppose/eleveai-maths-5e-frac-oppose-short.vignette.webp",
+  "titre": "Le kangourou saute de 2/3 m, puis revient : où retombe-t-il ? 🦘 — 5e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=fraction_nombre&microId=fraction_oppose&display=simple"
+ },
+ "5e-frac-quantite": {
+  "fichier": "5e/maths/fractions/09-quantite/eleveai-maths-5e-frac-quantite.mp4",
+  "poster": "5e/maths/fractions/09-quantite/eleveai-maths-5e-frac-quantite.png",
+  "vignette": "5e/maths/fractions/09-quantite/eleveai-maths-5e-frac-quantite.vignette.webp",
+  "titre": "Les 2/3 d'un vol de 600 km, combien de km ? — La fraction d'une quantité — épisode 9 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=fraction_calcul&microId=fraction_quantite&display=simple"
+ },
+ "5e-frac-quantite-short": {
+  "fichier": "5e/maths/fractions/09-quantite/eleveai-maths-5e-frac-quantite-short.mp4",
+  "poster": "5e/maths/fractions/09-quantite/eleveai-maths-5e-frac-quantite-short.png",
+  "vignette": "5e/maths/fractions/09-quantite/eleveai-maths-5e-frac-quantite-short.vignette.webp",
+  "titre": "Un chat dort 16 h par jour : quelle fraction de sa vie ? 🐱 — 5e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=fraction_calcul&microId=fraction_quantite&display=simple"
+ },
+ "5e-frac-rationnel": {
+  "fichier": "5e/maths/fractions/03-rationnel/eleveai-maths-5e-frac-rationnel.mp4",
+  "poster": "5e/maths/fractions/03-rationnel/eleveai-maths-5e-frac-rationnel.png",
+  "vignette": "5e/maths/fractions/03-rationnel/eleveai-maths-5e-frac-rationnel.vignette.webp",
+  "titre": "7 m de ruban pour 4 robes : 7 ÷ 4 = 7/4 = 1,75 m — Fraction et quotient — épisode 3 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=fraction_nombre&microId=fraction_rationnel&display=simple"
+ },
+ "5e-frac-rationnel-short": {
+  "fichier": "5e/maths/fractions/03-rationnel/eleveai-maths-5e-frac-rationnel-short.mp4",
+  "poster": "5e/maths/fractions/03-rationnel/eleveai-maths-5e-frac-rationnel-short.png",
+  "vignette": "5e/maths/fractions/03-rationnel/eleveai-maths-5e-frac-rationnel-short.vignette.webp",
+  "titre": "3 crêpes pour 4 amis : combien chacun ? 🥞 — 5e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=fraction_nombre&microId=fraction_rationnel&display=simple"
+ },
+ "5e-frac-simplifier": {
+  "fichier": "5e/maths/fractions/02-simplifier/eleveai-maths-5e-frac-simplifier.mp4",
+  "poster": "5e/maths/fractions/02-simplifier/eleveai-maths-5e-frac-simplifier.png",
+  "vignette": "5e/maths/fractions/02-simplifier/eleveai-maths-5e-frac-simplifier.vignette.webp",
+  "titre": "60 minutes de crawl sur 90 : simplifier jusqu'à 2/3 — Simplifier une fraction — épisode 2 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=fraction_nombre&microId=fraction_simplifier&display=simple"
+ },
+ "5e-frac-simplifier-short": {
+  "fichier": "5e/maths/fractions/02-simplifier/eleveai-maths-5e-frac-simplifier-short.mp4",
+  "poster": "5e/maths/fractions/02-simplifier/eleveai-maths-5e-frac-simplifier-short.png",
+  "vignette": "5e/maths/fractions/02-simplifier/eleveai-maths-5e-frac-simplifier-short.vignette.webp",
+  "titre": "Il a mangé 18 carrés sur 24 : comment le dire plus simplement ? 🍫 — 5e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=fraction_nombre&microId=fraction_simplifier&display=simple"
+ },
  "5e-litteral-calcul": {
   "fichier": "5e/maths/paysage/fr/litteral-calcul/eleveai-maths-5e-litteral-calcul.mp4",
   "poster": "5e/maths/paysage/fr/litteral-calcul/eleveai-maths-5e-litteral-calcul.png",

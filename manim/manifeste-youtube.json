@@ -41289,6 +41289,1436 @@
         "reseaux-sociaux",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "5e-frac-egale",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_egale",
+      "classe": "5e",
+      "ceinture": "verte",
+      "serie": "Maths 5e",
+      "type": "longue",
+      "fichier": "5e/maths/fractions/01-egale/eleveai-maths-5e-frac-egale.mp4",
+      "miniature": "5e/maths/fractions/01-egale/eleveai-maths-5e-frac-egale.png",
+      "titre": "3/4 de botte en 8 tranches : 6/8 pour la girafe ? — Fractions égales — épisode 1 · Maths 5e",
+      "accroche": "Tom est soigneur dans un parc animalier. Chaque matin, la girafe mange 3/4 d'une botte de foin. Aujourd'hui, la botte est coupée en 8 tranches. Combien de tranches faut-il : 3/4, est-ce 6/8 ?\n\nDans cette vidéo :\n• couper chaque quart en 2 : 3/4 = 6/8, la quantité de foin ne change pas\n• la règle : multiplier, ou diviser, en haut ET en bas par le même nombre (3/5 = 6/10)\n• vérifier avec le même dénominateur : 3/4 = 9/12, mais 2/3 et 4/5 ne sont pas égales\n• diviser, c'est simplifier : 12/16 = 3/4 ; le piège, soustraire (12/16 → 3/7)\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : le zèbre mange 2/5 d'une botte coupée en 20 tranches : combien de tranches lui faut-il ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/fraction-nombre\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/fraction-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=fraction_nombre&microId=fraction_egale&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Deux fractions égales ?"
+        ],
+        [
+          "00:25",
+          "Couper chaque quart en 2"
+        ],
+        [
+          "00:43",
+          "La règle : × ou ÷ en haut et en bas"
+        ],
+        [
+          "00:58",
+          "Question : 2/3 en douzièmes"
+        ],
+        [
+          "01:24",
+          "Deux fractions pas égales"
+        ],
+        [
+          "01:41",
+          "Vérifier : le même dénominateur"
+        ],
+        [
+          "01:57",
+          "Question : égale à 4/5"
+        ],
+        [
+          "02:30",
+          "Diviser, et le piège"
+        ],
+        [
+          "02:48",
+          "Question : 10/15 = 2/3 ?"
+        ],
+        [
+          "03:18",
+          "À toi de jouer"
+        ],
+        [
+          "03:33",
+          "Correction"
+        ],
+        [
+          "03:55",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/5e/fraction-nombre",
+      "tags": [
+        "fractions égales",
+        "égalité de fractions",
+        "simplifier",
+        "parc animalier",
+        "soigneur animalier",
+        "girafe",
+        "fractions",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:58",
+          "question": "2/3 = combien de douzièmes ?",
+          "choix": [
+            "8",
+            "11",
+            "2"
+          ],
+          "reponse": 0,
+          "explication": "3 × 4 = 12 donc 2 × 4 = 8 ; 11 : on a ajouté 9."
+        },
+        {
+          "t": "01:57",
+          "question": "Laquelle est égale à 4/5 ?",
+          "choix": [
+            "5/6",
+            "8/5",
+            "8/10"
+          ],
+          "reponse": 2,
+          "explication": "4 × 2 = 8 et 5 × 2 = 10 ; 5/6 : on a ajouté 1 ; 8/5 : seul le haut a changé."
+        },
+        {
+          "t": "02:48",
+          "question": "Vrai ou faux : 10/15 = 2/3 ?",
+          "choix": [
+            "vrai",
+            "faux",
+            "on ne peut pas savoir"
+          ],
+          "reponse": 0,
+          "explication": "10 ÷ 5 = 2 et 15 ÷ 5 = 3."
+        }
+      ],
+      "centres": [
+        "animaux"
+      ]
+    },
+    {
+      "id": "5e-frac-egale-short",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_egale",
+      "classe": "5e",
+      "ceinture": "blanche",
+      "serie": "Maths 5e",
+      "type": "short",
+      "renvoie_vers": "5e-frac-egale",
+      "fichier": "5e/maths/fractions/01-egale/eleveai-maths-5e-frac-egale-short.mp4",
+      "miniature": "5e/maths/fractions/01-egale/eleveai-maths-5e-frac-egale-short.png",
+      "titre": "Une demi-heure : de combien de façons l'écrire ? ⏰ — 5e #Shorts",
+      "accroche": "Nora, horlogère, montre une demi-heure sur le cadran : la moitié du tour. Le cadran a 12 graduations, la demi-heure en couvre 6 : 6/12. Par paquets de 3 : 2/4. En minutes : 30/60. 1/2 = 2/4 = 6/12 = 30/60 : la même part du cadran !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un quart d'heure, c'est combien de soixantièmes du cadran ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=fraction_nombre&microId=fraction_egale&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #5e #collège",
+      "tags": [
+        "fractions égales",
+        "horloge",
+        "cadran",
+        "heure",
+        "horlogère",
+        "fractions",
+        "maths",
+        "5e",
+        "collège",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:31",
+          "question": "3 quarts d'heure : combien de douzièmes ?",
+          "choix": [
+            "3",
+            "9",
+            "4"
+          ],
+          "reponse": 1,
+          "explication": "4 × 3 = 12 et 3 × 3 = 9 : 9/12."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "art-design"
+      ]
+    },
+    {
+      "id": "5e-frac-simplifier",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_simplifier",
+      "classe": "5e",
+      "ceinture": "verte",
+      "serie": "Maths 5e",
+      "type": "longue",
+      "fichier": "5e/maths/fractions/02-simplifier/eleveai-maths-5e-frac-simplifier.mp4",
+      "miniature": "5e/maths/fractions/02-simplifier/eleveai-maths-5e-frac-simplifier.png",
+      "titre": "60 minutes de crawl sur 90 : simplifier jusqu'à 2/3 — Simplifier une fraction — épisode 2 · Maths 5e",
+      "accroche": "Samir est entraîneur de natation. Sa séance dure 90 minutes, et ses nageurs font 60 minutes de crawl : 60/90 de la séance. C'est juste, mais les nombres sont grands !\n\nDans cette vidéo :\n• par paquets de 10 minutes : 60/90 = 6/9, puis ÷ 3 : 2/3, la fraction irréductible\n• les critères de divisibilité par 2, 5 et 3 pour savoir par quoi diviser\n• les deux pièges : soustraire (60/90 → 30/60) ou ne diviser qu'un seul nombre\n• en une seule étape : ÷ 30, et 2/3 d'un coup\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : dans une séance de 60 minutes, l'échauffement dure 15 minutes : quelle fraction, simplifiée au maximum ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/fraction-nombre\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/fraction-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=fraction_nombre&microId=fraction_simplifier&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Des nombres plus petits"
+        ],
+        [
+          "00:29",
+          "Par paquets de 10"
+        ],
+        [
+          "00:48",
+          "Encore plus simple : irréductible"
+        ],
+        [
+          "01:09",
+          "Les critères de divisibilité"
+        ],
+        [
+          "01:38",
+          "Question : simplifie 6/8"
+        ],
+        [
+          "02:11",
+          "Les deux pièges"
+        ],
+        [
+          "02:44",
+          "Question : la fraction irréductible"
+        ],
+        [
+          "03:15",
+          "En une seule étape"
+        ],
+        [
+          "03:37",
+          "Question : 12/18 d'un coup"
+        ],
+        [
+          "04:06",
+          "À toi de jouer"
+        ],
+        [
+          "04:23",
+          "Correction"
+        ],
+        [
+          "04:57",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/5e/fraction-nombre",
+      "tags": [
+        "simplifier une fraction",
+        "fraction irréductible",
+        "critères de divisibilité",
+        "natation",
+        "entraîneur",
+        "sport",
+        "fractions",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:38",
+          "question": "Simplifie 6/8.",
+          "choix": [
+            "4/6",
+            "3/8",
+            "3/4"
+          ],
+          "reponse": 2,
+          "explication": "6 ÷ 2 = 3 et 8 ÷ 2 = 4 ; 4/6 : on a soustrait 2 ; 3/8 : seul le haut est divisé."
+        },
+        {
+          "t": "02:44",
+          "question": "Laquelle de ces fractions est irréductible ?",
+          "choix": [
+            "9/12",
+            "7/10",
+            "10/15"
+          ],
+          "reponse": 1,
+          "explication": "7 et 10 : rien en commun ; 9 et 12 : table de 3 ; 10 et 15 : table de 5."
+        },
+        {
+          "t": "03:37",
+          "question": "Pour simplifier 12/18 en une seule étape, on divise par :",
+          "choix": [
+            "2",
+            "3",
+            "6"
+          ],
+          "reponse": 2,
+          "explication": "12 = 6 × 2 et 18 = 6 × 3, donc 2/3 d'un coup ; avec 2 on obtient 6/9, pas fini."
+        }
+      ],
+      "centres": [
+        "sport"
+      ]
+    },
+    {
+      "id": "5e-frac-simplifier-short",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_simplifier",
+      "classe": "5e",
+      "ceinture": "blanche",
+      "serie": "Maths 5e",
+      "type": "short",
+      "renvoie_vers": "5e-frac-simplifier",
+      "fichier": "5e/maths/fractions/02-simplifier/eleveai-maths-5e-frac-simplifier-short.mp4",
+      "miniature": "5e/maths/fractions/02-simplifier/eleveai-maths-5e-frac-simplifier-short.png",
+      "titre": "Il a mangé 18 carrés sur 24 : comment le dire plus simplement ? 🍫 — 5e #Shorts",
+      "accroche": "Maëva, chocolatière, fabrique une tablette de 24 carrés : 4 rangées de 6. Son neveu en mange 18, soit 3 rangées entières. 24 ÷ 6 = 4 et 18 ÷ 6 = 3 : 18/24 = 3/4, le même chocolat ! Enlever 6 en haut et en bas donne 12/18 : faux, on divise, on ne soustrait jamais.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : une tablette de 30 carrés, dont 20 mangés : quelle fraction, la plus simple possible ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=fraction_nombre&microId=fraction_simplifier&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #5e #collège",
+      "tags": [
+        "simplifier une fraction",
+        "chocolat",
+        "tablette",
+        "chocolatière",
+        "fractions",
+        "maths",
+        "5e",
+        "collège",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:46",
+          "question": "15 carrés, dont 10 mangés, regroupés 5 par 5 : combien de gros carrés mangés ?",
+          "choix": [
+            "5",
+            "2",
+            "3"
+          ],
+          "reponse": 1,
+          "explication": "10 ÷ 5 = 2 : 2/3 de la tablette."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "5e-frac-rationnel",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_rationnel",
+      "classe": "5e",
+      "ceinture": "verte",
+      "serie": "Maths 5e",
+      "type": "longue",
+      "fichier": "5e/maths/fractions/03-rationnel/eleveai-maths-5e-frac-rationnel.mp4",
+      "miniature": "5e/maths/fractions/03-rationnel/eleveai-maths-5e-frac-rationnel.png",
+      "titre": "7 m de ruban pour 4 robes : 7 ÷ 4 = 7/4 = 1,75 m — Fraction et quotient — épisode 3 · Maths 5e",
+      "accroche": "Sana est couturière. Elle a un ruban de 7 mètres, à couper en 4 morceaux égaux, pour 4 robes. Combien mesure chaque morceau ?\n\nDans cette vidéo :\n• 7 ÷ 4 s'écrit 7/4 : le numérateur divisé par le dénominateur\n• vérifier : 4 × 7/4 = 7, et 7/4 est entre 1 et 2\n• avec une virgule, on fait la division : 7/4 = 1,75, jamais 7,4\n• dans l'autre sens : 0,35 = 35/100 = 7/20, soit 35 %\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Sana partage 3 mètres de dentelle entre 4 robes : écris chaque morceau avec une fraction, puis avec une virgule.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/fraction-nombre\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/fraction-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=fraction_nombre&microId=fraction_rationnel&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Une fraction, c'est une division"
+        ],
+        [
+          "00:21",
+          "7 ÷ 4 = 7/4"
+        ],
+        [
+          "00:37",
+          "Vérifier : 4 × 7/4 = 7"
+        ],
+        [
+          "00:52",
+          "Question : 3 ÷ 5"
+        ],
+        [
+          "01:23",
+          "Avec une virgule : 1,75"
+        ],
+        [
+          "01:41",
+          "Entre 1 et 2"
+        ],
+        [
+          "01:54",
+          "Question : 9/4 en décimal"
+        ],
+        [
+          "02:25",
+          "Dans l'autre sens : 0,35 = 7/20"
+        ],
+        [
+          "02:46",
+          "Question : 0,35 en %"
+        ],
+        [
+          "03:21",
+          "À toi de jouer"
+        ],
+        [
+          "03:37",
+          "Correction"
+        ],
+        [
+          "03:57",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/5e/fraction-nombre",
+      "tags": [
+        "fraction et quotient",
+        "écriture décimale",
+        "division",
+        "pourcentage",
+        "couturière",
+        "couture",
+        "fractions",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:52",
+          "question": "Comment s'écrit 3 ÷ 5 ?",
+          "choix": [
+            "5/3",
+            "3/5",
+            "3,5"
+          ],
+          "reponse": 1,
+          "explication": "3 ÷ 5 = 3/5 ; 5/3 est à l'envers ; 3,5 colle les nombres."
+        },
+        {
+          "t": "01:54",
+          "question": "Écriture décimale de 9/4 ?",
+          "choix": [
+            "9,4",
+            "2,25",
+            "0,94"
+          ],
+          "reponse": 1,
+          "explication": "9 ÷ 4 = 2,25 ; 9,4 colle les deux nombres : c'est le piège."
+        },
+        {
+          "t": "02:46",
+          "question": "0,35, c'est combien de pour cent ?",
+          "choix": [
+            "0,35 %",
+            "3,5 %",
+            "35 %"
+          ],
+          "reponse": 2,
+          "explication": "0,35 = 35 centièmes = 35 % ; 0,35 % : moins d'un centième."
+        }
+      ],
+      "centres": [
+        "art-design"
+      ]
+    },
+    {
+      "id": "5e-frac-rationnel-short",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_rationnel",
+      "classe": "5e",
+      "ceinture": "blanche",
+      "serie": "Maths 5e",
+      "type": "short",
+      "renvoie_vers": "5e-frac-rationnel",
+      "fichier": "5e/maths/fractions/03-rationnel/eleveai-maths-5e-frac-rationnel-short.mp4",
+      "miniature": "5e/maths/fractions/03-rationnel/eleveai-maths-5e-frac-rationnel-short.png",
+      "titre": "3 crêpes pour 4 amis : combien chacun ? 🥞 — 5e #Shorts",
+      "accroche": "Malo, crêpier, a 3 crêpes pour 4 amis : impossible de donner une crêpe entière à chacun ! Il coupe chaque crêpe en 4. Chaque ami prend 1 quart de chaque crêpe : 3 quarts en tout. 3 ÷ 4 = 3/4 de crêpe !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 5 crêpes pour 4 amis : combien de crêpe chacun, avec une virgule ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=fraction_nombre&microId=fraction_rationnel&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #5e #collège",
+      "tags": [
+        "fraction et quotient",
+        "partage",
+        "crêpes",
+        "crêpier",
+        "fractions",
+        "maths",
+        "5e",
+        "collège",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:22",
+          "question": "2 crêpes pour 5 amis : combien chacun ?",
+          "choix": [
+            "5/2",
+            "2/5",
+            "2,5"
+          ],
+          "reponse": 1,
+          "explication": "2 ÷ 5 = 2/5."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "5e-frac-comparer",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_comparer",
+      "classe": "5e",
+      "ceinture": "verte",
+      "serie": "Maths 5e",
+      "type": "longue",
+      "fichier": "5e/maths/fractions/04-comparer/eleveai-maths-5e-frac-comparer.mp4",
+      "miniature": "5e/maths/fractions/04-comparer/eleveai-maths-5e-frac-comparer.png",
+      "titre": "Bébés tortues : 5/6 ou 7/12 du chemin, qui mène ? — Comparer des fractions — épisode 4 · Maths 5e",
+      "accroche": "Zoé est garde du littoral. Cette nuit, des bébés tortues filent vers la mer. La tortue A a fait 5/6 du chemin, la tortue B 7/12. Laquelle est la plus près de la mer ?\n\nDans cette vidéo :\n• même dénominateur : on compare les numérateurs (7/12 est plus grand que 5/12)\n• même numérateur : plus le dénominateur est grand, plus les parts sont petites (3/4 plus grand que 3/8)\n• dénominateurs multiples : 5/6 = 10/12, plus grand que 7/12\n• le piège : 1/10 est plus petit que 1/5 ; une fraction dépasse 1 quand le haut dépasse le bas\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : trois tortues ont fait 1/2, 3/8 et 5/8 du chemin : range ces fractions de la plus petite à la plus grande.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/fraction-nombre\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/fraction-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=fraction_nombre&microId=fraction_comparer&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Quelle fraction est la plus grande ?"
+        ],
+        [
+          "00:23",
+          "Même dénominateur"
+        ],
+        [
+          "00:39",
+          "Même numérateur"
+        ],
+        [
+          "00:59",
+          "Question : 5/7 et 5/9"
+        ],
+        [
+          "01:28",
+          "Dénominateurs multiples"
+        ],
+        [
+          "01:50",
+          "Question : 2/3 et 5/9"
+        ],
+        [
+          "02:18",
+          "Le piège : 1/5 et 1/10"
+        ],
+        [
+          "02:32",
+          "Comparer à 1"
+        ],
+        [
+          "02:43",
+          "Question : plus grande que 1"
+        ],
+        [
+          "03:11",
+          "À toi de jouer"
+        ],
+        [
+          "03:25",
+          "Correction"
+        ],
+        [
+          "03:47",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/5e/fraction-nombre",
+      "tags": [
+        "comparer des fractions",
+        "ranger des fractions",
+        "même dénominateur",
+        "tortues",
+        "garde du littoral",
+        "océan",
+        "fractions",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:59",
+          "question": "Compare 5/7 et 5/9.",
+          "choix": [
+            "> plus grand",
+            "= égal",
+            "< plus petit"
+          ],
+          "reponse": 0,
+          "explication": "Même numérateur : un septième > un neuvième, donc 5/7 > 5/9."
+        },
+        {
+          "t": "01:50",
+          "question": "Compare 2/3 et 5/9.",
+          "choix": [
+            "< plus petit",
+            "= égal",
+            "> plus grand"
+          ],
+          "reponse": 2,
+          "explication": "3 × 3 = 9 : 2/3 = 6/9, et 6/9 > 5/9."
+        },
+        {
+          "t": "02:43",
+          "question": "Laquelle est plus grande que 1 ?",
+          "choix": [
+            "5/6",
+            "7/6",
+            "6/7"
+          ],
+          "reponse": 1,
+          "explication": "7 > 6 : 7/6 > 1 ; 5/6 et 6/7 < 1."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "5e-frac-comparer-short",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_comparer",
+      "classe": "5e",
+      "ceinture": "blanche",
+      "serie": "Maths 5e",
+      "type": "short",
+      "renvoie_vers": "5e-frac-comparer",
+      "fichier": "5e/maths/fractions/04-comparer/eleveai-maths-5e-frac-comparer-short.mp4",
+      "miniature": "5e/maths/fractions/04-comparer/eleveai-maths-5e-frac-comparer-short.png",
+      "titre": "Course d'escargots : 2/3 ou 7/12, qui mène ? 🐌 — 5e #Shorts",
+      "accroche": "Léo, animateur, lance une course d'escargots ! Le vert a fait 2/3 de la piste, le jaune 7/12. On coupe chaque tiers en 4 : 2/3 = 8/12. 8 cases contre 7 : le vert mène !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un escargot à 2/5, l'autre à 3/10 : lequel mène ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=fraction_nombre&microId=fraction_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #5e #collège",
+      "tags": [
+        "comparer des fractions",
+        "course",
+        "escargots",
+        "animateur",
+        "fractions",
+        "maths",
+        "5e",
+        "collège",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:24",
+          "question": "Rouge : 1/2. Bleu : 3/6. Qui mène ?",
+          "choix": [
+            "le rouge",
+            "le bleu",
+            "égalité"
+          ],
+          "reponse": 2,
+          "explication": "1/2 = 3/6 : égalité !"
+        }
+      ],
+      "centres": [
+        "animaux",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "5e-frac-oppose",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_oppose",
+      "classe": "5e",
+      "ceinture": "verte",
+      "serie": "Maths 5e",
+      "type": "longue",
+      "fichier": "5e/maths/fractions/05-oppose/eleveai-maths-5e-frac-oppose.mp4",
+      "miniature": "5e/maths/fractions/05-oppose/eleveai-maths-5e-frac-oppose.png",
+      "titre": "Le volcan monte de 2/5 cm, puis redescend — L'opposé d'une fraction — épisode 5 · Maths 5e",
+      "accroche": "Ilan est volcanologue à La Réunion, au Piton de la Fournaise. Lundi, le sol du volcan est monté de 2/5 de centimètre ; mardi, il est redescendu de 2/5. Comment écrire ces deux mouvements ?\n\nDans cette vidéo :\n• monter, c'est +2/5 ; descendre, c'est −2/5 : les deux s'annulent\n• sur la droite graduée, deux opposés sont à la même distance de 0, de chaque côté\n• un nombre plus son opposé égale 0 ; l'opposé de −7/9, c'est 7/9\n• le piège : l'opposé n'est pas la fraction retournée (2/5 → 5/2)\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : mercredi, le sol est descendu de 3/10 de centimètre : écris ce mouvement avec un signe, puis son opposé avec une virgule.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/fraction-nombre\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/fraction-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=fraction_nombre&microId=fraction_oppose&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "De l'autre côté du 0"
+        ],
+        [
+          "00:25",
+          "Monter, descendre : le signe"
+        ],
+        [
+          "00:38",
+          "Sur la droite graduée"
+        ],
+        [
+          "00:53",
+          "Question : l'opposé de 3/5"
+        ],
+        [
+          "01:23",
+          "Un nombre plus son opposé = 0"
+        ],
+        [
+          "01:37",
+          "L'opposé d'un nombre négatif"
+        ],
+        [
+          "01:50",
+          "Question : l'opposé de −4/7"
+        ],
+        [
+          "02:21",
+          "Le piège : la fraction retournée"
+        ],
+        [
+          "02:41",
+          "Question : 5/6 + ? = 0"
+        ],
+        [
+          "03:07",
+          "À toi de jouer"
+        ],
+        [
+          "03:25",
+          "Correction"
+        ],
+        [
+          "03:42",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/5e/fraction-nombre",
+      "tags": [
+        "opposé d'une fraction",
+        "fraction négative",
+        "droite graduée",
+        "volcan",
+        "volcanologue",
+        "La Réunion",
+        "Piton de la Fournaise",
+        "fractions",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:53",
+          "question": "Quel est l'opposé de 3/5 ?",
+          "choix": [
+            "−3/5",
+            "5/3",
+            "3/5"
+          ],
+          "reponse": 0,
+          "explication": "On change seulement le signe ; 5/3 est la fraction retournée, un autre nombre."
+        },
+        {
+          "t": "01:50",
+          "question": "Quel est l'opposé de −4/7 ?",
+          "choix": [
+            "−7/4",
+            "4/7",
+            "−4/7"
+          ],
+          "reponse": 1,
+          "explication": "Le − devient + ; 4/7 + (−4/7) = 0."
+        },
+        {
+          "t": "02:41",
+          "question": "5/6 + combien = 0 ?",
+          "choix": [
+            "6/5",
+            "0",
+            "−5/6"
+          ],
+          "reponse": 2,
+          "explication": "5/6 + (−5/6) = 0 : deux nombres opposés."
+        }
+      ],
+      "centres": [
+        "sciences",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "5e-frac-oppose-short",
+      "notionId": "fraction_nombre",
+      "microId": "fraction_oppose",
+      "classe": "5e",
+      "ceinture": "blanche",
+      "serie": "Maths 5e",
+      "type": "short",
+      "renvoie_vers": "5e-frac-oppose",
+      "fichier": "5e/maths/fractions/05-oppose/eleveai-maths-5e-frac-oppose-short.mp4",
+      "miniature": "5e/maths/fractions/05-oppose/eleveai-maths-5e-frac-oppose-short.png",
+      "titre": "Le kangourou saute de 2/3 m, puis revient : où retombe-t-il ? 🦘 — 5e #Shorts",
+      "accroche": "Emma, guide en Australie, observe un kangourou. Il saute de 2/3 de mètre vers la droite, puis de 2/3 vers la gauche. +2/3 puis −2/3 : 2/3 + (−2/3) = 0, il retombe pile au départ ! 2/3 et −2/3 sont opposés.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : quel est l'opposé de l'opposé de −3/8 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=fraction_nombre&microId=fraction_oppose&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #5e #collège",
+      "tags": [
+        "opposé d'une fraction",
+        "nombres relatifs",
+        "kangourou",
+        "Australie",
+        "guide",
+        "fractions",
+        "maths",
+        "5e",
+        "collège",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:27",
+          "question": "Le kangourou est à −4/5. Où est son opposé ?",
+          "choix": [
+            "4/5",
+            "−5/4",
+            "5/4"
+          ],
+          "reponse": 0,
+          "explication": "On change le signe : 4/5, de l'autre côté du 0."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "5e-frac-additionner",
+      "notionId": "fraction_calcul",
+      "microId": "fraction_additionner",
+      "classe": "5e",
+      "ceinture": "verte",
+      "serie": "Maths 5e",
+      "type": "longue",
+      "fichier": "5e/maths/fractions/07-additionner/eleveai-maths-5e-frac-additionner.mp4",
+      "miniature": "5e/maths/fractions/07-additionner/eleveai-maths-5e-frac-additionner.png",
+      "titre": "Une blanche et une noire : 1/2 + 1/4 de la mesure — Additionner des fractions — épisode 7 · Maths 5e",
+      "accroche": "Maya est batteuse. Elle écrit le rythme d'une chanson : une mesure, c'est 1 ronde ; une blanche vaut 1/2, une noire 1/4, une croche 1/8. Maya joue une blanche, puis une noire : quelle part de la mesure est remplie ?\n\nDans cette vidéo :\n• écrire tout en quarts : 1/2 = 2/4, puis 2/4 + 1/4 = 3/4\n• le piège : on n'ajoute jamais les dénominateurs (1/2 + 1/4 ne fait pas 2/6)\n• simplifier le résultat : 3/8 + 1/8 = 4/8 = 1/2 = 0,5 = 50 %\n• soustraire, c'est pareil : 1 − 5/8 = 8/8 − 5/8 = 3/8\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : dans une mesure, Maya joue 1/2, puis 1/8, puis encore 1/8 : quelle part de la mesure est remplie ? Simplifie !\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/fraction-calcul\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/fraction-calcul\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=fraction_calcul&microId=fraction_additionner&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "1/2 + 1/4 ?"
+        ],
+        [
+          "00:27",
+          "Le même dénominateur"
+        ],
+        [
+          "00:40",
+          "Ajouter les numérateurs"
+        ],
+        [
+          "00:51",
+          "Question : 1/4 + 1/8"
+        ],
+        [
+          "01:18",
+          "Le piège : ajouter les dénominateurs"
+        ],
+        [
+          "01:34",
+          "Simplifier le résultat"
+        ],
+        [
+          "02:01",
+          "Question : 5/8 + 1/8"
+        ],
+        [
+          "02:35",
+          "Soustraire, c'est pareil"
+        ],
+        [
+          "02:55",
+          "À toi de jouer"
+        ],
+        [
+          "03:12",
+          "Correction"
+        ],
+        [
+          "03:30",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/5e/fraction-calcul",
+      "tags": [
+        "additionner des fractions",
+        "soustraire des fractions",
+        "même dénominateur",
+        "rythme",
+        "musique",
+        "batteuse",
+        "fractions",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:51",
+          "question": "1/4 + 1/8 ?",
+          "choix": [
+            "2/12",
+            "3/8",
+            "2/8"
+          ],
+          "reponse": 1,
+          "explication": "1/4 = 2/8, puis 2 + 1 = 3 : 3/8 ; on n'ajoute pas les dénominateurs."
+        },
+        {
+          "t": "02:01",
+          "question": "5/8 + 1/8, simplifié ?",
+          "choix": [
+            "6/16",
+            "4/6",
+            "3/4"
+          ],
+          "reponse": 2,
+          "explication": "5 + 1 = 6 : 6/8, ÷ 2 en haut et en bas : 3/4 ; enlever 2, c'est le piège."
+        }
+      ],
+      "centres": [
+        "musique"
+      ]
+    },
+    {
+      "id": "5e-frac-additionner-short",
+      "notionId": "fraction_calcul",
+      "microId": "fraction_additionner",
+      "classe": "5e",
+      "ceinture": "jaune",
+      "serie": "Maths 5e",
+      "type": "short",
+      "renvoie_vers": "5e-frac-additionner",
+      "fichier": "5e/maths/fractions/07-additionner/eleveai-maths-5e-frac-additionner-short.mp4",
+      "miniature": "5e/maths/fractions/07-additionner/eleveai-maths-5e-frac-additionner-short.png",
+      "titre": "Les 7 pièces du tangram : quelle fraction du carré ? 🧩 — 5e #Shorts",
+      "accroche": "Léo, créateur de casse-tête, montre le tangram, un vieux jeu chinois : un carré coupé en 7 pièces. Chaque grand triangle fait 1/4 du carré ; le triangle moyen, le petit carré et le parallélogramme, 1/8 ; chaque petit triangle, 1/16. En seizièmes : 4 + 4 + 2 + 2 + 2 + 1 + 1 = 16, soit 16/16 = 1 carré entier !\n\n🥋 Ceinture jaune.\n👉 À toi : le petit carré et les deux petits triangles ensemble : quelle part du grand carré ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=fraction_calcul&microId=fraction_additionner&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #5e #collège",
+      "tags": [
+        "additionner des fractions",
+        "tangram",
+        "casse-tête",
+        "jeu chinois",
+        "créateur de casse-tête",
+        "fractions",
+        "maths",
+        "5e",
+        "collège",
+        "CRPE",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:26",
+          "question": "Les deux grands triangles ensemble ?",
+          "choix": [
+            "2/8",
+            "1/2",
+            "1/8"
+          ],
+          "reponse": 1,
+          "explication": "1/4 + 1/4 = 2/4 = 1/2."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "art-design"
+      ]
+    },
+    {
+      "id": "5e-frac-multiplier",
+      "notionId": "fraction_calcul",
+      "microId": "fraction_multiplier",
+      "classe": "5e",
+      "ceinture": "verte",
+      "serie": "Maths 5e",
+      "type": "longue",
+      "fichier": "5e/maths/fractions/08-multiplier/eleveai-maths-5e-frac-multiplier.mp4",
+      "miniature": "5e/maths/fractions/08-multiplier/eleveai-maths-5e-frac-multiplier.png",
+      "titre": "La cour du collège : les 2/3 des 3/5 en arbres — Multiplier des fractions — épisode 8 · Maths 5e",
+      "accroche": "Fatou est architecte : elle dessine la cour d'un collège. Les 3/5 de la cour seront en herbe, pour avoir moins chaud, et sur les 2/3 de cette herbe, elle plantera des arbres. Quelle part de la cour aura des arbres ?\n\nDans cette vidéo :\n• la grille : 5 bandes et 3 rangées, 6 rectangles sur 15 : 2/3 × 3/5 = 6/15\n• la règle : numérateurs entre eux, dénominateurs entre eux\n• simplifier, après ou avant de multiplier : 6/15 = 2/5 ; 5/6 × 3/5 = 1/2\n• un entier fois une fraction : 4 × 2/7 = 8/7 ; et 2/5 = 0,4 = 40 %\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : parmi ces arbres, les 3/4 sont fruitiers : quelle part de la cour porte des arbres fruitiers, en fraction simplifiée puis en pourcentage ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/fraction-calcul\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/fraction-calcul\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=fraction_calcul&microId=fraction_multiplier&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "2/3 × 3/5 ?"
+        ],
+        [
+          "00:25",
+          "La grille : 6 sur 15"
+        ],
+        [
+          "00:47",
+          "La règle"
+        ],
+        [
+          "01:03",
+          "Question : 1/4 × 3/5"
+        ],
+        [
+          "01:31",
+          "Simplifier le résultat"
+        ],
+        [
+          "01:49",
+          "Simplifier avant de multiplier"
+        ],
+        [
+          "02:07",
+          "Un entier fois une fraction"
+        ],
+        [
+          "02:23",
+          "Question : 3 × 2/9"
+        ],
+        [
+          "02:52",
+          "En pourcentage : 40 %"
+        ],
+        [
+          "03:04",
+          "À toi de jouer"
+        ],
+        [
+          "03:22",
+          "Correction"
+        ],
+        [
+          "03:45",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/5e/fraction-calcul",
+      "tags": [
+        "multiplier des fractions",
+        "produit de fractions",
+        "fraction d'une fraction",
+        "architecte",
+        "cour d'école",
+        "végétalisation",
+        "fractions",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:03",
+          "question": "1/4 × 3/5 ?",
+          "choix": [
+            "4/9",
+            "3/20",
+            "3/5"
+          ],
+          "reponse": 1,
+          "explication": "En haut 1 × 3 = 3, en bas 4 × 5 = 20."
+        },
+        {
+          "t": "02:23",
+          "question": "3 × 2/9, simplifié ?",
+          "choix": [
+            "6/27",
+            "2/3",
+            "5/9"
+          ],
+          "reponse": 1,
+          "explication": "3 × 2 = 6 : 6/9, ÷ 3 : 2/3 ; on ne multiplie pas le bas."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "art-design"
+      ]
+    },
+    {
+      "id": "5e-frac-multiplier-short",
+      "notionId": "fraction_calcul",
+      "microId": "fraction_multiplier",
+      "classe": "5e",
+      "ceinture": "blanche",
+      "serie": "Maths 5e",
+      "type": "short",
+      "renvoie_vers": "5e-frac-multiplier",
+      "fichier": "5e/maths/fractions/08-multiplier/eleveai-maths-5e-frac-multiplier-short.mp4",
+      "miniature": "5e/maths/fractions/08-multiplier/eleveai-maths-5e-frac-multiplier-short.png",
+      "titre": "1/4 de 1/3 de la tablette : combien de carrés ? 🍫 — 5e #Shorts",
+      "accroche": "Anaïs, chocolatière, a une tablette de 12 carrés : 3 rangées de 4. Malo prend 1/3 de la tablette, une rangée de 4 carrés. Sa sœur lui demande 1/4 de sa part : elle reçoit 1 carré. 1/4 de 1/3, c'est 1/12 de la tablette : 1/4 × 1/3 = 1/12.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : une tablette de 24 carrés, tu prends 1/2 de 1/3 : combien de carrés ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=fraction_calcul&microId=fraction_multiplier&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #5e #collège",
+      "tags": [
+        "multiplier des fractions",
+        "fraction d'une fraction",
+        "chocolat",
+        "partage",
+        "chocolatière",
+        "fractions",
+        "maths",
+        "5e",
+        "collège",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:27",
+          "question": "La moitié de la moitié de la tablette ?",
+          "choix": [
+            "1/4",
+            "1/2",
+            "1/8"
+          ],
+          "reponse": 0,
+          "explication": "1/2 × 1/2 = 1/4 : 3 carrés sur 12."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "5e-frac-quantite",
+      "notionId": "fraction_calcul",
+      "microId": "fraction_quantite",
+      "classe": "5e",
+      "ceinture": "verte",
+      "serie": "Maths 5e",
+      "type": "longue",
+      "fichier": "5e/maths/fractions/09-quantite/eleveai-maths-5e-frac-quantite.mp4",
+      "miniature": "5e/maths/fractions/09-quantite/eleveai-maths-5e-frac-quantite.png",
+      "titre": "Les 2/3 d'un vol de 600 km, combien de km ? — La fraction d'une quantité — épisode 9 · Maths 5e",
+      "accroche": "Lina est pilote de ligne. Son vol fait 600 kilomètres. Au bout d'une heure, l'avion a parcouru les 2/3 du trajet. Combien de kilomètres ?\n\nDans cette vidéo :\n• prendre les 2/3 : 600 ÷ 3 = 200, puis 200 × 2 = 400 km\n• le piège : diviser par le numérateur (600 ÷ 2 × 3 = 900, plus que le trajet !)\n• la fraction d'une fraction : les 2/3 de 3/4, c'est 2/3 × 3/4 = 6/12 = 1/2\n• 1/2 = 0,5 = 50 % du réservoir\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : plein, le réservoir contient 1 200 litres ; il est plein aux 3/4, et Lina en utilise les 2/3 : combien de litres, et quel pourcentage reste-t-il ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/fraction-calcul\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/fraction-calcul\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=fraction_calcul&microId=fraction_quantite&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les 2/3 de 600 km ?"
+        ],
+        [
+          "00:20",
+          "La méthode : ÷ puis ×"
+        ],
+        [
+          "00:37",
+          "Question : 2/5 de 150"
+        ],
+        [
+          "01:07",
+          "Le piège : 900 km ?"
+        ],
+        [
+          "01:25",
+          "La fraction d'une fraction"
+        ],
+        [
+          "01:50",
+          "Simplifier : 1/2 = 50 %"
+        ],
+        [
+          "02:08",
+          "Question : 1/2 de 3/4"
+        ],
+        [
+          "02:37",
+          "À toi de jouer"
+        ],
+        [
+          "02:58",
+          "Correction"
+        ],
+        [
+          "03:32",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/5e/fraction-calcul",
+      "tags": [
+        "fraction d'une quantité",
+        "fraction d'une fraction",
+        "prendre une fraction",
+        "avion",
+        "pilote de ligne",
+        "aviation",
+        "fractions",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:37",
+          "question": "Les 2/5 de 150 passagers ?",
+          "choix": [
+            "30",
+            "60",
+            "375"
+          ],
+          "reponse": 1,
+          "explication": "150 ÷ 5 = 30 (1/5), puis 30 × 2 = 60."
+        },
+        {
+          "t": "02:07",
+          "question": "1/2 de 3/4 ?",
+          "choix": [
+            "4/6",
+            "3/8",
+            "1/4"
+          ],
+          "reponse": 1,
+          "explication": "« de » = « × » : 1 × 3 = 3 et 2 × 4 = 8."
+        }
+      ],
+      "centres": [
+        "transports"
+      ]
+    },
+    {
+      "id": "5e-frac-quantite-short",
+      "notionId": "fraction_calcul",
+      "microId": "fraction_quantite",
+      "classe": "5e",
+      "ceinture": "jaune",
+      "serie": "Maths 5e",
+      "type": "short",
+      "renvoie_vers": "5e-frac-quantite",
+      "fichier": "5e/maths/fractions/09-quantite/eleveai-maths-5e-frac-quantite-short.mp4",
+      "miniature": "5e/maths/fractions/09-quantite/eleveai-maths-5e-frac-quantite-short.png",
+      "titre": "Un chat dort 16 h par jour : quelle fraction de sa vie ? 🐱 — 5e #Shorts",
+      "accroche": "Aya, vétérinaire, se pose une question sur ses patients préférés : combien de temps dort un chat ? Une journée, c'est 24 heures ; coupée en 3, 8 heures par part. Un chat adulte peut dormir 2 parts : 16 heures, les 2/3 de la journée ! Sur 15 ans de vie, 10 ans à dormir.\n\n🥋 Ceinture jaune.\n👉 À toi : un koala dort environ 5/6 de la journée : combien d'heures ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=fraction_calcul&microId=fraction_quantite&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #5e #collège",
+      "tags": [
+        "fraction d'une quantité",
+        "sommeil",
+        "chat",
+        "koala",
+        "vétérinaire",
+        "animaux",
+        "fractions",
+        "maths",
+        "5e",
+        "collège",
+        "CRPE",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:22",
+          "question": "Chat de 15 ans, 2/3 de sa vie à dormir : combien d'années ?",
+          "choix": [
+            "5 ans",
+            "10 ans",
+            "30 ans"
+          ],
+          "reponse": 1,
+          "explication": "15 ÷ 3 = 5, puis 5 × 2 = 10."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "corps-sante"
+      ]
+    },
+    {
+      "id": "5e-frac-calcul-defi",
+      "notionId": "fraction_calcul",
+      "microId": "fraction_calcul_defi",
+      "classe": "5e",
+      "ceinture": "orange",
+      "serie": "Maths 5e",
+      "type": "longue",
+      "fichier": "5e/maths/fractions/10-calcul-defi/eleveai-maths-5e-frac-calcul-defi.mp4",
+      "miniature": "5e/maths/fractions/10-calcul-defi/eleveai-maths-5e-frac-calcul-defi.png",
+      "titre": "Voyage scolaire : de 18/20 à 90 % — Défi : calculer avec les fractions — épisode 10 · Maths 5e",
+      "accroche": "Romane organise des voyages scolaires. Le voyage d'une classe a un budget de 1 200 euros : le car coûte 3/20 du budget, l'hébergement 1/2, les repas 1/4. Quelle part du budget est dépensée ? Et combien reste-t-il pour les activités ?\n\nDans cette vidéo :\n• additionner en vingtièmes : 3/20 + 10/20 + 5/20 = 18/20 (pas 5/26 !)\n• étape 1, simplifier : 18/20 = 9/10 (le piège : soustraire, 16/18)\n• étape 2, le décimal : 9 ÷ 10 = 0,9, pas 9,10\n• étape 3, le pourcentage : 0,9 = 90 % ; il reste 10 %, soit 120 euros\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : pour une sortie au musée, budget 800 euros : le car coûte 1/5, les billets 3/10. Quel pourcentage est dépensé, et combien d'euros reste-t-il ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/fraction-calcul\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/fraction-calcul\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=fraction_calcul&microId=fraction_calcul_defi&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Simplifier, décimal, pourcentage"
+        ],
+        [
+          "00:10",
+          "Le budget de Romane"
+        ],
+        [
+          "00:33",
+          "D'abord, additionner"
+        ],
+        [
+          "00:57",
+          "Étape 1 : simplifier"
+        ],
+        [
+          "01:13",
+          "Question : simplifie 12/16"
+        ],
+        [
+          "01:43",
+          "Étape 2 : le décimal"
+        ],
+        [
+          "01:55",
+          "Question : 3/5 en décimal"
+        ],
+        [
+          "02:25",
+          "Étape 3 : le pourcentage"
+        ],
+        [
+          "02:38",
+          "Question : 0,45 en pourcentage"
+        ],
+        [
+          "03:09",
+          "Le reste : 120 euros"
+        ],
+        [
+          "03:20",
+          "À toi de jouer"
+        ],
+        [
+          "03:41",
+          "Correction"
+        ],
+        [
+          "04:04",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/5e/fraction-calcul",
+      "tags": [
+        "défi",
+        "additionner des fractions",
+        "simplifier une fraction",
+        "fraction et décimal",
+        "pourcentage",
+        "budget",
+        "voyage scolaire",
+        "fractions",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:13",
+          "question": "Simplifie 12/16.",
+          "choix": [
+            "10/14",
+            "3/4",
+            "6/16"
+          ],
+          "reponse": 1,
+          "explication": "÷ 4 en haut et en bas : 3/4 ; enlever 2 ou ne diviser que le haut, ce sont les pièges."
+        },
+        {
+          "t": "01:55",
+          "question": "3/5 en nombre décimal ?",
+          "choix": [
+            "3,5",
+            "0,6",
+            "5,3"
+          ],
+          "reponse": 1,
+          "explication": "3 ÷ 5 = 0,6 ; 3,5 colle les deux nombres."
+        },
+        {
+          "t": "02:38",
+          "question": "0,45 en pourcentage ?",
+          "choix": [
+            "0,45 %",
+            "4,5 %",
+            "45 %"
+          ],
+          "reponse": 2,
+          "explication": "0,45 = 45 centièmes = 45 %."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "histoire-geographie"
+      ]
+    },
+    {
+      "id": "5e-frac-calcul-defi-short",
+      "notionId": "fraction_calcul",
+      "microId": "fraction_calcul_defi",
+      "classe": "5e",
+      "ceinture": "jaune",
+      "serie": "Maths 5e",
+      "type": "short",
+      "renvoie_vers": "5e-frac-calcul-defi",
+      "fichier": "5e/maths/fractions/10-calcul-defi/eleveai-maths-5e-frac-calcul-defi-short.mp4",
+      "miniature": "5e/maths/fractions/10-calcul-defi/eleveai-maths-5e-frac-calcul-defi-short.png",
+      "titre": "12 victoires sur 20 ou 7 sur 10 : qui gagne le trophée ? 🏆 — 5e #Shorts",
+      "accroche": "Lucas, commentateur d'e-sport : deux joueuses, un seul trophée. Léa a gagné 12 parties sur 20, Inès seulement 7 sur 10. Mais 12/20 = 3/5 = 0,6 = 60 %, et 7/10 = 0,7 = 70 % : Inès gagne le trophée ! Moins de victoires, mais un meilleur pourcentage.\n\n🥋 Ceinture jaune.\n👉 À toi : un joueur gagne 9 parties sur 15 : quel pourcentage de victoires ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=fraction_calcul&microId=fraction_calcul_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #5e #collège",
+      "tags": [
+        "pourcentage",
+        "simplifier une fraction",
+        "e-sport",
+        "jeux vidéo",
+        "commentateur",
+        "fractions",
+        "maths",
+        "5e",
+        "collège",
+        "CRPE",
+        "eleveai",
+        "ceinture jaune",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:19",
+          "question": "Simplifie 12/20.",
+          "choix": [
+            "10/18",
+            "3/5",
+            "6/20"
+          ],
+          "reponse": 1,
+          "explication": "÷ 4 en haut et en bas : 3/5."
+        }
+      ],
+      "centres": [
+        "jeux-video",
+        "jeux-defis"
+      ]
     }
   ]
 }
