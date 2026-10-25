@@ -214,11 +214,16 @@ export default function AccueilNouveau(props: {
         <p className="mb-2 text-sm font-black uppercase tracking-wide text-teal-700">
           EleveAI · le coach qui suit ton programme et tes progrès
         </p>
+        {/* ⭐ 25/10/2026 — Frédéric : le titre ne parlait que des vidéos, « or on a
+            vidéos + coach comme porte d'entrée », « et même évaluation et
+            automatismes et fiches d'exercices » : il nomme toutes les portes.
+            L'évaluation est celle du COACH (/evaluation est l'ancien concours,
+            « disponible le 1er juin » : on n'y envoie pas). */}
         <h1 className="max-w-3xl text-3xl font-black leading-tight sm:text-4xl">
-          Toutes les maths de ton programme, expliquées en vidéo et vérifiées par un professeur
+          Vidéos, coach, automatismes, fiches d&apos;exercices : toutes les maths de ton programme
         </h1>
         <p className="mt-3 max-w-2xl text-lg leading-relaxed text-slate-600">
-          Du CP à la Terminale, dans ton pays. Le coach trouve ce qui te manque et te fait progresser, une notion à la fois.
+          Du CP à la Terminale, dans ton pays. Commence où tu veux : une vidéo pour comprendre, le coach qui t&apos;évalue et trouve ce qui te manque, les automatismes pour aller vite, les exercices corrigés à imprimer. Tout est vérifié par un professeur.
         </p>
       </section>
 
@@ -344,6 +349,22 @@ export default function AccueilNouveau(props: {
                 className="inline-flex items-center gap-2 rounded-full px-5 py-3 font-black text-teal-700 ring-2 ring-teal-700 hover:bg-teal-50"
               >
                 <Camera className="h-4 w-4" aria-hidden="true" /> Ou prendre ton exercice en photo
+              </Lien>
+              {/* ⭐ LES PORTES 4 ET 5 (Frédéric, 25/10 : « et même évaluation et
+                  automatismes et fiches d'exercices »). */}
+              <Lien
+                href="/automatismes-maths"
+                bloc="porte-automatismes"
+                className="inline-flex items-center gap-2 rounded-full px-5 py-3 font-black text-teal-700 ring-2 ring-teal-700 hover:bg-teal-50"
+              >
+                Ou les automatismes
+              </Lien>
+              <Lien
+                href="/fiches-exercices"
+                bloc="porte-fiches-exercices"
+                className="inline-flex items-center gap-2 rounded-full px-5 py-3 font-black text-teal-700 ring-2 ring-teal-700 hover:bg-teal-50"
+              >
+                Ou une fiche d&apos;exercices
               </Lien>
               {profil === "parent" && (
                 <Lien href="/parents" bloc="parents" className="text-sm font-bold text-teal-700 hover:underline">

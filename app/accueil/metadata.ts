@@ -50,8 +50,10 @@ const TITRE = "EleveAI — exercices, coach et cahiers gratuits, du CP au Bac";
 // ⭐ 23/10/2026 : nouvel accueil, nouveau <h1> (« Toutes les maths de ton
 // programme, expliquées en vidéo et vérifiées par un professeur ») → la
 // promesse le suit, selon la règle ci-dessus.
+// ⭐ 25/10/2026 : nouveau <h1> (vidéos, coach, automatismes, fiches d'exercices)
+// → la promesse le suit.
 const PROMESSE =
-  "EleveAI : toutes les maths de ton programme, expliquées en vidéo et vérifiées par un professeur. Du CP à la Terminale, un coach qui suit tes progrès.";
+  "EleveAI : vidéos, coach, automatismes et exercices corrigés, toutes les maths de ton programme vérifiées par un professeur, du CP à la Terminale.";
 
 export const metadata: Metadata = {
   // ⭐ `absolute` ET NON une simple chaîne. Le layout applique le gabarit
