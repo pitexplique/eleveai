@@ -31,6 +31,11 @@ Points à améliorer dans les lots : lignes de réponse qui arrivent 1 à 3 s ap
 - Chiffres de 6e 13 (USGS) et du short 4e 05 (steak) : confirmés par Frédéric le 25/10.
 - PUSH : Frédéric pousse le soir du 25/10 (vérifier la story avant).
 
+## État au 25/10 soir (suite)
+- Coach fractions 5e vert ; CM1 (9 micros, `ba79e698`) et CM2 (13 micros, `69a06cfd`, `672a23ec`) réparés, AUCUNE question open au CM (règle) ; 4e fraction_decimal renforcée `7ec39890`.
+- Feuilles fractions CM1 + CM2 commitées `89debf2a`.
+- Vidéos en cours : 5e G (01-05), 5e H (06-10), CM I (01-04 communs). À lancer : CM J (05-equivalente, 06-decimale, 07-defi communs ; 08-unite, 09-superieure-1 CM1), CM K (CM2 10 à 15). Puis passe finale 5e + CM (comme `a5aee451`).
+
 ## À faire, dans l'ordre
 1. Pour chaque lot non commité : vérifier ce qui existe (`manim/sorties/{6e,4e}/maths/fractions/*/`), `python scripts/verifier-bords-video.py <mp4>` → 0 instants, planche PyAV de 12 images sur 1 ou 2 vidéos par lot (écrans chargés : questions, corrections, « Ce que tu as appris » titre en haut et centré, étiquettes jamais collées). Les `questions`/`centres` sont dans les en-têtes des scripts et dans les voix : les recopier dans `manim/questions-fractions.md`. Committer par chemin (scripts `frac_*`, `*_marques.json`, voix `manim/voix/<classe>-frac-*.json` ; jamais `media-*`, jamais les `*.cues.tsv`).
 2. Relancer UN agent par lot interrompu (4e D, 4e F) en lui donnant l'état ci-dessus, puis le lot 4e E (06 à 09) avec la consigne et les modèles ci-dessus ; 3 agents au plus.
