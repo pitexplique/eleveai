@@ -91,7 +91,7 @@ function Vignette({ v, bloc }: { v: VideoVitrine; bloc: string }) {
   );
 }
 
-function Rangee({ titre, lien, videos, bloc, id, sous }: { titre: string; lien: { href: string; label: string }; videos: VideoVitrine[]; bloc: string; id?: string; sous?: string }) {
+function Rangee({ titre, lien, videos, bloc, id, sous, attente }: { titre: string; lien: { href: string; label: string }; videos: VideoVitrine[]; bloc: string; id?: string; sous?: string; attente?: { texte: string; href: string; label: string } }) {
   return (
     <section id={id} className="mt-8 scroll-mt-24">
       <div className="mb-3 flex items-baseline justify-between gap-3">
@@ -101,15 +101,25 @@ function Rangee({ titre, lien, videos, bloc, id, sous }: { titre: string; lien: 
         </Lien>
       </div>
       {sous && <p className="-mt-2 mb-3 text-sm text-slate-600">{sous}</p>}
-      {videos.length > 0 ? (
+      {videos.length > 0 && (
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           {videos.map((v) => (
             <Vignette key={v.id} v={v} bloc={bloc} />
           ))}
         </div>
-      ) : (
-        <p className="rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-600">Les vidéos de cette classe arrivent.</p>
       )}
+      {/* ⭐ 26/10/2026 : pas de vidéos CE (CE1, CE2, et leurs classes des autres
+          pays) et 2 au CP → un message et le coach plutôt qu'une rangée vide. */}
+      {attente && videos.length < 4 ? (
+        <p className={`${videos.length > 0 ? "mt-3 " : ""}rounded-xl bg-amber-50 px-4 py-3 text-sm text-slate-700 ring-1 ring-amber-200`}>
+          {attente.texte}{" "}
+          <Lien href={attente.href} bloc={`${bloc}-attente`} className="font-bold text-teal-700 underline">
+            {attente.label} →
+          </Lien>
+        </p>
+      ) : videos.length === 0 ? (
+        <p className="rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-600">Les vidéos de cette classe arrivent.</p>
+      ) : null}
     </section>
   );
 }
@@ -465,6 +475,13 @@ export default function AccueilNouveau(props: {
         bloc="videos-classe"
         id="videos-classe"
         sous="Chaque vidéo te mène à sa fiche d'exercices, à son cours et au coach."
+        attente={{
+          texte: (props.parClasse[classeVideos] ?? []).length > 0
+            ? "D'autres vidéos arrivent bientôt. En attendant, le coach t'entraîne sur tout ton programme."
+            : `Les vidéos de ${nomClasse} arrivent bientôt. En attendant, le coach t'entraîne sur tout ton programme.`,
+          href: `/coach-ia/maths?classe=${classeVideos}`,
+          label: "Ouvrir le coach",
+        }}
       />
       <Rangee titre="Les maths dehors" lien={{ href: "/maths-974", label: "Toutes" }} videos={props.dehors} bloc="dehors" />
 
