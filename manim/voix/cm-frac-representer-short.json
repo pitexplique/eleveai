@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Zoé crée des puzzles. Elle coupe un carré en 4 parts égales. De combien de façons ?",
+  "01-facons": "En 4 bandes. En 4 petits carrés. En 4 triangles. Toutes ces parts sont des quarts : elles ont la même taille !",
+  "02-piege": "Mais là, les 4 parts ne sont pas pareilles : ce ne sont pas des quarts !",
+  "03-question": "Question ! Ce carré est coupé en 2 triangles égaux. 1 triangle, c'est quelle fraction ? A : 1 demi. B : 1 quart. C : 2 demis. Mets pause !",
+  "03b-reponse": "Réponse A. 2 parts égales : des demis. 1 triangle, c'est 1 demi.",
+  "04-question": "À toi : Zoé coupe un carré en 8 parts égales et en colorie 6. Quelle fraction ? Réponds en commentaire !"
+}

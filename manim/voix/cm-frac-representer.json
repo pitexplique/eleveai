@@ -1,0 +1,16 @@
+{
+  "00-garde": "Représenter une fraction. Comment dessiner 2 tiers ?",
+  "01-situation": "Voici Maya, éleveuse de poules. Ce matin, ses poules ont pondu. Elle range les œufs dans une boîte de 6 places. 4 places sont pleines. Quelle fraction de la boîte est pleine ?",
+  "02-lire": "On compte toutes les places : 6. On l'écrit en bas. Puis les places pleines : 4. On l'écrit en haut. La boîte est pleine aux 4 sixièmes.",
+  "03-dessiner": "Et pour dessiner 3 quarts ? D'abord le bas : 4. On partage en 4 parts égales. Puis le haut : 3. On colorie 3 parts. Avec une barre ou avec un disque, c'est pareil !",
+  "04-question": "Question ! Pour dessiner 5 huitièmes, combien de parts faut-il colorier ? A : 8. B : 5. C : 3. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. On partage en 8 parts égales, et on en colorie 5, comme le numérateur.",
+  "05-piege": "Attention au piège ! Les parts doivent être égales. Cette galette est coupée en 4, mais les parts ne sont pas pareilles : ce ne sont pas des quarts ! Ici, les 4 parts sont égales : ce sont des quarts.",
+  "06-grille": "Avec une grille, on compte toutes les cases. Le plateau de Maya a 2 rangées de 6 cases : 2 fois 6, égale 12 cases. 7 sont pleines, et 5 sont vides. Les cases vides font 5 douzièmes du plateau.",
+  "07-question": "Question ! Une barre a 10 parts égales. 3 sont coloriées. Quelle fraction n'est pas coloriée ? A : 3 dixièmes. B : 7 dixièmes. C : 7 tiers. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. 10 parts en tout, en bas. 10 moins 3, égale 7 parts blanches, en haut : 7 dixièmes.",
+  "08-defi": "À toi de jouer ! Maya a une boîte de 12 œufs. Pour un gâteau, elle prend 1 quart des œufs. Combien d'œufs prend-elle ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 1 quart : on partage les 12 œufs en 4 paquets égaux. 12 divisé par 4, égale 3 : 3 œufs par paquet. Maya prend 1 paquet : 3 œufs. 3 douzièmes, c'est la même part que 1 quart !",
+  "09-finale": "Ce que tu as appris. On partage en parts égales, autant que le dénominateur. On colorie autant de parts que le numérateur. Barre, disque ou grille : ça marche avec toutes les formes.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -1,0 +1,16 @@
+{
+  "00-garde": "Placer une fraction sur une droite graduée. Où se trouve 3 quarts ?",
+  "01-situation": "Voici Salomé, maître-nageuse. Elle entraîne Tom. Le bassin va d'un bord, 0, à l'autre bord, 1. Des bouées le partagent en 4 parts égales. Tom s'arrête aux 3 quarts. Où est-il ?",
+  "02-methode": "On part de 0. Le dénominateur, 4 : l'unité est partagée en 4 parts égales. Chaque part, c'est 1 quart. Le numérateur, 3 : on avance de 3 parts. 1 quart, 2 quarts, 3 quarts : Tom est là !",
+  "03-piege": "Attention au piège ! Entre 0 et 1, on voit 5 traits, mais il n'y a que 4 parts. On compte les parts, les espaces entre les traits. On ne compte pas les traits !",
+  "04-question": "Question ! Quelle fraction marque le point bleu ? A : 2 sixièmes. B : 2 cinquièmes. C : 5 demis. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. Entre 0 et 1, il y a 5 parts : des cinquièmes. Le point est à 2 parts de 0 : 2 cinquièmes.",
+  "05-milieu": "Salomé met une bouée rouge au milieu du bassin. Avec 4 parts, le milieu, c'est 2 quarts. C'est aussi 1 demi : la même place !",
+  "06-apres": "Tom touche le bord, puis repart. De 1 à 2, il y a aussi 4 parts. On continue de compter : 4 quarts, c'est 1. Puis 5 quarts, 6 quarts. Tom est à 6 quarts : après 1 !",
+  "07-question": "Question ! Chaque unité a 3 parts égales. Où se place 4 tiers ? A : avant 1. B : sur 1. C : après 1. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. 3 tiers, c'est 1. 4 tiers, c'est 1 part de plus : après 1.",
+  "08-defi": "À toi de jouer ! Ce bassin est partagé en 8 parts égales. Tom s'arrête au point bleu. Quelle fraction de la longueur a-t-il nagée ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Entre 0 et 1, on compte 8 parts : des huitièmes. De 0 au point : 5 parts. Tom a nagé 5 huitièmes de la longueur. Il a passé la moitié : 4 huitièmes !",
+  "09-finale": "Ce que tu as appris. Le dénominateur dit en combien de parts égales on partage l'unité. Le numérateur dit de combien de parts on avance depuis 0. On compte les parts, pas les traits. Et après 1, on continue de compter.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

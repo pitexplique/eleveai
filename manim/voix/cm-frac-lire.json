@@ -1,0 +1,16 @@
+{
+  "00-garde": "Lire une fraction. 3 huitièmes, 2 tiers, 1 demi : comment lit-on ces nombres ?",
+  "01-situation": "Voici Léo, chocolatier. Il fabrique une tablette de 8 carrés, tous pareils. Il en offre 3 à sa sœur. Quelle part de la tablette a-t-il offerte ?",
+  "02-bas": "On compte d'abord tous les carrés : 8. C'est le dénominateur. On l'écrit en bas. Il dit en combien de parts égales on a partagé la tablette.",
+  "03-haut": "Puis les carrés offerts : 3. C'est le numérateur. On l'écrit en haut. Il compte les parts prises. On lit : 3 huitièmes.",
+  "04-question": "Question ! Dans 5 sixièmes, quel nombre est le numérateur ? A : 6. B : 5. C : 11. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. Le numérateur est en haut : 5. Il compte les parts prises. Le dénominateur, 6, compte toutes les parts.",
+  "05-noms": "Pour lire, le dénominateur donne le nom des parts. En 2 parts égales : des demis. En 3 : des tiers. En 4 : des quarts. Après, on ajoute « ième » : en 5, des cinquièmes. En 10, des dixièmes.",
+  "06-piege": "Attention au piège ! 3 quarts, on ne dit pas « 3 quatrièmes ». 1 demi, on ne dit pas « 1 deuxième ». Pour 2, 3 et 4, on dit : demi, tiers, quart.",
+  "07-question": "Question ! Léo dit : « J'ai vendu 7 dixièmes de mes chocolats. » Quelle fraction écrit-il ? A : 10 en haut, 7 en bas. B : 7 en haut, 10 en bas. C : 7 en haut, 100 en bas. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Le nombre dit en premier va en haut : 7. Dixièmes : 10 parts en tout, en bas.",
+  "08-defi": "À toi de jouer ! Léo fait une tablette de 10 carrés. Il en mange 1, et il en offre 4. Quelle fraction de la tablette a-t-il offerte ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 10 carrés en tout : 10 en bas. 4 carrés offerts : 4 en haut. Léo a offert 4 dixièmes de la tablette. Le carré mangé ne compte pas ! Et regarde : en groupant les carrés par 2, c'est aussi 2 cinquièmes.",
+  "09-finale": "Ce que tu as appris. Le dénominateur, en bas, compte toutes les parts égales. Le numérateur, en haut, compte les parts prises. On lit : demis, tiers, quarts, puis cinquièmes, sixièmes, et ainsi de suite.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

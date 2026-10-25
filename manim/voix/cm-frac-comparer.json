@@ -1,0 +1,16 @@
+{
+  "00-garde": "Comparer des fractions. 1 quart ou 1 huitième : lequel est le plus grand ?",
+  "01-situation": "Voici Nolan, testeur de jeux vidéo. Il vérifie les barres d'énergie des héros. Le héros bleu a 3 cinquièmes de sa barre. Le héros vert, 4 cinquièmes. Qui a le plus d'énergie ?",
+  "02-meme-den": "Les 2 barres ont 5 parts : des parts de même taille. On compare le nombre de parts : 4 est plus grand que 3. Donc 4 cinquièmes est plus grand que 3 cinquièmes. Le héros vert a le plus d'énergie.",
+  "03-question": "Question ! Quel signe entre 5 huitièmes et 7 huitièmes ? A : plus petit que. B : plus grand que. C : égal. Mets pause, et choisis !",
+  "03b-reponse": "Réponse A. Même dénominateur : on compare 5 et 7. 5 est plus petit que 7, donc 5 huitièmes est plus petit que 7 huitièmes.",
+  "04-meme-num": "Nolan teste 2 potions. L'une remplit 1 quart de la barre, l'autre 1 huitième. 8 est plus grand que 4… mais la part est plus petite ! Plus on partage, plus les parts sont petites. 1 quart est plus grand que 1 huitième.",
+  "05-piege": "Attention au piège ! Un grand nombre en bas ne fait pas une grande fraction. 1 dixième est plus petit que 1 demi.",
+  "06-question": "Question ! Quelle fraction est la plus grande ? A : 1 sixième. B : 1 tiers. C : 1 cinquième. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. Même numérateur, 1 : la plus grande a le plus petit dénominateur. En 3 parts, les parts sont plus grosses.",
+  "07-moitie": "Et pour comparer à la moitié ? 3 huitièmes : la moitié de 8, c'est 4. 3 est plus petit que 4 : 3 huitièmes, c'est moins de la moitié. Et 4 huitièmes, c'est pile la moitié : 1 demi !",
+  "08-defi": "À toi de jouer ! Nolan a 3 barres : 2 sixièmes, 5 sixièmes et 1 sixième. Range-les de la plus petite à la plus grande. Mets pause, et cherche !",
+  "08b-correction": "Correction. Même dénominateur : on range les numérateurs, 1, puis 2, puis 5. 1 sixième est plus petit que 2 sixièmes, plus petit que 5 sixièmes.",
+  "09-finale": "Ce que tu as appris. Même dénominateur : on compare les numérateurs. Même numérateur : plus il y a de parts, plus elles sont petites. Un grand nombre en bas, c'est une petite part !",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}
