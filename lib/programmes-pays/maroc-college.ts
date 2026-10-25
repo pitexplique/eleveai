@@ -67,7 +67,7 @@ export const MAROC_1AC: ProgrammePays = {
       couverture: "partielle",
       micros: [
         ...m("6e", "fraction_egale", "fraction_comparer"),
-        ...m("5e", "fraction_simplifier", "fraction_comparer"),
+        ...m("5e", "fraction_egale", "fraction_simplifier", "fraction_comparer"),
       ],
       note: "Manque le quotient à dénominateur décimal rendu entier (2,5 ÷ 1,5 = 25 ÷ 15) comme exercice à part.",
     },

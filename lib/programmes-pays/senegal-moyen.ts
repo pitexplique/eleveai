@@ -70,7 +70,7 @@ export const SENEGAL_6E: ProgrammePays = {
       texte: "Multiplication de décimaux arithmétiques : facteur, produit, distributivité ; multiplier par une fraction a/b.",
       couverture: "complete",
       micros: [
-        ...m("6e", "decimal_multiplier", "decimal_multiplier_par_01", "entier_multiplication_posee", "entier_multiplication_mentale", "fraction_quantite"),
+        ...m("6e", "decimal_multiplier", "decimal_multiplier_par_01", "entier_multiplication_posee", "entier_multiplication_mentale", "fraction_quantite", "fraction_multiplier_entier"),
         ...m("5e", "litteral_distributivite"),
       ],
     },
@@ -333,7 +333,7 @@ export const SENEGAL_4E: ProgrammePays = {
       texte: "Nombres rationnels : définition, écritures, valeur absolue, simplification, opérations dans ℚ, comparaison, opérations et inégalités, approximation décimale, intervalles.",
       couverture: "partielle",
       micros: [
-        ...m("4e", "fraction_rationnel", "fraction_simplifier", "fraction_comparer", "fraction_additionner", "fraction_multiplier", "fraction_inverse", "fraction_diviser", "fraction_oppose", "fraction_decimal"),
+        ...m("4e", "fraction_rationnel", "fraction_egale", "fraction_simplifier", "fraction_comparer", "fraction_additionner", "fraction_multiplier", "fraction_inverse", "fraction_diviser", "fraction_oppose", "fraction_decimal"),
         ...m("5e", "relatif_valeur_absolue"),
         ...m("seconde", "intervalle_representer", "reels_encadrement"),
       ],
