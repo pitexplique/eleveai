@@ -2,6 +2,7 @@
 import { ETATS_UNIS_GRADE_8 } from "./etats-unis-grade-8";
 import { MAROC_3AC } from "./maroc-3ac";
 import { MAROC_1AC, MAROC_2AC } from "./maroc-college";
+import { MAROC_1BAC, MAROC_2BAC, MAROC_TC } from "./maroc-lycee";
 import { ONTARIO_9E_MTH1W } from "./ontario-9e-mth1w";
 import {
   QUEBEC_1E_ANNEE,
@@ -33,6 +34,9 @@ export const PROGRAMMES_PAYS: ProgrammePays[] = [
   MAROC_1AC,
   MAROC_2AC,
   MAROC_3AC,
+  MAROC_TC,
+  MAROC_1BAC,
+  MAROC_2BAC,
   ETATS_UNIS_GRADE_8,
   SENEGAL_6E,
   SENEGAL_5E,
