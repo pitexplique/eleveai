@@ -160,6 +160,8 @@ function Defi({ defi }: { defi: DefiGenere }) {
 export default function AccueilNouveau(props: {
   totalVideos: number;
   parClasse: Record<string, VideoVitrine[]>;
+  /** Par pays : ses groupes de classes ; `eq` = classe française qui correspond, null si pas encore de matrice. */
+  classesPays: Record<string, { titre: string; classes: { cle: string; court: string; eq: string | null }[] }[]>;
   dehors: VideoVitrine[];
   une: (VideoVitrine & { classe: string }) | null;
   defi: DefiGenere;
@@ -168,6 +170,7 @@ export default function AccueilNouveau(props: {
   const [profil, setProfil] = useState<Profil>("eleve");
   const [pays, setPays] = useState<string>("france");
   const [classe, setClasse] = useState<string>("4e");
+  const [cleChoisie, setCleChoisie] = useState<string | null>(null);
 
   useEffect(() => {
     try {
@@ -183,10 +186,17 @@ export default function AccueilNouveau(props: {
     } catch {}
   }, [profil, pays, classe]);
 
-  const nomClasse = NOM_CLASSE.get(classe) ?? classe;
   const autrePays = PAYS.find((p) => p.slug === pays);
-  const appel =
-    profil === "eleve"
+  // La classe choisie dans un autre pays : celle cliquée, sinon la première qui a sa matrice.
+  const ouvertesPays = autrePays ? (props.classesPays[autrePays.slug] ?? []).flatMap((g) => g.classes).filter((c) => c.eq) : [];
+  const trouvee = ouvertesPays.find((c) => c.cle === cleChoisie) ?? ouvertesPays[0];
+  const clePays = trouvee?.eq ? { cle: trouvee.cle, court: trouvee.court, eq: trouvee.eq } : null;
+  // Les vidéos et le nom affiché suivent la classe française qui correspond.
+  const classeVideos = autrePays ? (clePays?.eq ?? classe) : classe;
+  const nomClasse = autrePays && clePays ? clePays.court : (NOM_CLASSE.get(classe) ?? classe);
+  const appel = autrePays
+    ? `Ouvrir le programme de ${nomClasse} (${autrePays.nom})`
+    : profil === "eleve"
       ? `Commencer avec le coach de ${nomClasse}`
       : profil === "parent"
         ? `Voir ce qu'on travaille en ${nomClasse}`
@@ -284,21 +294,52 @@ export default function AccueilNouveau(props: {
           </figcaption>
         </figure>
 
+        {/* ⭐ 25/10/2026 — Frédéric : « quand on clique sur France, les classes
+            s'affichent, et les vidéos ; peut-on faire pareil pour les autres
+            pays : mets en gris ceux qui n'existent pas, et pour les autres le
+            même système ». Les classes DU PAYS (sans matrice = grisées), la
+            classe française qui correspond, ses vidéos plus bas. */}
         {autrePays ? (
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl bg-sky-50 px-4 py-3">
-            <p className="text-sm text-slate-700">
-              Le coach suit le programme officiel : {autrePays.nom}. Tes classes, tes notions, nos vidéos.
-            </p>
-            <Lien
-              href={`/pays/${autrePays.slug}`}
-              bloc="pays"
-              className="inline-flex items-center gap-1 rounded-full bg-teal-700 px-4 py-2 text-sm font-bold text-white hover:bg-teal-800"
-            >
-              Ouvrir le coach de ce pays <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </Lien>
-          </div>
-        ) : (
           <>
+            <div className="mt-4 flex flex-col gap-3 lg:flex-row lg:flex-wrap lg:gap-0">
+              {(props.classesPays[autrePays.slug] ?? []).map((g, i) => (
+                <div key={g.titre} className={i === 0 ? "lg:pr-4" : "lg:border-l lg:border-slate-200 lg:px-4"}>
+                  <p className="mb-1.5 text-xs font-black uppercase tracking-wide text-slate-500">{g.titre}</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {g.classes.map((c) =>
+                      c.eq ? (
+                        <button
+                          key={c.cle}
+                          type="button"
+                          aria-pressed={clePays?.cle === c.cle}
+                          onClick={() => setCleChoisie(c.cle)}
+                          className={`min-w-[3rem] rounded-lg px-3 py-1.5 text-sm font-black transition ${
+                            clePays?.cle === c.cle ? "bg-teal-700 text-white" : "bg-slate-100 text-slate-800 hover:bg-slate-200"
+                          }`}
+                        >
+                          {c.court}
+                        </button>
+                      ) : (
+                        <span
+                          key={c.cle}
+                          title="Bientôt : ce programme n'est pas encore relevé"
+                          className="min-w-[3rem] cursor-not-allowed rounded-lg bg-slate-50 px-3 py-1.5 text-center text-sm font-black text-slate-300"
+                        >
+                          {c.court}
+                        </span>
+                      ),
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+            {clePays && (
+              <p className="mt-3 text-sm text-slate-600">
+                {clePays.court} ({autrePays.nom}), en France : <span className="font-bold">{NOM_CLASSE.get(clePays.eq) ?? clePays.eq}</span>. Même âge, mêmes vidéos.
+              </p>
+            )}
+          </>
+        ) : (
             <div className="mt-4 flex flex-col gap-3 lg:flex-row lg:gap-0">
               {CYCLES.map((c, i) => (
                 <div key={c.titre} className={i === 0 ? "lg:pr-4" : "lg:border-l lg:border-slate-200 lg:px-4"}>
@@ -321,10 +362,11 @@ export default function AccueilNouveau(props: {
                 </div>
               ))}
             </div>
+        )}
             <div className="mt-4 flex flex-wrap items-center gap-3">
               <Lien
-                href={`/coach-ia/maths?classe=${classe}`}
-                bloc={`coach-${profil}`}
+                href={autrePays ? `/pays/${autrePays.slug}${clePays ? `?classe=${encodeURIComponent(clePays.cle)}` : ""}` : `/coach-ia/maths?classe=${classe}`}
+                bloc={autrePays ? `pays-${autrePays.slug}` : `coach-${profil}`}
                 className="inline-flex items-center gap-2 rounded-full bg-teal-700 px-5 py-3 font-black text-white shadow hover:bg-teal-800"
               >
                 {appel} <ArrowRight className="h-5 w-5" aria-hidden="true" />
@@ -377,8 +419,6 @@ export default function AccueilNouveau(props: {
                 </Lien>
               )}
             </div>
-          </>
-        )}
       </section>
 
       {/* 3. LES PREUVES */}
@@ -414,16 +454,18 @@ export default function AccueilNouveau(props: {
       </Lien>
 
       {/* 5. LA BIBLIOTHÈQUE */}
-      {!autrePays && (
-        <Rangee
-          titre={`Les vidéos de ${nomClasse}`}
-          lien={{ href: "/video", label: "Toute la bibliothèque" }}
-          videos={props.parClasse[classe] ?? []}
-          bloc="videos-classe"
-          id="videos-classe"
-          sous="Chaque vidéo te mène à sa fiche d'exercices, à son cours et au coach."
-        />
-      )}
+      <Rangee
+        titre={
+          autrePays && clePays
+            ? `Les vidéos de ${clePays.court} (${NOM_CLASSE.get(clePays.eq) ?? clePays.eq} en France)`
+            : `Les vidéos de ${nomClasse}`
+        }
+        lien={{ href: "/video", label: "Toute la bibliothèque" }}
+        videos={props.parClasse[classeVideos] ?? []}
+        bloc="videos-classe"
+        id="videos-classe"
+        sous="Chaque vidéo te mène à sa fiche d'exercices, à son cours et au coach."
+      />
       <Rangee titre="Les maths dehors" lien={{ href: "/maths-974", label: "Toutes" }} videos={props.dehors} bloc="dehors" />
 
       {/* 6. LE JOURNAL EN TROIS CASES */}
