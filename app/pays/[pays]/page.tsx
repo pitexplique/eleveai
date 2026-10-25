@@ -1,7 +1,7 @@
 // /pays/<pays> — le programme officiel d'un pays francophone, contenu par
 // contenu, avec les compétences du coach qui le travaillent (matrice
-// lib/programmes-pays). ⚠️ Version d'ÉTUDE (22/10/2026) : pas indexée, les
-// correspondances restent à vérifier.
+// lib/programmes-pays). Version d'étude le 22/10/2026 ; INDEXÉE depuis le
+// 25/10/2026 (6 pays, programmes officiels relevés, voir generateMetadata).
 // Même habillage que la page du coach France (/coach-ia/maths) — Frédéric :
 // « même css que coach France » : fond clair, une carte blanche par domaine,
 // GO vert pour lancer la série.
@@ -19,17 +19,31 @@ import { displayParamForClasse } from "@/lib/tutor-v4/displayMode";
 import { CLASSES_PAYS, infoPays, programmesDuPays } from "@/lib/programmes-pays/pays";
 import type { ContenuPays, Couverture, ProgrammePays, RenvoiMicro } from "@/lib/programmes-pays/types";
 
+// ⭐ 25/10/2026 — Frédéric : « écris le sitemap de Google pour qu'il sache
+// qu'on fait programme francophone, Maroc, etc. ». La page sort de l'étude :
+// INDEXÉE, une adresse par classe du pays (?classe=…), au sitemap (app/sitemap.ts).
 export async function generateMetadata({
   params,
+  searchParams,
 }: {
   params: Promise<{ pays: string }>;
+  searchParams: Promise<{ classe?: string }>;
 }): Promise<Metadata> {
   const { pays } = await params;
+  const { classe } = await searchParams;
   const info = infoPays(pays);
   if (!info) return {};
+  const programmes = programmesDuPays(info.slug);
+  const p = programmes.find((x) => x.cle === classe) ?? (classe ? null : programmes[0]);
+  const du = DU_PAYS[info.slug] ?? `de ${info.nom}`;
+  const niveau = p ? `, ${p.niveau}` : "";
   return {
-    title: `Programme de maths : ${info.nom}`,
-    robots: { index: false, follow: false },
+    title: `Programme de maths ${du}${niveau} : exercices corrigés et vidéos`,
+    description: `Le programme officiel de mathématiques ${du}${niveau}, point par point, en français : pour chaque notion, une série d'exercices corrigés, une fiche de cours et des vidéos, vérifiées par un professeur. Gratuit.`,
+    // La première classe est servie par /pays/<pays> : une seule adresse pour elle.
+    alternates: { canonical: `/pays/${info.slug}${p && p !== programmes[0] ? `?classe=${encodeURIComponent(p.cle)}` : ""}` },
+    // Une classe encore grisée (sans matrice) n'est pas indexée.
+    robots: p ? { index: true, follow: true } : { index: false, follow: true },
   };
 }
 
@@ -39,7 +53,14 @@ const LIBELLE_CLASSE: Record<string, string> = {
 };
 
 /** « Programme du … » : l'article de chaque pays. */
-const DU_PAYS: Record<string, string> = { maroc: "du Maroc", quebec: "du Québec", senegal: "du Sénégal", belgique: "de la Fédération Wallonie-Bruxelles" };
+const DU_PAYS: Record<string, string> = {
+  maroc: "du Maroc",
+  quebec: "du Québec",
+  senegal: "du Sénégal",
+  belgique: "de la Fédération Wallonie-Bruxelles",
+  suisse: "de Suisse romande",
+  "cote-divoire": "de Côte d'Ivoire",
+};
 
 const BADGE: Record<Couverture, { texte: string; cls: string }> = {
   complete: { texte: "Couvert", cls: "border-green-300 bg-green-50 text-green-800" },

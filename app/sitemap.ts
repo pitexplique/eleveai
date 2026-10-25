@@ -8,6 +8,7 @@ import { UNE_COURANTE } from "@/lib/accueil/une";
 import { PDF_DISPONIBLES } from "@/lib/fiches/pdf-disponibles";
 import { FICHES_REGISTRE } from "@/lib/fiches/registre";
 import { FICHES_EXERCICES_REGISTRE } from "@/lib/fiches-exercices/registre";
+import { PAYS, programmesDuPays } from "@/lib/programmes-pays/pays";
 import {
   FAMILLES as FAMILLES_ECRITURE,
   FICHES as FICHES_ECRITURE,
@@ -1330,10 +1331,31 @@ const VIDEOS_UNE: VideoSitemap[] = (UNE_COURANTE?.diapos ?? [])
     description: d.accroche,
   }));
 
+/* ─── ⭐ 25/10/2026 — LES PROGRAMMES FRANCOPHONES ──────────────────────────
+   Frédéric : « écris le sitemap de Google pour qu'il sache qu'on fait
+   programme francophone, Maroc, etc. ». Une adresse par pays proposé (Suisse
+   romande, Belgique, Québec, Maroc, Sénégal, Côte d'Ivoire), puis une par
+   classe qui a sa matrice (/pays/<pays>?classe=<clé>, l'adresse canonique de
+   la page). Les classes grisées, sans matrice, n'y sont pas (noindex). La
+   liste suit lib/programmes-pays : un pays ajouté entre seul au sitemap. */
+const LASTMOD_PAYS = new Date("2026-10-25");
+const paysRoutes: RouteConfig[] = PAYS.flatMap((info) => [
+  { path: `/pays/${info.slug}`, priority: 0.8, changeFrequency: "weekly" as const, lastMod: LASTMOD_PAYS },
+  ...programmesDuPays(info.slug)
+    .slice(1) // la première classe est déjà servie par /pays/<pays>
+    .map((p) => ({
+      path: `/pays/${info.slug}?classe=${encodeURIComponent(p.cle)}`,
+      priority: 0.7,
+      changeFrequency: "weekly" as const,
+      lastMod: LASTMOD_PAYS,
+    })),
+]);
+
 export default function sitemap(): MetadataRoute.Sitemap {
   // Routes statiques
   const staticRoutes = [
     ...ROUTES,
+    ...paysRoutes,
     ...jeuxCartesRoutes,
     ...fichesRoutes,
     ...fichesExercicesRoutes,
