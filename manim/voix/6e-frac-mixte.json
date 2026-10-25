@@ -1,0 +1,19 @@
+{
+  "00-garde": "Encadrer, ranger, écriture mixte. 7 quarts, c'est plus ou moins que 1 ?",
+  "01-situation": "Voici Awa, productrice de musique. Dans son logiciel, une mesure dure 4 temps. Son effet sonore dure 7 temps : 7 quarts de mesure. Où se termine-t-il ?",
+  "02-droite": "Sur la demi-droite, chaque unité est une mesure. On coupe chaque mesure en 4 : ce sont des quarts. On avance de 7 quarts : 1, 2, 3, 4, 5, 6, 7. L'effet se termine ici, à 7 quarts.",
+  "03-comparer-1": "D'abord, on compare à 1. 4 quarts, c'est une mesure entière : 4 quarts égale 1. Ici, 7 est plus grand que 4 : 7 quarts est plus grand que 1. Avec 3 quarts, 3 est plus petit que 4 : 3 quarts est plus petit que 1.",
+  "04-mixte": "7 quarts, c'est 4 quarts, plus 3 quarts. Donc 7 quarts égale 1 plus 3 quarts. On lit : 1 et 3 quarts. C'est l'écriture mixte.",
+  "05-piege": "Attention au piège ! Le 7 ne compte pas des mesures : il compte des quarts. 7 quarts n'est pas près de 7. Il est entre 1 et 2 : c'est encadrer.",
+  "06-question": "Question ! Entre quels entiers se trouve 7 tiers ? A : entre 2 et 3. B : entre 7 et 8. C : entre 1 et 2. Mets pause, et choisis !",
+  "06b-reponse": "Réponse A. 6 tiers égale 2, et 9 tiers égale 3. 7 est entre 6 et 9 : 7 tiers égale 2 plus 1 tiers.",
+  "07-demi": "Autre repère : 1 demi. 2 cinquièmes, 3 cinquièmes : lequel dépasse 1 demi ? On double le numérateur. 2 fois 2, égale 4 : moins que 5. Donc 2 cinquièmes est plus petit que 1 demi. 2 fois 3, égale 6 : plus que 5. Donc 3 cinquièmes est plus grand.",
+  "08-ranger": "Avec ces repères, on range sans calcul. Awa a trois sons : 5 tiers, 3 quarts et 2 cinquièmes. 5 tiers dépasse 1. 3 quarts est entre 1 demi et 1. 2 cinquièmes est plus petit que 1 demi. L'ordre : 2 cinquièmes, puis 3 quarts, puis 5 tiers.",
+  "09-question": "Question ! Laquelle est plus petite que 1 demi ? A : 3 cinquièmes. B : 4 neuvièmes. C : 5 huitièmes. Mets pause, et choisis !",
+  "09b-reponse": "Réponse B. 2 fois 4, égale 8 : moins que 9. Donc 4 neuvièmes est plus petit que 1 demi.",
+  "10-defi": "À toi de jouer ! Range dans l'ordre croissant : 3 demis, 5 quarts, et 1 plus 3 quarts. Mets pause, et cherche !",
+  "10b-correction": "Correction. Les trois sont entre 1 et 2 : on regarde ce qui dépasse 1. 5 quarts égale 1 plus 1 quart. 3 demis égale 1 plus 1 demi, c'est-à-dire 2 quarts. Le dernier dépasse de 3 quarts. L'ordre : 5 quarts, puis 3 demis, puis 1 plus 3 quarts.",
+  "11-chaine": "Une dernière chose. 3 quarts égale 0,75 : c'est 75 %. Donc 7 quarts égale 1,75 : une mesure entière, et 75 % de la suivante.",
+  "12-finale": "Ce que tu as appris. On compare d'abord à 1 : numérateur plus grand, la fraction dépasse 1. Puis à 1 demi : on double le numérateur. On encadre entre deux entiers. Et 7 quarts égale 1 plus 3 quarts.",
+  "13-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

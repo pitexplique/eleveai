@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Lou, biologiste, étudie une grenouille. À chaque saut, elle avance de 1 quart de mètre. Après 9 sauts, où est-elle ?",
+  "01-sauts": "On compte les quarts : 1, 2, 3, 4 : 1 mètre ! 5, 6, 7, 8 : 2 mètres ! Et 9.",
+  "02-surprise": "Surprise : 9 quarts, ce n'est pas vers 9 ! C'est 2 mètres, plus 1 quart. 9 quarts égale 2 plus 1 quart : entre 2 et 3.",
+  "03-question": "Question ! 5 demis, c'est entre quels entiers ? A : entre 1 et 2. B : entre 2 et 3. C : entre 5 et 6. Mets pause !",
+  "03b-reponse": "Réponse B. 4 demis égale 2. Donc 5 demis égale 2 plus 1 demi.",
+  "04-question": "À toi : 11 tiers, c'est entre quels entiers ? Réponds en commentaire !"
+}

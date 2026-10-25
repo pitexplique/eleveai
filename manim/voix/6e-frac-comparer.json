@@ -1,0 +1,16 @@
+{
+  "00-garde": "Comparer des fractions. Laquelle est la plus grande ?",
+  "01-situation": "Voici Yasmine, régulatrice du trafic ferroviaire. Deux trains roulent sur la même ligne. L'écran du train de Sami affiche 3 cinquièmes du trajet. Celui de Nora, 7 dixièmes. Qui est devant ?",
+  "02-meme-den": "D'abord, un cas simple : 3 cinquièmes et 4 cinquièmes. Les deux barres sont coupées en 5 : les parts ont la même taille. On compare les numérateurs : 4 est plus grand que 3. Donc 4 cinquièmes est plus grand que 3 cinquièmes.",
+  "03-meme-num": "Et maintenant : 1 tiers, ou 1 cinquième ? Attention au piège ! 5 est plus grand que 3. Mais regarde les barres : couper en 5 donne des parts plus petites. 1 cinquième est plus petit que 1 tiers. Plus on coupe, plus les parts sont petites !",
+  "04-question": "Question ! Laquelle est la plus grande ? A : 1 huitième. B : 1 quart. C : 1 sixième. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 1 quart : on coupe en 4 seulement. Ce sont les plus grandes parts.",
+  "05-redecouper": "Revenons aux trains de Sami et Nora : 3 cinquièmes et 7 dixièmes. Ici, les parts n'ont pas la même taille. Mais 5 fois 2, égale 10. Alors on coupe chaque cinquième en 2. Et 3 fois 2, égale 6 : 3 cinquièmes égale 6 dixièmes. Maintenant, les parts sont les mêmes : 6 dixièmes est plus petit que 7 dixièmes. Nora est devant !",
+  "06-question": "Question ! Compare 2 tiers et 5 sixièmes. A : 2 tiers est plus petit. B : elles sont égales. C : 2 tiers est plus grand. Mets pause, et choisis !",
+  "06b-reponse": "Réponse A. 2 tiers égale 4 sixièmes. Et 4 sixièmes est plus petit que 5 sixièmes. Enlever 3 en haut et en bas, c'est le piège !",
+  "07-defi": "À toi de jouer ! Le lendemain, le train de Sami a parcouru 3 quarts du trajet. Celui de Nora, 5 huitièmes. Qui est devant ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 4 fois 2, égale 8 : on coupe chaque quart en 2. Et 3 fois 2, égale 6. 3 quarts égale 6 huitièmes. Or 6 huitièmes est plus grand que 5 huitièmes : cette fois, Sami est devant ! Si tu as répondu Nora parce que 5 est plus grand que 3, redécoupe d'abord !",
+  "08-chaine": "L'écran de contrôle affiche aussi un pourcentage. 6 dixièmes, c'est 6 divisé par 10, égale 0,6. Et 0,6, c'est 60 %. Pour Nora, 7 dixièmes égale 0,7 : 70 %. 60 % est plus petit que 70 % : même réponse ! Fraction, puis décimal, puis pourcentage : c'est toujours la même chaîne.",
+  "09-finale": "Ce que tu as appris. Même dénominateur : on compare les numérateurs. Même numérateur : plus on coupe, plus les parts sont petites. Sinon, on redécoupe pour avoir les mêmes parts.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

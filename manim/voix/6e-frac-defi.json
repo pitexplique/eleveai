@@ -1,0 +1,16 @@
+{
+  "00-garde": "Défis sur les fractions. Prêt pour une mission sur Mars ?",
+  "01-situation": "Voici Inaya, ingénieure spatiale. Elle prépare un rover pour Mars. Avant le départ, elle a 5 défis à relever. Relève-les avec elle !",
+  "02-batterie": "Défi 1 : la batterie du rover. Elle a 8 cases, et 4 sont chargées. Est-ce la moitié ? On regroupe les cases 4 par 4 : 4 huitièmes égale 1 demi. Oui, c'est la moitié !",
+  "03-question": "Question ! Le rover a 24 panneaux solaires. 1 quart est couvert de poussière. Combien faut-il en nettoyer ? A : 6. B : 4. C : 20. Mets pause, et choisis !",
+  "03b-reponse": "Réponse A. 1 quart de 24, c'est 24 divisé par 4, égale 6 : une rangée sur 4.",
+  "04-question": "Question ! Le rover a roulé 2 huitièmes de son trajet. Quelle fraction plus simple Inaya écrit-elle ? A : 1 quart. B : 1 septième. C : 2 quarts. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. On divise en haut ET en bas par 2 : 2 huitièmes égale 1 quart. 1 septième, c'est le piège : on a enlevé 1.",
+  "05-question": "Question ! Deux réservoirs identiques : l'un est rempli aux 2 tiers, l'autre aux 3 quarts. Lequel est le plus rempli ? A : 2 tiers. B : 3 quarts. C : ils sont pareils. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B : 3 quarts. Vérifions avec les nombres décimaux.",
+  "06-decimaux": "2 tiers, c'est 2 divisé par 3. La division ne s'arrête pas : environ 0,67. 3 quarts, c'est 3 divisé par 4, égale 0,75. Et 0,75 est plus grand que 0,67 : le réservoir à 3 quarts est le plus rempli.",
+  "07-defi": "À toi de jouer ! Dernier défi : le réservoir d'oxygène est rempli aux 9 douzièmes. Inaya dit : c'est 75 %. A-t-elle raison ? Simplifie, puis passe au décimal, puis au pourcentage. Mets pause, et cherche !",
+  "07b-correction": "Correction. 9 et 12 sont dans la table de 3. 9 divisé par 3, égale 3. 12 divisé par 3, égale 4. Donc 9 douzièmes égale 3 quarts. Puis 3 divisé par 4, égale 0,75. Et 0,75, c'est 75 %. Inaya a raison : tu as fait toute la chaîne !",
+  "08-finale": "Ce que tu as appris. Pour voir si deux fractions sont égales, on simplifie. 1 quart de 24, c'est 24 divisé par 4. Pour comparer, on peut passer au décimal. Et on enchaîne : fraction, décimal, pourcentage.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

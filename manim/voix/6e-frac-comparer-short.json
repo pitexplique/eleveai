@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Sacha, créateur d'escape games, cache deux lingots d'or identiques. Tu as le choix : 1 tiers du premier, ou 1 cinquième du second. Lequel prends-tu ?",
+  "01-tiers": "Le premier lingot est coupé en 3 parts égales. Tu en prends 1 : 1 tiers.",
+  "02-cinquieme": "Le second est coupé en 5 parts égales. Tu en prends 1 : 1 cinquième.",
+  "03-surprise": "Surprise ! 5 est plus grand que 3, mais 1 cinquième est plus petit que 1 tiers. Plus on coupe, plus les parts sont petites. Prends le tiers !",
+  "04-question": "Question ! Laquelle est la plus grande ? A : 1 dixième. B : 1 demi. C : 1 septième. Mets pause !",
+  "04b-reponse": "Réponse B. Couper en 2 donne les plus grosses parts.",
+  "05-question": "À toi : range du plus petit au plus grand 1 demi, 1 neuvième et 1 cinquième. Réponds en commentaire !"
+}

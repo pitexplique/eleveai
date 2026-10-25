@@ -52,4 +52,38 @@ Recopié des rapports des agents au fil des lots (consigne : `manim/consigne-vid
   ```
 - Soucis restants : sur l'écran du piège, « − 2 » et « ÷ 2 » très proches ; quelques lignes de réponse arrivent 1 à 3 s après leur premier nombre (la ligne attend son dernier mot) — à resserrer à 0,4 s dans les lots suivants.
 
+### 05-comparer (fraction_comparer) — lot B, 25/10
+- Paysage `6e-frac-comparer` (3:58, verte, Yasmine régulatrice du trafic ferroviaire : 3/5 = 6/10 contre 7/10 ; défi 3/4 et 5/8 ; 60 % / 70 %). Centres : `["transports"]`.
+  ```json
+  [{"t":"01:01","question":"Laquelle est la plus grande ?","choix":["1/8","1/4","1/6"],"reponse":1,"explication":"1/4 : on coupe en 4 seulement, ce sont les plus grandes parts."},
+   {"t":"01:53","question":"Compare 2/3 et 5/6.","choix":["2/3 < 5/6","2/3 = 5/6","2/3 > 5/6"],"reponse":0,"explication":"2/3 = 4/6 et 4/6 < 5/6 ; enlever 3 en haut et en bas, c'est le piège."}]
+  ```
+- Short `6e-frac-comparer-short` (1:06, blanche, « Le piège du lingot », Sacha créateur d'escape games : 1/3 ou 1/5 d'un lingot). Centres : `["jeux-defis","argent-budget"]`. Commentaire : « Range 1/2, 1/9 et 1/5 du plus petit au plus grand » (1/9 < 1/5 < 1/2).
+  ```json
+  [{"t":"00:37","question":"Laquelle est la plus grande ?","choix":["1/10","1/2","1/7"],"reponse":1,"explication":"Couper en 2 donne les plus grosses parts."}]
+  ```
+
+### 06-mixte (fraction_mixte) — lot B, 25/10
+- Paysage `6e-frac-mixte` (4:22, verte, Awa productrice de musique : effet de 7/4 de mesure = 1 + 3/4 ; comparer à 1, à 1/2, encadrer ; défi 5/4 < 3/2 < 1 + 3/4 ; 7/4 = 1,75). Centres : `["musique","technologie-ia"]`.
+  ```json
+  [{"t":"01:23","question":"Entre quels entiers se trouve 7/3 ?","choix":["entre 2 et 3","entre 7 et 8","entre 1 et 2"],"reponse":0,"explication":"6/3 = 2 et 9/3 = 3 ; 7 est entre 6 et 9, donc 7/3 = 2 + 1/3."},
+   {"t":"02:39","question":"Laquelle est plus petite que 1/2 ?","choix":["3/5","4/9","5/8"],"reponse":1,"explication":"2 × 4 = 8, moins que 9 : 4/9 < 1/2."}]
+  ```
+- Short `6e-frac-mixte-short` (1:04, blanche, « La grenouille sauteuse », Lou biologiste : 9 sauts d'un quart de mètre). Centres : `["animaux","sciences"]`. Commentaire : « 11 tiers, c'est entre quels entiers ? » (3 et 4).
+  ```json
+  [{"t":"00:32","question":"5/2, c'est entre quels entiers ?","choix":["entre 1 et 2","entre 2 et 3","entre 5 et 6"],"reponse":1,"explication":"4/2 = 2, donc 5/2 = 2 + 1/2."}]
+  ```
+
+### 07-defi (fraction_defi) — lot B, 25/10
+- Paysage `6e-frac-defi` (3:47, ORANGE, Inaya ingénieure spatiale, rover pour Mars ; défi oxygène 9/12 = 3/4 = 0,75 = 75 %). Centres : `["espace","sciences"]`.
+  ```json
+  [{"t":"00:34","question":"24 panneaux, 1/4 couvert de poussière : combien à nettoyer ?","choix":["6","4","20"],"reponse":0,"explication":"24 ÷ 4 = 6 : une rangée sur 4."},
+   {"t":"01:04","question":"2/8 du trajet : quelle fraction plus simple ?","choix":["1/4","1/7","2/4"],"reponse":0,"explication":"÷ 2 en haut ET en bas : 2/8 = 1/4 ; 1/7, c'est le piège (on a enlevé 1)."},
+   {"t":"01:37","question":"Lequel est le plus rempli ?","choix":["2/3","3/4","ils sont pareils"],"reponse":1,"explication":"3/4 = 0,75 et 2/3 ≈ 0,67."}]
+  ```
+- Short `6e-frac-defi-short` (1:09, JAUNE, « Le défi des drapeaux », Moussa graphiste : France 1/3, Maurice 1/4, Thaïlande 2/6 = 1/3 ; sources Wikipédia dans l'en-tête). Centres : `["histoire-geographie","art-design"]`. Commentaire : « Colombie : jaune sur la moitié, combien de huitièmes ? » (4).
+  ```json
+  [{"t":"00:33","question":"Laquelle est égale à 1/3 ?","choix":["4/12","3/4","2/5"],"reponse":0,"explication":"4 ÷ 4 = 1 et 12 ÷ 4 = 3."}]
+  ```
+
 ## 4e

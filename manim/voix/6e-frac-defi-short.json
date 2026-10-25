@@ -1,0 +1,10 @@
+{
+  "00-accroche": "Moussa, graphiste, dessine des drapeaux. Défi : quel drapeau a le plus de bleu ?",
+  "01-france": "La France : 3 bandes égales. Le bleu fait 1 tiers.",
+  "02-maurice": "L'île Maurice : 4 bandes égales. Le bleu fait 1 quart.",
+  "03-thailande": "La Thaïlande : 6 parts égales, et le bleu en prend 2. 2 sixièmes.",
+  "04-surprise": "Surprise ! 2 sixièmes égale 1 tiers : la France et la Thaïlande ont autant de bleu ! Maurice en a le moins.",
+  "05-question": "Question ! Laquelle est égale à 1 tiers ? A : 4 douzièmes. B : 3 quarts. C : 2 cinquièmes. Mets pause !",
+  "05b-reponse": "Réponse A. 4 divisé par 4, égale 1. 12 divisé par 4, égale 3.",
+  "06-question": "À toi : le drapeau de la Colombie est jaune sur la moitié. Combien de huitièmes de jaune ? Réponds en commentaire !"
+}
