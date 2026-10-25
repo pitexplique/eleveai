@@ -27,7 +27,7 @@ Points à améliorer dans les lots : lignes de réponse qui arrivent 1 à 3 s ap
 
 ## État au 25/10 après-midi
 - ✅ VIDÉOS 6e COMPLÈTES (13 épisodes, 22 vidéos neuves) et 4e COMPLÈTES (12 épisodes, 24 vidéos), toutes commitées (dernier : `fd535325`) ; bords 0 instants partout ; questions et centres de TOUTES dans `manim/questions-fractions.md`.
-- ⏳ PASSE FINALE lancée le 25/10 (agent) : miniatures, manifeste, fiches-youtube, R2, branchement coach. Vérifier ce qui est fait : `git log --oneline -5`, ids `6e-frac-`/`4e-frac-` dans `manim/manifeste-youtube.json`.
+- ✅ PASSE FINALE FAITE (`a5aee451`) : 46 entrées au manifeste, miniatures + fiche-youtube.md à côté des mp4, R2 envoyé, table R2 (1 156), 46 vidéos branchées au coach. Reste : publier sur YouTube (playlists Cycle 4 + CRPE à cocher à la main), puis la 5e, CM1-CM2, 3e, lycée.
 - Chiffres de 6e 13 (USGS) et du short 4e 05 (steak) : confirmés par Frédéric le 25/10.
 - PUSH : Frédéric pousse le soir du 25/10 (vérifier la story avant).
 
