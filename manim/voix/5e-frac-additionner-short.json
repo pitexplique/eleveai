@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Voici Léo, créateur de casse-tête. Il te montre le tangram, un vieux jeu chinois : un carré coupé en 7 pièces.",
+  "01-pieces": "Chaque grand triangle, c'est 1 quart du carré. Le triangle moyen : 1 huitième. Le petit carré : 1 huitième. Le parallélogramme : 1 huitième. Chaque petit triangle : 1 seizième.",
+  "02-question": "Question ! Les deux grands triangles ensemble, quelle part du carré ? A : 2 huitièmes. B : 1 demi. C : 1 huitième. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B. 1 quart plus 1 quart, égale 2 quarts : 1 demi du carré !",
+  "03-total": "Et les 7 pièces ensemble ? Tout en seizièmes : 4 plus 4, plus 2, plus 2, plus 2, plus 1, plus 1, égale 16.",
+  "04-surprise": "16 seizièmes : 1 carré entier ! Les 7 pièces font exactement 1, rien ne dépasse et rien ne manque.",
+  "05-question": "À toi ! Le petit carré et les deux petits triangles ensemble : quelle part du grand carré ? Réponds en commentaire !"
+}

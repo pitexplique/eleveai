@@ -1,0 +1,18 @@
+{
+  "00-garde": "Multiplier des fractions. 2 tiers fois 3 cinquièmes, ça fait combien ?",
+  "01-situation": "Voici Fatou, architecte. Elle dessine la cour d'un collège. Les 3 cinquièmes de la cour seront en herbe, pour avoir moins chaud. Et sur les 2 tiers de cette herbe, elle plantera des arbres. Quelle part de la cour aura des arbres ?",
+  "02-grille": "Les 2 tiers des 3 cinquièmes. On coupe la cour en 5 bandes : on en prend 3, l'herbe. On coupe en 3 rangées : on en prend 2, les arbres. 5 fois 3, égale 15 petits rectangles. 3 fois 2, égale 6 rectangles d'arbres : 6 quinzièmes de la cour.",
+  "03-regle": "C'est la règle : 2 tiers fois 3 cinquièmes. En haut, 2 fois 3, égale 6. En bas, 3 fois 5, égale 15. On multiplie les numérateurs entre eux, et les dénominateurs entre eux.",
+  "04-question": "Question ! Combien font 1 quart fois 3 cinquièmes ? A : 4 neuvièmes. B : 3 vingtièmes. C : 3 cinquièmes. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. En haut, 1 fois 3, égale 3. En bas, 4 fois 5, égale 20.",
+  "05-simplifier": "6 quinzièmes : on simplifie ! On ne soustrait pas : 6 moins 3, sur 15 moins 3, ça donne 3 douzièmes, c'est faux. On divise par 3 en haut et en bas : 2 cinquièmes. Les arbres couvrent 2 cinquièmes de la cour.",
+  "06-avant": "Astuce : on peut simplifier avant de multiplier. 5 sixièmes fois 3 cinquièmes. Le 5 en haut et le 5 en bas s'en vont. Le 3 et le 6 se divisent par 3 : 1 et 2. Il reste 1 sur 2 : 1 demi.",
+  "07-entier": "Et un nombre entier fois une fraction ? 4 fois 2 septièmes. 4, c'est 4 sur 1. En haut, 4 fois 2, égale 8. En bas, 1 fois 7, égale 7 : 8 septièmes.",
+  "08-question": "Question ! Combien font 3 fois 2 neuvièmes, en simplifiant ? A : 6 vingt-septièmes. B : 2 tiers. C : 5 neuvièmes. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. 3 fois 2, égale 6 : 6 neuvièmes. On divise par 3 en haut et en bas : 2 tiers.",
+  "09-chaine": "Revenons à la cour. 2 cinquièmes, c'est 2 divisé par 5 : 0,4. Les arbres couvrent 40 % de la cour.",
+  "10-defi": "À toi de jouer ! Parmi ces arbres, les 3 quarts sont des arbres fruitiers. Quelle part de la cour porte des arbres fruitiers ? En fraction simplifiée, puis en pourcentage. Mets pause, et cherche !",
+  "10b-correction": "Correction. Les 3 quarts de 2 cinquièmes, c'est 3 quarts fois 2 cinquièmes. En haut, 3 fois 2, égale 6. En bas, 4 fois 5, égale 20. On simplifie par 2 : 3 dixièmes. 3 dixièmes, c'est 0,3 : 30 % de la cour !",
+  "11-finale": "Ce que tu as appris. On multiplie les numérateurs entre eux, et les dénominateurs entre eux. On simplifie le résultat, ou même avant de multiplier. Et prendre une fraction de, c'est multiplier.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Voici Aya, vétérinaire. Elle a une question sur ses patients préférés : les chats. Combien de temps dort un chat ?",
+  "01-journee": "Une journée, c'est 24 heures. On la coupe en 3 : 8 heures par part. Un chat adulte peut dormir 2 parts : 16 heures ! Les 2 tiers de la journée.",
+  "02-question": "Question ! Un chat de 15 ans a dormi les 2 tiers de sa vie. Combien d'années ? A : 5 ans. B : 10 ans. C : 30 ans. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B. 15 divisé par 3, égale 5. 5 fois 2, égale 10 ans de sommeil !",
+  "03-surprise": "Surprise : sur 15 ans de vie, 10 ans à dormir ! Il n'a été réveillé que 5 ans.",
+  "04-question": "À toi ! Un koala dort environ 5 sixièmes de la journée. Combien d'heures ? Réponds en commentaire !"
+}

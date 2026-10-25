@@ -1,0 +1,16 @@
+{
+  "00-garde": "La fraction d'une quantité. Les 2 tiers de 600 kilomètres, c'est combien ?",
+  "01-situation": "Voici Lina, pilote de ligne. Son vol fait 600 kilomètres. Au bout d'une heure, l'avion a parcouru les 2 tiers du trajet. Combien de kilomètres ?",
+  "02-methode": "Prendre les 2 tiers, c'est partager en 3 parts égales, et en prendre 2. 600 divisé par 3, égale 200 : une part fait 200 kilomètres. 2 parts : 200 fois 2, égale 400 kilomètres.",
+  "03-question": "Question ! Combien font les 2 cinquièmes de 150 passagers ? A : 30. B : 60. C : 375. Mets pause, et choisis !",
+  "03b-reponse": "Réponse B. 150 divisé par 5, égale 30 : c'est 1 cinquième. 30 fois 2, égale 60.",
+  "04-piege": "Attention au piège ! On divise par le nombre du bas, le dénominateur. 600 divisé par 2, fois 3, ça fait 900. Plus que le trajet entier : impossible ! Les 2 tiers, c'est moins que le tout.",
+  "05-fraction": "Et la fraction d'une fraction ? Au départ, le réservoir est plein aux 3 quarts. Pendant le vol, Lina utilise les 2 tiers de ce carburant. Les 2 tiers de 3 quarts, c'est 2 tiers fois 3 quarts. En haut, 2 fois 3, égale 6. En bas, 3 fois 4, égale 12 : 6 douzièmes du réservoir.",
+  "06-simplifier": "On simplifie ! On divise par 6 en haut et en bas : 1 demi. Lina a utilisé la moitié du réservoir. 1 demi, c'est 1 divisé par 2 : 0,5. Soit 50 % du réservoir.",
+  "07-question": "Question ! Combien fait 1 demi de 3 quarts ? A : 4 sixièmes. B : 3 huitièmes. C : 1 quart. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. De, c'est fois. En haut, 1 fois 3, égale 3. En bas, 2 fois 4, égale 8.",
+  "08-defi": "À toi de jouer ! Plein, le réservoir contient 1 200 litres. Il est plein aux 3 quarts, et Lina en utilise les 2 tiers. Combien de litres utilise-t-elle ? Et quel pourcentage du réservoir reste-t-il ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Les 3 quarts de 1 200 : 1 200 divisé par 4, égale 300, fois 3, égale 900 litres. Les 2 tiers de 900 : 900 divisé par 3, égale 300, fois 2, égale 600 litres utilisés. Il reste 900 moins 600 : 300 litres. 300 sur 1 200, on simplifie par 300 : 1 quart. 1 quart, c'est 0,25 : il reste 25 % du réservoir.",
+  "09-finale": "Ce que tu as appris. Pour prendre une fraction d'une quantité, on divise par le dénominateur, puis on multiplie par le numérateur. Avec une fraction plus petite que 1, on trouve moins que le tout. Et une fraction d'une fraction, c'est une multiplication.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

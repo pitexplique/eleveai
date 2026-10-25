@@ -1,0 +1,19 @@
+{
+  "00-garde": "Défi : calculer avec les fractions. Simplifier, écrire en décimal, puis en pourcentage, sans tomber dans les pièges !",
+  "01-situation": "Voici Romane, organisatrice de voyages scolaires. Le voyage d'une classe a un budget de 1 200 euros. Le car coûte 3 vingtièmes du budget. L'hébergement, 1 demi. Les repas, 1 quart. Quelle part du budget est dépensée ? Et combien reste-t-il pour les activités ?",
+  "02-additionner": "D'abord, on additionne. 20 est un multiple de 2 et de 4 : on écrit tout en vingtièmes. 1 demi égale 10 vingtièmes. 1 quart égale 5 vingtièmes. 3 plus 10 plus 5, égale 18 : 18 vingtièmes. Et surtout pas 5 vingt-sixièmes : on n'ajoute pas les dénominateurs !",
+  "03-simplifier": "Étape 1 : simplifier. 18 et 20 sont pairs : on divise par 2 en haut et en bas. 9 dixièmes. On ne soustrait pas : 18 moins 2, sur 20 moins 2, ça donne 16 dix-huitièmes, c'est faux.",
+  "04-question": "Question ! Comment simplifier 12 seizièmes ? A : 10 quatorzièmes. B : 3 quarts. C : 6 seizièmes. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. On divise par 4 en haut et en bas : 3 quarts. Enlever 2, ou ne diviser que le haut, ce sont les pièges.",
+  "05-decimal": "Étape 2 : le nombre décimal. 9 dixièmes, c'est 9 divisé par 10 : 0,9. Pas 9,10 : on divise !",
+  "06-question": "Question ! Quelle est l'écriture décimale de 3 cinquièmes ? A : 3,5. B : 0,6. C : 5,3. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. 3 divisé par 5, égale 0,6. 3,5 colle les deux nombres : c'est le piège.",
+  "07-pourcentage": "Étape 3 : le pourcentage. 0,9, c'est 90 centièmes : 90 %. Romane a dépensé 90 % du budget.",
+  "08-question": "Question ! 0,45, en pourcentage, c'est combien ? A : 0,45 %. B : 4,5 %. C : 45 %. Mets pause, et choisis !",
+  "08b-reponse": "Réponse C. 0,45, c'est 45 centièmes : 45 %.",
+  "09-reste": "Et pour les activités ? Il reste 10 % : 1 dixième du budget. 1 200 divisé par 10, égale 120 euros.",
+  "10-defi": "À toi de jouer ! Pour une sortie au musée, le budget est de 800 euros. Le car coûte 1 cinquième du budget, les billets 3 dixièmes. Quel pourcentage du budget est dépensé ? Combien d'euros reste-t-il ? Mets pause, et cherche !",
+  "10b-correction": "Correction. 1 cinquième égale 2 dixièmes. 2 plus 3, égale 5 : 5 dixièmes. On simplifie par 5 : 1 demi. 1 demi, c'est 0,5 : 50 % du budget. Il reste 1 demi de 800 : 800 divisé par 2, égale 400 euros.",
+  "11-finale": "Ce que tu as appris. On simplifie en divisant le haut et le bas par le même nombre. Une fraction, c'est une division : 9 dixièmes égale 0,9. Et 0,9, c'est 90 centièmes : 90 %.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

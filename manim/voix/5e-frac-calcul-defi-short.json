@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Voici Lucas, commentateur d'e-sport. Deux joueuses, un seul trophée. Qui est la meilleure ?",
+  "01-scores": "Léa a gagné 12 parties sur 20. Inès, seulement 7 parties sur 10. Léa a plus de victoires… mais attention !",
+  "02-question": "Question ! Comment simplifier 12 vingtièmes ? A : 10 dix-huitièmes. B : 3 cinquièmes. C : 6 vingtièmes. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B. On divise par 4 en haut et en bas : 3 cinquièmes.",
+  "03-pourcent": "3 cinquièmes, c'est 3 divisé par 5 : 0,6. Soit 60 % de victoires pour Léa. 7 dixièmes, c'est 0,7 : 70 % pour Inès !",
+  "04-surprise": "Surprise : Inès gagne le trophée ! Moins de victoires, mais un meilleur pourcentage.",
+  "05-question": "À toi ! Un joueur gagne 9 parties sur 15. Quel pourcentage de victoires ? Réponds en commentaire !"
+}

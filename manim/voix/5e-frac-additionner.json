@@ -1,0 +1,18 @@
+{
+  "00-garde": "Additionner des fractions. 1 demi plus 1 quart, ça fait combien ?",
+  "01-situation": "Voici Maya, batteuse. Elle écrit le rythme d'une chanson. Une mesure, c'est 1 ronde. Une blanche vaut 1 demi de ronde, une noire 1 quart, une croche 1 huitième. Maya joue une blanche, puis une noire. Quelle part de la mesure est remplie ?",
+  "02-commun": "1 demi plus 1 quart : les parts n'ont pas la même taille. 4 est un multiple de 2 : on écrit tout en quarts. 1 demi égale 2 quarts : on multiplie par 2 en haut et en bas.",
+  "03-somme": "Maintenant, les parts ont la même taille. 2 plus 1, égale 3 : 3 quarts de la mesure. Il manque encore 1 quart : une noire !",
+  "04-question": "Question ! Combien font 1 quart plus 1 huitième ? A : 2 douzièmes. B : 3 huitièmes. C : 2 huitièmes. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 1 quart égale 2 huitièmes. 2 plus 1, égale 3 : 3 huitièmes.",
+  "05-piege": "Attention au piège ! On n'ajoute jamais les dénominateurs. 1 demi plus 1 quart, ce n'est pas 2 sixièmes. Regarde : 2 sixièmes, c'est moins que 1 demi tout seul. Impossible !",
+  "06-simplifier": "Maya joue 3 croches : 3 huitièmes. Puis encore 1 croche : 1 huitième. 3 plus 1, égale 4 : 4 huitièmes. Ce n'est pas fini : on simplifie ! On divise par 4 en haut et en bas : 1 demi.",
+  "07-chaine": "Et 1 demi, c'est 1 divisé par 2 : 0,5. La mesure est remplie à 50 %, à moitié.",
+  "08-question": "Question ! Combien font 5 huitièmes plus 1 huitième, en simplifiant ? A : 6 seizièmes. B : 4 sixièmes. C : 3 quarts. Mets pause, et choisis !",
+  "08b-reponse": "Réponse C. 5 plus 1, égale 6 : 6 huitièmes. On divise par 2 en haut et en bas : 3 quarts. Enlever 2 en haut et en bas, c'est le piège.",
+  "09-soustraire": "Pour soustraire, c'est pareil. Une mesure entière, c'est 1. Maya a déjà écrit 5 huitièmes. 1 égale 8 huitièmes. 8 huitièmes moins 5 huitièmes : 8 moins 5, égale 3. Il lui reste 3 huitièmes à écrire.",
+  "10-defi": "À toi de jouer ! Dans une mesure, Maya joue 1 demi, puis 1 huitième, puis encore 1 huitième. Quelle part de la mesure est remplie ? Simplifie ! Mets pause, et cherche !",
+  "10b-correction": "Correction. On écrit tout en huitièmes. 1 demi égale 4 huitièmes. 4 plus 1 plus 1, égale 6 : 6 huitièmes. On simplifie par 2 : 3 quarts. La mesure est remplie aux 3 quarts !",
+  "11-finale": "Ce que tu as appris. On écrit les fractions avec le même dénominateur, puis on ajoute les numérateurs. Pour soustraire, c'est pareil. On simplifie toujours le résultat. Et on n'ajoute jamais les dénominateurs.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}
