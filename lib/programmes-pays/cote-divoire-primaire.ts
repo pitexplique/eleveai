@@ -101,7 +101,7 @@ export const COTE_DIVOIRE_CM1 = base("cm1", "CM1", "cm1", [
   c("L3", NB, "La soustraction : techniques opératoires, avec ou sans la calculette.", "complete", m("cm1", "calcul_soustraction_posee")),
   c("L4", NB, "La multiplication de nombres de 3 à 6 chiffres, avec ou sans la calculette.", "complete", m("cm1", "multiplication_posee", "calcul_multiplication_posee")),
   c("L5", NB, "La division : quotient et reste, avec ou sans la calculette.", "complete", m("cm1", "division_posee", "division_reste")),
-  c("L6", NB, "Les fractions : sens, lire, écrire.", "complete", m("cm1", "fraction_lire", "fraction_representer", "fraction_unite")),
+  c("L6", NB, "Les fractions : sens, lire, écrire.", "complete", m("cm1", "fraction_lire", "fraction_representer", "fraction_unite", "fraction_droite", "fraction_comparer")),
   c("L7", NB, "Les nombres décimaux : lire, écrire en lettres et en chiffres, partie entière et décimale, comparer, ranger.", "complete", m("cm1", "decimal_lire", "decimal_valeur_chiffre", "decimal_comparer", "decimal_ordonner")),
   c("L8", NB, "La proportionnalité : tableau avec un opérateur entier, budget familial.", "complete", m("cm1", "prop_reconnaitre", "prop_tableau", "prop_coefficient", "prop_probleme")),
   c("L9", NB, "Le pourcentage : quantité correspondant à un pourcentage ; intérêt, capital, remise, augmentation, solde.", "partielle", m("cm2", "pourcentage_comprendre", "pourcentage_calculer", "pourcentage_probleme"), "Intérêt et capital n'ont pas de micro."),
