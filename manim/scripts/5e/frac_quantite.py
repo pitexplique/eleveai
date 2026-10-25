@@ -32,6 +32,7 @@
 # python -m manim render -qh --disable_caching manim/scripts/5e/frac_quantite.py FracQuantite5e -o eleveai-maths-5e-frac-quantite --media_dir manim/scripts/5e/media-frac-quantite
 # Sortie : manim/sorties/5e/maths/fractions/09-quantite/eleveai-maths-5e-frac-quantite.mp4
 
+import re
 import sys
 from pathlib import Path
 
@@ -78,6 +79,48 @@ def avion(s=1.0, couleur=WHITE):
 class FracQuantiteBase(PaysageH):
     nom_voix = "5e-frac-quantite"
     fichier_marques = "frac_quantite_marques.json"
+
+    def _disposer_q(self, question, choix, phrase):
+        """25/10 : la phrase de RÉPONSE était réduite (≈ 26) pour tenir dans la
+        colonne : refaite en corps 34 (lisible projetée en classe), lignes
+        courtes, sous les cartes, à gauche de Ti-Margo, dans les marges."""
+        tete, q, cartes, pause, rebours, ph = super()._disposer_q(question, choix, phrase)
+        g, haut = cartes.get_left()[0], cartes.get_bottom()[1] - 0.25
+        neuf = VGroup(*[self.t(s, 34, VERT_OK) for s in phrase]).arrange(DOWN, aligned_edge=LEFT, buff=0.12)
+        if neuf.width > 5.3 - g:  # Ti-Margo commence à x ≈ 5,7 : de l'air
+            neuf.scale_to_fit_width(5.3 - g)
+        if neuf.height > haut + 3.45:  # bas ≥ −3,45 (marge des 3 %)
+            neuf.scale_to_fit_height(haut + 3.45)
+        neuf.align_to(P(g, 0), LEFT).align_to(P(0, haut), UP)
+        self.ph_q = neuf
+        self._q_bloc = q
+        return tete, q, cartes, pause, rebours, neuf
+
+    def rep_mots(self, i, morceaux, avec=()):
+        """25/10 : la ligne i de la réponse posée MORCEAU PAR MORCEAU, chacun à
+        son mot (0 s d'avance) : morceaux = [(texte écrit, extrait de la voix)] ;
+        `avec` : jouées avec le premier morceau."""
+        lg, k = self.ph_q[i], 0
+        for j, (txt, mot) in enumerate(morceaux):
+            n = len(txt.replace(" ", ""))
+            part, k = VGroup(*lg[k:k + n]), k + n
+            self.au_nb(mot) if re.search(r"\d", mot) else self.au_mot(mot)
+            self.play(FadeIn(part, shift=UP * 0.15), *(list(avec) if j == 0 else []), run_time=0.3)
+        assert k == len(lg), f"morceaux de « {lg.original_text} » mal comptés"
+        self._deja = getattr(self, "_deja", set()) | {i}
+
+    def _poser_ligne0(self, mots):
+        """avant_q (25/10) : « 1 demi » attendait « demi » et montrait le 1 avec
+        0,42 s de retard. La 1re ligne de la question entre en deux morceaux
+        (son 1er caractère, puis le reste), chacun AU MOT, puis elle sort du bloc
+        pour que poser_lignes ne la rejoue pas."""
+        q = self._q_bloc
+        l0 = q[0]
+        morceaux = [VGroup(l0[0]), VGroup(*l0[1:])]
+        for m, mot in zip(morceaux, mots):
+            self.au_nb(mot) if re.search(r"\d", mot) else self.au_mot(mot)
+            self.play(FadeIn(m, shift=UP * 0.2), run_time=0.25)
+        q.remove(l0)
 
     def barre(self, n, k=0, y=0.0, couleur=CIEL, largeur=LB, **kw):
         return Barre(n, k, largeur=largeur, hauteur=0.7, couleur=couleur, marge=0.2, centre=P(XB, y), **kw)
@@ -172,16 +215,16 @@ class FracQuantiteBase(PaysageH):
             sc.play(FadeIn(br), FadeIn(t150), run_time=0.3)
 
         def apres(sc):
-            sc.au_mot("150 divisé")
-            sc.rep(0)
+            sc.rep_mots(0, [("150 ÷", "B. 150"), ("5", "par 5"), ("= 30 :", "égale 30")])
             sc.play(FadeIn(vals, scale=1.3), run_time=0.3)
-            sc.au_mot("30 fois 2")
-            sc.rep(1, avec=[b.colorier([0, 1], lag=0.15, run_time=0.5)])
+            sc.rep_mots(1, [("c'est 1/5", "c'est 1")])
+            sc.rep_mots(2, [("30 ×", "cinquième. 30"), ("2", "fois 2"), ("= 60", "égale 60")],
+                        avec=[b.colorier([0, 1], lag=0.15, run_time=0.5)])
             sc.rep_fin()
 
         self.question_pause("03-question", "03b-reponse", ["Les 2 cinquièmes", "de 150 passagers ?"],
                             [self.inline("30"), self.inline("60"), self.inline("375")], 1,
-                            ["150 ÷ 5 = 30 : c'est 1/5", "30 × 2 = 60"], mot_q="les 2 cinquièmes",
+                            ["150 ÷ 5 = 30 :", "c'est 1/5", "30 × 2 = 60"], mot_q="les 2 cinquièmes",
                             autres_q=avant, autres_r=apres)
 
     # ── 04 : le piège (on divise par le dénominateur) ───────────────────────
@@ -292,16 +335,17 @@ class FracQuantiteBase(PaysageH):
         self.add(rs)
 
         def apres(sc):
-            sc.au_mot("En haut")
-            sc.rep(0, avec=[FadeIn(kero), FadeIn(util)])
-            sc.au_mot("En bas")
-            sc.rep(1, avec=[Indicate(VGroup(rs.vert, rs.hori), color=AMBRE)])
+            sc.rep_mots(0, [("« de » =", "De, c'est"), ("« × »", "fois.")])
+            sc.rep_mots(1, [("en haut :", "En haut"), ("1 ×", "haut, 1"), ("3", "fois 3"), ("= 3", "égale 3")],
+                        avec=[FadeIn(kero), FadeIn(util)])
+            sc.rep_mots(2, [("en bas :", "En bas"), ("2 ×", "bas, 2"), ("4", "fois 4"), ("= 8", "égale 8")],
+                        avec=[Indicate(VGroup(rs.vert, rs.hori), color=AMBRE)])
             sc.rep_fin()
 
         self.question_pause("07-question", "07b-reponse", ["1 demi", "de 3 quarts ?"],
                             [self.inline("4/6"), self.inline("3/8"), self.inline("1/4")], 1,
-                            ["« de » = « × » : en haut, 1 × 3 = 3", "en bas, 2 × 4 = 8"], mot_q="Combien fait",
-                            autres_r=apres)
+                            ["« de » = « × »", "en haut : 1 × 3 = 3", "en bas : 2 × 4 = 8"], mot_q="Combien fait",
+                            avant_q=lambda sc: sc._poser_ligne0(["fait 1", "demi"]), autres_r=apres)
 
     # ── 08 : défi (1 200 L, 3/4, 2/3) ───────────────────────────────────────
     def ecran_defi(self):

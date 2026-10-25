@@ -349,11 +349,20 @@ class FracDecimalBase(FracLireEcrireBase):
             d.scale_to_fit_width(6.4 - g0).align_to(P(g0, 0), LEFT)
         self.play(FadeIn(d, shift=RIGHT * 0.2), run_time=0.4)
         self.au_mot("Le numérateur est")
-        g = self.col(self.bloc(["numérateur > dénominateur :", "plus que 1 !"], 36, AMBRE), -0.4)
-        self.play(FadeIn(g, shift=UP * 0.15), Indicate(f.num, color=AMBRE, scale_factor=1.4), run_time=0.5)
+        g = self.col(self.bloc(["numérateur > dénominateur :", "la fraction dépasse 1 !"], 36, AMBRE), -0.4)
+        self.play(FadeIn(g[0], shift=UP * 0.15), Indicate(f.num, color=AMBRE, scale_factor=1.4), run_time=0.5)
+        # 25/10 : la 2e ligne attendait le « 1 » final et retardait l'accolade
+        # de 0,79 s : elle entre MOT À MOT (« la fraction » · « dépasse » ·
+        # « 1 ! »), l'accolade « 1 entier » avec le « 1 ».
+        l2 = self.ligne([("la fraction", AMBRE), ("dépasse", AMBRE), ("1 !", AMBRE)], 36)
+        l2.scale(g[1].width / l2.width).move_to(g[1])  # même taille et même place que la ligne du bloc
+        self.au_mot("la fraction")
+        self.play(FadeIn(l2[0], shift=UP * 0.15), run_time=0.3)
         self.au_mot("dépasse 1")
+        self.play(FadeIn(l2[1], shift=UP * 0.15), run_time=0.3)
         acc = b1.accolade("1 entier", dessus=False, fs=30)
-        self.play(FadeIn(acc, shift=UP * 0.1), run_time=0.4)
+        self.au_mot("1.")
+        self.play(FadeIn(l2[2], scale=1.3), FadeIn(acc, shift=UP * 0.1), run_time=0.35)
         self.attendre_voix()
 
     # ── 10 : le pourcentage ─────────────────────────────────────────────────

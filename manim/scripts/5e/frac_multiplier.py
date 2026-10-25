@@ -32,6 +32,7 @@
 # python -m manim render -qh --disable_caching manim/scripts/5e/frac_multiplier.py FracMultiplier5e -o eleveai-maths-5e-frac-multiplier --media_dir manim/scripts/5e/media-frac-multiplier
 # Sortie : manim/sorties/5e/maths/fractions/08-multiplier/eleveai-maths-5e-frac-multiplier.mp4
 
+import re
 import sys
 from pathlib import Path
 
@@ -83,6 +84,34 @@ def arbre(s=0.3):
 class FracMultiplierBase(PaysageH):
     nom_voix = "5e-frac-multiplier"
     fichier_marques = "frac_multiplier_marques.json"
+
+    def _disposer_q(self, question, choix, phrase):
+        """25/10 : la phrase de RÉPONSE était réduite (≈ 26) pour tenir dans la
+        colonne : refaite en corps 34 (lisible projetée en classe), lignes
+        courtes, sous les cartes, à gauche de Ti-Margo, dans les marges."""
+        tete, q, cartes, pause, rebours, ph = super()._disposer_q(question, choix, phrase)
+        g, haut = cartes.get_left()[0], cartes.get_bottom()[1] - 0.25
+        neuf = VGroup(*[self.t(s, 34, VERT_OK) for s in phrase]).arrange(DOWN, aligned_edge=LEFT, buff=0.12)
+        if neuf.width > 5.3 - g:  # Ti-Margo commence à x ≈ 5,7 : de l'air
+            neuf.scale_to_fit_width(5.3 - g)
+        if neuf.height > haut + 3.45:  # bas ≥ −3,45 (marge des 3 %)
+            neuf.scale_to_fit_height(haut + 3.45)
+        neuf.align_to(P(g, 0), LEFT).align_to(P(0, haut), UP)
+        self.ph_q = neuf
+        return tete, q, cartes, pause, rebours, neuf
+
+    def rep_mots(self, i, morceaux, avec=()):
+        """25/10 : la ligne i de la réponse posée MORCEAU PAR MORCEAU, chacun à
+        son mot (0 s d'avance) : morceaux = [(texte écrit, extrait de la voix)] ;
+        `avec` : jouées avec le premier morceau."""
+        lg, k = self.ph_q[i], 0
+        for j, (txt, mot) in enumerate(morceaux):
+            n = len(txt.replace(" ", ""))
+            part, k = VGroup(*lg[k:k + n]), k + n
+            self.au_nb(mot) if re.search(r"\d", mot) else self.au_mot(mot)
+            self.play(FadeIn(part, shift=UP * 0.15), *(list(avec) if j == 0 else []), run_time=0.3)
+        assert k == len(lg), f"morceaux de « {lg.original_text} » mal comptés"
+        self._deja = getattr(self, "_deja", set()) | {i}
 
     def cour(self, L=4.2, H=3.0, centre=P(XC, -0.1), lignes=False):
         """La cour : 5 bandes × 3 rangées ; .herbe (3 bandes) et .arbres (2 rangées)."""
@@ -208,10 +237,10 @@ class FracMultiplierBase(PaysageH):
         self.add(pv)
 
         def apres(sc):
-            sc.au_mot("En haut")
-            sc.rep(0, avec=[pv.pris.animate.set_opacity(1)])
-            sc.au_mot("En bas")
-            sc.rep(1, avec=[Indicate(VGroup(pv.vert, pv.hori), color=AMBRE)])
+            sc.rep_mots(0, [("En haut :", "En haut"), ("1 ×", "haut, 1"), ("3", "fois 3"), ("= 3", "égale 3")],
+                        avec=[pv.pris.animate.set_opacity(1)])
+            sc.rep_mots(1, [("En bas :", "En bas"), ("4 ×", "bas, 4"), ("5", "fois 5"), ("= 20", "égale 20")],
+                        avec=[Indicate(VGroup(pv.vert, pv.hori), color=AMBRE)])
             sc.rep_fin()
 
         self.question_pause("04-question", "04b-reponse", ["1 quart", "× 3 cinquièmes ?"],
@@ -320,15 +349,15 @@ class FracMultiplierBase(PaysageH):
         self.add(bs)
 
         def apres(sc):
-            sc.au_mot("3 fois 2")
-            sc.rep(0, avec=[*[Indicate(VGroup(b.parts[0], b.parts[1]), color=AMBRE) for b in bs]])
-            sc.au_nb("On divise par 3")
-            sc.rep(1)
+            sc.rep_mots(0, [("3 ×", "B. 3"), ("2", "fois 2"), ("= 6 :", "égale 6"), ("6/9", "6 neuvièmes")],
+                        avec=[*[Indicate(VGroup(b.parts[0], b.parts[1]), color=AMBRE) for b in bs]])
+            sc.rep_mots(1, [("÷ 3", "par 3"), ("en haut", "en haut")])
+            sc.rep_mots(2, [("et en bas :", "et en bas"), ("2/3", "2 tiers")])
             sc.rep_fin()
 
         self.question_pause("08-question", "08b-reponse", ["3 × 2 neuvièmes,", "simplifié ?"],
                             [self.inline("6/27"), self.inline("2/3"), self.inline("5/9")], 1,
-                            ["3 × 2 = 6 : 6/9", "÷ 3 en haut et en bas : 2/3"], mot_q="3 fois 2", autres_r=apres)
+                            ["3 × 2 = 6 : 6/9", "÷ 3 en haut", "et en bas : 2/3"], mot_q="3 fois 2", autres_r=apres)
 
     # ── 09 : 2/5 = 0,4 = 40 % ───────────────────────────────────────────────
     def ecran_chaine(self):

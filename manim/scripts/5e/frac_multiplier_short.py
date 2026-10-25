@@ -127,7 +127,7 @@ class FracMultiplierShort5e(ShortH):
         # ── 03 : la question-pause (3 s) ──
         self.question_pause("03-question", "03b-reponse", ["La moitié de la moitié", "de la tablette ?"],
                             [self.inline("1/4", 30), self.inline("1/2", 30), self.inline("1/8", 30)], 0,
-                            ["1/2 × 1/2 = 1/4 : 3 carrés sur 12"], mot_q="la moitié")
+                            ["1/2 × 1/2 = 1/4 :", "3 carrés sur 12"], mot_q="la moitié")
         self.vider(garder)
 
         # ── 04 : la question en commentaire ──
