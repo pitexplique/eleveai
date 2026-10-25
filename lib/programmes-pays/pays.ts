@@ -73,7 +73,8 @@ export const CLASSES_PAYS: Record<SlugPays, { titre: string; classes: ClassePays
     },
   ],
   // Sénégal (25/10) : élémentaire CI → CM2, moyen 6e → 3e (BFEM), secondaire
-  // 2nde → Tle (bac). Matrice du moyen seule : lib/programmes-pays/senegal-moyen.ts.
+  // 2nde → Tle (bac). Matrices : senegal-moyen.ts (6e → 3e), senegal-secondaire.ts
+  // (2nde S, 1re S2, Tle S2) ; l'élémentaire reste grisé.
   senegal: [
     { titre: "Élémentaire", classes: ["CI", "CP", "CE1", "CE2", "CM1", "CM2"].map((c) => ({ cle: c.toLowerCase(), court: c })) },
     { titre: "Moyen", classes: ["6e", "5e", "4e", "3e"].map((c) => ({ cle: c, court: c })) },

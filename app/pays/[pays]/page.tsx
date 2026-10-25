@@ -35,7 +35,7 @@ export async function generateMetadata({
 
 const LIBELLE_CLASSE: Record<string, string> = {
   "6e": "6e", "5e": "5e", "4e": "4e", "3e": "3e",
-  seconde: "2de", premiere: "1re", stmg: "Tle STMG",
+  seconde: "2de", premiere: "1re", "premiere-spe": "1re spé", "terminale-spe": "Tle spé", stmg: "Tle STMG",
 };
 
 /** « Programme du … » : l'article de chaque pays. */

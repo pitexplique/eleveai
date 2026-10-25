@@ -13,6 +13,7 @@ import {
 } from "./quebec-primaire";
 import { QUEBEC_SEC_1, QUEBEC_SEC_2, QUEBEC_SEC_3, QUEBEC_SEC_4, QUEBEC_SEC_5 } from "./quebec-secondaire";
 import { SENEGAL_3E, SENEGAL_4E, SENEGAL_5E, SENEGAL_6E } from "./senegal-moyen";
+import { SENEGAL_1RE, SENEGAL_2NDE, SENEGAL_TLE } from "./senegal-secondaire";
 import type { ProgrammePays } from "./types";
 
 export const PROGRAMMES_PAYS: ProgrammePays[] = [
@@ -37,6 +38,9 @@ export const PROGRAMMES_PAYS: ProgrammePays[] = [
   SENEGAL_5E,
   SENEGAL_4E,
   SENEGAL_3E,
+  SENEGAL_2NDE,
+  SENEGAL_1RE,
+  SENEGAL_TLE,
 ];
 
 export type { ProgrammePays, ContenuPays, Couverture, RenvoiMicro } from "./types";
