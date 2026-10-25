@@ -75,7 +75,10 @@ for (const v of manifeste.videos) {
 // Les MP4 rendus hors manifeste (tout le CP, par exemple) : clé = nom du fichier
 // sans « eleveai- », titre tiré du nom. Ils sont sur R2 comme les autres.
 const connus = new Set(Object.values(table).map((v) => v.fichier));
-const parcourir = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) =>
+// ⛔ 26/10/2026 : un dossier qui contient un fichier `.brouillon` (lot pas encore
+// validé, ex. vidéos CM fractions) reste hors table tant que la passe finale ne
+// l'a pas retiré.
+const parcourir = (dir) => fs.existsSync(path.join(dir, ".brouillon")) ? [] : fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) =>
   e.isDirectory()
     // _avant-marges : les originaux gardés avant la marge noire (24/10), jamais publiés.
     ? e.name === "partial_movie_files" || e.name.startsWith("480p") || e.name === "_avant-marges" ? [] : parcourir(path.join(dir, e.name))
