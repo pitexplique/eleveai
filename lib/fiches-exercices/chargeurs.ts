@@ -38,6 +38,13 @@ export const CHARGEURS_FICHES_EXERCICES: Record<string, () => Promise<FicheExerc
   "maths/6e/algo-programmation": () => import("@/lib/fiches-exercices/maths-6e-algo-programmation").then((m) => m.exercicesAlgoProgrammation6e),
   "maths/cm1/tableau": () => import("@/lib/fiches-exercices/maths-cm1-tableau").then((m) => m.exercicesTableauCm1),
   "maths/cm1/graphique": () => import("@/lib/fiches-exercices/maths-cm1-graphique").then((m) => m.exercicesGraphiqueCm1),
+  // ── CM1 : fractions (25/10/2026) ──
+  "maths/cm1/fraction": () => import("@/lib/fiches-exercices/maths-cm1-fraction").then((m) => m.exercicesFractionCm1),
+  // ── fin CM1 : fractions ──
+  // CM2 : fractions (25/10/2026)
+  "maths/cm2/fraction": () => import("@/lib/fiches-exercices/maths-cm2-fraction").then((m) => m.exercicesFractionCm2),
+  "maths/cm2/fraction-mixte": () => import("@/lib/fiches-exercices/maths-cm2-fraction-mixte").then((m) => m.exercicesFractionMixteCm2),
+  "maths/cm2/fraction-calcul": () => import("@/lib/fiches-exercices/maths-cm2-fraction-calcul").then((m) => m.exercicesFractionCalculCm2),
   "maths/cm2/tableau": () => import("@/lib/fiches-exercices/maths-cm2-tableau").then((m) => m.exercicesTableauCm2),
   "maths/cm2/graphique": () => import("@/lib/fiches-exercices/maths-cm2-graphique").then((m) => m.exercicesGraphiqueCm2),
   "maths/6e/stat-enquete": () => import("@/lib/fiches-exercices/maths-6e-stat-enquete").then((m) => m.exercicesStatEnquete6e),

@@ -195,6 +195,30 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Lire une barre sur un axe gradué, lire un diagramme circulaire, compléter une barre effacée, comparer, calculer un écart ou un total. Une mangeoire, une bibliothèque, des étoiles filantes, une kermesse, un vivarium, la météo et la cantine.",
   },
+  // ── CM1 : fractions (25/10/2026) ──
+  "maths/cm1/fraction": {
+    titre: "Les fractions : 20 exercices corrigés",
+    resume:
+      "Lire et dessiner une fraction, comprendre l'unité, reconnaître une fraction plus grande que 1, la placer sur la droite, comparer, trouver des fractions égales en regroupant les parts, passer aux dixièmes, aux centièmes et au « pour cent ». Des crêpes, des billes, un saut sans élan, un calendrier, un match de football, les planètes et une mosaïque.",
+  },
+  // ── fin CM1 : fractions ──
+  // ─── CM2 : fractions (25/10/2026) ───
+  // Une feuille par notion du coach CM2 : fraction, fraction_mixte, fraction_calcul.
+  "maths/cm2/fraction": {
+    titre: "Les fractions : 20 exercices corrigés",
+    resume:
+      "Lire une fraction, la dessiner sur une barre, un disque ou un rectangle, la placer sur la droite graduée, comparer, trouver des fractions égales et simplifier, passer d'une fraction à un nombre à virgule puis à un pourcentage (1/4 = 0,25 = 25 %). Une pizza, un potager, les océans, un match de basket, une fresque, des notes de musique et un sac de billes.",
+  },
+  "maths/cm2/fraction-mixte": {
+    titre: "Les fractions plus grandes que 1 : 20 exercices corrigés",
+    resume:
+      "Écrire une fraction plus grande que 1 comme un entier et une fraction (7/4 = 1 + 3/4), regrouper un entier et une fraction en une seule fraction, encadrer une fraction entre deux entiers, la placer sur la droite et l'écrire avec une virgule. Des pizzas, une piste cyclable, une recette, des tartes, un train et des rubans.",
+  },
+  "maths/cm2/fraction-calcul": {
+    titre: "Calculer avec les fractions : 20 exercices corrigés",
+    resume:
+      "Additionner et soustraire des fractions de même dénominateur, ou dont un dénominateur est multiple de l'autre, multiplier une fraction par un entier, prendre une fraction d'une quantité. Une pizza, des billes, une grenouille, un match de football, une kermesse, un refuge pour tortues et une haie à planter.",
+  },
   "maths/cm2/tableau": {
     titre: "Lire, compléter et interpréter un tableau : 20 exercices corrigés",
     resume:
