@@ -77,7 +77,8 @@ for (const v of manifeste.videos) {
 const connus = new Set(Object.values(table).map((v) => v.fichier));
 const parcourir = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) =>
   e.isDirectory()
-    ? e.name === "partial_movie_files" || e.name.startsWith("480p") ? [] : parcourir(path.join(dir, e.name))
+    // _avant-marges : les originaux gardés avant la marge noire (24/10), jamais publiés.
+    ? e.name === "partial_movie_files" || e.name.startsWith("480p") || e.name === "_avant-marges" ? [] : parcourir(path.join(dir, e.name))
     : e.name.endsWith(".mp4") ? [path.join(dir, e.name)] : []);
 // Les vidéos publiées AVANT le manifeste, téléchargées depuis YouTube (19/10) :
 // manim/sorties/<classe>/maths/youtube/<ID YouTube>.mp4, titre et format dans

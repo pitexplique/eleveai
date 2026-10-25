@@ -4760,854 +4760,6 @@
   "youtube": null,
   "coach": "/coach/serie?classe=seconde&matiere=maths&notion=identites_remarquables_2de&microId=ir_carre_somme&display=simple"
  },
- "maths-3e-stats-defi": {
-  "fichier": "_avant-marges/3e/maths/statistiques/08-defi/eleveai-maths-3e-stats-defi.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 3e stats defi",
-  "short": false,
-  "youtube": null
- },
- "maths-3e-stats-defi-short": {
-  "fichier": "_avant-marges/3e/maths/statistiques/08-defi/eleveai-maths-3e-stats-defi-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 3e stats defi short",
-  "short": true,
-  "youtube": null
- },
- "maths-3e-stats-effectif-frequence": {
-  "fichier": "_avant-marges/3e/maths/statistiques/03-effectif-frequence/eleveai-maths-3e-stats-effectif-frequence.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 3e stats effectif frequence",
-  "short": false,
-  "youtube": null
- },
- "maths-3e-stats-effectif-frequence-short": {
-  "fichier": "_avant-marges/3e/maths/statistiques/03-effectif-frequence/eleveai-maths-3e-stats-effectif-frequence-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 3e stats effectif frequence short",
-  "short": true,
-  "youtube": null
- },
- "maths-3e-stats-etendue": {
-  "fichier": "_avant-marges/3e/maths/statistiques/06-etendue/eleveai-maths-3e-stats-etendue.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 3e stats etendue",
-  "short": false,
-  "youtube": null
- },
- "maths-3e-stats-etendue-short": {
-  "fichier": "_avant-marges/3e/maths/statistiques/06-etendue/eleveai-maths-3e-stats-etendue-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 3e stats etendue short",
-  "short": true,
-  "youtube": null
- },
- "maths-3e-stats-interpreter": {
-  "fichier": "_avant-marges/3e/maths/statistiques/07-interpreter/eleveai-maths-3e-stats-interpreter.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 3e stats interpreter",
-  "short": false,
-  "youtube": null
- },
- "maths-3e-stats-interpreter-short": {
-  "fichier": "_avant-marges/3e/maths/statistiques/07-interpreter/eleveai-maths-3e-stats-interpreter-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 3e stats interpreter short",
-  "short": true,
-  "youtube": null
- },
- "maths-3e-stats-lire-graphique": {
-  "fichier": "_avant-marges/3e/maths/statistiques/02-lire-graphique/eleveai-maths-3e-stats-lire-graphique.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 3e stats lire graphique",
-  "short": false,
-  "youtube": null
- },
- "maths-3e-stats-lire-graphique-short": {
-  "fichier": "_avant-marges/3e/maths/statistiques/02-lire-graphique/eleveai-maths-3e-stats-lire-graphique-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 3e stats lire graphique short",
-  "short": true,
-  "youtube": null
- },
- "maths-3e-stats-lire-tableau": {
-  "fichier": "_avant-marges/3e/maths/statistiques/01-lire-tableau/eleveai-maths-3e-stats-lire-tableau.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 3e stats lire tableau",
-  "short": false,
-  "youtube": null
- },
- "maths-3e-stats-lire-tableau-short": {
-  "fichier": "_avant-marges/3e/maths/statistiques/01-lire-tableau/eleveai-maths-3e-stats-lire-tableau-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 3e stats lire tableau short",
-  "short": true,
-  "youtube": null
- },
- "maths-3e-stats-mediane": {
-  "fichier": "_avant-marges/3e/maths/statistiques/05-mediane/eleveai-maths-3e-stats-mediane.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 3e stats mediane",
-  "short": false,
-  "youtube": null
- },
- "maths-3e-stats-mediane-short": {
-  "fichier": "_avant-marges/3e/maths/statistiques/05-mediane/eleveai-maths-3e-stats-mediane-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 3e stats mediane short",
-  "short": true,
-  "youtube": null
- },
- "maths-3e-stats-moyenne": {
-  "fichier": "_avant-marges/3e/maths/statistiques/04-moyenne/eleveai-maths-3e-stats-moyenne.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 3e stats moyenne",
-  "short": false,
-  "youtube": null
- },
- "maths-3e-stats-moyenne-short": {
-  "fichier": "_avant-marges/3e/maths/statistiques/04-moyenne/eleveai-maths-3e-stats-moyenne-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 3e stats moyenne short",
-  "short": true,
-  "youtube": null
- },
- "maths-4e-stats-defi": {
-  "fichier": "_avant-marges/4e/maths/statistiques/11-defi/eleveai-maths-4e-stats-defi.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 4e stats defi",
-  "short": false,
-  "youtube": null
- },
- "maths-4e-stats-defi-short": {
-  "fichier": "_avant-marges/4e/maths/statistiques/11-defi/eleveai-maths-4e-stats-defi-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 4e stats defi short",
-  "short": true,
-  "youtube": null
- },
- "maths-4e-stats-donnee-defi": {
-  "fichier": "_avant-marges/4e/maths/statistiques/05-donnee-defi/eleveai-maths-4e-stats-donnee-defi.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 4e stats donnee defi",
-  "short": false,
-  "youtube": null
- },
- "maths-4e-stats-donnee-defi-short": {
-  "fichier": "_avant-marges/4e/maths/statistiques/05-donnee-defi/eleveai-maths-4e-stats-donnee-defi-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 4e stats donnee defi short",
-  "short": true,
-  "youtube": null
- },
- "maths-4e-stats-effectif": {
-  "fichier": "_avant-marges/4e/maths/statistiques/03-effectif/eleveai-maths-4e-stats-effectif.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 4e stats effectif",
-  "short": false,
-  "youtube": null
- },
- "maths-4e-stats-effectif-short": {
-  "fichier": "_avant-marges/4e/maths/statistiques/03-effectif/eleveai-maths-4e-stats-effectif-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 4e stats effectif short",
-  "short": true,
-  "youtube": null
- },
- "maths-4e-stats-etendue": {
-  "fichier": "_avant-marges/4e/maths/statistiques/08-etendue/eleveai-maths-4e-stats-etendue.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 4e stats etendue",
-  "short": false,
-  "youtube": null
- },
- "maths-4e-stats-etendue-short": {
-  "fichier": "_avant-marges/4e/maths/statistiques/08-etendue/eleveai-maths-4e-stats-etendue-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 4e stats etendue short",
-  "short": true,
-  "youtube": null
- },
- "maths-4e-stats-frequence": {
-  "fichier": "_avant-marges/4e/maths/statistiques/04-frequence/eleveai-maths-4e-stats-frequence.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 4e stats frequence",
-  "short": false,
-  "youtube": null
- },
- "maths-4e-stats-frequence-short": {
-  "fichier": "_avant-marges/4e/maths/statistiques/04-frequence/eleveai-maths-4e-stats-frequence-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 4e stats frequence short",
-  "short": true,
-  "youtube": null
- },
- "maths-4e-stats-interpreter": {
-  "fichier": "_avant-marges/4e/maths/statistiques/09-interpreter/eleveai-maths-4e-stats-interpreter.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 4e stats interpreter",
-  "short": false,
-  "youtube": null
- },
- "maths-4e-stats-interpreter-short": {
-  "fichier": "_avant-marges/4e/maths/statistiques/09-interpreter/eleveai-maths-4e-stats-interpreter-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 4e stats interpreter short",
-  "short": true,
-  "youtube": null
- },
- "maths-4e-stats-lire-graphique": {
-  "fichier": "_avant-marges/4e/maths/statistiques/02-lire-graphique/eleveai-maths-4e-stats-lire-graphique.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 4e stats lire graphique",
-  "short": false,
-  "youtube": null
- },
- "maths-4e-stats-lire-graphique-short": {
-  "fichier": "_avant-marges/4e/maths/statistiques/02-lire-graphique/eleveai-maths-4e-stats-lire-graphique-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 4e stats lire graphique short",
-  "short": true,
-  "youtube": null
- },
- "maths-4e-stats-lire-tableau": {
-  "fichier": "_avant-marges/4e/maths/statistiques/01-lire-tableau/eleveai-maths-4e-stats-lire-tableau.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 4e stats lire tableau",
-  "short": false,
-  "youtube": null
- },
- "maths-4e-stats-lire-tableau-short": {
-  "fichier": "_avant-marges/4e/maths/statistiques/01-lire-tableau/eleveai-maths-4e-stats-lire-tableau-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 4e stats lire tableau short",
-  "short": true,
-  "youtube": null
- },
- "maths-4e-stats-mediane": {
-  "fichier": "_avant-marges/4e/maths/statistiques/07-mediane/eleveai-maths-4e-stats-mediane.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 4e stats mediane",
-  "short": false,
-  "youtube": null
- },
- "maths-4e-stats-mediane-short": {
-  "fichier": "_avant-marges/4e/maths/statistiques/07-mediane/eleveai-maths-4e-stats-mediane-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 4e stats mediane short",
-  "short": true,
-  "youtube": null
- },
- "maths-4e-stats-moyenne": {
-  "fichier": "_avant-marges/4e/maths/statistiques/06-moyenne/eleveai-maths-4e-stats-moyenne.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 4e stats moyenne",
-  "short": false,
-  "youtube": null
- },
- "maths-4e-stats-moyenne-short": {
-  "fichier": "_avant-marges/4e/maths/statistiques/06-moyenne/eleveai-maths-4e-stats-moyenne-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 4e stats moyenne short",
-  "short": true,
-  "youtube": null
- },
- "maths-4e-stats-probleme": {
-  "fichier": "_avant-marges/4e/maths/statistiques/10-probleme/eleveai-maths-4e-stats-probleme.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 4e stats probleme",
-  "short": false,
-  "youtube": null
- },
- "maths-4e-stats-probleme-short": {
-  "fichier": "_avant-marges/4e/maths/statistiques/10-probleme/eleveai-maths-4e-stats-probleme-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 4e stats probleme short",
-  "short": true,
-  "youtube": null
- },
- "maths-5e-stats-choisir-representation": {
-  "fichier": "_avant-marges/5e/maths/statistiques/06-choisir-representation/eleveai-maths-5e-stats-choisir-representation.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 5e stats choisir representation",
-  "short": false,
-  "youtube": null
- },
- "maths-5e-stats-choisir-representation-short": {
-  "fichier": "_avant-marges/5e/maths/statistiques/06-choisir-representation/eleveai-maths-5e-stats-choisir-representation-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 5e stats choisir representation short",
-  "short": true,
-  "youtube": null
- },
- "maths-5e-stats-defi": {
-  "fichier": "_avant-marges/5e/maths/statistiques/08-defi/eleveai-maths-5e-stats-defi.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 5e stats defi",
-  "short": false,
-  "youtube": null
- },
- "maths-5e-stats-defi-short": {
-  "fichier": "_avant-marges/5e/maths/statistiques/08-defi/eleveai-maths-5e-stats-defi-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 5e stats defi short",
-  "short": true,
-  "youtube": null
- },
- "maths-5e-stats-effectif-frequence": {
-  "fichier": "_avant-marges/5e/maths/statistiques/04-effectif-frequence/eleveai-maths-5e-stats-effectif-frequence.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 5e stats effectif frequence",
-  "short": false,
-  "youtube": null
- },
- "maths-5e-stats-effectif-frequence-short": {
-  "fichier": "_avant-marges/5e/maths/statistiques/04-effectif-frequence/eleveai-maths-5e-stats-effectif-frequence-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 5e stats effectif frequence short",
-  "short": true,
-  "youtube": null
- },
- "maths-5e-stats-lire-graphique": {
-  "fichier": "_avant-marges/5e/maths/statistiques/03-lire-graphique/eleveai-maths-5e-stats-lire-graphique.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 5e stats lire graphique",
-  "short": false,
-  "youtube": null
- },
- "maths-5e-stats-lire-graphique-short": {
-  "fichier": "_avant-marges/5e/maths/statistiques/03-lire-graphique/eleveai-maths-5e-stats-lire-graphique-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 5e stats lire graphique short",
-  "short": true,
-  "youtube": null
- },
- "maths-5e-stats-lire-tableau": {
-  "fichier": "_avant-marges/5e/maths/statistiques/02-lire-tableau/eleveai-maths-5e-stats-lire-tableau.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 5e stats lire tableau",
-  "short": false,
-  "youtube": null
- },
- "maths-5e-stats-lire-tableau-short": {
-  "fichier": "_avant-marges/5e/maths/statistiques/02-lire-tableau/eleveai-maths-5e-stats-lire-tableau-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 5e stats lire tableau short",
-  "short": true,
-  "youtube": null
- },
- "maths-5e-stats-moyenne": {
-  "fichier": "_avant-marges/5e/maths/statistiques/07-moyenne/eleveai-maths-5e-stats-moyenne.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 5e stats moyenne",
-  "short": false,
-  "youtube": null
- },
- "maths-5e-stats-moyenne-short": {
-  "fichier": "_avant-marges/5e/maths/statistiques/07-moyenne/eleveai-maths-5e-stats-moyenne-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 5e stats moyenne short",
-  "short": true,
-  "youtube": null
- },
- "maths-5e-stats-organiser": {
-  "fichier": "_avant-marges/5e/maths/statistiques/01-organiser/eleveai-maths-5e-stats-organiser.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 5e stats organiser",
-  "short": false,
-  "youtube": null
- },
- "maths-5e-stats-organiser-short": {
-  "fichier": "_avant-marges/5e/maths/statistiques/01-organiser/eleveai-maths-5e-stats-organiser-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 5e stats organiser short",
-  "short": true,
-  "youtube": null
- },
- "maths-5e-stats-representer": {
-  "fichier": "_avant-marges/5e/maths/statistiques/05-representer/eleveai-maths-5e-stats-representer.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 5e stats representer",
-  "short": false,
-  "youtube": null
- },
- "maths-5e-stats-representer-short": {
-  "fichier": "_avant-marges/5e/maths/statistiques/05-representer/eleveai-maths-5e-stats-representer-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 5e stats representer short",
-  "short": true,
-  "youtube": null
- },
- "maths-6e-stats-comparer": {
-  "fichier": "_avant-marges/6e/maths/statistiques/08-comparer/eleveai-maths-6e-stats-comparer.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 6e stats comparer",
-  "short": false,
-  "youtube": null
- },
- "maths-6e-stats-comparer-short": {
-  "fichier": "_avant-marges/6e/maths/statistiques/08-comparer/eleveai-maths-6e-stats-comparer-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 6e stats comparer short",
-  "short": true,
-  "youtube": null
- },
- "maths-6e-stats-construire-tableau": {
-  "fichier": "_avant-marges/6e/maths/statistiques/03-construire-tableau/eleveai-maths-6e-stats-construire-tableau.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 6e stats construire tableau",
-  "short": false,
-  "youtube": null
- },
- "maths-6e-stats-construire-tableau-short": {
-  "fichier": "_avant-marges/6e/maths/statistiques/03-construire-tableau/eleveai-maths-6e-stats-construire-tableau-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 6e stats construire tableau short",
-  "short": true,
-  "youtube": null
- },
- "maths-6e-stats-defi": {
-  "fichier": "_avant-marges/6e/maths/statistiques/10-defi/eleveai-maths-6e-stats-defi.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 6e stats defi",
-  "short": false,
-  "youtube": null
- },
- "maths-6e-stats-defi-short": {
-  "fichier": "_avant-marges/6e/maths/statistiques/10-defi/eleveai-maths-6e-stats-defi-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 6e stats defi short",
-  "short": true,
-  "youtube": null
- },
- "maths-6e-stats-enquete-mesurer": {
-  "fichier": "_avant-marges/6e/maths/statistiques/05-enquete-mesurer/eleveai-maths-6e-stats-enquete-mesurer.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 6e stats enquete mesurer",
-  "short": false,
-  "youtube": null
- },
- "maths-6e-stats-enquete-mesurer-short": {
-  "fichier": "_avant-marges/6e/maths/statistiques/05-enquete-mesurer/eleveai-maths-6e-stats-enquete-mesurer-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 6e stats enquete mesurer short",
-  "short": true,
-  "youtube": null
- },
- "maths-6e-stats-enquete-planifier": {
-  "fichier": "_avant-marges/6e/maths/statistiques/04-enquete-planifier/eleveai-maths-6e-stats-enquete-planifier.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 6e stats enquete planifier",
-  "short": false,
-  "youtube": null
- },
- "maths-6e-stats-enquete-planifier-short": {
-  "fichier": "_avant-marges/6e/maths/statistiques/04-enquete-planifier/eleveai-maths-6e-stats-enquete-planifier-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 6e stats enquete planifier short",
-  "short": true,
-  "youtube": null
- },
- "maths-6e-stats-interpreter": {
-  "fichier": "_avant-marges/6e/maths/statistiques/09-interpreter/eleveai-maths-6e-stats-interpreter.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 6e stats interpreter",
-  "short": false,
-  "youtube": null
- },
- "maths-6e-stats-interpreter-short": {
-  "fichier": "_avant-marges/6e/maths/statistiques/09-interpreter/eleveai-maths-6e-stats-interpreter-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 6e stats interpreter short",
-  "short": true,
-  "youtube": null
- },
- "maths-6e-stats-lire-circulaire": {
-  "fichier": "_avant-marges/6e/maths/statistiques/07-lire-circulaire/eleveai-maths-6e-stats-lire-circulaire.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 6e stats lire circulaire",
-  "short": false,
-  "youtube": null
- },
- "maths-6e-stats-lire-circulaire-short": {
-  "fichier": "_avant-marges/6e/maths/statistiques/07-lire-circulaire/eleveai-maths-6e-stats-lire-circulaire-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 6e stats lire circulaire short",
-  "short": true,
-  "youtube": null
- },
- "maths-6e-stats-lire-graphique": {
-  "fichier": "_avant-marges/6e/maths/statistiques/06-lire-graphique/eleveai-maths-6e-stats-lire-graphique.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 6e stats lire graphique",
-  "short": false,
-  "youtube": null
- },
- "maths-6e-stats-lire-graphique-short": {
-  "fichier": "_avant-marges/6e/maths/statistiques/06-lire-graphique/eleveai-maths-6e-stats-lire-graphique-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 6e stats lire graphique short",
-  "short": true,
-  "youtube": null
- },
- "maths-6e-stats-lire-tableau": {
-  "fichier": "_avant-marges/6e/maths/statistiques/01-lire-tableau/eleveai-maths-6e-stats-lire-tableau.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 6e stats lire tableau",
-  "short": false,
-  "youtube": null
- },
- "maths-6e-stats-lire-tableau-short": {
-  "fichier": "_avant-marges/6e/maths/statistiques/01-lire-tableau/eleveai-maths-6e-stats-lire-tableau-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 6e stats lire tableau short",
-  "short": true,
-  "youtube": null
- },
- "maths-6e-stats-prelever": {
-  "fichier": "_avant-marges/6e/maths/statistiques/02-prelever/eleveai-maths-6e-stats-prelever.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 6e stats prelever",
-  "short": false,
-  "youtube": null
- },
- "maths-6e-stats-prelever-short": {
-  "fichier": "_avant-marges/6e/maths/statistiques/02-prelever/eleveai-maths-6e-stats-prelever-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 6e stats prelever short",
-  "short": true,
-  "youtube": null
- },
- "maths-cm1-stats-graphique-completer": {
-  "fichier": "_avant-marges/cm1/maths/statistiques/06-graphique-completer/eleveai-maths-cm1-stats-graphique-completer.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm1 stats graphique completer",
-  "short": false,
-  "youtube": null
- },
- "maths-cm1-stats-graphique-completer-short": {
-  "fichier": "_avant-marges/cm1/maths/statistiques/06-graphique-completer/eleveai-maths-cm1-stats-graphique-completer-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm1 stats graphique completer short",
-  "short": true,
-  "youtube": null
- },
- "maths-cm1-stats-graphique-defi": {
-  "fichier": "_avant-marges/cm1/maths/statistiques/08-graphique-defi/eleveai-maths-cm1-stats-graphique-defi.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm1 stats graphique defi",
-  "short": false,
-  "youtube": null
- },
- "maths-cm1-stats-graphique-defi-short": {
-  "fichier": "_avant-marges/cm1/maths/statistiques/08-graphique-defi/eleveai-maths-cm1-stats-graphique-defi-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm1 stats graphique defi short",
-  "short": true,
-  "youtube": null
- },
- "maths-cm1-stats-graphique-interpreter": {
-  "fichier": "_avant-marges/cm1/maths/statistiques/07-graphique-interpreter/eleveai-maths-cm1-stats-graphique-interpreter.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm1 stats graphique interpreter",
-  "short": false,
-  "youtube": null
- },
- "maths-cm1-stats-graphique-interpreter-short": {
-  "fichier": "_avant-marges/cm1/maths/statistiques/07-graphique-interpreter/eleveai-maths-cm1-stats-graphique-interpreter-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm1 stats graphique interpreter short",
-  "short": true,
-  "youtube": null
- },
- "maths-cm1-stats-graphique-lire": {
-  "fichier": "_avant-marges/cm1/maths/statistiques/05-graphique-lire/eleveai-maths-cm1-stats-graphique-lire.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm1 stats graphique lire",
-  "short": false,
-  "youtube": null
- },
- "maths-cm1-stats-graphique-lire-short": {
-  "fichier": "_avant-marges/cm1/maths/statistiques/05-graphique-lire/eleveai-maths-cm1-stats-graphique-lire-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm1 stats graphique lire short",
-  "short": true,
-  "youtube": null
- },
- "maths-cm1-stats-tableau-completer": {
-  "fichier": "_avant-marges/cm1/maths/statistiques/02-tableau-completer/eleveai-maths-cm1-stats-tableau-completer.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm1 stats tableau completer",
-  "short": false,
-  "youtube": null
- },
- "maths-cm1-stats-tableau-completer-short": {
-  "fichier": "_avant-marges/cm1/maths/statistiques/02-tableau-completer/eleveai-maths-cm1-stats-tableau-completer-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm1 stats tableau completer short",
-  "short": true,
-  "youtube": null
- },
- "maths-cm1-stats-tableau-defi": {
-  "fichier": "_avant-marges/cm1/maths/statistiques/04-tableau-defi/eleveai-maths-cm1-stats-tableau-defi.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm1 stats tableau defi",
-  "short": false,
-  "youtube": null
- },
- "maths-cm1-stats-tableau-defi-short": {
-  "fichier": "_avant-marges/cm1/maths/statistiques/04-tableau-defi/eleveai-maths-cm1-stats-tableau-defi-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm1 stats tableau defi short",
-  "short": true,
-  "youtube": null
- },
- "maths-cm1-stats-tableau-interpreter": {
-  "fichier": "_avant-marges/cm1/maths/statistiques/03-tableau-interpreter/eleveai-maths-cm1-stats-tableau-interpreter.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm1 stats tableau interpreter",
-  "short": false,
-  "youtube": null
- },
- "maths-cm1-stats-tableau-interpreter-short": {
-  "fichier": "_avant-marges/cm1/maths/statistiques/03-tableau-interpreter/eleveai-maths-cm1-stats-tableau-interpreter-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm1 stats tableau interpreter short",
-  "short": true,
-  "youtube": null
- },
- "maths-cm1-stats-tableau-lire": {
-  "fichier": "_avant-marges/cm1/maths/statistiques/01-tableau-lire/eleveai-maths-cm1-stats-tableau-lire.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm1 stats tableau lire",
-  "short": false,
-  "youtube": null
- },
- "maths-cm1-stats-tableau-lire-short": {
-  "fichier": "_avant-marges/cm1/maths/statistiques/01-tableau-lire/eleveai-maths-cm1-stats-tableau-lire-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm1 stats tableau lire short",
-  "short": true,
-  "youtube": null
- },
- "maths-cm2-stats-graphique-completer": {
-  "fichier": "_avant-marges/cm2/maths/statistiques/06-graphique-completer/eleveai-maths-cm2-stats-graphique-completer.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm2 stats graphique completer",
-  "short": false,
-  "youtube": null
- },
- "maths-cm2-stats-graphique-completer-short": {
-  "fichier": "_avant-marges/cm2/maths/statistiques/06-graphique-completer/eleveai-maths-cm2-stats-graphique-completer-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm2 stats graphique completer short",
-  "short": true,
-  "youtube": null
- },
- "maths-cm2-stats-graphique-defi": {
-  "fichier": "_avant-marges/cm2/maths/statistiques/08-graphique-defi/eleveai-maths-cm2-stats-graphique-defi.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm2 stats graphique defi",
-  "short": false,
-  "youtube": null
- },
- "maths-cm2-stats-graphique-defi-short": {
-  "fichier": "_avant-marges/cm2/maths/statistiques/08-graphique-defi/eleveai-maths-cm2-stats-graphique-defi-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm2 stats graphique defi short",
-  "short": true,
-  "youtube": null
- },
- "maths-cm2-stats-graphique-interpreter": {
-  "fichier": "_avant-marges/cm2/maths/statistiques/07-graphique-interpreter/eleveai-maths-cm2-stats-graphique-interpreter.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm2 stats graphique interpreter",
-  "short": false,
-  "youtube": null
- },
- "maths-cm2-stats-graphique-interpreter-short": {
-  "fichier": "_avant-marges/cm2/maths/statistiques/07-graphique-interpreter/eleveai-maths-cm2-stats-graphique-interpreter-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm2 stats graphique interpreter short",
-  "short": true,
-  "youtube": null
- },
- "maths-cm2-stats-graphique-lire": {
-  "fichier": "_avant-marges/cm2/maths/statistiques/05-graphique-lire/eleveai-maths-cm2-stats-graphique-lire.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm2 stats graphique lire",
-  "short": false,
-  "youtube": null
- },
- "maths-cm2-stats-graphique-lire-short": {
-  "fichier": "_avant-marges/cm2/maths/statistiques/05-graphique-lire/eleveai-maths-cm2-stats-graphique-lire-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm2 stats graphique lire short",
-  "short": true,
-  "youtube": null
- },
- "maths-cm2-stats-tableau-completer": {
-  "fichier": "_avant-marges/cm2/maths/statistiques/02-tableau-completer/eleveai-maths-cm2-stats-tableau-completer.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm2 stats tableau completer",
-  "short": false,
-  "youtube": null
- },
- "maths-cm2-stats-tableau-completer-short": {
-  "fichier": "_avant-marges/cm2/maths/statistiques/02-tableau-completer/eleveai-maths-cm2-stats-tableau-completer-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm2 stats tableau completer short",
-  "short": true,
-  "youtube": null
- },
- "maths-cm2-stats-tableau-defi": {
-  "fichier": "_avant-marges/cm2/maths/statistiques/04-tableau-defi/eleveai-maths-cm2-stats-tableau-defi.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm2 stats tableau defi",
-  "short": false,
-  "youtube": null
- },
- "maths-cm2-stats-tableau-defi-short": {
-  "fichier": "_avant-marges/cm2/maths/statistiques/04-tableau-defi/eleveai-maths-cm2-stats-tableau-defi-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm2 stats tableau defi short",
-  "short": true,
-  "youtube": null
- },
- "maths-cm2-stats-tableau-interpreter": {
-  "fichier": "_avant-marges/cm2/maths/statistiques/03-tableau-interpreter/eleveai-maths-cm2-stats-tableau-interpreter.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm2 stats tableau interpreter",
-  "short": false,
-  "youtube": null
- },
- "maths-cm2-stats-tableau-interpreter-short": {
-  "fichier": "_avant-marges/cm2/maths/statistiques/03-tableau-interpreter/eleveai-maths-cm2-stats-tableau-interpreter-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm2 stats tableau interpreter short",
-  "short": true,
-  "youtube": null
- },
- "maths-cm2-stats-tableau-lire": {
-  "fichier": "_avant-marges/cm2/maths/statistiques/01-tableau-lire/eleveai-maths-cm2-stats-tableau-lire.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm2 stats tableau lire",
-  "short": false,
-  "youtube": null
- },
- "maths-cm2-stats-tableau-lire-short": {
-  "fichier": "_avant-marges/cm2/maths/statistiques/01-tableau-lire/eleveai-maths-cm2-stats-tableau-lire-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths cm2 stats tableau lire short",
-  "short": true,
-  "youtube": null
- },
  "maths-cp-chiffre-0-droitier-portrait": {
   "fichier": "cp/maths/shorts/fr/chiffre-0/eleveai-maths-cp-chiffre-0-droitier-portrait.mp4",
   "poster": null,
@@ -6505,8 +5657,8 @@
  "premiere-commun-stats-filtre-effectif": {
   "fichier": "premiere-commun/maths/statistiques/18-filtre-effectif/eleveai-maths-premiere-commun-stats-filtre-effectif.mp4",
   "poster": "premiere-commun/maths/statistiques/18-filtre-effectif/eleveai-maths-premiere-commun-stats-filtre-effectif.png",
-  "vignette": null,
-  "titre": "Patrimoine mondial : 294 biens ? Non, 282 ! — L'effectif d'un filtre dans un tableau croisé — épisode 18 · Maths 1re",
+  "vignette": "premiere-commun/maths/statistiques/18-filtre-effectif/eleveai-maths-premiere-commun-stats-filtre-effectif.vignette.webp",
+  "titre": "Patrimoine mondial : 294 biens ? Non, 282 ! — L'effectif d'un filtre · Maths 1re",
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=premiere&matiere=maths&notion=info_filtre_donnees&microId=info_filtre_effectif&display=simple"
@@ -6514,7 +5666,7 @@
  "premiere-commun-stats-filtre-effectif-short": {
   "fichier": "premiere-commun/maths/statistiques/18-filtre-effectif/eleveai-maths-premiere-commun-stats-filtre-effectif-short.mp4",
   "poster": "premiere-commun/maths/statistiques/18-filtre-effectif/eleveai-maths-premiere-commun-stats-filtre-effectif-short.png",
-  "vignette": null,
+  "vignette": "premiere-commun/maths/statistiques/18-filtre-effectif/eleveai-maths-premiere-commun-stats-filtre-effectif-short.vignette.webp",
   "titre": "Patrimoine mondial : naturels OU en danger, combien ? 🏛️ — 1re #Shorts",
   "short": true,
   "youtube": null,
@@ -6523,7 +5675,7 @@
  "premiere-commun-stats-filtre-et": {
   "fichier": "premiere-commun/maths/statistiques/15-filtre-et/eleveai-maths-premiere-commun-stats-filtre-et.mp4",
   "poster": "premiere-commun/maths/statistiques/15-filtre-et/eleveai-maths-premiere-commun-stats-filtre-et.png",
-  "vignette": null,
+  "vignette": "premiere-commun/maths/statistiques/15-filtre-et/eleveai-maths-premiere-commun-stats-filtre-et.vignette.webp",
   "titre": "Volcans : avec ET, il en reste moins ! — Filtrer avec ET — épisode 15 · Maths 1re",
   "short": false,
   "youtube": null,
@@ -6532,7 +5684,7 @@
  "premiere-commun-stats-filtre-et-short": {
   "fichier": "premiere-commun/maths/statistiques/15-filtre-et/eleveai-maths-premiere-commun-stats-filtre-et-short.mp4",
   "poster": "premiere-commun/maths/statistiques/15-filtre-et/eleveai-maths-premiere-commun-stats-filtre-et-short.png",
-  "vignette": null,
+  "vignette": "premiere-commun/maths/statistiques/15-filtre-et/eleveai-maths-premiere-commun-stats-filtre-et-short.vignette.webp",
   "titre": "Mission volcans : très hauts ET actifs, combien ? 🌋 — 1re #Shorts",
   "short": true,
   "youtube": null,
@@ -6541,7 +5693,7 @@
  "premiere-commun-stats-filtre-non": {
   "fichier": "premiere-commun/maths/statistiques/17-filtre-non/eleveai-maths-premiere-commun-stats-filtre-non.mp4",
   "poster": "premiere-commun/maths/statistiques/17-filtre-non/eleveai-maths-premiere-commun-stats-filtre-non.png",
-  "vignette": null,
+  "vignette": "premiere-commun/maths/statistiques/17-filtre-non/eleveai-maths-premiere-commun-stats-filtre-non.vignette.webp",
   "titre": "Planètes : le filtre NON, et le piège du NON ET — Filtrer avec NON — épisode 17 · Maths 1re",
   "short": false,
   "youtube": null,
@@ -6550,7 +5702,7 @@
  "premiere-commun-stats-filtre-non-short": {
   "fichier": "premiere-commun/maths/statistiques/17-filtre-non/eleveai-maths-premiere-commun-stats-filtre-non-short.mp4",
   "poster": "premiere-commun/maths/statistiques/17-filtre-non/eleveai-maths-premiere-commun-stats-filtre-non-short.png",
-  "vignette": null,
+  "vignette": "premiere-commun/maths/statistiques/17-filtre-non/eleveai-maths-premiere-commun-stats-filtre-non-short.vignette.webp",
   "titre": "Les planètes sans aucune lune : combien ? 🪐 — 1re #Shorts",
   "short": true,
   "youtube": null,
@@ -6559,7 +5711,7 @@
  "premiere-commun-stats-filtre-ou": {
   "fichier": "premiere-commun/maths/statistiques/16-filtre-ou/eleveai-maths-premiere-commun-stats-filtre-ou.mp4",
   "poster": "premiere-commun/maths/statistiques/16-filtre-ou/eleveai-maths-premiere-commun-stats-filtre-ou.png",
-  "vignette": null,
+  "vignette": "premiere-commun/maths/statistiques/16-filtre-ou/eleveai-maths-premiere-commun-stats-filtre-ou.vignette.webp",
   "titre": "Gratte-ciel : avec OU, 6 + 4 ne fait pas 10 ! — Filtrer avec OU — épisode 16 · Maths 1re",
   "short": false,
   "youtube": null,
@@ -6568,7 +5720,7 @@
  "premiere-commun-stats-filtre-ou-short": {
   "fichier": "premiere-commun/maths/statistiques/16-filtre-ou/eleveai-maths-premiere-commun-stats-filtre-ou-short.mp4",
   "poster": "premiere-commun/maths/statistiques/16-filtre-ou/eleveai-maths-premiere-commun-stats-filtre-ou-short.png",
-  "vignette": null,
+  "vignette": "premiere-commun/maths/statistiques/16-filtre-ou/eleveai-maths-premiere-commun-stats-filtre-ou-short.vignette.webp",
   "titre": "Gratte-ciel : 6 + 4 = 10 ? Perdu ! 🏙️ — 1re #Shorts",
   "short": true,
   "youtube": null,
@@ -6577,8 +5729,8 @@
  "premiere-commun-stats-filtre-sous-ensemble": {
   "fichier": "premiere-commun/maths/statistiques/14-filtre-sous-ensemble/eleveai-maths-premiere-commun-stats-filtre-sous-ensemble.mp4",
   "poster": "premiere-commun/maths/statistiques/14-filtre-sous-ensemble/eleveai-maths-premiere-commun-stats-filtre-sous-ensemble.png",
-  "vignette": null,
-  "titre": "Le filtre du tableur : que garde-t-il vraiment ? — Filtrer des données avec un critère — épisode 14 · Maths 1re",
+  "vignette": "premiere-commun/maths/statistiques/14-filtre-sous-ensemble/eleveai-maths-premiere-commun-stats-filtre-sous-ensemble.vignette.webp",
+  "titre": "Le filtre du tableur : que garde-t-il vraiment ? — Filtrer des données avec un critère · Maths 1re",
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=premiere&matiere=maths&notion=info_filtre_donnees&microId=info_filtre_sous_ensemble&display=simple"
@@ -6586,7 +5738,7 @@
  "premiere-commun-stats-filtre-sous-ensemble-short": {
   "fichier": "premiere-commun/maths/statistiques/14-filtre-sous-ensemble/eleveai-maths-premiere-commun-stats-filtre-sous-ensemble-short.mp4",
   "poster": "premiere-commun/maths/statistiques/14-filtre-sous-ensemble/eleveai-maths-premiere-commun-stats-filtre-sous-ensemble-short.png",
-  "vignette": null,
+  "vignette": "premiere-commun/maths/statistiques/14-filtre-sous-ensemble/eleveai-maths-premiere-commun-stats-filtre-sous-ensemble-short.vignette.webp",
   "titre": "Soirée cinéma : que des films de 140 minutes ou plus ! 🍿 — 1re #Shorts",
   "short": true,
   "youtube": null,
@@ -6595,7 +5747,7 @@
  "premiere-commun-stats-graphique-donnees": {
   "fichier": "premiere-commun/maths/statistiques/03-graphique-donnees/eleveai-maths-premiere-commun-stats-graphique-donnees.mp4",
   "poster": "premiere-commun/maths/statistiques/03-graphique-donnees/eleveai-maths-premiere-commun-stats-graphique-donnees.png",
-  "vignette": null,
+  "vignette": "premiere-commun/maths/statistiques/03-graphique-donnees/eleveai-maths-premiere-commun-stats-graphique-donnees.vignette.webp",
   "titre": "Mbappé : la moitié des buts de la France ? 180° ! — Du graphique aux données — épisode 3 · Maths 1re",
   "short": false,
   "youtube": null,
@@ -6604,7 +5756,7 @@
  "premiere-commun-stats-graphique-donnees-short": {
   "fichier": "premiere-commun/maths/statistiques/03-graphique-donnees/eleveai-maths-premiere-commun-stats-graphique-donnees-short.mp4",
   "poster": "premiere-commun/maths/statistiques/03-graphique-donnees/eleveai-maths-premiere-commun-stats-graphique-donnees-short.png",
-  "vignette": null,
+  "vignette": "premiere-commun/maths/statistiques/03-graphique-donnees/eleveai-maths-premiere-commun-stats-graphique-donnees-short.vignette.webp",
   "titre": "Mbappé a-t-il marqué la moitié des buts de la France ? ⚽ — 1re #Shorts",
   "short": true,
   "youtube": null,
@@ -6613,7 +5765,7 @@
  "premiere-commun-stats-graphiques-usuels": {
   "fichier": "premiere-commun/maths/statistiques/02-graphiques-usuels/eleveai-maths-premiere-commun-stats-graphiques-usuels.mp4",
   "poster": "premiere-commun/maths/statistiques/02-graphiques-usuels/eleveai-maths-premiere-commun-stats-graphiques-usuels.png",
-  "vignette": null,
+  "vignette": "premiere-commun/maths/statistiques/02-graphiques-usuels/eleveai-maths-premiere-commun-stats-graphiques-usuels.vignette.webp",
   "titre": "Films français : + 4,3 % ? Non, + 4,3 points ! — Les diagrammes usuels — épisode 2 · Maths 1re",
   "short": false,
   "youtube": null,
@@ -6622,7 +5774,7 @@
  "premiere-commun-stats-graphiques-usuels-short": {
   "fichier": "premiere-commun/maths/statistiques/02-graphiques-usuels/eleveai-maths-premiere-commun-stats-graphiques-usuels-short.mp4",
   "poster": "premiere-commun/maths/statistiques/02-graphiques-usuels/eleveai-maths-premiere-commun-stats-graphiques-usuels-short.png",
-  "vignette": null,
+  "vignette": "premiere-commun/maths/statistiques/02-graphiques-usuels/eleveai-maths-premiere-commun-stats-graphiques-usuels-short.vignette.webp",
   "titre": "Films français contre films américains : qui gagne au cinéma ? 🎬 — 1re #Shorts",
   "short": true,
   "youtube": null,
@@ -6631,7 +5783,7 @@
  "premiere-commun-stats-lire-graphique": {
   "fichier": "premiere-commun/maths/statistiques/01-lire-graphique/eleveai-maths-premiere-commun-stats-lire-graphique.mp4",
   "poster": "premiere-commun/maths/statistiques/01-lire-graphique/eleveai-maths-premiere-commun-stats-lire-graphique.png",
-  "vignette": null,
+  "vignette": "premiere-commun/maths/statistiques/01-lire-graphique/eleveai-maths-premiere-commun-stats-lire-graphique.vignette.webp",
   "titre": "Le CO₂ multiplié par 3 ? Regarde l'axe ! — Lire un graphique — épisode 1 · Maths 1re",
   "short": false,
   "youtube": null,
@@ -6640,7 +5792,7 @@
  "premiere-commun-stats-lire-graphique-short": {
   "fichier": "premiere-commun/maths/statistiques/01-lire-graphique/eleveai-maths-premiere-commun-stats-lire-graphique-short.mp4",
   "poster": "premiere-commun/maths/statistiques/01-lire-graphique/eleveai-maths-premiere-commun-stats-lire-graphique-short.png",
-  "vignette": null,
+  "vignette": "premiere-commun/maths/statistiques/01-lire-graphique/eleveai-maths-premiere-commun-stats-lire-graphique-short.vignette.webp",
   "titre": "Le CO₂ de l'air multiplié par 3 ? Regarde l'axe ! 🌍 — 1re #Shorts",
   "short": true,
   "youtube": null,
@@ -6649,7 +5801,7 @@
  "premiere-commun-stats-nuage-construire": {
   "fichier": "premiere-commun/maths/statistiques/12-nuage-construire/eleveai-maths-premiere-commun-stats-nuage-construire.mp4",
   "poster": "premiere-commun/maths/statistiques/12-nuage-construire/eleveai-maths-premiere-commun-stats-nuage-construire.png",
-  "vignette": null,
+  "vignette": "premiere-commun/maths/statistiques/12-nuage-construire/eleveai-maths-premiere-commun-stats-nuage-construire.vignette.webp",
   "titre": "Le métro de Paris en nuage de points — Construire un nuage de points — épisode 12 · Maths 1re",
   "short": false,
   "youtube": null,
@@ -6658,7 +5810,7 @@
  "premiere-commun-stats-nuage-construire-short": {
   "fichier": "premiere-commun/maths/statistiques/12-nuage-construire/eleveai-maths-premiere-commun-stats-nuage-construire-short.mp4",
   "poster": "premiere-commun/maths/statistiques/12-nuage-construire/eleveai-maths-premiere-commun-stats-nuage-construire-short.png",
-  "vignette": null,
+  "vignette": "premiere-commun/maths/statistiques/12-nuage-construire/eleveai-maths-premiere-commun-stats-nuage-construire-short.vignette.webp",
   "titre": "Le métro de Paris : une ligne, un point 🚇 — 1re #Shorts",
   "short": true,
   "youtube": null,
@@ -6667,7 +5819,7 @@
  "premiere-commun-stats-nuage-lire": {
   "fichier": "premiere-commun/maths/statistiques/11-nuage-lire/eleveai-maths-premiere-commun-stats-nuage-lire.mp4",
   "poster": "premiere-commun/maths/statistiques/11-nuage-lire/eleveai-maths-premiere-commun-stats-nuage-lire.png",
-  "vignette": null,
+  "vignette": "premiere-commun/maths/statistiques/11-nuage-lire/eleveai-maths-premiere-commun-stats-nuage-lire.vignette.webp",
   "titre": "Mbappé au PSG : (35 ; 28) ou (28 ; 35) ? — Lire un nuage de points — épisode 11 · Maths 1re",
   "short": false,
   "youtube": null,
@@ -6676,7 +5828,7 @@
  "premiere-commun-stats-nuage-lire-short": {
   "fichier": "premiere-commun/maths/statistiques/11-nuage-lire/eleveai-maths-premiere-commun-stats-nuage-lire-short.mp4",
   "poster": "premiere-commun/maths/statistiques/11-nuage-lire/eleveai-maths-premiere-commun-stats-nuage-lire-short.png",
-  "vignette": null,
+  "vignette": "premiere-commun/maths/statistiques/11-nuage-lire/eleveai-maths-premiere-commun-stats-nuage-lire-short.vignette.webp",
   "titre": "Mbappé au PSG : chaque point, une saison ⚽ — 1re #Shorts",
   "short": true,
   "youtube": null,
@@ -6685,8 +5837,8 @@
  "premiere-commun-stats-nuage-tendance": {
   "fichier": "premiere-commun/maths/statistiques/13-nuage-tendance/eleveai-maths-premiere-commun-stats-nuage-tendance.mp4",
   "poster": "premiere-commun/maths/statistiques/13-nuage-tendance/eleveai-maths-premiere-commun-stats-nuage-tendance.png",
-  "vignette": null,
-  "titre": "Plus loin de l'équateur, plus froid ? La tendance d'un nuage — Décrire la tendance d'un nuage — épisode 13 · Maths 1re",
+  "vignette": "premiere-commun/maths/statistiques/13-nuage-tendance/eleveai-maths-premiere-commun-stats-nuage-tendance.vignette.webp",
+  "titre": "Plus loin de l'équateur, plus froid ? La tendance d'un nuage — Tendance d'un nuage · Maths 1re",
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=premiere&matiere=maths&notion=info_nuage&microId=info_nuage_tendance&display=simple"
@@ -6694,7 +5846,7 @@
  "premiere-commun-stats-nuage-tendance-short": {
   "fichier": "premiere-commun/maths/statistiques/13-nuage-tendance/eleveai-maths-premiere-commun-stats-nuage-tendance-short.mp4",
   "poster": "premiere-commun/maths/statistiques/13-nuage-tendance/eleveai-maths-premiere-commun-stats-nuage-tendance-short.png",
-  "vignette": null,
+  "vignette": "premiere-commun/maths/statistiques/13-nuage-tendance/eleveai-maths-premiere-commun-stats-nuage-tendance-short.vignette.webp",
   "titre": "Plus une ville est loin de l'équateur, plus il y fait froid ? 🌡️ — 1re #Shorts",
   "short": true,
   "youtube": null,
@@ -6703,8 +5855,8 @@
  "premiere-commun-stats-rep-barres": {
   "fichier": "premiere-commun/maths/statistiques/07-rep-barres/eleveai-maths-premiere-commun-stats-rep-barres.mp4",
   "poster": "premiere-commun/maths/statistiques/07-rep-barres/eleveai-maths-premiere-commun-stats-rep-barres.png",
-  "vignette": null,
-  "titre": "ChatGPT chaque jour : 51 % de qui ? — Lire un diagramme en barres qui croise deux caractères — épisode 7 · Maths 1re",
+  "vignette": "premiere-commun/maths/statistiques/07-rep-barres/eleveai-maths-premiere-commun-stats-rep-barres.vignette.webp",
+  "titre": "ChatGPT chaque jour : 51 % de qui ? — Diagramme en barres · Maths 1re",
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=premiere&matiere=maths&notion=info_representations_croisees&microId=info_rep_barres&display=simple"
@@ -6712,7 +5864,7 @@
  "premiere-commun-stats-rep-barres-short": {
   "fichier": "premiere-commun/maths/statistiques/07-rep-barres/eleveai-maths-premiere-commun-stats-rep-barres-short.mp4",
   "poster": "premiere-commun/maths/statistiques/07-rep-barres/eleveai-maths-premiere-commun-stats-rep-barres-short.png",
-  "vignette": null,
+  "vignette": "premiere-commun/maths/statistiques/07-rep-barres/eleveai-maths-premiere-commun-stats-rep-barres-short.vignette.webp",
   "titre": "L'IA chaque jour : les ados ou les jeunes adultes ? 🤖 — 1re #Shorts",
   "short": true,
   "youtube": null,
@@ -6721,8 +5873,8 @@
  "premiere-commun-stats-rep-choisir": {
   "fichier": "premiere-commun/maths/statistiques/09-rep-choisir/eleveai-maths-premiere-commun-stats-rep-choisir.mp4",
   "poster": "premiere-commun/maths/statistiques/09-rep-choisir/eleveai-maths-premiere-commun-stats-rep-choisir.png",
-  "vignette": null,
-  "titre": "Jeux vidéo : camembert, barres, courbe ou nuage ? — Choisir la bonne représentation — épisode 9 · Maths 1re",
+  "vignette": "premiere-commun/maths/statistiques/09-rep-choisir/eleveai-maths-premiere-commun-stats-rep-choisir.vignette.webp",
+  "titre": "Jeux vidéo : camembert, barres, courbe ou nuage ? — Choisir la bonne représentation · Maths 1re",
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=premiere&matiere=maths&notion=info_representations_croisees&microId=info_rep_choisir&display=simple"
@@ -6730,7 +5882,7 @@
  "premiere-commun-stats-rep-choisir-short": {
   "fichier": "premiere-commun/maths/statistiques/09-rep-choisir/eleveai-maths-premiere-commun-stats-rep-choisir-short.mp4",
   "poster": "premiere-commun/maths/statistiques/09-rep-choisir/eleveai-maths-premiere-commun-stats-rep-choisir-short.png",
-  "vignette": null,
+  "vignette": "premiere-commun/maths/statistiques/09-rep-choisir/eleveai-maths-premiere-commun-stats-rep-choisir-short.vignette.webp",
   "titre": "Jeux vidéo : peut-on en faire un camembert ? 🎮 — 1re #Shorts",
   "short": true,
   "youtube": null,
@@ -6739,7 +5891,7 @@
  "premiere-commun-stats-rep-circulaire": {
   "fichier": "premiere-commun/maths/statistiques/08-rep-circulaire/eleveai-maths-premiere-commun-stats-rep-circulaire.mp4",
   "poster": "premiere-commun/maths/statistiques/08-rep-circulaire/eleveai-maths-premiere-commun-stats-rep-circulaire.png",
-  "vignette": null,
+  "vignette": "premiere-commun/maths/statistiques/08-rep-circulaire/eleveai-maths-premiere-commun-stats-rep-circulaire.vignette.webp",
   "titre": "Le demi-disque : 1 % = 3,6° ? Non, 1,8° ! — Lire un diagramme circulaire — épisode 8 · Maths 1re",
   "short": false,
   "youtube": null,
@@ -6748,7 +5900,7 @@
  "premiere-commun-stats-rep-circulaire-short": {
   "fichier": "premiere-commun/maths/statistiques/08-rep-circulaire/eleveai-maths-premiere-commun-stats-rep-circulaire-short.mp4",
   "poster": "premiere-commun/maths/statistiques/08-rep-circulaire/eleveai-maths-premiere-commun-stats-rep-circulaire-short.png",
-  "vignette": null,
+  "vignette": "premiere-commun/maths/statistiques/08-rep-circulaire/eleveai-maths-premiere-commun-stats-rep-circulaire-short.vignette.webp",
   "titre": "Le nucléaire : 241,2° sur le camembert, ça fait combien ? ⚡ — 1re #Shorts",
   "short": true,
   "youtube": null,
@@ -6757,7 +5909,7 @@
  "premiere-commun-stats-rep-commenter": {
   "fichier": "premiere-commun/maths/statistiques/10-rep-commenter/eleveai-maths-premiere-commun-stats-rep-commenter.mp4",
   "poster": "premiere-commun/maths/statistiques/10-rep-commenter/eleveai-maths-premiere-commun-stats-rep-commenter.png",
-  "vignette": null,
+  "vignette": "premiere-commun/maths/statistiques/10-rep-commenter/eleveai-maths-premiere-commun-stats-rep-commenter.vignette.webp",
   "titre": "Plus de filles au basket qu'au foot ? FAUX ! — Commenter un graphique — épisode 10 · Maths 1re",
   "short": false,
   "youtube": null,
@@ -6766,7 +5918,7 @@
  "premiere-commun-stats-rep-commenter-short": {
   "fichier": "premiere-commun/maths/statistiques/10-rep-commenter/eleveai-maths-premiere-commun-stats-rep-commenter-short.mp4",
   "poster": "premiere-commun/maths/statistiques/10-rep-commenter/eleveai-maths-premiere-commun-stats-rep-commenter-short.png",
-  "vignette": null,
+  "vignette": "premiere-commun/maths/statistiques/10-rep-commenter/eleveai-maths-premiere-commun-stats-rep-commenter-short.vignette.webp",
   "titre": "Plus de filles licenciées au foot ou au basket ? 🏀⚽ — 1re #Shorts",
   "short": true,
   "youtube": null,
@@ -6775,7 +5927,7 @@
  "premiere-commun-stats-tab-completer": {
   "fichier": "premiere-commun/maths/statistiques/05-tab-completer/eleveai-maths-premiere-commun-stats-tab-completer.mp4",
   "poster": "premiere-commun/maths/statistiques/05-tab-completer/eleveai-maths-premiere-commun-stats-tab-completer.png",
-  "vignette": null,
+  "vignette": "premiere-commun/maths/statistiques/05-tab-completer/eleveai-maths-premiere-commun-stats-tab-completer.vignette.webp",
   "titre": "Fusées 2024 : retrouver les cases disparues — Compléter un tableau croisé — épisode 5 · Maths 1re",
   "short": false,
   "youtube": null,
@@ -6784,7 +5936,7 @@
  "premiere-commun-stats-tab-completer-short": {
   "fichier": "premiere-commun/maths/statistiques/05-tab-completer/eleveai-maths-premiere-commun-stats-tab-completer-short.mp4",
   "poster": "premiere-commun/maths/statistiques/05-tab-completer/eleveai-maths-premiere-commun-stats-tab-completer-short.png",
-  "vignette": null,
+  "vignette": "premiere-commun/maths/statistiques/05-tab-completer/eleveai-maths-premiere-commun-stats-tab-completer-short.vignette.webp",
   "titre": "2024, record de fusées : combien ont raté leur mission ? 🚀 — 1re #Shorts",
   "short": true,
   "youtube": null,
@@ -6793,8 +5945,8 @@
  "premiere-commun-stats-tab-construire": {
   "fichier": "premiere-commun/maths/statistiques/06-tab-construire/eleveai-maths-premiere-commun-stats-tab-construire.mp4",
   "poster": "premiere-commun/maths/statistiques/06-tab-construire/eleveai-maths-premiere-commun-stats-tab-construire.png",
-  "vignette": null,
-  "titre": "Eurovision : faut-il chanter en anglais pour gagner ? — Dresser un tableau croisé — épisode 6 · Maths 1re",
+  "vignette": "premiere-commun/maths/statistiques/06-tab-construire/eleveai-maths-premiere-commun-stats-tab-construire.vignette.webp",
+  "titre": "Eurovision : faut-il chanter en anglais pour gagner ? — Dresser un tableau croisé · Maths 1re",
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=premiere&matiere=maths&notion=info_tableau_croise&microId=info_tab_construire&display=simple"
@@ -6802,7 +5954,7 @@
  "premiere-commun-stats-tab-construire-short": {
   "fichier": "premiere-commun/maths/statistiques/06-tab-construire/eleveai-maths-premiere-commun-stats-tab-construire-short.mp4",
   "poster": "premiere-commun/maths/statistiques/06-tab-construire/eleveai-maths-premiere-commun-stats-tab-construire-short.png",
-  "vignette": null,
+  "vignette": "premiere-commun/maths/statistiques/06-tab-construire/eleveai-maths-premiere-commun-stats-tab-construire-short.vignette.webp",
   "titre": "Eurovision : faut-il chanter en anglais pour gagner ? 🎤 — 1re #Shorts",
   "short": true,
   "youtube": null,
@@ -6811,7 +5963,7 @@
  "premiere-commun-stats-tab-lire": {
   "fichier": "premiere-commun/maths/statistiques/04-tab-lire/eleveai-maths-premiere-commun-stats-tab-lire.mp4",
   "poster": "premiere-commun/maths/statistiques/04-tab-lire/eleveai-maths-premiere-commun-stats-tab-lire.png",
-  "vignette": null,
+  "vignette": "premiere-commun/maths/statistiques/04-tab-lire/eleveai-maths-premiere-commun-stats-tab-lire.vignette.webp",
   "titre": "Femmes Nobel : plus en 25 ans qu'en un siècle ! — Lire un tableau croisé — épisode 4 · Maths 1re",
   "short": false,
   "youtube": null,
@@ -6820,7 +5972,7 @@
  "premiere-commun-stats-tab-lire-short": {
   "fichier": "premiere-commun/maths/statistiques/04-tab-lire/eleveai-maths-premiere-commun-stats-tab-lire-short.mp4",
   "poster": "premiere-commun/maths/statistiques/04-tab-lire/eleveai-maths-premiere-commun-stats-tab-lire-short.png",
-  "vignette": null,
+  "vignette": "premiere-commun/maths/statistiques/04-tab-lire/eleveai-maths-premiere-commun-stats-tab-lire-short.vignette.webp",
   "titre": "Femmes Nobel en sciences : plus nombreuses depuis 2000 ? 🔬 — 1re #Shorts",
   "short": true,
   "youtube": null,
@@ -7684,8 +6836,8 @@
  "seconde-stats-ecart-interquartile": {
   "fichier": "seconde/maths/statistiques/06-ecart-interquartile/eleveai-maths-seconde-stats-ecart-interquartile.mp4",
   "poster": "seconde/maths/statistiques/06-ecart-interquartile/eleveai-maths-seconde-stats-ecart-interquartile.png",
-  "vignette": null,
-  "titre": "Paris ou Saint-Denis : où la pluie est-elle régulière ? — L'écart interquartile — épisode 6 · Maths 2de",
+  "vignette": "seconde/maths/statistiques/06-ecart-interquartile/eleveai-maths-seconde-stats-ecart-interquartile.vignette.webp",
+  "titre": "Paris ou Saint-Denis : où la pluie est-elle régulière ? — L'écart interquartile · Maths 2de",
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=seconde&matiere=maths&notion=statistiques_descriptives&microId=stat_ecart_interquartile&display=simple"
@@ -7693,7 +6845,7 @@
  "seconde-stats-ecart-interquartile-short": {
   "fichier": "seconde/maths/statistiques/06-ecart-interquartile/eleveai-maths-seconde-stats-ecart-interquartile-short.mp4",
   "poster": "seconde/maths/statistiques/06-ecart-interquartile/eleveai-maths-seconde-stats-ecart-interquartile-short.png",
-  "vignette": null,
+  "vignette": "seconde/maths/statistiques/06-ecart-interquartile/eleveai-maths-seconde-stats-ecart-interquartile-short.vignette.webp",
   "titre": "Saint-Denis : la pluie du milieu de l'année est-elle régulière ? 🌧️ — 2de #Shorts",
   "short": true,
   "youtube": null,
@@ -7702,7 +6854,7 @@
  "seconde-stats-ecart-type": {
   "fichier": "seconde/maths/statistiques/08-ecart-type/eleveai-maths-seconde-stats-ecart-type.mp4",
   "poster": "seconde/maths/statistiques/08-ecart-type/eleveai-maths-seconde-stats-ecart-type.png",
-  "vignette": null,
+  "vignette": "seconde/maths/statistiques/08-ecart-type/eleveai-maths-seconde-stats-ecart-type.vignette.webp",
   "titre": "Brest ou Strasbourg : même moyenne, même climat ? — L'écart type — épisode 8 · Maths 2de",
   "short": false,
   "youtube": null,
@@ -7711,7 +6863,7 @@
  "seconde-stats-ecart-type-short": {
   "fichier": "seconde/maths/statistiques/08-ecart-type/eleveai-maths-seconde-stats-ecart-type-short.mp4",
   "poster": "seconde/maths/statistiques/08-ecart-type/eleveai-maths-seconde-stats-ecart-type-short.png",
-  "vignette": null,
+  "vignette": "seconde/maths/statistiques/08-ecart-type/eleveai-maths-seconde-stats-ecart-type-short.vignette.webp",
   "titre": "Brest ou Strasbourg : même moyenne, même climat ? 🌡️ — 2de #Shorts",
   "short": true,
   "youtube": null,
@@ -7720,7 +6872,7 @@
  "seconde-stats-frequence": {
   "fichier": "seconde/maths/statistiques/05-frequence/eleveai-maths-seconde-stats-frequence.mp4",
   "poster": "seconde/maths/statistiques/05-frequence/eleveai-maths-seconde-stats-frequence.png",
-  "vignette": null,
+  "vignette": "seconde/maths/statistiques/05-frequence/eleveai-maths-seconde-stats-frequence.vignette.webp",
   "titre": "Casser un code secret avec les fréquences — Calculer une fréquence — épisode 5 · Maths 2de",
   "short": false,
   "youtube": null,
@@ -7729,7 +6881,7 @@
  "seconde-stats-frequence-short": {
   "fichier": "seconde/maths/statistiques/05-frequence/eleveai-maths-seconde-stats-frequence-short.mp4",
   "poster": "seconde/maths/statistiques/05-frequence/eleveai-maths-seconde-stats-frequence-short.png",
-  "vignette": null,
+  "vignette": "seconde/maths/statistiques/05-frequence/eleveai-maths-seconde-stats-frequence-short.vignette.webp",
   "titre": "Un message secret : quelle lettre se cache derrière le H ? 🔐 — 2de #Shorts",
   "short": true,
   "youtube": null,
@@ -7738,8 +6890,8 @@
  "seconde-stats-interpreter": {
   "fichier": "seconde/maths/statistiques/09-interpreter/eleveai-maths-seconde-stats-interpreter.mp4",
   "poster": "seconde/maths/statistiques/09-interpreter/eleveai-maths-seconde-stats-interpreter.png",
-  "vignette": null,
-  "titre": "Salaire moyen 2 735 € : la plupart gagnent ça ? FAUX ! — Interpréter des indicateurs — épisode 9 · Maths 2de",
+  "vignette": "seconde/maths/statistiques/09-interpreter/eleveai-maths-seconde-stats-interpreter.vignette.webp",
+  "titre": "Salaire moyen 2 735 € : la plupart gagnent ça ? FAUX ! — Interpréter des indicateurs · Maths 2de",
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=seconde&matiere=maths&notion=statistiques_descriptives&microId=stat_interpreter&display=simple"
@@ -7747,7 +6899,7 @@
  "seconde-stats-interpreter-short": {
   "fichier": "seconde/maths/statistiques/09-interpreter/eleveai-maths-seconde-stats-interpreter-short.mp4",
   "poster": "seconde/maths/statistiques/09-interpreter/eleveai-maths-seconde-stats-interpreter-short.png",
-  "vignette": null,
+  "vignette": "seconde/maths/statistiques/09-interpreter/eleveai-maths-seconde-stats-interpreter-short.vignette.webp",
   "titre": "Salaire moyen : 2 735 €… et la moitié gagne moins de 2 183 € ? 💶 — 2de #Shorts",
   "short": true,
   "youtube": null,
@@ -7756,8 +6908,8 @@
  "seconde-stats-linearite-moyenne": {
   "fichier": "seconde/maths/statistiques/07-linearite-moyenne/eleveai-maths-seconde-stats-linearite-moyenne.mp4",
   "poster": "seconde/maths/statistiques/07-linearite-moyenne/eleveai-maths-seconde-stats-linearite-moyenne.png",
-  "vignette": null,
-  "titre": "+ 20 minutes à chaque film : faut-il tout recalculer ? — La linéarité de la moyenne — épisode 7 · Maths 2de",
+  "vignette": "seconde/maths/statistiques/07-linearite-moyenne/eleveai-maths-seconde-stats-linearite-moyenne.vignette.webp",
+  "titre": "+ 20 minutes à chaque film : faut-il tout recalculer ? — La linéarité de la moyenne · Maths 2de",
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=seconde&matiere=maths&notion=statistiques_descriptives&microId=stat_linearite_moyenne&display=simple"
@@ -7765,7 +6917,7 @@
  "seconde-stats-linearite-moyenne-short": {
   "fichier": "seconde/maths/statistiques/07-linearite-moyenne/eleveai-maths-seconde-stats-linearite-moyenne-short.mp4",
   "poster": "seconde/maths/statistiques/07-linearite-moyenne/eleveai-maths-seconde-stats-linearite-moyenne-short.png",
-  "vignette": null,
+  "vignette": "seconde/maths/statistiques/07-linearite-moyenne/eleveai-maths-seconde-stats-linearite-moyenne-short.vignette.webp",
   "titre": "Hunger Games : + 20 minutes à chaque film, et la moyenne ? 🎬 — 2de #Shorts",
   "short": true,
   "youtube": null,
@@ -7774,7 +6926,7 @@
  "seconde-stats-lire-serie": {
   "fichier": "seconde/maths/statistiques/01-lire-serie/eleveai-maths-seconde-stats-lire-serie.mp4",
   "poster": "seconde/maths/statistiques/01-lire-serie/eleveai-maths-seconde-stats-lire-serie.png",
-  "vignette": null,
+  "vignette": "seconde/maths/statistiques/01-lire-serie/eleveai-maths-seconde-stats-lire-serie.vignette.webp",
   "titre": "17 ou 2 ? La valeur n'est pas l'effectif ! — Lire une série statistique — épisode 1 · Maths 2de",
   "short": false,
   "youtube": null,
@@ -7783,7 +6935,7 @@
  "seconde-stats-lire-serie-short": {
   "fichier": "seconde/maths/statistiques/01-lire-serie/eleveai-maths-seconde-stats-lire-serie-short.mp4",
   "poster": "seconde/maths/statistiques/01-lire-serie/eleveai-maths-seconde-stats-lire-serie-short.png",
-  "vignette": null,
+  "vignette": "seconde/maths/statistiques/01-lire-serie/eleveai-maths-seconde-stats-lire-serie-short.vignette.webp",
   "titre": "Combien de buts voit-on le plus souvent dans un match ? ⚽ — 2de #Shorts",
   "short": true,
   "youtube": null,
@@ -7792,7 +6944,7 @@
  "seconde-stats-mediane-quartiles": {
   "fichier": "seconde/maths/statistiques/04-mediane-quartiles/eleveai-maths-seconde-stats-mediane-quartiles.mp4",
   "poster": "seconde/maths/statistiques/04-mediane-quartiles/eleveai-maths-seconde-stats-mediane-quartiles.png",
-  "vignette": null,
+  "vignette": "seconde/maths/statistiques/04-mediane-quartiles/eleveai-maths-seconde-stats-mediane-quartiles.vignette.webp",
   "titre": "Q1 au rang 7,5 ? Non, 8 ! — Médiane et quartiles — épisode 4 · Maths 2de",
   "short": false,
   "youtube": null,
@@ -7801,7 +6953,7 @@
  "seconde-stats-mediane-quartiles-short": {
   "fichier": "seconde/maths/statistiques/04-mediane-quartiles/eleveai-maths-seconde-stats-mediane-quartiles-short.mp4",
   "poster": "seconde/maths/statistiques/04-mediane-quartiles/eleveai-maths-seconde-stats-mediane-quartiles-short.png",
-  "vignette": null,
+  "vignette": "seconde/maths/statistiques/04-mediane-quartiles/eleveai-maths-seconde-stats-mediane-quartiles-short.vignette.webp",
   "titre": "Un bonus de 10 minutes : la médiane explose ? 🎵 — 2de #Shorts",
   "short": true,
   "youtube": null,
@@ -7810,7 +6962,7 @@
  "seconde-stats-moyenne": {
   "fichier": "seconde/maths/statistiques/02-moyenne/eleveai-maths-seconde-stats-moyenne.mp4",
   "poster": "seconde/maths/statistiques/02-moyenne/eleveai-maths-seconde-stats-moyenne.png",
-  "vignette": null,
+  "vignette": "seconde/maths/statistiques/02-moyenne/eleveai-maths-seconde-stats-moyenne.vignette.webp",
   "titre": "Une 7e sortie dans l'espace : 439,5 ? FAUX ! — Calculer une moyenne — épisode 2 · Maths 2de",
   "short": false,
   "youtube": null,
@@ -7819,7 +6971,7 @@
  "seconde-stats-moyenne-ponderee": {
   "fichier": "seconde/maths/statistiques/03-moyenne-ponderee/eleveai-maths-seconde-stats-moyenne-ponderee.mp4",
   "poster": "seconde/maths/statistiques/03-moyenne-ponderee/eleveai-maths-seconde-stats-moyenne-ponderee.png",
-  "vignette": null,
+  "vignette": "seconde/maths/statistiques/03-moyenne-ponderee/eleveai-maths-seconde-stats-moyenne-ponderee.vignette.webp",
   "titre": "Wembanyama : 23,6 points par match ? Non, 23,4 ! — La moyenne pondérée — épisode 3 · Maths 2de",
   "short": false,
   "youtube": null,
@@ -7828,7 +6980,7 @@
  "seconde-stats-moyenne-ponderee-short": {
   "fichier": "seconde/maths/statistiques/03-moyenne-ponderee/eleveai-maths-seconde-stats-moyenne-ponderee-short.mp4",
   "poster": "seconde/maths/statistiques/03-moyenne-ponderee/eleveai-maths-seconde-stats-moyenne-ponderee-short.png",
-  "vignette": null,
+  "vignette": "seconde/maths/statistiques/03-moyenne-ponderee/eleveai-maths-seconde-stats-moyenne-ponderee-short.vignette.webp",
   "titre": "Wembanyama : sa moyenne, c'est la moyenne des 3 saisons ? 🏀 — 2de #Shorts",
   "short": true,
   "youtube": null,
@@ -7837,7 +6989,7 @@
  "seconde-stats-moyenne-short": {
   "fichier": "seconde/maths/statistiques/02-moyenne/eleveai-maths-seconde-stats-moyenne-short.mp4",
   "poster": "seconde/maths/statistiques/02-moyenne/eleveai-maths-seconde-stats-moyenne-short.png",
-  "vignette": null,
+  "vignette": "seconde/maths/statistiques/02-moyenne/eleveai-maths-seconde-stats-moyenne-short.vignette.webp",
   "titre": "Thomas Pesquet : combien dure une sortie dans l'espace ? 🚀 — 2de #Shorts",
   "short": true,
   "youtube": null,
@@ -8746,7 +7898,7 @@
  "stmg-stats-ajust-au-juge": {
   "fichier": "stmg/maths/statistiques/21-ajust-au-juge/eleveai-maths-stmg-stats-ajust-au-juge.mp4",
   "poster": "stmg/maths/statistiques/21-ajust-au-juge/eleveai-maths-stmg-stats-ajust-au-juge.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/21-ajust-au-juge/eleveai-maths-stmg-stats-ajust-au-juge.vignette.webp",
   "titre": "Achats en ligne : où poser la règle ? — Droite d'ajustement au jugé — épisode 21 · Maths STMG",
   "short": false,
   "youtube": null,
@@ -8755,7 +7907,7 @@
  "stmg-stats-ajust-au-juge-short": {
   "fichier": "stmg/maths/statistiques/21-ajust-au-juge/eleveai-maths-stmg-stats-ajust-au-juge-short.mp4",
   "poster": "stmg/maths/statistiques/21-ajust-au-juge/eleveai-maths-stmg-stats-ajust-au-juge-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/21-ajust-au-juge/eleveai-maths-stmg-stats-ajust-au-juge-short.vignette.webp",
   "titre": "Où poser la règle sur ce nuage ? 📏 — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -8764,7 +7916,7 @@
  "stmg-stats-ajust-calculer": {
   "fichier": "stmg/maths/statistiques/23-ajust-calculer/eleveai-maths-stmg-stats-ajust-calculer.mp4",
   "poster": "stmg/maths/statistiques/23-ajust-calculer/eleveai-maths-stmg-stats-ajust-calculer.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/23-ajust-calculer/eleveai-maths-stmg-stats-ajust-calculer.vignette.webp",
   "titre": "Éoliennes : quelle puissance en 2026 ? — Calculer avec un ajustement — épisode 23 · Maths STMG",
   "short": false,
   "youtube": null,
@@ -8773,7 +7925,7 @@
  "stmg-stats-ajust-calculer-short": {
   "fichier": "stmg/maths/statistiques/23-ajust-calculer/eleveai-maths-stmg-stats-ajust-calculer-short.mp4",
   "poster": "stmg/maths/statistiques/23-ajust-calculer/eleveai-maths-stmg-stats-ajust-calculer-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/23-ajust-calculer/eleveai-maths-stmg-stats-ajust-calculer-short.vignette.webp",
   "titre": "Les éoliennes en 2024 : que prévoit la droite ? 🌬️ — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -8782,7 +7934,7 @@
  "stmg-stats-ajust-equation": {
   "fichier": "stmg/maths/statistiques/22-ajust-equation/eleveai-maths-stmg-stats-ajust-equation.mp4",
   "poster": "stmg/maths/statistiques/22-ajust-equation/eleveai-maths-stmg-stats-ajust-equation.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/22-ajust-equation/eleveai-maths-stmg-stats-ajust-equation.vignette.webp",
   "titre": "Espérance de vie : 0,22 an par an — Équation d'une droite d'ajustement — épisode 22 · Maths STMG",
   "short": false,
   "youtube": null,
@@ -8791,7 +7943,7 @@
  "stmg-stats-ajust-equation-short": {
   "fichier": "stmg/maths/statistiques/22-ajust-equation/eleveai-maths-stmg-stats-ajust-equation-short.mp4",
   "poster": "stmg/maths/statistiques/22-ajust-equation/eleveai-maths-stmg-stats-ajust-equation-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/22-ajust-equation/eleveai-maths-stmg-stats-ajust-equation-short.vignette.webp",
   "titre": "Espérance de vie : combien d'années de plus chaque année ? ⏳ — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -8800,7 +7952,7 @@
  "stmg-stats-ajust-pertinence": {
   "fichier": "stmg/maths/statistiques/20-ajust-pertinence/eleveai-maths-stmg-stats-ajust-pertinence.mp4",
   "poster": "stmg/maths/statistiques/20-ajust-pertinence/eleveai-maths-stmg-stats-ajust-pertinence.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/20-ajust-pertinence/eleveai-maths-stmg-stats-ajust-pertinence.vignette.webp",
   "titre": "Spotify ou voiture électrique : une droite ? — Ajustement pertinent ? — épisode 20 · Maths STMG",
   "short": false,
   "youtube": null,
@@ -8809,7 +7961,7 @@
  "stmg-stats-ajust-pertinence-short": {
   "fichier": "stmg/maths/statistiques/20-ajust-pertinence/eleveai-maths-stmg-stats-ajust-pertinence-short.mp4",
   "poster": "stmg/maths/statistiques/20-ajust-pertinence/eleveai-maths-stmg-stats-ajust-pertinence-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/20-ajust-pertinence/eleveai-maths-stmg-stats-ajust-pertinence-short.vignette.webp",
   "titre": "Spotify ou voiture électrique : lequel suit une droite ? 🎧 — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -8818,8 +7970,8 @@
  "stmg-stats-boite": {
   "fichier": "stmg/maths/statistiques/03-boite/eleveai-maths-stmg-stats-boite.mp4",
   "poster": "stmg/maths/statistiques/03-boite/eleveai-maths-stmg-stats-boite.png",
-  "vignette": null,
-  "titre": "Salaire minimum en Europe : la France dans le quart du haut — Lire un diagramme en boîte — épisode 3 · Maths STMG",
+  "vignette": "stmg/maths/statistiques/03-boite/eleveai-maths-stmg-stats-boite.vignette.webp",
+  "titre": "Salaire minimum en Europe : la France dans le quart du haut — Diagramme en boîte · Maths STMG",
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_donnees_graphiques&microId=auto_stat_boite&display=simple"
@@ -8827,7 +7979,7 @@
  "stmg-stats-boite-short": {
   "fichier": "stmg/maths/statistiques/03-boite/eleveai-maths-stmg-stats-boite-short.mp4",
   "poster": "stmg/maths/statistiques/03-boite/eleveai-maths-stmg-stats-boite-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/03-boite/eleveai-maths-stmg-stats-boite-short.vignette.webp",
   "titre": "Le salaire minimum en Europe : où se place la France ? 💶 — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -8836,7 +7988,7 @@
  "stmg-stats-cv-appliquer": {
   "fichier": "stmg/maths/statistiques/30-cv-appliquer/eleveai-maths-stmg-stats-cv-appliquer.mp4",
   "poster": "stmg/maths/statistiques/30-cv-appliquer/eleveai-maths-stmg-stats-cv-appliquer.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/30-cv-appliquer/eleveai-maths-stmg-stats-cv-appliquer.vignette.webp",
   "titre": "Taxi : pourquoi le kilomètre baisse-t-il ? — Changement de variable — épisode 30 · Maths STMG",
   "short": false,
   "youtube": null,
@@ -8845,7 +7997,7 @@
  "stmg-stats-cv-appliquer-short": {
   "fichier": "stmg/maths/statistiques/30-cv-appliquer/eleveai-maths-stmg-stats-cv-appliquer-short.mp4",
   "poster": "stmg/maths/statistiques/30-cv-appliquer/eleveai-maths-stmg-stats-cv-appliquer-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/30-cv-appliquer/eleveai-maths-stmg-stats-cv-appliquer-short.vignette.webp",
   "titre": "En taxi, pourquoi le kilomètre coûte moins cher sur une longue course ? 🚕 — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -8854,7 +8006,7 @@
  "stmg-stats-cv-lire": {
   "fichier": "stmg/maths/statistiques/31-cv-lire/eleveai-maths-stmg-stats-cv-lire.mp4",
   "poster": "stmg/maths/statistiques/31-cv-lire/eleveai-maths-stmg-stats-cv-lire.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/31-cv-lire/eleveai-maths-stmg-stats-cv-lire.vignette.webp",
   "titre": "Loi de Moore : + 40 % de transistors par an — Lire un nuage transformé — épisode 31 · Maths STMG",
   "short": false,
   "youtube": null,
@@ -8863,7 +8015,7 @@
  "stmg-stats-cv-lire-short": {
   "fichier": "stmg/maths/statistiques/31-cv-lire/eleveai-maths-stmg-stats-cv-lire-short.mp4",
   "poster": "stmg/maths/statistiques/31-cv-lire/eleveai-maths-stmg-stats-cv-lire-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/31-cv-lire/eleveai-maths-stmg-stats-cv-lire-short.vignette.webp",
   "titre": "La loi de Moore : des transistors qui s'envolent 💻 — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -8872,7 +8024,7 @@
  "stmg-stats-cv-revenir": {
   "fichier": "stmg/maths/statistiques/32-cv-revenir/eleveai-maths-stmg-stats-cv-revenir.mp4",
   "poster": "stmg/maths/statistiques/32-cv-revenir/eleveai-maths-stmg-stats-cv-revenir.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/32-cv-revenir/eleveai-maths-stmg-stats-cv-revenir.vignette.webp",
   "titre": "Afrique 2030 : défaire le logarithme — Revenir aux variables de départ — épisode 32 · Maths STMG",
   "short": false,
   "youtube": null,
@@ -8881,7 +8033,7 @@
  "stmg-stats-cv-revenir-short": {
   "fichier": "stmg/maths/statistiques/32-cv-revenir/eleveai-maths-stmg-stats-cv-revenir-short.mp4",
   "poster": "stmg/maths/statistiques/32-cv-revenir/eleveai-maths-stmg-stats-cv-revenir-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/32-cv-revenir/eleveai-maths-stmg-stats-cv-revenir-short.vignette.webp",
   "titre": "L'Afrique en 2030 : combien d'habitants ? 🌍 — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -8890,7 +8042,7 @@
  "stmg-stats-diagrammes-usuels": {
   "fichier": "stmg/maths/statistiques/02-diagrammes-usuels/eleveai-maths-stmg-stats-diagrammes-usuels.mp4",
   "poster": "stmg/maths/statistiques/02-diagrammes-usuels/eleveai-maths-stmg-stats-diagrammes-usuels.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/02-diagrammes-usuels/eleveai-maths-stmg-stats-diagrammes-usuels.vignette.webp",
   "titre": "Films français : + 4,3 % ? Non, + 4,3 points ! — Les diagrammes usuels — épisode 2 · Maths STMG",
   "short": false,
   "youtube": null,
@@ -8899,7 +8051,7 @@
  "stmg-stats-diagrammes-usuels-short": {
   "fichier": "stmg/maths/statistiques/02-diagrammes-usuels/eleveai-maths-stmg-stats-diagrammes-usuels-short.mp4",
   "poster": "stmg/maths/statistiques/02-diagrammes-usuels/eleveai-maths-stmg-stats-diagrammes-usuels-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/02-diagrammes-usuels/eleveai-maths-stmg-stats-diagrammes-usuels-short.vignette.webp",
   "titre": "Films français contre films américains : qui gagne au cinéma ? 🎬 — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -8908,7 +8060,7 @@
  "stmg-stats-extrapoler": {
   "fichier": "stmg/maths/statistiques/25-extrapoler/eleveai-maths-stmg-stats-extrapoler.mp4",
   "poster": "stmg/maths/statistiques/25-extrapoler/eleveai-maths-stmg-stats-extrapoler.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/25-extrapoler/eleveai-maths-stmg-stats-extrapoler.vignette.webp",
   "titre": "Le diesel en 2024 : prévision réussie… et en 2030 ? — Extrapoler — épisode 25 · Maths STMG",
   "short": false,
   "youtube": null,
@@ -8917,7 +8069,7 @@
  "stmg-stats-extrapoler-short": {
   "fichier": "stmg/maths/statistiques/25-extrapoler/eleveai-maths-stmg-stats-extrapoler-short.mp4",
   "poster": "stmg/maths/statistiques/25-extrapoler/eleveai-maths-stmg-stats-extrapoler-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/25-extrapoler/eleveai-maths-stmg-stats-extrapoler-short.vignette.webp",
   "titre": "Le diesel en 2024 : la droite avait-elle raison ? 🚗 — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -8926,7 +8078,7 @@
  "stmg-stats-filtre-et": {
   "fichier": "stmg/maths/statistiques/14-filtre-et/eleveai-maths-stmg-stats-filtre-et.mp4",
   "poster": "stmg/maths/statistiques/14-filtre-et/eleveai-maths-stmg-stats-filtre-et.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/14-filtre-et/eleveai-maths-stmg-stats-filtre-et.vignette.webp",
   "titre": "Volcans : avec ET, il en reste moins ! — Filtrer avec ET — épisode 14 · Maths STMG",
   "short": false,
   "youtube": null,
@@ -8935,7 +8087,7 @@
  "stmg-stats-filtre-et-short": {
   "fichier": "stmg/maths/statistiques/14-filtre-et/eleveai-maths-stmg-stats-filtre-et-short.mp4",
   "poster": "stmg/maths/statistiques/14-filtre-et/eleveai-maths-stmg-stats-filtre-et-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/14-filtre-et/eleveai-maths-stmg-stats-filtre-et-short.vignette.webp",
   "titre": "Mission volcans : très hauts ET actifs, combien ? 🌋 — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -8944,7 +8096,7 @@
  "stmg-stats-filtre-non": {
   "fichier": "stmg/maths/statistiques/16-filtre-non/eleveai-maths-stmg-stats-filtre-non.mp4",
   "poster": "stmg/maths/statistiques/16-filtre-non/eleveai-maths-stmg-stats-filtre-non.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/16-filtre-non/eleveai-maths-stmg-stats-filtre-non.vignette.webp",
   "titre": "Planètes : le filtre NON, et le piège du NON ET — Filtrer avec NON — épisode 16 · Maths STMG",
   "short": false,
   "youtube": null,
@@ -8953,7 +8105,7 @@
  "stmg-stats-filtre-non-short": {
   "fichier": "stmg/maths/statistiques/16-filtre-non/eleveai-maths-stmg-stats-filtre-non-short.mp4",
   "poster": "stmg/maths/statistiques/16-filtre-non/eleveai-maths-stmg-stats-filtre-non-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/16-filtre-non/eleveai-maths-stmg-stats-filtre-non-short.vignette.webp",
   "titre": "Les planètes sans aucune lune : combien ? 🪐 — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -8962,7 +8114,7 @@
  "stmg-stats-filtre-ou": {
   "fichier": "stmg/maths/statistiques/15-filtre-ou/eleveai-maths-stmg-stats-filtre-ou.mp4",
   "poster": "stmg/maths/statistiques/15-filtre-ou/eleveai-maths-stmg-stats-filtre-ou.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/15-filtre-ou/eleveai-maths-stmg-stats-filtre-ou.vignette.webp",
   "titre": "Gratte-ciel : avec OU, 6 + 4 ne fait pas 10 ! — Filtrer avec OU — épisode 15 · Maths STMG",
   "short": false,
   "youtube": null,
@@ -8971,7 +8123,7 @@
  "stmg-stats-filtre-ou-short": {
   "fichier": "stmg/maths/statistiques/15-filtre-ou/eleveai-maths-stmg-stats-filtre-ou-short.mp4",
   "poster": "stmg/maths/statistiques/15-filtre-ou/eleveai-maths-stmg-stats-filtre-ou-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/15-filtre-ou/eleveai-maths-stmg-stats-filtre-ou-short.vignette.webp",
   "titre": "Gratte-ciel : 6 + 4 = 10 ? Perdu ! 🏙️ — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -8980,8 +8132,8 @@
  "stmg-stats-filtre-sous-ensemble": {
   "fichier": "stmg/maths/statistiques/13-filtre-sous-ensemble/eleveai-maths-stmg-stats-filtre-sous-ensemble.mp4",
   "poster": "stmg/maths/statistiques/13-filtre-sous-ensemble/eleveai-maths-stmg-stats-filtre-sous-ensemble.png",
-  "vignette": null,
-  "titre": "Le filtre du tableur : que garde-t-il vraiment ? — Filtrer des données avec un critère — épisode 13 · Maths STMG",
+  "vignette": "stmg/maths/statistiques/13-filtre-sous-ensemble/eleveai-maths-stmg-stats-filtre-sous-ensemble.vignette.webp",
+  "titre": "Le filtre du tableur : que garde-t-il vraiment ? — Filtrer des données avec un critère · Maths STMG",
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=stmg&matiere=maths&notion=donnees_filtres&microId=don_filtre_sous_ensemble&display=simple"
@@ -8989,7 +8141,7 @@
  "stmg-stats-filtre-sous-ensemble-short": {
   "fichier": "stmg/maths/statistiques/13-filtre-sous-ensemble/eleveai-maths-stmg-stats-filtre-sous-ensemble-short.mp4",
   "poster": "stmg/maths/statistiques/13-filtre-sous-ensemble/eleveai-maths-stmg-stats-filtre-sous-ensemble-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/13-filtre-sous-ensemble/eleveai-maths-stmg-stats-filtre-sous-ensemble-short.vignette.webp",
   "titre": "Soirée cinéma : que des films de 140 minutes ou plus ! 🍿 — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -8998,8 +8150,8 @@
  "stmg-stats-freq-completer": {
   "fichier": "stmg/maths/statistiques/11-freq-completer/eleveai-maths-stmg-stats-freq-completer.mp4",
   "poster": "stmg/maths/statistiques/11-freq-completer/eleveai-maths-stmg-stats-freq-completer.png",
-  "vignette": null,
-  "titre": "Voitures électriques : du pourcentage à l'effectif, et retour — Compléter un tableau avec des fréquences — épisode 11 · Maths STMG",
+  "vignette": "stmg/maths/statistiques/11-freq-completer/eleveai-maths-stmg-stats-freq-completer.vignette.webp",
+  "titre": "Voitures électriques : du pourcentage à l'effectif, et retour — Fréquences et effectifs · Maths STMG",
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=stmg&matiere=maths&notion=donnees_frequences&microId=don_freq_completer&display=simple"
@@ -9007,7 +8159,7 @@
  "stmg-stats-freq-completer-short": {
   "fichier": "stmg/maths/statistiques/11-freq-completer/eleveai-maths-stmg-stats-freq-completer-short.mp4",
   "poster": "stmg/maths/statistiques/11-freq-completer/eleveai-maths-stmg-stats-freq-completer-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/11-freq-completer/eleveai-maths-stmg-stats-freq-completer-short.vignette.webp",
   "titre": "2024 : combien de voitures électriques vendues en France ? 🔌 — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -9016,8 +8168,8 @@
  "stmg-stats-freq-conditionnelle": {
   "fichier": "stmg/maths/statistiques/10-freq-conditionnelle/eleveai-maths-stmg-stats-freq-conditionnelle.mp4",
   "poster": "stmg/maths/statistiques/10-freq-conditionnelle/eleveai-maths-stmg-stats-freq-conditionnelle.png",
-  "vignette": null,
-  "titre": "Football ou handball : quel sport est le plus féminin ? — Fréquence conditionnelle — épisode 10 · Maths STMG",
+  "vignette": "stmg/maths/statistiques/10-freq-conditionnelle/eleveai-maths-stmg-stats-freq-conditionnelle.vignette.webp",
+  "titre": "Football ou handball : quel sport est le plus féminin ? — Fréquence conditionnelle · Maths STMG",
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=stmg&matiere=maths&notion=donnees_frequences&microId=don_freq_conditionnelle&display=simple"
@@ -9025,7 +8177,7 @@
  "stmg-stats-freq-conditionnelle-short": {
   "fichier": "stmg/maths/statistiques/10-freq-conditionnelle/eleveai-maths-stmg-stats-freq-conditionnelle-short.mp4",
   "poster": "stmg/maths/statistiques/10-freq-conditionnelle/eleveai-maths-stmg-stats-freq-conditionnelle-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/10-freq-conditionnelle/eleveai-maths-stmg-stats-freq-conditionnelle-short.vignette.webp",
   "titre": "Football ou handball : quel sport est le plus féminin ? 🤾‍♀️ — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -9034,8 +8186,8 @@
  "stmg-stats-freq-interpreter": {
   "fichier": "stmg/maths/statistiques/12-freq-interpreter/eleveai-maths-stmg-stats-freq-interpreter.mp4",
   "poster": "stmg/maths/statistiques/12-freq-interpreter/eleveai-maths-stmg-stats-freq-interpreter.png",
-  "vignette": null,
-  "titre": "« 92 % des tués à deux-roues sont des hommes » : 92 % de qui ? — Interpréter une fréquence dans la presse — épisode 12 · Maths STMG",
+  "vignette": "stmg/maths/statistiques/12-freq-interpreter/eleveai-maths-stmg-stats-freq-interpreter.vignette.webp",
+  "titre": "« 92 % des tués à deux-roues sont des hommes » : 92 % de qui ? — Fréquence et presse · Maths STMG",
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=stmg&matiere=maths&notion=donnees_frequences&microId=don_freq_interpreter&display=simple"
@@ -9043,7 +8195,7 @@
  "stmg-stats-freq-interpreter-short": {
   "fichier": "stmg/maths/statistiques/12-freq-interpreter/eleveai-maths-stmg-stats-freq-interpreter-short.mp4",
   "poster": "stmg/maths/statistiques/12-freq-interpreter/eleveai-maths-stmg-stats-freq-interpreter-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/12-freq-interpreter/eleveai-maths-stmg-stats-freq-interpreter-short.vignette.webp",
   "titre": "92 % des tués à deux-roues sont des hommes… donc ? 🏍️ — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -9052,7 +8204,7 @@
  "stmg-stats-freq-marginale": {
   "fichier": "stmg/maths/statistiques/09-freq-marginale/eleveai-maths-stmg-stats-freq-marginale.mp4",
   "poster": "stmg/maths/statistiques/09-freq-marginale/eleveai-maths-stmg-stats-freq-marginale.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/09-freq-marginale/eleveai-maths-stmg-stats-freq-marginale.vignette.webp",
   "titre": "Touristes de l'étranger : 28,5 %, pas 44,5 % ! — Fréquence marginale — épisode 9 · Maths STMG",
   "short": false,
   "youtube": null,
@@ -9061,7 +8213,7 @@
  "stmg-stats-freq-marginale-short": {
   "fichier": "stmg/maths/statistiques/09-freq-marginale/eleveai-maths-stmg-stats-freq-marginale-short.mp4",
   "poster": "stmg/maths/statistiques/09-freq-marginale/eleveai-maths-stmg-stats-freq-marginale-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/09-freq-marginale/eleveai-maths-stmg-stats-freq-marginale-short.vignette.webp",
   "titre": "Les nuits d'hôtel en Auvergne-Rhône-Alpes : quelle part vient de l'étranger ? 🏔️ — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -9070,8 +8222,8 @@
  "stmg-stats-graphique-donnees": {
   "fichier": "stmg/maths/statistiques/04-graphique-donnees/eleveai-maths-stmg-stats-graphique-donnees.mp4",
   "poster": "stmg/maths/statistiques/04-graphique-donnees/eleveai-maths-stmg-stats-graphique-donnees.png",
-  "vignette": null,
-  "titre": "Mbappé : la moitié des buts de la France ? 180° ! — Du graphique aux données — épisode 4 · Maths STMG",
+  "vignette": "stmg/maths/statistiques/04-graphique-donnees/eleveai-maths-stmg-stats-graphique-donnees.vignette.webp",
+  "titre": "Mbappé : la moitié des buts de la France ? 180° ! — Du graphique aux données · Maths STMG",
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_donnees_graphiques&microId=auto_stat_graphique_donnees&display=simple"
@@ -9079,7 +8231,7 @@
  "stmg-stats-graphique-donnees-short": {
   "fichier": "stmg/maths/statistiques/04-graphique-donnees/eleveai-maths-stmg-stats-graphique-donnees-short.mp4",
   "poster": "stmg/maths/statistiques/04-graphique-donnees/eleveai-maths-stmg-stats-graphique-donnees-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/04-graphique-donnees/eleveai-maths-stmg-stats-graphique-donnees-short.vignette.webp",
   "titre": "Mbappé a-t-il marqué la moitié des buts de la France ? ⚽ — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -9088,7 +8240,7 @@
  "stmg-stats-interpoler": {
   "fichier": "stmg/maths/statistiques/24-interpoler/eleveai-maths-stmg-stats-interpoler.mp4",
   "poster": "stmg/maths/statistiques/24-interpoler/eleveai-maths-stmg-stats-interpoler.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/24-interpoler/eleveai-maths-stmg-stats-interpoler.vignette.webp",
   "titre": "La France en 2012, sans relevé : interpolons ! — Interpoler — épisode 24 · Maths STMG",
   "short": false,
   "youtube": null,
@@ -9097,7 +8249,7 @@
  "stmg-stats-interpoler-short": {
   "fichier": "stmg/maths/statistiques/24-interpoler/eleveai-maths-stmg-stats-interpoler-short.mp4",
   "poster": "stmg/maths/statistiques/24-interpoler/eleveai-maths-stmg-stats-interpoler-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/24-interpoler/eleveai-maths-stmg-stats-interpoler-short.vignette.webp",
   "titre": "Combien d'habitants en France en 2012 ? 🗺️ — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -9106,7 +8258,7 @@
  "stmg-stats-limites": {
   "fichier": "stmg/maths/statistiques/26-limites/eleveai-maths-stmg-stats-limites.mp4",
   "poster": "stmg/maths/statistiques/26-limites/eleveai-maths-stmg-stats-limites.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/26-limites/eleveai-maths-stmg-stats-limites.vignette.webp",
   "titre": "104,5 % de Français avec un smartphone ? — Limites d'une extrapolation — épisode 26 · Maths STMG",
   "short": false,
   "youtube": null,
@@ -9115,7 +8267,7 @@
  "stmg-stats-limites-short": {
   "fichier": "stmg/maths/statistiques/26-limites/eleveai-maths-stmg-stats-limites-short.mp4",
   "poster": "stmg/maths/statistiques/26-limites/eleveai-maths-stmg-stats-limites-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/26-limites/eleveai-maths-stmg-stats-limites-short.vignette.webp",
   "titre": "104,5 % de Français avec un smartphone ? 📱 — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -9124,7 +8276,7 @@
  "stmg-stats-lire-graphique": {
   "fichier": "stmg/maths/statistiques/01-lire-graphique/eleveai-maths-stmg-stats-lire-graphique.mp4",
   "poster": "stmg/maths/statistiques/01-lire-graphique/eleveai-maths-stmg-stats-lire-graphique.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/01-lire-graphique/eleveai-maths-stmg-stats-lire-graphique.vignette.webp",
   "titre": "Le CO₂ multiplié par 3 ? Regarde l'axe ! — Lire un graphique — épisode 1 · Maths STMG",
   "short": false,
   "youtube": null,
@@ -9133,7 +8285,7 @@
  "stmg-stats-lire-graphique-short": {
   "fichier": "stmg/maths/statistiques/01-lire-graphique/eleveai-maths-stmg-stats-lire-graphique-short.mp4",
   "poster": "stmg/maths/statistiques/01-lire-graphique/eleveai-maths-stmg-stats-lire-graphique-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/01-lire-graphique/eleveai-maths-stmg-stats-lire-graphique-short.vignette.webp",
   "titre": "Le CO₂ de l'air multiplié par 3 ? Regarde l'axe ! 🌍 — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -9142,7 +8294,7 @@
  "stmg-stats-mc-calculer": {
   "fichier": "stmg/maths/statistiques/28-mc-calculer/eleveai-maths-stmg-stats-mc-calculer.mp4",
   "poster": "stmg/maths/statistiques/28-mc-calculer/eleveai-maths-stmg-stats-mc-calculer.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/28-mc-calculer/eleveai-maths-stmg-stats-mc-calculer.vignette.webp",
   "titre": "Naissances : la droite colle-t-elle ? — Somme des carrés des écarts — épisode 28 · Maths STMG",
   "short": false,
   "youtube": null,
@@ -9151,7 +8303,7 @@
  "stmg-stats-mc-calculer-short": {
   "fichier": "stmg/maths/statistiques/28-mc-calculer/eleveai-maths-stmg-stats-mc-calculer-short.mp4",
   "poster": "stmg/maths/statistiques/28-mc-calculer/eleveai-maths-stmg-stats-mc-calculer-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/28-mc-calculer/eleveai-maths-stmg-stats-mc-calculer-short.vignette.webp",
   "titre": "Quel écart pèse le plus dans la somme des carrés ? 🧮 — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -9160,7 +8312,7 @@
  "stmg-stats-mc-comparer": {
   "fichier": "stmg/maths/statistiques/29-mc-comparer/eleveai-maths-stmg-stats-mc-comparer.mp4",
   "poster": "stmg/maths/statistiques/29-mc-comparer/eleveai-maths-stmg-stats-mc-comparer.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/29-mc-comparer/eleveai-maths-stmg-stats-mc-comparer.vignette.webp",
   "titre": "Aéroports de Paris : quelle droite garder ? — Comparer deux ajustements — épisode 29 · Maths STMG",
   "short": false,
   "youtube": null,
@@ -9169,7 +8321,7 @@
  "stmg-stats-mc-comparer-short": {
   "fichier": "stmg/maths/statistiques/29-mc-comparer/eleveai-maths-stmg-stats-mc-comparer-short.mp4",
   "poster": "stmg/maths/statistiques/29-mc-comparer/eleveai-maths-stmg-stats-mc-comparer-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/29-mc-comparer/eleveai-maths-stmg-stats-mc-comparer-short.vignette.webp",
   "titre": "2020 aux aéroports de Paris : un seul point écrase tout ✈️ — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -9178,7 +8330,7 @@
  "stmg-stats-mc-principe": {
   "fichier": "stmg/maths/statistiques/27-mc-principe/eleveai-maths-stmg-stats-mc-principe.mp4",
   "poster": "stmg/maths/statistiques/27-mc-principe/eleveai-maths-stmg-stats-mc-principe.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/27-mc-principe/eleveai-maths-stmg-stats-mc-principe.vignette.webp",
   "titre": "Des écarts nuls… et une très mauvaise droite ! — Les moindres carrés — épisode 27 · Maths STMG",
   "short": false,
   "youtube": null,
@@ -9187,7 +8339,7 @@
  "stmg-stats-mc-principe-short": {
   "fichier": "stmg/maths/statistiques/27-mc-principe/eleveai-maths-stmg-stats-mc-principe-short.mp4",
   "poster": "stmg/maths/statistiques/27-mc-principe/eleveai-maths-stmg-stats-mc-principe-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/27-mc-principe/eleveai-maths-stmg-stats-mc-principe-short.vignette.webp",
   "titre": "Des écarts qui s'annulent : la meilleure droite ? 📉 — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -9196,7 +8348,7 @@
  "stmg-stats-nuage-lire": {
   "fichier": "stmg/maths/statistiques/18-nuage-lire/eleveai-maths-stmg-stats-nuage-lire.mp4",
   "poster": "stmg/maths/statistiques/18-nuage-lire/eleveai-maths-stmg-stats-nuage-lire.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/18-nuage-lire/eleveai-maths-stmg-stats-nuage-lire.vignette.webp",
   "titre": "Mbappé au PSG : (35 ; 28) ou (28 ; 35) ? — Lire un nuage de points — épisode 18 · Maths STMG",
   "short": false,
   "youtube": null,
@@ -9205,7 +8357,7 @@
  "stmg-stats-nuage-lire-short": {
   "fichier": "stmg/maths/statistiques/18-nuage-lire/eleveai-maths-stmg-stats-nuage-lire-short.mp4",
   "poster": "stmg/maths/statistiques/18-nuage-lire/eleveai-maths-stmg-stats-nuage-lire-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/18-nuage-lire/eleveai-maths-stmg-stats-nuage-lire-short.vignette.webp",
   "titre": "Mbappé au PSG : chaque point, une saison ⚽ — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -9214,7 +8366,7 @@
  "stmg-stats-nuage-representer": {
   "fichier": "stmg/maths/statistiques/17-nuage-representer/eleveai-maths-stmg-stats-nuage-representer.mp4",
   "poster": "stmg/maths/statistiques/17-nuage-representer/eleveai-maths-stmg-stats-nuage-representer.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/17-nuage-representer/eleveai-maths-stmg-stats-nuage-representer.vignette.webp",
   "titre": "Le métro de Paris en nuage de points — Construire un nuage de points — épisode 17 · Maths STMG",
   "short": false,
   "youtube": null,
@@ -9223,7 +8375,7 @@
  "stmg-stats-nuage-representer-short": {
   "fichier": "stmg/maths/statistiques/17-nuage-representer/eleveai-maths-stmg-stats-nuage-representer-short.mp4",
   "poster": "stmg/maths/statistiques/17-nuage-representer/eleveai-maths-stmg-stats-nuage-representer-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/17-nuage-representer/eleveai-maths-stmg-stats-nuage-representer-short.vignette.webp",
   "titre": "Le métro de Paris : une ligne, un point 🚇 — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -9232,8 +8384,8 @@
  "stmg-stats-nuage-tendance": {
   "fichier": "stmg/maths/statistiques/19-nuage-tendance/eleveai-maths-stmg-stats-nuage-tendance.mp4",
   "poster": "stmg/maths/statistiques/19-nuage-tendance/eleveai-maths-stmg-stats-nuage-tendance.png",
-  "vignette": null,
-  "titre": "Plus loin de l'équateur, plus froid ? La tendance d'un nuage — Décrire la tendance d'un nuage — épisode 19 · Maths STMG",
+  "vignette": "stmg/maths/statistiques/19-nuage-tendance/eleveai-maths-stmg-stats-nuage-tendance.vignette.webp",
+  "titre": "Plus loin de l'équateur, plus froid ? La tendance d'un nuage — Tendance d'un nuage · Maths STMG",
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=stmg&matiere=maths&notion=stat_nuage&microId=statT_nuage_tendance&display=simple"
@@ -9241,7 +8393,7 @@
  "stmg-stats-nuage-tendance-short": {
   "fichier": "stmg/maths/statistiques/19-nuage-tendance/eleveai-maths-stmg-stats-nuage-tendance-short.mp4",
   "poster": "stmg/maths/statistiques/19-nuage-tendance/eleveai-maths-stmg-stats-nuage-tendance-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/19-nuage-tendance/eleveai-maths-stmg-stats-nuage-tendance-short.vignette.webp",
   "titre": "Plus une ville est loin de l'équateur, plus il y fait froid ? 🌡️ — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -9250,7 +8402,7 @@
  "stmg-stats-tab-completer": {
   "fichier": "stmg/maths/statistiques/07-tab-completer/eleveai-maths-stmg-stats-tab-completer.mp4",
   "poster": "stmg/maths/statistiques/07-tab-completer/eleveai-maths-stmg-stats-tab-completer.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/07-tab-completer/eleveai-maths-stmg-stats-tab-completer.vignette.webp",
   "titre": "Fusées 2024 : retrouver les cases disparues — Compléter un tableau croisé — épisode 7 · Maths STMG",
   "short": false,
   "youtube": null,
@@ -9259,7 +8411,7 @@
  "stmg-stats-tab-completer-short": {
   "fichier": "stmg/maths/statistiques/07-tab-completer/eleveai-maths-stmg-stats-tab-completer-short.mp4",
   "poster": "stmg/maths/statistiques/07-tab-completer/eleveai-maths-stmg-stats-tab-completer-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/07-tab-completer/eleveai-maths-stmg-stats-tab-completer-short.vignette.webp",
   "titre": "2024, record de fusées : combien ont raté leur mission ? 🚀 — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -9268,8 +8420,8 @@
  "stmg-stats-tab-dresser": {
   "fichier": "stmg/maths/statistiques/08-tab-dresser/eleveai-maths-stmg-stats-tab-dresser.mp4",
   "poster": "stmg/maths/statistiques/08-tab-dresser/eleveai-maths-stmg-stats-tab-dresser.png",
-  "vignette": null,
-  "titre": "Eurovision : faut-il chanter en anglais pour gagner ? — Dresser un tableau croisé — épisode 8 · Maths STMG",
+  "vignette": "stmg/maths/statistiques/08-tab-dresser/eleveai-maths-stmg-stats-tab-dresser.vignette.webp",
+  "titre": "Eurovision : faut-il chanter en anglais pour gagner ? — Dresser un tableau croisé · Maths STMG",
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=stmg&matiere=maths&notion=donnees_tableau_croise&microId=don_tab_dresser&display=simple"
@@ -9277,7 +8429,7 @@
  "stmg-stats-tab-dresser-short": {
   "fichier": "stmg/maths/statistiques/08-tab-dresser/eleveai-maths-stmg-stats-tab-dresser-short.mp4",
   "poster": "stmg/maths/statistiques/08-tab-dresser/eleveai-maths-stmg-stats-tab-dresser-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/08-tab-dresser/eleveai-maths-stmg-stats-tab-dresser-short.vignette.webp",
   "titre": "Eurovision : faut-il chanter en anglais pour gagner ? 🎤 — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -9286,7 +8438,7 @@
  "stmg-stats-tab-lire": {
   "fichier": "stmg/maths/statistiques/05-tab-lire/eleveai-maths-stmg-stats-tab-lire.mp4",
   "poster": "stmg/maths/statistiques/05-tab-lire/eleveai-maths-stmg-stats-tab-lire.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/05-tab-lire/eleveai-maths-stmg-stats-tab-lire.vignette.webp",
   "titre": "Femmes Nobel : plus en 25 ans qu'en un siècle ! — Lire un tableau croisé — épisode 5 · Maths STMG",
   "short": false,
   "youtube": null,
@@ -9295,7 +8447,7 @@
  "stmg-stats-tab-lire-short": {
   "fichier": "stmg/maths/statistiques/05-tab-lire/eleveai-maths-stmg-stats-tab-lire-short.mp4",
   "poster": "stmg/maths/statistiques/05-tab-lire/eleveai-maths-stmg-stats-tab-lire-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/05-tab-lire/eleveai-maths-stmg-stats-tab-lire-short.vignette.webp",
   "titre": "Femmes Nobel en sciences : plus nombreuses depuis 2000 ? 🔬 — STMG #Shorts",
   "short": true,
   "youtube": null,
@@ -9304,8 +8456,8 @@
  "stmg-stats-tab-marges": {
   "fichier": "stmg/maths/statistiques/06-tab-marges/eleveai-maths-stmg-stats-tab-marges.mp4",
   "poster": "stmg/maths/statistiques/06-tab-marges/eleveai-maths-stmg-stats-tab-marges.png",
-  "vignette": null,
-  "titre": "Plus de femmes que d'hommes chez les médecins ? De justesse ! — Calculer les marges d'un tableau croisé — épisode 6 · Maths STMG",
+  "vignette": "stmg/maths/statistiques/06-tab-marges/eleveai-maths-stmg-stats-tab-marges.vignette.webp",
+  "titre": "Plus de femmes que d'hommes chez les médecins ? De justesse ! — Les marges d'un tableau · Maths STMG",
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=stmg&matiere=maths&notion=donnees_tableau_croise&microId=don_tab_marges&display=simple"
@@ -9313,7 +8465,7 @@
  "stmg-stats-tab-marges-short": {
   "fichier": "stmg/maths/statistiques/06-tab-marges/eleveai-maths-stmg-stats-tab-marges-short.mp4",
   "poster": "stmg/maths/statistiques/06-tab-marges/eleveai-maths-stmg-stats-tab-marges-short.png",
-  "vignette": null,
+  "vignette": "stmg/maths/statistiques/06-tab-marges/eleveai-maths-stmg-stats-tab-marges-short.vignette.webp",
   "titre": "Plus de femmes que d'hommes chez les médecins ? 🩺 — STMG #Shorts",
   "short": true,
   "youtube": null,
