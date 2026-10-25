@@ -27,7 +27,7 @@ Points à améliorer dans les lots : lignes de réponse qui arrivent 1 à 3 s ap
 
 ## État au 25/10 (fin de la session « fraction »)
 - 6e COMMITÉS : 03-egale (pilote `01dc0c3d`), lot A 01/02/04 (`c3468f67`), lot B 05/06/07 (`f0e298ae`). Outils de calage dans `scripts/` (`85683fe5`).
-- EN COURS au moment de la bascule (agents de l'ancienne session) : lot 6e C (08-11 paysages, 12-13 paysage + short), lot 4e D (01-05), lot 4e F (10-quantite avec le gâteau CARRÉ en 5, 11-oppose, 12-defi). Voir LOTS_ETAT ci-dessous.
+- ✅ 6e COMPLÈTE : lot C 08-13 commité (`df4ca05e`). EN COURS au moment de la bascule : lot 4e D (01-05), lot 4e F (10-quantite avec le gâteau CARRÉ en 5, 11-oppose, 12-defi). Voir LOTS_ETAT ci-dessous.
 - PAS ENCORE LANCÉ : lot 4e E (06-additionner, 07-multiplier, 08-inverse, 09-diviser).
 - Modèles pour tout nouveau lot : `manim/scripts/6e/frac_lotb_commun.py` (lignes au mot, correctif « Et 3 ») + `frac_comparer.py`, le pilote `frac_egale.py`, `frac_representer_short.py` (gâteau en 6).
 
