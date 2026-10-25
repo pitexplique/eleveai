@@ -1,0 +1,17 @@
+{
+  "00-garde": "Représenter une fraction. Comment dessiner une fraction sur une figure ?",
+  "01-situation": "Voici Maëlys, artiste. Elle peint des fresques sur les murs de la ville. Pour sa nouvelle fresque, elle doit peindre en bleu 3 quarts d'un mur. Où met-elle la peinture ?",
+  "02-methode": "Le dénominateur, 4, dit en combien de parts égales on partage. On coupe le mur en 4. Le numérateur, 3, dit combien on en prend. On peint 3 parts. Voilà 3 quarts du mur !",
+  "03-formes": "Ça marche avec toutes les formes. 2 tiers d'un disque : on coupe en 3, on colorie 2 parts. 5 huitièmes d'une grille de 8 cases : on colorie 5 cases. N'importe lesquelles !",
+  "04-question": "Question ! Pour représenter 4 sixièmes, en combien de parts égales faut-il partager ? A : 4. B : 6. C : 10. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. Le dénominateur, 6, donne le nombre de parts. Puis on en colorie 4.",
+  "05-egales": "Attention, les parts doivent être égales ! Ce mur est coupé en 4, mais les parts n'ont pas la même taille. La part bleue n'est pas 1 quart du mur. Avec des parts inégales, pas de fraction !",
+  "06-fines": "Plus difficile. Maëlys veut peindre 2 tiers d'un mur de 12 carreaux. 12 divisé par 3, égale 4 : 1 tiers, c'est 4 carreaux. Pour 2 tiers : 2 fois 4, égale 8 carreaux.",
+  "07-question": "Question ! Un mur a 10 carreaux. Combien faut-il en peindre pour 1 demi ? A : 2. B : 5. C : 1. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. 10 divisé par 2, égale 5 : la moitié des carreaux.",
+  "08-defi": "À toi de jouer ! Une fresque a 15 carreaux égaux. Maëlys en peint 3 cinquièmes en jaune. Combien de carreaux peint-elle ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 15 divisé par 5, égale 3 : 1 cinquième, c'est 3 carreaux. Pour 3 cinquièmes : 3 fois 3, égale 9 carreaux. Maëlys peint 9 carreaux sur 15.",
+  "09-chaine": "Et regarde : 3 cinquièmes et 9 quinzièmes couvrent la même surface. Ce sont deux fractions égales : c'est la prochaine vidéo !",
+  "10-finale": "Ce que tu as appris. Le dénominateur dit en combien de parts égales on partage. Le numérateur dit combien de parts on colorie. Les parts doivent être égales. Avec de petites parts, on fait des groupes.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

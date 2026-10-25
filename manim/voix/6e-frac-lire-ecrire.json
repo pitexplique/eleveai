@@ -1,0 +1,19 @@
+{
+  "00-garde": "Lire et écrire une fraction. Que veulent dire les deux nombres d'une fraction ?",
+  "01-situation": "Voici Lucas, maraîcher. Il cultive des légumes. Son potager est partagé en 8 carrés égaux. Il plante des tomates dans 3 carrés. Quelle part du potager a-t-il plantée ?",
+  "02-fraction": "Le potager a 8 carrés en tout. C'est le dénominateur : on l'écrit en bas. Lucas en a planté 3. C'est le numérateur : on l'écrit en haut. Entre les deux, un trait. On lit : 3 huitièmes.",
+  "03-noms": "Pour lire, le dénominateur donne le nom des parts. En 2 parts : des demis. En 3 : des tiers. En 4 : des quarts. Ensuite, on ajoute « ième ». En 5 : des cinquièmes. En 8 : des huitièmes. En 10 : des dixièmes.",
+  "04-question": "Question ! Dans 3 huitièmes du potager, que dit le 8 ? A : 8 carrés en tout. B : 8 carrés plantés. C : 8 carrés vides. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. Le 8, en bas, compte tous les carrés. Les carrés plantés, c'est le 3, en haut.",
+  "05-formes": "Ça marche avec toutes les formes. Une barre en 5 parts égales. 2 sont coloriées : 2 cinquièmes. Un disque en 6 parts égales. 5 sont coloriées : 5 sixièmes.",
+  "06-ecrire": "Et dans l'autre sens ? Pour écrire 7 dixièmes, on met 10 en bas : 10 parts en tout. Et 7 en haut : 7 parts prises.",
+  "07-question": "Question ! Comment s'écrit 5 sixièmes ? A : 6 en haut, 5 en bas. B : 5 en haut, 6 en bas. C : 5,6. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. 6 parts en tout : en bas. 5 parts prises : en haut. Et 5,6 est un nombre décimal : rien à voir !",
+  "08-piege": "Attention au piège ! On n'écrit jamais le 8 en haut : les parts en tout vont toujours en bas. Et on ne compte pas les carrés vides : 5 huitièmes, c'est ce qui reste. Lucas a planté 3 huitièmes.",
+  "09-question": "Question ! Quelle fraction de la barre est coloriée ? A : 7 quarts. B : 3 septièmes. C : 4 septièmes. Mets pause, et choisis !",
+  "09b-reponse": "Réponse C. 7 parts en tout, en bas. 4 parts coloriées, en haut. 3 septièmes, c'est la partie blanche.",
+  "10-defi": "À toi de jouer ! Le nouveau potager de Lucas a 10 carrés égaux. Il plante 3 carrés de salades. Sa sœur Nina plante 4 carrés de fraises. Quelle fraction du potager reste vide ? Mets pause, et cherche !",
+  "10b-correction": "Correction. 10 carrés en tout : le dénominateur est 10. 3 plus 4, égale 7 carrés plantés. 10 moins 7, égale 3 carrés vides. Il reste 3 dixièmes du potager. Et 3 dixièmes, c'est aussi 0,3 : on le verra bientôt !",
+  "11-finale": "Ce que tu as appris. Le dénominateur, en bas, compte toutes les parts. Le numérateur, en haut, compte les parts prises. On lit : demis, tiers, quarts, puis les « ièmes ». Et les parts sont toujours égales.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

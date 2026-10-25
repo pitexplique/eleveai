@@ -644,7 +644,8 @@ class Division(VGroup):
                 sp, sc = str(prod), str(cur)
                 yp = y - lh
                 lp = VGroup(*[T(c).move_to(P(X(i - len(sp) + 1 + j), yp)) for j, c in enumerate(sp)])
-                moins = T("−").move_to(P(X(i - max(len(sp), len(sc))) + cw * 0.15, yp))
+                # le « − » à un vrai écart du premier chiffre (il touchait le « 28 », 25/10)
+                moins = T("−").move_to(P(X(i - max(len(sp), len(sc))) - cw * 0.12, yp))
                 trait = Line(P(X(i - max(len(sp), len(sc)) + 1) - cw / 2, yp - lh * 0.52),
                              P(X(i) + cw / 2, yp - lh * 0.52), color=WHITE, stroke_width=3)
                 sr = str(r) + (chiffres[i + 1] if i + 1 < len(chiffres) else "")

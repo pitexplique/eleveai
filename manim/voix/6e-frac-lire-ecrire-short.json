@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Jade crée des jeux vidéo. Son héros a une barre de vie de 5 cœurs. Combien de vie lui reste-t-il ?",
+  "01-coups": "Aïe ! Un coup : il perd 1 cœur. Encore un : il en perd 2. Il lui reste 3 cœurs sur 5 : 3 cinquièmes de vie !",
+  "02-boss": "Contre le boss, la barre a 10 cœurs. Il en perd 3. Il en reste 7 : 7 dixièmes de vie.",
+  "03-question": "Question ! Il reste 2 cœurs sur 8. Quelle fraction de vie ? A : 8 demis. B : 2 huitièmes. C : 6 huitièmes. Mets pause !",
+  "03b-reponse": "Réponse B. 8 cœurs en tout, en bas. 2 qui restent, en haut.",
+  "04-question": "À toi : le héros a 6 cœurs. Il en perd 1. Quelle fraction de vie lui reste-t-il ? Réponds en commentaire !"
+}

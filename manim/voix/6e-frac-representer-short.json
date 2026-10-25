@@ -1,0 +1,11 @@
+{
+  "00-accroche": "Rayan, boulanger, doit couper un gâteau rond en 6 parts égales. Sans rapporteur ! Son astuce : un compas.",
+  "01-compas": "Il ouvre le compas de la longueur du rayon. Il pique sur le bord, et reporte le rayon. Encore, et encore. 6 fois, et il retombe pile au départ !",
+  "02-hexagone": "Il relie les 6 points : un hexagone ! Avec le centre, ça fait 6 triangles. Tous leurs côtés sont égaux au rayon : ce sont des triangles équilatéraux. Leurs angles font 60 degrés. 6 fois 60, égale 360 : le tour complet !",
+  "03-parts": "Chaque part, c'est un triangle, plus un petit arc de croûte. 1 part sur 6 : 1 sixième du gâteau.",
+  "04-egal": "2 parts : 2 sixièmes, c'est 1 tiers. 3 parts : 3 sixièmes, c'est 1 demi !",
+  "05-question": "Question ! 4 parts sur 6, c'est combien de tiers ? A : 4 tiers. B : 2 tiers. C : 1 tiers. Mets pause !",
+  "05b-reponse": "Réponse B. 4 sixièmes : on divise par 2 en haut et en bas. 2 tiers.",
+  "06-decimal": "Et 1 sixième, en nombre décimal ? 1 divisé par 6, égale 0,1 6 6 6, et ça continue : la division ne s'arrête jamais ! C'est environ 16,7 %.",
+  "07-question": "À toi : 2 parts sur 6, quel pourcentage du gâteau ? Réponds en commentaire !"
+}

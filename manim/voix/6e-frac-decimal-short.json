@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Hugo, ingénieur du son, crée une appli de musique. Sa chanson dure 4 minutes. On en a écouté 3. Que doit afficher la barre de lecture ?",
+  "01-minutes": "1 minute, 2 minutes, 3 minutes : on a écouté 3 quarts de la chanson.",
+  "02-surprise": "L'appli, elle, calcule 3 divisé par 4 : 0,75. Et elle affiche 75 % !",
+  "03-question": "Question ! À la moitié de la chanson, l'appli affiche : A : 12 %. B : 50 %. C : 0,5 %. Mets pause !",
+  "03b-reponse": "Réponse B. 1 demi, égale 0,5 : c'est 50 %.",
+  "04-question": "À toi : tu as écouté 1 minute sur 4. Quel pourcentage affiche l'appli ? Réponds en commentaire !"
+}

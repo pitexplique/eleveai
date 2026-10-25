@@ -1,0 +1,21 @@
+{
+  "00-garde": "Fraction et nombre décimal. Une fraction peut-elle s'écrire avec une virgule ?",
+  "01-situation": "Voici Kenza, entraîneuse de basket. Au dernier match, Lou a marqué 3 lancers francs sur 4. Kenza veut l'écrire sur sa tablette, avec une virgule. Comment faire ?",
+  "02-quotient": "3 lancers sur 4, c'est la fraction 3 quarts. Et une fraction, c'est aussi une division : 3 quarts, c'est 3 divisé par 4.",
+  "03-poser": "Posons la division. En 3, combien de fois 4 ? 0 fois : on écrit 0, et une virgule. On ajoute un zéro : 30. En 30, 7 fois 4, égale 28. Il reste 2. On ajoute un zéro : 20. En 20, 5 fois 4, égale 20. Il reste 0 : c'est fini ! 3 divisé par 4, égale 0,75.",
+  "04-droite": "Vérifions sur une droite graduée. De 0 à 1, coupée en 4. 3 quarts tombe pile sur 0,75 : entre 0,5 et 1.",
+  "05-question": "Question ! Quelle est l'écriture décimale de 1 quart ? A : 1,4. B : 0,25. C : 4,1. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 1 divisé par 4, égale 0,25. 1,4 colle les deux nombres : c'est faux !",
+  "06-piege": "Attention au piège ! 3 quarts, ce n'est pas 3,4. 3,4, c'est plus que 3. Or 3 quarts, c'est moins que 1 : moins qu'une barre entière. Entre les deux nombres d'une fraction, il y a une division, jamais une virgule.",
+  "07-connaitre": "Quelques-unes sont à connaître par cœur. 1 demi, égale 0,5. 1 quart, égale 0,25. 3 quarts, égale 0,75. 1 cinquième, égale 0,2. 1 dixième, égale 0,1.",
+  "08-question": "Question ! Quelle est l'écriture décimale de 2 cinquièmes ? A : 2,5. B : 0,4. C : 0,2. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. 2 divisé par 5, égale 0,4. Ou bien : 1 cinquième, égale 0,2, donc 2 cinquièmes, égale 0,4.",
+  "09-plus-que-1": "Et 7 quarts ? 7 divisé par 4, égale 1,75. Le numérateur est plus grand que le dénominateur : la fraction dépasse 1.",
+  "10-pourcentage": "Et le lien avec les pourcentages ! 0,75, c'est 75 centièmes : 75 cases sur 100. On écrit 75 %. Lou a réussi 75 % de ses lancers !",
+  "11-question": "Question ! 0,75 en pourcentage, c'est combien ? A : 0,75 %. B : 7,5 %. C : 75 %. Mets pause, et choisis !",
+  "11b-reponse": "Réponse C. 0,75, c'est 75 centièmes : 75 %. 0,75 %, ce serait moins d'une case sur 100 !",
+  "12-defi": "À toi de jouer ! Au match suivant, Lou marque 4 lancers francs sur 5. Écris-le en fraction, puis en nombre décimal, puis en pourcentage. Mets pause, et cherche !",
+  "12b-correction": "Correction. 4 lancers sur 5 : 4 cinquièmes. 4 divisé par 5, égale 0,8. Et 0,8, c'est 80 centièmes : 80 %. Lou progresse : de 75 % à 80 % !",
+  "13-finale": "Ce que tu as appris. Une fraction, c'est une division : 3 quarts, c'est 3 divisé par 4. 3 divisé par 4, égale 0,75. Jamais de virgule entre les deux nombres. Et 0,75, c'est 75 %.",
+  "14-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}
