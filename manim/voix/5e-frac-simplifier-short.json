@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Maëva, chocolatière, fabrique une tablette de 24 carrés. Son neveu en mange 18. Peut-on dire plus simplement ce qu'il a mangé ?",
+  "01-rangees": "La tablette a 4 rangées de 6 carrés. Les 18 carrés mangés font 3 rangées entières ! 24 divisé par 6, égale 4 rangées. 18 divisé par 6, égale 3 rangées. 18 vingt-quatrièmes égale 3 quarts : c'est le même chocolat !",
+  "02-piege": "Et si on enlève 6 en haut et en bas de 18 vingt-quatrièmes ? On trouve 12 dix-huitièmes : la barre est plus courte ! Faux. On divise, on ne soustrait jamais.",
+  "03-question": "Question ! 15 carrés, dont 10 mangés, regroupés 5 par 5. Combien de gros carrés mangés ? A : 5. B : 2. C : 3. Mets pause !",
+  "03b-reponse": "Réponse B. 10 divisé par 5, égale 2 : 2 tiers de la tablette.",
+  "04-question": "À toi : une tablette de 30 carrés, dont 20 mangés. Quelle fraction, la plus simple possible ? Réponds en commentaire !"
+}

@@ -1,0 +1,7 @@
+{
+  "00-accroche": "Malo, crêpier, a 3 crêpes pour 4 amis. Impossible de donner une crêpe entière à chacun ! Alors, combien chacun ?",
+  "01-partage": "Il coupe chaque crêpe en 4. Chaque ami prend 1 quart de chaque crêpe : 3 quarts en tout. 3 divisé par 4, égale 3 quarts de crêpe !",
+  "02-question": "Question ! 2 crêpes pour 5 amis. Combien chacun ? A : 5 demis. B : 2 cinquièmes. C : 2,5. Mets pause !",
+  "02b-reponse": "Réponse B. 2 divisé par 5, égale 2 cinquièmes de crêpe.",
+  "03-question": "À toi : 5 crêpes pour 4 amis. Combien de crêpe chacun, avec une virgule ? Réponds en commentaire !"
+}

@@ -1,0 +1,19 @@
+{
+  "00-garde": "Comparer des fractions. Comment savoir quelle fraction est la plus grande ?",
+  "01-situation": "Voici Zoé, garde du littoral. Cette nuit, des bébés tortues filent vers la mer. La tortue A a fait 5 sixièmes du chemin. La tortue B, 7 douzièmes. Laquelle est la plus près de la mer ?",
+  "02-meme-den": "Commençons simple. Avec le même dénominateur, les parts ont la même taille. 7 douzièmes et 5 douzièmes : 7 parts, c'est plus que 5 parts. Donc 7 douzièmes est plus grand que 5 douzièmes.",
+  "03-meme-num": "Avec le même numérateur, regarde la taille des parts. 3 quarts et 3 huitièmes : 3 parts dans les deux cas. Mais un quart est plus grand qu'un huitième. Donc 3 quarts est plus grand que 3 huitièmes. Plus le dénominateur est grand, plus les parts sont petites.",
+  "04-question": "Question ! Compare 5 septièmes et 5 neuvièmes. A : plus grand. B : égal. C : plus petit. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. Même numérateur : un septième est plus grand qu'un neuvième. Donc 5 septièmes est plus grand que 5 neuvièmes.",
+  "05-multiple": "Et nos tortues ? 5 sixièmes et 7 douzièmes : les dénominateurs sont différents. Mais 12, c'est 6 fois 2 ! 5 sixièmes, fois 2 en haut et en bas, égale 10 douzièmes. Et 10 douzièmes est plus grand que 7 douzièmes. La tortue A est la plus près de la mer !",
+  "06-question": "Question ! Compare 2 tiers et 5 neuvièmes. A : plus petit. B : égal. C : plus grand. Mets pause, et choisis !",
+  "06b-reponse": "Réponse C. 3 fois 3, égale 9 : 2 tiers égale 6 neuvièmes. Et 6 neuvièmes est plus grand que 5 neuvièmes.",
+  "07-piege": "Attention au piège ! 1 cinquième et 1 dixième. 10 est plus grand que 5, mais 1 dixième est plus petit ! Couper en 10, ça donne des parts plus petites.",
+  "08-un": "Et pour comparer à 1 ? 6 sixièmes, c'est une unité entière : 1. Une fraction est plus grande que 1 quand son numérateur dépasse son dénominateur.",
+  "09-question": "Question ! Laquelle est plus grande que 1 ? A : 5 sixièmes. B : 7 sixièmes. C : 6 septièmes. Mets pause, et choisis !",
+  "09b-reponse": "Réponse B. 7 dépasse 6 : 7 sixièmes est plus grand que 1. 5 sixièmes et 6 septièmes sont plus petits que 1.",
+  "10-defi": "À toi de jouer ! Trois tortues ont fait 1 demi, 3 huitièmes et 5 huitièmes du chemin. Range ces fractions de la plus petite à la plus grande. Mets pause, et cherche !",
+  "10b-correction": "Correction. 2 fois 4, égale 8 : 1 demi égale 4 huitièmes. On compare 3 huitièmes, 4 huitièmes et 5 huitièmes. Donc 3 huitièmes, puis 1 demi, puis 5 huitièmes. Et 1 demi, c'est 0,5, soit 50 % du chemin !",
+  "11-finale": "Ce que tu as appris. Même dénominateur : on compare les numérateurs. Même numérateur : plus le dénominateur est grand, plus la fraction est petite. Sinon, on écrit les deux fractions avec le même dénominateur.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -1,0 +1,7 @@
+{
+  "00-accroche": "Léo, animateur, lance une course d'escargots ! L'escargot vert a fait 2 tiers de la piste. L'escargot jaune, 7 douzièmes. Qui mène la course ?",
+  "01-piste": "La piste jaune a 12 cases. On coupe chaque tiers de la piste verte en 4 : 2 tiers égale 8 douzièmes. 8 cases contre 7 : le vert mène !",
+  "02-question": "Question ! Escargot rouge : 1 demi. Escargot bleu : 3 sixièmes. Qui mène ? A : le rouge. B : le bleu. C : égalité. Mets pause !",
+  "02b-reponse": "Réponse C. 1 demi égale 3 sixièmes : égalité !",
+  "03-question": "À toi : un escargot à 2 cinquièmes, l'autre à 3 dixièmes. Lequel mène ? Réponds en commentaire !"
+}

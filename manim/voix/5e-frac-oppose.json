@@ -1,0 +1,19 @@
+{
+  "00-garde": "L'opposé d'une fraction. Quel nombre est le même, mais de l'autre côté du 0 ?",
+  "01-situation": "Voici Ilan, volcanologue à La Réunion. Il mesure les mouvements du sol du volcan. Lundi, le sol est monté de 2 cinquièmes de centimètre. Mardi, il est redescendu de 2 cinquièmes. Comment écrire ces deux mouvements ?",
+  "02-signe": "Monter, c'est plus 2 cinquièmes. Descendre, c'est moins 2 cinquièmes : on met un signe moins devant la fraction. Les deux mouvements s'annulent : le sol revient à 0.",
+  "03-droite": "Sur une droite graduée, 2 cinquièmes et moins 2 cinquièmes sont à la même distance de 0, de chaque côté. Ce sont deux nombres opposés. L'opposé de 2 cinquièmes, c'est moins 2 cinquièmes.",
+  "04-question": "Question ! Quel est l'opposé de 3 cinquièmes ? A : moins 3 cinquièmes. B : 5 tiers. C : 3 cinquièmes. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. On change seulement le signe : moins 3 cinquièmes. 5 tiers, c'est la fraction retournée : un autre nombre !",
+  "05-somme": "Autre façon de le voir : un nombre plus son opposé, ça fait 0. 3 cinquièmes, plus moins 3 cinquièmes, égale 0. Comme le sol qui monte, puis redescend d'autant.",
+  "06-negatif": "Et l'opposé d'un nombre négatif ? L'opposé de moins 7 neuvièmes, c'est 7 neuvièmes : on enlève le signe moins. L'opposé de l'opposé, c'est le nombre de départ !",
+  "07-question": "Question ! Quel est l'opposé de moins 4 septièmes ? A : moins 7 quarts. B : 4 septièmes. C : moins 4 septièmes. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. On change le signe : le moins devient plus. 4 septièmes, plus moins 4 septièmes, égale 0.",
+  "08-piege": "Attention au piège ! L'opposé, ce n'est pas la fraction retournée. L'opposé de 2 cinquièmes, c'est moins 2 cinquièmes : on change le signe. 5 demis, c'est la fraction retournée : un autre nombre ! Pour l'opposé, on ne touche jamais à la fraction.",
+  "09-question": "Question ! 5 sixièmes plus combien égale 0 ? A : 6 cinquièmes. B : 0. C : moins 5 sixièmes. Mets pause, et choisis !",
+  "09b-reponse": "Réponse C. 5 sixièmes plus moins 5 sixièmes, égale 0 : ce sont deux nombres opposés.",
+  "10-defi": "À toi de jouer ! Mercredi, le sol est descendu de 3 dixièmes de centimètre. Écris ce mouvement avec un signe. Puis écris son opposé, avec une virgule. Mets pause, et cherche !",
+  "10b-correction": "Correction. Descendre de 3 dixièmes : moins 3 dixièmes. Son opposé : 3 dixièmes. Et 3 dixièmes, c'est 3 divisé par 10, égale 0,3 centimètre, soit 3 millimètres !",
+  "11-finale": "Ce que tu as appris. L'opposé d'un nombre est de l'autre côté de 0, à la même distance. On change seulement le signe. Un nombre plus son opposé égale 0. Et l'opposé n'est jamais la fraction retournée !",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

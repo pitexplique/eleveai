@@ -1,0 +1,7 @@
+{
+  "00-accroche": "Nora, horlogère, montre une demi-heure sur le cadran. La moitié du tour ! Mais de combien de façons peut-on l'écrire ?",
+  "01-ecritures": "Le cadran a 12 graduations. La demi-heure en couvre 6 : 6 douzièmes. Par paquets de 3 graduations : 2 quarts. Et en minutes : 30 soixantièmes. 1 demi, 2 quarts, 6 douzièmes, 30 soixantièmes : la même part du cadran !",
+  "02-question": "Question ! 3 quarts d'heure, c'est combien de douzièmes ? A : 3. B : 9. C : 4. Mets pause !",
+  "02b-reponse": "Réponse B. 4 fois 3, égale 12, et 3 fois 3, égale 9 : 9 douzièmes.",
+  "03-question": "À toi : un quart d'heure, c'est combien de soixantièmes du cadran ? Réponds en commentaire !"
+}

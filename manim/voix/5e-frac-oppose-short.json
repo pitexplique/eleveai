@@ -1,0 +1,7 @@
+{
+  "00-accroche": "Emma, guide en Australie, observe un kangourou. Il saute de 2 tiers de mètre vers la droite. Puis de 2 tiers vers la gauche. Où retombe-t-il ?",
+  "01-saut": "Premier saut : plus 2 tiers. Deuxième saut : moins 2 tiers. 2 tiers, plus moins 2 tiers, égale 0 : il retombe pile au départ ! 2 tiers et moins 2 tiers sont opposés.",
+  "02-question": "Question ! Le kangourou est à moins 4 cinquièmes. Où est son opposé ? A : 4 cinquièmes. B : moins 5 quarts. C : 5 quarts. Mets pause !",
+  "02b-reponse": "Réponse A. On change le signe : 4 cinquièmes, de l'autre côté du 0.",
+  "03-question": "À toi : quel est l'opposé de l'opposé de moins 3 huitièmes ? Réponds en commentaire !"
+}

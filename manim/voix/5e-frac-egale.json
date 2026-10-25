@@ -1,0 +1,19 @@
+{
+  "00-garde": "Des fractions égales. Comment savoir si deux fractions représentent la même quantité ?",
+  "01-situation": "Voici Tom, soigneur dans un parc animalier. Chaque matin, la girafe mange 3 quarts d'une botte de foin. Aujourd'hui, la botte est coupée en 8 tranches. Combien de tranches faut-il ? 3 quarts, est-ce 6 huitièmes ?",
+  "02-couper": "On coupe chaque quart en 2. Les 4 quarts deviennent 8 huitièmes. Les 3 quarts deviennent 6 huitièmes. La quantité de foin ne change pas : 3 quarts égale 6 huitièmes. On a multiplié en haut et en bas par 2.",
+  "03-regle": "C'est la règle des fractions égales. On multiplie, ou on divise, le numérateur et le dénominateur par le même nombre. Par exemple, 3 cinquièmes : fois 2 en haut et en bas, égale 6 dixièmes.",
+  "04-question": "Question ! 2 tiers égale combien de douzièmes ? A : 8. B : 11. C : 2. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. 3 fois 4, égale 12, donc 2 fois 4, égale 8. Avec 11, on a ajouté 9 en haut et en bas : faux !",
+  "05-pas-egales": "Et 2 tiers, et 4 cinquièmes ? De 2 à 4, on multiplie par 2. Mais 3 fois 2, égale 6, pas 5 ! Sur les barres, les longueurs sont différentes : ces fractions ne sont pas égales.",
+  "06-meme-den": "Pour vérifier, écris-les avec le même dénominateur. 3 quarts et 9 douzièmes : 4 fois 3, égale 12, et 3 fois 3, égale 9. Donc 3 quarts égale 9 douzièmes : elles sont égales !",
+  "07-question": "Question ! Laquelle est égale à 4 cinquièmes ? A : 5 sixièmes. B : 8 cinquièmes. C : 8 dixièmes. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. 4 fois 2, égale 8, et 5 fois 2, égale 10. Avec 5 sixièmes, on a ajouté 1. Avec 8 cinquièmes, seul le haut a changé.",
+  "08-diviser": "Ça marche aussi en divisant. 12 seizièmes : divisé par 4, en haut et en bas, égale 3 quarts. C'est simplifier ! Mais on ne soustrait jamais : 12 moins 9, et 16 moins 9, donnent 3 septièmes. Faux !",
+  "09-question": "Question ! Vrai ou faux : 10 quinzièmes égale 2 tiers. A : vrai. B : faux. C : on ne peut pas savoir. Mets pause, et choisis !",
+  "09b-reponse": "Réponse A. 10 divisé par 5, égale 2, et 15 divisé par 5, égale 3. Donc 10 quinzièmes égale bien 2 tiers.",
+  "10-defi": "À toi de jouer ! Le zèbre mange 2 cinquièmes d'une botte. La botte est coupée en 20 tranches. Combien de tranches lui faut-il ? Mets pause, et cherche !",
+  "10b-correction": "Correction. 5 fois 4, égale 20 : on multiplie par 4, en haut et en bas. 2 fois 4, égale 8. 2 cinquièmes égale 8 vingtièmes : il faut 8 tranches. Et 2 cinquièmes, c'est 2 divisé par 5, égale 0,4, soit 40 % de la botte !",
+  "11-finale": "Ce que tu as appris. Deux fractions sont égales quand elles représentent la même quantité. On multiplie, ou on divise, le numérateur et le dénominateur par le même nombre. On n'ajoute pas, et on ne soustrait pas !",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

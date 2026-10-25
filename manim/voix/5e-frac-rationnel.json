@@ -1,0 +1,19 @@
+{
+  "00-garde": "Fraction et quotient. Une fraction, c'est aussi une division ! Comment l'écrire, et la calculer ?",
+  "01-situation": "Voici Sana, couturière. Elle a un ruban de 7 mètres, à couper en 4 morceaux égaux, pour 4 robes. Combien mesure chaque morceau ?",
+  "02-quotient": "Chaque morceau mesure 7 divisé par 4. Ce quotient s'écrit avec une fraction : 7 quarts de mètre. 7 divisé par 4, égale 7 quarts : le numérateur divisé par le dénominateur.",
+  "03-verif": "Vérifions. 4 morceaux de 7 quarts : 4 fois 7 quarts, égale 28 quarts, soit 7 mètres. 7 quarts, c'est le nombre qui, multiplié par 4, donne 7.",
+  "04-question": "Question ! Comment s'écrit 3 divisé par 5 ? A : 5 tiers. B : 3 cinquièmes. C : 3,5. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 3 divisé par 5, égale 3 cinquièmes : le premier nombre va en haut. 5 tiers est à l'envers, et 3,5 colle les deux nombres !",
+  "05-decimal": "Et avec une virgule ? On fait la division : 7 divisé par 4, égale 1,75. Donc 7 quarts égale 1,75 mètre. Attention : 7 quarts, ce n'est pas 7,4 !",
+  "06-encadrer": "1,75 est entre 1 et 2. Avec les fractions : 4 quarts égale 1, et 8 quarts égale 2. 7 est entre 4 et 8 : 7 quarts est entre 1 et 2.",
+  "07-question": "Question ! Quelle est l'écriture décimale de 9 quarts ? A : 9,4. B : 2,25. C : 0,94. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. 9 divisé par 4, égale 2,25. 9,4 colle les deux nombres : c'est le piège !",
+  "08-retour": "Et dans l'autre sens ? Sana coupe un galon de 0,35 mètre. 0,35, c'est 35 centièmes. 35 et 100 sont dans la table de 5 : on divise par 5, en haut et en bas. 0,35 égale 7 vingtièmes.",
+  "09-question": "Question ! 0,35, c'est combien de pour cent ? A : 0,35 %. B : 3,5 %. C : 35 %. Mets pause, et choisis !",
+  "09b-reponse": "Réponse C. 0,35, c'est 35 centièmes, donc 35 %. Et 0,35 %, ce serait moins d'un centième !",
+  "10-defi": "À toi de jouer ! Sana partage 3 mètres de dentelle entre 4 robes, à parts égales. Écris chaque morceau avec une fraction, puis avec une virgule. Mets pause, et cherche !",
+  "10b-correction": "Correction. 3 divisé par 4, égale 3 quarts de mètre. Avec une virgule : 3 divisé par 4, égale 0,75. Chaque morceau mesure 0,75 mètre, soit 75 % d'un mètre !",
+  "11-finale": "Ce que tu as appris. Une fraction est un quotient : 7 divisé par 4, égale 7 quarts. Multiplié par 4, il redonne 7. Pour l'écrire avec une virgule, on fait la division. Et 7 quarts, ce n'est jamais 7,4 !",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}
