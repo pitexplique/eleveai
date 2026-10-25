@@ -183,14 +183,19 @@ function GridFraction({
   shaded,
   width,
   height,
+  showFraction,
 }: {
   rows: number;
   cols: number;
   shaded: number;
   width: number;
   height: number;
+  showFraction?: boolean;
 }) {
-  const cell = 34;
+  // 25/10/2026 : une grille de 10 × 10 (1/4 = 25/100 = 25 %) débordait à 34 px
+  // la case ; et l'écriture « 25/100 » sous la grille donnait la réponse quand
+  // la question demandait de la lire — elle suit maintenant showFraction.
+  const cell = Math.min(34, (width - 24) / cols, (height - 50) / rows);
   const totalW = cols * cell;
   const totalH = rows * cell;
   const startX = (width - totalW) / 2;
@@ -217,16 +222,18 @@ function GridFraction({
         );
       })}
 
-      <text
-        x={width / 2}
-        y={height - 14}
-        textAnchor="middle"
-        fontSize="18"
-        fontWeight="900"
-        fill={BORDER}
-      >
-        {safeShaded}/{total}
-      </text>
+      {showFraction !== false ? (
+        <text
+          x={width / 2}
+          y={height - 14}
+          textAnchor="middle"
+          fontSize="18"
+          fontWeight="900"
+          fill={BORDER}
+        >
+          {safeShaded}/{total}
+        </text>
+      ) : null}
     </g>
   );
 }
@@ -281,6 +288,7 @@ export default function FractionCanvas({ figure }: Props) {
             shaded={figure.grid.shaded}
             width={width}
             height={height}
+            showFraction={showFraction}
           />
         ) : null}
 

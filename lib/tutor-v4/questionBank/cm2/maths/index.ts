@@ -9,6 +9,8 @@ import { multiplicationBank } from "./multiplication.bank";
 import { divisionBank } from "./division.bank";
 import { nombresEntiersBank } from "./nombres-entiers.bank";
 import { fractionsBank } from "./fractions.bank";
+// Les générateurs de la notion « fraction » (25/10/2026), voir le fichier.
+import { fractionsGabaritsBank } from "./fractions-gabarits.bank";
 import { fractionsSuperieuresBank } from "./fractions-superieures.bank";
 import { fractionsCalculCm2Bank } from "./fractions-calcul.bank";
 import { calculBank } from "./calcul.bank";
@@ -54,6 +56,7 @@ export const mathsCm2QuestionBank: TutorBankItemV4[] = [
   ...applyMathsKeyboardFree(divisionBank),
   ...applyMathsKeyboardFree(nombresEntiersBank),
   ...applyMathsKeyboardFree(fractionsBank),
+  ...applyMathsKeyboardFree(fractionsGabaritsBank),
   ...applyMathsKeyboardFree(fractionsSuperieuresBank),
   ...applyMathsKeyboardFree(fractionsCalculCm2Bank),
   ...applyMathsKeyboardFree(algorithmiqueBank),
