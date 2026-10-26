@@ -1,0 +1,16 @@
+{
+  "00-garde": "Regrouper en une seule fraction. 3 et 1 quart : combien de quarts en tout ?",
+  "01-situation": "Voici Malik, diététicien à la cantine. Pour le goûter, il coupe les oranges en 4 quartiers : chaque quartier, c'est 1 quart d'orange. Sur le plateau : 3 oranges entières et 1 quart. Combien de quarts en tout ?",
+  "02-entier": "1 orange, c'est 4 quarts. Alors 3 oranges, c'est 3 fois 4 : 12 quarts. 3 égale 12 quarts.",
+  "03-methode": "On ajoute le quart qui reste : 12 quarts plus 1 quart, 13 quarts. Donc 3 plus 1 quart égale 13 quarts.",
+  "04-question": "Question ! 2 plus 3 quarts, c'est… A : 5 quarts. B : 11 quarts. C : 6 quarts. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 2 oranges, c'est 8 quarts. 8 plus 3 : 11 quarts. Le piège : ajouter 2 et 3.",
+  "05-pourquoi": "Pourquoi le dénominateur ne change pas ? On compte des quarts, comme on compte des oranges. 12 quarts plus 1 quart, c'est 13 quarts : des quarts avant, des quarts après.",
+  "06-cinquiemes": "Avec des cinquièmes : 2 plus 3 cinquièmes. 2 entiers, c'est 2 fois 5 : 10 cinquièmes. 10 plus 3 : 13 cinquièmes. 2 plus 3 cinquièmes égale 13 cinquièmes.",
+  "07-question": "Question ! 1 plus 1 quart, en nombre décimal ? A : 1,4. B : 1,25. C : 5,4. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. 1 quart, c'est 0,25 : 1 plus 0,25, c'est 1,25. Et c'est aussi 5 quarts !",
+  "08-defi": "À toi de jouer ! Malik prépare 4 oranges entières et 3 quarts. Écris-le avec une seule fraction. Mets pause, et cherche !",
+  "08b-correction": "Correction. 4 oranges, c'est 4 fois 4 : 16 quarts. 16 plus 3 : 19 quarts. 4 plus 3 quarts égale 19 quarts.",
+  "09-finale": "Ce que tu as appris. On écrit les entiers en parts : entier fois dénominateur. On ajoute les numérateurs. Le dénominateur ne change pas.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

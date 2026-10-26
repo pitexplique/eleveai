@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Un jeu de livreur ! Sami livre des jus. Un carton contient 4 bouteilles : 1 bouteille, c'est 1 quart du carton.",
+  "01-compter": "Il livre 3 cartons et 2 bouteilles. 3 cartons, c'est 3 fois 4 : 12 bouteilles. Plus 2 : 14 bouteilles.",
+  "02-surprise": "Donc 3 plus 2 quarts égale 14 quarts de carton ! Le dénominateur, lui, ne bouge pas.",
+  "03-question": "Question ! 2 cartons et 1 bouteille : combien de quarts de carton ? A : 3. B : 9. C : 8. Mets pause !",
+  "03b-reponse": "Réponse B. 2 cartons, c'est 8 bouteilles. Plus 1 : 9 quarts.",
+  "04-question": "À toi : 5 cartons et 1 bouteille, c'est combien de quarts de carton ? Réponds en commentaire !"
+}
