@@ -8,7 +8,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { trouverVideo } from "@/lib/videos/r2";
 import BILANS from "@/lib/videos/bilans-videos.json";
-import BoutonImprimer from "./BoutonImprimer";
+import BoutonImprimer from "@/components/BoutonImprimer";
 
 type Props = { params: Promise<{ id: string }> };
 type Bilan = { vus: string[]; questions: { question: string; choix: string[]; reponse: number }[] };

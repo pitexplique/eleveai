@@ -32,14 +32,16 @@ const CLE = "coach-notions-mode";
 
 export function useNotionsPliees(notionIds: string[]) {
   const [depliees, setDepliees] = useState<Set<string>>(() => new Set());
-  const [modeComplet, setModeComplet] = useState(false);
+  // ⭐ 27/10/2026 — Frédéric : « dans coach maths, mettre tout déplier par
+  // défaut ». Le mode simple ne revient que si on l'a choisi (« Tout replier »).
+  const [modeComplet, setModeComplet] = useState(true);
 
   // Le choix retenu se lit APRÈS le montage : le serveur n'a pas de
   // localStorage, et rendre « tout déplié » côté serveur pour tout le monde
   // serait exactement l'écran qu'on vient de quitter.
   useEffect(() => {
     try {
-      if (localStorage.getItem(CLE) === "complet") setModeComplet(true);
+      if (localStorage.getItem(CLE) === "simple") setModeComplet(false);
     } catch {
       /* localStorage indisponible : mode simple, sans mémoire. */
     }

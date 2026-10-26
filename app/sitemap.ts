@@ -8,6 +8,7 @@ import { UNE_COURANTE } from "@/lib/accueil/une";
 import { PDF_DISPONIBLES } from "@/lib/fiches/pdf-disponibles";
 import { FICHES_REGISTRE } from "@/lib/fiches/registre";
 import { FICHES_EXERCICES_REGISTRE } from "@/lib/fiches-exercices/registre";
+import CARTES_MENTALES from "@/lib/videos/bilans-notions.json";
 import { PAYS, programmesDuPays } from "@/lib/programmes-pays/pays";
 import {
   FAMILLES as FAMILLES_ECRITURE,
@@ -1339,6 +1340,23 @@ const VIDEOS_UNE: VideoSitemap[] = (UNE_COURANTE?.diapos ?? [])
    la page). Les classes grisées, sans matrice, n'y sont pas (noindex). La
    liste suit lib/programmes-pays : un pays ajouté entre seul au sitemap. */
 const LASTMOD_PAYS = new Date("2026-10-25");
+
+/* ⭐ 27/10/2026 — Frédéric : « rajouter cartes-mentales maths dans sitemaps ».
+   Le hub, puis une adresse par notion du coach (lib/videos/bilans-notions.json,
+   la même source que le hub et les cartes : une notion ajoutée au coach entre
+   seule au sitemap). */
+const LASTMOD_CARTES = new Date("2026-10-27");
+const cartesMentalesRoutes: RouteConfig[] = [
+  { path: "/cartes-mentales", priority: 0.85, changeFrequency: "weekly" as const, lastMod: LASTMOD_CARTES },
+  ...Object.keys(CARTES_MENTALES)
+    .filter((cle) => !cle.startsWith("adulte/"))
+    .map((cle) => ({
+      path: `/cartes-mentales/maths/${cle}`,
+      priority: 0.7,
+      changeFrequency: "monthly" as const,
+      lastMod: LASTMOD_CARTES,
+    })),
+];
 const paysRoutes: RouteConfig[] = PAYS.flatMap((info) => [
   { path: `/pays/${info.slug}`, priority: 0.8, changeFrequency: "weekly" as const, lastMod: LASTMOD_PAYS },
   ...programmesDuPays(info.slug)
@@ -1359,6 +1377,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...jeuxCartesRoutes,
     ...fichesRoutes,
     ...fichesExercicesRoutes,
+    ...cartesMentalesRoutes,
     ...niveauxRoutes,
     ...notionsRoutes,
     ...niveauxHorsClasseRoutes,

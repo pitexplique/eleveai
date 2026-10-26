@@ -29,7 +29,7 @@ import BoiteAOutils from "@/components/BoiteAOutils";
 import { useEleve } from "@/context/EleveContext";
 import Link from "next/link";
 import SelecteurPays from "@/components/SelecteurPays";
-import { BookOpen, Camera, ChevronRight, PencilLine, Play } from "lucide-react";
+import { BookOpen, Camera, ChevronRight, Network, PencilLine, Play } from "lucide-react";
 import { ficheExercicesHrefPourCoach } from "@/lib/fiches-exercices/registre";
 import { estShortVideo, lienVideo } from "@/lib/videos/lienVideo";
 import { ficheClasseSource, ficheHrefPourCoach, libelleClasse } from "@/lib/fiches/registre";
@@ -211,6 +211,8 @@ const CASE_GO = `${CASE} w-12`;
 const CASE_FICHE = `${CASE} min-w-16`;
 const CASE_EXERCICES = `${CASE} w-23`;
 const CASE_VIDEO = `${CASE} w-16`;
+// ⭐ 27/10/2026 — « à côté de cours, exercices, vidéos : CM, comme carte mentale ».
+const CASE_CM = `${CASE} w-11`;
 const BOUTON_SECONDAIRE =
   "rounded-full border border-slate-200 bg-white px-1.5 font-bold text-slate-600 transition hover:border-slate-300 hover:bg-slate-50";
 
@@ -1155,6 +1157,18 @@ export default function CoachIA() {
                               Vidéo
                             </a>
                           ) : <span aria-hidden="true" className={CASE_VIDEO} />}
+                          {/* La carte mentale de la notion, à imprimer : une par
+                              notion du coach qui a des micros (/cartes-mentales). */}
+                          {matiere === "maths" && micros.length > 0 ? (
+                            <Link
+                              href={`/cartes-mentales/maths/${classe}/${notionId}`}
+                              className={[CASE_CM, BOUTON_SECONDAIRE].join(" ")}
+                              title="La carte mentale de cette notion, à imprimer"
+                            >
+                              <Network className="h-3.5 w-3.5 text-teal-600" />
+                              CM
+                            </Link>
+                          ) : <span aria-hidden="true" className={CASE_CM} />}
                           </div>
                         </div>
                         {ouverte ? (

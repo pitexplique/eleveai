@@ -45,7 +45,7 @@ export default async function PageVideo({ params }: Props) {
   const cours = q ? ficheHrefPourCoach("maths", q.get("classe") ?? "", q.get("notion") ?? "") : null;
   // La feuille bilan de toute la notion (une ligne par micro), si elle existe.
   const cleNotion = q ? `${q.get("classe")}/${q.get("notion")}` : "";
-  const bilanNotion = cleNotion in BILANS_NOTIONS ? `/video/bilan/${cleNotion}` : null;
+  const bilanNotion = cleNotion in BILANS_NOTIONS ? `/cartes-mentales/maths/${cleNotion}` : null;
 
   return (
     <main className="min-h-screen bg-slate-950 px-4 py-6 text-white">
@@ -94,7 +94,7 @@ export default async function PageVideo({ params }: Props) {
             className="mt-1 flex items-center gap-2 text-sm font-bold text-slate-300 underline-offset-4 hover:text-white hover:underline"
           >
             <PencilLine className="h-4 w-4" />
-            Feuille bilan de toute la notion (recto verso)
+            Carte mentale de toute la notion (à imprimer)
           </Link>
         )}
 
