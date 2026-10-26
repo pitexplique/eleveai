@@ -228,6 +228,20 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les fractions",
     resume: "Lire, dessiner (barre, disque, grille) et placer une fraction sur la droite graduée.",
   },
+  // ⭐ 26/10/2026 — LES FRACTIONS DU PRIMAIRE AU COMPLET : les deux notions de
+  // CM2 qui n'avaient pas de fiche, et la première fiche de maths du CM1.
+  "maths/cm2/fraction-mixte": {
+    titre: "Les fractions plus grandes que 1",
+    resume: "Écrire 7/4 = 1 + 3/4, regrouper 3 + 1/4 = 13/4, et encadrer une fraction entre deux entiers.",
+  },
+  "maths/cm2/fraction-calcul": {
+    titre: "Calculer avec les fractions",
+    resume: "Ajouter des fractions, multiplier par un entier, et prendre une fraction d'une quantité.",
+  },
+  "maths/cm1/fraction": {
+    titre: "Les fractions",
+    resume: "Lire, dessiner, placer et comparer une fraction ; fractions égales et fractions décimales.",
+  },
   "maths/cm2/multiplication": {
     titre: "La multiplication",
     resume: "Tables, calcul mental, multiplication posée, × 10/100/1000 et problèmes.",
