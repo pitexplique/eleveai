@@ -79,6 +79,14 @@ export default async function PageVideo({ params }: Props) {
         <div className="mt-3">
           <BoutonAbonnement />
         </div>
+        {/* ⭐ 27/10/2026 — pour le prof : la feuille bilan à imprimer. */}
+        <Link
+          href={`/video/${v.id}/bilan`}
+          className="mt-3 inline-flex items-center gap-2 text-sm font-bold text-slate-300 underline-offset-4 hover:text-white hover:underline"
+        >
+          <PencilLine className="h-4 w-4" />
+          Feuille bilan à imprimer (compris, pas compris, questions)
+        </Link>
 
         {/* ⭐ 20/10/2026 — Frédéric : « relier, sous les vidéos, un lien vers
             le coach ». Après la vidéo, l'exercice de la même micro. */}

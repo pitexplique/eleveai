@@ -1125,7 +1125,7 @@ export default function CoachIA() {
                               title="Lire la fiche de cours de cette notion"
                             >
                               <BookOpen className="h-3.5 w-3.5 text-emerald-600" />
-                              {ficheAutreClasse ? `Fiche · ${libelleClasse(ficheAutreClasse)}` : "Fiche"}
+                              {ficheAutreClasse ? `Cours · ${libelleClasse(ficheAutreClasse)}` : "Cours"}
                             </Link>
                           ) : <span aria-hidden="true" className={CASE_FICHE} />}
                           {exercicesHref ? (

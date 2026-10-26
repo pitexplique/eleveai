@@ -154,3 +154,4 @@ if (sansFichier) console.log(`${sansFichier} vidéos du manifeste sans MP4 dans 
 
 // Les mots des titres, pour la recherche de l'en-tête (19/10/2026).
 await import("./generer-mots-videos.mjs");
+await import("./generer-bilans-videos.mjs");
