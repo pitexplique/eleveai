@@ -1,0 +1,18 @@
+{
+  "00-garde": "Les fractions décimales. 3 dixièmes, 7 centièmes : comment les écrire avec une virgule ?",
+  "01-situation": "Voici Chloé, laborantine. Elle prépare un mélange dans un récipient de 1 litre. Il est gradué en 10 parts égales. Elle verse de l'eau : 3 parts. Quelle fraction du litre ?",
+  "02-dixiemes": "1 litre en 10 parts égales : chaque part est 1 dixième. 3 parts : 3 dixièmes de litre. Le dénominateur est 10 : c'est une fraction décimale.",
+  "03-definition": "Une fraction décimale a pour dénominateur 10, 100 ou 1 000. 3 dixièmes : oui. 7 centièmes : oui. 3 quarts : non, car 4 n'est pas 10, 100 ou 1 000.",
+  "04-question": "Question ! Laquelle est une fraction décimale ? A : 5 sixièmes. B : 9 dixièmes. C : 1 demi. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. Son dénominateur est 10. Les autres ont 6 et 2 en bas.",
+  "05-virgule": "Maintenant, la virgule. 3 dixièmes, c'est 0 unité et 3 dixièmes. On écrit 0,3. Le chiffre juste après la virgule compte les dixièmes.",
+  "06-centiemes": "Avec 100 parts égales, chaque part est 1 centième. Sur cette grille de 100 cases, 25 sont bleues : 25 centièmes. On écrit 0,25. Le 2 compte les dixièmes : 2 colonnes. Le 5 compte les centièmes : 5 petites cases.",
+  "07-piege": "Attention au piège ! 7 centièmes, ce n'est pas 0,7. 0,7, c'est 7 dixièmes : 7 colonnes. 7 centièmes, c'est 7 petites cases. On écrit 0,07.",
+  "08-question": "Question ! Comment écrire 4 centièmes avec une virgule ? A : 0,4. B : 0,04. C : 4,0. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. 0 dixième, et 4 centièmes : 0,04. Le 4 est au rang des centièmes.",
+  "09-pourcent": "Et un secret : « sur 100 », on dit aussi « pour cent ». 25 centièmes, c'est 25 pour cent. On écrit 25 %. Fraction, virgule, pourcentage : trois façons d'écrire le même nombre !",
+  "10-defi": "À toi de jouer ! Chloé verse 6 dixièmes de litre. Écris ce nombre avec une virgule. Puis en centièmes. Mets pause, et cherche !",
+  "10b-correction": "Correction. 6 dixièmes, c'est 0,6 litre. 1 dixième, c'est 10 centièmes. Alors 6 dixièmes, c'est 60 centièmes.",
+  "11-finale": "Ce que tu as appris. Une fraction décimale a pour dénominateur 10, 100 ou 1 000. Les dixièmes vont juste après la virgule : 3 dixièmes, 0,3. Les centièmes vont au 2e rang : 7 centièmes, 0,07.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

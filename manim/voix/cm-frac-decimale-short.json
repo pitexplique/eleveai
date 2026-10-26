@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Kenji vend des glaces. Un client paie avec 7 pièces de 1 centime. Kenji écrit : 0,7 euro. A-t-il raison ?",
+  "01-cent": "1 euro, c'est 100 centimes. Alors 1 centime, c'est 1 centième d'euro.",
+  "02-surprise": "7 centimes, c'est 7 centièmes : on écrit 0,07 euro. Et 0,7 euro ? C'est 7 dixièmes : 70 centimes ! 10 fois plus !",
+  "03-question": "Question ! 50 centimes, c'est combien d'euros ? A : 0,05. B : 0,5. C : 50. Mets pause !",
+  "03b-reponse": "Réponse B. 50 centièmes, c'est 5 dixièmes : 0,5 euro, la moitié d'un euro.",
+  "04-question": "À toi : 35 centimes, ça s'écrit comment en euro ? Réponds en commentaire !"
+}
