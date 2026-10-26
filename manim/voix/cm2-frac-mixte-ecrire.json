@@ -1,0 +1,16 @@
+{
+  "00-garde": "L'écriture mixte. Dans 7 quarts, combien d'entiers se cachent ?",
+  "01-situation": "Voici Inès, ingénieure en robotique. Ses robots ont une batterie de 4 crans : chaque cran, c'est 1 quart de batterie. Aujourd'hui, son robot a utilisé 7 quarts de batterie. Combien de batteries entières ?",
+  "02-entier": "Une batterie pleine, c'est 4 crans : 4 quarts égale 1. C'est la clé ! De même, 7 septièmes égale 1, et 10 dixièmes égale 1.",
+  "03-methode": "Dans 7 quarts, on fait un paquet de 4 quarts : 1 batterie entière. Il reste 7 moins 4 : 3 quarts. Donc 7 quarts égale 1 plus 3 quarts. On lit : 1 et 3 quarts.",
+  "04-question": "Question ! 9 quarts, c'est… A : 2 plus 1 quart. B : 9 plus 1 quart. C : 1 plus 5 quarts. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. 8 quarts font 2 batteries, il reste 1 quart. Pas fini, 1 plus 5 quarts : 5 quarts, c'est plus que 1.",
+  "05-table": "Pour une grande fraction, on prend la table. 23 quarts ? Dans la table de 4 : 4 fois 5, 20. 4 fois 6, 24 : c'est trop. Donc 5 entiers, et il reste 23 moins 20 : 3 quarts. 23 quarts égale 5 plus 3 quarts.",
+  "06-virgule": "Et avec une virgule ? Sur 100 cases, 1 quart, c'est 25 cases : 0,25. 3 quarts, c'est 75 cases : 0,75. Donc 1 et 3 quarts, c'est 1,75.",
+  "07-question": "Question ! 7 quarts, en nombre décimal ? A : 7,4. B : 1,75. C : 1,3. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. 7 quarts, c'est 1 plus 3 quarts : 1 plus 0,75, c'est 1,75. La barre de fraction n'est pas une virgule !",
+  "08-defi": "À toi de jouer ! Le grand robot a utilisé 58 septièmes de batterie. Écris-le avec un entier et une fraction plus petite que 1. Mets pause, et cherche !",
+  "08b-correction": "Correction. 7 septièmes font 1 entier. Dans la table de 7 : 7 fois 8, 56. 7 fois 9, 63 : c'est trop. Il reste 58 moins 56 : 2 septièmes. 58 septièmes égale 8 plus 2 septièmes.",
+  "09-finale": "Ce que tu as appris. Le dénominateur dit combien de parts font 1 entier. On cherche dans la table combien d'entiers on peut faire. Le reste est plus petit que le dénominateur.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}
