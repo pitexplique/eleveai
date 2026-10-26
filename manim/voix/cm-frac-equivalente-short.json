@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Marco est pizzaïolo. Il te propose 3 assiettes. Laquelle a le plus de pizza ?",
+  "01-trois": "1 demi pizza. 2 quarts de pizza. 4 huitièmes de pizza.",
+  "02-surprise": "Surprise ! On les pose l'une sur l'autre : c'est pareil ! 1 demi, 2 quarts, 4 huitièmes : la même moitié de pizza.",
+  "03-question": "Question ! 3 quarts de pizza, c'est combien de huitièmes ? A : 3. B : 6. C : 7. Mets pause !",
+  "03b-reponse": "Réponse B. On coupe chaque quart en 2 : 3 quarts égale 6 huitièmes.",
+  "04-question": "À toi : une pizza coupée en 12 parts. Combien de parts pour avoir la moitié ? Réponds en commentaire !"
+}

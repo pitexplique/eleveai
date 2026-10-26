@@ -1,0 +1,16 @@
+{
+  "00-garde": "Fractions égales. 3 quarts et 6 huitièmes : est-ce la même chose ?",
+  "01-situation": "Voici Awa, paysagiste. Elle plante des fleurs dans une longue plate-bande. Elle la partage en 4 parts égales. Elle fleurit 3 parts : 3 quarts de la plate-bande.",
+  "02-couper": "Son apprenti, Tom, coupe chaque part en 2. Maintenant, il y a 8 parts. Les fleurs couvrent 6 parts : 6 huitièmes. Mais regarde : la longueur fleurie n'a pas bougé !",
+  "03-egal": "Alors 3 quarts égale 6 huitièmes. Ce sont deux fractions égales. Regarde les nombres : 3 fois 2, égale 6. 4 fois 2, égale 8. On multiplie en haut ET en bas par le même nombre.",
+  "04-question": "Question ! 1 demi égale combien de quarts ? A : 1 quart. B : 2 quarts. C : 3 quarts. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. On coupe chaque demi en 2 : 1 demi égale 2 quarts. 1 fois 2, égale 2. 2 fois 2, égale 4.",
+  "05-regrouper": "Et dans l'autre sens ? Tom regroupe les parts 2 par 2. 6 huitièmes redevient 3 quarts. 6 divisé par 2, égale 3. 8 divisé par 2, égale 4. On divise en haut ET en bas par le même nombre. C'est le début de la simplification.",
+  "06-piege": "Attention au piège ! Certains ajoutent 1 en haut et en bas : 3 quarts deviendrait 4 cinquièmes. Faux ! D'autres enlèvent 2 : 6 huitièmes deviendrait 4 sixièmes. Faux aussi ! Regarde les barres : ce n'est pas la même longueur. On multiplie, ou on divise. On n'ajoute pas, on n'enlève pas.",
+  "07-question": "Question ! Sur la grille, 4 cases sur 10 sont bleues. Regroupe les cases 2 par 2. Quelle fraction trouves-tu ? A : 2 cinquièmes. B : 2 huitièmes. C : 4 cinquièmes. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 4 divisé par 2, égale 2. 10 divisé par 2, égale 5. 4 dixièmes égale 2 cinquièmes.",
+  "08-defi": "À toi de jouer ! Awa fleurit 2 tiers d'une autre plate-bande. Tom la coupe en 6 parts égales. Combien de parts sont fleuries ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Tom coupe chaque tiers en 2. 3 fois 2, égale 6 parts en tout. 2 fois 2, égale 4 parts fleuries. 2 tiers égale 4 sixièmes.",
+  "09-finale": "Ce que tu as appris. Deux fractions égales couvrent la même longueur. On multiplie, ou on divise, le haut et le bas par le même nombre. On n'ajoute pas, on n'enlève pas.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}
