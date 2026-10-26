@@ -17,6 +17,7 @@ import BoutonAbonnement from "@/components/BoutonAbonnement";
 import LecteurVideo from "@/components/LecteurVideo";
 import { ficheExercicesHrefPourCoach } from "@/lib/fiches-exercices/registre";
 import { ficheHrefPourCoach } from "@/lib/fiches/registre";
+import BILANS_NOTIONS from "@/lib/videos/bilans-notions.json";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -42,6 +43,9 @@ export default async function PageVideo({ params }: Props) {
   const q = v.coach ? new URLSearchParams(v.coach.split("?")[1]) : null;
   const exercices = q ? ficheExercicesHrefPourCoach("maths", q.get("classe") ?? "", q.get("notion") ?? "") : null;
   const cours = q ? ficheHrefPourCoach("maths", q.get("classe") ?? "", q.get("notion") ?? "") : null;
+  // La feuille bilan de toute la notion (une ligne par micro), si elle existe.
+  const cleNotion = q ? `${q.get("classe")}/${q.get("notion")}` : "";
+  const bilanNotion = cleNotion in BILANS_NOTIONS ? `/video/bilan/${cleNotion}` : null;
 
   return (
     <main className="min-h-screen bg-slate-950 px-4 py-6 text-white">
@@ -87,6 +91,15 @@ export default async function PageVideo({ params }: Props) {
           <PencilLine className="h-4 w-4" />
           Feuille bilan à imprimer (compris, pas compris, questions)
         </Link>
+        {bilanNotion && (
+          <Link
+            href={bilanNotion}
+            className="mt-1 flex items-center gap-2 text-sm font-bold text-slate-300 underline-offset-4 hover:text-white hover:underline"
+          >
+            <PencilLine className="h-4 w-4" />
+            Feuille bilan de toute la notion (recto verso)
+          </Link>
+        )}
 
         {/* ⭐ 20/10/2026 — Frédéric : « relier, sous les vidéos, un lien vers
             le coach ». Après la vidéo, l'exercice de la même micro. */}

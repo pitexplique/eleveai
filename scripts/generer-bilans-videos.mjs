@@ -28,3 +28,36 @@ for (const v of manifeste.videos) {
 const sortie = path.join(RACINE, "lib", "videos", "bilans-videos.json");
 fs.writeFileSync(sortie, JSON.stringify(bilans) + "\n", "utf8");
 console.log(`${Object.keys(bilans).length} feuilles bilan → ${path.relative(RACINE, sortie)} (${(fs.statSync(sortie).size / 1024).toFixed(0)} Ko)`);
+
+// ⭐ 27/10/2026 — « une feuille A4 pour les micros d'une notion, elle peut être
+// recto verso » : par classe et notion, les paysages dans l'ordre des dossiers
+// (01-, 02-…), une ligne par micro et sa première question-pause.
+const KNOW = path.join(RACINE, "lib", "tutor-v4", "knowledge", "maths");
+const sources = {};
+const libelleNotion = (classe, id) => {
+  if (!(classe in sources)) {
+    const f = path.join(KNOW, classe, "notions.ts");
+    sources[classe] = fs.existsSync(f) ? fs.readFileSync(f, "utf8") : "";
+  }
+  return sources[classe].match(new RegExp(`id: "${id}",\\s*label: "([^"]+)"`))?.[1] ?? null;
+};
+const notions = {};
+for (const v of manifeste.videos) {
+  if (v.type === "short" || !v.notionId || !v.classe) continue;
+  const morceaux = v.titre.split(" — ");
+  const q = (v.questions ?? []).find((x) => x.question && Array.isArray(x.choix) && x.choix.length > 1);
+  (notions[`${v.classe}/${v.notionId}`] ??= { classe: v.classe, notion: libelleNotion(v.classe, v.notionId) ?? v.notionId, videos: [] }).videos.push({
+    id: v.id,
+    micro: morceaux.length > 2 ? morceaux[1] : morceaux[0],
+    ordre: v.fichier,
+    question: q ? { question: q.question, choix: q.choix, reponse: q.reponse } : null,
+  });
+}
+for (const [cle, n] of Object.entries(notions)) {
+  if (n.videos.length < 2) { delete notions[cle]; continue; }
+  n.videos.sort((x, y) => x.ordre.localeCompare(y.ordre));
+  for (const x of n.videos) delete x.ordre;
+}
+const sortieN = path.join(RACINE, "lib", "videos", "bilans-notions.json");
+fs.writeFileSync(sortieN, JSON.stringify(notions) + "\n", "utf8");
+console.log(`${Object.keys(notions).length} feuilles bilan par notion → ${path.relative(RACINE, sortieN)}`);
