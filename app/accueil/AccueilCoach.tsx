@@ -20,7 +20,6 @@ import {
   ArrowRight,
   Backpack,
   Building2,
-  Camera,
   Compass,
   Eye,
   Play,
@@ -238,9 +237,11 @@ export default function AccueilNouveau(props: {
             vidéos + coach comme porte d'entrée », « et même évaluation et
             automatismes et fiches d'exercices » : il nomme toutes les portes.
             L'évaluation est celle du COACH (/evaluation est l'ancien concours,
-            « disponible le 1er juin » : on n'y envoie pas). */}
+            « disponible le 1er juin » : on n'y envoie pas).
+            26/10 : « rajoute évaluation à côté de fiches exercices et rajoute
+            fiches cours ». */}
         <h1 className="max-w-3xl text-3xl font-black leading-tight sm:text-4xl">
-          Vidéos, coach, automatismes, fiches d&apos;exercices : toutes les maths de ton programme
+          Vidéos, coach, automatismes, fiches d&apos;exercices, évaluation, fiches de cours : toutes les maths de ton programme
         </h1>
         <p className="mt-3 max-w-2xl text-lg leading-relaxed text-slate-600">
           Du CP à la Terminale, dans ton pays. Commence où tu veux : une vidéo pour comprendre, le coach qui t&apos;évalue et trouve ce qui te manque, les automatismes pour aller vite, les exercices corrigés à imprimer. Tout est vérifié par un professeur.
@@ -391,17 +392,6 @@ export default function AccueilNouveau(props: {
               >
                 <Play className="h-4 w-4" fill="currentColor" aria-hidden="true" /> Ou commencer par une vidéo
               </a>
-              {/* ⭐ LA TROISIÈME PORTE (Frédéric, 23/10 : « il manque : commence en
-                  prenant une photo »). Elle mène à /photo-exercice (la feuille → les
-                  séries du coach), qui marche aujourd'hui. ⏳ À élargir à la photo du
-                  COURS (mémoire : photo-du-cours-et-suivi-du-cahier). */}
-              <Lien
-                href="/photo-exercice"
-                bloc="porte-photo"
-                className="inline-flex items-center gap-2 rounded-full px-5 py-3 font-black text-teal-700 ring-2 ring-teal-700 hover:bg-teal-50"
-              >
-                <Camera className="h-4 w-4" aria-hidden="true" /> Ou prendre ton exercice en photo
-              </Lien>
               {/* ⭐ LES PORTES 4 ET 5 (Frédéric, 25/10 : « et même évaluation et
                   automatismes et fiches d'exercices »). */}
               <Lien
@@ -417,6 +407,24 @@ export default function AccueilNouveau(props: {
                 className="inline-flex items-center gap-2 rounded-full px-5 py-3 font-black text-teal-700 ring-2 ring-teal-700 hover:bg-teal-50"
               >
                 Ou une fiche d&apos;exercices
+              </Lien>
+              {/* ⭐ 26/10/2026 — Frédéric : « rajouter évaluation à côté de fiches
+                  exercices et enlève prendre une photo », « et rajouter fiche
+                  cours ». L'évaluation est celle du COACH, /parcours (pas
+                  /evaluation, l'ancien concours). */}
+              <Lien
+                href="/parcours"
+                bloc="porte-evaluation"
+                className="inline-flex items-center gap-2 rounded-full px-5 py-3 font-black text-teal-700 ring-2 ring-teal-700 hover:bg-teal-50"
+              >
+                Ou une évaluation
+              </Lien>
+              <Lien
+                href="/fiches-cours"
+                bloc="porte-fiches-cours"
+                className="inline-flex items-center gap-2 rounded-full px-5 py-3 font-black text-teal-700 ring-2 ring-teal-700 hover:bg-teal-50"
+              >
+                Ou une fiche de cours
               </Lien>
               {profil === "parent" && (
                 <Lien href="/parents" bloc="parents" className="text-sm font-bold text-teal-700 hover:underline">

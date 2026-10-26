@@ -11,6 +11,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { Search, X } from "lucide-react";
+import BoutonAbonnement from "@/components/BoutonAbonnement";
 import LecteurVideo from "@/components/LecteurVideo";
 
 export type VideoListe = {
@@ -57,6 +58,9 @@ function LecteurUne({ v, short }: { v: VideoUne; short?: boolean }) {
         <Link href={`/video/${v.id}`} className="text-sm font-bold leading-5 text-slate-800 hover:text-rose-700">
           {v.titre}
         </Link>
+        <div className="mt-2">
+          <BoutonAbonnement petit />
+        </div>
       </figcaption>
     </figure>
   );

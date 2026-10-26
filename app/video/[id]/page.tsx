@@ -13,6 +13,7 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { ArrowLeft, BookOpen, Dumbbell, PencilLine } from "lucide-react";
 import { trouverVideo, urlR2 } from "@/lib/videos/r2";
+import BoutonAbonnement from "@/components/BoutonAbonnement";
 import LecteurVideo from "@/components/LecteurVideo";
 import { ficheExercicesHrefPourCoach } from "@/lib/fiches-exercices/registre";
 import { ficheHrefPourCoach } from "@/lib/fiches/registre";
@@ -74,6 +75,9 @@ export default async function PageVideo({ params }: Props) {
           </a>
           .
         </LecteurVideo>
+        <div className="mt-3">
+          <BoutonAbonnement />
+        </div>
 
         {/* ⭐ 20/10/2026 — Frédéric : « relier, sous les vidéos, un lien vers
             le coach ». Après la vidéo, l'exercice de la même micro. */}
