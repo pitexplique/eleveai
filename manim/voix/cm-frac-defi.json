@@ -1,0 +1,16 @@
+{
+  "00-garde": "Défi fractions ! Trois énigmes pour devenir champion.",
+  "01-situation": "Voici Rayan, conducteur de tram. Son trajet est partagé en 10 parts égales.",
+  "02-enigme1": "Énigme 1. Le matin, Rayan roule 3 dixièmes du trajet. Puis encore 4 dixièmes. Quelle fraction du trajet a-t-il faite ?",
+  "02b-solution1": "On compte les parts : 3 plus 4, égale 7. Il a fait 7 dixièmes du trajet. Il en reste 3 dixièmes.",
+  "03-question": "Question ! 7 dixièmes, avec une virgule ? A : 7,10. B : 0,7. C : 0,07. Mets pause, et choisis !",
+  "03b-reponse": "Réponse B. 7 dixièmes : le 7 va juste après la virgule. 0,7.",
+  "04-enigme2": "Énigme 2. Léna, sa collègue, a fait 2 cinquièmes de son trajet. Qui a fait le plus ?",
+  "04b-solution2": "On écrit les deux en dixièmes. On coupe chaque cinquième en 2 : 2 cinquièmes égale 4 dixièmes. 7 dixièmes, c'est plus que 4 dixièmes : Rayan a fait le plus.",
+  "05-question": "Question ! Qui a fait plus de la moitié du trajet ? A : Rayan. B : Léna. C : les deux. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. La moitié, c'est 5 dixièmes. Rayan, 7 dixièmes : c'est plus. Léna, 4 dixièmes : c'est moins.",
+  "06-defi": "À toi de jouer ! Énigme 3. Je suis une fraction en quarts. Sur la droite, je suis entre 1 quart et 3 quarts. Qui suis-je ? Mets pause, et cherche !",
+  "06b-correction": "Correction. On place 1 quart et 3 quarts sur la droite. Juste entre les deux : 2 quarts. Et 2 quarts égale 1 demi : c'est le milieu !",
+  "07-finale": "Ce que tu as appris. Pour ajouter des dixièmes, on compte les parts. Pour comparer, on écrit les fractions avec le même dénominateur. Et 7 dixièmes s'écrit 0,7.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}
