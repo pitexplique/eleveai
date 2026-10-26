@@ -19,8 +19,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return { title: v ? `Bilan — ${v.titre}` : "Bilan", robots: { index: false, follow: false } };
 }
 
-const LETTRES = ["A", "B", "C", "D", "E"];
-
 function Case({ texte }: { texte: string }) {
   return (
     <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
@@ -89,24 +87,8 @@ export default async function PageBilan({ params }: Props) {
         </section>
       )}
 
-      {b.questions.length > 0 && (
-        <section className="mt-5 break-inside-avoid">
-          <h2 className="text-base font-black">{b.vus.length > 0 ? "2" : "1"}. Je refais les questions de la vidéo</h2>
-          <ol className="mt-2 space-y-3">
-            {b.questions.map((q, i) => (
-              <li key={i} className="rounded-xl border border-slate-300 px-3 py-2">
-                <p className="font-semibold">Question {i + 1} : {q.question}</p>
-                <p className="mt-1 flex flex-wrap gap-x-5 gap-y-1">
-                  {q.choix.map((c, j) => (
-                    <Case key={j} texte={`${LETTRES[j]}. ${c}`} />
-                  ))}
-                </p>
-              </li>
-            ))}
-          </ol>
-        </section>
-      )}
-
+      {/* ⛔ 27/10/2026 — « pas de question, ils ont les feuilles d'exercices pour
+          cela » : la feuille bilan dit ce qu'on a compris et retenu, rien d'autre. */}
       <section className="mt-5 break-inside-avoid">
         <h2 className="text-base font-black">Ce que j&apos;ai retenu</h2>
         {/* ⭐ 27/10/2026 — Frédéric : « pas 3 mais 5 lignes, ou un encadré ! » */}
@@ -119,11 +101,6 @@ export default async function PageBilan({ params }: Props) {
         <Lignes n={1} />
       </section>
 
-      {b.questions.length > 0 && (
-        <p className="mt-8 rotate-180 text-right text-xs text-slate-500">
-          Corrigé : {b.questions.map((q, i) => `${i + 1} → ${LETTRES[q.reponse]}`).join(" · ")}
-        </p>
-      )}
     </main>
   );
 }
