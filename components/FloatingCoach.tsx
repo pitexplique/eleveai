@@ -19,7 +19,10 @@ const MESSAGE_ACCUEIL: CoachMessage = {
  * Le fil complet reste affiché et l'historique est envoyé à l'API (retour
  * élève du 11/06/2026 : le coach resaluait et on perdait la question d'avant).
  */
-export default function FloatingCoach() {
+// ⭐ 27/10/2026 — Frédéric : dans le coach simple, « Demande à l'IA » ne flotte
+// plus en bas à droite (place de « Question suivante ») : `enBas` le pose à la
+// fin de la page.
+export default function FloatingCoach({ enBas }: { enBas?: boolean } = {}) {
   const { eleve } = useEleve();
   const codeEtablissement = eleve?.code_etablissement?.trim() ?? "";
   const codeUtilisateur = eleve?.code_eleve?.trim() ?? "";
@@ -83,9 +86,9 @@ export default function FloatingCoach() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 via-emerald-500 to-orange-400 px-5 py-3 text-sm font-black text-white shadow-2xl ring-2 ring-white/50 transition hover:scale-105"
+        className={`${enBas ? "mx-auto mb-24 mt-8" : "fixed bottom-5 right-5 z-50"} flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 via-emerald-500 to-orange-400 px-5 py-3 text-sm font-black text-white shadow-2xl ring-2 ring-white/50 transition hover:scale-105`}
       >
-        🤖 <span className="hidden sm:inline">Demande à l&rsquo;IA</span>
+        🤖 <span className={enBas ? "" : "hidden sm:inline"}>Demande à l&rsquo;IA</span>
       </button>
     );
   }

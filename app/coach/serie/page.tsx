@@ -1,7 +1,6 @@
 // app/coach/page.tsx
 import { Suspense } from "react";
 import TutorV4Client from "./TutorV4Client";
-import FloatingCoach from "@/components/FloatingCoach";
 
 function CoachFallback() {
   return (
@@ -18,8 +17,8 @@ function CoachFallback() {
 export default function CoachPage() {
   return (
     <Suspense fallback={<CoachFallback />}>
+      {/* « Demande à l'IA » est posé par TutorV4Client (en bas en vue simple, 27/10). */}
       <TutorV4Client />
-      <FloatingCoach />
     </Suspense>
   );
 }

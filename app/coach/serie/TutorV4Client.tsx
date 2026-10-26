@@ -111,6 +111,7 @@ import AudioBoost from "@/components/AudioBoost";
 import { ficheClasseSource, ficheHrefPourCoach } from "@/lib/fiches/registre";
 import { MarkdownMath } from "@/components/MarkdownMath";
 import BoiteAOutils from "@/components/BoiteAOutils";
+import FloatingCoach from "@/components/FloatingCoach";
 import Image from "next/image";
 
 import { useRouter, useSearchParams } from "next/navigation";
@@ -1781,7 +1782,22 @@ function handleInputKeyDown(
           saveMessage={saveMessage}
           onSave={() => void enregistrerSeance()}
         />
-        {calculatriceAutorisee && <BoiteAOutils />}
+        {/* ⭐ 27/10/2026 — Frédéric : « la calculatrice à gauche », « Question
+            suivante » là où était « Demande à l'IA » (en bas à droite, les élèves
+            la voient), et « Demande à l'IA » tout en bas. */}
+        {calculatriceAutorisee && <BoiteAOutils aGauche />}
+        {wrongAnswerPanelOpen && currentQuestion ? (
+          <button
+            type="button"
+            onClick={continueAfterExplanation}
+            className="fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-full bg-lime-500 px-5 py-3 text-base font-black text-white shadow-2xl ring-2 ring-white/60 transition hover:scale-105 hover:bg-lime-600 print:hidden"
+          >
+            Question suivante →
+          </button>
+        ) : null}
+        <div className="flex justify-center print:hidden">
+          <FloatingCoach enBas />
+        </div>
       </>
     );
   }
@@ -2502,6 +2518,7 @@ function handleInputKeyDown(
       </div>
     </div>
     {calculatriceAutorisee && <BoiteAOutils />}
+    <FloatingCoach />
   </main>
 );
 }

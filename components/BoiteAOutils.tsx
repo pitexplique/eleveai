@@ -241,7 +241,10 @@ const STYLE_VARIANTE: Record<NonNullable<Touche["variante"]>, string> = {
   effacer: "bg-pink-100 text-pink-700 hover:bg-pink-200",
 };
 
-export default function BoiteAOutils() {
+// ⭐ 27/10/2026 — Frédéric : dans le coach simple, « la calculatrice doit être
+// affichée à gauche » (la droite est à « Question suivante »).
+export default function BoiteAOutils({ aGauche }: { aGauche?: boolean } = {}) {
+  const place = aGauche ? "left-5" : "left-1/2 -translate-x-1/2";
   const [open, setOpen] = useState(false);
   const [scientifique, setScientifique] = useState(false);
   const [angleMode, setAngleMode] = useState<AngleMode>("deg");
@@ -361,7 +364,7 @@ export default function BoiteAOutils() {
         type="button"
         onClick={() => setOpen(true)}
         aria-label="Ouvrir la calculatrice"
-        className="fixed bottom-5 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2 rounded-full bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 px-5 py-3 text-sm font-black text-white shadow-2xl ring-2 ring-white/50 transition hover:scale-105 print:hidden"
+        className={`fixed bottom-5 ${place} z-50 flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 px-5 py-3 text-sm font-black text-white shadow-2xl ring-2 ring-white/50 transition hover:scale-105 print:hidden`}
       >
         🧮 <span className="hidden sm:inline">Calculatrice</span>
       </button>
@@ -369,7 +372,7 @@ export default function BoiteAOutils() {
   }
 
   return (
-    <aside className="fixed bottom-5 left-1/2 z-50 flex w-[290px] -translate-x-1/2 flex-col overflow-hidden rounded-3xl border border-cyan-200 bg-[#f5f8ff] text-slate-800 shadow-2xl sm:w-[320px] print:hidden">
+    <aside className={`fixed bottom-5 ${place} z-50 flex w-[290px] flex-col overflow-hidden rounded-3xl border border-cyan-200 bg-[#f5f8ff] text-slate-800 shadow-2xl sm:w-[320px] print:hidden`}>
       <div className="flex items-center justify-between bg-gradient-to-br from-emerald-500 via-cyan-500 to-blue-500 px-5 py-4">
         <div>
           <p className="font-black text-white">🧮 Calculatrice</p>
