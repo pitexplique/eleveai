@@ -1,0 +1,16 @@
+{
+  "00-garde": "L'unité dans une fraction. 1 quart… mais 1 quart de quoi ?",
+  "01-situation": "Voici Sofia, cheffe de chorale. Sa chorale a 12 enfants. Pour un chant, elle veut 1 quart de la chorale devant. Combien d'enfants ?",
+  "02-unite": "L'unité, c'est le tout : ici, toute la chorale, les 12 enfants. Pour 1 quart, on partage l'unité en 4 parts égales.",
+  "03-partage": "12 enfants en 4 groupes égaux : 12 divisé par 4, égale 3. 1 quart de la chorale, c'est 3 enfants.",
+  "04-question": "Question ! 1 quart de la chorale est devant. Quelle fraction reste derrière ? A : 1 quart. B : 3 quarts. C : 4 quarts. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 4 quarts font toute la chorale. 4 moins 1, égale 3 : 3 quarts restent derrière. 3 groupes de 3 : 9 enfants.",
+  "05-entiere": "4 quarts, c'est la chorale entière : l'unité. Quand le numérateur égale le dénominateur, on a tout. 4 quarts égale 1.",
+  "06-piege": "Attention au piège ! 1 demi n'est pas toujours la même quantité : ça dépend de l'unité. 1 demi d'une chorale de 12, c'est 6 enfants. 1 demi d'une chorale de 20, c'est 10 enfants.",
+  "07-question": "Question ! Une grande tarte, une petite tarte. Où est le plus gros quart ? A : dans la grande tarte. B : dans la petite tarte. C : c'est pareil. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. Ce sont des quarts tous les deux. Mais l'unité n'est pas la même : la grande tarte donne de plus gros quarts.",
+  "08-defi": "À toi de jouer ! Une autre chorale a 15 enfants. 1 tiers joue du tambour. Combien d'enfants jouent du tambour ? Mets pause, et cherche !",
+  "08b-correction": "Correction. L'unité, c'est les 15 enfants. On les partage en 3 groupes égaux : 15 divisé par 3, égale 5. 1 tiers de la chorale, c'est 5 enfants.",
+  "09-finale": "Ce que tu as appris. L'unité, c'est le tout. Le dénominateur dit en combien de parts égales on la partage. Quand le numérateur égale le dénominateur, on a l'unité entière. Et 1 quart dépend de l'unité !",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}
