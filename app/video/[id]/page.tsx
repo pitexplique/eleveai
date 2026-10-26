@@ -80,9 +80,6 @@ export default async function PageVideo({ params }: Props) {
           </a>
           .
         </LecteurVideo>
-        <div className="mt-3">
-          <BoutonAbonnement />
-        </div>
         {/* ⭐ 27/10/2026 — pour le prof : la feuille bilan à imprimer. */}
         <Link
           href={`/video/${v.id}/bilan`}
@@ -134,6 +131,12 @@ export default async function PageVideo({ params }: Props) {
             ) : null}
           </div>
         ) : null}
+
+        {/* ⭐ 27/10/2026 — Frédéric : « s'abonner à la chaîne YouTube, mets-le en
+            bas des cards fiche de cours, les exercices » : après l'entraînement. */}
+        <div className="mt-5">
+          <BoutonAbonnement />
+        </div>
 
         {/* ⛔ 20/10/2026 — Frédéric : « on enlève commenter sur YouTube ».
             Les élèves restent sur le lecteur du site : aucun lien vers YouTube. */}

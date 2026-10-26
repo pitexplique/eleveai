@@ -95,7 +95,10 @@ export default async function PageBilanNotion({ params }: Props) {
 
       <section className="mt-5 break-inside-avoid">
         <h2 className="text-base font-black">2. Ce que j&apos;ai retenu</h2>
-        <Lignes n={3} />
+        {/* ⭐ 27/10/2026 — Frédéric : « pas 3 mais 5 lignes, ou un encadré ! » */}
+        <div className="mt-2 rounded-xl border-2 border-slate-400 px-3 pb-3 pt-1">
+          <Lignes n={5} />
+        </div>
       </section>
 
       {questions.length > 0 && (
