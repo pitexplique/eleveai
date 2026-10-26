@@ -14,12 +14,16 @@ const RACINE = path.resolve(path.dirname(new URL(import.meta.url).pathname.repla
 const manifeste = JSON.parse(fs.readFileSync(path.join(RACINE, "manim", "manifeste-youtube.json"), "utf8"));
 
 // Les chapitres qui ne sont pas une notion : questions, corrections, générique.
-const PAS_NOTION = /^(question|correction|à toi|a toi|ce que tu as appris|le défi|défi|réponse|conclusion|intro)/i;
+const PAS_NOTION = /^(question|la question|correction|à toi|a toi|ce que tu as appris|ce que tu sais faire|le défi|défi|réponse|conclusion|intro|et toi)/i;
+// Les questions écrites à la main pour les vidéos sans questions-pauses (Pythagore 4e…).
+const MANUELLES = JSON.parse(fs.readFileSync(path.join(RACINE, "manim", "bilans-questions.json"), "utf8"));
+// La classe : celle du manifeste, sinon le dossier du fichier (« 4e/maths/… »).
+const classeDe = (v) => v.classe ?? v.fichier?.split("/")[0] ?? null;
 
 const bilans = {};
 for (const v of manifeste.videos) {
   const vus = (v.chapitres ?? []).map(([, t]) => t).filter((t, i) => i > 0 && !PAS_NOTION.test(t.trim()));
-  const questions = (v.questions ?? [])
+  const questions = (v.questions?.length ? v.questions : MANUELLES[v.id] ? [MANUELLES[v.id]] : [])
     .filter((q) => q.question && Array.isArray(q.choix) && q.choix.length > 1)
     .map((q) => ({ question: q.question, choix: q.choix, reponse: q.reponse }));
   if (vus.length === 0 && questions.length === 0) continue;
@@ -43,12 +47,14 @@ const libelleNotion = (classe, id) => {
 };
 const notions = {};
 for (const v of manifeste.videos) {
-  if (v.type === "short" || !v.notionId || !v.classe) continue;
-  const morceaux = v.titre.split(" — ");
-  const q = (v.questions ?? []).find((x) => x.question && Array.isArray(x.choix) && x.choix.length > 1);
-  (notions[`${v.classe}/${v.notionId}`] ??= { classe: v.classe, notion: libelleNotion(v.classe, v.notionId) ?? v.notionId, videos: [] }).videos.push({
+  const classe = classeDe(v);
+  if (v.type === "short" || !v.notionId || !classe) continue;
+  // Le nom de la micro : le morceau du titre qui n'est ni « épisode » ni « Maths 6e ».
+  const morceaux = v.titre.replace(/ · Maths .*$/, "").split(" — ").filter((m) => !/épisode|^Maths /.test(m));
+  const q = (v.questions?.length ? v.questions : MANUELLES[v.id] ? [MANUELLES[v.id]] : []).find((x) => x.question && Array.isArray(x.choix) && x.choix.length > 1);
+  (notions[`${classe}/${v.notionId}`] ??= { classe, notion: libelleNotion(classe, v.notionId) ?? v.notionId, videos: [] }).videos.push({
     id: v.id,
-    micro: morceaux.length > 2 ? morceaux[1] : morceaux[0],
+    micro: morceaux.length > 1 ? morceaux[1] : morceaux[0],
     ordre: v.fichier,
     question: q ? { question: q.question, choix: q.choix, reponse: q.reponse } : null,
   });

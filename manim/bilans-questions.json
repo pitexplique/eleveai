@@ -1,0 +1,11 @@
+{
+  "_": "27/10/2026 — Questions des feuilles bilan pour les vidéos SANS questions-pauses au manifeste (une par vidéo, calcul vérifié). Lu par scripts/generer-bilans-videos.mjs. reponse = indice du bon choix (0 = A).",
+  "4e-pythagore-reconnaitre": { "question": "Le triangle ABC est rectangle en A. Quel côté est l'hypoténuse ?", "choix": ["[AB]", "[BC]", "[AC]"], "reponse": 1 },
+  "4e-pythagore-carre-racine": { "question": "Quel nombre positif a pour carré 49 ?", "choix": ["7", "24,5", "2 401"], "reponse": 0 },
+  "4e-pythagore-hypotenuse": { "question": "Les côtés de l'angle droit mesurent 6 cm et 8 cm. L'hypoténuse mesure :", "choix": ["14 cm", "10 cm", "100 cm"], "reponse": 1 },
+  "4e-pythagore-cote": { "question": "L'hypoténuse mesure 13 cm et un côté 5 cm. L'autre côté mesure :", "choix": ["12 cm", "8 cm", "18 cm"], "reponse": 0 },
+  "4e-pythagore-verifier": { "question": "Un triangle a pour côtés 5 cm, 12 cm et 13 cm. Que compare-t-on ?", "choix": ["13² et 5² + 12²", "5² et 12² + 13²", "12² et 5² + 13²"], "reponse": 0 },
+  "4e-pythagore-reciproque": { "question": "Côtés 4 cm, 5 cm et 6 cm : 6² = 36 et 4² + 5² = 41. Le triangle :", "choix": ["est rectangle", "n'est pas rectangle", "est isocèle"], "reponse": 1 },
+  "4e-pythagore-rediger": { "question": "On connaît l'angle droit et on cherche une longueur. On utilise :", "choix": ["le théorème de Pythagore", "la réciproque", "les deux"], "reponse": 0 },
+  "4e-pythagore-defi-cube": { "question": "Avec les sommets d'un cube, combien de triangles rectangles sur ses 6 faces ?", "choix": ["6", "12", "24"], "reponse": 2 }
+}
