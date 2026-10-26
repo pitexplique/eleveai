@@ -3393,6 +3393,168 @@
   "youtube": "_-GyjUG7noI",
   "coach": null
  },
+ "cm1-frac-comparer": {
+  "fichier": "cm1/maths/fractions/04-comparer/eleveai-maths-cm1-frac-comparer.mp4",
+  "poster": "cm1/maths/fractions/04-comparer/eleveai-maths-cm1-frac-comparer.png",
+  "vignette": "cm1/maths/fractions/04-comparer/eleveai-maths-cm1-frac-comparer.vignette.webp",
+  "titre": "1/4 ou 1/8 d'énergie : lequel est le plus grand ? — Comparer des fractions — épisode 4 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_comparer&display=simple"
+ },
+ "cm1-frac-comparer-short": {
+  "fichier": "cm1/maths/fractions/04-comparer/eleveai-maths-cm1-frac-comparer-short.mp4",
+  "poster": "cm1/maths/fractions/04-comparer/eleveai-maths-cm1-frac-comparer-short.png",
+  "vignette": "cm1/maths/fractions/04-comparer/eleveai-maths-cm1-frac-comparer-short.vignette.webp",
+  "titre": "Un gâteau pour 2 éléphants ou pour 10 fourmis ? 🐘 — CM1 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_comparer&display=simple"
+ },
+ "cm1-frac-decimale": {
+  "fichier": "cm1/maths/fractions/06-decimale/eleveai-maths-cm1-frac-decimale.mp4",
+  "poster": "cm1/maths/fractions/06-decimale/eleveai-maths-cm1-frac-decimale.png",
+  "vignette": "cm1/maths/fractions/06-decimale/eleveai-maths-cm1-frac-decimale.vignette.webp",
+  "titre": "7 centièmes de litre : 0,7 ou 0,07 ? — Les fractions décimales — épisode 6 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_decimale&display=simple"
+ },
+ "cm1-frac-decimale-short": {
+  "fichier": "cm1/maths/fractions/06-decimale/eleveai-maths-cm1-frac-decimale-short.mp4",
+  "poster": "cm1/maths/fractions/06-decimale/eleveai-maths-cm1-frac-decimale-short.png",
+  "vignette": "cm1/maths/fractions/06-decimale/eleveai-maths-cm1-frac-decimale-short.vignette.webp",
+  "titre": "7 centimes = 0,7 € ? Le glacier se trompe ! 🍦 — CM1 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_decimale&display=simple"
+ },
+ "cm1-frac-defi": {
+  "fichier": "cm1/maths/fractions/07-defi/eleveai-maths-cm1-frac-defi.mp4",
+  "poster": "cm1/maths/fractions/07-defi/eleveai-maths-cm1-frac-defi.png",
+  "vignette": "cm1/maths/fractions/07-defi/eleveai-maths-cm1-frac-defi.vignette.webp",
+  "titre": "Défi fractions : 3 énigmes dans le tram — Défi fractions — épisode 7 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_defi&display=simple"
+ },
+ "cm1-frac-defi-short": {
+  "fichier": "cm1/maths/fractions/07-defi/eleveai-maths-cm1-frac-defi-short.mp4",
+  "poster": "cm1/maths/fractions/07-defi/eleveai-maths-cm1-frac-defi-short.png",
+  "vignette": "cm1/maths/fractions/07-defi/eleveai-maths-cm1-frac-defi-short.vignette.webp",
+  "titre": "Course d'escargots : qui est en tête ? 🐌 — CM1 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_defi&display=simple"
+ },
+ "cm1-frac-droite": {
+  "fichier": "cm1/maths/fractions/03-droite/eleveai-maths-cm1-frac-droite.mp4",
+  "poster": "cm1/maths/fractions/03-droite/eleveai-maths-cm1-frac-droite.png",
+  "vignette": "cm1/maths/fractions/03-droite/eleveai-maths-cm1-frac-droite.vignette.webp",
+  "titre": "Tom nage 3/4 du bassin : où est-il ? — Fraction et droite graduée — épisode 3 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_droite&display=simple"
+ },
+ "cm1-frac-droite-short": {
+  "fichier": "cm1/maths/fractions/03-droite/eleveai-maths-cm1-frac-droite-short.mp4",
+  "poster": "cm1/maths/fractions/03-droite/eleveai-maths-cm1-frac-droite-short.png",
+  "vignette": "cm1/maths/fractions/03-droite/eleveai-maths-cm1-frac-droite-short.vignette.webp",
+  "titre": "La route de la Lune : 5 traits, mais 4 parts ! 🚀 — CM1 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_droite&display=simple"
+ },
+ "cm1-frac-equivalente": {
+  "fichier": "cm1/maths/fractions/05-equivalente/eleveai-maths-cm1-frac-equivalente.mp4",
+  "poster": "cm1/maths/fractions/05-equivalente/eleveai-maths-cm1-frac-equivalente.png",
+  "vignette": "cm1/maths/fractions/05-equivalente/eleveai-maths-cm1-frac-equivalente.vignette.webp",
+  "titre": "3/4 de la plate-bande = 6/8 ? Les fractions égales — Fractions égales — épisode 5 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_equivalente&display=simple"
+ },
+ "cm1-frac-equivalente-short": {
+  "fichier": "cm1/maths/fractions/05-equivalente/eleveai-maths-cm1-frac-equivalente-short.mp4",
+  "poster": "cm1/maths/fractions/05-equivalente/eleveai-maths-cm1-frac-equivalente-short.png",
+  "vignette": "cm1/maths/fractions/05-equivalente/eleveai-maths-cm1-frac-equivalente-short.vignette.webp",
+  "titre": "Quelle assiette a le plus de pizza ? 🍕 — CM1 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_equivalente&display=simple"
+ },
+ "cm1-frac-lire": {
+  "fichier": "cm1/maths/fractions/01-lire/eleveai-maths-cm1-frac-lire.mp4",
+  "poster": "cm1/maths/fractions/01-lire/eleveai-maths-cm1-frac-lire.png",
+  "vignette": "cm1/maths/fractions/01-lire/eleveai-maths-cm1-frac-lire.vignette.webp",
+  "titre": "3 carrés sur 8 offerts : comment lire 3/8 ? — Lire une fraction — épisode 1 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_lire&display=simple"
+ },
+ "cm1-frac-lire-short": {
+  "fichier": "cm1/maths/fractions/01-lire/eleveai-maths-cm1-frac-lire-short.mp4",
+  "poster": "cm1/maths/fractions/01-lire/eleveai-maths-cm1-frac-lire-short.png",
+  "vignette": "cm1/maths/fractions/01-lire/eleveai-maths-cm1-frac-lire-short.vignette.webp",
+  "titre": "Pourquoi dit-on « 1 quart d'heure » ? ⏰ — CM1 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_lire&display=simple"
+ },
+ "cm1-frac-representer": {
+  "fichier": "cm1/maths/fractions/02-representer/eleveai-maths-cm1-frac-representer.mp4",
+  "poster": "cm1/maths/fractions/02-representer/eleveai-maths-cm1-frac-representer.png",
+  "vignette": "cm1/maths/fractions/02-representer/eleveai-maths-cm1-frac-representer.vignette.webp",
+  "titre": "6 places, 4 œufs : quelle fraction ? — Représenter une fraction — épisode 2 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_representer&display=simple"
+ },
+ "cm1-frac-representer-short": {
+  "fichier": "cm1/maths/fractions/02-representer/eleveai-maths-cm1-frac-representer-short.mp4",
+  "poster": "cm1/maths/fractions/02-representer/eleveai-maths-cm1-frac-representer-short.png",
+  "vignette": "cm1/maths/fractions/02-representer/eleveai-maths-cm1-frac-representer-short.vignette.webp",
+  "titre": "Couper un carré en 4 : de combien de façons ? ✂️ — CM1 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_representer&display=simple"
+ },
+ "cm1-frac-superieure-1": {
+  "fichier": "cm1/maths/fractions/09-superieure-1/eleveai-maths-cm1-frac-superieure-1.mp4",
+  "poster": "cm1/maths/fractions/09-superieure-1/eleveai-maths-cm1-frac-superieure-1.png",
+  "vignette": "cm1/maths/fractions/09-superieure-1/eleveai-maths-cm1-frac-superieure-1.vignette.webp",
+  "titre": "5 quarts de tour : c'est possible ? — Une fraction plus grande que 1 — épisode 9 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_superieure_1&display=simple"
+ },
+ "cm1-frac-superieure-1-short": {
+  "fichier": "cm1/maths/fractions/09-superieure-1/eleveai-maths-cm1-frac-superieure-1-short.mp4",
+  "poster": "cm1/maths/fractions/09-superieure-1/eleveai-maths-cm1-frac-superieure-1-short.png",
+  "vignette": "cm1/maths/fractions/09-superieure-1/eleveai-maths-cm1-frac-superieure-1-short.vignette.webp",
+  "titre": "7 quarts de cœur : combien de cœurs ? ❤️ — CM1 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_superieure_1&display=simple"
+ },
+ "cm1-frac-unite": {
+  "fichier": "cm1/maths/fractions/08-unite/eleveai-maths-cm1-frac-unite.mp4",
+  "poster": "cm1/maths/fractions/08-unite/eleveai-maths-cm1-frac-unite.png",
+  "vignette": "cm1/maths/fractions/08-unite/eleveai-maths-cm1-frac-unite.vignette.webp",
+  "titre": "1 quart de la chorale : combien d'enfants ? — L'unité dans une fraction — épisode 8 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_unite&display=simple"
+ },
+ "cm1-frac-unite-short": {
+  "fichier": "cm1/maths/fractions/08-unite/eleveai-maths-cm1-frac-unite-short.mp4",
+  "poster": "cm1/maths/fractions/08-unite/eleveai-maths-cm1-frac-unite-short.png",
+  "vignette": "cm1/maths/fractions/08-unite/eleveai-maths-cm1-frac-unite-short.vignette.webp",
+  "titre": "La moitié plus petite qu'un quart ? 🌍 — CM1 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_unite&display=simple"
+ },
  "cm1-proba-comparer": {
   "fichier": "cm1/maths/probabilites/03-comparer/eleveai-maths-cm1-proba-comparer.mp4",
   "poster": "cm1/maths/probabilites/03-comparer/eleveai-maths-cm1-proba-comparer.png",

@@ -42719,6 +42719,1292 @@
         "jeux-video",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "cm1-frac-lire",
+      "notionId": "fraction",
+      "microId": "fraction_lire",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/fractions/01-lire/eleveai-maths-cm1-frac-lire.mp4",
+      "miniature": "cm1/maths/fractions/01-lire/eleveai-maths-cm1-frac-lire.png",
+      "titre": "3 carrés sur 8 offerts : comment lire 3/8 ? — Lire une fraction — épisode 1 · Maths CM1",
+      "accroche": "Léo est chocolatier. Il fabrique une tablette de 8 carrés, tous pareils, et en offre 3 à sa sœur. Quelle part de la tablette a-t-il offerte ?\n\nDans cette vidéo :\n• le dénominateur, en bas, compte toutes les parts égales : 8\n• le numérateur, en haut, compte les parts prises : 3, on lit « 3 huitièmes »\n• les noms des parts : demis, tiers, quarts, puis cinquièmes, sixièmes, dixièmes…\n• le piège : on ne dit pas « 3 quatrièmes » mais 3 quarts, ni « 1 deuxième » mais 1 demi\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Léo fait une tablette de 10 carrés, en mange 1 et en offre 4 : quelle fraction a-t-il offerte ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/cm1/fraction\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/cm1/fraction\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_lire&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "La tablette de Léo"
+        ],
+        [
+          "00:21",
+          "En bas : le dénominateur"
+        ],
+        [
+          "00:32",
+          "En haut : le numérateur"
+        ],
+        [
+          "00:43",
+          "Question : le numérateur de 5/6"
+        ],
+        [
+          "01:10",
+          "Le nom des parts"
+        ],
+        [
+          "01:29",
+          "Le piège : « quatrièmes »"
+        ],
+        [
+          "01:44",
+          "Question : écrire 7 dixièmes"
+        ],
+        [
+          "02:16",
+          "À toi de jouer"
+        ],
+        [
+          "02:32",
+          "Correction"
+        ],
+        [
+          "02:52",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/cm1/fraction",
+      "tags": [
+        "lire une fraction",
+        "numérateur",
+        "dénominateur",
+        "demi tiers quart",
+        "chocolatier",
+        "chocolat",
+        "fractions",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:43",
+          "question": "Dans 5/6, quel nombre est le numérateur ?",
+          "choix": [
+            "6",
+            "5",
+            "11"
+          ],
+          "reponse": 1,
+          "explication": "Le numérateur est en haut : 5, les parts prises ; 6, en bas, compte toutes les parts."
+        },
+        {
+          "t": "01:44",
+          "question": "« 7 dixièmes » : quelle fraction ?",
+          "choix": [
+            "10/7",
+            "7/10",
+            "7/100"
+          ],
+          "reponse": 1,
+          "explication": "Le nombre dit en premier va en haut : 7 ; dixièmes : 10 parts, en bas."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "cm1-frac-lire-short",
+      "notionId": "fraction",
+      "microId": "fraction_lire",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-frac-lire",
+      "fichier": "cm1/maths/fractions/01-lire/eleveai-maths-cm1-frac-lire-short.mp4",
+      "miniature": "cm1/maths/fractions/01-lire/eleveai-maths-cm1-frac-lire-short.png",
+      "titre": "Pourquoi dit-on « 1 quart d'heure » ? ⏰ — CM1 #Shorts",
+      "accroche": "Romane est horlogère. En 1 heure, la grande aiguille fait 1 tour : 60 minutes. On partage le tour en 4 parts égales : des quarts. 1 quart d'heure, c'est 15 minutes ; 2 quarts, la moitié du tour : 1 demi-heure, 30 minutes !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 3 quarts d'heure, c'est combien de minutes ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_lire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #cm1 #primaire",
+      "tags": [
+        "quart d'heure",
+        "demi-heure",
+        "horloge",
+        "lire l'heure",
+        "horlogère",
+        "fractions",
+        "maths",
+        "CM1",
+        "école",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:25",
+          "question": "1 tiers de tour : combien de minutes ?",
+          "choix": [
+            "3",
+            "20",
+            "30"
+          ],
+          "reponse": 1,
+          "explication": "60 minutes en 3 parts égales : 20 minutes chacune."
+        }
+      ],
+      "centres": [
+        "sciences",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm1-frac-representer",
+      "notionId": "fraction",
+      "microId": "fraction_representer",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/fractions/02-representer/eleveai-maths-cm1-frac-representer.mp4",
+      "miniature": "cm1/maths/fractions/02-representer/eleveai-maths-cm1-frac-representer.png",
+      "titre": "6 places, 4 œufs : quelle fraction ? — Représenter une fraction — épisode 2 · Maths CM1",
+      "accroche": "Maya est éleveuse de poules. Ce matin, elle range les œufs dans une boîte de 6 places : 4 places sont pleines. Quelle fraction de la boîte est pleine ?\n\nDans cette vidéo :\n• lire la boîte : 6 places en bas, 4 pleines en haut, 4/6\n• dessiner 3/4 : partager en 4 parts égales, colorier 3 parts (barre ou disque)\n• le piège : des parts pas égales ne sont pas des quarts\n• avec une grille : 2 rangées de 6 = 12 cases, 5 vides → 5/12\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Maya prend 1 quart d'une boîte de 12 œufs pour un gâteau : combien d'œufs ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/cm1/fraction\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/cm1/fraction\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_representer&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les œufs de Maya"
+        ],
+        [
+          "00:20",
+          "Lire la boîte : 4/6"
+        ],
+        [
+          "00:31",
+          "Dessiner 3/4"
+        ],
+        [
+          "00:46",
+          "Question : dessiner 5/8"
+        ],
+        [
+          "01:10",
+          "Le piège : des parts égales"
+        ],
+        [
+          "01:26",
+          "Avec une grille"
+        ],
+        [
+          "01:43",
+          "Question : la part blanche"
+        ],
+        [
+          "02:15",
+          "À toi de jouer"
+        ],
+        [
+          "02:29",
+          "Correction"
+        ],
+        [
+          "02:48",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/cm1/fraction",
+      "tags": [
+        "représenter une fraction",
+        "parts égales",
+        "colorier",
+        "grille",
+        "éleveuse",
+        "poules",
+        "œufs",
+        "fractions",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:46",
+          "question": "Pour dessiner 5/8, combien de parts colorier ?",
+          "choix": [
+            "8",
+            "5",
+            "3"
+          ],
+          "reponse": 1,
+          "explication": "On partage en 8 parts égales et on en colorie 5, comme le numérateur."
+        },
+        {
+          "t": "01:43",
+          "question": "10 parts, 3 coloriées : quelle fraction n'est pas coloriée ?",
+          "choix": [
+            "3/10",
+            "7/10",
+            "7/3"
+          ],
+          "reponse": 1,
+          "explication": "10 parts en tout en bas ; 10 − 3 = 7 blanches en haut : 7/10."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "cm1-frac-representer-short",
+      "notionId": "fraction",
+      "microId": "fraction_representer",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-frac-representer",
+      "fichier": "cm1/maths/fractions/02-representer/eleveai-maths-cm1-frac-representer-short.mp4",
+      "miniature": "cm1/maths/fractions/02-representer/eleveai-maths-cm1-frac-representer-short.png",
+      "titre": "Couper un carré en 4 : de combien de façons ? ✂️ — CM1 #Shorts",
+      "accroche": "Zoé crée des puzzles. Elle coupe un carré en 4 parts égales : en bandes, en petits carrés, en triangles. Toutes ces parts sont des quarts, elles ont la même taille ! Mais 4 parts pas pareilles, ce ne sont pas des quarts.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Zoé coupe un carré en 8 parts égales et en colorie 6 : quelle fraction ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_representer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #cm1 #primaire",
+      "tags": [
+        "quarts",
+        "parts égales",
+        "puzzle",
+        "carré",
+        "créatrice de puzzles",
+        "fractions",
+        "maths",
+        "CM1",
+        "école",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:23",
+          "question": "Un carré coupé en 2 triangles égaux : 1 triangle, c'est… ?",
+          "choix": [
+            "1/2",
+            "1/4",
+            "2/2"
+          ],
+          "reponse": 0,
+          "explication": "2 parts égales : des demis ; 1 triangle = 1 demi."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm1-frac-droite",
+      "notionId": "fraction",
+      "microId": "fraction_droite",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/fractions/03-droite/eleveai-maths-cm1-frac-droite.mp4",
+      "miniature": "cm1/maths/fractions/03-droite/eleveai-maths-cm1-frac-droite.png",
+      "titre": "Tom nage 3/4 du bassin : où est-il ? — Fraction et droite graduée — épisode 3 · Maths CM1",
+      "accroche": "Salomé est maître-nageuse et entraîne Tom. Le bassin va d'un bord, 0, à l'autre, 1 ; des bouées le partagent en 4 parts égales. Tom s'arrête aux 3 quarts : où est-il ?\n\nDans cette vidéo :\n• partir de 0 : le dénominateur partage l'unité, le numérateur dit de combien de parts avancer\n• le piège : 5 traits mais 4 parts, on compte les parts, pas les traits\n• le milieu : 2/4, c'est aussi 1/2\n• après 1 : 4/4 = 1, puis 5/4, 6/4\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : un bassin en 8 parts égales, Tom au point bleu : quelle fraction de la longueur a-t-il nagée ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/cm1/fraction\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/cm1/fraction\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_droite&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Tom dans le bassin"
+        ],
+        [
+          "00:24",
+          "La méthode : partager, avancer"
+        ],
+        [
+          "00:43",
+          "Le piège : les traits"
+        ],
+        [
+          "00:56",
+          "Question : le point bleu"
+        ],
+        [
+          "01:25",
+          "Le milieu : 1/2"
+        ],
+        [
+          "01:37",
+          "Après 1"
+        ],
+        [
+          "01:53",
+          "Question : où est 4/3 ?"
+        ],
+        [
+          "02:21",
+          "À toi de jouer"
+        ],
+        [
+          "02:36",
+          "Correction"
+        ],
+        [
+          "02:53",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/cm1/fraction",
+      "tags": [
+        "droite graduée",
+        "placer une fraction",
+        "graduation",
+        "maître-nageuse",
+        "natation",
+        "piscine",
+        "fractions",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:56",
+          "question": "Quelle fraction marque le point bleu ?",
+          "choix": [
+            "2/6",
+            "2/5",
+            "5/2"
+          ],
+          "reponse": 1,
+          "explication": "Entre 0 et 1, 5 parts : des cinquièmes ; le point est à 2 parts de 0 (2/6 compte les traits)."
+        },
+        {
+          "t": "01:53",
+          "question": "Chaque unité a 3 parts égales : où se place 4/3 ?",
+          "choix": [
+            "avant 1",
+            "sur 1",
+            "après 1"
+          ],
+          "reponse": 2,
+          "explication": "3/3 = 1 ; 4/3, c'est 1 part de plus : après 1."
+        }
+      ],
+      "centres": [
+        "sport"
+      ]
+    },
+    {
+      "id": "cm1-frac-droite-short",
+      "notionId": "fraction",
+      "microId": "fraction_droite",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-frac-droite",
+      "fichier": "cm1/maths/fractions/03-droite/eleveai-maths-cm1-frac-droite-short.mp4",
+      "miniature": "cm1/maths/fractions/03-droite/eleveai-maths-cm1-frac-droite-short.png",
+      "titre": "La route de la Lune : 5 traits, mais 4 parts ! 🚀 — CM1 #Shorts",
+      "accroche": "Ilan guide une fusée de la Terre jusqu'à la Lune. La route est partagée en 4 parts égales : 1 quart, 2 quarts, 3 quarts… et 4 quarts, la Lune ! 4 quarts, c'est 1. Surprise : sur la route, 5 traits, mais seulement 4 parts.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : la route a 8 parts égales et la fusée est au milieu : quelle fraction ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_droite&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #cm1 #primaire",
+      "tags": [
+        "droite graduée",
+        "fusée",
+        "Lune",
+        "espace",
+        "quarts",
+        "fractions",
+        "maths",
+        "CM1",
+        "école",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:25",
+          "question": "La route a 6 parts, la fusée en a fait 3 : quelle fraction ?",
+          "choix": [
+            "3/6",
+            "3/7",
+            "6/3"
+          ],
+          "reponse": 0,
+          "explication": "6 parts : des sixièmes ; 3 parts faites : 3/6, la moitié de la route."
+        }
+      ],
+      "centres": [
+        "espace"
+      ]
+    },
+    {
+      "id": "cm1-frac-comparer",
+      "notionId": "fraction",
+      "microId": "fraction_comparer",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/fractions/04-comparer/eleveai-maths-cm1-frac-comparer.mp4",
+      "miniature": "cm1/maths/fractions/04-comparer/eleveai-maths-cm1-frac-comparer.png",
+      "titre": "1/4 ou 1/8 d'énergie : lequel est le plus grand ? — Comparer des fractions — épisode 4 · Maths CM1",
+      "accroche": "Nolan est testeur de jeux vidéo. Il vérifie les barres d'énergie des héros : le bleu a 3 cinquièmes de sa barre, le vert 4 cinquièmes. Qui a le plus d'énergie ?\n\nDans cette vidéo :\n• même dénominateur : on compare les numérateurs, 4/5 est plus grand que 3/5\n• même numérateur : plus on partage, plus les parts sont petites (1/4 plus grand que 1/8)\n• le piège : un grand nombre en bas ne fait pas une grande fraction (1/10 plus petit que 1/2)\n• comparer à la moitié : 3/8 est moins que 4/8 = 1/2\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : ranger 2/6, 5/6 et 1/6 de la plus petite à la plus grande\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/cm1/fraction\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/cm1/fraction\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_comparer&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les barres d'énergie"
+        ],
+        [
+          "00:22",
+          "Même dénominateur"
+        ],
+        [
+          "00:38",
+          "Question : 5/8 et 7/8"
+        ],
+        [
+          "01:09",
+          "Même numérateur : les potions"
+        ],
+        [
+          "01:27",
+          "Le piège : un grand nombre en bas"
+        ],
+        [
+          "02:06",
+          "Comparer à la moitié"
+        ],
+        [
+          "02:23",
+          "À toi de jouer"
+        ],
+        [
+          "02:37",
+          "Correction"
+        ],
+        [
+          "02:51",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/cm1/fraction",
+      "tags": [
+        "comparer des fractions",
+        "ranger des fractions",
+        "jeux vidéo",
+        "testeur de jeux vidéo",
+        "barre d'énergie",
+        "fractions",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:38",
+          "question": "Quel signe entre 5/8 et 7/8 ?",
+          "choix": [
+            "<",
+            ">",
+            "="
+          ],
+          "reponse": 0,
+          "explication": "Même dénominateur : on compare 5 et 7 ; 5 < 7, donc 5/8 < 7/8."
+        },
+        {
+          "t": "01:37",
+          "question": "Quelle fraction est la plus grande ?",
+          "choix": [
+            "1/6",
+            "1/3",
+            "1/5"
+          ],
+          "reponse": 1,
+          "explication": "Même numérateur : la plus grande a le plus petit dénominateur ; en 3 parts, les parts sont plus grosses."
+        }
+      ],
+      "centres": [
+        "jeux-video"
+      ]
+    },
+    {
+      "id": "cm1-frac-comparer-short",
+      "notionId": "fraction",
+      "microId": "fraction_comparer",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-frac-comparer",
+      "fichier": "cm1/maths/fractions/04-comparer/eleveai-maths-cm1-frac-comparer-short.mp4",
+      "miniature": "cm1/maths/fractions/04-comparer/eleveai-maths-cm1-frac-comparer-short.png",
+      "titre": "Un gâteau pour 2 éléphants ou pour 10 fourmis ? 🐘 — CM1 #Shorts",
+      "accroche": "Malo est vétérinaire au zoo. Il a 2 gâteaux pareils : l'un pour 2 éléphants, l'autre pour 10 fourmis. Chaque éléphant a 1 demi, chaque fourmi 1 dixième : 10 est plus grand que 2… mais la part de fourmi est toute petite ! Et pour 100 fourmis : 1 centième, une miette.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : combien de parts d'1 huitième faut-il pour faire 1 demi ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #cm1 #primaire",
+      "tags": [
+        "comparer des fractions",
+        "zoo",
+        "éléphant",
+        "fourmi",
+        "vétérinaire",
+        "fractions",
+        "maths",
+        "CM1",
+        "école",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:23",
+          "question": "Un gâteau pour 4 singes, un pareil pour 3 lions : la plus grosse part ?",
+          "choix": [
+            "1 quart",
+            "1 tiers",
+            "pareil"
+          ],
+          "reponse": 1,
+          "explication": "En 3 parts, les parts sont plus grosses qu'en 4 : 1/3 > 1/4."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "cm1-frac-equivalente",
+      "notionId": "fraction",
+      "microId": "fraction_equivalente",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/fractions/05-equivalente/eleveai-maths-cm1-frac-equivalente.mp4",
+      "miniature": "cm1/maths/fractions/05-equivalente/eleveai-maths-cm1-frac-equivalente.png",
+      "titre": "3/4 de la plate-bande = 6/8 ? Les fractions égales — Fractions égales — épisode 5 · Maths CM1",
+      "accroche": "Awa est paysagiste. Elle partage une longue plate-bande en 4 parts égales et en fleurit 3 : 3 quarts. Son apprenti, Tom, coupe chaque part en 2 : les fleurs couvrent 6 parts sur 8. Est-ce la même chose ?\n\nDans cette vidéo :\n• couper chaque part en 2 : 3/4 = 6/8, la longueur fleurie ne bouge pas\n• multiplier en haut ET en bas par le même nombre : 1/2 = 2/4\n• regrouper 2 par 2 : 6/8 redevient 3/4, on divise en haut et en bas\n• le piège : ajouter 1 ou enlever 2 en haut et en bas, c'est faux\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Awa fleurit 2/3 d'une plate-bande coupée en 6 parts égales : combien de parts sont fleuries ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/cm1/fraction\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/cm1/fraction\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_equivalente&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "La plate-bande d'Awa"
+        ],
+        [
+          "00:20",
+          "Couper chaque part en 2"
+        ],
+        [
+          "00:35",
+          "× 2 en haut et en bas"
+        ],
+        [
+          "00:52",
+          "Question : 1/2 en quarts"
+        ],
+        [
+          "01:21",
+          "Regrouper : ÷ 2"
+        ],
+        [
+          "01:43",
+          "Le piège : ajouter, enlever"
+        ],
+        [
+          "02:07",
+          "Question : regrouper 4/10"
+        ],
+        [
+          "02:43",
+          "À toi de jouer"
+        ],
+        [
+          "02:58",
+          "Correction"
+        ],
+        [
+          "03:13",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/cm1/fraction",
+      "tags": [
+        "fractions égales",
+        "fractions équivalentes",
+        "simplifier",
+        "paysagiste",
+        "jardin",
+        "fleurs",
+        "fractions",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:52",
+          "question": "1 demi égale combien de quarts ?",
+          "choix": [
+            "1/4",
+            "2/4",
+            "3/4"
+          ],
+          "reponse": 1,
+          "explication": "On coupe chaque demi en 2 : 1 × 2 = 2 et 2 × 2 = 4, donc 1/2 = 2/4."
+        },
+        {
+          "t": "02:07",
+          "question": "4 cases sur 10 bleues. Regroupe 2 par 2 : quelle fraction ?",
+          "choix": [
+            "2/5",
+            "2/8",
+            "4/5"
+          ],
+          "reponse": 0,
+          "explication": "4 ÷ 2 = 2 et 10 ÷ 2 = 5 : 4/10 = 2/5 ; on divise en haut ET en bas."
+        }
+      ],
+      "centres": [
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "cm1-frac-equivalente-short",
+      "notionId": "fraction",
+      "microId": "fraction_equivalente",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-frac-equivalente",
+      "fichier": "cm1/maths/fractions/05-equivalente/eleveai-maths-cm1-frac-equivalente-short.mp4",
+      "miniature": "cm1/maths/fractions/05-equivalente/eleveai-maths-cm1-frac-equivalente-short.png",
+      "titre": "Quelle assiette a le plus de pizza ? 🍕 — CM1 #Shorts",
+      "accroche": "Marco est pizzaïolo. Il te propose 3 assiettes : 1 demi pizza, 2 quarts de pizza, 4 huitièmes de pizza. Surprise : posées l'une sur l'autre, c'est pareil ! 1/2 = 2/4 = 4/8 : la même moitié de pizza.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : une pizza coupée en 12 parts : combien de parts pour avoir la moitié ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_equivalente&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #cm1 #primaire",
+      "tags": [
+        "fractions égales",
+        "pizza",
+        "moitié",
+        "pizzaïolo",
+        "fractions",
+        "maths",
+        "CM1",
+        "école",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:24",
+          "question": "3 quarts de pizza : combien de huitièmes ?",
+          "choix": [
+            "3",
+            "6",
+            "7"
+          ],
+          "reponse": 1,
+          "explication": "On coupe chaque quart en 2 : 3 quarts = 6 huitièmes."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm1-frac-decimale",
+      "notionId": "fraction",
+      "microId": "fraction_decimale",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/fractions/06-decimale/eleveai-maths-cm1-frac-decimale.mp4",
+      "miniature": "cm1/maths/fractions/06-decimale/eleveai-maths-cm1-frac-decimale.png",
+      "titre": "7 centièmes de litre : 0,7 ou 0,07 ? — Les fractions décimales — épisode 6 · Maths CM1",
+      "accroche": "Chloé est laborantine. Elle prépare un mélange dans un récipient de 1 litre gradué en 10 parts égales, et verse 3 parts d'eau. Quelle fraction du litre ?\n\nDans cette vidéo :\n• une fraction décimale a pour dénominateur 10, 100 ou 1 000 (3/4 n'en est pas une)\n• 3 dixièmes = 0,3 : le chiffre juste après la virgule compte les dixièmes\n• une grille de 100 : 25 centièmes = 0,25 = 25 %\n• le piège : 7 centièmes, ce n'est pas 0,7 mais 0,07\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Chloé verse 6 dixièmes de litre : écris-le avec une virgule, puis en centièmes\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/cm1/fraction\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/cm1/fraction\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_decimale&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le litre de Chloé"
+        ],
+        [
+          "00:24",
+          "Des dixièmes"
+        ],
+        [
+          "00:36",
+          "Une fraction décimale"
+        ],
+        [
+          "00:51",
+          "Question : laquelle est décimale ?"
+        ],
+        [
+          "01:17",
+          "La virgule : 0,3"
+        ],
+        [
+          "01:31",
+          "Des centièmes : 0,25"
+        ],
+        [
+          "01:51",
+          "Le piège : 0,7 ou 0,07"
+        ],
+        [
+          "02:09",
+          "Question : 4 centièmes"
+        ],
+        [
+          "02:40",
+          "Le secret : pour cent"
+        ],
+        [
+          "02:57",
+          "À toi de jouer"
+        ],
+        [
+          "03:11",
+          "Correction"
+        ],
+        [
+          "03:25",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/cm1/fraction",
+      "tags": [
+        "fraction décimale",
+        "dixièmes",
+        "centièmes",
+        "nombre décimal",
+        "virgule",
+        "laborantine",
+        "laboratoire",
+        "fractions",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:51",
+          "question": "Laquelle est une fraction décimale ?",
+          "choix": [
+            "5/6",
+            "9/10",
+            "1/2"
+          ],
+          "reponse": 1,
+          "explication": "Son dénominateur est 10 ; les autres ont 6 et 2 en bas."
+        },
+        {
+          "t": "02:09",
+          "question": "4 centièmes, avec une virgule ?",
+          "choix": [
+            "0,4",
+            "0,04",
+            "4,0"
+          ],
+          "reponse": 1,
+          "explication": "0 dixième et 4 centièmes : 0,04 ; le 4 est au rang des centièmes."
+        }
+      ],
+      "centres": [
+        "sciences"
+      ]
+    },
+    {
+      "id": "cm1-frac-decimale-short",
+      "notionId": "fraction",
+      "microId": "fraction_decimale",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-frac-decimale",
+      "fichier": "cm1/maths/fractions/06-decimale/eleveai-maths-cm1-frac-decimale-short.mp4",
+      "miniature": "cm1/maths/fractions/06-decimale/eleveai-maths-cm1-frac-decimale-short.png",
+      "titre": "7 centimes = 0,7 € ? Le glacier se trompe ! 🍦 — CM1 #Shorts",
+      "accroche": "Kenji vend des glaces. Un client paie avec 7 pièces de 1 centime ; Kenji écrit 0,7 euro. Erreur : 1 euro, c'est 100 centimes, donc 7 centimes, c'est 7 centièmes, 0,07 €. Et 0,7 €, c'est 7 dixièmes : 70 centimes, 10 fois plus !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 35 centimes, ça s'écrit comment en euro ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_decimale&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #cm1 #primaire",
+      "tags": [
+        "centimes",
+        "euros",
+        "nombre décimal",
+        "centièmes",
+        "glacier",
+        "monnaie",
+        "fractions",
+        "maths",
+        "CM1",
+        "école",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:32",
+          "question": "50 centimes : combien d'euros ?",
+          "choix": [
+            "0,05",
+            "0,5",
+            "50"
+          ],
+          "reponse": 1,
+          "explication": "50 centièmes = 5 dixièmes = 0,5 €, la moitié d'un euro."
+        }
+      ],
+      "centres": [
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "cm1-frac-defi",
+      "notionId": "fraction",
+      "microId": "fraction_defi",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/fractions/07-defi/eleveai-maths-cm1-frac-defi.mp4",
+      "miniature": "cm1/maths/fractions/07-defi/eleveai-maths-cm1-frac-defi.png",
+      "titre": "Défi fractions : 3 énigmes dans le tram — Défi fractions — épisode 7 · Maths CM1",
+      "accroche": "Rayan est conducteur de tram : son trajet est partagé en 10 parts égales. Trois énigmes de fractions pour devenir champion !\n\nDans cette vidéo :\n• énigme 1 : 3/10 puis 4/10 du trajet, on compte les parts : 7/10, il en reste 3/10\n• 7 dixièmes avec une virgule : 0,7\n• énigme 2 : Léna a fait 2/5 = 4/10, moins que Rayan ; la moitié, c'est 5/10\n• énigme 3 : une fraction en quarts entre 1/4 et 3/4\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : je suis une fraction en quarts, entre 1/4 et 3/4 sur la droite : qui suis-je ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/cm1/fraction\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/cm1/fraction\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_defi&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le tram de Rayan"
+        ],
+        [
+          "00:13",
+          "Énigme 1 : 3/10 + 4/10"
+        ],
+        [
+          "00:35",
+          "Question : 7/10 avec une virgule"
+        ],
+        [
+          "01:03",
+          "Énigme 2 : qui a fait le plus ?"
+        ],
+        [
+          "01:25",
+          "Question : plus de la moitié ?"
+        ],
+        [
+          "01:54",
+          "À toi de jouer : énigme 3"
+        ],
+        [
+          "02:11",
+          "Correction"
+        ],
+        [
+          "02:24",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/cm1/fraction",
+      "tags": [
+        "défi fractions",
+        "énigmes",
+        "dixièmes",
+        "comparer des fractions",
+        "conducteur de tram",
+        "tram",
+        "fractions",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:35",
+          "question": "7 dixièmes, avec une virgule ?",
+          "choix": [
+            "7,10",
+            "0,7",
+            "0,07"
+          ],
+          "reponse": 1,
+          "explication": "7 dixièmes : le 7 va juste après la virgule, 0,7."
+        },
+        {
+          "t": "01:25",
+          "question": "Qui a fait plus de la moitié du trajet ?",
+          "choix": [
+            "Rayan",
+            "Léna",
+            "les deux"
+          ],
+          "reponse": 0,
+          "explication": "La moitié, c'est 5/10 ; Rayan 7/10, c'est plus ; Léna 4/10, c'est moins."
+        }
+      ],
+      "centres": [
+        "transports"
+      ]
+    },
+    {
+      "id": "cm1-frac-defi-short",
+      "notionId": "fraction",
+      "microId": "fraction_defi",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-frac-defi",
+      "fichier": "cm1/maths/fractions/07-defi/eleveai-maths-cm1-frac-defi-short.mp4",
+      "miniature": "cm1/maths/fractions/07-defi/eleveai-maths-cm1-frac-defi-short.png",
+      "titre": "Course d'escargots : qui est en tête ? 🐌 — CM1 #Shorts",
+      "accroche": "Zoé est biologiste. Elle fait courir 3 escargots sur une piste de 1 mètre : Turbo est à 0,6 m, Flash à 7 dixièmes de mètre, Lento à 1 demi mètre. 7 dixièmes = 0,7 ; 1 demi = 0,5 : Flash est en tête !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Turbo avance encore de 3 dixièmes de mètre : où arrive-t-il ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #cm1 #primaire",
+      "tags": [
+        "dixièmes",
+        "nombre décimal",
+        "escargots",
+        "course",
+        "biologiste",
+        "fractions",
+        "maths",
+        "CM1",
+        "école",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:17",
+          "question": "Qui est en tête ?",
+          "choix": [
+            "Turbo",
+            "Flash",
+            "Lento"
+          ],
+          "reponse": 1,
+          "explication": "7 dixièmes = 0,7 ; 1 demi = 0,5 ; Turbo 0,6 : Flash est en tête."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm1-frac-unite",
+      "notionId": "fraction",
+      "microId": "fraction_unite",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/fractions/08-unite/eleveai-maths-cm1-frac-unite.mp4",
+      "miniature": "cm1/maths/fractions/08-unite/eleveai-maths-cm1-frac-unite.png",
+      "titre": "1 quart de la chorale : combien d'enfants ? — L'unité dans une fraction — épisode 8 · Maths CM1",
+      "accroche": "Sofia est cheffe de chorale. Sa chorale a 12 enfants ; pour un chant, elle veut 1 quart de la chorale devant. Combien d'enfants ?\n\nDans cette vidéo :\n• l'unité, c'est le tout : les 12 enfants, partagés en 4 parts égales\n• 12 ÷ 4 = 3 : 1 quart de la chorale, c'est 3 enfants ; 3 quarts restent derrière, 9 enfants\n• 4 quarts, c'est la chorale entière : 4/4 = 1\n• le piège : 1 demi dépend de l'unité (1/2 de 12 = 6, mais 1/2 de 20 = 10)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une chorale de 15 enfants, 1 tiers joue du tambour : combien d'enfants ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/cm1/fraction\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/cm1/fraction\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_unite&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "La chorale de Sofia"
+        ],
+        [
+          "00:18",
+          "L'unité, c'est le tout"
+        ],
+        [
+          "00:37",
+          "Question : qui reste derrière ?"
+        ],
+        [
+          "01:09",
+          "4/4 = 1"
+        ],
+        [
+          "01:20",
+          "Le piège : 1 demi de quoi ?"
+        ],
+        [
+          "01:35",
+          "Question : le plus gros quart"
+        ],
+        [
+          "02:07",
+          "À toi de jouer"
+        ],
+        [
+          "02:21",
+          "Correction"
+        ],
+        [
+          "02:36",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/cm1/fraction",
+      "tags": [
+        "unité",
+        "fraction d'une quantité",
+        "quart",
+        "partager",
+        "cheffe de chorale",
+        "chorale",
+        "musique",
+        "fractions",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:37",
+          "question": "1 quart de la chorale est devant. Quelle fraction reste derrière ?",
+          "choix": [
+            "1/4",
+            "3/4",
+            "4/4"
+          ],
+          "reponse": 1,
+          "explication": "4/4, c'est toute la chorale ; 4 − 1 = 3 : 3/4 restent derrière, 9 enfants."
+        },
+        {
+          "t": "01:35",
+          "question": "Une grande tarte, une petite tarte : où est le plus gros quart ?",
+          "choix": [
+            "la grande tarte",
+            "la petite tarte",
+            "c'est pareil"
+          ],
+          "reponse": 0,
+          "explication": "Des quarts tous les deux, mais pas la même unité : la grande tarte donne de plus gros quarts."
+        }
+      ],
+      "centres": [
+        "musique"
+      ]
+    },
+    {
+      "id": "cm1-frac-unite-short",
+      "notionId": "fraction",
+      "microId": "fraction_unite",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-frac-unite",
+      "fichier": "cm1/maths/fractions/08-unite/eleveai-maths-cm1-frac-unite-short.mp4",
+      "miniature": "cm1/maths/fractions/08-unite/eleveai-maths-cm1-frac-unite-short.png",
+      "titre": "La moitié plus petite qu'un quart ? 🌍 — CM1 #Shorts",
+      "accroche": "Lucie est astronome. Elle te montre 1 quart de la Terre et 1 demi de la Lune. La Lune est bien plus petite que la Terre : le quart de la Terre est bien plus gros ! Une fraction dépend toujours de l'unité.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 1 quart de 20 bonbons, ou 1 demi de 6 bonbons : lequel donne le plus de bonbons ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_unite&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #cm1 #primaire",
+      "tags": [
+        "unité",
+        "moitié",
+        "quart",
+        "Terre",
+        "Lune",
+        "astronome",
+        "fractions",
+        "maths",
+        "CM1",
+        "école",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:20",
+          "question": "Quel morceau est le plus gros ?",
+          "choix": [
+            "1/2 de pomme",
+            "1/4 de pastèque",
+            "c'est pareil"
+          ],
+          "reponse": 1,
+          "explication": "Tout dépend de l'unité : la pastèque est bien plus grosse que la pomme."
+        }
+      ],
+      "centres": [
+        "espace",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm1-frac-superieure-1",
+      "notionId": "fraction",
+      "microId": "fraction_superieure_1",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/fractions/09-superieure-1/eleveai-maths-cm1-frac-superieure-1.mp4",
+      "miniature": "cm1/maths/fractions/09-superieure-1/eleveai-maths-cm1-frac-superieure-1.png",
+      "titre": "5 quarts de tour : c'est possible ? — Une fraction plus grande que 1 — épisode 9 · Maths CM1",
+      "accroche": "Inès est entraîneuse d'athlétisme. Sur sa piste, 1 tour est partagé en 4 parts égales : des quarts de tour. Son élève, Noé, court 5 quarts de tour. C'est possible ?\n\nDans cette vidéo :\n• compter : 4 quarts = 1 tour complet, puis 1 quart de plus : 5/4\n• 5/4, c'est 1 tour et 1 quart : le numérateur est plus grand que le dénominateur\n• sur la droite de 0 à 2 : 3/4 avant 1, 4/4 sur 1, 5/4 après 1, 8/4 sur 2\n• 9 quarts de tour : 2 tours et 1 quart\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une course de 7 quarts de tour : plus ou moins que 2 tours ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/cm1/fraction\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/cm1/fraction\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_superieure_1&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "La piste d'Inès"
+        ],
+        [
+          "00:20",
+          "4 quarts = 1 tour"
+        ],
+        [
+          "00:32",
+          "Plus grand que 1"
+        ],
+        [
+          "00:43",
+          "Question : plus grande que 1"
+        ],
+        [
+          "01:12",
+          "Sur la droite graduée"
+        ],
+        [
+          "01:28",
+          "Question : 9 quarts de tour"
+        ],
+        [
+          "01:54",
+          "À toi de jouer"
+        ],
+        [
+          "02:06",
+          "Correction"
+        ],
+        [
+          "02:17",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/cm1/fraction",
+      "tags": [
+        "fraction supérieure à 1",
+        "quarts",
+        "droite graduée",
+        "entraîneuse d'athlétisme",
+        "athlétisme",
+        "course",
+        "fractions",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:43",
+          "question": "Laquelle est plus grande que 1 ?",
+          "choix": [
+            "3/4",
+            "7/6",
+            "5/5"
+          ],
+          "reponse": 1,
+          "explication": "7 > 6 : plus grand que 1 ; 3/4 est plus petit que 1 ; 5/5 = 1, tout juste."
+        },
+        {
+          "t": "01:28",
+          "question": "Noé court 9 quarts de tour. Combien de tours complets ?",
+          "choix": [
+            "9",
+            "2",
+            "4"
+          ],
+          "reponse": 1,
+          "explication": "4 quarts : 1 tour ; 8 quarts : 2 tours ; il reste 1 quart : 2 tours et 1 quart."
+        }
+      ],
+      "centres": [
+        "sport"
+      ]
+    },
+    {
+      "id": "cm1-frac-superieure-1-short",
+      "notionId": "fraction",
+      "microId": "fraction_superieure_1",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-frac-superieure-1",
+      "fichier": "cm1/maths/fractions/09-superieure-1/eleveai-maths-cm1-frac-superieure-1-short.mp4",
+      "miniature": "cm1/maths/fractions/09-superieure-1/eleveai-maths-cm1-frac-superieure-1-short.png",
+      "titre": "7 quarts de cœur : combien de cœurs ? ❤️ — CM1 #Shorts",
+      "accroche": "Hugo crée des jeux vidéo. Dans son jeu, chaque cœur de vie est coupé en 4 quarts ; ton héros a 7 quarts de cœur. On remplit : 4 quarts, 1 cœur plein ! Puis 3 quarts de plus : 7/4, c'est 1 cœur et 3 quarts, plus que 1.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 11 quarts de cœur : combien de cœurs pleins ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_superieure_1&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #cm1 #primaire",
+      "tags": [
+        "fraction supérieure à 1",
+        "jeux vidéo",
+        "cœurs de vie",
+        "quarts",
+        "créateur de jeux vidéo",
+        "fractions",
+        "maths",
+        "CM1",
+        "école",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:23",
+          "question": "Potion : 2 quarts de plus. Combien de quarts ?",
+          "choix": [
+            "9",
+            "5",
+            "2"
+          ],
+          "reponse": 0,
+          "explication": "7 + 2 = 9 quarts : 2 cœurs pleins et 1 quart."
+        }
+      ],
+      "centres": [
+        "jeux-video",
+        "jeux-defis"
+      ]
     }
   ]
 }
