@@ -59,6 +59,7 @@ export default async function PageVideo({ params }: Props) {
         <LecteurVideo
           key={v.id}
           videoId={v.id}
+          suite={v.coach ? { href: v.coach, label: "Je m'entraîne sur ces questions" } : undefined}
           src={urlR2(v.fichier)}
           poster={v.poster ? urlR2(v.poster) : undefined}
           controls
