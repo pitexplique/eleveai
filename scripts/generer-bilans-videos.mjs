@@ -19,12 +19,17 @@ const PAS_NOTION = /^(question|la question|correction|à toi|a toi|ce que tu as 
 const MANUELLES = JSON.parse(fs.readFileSync(path.join(RACINE, "manim", "bilans-questions.json"), "utf8"));
 // La classe : celle du manifeste, sinon le dossier du fichier (« 4e/maths/… »).
 const classeDe = (v) => v.classe ?? v.fichier?.split("/")[0] ?? null;
+// ⛔ 27/10/2026 — Frédéric : « surtout ne pas demander quelle fraction de la barre
+// est coloriée alors que tu n'affiches pas la barre ». Sur papier, une question
+// qui renvoie à une image de la vidéo n'a pas de sens : on l'écarte.
+const VUE_DANS_LA_VIDEO = /de la barre|de la figure|du dessin|du schéma|point (bleu|rouge|vert|orange|noir)|marque le point|ce point|ci-dessus|ci-contre|à l.écran|qui a fait/i;
+const surPapier = (q) => q.question && Array.isArray(q.choix) && q.choix.length > 1 && !VUE_DANS_LA_VIDEO.test(q.question);
+const questionsDe = (v) => (v.questions?.length ? v.questions : MANUELLES[v.id] ? [MANUELLES[v.id]] : []).filter(surPapier);
 
 const bilans = {};
 for (const v of manifeste.videos) {
   const vus = (v.chapitres ?? []).map(([, t]) => t).filter((t, i) => i > 0 && !PAS_NOTION.test(t.trim()));
-  const questions = (v.questions?.length ? v.questions : MANUELLES[v.id] ? [MANUELLES[v.id]] : [])
-    .filter((q) => q.question && Array.isArray(q.choix) && q.choix.length > 1)
+  const questions = questionsDe(v)
     .map((q) => ({ question: q.question, choix: q.choix, reponse: q.reponse }));
   if (vus.length === 0 && questions.length === 0) continue;
   bilans[v.id] = { vus, questions };
@@ -51,18 +56,32 @@ for (const v of manifeste.videos) {
   if (v.type === "short" || !v.notionId || !classe) continue;
   // Le nom de la micro : le morceau du titre qui n'est ni « épisode » ni « Maths 6e ».
   const morceaux = v.titre.replace(/ · Maths .*$/, "").split(" — ").filter((m) => !/épisode|^Maths /.test(m));
-  const q = (v.questions?.length ? v.questions : MANUELLES[v.id] ? [MANUELLES[v.id]] : []).find((x) => x.question && Array.isArray(x.choix) && x.choix.length > 1);
+  // Une question par micro : celle écrite à la main d'abord (bilans-questions.json), sinon la première question-pause lisible sur papier.
+  const q = (MANUELLES[v.id] && surPapier(MANUELLES[v.id]) ? MANUELLES[v.id] : null) ?? questionsDe(v)[0];
   (notions[`${classe}/${v.notionId}`] ??= { classe, notion: libelleNotion(classe, v.notionId) ?? v.notionId, videos: [] }).videos.push({
     id: v.id,
+    microId: v.microId ?? null,
     micro: morceaux.length > 1 ? morceaux[1] : morceaux[0],
     ordre: v.fichier,
     question: q ? { question: q.question, choix: q.choix, reponse: q.reponse } : null,
   });
 }
+// Une ligne = une MICRO (« il faut une question par micro ») : on retire les
+// vidéos de toute la notion (sans micro) dès que la notion a des vidéos par
+// micro, et on garde une seule vidéo par micro.
+let sansQuestion = 0;
 for (const [cle, n] of Object.entries(notions)) {
-  if (n.videos.length < 2) { delete notions[cle]; continue; }
   n.videos.sort((x, y) => x.ordre.localeCompare(y.ordre));
-  for (const x of n.videos) delete x.ordre;
+  if (n.videos.filter((x) => x.microId).length >= 2) {
+    const vues = new Set();
+    n.videos = n.videos.filter((x) => x.microId && !vues.has(x.microId) && vues.add(x.microId));
+  }
+  if (n.videos.length < 2) { delete notions[cle]; continue; }
+  for (const x of n.videos) {
+    delete x.ordre;
+    delete x.microId;
+    if (!x.question) { sansQuestion++; console.log(`  sans question sur papier : ${cle} · ${x.id}`); }
+  }
 }
 const sortieN = path.join(RACINE, "lib", "videos", "bilans-notions.json");
 fs.writeFileSync(sortieN, JSON.stringify(notions) + "\n", "utf8");
