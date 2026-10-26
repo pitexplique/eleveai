@@ -17,6 +17,8 @@ Réponds toujours en français. Ne pose pas de questions : tranche, avance, list
 - Lot CM J (reprise 05-09), lot CM K (CM2 10-15, scripts `manim/scripts/cm2/frac_*`, aide `frac_cmk_commun.py`), fiches de cours CM1 `fraction` + CM2 `fraction_mixte` / `fraction_calcul`.
 - Chaque agent commite PAR CHEMIN ce qui est fini, sans pousser. Si la session s'est fermée : `git log origin/main..HEAD --oneline`, `git status --short manim/scripts/cm1 manim/scripts/cm2 manim/voix lib/fiches app/fiches-cours`, `ls manim/sorties/{cm1,cm2}/maths/fractions/*/` → reprendre ce qui n'est pas commité (vérifier chaque mp4 avant).
 
+- ⚠️ Nuit du 26/10 : réseau instable, agents coupés 3 fois. ✅ Fiches de cours CM FAITES (`6703e07b`). Sur le disque, NON commités : lot J 05-09 (mp4 CM1 + CM2 présents, à vérifier), lot K 10-11 (HD rendus, short 10 à re-rendre), 12-15 à faire.
+
 ## À faire, dans l'ordre
 1. **Lot CM J** (interrompu, NON commité) : scripts `manim/scripts/cm1/frac_{equivalente,decimale,defi,unite,superieure_1}*.py` + `frac_cmj_commun.py`, voix `manim/voix/cm-frac-{equivalente,decimale,defi,unite,superieure-1}*.json`. Rendus présents : 05, 06, 07 (paysage + short, CM1 + CM2) NON VÉRIFIÉS ; 08-unite (CM1) rendu HD peut-être inachevé, short défi re-rendu peut-être ; 09-superieure-1 en brouillon. Reprendre : vérifier chaque mp4 (`python scripts/verifier-bords-video.py`, planche PyAV, dry run 0 retard), finir 08 et 09, recopier questions/centres dans `manim/questions-fractions.md`, committer par chemin.
 2. **Lot CM K** (CM2 seul) : 10-mixte-ecrire, 11-mixte-regrouper, 12-encadrer, 13-additionner, 14-produit-entier, 15-quantite (consigne `manim/consigne-videos-fractions.md`, section CM ; base `frac_cm_commun.py`).
