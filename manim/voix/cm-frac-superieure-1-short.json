@@ -1,0 +1,7 @@
+{
+  "00-accroche": "Hugo crée des jeux vidéo. Dans son jeu, chaque cœur de vie est coupé en 4 quarts. Ton héros a 7 quarts de cœur. Combien de cœurs ?",
+  "01-remplir": "On remplit les cœurs. 4 quarts : 1 cœur plein ! Puis 3 quarts de plus. 7 quarts, c'est 1 cœur et 3 quarts : plus que 1 !",
+  "02-question": "Question ! Le héros boit une potion : 2 quarts de plus. Combien de quarts a-t-il ? A : 9. B : 5. C : 2. Mets pause !",
+  "02b-reponse": "Réponse A. 7 plus 2, égale 9 quarts : 2 cœurs pleins et 1 quart !",
+  "03-question": "À toi : 11 quarts de cœur, combien de cœurs pleins ? Réponds en commentaire !"
+}
