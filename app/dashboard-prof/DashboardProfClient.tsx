@@ -449,6 +449,39 @@ export default function DashboardProfClient() {
               ))}
             </div>
 
+            {/* ⭐ 27/10/2026 — Frédéric : « lorsque je me suis connecté il m'envoie
+                sur dashboard-prof où inscrire une classe n'existe pas ». La
+                porte vers « Mes classes » (/prof/classes) : créer une classe,
+                suivre en direct, le bilan par micro, les cartes de connexion. */}
+            <div className="rounded-[2rem] bg-white p-6 text-slate-950 shadow-xl">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <span>
+                  <span className="block text-xl font-black">👩‍🏫 Mes classes : inscrire une classe</span>
+                  <span className="mt-1 block text-sm font-semibold text-slate-500">
+                    Crée ta classe, donne à chaque élève son code et son mot de passe simple, puis suis-les en direct
+                    dans le coach et les vidéos.
+                  </span>
+                </span>
+                <Link
+                  href="/prof/classes"
+                  className="rounded-2xl bg-emerald-600 px-5 py-3 text-sm font-black text-white shadow hover:bg-emerald-500"
+                >
+                  Inscrire / gérer mes classes →
+                </Link>
+              </div>
+              <div className="mt-4 flex flex-wrap gap-2 text-sm font-black">
+                <Link href="/prof/classes/direct" className="rounded-2xl bg-sky-100 px-4 py-2 text-sky-900 ring-1 ring-sky-200 hover:brightness-95">
+                  En direct
+                </Link>
+                <Link href="/prof/classes/bilan" className="rounded-2xl bg-amber-100 px-4 py-2 text-amber-900 ring-1 ring-amber-200 hover:brightness-95">
+                  Bilan par micro
+                </Link>
+                <Link href="/prof/cartes" className="rounded-2xl bg-slate-100 px-4 py-2 text-slate-800 ring-1 ring-slate-200 hover:brightness-95">
+                  Cartes de connexion des élèves
+                </Link>
+              </div>
+            </div>
+
             {/* L'ÉVALUATION NATIONALE — même raison que sur le tableau de bord
                 principal (11/08) : un professeur connecté atterrit ici, pas sur
                 le hub public. La vue se cale sur SON établissement, décidé par

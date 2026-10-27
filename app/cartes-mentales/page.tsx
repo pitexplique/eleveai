@@ -89,7 +89,7 @@ export default function CartesMentalesPage() {
                     <span className="block font-black leading-tight text-slate-900 group-hover:text-teal-800">{n.notion}</span>
                     <span className="text-sm text-slate-500">
                       {n.micros.length} compétence{n.micros.length > 1 ? "s" : ""}
-                      {n.micros.length > 7 ? " · recto verso" : ""}
+                      {n.micros.length > (["seconde", "premiere", "premiere-spe", "terminale-spe", "stmg"].includes(n.classe) ? 4 : 7) ? " · carte sur 2 pages" : ""}
                     </span>
                   </span>
                 </Link>
