@@ -267,6 +267,23 @@ export default function AccueilNouveau(props: {
           ))}
         </div>
 
+        {/* ⭐ 27/10/2026 — Frédéric : « quand on sélectionne profs il faut
+            afficher s'inscrire ». L'inscription mène à « Mes classes ». */}
+        {profil === "prof" && (
+          <div className="mt-3 flex flex-wrap items-center gap-3 rounded-xl bg-teal-50 p-3 ring-1 ring-teal-200">
+            <p className="flex-1 text-sm text-slate-700">
+              Crée tes classes : un code et un mot de passe simple par élève, puis suis-les en direct pendant le cours.
+            </p>
+            <Lien
+              href="/auth/signin?type=prof&inscription=1&next=/prof/classes"
+              bloc="prof-inscription"
+              className="inline-flex items-center gap-2 rounded-full bg-teal-700 px-5 py-2.5 font-black text-white shadow hover:bg-teal-800"
+            >
+              S&apos;inscrire <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Lien>
+          </div>
+        )}
+
         <div className="mt-4 flex flex-wrap items-center gap-2 text-sm">
           <span className="font-bold text-slate-600">Ton pays :</span>
           {[{ slug: "france", nom: "France" }, ...PAYS].map((p) => (
