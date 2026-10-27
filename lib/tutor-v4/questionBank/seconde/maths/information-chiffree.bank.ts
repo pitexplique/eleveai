@@ -16,6 +16,7 @@
 //   info_evolutions_successives  — Composer des evolutions
 //   info_evolution_reciproque    — Evolution reciproque
 
+import { fusionnerRenfort, renfortSeconde } from "@/lib/tutor-v4/questionBank/seconde/maths/evolutions-lycee-renfort";
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
 
 function randomInt(min: number, max: number) {
@@ -77,7 +78,7 @@ function tableauAvantApres(
   };
 }
 
-export const informationChiffreeBank: TutorBankItemV4[] = [
+const anciens: TutorBankItemV4[] = [
   /* ===================== INFO_PROPORTION ===================== */
 
   {
@@ -1680,3 +1681,7 @@ export const informationChiffreeBank: TutorBankItemV4[] = [
     },
   },
 ];
+
+// 28/10 : les micros de proportions et d'évolutions sont renforcées (générateurs
+// à nombreuses tournures) ; leurs anciens gabarits et leurs « open » sont retirés.
+export const informationChiffreeBank: TutorBankItemV4[] = fusionnerRenfort(anciens, renfortSeconde);

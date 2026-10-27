@@ -17,6 +17,7 @@
 // Les questions de lecture portent un diagramme ou une série affichée : on lit
 // avant de calculer.
 
+import { fusionnerRenfort, renfortPremiere } from "@/lib/tutor-v4/questionBank/seconde/maths/evolutions-lycee-renfort";
 import type { CanvasFigure, TutorBankItemV4, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
 import { CONTEXTES_SERIES, affirmationsSerie, tirerParts, trierAffirmations } from "./information-chiffree.bank";
 import type { Affirmation, ContexteSerie } from "./information-chiffree.bank";
@@ -480,7 +481,7 @@ const ITEMS_STAT_DONNEES: TutorBankItemV4[] = [
     }, ["diagramme"]),
 ];
 
-export const automatismesProportionsStatsBank: TutorBankItemV4[] = [
+const anciens: TutorBankItemV4[] = [
   /* ═══════════════ auto_prop_calculer / formes ═══════════════ */
 
   {
@@ -1024,3 +1025,7 @@ export const automatismesProportionsStatsBank: TutorBankItemV4[] = [
   // Les automatismes de probabilités (auto_proba_base) vivent dans
   // automatismes-probabilites.bank.ts depuis le 15/10/2026 (ids conservés).
 ];
+
+// 28/10 : les micros de proportions et d'évolutions sont renforcées (générateurs
+// à nombreuses tournures) ; leurs anciens gabarits et leurs « open » sont retirés.
+export const automatismesProportionsStatsBank: TutorBankItemV4[] = fusionnerRenfort(anciens, renfortPremiere.filter((i) => i.notionId === "auto_proportion" || i.notionId === "auto_partie_tout"));

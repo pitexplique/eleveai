@@ -1122,7 +1122,7 @@ export function genCoeffMult(mode: "short" | "qcm", sens: "hausse" | "baisse" | 
 }
 
 /** Du coefficient multiplicateur au pourcentage d'évolution. */
-function genCoeffVersTaux(taux: number[]) {
+export function genCoeffVersTaux(taux: number[]) {
   const s = randomChoice(EVOLUTIONS);
   const p = randomChoice(taux);
   const hausse = Math.random() < 0.5;
@@ -1148,7 +1148,7 @@ function genCoeffVersTaux(taux: number[]) {
 }
 
 /** Appliquer un coefficient multiplicateur. */
-function genAppliquerCoeff(taux: number[]) {
+export function genAppliquerCoeff(taux: number[]) {
   const { s, v, p, hausse, res, c } = tirerEvolution(taux);
   const w = mots(hausse);
   const text =

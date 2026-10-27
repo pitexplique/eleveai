@@ -26,6 +26,7 @@
 // pas du tout au programme de première générale. C'est l'écart le plus net
 // entre les deux voies.
 
+import { fusionnerRenfort, renfortStmg } from "@/lib/tutor-v4/questionBank/seconde/maths/evolutions-lycee-renfort";
 import type { CanvasFigure, TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 /* ─────────────────────────── outils ─────────────────────────── */
@@ -135,7 +136,7 @@ const GRANDEURS = [
   { nom: "le nombre d'abonnés", unite: "" },
 ] as const;
 
-export const proportionsEvolutionsBank: TutorBankItemV4[] = [
+const anciens: TutorBankItemV4[] = [
   /* ═══════════════════════ auto_prop_calculer ═══════════════════════ */
 
   {
@@ -2010,3 +2011,7 @@ export const proportionsEvolutionsBank: TutorBankItemV4[] = [
     },
   },
 ];
+
+// 28/10 : les micros de proportions et d'évolutions sont renforcées (générateurs
+// à nombreuses tournures) ; leurs anciens gabarits et leurs « open » sont retirés.
+export const proportionsEvolutionsBank: TutorBankItemV4[] = fusionnerRenfort(anciens, renfortStmg);

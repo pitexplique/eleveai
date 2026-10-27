@@ -16,6 +16,7 @@
 //   - des générateurs partout, du fixed seulement pour les pièges — celui de
 //     la baisse puis hausse de même taux se raconte, il ne se paramètre pas.
 
+import { fusionnerRenfort, renfortPremiere } from "@/lib/tutor-v4/questionBank/seconde/maths/evolutions-lycee-renfort";
 import type { CanvasFigure, TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 /* ─────────────────────────── outils ─────────────────────────── */
@@ -105,7 +106,7 @@ const BIENS = [
   { nom: "une paire de chaussures", unite: "€" },
 ] as const;
 
-export const evolutionsBank: TutorBankItemV4[] = [
+const anciens: TutorBankItemV4[] = [
   /* ═══════════════ auto_evo_additif_multiplicatif ═══════════════ */
 
   {
@@ -967,3 +968,7 @@ export const evolutionsBank: TutorBankItemV4[] = [
     },
   },
 ];
+
+// 28/10 : les micros de proportions et d'évolutions sont renforcées (générateurs
+// à nombreuses tournures) ; leurs anciens gabarits et leurs « open » sont retirés.
+export const evolutionsBank: TutorBankItemV4[] = fusionnerRenfort(anciens, renfortPremiere.filter((i) => i.notionId === "auto_coefficient_multiplicateur" || i.notionId === "auto_taux_evolution"));
