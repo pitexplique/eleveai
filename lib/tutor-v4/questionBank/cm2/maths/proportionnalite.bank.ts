@@ -1,3 +1,4 @@
+import { renfortPropCM } from "@/lib/tutor-v4/questionBank/cm2/maths/proportionnalite-cm-renfort";
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 function randomInt(min: number, max: number) {
@@ -17,7 +18,7 @@ function exp(
   return `Définition : ${definition}\n\nMéthode : ${methode}\n\nCalcul : ${calcul}\n\nConclusion : ${conclusion}`;
 }
 
-export const proportionnaliteBank: TutorBankItemV4[] = [
+const anciens: TutorBankItemV4[] = [
   // ============================================================
   // PROP_RECONNAITRE
   // ============================================================
@@ -415,4 +416,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       };
     },
   },
+];
+
+// 28/10 : les anciens gabarits (1 ou 2 phrases chacun, des questions « open »)
+// sont remplacés par le renfort (QCM ou réponse courte) ; on garde les items
+// figés, sauf les « open ».
+export const proportionnaliteBank: TutorBankItemV4[] = [
+  ...anciens.filter((item) => item.kind === "fixed" && (item as any).format !== "open"),
+  ...renfortPropCM("cm2"),
 ];

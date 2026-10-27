@@ -1,5 +1,6 @@
 // lib/tutor-v4/question-banks/maths/cm2/echelles.bank.ts
 
+import { renfortEchellesCM2 } from "@/lib/tutor-v4/questionBank/cm2/maths/proportionnalite-cm-renfort";
 import type {
   EchelleCanvasData,
   TutorBankItemV4,
@@ -96,7 +97,7 @@ function distancePlanCanvas(args: {
 // BANK
 // ============================================================
 
-export const echellesBank: TutorBankItemV4[] = [
+const anciens: TutorBankItemV4[] = [
   // ============================================================
   // ECHELLE_COMPRENDRE
   // ============================================================
@@ -2232,4 +2233,12 @@ export const echellesBank: TutorBankItemV4[] = [
       };
     },
   },
+];
+
+// 28/10 : les anciens gabarits (1 ou 2 phrases chacun, des questions « open »)
+// sont remplacés par le renfort (QCM ou réponse courte) ; on garde les items
+// figés, sauf les « open ».
+export const echellesBank: TutorBankItemV4[] = [
+  ...anciens.filter((item) => item.kind === "fixed" && (item as any).format !== "open"),
+  ...renfortEchellesCM2,
 ];

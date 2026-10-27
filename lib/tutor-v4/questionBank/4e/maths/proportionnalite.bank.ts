@@ -57,7 +57,7 @@ function formatNumber(n: number) {
   return Number.isInteger(n) ? String(n) : String(Math.round(n * 100) / 100);
 }
 
-function makeChoices(correct: string, wrongs: readonly string[]) {
+export function makeChoices(correct: string, wrongs: readonly string[]) {
   // Jamais deux fois la même ligne. Un gabarit dont le piège coïncide avec la
   // bonne réponse (les coordonnées inversées quand x = y, un arrondi égal à la
   // valeur de départ…) affichait la même proposition deux fois, et l'élève
@@ -72,7 +72,7 @@ function makeChoices(correct: string, wrongs: readonly string[]) {
   ).slice(0, 3);
   return shuffle([correct, ...distracteurs]);
 }
-function tableauProportionnaliteCanvas(params: {
+export function tableauProportionnaliteCanvas(params: {
   rowLabels: string[];
   values: string[][];
   missing: Array<{ row: number; col: number }>;
