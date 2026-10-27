@@ -11,7 +11,7 @@ import { QRCodeSVG } from "qrcode.react";
 import { useEleve } from "@/context/EleveContext";
 
 type Carte = { code_utilisateur: string; nom: string | null; mot_de_passe: string | null };
-type Classe = {
+export type Classe = {
   etablissement: string;
   nom_classe: string;
   code_etablissement: string;
@@ -45,10 +45,12 @@ export default function CartesClient() {
   if (erreur) return <p className="p-8 text-red-700">{erreur}</p>;
   if (!classe) return <p className="p-8 text-slate-500">Chargement…</p>;
 
-  const adresse = origine.replace(/^https?:\/\//, "");
-
   return (
-    <main className="mx-auto max-w-[21cm] bg-white p-4 print:p-0">
+    <main className="mx-auto max-w-[21cm] bg-white p-4 text-slate-950 print:p-0">
+      {/* ⛔ 27/10/2026 — Frédéric : « où sont code établissement, code utilisateur
+          et mot de passe ? non affichés lorsque je fais imprimer ». Les valeurs
+          prenaient la couleur claire du site (fond sombre) : invisibles sur le
+          papier blanc. Tout est forcé en noir ici. */}
       <div className="mb-4 flex items-center gap-3 print:hidden">
         <Link href="/prof/classes" className="text-sm font-semibold text-slate-600 hover:underline">
           ← Mes classes
@@ -61,41 +63,50 @@ export default function CartesClient() {
         </button>
       </div>
 
-      <div className="grid grid-cols-2 gap-0">
-        {classe.eleves.map((e) => {
-          const lien = `${origine}/auth/signin?etab=${encodeURIComponent(classe.code_etablissement)}&code=${encodeURIComponent(e.code_utilisateur)}`;
-          const prenom = e.nom && !/^Élève \d+$/.test(e.nom) ? e.nom : null;
-          return (
-            <div
-              key={e.code_utilisateur}
-              className="flex h-[5.4cm] break-inside-avoid items-center gap-3 border border-dashed border-slate-400 p-3"
-            >
-              <div className="min-w-0 flex-1">
-                <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">
-                  EleveAI · {classe.nom_classe}
-                </p>
-                <p className="truncate text-sm font-black text-slate-900">{prenom ?? " "}</p>
-                <dl className="mt-1 space-y-0.5 text-sm">
-                  <div className="flex gap-2">
-                    <dt className="w-24 text-slate-500">Établissement</dt>
-                    <dd className="font-mono text-base font-black">{classe.code_etablissement}</dd>
-                  </div>
-                  <div className="flex gap-2">
-                    <dt className="w-24 text-slate-500">Mon code</dt>
-                    <dd className="font-mono text-base font-black">{e.code_utilisateur}</dd>
-                  </div>
-                  <div className="flex gap-2">
-                    <dt className="w-24 text-slate-500">Mot de passe</dt>
-                    <dd className="font-mono text-base font-black">{e.mot_de_passe}</dd>
-                  </div>
-                </dl>
-                <p className="mt-1 text-[10px] text-slate-500">{adresse} → Se connecter</p>
-              </div>
-              <QRCodeSVG value={lien} size={92} level="M" />
-            </div>
-          );
-        })}
-      </div>
+      <PlancheCartes classe={classe} origine={origine} />
     </main>
+  );
+}
+
+// La planche elle-même (séparée le 27/10/2026 pour pouvoir l'imprimer en test
+// sans compte prof : scripts de contrôle de l'impression).
+export function PlancheCartes({ classe, origine }: { classe: Classe; origine: string }) {
+  const adresse = origine.replace(/^https?:\/\//, "");
+  return (
+        <div className="grid grid-cols-2 gap-0">
+          {classe.eleves.map((e) => {
+            const lien = `${origine}/auth/signin?etab=${encodeURIComponent(classe.code_etablissement)}&code=${encodeURIComponent(e.code_utilisateur)}`;
+            const prenom = e.nom && !/^Élève \d+$/.test(e.nom) ? e.nom : null;
+            return (
+              <div
+                key={e.code_utilisateur}
+                className="flex h-[5.4cm] break-inside-avoid items-center gap-3 border border-dashed border-slate-400 p-3"
+              >
+                <div className="min-w-0 flex-1">
+                  <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">
+                    EleveAI · {classe.nom_classe}
+                  </p>
+                  <p className="truncate text-sm font-black text-slate-900">{prenom ?? " "}</p>
+                  <dl className="mt-1 space-y-0.5 text-sm">
+                    <div className="flex gap-2">
+                      <dt className="w-24 text-slate-500">Établissement</dt>
+                      <dd className="font-mono text-lg font-black text-slate-950">{classe.code_etablissement}</dd>
+                    </div>
+                    <div className="flex gap-2">
+                      <dt className="w-24 text-slate-500">Mon code</dt>
+                      <dd className="font-mono text-lg font-black text-slate-950">{e.code_utilisateur}</dd>
+                    </div>
+                    <div className="flex gap-2">
+                      <dt className="w-24 text-slate-500">Mot de passe</dt>
+                      <dd className="font-mono text-lg font-black text-slate-950">{e.mot_de_passe}</dd>
+                    </div>
+                  </dl>
+                  <p className="mt-1 text-[10px] text-slate-500">{adresse} → Se connecter</p>
+                </div>
+                <QRCodeSVG value={lien} size={92} level="M" />
+              </div>
+            );
+          })}
+        </div>
   );
 }

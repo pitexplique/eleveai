@@ -106,13 +106,36 @@ export function prefixeDeClasse(nomClasse: string): string {
   return (compact || "CL").slice(0, 4);
 }
 
-/** Code de classe libre en base : « LAC6A », puis « LAC6A2 », « LAC6A3 »… */
+// ⭐ 27/10/2026 — Frédéric : « établissement : collège Saint-Joseph, il devrait
+// taper 3 lettres max », puis « on peut demander 5 lettres à la saisie tout
+// simplement ». Le code commence par le SIGLE de l'établissement, pas par le
+// nom du prof : celui que le prof a tapé (5 lettres au plus), sinon les
+// initiales du nom, sans les petits mots (« Collège Saint-Joseph » → « CSJ »).
+const PETITS_MOTS = new Set(["DE", "DU", "DES", "LA", "LE", "LES", "D", "L", "ET", "AU", "AUX", "EN"]);
+export function sigleEtablissement(etablissement: string): string {
+  const mots = etablissement
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toUpperCase()
+    .split(/[^A-Z]+/)
+    .filter(Boolean);
+  if (mots.length === 1 && mots[0].length <= 5) return mots[0];
+  return mots
+    .filter((m) => !PETITS_MOTS.has(m))
+    .map((m) => m[0])
+    .join("")
+    .slice(0, 3);
+}
+
+/** Code de classe libre en base : « CSJ6A », puis « CSJ6A2 », « CSJ6A3 »… */
 export async function codeDeClasseLibre(
   admin: SupabaseClient,
   prof: ProfVerifie,
-  prefixe: string
+  prefixe: string,
+  etablissement = "",
+  sigle = ""
 ): Promise<string> {
-  const base = troisLettres(prof.nom, prof.email) + prefixe;
+  const base = (sigleEtablissement(sigle) || sigleEtablissement(etablissement) || troisLettres(prof.nom, prof.email)) + prefixe;
   for (let n = 1; n < 100; n++) {
     const code = n === 1 ? base : `${base}${n}`;
     const [{ count: c1 }, { count: c2 }] = await Promise.all([

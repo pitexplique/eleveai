@@ -51,6 +51,9 @@ export default function MesClassesClient() {
   const [envoi, setEnvoi] = useState(false);
 
   const [etablissement, setEtablissement] = useState("");
+  // ⭐ 27/10/2026 — Frédéric : « l'élève devrait taper 3 lettres max », « on peut
+  // demander 5 lettres à la saisie tout simplement » : le sigle commence le code.
+  const [sigle, setSigle] = useState("");
   const [nomClasse, setNomClasse] = useState("");
   const [niveau, setNiveau] = useState("6e");
   const [nbEleves, setNbEleves] = useState(30);
@@ -90,6 +93,7 @@ export default function MesClassesClient() {
       },
       body: JSON.stringify({
         etablissement,
+        sigle,
         nom_classe: nomClasse,
         niveau,
         nb_eleves: nbEleves,
@@ -163,15 +167,29 @@ export default function MesClassesClient() {
           <h2 className="text-lg font-black text-slate-900 sm:col-span-2">
             Nouvelle classe
           </h2>
-          <label className="space-y-1 text-sm font-semibold text-slate-800 sm:col-span-2">
+          <label className="space-y-1 text-sm font-semibold text-slate-800">
             Établissement
             <input
               required
               value={etablissement}
               onChange={(e) => setEtablissement(e.target.value)}
-              placeholder="Collège Dimitile, Entre-Deux"
+              placeholder="Collège Saint-Joseph"
               className="w-full rounded-lg border border-slate-300 px-3 py-2 font-normal"
             />
+          </label>
+          <label className="space-y-1 text-sm font-semibold text-slate-800">
+            Sigle (5 lettres au plus)
+            <input
+              value={sigle}
+              onChange={(e) => setSigle(e.target.value.toUpperCase().replace(/[^A-Z]/g, "").slice(0, 5))}
+              placeholder="CSJ"
+              maxLength={5}
+              className="w-full rounded-lg border border-slate-300 px-3 py-2 font-mono font-normal uppercase"
+            />
+            <span className="block text-xs font-normal text-slate-500">
+              Le code que tapent les élèves commence par lui : {(sigle || "CSJ") + "6A"}. Vide : les initiales de
+              l&apos;établissement.
+            </span>
           </label>
           <label className="space-y-1 text-sm font-semibold text-slate-800">
             Nom de la classe

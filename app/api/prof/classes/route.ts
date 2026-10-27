@@ -83,7 +83,8 @@ export async function POST(req: Request) {
   }
 
   const prefixe = prefixeDeClasse(nomClasse);
-  const code = await codeDeClasseLibre(admin, p.prof, prefixe);
+  const sigle = String(body.sigle ?? "").toUpperCase().replace(/[^A-Z]/g, "").slice(0, 5);
+  const code = await codeDeClasseLibre(admin, p.prof, prefixe, etablissement, sigle);
 
   const { data: classe, error: errClasse } = await admin
     .from("classes_prof")
