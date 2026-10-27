@@ -98,6 +98,15 @@ export default function ModeTableau({ notion, classe, micros }: Props) {
                 </div>
                 <div className="flex min-h-0 flex-1 flex-col rounded-3xl border-[4px] border-slate-400 p-[2vw]">
                   <p className="text-[2vw] font-black uppercase tracking-wide text-slate-400">Ce que nous avons retenu</p>
+                  {/* « en mode classe il n'affiche pas les traits » (27/10) : des
+                      lignes d'écriture, larges pour se lire au fond de la salle. */}
+                  <div
+                    className="mt-[1vh] min-h-0 flex-1"
+                    style={{
+                      backgroundImage:
+                        "repeating-linear-gradient(to bottom, transparent 0, transparent calc(8vh - 2px), #94a3b8 calc(8vh - 2px), #94a3b8 8vh)",
+                    }}
+                  />
                 </div>
               </div>
             )}
