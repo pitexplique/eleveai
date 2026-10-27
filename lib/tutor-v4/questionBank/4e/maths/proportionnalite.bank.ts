@@ -126,7 +126,7 @@ function fr(n: number) {
  * ⚠️ Plus de forme « 1.3 » en tête : le contrôle commun refuse le point décimal.
  */
 const UNITES_MESURE = new Set(["€", "km", "m", "cm", "g", "kg", "L", "mL", "kWh", "m²", "h", "min", "%", "Go", "tonnes", "hectares"]);
-function attendu(n: number, u = "") {
+export function attendu(n: number, u = "") {
   const unite = u === "minutes" ? "min" : u === "heures" ? "h" : u;
   if (!UNITES_MESURE.has(unite)) return [fr(n)];
   const enLettres = unite === "min" ? [`${fr(n)} minutes`] : unite === "h" ? [`${fr(n)} heures`] : [];
@@ -615,7 +615,7 @@ const ENONCES_TABLEAU = [
 ];
 
 /** Quatrième proportionnelle : on donne un couple, on demande B (ou A). */
-function genQuatrieme(niveau: 1 | 2 | 3) {
+export function genQuatrieme(niveau: 1 | 2 | 3) {
   const s = randomChoice(SITUATIONS);
   const { k, n1, n2, m1, m2 } = tirerPaire(s, niveau);
   const t = randomInt(1, 6);
@@ -664,7 +664,7 @@ function genQuatrieme(niveau: 1 | 2 | 3) {
 }
 
 /** Compléter un tableau de proportionnalité (canvas ou tableau décrit). */
-function genTableau(niveau: 1 | 2 | 3) {
+export function genTableau(niveau: 1 | 2 | 3) {
   const s = randomChoice(SITUATIONS);
   const { k, n1, n2, m1, m2 } = tirerPaire(s, niveau);
   // niveau 1 : la case vide est toujours en bas ; ensuite, une fois sur deux en haut.
@@ -710,7 +710,7 @@ function genTableau(niveau: 1 | 2 | 3) {
 }
 
 /** Coefficient de proportionnalité (valeur pour une unité), ou son usage. */
-function genCoeff(niveau: 1 | 2 | 3) {
+export function genCoeff(niveau: 1 | 2 | 3) {
   const s = randomChoice(SITUATIONS);
   const k = randomChoice(s.k);
   const [lo, hi] = s.n;
@@ -763,7 +763,7 @@ function rapportTexte(m: number, n: number) {
 }
 
 /** Reconnaître une situation de proportionnalité (oui / non). */
-function genReconnaitre(niveau: 1 | 2 | 3) {
+export function genReconnaitre(niveau: 1 | 2 | 3) {
   const s = randomChoice(SITUATIONS);
   const prop = Math.random() < 0.5;
   const { k, n1, n2 } = tirerPaire(s, niveau === 1 ? 1 : 2);
@@ -812,7 +812,7 @@ function genReconnaitre(niveau: 1 | 2 | 3) {
 }
 
 /** Problèmes : produit en croix, retour à la grandeur A, différence, somme. */
-function genProbleme(niveau: 3 | 4) {
+export function genProbleme(niveau: 3 | 4) {
   const s = randomChoice(SITUATIONS);
   const t = randomInt(1, 4);
   if (niveau === 3 || t <= 2) {
@@ -893,7 +893,7 @@ const ELEVES: Array<[string, "il" | "elle"]> = [
 ];
 
 /** Défi : un élève affirme un résultat ; a-t-il raison ? */
-function genAffirmation(niveau: 2 | 3) {
+export function genAffirmation(niveau: 2 | 3) {
   const s = randomChoice(SITUATIONS);
   let { k, n1, n2, m1, m2 } = tirerPaire(s, niveau);
   if (n2 < n1) {
@@ -940,7 +940,7 @@ function genAffirmation(niveau: 2 | 3) {
 }
 
 /** Défi : comparer deux situations par leur valeur pour une unité. */
-function genComparer(niveau: 2 | 3) {
+export function genComparer(niveau: 2 | 3) {
   const s = randomChoice(SITUATIONS);
   const kA = randomChoice(s.k);
   const pareil = Math.random() < 0.2;
@@ -1032,7 +1032,7 @@ const mots = (hausse: boolean) =>
     : { verbe: "diminue", nomEvol: "baisse", participe: "diminué", taux: "de diminution" };
 
 /** Nouvelle valeur après une évolution. */
-function genNouvelleValeur(taux: number[]) {
+export function genNouvelleValeur(taux: number[]) {
   const { s, v, p, hausse, res, c } = tirerEvolution(taux);
   const w = mots(hausse);
   const t = randomInt(1, 3);
@@ -1055,7 +1055,7 @@ function genNouvelleValeur(taux: number[]) {
 }
 
 /** Pourcentage d'évolution entre deux valeurs. */
-function genTauxEvolution(taux: number[]) {
+export function genTauxEvolution(taux: number[]) {
   const { s, v, p, hausse, res } = tirerEvolution(taux);
   const w = mots(hausse);
   const pron = s.genre === "m" ? "il" : "elle";
@@ -1079,7 +1079,7 @@ function genTauxEvolution(taux: number[]) {
 }
 
 /** Coefficient multiplicateur d'une évolution. mode : "short" ou "qcm". */
-function genCoeffMult(mode: "short" | "qcm", sens: "hausse" | "baisse" | "mixte", taux: number[]) {
+export function genCoeffMult(mode: "short" | "qcm", sens: "hausse" | "baisse" | "mixte", taux: number[]) {
   const s = randomChoice(EVOLUTIONS);
   const p = randomChoice(taux);
   const hausse = sens === "mixte" ? Math.random() < 0.5 : sens === "hausse";
@@ -1170,7 +1170,7 @@ function genAppliquerCoeff(taux: number[]) {
 }
 
 /** Deux évolutions successives. memeTaux : +p puis −p (ou l'inverse). */
-function genSuccessives(memeTaux: boolean) {
+export function genSuccessives(memeTaux: boolean) {
   const taux = [10, 20, 25, 30, 50];
   for (let essai = 0; essai < 300; essai++) {
     const s = randomChoice(EVOLUTIONS);
@@ -1226,7 +1226,7 @@ function libelleEvol(g: number) {
 }
 
 /** Deux évolutions successives → l'évolution globale, en QCM. */
-function genTauxGlobal() {
+export function genTauxGlobal() {
   const taux = [10, 20, 25, 30, 40, 50];
   for (let essai = 0; essai < 300; essai++) {
     const s = randomChoice(EVOLUTIONS);
@@ -1288,7 +1288,7 @@ const RETOURS: { h: boolean; a: number; b: number }[] = [
   { h: false, a: 80, b: 400 },
 ];
 
-function genRetour() {
+export function genRetour() {
   for (let essai = 0; essai < 300; essai++) {
     const s = randomChoice(EVOLUTIONS);
     const v = randomChoice(s.valeurs);
@@ -1322,7 +1322,7 @@ function genRetour() {
 }
 
 /** Valeur finale connue après deux évolutions → valeur de départ, à rebours. */
-function genDepart() {
+export function genDepart() {
   const taux = [10, 20, 25, 50];
   for (let essai = 0; essai < 400; essai++) {
     const s = randomChoice(EVOLUTIONS);
@@ -1359,7 +1359,7 @@ function genDepart() {
 }
 
 /** « 0,975 correspond à une baisse de ? » — taux à virgule, coefficient au millième. */
-function genCoeffMillieme() {
+export function genCoeffMillieme() {
   // Taux en dixièmes de pour cent : 25 = 2,5 %.
   const dixiemes = [5, 15, 25, 35, 45, 75, 125, 175, 225, 8, 12, 32];
   const s = randomChoice(EVOLUTIONS);
@@ -1672,7 +1672,7 @@ function tirerPourcentage(taux: number[]) {
  * Pourcentages. types : "partie" (p % de N), "aide" (avec la fraction),
  * "taux" (quel pourcentage ?), "total" (retrouver le tout), "fraction" (QCM).
  */
-function genPourcentage(types: Array<"partie" | "aide" | "taux" | "total" | "fraction">, taux: number[]) {
+export function genPourcentage(types: Array<"partie" | "aide" | "taux" | "total" | "fraction">, taux: number[]) {
   const type = randomChoice(types);
   const tauxUtiles = type === "aide" || type === "fraction" ? taux.filter((p) => FRACTIONS_POURCENT[p]) : taux;
   const { s, N, p, x } = tirerPourcentage(tauxUtiles.length ? tauxUtiles : [10, 25, 50]);
@@ -1808,7 +1808,7 @@ function tirerComparaison(taux: number[]) {
 }
 
 /** p % de N, de tête : sans contexte, dans une partie d'un tout, ou dans une comparaison. */
-function genMental(taux: MentalP[], sources: Array<"nu" | "partie" | "comparaison">) {
+export function genMental(taux: MentalP[], sources: Array<"nu" | "partie" | "comparaison">) {
   const source = randomChoice(sources);
   const tauxPartie = taux.filter((p) => p <= 30);
   let text: string;

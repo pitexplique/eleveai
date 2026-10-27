@@ -1,6 +1,7 @@
 // lib/tutor-v4/question-banks/maths/3e/proportionnalite.bank.ts
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { proportionnaliteRenfort3e } from "./proportionnalite-renfort";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -14,7 +15,7 @@ function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
 }
 
-export const proportionnaliteBank: TutorBankItemV4[] = [
+const anciens3e: TutorBankItemV4[] = [
 
 /* =========================
    PROP_RECONNAITRE
@@ -1792,4 +1793,10 @@ ${x2} → ?`,
     "Conclusion : le prix initial était $80$ €.",
   tags: ["prop_proportionnalite", "defi", "evolution", "short"],
 },
+];
+// 28/10 : les anciens gabarits (1 ou 2 phrases chacun) sont remplacés par le
+// renfort ; on garde les items figés.
+export const proportionnaliteBank: TutorBankItemV4[] = [
+  ...anciens3e.filter((item) => item.kind === "fixed"),
+  ...proportionnaliteRenfort3e,
 ];
