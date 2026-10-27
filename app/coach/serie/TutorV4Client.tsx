@@ -13,6 +13,7 @@ import {
 import Link from "next/link";
 import { saveResultat } from "@/lib/resultats";
 import { useEleve } from "@/context/EleveContext";
+import { signalerActivite } from "@/lib/activite";
 
 type EleveSession = {
   acces_id?: string | null;
@@ -1438,6 +1439,14 @@ function continueAfterExplanation() {
 
       // Bandeau persistant : présent tant qu'on est en remédiation, null sinon.
       setRemediationState(typed.remediation ?? null);
+
+      // Pour la page « En direct » du prof (élèves d'une classe seulement).
+      signalerActivite(eleve?.token, {
+        type: "coach",
+        ressource: currentMicro,
+        libelle: currentMicroLabel,
+        juste: typed.result.ok,
+      });
 
       setSessionResults((prev) => [...prev, typed.result.ok]);
       setPossiblePoints((prev) => prev + pointsForQuestion);

@@ -14,6 +14,8 @@
 
 import Link from "next/link";
 import { useRef, useState, type VideoHTMLAttributes } from "react";
+import { useEleve } from "@/context/EleveContext";
+import { signalerActivite } from "@/lib/activite";
 
 const COUPE_FIN = 3.6; // secondes retirées à la fin : « Et abonne-toi ! »
 
@@ -27,9 +29,13 @@ export default function LecteurVideo({ videoId, children, suite, ...props }: Pro
   const compte = useRef(false);
   const ref = useRef<HTMLVideoElement>(null);
   const [fini, setFini] = useState(false);
+  // Élève connecté : son prof voit la vidéo sur la page « En direct ».
+  const { eleve } = useEleve();
+  const finSignalee = useRef(false);
   const signaler = () => {
     if (compte.current) return;
     compte.current = true;
+    signalerActivite(eleve?.token, { type: "video_debut", ressource: videoId });
     const corps = JSON.stringify({ id: videoId });
     try {
       if (!navigator.sendBeacon?.("/api/video-vue", new Blob([corps], { type: "application/json" }))) {
@@ -43,6 +49,10 @@ export default function LecteurVideo({ videoId, children, suite, ...props }: Pro
     if (v.currentTime >= v.duration - COUPE_FIN) {
       v.pause();
       setFini(true);
+      if (!finSignalee.current) {
+        finSignalee.current = true;
+        signalerActivite(eleve?.token, { type: "video_fin", ressource: videoId });
+      }
     }
   };
   const revoir = () => {
