@@ -1,0 +1,101 @@
+"use client";
+
+// Les CARTES DE CONNEXION d'une classe, à imprimer et découper : 10 par A4.
+// Chaque carte porte le code de la classe, le code de l'élève, son mot de
+// passe et un QR qui ouvre /auth/signin déjà rempli — il ne reste que le mot
+// de passe à taper. Page sans habillage (components/MasqueSurEmbed.tsx).
+
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { QRCodeSVG } from "qrcode.react";
+import { useEleve } from "@/context/EleveContext";
+
+type Carte = { code_utilisateur: string; nom: string | null; mot_de_passe: string | null };
+type Classe = {
+  etablissement: string;
+  nom_classe: string;
+  code_etablissement: string;
+  eleves: Carte[];
+};
+
+export default function CartesClient() {
+  const { eleve: user } = useEleve();
+  const [classe, setClasse] = useState<Classe | null>(null);
+  const [erreur, setErreur] = useState<string | null>(null);
+  const [origine, setOrigine] = useState("https://eleveai.fr");
+
+  useEffect(() => {
+    setOrigine(window.location.origin);
+    const code = new URLSearchParams(window.location.search).get("code")?.toUpperCase() ?? "";
+    if (!user?.token) return;
+    fetch("/api/prof/classes", { headers: { Authorization: `Bearer ${user.token}` } })
+      .then((r) => r.json())
+      .then((d) => {
+        if (!d?.ok) return setErreur(d?.error ?? "Impossible de charger la classe.");
+        const c = (d.classes ?? []).find((x: Classe) => x.code_etablissement === code);
+        if (!c) return setErreur("Classe introuvable.");
+        setClasse(c);
+      })
+      .catch(() => setErreur("Impossible de charger la classe."));
+  }, [user?.token]);
+
+  if (!user) {
+    return <p className="p-8">Connecte-toi pour imprimer les cartes de ta classe.</p>;
+  }
+  if (erreur) return <p className="p-8 text-red-700">{erreur}</p>;
+  if (!classe) return <p className="p-8 text-slate-500">Chargement…</p>;
+
+  const adresse = origine.replace(/^https?:\/\//, "");
+
+  return (
+    <main className="mx-auto max-w-[21cm] bg-white p-4 print:p-0">
+      <div className="mb-4 flex items-center gap-3 print:hidden">
+        <Link href="/prof/classes" className="text-sm font-semibold text-slate-600 hover:underline">
+          ← Mes classes
+        </Link>
+        <button
+          onClick={() => window.print()}
+          className="ml-auto rounded-xl bg-slate-900 px-4 py-2 text-sm font-bold text-white hover:bg-slate-700"
+        >
+          🖨️ Imprimer
+        </button>
+      </div>
+
+      <div className="grid grid-cols-2 gap-0">
+        {classe.eleves.map((e) => {
+          const lien = `${origine}/auth/signin?etab=${encodeURIComponent(classe.code_etablissement)}&code=${encodeURIComponent(e.code_utilisateur)}`;
+          const prenom = e.nom && !/^Élève \d+$/.test(e.nom) ? e.nom : null;
+          return (
+            <div
+              key={e.code_utilisateur}
+              className="flex h-[5.4cm] break-inside-avoid items-center gap-3 border border-dashed border-slate-400 p-3"
+            >
+              <div className="min-w-0 flex-1">
+                <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">
+                  EleveAI · {classe.nom_classe}
+                </p>
+                <p className="truncate text-sm font-black text-slate-900">{prenom ?? " "}</p>
+                <dl className="mt-1 space-y-0.5 text-sm">
+                  <div className="flex gap-2">
+                    <dt className="w-24 text-slate-500">Établissement</dt>
+                    <dd className="font-mono text-base font-black">{classe.code_etablissement}</dd>
+                  </div>
+                  <div className="flex gap-2">
+                    <dt className="w-24 text-slate-500">Mon code</dt>
+                    <dd className="font-mono text-base font-black">{e.code_utilisateur}</dd>
+                  </div>
+                  <div className="flex gap-2">
+                    <dt className="w-24 text-slate-500">Mot de passe</dt>
+                    <dd className="font-mono text-base font-black">{e.mot_de_passe}</dd>
+                  </div>
+                </dl>
+                <p className="mt-1 text-[10px] text-slate-500">{adresse} → Se connecter</p>
+              </div>
+              <QRCodeSVG value={lien} size={92} level="M" />
+            </div>
+          );
+        })}
+      </div>
+    </main>
+  );
+}

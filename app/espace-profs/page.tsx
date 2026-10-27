@@ -133,6 +133,12 @@ export default function EnseignantsPage() {
             >
               📊 Accéder à mon tableau de bord
             </Link>
+            <Link
+              href="/prof/classes"
+              className="rounded-2xl border-2 border-emerald-600 bg-white px-7 py-3.5 text-base font-black text-emerald-700 shadow-lg transition hover:bg-emerald-50 hover:scale-105"
+            >
+              🏫 Créer mes classes
+            </Link>
             {/* ⛔⛔ « DÉPLOYER DANS MON COLLÈGE » RETIRÉ LE 29/08/2026 — on ne
                 vend plus aux établissements (Frédéric : « c'est du pénal »).
                 ⚠️ LA PAGE PROF, ELLE, NE BOUGE PAS : c'est une décision explicite

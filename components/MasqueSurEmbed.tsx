@@ -19,7 +19,9 @@ import { usePathname } from "next/navigation";
 // un dirigeant, puis qu'on lui imprime. Un menu « Élèves · Parents ·
 // Enseignants » au-dessus d'un audit d'hôtel dit exactement le contraire de ce
 // que le document essaie d'établir — et il partirait sur le papier.
-const SANS_HABILLAGE = ["/embed", "/ia", "/devis"];
+// 27/10/2026 : /prof/cartes rejoint la liste — les cartes de connexion des
+// élèves partent sur le papier, sans le menu du site.
+const SANS_HABILLAGE = ["/embed", "/ia", "/devis", "/prof/cartes"];
 
 // Les générateurs d'audit forment une FAMILLE — /audit-commission aujourd'hui,
 // d'autres ensuite. On les masque par préfixe plutôt qu'un par un : sinon le

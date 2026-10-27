@@ -152,6 +152,19 @@ export default function SignInPage() {
 
     if (params.get("inscription") === "1") setModeInscription(true);
 
+    // 27/10/2026 — LE QR DES CARTES ÉLÈVES (/prof/cartes) arrive ici avec
+    // ?etab=LAC6A&code=6A07 : l'élève n'a plus que son mot de passe à taper.
+    const etab = params.get("etab");
+    const codeU = params.get("code");
+    if (etab) setCodeEtablissement(normalizeCode(etab));
+    if (codeU) setCodeUtilisateur(normalizeCode(codeU));
+    if (etab && codeU) {
+      setTimeout(() => {
+        document.getElementById("connexion-etablissement")?.scrollIntoView({ block: "center" });
+        document.getElementById("mot-de-passe-etablissement")?.focus();
+      }, 50);
+    }
+
     // ⚠️ CHEMIN INTERNE UNIQUEMENT. « /quelque-chose », jamais « //autre.site »
     // ni « https://… » : accepter une URL absolue ici, c'est offrir une
     // redirection ouverte — un lien qui porte notre nom de domaine et qui
@@ -859,7 +872,7 @@ export default function SignInPage() {
               )}
 
               {/* ✅ AJOUT : CONNEXION ÉTABLISSEMENT (sous la partie email) */}
-              <div className="mt-5 border-t border-slate-200 pt-5">
+              <div id="connexion-etablissement" className="mt-5 border-t border-slate-200 pt-5">
                 <h2 className="text-sm font-semibold text-slate-900">
                   Connexion établissement
                 </h2>
@@ -902,6 +915,7 @@ export default function SignInPage() {
                     </label>
                     <div className="relative">
                       <input
+                        id="mot-de-passe-etablissement"
                         type={showPassword ? "text" : "password"}
                         value={motDePasse}
                         onChange={(e) => setMotDePasse(e.target.value.toUpperCase())}
