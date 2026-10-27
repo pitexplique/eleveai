@@ -411,11 +411,12 @@ export default function DashboardProfClient() {
             </div>
             <div className="flex flex-wrap gap-2">
               {[
+                // ⭐ 27/10/2026 — Frédéric : « dans le dashboard prof tu enlèves English
+                // et tu mets Coach en premier, de toute façon on le refera plus tard ».
+                { href: "/coach-ia/maths", label: "🧠 Coach", color: "bg-indigo-100 text-indigo-900 ring-1 ring-indigo-200" },
                 { href: "/parcours", label: "🛤️ Évaluation annuelle", color: "bg-violet-100 text-violet-900 ring-1 ring-violet-200" },
                 { href: "/calcul-rapide", label: "⚡ Calcul", color: "bg-lime-100 text-lime-900 ring-1 ring-lime-200" },
                 { href: "/defis-du-jour", label: "🎯 Défis", color: "bg-orange-100 text-orange-900 ring-1 ring-orange-200" },
-                { href: "/english-maths", label: "🇬🇧 English", color: "bg-sky-100 text-sky-900 ring-1 ring-sky-200" },
-                { href: "/coach-ia/maths", label: "🧠 Coach", color: "bg-indigo-100 text-indigo-900 ring-1 ring-indigo-200" },
               ].map((l) => (
                 <Link key={l.href} href={l.href}
                   className={`rounded-2xl ${l.color} px-4 py-2 text-sm font-black shadow-sm hover:brightness-95 transition`}>
@@ -439,7 +440,7 @@ export default function DashboardProfClient() {
                 { label: "Élèves actifs", value: totalActifs, color: "text-sky-400", sub: "≥ 1 activité" },
                 { label: "Activités totales", value: totalActivites, color: "text-amber-400", sub: "Tous modules" },
                 { label: "Moyenne établ.", value: moyenneEtab !== null ? `${moyenneEtab} %` : "—", color: "text-purple-400", sub: "Parcours·Calcul·Défis·EN" },
-                { label: "Modules suivis", value: 5, color: "text-pink-400", sub: "Parcours·Calcul·Défis·EN·Coach" },
+                { label: "Modules suivis", value: 4, color: "text-pink-400", sub: "Coach·Parcours·Calcul·Défis" },
               ].map((s) => (
                 <div key={s.label} className="rounded-[2rem] bg-white p-5 text-slate-950 shadow-xl">
                   <p className="text-xs font-black uppercase text-slate-500">{s.label}</p>
@@ -604,11 +605,11 @@ export default function DashboardProfClient() {
                         <th className="px-4 py-3 font-black text-center">🏖️ Vacances</th>
                         <th className="px-4 py-3 font-black text-center">Activités</th>
                         <th className="px-4 py-3 font-black text-center">Moyenne</th>
+                        <th className="px-4 py-3 font-black text-center">🧠 Coach</th>
                         <th className="px-4 py-3 font-black text-center">🛤️ Évaluation</th>
                         <th className="px-4 py-3 font-black text-center">⚡ Calcul</th>
                         <th className="px-4 py-3 font-black text-center">🎯 Défis</th>
-                        <th className="px-4 py-3 font-black text-center">🇬🇧 EN</th>
-                        <th className="px-4 py-3 font-black text-center">🧠 Coach</th>
+
                       </tr>
                     </thead>
                     <tbody>
@@ -633,6 +634,9 @@ export default function DashboardProfClient() {
                               <PctBadge pct={s.moyenneGlobale} />
                             </td>
                             <td className="px-4 py-3 text-center text-xs font-bold text-slate-600">
+                              {s.tutor.length > 0 ? `${s.tutor.length} sess.` : <span className="text-slate-300">—</span>}
+                            </td>
+                            <td className="px-4 py-3 text-center text-xs font-bold text-slate-600">
                               {s.parcours.length > 0 ? `${s.parcours.length} sess.` : <span className="text-slate-300">—</span>}
                             </td>
                             <td className="px-4 py-3 text-center text-xs font-bold text-slate-600">
@@ -640,12 +644,6 @@ export default function DashboardProfClient() {
                             </td>
                             <td className="px-4 py-3 text-center text-xs font-bold text-slate-600">
                               {s.defis.length > 0 ? `${s.defis.length}` : <span className="text-slate-300">—</span>}
-                            </td>
-                            <td className="px-4 py-3 text-center text-xs font-bold text-slate-600">
-                              {s.english.length > 0 ? `${s.english.length}` : <span className="text-slate-300">—</span>}
-                            </td>
-                            <td className="px-4 py-3 text-center text-xs font-bold text-slate-600">
-                              {s.tutor.length > 0 ? `${s.tutor.length} sess.` : <span className="text-slate-300">—</span>}
                             </td>
                           </tr>
 
@@ -655,6 +653,7 @@ export default function DashboardProfClient() {
                               <td colSpan={10} className="bg-blue-50 px-4 pb-4 pt-2">
                                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                                   {[
+                                    { label: "Dernier Coach", value: s.dernierTutor ? `${s.dernierTutor.score_sur_20 ?? "??"}/20 · ${s.dernierTutor.notion_id}` : "—" },
                                     { label: "Dernière évaluation", value: s.dernierParcours ? `${matiereLabel(s.dernierParcours.matiere)} · ${s.dernierParcours.score}/${s.dernierParcours.total} · ${formatDate(s.dernierParcours.created_at)}` : "—" },
                                     {
                                       label: "Évaluations par matière",
@@ -671,9 +670,7 @@ export default function DashboardProfClient() {
                                     },
                                     { label: "Dernier calcul", value: s.dernierCalcul ? `${s.dernierCalcul.score}/${s.dernierCalcul.total} · ${formatDate(s.dernierCalcul.created_at)}` : "—" },
                                     { label: "Dernier défi", value: s.dernierDefi ? `${s.dernierDefi.score}/${s.dernierDefi.total} · ${formatDate(s.dernierDefi.created_at)}` : "—" },
-                                    { label: "Dernier English", value: s.dernierEnglish ? `${s.dernierEnglish.score}/${s.dernierEnglish.total} · ${s.dernierEnglish.theme ?? ""}` : "—" },
                                     { label: "Dernière dictée", value: s.dernierDictee ? `${s.dernierDictee.score}/${s.dernierDictee.total} · ${formatDate(s.dernierDictee.created_at)}` : "—" },
-                                    { label: "Dernier Coach", value: s.dernierTutor ? `${s.dernierTutor.score_sur_20 ?? "??"}/20 · ${s.dernierTutor.notion_id}` : "—" },
                                   ].map((d) => (
                                     <div key={d.label} className="rounded-2xl bg-white p-3 shadow-sm">
                                       <p className="text-xs font-black uppercase text-slate-400">{d.label}</p>
@@ -717,6 +714,27 @@ export default function DashboardProfClient() {
             {/* ACTIVITÉ RÉCENTE */}
             <div className="grid gap-4 lg:grid-cols-2">
               <div className="rounded-[2rem] bg-white p-6 text-slate-950 shadow-xl">
+                <h2 className="mb-4 text-xl font-black">🧠 Dernières séances Coach</h2>
+                {resultatsTutor.length === 0 ? (
+                  <p className="text-sm font-bold text-slate-400">Aucune séance Coach enregistrée.</p>
+                ) : (
+                  <div className="space-y-2">
+                    {resultatsTutor.slice(0, 6).map((r) => (
+                      <div key={r.id} className="flex items-center justify-between rounded-2xl bg-slate-50 px-4 py-3">
+                        <div>
+                          <p className="text-sm font-black">{r.nom ?? r.code_utilisateur}</p>
+                          <p className="text-xs font-bold text-slate-500">{r.notion_id} · {r.classe} · {formatDate(r.created_at)}</p>
+                        </div>
+                        <span className="rounded-full bg-indigo-100 px-3 py-1 text-xs font-black text-indigo-800">
+                          {r.score_sur_20 ?? "—"}/20
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <div className="rounded-[2rem] bg-white p-6 text-slate-950 shadow-xl">
                 <h2 className="mb-4 text-xl font-black">🛤️ Dernières évaluations</h2>
                 {resultatsParcours.length === 0 ? (
                   <p className="text-sm font-bold text-slate-400">Aucune évaluation enregistrée.</p>
@@ -748,46 +766,6 @@ export default function DashboardProfClient() {
                           <p className="text-xs font-bold text-slate-500">{r.titre_session ?? r.theme ?? "Session"} · {formatDate(r.created_at)}</p>
                         </div>
                         <PctBadge pct={getPct(r.score, r.total)} />
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              <div className="rounded-[2rem] bg-white p-6 text-slate-950 shadow-xl">
-                <h2 className="mb-4 text-xl font-black">🇬🇧 Derniers English Maths</h2>
-                {resultatsEnglish.length === 0 ? (
-                  <p className="text-sm font-bold text-slate-400">Aucun défi English enregistré.</p>
-                ) : (
-                  <div className="space-y-2">
-                    {resultatsEnglish.slice(0, 6).map((r) => (
-                      <div key={r.id} className="flex items-center justify-between rounded-2xl bg-slate-50 px-4 py-3">
-                        <div>
-                          <p className="text-sm font-black">{r.nom ?? r.code_utilisateur}</p>
-                          <p className="text-xs font-bold text-slate-500">{r.theme ?? `Jour ${r.jour}`} · {formatDate(r.created_at)}</p>
-                        </div>
-                        <PctBadge pct={getPct(r.score, r.total)} />
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              <div className="rounded-[2rem] bg-white p-6 text-slate-950 shadow-xl">
-                <h2 className="mb-4 text-xl font-black">🧠 Dernières séances Coach</h2>
-                {resultatsTutor.length === 0 ? (
-                  <p className="text-sm font-bold text-slate-400">Aucune séance Coach enregistrée.</p>
-                ) : (
-                  <div className="space-y-2">
-                    {resultatsTutor.slice(0, 6).map((r) => (
-                      <div key={r.id} className="flex items-center justify-between rounded-2xl bg-slate-50 px-4 py-3">
-                        <div>
-                          <p className="text-sm font-black">{r.nom ?? r.code_utilisateur}</p>
-                          <p className="text-xs font-bold text-slate-500">{r.notion_id} · {r.classe} · {formatDate(r.created_at)}</p>
-                        </div>
-                        <span className="rounded-full bg-indigo-100 px-3 py-1 text-xs font-black text-indigo-800">
-                          {r.score_sur_20 ?? "—"}/20
-                        </span>
                       </div>
                     ))}
                   </div>
