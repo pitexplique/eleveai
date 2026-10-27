@@ -172,6 +172,10 @@ export default function VideosClient({
 }) {
   const [classe, setClasse] = useState<string>("");
   const [recherche, setRecherche] = useState("");
+  // ⭐ 27/10/2026 — l'accueil envoie sur /video?classe=6e : tant que l'adresse
+  // n'est pas lue, on n'affiche pas la vue « Toutes » qui clignotait avant de
+  // laisser place à la classe demandée.
+  const [lu, setLu] = useState(false);
 
   // Lecture puis écriture de ?classe= sans recharger la page.
   useEffect(() => {
@@ -181,6 +185,7 @@ export default function VideosClient({
     // ?q= : posé par la recherche de l'en-tête (« vidéo pythagore », 19/10).
     const q = p.get("q");
     if (q) setRecherche(q);
+    setLu(true);
   }, []);
   const choisir = (c: string) => {
     setClasse(c);
@@ -287,21 +292,12 @@ export default function VideosClient({
         </label>
       </div>
 
-      {facon === "netflix" ? (
+      {!lu ? (
+        <div className="mt-6 h-[60vh]" aria-hidden="true" />
+      ) : facon === "netflix" ? (
         <>
-          {paysage || short ? (
-            <section className="mt-4">
-              <h2 className="text-lg font-black text-slate-800">À la une</h2>
-              <div className="mt-2 grid items-start gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,14rem)]">
-                {paysage ? <LecteurUne v={paysage} /> : null}
-                {short ? (
-                  <div className="mx-auto w-full max-w-[14rem]">
-                    <LecteurUne v={short} short />
-                  </div>
-                ) : null}
-              </div>
-            </section>
-          ) : null}
+          {/* ⛔ 27/10/2026 — Frédéric : « enlever vidéo à la une » (on arrive de
+              l'accueil pour SA classe, pas pour la vidéo du jour). */}
 
           {rangees.map(({ c, liste }) => (
             <section key={c} className="mt-8">

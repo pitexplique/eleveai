@@ -44,6 +44,8 @@ const CYCLES = [
   { titre: "Collège", classes: [["3e", "3e"], ["4e", "4e"], ["5e", "5e"], ["6e", "6e"]] },
   { titre: "Primaire", classes: [["cm2", "CM2"], ["cm1", "CM1"], ["ce2", "CE2"], ["ce1", "CE1"], ["cp", "CP"]] },
 ] as const;
+// Les clés de la galerie /video ne sont pas celles du coach au lycée.
+const CLASSE_VIDEO: Record<string, string> = { "terminale-spe": "terminale", "premiere-spe": "premiere", premiere: "premiere-commun" };
 const NOM_CLASSE = new Map<string, string>(CYCLES.flatMap((c) => c.classes.map(([id, l]) => [id, l] as [string, string])));
 
 const PROFILS: { id: Profil; label: string; Icone: typeof Backpack }[] = [
@@ -402,8 +404,11 @@ export default function AccueilNouveau(props: {
               {/* ⭐ DEUX PORTES D'ENTRÉE (Frédéric, 23/10 : « soit l'élève commence
                   avec le coach, soit avec la vidéo, car quand il regarde la vidéo,
                   la fiche d'exercices, le cours et le coach sont proposés »). */}
+              {/* ⭐ 27/10/2026 — Frédéric : « commencer par une vidéo doit envoyer au
+                  répertoire vidéo et sélectionner la classe en fonction du choix
+                  de l'accueil ». */}
               <a
-                href="#videos-classe"
+                href={`/video?classe=${CLASSE_VIDEO[classeVideos] ?? classeVideos}`}
                 onClick={() => track("accueil_clic", { bloc: "porte-video" })}
                 className="inline-flex items-center gap-2 rounded-full px-5 py-3 font-black text-teal-700 ring-2 ring-teal-700 hover:bg-teal-50"
               >
