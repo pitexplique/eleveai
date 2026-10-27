@@ -506,6 +506,10 @@ function PastilleFiche({
   );
 }
 
+function nouvelIdSeance(): string {
+  return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+}
+
 export default function TutorV4Page() {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -1173,6 +1177,10 @@ function continueAfterExplanation() {
     if (!activeNotion) return;
 
     try {
+      // La séance qui se termine part avant d'être remise à zéro.
+      enregistrerEnSilenceRef.current();
+      seanceIdRef.current = nouvelIdSeance();
+      dernierEnregistreRef.current = 0;
       setBusy(true);
       setAnswer("");
       setSessionResults([]);
@@ -1608,6 +1616,73 @@ function handleInputKeyDown(
     void jumpToMicro(microId);
   }
 
+  // ENREGISTREMENT AUTOMATIQUE DE LA SÉANCE (27/10/2026). Jusqu'ici, une
+  // séance n'arrivait dans resultats_tutor que si l'élève cliquait
+  // « Enregistrer » — presque jamais. Le bilan par micro du prof
+  // (/prof/classes/bilan) restait vide. Désormais la séance s'enregistre
+  // toute seule toutes les 5 réponses, quand l'élève change de notion, et
+  // quand il quitte la page. Chaque envoi porte le CUMUL et le seance_id :
+  // /api/resultats remplace la version précédente, jamais de doublon.
+  const seanceIdRef = useRef<string>(nouvelIdSeance());
+  const dernierEnregistreRef = useRef(0);
+
+  function contenuSeance() {
+    return {
+      classe,
+      matiere,
+      notion_id: notion,
+      mode,
+      score_sur_20:
+        nbTentatives > 0 ? parseFloat(((bonnesReponses / nbTentatives) * 20).toFixed(1)) : 0,
+      earned_points: earnedPoints,
+      possible_points: possiblePoints,
+      bonnes_reponses: bonnesReponses,
+      nb_tentatives: nbTentatives,
+      temps_sec: elapsedSeconds,
+      details: {
+        seance_id: seanceIdRef.current,
+        notionLabel: notionLabel(notion, classe, matiere),
+        microStatuses,
+        microScores,
+        aReviser: aReviserList,
+        badges: visibleProgress.unlockedStars,
+        savedAt: new Date().toISOString(),
+      },
+    };
+  }
+
+  // Lu par les écouteurs de sortie de page : toujours la séance du dernier rendu.
+  const enregistrerEnSilenceRef = useRef<() => void>(() => {});
+  enregistrerEnSilenceRef.current = () => {
+    if (!eleve?.token || nbTentatives === 0 || nbTentatives === dernierEnregistreRef.current) return;
+    dernierEnregistreRef.current = nbTentatives;
+    // keepalive : l'envoi survit à la fermeture de l'onglet.
+    fetch("/api/resultats", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token: eleve.token, type: "tutor", resultat: contenuSeance() }),
+      keepalive: true,
+    }).catch(() => {});
+  };
+
+  useEffect(() => {
+    if (nbTentatives > 0 && nbTentatives % 5 === 0) enregistrerEnSilenceRef.current();
+  }, [nbTentatives]);
+
+  useEffect(() => {
+    const quitter = () => enregistrerEnSilenceRef.current();
+    const cache = () => {
+      if (document.visibilityState === "hidden") quitter();
+    };
+    window.addEventListener("pagehide", quitter);
+    document.addEventListener("visibilitychange", cache);
+    return () => {
+      window.removeEventListener("pagehide", quitter);
+      document.removeEventListener("visibilitychange", cache);
+      quitter(); // navigation dans le site : le composant se démonte
+    };
+  }, []);
+
   async function enregistrerSeance() {
     setSaveMessage(null);
 
@@ -1631,31 +1706,8 @@ function handleInputKeyDown(
 
     setSaving(true);
 
-    const scoreSur20 = nbTentatives > 0
-      ? parseFloat(((bonnesReponses / nbTentatives) * 20).toFixed(1))
-      : 0;
-
     // Insert via /api/resultats : identité prise dans le jeton de session.
-    const { error } = await saveResultat(eleve, "tutor", {
-      classe,
-      matiere,
-      notion_id: notion,
-      mode,
-      score_sur_20: scoreSur20,
-      earned_points: earnedPoints,
-      possible_points: possiblePoints,
-      bonnes_reponses: bonnesReponses,
-      nb_tentatives: nbTentatives,
-      temps_sec: elapsedSeconds,
-      details: {
-        notionLabel: notionLabel(notion, classe, matiere),
-        microStatuses,
-        microScores,
-        aReviser: aReviserList,
-        badges: visibleProgress.unlockedStars,
-        savedAt: new Date().toISOString(),
-      },
-    });
+    const { error } = await saveResultat(eleve, "tutor", contenuSeance());
 
     setSaving(false);
 
@@ -1665,6 +1717,7 @@ function handleInputKeyDown(
       return;
     }
 
+    dernierEnregistreRef.current = nbTentatives;
     setSaveMessage("Séance enregistrée ✅");
   }
 

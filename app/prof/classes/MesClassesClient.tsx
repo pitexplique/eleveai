@@ -252,6 +252,12 @@ export default function MesClassesClient() {
                   🟢 En direct
                 </Link>
                 <Link
+                  href={`/prof/classes/bilan?code=${encodeURIComponent(c.code_etablissement)}`}
+                  className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-bold text-slate-800 hover:bg-slate-50"
+                >
+                  📊 Bilan
+                </Link>
+                <Link
                   href={`/prof/cartes?code=${encodeURIComponent(c.code_etablissement)}`}
                   className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-bold text-white hover:bg-slate-700"
                 >

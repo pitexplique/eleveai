@@ -155,6 +155,26 @@ export async function POST(req: Request) {
       process.env.SUPABASE_SERVICE_ROLE_KEY!
     );
 
+    // UNE SÉANCE DU COACH = UNE LIGNE, MÊME ENREGISTRÉE PLUSIEURS FOIS
+    // (27/10/2026). Le coach s'enregistre désormais tout seul (toutes les 5
+    // réponses, et quand l'élève quitte la page), en plus du bouton : chaque
+    // enregistrement porte le cumul de la séance et son seance_id. On efface
+    // la version précédente avant d'écrire la nouvelle — sinon le bilan du
+    // prof, le bulletin et le profil compteraient la même séance deux fois.
+    const seanceId =
+      String(body.type) === "tutor" &&
+      typeof (resultat.details as any)?.seance_id === "string"
+        ? String((resultat.details as any).seance_id).slice(0, 64)
+        : null;
+    if (seanceId) {
+      await supabaseAdmin
+        .from(activite.table)
+        .delete()
+        .eq("code_etablissement", session.code_etablissement)
+        .eq("code_utilisateur", session.code_utilisateur)
+        .eq("details->>seance_id", seanceId);
+    }
+
     const { error } = await supabaseAdmin.from(activite.table).insert(row);
     if (error) throw error;
 
