@@ -186,6 +186,10 @@ const espaces = [
 const infos = [
   { label: "Pourquoi EleveAI", href: "/pourquoi-eleveai" },
   { label: "Préparer les maths du CRPE", href: "/formation-crpe" },
+  // 28/10 : sortis du menu du compte, ils vivent ici (pages ouvertes à tous).
+  { label: "Donner mon avis", href: "/votre-avis" },
+  { label: "Signaler une erreur", href: "/signaler-une-erreur" },
+  { label: "Devenir bêta testeur", href: "/devenir-beta-testeur" },
   { label: "Qui sommes-nous", href: "/qui-sommes-nous" },
   { label: "Charte d'usage de l'IA", href: "/charte" },
   /* ⛔⛔ « TARIFS » ET « POURQUOI NOS TARIFS SONT JUSTES » RETIRÉS LE

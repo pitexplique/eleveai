@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import VotreAvisClient from "./VotreAvisClient";
-import {
-  getElevesALHonneur,
-  getAmeliorationsALHonneur,
-} from "@/lib/ameliorations/honneurServer";
+import { getAmeliorationsALHonneur } from "@/lib/ameliorations/honneurServer";
 
-// Le palmarès « élèves à l'honneur » est rechargé au plus toutes les heures.
+// Le mur des améliorations est rechargé au plus toutes les heures.
+// 28/10 : la rubrique « élèves à l'honneur » est retirée de cette page (Frédéric).
 // 04/08 : 5 minutes → 1 heure, pour la même raison que l'accueil (quota ISR
 // Reads à 75 %). Un palmarès n'a pas besoin d'être à la minute — un élève qui
 // vient de laisser son avis se voit apparaître au prochain passage.
@@ -18,9 +16,6 @@ export const metadata: Metadata = {
 };
 
 export default async function VotreAvisPage() {
-  const [honneur, ameliorations] = await Promise.all([
-    getElevesALHonneur(),
-    getAmeliorationsALHonneur(),
-  ]);
-  return <VotreAvisClient honneur={honneur} ameliorations={ameliorations} />;
+  const ameliorations = await getAmeliorationsALHonneur();
+  return <VotreAvisClient ameliorations={ameliorations} />;
 }

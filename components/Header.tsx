@@ -404,12 +404,23 @@ function MenuCompte({
           </div>
 
           <div className={`border-t px-1 pt-1 ${paper ? "border-[#1d1c16]/10" : "border-white/10"}`}>
+            {/* 28/10 : le menu mène au TRAVAIL (classes, coach, fiches) ;
+                avis, erreurs et bêta testeurs sont au pied de page.
+                Les deux lignes « classe » : profs seulement. */}
             {[
               { label: "Tableau de bord", href: dashboardHref },
-              { label: "Mon évaluation annuelle", href: "/parcours" },
-              { label: "Donner mon avis", href: "/votre-avis" },
-              { label: "Signaler une erreur", href: "/signaler-une-erreur" },
-              { label: "Devenir bêta testeur", href: "/devenir-beta-testeur" },
+              ...(estEleve
+                ? []
+                : [
+                    { label: "Créer une classe", href: "/prof/classes#nouvelle-classe" },
+                    { label: "Gérer une classe", href: "/prof/classes" },
+                  ]),
+              { label: "Coach", href: "/coach-ia/maths" },
+              { label: "Évaluation", href: "/parcours" },
+              { label: "Automatismes", href: "/automatismes-maths" },
+              { label: "Fiches d'exercices", href: "/fiches-exercices" },
+              { label: "Fiches de cours", href: "/fiches-cours" },
+              { label: "Cartes mentales", href: "/cartes-mentales" },
             ].map((l) => (
               <Link
                 key={l.href}
@@ -524,9 +535,6 @@ export default function Header() {
       : eleveClasse
         ? `Élève · ${eleveClasse}`
         : "Élève";
-  const dashboardColor = isStaff
-    ? "bg-gradient-to-r from-blue-300 to-indigo-300"
-    : "bg-gradient-to-r from-emerald-300 to-cyan-300";
 
 
   // Le guide de survie de SA classe — et le sommaire quand sa classe en a
@@ -898,32 +906,9 @@ export default function Header() {
         <div className="col-start-3 flex items-center gap-1.5 justify-self-end">
           {eleve ? (
             <>
-              {/* « MON ESPACE » plutôt que le nom et la classe (07/08).
-                  Le bouton affichait « MARIE DUPONT · 4C » en pastille verte
-                  au milieu de la barre : le nom d'un élève, en grand, sur un
-                  écran souvent partagé en classe. Le nom vit maintenant dans le
-                  menu du compte, là où on va exprès. */}
-              <Link
-                prefetch={false}
-                href={dashboardHref}
-                className={`hidden items-center gap-2 rounded-full px-3.5 py-2 text-sm font-black shadow-lg transition hover:brightness-110 lg:inline-flex ${
-                  paper ? "bg-teal-700 text-white" : `${dashboardColor} text-[#041B33]`
-                }`}
-              >
-                <GraduationCap className="h-4 w-4" />
-                Mon espace
-              </Link>
-              <Link
-                prefetch={false}
-                href="/besoin-de-vous"
-                className={`hidden items-center rounded-full px-3 py-2 text-sm font-black transition lg:inline-flex ${
-                  paper
-                    ? "text-[#1d1c16]/85 hover:bg-[#1d1c16]/10"
-                    : "text-white/85 hover:bg-white/15 hover:text-white"
-                }`}
-              >
-                Participer
-              </Link>
+              {/* 28/10 : « Mon espace » et « Participer » retirés de la barre
+                  (Frédéric) : le tableau de bord est la 1re ligne du menu du
+                  compte ; avis, erreurs et bêta testeurs passent au pied de page. */}
               <div className="hidden lg:block">
                 <MenuCompte
                   nom={eleveLabel}
@@ -1114,7 +1099,7 @@ export default function Header() {
                     className={`flex items-center gap-2 text-sm font-black ${paper ? "text-[#1d1c16]" : "text-white"}`}
                   >
                     <GraduationCap className={`h-4 w-4 ${paper ? "text-cyan-800" : "text-emerald-300"}`} />
-                    Mon espace
+                    Tableau de bord
                   </Link>
                   <button
                     type="button"
@@ -1130,9 +1115,6 @@ export default function Header() {
                   </button>
                 </div>
                 <div className={`mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs font-bold ${paper ? "text-[#1d1c16]/70" : "text-white/70"}`}>
-                  <Link prefetch={false} href="/besoin-de-vous" onClick={() => setMobileOpen(false)}>
-                    Participer
-                  </Link>
                   <Link prefetch={false} href="/votre-avis" onClick={() => setMobileOpen(false)}>
                     Donner mon avis
                   </Link>

@@ -161,8 +161,9 @@ export default function MesClassesClient() {
         )}
 
         <form
+          id="nouvelle-classe"
           onSubmit={creer}
-          className="mt-6 grid gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:grid-cols-2"
+          className="mt-6 scroll-mt-24 grid gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:grid-cols-2"
         >
           <h2 className="text-lg font-black text-slate-900 sm:col-span-2">
             Nouvelle classe

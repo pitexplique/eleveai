@@ -8,8 +8,6 @@ import {
   ameliorationsRealisees,
   type AmeliorationRealisee,
 } from "@/lib/ameliorations/realisees";
-import ElevesALHonneur from "@/components/ameliorations/ElevesALHonneur";
-import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 
 type EmailUser = {
   auth_user_id: string;
@@ -70,10 +68,8 @@ const PAGES = [
 ];
 
 export default function VotreAvisClient({
-  honneur,
   ameliorations,
 }: {
-  honneur?: EleveALHonneur[];
   ameliorations?: AmeliorationRealisee[];
 }) {
   const { eleve } = useEleve();
@@ -236,9 +232,6 @@ export default function VotreAvisClient({
           </header>
         </div>
       </section>
-
-      {/* ÉLÈVES À L'HONNEUR */}
-      <ElevesALHonneur eleves={honneur} />
 
       {/* VOUS L'AVEZ DEMANDÉ → C'EST FAIT */}
       <section className="mx-auto max-w-4xl px-4 pt-10 sm:pt-12">
