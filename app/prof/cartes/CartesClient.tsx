@@ -39,6 +39,32 @@ export default function CartesClient() {
       .catch(() => setErreur("Impossible de charger la classe."));
   }, [user?.token]);
 
+  const [pdfEnCours, setPdfEnCours] = useState(false);
+  const [erreurPdf, setErreurPdf] = useState<string | null>(null);
+
+  async function telecharger() {
+    if (!user?.token || !classe) return;
+    setPdfEnCours(true);
+    setErreurPdf(null);
+    try {
+      const res = await fetch(
+        `/api/prof/classes/cartes-pdf?code=${encodeURIComponent(classe.code_etablissement)}`,
+        { headers: { Authorization: `Bearer ${user.token}` } },
+      );
+      if (!res.ok) throw new Error();
+      const url = URL.createObjectURL(await res.blob());
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `cartes-eleveai-${classe.nom_classe}-${classe.code_etablissement}.pdf`;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 10_000);
+    } catch {
+      setErreurPdf("Le PDF n'a pas pu être fabriqué. Réessaie, ou utilise « Imprimer ».");
+    } finally {
+      setPdfEnCours(false);
+    }
+  }
+
   if (!user) {
     return <p className="p-8">Connecte-toi pour imprimer les cartes de ta classe.</p>;
   }
@@ -55,13 +81,30 @@ export default function CartesClient() {
         <Link href="/prof/classes" className="text-sm font-semibold text-slate-600 hover:underline">
           ← Mes classes
         </Link>
+        {/* ⭐ 28/10 « Télécharger en PDF » (Frédéric : « plus simple que
+            imprimer en PDF ») : un clic, le fichier arrive. Le PDF est
+            fabriqué par le serveur (lib/server/cartesPdf.ts). */}
+        <button
+          onClick={telecharger}
+          disabled={pdfEnCours}
+          className="ml-auto flex items-center gap-2 rounded-xl bg-emerald-600 px-4 py-2 text-sm font-bold text-white hover:bg-emerald-500 disabled:cursor-wait"
+        >
+          {pdfEnCours && (
+            <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" strokeOpacity="0.3" strokeWidth="4" />
+              <path d="M22 12a10 10 0 0 0-10-10" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+            </svg>
+          )}
+          {pdfEnCours ? "Préparation du PDF…" : "📄 Télécharger en PDF"}
+        </button>
         <button
           onClick={() => window.print()}
-          className="ml-auto rounded-xl bg-slate-900 px-4 py-2 text-sm font-bold text-white hover:bg-slate-700"
+          className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-bold text-white hover:bg-slate-700"
         >
           🖨️ Imprimer
         </button>
       </div>
+      {erreurPdf && <p className="mb-4 text-sm text-red-700 print:hidden">{erreurPdf}</p>}
 
       <PlancheCartes classe={classe} origine={origine} />
     </main>
