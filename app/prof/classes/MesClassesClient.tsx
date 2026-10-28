@@ -58,8 +58,24 @@ export default function MesClassesClient() {
   const [niveau, setNiveau] = useState("6e");
   const [nbEleves, setNbEleves] = useState(30);
 
+  // ⭐ 28/10 : un bouton qui ne réagit pas, c'est pire qu'un message. Sans
+  // jeton (session ancienne ou simulée), on le DIT au lieu de rester muet.
+  const SANS_JETON =
+    "Ta session ne permet pas de créer de classe : déconnecte-toi puis reconnecte-toi avec ton adresse académique.";
+
+  // Le bouton s'allume quand tout ce qui est obligatoire est rempli.
+  const complet =
+    etablissement.trim() !== "" &&
+    nomClasse.trim() !== "" &&
+    nbEleves >= 1 &&
+    nbEleves <= 40;
+
   const charger = useCallback(async () => {
-    if (!token) return;
+    if (!token) {
+      setErreur(SANS_JETON);
+      setClasses([]);
+      return;
+    }
     const res = await fetch("/api/prof/classes", {
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -82,32 +98,41 @@ export default function MesClassesClient() {
 
   async function creer(e: FormEvent) {
     e.preventDefault();
-    if (!token) return;
-    setEnvoi(true);
-    setErreur(null);
-    const res = await fetch("/api/prof/classes", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        etablissement,
-        sigle,
-        nom_classe: nomClasse,
-        niveau,
-        nb_eleves: nbEleves,
-      }),
-    });
-    const d = await res.json().catch(() => ({}));
-    setEnvoi(false);
-    if (!res.ok || !d?.ok) {
-      setErreur(d?.error ?? "Création impossible.");
+    if (!token) {
+      setErreur(SANS_JETON);
       return;
     }
-    setNomClasse("");
-    setOuverte(d.code_etablissement);
-    await charger();
+    if (!complet || envoi) return;
+    setEnvoi(true);
+    setErreur(null);
+    try {
+      const res = await fetch("/api/prof/classes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          etablissement,
+          sigle,
+          nom_classe: nomClasse,
+          niveau,
+          nb_eleves: nbEleves,
+        }),
+      });
+      const d = await res.json().catch(() => ({}));
+      if (!res.ok || !d?.ok) {
+        setErreur(d?.error ?? "Création impossible.");
+        return;
+      }
+      setNomClasse("");
+      setOuverte(d.code_etablissement);
+      await charger();
+    } catch {
+      setErreur("Le serveur ne répond pas. Vérifie ta connexion et réessaie.");
+    } finally {
+      setEnvoi(false);
+    }
   }
 
   async function agir(code: string, body: Record<string, unknown>) {
@@ -228,14 +253,34 @@ export default function MesClassesClient() {
               className="w-full rounded-lg border border-slate-300 px-3 py-2 font-normal"
             />
           </label>
-          <div className="flex items-end">
+          <div className="flex flex-col justify-end gap-1.5">
+            {/* 28/10 (Frédéric) : gris tant qu'il manque un champ, en
+                surbrillance quand tout est rempli, roue pendant la création. */}
             <button
               type="submit"
-              disabled={envoi}
-              className="w-full rounded-xl bg-emerald-600 px-5 py-2.5 font-bold text-white hover:bg-emerald-500 disabled:opacity-60"
+              disabled={!complet || envoi}
+              aria-busy={envoi}
+              className={`flex w-full items-center justify-center gap-2 rounded-xl px-5 py-2.5 font-bold transition ${
+                envoi
+                  ? "cursor-wait bg-emerald-600 text-white"
+                  : complet
+                    ? "bg-emerald-600 text-white shadow-lg shadow-emerald-600/30 ring-4 ring-emerald-200 hover:bg-emerald-500"
+                    : "cursor-not-allowed bg-slate-200 text-slate-500"
+              }`}
             >
-              {envoi ? "Création…" : "Créer la classe"}
+              {envoi && (
+                <svg className="h-5 w-5 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeOpacity="0.3" strokeWidth="4" />
+                  <path d="M22 12a10 10 0 0 0-10-10" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+                </svg>
+              )}
+              {envoi ? "Création de la classe…" : "Créer la classe"}
             </button>
+            {!complet && !envoi && (
+              <span className="text-center text-xs text-slate-500">
+                Remplis l&apos;établissement, le nom de la classe et le nombre d&apos;élèves (1 à 40).
+              </span>
+            )}
           </div>
         </form>
 
