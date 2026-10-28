@@ -31,3 +31,31 @@ export async function lireTotalReponsesCoach(): Promise<number | null> {
     return null;
   }
 }
+
+// Une réponse FAUSSE, telle que l'élève l'a tapée, sans aucune identité
+// (supabase/coach_reponses_fausses.sql). Lue et supprimée dans
+// /admin/reponses-fausses. Purge des 30 jours, une fois sur cent : un élève
+// peut taper son prénom dans la case.
+export async function noterReponseFausse(
+  q: { classe: string; matiere: string; microId: string; questionId: string; enonce: string; attendu: string[] },
+  reponse: string
+) {
+  try {
+    const db = admin();
+    await db.from("coach_reponses_fausses").insert({
+      classe: q.classe.slice(0, 40),
+      matiere: q.matiere.slice(0, 40),
+      micro_id: q.microId.slice(0, 120),
+      question_id: q.questionId.slice(0, 160),
+      enonce: q.enonce.slice(0, 400),
+      attendu: q.attendu.join(" | ").slice(0, 200) || null,
+      reponse: reponse.trim().slice(0, 120),
+    });
+    if (Math.random() < 0.01) {
+      await db
+        .from("coach_reponses_fausses")
+        .delete()
+        .lt("created_at", new Date(Date.now() - 30 * 86_400_000).toISOString());
+    }
+  } catch {}
+}

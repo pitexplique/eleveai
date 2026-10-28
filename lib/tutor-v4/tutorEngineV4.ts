@@ -1262,6 +1262,13 @@ export async function answerTutorV4(
       notionMastery: session.masteryByNotion,
       microMastery: session.masteryByMicro,
     },
-    compte: { classe: session.classe, matiere: session.matiere, microId: chosenOption.microId },
+    compte: {
+      classe: session.classe,
+      matiere: session.matiere,
+      microId: chosenOption.microId,
+      questionId: chosenOption.id,
+      enonce: chosenOption.text,
+      attendu: chosenOption.expected,
+    },
   };
 }

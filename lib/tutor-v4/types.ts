@@ -453,9 +453,17 @@ export type AnswerTutorV4Response = {
     notionMastery: MasteryMap;
     microMastery: MasteryMap;
   };
-  /** Pour le compteur des réponses (lib/server/compteurCoach.ts) : lu et
-      retiré par /api/coach/answer, jamais envoyé au navigateur. */
-  compte?: { classe: string; matiere: string; microId: string };
+  /** Pour le compteur des réponses et le relevé des réponses fausses
+      (lib/server/compteurCoach.ts) : lu et retiré par /api/coach/answer,
+      jamais envoyé au navigateur. */
+  compte?: {
+    classe: string;
+    matiere: string;
+    microId: string;
+    questionId: string;
+    enonce: string;
+    attendu: string[];
+  };
 };
 
 /* =========================================================

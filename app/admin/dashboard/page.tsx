@@ -129,6 +129,17 @@ export default async function AdminDashboardPage() {
         </Link>
 
         <Link
+          href="/admin/reponses-fausses"
+          className="block rounded-xl border border-orange-700 bg-orange-900/30 p-4 transition hover:bg-orange-900/50"
+        >
+          <p className="font-bold text-orange-300">✗ Réponses fausses au coach</p>
+          <p className="mt-1 text-sm text-slate-400">
+            Ce que les élèves ont tapé de faux, question par question, sans identité :
+            un format refusé à tort se voit ici. Supprimer une fois corrigé.
+          </p>
+        </Link>
+
+        <Link
           href="/admin/signalements"
           className="block rounded-xl border border-sky-700 bg-sky-900/30 p-4 transition hover:bg-sky-900/50"
         >

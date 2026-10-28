@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse, after } from "next/server";
 import { answerTutorV4 } from "@/lib/tutor-v4/tutorEngineV4";
-import { compterReponseCoach } from "@/lib/server/compteurCoach";
+import { compterReponseCoach, noterReponseFausse } from "@/lib/server/compteurCoach";
 
 export async function POST(req: NextRequest) {
   try {
@@ -16,9 +16,13 @@ export async function POST(req: NextRequest) {
 
     const result = await answerTutorV4(sessionId, answer);
 
-    // Le compteur façon IXL : après la réponse, sans la retarder.
+    // Le compteur façon IXL, et la réponse tapée si elle est fausse
+    // (/admin/reponses-fausses) : après la réponse, sans la retarder.
     const compte = result.compte;
-    if (compte) after(() => compterReponseCoach(compte.classe, compte.matiere, compte.microId, result.result.ok));
+    if (compte) {
+      after(() => compterReponseCoach(compte.classe, compte.matiere, compte.microId, result.result.ok));
+      if (!result.result.ok) after(() => noterReponseFausse(compte, answer));
+    }
 
     return NextResponse.json({ ...result, compte: undefined });
   } catch (error) {
