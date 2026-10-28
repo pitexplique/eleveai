@@ -6,6 +6,9 @@
 // sont connectés ; ici la connexion n'est pas obligatoire, donc le compteur
 // est ANONYME : toute réponse corrigée compte (supabase/coach_reponses.sql).
 // ⛔ On n'affiche que le TOTAL, jamais le nombre de bonnes réponses.
+// ⛔ PAS EN HAUT DU COACH (retiré le 28/10, Frédéric) : « chaque élève va
+// croire que c'est lui ». Il vit dans le pied de page, et dit « par tous les
+// élèves ».
 //
 // Le total est relu toutes les 30 s ; entre deux lectures, le nombre monte
 // un par un jusqu'à la nouvelle valeur, pour qu'on le voie bouger.
@@ -100,7 +103,7 @@ export default function CompteurReponsesCoach({
           <strong className={["font-bold tabular-nums", sombre ? "text-white" : "text-slate-800"].join(" ")}>
             {affiche.toLocaleString("fr-FR")}
           </strong>{" "}
-          {affiche > 1 ? "questions répondues" : "question répondue"} au coach&nbsp;!
+          {affiche > 1 ? "questions répondues" : "question répondue"} au coach par tous les élèves&nbsp;!
         </>
       ) : null}
     </p>
