@@ -34,6 +34,7 @@ import { ficheExercicesHrefPourCoach } from "@/lib/fiches-exercices/registre";
 import { estShortVideo, lienVideo } from "@/lib/videos/lienVideo";
 import { ficheClasseSource, ficheHrefPourCoach, libelleClasse } from "@/lib/fiches/registre";
 import { useNotionsPliees } from "@/components/coach/useNotionsPliees";
+import CompteurReponsesCoach from "@/components/coach/CompteurReponsesCoach";
 import { track } from "@vercel/analytics";
 
 /* ⭐ 13/09/2026 — LA COLONNE SE LIT DE LA TERMINALE AU CP (Frédéric : « plutôt
@@ -730,6 +731,8 @@ export default function CoachIA() {
                 <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 sm:text-base">
                   Séries d&apos;exercices avec correction et score&nbsp;!
                 </p>
+                <CompteurReponsesCoach className="mt-2" />
+
               </div>
 
               <div className="flex flex-wrap gap-2">

@@ -1,5 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse, after } from "next/server";
 import { answerTutorV4 } from "@/lib/tutor-v4/tutorEngineV4";
+import { compterReponseCoach } from "@/lib/server/compteurCoach";
 
 export async function POST(req: NextRequest) {
   try {
@@ -15,7 +16,11 @@ export async function POST(req: NextRequest) {
 
     const result = await answerTutorV4(sessionId, answer);
 
-    return NextResponse.json(result);
+    // Le compteur façon IXL : après la réponse, sans la retarder.
+    const compte = result.compte;
+    if (compte) after(() => compterReponseCoach(compte.classe, compte.matiere, compte.microId, result.result.ok));
+
+    return NextResponse.json({ ...result, compte: undefined });
   } catch (error) {
     console.error("Tutor V4 answer error:", error);
 
