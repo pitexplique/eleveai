@@ -361,7 +361,6 @@ function MenuCompte({
     return () => document.removeEventListener("mousedown", handle);
   }, []);
 
-  const initiales = nom.trim().slice(0, 2).toUpperCase() || "?";
 
   return (
     <div ref={ref} className="relative">
@@ -369,22 +368,16 @@ function MenuCompte({
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        aria-label="Mon compte"
-        className={`inline-flex items-center gap-1.5 rounded-full p-0.5 pr-2 transition ${
-          paper ? "hover:bg-[#1d1c16]/10" : "hover:bg-white/15"
+        aria-label="Mon espace"
+        className={`inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-sm font-black shadow-lg transition hover:brightness-110 ${
+          paper ? "bg-teal-700 text-white" : "bg-cyan-300 text-[#041B33]"
         }`}
       >
-        <span
-          className={`flex h-8 w-8 items-center justify-center rounded-full text-xs font-black ${
-            paper ? "bg-teal-700 text-white" : "bg-cyan-300 text-[#041B33]"
-          }`}
-        >
-          {initiales}
-        </span>
+        {/* 28/10 : « Mon espace » à la place des initiales (Frédéric). */}
+        <GraduationCap className="h-4 w-4" />
+        Mon espace
         <ChevronDown
-          className={`h-3.5 w-3.5 transition-transform ${open ? "rotate-180" : ""} ${
-            paper ? "text-[#1d1c16]/60" : "text-white/70"
-          }`}
+          className={`h-3.5 w-3.5 transition-transform ${open ? "rotate-180" : ""}`}
         />
       </button>
 
