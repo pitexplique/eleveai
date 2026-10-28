@@ -5,23 +5,37 @@
 // réponses au coach comme IXL, ça bouge en direct ! ». Chez IXL, les élèves
 // sont connectés ; ici la connexion n'est pas obligatoire, donc le compteur
 // est ANONYME : toute réponse corrigée compte (supabase/coach_reponses.sql).
+// ⛔ On n'affiche que le TOTAL, jamais le nombre de bonnes réponses.
 //
-// Le total est relu toutes les 10 s ; entre deux lectures, le nombre monte
+// Le total est relu toutes les 30 s ; entre deux lectures, le nombre monte
 // un par un jusqu'à la nouvelle valeur, pour qu'on le voie bouger.
-// Rien ne s'affiche tant que le SQL n'a pas été exécuté (total null) ou que
-// le compteur est à 0.
+// ⚠️ Il est aussi dans le PIED DE PAGE, donc sur toutes les pages, avec le
+// quota gratuit de Vercel à surveiller : on ne relit QUE si le compteur est à
+// l'écran et l'onglet visible. Un visiteur qui ne descend pas jusqu'en bas
+// ne coûte rien.
+// Rien ne s'affiche tant que le compteur est à 0 ou illisible.
 
 import { useEffect, useRef, useState } from "react";
 
-const RELECTURE_MS = 10_000;
+const RELECTURE_MS = 30_000;
 
-export default function CompteurReponsesCoach({ className = "" }: { className?: string }) {
+export default function CompteurReponsesCoach({
+  className = "",
+  sombre = false,
+}: {
+  className?: string;
+  sombre?: boolean;
+}) {
   const [cible, setCible] = useState<number | null>(null);
   const [affiche, setAffiche] = useState<number | null>(null);
   const afficheRef = useRef<number | null>(null);
+  const boite = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
     let actif = true;
+    let aLEcran = false;
+    let id: ReturnType<typeof setInterval> | null = null;
+
     const lire = () =>
       fetch("/api/coach/compteur")
         .then((r) => r.json())
@@ -29,11 +43,29 @@ export default function CompteurReponsesCoach({ className = "" }: { className?: 
           if (actif && typeof d?.total === "number") setCible(d.total);
         })
         .catch(() => {});
-    lire();
-    const id = setInterval(lire, RELECTURE_MS);
+
+    const regler = () => {
+      const doitLire = aLEcran && document.visibilityState === "visible";
+      if (doitLire && !id) {
+        lire();
+        id = setInterval(lire, RELECTURE_MS);
+      } else if (!doitLire && id) {
+        clearInterval(id);
+        id = null;
+      }
+    };
+
+    const obs = new IntersectionObserver(([e]) => {
+      aLEcran = e.isIntersecting;
+      regler();
+    });
+    if (boite.current) obs.observe(boite.current);
+    document.addEventListener("visibilitychange", regler);
     return () => {
       actif = false;
-      clearInterval(id);
+      obs.disconnect();
+      document.removeEventListener("visibilitychange", regler);
+      if (id) clearInterval(id);
     };
   }, []);
 
@@ -59,12 +91,18 @@ export default function CompteurReponsesCoach({ className = "" }: { className?: 
     return () => clearInterval(id);
   }, [cible]);
 
-  if (!affiche) return null;
-
+  // La boîte reste dans la page (vide, mais haute d'une ligne) pour que
+  // l'observateur la voie : un élément de hauteur nulle n'entre jamais à l'écran.
   return (
-    <p className={["text-base text-slate-600", className].join(" ")} aria-live="off">
-      <strong className="font-bold tabular-nums text-slate-800">{affiche.toLocaleString("fr-FR")}</strong>{" "}
-      questions répondues au coach&nbsp;!
+    <p ref={boite} className={["min-h-6 text-base", sombre ? "text-slate-400" : "text-slate-600", className].join(" ")}>
+      {affiche ? (
+        <>
+          <strong className={["font-bold tabular-nums", sombre ? "text-white" : "text-slate-800"].join(" ")}>
+            {affiche.toLocaleString("fr-FR")}
+          </strong>{" "}
+          {affiche > 1 ? "questions répondues" : "question répondue"} au coach&nbsp;!
+        </>
+      ) : null}
     </p>
   );
 }

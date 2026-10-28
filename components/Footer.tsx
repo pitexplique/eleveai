@@ -15,6 +15,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { cgvEnVigueur } from "@/lib/legal/editeur";
+import CompteurReponsesCoach from "@/components/coach/CompteurReponsesCoach";
 import {
   IconeInstagram,
   IconeYoutube,
@@ -491,7 +492,10 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col gap-2 border-t border-slate-800 pt-5 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+        {/* ⭐ 28/10/2026 — le compteur façon IXL, sur toutes les pages. */}
+        <CompteurReponsesCoach sombre className="mt-10 text-center" />
+
+        <div className="mt-6 flex flex-col gap-2 border-t border-slate-800 pt-5 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} EleveAI - Tous droits réservés.</p>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px]">
             <span>Conçu à La Réunion</span>
