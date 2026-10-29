@@ -15,6 +15,7 @@ import type { ProfilId } from "@/lib/matrice/types";
 // ⚠️ N'EST RENDU QUE SUR L'ACCUEIL — voir `rechercheAuCentre` plus bas.
 import RechercheEntete from "@/components/accueil/RechercheEntete";
 import { IconeInstagram, INSTAGRAM_URL } from "@/components/IconesReseaux";
+import SelecteurPaysEntete, { PaysTiroir } from "@/components/SelecteurPaysEntete";
 
 // ─── Nav structure ────────────────────────────────────────────────────────────
 
@@ -897,6 +898,12 @@ export default function Header() {
             zone tient sa colonne à toutes les largeurs ; au-dessus de 1024 px la
             zone 2 existe et rien ne change. */}
         <div className="col-start-3 flex items-center gap-1.5 justify-self-end">
+          {/* ⭐ LE PAYS (29/10/2026, Frédéric) : un drapeau et son menu, parti de
+              l'accueil. Drapeau seul, ~34 px, à partir de `sm` ; sous 640 px il
+              recouvrait Ti Margo, le choix passe dans le menu ☰ (PaysTiroir). */}
+          <div className="hidden sm:block">
+            <SelecteurPaysEntete paper={paper} />
+          </div>
           {eleve ? (
             <>
               {/* 28/10 : « Mon espace » et « Participer » retirés de la barre
@@ -1076,6 +1083,11 @@ export default function Header() {
             >
               <span aria-hidden="true">🏠</span> Accueil
             </Link>
+
+            {/* Le pays, sur téléphone (29/10/2026) : la barre n'a pas la place du drapeau. */}
+            <div className="sm:hidden">
+              <PaysTiroir paper={paper} onChoisi={() => setMobileOpen(false)} />
+            </div>
 
             {/* Auth mobile */}
             {eleve ? (

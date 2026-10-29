@@ -3,14 +3,16 @@
 // L'ACCUEIL « LE COACH QUI SUIT TON PROGRAMME ET TES PROGRÈS » (23/10/2026) —
 // voir page.tsx pour le pourquoi. Sept blocs, dans l'ordre de la maquette validée :
 //   1. la promesse (le programme du pays, vérifié par un professeur) ;
-//   2. qui es-tu (élève, parent, prof), ton pays, ta classe → le coach ;
+//   2. qui es-tu (élève, parent, prof), ton cycle, ta classe → le coach ;
 //   3. les preuves (compteurs calculés) ;
 //   4. « par où commencer ? » ;
 //   5. la bibliothèque : les vidéos de ta classe, les maths dehors ;
 //   6. le journal plié en trois cases (Une, défi, métier) ;
 //   7. les portes des adultes (profs, parents, écoles et pays).
 // ⛔ Aucune vidéo ne se lance ici : la vignette mène à /video/<id>, en pause.
-// ⚠️ Le profil, le pays et la classe choisis sont gardés dans le navigateur
+// ⏸ 29/10/2026 : le choix du pays et la carte ont quitté l'accueil pour
+// l'en-tête (components/SelecteurPaysEntete.tsx).
+// ⚠️ Le profil et la classe choisis sont gardés dans le navigateur
 // (commodité, sans compte) : tout s'affiche correctement sans.
 
 import { useEffect, useState, type ReactNode } from "react";
@@ -38,11 +40,13 @@ export type VideoVitrine = { id: string; titre: string; vignette: string };
 type Profil = "eleve" | "parent" | "prof";
 const CLE = "eleveai.accueil";
 
-/* Les classes du coach France, dans l'ordre de l'accueil (lycée d'abord). */
+/* Les classes du coach France, dans l'ordre de l'accueil (lycée d'abord).
+   ⭐ 29/10/2026 — Frédéric : trois sélecteurs en chips, un par cycle, aux
+   couleurs des cycles (lycée bleu, collège rouge, primaire jaune). */
 const CYCLES = [
-  { titre: "Lycée", classes: [["terminale-spe", "Term"], ["premiere-spe", "1re spé"], ["premiere", "1re"], ["seconde", "2de"], ["stmg", "STMG"]] },
-  { titre: "Collège", classes: [["3e", "3e"], ["4e", "4e"], ["5e", "5e"], ["6e", "6e"]] },
-  { titre: "Primaire", classes: [["cm2", "CM2"], ["cm1", "CM1"], ["ce2", "CE2"], ["ce1", "CE1"], ["cp", "CP"]] },
+  { titre: "Lycée", couleur: { chip: "bg-blue-700 text-white ring-blue-700", vide: "bg-white text-blue-800 ring-blue-300 hover:bg-blue-50", classe: "bg-blue-700 text-white", repos: "bg-blue-50 text-blue-900 ring-1 ring-blue-200 hover:bg-blue-100" }, classes: [["terminale-spe", "Term"], ["premiere-spe", "1re spé"], ["premiere", "1re"], ["seconde", "2de"], ["stmg", "STMG"]] },
+  { titre: "Collège", couleur: { chip: "bg-red-600 text-white ring-red-600", vide: "bg-white text-red-700 ring-red-300 hover:bg-red-50", classe: "bg-red-600 text-white", repos: "bg-red-50 text-red-900 ring-1 ring-red-200 hover:bg-red-100" }, classes: [["3e", "3e"], ["4e", "4e"], ["5e", "5e"], ["6e", "6e"]] },
+  { titre: "Primaire", couleur: { chip: "bg-amber-400 text-slate-900 ring-amber-400", vide: "bg-white text-amber-800 ring-amber-300 hover:bg-amber-50", classe: "bg-amber-400 text-slate-900", repos: "bg-amber-50 text-amber-900 ring-1 ring-amber-200 hover:bg-amber-100" }, classes: [["cm2", "CM2"], ["cm1", "CM1"], ["ce2", "CE2"], ["ce1", "CE1"], ["cp", "CP"]] },
 ] as const;
 // Les clés de la galerie /video ne sont pas celles du coach au lycée.
 const CLASSE_VIDEO: Record<string, string> = { "terminale-spe": "terminale", "premiere-spe": "premiere", premiere: "premiere-commun" };
@@ -171,43 +175,32 @@ function Defi({ defi }: { defi: DefiGenere }) {
 export default function AccueilNouveau(props: {
   totalVideos: number;
   parClasse: Record<string, VideoVitrine[]>;
-  /** Par pays : ses groupes de classes ; `eq` = classe française qui correspond, null si pas encore de matrice. */
-  classesPays: Record<string, { titre: string; classes: { cle: string; court: string; eq: string | null }[] }[]>;
   dehors: VideoVitrine[];
   une: (VideoVitrine & { classe: string }) | null;
   defi: DefiGenere;
   metier: Metier;
 }) {
   const [profil, setProfil] = useState<Profil>("eleve");
-  const [pays, setPays] = useState<string>("france");
   const [classe, setClasse] = useState<string>("4e");
-  const [cleChoisie, setCleChoisie] = useState<string | null>(null);
 
   useEffect(() => {
     try {
       const lu = JSON.parse(localStorage.getItem(CLE) ?? "{}");
       if (lu.profil) setProfil(lu.profil);
-      if (lu.pays) setPays(lu.pays);
       if (lu.classe && NOM_CLASSE.has(lu.classe)) setClasse(lu.classe);
     } catch {}
   }, []);
   useEffect(() => {
     try {
-      localStorage.setItem(CLE, JSON.stringify({ profil, pays, classe }));
+      localStorage.setItem(CLE, JSON.stringify({ profil, classe }));
     } catch {}
-  }, [profil, pays, classe]);
+  }, [profil, classe]);
 
-  const autrePays = PAYS.find((p) => p.slug === pays);
-  // La classe choisie dans un autre pays : celle cliquée, sinon la première qui a sa matrice.
-  const ouvertesPays = autrePays ? (props.classesPays[autrePays.slug] ?? []).flatMap((g) => g.classes).filter((c) => c.eq) : [];
-  const trouvee = ouvertesPays.find((c) => c.cle === cleChoisie) ?? ouvertesPays[0];
-  const clePays = trouvee?.eq ? { cle: trouvee.cle, court: trouvee.court, eq: trouvee.eq } : null;
-  // Les vidéos et le nom affiché suivent la classe française qui correspond.
-  const classeVideos = autrePays ? (clePays?.eq ?? classe) : classe;
-  const nomClasse = autrePays && clePays ? clePays.court : (NOM_CLASSE.get(classe) ?? classe);
-  const appel = autrePays
-    ? `Ouvrir le programme de ${nomClasse} (${autrePays.nom})`
-    : profil === "eleve"
+  const cycle = CYCLES.find((c) => c.classes.some(([id]) => id === classe)) ?? CYCLES[1];
+  const nomClasse = NOM_CLASSE.get(classe) ?? classe;
+  const classeVideos = classe;
+  const appel =
+    profil === "eleve"
       ? `Commencer avec le coach de ${nomClasse}`
       : profil === "parent"
         ? `Voir ce qu'on travaille en ${nomClasse}`
@@ -250,7 +243,7 @@ export default function AccueilNouveau(props: {
         </p>
       </section>
 
-      {/* 2. QUI ES-TU, TON PAYS, TA CLASSE */}
+      {/* 2. QUI ES-TU, TON CYCLE, TA CLASSE */}
       <section aria-label="Commencer" className="mt-6 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
         <div className="grid grid-cols-3 gap-2">
           {PROFILS.map(({ id, label, Icone }) => (
@@ -286,117 +279,50 @@ export default function AccueilNouveau(props: {
           </div>
         )}
 
-        <div className="mt-4 flex flex-wrap items-center gap-2 text-sm">
-          <span className="font-bold text-slate-600">Ton pays :</span>
-          {[{ slug: "france", nom: "France" }, ...PAYS].map((p) => (
+        {/* ⭐ 29/10/2026 — Frédéric : « remplace la liste des classes par trois
+            sélecteurs en chips : Lycée, Collège, Primaire ». Une chip ouvre les
+            classes de son cycle, de la plus grande à la plus petite ; la classe
+            choisie règle le bouton du coach et les vidéos, comme avant.
+            ⏸ Le choix du pays et la carte du monde sont partis dans l'en-tête
+            (components/SelecteurPaysEntete.tsx) : pays gelés jusqu'à 3 000 vidéos. */}
+        <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="Ton cycle">
+          {CYCLES.map((c) => (
             <button
-              key={p.slug}
+              key={c.titre}
               type="button"
-              aria-pressed={pays === p.slug}
-              onClick={() => setPays(p.slug)}
-              className={`inline-flex items-center gap-1.5 rounded-full py-1 pl-1.5 pr-3 text-xs font-black ring-1 transition ${
-                pays === p.slug ? "bg-teal-700 text-white ring-teal-700" : "bg-white text-teal-700 ring-slate-200 hover:bg-slate-50"
+              aria-pressed={cycle.titre === c.titre}
+              onClick={() => {
+                // Le cycle ouvert est celui de la classe choisie. Changer de cycle choisit sa première classe : le bouton du coach
+                // ne doit pas dire « 4e » sous la chip « Lycée ».
+                if (!c.classes.some(([id]) => id === classe)) setClasse(c.classes[0][0]);
+              }}
+              className={`rounded-full px-4 py-1.5 text-sm font-black ring-2 transition sm:text-base ${
+                cycle.titre === c.titre ? c.couleur.chip : c.couleur.vide
               }`}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={`/drapeaux/${p.slug}.svg`} alt="" width={20} height={15} className="h-[15px] w-5 rounded-[3px] object-cover" />
-              {p.nom}
+              {c.titre}
             </button>
           ))}
         </div>
-
-        {/* ⭐ 24/10/2026 — Frédéric : « sous ton pays, affiche une map monde avec
-            en rouge mes pays ». SVG statique (public/carte-pays.svg, 74 Ko, Natural
-            Earth 110m) : un point rouge pour le Québec, la Suisse et la Belgique,
-            trop petits à cette échelle. Pleine largeur de la carte, 680 px au plus. */}
-        <figure className="mx-auto mt-4 max-w-[680px]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/carte-pays.svg"
-            alt="Carte du monde : en rouge, la France, la Suisse, la Belgique, le Maroc, le Québec, la Côte d'Ivoire et le Sénégal"
-            width={960}
-            height={426}
-            loading="lazy"
-            className="h-auto w-full"
-          />
-          <figcaption className="mt-1 text-center text-xs text-slate-500">
-            En rouge, nos pays : France, Suisse, Belgique, Maroc, Québec, Côte d&apos;Ivoire, Sénégal.
-          </figcaption>
-        </figure>
-
-        {/* ⭐ 25/10/2026 — Frédéric : « quand on clique sur France, les classes
-            s'affichent, et les vidéos ; peut-on faire pareil pour les autres
-            pays : mets en gris ceux qui n'existent pas, et pour les autres le
-            même système ». Les classes DU PAYS (sans matrice = grisées), la
-            classe française qui correspond, ses vidéos plus bas. */}
-        {autrePays ? (
-          <>
-            <div className="mt-4 flex flex-col gap-3 lg:flex-row lg:flex-wrap lg:gap-0">
-              {(props.classesPays[autrePays.slug] ?? []).map((g, i) => (
-                <div key={g.titre} className={i === 0 ? "lg:pr-4" : "lg:border-l lg:border-slate-200 lg:px-4"}>
-                  <p className="mb-1.5 text-xs font-black uppercase tracking-wide text-slate-500">{g.titre}</p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {g.classes.map((c) =>
-                      c.eq ? (
-                        <button
-                          key={c.cle}
-                          type="button"
-                          aria-pressed={clePays?.cle === c.cle}
-                          onClick={() => setCleChoisie(c.cle)}
-                          className={`min-w-[3rem] rounded-lg px-3 py-1.5 text-sm font-black transition ${
-                            clePays?.cle === c.cle ? "bg-teal-700 text-white" : "bg-slate-100 text-slate-800 hover:bg-slate-200"
-                          }`}
-                        >
-                          {c.court}
-                        </button>
-                      ) : (
-                        <span
-                          key={c.cle}
-                          title="Bientôt : ce programme n'est pas encore relevé"
-                          className="min-w-[3rem] cursor-not-allowed rounded-lg bg-slate-50 px-3 py-1.5 text-center text-sm font-black text-slate-300"
-                        >
-                          {c.court}
-                        </span>
-                      ),
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-            {clePays && (
-              <p className="mt-3 text-sm text-slate-600">
-                {clePays.court} ({autrePays.nom}), en France : <span className="font-bold">{NOM_CLASSE.get(clePays.eq) ?? clePays.eq}</span>. Même âge, mêmes vidéos.
-              </p>
-            )}
-          </>
-        ) : (
-            <div className="mt-4 flex flex-col gap-3 lg:flex-row lg:gap-0">
-              {CYCLES.map((c, i) => (
-                <div key={c.titre} className={i === 0 ? "lg:pr-4" : "lg:border-l lg:border-slate-200 lg:px-4"}>
-                  <p className="mb-1.5 text-xs font-black uppercase tracking-wide text-slate-500">{c.titre}</p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {c.classes.map(([id, label]) => (
-                      <button
-                        key={id}
-                        type="button"
-                        aria-pressed={classe === id}
-                        onClick={() => setClasse(id)}
-                        className={`min-w-[3rem] rounded-lg px-3 py-1.5 text-sm font-black transition ${
-                          classe === id ? "bg-teal-700 text-white" : "bg-slate-100 text-slate-800 hover:bg-slate-200"
-                        }`}
-                      >
-                        {label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-        )}
+        <div className="mt-3 flex flex-wrap gap-1.5" role="group" aria-label={`Les classes : ${cycle.titre}`}>
+          {cycle.classes.map(([id, label]) => (
+            <button
+              key={id}
+              type="button"
+              aria-pressed={classe === id}
+              onClick={() => setClasse(id)}
+              className={`min-w-[3rem] rounded-lg px-3 py-1.5 text-sm font-black transition ${
+                classe === id ? cycle.couleur.classe : cycle.couleur.repos
+              }`}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
             <div className="mt-4 flex flex-wrap items-center gap-3">
               <Lien
-                href={autrePays ? `/pays/${autrePays.slug}${clePays ? `?classe=${encodeURIComponent(clePays.cle)}` : ""}` : `/coach-ia/maths?classe=${classe}`}
-                bloc={autrePays ? `pays-${autrePays.slug}` : `coach-${profil}`}
+                href={`/coach-ia/maths?classe=${classe}`}
+                bloc={`coach-${profil}`}
                 className="inline-flex items-center gap-2 rounded-full bg-teal-700 px-5 py-3 font-black text-white shadow hover:bg-teal-800"
               >
                 {appel} <ArrowRight className="h-5 w-5" aria-hidden="true" />
@@ -495,11 +421,7 @@ export default function AccueilNouveau(props: {
 
       {/* 5. LA BIBLIOTHÈQUE */}
       <Rangee
-        titre={
-          autrePays && clePays
-            ? `Les vidéos de ${clePays.court} (${NOM_CLASSE.get(clePays.eq) ?? clePays.eq} en France)`
-            : `Les vidéos de ${nomClasse}`
-        }
+        titre={`Les vidéos de ${nomClasse}`}
         lien={{ href: "/video", label: "Toute la bibliothèque" }}
         videos={props.parClasse[classeVideos] ?? []}
         bloc="videos-classe"

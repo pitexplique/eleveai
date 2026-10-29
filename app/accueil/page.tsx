@@ -80,7 +80,6 @@ import JournalClient from "../accueil-journal/JournalClient";
 import { donneesDuJournal } from "../accueil-journal/donnees";
 import AccueilCoach, { type VideoVitrine } from "./AccueilCoach";
 import { toutesLesVideos, urlR2, type VideoR2 } from "@/lib/videos/r2";
-import { CLASSES_PAYS, PAYS, programmesDuPays } from "@/lib/programmes-pays/pays";
 
 // ⭐ LES MÉTADONNÉES VIVENT DANS ./metadata.ts, ET NULLE PART AILLEURS.
 // Elles étaient écrites ici en dur pendant qu'un fichier metadata.ts existait à
@@ -136,31 +135,13 @@ export default function AccueilPage() {
   );
   const totalVideos = toutes.filter((v) => v.vignette && !v.fichier.startsWith("atelier-video-essais")).length;
 
-  // Les classes de chaque pays proposé, calculées ICI (serveur) : les matrices
-  // sont lourdes, le navigateur ne reçoit que la clé, le nom court et la classe
-  // française qui correspond (null = pas encore de matrice → grisée).
-  const classesPays = Object.fromEntries(
-    PAYS.map((info) => {
-      const programmes = programmesDuPays(info.slug);
-      return [
-        info.slug,
-        CLASSES_PAYS[info.slug].map((g) => ({
-          titre: g.titre,
-          classes: g.classes.map((c) => ({
-            cle: c.cle,
-            court: c.court,
-            eq: programmes.find((p) => p.cle === c.cle)?.equivalentFrance ?? null,
-          })),
-        })),
-      ];
-    }),
-  );
+  // ⏸ 29/10/2026 : les classes des pays ne se calculent plus ici — le choix du
+  // pays a quitté l'accueil pour l'en-tête (components/SelecteurPaysEntete.tsx).
 
   return (
     <AccueilCoach
       totalVideos={totalVideos}
       parClasse={parClasse}
-      classesPays={classesPays}
       dehors={dehors}
       une={journal.une.paysage ? { ...journal.une.paysage, classe: journal.une.classe } : null}
       defi={journal.defi}
