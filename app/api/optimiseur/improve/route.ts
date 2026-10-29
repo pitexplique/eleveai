@@ -9,6 +9,7 @@ import {
   normalizePromptType,
   normalizeAudience,
   getPromptRubricEditor,
+  verifierBareme,
   type Audience,
 } from "@/lib/promptRubric";
 
@@ -308,11 +309,54 @@ ${scoreReport ? JSON.stringify(scoreReport).slice(0, 8000) : "null"}
       }
     }
 
-    const improvedPrompt = String(parsed.improvedPrompt || "").trim();
+    let improvedPrompt = String(parsed.improvedPrompt || "").trim();
 
-    const changes = Array.isArray(parsed.changes)
+    let changes = Array.isArray(parsed.changes)
       ? parsed.changes.map(String).slice(0, 12)
       : [];
+
+    // Barème : une seconde passe si les points ne font pas le total.
+    const bareme = verifierBareme(improvedPrompt);
+    if (bareme && bareme.somme !== bareme.total) {
+      const reparation = await openai.chat.completions.create({
+        model,
+        temperature: 0,
+        max_tokens: 1500,
+        response_format: { type: "json_object" },
+        messages: [
+          { role: "system", content: system },
+          {
+            role: "user",
+            content: `
+Ce prompt annonce un total de ${bareme.total} points, mais ses points écrits font ${bareme.somme}.
+Réécris-le avec UN SEUL barème, par question, dont la somme fait exactement ${bareme.total}.
+Les critères de réussite ne portent plus de points à eux seuls.
+Garde tout le reste (sujet, niveau, durée, public).
+
+PROMPT:
+"""${improvedPrompt}"""
+`.trim(),
+          },
+        ],
+      });
+      const repare = safeJsonParse<ImproveResponse>(
+        reparation.choices?.[0]?.message?.content?.trim() || "",
+      );
+      const texteRepare = String(repare?.improvedPrompt || "").trim();
+      const bareme2 = texteRepare ? verifierBareme(texteRepare) : null;
+      if (texteRepare.length >= 40 && (!bareme2 || bareme2.somme === bareme2.total)) {
+        improvedPrompt = texteRepare;
+        changes = [
+          ...changes.slice(0, 11),
+          `Barème corrigé : les points font maintenant ${bareme.total}.`,
+        ];
+      } else {
+        changes = [
+          ...changes.slice(0, 11),
+          `⚠️ Barème à vérifier : les points écrits font ${bareme.somme}, pas ${bareme.total}.`,
+        ];
+      }
+    }
 
     if (!isNonEmptyString(improvedPrompt) || improvedPrompt.length < 40) {
       return NextResponse.json(

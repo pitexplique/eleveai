@@ -56,8 +56,19 @@ export function getTypeRequirements(type: PromptType): string {
     case "evaluation":
       return `
 EXIGENCES SPÉCIFIQUES (ÉVALUATION) :
-- Barème explicite (total /20 recommandé).
+- Barème explicite (total /20 recommandé) : UN SEUL barème, par question,
+  dont la somme est EXACTEMENT le total annoncé (ex. 6 + 7 + 7 = 20).
+  Les critères de réussite ne s'ajoutent pas au barème : ils disent
+  comment les points de chaque question sont gagnés.
 - Une consigne = une question (éviter les doubles tâches).
+- Chaque question est PRÉCISE : la situation et les données sont écrites
+  (en maths, des nombres : « ABC rectangle en A, AB = 6 cm, AC = 8 cm.
+  Calcule BC. »), avec une seule réponse attendue.
+- Jamais de question vague (« Appliquez le théorème… », « Résolvez un problème
+  de la vie quotidienne… ») ni « Justifiez / Expliquez » comme question à part :
+  la justification fait partie de la question qu'elle accompagne.
+- Les durées tiennent ensemble (la correction collective est une autre séance
+  si elle ne rentre pas dans la durée annoncée).
 - Critères de réussite mesurables (observables).
 - Différenciation Base/Attendu/Défi si activée.
 - Version élève sans réponses ; correction séparée si demandée.
@@ -225,6 +236,11 @@ Un score de 20 exige :
 - Si PUBLIC = profs et contexte scolaire : BO/Eduscol (ou compétences/socle) si pertinent.
 - Si PUBLIC = eleves : pas d’exigence BO/Eduscol.
 
+PÉNALITÉS OBLIGATOIRES :
+- Barème dont la somme ne fait pas le total annoncé : critère 5 ≤ 1.
+- Questions sans situation ni données (« appliquez… », « résolvez un problème… ») :
+  critère 1 ≤ 2.
+
 ==================================================
 RÈGLES DE SORTIE
 ==================================================
@@ -296,6 +312,9 @@ FORMAT D’AMÉLIORATION (IMPORTANT)
   B) "CRITÈRES DE RÉUSSITE (MESURABLES)" (3 à 6 items)
   C) "AUTO-CONTRÔLE (CHECKLIST)" (6 à 10 cases)
 - Évite d’allonger inutilement : amélioration = précision + testabilité.
+- Tous les nombres doivent tenir ensemble : points, totaux, durées.
+  Relis-les avant de répondre ; une somme fausse est une contradiction.
+- Français correct et simple (« exactitude », jamais « correctitude »).
 
 ==================================================
 SORTIE (JSON STRICT)
@@ -310,6 +329,33 @@ Tu dois renvoyer EXACTEMENT ce schéma (et rien d’autre) :
 - improvedPrompt : prompt complet amélioré (même sujet, même niveau, même type, même public).
 - changes : 5 à 12 items max, phrases courtes, actionnables.
 `.trim();
+}
+
+/**
+ * Barème : les points écrits « (5 points) » ou « : 5 pts » doivent faire
+ * le total annoncé (« Total sur 20 »). Renvoie null si rien à vérifier.
+ */
+export function verifierBareme(
+  texte: string,
+): { total: number; somme: number } | null {
+  const mTotal = texte.match(
+    /total\s*(?:sur|:|=)?\s*(\d+(?:[.,]\d+)?)\s*(?:points?|pts?)?/i,
+  );
+  if (!mTotal) return null;
+  const total = Number(mTotal[1].replace(",", "."));
+  const sansTotal = texte.replace(mTotal[0], "");
+  // « (5 points par question) » compte une fois : la somme sera fausse,
+  // et c'est voulu — un barème « par question » mêlé à d'autres critères
+  // est justement ce qu'il faut réécrire.
+  const re = /(?:\(\s*|:\s*)(\d+(?:[.,]\d+)?)\s*(?:pts?|points?)\b/gi;
+  let somme = 0;
+  let trouves = 0;
+  for (const m of sansTotal.matchAll(re)) {
+    somme += Number(m[1].replace(",", "."));
+    trouves++;
+  }
+  if (trouves === 0) return null;
+  return { total, somme };
 }
 
 // ✅ Défauts
