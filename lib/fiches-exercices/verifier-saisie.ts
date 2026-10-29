@@ -16,6 +16,12 @@ export type ReponseAttendue = {
   attendu: string | string[];
   /** Écart permis pour une valeur approchée (ex. 0.01 pour « au centième »). */
   tolerance?: number;
+  /**
+   * La FORME compte, pas seulement la valeur : « fraction irréductible »,
+   * « notation scientifique », « forme développée ». On compare alors le texte
+   * (sans espaces ni majuscules, × = *, ^(5) = ^5) : 6/8 ne vaut plus 3/4.
+   */
+  exact?: boolean;
 };
 
 type Valeurs = Record<string, number>;
@@ -160,7 +166,19 @@ function texteNormalise(s: string): string {
     .replace(/,/g, ".");
 }
 
-const POINTS = [0.37, 1.21, 2.73, -0.58, 3.9];
+/** Pour `exact` : la même écriture, aux variantes de clavier près. */
+function formeNormalisee(s: string): string {
+  return texteNormalise(s.replace(UNITE, ""))
+    .replace(/[×·x](?=10)/g, "*")
+    .replace(/[×·]/g, "*")
+    .replace(/[−–]/g, "-")
+    .replace(/÷/g, ":")
+    .replace(/\^\(([^()]*)\)/g, "^$1")
+    .replace(/²/g, "^2")
+    .replace(/³/g, "^3");
+}
+
+const POINTS =[0.37, 1.21, 2.73, -0.58, 3.9];
 const LETTRES = "abcdfghjklmnpqrstuvwxyz".split("");
 
 function memesValeurs(a: string, b: string, tolerance: number): boolean {
@@ -186,6 +204,7 @@ export function saisieJuste(saisie: string, attendue: ReponseAttendue): boolean 
   const eleve = sansMembreGauche(saisie);
   return formes.some((forme) => {
     const juste = sansMembreGauche(forme);
+    if (attendue.exact) return formeNormalisee(eleve) === formeNormalisee(juste);
     if (texteNormalise(eleve) === texteNormalise(juste)) return true;
     // Plusieurs valeurs (« 2 ; 5 », solutions d'une équation) : même liste, tout ordre.
     const decoupe = (t: string) => t.split(/\s*[;]\s*|\s+(?:et|ou)\s+/).filter(Boolean);
