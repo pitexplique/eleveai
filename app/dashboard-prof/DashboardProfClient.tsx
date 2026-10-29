@@ -417,6 +417,9 @@ export default function DashboardProfClient() {
                 { href: "/parcours", label: "🛤️ Évaluation annuelle", color: "bg-violet-100 text-violet-900 ring-1 ring-violet-200" },
                 { href: "/calcul-rapide", label: "⚡ Calcul", color: "bg-lime-100 text-lime-900 ring-1 ring-lime-200" },
                 { href: "/defis-du-jour", label: "🎯 Défis", color: "bg-orange-100 text-orange-900 ring-1 ring-orange-200" },
+                // 29/10/2026 — Frédéric : « rajoute l'optimiseur dans le dashboard profs
+                // en mettant Prompt pédagogique ».
+                { href: "/prompt-pedagogique", label: "✍️ Prompt pédagogique", color: "bg-rose-100 text-rose-900 ring-1 ring-rose-200" },
               ].map((l) => (
                 <Link key={l.href} href={l.href}
                   className={`rounded-2xl ${l.color} px-4 py-2 text-sm font-black shadow-sm hover:brightness-95 transition`}>
