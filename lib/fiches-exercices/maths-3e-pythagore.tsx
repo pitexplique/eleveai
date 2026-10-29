@@ -92,6 +92,11 @@ export const exercicesPythagore3e: FicheExercicesData = {
         {
           enonce:
             "Dans chaque triangle rectangle, nommer l'hypoténuse.\na) Le triangle $RST$ est rectangle en $S$.\nb) Le triangle $KLM$ est rectangle en $K$.\nc) Dans le triangle $UVW$, l'angle $\\widehat{W}$ est droit.\nd) L'hypoténuse est-elle toujours le côté « du bas » ? Toujours le plus long ?",
+          reponses: [
+            { question: "a)", attendu: ["RT", "[RT]", "[TR]"] },
+            { question: "b)", attendu: ["LM", "[LM]", "[ML]"] },
+            { question: "c)", attendu: ["UV", "[UV]", "[VU]"] },
+          ],
           correction:
             "L'hypoténuse est le côté OPPOSÉ à l'angle droit : celui qui ne touche pas son sommet. Je repère donc d'abord le sommet de l'angle droit, puis je prends le côté formé par les deux autres lettres.\na) L'angle droit est en $S$. Les deux autres sommets sont $R$ et $T$ : l'hypoténuse est $[RT]$.\nb) L'angle droit est en $K$ : l'hypoténuse est $[LM]$.\nc) L'angle droit est en $W$ : l'hypoténuse est $[UV]$.\nd) Pas toujours « en bas » : sur le dessin, $[RT]$ est penché, et c'est pourtant l'hypoténuse. En revanche, c'est TOUJOURS le plus long côté du triangle rectangle.\n⛔ Le piège : prendre le côté horizontal, ou le côté le plus « visible ». Seul l'angle droit décide.\nRéponse : $[RT]$ ; $[LM]$ ; $[UV]$ ; et l'hypoténuse est toujours le plus long côté.",
           schema: triangle({ A: [0, 0], B: [4, 2], C: [2, 6] }, { noms: { A: "R", B: "S", C: "T" }, cotes: { CA: "hypoténuse" }, droit: "B" }),
@@ -100,6 +105,9 @@ export const exercicesPythagore3e: FicheExercicesData = {
         {
           enonce:
             "Le triangle $ABC$ est rectangle en $A$.\na) Quelle est son hypoténuse ?\nb) Écrire l'égalité de Pythagore pour ce triangle.\nc) Un élève écrit $AB^2 = AC^2 + BC^2$. Où est l'erreur ?",
+          reponses: [
+            { question: "a)", attendu: ["BC", "[BC]", "[CB]"] },
+          ],
           correction:
             "a) L'angle droit est en $A$ : l'hypoténuse est le côté opposé, $[BC]$.\nb) Le théorème dit : le carré de l'hypoténuse est égal à la somme des carrés des deux autres côtés. J'écris donc l'hypoténuse SEULE d'un côté du signe égal : $BC^2 = AB^2 + AC^2$.\nc) Il a récité l'égalité comme si l'angle droit était en $C$, sans regarder la figure. Son égalité isole $AB$, qui n'est pas l'hypoténuse.\n⛔ Le piège : écrire l'égalité par habitude. Les lettres changent d'un triangle à l'autre : je repars toujours du sommet de l'angle droit.\nRéponse : l'hypoténuse est $[BC]$, et $BC^2 = AB^2 + AC^2$.",
           schema: triangle({ A: [2, 1], B: [6, 3], C: [0, 5] }, { cotes: { BC: "hypoténuse" }, droit: "A" }),
@@ -107,6 +115,9 @@ export const exercicesPythagore3e: FicheExercicesData = {
         },
         {
           enonce: "Le triangle $ABC$ est rectangle en $B$, avec $AB = 8$ cm et $BC = 15$ cm. Calculer $AC$.",
+          reponses: [
+            { attendu: "17" },
+          ],
           correction:
             "Je repère l'angle droit : il est en $B$. L'hypoténuse est le côté opposé, $[AC]$ : c'est elle que je cherche.\nJ'écris l'égalité de Pythagore : $AC^2 = AB^2 + BC^2$.\nJe remplace par les longueurs : $AC^2 = 8^2 + 15^2 = 64 + 225 = 289$.\nJe connais $AC^2$ et je veux $AC$ : je prends la racine carrée. $AC = \\sqrt{289} = 17$ cm.\n⭐ Contrôle : $17$ est plus grand que $8$ et que $15$. L'hypoténuse est bien le plus long côté.\n⛔ Le piège : additionner les longueurs, $8 + 15 = 23$ cm. On additionne les CARRÉS, puis on prend la racine.\nRéponse : $AC = 17$ cm.",
           schema: triangle({ A: [0, 8], B: [0, 0], C: [15, 0] }, { cotes: { AB: "8 cm", BC: "15 cm", CA: "? = 17 cm" }, droit: "B" }),
@@ -114,6 +125,9 @@ export const exercicesPythagore3e: FicheExercicesData = {
         },
         {
           enonce: "Le triangle $DEF$ est rectangle en $E$, avec $DF = 41$ cm et $DE = 9$ cm. Calculer $EF$.",
+          reponses: [
+            { attendu: "40" },
+          ],
           correction:
             "L'angle droit est en $E$ : l'hypoténuse est $[DF]$, qui mesure $41$ cm. Cette fois, je connais l'hypoténuse et je cherche un côté de l'angle droit.\nPythagore : $DF^2 = DE^2 + EF^2$, donc $EF^2 = DF^2 - DE^2$. Je SOUSTRAIS, parce que le carré de l'hypoténuse est le total.\n$EF^2 = 41^2 - 9^2 = 1\\,681 - 81 = 1\\,600$.\n$EF = \\sqrt{1\\,600} = 40$ cm.\n⭐ Contrôle : $40 < 41$, le côté trouvé est bien plus court que l'hypoténuse.\n⛔ Le piège : prendre $[EF]$ pour l'hypoténuse et additionner. $41^2 + 9^2 = 1\\,762$ donnerait $EF \\approx 42$ cm : un côté plus long que l'hypoténuse, c'est impossible.\nRéponse : $EF = 40$ cm.",
           schema: triangle({ A: [0, 9], B: [0, 0], C: [40, 0] }, { noms: { A: "D", B: "E", C: "F" }, cotes: { AB: "9 cm", BC: "? = 40 cm", CA: "41 cm" }, droit: "B" }),
@@ -121,6 +135,10 @@ export const exercicesPythagore3e: FicheExercicesData = {
         },
         {
           enonce: "Le triangle $KLM$ est rectangle en $K$, avec $KL = 5$ cm et $KM = 9$ cm. Calculer la valeur exacte de $LM$, puis son arrondi au dixième.",
+          reponses: [
+            { question: "exacte", attendu: ["√(106)", "√106"], exact: true },
+            { question: "arrondi", attendu: "10,3", tolerance: 0.05 },
+          ],
           correction:
             "L'angle droit est en $K$ : l'hypoténuse est $[LM]$.\n$LM^2 = KL^2 + KM^2 = 5^2 + 9^2 = 25 + 81 = 106$.\n$106$ n'est pas un carré parfait ($10^2 = 100$ et $11^2 = 121$) : la valeur exacte est $LM = \\sqrt{106}$ cm, et je sais déjà que $10 < LM < 11$.\nÀ la calculatrice, $\\sqrt{106} \\approx 10{,}296$, donc $LM \\approx 10{,}3$ cm au dixième.\n⛔ Le piège : s'arrêter à $LM = 106$ cm. $106$, c'est $LM^2$. Un triangle de côtés $5$ et $9$ cm n'a pas un côté de plus d'un mètre : sans la racine, la réponse est absurde.\nRéponse : $LM = \\sqrt{106} \\approx 10{,}3$ cm.",
           schema: triangle({ A: [0, 5], B: [0, 0], C: [9, 0] }, { noms: { A: "L", B: "K", C: "M" }, cotes: { AB: "5 cm", BC: "9 cm", CA: "? ≈ 10,3 cm" }, droit: "B" }),
@@ -128,6 +146,9 @@ export const exercicesPythagore3e: FicheExercicesData = {
         },
         {
           enonce: "Le triangle $UVW$ est rectangle en $V$, avec $UW = 12$ cm et $UV = 7$ cm. Calculer $VW$, arrondi au dixième.",
+          reponses: [
+            { attendu: "9,7", tolerance: 0.05 },
+          ],
           correction:
             "L'angle droit est en $V$ : l'hypoténuse est $[UW]$, $12$ cm. Je cherche un côté de l'angle droit : je soustrais.\n$UW^2 = UV^2 + VW^2$, donc $VW^2 = UW^2 - UV^2 = 12^2 - 7^2 = 144 - 49 = 95$.\n$VW = \\sqrt{95} \\approx 9{,}7$ cm (la calculatrice affiche $9{,}746\\ldots$).\n⭐ Contrôle : $9^2 = 81 < 95 < 100 = 10^2$, donc $VW$ est bien entre $9$ et $10$.\n⛔ Le piège : soustraire les longueurs, $12 - 7 = 5$ cm. Comme pour l'addition, on soustrait les CARRÉS.\nRéponse : $VW = \\sqrt{95} \\approx 9{,}7$ cm.",
           schema: triangle({ A: [0, 7], B: [0, 0], C: [9.7468, 0] }, { noms: { A: "U", B: "V", C: "W" }, cotes: { AB: "7 cm", BC: "? ≈ 9,7 cm", CA: "12 cm" }, droit: "B" }),
@@ -135,6 +156,10 @@ export const exercicesPythagore3e: FicheExercicesData = {
         },
         {
           enonce: "Le triangle $LMN$ a pour côtés $LM = 20$ cm, $MN = 21$ cm et $LN = 29$ cm. Est-il rectangle ? Si oui, en quel sommet ?",
+          reponses: [
+            { question: "rect.", attendu: ["oui", "vrai"] },
+            { question: "sommet", attendu: "M" },
+          ],
           correction:
             "Je ne sais pas si le triangle est rectangle : je ne peux PAS écrire « d'après le théorème de Pythagore ». J'utilise la réciproque, et je calcule les deux membres séparément.\nLe plus grand côté est $[LN]$ : c'est le seul qui puisse être l'hypoténuse.\nD'une part, $LN^2 = 29^2 = 841$.\nD'autre part, $LM^2 + MN^2 = 20^2 + 21^2 = 400 + 441 = 841$.\nLes deux résultats sont égaux : d'après la réciproque du théorème de Pythagore, le triangle $LMN$ est rectangle en $M$ : l'angle droit est en face du plus grand côté $[LN]$, au sommet qu'il ne touche pas.\n⛔ Le piège : chercher l'angle droit en $L$ ou en $N$. Il est au sommet que le plus grand côté ne touche pas.\nRéponse : $LMN$ est rectangle en $M$.",
           schema: triangle({ A: [0, 20], B: [0, 0], C: [21, 0] }, { noms: { A: "L", B: "M", C: "N" }, cotes: { AB: "20 cm", BC: "21 cm", CA: "29 cm" }, droit: "B" }),
@@ -142,6 +167,9 @@ export const exercicesPythagore3e: FicheExercicesData = {
         },
         {
           enonce: "Le triangle $ABC$ a pour côtés $AB = 11$ cm, $BC = 9$ cm et $CA = 6$ cm. Est-il rectangle ?",
+          reponses: [
+            { attendu: ["non", "faux"] },
+          ],
           correction:
             "Je teste avec la réciproque. Le plus grand côté est $[AB]$.\nD'une part, $AB^2 = 11^2 = 121$.\nD'autre part, $BC^2 + CA^2 = 9^2 + 6^2 = 81 + 36 = 117$.\n$121 \\neq 117$ : l'égalité de Pythagore n'est pas vérifiée. Or, si le triangle était rectangle, elle le serait forcément. D'après la contraposée du théorème de Pythagore, $ABC$ n'est pas rectangle.\n⭐ Comme $121 > 117$, l'angle en $C$ est un peu plus ouvert qu'un angle droit : environ $92°$ sur le dessin.\n⛔ Le piège : dire « presque égal, donc rectangle ». $121$ et $117$ ne sont pas égaux : la réponse est non.\nRéponse : $ABC$ n'est pas rectangle.",
           schema: triangle({ A: [0, 0], B: [11, 0], C: [3.4545, 4.9057] }, { cotes: { AB: "11 cm", BC: "9 cm", CA: "6 cm" } }),
@@ -163,6 +191,9 @@ export const exercicesPythagore3e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Le triangle $RST$ est rectangle en $S$, avec $RS = 2{,}8$ cm et $ST = 4{,}5$ cm. Calculer $RT$ en rédigeant comme au brevet.",
+          reponses: [
+            { attendu: "5,3" },
+          ],
           correction:
             "Je rédige en quatre temps : la situation, l'égalité, le calcul, la conclusion.\n1. Dans le triangle $RST$ rectangle en $S$, l'hypoténuse est $[RT]$.\n2. D'après le théorème de Pythagore, $RT^2 = RS^2 + ST^2$.\n3. $RT^2 = 2{,}8^2 + 4{,}5^2 = 7{,}84 + 20{,}25 = 28{,}09$.\n4. Donc $RT = \\sqrt{28{,}09} = 5{,}3$ cm.\n⭐ La racine tombe juste : je le vérifie en élevant au carré, $5{,}3^2 = 28{,}09$.\n⛔ Le piège : écrire $2{,}8^2 = 5{,}6$. Élever au carré, c'est multiplier le nombre par LUI-MÊME : $2{,}8 \\times 2{,}8 = 7{,}84$, pas $2{,}8 \\times 2$.\nRéponse : $RT = 5{,}3$ cm.",
           schema: triangle({ A: [0, 2.8], B: [0, 0], C: [4.5, 0] }, { noms: { A: "R", B: "S", C: "T" }, cotes: { AB: "2,8 cm", BC: "4,5 cm", CA: "? = 5,3 cm" }, droit: "B" }),
@@ -170,6 +201,9 @@ export const exercicesPythagore3e: FicheExercicesData = {
         },
         {
           enonce: "Le triangle $IJK$ est rectangle en $I$, avec $JK = 6{,}5$ cm et $IJ = 3{,}3$ cm. Calculer $IK$ en rédigeant comme au brevet.",
+          reponses: [
+            { attendu: "5,6" },
+          ],
           correction:
             "1. Dans le triangle $IJK$ rectangle en $I$, l'hypoténuse est $[JK]$.\n2. D'après le théorème de Pythagore, $JK^2 = IJ^2 + IK^2$.\n3. Je cherche un côté de l'angle droit, donc je soustrais : $IK^2 = JK^2 - IJ^2 = 6{,}5^2 - 3{,}3^2 = 42{,}25 - 10{,}89 = 31{,}36$.\n4. Donc $IK = \\sqrt{31{,}36} = 5{,}6$ cm.\n⭐ Contrôle : $5{,}6^2 = 31{,}36$, et $5{,}6 < 6{,}5$ : le côté est plus court que l'hypoténuse.\n⛔ Le piège : écrire tout de suite $IK^2 = JK^2 + IJ^2$, parce qu'on a retenu « on additionne ». On additionne seulement quand on cherche l'hypoténuse.\nRéponse : $IK = 5{,}6$ cm.",
           schema: triangle({ A: [0, 3.3], B: [0, 0], C: [5.6, 0] }, { noms: { A: "J", B: "I", C: "K" }, cotes: { AB: "3,3 cm", BC: "? = 5,6 cm", CA: "6,5 cm" }, droit: "B" }),
@@ -184,6 +218,9 @@ export const exercicesPythagore3e: FicheExercicesData = {
         },
         {
           enonce: "Le triangle $EFG$ a pour côtés $EF = 8$ cm, $FG = 9$ cm et $EG = 12$ cm. Sur un dessin, l'angle en $F$ a l'air droit. Le triangle est-il rectangle ? Rédiger.",
+          reponses: [
+            { attendu: ["non", "faux"] },
+          ],
           correction:
             "1. Dans le triangle $EFG$, le plus grand côté est $[EG]$.\n2. D'une part, $EG^2 = 12^2 = 144$.\n3. D'autre part, $EF^2 + FG^2 = 8^2 + 9^2 = 64 + 81 = 145$.\n4. On constate que $EG^2 \\neq EF^2 + FG^2$. D'après la contraposée du théorème de Pythagore, le triangle $EFG$ n'est pas rectangle.\n⭐ L'angle en $F$ mesure environ $89{,}6°$ : à l'œil, et même au rapporteur, on jurerait un angle droit. C'est pour cela qu'on calcule.\n⛔ Le piège : conclure « rectangle » parce que $144$ et $145$ sont très proches, ou parce que le dessin le montre. Une égalité est vraie ou fausse : ici, elle est fausse.\nRéponse : $EFG$ n'est pas rectangle.",
           schema: triangle({ A: [0, 0], B: [5.2917, 5.9999], C: [12, 0] }, { noms: { A: "E", B: "F", C: "G" }, cotes: { AB: "8 cm", BC: "9 cm", CA: "12 cm" } }),
@@ -200,6 +237,12 @@ export const exercicesPythagore3e: FicheExercicesData = {
         {
           enonce:
             "Dans le triangle $ABC$, $H$ est le pied de la hauteur issue de $A$ : $H$ est sur $[BC]$ et $(AH)$ est perpendiculaire à $(BC)$. On donne $AB = 25$ cm, $AC = 26$ cm et $AH = 24$ cm.\na) Calculer $BH$.\nb) Calculer $HC$.\nc) En déduire $BC$.\nd) Le triangle $ABC$ est-il rectangle en $A$ ?",
+          reponses: [
+            { question: "a)", attendu: "7" },
+            { question: "b)", attendu: "10" },
+            { question: "c)", attendu: "17" },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           correction:
             "La hauteur coupe le triangle en DEUX triangles rectangles en $H$ : $ABH$ et $ACH$. J'applique Pythagore dans chacun.\na) Dans le triangle $ABH$ rectangle en $H$, l'hypoténuse est $[AB]$. D'après le théorème de Pythagore, $AB^2 = AH^2 + BH^2$, donc $BH^2 = 25^2 - 24^2 = 625 - 576 = 49$ et $BH = \\sqrt{49} = 7$ cm.\nb) Dans le triangle $ACH$ rectangle en $H$, l'hypoténuse est $[AC]$ : $HC^2 = 26^2 - 24^2 = 676 - 576 = 100$ et $HC = \\sqrt{100} = 10$ cm.\nc) $H$ est entre $B$ et $C$ : $BC = BH + HC = 7 + 10 = 17$ cm. Ici j'additionne des LONGUEURS, car ce sont deux morceaux d'un même segment.\nd) Non. S'il était rectangle en $A$, son hypoténuse serait $[BC]$, le côté opposé à $A$, et ce serait le plus long côté. Or $BC = 17$ cm est plus court que $AB$ et que $AC$.\n⛔ Le piège : appliquer Pythagore dans $ABC$ tout entier. Rien ne dit qu'il est rectangle : les angles droits sont en $H$.\nRéponse : $BH = 7$ cm, $HC = 10$ cm, $BC = 17$ cm, et $ABC$ n'est pas rectangle en $A$.",
           schema: triangle({ A: [7, 24], B: [0, 0], C: [17, 0] }, { cotes: { AB: "25 cm", BC: "? = 17 cm", CA: "26 cm" }, hauteur: { depuis: "A", label: "24 cm" } }),
@@ -208,6 +251,11 @@ export const exercicesPythagore3e: FicheExercicesData = {
         {
           enonce:
             "Un voilier quitte le port $P$. Il navigue $18$ milles marins plein nord jusqu'à une bouée $B$, puis $25$ milles plein est jusqu'à une île $I$.\na) Pourquoi le triangle $PBI$ est-il rectangle ? En quel sommet ?\nb) Calculer la distance $PI$ en ligne droite, au dixième de mille, en rédigeant.\nc) Un mille marin vaut $1\\,852$ m. Convertir $PI$ en kilomètres, au dixième.",
+          reponses: [
+            { question: "a)", attendu: "B" },
+            { question: "b)", attendu: "30,8", tolerance: 0.05 },
+            { question: "c)", attendu: "57,1", tolerance: 0.05 },
+          ],
           correction:
             "a) Le nord et l'est sont perpendiculaires : le bateau tourne d'un quart de tour en $B$. Le triangle $PBI$ est rectangle en $B$, et son hypoténuse est $[PI]$.\nb) Dans le triangle $PBI$ rectangle en $B$, d'après le théorème de Pythagore, $PI^2 = PB^2 + BI^2 = 18^2 + 25^2 = 324 + 625 = 949$.\nDonc $PI = \\sqrt{949} \\approx 30{,}8$ milles.\n⭐ Contrôle : $30^2 = 900 < 949 < 961 = 31^2$.\nc) Je convertis la valeur de la calculatrice : $\\sqrt{949} \\times 1\\,852 \\approx 57\\,052$ m, soit environ $57{,}1$ km.\n⛔ Le piège au c) : convertir l'arrondi. $30{,}8 \\times 1\\,852 = 57\\,041{,}6$ m, soit $57{,}0$ km : le dixième change. J'arrondis toujours à la FIN.\nRéponse : l'île est à environ $30{,}8$ milles du port, soit $57{,}1$ km.",
           schema: triangle({ A: [0, 0], B: [0, 18], C: [25, 18] }, { noms: { A: "P", B: "B", C: "I" }, cotes: { AB: "18 milles", BC: "25 milles", CA: "? ≈ 30,8 milles" }, droit: "B" }),
@@ -216,6 +264,11 @@ export const exercicesPythagore3e: FicheExercicesData = {
         {
           enonce:
             "Parmi ces trois triangles, lesquels sont rectangles ? Justifier.\na) $16$ cm, $30$ cm, $34$ cm\nb) $10$ cm, $11$ cm, $15$ cm\nc) $0{,}9$ m, $4$ m, $4{,}1$ m",
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: ["non", "faux"] },
+            { question: "c)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "Pour chacun, je compare le carré du PLUS GRAND côté à la somme des carrés des deux autres.\na) $34^2 = 1\\,156$ et $16^2 + 30^2 = 256 + 900 = 1\\,156$. Égalité : d'après la réciproque du théorème de Pythagore, ce triangle est rectangle.\nb) $15^2 = 225$ et $10^2 + 11^2 = 100 + 121 = 221$. $225 \\neq 221$ : d'après la contraposée, il n'est pas rectangle.\nc) $4{,}1^2 = 16{,}81$ et $0{,}9^2 + 4^2 = 0{,}81 + 16 = 16{,}81$. Égalité : il est rectangle.\n⭐ Le a) est un agrandissement du triangle $8$, $15$, $17$ : tout multiplier par $2$ garde l'égalité, puisque chaque carré est multiplié par $4$.\n⛔ Le piège : prendre les côtés dans l'ordre de l'énoncé au lieu de partir du plus grand. Au c), comparer $0{,}9^2$ à $4^2 + 4{,}1^2$ ne peut jamais donner l'égalité.\nRéponse : les triangles a) et c) sont rectangles, le b) ne l'est pas.",
           schema: deux(
@@ -242,6 +295,11 @@ export const exercicesPythagore3e: FicheExercicesData = {
           titre: "L'échelle du couvreur",
           enonce:
             "Une échelle de $6$ m est appuyée contre un mur vertical, sur un sol horizontal. La règle de sécurité demande de poser le pied de l'échelle à environ un quart de sa longueur du mur.\na) À quelle distance du mur faut-il poser le pied ?\nb) À quelle hauteur le haut de l'échelle touche-t-il le mur ? Arrondir au centimètre.\nc) Le couvreur veut atteindre une gouttière à $6$ m de haut avec cette échelle. Est-ce possible ?",
+          reponses: [
+            { question: "a)", attendu: "1,5" },
+            { question: "b)", attendu: "5,81", tolerance: 0.005 },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) Un quart de $6$ m : $6 \\div 4 = 1{,}5$ m.\nb) Le mur est vertical et le sol horizontal : l'angle au pied du mur est droit. Le mur, le sol et l'échelle forment un triangle rectangle, dont l'hypoténuse est l'ÉCHELLE, opposée à cet angle droit.\nD'après le théorème de Pythagore, $6^2 = 1{,}5^2 + h^2$, donc $h^2 = 36 - 2{,}25 = 33{,}75$.\n$h = \\sqrt{33{,}75} \\approx 5{,}81$ m.\nc) Non. L'échelle est l'hypoténuse, le plus long côté : la hauteur atteinte est forcément plus petite que $6$ m. Il lui faut une échelle plus longue.\n⛔ Le piège au b) : additionner, $6^2 + 1{,}5^2 = 38{,}25$, et trouver $h \\approx 6{,}18$ m, plus que la longueur de l'échelle. L'échelle n'est pas un côté de l'angle droit.\nRéponse : le pied est à $1{,}5$ m du mur, le haut touche le mur à environ $5{,}81$ m ; la gouttière à $6$ m est hors de portée.",
           schema: triangle({ A: [0, 0], B: [1.5, 0], C: [1.5, 5.8095] }, { noms: { A: "pied", B: "mur", C: "haut" }, cotes: { AB: "1,5 m", BC: "? ≈ 5,81 m", CA: "6 m" }, droit: "B" }),
@@ -251,6 +309,10 @@ export const exercicesPythagore3e: FicheExercicesData = {
           titre: "La tyrolienne",
           enonce:
             "Le câble d'une tyrolienne est tendu en ligne droite entre une plateforme de départ et une plateforme d'arrivée située $45$ m plus bas. À l'horizontale, les deux plateformes sont à $200$ m l'une de l'autre.\na) Calculer la longueur du câble.\nb) Sur un autre site, le câble mesure $250$ m, pour la même dénivelée de $45$ m. Quelle distance parcourt-on à l'horizontale ? Arrondir au mètre.\nc) Un visiteur affirme : « le câble mesure $200 + 45 = 245$ m ». Qu'en penser ?",
+          reponses: [
+            { question: "a)", attendu: "205" },
+            { question: "b)", attendu: "246", tolerance: 0.5 },
+          ],
           correction:
             "a) La verticale et l'horizontale sont perpendiculaires : la dénivelée, la distance horizontale et le câble forment un triangle rectangle, dont l'hypoténuse est le CÂBLE.\nD'après le théorème de Pythagore, $c^2 = 45^2 + 200^2 = 2\\,025 + 40\\,000 = 42\\,025$.\n$c = \\sqrt{42\\,025} = 205$ m. Je vérifie : $205^2 = 42\\,025$.\nb) Cette fois, je connais l'hypoténuse, $250$ m : je soustrais. $d^2 = 250^2 - 45^2 = 62\\,500 - 2\\,025 = 60\\,475$.\n$d = \\sqrt{60\\,475} \\approx 246$ m.\nc) Il additionne les longueurs : $245$ m, c'est le trajet « descendre, puis avancer ». La ligne droite est plus courte : $205$ m.\n⛔ Le piège : additionner les longueurs au lieu des carrés.\nRéponse : le câble mesure $205$ m ; sur l'autre site, on parcourt environ $246$ m à l'horizontale.",
           schema: triangle({ A: [0, 45], B: [0, 0], C: [200, 0] }, { noms: { A: "départ", C: "arrivée" }, cotes: { AB: "45 m", BC: "200 m", CA: "? = 205 m" }, droit: "B" }),
@@ -260,6 +322,11 @@ export const exercicesPythagore3e: FicheExercicesData = {
           titre: "La rampe d'accès",
           enonce:
             "Pour qu'un fauteuil roulant puisse entrer dans un bâtiment public, la réglementation française impose une rampe de pente au plus $5$ % : elle monte d'au plus $5$ cm pour $100$ cm parcourus à l'horizontale. Une entrée est $50$ cm plus haute que le trottoir.\na) Quelle longueur horizontale faut-il au minimum pour la rampe ?\nb) Calculer alors la longueur de la rampe elle-même, arrondie au centimètre.\nc) Un menuisier pense qu'il faut « beaucoup plus » de planche que la longueur horizontale. A-t-il raison ?",
+          reponses: [
+            { question: "a)", attendu: ["10m", "1000cm"] },
+            { question: "b)", attendu: "10,01", tolerance: 0.005 },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $5$ cm de montée pour $100$ cm d'horizontale : pour $50$ cm de montée, il en faut $10$ fois plus, soit $1\\,000$ cm, c'est-à-dire $10$ m.\nb) La montée est verticale, le trottoir horizontal : ils forment un angle droit. La rampe est l'HYPOTÉNUSE.\nJe mets tout en mètres : $50$ cm $= 0{,}5$ m. D'après le théorème de Pythagore, $r^2 = 10^2 + 0{,}5^2 = 100 + 0{,}25 = 100{,}25$.\n$r = \\sqrt{100{,}25} \\approx 10{,}01$ m.\nc) Non : la rampe ne mesure qu'environ $1$ cm de plus que l'horizontale. Quand la pente est très douce, l'hypoténuse est presque égale au grand côté.\n⛔ Le piège : mêler les unités, $10^2 + 50^2$, avec des mètres et des centimètres. Je convertis tout AVANT de calculer.\nRéponse : il faut $10$ m à l'horizontale, et une rampe d'environ $10{,}01$ m.",
           schema: triangle({ A: [0, 0], B: [10, 0], C: [10, 0.5] }, { cotes: { AB: "10 m", BC: "0,5 m", CA: "? ≈ 10,01 m" }, droit: "B" }),
@@ -269,6 +336,10 @@ export const exercicesPythagore3e: FicheExercicesData = {
           titre: "Le coin du terrain de football",
           enonce:
             "Un jardinier trace un terrain de football de $105$ m sur $68$ m, les dimensions recommandées pour les matchs internationaux. Il plante un piquet $B$ au coin, un piquet $A$ à $105$ m sur la ligne de touche et un piquet $C$ à $68$ m sur la ligne de but. Pour vérifier que l'angle en $B$ est droit, il mesure $AC$ : il trouve $126$ m.\na) Le coin est-il droit ? Rédiger.\nb) Quelle longueur $AC$ devrait-il trouver, au dixième de mètre ?",
+          reponses: [
+            { question: "a)", attendu: ["non", "faux"] },
+            { question: "b)", attendu: "125,1", tolerance: 0.05 },
+          ],
           correction:
             "a) Je ne sais pas si l'angle est droit : c'est à démontrer, avec la réciproque.\nDans le triangle $ABC$, le plus grand côté est $[AC]$.\nD'une part, $AC^2 = 126^2 = 15\\,876$.\nD'autre part, $AB^2 + BC^2 = 105^2 + 68^2 = 11\\,025 + 4\\,624 = 15\\,649$.\nOn constate que $AC^2 \\neq AB^2 + BC^2$. D'après la contraposée du théorème de Pythagore, le triangle $ABC$ n'est pas rectangle : le coin n'est pas droit, il faut déplacer un piquet.\nb) Si l'angle en $B$ était droit, $[AC]$ serait l'hypoténuse : $AC^2 = 15\\,649$, et $AC = \\sqrt{15\\,649} \\approx 125{,}1$ m.\n⭐ C'est la méthode des traceurs de terrain : trois longueurs au mètre ruban remplacent une équerre, bien trop petite pour un terrain de $105$ m. Sur le dessin, les deux coins se ressemblent : l'écart n'est que d'un degré.\n⛔ Le piège : écrire au a) « d'après le théorème de Pythagore, $AC^2 = AB^2 + BC^2$ ». Ce serait supposer le coin droit, alors que c'est la question.\nRéponse : non, le coin n'est pas droit ; la diagonale devrait mesurer environ $125{,}1$ m.",
           schema: deux(

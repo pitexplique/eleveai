@@ -305,6 +305,10 @@ export const exercicesParallelogramme5e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Observe le codage des deux quadrilatères. Lequel est un parallélogramme ? Comment s'appelle l'autre ?",
+          reponses: [
+            { question: "lequel", attendu: ["ABCD"] },
+            { question: "l'autre", attendu: ["trapèze", "un trapèze"] },
+          ],
           figure: deux(
             quad({ A: [0, 0], B: [5, 0], C: [6.5, 3], D: [1.5, 3] }, { paralleles: [["AB", "CD"], ["BC", "DA"]] }),
             quad({ A: [0, 0], B: [6, 0], C: [4.5, 3], D: [1, 3] }, { noms: { A: "M", B: "N", C: "P", D: "Q" }, paralleles: [["AB", "CD"]] }),
@@ -315,6 +319,11 @@ export const exercicesParallelogramme5e: FicheExercicesData = {
         },
         {
           enonce: "$EFGH$ est un parallélogramme. Donne les longueurs $GH$ et $HE$, puis calcule son périmètre.",
+          reponses: [
+            { question: "GH", attendu: "6,5" },
+            { question: "HE", attendu: "3,8" },
+            { question: "périm.", attendu: "20,6" },
+          ],
           figure: quad({ A: [0, 0], B: [6.5, 0], C: [8.0456, 3.4715], D: [1.5456, 3.4715] }, { noms: { A: "E", B: "F", C: "G", D: "H" }, cotes: { AB: "6,5 cm", BC: "3,8 cm" } }),
           correction:
             "Dans un parallélogramme, les côtés opposés ont la même longueur.\n$[GH]$ est opposé à $[EF]$ : $GH = EF = 6{,}5$ cm.\n$[HE]$ est opposé à $[FG]$ : $HE = FG = 3{,}8$ cm.\nLe périmètre est le tour complet : $6{,}5 + 3{,}8 + 6{,}5 + 3{,}8 = 20{,}6$ cm.\n⛔ Le piège : s'arrêter à $6{,}5 + 3{,}8 = 10{,}3$ cm. Ce n'est que la moitié du tour.\nRéponse : $GH = 6{,}5$ cm, $HE = 3{,}8$ cm, et le périmètre vaut $20{,}6$ cm.",
@@ -322,6 +331,11 @@ export const exercicesParallelogramme5e: FicheExercicesData = {
         },
         {
           enonce: "$KLMN$ est un parallélogramme et $\\widehat{K} = 63°$. Calcule les trois autres angles.",
+          reponses: [
+            { question: "angle L", attendu: "117" },
+            { question: "angle M", attendu: "63" },
+            { question: "angle N", attendu: "117" },
+          ],
           correction:
             "L'angle opposé à $\\widehat{K}$ est $\\widehat{M}$ : deux angles opposés sont égaux, donc $\\widehat{M} = 63°$.\n$\\widehat{L}$ est consécutif à $\\widehat{K}$ : deux angles consécutifs font $180°$. $\\widehat{L} = 180° - 63° = 117°$.\n$\\widehat{N}$ est opposé à $\\widehat{L}$ : $\\widehat{N} = 117°$.\nJe contrôle : $63 + 117 + 63 + 117 = 360$.\n⛔ Le piège : calculer $180 - 63$ pour l'angle OPPOSÉ. L'angle opposé est égal ; c'est le consécutif qui complète à $180°$.\nRéponse : $\\widehat{L} = 117°$, $\\widehat{M} = 63°$, $\\widehat{N} = 117°$.",
           schema: ecranSeulement(quad({ A: [0, 0], B: [5, 0], C: [6.362, 2.673], D: [1.362, 2.673] }, { noms: { A: "K", B: "L", C: "M", D: "N" }, angles: { A: "63°", B: "117°", C: "63°", D: "117°" }, trouve: ["B", "C", "D"] })),
@@ -329,6 +343,11 @@ export const exercicesParallelogramme5e: FicheExercicesData = {
         },
         {
           enonce: "Les diagonales du parallélogramme $RSTU$ se coupent en $I$. On sait que $RI = 2{,}7$ cm et $SU = 7{,}4$ cm.\nCalcule $IT$, $RT$ et $IS$.",
+          reponses: [
+            { question: "IT", attendu: "2,7" },
+            { question: "RT", attendu: "5,4" },
+            { question: "IS", attendu: "3,7" },
+          ],
           figure: quad({ A: [-2.5372, -0.9235], B: [1.85, -3.2043], C: [2.5372, 0.9235], D: [-1.85, 3.2043] }, { noms: { A: "R", B: "S", C: "T", D: "U" }, centre: "I", demi: { OA: "2,7 cm" } }),
           correction:
             "Les diagonales d'un parallélogramme se coupent en leur MILIEU : $I$ est le milieu de $[RT]$ et le milieu de $[SU]$.\n$IT = RI = 2{,}7$ cm.\n$RT = 2 \\times 2{,}7 = 5{,}4$ cm.\n$I$ partage $[SU]$ en deux moitiés : $IS = 7{,}4 \\div 2 = 3{,}7$ cm.\n⛔ Le piège : croire que les deux diagonales ont la même longueur, et écrire $IS = 2{,}7$ cm. Chaque diagonale est coupée en deux moitiés égales, mais les deux diagonales sont différentes.\nRéponse : $IT = 2{,}7$ cm, $RT = 5{,}4$ cm et $IS = 3{,}7$ cm.",
@@ -336,6 +355,12 @@ export const exercicesParallelogramme5e: FicheExercicesData = {
         },
         {
           enonce: "$ABCD$ est un parallélogramme de centre $O$. On utilise la symétrie de centre $O$.\na) Quelle est l'image du point $A$ ? Du point $B$ ?\nb) Quelle est l'image du côté $[AB]$ ?\nc) Quelle est l'image de l'angle $\\widehat{ABC}$ ?",
+          reponses: [
+            { question: "a) A", attendu: ["C"] },
+            { question: "a) B", attendu: ["D"] },
+            { question: "b)", attendu: ["[CD]", "CD", "[DC]", "DC"] },
+            { question: "c)", attendu: ["CDA", "ADC"] },
+          ],
           figure: quad({ A: [0, 0], B: [5.5, 0], C: [7, 3.2], D: [1.5, 3.2] }, { centre: "O", diagonales: true }),
           correction:
             "$O$ est le milieu des deux diagonales : c'est le centre de symétrie du parallélogramme.\na) $O$ est le milieu de $[AC]$ : l'image de $A$ est $C$. $O$ est le milieu de $[BD]$ : l'image de $B$ est $D$.\nb) Les bouts $A$ et $B$ vont en $C$ et $D$ : l'image de $[AB]$ est le côté opposé $[CD]$.\nc) $A$, $B$, $C$ vont en $C$, $D$, $A$ : l'image de $\\widehat{ABC}$ est $\\widehat{CDA}$. C'est pour cela que les angles opposés sont égaux.\n⛔ Le piège au b) : répondre $[BC]$, le côté voisin. Le demi-tour envoie chaque côté sur le côté d'EN FACE.\nRéponse : a) $C$ et $D$ ; b) $[CD]$ ; c) $\\widehat{CDA}$.",
@@ -343,6 +368,12 @@ export const exercicesParallelogramme5e: FicheExercicesData = {
         },
         {
           enonce: "Donne le nom le plus précis de chaque parallélogramme.\na) Il a un angle droit.\nb) Il a deux côtés consécutifs de même longueur.\nc) Ses diagonales sont perpendiculaires.\nd) Ses diagonales ont la même longueur et sont perpendiculaires.",
+          reponses: [
+            { question: "a)", attendu: ["rectangle", "un rectangle"] },
+            { question: "b)", attendu: ["losange", "un losange"] },
+            { question: "c)", attendu: ["losange", "un losange"] },
+            { question: "d)", attendu: ["carré", "un carré"] },
+          ],
           correction:
             "a) Un angle droit : son consécutif fait $180 - 90 = 90$ degrés, et les angles opposés sont égaux. Les quatre angles sont droits : c'est un rectangle.\nb) Deux côtés consécutifs égaux : avec les côtés opposés égaux, les quatre côtés sont égaux. C'est un losange.\nc) Des diagonales perpendiculaires : c'est un losange.\nd) Des diagonales de même longueur : rectangle ; perpendiculaires : losange. Les deux à la fois : c'est un carré.\n⛔ Le piège au c) : répondre « carré ». Des diagonales perpendiculaires suffisent pour un losange ; pour un carré, il faut en plus qu'elles aient la même longueur.\nRéponse : a) rectangle ; b) losange ; c) losange ; d) carré.",
           schema: ecranSeulement(quad({ A: [0, 0], B: [4, 0], C: [6.5712, 3.0642], D: [2.5712, 3.0642] }, { egaux: [["AB", "BC", "CD", "DA"]], diagDroit: true })),
@@ -357,6 +388,9 @@ export const exercicesParallelogramme5e: FicheExercicesData = {
         },
         {
           enonce: "Sur un quadrillage, on place $A(1\\,;\\,1)$, $B(6\\,;\\,2)$ et $C(8\\,;\\,5)$. Trouve les coordonnées du point $D$ tel que $ABCD$ soit un parallélogramme.",
+          reponses: [
+            { question: "D", attendu: "(3 ; 4)" },
+          ],
           correction:
             "Dans le parallélogramme $ABCD$, $[AC]$ et $[BD]$ sont les diagonales : elles ont le même milieu $O$.\nLe milieu de $[AC]$ : de $A$ à $C$, $7$ à droite et $4$ en haut ; la moitié, $3{,}5$ et $2$. Donc $O(4{,}5\\,;\\,3)$.\n$D$ est l'image de $B$ par la symétrie de centre $O$ : de $B$ à $O$, $1{,}5$ à gauche et $1$ en haut. Encore une fois depuis $O$ : $D(3\\,;\\,4)$.\n⭐ Contrôle : de $A$ à $B$, $5$ à droite et $1$ en haut ; de $D$ à $C$, aussi $5$ à droite et $1$ en haut. $[AB]$ et $[DC]$ sont parallèles et de même longueur.\n⛔ Le piège : placer $D$ au hasard « pour fermer la figure », ou le mettre en face de $C$ au lieu d'en face de $B$. L'ordre des lettres dit que $[BD]$ est une diagonale.\nRéponse : $D(3\\,;\\,4)$.",
           schema: ecranSeulement(quad({ A: [1, 1], B: [6, 2], C: [8, 5], D: [3, 4] }, { centre: "O", diagonales: true, paralleles: [["AB", "CD"], ["BC", "DA"]] })),
@@ -378,6 +412,10 @@ export const exercicesParallelogramme5e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Dans le parallélogramme $ABCD$, on sait que $\\widehat{A} + \\widehat{C} = 152°$.\nCalcule les quatre angles.",
+          reponses: [
+            { question: "A et C", attendu: "76" },
+            { question: "B et D", attendu: "104" },
+          ],
           correction:
             "$\\widehat{A}$ et $\\widehat{C}$ sont opposés : ils sont égaux. Je partage $152$ en deux : $152 \\div 2 = 76$. Donc $\\widehat{A} = \\widehat{C} = 76°$.\n$\\widehat{B}$ est consécutif à $\\widehat{A}$ : $\\widehat{B} = 180° - 76° = 104°$. Et $\\widehat{D}$, opposé à $\\widehat{B}$, mesure aussi $104°$.\nJe contrôle : $76 + 104 + 76 + 104 = 360$.\n⛔ Le piège : faire $180 - 152 = 28$, comme si $\\widehat{A}$ et $\\widehat{C}$ étaient consécutifs. Ils sont opposés : ils se partagent la somme en deux parts égales.\nRéponse : $\\widehat{A} = \\widehat{C} = 76°$ et $\\widehat{B} = \\widehat{D} = 104°$.",
           schema: ecranSeulement(quad({ A: [0, 0], B: [5, 0], C: [5.7258, 2.9109], D: [0.7258, 2.9109] }, { angles: { A: "76°", B: "104°", C: "76°", D: "104°" }, trouve: ["A", "B", "C", "D"] })),
@@ -386,6 +424,12 @@ export const exercicesParallelogramme5e: FicheExercicesData = {
         {
           enonce:
             "Ces quadrilatères sont-ils des parallélogrammes ? Justifie.\na) $ABCD$ : ses diagonales se coupent en $O$, avec $OA = OC = 3$ cm, $OB = 5$ cm et $OD = 4$ cm.\nb) $EFGH$ : $(EF)$ est parallèle à $(GH)$, et $(FG)$ est parallèle à $(HE)$.\nc) $IJKL$ : ses diagonales $[IK]$ et $[JL]$ ont le même milieu.\nd) $MNPQ$ : $(MN)$ est parallèle à $(PQ)$, avec $MN = 4$ cm et $PQ = 6$ cm.",
+          reponses: [
+            { question: "a)", attendu: ["non", "faux"] },
+            { question: "b)", attendu: ["oui", "vrai"] },
+            { question: "c)", attendu: ["oui", "vrai"] },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $O$ est le milieu de $[AC]$ ($OA = OC$), mais pas de $[BD]$ ($OB \\neq OD$). Les diagonales ne se coupent pas en leur milieu : ce n'est pas un parallélogramme.\nb) Les côtés opposés sont parallèles deux à deux : c'est la définition. Oui.\nc) Des diagonales qui ont le même milieu : oui, c'est un parallélogramme.\nd) Une seule paire de côtés parallèles, et en plus de longueurs différentes : c'est un trapèze, pas un parallélogramme.\n⛔ Le piège au a) : se contenter de $OA = OC$. Il faut que $O$ soit le milieu des DEUX diagonales.\nRéponse : a) non ; b) oui ; c) oui ; d) non.",
           schema: ecranSeulement(quad({ A: [-3, 0], B: [0, -5], C: [3, 0], D: [0, 4] }, { demi: { OA: "3 cm", OB: "5 cm", OC: "3 cm", OD: "4 cm" } })),
@@ -394,6 +438,12 @@ export const exercicesParallelogramme5e: FicheExercicesData = {
         {
           enonce:
             "$ABCD$ est un parallélogramme de centre $O$. Donne sa nature dans chaque cas.\na) $AC = BD = 8$ cm.\nb) $AB = BC$.\nc) $\\widehat{A} = 90°$ et $AB = BC$.\nd) $(AC)$ est perpendiculaire à $(BD)$, et $AC = 8$ cm, $BD = 5$ cm.",
+          reponses: [
+            { question: "a)", attendu: ["rectangle", "un rectangle"] },
+            { question: "b)", attendu: ["losange", "un losange"] },
+            { question: "c)", attendu: ["carré", "un carré"] },
+            { question: "d)", attendu: ["losange", "un losange"] },
+          ],
           correction:
             "a) Diagonales de même longueur : c'est un rectangle.\nb) Deux côtés consécutifs égaux : les quatre côtés sont égaux, c'est un losange.\nc) Un angle droit fait un rectangle ; deux côtés consécutifs égaux font un losange. Les deux : c'est un carré.\nd) Diagonales perpendiculaires : c'est un losange. Elles n'ont pas la même longueur ($8 \\neq 5$) : ce n'est pas un carré.\n⛔ Le piège au d) : voir l'angle droit au centre et conclure « carré ». L'angle droit est entre les DIAGONALES, pas entre deux côtés.\nRéponse : a) rectangle ; b) losange ; c) carré ; d) losange.",
           schema: ecranSeulement(quad({ A: [0, 0], B: [6, 0], C: [6, 3.5], D: [0, 3.5] }, { droits: ["A", "B", "C", "D"], diagonales: true, moities: [["OA", "OB", "OC", "OD"]] })),
@@ -401,6 +451,13 @@ export const exercicesParallelogramme5e: FicheExercicesData = {
         },
         {
           enonce: "$ABCD$ est un losange de côté $4{,}5$ cm, et $\\widehat{A} = 124°$.\na) Calcule son périmètre.\nb) Calcule les trois autres angles.\nc) Quel angle font ses diagonales ?",
+          reponses: [
+            { question: "a)", attendu: "18" },
+            { question: "b) B", attendu: "56" },
+            { question: "b) C", attendu: "124" },
+            { question: "b) D", attendu: "56" },
+            { question: "c)", attendu: "90" },
+          ],
           figure: quad({ A: [0, 0], B: [4.5, 0], C: [1.9836, 3.7307], D: [-2.5164, 3.7307] }, { cotes: { AB: "4,5 cm" }, angles: { A: "124°", B: "?" }, trouve: ["B"], egaux: [["AB", "BC", "CD", "DA"]] }),
           correction:
             "a) Un losange a quatre côtés égaux : $4 \\times 4{,}5 = 18$ cm.\nb) Un losange est un parallélogramme. $\\widehat{C}$ est opposé à $\\widehat{A}$ : $124°$.\n$\\widehat{B}$ est consécutif à $\\widehat{A}$ : $180° - 124° = 56°$. $\\widehat{D}$, opposé à $\\widehat{B}$ : $56°$.\nc) Les diagonales d'un losange sont perpendiculaires : elles font un angle droit, $90°$.\n⛔ Le piège : croire qu'un losange a quatre angles égaux, comme un carré. Seuls les angles opposés sont égaux.\nRéponse : a) $18$ cm ; b) $\\widehat{B} = \\widehat{D} = 56°$ et $\\widehat{C} = 124°$ ; c) $90°$.",
@@ -408,6 +465,12 @@ export const exercicesParallelogramme5e: FicheExercicesData = {
         },
         {
           enonce: "$EFGH$ est un rectangle de centre $O$, et sa diagonale $[EG]$ mesure $9{,}6$ cm.\na) Combien mesure $[FH]$ ?\nb) Calcule $OE$ et $OF$.\nc) Quelle est la nature du triangle $OEF$ ?",
+          reponses: [
+            { question: "a)", attendu: "9,6" },
+            { question: "b) OE", attendu: "4,8" },
+            { question: "b) OF", attendu: "4,8" },
+            { question: "c)", attendu: ["isocèle", "isocèle en O"] },
+          ],
           figure: quad({ A: [0, 0], B: [7.68, 0], C: [7.68, 5.76], D: [0, 5.76] }, { noms: { A: "E", B: "F", C: "G", D: "H" }, droits: ["A", "B", "C", "D"], centre: "O", diagonales: true }),
           correction:
             "a) Les diagonales d'un rectangle ont la même longueur : $FH = EG = 9{,}6$ cm.\nb) Un rectangle est un parallélogramme : ses diagonales se coupent en leur milieu. $OE = 9{,}6 \\div 2 = 4{,}8$ cm, et de même $OF = 9{,}6 \\div 2 = 4{,}8$ cm.\nc) $OE = OF$ : le triangle $OEF$ a deux côtés égaux, il est isocèle en $O$.\n⭐ Les quatre moitiés de diagonales mesurent toutes $4{,}8$ cm : les quatre sommets sont sur un cercle de centre $O$.\n⛔ Le piège au b) : donner $OE = 9{,}6$ cm. $O$ est au MILIEU de la diagonale.\nRéponse : a) $9{,}6$ cm ; b) $OE = OF = 4{,}8$ cm ; c) isocèle en $O$.",
@@ -415,6 +478,10 @@ export const exercicesParallelogramme5e: FicheExercicesData = {
         },
         {
           enonce: "Lina affirme : « Mon quadrilatère $ABCD$ a des diagonales de même longueur, donc c'est un rectangle. » Voici son quadrilatère.\na) Est-ce un parallélogramme ?\nb) Lina a-t-elle raison ? Que manque-t-il à son raisonnement ?",
+          reponses: [
+            { question: "a)", attendu: ["non", "faux"] },
+            { question: "b)", attendu: ["non", "faux"] },
+          ],
           figure: quad({ A: [0, 0], B: [6, 0], C: [4.5, 3], D: [1.5, 3] }, { diagonales: true, paralleles: [["AB", "CD"]] }),
           correction:
             "a) Seuls $[AB]$ et $[CD]$ sont parallèles, et ils n'ont pas la même longueur. Ses diagonales ne se coupent pas en leur milieu : ce n'est pas un parallélogramme, c'est un trapèze.\nb) Lina a tort. La propriété dit : un PARALLÉLOGRAMME dont les diagonales ont la même longueur est un rectangle. Son quadrilatère n'est pas un parallélogramme : la propriété ne s'applique pas.\nIl lui manque de vérifier d'abord que les diagonales se coupent en leur milieu.\n⛔ Le piège : oublier la première moitié de la propriété. Des diagonales égales ne suffisent pas : ce trapèze en est la preuve.\nRéponse : a) non ; b) non, il faut d'abord que ce soit un parallélogramme.",
@@ -430,6 +497,9 @@ export const exercicesParallelogramme5e: FicheExercicesData = {
         {
           enonce:
             "Suis ce programme de construction.\n1. Trace un segment $[AC]$ de $6$ cm et place son milieu $O$.\n2. Trace un segment $[BD]$ de $6$ cm, de milieu $O$, qui fait un angle de $50°$ avec $[AC]$.\n3. Trace le quadrilatère $ABCD$.\nQuelle est sa nature ? Justifie.",
+          reponses: [
+            { attendu: ["rectangle", "un rectangle"] },
+          ],
           correction:
             "Les diagonales $[AC]$ et $[BD]$ ont le même milieu $O$ : $ABCD$ est un parallélogramme.\nElles ont en plus la même longueur, $6$ cm : c'est un rectangle.\nElles ne sont pas perpendiculaires (elles font $50°$) : ce n'est pas un losange, donc pas un carré.\n⭐ Contrôle à l'équerre : les quatre angles de $ABCD$ sont droits.\n⛔ Le piège : conclure « losange » parce que les diagonales ont la même longueur. Même longueur : rectangle ; perpendiculaires : losange.\nRéponse : $ABCD$ est un rectangle.",
           schema: ecranSeulement(quad({ A: [-3, 0], B: [-1.9284, -2.2981], C: [3, 0], D: [1.9284, 2.2981] }, { centre: "O", droits: ["A", "B", "C", "D"], moities: [["OA", "OB", "OC", "OD"]] })),
@@ -453,6 +523,13 @@ export const exercicesParallelogramme5e: FicheExercicesData = {
           titre: "Le portail extensible",
           enonce:
             "Un portail extensible est fait de barres articulées. Chaque case est un quadrilatère dont les quatre côtés mesurent $15$ cm. Les mesures sont des modèles.\na) Quelle est la nature d'une case ?\nb) Portail à moitié ouvert, un angle d'une case mesure $64°$. Calcule les trois autres.\nc) Quel angle font les deux diagonales d'une case ?\nd) Peut-on ouvrir le portail pour que chaque case devienne un carré ? Que vaut alors chaque angle ?",
+          reponses: [
+            { question: "a)", attendu: ["losange", "un losange"] },
+            { question: "b)", attendu: "64 ; 116 ; 116" },
+            { question: "c)", attendu: "90" },
+            { question: "d)", attendu: ["oui", "vrai"] },
+            { question: "d) angle", attendu: "90" },
+          ],
           correction:
             "a) Quatre côtés égaux : chaque case est un losange.\nb) Un losange est un parallélogramme. L'angle opposé mesure aussi $64°$ ; les deux angles consécutifs mesurent $180° - 64° = 116°$.\nc) Les diagonales d'un losange sont perpendiculaires : elles font $90°$, quelle que soit l'ouverture.\nd) Oui : quand le portail s'ouvre, les angles changent mais les côtés restent de $15$ cm. Au moment où un angle vaut $90°$, les quatre sont droits : la case est un losange avec un angle droit, c'est un carré.\n⛔ Le piège au b) : croire que les angles restent fixes, comme les longueurs. Les barres gardent leur longueur, mais tournent autour des articulations.\nRéponse : a) un losange ; b) $64°$, $116°$ et $116°$ ; c) $90°$ ; d) oui, avec quatre angles de $90°$.",
           schema: ecranSeulement(quad({ A: [0, 0], B: [3, 0], C: [4.3151, 2.6964], D: [1.3151, 2.6964] }, { angles: { A: "64°", B: "116°", C: "64°", D: "116°" }, trouve: ["B", "C", "D"], egaux: [["AB", "BC", "CD", "DA"]] })),
@@ -462,6 +539,11 @@ export const exercicesParallelogramme5e: FicheExercicesData = {
           titre: "Le pavage de losanges",
           enonce:
             "On pave un sol avec des losanges tous identiques, de côté $3$ cm, dont un angle mesure $60°$. Les mesures sont des modèles.\na) Calcule les autres angles d'un losange.\nb) Autour d'un point du pavage, on met des coins obtus. Combien de losanges faut-il pour faire le tour ?\nc) Et avec des coins aigus ?\nd) Montre que la petite diagonale $[BD]$ mesure $3$ cm.",
+          reponses: [
+            { question: "a)", attendu: "60 ; 120 ; 120" },
+            { question: "b)", attendu: "3" },
+            { question: "c)", attendu: "6" },
+          ],
           figure: quad({ A: [0, 0], B: [3, 0], C: [4.5, 2.5981], D: [1.5, 2.5981] }, { cotes: { AB: "3 cm" }, angles: { A: "60°", B: "?" }, trouve: ["B"], egaux: [["AB", "BC", "CD", "DA"]] }),
           correction:
             "a) L'angle opposé à celui de $60°$ mesure $60°$ ; les deux autres mesurent $180° - 60° = 120°$.\nb) Un tour complet fait $360°$ : $360 \\div 120 = 3$. Il faut $3$ losanges, par leurs coins obtus.\nc) $360 \\div 60 = 6$ : il faut $6$ losanges, par leurs coins aigus. Ils forment une étoile.\nd) Dans le triangle $ABD$, $AB = AD = 3$ cm : il est isocèle en $A$. Ses deux autres angles se partagent $180 - 60 = 120$ degrés : $120 \\div 2 = 60$ chacun. Trois angles de $60°$ : le triangle est équilatéral, donc $BD = 3$ cm.\n⛔ Le piège au b) : diviser $360$ par $60$ par réflexe. Les coins obtus mesurent $120°$ : il en faut deux fois moins.\nRéponse : a) $60°$, $120°$ et $120°$ ; b) $3$ ; c) $6$ ; d) $BD = 3$ cm.",
@@ -471,6 +553,11 @@ export const exercicesParallelogramme5e: FicheExercicesData = {
           titre: "Le segment qui passe par le centre",
           enonce:
             "$ABCD$ est un parallélogramme de centre $O$, avec $AB = 6$ cm. Le point $M$ est sur $[AB]$, avec $AM = 4$ cm. La droite $(MO)$ recoupe $[CD]$ en $M'$. On mesure $OM = 1{,}75$ cm.\na) Quelle est l'image du côté $[AB]$ par la symétrie de centre $O$ ?\nb) Explique pourquoi $M'$ est l'image de $M$.\nc) Calcule $MM'$.\nd) Calcule $CM'$.",
+          reponses: [
+            { question: "a)", attendu: ["[CD]", "CD", "[DC]", "DC"] },
+            { question: "c)", attendu: "3,5" },
+            { question: "d)", attendu: "4" },
+          ],
           figure: quad({ A: [0, 0], B: [6, 0], C: [8, 3.5], D: [2, 3.5] }, { cotes: { AB: "6 cm" }, centre: "O", diagonales: true, points: [{ en: [4, 0], nom: "M", vers: "bas" }, { en: [4, 3.5], nom: "M'", vers: "haut" }] }),
           correction:
             "a) $A$ a pour image $C$ et $B$ a pour image $D$ : l'image de $[AB]$ est $[CD]$.\nb) L'image de $M$ est sur l'image de $[AB]$, donc sur $[CD]$. Elle est aussi sur la droite $(MO)$, puisque $O$ est le milieu du segment qui relie $M$ à son image. Le seul point commun à $[CD]$ et à $(MO)$ est $M'$ : c'est l'image de $M$.\nc) $O$ est le milieu de $[MM']$ : $MM' = 2 \\times 1{,}75 = 3{,}5$ cm.\nd) La symétrie conserve les longueurs : $CM'$ est l'image de $AM$. Donc $CM' = AM = 4$ cm.\n⛔ Le piège au c) : répondre $MM' = 1{,}75$ cm. $OM$ n'est que la moitié du segment.\nRéponse : a) $[CD]$ ; b) voir ci-dessus ; c) $MM' = 3{,}5$ cm ; d) $CM' = 4$ cm.",
@@ -480,6 +567,13 @@ export const exercicesParallelogramme5e: FicheExercicesData = {
           titre: "Le cadre qu'on pousse",
           enonce:
             "Un cadre rectangulaire en bois mesure $40$ cm sur $30$ cm. Ses coins sont mal collés : on le pousse, et il se penche. Les mesures sont des modèles.\na) Le cadre penché est-il toujours un parallélogramme ? Un rectangle ?\nb) Son périmètre a-t-il changé ?\nc) Un angle du cadre penché mesure $72°$. Calcule les trois autres.\nd) Avant la poussée, les diagonales avaient la même longueur. Est-ce encore le cas ?",
+          reponses: [
+            { question: "a) para.", attendu: ["oui", "vrai"] },
+            { question: "a) rect.", attendu: ["non", "faux"] },
+            { question: "b)", attendu: ["non", "faux"] },
+            { question: "c)", attendu: "72 ; 108 ; 108" },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           figure: deux(
             quad({ A: [0, 0], B: [40, 0], C: [40, 30], D: [0, 30] }, { cotes: { AB: "40 cm", DA: "30 cm" }, droits: ["A", "B", "C", "D"] }),
             quad({ A: [0, 0], B: [40, 0], C: [49.2705, 28.5317], D: [9.2705, 28.5317] }, { cotes: { AB: "40 cm", DA: "30 cm" }, angles: { A: "72°" } }),

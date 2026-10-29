@@ -529,6 +529,14 @@ export const exercicesGeometrieEspace3e: FicheExercicesData = {
         {
           enonce:
             "Nommer chaque solide.\na) Six faces, toutes des carrés identiques.\nb) Deux disques identiques et parallèles, reliés par une surface courbe.\nc) Une base carrée et quatre triangles qui se rejoignent en un même point.\nd) Deux triangles identiques et parallèles, reliés par trois rectangles.\ne) Aucune face plane, aucune arête : tous ses points sont à la même distance d'un centre.\nf) Un disque et un sommet, reliés par une surface courbe.",
+          reponses: [
+            { question: "a)", attendu: ["cube", "un cube"] },
+            { question: "b)", attendu: ["cylindre", "un cylindre"] },
+            { question: "c)", attendu: ["pyramide à base carrée", "pyramide", "une pyramide à base carrée", "une pyramide"] },
+            { question: "d)", attendu: ["prisme droit", "prisme", "un prisme droit", "un prisme"] },
+            { question: "e)", attendu: ["boule", "une boule", "sphère", "une sphère"] },
+            { question: "f)", attendu: ["cône", "un cône"] },
+          ],
           correction:
             "Je cherche d'abord les BASES : combien il y en a, de quelle forme, et s'il y a un sommet pointu.\na) Six carrés identiques : c'est un cube.\nb) Deux bases en forme de disque : c'est un cylindre.\nc) Une seule base, carrée, et un sommet où se rejoignent les triangles : c'est une pyramide à base carrée (le dessin).\nd) Deux bases triangulaires : c'est un prisme droit à base triangulaire. Deux bases, donc un prisme, pas une pyramide.\ne) Ni face plane, ni arête : c'est une boule. Sa surface, la « peau », s'appelle une sphère.\nf) Une base en forme de disque et un sommet : c'est un cône.\n⛔ Le piège : confondre prisme et pyramide, ou cylindre et cône. Deux bases : prisme ou cylindre. Une base et un sommet : pyramide ou cône.\nRéponse : cube ; cylindre ; pyramide à base carrée ; prisme droit ; boule ; cône.",
           schema: solide({ sommets: { A: [0, 0, 0], B: [4, 0, 0], C: [4, 4, 0], D: [0, 4, 0], S: [2, 2, 5] }, aretes: ["AB", "BC", "CD", "DA", "SA", "SB", "SC", "SD"], cachees: ["CD", "DA", "SD"], noms: true }),
@@ -537,6 +545,12 @@ export const exercicesGeometrieEspace3e: FicheExercicesData = {
         {
           enonce:
             "Un prisme droit ABCDEF a pour bases les triangles ABC et DEF. Ses arêtes latérales sont [AD], [BE] et [CF].\na) Combien a-t-il de faces ? De quelles formes ?\nb) Combien a-t-il d'arêtes ? De sommets ?\nc) Dans la représentation habituelle, combien d'arêtes sont dessinées en pointillés ?\nd) Vérifier que faces − arêtes + sommets = 2.",
+          reponses: [
+            { question: "a)", attendu: "5" },
+            { question: "b) arêt.", attendu: "9" },
+            { question: "b) somm.", attendu: "6" },
+            { question: "c)", attendu: "3" },
+          ],
           correction:
             "a) Deux bases triangulaires, ABC et DEF, plus une face rectangulaire par côté du triangle : 3 rectangles. En tout 2 + 3 = 5 faces.\nb) Chaque triangle a 3 arêtes, et 3 arêtes relient les deux bases, [AD], [BE] et [CF] : 6 + 3 = 9 arêtes. Chaque triangle a 3 sommets : 3 + 3 = 6 sommets.\nc) Sur le dessin, le sommet D est derrière : ses trois arêtes, [AD], [DE] et [DF], sont cachées. 3 pointillés, et 9 − 3 = 6 traits pleins.\nd) $5 - 9 + 6 = 2$. Le compte est cohérent.\n⛔ Le piège : ne compter que les traits pleins et trouver 6 arêtes. Je compte sur le SOLIDE, pas sur ce que je vois.\nRéponse : 5 faces (2 triangles et 3 rectangles), 9 arêtes, 6 sommets, dont 3 arêtes cachées.",
           schema: solide({ sommets: { A: [0, 0, 0], B: [4, 0, 0], C: [2, 0, 3], D: [0, 5, 0], E: [4, 5, 0], F: [2, 5, 3] }, aretes: ["AB", "BC", "CA", "DE", "EF", "FD", "AD", "BE", "CF"], cachees: ["AD", "DE", "FD"], noms: true }),
@@ -545,6 +559,11 @@ export const exercicesGeometrieEspace3e: FicheExercicesData = {
         {
           enonce:
             "ABCDEFGH est un pavé droit dessiné en perspective cavalière : ABCD est la face du dessous, ABFE la face de devant.\na) Quelles arêtes sont dessinées en pointillés ?\nb) Sur le dessin, la face BCGF est un parallélogramme. Quelle est sa vraie nature ?\nc) Citer les trois arêtes parallèles à [AE].",
+          reponses: [
+            { question: "a)", attendu: ["[AD] ; [DC] ; [DH]", "AD ; DC ; DH", "AD ; CD ; DH", "[AD] ; [CD] ; [DH]"] },
+            { question: "b)", attendu: ["rectangle", "un rectangle"] },
+            { question: "c)", attendu: ["[BF] ; [CG] ; [DH]", "BF ; CG ; DH"] },
+          ],
           correction:
             "a) Je repère le sommet qui est derrière, en bas, à gauche : c'est D. Les trois arêtes qui en partent sont cachées : [AD], [DC] et [DH].\nb) Toutes les faces d'un pavé droit sont des rectangles. BCGF est vue de biais : la perspective incline ses angles, mais en réalité ce sont des angles droits. BCGF est un rectangle.\nc) Les quatre arêtes « verticales » du pavé sont parallèles : [AE], [BF], [CG] et [DH]. La perspective conserve le parallélisme : sur le dessin aussi, elles sont parallèles.\n⛔ Le piège : croire que BCGF est un parallélogramme parce qu'elle est dessinée ainsi. Le dessin déforme les angles, jamais la nature d'une face.\nRéponse : [AD], [DC] et [DH] ; BCGF est un rectangle ; [BF], [CG] et [DH].",
           schema: pave(5, 3, 2, ["AD", "CD", "DH"], { noms: true }),
@@ -553,6 +572,13 @@ export const exercicesGeometrieEspace3e: FicheExercicesData = {
         {
           enonce:
             "On coupe chaque solide par un plan. Quelle est la forme de la section ?\na) Un cube, parallèlement à une face.\nb) Un cylindre, parallèlement à ses bases.\nc) Un cylindre, par un plan qui contient son axe.\nd) Une pyramide à base carrée, parallèlement à sa base.\ne) Une boule, par n'importe quel plan.",
+          reponses: [
+            { question: "a)", attendu: ["carré", "un carré"] },
+            { question: "b)", attendu: ["disque", "un disque"] },
+            { question: "c)", attendu: ["rectangle", "un rectangle"] },
+            { question: "d)", attendu: ["carré", "un carré", "un carré plus petit"] },
+            { question: "e)", attendu: ["disque", "un disque"] },
+          ],
           correction:
             "La section est toujours une figure PLANE. Sa forme dépend du solide ET du sens de la coupe.\na) Parallèlement à une face, le cube est coupé comme une tranche de pain de mie : la section est un carré, identique aux faces.\nb) Parallèlement aux bases, le cylindre donne une rondelle : un disque, de même rayon que les bases.\nc) Par un plan qui contient l'axe, le cylindre est coupé dans sa hauteur : la section est un rectangle (le dessin).\nd) Parallèlement à la base, la pyramide donne un carré plus petit que la base : une réduction de la base.\ne) Une boule coupée par un plan donne toujours un disque, dont le bord est un cercle.\n⛔ Le piège : croire que toute section d'un cylindre est un disque. Tout dépend du sens de la coupe : dans la hauteur, c'est un rectangle.\nRéponse : un carré ; un disque ; un rectangle ; un carré plus petit ; un disque.",
           schema: coupe("cylindre", "parallele_axe", "cylindre coupé selon son axe : un rectangle"),
@@ -561,6 +587,14 @@ export const exercicesGeometrieEspace3e: FicheExercicesData = {
         {
           enonce:
             "ABCDEFGH est un pavé droit avec AB = 4, AD = 3 et AE = 2. On prend A comme origine, l'axe des abscisses sur [AB], celui des ordonnées sur [AD] et celui des altitudes sur [AE].\nDonner les coordonnées de A, B, D, E, C et G.",
+          reponses: [
+            { question: "A", attendu: "(0 ; 0 ; 0)" },
+            { question: "B", attendu: "(4 ; 0 ; 0)" },
+            { question: "D", attendu: "(0 ; 3 ; 0)" },
+            { question: "E", attendu: "(0 ; 0 ; 2)" },
+            { question: "C", attendu: "(4 ; 3 ; 0)" },
+            { question: "G", attendu: "(4 ; 3 ; 2)" },
+          ],
           correction:
             "Pour chaque sommet, je lis trois longueurs, toujours dans le même ordre : d'abord le long de [AB] (abscisse), puis le long de [AD] (ordonnée), enfin vers le haut, le long de [AE] (altitude).\nA est l'origine : A(0 ; 0 ; 0).\nB : j'avance de 4 le long de [AB], rien d'autre : B(4 ; 0 ; 0).\nD : 3 le long de [AD] : D(0 ; 3 ; 0).\nE : je monte de 2 : E(0 ; 0 ; 2).\nC : 4, puis 3, sans monter : C(4 ; 3 ; 0).\nG : 4, puis 3, puis je monte de 2 (le chemin orange) : G(4 ; 3 ; 2).\n⛔ Le piège : écrire les nombres dans le désordre, par exemple G(4 ; 2 ; 3). L'ordre est fixe : abscisse, ordonnée, altitude.\nRéponse : A(0 ; 0 ; 0), B(4 ; 0 ; 0), D(0 ; 3 ; 0), E(0 ; 0 ; 2), C(4 ; 3 ; 0), G(4 ; 3 ; 2).",
           schema: pave(4, 3, 2, ["AD", "CD", "DH"], { noms: true, axes: true, points: [{ nom: "G", p: [4, 3, 2], texte: "", chemin: true }] }),
@@ -569,6 +603,12 @@ export const exercicesGeometrieEspace3e: FicheExercicesData = {
         {
           enonce:
             "Paris a pour coordonnées géographiques (49° N ; 2° E) et Sydney (34° S ; 151° E).\na) Paris est-elle au nord ou au sud de l'équateur ? À l'est ou à l'ouest du méridien de Greenwich ?\nb) Même question pour Sydney.\nc) Un élève écrit Paris (2° N ; 49° E). Où tomberait ce point ?",
+          reponses: [
+            { question: "a) N/S", attendu: ["nord", "au nord"] },
+            { question: "a) E/O", attendu: ["est", "à l'est"] },
+            { question: "b) N/S", attendu: ["sud", "au sud"] },
+            { question: "b) E/O", attendu: ["est", "à l'est"] },
+          ],
           correction:
             "La latitude se lit EN PREMIER : c'est l'écart à l'équateur, vers le Nord (N) ou vers le Sud (S). La longitude vient ensuite : l'écart au méridien de Greenwich, vers l'Est (E) ou vers l'Ouest (O).\na) Paris (49° N ; 2° E) : N, donc au nord de l'équateur ; E, donc à l'est de Greenwich, de très peu.\nb) Sydney (34° S ; 151° E) : S, donc au sud de l'équateur ; E, donc à l'est de Greenwich, presque à l'opposé (151° sur 180°).\nc) (2° N ; 49° E) voudrait dire 2° au nord de l'équateur et 49° à l'est de Greenwich : en plein océan Indien, au large de la Somalie, à plus de 5 000 km de Paris.\n⭐ Sur le dessin, les 49° de Paris sont un ANGLE, mesuré au centre de la Terre à partir de l'équateur.\n⛔ Le piège : inverser latitude et longitude. L'ordre est toujours (latitude ; longitude), comme sur un GPS.\nRéponse : Paris est au nord de l'équateur et à l'est de Greenwich ; Sydney est au sud de l'équateur et à l'est de Greenwich.",
           schema: globe({ centre: -48, paralleles: [0], meridiens: [0], villes: [{ nom: "Paris", lat: 49, lon: 2, angle: true }] }, "en orange l'équateur, en vert le méridien de Greenwich"),
@@ -577,6 +617,13 @@ export const exercicesGeometrieEspace3e: FicheExercicesData = {
         {
           enonce:
             "a) Quito, capitale de l'Équateur, a pour latitude 0°. Sur quelle ligne se trouve-t-elle ?\nb) L'observatoire de Greenwich, à Londres, a pour longitude 0°. Quelle ligne passe par lui ?\nc) Quelle est la latitude du pôle Nord ? Peut-on donner sa longitude ?\nd) Une latitude peut-elle valoir 120° ? Et une longitude ?",
+          reponses: [
+            { question: "a)", attendu: ["équateur", "l'équateur"] },
+            { question: "b)", attendu: ["méridien de Greenwich", "le méridien de Greenwich", "Greenwich"] },
+            { question: "c) lat.", attendu: ["90° N", "90 N", "90°", "90"] },
+            { question: "d) lat.", attendu: ["non", "faux"] },
+            { question: "d) long.", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) Latitude 0° : Quito est sur l'équateur, la ligne des points à 0° de latitude. Le pays porte d'ailleurs son nom.\nb) Longitude 0° : c'est le méridien de Greenwich, le méridien d'origine, choisi en 1884.\nc) Le pôle Nord est le point le plus éloigné de l'équateur vers le Nord : 90° N. Tous les méridiens s'y rejoignent : sa longitude n'est pas définie, n'importe laquelle convient.\nd) Une latitude va de 0° à 90°, vers le Nord ou vers le Sud : 120° est impossible. Une longitude va de 0° à 180°, vers l'Est ou vers l'Ouest : 120° E existe, ce méridien traverse la Chine.\n⛔ Le piège : donner la même étendue aux deux. La latitude s'arrête à 90° (au pôle), la longitude à 180° (de l'autre côté de la Terre).\nRéponse : l'équateur ; le méridien de Greenwich ; 90° N, longitude quelconque ; une latitude de 120° est impossible, une longitude de 120° est possible.",
           schema: globe({ centre: -40, paralleles: [0], meridiens: [0], villes: [{ nom: "Quito", lat: 0, lon: -79 }, { nom: "Greenwich", lat: 51, lon: 0 }] }, "en orange l'équateur, en vert le méridien de Greenwich"),
@@ -585,6 +632,12 @@ export const exercicesGeometrieEspace3e: FicheExercicesData = {
         {
           enonce:
             "On assimile la Terre à une sphère.\na) Un parallèle est la section de la sphère par un plan. Lequel ? Quelle est la forme de la section ?\nb) Quel est le plus grand des parallèles ?\nc) Le parallèle 60° N est-il plus long ou plus court que l'équateur ?\nd) Un méridien est-il aussi lié à une section de la sphère ? Par quel plan ?",
+          reponses: [
+            { question: "a) forme", attendu: ["cercle", "un cercle"] },
+            { question: "b)", attendu: ["équateur", "l'équateur"] },
+            { question: "c)", attendu: ["plus court", "court"] },
+            { question: "d)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) Un parallèle est l'ensemble des points de même latitude. C'est la section de la sphère par un plan PARALLÈLE au plan de l'équateur : un cercle.\nb) Le plus grand est l'équateur : son plan passe par le centre de la Terre, et c'est la coupe par le centre qui donne le plus grand cercle. On l'appelle un grand cercle.\nc) Plus court. En montant vers le pôle, les plans de coupe s'éloignent du centre et les cercles rétrécissent, jusqu'au pôle, où il ne reste qu'un point. Le parallèle 60° N mesure même la moitié de l'équateur : environ 20 000 km.\nd) Oui : un méridien est la moitié de la section de la sphère par un plan qui contient l'axe des pôles. Cette section est un grand cercle, formé de deux méridiens opposés.\n⛔ Le piège : croire que tous les parallèles ont la même longueur, parce qu'ils sont parallèles. Parallèles ne veut pas dire égaux.\nRéponse : un plan parallèle à l'équateur, la section est un cercle ; l'équateur ; plus court, la moitié de l'équateur ; oui, un plan qui contient l'axe des pôles.",
           schema: globe({ centre: 0, paralleles: [-60, -30, 0, 30, 60], meridiens: [0], surligne: 60 }, "les parallèles rétrécissent vers les pôles"),
@@ -607,6 +660,11 @@ export const exercicesGeometrieEspace3e: FicheExercicesData = {
         {
           enonce:
             "Une pièce a la forme d'un pavé droit : 6 m de long, 4 m de large, 3 m de haut. Un coin du sol, O, est l'origine du repère : abscisses le long de la longueur, ordonnées le long de la largeur, altitudes vers le plafond (en mètres).\na) Quelles sont les coordonnées du coin du plafond le plus éloigné de O ?\nb) Une lampe L est fixée au centre du plafond. Quelles sont ses coordonnées ?\nc) Un drone est au point D(5 ; 1 ; 2). Décrire comment l'atteindre depuis O.\nd) Le point (2 ; 7 ; 1) est-il dans la pièce ?",
+          reponses: [
+            { question: "a)", attendu: "(6 ; 4 ; 3)" },
+            { question: "b)", attendu: "(3 ; 2 ; 3)" },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) Le coin opposé est au bout des trois dimensions : 6 m de long, 4 m de large, 3 m de haut. Ses coordonnées sont (6 ; 4 ; 3).\nb) Le centre du plafond est au milieu de la longueur et au milieu de la largeur, $6 \\div 2 = 3$ et $4 \\div 2 = 2$, tout en haut : L(3 ; 2 ; 3).\nc) Je lis dans l'ordre : j'avance de 5 m le long de la longueur, puis de 1 m le long de la largeur, puis je monte de 2 m (le chemin orange).\nd) L'ordonnée vaut 7, mais la pièce n'a que 4 m de large : le point est dehors, derrière le mur.\n⛔ Le piège : lire (5 ; 1 ; 2) dans le désordre. Le point (1 ; 5 ; 2) serait à 5 m dans la largeur : hors de la pièce.\nRéponse : (6 ; 4 ; 3) ; L(3 ; 2 ; 3) ; 5 m, puis 1 m, puis 2 m vers le haut ; non.",
           schema: pave(6, 4, 3, ["AD", "CD", "DH"], { noms: { A: "O" }, axes: true, cotes: { AB: "6 m", AE: "3 m" }, points: [{ nom: "L", p: [3, 2, 3], etiquette: "dessus" }, { nom: "D", p: [5, 1, 2], chemin: true, etiquette: "droite" }] }),
@@ -615,6 +673,13 @@ export const exercicesGeometrieEspace3e: FicheExercicesData = {
         {
           enonce:
             "Sur le pont d'un porte-conteneurs, les conteneurs forment un bloc de 5 conteneurs de long, 3 de large et 4 de haut. Chacun est repéré par (rang dans la longueur ; rang dans la largeur ; étage), en comptant à partir de 1.\na) Combien de conteneurs y a-t-il à l'étage 4 ?\nb) Le conteneur rouge est en (4 ; 2 ; 3). Quel conteneur est juste au-dessus de lui ? Juste en dessous ?\nc) Pour le décharger, il faut d'abord enlever tous ceux qui sont au-dessus de lui. Combien ?\nd) Un conteneur mesure 2,59 m de haut. À quelle hauteur au-dessus du pont se trouve le toit du conteneur rouge ?",
+          reponses: [
+            { question: "a)", attendu: "15" },
+            { question: "b) haut", attendu: "(4 ; 2 ; 4)" },
+            { question: "b) bas", attendu: "(4 ; 2 ; 2)" },
+            { question: "c)", attendu: "1" },
+            { question: "d)", attendu: "7,77" },
+          ],
           correction:
             "a) Un étage est une couche du bloc : 5 conteneurs de long sur 3 de large, soit $5 \\times 3 = 15$ conteneurs.\nb) Au-dessus, seul l'étage change, les deux premiers nombres restent : (4 ; 2 ; 4). En dessous : (4 ; 2 ; 2).\nc) Le rouge est à l'étage 3 et le bloc en a 4 : au-dessus de lui, il n'y a que (4 ; 2 ; 4). Un seul conteneur à enlever.\nd) Le toit du rouge est en haut du 3e étage : trois conteneurs empilés, $3 \\times 2{,}59 = 7{,}77$ m au-dessus du pont.\n⛔ Le piège : chercher (2 ; 4 ; 3), le rouge écrit dans le désordre. Ce conteneur n'existe même pas : le bloc n'a que 3 rangées dans la largeur.\nRéponse : 15 ; (4 ; 2 ; 4) et (4 ; 2 ; 2) ; 1 ; 7,77 m.",
           schema: legendeSous(pave(5, 3, 4, ["AD", "CD", "DH"], { grille: true, boites: [{ de: [3, 1, 2], a: [4, 2, 3] }] }), "le conteneur rouge, vu en transparence (sans les proportions)"),
@@ -623,6 +688,18 @@ export const exercicesGeometrieEspace3e: FicheExercicesData = {
         {
           enonce:
             "ABCDEFGH est un pavé droit. Dans le repère d'origine A, les axes sont portés par [AB], [AD] et [AE], et G(5 ; 3 ; 4).\na) Donner les longueurs AB, AD et AE.\nb) Donner les coordonnées de B, C, D, E, F et H.\nc) Le point I est le milieu de [AG], le centre du pavé. Quelles sont ses coordonnées ?",
+          reponses: [
+            { question: "AB", attendu: "5" },
+            { question: "AD", attendu: "3" },
+            { question: "AE", attendu: "4" },
+            { question: "B", attendu: "(5 ; 0 ; 0)" },
+            { question: "C", attendu: "(5 ; 3 ; 0)" },
+            { question: "D", attendu: "(0 ; 3 ; 0)" },
+            { question: "E", attendu: "(0 ; 0 ; 4)" },
+            { question: "F", attendu: "(5 ; 0 ; 4)" },
+            { question: "H", attendu: "(0 ; 3 ; 4)" },
+            { question: "I", attendu: "(2,5 ; 1,5 ; 2)" },
+          ],
           correction:
             "a) G est le sommet opposé à A : ses trois coordonnées sont les trois dimensions du pavé. AB = 5, AD = 3 et AE = 4.\nb) Je repère chaque sommet par les arêtes qui y mènent depuis A.\nB(5 ; 0 ; 0), C(5 ; 3 ; 0), D(0 ; 3 ; 0) : les trois sont au sol, altitude 0.\nE(0 ; 0 ; 4), F(5 ; 0 ; 4), H(0 ; 3 ; 4) : les trois sont en haut, altitude 4.\nc) Le milieu de [AG] a pour coordonnées les moitiés de celles de G : $5 \\div 2 = 2{,}5$ ; $3 \\div 2 = 1{,}5$ ; $4 \\div 2 = 2$. Donc I(2,5 ; 1,5 ; 2).\n⛔ Le piège : placer F au-dessus de A. ABFE est la face de devant : F est au-dessus de B, en haut à droite.\nRéponse : AB = 5, AD = 3, AE = 4 ; B(5 ; 0 ; 0), C(5 ; 3 ; 0), D(0 ; 3 ; 0), E(0 ; 0 ; 4), F(5 ; 0 ; 4), H(0 ; 3 ; 4) ; I(2,5 ; 1,5 ; 2).",
           schema: pave(5, 3, 4, ["AD", "CD", "DH"], { noms: true, axes: true, segments: ["AG"], points: [{ nom: "I", p: [2.5, 1.5, 2] }] }),
@@ -631,6 +708,12 @@ export const exercicesGeometrieEspace3e: FicheExercicesData = {
         {
           enonce:
             "Voici quatre villes et leurs coordonnées géographiques, arrondies au degré : Reykjavik (64° N ; 22° O) ; Quito (0° ; 79° O) ; Tokyo (36° N ; 140° E) ; Sydney (34° S ; 151° E).\na) Laquelle est la plus au nord ?\nb) Lesquelles sont dans l'hémisphère Sud ?\nc) Lesquelles sont à l'ouest du méridien de Greenwich ?\nd) Un élève dit : « Tokyo et Sydney sont presque à la même latitude, 36° et 34°. » Qu'en penser ?",
+          reponses: [
+            { question: "a)", attendu: ["Reykjavik"] },
+            { question: "b)", attendu: ["Sydney"] },
+            { question: "c)", attendu: ["Reykjavik ; Quito"] },
+            { question: "d)", attendu: ["faux", "non"] },
+          ],
           correction:
             "a) Je compare les latitudes NORD : Reykjavik 64° N, Tokyo 36° N. Reykjavik est la plus au nord.\nb) Seule Sydney a une latitude S. Quito, à 0°, est sur l'équateur (en réalité juste au sud, à moins de 30 km).\nc) Les longitudes O sont à l'ouest de Greenwich : Reykjavik et Quito.\nd) Faux : 36° N et 34° S sont de part et d'autre de l'équateur. L'écart de latitude est $36 + 34 = 70$ degrés, pas 2.\n⛔ Le piège : comparer les nombres sans regarder la lettre. N ou S, E ou O, c'est la moitié de l'information.\nRéponse : Reykjavik ; Sydney ; Reykjavik et Quito ; faux, 70 degrés de latitude les séparent.",
           schema: planisphere(
@@ -647,6 +730,12 @@ export const exercicesGeometrieEspace3e: FicheExercicesData = {
         {
           enonce:
             "Sur le planisphère ci-dessous, les lignes sont tracées tous les 30°. L'équateur est en orange, le méridien de Greenwich en vert.\nDonner les coordonnées géographiques des points A, B, C et D.",
+          reponses: [
+            { question: "A", attendu: ["(60° N ; 30° O)", "(60 N ; 30 O)"] },
+            { question: "B", attendu: ["(30° N ; 120° E)", "(30 N ; 120 E)"] },
+            { question: "C", attendu: ["(0° ; 90° O)", "(0 ; 90 O)"] },
+            { question: "D", attendu: ["(30° S ; 150° E)", "(30 S ; 150 E)"] },
+          ],
           figure: planisphere(
             [
               { nom: "A", lat: 60, lon: -30 },
@@ -672,6 +761,18 @@ export const exercicesGeometrieEspace3e: FicheExercicesData = {
         {
           enonce:
             "a) Combien une pyramide à base carrée a-t-elle de faces, d'arêtes, de sommets ?\nb) Même question pour une pyramide à base hexagonale (6 côtés).\nc) La base d'une pyramide a n côtés. Exprimer en fonction de n son nombre de faces, d'arêtes et de sommets, puis vérifier que faces − arêtes + sommets = 2.\nd) Une pyramide peut-elle avoir 15 arêtes ?",
+          reponses: [
+            { question: "a) faces", attendu: "5" },
+            { question: "a) arêt.", attendu: "8" },
+            { question: "a) somm.", attendu: "5" },
+            { question: "b) faces", attendu: "7" },
+            { question: "b) arêt.", attendu: "12" },
+            { question: "b) somm.", attendu: "7" },
+            { question: "c) faces", attendu: "n+1" },
+            { question: "c) arêt.", attendu: "2n" },
+            { question: "c) somm.", attendu: "n+1" },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           correction:
             "Une pyramide, c'est une base, plus un triangle par côté de la base, tous réunis au sommet.\na) Base carrée : 1 base + 4 triangles = 5 faces ; 4 arêtes de base + 4 qui montent au sommet = 8 arêtes ; 4 sommets de base + le sommet = 5 sommets.\nb) Base hexagonale (le dessin) : 1 + 6 = 7 faces ; 6 + 6 = 12 arêtes ; 6 + 1 = 7 sommets.\nc) Avec n côtés : n + 1 faces, 2n arêtes (n autour de la base, n qui montent), n + 1 sommets. Et $(n + 1) - 2n + (n + 1) = 2$ : ça marche pour tout n.\nd) Le nombre d'arêtes vaut 2n : il est toujours PAIR. 15 est impair : aucune pyramide n'a 15 arêtes.\n⛔ Le piège : oublier les arêtes cachées. Sur le dessin, 5 arêtes sont en pointillés : je compte 12, pas 7.\nRéponse : 5, 8, 5 ; 7, 12, 7 ; n + 1, 2n, n + 1 ; non, le nombre d'arêtes d'une pyramide est toujours pair.",
           schema: solide({ sommets: { A: [-2.82, -1.03, 0], B: [-0.52, -2.95, 0], C: [2.3, -1.93, 0], D: [2.82, 1.03, 0], E: [0.52, 2.95, 0], F: [-2.3, 1.93, 0], S: [0, 0, 4] }, aretes: ["AB", "BC", "CD", "DE", "EF", "FA", "SA", "SB", "SC", "SD", "SE", "SF"], cachees: ["DE", "EF", "FA", "SE", "SF"] }),
@@ -680,6 +781,13 @@ export const exercicesGeometrieEspace3e: FicheExercicesData = {
         {
           enonce:
             "a) Un pavé droit de 6 cm × 4 cm × 3 cm est coupé par un plan parallèle à sa face de 6 cm sur 3 cm. Nature et dimensions de la section ?\nb) Un cylindre de rayon 5 cm et de hauteur 12 cm est coupé par un plan qui contient son axe. Nature et dimensions de la section ?\nc) Une boule de centre O et de rayon 5 cm est coupée par un plan situé à 3 cm de O. Quel est le rayon du disque obtenu ?",
+          reponses: [
+            { question: "a) nat.", attendu: ["rectangle", "un rectangle"] },
+            { question: "a) dim.", attendu: "6 ; 3" },
+            { question: "b) nat.", attendu: ["rectangle", "un rectangle"] },
+            { question: "b) dim.", attendu: "10 ; 12" },
+            { question: "c)", attendu: "4" },
+          ],
           correction:
             "a) Une coupe parallèle à une face donne une figure identique à cette face : un rectangle de 6 cm sur 3 cm.\nb) Le plan passe par l'axe : il traverse le cylindre sur toute sa largeur, c'est-à-dire un DIAMÈTRE, et sur toute sa hauteur. La section est un rectangle de $2 \\times 5 = 10$ cm sur 12 cm.\nc) Je nomme H le centre du disque et M un point de son bord (le dessin). Le triangle OHM est rectangle en H, avec OH = 3 cm et OM = 5 cm, un rayon de la boule. Par le théorème de Pythagore : $HM^2 = 5^2 - 3^2 = 25 - 9 = 16$, donc HM = 4 cm.\n⛔ Le piège au b) : prendre le rayon, 5 cm, pour la largeur. Le plan coupe le cylindre selon un diamètre : 10 cm.\nRéponse : un rectangle de 6 cm sur 3 cm ; un rectangle de 10 cm sur 12 cm ; un disque de rayon 4 cm.",
           schema: coupeBoule(5, 3),
@@ -688,6 +796,14 @@ export const exercicesGeometrieEspace3e: FicheExercicesData = {
         {
           enonce:
             "ABCDEFGH est un cube de 4 cm d'arête, dessiné en perspective cavalière avec des fuyantes réduites de moitié. ABCD est la face du dessous, ABFE la face de devant.\na) Sur le dessin, [AB] mesure 4 cm. Combien mesure [BC] sur le dessin ? Et en réalité ?\nb) Sur le dessin, l'angle ABC mesure 135°. Quelle est sa vraie mesure ?\nc) Quelle est la vraie nature du triangle ABC ? Calculer AC, arrondi au centième.\nd) Quelles arêtes sont cachées ?",
+          reponses: [
+            { question: "a) des.", attendu: "2" },
+            { question: "a) réel", attendu: "4" },
+            { question: "b)", attendu: "90" },
+            { question: "c) nat.", attendu: ["rectangle isocèle", "triangle rectangle isocèle", "rectangle isocèle en B"] },
+            { question: "c) AC", attendu: "5,66", tolerance: 0.005 },
+            { question: "d)", attendu: ["[AD] ; [DC] ; [DH]", "AD ; DC ; DH", "AD ; CD ; DH", "[AD] ; [CD] ; [DH]"] },
+          ],
           correction:
             "a) [BC] part vers l'arrière : c'est une fuyante, réduite de moitié. Sur le dessin, $4 \\div 2 = 2$ cm. En réalité, c'est une arête du cube : 4 cm.\nb) ABCD est une face du cube, donc un carré : l'angle ABC est droit, il mesure 90°. Le dessin l'a ouvert à 135°.\nc) AB = BC = 4 cm et l'angle en B est droit : ABC est rectangle et isocèle en B. Par le théorème de Pythagore : $AC^2 = 4^2 + 4^2 = 32$, donc $AC = \\sqrt{32} \\approx 5{,}66$ cm.\nd) Le sommet D est derrière, en bas, à gauche : [AD], [DC] et [DH] sont cachées.\n⛔ Le piège : mesurer à la règle sur le dessin. Les fuyantes sont raccourcies et les angles déformés : je calcule avec les vraies dimensions.\nRéponse : 2 cm sur le dessin, 4 cm en réalité ; 90° ; ABC est rectangle isocèle en B et AC ≈ 5,66 cm ; [AD], [DC] et [DH].",
           schema: pave(4, 4, 4, ["AD", "CD", "DH"], { noms: true, segments: ["AC"] }),
@@ -710,6 +826,10 @@ export const exercicesGeometrieEspace3e: FicheExercicesData = {
           titre: "Le drone de la salle de sport",
           enonce:
             "Une salle de sport est un pavé droit de 20 m de long, 12 m de large et 8 m de haut. Un coin du sol, O, est l'origine du repère (en mètres). Un drone décolle de P(2 ; 2 ; 0) et reçoit trois ordres : avancer de 12 m selon l'axe des abscisses, puis de 6 m selon l'axe des ordonnées, puis monter de 5 m.\na) Quelles sont les coordonnées de son point d'arrivée M ?\nb) Une caméra C est fixée au centre du plafond. Quelles sont ses coordonnées ?\nc) Quels ordres donner au drone, depuis M, pour qu'il se place 2 m sous la caméra ?\nd) Arrivé là, le pilote ordonne « monter de 3 m ». Que se passe-t-il ?",
+          reponses: [
+            { question: "a)", attendu: "(14 ; 8 ; 5)" },
+            { question: "b)", attendu: "(10 ; 6 ; 8)" },
+          ],
           correction:
             "a) Chaque ordre ne change qu'UNE coordonnée. Abscisse : $2 + 12 = 14$. Ordonnée : $2 + 6 = 8$. Altitude : $0 + 5 = 5$. Donc M(14 ; 8 ; 5), au bout du chemin orange.\nb) Le centre du plafond est au milieu de la longueur et au milieu de la largeur, tout en haut : $20 \\div 2 = 10$ et $12 \\div 2 = 6$, donc C(10 ; 6 ; 8).\nc) 2 m sous la caméra, c'est le point (10 ; 6 ; 6). Depuis M(14 ; 8 ; 5) : reculer de $14 - 10 = 4$ m selon les abscisses, reculer de $8 - 6 = 2$ m selon les ordonnées, monter de $6 - 5 = 1$ m.\nd) L'altitude passerait à $6 + 3 = 9$ m, mais le plafond est à 8 m, et la caméra juste au-dessus du drone : il la percute au bout de 2 m.\n⛔ Le piège : ajouter les 12 m à la mauvaise coordonnée. « Selon l'axe des abscisses » ne touche QUE le premier nombre.\nRéponse : M(14 ; 8 ; 5) ; C(10 ; 6 ; 8) ; reculer de 4 m, reculer de 2 m, monter de 1 m ; le drone heurte la caméra.",
           schema: pave(20, 12, 8, ["AD", "CD", "DH"], { noms: { A: "O" }, chemin: [[2, 2, 0], [14, 2, 0], [14, 8, 0], [14, 8, 5]], points: [{ nom: "P", p: [2, 2, 0] }, { nom: "M", p: [14, 8, 5], etiquette: "droite" }, { nom: "C", p: [10, 6, 8], etiquette: "dessus" }] }),
@@ -719,6 +839,10 @@ export const exercicesGeometrieEspace3e: FicheExercicesData = {
           titre: "De Stockholm au Cap",
           enonce:
             "Stockholm a pour coordonnées (59° N ; 18° E) et Le Cap (34° S ; 18° E).\na) Que remarque-t-on sur leurs longitudes ? Qu'en déduire ?\nb) Quel angle, mesuré au centre de la Terre, sépare les deux villes ?\nc) Le tour de la Terre par les pôles mesure environ 40 000 km. Quelle distance sépare les deux villes le long du méridien ? Arrondir à la centaine de kilomètres.\nd) Un élève trouve 25° au b). Quelle est son erreur ?",
+          reponses: [
+            { question: "b)", attendu: "93" },
+            { question: "c)", attendu: "10300", tolerance: 50 },
+          ],
           correction:
             "a) Même longitude, 18° E : les deux villes sont sur le même méridien. Si on coupe la Terre par le plan de ce méridien, on obtient un grand cercle qui passe par les deux villes (le dessin).\nb) Les latitudes se mesurent à partir de l'équateur, chacune de son côté : 59° vers le Nord, 34° vers le Sud. L'angle total est $59 + 34 = 93$ degrés.\nc) Le tour complet, 360°, mesure 40 000 km, et la distance est proportionnelle à l'angle : $\\dfrac{93}{360} \\times 40\\,000 \\approx 10\\,333$ km, soit environ 10 300 km.\nd) Il a calculé $59 - 34 = 25$, comme si les deux villes étaient du même côté de l'équateur. L'une est au Nord, l'autre au Sud : j'additionne.\n⭐ Contrôle : 1° de méridien vaut $40\\,000 \\div 360 \\approx 111$ km, et $93 \\times 111 = 10\\,323$ km. Même résultat, à la centaine près.\nRéponse : les deux villes sont sur le même méridien ; 93° ; environ 10 300 km.",
           schema: coupeMeridien([{ nom: "Stockholm", lat: 59 }, { nom: "Le Cap", lat: -34 }]),
@@ -728,6 +852,10 @@ export const exercicesGeometrieEspace3e: FicheExercicesData = {
           titre: "Les antipodes",
           enonce:
             "L'antipode d'un lieu est le point de la Terre diamétralement opposé : on l'atteint en traversant la Terre en ligne droite, par son centre.\na) Madrid a pour coordonnées (40° N ; 4° O). Quelles sont celles de son antipode ?\nb) Les îles des Antipodes, en Nouvelle-Zélande, sont en (50° S ; 179° E). Où se trouve leur antipode ?\nc) Énoncer la règle qui donne l'antipode d'un lieu.",
+          reponses: [
+            { question: "a)", attendu: ["(40° S ; 176° E)", "(40 S ; 176 E)"] },
+            { question: "b)", attendu: ["(50° N ; 1° O)", "(50 N ; 1 O)"] },
+          ],
           correction:
             "a) Traverser par le centre fait passer de l'autre côté de l'équateur, à la même distance : la latitude garde son nombre et change de lettre, 40° N devient 40° S.\nPour la longitude, je fais le demi-tour de la Terre : $180 - 4 = 176$, et je passe de l'autre côté de Greenwich, O devient E. L'antipode de Madrid est (40° S ; 176° E) : en Nouvelle-Zélande, près du village de Weber.\nb) Même règle : 50° S devient 50° N, et $180 - 179 = 1$, E devient O. Le point (50° N ; 1° O) est en Normandie, près de Barfleur, dans le Cotentin. Ces îles doivent leur nom à leur position : presque à l'opposé de l'Europe de l'Ouest.\nc) Latitude : le même nombre, N et S échangés. Longitude : 180 moins le nombre, E et O échangés.\n⛔ Le piège : garder 4° et changer seulement la lettre. Le point (40° S ; 4° E) est en plein océan, au sud-ouest de l'Afrique, pas du tout à l'opposé de Madrid.\nRéponse : (40° S ; 176° E) ; (50° N ; 1° O), en Normandie ; la latitude garde son nombre et change de côté, la longitude devient 180 moins son nombre et change de côté.",
           schema: planisphere(
@@ -743,6 +871,11 @@ export const exercicesGeometrieEspace3e: FicheExercicesData = {
           titre: "Le ballon de football",
           enonce:
             "Le ballon Telstar, dessiné pour la Coupe du monde de 1970, est cousu de 12 pentagones et 20 hexagones. On le voit comme un solide à faces planes : chaque arête est commune à exactement deux pièces, et en chaque sommet se rejoignent exactement trois pièces.\na) Combien le ballon a-t-il de faces ?\nb) Combien a-t-il d'arêtes ?\nc) Combien a-t-il de sommets ?\nd) Vérifier la relation faces − arêtes + sommets = 2.",
+          reponses: [
+            { question: "a)", attendu: "32" },
+            { question: "b)", attendu: "90" },
+            { question: "c)", attendu: "60" },
+          ],
           correction:
             "a) Chaque pièce est une face : $12 + 20 = 32$ faces.\nb) Je compte les côtés de toutes les pièces : $12 \\times 5 = 60$ pour les pentagones, $20 \\times 6 = 120$ pour les hexagones, $60 + 120 = 180$ côtés. Mais chaque arête est le côté de DEUX pièces : je l'ai comptée deux fois. $180 \\div 2 = 90$ arêtes.\nc) Même idée : les 180 coins des pièces se regroupent par trois en chaque sommet. $180 \\div 3 = 60$ sommets.\nd) $32 - 90 + 60 = 2$. La relation d'Euler est vérifiée : le décompte est cohérent.\n⛔ Le piège : s'arrêter à 180 arêtes. Deux pièces cousues partagent la même couture : chaque arête est comptée deux fois.\nRéponse : 32 faces, 90 arêtes et 60 sommets.",
           schema: tableauProba(

@@ -399,6 +399,12 @@ export const exercicesRelatifs4e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Pour se remettre en route : les gestes de 5e. Calcule.\na) $-14 + 6$\nb) $-2{,}5 - 4$\nc) $9 - (-7)$\nd) $-6 - (-13)$",
+          reponses: [
+            { question: "a)", attendu: "-8" },
+            { question: "b)", attendu: "-6,5" },
+            { question: "c)", attendu: "16" },
+            { question: "d)", attendu: "7" },
+          ],
           correction:
             "Je regarde les signes, puis les distances à zéro. Une soustraction devient l'addition de l'opposé.\na) Signes contraires : $14 - 6 = 8$, et $-14$ est le plus loin de zéro. $-14 + 6 = -8$.\nb) $-2{,}5 - 4 = -2{,}5 + (-4) = -6{,}5$ : deux négatifs, j'additionne les distances.\nc) $9 - (-7) = 9 + 7 = 16$ : l'opposé de $-7$ est $7$.\nd) $-6 - (-13) = -6 + 13 = 7$ : signes contraires, et $13$ l'emporte.\n⛔ Le piège : au d), écrire $-6 - 13 = -19$. Enlever $-13$, c'est AJOUTER $13$.\nRéponse : a) $-8$ ; b) $-6{,}5$ ; c) $16$ ; d) $7$.",
           schema: ecranSeulement(
@@ -411,6 +417,11 @@ export const exercicesRelatifs4e: FicheExercicesData = {
         },
         {
           enonce: "Sur cette droite graduée, je pars de $0$ et je fais quatre sauts identiques, tous vers la gauche.\na) Quelle est la longueur de chaque saut ? Écris-la avec son signe.\nb) Écris le produit que montre le dessin, puis donne l'abscisse du point A.\nc) Sans dessiner : où arrive-t-on après $7$ sauts de la même sorte ?",
+          reponses: [
+            { question: "a)", attendu: "-2,5" },
+            { question: "b) A", attendu: "-10" },
+            { question: "c)", attendu: "-17,5" },
+          ],
           figure: droiteRel(-12, 2, 0.5, [
             { value: 0, label: "départ", color: NOIR },
             { value: -10, label: "A", color: ROUGE },
@@ -421,6 +432,12 @@ export const exercicesRelatifs4e: FicheExercicesData = {
         },
         {
           enonce: "Calcule. Décide le signe avant d'écrire le moindre chiffre.\na) $(-6) \\times 8$\nb) $(-7) \\times (-9)$\nc) $0{,}5 \\times (-14)$\nd) $(-1{,}5) \\times (-6)$",
+          reponses: [
+            { question: "a)", attendu: "-48" },
+            { question: "b)", attendu: "63" },
+            { question: "c)", attendu: "-7" },
+            { question: "d)", attendu: "9" },
+          ],
           correction:
             "Je décide le signe d'abord, avec la règle des signes, puis je multiplie les distances à zéro.\na) Signes contraires : négatif. $6 \\times 8 = 48$, donc $(-6) \\times 8 = -48$.\nb) Deux négatifs, signes pareils : positif. $7 \\times 9 = 63$, donc $(-7) \\times (-9) = 63$.\nc) Signes contraires : négatif. $0{,}5 \\times 14 = 7$, donc $0{,}5 \\times (-14) = -7$.\nd) Signes pareils : positif. $1{,}5 \\times 6 = 9$, donc $(-1{,}5) \\times (-6) = 9$.\n⛔ Le piège : au b), écrire $-63$ parce qu'« il y a des moins ». Dans un PRODUIT, deux signes moins donnent un résultat positif.\nRéponse : a) $-48$ ; b) $63$ ; c) $-7$ ; d) $9$.",
           schema: table(["×", "positif", "négatif"], [
@@ -431,6 +448,12 @@ export const exercicesRelatifs4e: FicheExercicesData = {
         },
         {
           enonce: "Calcule.\na) $(-72) \\div 9$\nb) $(-63) \\div (-7)$\nc) $54 \\div (-6)$\nd) $(-9) \\div 4$",
+          reponses: [
+            { question: "a)", attendu: "-8" },
+            { question: "b)", attendu: "9" },
+            { question: "c)", attendu: "-9" },
+            { question: "d)", attendu: "-2,25" },
+          ],
           correction:
             "La division suit la même règle des signes que la multiplication.\na) Signes contraires : négatif. $72 \\div 9 = 8$, donc $(-72) \\div 9 = -8$.\nb) Signes pareils : positif. $63 \\div 7 = 9$, donc $(-63) \\div (-7) = 9$.\nc) Signes contraires : négatif. $54 \\div 6 = 9$, donc $54 \\div (-6) = -9$.\nd) Signes contraires : négatif. $9 \\div 4 = 2{,}25$, donc $(-9) \\div 4 = -2{,}25$.\n⭐ Je contrôle par la multiplication : $(-8) \\times 9 = -72$ et $9 \\times (-7) = -63$.\n⛔ Le piège : croire que la division a sa propre règle, et que « moins divisé par moins » reste négatif. C'est la même règle que pour le produit.\nRéponse : a) $-8$ ; b) $9$ ; c) $-9$ ; d) $-2{,}25$.",
           schema: ecranSeulement(
@@ -445,6 +468,11 @@ export const exercicesRelatifs4e: FicheExercicesData = {
         },
         {
           enonce: "Sans calculer, donne le signe de chaque produit. Calcule-le ensuite pour vérifier.\n$A = (-1) \\times (-2) \\times (-3) \\times (-4) \\times (-5)$\n$B = (-0{,}5) \\times 4 \\times (-10) \\times (-2)$\n$C = (-3) \\times (-3) \\times (-3) \\times (-3)$",
+          reponses: [
+            { question: "A", attendu: "-120" },
+            { question: "B", attendu: "-40" },
+            { question: "C", attendu: "81" },
+          ],
           correction:
             "Dans un produit, je compte les facteurs NÉGATIFS. Un nombre pair de facteurs négatifs donne un produit positif ; un nombre impair, un produit négatif.\n$A$ : cinq facteurs négatifs. $5$ est impair : $A$ est négatif. Les distances : $1 \\times 2 \\times 3 \\times 4 \\times 5 = 120$, donc $A = -120$.\n$B$ : trois facteurs négatifs, $-0{,}5$, $-10$ et $-2$. $3$ est impair : $B$ est négatif. $0{,}5 \\times 4 \\times 10 \\times 2 = 40$, donc $B = -40$.\n$C$ : quatre facteurs négatifs, un nombre pair : $C$ est positif. $3 \\times 3 \\times 3 \\times 3 = 81$, donc $C = 81$.\n⭐ Pourquoi compter suffit : les facteurs négatifs vont par paires, et chaque paire donne un positif. Un négatif resté seul rend le tout négatif.\n⛔ Le piège : compter TOUS les facteurs au lieu des facteurs négatifs. $B$ a quatre facteurs, mais trois seulement sont négatifs.\nRéponse : $A = -120$, négatif ; $B = -40$, négatif ; $C = 81$, positif.",
           schema: table(["produit", "négatifs", "signe"], [
@@ -456,6 +484,9 @@ export const exercicesRelatifs4e: FicheExercicesData = {
         },
         {
           enonce: "Calcule $E = -9 + 3 \\times (-7)$.",
+          reponses: [
+            { attendu: "-30" },
+          ],
           correction:
             "La multiplication passe AVANT l'addition. Je commence par $3 \\times (-7)$.\nSignes contraires : $3 \\times (-7) = -21$.\nJe réécris : $E = -9 + (-21)$. Deux négatifs : $-9 + (-21) = -30$.\n⛔ Le piège : calculer de gauche à droite, $(-9 + 3) \\times (-7) = (-6) \\times (-7) = 42$. Ce n'est pas le calcul écrit : il n'y a pas de parenthèses.\nRéponse : $E = -30$.",
           schema: etapes(["−9 + 3 × (−7)", "−9 + (−21)", "−30"], ["le × d'abord", "puis le +"]),
@@ -463,6 +494,10 @@ export const exercicesRelatifs4e: FicheExercicesData = {
         },
         {
           enonce: "Un sous-marin part de la surface (profondeur $0$ m) et plonge : sa position change de $-12$ m chaque minute.\na) Où est-il au bout de $7$ minutes ?\nb) Au bout de combien de minutes atteint-il $-150$ m ?",
+          reponses: [
+            { question: "a)", attendu: "-84" },
+            { question: "b)", attendu: ["12,5", "12min30s", "12min30"] },
+          ],
           correction:
             "Une descente est négative : chaque minute, j'ajoute $-12$ m. Plusieurs minutes, c'est une multiplication.\na) $7 \\times (-12) = -84$ : signes contraires, négatif, et $7 \\times 12 = 84$. Il est à $-84$ m.\nb) Je cherche combien de fois $-12$ il faut pour faire $-150$ : c'est une division. $(-150) \\div (-12) = 12{,}5$ : signes pareils, positif. Il lui faut $12{,}5$ minutes, soit $12$ min $30$ s.\n⛔ Le piège : au b), trouver $-12{,}5$ minutes. Deux négatifs divisés donnent un positif, et une durée n'est jamais négative.\nRéponse : a) $-84$ m ; b) $12{,}5$ minutes.",
           schema: axeVertical(-160, 0, 20, [
@@ -474,6 +509,12 @@ export const exercicesRelatifs4e: FicheExercicesData = {
         },
         {
           enonce: "Trouve le nombre qui manque.\na) $(-4) \\times \\ldots = 28$\nb) $\\ldots \\times (-5) = -35$\nc) $(-36) \\div \\ldots = 4$\nd) $\\ldots \\div (-3) = -6$",
+          reponses: [
+            { question: "a)", attendu: "-7" },
+            { question: "b)", attendu: "7" },
+            { question: "c)", attendu: "-9" },
+            { question: "d)", attendu: "18" },
+          ],
           correction:
             "Je décide le signe du nombre qui manque d'abord, avec la règle des signes, puis je cherche sa distance à zéro.\na) $28$ est positif : les deux facteurs ont le même signe. Le nombre est négatif, et $4 \\times 7 = 28$. $(-4) \\times (-7) = 28$.\nb) $-35$ est négatif : signes contraires. Le nombre est positif : $7 \\times (-5) = -35$.\nc) Le quotient $4$ est positif : $-36$ et le nombre ont le même signe. $(-36) \\div (-9) = 4$.\nd) Le résultat $-6$ est négatif et on divise par $-3$ : le nombre est positif. $18 \\div (-3) = -6$.\n⛔ Le piège : au a), répondre $7$ parce que « $4 \\times 7 = 28$ ». Contrôle : $(-4) \\times 7 = -28$, pas $28$.\nRéponse : a) $-7$ ; b) $7$ ; c) $-9$ ; d) $18$.",
           schema: ecranSeulement(
@@ -502,6 +543,9 @@ export const exercicesRelatifs4e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Calcule $F = 7 - 3 \\times (-4) + (-20) \\div 5$.",
+          reponses: [
+            { attendu: "15" },
+          ],
           correction:
             "Pas de parenthèse à calculer : la multiplication et la division passent avant l'addition et la soustraction.\nLe produit : $3 \\times (-4) = -12$.\nLe quotient : $(-20) \\div 5 = -4$.\nJe réécris : $F = 7 - (-12) + (-4)$.\nJ'enlève les parenthèses : $F = 7 + 12 - 4$.\nDe gauche à droite : $7 + 12 = 19$, puis $19 - 4 = 15$.\n⛔ Le piège : commencer par $7 - 3 = 4$. La soustraction attend que le produit soit calculé.\nRéponse : $F = 15$.",
           schema: ecranSeulement(etapes(["7 − 3 × (−4) + (−20) ÷ 5", "7 − (−12) + (−4)", "7 + 12 − 4", "15"], ["× et ÷ d'abord", "les signes", "gauche à droite"])),
@@ -509,6 +553,9 @@ export const exercicesRelatifs4e: FicheExercicesData = {
         },
         {
           enonce: "Calcule $G = (-2) \\times (9 - 14) - (3 - 8) \\times (-6)$.",
+          reponses: [
+            { attendu: "-20" },
+          ],
           correction:
             "D'abord les parenthèses : $9 - 14 = -5$ et $3 - 8 = -5$.\nJe réécris : $G = (-2) \\times (-5) - (-5) \\times (-6)$.\nPuis les deux produits. $(-2) \\times (-5) = 10$ : signes pareils. $(-5) \\times (-6) = 30$ : signes pareils.\nIl reste $G = 10 - 30 = -20$.\n⛔ Le piège : voir « $- (-5)$ » et le changer en « $+ 5$ » avant d'avoir fait le produit. Le signe moins porte sur le PRODUIT $(-5) \\times (-6)$ tout entier : je retire $30$.\nRéponse : $G = -20$.",
           schema: etapes(["(−2) × (−5) − (−5) × (−6)", "10 − 30", "−20"], ["les produits", "la soustraction"]),
@@ -516,6 +563,9 @@ export const exercicesRelatifs4e: FicheExercicesData = {
         },
         {
           enonce: "Calcule $H = \\dfrac{-6 \\times 5 + 2}{-3 - 4}$.",
+          reponses: [
+            { attendu: "4" },
+          ],
           correction:
             "Le trait de fraction est une division, et il agit comme des parenthèses : je calcule le haut, puis le bas, puis je divise.\nEn haut : $-6 \\times 5 = -30$, puis $-30 + 2 = -28$.\nEn bas : $-3 - 4 = -7$.\nIl reste $(-28) \\div (-7) = 4$ : signes pareils, positif.\n⛔ Le piège : simplifier trop tôt, en divisant le $-6$ du haut par un nombre du bas. Le haut n'est fini qu'après le $+ 2$.\nRéponse : $H = 4$.",
           schema: ecranSeulement(
@@ -529,6 +579,11 @@ export const exercicesRelatifs4e: FicheExercicesData = {
         },
         {
           enonce: "Trois élèves se sont trompés. Trouve l'erreur de chacun, puis corrige.\na) Sami écrit : $(-6) \\times (-7) = -42$.\nb) Maya écrit : $-8 - 2 \\times (-3) = 30$.\nc) Hugo écrit : $(-24) \\div (-4) \\times 2 = 3$.",
+          reponses: [
+            { question: "a)", attendu: "42" },
+            { question: "b)", attendu: "-2" },
+            { question: "c)", attendu: "12" },
+          ],
           correction:
             "a) Sami a oublié la règle des signes. Deux facteurs négatifs : le produit est positif. $(-6) \\times (-7) = 42$.\nb) Maya a calculé $-8 - 2 = -10$ d'abord, puis $(-10) \\times (-3) = 30$. Mais la multiplication passe avant : $2 \\times (-3) = -6$, puis $-8 - (-6) = -8 + 6 = -2$.\nc) Hugo a fait la multiplication avant la division : $(-4) \\times 2 = -8$, puis $(-24) \\div (-8) = 3$. Or multiplications et divisions se font de gauche à droite : $(-24) \\div (-4) = 6$, puis $6 \\times 2 = 12$.\n⭐ Un contrôle au b) : on enlève un nombre négatif à $-8$, donc on avance un peu vers la droite. Le résultat est proche de $-8$ : $30$ ne peut pas convenir.\nRéponse : a) $42$ ; b) $-2$ ; c) $12$.",
           schema: ecranSeulement(etapes(["−8 − 2 × (−3)", "−8 − (−6)", "−8 + 6", "−2"], ["le × d'abord", "l'opposé", "la somme"])),
@@ -536,6 +591,11 @@ export const exercicesRelatifs4e: FicheExercicesData = {
         },
         {
           enonce: "À un quiz de $20$ questions, une bonne réponse rapporte $4$ points, une mauvaise en fait perdre $3$, et une question sans réponse en fait perdre $1$. Le tableau donne les réponses de Nina et de Karim.\na) Écris le score de Nina en un seul calcul avec des nombres relatifs, puis calcule-le.\nb) Même question pour Karim.\nc) Jade a donné $9$ mauvaises réponses et laissé $1$ question sans réponse. Quel est son score ?",
+          reponses: [
+            { question: "a)", attendu: "30" },
+            { question: "b)", attendu: "0" },
+            { question: "c)", attendu: "12" },
+          ],
           figure: table(["réponses", "Nina", "Karim"], [
             ["bonnes", "12", "8"],
             ["mauvaises", "5", "10"],
@@ -547,6 +607,11 @@ export const exercicesRelatifs4e: FicheExercicesData = {
         },
         {
           enonce: "Une station météo de montagne relève la température la plus basse de chaque nuit, pendant six nuits (chiffres d'un modèle).\na) Quel est l'écart entre la nuit la plus froide et la nuit la plus douce ?\nb) Calcule la température moyenne de ces six nuits.\nc) Quelle température faudrait-il la septième nuit pour que la moyenne des sept nuits soit de $-4$ °C ?",
+          reponses: [
+            { question: "a)", attendu: "11" },
+            { question: "b)", attendu: "-3" },
+            { question: "c)", attendu: "-10" },
+          ],
           figure: tableau(["nuit", "1", "2", "3", "4", "5", "6"], ["°C", "−7", "−3,5", "2", "−9", "−1,5", "1"], true),
           correction:
             "a) La plus douce : $2$ °C ; la plus froide : $-9$ °C. L'écart : $2 - (-9) = 2 + 9 = 11$.\nb) La moyenne, c'est la somme divisée par le nombre de nuits.\nLes positifs : $2 + 1 = 3$. Les négatifs : $-7 + (-3{,}5) + (-9) + (-1{,}5) = -21$.\nLa somme : $3 + (-21) = -18$. Puis $(-18) \\div 6 = -3$.\nc) Pour une moyenne de $-4$ sur sept nuits, la somme doit valoir $7 \\times (-4) = -28$. Il manque $-28 - (-18) = -28 + 18 = -10$.\n⭐ Contrôle : $(-18 + (-10)) \\div 7 = (-28) \\div 7 = -4$.\n⛔ Le piège du b) : faire la moyenne des distances, $(7 + 3{,}5 + 2 + 9 + 1{,}5 + 1) \\div 6 = 4$, en oubliant les signes. Des nuits presque toutes sous zéro ne peuvent pas avoir une moyenne positive.\nRéponse : a) $11$ °C ; b) $-3$ °C ; c) $-10$ °C.",
@@ -561,6 +626,12 @@ export const exercicesRelatifs4e: FicheExercicesData = {
         },
         {
           enonce: "Voici un programme de calcul.\na) Applique-le au nombre $-4$, puis au nombre $2{,}5$.\nb) Quel nombre de départ donne $0$ ?\nc) Remonte le programme : quel nombre de départ donne $12$ ?",
+          reponses: [
+            { question: "a) -4", attendu: "-36" },
+            { question: "a) 2,5", attendu: "3" },
+            { question: "b)", attendu: "2" },
+            { question: "c)", attendu: "4" },
+          ],
           figure: programme(["Choisir un nombre", "Le multiplier par −3", "Ajouter 6", "Multiplier par −2"]),
           correction:
             "a) Avec $-4$ : $(-4) \\times (-3) = 12$, puis $12 + 6 = 18$, puis $18 \\times (-2) = -36$.\nAvec $2{,}5$ : $2{,}5 \\times (-3) = -7{,}5$, puis $-7{,}5 + 6 = -1{,}5$, puis $(-1{,}5) \\times (-2) = 3$.\nb) Un produit par $-2$ vaut $0$ seulement si l'autre facteur vaut $0$. Avant « ajouter $6$ », il fallait donc $-6$. Et $-6$ vient de $2$, car $2 \\times (-3) = -6$.\nc) Je remonte en partant de la fin, avec l'opération contraire à chaque étape.\nAvant « multiplier par $-2$ » : $12 \\div (-2) = -6$.\nAvant « ajouter $6$ » : $-6 - 6 = -12$.\nAvant « multiplier par $-3$ » : $(-12) \\div (-3) = 4$.\n⭐ Contrôle : $4 \\times (-3) = -12$, puis $-12 + 6 = -6$, puis $(-6) \\times (-2) = 12$.\n⛔ Le piège du c) : remonter avec les mêmes opérations, par exemple multiplier $12$ par $-2$. Pour défaire une multiplication, je divise ; pour défaire un ajout, je soustrais.\nRéponse : a) $-36$ et $3$ ; b) $2$ ; c) $4$.",
@@ -575,6 +646,10 @@ export const exercicesRelatifs4e: FicheExercicesData = {
         },
         {
           enonce: "Dans cette pyramide, chaque brique est le PRODUIT des deux briques posées juste en dessous d'elle. Complète-la, puis explique le signe du sommet.",
+          reponses: [
+            { question: "en bas", attendu: "3" },
+            { question: "sommet", attendu: "108" },
+          ],
           figure: pyramide([["?"], ["?", "?"], ["−6", "?", "?"], ["−2", "?", "−1", "2"]]),
           correction:
             "Je commence par la brique du bas qui manque : $(-2) \\times \\ldots = -6$. Le produit est négatif, donc la brique est positive : $(-6) \\div (-2) = 3$.\nTroisième rangée : $3 \\times (-1) = -3$ et $(-1) \\times 2 = -2$.\nDeuxième rangée : $(-6) \\times (-3) = 18$ et $(-3) \\times (-2) = 6$.\nLe sommet : $18 \\times 6 = 108$.\n⭐ Le signe du sommet : les deux briques sous lui sont positives, donc il est positif. Et chacune d'elles est le produit de deux négatifs.\n⛔ Le piège : écrire $-3$ en bas, parce que « $2 \\times 3 = 6$ ». Contrôle : $(-2) \\times (-3) = 6$, pas $-6$ ; alors que $(-2) \\times 3 = -6$.\nRéponse : en bas, $3$ ; puis $-3$ et $-2$ ; puis $18$ et $6$ ; au sommet, $108$.",
@@ -599,6 +674,12 @@ export const exercicesRelatifs4e: FicheExercicesData = {
           titre: "L'air se refroidit en altitude",
           enonce:
             "Dans l'atmosphère « type » des pilotes d'avion, il fait $15$ °C au niveau de la mer, et la température baisse de $6{,}5$ °C chaque fois qu'on monte de $1$ km, jusqu'à $11$ km d'altitude.\na) Quelle température fait-il à $4$ km d'altitude ?\nb) Et à $10$ km, où volent les avions de ligne ?\nc) Quel est l'écart de température entre ces deux altitudes ?\nd) À quelle altitude fait-il $-30{,}5$ °C ?",
+          reponses: [
+            { question: "a)", attendu: "-11" },
+            { question: "b)", attendu: "-50" },
+            { question: "c)", attendu: "39" },
+            { question: "d)", attendu: "7" },
+          ],
           correction:
             "Une baisse est négative : chaque kilomètre de montée ajoute $-6{,}5$ °C.\na) $4 \\times (-6{,}5) = -26$, puis $15 + (-26) = -11$. À $4$ km, il fait $-11$ °C.\nb) $10 \\times (-6{,}5) = -65$, puis $15 + (-65) = -50$. À $10$ km, il fait $-50$ °C.\nc) La plus haute moins la plus basse : $-11 - (-50) = -11 + 50 = 39$.\n⭐ Contrôle : on monte de $6$ km, et $6 \\times 6{,}5 = 39$.\nd) Depuis le niveau de la mer, la température doit changer de $-30{,}5 - 15 = -45{,}5$ °C. Combien de fois $-6{,}5$ ? $(-45{,}5) \\div (-6{,}5) = 7$ : signes pareils, positif.\n⛔ Le piège du c) : calculer $-11 - 50 = -61$. On enlève $-50$, donc on ajoute $50$ ; et un écart n'est jamais négatif.\nRéponse : a) $-11$ °C ; b) $-50$ °C ; c) $39$ °C ; d) à $7$ km.",
           schema: axeVertical(-60, 20, 10, [
@@ -613,6 +694,11 @@ export const exercicesRelatifs4e: FicheExercicesData = {
           titre: "Le compte du club de VTT",
           enonce:
             "Le 1er avril, le compte d'un club de VTT est à $-150$ € : il est « à découvert ». Chaque semaine d'avril, les cotisations rapportent $90$ € et l'entretien des vélos coûte $40$ €. Pendant le mois, le club loue aussi trois fois un minibus, à $35$ € chaque fois. Avril compte ici quatre semaines (chiffres d'un modèle).\na) Écris le solde à la fin d'avril en un seul calcul avec des nombres relatifs.\nb) Calcule-le. Le compte est-il encore à découvert ?\nc) En mai, il n'y a plus de minibus. Après combien de semaines de mai le compte n'est-il plus à découvert ?",
+          reponses: [
+            { question: "b) solde", attendu: "-55" },
+            { question: "b) déc.?", attendu: ["oui", "vrai"] },
+            { question: "c)", attendu: "2" },
+          ],
           correction:
             "Ce qui entre est positif, ce qui sort est négatif. Ce qui revient plusieurs fois se compte par une multiplication.\na) $-150 + 4 \\times 90 + 4 \\times (-40) + 3 \\times (-35)$.\nb) Les produits d'abord : $4 \\times 90 = 360$ ; $4 \\times (-40) = -160$ ; $3 \\times (-35) = -105$.\nPuis la somme $-150 + 360 + (-160) + (-105)$. Les positifs : $360$. Les négatifs : $-150 + (-160) + (-105) = -415$. Et $360 + (-415) = -55$.\nLe solde est de $-55$ € : le compte est encore à découvert.\nc) En mai, chaque semaine rapporte $90 + (-40) = 50$ €.\nAprès $1$ semaine : $-55 + 50 = -5$, encore à découvert.\nAprès $2$ semaines : $-5 + 50 = 45$. Le compte est repassé au-dessus de zéro.\n⛔ Le piège du b) : oublier le signe du départ et compter $150 + 360 - 160 - 105 = 245$. Le club commence le mois avec une dette.\nRéponse : b) $-55$ €, encore à découvert ; c) après $2$ semaines.",
           schema: axeVertical(-160, 60, 20, [
@@ -627,6 +713,13 @@ export const exercicesRelatifs4e: FicheExercicesData = {
           titre: "Le jeu du produit",
           enonce:
             "Dans un jeu, on dispose des huit cartes dessinées. Chaque joueur en tire trois, et son score est le PRODUIT de ses trois cartes. Le plus grand score gagne.\na) Emma tire $-2$, $3$ et $-4$. Léo tire $-1$, $-3$ et $2$. Calcule leurs scores. Qui gagne ?\nb) Quel est le plus grand score possible ? Explique ton choix de cartes.\nc) Quel est le plus petit score possible ?",
+          reponses: [
+            { question: "a) Emma", attendu: "24" },
+            { question: "a) Léo", attendu: "6" },
+            { question: "a) gagne", attendu: ["Emma", "Emma gagne"] },
+            { question: "b)", attendu: "48" },
+            { question: "c)", attendu: "-48" },
+          ],
           figure: cartes(["−4", "−3", "−2", "−1", "1", "2", "3", "4"]),
           correction:
             "a) Emma : deux facteurs négatifs, un nombre pair : son score est positif. $(-2) \\times 3 \\times (-4) = 24$.\nLéo : deux facteurs négatifs aussi : $(-1) \\times (-3) \\times 2 = 6$.\n$24 > 6$ : Emma gagne.\nb) Pour un grand score, il faut d'abord un produit POSITIF : zéro ou deux cartes négatives.\nAvec trois cartes positives, le mieux est $4 \\times 3 \\times 2 = 24$.\nAvec deux négatives, je prends les plus loin de zéro et la plus grande positive : $(-4) \\times (-3) \\times 4 = 48$.\nLe plus grand score possible est $48$.\nc) Pour le plus petit, il faut un produit négatif, le plus loin possible de zéro : une ou trois cartes négatives.\nAvec trois négatives : $(-4) \\times (-3) \\times (-2) = -24$.\nAvec une seule : $(-4) \\times 4 \\times 3 = -48$.\nLe plus petit score possible est $-48$.\n⛔ Le piège du b) : prendre les trois plus grandes cartes, $4$, $3$ et $2$, et répondre $24$. Deux négatifs loin de zéro font un grand positif.\nRéponse : a) Emma $24$, Léo $6$ : Emma gagne ; b) $48$ ; c) $-48$.",
@@ -637,6 +730,11 @@ export const exercicesRelatifs4e: FicheExercicesData = {
           titre: "Le glacier qui fond",
           enonce:
             "Chaque année, des glaciologues mesurent le « bilan » d'un glacier : l'épaisseur de glace gagnée (positive) ou perdue (négative) sur l'année, en mètres. Le diagramme donne les bilans d'un glacier des Alpes pendant cinq ans (chiffres d'un modèle).\na) Quelle épaisseur le glacier a-t-il gagnée ou perdue en tout, sur les cinq ans ?\nb) Calcule le bilan moyen par an.\nc) À ce rythme moyen, combien d'années faudrait-il pour que le glacier perde encore $22$ m ?",
+          reponses: [
+            { question: "a)", attendu: ["-5,5", "perdu 5,5", "il a perdu 5,5 m"] },
+            { question: "b)", attendu: "-1,1" },
+            { question: "c)", attendu: "20" },
+          ],
           figure: barresRel(-3, 1, 1, [
             { label: "2021", value: -1.2 },
             { label: "2022", value: -2.6 },

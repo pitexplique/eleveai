@@ -515,6 +515,9 @@ export const exercicesTrianglePropriete6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Voici le triangle $GEM$ et ses trois angles.\na) Additionne les trois angles.\nb) Trace un autre triangle, mesure ses angles, et additionne. Que remarques-tu ?",
+          reponses: [
+            { question: "a)", attendu: "180" },
+          ],
           figure: tri({ A: [0, 0], B: [6, 0], C: [4.382, 4.6991] }, { noms: { A: "G", B: "E", C: "M" }, angles: { A: "47°", B: "71°", C: "62°" } }),
           correction:
             "a) J'additionne : $47 + 71 = 118$, puis $118 + 62 = 180$.\nLes trois angles font $180°$.\nb) Avec un autre triangle, je trouve encore $180°$, ou presque, à cause des erreurs de mesure.\nC'est une règle : dans TOUT triangle, les trois angles font $180°$.\n⛔ Le piège : croire que la somme change avec la taille ou la forme. Elle vaut toujours $180°$.\nRéponse : a) $180°$ ; b) on trouve toujours $180°$.",
@@ -522,6 +525,9 @@ export const exercicesTrianglePropriete6e: FicheExercicesData = {
         },
         {
           enonce: "Dans le triangle $HIP$, l'angle en $H$ mesure $38°$ et l'angle en $I$ mesure $85°$.\nCombien mesure l'angle en $P$ ?",
+          reponses: [
+            { attendu: "57" },
+          ],
           correction:
             "Les trois angles font $180°$. Il m'en manque un.\nJ'additionne les deux angles connus : $38 + 85 = 123$.\nJe retire de $180$ : $180 - 123 = 57$.\nL'angle en $P$ mesure $57°$.\nJe vérifie : $38 + 85 + 57 = 180$.\n⛔ Le piège : retirer un seul angle, $180 - 38 = 142$. Il faut retirer les DEUX angles connus.\nRéponse : $57°$.",
           schema: ecranSeulement(tri({ A: [0, 0], B: [6, 0], C: [5.6161, 4.3878] }, { noms: { A: "H", B: "I", C: "P" }, angles: { A: "38°", B: "85°", C: "57°" }, trouve: ["C"] })),
@@ -529,6 +535,9 @@ export const exercicesTrianglePropriete6e: FicheExercicesData = {
         },
         {
           enonce: "Le triangle $JUS$ est rectangle en $U$. L'angle en $J$ mesure $27°$.\nCombien mesure l'angle en $S$ ?",
+          reponses: [
+            { attendu: "63" },
+          ],
           correction:
             "Rectangle en $U$ : l'angle en $U$ mesure $90°$.\nJ'additionne les deux angles connus : $90 + 27 = 117$.\nJe retire de $180$ : $180 - 117 = 63$.\nL'angle en $S$ mesure $63°$.\n⭐ Dans un triangle rectangle, les deux autres angles font $90°$ ensemble : $27 + 63 = 90$.\n⛔ Le piège : oublier l'angle droit. Il compte, même s'il n'est pas écrit en degrés.\nRéponse : $63°$.",
           schema: ecranSeulement(tri({ A: [0, 0], B: [5, 0], C: [0, 2.5476] }, { noms: { A: "U", B: "J", C: "S" }, droit: "A", angles: { B: "27°", C: "63°" }, trouve: ["C"] })),
@@ -536,6 +545,11 @@ export const exercicesTrianglePropriete6e: FicheExercicesData = {
         },
         {
           enonce: "Peut-on construire un triangle avec ces trois longueurs ?\na) $5$ cm, $7$ cm et $13$ cm.\nb) $6$ cm, $9$ cm et $11$ cm.\nc) $4$ cm, $6$ cm et $10$ cm.",
+          reponses: [
+            { question: "a)", attendu: ["non", "faux"] },
+            { question: "b)", attendu: ["oui", "vrai"] },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           correction:
             "Je prends le plus grand côté. Je le compare aux deux autres mis bout à bout.\na) $5 + 7 = 12$. Et $12$ est plus petit que $13$. Les deux petits côtés ne se rejoignent pas : non.\nb) $6 + 9 = 15$. Et $15$ est plus grand que $11$ : oui.\nc) $4 + 6 = 10$. C'est ÉGAL au grand côté. Les trois points sont alignés : le triangle est « aplati ». Non.\n⛔ Le piège au c) : répondre oui. Il faut une somme PLUS GRANDE, pas égale.\nRéponse : a) non ; b) oui ; c) non.",
           schema: longueurs([{ grand: 13, petits: [5, 7] }, { grand: 11, petits: [6, 9] }, { grand: 10, petits: [4, 6] }]),
@@ -543,6 +557,10 @@ export const exercicesTrianglePropriete6e: FicheExercicesData = {
         },
         {
           enonce: "Ces trois angles peuvent-ils être ceux d'un triangle ?\na) $95°$, $48°$ et $41°$.\nb) $72°$, $54°$ et $54°$.",
+          reponses: [
+            { question: "a)", attendu: ["non", "faux"] },
+            { question: "b)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "Je vérifie si la somme fait exactement $180°$.\na) $95 + 48 = 143$, puis $143 + 41 = 184$. Ce n'est pas $180$ : non.\nb) $72 + 54 = 126$, puis $126 + 54 = 180$ : oui.\n⛔ Le piège au a) : dire oui car $184$ est « presque » $180$. Il faut $180$ tout juste.\nRéponse : a) non ; b) oui.",
           schema: ecranSeulement(tri({ A: [0, 0], B: [6, 0], C: [3, 4.1291] }, { angles: { A: "54°", B: "54°", C: "72°" } })),
@@ -550,6 +568,9 @@ export const exercicesTrianglePropriete6e: FicheExercicesData = {
         },
         {
           enonce: "Un triangle a un angle de $104°$ et un angle de $29°$.\nCombien mesure son troisième angle ?",
+          reponses: [
+            { attendu: "47" },
+          ],
           correction:
             "J'additionne les deux angles connus : $104 + 29 = 133$.\nJe retire de $180$ : $180 - 133 = 47$.\nLe troisième angle mesure $47°$.\nJe vérifie : $104 + 29 + 47 = 180$.\n⛔ Le piège : retirer un seul angle. $180 - 104 = 76$ ne suffit pas : il reste l'angle de $29°$.\nRéponse : $47°$.",
           schema: ecranSeulement(tri({ A: [0, 0], B: [5, 0], C: [-0.8018, 3.216] }, { angles: { A: "104°", B: "29°", C: "47°" }, trouve: ["C"] })),
@@ -557,6 +578,9 @@ export const exercicesTrianglePropriete6e: FicheExercicesData = {
         },
         {
           enonce: "Le triangle $ABC$ est rectangle en $A$.\nCombien font ses deux autres angles, $a$ et $b$, ensemble ?",
+          reponses: [
+            { attendu: "90" },
+          ],
           correction:
             "Les trois angles font $180°$.\nL'angle droit en $A$ en prend $90°$.\nIl reste $180 - 90 = 90$ pour les deux autres angles.\nEnsemble, $a$ et $b$ font $90°$.\n⭐ Chacun des deux est donc plus petit que $90°$ : ils sont aigus.\n⛔ Le piège : ajouter l'angle droit au lieu de le retirer.\nRéponse : $90°$.",
           schema: ecranSeulement(tri({ A: [0, 0], B: [5, 0], C: [0, 3.2] }, { droit: "A", angles: { B: "a", C: "b" } })),
@@ -564,6 +588,9 @@ export const exercicesTrianglePropriete6e: FicheExercicesData = {
         },
         {
           enonce: "Nina veut tracer un triangle avec un angle de $100°$ et un angle de $95°$, sur un côté $[AB]$.\nPeut-elle y arriver ?",
+          reponses: [
+            { attendu: ["non"] },
+          ],
           figure: geo({ traits: [{ de: [0, 0], vers: [5, 0] }, { de: [0, 0], vers: [-0.5209, 2.9544] }, { de: [5, 0], vers: [5.2615, 2.9886] }], arcs: [{ en: [0, 0], de: [5, 0], vers: [-0.5209, 2.9544], label: "100°" }, { en: [5, 0], de: [5.2615, 2.9886], vers: [0, 0], label: "95°" }], points: [{ en: [0, 0], nom: "A", vers: "bg" }, { en: [5, 0], nom: "B", vers: "bd" }] }),
           correction:
             "J'additionne les deux angles : $100 + 95 = 195$.\nC'est déjà plus que $180°$. Il ne reste rien pour le troisième angle.\nSur le dessin, les deux côtés s'écartent : ils ne se rencontreront jamais.\nNon, ce triangle est impossible.\n⭐ Un triangle a au plus UN angle obtus.\n⛔ Le piège : croire qu'il suffit de tracer plus long. Les côtés s'éloignent de plus en plus.\nRéponse : non.",
@@ -585,6 +612,9 @@ export const exercicesTrianglePropriete6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Dans le triangle $LUX$, l'angle en $L$ mesure $28°$ et l'angle en $U$ mesure $62°$.\na) Calcule l'angle en $X$.\nb) Que remarques-tu ?",
+          reponses: [
+            { question: "a)", attendu: "90" },
+          ],
           correction:
             "a) $28 + 62 = 90$. Puis $180 - 90 = 90$.\nL'angle en $X$ mesure $90°$.\nb) C'est un angle droit : le triangle $LUX$ est rectangle en $X$.\n⛔ Le piège : ne pas voir l'angle droit caché. Un angle de $90°$ calculé est un vrai angle droit.\nRéponse : a) $90°$ ; b) le triangle est rectangle en $X$.",
           schema: ecranSeulement(tri({ A: [0, 0], B: [6, 0], C: [4.6776, 2.4871] }, { noms: { A: "L", B: "U", C: "X" }, angles: { A: "28°", B: "62°" }, droit: "C" })),
@@ -592,6 +622,10 @@ export const exercicesTrianglePropriete6e: FicheExercicesData = {
         },
         {
           enonce: "Le triangle $ABC$ est isocèle en $A$. L'angle en $B$ mesure $67°$.\na) Combien mesure l'angle en $C$ ?\nb) Combien mesure l'angle en $A$ ?",
+          reponses: [
+            { question: "a)", attendu: "67" },
+            { question: "b)", attendu: "46" },
+          ],
           figure: tri({ A: [0, 0], B: [5, 0], C: [2.5, 5.8896] }, { noms: { A: "B", B: "C", C: "A" }, angles: { A: "67°", C: "?" }, trouve: ["C"], egaux: ["BC", "CA"] }),
           correction:
             "a) Isocèle en $A$ : les angles à la base, en $B$ et en $C$, sont égaux.\nL'angle en $C$ mesure aussi $67°$.\nb) J'additionne les deux angles à la base : $67 + 67 = 134$.\nJe retire de $180$ : $180 - 134 = 46$. L'angle en $A$ mesure $46°$.\nJe vérifie : $46 + 67 + 67 = 180$.\n⛔ Le piège : partager $180$ en trois. Les trois angles ne sont égaux que dans un triangle équilatéral.\nRéponse : a) $67°$ ; b) $46°$.",
@@ -599,6 +633,12 @@ export const exercicesTrianglePropriete6e: FicheExercicesData = {
         },
         {
           enonce: "Deux côtés d'un triangle mesurent $4$ cm et $9$ cm.\nLe troisième côté peut-il mesurer :\na) $3$ cm ? b) $5$ cm ? c) $8$ cm ? d) $14$ cm ?",
+          reponses: [
+            { question: "a)", attendu: ["non", "faux"] },
+            { question: "b)", attendu: ["non", "faux"] },
+            { question: "c)", attendu: ["oui", "vrai"] },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           correction:
             "Chaque fois, je compare le plus grand côté aux deux autres.\na) Plus grand : $9$. $4 + 3 = 7$, plus petit que $9$ : non.\nb) Plus grand : $9$. $4 + 5 = 9$, égal : triangle aplati, non.\nc) Plus grand : $9$. $4 + 8 = 12$, plus grand que $9$ : oui.\nd) Plus grand : $14$. $4 + 9 = 13$, plus petit que $14$ : non.\n⛔ Le piège au d) : comparer à $9$ par habitude. Ici, le plus grand côté est le NOUVEAU, $14$ cm.\nRéponse : a) non ; b) non ; c) oui ; d) non.",
           schema: ecranSeulement(longueurs([{ grand: 9, petits: [4, 3] }, { grand: 9, petits: [4, 5] }, { grand: 9, petits: [4, 8] }, { grand: 14, petits: [4, 9] }])),
@@ -606,6 +646,9 @@ export const exercicesTrianglePropriete6e: FicheExercicesData = {
         },
         {
           enonce: "Léo veut construire un triangle de côtés $3$ cm, $5$ cm et $9$ cm.\nIl trace $[AB]$ de $9$ cm, puis deux arcs au compas. Les arcs ne se coupent pas.\na) Son compas est-il cassé ?\nb) Explique pourquoi.",
+          reponses: [
+            { question: "a)", attendu: ["non"] },
+          ],
           correction:
             "a) Non, le compas n'y est pour rien.\nb) Les deux petits côtés, bout à bout, font $3 + 5 = 8$ cm.\nC'est moins que $9$ cm. Ils ne peuvent pas relier les deux bouts de $[AB]$.\nLes arcs ne se touchent donc jamais : ce triangle est impossible.\n⛔ Le piège : recommencer la construction. Je vérifie AVANT de construire.\nRéponse : a) non ; b) $3 + 5 = 8$, plus petit que $9$.",
           schema: ecranSeulement(longueurs([{ grand: 9, petits: [3, 5] }])),
@@ -613,6 +656,9 @@ export const exercicesTrianglePropriete6e: FicheExercicesData = {
         },
         {
           enonce: "Une échelle est posée contre un mur vertical. Le sol est horizontal.\nL'échelle fait un angle de $74°$ avec le sol.\nQuel angle fait-elle avec le mur ?",
+          reponses: [
+            { attendu: "16" },
+          ],
           figure: tri({ A: [0, 0], B: [1, 0], C: [0, 3.4874] }, { noms: { A: "M", B: "P", C: "H" }, droit: "A", angles: { B: "74°", C: "?" }, trouve: ["C"] }),
           correction:
             "Le mur, le sol et l'échelle forment un triangle $MPH$.\nLe mur est vertical, le sol horizontal : l'angle en $M$ est droit, $90°$.\nJ'additionne : $90 + 74 = 164$.\nJe retire de $180$ : $180 - 164 = 16$.\nL'échelle fait un angle de $16°$ avec le mur.\n⛔ Le piège : oublier l'angle droit entre le mur et le sol.\nRéponse : $16°$.",
@@ -620,6 +666,10 @@ export const exercicesTrianglePropriete6e: FicheExercicesData = {
         },
         {
           enonce: "Dans le triangle $ABC$, on prolonge le côté $[BC]$ jusqu'au point $D$.\nL'angle $\\widehat{ACD}$ mesure $128°$. L'angle en $A$ mesure $57°$.\na) Calcule l'angle du triangle en $C$.\nb) Calcule l'angle en $B$.",
+          reponses: [
+            { question: "a)", attendu: "52" },
+            { question: "b)", attendu: "71" },
+          ],
           figure: tri({ A: [0, 0], B: [5, 0], C: [1.5295, 4.442] }, { noms: { A: "B", B: "C", C: "A" }, angles: { C: "57°", A: "?" }, trouve: ["A"], lignes: [{ de: [5, 0], vers: [7, 0], couleur: "gris" }], points: [{ en: [7, 0], nom: "D", vers: "bas" }], libres: [{ en: [5, 0], de: [7, 0], vers: [1.5295, 4.442], label: "128°" }] }),
           correction:
             "a) $B$, $C$ et $D$ sont alignés : l'angle $\\widehat{BCD}$ est plat, $180°$.\nL'angle du triangle en $C$ et l'angle de $128°$ sont côte à côte.\nAngle en $C$ : $180 - 128 = 52$, soit $52°$.\nb) Dans le triangle : $57 + 52 = 109$. Puis $180 - 109 = 71$.\nL'angle en $B$ mesure $71°$.\nJe vérifie : $57 + 52 + 71 = 180$.\n⛔ Le piège : prendre $128°$ pour l'angle du triangle en $C$. Il est DEHORS.\nRéponse : a) $52°$ ; b) $71°$.",
@@ -627,6 +677,11 @@ export const exercicesTrianglePropriete6e: FicheExercicesData = {
         },
         {
           enonce: "Vrai ou faux ? Justifie.\na) Un triangle rectangle a toujours deux angles aigus.\nb) Si je connais deux angles d'un triangle, je connais le troisième.\nc) Si je connais les trois angles, je connais les longueurs des côtés.",
+          reponses: [
+            { question: "a)", attendu: ["vrai", "oui"] },
+            { question: "b)", attendu: ["vrai", "oui"] },
+            { question: "c)", attendu: ["faux", "non"] },
+          ],
           figure: deux(
             tri({ A: [0, 0], B: [5, 0], C: [3.7693, 2.6393] }, { angles: { A: "35°", B: "65°", C: "80°" } }),
             tri({ A: [0, 0], B: [8, 0], C: [6.0309, 4.2228] }, { noms: { A: "D", B: "E", C: "F" }, angles: { A: "35°", B: "65°", C: "80°" } }),
@@ -637,6 +692,10 @@ export const exercicesTrianglePropriete6e: FicheExercicesData = {
         },
         {
           enonce: "Dans le triangle $ABC$, le point $D$ est sur $[BC]$.\nL'angle en $B$ mesure $48°$. $\\widehat{BAD} = 37°$ et $\\widehat{DAC} = 29°$.\na) Combien mesure l'angle du triangle $ABC$ en $A$ ?\nb) Combien mesure l'angle en $C$ ?\nc) Que remarques-tu pour les angles en $A$ et en $C$ ?",
+          reponses: [
+            { question: "a)", attendu: "66" },
+            { question: "b)", attendu: "66" },
+          ],
           figure: tri({ A: [0, 0], B: [6, 0], C: [4.0148, 4.4589] }, { noms: { A: "B", B: "C", C: "A" }, angles: { A: "48°", B: "?" }, trouve: ["B"], lignes: [{ de: [4.0148, 4.4589], vers: [3.6247, 0] }], points: [{ en: [3.6247, 0], nom: "D", vers: "bas" }], libres: [{ en: [4.0148, 4.4589], de: [0, 0], vers: [3.6247, 0], label: "37°" }, { en: [4.0148, 4.4589], de: [3.6247, 0], vers: [6, 0], label: "29°" }] }),
           correction:
             "a) L'angle en $A$ est fait des deux petits angles : $37 + 29 = 66$. Il mesure $66°$.\nb) Dans le triangle $ABC$ : $48 + 66 = 114$. Puis $180 - 114 = 66$.\nL'angle en $C$ mesure $66°$.\nc) Les angles en $A$ et en $C$ sont égaux : $66°$ chacun.\n⭐ Contrôle dans le petit triangle $ABD$ : $180 - 48 - 37 = 95$. Et dans $ADC$ : $180 - 66 - 29 = 85$. Or $95 + 85 = 180$ : l'angle plat en $D$ est bien là.\n⛔ Le piège : utiliser $37°$ ou $29°$ comme angle en $A$. L'angle du grand triangle, ce sont les DEUX réunis.\nRéponse : a) $66°$ ; b) $66°$ ; c) ils sont égaux.",
@@ -658,6 +717,11 @@ export const exercicesTrianglePropriete6e: FicheExercicesData = {
         {
           titre: "La charpente",
           enonce: "La charpente d'un toit forme un triangle isocèle. L'angle du haut mesure $104°$. Un poteau vertical part du haut et tombe au milieu de la poutre du bas, à angle droit. Les mesures sont des modèles.\na) Combien mesure chacun des deux angles du bas ?\nb) Quel angle fait le poteau avec un des côtés du toit ?\nc) Peut-on faire ce toit avec deux côtés de $3$ m et une poutre de $6{,}5$ m ?",
+          reponses: [
+            { question: "a)", attendu: "38" },
+            { question: "b)", attendu: "52" },
+            { question: "c)", attendu: ["non"] },
+          ],
           figure: tri({ A: [0, 0], B: [6, 0], C: [3, 2.3439] }, { angles: { C: "104°", A: "?", B: "?" }, trouve: ["A", "B"], egaux: ["BC", "CA"], lignes: [{ de: [3, 2.3439], vers: [3, 0], couleur: "gris", pointilles: true }] }),
           correction:
             "a) Les deux angles du bas sont égaux (triangle isocèle).\nIls se partagent $180 - 104 = 76$. Donc $76 \\div 2 = 38$ : chacun mesure $38°$.\nb) Je regarde le petit triangle de gauche : un angle de $38°$, un angle droit, et l'angle cherché.\n$38 + 90 = 128$. Puis $180 - 128 = 52$. Le poteau fait $52°$ avec le côté du toit.\n⭐ Contrôle : $52 + 52 = 104$, l'angle du haut.\nc) $3 + 3 = 6$ m. C'est plus petit que $6{,}5$ m : les deux côtés ne se rejoignent pas. Non.\n⛔ Le piège au b) : oublier l'angle droit entre le poteau et la poutre.\nRéponse : a) $38°$ ; b) $52°$ ; c) non.",
@@ -666,6 +730,13 @@ export const exercicesTrianglePropriete6e: FicheExercicesData = {
         {
           titre: "Les trois villages",
           enonce: "Trois villages $A$, $B$ et $C$ sont reliés par des routes droites. De $A$ à $B$ : $12$ km. De $B$ à $C$ : $5$ km.\na) La route de $A$ à $C$ peut-elle mesurer $6$ km ? $15$ km ? $17$ km ? $19$ km ?\nb) Si $AC = 17$ km, où est le village $B$ ?\nc) Si $AC = 15$ km, de combien le détour par $B$ allonge-t-il le trajet ?",
+          reponses: [
+            { question: "a) 6 km", attendu: ["non", "faux"] },
+            { question: "a) 15 km", attendu: ["oui", "vrai"] },
+            { question: "a) 17 km", attendu: ["oui", "alignés"] },
+            { question: "a) 19 km", attendu: ["non", "faux"] },
+            { question: "c)", attendu: "2" },
+          ],
           correction:
             "a) Je compare chaque fois le plus grand côté aux deux autres.\n$6$ km : $5 + 6 = 11$, plus petit que $12$. Non.\n$15$ km : $12 + 5 = 17$, plus grand que $15$. Oui.\n$17$ km : $12 + 5 = 17$, égal. Les trois villages sont alignés.\n$19$ km : $12 + 5 = 17$, plus petit que $19$. Non.\nb) Avec $17$ km, le triangle est aplati : $B$ est sur la route de $A$ à $C$.\nc) Par $B$ : $12 + 5 = 17$ km. Tout droit : $15$ km. Le détour allonge de $17 - 15 = 2$ km.\n⛔ Le piège : oublier le cas égal. $17$ km marche, mais il n'y a plus de triangle.\nRéponse : a) $6$ non, $15$ oui, $17$ alignés, $19$ non ; b) sur la route ; c) $2$ km.",
           schema: ecranSeulement(longueurs([{ grand: 12, petits: [5, 6] }, { grand: 15, petits: [12, 5] }, { grand: 17, petits: [12, 5] }, { grand: 19, petits: [12, 5] }], "km")),
@@ -674,6 +745,10 @@ export const exercicesTrianglePropriete6e: FicheExercicesData = {
         {
           titre: "Les dix bâtonnets",
           enonce: "Sami a $10$ bâtonnets identiques. Il veut faire un triangle avec TOUS les bâtonnets.\nChaque côté est fait d'un nombre entier de bâtonnets.\na) Peut-il faire un triangle de côtés $1$, $4$ et $5$ bâtonnets ?\nb) Trouve tous les triangles possibles.\nc) Quelle est leur nature ?",
+          reponses: [
+            { question: "a)", attendu: ["non"] },
+            { question: "c)", attendu: ["isocèles", "isocèle"] },
+          ],
           schema: longueurs([{ grand: 5, petits: [1, 4] }, { grand: 4, petits: [2, 4] }, { grand: 4, petits: [3, 3] }], "bâtonnets"),
           correction:
             "a) $1 + 4 = 5$ : égal au grand côté. Triangle aplati : non.\nb) J'écris toutes les façons de faire $10$ avec trois nombres, du plus petit au plus grand.\n$1+1+8$, $1+2+7$, $1+3+6$, $1+4+5$, $2+2+6$, $2+3+5$, $2+4+4$, $3+3+4$.\nJe teste chacune. Seules deux marchent :\n$2$, $4$, $4$ : $2 + 4 = 6$, plus grand que $4$. Oui.\n$3$, $3$, $4$ : $3 + 3 = 6$, plus grand que $4$. Oui.\nc) Les deux ont deux côtés égaux : ils sont isocèles.\n⛔ Le piège : oublier une façon. Je les range dans l'ordre pour n'en rater aucune.\nRéponse : a) non ; b) $2$-$4$-$4$ et $3$-$3$-$4$ ; c) isocèles.",
@@ -682,6 +757,11 @@ export const exercicesTrianglePropriete6e: FicheExercicesData = {
         {
           titre: "Les trois coins de papier",
           enonce: "Emma découpe un triangle en papier. Deux de ses angles mesurent $52°$ et $75°$.\nElle déchire les trois coins et les colle côte à côte, les sommets au même point.\na) Combien mesure le troisième angle ?\nb) Que forment les trois coins collés ?\nc) Est-ce un hasard ?",
+          reponses: [
+            { question: "a)", attendu: "53" },
+            { question: "b)", attendu: ["angle plat", "un angle plat"] },
+            { question: "c)", attendu: ["non"] },
+          ],
           figure: deux(
             tri({ A: [0, 0], B: [6, 0], C: [4.4677, 5.7185] }, { angles: { A: "52°", B: "75°", C: "?" }, trouve: ["C"] }),
             geo({ traits: [{ de: [-4, 0], vers: [4, 0] }, { de: [0, 0], vers: [1.847, 2.364] }, { de: [0, 0], vers: [-1.8054, 2.3959] }], arcs: [{ en: [0, 0], de: [4, 0], vers: [1.847, 2.364], label: "52°", rayon: 34 }, { en: [0, 0], de: [1.847, 2.364], vers: [-1.8054, 2.3959], label: "75°", rayon: 26 }, { en: [0, 0], de: [-1.8054, 2.3959], vers: [-4, 0], label: "?", plein: true, rayon: 34 }] }),

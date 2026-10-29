@@ -308,6 +308,10 @@ export const exercicesThales3e: FicheExercicesData = {
         {
           enonce:
             "Les droites $(BM)$ et $(CN)$ se coupent en $A$, et $(MN) // (BC)$.\na) $M$ est sur le segment $[AB]$ et $N$ sur le segment $[AC]$. Quelle est la configuration ?\nb) Cette fois, $A$ est sur le segment $[MB]$ et sur le segment $[NC]$. Quelle est la configuration ?\nc) Dans chaque cas, nommer les deux triangles que l'on compare.",
+          reponses: [
+            { question: "a)", attendu: ["emboîtés", "triangles emboîtés"] },
+            { question: "b)", attendu: ["papillon", "configuration papillon"] },
+          ],
           correction:
             "Je regarde où se trouvent $M$ et $N$ par rapport au point commun $A$.\na) $M$ et $N$ sont du MÊME côté de $A$ que $B$ et $C$ : le petit triangle $AMN$ est dans le grand triangle $ABC$. Ce sont des triangles emboîtés.\nb) $M$ et $N$ sont de l'AUTRE côté de $A$ : les deux triangles se touchent par la pointe $A$, comme les deux ailes d'un papillon. C'est la configuration papillon.\nc) Dans les deux cas, je compare le triangle $AMN$ au triangle $ABC$ : ils ont le sommet $A$ en commun, et leurs côtés $[MN]$ et $[BC]$ sont parallèles.\n⛔ Le piège : croire que le théorème ne marche pas en papillon. Les deux conditions sont là (deux droites sécantes en $A$, deux droites parallèles) : c'est la même configuration, retournée.\nRéponse : a) triangles emboîtés ; b) papillon ; c) $AMN$ et $ABC$ dans les deux cas.",
           schema: (
@@ -321,6 +325,9 @@ export const exercicesThales3e: FicheExercicesData = {
         {
           enonce:
             "Sur la figure, les points $E$, $R$, $S$ sont alignés, ainsi que $E$, $T$, $U$, et $(RT) // (SU)$.\na) Quel est le point commun des deux sécantes ?\nb) Écrire les trois quotients égaux donnés par le théorème de Thalès.",
+          reponses: [
+            { question: "a)", attendu: "E" },
+          ],
           figure: thales({ A: [0, 0], B: [9, 0], C: [5.4, 7.2], M: [3, 0], N: [1.8, 2.4], noms: { A: "E", M: "R", B: "S", N: "T", C: "U" } }),
           correction:
             "a) Les droites $(RS)$ et $(TU)$ passent toutes les deux par $E$ : c'est le sommet commun, il joue le rôle de $A$.\nb) Je nomme les deux triangles : le petit $ERT$ et le grand $ESU$. Je range leurs côtés face à face : $ER$ va avec $ES$ (même droite), $ET$ avec $EU$ (même droite), et $RT$ avec $SU$ (les parallèles).\nJ'écris le petit triangle en haut, le grand en bas, dans le même ordre.\n⛔ Le piège : écrire $\\dfrac{ER}{ES} = \\dfrac{EU}{ET}$. Le premier quotient a le petit en haut, le second le grand en haut : l'égalité est fausse.\nRéponse : $\\dfrac{ER}{ES} = \\dfrac{ET}{EU} = \\dfrac{RT}{SU}$.",
@@ -330,6 +337,10 @@ export const exercicesThales3e: FicheExercicesData = {
         {
           enonce:
             "Les droites $(KL)$ et $(PQ)$ se coupent en $O$, et $(KP) // (LQ)$. Le point $O$ est entre $K$ et $L$, et entre $P$ et $Q$.\na) Quelle est la configuration ?\nb) Écrire les trois quotients égaux.\nc) On a $OK = 4$ cm et $OL = 8$ cm. Que vaut le quotient $\\dfrac{OP}{OQ}$ ?",
+          reponses: [
+            { question: "a)", attendu: ["papillon", "configuration papillon"] },
+            { question: "c)", attendu: "0,5" },
+          ],
           correction:
             "a) $O$ est entre les points : les triangles $OKP$ et $OLQ$ sont de part et d'autre de $O$. C'est un papillon.\nb) Le triangle $OKP$ d'un côté, le triangle $OLQ$ de l'autre. $OK$ et $OL$ sont sur la même droite, $OP$ et $OQ$ aussi, et $KP$ va avec $LQ$ : $\\dfrac{OK}{OL} = \\dfrac{OP}{OQ} = \\dfrac{KP}{LQ}$.\nc) $\\dfrac{OP}{OQ} = \\dfrac{OK}{OL} = \\dfrac{4}{8} = 0{,}5$. Le triangle $OKP$ est deux fois plus petit que le triangle $OLQ$.\n⛔ Le piège : écrire $\\dfrac{OK}{KL}$. En papillon, $[KL]$ traverse $O$ : ce n'est un côté d'aucun des deux triangles. Chaque longueur part de $O$.\nRéponse : un papillon ; $\\dfrac{OK}{OL} = \\dfrac{OP}{OQ} = \\dfrac{KP}{LQ}$ ; ce quotient vaut $0{,}5$.",
           schema: thales({ A: [0, 0], B: [8, 0], C: [4.8, 6.4], M: [-4, 0], N: [-2.4, -3.2], noms: { A: "O", M: "K", B: "L", N: "P", C: "Q" }, cotes: { AM: "4 cm", AB: "8 cm" }, remplir: true }),
@@ -338,6 +349,9 @@ export const exercicesThales3e: FicheExercicesData = {
         {
           enonce:
             "$M$ est sur $[AB]$, $N$ sur $[AC]$ et $(MN) // (BC)$. On donne $AM = 4$ cm, $AB = 10$ cm et $AC = 15$ cm. Calculer $AN$.",
+          reponses: [
+            { attendu: "6" },
+          ],
           correction:
             "Les droites $(BM)$ et $(CN)$ sont sécantes en $A$ et $(MN) // (BC)$ : je peux appliquer le théorème de Thalès.\n$\\dfrac{AM}{AB} = \\dfrac{AN}{AC} = \\dfrac{MN}{BC}$.\nJe garde le quotient où tout est connu et celui qui contient la longueur cherchée : $\\dfrac{4}{10} = \\dfrac{AN}{15}$.\nProduit en croix : $AN = \\dfrac{15 \\times 4}{10} = 6$ cm.\n⭐ Contrôle : $\\dfrac{6}{15} = 0{,}4$ et $\\dfrac{4}{10} = 0{,}4$. Les deux quotients sont bien égaux.\n⛔ Le piège : écrire $\\dfrac{4}{10} = \\dfrac{15}{AN}$. Le petit triangle reste en haut dans les DEUX quotients.\nRéponse : $AN = 6$ cm.",
           schema: thales({ A: [0, 0], B: [10, 0], C: [9, 12], M: [4, 0], N: [3.6, 4.8], cotes: { AM: "4 cm", AB: "AB = 10 cm", AC: "AC = 15 cm", AN: "6 cm" }, trouve: ["AN"] }),
@@ -346,6 +360,9 @@ export const exercicesThales3e: FicheExercicesData = {
         {
           enonce:
             "Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$ et $(MN) // (BC)$. On donne $AM = 5$ cm, $AB = 8$ cm et $BC = 12$ cm. Calculer $MN$.",
+          reponses: [
+            { attendu: "7,5" },
+          ],
           correction:
             "Les droites $(BM)$ et $(CN)$ sont sécantes en $A$ et $(MN) // (BC)$. D'après le théorème de Thalès : $\\dfrac{AM}{AB} = \\dfrac{AN}{AC} = \\dfrac{MN}{BC}$.\nJe cherche $MN$, je connais $AM$, $AB$ et $BC$ : $\\dfrac{5}{8} = \\dfrac{MN}{12}$.\n$MN = \\dfrac{12 \\times 5}{8} = 7{,}5$ cm.\n⭐ $MN$ est plus petit que $BC$ : normal, $[MN]$ est un côté du petit triangle.\n⛔ Le piège : calculer $\\dfrac{8 \\times 5}{12}$. Dans un produit en croix, je multiplie les deux nombres en DIAGONALE ($12$ et $5$), puis je divise par le troisième.\nRéponse : $MN = 7{,}5$ cm.",
           schema: thales({ A: [0, 0], B: [8, 0], C: [0.8, 9.6], M: [5, 0], N: [0.5, 6], cotes: { AM: "5 cm", AB: "AB = 8 cm", BC: "12 cm", MN: "7,5 cm" }, trouve: ["MN"] }),
@@ -354,6 +371,11 @@ export const exercicesThales3e: FicheExercicesData = {
         {
           enonce:
             "$M \\in [AB]$, $N \\in [AC]$ et $(MN) // (BC)$. On donne $AM = 6$ cm, $MB = 4$ cm et $AN = 9$ cm.\na) Calculer $AB$.\nb) Calculer $AC$, puis $NC$.",
+          reponses: [
+            { question: "a)", attendu: "10" },
+            { question: "b) AC", attendu: "15" },
+            { question: "b) NC", attendu: "6" },
+          ],
           correction:
             "a) $M$ est sur le segment $[AB]$ : $AB = AM + MB = 6 + 4 = 10$ cm.\nb) Les droites $(BM)$ et $(CN)$ sont sécantes en $A$ et $(MN) // (BC)$. D'après le théorème de Thalès : $\\dfrac{AM}{AB} = \\dfrac{AN}{AC}$, soit $\\dfrac{6}{10} = \\dfrac{9}{AC}$.\nProduit en croix : $AC = \\dfrac{10 \\times 9}{6} = 15$ cm.\nPuis $NC = AC - AN = 15 - 9 = 6$ cm.\n⛔ Le piège : écrire $\\dfrac{AM}{MB} = \\dfrac{AN}{AC}$, avec $MB = 4$. $[MB]$ n'est un côté d'aucun des deux triangles : chaque longueur du quotient part de $A$. Ce calcul donnerait $AC = \\dfrac{4 \\times 9}{6} = 6$ cm, plus court que $AN$ : absurde.\nRéponse : $AB = 10$ cm, $AC = 15$ cm et $NC = 6$ cm.",
           schema: thales({ A: [0, 0], B: [10, 0], C: [12, 9], M: [6, 0], N: [7.2, 5.4], cotes: { AM: "6 cm", MB: "4 cm", AN: "9 cm", NC: "6 cm" }, trouve: ["NC"] }),
@@ -362,6 +384,9 @@ export const exercicesThales3e: FicheExercicesData = {
         {
           enonce:
             "Les points $A$, $M$, $B$ sont alignés dans cet ordre, ainsi que $A$, $N$, $C$. On mesure $AM = 3{,}6$ cm, $AB = 6$ cm, $AN = 4{,}2$ cm et $AC = 7$ cm. Les droites $(MN)$ et $(BC)$ sont-elles parallèles ?",
+          reponses: [
+            { attendu: ["oui", "vrai"] },
+          ],
           correction:
             "Je ne sais PAS si les droites sont parallèles : je ne peux pas utiliser le théorème. Je calcule séparément les deux quotients.\n$\\dfrac{AM}{AB} = \\dfrac{3{,}6}{6} = 0{,}6$ et $\\dfrac{AN}{AC} = \\dfrac{4{,}2}{7} = 0{,}6$.\nLes deux quotients sont égaux, et les points $A$, $M$, $B$ et $A$, $N$, $C$ sont dans le même ordre.\nD'après la réciproque du théorème de Thalès, $(MN) // (BC)$.\n⛔ Le piège : écrire « d'après le théorème de Thalès, $\\dfrac{AM}{AB} = \\dfrac{AN}{AC}$ » dès la première ligne. Le théorème SUPPOSE les droites parallèles : c'est justement ce qu'on cherche.\nRéponse : oui, $(MN)$ et $(BC)$ sont parallèles.",
           schema: thales({ A: [0, 0], B: [6, 0], C: [4.2, 5.6], M: [3.6, 0], N: [2.52, 3.36], cotes: { AM: "3,6 cm", AB: "AB = 6 cm", AN: "4,2 cm", AC: "AC = 7 cm" } }),
@@ -370,6 +395,9 @@ export const exercicesThales3e: FicheExercicesData = {
         {
           enonce:
             "Les points $A$, $M$, $B$ sont alignés dans cet ordre, ainsi que $A$, $N$, $C$. On mesure $AM = 5$ cm, $AB = 8$ cm, $AN = 6$ cm et $AC = 10$ cm. Les droites $(MN)$ et $(BC)$ sont-elles parallèles ?",
+          reponses: [
+            { attendu: ["non", "faux"] },
+          ],
           correction:
             "Je calcule séparément les deux quotients.\n$\\dfrac{AM}{AB} = \\dfrac{5}{8} = 0{,}625$ et $\\dfrac{AN}{AC} = \\dfrac{6}{10} = 0{,}6$.\nIls ne sont pas égaux. Or, si les droites étaient parallèles, le théorème de Thalès dirait qu'ils sont égaux.\nD'après la contraposée du théorème de Thalès, $(MN)$ et $(BC)$ ne sont pas parallèles.\n⭐ Sans décimaux, par les produits en croix : $5 \\times 10 = 50$ et $8 \\times 6 = 48$. $50 \\neq 48$.\n⛔ Le piège : arrondir, « $0{,}6$ et $0{,}6$, c'est pareil ». Les quotients doivent être EXACTEMENT égaux. Sur le dessin, l'écart se voit à peine : c'est le calcul qui tranche.\nRéponse : non, $(MN)$ et $(BC)$ ne sont pas parallèles.",
           schema: thales({ A: [0, 0], B: [8, 0], C: [6, 8], M: [5, 0], N: [3.6, 4.8], cotes: { AM: "5 cm", AB: "AB = 8 cm", AN: "6 cm", AC: "AC = 10 cm" }, paralleles: false }),
@@ -392,6 +420,10 @@ export const exercicesThales3e: FicheExercicesData = {
         {
           enonce:
             "Les droites $(BM)$ et $(CN)$ sont sécantes en $A$, avec $M \\in [AB]$, $N \\in [AC]$ et $(MN) // (BC)$. On donne $AM = 2{,}4$ cm, $AB = 6$ cm, $AC = 7{,}5$ cm et $BC = 4{,}5$ cm. Calculer $AN$ et $MN$, en rédigeant comme au brevet.",
+          reponses: [
+            { question: "AN", attendu: "3" },
+            { question: "MN", attendu: "1,8" },
+          ],
           correction:
             "Je commence par les hypothèses, puis le théorème, puis le calcul.\nLes droites $(BM)$ et $(CN)$ sont sécantes en $A$ et les droites $(MN)$ et $(BC)$ sont parallèles.\nD'après le théorème de Thalès : $\\dfrac{AM}{AB} = \\dfrac{AN}{AC} = \\dfrac{MN}{BC}$, soit $\\dfrac{2{,}4}{6} = \\dfrac{AN}{7{,}5} = \\dfrac{MN}{4{,}5}$.\nCalcul de $AN$ : $AN = \\dfrac{7{,}5 \\times 2{,}4}{6} = 3$ cm.\nCalcul de $MN$ : $MN = \\dfrac{4{,}5 \\times 2{,}4}{6} = 1{,}8$ cm.\n⭐ Le quotient commun vaut $\\dfrac{2{,}4}{6} = 0{,}4$ : chaque côté du petit triangle mesure $0{,}4$ fois le côté correspondant du grand. $0{,}4 \\times 7{,}5 = 3$ et $0{,}4 \\times 4{,}5 = 1{,}8$.\n⛔ Le piège : sauter la phrase des hypothèses. Au brevet, la rédaction rapporte autant de points que le résultat.\nRéponse : $AN = 3$ cm et $MN = 1{,}8$ cm.",
           schema: thales({ A: [0, 0], B: [6, 0], C: [6, 4.5], M: [2.4, 0], N: [2.4, 1.8], cotes: { AM: "2,4 cm", AB: "AB = 6 cm", AC: "AC = 7,5 cm", BC: "4,5 cm", AN: "3 cm", MN: "1,8 cm" }, trouve: ["AN", "MN"] }),
@@ -400,6 +432,11 @@ export const exercicesThales3e: FicheExercicesData = {
         {
           enonce:
             "Les droites $(BM)$ et $(CN)$ sont sécantes en $A$. Le point $A$ est entre $B$ et $M$, et entre $C$ et $N$, et $(MN) // (BC)$. On donne $AB = 4$ cm, $AC = 5$ cm, $AM = 6$ cm et $MN = 9$ cm.\na) De quelle configuration s'agit-il ?\nb) Calculer $AN$ et $BC$.",
+          reponses: [
+            { question: "a)", attendu: ["papillon", "configuration papillon"] },
+            { question: "b) AN", attendu: "7,5" },
+            { question: "b) BC", attendu: "6" },
+          ],
           correction:
             "a) $A$ est entre les points : les triangles $ABC$ et $AMN$ sont de part et d'autre de $A$. C'est un papillon.\nb) Les droites $(BM)$ et $(CN)$ sont sécantes en $A$ et $(MN) // (BC)$. D'après le théorème de Thalès : $\\dfrac{AM}{AB} = \\dfrac{AN}{AC} = \\dfrac{MN}{BC}$, soit $\\dfrac{6}{4} = \\dfrac{AN}{5} = \\dfrac{9}{BC}$.\n$AN = \\dfrac{5 \\times 6}{4} = 7{,}5$ cm.\n$BC = \\dfrac{4 \\times 9}{6} = 6$ cm.\n⭐ Ici, le triangle $AMN$ est le PLUS GRAND : le quotient vaut $1{,}5$. Ce n'est pas grave, pourvu que $AMN$ reste en haut dans les trois quotients.\n⛔ Le piège : lire les longueurs en travers du papillon, par exemple $\\dfrac{AM}{AC}$. $[AM]$ et $[AC]$ ne sont pas sur la même droite : chaque quotient réunit deux longueurs d'une MÊME droite, ou les deux parallèles.\nRéponse : un papillon ; $AN = 7{,}5$ cm et $BC = 6$ cm.",
           schema: thales({ A: [0, 0], B: [4, 0], C: [0.625, 4.96078], M: [-6, 0], N: [-0.9375, -7.44117], cotes: { AB: "4 cm", AC: "5 cm", AM: "6 cm", MN: "9 cm", AN: "7,5 cm", BC: "6 cm" }, trouve: ["AN", "BC"], remplir: true }),
@@ -408,6 +445,11 @@ export const exercicesThales3e: FicheExercicesData = {
         {
           enonce:
             "Les points $A$, $M$, $B$ sont alignés, ainsi que $A$, $N$, $C$. $M$ est sur le segment $[AB]$, mais $A$ est sur le segment $[NC]$. On a $AM = 2$ cm, $AB = 5$ cm, $AN = 3$ cm et $AC = 7{,}5$ cm.\na) Calculer $\\dfrac{AM}{AB}$ et $\\dfrac{AN}{AC}$.\nb) Un élève conclut : « les quotients sont égaux, donc $(MN) // (BC)$ ». A-t-il raison ?",
+          reponses: [
+            { question: "a) 1er", attendu: "0,4" },
+            { question: "a) 2e", attendu: "0,4" },
+            { question: "b)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $\\dfrac{AM}{AB} = \\dfrac{2}{5} = 0{,}4$ et $\\dfrac{AN}{AC} = \\dfrac{3}{7{,}5} = 0{,}4$. Ils sont égaux.\nb) Non. La réciproque demande AUSSI que les points soient dans le même ordre sur les deux droites. Sur la première droite, l'ordre est $A$, $M$, $B$ ; sur la seconde, c'est $N$, $A$, $C$ : $M$ est du côté de $B$, mais $N$ est de l'autre côté de $A$ que $C$.\nLe dessin le montre : $(MN)$ et $(BC)$ ne sont pas parallèles, elles finiraient par se couper.\n⛔ Le piège : oublier l'ordre des points. L'égalité des quotients ne suffit pas : la réciproque a DEUX conditions.\nRéponse : les deux quotients valent $0{,}4$, mais l'élève a tort : les points ne sont pas dans le même ordre, et $(MN)$ n'est pas parallèle à $(BC)$.",
           schema: thales({ A: [0, 0], B: [5, 0], C: [4.5, 6], M: [2, 0], N: [-1.8, -2.4], cotes: { AM: "2 cm", AB: "AB = 5 cm", AN: "3 cm", AC: "7,5 cm" }, paralleles: false }),
@@ -424,6 +466,12 @@ export const exercicesThales3e: FicheExercicesData = {
         {
           enonce:
             "Dans le triangle $ABC$, $M \\in [AB]$ et $N \\in [AC]$, avec $(MN) // (BC)$. On donne $AM = 4$ cm, $MB = 6$ cm, $AC = 12{,}5$ cm et $BC = 9$ cm.\na) Calculer $AN$, puis $NC$.\nb) Calculer $MN$.\nc) Calculer le périmètre du quadrilatère $MBCN$.",
+          reponses: [
+            { question: "a) AN", attendu: "5" },
+            { question: "a) NC", attendu: "7,5" },
+            { question: "b)", attendu: "3,6" },
+            { question: "c)", attendu: "26,1" },
+          ],
           correction:
             "a) D'abord la longueur du grand côté : $AB = AM + MB = 4 + 6 = 10$ cm.\nLes droites $(BM)$ et $(CN)$ sont sécantes en $A$ et $(MN) // (BC)$. D'après le théorème de Thalès : $\\dfrac{AM}{AB} = \\dfrac{AN}{AC} = \\dfrac{MN}{BC}$, soit $\\dfrac{4}{10} = \\dfrac{AN}{12{,}5} = \\dfrac{MN}{9}$.\n$AN = \\dfrac{12{,}5 \\times 4}{10} = 5$ cm, puis $NC = 12{,}5 - 5 = 7{,}5$ cm.\nb) $MN = \\dfrac{9 \\times 4}{10} = 3{,}6$ cm.\nc) Le quadrilatère $MBCN$ a pour côtés $[MB]$, $[BC]$, $[CN]$ et $[NM]$ : $6 + 9 + 7{,}5 + 3{,}6 = 26{,}1$ cm.\n⛔ Le piège : mettre $MB = 6$ au dénominateur du premier quotient. Le quotient de Thalès, c'est $\\dfrac{AM}{AB}$, avec $AB = 10$.\nRéponse : $AN = 5$ cm, $NC = 7{,}5$ cm, $MN = 3{,}6$ cm, et le périmètre de $MBCN$ vaut $26{,}1$ cm.",
           schema: thales({ A: [0, 0], B: [10, 0], C: [8.7625, 8.91461], M: [4, 0], N: [3.505, 3.565844], cotes: { AM: "4 cm", MB: "6 cm", AC: "AC = 12,5 cm", BC: "9 cm", AN: "5 cm", MN: "3,6 cm" }, trouve: ["AN", "MN"] }),
@@ -432,6 +480,11 @@ export const exercicesThales3e: FicheExercicesData = {
         {
           enonce:
             "Le triangle $ABC$ est rectangle en $B$, avec $AB = 12$ cm et $BC = 5$ cm. Le point $M$ est sur $[AB]$, avec $AM = 9$ cm, et la perpendiculaire à $(AB)$ passant par $M$ coupe $[AC]$ en $N$.\na) Calculer $AC$.\nb) Justifier que $(MN) // (BC)$.\nc) Calculer $AN$ et $MN$.",
+          reponses: [
+            { question: "a)", attendu: "13" },
+            { question: "c) AN", attendu: "9,75" },
+            { question: "c) MN", attendu: "3,75" },
+          ],
           correction:
             "a) Le triangle $ABC$ est rectangle en $B$. D'après le théorème de Pythagore : $AC^2 = AB^2 + BC^2 = 144 + 25 = 169$, donc $AC = \\sqrt{169} = 13$ cm.\nb) Les droites $(MN)$ et $(BC)$ sont toutes les deux perpendiculaires à $(AB)$. Or deux droites perpendiculaires à une même droite sont parallèles : $(MN) // (BC)$.\nc) Les droites $(BM)$ et $(CN)$ sont sécantes en $A$ et $(MN) // (BC)$. D'après le théorème de Thalès : $\\dfrac{AM}{AB} = \\dfrac{AN}{AC} = \\dfrac{MN}{BC}$, soit $\\dfrac{9}{12} = \\dfrac{AN}{13} = \\dfrac{MN}{5}$.\n$AN = \\dfrac{13 \\times 9}{12} = 9{,}75$ cm et $MN = \\dfrac{5 \\times 9}{12} = 3{,}75$ cm.\n⛔ Le piège : appliquer Thalès sans avoir PROUVÉ le parallélisme. L'énoncé ne dit pas « $(MN) // (BC)$ » : il faut le justifier, c'est la question b).\nRéponse : $AC = 13$ cm, $AN = 9{,}75$ cm et $MN = 3{,}75$ cm.",
           schema: thales({ A: [0, 0], B: [12, 0], C: [12, 5], M: [9, 0], N: [9, 3.75], cotes: { AM: "9 cm", AB: "AB = 12 cm", BC: "5 cm", AC: "AC = 13 cm", AN: "9,75 cm", MN: "3,75 cm" }, trouve: ["AC", "AN", "MN"], interieur: true }),
@@ -440,6 +493,9 @@ export const exercicesThales3e: FicheExercicesData = {
         {
           enonce:
             "Les points $A$, $M$, $B$ sont alignés dans cet ordre, ainsi que $A$, $N$, $C$. On donne $AM = 3$ cm, $AB = 12$ cm, $AN = 2{,}5$ cm, $AC = 10$ cm et $BC = 14$ cm.\na) Démontrer que $(MN) // (BC)$.\nb) En déduire $MN$.",
+          reponses: [
+            { question: "b)", attendu: "3,5" },
+          ],
           correction:
             "a) Je ne sais pas si les droites sont parallèles : la réciproque d'abord.\n$\\dfrac{AM}{AB} = \\dfrac{3}{12} = 0{,}25$ et $\\dfrac{AN}{AC} = \\dfrac{2{,}5}{10} = 0{,}25$. Les quotients sont égaux, et les points $A$, $M$, $B$ et $A$, $N$, $C$ sont dans le même ordre.\nD'après la réciproque du théorème de Thalès, $(MN) // (BC)$.\nb) MAINTENANT je sais que les droites sont parallèles : je peux me servir du théorème. Les droites $(BM)$ et $(CN)$ sont sécantes en $A$ et $(MN) // (BC)$. D'après le théorème de Thalès : $\\dfrac{AM}{AB} = \\dfrac{MN}{BC}$, soit $\\dfrac{3}{12} = \\dfrac{MN}{14}$.\n$MN = \\dfrac{14 \\times 3}{12} = 3{,}5$ cm.\n⛔ Le piège : confondre les deux théorèmes. La réciproque PROUVE le parallélisme ; le théorème s'en SERT pour calculer. Ici, l'un après l'autre.\nRéponse : $(MN) // (BC)$, et $MN = 3{,}5$ cm.",
           schema: thales({ A: [0, 0], B: [12, 0], C: [2, 9.79796], M: [3, 0], N: [0.5, 2.44949], cotes: { AM: "3 cm", AB: "AB = 12 cm", AN: "2,5 cm", AC: "AC = 10 cm", BC: "14 cm", MN: "3,5 cm" }, trouve: ["MN"] }),
@@ -448,6 +504,9 @@ export const exercicesThales3e: FicheExercicesData = {
         {
           enonce:
             "Voici la copie d'un élève : « $M \\in [AB]$, $N \\in [AC]$, $(MN) // (BC)$, $AM = 3$ cm, $MB = 5$ cm, $AC = 12$ cm. D'après le théorème de Thalès, $\\dfrac{AM}{MB} = \\dfrac{AN}{AC}$, donc $AN = \\dfrac{12 \\times 3}{5} = 7{,}2$ cm. »\na) Trouver l'erreur.\nb) Corriger le calcul.\nc) Comment aurait-il pu voir, sans refaire le calcul, que $7{,}2$ cm était suspect ?",
+          reponses: [
+            { question: "b)", attendu: "4,5" },
+          ],
           correction:
             "a) Le quotient $\\dfrac{AM}{MB}$ compare deux morceaux de $[AB]$. Le théorème compare le petit triangle $AMN$ au grand triangle $ABC$ : il faut $\\dfrac{AM}{AB}$, deux longueurs qui partent de $A$.\nb) $AB = AM + MB = 3 + 5 = 8$ cm. Puis $\\dfrac{AM}{AB} = \\dfrac{AN}{AC}$, soit $\\dfrac{3}{8} = \\dfrac{AN}{12}$, et $AN = \\dfrac{12 \\times 3}{8} = 4{,}5$ cm.\nc) $M$ est à $3$ cm de $A$ sur $8$ : il est avant le milieu de $[AB]$. Donc $N$ doit être avant le milieu de $[AC]$, qui est à $6$ cm de $A$. $7{,}2$ cm dépasse ce milieu : impossible.\n⛔ Le piège : $\\dfrac{AM}{MB}$ au lieu de $\\dfrac{AM}{AB}$. C'est l'erreur la plus fréquente, parce que $MB$ est la longueur DONNÉE : il faut d'abord calculer $AB$.\nRéponse : $AN = 4{,}5$ cm, et non $7{,}2$ cm.",
           schema: thales({ A: [0, 0], B: [8, 0], C: [7.2, 9.6], M: [3, 0], N: [2.7, 3.6], cotes: { AM: "3 cm", MB: "5 cm", AC: "AC = 12 cm", AN: "4,5 cm" }, trouve: ["AN"] }),
@@ -470,6 +529,9 @@ export const exercicesThales3e: FicheExercicesData = {
           titre: "La hauteur d'un arbre par son ombre",
           enonce:
             "Pour mesurer un arbre sans y grimper, Léa plante un jalon vertical $[PQ]$ de $2$ m. Elle le place pour que le bout de son ombre tombe exactement au même point $O$ que le bout de l'ombre de l'arbre $[RS]$. Elle mesure l'ombre du jalon, $OP = 3{,}2$ m, et la distance du jalon au pied de l'arbre, $PR = 9{,}6$ m.\na) Pourquoi les droites $(PQ)$ et $(RS)$ sont-elles parallèles ?\nb) Calculer la hauteur $RS$ de l'arbre.",
+          reponses: [
+            { question: "b)", attendu: "8" },
+          ],
           correction:
             "a) Le jalon et l'arbre sont verticaux : les droites $(PQ)$ et $(RS)$ sont toutes les deux perpendiculaires au sol $(OR)$. Deux droites perpendiculaires à une même droite sont parallèles.\nb) Le rayon de soleil qui frôle le sommet de l'arbre frôle aussi le haut du jalon : les points $O$, $Q$, $S$ sont alignés. Et $O$, $P$, $R$ sont alignés sur le sol.\nJe calcule d'abord l'ombre de l'arbre : $OR = OP + PR = 3{,}2 + 9{,}6 = 12{,}8$ m.\nLes droites $(PR)$ et $(QS)$ sont sécantes en $O$ et $(PQ) // (RS)$. D'après le théorème de Thalès : $\\dfrac{OP}{OR} = \\dfrac{OQ}{OS} = \\dfrac{PQ}{RS}$, soit $\\dfrac{3{,}2}{12{,}8} = \\dfrac{2}{RS}$.\n$RS = \\dfrac{12{,}8 \\times 2}{3{,}2} = 8$ m.\n⭐ Contrôle : l'ombre de l'arbre est $4$ fois celle du jalon ($12{,}8 \\div 3{,}2 = 4$), donc l'arbre est $4$ fois plus haut : $4 \\times 2 = 8$ m.\n⛔ Le piège : prendre $PR = 9{,}6$ m pour l'ombre de l'arbre. L'ombre de l'arbre va de $R$ jusqu'à $O$ : $12{,}8$ m.\nRéponse : l'arbre mesure $8$ m de haut.",
           schema: thales({ A: [0, 0], M: [3.2, 0], B: [12.8, 0], N: [3.2, 2], C: [12.8, 8], noms: { A: "O", M: "P", B: "R", N: "Q", C: "S" }, cotes: { AM: "3,2 m", MB: "9,6 m", MN: "2 m", BC: "8 m" }, trouve: ["BC"] }),
@@ -479,6 +541,10 @@ export const exercicesThales3e: FicheExercicesData = {
           titre: "Une passerelle sans traverser la rivière",
           enonce:
             "On veut construire une passerelle entre un piquet $M$, planté au bord de l'eau, et un arbre $A$ sur l'autre rive, sans traverser. On plante trois autres piquets : $N$ au bord de l'eau, $B$ et $C$ plus loin du bord, de sorte que $A$, $M$, $B$ soient alignés, $A$, $N$, $C$ aussi, et $(MN) // (BC)$. On mesure $MN = 12$ m, $BC = 15$ m et $MB = 8$ m.\na) Écrire l'égalité de Thalès qui relie $AM$, $AB$, $MN$ et $BC$.\nb) On pose $AM = x$. Exprimer $AB$ en fonction de $x$.\nc) Calculer $x$, la longueur de la passerelle.",
+          reponses: [
+            { question: "b)", attendu: "x+8" },
+            { question: "c)", attendu: "32" },
+          ],
           correction:
             "a) Les droites $(BM)$ et $(CN)$ sont sécantes en $A$ et $(MN) // (BC)$. D'après le théorème de Thalès : $\\dfrac{AM}{AB} = \\dfrac{MN}{BC}$, soit $\\dfrac{AM}{AB} = \\dfrac{12}{15}$.\nb) $M$ est entre $A$ et $B$ : $AB = AM + MB = x + 8$.\nc) L'égalité devient $\\dfrac{x}{x + 8} = \\dfrac{12}{15}$. Produit en croix : $15x = 12(x + 8)$, soit $15x = 12x + 96$.\nDonc $3x = 96$ et $x = 32$ m.\n⭐ Contrôle : $\\dfrac{32}{40} = 0{,}8$ et $\\dfrac{12}{15} = 0{,}8$.\n⛔ Le piège : écrire $\\dfrac{AM}{MB} = \\dfrac{12}{15}$, ce qui donnerait $AM = 6{,}4$ m. $[MB]$ n'est pas un côté du grand triangle $ABC$ : c'est $AB = x + 8$.\nRéponse : la passerelle mesure $32$ m.",
           schema: thales({ A: [0, 0], B: [39.2906, -7.5], C: [39.2906, 7.5], M: [31.43248, -6], N: [31.43248, 6], cotes: { AM: "32 m", MB: "8 m", MN: "12 m", BC: "15 m" }, trouve: ["AM"], interieur: true }),
@@ -488,6 +554,11 @@ export const exercicesThales3e: FicheExercicesData = {
           titre: "La Mausefalle, sur la piste de Kitzbühel",
           enonce:
             "Sur la Streif, la piste de descente de Kitzbühel (Autriche), le passage de la Mausefalle atteint une pente de $85$ % : pour $100$ m parcourus à l'horizontale, on descend de $85$ m. On le modélise par une pente droite $[AC]$ : $B$ est au niveau de $A$, à la verticale de $C$, avec $AB = 100$ m et $BC = 85$ m. Un skieur est en $N$, sur la pente ; $M$ est au niveau de $A$, à la verticale de $N$, avec $AM = 40$ m.\na) De combien de mètres le skieur est-il plus haut que $A$ ?\nb) Quelle distance de piste lui reste-t-il jusqu'en $A$ ? Arrondir au dixième.\nc) Un autre skieur est $51$ m plus haut que $A$. À quelle distance horizontale de $A$ est-il ?",
+          reponses: [
+            { question: "a)", attendu: "34" },
+            { question: "b)", attendu: "52,5", tolerance: 0.05 },
+            { question: "c)", attendu: "60" },
+          ],
           correction:
             "a) Les droites $(MN)$ et $(BC)$ sont verticales toutes les deux : elles sont parallèles. Les droites $(MB)$ et $(NC)$ sont sécantes en $A$ et $(MN) // (BC)$. D'après le théorème de Thalès : $\\dfrac{AM}{AB} = \\dfrac{AN}{AC} = \\dfrac{MN}{BC}$, soit $\\dfrac{40}{100} = \\dfrac{MN}{85}$.\n$MN = \\dfrac{85 \\times 40}{100} = 34$ m.\n⭐ C'est le sens de « $85$ % » : la hauteur vaut $85$ % de la distance horizontale, à tout endroit de la pente. $85$ % de $40$ m, c'est $34$ m.\nb) Le triangle $AMN$ est rectangle en $M$. D'après le théorème de Pythagore : $AN^2 = 40^2 + 34^2 = 1\\,600 + 1\\,156 = 2\\,756$, donc $AN = \\sqrt{2\\,756} \\approx 52{,}5$ m.\nc) $\\dfrac{AM}{100} = \\dfrac{51}{85}$, donc $AM = \\dfrac{100 \\times 51}{85} = 60$ m.\n⛔ Le piège : croire qu'une pente de $85$ % descend de $85$ m sur $100$ m de PISTE. Les $100$ m sont mesurés à l'horizontale ; sur la piste, le skieur en parcourt plus : $\\sqrt{100^2 + 85^2} \\approx 131{,}2$ m.\nRéponse : $34$ m plus haut que $A$ ; environ $52{,}5$ m de piste ; $60$ m à l'horizontale.",
           schema: thales({ A: [0, 0], B: [100, 0], C: [100, 85], M: [40, 0], N: [40, 34], cotes: { AM: "40 m", AB: "AB = 100 m", BC: "85 m", MN: "34 m" }, trouve: ["MN"] }),
@@ -497,6 +568,11 @@ export const exercicesThales3e: FicheExercicesData = {
           titre: "Faire entrer la tour Eiffel dans la photo",
           enonce:
             "Dans un appareil photo, les rayons de lumière se croisent au centre $A$ de l'objectif. On modélise : l'objet $[BC]$ et son image $[MN]$ sur le capteur sont parallèles, de part et d'autre de $A$, avec $B$, $A$, $M$ alignés et $C$, $A$, $N$ alignés. Le capteur d'un appareil « plein format » mesure $36$ mm sur $24$ mm, et il est à $AM = 50$ mm de l'objectif.\na) Quelle est la configuration ?\nb) On photographie un mur à $AB = 10$ m. Le capteur le voit sur toute sa largeur, $MN = 36$ mm. Quelle largeur de mur tient sur la photo ?\nc) La tour Eiffel mesure $330$ m. On tient l'appareil pour que le grand côté du capteur, $36$ mm, soit vertical. À quelle distance minimale faut-il se placer pour que toute la tour tienne sur la photo ? Arrondir au mètre supérieur.",
+          reponses: [
+            { question: "a)", attendu: ["papillon", "configuration papillon"] },
+            { question: "b)", attendu: ["7,2m", "7200mm"] },
+            { question: "c)", attendu: "459" },
+          ],
           correction:
             "a) Les rayons se croisent en $A$, entre l'objet et le capteur : c'est un papillon. L'image est d'ailleurs à l'envers.\nb) Les droites $(BM)$ et $(CN)$ sont sécantes en $A$ et $(MN) // (BC)$. D'après le théorème de Thalès : $\\dfrac{AM}{AB} = \\dfrac{AN}{AC} = \\dfrac{MN}{BC}$.\nJe mets tout en millimètres : $AB = 10$ m $= 10\\,000$ mm. Donc $\\dfrac{50}{10\\,000} = \\dfrac{36}{BC}$.\n$BC = \\dfrac{10\\,000 \\times 36}{50} = 7\\,200$ mm, soit $7{,}2$ m.\nc) Cette fois, $BC = 330$ m $= 330\\,000$ mm, et je cherche $AB$ : $\\dfrac{50}{AB} = \\dfrac{36}{330\\,000}$.\n$AB = \\dfrac{330\\,000 \\times 50}{36} \\approx 458\\,333$ mm, soit environ $458{,}3$ m.\n⛔ Le piège : arrondir à $458$ m. À $458$ m, on est un peu trop près : la photo ne couvre que $\\dfrac{458\\,000 \\times 36}{50} = 329\\,760$ mm, soit $329{,}76$ m, et le haut de l'antenne sort du cadre. Une distance MINIMALE s'arrondit vers le haut.\nRéponse : un papillon ; $7{,}2$ m de mur ; il faut se placer à au moins $459$ m de la tour.",
           schema: thales({ A: [0, 0], B: [12, -4], C: [12, 4], M: [-4.2, 1.4], N: [-4.2, -1.4], cotes: { AM: "50 mm", MN: "36 mm", AB: "10 m", BC: "7,2 m" }, trouve: ["BC"], echelle: false }),

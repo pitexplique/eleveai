@@ -279,6 +279,9 @@ export const exercicesStatistiques4e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Un nageur chronomètre ses cinq longueurs de $50$ m, en secondes : $42$, $45$, $44$, $47$, $42$. Calculer son temps moyen pour une longueur.",
+          reponses: [
+            { attendu: "44" },
+          ],
           correction:
             "J'additionne les cinq temps, puis je divise par le nombre de longueurs, $5$.\n$42 + 45 + 44 + 47 + 42 = 220$, et $\\dfrac{220}{5} = 44$.\n⭐ Contrôle : $44$ est bien entre le temps le plus court, $42$ s, et le plus long, $47$ s. Sur le dessin, la ligne rouge de la moyenne passe au milieu des barres : ce qui dépasse au-dessus comble ce qui manque en dessous.\n⛔ Le piège : ne compter qu'une fois le temps $42$, qui revient deux fois : $\\dfrac{42 + 45 + 44 + 47}{4} = 44{,}5$. Chaque longueur compte, même si son temps se répète.\nRéponse : il nage une longueur en $44$ s en moyenne.",
           schema: barres([{ label: "L1", value: 42 }, { label: "L2", value: 45 }, { label: "L3", value: 44 }, { label: "L4", value: 47 }, { label: "L5", value: 42 }], { moyenne: 44 }),
@@ -286,6 +289,9 @@ export const exercicesStatistiques4e: FicheExercicesData = {
         },
         {
           enonce: "Une classe a planté sept jeunes chênes. Un an plus tard, elle mesure leur hauteur, en cm, arbre par arbre : $64$, $81$, $58$, $90$, $72$, $69$, $77$. Déterminer la hauteur médiane.",
+          reponses: [
+            { attendu: "72" },
+          ],
           correction:
             "Je RANGE d'abord, du plus petit au plus grand : $58$, $64$, $69$, $72$, $77$, $81$, $90$.\nIl y a $7$ valeurs, un nombre impair : la médiane est la valeur du milieu, la $4^e$, avec $3$ valeurs de chaque côté.\nDonc la médiane est $72$ cm.\n⛔ Le piège : prendre la $4^e$ valeur de la liste non rangée, $90$ : c'est le plus grand chêne, pas celui du milieu.\nRéponse : la hauteur médiane est $72$ cm : au moins la moitié des chênes mesure $72$ cm ou moins.",
           schema: rangee([58, 64, 69, 72, 77, 81, 90], 72),
@@ -293,6 +299,9 @@ export const exercicesStatistiques4e: FicheExercicesData = {
         },
         {
           enonce: "Une station météo relève la température à midi pendant six jours de mai, en °C : $17$, $21$, $15$, $19$, $24$, $18$. Déterminer la température médiane.",
+          reponses: [
+            { attendu: "18,5" },
+          ],
           correction:
             "Je range : $15$, $17$, $18$, $19$, $21$, $24$.\nIl y a $6$ valeurs, un nombre pair : aucune n'est au milieu. La médiane est la moyenne des deux valeurs centrales, la $3^e$ et la $4^e$ : $\\dfrac{18 + 19}{2} = 18{,}5$.\n⭐ $18{,}5$ n'est aucune des valeurs, et ce n'est pas grave : $3$ jours sont en dessous, $3$ au-dessus.\n⛔ Le piège : prendre les deux valeurs du milieu SANS ranger, la $3^e$ et la $4^e$ de la liste : $\\dfrac{15 + 19}{2} = 17$.\nRéponse : la température médiane est $18{,}5$ °C.",
           schema: rangee([15, 17, 18, 19, 21, 24], 18.5),
@@ -300,6 +309,9 @@ export const exercicesStatistiques4e: FicheExercicesData = {
         },
         {
           enonce: "Une vétérinaire pèse les six chats d'un refuge, de C1 à C6, en kg : $4{,}2$ ; $3{,}6$ ; $5{,}1$ ; $4{,}8$ ; $3{,}9$ ; $4{,}5$. Calculer l'étendue de cette série.",
+          reponses: [
+            { attendu: "1,5" },
+          ],
           correction:
             "L'étendue mesure l'écart entre les deux extrêmes : la plus grande valeur moins la plus petite.\nLe chat le plus lourd pèse $5{,}1$ kg (C3), le plus léger $3{,}6$ kg (C2).\nÉtendue : $5{,}1 - 3{,}6 = 1{,}5$ kg.\n⛔ Le piège : faire « dernière moins première » dans la liste, $4{,}5 - 4{,}2 = 0{,}3$. Les extrêmes ne sont ni au début ni à la fin : je les cherche.\nRéponse : l'étendue est $1{,}5$ kg : entre le chat le plus léger et le plus lourd, il y a $1{,}5$ kg.",
           schema: barres([{ label: "C1", value: 4.2 }, { label: "C2", value: 3.6 }, { label: "C3", value: 5.1 }, { label: "C4", value: 4.8 }, { label: "C5", value: 3.9 }, { label: "C6", value: 4.5 }], { etendue: true }),
@@ -307,6 +319,9 @@ export const exercicesStatistiques4e: FicheExercicesData = {
         },
         {
           enonce: "Le tableau donne les pointures des $20$ joueuses d'un club de handball. Calculer la pointure moyenne.",
+          reponses: [
+            { attendu: "38,6" },
+          ],
           figure: tableau(["Pointure", "37", "38", "39", "40"], ["Joueuses", 3, 6, 7, 4]),
           correction:
             "Chaque pointure compte autant de fois qu'il y a de joueuses qui la portent : je multiplie chaque pointure par son effectif, j'additionne, puis je divise par le nombre TOTAL de joueuses.\nEffectif total : $3 + 6 + 7 + 4 = 20$ joueuses.\nSomme : $37 \\times 3 + 38 \\times 6 + 39 \\times 7 + 40 \\times 4 = 111 + 228 + 273 + 160 = 772$.\nMoyenne : $\\dfrac{772}{20} = 38{,}6$.\n⭐ Contrôle : $38{,}6$ est bien entre $37$ et $40$.\n⛔ Le piège : diviser par $4$, le nombre de pointures DIFFÉRENTES : $\\dfrac{772}{4} = 193$, une pointure de géant.\nRéponse : la pointure moyenne est $38{,}6$.",
@@ -315,6 +330,9 @@ export const exercicesStatistiques4e: FicheExercicesData = {
         },
         {
           enonce: "À Strasbourg, un élève relève la température à $7$ h du matin pendant une semaine d'école de janvier, en °C : lundi $-4$, mardi $-1$, mercredi $2$, jeudi $-3$, vendredi $1$. Calculer la température moyenne.",
+          reponses: [
+            { attendu: "-1" },
+          ],
           correction:
             "J'additionne les cinq températures AVEC leurs signes, puis je divise par $5$.\n$(-4) + (-1) + 2 + (-3) + 1 = -5$.\n$\\dfrac{-5}{5} = -1$.\n⭐ Contrôle : $-1$ est bien entre la plus basse, $-4$, et la plus haute, $2$.\n⛔ Le piège : oublier les signes « moins » : $\\dfrac{4 + 1 + 2 + 3 + 1}{5} = 2{,}2$. Une moyenne au-dessus de zéro alors que trois matins sur cinq ont gelé : impossible.\nRéponse : la température moyenne est $-1$ °C.",
           schema: barres([{ label: "Lun", value: -4 }, { label: "Mar", value: -1 }, { label: "Mer", value: 2 }, { label: "Jeu", value: -3 }, { label: "Ven", value: 1 }], { moyenne: -1 }),
@@ -322,6 +340,10 @@ export const exercicesStatistiques4e: FicheExercicesData = {
         },
         {
           enonce: "Lors d'une course d'orientation, le coureur le plus rapide a mis $38$ min. L'étendue des temps est de $12$ min.\na) Quel est le temps du coureur le plus lent ?\nb) Un coureur dit avoir mis $52$ min. Est-ce possible ?",
+          reponses: [
+            { question: "a)", attendu: "50" },
+            { question: "b)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) L'étendue est le plus grand temps moins le plus petit. Le plus petit temps, c'est celui du plus rapide, $38$ min. Donc le plus lent a mis $38 + 12 = 50$ min.\nb) Non : aucun temps ne dépasse celui du plus lent, $50$ min. D'ailleurs $52 - 38 = 14$, plus que l'étendue.\n⛔ Le piège : calculer $38 - 12 = 26$ min. Le plus rapide a le PLUS PETIT temps : le plus lent est au-dessus, pas en dessous.\nRéponse : le plus lent a mis $50$ min ; $52$ min est impossible.",
           schema: barres([{ label: "rapide", value: 38 }, { label: "lent", value: 50 }], { etendue: true }),
@@ -329,6 +351,9 @@ export const exercicesStatistiques4e: FicheExercicesData = {
         },
         {
           enonce: "Dans un groupe de cinq élèves, les notes d'un devoir sont : $14$, $2$, $13$, $12$, $14$. La moyenne du groupe est $11$. Léa a eu $12$ et dit : « J'ai plus que la moyenne, donc je suis dans la meilleure moitié du groupe. » A-t-elle raison ?",
+          reponses: [
+            { attendu: ["non", "faux"] },
+          ],
           correction:
             "Je vérifie d'abord la moyenne : $\\dfrac{14 + 2 + 13 + 12 + 14}{5} = \\dfrac{55}{5} = 11$.\nCe qui coupe le groupe en deux moitiés, ce n'est pas la moyenne, c'est la MÉDIANE. Je range : $2$, $12$, $13$, $14$, $14$. $5$ valeurs : la médiane est la $3^e$, $13$.\nLéa, avec $12$, est SOUS la médiane : elle est l'avant-dernière du groupe.\nPourquoi la moyenne est-elle si basse ? La note $2$, très à l'écart, la tire vers le bas.\n⛔ Le piège : croire que la moyenne coupe le groupe en deux. Ici, $4$ élèves sur $5$ ont plus que la moyenne.\nRéponse : non, Léa n'est pas dans la meilleure moitié : la médiane est $13$.",
           schema: rangee([2, 12, 13, 14, 14], 13),
@@ -351,6 +376,12 @@ export const exercicesStatistiques4e: FicheExercicesData = {
         {
           enonce:
             "Un apiculteur a récolté du miel dans ses sept ruches. Le diagramme donne la masse récoltée dans chaque ruche, en kg.\na) Calculer la masse moyenne récoltée par ruche.\nb) Déterminer la médiane.\nc) Calculer l'étendue.\nd) Combien de ruches ont donné plus que la moyenne ?",
+          reponses: [
+            { question: "a)", attendu: "21" },
+            { question: "b)", attendu: "21" },
+            { question: "c)", attendu: "18" },
+            { question: "d)", attendu: "3" },
+          ],
           figure: barres([{ label: "R1", value: 18 }, { label: "R2", value: 25 }, { label: "R3", value: 12 }, { label: "R4", value: 30 }, { label: "R5", value: 21 }, { label: "R6", value: 16 }, { label: "R7", value: 25 }]),
           correction:
             "a) Total : $18 + 25 + 12 + 30 + 21 + 16 + 25 = 147$ kg. Moyenne : $\\dfrac{147}{7} = 21$ kg.\nb) Je range : $12$, $16$, $18$, $21$, $25$, $25$, $30$. $7$ valeurs : la médiane est la $4^e$, $21$ kg.\nc) $30 - 12 = 18$ kg.\nd) Plus de $21$ kg : R2 ($25$), R4 ($30$) et R7 ($25$). Cela fait $3$ ruches. R5 donne exactement $21$ kg : ce n'est pas « plus ».\n⭐ Ici, la moyenne et la médiane sont égales : aucune ruche n'est très à l'écart, la série est équilibrée.\n⛔ Le piège au b) : prendre la $4^e$ ruche du diagramme, R4, qui vaut $30$. Le diagramme suit l'ordre des ruches, pas l'ordre des masses.\nRéponse : $21$ kg en moyenne, médiane $21$ kg, étendue $18$ kg, $3$ ruches au-dessus de la moyenne.",
@@ -365,6 +396,17 @@ export const exercicesStatistiques4e: FicheExercicesData = {
         {
           enonce:
             "Dans une année qui n'est pas bissextile, les douze mois, de janvier à décembre, ont $31$, $28$, $31$, $30$, $31$, $30$, $31$, $31$, $30$, $31$, $30$ et $31$ jours.\na) Combien de mois ont $28$ jours ? $30$ jours ? $31$ jours ?\nb) Calculer le nombre moyen de jours par mois, arrondi au dixième.\nc) Déterminer la médiane et l'étendue.\nd) En 2028, année bissextile, février aura $29$ jours. Que deviennent la moyenne, la médiane et l'étendue ?",
+          reponses: [
+            { question: "a) 28 j", attendu: "1" },
+            { question: "a) 30 j", attendu: "4" },
+            { question: "a) 31 j", attendu: "7" },
+            { question: "b)", attendu: "30,4", tolerance: 0.05 },
+            { question: "c) méd.", attendu: "31" },
+            { question: "c) ét.", attendu: "3" },
+            { question: "d) moy.", attendu: "30,5", tolerance: 0.05 },
+            { question: "d) méd.", attendu: "31" },
+            { question: "d) ét.", attendu: "2" },
+          ],
           correction:
             "a) $1$ mois de $28$ jours (février), $4$ mois de $30$ jours (avril, juin, septembre, novembre) et $7$ mois de $31$ jours. Contrôle : $1 + 4 + 7 = 12$.\nb) Chaque durée compte autant de fois que son effectif : $28 \\times 1 + 30 \\times 4 + 31 \\times 7 = 28 + 120 + 217 = 365$, le nombre de jours de l'année. Moyenne : $\\dfrac{365}{12} \\approx 30{,}4$ jours.\nc) $12$ valeurs : la médiane est la moyenne des $6^e$ et $7^e$. J'additionne les effectifs dans l'ordre : $1$, puis $5$, puis $12$. Les rangs $6$ à $12$ ont $31$ jours : la $6^e$ et la $7^e$ valeur valent $31$, la médiane est $31$ jours. Étendue : $31 - 28 = 3$ jours.\nd) Le total passe à $366$ jours : moyenne $\\dfrac{366}{12} = 30{,}5$ jours. La médiane ne bouge pas, $31$ jours. L'étendue devient $31 - 29 = 2$ jours.\n⛔ Le piège au c) : répondre $30$, la valeur « du milieu » parmi $28$, $30$ et $31$. La médiane se cherche dans les RANGS des $12$ mois, pas parmi les $3$ valeurs différentes.\nRéponse : $30{,}4$ jours en moyenne, médiane $31$ jours, étendue $3$ jours ; en 2028 : $30{,}5$ jours, $31$ jours et $2$ jours.",
           schema: (
@@ -378,6 +420,11 @@ export const exercicesStatistiques4e: FicheExercicesData = {
         {
           enonce:
             "Tom a eu $11$, $14$, $9$ et $14$ à ses quatre premiers contrôles de maths. Il reste un contrôle avant le bulletin.\na) Calculer sa moyenne actuelle.\nb) Quelle note doit-il avoir au cinquième contrôle pour finir avec $13$ de moyenne ?\nc) Peut-il finir avec $15$ de moyenne ? (Les notes sont sur $20$.)",
+          reponses: [
+            { question: "a)", attendu: "12" },
+            { question: "b)", attendu: "17" },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $11 + 14 + 9 + 14 = 48$, et $\\dfrac{48}{4} = 12$.\nb) Une moyenne de $13$ sur $5$ contrôles, c'est un total de $13 \\times 5 = 65$ points. Il en a déjà $48$ : il lui faut $65 - 48 = 17$.\nJe vérifie : $\\dfrac{48 + 17}{5} = \\dfrac{65}{5} = 13$.\nc) Il faudrait un total de $15 \\times 5 = 75$ points, donc $75 - 48 = 27$ au dernier contrôle. Impossible : la note maximale est $20$.\n⛔ Le piège : répondre $13$, la moyenne qu'il vise. Avec $13$ au dernier contrôle, sa moyenne serait $\\dfrac{48 + 13}{5} = 12{,}2$ : la dernière note doit aussi rattraper le retard des quatre premières.\nRéponse : $12$ de moyenne aujourd'hui ; il lui faut $17$ ; $15$ de moyenne est impossible.",
           schema: barres([{ label: "C1", value: 11 }, { label: "C2", value: 14 }, { label: "C3", value: 9 }, { label: "C4", value: 14 }, { label: "C5", value: 17 }], { moyenne: 13, surligne: 4 }),
@@ -386,6 +433,12 @@ export const exercicesStatistiques4e: FicheExercicesData = {
         {
           enonce:
             "Dans une rue, sept maisons ont été vendues cette année. Leurs prix, en milliers d'euros : $180$, $195$, $210$, $200$, $190$, $205$ et $920$ (une grande villa avec piscine).\na) Calculer le prix moyen.\nb) Déterminer le prix médian.\nc) Combien de maisons ont été vendues moins cher que le prix moyen ?\nd) Une agence affiche : « Dans cette rue, une maison se vend en moyenne $300\\,000$ € ». Quel nombre décrit mieux le prix d'une maison ordinaire ?",
+          reponses: [
+            { question: "a)", attendu: ["300000", "300"] },
+            { question: "b)", attendu: ["200000", "200"] },
+            { question: "c)", attendu: "6" },
+            { question: "d)", attendu: ["la médiane", "médiane", "le prix médian", "prix médian"] },
+          ],
           correction:
             "a) $180 + 195 + 210 + 200 + 190 + 205 + 920 = 2\\,100$, et $\\dfrac{2\\,100}{7} = 300$ milliers d'euros, soit $300\\,000$ €.\nb) Je range : $180$, $190$, $195$, $200$, $205$, $210$, $920$. $7$ valeurs : la médiane est la $4^e$, $200$ milliers d'euros.\nc) $6$ maisons sur $7$ : toutes, sauf la villa.\nd) La médiane, $200\\,000$ €. La villa, très à l'écart, tire la moyenne vers le haut. La médiane, elle, ne regarde que le rang du milieu : la villa pourrait valoir le double, la médiane ne bougerait pas.\n⛔ Le piège : croire que « en moyenne » veut dire « d'habitude ». Ici, aucune maison ne s'est vendue près de $300\\,000$ €.\nRéponse : moyenne $300\\,000$ €, médiane $200\\,000$ € ; la médiane décrit mieux une maison ordinaire.",
           schema: (
@@ -399,6 +452,10 @@ export const exercicesStatistiques4e: FicheExercicesData = {
         {
           enonce:
             "Un matin, des élèves comptent les personnes à bord de $40$ voitures qui passent devant le collège, conducteur compris. Le diagramme donne le nombre de voitures pour $1$, $2$, $3$ ou $4$ personnes à bord.\na) Calculer le nombre moyen de personnes par voiture.\nb) Déterminer la médiane.\nc) Le maire dit : « En moyenne, il y a une personne et demie par voiture : le covoiturage marche bien. » Que lui répondre, avec la médiane ?",
+          reponses: [
+            { question: "a)", attendu: "1,5" },
+            { question: "b)", attendu: "1" },
+          ],
           figure: barres([{ label: "1", value: 27 }, { label: "2", value: 8 }, { label: "3", value: 3 }, { label: "4", value: 2 }]),
           correction:
             "a) Chaque valeur compte autant de fois que son effectif : $1 \\times 27 + 2 \\times 8 + 3 \\times 3 + 4 \\times 2 = 27 + 16 + 9 + 8 = 60$ personnes, dans $27 + 8 + 3 + 2 = 40$ voitures. Moyenne : $\\dfrac{60}{40} = 1{,}5$ personne par voiture.\nb) $40$ valeurs : la médiane est la moyenne des $20^e$ et $21^e$. Les $27$ premières voitures, rangées, n'ont qu'une personne : la $20^e$ et la $21^e$ valent $1$, donc la médiane est $1$.\nc) La médiane dit l'inverse du maire : plus de la moitié des voitures, $27$ sur $40$, roulent avec le conducteur SEUL. La moyenne de $1{,}5$ vient de quelques voitures pleines.\n⛔ Le piège au b) : prendre le milieu des valeurs $1$, $2$, $3$, $4$, soit $2{,}5$. La médiane se cherche parmi les $40$ voitures, avec les effectifs cumulés.\nRéponse : $1{,}5$ personne en moyenne, médiane $1$ : la plupart des voitures ne transportent que le conducteur.",
@@ -413,6 +470,15 @@ export const exercicesStatistiques4e: FicheExercicesData = {
         {
           enonce:
             "Mehdi note dans un tableur la durée de ses cinq trajets en bus de la semaine, en minutes : $14$, $9$, $81$, $11$, $13$. Il s'est trompé de touche : le $81$ était un $18$.\na) Calculer la moyenne, la médiane et l'étendue de la série fausse.\nb) Recommencer avec la série corrigée.\nc) Quel indicateur n'a pas bougé ? Pourquoi ?",
+          reponses: [
+            { question: "a) moy.", attendu: "25,6" },
+            { question: "a) méd.", attendu: "13" },
+            { question: "a) ét.", attendu: "72" },
+            { question: "b) moy.", attendu: "13" },
+            { question: "b) méd.", attendu: "13" },
+            { question: "b) ét.", attendu: "9" },
+            { question: "c)", attendu: ["la médiane", "médiane"] },
+          ],
           correction:
             "a) Série fausse : $14 + 9 + 81 + 11 + 13 = 128$, moyenne $\\dfrac{128}{5} = 25{,}6$ min. Rangée : $9$, $11$, $13$, $14$, $81$ : médiane $13$ min. Étendue : $81 - 9 = 72$ min.\nb) Série corrigée : $14 + 9 + 18 + 11 + 13 = 65$, moyenne $\\dfrac{65}{5} = 13$ min. Rangée : $9$, $11$, $13$, $14$, $18$ : médiane $13$ min. Étendue : $18 - 9 = 9$ min.\nc) La médiane n'a pas bougé : elle ne dépend que de la valeur du MILIEU, et le $81$ comme le $18$ restent à la dernière place. La moyenne et l'étendue, elles, utilisent la plus grande valeur : l'erreur les fausse.\n⛔ Le piège : croire qu'une seule faute de frappe ne change presque rien. Ici, elle double presque la moyenne et multiplie l'étendue par $8$.\nRéponse : série fausse : $25{,}6$ ; $13$ ; $72$. Série corrigée : $13$ ; $13$ ; $9$. Seule la médiane résiste à l'erreur.",
           schema: (
@@ -425,6 +491,11 @@ export const exercicesStatistiques4e: FicheExercicesData = {
         },
         {
           enonce: "Les $25$ élèves d'une classe ont répondu à un QCM de $5$ questions. Le tableau donne le nombre d'élèves pour chaque nombre de bonnes réponses.\na) Déterminer la médiane.\nb) Calculer la moyenne.\nc) Calculer l'étendue.",
+          reponses: [
+            { question: "a)", attendu: "3" },
+            { question: "b)", attendu: "3,32" },
+            { question: "c)", attendu: "5" },
+          ],
           figure: tableau(["Bonnes réponses", "0", "1", "2", "3", "4", "5"], ["Élèves", 1, 2, 4, 6, 5, 7], true),
           correction:
             "a) $25$ valeurs, un nombre impair : la médiane est la $13^e$ valeur, avec $12$ élèves avant et $12$ après. J'additionne les effectifs au fur et à mesure : $1$, $3$, $7$, $13$. Les rangs $8$ à $13$ ont $3$ bonnes réponses : la $13^e$ valeur est $3$, la médiane est $3$.\nb) $0 \\times 1 + 1 \\times 2 + 2 \\times 4 + 3 \\times 6 + 4 \\times 5 + 5 \\times 7 = 0 + 2 + 8 + 18 + 20 + 35 = 83$, et $\\dfrac{83}{25} = 3{,}32$ bonnes réponses.\nc) $5 - 0 = 5$ bonnes réponses.\n⛔ Le piège au a) : répondre $5$, parce que c'est la valeur qui a le plus d'élèves, ou $2{,}5$, le milieu entre $0$ et $5$. La médiane se trouve par les RANGS.\nRéponse : médiane $3$, moyenne $3{,}32$, étendue $5$.",
@@ -433,6 +504,9 @@ export const exercicesStatistiques4e: FicheExercicesData = {
         },
         {
           enonce: "Deux classes de 4e ont passé le même devoir commun. En 4e A, les $20$ élèves ont une moyenne de $12{,}5$. En 4e B, les $30$ élèves ont une moyenne de $10$. Quelle est la moyenne des $50$ élèves réunis ?",
+          reponses: [
+            { attendu: "11" },
+          ],
           correction:
             "Je ne peux pas faire la moyenne des deux moyennes : les classes n'ont pas le même nombre d'élèves. Je repasse par les TOTAUX de points.\n4e A : $12{,}5 \\times 20 = 250$ points. 4e B : $10 \\times 30 = 300$ points.\nTotal : $250 + 300 = 550$ points pour $20 + 30 = 50$ élèves.\nMoyenne : $\\dfrac{550}{50} = 11$.\n⭐ Contrôle : $11$ est entre $10$ et $12{,}5$, et plus près de $10$ : la 4e B, plus nombreuse, pèse plus lourd.\n⛔ Le piège : $\\dfrac{12{,}5 + 10}{2} = 11{,}25$. Ce serait juste si les deux classes avaient le même effectif.\nRéponse : la moyenne des $50$ élèves est $11$.",
           schema: (
@@ -461,6 +535,11 @@ export const exercicesStatistiques4e: FicheExercicesData = {
           titre: "Les huit planètes",
           enonce:
             "Voici le diamètre des huit planètes du Système solaire, en milliers de km, arrondi à l'unité (NASA) : Mercure $5$, Vénus $12$, Terre $13$, Mars $7$, Jupiter $143$, Saturne $121$, Uranus $51$, Neptune $50$.\na) Calculer le diamètre moyen.\nb) Déterminer le diamètre médian.\nc) Calculer l'étendue.\nd) La moyenne ou la médiane décrivent-elles une planète « typique » ? Que faudrait-il dire plutôt ?",
+          reponses: [
+            { question: "a)", attendu: "50,25" },
+            { question: "b)", attendu: "31,5" },
+            { question: "c)", attendu: "138" },
+          ],
           correction:
             "a) $5 + 12 + 13 + 7 + 143 + 121 + 51 + 50 = 402$, et $\\dfrac{402}{8} = 50{,}25$ milliers de km, soit environ $50\\,000$ km.\nb) Je range : $5$, $7$, $12$, $13$, $50$, $51$, $121$, $143$. $8$ valeurs : la médiane est la moyenne des $4^e$ et $5^e$, $\\dfrac{13 + 50}{2} = 31{,}5$ milliers de km.\nc) $143 - 5 = 138$ milliers de km : Jupiter est presque $30$ fois plus large que Mercure.\nd) Non. La médiane, $31{,}5$, tombe dans le vide : aucune planète ne mesure entre $13$ et $50$ milliers de km. La série forme DEUX familles : quatre petites planètes rocheuses, de $5$ à $13$, et quatre géantes, de $50$ à $143$. Je décris plutôt chaque famille : $\\dfrac{5 + 7 + 12 + 13}{4} = 9{,}25$ pour les rocheuses, $\\dfrac{50 + 51 + 121 + 143}{4} = 91{,}25$ pour les géantes.\n⛔ Le piège : croire qu'un indicateur décrit toujours une valeur « typique ». Quand la série a deux groupes, la médiane tombe entre les deux.\nRéponse : moyenne $50{,}25$, médiane $31{,}5$, étendue $138$ (en milliers de km) ; il faut décrire les deux familles séparément.",
           schema: (
@@ -475,6 +554,18 @@ export const exercicesStatistiques4e: FicheExercicesData = {
           titre: "Deux toits solaires",
           enonce:
             "Deux familles, dans deux régions différentes, ont installé les mêmes panneaux solaires. Voici leur production d'électricité, en kWh, chaque jour d'une même semaine de mai (du lundi au dimanche) :\nfamille A : $14$, $15$, $13$, $14$, $16$, $15$, $11$ ;\nfamille B : $18$, $6$, $19$, $17$, $5$, $18$, $15$.\na) Calculer la production de chaque famille sur la semaine, puis sa moyenne par jour.\nb) Déterminer la médiane de chaque série.\nc) Calculer l'étendue de chaque série.\nd) Quelle installation a la production la plus régulière ? Un jour « ordinaire », laquelle produit le plus ?",
+          reponses: [
+            { question: "A total", attendu: "98" },
+            { question: "A moy.", attendu: "14" },
+            { question: "B total", attendu: "98" },
+            { question: "B moy.", attendu: "14" },
+            { question: "b) A", attendu: "14" },
+            { question: "b) B", attendu: "17" },
+            { question: "c) A", attendu: "5" },
+            { question: "c) B", attendu: "14" },
+            { question: "d) régu.", attendu: ["A", "la famille A", "famille A"] },
+            { question: "d) ordi.", attendu: ["B", "la famille B", "famille B"] },
+          ],
           correction:
             "a) A : $14 + 15 + 13 + 14 + 16 + 15 + 11 = 98$ kWh, soit $\\dfrac{98}{7} = 14$ kWh par jour. B : $18 + 6 + 19 + 17 + 5 + 18 + 15 = 98$ kWh, soit $14$ kWh par jour aussi. Même total, même moyenne.\nb) A rangée : $11$, $13$, $14$, $14$, $15$, $15$, $16$ : médiane $14$ kWh. B rangée : $5$, $6$, $15$, $17$, $18$, $18$, $19$ : médiane $17$ kWh.\nc) A : $16 - 11 = 5$ kWh. B : $19 - 5 = 14$ kWh.\nd) La plus régulière est A : son étendue est bien plus petite. Mais un jour ordinaire, B produit plus : sa médiane, $17$ kWh, dépasse $14$. Ce sont deux jours très nuageux, à $5$ et $6$ kWh, qui font tomber sa moyenne.\n⛔ Le piège : conclure « les deux se valent » parce que les moyennes sont égales. La moyenne cache ici deux histoires différentes.\nRéponse : $98$ kWh, soit $14$ kWh par jour, pour les deux ; médianes $14$ et $17$ kWh ; étendues $5$ et $14$ kWh ; A est la plus régulière, B produit plus un jour ordinaire.",
           schema: (
@@ -489,6 +580,14 @@ export const exercicesStatistiques4e: FicheExercicesData = {
           titre: "Les cigognes du marais",
           enonce:
             "Au printemps, un ornithologue compte chaque jour les cigognes posées dans un marais. Sur cinq jours, il en compte : $6$, $9$, $11$, $14$ et $15$.\na) Calculer la moyenne et la médiane.\nb) Combien de cigognes doit-il compter le sixième jour pour que la moyenne des six jours soit $12$ ?\nc) Avec ce sixième jour, quelle est la nouvelle médiane ?\nd) Quel nombre de cigognes, le sixième jour, laisserait la médiane à $11$ ? Y en a-t-il un seul ?",
+          reponses: [
+            { question: "a) moy.", attendu: "11" },
+            { question: "a) méd.", attendu: "11" },
+            { question: "b)", attendu: "17" },
+            { question: "c)", attendu: "12,5" },
+            { question: "d)", attendu: "11" },
+            { question: "d) seul?", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) $6 + 9 + 11 + 14 + 15 = 55$, et $\\dfrac{55}{5} = 11$. La série est déjà rangée : $5$ valeurs, la médiane est la $3^e$, $11$.\nb) Une moyenne de $12$ sur $6$ jours, c'est un total de $12 \\times 6 = 72$ cigognes. Il en a déjà compté $55$ : il faut $72 - 55 = 17$ cigognes le sixième jour.\nc) Je range : $6$, $9$, $11$, $14$, $15$, $17$. $6$ valeurs : la médiane est la moyenne des $3^e$ et $4^e$, $\\dfrac{11 + 14}{2} = 12{,}5$.\nd) Avec $6$ valeurs, la médiane est la moyenne des $3^e$ et $4^e$. Si le sixième nombre vaut $9$ ou moins, les deux valeurs du milieu sont $9$ et $11$ : médiane $10$. S'il vaut $14$ ou plus, ce sont $11$ et $14$ : médiane $12{,}5$. Entre les deux, les valeurs du milieu sont $11$ et ce nombre : il faut qu'il vaille $11$. Il n'y a donc qu'une possibilité : $11$ cigognes.\n⛔ Le piège au c) : garder l'ancienne médiane, $11$. Ajouter une valeur change le nombre de valeurs, donc le rang du milieu.\nRéponse : moyenne et médiane $11$ ; $17$ cigognes ; nouvelle médiane $12{,}5$ ; seul le nombre $11$ garde la médiane à $11$.",
           schema: (
@@ -503,6 +602,13 @@ export const exercicesStatistiques4e: FicheExercicesData = {
           titre: "Les randonnées oubliées",
           enonce:
             "Pendant l'été, Chloé a fait quatre randonnées. Elle a oublié les distances, mais se souvient de trois résultats : la plus courte faisait $6$ km, la distance médiane est $10$ km et la distance moyenne $11$ km.\na) Quelle distance a-t-elle parcourue en tout ?\nb) Que vaut la somme des deux distances du milieu ?\nc) En déduire la plus longue randonnée, puis l'étendue.\nd) Proposer quatre distances possibles.\ne) Si les distances sont des nombres entiers de km, combien de séries sont possibles ?",
+          reponses: [
+            { question: "a)", attendu: "44" },
+            { question: "b)", attendu: "20" },
+            { question: "c) long.", attendu: "18" },
+            { question: "c) ét.", attendu: "12" },
+            { question: "e)", attendu: "5" },
+          ],
           correction:
             "a) Une moyenne de $11$ km sur $4$ randonnées : $11 \\times 4 = 44$ km en tout.\nb) $4$ valeurs : la médiane est la moyenne des $2^e$ et $3^e$ distances rangées. Si leur moyenne vaut $10$, leur somme vaut $10 \\times 2 = 20$ km.\nc) La plus longue : $44 - 6 - 20 = 18$ km. Étendue : $18 - 6 = 12$ km.\nd) Il faut deux distances rangées entre $6$ et $18$, de somme $20$ : par exemple $8$ et $12$. Série : $6$, $8$, $12$, $18$. Je vérifie : $6 + 8 + 12 + 18 = 44$, et $\\dfrac{8 + 12}{2} = 10$.\ne) La $2^e$ distance vaut au moins $6$ (la plus courte) et au plus $10$ (sinon elle dépasserait la $3^e$, qui vaut $20$ moins elle). Cela fait $5$ séries : au milieu, $6$ et $14$, $7$ et $13$, $8$ et $12$, $9$ et $11$, ou $10$ et $10$.\n⛔ Le piège : chercher les quatre distances au hasard. Je pars du TOTAL, que donne la moyenne, puis de la somme du milieu, que donne la médiane : la plus longue tombe toute seule.\nRéponse : $44$ km ; $20$ km ; $18$ km et une étendue de $12$ km ; par exemple $6$, $8$, $12$, $18$ ; $5$ séries possibles.",
           schema: (

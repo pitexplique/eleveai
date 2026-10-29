@@ -405,6 +405,11 @@ export const exercicesRatio4e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Cette saison, une équipe de volley a gagné $24$ matchs et en a perdu $16$.\na) Écris le ratio gagnés : perdus, puis simplifie-le.\nb) Écris le ratio perdus : gagnés.\nc) Écris le ratio gagnés : joués, simplifié.",
+          reponses: [
+            { question: "a)", attendu: ["3 : 2"], exact: true },
+            { question: "b)", attendu: "2 : 3" },
+            { question: "c)", attendu: ["3 : 5"], exact: true },
+          ],
           correction:
             "a) J'écris les nombres dans l'ordre demandé, les matchs gagnés d'abord : $24 : 16$.\nJe cherche le plus grand nombre qui divise $24$ et $16$ : c'est $8$.\n$24 \\div 8 = 3$ et $16 \\div 8 = 2$. Le ratio simplifié est $3 : 2$.\nb) L'ordre change, le ratio aussi : perdus : gagnés $= 2 : 3$.\nc) L'équipe a joué $24 + 16 = 40$ matchs. Gagnés : joués $= 24 : 40$ ; en divisant par $8$, c'est $3 : 5$.\n⭐ Sur la barre : $5$ parts de $8$ matchs, $3$ parts gagnées et $2$ perdues.\n⛔ Le piège : simplifier en SOUSTRAYANT. Enlever $14$ aux deux nombres donne $10 : 2$, soit $5$ victoires pour $1$ défaite : ce n'est plus la même équipe.\nRéponse : a) $3 : 2$ ; b) $2 : 3$ ; c) $3 : 5$.",
           schema: barre([{ nom: "gagnés", parts: 3, valeur: "24" }, { nom: "perdus", parts: 2, valeur: "16" }], "40 matchs", "8 matchs"),
@@ -412,6 +417,11 @@ export const exercicesRatio4e: FicheExercicesData = {
         },
         {
           enonce: "Simplifie chaque ratio : écris-le avec les plus petits nombres entiers possibles.\na) $18 : 42$\nb) $2{,}4 : 3$\nc) Pendant une sortie à vélo, il y a eu $45$ min de pause pour $2$ h de route. Écris le ratio pause : route.",
+          reponses: [
+            { question: "a)", attendu: ["3 : 7"], exact: true },
+            { question: "b)", attendu: ["4 : 5"], exact: true },
+            { question: "c)", attendu: ["3 : 8"], exact: true },
+          ],
           correction:
             "a) $18$ et $42$ se divisent tous les deux par $6$. $18 \\div 6 = 3$ et $42 \\div 6 = 7$. Le ratio est $3 : 7$.\nb) Pour enlever la virgule, je multiplie les DEUX nombres par $10$ : $2{,}4 \\times 10 = 24$ et $3 \\times 10 = 30$. Puis je divise par $6$ : $24 : 30 = 4 : 5$.\nc) D'abord la même unité : $2$ h, c'est $2 \\times 60 = 120$ min. Le ratio est $45 : 120$, et en divisant par $15$, $45 : 120 = 3 : 8$.\n⛔ Le piège du c) : écrire $45 : 2$. Des minutes contre des heures, ce n'est pas un ratio : les deux nombres doivent être dans la même unité.\nRéponse : a) $3 : 7$ ; b) $4 : 5$ ; c) $3 : 8$.",
           schema: ecranSeulement(
@@ -425,6 +435,10 @@ export const exercicesRatio4e: FicheExercicesData = {
         },
         {
           enonce: "Les nombres $m$ et $n$ sont dans le ratio $4 : 7$.\na) Écris l'égalité de quotients qui traduit ce ratio.\nb) On sait que $m = 28$. Calcule $n$.\nc) Cette fois, $n = 21$. Calcule $m$.",
+          reponses: [
+            { question: "b)", attendu: "49" },
+            { question: "c)", attendu: "12" },
+          ],
           correction:
             "a) Chaque nombre divisé par SA part donne le même quotient : $\\dfrac{m}{4} = \\dfrac{n}{7}$. Ce quotient, c'est la valeur d'une part.\nb) $\\dfrac{28}{4} = 7$ : une part vaut $7$. $n$ compte $7$ parts : $n = 7 \\times 7 = 49$.\nc) $\\dfrac{21}{7} = 3$ : une part vaut $3$. $m$ compte $4$ parts : $m = 4 \\times 3 = 12$.\n⭐ Contrôle du b) : $\\dfrac{49}{7} = 7$, le même quotient que $\\dfrac{28}{4}$.\n⛔ Le piège : diviser par la part de l'AUTRE nombre, $\\dfrac{28}{7} = 4$, puis $n = 7 \\times 4 = 28$. Chaque nombre se divise par SA part : $m$ par $4$, $n$ par $7$.\nRéponse : a) $\\dfrac{m}{4} = \\dfrac{n}{7}$ ; b) $n = 49$ ; c) $m = 12$.",
           schema: ecranSeulement(tableauParts(["parts", "nombres"], ["4", "7"], ["28", "!49"], "7")),
@@ -432,6 +446,11 @@ export const exercicesRatio4e: FicheExercicesData = {
         },
         {
           enonce: "Un club commande des drapeaux. Ils doivent respecter le ratio longueur : largeur $= 3 : 2$. Voici trois modèles, dessinés à l'échelle.\na) $90$ cm sur $60$ cm.\nb) $120$ cm sur $75$ cm.\nc) $1{,}5$ m sur $1$ m.\nLesquels respectent le ratio ? Justifie avec l'égalité de quotients.",
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: ["non", "faux"] },
+            { question: "c)", attendu: ["oui", "vrai"] },
+          ],
           figure: rectangles([
             { nom: "a", L: 90, l: 60, texte: "90 × 60" },
             { nom: "b", L: 120, l: 75, texte: "120 × 75" },
@@ -450,6 +469,11 @@ export const exercicesRatio4e: FicheExercicesData = {
         },
         {
           enonce: "Un sachet de perles pour fabriquer des bracelets contient des perles en bois, en verre et en métal, dans le ratio bois : verre : métal $= 2 : 3 : 5$. Il contient $300$ perles en verre.\nCombien de perles en bois et en métal contient-il ? Combien de perles en tout ?",
+          reponses: [
+            { question: "bois", attendu: "200" },
+            { question: "métal", attendu: "500" },
+            { question: "total", attendu: "1000" },
+          ],
           figure: barre([{ nom: "bois", parts: 2, valeur: "?" }, { nom: "verre", parts: 3, valeur: "300" }, { nom: "métal", parts: 5, valeur: "?" }], "?", "?"),
           correction:
             "Le ratio à trois termes se traduit par trois quotients égaux : le nombre de perles en bois divisé par $2$, en verre par $3$, en métal par $5$.\nLe verre est connu : $300 \\div 3 = 100$. Une part vaut $100$ perles.\nBois : $2 \\times 100 = 200$ perles. Métal : $5 \\times 100 = 500$ perles.\nEn tout : $200 + 300 + 500 = 1\\,000$ perles. Ce sont bien $2 + 3 + 5 = 10$ parts de $100$.\n⛔ Le piège : croire qu'il faut connaître le nombre total pour commencer. Une seule quantité connue suffit : elle donne la valeur d'une part, et tout le reste.\nRéponse : $200$ perles en bois, $500$ en métal ; $1\\,000$ perles en tout.",
@@ -458,6 +482,10 @@ export const exercicesRatio4e: FicheExercicesData = {
         },
         {
           enonce: "Un club de sport reçoit une aide de $1\\,400$ €. Il la partage entre sa section football et sa section judo, selon le ratio football : judo $= 4 : 3$.\nCombien reçoit chaque section ?",
+          reponses: [
+            { question: "foot", attendu: "800" },
+            { question: "judo", attendu: "600" },
+          ],
           figure: barre([{ nom: "football", parts: 4, valeur: "?" }, { nom: "judo", parts: 3, valeur: "?" }], "1 400 €", "?"),
           correction:
             "Je compte les parts : $4 + 3 = 7$ parts.\nUne part vaut $1\\,400 \\div 7 = 200$ €.\nFootball : $4 \\times 200 = 800$ €. Judo : $3 \\times 200 = 600$ €.\n⭐ Contrôle : $800 + 600 = 1\\,400$, et $\\dfrac{800}{4} = \\dfrac{600}{3} = 200$.\n⛔ Le piège : diviser par $2$ parce qu'il y a deux sections. $700$ € chacune, c'est le ratio $1 : 1$, pas $4 : 3$.\nRéponse : $800$ € pour le football, $600$ € pour le judo.",
@@ -466,6 +494,11 @@ export const exercicesRatio4e: FicheExercicesData = {
         },
         {
           enonce: "Un orchestre compte $72$ musiciens. Ils se répartissent en cordes, cuivres et bois selon le ratio cordes : cuivres : bois $= 4 : 3 : 2$.\nCombien y a-t-il de musiciens dans chaque famille d'instruments ?",
+          reponses: [
+            { question: "cordes", attendu: "32" },
+            { question: "cuivres", attendu: "24" },
+            { question: "bois", attendu: "16" },
+          ],
           correction:
             "Je compte les parts : $4 + 3 + 2 = 9$ parts.\nUne part vaut $72 \\div 9 = 8$ musiciens.\nCordes : $4 \\times 8 = 32$. Cuivres : $3 \\times 8 = 24$. Bois : $2 \\times 8 = 16$.\n⭐ Contrôle : $32 + 24 + 16 = 72$.\n⛔ Le piège : diviser par $3$ parce qu'il y a trois familles. $24$ musiciens chacune, ce n'est juste que pour les cuivres : il y aurait trop de bois et pas assez de cordes.\nRéponse : $32$ cordes, $24$ cuivres et $16$ bois.",
           schema: ecranSeulement(barre([{ nom: "cordes", parts: 4, valeur: "32" }, { nom: "cuivres", parts: 3, valeur: "24" }, { nom: "bois", parts: 2, valeur: "16" }], "72 musiciens", "8 musiciens")),
@@ -473,6 +506,11 @@ export const exercicesRatio4e: FicheExercicesData = {
         },
         {
           enonce: "Pour rempoter ses plantes, Nina mélange du terreau et du sable dans le ratio terreau : sable $= 3 : 2$, en volume.\na) Elle a $45$ L de terreau. Quel volume de sable doit-elle ajouter ?\nb) Pour $100$ L de mélange en tout, quel volume de chaque faut-il ?",
+          reponses: [
+            { question: "a)", attendu: "30" },
+            { question: "b) terr", attendu: "60" },
+            { question: "b) sable", attendu: "40" },
+          ],
           correction:
             "a) Le terreau fait $3$ parts : une part vaut $45 \\div 3 = 15$ L. Le sable fait $2$ parts : $2 \\times 15 = 30$ L.\nb) Les $100$ L sont partagés en $3 + 2 = 5$ parts. Une part vaut $100 \\div 5 = 20$ L.\nTerreau : $3 \\times 20 = 60$ L. Sable : $2 \\times 20 = 40$ L.\n⛔ Le piège du a) : diviser $45$ par $2$, la part du sable, et trouver $22{,}5$ L. Le terreau se divise par SA part, $3$, pour avoir une part.\nRéponse : a) $30$ L de sable ; b) $60$ L de terreau et $40$ L de sable.",
           schema: ecranSeulement(barre([{ nom: "terreau", parts: 3, valeur: "60 L" }, { nom: "sable", parts: 2, valeur: "40 L" }], "100 L", "20 L")),
@@ -495,6 +533,11 @@ export const exercicesRatio4e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Au triathlon, on enchaîne natation, vélo et course à pied. Le tableau donne les distances de deux formats officiels.\na) Écris le ratio natation : vélo : course du format olympique avec des nombres entiers, le plus simple possible.\nb) Le format sprint respecte-t-il le même ratio ? Justifie avec des quotients.\nc) Un triathlon longue distance fait environ $3{,}8$ km de natation, $180$ km de vélo et $42{,}2$ km de course. Respecte-t-il ce ratio ?",
+          reponses: [
+            { question: "a)", attendu: ["3 : 80 : 20"], exact: true },
+            { question: "b)", attendu: ["oui", "vrai"] },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           figure: table(["épreuve", "olympique", "sprint"], [
             ["natation (km)", "1,5", "0,75"],
             ["vélo (km)", "40", "20"],
@@ -513,6 +556,12 @@ export const exercicesRatio4e: FicheExercicesData = {
         },
         {
           enonce: "Dans une réserve naturelle, le ratio flamants : hérons est $7 : 4$. Les ornithologues comptent $27$ flamants de plus que de hérons.\na) Combien de parts cet écart représente-t-il ?\nb) Combien y a-t-il de flamants ? De hérons ? D'oiseaux de ces deux espèces en tout ?",
+          reponses: [
+            { question: "a)", attendu: "3" },
+            { question: "b) flam", attendu: "63" },
+            { question: "b) hér", attendu: "36" },
+            { question: "b) total", attendu: "99" },
+          ],
           figure: comparer([{ nom: "flamants", parts: 7, valeur: "?" }, { nom: "hérons", parts: 4, valeur: "?" }], "", "27"),
           correction:
             "a) Les flamants ont $7$ parts, les hérons $4$ : l'écart est de $7 - 4 = 3$ parts.\nb) Ces $3$ parts valent $27$ oiseaux : une part vaut $27 \\div 3 = 9$.\nFlamants : $7 \\times 9 = 63$. Hérons : $4 \\times 9 = 36$. En tout : $63 + 36 = 99$ oiseaux.\n⭐ Contrôle : $63 - 36 = 27$, et $\\dfrac{63}{7} = \\dfrac{36}{4} = 9$.\n⛔ Le piège : prendre $27$ pour le nombre de hérons, ou diviser $27$ par $7$. L'écart n'est aucune des deux quantités : c'est un nombre de PARTS, ici $3$.\nRéponse : a) $3$ parts ; b) $63$ flamants, $36$ hérons, $99$ oiseaux.",
@@ -521,6 +570,11 @@ export const exercicesRatio4e: FicheExercicesData = {
         },
         {
           enonce: "Deux maraîchers louent ensemble un tracteur pour la saison : $1\\,200$ €. Paul l'utilise $15$ jours, Anne $25$ jours. Ils partagent le prix selon le ratio de leurs jours d'utilisation.\na) Écris le ratio Paul : Anne, et simplifie-le.\nb) Combien paie chacun ?",
+          reponses: [
+            { question: "a)", attendu: ["3 : 5"], exact: true },
+            { question: "b) Paul", attendu: "450" },
+            { question: "b) Anne", attendu: "750" },
+          ],
           correction:
             "a) Paul : Anne $= 15 : 25$. Je divise les deux nombres par $5$ : $15 : 25 = 3 : 5$.\nb) $3 + 5 = 8$ parts. Une part vaut $1\\,200 \\div 8 = 150$ €.\nPaul : $3 \\times 150 = 450$ €. Anne : $5 \\times 150 = 750$ €.\n⭐ Contrôle : $450 + 750 = 1\\,200$. Autre chemin : le tracteur a servi $15 + 25 = 40$ jours, un jour coûte $1\\,200 \\div 40 = 30$ €, et $15 \\times 30 = 450$.\n⛔ Le piège : partager selon $25 : 15$, dans le mauvais ordre. Paul paierait $750$ € pour $15$ jours : la part d'Anne.\nRéponse : a) $3 : 5$ ; b) Paul paie $450$ €, Anne $750$ €.",
           schema: ecranSeulement(barre([{ nom: "Paul", parts: 3, valeur: "450 €" }, { nom: "Anne", parts: 5, valeur: "750 €" }], "1 200 €", "150 €")),
@@ -528,6 +582,10 @@ export const exercicesRatio4e: FicheExercicesData = {
         },
         {
           enonce: "Pour un bon compost, un jardinier vise le ratio matières brunes : matières vertes $= 2 : 1$ (feuilles mortes et carton d'un côté, épluchures et tonte de l'autre ; chiffres d'un modèle). Dans son bac, il y a $30$ L de matières brunes et $24$ L de matières vertes.\na) Écris le ratio brunes : vertes de son bac, simplifié.\nb) Il n'enlève rien. Combien de litres de matières brunes doit-il ajouter pour atteindre le ratio $2 : 1$ ?",
+          reponses: [
+            { question: "a)", attendu: ["5 : 4"], exact: true },
+            { question: "b)", attendu: "18" },
+          ],
           figure: comparer([{ nom: "brunes", parts: 5, valeur: "30 L" }, { nom: "vertes", parts: 4, valeur: "24 L" }], "6 L", ""),
           correction:
             "a) $30 : 24$ ; je divise par $6$ : $30 : 24 = 5 : 4$. Il y a trop peu de matières brunes : il en faudrait deux fois plus que de vertes.\nb) Les matières vertes ne bougent pas : $24$ L. Dans le ratio $2 : 1$, elles font $1$ part : la nouvelle part vaut $24$ L.\nLes brunes doivent faire $2$ parts : $2 \\times 24 = 48$ L. Il en a $30$ : il doit en ajouter $48 - 30 = 18$ L.\n⭐ Contrôle : $48 : 24 = 2 : 1$.\n⛔ Le piège : garder l'ancienne part de $6$ L. Elle valait pour le ratio $5 : 4$. La quantité qui ne bouge pas, les vertes, fixe la NOUVELLE valeur d'une part.\nRéponse : a) $5 : 4$ ; b) il doit ajouter $18$ L de matières brunes.",
@@ -536,6 +594,12 @@ export const exercicesRatio4e: FicheExercicesData = {
         },
         {
           enonce: "a) Les nombres $x$ et $y$ sont dans le ratio $3 : 8$, et $x + y = 66$. Calcule $x$ et $y$.\nb) Les nombres $a$ et $b$ sont dans le ratio $5 : 2$, et $a - b = 21$. Calcule $a$ et $b$.",
+          reponses: [
+            { question: "a) x", attendu: "18" },
+            { question: "a) y", attendu: "48" },
+            { question: "b) a", attendu: "35" },
+            { question: "b) b", attendu: "14" },
+          ],
           correction:
             "Dans les deux cas, j'écris l'égalité de quotients, puis je cherche la valeur d'une part.\na) $\\dfrac{x}{3} = \\dfrac{y}{8}$. La somme $x + y$ compte $3 + 8 = 11$ parts. Une part vaut $66 \\div 11 = 6$.\n$x = 3 \\times 6 = 18$ et $y = 8 \\times 6 = 48$. Contrôle : $18 + 48 = 66$.\nb) $\\dfrac{a}{5} = \\dfrac{b}{2}$. La différence $a - b$ compte $5 - 2 = 3$ parts. Une part vaut $21 \\div 3 = 7$.\n$a = 5 \\times 7 = 35$ et $b = 2 \\times 7 = 14$. Contrôle : $35 - 14 = 21$.\n⛔ Le piège du b) : diviser $21$ par $5 + 2 = 7$. Une différence ne compte pas toutes les parts, seulement celles qui dépassent : $5 - 2 = 3$.\nRéponse : a) $x = 18$ et $y = 48$ ; b) $a = 35$ et $b = 14$.",
           schema: ecranSeulement(
@@ -548,6 +612,13 @@ export const exercicesRatio4e: FicheExercicesData = {
         },
         {
           enonce: "Une ferme cultive $12$ ha de blé, $8$ ha de maïs et $20$ ha de prairie.\na) Écris le ratio blé : maïs : prairie, et simplifie-le.\nb) La ferme s'agrandit : elle a maintenant $50$ ha en tout, toujours dans le même ratio. Combien d'hectares de chaque culture ?\nc) De combien d'hectares la prairie a-t-elle grandi ?",
+          reponses: [
+            { question: "a)", attendu: ["3 : 2 : 5"], exact: true },
+            { question: "b) blé", attendu: "15" },
+            { question: "b) maïs", attendu: "10" },
+            { question: "b) prair", attendu: "25" },
+            { question: "c)", attendu: "5" },
+          ],
           correction:
             "a) $12 : 8 : 20$. Les trois nombres se divisent par $4$ : $3 : 2 : 5$.\nb) $3 + 2 + 5 = 10$ parts pour $50$ ha : une part vaut $50 \\div 10 = 5$ ha.\nBlé : $3 \\times 5 = 15$ ha. Maïs : $2 \\times 5 = 10$ ha. Prairie : $5 \\times 5 = 25$ ha.\n⭐ Contrôle : $15 + 10 + 25 = 50$.\nc) $25 - 20 = 5$ ha de plus.\n⛔ Le piège : donner les $10$ ha nouveaux à une seule culture, ou les partager en trois. Pour garder le ratio, chaque culture grandit selon SES parts : $3$, $2$ et $5$ ha de plus.\nRéponse : a) $3 : 2 : 5$ ; b) $15$ ha de blé, $10$ ha de maïs, $25$ ha de prairie ; c) $5$ ha.",
           schema: ecranSeulement(barre([{ nom: "blé", parts: 3, valeur: "15 ha" }, { nom: "maïs", parts: 2, valeur: "10 ha" }, { nom: "prairie", parts: 5, valeur: "25 ha" }], "50 ha", "5 ha")),
@@ -555,6 +626,11 @@ export const exercicesRatio4e: FicheExercicesData = {
         },
         {
           enonce: "Une mosaïque est faite de carreaux bleus, blancs et verts. Le ratio bleus : blancs est $2 : 3$, et le ratio blancs : verts est $4 : 5$.\na) Écris le ratio bleus : blancs : verts avec des nombres entiers.\nb) La mosaïque compte $96$ carreaux blancs. Combien de carreaux bleus et de carreaux verts ?",
+          reponses: [
+            { question: "a)", attendu: ["8 : 12 : 15"], exact: true },
+            { question: "b) bleus", attendu: "64" },
+            { question: "b) verts", attendu: "120" },
+          ],
           correction:
             "a) Les blancs sont dans les deux ratios, mais ils valent $3$ parts dans le premier et $4$ dans le second. Je les ramène au même nombre de parts : $12$, un multiple de $3$ et de $4$.\nPremier ratio, tout multiplié par $4$ : $2 : 3 = 8 : 12$. Second ratio, tout multiplié par $3$ : $4 : 5 = 12 : 15$.\nJ'assemble : bleus : blancs : verts $= 8 : 12 : 15$.\nb) Les blancs font $12$ parts : une part vaut $96 \\div 12 = 8$ carreaux.\nBleus : $8 \\times 8 = 64$. Verts : $15 \\times 8 = 120$.\n⛔ Le piège : recoller les deux ratios tels quels, $2 : 3 : 5$. Les blancs y vaudraient $3$ parts d'un côté et $4$ de l'autre : ce ne sont pas les mêmes parts.\nRéponse : a) $8 : 12 : 15$ ; b) $64$ carreaux bleus et $120$ carreaux verts.",
           schema: ecranSeulement(
@@ -568,6 +644,9 @@ export const exercicesRatio4e: FicheExercicesData = {
         },
         {
           enonce: "Pour un thé glacé, Léo mélange du thé concentré et de l'eau dans le ratio thé : eau $= 2 : 7$. Mia utilise le ratio $3 : 10$.\na) Lequel des deux thés glacés a le goût de thé le plus fort ? Justifie.\nb) Tom dit : « Celui de Léo, car l'écart est plus petit : $7 - 2 = 5$ contre $10 - 3 = 7$. » Pourquoi a-t-il tort ?",
+          reponses: [
+            { question: "a)", attendu: ["Mia", "celui de Mia"] },
+          ],
           figure: deux(
             barre([{ nom: "thé", parts: 2, valeur: "" }, { nom: "eau", parts: 7, valeur: "" }], "Léo", ""),
             barre([{ nom: "thé", parts: 3, valeur: "" }, { nom: "eau", parts: 10, valeur: "" }], "Mia", ""),
@@ -593,6 +672,15 @@ export const exercicesRatio4e: FicheExercicesData = {
           titre: "Le braquet du vélo",
           enonce:
             "Sur un vélo, la chaîne relie le plateau (à la pédale) au pignon (à la roue arrière). Quand le plateau tourne, chacune de ses dents entraîne une dent du pignon. Ici, le plateau a $50$ dents et le pignon $20$ dents.\na) Écris le ratio plateau : pignon des nombres de dents, simplifié.\nb) Quand la pédale fait $2$ tours, combien de tours fait la roue ? Et pour $1$ tour de pédale ?\nc) À chaque tour, la roue avance de $2{,}1$ m (chiffre d'un modèle). Quelle distance le vélo parcourt-il pour un tour de pédale ?\nd) Léa pédale à $80$ tours par minute. Quelle distance parcourt-elle en une minute ? En une heure, en km ?\ne) Pour monter une côte, elle veut que la roue fasse exactement $2$ tours quand la pédale en fait $1$, avec un plateau de $34$ dents. Combien de dents faut-il au pignon ?",
+          reponses: [
+            { question: "a)", attendu: ["5 : 2"], exact: true },
+            { question: "b) 2 t", attendu: "5" },
+            { question: "b) 1 t", attendu: "2,5" },
+            { question: "c)", attendu: "5,25" },
+            { question: "d) min", attendu: "420" },
+            { question: "d) km", attendu: "25,2" },
+            { question: "e)", attendu: "17" },
+          ],
           figure: engrenages(50, 20),
           correction:
             "a) $50 : 20$ ; je divise par $10$ : $50 : 20 = 5 : 2$.\nb) $2$ tours de pédale font passer $2 \\times 50 = 100$ dents. Le pignon a $20$ dents : la roue fait $100 \\div 20 = 5$ tours.\nPour $1$ tour de pédale : $5 \\div 2 = 2{,}5$ tours de roue. Le ratio pédale : roue des tours est donc $2 : 5$, à l'envers du ratio des dents. Avec les quotients : si $p$ compte les tours de pédale et $r$ ceux de la roue, $\\dfrac{p}{2} = \\dfrac{r}{5}$.\nc) $2{,}5 \\times 2{,}1 = 5{,}25$ m par tour de pédale.\nd) $80 \\times 5{,}25 = 420$ m en une minute. En une heure : $420 \\times 60 = 25\\,200$ m, soit $25{,}2$ km.\ne) La roue doit faire $2$ tours pour $1$ tour de pédale : le plateau doit avoir deux fois plus de dents que le pignon, le ratio plateau : pignon $2 : 1$. $34 \\div 2 = 17$ dents.\n⛔ Le piège du b) : croire que la roue tourne moins vite parce que le pignon est plus petit. Un tour du petit pignon demande moins de dents : il en fait PLUS.\nRéponse : a) $5 : 2$ ; b) $5$ tours, et $2{,}5$ tours pour un tour de pédale ; c) $5{,}25$ m ; d) $420$ m, et $25{,}2$ km en une heure ; e) $17$ dents.",
@@ -602,6 +690,14 @@ export const exercicesRatio4e: FicheExercicesData = {
           titre: "La prairie fleurie",
           enonce:
             "Pour semer une prairie fleurie, une commune achète un mélange de graines : graminées, trèfles et fleurs sauvages, dans le ratio graminées : trèfles : fleurs $= 6 : 3 : 1$, en masse (chiffres d'un modèle).\na) Un sac pèse $2{,}5$ kg. Quelle masse de chaque sorte de graines contient-il ?\nb) Pour les abeilles, la commune veut plus de fleurs : le ratio $6 : 3 : 2$. Quelle masse de graines de fleurs doit-elle ajouter au sac, sans rien enlever ?\nc) Combien pèse alors le sac ? Et quelle masse de graines de fleurs contiendrait un sac de $5{,}5$ kg de ce nouveau mélange ?",
+          reponses: [
+            { question: "a) gram", attendu: "1,5" },
+            { question: "a) trèf", attendu: "0,75" },
+            { question: "a) fleur", attendu: "0,25" },
+            { question: "b)", attendu: "0,25" },
+            { question: "c) sac", attendu: "2,75" },
+            { question: "c) fleur", attendu: "1" },
+          ],
           correction:
             "a) $6 + 3 + 1 = 10$ parts pour $2{,}5$ kg : une part pèse $2{,}5 \\div 10 = 0{,}25$ kg.\nGraminées : $6 \\times 0{,}25 = 1{,}5$ kg. Trèfles : $3 \\times 0{,}25 = 0{,}75$ kg. Fleurs : $1 \\times 0{,}25 = 0{,}25$ kg.\nb) Les graminées et les trèfles ne bougent pas. Dans $6 : 3 : 2$, les graminées font encore $6$ parts : une part pèse encore $1{,}5 \\div 6 = 0{,}25$ kg.\nLes fleurs doivent faire $2$ parts : $2 \\times 0{,}25 = 0{,}5$ kg. Il y en a $0{,}25$ kg : il faut ajouter $0{,}5 - 0{,}25 = 0{,}25$ kg.\nc) $2{,}5 + 0{,}25 = 2{,}75$ kg. Le nouveau ratio compte $6 + 3 + 2 = 11$ parts. Dans un sac de $5{,}5$ kg, une part pèse $5{,}5 \\div 11 = 0{,}5$ kg, et les fleurs $2 \\times 0{,}5 = 1$ kg.\n⛔ Le piège du b) : repartager les $2{,}5$ kg en $11$ parts. Il faudrait alors ENLEVER des graminées. Ici, on ajoute seulement des fleurs : ce sont les graminées, qui ne bougent pas, qui fixent la valeur d'une part.\nRéponse : a) $1{,}5$ kg de graminées, $0{,}75$ kg de trèfles, $0{,}25$ kg de fleurs ; b) $0{,}25$ kg de fleurs ; c) $2{,}75$ kg, et $1$ kg de fleurs dans le sac de $5{,}5$ kg.",
           schema: comparer([{ nom: "graminées", parts: 6, valeur: "1,5 kg" }, { nom: "trèfles", parts: 3, valeur: "0,75 kg" }, { nom: "fleurs", parts: 1, valeur: "0,25 kg" }], "0,25 kg", ""),
@@ -611,6 +707,15 @@ export const exercicesRatio4e: FicheExercicesData = {
           titre: "L'atelier de vélos",
           enonce:
             "Ana, Ben et Chloé ouvrent ensemble un atelier de réparation de vélos. Leurs apports d'argent sont dans le ratio Ana : Ben $= 3 : 4$, et Ben : Chloé $= 2 : 3$.\na) Écris le ratio Ana : Ben : Chloé avec des nombres entiers.\nb) Chloé a apporté $9\\,000$ € de plus qu'Ana. Combien chacun a-t-il apporté ?\nc) La première année, l'atelier fait $5\\,200$ € de bénéfice, partagés selon le ratio des apports. Combien reçoit chacun ?",
+          reponses: [
+            { question: "a)", attendu: ["3 : 4 : 6"], exact: true },
+            { question: "b) Ana", attendu: "9000" },
+            { question: "b) Ben", attendu: "12000" },
+            { question: "b) Chloé", attendu: "18000" },
+            { question: "c) Ana", attendu: "1200" },
+            { question: "c) Ben", attendu: "1600" },
+            { question: "c) Chloé", attendu: "2400" },
+          ],
           correction:
             "a) Ben vaut $4$ parts dans le premier ratio et $2$ dans le second. Je multiplie le second par $2$ : $2 : 3 = 4 : 6$. Ben vaut alors $4$ parts des deux côtés.\nJ'assemble : Ana : Ben : Chloé $= 3 : 4 : 6$.\nb) Chloé a $6$ parts, Ana $3$ : l'écart est de $6 - 3 = 3$ parts, qui valent $9\\,000$ €. Une part vaut $9\\,000 \\div 3 = 3\\,000$ €.\nAna : $3 \\times 3\\,000 = 9\\,000$ €. Ben : $4 \\times 3\\,000 = 12\\,000$ €. Chloé : $6 \\times 3\\,000 = 18\\,000$ €.\n⭐ Contrôle : $18\\,000 - 9\\,000 = 9\\,000$.\nc) $3 + 4 + 6 = 13$ parts. Une part vaut $5\\,200 \\div 13 = 400$ €.\nAna : $3 \\times 400 = 1\\,200$ €. Ben : $4 \\times 400 = 1\\,600$ €. Chloé : $6 \\times 400 = 2\\,400$ €. Contrôle : $1\\,200 + 1\\,600 + 2\\,400 = 5\\,200$.\n⛔ Le piège du a) : écrire $3 : 4 : 3$, en recollant les ratios sans égaliser la part de Ben. Celui du b) : diviser $9\\,000$ par $6$, la part de Chloé. $9\\,000$ € est un ÉCART : $3$ parts.\nRéponse : a) $3 : 4 : 6$ ; b) Ana $9\\,000$ €, Ben $12\\,000$ €, Chloé $18\\,000$ € ; c) Ana $1\\,200$ €, Ben $1\\,600$ €, Chloé $2\\,400$ €.",
           schema: barre([{ nom: "Ana", parts: 3, valeur: "1 200 €" }, { nom: "Ben", parts: 4, valeur: "1 600 €" }, { nom: "Chloé", parts: 6, valeur: "2 400 €" }], "5 200 €", "400 €"),
@@ -620,6 +725,13 @@ export const exercicesRatio4e: FicheExercicesData = {
           titre: "L'eau, atome par atome",
           enonce:
             "Dans l'eau, l'hydrogène et l'oxygène sont toujours dans le même ratio de masses : hydrogène : oxygène $= 1 : 8$ (en arrondissant).\na) Quelle masse d'hydrogène et quelle masse d'oxygène y a-t-il dans $900$ g d'eau ?\nb) Dans une expérience, on fait réagir $40$ g d'hydrogène avec $400$ g d'oxygène pour former de l'eau. Quelle masse d'eau obtient-on au plus ? Que reste-t-il ?\nc) Une molécule d'eau contient $2$ atomes d'hydrogène et $1$ atome d'oxygène. Combien de fois un atome d'oxygène est-il plus lourd qu'un atome d'hydrogène ?",
+          reponses: [
+            { question: "a) H", attendu: "100" },
+            { question: "a) O", attendu: "800" },
+            { question: "b) eau", attendu: "360" },
+            { question: "b) reste", attendu: "80" },
+            { question: "c)", attendu: "16" },
+          ],
           correction:
             "a) $1 + 8 = 9$ parts pour $900$ g : une part pèse $900 \\div 9 = 100$ g. Hydrogène : $1$ part, $100$ g. Oxygène : $8 \\times 100 = 800$ g.\nb) Les $40$ g d'hydrogène font $1$ part : il leur faut $8 \\times 40 = 320$ g d'oxygène. On en a $400$ g : c'est assez, et il en reste $400 - 320 = 80$ g.\nL'eau formée pèse $40 + 320 = 360$ g.\nc) Dans une molécule, les deux atomes d'hydrogène pèsent ensemble $1$ part, l'atome d'oxygène $8$ parts. Un seul atome d'hydrogène pèse donc une demi-part : l'oxygène est $8 \\times 2 = 16$ fois plus lourd.\n⛔ Le piège du b) : tout additionner, $40 + 400 = 440$ g d'eau. Le ratio $1 : 8$ décide : l'hydrogène est épuisé le premier, et l'oxygène en trop ne devient pas de l'eau.\n⛔ Le piège du c) : répondre $8$. Le ratio $1 : 8$ compare DEUX atomes d'hydrogène à un atome d'oxygène.\nRéponse : a) $100$ g d'hydrogène et $800$ g d'oxygène ; b) $360$ g d'eau, et il reste $80$ g d'oxygène ; c) $16$ fois plus lourd.",
           schema: comparer([{ nom: "hydrogène", parts: 1, valeur: "100 g" }, { nom: "oxygène", parts: 8, valeur: "800 g" }], "100 g", ""),

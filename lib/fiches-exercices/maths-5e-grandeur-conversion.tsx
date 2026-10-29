@@ -259,6 +259,12 @@ export const exercicesGrandeurConversion5e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Convertis.\na) $4{,}2$ km en m\nb) $356$ cm en m\nc) $7{,}5$ cm en mm\nd) $80$ mm en cm",
+          reponses: [
+            { question: "a)", attendu: "4200" },
+            { question: "b)", attendu: "3,56" },
+            { question: "c)", attendu: "75" },
+            { question: "d)", attendu: "8" },
+          ],
           correction:
             "Je regarde d'abord le sens : vers une unité plus petite, le nombre devient plus grand ; vers une plus grande, il devient plus petit.\na) $1$ km $= 1\\,000$ m. Du km au m, l'unité est plus petite : je multiplie par $1\\,000$. $4{,}2 \\times 1\\,000 = 4\\,200$ m.\nb) $1$ m $= 100$ cm. Du cm au m, l'unité est plus grande : je divise par $100$. $356 \\div 100 = 3{,}56$ m.\nc) $1$ cm $= 10$ mm : $7{,}5 \\times 10 = 75$ mm.\nd) $80 \\div 10 = 8$ cm.\n⛔ Le piège du a) : « ajouter trois zéros » et écrire $4{,}2000$. Ce nombre vaut toujours $4{,}2$. Multiplier par $1\\,000$, c'est déplacer la virgule de trois rangs : c'est ce que montre le tableau.\nRéponse : a) $4\\,200$ m ; b) $3{,}56$ m ; c) $75$ mm ; d) $8$ cm.",
           schema: (
@@ -275,6 +281,12 @@ export const exercicesGrandeurConversion5e: FicheExercicesData = {
         },
         {
           enonce: "Convertis.\na) $3{,}05$ kg en g\nb) $650$ g en kg\nc) $2$ t en kg (une tonne vaut $1\\,000$ kg)\nd) $0{,}8$ t en kg",
+          reponses: [
+            { question: "a)", attendu: "3050" },
+            { question: "b)", attendu: "0,65" },
+            { question: "c)", attendu: "2000" },
+            { question: "d)", attendu: "800" },
+          ],
           correction:
             "a) $1$ kg $= 1\\,000$ g : je multiplie par $1\\,000$. $3{,}05 \\times 1\\,000 = 3\\,050$ g.\nb) Du g au kg, l'unité est plus grande : je divise par $1\\,000$. $650 \\div 1\\,000 = 0{,}65$ kg.\nc) $2 \\times 1\\,000 = 2\\,000$ kg.\nd) $0{,}8 \\times 1\\,000 = 800$ kg.\n⛔ Le piège du a) : enlever la virgule et écrire $305$ g. Dans le tableau, le $3$ est dans la colonne des kg : il faut aller jusqu'à la colonne des g, trois rangs plus loin, donc un zéro de plus.\nRéponse : a) $3\\,050$ g ; b) $0{,}65$ kg ; c) $2\\,000$ kg ; d) $800$ kg.",
           schema: conversion(["kg", "hg", "dag", "g"], [
@@ -285,6 +297,12 @@ export const exercicesGrandeurConversion5e: FicheExercicesData = {
         },
         {
           enonce: "Convertis.\na) $1{,}5$ L en cL\nb) $250$ mL en L\nc) $33$ cL en mL\nd) $4$ dL en L",
+          reponses: [
+            { question: "a)", attendu: "150" },
+            { question: "b)", attendu: "0,25" },
+            { question: "c)", attendu: "330" },
+            { question: "d)", attendu: "0,4" },
+          ],
           correction:
             "a) $1$ L $= 100$ cL : $1{,}5 \\times 100 = 150$ cL.\nb) $1$ L $= 1\\,000$ mL. Du mL au L, je divise par $1\\,000$ : $250 \\div 1\\,000 = 0{,}25$ L.\nc) $1$ cL $= 10$ mL : $33 \\times 10 = 330$ mL.\nd) $1$ L $= 10$ dL : $4 \\div 10 = 0{,}4$ L.\n⛔ Le piège du b) : diviser par $100$ et écrire $2{,}5$ L. $2{,}5$ L, c'est plus que deux bouteilles d'un litre, alors que $250$ mL tiennent dans un verre. Entre le mL et le L, il y a trois rangs : dL, cL, mL.\nRéponse : a) $150$ cL ; b) $0{,}25$ L ; c) $330$ mL ; d) $0{,}4$ L.",
           schema: ecranSeulement(
@@ -299,6 +317,12 @@ export const exercicesGrandeurConversion5e: FicheExercicesData = {
         },
         {
           enonce: "Convertis en minutes.\na) $3$ h\nb) $1$ h $35$ min\nc) $2$ h $05$ min\nd) une demi-heure",
+          reponses: [
+            { question: "a)", attendu: "180" },
+            { question: "b)", attendu: "95" },
+            { question: "c)", attendu: "125" },
+            { question: "d)", attendu: "30" },
+          ],
           correction:
             "Une heure vaut $60$ minutes : je multiplie les heures par $60$, puis j'ajoute les minutes.\na) $3 \\times 60 = 180$ min.\nb) $60 + 35 = 95$ min.\nc) $2 \\times 60 = 120$, puis $120 + 5 = 125$ min.\nd) La moitié de $60$ : $30$ min.\n⛔ Le piège du b) : lire « $1$ h $35$ » comme $135$ min. Une heure ne vaut pas $100$ minutes : elle en vaut $60$.\nRéponse : a) $180$ min ; b) $95$ min ; c) $125$ min ; d) $30$ min.",
           schema: ecranSeulement(bande("95 min", [{ valeur: 60, label: "1 h = 60 min" }, { valeur: 35, label: "35 min" }])),
@@ -306,6 +330,11 @@ export const exercicesGrandeurConversion5e: FicheExercicesData = {
         },
         {
           enonce: "Écris chaque durée en heures et minutes.\na) Un film de $110$ min.\nb) Un trajet de $200$ min.\nc) Une randonnée de $285$ min.",
+          reponses: [
+            { question: "a)", attendu: ["1h50", "1h50min"] },
+            { question: "b)", attendu: ["3h20", "3h20min"] },
+            { question: "c)", attendu: ["4h45", "4h45min"] },
+          ],
           correction:
             "Je cherche combien de fois $60$ minutes tiennent dans la durée : ce sont les heures. Ce qui reste, ce sont les minutes.\na) $110 = 60 + 50$ : $1$ h $50$ min.\nb) $3 \\times 60 = 180$, et $200 - 180 = 20$ : $3$ h $20$ min.\nc) $4 \\times 60 = 240$, et $285 - 240 = 45$ : $4$ h $45$ min.\n⛔ Le piège du c) : écrire $2$ h $85$ min, ou $2{,}85$ h. Les minutes s'arrêtent à $59$ : dès qu'il y en a $60$, cela fait une heure de plus.\nRéponse : a) $1$ h $50$ min ; b) $3$ h $20$ min ; c) $4$ h $45$ min.",
           schema: bande("285 min = 4 h 45 min", [
@@ -319,6 +348,14 @@ export const exercicesGrandeurConversion5e: FicheExercicesData = {
         },
         {
           enonce: "Sur cette règle graduée en centimètres, on a posé une clé et une gomme, au ras du zéro.\na) Lis la longueur de chacune, en centimètres.\nb) Écris ces deux longueurs en millimètres.\nc) Quelle est la différence de longueur entre la clé et la gomme, en mm puis en cm ?",
+          reponses: [
+            { question: "a) clé", attendu: "6,3" },
+            { question: "a) gomme", attendu: "3,8" },
+            { question: "b) clé", attendu: "63" },
+            { question: "b) gomme", attendu: "38" },
+            { question: "c) mm", attendu: "25" },
+            { question: "c) cm", attendu: "2,5" },
+          ],
           figure: regle(7, [
             { de: 0, a: 6.3, label: "clé" },
             { de: 0, a: 3.8, label: "gomme" },
@@ -329,6 +366,13 @@ export const exercicesGrandeurConversion5e: FicheExercicesData = {
         },
         {
           enonce: "Choisis l'unité qui convient, parmi : mg, g, kg, mL, L, cm, m, km.\na) Un crayon neuf mesure environ $17$ …\nb) Une baignoire pleine contient environ $200$ …\nc) Une fourmi pèse environ $3$ …\nd) Un marathon mesure environ $42$ …\ne) Une cuillère à café contient environ $5$ …",
+          reponses: [
+            { question: "a)", attendu: ["cm"] },
+            { question: "b)", attendu: ["L"] },
+            { question: "c)", attendu: ["mg"] },
+            { question: "d)", attendu: ["km"] },
+            { question: "e)", attendu: ["mL"] },
+          ],
           correction:
             "J'essaie chaque unité dans ma tête et je garde celle qui donne un objet que je reconnais.\na) $17$ m, c'est la hauteur d'un immeuble ; $17$ cm, c'est bien un crayon. Réponse : cm.\nb) $200$ mL, c'est un verre ; $200$ L, c'est une baignoire. Réponse : L.\nc) $3$ g, c'est un morceau de sucre, bien trop lourd pour une fourmi. Réponse : mg.\nd) $42$ m, c'est la longueur d'une piscine et demie ; $42$ km, c'est une course de plusieurs heures. Réponse : km.\ne) $5$ L, c'est un bidon ; $5$ mL tiennent dans une cuillère. Réponse : mL.\n⛔ Le piège : répondre au hasard parce que « le nombre est juste ». Un nombre sans la bonne unité ne veut rien dire.\nRéponse : a) cm ; b) L ; c) mg ; d) km ; e) mL.",
           schema: ecranSeulement(
@@ -343,6 +387,14 @@ export const exercicesGrandeurConversion5e: FicheExercicesData = {
         },
         {
           enonce: "Sans poser de calcul, dis si chaque égalité est vraie ou fausse. Corrige celles qui sont fausses.\na) $5$ km $= 500$ m\nb) $0{,}3$ kg $= 300$ g\nc) $45$ cL $= 4{,}5$ L\nd) $2$ h $= 120$ min",
+          reponses: [
+            { question: "a)", attendu: ["faux", "non"] },
+            { question: "a) corr.", attendu: "5000" },
+            { question: "b)", attendu: ["vrai", "oui"] },
+            { question: "c)", attendu: ["faux", "non"] },
+            { question: "c) corr.", attendu: "0,45" },
+            { question: "d)", attendu: ["vrai", "oui"] },
+          ],
           correction:
             "Je compare avec une unité que je connais bien.\na) $1$ km, c'est déjà $1\\,000$ m. Donc $5$ km, c'est bien plus que $500$ m : FAUX. La bonne égalité : $5$ km $= 5\\,000$ m.\nb) $0{,}3$ kg, c'est moins que $1$ kg $= 1\\,000$ g, et $300$ g aussi : VRAI, puisque $0{,}3 \\times 1\\,000 = 300$.\nc) $4{,}5$ L, c'est plus que $1$ L $= 100$ cL. Or $45$ cL, c'est moins qu'un litre : FAUX. La bonne égalité : $45$ cL $= 0{,}45$ L.\nd) $2 \\times 60 = 120$ : VRAI.\n⛔ Le piège : regarder seulement si le nombre grandit ou diminue. Au a), $500$ est bien plus grand que $5$, et pourtant c'est faux : il faut aussi le bon nombre de rangs.\nRéponse : a) faux, $5\\,000$ m ; b) vrai ; c) faux, $0{,}45$ L ; d) vrai.",
           schema: conversion(["km", "hm", "dam", "m"], [{ cases: ["5", "0", "0", "0"], de: "km", vers: "m" }]),
@@ -364,6 +416,10 @@ export const exercicesGrandeurConversion5e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Voici quatre masses : $1{,}2$ kg ; $950$ g ; $1\\,050$ g ; $0{,}99$ kg.\na) Range-les dans l'ordre croissant.\nb) Quel écart y a-t-il entre la plus lourde et la plus légère, en grammes ?",
+          reponses: [
+            { question: "a)", attendu: ["950 g < 0,99 kg < 1050 g < 1,2 kg", "950 ; 0,99 ; 1050 ; 1,2"], exact: true },
+            { question: "b)", attendu: "250" },
+          ],
           correction:
             "a) Je mets tout en grammes : $1$ kg $= 1\\,000$ g.\n$1{,}2$ kg $= 1\\,200$ g et $0{,}99$ kg $= 990$ g. Les deux autres sont déjà en grammes.\n$950 < 990 < 1\\,050 < 1\\,200$.\nb) $1\\,200 - 950 = 250$ g.\n⛔ Le piège : comparer les nombres sans leurs unités, et croire que $0{,}99$ est la plus petite masse parce que $0{,}99 < 950$. Des kilogrammes et des grammes ne se comparent qu'une fois convertis.\nRéponse : a) $950$ g $< 0{,}99$ kg $< 1\\,050$ g $< 1{,}2$ kg ; b) $250$ g.",
           schema: tableau(["Masse", "1,2 kg", "950 g", "1 050 g", "0,99 kg"], ["en g", "1 200", "950", "1 050", "990"], true),
@@ -371,6 +427,11 @@ export const exercicesGrandeurConversion5e: FicheExercicesData = {
         },
         {
           enonce: "Amir prépare son sac de randonnée. Il y met une gourde pleine de $1{,}2$ kg, un pique-nique de $850$ g, une polaire de $400$ g et une trousse de secours de $0{,}25$ kg. Le sac vide pèse $1{,}1$ kg.\na) Quelle est la masse du sac rempli, en grammes, puis en kilogrammes ?\nb) Pour un enfant, on conseille un sac de $4$ kg au plus (un modèle). Le sac d'Amir respecte-t-il ce conseil ?",
+          reponses: [
+            { question: "a) g", attendu: "3800" },
+            { question: "a) kg", attendu: "3,8" },
+            { question: "b)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) Je mets tout en grammes : $1{,}2$ kg $= 1\\,200$ g ; $0{,}25$ kg $= 250$ g ; $1{,}1$ kg $= 1\\,100$ g.\n$1\\,200 + 850 + 400 + 250 + 1\\,100 = 3\\,800$ g.\nEn kilogrammes : $3\\,800 \\div 1\\,000 = 3{,}8$ kg.\nb) $3{,}8 < 4$ : le sac respecte le conseil, avec $200$ g de marge.\n⛔ Le piège : additionner les nombres tels quels, $1{,}2 + 850 + 400 + 0{,}25 + 1{,}1$. On mélangerait des kilogrammes et des grammes : le total ne voudrait rien dire.\nRéponse : a) $3\\,800$ g, soit $3{,}8$ kg ; b) oui.",
           schema: ecranSeulement(
@@ -387,6 +448,11 @@ export const exercicesGrandeurConversion5e: FicheExercicesData = {
         },
         {
           enonce: "Dans une planche de $2{,}4$ m, un menuisier coupe $3$ morceaux de $65$ cm.\na) Quelle longueur de planche reste-t-il, en cm puis en m ?\nb) Peut-il couper un quatrième morceau de $65$ cm ?",
+          reponses: [
+            { question: "a) cm", attendu: "45" },
+            { question: "a) m", attendu: "0,45" },
+            { question: "b)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) Je mets tout en centimètres : $2{,}4$ m $= 240$ cm.\nLes trois morceaux : $3 \\times 65 = 195$ cm.\nIl reste $240 - 195 = 45$ cm, soit $0{,}45$ m.\nb) $45 < 65$ : il ne reste pas assez de bois pour un quatrième morceau.\n⛔ Le piège : calculer $2{,}4 - 195$. On ne soustrait pas des centimètres à des mètres : je convertis d'abord.\nRéponse : a) $45$ cm, soit $0{,}45$ m ; b) non.",
           schema: bande("2,4 m = 240 cm", [
@@ -399,6 +465,10 @@ export const exercicesGrandeurConversion5e: FicheExercicesData = {
         },
         {
           enonce: "Un train part de Lyon à $9$ h $47$ et arrive à Marseille à $12$ h $15$ (horaires modèles).\na) Combien de temps dure le trajet, en heures et minutes ?\nb) Écris cette durée en minutes.",
+          reponses: [
+            { question: "a)", attendu: ["2h28", "2h28min"] },
+            { question: "b)", attendu: "148" },
+          ],
           correction:
             "a) J'avance par étapes, comme sur une frise.\nDe $9$ h $47$ à $10$ h : $13$ min.\nDe $10$ h à $12$ h : $2$ h.\nDe $12$ h à $12$ h $15$ : $15$ min.\nEn tout : $2$ h et $13 + 15 = 28$ min, soit $2$ h $28$ min.\nb) $2 \\times 60 = 120$, puis $120 + 28 = 148$ min.\n⛔ Le piège : poser $12{,}15 - 9{,}47 = 2{,}68$ et répondre « $2$ h $68$ min ». Un horaire n'est pas un nombre décimal : une heure a $60$ minutes, pas $100$.\nRéponse : a) $2$ h $28$ min ; b) $148$ min.",
           schema: bande("2 h 28 min", [
@@ -410,6 +480,10 @@ export const exercicesGrandeurConversion5e: FicheExercicesData = {
         },
         {
           enonce: "Dans un relais $4 \\times 100$ m nage libre, les quatre nageurs d'un club réalisent : $1$ min $52$ s ; $2$ min $05$ s ; $1$ min $58$ s ; $2$ min $10$ s.\na) Quel est le temps total du relais, en minutes et secondes ?\nb) Écris ce temps en secondes.",
+          reponses: [
+            { question: "a)", attendu: ["8min5s", "8min05s", "8min5", "8min05"] },
+            { question: "b)", attendu: "485" },
+          ],
           correction:
             "a) J'additionne les minutes, puis les secondes.\nMinutes : $1 + 2 + 1 + 2 = 6$ min. Secondes : $52 + 5 + 58 + 10 = 125$ s.\n$125$ s, c'est plus d'une minute : $125 = 2 \\times 60 + 5$, soit $2$ min $5$ s.\nEn tout : $6$ min $+ 2$ min $5$ s $= 8$ min $5$ s.\nb) $8 \\times 60 = 480$, puis $480 + 5 = 485$ s.\n⭐ Contrôle nageur par nageur : $112 + 125 + 118 + 130 = 485$ s.\n⛔ Le piège : laisser « $6$ min $125$ s ». Comme les minutes dans une heure, les secondes s'arrêtent à $59$.\nRéponse : a) $8$ min $5$ s ; b) $485$ s.",
           schema: ecranSeulement(
@@ -425,6 +499,12 @@ export const exercicesGrandeurConversion5e: FicheExercicesData = {
         },
         {
           enonce: "Léo a écrit quatre égalités, toutes fausses. Pour chacune, explique pourquoi elle ne peut pas être juste, puis corrige-la.\na) $2{,}5$ m $= 25$ cm\nb) $1$ h $30$ min $= 130$ min\nc) $600$ g $= 6$ kg\nd) $12$ mL $= 1{,}2$ L",
+          reponses: [
+            { question: "a)", attendu: "250" },
+            { question: "b)", attendu: "90" },
+            { question: "c)", attendu: "0,6" },
+            { question: "d)", attendu: "0,012" },
+          ],
           correction:
             "a) $2{,}5$ m, c'est plus que $1$ m $= 100$ cm ; $25$ cm, c'est moins. Impossible. $2{,}5 \\times 100 = 250$ : $2{,}5$ m $= 250$ cm.\nb) Une heure ne vaut pas $100$ minutes. $60 + 30 = 90$ : $1$ h $30$ min $= 90$ min.\nc) $600$ g, c'est moins que $1$ kg ; $6$ kg, c'est plus. Impossible. $600 \\div 1\\,000 = 0{,}6$ : $600$ g $= 0{,}6$ kg.\nd) $12$ mL tiennent dans une cuillère, $1{,}2$ L remplissent une bouteille. $12 \\div 1\\,000 = 0{,}012$ : $12$ mL $= 0{,}012$ L.\n⭐ Le réflexe : avant de calculer, je me demande si le résultat doit être plus grand ou plus petit que $1$ de la nouvelle unité.\n⛔ Le piège de Léo, à chaque fois : un seul rang de virgule, ou $100$ minutes dans une heure.\nRéponse : a) $250$ cm ; b) $90$ min ; c) $0{,}6$ kg ; d) $0{,}012$ L.",
           schema: ecranSeulement(
@@ -439,6 +519,11 @@ export const exercicesGrandeurConversion5e: FicheExercicesData = {
         },
         {
           enonce: "Chloé remplit un aquarium de $54$ L.\na) Avec une carafe de $1{,}5$ L, combien de carafes doit-elle verser ?\nb) Avec un verre de $25$ cL, combien de verres faudrait-il ?\nc) Avec une bouteille de $750$ mL, combien de bouteilles ?",
+          reponses: [
+            { question: "a)", attendu: "36" },
+            { question: "b)", attendu: "216" },
+            { question: "c)", attendu: "72" },
+          ],
           correction:
             "a) La carafe et l'aquarium sont en litres : $54 \\div 1{,}5 = 36$ carafes.\nb) Le verre est en cL : je mets l'aquarium en cL. $54$ L $= 5\\,400$ cL, et $5\\,400 \\div 25 = 216$ verres.\nc) La bouteille est en mL : $54$ L $= 54\\,000$ mL, et $54\\,000 \\div 750 = 72$ bouteilles.\n⭐ Contrôle : une bouteille de $750$ mL, c'est la moitié d'une carafe de $1{,}5$ L. Il en faut deux fois plus : $2 \\times 36 = 72$.\n⛔ Le piège du b) : calculer $54 \\div 25$ et trouver à peine plus de $2$ verres pour tout un aquarium. Je divise des cL par des cL.\nRéponse : a) $36$ carafes ; b) $216$ verres ; c) $72$ bouteilles.",
           schema: conversion(["hL", "daL", "L", "dL", "cL", "mL"], [
@@ -449,6 +534,11 @@ export const exercicesGrandeurConversion5e: FicheExercicesData = {
         },
         {
           enonce: "Un compte-gouttes délivre des gouttes de $0{,}05$ mL (un modèle).\na) Combien de gouttes faut-il pour $1$ mL ?\nb) Pour $1$ cL ?\nc) Pour $1$ L ?\nd) Hugo affirme : « $1$ L d'eau, c'est à peu près $20$ gouttes ». Qu'en penses-tu ?",
+          reponses: [
+            { question: "a)", attendu: "20" },
+            { question: "b)", attendu: "200" },
+            { question: "c)", attendu: "20000" },
+          ],
           correction:
             "a) $1 \\div 0{,}05 = 20$ : il faut $20$ gouttes pour $1$ mL.\nb) $1$ cL $= 10$ mL : $10 \\times 20 = 200$ gouttes.\nc) $1$ L $= 1\\,000$ mL : $1\\,000 \\times 20 = 20\\,000$ gouttes.\nd) Hugo se trompe : $20$ gouttes font seulement $1$ mL, une toute petite cuillère. Il a oublié de convertir le litre en millilitres.\n⛔ Le piège : faire le calcul du a) et l'appliquer au litre sans conversion. Une bouteille d'un litre ne se vide pas en $20$ gouttes.\nRéponse : a) $20$ ; b) $200$ ; c) $20\\,000$ gouttes ; d) Hugo a tort, $20$ gouttes font $1$ mL.",
           schema: ecranSeulement(conversion(["L", "dL", "cL", "mL"], [{ cases: ["1", "0", "0", "0"], de: "L", vers: "mL" }])),
@@ -471,6 +561,13 @@ export const exercicesGrandeurConversion5e: FicheExercicesData = {
         {
           titre: "Le trail",
           enonce: "Un trail compte trois étapes : $12{,}5$ km, puis $8\\,400$ m, puis $9{,}1$ km. Nora part à $7$ h $45$ et arrive à $11$ h $20$.\na) Quelle est la longueur totale du trail, en km ?\nb) Combien de temps a duré sa course, en heures et minutes, puis en minutes ?\nc) À chacun des $2$ ravitaillements, elle boit $3$ gobelets de $20$ cL. Quelle quantité d'eau a-t-elle bue, en L ?\nd) Le soir, sa montre affiche « $30\\,000$ » pour la distance. Dans quelle unité ? Est-ce cohérent ?",
+          reponses: [
+            { question: "a)", attendu: "30" },
+            { question: "b) h min", attendu: ["3h35", "3h35min"] },
+            { question: "b) min", attendu: "215" },
+            { question: "c)", attendu: "1,2" },
+            { question: "d) unité", attendu: ["mètres", "mètre", "en mètres", "m"] },
+          ],
           correction:
             "a) Je mets tout en km : $8\\,400$ m $= 8{,}4$ km. Puis $12{,}5 + 8{,}4 + 9{,}1 = 30$ km.\nb) De $7$ h $45$ à $8$ h : $15$ min. De $8$ h à $11$ h : $3$ h. De $11$ h à $11$ h $20$ : $20$ min.\nEn tout : $3$ h et $15 + 20 = 35$ min, soit $3$ h $35$ min. En minutes : $3 \\times 60 + 35 = 215$ min.\nc) $2 \\times 3 = 6$ gobelets, et $6 \\times 20 = 120$ cL. Or $1$ L $= 100$ cL : $120$ cL $= 1{,}2$ L.\nd) $30$ km $= 30\\,000$ m : la montre compte en mètres, et c'est cohérent avec le a).\n⛔ Le piège du b) : poser $11{,}20 - 7{,}45 = 3{,}75$ et répondre « $3$ h $75$ min ». Un horaire se calcule par étapes, en passant par l'heure pile.\nRéponse : a) $30$ km ; b) $3$ h $35$ min, soit $215$ min ; c) $1{,}2$ L ; d) des mètres, c'est cohérent.",
           schema: bande("3 h 35 min", [
@@ -483,6 +580,12 @@ export const exercicesGrandeurConversion5e: FicheExercicesData = {
         {
           titre: "La citronnade de la fête",
           enonce: "Pour la fête de l'école, on prépare une citronnade pour $20$ personnes : $3$ L d'eau, $45$ cL de jus de citron et $600$ g de sucre.\na) Quel volume de liquide obtient-on, en cL, puis en L ?\nb) On la sert dans des verres de $15$ cL. Combien de verres peut-on remplir ?\nc) Pour $50$ personnes, il faut $2{,}5$ fois plus de sucre. Le sucre se vend en paquets de $1$ kg. Combien de paquets faut-il acheter ?\nd) Lou affirme : « $3{,}45$ L, c'est $34{,}5$ cL ». Explique son erreur.",
+          reponses: [
+            { question: "a) cL", attendu: "345" },
+            { question: "a) L", attendu: "3,45" },
+            { question: "b)", attendu: "23" },
+            { question: "c)", attendu: "2" },
+          ],
           correction:
             "a) Je mets tout en cL : $3$ L $= 300$ cL. Puis $300 + 45 = 345$ cL, soit $3{,}45$ L.\nb) $345 \\div 15 = 23$ : on remplit $23$ verres.\nc) $600 \\times 2{,}5 = 1\\,500$ g, soit $1{,}5$ kg. On ne vend pas de demi-paquet : il faut acheter $2$ paquets.\nd) $3{,}45$ L, c'est plus que $1$ L $= 100$ cL. Or $34{,}5$ cL, c'est moins qu'un litre : impossible. Lou a multiplié par $10$ au lieu de $100$ : $3{,}45 \\times 100 = 345$ cL.\n⛔ Le piège du c) : répondre « $1{,}5$ paquet ». Un nombre de paquets se compte en entiers, et il faut avoir ASSEZ de sucre : j'arrondis au-dessus.\nRéponse : a) $345$ cL, soit $3{,}45$ L ; b) $23$ verres ; c) $2$ paquets ; d) $3{,}45$ L $= 345$ cL.",
           schema: table(["Ingrédient", "en cL"], [
@@ -495,6 +598,14 @@ export const exercicesGrandeurConversion5e: FicheExercicesData = {
         {
           titre: "La sortie au musée",
           enonce: "Une classe part en sortie à $8$ h $15$. Le trajet en car dure $1$ h $40$ min, la visite du musée $2$ h $30$ min, le pique-nique $50$ min et le retour $1$ h $40$ min.\na) À quelle heure commence la visite ? À quelle heure finit-elle ?\nb) À quelle heure la classe rentre-t-elle ?\nc) Combien de temps dure la sortie, en heures et minutes, puis en minutes ?\nd) Les parents attendent à $15$ h $30$. La classe est-elle à l'heure ?",
+          reponses: [
+            { question: "a) début", attendu: ["9h55"] },
+            { question: "a) fin", attendu: ["12h25"] },
+            { question: "b)", attendu: ["14h55"] },
+            { question: "c) h min", attendu: ["6h40", "6h40min"] },
+            { question: "c) min", attendu: "400" },
+            { question: "d)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) $8$ h $15 + 1$ h $40$ : j'ajoute les heures, puis les minutes. $9$ h et $15 + 40 = 55$ min : la visite commence à $9$ h $55$.\n$9$ h $55 + 2$ h $30$ : $11$ h et $55 + 30 = 85$ min. Or $85$ min $= 1$ h $25$ min : la visite finit à $12$ h $25$.\nb) Pique-nique : $12$ h $25 + 50$ min $= 12$ h $75$ min $= 13$ h $15$. Retour : $13$ h $15 + 1$ h $40 = 14$ h $55$.\nc) $100 + 150 + 50 + 100 = 400$ min, et $400 = 6 \\times 60 + 40$ : $6$ h $40$ min.\n⭐ Contrôle : de $8$ h $15$ à $14$ h $55$, il y a bien $6$ h $40$ min.\nd) $14$ h $55$, c'est avant $15$ h $30$ : la classe arrive $35$ min en avance.\n⛔ Le piège : écrire « $11$ h $85$ ». Dès qu'on dépasse $59$ minutes, on ajoute une heure.\nRéponse : a) de $9$ h $55$ à $12$ h $25$ ; b) $14$ h $55$ ; c) $6$ h $40$ min, soit $400$ min ; d) oui, $35$ min en avance.",
           schema: bande("6 h 40 min", [
@@ -508,6 +619,13 @@ export const exercicesGrandeurConversion5e: FicheExercicesData = {
         {
           titre: "Les bouteilles en plastique",
           enonce: "Léa boit $1{,}5$ L d'eau par jour.\na) Si elle boit des bouteilles de $50$ cL, combien en vide-t-elle par jour ? Et en un an de $365$ jours ?\nb) Une bouteille vide pèse $12$ g (un modèle). Quelle masse de plastique cela fait-il en un an, en kg ?\nc) Elle achète une gourde de $750$ mL. Combien de fois la remplit-elle chaque jour ?\nd) Son frère dit : « Ce plastique pèse $13$ g par an ». Est-ce possible ?",
+          reponses: [
+            { question: "a) jour", attendu: "3" },
+            { question: "a) an", attendu: "1095" },
+            { question: "b)", attendu: "13,14" },
+            { question: "c)", attendu: "2" },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) Je mets tout en cL : $1{,}5$ L $= 150$ cL. Puis $150 \\div 50 = 3$ bouteilles par jour.\nEn un an : $3 \\times 365 = 1\\,095$ bouteilles.\nb) $1\\,095 \\times 12 = 13\\,140$ g. En kg : $13\\,140 \\div 1\\,000 = 13{,}14$ kg.\nc) $1{,}5$ L $= 1\\,500$ mL, et $1\\,500 \\div 750 = 2$ : elle remplit sa gourde $2$ fois par jour.\nd) Non : une seule bouteille pèse déjà $12$ g. Son frère a confondu les grammes et les kilogrammes : c'est environ $13$ kg.\n⭐ Plus de $13$ kg de plastique par an pour une seule personne : la gourde les évite presque tous.\n⛔ Le piège du c) : diviser $1{,}5$ par $750$. Les litres et les millilitres ne se divisent qu'une fois dans la même unité.\nRéponse : a) $3$ par jour, $1\\,095$ par an ; b) $13{,}14$ kg ; c) $2$ fois ; d) non, c'est environ $13$ kg.",
           schema: table(["Contenance", "en mL"], [

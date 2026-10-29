@@ -294,6 +294,7 @@ export default function FicheExercicesClient({ fiche }: { fiche: FicheExercicesD
                             reponses={ex.reponses}
                             idBase={`reponse-${numero}`}
                             clavierMaths={fiche.matiere === "maths"}
+                            classe={fiche.classe}
                           />
                         ) : null}
                       </li>

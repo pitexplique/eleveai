@@ -305,6 +305,12 @@ export const exercicesStatDonnee4e: FicheExercicesData = {
         {
           enonce:
             "Une journaliste sportive prépare un article sur trois légendes du tennis. Le tableau donne leurs titres du Grand Chelem, tournoi par tournoi, à la fin de 2025.\na) Combien de fois Nadal a-t-il gagné Roland-Garros ?\nb) Combien de fois Federer a-t-il gagné Wimbledon ?\nc) Quel tournoi Djokovic a-t-il gagné le plus souvent ?\nd) Lequel des trois a gagné le plus d'US Open ?",
+          reponses: [
+            { question: "a)", attendu: "14" },
+            { question: "b)", attendu: "8" },
+            { question: "c)", attendu: ["Open d'Australie", "l'Open d'Australie", "Australie"] },
+            { question: "d)", attendu: ["Federer"] },
+          ],
           figure: grille(["tournoi", "Djokovic", "Nadal", "Federer"], [
             ["Open d'Australie", 10, 2, 6],
             ["Roland-Garros", 3, 14, 1],
@@ -318,6 +324,12 @@ export const exercicesStatDonnee4e: FicheExercicesData = {
         {
           enonce:
             "La gérante d'une boutique de vêtements compte les T-shirts vendus en un mois, taille par taille.\na) Combien de T-shirts de taille M a-t-elle vendus ?\nb) Combien de taille S ?\nc) Combien de taille XL ?\nd) Combien de T-shirts L de plus que de XS ?",
+          reponses: [
+            { question: "a)", attendu: "50" },
+            { question: "b)", attendu: "35" },
+            { question: "c)", attendu: "15" },
+            { question: "d)", attendu: "25" },
+          ],
           figure: barres([
             { label: "XS", value: 20 },
             { label: "S", value: 35 },
@@ -332,6 +344,12 @@ export const exercicesStatDonnee4e: FicheExercicesData = {
         {
           enonce:
             "Une guide de haute montagne a fait 30 sorties cet été. À chaque sortie, elle note le nombre de clients encordés avec elle. Le diagramme en bâtons donne le nombre de sorties pour chaque nombre de clients.\na) Combien de sorties avec exactement 2 clients ?\nb) Combien de sorties avec 3 clients ?\nc) Combien de sorties avec 4 clients ?\nd) Quel nombre de clients revient le plus souvent ?",
+          reponses: [
+            { question: "a)", attendu: "11" },
+            { question: "b)", attendu: "9" },
+            { question: "c)", attendu: "4" },
+            { question: "d)", attendu: "2" },
+          ],
           figure: barres([
             { label: "1", value: 6 },
             { label: "2", value: 11 },
@@ -345,6 +363,12 @@ export const exercicesStatDonnee4e: FicheExercicesData = {
         {
           enonce:
             "Un cryptographe casse des codes secrets en comptant les lettres. Il s'entraîne sur un proverbe : « Petit à petit, l'oiseau fait son nid. » Le « à » compte comme un a.\na) Combien de lettres la phrase compte-t-elle en tout ?\nb) Quel est l'effectif de la lettre t ?\nc) Quelle lettre a le plus grand effectif ?\nd) Quel est l'effectif de la lettre e ?",
+          reponses: [
+            { question: "a)", attendu: "28" },
+            { question: "b)", attendu: "5" },
+            { question: "c)", attendu: ["t ; i", "t et i"] },
+            { question: "d)", attendu: "3" },
+          ],
           correction:
             "a) Je compte mot par mot : petit (5), à (1), petit (5), l (1), oiseau (6), fait (4), son (3), nid (3).\n$5 + 1 + 5 + 1 + 6 + 4 + 3 + 3 = 28$ lettres : c'est l'effectif total.\nb) Deux t dans chaque « petit », un dans « fait » : $2 + 2 + 1 = 5$.\nc) Je compte aussi les i : un dans chaque « petit », un dans « oiseau », « fait » et « nid » : $1 + 1 + 1 + 1 + 1 = 5$.\nLe t et le i sont à égalité, avec 5 chacun. Aucune autre lettre n'en a autant.\nd) Un e dans chaque « petit », un dans « oiseau » : 3.\n⭐ Dans un long texte en français, la lettre la plus fréquente est le e. Ici, la phrase est trop courte pour le montrer : le cryptographe a besoin d'un grand effectif total.\n⛔ Le piège au c) : s'arrêter au t. Je compte toutes les lettres avant de conclure.\nRéponse : a) 28 lettres ; b) 5 ; c) le t et le i, 5 chacun ; d) 3.",
           schema: ecranSeulement(
@@ -368,6 +392,11 @@ export const exercicesStatDonnee4e: FicheExercicesData = {
         {
           enonce:
             "Une technicienne de la qualité de l'air relève chaque jour l'indice ATMO d'une ville, pendant les 30 jours d'avril. Une case du tableau a été effacée.\na) Combien de jours la qualité de l'air a-t-elle été « mauvaise » ?\nb) Combien de jours a-t-elle été « dégradée » ou pire ?\nc) Combien de jours a-t-elle été « bonne » ou « moyenne » ?",
+          reponses: [
+            { question: "a)", attendu: "3" },
+            { question: "b)", attendu: "9" },
+            { question: "c)", attendu: "21" },
+          ],
           figure: grille(["indice ATMO", "nombre de jours"], [
             ["bon", 12],
             ["moyen", 9],
@@ -382,8 +411,14 @@ export const exercicesStatDonnee4e: FicheExercicesData = {
         {
           enonce:
             "Un soigneur animalier s'occupe de 24 manchots dans un zoo. 9 d'entre eux sont des jeunes, nés dans l'année.\na) Quelle est la fréquence des jeunes ? Donne-la en fraction simplifiée.\nb) Écris-la en nombre décimal.\nc) Écris-la en pourcentage.\nd) Quelle est la fréquence des adultes, en nombre décimal ?",
+          reponses: [
+            { question: "a)", attendu: ["3/8"], exact: true },
+            { question: "b)", attendu: ["0,375"], exact: true },
+            { question: "c)", attendu: "37,5 %" },
+            { question: "d)", attendu: ["0,625"], exact: true },
+          ],
           correction:
-            "La fréquence, c'est l'effectif divisé par l'effectif total, ici 24 manchots.\na) $\dfrac{9}{24}$. Je simplifie par 3 : $\dfrac{9}{24} = \dfrac{3}{8}$.\nb) $9 \div 24 = 0{,}375$.\nc) $0{,}375 = \dfrac{37{,}5}{100}$, soit 37,5 %.\nd) Les adultes : $24 - 9 = 15$ manchots. $15 \div 24 = 0{,}625$.\nContrôle : $0{,}375 + 0{,}625 = 1$. La somme des fréquences fait toujours 1.\n⛔ Le piège : diviser 9 par 15, le nombre d'adultes. $\dfrac{9}{15}$ compare les jeunes aux adultes ; la fréquence compare les jeunes au TOTAL.\nRéponse : a) $\dfrac{3}{8}$ ; b) $0{,}375$ ; c) 37,5 % ; d) $0{,}625$.",
+            "La fréquence, c'est l'effectif divisé par l'effectif total, ici 24 manchots.\na) $\\dfrac{9}{24}$. Je simplifie par 3 : $\\dfrac{9}{24} = \\dfrac{3}{8}$.\nb) $9 \\div 24 = 0{,}375$.\nc) $0{,}375 = \\dfrac{37{,}5}{100}$, soit 37,5 %.\nd) Les adultes : $24 - 9 = 15$ manchots. $15 \\div 24 = 0{,}625$.\nContrôle : $0{,}375 + 0{,}625 = 1$. La somme des fréquences fait toujours 1.\n⛔ Le piège : diviser 9 par 15, le nombre d'adultes. $\\dfrac{9}{15}$ compare les jeunes aux adultes ; la fréquence compare les jeunes au TOTAL.\nRéponse : a) $\\dfrac{3}{8}$ ; b) $0{,}375$ ; c) 37,5 % ; d) $0{,}625$.",
           schema: ecranSeulement(
             camembert([
               { label: "jeunes", value: 9 },
@@ -395,6 +430,13 @@ export const exercicesStatDonnee4e: FicheExercicesData = {
         {
           enonce:
             "Un chef pâtissier remplit une grande boîte de macarons. Le tableau donne le nombre de macarons de chaque parfum.\na) Combien de macarons la boîte contient-elle ?\nb) Quelle est la fréquence des macarons à la framboise ? Donne-la en fraction simplifiée, en décimal et en pourcentage.\nc) Quelle est la fréquence des macarons à la pistache, en pourcentage ?",
+          reponses: [
+            { question: "a)", attendu: "40" },
+            { question: "b) frac.", attendu: ["1/4"], exact: true },
+            { question: "b) déc.", attendu: ["0,25"], exact: true },
+            { question: "b) %", attendu: "25 %" },
+            { question: "c)", attendu: "22,5 %" },
+          ],
           figure: grille(["parfum", "macarons"], [
             ["chocolat", 14],
             ["framboise", 10],
@@ -402,14 +444,20 @@ export const exercicesStatDonnee4e: FicheExercicesData = {
             ["citron", 7],
           ]),
           correction:
-            "a) L'effectif total est la somme des quatre lignes : $14 + 10 + 9 + 7 = 40$ macarons.\nb) $\dfrac{10}{40} = \dfrac{1}{4}$, et $10 \div 40 = 0{,}25$, soit 25 %.\nUn macaron sur quatre est à la framboise.\nc) $9 \div 40 = 0{,}225$, soit 22,5 %.\n⛔ Le piège : diviser par 14, le nombre de macarons au chocolat, ou par 30, les macarons qui ne sont pas à la framboise. Une fréquence se calcule TOUJOURS sur le total, 40.\nRéponse : a) 40 macarons ; b) $\dfrac{1}{4}$, $0{,}25$, 25 % ; c) 22,5 %.",
+            "a) L'effectif total est la somme des quatre lignes : $14 + 10 + 9 + 7 = 40$ macarons.\nb) $\\dfrac{10}{40} = \\dfrac{1}{4}$, et $10 \\div 40 = 0{,}25$, soit 25 %.\nUn macaron sur quatre est à la framboise.\nc) $9 \\div 40 = 0{,}225$, soit 22,5 %.\n⛔ Le piège : diviser par 14, le nombre de macarons au chocolat, ou par 30, les macarons qui ne sont pas à la framboise. Une fréquence se calcule TOUJOURS sur le total, 40.\nRéponse : a) 40 macarons ; b) $\\dfrac{1}{4}$, $0{,}25$, 25 % ; c) 22,5 %.",
           micros: ["stat_lire_tableau", "stat_frequence"],
         },
         {
           enonce:
             "Une contrôleuse qualité teste 50 jouets d'un lot, sortis d'une usine. 3 jouets ont un défaut.\na) Quelle est la fréquence des jouets avec un défaut, en fraction ?\nb) En nombre décimal ?\nc) En pourcentage ?\nd) Le lot est refusé si plus de 5 % des jouets ont un défaut. Ce lot est-il refusé ?",
+          reponses: [
+            { question: "a)", attendu: ["3/50", "6/100"], exact: true },
+            { question: "b)", attendu: ["0,06"], exact: true },
+            { question: "c)", attendu: "6 %" },
+            { question: "d)", attendu: ["oui", "vrai"] },
+          ],
           correction:
-            "L'effectif total est 50 jouets ; l'effectif des jouets avec un défaut est 3.\na) $\dfrac{3}{50}$.\nb) $3 \div 50 = 0{,}06$.\nc) $0{,}06 = \dfrac{6}{100}$, soit 6 %.\nd) 6 % est plus que 5 % : oui, le lot est refusé.\n⛔ Le piège : écrire 3 %. 3 est un effectif, pas un pourcentage. « 3 sur 50 » fait 6 sur 100.\nRéponse : a) $\dfrac{3}{50}$ ; b) $0{,}06$ ; c) 6 % ; d) oui, il est refusé.",
+            "L'effectif total est 50 jouets ; l'effectif des jouets avec un défaut est 3.\na) $\\dfrac{3}{50}$.\nb) $3 \\div 50 = 0{,}06$.\nc) $0{,}06 = \\dfrac{6}{100}$, soit 6 %.\nd) 6 % est plus que 5 % : oui, le lot est refusé.\n⛔ Le piège : écrire 3 %. 3 est un effectif, pas un pourcentage. « 3 sur 50 » fait 6 sur 100.\nRéponse : a) $\\dfrac{3}{50}$ ; b) $0{,}06$ ; c) 6 % ; d) oui, il est refusé.",
           schema: ecranSeulement(
             barres([
               { label: "défaut", value: 3 },
@@ -436,6 +484,14 @@ export const exercicesStatDonnee4e: FicheExercicesData = {
         {
           enonce:
             "Un cartographe dessine la carte des régions de France métropolitaine. Le tableau donne le nombre de départements de chaque région.\na) Combien de départements compte la Bretagne ?\nb) Quelle région en compte le plus ?\nc) Combien de régions comptent exactement 5 départements ?\nd) Combien de départements compte la France métropolitaine ?\ne) La France compte 101 départements en tout. Combien sont en outre-mer ?\nf) Quelle est la fréquence des départements d'Île-de-France parmi ceux de la métropole ? Donne une fraction simplifiée.",
+          reponses: [
+            { question: "a)", attendu: "4" },
+            { question: "b)", attendu: ["Occitanie", "l'Occitanie"] },
+            { question: "c)", attendu: "3" },
+            { question: "d)", attendu: "96" },
+            { question: "e)", attendu: "5" },
+            { question: "f)", attendu: ["1/12"], exact: true },
+          ],
           figure: grille(["région", "départements"], [
             ["Auvergne-Rhône-Alpes", 12],
             ["Bourgogne-Franche-Comté", 8],
@@ -458,6 +514,13 @@ export const exercicesStatDonnee4e: FicheExercicesData = {
         {
           enonce:
             "Un sapeur-pompier note, chaque jour de juin, le nombre d'interventions de sa caserne. Le diagramme en bâtons donne le nombre de jours pour chaque nombre d'interventions.\na) Combien de jours la caserne a-t-elle fait exactement 4 interventions ?\nb) Combien de jours a-t-elle fait 5 interventions ?\nc) Vérifie que le diagramme compte bien les 30 jours de juin.\nd) Combien de jours a-t-elle fait au moins 6 interventions ?\ne) Combien d'interventions la caserne a-t-elle faites en tout, en juin ?",
+          reponses: [
+            { question: "a)", attendu: "8" },
+            { question: "b)", attendu: "7" },
+            { question: "c)", attendu: ["oui", "vrai"] },
+            { question: "d)", attendu: "7" },
+            { question: "e)", attendu: "132" },
+          ],
           figure: barres([
             { label: "2", value: 3 },
             { label: "3", value: 5 },
@@ -473,6 +536,12 @@ export const exercicesStatDonnee4e: FicheExercicesData = {
         {
           enonce:
             "Une ingénieure du réseau électrique présente la production d'électricité de la France en 2023 : environ 495 TWh (térawattheures). Le diagramme circulaire donne la part de chaque source.\na) Quelle est la fréquence du nucléaire, en nombre décimal ?\nb) Combien de TWh le nucléaire a-t-il produits ? Arrondis à l'unité.\nc) L'hydraulique, l'éolien et le solaire sont des énergies renouvelables. Quelle part de l'électricité produisent-elles ensemble ?\nd) Dans le disque, quel est l'angle du secteur du nucléaire ?",
+          reponses: [
+            { question: "a)", attendu: ["0,65"], exact: true },
+            { question: "b)", attendu: "322", tolerance: 0.5 },
+            { question: "c)", attendu: "27 %" },
+            { question: "d)", attendu: "234" },
+          ],
           figure: camembert([
             { label: "nucléaire", value: 65 },
             { label: "hydraulique", value: 12 },
@@ -486,6 +555,18 @@ export const exercicesStatDonnee4e: FicheExercicesData = {
         {
           enonce:
             "Un game designer fait tester son nouveau jeu vidéo par 20 joueurs. Chacun choisit un personnage : G (guerrier), M (mage), A (archère) ou S (soigneuse). Voici les choix, dans l'ordre : G, M, A, G, S, M, G, A, M, G, S, A, G, M, M, G, A, G, S, M.\na) Donne l'effectif de chaque personnage.\nb) Calcule la fréquence de chaque personnage, en pourcentage.\nc) Vérifie que la somme des fréquences fait 100 %.\nd) Le game designer veut rendre plus attirant le personnage le moins choisi. Lequel ?",
+          reponses: [
+            { question: "a) G", attendu: "7" },
+            { question: "a) M", attendu: "6" },
+            { question: "a) A", attendu: "4" },
+            { question: "a) S", attendu: "3" },
+            { question: "b) G", attendu: "35 %" },
+            { question: "b) M", attendu: "30 %" },
+            { question: "b) A", attendu: "20 %" },
+            { question: "b) S", attendu: "15 %" },
+            { question: "c)", attendu: ["oui", "vrai"] },
+            { question: "d)", attendu: ["la soigneuse", "soigneuse", "S"] },
+          ],
           correction:
             "a) Je barre chaque lettre quand je la compte. G : 7. M : 6. A : 4. S : 3.\nContrôle : $7 + 6 + 4 + 3 = 20$ joueurs. Le compte est bon.\nb) Je divise chaque effectif par 20.\nG : $7 \\div 20 = 0{,}35$, soit 35 %. M : $6 \\div 20 = 0{,}3$, soit 30 %.\nA : $4 \\div 20 = 0{,}2$, soit 20 %. S : $3 \\div 20 = 0{,}15$, soit 15 %.\n⭐ Sur 20 joueurs, un joueur vaut $100 \\div 20 = 5$ %.\nc) $35 + 30 + 20 + 15 = 100$, soit 100 %.\nd) Le plus petit effectif est 3 : la soigneuse.\n⛔ Le piège au a) : compter trop vite et perdre une lettre. Le contrôle par le total, 20, le montre tout de suite.\nRéponse : a) G : 7, M : 6, A : 4, S : 3 ; b) 35 %, 30 %, 20 %, 15 % ; c) oui, 100 % ; d) la soigneuse.",
           schema: ecranSeulement(
@@ -502,6 +583,13 @@ export const exercicesStatDonnee4e: FicheExercicesData = {
         {
           enonce:
             "Une urbaniste étudie les trajets domicile-travail de 500 habitants d'une ville. Le tableau à double entrée croise la longueur du trajet et le moyen de transport.\na) Combien d'habitants font moins de 5 km à vélo ?\nb) Combien d'habitants vont au travail à vélo, en tout ?\nc) Quelle est la fréquence de la voiture parmi les 500 habitants, en pourcentage ?\nd) Parmi les trajets de moins de 5 km, quelle est la fréquence de la voiture, en pourcentage ?\ne) Vrai ou faux : « Près de la moitié des trajets de moins de 5 km se font en voiture. »",
+          reponses: [
+            { question: "a)", attendu: "30" },
+            { question: "b)", attendu: "40" },
+            { question: "c)", attendu: "62 %" },
+            { question: "d)", attendu: "48 %" },
+            { question: "e)", attendu: ["oui", "vrai"] },
+          ],
           figure: grille(["trajet", "voiture", "bus, tram", "vélo", "à pied"], [
             ["moins de 5 km", 120, 40, 30, 60],
             ["5 km ou plus", 190, 50, 10, 0],
@@ -513,6 +601,14 @@ export const exercicesStatDonnee4e: FicheExercicesData = {
         {
           enonce:
             "Une appli de vélos en libre-service publie ce graphique, avec le titre : « Nos abonnés explosent ! ». Un journaliste de données le vérifie. L'axe compte les abonnés en milliers.\na) De combien en combien l'axe est-il gradué ? Par quel nombre commence-t-il ?\nb) Combien d'abonnés en 2022 ? Et en 2025 ?\nc) Sur le dessin, la barre de 2025 est combien de fois plus haute que celle de 2022 ?\nd) En vrai, le nombre d'abonnés a-t-il doublé entre 2022 et 2025 ?",
+          reponses: [
+            { question: "a) pas", attendu: "5" },
+            { question: "a) début", attendu: "60" },
+            { question: "b) 2022", attendu: "70000" },
+            { question: "b) 2025", attendu: "85000" },
+            { question: "c)", attendu: "2,5" },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           figure: barres([
             { label: "2022", value: 70 },
             { label: "2023", value: 75 },
@@ -526,6 +622,13 @@ export const exercicesStatDonnee4e: FicheExercicesData = {
         {
           enonce:
             "Une monitrice d'auto-école relève le nombre de fautes de ses 50 candidats à l'examen du code de la route. L'examen compte 40 questions. Il est réussi avec 5 fautes au plus.\na) Combien de candidats ont fait exactement 3 fautes ?\nb) Vérifie l'effectif total.\nc) Combien de candidats ont réussi l'examen ?\nd) Quelle est la fréquence de réussite, en pourcentage ?\ne) Quelle est la fréquence d'échec, en pourcentage ?",
+          reponses: [
+            { question: "a)", attendu: "9" },
+            { question: "b)", attendu: "50" },
+            { question: "c)", attendu: "36" },
+            { question: "d)", attendu: "72 %" },
+            { question: "e)", attendu: "28 %" },
+          ],
           figure: grille(["fautes", "candidats"], [
             [0, 2],
             [1, 4],
@@ -544,6 +647,13 @@ export const exercicesStatDonnee4e: FicheExercicesData = {
         {
           enonce:
             "Une agronome surveille une maladie des plants de tomates dans deux serres. Serre A : 300 plants, dont 45 malades. Serre B : 200 plants, dont 36 malades.\na) Quelle serre a le plus de plants malades ?\nb) Calcule la fréquence des plants malades dans chaque serre, en pourcentage.\nc) Quelle serre est la plus touchée par la maladie ?\nd) Quelle est la fréquence des plants malades dans les deux serres réunies, en pourcentage ?",
+          reponses: [
+            { question: "a)", attendu: ["A", "la serre A", "serre A"] },
+            { question: "b) A", attendu: "15 %" },
+            { question: "b) B", attendu: "18 %" },
+            { question: "c)", attendu: ["B", "la serre B", "serre B"] },
+            { question: "d)", attendu: "16,2 %" },
+          ],
           correction:
             "a) 45 malades contre 36 : la serre A en a le plus.\nb) Serre A : $45 \\div 300 = 0{,}15$, soit 15 %.\nSerre B : $36 \\div 200 = 0{,}18$, soit 18 %.\nc) 18 % est plus que 15 % : la serre B est la plus touchée, alors qu'elle a moins de plants malades.\nPour comparer deux groupes de tailles différentes, je compare les FRÉQUENCES, pas les effectifs.\nd) Je réunis les deux serres : $45 + 36 = 81$ malades sur $300 + 200 = 500$ plants.\n$81 \\div 500 = 0{,}162$, soit 16,2 %.\n⛔ Le piège au d) : faire la moyenne des deux pourcentages, $(15 + 18) \\div 2 = 16{,}5$. La serre A, plus grande, pèse plus : je repars des effectifs.\nRéponse : a) la serre A ; b) 15 % et 18 % ; c) la serre B ; d) 16,2 %.",
           schema: ecranSeulement(
@@ -572,6 +682,12 @@ export const exercicesStatDonnee4e: FicheExercicesData = {
           titre: "Les 206 os du squelette",
           enonce:
             "Une paléoanthropologue reconstitue le squelette d'un être humain adulte, trouvé lors d'une fouille. Un squelette adulte compte 206 os. Le tableau les range par partie du corps.\na) Combien d'os compte « le reste du corps » (épaules, bras, bassin, jambes, oreilles…) ?\nb) Quelle est la fréquence des os des deux mains ? Donne un décimal arrondi au centième.\nc) Vrai ou faux : « Plus d'un quart des os du corps sont dans les mains. »\nd) Vrai ou faux : « Plus de la moitié des os du corps sont dans les mains et les pieds. »",
+          reponses: [
+            { question: "a)", attendu: "27" },
+            { question: "b)", attendu: "0,26", tolerance: 0.005 },
+            { question: "c)", attendu: ["oui", "vrai"] },
+            { question: "d)", attendu: ["oui", "vrai"] },
+          ],
           figure: grille(["partie du corps", "os"], [
             ["les deux mains", 54],
             ["les deux pieds", 52],
@@ -588,6 +704,14 @@ export const exercicesStatDonnee4e: FicheExercicesData = {
           titre: "La collecte de sang",
           enonce:
             "Un infirmier de l'Établissement français du sang prépare une collecte. Le diagramme donne la répartition des groupes sanguins en France. Il attend 400 donneurs, répartis comme dans toute la France.\na) Quel est le groupe sanguin le plus répandu ?\nb) Combien de donneurs du groupe O peut-il attendre ?\nc) Combien de donneurs du groupe AB ?\nd) Sans tenir compte du rhésus, un malade du groupe B peut recevoir du sang B ou O. Quelle part des donneurs lui convient ? Est-ce plus de la moitié ?\ne) Quel est l'angle du secteur du groupe A ?",
+          reponses: [
+            { question: "a)", attendu: ["A", "le groupe A", "groupe A"] },
+            { question: "b)", attendu: "168" },
+            { question: "c)", attendu: "16" },
+            { question: "d) part", attendu: "51 %" },
+            { question: "d) moit.", attendu: ["oui", "vrai"] },
+            { question: "e)", attendu: "162" },
+          ],
           figure: camembert([
             { label: "A", value: 45 },
             { label: "O", value: 42 },
@@ -602,6 +726,17 @@ export const exercicesStatDonnee4e: FicheExercicesData = {
           titre: "Les 88 touches du piano",
           enonce:
             "Une accordeuse de piano règle les 88 touches d'un piano. Une octave compte 12 touches : 7 blanches et 5 noires. Le piano compte 7 octaves entières, plus 4 touches : 3 blanches et 1 noire.\na) Combien de touches dans les 7 octaves entières ? Vérifie qu'on trouve bien 88 touches en tout.\nb) Combien de touches blanches compte le piano ? Combien de noires ?\nc) Quelle est la fréquence des touches noires dans une octave ? Et sur le piano entier ? Donne des fractions simplifiées.\nd) Arrondis ces deux fréquences au centième. Sont-elles égales ?",
+          reponses: [
+            { question: "a) 7 oct", attendu: "84" },
+            { question: "a) total", attendu: "88" },
+            { question: "b) blan.", attendu: "52" },
+            { question: "b) noir.", attendu: "36" },
+            { question: "c) oct.", attendu: ["5/12"], exact: true },
+            { question: "c) piano", attendu: ["9/22"], exact: true },
+            { question: "d) oct.", attendu: "0,42", tolerance: 0.005 },
+            { question: "d) piano", attendu: "0,41", tolerance: 0.005 },
+            { question: "d) égal?", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $7 \\times 12 = 84$ touches. Avec les 4 autres : $84 + 4 = 88$. Le compte est bon.\nb) Blanches : $7 \\times 7 + 3 = 52$. Noires : $7 \\times 5 + 1 = 36$.\nContrôle : $52 + 36 = 88$.\nc) Dans une octave : $\\dfrac{5}{12}$ (on ne peut pas simplifier).\nSur le piano : $\\dfrac{36}{88}$. Je simplifie par 4 : $\\dfrac{36}{88} = \\dfrac{9}{22}$.\nd) $5 \\div 12 \\approx 0{,}417$, soit environ $0{,}42$.\n$9 \\div 22 \\approx 0{,}409$, soit environ $0{,}41$.\nElles sont proches, mais pas égales : les 4 touches du bout ont moins de noires qu'une octave.\n⛔ Le piège au c) : croire que la fréquence du piano est celle d'une octave. Le piano n'est pas fait que d'octaves entières.\nRéponse : a) 84, puis 88 ; b) 52 blanches, 36 noires ; c) $\\dfrac{5}{12}$ et $\\dfrac{9}{22}$ ; d) $0{,}42$ et $0{,}41$, pas égales.",
           schema: ecranSeulement(
@@ -618,6 +753,13 @@ export const exercicesStatDonnee4e: FicheExercicesData = {
           titre: "La cagnotte de l'association",
           enonce:
             "Une conseillère bancaire aide une association à déposer sa cagnotte. Elle trie les pièces : le tableau donne le nombre de pièces de chaque sorte.\na) Combien de pièces la cagnotte contient-elle ?\nb) Quelle est la fréquence des pièces de 2 €, en pourcentage ?\nc) Calcule ce que vaut chaque sorte de pièces, puis le montant total de la cagnotte.\nd) Quelle part de l'argent les pièces de 2 € représentent-elles ? Arrondis au pour cent.\ne) Léa dit : « Les pièces de 2 € sont 13 % des pièces, donc 13 % de l'argent. » A-t-elle raison ?",
+          reponses: [
+            { question: "a)", attendu: "100" },
+            { question: "b)", attendu: "13 %" },
+            { question: "c)", attendu: "58,40" },
+            { question: "d)", attendu: "45 %", tolerance: 0.5 },
+            { question: "e)", attendu: ["non", "faux"] },
+          ],
           figure: grille(["pièce", "nombre"], [
             ["10 c", 24],
             ["20 c", 30],

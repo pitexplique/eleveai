@@ -367,6 +367,10 @@ export const exercicesAireLongueur6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Une plume et un trombone sont posés sur la règle. Ils partent du zéro.\na) Combien mesure chacun, en cm ?\nb) Écris ces deux longueurs en mm.",
+          reponses: [
+            { question: "a)", attendu: "6,7 ; 3,2" },
+            { question: "b)", attendu: "67 ; 32" },
+          ],
           figure: regle(8, [
             { de: 0, a: 6.7, label: "plume" },
             { de: 0, a: 3.2, label: "trombone" },
@@ -377,6 +381,10 @@ export const exercicesAireLongueur6e: FicheExercicesData = {
         },
         {
           enonce: "Une chenille est posée sur la règle. Elle ne part pas du zéro.\nCombien mesure-t-elle, en cm puis en mm ?",
+          reponses: [
+            { question: "en cm", attendu: "4,5" },
+            { question: "en mm", attendu: "45" },
+          ],
           figure: regle(8, [{ de: 2, a: 6.5, label: "chenille" }]),
           correction:
             "La chenille commence au $2$.\nElle finit $5$ petits traits après le $6$, donc à $6{,}5$.\nSa longueur, c'est l'écart entre les deux bouts.\n$6{,}5 - 2 = 4{,}5$ cm.\nEn mm : $4{,}5 \\times 10 = 45$ mm.\n⛔ Le piège : lire seulement le bout, et répondre $6{,}5$ cm. La chenille ne part pas du zéro.\nRéponse : la chenille mesure $4{,}5$ cm, soit $45$ mm.",
@@ -384,6 +392,13 @@ export const exercicesAireLongueur6e: FicheExercicesData = {
         },
         {
           enonce: "Complète.\na) $1$ m = … cm\nb) $1$ km = … m\nc) $1$ cm = … mm\nd) $1$ m = … mm\ne) $1$ dm = … cm",
+          reponses: [
+            { question: "a)", attendu: "100" },
+            { question: "b)", attendu: "1000" },
+            { question: "c)", attendu: "10" },
+            { question: "d)", attendu: "1000" },
+            { question: "e)", attendu: "10" },
+          ],
           correction:
             "Dans le tableau, chaque colonne vaut $10$ fois sa voisine de droite.\na) Du m au cm, j'avance de deux colonnes. $1$ m $= 100$ cm.\nb) Du km au m, j'avance de trois colonnes. $1$ km $= 1\\,000$ m.\nc) $1$ cm $= 10$ mm.\nd) Du m au mm, trois colonnes. $1$ m $= 1\\,000$ mm.\ne) $1$ dm $= 10$ cm.\n⛔ Le piège du a) : écrire $10$ cm. $10$ cm, c'est seulement $1$ dm.\nRéponse : a) $100$ ; b) $1\\,000$ ; c) $10$ ; d) $1\\,000$ ; e) $10$.",
           schema: (
@@ -399,6 +414,12 @@ export const exercicesAireLongueur6e: FicheExercicesData = {
         },
         {
           enonce: "Convertis.\na) $6$ m en cm\nb) $45$ mm en cm\nc) $3{,}2$ km en m\nd) $900$ cm en m",
+          reponses: [
+            { question: "a)", attendu: "600" },
+            { question: "b)", attendu: "4,5" },
+            { question: "c)", attendu: "3200" },
+            { question: "d)", attendu: "9" },
+          ],
           correction:
             "Je regarde d'abord le sens.\nVers une unité plus petite, je multiplie. Vers une unité plus grande, je divise.\na) $1$ m $= 100$ cm. $6 \\times 100 = 600$ cm.\nb) $10$ mm font $1$ cm. $45 \\div 10 = 4{,}5$ cm.\nc) $1$ km $= 1\\,000$ m. $3{,}2 \\times 1\\,000 = 3\\,200$ m.\nd) $100$ cm font $1$ m. $900 \\div 100 = 9$ m.\n⛔ Le piège : se tromper de sens. $900$ cm ne peuvent pas faire $90\\,000$ m !\nRéponse : a) $600$ cm ; b) $4{,}5$ cm ; c) $3\\,200$ m ; d) $9$ m.",
           schema: ecranSeulement(
@@ -415,6 +436,12 @@ export const exercicesAireLongueur6e: FicheExercicesData = {
         },
         {
           enonce: "Convertis.\na) $1{,}8$ m en cm\nb) $2\\,450$ m en km\nc) $36$ dm en m\nd) $0{,}6$ cm en mm",
+          reponses: [
+            { question: "a)", attendu: "180" },
+            { question: "b)", attendu: "2,45" },
+            { question: "c)", attendu: "3,6" },
+            { question: "d)", attendu: "6" },
+          ],
           correction:
             "a) $1$ m $= 100$ cm. $1{,}8 \\times 100 = 180$ cm.\nb) $1\\,000$ m font $1$ km. $2\\,450 \\div 1\\,000 = 2{,}45$ km.\nc) $10$ dm font $1$ m. $36 \\div 10 = 3{,}6$ m.\nd) $1$ cm $= 10$ mm. $0{,}6 \\times 10 = 6$ mm.\n⛔ Le piège du a) : « ajouter deux zéros » et écrire $1{,}800$. Ce nombre vaut toujours $1{,}8$.\nDans le tableau, c'est la virgule qui se déplace.\nRéponse : a) $180$ cm ; b) $2{,}45$ km ; c) $3{,}6$ m ; d) $6$ mm.",
           schema: (
@@ -438,6 +465,13 @@ export const exercicesAireLongueur6e: FicheExercicesData = {
         },
         {
           enonce: "Choisis la bonne unité : mm, cm, m ou km.\na) Un terrain de football mesure environ $100$ …\nb) Un téléphone a une épaisseur d'environ $8$ …\nc) Deux villes voisines sont à environ $25$ …\nd) Une baguette de pain mesure environ $60$ …\ne) Une girafe mesure environ $5$ …",
+          reponses: [
+            { question: "a)", attendu: ["m", "mètre", "mètres"] },
+            { question: "b)", attendu: ["mm", "millimètre", "millimètres"] },
+            { question: "c)", attendu: ["km", "kilomètre", "kilomètres"] },
+            { question: "d)", attendu: ["cm", "centimètre", "centimètres"] },
+            { question: "e)", attendu: ["m", "mètre", "mètres"] },
+          ],
           correction:
             "J'essaie chaque unité dans ma tête. Je garde celle qui colle à l'objet.\na) $100$ cm, c'est la hauteur d'une table. Un terrain, c'est $100$ m.\nb) $8$ cm, c'est trop épais. Un téléphone fait $8$ mm.\nc) $25$ m, c'est une piscine. Deux villes sont à $25$ km.\nd) $60$ m, c'est un immeuble couché ! Une baguette fait $60$ cm.\ne) Une girafe mesure $5$ m.\n⛔ Le piège : répondre au hasard. Un nombre sans la bonne unité ne veut rien dire.\nRéponse : a) m ; b) mm ; c) km ; d) cm ; e) m.",
           schema: ecranSeulement(
@@ -451,6 +485,12 @@ export const exercicesAireLongueur6e: FicheExercicesData = {
         },
         {
           enonce: "Vrai ou faux ? Corrige les égalités fausses.\na) $4$ m $= 40$ cm\nb) $5\\,000$ m $= 5$ km\nc) $3$ cm $= 30$ mm\nd) $60$ cm $= 6$ m",
+          reponses: [
+            { question: "a)", attendu: ["faux", "non"] },
+            { question: "b)", attendu: ["vrai", "oui"] },
+            { question: "c)", attendu: ["vrai", "oui"] },
+            { question: "d)", attendu: ["faux", "non"] },
+          ],
           correction:
             "Je compare avec ce que je connais bien.\na) $1$ m, c'est déjà $100$ cm. Donc $4$ m, c'est $400$ cm : FAUX.\nb) $5 \\times 1\\,000 = 5\\,000$ : VRAI.\nc) $3 \\times 10 = 30$ : VRAI.\nd) $60$ cm, c'est moins qu'un mètre. Ça ne peut pas faire $6$ m : FAUX.\n$60 \\div 100 = 0{,}6$ m.\n⛔ Le piège : vérifier seulement si le nombre grandit. Au a), $40$ est plus grand que $4$, et pourtant c'est faux.\nRéponse : a) faux, $400$ cm ; b) vrai ; c) vrai ; d) faux, $0{,}6$ m.",
           schema: conversion(["m", "dm", "cm", "mm"], [
@@ -475,6 +515,11 @@ export const exercicesAireLongueur6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Écris chaque longueur dans l'unité demandée.\na) $2$ km $350$ m, en m\nb) $5$ m $8$ cm, en cm\nc) $1$ m $5$ mm, en mm",
+          reponses: [
+            { question: "a)", attendu: "2350" },
+            { question: "b)", attendu: "508" },
+            { question: "c)", attendu: "1005" },
+          ],
           correction:
             "Je convertis la grande unité, puis j'ajoute le reste.\na) $2$ km $= 2\\,000$ m. Puis $2\\,000 + 350 = 2\\,350$ m.\nb) $5$ m $= 500$ cm. Puis $500 + 8 = 508$ cm.\nc) $1$ m $= 1\\,000$ mm. Puis $1\\,000 + 5 = 1\\,005$ mm.\n⛔ Le piège du b) : écrire $58$ cm. Le $8$ va dans la colonne des cm, pas dans celle des dm.\nRéponse : a) $2\\,350$ m ; b) $508$ cm ; c) $1\\,005$ mm.",
           schema: conversion(["m", "dm", "cm", "mm"], [
@@ -485,6 +530,9 @@ export const exercicesAireLongueur6e: FicheExercicesData = {
         },
         {
           enonce: "Au saut en longueur, trois élèves ont sauté.\nLéa : $3{,}15$ m. Tom : $298$ cm. Inès : $31$ dm.\na) Range les sauts du plus long au plus court.\nb) Quel écart y a-t-il entre le premier et le dernier, en cm ?",
+          reponses: [
+            { question: "b)", attendu: "17" },
+          ],
           correction:
             "a) Je mets tout en cm.\nLéa : $3{,}15$ m $= 315$ cm.\nInès : $31$ dm $= 310$ cm.\nTom : $298$ cm.\n$315 > 310 > 298$. Léa est première, puis Inès, puis Tom.\nb) $315 - 298 = 17$ cm.\n⛔ Le piège : croire que $31$ dm est le plus long, car $31$ est un grand nombre. Il faut d'abord convertir.\nRéponse : a) Léa, Inès, Tom ; b) $17$ cm.",
           schema: ecranSeulement(
@@ -498,6 +546,12 @@ export const exercicesAireLongueur6e: FicheExercicesData = {
         },
         {
           enonce: "Dans chaque paire, quelle longueur est la plus grande ?\na) $2{,}5$ km ou $2\\,400$ m ?\nb) $45$ mm ou $5$ cm ?\nc) $7$ dm ou $68$ cm ?\nd) $0{,}9$ m ou $1\\,000$ mm ?",
+          reponses: [
+            { question: "a)", attendu: ["2,5 km", "2500 m"] },
+            { question: "b)", attendu: ["5 cm", "50 mm"] },
+            { question: "c)", attendu: ["7 dm", "70 cm"] },
+            { question: "d)", attendu: ["1000 mm", "1 m"] },
+          ],
           correction:
             "Pour chaque paire, je mets les deux longueurs dans la même unité.\na) $2{,}5$ km $= 2\\,500$ m. Et $2\\,500 > 2\\,400$.\nb) $5$ cm $= 50$ mm. Et $50 > 45$.\nc) $7$ dm $= 70$ cm. Et $70 > 68$.\nd) $1\\,000$ mm $= 1$ m. Et $1 > 0{,}9$.\n⛔ Le piège du d) : croire que $0{,}9$ m est plus petit parce qu'il a une virgule. Il faut comparer dans la même unité.\nRéponse : a) $2{,}5$ km ; b) $5$ cm ; c) $7$ dm ; d) $1\\,000$ mm.",
           schema: ecranSeulement(
@@ -512,6 +566,11 @@ export const exercicesAireLongueur6e: FicheExercicesData = {
         },
         {
           enonce: "Mia a une pelote de laine de $12$ m.\nElle tricote une écharpe avec $850$ cm de laine.\na) Quelle longueur de laine reste-t-il, en cm puis en m ?\nb) Un bonnet demande $4$ m de laine. Peut-elle le tricoter ?",
+          reponses: [
+            { question: "a) cm", attendu: "350" },
+            { question: "a) m", attendu: "3,5" },
+            { question: "b)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) Je mets tout en cm : $12$ m $= 1\\,200$ cm.\nIl reste $1\\,200 - 850 = 350$ cm.\nEn m : $350 \\div 100 = 3{,}5$ m.\nb) $3{,}5$ m, c'est moins que $4$ m.\nIl manque $4 - 3{,}5 = 0{,}5$ m, soit $50$ cm.\n⛔ Le piège : calculer $12 - 850$. On ne soustrait pas des cm à des m.\nRéponse : a) $350$ cm, soit $3{,}5$ m ; b) non, il manque $50$ cm.",
           schema: bande("12 m = 1 200 cm", [
@@ -522,6 +581,10 @@ export const exercicesAireLongueur6e: FicheExercicesData = {
         },
         {
           enonce: "Une piste d'athlétisme mesure $400$ m.\nNour fait $6$ tours et demi.\nQuelle distance parcourt-il, en m puis en km ?",
+          reponses: [
+            { question: "en m", attendu: "2600" },
+            { question: "en km", attendu: "2,6" },
+          ],
           correction:
             "Six tours : $6 \\times 400 = 2\\,400$ m.\nUn demi-tour, c'est la moitié de $400$ m : $200$ m.\nEn tout : $2\\,400 + 200 = 2\\,600$ m.\nEn km : $2\\,600 \\div 1\\,000 = 2{,}6$ km.\n⛔ Le piège : oublier le demi-tour, et répondre $2\\,400$ m.\nRéponse : Nour parcourt $2\\,600$ m, soit $2{,}6$ km.",
           schema: bande("2 600 m = 2,6 km", [
@@ -537,6 +600,11 @@ export const exercicesAireLongueur6e: FicheExercicesData = {
         },
         {
           enonce: "Sami fait un tour à vélo. Il va de la maison à l'école, puis à la piscine, puis il rentre.\nMaison → école : $1{,}2$ km. École → piscine : $850$ m. Piscine → maison : $1$ km $50$ m.\na) Quelle distance fait-il en tout, en m puis en km ?\nb) De la maison à l'école, il peut aussi passer par la piscine. Combien de mètres en plus ?",
+          reponses: [
+            { question: "a) m", attendu: "3100" },
+            { question: "a) km", attendu: "3,1" },
+            { question: "b)", attendu: "700" },
+          ],
           figure: plan("m", [
             { trait: [[0, 0], [1200, 0]] },
             { trait: [[1200, 0], [758.333, 726.244]] },
@@ -554,6 +622,11 @@ export const exercicesAireLongueur6e: FicheExercicesData = {
         },
         {
           enonce: "Un escargot avance de $4$ mm chaque seconde. C'est un modèle.\na) Quelle distance fait-il en $10$ secondes ? Réponds en cm.\nb) Et en $1$ minute ?\nc) Combien de secondes lui faut-il pour faire $1$ m ?",
+          reponses: [
+            { question: "a)", attendu: "4" },
+            { question: "b)", attendu: "24" },
+            { question: "c)", attendu: "250" },
+          ],
           correction:
             "a) $10 \\times 4 = 40$ mm. Et $40$ mm $= 4$ cm.\nb) $1$ minute, c'est $60$ secondes.\n$60 \\times 4 = 240$ mm, soit $24$ cm.\nc) Je mets le mètre en mm : $1$ m $= 1\\,000$ mm.\nIl fait $4$ mm par seconde : $1\\,000 \\div 4 = 250$ secondes.\n⛔ Le piège du c) : calculer $1 \\div 4$. Le mètre et le millimètre ne se mélangent pas.\nRéponse : a) $4$ cm ; b) $24$ cm ; c) $250$ secondes.",
           schema: ecranSeulement(
@@ -568,6 +641,11 @@ export const exercicesAireLongueur6e: FicheExercicesData = {
         },
         {
           enonce: "Dans un paquet de papier, $10$ feuilles font $1$ mm d'épaisseur. C'est un modèle.\na) Une ramette a $500$ feuilles. Quelle est son épaisseur, en mm puis en cm ?\nb) Combien de feuilles faut-il pour une pile de $1$ m ?",
+          reponses: [
+            { question: "a) mm", attendu: "50" },
+            { question: "a) cm", attendu: "5" },
+            { question: "b)", attendu: "10000" },
+          ],
           correction:
             "a) $10$ feuilles font $1$ mm.\n$500 \\div 10 = 50$ : la ramette fait $50$ mm.\nEn cm : $50 \\div 10 = 5$ cm.\nb) Je mets le mètre en mm : $1$ m $= 1\\,000$ mm.\nChaque mm contient $10$ feuilles : $1\\,000 \\times 10 = 10\\,000$ feuilles.\n⛔ Le piège : répondre $10$ feuilles pour $1$ m. Il faut d'abord convertir le mètre en mm.\nRéponse : a) $50$ mm, soit $5$ cm ; b) $10\\,000$ feuilles.",
           schema: conversion(["m", "dm", "cm", "mm"], [
@@ -594,6 +672,12 @@ export const exercicesAireLongueur6e: FicheExercicesData = {
           titre: "La course d'orientation",
           enonce:
             "Une course d'orientation a quatre étapes.\nDépart → B1 : $450$ m. B1 → B2 : $0{,}7$ km. B2 → B3 : $1$ km $200$ m. B3 → arrivée : $650$ m.\na) Quelle est la longueur de la course, en m puis en km ?\nb) Zoé est arrivée à B2. Quelle distance lui reste-t-il ?\nc) Quelle étape est la plus longue ?",
+          reponses: [
+            { question: "a) m", attendu: "3000" },
+            { question: "a) km", attendu: "3" },
+            { question: "b)", attendu: "1850" },
+            { question: "c)", attendu: ["de B2 à B3", "B2 à B3", "B2-B3", "B2B3"] },
+          ],
           correction:
             "a) Je mets tout en m.\n$0{,}7$ km $= 700$ m et $1$ km $200$ m $= 1\\,200$ m.\n$450 + 700 + 1\\,200 + 650 = 3\\,000$ m.\nEn km : $3\\,000 \\div 1\\,000 = 3$ km.\nb) Jusqu'à B2, Zoé a fait $450 + 700 = 1\\,150$ m.\nIl lui reste $3\\,000 - 1\\,150 = 1\\,850$ m.\nc) L'étape de B2 à B3, avec $1\\,200$ m.\n⛔ Le piège : additionner $450 + 0{,}7$. Des m et des km ne s'ajoutent pas tels quels.\nRéponse : a) $3\\,000$ m, soit $3$ km ; b) $1\\,850$ m ; c) de B2 à B3.",
           schema: bande("3 000 m = 3 km", [
@@ -608,6 +692,12 @@ export const exercicesAireLongueur6e: FicheExercicesData = {
           titre: "L'étagère",
           enonce:
             "Tom a une étagère de $1{,}2$ m de long.\nIl y range d'abord $8$ BD. Chaque BD fait $15$ mm d'épaisseur.\nPuis il ajoute des livres de $3$ cm d'épaisseur.\na) Quelle place prennent les BD, en mm puis en cm ?\nb) Quelle place reste-t-il pour les livres, en cm ?\nc) Combien de livres peut-il ranger ?",
+          reponses: [
+            { question: "a) mm", attendu: "120" },
+            { question: "a) cm", attendu: "12" },
+            { question: "b)", attendu: "108" },
+            { question: "c)", attendu: "36" },
+          ],
           correction:
             "a) $8 \\times 15 = 120$ mm.\nEn cm : $120 \\div 10 = 12$ cm.\nb) L'étagère en cm : $1{,}2$ m $= 120$ cm.\nIl reste $120 - 12 = 108$ cm.\nc) Chaque livre fait $3$ cm : $108 \\div 3 = 36$ livres.\n⛔ Le piège : calculer $1{,}2 - 120$. Je convertis avant de soustraire.\nRéponse : a) $120$ mm, soit $12$ cm ; b) $108$ cm ; c) $36$ livres.",
           schema: bande("1,2 m = 120 cm", [
@@ -620,6 +710,12 @@ export const exercicesAireLongueur6e: FicheExercicesData = {
           titre: "Le bambou",
           enonce:
             "Un bambou mesure $1{,}8$ m. Il pousse de $35$ cm chaque jour. C'est un modèle.\na) De combien pousse-t-il en $7$ jours, en cm puis en m ?\nb) Quelle est sa hauteur au bout de $7$ jours ?\nc) Au bout de combien de jours dépasse-t-il $5$ m ?",
+          reponses: [
+            { question: "a) cm", attendu: "245" },
+            { question: "a) m", attendu: "2,45" },
+            { question: "b)", attendu: ["4,25 m", "425 cm"] },
+            { question: "c)", attendu: "10" },
+          ],
           correction:
             "a) $7 \\times 35 = 245$ cm.\nEn m : $245 \\div 100 = 2{,}45$ m.\nb) Je mets tout en cm : $1{,}8$ m $= 180$ cm.\n$180 + 245 = 425$ cm, soit $4{,}25$ m.\nc) Il doit encore grandir de $500 - 180 = 320$ cm.\n$9 \\times 35 = 315$ : au bout de $9$ jours, il manque encore $5$ cm.\n$10 \\times 35 = 350$ : au bout de $10$ jours, il dépasse $5$ m.\n⛔ Le piège : lire $245$ m. Le bambou grandit de $245$ cm, pas de $245$ m !\nRéponse : a) $245$ cm, soit $2{,}45$ m ; b) $4{,}25$ m ; c) au bout de $10$ jours.",
           schema: ecranSeulement(
@@ -634,6 +730,12 @@ export const exercicesAireLongueur6e: FicheExercicesData = {
           titre: "La guirlande",
           enonce:
             "La classe fabrique une guirlande de $24$ fanions.\nChaque fanion fait $15$ cm de large.\nEntre deux fanions, on laisse $5$ cm.\nOn laisse aussi $50$ cm de ficelle à chaque bout.\na) Combien y a-t-il d'espaces entre les fanions ?\nb) Quelle longueur de ficelle faut-il, en cm puis en m ?\nc) La ficelle se vend en rouleaux de $3$ m. Combien de rouleaux faut-il ?",
+          reponses: [
+            { question: "a)", attendu: "23" },
+            { question: "b) cm", attendu: "575" },
+            { question: "b) m", attendu: "5,75" },
+            { question: "c)", attendu: "2" },
+          ],
           correction:
             "a) Sur le dessin, $4$ fanions ont $3$ espaces : un de moins.\nAvec $24$ fanions, il y a $23$ espaces.\nb) Les fanions : $24 \\times 15 = 360$ cm.\nLes espaces : $23 \\times 5 = 115$ cm.\nLes deux bouts : $2 \\times 50 = 100$ cm.\nEn tout : $360 + 115 + 100 = 575$ cm, soit $5{,}75$ m.\nc) Un rouleau ne suffit pas : $3$ m $< 5{,}75$ m.\nDeux rouleaux font $6$ m : ça suffit. Il restera $25$ cm.\n⛔ Le piège : compter $24$ espaces. Il y a un espace de moins que de fanions.\nRéponse : a) $23$ espaces ; b) $575$ cm, soit $5{,}75$ m ; c) $2$ rouleaux.",
           schema: guirlande(4, 15, 5),

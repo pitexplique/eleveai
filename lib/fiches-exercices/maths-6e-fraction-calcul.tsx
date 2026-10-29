@@ -335,6 +335,12 @@ export const exercicesFractionCalcul6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Calcule.\na) $\\dfrac{1}{4}$ de $28$\nb) $\\dfrac{1}{3}$ de $27$\nc) $\\dfrac{1}{5}$ de $45$\nd) $\\dfrac{1}{10}$ de $70$",
+          reponses: [
+            { question: "a)", attendu: "7" },
+            { question: "b)", attendu: "9" },
+            { question: "c)", attendu: "9" },
+            { question: "d)", attendu: "7" },
+          ],
           correction:
             "Prendre $\\dfrac{1}{4}$, c'est couper en $4$ parts égales. Puis j'en garde une.\na) $28 \\div 4 = 7$.\nb) $27 \\div 3 = 9$.\nc) $45 \\div 5 = 9$.\nd) $70 \\div 10 = 7$.\n⛔ Le piège : multiplier par le dénominateur. $28 \\times 4 = 112$, c'est bien plus que $28$ ! Une part d'un tout est plus petite que le tout.\nRéponse : a) $7$ ; b) $9$ ; c) $9$ ; d) $7$.",
           schema: ecranSeulement(partage("28", 4, "7", [1])),
@@ -342,6 +348,12 @@ export const exercicesFractionCalcul6e: FicheExercicesData = {
         },
         {
           enonce: "Calcule.\na) $\\dfrac{2}{3}$ de $18$\nb) $\\dfrac{3}{5}$ de $40$\nc) $\\dfrac{5}{6}$ de $24$\nd) $\\dfrac{3}{10}$ de $50$",
+          reponses: [
+            { question: "a)", attendu: "12" },
+            { question: "b)", attendu: "24" },
+            { question: "c)", attendu: "20" },
+            { question: "d)", attendu: "15" },
+          ],
           correction:
             "Je cherche d'abord UNE part : je divise par le nombre du bas. Puis j'en prends autant que le nombre du haut.\na) $18 \\div 3 = 6$, puis $2 \\times 6 = 12$.\nb) $40 \\div 5 = 8$, puis $3 \\times 8 = 24$.\nc) $24 \\div 6 = 4$, puis $5 \\times 4 = 20$.\nd) $50 \\div 10 = 5$, puis $3 \\times 5 = 15$.\n⛔ Le piège : s'arrêter après la division. $40 \\div 5 = 8$, c'est UN cinquième. Il en faut trois.\nRéponse : a) $12$ ; b) $24$ ; c) $20$ ; d) $15$.",
           schema: partage("40", 5, "8", [3]),
@@ -349,6 +361,12 @@ export const exercicesFractionCalcul6e: FicheExercicesData = {
         },
         {
           enonce: "Calcule.\na) $\\dfrac{2}{7} + \\dfrac{3}{7}$\nb) $\\dfrac{4}{9} + \\dfrac{4}{9}$\nc) $\\dfrac{1}{10} + \\dfrac{6}{10}$\nd) $\\dfrac{5}{8} + \\dfrac{3}{8}$",
+          reponses: [
+            { question: "a)", attendu: "5/7" },
+            { question: "b)", attendu: "8/9" },
+            { question: "c)", attendu: "7/10" },
+            { question: "d)", attendu: "1" },
+          ],
           correction:
             "Les parts ont la même taille : j'ajoute seulement le nombre de parts.\na) $2$ septièmes et $3$ septièmes : $\\dfrac{2}{7} + \\dfrac{3}{7} = \\dfrac{5}{7}$.\nb) $\\dfrac{4}{9} + \\dfrac{4}{9} = \\dfrac{8}{9}$.\nc) $\\dfrac{1}{10} + \\dfrac{6}{10} = \\dfrac{7}{10}$.\nd) $\\dfrac{5}{8} + \\dfrac{3}{8} = \\dfrac{8}{8} = 1$ : la barre est pleine.\n⛔ Le piège : ajouter aussi les dénominateurs et écrire $\\dfrac{5}{14}$. Des septièmes plus des septièmes donnent des septièmes.\nRéponse : a) $\\dfrac{5}{7}$ ; b) $\\dfrac{8}{9}$ ; c) $\\dfrac{7}{10}$ ; d) $1$.",
           schema: ecranSeulement(
@@ -361,6 +379,12 @@ export const exercicesFractionCalcul6e: FicheExercicesData = {
         },
         {
           enonce: "Calcule.\na) $\\dfrac{7}{9} - \\dfrac{2}{9}$\nb) $\\dfrac{9}{10} - \\dfrac{4}{10}$\nc) $\\dfrac{6}{5} - \\dfrac{2}{5}$\nd) $1 - \\dfrac{3}{8}$",
+          reponses: [
+            { question: "a)", attendu: "5/9" },
+            { question: "b)", attendu: "1/2" },
+            { question: "c)", attendu: "4/5" },
+            { question: "d)", attendu: "5/8" },
+          ],
           correction:
             "Même dénominateur : je retire des parts de même taille.\na) $\\dfrac{7}{9} - \\dfrac{2}{9} = \\dfrac{5}{9}$.\nb) $\\dfrac{9}{10} - \\dfrac{4}{10} = \\dfrac{5}{10}$. C'est la moitié : $\\dfrac{5}{10} = \\dfrac{1}{2}$.\nc) $\\dfrac{6}{5} - \\dfrac{2}{5} = \\dfrac{4}{5}$.\nd) $1$, ce sont $8$ huitièmes : $1 - \\dfrac{3}{8} = \\dfrac{8}{8} - \\dfrac{3}{8} = \\dfrac{5}{8}$.\n⛔ Le piège : soustraire aussi les dénominateurs. $10 - 10 = 0$ : une fraction ne peut pas avoir $0$ en bas.\nRéponse : a) $\\dfrac{5}{9}$ ; b) $\\dfrac{5}{10} = \\dfrac{1}{2}$ ; c) $\\dfrac{4}{5}$ ; d) $\\dfrac{5}{8}$.",
           schema: barres([
@@ -371,6 +395,12 @@ export const exercicesFractionCalcul6e: FicheExercicesData = {
         },
         {
           enonce: "Calcule.\na) $4 \\times \\dfrac{2}{9}$\nb) $3 \\times \\dfrac{3}{10}$\nc) $\\dfrac{2}{11} \\times 5$\nd) $7 \\times \\dfrac{1}{7}$",
+          reponses: [
+            { question: "a)", attendu: "8/9" },
+            { question: "b)", attendu: "9/10" },
+            { question: "c)", attendu: "10/11" },
+            { question: "d)", attendu: "1" },
+          ],
           correction:
             "Multiplier par $4$, c'est ajouter $4$ fois la même fraction. Je multiplie le numérateur. Le dénominateur ne change pas.\na) $4 \\times \\dfrac{2}{9} = \\dfrac{4 \\times 2}{9} = \\dfrac{8}{9}$.\nb) $3 \\times \\dfrac{3}{10} = \\dfrac{9}{10}$.\nc) $\\dfrac{2}{11} \\times 5 = \\dfrac{10}{11}$. L'ordre ne change rien.\nd) $7 \\times \\dfrac{1}{7} = \\dfrac{7}{7} = 1$.\n⛔ Le piège : multiplier aussi le bas. On trouverait $\\dfrac{8}{36}$, qui est égal à $\\dfrac{2}{9}$ : on n'aurait rien multiplié !\nRéponse : a) $\\dfrac{8}{9}$ ; b) $\\dfrac{9}{10}$ ; c) $\\dfrac{10}{11}$ ; d) $1$.",
           schema: ecranSeulement(
@@ -388,6 +418,12 @@ export const exercicesFractionCalcul6e: FicheExercicesData = {
         },
         {
           enonce: "Calcule. Écris d'abord les deux fractions avec le même dénominateur.\na) $\\dfrac{1}{3} + \\dfrac{1}{6}$\nb) $\\dfrac{3}{8} + \\dfrac{1}{4}$\nc) $\\dfrac{9}{10} - \\dfrac{3}{5}$\nd) $\\dfrac{1}{2} + \\dfrac{3}{8}$",
+          reponses: [
+            { question: "a)", attendu: "1/2" },
+            { question: "b)", attendu: "5/8" },
+            { question: "c)", attendu: "3/10" },
+            { question: "d)", attendu: "7/8" },
+          ],
           correction:
             "Un dénominateur est un multiple de l'autre. Je redécoupe les plus grosses parts.\na) $\\dfrac{1}{3} = \\dfrac{2}{6}$. Donc $\\dfrac{2}{6} + \\dfrac{1}{6} = \\dfrac{3}{6}$. C'est la moitié : $\\dfrac{3}{6} = \\dfrac{1}{2}$.\nb) $\\dfrac{1}{4} = \\dfrac{2}{8}$. Donc $\\dfrac{3}{8} + \\dfrac{2}{8} = \\dfrac{5}{8}$.\nc) $\\dfrac{3}{5} = \\dfrac{6}{10}$. Donc $\\dfrac{9}{10} - \\dfrac{6}{10} = \\dfrac{3}{10}$.\nd) $\\dfrac{1}{2} = \\dfrac{4}{8}$. Donc $\\dfrac{4}{8} + \\dfrac{3}{8} = \\dfrac{7}{8}$.\n⛔ Le piège : ajouter tout de suite les huitièmes et les quarts. Ce ne sont pas des parts de même taille.\nRéponse : a) $\\dfrac{1}{2}$ ; b) $\\dfrac{5}{8}$ ; c) $\\dfrac{3}{10}$ ; d) $\\dfrac{7}{8}$.",
           schema: barres([
@@ -399,6 +435,12 @@ export const exercicesFractionCalcul6e: FicheExercicesData = {
         },
         {
           enonce: "a) Calcule $6 \\times \\dfrac{2}{5}$, puis $\\dfrac{2}{5} \\times 6$. Que remarques-tu ?\nb) Ce résultat est-il plus grand que $1$ ? Écris-le sous la forme « entier + fraction ».\nc) Calcule $4 \\times \\dfrac{5}{12}$, puis simplifie le résultat.",
+          reponses: [
+            { question: "a)", attendu: "12/5" },
+            { question: "b) > 1 ?", attendu: ["oui", "vrai"] },
+            { question: "b) forme", attendu: ["2 + 2/5"], exact: true },
+            { question: "c)", attendu: ["5/3"], exact: true },
+          ],
           correction:
             "a) $6 \\times \\dfrac{2}{5} = \\dfrac{6 \\times 2}{5} = \\dfrac{12}{5}$. Et $\\dfrac{2}{5} \\times 6 = \\dfrac{12}{5}$ aussi.\nLes deux produits sont égaux : l'ordre ne compte pas.\nb) Le haut dépasse le bas : c'est plus grand que $1$.\n$10$ cinquièmes font $2$ unités. Il reste $2$ cinquièmes : $\\dfrac{12}{5} = 2 + \\dfrac{2}{5}$.\nc) $4 \\times \\dfrac{5}{12} = \\dfrac{20}{12}$. Je divise le haut et le bas par $4$ : $\\dfrac{20}{12} = \\dfrac{5}{3}$.\n⛔ Le piège : multiplier aussi le bas par $6$, et écrire $\\dfrac{12}{30}$.\nRéponse : a) $\\dfrac{12}{5}$ dans les deux cas ; b) oui, $2 + \\dfrac{2}{5}$ ; c) $\\dfrac{5}{3}$.",
           schema: barres([
@@ -410,6 +452,12 @@ export const exercicesFractionCalcul6e: FicheExercicesData = {
         },
         {
           enonce: "Complète.\na) $\\dfrac{2}{5}$ de $1$ km $= \\ldots$ m\nb) $\\dfrac{3}{10}$ de $1$ kg $= \\ldots$ g\nc) $\\dfrac{1}{4}$ de $1$ L $= \\ldots$ cL\nd) $\\dfrac{3}{4}$ de $1$ m $= \\ldots$ cm",
+          reponses: [
+            { question: "a)", attendu: "400" },
+            { question: "b)", attendu: "300" },
+            { question: "c)", attendu: "25" },
+            { question: "d)", attendu: "75" },
+          ],
           correction:
             "Je convertis d'abord l'unité en un nombre facile à couper.\na) $1$ km $= 1\\,000$ m. $1\\,000 \\div 5 = 200$, puis $2 \\times 200 = 400$ m.\nb) $1$ kg $= 1\\,000$ g. $1\\,000 \\div 10 = 100$, puis $3 \\times 100 = 300$ g.\nc) $1$ L $= 100$ cL. $100 \\div 4 = 25$ cL.\nd) $1$ m $= 100$ cm. $100 \\div 4 = 25$, puis $3 \\times 25 = 75$ cm.\n⛔ Le piège : chercher les $\\dfrac{2}{5}$ de $1$ tout court. Il faut d'abord écrire $1$ km en mètres.\nRéponse : a) $400$ m ; b) $300$ g ; c) $25$ cL ; d) $75$ cm.",
           schema: partage("1 000 m", 5, "200 m", [2]),
@@ -431,6 +479,11 @@ export const exercicesFractionCalcul6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Une tarte est coupée en $8$ parts égales. Paul mange $\\dfrac{1}{4}$ de la tarte. Zoé mange $\\dfrac{3}{8}$ de la tarte.\na) Écris $\\dfrac{1}{4}$ en huitièmes.\nb) Quelle fraction de la tarte ont-ils mangée à deux ?\nc) Quelle fraction reste-t-il ?",
+          reponses: [
+            { question: "a)", attendu: ["2/8"], exact: true },
+            { question: "b)", attendu: "5/8" },
+            { question: "c)", attendu: "3/8" },
+          ],
           correction:
             "a) Un quart, ce sont $2$ parts sur $8$ : $\\dfrac{1}{4} = \\dfrac{2}{8}$.\nb) $\\dfrac{2}{8} + \\dfrac{3}{8} = \\dfrac{5}{8}$.\nc) La tarte entière, c'est $\\dfrac{8}{8}$. Donc $\\dfrac{8}{8} - \\dfrac{5}{8} = \\dfrac{3}{8}$.\n⛔ Le piège : ajouter $\\dfrac{1}{4}$ et $\\dfrac{3}{8}$ sans redécouper. Des quarts et des huitièmes n'ont pas la même taille.\nRéponse : a) $\\dfrac{2}{8}$ ; b) $\\dfrac{5}{8}$ ; c) $\\dfrac{3}{8}$.",
           schema: barres([
@@ -442,6 +495,10 @@ export const exercicesFractionCalcul6e: FicheExercicesData = {
         },
         {
           enonce: "Deux élèves se trompent. Explique l'erreur, puis corrige.\na) Noé : « $\\dfrac{2}{5} + \\dfrac{1}{5} = \\dfrac{3}{10}$. »\nb) Maé : « $3 \\times \\dfrac{2}{7} = \\dfrac{6}{21}$. »",
+          reponses: [
+            { question: "a)", attendu: "3/5" },
+            { question: "b)", attendu: "6/7" },
+          ],
           correction:
             "a) Noé ajoute aussi les dénominateurs. Des cinquièmes plus des cinquièmes, ce sont des cinquièmes : $\\dfrac{2}{5} + \\dfrac{1}{5} = \\dfrac{3}{5}$.\n⭐ Contrôle : $\\dfrac{3}{10}$ est plus petit que $\\dfrac{2}{5} = \\dfrac{4}{10}$. Une somme ne peut pas être plus petite qu'un de ses morceaux.\nb) Maé multiplie aussi le bas. Or $\\dfrac{6}{21} = \\dfrac{2}{7}$ : elle n'a rien multiplié ! Le bon calcul : $3 \\times \\dfrac{2}{7} = \\dfrac{6}{7}$.\n⛔ Le piège : toucher au dénominateur. En ajoutant, ou en multipliant par un entier, les parts gardent leur taille.\nRéponse : a) $\\dfrac{3}{5}$ ; b) $\\dfrac{6}{7}$.",
           schema: ecranSeulement(
@@ -454,6 +511,11 @@ export const exercicesFractionCalcul6e: FicheExercicesData = {
         },
         {
           enonce: "Une classe compte $28$ élèves. Les $\\dfrac{3}{7}$ viennent à vélo. Le quart vient en bus. Les autres viennent à pied.\na) Combien d'élèves viennent à vélo ?\nb) Combien viennent en bus ?\nc) Combien viennent à pied ?",
+          reponses: [
+            { question: "a)", attendu: "12" },
+            { question: "b)", attendu: "7" },
+            { question: "c)", attendu: "9" },
+          ],
           correction:
             "a) $28 \\div 7 = 4$ : un septième de la classe, c'est $4$ élèves. Puis $3 \\times 4 = 12$ élèves à vélo.\nb) Le quart : $28 \\div 4 = 7$ élèves en bus.\nc) $12 + 7 = 19$ élèves viennent à vélo ou en bus. Donc $28 - 19 = 9$ élèves à pied.\n⛔ Le piège : prendre le quart des élèves qui restent après le vélo. « Le quart » parle de TOUTE la classe : $28$ élèves.\nRéponse : a) $12$ élèves ; b) $7$ élèves ; c) $9$ élèves.",
           schema: grille(4, 7, [
@@ -464,6 +526,11 @@ export const exercicesFractionCalcul6e: FicheExercicesData = {
         },
         {
           enonce: "Calcule. Les dénominateurs ne sont pas multiples l'un de l'autre : j'utilise le dénominateur donné.\na) $\\dfrac{1}{2} + \\dfrac{1}{3}$, en sixièmes\nb) $\\dfrac{3}{4} - \\dfrac{2}{3}$, en douzièmes\nc) $\\dfrac{2}{5} + \\dfrac{1}{2}$, en dixièmes",
+          reponses: [
+            { question: "a)", attendu: ["5/6"], exact: true },
+            { question: "b)", attendu: ["1/12"], exact: true },
+            { question: "c)", attendu: ["9/10"], exact: true },
+          ],
           correction:
             "a) $\\dfrac{1}{2} = \\dfrac{3}{6}$ et $\\dfrac{1}{3} = \\dfrac{2}{6}$. Donc $\\dfrac{3}{6} + \\dfrac{2}{6} = \\dfrac{5}{6}$.\nb) $\\dfrac{3}{4} = \\dfrac{9}{12}$ et $\\dfrac{2}{3} = \\dfrac{8}{12}$. Donc $\\dfrac{9}{12} - \\dfrac{8}{12} = \\dfrac{1}{12}$.\nc) $\\dfrac{2}{5} = \\dfrac{4}{10}$ et $\\dfrac{1}{2} = \\dfrac{5}{10}$. Donc $\\dfrac{4}{10} + \\dfrac{5}{10} = \\dfrac{9}{10}$.\n⛔ Le piège du a) : écrire $\\dfrac{2}{5}$. Or $\\dfrac{2}{5}$ est plus petit que $\\dfrac{1}{2}$ : impossible pour une somme.\nRéponse : a) $\\dfrac{5}{6}$ ; b) $\\dfrac{1}{12}$ ; c) $\\dfrac{9}{10}$.",
           schema: ecranSeulement(
@@ -477,6 +544,12 @@ export const exercicesFractionCalcul6e: FicheExercicesData = {
         },
         {
           enonce: "a) Sans calculer : $5 \\times \\dfrac{3}{4}$ est-il plus grand ou plus petit que $5$ ?\nb) Calcule-le, puis écris-le sous la forme « entier + fraction ».\nc) Et $4 \\times \\dfrac{7}{6}$ : plus grand ou plus petit que $4$ ?",
+          reponses: [
+            { question: "a)", attendu: ["plus petit", "plus petit que 5"], exact: true },
+            { question: "b) calc.", attendu: "15/4" },
+            { question: "b) forme", attendu: ["3 + 3/4"], exact: true },
+            { question: "c)", attendu: ["plus grand", "plus grand que 4"], exact: true },
+          ],
           correction:
             "a) $\\dfrac{3}{4}$ est plus petit que $1$. Donc $5 \\times \\dfrac{3}{4}$ est plus petit que $5 \\times 1 = 5$.\nb) $5 \\times \\dfrac{3}{4} = \\dfrac{15}{4}$. Or $12$ quarts font $3$ unités : $\\dfrac{15}{4} = 3 + \\dfrac{3}{4}$. C'est bien moins que $5$.\nc) $\\dfrac{7}{6}$ est plus grand que $1$. Donc le produit est plus grand que $4$.\nJe vérifie : $4 \\times \\dfrac{7}{6} = \\dfrac{28}{6}$. Et $24$ sixièmes font $4$ : $\\dfrac{28}{6} = 4 + \\dfrac{4}{6}$.\n⛔ Le piège : croire qu'une multiplication agrandit toujours. Multiplier par une fraction plus petite que $1$ donne un résultat plus PETIT.\nRéponse : a) plus petit ; b) $\\dfrac{15}{4} = 3 + \\dfrac{3}{4}$ ; c) plus grand, $\\dfrac{28}{6} = 4 + \\dfrac{4}{6}$.",
           schema: droiteRel(0, 5, 0.25, [{ value: 3.75, label: "15/4" }], { nombres: 1 }),
@@ -484,6 +557,12 @@ export const exercicesFractionCalcul6e: FicheExercicesData = {
         },
         {
           enonce: "Pour une pâte à crêpes, il faut $\\dfrac{3}{4}$ L de lait. Léo fait $3$ fois la recette.\na) Quelle quantité de lait lui faut-il, en fraction de litre ?\nb) Écris ce résultat sous la forme « entier + fraction », puis en décimal.\nc) Léo a une bouteille de $2$ L. Est-ce assez ?",
+          reponses: [
+            { question: "a)", attendu: "9/4" },
+            { question: "b) forme", attendu: ["2 + 1/4"], exact: true },
+            { question: "b) déc", attendu: ["2,25"], exact: true },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $3 \\times \\dfrac{3}{4} = \\dfrac{9}{4}$ L.\nb) $8$ quarts font $2$ L : $\\dfrac{9}{4} = 2 + \\dfrac{1}{4}$.\nUn quart de litre, c'est $0{,}25$ L. Donc $\\dfrac{9}{4}$ L, c'est $2{,}25$ L.\nc) $2{,}25 > 2$ : non, il manque $\\dfrac{1}{4}$ L.\n⛔ Le piège : multiplier aussi le bas, et trouver $\\dfrac{9}{12}$. Trois recettes demandent PLUS de lait qu'une seule.\nRéponse : a) $\\dfrac{9}{4}$ L ; b) $2 + \\dfrac{1}{4}$, soit $2{,}25$ L ; c) non, il manque $\\dfrac{1}{4}$ L.",
           schema: ecranSeulement(
@@ -497,6 +576,13 @@ export const exercicesFractionCalcul6e: FicheExercicesData = {
         },
         {
           enonce: "Un jardin a une aire de $720$ m². Le potager occupe $\\dfrac{2}{9}$ du jardin. Le verger occupe $\\dfrac{4}{9}$ du jardin. Le reste est une pelouse.\na) Quelle fraction du jardin occupent le potager et le verger ensemble ?\nb) Quelle fraction du jardin occupe la pelouse ?\nc) Calcule l'aire de chaque partie.",
+          reponses: [
+            { question: "a)", attendu: "6/9" },
+            { question: "b)", attendu: "3/9" },
+            { question: "c) pot.", attendu: "160" },
+            { question: "c) verg.", attendu: "320" },
+            { question: "c) pel.", attendu: "240" },
+          ],
           correction:
             "a) $\\dfrac{2}{9} + \\dfrac{4}{9} = \\dfrac{6}{9}$.\nb) Le jardin entier, c'est $\\dfrac{9}{9}$. La pelouse : $\\dfrac{9}{9} - \\dfrac{6}{9} = \\dfrac{3}{9}$. C'est aussi $\\dfrac{1}{3}$.\nc) Un neuvième du jardin : $720 \\div 9 = 80$ m².\nPotager : $2 \\times 80 = 160$ m². Verger : $4 \\times 80 = 320$ m². Pelouse : $3 \\times 80 = 240$ m².\n⭐ Contrôle : $160 + 320 + 240 = 720$ m².\n⛔ Le piège : oublier que le jardin entier vaut $\\dfrac{9}{9}$, et répondre $\\dfrac{3}{6}$ pour la pelouse.\nRéponse : a) $\\dfrac{6}{9}$ ; b) $\\dfrac{3}{9}$ ; c) $160$ m², $320$ m² et $240$ m².",
           schema: partage("720 m²", 9, "80", [2, 4], ["potager", "verger", "pelouse"]),
@@ -504,6 +590,12 @@ export const exercicesFractionCalcul6e: FicheExercicesData = {
         },
         {
           enonce: "Une grenouille fait des bonds de $\\dfrac{3}{5}$ de mètre, tous pareils. Elle part de $0$.\na) Où est-elle après $4$ bonds ? Donne une fraction.\nb) Écris ce nombre sous la forme « entier + fraction », puis en décimal.\nc) Combien de bonds lui faut-il pour dépasser $3$ m ?",
+          reponses: [
+            { question: "a)", attendu: "12/5" },
+            { question: "b) forme", attendu: ["2 + 2/5"], exact: true },
+            { question: "b) déc", attendu: ["2,4"], exact: true },
+            { question: "c)", attendu: "6" },
+          ],
           correction:
             "a) $4 \\times \\dfrac{3}{5} = \\dfrac{12}{5}$ m.\nb) $10$ cinquièmes font $2$ : $\\dfrac{12}{5} = 2 + \\dfrac{2}{5}$.\nEt $\\dfrac{2}{5} = \\dfrac{4}{10} = 0{,}4$. Donc $\\dfrac{12}{5}$ m, c'est $2{,}4$ m.\nc) $3$ m, ce sont $15$ cinquièmes. Chaque bond fait $3$ cinquièmes.\nAprès $5$ bonds : $5 \\times \\dfrac{3}{5} = \\dfrac{15}{5} = 3$ m pile.\nIl faut donc $6$ bonds pour DÉPASSER $3$ m.\n⛔ Le piège du c) : répondre $5$ bonds. Avec $5$ bonds, elle est pile à $3$ m : elle ne l'a pas dépassé.\nRéponse : a) $\\dfrac{12}{5}$ m ; b) $2 + \\dfrac{2}{5} = 2{,}4$ m ; c) $6$ bonds.",
           schema: droiteRel(0, 3, 0.2, [{ value: 2.4, label: "12/5" }], {
@@ -534,6 +626,12 @@ export const exercicesFractionCalcul6e: FicheExercicesData = {
         {
           titre: "Le goûter",
           enonce: "Une pizza est coupée en $12$ parts égales. Nina mange $\\dfrac{1}{3}$ de la pizza, Oscar $\\dfrac{1}{6}$ et Lucas $\\dfrac{1}{4}$.\na) Écris chaque fraction en douzièmes.\nb) Quelle fraction de la pizza ont-ils mangée à trois ?\nc) Quelle fraction reste-t-il ?\nd) Combien de parts reste-t-il ?",
+          reponses: [
+            { question: "a)", attendu: ["4/12 ; 2/12 ; 3/12"], exact: true },
+            { question: "b)", attendu: "9/12" },
+            { question: "c)", attendu: "3/12" },
+            { question: "d)", attendu: "3" },
+          ],
           correction:
             "a) $12$ est un multiple de $3$, de $6$ et de $4$.\n$\\dfrac{1}{3} = \\dfrac{4}{12}$ ; $\\dfrac{1}{6} = \\dfrac{2}{12}$ ; $\\dfrac{1}{4} = \\dfrac{3}{12}$.\nb) $\\dfrac{4}{12} + \\dfrac{2}{12} + \\dfrac{3}{12} = \\dfrac{9}{12}$. C'est aussi $\\dfrac{3}{4}$.\nc) $\\dfrac{12}{12} - \\dfrac{9}{12} = \\dfrac{3}{12}$, soit $\\dfrac{1}{4}$ de la pizza.\nd) $\\dfrac{3}{12}$, ce sont $3$ parts sur $12$ : il reste $3$ parts.\n⛔ Le piège : ajouter en haut et en bas, et trouver $\\dfrac{3}{13}$. Les parts doivent d'abord avoir la même taille : des douzièmes.\nRéponse : a) $\\dfrac{4}{12}$, $\\dfrac{2}{12}$, $\\dfrac{3}{12}$ ; b) $\\dfrac{9}{12}$ ; c) $\\dfrac{3}{12}$ ; d) $3$ parts.",
           schema: grille(2, 6, [
@@ -546,6 +644,13 @@ export const exercicesFractionCalcul6e: FicheExercicesData = {
         {
           titre: "La randonnée en trois jours",
           enonce: "Une randonnée fait $18$ km. Le premier jour, on parcourt $\\dfrac{1}{3}$ du trajet. Le deuxième jour, on parcourt $\\dfrac{4}{9}$ du trajet. Le troisième jour, on finit.\na) Quelle fraction du trajet reste-t-il pour le troisième jour ?\nb) Combien de kilomètres parcourt-on chaque jour ?\nc) Vérifie : la somme fait-elle $18$ km ?",
+          reponses: [
+            { question: "a)", attendu: "2/9" },
+            { question: "b) j1", attendu: "6" },
+            { question: "b) j2", attendu: "8" },
+            { question: "b) j3", attendu: "4" },
+            { question: "c)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) $\\dfrac{1}{3} = \\dfrac{3}{9}$. Les deux premiers jours : $\\dfrac{3}{9} + \\dfrac{4}{9} = \\dfrac{7}{9}$.\nIl reste $\\dfrac{9}{9} - \\dfrac{7}{9} = \\dfrac{2}{9}$ du trajet.\nb) Un neuvième du trajet : $18 \\div 9 = 2$ km.\nJour 1 : $3 \\times 2 = 6$ km. Jour 2 : $4 \\times 2 = 8$ km. Jour 3 : $2 \\times 2 = 4$ km.\nc) $6 + 8 + 4 = 18$ km. C'est juste.\n⛔ Le piège : calculer le jour 2 sur ce qui reste après le jour 1. Les $\\dfrac{4}{9}$ parlent du trajet ENTIER.\nRéponse : a) $\\dfrac{2}{9}$ ; b) $6$ km, $8$ km et $4$ km ; c) oui.",
           schema: partage("18 km", 9, "2", [3, 4], ["jour 1", "jour 2", "jour 3"]),
@@ -554,6 +659,12 @@ export const exercicesFractionCalcul6e: FicheExercicesData = {
         {
           titre: "L'argent de poche",
           enonce: "Sofia a $60$ €. Elle dépense les $\\dfrac{2}{5}$ pour un livre. Elle dépense le quart pour une place de cinéma.\na) Combien coûte le livre ? Et la place ?\nb) Combien d'euros lui reste-t-il ?\nc) Quelle fraction de son argent lui reste-t-il ?",
+          reponses: [
+            { question: "a) livre", attendu: "24" },
+            { question: "a) place", attendu: "15" },
+            { question: "b)", attendu: "21" },
+            { question: "c)", attendu: "7/20" },
+          ],
           correction:
             "a) Livre : $60 \\div 5 = 12$, puis $2 \\times 12 = 24$ €.\nPlace : $60 \\div 4 = 15$ €.\nb) Elle dépense $24 + 15 = 39$ €. Il lui reste $60 - 39 = 21$ €.\nc) $21$ € sur $60$ € : $\\dfrac{21}{60}$. Je divise le haut et le bas par $3$ : $\\dfrac{21}{60} = \\dfrac{7}{20}$.\n⭐ Sur le dessin, les $60$ € sont coupés en $20$ carreaux de $3$ €. Il reste $7$ carreaux.\n⭐ Autre chemin : $\\dfrac{2}{5} = \\dfrac{8}{20}$ et $\\dfrac{1}{4} = \\dfrac{5}{20}$. Elle dépense $\\dfrac{13}{20}$, il reste $\\dfrac{7}{20}$.\n⛔ Le piège du a) : diviser $60$ par $2$, le nombre du haut. Je divise par le nombre du BAS.\nRéponse : a) $24$ € et $15$ € ; b) $21$ € ; c) $\\dfrac{21}{60} = \\dfrac{7}{20}$.",
           schema: grille(4, 5, [
@@ -565,6 +676,12 @@ export const exercicesFractionCalcul6e: FicheExercicesData = {
         {
           titre: "L'arrosage",
           enonce: "Chaque jour, on verse $\\dfrac{3}{10}$ L d'eau à une plante.\na) Quelle quantité d'eau reçoit-elle en $7$ jours ? Donne une fraction, puis un décimal.\nb) Est-ce plus ou moins que $2$ L ?\nc) Un arrosoir contient $5$ L. Pendant combien de jours entiers peut-on arroser la plante ?",
+          reponses: [
+            { question: "a) frac", attendu: ["21/10"], exact: true },
+            { question: "a) déc", attendu: ["2,1"], exact: true },
+            { question: "b)", attendu: ["plus", "plus que 2 L"], exact: true },
+            { question: "c)", attendu: "16" },
+          ],
           correction:
             "a) $7 \\times \\dfrac{3}{10} = \\dfrac{21}{10}$ L, soit $2{,}1$ L.\nb) $2{,}1 > 2$ : un peu plus que $2$ L.\nc) $5$ L, ce sont $50$ dixièmes de litre. Chaque jour prend $3$ dixièmes.\n$16$ jours : $16 \\times \\dfrac{3}{10} = \\dfrac{48}{10} = 4{,}8$ L. Ça passe.\n$17$ jours : $17 \\times \\dfrac{3}{10} = \\dfrac{51}{10} = 5{,}1$ L. C'est trop.\nOn peut arroser pendant $16$ jours entiers.\n⛔ Le piège du a) : écrire $\\dfrac{21}{70}$. Sept jours donnent PLUS d'eau qu'un seul jour.\nRéponse : a) $\\dfrac{21}{10}$ L, soit $2{,}1$ L ; b) plus ; c) $16$ jours.",
           schema: ecranSeulement(

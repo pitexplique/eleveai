@@ -309,6 +309,12 @@ export const exercicesStatDonnee6e: FicheExercicesData = {
         {
           enonce:
             "Un centre de soins accueille des hérissons blessés. Le diagramme donne le nombre de hérissons reçus chaque mois.\na) Combien de hérissons en avril ?\nb) Quel mois en a reçu le plus ?\nc) Quel mois en a reçu le moins ?\nd) Combien de hérissons en tout, sur les quatre mois ?",
+          reponses: [
+            { question: "a)", attendu: "10" },
+            { question: "b)", attendu: ["mai"] },
+            { question: "c)", attendu: ["mars"] },
+            { question: "d)", attendu: "32" },
+          ],
           figure: barres([
             { label: "mars", value: 4 },
             { label: "avril", value: 10 },
@@ -322,6 +328,12 @@ export const exercicesStatDonnee6e: FicheExercicesData = {
         {
           enonce:
             "Un parc compte $40$ arbres. Le diagramme circulaire montre les espèces.\na) Quelle espèce occupe la moitié du disque ? Combien d'arbres ?\nb) Les érables occupent un quart du disque. Combien d'érables ?\nc) Les pins et les tilleuls ont des secteurs de même taille. Combien de pins ?",
+          reponses: [
+            { question: "a) arbre", attendu: ["chêne", "chênes", "les chênes", "le chêne"] },
+            { question: "a) nb", attendu: "20" },
+            { question: "b)", attendu: "10" },
+            { question: "c)", attendu: "5" },
+          ],
           figure: camembert([
             { label: "chênes", value: 20 },
             { label: "pins", value: 5 },
@@ -343,6 +355,11 @@ export const exercicesStatDonnee6e: FicheExercicesData = {
         {
           enonce:
             "Ce tableau donne les livres empruntés au CDI par deux classes, en septembre.\na) Combien de BD la 6e B a-t-elle empruntées ?\nb) Combien de romans la 6e A a-t-elle empruntés ?\nc) Quel nombre est dans la ligne « albums », colonne « 6e A » ?\nd) Quelle case contient le nombre $9$ ?",
+          reponses: [
+            { question: "a)", attendu: "25" },
+            { question: "b)", attendu: "14" },
+            { question: "c)", attendu: "6" },
+          ],
           figure: grille(["livres", "6e A", "6e B"], [
             ["romans", "14", "9"],
             ["BD", "21", "25"],
@@ -355,6 +372,12 @@ export const exercicesStatDonnee6e: FicheExercicesData = {
         {
           enonce:
             "Quatre classes ont ramassé des déchets dans la nature. La 6e A a rempli $12$ sacs. La 6e B, $17$ sacs. La 6e C, $9$ sacs. La 6e D, $14$ sacs.\na) Quelle classe a rempli le plus de sacs ?\nb) Combien de sacs de plus pour la 6e B que pour la 6e C ?\nc) Range les classes, de celle qui a le plus de sacs à celle qui en a le moins.\nd) Combien de sacs manquait-il à la 6e C pour égaler la 6e D ?",
+          reponses: [
+            { question: "a)", attendu: ["6e B", "la 6e B", "B"] },
+            { question: "b)", attendu: "8" },
+            { question: "c)", attendu: ["B, D, A, C", "B D A C", "B-D-A-C", "B > D > A > C"] },
+            { question: "d)", attendu: "5" },
+          ],
           correction:
             "a) Le plus grand nombre est $17$ : c'est la 6e B.\nb) Je fais la différence, le grand moins le petit : $17 - 9 = 8$ sacs.\nc) Je range les nombres : $17$, puis $14$, puis $12$, puis $9$.\nL'ordre est : 6e B, 6e D, 6e A, 6e C.\nd) $14 - 9 = 5$ sacs.\n⛔ Le piège : écrire $9 - 17$. Pour un écart, j'enlève toujours le petit nombre du grand.\nRéponse : a) la 6e B ; b) $8$ sacs ; c) B, D, A, C ; d) $5$ sacs.",
           schema: ecranSeulement(
@@ -370,6 +393,12 @@ export const exercicesStatDonnee6e: FicheExercicesData = {
         {
           enonce:
             "On a demandé leur sport préféré à $30$ élèves. Hand : $9$. Foot : $12$. Tennis : $6$. Judo : $3$.\nPour chaque phrase, dis si elle est vraie ou fausse. Explique avec les nombres.\na) « Le foot est le sport le plus choisi. »\nb) « Le hand est choisi deux fois plus que le tennis. »\nc) « La moitié des élèves préfère le foot. »\nd) « Le tennis est choisi deux fois plus que le judo. »",
+          reponses: [
+            { question: "a)", attendu: ["vrai", "oui"] },
+            { question: "b)", attendu: ["faux", "non"] },
+            { question: "c)", attendu: ["faux", "non"] },
+            { question: "d)", attendu: ["vrai", "oui"] },
+          ],
           correction:
             "a) Vrai : $12$ est le plus grand nombre.\nb) Deux fois le tennis : $2 \\times 6 = 12$.\nLe hand a $9$ élèves, pas $12$ : c'est faux.\nc) La moitié de $30$ : $30 \\div 2 = 15$.\nLe foot a $12$ élèves, moins que $15$ : c'est faux.\nd) Deux fois le judo : $2 \\times 3 = 6$. C'est le tennis : vrai.\n⛔ Le piège : juger « deux fois plus » à l'œil. Je fais toujours le calcul.\nRéponse : a) vrai ; b) faux ; c) faux ; d) vrai.",
           schema: ecranSeulement(
@@ -385,6 +414,12 @@ export const exercicesStatDonnee6e: FicheExercicesData = {
         {
           enonce:
             "Un jour de printemps, une station météo relève la température toutes les deux heures (en °C).\na) Quelle température à $12$ h ?\nb) À quelle heure fait-il le plus chaud ?\nc) De combien la température monte-t-elle entre $8$ h et $14$ h ?\nd) Entre $14$ h et $16$ h, la température monte-t-elle ou baisse-t-elle ?",
+          reponses: [
+            { question: "a)", attendu: "19" },
+            { question: "b)", attendu: "14" },
+            { question: "c)", attendu: "9" },
+            { question: "d)", attendu: ["baisse", "elle baisse", "elle descend", "descend"] },
+          ],
           figure: pointsRelies(["8 h", "10 h", "12 h", "14 h", "16 h"], [12, 15, 19, 21, 18], 5),
           correction:
             "En bas, je lis l'heure. Au-dessus du point, je lis la température.\na) Au-dessus de « 12 h », le point porte $19$ : il fait $19$ °C.\nb) Le point le plus haut est à $14$ h : $21$ °C.\nc) À $8$ h, $12$ °C. À $14$ h, $21$ °C.\n$21 - 12 = 9$ : elle monte de $9$ °C.\nd) La ligne descend : de $21$ °C à $18$ °C, elle baisse de $3$ °C.\n⛔ Le piège : lire l'heure à la place de la température. « 12 h » est l'heure, pas la réponse.\nRéponse : a) $19$ °C ; b) à $14$ h ; c) $9$ °C ; d) elle baisse.",
@@ -393,6 +428,12 @@ export const exercicesStatDonnee6e: FicheExercicesData = {
         {
           enonce:
             "Une famille pèse ses déchets pendant une semaine (en kg). Voici le diagramme circulaire.\na) Combien de kg de verre ?\nb) Quel déchet pèse le plus lourd ?\nc) Combien pèsent tous les déchets de la semaine ?\nd) Quel déchet fait exactement le quart du total ?",
+          reponses: [
+            { question: "a)", attendu: "2" },
+            { question: "b)", attendu: ["épluchures", "les épluchures"] },
+            { question: "c)", attendu: "20" },
+            { question: "d)", attendu: ["autres", "les autres"] },
+          ],
           figure: camembert([
             { label: "épluchures", value: 6 },
             { label: "papier", value: 3 },
@@ -407,6 +448,10 @@ export const exercicesStatDonnee6e: FicheExercicesData = {
         {
           enonce:
             "Au goûter, $28$ élèves choisissent un fruit. $11$ prennent une pomme. $4$ prennent une banane. $8$ prennent une poire. Les autres prennent une orange.\na) Combien d'élèves prennent une orange ?\nb) Combien d'élèves ne prennent pas de pomme ?",
+          reponses: [
+            { question: "a)", attendu: "5" },
+            { question: "b)", attendu: "17" },
+          ],
           correction:
             "a) J'additionne les fruits connus : $11 + 4 + 8 = 23$.\nIl y a $28$ élèves en tout : $28 - 23 = 5$ oranges.\nContrôle : $11 + 4 + 8 + 5 = 28$. Le compte est bon.\nb) Tous les élèves, moins ceux qui prennent une pomme : $28 - 11 = 17$.\n⛔ Le piège au b) : répondre seulement les poires. « Pas de pomme », c'est banane, poire OU orange : $4 + 8 + 5 = 17$.\nRéponse : a) $5$ élèves ; b) $17$ élèves.",
           schema: ecranSeulement(tableau(["fruit", "pomme", "banane", "poire", "orange"], ["élèves", 11, 4, 8, 5], true)),
@@ -429,6 +474,12 @@ export const exercicesStatDonnee6e: FicheExercicesData = {
         {
           enonce:
             "Une équipe de hand a joué cinq matchs. Elle a marqué $24$, $31$, $19$, $27$ et $31$ buts.\na) Dans quel match a-t-elle marqué le moins ?\nb) Dans quels matchs a-t-elle marqué le plus ?\nc) Quel est l'écart entre son meilleur et son moins bon match ?\nd) Combien de buts en tout ?",
+          reponses: [
+            { question: "a)", attendu: ["3", "match 3", "le match 3"] },
+            { question: "b)", attendu: "2 ; 5" },
+            { question: "c)", attendu: "12" },
+            { question: "d)", attendu: "132" },
+          ],
           correction:
             "Je numérote les matchs de $1$ à $5$, dans l'ordre.\na) Le plus petit nombre est $19$ : c'est le match $3$.\nb) Le plus grand nombre est $31$. Il apparaît deux fois : matchs $2$ et $5$.\nc) $31 - 19 = 12$ buts d'écart.\nd) $24 + 31 + 19 + 27 + 31 = 132$ buts.\n⛔ Le piège au b) : s'arrêter au premier $31$. Je relis toute la liste.\nRéponse : a) le match $3$ ; b) les matchs $2$ et $5$ ; c) $12$ buts ; d) $132$ buts.",
           schema: ecranSeulement(
@@ -445,6 +496,13 @@ export const exercicesStatDonnee6e: FicheExercicesData = {
         {
           enonce:
             "Une classe prépare une sortie. Le budget total est de $600$ €. Les entrées du musée coûtent $100$ €.\na) Quelle dépense occupe la moitié du disque ? Combien coûte-t-elle ?\nb) Le repas occupe un quart du disque. Combien coûte-t-il ?\nc) Combien coûte le goûter ?\nd) Le goûter est-il la plus petite dépense ?",
+          reponses: [
+            { question: "a) poste", attendu: ["car", "le car"] },
+            { question: "a) €", attendu: "300" },
+            { question: "b)", attendu: "150" },
+            { question: "c)", attendu: "50" },
+            { question: "d)", attendu: ["oui", "vrai"] },
+          ],
           figure: camembert([
             { label: "car", value: 300 },
             { label: "entrées", value: 100 },
@@ -466,6 +524,13 @@ export const exercicesStatDonnee6e: FicheExercicesData = {
         {
           enonce:
             "Lors de deux sorties nature, une classe a compté les animaux vus.\na) Combien de papillons le soir ?\nb) Combien d'écureuils en tout ?\nc) Quel moment a vu le plus d'animaux ? Combien de plus ?\nd) Quel animal a été vu plus souvent le soir que le matin ?",
+          reponses: [
+            { question: "a)", attendu: "4" },
+            { question: "b)", attendu: "7" },
+            { question: "c) quand", attendu: ["matin", "le matin"] },
+            { question: "c) écart", attendu: "13" },
+            { question: "d)", attendu: ["écureuils", "les écureuils", "écureuil"] },
+          ],
           figure: grille(["animal", "matin", "soir"], [
             ["oiseaux", "23", "15"],
             ["papillons", "12", "4"],
@@ -478,6 +543,12 @@ export const exercicesStatDonnee6e: FicheExercicesData = {
         {
           enonce:
             "Deux magasins vendent des vélos. Voici leurs ventes de janvier à mars.\na) Les deux diagrammes se ressemblent. Les deux magasins vendent-ils autant ?\nb) En février, combien de vélos le magasin B a-t-il vendus de plus que le A ?\nc) Combien de vélos chaque magasin a-t-il vendus en trois mois ?\nd) Pourquoi les barres ont-elles la même forme ?",
+          reponses: [
+            { question: "a)", attendu: ["non"] },
+            { question: "b)", attendu: "40" },
+            { question: "c) A", attendu: "45" },
+            { question: "c) B", attendu: "135" },
+          ],
           figure: (
             <div className="grid grid-cols-1 min-w-0 gap-3 sm:grid-cols-2 print:grid-cols-2">
               {nomme("Magasin A", barres([
@@ -499,6 +570,12 @@ export const exercicesStatDonnee6e: FicheExercicesData = {
         {
           enonce:
             "On a demandé à $24$ élèves l'heure de leur coucher, un soir d'école. À $20$ h $30$ : $3$ élèves. À $21$ h : $9$. À $21$ h $30$ : $8$. À $22$ h : $4$.\nVrai ou faux ? Explique.\na) « $21$ h est l'heure la plus citée. »\nb) « Plus de la moitié des élèves se couche après $21$ h. »\nc) « Un élève sur huit se couche à $20$ h $30$. »\nd) « Tous les élèves de 6e de France se couchent vers $21$ h. »",
+          reponses: [
+            { question: "a)", attendu: ["vrai", "oui"] },
+            { question: "b)", attendu: ["faux", "non"] },
+            { question: "c)", attendu: ["vrai", "oui"] },
+            { question: "d)", attendu: ["faux", "non"] },
+          ],
           correction:
             "a) Vrai : $9$ est le plus grand nombre.\nb) Après $21$ h : à $21$ h $30$ ou à $22$ h. Cela fait $8 + 4 = 12$ élèves.\nLa moitié de $24$ : $24 \\div 2 = 12$.\n$12$ élèves, c'est la moitié tout juste, pas plus : faux.\nc) Un sur huit : $24 \\div 8 = 3$. Il y a bien $3$ élèves à $20$ h $30$ : vrai.\nd) Faux : on a interrogé $24$ élèves, pas toute la France.\n⛔ Le piège au b) : « plus de la moitié » veut dire plus que $12$. Égal à $12$ ne suffit pas.\nRéponse : a) vrai ; b) faux ; c) vrai ; d) faux.",
           schema: ecranSeulement(
@@ -514,6 +591,12 @@ export const exercicesStatDonnee6e: FicheExercicesData = {
         {
           enonce:
             "Des naturalistes comptent chaque année les nids de faucons dans une région.\na) Combien de nids en $2022$ ?\nb) Quelle année le nombre de nids a-t-il baissé ?\nc) Combien de nids de plus en $2024$ qu'en $2020$ ?\nd) Entre quelles années la hausse est-elle la plus forte ?",
+          reponses: [
+            { question: "a)", attendu: "15" },
+            { question: "b)", attendu: "2023" },
+            { question: "c)", attendu: "11" },
+            { question: "d)", attendu: ["2021 ; 2022", "de 2021 à 2022", "entre 2021 et 2022"] },
+          ],
           figure: pointsRelies(["2020", "2021", "2022", "2023", "2024"], [6, 9, 15, 13, 17], 5),
           correction:
             "a) Au-dessus de $2022$, je lis $15$ nids.\nb) La ligne descend une seule fois : de $15$ en $2022$ à $13$ en $2023$.\nc) $17 - 6 = 11$ nids de plus.\nd) Je calcule chaque hausse, d'une année à l'autre.\nDe $2020$ à $2021$ : $9 - 6 = 3$. De $2021$ à $2022$ : $15 - 9 = 6$.\nDe $2023$ à $2024$ : $17 - 13 = 4$.\nLa plus forte hausse est $6$ : de $2021$ à $2022$. C'est là que la ligne monte le plus raide.\n⛔ Le piège au d) : répondre $2024$, le point le plus haut. La plus forte HAUSSE, c'est la montée la plus raide.\nRéponse : a) $15$ ; b) en $2023$ ; c) $11$ ; d) de $2021$ à $2022$.",
@@ -522,6 +605,12 @@ export const exercicesStatDonnee6e: FicheExercicesData = {
         {
           enonce:
             "Une famille note l'eau utilisée en un jour (en litres). Douche : $80$ L. WC : $40$ L. Linge : $30$ L. Cuisine : $30$ L.\na) Quel usage consomme le plus ?\nb) Combien de litres en tout dans la journée ?\nc) Vrai ou faux : « La douche consomme deux fois plus que les WC. »\nd) Vrai ou faux : « La douche consomme plus que tout le reste réuni. »",
+          reponses: [
+            { question: "a)", attendu: ["douche", "la douche"] },
+            { question: "b)", attendu: "180" },
+            { question: "c)", attendu: ["vrai", "oui"] },
+            { question: "d)", attendu: ["faux", "non"] },
+          ],
           correction:
             "a) Le plus grand nombre est $80$ : c'est la douche.\nb) $80 + 40 + 30 + 30 = 180$ litres.\nc) Deux fois les WC : $2 \\times 40 = 80$. C'est la douche : vrai.\nd) Tout le reste : $40 + 30 + 30 = 100$ litres.\n$80$ est plus petit que $100$ : faux.\n⛔ Le piège au d) : comparer la douche à un seul usage. « Tout le reste », ce sont les trois autres réunis.\nRéponse : a) la douche ; b) $180$ L ; c) vrai ; d) faux.",
           schema: ecranSeulement(
@@ -537,6 +626,13 @@ export const exercicesStatDonnee6e: FicheExercicesData = {
         {
           enonce:
             "Un club d'athlétisme a gagné $24$ médailles cette saison. $4$ sont en or.\na) Quelle couleur occupe la moitié du disque ? Combien de médailles ?\nb) Combien de médailles d'argent ?\nc) L'argent occupe-t-il le tiers du disque ?\nd) Combien de fois plus de bronze que d'or ?",
+          reponses: [
+            { question: "a) coul.", attendu: ["bronze", "le bronze"] },
+            { question: "a) nb", attendu: "12" },
+            { question: "b)", attendu: "8" },
+            { question: "c)", attendu: ["oui", "vrai"] },
+            { question: "d)", attendu: "3" },
+          ],
           figure: camembert([
             { label: "or", value: 4 },
             { label: "argent", value: 8 },
@@ -571,6 +667,12 @@ export const exercicesStatDonnee6e: FicheExercicesData = {
           titre: "Le compteur de vélos",
           enonce:
             "Une ville a installé un compteur sur une piste cyclable. Voici les vélos comptés pendant une semaine.\na) Quel jour passe-t-il le plus de vélos ?\nb) Combien de vélos de plus le dimanche que le mercredi ?\nc) Combien de vélos pendant le week-end ?\nd) Vrai ou faux : « Il passe plus de vélos le week-end que du lundi au vendredi. »",
+          reponses: [
+            { question: "a)", attendu: ["dimanche", "le dimanche"] },
+            { question: "b)", attendu: "260" },
+            { question: "c)", attendu: "1050" },
+            { question: "d)", attendu: ["faux", "non"] },
+          ],
           figure: barres([
             { label: "lun", value: 320 },
             { label: "mar", value: 350 },
@@ -588,6 +690,12 @@ export const exercicesStatDonnee6e: FicheExercicesData = {
           titre: "Le dessert de la cantine",
           enonce:
             "À la cantine, on demande leur dessert préféré aux $40$ élèves de deux classes de 6e. Gâteau : $20$. Yaourt : $8$. Fruit : $10$. Fromage : $2$.\na) Quel dessert est choisi par la moitié des élèves ?\nb) Le cuisinier dit : « Un élève sur quatre choisit un fruit. » A-t-il raison ?\nc) « Fruits et yaourts réunis, c'est presque la moitié. » Est-ce juste ?\nd) Peut-on dire : « Au collège, la moitié des élèves préfère le gâteau » ?",
+          reponses: [
+            { question: "a)", attendu: ["gâteau", "le gâteau"] },
+            { question: "b)", attendu: ["oui", "vrai"] },
+            { question: "c)", attendu: ["oui", "vrai"] },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) La moitié de $40$ : $40 \\div 2 = 20$. C'est le gâteau.\nb) Un sur quatre : $40 \\div 4 = 10$. Il y a bien $10$ fruits : il a raison.\nc) $10 + 8 = 18$. La moitié, c'est $20$.\nIl manque seulement $2$ élèves : « presque la moitié » est juste.\nd) Non. On a interrogé deux classes de 6e seulement.\nLes autres classes du collège peuvent avoir d'autres goûts.\n⛔ Le piège au d) : conclure pour tout le collège avec deux classes.\nRéponse : a) le gâteau ; b) oui ; c) oui ; d) non, on ne peut pas le dire.",
           schema: ecranSeulement(
@@ -604,6 +712,14 @@ export const exercicesStatDonnee6e: FicheExercicesData = {
           titre: "La mer et l'intérieur des terres",
           enonce:
             "Voici la température moyenne de quatre mois, dans deux villes (en °C). La première est au bord de la mer. La seconde est loin de la mer.\na) En juillet, quelle ville est la plus chaude ? De combien ?\nb) En janvier, quel est l'écart entre les deux villes ?\nc) Pour chaque ville, calcule l'écart entre le mois le plus chaud et le plus froid.\nd) Vrai ou faux : « Au bord de la mer, la température change moins dans l'année. »",
+          reponses: [
+            { question: "a) ville", attendu: ["intérieur", "l'intérieur", "la seconde", "loin de la mer"] },
+            { question: "a) écart", attendu: "3" },
+            { question: "b)", attendu: "6" },
+            { question: "c) mer", attendu: "11" },
+            { question: "c) int.", attendu: "20" },
+            { question: "d)", attendu: ["vrai", "oui"] },
+          ],
           figure: grille(["mois", "mer", "intérieur"], [
             ["janvier", "7", "1"],
             ["avril", "11", "10"],
@@ -618,6 +734,12 @@ export const exercicesStatDonnee6e: FicheExercicesData = {
           titre: "Le défi anti-gaspi",
           enonce:
             "La cantine pèse chaque semaine la nourriture jetée (en kg). Voici les cinq premières semaines.\na) Combien de kg jetés la semaine $3$ ?\nb) De combien le poids a-t-il baissé entre la semaine $1$ et la semaine $5$ ?\nc) Entre quelles semaines la baisse est-elle la plus forte ?\nd) Le défi est réussi si le poids baisse d'au moins un tiers. Est-il réussi ?",
+          reponses: [
+            { question: "a)", attendu: "30" },
+            { question: "b)", attendu: "18" },
+            { question: "c)", attendu: ["S2 et S3", "entre S2 et S3", "2 ; 3"] },
+            { question: "d)", attendu: ["oui", "vrai"] },
+          ],
           figure: pointsRelies(["S1", "S2", "S3", "S4", "S5"], [42, 38, 30, 26, 24], 10),
           correction:
             "a) Au-dessus de « S3 », je lis $30$ kg.\nb) Semaine $1$ : $42$ kg. Semaine $5$ : $24$ kg. Baisse : $42 - 24 = 18$ kg.\nc) Je calcule chaque baisse, d'une semaine à l'autre.\n$42 - 38 = 4$, puis $38 - 30 = 8$, puis $30 - 26 = 4$, puis $26 - 24 = 2$.\nLa plus forte baisse est $8$ kg : entre la semaine $2$ et la semaine $3$.\nd) Le tiers du départ : $42 \\div 3 = 14$ kg.\nLe poids a baissé de $18$ kg, plus que $14$ kg : le défi est réussi.\n⛔ Le piège au d) : prendre le tiers de $24$. Le défi se compte à partir du DÉBUT, $42$ kg.\nRéponse : a) $30$ kg ; b) $18$ kg ; c) entre S2 et S3 ; d) oui.",

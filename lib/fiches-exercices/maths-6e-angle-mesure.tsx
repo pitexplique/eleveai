@@ -287,6 +287,11 @@ export const exercicesAngleMesure6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Trois demi-droites partent du point $R$. Un angle est colorié.\na) Quel est son sommet ?\nb) Quels sont ses deux côtés ?\nc) Écris son nom avec trois lettres.",
+          reponses: [
+            { question: "a)", attendu: ["R"] },
+            { question: "b)", attendu: ["[RV) ; [RW)", "RV ; RW"] },
+            { question: "c)", attendu: ["VRW", "WRV"] },
+          ],
           figure: geo({ traits: [{ de: [0, 0], vers: [6, 0] }, { de: [0, 0], vers: [3.5967, 3.4733] }, { de: [0, 0], vers: [-1.873, 4.6359] }], arcs: [{ en: [0, 0], de: [3.5967, 3.4733], vers: [-1.873, 4.6359], plein: true }], points: [{ en: [0, 0], nom: "R", vers: "bas" }, { en: [6, 0], nom: "U", vers: "bas" }, { en: [3.5967, 3.4733], nom: "V", vers: "hd" }, { en: [-1.873, 4.6359], nom: "W", vers: "gauche" }] }),
           correction:
             "a) Le sommet est le point d'où partent les deux côtés. C'est $R$.\nb) Les côtés sont les deux demi-droites qui bordent l'angle colorié. Ce sont $[RV)$ et $[RW)$.\nc) J'écris un point d'un côté, puis le sommet, puis un point de l'autre côté.\nLe nom est $\\widehat{VRW}$. On peut aussi écrire $\\widehat{WRV}$.\n⛔ Le piège : écrire $\\widehat{RVW}$. Le sommet doit être la lettre du MILIEU.\nRéponse : a) $R$ ; b) $[RV)$ et $[RW)$ ; c) $\\widehat{VRW}$.",
@@ -294,6 +299,12 @@ export const exercicesAngleMesure6e: FicheExercicesData = {
         },
         {
           enonce: "Voici quatre angles : $a$, $b$, $c$ et $d$.\nPour chacun, dis s'il est aigu, droit, obtus ou plat.\nTu peux t'aider du coin d'une feuille.",
+          reponses: [
+            { question: "angle a", attendu: ["aigu"] },
+            { question: "angle b", attendu: ["droit"] },
+            { question: "angle c", attendu: ["obtus"] },
+            { question: "angle d", attendu: ["plat"] },
+          ],
           figure: geo({ traits: [{ de: [2.5, 3.5], vers: [5.1, 3.5] }, { de: [2.5, 3.5], vers: [4.8564, 4.5988] }, { de: [8, 3.5], vers: [10.6, 3.5] }, { de: [8, 3.5], vers: [8, 6.1] }, { de: [2.5, 0], vers: [5.1, 0] }, { de: [2.5, 0], vers: [0.2951, 1.3778] }, { de: [8.5, 0], vers: [11.1, 0] }, { de: [8.5, 0], vers: [5.9, 0] }], arcs: [{ en: [2.5, 3.5], de: [5.1, 3.5], vers: [4.8564, 4.5988], label: "a" }, { en: [8, 3.5], de: [10.6, 3.5], vers: [8, 6.1], label: "b" }, { en: [2.5, 0], de: [5.1, 0], vers: [0.2951, 1.3778], label: "c" }, { en: [8.5, 0], de: [11.1, 0], vers: [5.9, 0], label: "d" }] }),
           correction:
             "Je pose le coin de ma feuille sur chaque sommet. Le coin est un angle droit.\nL'angle $a$ est plus fermé que le coin : il est aigu.\nL'angle $b$ colle exactement au coin : il est droit.\nL'angle $c$ est plus ouvert que le coin : il est obtus.\nLes deux côtés de $d$ forment une ligne droite : il est plat.\n⛔ Le piège : dire « droit » à l'œil. Je vérifie toujours avec le coin de la feuille, ou l'équerre.\nRéponse : $a$ aigu ; $b$ droit ; $c$ obtus ; $d$ plat.",
@@ -301,6 +312,11 @@ export const exercicesAngleMesure6e: FicheExercicesData = {
         },
         {
           enonce: "Lina vérifie les coins d'une étagère avec son équerre.\na) Quels angles sont droits ?\nb) Les autres sont-ils aigus ou obtus ?",
+          reponses: [
+            { question: "a)", attendu: ["B ; C"] },
+            { question: "b) A", attendu: ["aigu"] },
+            { question: "b) D", attendu: ["obtus"] },
+          ],
           figure: geo({ traits: [{ de: [0, 0], vers: [6, 0] }, { de: [6, 0], vers: [6, 3.9126] }, { de: [6, 3.9126], vers: [0.8316, 3.9126] }, { de: [0.8316, 3.9126], vers: [0, 0] }], points: [{ en: [0, 0], nom: "A", vers: "bg" }, { en: [6, 0], nom: "B", vers: "bd" }, { en: [6, 3.9126], nom: "C", vers: "hd" }, { en: [0.8316, 3.9126], nom: "D", vers: "hg" }] }),
           correction:
             "Je pose l'équerre dans chaque coin.\nEn $B$ et en $C$, l'équerre colle aux deux côtés. Ces angles sont droits.\nEn $A$, l'angle est plus fermé que l'équerre : il est aigu.\nEn $D$, l'angle est plus ouvert que l'équerre : il est obtus.\n⭐ Mesurés au rapporteur : $78°$ en $A$ et $102°$ en $D$.\n⛔ Le piège : croire que tous les coins sont droits, comme dans un rectangle. Il faut vérifier chaque coin.\nRéponse : a) $\\widehat{B}$ et $\\widehat{C}$ ; b) $\\widehat{A}$ est aigu, $\\widehat{D}$ est obtus.",
@@ -311,6 +327,12 @@ export const exercicesAngleMesure6e: FicheExercicesData = {
         },
         {
           enonce: "Nina dit : « L'angle $1$ est le plus grand, car ses côtés sont les plus longs. »\na) A-t-elle raison ?\nb) Range les trois angles du plus petit au plus grand.\nc) On les a mesurés : $27°$, $48°$ et $63°$. Donne la mesure de chaque angle.",
+          reponses: [
+            { question: "a)", attendu: ["non", "faux"] },
+            { question: "c) 1", attendu: "27" },
+            { question: "c) 2", attendu: "63" },
+            { question: "c) 3", attendu: "48" },
+          ],
           figure: geo({ traits: [{ de: [0, 0], vers: [5, 0] }, { de: [0, 0], vers: [4.455, 2.27] }, { de: [6.2, 0], vers: [8, 0] }, { de: [6.2, 0], vers: [7.0172, 1.6038] }, { de: [9, 0], vers: [12, 0] }, { de: [9, 0], vers: [11.0074, 2.2294] }], arcs: [{ en: [0, 0], de: [5, 0], vers: [4.455, 2.27], label: "1" }, { en: [6.2, 0], de: [8, 0], vers: [7.0172, 1.6038], label: "2" }, { en: [9, 0], de: [12, 0], vers: [11.0074, 2.2294], label: "3" }] }),
           correction:
             "a) Non. Un angle se mesure à son OUVERTURE. La longueur des côtés ne compte pas.\nb) Je décalque un angle et je le pose sur un autre, sommet sur sommet.\nL'angle $1$ est le plus fermé. L'angle $2$ est le plus ouvert.\nDu plus petit au plus grand : angle $1$, angle $3$, angle $2$.\nc) Le plus petit mesure $27°$, le plus grand $63°$.\nDonc angle $1$ : $27°$ ; angle $3$ : $48°$ ; angle $2$ : $63°$.\n⛔ Le piège : juger un angle à la longueur de ses côtés. On peut les prolonger : la mesure ne change pas.\nRéponse : a) non ; b) $1$, $3$, $2$ ; c) $1$ : $27°$ ; $2$ : $63°$ ; $3$ : $48°$.",
@@ -318,6 +340,10 @@ export const exercicesAngleMesure6e: FicheExercicesData = {
         },
         {
           enonce: "Le rapporteur est posé sur l'angle $\\widehat{AOB}$.\na) Faut-il lire les nombres bleus ou les nombres gris ?\nb) Combien mesure $\\widehat{AOB}$ ?",
+          reponses: [
+            { question: "a)", attendu: ["les nombres bleus", "bleus", "bleu"] },
+            { question: "b)", attendu: "70" },
+          ],
           figure: geo({ rapporteur: { centre: [0, 0], rayon: 5 }, traits: [{ de: [0, 0], vers: [6.2, 0] }, { de: [0, 0], vers: [2.1205, 5.8261] }], arcs: [{ en: [0, 0], de: [6.2, 0], vers: [2.1205, 5.8261], label: "?", rayon: 16 }], points: [{ en: [0, 0], nom: "O", vers: "bas" }, { en: [6.2, 0], nom: "A", vers: "bas" }, { en: [2.1205, 5.8261], nom: "B", vers: "hd" }] }),
           correction:
             "a) Je cherche le $0$ posé sur un côté. Le côté $[OA)$ passe par le $0$ BLEU. Je lis donc les nombres bleus.\nb) Je suis l'autre côté, $[OB)$, jusqu'au bord.\nIl passe un trait moyen après le $60$ bleu. Un trait moyen vaut $10°$ de plus : $60 + 10 = 70$.\n$\\widehat{AOB} = 70°$.\n⭐ Je contrôle à l'œil : l'angle est aigu. $70°$ est bien plus petit que $90°$.\n⛔ Le piège : lire le nombre gris, $110$. Le $0$ gris n'est pas sur $[OA)$.\nRéponse : a) les nombres bleus ; b) $\\widehat{AOB} = 70°$.",
@@ -334,6 +360,9 @@ export const exercicesAngleMesure6e: FicheExercicesData = {
         },
         {
           enonce: "Les points $A$, $O$ et $B$ sont alignés. Le point $C$ est au-dessus.\nL'angle $\\widehat{AOC}$ mesure $57°$.\nCombien mesure l'angle $\\widehat{COB}$ ?",
+          reponses: [
+            { attendu: "123" },
+          ],
           correction:
             "$A$, $O$ et $B$ sont alignés. Donc $\\widehat{AOB}$ est un angle plat : $180°$.\nLes angles $\\widehat{AOC}$ et $\\widehat{COB}$ sont côte à côte. Ensemble, ils remplissent l'angle plat.\nJe retire l'angle connu : $180 - 57 = 123$.\n$\\widehat{COB} = 123°$. C'est un angle obtus.\n⛔ Le piège : répondre $57°$ en croyant les deux angles égaux. Sur la figure, l'un est aigu, l'autre obtus.\nRéponse : $\\widehat{COB} = 123°$.",
           schema: ecranSeulement(
@@ -343,6 +372,9 @@ export const exercicesAngleMesure6e: FicheExercicesData = {
         },
         {
           enonce: "L'angle $\\widehat{AOC}$ mesure $104°$.\nLa demi-droite $[OB)$ est à l'intérieur de cet angle.\nL'angle $\\widehat{AOB}$ mesure $37°$.\nCombien mesure l'angle $\\widehat{BOC}$ ?",
+          reponses: [
+            { attendu: "67" },
+          ],
           correction:
             "La demi-droite $[OB)$ coupe le grand angle en deux angles.\nCes deux angles, côte à côte, forment le grand angle.\nJe retire le petit angle connu : $104 - 37 = 67$.\n$\\widehat{BOC} = 67°$.\nJe vérifie : $37 + 67 = 104$.\n⛔ Le piège : additionner, $104 + 37$. L'angle cherché est une PARTIE du grand angle : il est plus petit.\nRéponse : $\\widehat{BOC} = 67°$.",
           schema: ecranSeulement(
@@ -366,6 +398,11 @@ export const exercicesAngleMesure6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Cette fois, le côté $[OA)$ part vers la GAUCHE.\na) Sans mesurer, l'angle est-il aigu ou obtus ?\nb) Sur quel $0$ est posé $[OA)$ : le bleu ou le gris ?\nc) Combien mesure $\\widehat{AOB}$ ?",
+          reponses: [
+            { question: "a)", attendu: ["obtus"] },
+            { question: "b)", attendu: ["le 0 gris", "gris", "le gris"] },
+            { question: "c)", attendu: "145" },
+          ],
           figure: geo({ rapporteur: { centre: [0, 0], rayon: 5 }, traits: [{ de: [0, 0], vers: [-6.2, 0] }, { de: [0, 0], vers: [5.0787, 3.5562] }], arcs: [{ en: [0, 0], de: [5.0787, 3.5562], vers: [-6.2, 0], label: "?", rayon: 16 }], points: [{ en: [0, 0], nom: "O", vers: "bas" }, { en: [-6.2, 0], nom: "A", vers: "bas" }, { en: [5.0787, 3.5562], nom: "B", vers: "droite" }] }),
           correction:
             "a) L'angle est plus ouvert qu'un angle droit. Il est obtus.\nb) $[OA)$ passe par le $0$ de gauche. C'est le $0$ GRIS.\nc) Je pars du $0$ gris, à gauche, et je compte vers la droite.\n$[OB)$ s'arrête un petit trait AVANT le $150$ gris.\nUn petit trait vaut $5°$ : $150 - 5 = 145$.\n$\\widehat{AOB} = 145°$.\nC'est bien obtus, comme je l'avais estimé.\n⛔ Le piège : lire le bleu, $35$. Un angle obtus ne peut pas mesurer $35°$.\nRéponse : a) obtus ; b) le $0$ gris ; c) $\\widehat{AOB} = 145°$.",
@@ -373,6 +410,10 @@ export const exercicesAngleMesure6e: FicheExercicesData = {
         },
         {
           enonce: "Suis ce programme de construction.\n1. Trace un segment $[OA]$ de $5$ cm.\n2. Trace $[OB)$ pour que $\\widehat{AOB}$ mesure $75°$.\n3. Trace $[OC)$ de l'autre côté de $[OB)$, pour que $\\widehat{BOC}$ mesure $105°$.\na) Combien mesure $\\widehat{AOC}$ ?\nb) Que remarques-tu pour les points $A$, $O$ et $C$ ?",
+          reponses: [
+            { question: "a)", attendu: "180" },
+            { question: "b)", attendu: ["alignés", "ils sont alignés"] },
+          ],
           correction:
             "Je trace $[OA]$. Je trace l'angle de $75°$ à partir de $[OA)$.\nPuis je pose le $0$ du rapporteur sur $[OB)$. Je trace l'angle de $105°$.\na) Les deux angles sont côte à côte : $75 + 105 = 180$.\nDonc $\\widehat{AOC} = 180°$. C'est un angle plat.\nb) Un angle plat, c'est une ligne droite. Les points $A$, $O$ et $C$ sont alignés.\n⛔ Le piège : laisser le $0$ sur $[OA)$ pour le deuxième angle. Le deuxième angle part de $[OB)$.\nRéponse : a) $\\widehat{AOC} = 180°$ ; b) $A$, $O$ et $C$ sont alignés.",
           schema: ecranSeulement(
@@ -382,6 +423,11 @@ export const exercicesAngleMesure6e: FicheExercicesData = {
         },
         {
           enonce: "Les deux lames d'une paire de ciseaux se croisent en $O$. Elles forment deux droites.\nDu côté des pointes, l'angle mesure $38°$.\nCalcule les angles $1$, $2$ et $3$.",
+          reponses: [
+            { question: "angle 1", attendu: "142" },
+            { question: "angle 2", attendu: "38" },
+            { question: "angle 3", attendu: "142" },
+          ],
           correction:
             "Les deux droites forment quatre angles autour de $O$.\nL'angle $1$ est côte à côte avec l'angle de $38°$. Ensemble, ils forment un angle plat.\nAngle $1$ : $180 - 38 = 142$, soit $142°$.\nL'angle $2$ est face à l'angle de $38°$. Deux angles face à face sont égaux : $38°$.\nL'angle $3$ est face à l'angle $1$ : $142°$.\nJe vérifie le tour complet : $38 + 142 + 38 + 142 = 360$.\n⛔ Le piège : croire les quatre angles égaux. Seuls les angles face à face sont égaux.\nRéponse : $1$ : $142°$ ; $2$ : $38°$ ; $3$ : $142°$.",
           schema: ecranSeulement(
@@ -391,6 +437,10 @@ export const exercicesAngleMesure6e: FicheExercicesData = {
         },
         {
           enonce: "Une tarte ronde est coupée en trois parts, depuis le centre.\nLa part de Léo fait un angle de $105°$. Celle de Sami fait $145°$.\na) Quel angle fait la troisième part ?\nb) Quelle est la plus grosse part ?",
+          reponses: [
+            { question: "a)", attendu: "110" },
+            { question: "b)", attendu: ["Sami", "la part de Sami"] },
+          ],
           correction:
             "a) Les trois parts font le tour complet du centre. Un tour complet mesure $360°$.\nJ'additionne les parts connues : $105 + 145 = 250$.\nJe retire du tour : $360 - 250 = 110$. La troisième part fait $110°$.\nb) Je compare $105$, $145$ et $110$. Le plus grand est $145$.\nLa plus grosse part est celle de Sami.\n⛔ Le piège : retirer de $180$. Un demi-tour ne suffit pas : les parts font le tour ENTIER.\nRéponse : a) $110°$ ; b) la part de Sami.",
           schema: ecranSeulement(
@@ -400,6 +450,13 @@ export const exercicesAngleMesure6e: FicheExercicesData = {
         },
         {
           enonce: "Voici une horloge à $2$ h et une autre à $7$ h.\na) Pour chaque heure, l'angle entre les aiguilles est-il aigu ou obtus ?\nb) Entre deux nombres voisins, il y a $30°$. Calcule les deux angles.\nc) Donne une heure pile où les aiguilles font un angle droit.",
+          reponses: [
+            { question: "a) 2 h", attendu: ["aigu"] },
+            { question: "a) 7 h", attendu: ["obtus"] },
+            { question: "b) 2 h", attendu: "60" },
+            { question: "b) 7 h", attendu: "150" },
+            { question: "c)", attendu: ["3 h", "9 h"] },
+          ],
           figure: deux(
             geo({ horloge: { centre: [0, 0], rayon: 4 }, traits: [{ de: [0, 0], vers: [1.9053, 1.1], couleur: ORANGE }, { de: [0, 0], vers: [0, 3.2] }], arcs: [{ en: [0, 0], de: [1.9053, 1.1], vers: [0, 3.2], label: "?", rayon: 18 }] }),
             geo({ horloge: { centre: [0, 0], rayon: 4 }, traits: [{ de: [0, 0], vers: [-1.1, -1.9053], couleur: ORANGE }, { de: [0, 0], vers: [0, 3.2] }], arcs: [{ en: [0, 0], de: [0, 3.2], vers: [-1.1, -1.9053], label: "?", rayon: 18 }] }),
@@ -410,6 +467,11 @@ export const exercicesAngleMesure6e: FicheExercicesData = {
         },
         {
           enonce: "Trois demi-droites $[OA)$, $[OB)$ et $[OC)$ partent du point $O$.\nL'angle $\\widehat{AOB}$ mesure $34°$. L'angle $\\widehat{BOC}$ mesure $51°$.\n$[OB)$ est entre les deux autres.\na) Combien d'angles de sommet $O$ vois-tu ? Nomme-les.\nb) Combien mesure $\\widehat{AOC}$ ? Est-il aigu ou obtus ?",
+          reponses: [
+            { question: "a)", attendu: "3" },
+            { question: "b) AOC", attendu: "85" },
+            { question: "b) type", attendu: ["aigu"] },
+          ],
           correction:
             "a) Je prends les demi-droites deux par deux.\n$[OA)$ et $[OB)$ : $\\widehat{AOB}$. $[OB)$ et $[OC)$ : $\\widehat{BOC}$. $[OA)$ et $[OC)$ : $\\widehat{AOC}$.\nIl y a trois angles.\nb) $\\widehat{AOC}$ est fait des deux petits angles, côte à côte : $34 + 51 = 85$.\n$\\widehat{AOC} = 85°$. C'est moins que $90°$ : il est aigu.\n⛔ Le piège : ne voir que deux angles. Le grand angle $\\widehat{AOC}$ compte aussi.\nRéponse : a) trois : $\\widehat{AOB}$, $\\widehat{BOC}$, $\\widehat{AOC}$ ; b) $85°$, aigu.",
           schema: ecranSeulement(
@@ -419,6 +481,9 @@ export const exercicesAngleMesure6e: FicheExercicesData = {
         },
         {
           enonce: "Un éventail ouvert fait un angle de $160°$.\nIl a $9$ baguettes. Elles sont régulièrement espacées.\nCombien mesure l'angle entre deux baguettes voisines ?",
+          reponses: [
+            { attendu: "20" },
+          ],
           figure: geo({ traits: [{ de: [0, 0], vers: [3.9392, 0.6946] }, { de: [0, 0], vers: [3.4641, 2] }, { de: [0, 0], vers: [2.5712, 3.0642] }, { de: [0, 0], vers: [1.3681, 3.7588] }, { de: [0, 0], vers: [0, 4] }, { de: [0, 0], vers: [-1.3681, 3.7588] }, { de: [0, 0], vers: [-2.5712, 3.0642] }, { de: [0, 0], vers: [-3.4641, 2] }, { de: [0, 0], vers: [-3.9392, 0.6946] }], arcs: [{ en: [0, 0], de: [3.9392, 0.6946], vers: [3.4641, 2], label: "?", plein: true, rayon: 60 }], points: [{ en: [0, 0], nom: "O", vers: "bas" }] }),
           correction:
             "Je compte les ESPACES entre les baguettes, pas les baguettes.\nAvec $9$ baguettes, il y a $8$ espaces.\nLes $8$ espaces se partagent les $160°$.\n$160 \\div 8 = 20$. Chaque espace mesure $20°$.\nJe vérifie : $8 \\times 20 = 160$.\n⛔ Le piège : diviser par $9$, le nombre de baguettes. Entre $9$ baguettes, il n'y a que $8$ espaces.\nRéponse : $20°$.",
@@ -426,6 +491,9 @@ export const exercicesAngleMesure6e: FicheExercicesData = {
         },
         {
           enonce: "1. Trace un segment $[AB]$ de $6$ cm.\n2. En $A$, trace une demi-droite qui fait un angle de $45°$ avec $[AB]$.\n3. En $B$, trace une demi-droite qui fait aussi $45°$ avec $[AB]$, du même côté.\n4. Les deux demi-droites se coupent en $C$.\nMesure l'angle $\\widehat{ACB}$. Que remarques-tu ?",
+          reponses: [
+            { attendu: "90" },
+          ],
           correction:
             "Je trace $[AB]$ de $6$ cm.\nEn $A$ : centre du rapporteur sur $A$, $0$ sur $[AB]$. Je marque $45$ et je trace.\nEn $B$ : je fais pareil, avec le $0$ posé sur $[BA]$.\nLes deux demi-droites se croisent au point $C$.\nJe mesure $\\widehat{ACB}$ : je trouve $90°$.\nC'est un angle droit. Je le vérifie avec l'équerre.\n⭐ Le coin de $C$ est droit sans avoir utilisé d'équerre pour le tracer.\n⛔ Le piège : poser le $0$ du rapporteur au mauvais bout. En $B$, le $0$ doit être sur le côté $[BA]$.\nRéponse : $\\widehat{ACB} = 90°$, c'est un angle droit.",
           schema: geo({ traits: [{ de: [0, 0], vers: [6, 0] }, { de: [0, 0], vers: [3, 3] }, { de: [6, 0], vers: [3, 3] }], arcs: [{ en: [0, 0], de: [6, 0], vers: [3, 3], label: "45°" }, { en: [6, 0], de: [3, 3], vers: [0, 0], label: "45°" }, { en: [3, 3], de: [0, 0], vers: [6, 0], droit: true }], points: [{ en: [0, 0], nom: "A", vers: "bg" }, { en: [6, 0], nom: "B", vers: "bd" }, { en: [3, 3], nom: "C", vers: "haut" }] }),
@@ -447,6 +515,12 @@ export const exercicesAngleMesure6e: FicheExercicesData = {
         {
           titre: "La rose des vents",
           enonce: "Une rose des vents montre huit directions.\na) Quel angle font le Nord et l'Est ?\nb) Quel angle font le Nord et le Nord-Est ?\nc) Quel angle font le Nord et le Sud ?\nd) Un bateau va vers le Nord. Il tourne vers le Sud-Est, en passant par l'Est. De quel angle a-t-il tourné ?",
+          reponses: [
+            { question: "a)", attendu: "90" },
+            { question: "b)", attendu: "45" },
+            { question: "c)", attendu: "180" },
+            { question: "d)", attendu: "135" },
+          ],
           figure: geo({ traits: [{ de: [0, 0], vers: [0, 4], nom: "N", ou: [0.55, 3.75] }, { de: [0, 0], vers: [2.8284, 2.8284], nom: "NE", ou: [3.3941, 3.3941] }, { de: [0, 0], vers: [4, 0], nom: "E", ou: [4.6, 0] }, { de: [0, 0], vers: [2.8284, -2.8284], nom: "SE", ou: [3.3941, -3.3941] }, { de: [0, 0], vers: [0, -4], nom: "S", ou: [0.55, -3.75] }, { de: [0, 0], vers: [-2.8284, -2.8284], nom: "SO", ou: [-3.3941, -3.3941] }, { de: [0, 0], vers: [-4, 0], nom: "O", ou: [-4.6, 0] }, { de: [0, 0], vers: [-2.8284, 2.8284], nom: "NO", ou: [-3.3941, 3.3941] }] }),
           correction:
             "Les huit directions partagent le tour complet, $360°$, en $8$ angles égaux.\nEntre deux directions voisines : $360 \\div 8 = 45$, soit $45°$.\na) Du Nord à l'Est, il y a $2$ espaces : $2 \\times 45 = 90$. C'est un angle droit.\nb) Le Nord-Est est juste entre le Nord et l'Est : $45°$.\nc) Le Nord et le Sud sont sur une même ligne droite : angle plat, $180°$.\nd) Du Nord au Sud-Est par l'Est, il y a $3$ espaces : $3 \\times 45 = 135$.\nLe bateau a tourné de $135°$. C'est un angle obtus.\n⛔ Le piège au b) : confondre le Nord-Est avec l'Est. Le Nord-Est est à mi-chemin.\nRéponse : a) $90°$ ; b) $45°$ ; c) $180°$ ; d) $135°$.",
@@ -458,6 +532,12 @@ export const exercicesAngleMesure6e: FicheExercicesData = {
         {
           titre: "La grande roue",
           enonce: "Une grande roue a $10$ rayons, régulièrement espacés. Une nacelle rouge est tout en haut.\na) Quel angle font deux rayons voisins ?\nb) La roue tourne de $3$ places. De quel angle a-t-elle tourné ?\nc) Peut-elle tourner d'un angle droit en s'arrêtant pile sur une place ?\nd) De combien de places pour faire un demi-tour ?",
+          reponses: [
+            { question: "a)", attendu: "36" },
+            { question: "b)", attendu: "108" },
+            { question: "c)", attendu: ["non", "faux"] },
+            { question: "d)", attendu: "5" },
+          ],
           correction:
             "a) Les $10$ rayons partagent le tour complet, $360°$.\n$360 \\div 10 = 36$. Deux rayons voisins font $36°$.\nb) Trois places, c'est trois fois $36°$ : $3 \\times 36 = 108$. La roue a tourné de $108°$.\nc) Deux places font $72°$. Trois places font $108°$. Aucune ne fait $90°$.\nUn angle droit tombe au milieu d'une place : non, pas pile sur une place.\nd) Un demi-tour fait $180°$. $180 \\div 36 = 5$ : il faut $5$ places.\n⛔ Le piège au c) : croire qu'on tombe toujours juste. Je calcule avant de répondre.\nRéponse : a) $36°$ ; b) $108°$ ; c) non ; d) $5$ places.",
           schema: geo({ traits: [{ de: [0, 0], vers: [0, 4] }, { de: [0, 0], vers: [-2.3511, 3.2361] }, { de: [0, 0], vers: [-3.8042, 1.2361] }, { de: [0, 0], vers: [-3.8042, -1.2361] }, { de: [0, 0], vers: [-2.3511, -3.2361] }, { de: [0, 0], vers: [0, -4] }, { de: [0, 0], vers: [2.3511, -3.2361] }, { de: [0, 0], vers: [3.8042, -1.2361] }, { de: [0, 0], vers: [3.8042, 1.2361] }, { de: [0, 0], vers: [2.3511, 3.2361] }], arcs: [{ en: [0, 0], de: [0, 4], vers: [-2.3511, 3.2361], label: "36°", rayon: 44 }, { en: [0, 0], de: [0, 4], vers: [-3.8042, -1.2361], label: "108°", plein: true, rayon: 22 }], points: [{ en: [0, 4], nom: "R", vers: "haut" }] }),
@@ -466,6 +546,10 @@ export const exercicesAngleMesure6e: FicheExercicesData = {
         {
           titre: "Le rayon et le miroir",
           enonce: "Un rayon de lumière arrive sur un miroir. Il fait un angle de $38°$ avec le miroir.\nIl repart en faisant le MÊME angle avec le miroir.\na) Calcule l'angle entre les deux rayons.\nb) Un autre rayon arrive à $45°$. Quel angle font alors les deux rayons ?",
+          reponses: [
+            { question: "a)", attendu: "104" },
+            { question: "b)", attendu: "90" },
+          ],
           figure: geo({ traits: [{ de: [-5, 0], vers: [5, 0], couleur: GRIS, nom: "miroir", ou: [3.6, -0.6] }, { de: [-3.152, 2.4626], vers: [0, 0], couleur: ORANGE }, { de: [0, 0], vers: [3.152, 2.4626], couleur: ORANGE }], arcs: [{ en: [0, 0], de: [-3.152, 2.4626], vers: [-5, 0], label: "38°", rayon: 40 }, { en: [0, 0], de: [5, 0], vers: [3.152, 2.4626], label: "38°", rayon: 40 }, { en: [0, 0], de: [3.152, 2.4626], vers: [-3.152, 2.4626], label: "?", plein: true }] }),
           correction:
             "a) Le miroir est une ligne droite. Autour du point de contact, il y a un angle plat : $180°$.\nTrois angles se partagent cet angle plat : $38°$, l'angle cherché, et $38°$.\nJ'additionne les deux angles connus : $38 + 38 = 76$.\nJe retire de $180$ : $180 - 76 = 104$. L'angle entre les rayons mesure $104°$.\nb) Avec $45°$ : $45 + 45 = 90$, puis $180 - 90 = 90$.\nLes deux rayons font un angle droit.\n⛔ Le piège : mesurer sur le dessin et trouver « environ $100°$ ». Le calcul donne la valeur exacte.\nRéponse : a) $104°$ ; b) $90°$, un angle droit.",
@@ -477,6 +561,12 @@ export const exercicesAngleMesure6e: FicheExercicesData = {
         {
           titre: "L'ordinateur portable",
           enonce: "Sam ouvre son ordinateur, posé sur une table. L'écran et le clavier font un angle de $105°$.\na) Cet angle est-il aigu ou obtus ?\nb) Calcule l'angle entre l'écran et la table, derrière l'ordinateur.\nc) Sam ouvre l'écran de $40°$ de plus. Quel angle font l'écran et le clavier ?\nd) Jusqu'où faut-il ouvrir pour que l'écran touche la table ?",
+          reponses: [
+            { question: "a)", attendu: ["obtus"] },
+            { question: "b)", attendu: "75" },
+            { question: "c)", attendu: "145" },
+            { question: "d)", attendu: "180" },
+          ],
           figure: geo({ traits: [{ de: [-4, 0], vers: [5, 0], couleur: GRIS, nom: "table", ou: [4.2, -0.6] }, { de: [0, 0], vers: [4, 0] }, { de: [0, 0], vers: [-0.8282, 3.091], couleur: BLEU }], arcs: [{ en: [0, 0], de: [4, 0], vers: [-0.8282, 3.091], label: "105°" }, { en: [0, 0], de: [-0.8282, 3.091], vers: [-4, 0], label: "?", plein: true }] }),
           correction:
             "a) $105°$ est entre $90°$ et $180°$. L'angle est obtus.\nb) Le clavier est posé à plat sur la table. La table forme un angle plat : $180°$.\nL'angle de $105°$ et l'angle cherché sont côte à côte sur cette ligne droite.\n$180 - 105 = 75$. L'écran fait $75°$ avec la table, derrière.\nc) Il ouvre de $40°$ de plus : $105 + 40 = 145$. L'angle mesure $145°$.\nd) L'écran touche la table quand l'angle est plat : $180°$.\nIl faut encore ouvrir de $180 - 145 = 35$ degrés.\n⛔ Le piège au b) : oublier que la table est une ligne droite. C'est elle qui donne les $180°$.\nRéponse : a) obtus ; b) $75°$ ; c) $145°$ ; d) jusqu'à $180°$.",

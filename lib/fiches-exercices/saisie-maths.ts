@@ -16,14 +16,18 @@ export type ToucheMaths = {
   /** Position du curseur dans `inserer` après l'insertion (par défaut : à la fin). */
   curseur?: number;
   titre: string;
+  /** La touche apparaît à partir de ce palier : 1 = jusqu'en 5e, 2 = 4e-3e, 3 = lycée. */
+  des?: 1 | 2 | 3;
 };
 
+// ⭐ UN CLAVIER À LA TAILLE DE LA CLASSE (29/10/2026) : un élève de 6e qui lit
+// difficilement n'a que faire de eˣ, ln ou ∪ — ces touches l'encombrent.
 export const TOUCHES_MATHS: ToucheMaths[] = [
-  { label: "eˣ", inserer: "e^()", curseur: 3, titre: "Exponentielle : e^(…)" },
-  { label: "ln", inserer: "ln()", curseur: 3, titre: "Logarithme népérien" },
-  { label: "√", inserer: "√()", curseur: 2, titre: "Racine carrée" },
-  { label: "xⁿ", inserer: "^()", curseur: 2, titre: "Puissance" },
-  { label: "x²", inserer: "²", titre: "Au carré" },
+  { label: "eˣ", inserer: "e^()", curseur: 3, titre: "Exponentielle : e^(…)", des: 3 },
+  { label: "ln", inserer: "ln()", curseur: 3, titre: "Logarithme népérien", des: 3 },
+  { label: "√", inserer: "√()", curseur: 2, titre: "Racine carrée", des: 2 },
+  { label: "xⁿ", inserer: "^()", curseur: 2, titre: "Puissance", des: 2 },
+  { label: "x²", inserer: "²", titre: "Au carré", des: 2 },
   { label: "a⁄b", inserer: "()/()", curseur: 1, titre: "Fraction" },
   { label: "( )", inserer: "()", curseur: 1, titre: "Parenthèses" },
   { label: "x", inserer: "x", titre: "La lettre x" },
@@ -32,12 +36,20 @@ export const TOUCHES_MATHS: ToucheMaths[] = [
   { label: "π", inserer: "π", titre: "Pi" },
   { label: "≤", inserer: "≤", titre: "Inférieur ou égal" },
   { label: "≥", inserer: "≥", titre: "Supérieur ou égal" },
-  { label: "≠", inserer: "≠", titre: "Différent de" },
-  { label: "∞", inserer: "∞", titre: "Infini" },
-  { label: "[ ]", inserer: "[ ; ]", curseur: 1, titre: "Intervalle" },
-  { label: "∪", inserer: " ∪ ", titre: "Union" },
+  { label: "≠", inserer: "≠", titre: "Différent de", des: 2 },
   { label: "≈", inserer: "≈", titre: "Environ égal" },
+  { label: "°", inserer: "°", titre: "Degré" },
+  { label: ";", inserer: " ; ", titre: "Séparer plusieurs réponses" },
+  { label: "∞", inserer: "∞", titre: "Infini", des: 3 },
+  { label: "[ ]", inserer: "[ ; ]", curseur: 1, titre: "Intervalle", des: 3 },
+  { label: "∪", inserer: " ∪ ", titre: "Union", des: 3 },
 ];
+
+/** Les touches d'une classe (« 6e », « 3e », « 1re-spe », « cm2 »…). */
+export function touchesPourClasse(classe: string): ToucheMaths[] {
+  const palier = /^(cp|ce|cm|6e|5e)/.test(classe) ? 1 : /^(4e|3e)/.test(classe) ? 2 : 3;
+  return TOUCHES_MATHS.filter((t) => (t.des ?? 1) <= palier);
+}
 
 const FONCTIONS = new Set(["ln", "exp", "log", "cos", "sin", "tan", "lim"]);
 

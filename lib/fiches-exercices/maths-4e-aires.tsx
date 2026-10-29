@@ -256,6 +256,10 @@ export const exercicesAires4e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Sur ce quadrillage, chaque carreau est un carré de $1$ cm de côté.\na) Combien de carreaux la figure recouvre-t-elle ? Quelle est son aire ?\nb) Léo annonce $22$. Qu'a-t-il mesuré ?",
+          reponses: [
+            { question: "a)", attendu: "18" },
+            { question: "b)", attendu: ["périmètre", "le périmètre"] },
+          ],
           figure: plan("cm", [
             { grille: [0, 0, 6, 5] },
             { poly: [[0, 0], [6, 0], [6, 2], [2, 2], [2, 5], [0, 5]], fond: "bleu" },
@@ -276,6 +280,9 @@ export const exercicesAires4e: FicheExercicesData = {
         },
         {
           enonce: "Une carte postale rectangulaire mesure $15$ cm sur $10{,}5$ cm. Calculer son aire.",
+          reponses: [
+            { attendu: "157,5" },
+          ],
           correction:
             "Un rectangle se remplit par rangées de carreaux : son aire est longueur × largeur.\n$\\mathcal{A} = 15 \\times 10{,}5$. Je calcule en deux morceaux : $15 \\times 10 = 150$ et $15 \\times 0{,}5 = 7{,}5$, donc $\\mathcal{A} = 150 + 7{,}5 = 157{,}5$ cm².\n⭐ Contrôle : la carte est à peine plus grande qu'un rectangle de $15$ cm sur $10$ cm, qui fait $150$ cm². $157{,}5$ est plausible.\n⛔ Le piège : ADDITIONNER les deux côtés, $15 + 10{,}5 = 25{,}5$. Une addition de longueurs donne une longueur, pas une surface.\nRéponse : $\\mathcal{A} = 157{,}5$ cm².",
           schema: plan("cm", [
@@ -288,6 +295,9 @@ export const exercicesAires4e: FicheExercicesData = {
         },
         {
           enonce: "Une salle de classe rectangulaire a une aire de $56$ m². Elle mesure $8$ m de long. Quelle est sa largeur ?",
+          reponses: [
+            { attendu: "7" },
+          ],
           correction:
             "Je connais l'aire et la longueur : je défais la multiplication $\\mathcal{A} = L \\times \\ell$.\n$8 \\times \\ell = 56$, donc $\\ell = 56 \\div 8 = 7$ m.\nContrôle : $8 \\times 7 = 56$ m², c'est bien l'aire annoncée.\n⛔ Le piège : soustraire, $56 - 8 = 48$ m. L'aire vient d'une MULTIPLICATION : on revient en arrière par une DIVISION.\nRéponse : la salle mesure $7$ m de large.",
           schema: plan("m", [
@@ -300,6 +310,9 @@ export const exercicesAires4e: FicheExercicesData = {
         },
         {
           enonce: "Calculer l'aire d'un carré de $3{,}5$ cm de côté.",
+          reponses: [
+            { attendu: "12,25" },
+          ],
           correction:
             "Un carré est un rectangle dont la longueur et la largeur sont égales : $\\mathcal{A} = c \\times c = c^2$.\n$\\mathcal{A} = 3{,}5 \\times 3{,}5$. Je calcule en deux morceaux : $3 \\times 3{,}5 = 10{,}5$ et $0{,}5 \\times 3{,}5 = 1{,}75$, donc $\\mathcal{A} = 10{,}5 + 1{,}75 = 12{,}25$ cm².\n⛔ Le piège : lire $3{,}5^2$ comme $3{,}5 \\times 2 = 7$. Le carré, c'est le côté multiplié par LUI-MÊME. Et $4 \\times 3{,}5 = 14$ cm, c'est le périmètre, pas l'aire.\nRéponse : $\\mathcal{A} = 12{,}25$ cm².",
           schema: plan("cm", [
@@ -312,6 +325,9 @@ export const exercicesAires4e: FicheExercicesData = {
         },
         {
           enonce: "Un carré a une aire de $144$ cm². Combien mesure son côté ?",
+          reponses: [
+            { attendu: "12" },
+          ],
           correction:
             "Je cherche le nombre qui, multiplié par LUI-MÊME, donne $144$.\n$10 \\times 10 = 100$ : trop petit. $12 \\times 12 = 144$ : c'est lui.\nDonc le côté mesure $12$ cm.\n⛔ Le piège : diviser par $4$, comme pour un périmètre : $144 \\div 4 = 36$. Mais un carré de $36$ cm de côté aurait une aire de $36 \\times 36 = 1\\,296$ cm², neuf fois trop.\nRéponse : le côté mesure $12$ cm.",
           schema: plan("cm", [
@@ -323,6 +339,9 @@ export const exercicesAires4e: FicheExercicesData = {
         },
         {
           enonce: "Le triangle $ABC$ a une base $[AB]$ de $11$ cm. La hauteur issue de $C$ mesure $4$ cm. Calculer son aire.",
+          reponses: [
+            { attendu: "22" },
+          ],
           correction:
             "La hauteur issue de $C$ est perpendiculaire à $[AB]$ : la base et la hauteur vont ensemble.\nLe triangle tient dans un rectangle de $11$ cm sur $4$ cm (en pointillés), d'aire $11 \\times 4 = 44$ cm². Il en occupe exactement la moitié.\n$\\mathcal{A} = \\dfrac{11 \\times 4}{2} = \\dfrac{44}{2} = 22$ cm².\n⛔ Le piège : oublier le $\\div 2$ et répondre $44$ cm², l'aire du rectangle entier.\nRéponse : $\\mathcal{A} = 22$ cm².",
           schema: plan("cm", [
@@ -340,6 +359,9 @@ export const exercicesAires4e: FicheExercicesData = {
         },
         {
           enonce: "Le triangle $RST$ est rectangle en $R$, avec $RS = 6$ cm, $RT = 4{,}5$ cm et $ST = 7{,}5$ cm. Calculer son aire.",
+          reponses: [
+            { attendu: "13,5" },
+          ],
           correction:
             "Dans un triangle rectangle, les deux côtés de l'angle droit sont perpendiculaires : l'un sert de base, l'autre de hauteur.\n$\\mathcal{A} = \\dfrac{RS \\times RT}{2} = \\dfrac{6 \\times 4{,}5}{2} = \\dfrac{27}{2} = 13{,}5$ cm².\n⭐ Le côté $[ST]$, en face de l'angle droit, ne sert pas : il n'est perpendiculaire à aucun des deux autres.\n⛔ Le piège : prendre le plus grand côté, $\\dfrac{6 \\times 7{,}5}{2} = 22{,}5$ cm². $[ST]$ est penché : ce n'est pas une hauteur.\nRéponse : $\\mathcal{A} = 13{,}5$ cm².",
           schema: plan("cm", [
@@ -356,6 +378,9 @@ export const exercicesAires4e: FicheExercicesData = {
         },
         {
           enonce: "Le parallélogramme $EFGH$ a une base $[EF]$ de $6$ cm et une hauteur de $3{,}5$ cm. Son côté $[EH]$ mesure $3{,}7$ cm. Calculer son aire.",
+          reponses: [
+            { attendu: "21" },
+          ],
           correction:
             "L'aire d'un parallélogramme est base × hauteur. La hauteur est la distance PERPENDICULAIRE entre $[EF]$ et le côté opposé $[HG]$.\n$\\mathcal{A} = 6 \\times 3{,}5 = 21$ cm².\nPourquoi pas de $\\div 2$ ? Je coupe le petit triangle de gauche le long de la hauteur et je le recolle à droite (en pointillés) : j'obtiens un rectangle de $6$ cm sur $3{,}5$ cm.\n⛔ Le piège : prendre le côté penché, $6 \\times 3{,}7 = 22{,}2$ cm². Le côté $[EH]$ est plus long que la hauteur : il gonfle l'aire.\nRéponse : $\\mathcal{A} = 21$ cm².",
           schema: plan("cm", [
@@ -389,6 +414,10 @@ export const exercicesAires4e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Le parallélogramme $ABCD$ a pour côtés $AB = 12$ cm et $AD = 10$ cm. La distance entre les droites $(AB)$ et $(CD)$ est de $8$ cm.\na) Calculer l'aire de $ABCD$.\nb) $H$ est le pied de la hauteur issue de $B$ sur la droite $(AD)$. Calculer $BH$.",
+          reponses: [
+            { question: "a)", attendu: "96" },
+            { question: "b)", attendu: "9,6" },
+          ],
           correction:
             "a) La hauteur relative à la base $[AB]$ est la distance entre $(AB)$ et $(CD)$ : $8$ cm.\n$\\mathcal{A} = AB \\times 8 = 12 \\times 8 = 96$ cm².\nb) Je change de base : je prends $[AD]$. La hauteur qui va avec est $[BH]$, perpendiculaire à $(AD)$. La surface, elle, n'a pas changé : $AD \\times BH = 96$, donc $10 \\times BH = 96$ et $BH = 96 \\div 10 = 9{,}6$ cm.\n⭐ Contrôle : $BH = 9{,}6$ cm est plus court que $AB = 12$ cm : le chemin perpendiculaire est toujours le plus court.\n⛔ Le piège : multiplier les deux côtés, $12 \\times 10 = 120$ cm². Aucun des deux n'est perpendiculaire à l'autre.\nRéponse : $\\mathcal{A} = 96$ cm² et $BH = 9{,}6$ cm.",
           schema: plan("cm", [
@@ -407,6 +436,9 @@ export const exercicesAires4e: FicheExercicesData = {
         },
         {
           enonce: "Une pièce a la forme d'un L : $9$ m de long en bas, $7$ m de haut à gauche, $4$ m sur le côté droit et $5$ m en haut. Calculer son aire.",
+          reponses: [
+            { attendu: "51" },
+          ],
           figure: plan("m", [
             { poly: [[0, 0], [9, 0], [9, 4], [5, 4], [5, 7], [0, 7]], fond: "bleu" },
             { cote: [[0, 0], [9, 0]], label: "9 m" },
@@ -430,6 +462,9 @@ export const exercicesAires4e: FicheExercicesData = {
         },
         {
           enonce: "Un fanion est un rectangle de $10$ cm sur $6$ cm, dans lequel on a découpé une encoche triangulaire : sa base est le côté de $6$ cm, et sa pointe s'enfonce de $4$ cm dans le fanion. Calculer l'aire du fanion.",
+          reponses: [
+            { attendu: "48" },
+          ],
           correction:
             "Le fanion, c'est le rectangle PLEIN, moins le triangle découpé : je soustrais.\nLe rectangle : $10 \\times 6 = 60$ cm².\nLe triangle a pour base le côté de $6$ cm, et pour hauteur la profondeur de l'encoche, $4$ cm, perpendiculaire à ce côté : $\\dfrac{6 \\times 4}{2} = 12$ cm².\n$\\mathcal{A} = 60 - 12 = 48$ cm².\n⛔ Le piège : oublier le $\\div 2$ du triangle, $60 - 24 = 36$ cm², ou AJOUTER l'encoche, $60 + 12 = 72$ cm². Le trou enlève de la surface.\nRéponse : le fanion a une aire de $48$ cm².",
           schema: plan("cm", [
@@ -444,6 +479,9 @@ export const exercicesAires4e: FicheExercicesData = {
         },
         {
           enonce: "Sur ce quadrillage de carreaux de $1$ cm, les sommets du triangle $ABC$ sont sur des nœuds. Aucun de ses côtés ne suit les lignes du quadrillage. Calculer l'aire du triangle $ABC$.",
+          reponses: [
+            { attendu: "13" },
+          ],
           figure: plan("cm", [
             { grille: [0, 0, 6, 5] },
             { poly: [[0, 0], [6, 2], [2, 5]], fond: "bleu" },
@@ -471,6 +509,9 @@ export const exercicesAires4e: FicheExercicesData = {
         },
         {
           enonce: "Un triangle a une aire de $30$ cm², et l'un de ses côtés mesure $7{,}5$ cm. Quelle est la hauteur relative à ce côté ?",
+          reponses: [
+            { attendu: "8" },
+          ],
           correction:
             "Je pars de la formule : $\\dfrac{b \\times h}{2} = \\mathcal{A}$, donc $\\dfrac{7{,}5 \\times h}{2} = 30$.\nJe défais le $\\div 2$ : $7{,}5 \\times h = 30 \\times 2 = 60$.\nJe défais le $\\times 7{,}5$ : $h = 60 \\div 7{,}5 = 8$ cm.\nContrôle : $\\dfrac{7{,}5 \\times 8}{2} = \\dfrac{60}{2} = 30$ cm².\n⛔ Le piège : diviser directement, $30 \\div 7{,}5 = 4$ cm. C'est oublier que le triangle est la MOITIÉ d'un rectangle : avec $4$ cm, l'aire ne serait que $15$ cm².\nRéponse : la hauteur mesure $8$ cm.",
           schema: plan("cm", [
@@ -483,6 +524,12 @@ export const exercicesAires4e: FicheExercicesData = {
         },
         {
           enonce: "On carrelle le sol d'une pièce rectangulaire de $4$ m sur $3$ m avec des carreaux carrés de $50$ cm de côté.\na) Calculer l'aire de la pièce en m², puis en cm².\nb) Calculer l'aire d'un carreau en cm².\nc) Combien faut-il de carreaux, sans compter les chutes ?",
+          reponses: [
+            { question: "a) m²", attendu: "12" },
+            { question: "a) cm²", attendu: "120000" },
+            { question: "b)", attendu: "2500" },
+            { question: "c)", attendu: "48" },
+          ],
           correction:
             "a) $\\mathcal{A} = 4 \\times 3 = 12$ m². Un mètre carré est un carré de $100$ cm sur $100$ cm : $1$ m² $= 100 \\times 100 = 10\\,000$ cm². Donc $12$ m² $= 120\\,000$ cm².\nb) Un carreau est un carré : $\\mathcal{A} = 50 \\times 50 = 2\\,500$ cm².\nc) $120\\,000 \\div 2\\,500 = 48$ carreaux.\n⭐ Contrôle par les longueurs : $400 \\div 50 = 8$ carreaux sur la longueur, $300 \\div 50 = 6$ sur la largeur, et $8 \\times 6 = 48$. Le quadrillage du dessin les montre.\n⛔ Le piège : convertir avec $100$ au lieu de $10\\,000$ : $12$ m² deviendraient $1\\,200$ cm², moins qu'un seul carreau ! Ou diviser l'aire par une longueur, $12 \\div 0{,}5 = 24$.\nRéponse : $12$ m² $= 120\\,000$ cm² ; $2\\,500$ cm² par carreau ; $48$ carreaux.",
           schema: plan("m", [
@@ -498,6 +545,9 @@ export const exercicesAires4e: FicheExercicesData = {
         },
         {
           enonce: "Une flèche de signalisation est formée d'un rectangle de $6$ cm sur $2$ cm, prolongé par un triangle. La base de ce triangle mesure $4$ cm, et sa pointe est à $3$ cm de cette base. Calculer l'aire de la flèche.",
+          reponses: [
+            { attendu: "18" },
+          ],
           correction:
             "Je découpe la flèche en deux figures connues : le rectangle (le corps) et le triangle (la pointe).\nLe rectangle : $\\mathcal{A}_1 = 6 \\times 2 = 12$ cm².\nLe triangle a pour base le côté de $4$ cm et pour hauteur $3$ cm, la distance perpendiculaire de la pointe à cette base : $\\mathcal{A}_2 = \\dfrac{4 \\times 3}{2} = 6$ cm².\nLes deux morceaux ne se chevauchent pas : $\\mathcal{A} = 12 + 6 = 18$ cm².\n⛔ Le piège : oublier le $\\div 2$ de la pointe, $12 + 12 = 24$ cm².\nRéponse : la flèche a une aire de $18$ cm².",
           schema: plan("cm", [
@@ -513,6 +563,10 @@ export const exercicesAires4e: FicheExercicesData = {
         },
         {
           enonce: "Les triangles $ABC$, $ABD$ et $ABE$ ont la même base $[AB]$ de $6$ cm. Leurs sommets $C$, $D$ et $E$ sont sur une droite parallèle à $(AB)$, à $4$ cm d'elle.\na) Calculer l'aire de chaque triangle.\nb) Le triangle $ABE$, très étiré, a-t-il une plus grande aire ?",
+          reponses: [
+            { question: "a)", attendu: "12" },
+            { question: "b)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) Pour les trois, la base est $[AB]$, et la hauteur est la distance du sommet à la droite $(AB)$. Les trois sommets sont sur la même parallèle, à $4$ cm : les trois hauteurs mesurent $4$ cm.\nPour $ABE$, la hauteur tombe en dehors du triangle, sur le prolongement de $[AB]$ : elle reste perpendiculaire à la droite $(AB)$ et mesure toujours $4$ cm.\n$\\mathcal{A} = \\dfrac{6 \\times 4}{2} = 12$ cm², pour chacun des trois.\nb) Non : les trois triangles ont la même aire, $12$ cm². Leurs formes sont différentes, mais ils ont la même base et la même hauteur.\n⛔ Le piège : se fier à l'œil, ou prendre le long côté $[AE]$, qui mesure presque $10$ cm, pour une hauteur. On trouverait $\\dfrac{6 \\times 10}{2} = 30$ cm², plus du double.\nRéponse : $12$ cm² pour chacun ; l'aire ne dépend que de la base et de la hauteur.",
           schema: plan("cm", [
@@ -549,6 +603,12 @@ export const exercicesAires4e: FicheExercicesData = {
           titre: "Le terrain de basket et sa bande",
           enonce:
             "Un terrain de basket-ball de compétition mesure $28$ m sur $15$ m. Tout autour, le règlement demande une bande libre d'au moins $2$ m de large.\na) Calculer l'aire du terrain.\nb) Calculer l'aire totale du terrain et de sa bande de $2$ m.\nc) En déduire l'aire de la bande.\nd) On peint la bande d'une autre couleur. Un pot de peinture couvre $25$ m². Combien de pots faut-il acheter ?",
+          reponses: [
+            { question: "a)", attendu: "420" },
+            { question: "b)", attendu: "608" },
+            { question: "c)", attendu: "188" },
+            { question: "d)", attendu: "8" },
+          ],
           correction:
             "a) Le terrain est un rectangle : $\\mathcal{A} = 28 \\times 15 = 420$ m².\nb) La bande ajoute $2$ m de CHAQUE côté : à gauche et à droite, en haut et en bas. Le grand rectangle mesure $28 + 2 + 2 = 32$ m sur $15 + 2 + 2 = 19$ m, donc $32 \\times 19 = 608$ m².\nc) La bande, c'est le grand rectangle MOINS le terrain : $608 - 420 = 188$ m².\nd) $188 \\div 25 = 7{,}52$ : sept pots ne suffisent pas, il en faut $8$.\n⛔ Le piège : n'ajouter les $2$ m qu'une fois par dimension, $30 \\times 17 = 510$ m², ce qui donnerait une bande de $90$ m² seulement, moins de la moitié de la vraie.\nRéponse : $420$ m² de terrain, $608$ m² en tout, $188$ m² de bande, donc $8$ pots.",
           schema: plan("m", [
@@ -567,6 +627,11 @@ export const exercicesAires4e: FicheExercicesData = {
           titre: "Le toit et la pluie",
           enonce:
             "Une maison a un toit à deux pans. Vue de dessus, elle occupe un rectangle de $10$ m sur $8$ m. Chaque pan du toit est un rectangle penché de $10$ m sur $5$ m.\na) Calculer l'aire des tuiles, c'est-à-dire des deux pans.\nb) Calculer l'aire au sol couverte par le toit.\nc) À Paris, il tombe environ $640$ mm de pluie par an. Une pluie de $1$ mm dépose $1$ litre d'eau sur chaque m² de SOL. Combien de litres le toit peut-il recueillir en un an ?",
+          reponses: [
+            { question: "a)", attendu: "100" },
+            { question: "b)", attendu: "80" },
+            { question: "c)", attendu: "51200" },
+          ],
           correction:
             "a) Deux pans de $10 \\times 5 = 50$ m² chacun : $2 \\times 50 = 100$ m² de tuiles.\nb) Vu d'en haut, le toit recouvre le rectangle de la maison : $10 \\times 8 = 80$ m².\nPourquoi moins que les tuiles ? Chaque pan est penché : ses $5$ m de pente ne couvrent que $4$ m au sol, la moitié des $8$ m. Sur le pignon dessiné, $5$ m de pente, $4$ m au sol et $3$ m de haut.\nc) La pluie tombe verticalement : le toit reçoit ce qui tomberait sur les $80$ m² de sol qu'il abrite. Chaque m² reçoit $640$ L par an, donc $80 \\times 640 = 51\\,200$ L.\n⛔ Le piège : compter l'aire des tuiles, $100 \\times 640 = 64\\,000$ L. Un toit penché ne reçoit pas plus de pluie qu'un toit plat de même surface au sol.\nRéponse : $100$ m² de tuiles, $80$ m² au sol, et environ $51\\,200$ L d'eau par an.",
           schema: deux(
@@ -591,6 +656,11 @@ export const exercicesAires4e: FicheExercicesData = {
           titre: "Le parking en épi",
           enonce:
             "Sur un parking, les places « en épi » sont des parallélogrammes, alignés le long d'une allée. Chaque place mesure $2{,}9$ m le long de l'allée, et $5$ m de profondeur, mesurés perpendiculairement à l'allée. Son côté penché mesure environ $5{,}4$ m.\na) Calculer l'aire d'une place.\nb) L'allée mesure $58$ m. Combien de places peut-on y tracer ?\nc) Calculer l'aire totale des places, de deux façons.",
+          reponses: [
+            { question: "a)", attendu: "14,5" },
+            { question: "b)", attendu: "20" },
+            { question: "c)", attendu: "290" },
+          ],
           correction:
             "a) Une place est un parallélogramme de base $2{,}9$ m (le long de l'allée) et de hauteur $5$ m (la profondeur, perpendiculaire à l'allée) : $\\mathcal{A} = 2{,}9 \\times 5 = 14{,}5$ m².\nb) Les places se suivent le long de l'allée, $2{,}9$ m chacune : $58 \\div 2{,}9 = 20$ places.\nc) Premier chemin : $20 \\times 14{,}5 = 290$ m².\nDeuxième chemin : collées les unes aux autres, les vingt places forment un grand parallélogramme de base $58$ m et de même hauteur $5$ m : $58 \\times 5 = 290$ m². Les deux chemins se rejoignent.\n⛔ Le piège : prendre le côté penché, $2{,}9 \\times 5{,}4 = 15{,}66$ m² par place. La profondeur se mesure perpendiculairement à l'allée.\nRéponse : $14{,}5$ m² par place, $20$ places, $290$ m² en tout.",
           schema: plan("m", [
@@ -609,6 +679,13 @@ export const exercicesAires4e: FicheExercicesData = {
           titre: "Le champ des deux sœurs",
           enonce:
             "Deux sœurs héritent d'un champ triangulaire. Un côté, le long de la route, mesure $120$ m ; le sommet opposé est à $80$ m de la route.\na) Calculer l'aire du champ en m², puis en hectares.\nb) Lina propose de couper le champ en ligne droite, du sommet jusqu'au MILIEU du côté de la route. Les deux parts ont-elles la même aire ?\nc) Sarah propose plutôt une clôture parallèle à la route, à mi-chemin du sommet, donc à $40$ m de la route. Calculer l'aire de la part du haut. Ce partage est-il juste ?",
+          reponses: [
+            { question: "a) m²", attendu: "4800" },
+            { question: "a) ha", attendu: "0,48" },
+            { question: "b)", attendu: ["oui", "vrai"] },
+            { question: "c) aire", attendu: "1200" },
+            { question: "c) juste", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) La base est le côté de la route, $120$ m, et la hauteur la distance du sommet à la route, $80$ m : $\\mathcal{A} = \\dfrac{120 \\times 80}{2} = 4\\,800$ m².\nUn hectare est un carré de $100$ m de côté, soit $10\\,000$ m² : $4\\,800 \\div 10\\,000 = 0{,}48$ ha.\nb) Chaque part est un triangle de base $120 \\div 2 = 60$ m et de MÊME hauteur $80$ m (même sommet, même route) : $\\dfrac{60 \\times 80}{2} = 2\\,400$ m² chacune. Oui, ce partage est juste : $2\\,400 + 2\\,400 = 4\\,800$.\nc) La part du haut est un petit triangle. Sa base, la clôture, relie les milieux des deux autres côtés : elle mesure la moitié de $120$ m, soit $60$ m. Sa hauteur est ce qui reste au-dessus de la clôture, $80 - 40 = 40$ m : $\\dfrac{60 \\times 40}{2} = 1\\,200$ m².\nLa part du bas : $4\\,800 - 1\\,200 = 3\\,600$ m², trois fois plus. Ce partage n'est pas juste.\n⛔ Le piège : croire que couper à mi-hauteur coupe l'aire en deux. En haut, le champ est étroit : la moitié de la hauteur ne porte qu'un quart de la surface.\nRéponse : $4\\,800$ m², soit $0{,}48$ ha ; la coupe de Lina donne deux parts de $2\\,400$ m² ; la clôture de Sarah donne $1\\,200$ m² et $3\\,600$ m², un partage injuste.",
           schema: deux(

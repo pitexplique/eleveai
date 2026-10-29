@@ -348,6 +348,12 @@ export const exercicesFactorisation4e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Pour chaque expression, écris chaque terme comme un produit, puis donne le plus grand facteur commun aux deux termes.\na) $7a + 7b$\nb) $4y + 28$\nc) $11t - 11$\nd) $ab + 6a$",
+          reponses: [
+            { question: "a)", attendu: "7" },
+            { question: "b)", attendu: "4" },
+            { question: "c)", attendu: "11" },
+            { question: "d)", attendu: "a" },
+          ],
           correction:
             "Un facteur commun est un nombre, ou une lettre, qui multiplie CHAQUE terme. J'écris chaque terme comme un produit.\na) $7a = 7 \\times a$ et $7b = 7 \\times b$ : le facteur commun est $7$.\nb) $4y = 4 \\times y$ et $28 = 4 \\times 7$ : le plus grand facteur commun est $4$. Le dessin le montre : un rectangle de hauteur $4$, coupé en deux morceaux d'aires $4y$ et $28$.\nc) $11t = 11 \\times t$ et $11 = 11 \\times 1$ : le facteur commun est $11$.\nd) $ab = a \\times b$ et $6a = 6 \\times a$ : la lettre $a$ est dans les deux termes, le facteur commun est $a$.\n⛔ Le piège du c) : croire que le $11$ tout seul n'a pas de partenaire. Un nombre est toujours égal à lui-même fois $1$ : $11 = 11 \\times 1$.\nRéponse : a) $7$ ; b) $4$ ; c) $11$ ; d) $a$.",
           schema: rectangle("4", ["y", "7"], ["4y", "28"], "4y + 28 = 4(y + 7)"),
@@ -355,6 +361,12 @@ export const exercicesFactorisation4e: FicheExercicesData = {
         },
         {
           enonce: "Factorise.\na) $5x + 35$\nb) $8y - 24$\nc) $21 + 7t$\nd) $9n - 45$",
+          reponses: [
+            { question: "a)", attendu: ["5(x+7)", "5(7+x)"], exact: true },
+            { question: "b)", attendu: ["8(y-3)", "8(-3+y)"], exact: true },
+            { question: "c)", attendu: ["7(3+t)", "7(t+3)"], exact: true },
+            { question: "d)", attendu: ["9(n-5)", "9(-5+n)"], exact: true },
+          ],
           correction:
             "Je trouve le facteur commun, puis je divise CHAQUE terme par lui : ce qui reste va dans la parenthèse.\na) $5x \\div 5 = x$ et $35 \\div 5 = 7$ : $5x + 35 = 5(x + 7)$.\nb) $8y \\div 8 = y$ et $24 \\div 8 = 3$ ; le signe moins reste dans la parenthèse : $8y - 24 = 8(y - 3)$.\nc) $21 \\div 7 = 3$ et $7t \\div 7 = t$ : $21 + 7t = 7(3 + t)$.\nd) $9n \\div 9 = n$ et $45 \\div 9 = 5$ : $9n - 45 = 9(n - 5)$.\n⭐ Contrôle du b) : $8 \\times y - 8 \\times 3 = 8y - 24$.\n⛔ Le piège : écrire $8(y - 24)$, en oubliant de diviser le second terme. En développant, on trouverait $8y - 192$.\nRéponse : a) $5(x + 7)$ ; b) $8(y - 3)$ ; c) $7(3 + t)$ ; d) $9(n - 5)$.",
           schema: division("8", ["8y", "− 24"], ["y", "− 3"]),
@@ -362,6 +374,12 @@ export const exercicesFactorisation4e: FicheExercicesData = {
         },
         {
           enonce: "Quatre élèves ont factorisé $18x + 24$.\nInès : $2(9x + 12)$. Malo : $3(6x + 8)$. Yanis : $6(3x + 4)$. Léa : $1{,}5(12x + 16)$.\na) Développe chaque écriture. Sont-elles toutes égales à $18x + 24$ ?\nb) La consigne était « factorise ». Qui a vraiment terminé ? Pourquoi ?\nc) Factorise le plus possible : $20t - 30$, puis $24n + 16$.",
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: ["Yanis"] },
+            { question: "c) 1", attendu: ["10(2t-3)", "10(-3+2t)"], exact: true },
+            { question: "c) 2", attendu: ["8(3n+2)", "8(2+3n)"], exact: true },
+          ],
           correction:
             "a) Je développe : $2(9x + 12) = 18x + 24$ ; $3(6x + 8) = 18x + 24$ ; $6(3x + 4) = 18x + 24$ ; $1{,}5(12x + 16) = 18x + 24$. Les quatre écritures sont égales à $18x + 24$.\nb) « Factorise » veut dire : factorise LE PLUS POSSIBLE, avec le plus grand facteur commun entier. Dans $9x + 12$, il reste le facteur $3$ ; dans $6x + 8$, il reste $2$. Dans $3x + 4$, plus rien n'est commun : seul Yanis a terminé. Léa a pris un nombre décimal : on met en facteur un nombre entier, le plus grand qui divise $18$ et $24$, c'est-à-dire $6$.\nc) Le plus grand nombre qui divise $20$ et $30$ est $10$ : $20t - 30 = 10(2t - 3)$. Le plus grand nombre qui divise $24$ et $16$ est $8$ : $24n + 16 = 8(3n + 2)$.\n⛔ Le piège : s'arrêter au premier facteur trouvé, comme Inès avec $2$. Son écriture est juste, mais pas finie : je vérifie toujours que plus rien n'est commun dans la parenthèse.\nRéponse : a) oui, toutes ; b) seul Yanis, avec $6(3x + 4)$ ; c) $10(2t - 3)$ et $8(3n + 2)$.",
           schema: table(["écriture", "développée", "finie ?"], [
@@ -374,6 +392,12 @@ export const exercicesFactorisation4e: FicheExercicesData = {
         },
         {
           enonce: "Cette fois, le facteur commun est une lettre. Factorise.\na) $x^2 + 9x$\nb) $y^2 - 4y$\nc) $7t + t^2$\nd) $ab - 3b$",
+          reponses: [
+            { question: "a)", attendu: ["x(x+9)", "x(9+x)"], exact: true },
+            { question: "b)", attendu: ["y(y-4)", "y(-4+y)"], exact: true },
+            { question: "c)", attendu: ["t(7+t)", "t(t+7)"], exact: true },
+            { question: "d)", attendu: ["b(a-3)", "b(-3+a)"], exact: true },
+          ],
           correction:
             "$x^2$, c'est $x \\times x$ : au a), la lettre $x$ est dans les deux termes. Je divise chaque terme par la lettre commune.\na) $x^2 \\div x = x$ et $9x \\div x = 9$ : $x^2 + 9x = x(x + 9)$. Sur le dessin, le rectangle a pour hauteur $x$ et pour longueur $x + 9$.\nb) $y^2 \\div y = y$ et $4y \\div y = 4$ : $y^2 - 4y = y(y - 4)$.\nc) $7t \\div t = 7$ et $t^2 \\div t = t$ : $7t + t^2 = t(7 + t)$.\nd) $ab \\div b = a$ et $3b \\div b = 3$ : $ab - 3b = b(a - 3)$.\n⭐ Contrôle du a) : $x \\times x + x \\times 9 = x^2 + 9x$.\n⛔ Le piège : écrire $x(x + 9x)$, en gardant la lettre dans le second terme. En développant, on trouverait $x^2 + 9x^2$ : ce n'est pas l'expression de départ.\nRéponse : a) $x(x + 9)$ ; b) $y(y - 4)$ ; c) $t(7 + t)$ ; d) $b(a - 3)$.",
           schema: rectangle("x", ["x", "9"], ["x²", "9x"], "x² + 9x = x(x + 9)"),
@@ -381,6 +405,12 @@ export const exercicesFactorisation4e: FicheExercicesData = {
         },
         {
           enonce: "Le facteur commun est un nombre ET une lettre. Factorise le plus possible.\na) $4x^2 + 10x$\nb) $9y^2 - 12y$\nc) $15t + 5t^2$\nd) $8a^2 - 8a$",
+          reponses: [
+            { question: "a)", attendu: ["2x(2x+5)", "2x(5+2x)"], exact: true },
+            { question: "b)", attendu: ["3y(3y-4)", "3y(-4+3y)"], exact: true },
+            { question: "c)", attendu: ["5t(3+t)", "5t(t+3)"], exact: true },
+            { question: "d)", attendu: ["8a(a-1)", "8a(-1+a)"], exact: true },
+          ],
           correction:
             "Je cherche d'abord le plus grand nombre qui divise les coefficients, puis la lettre présente dans tous les termes. Le facteur commun est leur produit.\na) $2$ divise $4$ et $10$ ; $x$ est dans les deux termes : le facteur commun est $2x$. $4x^2 \\div 2x = 2x$ et $10x \\div 2x = 5$ : $4x^2 + 10x = 2x(2x + 5)$.\nb) $3$ et $y$ : le facteur commun est $3y$. $9y^2 \\div 3y = 3y$ et $12y \\div 3y = 4$ : $9y^2 - 12y = 3y(3y - 4)$.\nc) $5$ et $t$ : $15t \\div 5t = 3$ et $5t^2 \\div 5t = t$ : $15t + 5t^2 = 5t(3 + t)$.\nd) $8$ et $a$ : $8a^2 \\div 8a = a$ et $8a \\div 8a = 1$ : $8a^2 - 8a = 8a(a - 1)$.\n⛔ Le piège du b) : s'arrêter à $3(3y^2 - 4y)$. C'est juste, mais $y$ est encore dans les deux termes de la parenthèse : ce n'est pas fini.\nRéponse : a) $2x(2x + 5)$ ; b) $3y(3y - 4)$ ; c) $5t(3 + t)$ ; d) $8a(a - 1)$.",
           schema: division("3y", ["9y²", "− 12y"], ["3y", "− 4"]),
@@ -388,6 +418,12 @@ export const exercicesFactorisation4e: FicheExercicesData = {
         },
         {
           enonce: "Vérifie chaque factorisation en développant. Corrige celles qui sont fausses.\na) $15x + 20 = 5(3x + 4)$\nb) $7y + 7 = 7y$\nc) $x^2 - 6x = x(x - 6x)$\nd) $16a - 8 = 8(2a - 8)$",
+          reponses: [
+            { question: "a)", attendu: ["juste", "vrai", "oui"] },
+            { question: "b)", attendu: ["7(y+1)", "7(1+y)"], exact: true },
+            { question: "c)", attendu: ["x(x-6)", "x(-6+x)"], exact: true },
+            { question: "d)", attendu: ["8(2a-1)", "8(-1+2a)"], exact: true },
+          ],
           correction:
             "Pour vérifier, je DÉVELOPPE le produit, puis je compare à l'expression de départ.\na) $5 \\times 3x + 5 \\times 4 = 15x + 20$ : c'est l'expression de départ. Juste.\nb) $7y$ n'est pas l'expression de départ : pour $y = 1$, $7y + 7$ vaut $14$ alors que $7y$ vaut $7$. Faux. Le second terme est $7 = 7 \\times 1$ : $7y + 7 = 7(y + 1)$.\nc) Je développe : $x \\times x - x \\times 6x$ donne $x^2 - 6x^2$, pas $x^2 - 6x$. Faux. $6x \\div x = 6$ : $x^2 - 6x = x(x - 6)$.\nd) Je développe : $8 \\times 2a - 8 \\times 8$ donne $16a - 64$. Faux. $8 \\div 8 = 1$ : $16a - 8 = 8(2a - 1)$.\n⛔ Le piège du b) et du d) : faire disparaître le terme qui EST le facteur commun. Il ne disparaît pas : il devient $1$ dans la parenthèse.\nRéponse : a) juste ; b) $7(y + 1)$ ; c) $x(x - 6)$ ; d) $8(2a - 1)$.",
           schema: fleches("7", ["y", "+ 1"], "7y + 7"),
@@ -395,6 +431,12 @@ export const exercicesFactorisation4e: FicheExercicesData = {
         },
         {
           enonce: "Calcule de tête, en mettant en facteur le nombre qui se répète.\na) $17 \\times 23 + 17 \\times 77$\nb) $2{,}8 \\times 64 + 2{,}8 \\times 36$\nc) $46 \\times 13 - 46 \\times 3$\nd) $25 \\times 39 + 25$",
+          reponses: [
+            { question: "a)", attendu: "1700" },
+            { question: "b)", attendu: "280" },
+            { question: "c)", attendu: "460" },
+            { question: "d)", attendu: "1000" },
+          ],
           correction:
             "$k \\times a + k \\times b = k \\times (a + b)$ : je mets en facteur le nombre qui se répète, et la parenthèse donne un nombre rond.\na) $17 \\times 23 + 17 \\times 77 = 17 \\times (23 + 77) = 17 \\times 100 = 1\\,700$. Le dessin le montre : deux rectangles de hauteur $17$ collés font un rectangle de longueur $100$.\nb) $2{,}8 \\times 64 + 2{,}8 \\times 36 = 2{,}8 \\times (64 + 36) = 2{,}8 \\times 100 = 280$.\nc) $46 \\times 13 - 46 \\times 3 = 46 \\times (13 - 3) = 46 \\times 10 = 460$.\nd) $25 = 25 \\times 1$, donc $25 \\times 39 + 25 = 25 \\times (39 + 1) = 25 \\times 40 = 1\\,000$.\n⛔ Le piège du d) : croire que le $25$ tout seul n'a pas de partenaire, et compter $39$ fois $25$. Le $25$ seul compte pour $25 \\times 1$ : c'est $40$ fois $25$.\nRéponse : a) $1\\,700$ ; b) $280$ ; c) $460$ ; d) $1\\,000$.",
           schema: rectangle("17", ["23", "77"], ["17 × 23", "17 × 77"], "17 × 100 = 1 700"),
@@ -402,6 +444,12 @@ export const exercicesFactorisation4e: FicheExercicesData = {
         },
         {
           enonce: "Vrai ou faux ? Justifie.\na) $5x + 3$ peut se factoriser par un nombre entier autre que $1$.\nb) Dans $10x + 15$, le plus grand facteur commun est $5$.\nc) $x^2 + 4x$ et $x(x + 4)$ sont égaux pour toutes les valeurs de $x$.\nd) La factorisation de $2x + 10y$ est $2(x + 10y)$.",
+          reponses: [
+            { question: "a)", attendu: ["non", "faux"] },
+            { question: "b)", attendu: ["oui", "vrai"] },
+            { question: "c)", attendu: ["oui", "vrai"] },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) Faux. Les nombres qui divisent $5$ sont $1$ et $5$, et $5$ ne divise pas $3$. Il n'y a pas de facteur commun autre que $1$ : $5x + 3$ ne se factorise pas.\nb) Vrai. $10 = 5 \\times 2$ et $15 = 5 \\times 3$, et dans $2x + 3$ plus rien n'est commun : $10x + 15 = 5(2x + 3)$. Sur le dessin : $5$ paquets identiques de $2$ barres et $3$ carrés.\nc) Vrai. Je développe : $x(x + 4) = x^2 + 4x$. Un développement juste prouve l'égalité pour TOUTES les valeurs.\nd) Faux. Le $2$ doit diviser les DEUX termes : $10y \\div 2 = 5y$, donc $2x + 10y = 2(x + 5y)$. En développant $2(x + 10y)$, on trouve $2x + 20y$.\n⛔ Le piège du d) : mettre $2$ en facteur sans diviser le second terme.\nRéponse : a) faux ; b) vrai ; c) vrai ; d) faux, c'est $2(x + 5y)$.",
           schema: ecranSeulement(paquets("x", 5, 2, 3, "5 × (2x + 3) = 10x + 15")),
@@ -424,6 +472,11 @@ export const exercicesFactorisation4e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Factorise le plus possible, puis vérifie en développant.\na) $8x + 12y - 4$\nb) $7x^2 - 14x + 21$\nc) $10t^2 + 25t$",
+          reponses: [
+            { question: "a)", attendu: ["4(2x+3y-1)"], exact: true },
+            { question: "b)", attendu: ["7(x^2-2x+3)"], exact: true },
+            { question: "c)", attendu: ["5t(2t+5)", "5t(5+2t)"], exact: true },
+          ],
           correction:
             "Avec trois termes, le facteur commun doit diviser les TROIS.\na) $4$ divise $8$, $12$ et $4$ ; aucune lettre n'est dans les trois termes. $8x \\div 4 = 2x$, $12y \\div 4 = 3y$ et $4 \\div 4 = 1$ : $8x + 12y - 4 = 4(2x + 3y - 1)$.\nVérification : $4 \\times 2x + 4 \\times 3y - 4 \\times 1 = 8x + 12y - 4$.\nb) $7$ divise $7$, $14$ et $21$ ; le dernier terme n'a pas de $x$, donc $x$ n'est pas commun. $7x^2 - 14x + 21 = 7(x^2 - 2x + 3)$.\nVérification : $7 \\times x^2 - 7 \\times 2x + 7 \\times 3 = 7x^2 - 14x + 21$.\nc) $5$ divise $10$ et $25$, et $t$ est dans les deux termes : le facteur commun est $5t$. $10t^2 + 25t = 5t(2t + 5)$.\nVérification : $5t \\times 2t + 5t \\times 5 = 10t^2 + 25t$.\n⛔ Le piège du a) : écrire $4(2x + 3y)$, en perdant le dernier terme. Il y a trois termes au départ : il en faut trois dans la parenthèse.\n⛔ Le piège du b) : mettre $7x$ en facteur. $21$ n'a pas de $x$ : la lettre n'est pas commune aux trois termes.\nRéponse : a) $4(2x + 3y - 1)$ ; b) $7(x^2 - 2x + 3)$ ; c) $5t(2t + 5)$.",
           schema: ecranSeulement(division("4", ["8x", "+ 12y", "− 4"], ["2x", "+ 3y", "− 1"])),
@@ -431,6 +484,11 @@ export const exercicesFactorisation4e: FicheExercicesData = {
         },
         {
           enonce: "Réduis d'abord, puis factorise le plus possible.\na) $3x + 9 + 5x + 15$\nb) $2y^2 + 7y + 3y^2 - 2y$\nc) $11a + 4 - 2a + 14$",
+          reponses: [
+            { question: "a)", attendu: ["8(x+3)", "8(3+x)"], exact: true },
+            { question: "b)", attendu: ["5y(y+1)", "5y(1+y)"], exact: true },
+            { question: "c)", attendu: ["9(a+2)", "9(2+a)"], exact: true },
+          ],
           correction:
             "Je factorise une expression rangée : je regroupe d'abord les termes semblables.\na) $3x + 5x = 8x$ et $9 + 15 = 24$. Puis $8$ divise $8x$ et $24$ : $3x + 9 + 5x + 15 = 8x + 24 = 8(x + 3)$.\nb) $2y^2 + 3y^2 = 5y^2$ et $7y - 2y = 5y$. Le facteur commun est $5y$ : $2y^2 + 7y + 3y^2 - 2y = 5y^2 + 5y = 5y(y + 1)$.\nc) $11a - 2a = 9a$ et $4 + 14 = 18$ : $11a + 4 - 2a + 14 = 9a + 18 = 9(a + 2)$.\n⭐ Contrôle du a) avec $x = 1$ : au départ, $3 + 9 + 5 + 15 = 32$ ; à la fin, $8 \\times (1 + 3) = 32$.\n⛔ Le piège : factoriser trop tôt, morceau par morceau, par exemple $3(x + 3) + 5x + 15$. C'est juste, mais ce n'est pas un produit : la somme est toujours là.\n⛔ Le piège du b) : oublier le $1$ dans la parenthèse, quand $5y$ est le facteur commun lui-même.\nRéponse : a) $8(x + 3)$ ; b) $5y(y + 1)$ ; c) $9(a + 2)$.",
           schema: ecranSeulement(paquets("x", 8, 1, 3, "8x + 24 = 8 × (x + 3)")),
@@ -438,6 +496,10 @@ export const exercicesFactorisation4e: FicheExercicesData = {
         },
         {
           enonce: "Un club de basket équipe ses $12$ joueuses. Pour chacune, il achète un maillot à $x$ € et une paire de chaussettes à $6$ €. Le trésorier écrit la dépense : $12x + 72$.\na) Que représentent $12x$ et $72$ ?\nb) Factorise $12x + 72$. Que représente la parenthèse ?\nc) Un maillot coûte $25$ €. Calcule la dépense avec chacune des deux écritures.",
+          reponses: [
+            { question: "b)", attendu: ["12(x+6)", "12(6+x)"], exact: true },
+            { question: "c)", attendu: "372" },
+          ],
           correction:
             "a) $12x$, c'est $12$ maillots à $x$ € : le prix des maillots. $72$, c'est $12 \\times 6$ : le prix des $12$ paires de chaussettes.\nb) Le plus grand nombre qui divise $12$ et $72$ est $12$, car $72 = 12 \\times 6$. Donc $12x + 72 = 12(x + 6)$.\nLa parenthèse $x + 6$, c'est le prix de l'équipement d'UNE joueuse : un maillot et une paire de chaussettes.\nc) Avec la somme : $12 \\times 25 + 72 = 300 + 72 = 372$. Avec le produit : $12 \\times (25 + 6) = 12 \\times 31 = 372$. Les deux donnent $372$ €.\n⛔ Le piège du b) : mettre seulement $6$ en facteur, et écrire $6(2x + 12)$. C'est juste, mais $2x + 12$ a encore $2$ en commun ; et la parenthèse ne dit plus rien de la situation.\nRéponse : a) le prix des maillots et celui des chaussettes ; b) $12(x + 6)$, le prix pour une joueuse ; c) $372$ €.",
           schema: rectangle("12", ["x", "6"], ["12x", "72"], "12x + 72 = 12(x + 6)"),
@@ -445,6 +507,12 @@ export const exercicesFactorisation4e: FicheExercicesData = {
         },
         {
           enonce: "Complète chaque factorisation, puis vérifie en développant.\na) $18x + 30 = 6(\\dots + \\dots)$\nb) $14y - 21 = \\dots(2y - 3)$\nc) $x^2 - 10x = x(\\dots)$\nd) $20a^2 + 8a = 4a(\\dots)$",
+          reponses: [
+            { question: "a)", attendu: "3x + 5" },
+            { question: "b)", attendu: "7" },
+            { question: "c)", attendu: "x - 10" },
+            { question: "d)", attendu: "5a + 2" },
+          ],
           correction:
             "a) Je divise chaque terme par $6$ : $18x \\div 6 = 3x$ et $30 \\div 6 = 5$. Donc $18x + 30 = 6(3x + 5)$.\nb) Je cherche le nombre qui, multiplié par $2y$, donne $14y$ : c'est $7$. Et $7 \\times 3 = 21$ : ça marche aussi pour le second terme. $14y - 21 = 7(2y - 3)$.\nc) $x^2 \\div x = x$ et $10x \\div x = 10$ : $x^2 - 10x = x(x - 10)$.\nd) $20a^2 \\div 4a = 5a$ et $8a \\div 4a = 2$ : $20a^2 + 8a = 4a(5a + 2)$.\nVérification du d) : $4a \\times 5a + 4a \\times 2 = 20a^2 + 8a$.\n⛔ Le piège du b) : chercher le facteur avec un seul terme. Je contrôle toujours avec l'autre : $7 \\times 3 = 21$.\nRéponse : a) $3x + 5$ ; b) $7$ ; c) $x - 10$ ; d) $5a + 2$.",
           schema: ecranSeulement(division("4a", ["20a²", "+ 8a"], ["5a", "+ 2"])),
@@ -452,6 +520,12 @@ export const exercicesFactorisation4e: FicheExercicesData = {
         },
         {
           enonce: "Programme A : choisir un nombre ; le multiplier par $6$ ; ajouter $15$.\nProgramme B : choisir un nombre ; le multiplier par $2$ ; ajouter $5$ ; multiplier le résultat par $3$.\na) Applique les deux programmes à $4$, puis à $10$.\nb) On choisit un nombre $x$. Écris le résultat du programme A.\nc) Factorise ce résultat, et explique pourquoi les deux programmes donnent toujours le même nombre.",
+          reponses: [
+            { question: "a) 4", attendu: "39 ; 39" },
+            { question: "a) 10", attendu: "75 ; 75" },
+            { question: "b)", attendu: "6x + 15" },
+            { question: "c)", attendu: ["3(2x+5)", "3(5+2x)"], exact: true },
+          ],
           correction:
             "a) Avec $4$ : A donne $4 \\times 6 + 15 = 39$ ; B donne $(4 \\times 2 + 5) \\times 3 = 13 \\times 3 = 39$.\nAvec $10$ : A donne $10 \\times 6 + 15 = 75$ ; B donne $(10 \\times 2 + 5) \\times 3 = 25 \\times 3 = 75$.\nb) $x$ multiplié par $6$, puis $15$ de plus : $6x + 15$.\nc) $3$ divise $6$ et $15$ : $6x + 15 = 3(2x + 5)$. Or le programme B calcule exactement $3 \\times (2x + 5)$ : d'abord $2x + 5$, puis fois $3$. Les deux programmes donnent le même nombre, pour TOUT nombre $x$.\n⛔ Le piège : croire que les deux essais du a) prouvent la règle. Ils donnent une idée ; c'est la factorisation qui la prouve pour tous les nombres.\nRéponse : a) $39$ et $39$, puis $75$ et $75$ ; b) $6x + 15$ ; c) $6x + 15 = 3(2x + 5)$, c'est le programme B.",
           schema: ecranSeulement(
@@ -464,6 +538,12 @@ export const exercicesFactorisation4e: FicheExercicesData = {
         },
         {
           enonce: "L'aire d'un rectangle est $3x^2 + 21x$ (en cm²).\na) Sa largeur est $3x$. Quelle est sa longueur ?\nb) Un autre rectangle a la même aire et une largeur de $3$. Quelle est sa longueur ?\nc) Un troisième a la même aire et une largeur de $x$. Quelle est sa longueur ?\nd) Laquelle des trois écritures est factorisée le plus possible ?",
+          reponses: [
+            { question: "a)", attendu: "x + 7" },
+            { question: "b)", attendu: "x^2 + 7x" },
+            { question: "c)", attendu: "3x + 21" },
+            { question: "d)", attendu: ["3x(x+7)", "3x(7+x)"], exact: true },
+          ],
           correction:
             "L'aire d'un rectangle est largeur × longueur : je trouve la longueur en divisant chaque terme de l'aire par la largeur.\na) $3x^2 \\div 3x = x$ et $21x \\div 3x = 7$ : $3x^2 + 21x = 3x(x + 7)$. La longueur est $x + 7$.\nb) $3x^2 \\div 3 = x^2$ et $21x \\div 3 = 7x$ : $3x^2 + 21x = 3(x^2 + 7x)$. La longueur est $x^2 + 7x$.\nc) $3x^2 \\div x = 3x$ et $21x \\div x = 21$ : $3x^2 + 21x = x(3x + 21)$. La longueur est $3x + 21$.\nd) Dans $x^2 + 7x$, il reste $x$ en commun ; dans $3x + 21$, il reste $3$. Dans $x + 7$, plus rien : $3x(x + 7)$ est factorisée le plus possible.\n⭐ Contrôle pour $x = 3$ : l'aire vaut $3 \\times 9 + 21 \\times 3 = 90$, et le rectangle du a) mesure $9$ sur $10$ : $9 \\times 10 = 90$.\n⛔ Le piège : croire qu'une expression n'a qu'une seule factorisation. Elle en a plusieurs ; « factorise » demande la plus poussée.\nRéponse : a) $x + 7$ ; b) $x^2 + 7x$ ; c) $3x + 21$ ; d) $3x(x + 7)$.",
           schema: rectangle("3x", ["x", "7"], ["3x²", "21x"], "3x² + 21x = 3x(x + 7)"),
@@ -471,6 +551,12 @@ export const exercicesFactorisation4e: FicheExercicesData = {
         },
         {
           enonce: "Les côtés d'un polygone régulier sont tous égaux.\na) Un triangle équilatéral a pour périmètre $9x + 6$ (en cm). Quelle est la longueur d'un côté ?\nb) Un carré a pour périmètre $12x + 28$. Quelle est la longueur d'un côté ?\nc) Un hexagone régulier (six côtés) a pour périmètre $24x + 30$. Quelle est la longueur d'un côté ?\nd) Calcule le côté du carré pour $x = 2$.",
+          reponses: [
+            { question: "a)", attendu: "3x + 2" },
+            { question: "b)", attendu: "3x + 7" },
+            { question: "c)", attendu: "4x + 5" },
+            { question: "d)", attendu: "13" },
+          ],
           correction:
             "Le périmètre d'un polygone régulier, c'est le nombre de côtés FOIS un côté. Je mets donc en facteur le nombre de côtés : la parenthèse est le côté.\na) $9x \\div 3 = 3x$ et $6 \\div 3 = 2$ : $9x + 6 = 3(3x + 2)$. Un côté mesure $3x + 2$.\nb) $12x \\div 4 = 3x$ et $28 \\div 4 = 7$ : $12x + 28 = 4(3x + 7)$. Un côté mesure $3x + 7$.\nc) $24x \\div 6 = 4x$ et $30 \\div 6 = 5$ : $24x + 30 = 6(4x + 5)$. Un côté mesure $4x + 5$.\n⭐ Ici, le nombre de côtés est justement le plus grand facteur commun.\nd) Pour $x = 2$ : $3 \\times 2 + 7 = 13$. Le côté mesure $13$ cm. Contrôle : $12 \\times 2 + 28 = 52$ et $4 \\times 13 = 52$.\n⛔ Le piège : diviser seulement le premier terme, et répondre $3x + 6$ pour le triangle. Le périmètre serait alors $3 \\times (3x + 6)$, soit $9x + 18$.\nRéponse : a) $3x + 2$ ; b) $3x + 7$ ; c) $4x + 5$ ; d) $13$ cm.",
           schema: ecranSeulement(triangle({ A: [2, 3.4641], B: [0, 0], C: [4, 0] }, { cotes: { AB: "3x + 2", BC: "3x + 2", CA: "3x + 2" } })),
@@ -478,6 +564,12 @@ export const exercicesFactorisation4e: FicheExercicesData = {
         },
         {
           enonce: "Cette fois, on met un nombre NÉGATIF en facteur.\na) Factorise $-5x - 15$ en mettant $-5$ en facteur.\nb) Factorise $-4x + 12$ en mettant $-4$ en facteur.\nc) Factorise $-6x^2 - 9x$ en mettant $-3x$ en facteur.\nd) Factorise $-2y + 14$ en mettant un nombre négatif en facteur.\nVérifie chaque réponse en redéveloppant.",
+          reponses: [
+            { question: "a)", attendu: ["-5(x+3)", "-5(3+x)"], exact: true },
+            { question: "b)", attendu: ["-4(x-3)", "-4(-3+x)"], exact: true },
+            { question: "c)", attendu: ["-3x(2x+3)", "-3x(3+2x)"], exact: true },
+            { question: "d)", attendu: ["-2(y-7)", "-2(-7+y)"], exact: true },
+          ],
           correction:
             "Je divise CHAQUE terme par le facteur négatif, avec la règle des signes : diviser par un nombre négatif change le signe de chaque terme.\na) $-5x \\div (-5) = x$ et $-15 \\div (-5) = 3$ : $-5x - 15 = -5(x + 3)$. Les deux termes étaient négatifs ; dans la parenthèse, ils deviennent positifs.\nb) $-4x \\div (-4) = x$ et $12 \\div (-4) = -3$ : $-4x + 12 = -4(x - 3)$.\nc) $-6x^2 \\div (-3x) = 2x$ et $-9x \\div (-3x) = 3$ : $-6x^2 - 9x = -3x(2x + 3)$.\nd) Je prends $-2$, qui divise $-2$ et $14$ : $-2y \\div (-2) = y$ et $14 \\div (-2) = -7$, donc $-2y + 14 = -2(y - 7)$.\nVérification du b) en redéveloppant : $(-4) \\times x + (-4) \\times (-3) = -4x + 12$. Et du a) : $(-5) \\times x + (-5) \\times 3 = -5x - 15$.\n⛔ Le piège du a) : écrire $-5(x - 3)$, en gardant le signe moins du $-15$. Or $-15 \\div (-5) = 3$ : moins divisé par moins donne plus. En redéveloppant $-5(x - 3)$, on trouverait $-5x + 15$, pas l'expression de départ.\nRéponse : a) $-5(x + 3)$ ; b) $-4(x - 3)$ ; c) $-3x(2x + 3)$ ; d) $-2(y - 7)$.",
           schema: division("−5", ["−5x", "− 15"], ["x", "+ 3"]),
@@ -501,6 +593,14 @@ export const exercicesFactorisation4e: FicheExercicesData = {
           titre: "La fresque du collège",
           enonce:
             "Des élèves peignent une fresque sur un mur de $3$ m de haut. Elle a trois panneaux côte à côte, de même hauteur : un de $x$ m de long, un de $2x$ m, et un de $4$ m.\na) Écris l'aire de chaque panneau, puis l'aire totale, réduite.\nb) Factorise l'aire totale. Que représente la parenthèse ?\nc) Pour $x = 2{,}5$, calcule la longueur de la fresque, puis son aire de deux façons.\nd) Un pot de peinture couvre $6$ m². Combien de pots faut-il pour $x = 2{,}5$ ?",
+          reponses: [
+            { question: "a) aires", attendu: "3x ; 6x ; 12" },
+            { question: "a) total", attendu: ["9x+12", "12+9x"], exact: true },
+            { question: "b)", attendu: ["3(3x+4)", "3(4+3x)"], exact: true },
+            { question: "c) L", attendu: "11,5" },
+            { question: "c) aire", attendu: "34,5" },
+            { question: "d)", attendu: "6" },
+          ],
           figure: rectangle("3", ["x", "2x", "4"], ["?", "?", "?"]),
           correction:
             "a) L'aire d'un rectangle, c'est hauteur × longueur. Les panneaux : $3 \\times x = 3x$ ; $3 \\times 2x = 6x$ ; $3 \\times 4 = 12$ (en m²). L'aire totale : $3x + 6x + 12 = 9x + 12$.\nb) $3$ divise $9$ et $12$ : $9x + 12 = 3(3x + 4)$. La hauteur est $3$ m, donc la parenthèse $3x + 4$ est la longueur totale de la fresque : $x + 2x + 4$.\nc) La longueur : $3 \\times 2{,}5 + 4 = 11{,}5$ m. L'aire avec la somme : $9 \\times 2{,}5 + 12 = 34{,}5$. Avec le produit : $3 \\times 11{,}5 = 34{,}5$. L'aire est $34{,}5$ m².\nd) $34{,}5 \\div 6 = 5{,}75$ : $5$ pots ne suffisent pas, il en faut $6$.\n⛔ Le piège du b) : lire $3x + 4$ comme une aire. C'est une longueur : l'aire, c'est $3$ fois cette longueur.\nRéponse : a) $3x$, $6x$ et $12$ ; $9x + 12$ ; b) $3(3x + 4)$, la longueur ; c) $11{,}5$ m et $34{,}5$ m² ; d) $6$ pots.",
@@ -510,6 +610,13 @@ export const exercicesFactorisation4e: FicheExercicesData = {
           titre: "Trois nombres qui se suivent",
           enonce:
             "Hugo choisit trois nombres entiers qui se suivent, et les additionne.\na) Fais-le avec $8$, $9$ et $10$, puis avec $41$, $42$ et $43$. Divise chaque somme par $3$ : que remarques-tu ?\nb) On appelle $n$ le plus petit des trois nombres. Écris les deux autres, puis la somme, réduite.\nc) Factorise la somme. Explique pourquoi elle est toujours un multiple de $3$, et égale à $3$ fois le nombre du milieu.\nd) Trois nombres qui se suivent ont pour somme $132$. Lesquels ?",
+          reponses: [
+            { question: "a) 1", attendu: "27" },
+            { question: "a) 2", attendu: "126" },
+            { question: "b)", attendu: ["3n+3", "3+3n"], exact: true },
+            { question: "c)", attendu: ["3(n+1)", "3(1+n)"], exact: true },
+            { question: "d)", attendu: "43 ; 44 ; 45" },
+          ],
           correction:
             "a) $8 + 9 + 10 = 27$ et $27 \\div 3 = 9$. $41 + 42 + 43 = 126$ et $126 \\div 3 = 42$. Chaque fois, la somme divisée par $3$ donne le nombre du milieu.\nb) Les deux autres sont $n + 1$ et $n + 2$. La somme : $n + n + 1 + n + 2 = 3n + 3$.\nc) $3n + 3 = 3(n + 1)$. C'est $3$ fois un nombre entier : un multiple de $3$. Et $n + 1$ est le nombre du milieu.\nLe dessin le montre : les trois barres et les trois carrés se rangent en $3$ paquets identiques d'une barre et d'un carré.\nd) $132 \\div 3 = 44$ : le nombre du milieu est $44$. Les nombres sont $43$, $44$ et $45$. Contrôle : $43 + 44 + 45 = 132$.\n⛔ Le piège : croire que deux exemples prouvent la règle. C'est la factorisation qui la prouve, pour tous les nombres $n$.\nRéponse : a) $27$ et $126$, le nombre du milieu ; b) $3n + 3$ ; c) $3(n + 1)$ ; d) $43$, $44$ et $45$.",
           schema: paquets("n", 3, 1, 1, "3n + 3 = 3 × (n + 1)"),
@@ -519,6 +626,15 @@ export const exercicesFactorisation4e: FicheExercicesData = {
           titre: "Le jardin agrandi",
           enonce:
             "Un jardin carré a des côtés de $x$ m. On l'agrandit d'une bande de $3$ m de large, le long d'un de ses côtés, pour y planter des framboisiers.\na) Écris l'aire du carré, celle de la bande, puis l'aire totale.\nb) Factorise l'aire totale. Quelles sont les dimensions du nouveau jardin ?\nc) Pour $x = 12$, calcule l'aire totale avec les deux écritures.\nd) Écris le périmètre du nouveau jardin, puis factorise-le.",
+          reponses: [
+            { question: "a) carré", attendu: "x^2" },
+            { question: "a) bande", attendu: "3x" },
+            { question: "a) total", attendu: "x^2 + 3x" },
+            { question: "b)", attendu: ["x(x+3)", "x(3+x)", "(x+3)x", "(3+x)x"], exact: true },
+            { question: "c)", attendu: "180" },
+            { question: "d) P", attendu: ["4x+6", "6+4x"], exact: true },
+            { question: "d) fact.", attendu: ["2(2x+3)", "2(3+2x)"], exact: true },
+          ],
           correction:
             "a) Le carré : $x \\times x = x^2$. La bande : un rectangle de $x$ m sur $3$ m, d'aire $3x$. L'aire totale : $x^2 + 3x$ (en m²).\nb) $x$ est dans les deux termes : $x^2 + 3x = x(x + 3)$. Le nouveau jardin est un rectangle de $x$ m sur $x + 3$ m : c'est ce que montre le dessin.\nc) Avec la somme : $12^2 + 3 \\times 12 = 144 + 36 = 180$. Avec le produit : $12 \\times (12 + 3) = 12 \\times 15 = 180$. L'aire est $180$ m².\nd) Le périmètre : $x + (x + 3) + x + (x + 3) = 4x + 6$. Puis $4x + 6 = 2(2x + 3)$ : c'est deux fois la somme de la largeur $x$ et de la longueur $x + 3$.\n⛔ Le piège du d) : écrire $4(x + 6)$. Le $4$ ne divise pas $6$ : le plus grand facteur commun de $4$ et de $6$ est $2$.\nRéponse : a) $x^2$, $3x$ et $x^2 + 3x$ ; b) $x(x + 3)$, un rectangle de $x$ m sur $x + 3$ m ; c) $180$ m² ; d) $4x + 6 = 2(2x + 3)$.",
           schema: rectangle("x", ["x", "3"], ["x²", "3x"], "x² + 3x = x(x + 3)"),
@@ -528,6 +644,12 @@ export const exercicesFactorisation4e: FicheExercicesData = {
           titre: "Le relais solidaire",
           enonce:
             "Pour une course solidaire, chaque équipe compte $4$ relayeurs. Chacun court la même distance : $x$ m sur la piste, puis $250$ m dans le parc.\na) Écris la distance parcourue par l'équipe de deux façons : développée, puis factorisée.\nb) Vérifie en développant.\nc) L'équipe parcourt $5\\,000$ m en tout. Quelle distance court chaque relayeur ? Combien de mètres sur la piste ?\nd) Mila écrit la distance $2(2x + 500)$. A-t-elle raison ? Sa factorisation est-elle finie ?",
+          reponses: [
+            { question: "a) dév.", attendu: ["4x+1000", "1000+4x"], exact: true },
+            { question: "a) fact.", attendu: ["4(x+250)", "4(250+x)"], exact: true },
+            { question: "c) relais", attendu: "1250" },
+            { question: "c) piste", attendu: "1000" },
+          ],
           figure: bandes(4, ["x", "250"], "4 relayeurs : la même distance chacun"),
           correction:
             "a) Chaque relayeur court $x + 250$ m, et ils sont $4$ : la distance est $4(x + 250)$. Développée : $4x + 1\\,000$.\nb) $4 \\times x + 4 \\times 250 = 4x + 1\\,000$ : c'est bien la même distance.\nc) Les $5\\,000$ m, c'est $4$ fois la distance d'un relayeur : $5\\,000 \\div 4 = 1\\,250$ m par relayeur. Sur la piste : $1\\,250 - 250 = 1\\,000$ m.\nd) $2(2x + 500) = 4x + 1\\,000$ : son écriture est juste. Mais $2x + 500$ a encore $2$ en commun : $2(2x + 500) = 4(x + 250)$. Sa factorisation n'est pas finie.\n⭐ Le dessin montre les $4$ bandes identiques : la factorisation fait voir ce qui se répète.\n⛔ Le piège du c) : enlever les $250$ m une seule fois, sur le total. Les $250$ m du parc reviennent pour CHAQUE relayeur.\nRéponse : a) $4x + 1\\,000$ et $4(x + 250)$ ; c) $1\\,250$ m par relayeur, dont $1\\,000$ m sur la piste ; d) juste, mais pas finie : $4(x + 250)$.",

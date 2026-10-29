@@ -149,6 +149,11 @@ export const exercicesFractionsNombres4e: FicheExercicesData = {
         {
           enonce:
             "Complète pour que les deux fractions soient égales.\na) $\\dfrac{3}{5} = \\dfrac{\\ldots}{20}$\nb) $\\dfrac{4}{7} = \\dfrac{12}{\\ldots}$\nc) $\\dfrac{2}{9} = \\dfrac{\\ldots}{45}$",
+          reponses: [
+            { question: "a)", attendu: "12" },
+            { question: "b)", attendu: "21" },
+            { question: "c)", attendu: "10" },
+          ],
           correction:
             "a) Je regarde comment on passe de $5$ à $20$ : $5 \\times 4 = 20$. Je fais la même chose en haut : $3 \\times 4 = 12$. Donc $\\dfrac{3}{5} = \\dfrac{12}{20}$.\nb) Cette fois, je regarde en haut : $4 \\times 3 = 12$. Je multiplie aussi en bas par $3$ : $7 \\times 3 = 21$. Donc $\\dfrac{4}{7} = \\dfrac{12}{21}$.\nc) $9 \\times 5 = 45$, donc en haut $2 \\times 5 = 10$ : $\\dfrac{2}{9} = \\dfrac{10}{45}$.\n⛔ Le piège : AJOUTER au lieu de multiplier. De $5$ à $20$, on ajoute $15$ ; mais $\\dfrac{3 + 15}{20} = \\dfrac{18}{20}$, qui vaut $0{,}9$, alors que $\\dfrac{3}{5}$ vaut $0{,}6$. Ce n'est plus le même nombre.\nRéponse : $\\dfrac{3}{5} = \\dfrac{12}{20}$ ; $\\dfrac{4}{7} = \\dfrac{12}{21}$ ; $\\dfrac{2}{9} = \\dfrac{10}{45}$.",
           schema: comparer([3, 5], [12, 20]),
@@ -157,6 +162,9 @@ export const exercicesFractionsNombres4e: FicheExercicesData = {
         {
           enonce:
             "Parmi les fractions $\\dfrac{8}{12}$, $\\dfrac{10}{15}$, $\\dfrac{6}{10}$ et $\\dfrac{14}{21}$, lesquelles sont égales à $\\dfrac{2}{3}$ ?",
+          reponses: [
+            { attendu: "8/12 ; 10/15 ; 14/21" },
+          ],
           correction:
             "Je simplifie chaque fraction au maximum, puis je compare le résultat à $\\dfrac{2}{3}$.\n$\\dfrac{8}{12}$ : je divise en haut et en bas par $4$, $\\dfrac{8}{12} = \\dfrac{2}{3}$.\n$\\dfrac{10}{15}$ : je divise par $5$, $\\dfrac{10}{15} = \\dfrac{2}{3}$.\n$\\dfrac{6}{10}$ : je divise par $2$, $\\dfrac{6}{10} = \\dfrac{3}{5}$. Ce n'est pas $\\dfrac{2}{3}$.\n$\\dfrac{14}{21}$ : je divise par $7$, $\\dfrac{14}{21} = \\dfrac{2}{3}$.\n⛔ Le piège : chercher « le même écart » entre le haut et le bas. $\\dfrac{2}{3}$ et $\\dfrac{5}{6}$ ont le même écart, $1$, et pourtant $\\dfrac{5}{6}$ est plus grand. On multiplie ou on divise, on n'ajoute jamais.\nRéponse : $\\dfrac{8}{12}$, $\\dfrac{10}{15}$ et $\\dfrac{14}{21}$ sont égales à $\\dfrac{2}{3}$ ; $\\dfrac{6}{10}$ ne l'est pas.",
           schema: tableau(["fraction", "8/12", "10/15", "6/10", "14/21"], ["simplifiée", "2/3", "2/3", "3/5", "2/3"]),
@@ -164,6 +172,9 @@ export const exercicesFractionsNombres4e: FicheExercicesData = {
         },
         {
           enonce: "Simplifie $\\dfrac{30}{42}$ jusqu'à obtenir une fraction irréductible.",
+          reponses: [
+            { attendu: ["5/7"], exact: true },
+          ],
           correction:
             "$30$ et $42$ sont pairs : je divise en haut et en bas par $2$. $\\dfrac{30}{42} = \\dfrac{15}{21}$.\n$15 = 3 \\times 5$ et $21 = 3 \\times 7$ : je divise encore par $3$. $\\dfrac{15}{21} = \\dfrac{5}{7}$.\n$5$ et $7$ n'ont plus aucun diviseur commun à part $1$ : je m'arrête, $\\dfrac{5}{7}$ est irréductible.\n⭐ Plus court : $6$ divise $30$ et $42$. En divisant d'un coup par $6$, je tombe directement sur $\\dfrac{5}{7}$.\n⛔ Le piège : s'arrêter à $\\dfrac{15}{21}$. Elle est plus simple, mais pas irréductible : $3$ divise encore les deux nombres.\nRéponse : $\\dfrac{30}{42} = \\dfrac{5}{7}$.",
           schema: etapes(["", "numérateur", "dénominateur"], [["au départ", "30", "42"], ["÷ 2", "15", "21"], ["÷ 3", "5", "7"]]),
@@ -171,6 +182,10 @@ export const exercicesFractionsNombres4e: FicheExercicesData = {
         },
         {
           enonce: "Pour simplifier $\\dfrac{13}{39}$, Mila barre les deux chiffres $3$ et écrit $\\dfrac{1}{9}$. A-t-elle raison ? Simplifie correctement.",
+          reponses: [
+            { question: "Mila", attendu: ["non", "faux"] },
+            { question: "fraction", attendu: ["1/3"], exact: true },
+          ],
           correction:
             "Simplifier, c'est DIVISER le numérateur et le dénominateur par un même nombre. Barrer un chiffre n'est pas une division.\nJe cherche un diviseur commun : $39 = 3 \\times 13$. Donc $13$ divise à la fois $13$ et $39$.\nJe divise en haut et en bas par $13$ : $13 \\div 13 = 1$ et $39 \\div 13 = 3$. Donc $\\dfrac{13}{39} = \\dfrac{1}{3}$.\n⭐ Contrôle : $\\dfrac{1}{9} \\approx 0{,}11$ et $\\dfrac{1}{3} \\approx 0{,}33$. Mila a trouvé un nombre trois fois trop petit.\n⛔ Le piège : « barrer » les chiffres identiques en haut et en bas. On ne simplifie pas des CHIFFRES, on divise des NOMBRES.\nRéponse : Mila a tort ; $\\dfrac{13}{39} = \\dfrac{1}{3}$.",
           schema: intervalles(0, 0.5, [{ de: 0, a: 0.333, deInclus: true, aInclus: true, label: "13/39 = 1/3", color: BLEU }], 0.1, [
@@ -181,6 +196,11 @@ export const exercicesFractionsNombres4e: FicheExercicesData = {
         },
         {
           enonce: "Écris chaque fraction en écriture décimale.\na) $\\dfrac{9}{20}$\nb) $\\dfrac{11}{4}$\nc) $\\dfrac{7}{5}$",
+          reponses: [
+            { question: "a)", attendu: ["0,45"], exact: true },
+            { question: "b)", attendu: ["2,75"], exact: true },
+            { question: "c)", attendu: ["1,4"], exact: true },
+          ],
           correction:
             "Une fraction est un quotient : je divise le numérateur par le dénominateur.\na) $9 \\div 20 = 0{,}45$. Autre chemin : je multiplie en haut et en bas par $5$, $\\dfrac{9}{20} = \\dfrac{45}{100}$, quarante-cinq centièmes.\nb) $11 \\div 4 = 2{,}75$. En effet, $4 \\times 2 = 8$, il reste $3$, et $3 \\div 4 = 0{,}75$.\nc) $7 \\div 5 = 1{,}4$.\n⛔ Le piège : lire la barre de fraction comme une virgule, et écrire $7{,}5$ pour $\\dfrac{7}{5}$. Or cinq cinquièmes font déjà $1$ : $\\dfrac{7}{5}$ est à peine plus grand que $1$.\nRéponse : $\\dfrac{9}{20} = 0{,}45$ ; $\\dfrac{11}{4} = 2{,}75$ ; $\\dfrac{7}{5} = 1{,}4$.",
           schema: intervalles(0, 3, [{ de: 0, a: 2.75, deInclus: true, aInclus: true, label: "de 0 à 11/4", color: BLEU }], 0.5, [
@@ -192,6 +212,11 @@ export const exercicesFractionsNombres4e: FicheExercicesData = {
         },
         {
           enonce: "Écris chaque nombre décimal sous la forme d'une fraction irréductible.\na) $0{,}125$\nb) $2{,}4$\nc) $0{,}06$",
+          reponses: [
+            { question: "a)", attendu: ["1/8"], exact: true },
+            { question: "b)", attendu: ["12/5"], exact: true },
+            { question: "c)", attendu: ["3/50"], exact: true },
+          ],
           correction:
             "Je lis le rang du dernier chiffre, j'écris la fraction sur $10$, $100$ ou $1\\,000$, puis je simplifie.\na) Trois chiffres après la virgule : des millièmes. $0{,}125 = \\dfrac{125}{1\\,000}$. $125$ divise $1\\,000$ ($125 \\times 8 = 1\\,000$) : je divise par $125$, $\\dfrac{125}{1\\,000} = \\dfrac{1}{8}$.\nb) Un chiffre après la virgule : des dixièmes. $2{,}4 = \\dfrac{24}{10} = \\dfrac{12}{5}$, en divisant par $2$.\nc) Deux chiffres après la virgule : des centièmes. $0{,}06 = \\dfrac{6}{100} = \\dfrac{3}{50}$, en divisant par $2$.\n⛔ Le piège : écrire $0{,}06 = \\dfrac{6}{10}$. Or $\\dfrac{6}{10} = 0{,}6$ : dix fois trop. Le zéro après la virgule compte.\nRéponse : $0{,}125 = \\dfrac{1}{8}$ ; $2{,}4 = \\dfrac{12}{5}$ ; $0{,}06 = \\dfrac{3}{50}$.",
           schema: tableau(["décimal", "0,125", "2,4", "0,06"], ["irréductible", "1/8", "12/5", "3/50"]),
@@ -200,6 +225,12 @@ export const exercicesFractionsNombres4e: FicheExercicesData = {
         {
           enonce:
             "Montre que chaque nombre est rationnel, en l'écrivant sous la forme $\\dfrac{a}{b}$ avec $a$ et $b$ entiers.\na) $-9$\nb) $1{,}75$\nc) $-0{,}3$\nd) $\\dfrac{22}{7}$, qu'Archimède utilisait pour approcher $\\pi$. Est-ce exactement $\\pi$ ?",
+          reponses: [
+            { question: "a)", attendu: ["-9/1", "(-9)/1", "9/(-1)"], exact: true },
+            { question: "b)", attendu: ["7/4", "175/100"], exact: true },
+            { question: "c)", attendu: ["-3/10", "(-3)/10", "3/(-10)"], exact: true },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           correction:
             "Un nombre est rationnel s'il s'écrit $\\dfrac{a}{b}$, avec $a$ et $b$ entiers et $b \\neq 0$.\na) Un entier, c'est un quotient par $1$ : $-9 = \\dfrac{-9}{1}$.\nb) Des centièmes : $1{,}75 = \\dfrac{175}{100} = \\dfrac{7}{4}$, en divisant par $25$.\nc) Des dixièmes : $-0{,}3 = \\dfrac{-3}{10}$.\nd) $\\dfrac{22}{7}$ est DÉJÀ un quotient de deux entiers : il est rationnel. Mais $22 \\div 7 = 3{,}142857\\ldots$ alors que $\\pi = 3{,}14159\\ldots$ : ils diffèrent dès le troisième chiffre après la virgule. $\\dfrac{22}{7}$ n'est qu'une valeur approchée de $\\pi$.\n⛔ Le piège : croire qu'un entier ou un nombre négatif « n'a pas de fraction ». Il en a une : il suffit de l'écrire.\nRéponse : $-9 = \\dfrac{-9}{1}$, $1{,}75 = \\dfrac{7}{4}$, $-0{,}3 = \\dfrac{-3}{10}$ et $\\dfrac{22}{7}$ sont rationnels ; $\\dfrac{22}{7}$ n'est pas égal à $\\pi$.",
           schema: tableau(["nombre", "−9", "1,75", "−0,3", "22/7"], ["a/b", "−9/1", "7/4", "−3/10", "22/7"]),
@@ -207,6 +238,10 @@ export const exercicesFractionsNombres4e: FicheExercicesData = {
         },
         {
           enonce: "Compare, sans calculatrice.\na) $\\dfrac{11}{13}$ et $\\dfrac{9}{13}$\nb) $\\dfrac{4}{9}$ et $\\dfrac{4}{7}$",
+          reponses: [
+            { question: "a)", attendu: ["11/13>9/13", "9/13<11/13"], exact: true },
+            { question: "b)", attendu: ["4/9<4/7", "4/7>4/9"], exact: true },
+          ],
           correction:
             "a) Même dénominateur : les parts ont la même taille, ce sont des treizièmes. $11$ parts contre $9$ : $\\dfrac{11}{13} > \\dfrac{9}{13}$.\nb) Même numérateur : je prends $4$ parts dans les deux cas. Mais en partageant en $9$, les parts sont plus petites qu'en partageant en $7$. Quatre petites parts font moins que quatre grandes : $\\dfrac{4}{9} < \\dfrac{4}{7}$.\n⭐ Contrôle : $\\dfrac{4}{9} = 0{,}444\\ldots$ et $\\dfrac{4}{7} = 0{,}571\\ldots$\n⛔ Le piège : conclure que $\\dfrac{4}{9}$ est la plus grande parce que $9 > 7$. Un grand dénominateur fait de PETITES parts.\nRéponse : $\\dfrac{11}{13} > \\dfrac{9}{13}$ et $\\dfrac{4}{9} < \\dfrac{4}{7}$.",
           schema: comparer([4, 9], [4, 7]),
@@ -229,6 +264,9 @@ export const exercicesFractionsNombres4e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Range dans l'ordre croissant : $\\dfrac{5}{6}$ ; $\\dfrac{3}{4}$ ; $\\dfrac{7}{12}$ ; $\\dfrac{1}{3}$.",
+          reponses: [
+            { attendu: ["1/3<7/12<3/4<5/6", "1/3;7/12;3/4;5/6"], exact: true },
+          ],
           correction:
             "Les dénominateurs $6$, $4$, $12$ et $3$ divisent tous $12$ : je mets tout en douzièmes.\n$\\dfrac{5}{6} = \\dfrac{10}{12}$ ; $\\dfrac{3}{4} = \\dfrac{9}{12}$ ; $\\dfrac{1}{3} = \\dfrac{4}{12}$ ; $\\dfrac{7}{12}$ ne bouge pas.\nMême dénominateur : je range les numérateurs, $4 < 7 < 9 < 10$.\n⛔ Le piège : ranger d'après les numérateurs de départ, $1$, $3$, $5$, $7$. On mettrait $\\dfrac{7}{12}$ en dernier, alors qu'il est deuxième : ses parts sont des douzièmes, bien plus petites.\nRéponse : $\\dfrac{1}{3} < \\dfrac{7}{12} < \\dfrac{3}{4} < \\dfrac{5}{6}$.",
           schema: intervalles(0.25, 1, [{ de: 0.333, a: 0.833, deInclus: true, aInclus: true, label: "du plus petit au plus grand", color: BLEU }], 0.25, [
@@ -242,6 +280,11 @@ export const exercicesFractionsNombres4e: FicheExercicesData = {
         {
           enonce:
             "a) Compare $\\dfrac{7}{10}$ et $\\dfrac{5}{6}$.\nb) Déduis-en l'ordre de $-\\dfrac{7}{10}$ et $-\\dfrac{5}{6}$.\nc) Range dans l'ordre croissant : $-\\dfrac{7}{10}$ ; $-\\dfrac{5}{6}$ ; $\\dfrac{1}{5}$ ; $-1$.",
+          reponses: [
+            { question: "a)", attendu: ["7/10<5/6", "5/6>7/10"], exact: true },
+            { question: "b)", attendu: ["-7/10>-5/6", "-5/6<-7/10"], exact: true },
+            { question: "c)", attendu: ["-1<-5/6<-7/10<1/5", "-1;-5/6;-7/10;1/5"], exact: true },
+          ],
           correction:
             "a) Je cherche un dénominateur commun à $10$ et $6$ : $30$. $\\dfrac{7}{10} = \\dfrac{21}{30}$ et $\\dfrac{5}{6} = \\dfrac{25}{30}$. $21 < 25$, donc $\\dfrac{7}{10} < \\dfrac{5}{6}$.\nb) $-\\dfrac{5}{6}$ est plus LOIN de zéro que $-\\dfrac{7}{10}$. Chez les négatifs, le plus loin de zéro est le plus petit : $-\\dfrac{5}{6} < -\\dfrac{7}{10}$.\nc) $\\dfrac{1}{5}$ est le seul positif : il est le plus grand. $-1 = -\\dfrac{30}{30}$ est le plus loin de zéro : il est le plus petit.\n⛔ Le piège : garder l'ordre des positifs. $\\dfrac{7}{10} < \\dfrac{5}{6}$, mais $-\\dfrac{7}{10} > -\\dfrac{5}{6}$.\nRéponse : $-1 < -\\dfrac{5}{6} < -\\dfrac{7}{10} < \\dfrac{1}{5}$.",
           schema: intervalles(-1, 0.25, [{ de: -0.833, a: -0.7, deInclus: true, aInclus: true, label: "les deux négatifs", color: BLEU }], 0.25, [
@@ -255,6 +298,11 @@ export const exercicesFractionsNombres4e: FicheExercicesData = {
         {
           enonce:
             "Au biathlon, une course individuelle compte $20$ cibles, un sprint $10$. Léa a touché $17$ cibles sur $20$ à l'individuelle ; Inès, $9$ sur $10$ au sprint.\na) Écris chaque réussite sous forme de fraction, puis de fraction de dénominateur $100$, puis en décimal.\nb) Laquelle a le meilleur taux de réussite ?",
+          reponses: [
+            { question: "a) Léa", attendu: "0,85" },
+            { question: "a) Inès", attendu: "0,9" },
+            { question: "b)", attendu: ["Inès"] },
+          ],
           correction:
             "a) Léa : $\\dfrac{17}{20}$. Pour avoir des centièmes, je multiplie en haut et en bas par $5$ : $\\dfrac{17}{20} = \\dfrac{85}{100} = 0{,}85$.\nInès : $\\dfrac{9}{10}$. Je multiplie en haut et en bas par $10$ : $\\dfrac{9}{10} = \\dfrac{90}{100} = 0{,}9$.\nb) Deux fractions sur $100$ : je compare les numérateurs. $85 < 90$, donc $\\dfrac{17}{20} < \\dfrac{9}{10}$.\n⛔ Le piège : comparer les nombres de cibles touchées. Léa en touche $17$, Inès seulement $9$ ; mais Inès n'avait que $10$ cibles. Ce qui compte, c'est la PART des cibles touchées.\nRéponse : Inès a le meilleur taux de réussite, $90$ % contre $85$ % pour Léa.",
           schema: deux(grille(85, "Léa : 17/20 = 85/100"), grille(90, "Inès : 9/10 = 90/100")),
@@ -263,6 +311,13 @@ export const exercicesFractionsNombres4e: FicheExercicesData = {
         {
           enonce:
             "Pour chaque fraction, pose la division. Son écriture décimale s'arrête-t-elle ?\na) $\\dfrac{3}{8}$\nb) $\\dfrac{7}{25}$\nc) $\\dfrac{5}{12}$\nd) $\\dfrac{4}{15}$\nCes quatre nombres sont-ils rationnels ?",
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: ["oui", "vrai"] },
+            { question: "c)", attendu: ["non", "faux"] },
+            { question: "d)", attendu: ["non", "faux"] },
+            { question: "rationn.", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) $3 \\div 8 = 0{,}375$ : le reste finit par valoir $0$, la division s'arrête.\nb) $7 \\div 25 = 0{,}28$ : elle s'arrête. Autre chemin : $\\dfrac{7}{25} = \\dfrac{28}{100}$, en multipliant par $4$.\nc) $5 \\div 12 = 0{,}41666\\ldots$ : à partir du troisième chiffre, le reste vaut toujours $8$, et le chiffre $6$ revient sans fin.\nd) $4 \\div 15 = 0{,}2666\\ldots$ : le reste vaut toujours $10$, le $6$ revient sans fin.\n⭐ Pourquoi : $8 \\times 125 = 1\\,000$ et $25 \\times 4 = 100$, donc $\\dfrac{3}{8}$ et $\\dfrac{7}{25}$ s'écrivent en millièmes ou en centièmes. $12$ et $15$ sont des multiples de $3$, et $3$ ne divise ni $10$, ni $100$, ni $1\\,000$ : impossible d'y arriver.\n⛔ Le piège : croire qu'un nombre sans écriture décimale exacte n'est pas rationnel. $\\dfrac{5}{12}$ est un quotient de deux entiers : il est rationnel, même si on n'écrit de lui qu'une valeur approchée.\nRéponse : $\\dfrac{3}{8}$ et $\\dfrac{7}{25}$ ont une écriture décimale exacte, $\\dfrac{5}{12}$ et $\\dfrac{4}{15}$ non ; les quatre sont des nombres rationnels.",
           schema: tableau(["fraction", "3/8", "7/25", "5/12", "4/15"], ["décimal", "0,375", "0,28", "0,4166…", "0,266…"]),
@@ -270,6 +325,9 @@ export const exercicesFractionsNombres4e: FicheExercicesData = {
         },
         {
           enonce: "Montre de deux façons que $\\dfrac{45}{105}$ et $\\dfrac{36}{84}$ sont égales.\na) En simplifiant chacune.\nb) Avec les produits en croix.",
+          reponses: [
+            { question: "a)", attendu: ["3/7"], exact: true },
+          ],
           correction:
             "a) $45 = 15 \\times 3$ et $105 = 15 \\times 7$ : je divise en haut et en bas par $15$, $\\dfrac{45}{105} = \\dfrac{3}{7}$.\n$36 = 12 \\times 3$ et $84 = 12 \\times 7$ : je divise par $12$, $\\dfrac{36}{84} = \\dfrac{3}{7}$.\nLes deux fractions ont la même forme irréductible : elles sont égales.\nb) Deux fractions $\\dfrac{a}{b}$ et $\\dfrac{c}{d}$ sont égales quand $a \\times d = b \\times c$. Ici, $45 \\times 84 = 3\\,780$ et $105 \\times 36 = 3\\,780$ : les produits sont égaux.\n⛔ Le piège : croire deux fractions différentes parce qu'elles n'ont aucun nombre en commun. Une même valeur a une infinité d'écritures.\nRéponse : $\\dfrac{45}{105} = \\dfrac{36}{84} = \\dfrac{3}{7}$.",
           schema: etapes(["", "45/105", "36/84"], [["on divise par", "15", "12"], ["il reste", "3/7", "3/7"]]),
@@ -278,6 +336,12 @@ export const exercicesFractionsNombres4e: FicheExercicesData = {
         {
           enonce:
             "En France, en 2023, le nucléaire a fourni environ $65$ % de l'électricité produite.\na) Écris $65$ % sous forme de fraction irréductible, puis en écriture décimale.\nb) Un journaliste écrit : « près des deux tiers ». Est-ce plus ou moins que $65$ % ?\nc) « Plus des trois cinquièmes » : est-ce vrai ?",
+          reponses: [
+            { question: "a) frac.", attendu: ["13/20"], exact: true },
+            { question: "a) déc.", attendu: ["0,65"], exact: true },
+            { question: "b)", attendu: ["moins", "un peu moins"] },
+            { question: "c)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) $65$ %, ce sont $65$ centièmes : $\\dfrac{65}{100}$. $65$ et $100$ sont divisibles par $5$ : $\\dfrac{65}{100} = \\dfrac{13}{20}$. $13$ est premier et ne divise pas $20$ : c'est irréductible. En décimal, $\\dfrac{65}{100} = 0{,}65$.\nb) Je compare $\\dfrac{13}{20}$ et $\\dfrac{2}{3}$ en soixantièmes : $\\dfrac{13}{20} = \\dfrac{39}{60}$ et $\\dfrac{2}{3} = \\dfrac{40}{60}$. $39 < 40$ : $65$ % est un peu MOINS que les deux tiers, de très peu.\nc) $\\dfrac{3}{5} = \\dfrac{60}{100} = 0{,}6$, et $0{,}65 > 0{,}6$. Oui, c'est vrai.\n⛔ Le piège : lire « près des deux tiers » comme « plus des deux tiers ». « Près de » ne dit pas de quel côté ; le calcul, si.\nRéponse : $65$ %, c'est $\\dfrac{13}{20}$, soit $0{,}65$ ; c'est un peu moins que les deux tiers, et plus que les trois cinquièmes.",
           schema: grille(65, "le nucléaire : 65/100 = 13/20"),
@@ -323,6 +387,13 @@ export const exercicesFractionsNombres4e: FicheExercicesData = {
           titre: "Les lancers francs",
           enonce:
             "Sur la saison, trois basketteuses ont tiré des lancers francs. Awa en a réussi $42$ sur $48$, Julie $35$ sur $40$, Nina $27$ sur $30$.\na) Écris chaque taux de réussite sous forme de fraction irréductible.\nb) Deux d'entre elles ont exactement le même taux : lesquelles ?\nc) Écris les taux en décimal et range-les.\nd) Qui est la meilleure tireuse ?",
+          reponses: [
+            { question: "a) Awa", attendu: ["7/8"], exact: true },
+            { question: "a) Julie", attendu: ["7/8"], exact: true },
+            { question: "a) Nina", attendu: ["9/10"], exact: true },
+            { question: "b)", attendu: ["Awa et Julie", "Julie et Awa"] },
+            { question: "d)", attendu: ["Nina"] },
+          ],
           correction:
             "a) Awa : $\\dfrac{42}{48}$ ; je divise par $6$, $\\dfrac{42}{48} = \\dfrac{7}{8}$.\nJulie : $\\dfrac{35}{40}$ ; je divise par $5$, $\\dfrac{35}{40} = \\dfrac{7}{8}$.\nNina : $\\dfrac{27}{30}$ ; je divise par $3$, $\\dfrac{27}{30} = \\dfrac{9}{10}$.\nb) Awa et Julie ont la même fraction irréductible, $\\dfrac{7}{8}$ : le même taux, même si elles n'ont pas réussi le même nombre de lancers.\nc) $\\dfrac{7}{8} = 7 \\div 8 = 0{,}875$ et $\\dfrac{9}{10} = 0{,}9$. $0{,}875 < 0{,}900$.\nd) C'est Nina : $9$ lancers réussis sur $10$.\n⛔ Le piège : désigner Awa parce qu'elle a réussi le plus de lancers, $42$. Elle en a aussi tiré le plus : c'est la PART réussie qui compte.\nRéponse : Awa et Julie réussissent $\\dfrac{7}{8}$ de leurs lancers, soit $0{,}875$ ; Nina en réussit $\\dfrac{9}{10}$, soit $0{,}9$ : Nina est la meilleure tireuse.",
           schema: intervalles(0.8, 1, [{ de: 0.875, a: 0.9, deInclus: true, aInclus: true, label: "de 7/8 à 9/10", color: BLEU }], 0.05, [
@@ -335,6 +406,14 @@ export const exercicesFractionsNombres4e: FicheExercicesData = {
           titre: "L'échappée",
           enonce:
             "Dans une étape du Tour de France de $200$ km, trois coureurs sont échappés. Au même instant, Paul a parcouru $150$ km, Marc les $\\dfrac{7}{10}$ de l'étape, et Tom $0{,}72$ de l'étape.\na) Quelle fraction de l'étape Paul a-t-il parcourue ? Simplifie-la.\nb) Écris les trois parts en écriture décimale.\nc) Range les trois coureurs, du plus avancé au moins avancé.\nd) Écris la part de Tom sous forme de fraction irréductible.",
+          reponses: [
+            { question: "a)", attendu: ["3/4"], exact: true },
+            { question: "b) Paul", attendu: "0,75" },
+            { question: "b) Marc", attendu: "0,7" },
+            { question: "b) Tom", attendu: "0,72" },
+            { question: "c)", attendu: ["Paul;Tom;Marc", "Paul,Tom,Marc", "PaulTomMarc", "Paul>Tom>Marc"], exact: true },
+            { question: "d)", attendu: ["18/25"], exact: true },
+          ],
           correction:
             "a) Paul a fait $150$ km sur $200$ : $\\dfrac{150}{200}$. Je divise en haut et en bas par $50$ : $\\dfrac{150}{200} = \\dfrac{3}{4}$.\nb) Paul : $\\dfrac{3}{4} = 0{,}75$. Marc : $\\dfrac{7}{10} = 0{,}7$. Tom : $0{,}72$.\nc) Pour comparer, j'écris tout en centièmes : $0{,}75$ ; $0{,}70$ ; $0{,}72$. Donc $0{,}70 < 0{,}72 < 0{,}75$.\nd) $0{,}72 = \\dfrac{72}{100}$. Je divise par $4$ : $\\dfrac{72}{100} = \\dfrac{18}{25}$.\n⛔ Le piège : lire $0{,}7$ et $0{,}72$ comme « $7$ » et « $72$ », et croire Tom loin devant Marc ; ou l'inverse, croire $0{,}7$ plus grand parce qu'il est « plus court ». J'écris $0{,}7 = 0{,}70$ : $70$ centièmes contre $72$, Tom devance Marc de très peu.\nRéponse : Paul est en tête avec les $\\dfrac{3}{4}$ de l'étape, puis Tom avec $\\dfrac{18}{25}$, puis Marc avec $\\dfrac{7}{10}$.",
           schema: intervalles(0.6, 0.8, [{ de: 0.7, a: 0.75, deInclus: true, aInclus: true, label: "les trois échappés", color: BLEU }], 0.05, [
@@ -348,6 +427,13 @@ export const exercicesFractionsNombres4e: FicheExercicesData = {
           titre: "Les braquets du vélo",
           enonce:
             "Sur un vélo de route, le plateau (à l'avant) a $50$ ou $34$ dents, le pignon (à l'arrière) de $11$ à $28$ dents. Le braquet est la fraction « dents du plateau sur dents du pignon » : c'est le nombre de tours de roue pour un tour de pédale.\na) Écris les braquets $\\dfrac{50}{20}$ et $\\dfrac{34}{17}$ sous forme irréductible, puis en décimal.\nb) Lequel est le plus grand : $\\dfrac{34}{20}$ ou $\\dfrac{50}{28}$ ?\nc) Le braquet $\\dfrac{50}{11}$ a-t-il une écriture décimale exacte ? Est-ce un nombre rationnel ?",
+          reponses: [
+            { question: "a) 50/20", attendu: "2,5" },
+            { question: "a) 34/17", attendu: "2" },
+            { question: "b)", attendu: "50/28" },
+            { question: "c) exact", attendu: ["non", "faux"] },
+            { question: "c) rat.", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) $\\dfrac{50}{20}$ : je divise par $10$, $\\dfrac{50}{20} = \\dfrac{5}{2} = 2{,}5$. Deux tours et demi de roue par tour de pédale.\n$\\dfrac{34}{17}$ : $34 = 2 \\times 17$, donc $\\dfrac{34}{17} = 2$. Exactement deux tours de roue.\nb) $\\dfrac{34}{20} = \\dfrac{17}{10} = 1{,}7$ et $\\dfrac{50}{28} = \\dfrac{25}{14}$, avec $25 \\div 14 = 1{,}785\\ldots$\nPour en être sûr sans arrondi, les produits en croix : $34 \\times 28 = 952$ et $20 \\times 50 = 1\\,000$. $952 < 1\\,000$, donc $\\dfrac{34}{20} < \\dfrac{50}{28}$.\nc) $50 \\div 11 = 4{,}545454\\ldots$ : les chiffres $4$ et $5$ reviennent sans fin, l'écriture décimale ne s'arrête pas. Mais $\\dfrac{50}{11}$ est un quotient de deux entiers : c'est un nombre rationnel.\n⛔ Le piège : croire que $\\dfrac{34}{20}$ gagne parce que son pignon est plus petit, $20$ dents contre $28$. C'est oublier le plateau : on compare des FRACTIONS, pas un seul de leurs nombres.\nRéponse : $\\dfrac{50}{20} = 2{,}5$ et $\\dfrac{34}{17} = 2$ ; $\\dfrac{50}{28}$ est plus grand que $\\dfrac{34}{20}$ ; $\\dfrac{50}{11}$ n'a pas d'écriture décimale exacte, mais c'est un rationnel.",
           schema: tableau(["braquet", "50/20", "34/17", "34/20", "50/28", "50/11"], ["décimal", "2,5", "2", "1,7", "1,785…", "4,5454…"], true),
@@ -357,6 +443,15 @@ export const exercicesFractionsNombres4e: FicheExercicesData = {
           titre: "Qui vient le plus à vélo ?",
           enonce:
             "Au collège, en 4e A, $12$ élèves sur $28$ viennent à vélo ; en 4e B, $13$ sur $30$.\na) Écris chaque part sous forme de fraction irréductible.\nb) Leur écriture décimale est-elle exacte ? Donne une valeur approchée au millième.\nc) Quelle classe a la plus grande part de cyclistes ? Justifie sans valeur approchée.\nd) La principale affirme : « Dans les deux classes, plus de $2$ élèves sur $5$ viennent à vélo. » A-t-elle raison ?",
+          reponses: [
+            { question: "a) A", attendu: ["3/7"], exact: true },
+            { question: "a) B", attendu: ["13/30"], exact: true },
+            { question: "b) exact", attendu: ["non", "faux"] },
+            { question: "b) A", attendu: "0,429", tolerance: 0.0005 },
+            { question: "b) B", attendu: "0,433", tolerance: 0.0005 },
+            { question: "c)", attendu: ["4e B", "B", "la 4e B"] },
+            { question: "d)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) 4e A : $\\dfrac{12}{28}$ ; je divise par $4$, $\\dfrac{12}{28} = \\dfrac{3}{7}$. 4e B : $\\dfrac{13}{30}$ ; $13$ est premier et ne divise pas $30$, elle est déjà irréductible.\nb) $3 \\div 7 = 0{,}428571\\ldots$ et $13 \\div 30 = 0{,}4333\\ldots$ : aucune ne s'arrête. Au millième : $0{,}429$ et $0{,}433$.\nc) Même dénominateur : $7 \\times 30 = 210$. $\\dfrac{3}{7} = \\dfrac{90}{210}$ et $\\dfrac{13}{30} = \\dfrac{91}{210}$. $90 < 91$, donc $\\dfrac{3}{7} < \\dfrac{13}{30}$.\nd) $\\dfrac{2}{5} = \\dfrac{84}{210}$, plus petit que $\\dfrac{90}{210}$ et que $\\dfrac{91}{210}$. Elle a raison.\n⛔ Le piège : arrondir trop tôt. Au dixième, les deux parts valent $0{,}4$ et semblent égales ; il faut aller au millième, ou mieux, écrire les fractions avec le même dénominateur.\nRéponse : la 4e B a la plus grande part de cyclistes, $\\dfrac{13}{30}$ contre $\\dfrac{3}{7}$, de très peu ; et dans les deux classes, plus de $2$ élèves sur $5$ viennent à vélo.",
           schema: intervalles(0.39, 0.44, [{ de: 0.4, a: 0.44, deInclus: false, aInclus: true, label: "plus de 2/5", color: BLEU }], 0.01, [

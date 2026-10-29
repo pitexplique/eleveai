@@ -399,6 +399,10 @@ export const exercicesDecimalCalcul6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Pose et calcule.\na) $14{,}6 + 3{,}85$\nb) $7{,}09 + 12{,}5$",
+          reponses: [
+            { question: "a)", attendu: "18,45" },
+            { question: "b)", attendu: "19,59" },
+          ],
           correction:
             "Je pose virgule sous virgule. J'ajoute un zéro pour avoir autant de chiffres après la virgule.\na) $14{,}6$ devient $14{,}60$. Je calcule de droite à gauche.\n$0 + 5 = 5$. Puis $6 + 8 = 14$ : j'écris $4$, je retiens $1$.\n$4 + 3 + 1 = 8$. Puis la dizaine : $1$.\nDonc $14{,}6 + 3{,}85 = 18{,}45$.\nb) $12{,}5$ devient $12{,}50$. Donc $7{,}09 + 12{,}5 = 19{,}59$.\n⛔ Le piège : caler les chiffres à droite, sans regarder la virgule. Les centièmes tomberaient sous les dixièmes.\nRéponse : a) $18{,}45$ ; b) $19{,}59$.",
           schema: posee("+", ["14,60", "3,85"], "18,45"),
@@ -406,6 +410,10 @@ export const exercicesDecimalCalcul6e: FicheExercicesData = {
         },
         {
           enonce: "Pose et calcule.\na) $20 - 6{,}35$\nb) $9{,}4 - 2{,}75$",
+          reponses: [
+            { question: "a)", attendu: "13,65" },
+            { question: "b)", attendu: "6,65" },
+          ],
           correction:
             "Je pose virgule sous virgule. J'écris les zéros qui manquent.\na) $20$ devient $20{,}00$. Donc $20 - 6{,}35 = 13{,}65$.\nContrôle : $13{,}65 + 6{,}35 = 20$.\nb) $9{,}4$ devient $9{,}40$. Donc $9{,}4 - 2{,}75 = 6{,}65$.\nContrôle : $6{,}65 + 2{,}75 = 9{,}4$.\n⛔ Le piège du a) : écrire $14{,}35$. On ne « garde » pas les $35$ centièmes : il faut les enlever aussi.\nRéponse : a) $13{,}65$ ; b) $6{,}65$.",
           schema: ecranSeulement(posee("−", ["20,00", "6,35"], "13,65")),
@@ -413,6 +421,11 @@ export const exercicesDecimalCalcul6e: FicheExercicesData = {
         },
         {
           enonce: "Calcule.\na) $3{,}26 \\times 4$\nb) $0{,}7 \\times 6$\nc) $1{,}05 \\times 3$",
+          reponses: [
+            { question: "a)", attendu: "13,04" },
+            { question: "b)", attendu: "4,2" },
+            { question: "c)", attendu: "3,15" },
+          ],
           correction:
             "Je calcule sans la virgule. Puis je remets autant de chiffres après la virgule.\na) $326 \\times 4 = 1\\,304$. $3{,}26$ a $2$ chiffres après la virgule.\nDonc $3{,}26 \\times 4 = 13{,}04$.\nb) $7 \\times 6 = 42$. Un chiffre après la virgule : $0{,}7 \\times 6 = 4{,}2$.\nc) $105 \\times 3 = 315$. Deux chiffres après la virgule : $1{,}05 \\times 3 = 3{,}15$.\n⭐ Contrôle du a) : c'est environ $3 \\times 4 = 12$. $13{,}04$ est proche.\n⛔ Le piège du a) : écrire $130{,}4$ ou $1{,}304$. Je compte bien $2$ chiffres après la virgule.\nRéponse : a) $13{,}04$ ; b) $4{,}2$ ; c) $3{,}15$.",
           schema: posee("×", ["3,26", "4"], "13,04"),
@@ -420,6 +433,11 @@ export const exercicesDecimalCalcul6e: FicheExercicesData = {
         },
         {
           enonce: "Calcule.\na) $2{,}5 \\times 1{,}4$\nb) $0{,}3 \\times 0{,}2$\nc) $1{,}2 \\times 1{,}2$",
+          reponses: [
+            { question: "a)", attendu: "3,5" },
+            { question: "b)", attendu: "0,06" },
+            { question: "c)", attendu: "1,44" },
+          ],
           correction:
             "Je calcule sans les virgules. Puis je compte les chiffres après la virgule dans LES DEUX nombres.\na) $25 \\times 14 = 350$. $1 + 1 = 2$ chiffres après la virgule : $3{,}50$, soit $3{,}5$.\nb) $3 \\times 2 = 6$. Deux chiffres après la virgule : $0{,}06$.\nc) $12 \\times 12 = 144$. Deux chiffres après la virgule : $1{,}44$.\n⛔ Le piège du b) : écrire $0{,}6$. Il faut DEUX chiffres après la virgule, un par nombre.\n⭐ $0{,}3 \\times 0{,}2$ est plus petit que $0{,}3$ : multiplier par $0{,}2$ réduit.\nRéponse : a) $3{,}5$ ; b) $0{,}06$ ; c) $1{,}44$.",
           schema: posee("×", ["2,5", "1,4"], "3,50", ["100", "250"]),
@@ -427,6 +445,12 @@ export const exercicesDecimalCalcul6e: FicheExercicesData = {
         },
         {
           enonce: "Calcule.\na) $480 \\times 0{,}1$\nb) $6{,}5 \\times 0{,}01$\nc) $2 \\times 0{,}001$\nd) $13{,}7 \\times 0{,}1$",
+          reponses: [
+            { question: "a)", attendu: "48" },
+            { question: "b)", attendu: "0,065" },
+            { question: "c)", attendu: "0,002" },
+            { question: "d)", attendu: "1,37" },
+          ],
           correction:
             "Multiplier par $0{,}1$, c'est diviser par $10$. Par $0{,}01$, c'est diviser par $100$. Par $0{,}001$, c'est diviser par $1\\,000$.\nDans le tableau, chaque chiffre recule d'un rang vers la droite à chaque division par $10$.\na) $480 \\div 10 = 48$.\nb) $6{,}5 \\div 100 = 0{,}065$. J'écris des zéros devant.\nc) $2 \\div 1\\,000 = 0{,}002$.\nd) $13{,}7 \\div 10 = 1{,}37$.\n⛔ Le piège du c) : écrire $2\\,000$. Multiplier par $0{,}001$ rend le nombre PLUS PETIT.\nRéponse : a) $48$ ; b) $0{,}065$ ; c) $0{,}002$ ; d) $1{,}37$.",
           schema: ecranSeulement(
@@ -441,6 +465,11 @@ export const exercicesDecimalCalcul6e: FicheExercicesData = {
         },
         {
           enonce: "Calcule.\na) $8{,}4 \\div 4$\nb) $13{,}5 \\div 5$\nc) $0{,}96 \\div 3$",
+          reponses: [
+            { question: "a)", attendu: "2,1" },
+            { question: "b)", attendu: "2,7" },
+            { question: "c)", attendu: "0,32" },
+          ],
           correction:
             "a) $8{,}4$, ce sont $84$ dixièmes. $84 \\div 4 = 21$ dixièmes. Donc $8{,}4 \\div 4 = 2{,}1$.\nb) Je pose la division. $13 \\div 5 = 2$, il reste $3$.\nJ'abaisse le $5$ des dixièmes : je mets la virgule au quotient.\n$35 \\div 5 = 7$. Donc $13{,}5 \\div 5 = 2{,}7$.\nc) $0{,}96$, ce sont $96$ centièmes. $96 \\div 3 = 32$ centièmes. Donc $0{,}96 \\div 3 = 0{,}32$.\n⭐ Contrôle du b) : $2{,}7 \\times 5 = 13{,}5$.\n⛔ Le piège du b) : oublier la virgule et écrire $27$. Le quotient ne peut pas dépasser $13{,}5$.\nRéponse : a) $2{,}1$ ; b) $2{,}7$ ; c) $0{,}32$.",
           schema: potence("13,5", "5", "2,7", [
@@ -451,6 +480,11 @@ export const exercicesDecimalCalcul6e: FicheExercicesData = {
         },
         {
           enonce: "Calcule, en continuant après la virgule.\na) $7 \\div 4$\nb) $9 \\div 2$\nc) $3 \\div 8$",
+          reponses: [
+            { question: "a)", attendu: "1,75" },
+            { question: "b)", attendu: "4,5" },
+            { question: "c)", attendu: "0,375" },
+          ],
           correction:
             "Quand il reste quelque chose, je continue. J'écris des zéros après la virgule : $7 = 7{,}00$.\na) $7 \\div 4 = 1$, il reste $3$. J'abaisse un $0$ : $30 \\div 4 = 7$, il reste $2$.\nJ'abaisse un $0$ : $20 \\div 4 = 5$, il reste $0$. Donc $7 \\div 4 = 1{,}75$.\nb) $9 \\div 2 = 4$, il reste $1$. $10 \\div 2 = 5$. Donc $9 \\div 2 = 4{,}5$.\nc) $3 \\div 8 = 0$ : j'écris $0$, puis la virgule.\n$30 \\div 8 = 3$, il reste $6$. $60 \\div 8 = 7$, il reste $4$. $40 \\div 8 = 5$, il reste $0$.\nDonc $3 \\div 8 = 0{,}375$.\n⛔ Le piège : s'arrêter au reste, « $1$ reste $3$ ». On demande un nombre décimal : je continue.\nRéponse : a) $1{,}75$ ; b) $4{,}5$ ; c) $0{,}375$.",
           schema: ecranSeulement(
@@ -464,6 +498,11 @@ export const exercicesDecimalCalcul6e: FicheExercicesData = {
         },
         {
           enonce: "Sans poser le calcul, choisis le bon résultat. Arrondis d'abord chaque nombre à l'unité.\na) $4{,}9 \\times 3{,}1$ : $1{,}519$ ou $15{,}19$ ou $151{,}9$ ?\nb) $19{,}8 \\div 4$ : $4{,}95$ ou $49{,}5$ ou $0{,}495$ ?\nc) $102{,}5 + 9{,}87$ : $112{,}37$ ou $201{,}2$ ou $11{,}237$ ?",
+          reponses: [
+            { question: "a)", attendu: "15,19" },
+            { question: "b)", attendu: "4,95" },
+            { question: "c)", attendu: "112,37" },
+          ],
           correction:
             "J'arrondis, puis je calcule de tête. Le bon résultat est proche.\na) $4{,}9$ donne $5$ et $3{,}1$ donne $3$. $5 \\times 3 = 15$. Je choisis $15{,}19$.\nb) $19{,}8$ donne $20$. $20 \\div 4 = 5$. Je choisis $4{,}95$.\nc) $102{,}5$ donne $103$ et $9{,}87$ donne $10$. $103 + 10 = 113$. Je choisis $112{,}37$.\n⭐ Cet ordre de grandeur sert à contrôler la place de la virgule.\n⛔ Le piège : choisir les « bons chiffres » sans regarder la virgule. $151{,}9$ a les mêmes chiffres, mais il est dix fois trop grand.\nRéponse : a) $15{,}19$ ; b) $4{,}95$ ; c) $112{,}37$.",
           schema: ecranSeulement(
@@ -491,6 +530,10 @@ export const exercicesDecimalCalcul6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Au marché, Nadia achète une baguette à $1{,}15$ €, du fromage à $4{,}8$ € et des pommes à $3{,}27$ €.\na) Combien paie-t-elle ?\nb) Elle donne un billet de $20$ €. Combien lui rend-on ?",
+          reponses: [
+            { question: "a)", attendu: "9,22" },
+            { question: "b)", attendu: "10,78" },
+          ],
           correction:
             "a) Je pose virgule sous virgule. $4{,}8$ devient $4{,}80$.\n$1{,}15 + 4{,}80 + 3{,}27 = 9{,}22$. Elle paie $9{,}22$ €.\nb) $20$ devient $20{,}00$. $20 - 9{,}22 = 10{,}78$.\nOn lui rend $10{,}78$ €.\n⭐ Contrôle : $9{,}22 + 10{,}78 = 20$.\n⛔ Le piège : poser $4{,}8$ sous les centièmes, comme si c'était $0{,}48$.\nRéponse : a) $9{,}22$ € ; b) $10{,}78$ €.",
           schema: (
@@ -503,6 +546,12 @@ export const exercicesDecimalCalcul6e: FicheExercicesData = {
         },
         {
           enonce: "Une recette de crêpes pour $4$ personnes demande $0{,}75$ L de lait. Elle demande aussi $0{,}25$ kg de farine et $0{,}06$ kg de sucre. On veut des crêpes pour $12$ personnes.\na) Par combien faut-il multiplier les quantités ?\nb) Calcule chaque quantité pour $12$ personnes.",
+          reponses: [
+            { question: "a)", attendu: "3" },
+            { question: "lait", attendu: "2,25" },
+            { question: "farine", attendu: "0,75" },
+            { question: "sucre", attendu: "0,18" },
+          ],
           correction:
             "a) $12 \\div 4 = 3$. Il faut tout multiplier par $3$.\nb) Lait : $0{,}75 \\times 3 = 2{,}25$ L.\nFarine : $0{,}25 \\times 3 = 0{,}75$ kg.\nSucre : $0{,}06 \\times 3 = 0{,}18$ kg.\n⛔ Le piège : ajouter $3$ au lieu de multiplier par $3$. Trois fois plus de monde, trois fois plus de lait.\nRéponse : a) par $3$ ; b) $2{,}25$ L de lait, $0{,}75$ kg de farine, $0{,}18$ kg de sucre.",
           schema: ecranSeulement(
@@ -516,6 +565,9 @@ export const exercicesDecimalCalcul6e: FicheExercicesData = {
         },
         {
           enonce: "Quatre amis partagent l'addition du restaurant : $58{,}6$ €. Chacun paie la même somme.\na) Combien paie chacun ?\nb) Vérifie ton résultat avec une multiplication.",
+          reponses: [
+            { question: "a)", attendu: "14,65" },
+          ],
           correction:
             "a) Je pose $58{,}6 \\div 4$. J'ajoute un zéro : $58{,}60$.\n$5 \\div 4 = 1$, il reste $1$. J'abaisse le $8$ : $18 \\div 4 = 4$, il reste $2$.\nJ'abaisse le $6$ des dixièmes : je mets la virgule. $26 \\div 4 = 6$, il reste $2$.\nJ'abaisse le $0$ : $20 \\div 4 = 5$, il reste $0$.\nChacun paie $14{,}65$ €.\nb) $14{,}65 \\times 4 = 58{,}6$. C'est bien l'addition.\n⛔ Le piège : s'arrêter à $14{,}6$ avec un reste. Pour payer au centime près, je continue.\nRéponse : a) $14{,}65$ € ; b) $14{,}65 \\times 4 = 58{,}6$.",
           schema: potence("58,60", "4", "14,65", [
@@ -528,6 +580,11 @@ export const exercicesDecimalCalcul6e: FicheExercicesData = {
         },
         {
           enonce: "On peut convertir en multipliant par $0{,}1$, $0{,}01$ ou $0{,}001$.\na) $1$ cm $= 0{,}01$ m. Combien de mètres font $175$ cm ?\nb) $1$ mm $= 0{,}1$ cm. Combien de centimètres font $8$ mm ?\nc) $1$ g $= 0{,}001$ kg. Combien de kilogrammes font $2\\,450$ g ?",
+          reponses: [
+            { question: "a)", attendu: "1,75" },
+            { question: "b)", attendu: "0,8" },
+            { question: "c)", attendu: "2,45" },
+          ],
           correction:
             "a) $175 \\times 0{,}01$, c'est $175 \\div 100 = 1{,}75$. Cela fait $1{,}75$ m.\nb) $8 \\times 0{,}1$, c'est $8 \\div 10 = 0{,}8$. Cela fait $0{,}8$ cm.\nc) $2\\,450 \\times 0{,}001$, c'est $2\\,450 \\div 1\\,000 = 2{,}45$. Cela fait $2{,}45$ kg.\n⭐ Contrôle : $175$ cm, c'est moins de $2$ m. Le résultat $1{,}75$ m va bien.\n⛔ Le piège du c) : multiplier par $1\\,000$. Un kilogramme contient beaucoup de grammes : le nombre doit baisser.\nRéponse : a) $1{,}75$ m ; b) $0{,}8$ cm ; c) $2{,}45$ kg.",
           schema: numeration(["C", "D", "U", "d", "c"], [
@@ -538,6 +595,12 @@ export const exercicesDecimalCalcul6e: FicheExercicesData = {
         },
         {
           enonce: "Sans calculer, dis si le résultat est plus grand ou plus petit que $24$.\na) $24 \\times 1{,}5$\nb) $24 \\times 0{,}5$\nc) $24 \\times 0{,}1$\nd) $24 \\times 1$\nPuis calcule les quatre produits.",
+          reponses: [
+            { question: "a)", attendu: "36" },
+            { question: "b)", attendu: "12" },
+            { question: "c)", attendu: "2,4" },
+            { question: "d)", attendu: "24" },
+          ],
           correction:
             "Multiplier par un nombre plus grand que $1$ agrandit. Par un nombre plus petit que $1$, cela réduit.\na) $1{,}5 > 1$ : plus grand. $24 \\times 1{,}5 = 36$.\nb) $0{,}5 < 1$ : plus petit. $24 \\times 0{,}5 = 12$, c'est la moitié.\nc) $0{,}1 < 1$ : plus petit. $24 \\times 0{,}1 = 2{,}4$.\nd) Multiplier par $1$ ne change rien : $24 \\times 1 = 24$.\n⛔ Le piège : croire qu'une multiplication agrandit toujours. C'est faux quand on multiplie par un nombre plus petit que $1$.\nRéponse : a) $36$ ; b) $12$ ; c) $2{,}4$ ; d) $24$.",
           schema: demiDroite(0, 40, 2, [
@@ -550,6 +613,11 @@ export const exercicesDecimalCalcul6e: FicheExercicesData = {
         },
         {
           enonce: "Au relais $4 \\times 100$ m, les quatre coureurs font $11{,}8$ s, puis $12{,}05$ s, puis $11{,}6$ s, puis $12{,}3$ s.\na) Quel est le temps de l'équipe ?\nb) Le record du collège est $48{,}2$ s. L'équipe l'a-t-elle battu ? De combien ?",
+          reponses: [
+            { question: "a)", attendu: "47,75" },
+            { question: "b)", attendu: ["oui"] },
+            { question: "b) écart", attendu: "0,45" },
+          ],
           correction:
             "a) Je pose virgule sous virgule, avec deux chiffres après la virgule.\n$11{,}80 + 12{,}05 = 23{,}85$. Puis $23{,}85 + 11{,}60 = 35{,}45$.\nPuis $35{,}45 + 12{,}30 = 47{,}75$. L'équipe court en $47{,}75$ s.\nb) Le plus petit temps gagne. $47{,}75 < 48{,}2$ : le record est battu.\n$48{,}20 - 47{,}75 = 0{,}45$ s.\n⛔ Le piège : poser $12{,}05$ décalé, avec le $5$ sous les dixièmes.\nRéponse : a) $47{,}75$ s ; b) oui, de $0{,}45$ s.",
           schema: ecranSeulement(posee("+", ["11,80", "12,05", "11,60", "12,30"], "47,75")),
@@ -557,6 +625,10 @@ export const exercicesDecimalCalcul6e: FicheExercicesData = {
         },
         {
           enonce: "Une ficelle de $10$ m est coupée en $8$ morceaux égaux.\na) Combien mesure chaque morceau ?\nb) Et si on la coupe en $3$ morceaux égaux ? Que remarques-tu ?\nc) Donne alors une valeur arrondie au centième.",
+          reponses: [
+            { question: "a)", attendu: "1,25" },
+            { question: "c)", attendu: "3,33", tolerance: 0.005 },
+          ],
           correction:
             "a) Je pose $10 \\div 8$. Je continue après la virgule.\n$10 \\div 8 = 1$, il reste $2$. $20 \\div 8 = 2$, il reste $4$. $40 \\div 8 = 5$, il reste $0$.\nChaque morceau mesure $1{,}25$ m.\nb) $10 \\div 3 = 3$, il reste $1$. Puis encore $10 \\div 3 = 3$, il reste $1$. Et ainsi de suite.\nLe quotient s'écrit $3{,}333\\ldots$ : il ne s'arrête jamais.\nc) Au centième : je regarde les millièmes, $3$. Je garde $3{,}33$ m.\n⭐ Contrôle du a) : $8 \\times 1{,}25 = 10$.\n⛔ Le piège : croire qu'une division finit toujours par tomber juste. $10 \\div 3$ ne tombe jamais juste.\nRéponse : a) $1{,}25$ m ; b) le quotient ne s'arrête pas ; c) environ $3{,}33$ m.",
           schema: potence("10,00", "8", "1,25", [
@@ -568,6 +640,9 @@ export const exercicesDecimalCalcul6e: FicheExercicesData = {
         },
         {
           enonce: "Un tapis rectangulaire mesure $3{,}5$ m de long et $2{,}4$ m de large.\na) Son aire est la longueur multipliée par la largeur. Calcule-la.\nb) Vérifie avec un ordre de grandeur.",
+          reponses: [
+            { question: "a)", attendu: "8,4" },
+          ],
           correction:
             "a) Je calcule sans les virgules : $35 \\times 24$.\n$35 \\times 4 = 140$ et $35 \\times 20 = 700$. Donc $35 \\times 24 = 840$.\nIl y a $1 + 1 = 2$ chiffres après la virgule : $8{,}40$.\nL'aire est $3{,}5 \\times 2{,}4 = 8{,}4$ m².\nb) $3{,}5$ donne $4$ et $2{,}4$ donne $2$. $4 \\times 2 = 8$ : c'est proche de $8{,}4$.\n⛔ Le piège : écrire $84$ m². Il faut remettre deux chiffres après la virgule.\nRéponse : a) $8{,}4$ m² ; b) environ $8$ m².",
           schema: posee("×", ["3,5", "2,4"], "8,40", ["140", "700"]),
@@ -590,6 +665,12 @@ export const exercicesDecimalCalcul6e: FicheExercicesData = {
         {
           titre: "La sortie au parc",
           enonce: "Une classe de $24$ élèves part au parc animalier. Le billet coûte $12{,}5$ € par élève. Le car coûte $450$ € pour toute la classe.\na) Combien coûtent les $24$ billets ?\nb) Le prix du car est partagé entre les $24$ élèves. Combien paie chaque élève pour le car ?\nc) Combien coûte la sortie pour un élève, billet et car compris ?\nd) Les familles donnent $30$ € par élève. Combien manque-t-il pour toute la classe ?",
+          reponses: [
+            { question: "a)", attendu: "300" },
+            { question: "b)", attendu: "18,75" },
+            { question: "c)", attendu: "31,25" },
+            { question: "d)", attendu: "30" },
+          ],
           correction:
             "a) $12{,}5 \\times 24 = 300$. Les billets coûtent $300$ €.\nb) Je pose $450 \\div 24$. Je continue après la virgule.\n$45 \\div 24 = 1$, il reste $21$. $210 \\div 24 = 8$, il reste $18$.\nJ'abaisse un $0$ après la virgule : $180 \\div 24 = 7$, il reste $12$. Puis $120 \\div 24 = 5$.\nChaque élève paie $18{,}75$ € pour le car.\nc) $12{,}5 + 18{,}75 = 31{,}25$ €.\nd) Il manque $31{,}25 - 30 = 1{,}25$ € par élève.\nPour la classe : $1{,}25 \\times 24 = 30$ €.\n⭐ Contrôle : $18{,}75 \\times 24 = 450$.\n⛔ Le piège du b) : écrire « $18$ reste $18$ ». En euros, je continue jusqu'aux centimes.\nRéponse : a) $300$ € ; b) $18{,}75$ € ; c) $31{,}25$ € ; d) $30$ €.",
           schema: (
@@ -614,6 +695,11 @@ export const exercicesDecimalCalcul6e: FicheExercicesData = {
         {
           titre: "Les tomates du potager",
           enonce: "Léo récolte des tomates pendant trois semaines : $2{,}8$ kg, puis $4{,}35$ kg, puis $2{,}85$ kg.\na) Quelle masse a-t-il récoltée en tout ?\nb) Il garde $0{,}1$ de la récolte pour faire de la confiture. Quelle masse est-ce ?\nc) Il partage le reste entre ses $4$ voisins, en parts égales. Combien reçoit chacun ?",
+          reponses: [
+            { question: "a)", attendu: "10" },
+            { question: "b)", attendu: "1" },
+            { question: "c)", attendu: "2,25" },
+          ],
           correction:
             "a) Je pose virgule sous virgule. $2{,}80 + 4{,}35 = 7{,}15$. Puis $7{,}15 + 2{,}85 = 10$.\nIl a récolté $10$ kg.\nb) $10 \\times 0{,}1$, c'est $10 \\div 10 = 1$. Il garde $1$ kg pour la confiture.\nc) Il reste $10 - 1 = 9$ kg.\n$9 \\div 4 = 2$, il reste $1$. $10 \\div 4 = 2$, il reste $2$. $20 \\div 4 = 5$.\nChaque voisin reçoit $2{,}25$ kg.\n⭐ Contrôle : $2{,}25 \\times 4 = 9$.\n⛔ Le piège du b) : écrire $100$ kg. Multiplier par $0{,}1$, c'est prendre un dixième : le nombre baisse.\nRéponse : a) $10$ kg ; b) $1$ kg ; c) $2{,}25$ kg.",
           schema: potence("9,00", "4", "2,25", [
@@ -626,6 +712,14 @@ export const exercicesDecimalCalcul6e: FicheExercicesData = {
         {
           titre: "L'eau de la douche",
           enonce: "Dans cet exercice, une douche normale utilise $12{,}5$ L d'eau par minute. Avec un pommeau économe, elle utilise $7{,}5$ L par minute. Nora se douche $8$ minutes par jour.\na) Combien de litres utilise-t-elle avec la douche normale ? Avec le pommeau économe ?\nb) Combien de litres économise-t-elle par jour ?\nc) Et en $30$ jours ?\nd) $1\\,000$ L d'eau coûtent $4$ €. Combien coûte $1$ L ? Combien économise-t-elle en $30$ jours ?",
+          reponses: [
+            { question: "a) norm.", attendu: "100" },
+            { question: "a) éco.", attendu: "60" },
+            { question: "b)", attendu: "40" },
+            { question: "c)", attendu: "1200" },
+            { question: "d) 1 L", attendu: "0,004" },
+            { question: "d) 30 j", attendu: "4,8" },
+          ],
           correction:
             "a) Normale : $12{,}5 \\times 8 = 100$ L. Économe : $7{,}5 \\times 8 = 60$ L.\nb) $100 - 60 = 40$ L par jour.\nc) $40 \\times 30 = 1\\,200$ L en $30$ jours.\nd) $1$ L coûte $4 \\div 1\\,000$, soit $4 \\times 0{,}001 = 0{,}004$ €.\nPour $1\\,200$ L, je calcule $1\\,200 \\times 4 = 4\\,800$.\nTrois chiffres après la virgule : $4{,}800$, soit $4{,}8$ €.\n⭐ Contrôle : $1\\,200$ L, c'est un peu plus que $1\\,000$ L. Cela coûte un peu plus que $4$ €.\n⛔ Le piège du d) : écrire $4\\,800$ €. Un litre d'eau coûte bien moins qu'un centime.\nRéponse : a) $100$ L et $60$ L ; b) $40$ L ; c) $1\\,200$ L ; d) $0{,}004$ € par litre, et $4{,}8$ € en $30$ jours.",
           schema: table(["douche", "par minute", "en 8 min"], [
@@ -638,6 +732,10 @@ export const exercicesDecimalCalcul6e: FicheExercicesData = {
         {
           titre: "Le nombre mystère",
           enonce: "Je pense à un nombre. Je le multiplie par $4$. Puis j'ajoute $1{,}3$. J'obtiens $11{,}7$.\na) Avant d'ajouter $1{,}3$, quel nombre avais-je ?\nb) Quel est mon nombre de départ ?\nc) Vérifie en refaisant le programme.",
+          reponses: [
+            { question: "a)", attendu: "10,4" },
+            { question: "b)", attendu: "2,6" },
+          ],
           correction:
             "Je remonte le programme avec les opérations inverses.\na) J'ai ajouté $1{,}3$. J'enlève donc $1{,}3$ : $11{,}7 - 1{,}3 = 10{,}4$.\nb) J'ai multiplié par $4$. Je divise donc par $4$ : $10{,}4 \\div 4 = 2{,}6$.\nc) $2{,}6 \\times 4 = 10{,}4$. Puis $10{,}4 + 1{,}3 = 11{,}7$. C'est bien ça.\n⛔ Le piège : défaire les étapes dans le mauvais ordre. Je défais d'abord la DERNIÈRE étape.\nRéponse : a) $10{,}4$ ; b) $2{,}6$.",
           schema: chaine(["2,6", "10,4", "11,7"], ["× 4", "+ 1,3"], ["÷ 4", "− 1,3"]),

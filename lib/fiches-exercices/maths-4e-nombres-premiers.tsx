@@ -271,6 +271,16 @@ export const exercicesNombresPremiers4e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Pour chaque nombre, écrire la liste de TOUS ses diviseurs, puis dire s'il est premier.\na) $17$\nb) $25$\nc) $1$\nd) $33$",
+          reponses: [
+            { question: "a) div", attendu: "1 ; 17" },
+            { question: "a) prem", attendu: ["oui", "vrai", "premier"] },
+            { question: "b) div", attendu: "1 ; 5 ; 25" },
+            { question: "b) prem", attendu: ["non", "faux", "pas premier"] },
+            { question: "c) div", attendu: "1" },
+            { question: "c) prem", attendu: ["non", "faux", "pas premier"] },
+            { question: "d) div", attendu: "1 ; 3 ; 11 ; 33" },
+            { question: "d) prem", attendu: ["non", "faux", "pas premier"] },
+          ],
           correction:
             "Je compte les diviseurs : un nombre premier en a EXACTEMENT deux, $1$ et lui-même.\na) Le seul produit égal à $17$ est $1 \\times 17$. Les diviseurs de $17$ sont $1$ et $17$ : deux diviseurs, $17$ est premier.\nb) $25 = 1 \\times 25 = 5 \\times 5$. Les diviseurs de $25$ sont $1$, $5$ et $25$ : trois diviseurs, $25$ n'est pas premier.\nc) Le seul diviseur de $1$ est $1$ : un seul diviseur, $1$ n'est pas premier.\nd) $33 = 1 \\times 33 = 3 \\times 11$. Les diviseurs de $33$ sont $1$, $3$, $11$ et $33$ : quatre diviseurs, $33$ n'est pas premier.\n⛔ Le piège : dire que $1$ est premier parce qu'il n'est divisible « que par $1$ et par lui-même ». Ici, « $1$ » et « lui-même » sont le même nombre : cela fait UN diviseur, pas deux.\nRéponse : seul $17$ est premier ; $25$, $1$ et $33$ ne le sont pas.",
           schema: grille(
@@ -283,6 +293,11 @@ export const exercicesNombresPremiers4e: FicheExercicesData = {
         {
           enonce:
             "Voici les nombres de $1$ à $30$.\na) Quels sont les nombres premiers de cette grille ?\nb) Combien y en a-t-il ?\nc) Lequel est pair ?\nd) Pourquoi $1$ n'est-il pas dans la liste ?",
+          reponses: [
+            { question: "a)", attendu: "2 ; 3 ; 5 ; 7 ; 11 ; 13 ; 17 ; 19 ; 23 ; 29" },
+            { question: "b)", attendu: "10" },
+            { question: "c)", attendu: "2" },
+          ],
           figure: cases(1, 30),
           correction:
             "Je garde $2$ et je barre tous ses multiples : $4$, $6$, $8$… Je garde $3$ et je barre ses multiples qui restent : $9$, $15$, $21$, $27$. Je garde $5$ et je barre $25$. Je peux m'arrêter là : $7 \\times 7 = 49$ dépasse $30$.\na) Il reste $2$, $3$, $5$, $7$, $11$, $13$, $17$, $19$, $23$ et $29$.\nb) Il y en a $10$. Cette liste est à savoir par cœur.\nc) $2$ est le seul nombre premier pair : tous les autres nombres pairs sont des multiples de $2$.\nd) $1$ n'a qu'un seul diviseur, lui-même. Il en faut exactement deux.\n⛔ Le piège : garder $25$, qui n'est ni pair ni multiple de $3$. Il se barre avec $5$ : $25 = 5 \\times 5$.\nRéponse : $2$, $3$, $5$, $7$, $11$, $13$, $17$, $19$, $23$ et $29$, soit $10$ nombres premiers.",
@@ -292,6 +307,10 @@ export const exercicesNombresPremiers4e: FicheExercicesData = {
         {
           enonce:
             "Léa range des jetons en rectangle complet : au moins $2$ rangées, et au moins $2$ jetons par rangée.\na) Avec $10$ jetons, quel rectangle peut-elle faire ?\nb) Et avec $11$ jetons ?\nc) Quel est le lien avec les nombres premiers ?",
+          reponses: [
+            { question: "a)", attendu: ["2×5", "5×2"], exact: true },
+            { question: "b)", attendu: ["aucun", "aucun rectangle", "impossible", "non"] },
+          ],
           correction:
             "Un rectangle de $r$ rangées de $j$ jetons contient $r \\times j$ jetons : je dois écrire le nombre de jetons comme un produit.\na) $10 = 2 \\times 5$ : $2$ rangées de $5$ jetons (ou $5$ rangées de $2$, le même rectangle tourné).\nb) $11$ ne s'écrit que $1 \\times 11$ : ni $2$, ni $3$, ni $4$, ni $5$ ne divisent $11$. Aucun rectangle n'est possible, les jetons restent sur une seule ligne.\nc) Si le nombre de jetons est premier, ses seuls diviseurs sont $1$ et lui-même : le seul rangement est une ligne. $11$ est premier, $10$ ne l'est pas.\n⛔ Le piège : compter $1 \\times 11$ comme un rectangle. Une seule rangée, c'est une ligne, et l'énoncé demande au moins $2$ rangées.\nRéponse : a) $2$ rangées de $5$ ; b) aucun rectangle ; c) avec un nombre premier de jetons, aucun rectangle n'est possible.",
           schema: deux(jetons(2, 5, "10 = 2 × 5"), jetons(1, 11, "11 : une seule ligne")),
@@ -299,6 +318,10 @@ export const exercicesNombresPremiers4e: FicheExercicesData = {
         },
         {
           enonce: "a) Pour savoir si $89$ est premier, quels nombres faut-il essayer comme diviseurs ? Pourquoi peut-on s'arrêter ?\nb) $89$ est-il premier ?",
+          reponses: [
+            { question: "a)", attendu: "2 ; 3 ; 5 ; 7" },
+            { question: "b)", attendu: ["oui", "premier"] },
+          ],
           correction:
             "a) J'essaie les nombres premiers $2$, $3$, $5$, $7$… tant que leur carré ne dépasse pas $89$. $7 \\times 7 = 49$ ne dépasse pas $89$, mais $11 \\times 11 = 121$ le dépasse : j'essaie $2$, $3$, $5$ et $7$, et je m'arrête.\nPourquoi : si $89$ s'écrivait $a \\times b$, l'un des deux facteurs vaudrait au plus $9$, car $10 \\times 10 = 100$ dépasse $89$. Et un nombre de $2$ à $9$ est divisible par $2$, $3$, $5$ ou $7$.\nb) Par $2$ : $89$ est impair, non. Par $3$ : $8 + 9 = 17$, pas dans la table de $3$, non. Par $5$ : il ne finit ni par $0$ ni par $5$, non. Par $7$ : $89 = 7 \\times 12 + 5$, reste $5$, non.\nAucun essai ne tombe juste : $89$ est premier.\n⛔ Le piège : essayer tous les nombres jusqu'à $88$. Quatre essais suffisent, parce que $11 \\times 11$ dépasse $89$.\nRéponse : on essaie $2$, $3$, $5$ et $7$ ; $89$ est premier.",
           schema: grille(
@@ -309,6 +332,9 @@ export const exercicesNombresPremiers4e: FicheExercicesData = {
         },
         {
           enonce: "Parmi ces nombres, lesquels sont premiers ? Justifier.\n$51$ ; $57$ ; $59$ ; $65$ ; $85$",
+          reponses: [
+            { attendu: "59" },
+          ],
           correction:
             "Tous ces nombres sont plus petits que $100$ : j'essaie $2$, $3$, $5$ et $7$.\n$51$ : $5 + 1 = 6$, il est divisible par $3$. $51 = 3 \\times 17$, pas premier.\n$57$ : $5 + 7 = 12$, il est divisible par $3$. $57 = 3 \\times 19$, pas premier.\n$59$ : impair ; $5 + 9 = 14$, pas par $3$ ; il ne finit ni par $0$ ni par $5$ ; $59 = 7 \\times 8 + 3$, pas par $7$. Il est premier.\n$65$ finit par $5$ : $65 = 5 \\times 13$, pas premier.\n$85$ finit par $5$ : $85 = 5 \\times 17$, pas premier.\n⛔ Le piège : croire $51$ et $57$ premiers parce qu'ils sont impairs et « ont l'air seuls ». La somme des chiffres les démasque en une seconde.\nRéponse : seul $59$ est premier.",
           schema: grille(
@@ -320,6 +346,9 @@ export const exercicesNombresPremiers4e: FicheExercicesData = {
         },
         {
           enonce: "a) Donner tous les nombres premiers compris entre $31$ et $50$.\nb) Pourquoi faut-il faire l'essai par $7$, et pas seulement par $2$, $3$ et $5$ ?",
+          reponses: [
+            { question: "a)", attendu: "31 ; 37 ; 41 ; 43 ; 47" },
+          ],
           correction:
             "Je barre d'abord les nombres pairs : ils sont divisibles par $2$. Restent $31$, $33$, $35$, $37$, $39$, $41$, $43$, $45$, $47$ et $49$.\nPar $3$ (somme des chiffres) : $33$, $39$ et $45$, barrés.\nPar $5$ : $35$, barré ($45$ l'est déjà).\nPar $7$ : $49 = 7 \\times 7$, barré.\nJe m'arrête : $11 \\times 11 = 121$ dépasse $50$.\na) Il reste $31$, $37$, $41$, $43$ et $47$.\nb) $49$ passe les essais par $2$, $3$ et $5$, et pourtant $49 = 7 \\times 7$. Comme $7 \\times 7$ ne dépasse pas $50$, l'essai par $7$ est obligatoire.\n⛔ Le piège : garder $49$ parce qu'il est impair et que ni $3$ ni $5$ ne le divisent.\nRéponse : $31$, $37$, $41$, $43$ et $47$.",
           schema: crible(31, 50, [31, 37, 41, 43, 47]),
@@ -327,6 +356,11 @@ export const exercicesNombresPremiers4e: FicheExercicesData = {
         },
         {
           enonce: "Décomposer en produit de facteurs premiers.\na) $76$\nb) $98$\nc) $117$",
+          reponses: [
+            { question: "a)", attendu: ["2^2×19", "2×2×19"], exact: true },
+            { question: "b)", attendu: ["2×7^2", "2×7×7"], exact: true },
+            { question: "c)", attendu: ["3^2×13", "3×3×13"], exact: true },
+          ],
           correction:
             "Je divise par le plus petit nombre premier possible, puis je recommence avec le quotient, jusqu'à $1$.\na) $76 \\div 2 = 38$, $38 \\div 2 = 19$, et $19$ est premier : $19 \\div 19 = 1$. Donc $76 = 2 \\times 2 \\times 19 = 2^2 \\times 19$.\nb) $98 \\div 2 = 49$, $49 \\div 7 = 7$, $7 \\div 7 = 1$. Donc $98 = 2 \\times 7 \\times 7 = 2 \\times 7^2$.\nc) $117$ est impair, et $1 + 1 + 7 = 9$ : il est divisible par $3$. $117 \\div 3 = 39$, $39 \\div 3 = 13$, $13 \\div 13 = 1$. Donc $117 = 3 \\times 3 \\times 13 = 3^2 \\times 13$.\n⭐ Contrôle : je remultiplie. $9 \\times 13 = 117$.\n⛔ Le piège : écrire $117 = 9 \\times 13$ et s'arrêter. $9 = 3 \\times 3$ n'est pas premier : la décomposition n'est finie que lorsque TOUS les facteurs le sont.\nRéponse : $76 = 2^2 \\times 19$ ; $98 = 2 \\times 7^2$ ; $117 = 3^2 \\times 13$.",
           schema: echelles(
@@ -339,6 +373,9 @@ export const exercicesNombresPremiers4e: FicheExercicesData = {
         {
           enonce:
             "Tom et Inès décomposent $100$ avec un arbre. Tom commence par $100 = 4 \\times 25$, Inès par $100 = 10 \\times 10$.\na) Terminer les deux arbres.\nb) Écrire la décomposition obtenue par chacun. Que remarque-t-on ?",
+          reponses: [
+            { question: "b)", attendu: ["2^2×5^2", "2×2×5×5"], exact: true },
+          ],
           correction:
             "Dans un arbre, j'écris sous chaque nombre deux facteurs dont il est le produit, et je continue tant qu'un facteur n'est pas premier. Les facteurs premiers sont les feuilles de l'arbre.\na) Tom : $4 = 2 \\times 2$ et $25 = 5 \\times 5$. Inès : chaque $10$ donne $2 \\times 5$.\nb) Tom : $100 = 2 \\times 2 \\times 5 \\times 5$. Inès : $100 = 2 \\times 5 \\times 2 \\times 5$. En rangeant les facteurs, c'est la même écriture : $100 = 2^2 \\times 5^2$.\n⭐ Quel que soit le premier pas, on arrive à la même décomposition : elle est UNIQUE, à l'ordre des facteurs près.\n⛔ Le piège : s'arrêter à $100 = 10 \\times 10$. $10$ n'est pas premier ; l'arbre n'est fini que lorsque toutes ses feuilles sont des nombres premiers.\nRéponse : les deux arbres donnent $100 = 2^2 \\times 5^2$.",
           schema: deux(
@@ -365,6 +402,11 @@ export const exercicesNombresPremiers4e: FicheExercicesData = {
         {
           enonce:
             "a) Décomposer $2\\,024$ en produit de facteurs premiers.\nb) Décomposer $2\\,025$.\nc) En rangeant ses facteurs en deux paquets identiques, montrer que $2\\,025$ est le carré d'un entier.",
+          reponses: [
+            { question: "a)", attendu: ["2^3×11×23", "2×2×2×11×23"], exact: true },
+            { question: "b)", attendu: ["3^4×5^2", "3×3×3×3×5×5"], exact: true },
+            { question: "c)", attendu: ["45^2", "45×45"], exact: true },
+          ],
           correction:
             "a) $2\\,024$ est pair : $2\\,024 \\div 2 = 1\\,012$, $1\\,012 \\div 2 = 506$, $506 \\div 2 = 253$.\n$253$ est impair, $2 + 5 + 3 = 10$ (pas par $3$), il ne finit ni par $0$ ni par $5$, et $253 = 7 \\times 36 + 1$ (pas par $7$). J'essaie $11$ : $253 = 11 \\times 23$, et $23$ est premier.\nDonc $2\\,024 = 2 \\times 2 \\times 2 \\times 11 \\times 23 = 2^3 \\times 11 \\times 23$.\nb) $2\\,025$ est impair et $2 + 0 + 2 + 5 = 9$ : je commence par $3$. $2\\,025 \\div 3 = 675$, $675 \\div 3 = 225$, $225 \\div 3 = 75$, $75 \\div 3 = 25$, $25 \\div 5 = 5$, $5 \\div 5 = 1$.\nDonc $2\\,025 = 3 \\times 3 \\times 3 \\times 3 \\times 5 \\times 5 = 3^4 \\times 5^2$.\nc) Je fais deux paquets identiques : $(3 \\times 3 \\times 5) \\times (3 \\times 3 \\times 5) = 45 \\times 45$. Donc $2\\,025 = 45^2$.\n⭐ Contrôle : $45 \\times 45 = 2\\,025$.\n⛔ Le piège au a) : croire $253$ premier parce que ni $2$, ni $3$, ni $5$, ni $7$ ne le divisent. $253$ dépasse $100$ : il faut aussi essayer $11$, car $11 \\times 11 = 121$ ne dépasse pas $253$.\nRéponse : $2\\,024 = 2^3 \\times 11 \\times 23$ ; $2\\,025 = 3^4 \\times 5^2 = 45^2$.",
           schema: echelles(
@@ -375,6 +417,10 @@ export const exercicesNombresPremiers4e: FicheExercicesData = {
         },
         {
           enonce: "Rendre chaque fraction irréductible, en décomposant le numérateur et le dénominateur.\na) $\\dfrac{105}{147}$\nb) $\\dfrac{182}{286}$",
+          reponses: [
+            { question: "a)", attendu: ["5/7"], exact: true },
+            { question: "b)", attendu: ["7/11"], exact: true },
+          ],
           correction:
             "Je décompose le haut et le bas, puis je barre les facteurs premiers communs, un par un.\na) $105 = 3 \\times 5 \\times 7$ et $147 = 3 \\times 7 \\times 7$. En commun : un $3$ et un $7$. Je les barre : $\\dfrac{105}{147} = \\dfrac{5}{7}$.\nb) $182 = 2 \\times 7 \\times 13$ et $286 = 2 \\times 11 \\times 13$. En commun : $2$ et $13$. Je les barre : $\\dfrac{182}{286} = \\dfrac{7}{11}$.\n⭐ Contrôle : $5$ et $7$ n'ont plus de facteur commun, ni $7$ et $11$ : les deux fractions sont irréductibles.\n⛔ Le piège au b) : simplifier par $2$ et s'arrêter à $\\dfrac{91}{143}$, qui a l'air irréductible. Or $91 = 7 \\times 13$ et $143 = 11 \\times 13$ : il reste un $13$ à barrer.\nRéponse : $\\dfrac{5}{7}$ et $\\dfrac{7}{11}$.",
           schema: grille(
@@ -387,6 +433,10 @@ export const exercicesNombresPremiers4e: FicheExercicesData = {
         {
           enonce:
             "Deux nombres premiers dont la différence vaut $2$ sont appelés « jumeaux ».\na) Trouver tous les nombres premiers compris entre $40$ et $75$.\nb) En déduire tous les couples de nombres premiers jumeaux entre $40$ et $75$.\nc) Pourquoi le nombre placé entre deux jumeaux est-il toujours pair ?",
+          reponses: [
+            { question: "a)", attendu: "41 ; 43 ; 47 ; 53 ; 59 ; 61 ; 67 ; 71 ; 73" },
+            { question: "b)", attendu: "41 ; 43 ; 59 ; 61 ; 71 ; 73" },
+          ],
           correction:
             "a) Je barre les nombres pairs. Parmi les impairs, je barre par $3$ : $45$, $51$, $57$, $63$, $69$, $75$ ; par $5$ : $55$ et $65$ ; par $7$ : $49$. Je m'arrête : $11 \\times 11 = 121$ dépasse $75$.\nIl reste $41$, $43$, $47$, $53$, $59$, $61$, $67$, $71$ et $73$.\nb) Je cherche dans la liste deux nombres séparés de $2$ : $41$ et $43$, $59$ et $61$, $71$ et $73$.\nc) Deux nombres premiers plus grands que $2$ sont impairs. Entre deux nombres impairs qui se suivent, il y a toujours un nombre pair : $42$, $60$, $72$.\n⛔ Le piège : prendre $47$ et $49$. $49 = 7 \\times 7$ n'est pas premier : il faut l'essai par $7$.\nRéponse : $41$ et $43$, $59$ et $61$, $71$ et $73$.",
           schema: crible(40, 75, [41, 43, 47, 53, 59, 61, 67, 71, 73]),
@@ -395,6 +445,12 @@ export const exercicesNombresPremiers4e: FicheExercicesData = {
         {
           enonce:
             "Vrai ou faux ? Justifier par un contre-exemple ou par une explication.\na) Tout nombre impair est premier.\nb) $2$ est le seul nombre premier pair.\nc) La somme de deux nombres premiers est toujours un nombre premier.\nd) Le produit de deux nombres premiers n'est jamais premier.",
+          reponses: [
+            { question: "a)", attendu: ["faux", "fausse", "non"] },
+            { question: "b)", attendu: ["vrai", "vraie", "oui"] },
+            { question: "c)", attendu: ["faux", "fausse", "non"] },
+            { question: "d)", attendu: ["vrai", "vraie", "oui"] },
+          ],
           correction:
             "Pour montrer qu'une phrase est FAUSSE, un seul contre-exemple suffit. Pour montrer qu'elle est VRAIE, il faut une explication qui marche pour tous les nombres.\na) FAUX. $35$ est impair, et $35 = 5 \\times 7$ : il n'est pas premier.\nb) VRAI. Un nombre pair plus grand que $2$ est divisible par $1$, par $2$ et par lui-même : il a au moins trois diviseurs, il n'est pas premier.\nc) FAUX. $3$ et $5$ sont premiers, mais $3 + 5 = 8$ ne l'est pas.\nd) VRAI. Si $p$ et $q$ sont premiers, $p \\times q$ est divisible par $1$, par $p$ et par lui-même : au moins trois diviseurs, puisque $p$ n'est ni $1$ ni $p \\times q$.\n⛔ Le piège au c) : essayer $2 + 3 = 5$ et conclure « vrai ». Un exemple qui marche ne prouve rien ; un contre-exemple, lui, suffit à dire faux.\nRéponse : a) faux ; b) vrai ; c) faux ; d) vrai.",
           schema: grille(
@@ -406,6 +462,16 @@ export const exercicesNombresPremiers4e: FicheExercicesData = {
         {
           enonce:
             "a) Décomposer $40$, $30$ et $81$ en produits de facteurs premiers.\nb) Sans les lister, trouver combien chacun a de diviseurs.\nc) Vérifier pour $40$ en écrivant la liste de ses diviseurs.\nd) Le plus grand des trois nombres a-t-il le plus de diviseurs ?",
+          reponses: [
+            { question: "a) 40", attendu: ["2^3×5", "2×2×2×5"], exact: true },
+            { question: "a) 30", attendu: ["2×3×5"], exact: true },
+            { question: "a) 81", attendu: ["3^4", "3×3×3×3"], exact: true },
+            { question: "b) 40", attendu: "8" },
+            { question: "b) 30", attendu: "8" },
+            { question: "b) 81", attendu: "5" },
+            { question: "c)", attendu: "1 ; 2 ; 4 ; 5 ; 8 ; 10 ; 20 ; 40" },
+            { question: "d)", attendu: ["non"] },
+          ],
           correction:
             "a) $40 = 2 \\times 2 \\times 2 \\times 5 = 2^3 \\times 5$ ; $30 = 2 \\times 3 \\times 5$ ; $81 = 3 \\times 3 \\times 3 \\times 3 = 3^4$.\nb) Un diviseur se fabrique en choisissant combien de fois je prends chaque facteur premier, de zéro fois jusqu'à son nombre d'apparitions.\n$40$ : le $2$ apparaît $3$ fois, donc $4$ choix (zéro, une, deux ou trois fois) ; le $5$ apparaît $1$ fois, donc $2$ choix. $4 \\times 2 = 8$ diviseurs.\n$30$ : trois facteurs qui apparaissent chacun $1$ fois, donc $2$ choix chacun. $2 \\times 2 \\times 2 = 8$ diviseurs.\n$81$ : le $3$ apparaît $4$ fois, donc $5$ choix. $5$ diviseurs.\nc) Les diviseurs de $40$ sont $1$, $2$, $4$, $5$, $8$, $10$, $20$ et $40$ : il y en a bien $8$.\nd) Non : $81$ est le plus grand, mais il n'a que $5$ diviseurs, contre $8$ pour $40$ et pour $30$.\n⛔ Le piège : oublier le choix « zéro fois ». Pour $40$, on trouverait $3 \\times 1 = 3$ diviseurs, alors que $1$ (aucun facteur pris) en est un.\nRéponse : $40$ et $30$ ont $8$ diviseurs chacun, $81$ en a $5$.",
           schema: grille(
@@ -417,6 +483,14 @@ export const exercicesNombresPremiers4e: FicheExercicesData = {
         {
           enonce:
             "Un nombre $N$ s'écrit $N = 2 \\times 3^2 \\times 11$.\na) Calculer $N$.\nb) Sans poser de division, dire si $N$ est divisible par $22$, par $4$, par $33$, par $27$.\nc) Décomposer $6 \\times N$ en produit de facteurs premiers.",
+          reponses: [
+            { question: "a)", attendu: "198" },
+            { question: "b) 22", attendu: ["oui"] },
+            { question: "b) 4", attendu: ["non"] },
+            { question: "b) 33", attendu: ["oui"] },
+            { question: "b) 27", attendu: ["non"] },
+            { question: "c)", attendu: ["2^2×3^3×11", "2×2×3×3×3×11"], exact: true },
+          ],
           correction:
             "a) $N = 2 \\times 9 \\times 11 = 18 \\times 11 = 198$.\nb) Un nombre divise $N$ quand tous ses facteurs premiers se trouvent dans $2 \\times 3 \\times 3 \\times 11$, avec au moins autant d'exemplaires.\n$22 = 2 \\times 11$ : les deux y sont. Oui, $198 = 22 \\times 9$.\n$4 = 2 \\times 2$ demande deux $2$ ; $N$ n'en a qu'un. Non.\n$33 = 3 \\times 11$ : les deux y sont. Oui, $198 = 33 \\times 6$.\n$27 = 3 \\times 3 \\times 3$ demande trois $3$ ; $N$ n'en a que deux. Non.\nc) $6 = 2 \\times 3$ : j'ajoute ses facteurs à ceux de $N$. $6 \\times N = 2 \\times 3 \\times 2 \\times 3^2 \\times 11 = 2^2 \\times 3^3 \\times 11$, soit $1\\,188$.\n⛔ Le piège au b) : dire oui pour $4$ parce que $2$ divise $N$. Il faut AUTANT de $2$ que $4$ en demande.\nRéponse : $N = 198$ ; divisible par $22$ et par $33$, pas par $4$ ni par $27$ ; $6 \\times N = 2^2 \\times 3^3 \\times 11$.",
           schema: echelles(
@@ -428,6 +502,11 @@ export const exercicesNombresPremiers4e: FicheExercicesData = {
         {
           enonce:
             "Mathis veut savoir si $143$ est premier. Il essaie $2$, $3$, $5$ et $7$ : aucun ne divise $143$. Il conclut : « $143$ est premier. »\na) Pourquoi ces quatre essais suffisent-ils pour un nombre plus petit que $100$, mais pas ici ?\nb) $143$ est-il premier ?\nc) $149$ est-il premier ? Jusqu'où faut-il essayer ?",
+          reponses: [
+            { question: "b)", attendu: ["non", "faux", "pas premier"] },
+            { question: "c)", attendu: ["oui", "premier"] },
+            { question: "c) essai", attendu: "11" },
+          ],
           correction:
             "a) Les essais s'arrêtent quand le carré du nombre premier essayé dépasse le nombre testé. Pour un nombre plus petit que $100$, $11 \\times 11 = 121$ dépasse toujours : $2$, $3$, $5$ et $7$ suffisent. Mais $121$ ne dépasse pas $143$ : il faut aussi essayer $11$.\nb) Par $11$ : $143 = 11 \\times 13$. $143$ n'est pas premier.\nc) $11 \\times 11 = 121$ ne dépasse pas $149$, mais $13 \\times 13 = 169$ le dépasse : j'essaie $2$, $3$, $5$, $7$ et $11$.\nPar $2$ : impair. Par $3$ : $1 + 4 + 9 = 14$, non. Par $5$ : non. Par $7$ : $149 = 7 \\times 21 + 2$, non. Par $11$ : $149 = 11 \\times 13 + 6$, non.\nAucun essai ne tombe juste : $149$ est premier.\n⛔ Le piège : appliquer « $2$, $3$, $5$, $7$ » comme une recette. Elle ne vaut que jusqu'à $120$ ; au-delà, je continue tant que le carré de l'essai ne dépasse pas le nombre.\nRéponse : $143 = 11 \\times 13$ n'est pas premier ; $149$ est premier (essais jusqu'à $11$).",
           schema: grille(
@@ -440,6 +519,13 @@ export const exercicesNombresPremiers4e: FicheExercicesData = {
         {
           enonce:
             "a) Écrire les diviseurs de $4$, de $9$ et de $25$. Combien chacun en a-t-il ?\nb) Expliquer pourquoi le carré d'un nombre premier a toujours exactement trois diviseurs.\nc) Trouver tous les nombres jusqu'à $100$ qui ont exactement trois diviseurs.",
+          reponses: [
+            { question: "a) 4", attendu: "1 ; 2 ; 4" },
+            { question: "a) 9", attendu: "1 ; 3 ; 9" },
+            { question: "a) 25", attendu: "1 ; 5 ; 25" },
+            { question: "a) nb", attendu: "3" },
+            { question: "c)", attendu: "4 ; 9 ; 25 ; 49" },
+          ],
           correction:
             "a) Diviseurs de $4$ : $1$, $2$, $4$. De $9$ : $1$, $3$, $9$. De $25$ : $1$, $5$, $25$. Chacun en a trois.\nb) Si $p$ est premier, $p \\times p$ ne contient que le facteur $p$, deux fois. Un diviseur prend $p$ zéro, une ou deux fois : c'est $1$, $p$ ou $p \\times p$. Trois choix, donc trois diviseurs.\nc) Le nombre de diviseurs est un produit de « nombres de choix ». Pour obtenir $3$, qui est premier, il faut un seul facteur premier, présent deux fois : le nombre est le carré d'un nombre premier.\n$2 \\times 2 = 4$, $3 \\times 3 = 9$, $5 \\times 5 = 25$, $7 \\times 7 = 49$ ; puis $11 \\times 11 = 121$ dépasse $100$.\n⛔ Le piège : prendre n'importe quel carré. $16 = 2^4$ est un carré, mais il a cinq diviseurs : $1$, $2$, $4$, $8$ et $16$.\nRéponse : $4$, $9$, $25$ et $49$.",
           schema: grille(
@@ -467,6 +553,23 @@ export const exercicesNombresPremiers4e: FicheExercicesData = {
           titre: "Les cigales à cycle premier",
           enonce:
             "En Amérique du Nord, certaines cigales passent $13$ ans ou $17$ ans sous terre, puis sortent toutes la même année. Des biologistes y voient une protection contre les prédateurs. Imaginons des prédateurs dont la population culmine tous les $2$, $3$, $4$, $5$ ou $6$ ans : si le cycle d'un prédateur DIVISE celui des cigales, il est au rendez-vous à chacune de leurs sorties.\na) Pour chaque cycle de $12$ à $18$ ans, donner sa décomposition en facteurs premiers, ou dire qu'il est premier.\nb) Pour chaque cycle, quels prédateurs sont au rendez-vous à chaque sortie ?\nc) Quels cycles échappent à tous ces prédateurs ? Qu'ont-ils en commun ?",
+          reponses: [
+            { question: "a) 12", attendu: ["2^2×3", "2×2×3"], exact: true },
+            { question: "a) 13", attendu: ["premier", "13"] },
+            { question: "a) 14", attendu: ["2×7"], exact: true },
+            { question: "a) 15", attendu: ["3×5"], exact: true },
+            { question: "a) 16", attendu: ["2^4", "2×2×2×2"], exact: true },
+            { question: "a) 17", attendu: ["premier", "17"] },
+            { question: "a) 18", attendu: ["2×3^2", "2×3×3"], exact: true },
+            { question: "b) 12", attendu: "2 ; 3 ; 4 ; 6" },
+            { question: "b) 13", attendu: ["aucun", "aucune", "rien"] },
+            { question: "b) 14", attendu: "2" },
+            { question: "b) 15", attendu: "3 ; 5" },
+            { question: "b) 16", attendu: "2 ; 4" },
+            { question: "b) 17", attendu: ["aucun", "aucune", "rien"] },
+            { question: "b) 18", attendu: "2 ; 3 ; 6" },
+            { question: "c)", attendu: "13 ; 17" },
+          ],
           correction:
             "a) $12 = 2^2 \\times 3$ ; $13$ est premier ; $14 = 2 \\times 7$ ; $15 = 3 \\times 5$ ; $16 = 2^4$ ; $17$ est premier ; $18 = 2 \\times 3^2$.\nb) Un prédateur est au rendez-vous si son cycle divise celui des cigales, donc si ses facteurs premiers se trouvent dans la décomposition.\n$12$ : $2$, $3$, $4$ et $6$. $13$ : aucun. $14$ : $2$. $15$ : $3$ et $5$. $16$ : $2$ et $4$. $17$ : aucun. $18$ : $2$, $3$ et $6$.\nc) Seuls $13$ et $17$ n'ont aucun prédateur à chaque sortie. Ce sont les deux nombres premiers de la liste : leurs seuls diviseurs sont $1$ et eux-mêmes, donc aucun cycle de $2$ à $6$ ans ne peut les diviser.\n⛔ Le piège au b) : oublier $6$ pour $12$ ou pour $18$. $6 = 2 \\times 3$, et $2$ et $3$ sont tous deux dans $12$ et dans $18$.\nRéponse : $13$ et $17$, les deux nombres premiers entre $12$ et $18$, échappent à tous les prédateurs.",
           schema: grille(
@@ -480,6 +583,10 @@ export const exercicesNombresPremiers4e: FicheExercicesData = {
           titre: "La photo du Tour de France",
           enonce:
             "Au départ du Tour de France 2025, $23$ équipes de $8$ coureurs, soit $184$ coureurs, posent pour la photo. On les range en rectangle complet : au moins $2$ rangs, et plus de coureurs par rang que de rangs.\na) Décomposer $184$ en produit de facteurs premiers.\nb) Donner tous les rectangles possibles.\nc) Après deux abandons, il reste $182$ coureurs. Quels rectangles sont possibles ? Lequel est le plus proche d'un carré ?",
+          reponses: [
+            { question: "a)", attendu: ["2^3×23", "2×2×2×23"], exact: true },
+            { question: "c) carré", attendu: ["13×14", "14×13", "13 rangs de 14", "13 de 14"], exact: true },
+          ],
           correction:
             "a) $184 \\div 2 = 92$, $92 \\div 2 = 46$, $46 \\div 2 = 23$, et $23$ est premier. Donc $184 = 2^3 \\times 23$.\nb) Le nombre de rangs doit diviser $184$ : il se fabrique avec les facteurs $2$, $2$, $2$ et $23$. Avec plus de coureurs par rang que de rangs : $2$ rangs de $92$, $4$ rangs de $46$, $8$ rangs de $23$.\nJe m'arrête : $23$ rangs de $8$, c'est le dernier rectangle, tourné.\nc) $182 \\div 2 = 91$, $91 \\div 7 = 13$ : $182 = 2 \\times 7 \\times 13$. Les rangs possibles : $2$ rangs de $91$, $7$ rangs de $26$, $13$ rangs de $14$.\nLe plus proche d'un carré : $13$ rangs de $14$ coureurs.\n⛔ Le piège au b) : oublier $4$ rangs de $46$, en ne prenant que les facteurs premiers $2$ et $23$. Un nombre de rangs peut être un PRODUIT de facteurs premiers : $4 = 2 \\times 2$ et $8 = 2 \\times 2 \\times 2$.\nRéponse : $184 = 2^3 \\times 23$ ; $2$ rangs de $92$, $4$ de $46$ ou $8$ de $23$ ; avec $182$ coureurs, $2$ rangs de $91$, $7$ de $26$ ou $13$ de $14$, le plus proche d'un carré.",
           schema: grille(
@@ -493,6 +600,17 @@ export const exercicesNombresPremiers4e: FicheExercicesData = {
           titre: "Les vitesses du vélo",
           enonce:
             "Sur un vélo de route, la chaîne relie un plateau (à l'avant) à un pignon (à l'arrière). Les plateaux ont $50$ et $34$ dents ; la cassette compte, entre autres, des pignons de $15$, $24$ et $27$ dents. Le rapport $\\dfrac{\\text{dents du plateau}}{\\text{dents du pignon}}$ donne le nombre de tours de roue pour un tour de pédalier.\na) Décomposer $50$, $34$, $15$, $24$ et $27$ en produits de facteurs premiers.\nb) Écrire les rapports $\\dfrac{50}{15}$, $\\dfrac{34}{24}$ et $\\dfrac{34}{27}$ sous forme irréductible.\nc) Avec le rapport $\\dfrac{50}{15}$, combien de tours de pédalier faut-il au minimum pour que la roue fasse un nombre entier de tours ?",
+          reponses: [
+            { question: "a) 50", attendu: ["2×5^2", "2×5×5"], exact: true },
+            { question: "a) 34", attendu: ["2×17"], exact: true },
+            { question: "a) 15", attendu: ["3×5"], exact: true },
+            { question: "a) 24", attendu: ["2^3×3", "2×2×2×3"], exact: true },
+            { question: "a) 27", attendu: ["3^3", "3×3×3"], exact: true },
+            { question: "b) 50/15", attendu: ["10/3"], exact: true },
+            { question: "b) 34/24", attendu: ["17/12"], exact: true },
+            { question: "b) 34/27", attendu: ["34/27"], exact: true },
+            { question: "c)", attendu: "3" },
+          ],
           correction:
             "a) $50 = 2 \\times 5^2$ ; $34 = 2 \\times 17$ ; $15 = 3 \\times 5$ ; $24 = 2^3 \\times 3$ ; $27 = 3^3$.\nb) Je barre les facteurs communs au haut et au bas.\n$\\dfrac{50}{15} = \\dfrac{2 \\times 5 \\times 5}{3 \\times 5} = \\dfrac{10}{3}$ : un $5$ en commun.\n$\\dfrac{34}{24} = \\dfrac{2 \\times 17}{2 \\times 2 \\times 2 \\times 3} = \\dfrac{17}{12}$ : un $2$ en commun.\n$\\dfrac{34}{27}$ : $34$ n'a que les facteurs $2$ et $17$, $27$ n'a que des $3$. Aucun facteur commun : $\\dfrac{34}{27}$ est déjà irréductible.\nc) $\\dfrac{50}{15} = \\dfrac{10}{3}$ : pour $3$ tours de pédalier, la roue fait exactement $10$ tours. Avec $1$ ou $2$ tours de pédalier, elle en fait $\\dfrac{10}{3}$ ou $\\dfrac{20}{3}$, qui ne sont pas des nombres entiers.\n⛔ Le piège au b) : chercher à « simplifier » $\\dfrac{34}{27}$ à tout prix. Les décompositions montrent d'un coup qu'il n'y a rien à barrer.\nRéponse : $\\dfrac{10}{3}$, $\\dfrac{17}{12}$ et $\\dfrac{34}{27}$ ; il faut $3$ tours de pédalier, et la roue en fait alors $10$.",
           schema: grille(
@@ -505,6 +623,10 @@ export const exercicesNombresPremiers4e: FicheExercicesData = {
           titre: "Le cadenas des sites Internet",
           enonce:
             "Le cadenas d'un site Internet repose sur un produit de deux très grands nombres premiers : multiplier est rapide, retrouver les deux facteurs à partir du produit est très long. Une clé actuelle est un nombre de $617$ chiffres. Voici une version miniature.\na) Calculer $13 \\times 29$.\nb) Le nombre $391$ est le produit de deux nombres premiers. Les retrouver.\nc) Pourquoi était-on sûr de trouver un facteur avant d'arriver à $20$ ?\nd) Léo propose $391 = 1 \\times 391$. Pourquoi sa réponse ne convient-elle pas ?",
+          reponses: [
+            { question: "a)", attendu: "377" },
+            { question: "b)", attendu: "17 ; 23" },
+          ],
           correction:
             "a) $13 \\times 29 = 377$ : un seul calcul.\nb) Dans l'autre sens, je dois chercher. J'essaie les nombres premiers dans l'ordre.\nPar $2$ : impair. Par $3$ : $3 + 9 + 1 = 13$, non. Par $5$ : non. Par $7$ : $391 = 7 \\times 55 + 6$. Par $11$ : $391 = 11 \\times 35 + 6$. Par $13$ : $391 = 13 \\times 30 + 1$. Par $17$ : $391 = 17 \\times 23$, reste $0$.\n$17$ et $23$ sont premiers : $391 = 17 \\times 23$.\nc) $20 \\times 20 = 400$ dépasse $391$. Si les deux facteurs valaient au moins $20$, leur produit dépasserait $391$ : le plus petit des deux est donc plus petit que $20$.\nd) $1$ n'est pas un nombre premier, et $391$ non plus, puisque $391 = 17 \\times 23$.\n⭐ Il a fallu sept essais pour un nombre de trois chiffres. Pour un nombre de $617$ chiffres, même un ordinateur n'y arrive pas : c'est ce déséquilibre qui protège les paiements en ligne.\n⛔ Le piège : s'arrêter après $2$, $3$, $5$ et $7$ en concluant « $391$ est premier ». $17 \\times 17 = 289$ ne dépasse pas $391$ : il faut pousser les essais plus loin.\nRéponse : $13 \\times 29 = 377$ ; $391 = 17 \\times 23$.",
           schema: grille(

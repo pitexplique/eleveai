@@ -326,6 +326,10 @@ export const exercicesAlgoConstruire5e: FicheExercicesData = {
         {
           enonce:
             "Un taxi fait payer $4$ € de prise en charge, puis $2$ € par kilomètre (tarif choisi pour l'exercice). Le prix se calcule par la formule : prix = 4 + 2 × km.\na) Écris le programme : le lutin demande le nombre de km, puis dit le prix.\nb) Que dit-il pour un trajet de $7$ km ?\nc) Un élève a écrit « mettre prix à (4 + 2) * km ». Que dirait son programme pour $7$ km ?",
+          reponses: [
+            { question: "b)", attendu: "18" },
+            { question: "c)", attendu: "42" },
+          ],
           correction:
             "a) Chaque morceau de la formule devient un bloc. L'entrée, le nombre de km, arrive par « demander » ; je la range dans la variable km. Puis je calcule le prix, et le lutin le dit.\nLe calcul s'écrit « mettre prix à 4 + 2 * km » : l'étoile * remplace le signe ×.\nb) La machine multiplie d'abord : $2 \\times 7 = 14$, puis $4 + 14 = 18$. Le lutin dit $18$ : le trajet coûte $18$ €.\nc) $(4 + 2) \\times 7 = 6 \\times 7 = 42$. Son programme ferait payer la prise en charge à chaque kilomètre.\n⛔ Le piège : des parenthèses en trop. La prise en charge se paie UNE fois : elle ne doit pas être multipliée.\nRéponse : b) $18$ € ; c) $42$ €, c'est faux.",
           schema: scratch(["quand drapeau vert cliqué", "demander 'Km ?'", "mettre km à réponse", "mettre prix à 4 + 2 * km", "dire prix"], 3),
@@ -334,6 +338,11 @@ export const exercicesAlgoConstruire5e: FicheExercicesData = {
         {
           enonce:
             "Un guépard lancé court à environ $30$ mètres par seconde (valeur arrondie pour l'exercice). La distance parcourue se calcule par : distance = vitesse × durée. Dans un programme, la variable v vaut $30$ et t est la durée en secondes.\na) Quel bloc traduit la formule ?\n(1) « mettre d à v + t » ; (2) « mettre d à v * t » ; (3) « mettre d à v / t » ; (4) « mettre d à t − v ».\nb) Quelle distance le lutin dit-il quand t vaut $4$ ?\nc) Et avec le bloc (1) ?",
+          reponses: [
+            { question: "a)", attendu: ["2", "(2)", "bloc 2", "le bloc (2)"] },
+            { question: "b)", attendu: "120" },
+            { question: "c)", attendu: "34" },
+          ],
           correction:
             "a) Le signe × s'écrit * dans Scratch : la formule devient « mettre d à v * t ». C'est le bloc (2).\nb) $30 \\times 4 = 120$. Le lutin dit $120$ : en $4$ secondes, le guépard parcourt $120$ m.\nc) Avec le bloc (1) : $30 + 4 = 34$. Additionner une vitesse et une durée n'a pas de sens : ce ne sont pas des grandeurs de même nature.\n⛔ Le piège : lire le × de la formule comme la lettre x. Dans Scratch, la multiplication est l'étoile *.\nRéponse : a) le bloc (2) ; b) $120$ m ; c) $34$, qui ne veut rien dire.",
           schema: ecranSeulement(scratch(["quand drapeau vert cliqué", "mettre v à 30", "mettre t à 4", "mettre d à v * t", "dire d"], 3)),
@@ -342,6 +351,9 @@ export const exercicesAlgoConstruire5e: FicheExercicesData = {
         {
           enonce:
             "Un capteur mesure l'humidité du sol d'une plante, en %. Il faut arroser quand l'humidité est inférieure à $30$ % (seuil choisi pour l'exercice). Le programme contient « si … alors », avec « dire 'Arrose' » dedans.\na) Quelle condition faut-il écrire : « humidité > 30 », « humidité < 30 » ou « humidité = 30 » ?\nb) Que dit le lutin quand l'humidité vaut $25$, $30$, puis $45$ ?",
+          reponses: [
+            { question: "a)", attendu: ["humidité < 30", "< 30"] },
+          ],
           correction:
             "a) « Inférieure à $30$ » veut dire plus petite que $30$ : j'écris « humidité < 30 ».\n« humidité > 30 » ferait arroser un sol déjà humide ; « humidité = 30 » n'arroserait qu'à $30$ pile.\nb) $25 < 30$ est vrai : le lutin dit « Arrose ».\n$30 < 30$ est faux : le lutin ne dit rien. $45 < 30$ est faux : rien non plus.\n⛔ Le piège : confondre < et >. La pointe du signe montre le plus petit : dans « humidité < 30 », c'est l'humidité qui est la plus petite.\nRéponse : a) « humidité < 30 » ; b) « Arrose », rien, rien.",
           schema: ecranSeulement(trace(["humidité", "< 30 ?", "le lutin dit"], [[25, "vrai", "Arrose"], [30, "faux", "rien"], [45, "faux", "rien"]])),
@@ -359,6 +371,12 @@ export const exercicesAlgoConstruire5e: FicheExercicesData = {
         {
           enonce:
             "Ce programme trace un carré.\na) Quelle est la longueur d'un côté ? Quel est le périmètre du carré ?\nb) Quel paramètre faut-il changer pour tracer un carré de côté $25$ ?\nc) On veut un carré dont le tour mesure $180$ pas. Quel nombre faut-il écrire, et dans quel bloc ?",
+          reponses: [
+            { question: "a) côté", attendu: "60" },
+            { question: "a) P", attendu: "240" },
+            { question: "b)", attendu: "25" },
+            { question: "c)", attendu: "45" },
+          ],
           figure: scratch(["quand drapeau vert cliqué", "stylo en position d'écriture", "répéter 4 fois", "  avancer de 60", "  tourner à gauche de 90°"]),
           correction:
             "a) Le bloc « avancer de 60 » trace un côté : un côté mesure $60$ pas. La boucle le répète $4$ fois : le périmètre est $4 \\times 60 = 240$ pas.\nb) Seule la longueur change : « avancer de 60 » devient « avancer de 25 ». L'angle reste $90$° et la boucle reste « répéter 4 fois ».\nc) Les $4$ côtés se partagent les $180$ pas : $180 \\div 4 = 45$. J'écris « avancer de 45 ».\n⛔ Le piège : changer le « 4 » de la boucle pour changer la taille. Le nombre de tours donne le nombre de côtés, pas leur longueur.\nRéponse : a) $60$ pas et $240$ pas ; b) « avancer de 25 » ; c) « avancer de 45 ».",
@@ -368,6 +386,11 @@ export const exercicesAlgoConstruire5e: FicheExercicesData = {
         {
           enonce:
             "Le lutin part en regardant vers la droite. Le programme A répète $4$ fois « avancer de 30 » puis « tourner à gauche de 90° ». Dans le programme B, on a seulement remplacé « à gauche » par « à droite ».\na) Quelle figure trace chaque programme ?\nb) Où se trouve la figure de B par rapport à celle de A ?\nc) Le lutin revient-il à son point de départ dans les deux cas ?",
+          reponses: [
+            { question: "a)", attendu: ["carré", "un carré", "deux carrés", "carrés"] },
+            { question: "b)", attendu: ["en dessous", "dessous", "en bas"] },
+            { question: "c)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) Les deux programmes font $4$ côtés de $30$ pas et $4$ quarts de tour : chacun trace un carré de côté $30$.\nb) A tourne vers la gauche : après le premier côté, il monte. Son carré est au-dessus de la ligne de départ.\nB tourne vers la droite : il descend. Son carré est en dessous, comme le reflet de A dans un miroir.\nc) Oui : $4$ quarts de tour font $4 \\times 90 = 360$°, un tour complet, et $4$ côtés égaux ramènent le lutin à son départ.\n⛔ Le piège : croire que le sens du virage ne compte pas. Il ne change pas la forme, mais il change l'endroit où elle est tracée.\nRéponse : a) deux carrés de côté $30$ ; b) en dessous ; c) oui.",
           schema: ecranSeulement(lutin([[[0, 0], [30, 0], [30, 30], [0, 30], [0, 0]], [[0, 0], [30, 0], [30, -30], [0, -30], [0, 0]]], "A en bleu, B en orange")),
@@ -376,6 +399,11 @@ export const exercicesAlgoConstruire5e: FicheExercicesData = {
         {
           enonce:
             "Dans un jeu, chaque pièce ramassée rapporte $5$ points. Ce programme compte les points de $6$ pièces.\na) Que dit le lutin ?\nb) Réécris le programme avec une boucle « répéter ». Combien de blocs gagnes-tu ?\nc) Que faut-il changer pour $15$ pièces ?",
+          reponses: [
+            { question: "a)", attendu: "30" },
+            { question: "b)", attendu: "4" },
+            { question: "c)", attendu: ["15", "répéter 15 fois"] },
+          ],
           figure: scratch(["quand drapeau vert cliqué", "mettre points à 0", "ajouter 5 à points", "ajouter 5 à points", "ajouter 5 à points", "ajouter 5 à points", "ajouter 5 à points", "ajouter 5 à points", "dire points"]),
           correction:
             "a) points part de $0$ et reçoit $5$ six fois : $6 \\times 5 = 30$. Le lutin dit $30$.\nb) Le bloc « ajouter 5 à points » revient $6$ fois de suite : je le range UNE fois dans « répéter 6 fois ».\nSous le drapeau : « mettre points à 0 », « répéter 6 fois » avec « ajouter 5 à points » dedans, puis « dire points ».\nSans boucle, il y avait $8$ blocs sous le drapeau ; avec la boucle, il en reste $4$. Je gagne $4$ blocs, et le lutin dit toujours $30$.\nc) Je change seulement le nombre de tours : « répéter 15 fois ». Le lutin dit alors $15 \\times 5 = 75$.\n⛔ Le piège : mettre « mettre points à 0 » DANS la boucle. Les points repartiraient de $0$ à chaque tour, et le lutin dirait $5$.\nRéponse : a) $30$ ; b) $4$ blocs de moins ; c) « répéter 15 fois », $75$ points.",
@@ -385,6 +413,10 @@ export const exercicesAlgoConstruire5e: FicheExercicesData = {
         {
           enonce:
             "Écris un programme qui fait dire au lutin la table de $7$ : $7$, $14$, $21$… jusqu'à $70$.\na) Quelle variable faut-il, et à quelle valeur commence-t-elle ?\nb) Combien de tours de boucle faut-il ? Écris le programme.\nc) Que dit le lutin si on range « dire n » AVANT « ajouter 7 à n » dans la boucle ?",
+          reponses: [
+            { question: "a)", attendu: "0" },
+            { question: "b)", attendu: "10" },
+          ],
           correction:
             "a) Il faut une variable n qui grandit de $7$ à chaque tour. Elle commence à $0$ : après le premier ajout, elle vaut $7$.\nb) De $7$ à $70$, il y a $70 \\div 7 = 10$ nombres : il faut $10$ tours.\nLe programme : « mettre n à 0 », puis « répéter 10 fois » avec, dedans, « ajouter 7 à n » puis « dire n ».\nc) Le lutin parlerait AVANT d'ajouter : il dirait $0$, $7$, $14$… jusqu'à $63$. Il dirait $0$ en trop, et il manquerait $70$.\n⛔ Le piège : l'ordre des blocs DANS la boucle. Les mêmes blocs, dans l'autre ordre, décalent toute la liste.\nRéponse : a) n, qui commence à $0$ ; b) $10$ tours ; c) de $0$ à $63$.",
           schema: ecranSeulement(scratch(["quand drapeau vert cliqué", "mettre n à 0", "répéter 10 fois", "  ajouter 7 à n", "  dire n"], 2)),
@@ -407,6 +439,12 @@ export const exercicesAlgoConstruire5e: FicheExercicesData = {
         {
           enonce:
             "Voici un programme de calcul : choisir un nombre, le multiplier par $4$, puis soustraire $3$ au résultat.\na) Écris-le en blocs : le lutin demande le nombre, puis dit le résultat.\nb) Que dit le lutin avec $5$ ? Avec $2{,}5$ ?\nc) Le lutin a dit $45$. Quel nombre avait-on choisi ?\nd) Écris le calcul avec la lettre $n$ pour le nombre choisi.",
+          reponses: [
+            { question: "b) 5", attendu: "17" },
+            { question: "b) 2,5", attendu: "7" },
+            { question: "c)", attendu: "12" },
+            { question: "d)", attendu: "4n-3" },
+          ],
           correction:
             "a) Chaque étape du programme de calcul devient un bloc, dans le même ordre : « demander », « mettre n à réponse », « mettre n à n * 4 », « mettre n à n − 3 », « dire n ».\nb) Avec $5$ : $5 \\times 4 = 20$, puis $20 - 3 = 17$. Le lutin dit $17$.\nAvec $2{,}5$ : $2{,}5 \\times 4 = 10$, puis $10 - 3 = 7$. Le lutin dit $7$.\nc) Je défais à l'envers : $45 + 3 = 48$, puis $48 \\div 4 = 12$. On avait choisi $12$.\n⭐ Contrôle : $12 \\times 4 - 3 = 48 - 3 = 45$.\nd) Le calcul s'écrit $4 \\times n - 3$.\n⛔ Le piège : écrire « mettre n à n − 3 » AVANT la multiplication. Le lutin calculerait $(5 - 3) \\times 4 = 8$.\nRéponse : b) $17$ et $7$ ; c) $12$ ; d) $4 \\times n - 3$.",
           schema: scratch(["quand drapeau vert cliqué", "demander 'Nombre ?'", "mettre n à réponse", "mettre n à n * 4", "mettre n à n − 3", "dire n"]),
@@ -415,6 +453,11 @@ export const exercicesAlgoConstruire5e: FicheExercicesData = {
         {
           enonce:
             "On veut que le lutin trace un triangle équilatéral de côté $80$ : trois côtés égaux, et il revient à son point de départ.\na) Combien de fois faut-il répéter « avancer de 80 » puis « tourner à gauche » ?\nb) De combien de degrés le lutin doit-il tourner à chaque sommet ? Écris le programme.\nc) Tom a écrit « tourner à gauche de 60° ». Que trace son programme ?\nd) Quelle est la longueur du tracé ?",
+          reponses: [
+            { question: "a)", attendu: "3" },
+            { question: "b)", attendu: "120" },
+            { question: "d)", attendu: "240" },
+          ],
           correction:
             "a) Un triangle a $3$ côtés : je répète $3$ fois « avancer de 80 » puis « tourner ».\nb) Pour revenir à son départ en regardant dans le même sens, le lutin doit faire un tour complet, $360$°, en $3$ virages égaux : $360 \\div 3 = 120$. Il tourne de $120$° à chaque sommet.\nLe programme : « stylo en position d'écriture », puis « répéter 3 fois » avec « avancer de 80 » et « tourner à gauche de 120° ».\nc) Avec $60$°, le lutin ne fait qu'un demi-tour en tout : $3 \\times 60 = 180$°. Il trace trois côtés d'un hexagone et ne revient pas à son départ : la figure reste ouverte.\nd) $3 \\times 80 = 240$ pas.\n⛔ Le piège : tourner de l'angle du triangle, $60$°. Le lutin tourne de l'angle qui lui fait CHANGER de direction, et ses trois virages doivent faire un tour complet.\nRéponse : a) $3$ fois ; b) $120$° ; c) une ligne ouverte ; d) $240$ pas.",
           schema: pile(
@@ -426,6 +469,9 @@ export const exercicesAlgoConstruire5e: FicheExercicesData = {
         {
           enonce:
             "Un thermomètre médical affiche la température au dixième. Le lutin doit dire « Fièvre » au-dessus de $38$ °C, et « Normal » sinon (seuil choisi pour l'exercice).\na) Écris le programme avec « si … alors … sinon ».\nb) Que dit-il pour $37{,}5$ ; $38$ ; $39{,}2$ ?\nc) Le médecin veut que $38$ °C pile compte comme de la fièvre. Quel paramètre changer ?",
+          reponses: [
+            { question: "c)", attendu: ["37,9", "réponse > 37.9", "réponse > 37,9"] },
+          ],
           correction:
             "a) Deux messages, un seul à la fois : c'est « si … alors … sinon ». La condition est « réponse > 38 ».\nLe programme : « demander », puis « si réponse > 38 alors » avec « dire Fièvre » dedans, et « dire Normal » dans le « sinon ».\nb) $37{,}5 > 38$ est faux : « Normal ». $38 > 38$ est faux : « Normal ». $39{,}2 > 38$ est vrai : « Fièvre ».\nc) Pour que $38$ passe dans le « si », je baisse le seuil d'un dixième : « si réponse > 37.9 alors ». Scratch écrit la virgule avec un point.\nLe thermomètre affiche des dixièmes : $38$ est la plus petite température qui dépasse $37{,}9$.\n⛔ Le piège : le $38$ pile. « > 38 » l'exclut ; il suffit de changer le paramètre de la condition, pas le reste du programme.\nRéponse : b) « Normal », « Normal », « Fièvre » ; c) « réponse > 37.9 ».",
           schema: pile(
@@ -437,6 +483,12 @@ export const exercicesAlgoConstruire5e: FicheExercicesData = {
         {
           enonce:
             "a) Quelle figure trace ce programme ? Le lutin revient-il à son point de départ ?\nb) Quelle est la longueur du tracé ?\nc) Modifie UN paramètre pour que chaque côté mesure $45$. Quelle longueur a alors le tracé ?\nd) Lina remplace « répéter 5 fois » par « répéter 4 fois », sans toucher à l'angle. Que se passe-t-il ?",
+          reponses: [
+            { question: "a) fig.", attendu: ["pentagone", "pentagone régulier", "un pentagone régulier"] },
+            { question: "départ", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: "150" },
+            { question: "c)", attendu: "225" },
+          ],
           figure: scratch(["quand drapeau vert cliqué", "stylo en position d'écriture", "répéter 5 fois", "  avancer de 30", "  tourner à gauche de 72°"]),
           correction:
             "a) La boucle fait $5$ côtés de $30$ pas. À chaque sommet, le lutin tourne de $72$° : en tout, $5 \\times 72 = 360$°, un tour complet. Il revient à son départ : c'est un pentagone régulier, $5$ côtés égaux.\nb) $5 \\times 30 = 150$ pas.\nc) Seul le paramètre de « avancer » change : « avancer de 45 ». Le tracé mesure alors $5 \\times 45 = 225$ pas.\nd) Avec $4$ tours, le lutin ne tourne que de $4 \\times 72 = 288$° en tout, et ne trace que $4$ côtés. Il manque le dernier côté : la figure reste ouverte.\n⛔ Le piège : croire qu'on change de figure en changeant UN seul nombre. Pour un carré, il faudrait changer les tours ET l'angle : « répéter 4 fois » et $90$°.\nRéponse : a) un pentagone régulier, oui ; b) $150$ pas ; c) « avancer de 45 », $225$ pas ; d) la figure reste ouverte.",
@@ -451,6 +503,9 @@ export const exercicesAlgoConstruire5e: FicheExercicesData = {
         {
           enonce:
             "Pour le lancement d'une fusée, le lutin doit dire $10$, $9$, $8$… jusqu'à $1$, puis « Décollage ».\na) Écris le programme avec une variable n et une boucle.\nb) Combien de tours de boucle faut-il ?\nc) Un élève range « mettre n à n − 1 » AVANT « dire n » dans la boucle. Que dit son lutin ?",
+          reponses: [
+            { question: "b)", attendu: "10" },
+          ],
           correction:
             "a) n part de $10$. À chaque tour, le lutin dit n, puis n diminue de $1$. Après la boucle, il dit « Décollage ».\nLe programme : « mettre n à 10 », « répéter 10 fois » avec « dire n » puis « mettre n à n − 1 », et enfin « dire Décollage » sous la boucle.\nb) De $10$ à $1$, il y a $10$ nombres : $10$ tours.\nc) n diminue AVANT d'être dit : le lutin dit $9$, $8$… jusqu'à $0$, puis « Décollage ». Il ne dit jamais $10$.\n⛔ Le piège : placer « dire Décollage » DANS la boucle. Le lutin le dirait dix fois, après chaque nombre.\nRéponse : b) $10$ tours ; c) de $9$ à $0$, puis « Décollage ».",
           schema: ecranSeulement(scratch(["quand drapeau vert cliqué", "mettre n à 10", "répéter 10 fois", "  dire n", "  mettre n à n − 1", "dire 'Décollage'"], 5)),
@@ -459,6 +514,11 @@ export const exercicesAlgoConstruire5e: FicheExercicesData = {
         {
           enonce:
             "On veut que le lutin trace un escalier de $4$ marches qui monte vers la droite. Chaque marche a $25$ pas de large et $15$ pas de haut. Le lutin part en regardant vers la droite.\na) Écris les blocs d'une marche. Dans quel sens tourner après la montée ?\nb) Écris le programme complet avec une boucle.\nc) Quelle est la longueur du tracé ?\nd) Où arrive le lutin par rapport à son départ ?",
+          reponses: [
+            { question: "c)", attendu: "160" },
+            { question: "droite", attendu: "100" },
+            { question: "d) haut", attendu: "60" },
+          ],
           correction:
             "a) Une marche : le lutin avance de $25$ (le plat), tourne à gauche de $90$° pour monter, avance de $15$ (la hauteur), puis tourne à DROITE de $90$° pour regarder de nouveau vers la droite.\nb) Le programme : « stylo en position d'écriture », puis « répéter 4 fois » avec les quatre blocs de la marche.\nc) Une marche mesure $25 + 15 = 40$ pas ; quatre marches : $4 \\times 40 = 160$ pas.\nd) Il arrive $4 \\times 25 = 100$ pas plus à droite et $4 \\times 15 = 60$ pas plus haut.\n⛔ Le piège : tourner deux fois à gauche. Le lutin repartirait vers la gauche et tracerait un rectangle de $25$ sur $15$, parcouru deux fois.\nRéponse : c) $160$ pas ; d) $100$ pas à droite et $60$ pas plus haut.",
           schema: pile(
@@ -470,6 +530,10 @@ export const exercicesAlgoConstruire5e: FicheExercicesData = {
         {
           enonce:
             "Pour avoir la moyenne de deux notes a et b, on calcule : moyenne = (a + b) ÷ 2.\na) Écris le bloc « mettre moy à … » qui traduit la formule.\nb) Avec $12$ et $15$, que dit le lutin ?\nc) Samia a écrit « mettre moy à a + b / 2 ». Que dit son programme avec $12$ et $15$ ? Pourquoi ?",
+          reponses: [
+            { question: "b)", attendu: "13,5" },
+            { question: "c)", attendu: "19,5" },
+          ],
           correction:
             "a) La formule additionne d'abord les deux notes, PUIS divise par $2$ : il faut des parenthèses. Je traduis ÷ par / : « mettre moy à (a + b) / 2 ».\nb) $(12 + 15) \\div 2 = 27 \\div 2 = 13{,}5$. Le lutin dit $13{,}5$.\nc) Sans parenthèses, la machine divise d'abord : $15 \\div 2 = 7{,}5$, puis $12 + 7{,}5 = 19{,}5$. Le lutin dirait $19{,}5$ : une moyenne plus grande que les deux notes !\n⛔ Le piège : oublier les parenthèses. Celles de la formule doivent passer dans le bloc.\n⭐ Contrôle : une moyenne est toujours entre la plus petite et la plus grande note.\nRéponse : a) « mettre moy à (a + b) / 2 » ; b) $13{,}5$ ; c) $19{,}5$.",
           schema: ecranSeulement(
@@ -483,6 +547,9 @@ export const exercicesAlgoConstruire5e: FicheExercicesData = {
         {
           enonce:
             "Un jeu garde le meilleur score : le record. On joue $4$ parties, et le lutin dit le record à la fin. On propose ces blocs : « mettre record à 0 », « répéter 4 fois », « demander Score ? », « si réponse > record alors », « mettre record à réponse », « dire record ».\na) Range-les dans le bon ordre et emboîte-les.\nb) Les scores sont $120$, $95$, $180$ et $150$. Suis la variable record : que dit le lutin ?\nc) Pourquoi « mettre record à 0 » doit-il être AVANT la boucle ?",
+          reponses: [
+            { question: "b)", attendu: "180" },
+          ],
           correction:
             "a) Je règle d'abord le record à $0$. Puis je répète $4$ fois : demander le score, et SI il dépasse le record, il devient le nouveau record. Le lutin ne dit le record qu'à la fin, sous la boucle.\nLe programme : « mettre record à 0 », « répéter 4 fois » avec dedans « demander » et « si réponse > record alors » (qui contient « mettre record à réponse »), puis « dire record ».\nb) $120 > 0$ : record vaut $120$. $95 > 120$ est faux : il reste $120$. $180 > 120$ : record vaut $180$. $150 > 180$ est faux : il reste $180$.\nLe lutin dit $180$.\nc) Dans la boucle, record repartirait de $0$ à chaque partie : le lutin dirait le dernier score, $150$, et plus le meilleur.\n⛔ Le piège : oublier la condition et écrire seulement « mettre record à réponse ». Là aussi, le lutin dirait le dernier score, $150$.\nRéponse : b) $180$ ; c) sinon, le lutin dirait $150$.",
           schema: ecranSeulement(
@@ -511,6 +578,14 @@ export const exercicesAlgoConstruire5e: FicheExercicesData = {
           titre: "Le polygone à la demande",
           enonce:
             "Ce programme demande un nombre de côtés n, puis trace un polygone régulier.\na) De combien de degrés le lutin tourne-t-il à chaque sommet si on répond $3$ ? $4$ ? $6$ ?\nb) Quel nombre faut-il répondre pour que le lutin tourne de $40$° ?\nc) Pourquoi le lutin revient-il toujours à son point de départ ?\nd) On répond $36$. Quelle est la longueur du tracé ? À quoi ressemble la figure ?",
+          reponses: [
+            { question: "a) 3", attendu: "120" },
+            { question: "a) 4", attendu: "90" },
+            { question: "a) 6", attendu: "60" },
+            { question: "b)", attendu: "9" },
+            { question: "d) L", attendu: "1440" },
+            { question: "d) forme", attendu: ["cercle", "un cercle", "presque un cercle"] },
+          ],
           figure: scratch(["quand drapeau vert cliqué", "demander 'Côtés ?'", "mettre n à réponse", "stylo en position d'écriture", "répéter n fois", "  avancer de 40", "  tourner à gauche de 360 / n"]),
           correction:
             "a) Pour revenir à son départ, le lutin doit faire un tour complet, $360$°, en n virages égaux : chaque virage vaut $360 \\div n$.\nAvec $3$ : $360 \\div 3 = 120$°. Avec $4$ : $360 \\div 4 = 90$°. Avec $6$ : $360 \\div 6 = 60$°.\nb) Je cherche n pour que $360 \\div n = 40$ : $360 \\div 40 = 9$. Il faut répondre $9$ : le lutin trace un polygone à $9$ côtés.\nc) La boucle fait n virages de $360 \\div n$ degrés : en tout, le lutin tourne de $360$°, un tour complet. Et comme tous les côtés et tous les virages sont égaux, il retombe sur son départ.\nd) $36$ côtés de $40$ pas : $36 \\times 40 = 1\\,440$ pas. Avec $36$ petits virages de $10$°, la figure ressemble à un cercle.\n⛔ Le piège : croire qu'il faut un programme par figure. Le nombre de côtés est ici une ENTRÉE : le même programme trace toutes les figures.\nRéponse : a) $120$°, $90$° et $60$° ; b) $9$ ; d) $1\\,440$ pas, presque un cercle.",
@@ -521,6 +596,9 @@ export const exercicesAlgoConstruire5e: FicheExercicesData = {
           titre: "La serre automatique",
           enonce:
             "Dans une serre, un capteur mesure la température. Le lutin doit dire « Ouvre » s'il fait plus de $28$ °C, et « Chauffe » s'il fait moins de $12$ °C. Sinon, il ne dit rien (seuils choisis pour l'exercice).\na) Écris le programme avec deux blocs « si … alors ».\nb) Que dit le lutin pour $31$ ; $20$ ; $8$ ; $28$ ?\nc) Pour des tomates, on veut ouvrir au-dessus de $26$ °C et chauffer sous $14$ °C. Quels blocs changes-tu ? Que dit alors le lutin pour $27$ et pour $13$ ?\nd) Peut-il arriver que le lutin dise les deux messages ? Pourquoi ?",
+          reponses: [
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) Deux situations, deux conditions : un premier « si réponse > 28 alors » qui contient « dire Ouvre », puis, EN DESSOUS, un second « si réponse < 12 alors » qui contient « dire Chauffe ».\nb) $31 > 28$ : « Ouvre ». $20$ n'est ni plus grand que $28$, ni plus petit que $12$ : rien. $8 < 12$ : « Chauffe ». $28 > 28$ est faux, et $28 < 12$ aussi : rien.\nc) Seuls les paramètres des conditions changent : « si réponse > 26 alors » et « si réponse < 14 alors ». Pour $27$ : « Ouvre ». Pour $13$ : « Chauffe ».\nd) Non : une température ne peut pas être à la fois plus grande que $28$ et plus petite que $12$. Au plus une condition est vraie.\n⛔ Le piège : ranger le second « si » DANS le premier. Il ne serait testé que quand il fait plus de $28$ °C, et le lutin ne dirait jamais « Chauffe ».\nRéponse : b) « Ouvre », rien, « Chauffe », rien ; c) « Ouvre » et « Chauffe » ; d) non.",
           schema: pile(
@@ -533,6 +611,15 @@ export const exercicesAlgoConstruire5e: FicheExercicesData = {
           titre: "La clôture du potager",
           enonce:
             "Un potager rectangulaire mesure $12$ m sur $8$ m. Sur l'écran, $1$ m est représenté par $5$ pas du lutin.\na) Combien de pas pour chaque côté ? Écris un programme qui trace le potager avec « répéter 2 fois ».\nb) Quelle longueur de clôture faut-il, en pas puis en mètres ?\nc) On veut un potager CARRÉ avec la même longueur de clôture. Quel est son côté, en mètres puis en pas ? Écris le programme.\nd) Lequel des deux potagers a la plus grande aire ?",
+          reponses: [
+            { question: "a) long.", attendu: "60" },
+            { question: "a) larg.", attendu: "40" },
+            { question: "b) pas", attendu: "200" },
+            { question: "b) m", attendu: "40" },
+            { question: "c) m", attendu: "10" },
+            { question: "c) pas", attendu: "50" },
+            { question: "d)", attendu: ["le carré", "carré"] },
+          ],
           correction:
             "a) $12$ m font $12 \\times 5 = 60$ pas, et $8$ m font $8 \\times 5 = 40$ pas.\nUn rectangle, c'est deux fois la même chose : une longueur, un quart de tour, une largeur, un quart de tour. Le programme : « répéter 2 fois » avec « avancer de 60 », « tourner à gauche de 90° », « avancer de 40 », « tourner à gauche de 90° ».\nb) $2 \\times (60 + 40) = 2 \\times 100 = 200$ pas. En mètres : $200 \\div 5 = 40$ m, et on retrouve $2 \\times (12 + 8) = 40$ m.\nc) Même clôture, $4$ côtés égaux : $40 \\div 4 = 10$ m, soit $10 \\times 5 = 50$ pas. Le programme : « répéter 4 fois » avec « avancer de 50 » et « tourner à gauche de 90° ».\nd) Rectangle : $12 \\times 8 = 96$ m². Carré : $10 \\times 10 = 100$ m². Avec la même clôture, le carré est plus grand !\n⛔ Le piège : écrire $12$ et $8$ dans les blocs « avancer ». Le lutin compte en pas : je convertis d'abord les mètres.\nRéponse : b) $200$ pas, soit $40$ m ; c) $10$ m, soit $50$ pas ; d) le carré.",
           schema: pile(
@@ -550,6 +637,14 @@ export const exercicesAlgoConstruire5e: FicheExercicesData = {
           titre: "Le feu tricolore",
           enonce:
             "Un feu tricolore suit ce programme (durées choisies pour l'exercice).\na) Combien de secondes dure un cycle vert, orange, rouge ?\nb) Combien de temps dure tout le programme ? Combien de fois le lutin dit-il « Orange » ?\nc) On veut que le programme tourne pendant une heure exactement. Quel paramètre changer, et quelle valeur écrire ?\nd) Aux heures de pointe, le vert doit durer $45$ secondes, et le cycle rester d'une minute. Quels paramètres changer ?",
+          reponses: [
+            { question: "a)", attendu: "60" },
+            { question: "b) durée", attendu: ["180", "3min"] },
+            { question: "Orange", attendu: "3" },
+            { question: "c)", attendu: ["60", "répéter 60 fois"] },
+            { question: "d) vert", attendu: "45" },
+            { question: "d) rouge", attendu: "12" },
+          ],
           figure: scratch(["quand drapeau vert cliqué", "répéter 3 fois", "  dire 'Vert'", "  attendre 30 secondes", "  dire 'Orange'", "  attendre 3 secondes", "  dire 'Rouge'", "  attendre 27 secondes"]),
           correction:
             "a) Un tour de boucle, c'est un cycle : $30 + 3 + 27 = 60$ secondes, soit une minute.\nb) La boucle tourne $3$ fois : $3 \\times 60 = 180$ secondes, soit $3$ minutes. « Orange » est dit une fois par tour : $3$ fois.\nc) Une heure, c'est $60$ minutes, donc $60$ cycles d'une minute. Je change seulement le nombre de tours : « répéter 60 fois ».\nd) Le cycle doit garder $60$ secondes. Le vert ($45$ s) et l'orange ($3$ s) font $48$ s : il reste $60 - 48 = 12$ secondes de rouge. Je change « attendre 30 secondes » en « attendre 45 secondes », et « attendre 27 secondes » en « attendre 12 secondes ».\n⛔ Le piège : changer seulement le vert. Le cycle passerait à $45 + 3 + 27 = 75$ secondes, et les voitures de l'autre rue attendraient plus longtemps.\nRéponse : a) $60$ s ; b) $180$ s, et « Orange » $3$ fois ; c) « répéter 60 fois » ; d) $45$ s de vert et $12$ s de rouge.",

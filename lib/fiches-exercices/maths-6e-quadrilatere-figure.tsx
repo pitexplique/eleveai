@@ -251,6 +251,9 @@ export const exercicesQuadrilatereFigure6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Voici un quadrilatère.\na) Écris deux noms corrects pour lui.\nb) Le nom $RTSU$ est-il correct ? Pourquoi ?",
+          reponses: [
+            { question: "b)", attendu: ["non"] },
+          ],
           figure: quad({ A: [0, 0], B: [5, 0.8], C: [4.2, 3.6], D: [0.6, 3] }, { noms: { A: "R", B: "S", C: "T", D: "U" } }),
           correction:
             "Je tourne autour de la figure, sans sauter de sommet.\na) Je pars de $R$ : $RSTU$.\nJe peux aussi partir de $S$ : $STUR$.\nOu tourner dans l'autre sens : $RUTS$.\nb) Dans $RTSU$, la lettre $R$ est suivie de $T$.\nMais $R$ et $T$ ne sont pas voisins.\n$[RT]$ est une diagonale, pas un côté.\n⛔ Le piège : écrire les lettres dans le désordre.\nRéponse : a) par exemple $RSTU$ et $STUR$ ; b) non.",
@@ -258,6 +261,11 @@ export const exercicesQuadrilatereFigure6e: FicheExercicesData = {
         },
         {
           enonce: "Observe le quadrilatère $EFGH$.\na) Nomme ses deux diagonales.\nb) Quel côté est opposé au côté $[EF]$ ?\nc) Quels côtés sont consécutifs à $[EF]$ ?",
+          reponses: [
+            { question: "a)", attendu: ["[EG] ; [FH]", "EG ; FH", "[EG] ; [HF]", "EG ; HF", "[GE] ; [FH]", "GE ; FH", "[GE] ; [HF]", "GE ; HF"] },
+            { question: "b)", attendu: ["[GH]", "GH", "[HG]", "HG"] },
+            { question: "c)", attendu: ["[FG] ; [HE]", "FG ; HE", "[FG] ; [EH]", "FG ; EH", "[GF] ; [HE]", "GF ; HE", "[GF] ; [EH]", "GF ; EH"] },
+          ],
           figure: quad({ A: [0, 0], B: [5.5, 0], C: [4.8, 3.4], D: [0.8, 3.2] }, { noms: { A: "E", B: "F", C: "G", D: "H" }, diagonales: true }),
           correction:
             "a) Une diagonale relie deux sommets opposés.\n$E$ est opposé à $G$. $F$ est opposé à $H$.\nLes diagonales sont $[EG]$ et $[FH]$.\nb) Le côté opposé ne touche pas $[EF]$.\nC'est $[GH]$.\nc) Deux côtés consécutifs se touchent en un sommet.\n$[HE]$ touche $[EF]$ en $E$.\n$[FG]$ touche $[EF]$ en $F$.\n⛔ Le piège : prendre une diagonale pour un côté.\nRéponse : a) $[EG]$ et $[FH]$ ; b) $[GH]$ ; c) $[FG]$ et $[HE]$.",
@@ -265,6 +273,9 @@ export const exercicesQuadrilatereFigure6e: FicheExercicesData = {
         },
         {
           enonce: "Lis les codages du quadrilatère $ABCD$.\nQuelle est sa nature ?",
+          reponses: [
+            { attendu: ["rectangle", "un rectangle"] },
+          ],
           figure: quad({ A: [0, 0], B: [6, 0], C: [6, 3.5], D: [0, 3.5] }, { droits: ["A", "B", "C", "D"] }),
           correction:
             "Je lis les codages, pas l'allure du dessin.\nUn petit carré rouge marque un angle droit.\nJe compte $4$ angles droits.\nUn quadrilatère avec $4$ angles droits est un rectangle.\n⚠️ Aucun côté n'est codé égal.\nJe ne peux donc pas dire « carré ».\nRéponse : $ABCD$ est un rectangle.",
@@ -272,6 +283,9 @@ export const exercicesQuadrilatereFigure6e: FicheExercicesData = {
         },
         {
           enonce: "Lis les codages du quadrilatère $PQRS$.\nQuelle est sa nature ?",
+          reponses: [
+            { attendu: ["losange", "un losange"] },
+          ],
           figure: quad({ A: [0, 0], B: [4, 0], C: [6.294305, 3.276608], D: [2.294305, 3.276608] }, { noms: { A: "P", B: "Q", C: "R", D: "S" }, egaux: [["AB", "BC", "CD", "DA"]] }),
           correction:
             "Les petits traits marquent des côtés de même longueur.\nLes $4$ côtés portent le même trait.\nIls ont donc la même longueur.\nUn quadrilatère avec $4$ côtés égaux est un losange.\nAucun angle droit n'est codé : ce n'est pas un carré.\n⛔ Le piège : croire qu'un losange doit « pointer » vers le haut.\nUn losange peut être posé sur un côté.\nRéponse : $PQRS$ est un losange.",
@@ -279,6 +293,9 @@ export const exercicesQuadrilatereFigure6e: FicheExercicesData = {
         },
         {
           enonce: "Tom regarde cette figure penchée.\nIl dit : « Elle est penchée, donc c'est un losange. »\nQuelle est sa nature exacte ?",
+          reponses: [
+            { attendu: ["carré", "un carré"] },
+          ],
           figure: quad({ A: [0, 0], B: [3.625231, 1.690473], C: [1.934758, 5.315704], D: [-1.690473, 3.625231] }, { droits: ["A", "B", "C", "D"], egaux: [["AB", "BC", "CD", "DA"]] }),
           correction:
             "Je compte $4$ angles droits : c'est un rectangle.\nJe compte $4$ côtés égaux : c'est aussi un losange.\nLes deux à la fois : c'est un carré.\n⛔ Le piège : croire qu'un carré penché n'est plus un carré.\nTourner la feuille ne change ni les angles, ni les côtés.\nTom a raison sur un point : c'est bien un losange.\nMais le nom le plus précis est « carré ».\nRéponse : c'est un carré.",
@@ -286,6 +303,9 @@ export const exercicesQuadrilatereFigure6e: FicheExercicesData = {
         },
         {
           enonce: "Ce quadrilatère $WXYZ$ a l'air d'un carré.\nQue peut-on affirmer avec ses codages ?",
+          reponses: [
+            { attendu: ["rectangle", "un rectangle"] },
+          ],
           figure: quad({ A: [0, 0], B: [4, 0], C: [4, 4], D: [0, 4] }, { noms: { A: "W", B: "X", C: "Y", D: "Z" }, droits: ["A", "B", "C", "D"] }),
           correction:
             "Je ne conclus que sur ce qui est codé.\n$4$ angles droits sont codés : c'est un rectangle.\nAucun côté n'est codé égal à un autre.\nJe ne peux donc pas affirmer « carré ».\n⛔ Le piège : juger à l'œil. Un dessin peut tromper.\nRéponse : c'est un rectangle ; on ne peut pas dire plus.",
@@ -293,6 +313,9 @@ export const exercicesQuadrilatereFigure6e: FicheExercicesData = {
         },
         {
           enonce: "Un carré et un rectangle se ressemblent.\na) Quel point commun ont-ils ?\nb) Qu'est-ce qui les distingue ?",
+          reponses: [
+            { question: "a)", attendu: ["4 angles droits", "quatre angles droits", "angles droits", "des angles droits"] },
+          ],
           correction:
             "a) Les deux ont $4$ angles droits.\nb) Le carré a ses $4$ côtés égaux.\nLe rectangle a deux longueurs différentes : une longueur et une largeur.\n⭐ Un carré est donc un rectangle un peu spécial.\n⛔ Le piège : chercher la différence dans les angles. Ils sont tous droits.\nRéponse : a) $4$ angles droits ; b) les côtés.",
           schema: ecranSeulement(deux(quad({ A: [0, 0], B: [3, 0], C: [3, 3], D: [0, 3] }, { droits: ["A", "B", "C", "D"], egaux: [["AB", "BC", "CD", "DA"]] }), quad({ A: [0, 0], B: [5, 0], C: [5, 2.5], D: [0, 2.5] }, { droits: ["A", "B", "C", "D"], egaux: [["AB", "CD"], ["BC", "DA"]] }))),
@@ -300,6 +323,9 @@ export const exercicesQuadrilatereFigure6e: FicheExercicesData = {
         },
         {
           enonce: "Un post-it est un carré de $7{,}5$ cm de côté.\nQuel est son périmètre ?",
+          reponses: [
+            { attendu: "30" },
+          ],
           figure: ecranSeulement(quad({ A: [0, 0], B: [7.5, 0], C: [7.5, 7.5], D: [0, 7.5] }, { cotes: { AB: "7,5 cm" }, droits: ["A", "B", "C", "D"], egaux: [["AB", "BC", "CD", "DA"]] })),
           correction:
             "Le périmètre, c'est le tour complet.\nUn carré a $4$ côtés égaux.\n$4 \\times 7{,}5 = 30$.\n⛔ Le piège : n'ajouter que deux côtés, soit $15$ cm.\nRéponse : $30$ cm.",
@@ -322,6 +348,12 @@ export const exercicesQuadrilatereFigure6e: FicheExercicesData = {
         {
           enonce:
             "Voici quatre quadrilatères, décrits par leurs codages.\n$ABCD$ : $4$ angles droits, des côtés de $5$ cm et $3$ cm.\n$EFGH$ : $4$ côtés de $5$ cm, aucun angle droit.\n$IJKL$ : $4$ angles droits, $4$ côtés de $5$ cm.\n$MNPQ$ : des côtés de $3$, $4$, $5$ et $6$ cm.\nDonne la nature de chacun.",
+          reponses: [
+            { question: "ABCD", attendu: ["rectangle", "un rectangle"] },
+            { question: "EFGH", attendu: ["losange", "un losange"] },
+            { question: "IJKL", attendu: ["carré", "un carré"] },
+            { question: "MNPQ", attendu: ["aucun", "aucun des trois", "quelconque", "quadrilatère quelconque"] },
+          ],
           correction:
             "Pour chacun, je regarde les angles, puis les côtés.\n$ABCD$ : $4$ angles droits, mais deux longueurs. C'est un rectangle.\n$EFGH$ : $4$ côtés égaux, sans angle droit. C'est un losange.\n$IJKL$ : $4$ angles droits et $4$ côtés égaux. C'est un carré.\n$MNPQ$ : ses côtés sont tous différents. Aucun angle droit n'est donné.\nCe n'est ni un rectangle, ni un losange, ni un carré.\n⛔ Le piège : donner un nom à tout. Beaucoup de quadrilatères n'ont pas de nom spécial.\nRéponse : rectangle, losange, carré, aucun des trois.",
           schema: ecranSeulement(trace(["quadrilatère", "nature"], [["ABCD", "rectangle"], ["EFGH", "losange"], ["IJKL", "carré"], ["MNPQ", "aucun des trois"]])),
@@ -329,6 +361,10 @@ export const exercicesQuadrilatereFigure6e: FicheExercicesData = {
         },
         {
           enonce: "Les sommets sont sur les nœuds du quadrillage.\nDonne la nature de chaque quadrilatère.\nJustifie en comptant les carreaux.",
+          reponses: [
+            { question: "ABCD", attendu: ["rectangle", "un rectangle"] },
+            { question: "EFGH", attendu: ["losange", "un losange"] },
+          ],
           figure: deux(
             quad({ A: [0, 0], B: [5, 0], C: [5, 2], D: [0, 2] }, { grille: true }),
             quad({ A: [-2, 0], B: [0, -3], C: [2, 0], D: [0, 3] }, { noms: { A: "E", B: "F", C: "G", D: "H" }, grille: true }),
@@ -339,6 +375,12 @@ export const exercicesQuadrilatereFigure6e: FicheExercicesData = {
         },
         {
           enonce: "Vrai ou faux ?\na) Un carré est aussi un rectangle.\nb) Un rectangle est toujours un carré.\nc) Un carré est aussi un losange.\nd) Un losange a toujours un angle droit.",
+          reponses: [
+            { question: "a)", attendu: ["vrai", "oui"] },
+            { question: "b)", attendu: ["faux", "non"] },
+            { question: "c)", attendu: ["vrai", "oui"] },
+            { question: "d)", attendu: ["faux", "non"] },
+          ],
           correction:
             "a) Vrai. Un carré a $4$ angles droits. C'est ce qu'il faut pour un rectangle.\nb) Faux. Un rectangle peut avoir deux longueurs différentes.\nc) Vrai. Un carré a $4$ côtés égaux. C'est ce qu'il faut pour un losange.\nd) Faux. Un losange peut avoir des angles pointus et des angles ouverts.\n⛔ Le piège : croire qu'une figure n'a qu'un seul nom.\nLe carré a les deux codages : il est rectangle ET losange.\nRéponse : a) vrai ; b) faux ; c) vrai ; d) faux.",
           schema: ecranSeulement(quad({ A: [0, 0], B: [4, 0], C: [4, 4], D: [0, 4] }, { droits: ["A", "B", "C", "D"], egaux: [["AB", "BC", "CD", "DA"]] })),
@@ -346,6 +388,12 @@ export const exercicesQuadrilatereFigure6e: FicheExercicesData = {
         },
         {
           enonce: "Observe le quadrilatère $VWXY$.\na) $[VX]$ est-il un côté ou une diagonale ?\nb) Et $[WX]$ ?\nc) Quel sommet est opposé au sommet $W$ ?\nd) Le nom $VXWY$ est-il correct ?",
+          reponses: [
+            { question: "a)", attendu: ["diagonale", "une diagonale"] },
+            { question: "b)", attendu: ["côté", "un côté"] },
+            { question: "c)", attendu: ["Y"] },
+            { question: "d)", attendu: ["non"] },
+          ],
           figure: quad({ A: [0, 0], B: [5.2, 0.5], C: [5.8, 3.8], D: [1, 3.2] }, { noms: { A: "V", B: "W", C: "X", D: "Y" } }),
           correction:
             "Dans $VWXY$, deux lettres voisines forment un côté.\na) $V$ et $X$ ne sont pas voisins.\n$[VX]$ relie deux sommets opposés : c'est une diagonale.\nb) $W$ et $X$ sont voisins : $[WX]$ est un côté.\nc) Les voisins de $W$ sont $V$ et $X$.\nLe sommet opposé est l'autre : $Y$.\nd) Dans $VXWY$, $V$ est suivi de $X$.\nOr $[VX]$ est une diagonale : le nom est faux.\n⛔ Le piège : croire que toutes les lettres dans n'importe quel ordre vont.\nRéponse : a) une diagonale ; b) un côté ; c) $Y$ ; d) non.",
@@ -353,6 +401,10 @@ export const exercicesQuadrilatereFigure6e: FicheExercicesData = {
         },
         {
           enonce: "Un terrain de handball est un rectangle.\nIl mesure $40$ m de long et $20$ m de large.\na) Quel est son périmètre ?\nb) Est-ce un carré ? Pourquoi ?",
+          reponses: [
+            { question: "a)", attendu: "120" },
+            { question: "b)", attendu: ["non"] },
+          ],
           figure: ecranSeulement(quad({ A: [0, 0], B: [40, 0], C: [40, 20], D: [0, 20] }, { cotes: { AB: "40 m", BC: "20 m" }, droits: ["A", "B", "C", "D"] })),
           correction:
             "a) Dans un rectangle, les côtés d'en face ont la même longueur.\nLe tour passe par deux longueurs et deux largeurs.\n$40 + 20 + 40 + 20 = 120$.\nb) Deux côtés qui se touchent mesurent $40$ m et $20$ m.\nIls ne sont pas égaux : ce n'est pas un carré.\n⛔ Le piège : faire $40 + 20 = 60$. C'est seulement la moitié du tour.\nRéponse : a) $120$ m ; b) non.",
@@ -360,6 +412,9 @@ export const exercicesQuadrilatereFigure6e: FicheExercicesData = {
         },
         {
           enonce: "Un potager carré est entouré d'une clôture.\nLa clôture mesure $36$ m en tout.\nCombien mesure un côté du potager ?",
+          reponses: [
+            { attendu: "9" },
+          ],
           correction:
             "La clôture fait le tour : c'est le périmètre.\nUn carré a $4$ côtés égaux.\nJe partage $36$ en $4$ parts égales.\n$36 \\div 4 = 9$.\nJe vérifie : $4 \\times 9 = 36$.\n⛔ Le piège : diviser par $2$. Il y a $4$ côtés, pas $2$.\nRéponse : $9$ m.",
           schema: quad({ A: [0, 0], B: [9, 0], C: [9, 9], D: [0, 9] }, { cotes: { AB: "9 m" }, trouveCotes: ["AB"], droits: ["A", "B", "C", "D"], egaux: [["AB", "BC", "CD", "DA"]] }),
@@ -367,6 +422,9 @@ export const exercicesQuadrilatereFigure6e: FicheExercicesData = {
         },
         {
           enonce: "Un cadre photo est un rectangle.\nSon périmètre est de $30$ cm.\nSa longueur mesure $9$ cm.\nCombien mesure sa largeur ?",
+          reponses: [
+            { attendu: "6" },
+          ],
           correction:
             "Le tour passe par deux longueurs et deux largeurs.\nUne longueur et une largeur font la moitié du tour.\n$30 \\div 2 = 15$.\nLa largeur vaut $15 - 9 = 6$.\nJe vérifie : $9 + 6 + 9 + 6 = 30$.\n⛔ Le piège : faire $30 - 9 = 21$. On oublie alors deux côtés.\nRéponse : $6$ cm.",
           schema: ecranSeulement(quad({ A: [0, 0], B: [9, 0], C: [9, 6], D: [0, 6] }, { cotes: { AB: "9 cm", BC: "6 cm" }, trouveCotes: ["BC"], droits: ["A", "B", "C", "D"] })),
@@ -374,6 +432,9 @@ export const exercicesQuadrilatereFigure6e: FicheExercicesData = {
         },
         {
           enonce: "Léo observe cette figure.\nIl dit : « $4$ côtés égaux, donc c'est un carré. »\nA-t-il raison ?",
+          reponses: [
+            { attendu: ["non"] },
+          ],
           figure: quad({ A: [0, 0], B: [4.5, 0], C: [6.039081, 4.228616], D: [1.539081, 4.228616] }, { angles: { A: "70°" }, egaux: [["AB", "BC", "CD", "DA"]] }),
           correction:
             "Les $4$ côtés sont codés égaux : c'est un losange.\nPour un carré, il faut aussi $4$ angles droits.\nIci, un angle mesure $70°$.\nUn angle droit mesure $90°$ : celui-ci n'est pas droit.\nCe n'est donc pas un carré.\n⛔ Le piège : oublier de regarder les angles.\nRéponse : non, c'est un losange.",
@@ -397,6 +458,12 @@ export const exercicesQuadrilatereFigure6e: FicheExercicesData = {
           titre: "La tablette de chocolat",
           enonce:
             "Une tablette de chocolat a $4$ rangées de $6$ carrés.\nChaque petit carré mesure $2$ cm de côté.\na) Quelle est la nature de la tablette ?\nb) Calcule sa longueur et sa largeur.\nc) Calcule son périmètre.\nd) Paul garde un morceau de $4$ rangées de $4$ carrés. Quelle est sa nature ?",
+          reponses: [
+            { question: "a)", attendu: ["rectangle", "un rectangle"] },
+            { question: "b)", attendu: "12 ; 8" },
+            { question: "c)", attendu: "40" },
+            { question: "d)", attendu: ["carré", "un carré"] },
+          ],
           figure: quad({ A: [0, 0], B: [6, 0], C: [6, 4], D: [0, 4] }, { grille: true, droits: ["A", "B", "C", "D"] }),
           correction:
             "a) La tablette a $4$ angles droits : c'est un rectangle.\nElle a $6$ carrés d'un côté et $4$ de l'autre.\nSes côtés ne sont pas égaux : ce n'est pas un carré.\nb) Longueur : $6 \\times 2 = 12$ cm.\nLargeur : $4 \\times 2 = 8$ cm.\nc) $12 + 8 + 12 + 8 = 40$ cm.\nd) Le morceau a $4$ carrés de chaque côté.\nSes côtés mesurent $4 \\times 2 = 8$ cm : ils sont égaux.\nIl a $4$ angles droits et $4$ côtés égaux : c'est un carré.\n⛔ Le piège : compter les carrés au lieu des centimètres.\nRéponse : a) un rectangle ; b) $12$ cm et $8$ cm ; c) $40$ cm ; d) un carré.",
@@ -406,6 +473,13 @@ export const exercicesQuadrilatereFigure6e: FicheExercicesData = {
           titre: "La feuille pliée",
           enonce:
             "Une feuille A4 mesure $21$ cm sur $29{,}7$ cm.\na) Est-ce un carré ? Pourquoi ?\nb) Je rabats le petit côté sur le grand côté. Je coupe la bande qui dépasse. J'obtiens un carré. Combien mesure son côté ?\nc) Quel est le périmètre de ce carré ?\nd) Quelle est la nature de la bande coupée ? Donne ses mesures.",
+          reponses: [
+            { question: "a)", attendu: ["non"] },
+            { question: "b)", attendu: "21" },
+            { question: "c)", attendu: "84" },
+            { question: "d) nat.", attendu: ["rectangle", "un rectangle"] },
+            { question: "d) mes.", attendu: "21 ; 8,7" },
+          ],
           correction:
             "a) La feuille a $4$ angles droits : c'est un rectangle.\nSes côtés mesurent $21$ cm et $29{,}7$ cm : ils sont différents.\nCe n'est pas un carré.\nb) Le petit côté se pose sur le grand côté.\nLe carré a donc pour côté le petit côté : $21$ cm.\nc) $4 \\times 21 = 84$ cm.\nd) La bande garde les angles droits de la feuille : c'est un rectangle.\nSa longueur est $21$ cm.\nSa largeur est ce qui dépasse : $29{,}7 - 21 = 8{,}7$ cm.\n⛔ Le piège : croire que la bande est un carré, parce qu'elle vient d'un pliage.\nRéponse : a) non ; b) $21$ cm ; c) $84$ cm ; d) un rectangle de $21$ cm sur $8{,}7$ cm.",
           schema: ecranSeulement(deux(quad({ A: [0, 0], B: [21, 0], C: [21, 21], D: [0, 21] }, { cotes: { AB: "21 cm" }, droits: ["A", "B", "C", "D"], egaux: [["AB", "BC", "CD", "DA"]] }), quad({ A: [0, 0], B: [21, 0], C: [21, 8.7], D: [0, 8.7] }, { cotes: { AB: "21 cm", BC: "8,7 cm" }, trouveCotes: ["BC"], droits: ["A", "B", "C", "D"] }))),
@@ -415,6 +489,11 @@ export const exercicesQuadrilatereFigure6e: FicheExercicesData = {
           titre: "Compter les carrés",
           enonce:
             "Ce dessin est un grand carré, partagé en $4$ petits carrés.\na) Combien de carrés vois-tu en tout ?\nb) Combien de rectangles qui ne sont pas des carrés ?\nc) Combien de rectangles en tout ?",
+          reponses: [
+            { question: "a)", attendu: "5" },
+            { question: "b)", attendu: "4" },
+            { question: "c)", attendu: "9" },
+          ],
           figure: quad({ A: [0, 0], B: [2, 0], C: [2, 2], D: [0, 2] }, { grille: true }),
           correction:
             "a) Je vois les $4$ petits carrés.\nLe grand carré compte aussi : $4 + 1 = 5$ carrés.\nb) Deux petits carrés côte à côte font un rectangle.\nJ'en trouve $2$ couchés : un en haut, un en bas.\nJ'en trouve $2$ debout : un à gauche, un à droite.\nCela fait $4$ rectangles qui ne sont pas des carrés.\nc) Un carré est aussi un rectangle.\nJe compte tout : $5 + 4 = 9$ rectangles.\n⛔ Le piège : oublier le grand carré.\n⚠️ Autre piège : oublier qu'un carré est aussi un rectangle.\nRéponse : a) $5$ ; b) $4$ ; c) $9$.",
@@ -424,6 +503,12 @@ export const exercicesQuadrilatereFigure6e: FicheExercicesData = {
           titre: "Qui suis-je ?",
           enonce:
             "Trouve la nature de chaque quadrilatère mystère.\na) J'ai $4$ angles droits. Deux de mes côtés qui se touchent mesurent $6$ cm et $4$ cm.\nb) J'ai $4$ côtés de $5$ cm. Un de mes angles mesure $60°$.\nc) Je suis à la fois un rectangle et un losange.\nd) J'ai $4$ angles droits et mes $4$ côtés mesurent $3$ cm.",
+          reponses: [
+            { question: "a)", attendu: ["rectangle", "un rectangle"] },
+            { question: "b)", attendu: ["losange", "un losange"] },
+            { question: "c)", attendu: ["carré", "un carré"] },
+            { question: "d)", attendu: ["carré", "un carré"] },
+          ],
           correction:
             "a) $4$ angles droits : je suis un rectangle.\nDeux côtés qui se touchent sont différents : je ne suis pas un carré.\nb) $4$ côtés égaux : je suis un losange.\nUn angle de $60°$ n'est pas droit : je ne suis pas un carré.\nc) Rectangle : $4$ angles droits. Losange : $4$ côtés égaux.\nLes deux à la fois : je suis un carré.\nd) $4$ angles droits et $4$ côtés égaux : je suis un carré.\n⛔ Le piège au a) : dire « carré » dès qu'on voit $4$ angles droits.\nRéponse : a) rectangle ; b) losange ; c) carré ; d) carré.",
           schema: ecranSeulement(quad({ A: [0, 0], B: [5, 0], C: [7.5, 4.330127], D: [2.5, 4.330127] }, { cotes: { AB: "5 cm" }, angles: { A: "60°" }, egaux: [["AB", "BC", "CD", "DA"]] })),

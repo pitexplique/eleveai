@@ -263,6 +263,9 @@ export const exercicesAirePerimetre6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Chaque carreau mesure $1$ cm de côté.\nQuel est le périmètre de la figure bleue ?",
+          reponses: [
+            { attendu: "18" },
+          ],
           figure: plan("cm", [
             { grille: [0, 0, 5, 4] },
             { poly: [[1, 0], [3, 0], [3, 3], [5, 3], [5, 4], [0, 4], [0, 3], [1, 3]], fond: "bleu" },
@@ -274,6 +277,13 @@ export const exercicesAirePerimetre6e: FicheExercicesData = {
         },
         {
           enonce: "Pour chaque travail, faut-il connaître le périmètre ou l'aire ?\na) Clôturer un champ.\nb) Poser de la moquette dans une chambre.\nc) Coller un ruban autour d'un cadre.\nd) Peindre un mur.\ne) Poser une bordure autour d'une pelouse.",
+          reponses: [
+            { question: "a)", attendu: ["périmètre"] },
+            { question: "b)", attendu: ["aire"] },
+            { question: "c)", attendu: ["périmètre"] },
+            { question: "d)", attendu: ["aire"] },
+            { question: "e)", attendu: ["périmètre"] },
+          ],
           correction:
             "Le périmètre, c'est le tour. L'aire, c'est l'intérieur.\na) La clôture fait le tour du champ : le périmètre.\nb) La moquette couvre tout le sol : l'aire.\nc) Le ruban fait le tour du cadre : le périmètre.\nd) La peinture couvre tout le mur : l'aire.\ne) La bordure fait le tour de la pelouse : le périmètre.\n⛔ Le piège : croire que « plus grand » veut dire la même chose pour les deux.\nRéponse : a) périmètre ; b) aire ; c) périmètre ; d) aire ; e) périmètre.",
           schema: ecranSeulement(
@@ -287,6 +297,9 @@ export const exercicesAirePerimetre6e: FicheExercicesData = {
         },
         {
           enonce: "Un carré a un côté de $8$ cm.\nCalcule son périmètre.",
+          reponses: [
+            { attendu: "32" },
+          ],
           correction:
             "Un carré a $4$ côtés de même longueur.\nJe mets les $4$ côtés bout à bout : $4 \\times 8 = 32$ cm.\n⛔ Le piège : calculer $8 \\times 8 = 64$. Cela donne l'aire, pas le tour.\nRéponse : le périmètre du carré est $32$ cm.",
           schema: ecranSeulement(
@@ -301,6 +314,9 @@ export const exercicesAirePerimetre6e: FicheExercicesData = {
         },
         {
           enonce: "Calcule le périmètre de ce rectangle.",
+          reponses: [
+            { attendu: "34" },
+          ],
           figure: plan("cm", [
             { poly: [[0, 0], [12, 0], [12, 5], [0, 5]], fond: "bleu" },
             { droit: [[0, 0], [12, 0], [0, 5]] },
@@ -314,6 +330,9 @@ export const exercicesAirePerimetre6e: FicheExercicesData = {
         },
         {
           enonce: "Calcule le périmètre de ce triangle.",
+          reponses: [
+            { attendu: "18" },
+          ],
           figure: plan("cm", [
             { poly: [[0, 0], [6, 0], [0, 4.5]], fond: "orange" },
             { droit: [[0, 0], [6, 0], [0, 4.5]] },
@@ -327,6 +346,9 @@ export const exercicesAirePerimetre6e: FicheExercicesData = {
         },
         {
           enonce: "Voici la façade d'une cabane à oiseaux.\nCalcule son périmètre.",
+          reponses: [
+            { attendu: "48" },
+          ],
           figure: plan("cm", [
             { poly: [[0, 0], [12, 0], [12, 8], [6, 16], [0, 8]], fond: "orange" },
             { cote: [[0, 0], [12, 0]], label: "12 cm" },
@@ -341,6 +363,9 @@ export const exercicesAirePerimetre6e: FicheExercicesData = {
         },
         {
           enonce: "Un carré a un périmètre de $44$ cm.\nCombien mesure un côté ?",
+          reponses: [
+            { attendu: "11" },
+          ],
           correction:
             "Le tour d'un carré, c'est $4$ côtés égaux.\nJe fais le calcul à l'envers : $44 \\div 4 = 11$ cm.\nJe vérifie : $4 \\times 11 = 44$ cm.\n⛔ Le piège : diviser par $2$, comme pour un rectangle. Un carré a $4$ côtés.\nRéponse : un côté mesure $11$ cm.",
           schema: ecranSeulement(
@@ -355,6 +380,10 @@ export const exercicesAirePerimetre6e: FicheExercicesData = {
         },
         {
           enonce: "Un tapis de yoga est un rectangle.\nIl mesure $1{,}8$ m de long et $60$ cm de large.\nQuel est son périmètre, en cm puis en m ?",
+          reponses: [
+            { question: "en cm", attendu: "480" },
+            { question: "en m", attendu: "4,8" },
+          ],
           figure: plan("m", [
             { poly: [[0, 0], [1.8, 0], [1.8, 0.6], [0, 0.6]], fond: "vert" },
             { cote: [[0, 0], [1.8, 0]], label: "1,8 m" },
@@ -380,6 +409,10 @@ export const exercicesAirePerimetre6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Chaque carreau mesure $1$ cm de côté.\na) Calcule le périmètre des figures A, B et C.\nb) Jade dit : « A a le plus grand périmètre, car elle a le plus de carreaux. » A-t-elle raison ?",
+          reponses: [
+            { question: "a)", attendu: "12 ; 12 ; 12" },
+            { question: "b)", attendu: ["non", "faux"] },
+          ],
           figure: plan("cm", [
             { grille: [0, 0, 12, 3] },
             { poly: [[0, 0], [4, 0], [4, 2], [0, 2]], fond: "bleu" },
@@ -395,6 +428,9 @@ export const exercicesAirePerimetre6e: FicheExercicesData = {
         },
         {
           enonce: "Un enclos pour des moutons est un rectangle.\nSon périmètre est $46$ m. Sa longueur est $15$ m.\nQuelle est sa largeur ?",
+          reponses: [
+            { attendu: "8" },
+          ],
           figure: plan("m", [
             { poly: [[0, 0], [15, 0], [15, 8], [0, 8]], fond: "vert" },
             { cote: [[0, 0], [15, 0]], label: "15 m" },
@@ -407,6 +443,10 @@ export const exercicesAirePerimetre6e: FicheExercicesData = {
         },
         {
           enonce: "Deux côtés de cette figure ne sont pas écrits.\na) Trouve leur longueur.\nb) Calcule le périmètre de la figure.",
+          reponses: [
+            { question: "a)", attendu: "6 ; 3" },
+            { question: "b)", attendu: "34" },
+          ],
           figure: plan("cm", [
             { poly: [[0, 0], [10, 0], [10, 4], [4, 4], [4, 7], [0, 7]], fond: "bleu" },
             { droit: [[0, 0], [10, 0], [0, 7]] },
@@ -422,6 +462,11 @@ export const exercicesAirePerimetre6e: FicheExercicesData = {
         },
         {
           enonce: "Emma a une ficelle de $30$ cm. Elle fait le tour de chaque figure avec toute la ficelle.\na) Un carré. Combien mesure un côté ?\nb) Un rectangle de $9$ cm de long. Quelle est sa largeur ?\nc) Un triangle à trois côtés égaux. Combien mesure un côté ?",
+          reponses: [
+            { question: "a)", attendu: "7,5" },
+            { question: "b)", attendu: "6" },
+            { question: "c)", attendu: "10" },
+          ],
           correction:
             "La ficelle fait le tour : le périmètre vaut toujours $30$ cm.\na) Un carré a $4$ côtés égaux : $30 \\div 4 = 7{,}5$ cm.\nb) Longueur plus largeur, c'est la moitié du tour : $30 \\div 2 = 15$ cm.\nPuis $15 - 9 = 6$ cm.\nc) Trois côtés égaux : $30 \\div 3 = 10$ cm.\n⛔ Le piège du a) : dire que le côté mesure $30$ cm. $30$ cm, c'est tout le tour.\nRéponse : a) $7{,}5$ cm ; b) $6$ cm ; c) $10$ cm.",
           schema: bande("30 cm", [
@@ -434,6 +479,10 @@ export const exercicesAirePerimetre6e: FicheExercicesData = {
         },
         {
           enonce: "Un poulailler carré a un côté de $7{,}5$ m.\nOn l'entoure de grillage, sauf un portillon de $1$ m.\na) Quelle longueur de grillage faut-il ?\nb) Le grillage coûte $4$ € le mètre. Quel est le prix ?",
+          reponses: [
+            { question: "a)", attendu: "29" },
+            { question: "b)", attendu: "116" },
+          ],
           figure: plan("m", [
             { poly: [[0, 0], [7.5, 0], [7.5, 7.5], [0, 7.5]], fond: "vert" },
             { trait: [[3, 7.5], [4, 7.5]], tirets: true },
@@ -446,6 +495,11 @@ export const exercicesAirePerimetre6e: FicheExercicesData = {
         },
         {
           enonce: "On encadre une affiche de $50$ cm sur $70$ cm avec une baguette de bois.\na) Quelle longueur de baguette faut-il, en cm puis en m ?\nb) La baguette coûte $6$ € le mètre. Quel est le prix ?",
+          reponses: [
+            { question: "a) cm", attendu: "240" },
+            { question: "a) m", attendu: "2,4" },
+            { question: "b)", attendu: "14,4" },
+          ],
           correction:
             "a) La baguette fait le tour de l'affiche : c'est le périmètre.\n$50 + 70 = 120$ cm, puis $2 \\times 120 = 240$ cm.\nEn m : $240 \\div 100 = 2{,}4$ m.\nb) Le prix est donné par mètre : j'utilise $2{,}4$ m.\n$2{,}4 \\times 6 = 14{,}4$. Le prix est $14{,}40$ €.\n⛔ Le piège : calculer $240 \\times 6 = 1\\,440$ €. Le prix est par mètre, pas par cm.\nRéponse : a) $240$ cm, soit $2{,}4$ m ; b) $14{,}40$ €.",
           schema: ecranSeulement(
@@ -460,6 +514,11 @@ export const exercicesAirePerimetre6e: FicheExercicesData = {
         },
         {
           enonce: "On a trois carrés de $4$ cm de côté.\nOn les colle bord à bord : en ligne, puis en L.\na) Quel est le périmètre d'un carré seul ?\nb) Quel est le périmètre de la figure en ligne ?\nc) Et celui de la figure en L ?\nd) Pourquoi ne trouve-t-on pas $3 \\times 16 = 48$ cm ?",
+          reponses: [
+            { question: "a)", attendu: "16" },
+            { question: "b)", attendu: "32" },
+            { question: "c)", attendu: "32" },
+          ],
           figure: plan("cm", [
             { poly: [[0, 0], [12, 0], [12, 4], [0, 4]], fond: "bleu" },
             { trait: [[4, 0], [4, 4]], tirets: true },
@@ -476,6 +535,11 @@ export const exercicesAirePerimetre6e: FicheExercicesData = {
         },
         {
           enonce: "Un carré a un côté de $6{,}5$ cm.\na) Calcule son périmètre.\nb) On double la longueur du côté. Que devient le périmètre ?\nc) On ajoute plutôt $2$ cm à chaque côté. Que devient le périmètre ?",
+          reponses: [
+            { question: "a)", attendu: "26" },
+            { question: "b)", attendu: "52" },
+            { question: "c)", attendu: "34" },
+          ],
           correction:
             "a) $4 \\times 6{,}5 = 26$ cm.\nb) Le nouveau côté : $2 \\times 6{,}5 = 13$ cm.\nLe nouveau tour : $4 \\times 13 = 52$ cm. C'est le double de $26$.\nc) Le nouveau côté : $6{,}5 + 2 = 8{,}5$ cm.\nLe nouveau tour : $4 \\times 8{,}5 = 34$ cm.\nLe tour a grandi de $34 - 26 = 8$ cm : $2$ cm sur chacun des $4$ côtés.\n⛔ Le piège du c) : croire que le tour grandit de $2$ cm seulement.\nRéponse : a) $26$ cm ; b) $52$ cm, le double ; c) $34$ cm.",
           schema: ecranSeulement(
@@ -506,6 +570,11 @@ export const exercicesAirePerimetre6e: FicheExercicesData = {
           titre: "Le terrain de handball",
           enonce:
             "Un terrain de handball est un rectangle de $40$ m sur $20$ m.\nPour s'échauffer, Léo court le long des lignes.\na) Quel est le périmètre du terrain ?\nb) Léo fait $3$ tours. Quelle distance parcourt-il ?\nc) Combien de tours complets faut-il pour faire au moins $1$ km ?",
+          reponses: [
+            { question: "a)", attendu: "120" },
+            { question: "b)", attendu: "360" },
+            { question: "c)", attendu: "9" },
+          ],
           figure: plan("m", [
             { poly: [[0, 0], [40, 0], [40, 20], [0, 20]], fond: "vert" },
             { trait: [[20, 0], [20, 20]], tirets: true },
@@ -520,6 +589,12 @@ export const exercicesAirePerimetre6e: FicheExercicesData = {
           titre: "Le jardin partagé",
           enonce:
             "Voici le plan d'un jardin partagé. Tous ses coins sont des angles droits.\nOn veut l'entourer de grillage, sauf un portail de $3$ m.\na) Trouve les deux côtés qui ne sont pas écrits.\nb) Calcule le périmètre du jardin.\nc) Quelle longueur de grillage faut-il ?\nd) Le grillage se vend en rouleaux de $10$ m, à $25$ € le rouleau. Combien faut-il payer ?",
+          reponses: [
+            { question: "a)", attendu: "12 ; 6" },
+            { question: "b)", attendu: "76" },
+            { question: "c)", attendu: "73" },
+            { question: "d)", attendu: "200" },
+          ],
           figure: plan("m", [
             { poly: [[0, 0], [20, 0], [20, 12], [8, 12], [8, 18], [0, 18]], fond: "vert" },
             { droit: [[8, 12], [20, 12], [8, 18]] },
@@ -536,6 +611,13 @@ export const exercicesAirePerimetre6e: FicheExercicesData = {
           titre: "La guirlande lumineuse",
           enonce:
             "Nina veut faire le tour de sa fenêtre avec une guirlande de $5$ m.\nLa fenêtre est un rectangle de $90$ cm de large et $1{,}2$ m de haut.\na) Quel est le périmètre de la fenêtre, en cm puis en m ?\nb) La guirlande est-elle assez longue ? Combien en reste-t-il ?\nc) La porte-fenêtre mesure $90$ cm sur $2{,}1$ m. La guirlande suffit-elle ?",
+          reponses: [
+            { question: "a) cm", attendu: "420" },
+            { question: "a) m", attendu: "4,2" },
+            { question: "b)", attendu: ["oui"] },
+            { question: "b) reste", attendu: ["80 cm", "0,8 m"] },
+            { question: "c)", attendu: ["non"] },
+          ],
           correction:
             "a) Je mets tout en cm : $1{,}2$ m $= 120$ cm.\n$90 + 120 = 210$ cm, puis $2 \\times 210 = 420$ cm, soit $4{,}2$ m.\nb) $4{,}2$ m, c'est moins que $5$ m : oui.\nIl reste $5 - 4{,}2 = 0{,}8$ m, soit $80$ cm.\nc) $2{,}1$ m $= 210$ cm.\n$90 + 210 = 300$ cm, puis $2 \\times 300 = 600$ cm, soit $6$ m.\n$6$ m, c'est plus que $5$ m : non. Il manque $1$ m.\n⛔ Le piège : oublier le « $2 \\times$ » et croire qu'il faut $3$ m.\nRéponse : a) $420$ cm, soit $4{,}2$ m ; b) oui, il reste $80$ cm ; c) non, il manque $1$ m.",
           schema: ecranSeulement(
@@ -554,6 +636,11 @@ export const exercicesAirePerimetre6e: FicheExercicesData = {
           titre: "Les tables de la fête",
           enonce:
             "Pour une fête, on a $6$ tables carrées de $1$ m de côté.\nOn met une personne par mètre de bord.\na) Tables collées en une longue ligne : combien de personnes peut-on asseoir ?\nb) Tables collées en rectangle, $3$ sur $2$ : combien de personnes ?\nc) Il y a $12$ invités. Quelle disposition choisir ?\nd) Pourquoi une table seule a-t-elle $4$ places, mais $6$ tables collées moins de $24$ ?",
+          reponses: [
+            { question: "a)", attendu: "14" },
+            { question: "b)", attendu: "10" },
+            { question: "c)", attendu: ["la ligne", "ligne", "en ligne", "une ligne"] },
+          ],
           figure: plan("m", [
             { grille: [0, 0, 11, 2] },
             { poly: [[0, 0], [6, 0], [6, 1], [0, 1]], fond: "bleu" },

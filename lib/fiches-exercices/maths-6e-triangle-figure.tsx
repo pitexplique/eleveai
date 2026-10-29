@@ -278,6 +278,10 @@ export const exercicesTriangleFigure6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Un triangle a pour sommets les points $P$, $I$ et $N$.\na) Donne un nom à ce triangle.\nb) Écris tous ses noms possibles. Combien y en a-t-il ?\nc) Tom écrit « triangle $PN$ ». A-t-il raison ?",
+          reponses: [
+            { question: "b)", attendu: "6" },
+            { question: "c)", attendu: ["non"] },
+          ],
           schema: ecranSeulement(tri({ A: [0, 0], B: [5.5, 0], C: [1.8, 3.6] }, { noms: { A: "P", B: "I", C: "N" } })),
           correction:
             "a) Je lis les trois sommets : $P$, $I$ et $N$. C'est le triangle $PIN$.\nb) L'ordre des lettres ne compte pas. Je commence par chaque lettre, puis j'échange les deux autres.\n$PIN$, $PNI$, $IPN$, $INP$, $NPI$, $NIP$. Il y a $6$ noms.\nc) Non. Avec deux lettres, on nomme un côté : $[PN]$. Un triangle a besoin de ses TROIS sommets.\n⛔ Le piège : oublier une lettre. Il faut toujours trois lettres pour un triangle.\nRéponse : a) $PIN$ ; b) $6$ noms ; c) non, $[PN]$ est un côté.",
@@ -285,6 +289,10 @@ export const exercicesTriangleFigure6e: FicheExercicesData = {
         },
         {
           enonce: "Dans le triangle $MUR$ :\na) Quels sont les sommets ? Quels sont les côtés ?\nb) Quel côté est opposé au sommet $U$ ?\nc) Quel sommet est opposé au côté $[UR]$ ?",
+          reponses: [
+            { question: "b)", attendu: ["[MR]", "MR", "[RM]", "RM"] },
+            { question: "c)", attendu: ["M"] },
+          ],
           correction:
             "a) Les sommets sont les trois points : $M$, $U$ et $R$.\nLes côtés sont les trois segments : $[MU]$, $[UR]$ et $[MR]$.\nb) Le côté opposé à $U$ ne touche pas $U$. C'est $[MR]$.\nc) Le sommet opposé à $[UR]$ n'est pas sur ce côté. C'est $M$.\n⛔ Le piège : confondre sommet et côté. Un sommet est un POINT, un côté est un SEGMENT.\nRéponse : a) $M$, $U$, $R$ et $[MU]$, $[UR]$, $[MR]$ ; b) $[MR]$ ; c) $M$.",
           schema: ecranSeulement(tri({ A: [0, 0], B: [5, 0], C: [3.5, 3] }, { noms: { A: "M", B: "U", C: "R" }, lignes: [{ de: [0, 0], vers: [3.5, 3], couleur: "orange" }] })),
@@ -292,6 +300,10 @@ export const exercicesTriangleFigure6e: FicheExercicesData = {
         },
         {
           enonce: "Observe les codages. Donne la nature de chaque triangle.\nPour le triangle isocèle, dis en quel sommet.",
+          reponses: [
+            { question: "VEI", attendu: ["isocèle en I"] },
+            { question: "BEC", attendu: ["équilatéral"] },
+          ],
           figure: deux(
             tri({ A: [0, 0], B: [4, 0], C: [2, 4.5] }, { noms: { A: "V", B: "E", C: "I" }, egaux: ["BC", "CA"] }),
             tri({ A: [0, 0], B: [4, 0], C: [2, 3.4641] }, { noms: { A: "B", B: "E", C: "C" }, egaux: ["AB", "BC", "CA"] }),
@@ -302,6 +314,12 @@ export const exercicesTriangleFigure6e: FicheExercicesData = {
         },
         {
           enonce: "Donne la nature de chaque triangle, selon ses côtés.\na) $5$ cm, $7$ cm et $5$ cm.\nb) $4{,}5$ cm, $4{,}5$ cm et $4{,}5$ cm.\nc) $3$ cm, $6$ cm et $7$ cm.\nd) $6$ cm, $6{,}5$ cm et $6$ cm.",
+          reponses: [
+            { question: "a)", attendu: ["isocèle"] },
+            { question: "b)", attendu: ["équilatéral"] },
+            { question: "c)", attendu: ["quelconque"] },
+            { question: "d)", attendu: ["isocèle"] },
+          ],
           correction:
             "Je cherche les longueurs égales.\na) Deux côtés de $5$ cm : isocèle.\nb) Trois côtés de $4{,}5$ cm : équilatéral.\nc) Trois longueurs différentes : quelconque.\nd) Deux côtés de $6$ cm : isocèle. Le troisième, $6{,}5$ cm, est différent.\n⛔ Le piège au d) : dire « équilatéral » car $6{,}5$ est proche de $6$. Presque égal, ce n'est pas égal.\nRéponse : a) isocèle ; b) équilatéral ; c) quelconque ; d) isocèle.",
           schema: ecranSeulement(tri({ A: [0, 0], B: [7, 0], C: [3.5, 3.5707] }, { cotes: { AB: "7 cm", BC: "5 cm", CA: "5 cm" }, egaux: ["BC", "CA"] })),
@@ -309,6 +327,11 @@ export const exercicesTriangleFigure6e: FicheExercicesData = {
         },
         {
           enonce: "a) Quelle est la nature du triangle $EGL$, selon ses angles ?\nb) Et celle du triangle $HUT$ ?\nc) Un troisième triangle a ses trois angles aigus. Comment l'appelle-t-on ?",
+          reponses: [
+            { question: "a)", attendu: ["rectangle en E", "rectangle"] },
+            { question: "b)", attendu: ["obtusangle"] },
+            { question: "c)", attendu: ["aigu", "un triangle aigu", "acutangle"] },
+          ],
           figure: deux(
             tri({ A: [0, 0], B: [4.5, 0], C: [0, 3] }, { noms: { A: "E", B: "G", C: "L" }, droit: "A" }),
             tri({ A: [0, 0], B: [6, 0], C: [-0.7258, 2.9109] }, { noms: { A: "H", B: "U", C: "T" }, angles: { A: "104°" } }),
@@ -319,6 +342,11 @@ export const exercicesTriangleFigure6e: FicheExercicesData = {
         },
         {
           enonce: "Le triangle $MAT$ est rectangle en $A$.\na) Où se trouve le petit carré ?\nb) Quels côtés forment l'angle droit ?\nc) Quel côté est opposé à l'angle droit ?",
+          reponses: [
+            { question: "a)", attendu: ["A", "en A"] },
+            { question: "b)", attendu: ["[AM] ; [AT]", "AM ; AT", "[AM] ; [TA]", "AM ; TA", "[MA] ; [AT]", "MA ; AT", "[MA] ; [TA]", "MA ; TA"] },
+            { question: "c)", attendu: ["[MT]", "MT", "[TM]", "TM"] },
+          ],
           figure: tri({ A: [0, 0], B: [5, 0], C: [0, 3.4] }, { noms: { A: "A", B: "M", C: "T" }, droit: "A" }),
           correction:
             "a) « Rectangle en $A$ » : l'angle droit est au sommet $A$. Le petit carré est en $A$.\nb) Les deux côtés qui partent de $A$ : $[AM]$ et $[AT]$.\nc) Le côté opposé à l'angle droit ne touche pas $A$. C'est $[MT]$.\n⭐ C'est le plus long côté du triangle rectangle.\n⛔ Le piège au c) : répondre $[AM]$. Ce côté touche le sommet $A$ : il n'est pas en face.\nRéponse : a) en $A$ ; b) $[AM]$ et $[AT]$ ; c) $[MT]$.",
@@ -326,6 +354,10 @@ export const exercicesTriangleFigure6e: FicheExercicesData = {
         },
         {
           enonce: "Dans le triangle $BUS$, $UB = 4{,}2$ cm, $US = 4{,}2$ cm et $BS = 6$ cm.\na) Quelle est sa nature ?\nb) En quel sommet ?",
+          reponses: [
+            { question: "a)", attendu: ["isocèle"] },
+            { question: "b)", attendu: ["U", "en U"] },
+          ],
           schema: ecranSeulement(tri({ A: [0, 0], B: [6, 0], C: [3, 2.9394] }, { noms: { A: "B", B: "S", C: "U" }, cotes: { AB: "6 cm", BC: "4,2 cm", CA: "4,2 cm" }, egaux: ["BC", "CA"] })),
           correction:
             "a) $UB = 4{,}2$ cm et $US = 4{,}2$ cm. Deux côtés sont égaux : le triangle est isocèle.\nb) Les deux côtés égaux, $[UB]$ et $[US]$, partent tous les deux de $U$.\nLe triangle est isocèle en $U$.\n⭐ Le troisième côté, $[BS]$, s'appelle la base.\n⛔ Le piège : répondre « en $B$ », la première lettre du nom. Je cherche le sommet COMMUN aux deux côtés égaux.\nRéponse : a) isocèle ; b) en $U$.",
@@ -333,6 +365,9 @@ export const exercicesTriangleFigure6e: FicheExercicesData = {
         },
         {
           enonce: "On a tracé le triangle $RIZ$. Puis on a relié $Z$ au point $P$, sur le côté $[RI]$.\na) Combien de triangles vois-tu ?\nb) Nomme-les.",
+          reponses: [
+            { question: "a)", attendu: "3" },
+          ],
           figure: tri({ A: [0, 0], B: [6, 0], C: [2, 3.5] }, { noms: { A: "R", B: "I", C: "Z" }, lignes: [{ de: [2, 3.5], vers: [3.5, 0], couleur: "orange" }], points: [{ en: [3.5, 0], nom: "P", vers: "bas" }] }),
           correction:
             "Le segment $[ZP]$ coupe le triangle en deux petits triangles.\nÀ gauche : $RPZ$. À droite : $PIZ$.\nEt le grand triangle $RIZ$ est toujours là.\nIl y a donc $3$ triangles.\n⛔ Le piège : oublier le grand triangle. Il existe encore, même coupé en deux.\nRéponse : a) $3$ ; b) $RPZ$, $PIZ$ et $RIZ$.",
@@ -354,6 +389,10 @@ export const exercicesTriangleFigure6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Donne la nature la plus précise de chaque triangle.\nRegarde les côtés, puis les angles.",
+          reponses: [
+            { question: "KIT", attendu: ["rectangle isocèle en K", "isocèle rectangle en K", "rectangle et isocèle en K"] },
+            { question: "GNU", attendu: ["isocèle en U et obtusangle", "isocèle en U obtusangle", "obtusangle isocèle en U"] },
+          ],
           figure: deux(
             tri({ A: [0, 0], B: [4, 0], C: [0, 4] }, { noms: { A: "K", B: "I", C: "T" }, droit: "A", egaux: ["AB", "CA"] }),
             tri({ A: [0, 0], B: [6, 0], C: [3, 1.5951] }, { noms: { A: "G", B: "N", C: "U" }, angles: { C: "124°" }, egaux: ["BC", "CA"] }),
@@ -364,6 +403,9 @@ export const exercicesTriangleFigure6e: FicheExercicesData = {
         },
         {
           enonce: "Le triangle $JEU$ est équilatéral. Son périmètre mesure $13{,}5$ cm.\nCombien mesure le côté $[JE]$ ?",
+          reponses: [
+            { attendu: "4,5" },
+          ],
           correction:
             "Équilatéral : ses trois côtés ont la même longueur.\nLe périmètre, c'est ces trois côtés mis bout à bout.\nJe partage en $3$ : $13{,}5 \\div 3 = 4{,}5$.\n$JE = 4{,}5$ cm.\nJe vérifie : $4{,}5 + 4{,}5 + 4{,}5 = 13{,}5$.\n⛔ Le piège : diviser par $2$. Un triangle a TROIS côtés.\nRéponse : $JE = 4{,}5$ cm.",
           schema: ecranSeulement(tri({ A: [0, 0], B: [4.5, 0], C: [2.25, 3.8971] }, { noms: { A: "J", B: "E", C: "U" }, cotes: { AB: "4,5 cm", BC: "4,5 cm", CA: "4,5 cm" }, egaux: ["AB", "BC", "CA"] })),
@@ -371,6 +413,9 @@ export const exercicesTriangleFigure6e: FicheExercicesData = {
         },
         {
           enonce: "Le triangle $VIE$ est isocèle en $I$.\n$IV = 6$ cm et $VE = 4$ cm.\nCalcule son périmètre.",
+          reponses: [
+            { attendu: "16" },
+          ],
           correction:
             "Isocèle en $I$ : les deux côtés égaux partent de $I$. Ce sont $[IV]$ et $[IE]$.\nDonc $IE = IV = 6$ cm.\nLe troisième côté, $[VE]$, mesure $4$ cm.\nPérimètre : $6 + 6 + 4 = 16$. Il mesure $16$ cm.\n⛔ Le piège : doubler la base, $6 + 4 + 4$. Les côtés égaux sont ceux qui partent de $I$.\nRéponse : $16$ cm.",
           schema: ecranSeulement(tri({ A: [0, 0], B: [4, 0], C: [2, 5.6569] }, { noms: { A: "V", B: "E", C: "I" }, cotes: { AB: "4 cm", BC: "6 cm", CA: "6 cm" }, egaux: ["BC", "CA"] })),
@@ -378,6 +423,9 @@ export const exercicesTriangleFigure6e: FicheExercicesData = {
         },
         {
           enonce: "Le triangle $NEZ$ est isocèle en $E$. Son périmètre mesure $19$ cm.\nLa base $[NZ]$ mesure $5$ cm.\nCombien mesure le côté $[EN]$ ?",
+          reponses: [
+            { attendu: "7" },
+          ],
           correction:
             "Je retire d'abord la base du périmètre : $19 - 5 = 14$.\nIl reste $14$ cm pour les deux côtés égaux, $[EN]$ et $[EZ]$.\nJe partage en deux : $14 \\div 2 = 7$.\n$EN = 7$ cm.\nJe vérifie : $7 + 7 + 5 = 19$.\n⛔ Le piège : diviser $19$ par $2$ tout de suite. Il faut d'abord retirer la base.\nRéponse : $EN = 7$ cm.",
           schema: ecranSeulement(tri({ A: [0, 0], B: [5, 0], C: [2.5, 6.5383] }, { noms: { A: "N", B: "Z", C: "E" }, cotes: { AB: "5 cm", BC: "7 cm", CA: "7 cm" }, egaux: ["BC", "CA"] })),
@@ -385,6 +433,9 @@ export const exercicesTriangleFigure6e: FicheExercicesData = {
         },
         {
           enonce: "Il n'y a ni mesure ni codage sur ce triangle.\nAvec ton compas, compare les longueurs de ses côtés.\nQuelle est sa nature ?",
+          reponses: [
+            { attendu: ["isocèle en C"] },
+          ],
           figure: tri({ A: [0, 0], B: [3.2, 0], C: [1.6, 4.7371] }, { noms: { A: "T", B: "I", C: "C" } }),
           correction:
             "J'ouvre le compas sur $[CT]$ : la pointe sur $C$, la mine sur $T$.\nSans changer l'écartement, je pique en $C$ et je vise $I$. La mine tombe pile sur $I$.\nDonc $CT = CI$.\nLe côté $[TI]$ est bien plus court.\nLe triangle est isocèle en $C$.\n⛔ Le piège : juger à l'œil. Le compas compare deux longueurs sans règle.\nRéponse : isocèle en $C$.",
@@ -392,6 +443,10 @@ export const exercicesTriangleFigure6e: FicheExercicesData = {
         },
         {
           enonce: "Ce triangle a-t-il un angle droit ?\na) Mesure son plus grand angle au rapporteur.\nb) Quelle est sa nature, selon ses angles ?",
+          reponses: [
+            { question: "a)", attendu: "97", tolerance: 1 },
+            { question: "b)", attendu: ["obtusangle"] },
+          ],
           figure: tri({ A: [0, 0], B: [6, 0], C: [3.3684, 2.6316] }, { noms: { A: "F", B: "E", C: "U" } }),
           correction:
             "Je cherche l'angle le plus ouvert. C'est l'angle en $U$.\na) Je pose le rapporteur en $U$. Je lis $97°$.\nb) $97°$, c'est un peu plus que $90°$ : l'angle est obtus.\nLe triangle est obtusangle, pas rectangle.\n⛔ Le piège : dire « rectangle » car l'angle a l'air droit. $97°$ n'est pas $90°$.\nRéponse : a) $97°$ ; b) obtusangle.",
@@ -400,6 +455,10 @@ export const exercicesTriangleFigure6e: FicheExercicesData = {
         },
         {
           enonce: "Construis le triangle $ABC$ rectangle en $A$, avec $AB = 6$ cm et $AC = 2{,}5$ cm.\na) Écris les étapes.\nb) Mesure $[BC]$.\nc) Le triangle est-il aussi isocèle ?",
+          reponses: [
+            { question: "b)", attendu: "6,5", tolerance: 0.1 },
+            { question: "c)", attendu: ["non"] },
+          ],
           correction:
             "a) Je trace $[AB]$ de $6$ cm.\nJe pose l'équerre en $A$, un bord sur $[AB]$.\nJe trace le long de l'autre bord. Je place $C$ à $2{,}5$ cm de $A$.\nJe trace $[BC]$.\nb) Je mesure : $BC = 6{,}5$ cm.\nc) Les trois côtés mesurent $6$ cm, $2{,}5$ cm et $6{,}5$ cm. Aucun n'est égal à un autre.\nLe triangle est rectangle, mais pas isocèle.\n⛔ Le piège : poser l'équerre en $B$. L'angle droit doit être en $A$.\nRéponse : b) $BC = 6{,}5$ cm ; c) non.",
           schema: ecranSeulement(tri({ A: [0, 0], B: [6, 0], C: [0, 2.5] }, { droit: "A", cotes: { AB: "6 cm", BC: "6,5 cm", CA: "2,5 cm" } })),
@@ -407,6 +466,12 @@ export const exercicesTriangleFigure6e: FicheExercicesData = {
         },
         {
           enonce: "Donne la nature la plus précise de chaque triangle.\na) Ses trois côtés mesurent $4$ cm.\nb) Il a un angle droit et deux côtés égaux.\nc) Ses côtés mesurent $5$ cm, $6$ cm et $8$ cm, et il n'a pas d'angle droit.\nd) Il a un angle de $100°$ et deux côtés égaux.",
+          reponses: [
+            { question: "a)", attendu: ["équilatéral"] },
+            { question: "b)", attendu: ["rectangle isocèle", "isocèle rectangle"] },
+            { question: "c)", attendu: ["quelconque"] },
+            { question: "d)", attendu: ["isocèle obtusangle", "obtusangle isocèle", "isocèle et obtusangle"] },
+          ],
           correction:
             "a) Trois côtés égaux : équilatéral.\nb) Un angle droit : rectangle. Deux côtés égaux : isocèle. Il est rectangle isocèle.\nc) Trois longueurs différentes : quelconque.\nd) Deux côtés égaux : isocèle. Un angle de $100°$ est obtus : obtusangle.\nIl est isocèle et obtusangle.\n⛔ Le piège : donner un seul nom au b) et au d). Il faut les deux.\nRéponse : a) équilatéral ; b) rectangle isocèle ; c) quelconque ; d) isocèle obtusangle.",
           schema: ecranSeulement(tri({ A: [0, 0], B: [6, 0], C: [3, 2.5173] }, { angles: { C: "100°" }, egaux: ["BC", "CA"] })),
@@ -428,6 +493,12 @@ export const exercicesTriangleFigure6e: FicheExercicesData = {
         {
           titre: "Le panneau de danger",
           enonce: "Un panneau « danger » est un triangle. Ses trois côtés mesurent $70$ cm. Les mesures sont des modèles.\na) Quelle est sa nature, selon ses côtés ?\nb) Calcule la longueur de sa bordure rouge, en cm puis en m.\nc) Mesure un de ses angles au rapporteur. Le triangle est-il rectangle, obtusangle ou aigu ?",
+          reponses: [
+            { question: "a)", attendu: ["équilatéral"] },
+            { question: "b) cm", attendu: "210" },
+            { question: "b) m", attendu: "2,1" },
+            { question: "c)", attendu: ["aigu"] },
+          ],
           figure: tri({ A: [0, 0], B: [70, 0], C: [35, 60.6218] }, { cotes: { AB: "70 cm", BC: "70 cm", CA: "70 cm" }, egaux: ["AB", "BC", "CA"] }),
           correction:
             "a) Trois côtés de $70$ cm : il est équilatéral.\nb) La bordure fait le tour : c'est le périmètre.\n$70 + 70 + 70 = 210$. La bordure mesure $210$ cm, soit $2{,}1$ m.\nc) Je mesure un angle : $60°$. Les trois angles sont pareils : $60°$ chacun.\n$60°$, c'est moins que $90°$ : trois angles aigus. Le triangle est aigu.\n⛔ Le piège au b) : répondre $70$ cm. C'est la longueur d'UN côté, pas du tour.\nRéponse : a) équilatéral ; b) $210$ cm, soit $2{,}1$ m ; c) aigu.",
@@ -436,6 +507,12 @@ export const exercicesTriangleFigure6e: FicheExercicesData = {
         {
           titre: "Le cerf-volant",
           enonce: "Un cerf-volant a quatre sommets $A$, $B$, $C$ et $D$. Une baguette $[BD]$ de $40$ cm le partage en deux triangles.\n$AB = AD = 30$ cm et $CB = CD = 55$ cm.\na) Nomme les deux triangles.\nb) Donne la nature de chacun.\nc) Calcule le périmètre de chaque triangle.\nd) On borde le cerf-volant d'un ruban. Quelle longueur de ruban faut-il ?",
+          reponses: [
+            { question: "b) ABD", attendu: ["isocèle en A"] },
+            { question: "b) CBD", attendu: ["isocèle en C"] },
+            { question: "c)", attendu: "100 ; 150" },
+            { question: "d)", attendu: "170" },
+          ],
           figure: tri({ A: [-20, 0], B: [20, 0], C: [0, 22.3607] }, { noms: { A: "B", B: "D", C: "A" }, cotes: { AB: "40 cm", BC: "30 cm", CA: "30 cm" }, egaux: ["BC", "CA"], lignes: [{ de: [-20, 0], vers: [0, -51.2348], couleur: "bleu" }, { de: [20, 0], vers: [0, -51.2348], couleur: "bleu" }], points: [{ en: [0, -51.2348], nom: "C", vers: "bas" }] }),
           correction:
             "a) Au-dessus de la baguette : le triangle $ABD$. En dessous : le triangle $CBD$.\nb) $AB = AD$ : $ABD$ est isocèle en $A$.\n$CB = CD$ : $CBD$ est isocèle en $C$.\nc) $ABD$ : $30 + 30 + 40 = 100$, soit $100$ cm.\n$CBD$ : $55 + 55 + 40 = 150$, soit $150$ cm.\nd) Le ruban fait le tour du cerf-volant. Il ne suit PAS la baguette.\n$30 + 30 + 55 + 55 = 170$. Il faut $170$ cm de ruban.\n⛔ Le piège au d) : additionner les deux périmètres, $250$ cm. La baguette serait comptée deux fois, alors qu'elle est à l'intérieur.\nRéponse : a) $ABD$ et $CBD$ ; b) isocèles en $A$ et en $C$ ; c) $100$ cm et $150$ cm ; d) $170$ cm.",
@@ -444,6 +521,12 @@ export const exercicesTriangleFigure6e: FicheExercicesData = {
         {
           titre: "Le potager",
           enonce: "Un potager a la forme d'un triangle $ABC$. $AC = BC = 9$ m et $AB = 6$ m.\na) Quelle est sa nature, selon ses côtés ?\nb) Combien de mètres de grillage faut-il pour l'entourer ?\nc) Le jardinier dit : « Le coin en $C$ est droit. » On a mesuré cet angle sur le plan. A-t-il raison ?\nd) Les deux autres angles mesurent environ $71°$. Quelle est la nature du triangle, selon ses angles ?",
+          reponses: [
+            { question: "a)", attendu: ["isocèle en C"] },
+            { question: "b)", attendu: "24" },
+            { question: "c)", attendu: ["non"] },
+            { question: "d)", attendu: ["aigu"] },
+          ],
           figure: tri({ A: [0, 0], B: [6, 0], C: [3, 8.4853] }, { cotes: { AB: "6 m", BC: "9 m", CA: "9 m" }, angles: { C: "39°" } }),
           correction:
             "a) $AC = BC = 9$ m : deux côtés égaux, qui partent de $C$. Il est isocèle en $C$.\nb) Le grillage fait le tour : $9 + 9 + 6 = 24$. Il faut $24$ m de grillage.\nc) L'angle en $C$ mesure $39°$. Ce n'est pas $90°$ : il a tort.\nC'est un angle aigu, très pointu.\nd) $39°$, $71°$ et $71°$ : les trois angles sont aigus. Le triangle est aigu.\n⛔ Le piège au c) : croire qu'un coin très pointu est droit. Un angle droit, c'est le coin d'une feuille.\nRéponse : a) isocèle en $C$ ; b) $24$ m ; c) non, $39°$ ; d) aigu.",
@@ -452,6 +535,13 @@ export const exercicesTriangleFigure6e: FicheExercicesData = {
         {
           titre: "Le pavage",
           enonce: "Le grand triangle $ABC$ est équilatéral, de côté $8$ cm. $I$, $J$ et $K$ sont les milieux de ses côtés.\nOn trace le triangle $IJK$ en orange.\na) Combien de triangles vois-tu en tout ?\nb) Quelle est la nature des petits triangles ?\nc) Calcule le périmètre d'un petit triangle, puis celui du grand.\nd) Léo additionne les périmètres des $4$ petits triangles. Trouve-t-il le périmètre du grand ?",
+          reponses: [
+            { question: "a)", attendu: "5" },
+            { question: "b)", attendu: ["équilatéraux", "équilatéral"] },
+            { question: "c) petit", attendu: "12" },
+            { question: "c) grand", attendu: "24" },
+            { question: "d)", attendu: ["non"] },
+          ],
           figure: tri({ A: [0, 0], B: [8, 0], C: [4, 6.9282] }, { lignes: [{ de: [4, 0], vers: [6, 3.4641] }, { de: [6, 3.4641], vers: [2, 3.4641] }, { de: [2, 3.4641], vers: [4, 0] }], points: [{ en: [4, 0], nom: "I", vers: "bas" }, { en: [6, 3.4641], nom: "J", vers: "droite" }, { en: [2, 3.4641], nom: "K", vers: "gauche" }] }),
           correction:
             "a) Il y a $4$ petits triangles : $AIK$, $IBJ$, $KJC$ et $IJK$.\nEt le grand triangle $ABC$. En tout : $5$ triangles.\nb) Chaque côté d'un petit triangle mesure la moitié de $8$ cm : $4$ cm.\nLes petits triangles ont trois côtés de $4$ cm : ils sont équilatéraux.\nc) Petit : $4 + 4 + 4 = 12$, soit $12$ cm. Grand : $8 + 8 + 8 = 24$, soit $24$ cm.\nd) Léo trouve $4 \\times 12 = 48$ cm. Ce n'est pas $24$ cm.\nLes côtés du triangle orange sont comptés deux fois, et ils sont à l'intérieur.\n⛔ Le piège : croire qu'on additionne des périmètres comme des morceaux. Le périmètre, c'est seulement le TOUR.\nRéponse : a) $5$ ; b) équilatéraux ; c) $12$ cm et $24$ cm ; d) non, il trouve $48$ cm.",

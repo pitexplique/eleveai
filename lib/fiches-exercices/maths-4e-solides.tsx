@@ -533,6 +533,12 @@ export const exercicesSolides4e: FicheExercicesData = {
         {
           enonce:
             "Voici quatre solides, dessinés en perspective. Ils ne sont pas posés comme d'habitude.\nNommer chacun d'eux le plus précisément possible.",
+          reponses: [
+            { question: "①", attendu: ["prisme droit à base triangulaire", "un prisme droit à base triangulaire", "prisme à base triangulaire", "prisme triangulaire", "prisme droit triangulaire"] },
+            { question: "②", attendu: ["cylindre", "un cylindre", "une cylindre"] },
+            { question: "③", attendu: ["cône", "un cône", "une cône"] },
+            { question: "④", attendu: ["pyramide à base triangulaire", "une pyramide à base triangulaire", "pyramide triangulaire", "tétraèdre", "un tétraèdre"] },
+          ],
           figure: ensemble(
             [
               solide({ sommets: { A: [0, 0, 0], B: [0, 3, 0], C: [0, 1.5, 2.5], D: [5, 0, 0], E: [5, 3, 0], F: [5, 1.5, 2.5] }, aretes: ["AB", "BC", "CA", "DE", "EF", "FD", "AD", "BE", "CF"], cachees: ["AB", "BC", "BE"] }),
@@ -560,6 +566,11 @@ export const exercicesSolides4e: FicheExercicesData = {
         {
           enonce:
             "Un crayon à papier neuf, pas encore taillé, a la forme d'un prisme droit à base hexagonale (six côtés).\na) Combien a-t-il de faces ? De quelles formes ?\nb) Combien a-t-il d'arêtes ?\nc) Combien a-t-il de sommets ?",
+          reponses: [
+            { question: "a)", attendu: "8" },
+            { question: "b)", attendu: "18" },
+            { question: "c)", attendu: "12" },
+          ],
           correction:
             "Je compte par groupes : les deux bases, puis ce qui les relie.\na) Deux bases hexagonales, aux deux bouts du crayon, et une face rectangulaire par côté de l'hexagone, soit 6 rectangles. En tout $2 + 6 = 8$ faces.\nb) Chaque hexagone a 6 côtés : $6 + 6 = 12$ arêtes autour des bases, plus 6 arêtes dans la longueur du crayon. En tout $12 + 6 = 18$ arêtes.\nc) 6 sommets à chaque bout : $6 + 6 = 12$ sommets.\n⭐ Contrôle : $8 - 18 + 12 = 2$, la relation d'Euler est vérifiée.\n⛔ Le piège : ne compter que ce que je vois. Sur le dessin, 5 arêtes sont en pointillés, cachées derrière le crayon : je compte 18, pas 13.\nRéponse : 8 faces (2 hexagones et 6 rectangles), 18 arêtes, 12 sommets.",
           schema: solide({ sommets: { A: [0, 2.4, 1.2], B: [0, 1.8, 2.24], C: [0, 0.6, 2.24], D: [0, 0, 1.2], E: [0, 0.6, 0.16], F: [0, 1.8, 0.16], G: [8, 2.4, 1.2], H: [8, 1.8, 2.24], I: [8, 0.6, 2.24], J: [8, 0, 1.2], K: [8, 0.6, 0.16], L: [8, 1.8, 0.16] }, aretes: ["AB", "BC", "CD", "DE", "EF", "FA", "GH", "HI", "IJ", "JK", "KL", "LG", "AG", "BH", "CI", "DJ", "EK", "FL"], cachees: ["AB", "AF", "AG", "EF", "FL"], faces: ["ABCDEF", "GHIJKL"] }),
@@ -568,6 +579,10 @@ export const exercicesSolides4e: FicheExercicesData = {
         {
           enonce:
             "On a empilé des cubes identiques, comme sur le dessin ci-dessous.\na) Combien de carrés compte sa vue de dessus ? La dessiner.\nb) Combien de carrés compte sa vue de face ? La dessiner.",
+          reponses: [
+            { question: "a)", attendu: "5" },
+            { question: "b)", attendu: "5" },
+          ],
           figure: empilement([[2, 1, 1], [3, 0, 1]]),
           correction:
             "a) De dessus, je vois une case par colonne de cubes, quelle que soit sa hauteur. Il y a 3 colonnes devant et 2 derrière, avec un trou au milieu du fond : la vue de dessus a 5 carrés.\nb) De face, je vois, pour chaque colonne de gauche à droite, la plus haute pile, qu'elle soit devant ou derrière. À gauche, la pile du fond, 3 cubes, dépasse celle de devant ; au milieu 1 ; à droite 1. La vue de face a $3 + 1 + 1 = 5$ carrés.\n⛔ Le piège : dessiner de face seulement la rangée de devant (2, 1 et 1). La pile de 3 du fond dépasse au-dessus : on la voit.\nRéponse : de dessus, 5 carrés (le trou au fond, au milieu) ; de face, des piles de 3, 1 et 1 carrés.",
@@ -577,6 +592,9 @@ export const exercicesSolides4e: FicheExercicesData = {
         {
           enonce:
             "Un solide posé sur une table a les deux vues ci-dessous : de face, un rectangle ; de dessus, un triangle.\nDe quel solide s'agit-il ? Comment est-il posé ?",
+          reponses: [
+            { question: "solide", attendu: ["prisme droit à base triangulaire", "un prisme droit à base triangulaire", "prisme à base triangulaire", "prisme triangulaire", "prisme droit triangulaire"] },
+          ],
           figure: vues([{ titre: "de face", poly: [[0, 0], [4, 0], [4, 5], [0, 5]] }, { titre: "de dessus", poly: [[0, 0], [4, 0], [2.5, 3]] }]),
           correction:
             "La vue de dessus donne la forme de la BASE posée sur la table : un triangle.\nLa vue de face dit comment le solide monte : un rectangle, donc des bords verticaux et pas de pointe. Le solide garde la même forme triangulaire sur toute sa hauteur.\nUne base triangulaire qui monte tout droit : c'est un prisme droit à base triangulaire, debout sur une de ses bases (le dessin).\n⛔ Le piège : répondre « une pyramide » parce qu'on voit un triangle. Une pyramide se termine en pointe : de face, elle donnerait un triangle, pas un rectangle.\nRéponse : un prisme droit à base triangulaire, debout sur sa base.",
@@ -586,6 +604,9 @@ export const exercicesSolides4e: FicheExercicesData = {
         {
           enonce:
             "Chacune de ces quatre figures est faite de six carrés identiques.\nLesquelles sont des patrons de cube ? Pour les autres, expliquer ce qui coince.",
+          reponses: [
+            { attendu: ["A ; C", "AC", "CA"] },
+          ],
           figure: ensemble(
             [
               patronCube([[0, 1], [1, 1], [2, 1], [3, 1], [1, 0], [3, 2]]),
@@ -613,6 +634,12 @@ export const exercicesSolides4e: FicheExercicesData = {
         {
           enonce:
             "Ce prisme droit est dessiné en perspective cavalière : ses fuyantes sont tracées à 45° et réduites de moitié. Sa face avant ABC est un triangle rectangle en A.\nSur le dessin, on mesure AB = 4 cm, AC = 3 cm et BE = 3,5 cm.\na) Quelles sont les vraies longueurs AB et AC ?\nb) Quelle est la vraie longueur de l'arête [BE] ?\nc) Quelles arêtes sont dessinées en pointillés ?",
+          reponses: [
+            { question: "a) AB", attendu: "4" },
+            { question: "a) AC", attendu: "3" },
+            { question: "b)", attendu: "7" },
+            { question: "c)", attendu: ["[AD] ; [DE] ; [DF]", "AD ; DE ; DF"] },
+          ],
           figure: solide({ sommets: { A: [0, 0, 0], B: [4, 0, 0], C: [0, 0, 3], D: [0, 7, 0], E: [4, 7, 0], F: [0, 7, 3] }, aretes: ["AB", "BC", "CA", "DE", "EF", "FD", "AD", "BE", "CF"], cachees: ["AD", "DE", "DF"], noms: { A: "bg", B: "bd", C: "g", D: "hg", E: "d", F: "h" }, cotes: { AB: ["4 cm", "b"], CA: ["3 cm", "g"], BE: ["3,5 cm", "bd"] } }),
           correction:
             "a) La face ABC est la face de devant, dessinée de face : elle est en vraie grandeur. AB = 4 cm et AC = 3 cm.\nb) [BE] part vers l'arrière : c'est une fuyante, dessinée à la moitié de sa longueur. Je double : $3{,}5 \\times 2 = 7$ cm.\nc) Le sommet D est derrière, en bas, à gauche : la face de gauche, celle du dessous et celle du fond le cachent. Les trois arêtes qui en partent, [AD], [DE] et [DF], sont en pointillés.\n⛔ Le piège : lire 3,5 cm pour [BE] avec la règle. Sur une perspective, seule la face de devant se mesure ; une fuyante, je la multiplie par 2.\nRéponse : AB = 4 cm, AC = 3 cm ; BE = 7 cm ; [AD], [DE] et [DF] sont en pointillés.",
@@ -622,6 +649,11 @@ export const exercicesSolides4e: FicheExercicesData = {
         {
           enonce:
             "ABCDEF est un prisme droit en forme de toit. Sa base ABC est un triangle isocèle en C, avec AB = 4 cm et une hauteur de 3 cm ; ses arêtes latérales mesurent 6 cm.\na) On le coupe par un plan parallèle à ses bases. Quelle est la nature de la section ?\nb) On le coupe par un plan parallèle à la face ABED, celle du dessous. Quelle est la nature de la section ? Quelle est sa longueur ?",
+          reponses: [
+            { question: "a)", attendu: ["triangle isocèle", "un triangle isocèle", "une triangle isocèle"] },
+            { question: "b)", attendu: ["rectangle", "un rectangle", "une rectangle"] },
+            { question: "b) long.", attendu: "6" },
+          ],
           correction:
             "a) Le plan est parallèle aux bases : il coupe le prisme comme une tranche. La section est un triangle identique à la base : un triangle isocèle de 4 cm de base et 3 cm de hauteur (à gauche sur le schéma).\nb) La face ABED est un rectangle. Le plan parallèle à cette face coupe chaque base selon un segment horizontal, et ces deux segments sont reliés par deux segments parallèles aux arêtes latérales : la section est un rectangle (à droite sur le schéma). Sa longueur est celle des arêtes latérales, 6 cm.\n⛔ Le piège : croire que la section d'un prisme a toujours la forme de sa base. C'est vrai si le plan est parallèle aux bases ; parallèle à une face latérale, c'est un rectangle.\nRéponse : a) un triangle isocèle identique à ABC ; b) un rectangle de 6 cm de long.",
           schema: ensemble(
@@ -636,6 +668,11 @@ export const exercicesSolides4e: FicheExercicesData = {
         {
           enonce:
             "SABC est une pyramide dont la base ABC est un triangle équilatéral de 8 cm de côté. On la coupe par un plan parallèle à la base, qui passe par le milieu de [SA].\na) Quelle est la forme de la section ?\nb) Est-elle plus grande que la base, plus petite, ou identique ?\nc) Le plan passe aussi par les milieux de [SB] et de [SC]. Quelle est la longueur de chaque côté de la section ?",
+          reponses: [
+            { question: "a)", attendu: ["triangle équilatéral", "un triangle équilatéral", "une triangle équilatéral"] },
+            { question: "b)", attendu: ["plus petite", "plus petit", "plus petite que la base"] },
+            { question: "c)", attendu: "4" },
+          ],
           correction:
             "a) Coupée parallèlement à sa base, une pyramide donne une section de même forme que la base : un triangle équilatéral.\nb) La pyramide se resserre vers sa pointe : la section est plus petite que la base.\nc) Dans la face SAB, le côté de la section relie les milieux de [SA] et de [SB]. D'après le théorème des milieux, il mesure la moitié de AB : $8 \\div 2 = 4$ cm. C'est pareil dans les deux autres faces.\n⛔ Le piège : répondre 8 cm, comme pour un prisme. Un prisme garde la même largeur de bas en haut ; une pyramide rétrécit.\nRéponse : un triangle équilatéral de 4 cm de côté, plus petit que la base.",
           schema: ensemble([
@@ -661,6 +698,11 @@ export const exercicesSolides4e: FicheExercicesData = {
         {
           enonce:
             "Voici le patron d'un solide (les longueurs sont en cm).\na) Quel est ce solide ? Combien a-t-il de faces ?\nb) Quelle est la longueur du bord marqué « ? » ? Justifier sans mesurer.\nc) Contre quel bord vient se coller le côté de 5 cm du triangle du haut ?",
+          reponses: [
+            { question: "a)", attendu: ["prisme droit à base triangulaire", "un prisme droit à base triangulaire", "prisme à base triangulaire", "prisme triangulaire", "prisme droit triangulaire"] },
+            { question: "a) fac.", attendu: "5" },
+            { question: "b)", attendu: "5" },
+          ],
           figure: aPlat([{ pts: [[0, 0], [3, 0], [3, 8], [0, 8]] }, { pts: [[3, 0], [7, 0], [7, 8], [3, 8]] }, { pts: [[7, 0], [12, 0], [12, 8], [7, 8]] }, { pts: [[3, 8], [7, 8], [3, 11]] }, { pts: [[3, 0], [3, -3], [7, 0]] }], [{ de: [0, 0], a: [0, 8], texte: "8 cm", cote: "g" }, { de: [0, 0], a: [3, 0], texte: "3 cm", cote: "b" }, { de: [3, 8], a: [7, 8], texte: "4 cm", cote: "b" }, { de: [3, 8], a: [3, 11], texte: "3 cm", cote: "g" }, { de: [3, 11], a: [7, 8], texte: "5 cm", cote: "hd" }, { de: [7, 0], a: [12, 0], texte: "?", cote: "b" }], 14),
           correction:
             "a) Trois rectangles côte à côte et deux triangles identiques, un en haut et un en bas : deux bases triangulaires reliées par des rectangles. C'est le patron d'un prisme droit à base triangulaire. Il a $2 + 3 = 5$ faces.\nb) Quand je replie, chaque rectangle vient border UN côté du triangle : la largeur de chaque rectangle est la longueur d'un côté de la base. Les côtés du triangle mesurent 3 cm, 4 cm et 5 cm ; les deux premiers rectangles ont 3 cm et 4 cm de large. Le troisième a donc 5 cm de large.\nc) Je replie le triangle du haut sur le rectangle de 4 cm : son côté de 3 cm vient contre le haut du rectangle de 3 cm, et son côté de 5 cm contre le haut du rectangle de 5 cm. Les bords qui se collent ont la même couleur sur le schéma.\n⛔ Le piège : chercher « ? » avec la règle, ou deviner 4 cm. Deux bords qui se collent ont la même longueur : c'est ce qui donne la réponse.\nRéponse : un prisme droit à base triangulaire, 5 faces ; ? = 5 cm ; contre le haut du rectangle de 5 cm.",
@@ -670,6 +712,10 @@ export const exercicesSolides4e: FicheExercicesData = {
         {
           enonce:
             "Un empilement de cubes identiques, posé sur une table, a les trois vues ci-dessous. Sur la vue de droite, l'avant de l'empilement est à gauche.\na) Combien de cubes, au plus, peut-il contenir ?\nb) Combien de cubes, au moins ?",
+          reponses: [
+            { question: "a)", attendu: "11" },
+            { question: "b)", attendu: "9" },
+          ],
           figure: vues([{ titre: "de dessus", cases: [[1, 1, 1], [1, 1, 1]] }, { titre: "de face", hauteurs: [2, 1, 3] }, { titre: "de droite", hauteurs: [3, 2] }]),
           correction:
             "La vue de dessus montre 2 rangées de 3 colonnes, toutes occupées : 6 piles, chacune d'au moins un cube.\nLa vue de face donne, de gauche à droite, la plus haute pile de chaque colonne : 2, 1 et 3. La vue de droite donne la plus haute pile de chaque rangée : 3 devant, 2 derrière.\na) Au plus : chaque pile est limitée par sa colonne ET par sa rangée. Devant : 2, 1 et 3 ; derrière : 2, 1 et 2, car rien ne dépasse 2 au fond. En tout $2 + 1 + 3 + 2 + 1 + 2 = 11$ cubes.\nb) Au moins : il faut une pile de 3 à droite, forcément devant, puisque derrière rien ne dépasse 2. Il faut aussi une pile de 2 à gauche : placée derrière, elle donne à la fois la colonne de gauche et la rangée du fond. Toutes les autres piles n'ont qu'un cube : $1 + 1 + 3 + 2 + 1 + 1 = 9$ cubes.\n⛔ Le piège : croire que trois vues donnent un seul empilement. Plusieurs empilements ont les mêmes vues : ici, de 9 à 11 cubes.\nRéponse : au plus 11 cubes, au moins 9.",
@@ -679,6 +725,9 @@ export const exercicesSolides4e: FicheExercicesData = {
         {
           enonce:
             "Léa a dessiné un pavé droit ABCDEFGH en perspective cavalière : ABCD est la face du dessous, ABFE la face de devant. Elle s'est trompée deux fois dans ses pointillés.\na) Quelles sont ses deux erreurs ?\nb) Sur son dessin, AB = 5 cm, AE = 3 cm et BC = 2 cm. Les fuyantes sont réduites de moitié. Donner les vraies dimensions du pavé.",
+          reponses: [
+            { question: "b)", attendu: "5 ; 4 ; 3" },
+          ],
           figure: pave(5, 4, 3, ["AD", "CD", "FG"], { noms: { A: "bg", B: "bd", C: "d", D: "hg", E: "g", F: "hg", G: "hd", H: "hg" }, cotes: { AB: ["5 cm", "b"], AE: ["3 cm", "g"], BC: ["2 cm", "bd"] } }),
           correction:
             "a) Je cherche le sommet caché : c'est celui qui est derrière, en bas, à gauche, D. Les arêtes cachées sont les trois qui partent de D : [AD], [DC] et [DH]. Toutes les autres se voient.\nLéa a tracé [DH] en trait plein : il fallait des pointillés. Et elle a mis [FG] en pointillés, alors que [FG] borde la face du dessus et la face de droite, toutes deux visibles : il fallait un trait plein.\nb) [AB] et [AE] sont sur la face de devant, en vraie grandeur : 5 cm et 3 cm. [BC] est une fuyante, réduite de moitié : $2 \\times 2 = 4$ cm.\n⛔ Le piège : mettre en pointillés tout ce qui est « au fond ». [FG] est au fond du dessus, mais rien ne le cache : seules les arêtes qui partent du sommet caché sont en pointillés.\nRéponse : [DH] devait être en pointillés et [FG] en trait plein ; le pavé mesure 5 cm, 4 cm et 3 cm.",
@@ -688,6 +737,11 @@ export const exercicesSolides4e: FicheExercicesData = {
         {
           enonce:
             "Sur un dé, deux faces opposées ont toujours 7 pour somme : 1 et 6, 2 et 5, 3 et 4.\nVoici un patron de dé dont trois faces sont déjà numérotées. Quels nombres faut-il écrire à la place de a, b et c ?",
+          reponses: [
+            { question: "a", attendu: "5" },
+            { question: "b", attendu: "6" },
+            { question: "c", attendu: "4" },
+          ],
           figure: patronCube([[0, 0], [1, 0], [1, 1], [2, 1], [3, 1], [3, 2]], { marques: ["2", "3", "1", "a", "b", "c"] }),
           correction:
             "Je cherche, pour chaque face, celle qui lui sera opposée une fois le dé plié.\nJe pose la face 1 sur la table. La face a se relève à sa droite, et b, collée à a, se rabat par-dessus : b est le dessus, opposé à 1. Donc $b = 7 - 1 = 6$.\nLa face 3 se relève derrière 1, et 2, collée à 3, se rabat sur la gauche : 2 est à gauche, a à droite, elles sont opposées. Donc $a = 7 - 2 = 5$.\nLa face c, collée à b, retombe devant : elle est opposée à 3, qui est derrière. Donc $c = 7 - 3 = 4$.\n⭐ Contrôle : 1, 2, 3, 4, 5 et 6 apparaissent chacun une fois.\n⛔ Le piège : chercher les faces opposées seulement dans une même rangée. 2 et a ne sont pas dans la même rangée, et pourtant elles se font face.\nRéponse : a = 5, b = 6, c = 4.",
@@ -697,6 +751,12 @@ export const exercicesSolides4e: FicheExercicesData = {
         {
           enonce:
             "Un bloc de mousse a la forme d'un pavé droit ABCDEFGH, avec AB = 12 cm, BC = 5 cm et AE = 7 cm (ABCD est la face du dessous). On le coupe d'un seul trait vertical, qui passe par les arêtes [AE] et [CG].\na) Quelle est la nature de la section ACGE ?\nb) Calculer AC.\nc) Donner les dimensions de la section, puis comparer son aire à celle de la face ABFE.",
+          reponses: [
+            { question: "a)", attendu: ["rectangle", "un rectangle", "une rectangle"] },
+            { question: "b)", attendu: "13" },
+            { question: "c) dim.", attendu: "13 ; 7" },
+            { question: "c) aire", attendu: "91" },
+          ],
           correction:
             "a) Les arêtes [AE] et [CG] sont verticales, parallèles et de même longueur, 7 cm. La section a deux côtés verticaux, et deux côtés [AC] et [EG] sur le dessous et sur le dessus : c'est un rectangle.\nb) [AC] est une diagonale du rectangle ABCD. Le triangle ABC est rectangle en B, donc d'après le théorème de Pythagore : $AC^2 = 12^2 + 5^2 = 144 + 25 = 169$, et $AC = 13$ cm.\nc) La section est un rectangle de 13 cm sur 7 cm. Son aire : $13 \\times 7 = 91$ cm². Celle de la face ABFE : $12 \\times 7 = 84$ cm². La section est plus grande que la face de devant.\n⛔ Le piège : croire que la coupe en diagonale a la taille d'une face. Elle traverse le bloc en biais : sa largeur est la diagonale, plus longue que chaque côté.\nRéponse : un rectangle de 13 cm sur 7 cm, d'aire 91 cm², plus grand que la face ABFE (84 cm²).",
           schema: ensemble([
@@ -708,6 +768,12 @@ export const exercicesSolides4e: FicheExercicesData = {
         {
           enonce:
             "Voici quatre solides coupés par un plan : ① un cube, ② un cône, ③ un cylindre, ④ une pyramide à base carrée.\nAssocier chaque solide à la forme de sa section : un disque de même rayon que la base ; un triangle ; un rectangle qui n'est pas un carré ; un carré plus petit que la base.",
+          reponses: [
+            { question: "①", attendu: ["rectangle", "un rectangle", "une rectangle"] },
+            { question: "②", attendu: ["triangle", "un triangle", "une triangle"] },
+            { question: "③", attendu: ["disque", "un disque", "une disque"] },
+            { question: "④", attendu: ["carré", "un carré", "une carré", "carré plus petit", "un carré plus petit", "une carré plus petit"] },
+          ],
           figure: ensemble([coupe("cube", "diagonale"), coupe("cone", "verticale"), coupe("cylindre", "parallele_base"), coupe("pyramide", "parallele_base")], ["①", "②", "③", "④"], true),
           correction:
             "Pour chaque dessin, je regarde comment le plan est placé par rapport au solide.\n① Le plan du cube contient deux arêtes verticales opposées : il le traverse en diagonale. La section a la hauteur du cube, mais la largeur d'une diagonale, plus longue que l'arête : un rectangle qui n'est pas un carré.\n② Le plan du cône est vertical et passe par la pointe : la section a deux côtés droits qui descendent de la pointe, et une base. C'est un triangle.\n③ Le plan du cylindre est parallèle à la base : un disque de même rayon.\n④ Le plan de la pyramide est parallèle à la base : un carré, plus petit que la base.\n⛔ Le piège : répondre « un carré » pour le cube. Parallèle à une face, oui ; mais ce plan-là passe en diagonale.\nRéponse : ① un rectangle ; ② un triangle ; ③ un disque ; ④ un carré plus petit.",
@@ -717,6 +783,11 @@ export const exercicesSolides4e: FicheExercicesData = {
         {
           enonce:
             "Une maison est modélisée par le solide ci-dessous : des murs de 6 m de long, 4 m de large et 3 m de haut, et un toit à deux pentes dont le faîte est à 5 m du sol.\na) Montrer que ce solide est un prisme droit. Quelles sont ses bases ?\nb) Compter ses faces, ses arêtes et ses sommets.\nc) Dessiner sa vue de face, sa vue de droite et sa vue de dessus.",
+          reponses: [
+            { question: "faces", attendu: "7" },
+            { question: "arêtes", attendu: "15" },
+            { question: "sommets", attendu: "10" },
+          ],
           figure: solide({ sommets: { A: [0, 0, 0], B: [6, 0, 0], C: [6, 4, 0], D: [0, 4, 0], E: [0, 0, 3], F: [6, 0, 3], G: [6, 4, 3], H: [0, 4, 3], I: [0, 2, 5], J: [6, 2, 5] }, aretes: ["AB", "BC", "CD", "DA", "AE", "BF", "CG", "DH", "EF", "HG", "EI", "HI", "FJ", "GJ", "IJ"], cachees: ["AD", "CD", "DH", "GH", "HI"] }),
           correction:
             "a) Je cherche deux faces identiques et parallèles : les deux pignons, à gauche et à droite, sont des pentagones identiques (un rectangle de 4 m sur 3 m surmonté d'un triangle). Ils sont reliés par des rectangles : le sol, les deux longs murs et les deux pans du toit. C'est un prisme droit à base pentagonale, couché sur une face.\nb) Faces : 2 pentagones et 5 rectangles, soit 7 faces. Arêtes : 5 autour de chaque pentagone, $5 + 5 = 10$, plus 5 dans la longueur : $10 + 5 = 15$ arêtes. Sommets : $5 + 5 = 10$.\nc) De face, je vois le long mur et, au-dessus, le pan du toit qui monte vers le faîte : un rectangle de 6 m sur 5 m, coupé par la ligne du bas du toit à 3 m. De droite, je vois le pignon : le pentagone. De dessus, je vois les deux pans du toit : un rectangle de 6 m sur 4 m, partagé en son milieu par le faîte.\n⛔ Le piège : voir deux solides, un pavé et un toit, et additionner leurs faces : $6 + 5 = 11$. Le plafond commun disparaît, et chaque pignon (rectangle et triangle) ne forme qu'UNE face : il en reste 7.\nRéponse : un prisme droit à base pentagonale (les pignons) ; 7 faces, 15 arêtes, 10 sommets.",
@@ -726,6 +797,13 @@ export const exercicesSolides4e: FicheExercicesData = {
         {
           enonce:
             "Un cube en bois de 3 cm d'arête est peint en bleu sur ses six faces, puis découpé en petits cubes de 1 cm d'arête.\na) Combien obtient-on de petits cubes ?\nb) Combien ont 3 faces peintes ? 2 faces ? 1 face ? Aucune ?",
+          reponses: [
+            { question: "a)", attendu: "27" },
+            { question: "b) 3 f.", attendu: "8" },
+            { question: "b) 2 f.", attendu: "12" },
+            { question: "b) 1 f.", attendu: "6" },
+            { question: "b) 0 f.", attendu: "1" },
+          ],
           correction:
             "a) 3 couches de 3 rangées de 3 cubes : $3 \\times 3 \\times 3 = 27$ petits cubes.\nb) Je classe les petits cubes selon leur place dans le grand cube (les couleurs du schéma).\nLes cubes des coins ont 3 faces peintes. Un cube a 8 sommets : 8 cubes.\nLes cubes au milieu d'une arête ont 2 faces peintes. Il y en a un par arête, et un cube a 12 arêtes : 12 cubes.\nLes cubes au centre d'une face ont 1 face peinte. Un par face : 6 cubes.\nLe cube tout au centre n'a aucune face peinte : 1 cube, invisible de l'extérieur.\n⭐ Contrôle : $8 + 12 + 6 + 1 = 27$.\n⛔ Le piège : oublier le cube du centre, qu'on ne voit sur aucun dessin. Le contrôle par le total le retrouve.\nRéponse : 27 cubes ; 8 avec 3 faces peintes, 12 avec 2, 6 avec 1, et 1 sans peinture.",
           schema: ensemble([
@@ -752,6 +830,14 @@ export const exercicesSolides4e: FicheExercicesData = {
           titre: "Le cristal de quartz",
           enonce:
             "Dans la nature, un cristal de quartz pousse souvent en colonne à six pans, terminée par une pointe à six faces triangulaires. On le modélise par le solide dessiné ci-dessous.\na) De quels solides usuels est-il fait ?\nb) Compter ses faces, ses arêtes et ses sommets. Vérifier que faces − arêtes + sommets = 2.\nc) Certains cristaux, qui ont poussé libres, ont une pointe à chaque bout. Combien ont-ils de faces, d'arêtes et de sommets ?",
+          reponses: [
+            { question: "b) fac.", attendu: "13" },
+            { question: "b) arêt.", attendu: "24" },
+            { question: "b) somm.", attendu: "13" },
+            { question: "c) fac.", attendu: "18" },
+            { question: "c) arêt.", attendu: "30" },
+            { question: "c) somm.", attendu: "14" },
+          ],
           figure: solide({ sommets: { A: [2, 0, 0], B: [1, 1.73, 0], C: [-1, 1.73, 0], D: [-2, 0, 0], E: [-1, -1.73, 0], F: [1, -1.73, 0], G: [2, 0, 5], H: [1, 1.73, 5], I: [-1, 1.73, 5], J: [-2, 0, 5], K: [-1, -1.73, 5], L: [1, -1.73, 5], S: [0, 0, 7.5] }, aretes: ["AB", "BC", "CD", "DE", "EF", "FA", "GH", "HI", "IJ", "JK", "KL", "LG", "AG", "BH", "CI", "DJ", "EK", "FL", "SG", "SH", "SI", "SJ", "SK", "SL"], cachees: ["AB", "BC", "BH", "CD", "CI", "HI", "IJ", "IS"] }),
           correction:
             "a) Une colonne à six pans : un prisme droit à base hexagonale. Surmontée d'une pointe à six faces triangulaires : une pyramide à base hexagonale, posée sur le dessus du prisme.\nb) Faces : l'hexagone du bas, 6 rectangles et 6 triangles, soit $1 + 6 + 6 = 13$ faces. L'hexagone du haut n'est plus une face : la pyramide le recouvre.\nArêtes : 6 autour du bas, 6 verticales, 6 autour du haut, 6 qui montent à la pointe : $6 + 6 + 6 + 6 = 24$ arêtes.\nSommets : 6 en bas, 6 en haut, et la pointe : $6 + 6 + 1 = 13$ sommets.\nContrôle : $13 - 24 + 13 = 2$.\nc) La face du bas est remplacée par 6 triangles : $6 + 6 + 6 = 18$ faces. On ajoute 6 arêtes vers la seconde pointe : $24 + 6 = 30$ arêtes. Et un sommet : $13 + 1 = 14$ sommets. Contrôle : $18 - 30 + 14 = 2$.\n⛔ Le piège : additionner les faces du prisme (8) et celles de la pyramide (7), soit 15. L'hexagone où ils se collent disparaît des deux côtés : $15 - 2 = 13$.\nRéponse : un prisme et une pyramide à base hexagonale ; 13 faces, 24 arêtes, 13 sommets ; avec deux pointes, 18 faces, 30 arêtes, 14 sommets.",
@@ -765,6 +851,13 @@ export const exercicesSolides4e: FicheExercicesData = {
           titre: "Le silo à grain",
           enonce:
             "Un silo à grain est formé d'un cylindre de 6 m de diamètre et de 10 m de haut, surmonté d'un toit en forme de cône, de même diamètre et de 2 m de haut.\na) Décrire sa vue de dessus et sa vue de face.\nb) On coupe le silo par un plan horizontal à 4 m du sol. Quelle est la section ? Donner son rayon.\nc) Même question à 11 m du sol, au milieu de la hauteur du toit.\nd) On coupe le silo par un plan vertical qui passe par son axe. Quelle est la forme de la section ?",
+          reponses: [
+            { question: "b)", attendu: ["disque", "un disque", "une disque"] },
+            { question: "b) rayon", attendu: "3" },
+            { question: "c)", attendu: ["disque", "un disque", "une disque"] },
+            { question: "c) rayon", attendu: "1,5" },
+            { question: "d)", attendu: ["pentagone", "un pentagone", "une pentagone"] },
+          ],
           correction:
             "a) De dessus, je vois le toit, qui est rond : un disque de 3 m de rayon, dont le centre est la pointe du toit. De face, je vois un rectangle de 6 m sur 10 m (le cylindre), surmonté d'un triangle isocèle de 6 m de base et 2 m de haut (le cône).\nb) À 4 m, le plan coupe le cylindre parallèlement à sa base : la section est un disque de même rayon que la base, $6 \\div 2 = 3$ m.\nc) À 11 m, le plan coupe le toit, 1 m au-dessus de sa base : la section est encore un disque, mais plus petit. Sur la vue de face, le toit est un triangle ; à mi-hauteur, le plan passe par les milieux de ses deux côtés. D'après le théorème des milieux, la largeur y est la moitié de la base : $6 \\div 2 = 3$ m de diamètre, donc un rayon de $3 \\div 2 = 1{,}5$ m.\nd) Le plan contient l'axe : il coupe le cylindre selon un rectangle de 6 m sur 10 m, et le cône selon un triangle. La section a la même forme que la vue de face : un pentagone, un rectangle surmonté d'un triangle.\n⛔ Le piège : donner 3 m de rayon au c), comme dans le cylindre. Le cône se resserre vers la pointe : sa section parallèle à la base est plus petite.\nRéponse : de dessus un disque, de face un rectangle surmonté d'un triangle ; à 4 m, un disque de rayon 3 m ; à 11 m, un disque de rayon 1,5 m ; par l'axe, un pentagone.",
           schema: ensemble([
@@ -777,6 +870,16 @@ export const exercicesSolides4e: FicheExercicesData = {
           titre: "Le bassin de la piscine",
           enonce:
             "Le bassin d'une piscine mesure 25 m de long et 12,5 m de large (5 couloirs de 2,5 m). Sa profondeur passe régulièrement de 1 m au petit bain à 2 m au grand bain. L'eau du bassin, rempli à ras bord, forme un solide.\na) Quel est ce solide ? Quelles sont ses bases ?\nb) Combien a-t-il de faces, d'arêtes et de sommets ?\nc) On coupe l'eau par un plan vertical, dans le sens de la longueur, le long d'une ligne d'eau. Quelle est la section ?\nd) On la coupe par un plan vertical, dans le sens de la largeur, à 10 m du petit bain. Quelle est la section ? Donner ses dimensions.",
+          reponses: [
+            { question: "a)", attendu: ["prisme droit", "un prisme droit", "une prisme droit", "prisme droit à base trapèze", "un prisme droit à base trapèze"] },
+            { question: "a) bases", attendu: ["trapèzes", "trapèze", "des trapèzes"] },
+            { question: "b) fac.", attendu: "6" },
+            { question: "b) arêt.", attendu: "12" },
+            { question: "b) somm.", attendu: "8" },
+            { question: "c)", attendu: ["trapèze", "un trapèze", "une trapèze"] },
+            { question: "d)", attendu: ["rectangle", "un rectangle", "une rectangle"] },
+            { question: "d) dim.", attendu: "12,5 ; 1,4" },
+          ],
           correction:
             "a) Vu de côté, le bassin a la forme d'un trapèze : la surface de l'eau (25 m) en haut, le fond en pente en bas, entre deux bords verticaux de 1 m et 2 m. Ce trapèze est le même sur toute la largeur du bassin : c'est un prisme droit, couché, dont les bases sont les deux trapèzes des murs de côté.\nb) 2 trapèzes et 4 rectangles (la surface, le fond, les murs des deux bouts) : 6 faces. $4 + 4 + 4 = 12$ arêtes, et $4 + 4 = 8$ sommets. Les mêmes nombres qu'un pavé droit, et pourtant ce n'en est pas un : le fond penche.\nc) Le plan est parallèle aux murs de côté, donc aux bases du prisme : la section est un trapèze identique à la base, de 1 m et 2 m de profondeur aux bouts et de 25 m de long.\nd) Ce plan est parallèle au mur du petit bain : la section est un rectangle. Sa largeur est celle du bassin, 12,5 m. Sa hauteur est la profondeur à 10 m du petit bain. La profondeur gagne 1 m sur 25 m, soit $1 \\div 25 = 0{,}04$ m par mètre, donc $10 \\times 0{,}04 = 0{,}4$ m sur 10 m. Profondeur : $1 + 0{,}4 = 1{,}4$ m.\n⛔ Le piège : prendre la profondeur d'un bout, ou la moyenne, 1,5 m. La profondeur dépend de l'endroit où je coupe.\nRéponse : un prisme droit à base trapèze ; 6 faces, 12 arêtes, 8 sommets ; un trapèze ; un rectangle de 12,5 m sur 1,4 m.",
           schema: ensemble([
@@ -789,6 +892,11 @@ export const exercicesSolides4e: FicheExercicesData = {
           titre: "Le podium",
           enonce:
             "Pour une remise de médailles, on construit un podium avec des cubes de 20 cm d'arête. Chaque marche fait 3 cubes de large et 3 cubes de profondeur. La marche du 1er, au milieu, a 3 cubes de haut ; celle du 2e, à gauche, 2 cubes ; celle du 3e, à droite, 1 cube.\na) Combien faut-il de cubes ?\nb) Décrire la vue de face et la vue de droite.\nc) On peint tout le podium, sauf le dessous posé au sol. Combien de faces de cubes (des carrés de 20 cm de côté) faut-il peindre ? Quelle aire cela représente-t-il, en m² ?",
+          reponses: [
+            { question: "a)", attendu: "54" },
+            { question: "c) nb", attendu: "81" },
+            { question: "c) aire", attendu: "3,24" },
+          ],
           correction:
             "a) Chaque marche a $3 \\times 3 = 9$ colonnes. Le 2e : $9 \\times 2 = 18$ cubes ; le 1er : $9 \\times 3 = 27$ ; le 3e : $9 \\times 1 = 9$. En tout $18 + 27 + 9 = 54$ cubes.\nb) De face, je vois les trois marches en escalier : 3 colonnes de 2 carrés, 3 de 3, puis 3 de 1. De droite, je vois la plus haute marche, celle du 1er, qui dépasse les autres : un carré de 3 cubes sur 3.\nc) Je compte les carrés à peindre, côté par côté.\nDevant : $3 \\times 2 + 3 \\times 3 + 3 \\times 1 = 18$ carrés, et autant derrière : 18.\nDessus : une case par colonne, $9 \\times 3 = 27$ carrés.\nCôtés : à gauche, le 2e, $3 \\times 2 = 6$ ; à droite, le 3e, $3 \\times 1 = 3$.\nContremarches : le 1er dépasse le 2e d'un cube, $3 \\times 1 = 3$ ; il dépasse le 3e de deux cubes, $3 \\times 2 = 6$.\nEn tout $18 + 18 + 27 + 6 + 3 + 3 + 6 = 81$ carrés. Un carré a une aire de $0{,}2 \\times 0{,}2 = 0{,}04$ m², donc $81 \\times 0{,}04 = 3{,}24$ m².\n⛔ Le piège : oublier les contremarches, ces côtés du 1er qui dépassent des deux autres marches. De face, on ne les voit pas.\nRéponse : 54 cubes ; 81 carrés à peindre, soit 3,24 m².",
           schema: ensemble([

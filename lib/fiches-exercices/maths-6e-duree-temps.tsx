@@ -227,6 +227,9 @@ export const exercicesDureeTemps6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Un match de basket commence à $14$ h $35$. Il dure $1$ h $40$ min, pauses comprises. À quelle heure finit-il ?",
+          reponses: [
+            { attendu: ["16h15", "16:15"], exact: true },
+          ],
           correction:
             "J'avance par bonds, jusqu'aux heures pile.\nDe $14$ h $35$ à $15$ h : $25$ min.\nIl reste $100 - 25 = 75$ min, soit $1$ h $15$ min.\nDe $15$ h à $16$ h : $1$ h. Puis encore $15$ min : $16$ h $15$.\n⛔ Le piège : écrire « $15$ h $75$ ». Une heure a $60$ minutes : $75$ min, c'est $1$ h $15$ min.\nRéponse : le match finit à $16$ h $15$.",
           schema: frise(["14 h 35", "15 h", "16 h", "16 h 15"], ["25 min", "1 h", "15 min"], "1 h 40 min"),
@@ -234,6 +237,9 @@ export const exercicesDureeTemps6e: FicheExercicesData = {
         },
         {
           enonce: "Une balade à vélo part à $9$ h $50$ et revient à $12$ h $20$. Combien de temps a-t-elle duré ?",
+          reponses: [
+            { attendu: ["2h30", "2h30min", "150min"], exact: true },
+          ],
           correction:
             "Je fais une ligne du temps, et j'avance jusqu'aux heures pile.\nDe $9$ h $50$ à $10$ h : $10$ min.\nDe $10$ h à $12$ h : $2$ h.\nDe $12$ h à $12$ h $20$ : $20$ min.\nEn tout : $2$ h et $10 + 20 = 30$ min.\n⛔ Le piège : calculer $12{,}20 - 9{,}50 = 2{,}70$. Un horaire n'est pas un nombre décimal.\nRéponse : la balade a duré $2$ h $30$ min.",
           schema: frise(["9 h 50", "10 h", "12 h", "12 h 20"], ["10 min", "2 h", "20 min"], "2 h 30 min"),
@@ -241,6 +247,11 @@ export const exercicesDureeTemps6e: FicheExercicesData = {
         },
         {
           enonce: "Écris ces durées en minutes.\na) $2$ h\nb) $4$ h $15$ min\nc) $1$ h $45$ min",
+          reponses: [
+            { question: "a)", attendu: "120" },
+            { question: "b)", attendu: "255" },
+            { question: "c)", attendu: "105" },
+          ],
           correction:
             "Une heure, c'est $60$ minutes.\na) $2 \\times 60 = 120$ min.\nb) $4 \\times 60 = 240$, puis $240 + 15 = 255$ min.\nc) $60 + 45 = 105$ min.\n⛔ Le piège : lire $4$ h $15$ comme $415$ min.\nRéponse : a) $120$ min ; b) $255$ min ; c) $105$ min.",
           schema: ecranSeulement(
@@ -254,6 +265,11 @@ export const exercicesDureeTemps6e: FicheExercicesData = {
         },
         {
           enonce: "Écris ces durées en heures et minutes.\na) $75$ min\nb) $200$ min\nc) $310$ min",
+          reponses: [
+            { question: "a)", attendu: ["1h15", "1h15min"], exact: true },
+            { question: "b)", attendu: ["3h20", "3h20min"], exact: true },
+            { question: "c)", attendu: ["5h10", "5h10min"], exact: true },
+          ],
           correction:
             "Je fais des paquets de $60$ minutes : ce sont les heures.\na) $75 = 60 + 15$ : $1$ h $15$ min.\nb) $200 = 3 \\times 60 + 20$ : $3$ h $20$ min.\nc) $310 = 5 \\times 60 + 10$ : $5$ h $10$ min.\n⛔ Le piège : diviser par $100$ et écrire « $2$ h » pour $200$ min. Une heure a $60$ minutes.\nRéponse : a) $1$ h $15$ min ; b) $3$ h $20$ min ; c) $5$ h $10$ min.",
           schema: bande("200 min = 3 h 20 min", [
@@ -266,6 +282,11 @@ export const exercicesDureeTemps6e: FicheExercicesData = {
         },
         {
           enonce: "Combien de minutes valent ces durées ?\na) $1{,}5$ h\nb) $0{,}2$ h\nc) $2{,}25$ h",
+          reponses: [
+            { question: "a)", attendu: "90" },
+            { question: "b)", attendu: "12" },
+            { question: "c)", attendu: "135" },
+          ],
           correction:
             "Une heure, c'est $60$ min. Je regarde ce qui est après la virgule.\na) $0{,}5$ h, c'est une demi-heure : $30$ min. Donc $1{,}5$ h $= 60 + 30 = 90$ min.\nb) $0{,}2$ h, c'est $0{,}2 \\times 60 = 12$ min.\nc) $0{,}25$ h, c'est un quart d'heure : $15$ min. Donc $2{,}25$ h $= 120 + 15 = 135$ min.\n⛔ Le piège : lire $1{,}5$ h comme $1$ h $5$ min. La virgule ne sépare pas les heures des minutes.\nRéponse : a) $90$ min ; b) $12$ min ; c) $135$ min.",
           schema: bande(
@@ -282,6 +303,9 @@ export const exercicesDureeTemps6e: FicheExercicesData = {
         },
         {
           enonce: "Sur un panneau de randonnée, on lit : « durée $1{,}2$ h ». Nina dit : « c'est $1$ h $20$ min ». A-t-elle raison ?",
+          reponses: [
+            { attendu: ["non", "faux"] },
+          ],
           correction:
             "$1{,}2$ h, c'est $1$ h plus $0{,}2$ h.\n$0{,}2$ h $= 0{,}2 \\times 60 = 12$ min.\nDonc $1{,}2$ h $= 1$ h $12$ min, et non $1$ h $20$ min.\n⭐ En minutes : $1{,}2$ h $= 72$ min, mais $1$ h $20$ min $= 80$ min.\n⛔ Le piège : croire que le chiffre après la virgule donne les minutes. Une heure n'a pas $100$ minutes.\nRéponse : non, Nina se trompe : $1{,}2$ h $= 1$ h $12$ min.",
           schema: ecranSeulement(
@@ -294,6 +318,10 @@ export const exercicesDureeTemps6e: FicheExercicesData = {
         },
         {
           enonce: "a) Une chanson dure $3$ min $45$ s. Écris cette durée en secondes.\nb) Une autre dure $150$ s. Écris-la en minutes et secondes.",
+          reponses: [
+            { question: "a)", attendu: "225" },
+            { question: "b)", attendu: ["2min30", "2min30s"], exact: true },
+          ],
           correction:
             "Une minute, c'est $60$ secondes.\na) $3 \\times 60 = 180$, puis $180 + 45 = 225$ s.\nb) $150 = 2 \\times 60 + 30$ : $2$ min $30$ s.\n⛔ Le piège : écrire « $1$ min $50$ s » pour $150$ s. Une minute a $60$ secondes, pas $100$.\nRéponse : a) $225$ s ; b) $2$ min $30$ s.",
           schema: ecranSeulement(
@@ -308,6 +336,9 @@ export const exercicesDureeTemps6e: FicheExercicesData = {
         },
         {
           enonce: "Un gâteau doit cuire $45$ minutes. Il doit être prêt à $12$ h $10$. À quelle heure faut-il le mettre au four ?",
+          reponses: [
+            { attendu: ["11h25", "11:25"], exact: true },
+          ],
           correction:
             "Je recule sur la ligne du temps, depuis $12$ h $10$.\nDe $12$ h $10$ à $12$ h : je recule de $10$ min.\nIl reste à reculer $45 - 10 = 35$ min.\nDe $12$ h, je recule de $35$ min : $11$ h $25$.\n⭐ Je vérifie : de $11$ h $25$ à $12$ h $10$, il y a $35 + 10 = 45$ min.\n⛔ Le piège : écrire « $11$ h $65$ ». Je passe par l'heure pile.\nRéponse : il faut le mettre au four à $11$ h $25$.",
           schema: frise(["11 h 25", "12 h", "12 h 10"], ["35 min", "10 min"], "45 min"),
@@ -329,6 +360,12 @@ export const exercicesDureeTemps6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Voici les horaires de deux bus.\na) Combien de temps dure le trajet de la gare à la piscine ?\nb) Léa arrive à la gare à $7$ h $50$. Quel bus prend-elle ? Combien de temps attend-elle ?\nc) Ses cours commencent à $8$ h $30$. Arrive-t-elle à l'heure à l'école ?",
+          reponses: [
+            { question: "a)", attendu: "27" },
+            { question: "b) bus", attendu: ["B", "le bus B", "bus B"], exact: true },
+            { question: "b) att.", attendu: "25" },
+            { question: "c)", attendu: ["oui", "vrai"] },
+          ],
           figure: table(["Arrêt", "Bus A", "Bus B"], [
             ["Gare", "7 h 45", "8 h 15"],
             ["École", "7 h 58", "8 h 28"],
@@ -340,6 +377,11 @@ export const exercicesDureeTemps6e: FicheExercicesData = {
         },
         {
           enonce: "Tom a cours $5$ jours par semaine. Chaque jour, il a $6$ cours de $55$ minutes.\na) Combien de cours a-t-il par semaine ?\nb) Quelle est la durée totale de ses cours, en minutes ?\nc) Écris cette durée en heures et minutes.",
+          reponses: [
+            { question: "a)", attendu: "30" },
+            { question: "b)", attendu: "1650" },
+            { question: "c)", attendu: ["27h30", "27h30min"], exact: true },
+          ],
           correction:
             "a) $5 \\times 6 = 30$ cours.\nb) $30 \\times 55 = 1\\,650$ min.\nc) Je cherche les paquets de $60$ min : $27 \\times 60 = 1\\,620$.\nIl reste $1\\,650 - 1\\,620 = 30$ min.\nDonc $1\\,650$ min $= 27$ h $30$ min.\n⭐ Contrôle : $30$ cours d'un peu moins d'une heure, c'est un peu moins de $30$ h.\n⛔ Le piège : compter $30$ h, comme si un cours durait une heure.\nRéponse : $30$ cours ; $1\\,650$ min ; $27$ h $30$ min.",
           schema: ecranSeulement(
@@ -353,6 +395,11 @@ export const exercicesDureeTemps6e: FicheExercicesData = {
         },
         {
           enonce: "a) Combien d'heures y a-t-il dans $3$ jours ?\nb) Écris $100$ h en jours et heures.\nc) Écris $45$ jours en semaines et jours.",
+          reponses: [
+            { question: "a)", attendu: "72" },
+            { question: "b)", attendu: ["4 jours 4 h", "4 jours et 4 h", "4 j 4 h", "4 j et 4 h"], exact: true },
+            { question: "c)", attendu: ["6 semaines 3 jours", "6 semaines et 3 jours", "6 sem 3 j", "6 sem et 3 j"], exact: true },
+          ],
           correction:
             "Un jour, c'est $24$ h. Une semaine, c'est $7$ jours.\na) $3 \\times 24 = 72$ h.\nb) $4 \\times 24 = 96$, et $100 - 96 = 4$ : $4$ jours et $4$ h.\nc) $6 \\times 7 = 42$, et $45 - 42 = 3$ : $6$ semaines et $3$ jours.\n⛔ Le piège : diviser par $10$ ou par $100$. Chaque unité a son nombre : $60$, $24$ ou $7$.\nRéponse : a) $72$ h ; b) $4$ jours et $4$ h ; c) $6$ semaines et $3$ jours.",
           schema: ecranSeulement(
@@ -367,6 +414,10 @@ export const exercicesDureeTemps6e: FicheExercicesData = {
         },
         {
           enonce: "Le GPS annonce un trajet de $2{,}75$ h.\na) Écris cette durée en heures et minutes.\nb) Le départ est à $8$ h $20$. À quelle heure arrive-t-on ?",
+          reponses: [
+            { question: "a)", attendu: ["2h45", "2h45min", "165min"], exact: true },
+            { question: "b)", attendu: ["11h05", "11h5", "11:05"], exact: true },
+          ],
           correction:
             "a) $2{,}75$ h, c'est $2$ h plus $0{,}75$ h.\n$0{,}75$ h, ce sont trois quarts d'heure : $3 \\times 15 = 45$ min.\nDonc $2{,}75$ h $= 2$ h $45$ min.\nb) $8$ h $20 + 2$ h $= 10$ h $20$.\nPuis $10$ h $20 + 40$ min $= 11$ h, et encore $5$ min : $11$ h $05$.\n⛔ Le piège : lire $2{,}75$ h comme $2$ h $75$ min.\nRéponse : a) $2$ h $45$ min ; b) on arrive à $11$ h $05$.",
           schema: frise(["8 h 20", "10 h 20", "11 h", "11 h 05"], ["2 h", "40 min", "5 min"], "2 h 45 min"),
@@ -374,6 +425,10 @@ export const exercicesDureeTemps6e: FicheExercicesData = {
         },
         {
           enonce: "Chaque semaine, Inès fait $3$ séances de natation de $45$ min. Son frère fait $2$ séances de foot de $1$ h $10$ min. Qui fait le plus de sport ? De combien de minutes ?",
+          reponses: [
+            { question: "qui", attendu: ["son frère", "le frère", "frère", "le frère d'Inès"], exact: true },
+            { question: "écart", attendu: "5" },
+          ],
           correction:
             "Je mets tout en minutes.\nInès : $3 \\times 45 = 135$ min.\nSon frère : $1$ h $10$ min $= 70$ min, et $2 \\times 70 = 140$ min.\n$140 - 135 = 5$ min.\n⛔ Le piège : dire « Inès, car elle a plus de séances ». Ce qui compte, c'est la durée totale.\nRéponse : son frère fait $5$ min de plus.",
           schema: table(["Qui", "Calcul", "Total"], [
@@ -384,6 +439,9 @@ export const exercicesDureeTemps6e: FicheExercicesData = {
         },
         {
           enonce: "Un bateau de nuit part à $21$ h $40$. Il arrive le lendemain à $6$ h $15$. Combien de temps dure la traversée ?",
+          reponses: [
+            { attendu: ["8h35", "8h35min"], exact: true },
+          ],
           correction:
             "Je passe par les heures pile, et par minuit.\nDe $21$ h $40$ à $22$ h : $20$ min.\nDe $22$ h à minuit : $2$ h.\nDe minuit à $6$ h : $6$ h.\nDe $6$ h à $6$ h $15$ : $15$ min.\nEn tout : $2 + 6 = 8$ h, et $20 + 15 = 35$ min.\n⛔ Le piège : calculer de $6$ h $15$ à $21$ h $40$. Le bateau part le soir et passe minuit.\nRéponse : la traversée dure $8$ h $35$ min.",
           schema: frise(["21 h 40", "22 h", "minuit", "6 h", "6 h 15"], ["20 min", "2 h", "6 h", "15 min"], "8 h 35 min"),
@@ -391,6 +449,10 @@ export const exercicesDureeTemps6e: FicheExercicesData = {
         },
         {
           enonce: "Pour un gratin, il faut préparer $25$ min, cuire $1$ h $10$ min, puis laisser reposer $15$ min. Jules commence à $17$ h $50$.\na) Combien de temps dure la recette ?\nb) À quelle heure le gratin est-il prêt ?",
+          reponses: [
+            { question: "a)", attendu: ["1h50", "1h50min", "110min"], exact: true },
+            { question: "b)", attendu: ["19h40", "19:40"], exact: true },
+          ],
           correction:
             "a) J'additionne les minutes : $25 + 10 + 15 = 50$ min. Plus $1$ h : $1$ h $50$ min.\nb) Je place chaque étape sur la ligne du temps.\n$17$ h $50 + 25$ min : $10$ min pour $18$ h, puis $15$ min. Il est $18$ h $15$.\n$18$ h $15 + 1$ h $10$ min $= 19$ h $25$.\n$19$ h $25 + 15$ min $= 19$ h $40$.\n⭐ Contrôle : $17$ h $50 + 1$ h $50$ min $= 19$ h $40$.\n⛔ Le piège : oublier le repos. La recette a TROIS étapes.\nRéponse : a) $1$ h $50$ min ; b) le gratin est prêt à $19$ h $40$.",
           schema: ecranSeulement(frise(["17 h 50", "18 h 15", "19 h 25", "19 h 40"], ["25 min", "1 h 10", "15 min"], "1 h 50 min")),
@@ -398,6 +460,9 @@ export const exercicesDureeTemps6e: FicheExercicesData = {
         },
         {
           enonce: "Une course de ski de fond a duré $4\\,000$ secondes. Écris cette durée en heures, minutes et secondes.",
+          reponses: [
+            { attendu: ["1h6min40s", "1h06min40s"], exact: true },
+          ],
           correction:
             "Une heure, c'est $60 \\times 60 = 3\\,600$ s.\n$4\\,000 - 3\\,600 = 400$ s : il y a $1$ h, et il reste $400$ s.\n$400 = 6 \\times 60 + 40$ : $6$ min et $40$ s.\n⛔ Le piège : diviser par $100$ et écrire « $40$ min ». Il faut passer par $60$, deux fois.\nRéponse : $1$ h $6$ min $40$ s.",
           schema: table(["Étape", "Secondes"], [
@@ -425,6 +490,12 @@ export const exercicesDureeTemps6e: FicheExercicesData = {
         {
           titre: "Le voyage en train",
           enonce: "Maé voyage en deux trains. Elle change de train à Lyon. Voici les horaires.\na) Combien de temps dure le premier trajet ?\nb) Combien de temps attend-elle à Lyon ?\nc) Combien de temps dure tout le voyage ?\nd) Le premier train a $35$ min de retard. Peut-elle prendre le deuxième train ?",
+          reponses: [
+            { question: "a)", attendu: ["2h8", "2h8min", "2h08", "2h08min", "128min"], exact: true },
+            { question: "b)", attendu: "24" },
+            { question: "c)", attendu: ["4h17", "4h17min", "257min"], exact: true },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           figure: table(["Train", "Départ", "Arrivée"], [
             ["1", "7 h 48", "9 h 56"],
             ["2", "10 h 20", "12 h 05"],
@@ -437,6 +508,12 @@ export const exercicesDureeTemps6e: FicheExercicesData = {
         {
           titre: "Le marathon",
           enonce: "Un coureur finit un marathon en $3{,}5$ h (un modèle).\na) Écris ce temps en heures et minutes.\nb) Il part à $8$ h $45$. À quelle heure arrive-t-il ?\nc) Son amie met $3$ h $50$ min. Combien de minutes de plus que lui ?\nd) Elle part en même temps. À quelle heure arrive-t-elle ?",
+          reponses: [
+            { question: "a)", attendu: ["3h30", "3h30min", "210min"], exact: true },
+            { question: "b)", attendu: ["12h15", "12:15"], exact: true },
+            { question: "c)", attendu: "20" },
+            { question: "d)", attendu: ["12h35", "12:35"], exact: true },
+          ],
           correction:
             "a) $3{,}5$ h, c'est $3$ h et une demi-heure : $3$ h $30$ min.\nb) $8$ h $45 + 3$ h $= 11$ h $45$.\nPuis $15$ min pour $12$ h, et encore $15$ min : $12$ h $15$.\nc) $3$ h $50$ min $- 3$ h $30$ min $= 20$ min.\nd) Elle arrive $20$ min après lui : $12$ h $15 + 20$ min $= 12$ h $35$.\n⛔ Le piège : lire $3{,}5$ h comme $3$ h $5$ min.\nRéponse : a) $3$ h $30$ min ; b) $12$ h $15$ ; c) $20$ min ; d) $12$ h $35$.",
           schema: frise(["8 h 45", "11 h 45", "12 h", "12 h 15", "12 h 35"], ["3 h", "15 min", "15 min", "20 min"], "3 h 50 min"),
@@ -445,6 +522,11 @@ export const exercicesDureeTemps6e: FicheExercicesData = {
         {
           titre: "La nuit de Sami",
           enonce: "Sami se couche à $21$ h $45$. Il se lève à $7$ h $10$.\na) Combien de temps dort-il ?\nb) Il dort pareil $5$ nuits de suite. Combien de temps en tout ?\nc) Samedi, il se couche à $23$ h $20$ et dort autant. À quelle heure se réveille-t-il ?",
+          reponses: [
+            { question: "a)", attendu: ["9h25", "9h25min", "565min"], exact: true },
+            { question: "b)", attendu: ["47h5", "47h5min", "47h05", "47h05min", "2825min"], exact: true },
+            { question: "c)", attendu: ["8h45", "8:45"], exact: true },
+          ],
           correction:
             "a) De $21$ h $45$ à $22$ h : $15$ min. De $22$ h à minuit : $2$ h.\nDe minuit à $7$ h : $7$ h. De $7$ h à $7$ h $10$ : $10$ min.\nEn tout : $9$ h $25$ min.\nb) $5 \\times 9 = 45$ h et $5 \\times 25 = 125$ min.\n$125$ min $= 2$ h $5$ min. En tout : $47$ h $5$ min.\nc) De $23$ h $20$ à minuit : $40$ min.\nIl reste $9$ h $25$ min $- 40$ min $= 8$ h $45$ min.\nIl se réveille à $8$ h $45$.\n⛔ Le piège : oublier de passer par minuit. Après minuit, on repart de $0$ h.\nRéponse : a) $9$ h $25$ min ; b) $47$ h $5$ min ; c) $8$ h $45$.",
           schema: frise(["21 h 45", "22 h", "minuit", "7 h", "7 h 10"], ["15 min", "2 h", "7 h", "10 min"], "9 h 25 min"),
@@ -453,6 +535,14 @@ export const exercicesDureeTemps6e: FicheExercicesData = {
         {
           titre: "La randonnée au refuge",
           enonce: "Une randonnée au refuge : montée $2{,}5$ h, pause $45$ min, descente $1{,}75$ h. Le départ est à $8$ h $50$.\na) Écris la montée et la descente en heures et minutes.\nb) À quelle heure arrive-t-on au refuge ? À quelle heure repart-on ?\nc) À quelle heure est-on de retour ?\nd) Il faut être rentré avant $16$ h. Avec combien d'avance ?",
+          reponses: [
+            { question: "a) mont.", attendu: ["2h30", "2h30min", "150min"], exact: true },
+            { question: "a) desc.", attendu: ["1h45", "1h45min", "105min"], exact: true },
+            { question: "b) arr.", attendu: ["11h20", "11:20"], exact: true },
+            { question: "b) dép.", attendu: ["12h05", "12h5", "12:05"], exact: true },
+            { question: "c)", attendu: ["13h50", "13:50"], exact: true },
+            { question: "d)", attendu: ["2h10", "2h10min", "130min"], exact: true },
+          ],
           correction:
             "a) $2{,}5$ h $= 2$ h $30$ min.\n$1{,}75$ h $= 1$ h $45$ min, car $0{,}75$ h, ce sont trois quarts d'heure.\nb) $8$ h $50 + 2$ h $= 10$ h $50$. Puis $10$ h $50 + 30$ min $= 11$ h $20$.\nAprès la pause : $11$ h $20 + 45$ min $= 12$ h $05$.\nc) $12$ h $05 + 1$ h $45$ min $= 13$ h $50$.\nd) De $13$ h $50$ à $16$ h : $10$ min, puis $2$ h. Soit $2$ h $10$ min d'avance.\n⛔ Le piège : lire $1{,}75$ h comme $1$ h $75$ min.\nRéponse : a) $2$ h $30$ min et $1$ h $45$ min ; b) $11$ h $20$, puis $12$ h $05$.\nc) $13$ h $50$ ; d) $2$ h $10$ min d'avance.",
           schema: frise(["8 h 50", "11 h 20", "12 h 05", "13 h 50"], ["2 h 30", "45 min", "1 h 45"], "5 h"),

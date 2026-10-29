@@ -154,8 +154,20 @@ function sansMembreGauche(s: string): string {
   return t.trim();
 }
 
-/** Les unités courantes en fin de réponse, qu'on ignore pour le calcul. */
-const UNITE = /\s*(mm|cm|dm|km|m|g|kg|mg|l|cl|ml|dl|s|min|h|€|°|%|cm²|m²|km²|cm³|m³|cm2|m2|cm3|m3)\s*$/i;
+/** Les unités courantes en fin de réponse, qu'on ignore pour le calcul — y
+ *  compris les composées (km/h, g/cm³, hab/km², €/kg) et kWh. */
+const UNITE =
+  /\s*([\p{L}€]+\s*\/\s*\p{L}+[²³23]?|kwh|wh|kw|w|ha|mm|cm|dm|km|m|g|kg|mg|t|l|cl|ml|dl|s|min|h|ans?|jours?|€|°|%|cm²|m²|km²|dm²|mm²|cm³|m³|dm³|mm³|cm2|m2|km2|dm2|cm3|m3|dm3)\s*$/iu;
+
+/** « g(2) = 7 » → « g(2) » ; « 7 » → null. Le membre de gauche d'une réponse. */
+function membreGauche(s: string): string | null {
+  const t = s.trim().replace(/^S\s*=\s*/i, "");
+  const egal = t.lastIndexOf("=");
+  if (egal >= 0 && /^[\p{L}\s()0-9]*$/u.test(t.slice(0, egal)) && /\p{L}/u.test(t.slice(0, egal))) {
+    return texteNormalise(t.slice(0, egal));
+  }
+  return null;
+}
 
 function texteNormalise(s: string): string {
   return s
@@ -202,14 +214,27 @@ export function saisieJuste(saisie: string, attendue: ReponseAttendue): boolean 
   if (!saisie.trim()) return false;
   const formes = Array.isArray(attendue.attendu) ? attendue.attendu : [attendue.attendu];
   const eleve = sansMembreGauche(saisie);
+  const gaucheEleve = membreGauche(saisie);
   return formes.some((forme) => {
+    // ⛔ « g(3) = 7 » ne vaut pas « g(2) = 7 » : quand l'élève ET la réponse
+    // écrivent un membre de gauche, il doit être le même.
+    const gaucheJuste = membreGauche(forme);
+    if (gaucheEleve && gaucheJuste && gaucheEleve !== gaucheJuste) return false;
     const juste = sansMembreGauche(forme);
     if (attendue.exact) return formeNormalisee(eleve) === formeNormalisee(juste);
     if (texteNormalise(eleve) === texteNormalise(juste)) return true;
     // Plusieurs valeurs (« 2 ; 5 », solutions d'une équation) : même liste, tout ordre.
-    const decoupe = (t: string) => t.split(/\s*[;]\s*|\s+(?:et|ou)\s+/).filter(Boolean);
-    const le = decoupe(eleve);
-    const lj = decoupe(juste);
+    // « x = 4 ou x = -1 » : le « x = » s'enlève dans CHAQUE élément.
+    const decoupe = (t: string) =>
+      t
+        .trim()
+        .replace(/^S\s*=\s*/i, "")
+        .replace(/^\{(.*)\}$/, "$1")
+        .split(/\s*[;]\s*|\s+(?:et|ou)\s+/)
+        .filter(Boolean)
+        .map(sansMembreGauche);
+    const le = decoupe(saisie);
+    const lj = decoupe(forme);
     if (lj.length > 1 || le.length > 1) {
       if (le.length !== lj.length) return false;
       const restantes = [...lj];
@@ -226,8 +251,13 @@ export function saisieJuste(saisie: string, attendue: ReponseAttendue): boolean 
 
 function egaux(a: string, b: string, tolerance: number): boolean {
   if (texteNormalise(a) === texteNormalise(b)) return true;
+  // L'unité ne s'enlève que si la réponse attendue est un NOMBRE : dans « 3a »
+  // ou « 2m + 1 », la lettre finale est une inconnue, pas des ares ni des mètres.
+  const nombre = !/\p{L}/u.test(b.replace(UNITE, "").replace(/π|pi/g, ""));
   try {
-    return memesValeurs(a.replace(UNITE, ""), b.replace(UNITE, ""), tolerance);
+    return nombre
+      ? memesValeurs(a.replace(UNITE, ""), b.replace(UNITE, ""), tolerance)
+      : memesValeurs(a, b, tolerance);
   } catch {
     return false;
   }

@@ -63,6 +63,9 @@ export const exercicesAlgorithmique3e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Voici un programme de calcul écrit en blocs. On répond $2$ à la question. Que dit le lutin à la fin ?",
+          reponses: [
+            { attendu: "15" },
+          ],
           figure: programme(["demander 'Nombre ?'", "mettre x à réponse", "mettre x à x + 3", "mettre x à x * 4", "mettre x à x - 5", "dire x"]),
           correction:
             "Je suis les blocs un par un, en gardant la valeur de x à chaque ligne.\nx vaut $2$, puis $2 + 3 = 5$, puis $5 \\times 4 = 20$, puis $20 - 5 = 15$.\nRéponse : le lutin dit $15$.\n⛔ Le piège : tout écrire en une ligne, $2 + 3 \\times 4 - 5$, et trouver $9$. Le programme ajoute 3 AVANT de multiplier : en une ligne, il faut des parenthèses, $(2 + 3) \\times 4 - 5 = 15$.",
@@ -71,6 +74,9 @@ export const exercicesAlgorithmique3e: FicheExercicesData = {
         },
         {
           enonce: "On appelle $x$ le nombre choisi. Écris le résultat de ce programme en fonction de $x$, puis développe-le.",
+          reponses: [
+            { attendu: ["3x-3", "-3+3x"], exact: true },
+          ],
           figure: programme(["demander 'Nombre ?'", "mettre x à réponse", "mettre x à x - 1", "mettre x à x * 3", "dire x"]),
           correction:
             "Le premier calcul enlève 1 : j'obtiens $x - 1$.\nLe second multiplie TOUT ce résultat par 3 : j'obtiens $3(x - 1)$.\nJe développe : $3(x - 1) = 3x - 3$.\nRéponse : le programme calcule $3x - 3$.\n⭐ Contrôle avec 5 : le programme donne $(5 - 1) \\times 3 = 12$, et $3 \\times 5 - 3 = 12$.\n⛔ Le piège : écrire $3x - 1$. La multiplication porte sur le résultat entier, pas seulement sur $x$.",
@@ -79,6 +85,9 @@ export const exercicesAlgorithmique3e: FicheExercicesData = {
         },
         {
           enonce: "Dans un jeu vidéo de basket, le score est une variable. Un bonus final double le score. Que dit le lutin ?",
+          reponses: [
+            { attendu: "12" },
+          ],
           figure: programme(["mettre score à 0", "ajouter 2 à score", "ajouter 3 à score", "ajouter 1 à score", "mettre score à score * 2", "dire score"]),
           correction:
             "« ajouter » augmente le score, il ne le remplace pas.\nLe score vaut $0$, puis $0 + 2 = 2$, puis $2 + 3 = 5$, puis $5 + 1 = 6$.\nLe dernier bloc remplace le score par son double : $6 \\times 2 = 12$.\nRéponse : le lutin dit $12$.\n⛔ Le piège : lire « ajouter 1 à score » comme « mettre score à 1 ». On trouverait $1 \\times 2 = 2$ : les paniers d'avant seraient effacés.",
@@ -87,6 +96,9 @@ export const exercicesAlgorithmique3e: FicheExercicesData = {
         },
         {
           enonce: "Dans une expérience, une colonie de $100$ bactéries triple toutes les heures. Ce programme la suit pendant $4$ heures. Que dit le lutin ?",
+          reponses: [
+            { attendu: "8100" },
+          ],
           figure: programme(["mettre n à 100", "répéter 4 fois", "  mettre n à n * 3", "dire n"]),
           correction:
             "À chaque tour de la boucle, je multiplie la valeur du moment par 3.\nTour 1 : $100 \\times 3 = 300$. Tour 2 : $300 \\times 3 = 900$. Tour 3 : $900 \\times 3 = 2\\,700$. Tour 4 : $2\\,700 \\times 3 = 8\\,100$.\nRéponse : le lutin dit $8\\,100$ : il y a $8\\,100$ bactéries au bout de $4$ heures.\n⛔ Le piège : calculer $100 \\times 3 \\times 4 = 1\\,200$. Répéter 4 fois « multiplier par 3 », c'est multiplier par $3 \\times 3 \\times 3 \\times 3 = 81$, pas par $12$.",
@@ -95,6 +107,11 @@ export const exercicesAlgorithmique3e: FicheExercicesData = {
         },
         {
           enonce: "Une appli de course à pied conseille de sortir selon la température. Que dit le lutin si on répond $3$ ? $18$ ? $25$ ?",
+          reponses: [
+            { question: "avec 3", attendu: ["on reste"] },
+            { question: "avec 18", attendu: ["on court"] },
+            { question: "avec 25", attendu: ["on reste"] },
+          ],
           figure: programme(["demander 'Température ?'", "mettre t à réponse", "si t > 5 et t < 25 alors", "  dire 'on court'", "sinon", "  dire 'on reste'"]),
           correction:
             "La condition est vraie seulement si t est plus grand que 5 ET plus petit que 25.\nAvec $3$ : « t > 5 » est fausse, donc toute la condition est fausse. Le lutin dit « on reste ».\nAvec $18$ : $18 > 5$ et $18 < 25$, les deux sont vraies. Le lutin dit « on court ».\nAvec $25$ : « t < 25 » est fausse, car $25$ n'est pas plus petit que $25$. Le lutin dit « on reste ».\nRéponse : dans l'ordre, « on reste », « on court », « on reste ».\n⛔ Le piège : la borne. « < 25 » exclut $25$ ; pour l'inclure, il faudrait écrire « t < 26 » avec des entiers.",
@@ -104,6 +121,11 @@ export const exercicesAlgorithmique3e: FicheExercicesData = {
         {
           enonce:
             "Un club de kayak annule la sortie si le vent dépasse $40$ km/h ou si les vagues dépassent $2$ m. Que dit le lutin :\na) avec un vent de $30$ km/h et des vagues de $3$ m ?\nb) avec $45$ km/h et $1$ m ?\nc) avec $35$ km/h et $1{,}5$ m ?",
+          reponses: [
+            { question: "a)", attendu: ["sortie annulée", "annulée"] },
+            { question: "b)", attendu: ["sortie annulée", "annulée"] },
+            { question: "c)", attendu: ["on part"] },
+          ],
           figure: programme(["demander 'Vent ?'", "mettre v à réponse", "demander 'Vagues ?'", "mettre h à réponse", "si v > 40 ou h > 2 alors", "  dire 'sortie annulée'", "sinon", "  dire 'on part'"]),
           correction:
             "Avec « ou », il suffit qu'UNE des deux conditions soit vraie.\na) $30 > 40$ est faux, mais $3 > 2$ est vrai. Réponse : « sortie annulée ».\nb) $45 > 40$ est vrai. Réponse : « sortie annulée ».\nc) $35 > 40$ est faux et $1{,}5 > 2$ est faux. Réponse : « on part ».\n⛔ Le piège : confondre « ou » et « et ». Avec « et », le cas a) donnerait « on part » : on sortirait avec des vagues de $3$ m parce que le vent est calme.",
@@ -113,6 +135,10 @@ export const exercicesAlgorithmique3e: FicheExercicesData = {
         {
           enonce:
             "Un terrain de volley mesure $18$ m sur $9$ m. Ce programme doit calculer le périmètre d'un rectangle.\na) Que dit-il si on répond $18$ puis $9$ ?\nb) Quel est le vrai périmètre du terrain ?\nc) Corrige le bloc faux.",
+          reponses: [
+            { question: "a)", attendu: "45" },
+            { question: "b)", attendu: "54" },
+          ],
           figure: programme(["demander 'Longueur ?'", "mettre L à réponse", "demander 'Largeur ?'", "mettre l à réponse", "mettre p à 2 * L + l", "dire p"]),
           correction:
             "a) L'ordinateur fait la multiplication d'abord : $2 \\times 18 + 9 = 36 + 9 = 45$. Réponse : il dit $45$.\nb) Le périmètre compte deux longueurs et deux largeurs : $2 \\times (18 + 9) = 2 \\times 27 = 54$. Réponse : $54$ m.\nc) Il faut des parenthèses : « mettre p à 2 * (L + l) ». Avec $18$ et $9$, le programme dit alors $54$.\n⛔ Le piège : oublier que l'ordinateur respecte les priorités, comme sur une copie. Sans parenthèses, seule la longueur est doublée.",
@@ -122,6 +148,9 @@ export const exercicesAlgorithmique3e: FicheExercicesData = {
         {
           enonce:
             "Louer un kayak coûte $12$ € de forfait, plus $3$ € par heure. Complète le bloc « mettre prix à … » pour que le programme calcule le prix pour h heures, puis donne le prix pour $4$ heures.",
+          reponses: [
+            { attendu: "24" },
+          ],
           figure: programme(["demander 'Heures ?'", "mettre h à réponse", "mettre prix à ...", "dire prix"]),
           correction:
             "Le forfait se paie une seule fois : $12$. Chaque heure coûte $3$ €, donc h heures coûtent $3 \\times h$.\nJe complète : « mettre prix à 12 + 3 * h ».\nPour $4$ heures : $12 + 3 \\times 4 = 12 + 12 = 24$. Réponse : $24$ €.\n⛔ Le piège : écrire « (12 + 3) * h ». On ferait payer le forfait à chaque heure : $15 \\times 4 = 60$ €.",
@@ -146,6 +175,10 @@ export const exercicesAlgorithmique3e: FicheExercicesData = {
         {
           enonce:
             "a) Quel résultat donne ce programme avec $7$ ?\nb) Et avec $-3$ ?\nc) Que remarques-tu ?\nd) Prouve-le pour tout nombre $x$.",
+          reponses: [
+            { question: "a)", attendu: "14" },
+            { question: "b)", attendu: "-6" },
+          ],
           figure: programme(["demander 'Nombre ?'", "mettre x à réponse", "mettre x à x + 5", "mettre x à x * 2", "mettre x à x - 10", "dire x"]),
           correction:
             "a) $7 + 5 = 12$, puis $12 \\times 2 = 24$, puis $24 - 10 = 14$. Réponse : $14$.\nb) $-3 + 5 = 2$, puis $2 \\times 2 = 4$, puis $4 - 10 = -6$. Réponse : $-6$.\nc) $14$ est le double de $7$, et $-6$ le double de $-3$ : le programme semble doubler le nombre choisi.\nd) J'écris le programme en $x$, puis je développe : $2(x + 5) - 10 = 2x + 10 - 10 = 2x$.\nRéponse : le programme donne toujours le double du nombre choisi.\n⛔ Le piège : croire que deux exemples prouvent la règle. Ils la font deviner ; seul le calcul avec $x$ la prouve.",
@@ -154,6 +187,10 @@ export const exercicesAlgorithmique3e: FicheExercicesData = {
         },
         {
           enonce: "a) Quel résultat donne ce programme avec $-2$ ?\nb) Quel nombre faut-il choisir pour obtenir $20$ ?",
+          reponses: [
+            { question: "a)", attendu: "-10" },
+            { question: "b)", attendu: "8" },
+          ],
           figure: programme(["demander 'Nombre ?'", "mettre x à réponse", "mettre x à x * 3", "mettre x à x - 4", "dire x"]),
           correction:
             "a) $-2 \\times 3 = -6$, puis $-6 - 4 = -10$. Réponse : $-10$.\nb) Le programme calcule $3x - 4$. Je résous $3x - 4 = 20$.\n$3x = 24$, donc $x = 8$.\n⭐ Contrôle : $8 \\times 3 = 24$ et $24 - 4 = 20$.\nRéponse : il faut choisir $8$.\n⛔ Le piège : remonter le programme dans le même ordre (diviser par 3, puis ajouter 4). Pour remonter, on défait les blocs à l'ENVERS : d'abord ajouter 4, puis diviser par 3.",
@@ -163,6 +200,11 @@ export const exercicesAlgorithmique3e: FicheExercicesData = {
         {
           enonce:
             "On suppose, pour l'exercice, qu'un glacier long de $3\\,000$ m recule de $12$ m chaque année à partir de 2026.\na) Que dit le lutin ?\nb) Combien de fois la boucle a-t-elle tourné ? Quelle est alors la longueur du glacier ?",
+          reponses: [
+            { question: "a)", attendu: "2035" },
+            { question: "b) tours", attendu: "9" },
+            { question: "b) L", attendu: "2892" },
+          ],
           figure: programme(["mettre L à 3000", "mettre an à 2026", "répéter jusqu'à L < 2900", "  mettre L à L - 12", "  ajouter 1 à an", "dire an"]),
           correction:
             "À chaque tour, le glacier perd $12$ m et l'année avance de $1$. La boucle s'arrête dès que L est plus petit que $2\\,900$.\nAprès $8$ tours : $3\\,000 - 8 \\times 12 = 2\\,904$. $2\\,904$ n'est pas plus petit que $2\\,900$ : la boucle continue.\nAprès $9$ tours : $3\\,000 - 9 \\times 12 = 2\\,892$, qui est plus petit que $2\\,900$ : la boucle s'arrête.\na) Réponse : le lutin dit $2035$.\nb) Réponse : la boucle a tourné $9$ fois, et le glacier mesure $2\\,892$ m.\n⛔ Le piège : diviser $100$ par $12$ et s'arrêter à $8$ tours. $8$ tours ne font que $96$ m de recul : il en faut un neuvième pour passer SOUS $2\\,900$.",
@@ -172,6 +214,10 @@ export const exercicesAlgorithmique3e: FicheExercicesData = {
         {
           enonce:
             "Un podomètre compte les jours où l'on a marché AU MOINS $10\\,000$ pas. Sur une semaine, on entre : $8\\,200$ ; $12\\,500$ ; $10\\,000$ ; $6\\,400$ ; $11\\,000$ ; $9\\,999$ ; $15\\,000$.\na) Que dit le lutin ?\nb) Est-ce le bon nombre de jours ?\nc) Corrige le programme.",
+          reponses: [
+            { question: "a)", attendu: "3" },
+            { question: "b)", attendu: ["non", "faux"] },
+          ],
           figure: programme(["mettre jours à 0", "répéter 7 fois", "  demander 'Pas ?'", "  si réponse > 10000 alors", "    ajouter 1 à jours", "dire jours"]),
           correction:
             "a) Je teste « réponse > 10000 » pour chaque jour : $12\\,500$, $11\\,000$ et $15\\,000$ passent ; $10\\,000$ ne passe pas, car $10\\,000$ n'est pas plus grand que $10\\,000$. Réponse : le lutin dit $3$.\nb) Non. « Au moins $10\\,000$ » inclut $10\\,000$ : il y a $4$ bons jours.\nc) Les pas sont des nombres entiers : « au moins $10\\,000$ », c'est « plus que $9\\,999$ ». J'écris « si réponse > 9999 alors ». Le lutin dit alors $4$.\n⛔ Le piège : le jour à $10\\,000$ pas pile. « > » exclut la borne ; Scratch n'a pas de bloc « supérieur ou égal ».",
@@ -181,6 +227,10 @@ export const exercicesAlgorithmique3e: FicheExercicesData = {
         {
           enonce:
             "Le lutin laisse une trace quand il avance.\na) Quelle figure trace ce programme ?\nb) Quelle est la longueur totale du tracé ?\nc) Écris un programme qui trace un octogone régulier de côté $25$.",
+          reponses: [
+            { question: "a)", attendu: ["hexagone régulier", "hexagone", "un hexagone régulier"] },
+            { question: "b)", attendu: "240" },
+          ],
           figure: programme(["stylo en position d'écriture", "répéter 6 fois", "  avancer de 40", "  tourner de 60 degrés"]),
           correction:
             "a) Six côtés de même longueur, et le lutin tourne de $6 \\times 60 = 360$ degrés en tout : il revient à son point de départ. Réponse : un hexagone régulier.\nb) $6 \\times 40 = 240$. Réponse : le tracé mesure $240$ pas.\nc) Un octogone a $8$ côtés. Pour faire un tour complet en $8$ virages, chaque virage vaut $360 \\div 8 = 45$ degrés. Le tracé mesure alors $8 \\times 25 = 200$ pas.\n⛔ Le piège : tourner de l'angle INTÉRIEUR de la figure. Avec « tourner de 120 degrés » au lieu de $60$, le lutin trace un triangle, parcouru deux fois.",
@@ -190,6 +240,9 @@ export const exercicesAlgorithmique3e: FicheExercicesData = {
         {
           enonce:
             "Ce programme doit calculer $1 + 2 + 3 + \\dots + 10$.\na) Que dit le lutin ?\nb) Pourquoi est-ce faux ?\nc) Corrige-le.",
+          reponses: [
+            { question: "a)", attendu: "65" },
+          ],
           figure: programme(["mettre s à 0", "mettre i à 1", "répéter 10 fois", "  ajouter 1 à i", "  ajouter i à s", "dire s"]),
           correction:
             "a) Au premier tour, i passe à $2$ AVANT d'être ajouté : s reçoit $2$, puis $3$, … jusqu'à $11$. Je calcule $2 + 3 + \\dots + 11 = 65$. Réponse : le lutin dit $65$.\nb) Le $1$ n'est jamais ajouté, et le $11$ l'est en trop : $65 = 55 - 1 + 11$.\nc) J'échange les deux blocs de la boucle : d'abord « ajouter i à s », puis « ajouter 1 à i ». Le lutin dit alors $55$.\n⭐ Contrôle : $1 + 2 + \\dots + 10 = \\dfrac{10 \\times 11}{2} = 55$.\n⛔ Le piège : l'ORDRE des blocs dans la boucle. Les mêmes blocs, dans l'autre ordre, ne font pas le même calcul.",
@@ -204,6 +257,12 @@ export const exercicesAlgorithmique3e: FicheExercicesData = {
         {
           enonce:
             "Un parc naturel affiche ses tarifs avec ce programme.\na) Quel prix dit-il pour un visiteur de $8$ ans ? $12$ ans ? $64$ ans ? $65$ ans ?\nb) Le parc crée un tarif « de $12$ à $17$ ans inclus ». Écris la condition, avec des âges entiers.",
+          reponses: [
+            { question: "8 ans", attendu: "5" },
+            { question: "12 ans", attendu: "9" },
+            { question: "64 ans", attendu: "9" },
+            { question: "65 ans", attendu: "5" },
+          ],
           figure: programme(["demander 'Âge ?'", "mettre a à réponse", "si a < 12 ou a > 64 alors", "  mettre prix à 5", "sinon", "  mettre prix à 9", "dire prix"]),
           correction:
             "a) $8 < 12$ : la condition est vraie, prix $5$ €.\n$12$ : $12 < 12$ est faux et $12 > 64$ est faux, prix $9$ €.\n$64$ : $64 > 64$ est faux, prix $9$ €.\n$65$ : $65 > 64$ est vrai, prix $5$ €.\nRéponse : $5$ €, $9$ €, $9$ €, $5$ €.\nb) Il faut les deux à la fois, donc « et ». $12$ inclus, c'est « plus que $11$ » ; $17$ inclus, c'est « moins que $18$ ». Réponse : « a > 11 et a < 18 ».\n⛔ Le piège : écrire « a > 12 et a < 17 ». Les deux bornes, $12$ et $17$, seraient exclues.",
@@ -213,6 +272,13 @@ export const exercicesAlgorithmique3e: FicheExercicesData = {
         {
           enonce:
             "a) Quel résultat donne ce programme avec $5$ ? Avec $-3$ ?\nb) Écris le résultat en fonction de $x$, puis développe-le.\nc) Quels nombres donnent $0$ ? Lesquels donnent $16$ ?",
+          reponses: [
+            { question: "a) 5", attendu: "16" },
+            { question: "a) -3", attendu: "0" },
+            { question: "b)", attendu: ["x^2-9", "-9+x^2"], exact: true },
+            { question: "c) 0", attendu: "3 ; -3" },
+            { question: "c) 16", attendu: "5 ; -5" },
+          ],
           figure: programme(["demander 'Nombre ?'", "mettre x à réponse", "mettre a à x - 3", "mettre b à x + 3", "mettre r à a * b", "dire r"]),
           correction:
             "a) Avec $5$ : a vaut $2$, b vaut $8$, r vaut $2 \\times 8 = 16$. Avec $-3$ : a vaut $-6$, b vaut $0$, r vaut $0$. Réponse : $16$ et $0$.\nb) Le programme multiplie $x - 3$ par $x + 3$ : $(x - 3)(x + 3) = x^2 - 9$.\nc) $x^2 - 9 = 0$ donne $x^2 = 9$ : Réponse : $3$ et $-3$ donnent $0$.\n$x^2 - 9 = 16$ donne $x^2 = 25$ : Réponse : $5$ et $-5$ donnent $16$.\n⛔ Le piège : oublier la solution négative. $(-5)^2 = 25$, comme $5^2$.",
@@ -237,6 +303,11 @@ export const exercicesAlgorithmique3e: FicheExercicesData = {
           titre: "Cinq jours de chaleur",
           enonce:
             "Un relevé fictif donne les températures maximales de cinq jours d'été : $28$ ; $31$ ; $33$ ; $29$ ; $34$ (en °C).\na) Que dit le lutin ?\nb) Un élève déplace « mettre somme à 0 » au début de la boucle. Que dit alors le premier bloc « dire » ?\nc) Ajoute au programme une variable max qui donne la température la plus haute.",
+          reponses: [
+            { question: "a) moy.", attendu: "31" },
+            { question: "a) jours", attendu: "3" },
+            { question: "b)", attendu: "6,8" },
+          ],
           figure: programme(["mettre somme à 0", "mettre chauds à 0", "répéter 5 fois", "  demander 'Température ?'", "  ajouter réponse à somme", "  si réponse > 30 alors", "    ajouter 1 à chauds", "dire somme / 5", "dire chauds"]),
           correction:
             "a) La somme vaut $28 + 31 + 33 + 29 + 34 = 155$, et $155 \\div 5 = 31$. Les jours au-dessus de $30$ sont $31$, $33$ et $34$.\nRéponse : le lutin dit $31$ (la moyenne, en °C), puis $3$ (le nombre de jours au-dessus de $30$ °C).\nb) La somme repart de $0$ à chaque tour : à la fin, elle ne contient que le dernier jour, $34$. Réponse : le lutin dit $34 \\div 5 = 6{,}8$.\nc) Je mets max à $0$ avant la boucle, et dans la boucle : « si réponse > max alors mettre max à réponse ». Le lutin dit alors aussi $34$.\n⛔ Le piège : remettre à $0$ une variable DANS la boucle. Elle oublie tout ce qu'elle a compté avant.\n⭐ En hiver, si toutes les températures étaient négatives, partir de $0$ donnerait un max faux : on partirait alors de la première température relevée.",
@@ -252,6 +323,13 @@ export const exercicesAlgorithmique3e: FicheExercicesData = {
           titre: "Deux programmes jumeaux",
           enonce:
             "Programme A : choisir un nombre, lui ajouter 1, multiplier le résultat par lui-même, puis retirer le carré du nombre de départ. Programme B : multiplier le nombre par 2, puis ajouter 1.\na) Fais tourner les deux programmes avec $4$, puis avec $-3$.\nb) Que remarques-tu ?\nc) Prouve-le pour tout nombre $x$.\nd) Quel nombre faut-il choisir pour obtenir $100$ ?",
+          reponses: [
+            { question: "A(4)", attendu: "9" },
+            { question: "B(4)", attendu: "9" },
+            { question: "A(-3)", attendu: "-5" },
+            { question: "B(-3)", attendu: "-5" },
+            { question: "d)", attendu: "49,5" },
+          ],
           figure: (
             <div className="space-y-2">
               {programme(["demander 'Nombre ?'", "mettre x à réponse", "mettre a à x + 1", "mettre a à a * a", "mettre r à a - x * x", "dire r"])}
@@ -267,6 +345,9 @@ export const exercicesAlgorithmique3e: FicheExercicesData = {
           titre: "Le plan d'entraînement",
           enonce:
             "Une coureuse prépare un trail : $3$ km la première semaine, puis $2$ km de plus chaque semaine. Le programme cherche la semaine où son total dépasse $100$ km.\na) Que dit le lutin ?\nb) Pourquoi la boucle ne s'arrête-t-elle pas à la semaine $9$ ?\nc) Montre que le total après $n$ semaines vaut $n(n + 2)$ km, sur les semaines $1$ à $4$, puis contrôle avec la semaine $10$.",
+          reponses: [
+            { question: "a)", attendu: "10" },
+          ],
           figure: programme(["mettre d à 3", "mettre total à 0", "mettre sem à 0", "répéter jusqu'à total > 100", "  ajouter 1 à sem", "  ajouter d à total", "  ajouter 2 à d", "dire sem"]),
           correction:
             "a) Je suis la boucle tour par tour : les totaux sont $3$, $8$, $15$, $24$, $35$, $48$, $63$, $80$, $99$, $120$.\nLe total dépasse $100$ pour la première fois à la semaine $10$. Réponse : le lutin dit $10$.\nb) Après la semaine $9$, le total vaut $99$ : « total > 100 » est fausse, la boucle continue.\nc) Semaine $1$ : $1 \\times 3 = 3$. Semaine $2$ : $2 \\times 4 = 8$. Semaine $3$ : $3 \\times 5 = 15$. Semaine $4$ : $4 \\times 6 = 24$. Ce sont bien les totaux du tableau.\nContrôle : $10 \\times 12 = 120$. Réponse : après $10$ semaines, elle a couru $120$ km.\n⛔ Le piège : mettre « ajouter 2 à d » AVANT « ajouter d à total ». La première semaine compterait $5$ km au lieu de $3$.",
@@ -277,6 +358,11 @@ export const exercicesAlgorithmique3e: FicheExercicesData = {
           titre: "Le nombre secret",
           enonce:
             "Dans ce jeu, le lutin cache un nombre entier entre $1$ et $100$ (ici $37$) et répond à chaque essai.\na) Un joueur propose $50$, puis $25$, puis $37$. Que dit le lutin à chaque fois ? Que dit-il à la fin ?\nb) Un joueur propose toujours le milieu des nombres encore possibles. Montre que $7$ essais lui suffisent toujours.",
+          reponses: [
+            { question: "a) 50", attendu: ["plus petit"] },
+            { question: "a) 25", attendu: ["plus grand"] },
+            { question: "a) fin", attendu: "3" },
+          ],
           figure: programme(["mettre n à 37", "mettre essais à 0", "répéter jusqu'à réponse = n", "  demander 'Ton nombre ?'", "  ajouter 1 à essais", "  si réponse < n alors", "    dire 'plus grand'", "  sinon", "    si réponse > n alors", "      dire 'plus petit'", "dire essais"]),
           correction:
             "a) $50$ : $50 < 37$ est faux, mais $50 > 37$ est vrai. Le lutin dit « plus petit ».\n$25$ : $25 < 37$ est vrai. Le lutin dit « plus grand ».\n$37$ : aucune des deux conditions n'est vraie, il ne dit rien ; « réponse = n » devient vraie, la boucle s'arrête.\nRéponse : « plus petit », « plus grand », puis $3$ (le nombre d'essais).\nb) Chaque essai raté garde au plus la moitié des nombres possibles : $100$, puis au plus $50$, $25$, $12$, $6$, $3$, $1$.\nAprès $6$ essais ratés, il ne reste qu'un nombre possible : le septième essai est le bon.\nRéponse : $7$ essais suffisent toujours.\n⭐ $6$ ne suffisent pas toujours : $6$ essais ne départagent que $2 \\times 2 \\times 2 \\times 2 \\times 2 \\times 2 = 64$ cas, moins que $100$.\n⛔ Le piège : lire « plus grand » comme « ton essai est trop grand ». C'est le SECRET qui est plus grand que l'essai : il faut monter.",

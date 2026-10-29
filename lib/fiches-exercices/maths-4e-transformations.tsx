@@ -126,6 +126,12 @@ export const exercicesTransformations4e: FicheExercicesData = {
         {
           enonce:
             "Sur le quadrillage, on a tracé le parallélogramme $ABCD$ et la droite grise $(d)$.\nConstruire $A'B'C'D'$, l'image de $ABCD$ par la symétrie d'axe $(d)$, et donner les coordonnées de ses sommets.",
+          reponses: [
+            { question: "A'", attendu: "(3 ; 5)" },
+            { question: "B'", attendu: "(7 ; 5)" },
+            { question: "C'", attendu: "(8 ; 3)" },
+            { question: "D'", attendu: "(4 ; 3)" },
+          ],
           figure: trace(
             [-1, 11],
             [{ pts: [[3, 7], [7, 7], [8, 9], [4, 9]] }, { pts: [[1, 6], [10, 6]], couleur: GRIS }],
@@ -147,6 +153,11 @@ export const exercicesTransformations4e: FicheExercicesData = {
         {
           enonce:
             "Sur le quadrillage, l'axe gris $(d)$ est OBLIQUE : il traverse les carreaux en diagonale, par leurs coins.\nConstruire l'image du triangle $ABC$ par la symétrie d'axe $(d)$, et donner les coordonnées de $A'$, $B'$ et $C'$.",
+          reponses: [
+            { question: "A'", attendu: "(3 ; 7)" },
+            { question: "B'", attendu: "(3 ; 9)" },
+            { question: "C'", attendu: "(5 ; 9)" },
+          ],
           figure: trace(
             [-1, 11],
             [{ pts: [[7, 3], [9, 3], [9, 5]] }, { pts: [[1, 1], [10, 10]], couleur: GRIS }],
@@ -170,6 +181,10 @@ export const exercicesTransformations4e: FicheExercicesData = {
         {
           enonce:
             "Sur le quadrillage, on a tracé le triangle $OAB$. Son sommet $O$ est aussi le centre de la symétrie.\nConstruire l'image de $OAB$ par la symétrie de centre $O$, et donner les coordonnées de $A'$ et $B'$.",
+          reponses: [
+            { question: "A'", attendu: "(2 ; 4)" },
+            { question: "B'", attendu: "(3 ; 2)" },
+          ],
           figure: trace(
             [-1, 11],
             [{ pts: [[5, 5], [8, 6], [7, 8]] }],
@@ -192,6 +207,12 @@ export const exercicesTransformations4e: FicheExercicesData = {
         {
           enonce:
             "Sur le quadrillage, on a tracé le trapèze $KLMN$ et une flèche verte.\nConstruire l'image de $KLMN$ par la translation qui suit la flèche verte, et donner les coordonnées de ses sommets.",
+          reponses: [
+            { question: "K'", attendu: "(2 ; 5)" },
+            { question: "L'", attendu: "(5 ; 5)" },
+            { question: "M'", attendu: "(4 ; 7)" },
+            { question: "N'", attendu: "(3 ; 7)" },
+          ],
           figure: trace(
             [-1, 11],
             [{ pts: [[7, 2], [10, 2], [9, 4], [8, 4]] }, { pts: [[10, 7], [5, 10]], couleur: VERT, fleche: true }],
@@ -215,6 +236,11 @@ export const exercicesTransformations4e: FicheExercicesData = {
         {
           enonce:
             "Sur le quadrillage, on a tracé le triangle $ABC$ et placé le point $O$.\nConstruire l'image de $ABC$ par la rotation de centre $O$, d'angle 90°, dans le sens des aiguilles d'une montre. Donner les coordonnées de $A'$, $B'$ et $C'$.",
+          reponses: [
+            { question: "A'", attendu: "(7 ; 9)" },
+            { question: "B'", attendu: "(9 ; 9)" },
+            { question: "C'", attendu: "(9 ; 7)" },
+          ],
           figure: trace(
             [-1, 11],
             [{ pts: [[3, 7], [3, 9], [5, 9]] }],
@@ -237,6 +263,13 @@ export const exercicesTransformations4e: FicheExercicesData = {
         {
           enonce:
             "Le triangle $RST$ a pour côtés $RS = 5$ cm, $ST = 7$ cm et $TR = 6$ cm, et $\\widehat{SRT} = 78°$. On construit son image $R'S'T'$ par la symétrie de centre $O$.\nSans rien mesurer, donner les longueurs des côtés de $R'S'T'$, son périmètre et la mesure de $\\widehat{S'R'T'}$.",
+          reponses: [
+            { question: "R'S'", attendu: "5" },
+            { question: "S'T'", attendu: "7" },
+            { question: "T'R'", attendu: "6" },
+            { question: "périm.", attendu: "18" },
+            { question: "angle", attendu: "78" },
+          ],
           correction:
             "La symétrie centrale est un demi-tour : elle déplace le triangle sans le déformer. Elle CONSERVE les longueurs et les angles.\nChaque côté a donc la même longueur que celui dont il est l'image : $R'S' = RS = 5$ cm, $S'T' = ST = 7$ cm et $T'R' = TR = 6$ cm.\nLe périmètre ne change pas : $5 + 7 + 6 = 18$ cm.\nL'angle est conservé aussi : $\\widehat{S'R'T'} = \\widehat{SRT} = 78°$.\n⭐ Le dessin le montre : le triangle $R'S'T'$ a la tête en bas, mais c'est le même triangle, aux mêmes mesures.\n⛔ Le piège : croire qu'une figure « à l'envers » a d'autres mesures, ou sortir la règle. La propriété suffit : aucune mesure, aucun rapporteur.\nRéponse : $R'S' = 5$ cm, $S'T' = 7$ cm, $T'R' = 6$ cm, un périmètre de $18$ cm, et $\\widehat{S'R'T'} = 78°$.",
           schema: deux(
@@ -248,6 +281,10 @@ export const exercicesTransformations4e: FicheExercicesData = {
         {
           enonce:
             "On a placé les points $M$, $N$, $P$ et $R$ sur le quadrillage. On utilise la translation qui transforme $M$ en $N$.\na) Placer $P'$, l'image de $P$.\nb) Placer le point $S$ dont l'image est $R$.",
+          reponses: [
+            { question: "a) P'", attendu: "(7 ; 8)" },
+            { question: "b) S", attendu: "(5 ; 5)" },
+          ],
           figure: trace([-1, 11], [], [{ x: 2, y: 3, label: "M" }, { x: 6, y: 4, label: "N" }, { x: 3, y: 7, label: "P" }, { x: 9, y: 6, label: "R" }]),
           correction:
             "Le déplacement se lit de $M$ à $N$ : $4$ carreaux à droite, $1$ en haut. La translation fait subir ce même déplacement à TOUS les points.\na) Depuis $P$ : $4$ à droite, $1$ en haut, $P'(7\\,;\\,8)$.\nb) Cette fois, je connais l'ARRIVÉE, $R$. Je remonte le déplacement à l'envers : $4$ à gauche, $1$ en bas, $S(5\\,;\\,5)$.\n⭐ Contrôle : de $S$ à $R$, $4$ à droite et $1$ en haut, comme de $M$ à $N$. Les trois flèches grises sont parallèles et de même longueur.\n⛔ Le piège au b) : appliquer la translation à $R$. On arriverait en $(13\\,;\\,7)$ : c'est l'image de $R$, pas le point qui arrive sur $R$.\nRéponse : $P'(7\\,;\\,8)$ et $S(5\\,;\\,5)$.",
@@ -265,6 +302,13 @@ export const exercicesTransformations4e: FicheExercicesData = {
         {
           enonce:
             "La grande aiguille d'une horloge mesure $12$ cm. Elle fait un tour complet en une heure, dans le sens des aiguilles d'une montre.\na) De combien de degrés tourne-t-elle en une minute ?\nb) De 14 h 00 à 14 h 20, son mouvement est une rotation. Donner son centre, son angle et son sens.\nc) À 14 h 20, à quelle distance du centre de l'horloge se trouve sa pointe ?",
+          reponses: [
+            { question: "a)", attendu: "6" },
+            { question: "b) ctre", attendu: ["O"] },
+            { question: "b) angle", attendu: "120" },
+            { question: "b) sens", attendu: ["horaire", "sens horaire", "sens des aiguilles d'une montre", "aiguilles d'une montre"] },
+            { question: "c)", attendu: "12" },
+          ],
           correction:
             "a) Un tour complet, c'est $360°$, en $60$ minutes : $360 \\div 60 = 6°$ par minute.\nb) En $20$ minutes : $20 \\times 6 = 120°$. C'est la rotation de centre $O$, le centre de l'horloge, d'angle $120°$, dans le sens des aiguilles d'une montre.\n⭐ Sur le dessin, un carreau vaut $3$ cm : la pointe part de $M$ à 14 h 00, passe en $P$ au quart d'heure, après $90°$, et arrive en $Q$ à 14 h 20.\nc) Une rotation conserve les longueurs : $OQ = OM = 12$ cm. La pointe reste à $12$ cm du centre, elle décrit un cercle.\n⛔ Le piège : croire qu'une minute vaut un degré, et trouver $20°$. Le cadran fait $360°$ pour $60$ minutes.\nRéponse : $6°$ par minute ; la rotation de centre $O$, d'angle $120°$, dans le sens des aiguilles d'une montre ; $12$ cm.",
           schema: trace(
@@ -296,6 +340,12 @@ export const exercicesTransformations4e: FicheExercicesData = {
         {
           enonce:
             "Dans Tetris, la pièce bleue s'appelle le « L ». On l'a reproduite trois fois sur le quadrillage : en orange, en vert et en violet.\na) Quelle transformation envoie la pièce bleue sur la pièce orange ? Sur la verte ? Sur la violette ?\nb) Dans le jeu, une pièce peut seulement glisser et tourner. Laquelle des trois le joueur ne peut-il PAS obtenir à partir de la bleue ?",
+          reponses: [
+            { question: "orange", attendu: ["translation", "un translation", "une translation", "la translation"] },
+            { question: "verte", attendu: ["rotation", "un rotation", "une rotation", "la rotation", "rotation d'un quart de tour", "un rotation d'un quart de tour", "une rotation d'un quart de tour", "la rotation d'un quart de tour", "quart de tour", "un quart de tour", "une quart de tour", "la quart de tour"] },
+            { question: "violet", attendu: ["symétrie axiale", "un symétrie axiale", "une symétrie axiale", "la symétrie axiale", "symétrie d'axe", "un symétrie d'axe", "une symétrie d'axe", "la symétrie d'axe", "réflexion", "un réflexion", "une réflexion", "la réflexion"] },
+            { question: "b)", attendu: ["violette", "la violette", "la pièce violette"] },
+          ],
           figure: trace([-1, 11], [
             { pts: [[2, 2], [4, 2], [4, 3], [3, 3], [3, 5], [2, 5]] },
             { pts: [[2, 7], [4, 7], [4, 8], [3, 8], [3, 10], [2, 10]], couleur: ORANGE },
@@ -317,6 +367,12 @@ export const exercicesTransformations4e: FicheExercicesData = {
         {
           enonce:
             "On a dessiné l'aile gauche d'un papillon. Son corps est sur la droite grise $(d)$.\na) Compléter le papillon par la symétrie d'axe $(d)$. Donner les coordonnées de $A'$, $B'$ et $C'$.\nb) Quels points de l'aile gauche sont leur propre image ?\nc) L'aile gauche couvre $18{,}5$ carreaux. Quelle est l'aire des deux ailes ?",
+          reponses: [
+            { question: "a) A'", attendu: "(9 ; 9)" },
+            { question: "a) B'", attendu: "(10 ; 7)" },
+            { question: "a) C'", attendu: "(9 ; 2)" },
+            { question: "c)", attendu: "37" },
+          ],
           figure: trace(
             [-1, 11],
             [{ pts: [[6, 8], [3, 9], [2, 7], [4, 6], [2, 4], [3, 2], [6, 4]] }, { pts: [[6, 1], [6, 10]], couleur: GRIS }],
@@ -338,6 +394,9 @@ export const exercicesTransformations4e: FicheExercicesData = {
         {
           enonce:
             "On a placé le centre $O$ et le segment $[AB]$.\na) Construire $[A'B']$, l'image de $[AB]$ par la symétrie de centre $O$.\nb) Comparer les longueurs $AB$ et $A'B'$, puis les directions des droites $(AB)$ et $(A'B')$.\nc) Quelle est la nature du quadrilatère $ABA'B'$ ? Justifier.",
+          reponses: [
+            { question: "c)", attendu: ["parallélogramme", "un parallélogramme", "une parallélogramme", "la parallélogramme"] },
+          ],
           figure: trace([-1, 11], [{ pts: [[3, 4], [5, 8]] }], [{ x: 6, y: 5, label: "O" }, { x: 3, y: 4, label: "A" }, { x: 5, y: 8, label: "B" }]),
           correction:
             "a) De $O$ à $A$ : $3$ à gauche, $1$ en bas. Je refais l'inverse depuis $O$ : $3$ à droite, $1$ en haut, $A'(9\\,;\\,6)$.\nDe $O$ à $B$ : $1$ à gauche, $3$ en haut. Donc $B'(7\\,;\\,2)$.\nb) De $A$ à $B$ : $2$ à droite, $4$ en haut. De $B'$ à $A'$ : $2$ à droite, $4$ en haut. Même déplacement : $A'B' = AB$, car la symétrie centrale conserve les longueurs, et $(A'B')$ est PARALLÈLE à $(AB)$.\n⭐ À retenir : par une symétrie centrale, une droite a pour image une droite parallèle.\nc) Les diagonales $[AA']$ et $[BB']$ du quadrilatère $ABA'B'$ ont le même milieu, $O$. Un quadrilatère dont les diagonales ont le même milieu est un parallélogramme.\n⛔ Le piège : relier les points dans le désordre et tracer $ABB'A'$, un quadrilatère croisé. Je fais le tour : $A$, $B$, puis $A'$, puis $B'$.\nRéponse : $A'(9\\,;\\,6)$ et $B'(7\\,;\\,2)$ ; $A'B' = AB$ et $(A'B') \\parallel (AB)$ ; $ABA'B'$ est un parallélogramme.",
@@ -358,6 +417,12 @@ export const exercicesTransformations4e: FicheExercicesData = {
         {
           enonce:
             "Aux échecs, le cavalier saute « en L ». Sur le quadrillage, il part de $D(2\\,;\\,2)$ et fait trois sauts : $t_1$ ($2$ carreaux à droite, $1$ en haut), puis $t_2$ ($1$ à droite, $2$ en haut), puis encore $t_1$.\na) Donner les coordonnées de ses trois arrivées $E$, $F$ et $G$.\nb) Quelle translation, en un seul saut, l'emmènerait de $D$ à $G$ ?\nc) S'il fait les mêmes sauts dans l'ordre $t_2$, $t_1$, $t_1$, où arrive-t-il ?",
+          reponses: [
+            { question: "a) E", attendu: "(4 ; 3)" },
+            { question: "a) F", attendu: "(5 ; 5)" },
+            { question: "a) G", attendu: "(7 ; 6)" },
+            { question: "c)", attendu: ["G", "en G", "(7 ; 6)"] },
+          ],
           correction:
             "a) Chaque saut est une translation : j'ajoute le déplacement aux coordonnées.\n$t_1$ depuis $D$ : $E(4\\,;\\,3)$. Puis $t_2$ : $F(5\\,;\\,5)$. Puis $t_1$ : $G(7\\,;\\,6)$.\nb) De $D$ à $G$ : $7 - 2 = 5$ carreaux à droite et $6 - 2 = 4$ en haut. C'est la translation de $5$ carreaux à droite et $4$ en haut : la flèche orange.\n⭐ Enchaîner des translations donne encore une translation : on ajoute les déplacements, $2 + 1 + 2 = 5$ et $1 + 2 + 1 = 4$.\nc) Les mêmes sauts dans un autre ordre donnent le même total : $5$ à droite, $4$ en haut. Il arrive encore en $G$, en passant par $(3\\,;\\,4)$ et $(5\\,;\\,5)$.\n⛔ Le piège : ajouter les longueurs des sauts, comme si le cavalier avançait en ligne droite. La translation ne retient que le DÉPART et l'ARRIVÉE.\nRéponse : $E(4\\,;\\,3)$, $F(5\\,;\\,5)$, $G(7\\,;\\,6)$ ; la translation de $5$ carreaux à droite et $4$ en haut ; au même endroit, en $G$.",
           schema: trace(
@@ -375,6 +440,9 @@ export const exercicesTransformations4e: FicheExercicesData = {
         {
           enonce:
             "Un moulinet, le jouet qui tourne au vent, a quatre pales identiques. On a dessiné la pale $OAB$.\na) Construire $OA_1B_1$, image de $OAB$ par la rotation de centre $O$, d'angle 90°, dans le sens contraire des aiguilles d'une montre ; puis $OA_2B_2$, image de $OA_1B_1$ par la même rotation ; puis $OA_3B_3$.\nb) Par quelle transformation passe-t-on directement de $OAB$ à $OA_2B_2$ ?\nc) Quelle rotation envoie directement $OAB$ sur $OA_3B_3$ ?",
+          reponses: [
+            { question: "b)", attendu: ["symétrie de centre O", "un symétrie de centre O", "une symétrie de centre O", "la symétrie de centre O", "symétrie centrale", "un symétrie centrale", "une symétrie centrale", "la symétrie centrale", "demi-tour", "un demi-tour", "une demi-tour", "la demi-tour"] },
+          ],
           figure: trace([-1, 11], [{ pts: [[6, 6], [6, 9], [8, 8]] }], [{ x: 6, y: 6, label: "O" }, { x: 6, y: 9, label: "A" }, { x: 8, y: 8, label: "B" }]),
           correction:
             "a) Quart de tour dans le sens contraire des aiguilles d'une montre : ce qui est en haut de $O$ passe à gauche, et ce qui est à droite passe en haut.\n$A$ est $3$ carreaux au-dessus de $O$ : $A_1$ est $3$ carreaux à gauche, $A_1(3\\,;\\,6)$.\n$B$ est $2$ à droite, $2$ en haut : $B_1$ est $2$ en haut, $2$ à gauche, $B_1(4\\,;\\,8)$.\nJe recommence depuis $A_1$ et $B_1$ : $A_2(6\\,;\\,3)$ et $B_2(4\\,;\\,4)$. Puis une dernière fois : $A_3(9\\,;\\,6)$ et $B_3(8\\,;\\,4)$.\nb) Deux quarts de tour font un demi-tour : $OA_2B_2$ est l'image de $OAB$ par la symétrie de centre $O$. Contrôle : $O$ est le milieu de $[AA_2]$, qui va de $(6\\,;\\,9)$ à $(6\\,;\\,3)$.\nc) Trois quarts de tour : $270°$ dans le sens contraire des aiguilles d'une montre. Ou, plus court, un quart de tour dans le sens des aiguilles d'une montre : la pale $OA_3B_3$ est juste à droite de $OAB$.\n⛔ Le piège : tourner chaque nouvelle pale autour d'un de ses propres sommets. Le centre reste $O$ à chaque fois : c'est l'axe du moulinet.\nRéponse : $A_1(3\\,;\\,6)$, $B_1(4\\,;\\,8)$, $A_2(6\\,;\\,3)$, $B_2(4\\,;\\,4)$, $A_3(9\\,;\\,6)$, $B_3(8\\,;\\,4)$ ; la symétrie de centre $O$ ; un quart de tour dans le sens des aiguilles d'une montre.",
@@ -393,6 +461,13 @@ export const exercicesTransformations4e: FicheExercicesData = {
         {
           enonce:
             "Un cerf-volant est formé du triangle $ABC$ et de son image $ADC$ par la symétrie d'axe $(AC)$, la baguette centrale. On sait que $AB = 40$ cm, $BC = 60$ cm et $\\widehat{ABC} = 100°$.\na) Donner $AD$, $DC$ et le périmètre du cerf-volant.\nb) Donner la mesure de $\\widehat{ADC}$.\nc) On mesure $\\widehat{BAD} = 99°$. En déduire $\\widehat{BCD}$.",
+          reponses: [
+            { question: "a) AD", attendu: "40" },
+            { question: "a) DC", attendu: "60" },
+            { question: "a) pér.", attendu: "200" },
+            { question: "b)", attendu: "100" },
+            { question: "c)", attendu: "61" },
+          ],
           figure: trace(
             [-1, 11],
             [{ pts: [[2, 5.5], [4.6, 8.54], [9.77, 5.5]] }, { pts: [[1, 5.5], [10.5, 5.5]], couleur: GRIS }],
@@ -415,6 +490,9 @@ export const exercicesTransformations4e: FicheExercicesData = {
         {
           enonce:
             "Sur le quadrillage : le triangle $ABC$ et deux points $I$ et $J$.\na) Construire $A'B'C'$, l'image de $ABC$ par la symétrie de centre $I$.\nb) Construire $A''B''C''$, l'image de $A'B'C'$ par la symétrie de centre $J$.\nc) Quelle transformation, en un seul geste, envoie $ABC$ sur $A''B''C''$ ? Comparer avec la longueur $IJ$.",
+          reponses: [
+            { question: "c)", attendu: ["translation", "un translation", "une translation", "la translation"] },
+          ],
           figure: trace(
             [-1, 11],
             [{ pts: [[2, 2], [4, 2], [2, 4]] }],
@@ -438,6 +516,9 @@ export const exercicesTransformations4e: FicheExercicesData = {
         {
           enonce:
             "Sur le quadrillage, $ABCD$ est un carré « penché », et $O$ est son centre.\na) Montrer, en comptant les carreaux, que la rotation de centre $O$, d'angle 90°, dans le sens contraire des aiguilles d'une montre, envoie $A$ sur $B$, puis $B$ sur $C$.\nb) Elle envoie aussi $C$ sur $D$ et $D$ sur $A$. Qu'en déduit-on pour les longueurs $OA$, $OB$, $OC$, $OD$, et pour l'angle $\\widehat{AOB}$ ?\nc) En déduire trois propriétés des diagonales d'un carré.",
+          reponses: [
+            { question: "b) angle", attendu: "90" },
+          ],
           figure: trace(
             [-1, 11],
             [{ pts: [[3, 4], [8, 3], [9, 8], [4, 9]] }],
@@ -474,6 +555,12 @@ export const exercicesTransformations4e: FicheExercicesData = {
           titre: "Le terrain de handball",
           enonce:
             "Un terrain de handball mesure $40$ m sur $20$ m. Sur le quadrillage, un carreau représente $5$ m ; $O$ est le centre du terrain, et $P$ le milieu de la ligne des 7 m de gauche, à $7$ m de la ligne de but.\na) Le terrain a un centre de symétrie et deux axes de symétrie. Lesquels ?\nb) Donner l'image du coin $A$ par la symétrie de centre $O$, puis par la symétrie d'axe la ligne médiane, puis par la symétrie d'axe la droite qui joint les deux buts.\nc) Placer $P'$, le symétrique de $P$ par rapport à $O$. Quelle distance sépare $P$ et $P'$ ?",
+          reponses: [
+            { question: "b) ctre", attendu: ["C"] },
+            { question: "b) méd.", attendu: ["B"] },
+            { question: "b) buts", attendu: ["D"] },
+            { question: "c)", attendu: "26" },
+          ],
           figure: trace(
             [-1, 11],
             [{ pts: [[2, 4], [10, 4], [10, 8], [2, 8]] }, { pts: [[6, 3], [6, 9]], couleur: GRIS }],
@@ -497,6 +584,14 @@ export const exercicesTransformations4e: FicheExercicesData = {
           titre: "La grande roue de Londres",
           enonce:
             "La grande roue de Londres, le London Eye, mesure $120$ m de diamètre. Elle porte $32$ cabines régulièrement réparties, et fait un tour complet en $30$ minutes environ.\na) Quelle rotation envoie chaque cabine sur la suivante ? Donner son angle.\nb) Une cabine part du point le plus bas. Au bout de combien de minutes a-t-elle tourné de 90° ?\nc) Où est-elle au bout de $15$ minutes ? Par quelle transformation passe-t-on de sa position de départ à celle-ci ?\nd) De combien de mètres est-elle montée au bout de $7{,}5$ minutes ? Au bout de $15$ minutes ?",
+          reponses: [
+            { question: "a)", attendu: "11,25" },
+            { question: "b)", attendu: "7,5" },
+            { question: "c) où ?", attendu: ["au sommet", "sommet", "en haut", "tout en haut"] },
+            { question: "c) trans", attendu: ["symétrie de centre O", "un symétrie de centre O", "une symétrie de centre O", "la symétrie de centre O", "symétrie centrale", "un symétrie centrale", "une symétrie centrale", "la symétrie centrale", "demi-tour", "un demi-tour", "une demi-tour", "la demi-tour"] },
+            { question: "d) 7,5", attendu: "60" },
+            { question: "d) 15", attendu: "120" },
+          ],
           correction:
             "a) Les $32$ cabines se partagent le tour complet, $360°$ : $360 \\div 32 = 11{,}25°$. La rotation de centre $O$, le moyeu, et d'angle $11{,}25°$ envoie chaque cabine sur la suivante.\nb) Un quart de tour prend un quart du temps : $30 \\div 4 = 7{,}5$ minutes. Sur le schéma, la roue tourne dans le sens contraire des aiguilles d'une montre : la cabine passe de $P$, en bas, à $Q$, à la hauteur du centre.\nc) Au bout de $15$ minutes, la moitié du tour : $180°$. La cabine est au point le plus haut, $R$. Une rotation de $180°$ est une symétrie centrale : $R$ est le symétrique de $P$ par rapport à $O$.\nd) La rotation conserve les distances : la cabine reste toujours à $120 \\div 2 = 60$ m de $O$. Au bout de $7{,}5$ minutes, elle est à la hauteur de $O$ : elle est montée de $60$ m. Au bout de $15$ minutes, de tout le diamètre : $120$ m.\n⭐ Le schéma est à l'échelle : un carreau vaut $15$ m, et le rayon mesure $4$ carreaux.\n⛔ Le piège au d) : répondre $30$ m au bout d'un quart de tour, le quart de $120$ m. La cabine est montée d'un RAYON, $60$ m : la moitié de la hauteur, en un quart du temps.\nRéponse : la rotation de centre $O$ et d'angle $11{,}25°$ ; $7{,}5$ minutes ; au sommet, le symétrique du départ par rapport à $O$ ; $60$ m, puis $120$ m.",
           schema: trace(
@@ -514,6 +609,12 @@ export const exercicesTransformations4e: FicheExercicesData = {
           titre: "Le flocon et l'étoile de mer",
           enonce:
             "Un flocon de neige a six branches identiques ; la plupart des étoiles de mer ont cinq bras identiques. On les a schématisés ci-dessous, chacun de centre $O$.\na) Quel est le plus petit angle d'une rotation de centre $O$ qui laisse le flocon inchangé ? Et l'étoile de mer ?\nb) L'un des deux a un centre de symétrie. Lequel ? Justifier par un calcul.\nc) L'étoile de mer a-t-elle un axe de symétrie ? En donner un.",
+          reponses: [
+            { question: "a) floc.", attendu: "60" },
+            { question: "a) étoi.", attendu: "72" },
+            { question: "b)", attendu: ["le flocon", "flocon"] },
+            { question: "c)", attendu: ["oui", "vrai"] },
+          ],
           figure: deux(
             trace(
               [-1, 9],
@@ -573,6 +674,11 @@ export const exercicesTransformations4e: FicheExercicesData = {
           titre: "Les panneaux solaires",
           enonce:
             "Sur un toit, on pose des panneaux solaires de $2$ m sur $1$ m. Sur le quadrillage, un carreau représente $1$ m. Le premier panneau, $P_1$, a pour coin $A$. Pour poser les autres, on utilise la translation $t$ ($2$ carreaux vers la droite) et la translation $u$ ($3$ carreaux vers le haut).\na) $P_2$ est l'image de $P_1$ par $t$, et $P_3$ celle de $P_2$ par $t$. Quelle translation mène directement de $P_1$ à $P_3$ ?\nb) On pose une rangée de $4$ panneaux, puis, avec $u$, une seconde rangée juste au-dessus. Donner les coordonnées de $A'$, le coin du dernier panneau, en haut à droite, qui correspond à $A$, et la translation qui va de $A$ à $A'$.\nc) Quelle surface de toit les $8$ panneaux couvrent-ils ?\nd) Pour le dernier panneau, on doit le tourner d'un quart de tour. Couvre-t-il toujours la même surface ?",
+          reponses: [
+            { question: "b) A'", attendu: "(8 ; 5)" },
+            { question: "c)", attendu: "16" },
+            { question: "d)", attendu: ["oui", "vrai"] },
+          ],
           figure: trace([-1, 11], [{ pts: [[2, 2], [4, 2], [4, 3], [2, 3]] }], [{ x: 2, y: 2, label: "A" }]),
           correction:
             "a) $t$ puis $t$ : $2$ carreaux à droite, puis encore $2$. En un seul geste, c'est la translation de $4$ carreaux vers la droite.\nb) Le dernier panneau de la première rangée est $P_4$ : trois fois $t$, soit $6$ carreaux à droite. Puis $u$ le monte de $3$ carreaux. Depuis $A(2\\,;\\,2)$ : $A'(8\\,;\\,5)$.\nDe $A$ à $A'$ : la translation de $6$ carreaux à droite et $3$ vers le haut, la flèche orange.\nc) Une translation conserve les aires : chaque panneau couvre $2 \\times 1 = 2$ m². Les $8$ panneaux : $8 \\times 2 = 16$ m².\nd) Oui : une rotation conserve aussi les aires. Tourné, le panneau fait $1$ m sur $2$ m, toujours $2$ m².\n⭐ Entre les deux rangées, $u$ laisse une bande de $3 - 1 = 2$ m : de quoi passer pour l'entretien.\n⛔ Le piège au b) : compter $4$ glissements pour $4$ panneaux. Le premier est déjà posé : il en faut $3$ pour atteindre le quatrième.\nRéponse : la translation de $4$ carreaux vers la droite ; $A'(8\\,;\\,5)$, par la translation de $6$ carreaux à droite et $3$ en haut ; $16$ m² ; oui, $2$ m².",

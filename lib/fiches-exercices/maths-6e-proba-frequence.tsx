@@ -324,6 +324,11 @@ export const exercicesProbaFrequence6e: FicheExercicesData = {
         {
           enonce:
             "Julie lance une pièce $20$ fois. Elle note P pour pile et F pour face :\nF P P F P P P F P F P P F P F P P F P P\na) Combien de fois pile est-il sorti ?\nb) Quelle est la fréquence observée de pile ? Écris-la en fraction, puis en nombre décimal.",
+          reponses: [
+            { question: "a)", attendu: "13" },
+            { question: "b) frac", attendu: ["13/20"], exact: true },
+            { question: "b) déc", attendu: ["0,65"], exact: true },
+          ],
           correction:
             "a) Je lis la liste une seule fois. Un trait par lettre, dans la bonne ligne.\nPile : $13$ fois. Face : $7$ fois.\nContrôle : $13 + 7 = 20$ lancers.\nb) Pile est sorti $13$ fois sur $20$ lancers : $\\dfrac{13}{20}$.\n$\\dfrac{13}{20} = \\dfrac{65}{100} = 0{,}65$.\n⛔ Le piège : relire la liste pour chaque lettre. On saute vite une lettre. Le total $20$ contrôle tout.\nRéponse : a) $13$ fois ; b) $\\dfrac{13}{20}$, soit $0{,}65$.",
           schema: grille(["face", "traits", "effectif"], [
@@ -336,6 +341,11 @@ export const exercicesProbaFrequence6e: FicheExercicesData = {
         {
           enonce:
             "Tom lance un dé $60$ fois. Le diagramme montre combien de fois chaque face est sortie.\na) Vérifie qu'il y a bien $60$ lancers.\nb) Combien de fois le $4$ est-il sorti ?\nc) Quelle est la fréquence observée du $4$ ? Écris-la en fraction, puis en nombre décimal.",
+          reponses: [
+            { question: "b)", attendu: "12" },
+            { question: "c) frac", attendu: ["12/60"], exact: true },
+            { question: "c) déc", attendu: ["0,2"], exact: true },
+          ],
           figure: barres([
             { label: "1", value: 8 },
             { label: "2", value: 11 },
@@ -351,6 +361,13 @@ export const exercicesProbaFrequence6e: FicheExercicesData = {
         {
           enonce:
             "On lance un bouchon de bouteille $100$ fois. Il tombe $64$ fois à l'endroit. Les autres fois, il tombe à l'envers.\na) Quelle est la fréquence de « à l'endroit » ? Écris-la en fraction, en décimal, puis en pourcentage.\nb) Combien de fois « à l'envers » ? Quelle est sa fréquence ?",
+          reponses: [
+            { question: "a) frac", attendu: ["64/100"], exact: true },
+            { question: "a) déc", attendu: ["0,64"], exact: true },
+            { question: "a) %", attendu: "64" },
+            { question: "b) nb", attendu: "36" },
+            { question: "b) fréq", attendu: "0,36" },
+          ],
           correction:
             "a) $64$ fois sur $100$ : $\\dfrac{64}{100} = 0{,}64$, soit $64$ %.\nb) $100 - 64 = 36$ fois à l'envers.\n$\\dfrac{36}{100} = 0{,}36$, soit $36$ %.\n⭐ Contrôle : $64 + 36 = 100$ %.\n⛔ Le piège : oublier l'autre issue. Les deux fréquences font $1$ à elles deux.\nRéponse : a) $0{,}64$, soit $64$ % ; b) $36$ fois, $0{,}36$.",
           schema: ecranSeulement(barres([{ label: "endroit", value: 64 }, { label: "envers", value: 36 }])),
@@ -359,6 +376,11 @@ export const exercicesProbaFrequence6e: FicheExercicesData = {
         {
           enonce:
             "Une roue a $4$ secteurs égaux : bleu, orange, vert, jaune. On la fait tourner $40$ fois.\na) Quelle est la probabilité d'obtenir le vert ?\nb) Combien de verts peut-on attendre, à peu près ?\nc) Obtiendra-t-on forcément ce nombre ?",
+          reponses: [
+            { question: "a)", attendu: "1/4" },
+            { question: "b)", attendu: "10" },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $1$ secteur vert sur $4$ secteurs égaux : $1$ chance sur $4$, soit $\\dfrac{1}{4}$.\nb) Un quart des tours : $40 \\div 4 = 10$ verts, à peu près.\nc) Non. C'est un ordre de grandeur. On obtiendra peut-être $8$, $11$ ou $13$ verts.\n⛔ Le piège : croire que l'expérience DOIT donner $10$. Le hasard fait varier le résultat.\nRéponse : a) $\\dfrac{1}{4}$ ; b) environ $10$ ; c) non.",
           schema: roue([{ label: "B", poids: 1, couleur: BLEU }, { label: "O", poids: 1, couleur: ORANGE }, { label: "V", poids: 1, couleur: VERT }, { label: "J", poids: 1, couleur: JAUNE }]),
@@ -367,6 +389,11 @@ export const exercicesProbaFrequence6e: FicheExercicesData = {
         {
           enonce:
             "La probabilité d'obtenir pile est $0{,}5$. Amir lance une pièce $10$ fois : il trouve une fréquence de pile de $0{,}7$. Bella la lance $1\\,000$ fois : elle trouve $0{,}51$.\na) Calcule l'écart entre chaque fréquence et $0{,}5$.\nb) Quelle série est la plus fiable ? Pourquoi ?",
+          reponses: [
+            { question: "a) Amir", attendu: "0,2" },
+            { question: "a) Bella", attendu: "0,01" },
+            { question: "b)", attendu: ["Bella", "celle de Bella", "la série de Bella"], exact: true },
+          ],
           correction:
             "a) Amir : $0{,}7 - 0{,}5 = 0{,}2$.\nBella : $0{,}51 - 0{,}5 = 0{,}01$.\nb) La série de Bella : $1\\,000$ lancers, contre $10$.\nSur $10$ lancers, le hasard a beaucoup de place. Sur $1\\,000$, beaucoup moins.\nSa fréquence est presque collée à $0{,}5$.\n⛔ Le piège : croire la série courte parce qu'elle « surprend ». Plus on lance, plus la fréquence est fiable.\nRéponse : a) $0{,}2$ et $0{,}01$ ; b) celle de Bella.",
           schema: echelle([{ label: "Amir", valeur: 0.7 }, { label: "Bella", valeur: 0.51 }]),
@@ -375,6 +402,12 @@ export const exercicesProbaFrequence6e: FicheExercicesData = {
         {
           enonce:
             "Un sac contient $1$ bille rouge et $4$ billes bleues. On tire une bille, on note sa couleur, puis on la remet. On fait cela $50$ fois. On obtient $13$ fois rouge.\na) Quelle est la probabilité de tirer rouge ?\nb) Quelle est la fréquence observée de rouge ?\nc) Combien de rouges pouvait-on attendre sur $50$ tirages ?\nd) L'écart est-il inquiétant ?",
+          reponses: [
+            { question: "a)", attendu: "0,2" },
+            { question: "b)", attendu: "0,26" },
+            { question: "c)", attendu: "10" },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $1$ bille rouge sur $5$ billes : $\\dfrac{1}{5}$, soit $0{,}2$.\nb) $13$ fois sur $50$ : $\\dfrac{13}{50} = \\dfrac{26}{100} = 0{,}26$.\nc) Un cinquième des tirages : $50 \\div 5 = 10$ rouges, à peu près.\nd) On attendait environ $10$ rouges. On en a eu $13$ : $3$ de plus.\nSur $50$ tirages seulement, c'est un écart normal.\n⛔ Le piège : conclure que le sac est « faux ». Une probabilité ne promet pas un résultat exact.\nRéponse : a) $0{,}2$ ; b) $0{,}26$ ; c) environ $10$ ; d) non.",
           schema: ecranSeulement(billes([{ couleur: ROUGE }, { couleur: BLEU }, { couleur: BLEU }, { couleur: BLEU }, { couleur: BLEU }])),
@@ -383,6 +416,9 @@ export const exercicesProbaFrequence6e: FicheExercicesData = {
         {
           enonce:
             "Des élèves ont écrit ces fréquences. Lesquelles sont impossibles ? Explique.\na) $0{,}4$\nb) $1{,}3$\nc) $0$\nd) $1$\ne) $\\dfrac{25}{20}$",
+          reponses: [
+            { attendu: ["b ; e", "b et e"] },
+          ],
           correction:
             "Une fréquence, c'est un nombre de fois divisé par un nombre d'essais.\nUn résultat ne peut pas sortir plus souvent qu'on n'a lancé. Donc une fréquence ne dépasse jamais $1$.\na) $0{,}4$ est entre $0$ et $1$ : possible.\nb) $1{,}3$ est plus grand que $1$ : impossible.\nc) $0$ : le résultat n'est jamais sorti. Possible.\nd) $1$ : le résultat est sorti à chaque fois. Possible.\ne) $25$ fois sur $20$ essais ? Impossible : $25$ est plus grand que $20$.\n⛔ Le piège : croire qu'une fréquence peut valoir plus que $1$ « si ça sort très souvent ».\nRéponse : impossibles : b) et e).",
           schema: ecranSeulement(echelle([{ label: "a", valeur: 0.4 }, { label: "c", valeur: 0 }, { label: "d", valeur: 1 }])),
@@ -391,6 +427,9 @@ export const exercicesProbaFrequence6e: FicheExercicesData = {
         {
           enonce:
             "Une pièce bien équilibrée tombe $4$ fois de suite sur pile. Chloé dit : « Au prochain lancer, face a plus de chances de sortir. » A-t-elle raison ?",
+          reponses: [
+            { attendu: ["non", "faux"] },
+          ],
           correction:
             "La pièce n'a pas de mémoire. Elle ne sait pas ce qui est sorti avant.\nAu prochain lancer, pile et face ont chacun $1$ chance sur $2$, comme au premier lancer.\nChloé a tort : face n'a pas plus de chances.\n⛔ Le piège : croire que le hasard « rattrape ». Rien ne compense les $4$ piles.\nRéponse : non, face a toujours $1$ chance sur $2$.",
           schema: pieces(["P", "P", "P", "P", "?"]),
@@ -413,6 +452,13 @@ export const exercicesProbaFrequence6e: FicheExercicesData = {
         {
           enonce:
             "On lance deux pièces en même temps.\na) Écris toutes les issues. Utilise P pour pile et F pour face.\nb) Quelle est la probabilité d'obtenir « deux piles » ?\nc) Une classe lance les deux pièces $40$ fois. Elle obtient « deux piles » $12$ fois. Quelle est la fréquence observée ?\nd) Combien de « deux piles » pouvait-on attendre ? L'écart est-il normal ?",
+          reponses: [
+            { question: "a)", attendu: "PP ; PF ; FP ; FF" },
+            { question: "b)", attendu: "1/4" },
+            { question: "c)", attendu: "0,3" },
+            { question: "d) nb", attendu: "10" },
+            { question: "d) norm.", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) Pièce $1$, puis pièce $2$ : PP, PF, FP, FF. Il y a $4$ issues.\nb) Une seule issue donne « deux piles » : PP. Probabilité : $\\dfrac{1}{4}$, soit $0{,}25$.\nc) $12$ fois sur $40$ : $\\dfrac{12}{40} = \\dfrac{3}{10} = 0{,}3$.\nd) Un quart des lancers : $40 \\div 4 = 10$. On a eu $12$ : $2$ de plus. C'est normal.\n⛔ Le piège au a) : oublier FP. « Pile puis face » et « face puis pile » sont deux issues différentes. Sinon, on trouve $\\dfrac{1}{3}$ au lieu de $\\dfrac{1}{4}$.\nRéponse : b) $\\dfrac{1}{4}$ ; c) $0{,}3$ ; d) environ $10$, l'écart est normal.",
           schema: grille(["pièce 1", "pièce 2", "deux piles ?"], [
@@ -426,6 +472,9 @@ export const exercicesProbaFrequence6e: FicheExercicesData = {
         {
           enonce:
             "On lance une pièce de plus en plus de fois. Le tableau donne le nombre de piles.\na) Calcule la fréquence de pile pour chaque ligne.\nb) Calcule l'écart entre chaque fréquence et $0{,}5$.\nc) Que remarques-tu ?\nd) La fréquence monte-t-elle toujours ?",
+          reponses: [
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           figure: grille(["lancers", "piles"], [
             ["10", "7"],
             ["50", "21"],
@@ -440,6 +489,10 @@ export const exercicesProbaFrequence6e: FicheExercicesData = {
         {
           enonce:
             "Une roue a $5$ secteurs égaux, dont $1$ vert. On la fait tourner $100$ fois. Le vert sort $23$ fois.\na) Quelle est la probabilité du vert ?\nb) Combien de verts pouvait-on attendre ?\nc) Sam dit : « La roue est truquée ! » Qu'en penses-tu ?",
+          reponses: [
+            { question: "a)", attendu: "0,2" },
+            { question: "b)", attendu: "20" },
+          ],
           correction:
             "a) $1$ secteur sur $5$ : $\\dfrac{1}{5}$, soit $0{,}2$.\nb) Un cinquième des tours : $100 \\div 5 = 20$ verts, à peu près.\nc) On attendait environ $20$ verts. On en a eu $23$ : $3$ de plus.\nC'est un petit écart, normal avec le hasard. Sam n'a pas de raison de crier au truquage.\n⛔ Le piège : croire que $23$ au lieu de $20$ prouve une triche. L'attendu est un ordre de grandeur.\nRéponse : a) $0{,}2$ ; b) environ $20$ ; c) l'écart est normal.",
           schema: ecranSeulement(roue([{ label: "V", poids: 1, couleur: VERT }, { label: "", poids: 1, couleur: GRIS }, { label: "", poids: 1, couleur: GRIS }, { label: "", poids: 1, couleur: GRIS }, { label: "", poids: 1, couleur: GRIS }])),
@@ -448,6 +501,11 @@ export const exercicesProbaFrequence6e: FicheExercicesData = {
         {
           enonce:
             "Un sac contient $10$ billes, rouges ou bleues. On ne peut pas regarder dedans. On tire une bille, on note sa couleur, on la remet. Voici les résultats de $50$ tirages.\na) Calcule la fréquence de rouge et celle de bleu.\nb) Combien de billes rouges le sac contient-il, sans doute ?",
+          reponses: [
+            { question: "a) rouge", attendu: "0,62" },
+            { question: "a) bleu", attendu: "0,38" },
+            { question: "b)", attendu: "6" },
+          ],
           figure: barres([{ label: "rouge", value: 31 }, { label: "bleu", value: 19 }]),
           correction:
             "a) Contrôle : $31 + 19 = 50$ tirages.\nRouge : $\\dfrac{31}{50} = \\dfrac{62}{100} = 0{,}62$.\nBleu : $\\dfrac{19}{50} = \\dfrac{38}{100} = 0{,}38$.\nb) La fréquence de rouge est proche de $0{,}6$.\nAvec $10$ billes, $0{,}6$ correspond à $6$ billes rouges sur $10$.\nLe sac contient sans doute $6$ billes rouges et $4$ bleues.\n⛔ Le piège : dire « sûrement $6$ ». Les tirages donnent une bonne idée, pas une certitude.\nRéponse : a) $0{,}62$ et $0{,}38$ ; b) sans doute $6$ rouges.",
@@ -456,6 +514,13 @@ export const exercicesProbaFrequence6e: FicheExercicesData = {
         {
           enonce:
             "Deux classes lancent un dé $20$ fois chacune. Elles comptent les $6$.\na) Calcule la fréquence du $6$ dans chaque classe.\nb) La probabilité du $6$ est $\\dfrac{1}{6}$, environ $0{,}17$. Quelle classe en est la plus proche ?\nc) Réunis les deux classes. Quelle fréquence obtiens-tu ?\nd) Est-elle plus proche de $0{,}17$ ?",
+          reponses: [
+            { question: "a) 6e A", attendu: "0,25" },
+            { question: "a) 6e B", attendu: "0,1" },
+            { question: "b)", attendu: ["la 6e B", "6e B", "B"], exact: true },
+            { question: "c)", attendu: "0,175" },
+            { question: "d)", attendu: ["oui", "vrai"] },
+          ],
           figure: grille(["classe", "lancers", "nombre de 6"], [
             ["6e A", "20", "5"],
             ["6e B", "20", "2"],
@@ -467,6 +532,11 @@ export const exercicesProbaFrequence6e: FicheExercicesData = {
         {
           enonce:
             "Un jardinier sème $200$ graines. $170$ graines germent.\na) Quelle est la fréquence de germination ? Écris-la en pourcentage.\nb) Le sachet annonce : « $9$ graines sur $10$ germent. » Quel pourcentage est-ce ?\nc) Le résultat du jardinier est-il proche de l'annonce ?",
+          reponses: [
+            { question: "a)", attendu: "85" },
+            { question: "b)", attendu: "90" },
+            { question: "c)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) $170$ graines sur $200$ : $\\dfrac{170}{200} = \\dfrac{85}{100} = 0{,}85$, soit $85$ %.\nb) $9$ sur $10$ : $\\dfrac{9}{10} = \\dfrac{90}{100}$, soit $90$ %.\nc) $90 - 85 = 5$. L'écart est de $5$ points : c'est assez proche.\nUn seul semis peut varier : la terre, l'eau, le hasard.\n⛔ Le piège : croire que le sachet promet exactement $180$ graines. « $9$ sur $10$ » est un ordre de grandeur, pas une promesse.\nRéponse : a) $85$ % ; b) $90$ % ; c) oui, assez proche.",
           schema: echelle([{ label: "semis", valeur: 0.85 }, { label: "sachet", valeur: 0.9 }]),
@@ -475,6 +545,10 @@ export const exercicesProbaFrequence6e: FicheExercicesData = {
         {
           enonce:
             "Maé joue aux petits chevaux. Il lui faut un $6$ pour sortir. Le $6$ n'est pas sorti depuis $15$ lancers. Elle dit : « Maintenant, il va forcément sortir ! »\na) Quelle est la probabilité d'obtenir $6$ au prochain lancer ?\nb) Maé a-t-elle raison ?",
+          reponses: [
+            { question: "a)", attendu: ["1/6", "1 sur 6"] },
+            { question: "b)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) Le dé a $6$ faces, et une seule porte le $6$ : $1$ chance sur $6$.\nb) Non. Le dé n'a pas de mémoire.\nLes $15$ lancers d'avant ne changent rien au prochain. Il reste $1$ chance sur $6$.\n⛔ Le piège : croire que le $6$ est « en retard » et va rattraper. Le hasard ne rattrape rien.\nRéponse : a) $1$ chance sur $6$ ; b) non.",
           schema: ecranSeulement(de([6])),
@@ -483,6 +557,11 @@ export const exercicesProbaFrequence6e: FicheExercicesData = {
         {
           enonce:
             "On lance un dé équilibré $300$ fois.\na) Combien de nombres pairs peut-on attendre, à peu près ?\nb) Combien de $1$ peut-on attendre ?\nc) On a obtenu $43$ fois le $1$. Est-ce normal ?",
+          reponses: [
+            { question: "a)", attendu: "150" },
+            { question: "b)", attendu: "50" },
+            { question: "c)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) Les faces paires : $2$, $4$, $6$. C'est $3$ faces sur $6$, la moitié.\nLa moitié de $300$ : $300 \\div 2 = 150$ nombres pairs, à peu près.\nb) Le $1$ : $1$ face sur $6$. Un sixième de $300$ : $300 \\div 6 = 50$.\nc) On attendait environ $50$. On a eu $43$ : $7$ de moins.\nSur $300$ lancers, c'est un petit écart : c'est normal.\n⛔ Le piège : attendre exactement $50$. On obtient presque toujours un peu plus ou un peu moins.\nRéponse : a) environ $150$ ; b) environ $50$ ; c) oui, c'est normal.",
           schema: ecranSeulement(grille(["résultat", "attendu"], [["pair", "150"], ["1", "50"]])),
@@ -506,6 +585,15 @@ export const exercicesProbaFrequence6e: FicheExercicesData = {
           titre: "La punaise",
           enonce:
             "Une punaise tombe soit pointe en l'air, soit pointe en bas. Quatre groupes la lancent $25$ fois chacun. Le diagramme donne les « pointe en l'air » de chaque groupe.\na) Calcule la fréquence de chaque groupe.\nb) Réunis les quatre groupes. Quelle fréquence obtiens-tu ?\nc) Peut-on trouver la probabilité en comptant les issues, comme pour une pièce ? Pourquoi ?\nd) Quelle valeur proposer pour la probabilité de « pointe en l'air » ?",
+          reponses: [
+            { question: "a) G1", attendu: "0,64" },
+            { question: "a) G2", attendu: "0,56" },
+            { question: "a) G3", attendu: "0,68" },
+            { question: "a) G4", attendu: "0,52" },
+            { question: "b)", attendu: "0,6" },
+            { question: "c)", attendu: ["non", "faux"] },
+            { question: "d)", attendu: "0,6" },
+          ],
           figure: barres([{ label: "G1", value: 16 }, { label: "G2", value: 14 }, { label: "G3", value: 17 }, { label: "G4", value: 13 }]),
           correction:
             "a) Sur $25$ lancers, je multiplie par $4$ pour avoir des centièmes.\nG1 : $\\dfrac{16}{25} = \\dfrac{64}{100} = 0{,}64$. G2 : $\\dfrac{14}{25} = 0{,}56$.\nG3 : $\\dfrac{17}{25} = 0{,}68$. G4 : $\\dfrac{13}{25} = 0{,}52$.\nb) Ensemble : $16 + 14 + 17 + 13 = 60$, sur $4 \\times 25 = 100$ lancers. Fréquence : $0{,}6$.\nc) Non. Les deux issues n'ont pas la même chance : la punaise n'est pas symétrique.\nSeule l'expérience peut nous renseigner.\nd) Environ $0{,}6$ : c'est la fréquence sur le plus grand nombre de lancers.\n⛔ Le piège : dire « deux issues, donc une chance sur deux ». Ce n'est vrai que si les issues ont la même chance.\nRéponse : b) $0{,}6$ ; c) non ; d) environ $0{,}6$.",
@@ -515,6 +603,13 @@ export const exercicesProbaFrequence6e: FicheExercicesData = {
           titre: "Le dé de Zoé est-il truqué ?",
           enonce:
             "Zoé se méfie de son dé. Elle fait deux séries de lancers et compte les $6$.\na) Calcule la fréquence du $6$ dans chaque série.\nb) Combien de $6$ pouvait-on attendre dans chaque série ?\nc) Quelle série doit inquiéter Zoé ? Explique.",
+          reponses: [
+            { question: "a) s. 1", attendu: "2/6" },
+            { question: "a) s. 2", attendu: "0,3" },
+            { question: "b) s. 1", attendu: "1" },
+            { question: "b) s. 2", attendu: "100" },
+            { question: "c)", attendu: ["la série 2", "série 2", "2"], exact: true },
+          ],
           figure: grille(["série", "lancers", "nombre de 6"], [
             ["série 1", "6", "2"],
             ["série 2", "600", "180"],
@@ -527,6 +622,13 @@ export const exercicesProbaFrequence6e: FicheExercicesData = {
           titre: "Toute la classe lance deux pièces",
           enonce:
             "Chacun des $25$ élèves d'une classe lance deux pièces $20$ fois. La classe réunit ses résultats.\na) Combien de lancers en tout ?\nb) La classe obtient « deux piles » $131$ fois. Quelle est la fréquence observée ?\nc) La probabilité de « deux piles » est $\\dfrac{1}{4}$. Combien pouvait-on attendre ?\nd) Léo, seul, a obtenu $8$ « deux piles » sur $20$. Quelle est sa fréquence ?\ne) Quelle fréquence est la plus proche de $0{,}25$ ? Pourquoi ?",
+          reponses: [
+            { question: "a)", attendu: "500" },
+            { question: "b)", attendu: "0,262" },
+            { question: "c)", attendu: "125" },
+            { question: "d)", attendu: "0,4" },
+            { question: "e)", attendu: ["celle de la classe", "la classe", "classe"], exact: true },
+          ],
           correction:
             "a) $25 \\times 20 = 500$ lancers.\nb) $\\dfrac{131}{500} = \\dfrac{262}{1\\,000} = 0{,}262$.\nc) Un quart de $500$ : $500 \\div 4 = 125$. On a eu $131$ : $6$ de plus seulement.\nd) $\\dfrac{8}{20} = \\dfrac{4}{10} = 0{,}4$.\ne) Celle de la classe : $0{,}262$ est tout près de $0{,}25$. Celle de Léo, $0{,}4$, en est loin.\nLa classe a fait $500$ lancers, Léo seulement $20$.\n⛔ Le piège : croire que Léo s'est trompé. Sur $20$ lancers, un tel écart arrive. C'est pour cela qu'on réunit les résultats.\nRéponse : a) $500$ ; b) $0{,}262$ ; c) $125$ ; d) $0{,}4$ ; e) celle de la classe.",
           schema: echelle([{ label: "classe", valeur: 0.262 }, { label: "Léo", valeur: 0.4 }]),
@@ -536,6 +638,12 @@ export const exercicesProbaFrequence6e: FicheExercicesData = {
           titre: "La roue du stand",
           enonce:
             "Une roue a $8$ secteurs égaux. $2$ secteurs sont gagnants.\na) Quelle est la probabilité de gagner ?\nb) Après $80$ tours, on a gagné $26$ fois. Combien de gains pouvait-on attendre ? Quelle est la fréquence observée ?\nc) Après $800$ tours, on a gagné $204$ fois. Quelle est la fréquence observée ?\nd) Que remarques-tu ?",
+          reponses: [
+            { question: "a)", attendu: "0,25" },
+            { question: "b) att.", attendu: "20" },
+            { question: "b) fréq", attendu: "0,325" },
+            { question: "c)", attendu: "0,255" },
+          ],
           correction:
             "a) $2$ secteurs sur $8$ : $\\dfrac{2}{8} = \\dfrac{1}{4}$, soit $0{,}25$.\nb) Un quart de $80$ : $80 \\div 4 = 20$ gains attendus.\nFréquence : $26 \\div 80 = 0{,}325$.\nc) $204 \\div 800 = 0{,}255$.\nd) Écart après $80$ tours : $0{,}325 - 0{,}25 = 0{,}075$.\nÉcart après $800$ tours : $0{,}255 - 0{,}25 = 0{,}005$.\nAvec plus de tours, la fréquence se rapproche de la probabilité.\n⛔ Le piège : croire que l'écart finira à $0$. Il devient tout petit, mais le hasard reste là.\nRéponse : a) $0{,}25$ ; b) $20$, et $0{,}325$ ; c) $0{,}255$ ; d) l'écart se réduit.",
           schema: roue([{ label: "G", poids: 1, couleur: VERT }, { label: "", poids: 1, couleur: GRIS }, { label: "", poids: 1, couleur: GRIS }, { label: "", poids: 1, couleur: GRIS }, { label: "G", poids: 1, couleur: VERT }, { label: "", poids: 1, couleur: GRIS }, { label: "", poids: 1, couleur: GRIS }, { label: "", poids: 1, couleur: GRIS }]),

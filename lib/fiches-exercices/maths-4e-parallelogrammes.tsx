@@ -365,6 +365,10 @@ export const exercicesParallelogrammes4e: FicheExercicesData = {
         {
           enonce:
             "Dans chaque cas, les droites citées sont parallèles, et ce sont les seules. Le quadrilatère est-il un parallélogramme ?\na) $KLMN$ : $(KL) \\parallel (MN)$ et $(LM) \\parallel (NK)$.\nb) $PQRS$ : $(PQ) \\parallel (RS)$, mais les droites $(QR)$ et $(SP)$ se coupent.",
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: ["non", "trapèze"] },
+          ],
           correction:
             "Je cherche DEUX couples de côtés opposés parallèles : c'est la définition.\na) $[KL]$ et $[MN]$ sont opposés, $[LM]$ et $[NK]$ aussi. Deux couples de côtés opposés parallèles : $KLMN$ est un parallélogramme.\nb) Un seul couple de côtés parallèles, $(PQ)$ et $(RS)$. L'autre couple se coupe : $PQRS$ n'est pas un parallélogramme, c'est un trapèze.\n⛔ Le piège : juger à l'œil. Un trapèze aussi peut être penché ; ce qui compte, ce sont les deux couples de parallèles.\nRéponse : a) oui ; b) non, c'est un trapèze.",
           schema: deux(
@@ -375,6 +379,11 @@ export const exercicesParallelogrammes4e: FicheExercicesData = {
         },
         {
           enonce: "$EFGH$ est un parallélogramme avec $EF = 9$ cm et $FG = 4{,}5$ cm.\na) Donner $GH$ et $HE$.\nb) Calculer son périmètre.",
+          reponses: [
+            { question: "a) GH", attendu: "9" },
+            { question: "a) HE", attendu: "4,5" },
+            { question: "b)", attendu: "27" },
+          ],
           correction:
             "a) Dans un parallélogramme, les côtés opposés ont la même longueur.\n$[GH]$ est opposé à $[EF]$ : $GH = EF = 9$ cm.\n$[HE]$ est opposé à $[FG]$ : $HE = FG = 4{,}5$ cm.\nb) Le périmètre, c'est le tour complet : les quatre côtés.\n$2 \\times (9 + 4{,}5) = 2 \\times 13{,}5 = 27$.\n⛔ Le piège : s'arrêter à $9 + 4{,}5$. Ce n'est que la moitié du tour : deux côtés sur quatre.\nRéponse : $GH = 9$ cm, $HE = 4{,}5$ cm, et le périmètre vaut $27$ cm.",
           schema: quad({ A: [0, 0], B: [9, 0], C: [11.7, 3.6], D: [2.7, 3.6] }, { noms: { A: "E", B: "F", C: "G", D: "H" }, cotes: { AB: "9 cm", BC: "4,5 cm", CD: "9 cm", DA: "4,5 cm" }, trouveCotes: ["CD", "DA"], egaux: [["AB", "CD"], ["BC", "DA"]], marge: 64 }),
@@ -382,6 +391,11 @@ export const exercicesParallelogrammes4e: FicheExercicesData = {
         },
         {
           enonce: "$RSTU$ est un parallélogramme et $\\widehat{R} = 118°$.\nCalculer $\\widehat{S}$, $\\widehat{T}$ et $\\widehat{U}$.",
+          reponses: [
+            { question: "S", attendu: "62" },
+            { question: "T", attendu: "118" },
+            { question: "U", attendu: "62" },
+          ],
           correction:
             "Je repère d'abord qui est en face de qui : $R$ et $T$ sont opposés, $S$ et $U$ aussi.\nLes angles opposés sont égaux : $\\widehat{T} = \\widehat{R} = 118°$.\n$R$ et $S$ se suivent : deux angles consécutifs font $180°$ ensemble. $\\widehat{S} = 180° - 118° = 62°$.\n$\\widehat{U}$ est opposé à $\\widehat{S}$ : $\\widehat{U} = 62°$.\nJe vérifie : $118 + 62 + 118 + 62 = 360$, la somme des angles d'un quadrilatère.\n⛔ Le piège : écrire $\\widehat{T} = 180° - 118°$. $T$ est en face de $R$, pas à côté : il lui est égal.\nRéponse : $\\widehat{S} = \\widehat{U} = 62°$ et $\\widehat{T} = 118°$.",
           schema: quad({ A: [0, 0], B: [6, 0], C: [4.122, 3.532], D: [-1.878, 3.532] }, { noms: { A: "R", B: "S", C: "T", D: "U" }, angles: { A: "118°", B: "62°", C: "118°", D: "62°" }, trouve: ["B", "C", "D"] }),
@@ -389,6 +403,12 @@ export const exercicesParallelogrammes4e: FicheExercicesData = {
         },
         {
           enonce: "$ABCD$ est un parallélogramme. Ses diagonales se coupent en $O$. On sait que $AC = 11$ cm et $BD = 7$ cm.\nCalculer $OA$, $OC$, $OB$ et $OD$.",
+          reponses: [
+            { question: "OA", attendu: "5,5" },
+            { question: "OC", attendu: "5,5" },
+            { question: "OB", attendu: "3,5" },
+            { question: "OD", attendu: "3,5" },
+          ],
           correction:
             "Les diagonales d'un parallélogramme se coupent en leur milieu : $O$ est le milieu de $[AC]$ ET le milieu de $[BD]$.\n$O$ milieu de $[AC]$ : $OA = OC = 11 \\div 2 = 5{,}5$ cm.\n$O$ milieu de $[BD]$ : $OB = OD = 7 \\div 2 = 3{,}5$ cm.\n⛔ Le piège : croire que les quatre morceaux sont égaux. $O$ coupe CHAQUE diagonale en deux moitiés égales, mais les deux diagonales n'ont pas la même longueur.\nRéponse : $OA = OC = 5{,}5$ cm et $OB = OD = 3{,}5$ cm.",
           schema: quad({ A: [-5.5, 0], B: [1.75, -3.031], C: [5.5, 0], D: [-1.75, 3.031] }, { centre: "O", demi: { OA: "5,5 cm", OB: "3,5 cm" }, trouveDemi: ["OA", "OB"], moities: [["OA", "OC"], ["OB", "OD"]] }),
@@ -396,6 +416,9 @@ export const exercicesParallelogrammes4e: FicheExercicesData = {
         },
         {
           enonce: "Un parallélogramme $ABCD$ a pour base $AB = 10$ cm. Le côté $[AD]$ mesure $6$ cm, et la hauteur issue de $D$ sur $(AB)$ mesure $5$ cm.\nCalculer son aire.",
+          reponses: [
+            { attendu: "50" },
+          ],
           correction:
             "L'aire d'un parallélogramme vaut base × hauteur, avec une hauteur PERPENDICULAIRE à la base.\nLa base est $[AB]$, $10$ cm. Sa hauteur est le segment pointillé qui tombe de $D$ à angle droit sur $(AB)$ : $5$ cm.\nAire $= 10 \\times 5 = 50$ cm².\nLe côté $[AD]$, $6$ cm, est penché : il ne sert pas pour l'aire.\n⛔ Le piège : calculer $10 \\times 6 = 60$ cm². Le côté oblique est plus long que la hauteur ; on obtient l'aire d'un rectangle de côtés $10$ et $6$, trop grande.\nRéponse : l'aire vaut $50$ cm².",
           schema: quad({ A: [0, 0], B: [10, 0], C: [13.317, 5], D: [3.317, 5] }, { cotes: { AB: "10 cm", DA: "6 cm" }, hauteurs: [{ de: "D", sur: "AB", label: "5 cm" }] }),
@@ -404,6 +427,11 @@ export const exercicesParallelogrammes4e: FicheExercicesData = {
         {
           enonce:
             "Donner la nature la plus précise de chaque parallélogramme.\na) $ABCD$ est un parallélogramme et $\\widehat{A} = 90°$.\nb) $EFGH$ est un parallélogramme et $EF = FG$.\nc) $IJKL$ est un parallélogramme, $IJ = JK$ et $\\widehat{J} = 90°$.",
+          reponses: [
+            { question: "a)", attendu: ["rectangle"] },
+            { question: "b)", attendu: ["losange"] },
+            { question: "c)", attendu: ["carré"] },
+          ],
           correction:
             "a) Un parallélogramme qui a UN angle droit est un rectangle. Un seul suffit : l'angle opposé vaut aussi $90°$, et les deux autres $180° - 90° = 90°$.\nb) $[EF]$ et $[FG]$ se suivent : ce sont deux côtés CONSÉCUTIFS égaux. Un parallélogramme qui a deux côtés consécutifs égaux est un losange : ses quatre côtés sont égaux.\nc) Deux côtés consécutifs égaux : c'est un losange. Un angle droit : c'est aussi un rectangle. Les deux à la fois : c'est un carré.\n⛔ Le piège : croire qu'il faut vérifier les quatre angles ou les quatre côtés. Dans un parallélogramme, les côtés opposés sont déjà égaux et les angles se déduisent : une seule information suffit.\nRéponse : a) rectangle ; b) losange ; c) carré.",
           schema: trois(
@@ -415,6 +443,9 @@ export const exercicesParallelogrammes4e: FicheExercicesData = {
         },
         {
           enonce: "Les diagonales $[MP]$ et $[NQ]$ du quadrilatère $MNPQ$ se coupent en $I$. On mesure $IM = IP = 4{,}2$ cm, $IN = 3$ cm et $IQ = 3{,}5$ cm.\n$MNPQ$ est-il un parallélogramme ?",
+          reponses: [
+            { attendu: ["non", "faux"] },
+          ],
           correction:
             "Pour que ce soit un parallélogramme par les diagonales, il faut que $I$ soit le milieu des DEUX diagonales.\n$IM = IP = 4{,}2$ cm : $I$ est bien le milieu de $[MP]$.\n$IN = 3$ cm mais $IQ = 3{,}5$ cm : $I$ n'est pas le milieu de $[NQ]$.\nOr, dans un parallélogramme, les diagonales se coupent en leur milieu. Ici ce n'est pas le cas : $MNPQ$ n'est pas un parallélogramme.\n⛔ Le piège : s'arrêter à la première diagonale. Un seul milieu ne suffit pas ; il faut le MÊME milieu pour les deux.\nRéponse : non, $MNPQ$ n'est pas un parallélogramme.",
           schema: quad({ A: [-4.2, 0], B: [1.026, -2.819], C: [4.2, 0], D: [-1.197, 3.289] }, { noms: { A: "M", B: "N", C: "P", D: "Q" }, centre: "I", demi: { OA: "4,2 cm", OB: "3 cm", OC: "4,2 cm", OD: "3,5 cm" }, trouveDemi: ["OB", "OD"], moities: [["OA", "OC"]] }),
@@ -423,6 +454,10 @@ export const exercicesParallelogrammes4e: FicheExercicesData = {
         {
           enonce:
             "a) $ABCD$ est un quadrilatère non croisé avec $AB = CD = 6$ cm et $BC = DA = 3{,}5$ cm. Est-ce un parallélogramme ?\nb) $EFGH$ est un quadrilatère non croisé avec $EF = FG = 5$ cm et $GH = HE = 3$ cm. Est-ce un parallélogramme ?",
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: ["non", "faux"] },
+          ],
           correction:
             "Un quadrilatère non croisé dont les côtés OPPOSÉS ont la même longueur deux à deux est un parallélogramme.\na) $[AB]$ et $[CD]$ sont opposés, et $AB = CD$. $[BC]$ et $[DA]$ sont opposés, et $BC = DA$. Les côtés opposés sont égaux deux à deux : $ABCD$ est un parallélogramme.\nb) $[EF]$ et $[FG]$ se suivent : ils ne sont pas opposés. Les côtés opposés sont $[EF]$ et $[GH]$ : $5$ cm et $3$ cm, différents. $EFGH$ n'est pas un parallélogramme : il a la forme d'un cerf-volant.\n⛔ Le piège au b) : voir « deux longueurs égales, deux fois » et conclure trop vite. Il faut que les côtés égaux soient EN FACE l'un de l'autre.\nRéponse : a) oui ; b) non.",
           schema: deux(
@@ -448,6 +483,13 @@ export const exercicesParallelogrammes4e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Dans le parallélogramme $ABCD$, $\\widehat{A}$ mesure $3x$ degrés et $\\widehat{B}$ mesure $2x$ degrés.\na) Écrire une équation et trouver $x$.\nb) En déduire les quatre angles.",
+          reponses: [
+            { question: "a)", attendu: "36" },
+            { question: "b) A", attendu: "108" },
+            { question: "b) B", attendu: "72" },
+            { question: "b) C", attendu: "108" },
+            { question: "b) D", attendu: "72" },
+          ],
           correction:
             "a) $A$ et $B$ sont deux sommets consécutifs : dans un parallélogramme, leurs angles font $180°$ ensemble.\n$3x + 2x = 180$, soit $5x = 180$, donc $x = 180 \\div 5 = 36$.\nb) $\\widehat{A} = 3 \\times 36 = 108°$ et $\\widehat{B} = 2 \\times 36 = 72°$.\nLes angles opposés sont égaux : $\\widehat{C} = \\widehat{A} = 108°$ et $\\widehat{D} = \\widehat{B} = 72°$.\nJe vérifie : $108 + 72 + 108 + 72 = 360$.\n⛔ Le piège : écrire $3x + 2x = 360$. Ce sont les QUATRE angles qui font $360°$ ; deux angles consécutifs font $180°$.\nRéponse : $x = 36$ ; $\\widehat{A} = \\widehat{C} = 108°$ et $\\widehat{B} = \\widehat{D} = 72°$.",
           schema: quad({ A: [0, 0], B: [6, 0], C: [4.764, 3.804], D: [-1.236, 3.804] }, { angles: { A: "108°", B: "72°", C: "108°", D: "72°" }, trouve: ["A", "B", "C", "D"] }),
@@ -455,6 +497,12 @@ export const exercicesParallelogrammes4e: FicheExercicesData = {
         },
         {
           enonce: "$ABCD$ est un parallélogramme de centre $O$ avec $AB = 9$ cm, $BC = 7$ cm, $AC = 14$ cm et $BD = 8$ cm.\na) Calculer $OA$ et $OB$.\nb) Calculer le périmètre du triangle $OAB$, puis celui du triangle $OBC$.",
+          reponses: [
+            { question: "a) OA", attendu: "7" },
+            { question: "a) OB", attendu: "4" },
+            { question: "b) OAB", attendu: "20" },
+            { question: "b) OBC", attendu: "18" },
+          ],
           correction:
             "a) Le centre $O$ est le point où les diagonales se coupent, et elles se coupent en leur milieu.\n$OA = 14 \\div 2 = 7$ cm et $OB = 8 \\div 2 = 4$ cm.\nb) Triangle $OAB$ : $OA + OB + AB = 7 + 4 + 9 = 20$ cm.\nTriangle $OBC$ : $OC = OA = 7$ cm, donc $OB + OC + BC = 4 + 7 + 7 = 18$ cm.\n⛔ Le piège : prendre la diagonale entière, $AC = 14$ cm, au lieu de sa moitié. Le triangle $OAB$ ne va que jusqu'au centre.\nRéponse : $OA = 7$ cm, $OB = 4$ cm ; périmètres $20$ cm et $18$ cm.",
           schema: quad({ A: [0, 0], B: [9, 0], C: [12.667, 5.963], D: [3.667, 5.963] }, { cotes: { AB: "9 cm", BC: "7 cm" }, centre: "O", demi: { OA: "7 cm", OB: "4 cm" }, trouveDemi: ["OA", "OB"], moities: [["OA", "OC"], ["OB", "OD"]] }),
@@ -462,6 +510,9 @@ export const exercicesParallelogrammes4e: FicheExercicesData = {
         },
         {
           enonce: "Deux segments $[EG]$ et $[FH]$ mesurent chacun $10$ cm et ont le même milieu $O$. Ils ne sont pas sur la même droite.\na) Montrer que $EFGH$ est un parallélogramme.\nb) Quelle est sa nature exacte ?",
+          reponses: [
+            { question: "b)", attendu: ["rectangle"] },
+          ],
           correction:
             "a) Je sais que les diagonales $[EG]$ et $[FH]$ de $EFGH$ ont le même milieu $O$.\nOr, si les diagonales d'un quadrilatère ont le même milieu, alors c'est un parallélogramme.\nDonc $EFGH$ est un parallélogramme.\nb) En plus, ses diagonales ont la même longueur : $EG = FH = 10$ cm.\nOr, un parallélogramme dont les diagonales ont la même longueur est un rectangle.\nDonc $EFGH$ est un rectangle : ses quatre angles sont droits.\n⛔ Le piège : répondre « carré ». Pour un carré, il faudrait AUSSI des diagonales perpendiculaires ; rien ne le dit ici.\nRéponse : $EFGH$ est un parallélogramme, et même un rectangle.",
           schema: quad({ A: [-5, 0], B: [3.214, -3.83], C: [5, 0], D: [-3.214, 3.83] }, { noms: { A: "E", B: "F", C: "G", D: "H" }, centre: "O", demi: { OA: "5 cm", OB: "5 cm" }, moities: [["OA", "OB", "OC", "OD"]], droits: ["A", "B", "C", "D"] }),
@@ -469,6 +520,10 @@ export const exercicesParallelogrammes4e: FicheExercicesData = {
         },
         {
           enonce: "Le parallélogramme $ABCD$ a pour côtés $AB = 10$ cm et $AD = 5$ cm. La hauteur issue de $D$ sur $(AB)$ mesure $4$ cm.\na) Calculer son aire.\nb) Calculer la hauteur issue de $B$ sur la droite $(AD)$.",
+          reponses: [
+            { question: "a)", attendu: "40" },
+            { question: "b)", attendu: "8" },
+          ],
           correction:
             "a) Je prends $[AB]$ pour base, avec sa hauteur : aire $= 10 \\times 4 = 40$ cm².\nb) Je prends maintenant $[AD]$ pour base. La hauteur $h$ qui lui correspond part de $B$, perpendiculaire à $(AD)$ : elle tombe en dehors du côté $[AD]$, sur son prolongement.\nL'aire ne change pas : $5 \\times h = 40$, donc $h = 40 \\div 5 = 8$ cm.\n⛔ Le piège : associer la base $AD$ avec la hauteur de $4$ cm. Chaque hauteur va avec SA base, celle à laquelle elle est perpendiculaire.\nRéponse : l'aire vaut $40$ cm² ; la hauteur issue de $B$ mesure $8$ cm.",
           schema: deux(
@@ -480,6 +535,14 @@ export const exercicesParallelogrammes4e: FicheExercicesData = {
         {
           enonce:
             "$KLMN$ est un losange de centre $O$, de côté $5$ cm, avec $KM = 8$ cm et $LN = 6$ cm.\na) Calculer $OK$ et $OL$.\nb) Que vaut l'angle $\\widehat{KOL}$ ?\nc) Calculer l'aire du triangle $KOL$, puis celle du losange.\nd) En déduire la hauteur du losange relative au côté $[KL]$.",
+          reponses: [
+            { question: "a) OK", attendu: "4" },
+            { question: "a) OL", attendu: "3" },
+            { question: "b)", attendu: "90" },
+            { question: "c) KOL", attendu: "6" },
+            { question: "c) los", attendu: "24" },
+            { question: "d)", attendu: "4,8" },
+          ],
           correction:
             "a) Un losange est un parallélogramme : ses diagonales se coupent en leur milieu. $OK = 8 \\div 2 = 4$ cm et $OL = 6 \\div 2 = 3$ cm.\nb) Les diagonales d'un losange sont perpendiculaires : $\\widehat{KOL} = 90°$.\nc) Le triangle $KOL$ est rectangle en $O$ : aire $= \\dfrac{4 \\times 3}{2} = 6$ cm².\nLes deux diagonales découpent le losange en quatre triangles rectangles pareils : $4 \\times 6 = 24$ cm².\nd) Le losange est aussi un parallélogramme : aire $=$ base × hauteur. Avec la base $KL = 5$ cm : $5 \\times h = 24$, donc $h = 24 \\div 5 = 4{,}8$ cm.\n⛔ Le piège au c) : multiplier les deux diagonales, $8 \\times 6 = 48$ cm². C'est l'aire du rectangle qui entoure le losange : le double.\nRéponse : $OK = 4$ cm, $OL = 3$ cm ; $\\widehat{KOL} = 90°$ ; aire $24$ cm² ; hauteur $4{,}8$ cm.",
           schema: deux(
@@ -491,6 +554,10 @@ export const exercicesParallelogrammes4e: FicheExercicesData = {
         {
           enonce:
             "On place trois points non alignés $A$, $B$, $C$, avec $BC = 5$ cm. $I$ est le milieu de $[AC]$, et on construit $D$ pour que $I$ soit aussi le milieu de $[BD]$.\na) Montrer que $ABCD$ est un parallélogramme, en trois temps.\nb) En déduire la longueur $AD$ et la position des droites $(AD)$ et $(BC)$.",
+          reponses: [
+            { question: "b) AD", attendu: "5" },
+            { question: "b) pos", attendu: ["parallèles", "parallèle"] },
+          ],
           correction:
             "a) Je sais que $I$ est le milieu de $[AC]$ et le milieu de $[BD]$ : les diagonales de $ABCD$ ont le même milieu.\nOr, si les diagonales d'un quadrilatère ont le même milieu, alors c'est un parallélogramme.\nDonc $ABCD$ est un parallélogramme.\nb) Dans un parallélogramme, les côtés opposés sont parallèles et de même longueur. $[AD]$ est opposé à $[BC]$ : $(AD) \\parallel (BC)$ et $AD = BC = 5$ cm.\n⛔ Le piège : écrire la propriété à l'envers, « dans un parallélogramme, les diagonales ont le même milieu ». C'est vrai, mais ça part de ce qu'on veut prouver. Pour MONTRER, je pars des diagonales et j'arrive au parallélogramme.\nRéponse : $ABCD$ est un parallélogramme ; $AD = 5$ cm et $(AD) \\parallel (BC)$.",
           schema: quad({ A: [0, 0], B: [5, -2], C: [8, 2], D: [3, 4] }, { cotes: { BC: "5 cm", DA: "5 cm" }, trouveCotes: ["DA"], centre: "I", moities: [["OA", "OC"], ["OB", "OD"]], paralleles: [["BC", "DA"]] }),
@@ -498,6 +565,10 @@ export const exercicesParallelogrammes4e: FicheExercicesData = {
         },
         {
           enonce: "Dans le parallélogramme $ABCD$, en centimètres : $AB = 2x + 1$, $CD = 3x - 4$ et $BC = x + 2$.\na) Trouver $x$.\nb) Calculer le périmètre de $ABCD$.",
+          reponses: [
+            { question: "a)", attendu: "5" },
+            { question: "b)", attendu: "36" },
+          ],
           correction:
             "a) $[AB]$ et $[CD]$ sont opposés : ils ont la même longueur.\n$2x + 1 = 3x - 4$. J'enlève $2x$ des deux côtés : $1 = x - 4$. J'ajoute $4$ : $x = 5$.\nJe vérifie : $2 \\times 5 + 1 = 11$ et $3 \\times 5 - 4 = 11$.\nb) $AB = 11$ cm et $BC = 5 + 2 = 7$ cm.\nPérimètre : $2 \\times (11 + 7) = 2 \\times 18 = 36$ cm.\n⛔ Le piège : écrire $2x + 1 = x + 2$. $[AB]$ et $[BC]$ se suivent, ils ne sont pas opposés : rien ne dit qu'ils sont égaux.\nRéponse : $x = 5$ ; le périmètre vaut $36$ cm.",
           schema: quad({ A: [0, 0], B: [11, 0], C: [13.394, 6.578], D: [2.394, 6.578] }, { cotes: { AB: "2x + 1", BC: "x + 2", CD: "3x − 4" }, egaux: [["AB", "CD"]], marge: 64 }),
@@ -506,6 +577,12 @@ export const exercicesParallelogrammes4e: FicheExercicesData = {
         {
           enonce:
             "Vrai ou faux ? Justifier par une propriété ou par un contre-exemple.\na) Un rectangle est un parallélogramme.\nb) Les diagonales d'un losange ont toujours la même longueur.\nc) Un quadrilatère dont les diagonales sont perpendiculaires est un losange.\nd) Un carré est un losange.",
+          reponses: [
+            { question: "a)", attendu: ["vrai", "vraie", "oui"] },
+            { question: "b)", attendu: ["faux", "fausse", "non"] },
+            { question: "c)", attendu: ["faux", "fausse", "non"] },
+            { question: "d)", attendu: ["vrai", "vraie", "oui"] },
+          ],
           correction:
             "a) Vrai. Un rectangle a ses côtés opposés parallèles deux à deux : c'est un parallélogramme, avec quatre angles droits en plus.\nb) Faux. Contre-exemple : le losange $EFGH$ dessiné a des diagonales de $7$ cm et $4$ cm. Des diagonales de même longueur, c'est le rectangle.\nc) Faux. Contre-exemple : dans le cerf-volant $PQRS$ dessiné, les diagonales sont perpendiculaires, mais elles ne se coupent pas en leur milieu ($OP = 2$ cm et $OR = 5$ cm). Ce n'est même pas un parallélogramme.\nd) Vrai. Un carré a quatre côtés égaux : c'est un losange, avec des angles droits en plus.\n⛔ Le piège au c) : oublier la première condition. Pour un losange, il faut des diagonales perpendiculaires QUI SE COUPENT EN LEUR MILIEU.\nRéponse : a) vrai ; b) faux ; c) faux ; d) vrai.",
           schema: deux(
@@ -532,6 +609,12 @@ export const exercicesParallelogrammes4e: FicheExercicesData = {
           titre: "La lampe d'architecte",
           enonce:
             "Le bras de nombreuses lampes d'architecte, comme l'Anglepoise dont le brevet est déposé en 1932, tient grâce à des parallélogrammes articulés. Sur le schéma, le petit côté $[AD]$, de $10$ cm, est fixé au pied et reste vertical. Les tiges $[AB]$ et $[DC]$ mesurent $32$ cm, et $[BC]$ mesure $10$ cm : c'est lui qui porte la tête de la lampe.\na) Pourquoi $ABCD$ est-il un parallélogramme, quelle que soit la position du bras ?\nb) Dans la position du schéma, $\\widehat{DAB} = 65°$. Calculer les trois autres angles.\nc) On lève le bras : $\\widehat{DAB} = 50°$. Le côté $[BC]$ est-il toujours vertical ? Pourquoi est-ce utile pour la lampe ?",
+          reponses: [
+            { question: "b) ABC", attendu: "115" },
+            { question: "b) BCD", attendu: "65" },
+            { question: "b) CDA", attendu: "115" },
+            { question: "c)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) Les tiges ne changent pas de longueur quand le bras bouge : $AB = DC = 32$ cm et $BC = AD = 10$ cm. Les côtés opposés sont égaux deux à deux, et le quadrilatère n'est pas croisé : $ABCD$ est un parallélogramme, dans toutes les positions.\nb) Les angles opposés sont égaux : $\\widehat{BCD} = \\widehat{DAB} = 65°$.\n$A$ et $B$ se suivent : $\\widehat{ABC} = 180° - 65° = 115°$, et $\\widehat{CDA} = 115°$ aussi.\nc) $ABCD$ reste un parallélogramme, donc $(BC) \\parallel (AD)$. Comme $[AD]$ est vertical, $[BC]$ l'est aussi, quel que soit l'angle.\nLa tête de la lampe, fixée sur $[BC]$, garde donc la même orientation : elle monte et descend sans basculer.\n⛔ Le piège : croire que les angles restent les mêmes quand on lève le bras. Les angles changent ($50°$ et $130°$), mais les longueurs et le parallélisme restent.\nRéponse : a) côtés opposés égaux ; b) $115°$, $65°$ et $115°$ ; c) oui, $[BC]$ reste parallèle à $[AD]$, donc vertical.",
           schema: deux(
@@ -544,6 +627,12 @@ export const exercicesParallelogrammes4e: FicheExercicesData = {
           titre: "Les places en épi",
           enonce:
             "Sur un parking « en épi », chaque place est un parallélogramme. Le long du trottoir, une place occupe $2{,}9$ m ; les lignes peintes, penchées, mesurent $6$ m ; la place s'avance de $5{,}2$ m perpendiculairement au trottoir.\na) Calculer l'aire d'une place.\nb) Une voiture a besoin d'au moins $2{,}5$ m de large, mesurés perpendiculairement aux lignes peintes. En prenant une ligne peinte comme base, calculer cette largeur. La place convient-elle ?\nc) Chaque ligne peinte, de son pied à son bout, avance de $3$ m le long du trottoir. Combien de places peut-on peindre au plus sur une bande de $60$ m ?",
+          reponses: [
+            { question: "a)", attendu: "15,08" },
+            { question: "b) larg", attendu: "2,51", tolerance: 0.005 },
+            { question: "b) conv", attendu: ["oui", "vrai"] },
+            { question: "c)", attendu: "19" },
+          ],
           correction:
             "a) Je prends pour base le côté le long du trottoir, $2{,}9$ m. Sa hauteur est la distance perpendiculaire au trottoir, $5{,}2$ m, et pas la ligne penchée de $6$ m.\nAire $= 2{,}9 \\times 5{,}2 = 15{,}08$ m².\nb) La même aire, avec une autre base : la ligne peinte, $6$ m. La hauteur qui lui correspond est justement la largeur $\\ell$ de la place.\n$6 \\times \\ell = 15{,}08$, donc $\\ell = 15{,}08 \\div 6 \\approx 2{,}51$ m.\n$2{,}51 > 2{,}5$ : la place convient, de justesse.\nc) $n$ places côte à côte occupent $n \\times 2{,}9$ m le long du trottoir, et la dernière ligne avance encore de $3$ m : il faut $n \\times 2{,}9 + 3 \\le 60$.\n$60 - 3 = 57$ et $57 \\div 2{,}9 \\approx 19{,}7$ : au plus $19$ places.\n⛔ Le piège au c) : faire $60 \\div 2{,}9 \\approx 20{,}7$ et répondre $20$. La dernière ligne penchée sortirait de la bande.\nRéponse : $15{,}08$ m² ; une largeur de $2{,}51$ m, la place convient ; $19$ places au plus.",
           schema: quad({ A: [0, 0], B: [2.9, 0], C: [5.893, 5.2], D: [2.993, 5.2] }, { cotes: { AB: "2,9 m", DA: "6 m" }, hauteurs: [{ de: "D", sur: "AB", label: "5,2 m" }, { de: "B", sur: "DA", label: "2,51 m" }] }),
@@ -553,6 +642,11 @@ export const exercicesParallelogrammes4e: FicheExercicesData = {
           titre: "Le losange du baseball",
           enonce:
             "Au baseball, les quatre bases forment ce qu'on appelle le « losange ». Le règlement officiel impose $27{,}43$ m entre deux bases qui se suivent, un angle droit au marbre $A$, et $38{,}80$ m du marbre $A$ à la deuxième base $C$. Les bases sont $A$, $B$, $C$, $D$ dans l'ordre.\na) Montrer que $ABCD$ est un carré.\nb) Quelle est la distance de la première base $B$ à la troisième base $D$ ? Où est le centre $O$ du terrain, et à quelle distance du marbre ?\nc) Le lanceur se tient sur le monticule $L$, sur $[AC]$, à $18{,}44$ m du marbre. Est-il au centre du carré ?",
+          reponses: [
+            { question: "b) BD", attendu: "38,8" },
+            { question: "b) AO", attendu: "19,4" },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) Les quatre côtés mesurent $27{,}43$ m : les côtés opposés sont égaux deux à deux, et $ABCD$ n'est pas croisé. C'est un parallélogramme.\nDeux côtés consécutifs sont égaux : c'est un losange.\nIl a en plus un angle droit en $A$ : un losange qui a un angle droit est un carré.\nb) Les diagonales d'un carré ont la même longueur : $BD = AC = 38{,}80$ m.\nElles se coupent en leur milieu $O$ : $AO = 38{,}80 \\div 2 = 19{,}40$ m.\nc) $L$ est à $18{,}44$ m du marbre, et le centre à $19{,}40$ m : $19{,}40 - 18{,}44 = 0{,}96$ m.\nLe lanceur n'est pas au centre : il est $0{,}96$ m plus près du marbre.\n⛔ Le piège : croire qu'un « losange » ne peut pas être un carré. Le carré EST un losange, avec des angles droits en plus : le nom du baseball n'a rien de faux.\nRéponse : $ABCD$ est un carré ; $BD = 38{,}80$ m et $AO = 19{,}40$ m ; le lanceur est à $0{,}96$ m du centre.",
           schema: quad({ A: [0, 0], B: [19.396, 19.396], C: [0, 38.792], D: [-19.396, 19.396] }, { cotes: { AB: "27,43 m" }, droits: ["A", "B", "C", "D"], egaux: [["AB", "BC", "CD", "DA"]], centre: "O", demi: { OC: "19,40 m" }, trouveDemi: ["OC"], points: [{ en: [0, 18.44], nom: "L", vers: "basdroite" }] }),
@@ -562,6 +656,13 @@ export const exercicesParallelogrammes4e: FicheExercicesData = {
           titre: "Le losange du drapeau brésilien",
           enonce:
             "Le drapeau du Brésil est un rectangle vert de $2$ m sur $1{,}4$ m. Le losange jaune $KLMN$ a ses quatre sommets sur les axes de symétrie du drapeau, chacun à $0{,}17$ m du bord le plus proche.\na) Calculer les longueurs des diagonales $[KM]$ et $[LN]$.\nb) Expliquer pourquoi $KLMN$ est bien un losange. Est-ce un carré ?\nc) Calculer l'aire du losange.\nd) Quel pourcentage du drapeau le losange couvre-t-il, à l'unité près ?",
+          reponses: [
+            { question: "a) KM", attendu: "1,66" },
+            { question: "a) LN", attendu: "1,06" },
+            { question: "b) carré", attendu: ["non", "faux"] },
+            { question: "c)", attendu: "0,8798", tolerance: 0.005 },
+            { question: "d)", attendu: "31", tolerance: 0.5 },
+          ],
           correction:
             "a) $[KM]$ est horizontale : $KM = 2 - 0{,}17 - 0{,}17 = 1{,}66$ m.\n$[LN]$ est verticale : $LN = 1{,}4 - 0{,}17 - 0{,}17 = 1{,}06$ m.\nb) Les deux diagonales sont portées par les axes du drapeau : elles se coupent au centre $O$ du drapeau, qui est le milieu de chacune ($OK = OM = 0{,}83$ m, $OL = ON = 0{,}53$ m). Même milieu : $KLMN$ est un parallélogramme.\nSes diagonales sont en plus perpendiculaires, comme les deux axes : c'est un losange.\nCe n'est pas un carré : ses diagonales n'ont pas la même longueur, $1{,}66$ m et $1{,}06$ m.\nc) Je trace le rectangle construit sur les diagonales, $1{,}66$ m sur $1{,}06$ m. Les diagonales le coupent en huit triangles rectangles pareils ; le losange en contient quatre : la moitié.\nAire $= \\dfrac{1{,}66 \\times 1{,}06}{2} = \\dfrac{1{,}7596}{2} = 0{,}8798$ m².\nd) Le drapeau mesure $2 \\times 1{,}4 = 2{,}8$ m². $0{,}8798 \\div 2{,}8 \\approx 0{,}314$, soit environ $31$ %.\n⛔ Le piège au c) : multiplier les diagonales sans diviser par $2$. On trouverait $1{,}7596$ m², l'aire du rectangle autour, et un losange qui couvrirait $63$ % du drapeau : à l'œil, c'est faux.\nRéponse : $KM = 1{,}66$ m et $LN = 1{,}06$ m ; un losange, pas un carré ; aire $\\approx 0{,}88$ m², environ $31$ % du drapeau.",
           schema: quad({ A: [0.17, 0.7], B: [1, 0.17], C: [1.83, 0.7], D: [1, 1.23] }, { noms: { A: "K", B: "L", C: "M", D: "N" }, cadre: [[0, 0], [2, 0], [2, 1.4], [0, 1.4]], centre: "O", demi: { OC: "0,83 m", OB: "0,53 m" }, diagDroit: true }),

@@ -244,6 +244,12 @@ export const exercicesEntierNombre6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Écris chaque nombre en chiffres.\na) trois mille six cent huit\nb) quarante-sept mille vingt\nc) deux millions cinq cent mille\nd) six cent mille neuf",
+          reponses: [
+            { question: "a)", attendu: "3608" },
+            { question: "b)", attendu: "47020" },
+            { question: "c)", attendu: "2500000" },
+            { question: "d)", attendu: "600009" },
+          ],
           correction:
             "Je coupe le nombre aux mots « millions » et « mille ».\nChaque morceau remplit une classe de trois chiffres.\na) « trois » mille, puis « six cent huit » : $3\\,608$.\nb) « quarante-sept » mille, puis « vingt ». Vingt s'écrit $020$ dans sa classe. Donc $47\\,020$.\nc) « deux » millions, « cinq cent » mille, puis rien. Donc $2\\,500\\,000$.\nd) « six cent » mille, puis « neuf ». Neuf s'écrit $009$. Donc $600\\,009$.\n⛔ Le piège : oublier les zéros et écrire $6\\,009$ au d). Après « mille », il faut toujours trois chiffres.\nRéponse : a) $3\\,608$ ; b) $47\\,020$ ; c) $2\\,500\\,000$ ; d) $600\\,009$.",
           schema: numeration(["3608", "47020", "2500000", "600009"], { noms: ["a)", "b)", "c)", "d)"] }),
@@ -251,6 +257,12 @@ export const exercicesEntierNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Écris chaque nombre en lettres.\na) $1\\,700$\nb) $80\\,000$\nc) $3\\,091$\nd) $200\\,300$",
+          reponses: [
+            { question: "a)", attendu: ["mille sept cents", "mille-sept-cents"], exact: true },
+            { question: "b)", attendu: ["quatre-vingt mille", "quatre-vingt-mille"], exact: true },
+            { question: "c)", attendu: ["trois mille quatre-vingt-onze", "trois-mille-quatre-vingt-onze"], exact: true },
+            { question: "d)", attendu: ["deux cent mille trois cents", "deux-cent-mille-trois-cents"], exact: true },
+          ],
           correction:
             "Je lis d'abord la classe des mille, puis le reste.\na) « mille », puis « sept cents » : mille sept cents.\nb) « quatre-vingt » mille : quatre-vingt mille.\nc) « trois mille », puis « quatre-vingt-onze » : trois mille quatre-vingt-onze.\nd) « deux cent » mille, puis « trois cents » : deux cent mille trois cents.\n⚠️ « Cent » et « vingt » prennent un s s'ils sont multipliés et finissent le nombre.\nDevant « mille », pas de s : deux cent mille. « Mille » ne prend jamais de s.\n⛔ Le piège : écrire « quatre-vingts mille » au b).\n⭐ On peut aussi mettre des traits d'union partout. Les deux écritures sont justes.\nRéponse : a) mille sept cents ; b) quatre-vingt mille ; c) trois mille quatre-vingt-onze ; d) deux cent mille trois cents.",
           schema: ecranSeulement(
@@ -265,6 +277,12 @@ export const exercicesEntierNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Dans le nombre $27\\,486$ :\na) quel est le chiffre des centaines ?\nb) quel est le nombre de centaines ?\nc) quel est le chiffre des dizaines ?\nd) quel est le nombre de dizaines ?",
+          reponses: [
+            { question: "a)", attendu: "4" },
+            { question: "b)", attendu: "274" },
+            { question: "c)", attendu: "8" },
+            { question: "d)", attendu: "2748" },
+          ],
           correction:
             "Je range le nombre dans le tableau, les unités à droite.\na) Le chiffre des centaines est dans la colonne des centaines : $4$.\nb) Le nombre de centaines : je lis depuis la gauche jusqu'à cette colonne. C'est $274$.\nEn effet, $274 \\times 100 = 27\\,400$.\nc) Le chiffre des dizaines est $8$.\nd) Le nombre de dizaines : je lis jusqu'à la colonne des dizaines. C'est $2\\,748$.\n⛔ Le piège : confondre « chiffre des » et « nombre de ».\nLe chiffre est seul dans sa colonne. Le nombre prend tout ce qui est à gauche.\nRéponse : a) $4$ ; b) $274$ ; c) $8$ ; d) $2\\,748$.",
           schema: numeration(["27486"], { surligne: 2 }),
@@ -272,6 +290,12 @@ export const exercicesEntierNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Voici un nombre : $30\\,915\\,624$.\na) Quel est le chiffre des millions ?\nb) Quel est le chiffre des dizaines de mille ?\nc) À quel rang est le chiffre $9$ ?\nd) Que vaut le chiffre $3$ ?",
+          reponses: [
+            { question: "a)", attendu: "0" },
+            { question: "b)", attendu: "1" },
+            { question: "c)", attendu: ["les centaines de mille", "centaines de mille", "centaine de mille", "la centaine de mille"], exact: true },
+            { question: "d)", attendu: "30000000" },
+          ],
           correction:
             "Je coupe le nombre en classes de trois, depuis la droite : $30$, $915$ et $624$.\na) La classe des millions contient $30$. Le chiffre des millions est $0$.\nb) La classe des mille contient $915$ : $9$ centaines, $1$ dizaine, $5$ unités de mille.\nLe chiffre des dizaines de mille est $1$.\nc) Le $9$ est au rang des centaines de mille.\nd) Le $3$ est au rang des dizaines de millions. Il vaut $30\\,000\\,000$ : trente millions.\n⛔ Le piège : oublier le $0$ et croire que $3$ est le chiffre des millions. Le $0$ occupe ce rang.\nRéponse : a) $0$ ; b) $1$ ; c) les centaines de mille ; d) $30\\,000\\,000$.",
           schema: numeration(["30915624"], { surligne: 6 }),
@@ -279,6 +303,12 @@ export const exercicesEntierNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Complète par $<$ ou $>$.\na) $9\\,870$ … $10\\,002$\nb) $45\\,390$ … $45\\,309$\nc) $700\\,070$ … $700\\,700$\nd) $1\\,000\\,000$ … $999\\,999$",
+          reponses: [
+            { question: "a)", attendu: "<" },
+            { question: "b)", attendu: ">" },
+            { question: "c)", attendu: "<" },
+            { question: "d)", attendu: ">" },
+          ],
           correction:
             "Je compte d'abord les chiffres. Le nombre qui en a le plus est le plus grand.\nS'ils en ont autant, je compare chiffre par chiffre depuis la gauche.\na) $4$ chiffres contre $5$ : $9\\,870 < 10\\,002$.\nb) Même longueur. Aux dizaines, $9 > 0$ : $45\\,390 > 45\\,309$.\nc) Même longueur. Aux centaines, $0 < 7$ : $700\\,070 < 700\\,700$.\nd) $7$ chiffres contre $6$ : $1\\,000\\,000 > 999\\,999$.\n⛔ Le piège : croire que $9\\,870$ gagne parce qu'il commence par $9$. Je compte les chiffres d'abord.\nRéponse : a) $<$ ; b) $>$ ; c) $<$ ; d) $>$.",
           schema: ecranSeulement(numeration(["45390", "45309"], { surligne: 1, noms: ["b) 1er", "b) 2e"] })),
@@ -293,6 +323,11 @@ export const exercicesEntierNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Encadre $3\\,684$ :\na) entre deux dizaines qui se suivent ;\nb) entre deux centaines qui se suivent ;\nc) entre deux milliers qui se suivent.",
+          reponses: [
+            { question: "a)", attendu: ["3680 ; 3690", "3680 < 3684 < 3690"] },
+            { question: "b)", attendu: ["3600 ; 3700", "3600 < 3684 < 3700"] },
+            { question: "c)", attendu: ["3000 ; 4000", "3000 < 3684 < 4000"] },
+          ],
           correction:
             "Encadrer, c'est trouver le nombre rond juste avant et celui juste après.\na) Je mets un $0$ aux unités : $3\\,680$. La dizaine suivante est $3\\,690$.\n$3\\,680 < 3\\,684 < 3\\,690$\nb) Je mets des $0$ aux dizaines et aux unités : $3\\,600$, puis $3\\,700$.\n$3\\,600 < 3\\,684 < 3\\,700$\nc) Les milliers : $3\\,000$, puis $4\\,000$.\n$3\\,000 < 3\\,684 < 4\\,000$\n⛔ Le piège : écrire $3\\,680 < 3\\,684 < 3\\,700$ au a). Les deux dizaines doivent se suivre.\n⭐ Sur la droite, $3\\,684$ est plus près de $3\\,700$ que de $3\\,600$.",
           schema: droiteRel(3600, 3700, 10, [{ value: 3684, label: "3 684", color: VERT }], { nombres: 50 }),
@@ -300,6 +335,9 @@ export const exercicesEntierNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Range ces nombres dans l'ordre croissant.\n$12\\,050$ ; $1\\,250$ ; $12\\,500$ ; $120\\,500$ ; $1\\,205$",
+          reponses: [
+            { attendu: ["1205 < 1250 < 12050 < 12500 < 120500", "1205 ; 1250 ; 12050 ; 12500 ; 120500"], exact: true },
+          ],
           correction:
             "Croissant veut dire : du plus petit au plus grand.\nJe groupe d'abord les nombres par nombre de chiffres.\n$4$ chiffres : $1\\,250$ et $1\\,205$. $5$ chiffres : $12\\,050$ et $12\\,500$. $6$ chiffres : $120\\,500$.\nDans chaque groupe, je compare depuis la gauche.\n$1\\,205 < 1\\,250$ : aux dizaines, $0 < 5$.\n$12\\,050 < 12\\,500$ : aux centaines, $0 < 5$.\n⛔ Le piège : ranger d'après le premier chiffre. Ici, ils commencent tous par $1$.\nRéponse : $1\\,205 < 1\\,250 < 12\\,050 < 12\\,500 < 120\\,500$.",
           schema: numeration(["1205", "1250", "12050", "12500", "120500"]),
@@ -322,6 +360,13 @@ export const exercicesEntierNombre6e: FicheExercicesData = {
         {
           enonce:
             "Voici, à peu près, la distance au Soleil de cinq planètes, en kilomètres.\nMars : deux cent vingt-huit millions.\nMercure : cinquante-huit millions.\nJupiter : sept cent soixante-dix-huit millions.\nLa Terre : cent cinquante millions.\nVénus : cent huit millions.\na) Écris la distance de la Terre et celle de Jupiter en chiffres.\nb) Range les planètes de la plus proche du Soleil à la plus lointaine.\nc) Écris la distance de Mars en chiffres. Quel est son chiffre des dizaines de millions ?",
+          reponses: [
+            { question: "a) Terre", attendu: "150000000" },
+            { question: "a) Jup.", attendu: "778000000" },
+            { question: "b)", attendu: ["Mercure, Vénus, la Terre, Mars, Jupiter", "Mercure, Vénus, Terre, Mars, Jupiter", "Mercure ; Vénus ; la Terre ; Mars ; Jupiter", "Mercure ; Vénus ; Terre ; Mars ; Jupiter"], exact: true },
+            { question: "c) Mars", attendu: "228000000" },
+            { question: "c) chif.", attendu: "2" },
+          ],
           correction:
             "a) « cent cinquante » millions : la classe des millions vaut $150$. Puis deux classes de zéros.\nLa Terre est à $150\\,000\\,000$ km. Jupiter est à $778\\,000\\,000$ km.\nb) Toutes les distances sont des millions. Je compare donc $228$, $58$, $778$, $150$ et $108$.\n$58 < 108 < 150 < 228 < 778$.\nL'ordre : Mercure, Vénus, la Terre, Mars, Jupiter.\nc) Mars est à $228\\,000\\,000$ km.\nLa classe des millions est $228$. Le chiffre des dizaines de millions est $2$.\n⛔ Le piège : écrire $150\\,000$ pour « cent cinquante millions ». Un million a six zéros.\n⭐ Sur la droite, une graduation vaut $100$ millions de km.",
           schema: droiteRel(0, 800, 100, [
@@ -335,6 +380,12 @@ export const exercicesEntierNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Écris chaque nombre en chiffres.\na) $5 \\times 10\\,000 + 3 \\times 100 + 8$\nb) $7$ milliers, $12$ centaines et $5$ unités\nc) $4 \\times 1\\,000\\,000 + 6 \\times 1\\,000$\nd) $9$ dizaines de mille et $9$ unités",
+          reponses: [
+            { question: "a)", attendu: "50308" },
+            { question: "b)", attendu: "8205" },
+            { question: "c)", attendu: "4006000" },
+            { question: "d)", attendu: "90009" },
+          ],
           correction:
             "Je calcule la valeur de chaque morceau, puis j'additionne.\na) $50\\,000 + 300 + 8 = 50\\,308$. Les rangs vides reçoivent un $0$.\nb) $12$ centaines, c'est $1\\,200$ : un millier et deux centaines.\nDonc $7\\,000 + 1\\,200 + 5 = 8\\,205$.\nc) $4\\,000\\,000 + 6\\,000 = 4\\,006\\,000$.\nd) $90\\,000 + 9 = 90\\,009$.\n⛔ Le piège du b) : écrire $7\\,125$. Une colonne ne contient qu'un seul chiffre.\nRéponse : a) $50\\,308$ ; b) $8\\,205$ ; c) $4\\,006\\,000$ ; d) $90\\,009$.",
           schema: numeration(["50308", "8205", "4006000", "90009"], { noms: ["a)", "b)", "c)", "d)"] }),
@@ -343,6 +394,11 @@ export const exercicesEntierNombre6e: FicheExercicesData = {
         {
           enonce:
             "Voici le nombre de spectateurs de quatre matchs de rugby.\nStade A : $42\\,715$ ; stade B : $42\\,157$ ; stade C : $41\\,999$ ; stade D : $42\\,571$.\na) Range les stades, du plus de spectateurs au moins de spectateurs.\nb) Quels stades ont eu plus de $42\\,500$ spectateurs ?\nc) Encadre le nombre du stade C entre deux milliers qui se suivent.",
+          reponses: [
+            { question: "a)", attendu: ["A, D, B, C", "A ; D ; B ; C", "A > D > B > C", "ADBC"], exact: true },
+            { question: "b)", attendu: ["A et D", "A ; D"] },
+            { question: "c)", attendu: ["41000 ; 42000", "41000 < 41999 < 42000"] },
+          ],
           correction:
             "a) Les quatre nombres ont $5$ chiffres. Je compare depuis la gauche.\n$41\\,999$ commence par $41$, les autres par $42$ : C est le plus petit.\nPour A, B et D, je regarde les centaines : $7$, $1$ et $5$.\n$42\\,715 > 42\\,571 > 42\\,157 > 41\\,999$ : A, D, B, puis C.\nb) Plus de $42\\,500$ : $42\\,715$ et $42\\,571$. Ce sont les stades A et D.\nc) $41\\,000 < 41\\,999 < 42\\,000$.\n⛔ Le piège : croire que C gagne avec ses trois $9$. Il a moins de milliers que les autres.\n⭐ Sur la droite, C est collé à $42\\,000$, juste avant.",
           schema: droiteRel(41500, 43000, 100, [
@@ -355,6 +411,12 @@ export const exercicesEntierNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Au magasin, un vélo électrique coûte $1\\,486$ €. Un autre coûte $1\\,468$ €.\na) Encadre le prix du premier vélo entre deux centaines qui se suivent.\nb) De quelle centaine ce prix est-il le plus proche ?\nc) Encadre ce prix entre deux dizaines qui se suivent.\nd) Quel vélo est le moins cher ?",
+          reponses: [
+            { question: "a)", attendu: ["1400 ; 1500", "1400 < 1486 < 1500"] },
+            { question: "b)", attendu: "1500" },
+            { question: "c)", attendu: ["1480 ; 1490", "1480 < 1486 < 1490"] },
+            { question: "d)", attendu: ["le second", "second", "le deuxième", "deuxième", "le 2e", "2e", "1468", "celui à 1468 €"], exact: true },
+          ],
           correction:
             "a) $1\\,400 < 1\\,486 < 1\\,500$.\nb) De $1\\,486$ à $1\\,500$, il y a $14$. De $1\\,400$ à $1\\,486$, il y a $86$.\nLe prix est plus proche de $1\\,500$. Le vélo coûte environ $1\\,500$ €.\nc) $1\\,480 < 1\\,486 < 1\\,490$.\nd) Mêmes milliers, mêmes centaines. Aux dizaines, $6 < 8$.\nDonc $1\\,468 < 1\\,486$ : le second vélo est le moins cher.\n⛔ Le piège : confondre $1\\,486$ et $1\\,468$. Mêmes chiffres, mais pas aux mêmes rangs.\nRéponse : a) entre $1\\,400$ et $1\\,500$ ; b) $1\\,500$ ; c) entre $1\\,480$ et $1\\,490$ ; d) le second.",
           schema: droiteRel(1400, 1500, 10, [
@@ -366,6 +428,12 @@ export const exercicesEntierNombre6e: FicheExercicesData = {
         {
           enonce:
             "Une association a récolté $36\\,572$ bouchons en plastique pour les recycler.\na) Elle les met dans des sacs de $100$ bouchons. Combien de sacs pleins ? Combien de bouchons restent ?\nb) Les bouchons vont ensuite dans des cartons de $1\\,000$. Combien de cartons pleins ?\nc) Combien de bouchons manque-t-il pour remplir un carton de plus ?",
+          reponses: [
+            { question: "a) sacs", attendu: "365" },
+            { question: "a) reste", attendu: "72" },
+            { question: "b)", attendu: "36" },
+            { question: "c)", attendu: "428" },
+          ],
           correction:
             "a) Un sac de $100$ bouchons, c'est une centaine.\nJe cherche le nombre de centaines de $36\\,572$. Je lis jusqu'aux centaines : $365$.\nElle remplit $365$ sacs. Il reste $72$ bouchons.\nb) Un carton, c'est un millier. Le nombre de milliers est $36$ : $36$ cartons pleins.\nc) Après les cartons, il reste $572$ bouchons. Or $572 + 428 = 1\\,000$.\nIl manque $428$ bouchons.\n⛔ Le piège : répondre $5$ sacs au a). C'est le chiffre des centaines, pas leur nombre.\nRéponse : a) $365$ sacs, reste $72$ ; b) $36$ cartons ; c) $428$ bouchons.",
           schema: ecranSeulement(numeration(["36572"], { surligne: 2 })),
@@ -373,6 +441,11 @@ export const exercicesEntierNombre6e: FicheExercicesData = {
         },
         {
           enonce: "On a les cinq chiffres $6$, $0$, $8$, $3$ et $1$. On les utilise tous, une seule fois chacun.\na) Écris le plus grand nombre possible.\nb) Écris le plus petit nombre possible.\nc) Écris le plus petit nombre impair possible.",
+          reponses: [
+            { question: "a)", attendu: "86310" },
+            { question: "b)", attendu: "10368" },
+            { question: "c)", attendu: "10683" },
+          ],
           correction:
             "a) Je mets les plus grands chiffres à gauche : ce sont les rangs qui valent le plus.\nLe plus grand est $86\\,310$.\nb) Je mets les plus petits à gauche. Mais un nombre ne commence pas par $0$.\nJe place d'abord $1$, puis $0$, $3$, $6$ et $8$ : $10\\,368$.\nc) Un nombre impair finit par $1$ ou par $3$.\nS'il finit par $1$, il commence par $3$ : $30\\,681$.\nS'il finit par $3$, il commence par $1$ : $10\\,683$.\nLe plus petit des deux est $10\\,683$.\n⛔ Le piège : écrire $01\\,368$ au b). Avec un $0$ devant, il n'a que quatre chiffres.\nRéponse : a) $86\\,310$ ; b) $10\\,368$ ; c) $10\\,683$.",
           schema: ecranSeulement(numeration(["86310", "10368", "10683"], { noms: ["a)", "b)", "c)"] })),
@@ -380,6 +453,14 @@ export const exercicesEntierNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Voici une droite graduée.\na) Combien vaut une graduation ?\nb) Lis les nombres des points A, B, C et D.\nc) Le nombre $21\\,000$ n'est pas sur une graduation. Entre quelles graduations se trouve-t-il ?",
+          reponses: [
+            { question: "a)", attendu: "2000" },
+            { question: "b) A", attendu: "6000" },
+            { question: "b) B", attendu: "14000" },
+            { question: "b) C", attendu: "28000" },
+            { question: "b) D", attendu: "36000" },
+            { question: "c)", attendu: ["20000 ; 22000", "20000 < 21000 < 22000"] },
+          ],
           figure: droiteRel(0, 40000, 2000, [
             { value: 6000, label: "A" },
             { value: 14000, label: "B" },
@@ -393,6 +474,12 @@ export const exercicesEntierNombre6e: FicheExercicesData = {
         {
           enonce:
             "Vrai ou faux ? Justifie.\na) Un nombre de $5$ chiffres est toujours plus grand qu'un nombre de $4$ chiffres.\nb) Dans $60\\,500$, le chiffre des centaines est $5$.\nc) $3$ dizaines de mille, c'est $300$ centaines.\nd) Le nombre de dizaines de $4\\,580$ est $8$.",
+          reponses: [
+            { question: "a)", attendu: ["vrai", "oui"] },
+            { question: "b)", attendu: ["vrai", "oui"] },
+            { question: "c)", attendu: ["vrai", "oui"] },
+            { question: "d)", attendu: ["faux", "non"] },
+          ],
           correction:
             "a) Vrai. Le plus petit nombre de $5$ chiffres est $10\\,000$.\nLe plus grand de $4$ chiffres est $9\\,999$. Et $9\\,999 < 10\\,000$.\nb) Vrai. De droite à gauche : $0$ unité, $0$ dizaine, $5$ centaines.\nc) Vrai. $3$ dizaines de mille valent $30\\,000$. Et $300 \\times 100 = 30\\,000$.\nd) Faux. $8$ est le chiffre des dizaines.\nLe nombre de dizaines se lit jusqu'à sa colonne : $458$.\n⛔ Le piège du d) : confondre encore « chiffre des » et « nombre de ».\nRéponse : a) vrai ; b) vrai ; c) vrai ; d) faux.",
           schema: ecranSeulement(numeration(["60500", "4580"], { surligne: 1 })),
@@ -415,6 +502,12 @@ export const exercicesEntierNombre6e: FicheExercicesData = {
           titre: "Le chèque",
           enonce:
             "La famille Martin achète une voiture d'occasion à $12\\,480$ €.\nElle paie par chèque. Sur un chèque, on écrit le prix en chiffres et en lettres.\na) Écris le prix en lettres.\nb) Deux autres voitures coûtaient $12\\,408$ € et $12\\,840$ €. Range les trois prix dans l'ordre croissant.\nc) La famille ne voulait pas dépasser $12\\,500$ €. Quelles voitures pouvait-elle acheter ?\nd) De quel millier le prix de sa voiture est-il le plus proche ?",
+          reponses: [
+            { question: "a)", attendu: ["douze mille quatre cent quatre-vingts", "douze-mille-quatre-cent-quatre-vingts", "douze mille quatre cent quatre-vingts euros", "douze-mille-quatre-cent-quatre-vingts euros"], exact: true },
+            { question: "b)", attendu: ["12408 < 12480 < 12840", "12408 ; 12480 ; 12840"], exact: true },
+            { question: "c)", attendu: ["12408 ; 12480", "12408 et 12480"] },
+            { question: "d)", attendu: "12000" },
+          ],
           correction:
             "a) $12\\,480$ : « douze » mille, puis « quatre cent quatre-vingts ».\nLe prix s'écrit : douze mille quatre cent quatre-vingts euros.\n⚠️ Quatre-vingts prend un s : il est multiplié et il finit le nombre.\nb) Les trois prix commencent par $12$. Je compare les centaines : $4$, $4$ et $8$.\nPuis, entre $12\\,480$ et $12\\,408$, les dizaines : $8 > 0$.\n$12\\,408 < 12\\,480 < 12\\,840$.\nc) Il faut un prix plus petit que $12\\,500$ : $12\\,408$ € et $12\\,480$ €.\nLa voiture à $12\\,840$ € est trop chère.\nd) $12\\,480$ est entre $12\\,000$ et $13\\,000$.\nLe milieu est $12\\,500$. $12\\,480$ est juste avant : il est plus proche de $12\\,000$.\n⛔ Le piège du d) : répondre $13\\,000$ parce que $480$, « c'est beaucoup ».\nRéponse : a) douze mille quatre cent quatre-vingts euros ; b) $12\\,408 < 12\\,480 < 12\\,840$ ; c) celles à $12\\,408$ € et à $12\\,480$ € ; d) $12\\,000$.",
           schema: droiteRel(12000, 13000, 100, [
@@ -428,6 +521,10 @@ export const exercicesEntierNombre6e: FicheExercicesData = {
           titre: "Le nombre mystère",
           enonce:
             "Je suis un nombre entier de cinq chiffres.\nIndice 1 : je suis entre $45\\,000$ et $46\\,000$.\nIndice 2 : mon chiffre des centaines est le double de mon chiffre des dizaines de mille.\nIndice 3 : mon chiffre des unités est $1$ de moins que mon chiffre des centaines.\nIndice 4 : la somme de mes cinq chiffres est $25$.\na) Que t'apprend l'indice 1 ?\nb) Trouve mes autres chiffres, un par un.\nc) Qui suis-je ? Écris-moi en chiffres, puis en lettres.",
+          reponses: [
+            { question: "c) chif.", attendu: "45817" },
+            { question: "c) mots", attendu: ["quarante-cinq mille huit cent dix-sept", "quarante-cinq-mille-huit-cent-dix-sept"], exact: true },
+          ],
           correction:
             "a) Entre $45\\,000$ et $46\\,000$ : je commence par $45$.\nMon chiffre des dizaines de mille est $4$. Mon chiffre des milliers est $5$.\nb) Indice 2 : le double de $4$ est $8$. Mon chiffre des centaines est $8$.\nIndice 3 : $1$ de moins que $8$, c'est $7$. Mon chiffre des unités est $7$.\nIndice 4 : $4 + 5 + 8 + 7 = 24$. Il manque $1$ pour faire $25$.\nMon chiffre des dizaines est $1$.\nc) Je suis $45\\,817$ : quarante-cinq mille huit cent dix-sept.\n⭐ Contrôle : $4 + 5 + 8 + 1 + 7 = 25$.\n⛔ Le piège : écrire les chiffres dans l'ordre où on les trouve. Chacun va dans SA colonne.",
           schema: numeration(["45817"]),
@@ -437,6 +534,12 @@ export const exercicesEntierNombre6e: FicheExercicesData = {
           titre: "Le comptage des oiseaux",
           enonce:
             "Un week-end, des bénévoles comptent les oiseaux d'une réserve naturelle.\nÉtourneaux : $125\\,400$ ; mouettes : $12\\,540$ ; grues : $1\\,254$.\na) Écris le nombre de mouettes en lettres.\nb) Range les trois espèces, de la plus nombreuse à la moins nombreuse.\nc) Encadre le nombre d'étourneaux entre deux dizaines de mille qui se suivent.\nd) Combien y a-t-il de centaines dans $125\\,400$ ? Compare avec le nombre de grues.",
+          reponses: [
+            { question: "a)", attendu: ["douze mille cinq cent quarante", "douze-mille-cinq-cent-quarante"], exact: true },
+            { question: "b)", attendu: ["étourneaux, mouettes, grues", "les étourneaux, les mouettes, les grues", "étourneaux ; mouettes ; grues", "étourneaux > mouettes > grues"], exact: true },
+            { question: "c)", attendu: ["120000 ; 130000", "120000 < 125400 < 130000"] },
+            { question: "d)", attendu: "1254" },
+          ],
           correction:
             "a) $12\\,540$ : « douze » mille, puis « cinq cent quarante ».\nOn écrit : douze mille cinq cent quarante.\nb) $125\\,400$ a $6$ chiffres, $12\\,540$ en a $5$, et $1\\,254$ en a $4$.\n$125\\,400 > 12\\,540 > 1\\,254$ : les étourneaux, les mouettes, puis les grues.\nc) $120\\,000 < 125\\,400 < 130\\,000$.\nd) Je lis jusqu'à la colonne des centaines : $1\\,254$ centaines.\nC'est le nombre de grues ! Il y a $100$ fois plus d'étourneaux que de grues.\n⭐ Dans le tableau, les chiffres $1$, $2$, $5$, $4$ glissent d'un rang à chaque ligne.\n⛔ Le piège du c) : encadrer entre $125\\,000$ et $126\\,000$. Ce sont des milliers.",
           schema: numeration(["125400", "12540", "1254"], { noms: ["étourneaux", "mouettes", "grues"] }),
@@ -446,6 +549,13 @@ export const exercicesEntierNombre6e: FicheExercicesData = {
           titre: "Le compteur de la voiture",
           enonce:
             "Le compteur d'une voiture affiche $28\\,997$ km.\na) Écris les cinq nombres qu'il va afficher ensuite, kilomètre après kilomètre.\nb) Quand il passe de $28\\,999$ à $29\\,000$, combien de chiffres changent ?\nc) Encadre $28\\,997$ entre deux milliers qui se suivent. Duquel est-il le plus proche ?\nd) Quel est le prochain nombre affiché qui a cinq chiffres identiques ?",
+          reponses: [
+            { question: "a)", attendu: "28998 ; 28999 ; 29000 ; 29001 ; 29002" },
+            { question: "b)", attendu: ["4", "quatre"] },
+            { question: "c) enc.", attendu: ["28000 ; 29000", "28000 < 28997 < 29000"] },
+            { question: "c) proc.", attendu: "29000" },
+            { question: "d)", attendu: "33333" },
+          ],
           correction:
             "a) J'ajoute $1$ à chaque fois : $28\\,998$, $28\\,999$, $29\\,000$, $29\\,001$, $29\\,002$.\nb) Les unités, les dizaines et les centaines passent de $9$ à $0$.\nLes milliers passent de $8$ à $9$. Quatre chiffres changent.\nc) $28\\,000 < 28\\,997 < 29\\,000$. Il est à $3$ km de $29\\,000$ : il en est le plus proche.\nd) Les nombres à cinq chiffres identiques : $11\\,111$, $22\\,222$, $33\\,333$…\nLe premier après $28\\,997$ est $33\\,333$.\n⛔ Le piège du d) : répondre $22\\,222$. Le compteur l'a déjà dépassé.\nRéponse : a) de $28\\,998$ à $29\\,002$ ; b) quatre ; c) $29\\,000$ ; d) $33\\,333$.",
           schema: droiteRel(28995, 29005, 1, [

@@ -235,6 +235,14 @@ export const exercicesStatStatistique5e: FicheExercicesData = {
         {
           enonce:
             "Au collège, on a demandé à $20$ élèves comment ils viennent le matin : B pour le bus, V pour le vélo, M pour la marche, C pour la voiture. Voici les réponses, dans l'ordre :\nB V M B B C M V B M B B V C B M B V M B\na) Range ces réponses dans un tableau d'effectifs.\nb) Vérifie ton total.\nc) Quel est le moyen de transport le plus utilisé ?",
+          reponses: [
+            { question: "a) bus", attendu: "9" },
+            { question: "a) vélo", attendu: "4" },
+            { question: "a) march", attendu: "5" },
+            { question: "a) voit.", attendu: "2" },
+            { question: "b)", attendu: "20" },
+            { question: "c)", attendu: ["bus", "le bus", "B"] },
+          ],
           correction:
             "a) Je lis la liste une seule fois, et je fais un trait dans la bonne ligne à chaque réponse. Puis je compte les traits.\nBus : $9$. Vélo : $4$. Marche : $5$. Voiture : $2$.\nb) $9 + 4 + 5 + 2 = 20$ : c'est bien le nombre d'élèves interrogés. Aucune réponse n'est oubliée ni comptée deux fois.\nc) Le plus grand effectif est $9$ : le bus.\n⛔ Le piège : relire toute la liste une fois pour chaque lettre. On en saute une facilement ; un total qui ne tombe pas sur $20$ le signale.\nRéponse : bus $9$, vélo $4$, marche $5$, voiture $2$ ; total $20$ ; le bus.",
           schema: grille(["moyen", "traits", "effectif"], [
@@ -249,6 +257,13 @@ export const exercicesStatStatistique5e: FicheExercicesData = {
         {
           enonce:
             "Ce tableau donne le nombre de chats adoptés dans un refuge, de janvier à juin.\na) Combien de chats ont été adoptés en avril ?\nb) Quel mois en compte le plus ? Le moins ?\nc) Combien de chats ont été adoptés en six mois ?\nd) Combien de chats de plus en mai qu'en février ?",
+          reponses: [
+            { question: "a)", attendu: "14" },
+            { question: "b) plus", attendu: ["mai"] },
+            { question: "b) moins", attendu: ["février"] },
+            { question: "c)", attendu: "64" },
+            { question: "d)", attendu: "12" },
+          ],
           figure: tableau(["mois", "janv.", "févr.", "mars", "avr.", "mai", "juin"], ["chats", 8, 5, 11, 14, 17, 9], true),
           correction:
             "a) Je cherche la colonne « avr. » et je lis la case des chats : $14$.\nb) Le plus grand nombre est $17$ : c'est mai. Le plus petit est $5$ : c'est février.\nc) J'additionne les six effectifs : $8 + 5 + 11 + 14 + 17 + 9 = 64$ chats.\nd) $17 - 5 = 12$ chats de plus.\n⛔ Le piège : lire la case d'à côté. Je pose le doigt sur le mois, puis je descends (ou je glisse) jusqu'au nombre.\nRéponse : a) $14$ ; b) mai, février ; c) $64$ chats ; d) $12$ de plus.",
@@ -257,6 +272,12 @@ export const exercicesStatStatistique5e: FicheExercicesData = {
         {
           enonce:
             "Pendant une heure, une famille a compté les oiseaux venus dans son jardin (nombres inventés). Voici le diagramme de ses résultats.\na) Quelle espèce a été la plus observée ?\nb) Combien d'oiseaux ont été comptés en tout ?\nc) Combien de mésanges de plus que de merles ?\nd) Quelle espèce représente exactement le quart des oiseaux comptés ?",
+          reponses: [
+            { question: "a)", attendu: ["moineau", "le moineau", "moineaux"] },
+            { question: "b)", attendu: "40" },
+            { question: "c)", attendu: "4" },
+            { question: "d)", attendu: ["pigeon", "le pigeon", "pigeons"] },
+          ],
           figure: diagramme("barres", [
             { label: "Moineau", value: 16 },
             { label: "Merle", value: 5 },
@@ -270,6 +291,11 @@ export const exercicesStatStatistique5e: FicheExercicesData = {
         {
           enonce:
             "Dans un groupe de $40$ élèves de 5e, $14$ pratiquent un sport en club. Donne la fréquence de ces élèves :\na) sous forme de fraction simplifiée ;\nb) sous forme décimale ;\nc) en pourcentage.",
+          reponses: [
+            { question: "a)", attendu: ["7/20"], exact: true },
+            { question: "b)", attendu: ["0,35"], exact: true },
+            { question: "c)", attendu: ["35 %"], exact: true },
+          ],
           correction:
             "La fréquence, c'est la part du total : effectif ÷ effectif total.\na) $\\dfrac{14}{40}$. Je simplifie par $2$ : $\\dfrac{14}{40} = \\dfrac{7}{20}$.\nb) $14 \\div 40 = 0{,}35$.\nc) $0{,}35 = \\dfrac{35}{100}$, soit $35$ %.\n⛔ Le piège : diviser dans le mauvais sens, $40 \\div 14 \\approx 2{,}86$. Une fréquence est une part : elle est toujours entre $0$ et $1$.\nRéponse : $\\dfrac{7}{20}$ ; $0{,}35$ ; $35$ %.",
           schema: ecranSeulement(
@@ -282,6 +308,9 @@ export const exercicesStatStatistique5e: FicheExercicesData = {
         },
         {
           enonce: "Une équipe de basket a marqué $64$, $71$, $58$, $80$ et $67$ points lors de ses cinq derniers matchs. Calcule sa moyenne de points par match.",
+          reponses: [
+            { attendu: "68" },
+          ],
           correction:
             "La moyenne partage le total en parts égales : j'additionne, puis je divise par le nombre de valeurs.\nLa somme : $64 + 71 + 58 + 80 + 67 = 340$ points.\nIl y a $5$ matchs : $340 \\div 5 = 68$.\nContrôle : $68$ est entre la plus petite valeur, $58$, et la plus grande, $80$.\n⛔ Le piège : s'arrêter à la somme, $340$. C'est le total des cinq matchs, pas le score d'un match moyen.\nRéponse : l'équipe marque en moyenne $68$ points par match.",
           schema: ecranSeulement(
@@ -298,6 +327,10 @@ export const exercicesStatStatistique5e: FicheExercicesData = {
         {
           enonce:
             "Dans une classe, on a compté les animaux de compagnie de chaque élève : $7$ élèves n'en ont aucun, $9$ en ont $1$, $5$ en ont $2$, $2$ en ont $3$ et $1$ élève en a $4$.\na) Représente ces données par un diagramme en bâtons.\nb) Combien d'élèves ont été interrogés ?\nc) Combien d'élèves ont au moins $2$ animaux ?",
+          reponses: [
+            { question: "b)", attendu: "24" },
+            { question: "c)", attendu: "8" },
+          ],
           correction:
             "a) En bas, sur l'axe horizontal, le nombre d'animaux : $0$, $1$, $2$, $3$, $4$. Pour chacun, un bâton aussi haut que l'effectif, avec $1$ carreau pour $1$ élève.\nb) $7 + 9 + 5 + 2 + 1 = 24$ élèves.\nc) « Au moins $2$ », c'est $2$, $3$ ou $4$ animaux : $5 + 2 + 1 = 8$ élèves.\n⛔ Le piège : oublier le bâton du $0$. Les élèves sans animal font partie de l'enquête : ce sont même les deuxièmes plus nombreux.\nRéponse : b) $24$ élèves ; c) $8$ élèves.",
           schema: diagramme("batons", [
@@ -312,6 +345,12 @@ export const exercicesStatStatistique5e: FicheExercicesData = {
         {
           enonce:
             "Pour chaque situation, choisis la représentation la plus adaptée : un tableau, un diagramme en barres, un diagramme circulaire, ou des points reliés.\na) Suivre la taille d'un tournesol, semaine après semaine.\nb) Montrer la part de chaque activité dans une journée de $24$ h.\nc) Comparer le nombre d'inscrits dans quatre clubs du collège.\nd) Garder toutes les réponses exactes d'une enquête, pour pouvoir les recompter.",
+          reponses: [
+            { question: "a)", attendu: ["points reliés", "des points reliés"] },
+            { question: "b)", attendu: ["circulaire", "diagramme circulaire", "un diagramme circulaire", "le circulaire"] },
+            { question: "c)", attendu: ["barres", "diagramme en barres", "un diagramme en barres", "les barres"] },
+            { question: "d)", attendu: ["tableau", "un tableau"] },
+          ],
           correction:
             "Je me demande d'abord : quelle question le dessin doit-il faire voir ?\na) Une évolution dans le temps : des points reliés. La ligne monte quand le tournesol grandit.\nb) Des parts d'un tout, les $24$ heures : un diagramme circulaire. Le disque entier, c'est la journée.\nc) Comparer des effectifs : un diagramme en barres. La barre la plus haute se voit d'un coup d'œil.\nd) Garder les nombres exacts : un tableau.\n⛔ Le piège : choisir le dessin « le plus joli ». Un diagramme circulaire pour une évolution dans le temps ne montrerait rien du tout.\nRéponse : a) points reliés ; b) circulaire ; c) barres ; d) tableau.",
           schema: ecranSeulement(
@@ -327,6 +366,15 @@ export const exercicesStatStatistique5e: FicheExercicesData = {
         {
           enonce:
             "Pour choisir le nom du club de sport du collège, $200$ élèves ont voté. Le Hibou a obtenu $30$ votes. Voici le diagramme circulaire des votes.\na) Le secteur de l'Aigle occupe la moitié du disque. Combien de votes a-t-il obtenus ? Quel pourcentage ?\nb) Celui du Faucon occupe un quart du disque. Même question.\nc) Calcule le pourcentage du Hibou, puis le nombre de votes et le pourcentage du Milan.\nd) Vérifie que les pourcentages font $100$ %.",
+          reponses: [
+            { question: "a) votes", attendu: "100" },
+            { question: "a) %", attendu: "50 %" },
+            { question: "b) votes", attendu: "50" },
+            { question: "b) %", attendu: "25 %" },
+            { question: "c) Hibou", attendu: "15 %" },
+            { question: "c) Milan", attendu: "20" },
+            { question: "c) M. %", attendu: "10 %" },
+          ],
           figure: diagramme("camembert", [
             { label: "Aigle", value: 100 },
             { label: "Hibou", value: 30 },
@@ -355,6 +403,19 @@ export const exercicesStatStatistique5e: FicheExercicesData = {
         {
           enonce:
             "Devant le collège, Tom note la couleur des $25$ premières voitures qui passent : G (gris), B (blanc), N (noir), R (rouge), U (bleu).\nG B N G G B R G N B G U B G N G B R G B N G U G B\na) Fais le tableau des effectifs.\nb) Calcule la fréquence de chaque couleur, en pourcentage.\nc) Vérifie que la somme des fréquences fait bien $100$ %.\nd) Tom dit : « Plus d'une voiture sur trois est grise. » A-t-il raison ?",
+          reponses: [
+            { question: "a) G", attendu: "10" },
+            { question: "a) B", attendu: "7" },
+            { question: "a) N", attendu: "4" },
+            { question: "a) R", attendu: "2" },
+            { question: "a) U", attendu: "2" },
+            { question: "b) G", attendu: "40 %" },
+            { question: "b) B", attendu: "28 %" },
+            { question: "b) N", attendu: "16 %" },
+            { question: "b) R", attendu: "8 %" },
+            { question: "b) U", attendu: "8 %" },
+            { question: "d)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) Je lis la liste une seule fois, un trait par voiture : gris $10$, blanc $7$, noir $4$, rouge $2$, bleu $2$. Contrôle : $10 + 7 + 4 + 2 + 2 = 25$.\nb) Le total est $25$ : pour avoir des centièmes, je multiplie en haut et en bas par $4$.\nGris : $\\dfrac{10}{25} = \\dfrac{40}{100}$, soit $40$ %. Blanc : $\\dfrac{7}{25} = \\dfrac{28}{100}$, soit $28$ %. Noir : $16$ %. Rouge : $8$ %. Bleu : $8$ %.\nc) $40 + 28 + 16 + 8 + 8 = 100$ : le compte est bon.\nd) Une voiture sur trois, c'est $\\dfrac{1}{3}$, environ $33$ %. Les grises font $40$ %, plus que $33$ % : Tom a raison.\n⛔ Le piège : des fréquences qui ne font pas $100$ % au total. Le plus souvent, une lettre a été oubliée ou comptée deux fois.\nRéponse : gris $40$ %, blanc $28$ %, noir $16$ %, rouge $8$ %, bleu $8$ % ; Tom a raison.",
           schema: grille(["couleur", "effectif", "fréquence"], [
@@ -370,6 +431,14 @@ export const exercicesStatStatistique5e: FicheExercicesData = {
         {
           enonce:
             "Voici le nombre de licenciés d'un club omnisports, par sport, filles et garçons.\na) Combien de garçons font du judo ?\nb) Combien de licenciés font de la danse ?\nc) Combien de filles le club compte-t-il ?\nd) Quelle fraction des licenciés de football sont des filles ? Donne-la aussi en pourcentage.\ne) Dans quel sport les filles sont-elles plus nombreuses que les garçons ?",
+          reponses: [
+            { question: "a)", attendu: "18" },
+            { question: "b)", attendu: "30" },
+            { question: "c)", attendu: "46" },
+            { question: "d) frac.", attendu: "3/10" },
+            { question: "d) %", attendu: "30 %" },
+            { question: "e)", attendu: ["danse", "la danse"] },
+          ],
           figure: grille(["sport", "filles", "garçons"], [
             ["judo", "12", "18"],
             ["danse", "25", "5"],
@@ -382,6 +451,12 @@ export const exercicesStatStatistique5e: FicheExercicesData = {
         {
           enonce:
             "Voici les températures relevées à midi pendant une semaine de mai (en °C).\na) Quel jour a-t-il fait le plus chaud ? Le plus froid ?\nb) Calcule la température moyenne de la semaine.\nc) Combien de jours la température a-t-elle dépassé la moyenne ?",
+          reponses: [
+            { question: "a) chaud", attendu: ["vendredi"] },
+            { question: "a) froid", attendu: ["mercredi"] },
+            { question: "b)", attendu: "14" },
+            { question: "c)", attendu: "3" },
+          ],
           figure: barres([
             { label: "lun", value: 12 },
             { label: "mar", value: 15 },
@@ -409,6 +484,10 @@ export const exercicesStatStatistique5e: FicheExercicesData = {
         {
           enonce:
             "Lina a eu $12$, $9$ et $15$ à ses trois premiers contrôles de maths.\na) Quelle est sa moyenne ?\nb) Quelle note doit-elle avoir au quatrième contrôle pour que sa moyenne soit $13$ ?",
+          reponses: [
+            { question: "a)", attendu: "12" },
+            { question: "b)", attendu: "16" },
+          ],
           correction:
             "a) $12 + 9 + 15 = 36$, et $36 \\div 3 = 12$. Sa moyenne est $12$.\nb) Je pars du total. Une moyenne de $13$ sur $4$ contrôles, c'est un total de $4 \\times 13 = 52$ points.\nElle a déjà $36$ points : il lui manque $52 - 36 = 16$.\nContrôle : $12 + 9 + 15 + 16 = 52$ et $52 \\div 4 = 13$.\n⛔ Le piège : croire qu'un $13$ suffit. Avec $13$, le total ferait $49$, et $49 \\div 4 = 12{,}25$.\nRéponse : a) $12$ ; b) il lui faut $16$.",
           schema: ecranSeulement(
@@ -424,6 +503,16 @@ export const exercicesStatStatistique5e: FicheExercicesData = {
         {
           enonce:
             "Le club de voile a dépensé $1\\,200$ € cette année : $600$ € de matériel, $300$ € de trajets, $180$ € de goûters et $120$ € d'affiches.\na) Calcule la fréquence de chaque dépense, en pourcentage.\nb) On veut un diagramme circulaire. Calcule l'angle de chaque secteur.\nc) Trace le diagramme.",
+          reponses: [
+            { question: "a) mat.", attendu: "50 %" },
+            { question: "a) traj.", attendu: "25 %" },
+            { question: "a) goût.", attendu: "15 %" },
+            { question: "a) aff.", attendu: "10 %" },
+            { question: "b) mat.", attendu: "180" },
+            { question: "b) traj.", attendu: "90" },
+            { question: "b) goût.", attendu: "54" },
+            { question: "b) aff.", attendu: "36" },
+          ],
           correction:
             "a) Fréquence = dépense ÷ total. Matériel : $600 \\div 1\\,200 = 0{,}5$, soit $50$ %. Trajets : $300 \\div 1\\,200 = 0{,}25$, soit $25$ %. Goûters : $180 \\div 1\\,200 = 0{,}15$, soit $15$ %. Affiches : $120 \\div 1\\,200 = 0{,}1$, soit $10$ %.\nb) Le disque entier, $360$°, représente les $1\\,200$ €. Chaque angle est la même part de $360$° :\nmatériel $0{,}5 \\times 360 = 180$° ; trajets $0{,}25 \\times 360 = 90$° ; goûters $0{,}15 \\times 360 = 54$° ; affiches $0{,}1 \\times 360 = 36$°.\nContrôle : $180 + 90 + 54 + 36 = 360$°.\nc) Au rapporteur, je trace les secteurs les uns après les autres, à partir d'un rayon.\n⛔ Le piège : prendre le pourcentage pour l'angle, $50$° pour le matériel. $50$ %, c'est la MOITIÉ du disque : $180$°.\nRéponse : $50$ %, $25$ %, $15$ %, $10$ % ; angles $180$°, $90$°, $54$° et $36$°.",
           schema: ecranSeulement(
@@ -439,6 +528,13 @@ export const exercicesStatStatistique5e: FicheExercicesData = {
         {
           enonce:
             "Voici le temps d'écran de Noé pendant un samedi, en minutes, représenté de deux façons.\na) Sur quel diagramme voit-on le plus vite quelle activité dure le plus longtemps ?\nb) Sur lequel voit-on le mieux la part de chaque activité dans son temps d'écran ?\nc) Calcule la part des vidéos, en fraction puis en pourcentage.\nd) Quelle activité occupe exactement un quart de son temps d'écran ?",
+          reponses: [
+            { question: "a)", attendu: ["barres", "diagramme en barres", "un diagramme en barres", "les barres"] },
+            { question: "b)", attendu: ["circulaire", "diagramme circulaire", "un diagramme circulaire", "le circulaire"] },
+            { question: "c) frac.", attendu: "3/8" },
+            { question: "c) %", attendu: "37,5 %" },
+            { question: "d)", attendu: ["jeux", "les jeux"] },
+          ],
           figure: (
             <div className="grid grid-cols-1 min-w-0 gap-3 print:grid-cols-2">
               {diagramme("barres", [
@@ -462,6 +558,10 @@ export const exercicesStatStatistique5e: FicheExercicesData = {
         {
           enonce:
             "Pendant cinq jours, des bénévoles ont planté des arbres : $8$ le lundi, $12$ le mardi, $0$ le mercredi (il pleuvait), $10$ le jeudi et $15$ le vendredi.\na) Calcule le nombre moyen d'arbres plantés par jour.\nb) Sacha ne compte pas le mercredi et trouve $11{,}25$. Explique son erreur.\nc) Le groupe voulait planter $60$ arbres en six jours. Combien doit-il en planter le samedi ?",
+          reponses: [
+            { question: "a)", attendu: "9" },
+            { question: "c)", attendu: "15" },
+          ],
           correction:
             "a) La somme : $8 + 12 + 0 + 10 + 15 = 45$ arbres, en $5$ jours : $45 \\div 5 = 9$ arbres par jour.\nb) Sacha a divisé par $4$ : $45 \\div 4 = 11{,}25$. Mais le mercredi est un jour de la série : sa valeur est $0$, elle compte comme les autres.\nc) Il en faut $60$ en tout, il y en a déjà $45$ : $60 - 45 = 15$ arbres le samedi.\nAlors la moyenne sur six jours serait $60 \\div 6 = 10$ arbres par jour.\n⛔ Le piège : oublier la valeur $0$. Un $0$ n'ajoute rien à la somme, mais il compte dans le nombre de valeurs : il fait baisser la moyenne.\nRéponse : a) $9$ arbres par jour ; b) il a oublié le $0$ ; c) $15$ arbres.",
           schema: ecranSeulement(
@@ -478,6 +578,11 @@ export const exercicesStatStatistique5e: FicheExercicesData = {
         {
           enonce:
             "Emma mesure son tournesol chaque semaine. Semaine $1$ : $10$ cm ; semaine $2$ : $25$ cm ; semaine $3$ : $45$ cm ; semaine $4$ : $70$ cm ; semaine $5$ : $100$ cm ; semaine $6$ : $125$ cm.\na) Représente ces mesures par des points reliés : en abscisse les semaines, en ordonnée la hauteur, graduée de $25$ cm en $25$ cm.\nb) De combien le tournesol a-t-il grandi entre la semaine $3$ et la semaine $4$ ?\nc) Entre quelles semaines a-t-il le plus grandi ?\nd) De combien a-t-il grandi en moyenne chaque semaine ?",
+          reponses: [
+            { question: "b)", attendu: "25" },
+            { question: "c)", attendu: "4 ; 5" },
+            { question: "d)", attendu: "23" },
+          ],
           correction:
             "a) Pour chaque semaine, je place un point à la hauteur mesurée : $10$ cm au-dessus de la semaine $1$, $25$ cm au-dessus de la semaine $2$, et ainsi de suite jusqu'à $125$ cm. Puis je les relie, dans l'ordre des semaines.\nb) $70 - 45 = 25$ cm.\nc) Les pousses d'une semaine à l'autre : $15$, $20$, $25$, $30$ et $25$ cm. La plus grande, $30$ cm, est entre la semaine $4$ et la semaine $5$ : c'est là que la ligne monte le plus fort.\nd) La moyenne des cinq pousses : $15 + 20 + 25 + 30 + 25 = 115$, et $115 \\div 5 = 23$ cm par semaine.\n⭐ Contrôle : de $10$ cm à $125$ cm, il a grandi de $125 - 10 = 115$ cm en $5$ semaines.\n⛔ Le piège : lire la plus grande HAUTEUR ($125$ cm, semaine $6$) au lieu de la plus grande POUSSE. La pousse, c'est la pente de la ligne.\nRéponse : b) $25$ cm ; c) entre les semaines $4$ et $5$ ; d) $23$ cm par semaine.",
           schema: pointsRelies(["s1", "s2", "s3", "s4", "s5", "s6"], [10, 25, 45, 70, 100, 125], 25),
@@ -501,6 +606,20 @@ export const exercicesStatStatistique5e: FicheExercicesData = {
           titre: "L'enquête sur le petit-déjeuner",
           enonce:
             "Pour le journal du collège, on demande à $25$ élèves ce qu'ils mangent le matin : T (tartines), C (céréales), F (fruit), B (brioche), R (rien).\nT C R T F C T R B C T R T C F R T C B R T C T F R\na) Fais le tableau des effectifs.\nb) Calcule la fréquence de chaque réponse, en pourcentage.\nc) Représente les résultats par un diagramme en barres.\nd) Le journal titre : « Près d'un élève sur quatre part sans petit-déjeuner. » Est-ce juste ?\ne) Quel diagramme faudrait-il pour montrer la part de chaque réponse dans l'ensemble ?",
+          reponses: [
+            { question: "a) T", attendu: "8" },
+            { question: "a) C", attendu: "6" },
+            { question: "a) F", attendu: "3" },
+            { question: "a) B", attendu: "2" },
+            { question: "a) R", attendu: "6" },
+            { question: "b) T", attendu: "32 %" },
+            { question: "b) C", attendu: "24 %" },
+            { question: "b) F", attendu: "12 %" },
+            { question: "b) B", attendu: "8 %" },
+            { question: "b) R", attendu: "24 %" },
+            { question: "d)", attendu: ["oui", "juste", "vrai"] },
+            { question: "e)", attendu: ["circulaire", "diagramme circulaire", "un diagramme circulaire", "le circulaire"] },
+          ],
           correction:
             "a) Un trait par réponse, en lisant la liste une seule fois : tartines $8$, céréales $6$, rien $6$, fruit $3$, brioche $2$. Contrôle : $8 + 6 + 6 + 3 + 2 = 25$.\nb) Le total est $25$ : je multiplie chaque effectif par $4$ pour avoir des pourcentages. Tartines $32$ %, céréales $24$ %, rien $24$ %, fruit $12$ %, brioche $8$ %.\nContrôle : $32 + 24 + 24 + 12 + 8 = 100$.\nc) Cinq barres, une par réponse, hautes de $8$, $6$, $6$, $3$ et $2$ (un carreau par élève).\nd) Un élève sur quatre, c'est $\\dfrac{1}{4}$, soit $25$ %. Les élèves sans petit-déjeuner font $24$ %, un tout petit peu moins : « près d'un sur quatre » est juste.\ne) Un diagramme circulaire : le disque représente les $25$ élèves.\n⛔ Le piège : vérifier le titre « à l'œil ». Il faut calculer la fréquence et la comparer à $25$ %.\nRéponse : $8$, $6$, $6$, $3$, $2$ ; $32$ %, $24$ %, $24$ %, $12$ %, $8$ % ; le titre est juste ; un diagramme circulaire.",
           schema: grille(["réponse", "effectif", "fréquence"], [
@@ -517,6 +636,13 @@ export const exercicesStatStatistique5e: FicheExercicesData = {
           titre: "Deux jardins, deux comptages",
           enonce:
             "Deux familles comptent les oiseaux de leur jardin pendant la même heure (nombres inventés).\na) Dans quel jardin a-t-on vu le plus de moineaux ?\nb) Calcule la fréquence des moineaux dans chaque jardin, en pourcentage.\nc) Dans quel jardin les moineaux sont-ils, en proportion, les plus nombreux ?\nd) Même question pour les mésanges.",
+          reponses: [
+            { question: "a)", attendu: ["A", "jardin A", "le jardin A"] },
+            { question: "b) A", attendu: "30 %" },
+            { question: "b) B", attendu: "36 %" },
+            { question: "c)", attendu: ["B", "jardin B", "le jardin B"] },
+            { question: "d)", attendu: ["A", "jardin A", "le jardin A"] },
+          ],
           figure: grille(["espèce", "jardin A", "jardin B"], [
             ["moineau", "12", "9"],
             ["mésange", "10", "6"],
@@ -532,6 +658,13 @@ export const exercicesStatStatistique5e: FicheExercicesData = {
           titre: "Deux joueuses, une même moyenne",
           enonce:
             "Au basket, Anaïs a marqué $12$, $18$, $9$ et $21$ points lors de ses quatre matchs. Bérénice a marqué $15$, $14$, $16$ et $15$ points.\na) Calcule la moyenne de chacune.\nb) Laquelle est la plus régulière ? Explique avec le diagramme.\nc) Anaïs joue un cinquième match. Combien doit-elle marquer pour que sa moyenne passe à $16$ ?\nd) Bérénice joue aussi un cinquième match, et ne marque que $10$ points. Quelle est sa nouvelle moyenne ?",
+          reponses: [
+            { question: "a) Anaïs", attendu: "15" },
+            { question: "a) Bér.", attendu: "15" },
+            { question: "b)", attendu: ["Bérénice"] },
+            { question: "c)", attendu: "20" },
+            { question: "d)", attendu: "14" },
+          ],
           figure: ecranSeulement(
             barres([
               { label: "A1", value: 12 },
@@ -552,6 +685,12 @@ export const exercicesStatStatistique5e: FicheExercicesData = {
           titre: "La pluie de six mois",
           enonce:
             "Une station météo a relevé la pluie tombée chaque mois (en mm) : janvier $60$, février $48$, mars $45$, avril $54$, mai $72$, juin $39$.\na) Représente ces données par un diagramme en barres.\nb) Calcule la pluie moyenne par mois.\nc) Quels mois ont été plus pluvieux que la moyenne ?\nd) Pour montrer la part de chaque mois dans la pluie des six mois, quel diagramme choisir ? Et pour voir comment la pluie change d'un mois à l'autre ?",
+          reponses: [
+            { question: "b)", attendu: "53" },
+            { question: "c)", attendu: "janvier ; avril ; mai" },
+            { question: "d) parts", attendu: ["circulaire", "diagramme circulaire", "un diagramme circulaire", "le circulaire"] },
+            { question: "d) évol.", attendu: ["barres", "diagramme en barres", "un diagramme en barres", "les barres", "points reliés", "des points reliés"] },
+          ],
           correction:
             "a) Six barres, une par mois, dans l'ordre du calendrier, hautes de $60$, $48$, $45$, $54$, $72$ et $39$ mm.\nb) La somme : $60 + 48 + 45 + 54 + 72 + 39 = 318$ mm, en $6$ mois : $318 \\div 6 = 53$ mm par mois.\nc) Au-dessus de $53$ : janvier ($60$), avril ($54$) et mai ($72$), soit $3$ mois.\nd) La part de chaque mois dans le total : un diagramme circulaire. L'évolution d'un mois à l'autre : des barres dans l'ordre des mois, ou des points reliés.\n⛔ Le piège : confondre « plus pluvieux que la moyenne » et « le plus pluvieux ». Mai est le plus pluvieux, mais trois mois dépassent la moyenne.\nRéponse : b) $53$ mm ; c) janvier, avril et mai ; d) circulaire pour les parts, barres ou points reliés pour l'évolution.",
           schema: ecranSeulement(

@@ -247,6 +247,12 @@ export const exercicesDemiDroiteGraduee6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Voici une demi-droite graduée.\na) Combien vaut une graduation ?\nb) Lis l'abscisse des points A, B et C.",
+          reponses: [
+            { question: "a)", attendu: "1" },
+            { question: "b) A", attendu: "3" },
+            { question: "b) B", attendu: "7" },
+            { question: "b) C", attendu: "9" },
+          ],
           figure: demiDroite(0, 10, 1, [
             { value: 3, label: "A" },
             { value: 7, label: "B" },
@@ -258,6 +264,12 @@ export const exercicesDemiDroiteGraduee6e: FicheExercicesData = {
         },
         {
           enonce: "Voici une demi-droite graduée de $0$ à $1$.\na) Combien vaut une graduation ?\nb) Lis l'abscisse des points D, E et F.",
+          reponses: [
+            { question: "a)", attendu: "0,1" },
+            { question: "b) D", attendu: "0,2" },
+            { question: "b) E", attendu: "0,7" },
+            { question: "b) F", attendu: "0,9" },
+          ],
           figure: demiDroite(0, 1, 0.1, [
             { value: 0.2, label: "D" },
             { value: 0.7, label: "E" },
@@ -280,6 +292,12 @@ export const exercicesDemiDroiteGraduee6e: FicheExercicesData = {
         },
         {
           enonce: "Sur cette demi-droite, l'unité est partagée en trois parts égales.\na) Quelle fraction de l'unité vaut une graduation ?\nb) Écris l'abscisse de L, M et N avec une fraction.",
+          reponses: [
+            { question: "a)", attendu: ["1/3"], exact: true },
+            { question: "b) L", attendu: ["2/3"], exact: true },
+            { question: "b) M", attendu: ["4/3"], exact: true },
+            { question: "b) N", attendu: ["5/3"], exact: true },
+          ],
           figure: demiDroite(0, 2, 1 / 3, [
             { value: 2 / 3, label: "L" },
             { value: 4 / 3, label: "M" },
@@ -291,6 +309,11 @@ export const exercicesDemiDroiteGraduee6e: FicheExercicesData = {
         },
         {
           enonce: "On veut partager un segment de $15$ cm en $5$ parts égales.\na) Combien mesure chaque part ?\nb) À combien de centimètres de l'origine trace-t-on les traits ?\nc) Combien de traits faut-il tracer à l'intérieur du segment ?",
+          reponses: [
+            { question: "a)", attendu: "3" },
+            { question: "b)", attendu: "3 ; 6 ; 9 ; 12" },
+            { question: "c)", attendu: "4" },
+          ],
           correction:
             "a) Je partage la longueur en $5$ : $15 \\div 5 = 3$ cm.\nb) Je pars de $0$. J'ajoute $3$ cm à chaque fois : $3$ cm, $6$ cm, $9$ cm, $12$ cm.\nLe bout du segment est à $15$ cm.\nc) Les deux bouts sont déjà là. À l'intérieur, il faut $4$ traits.\n⛔ Le piège : tracer $5$ traits pour $5$ parts. À l'intérieur, il y a un trait de moins que de parts.\nRéponse : a) $3$ cm ; b) à $3$, $6$, $9$ et $12$ cm ; c) $4$ traits.",
           schema: ecranSeulement(segmentGradue(15, 5, ["0", "3 cm", "6 cm", "9 cm", "12 cm", "15 cm"])),
@@ -298,6 +321,12 @@ export const exercicesDemiDroiteGraduee6e: FicheExercicesData = {
         },
         {
           enonce: "Sur une demi-droite graduée de $0{,}5$ en $0{,}5$, entre quelles graduations se place chaque nombre ?\na) $1{,}2$\nb) $3{,}8$\nc) $0{,}4$\nd) $2{,}5$",
+          reponses: [
+            { question: "a)", attendu: ["1 ; 1,5", "entre 1 et 1,5"] },
+            { question: "b)", attendu: ["3,5 ; 4", "entre 3,5 et 4"] },
+            { question: "c)", attendu: ["0 ; 0,5", "entre 0 et 0,5"] },
+            { question: "d)", attendu: ["2,5", "sur 2,5"] },
+          ],
           correction:
             "Les graduations sont $0$ ; $0{,}5$ ; $1$ ; $1{,}5$ ; $2$…\nJe regarde la partie entière. Puis je compare les dixièmes à $5$ dixièmes.\na) $1{,}2$ : $2$ dixièmes, c'est moins que $5$. Il est entre $1$ et $1{,}5$.\nb) $3{,}8$ : $8$ dixièmes, c'est plus que $5$. Il est entre $3{,}5$ et $4$.\nc) $0{,}4$ est entre $0$ et $0{,}5$, tout près de $0{,}5$.\nd) $2{,}5$ tombe pile sur une graduation.\n⛔ Le piège : placer $1{,}2$ après $1{,}5$. Or $1{,}2$ est plus petit que $1{,}5$.\nRéponse : a) entre $1$ et $1{,}5$ ; b) entre $3{,}5$ et $4$ ; c) entre $0$ et $0{,}5$ ; d) sur $2{,}5$.",
           schema: ecranSeulement(
@@ -312,6 +341,12 @@ export const exercicesDemiDroiteGraduee6e: FicheExercicesData = {
         },
         {
           enonce: "Voici une autre demi-droite graduée.\na) Combien vaut une graduation ?\nb) Lis l'abscisse des points P, Q et R.",
+          reponses: [
+            { question: "a)", attendu: "20" },
+            { question: "b) P", attendu: "40" },
+            { question: "b) Q", attendu: "120" },
+            { question: "b) R", attendu: "180" },
+          ],
           figure: demiDroite(0, 200, 20, [
             { value: 40, label: "P" },
             { value: 120, label: "Q" },
@@ -351,6 +386,14 @@ export const exercicesDemiDroiteGraduee6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Un sentier de $5$ km est dessiné comme une demi-droite graduée. Le départ est à l'origine. Chaque kilomètre est partagé en quatre.\na) Combien vaut une graduation, en km ? Écris-le en fraction, puis en décimal.\nb) À quelle distance du départ est le refuge ? Et la cascade ?\nc) Écris la distance du refuge avec une fraction.\nd) Quelle distance sépare le refuge de la cascade ?",
+          reponses: [
+            { question: "a) frac", attendu: ["1/4"], exact: true },
+            { question: "a) déc", attendu: ["0,25"], exact: true },
+            { question: "b) ref", attendu: "1,75" },
+            { question: "b) casc", attendu: "3,5" },
+            { question: "c)", attendu: ["7/4"], exact: true },
+            { question: "d)", attendu: "1,75" },
+          ],
           figure: demiDroite(0, 5, 0.25, [
             { value: 1.75, label: "refuge" },
             { value: 3.5, label: "cascade" },
@@ -367,6 +410,9 @@ export const exercicesDemiDroiteGraduee6e: FicheExercicesData = {
         },
         {
           enonce: "Sur une frise, les années sont placées sur une demi-droite graduée. Trace un morceau de frise de $1900$ à $2000$ : une graduation tous les $10$ ans.\na) Place ces trois dates : $1914$, début de la Première Guerre mondiale ; $1945$, fin de la Seconde Guerre mondiale ; $1969$, premiers pas sur la Lune.\nb) Laquelle est la plus proche de $1950$ ?",
+          reponses: [
+            { question: "b)", attendu: "1945" },
+          ],
           correction:
             "a) Une graduation vaut $10$ ans. Je cherche la dizaine de chaque date.\n$1914$ est entre $1910$ et $1920$. Il est $4$ ans après $1910$.\n$1945$ est au milieu de $1940$ et $1950$.\n$1969$ est juste avant $1970$, à $1$ an.\nb) De $1945$ à $1950$, il y a $5$ ans.\nDe $1950$ à $1969$, il y a $19$ ans.\n⛔ Le piège : poser $1914$ sur un trait. Un trait vaut $10$ ans : $1914$ est ENTRE deux traits.\nRéponse : b) $1945$, la fin de la Seconde Guerre mondiale.",
           schema: demiDroite(1900, 2000, 10, [
@@ -378,6 +424,15 @@ export const exercicesDemiDroiteGraduee6e: FicheExercicesData = {
         },
         {
           enonce: "Sur cette demi-droite, l'unité est partagée en cinq parts égales.\na) Que vaut une graduation ? Donne une fraction et un décimal.\nb) Écris l'abscisse de A, B et C avec une fraction.\nc) Lesquelles sont plus grandes que $1$ ?\nd) Écris l'abscisse de C en décimal.",
+          reponses: [
+            { question: "a) frac", attendu: ["1/5"], exact: true },
+            { question: "a) déc", attendu: ["0,2"], exact: true },
+            { question: "b) A", attendu: ["2/5"], exact: true },
+            { question: "b) B", attendu: ["6/5"], exact: true },
+            { question: "b) C", attendu: ["9/5"], exact: true },
+            { question: "c)", attendu: ["B ; C", "B et C"] },
+            { question: "d)", attendu: ["1,8"], exact: true },
+          ],
           figure: demiDroite(0, 2, 0.2, [
             { value: 0.4, label: "A" },
             { value: 1.2, label: "B" },
@@ -389,6 +444,13 @@ export const exercicesDemiDroiteGraduee6e: FicheExercicesData = {
         },
         {
           enonce: "Maëlle trace un segment de $12$ cm. Elle en fait une demi-droite graduée de $0$ à $3$. L'origine $0$ est à gauche, le nombre $3$ au bout.\na) Combien de centimètres mesure une unité ?\nb) À combien de centimètres de l'origine sont $1$ et $2$ ?\nc) Elle place A$(0{,}5)$, B$(1{,}5)$ et C$(2{,}25)$. À combien de centimètres de l'origine sont-ils ?",
+          reponses: [
+            { question: "a)", attendu: "4" },
+            { question: "b)", attendu: "4 ; 8" },
+            { question: "c) A", attendu: "2" },
+            { question: "c) B", attendu: "6" },
+            { question: "c) C", attendu: "9" },
+          ],
           correction:
             "a) De $0$ à $3$, il y a $3$ unités dans $12$ cm.\nUne unité mesure $12 \\div 3 = 4$ cm.\nb) $1$ est à $4$ cm de l'origine. $2$ est à $2 \\times 4 = 8$ cm.\nc) Une demi-unité mesure $4 \\div 2 = 2$ cm. A est à $2$ cm.\nB : $1{,}5$ unité, c'est $4 + 2 = 6$ cm.\nC : un quart d'unité mesure $4 \\div 4 = 1$ cm. C est à $8 + 1 = 9$ cm.\n⛔ Le piège : placer A à $0{,}5$ cm. Ici, l'unité ne mesure pas $1$ cm, mais $4$ cm.\nRéponse : a) $4$ cm ; b) $4$ cm et $8$ cm ; c) A à $2$ cm, B à $6$ cm, C à $9$ cm.",
           schema: segmentGradue(12, 12, ["0", "", "", "", "1", "", "", "", "2", "", "", "", "3"], [
@@ -400,6 +462,10 @@ export const exercicesDemiDroiteGraduee6e: FicheExercicesData = {
         },
         {
           enonce: "Tom lit cette demi-droite. Il dit : « A a pour abscisse $3$, car il est sur le 3e trait. Et B a pour abscisse $6$. »\na) Explique son erreur.\nb) Donne les vraies abscisses de A et de B.\nc) Place le point C d'abscisse $1{,}25$.",
+          reponses: [
+            { question: "b) A", attendu: "0,75" },
+            { question: "b) B", attendu: "1,5" },
+          ],
           figure: demiDroite(0, 2, 0.25, [
             { value: 0.75, label: "A" },
             { value: 1.5, label: "B" },
@@ -417,6 +483,10 @@ export const exercicesDemiDroiteGraduee6e: FicheExercicesData = {
         },
         {
           enonce: "L'unité est partagée en quatre.\na) Place A d'abscisse $\\dfrac{3}{4}$, B d'abscisse $\\dfrac{1}{2}$, C d'abscisse $\\dfrac{6}{4}$ et D d'abscisse $\\dfrac{5}{4}$.\nb) Quel point a pour abscisse $1{,}5$ ?\nc) Range les quatre abscisses dans l'ordre croissant.",
+          reponses: [
+            { question: "b)", attendu: ["C"] },
+            { question: "c)", attendu: ["1/2 < 3/4 < 5/4 < 6/4", "2/4 < 3/4 < 5/4 < 6/4", "1/2 ; 3/4 ; 5/4 ; 6/4"], exact: true },
+          ],
           correction:
             "a) Une graduation vaut $\\dfrac{1}{4}$.\n$\\dfrac{1}{2}$, c'est la moitié de l'unité, soit $\\dfrac{2}{4}$. B est à $2$ graduations.\nA est à $3$ graduations. D est à $5$ graduations. C est à $6$ graduations.\nb) $1{,}5$, c'est $1$ et une demi-unité. Cela fait $4 + 2 = 6$ quarts : c'est C.\nc) De gauche à droite, je lis B, A, D, C.\n⛔ Le piège : croire que $\\dfrac{1}{2}$ et $\\dfrac{2}{4}$ sont deux points. C'est le même point : la moitié de l'unité.\nRéponse : $\\dfrac{1}{2} < \\dfrac{3}{4} < \\dfrac{5}{4} < \\dfrac{6}{4}$.",
           schema: ecranSeulement(
@@ -431,6 +501,10 @@ export const exercicesDemiDroiteGraduee6e: FicheExercicesData = {
         },
         {
           enonce: "Voici le cadran d'une balance de cuisine. Il est dessiné comme une demi-droite graduée en grammes.\na) Combien de grammes vaut une graduation ?\nb) Combien pèse la farine ?\nc) On pèse ensuite $250$ g de sucre, puis $125$ g de beurre. Où s'arrête l'aiguille à chaque fois ?",
+          reponses: [
+            { question: "a)", attendu: "50" },
+            { question: "b)", attendu: "650" },
+          ],
           figure: demiDroite(0, 1000, 50, [{ value: 650, label: "farine" }], { nombres: 200 }),
           correction:
             "a) Entre $0$ et $200$, je compte $4$ cases. Une graduation vaut $200 \\div 4 = 50$ g.\nb) La farine est $1$ graduation après $600$ : $600 + 50 = 650$ g.\nc) $250 = 200 + 50$. L'aiguille s'arrête sur la graduation juste après $200$.\n$125$ est au milieu de $100$ et $150$. L'aiguille s'arrête entre deux graduations.\n⛔ Le piège : croire qu'un nombre tombe toujours sur un trait. $125$ n'a pas de trait à lui.\nRéponse : a) $50$ g ; b) $650$ g ; c) sur la graduation $250$, puis entre $100$ et $150$.",
@@ -445,6 +519,12 @@ export const exercicesDemiDroiteGraduee6e: FicheExercicesData = {
         },
         {
           enonce: "Un jardinier pose une clôture droite de $20$ m. Il plante un piquet au début et un à la fin. Il en plante d'autres entre les deux, tous les $4$ m.\na) En combien de parts égales la clôture est-elle partagée ?\nb) Combien de piquets plante-t-il en tout ?\nc) Il préfère un piquet tous les $2$ m. Combien de parts ? Combien de piquets ?",
+          reponses: [
+            { question: "a)", attendu: "5" },
+            { question: "b)", attendu: "6" },
+            { question: "c) parts", attendu: "10" },
+            { question: "c) piq.", attendu: "11" },
+          ],
           correction:
             "a) Je divise la longueur par l'écart : $20 \\div 4 = 5$ parts.\nb) Les piquets sont les traits : à $0$, $4$, $8$, $12$, $16$ et $20$ m.\nCela fait $6$ piquets : un de plus que de parts.\nc) $20 \\div 2 = 10$ parts. Donc $10 + 1 = 11$ piquets.\n⛔ Le piège : répondre $5$ piquets pour $5$ parts. Avec les deux bouts, il y a un piquet de plus que de parts.\nRéponse : a) $5$ parts ; b) $6$ piquets ; c) $10$ parts et $11$ piquets.",
           schema: ecranSeulement(segmentGradue(20, 5, ["0", "4", "8", "12", "16", "20"], [], "m")),
@@ -467,6 +547,12 @@ export const exercicesDemiDroiteGraduee6e: FicheExercicesData = {
         {
           titre: "Le thermomètre",
           enonce: "Voici un morceau de thermomètre médical, couché. Il commence à $36$ °C.\na) Combien vaut une graduation ?\nb) Quelle est la température de Léo ?\nc) Sa sœur Jade a $37{,}2$ °C. Son père a $39{,}5$ °C. Place-les.\nd) On parle de fièvre au-dessus de $38$ °C. Qui a de la fièvre ?\ne) Le lendemain, Léo a $1{,}3$ °C de moins. Quelle est sa température ?",
+          reponses: [
+            { question: "a)", attendu: "0,1" },
+            { question: "b)", attendu: "38,6" },
+            { question: "d)", attendu: ["Léo et son père", "Léo et le père"] },
+            { question: "e)", attendu: "37,3" },
+          ],
           figure: demiDroite(36, 40, 0.1, [{ value: 38.6, label: "Léo" }], { nombres: 1 }),
           correction:
             "a) Entre $36$ et $37$, je compte $10$ cases. Une graduation vaut $0{,}1$ °C : un dixième de degré.\nb) Léo est $6$ graduations après $38$ : $38{,}6$ °C.\nc) Jade est $2$ graduations après $37$. Le père est au milieu de $39$ et $40$.\nd) $38{,}6 > 38$ et $39{,}5 > 38$ : Léo et son père ont de la fièvre.\nJade, à $37{,}2$ °C, n'a pas de fièvre.\ne) $1{,}3$ °C, c'est $13$ graduations. Je recule de $13$ graduations depuis $38{,}6$.\n$10$ graduations m'amènent à $37{,}6$. Encore $3$ : $37{,}3$ °C.\n⛔ Le piège : lire $38{,}06$ pour Léo. $6$ graduations, ce sont $6$ DIXIÈMES : $38{,}6$.\nRéponse : a) $0{,}1$ °C ; b) $38{,}6$ °C ; d) Léo et son père ; e) $37{,}3$ °C.",
@@ -482,6 +568,13 @@ export const exercicesDemiDroiteGraduee6e: FicheExercicesData = {
         {
           titre: "Le ruban de la couturière",
           enonce: "Samia a un ruban de $1$ m, soit $100$ cm. Elle veut le couper en $8$ morceaux égaux.\na) Combien mesure chaque morceau ?\nb) Elle marque chaque coupe au crayon. Combien de marques fait-elle ?\nc) À combien de centimètres du bout est la marque des $\\dfrac{3}{8}$ du ruban ? Et celle de la moitié ?\nd) Elle coupe $3$ morceaux. Quelle fraction du ruban reste-t-il ?",
+          reponses: [
+            { question: "a)", attendu: "12,5" },
+            { question: "b)", attendu: "7" },
+            { question: "c) 3/8", attendu: "37,5" },
+            { question: "c) 1/2", attendu: "50" },
+            { question: "d)", attendu: "5/8" },
+          ],
           correction:
             "a) Je divise la longueur par $8$ : $100 \\div 8 = 12{,}5$ cm.\nJe vérifie : $8 \\times 12{,}5 = 100$.\nb) Les deux bouts ne se coupent pas. Il faut $8 - 1 = 7$ marques.\nc) $\\dfrac{3}{8}$, ce sont $3$ morceaux : $3 \\times 12{,}5 = 37{,}5$ cm.\nLa moitié, c'est $\\dfrac{4}{8}$ : $4 \\times 12{,}5 = 50$ cm.\nd) Il reste $8 - 3 = 5$ morceaux. C'est $\\dfrac{5}{8}$ du ruban.\n⛔ Le piège : faire $8$ marques pour $8$ morceaux. Il y a une marque de moins que de morceaux.\nRéponse : a) $12{,}5$ cm ; b) $7$ marques ; c) $37{,}5$ cm et $50$ cm ; d) $\\dfrac{5}{8}$.",
           schema: ecranSeulement(segmentGradue(100, 8, ["0", "", "", "3/8", "4/8", "", "", "", "1"], [{ cm: 37.5, label: "37,5 cm" }])),
@@ -490,6 +583,14 @@ export const exercicesDemiDroiteGraduee6e: FicheExercicesData = {
         {
           titre: "Le saut en longueur",
           enonce: "Au saut en longueur, on mesure les sauts en mètres. Voici un morceau de demi-droite graduée, de $4$ m à $6$ m.\na) Combien vaut une graduation ? Écris-le en m, puis en cm.\nb) Lis la longueur des sauts de Nina et de Kylian.\nc) Sofia saute $5{,}05$ m. Entre quelles graduations se place-t-elle ?\nd) Range les trois sauts, du plus long au plus court.\ne) Kylian vise $5{,}5$ m. Combien de centimètres lui manque-t-il ?",
+          reponses: [
+            { question: "a) m", attendu: "0,1" },
+            { question: "a) cm", attendu: "10" },
+            { question: "b)", attendu: "4,8 ; 5,3" },
+            { question: "c)", attendu: ["5 ; 5,1", "entre 5 et 5,1"] },
+            { question: "d)", attendu: ["Kylian, Sofia, Nina", "Kylian ; Sofia ; Nina", "Kylian > Sofia > Nina"], exact: true },
+            { question: "e)", attendu: "20" },
+          ],
           figure: demiDroite(4, 6, 0.1, [
             { value: 4.8, label: "Nina" },
             { value: 5.3, label: "Kylian" },
@@ -508,6 +609,12 @@ export const exercicesDemiDroiteGraduee6e: FicheExercicesData = {
         {
           titre: "Le nombre mystère",
           enonce: "Je suis l'abscisse d'un point de cette demi-droite. Je tombe sur une graduation.\nIndice 1 : je suis entre $2$ et $3$.\nIndice 2 : je suis plus près de $3$ que de $2$.\nIndice 3 : mon chiffre des dixièmes est pair.\nIndice 4 : entre moi et $3$, il y a une seule graduation.\na) Quels nombres respectent les indices 1 et 2 ?\nb) Lesquels respectent aussi l'indice 3 ?\nc) Qui suis-je ? Écris-moi en décimal, puis en fraction.",
+          reponses: [
+            { question: "a)", attendu: "2,6 ; 2,7 ; 2,8 ; 2,9" },
+            { question: "b)", attendu: "2,6 ; 2,8" },
+            { question: "c) déc", attendu: ["2,8"], exact: true },
+            { question: "c) frac", attendu: ["28/10", "14/5"], exact: true },
+          ],
           figure: demiDroite(2, 3, 0.1, [], { nombres: 0.5 }),
           correction:
             "Entre $2$ et $2{,}5$, il y a $5$ cases. Une graduation vaut $0{,}1$.\na) Plus près de $3$ que de $2$ : après le milieu, $2{,}5$. Il reste $2{,}6$ ; $2{,}7$ ; $2{,}8$ ; $2{,}9$.\nb) Dixièmes pairs : $2{,}6$ et $2{,}8$.\nc) Entre $2{,}6$ et $3$, il y a trois graduations : $2{,}7$, $2{,}8$, $2{,}9$.\nEntre $2{,}8$ et $3$, il y en a une seule : $2{,}9$.\nJe suis $2{,}8$. C'est $28$ dixièmes : $\\dfrac{28}{10}$.\n⛔ Le piège : garder $2{,}5$ au a). Au milieu, on est aussi près de $2$ que de $3$.\nRéponse : je suis $2{,}8 = \\dfrac{28}{10}$.",

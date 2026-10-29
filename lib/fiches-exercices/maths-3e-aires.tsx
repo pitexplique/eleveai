@@ -249,6 +249,12 @@ export const exercicesAires3e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Convertir.\na) $3$ m² en cm²\nb) $45\\,000$ cm² en m²\nc) $2{,}5$ ha en m²\nd) $0{,}6$ km² en ha",
+          reponses: [
+            { question: "a)", attendu: "30000" },
+            { question: "b)", attendu: "4,5" },
+            { question: "c)", attendu: "25000" },
+            { question: "d)", attendu: "60" },
+          ],
           correction:
             "Pour convertir une aire, je repars d'un carré. Un carré de $1$ m de côté mesure $100$ cm sur $100$ cm : il contient $100 \\times 100$ petits carrés de $1$ cm de côté, donc $1$ m² $= 10\\,000$ cm².\na) $3 \\times 10\\,000 = 30\\,000$ cm².\nb) Dans l'autre sens, je divise : $45\\,000 \\div 10\\,000 = 4{,}5$ m².\nc) Un hectare est un carré de $100$ m de côté : $1$ ha $= 100 \\times 100 = 10\\,000$ m². Donc $2{,}5$ ha $= 25\\,000$ m².\nd) $1$ km² est un carré de $1\\,000$ m de côté : $1\\,000 \\times 1\\,000 = 1\\,000\\,000$ m², c'est-à-dire $100$ ha. Donc $0{,}6$ km² $= 60$ ha.\n⛔ Le piège : multiplier par $100$, comme pour une longueur, et écrire $3$ m² $= 300$ cm². Les centimètres se comptent dans les DEUX sens du carré : $100$ en longueur ET $100$ en largeur.\nRéponse : $30\\,000$ cm² ; $4{,}5$ m² ; $25\\,000$ m² ; $60$ ha.",
           schema: plan("cm", [
@@ -262,6 +268,10 @@ export const exercicesAires3e: FicheExercicesData = {
         },
         {
           enonce: "Un tableau blanc mesure $2{,}5$ m de long et $80$ cm de large.\na) Calculer son aire en m².\nb) Calculer son aire en cm², et vérifier que les deux réponses disent la même chose.",
+          reponses: [
+            { question: "a)", attendu: "2" },
+            { question: "b)", attendu: "20000" },
+          ],
           correction:
             "Avant de multiplier, je mets les deux longueurs dans la MÊME unité : une aire en m² demande des mètres, une aire en cm² des centimètres.\na) $80$ cm $= 0{,}8$ m, donc $\\mathcal{A} = 2{,}5 \\times 0{,}8 = 2$ m².\nb) $2{,}5$ m $= 250$ cm, donc $\\mathcal{A} = 250 \\times 80 = 20\\,000$ cm².\nContrôle : $2$ m² $= 2 \\times 10\\,000 = 20\\,000$ cm². Les deux calculs mesurent bien la même surface.\n⛔ Le piège : multiplier les nombres tels quels, $2{,}5 \\times 80 = 200$. Deux cents quoi ? Un mètre fois un centimètre n'est pas une unité d'aire : ce nombre ne veut rien dire.\nRéponse : $2$ m², soit $20\\,000$ cm².",
           schema: plan("cm", [
@@ -274,6 +284,9 @@ export const exercicesAires3e: FicheExercicesData = {
         },
         {
           enonce: "Le triangle $ABC$ a une base $[AB]$ de $9$ cm. La hauteur issue de $C$ mesure $4$ cm. Calculer son aire.",
+          reponses: [
+            { attendu: "18" },
+          ],
           correction:
             "La hauteur issue de $C$ tombe PERPENDICULAIREMENT sur $[AB]$ : la base et la hauteur vont ensemble.\n$\\mathcal{A} = \\dfrac{9 \\times 4}{2} = \\dfrac{36}{2} = 18$ cm².\nPourquoi diviser par $2$ ? Le triangle tient dans un rectangle de $9$ cm sur $4$ cm (en pointillés). La hauteur coupe ce rectangle en deux rectangles, et dans chacun, le triangle en garde exactement la moitié.\n⛔ Le piège : oublier le $\\div 2$ et répondre $36$ cm², l'aire du rectangle entier.\nRéponse : $\\mathcal{A} = 18$ cm².",
           schema: plan("cm", [
@@ -291,6 +304,9 @@ export const exercicesAires3e: FicheExercicesData = {
         },
         {
           enonce: "Le triangle $ABC$ a pour base $BC = 12$ cm. Ses côtés $[AB]$ et $[AC]$ mesurent chacun $7{,}5$ cm, et la hauteur $[AH]$ issue de $A$ mesure $4{,}5$ cm. Calculer son aire.",
+          reponses: [
+            { attendu: "27" },
+          ],
           correction:
             "Trois longueurs sont données avec la base : une seule va avec elle, celle qui lui est PERPENDICULAIRE. C'est la hauteur $[AH]$, pas les côtés penchés.\n$\\mathcal{A} = \\dfrac{BC \\times AH}{2} = \\dfrac{12 \\times 4{,}5}{2} = \\dfrac{54}{2} = 27$ cm².\n⭐ Contrôle : un côté penché est toujours plus long que la hauteur ($7{,}5 > 4{,}5$). Le prendre à sa place gonfle l'aire.\n⛔ Le piège : prendre le côté oblique pour la hauteur, $\\dfrac{12 \\times 7{,}5}{2} = 45$ cm². Le côté $[AB]$ n'est pas perpendiculaire à $[BC]$.\nRéponse : $\\mathcal{A} = 27$ cm².",
           schema: plan("cm", [
@@ -307,6 +323,9 @@ export const exercicesAires3e: FicheExercicesData = {
         },
         {
           enonce: "Le triangle $EFG$ a un angle obtus en $F$, avec $EF = 5$ cm. La hauteur issue de $G$ mesure $6$ cm : elle tombe EN DEHORS du triangle, au point $K$ du prolongement de $[EF]$, à $3$ cm de $F$. Calculer l'aire du triangle $EFG$.",
+          reponses: [
+            { attendu: "15" },
+          ],
           correction:
             "La formule marche encore. La hauteur relative à $[EF]$ est la distance de $G$ à la DROITE $(EF)$ : elle tombe sur le prolongement du côté, mais elle reste perpendiculaire à la base.\n$\\mathcal{A} = \\dfrac{EF \\times GK}{2} = \\dfrac{5 \\times 6}{2} = 15$ cm².\n⭐ Pourquoi c'est juste : le grand triangle rectangle $EKG$ a pour aire $\\dfrac{8 \\times 6}{2} = 24$ cm², le petit triangle $FKG$ a pour aire $\\dfrac{3 \\times 6}{2} = 9$ cm². Le triangle $EFG$ est ce qui reste : $24 - 9 = 15$ cm².\n⛔ Le piège : croire qu'une hauteur est toujours à l'intérieur du triangle, et prendre à sa place le côté penché $[FG]$, qui mesure environ $6{,}7$ cm.\nRéponse : $\\mathcal{A} = 15$ cm².",
           schema: plan("cm", [
@@ -324,6 +343,9 @@ export const exercicesAires3e: FicheExercicesData = {
         },
         {
           enonce: "Un disque a un diamètre de $12$ cm. Calculer son aire, arrondie au dixième de cm².",
+          reponses: [
+            { attendu: "113,1", tolerance: 0.05 },
+          ],
           correction:
             "La formule demande le RAYON : je commence par lui. $r = 12 \\div 2 = 6$ cm.\n$\\mathcal{A} = \\pi \\times r^2 = \\pi \\times 6^2 = 36\\pi$ cm² : c'est la valeur exacte.\nÀ la calculatrice, $36\\pi \\approx 113{,}097$, donc $\\mathcal{A} \\approx 113{,}1$ cm².\n⭐ Contrôle : le disque tient dans un carré de $12$ cm de côté, d'aire $144$ cm², et il en remplit un peu plus des trois quarts. $113$, c'est plausible.\n⛔ Le piège : calculer $\\pi \\times d \\approx 37{,}7$, qui est le PÉRIMÈTRE (une longueur en cm), ou mettre le diamètre au carré, $\\pi \\times 12^2 \\approx 452{,}4$ cm², quatre fois trop.\nRéponse : $\\mathcal{A} = 36\\pi \\approx 113{,}1$ cm².",
           schema: plan("cm", [
@@ -341,6 +363,10 @@ export const exercicesAires3e: FicheExercicesData = {
         },
         {
           enonce: "Un tapis rond a un rayon de $1{,}5$ m. Donner la valeur exacte de son aire, puis son arrondi au centième de m².",
+          reponses: [
+            { question: "exacte", attendu: ["2,25π", "2,25×π", "π×2,25", "9π/4"], exact: true },
+            { question: "arrondi", attendu: "7,07", tolerance: 0.005 },
+          ],
           correction:
             "Le rayon est donné : j'applique directement la formule.\n$\\mathcal{A} = \\pi \\times 1{,}5^2 = \\pi \\times 2{,}25 = 2{,}25\\pi$ m² : c'est la valeur exacte.\nÀ la calculatrice, $2{,}25\\pi \\approx 7{,}0686$, donc $\\mathcal{A} \\approx 7{,}07$ m².\n⛔ Le piège : écrire $1{,}5^2 = 3$. Le carré, c'est le nombre multiplié par LUI-MÊME : $1{,}5 \\times 1{,}5 = 2{,}25$, pas $1{,}5 \\times 2$. Avec $3$, on trouverait $3\\pi \\approx 9{,}42$ m², un tiers de trop.\nRéponse : $\\mathcal{A} = 2{,}25\\pi \\approx 7{,}07$ m².",
           schema: plan("m", [
@@ -353,6 +379,11 @@ export const exercicesAires3e: FicheExercicesData = {
         },
         {
           enonce: "Un triangle rectangle a des côtés de l'angle droit de $2$ cm et $6$ cm.\na) Calculer son aire.\nb) On multiplie toutes ses longueurs par $3$. Quelle est l'aire du nouveau triangle ?\nc) On divise au contraire toutes les longueurs du premier triangle par $2$. Quelle est son aire ?",
+          reponses: [
+            { question: "a)", attendu: "6" },
+            { question: "b)", attendu: "54" },
+            { question: "c)", attendu: "1,5" },
+          ],
           correction:
             "a) Dans un triangle rectangle, les deux côtés de l'angle droit sont perpendiculaires : l'un est la base, l'autre la hauteur. $\\mathcal{A} = \\dfrac{2 \\times 6}{2} = 6$ cm².\nb) Les côtés deviennent $6$ cm et $18$ cm : $\\dfrac{6 \\times 18}{2} = 54$ cm². L'aire est multipliée par $54 \\div 6 = 9 = 3^2$ : la base est multipliée par $3$ ET la hauteur aussi.\nc) Les côtés deviennent $1$ cm et $3$ cm : $\\dfrac{1 \\times 3}{2} = 1{,}5$ cm². L'aire est divisée par $2^2 = 4$ : $6 \\div 4 = 1{,}5$.\n⛔ Le piège : multiplier l'aire par $3$ et répondre $18$ cm². Une aire est le produit de DEUX longueurs : chacune est multipliée par $3$, donc l'aire par $3 \\times 3 = 9$.\nRéponse : $6$ cm², puis $54$ cm², puis $1{,}5$ cm².",
           schema: plan("cm", [
@@ -386,6 +417,9 @@ export const exercicesAires3e: FicheExercicesData = {
       exercices: [
         {
           enonce: "La figure est un rectangle de $8$ cm sur $5$ cm, surmonté d'un triangle dont la base est le côté de $8$ cm et dont la hauteur mesure $3$ cm. Calculer l'aire de la figure.",
+          reponses: [
+            { attendu: "52" },
+          ],
           correction:
             "Je découpe la figure le long du côté commun : un rectangle en bas, un triangle en haut.\nLe rectangle : $\\mathcal{A}_1 = 8 \\times 5 = 40$ cm².\nLe triangle : $\\mathcal{A}_2 = \\dfrac{8 \\times 3}{2} = 12$ cm².\nLes deux morceaux ne se chevauchent pas et remplissent toute la figure : j'additionne. $\\mathcal{A} = 40 + 12 = 52$ cm².\n⛔ Le piège : oublier le $\\div 2$ du triangle et compter $8 \\times 3 = 24$ cm². On trouverait $64$ cm², l'aire du carré de $8$ cm de côté qui entoure toute la figure.\nRéponse : l'aire de la figure est $52$ cm².",
           schema: plan("cm", [
@@ -401,6 +435,10 @@ export const exercicesAires3e: FicheExercicesData = {
         },
         {
           enonce: "La figure est un rectangle de $10$ cm sur $6$ cm, prolongé sur son côté de $6$ cm par un demi-disque. Calculer son aire exacte, puis son arrondi au centième.",
+          reponses: [
+            { question: "exacte", attendu: ["60+4,5π", "4,5π+60", "60+9π/2", "60+4,5×π"], exact: true },
+            { question: "arrondi", attendu: "74,14", tolerance: 0.005 },
+          ],
           correction:
             "Je découpe : le rectangle, et le demi-disque collé sur le côté de $6$ cm.\nLe rectangle : $\\mathcal{A}_1 = 10 \\times 6 = 60$ cm².\nLe demi-disque a pour DIAMÈTRE le côté de $6$ cm : son rayon est $r = 6 \\div 2 = 3$ cm. C'est la moitié d'un disque : $\\mathcal{A}_2 = \\dfrac{\\pi \\times 3^2}{2} = \\dfrac{9\\pi}{2} = 4{,}5\\pi$ cm².\nJ'additionne : $\\mathcal{A} = 60 + 4{,}5\\pi$ cm², la valeur exacte. À la calculatrice, $\\mathcal{A} \\approx 74{,}14$ cm².\n⛔ Le piège : prendre $6$ cm pour le rayon. Le demi-disque aurait alors $\\dfrac{36\\pi}{2} \\approx 56{,}5$ cm², presque autant que le rectangle : sur le dessin, il est bien plus petit.\nRéponse : $\\mathcal{A} = 60 + 4{,}5\\pi \\approx 74{,}14$ cm².",
           schema: plan("cm", [
@@ -416,6 +454,9 @@ export const exercicesAires3e: FicheExercicesData = {
         },
         {
           enonce: "Une plaque de métal rectangulaire de $12$ cm sur $8$ cm est percée d'un trou circulaire de $4$ cm de diamètre. Calculer l'aire de métal qui reste, au centième.",
+          reponses: [
+            { attendu: "83,43", tolerance: 0.005 },
+          ],
           correction:
             "Cette fois, je ne découpe pas en morceaux à additionner : c'est la plaque PLEINE, moins le trou.\nLa plaque pleine : $12 \\times 8 = 96$ cm².\nLe trou : son rayon est $4 \\div 2 = 2$ cm, donc son aire est $\\pi \\times 2^2 = 4\\pi$ cm².\nJe soustrais : $\\mathcal{A} = 96 - 4\\pi \\approx 83{,}43$ cm².\n⭐ Contrôle : le trou fait environ $12{,}6$ cm², un peu plus d'un huitième de la plaque. Il reste bien la plus grande partie.\n⛔ Le piège : ajouter l'aire du trou au lieu de l'enlever ($96 + 4\\pi \\approx 108{,}57$ cm²), ou prendre $4$ cm pour le rayon ($96 - 16\\pi \\approx 45{,}73$ cm²).\nRéponse : il reste $96 - 4\\pi \\approx 83{,}43$ cm² de métal.",
           schema: plan("cm", [
@@ -430,6 +471,10 @@ export const exercicesAires3e: FicheExercicesData = {
         },
         {
           enonce: "Le triangle $ABC$ est rectangle en $A$, avec $AB = 9$ cm, $AC = 12$ cm et $BC = 15$ cm.\na) Calculer son aire.\nb) $H$ est le pied de la hauteur issue de $A$. En calculant l'aire d'une autre façon, trouver $AH$.",
+          reponses: [
+            { question: "a)", attendu: "54" },
+            { question: "b)", attendu: "7,2" },
+          ],
           correction:
             "a) L'angle droit est en $A$ : les côtés $[AB]$ et $[AC]$ sont perpendiculaires. L'un sert de base, l'autre de hauteur.\n$\\mathcal{A} = \\dfrac{AB \\times AC}{2} = \\dfrac{9 \\times 12}{2} = 54$ cm².\nb) Je prends maintenant $[BC]$ comme base. La hauteur qui lui correspond est $[AH]$, perpendiculaire à $(BC)$. La surface n'a pas changé : $\\dfrac{BC \\times AH}{2} = 54$, donc $15 \\times AH = 108$ et $AH = 108 \\div 15 = 7{,}2$ cm.\n⭐ Contrôle : $7{,}2$ cm est plus court que $AB$ et que $AC$. La hauteur est le plus court chemin d'un sommet à la droite opposée.\n⛔ Le piège : prendre l'hypoténuse comme hauteur, $\\dfrac{9 \\times 15}{2} = 67{,}5$ cm². $[BC]$ n'est pas perpendiculaire à $[AB]$ : c'est le côté penché.\nRéponse : $\\mathcal{A} = 54$ cm² et $AH = 7{,}2$ cm.",
           schema: plan("cm", [
@@ -448,6 +493,11 @@ export const exercicesAires3e: FicheExercicesData = {
         },
         {
           enonce: "Sur un plan à l'échelle $\\dfrac{1}{200}$, un jardin rectangulaire mesure $6$ cm sur $5$ cm.\na) Calculer l'aire du jardin sur le plan.\nb) Par combien faut-il multiplier cette aire pour obtenir l'aire réelle ?\nc) En déduire l'aire réelle du jardin, en m². Vérifier avec les dimensions réelles.",
+          reponses: [
+            { question: "a)", attendu: "30" },
+            { question: "b)", attendu: "40000" },
+            { question: "c)", attendu: "120" },
+          ],
           correction:
             "a) Sur le plan : $\\mathcal{A} = 6 \\times 5 = 30$ cm².\nb) L'échelle $\\dfrac{1}{200}$ veut dire que chaque longueur réelle est $200$ fois plus grande. C'est un agrandissement de rapport $k = 200$ : les aires sont multipliées par $k^2 = 200^2 = 40\\,000$.\nc) L'aire réelle vaut $30 \\times 40\\,000 = 1\\,200\\,000$ cm². Je convertis : $1$ m² $= 10\\,000$ cm², donc $1\\,200\\,000 \\div 10\\,000 = 120$ m².\nVérification par les longueurs : $6 \\times 200 = 1\\,200$ cm $= 12$ m et $5 \\times 200 = 1\\,000$ cm $= 10$ m, puis $12 \\times 10 = 120$ m². Les deux chemins se rejoignent.\n⛔ Le piège : multiplier l'aire par $200$ seulement, $30 \\times 200 = 6\\,000$ cm², soit $0{,}6$ m² : un jardin plus petit qu'un tapis de bain !\nRéponse : $30$ cm² sur le plan, une aire multipliée par $40\\,000$, et $120$ m² en vrai.",
           schema: deux(
@@ -468,6 +518,11 @@ export const exercicesAires3e: FicheExercicesData = {
         },
         {
           enonce: "Un rectangle de $5$ cm sur $4$ cm, d'aire $20$ cm², est agrandi. Le rectangle agrandi a une aire de $125$ cm².\na) Par combien l'aire a-t-elle été multipliée ?\nb) Quel est le rapport d'agrandissement $k$ des longueurs ?\nc) Quelles sont les dimensions du rectangle agrandi ?",
+          reponses: [
+            { question: "a)", attendu: "6,25" },
+            { question: "b)", attendu: "2,5" },
+            { question: "c)", attendu: "12,5 ; 10" },
+          ],
           correction:
             "a) $125 \\div 20 = 6{,}25$ : l'aire a été multipliée par $6{,}25$.\nb) Dans un agrandissement de rapport $k$, les aires sont multipliées par $k^2$. Donc $k^2 = 6{,}25$, et $k$ est le nombre positif dont le carré vaut $6{,}25$ : $k = \\sqrt{6{,}25} = 2{,}5$. Je vérifie : $2{,}5 \\times 2{,}5 = 6{,}25$.\nc) Chaque longueur est multipliée par $2{,}5$ : $5 \\times 2{,}5 = 12{,}5$ cm et $4 \\times 2{,}5 = 10$ cm. Contrôle : $12{,}5 \\times 10 = 125$ cm².\n⛔ Le piège : dire $k = 6{,}25$. Les côtés deviendraient $31{,}25$ cm et $25$ cm, et l'aire $781{,}25$ cm² : plus de six fois trop. Le rapport des aires, c'est $k^2$, pas $k$.\nRéponse : l'aire est multipliée par $6{,}25$, $k = 2{,}5$, et le rectangle agrandi mesure $12{,}5$ cm sur $10$ cm.",
           schema: plan("cm", [
@@ -484,6 +539,9 @@ export const exercicesAires3e: FicheExercicesData = {
         },
         {
           enonce: "Une parcelle de potager a la forme d'un trapèze rectangle : deux côtés parallèles de $14$ m et $8$ m, distants de $5$ m. Le quatrième côté, penché, mesure environ $7{,}8$ m. Calculer l'aire de la parcelle.",
+          reponses: [
+            { attendu: "55" },
+          ],
           correction:
             "Je découpe la parcelle par un trait perpendiculaire aux côtés parallèles, tiré depuis le bout du côté de $8$ m : un rectangle et un triangle rectangle.\nLe rectangle mesure $8$ m sur $5$ m : $\\mathcal{A}_1 = 8 \\times 5 = 40$ m².\nLe triangle a pour base ce qui dépasse, $14 - 8 = 6$ m, et pour hauteur la distance entre les côtés parallèles, $5$ m : $\\mathcal{A}_2 = \\dfrac{6 \\times 5}{2} = 15$ m².\nJ'additionne : $\\mathcal{A} = 40 + 15 = 55$ m².\n⭐ Le côté penché de $7{,}8$ m ne sert à rien ici : il n'est perpendiculaire à aucun autre côté.\n⛔ Le piège : prendre le côté penché comme hauteur du triangle, $\\dfrac{6 \\times 7{,}8}{2} = 23{,}4$ m².\nRéponse : la parcelle a une aire de $55$ m².",
           schema: plan("m", [
@@ -500,6 +558,10 @@ export const exercicesAires3e: FicheExercicesData = {
         },
         {
           enonce: "Un CD est un disque de $12$ cm de diamètre, percé en son centre d'un trou de $1{,}5$ cm de diamètre. Calculer l'aire de l'anneau de plastique, exacte puis au centième de cm².",
+          reponses: [
+            { question: "exacte", attendu: ["35,4375π", "35,4375×π"], exact: true },
+            { question: "arrondi", attendu: "111,33", tolerance: 0.005 },
+          ],
           correction:
             "L'anneau, c'est le grand disque MOINS le petit : je calcule les deux aires, puis je soustrais.\nLes rayons d'abord : $R = 12 \\div 2 = 6$ cm et $r = 1{,}5 \\div 2 = 0{,}75$ cm.\nLe grand disque : $\\pi \\times 6^2 = 36\\pi$ cm².\nLe trou : $\\pi \\times 0{,}75^2 = 0{,}5625\\pi$ cm².\n$\\mathcal{A} = 36\\pi - 0{,}5625\\pi = 35{,}4375\\pi \\approx 111{,}33$ cm².\n⛔ Le piège : soustraire les rayons AVANT d'élever au carré, $\\pi \\times (6 - 0{,}75)^2 = 27{,}5625\\pi \\approx 86{,}59$ cm². Un anneau n'est pas un disque de rayon $6 - 0{,}75$ : je soustrais des AIRES, pas des longueurs.\nRéponse : l'anneau a une aire de $35{,}4375\\pi \\approx 111{,}33$ cm².",
           schema: plan("cm", [
@@ -529,6 +591,13 @@ export const exercicesAires3e: FicheExercicesData = {
           titre: "Le terrain de football et la forêt",
           enonce:
             "Un terrain de football de match international mesure $105$ m sur $68$ m.\na) Calculer son aire en m², puis en hectares.\nb) Un terrain de football fait-il un hectare ?\nc) En juillet 2022, les incendies de La Teste-de-Buch et de Landiras, en Gironde, ont brûlé environ $20\\,800$ ha de forêt. Combien de terrains de football cela représente-t-il ? Et combien de km² ?",
+          reponses: [
+            { question: "a) m²", attendu: "7140" },
+            { question: "a) ha", attendu: "0,714" },
+            { question: "b)", attendu: ["non", "faux"] },
+            { question: "c) nb", attendu: "29000", tolerance: 200 },
+            { question: "c) km²", attendu: "208" },
+          ],
           correction:
             "a) Le terrain est un rectangle : $\\mathcal{A} = 105 \\times 68 = 7\\,140$ m².\nUn hectare est un carré de $100$ m de côté : $1$ ha $= 10\\,000$ m². Donc $7\\,140 \\div 10\\,000 = 0{,}714$ ha.\nb) Non : un terrain de football, c'est à peu près les trois quarts d'un hectare. Sur le dessin, le carré d'un hectare est à peine moins long que le terrain, mais bien plus large.\nc) Je divise la surface brûlée par celle d'un terrain, les deux en hectares : $20\\,800 \\div 0{,}714 \\approx 29\\,132$, soit environ $29\\,000$ terrains de football.\nEn km² : $1$ km² est un carré de $1\\,000$ m de côté, soit $1\\,000\\,000$ m² $= 100$ ha. Donc $20\\,800 \\div 100 = 208$ km², à peu près deux fois la surface de Paris.\n⛔ Le piège : diviser par $100$ au lieu de $10\\,000$ au a), et trouver $71{,}4$ ha pour un seul terrain : plus de soixante-dix hectares, c'est absurde. Entre m² et hectares, il y a $100 \\times 100$.\nRéponse : $7\\,140$ m², soit $0{,}714$ ha, moins d'un hectare ; la forêt brûlée représente environ $29\\,000$ terrains, soit $208$ km².",
           schema: plan("m", [
@@ -547,6 +616,13 @@ export const exercicesAires3e: FicheExercicesData = {
           titre: "Petite ou grande pizza ?",
           enonce:
             "Une pizzeria vend deux tailles : la petite pizza fait $20$ cm de diamètre et coûte $9$ €, la grande fait $40$ cm de diamètre et coûte $24$ €.\na) Calculer l'aire de chaque pizza, au cm² près.\nb) Le diamètre est doublé : par combien l'aire est-elle multipliée ?\nc) Combien de petites pizzas faut-il pour avoir autant de pizza qu'une grande ? Qu'est-ce qui coûte le moins cher ?",
+          reponses: [
+            { question: "a) pet.", attendu: "314", tolerance: 0.5 },
+            { question: "a) gde", attendu: "1257", tolerance: 0.5 },
+            { question: "b)", attendu: "4" },
+            { question: "c) nb", attendu: "4" },
+            { question: "c) moins", attendu: ["la grande", "grande", "la grande pizza"] },
+          ],
           correction:
             "a) Les rayons d'abord : $20 \\div 2 = 10$ cm et $40 \\div 2 = 20$ cm.\nPetite : $\\pi \\times 10^2 = 100\\pi \\approx 314$ cm². Grande : $\\pi \\times 20^2 = 400\\pi \\approx 1\\,257$ cm².\nb) $400\\pi \\div 100\\pi = 4$ : l'aire est multipliée par $4$. C'est un agrandissement de rapport $k = 2$, et les aires sont multipliées par $k^2 = 4$.\nc) Il faut $4$ petites pizzas pour avoir autant de pizza qu'une grande. Elles coûtent $4 \\times 9 = 36$ €, contre $24$ € pour la grande : la grande est bien plus avantageuse.\n⭐ Au centimètre carré : $9 \\div 314 \\approx 0{,}029$ € pour la petite, $24 \\div 1\\,257 \\approx 0{,}019$ € pour la grande.\n⛔ Le piège : croire qu'un diamètre deux fois plus grand donne deux fois plus de pizza, et prendre deux petites ($18$ €) « pour autant ». On n'aurait que la MOITIÉ d'une grande.\nRéponse : environ $314$ cm² et $1\\,257$ cm² ; l'aire est multipliée par $4$ ; il faut quatre petites pizzas ($36$ €), la grande à $24$ € est la meilleure affaire.",
           schema: plan("cm", [
@@ -564,6 +640,11 @@ export const exercicesAires3e: FicheExercicesData = {
           titre: "Repeindre le pignon",
           enonce:
             "Le pignon d'une maison est un mur formé d'un rectangle de $6$ m de large sur $2{,}5$ m de haut, surmonté d'un triangle de $1{,}5$ m de haut. Il est percé d'une fenêtre de $1{,}2$ m sur $1$ m, qu'on ne peint pas.\na) Calculer l'aire à peindre.\nb) On passe deux couches. Un litre de peinture couvre $10$ m² par couche. Combien de litres faut-il ?\nc) La peinture se vend en pots de $2{,}5$ L. Combien de pots acheter ?",
+          reponses: [
+            { question: "a)", attendu: "18,3" },
+            { question: "b)", attendu: "3,66" },
+            { question: "c)", attendu: "2" },
+          ],
           correction:
             "a) Je découpe le mur en un rectangle et un triangle, puis j'enlève la fenêtre.\nLe rectangle : $6 \\times 2{,}5 = 15$ m².\nLe triangle a pour base la largeur du mur, $6$ m, et pour hauteur $1{,}5$ m : $\\dfrac{6 \\times 1{,}5}{2} = 4{,}5$ m².\nLa fenêtre : $1{,}2 \\times 1 = 1{,}2$ m².\n$\\mathcal{A} = 15 + 4{,}5 - 1{,}2 = 18{,}3$ m².\nb) Deux couches : je peins deux fois la surface, $2 \\times 18{,}3 = 36{,}6$ m². À $10$ m² par litre : $36{,}6 \\div 10 = 3{,}66$ L.\nc) $3{,}66 \\div 2{,}5 = 1{,}464$ : un pot ne suffit pas, il en faut $2$ (il restera un peu de peinture).\n⛔ Le piège : oublier le $\\div 2$ du triangle ($9$ m² au lieu de $4{,}5$), ou oublier d'enlever la fenêtre. Chaque oubli change la quantité de peinture.\nRéponse : $18{,}3$ m² à peindre, $3{,}66$ L de peinture, donc $2$ pots.",
           schema: plan("m", [
@@ -582,6 +663,14 @@ export const exercicesAires3e: FicheExercicesData = {
           titre: "Un champ de panneaux solaires",
           enonce:
             "Un panneau solaire mesure environ $1{,}7$ m sur $1$ m.\na) Calculer l'aire d'un panneau en m², puis en cm².\nb) Une centrale solaire occupe un terrain rectangulaire de $250$ m sur $120$ m. Calculer son aire en m², puis en hectares.\nc) Les panneaux couvrent $40$ % du terrain : il faut des allées, et de l'espace pour que les rangées ne se fassent pas d'ombre. Combien de panneaux y a-t-il, au maximum ?\nd) Une seconde centrale a un terrain deux fois plus long ET deux fois plus large. Combien de panneaux peut-elle accueillir ?",
+          reponses: [
+            { question: "a) m²", attendu: "1,7" },
+            { question: "a) cm²", attendu: "17000" },
+            { question: "b) m²", attendu: "30000" },
+            { question: "b) ha", attendu: "3" },
+            { question: "c)", attendu: "7058" },
+            { question: "d)", attendu: "28235" },
+          ],
           correction:
             "a) $\\mathcal{A} = 1{,}7 \\times 1 = 1{,}7$ m². En cm² : $1{,}7 \\times 10\\,000 = 17\\,000$ cm² (ou $170 \\times 100 = 17\\,000$ cm²).\nb) $250 \\times 120 = 30\\,000$ m², soit $30\\,000 \\div 10\\,000 = 3$ ha.\nc) La surface couverte : $40$ % de $30\\,000$ m², c'est $0{,}4 \\times 30\\,000 = 12\\,000$ m². Chaque panneau occupe $1{,}7$ m² : $12\\,000 \\div 1{,}7 \\approx 7\\,058{,}8$. On ne pose pas un morceau de panneau : au maximum $7\\,058$ panneaux.\nd) Le terrain mesure $500$ m sur $240$ m : $500 \\times 240 = 120\\,000$ m², quatre fois plus que $30\\,000$ m². Longueur et largeur sont multipliées par $2$, donc l'aire par $2^2 = 4$. Surface couverte : $0{,}4 \\times 120\\,000 = 48\\,000$ m², et $48\\,000 \\div 1{,}7 \\approx 28\\,235{,}3$, soit $28\\,235$ panneaux au maximum.\n⛔ Le piège : répondre « deux fois plus de panneaux », environ $14\\,000$. Doubler les deux dimensions quadruple l'aire : sur le dessin, le petit terrain tient QUATRE fois dans le grand.\nRéponse : $1{,}7$ m² $= 17\\,000$ cm² par panneau ; $3$ ha ; au plus $7\\,058$ panneaux, et $28\\,235$ sur le terrain deux fois plus long et plus large.",
           schema: plan("m", [

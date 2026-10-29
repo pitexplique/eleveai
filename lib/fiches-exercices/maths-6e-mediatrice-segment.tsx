@@ -212,6 +212,9 @@ export const exercicesMediatriceSegment6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Trois droites coupent le segment $[AB]$. Le codage montre le milieu $M$ et les angles droits.\nLaquelle est la médiatrice de $[AB]$ ? Pourquoi pas les deux autres ?",
+          reponses: [
+            { attendu: ["3", "la droite 3", "droite 3"], exact: true },
+          ],
           figure: geo({ segs: [{ de: [0, 0], vers: [6, 0] }, { de: [5, -2.5], vers: [5, 2.5], couleur: VIOLET }, { de: [2, -2.5], vers: [4, 2.5], couleur: VIOLET }, { de: [3, -2.5], vers: [3, 2.5], couleur: VIOLET }], points: [{ en: [0, 0], nom: "A", vers: "gauche" }, { en: [6, 0], nom: "B", vers: "droite" }, { en: [3, 0], nom: "M", vers: "bd" }], codes: [{ de: [0, 0], vers: [3, 0], n: 1 }, { de: [3, 0], vers: [6, 0], n: 1 }], droits: [{ en: [5, 0], a: [6, 0], b: [5, 2.5] }, { en: [3, 0], a: [0, 0], b: [3, 2.5] }], textes: [{ en: [5, 2.95], t: "1", couleur: VIOLET }, { en: [4.1, 2.95], t: "2", couleur: VIOLET }, { en: [3, 2.95], t: "3", couleur: VIOLET }] }),
           correction:
             "La médiatrice doit remplir DEUX conditions.\nElle est perpendiculaire à $[AB]$, et elle passe par son milieu $M$.\nLa droite $1$ est perpendiculaire, mais elle ne passe pas par $M$.\nLa droite $2$ passe par $M$, mais elle n'est pas perpendiculaire.\nLa droite $3$ fait les deux : c'est la médiatrice.\n⛔ Le piège : se contenter d'une seule condition.\nRéponse : la droite $3$.",
@@ -219,6 +222,12 @@ export const exercicesMediatriceSegment6e: FicheExercicesData = {
         },
         {
           enonce: "Complète.\na) La médiatrice d'un segment est la droite … à ce segment, qui passe par son … .\nb) Combien un segment a-t-il de médiatrices ?\nc) La médiatrice est-elle une droite, un segment ou une demi-droite ?",
+          reponses: [
+            { question: "a) 1", attendu: ["perpendiculaire"], exact: true },
+            { question: "a) 2", attendu: ["milieu"], exact: true },
+            { question: "b)", attendu: ["une", "1", "une seule"], exact: true },
+            { question: "c)", attendu: ["une droite", "droite"], exact: true },
+          ],
           correction:
             "a) La médiatrice est PERPENDICULAIRE au segment. Elle passe par son MILIEU.\nb) Un segment n'a qu'un milieu. Par ce point, il n'y a qu'une perpendiculaire.\nDonc un segment a une seule médiatrice.\nc) C'est une DROITE : elle ne s'arrête pas.\n⛔ Le piège au c) : croire que c'est un petit segment. On la trace longue, mais elle continue.\nRéponse : a) perpendiculaire, milieu ; b) une seule ; c) une droite.",
           schema: ecranSeulement(geo({ segs: [{ de: [0, 0], vers: [5, 0] }, { de: [2.5, -2.5], vers: [2.5, 2.5], couleur: VERT }], points: [{ en: [0, 0], nom: "A", vers: "gauche" }, { en: [5, 0], nom: "B", vers: "droite" }, { en: [2.5, 0], nom: "M", vers: "bd" }], codes: [{ de: [0, 0], vers: [2.5, 0], n: 1 }, { de: [2.5, 0], vers: [5, 0], n: 1 }], droits: [{ en: [2.5, 0], a: [5, 0], b: [2.5, 2.5] }] })),
@@ -226,6 +235,9 @@ export const exercicesMediatriceSegment6e: FicheExercicesData = {
         },
         {
           enonce: "Le point $P$ est sur la médiatrice du segment $[EF]$, et $PE = 5{,}3$ cm.\nCombien mesure $PF$ ?",
+          reponses: [
+            { attendu: "5,3" },
+          ],
           correction:
             "$P$ est sur la médiatrice de $[EF]$.\nDonc $P$ est à la même distance de $E$ et de $F$.\n$PF = PE = 5{,}3$ cm.\n⛔ Le piège : diviser par $2$. Il n'y a rien à calculer : les deux distances sont égales.\nRéponse : $PF = 5{,}3$ cm.",
           schema: ecranSeulement(geo({ segs: [{ de: [0, 0], vers: [4, 0] }, { de: [2, -1], vers: [2, 5.6], couleur: VERT }, { de: [2, 4.908], vers: [0, 0], couleur: GRIS }, { de: [2, 4.908], vers: [4, 0], couleur: GRIS }], points: [{ en: [0, 0], nom: "E", vers: "gauche" }, { en: [4, 0], nom: "F", vers: "droite" }, { en: [2, 4.908], nom: "P", vers: "droite" }], cotes: [{ de: [2, 4.908], vers: [0, 0], t: "5,3 cm", cote: -1 }, { de: [4, 0], vers: [2, 4.908], t: "5,3 cm", cote: -1 }] })),
@@ -247,6 +259,9 @@ export const exercicesMediatriceSegment6e: FicheExercicesData = {
         },
         {
           enonce: "Nina dessine le segment $[RS]$ sur du papier calque.\nElle plie la feuille pour que $R$ tombe exactement sur $S$.\nQue représente le pli ? Explique.",
+          reponses: [
+            { attendu: ["la médiatrice de [RS]", "médiatrice de [RS]", "la médiatrice", "médiatrice"], exact: true },
+          ],
           correction:
             "Après le pliage, $R$ et $S$ sont l'un sur l'autre.\nChaque point du pli est donc à la même distance de $R$ et de $S$.\nLe pli coupe $[RS]$ en son milieu, et il fait un angle droit avec $[RS]$.\nC'est la médiatrice de $[RS]$.\n⭐ C'est aussi l'axe de la symétrie qui envoie $R$ sur $S$.\n⛔ Le piège : plier n'importe comment. Il faut que $R$ tombe PILE sur $S$.\nRéponse : le pli est la médiatrice de $[RS]$.",
           schema: ecranSeulement(geo({ segs: [{ de: [0, 0], vers: [5, 0] }, { de: [2.5, -2.2], vers: [2.5, 2.2], couleur: VERT, pointilles: true }], points: [{ en: [0, 0], nom: "R", vers: "gauche" }, { en: [5, 0], nom: "S", vers: "droite" }], codes: [{ de: [0, 0], vers: [2.5, 0], n: 1 }, { de: [2.5, 0], vers: [5, 0], n: 1 }], droits: [{ en: [2.5, 0], a: [5, 0], b: [2.5, 2.2] }], textes: [{ en: [2.5, 2.6], t: "pli", couleur: VERT }] })),
@@ -254,6 +269,11 @@ export const exercicesMediatriceSegment6e: FicheExercicesData = {
         },
         {
           enonce: "La droite $(d)$ est la médiatrice de $[AB]$. Les points $M$ et $N$ sont sur $(d)$.\nLe point $K$ n'est pas sur $(d)$.\na) Combien mesurent $MB$ et $NA$ ?\nb) $KA$ et $KB$ sont-ils égaux ?",
+          reponses: [
+            { question: "a) MB", attendu: "3,9" },
+            { question: "a) NA", attendu: "3,2" },
+            { question: "b)", attendu: ["non", "faux"] },
+          ],
           figure: geo({ segs: [{ de: [0, 0], vers: [5, 0] }, { de: [2.5, -3], vers: [2.5, 4], couleur: VERT }, { de: [2.5, 3], vers: [0, 0], couleur: GRIS }, { de: [2.5, -2], vers: [5, 0], couleur: GRIS }], points: [{ en: [0, 0], nom: "A", vers: "gauche" }, { en: [5, 0], nom: "B", vers: "droite" }, { en: [2.5, 3], nom: "M", vers: "droite" }, { en: [2.5, -2], nom: "N", vers: "gauche" }, { en: [4.2, 2.2], nom: "K", vers: "droite" }], cotes: [{ de: [2.5, 3], vers: [0, 0], t: "3,9 cm", cote: -1 }, { de: [2.5, -2], vers: [5, 0], t: "3,2 cm", cote: -1 }], textes: [{ en: [2.5, 4.45], t: "(d)", couleur: VERT }] }),
           correction:
             "a) $M$ est sur la médiatrice : $MB = MA = 3{,}9$ cm.\n$N$ est sur la médiatrice : $NA = NB = 3{,}2$ cm.\nb) Non. $K$ n'est pas sur la médiatrice. Il est plus près de $B$ que de $A$.\n⛔ Le piège au b) : croire que tous les points ont cette propriété. Seuls les points de la médiatrice l'ont.\nRéponse : a) $MB = 3{,}9$ cm et $NA = 3{,}2$ cm ; b) non.",
@@ -261,6 +281,12 @@ export const exercicesMediatriceSegment6e: FicheExercicesData = {
         },
         {
           enonce: "$(d)$ est la médiatrice de $[AB]$. Vrai ou faux ?\na) Tout point de $(d)$ est à la même distance de $A$ et de $B$.\nb) Le milieu de $[AB]$ est sur $(d)$.\nc) Un point à $3$ cm de $A$ et à $3$ cm de $B$ est sur $(d)$.\nd) Un point de $(d)$ est toujours le milieu de $[AB]$.",
+          reponses: [
+            { question: "a)", attendu: ["vrai", "oui"] },
+            { question: "b)", attendu: ["vrai", "oui"] },
+            { question: "c)", attendu: ["vrai", "oui"] },
+            { question: "d)", attendu: ["faux", "non"] },
+          ],
           correction:
             "a) Vrai : c'est la propriété de la médiatrice.\nb) Vrai : la médiatrice passe par le milieu.\nc) Vrai : ce point est à égale distance de $A$ et de $B$. Donc il est sur $(d)$.\nd) Faux : un seul point de $(d)$ est le milieu. C'est celui qui est sur $[AB]$.\n⛔ Le piège au d) : confondre « sur la médiatrice » et « milieu ».\nRéponse : a) vrai ; b) vrai ; c) vrai ; d) faux.",
           schema: ecranSeulement(geo({ segs: [{ de: [0, 0], vers: [4, 0] }, { de: [2, -1.5], vers: [2, 3.2], couleur: VERT }, { de: [2, 2.236], vers: [0, 0], couleur: GRIS }, { de: [2, 2.236], vers: [4, 0], couleur: GRIS }], points: [{ en: [0, 0], nom: "A", vers: "gauche" }, { en: [4, 0], nom: "B", vers: "droite" }, { en: [2, 0], nom: "M", vers: "bd" }, { en: [2, 2.236], nom: "Z", vers: "hd" }], cotes: [{ de: [2, 2.236], vers: [0, 0], t: "3 cm", cote: -1 }, { de: [4, 0], vers: [2, 2.236], t: "3 cm", cote: -1 }] })),
@@ -297,6 +323,10 @@ export const exercicesMediatriceSegment6e: FicheExercicesData = {
         },
         {
           enonce: "Un cercle a pour centre $O$. La corde $[PQ]$ mesure $6$ cm.\nOn trace la perpendiculaire à $(PQ)$ qui passe par $O$. Elle coupe $[PQ]$ en $M$.\na) Pourquoi $O$ est-il sur la médiatrice de $[PQ]$ ?\nb) Que représente le point $M$ ? Combien mesure $PM$ ?",
+          reponses: [
+            { question: "b) M", attendu: ["le milieu de [PQ]", "milieu de [PQ]", "le milieu", "milieu"], exact: true },
+            { question: "b) PM", attendu: "3" },
+          ],
           figure: geo({ cercles: [{ centre: [0, 0], rayon: 5 }], segs: [{ de: [-3, -4], vers: [3, -4] }, { de: [0, 0.8], vers: [0, -5.6], couleur: VERT, pointilles: true }], points: [{ en: [0, 0], nom: "O", vers: "droite" }, { en: [-3, -4], nom: "P", vers: "bg" }, { en: [3, -4], nom: "Q", vers: "bd" }, { en: [0, -4], nom: "M", vers: "hd" }], droits: [{ en: [0, -4], a: [3, -4], b: [0, 0] }] }),
           correction:
             "a) $OP$ et $OQ$ sont deux rayons du cercle : $OP = OQ$.\nDonc $O$ est sur la médiatrice de $[PQ]$.\nb) La médiatrice est la perpendiculaire à $(PQ)$ qui passe par $O$. C'est la droite tracée.\nElle coupe $[PQ]$ en son milieu : $M$ est le milieu de $[PQ]$.\n$PM = 6 \\div 2 = 3$ cm.\n⭐ Avec une simple équerre, on trouve le milieu d'une corde.\n⛔ Le piège : croire que $M$ tombe au hasard. La perpendiculaire par le centre tombe TOUJOURS au milieu.\nRéponse : a) car $OP = OQ$ ; b) le milieu de $[PQ]$, et $PM = 3$ cm.",
@@ -312,6 +342,11 @@ export const exercicesMediatriceSegment6e: FicheExercicesData = {
         },
         {
           enonce: "Le point $M$ est sur la médiatrice de $[AB]$. $MA = 4{,}2$ cm et $AB = 5$ cm.\na) Combien mesure $MB$ ?\nb) Calcule le périmètre du triangle $MAB$.\nc) Quelle est la nature du triangle $MAB$ ?",
+          reponses: [
+            { question: "a)", attendu: "4,2" },
+            { question: "b)", attendu: "13,4" },
+            { question: "c)", attendu: ["isocèle", "isocèle en M"], exact: true },
+          ],
           correction:
             "a) $M$ est sur la médiatrice : $MB = MA = 4{,}2$ cm.\nb) Périmètre : $4{,}2 + 4{,}2 + 5 = 13{,}4$ cm.\nc) Deux côtés sont égaux : $MAB$ est isocèle en $M$.\n⛔ Le piège au b) : oublier $MB$. Le triangle a TROIS côtés.\nRéponse : a) $4{,}2$ cm ; b) $13{,}4$ cm ; c) isocèle en $M$.",
           schema: ecranSeulement(geo({ segs: [{ de: [0, 0], vers: [5, 0] }, { de: [2.5, 3.375], vers: [0, 0] }, { de: [2.5, 3.375], vers: [5, 0] }, { de: [2.5, -1], vers: [2.5, 4.3], couleur: VERT, pointilles: true }], points: [{ en: [0, 0], nom: "A", vers: "gauche" }, { en: [5, 0], nom: "B", vers: "droite" }, { en: [2.5, 3.375], nom: "M", vers: "hd" }], cotes: [{ de: [2.5, 3.375], vers: [0, 0], t: "4,2 cm", cote: -1 }, { de: [5, 0], vers: [2.5, 3.375], t: "4,2 cm", cote: -1 }, { de: [0, 0], vers: [5, 0], t: "5 cm", cote: -1 }] })),
@@ -319,6 +354,9 @@ export const exercicesMediatriceSegment6e: FicheExercicesData = {
         },
         {
           enonce: "Deux maisons, $A$ et $B$, sont près d'une route droite.\nOn veut un arrêt de bus $S$ sur la route, à la même distance des deux maisons.\na) Sur quelle droite doit être $S$ ?\nb) Explique comment le placer.",
+          reponses: [
+            { question: "a)", attendu: ["la médiatrice de [AB]", "médiatrice de [AB]", "la médiatrice", "médiatrice"], exact: true },
+          ],
           figure: geo({ segs: [{ de: [-1, 0], vers: [9, 0], couleur: GRIS }], points: [{ en: [1, 3], nom: "A" }, { en: [6, 4], nom: "B" }], textes: [{ en: [8, -0.6], t: "route", couleur: GRIS }] }),
           correction:
             "a) $SA = SB$ : $S$ doit être sur la médiatrice de $[AB]$.\nb) Je trace la médiatrice de $[AB]$.\nL'arrêt doit aussi être sur la route.\nDonc $S$ est le point où la médiatrice coupe la route.\n⭐ Contrôle sur le plan : $SA$ et $SB$ mesurent tous les deux environ $4{,}4$ cm.\n⛔ Le piège : placer $S$ sur la route, juste en face du milieu de $[AB]$. Là, $SA$ et $SB$ ne sont pas égaux.\nRéponse : $S$ est à la rencontre de la médiatrice de $[AB]$ et de la route.",
@@ -327,6 +365,11 @@ export const exercicesMediatriceSegment6e: FicheExercicesData = {
         },
         {
           enonce: "Le triangle $RST$ est isocèle en $R$ : $RS = RT = 5$ cm, et $ST = 6$ cm.\na) $R$ est-il sur la médiatrice de $[ST]$ ? Pourquoi ?\nb) Cette médiatrice coupe $[ST]$ en $H$. Combien mesure $SH$ ?\nc) Quel angle font les droites $(RH)$ et $(ST)$ ?",
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: "3" },
+            { question: "c)", attendu: ["droit", "un angle droit", "angle droit", "90°"], exact: true },
+          ],
           figure: geo({ segs: [{ de: [0, 0], vers: [6, 0] }, { de: [0, 0], vers: [3, 4] }, { de: [3, 4], vers: [6, 0] }], points: [{ en: [0, 0], nom: "S", vers: "gauche" }, { en: [6, 0], nom: "T", vers: "droite" }, { en: [3, 4], nom: "R" }], codes: [{ de: [0, 0], vers: [3, 4], n: 1 }, { de: [6, 0], vers: [3, 4], n: 1 }] }),
           correction:
             "a) Oui. $RS = RT$ : $R$ est à égale distance de $S$ et de $T$.\nb) La médiatrice passe par le milieu de $[ST]$ : $H$ est ce milieu.\n$SH = 6 \\div 2 = 3$ cm.\nc) La médiatrice est perpendiculaire à $[ST]$ : elles font un angle droit.\n⭐ Dans un triangle isocèle, la médiatrice de la base passe par le sommet principal.\n⛔ Le piège : chercher $H$ ailleurs qu'au milieu de la base.\nRéponse : a) oui ; b) $SH = 3$ cm ; c) un angle droit.",
@@ -335,6 +378,10 @@ export const exercicesMediatriceSegment6e: FicheExercicesData = {
         },
         {
           enonce: "a) Le point $K$ n'est pas sur la médiatrice de $[AB]$. On sait que $KA = 3$ cm.\n$KB$ peut-il mesurer $3$ cm ?\nb) Le point $L$ vérifie $LA = 4$ cm et $LB = 4{,}5$ cm. Est-il sur la médiatrice de $[AB]$ ?",
+          reponses: [
+            { question: "a)", attendu: ["non", "faux"] },
+            { question: "b)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) Non. Si $KB$ mesurait $3$ cm, on aurait $KA = KB$.\nAlors $K$ serait sur la médiatrice. Or il n'y est pas.\nb) Non. $LA$ et $LB$ ne sont pas égaux : $4$ cm et $4{,}5$ cm.\nOr un point de la médiatrice est à la même distance de $A$ et de $B$.\n⛔ Le piège au b) : dire « presque égal, donc sur la médiatrice ». Il faut une égalité EXACTE.\nRéponse : a) non ; b) non.",
           schema: ecranSeulement(geo({ segs: [{ de: [0, 0], vers: [5, 0] }, { de: [2.5, -4], vers: [2.5, 3.4], couleur: VERT, pointilles: true }, { de: [1.5, 2.598], vers: [0, 0], couleur: GRIS }, { de: [2.075, -3.42], vers: [0, 0], couleur: GRIS }, { de: [2.075, -3.42], vers: [5, 0], couleur: GRIS }], points: [{ en: [0, 0], nom: "A", vers: "gauche" }, { en: [5, 0], nom: "B", vers: "droite" }, { en: [1.5, 2.598], nom: "K", vers: "hg" }, { en: [2.075, -3.42], nom: "L", vers: "bg" }], cotes: [{ de: [1.5, 2.598], vers: [0, 0], t: "3 cm" }, { de: [2.075, -3.42], vers: [0, 0], t: "4 cm" }, { de: [5, 0], vers: [2.075, -3.42], t: "4,5 cm", cote: -1 }] })),
@@ -358,6 +405,11 @@ export const exercicesMediatriceSegment6e: FicheExercicesData = {
           titre: "Le gymnase",
           enonce:
             "Trois écoles $A$, $B$ et $C$ ne sont pas alignées.\nLa ville veut un gymnase $O$ à la même distance des trois écoles.\na) Sur quelle droite doit être $O$ pour que $OA = OB$ ?\nb) Et pour que $OB = OC$ ?\nc) Construis $O$.\nd) La médiatrice de $[AC]$ passe-t-elle aussi par $O$ ? Pourquoi ?",
+          reponses: [
+            { question: "a)", attendu: ["la médiatrice de [AB]", "médiatrice de [AB]"], exact: true },
+            { question: "b)", attendu: ["la médiatrice de [BC]", "médiatrice de [BC]"], exact: true },
+            { question: "d)", attendu: ["oui", "vrai"] },
+          ],
           figure: geo({ points: [{ en: [0, 0], nom: "A", vers: "gauche" }, { en: [8, 0], nom: "B", vers: "droite" }, { en: [2, 6], nom: "C" }], segs: [{ de: [0, 0], vers: [8, 0], couleur: GRIS, pointilles: true }, { de: [8, 0], vers: [2, 6], couleur: GRIS, pointilles: true }, { de: [2, 6], vers: [0, 0], couleur: GRIS, pointilles: true }] }),
           correction:
             "a) $OA = OB$ : $O$ est sur la médiatrice de $[AB]$.\nb) $OB = OC$ : $O$ est sur la médiatrice de $[BC]$.\nc) Je trace ces deux médiatrices. $O$ est leur point commun.\nd) Oui. $OA = OB$ et $OB = OC$. Donc $OA = OC$.\nAlors $O$ est aussi sur la médiatrice de $[AC]$ : les trois médiatrices se coupent en $O$.\n⭐ Sur le plan, $OA$, $OB$ et $OC$ ont la même longueur.\n⛔ Le piège : chercher un point « au milieu » des trois écoles, à l'œil. Seules les médiatrices donnent le bon point.\nRéponse : $O$ est le point commun des médiatrices ; oui, celle de $[AC]$ y passe aussi.",
@@ -368,6 +420,9 @@ export const exercicesMediatriceSegment6e: FicheExercicesData = {
           titre: "L'assiette cassée",
           enonce:
             "Une archéologue trouve un morceau d'assiette ronde.\nElle place trois points $A$, $B$ et $C$ sur le bord.\na) Explique comment retrouver le centre $O$ de l'assiette.\nb) Elle trouve $OB = 6$ cm. Quel est le diamètre de l'assiette ?",
+          reponses: [
+            { question: "b)", attendu: "12" },
+          ],
           figure: geo({ arcs: [{ centre: [0, 0], rayon: 6, de: 25, a: 155, couleur: VIOLET }], points: [{ en: [-5.196, 3], nom: "A", vers: "gauche" }, { en: [0, 6], nom: "B" }, { en: [5.196, 3], nom: "C", vers: "droite" }] }),
           correction:
             "a) Le centre est à la même distance de tous les points du bord.\n$OA = OB$ : $O$ est sur la médiatrice de $[AB]$.\n$OB = OC$ : $O$ est sur la médiatrice de $[BC]$.\nJe trace ces deux médiatrices. Elles se coupent en $O$.\nb) $OB$ est un rayon : $6$ cm. Le diamètre est le double : $2 \\times 6 = 12$ cm.\n⛔ Le piège au b) : répondre $6$ cm. Le diamètre traverse toute l'assiette : c'est deux rayons.\nRéponse : a) $O$ est à la rencontre des deux médiatrices ; b) $12$ cm.",
@@ -378,6 +433,10 @@ export const exercicesMediatriceSegment6e: FicheExercicesData = {
           titre: "Le cerf-volant",
           enonce:
             "Le cerf-volant $ABCD$ a deux paires de côtés égaux.\n$AB = AD = 3$ cm et $CB = CD = 5$ cm.\na) Montre que la droite $(AC)$ est la médiatrice de $[BD]$.\nb) Les baguettes $[AC]$ et $[BD]$ se croisent en $I$. Où est $I$ sur $[BD]$ ?\nc) Quel angle font les deux baguettes ?",
+          reponses: [
+            { question: "b)", attendu: ["au milieu", "milieu", "au milieu de [BD]", "le milieu", "le milieu de [BD]"], exact: true },
+            { question: "c)", attendu: ["droit", "un angle droit", "angle droit", "90°"], exact: true },
+          ],
           figure: geo({ segs: [{ de: [2, 2.236], vers: [0, 0] }, { de: [0, 0], vers: [2, -4.583] }, { de: [2, -4.583], vers: [4, 0] }, { de: [4, 0], vers: [2, 2.236] }], points: [{ en: [2, 2.236], nom: "A" }, { en: [0, 0], nom: "B", vers: "gauche" }, { en: [2, -4.583], nom: "C", vers: "bas" }, { en: [4, 0], nom: "D", vers: "droite" }], cotes: [{ de: [2, 2.236], vers: [0, 0], t: "3 cm", cote: -1 }, { de: [4, 0], vers: [2, 2.236], t: "3 cm", cote: -1 }, { de: [0, 0], vers: [2, -4.583], t: "5 cm", cote: -1 }, { de: [2, -4.583], vers: [4, 0], t: "5 cm", cote: -1 }] }),
           correction:
             "a) $AB = AD$ : $A$ est à égale distance de $B$ et de $D$. Il est sur la médiatrice de $[BD]$.\n$CB = CD$ : $C$ aussi est sur la médiatrice de $[BD]$.\nDeux points suffisent : la médiatrice de $[BD]$ est la droite $(AC)$.\nb) La médiatrice passe par le milieu : $I$ est le milieu de $[BD]$.\nc) La médiatrice est perpendiculaire à $[BD]$ : les baguettes font un angle droit.\n⛔ Le piège : croire que $I$ est aussi le milieu de $[AC]$. Ici, $IA$ et $IC$ ne sont pas égaux.\nRéponse : a) $A$ et $C$ sont sur la médiatrice ; b) au milieu de $[BD]$ ; c) un angle droit.",
@@ -388,6 +447,11 @@ export const exercicesMediatriceSegment6e: FicheExercicesData = {
           titre: "Les deux puits",
           enonce:
             "Dans un champ, il y a deux puits, $P$ et $Q$.\nChaque animal va boire au puits le plus proche.\na) Quelle ligne sépare les animaux qui vont en $P$ de ceux qui vont en $Q$ ?\nb) Une vache est à $42$ m de $P$ et à $35$ m de $Q$. À quel puits va-t-elle ?\nc) Un mouton est sur la ligne de séparation, à $50$ m de $P$. À quelle distance est-il de $Q$ ?",
+          reponses: [
+            { question: "a)", attendu: ["la médiatrice de [PQ]", "médiatrice de [PQ]", "la médiatrice", "médiatrice"], exact: true },
+            { question: "b)", attendu: ["Q", "en Q"], exact: true },
+            { question: "c)", attendu: "50" },
+          ],
           figure: geo({ segs: [{ de: [0, 0], vers: [10, 0], couleur: VERT }, { de: [10, 0], vers: [10, 7], couleur: VERT }, { de: [10, 7], vers: [0, 7], couleur: VERT }, { de: [0, 7], vers: [0, 0], couleur: VERT }], points: [{ en: [2, 3], nom: "P" }, { en: [8, 3], nom: "Q" }] }),
           correction:
             "a) Sur la ligne de séparation, un animal est à la même distance des deux puits.\nCes points forment la médiatrice de $[PQ]$.\nb) $35$ m, c'est moins que $42$ m : la vache est plus près de $Q$. Elle va en $Q$.\nc) Il est sur la médiatrice : il est aussi à $50$ m de $Q$.\n⛔ Le piège au a) : tracer une ligne « entre les deux », au hasard.\nC'est la médiatrice : perpendiculaire à $[PQ]$, en son milieu.\nRéponse : a) la médiatrice de $[PQ]$ ; b) en $Q$ ; c) $50$ m.",

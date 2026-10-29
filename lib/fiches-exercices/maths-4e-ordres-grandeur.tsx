@@ -244,6 +244,12 @@ export const exercicesOrdresGrandeur4e: FicheExercicesData = {
         {
           enonce:
             "Écris chaque grandeur avec une puissance de dix, dans l'unité demandée.\na) $1$ km en mètres\nb) $1$ ns (une nanoseconde) en secondes\nc) $1$ MW (un mégawatt) en watts\nd) $1$ µg (un microgramme) en grammes",
+          reponses: [
+            { question: "a)", attendu: ["10^3"], exact: true },
+            { question: "b)", attendu: ["10^(-9)"], exact: true },
+            { question: "c)", attendu: ["10^6"], exact: true },
+            { question: "d)", attendu: ["10^(-6)"], exact: true },
+          ],
           correction:
             "Je remplace chaque préfixe par sa puissance de dix ; l'unité reste la même.\na) Kilo vaut mille : $1$ km $= 10^{3}$ m.\nb) Nano vaut un milliardième : $1$ ns $= 10^{-9}$ s.\nc) Méga vaut un million : $1$ MW $= 10^{6}$ W.\nd) Micro vaut un millionième : $1$ µg $= 10^{-6}$ g.\n⛔ Le piège : lire « micro » comme « très petit » et répondre au hasard. En maths, micro vaut EXACTEMENT $10^{-6}$, ni plus ni moins.\nRéponse : $10^{3}$ m ; $10^{-9}$ s ; $10^{6}$ W ; $10^{-6}$ g.",
           schema: echelle(-10, 10, PREFIXES, { unite: "unités", pas: 3 }),
@@ -252,6 +258,11 @@ export const exercicesOrdresGrandeur4e: FicheExercicesData = {
         {
           enonce:
             "Convertis dans l'unité sans préfixe, d'abord avec une puissance de dix, puis en écriture décimale.\na) $7$ GW en watts\nb) $25$ µm en mètres\nc) $0{,}4$ mg en grammes",
+          reponses: [
+            { question: "a)", attendu: "7000000000" },
+            { question: "b)", attendu: "0,000025" },
+            { question: "c)", attendu: "0,0004" },
+          ],
           correction:
             "Je garde le nombre devant, et je remplace seulement le préfixe par sa puissance de dix.\na) Giga vaut $10^{9}$ : $7$ GW $= 7 \\times 10^{9}$ W $= 7\\,000\\,000\\,000$ W, sept milliards de watts.\nb) Micro vaut $10^{-6}$ : $25$ µm $= 25 \\times 10^{-6}$ m $= 0{,}000025$ m.\nc) Milli vaut $10^{-3}$ : $0{,}4$ mg $= 0{,}4 \\times 10^{-3}$ g $= 0{,}0004$ g.\n⛔ Le piège : perdre le nombre devant, et écrire $10^{9}$ W pour $7$ GW. Le $7$ reste : seul le préfixe devient une puissance de dix.\nRéponse : $7\\,000\\,000\\,000$ W ; $0{,}000025$ m ; $0{,}0004$ g.",
           schema: tableau([
@@ -265,6 +276,11 @@ export const exercicesOrdresGrandeur4e: FicheExercicesData = {
         {
           enonce:
             "a) Combien de micromètres y a-t-il dans un millimètre ?\nb) Combien de mégaoctets dans un gigaoctet ?\nc) Combien de milligrammes dans un kilogramme ?",
+          reponses: [
+            { question: "a)", attendu: "1000" },
+            { question: "b)", attendu: "1000" },
+            { question: "c)", attendu: "1000000" },
+          ],
           correction:
             "Pour passer d'un préfixe à l'autre, je soustrais leurs exposants : l'écart dit combien de rangs les séparent.\na) Milli $10^{-3}$, micro $10^{-6}$ : écart $-3 - (-6) = 3$. Un millimètre contient $10^{3} = 1\\,000$ micromètres.\nb) Giga $10^{9}$, méga $10^{6}$ : écart $9 - 6 = 3$. Un gigaoctet contient $10^{3} = 1\\,000$ mégaoctets.\nc) Kilo $10^{3}$, milli $10^{-3}$ : écart $3 - (-3) = 6$. Un kilogramme contient $10^{6} = 1\\,000\\,000$ milligrammes.\n⛔ Le piège : au c), s'arrêter à $1\\,000$. Du kilo au milli, il y a DEUX sauts de mille, en passant par l'unité : $10^{3} \\times 10^{3} = 10^{6}$.\nRéponse : $1\\,000$ µm ; $1\\,000$ Mo ; $1\\,000\\,000$ mg.",
           schema: echelle(-10, 10, PREFIXES, {
@@ -280,6 +296,13 @@ export const exercicesOrdresGrandeur4e: FicheExercicesData = {
         {
           enonce:
             "Associe à chaque longueur son ordre de grandeur, en mètres, parmi : $10^{-9}$ ; $10^{-3}$ ; $10^{2}$ ; $10^{4}$ ; $10^{7}$.\na) l'épaisseur d'une carte bancaire : $0{,}76$ mm\nb) la hauteur de l'Everest : $8\\,849$ m\nc) la largeur de la double hélice d'ADN : environ $2$ nm\nd) la longueur d'un terrain de football : $105$ m\ne) le diamètre de la Terre : environ $12\\,700$ km",
+          reponses: [
+            { question: "a)", attendu: "10^(-3)" },
+            { question: "b)", attendu: "10^4" },
+            { question: "c)", attendu: "10^(-9)" },
+            { question: "d)", attendu: "10^2" },
+            { question: "e)", attendu: "10^7" },
+          ],
           correction:
             "Je convertis d'abord en mètres, puis j'encadre entre deux puissances de dix et je prends la plus proche.\na) $0{,}76$ mm $= 0{,}00076$ m, entre $10^{-4}$ et $10^{-3}$, plus près de $0{,}001$ : $10^{-3}$ m.\nb) $8\\,849$ m est entre $10^{3}$ et $10^{4}$, bien plus près de $10\\,000$ : $10^{4}$ m.\nc) $2$ nm $= 2 \\times 10^{-9}$ m : $10^{-9}$ m.\nd) $105$ m est tout près de $100$ : $10^{2}$ m.\ne) $12\\,700$ km $= 12\\,700\\,000$ m, entre $10^{7}$ et $10^{8}$, tout près de dix millions : $10^{7}$ m.\n⛔ Le piège : oublier de convertir. Le diamètre de la Terre n'est pas « de l'ordre de $10^{4}$ » : ça, ce sont des kilomètres. Un ordre de grandeur se donne dans UNE unité.\nRéponse : a) $10^{-3}$ m ; b) $10^{4}$ m ; c) $10^{-9}$ m ; d) $10^{2}$ m ; e) $10^{7}$ m.",
           schema: echelle(-10, 9, [
@@ -293,6 +316,12 @@ export const exercicesOrdresGrandeur4e: FicheExercicesData = {
         },
         {
           enonce: "Donne l'ordre de grandeur de chaque nombre.\na) $9\\,600$\nb) $0{,}0012$\nc) $1\\,850\\,000$\nd) $0{,}09$",
+          reponses: [
+            { question: "a)", attendu: "10^4" },
+            { question: "b)", attendu: "10^(-3)" },
+            { question: "c)", attendu: "10^6" },
+            { question: "d)", attendu: "10^(-1)" },
+          ],
           correction:
             "J'encadre chaque nombre entre deux puissances de dix qui se suivent, puis je prends la plus proche.\na) $10^{3} < 9\\,600 < 10^{4}$, et $9\\,600$ n'est qu'à $400$ de $10\\,000$ : l'ordre de grandeur est $10^{4}$.\nb) $10^{-3} < 0{,}0012 < 10^{-2}$, et $0{,}0012$ est tout près de $0{,}001$ : $10^{-3}$.\nc) $10^{6} < 1\\,850\\,000 < 10^{7}$, et $1\\,850\\,000$ est bien plus près d'un million que de dix millions : $10^{6}$.\nd) $10^{-2} < 0{,}09 < 10^{-1}$, et $0{,}09$ est tout près de $0{,}1$ : $10^{-1}$.\n⛔ Le piège : compter les chiffres sans regarder, et répondre $10^{3}$ pour $9\\,600$ parce qu'il a quatre chiffres « comme mille ». $9\\,600$, c'est presque dix mille.\nRéponse : $10^{4}$ ; $10^{-3}$ ; $10^{6}$ ; $10^{-1}$.",
           schema: tableau([
@@ -306,6 +335,11 @@ export const exercicesOrdresGrandeur4e: FicheExercicesData = {
         },
         {
           enonce: "Donne l'ordre de grandeur de chaque produit, sans calculatrice.\na) $2\\,100 \\times 89\\,000$\nb) $0{,}012 \\times 980$\nc) $1\\,200\\,000 \\times 0{,}0009$",
+          reponses: [
+            { question: "a)", attendu: "10^8" },
+            { question: "b)", attendu: "10^1" },
+            { question: "c)", attendu: "10^3" },
+          ],
           correction:
             "J'arrondis chaque facteur à sa puissance de dix, PUIS j'ajoute les exposants.\na) $2\\,100 \\approx 10^{3}$ et $89\\,000 \\approx 10^{5}$, donc $10^{3} \\times 10^{5} = 10^{3+5} = 10^{8}$.\nb) $0{,}012 \\approx 10^{-2}$ et $980 \\approx 10^{3}$, donc $10^{-2} \\times 10^{3} = 10^{-2+3} = 10^{1}$.\nc) $1\\,200\\,000 \\approx 10^{6}$ et $0{,}0009 \\approx 10^{-3}$, donc $10^{6} \\times 10^{-3} = 10^{6+(-3)} = 10^{3}$.\n⭐ Contrôle à la calculatrice : les produits exacts valent $186\\,900\\,000$, $11{,}76$ et $1\\,080$ ; chacun est bien du rang annoncé.\n⛔ Le piège : MULTIPLIER les exposants, et trouver $10^{15}$ au a). Pour un produit de puissances de dix, on les AJOUTE.\nRéponse : $10^{8}$ ; $10^{1}$ ; $10^{3}$.",
           schema: tableau([
@@ -318,6 +352,11 @@ export const exercicesOrdresGrandeur4e: FicheExercicesData = {
         },
         {
           enonce: "Donne l'ordre de grandeur de chaque quotient, sans calculatrice.\na) $8\\,900\\,000 \\div 1\\,100$\nb) $0{,}0021 \\div 0{,}0009$\nc) $12\\,000 \\div 0{,}011$",
+          reponses: [
+            { question: "a)", attendu: "10^4" },
+            { question: "b)", attendu: "1" },
+            { question: "c)", attendu: "10^6" },
+          ],
           correction:
             "Pour un quotient, j'arrondis, puis je SOUSTRAIS les exposants : celui du haut moins celui du bas.\na) $8\\,900\\,000 \\approx 10^{7}$ et $1\\,100 \\approx 10^{3}$, donc $10^{7} \\div 10^{3} = 10^{7-3} = 10^{4}$.\nb) $0{,}0021 \\approx 10^{-3}$ et $0{,}0009 \\approx 10^{-3}$, donc $10^{-3} \\div 10^{-3} = 10^{0} = 1$.\nc) $12\\,000 \\approx 10^{4}$ et $0{,}011 \\approx 10^{-2}$, donc $10^{4} \\div 10^{-2} = 10^{4-(-2)} = 10^{6}$.\n⭐ Diviser par un centième, c'est multiplier par cent : le résultat du c) est PLUS GRAND que $12\\,000$.\n⛔ Le piège : au c), calculer $4 - 2 = 2$ et répondre $10^{2}$. Soustraire $-2$, c'est ajouter $2$.\nRéponse : $10^{4}$ ; $10^{0}$, soit $1$ ; $10^{6}$.",
           schema: tableau([
@@ -331,6 +370,11 @@ export const exercicesOrdresGrandeur4e: FicheExercicesData = {
         {
           enonce:
             "Sans poser l'opération, dis si chaque résultat annoncé est plausible. Arrondis chaque nombre à un seul chiffre non nul.\na) $312 \\times 29 = 90\\,480$\nb) $4\\,870 \\div 52 = 9{,}4$\nc) $0{,}21 \\times 0{,}48 = 0{,}1008$",
+          reponses: [
+            { question: "a)", attendu: ["non", "faux", "pas plausible", "non plausible"] },
+            { question: "b)", attendu: ["non", "faux", "pas plausible", "non plausible"] },
+            { question: "c)", attendu: ["oui", "vrai", "plausible"] },
+          ],
           correction:
             "J'arrondis chaque nombre à un seul chiffre non nul : le calcul se fait de tête, et il suffit pour repérer un facteur $10$.\na) $312 \\times 29 \\approx 300 \\times 30 = 9\\,000$. L'annonce, $90\\,480$, est environ $10$ fois trop grande : NON plausible. Le vrai résultat est $9\\,048$ : un zéro de trop.\nb) $4\\,870 \\div 52 \\approx 5\\,000 \\div 50 = 100$. L'annonce, $9{,}4$, est environ $10$ fois trop petite : NON plausible. Le vrai résultat est environ $93{,}7$ : une virgule mal placée.\nc) $0{,}21 \\times 0{,}48 \\approx 0{,}2 \\times 0{,}5 = 0{,}1$. L'annonce, $0{,}1008$, est du même rang : plausible, et même exacte.\n⛔ Le piège : croire qu'un produit est toujours plus grand que ses facteurs. Au c), multiplier par $0{,}48$, c'est prendre à peu près la moitié : le résultat est plus PETIT que $0{,}21$.\nRéponse : a) non ; b) non ; c) oui.",
           schema: tableau([
@@ -359,6 +403,13 @@ export const exercicesOrdresGrandeur4e: FicheExercicesData = {
         {
           enonce:
             "Une ampoule LED consomme $9$ W. Une éolienne terrestre récente a une puissance d'environ $3$ MW. Un réacteur nucléaire du modèle le plus répandu en France a une puissance de $900$ MW.\na) Écris ces trois puissances en watts, avec une puissance de dix.\nb) Combien d'éoliennes de $3$ MW faut-il pour égaler un réacteur ?\nc) Combien d'ampoules de $9$ W le réacteur pourrait-il allumer en même temps ?",
+          reponses: [
+            { question: "a) LED", attendu: "9" },
+            { question: "a) éol", attendu: "3×10^6" },
+            { question: "a) réact", attendu: "9×10^8" },
+            { question: "b)", attendu: "300" },
+            { question: "c)", attendu: "10^8" },
+          ],
           correction:
             "a) Je remplace chaque préfixe : l'ampoule reste à $9$ W ; $3$ MW $= 3 \\times 10^{6}$ W ; $900$ MW $= 900 \\times 10^{6}$ W $= 9 \\times 10^{8}$ W.\nb) Même préfixe des deux côtés : je divise directement, $900 \\div 3 = 300$. Il faut $300$ éoliennes, quand le vent souffle à plein.\nc) Je divise en watts : $\\dfrac{9 \\times 10^{8}}{9} = 10^{8}$. Le réacteur alimente cent millions d'ampoules.\n⭐ Sur l'échelle, huit rangs séparent l'ampoule du réacteur : c'est le facteur $10^{8}$ du c).\n⛔ Le piège : diviser $900$ par $9$ sans convertir, et répondre $100$ ampoules. Des mégawatts et des watts ne se divisent pas entre eux : j'écris tout en watts d'abord.\nRéponse : a) $9$ W, $3 \\times 10^{6}$ W et $9 \\times 10^{8}$ W ; b) $300$ éoliennes ; c) $10^{8}$ ampoules.",
           schema: echelle(-1, 11, [
@@ -371,6 +422,14 @@ export const exercicesOrdresGrandeur4e: FicheExercicesData = {
         {
           enonce:
             "Quatre masses du monde vivant : une abeille ouvrière, environ $0{,}1$ g ; le colibri d'Hélène, le plus petit oiseau du monde, environ $2$ g ; un éléphant d'Afrique, environ $6$ t ; une baleine bleue, environ $150$ t.\na) Écris chaque masse en kilogrammes, puis donne son ordre de grandeur.\nb) Avec les ordres de grandeur, combien de fois la baleine est-elle plus lourde que le colibri ?\nc) Vérifie avec les valeurs de l'énoncé.",
+          reponses: [
+            { question: "a) abeil", attendu: "10^(-4)" },
+            { question: "a) colib", attendu: "10^(-3)" },
+            { question: "a) éléph", attendu: "10^4" },
+            { question: "a) bal", attendu: "10^5" },
+            { question: "b)", attendu: "10^8" },
+            { question: "c)", attendu: "75000000" },
+          ],
           correction:
             "a) $1$ g $= 10^{-3}$ kg et $1$ t $= 10^{3}$ kg.\nAbeille : $0{,}1$ g $= 0{,}0001$ kg $= 10^{-4}$ kg.\nColibri : $2$ g $= 0{,}002$ kg, tout près de $0{,}001$ : ordre de grandeur $10^{-3}$ kg.\nÉléphant : $6$ t $= 6\\,000$ kg, plus près de $10\\,000$ que de $1\\,000$ : $10^{4}$ kg.\nBaleine : $150$ t $= 150\\,000$ kg, tout près de $100\\,000$ : $10^{5}$ kg.\nb) $10^{5} \\div 10^{-3} = 10^{5-(-3)} = 10^{8}$ : environ cent millions de fois.\nc) $150\\,000 \\div 0{,}002 = 75\\,000\\,000$, soit $7{,}5 \\times 10^{7}$ : c'est bien le rang de $10^{8}$.\n⛔ Le piège : comparer $150$ et $2$ sans convertir, et répondre $75$ fois. Des tonnes et des grammes ne se comparent pas : une seule unité d'abord.\nRéponse : la baleine est environ $10^{8}$ fois plus lourde que le colibri, exactement $75$ millions de fois avec ces valeurs.",
           schema: echelle(-3.5, 6, [
@@ -383,6 +442,11 @@ export const exercicesOrdresGrandeur4e: FicheExercicesData = {
         {
           enonce:
             "a) Estime le nombre de secondes dans une année de $365$ jours, en arrondissant chaque nombre à un seul chiffre non nul.\nb) Calcule le nombre exact, et compare.\nc) Un milliard de secondes, c'est environ combien d'années ?",
+          reponses: [
+            { question: "a)", attendu: ["3×10^7", "32000000"] },
+            { question: "b)", attendu: "31536000" },
+            { question: "c)", attendu: "32", tolerance: 0.5 },
+          ],
           correction:
             "a) Une heure compte $60 \\times 60 = 3\\,600$ secondes. Une année compte donc $365 \\times 24 \\times 3\\,600$ secondes. J'arrondis : $365 \\approx 400$, $24 \\approx 20$, $3\\,600 \\approx 4\\,000$.\n$400 \\times 20 \\times 4\\,000 = 32\\,000\\,000$, environ $3 \\times 10^{7}$ secondes.\nb) $365 \\times 24 = 8\\,760$ heures, puis $8\\,760 \\times 3\\,600 = 31\\,536\\,000$ secondes. L'estimation, $32$ millions, est à moins de $2$ % du résultat exact.\nc) Un milliard, c'est $10^{9}$. $10^{9} \\div 31\\,536\\,000 \\approx 31{,}7$ : un milliard de secondes, c'est environ $32$ ans.\n⭐ Un million de secondes, mille fois moins, dure environ $11{,}6$ jours. Du million au milliard, on passe de deux semaines à une vie d'adulte.\n⛔ Le piège : compter $60$ secondes par heure. $365 \\times 24 \\times 60 = 525\\,600$ : c'est le nombre de MINUTES d'une année, soixante fois moins.\nRéponse : environ $3 \\times 10^{7}$ s dans une année, $31\\,536\\,000$ exactement ; un milliard de secondes, c'est environ $32$ ans.",
           schema: tableau([
@@ -397,6 +461,12 @@ export const exercicesOrdresGrandeur4e: FicheExercicesData = {
         {
           enonce:
             "En 2024, l'air contenait en moyenne environ $420$ ppm de dioxyde de carbone, le CO₂. « ppm » veut dire « partie par million » : $1$ ppm $= 10^{-6}$, un millionième.\na) Écris $420$ ppm avec une puissance de dix, puis en écriture décimale.\nb) Écris cette proportion en pourcentage.\nc) Un exposé affirme : « l'air contient $4{,}2$ % de CO₂ ». Est-ce plausible ? De quel facteur se trompe-t-il ?",
+          reponses: [
+            { question: "a)", attendu: "0,00042" },
+            { question: "b)", attendu: "0,042" },
+            { question: "c)", attendu: ["non", "faux", "pas plausible", "non plausible"] },
+            { question: "c) ×", attendu: "100" },
+          ],
           correction:
             "a) $420$ ppm $= 420 \\times 10^{-6} = 0{,}00042$. Une partie par million, c'est le « micro » des préfixes.\nb) Un pourcentage compte en centièmes : $0{,}00042 \\times 100 = 0{,}042$, donc $420$ ppm $= 0{,}042$ %.\nc) $4{,}2 \\div 0{,}042 = 100$ : l'exposé annonce $100$ fois trop, deux rangs. Ce n'est PAS plausible : à $4$ % de CO₂, l'air devient dangereux à respirer.\n⛔ Le piège : lire « par million » comme « par cent ». $1$ % $= 10^{-2}$ et $1$ ppm $= 10^{-6}$ : quatre rangs d'écart.\nRéponse : $420$ ppm $= 420 \\times 10^{-6} = 0{,}00042$, soit $0{,}042$ % ; l'exposé se trompe d'un facteur $100$.",
           schema: echelle(-7, 0, [
@@ -410,6 +480,11 @@ export const exercicesOrdresGrandeur4e: FicheExercicesData = {
         {
           enonce:
             "Regarder un film en streaming en ultra haute définition consomme environ $7$ Go de données par heure.\na) Écris la consommation d'un film de $2$ h en octets, avec une puissance de dix.\nb) Combien d'heures de film tiennent sur une clé USB de $64$ Go ?\nc) Un camarade affirme qu'un film de $2$ h en ultra HD pèse $14$ Mo. Quel facteur le sépare de la bonne valeur ? D'où vient l'erreur ?",
+          reponses: [
+            { question: "a)", attendu: "1,4×10^10" },
+            { question: "b)", attendu: "9", tolerance: 0.15 },
+            { question: "c)", attendu: "1000" },
+          ],
           correction:
             "a) $2 \\times 7 = 14$ Go. Giga vaut $10^{9}$ : $14$ Go $= 14 \\times 10^{9}$ octets, soit $1{,}4 \\times 10^{10}$ octets.\nb) Même unité des deux côtés : $64 \\div 7 \\approx 9{,}1$. Environ $9$ heures de film.\nc) $14$ Go et $14$ Mo ont le même nombre devant ; seul le préfixe change. Giga $10^{9}$, méga $10^{6}$ : écart $9 - 6 = 3$ rangs, un facteur $1\\,000$. Le camarade a confondu giga et méga.\n⭐ Contrôle du sens : à $7$ Go par heure, $14$ Mo ne dureraient qu'environ $7$ secondes.\n⛔ Le piège : croire que Mo et Go, « c'est pareil, en gros ». Entre les deux, il y a exactement mille.\nRéponse : $1{,}4 \\times 10^{10}$ octets ; environ $9$ heures ; un facteur $1\\,000$, méga pris pour giga.",
           schema: echelle(6, 11, [
@@ -421,6 +496,12 @@ export const exercicesOrdresGrandeur4e: FicheExercicesData = {
         {
           enonce:
             "Au repos, le cœur d'un adulte bat environ $70$ fois par minute. On garde cette valeur pour toute la vie.\na) Calcule le nombre de battements en un jour.\nb) Estime le nombre de battements en $80$ ans, en arrondissant à chaque étape.\nc) Une affiche annonce : « votre cœur battra $3$ millions de fois dans votre vie ». Est-ce plausible ?",
+          reponses: [
+            { question: "a)", attendu: "100800" },
+            { question: "b)", attendu: ["3×10^9", "3,2×10^9"] },
+            { question: "c)", attendu: ["non", "faux", "pas plausible", "non plausible"] },
+            { question: "c) ×", attendu: "1000" },
+          ],
           correction:
             "a) Une journée compte $24 \\times 60 = 1\\,440$ minutes. $70 \\times 1\\,440 = 100\\,800$ battements par jour, environ $10^{5}$.\nb) En un an : $10^{5} \\times 365$. J'arrondis $365 \\approx 400$ : environ $4 \\times 10^{7}$ battements.\nEn $80$ ans : $4 \\times 10^{7} \\times 80 = 320 \\times 10^{7} = 3{,}2 \\times 10^{9}$ battements, environ trois milliards.\n⭐ Le calcul exact, $100\\,800 \\times 365 \\times 80 = 2\\,943\\,360\\,000$, tombe bien dans le même rang : quelques milliards.\nc) $3$ millions, c'est $3 \\times 10^{6}$ ; l'estimation dit $3 \\times 10^{9}$. Écart : $9 - 6 = 3$ rangs, un facteur $1\\,000$. L'affiche n'est PAS plausible : trois millions de battements, c'est à peine un mois de vie.\n⛔ Le piège : confondre million et milliard. Ils se ressemblent à l'oreille, mais il y a mille entre eux.\nRéponse : $100\\,800$ battements par jour, environ $3 \\times 10^{9}$ en $80$ ans ; l'affiche se trompe d'un facteur $1\\,000$.",
           schema: tableau([
@@ -434,6 +515,13 @@ export const exercicesOrdresGrandeur4e: FicheExercicesData = {
         {
           enonce:
             "Un cheveu a une épaisseur d'environ $70$ µm. Le virus de la grippe mesure environ $100$ nm.\na) Écris ces deux longueurs en mètres, avec une puissance de dix, et donne leur ordre de grandeur.\nb) Avec les ordres de grandeur, combien de virus côte à côte faudrait-il pour couvrir l'épaisseur du cheveu ?\nc) Fais le calcul avec les valeurs de l'énoncé.",
+          reponses: [
+            { question: "a) chev", attendu: "7×10^(-5)" },
+            { question: "a) OG ch", attendu: "10^(-4)" },
+            { question: "a) virus", attendu: "10^(-7)" },
+            { question: "b)", attendu: "1000" },
+            { question: "c)", attendu: "700" },
+          ],
           correction:
             "a) Cheveu : $70$ µm $= 70 \\times 10^{-6}$ m $= 7 \\times 10^{-5}$ m, plus près de $10^{-4}$ que de $10^{-5}$ : ordre de grandeur $10^{-4}$ m.\nVirus : $100$ nm $= 100 \\times 10^{-9}$ m $= 10^{-7}$ m.\nb) Je divise : $10^{-4} \\div 10^{-7} = 10^{-4-(-7)} = 10^{3}$. Environ mille virus.\nc) $\\dfrac{7 \\times 10^{-5}}{10^{-7}} = 7 \\times 10^{-5+7} = 7 \\times 10^{2} = 700$ virus.\n⭐ $700$ et $1\\,000$ sont du même rang : l'ordre de grandeur donne le rang, le calcul donne le chiffre.\n⛔ Le piège : calculer $-4 - 7 = -11$ et trouver un nombre minuscule. Un cheveu est PLUS GROS qu'un virus : le résultat doit dépasser $1$. Soustraire $-7$, c'est ajouter $7$.\nRéponse : environ $700$ virus, de l'ordre de $10^{3}$.",
           schema: echelle(-8, -3, [
@@ -445,6 +533,11 @@ export const exercicesOrdresGrandeur4e: FicheExercicesData = {
         {
           enonce:
             "Trois élèves ont converti une grandeur. Pour chacun, trouve le facteur entre sa réponse et la bonne, puis l'erreur probable.\na) $3{,}5$ kg en mg : Léa trouve $3\\,500$ mg.\nb) $45$ µs en s : Noé trouve $0{,}045$ s.\nc) $2$ GW en W : Inès trouve $2 \\times 10^{6}$ W.",
+          reponses: [
+            { question: "a) ×", attendu: "1000" },
+            { question: "b) ×", attendu: "1000" },
+            { question: "c) ×", attendu: "1000" },
+          ],
           correction:
             "Je fais la conversion juste, puis je compare les deux réponses : le facteur dit combien de rangs ont été perdus.\na) Du kilo au milli : $3 - (-3) = 6$ rangs. $3{,}5$ kg $= 3{,}5 \\times 10^{6}$ mg $= 3\\,500\\,000$ mg. Facteur : $3\\,500\\,000 \\div 3\\,500 = 1\\,000$. Léa s'est arrêtée aux grammes : une conversion sur deux.\nb) Micro vaut $10^{-6}$ : $45$ µs $= 45 \\times 10^{-6}$ s $= 0{,}000045$ s. Facteur : $0{,}045 \\div 0{,}000045 = 1\\,000$. Noé a pris micro pour milli.\nc) Giga vaut $10^{9}$ : $2$ GW $= 2 \\times 10^{9}$ W. Facteur : $10^{9} \\div 10^{6} = 1\\,000$. Inès a pris giga pour méga.\n⭐ Trois fois le facteur $1\\,000$ : c'est la signature d'un préfixe voisin confondu, ou d'une conversion oubliée, puisque les préfixes vont de trois rangs en trois rangs.\n⛔ Le piège : tout recommencer sans chercher le facteur. Le facteur montre OÙ est l'erreur.\nRéponse : les trois réponses sont fausses d'un facteur $1\\,000$.",
           schema: tableau([
@@ -473,6 +566,16 @@ export const exercicesOrdresGrandeur4e: FicheExercicesData = {
           titre: "Le système solaire dans la cour",
           enonce:
             "Diamètre de la Terre : environ $1{,}3 \\times 10^{4}$ km. Diamètre du Soleil : environ $1{,}4 \\times 10^{6}$ km. Distance de la Terre au Soleil : environ $1{,}5 \\times 10^{8}$ km. On construit une maquette où $1$ cm représente $10^{4}$ km.\na) Donne l'ordre de grandeur de ces trois longueurs. Que remarques-tu ?\nb) Calcule chaque longueur sur la maquette.\nc) La maquette tient-elle dans une salle de classe d'environ $10$ m ? Sur un terrain de football d'environ $100$ m ?",
+          reponses: [
+            { question: "a) Terre", attendu: "10^4" },
+            { question: "a) Sol", attendu: "10^6" },
+            { question: "a) dist", attendu: "10^8" },
+            { question: "b) Terre", attendu: "1,3" },
+            { question: "b) Sol", attendu: "140" },
+            { question: "b) dist", attendu: ["150", "15000"] },
+            { question: "c) salle", attendu: ["non"] },
+            { question: "c) foot", attendu: ["non"] },
+          ],
           correction:
             "a) $1{,}3 \\times 10^{4}$ : ordre $10^{4}$ km. $1{,}4 \\times 10^{6}$ : ordre $10^{6}$ km. $1{,}5 \\times 10^{8}$ : ordre $10^{8}$ km.\nDeux rangs à chaque fois : le Soleil est environ $100$ fois plus large que la Terre, et la distance vaut environ $100$ diamètres du Soleil.\nb) Je divise chaque longueur par $10^{4}$ km, la longueur que représente $1$ cm.\nTerre : $\\dfrac{1{,}3 \\times 10^{4}}{10^{4}} = 1{,}3$ cm, une bille.\nSoleil : $\\dfrac{1{,}4 \\times 10^{6}}{10^{4}} = 1{,}4 \\times 10^{2} = 140$ cm, une boule de la taille d'un enfant de dix ans.\nDistance : $\\dfrac{1{,}5 \\times 10^{8}}{10^{4}} = 1{,}5 \\times 10^{4} = 15\\,000$ cm, soit $150$ m.\nc) $150 \\div 10 = 15$ : il faudrait $15$ salles de classe bout à bout. Et $150$ m, c'est un terrain de football et demi.\n⛔ Le piège : imaginer le Soleil et la Terre côte à côte, comme sur les images des livres. À l'échelle, une bille à $150$ m d'une boule de $1{,}4$ m : le système solaire, c'est surtout du VIDE.\nRéponse : Terre $1{,}3$ cm, Soleil $140$ cm, distance $150$ m ; la maquette ne tient pas dans la classe, il faut un terrain et demi.",
           schema: pile(
@@ -500,6 +603,12 @@ export const exercicesOrdresGrandeur4e: FicheExercicesData = {
           titre: "Un fil d'une nanoseconde",
           enonce:
             "La lumière parcourt environ $3 \\times 10^{8}$ mètres par seconde. L'informaticienne Grace Hopper distribuait à ses élèves des bouts de fil électrique d'une trentaine de centimètres, en disant : « voici une nanoseconde ».\na) Quelle distance la lumière parcourt-elle en $1$ ns ? Explique le fil de Grace Hopper.\nb) Un processeur cadencé à $3$ GHz effectue $3 \\times 10^{9}$ cycles par seconde. Quelle distance la lumière parcourt-elle pendant un cycle ?\nc) Un élève affirme : « en une microseconde, la lumière parcourt $300$ km ». Vrai ou faux ? Corrige.",
+          reponses: [
+            { question: "a) cm", attendu: "30" },
+            { question: "b) cm", attendu: "10" },
+            { question: "c)", attendu: ["faux", "non"] },
+            { question: "c) m", attendu: "300" },
+          ],
           correction:
             "a) Distance $=$ vitesse $\\times$ durée, avec $1$ ns $= 10^{-9}$ s : $3 \\times 10^{8} \\times 10^{-9} = 3 \\times 10^{8+(-9)} = 3 \\times 10^{-1}$ m $= 0{,}3$ m, soit $30$ cm. Le fil a la longueur que parcourt la lumière en une nanoseconde : Grace Hopper faisait TOUCHER une durée.\nb) En une seconde, $3 \\times 10^{9}$ cycles : pendant un cycle, la lumière parcourt $\\dfrac{3 \\times 10^{8}}{3 \\times 10^{9}} = 10^{8-9} = 10^{-1}$ m, soit $10$ cm. Pendant un cycle, même la lumière n'a pas le temps de traverser l'ordinateur.\nc) $1$ µs $= 10^{-6}$ s : $3 \\times 10^{8} \\times 10^{-6} = 3 \\times 10^{2} = 300$ m. L'élève annonce $300$ km, mille fois trop : c'est FAUX. $300$ km, c'est la distance parcourue en une MILLIseconde.\n⛔ Le piège : confondre micro et milli. Ils se suivent sur l'échelle des préfixes, à trois rangs l'un de l'autre : un facteur $1\\,000$.\nRéponse : $30$ cm en une nanoseconde ; $10$ cm pendant un cycle ; en une microseconde, $300$ m et non $300$ km.",
           schema: tableau([
@@ -515,6 +624,15 @@ export const exercicesOrdresGrandeur4e: FicheExercicesData = {
           titre: "Les arbres de la Terre",
           enonce:
             "En 2015, une équipe de chercheurs a estimé qu'il y a environ $3 \\times 10^{12}$ arbres sur Terre, et que l'humanité en abat environ $1{,}5 \\times 10^{10}$ chaque année. On compte environ $8 \\times 10^{9}$ êtres humains.\na) Donne l'ordre de grandeur de ces trois nombres, puis estime le nombre d'arbres par être humain.\nb) Calcule-le avec les valeurs de l'énoncé.\nc) Si aucun arbre ne repoussait, en combien d'années toutes les forêts auraient-elles disparu ?\nd) Un site titre : « $15$ millions d'arbres abattus chaque année dans le monde ». Est-ce vraisemblable ?",
+          reponses: [
+            { question: "a) arb", attendu: "10^12" },
+            { question: "a) abat", attendu: "10^10" },
+            { question: "a) hum", attendu: "10^10" },
+            { question: "a) /hum", attendu: "10^2" },
+            { question: "b)", attendu: "375" },
+            { question: "c)", attendu: "200" },
+            { question: "d)", attendu: ["non", "faux", "pas plausible", "non plausible"] },
+          ],
           correction:
             "a) $3 \\times 10^{12}$ : ordre $10^{12}$. $1{,}5 \\times 10^{10}$ : ordre $10^{10}$. $8 \\times 10^{9}$, huit milliards, est plus près de dix milliards que d'un milliard : ordre $10^{10}$.\nArbres par humain : $10^{12} \\div 10^{10} = 10^{2}$, de l'ordre de la centaine.\nb) $\\dfrac{3 \\times 10^{12}}{8 \\times 10^{9}} = \\dfrac{3}{8} \\times 10^{12-9} = 0{,}375 \\times 10^{3} = 375$ arbres par être humain : des centaines, comme prévu.\nc) $\\dfrac{3 \\times 10^{12}}{1{,}5 \\times 10^{10}} = 2 \\times 10^{2} = 200$ ans.\n⭐ En vrai, des arbres repoussent et on en plante : $200$ ans n'est pas une prévision. C'est une MESURE de la vitesse de l'abattage.\nd) $15$ millions $= 1{,}5 \\times 10^{7}$. Les chercheurs disent $1{,}5 \\times 10^{10}$ : écart $10 - 7 = 3$ rangs, un facteur $1\\,000$. Le titre n'est pas vraisemblable : il a écrit millions au lieu de milliards.\n⛔ Le piège : comparer « $15$ » et « $1{,}5$ » en oubliant les puissances de dix. Deux nombres ne se comparent qu'écrits de la même façon.\nRéponse : environ $375$ arbres par humain ; $200$ ans sans repousse ; le titre se trompe d'un facteur $1\\,000$.",
           schema: echelle(6, 13, [
@@ -534,6 +652,12 @@ export const exercicesOrdresGrandeur4e: FicheExercicesData = {
           titre: "Les gouttes d'un bassin olympique",
           enonce:
             "Un bassin olympique mesure $50$ m de long, $25$ m de large et au moins $2$ m de profondeur. Un compte-gouttes de pharmacie délivre $20$ gouttes d'eau par millilitre.\na) Calcule le volume d'un bassin de $2$ m de profondeur, en m³, puis en litres. On rappelle que $1$ m³ $= 1\\,000$ L.\nb) Combien de gouttes d'eau contient-il ? Écris le résultat avec une puissance de dix, puis en mots.\nc) Un élève trouve $5 \\times 10^{7}$ gouttes. Quel facteur le sépare du bon résultat ? Quelle conversion a-t-il oubliée ?",
+          reponses: [
+            { question: "a) m³", attendu: "2500" },
+            { question: "a) L", attendu: "2500000" },
+            { question: "b)", attendu: "5×10^10" },
+            { question: "c)", attendu: "1000" },
+          ],
           correction:
             "a) $V = 50 \\times 25 \\times 2 = 2\\,500$ m³. Puis $2\\,500 \\times 1\\,000 = 2\\,500\\,000$ L, soit $2{,}5 \\times 10^{6}$ L.\nb) Un litre vaut $1\\,000$ mL, donc $1\\,000 \\times 20 = 20\\,000$ gouttes par litre, soit $2 \\times 10^{4}$.\nNombre de gouttes : $2{,}5 \\times 10^{6} \\times 2 \\times 10^{4} = 5 \\times 10^{10}$, cinquante milliards de gouttes.\nc) $\\dfrac{5 \\times 10^{10}}{5 \\times 10^{7}} = 10^{3}$ : un facteur $1\\,000$. L'élève a compté $20$ gouttes par LITRE au lieu de $20$ par millilitre : il a oublié le passage des litres aux millilitres.\n⭐ Pour sentir ce nombre : à une goutte par seconde, vider le bassin prendrait $5 \\times 10^{10}$ secondes, plus de $1\\,500$ ans.\n⛔ Le piège : enchaîner les conversions sans les écrire. Chaque « milli » oublié coûte trois rangs d'un coup.\nRéponse : $2\\,500$ m³, soit $2{,}5 \\times 10^{6}$ L ; $5 \\times 10^{10}$ gouttes, cinquante milliards ; l'élève se trompe d'un facteur $1\\,000$.",
           schema: pile(

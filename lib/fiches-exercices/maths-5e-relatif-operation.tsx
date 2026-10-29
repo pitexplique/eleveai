@@ -318,6 +318,12 @@ export const exercicesRelatifOperation5e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Calcule.\na) $-9 + (-5)$\nb) $-12 + 7$\nc) $6 + (-15)$\nd) $-3{,}5 + (-2{,}5)$",
+          reponses: [
+            { question: "a)", attendu: "-14" },
+            { question: "b)", attendu: "-5" },
+            { question: "c)", attendu: "-9" },
+            { question: "d)", attendu: "-6" },
+          ],
           correction:
             "Je regarde d'abord les signes, puis les distances à zéro.\na) Deux négatifs : mêmes signes. J'additionne les distances, $9 + 5 = 14$, et je garde le signe moins : $-9 + (-5) = -14$.\nb) Signes contraires : je soustrais les distances, $12 - 7 = 5$. Le plus loin de zéro est $-12$, je garde son signe : $-12 + 7 = -5$.\nc) Signes contraires : $15 - 6 = 9$, et $-15$ est le plus loin de zéro : $6 + (-15) = -9$.\nd) Deux négatifs : $3{,}5 + 2{,}5 = 6$, donc $-3{,}5 + (-2{,}5) = -6$.\n⛔ Le piège : au b), écrire $-19$ en additionnant les distances. Quand les signes sont contraires, les deux nombres se compensent : je soustrais.\nRéponse : a) $-14$ ; b) $-5$ ; c) $-9$ ; d) $-6$.",
           schema: ecranSeulement(
@@ -330,6 +336,11 @@ export const exercicesRelatifOperation5e: FicheExercicesData = {
         },
         {
           enonce: "Sur cette droite graduée, je pars de $3$ et je fais le saut dessiné.\na) Compte la longueur du saut et regarde son sens. Écris l'addition que montre le dessin.\nb) Calcule-la, et vérifie sur le dessin l'abscisse du point A.\nc) Quel saut faut-il faire depuis A pour revenir au départ ?",
+          reponses: [
+            { question: "a)", attendu: ["3 + (-8)"], exact: true },
+            { question: "b)", attendu: "-5" },
+            { question: "c)", attendu: "+8" },
+          ],
           figure: droiteRel(-6, 4, 1, [
             { value: 3, label: "départ" },
             { value: -5, label: "A", color: ROUGE },
@@ -340,6 +351,12 @@ export const exercicesRelatifOperation5e: FicheExercicesData = {
         },
         {
           enonce: "Écris chaque soustraction comme une addition, puis calcule.\na) $5 - 11$\nb) $-7 - 6$\nc) $-8 - (-3)$\nd) $2 - (-6{,}5)$",
+          reponses: [
+            { question: "a)", attendu: "-6" },
+            { question: "b)", attendu: "-13" },
+            { question: "c)", attendu: "-5" },
+            { question: "d)", attendu: "8,5" },
+          ],
           correction:
             "Soustraire un nombre, c'est ajouter son opposé. Je change le signe du nombre qu'on enlève, et seulement de lui.\na) $5 - 11 = 5 + (-11) = -6$ : signes contraires, $11 - 5 = 6$, et $-11$ est le plus loin de zéro.\nb) $-7 - 6 = -7 + (-6) = -13$ : deux négatifs, j'additionne les distances.\nc) $-8 - (-3) = -8 + 3 = -5$ : l'opposé de $-3$ est $3$.\nd) $2 - (-6{,}5) = 2 + 6{,}5 = 8{,}5$.\n⛔ Le piège : au c), écrire $-8 - 3 = -11$. Enlever $-3$, c'est AJOUTER $3$ : deux signes moins qui se suivent font plus.\nRéponse : a) $-6$ ; b) $-13$ ; c) $-5$ ; d) $8{,}5$.",
           schema: ecranSeulement(
@@ -354,6 +371,12 @@ export const exercicesRelatifOperation5e: FicheExercicesData = {
         },
         {
           enonce: "Trouve le nombre qui manque.\na) $-4 + \\ldots = 0$\nb) $6 + \\ldots = 2$\nc) $\\ldots + (-5) = -12$\nd) $-3 + \\ldots = 5$",
+          reponses: [
+            { question: "a)", attendu: "4" },
+            { question: "b)", attendu: "-4" },
+            { question: "c)", attendu: "-7" },
+            { question: "d)", attendu: "8" },
+          ],
           correction:
             "Je cherche de combien il faut se déplacer sur la droite graduée, et dans quel sens.\na) Pour aller de $-4$ à $0$, j'avance de $4$ vers la droite : $-4 + 4 = 0$. Le nombre qui manque est l'opposé de $-4$.\nb) De $6$ à $2$, je recule de $4$ : j'ajoute $-4$. $6 + (-4) = 2$.\nc) Ajouter $-5$ fait reculer de $5$ et arriver à $-12$ : le départ est $5$ unités à droite de $-12$, en $-7$. $-7 + (-5) = -12$.\nd) De $-3$ à $5$ : $3$ unités jusqu'à zéro, puis $5$ de plus, soit $8$ vers la droite. $-3 + 8 = 5$.\n⛔ Le piège : au b), répondre $4$ parce que « de $6$ à $2$, il y a $4$ ». On RECULE : le nombre ajouté est négatif.\nRéponse : a) $4$ ; b) $-4$ ; c) $-7$ ; d) $8$.",
           schema: droiteRel(-4, 6, 1, [
@@ -364,6 +387,10 @@ export const exercicesRelatifOperation5e: FicheExercicesData = {
         },
         {
           enonce: "Un congélateur est réglé à $-18$ °C et un réfrigérateur à $4$ °C.\na) Quel est l'écart de température entre les deux appareils ?\nb) On sort un glaçon du congélateur. Il fond quand sa température atteint $0$ °C. De combien de degrés sa température a-t-elle monté ?",
+          reponses: [
+            { question: "a)", attendu: "22" },
+            { question: "b)", attendu: "18" },
+          ],
           correction:
             "Un écart se calcule toujours : la température la plus haute moins la plus basse.\na) $4 - (-18) = 4 + 18 = 22$. Sur l'axe : de $-18$ à $0$, il y a $18$ degrés, puis de $0$ à $4$, encore $4$. En tout, $22$.\nb) De $-18$ à $0$ : $0 - (-18) = 0 + 18 = 18$.\n⛔ Le piège : calculer $18 - 4 = 14$. Le congélateur est SOUS zéro : il faut remonter jusqu'à zéro, puis continuer jusqu'à $4$.\nRéponse : a) l'écart est de $22$ °C ; b) sa température a monté de $18$ °C.",
           schema: axeVertical(-20, 5, 5, [
@@ -378,6 +405,9 @@ export const exercicesRelatifOperation5e: FicheExercicesData = {
         },
         {
           enonce: "Calcule $D = -6 + 9 - 11 + 4$ de gauche à droite.",
+          reponses: [
+            { attendu: "-4" },
+          ],
           correction:
             "Sans parenthèses, je calcule de gauche à droite, un déplacement à la fois.\n$-6 + 9 = 3$ : signes contraires, $9 - 6 = 3$, et $9$ est le plus loin de zéro.\n$3 - 11 = -8$ : je recule de $11$ depuis $3$, je passe sous zéro.\n$-8 + 4 = -4$ : je remonte de $4$, sans atteindre zéro.\n⛔ Le piège : oublier le signe de $-6$ et commencer par $6 + 9 = 15$. Chaque nombre garde le signe écrit juste devant lui.\nRéponse : $D = -4$.",
           schema: droiteRel(-10, 4, 1, [
@@ -388,6 +418,9 @@ export const exercicesRelatifOperation5e: FicheExercicesData = {
         },
         {
           enonce: "Calcule astucieusement $B = 17 + (-6) + (-17) + 9 + (-4)$.",
+          reponses: [
+            { attendu: "-1" },
+          ],
           correction:
             "Dans une somme, je peux changer l'ordre des termes. Je cherche d'abord deux nombres opposés.\n$17$ et $-17$ sont opposés : $17 + (-17) = 0$. Ils s'annulent.\nIl reste $-6 + 9 + (-4)$. $-6 + 9 = 3$, puis $3 + (-4) = -1$.\n⭐ Contrôle de gauche à droite : $17 + (-6) = 11$, $11 + (-17) = -6$, $-6 + 9 = 3$, $3 + (-4) = -1$. Même résultat, avec plus d'étapes.\n⛔ Le piège : voir « $17$ » deux fois et écrire $34$. Un nombre et son opposé ne s'ajoutent pas : ils s'annulent.\nRéponse : $B = -1$.",
           schema: ecranSeulement(
@@ -401,6 +434,12 @@ export const exercicesRelatifOperation5e: FicheExercicesData = {
         },
         {
           enonce: "Calcule.\na) $-2{,}3 + 4{,}8$\nb) $-1{,}25 - 0{,}75$\nc) $0{,}6 - 1{,}4$\nd) $-0{,}5 - (-0{,}5)$",
+          reponses: [
+            { question: "a)", attendu: "2,5" },
+            { question: "b)", attendu: "-2" },
+            { question: "c)", attendu: "-0,8" },
+            { question: "d)", attendu: "0" },
+          ],
           correction:
             "Les règles sont les mêmes avec des décimaux : je regarde les signes, puis les distances à zéro.\na) Signes contraires : $4{,}8 - 2{,}3 = 2{,}5$, et $4{,}8$ est le plus loin de zéro. $-2{,}3 + 4{,}8 = 2{,}5$.\nb) $-1{,}25 - 0{,}75 = -1{,}25 + (-0{,}75) = -2$ : deux négatifs, $1{,}25 + 0{,}75 = 2$.\nc) $0{,}6 - 1{,}4 = 0{,}6 + (-1{,}4) = -0{,}8$ : signes contraires, $1{,}4 - 0{,}6 = 0{,}8$, et $-1{,}4$ l'emporte.\nd) $-0{,}5 - (-0{,}5) = -0{,}5 + 0{,}5 = 0$ : deux nombres opposés.\n⛔ Le piège : au c), écrire $0{,}8$ en oubliant le signe. On enlève plus qu'on n'a : on passe sous zéro.\nRéponse : a) $2{,}5$ ; b) $-2$ ; c) $-0{,}8$ ; d) $0$.",
           schema: ecranSeulement(
@@ -427,6 +466,9 @@ export const exercicesRelatifOperation5e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Calcule $C = 3 - (-7) + (-12) - (+4)$.",
+          reponses: [
+            { attendu: "-6" },
+          ],
           correction:
             "D'abord, j'enlève les parenthèses. Deux signes qui se suivent : pareils, ils font plus ; différents, ils font moins.\n$- (-7)$ devient $+ 7$ ; $+ (-12)$ devient $- 12$ ; $- (+4)$ devient $- 4$.\n$C = 3 + 7 - 12 - 4$.\nPuis de gauche à droite : $3 + 7 = 10$, puis $10 - 12 = -2$, puis $-2 - 4 = -6$.\n⛔ Le piège : recopier $- (-7)$ en $- 7$. Enlever $-7$, c'est ajouter $7$.\nRéponse : $C = -6$.",
           schema: table(["étape", "ce que j'écris"], [
@@ -440,6 +482,11 @@ export const exercicesRelatifOperation5e: FicheExercicesData = {
         },
         {
           enonce: "Trois élèves se sont trompés. Trouve l'erreur de chacun, puis corrige.\na) Noé écrit : $-8 + 3 = -11$.\nb) Lina écrit : $-2 - 6 = 4$.\nc) Yanis écrit : $5 - (-5) = 0$.",
+          reponses: [
+            { question: "a)", attendu: "-5" },
+            { question: "b)", attendu: "-8" },
+            { question: "c)", attendu: "10" },
+          ],
           correction:
             "a) Noé a additionné les distances, $8 + 3 = 11$, alors que les signes sont contraires. Il faut les soustraire : $8 - 3 = 5$, et $-8$ est le plus loin de zéro. $-8 + 3 = -5$.\nb) Lina a calculé $6 - 2 = 4$. Or je pars de $-2$ et je recule encore de $6$ : $-2 - 6 = -2 + (-6) = -8$.\nc) Yanis a lu $5 - 5$. Mais on enlève $-5$ : c'est ajouter $5$. $5 - (-5) = 5 + 5 = 10$.\n⭐ Un contrôle rapide au b) : on recule depuis $-2$, le résultat doit être à gauche de $-2$. Le nombre $4$ ne peut pas convenir.\nRéponse : a) $-5$ ; b) $-8$ ; c) $10$.",
           schema: ecranSeulement(
@@ -453,6 +500,12 @@ export const exercicesRelatifOperation5e: FicheExercicesData = {
         {
           enonce:
             "Le niveau d'un lac de barrage est mesuré par rapport à son niveau normal, noté $0$. Le 1er juin, il est exactement au niveau normal. Le tableau donne la variation du niveau pendant chaque mois de l'été (chiffres d'un modèle).\na) Quel est le niveau à la fin de juillet ?\nb) Quel est le niveau à la fin de septembre ?\nc) À la fin de quel mois le lac était-il le plus bas ?\nd) De combien le niveau doit-il encore monter pour revenir au niveau normal ?",
+          reponses: [
+            { question: "a)", attendu: "-0,9" },
+            { question: "b)", attendu: "-1,2" },
+            { question: "c)", attendu: ["août", "fin août"] },
+            { question: "d)", attendu: "1,2" },
+          ],
           figure: tableau(["mois", "juin", "juil.", "août", "sept."], ["variation (m)", "+0,4", "−1,3", "−0,9", "+0,6"], true),
           correction:
             "Je pars de $0$ et j'ajoute les variations une à une : une hausse est positive, une baisse négative.\nFin juin : $0 + 0{,}4 = 0{,}4$.\na) Fin juillet : $0{,}4 + (-1{,}3) = -0{,}9$. Le lac est à $0{,}9$ m sous son niveau normal.\nFin août : $-0{,}9 + (-0{,}9) = -1{,}8$.\nb) Fin septembre : $-1{,}8 + 0{,}6 = -1{,}2$.\nc) Le plus bas est $-1{,}8$ : c'est à la fin du mois d'août.\nd) Pour aller de $-1{,}2$ à $0$ : $0 - (-1{,}2) = 1{,}2$. Il doit encore monter de $1{,}2$ m.\n⛔ Le piège du b) : additionner les distances sans les signes, $0{,}4 + 1{,}3 + 0{,}9 + 0{,}6 = 3{,}2$. Une baisse et une hausse se compensent.\nRéponse : a) $-0{,}9$ m ; b) $-1{,}2$ m ; c) fin août ; d) $1{,}2$ m.",
@@ -468,6 +521,14 @@ export const exercicesRelatifOperation5e: FicheExercicesData = {
         {
           enonce:
             "Voici trois dates de l'histoire antique.\nSelon la légende, Rome est fondée en $753$ av. J.-C.\nHannibal traverse les Alpes avec ses éléphants en $218$ av. J.-C.\nJules César remporte la bataille d'Alésia en $52$ av. J.-C.\na) Écris ces trois dates avec des nombres relatifs.\nb) Combien d'années séparent la fondation de Rome et le passage d'Hannibal ?\nc) Combien d'années séparent le passage d'Hannibal et Alésia ?\nd) Vérifie tes deux réponses avec la durée entre la fondation de Rome et Alésia.",
+          reponses: [
+            { question: "a) Rome", attendu: "-753" },
+            { question: "a) Hann.", attendu: "-218" },
+            { question: "a) Alés.", attendu: "-52" },
+            { question: "b)", attendu: "535" },
+            { question: "c)", attendu: "166" },
+            { question: "d)", attendu: "701" },
+          ],
           correction:
             "a) Avant J.-C., les dates sont négatives : Rome $-753$, Hannibal $-218$, Alésia $-52$.\nb) Une durée, c'est la date la plus récente moins la plus ancienne : $-218 - (-753) = -218 + 753 = 535$. Il s'est passé $535$ ans.\nc) $-52 - (-218) = -52 + 218 = 166$. Il s'est passé $166$ ans.\nd) $-52 - (-753) = -52 + 753 = 701$, et $535 + 166 = 701$ : les deux calculs sont d'accord.\n⛔ Le piège : calculer $-218 - 753 = -971$. On n'enlève pas $753$, on enlève $-753$ : c'est ajouter $753$. Et une durée n'est jamais négative.\nRéponse : b) $535$ ans ; c) $166$ ans ; d) $701$ ans.",
           schema: droiteRel(-800, 0, 100, [
@@ -479,6 +540,12 @@ export const exercicesRelatifOperation5e: FicheExercicesData = {
         },
         {
           enonce: "Dans cette pyramide, chaque brique est la somme des deux briques posées juste en dessous d'elle. Complète-la.",
+          reponses: [
+            { question: "bas", attendu: "-8" },
+            { question: "rang 2", attendu: "-2 ; -2" },
+            { question: "rang 3", attendu: "-7 ; -7" },
+            { question: "sommet", attendu: "-14" },
+          ],
           figure: pyramide([["?"], ["?", "?"], ["?", "−5", "?"], ["−5", "3", "?", "6"]]),
           correction:
             "Je commence par la brique du bas qui manque : au-dessus d'elle et de $3$, il y a $-5$.\nJe cherche le nombre qui, ajouté à $3$, donne $-5$ : $-5 - 3 = -8$. Contrôle : $3 + (-8) = -5$.\nDeuxième rangée en partant du bas : $-5 + 3 = -2$ à gauche, et $-8 + 6 = -2$ à droite.\nRangée suivante : $-2 + (-5) = -7$ et $-5 + (-2) = -7$.\nLe sommet : $-7 + (-7) = -14$.\n⛔ Le piège : écrire $8$ en bas, parce que « $3$ et $5$ font $8$ ». Je vérifie toujours : $3 + 8 = 11$, pas $-5$.\nRéponse : en bas, $-8$ ; puis $-2$ et $-2$ ; puis $-7$ et $-7$ ; au sommet, $-14$.",
@@ -487,6 +554,10 @@ export const exercicesRelatifOperation5e: FicheExercicesData = {
         },
         {
           enonce: "Dans cette table d'addition, chaque case est la somme du nombre de sa ligne et du nombre de sa colonne. Complète-la : commence par les deux nombres qui manquent au bord.",
+          reponses: [
+            { question: "colonne", attendu: "-3" },
+            { question: "ligne", attendu: "7" },
+          ],
           figure: table(["+", "−4", "…"], [
             ["−6", "…", "−9"],
             ["…", "3", "…"],
@@ -498,6 +569,12 @@ export const exercicesRelatifOperation5e: FicheExercicesData = {
         },
         {
           enonce: "Écris chaque phrase par un calcul, puis calcule.\na) La somme de $-7$ et de $4{,}5$.\nb) La différence de $-3$ et de $-10$.\nc) J'ajoute $-8$ à l'opposé de $5$.\nd) Je soustrais $6$ à $-2{,}5$.",
+          reponses: [
+            { question: "a)", attendu: "-2,5" },
+            { question: "b)", attendu: "7" },
+            { question: "c)", attendu: "-13" },
+            { question: "d)", attendu: "-8,5" },
+          ],
           correction:
             "a) Une somme : j'ajoute. $-7 + 4{,}5 = -2{,}5$ : signes contraires, $7 - 4{,}5 = 2{,}5$, et $-7$ l'emporte.\nb) « La différence de $-3$ et de $-10$ », c'est le premier moins le second, dans cet ordre : $-3 - (-10) = -3 + 10 = 7$.\nc) L'opposé de $5$ est $-5$. J'y ajoute $-8$ : $-5 + (-8) = -13$.\nd) Je pars de $-2{,}5$ et j'enlève $6$ : $-2{,}5 - 6 = -8{,}5$.\n⛔ Le piège du d) : écrire $6 - (-2{,}5)$. « Soustraire $6$ à $-2{,}5$ », c'est partir de $-2{,}5$ et enlever $6$.\nRéponse : a) $-2{,}5$ ; b) $7$ ; c) $-13$ ; d) $-8{,}5$.",
           schema: ecranSeulement(
@@ -512,6 +589,16 @@ export const exercicesRelatifOperation5e: FicheExercicesData = {
         },
         {
           enonce: "Sans calculer, dis si le résultat est positif, négatif ou nul. Calcule ensuite pour vérifier.\na) $-47 + 29$\nb) $38 - 52$\nc) $-16 - (-21)$\nd) $-8{,}4 + 8{,}4$",
+          reponses: [
+            { question: "a) signe", attendu: ["négatif"] },
+            { question: "a) =", attendu: "-18" },
+            { question: "b) signe", attendu: ["négatif"] },
+            { question: "b) =", attendu: "-14" },
+            { question: "c) signe", attendu: ["positif"] },
+            { question: "c) =", attendu: "5" },
+            { question: "d) signe", attendu: ["nul"] },
+            { question: "d) =", attendu: "0" },
+          ],
           correction:
             "J'écris d'abord une addition, puis je regarde quel nombre est le plus loin de zéro : c'est lui qui donne le signe.\na) $-47$ est plus loin de zéro que $29$ : le résultat est négatif. $-47 + 29 = -18$.\nb) $38 - 52 = 38 + (-52)$ : $-52$ l'emporte, le résultat est négatif. $38 - 52 = -14$.\nc) $-16 - (-21) = -16 + 21$ : $21$ l'emporte, le résultat est positif. $-16 - (-21) = 5$.\nd) $-8{,}4$ et $8{,}4$ sont opposés : le résultat est nul. $-8{,}4 + 8{,}4 = 0$.\n⛔ Le piège du c) : « il y a des moins partout, donc c'est négatif ». Enlever un négatif fait AVANCER vers la droite.\nRéponse : a) négatif, $-18$ ; b) négatif, $-14$ ; c) positif, $5$ ; d) nul, $0$.",
           schema: ecranSeulement(
@@ -542,6 +629,12 @@ export const exercicesRelatifOperation5e: FicheExercicesData = {
           titre: "Les fuseaux horaires",
           enonce:
             "En hiver, l'heure légale de Paris est en avance d'une heure sur le temps universel : on note $+1$. Celle de New York est en retard de $5$ heures : $-5$. Celle de Tokyo est en avance de $9$ heures : $+9$.\na) Calcule $-5 - (+1)$. Que signifie ce résultat pour un habitant de New York ?\nb) Quel est le décalage horaire entre Tokyo et New York ?\nc) Quand il est $20$ h à Paris, quelle heure est-il à Tokyo ?\nd) Un avion quitte Paris à $10$ h, heure de Paris. Le vol dure $8$ h. Quelle heure est-il à New York quand il atterrit ?",
+          reponses: [
+            { question: "a)", attendu: "-6" },
+            { question: "b)", attendu: "14" },
+            { question: "c)", attendu: ["4", "4 h du matin"] },
+            { question: "d)", attendu: ["12", "midi"] },
+          ],
           correction:
             "a) $-5 - (+1) = -5 - 1 = -6$. New York a $6$ heures de RETARD sur Paris : quand il est midi à Paris, il est $6$ h du matin à New York.\nb) Tokyo moins New York : $9 - (-5) = 9 + 5 = 14$. Tokyo a $14$ heures d'avance sur New York.\nc) Tokyo moins Paris : $9 - 1 = 8$ heures d'avance. $20 + 8 = 28$ : c'est plus que $24$ h, on passe au lendemain. $28 - 24 = 4$ : il est $4$ h du matin à Tokyo, le lendemain.\nd) À l'arrivée, il est $10 + 8 = 18$ h à Paris. New York a $6$ heures de retard : $18 - 6 = 12$. Il est $12$ h, midi, à New York.\n⛔ Le piège du b) : calculer $9 - 5 = 4$. New York est à $-5$, pas à $5$ : entre les deux, il faut passer par zéro.\nRéponse : a) $-6$ ; b) $14$ heures ; c) $4$ h du matin, le lendemain ; d) midi.",
           schema: droiteRel(-6, 10, 1, [
@@ -555,6 +648,11 @@ export const exercicesRelatifOperation5e: FicheExercicesData = {
           titre: "La grotte",
           enonce:
             "Une spéléologue prend l'entrée d'une grotte comme repère : l'altitude $0$. Elle descend un puits de $42$ m, remonte de $15$ m le long d'une galerie, puis redescend de $27{,}5$ m jusqu'à une rivière souterraine (chiffres d'un modèle).\na) Écris le calcul de son altitude finale avec des nombres relatifs, puis calcule-la étape par étape.\nb) Une deuxième équipe l'attend à l'altitude $-31$ m. Combien de mètres les séparent ?\nc) De combien de mètres doit-elle remonter pour ressortir de la grotte ?",
+          reponses: [
+            { question: "a)", attendu: "-54,5" },
+            { question: "b)", attendu: "23,5" },
+            { question: "c)", attendu: "54,5" },
+          ],
           correction:
             "a) Descendre, c'est ajouter un négatif ; remonter, un positif : $0 + (-42) + 15 + (-27{,}5)$.\nAprès le puits : $0 + (-42) = -42$.\nAprès la galerie : $-42 + 15 = -27$.\nÀ la rivière : $-27 + (-27{,}5) = -54{,}5$. Elle est à $-54{,}5$ m.\nb) L'écart, c'est la plus haute moins la plus basse : $-31 - (-54{,}5) = -31 + 54{,}5 = 23{,}5$. Elles sont à $23{,}5$ m l'une de l'autre.\nc) De $-54{,}5$ à $0$ : $0 - (-54{,}5) = 54{,}5$. Elle doit remonter de $54{,}5$ m.\n⭐ Contrôle : elle est descendue de $42 + 27{,}5 = 69{,}5$ m et remontée de $15$ m, et $69{,}5 - 15 = 54{,}5$.\n⛔ Le piège du b) : calculer $-31 - 54{,}5 = -85{,}5$. On enlève $-54{,}5$, pas $54{,}5$ ; et une distance n'est jamais négative.\nRéponse : a) $-54{,}5$ m ; b) $23{,}5$ m ; c) $54{,}5$ m.",
           schema: axeVertical(-60, 0, 10, [
@@ -570,6 +668,11 @@ export const exercicesRelatifOperation5e: FicheExercicesData = {
           titre: "Le carré magique",
           enonce:
             "Dans un carré magique, les sommes de chaque ligne, de chaque colonne et des deux diagonales sont toutes égales : c'est la somme magique.\na) Calcule la somme de la diagonale déjà complète. C'est la somme magique.\nb) Complète le carré. Explique dans quel ordre tu remplis les cases.\nc) On ajoute $-2$ à chacune des neuf cases. Le carré est-il encore magique ? Quelle est sa nouvelle somme magique ?",
+          reponses: [
+            { question: "a)", attendu: "0" },
+            { question: "c) mag.", attendu: ["oui", "vrai"] },
+            { question: "c) somme", attendu: "-6" },
+          ],
           figure: grille([["−3", "?", "1"], ["?", "0", "?"], ["?", "−2", "3"]]),
           correction:
             "a) La diagonale complète : $-3 + 0 + 3 = 0$. La somme magique est $0$.\nb) Je remplis d'abord une case qui est seule à manquer dans sa ligne ou sa colonne.\nLigne du haut : $-3 + 1 = -2$. Pour revenir à $0$, il manque l'opposé de $-2$, soit $2$. Contrôle : $-3 + 2 + 1 = 0$.\nLigne du bas : $-2 + 3 = 1$, il manque $-1$. Contrôle : $-1 + (-2) + 3 = 0$.\nColonne de gauche : $-3 + (-1) = -4$, il manque $4$.\nLigne du milieu : $4 + 0 = 4$, il manque $-4$.\nDerniers contrôles : la colonne de droite, $1 + (-4) + 3 = 0$ ; l'autre diagonale, $1 + 0 + (-1) = 0$.\nc) Chaque ligne a trois cases : sa somme change de $(-2) + (-2) + (-2) = -6$. C'est pareil pour chaque colonne et chaque diagonale : toutes les sommes valent $0 + (-6) = -6$. Le carré reste magique.\n⛔ Le piège du c) : croire que la somme change de $-2$ seulement. Chaque ligne reçoit $-2$ trois fois.\nRéponse : a) $0$ ; c) oui, la nouvelle somme magique est $-6$.",
@@ -580,6 +683,13 @@ export const exercicesRelatifOperation5e: FicheExercicesData = {
           titre: "La bataille des cartes",
           enonce:
             "Dans un jeu, chaque carte porte un nombre relatif. Le score d'un joueur est la somme de ses cartes, et le plus grand score gagne.\nTom a tiré $-7$, $4$ et $-2{,}5$. Inès a tiré $3$, $-9$ et $1{,}5$.\na) Calcule le score de chacun.\nb) Qui mène ? Avec combien de points d'avance ?\nc) Tom a le droit de tirer une quatrième carte. Les cartes vont de $-10$ à $10$, de $0{,}5$ en $0{,}5$. Quelles cartes lui font gagner la partie ? Donne la plus petite.",
+          reponses: [
+            { question: "a) Tom", attendu: "-5,5" },
+            { question: "a) Inès", attendu: "-4,5" },
+            { question: "b) qui", attendu: ["Inès"] },
+            { question: "b) écart", attendu: "1" },
+            { question: "c)", attendu: "1,5" },
+          ],
           correction:
             "a) Tom : $-7 + 4 = -3$, puis $-3 + (-2{,}5) = -5{,}5$.\nInès : $3 + (-9) = -6$, puis $-6 + 1{,}5 = -4{,}5$.\nb) $-4{,}5$ est plus proche de zéro que $-5{,}5$ : $-4{,}5 > -5{,}5$. Inès mène.\nSon avance : $-4{,}5 - (-5{,}5) = -4{,}5 + 5{,}5 = 1$. Elle a $1$ point d'avance.\nc) Avec une carte de $1$, Tom arrive à $-5{,}5 + 1 = -4{,}5$ : égalité, il ne gagne pas encore.\nIl lui faut une carte plus grande que $1$. La plus petite est $1{,}5$ : $-5{,}5 + 1{,}5 = -4$, et $-4$ est plus grand que $-4{,}5$.\nToutes les cartes de $1{,}5$ à $10$ le font gagner.\n⛔ Le piège du b) : croire que Tom mène parce que $5{,}5$ est plus grand que $4{,}5$. Chez les négatifs, le plus grand est le plus proche de zéro.\nRéponse : a) Tom $-5{,}5$, Inès $-4{,}5$ ; b) Inès, avec $1$ point d'avance ; c) les cartes de $1{,}5$ à $10$, la plus petite est $1{,}5$.",
           schema: droiteRel(-6, 0, 0.5, [

@@ -228,6 +228,10 @@ export const exercicesCercleCirconscrit6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Sur la figure, on a tracé trois droites rouges.\nChacune coupe un côté du triangle en son milieu, à angle droit.\na) Comment s'appellent ces trois droites ?\nb) Que remarques-tu ?\nc) Comment s'appelle le cercle bleu ?",
+          reponses: [
+            { question: "a)", attendu: ["les médiatrices", "médiatrices"] },
+            { question: "c)", attendu: ["le cercle circonscrit", "cercle circonscrit"] },
+          ],
           figure: geo({
             points: [
               { nom: "A", en: [-5, 0], vers: "g" },
@@ -245,6 +249,10 @@ export const exercicesCercleCirconscrit6e: FicheExercicesData = {
         },
         {
           enonce: "O est le point commun des trois médiatrices du triangle ABC.\nOn sait que $OA = 4$ cm.\nCombien mesurent $OB$ et $OC$ ? Pourquoi ?",
+          reponses: [
+            { question: "OB", attendu: "4" },
+            { question: "OC", attendu: "4" },
+          ],
           figure: geo({
             points: [
               { nom: "A", en: [-2.4, -3.2], vers: "bg" },
@@ -266,6 +274,9 @@ export const exercicesCercleCirconscrit6e: FicheExercicesData = {
         },
         {
           enonce: "Pour trouver le centre du cercle circonscrit, Nour trace des médiatrices.\nCombien doit-elle en tracer au minimum ? Pourquoi ?",
+          reponses: [
+            { attendu: "2" },
+          ],
           correction:
             "Deux médiatrices suffisent. Elles se coupent en un point, O.\nLa troisième passe forcément par O : les trois médiatrices sont concourantes.\nSi je la trace, elle sert seulement à vérifier.\n⛔ Le piège : croire qu'il en faut trois. La troisième ne change pas le point.\nRéponse : $2$ médiatrices.",
           schema: ecranSeulement(
@@ -285,6 +296,10 @@ export const exercicesCercleCirconscrit6e: FicheExercicesData = {
         },
         {
           enonce: "Le cercle circonscrit au triangle ABC a pour centre O et pour rayon $3{,}5$ cm.\na) Combien mesure son diamètre ?\nb) Combien mesurent $OA$, $OB$ et $OC$ ?",
+          reponses: [
+            { question: "a)", attendu: "7" },
+            { question: "b)", attendu: "3,5" },
+          ],
           correction:
             "a) Le diamètre vaut deux rayons : $3{,}5 \\times 2 = 7$ cm.\nb) Le cercle passe par A, B et C. Ce sont trois points du cercle.\nIls sont tous à un rayon du centre : $OA = OB = OC = 3{,}5$ cm.\n⛔ Le piège : répondre $7$ cm pour OA. OA est un rayon, pas un diamètre.\nRéponse : a) $7$ cm ; b) $3{,}5$ cm chacun.",
           schema: ecranSeulement(
@@ -325,6 +340,11 @@ export const exercicesCercleCirconscrit6e: FicheExercicesData = {
         },
         {
           enonce: "On a mesuré les distances de trois points P, Q et R aux sommets.\nP : $PA = 2{,}1$ cm, $PB = 2{,}1$ cm, $PC = 5{,}1$ cm.\nQ : $QA = 3$ cm, $QB = 3$ cm, $QC = 3$ cm.\nR : $RA = 3{,}3$ cm, $RB = 5{,}5$ cm, $RC = 3{,}3$ cm.\na) Lequel est le centre du cercle circonscrit ?\nb) Sur quelle médiatrice sont les deux autres ?",
+          reponses: [
+            { question: "a)", attendu: ["Q"] },
+            { question: "b) P", attendu: ["[AB]", "AB"] },
+            { question: "b) R", attendu: ["[AC]", "AC"] },
+          ],
           figure: geo({
             points: [
               { nom: "A", en: [-1.8, -2.4], vers: "bg" },
@@ -342,6 +362,11 @@ export const exercicesCercleCirconscrit6e: FicheExercicesData = {
         },
         {
           enonce: "Lou pique son compas en O, le point commun des médiatrices. Elle règle l'écartement sur OA.\nTom pique en P, un autre point de la médiatrice de $[AB]$. Il règle l'écartement sur PA.\na) Le cercle de Lou passe-t-il par B et par C ?\nb) Le cercle de Tom passe-t-il par B ? Et par C ?",
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b) B", attendu: ["oui", "vrai"] },
+            { question: "b) C", attendu: ["non", "faux"] },
+          ],
           figure: geo({
             points: [
               { nom: "A", en: [-4, 3], vers: "hg" },
@@ -363,6 +388,10 @@ export const exercicesCercleCirconscrit6e: FicheExercicesData = {
         },
         {
           enonce: "Trois points A, B et C sont alignés : $AB = 3$ cm et $BC = 4$ cm.\na) Trace les médiatrices de $[AB]$ et de $[BC]$. Se coupent-elles ?\nb) Existe-t-il un cercle qui passe par A, B et C ?",
+          reponses: [
+            { question: "a)", attendu: ["non", "faux"] },
+            { question: "b)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) Les deux médiatrices sont perpendiculaires à la même droite $(AC)$.\nDonc elles sont parallèles. Elles ne se coupent jamais.\nb) Le centre devrait être sur les deux médiatrices à la fois. C'est impossible.\nAucun cercle ne passe par trois points alignés.\n⛔ Le piège : croire qu'on peut toujours tracer un cercle. Il faut un vrai triangle.\nRéponse : a) non, elles sont parallèles ; b) non.",
           schema: geo({
@@ -394,6 +423,9 @@ export const exercicesCercleCirconscrit6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Voici les étapes pour tracer le cercle circonscrit, dans le désordre.\n① Tracer le cercle de centre O qui passe par A.\n② Tracer la médiatrice de $[AB]$.\n③ Placer O, le point où les deux médiatrices se coupent.\n④ Tracer la médiatrice de $[BC]$.\na) Remets les étapes dans l'ordre.\nb) Comment vérifier le tracé ?",
+          reponses: [
+            { question: "a)", attendu: ["②, ④, ③, ①", "2, 4, 3, 1", "2 4 3 1", "2-4-3-1"] },
+          ],
           correction:
             "a) D'abord les deux médiatrices : ② puis ④. On peut aussi faire ④ puis ②.\nEnsuite leur point commun : ③.\nEnfin le cercle : ①. L'ordre est ②, ④, ③, ①.\nb) Je trace la troisième médiatrice, celle de $[AC]$. Elle doit passer par O.\nJe vérifie aussi que le cercle passe par B et par C.\n⛔ Le piège : tracer le cercle avant d'avoir O. Sans centre, pas de cercle.\nRéponse : a) ②, ④, ③, ① ; b) la médiatrice de $[AC]$ passe par O.",
           schema: ecranSeulement(
@@ -436,6 +468,11 @@ export const exercicesCercleCirconscrit6e: FicheExercicesData = {
         },
         {
           enonce: "Le triangle ABC a un angle obtus en C.\nOn a tracé ses trois médiatrices et son cercle circonscrit.\na) Le centre O est-il dans le triangle ou dehors ?\nb) Le cercle passe-t-il quand même par A, B et C ?\nc) Est-ce une erreur de tracé ?",
+          reponses: [
+            { question: "a)", attendu: ["dehors", "en dehors", "à l'extérieur", "extérieur"] },
+            { question: "b)", attendu: ["oui", "vrai"] },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           figure: geo({
             points: [
               { nom: "A", en: [-5, 0], vers: "g" },
@@ -453,6 +490,10 @@ export const exercicesCercleCirconscrit6e: FicheExercicesData = {
         },
         {
           enonce: "ABC est isocèle en A : $AB = AC$.\na) Pourquoi A est-il sur la médiatrice de $[BC]$ ?\nb) La médiatrice de $[AB]$ coupe celle de $[BC]$ en O. On mesure $OA = 5$ cm. Que vaut $OB$ ?\nc) Que vaut $OC$ ?",
+          reponses: [
+            { question: "b)", attendu: "5" },
+            { question: "c)", attendu: "5" },
+          ],
           figure: geo({
             points: [
               { nom: "A", en: [0, 8], vers: "hd" },
@@ -470,6 +511,11 @@ export const exercicesCercleCirconscrit6e: FicheExercicesData = {
         },
         {
           enonce: "P, Q et R sont sur la médiatrice de $[AB]$.\na) Le cercle de centre P qui passe par A passe-t-il aussi par B ?\nb) Combien de cercles passent par A et par B ? Où sont leurs centres ?\nc) On ajoute un point C hors de la droite $(AB)$. Combien de cercles passent par A, B et C ?",
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: ["une infinité", "infinité"] },
+            { question: "c)", attendu: ["un seul", "un", "1"] },
+          ],
           figure: geo({
             points: [
               { nom: "A", en: [0, 0], vers: "g", ecart: 12 },
@@ -491,6 +537,13 @@ export const exercicesCercleCirconscrit6e: FicheExercicesData = {
         },
         {
           enonce: "Le cercle circonscrit au triangle DEF a pour centre K. On sait que $KD = 6$ cm.\na) Combien mesurent $KE$ et $KF$ ?\nb) Quel est le diamètre du cercle ?\nc) Un point M vérifie $KM = 6$ cm. Est-il sur le cercle ?\nd) Un point N vérifie $KN = 5$ cm. Est-il sur le cercle ?",
+          reponses: [
+            { question: "a) KE", attendu: "6" },
+            { question: "a) KF", attendu: "6" },
+            { question: "b)", attendu: "12" },
+            { question: "c)", attendu: ["oui", "vrai"] },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) D, E et F sont sur le cercle : $KE = KF = KD = 6$ cm.\nb) $6 \\times 2 = 12$ cm.\nc) M est à $6$ cm de K, comme le rayon. M est sur le cercle.\nd) $5 < 6$ : N est à l'intérieur du cercle, pas dessus.\n⛔ Le piège : confondre « sur le cercle » et « dans le disque ».\nRéponse : a) $6$ cm chacun ; b) $12$ cm ; c) oui ; d) non.",
           schema: ecranSeulement(
@@ -511,6 +564,9 @@ export const exercicesCercleCirconscrit6e: FicheExercicesData = {
         },
         {
           enonce: "ABC est équilatéral : ses trois côtés sont égaux.\na) Pourquoi C est-il sur la médiatrice de $[AB]$ ?\nb) Chaque médiatrice passe-t-elle par un sommet ?\nc) Où est le centre O du cercle circonscrit ?",
+          reponses: [
+            { question: "b)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) $CA = CB$ : C est à la même distance de A et de B.\nIl est donc sur la médiatrice de $[AB]$.\nb) Oui. A est sur la médiatrice de $[BC]$, car $AB = AC$.\nEt B est sur celle de $[AC]$, car $BA = BC$.\nc) O est le point commun des trois médiatrices. Il est au milieu du triangle.\n⛔ Le piège : oublier l'autre sens de la propriété : même distance, donc sur la médiatrice.\nRéponse : a) car $CA = CB$ ; b) oui ; c) au point commun, à l'intérieur.",
           schema: ecranSeulement(
@@ -530,6 +586,12 @@ export const exercicesCercleCirconscrit6e: FicheExercicesData = {
         },
         {
           enonce: "Vrai ou faux ?\na) Le centre du cercle circonscrit est toujours dans le triangle.\nb) Deux médiatrices suffisent pour trouver le centre.\nc) Le cercle circonscrit passe par les trois sommets.\nd) Trois points alignés ont un cercle circonscrit.",
+          reponses: [
+            { question: "a)", attendu: ["faux", "non"] },
+            { question: "b)", attendu: ["vrai", "oui"] },
+            { question: "c)", attendu: ["vrai", "oui"] },
+            { question: "d)", attendu: ["faux", "non"] },
+          ],
           correction:
             "a) Faux. Avec un angle obtus, le centre est dehors.\nb) Vrai. La troisième passe par le même point.\nc) Vrai. C'est sa définition.\nd) Faux. Les médiatrices sont parallèles : il n'y a pas de centre.\n⛔ Le piège : généraliser à partir d'un seul dessin.\nRéponse : a) faux ; b) vrai ; c) vrai ; d) faux.",
           schema: ecranSeulement(
@@ -566,6 +628,10 @@ export const exercicesCercleCirconscrit6e: FicheExercicesData = {
           titre: "Le puits des trois fermes",
           enonce:
             "Trois fermes A, B et C veulent creuser un puits commun.\nLe puits doit être à la même distance des trois fermes.\na) Comment trouver l'endroit du puits ?\nb) Le puits O est à $500$ m de A. À quelle distance est-il de B et de C ?\nc) Une ferme D est à $400$ m du puits. Est-elle sur le cercle des trois autres ?\nd) Et si les trois fermes étaient alignées ?",
+          reponses: [
+            { question: "b)", attendu: "500" },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           figure: geo({
             points: [
               { nom: "A", en: [3, 4], vers: "hd" },
@@ -596,6 +662,9 @@ export const exercicesCercleCirconscrit6e: FicheExercicesData = {
           titre: "L'assiette cassée",
           enonce:
             "Une archéologue trouve un morceau d'assiette ronde.\nElle marque trois points A, B et C sur le bord.\na) Comment retrouver le centre de l'assiette ?\nb) Elle trouve $OA = 12$ cm. Quel était le diamètre de l'assiette ?\nc) Pourquoi la méthode marche-t-elle ?",
+          reponses: [
+            { question: "b)", attendu: "24" },
+          ],
           figure: geo({
             points: [
               { nom: "A", en: [-12, 0], vers: "g" },
@@ -650,6 +719,10 @@ export const exercicesCercleCirconscrit6e: FicheExercicesData = {
           titre: "La table ronde",
           enonce:
             "Un menuisier a un plateau rectangulaire ABCD de $8$ dm sur $6$ dm.\nIl veut une table ronde dont le bord passe par les quatre coins.\na) Trace les médiatrices de $[AB]$ et de $[BC]$. Où se coupent-elles ?\nb) On mesure $OA = 5$ dm. Que valent $OB$, $OC$ et $OD$ ?\nc) Quel diamètre doit avoir la table ?",
+          reponses: [
+            { question: "b)", attendu: "5" },
+            { question: "c)", attendu: "10" },
+          ],
           figure: geo({
             points: [
               { nom: "A", en: [-4, -3], vers: "bg" },

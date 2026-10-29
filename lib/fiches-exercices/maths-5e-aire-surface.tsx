@@ -243,6 +243,11 @@ export const exercicesAireSurface5e: FicheExercicesData = {
         {
           enonce:
             "Sur ce quadrillage, chaque carreau est un carré de $1$ cm de côté : son aire est $1$ cm².\na) Combien de carreaux entiers la figure recouvre-t-elle ?\nb) Combien de demi-carreaux ?\nc) Quelle est l'aire de la figure ?",
+          reponses: [
+            { question: "a)", attendu: "13" },
+            { question: "b)", attendu: "2" },
+            { question: "c)", attendu: "14" },
+          ],
           figure: plan("cm", [
             { grille: [0, 0, 5, 4] },
             { poly: [[0, 0], [4, 0], [4, 2], [2, 4], [0, 4]], fond: "bleu" },
@@ -255,6 +260,13 @@ export const exercicesAireSurface5e: FicheExercicesData = {
         {
           enonce:
             "Sur ce quadrillage de carreaux de $1$ cm, on a dessiné deux figures A et B.\na) Calcule l'aire de chaque figure.\nb) Calcule le périmètre de chaque figure.\nc) Nina affirme : « Deux figures qui ont la même aire ont le même périmètre. » A-t-elle raison ?",
+          reponses: [
+            { question: "a) A", attendu: "12" },
+            { question: "a) B", attendu: "12" },
+            { question: "b) A", attendu: "14" },
+            { question: "b) B", attendu: "18" },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           figure: plan("cm", [
             { grille: [0, 0, 11, 3] },
             { poly: [[0, 0], [4, 0], [4, 3], [0, 3]], fond: "bleu" },
@@ -268,6 +280,9 @@ export const exercicesAireSurface5e: FicheExercicesData = {
         },
         {
           enonce: "Le triangle $ABC$ a une base $[AB]$ de $7$ cm. La hauteur issue de $C$ mesure $4$ cm. Calcule son aire.",
+          reponses: [
+            { attendu: "14" },
+          ],
           correction:
             "La hauteur issue de $C$ tombe perpendiculairement sur $[AB]$ : cette base et cette hauteur vont ensemble.\nLe triangle tient dans un rectangle de $7$ cm sur $4$ cm (en pointillés) : $7 \\times 4 = 28$ cm².\nLe triangle occupe exactement la moitié de ce rectangle : $28 \\div 2 = 14$ cm².\nC'est la formule : base × hauteur ÷ 2.\n⛔ Le piège : oublier le ÷ 2 et répondre $28$ cm², l'aire du rectangle entier.\nRéponse : l'aire du triangle $ABC$ est $14$ cm².",
           schema: ecranSeulement(
@@ -288,6 +303,9 @@ export const exercicesAireSurface5e: FicheExercicesData = {
         {
           enonce:
             "Le triangle $DEF$ a un angle obtus en $E$. Sur la figure, la base $[DE]$ mesure $5$ cm, le côté $[EF]$ mesure $5$ cm, et la hauteur issue de $F$ mesure $4$ cm.\na) Où tombe la hauteur issue de $F$ ?\nb) Calcule l'aire du triangle $DEF$.",
+          reponses: [
+            { question: "b)", attendu: "10" },
+          ],
           figure: plan("cm", [
             { poly: [[0, 0], [5, 0], [8, 4]], fond: "bleu" },
             { trait: [[5, 0], [8, 0]], tirets: true },
@@ -304,6 +322,9 @@ export const exercicesAireSurface5e: FicheExercicesData = {
         },
         {
           enonce: "Le parallélogramme $IJKL$ a une base $[IJ]$ de $9$ cm et une hauteur de $3$ cm. Son côté $[IL]$ mesure $5$ cm. Calcule son aire.",
+          reponses: [
+            { attendu: "27" },
+          ],
           figure: plan("cm", [
             { poly: [[0, 0], [9, 0], [13, 3], [4, 3]], fond: "bleu" },
             { haut: [[4, 3], [4, 0]], label: "3 cm" },
@@ -320,6 +341,9 @@ export const exercicesAireSurface5e: FicheExercicesData = {
         },
         {
           enonce: "Un parallélogramme a une aire de $42$ cm² et une base de $7$ cm. Quelle est la hauteur relative à cette base ?",
+          reponses: [
+            { attendu: "6" },
+          ],
           correction:
             "L'aire d'un parallélogramme est base × hauteur : $7 \\times$ hauteur $= 42$.\nJe cherche le nombre qui, multiplié par $7$, donne $42$ : je défais la multiplication par une division. $42 \\div 7 = 6$.\nContrôle : $7 \\times 6 = 42$ cm².\n⛔ Le piège : utiliser la formule du triangle, $42 \\times 2 \\div 7 = 12$ cm. Un parallélogramme n'a pas de ÷ 2 : il n'y a rien à défaire.\nRéponse : la hauteur mesure $6$ cm.",
           schema: ecranSeulement(
@@ -335,6 +359,9 @@ export const exercicesAireSurface5e: FicheExercicesData = {
         {
           enonce:
             "Le mur du fond d'une cabane de jardin a la forme d'une maison : un rectangle de $5$ m de large et $3$ m de haut, surmonté d'un triangle dont la pointe est à $2$ m au-dessus du rectangle. Calcule l'aire de ce mur.",
+          reponses: [
+            { attendu: "20" },
+          ],
           correction:
             "Je découpe le mur en deux figures connues : le rectangle du bas et le triangle du haut.\nLe rectangle : $5 \\times 3 = 15$ m².\nLe triangle a pour base le haut du rectangle, $5$ m, et pour hauteur $2$ m : $5 \\times 2 \\div 2 = 5$ m².\nLes deux morceaux ne se chevauchent pas : j'additionne. $15 + 5 = 20$ m².\n⛔ Le piège : oublier le ÷ 2 du triangle, et trouver $15 + 10 = 25$ m².\nRéponse : le mur a une aire de $20$ m².",
           schema: ecranSeulement(
@@ -352,6 +379,9 @@ export const exercicesAireSurface5e: FicheExercicesData = {
         {
           enonce:
             "Un cadre photo en bois est un rectangle de $20$ cm sur $15$ cm. Au milieu, on a découpé une ouverture rectangulaire de $14$ cm sur $9$ cm pour la photo. Calcule l'aire du bois.",
+          reponses: [
+            { attendu: "174" },
+          ],
           correction:
             "Le bois, c'est le grand rectangle PLEIN, moins l'ouverture : je soustrais.\nLe grand rectangle : $20 \\times 15 = 300$ cm².\nL'ouverture : $14 \\times 9 = 126$ cm².\nLe bois : $300 - 126 = 174$ cm².\n⛔ Le piège : soustraire les longueurs d'abord, $20 - 14 = 6$ et $15 - 9 = 6$, puis calculer $6 \\times 6 = 36$ cm². Ce carré n'est pas le cadre : on soustrait des AIRES, pas des côtés.\nRéponse : le bois a une aire de $174$ cm².",
           schema: ecranSeulement(
@@ -383,6 +413,10 @@ export const exercicesAireSurface5e: FicheExercicesData = {
         {
           enonce:
             "Dans le triangle $ABC$, $BC = 10$ cm et $AC = 7{,}5$ cm. La hauteur issue de $A$ mesure $6$ cm.\na) Calcule l'aire du triangle $ABC$.\nb) On trace maintenant la hauteur issue de $B$ : elle tombe perpendiculairement sur $[AC]$. Combien mesure-t-elle ?",
+          reponses: [
+            { question: "a)", attendu: "30" },
+            { question: "b)", attendu: "8" },
+          ],
           figure: plan("cm", [
             { poly: [[0, 0], [10, 0], [5.5, 6]], fond: "bleu" },
             { haut: [[5.5, 6], [5.5, 0]], label: "6 cm", sens: -1 },
@@ -409,6 +443,11 @@ export const exercicesAireSurface5e: FicheExercicesData = {
         {
           enonce:
             "La voile d'un petit bateau est un triangle rectangle. Les deux côtés de l'angle droit mesurent $4{,}8$ m, le long du mât, et $3{,}6$ m, le long de la bôme. Le grand côté mesure $6$ m.\na) Calcule l'aire de la voile.\nb) Le tissu de voile coûte $15$ € le m². Combien coûte le tissu de cette voile ?\nc) Une couture de renfort part du coin de l'angle droit et arrive perpendiculairement sur le grand côté. Quelle est sa longueur ?",
+          reponses: [
+            { question: "a)", attendu: "8,64" },
+            { question: "b)", attendu: "129,6" },
+            { question: "c)", attendu: "2,88" },
+          ],
           correction:
             "a) Dans un triangle rectangle, les deux côtés de l'angle droit sont perpendiculaires : l'un est la base, l'autre la hauteur.\n$4{,}8 \\times 3{,}6 \\div 2 = 17{,}28 \\div 2 = 8{,}64$ m².\nb) $8{,}64 \\times 15 = 129{,}6$ : le tissu coûte $129{,}60$ €.\nc) La couture est la hauteur relative au grand côté. Avec cette base de $6$ m, l'aire reste $8{,}64$ m².\nJe défais le ÷ 2 : $8{,}64 \\times 2 = 17{,}28$. Je défais la multiplication par $6$ : $17{,}28 \\div 6 = 2{,}88$.\n⛔ Le piège : utiliser le grand côté au a), $6 \\times 4{,}8 \\div 2 = 14{,}4$ m². Le grand côté n'est perpendiculaire à aucun des deux autres.\nRéponse : a) $8{,}64$ m² ; b) $129{,}60$ € ; c) la couture mesure $2{,}88$ m.",
           schema: ecranSeulement(
@@ -426,6 +465,11 @@ export const exercicesAireSurface5e: FicheExercicesData = {
         {
           enonce:
             "Quatre baguettes de bois, deux de $7$ cm et deux de $5$ cm, sont articulées à leurs coins. On en fait d'abord un rectangle (en orange), puis on le penche : il devient un parallélogramme (en bleu), de hauteur $4$ cm.\na) Calcule l'aire du rectangle.\nb) Calcule l'aire du parallélogramme.\nc) On le penche encore, jusqu'à une hauteur de $3$ cm. Calcule sa nouvelle aire.\nd) Le périmètre a-t-il changé ? Et l'aire ?",
+          reponses: [
+            { question: "a)", attendu: "35" },
+            { question: "b)", attendu: "28" },
+            { question: "c)", attendu: "21" },
+          ],
           figure: plan("cm", [
             { poly: [[0, 0], [7, 0], [7, 5], [0, 5]], fond: "orange" },
             { poly: [[0, 0], [7, 0], [10, 4], [3, 4]], fond: "bleu" },
@@ -440,6 +484,9 @@ export const exercicesAireSurface5e: FicheExercicesData = {
         },
         {
           enonce: "Sur ce quadrillage de carreaux de $1$ cm, on a dessiné un trapèze : ses sommets sont sur des nœuds. Découpe-le en figures connues, puis calcule son aire.",
+          reponses: [
+            { attendu: "26" },
+          ],
           figure: plan("cm", [
             { grille: [0, 0, 8, 4] },
             { poly: [[0, 0], [8, 0], [6, 4], [1, 4]], fond: "bleu" },
@@ -463,6 +510,13 @@ export const exercicesAireSurface5e: FicheExercicesData = {
         {
           enonce:
             "Un jardin rectangulaire de $12$ m sur $8$ m est couvert de pelouse, sauf un massif de fleurs triangulaire dans un coin et un bassin rectangulaire (en blanc sur le plan).\na) Calcule l'aire du jardin, celle du massif et celle du bassin.\nb) Calcule l'aire de la pelouse.\nc) Un sac de graines de gazon suffit pour $30$ m². Combien de sacs faut-il pour semer toute la pelouse ?",
+          reponses: [
+            { question: "jardin", attendu: "96" },
+            { question: "massif", attendu: "6" },
+            { question: "bassin", attendu: "3" },
+            { question: "b)", attendu: "87" },
+            { question: "c)", attendu: "3" },
+          ],
           figure: plan("m", [
             { poly: [[0, 0], [12, 0], [12, 8], [0, 8]], fond: "vert" },
             { poly: [[0, 0], [4, 0], [0, 3]], fond: "trou" },
@@ -481,6 +535,12 @@ export const exercicesAireSurface5e: FicheExercicesData = {
         {
           enonce:
             "Sur ce quadrillage de carreaux de $1$ cm, on a dessiné un rectangle A, un parallélogramme B et un triangle C.\na) Calcule l'aire de chaque figure.\nb) Emma affirme : « Le triangle C est le plus grand, il est le plus large. » A-t-elle raison ?\nc) Qu'est-ce qui explique ce résultat ?",
+          reponses: [
+            { question: "a) A", attendu: "8" },
+            { question: "a) B", attendu: "8" },
+            { question: "a) C", attendu: "8" },
+            { question: "b)", attendu: ["non", "faux"] },
+          ],
           figure: plan("cm", [
             { grille: [0, 0, 13, 4] },
             { poly: [[0, 0], [2, 0], [2, 4], [0, 4]], fond: "bleu" },
@@ -497,6 +557,10 @@ export const exercicesAireSurface5e: FicheExercicesData = {
         {
           enonce:
             "Un champ de blé a la forme d'un parallélogramme, entre deux chemins parallèles. Le côté le long du chemin mesure $150$ m, et les deux chemins sont à $80$ m l'un de l'autre. Le côté penché du champ mesure $100$ m.\na) Calcule l'aire du champ.\nb) L'agriculteur récolte environ $0{,}7$ kg de blé par m². Quelle masse de blé peut-il espérer ?\nc) Son voisin calcule $150 \\times 100 = 15\\,000$ m². Explique son erreur.",
+          reponses: [
+            { question: "a)", attendu: "12000" },
+            { question: "b)", attendu: "8400" },
+          ],
           correction:
             "a) La base est le côté le long du chemin, $150$ m. La hauteur est la distance PERPENDICULAIRE entre les deux chemins, $80$ m.\n$150 \\times 80 = 12\\,000$ m².\nb) Chaque m² donne $0{,}7$ kg : $12\\,000 \\times 0{,}7 = 8\\,400$ kg.\nc) Le voisin a multiplié les deux côtés. Le côté de $100$ m est penché : il est plus long que la distance entre les chemins. Son calcul gonfle l'aire de $3\\,000$ m².\n⛔ Le piège : prendre le côté penché pour la hauteur. La hauteur se mesure toujours à angle droit avec la base.\nRéponse : a) $12\\,000$ m² ; b) environ $8\\,400$ kg de blé ; c) il a pris le côté penché au lieu de la hauteur.",
           schema: ecranSeulement(
@@ -513,6 +577,10 @@ export const exercicesAireSurface5e: FicheExercicesData = {
         {
           enonce:
             "Un cerf-volant est dessiné sur un quadrillage de carreaux de $1$ dm de côté. Ses quatre sommets sont sur des nœuds.\na) Calcule son aire en le découpant en deux triangles par sa grande diagonale, verticale.\nb) Vérifie en l'entourant d'un rectangle et en retirant les quatre coins.",
+          reponses: [
+            { question: "a)", attendu: "21" },
+            { question: "b)", attendu: "21" },
+          ],
           figure: plan("dm", [
             { grille: [0, 0, 6, 7] },
             { poly: [[3, 0], [6, 5], [3, 7], [0, 5]], fond: "bleu" },
@@ -549,6 +617,14 @@ export const exercicesAireSurface5e: FicheExercicesData = {
           titre: "Le potager",
           enonce:
             "Voici le plan d'un potager rectangulaire. Chaque carreau représente un carré de $1$ m de côté. Dans un coin, un bac à compost triangulaire (en orange) ; une planche de fraisiers en forme de parallélogramme (en bleu) ; le reste est semé de gazon (en vert).\na) Calcule l'aire du potager entier.\nb) Calcule l'aire du bac à compost, puis celle de la planche de fraisiers.\nc) Calcule l'aire semée de gazon.\nd) Un paquet de graines de gazon suffit pour $10$ m². Combien de paquets faut-il acheter ?\ne) On plante $4$ fraisiers par m². Combien de fraisiers faut-il ?",
+          reponses: [
+            { question: "a)", attendu: "60" },
+            { question: "compost", attendu: "2" },
+            { question: "fraises", attendu: "12" },
+            { question: "c)", attendu: "46" },
+            { question: "d)", attendu: "5" },
+            { question: "e)", attendu: "48" },
+          ],
           figure: plan("m", [
             { grille: [0, 0, 10, 6] },
             { poly: [[0, 0], [10, 0], [10, 6], [0, 6]], fond: "vert" },
@@ -565,6 +641,12 @@ export const exercicesAireSurface5e: FicheExercicesData = {
           titre: "Le drapeau du club",
           enonce:
             "Le club de voile de la ville a dessiné son drapeau : un rectangle de $150$ cm sur $100$ cm, avec un triangle bleu le long du mât. La pointe du triangle est au milieu du drapeau, à $75$ cm du mât. Le reste est partagé en deux bandes, une verte en haut et une orange en bas.\na) Calcule l'aire du drapeau.\nb) Calcule l'aire du triangle bleu.\nc) Les deux bandes ont la même aire. Calcule l'aire d'une bande.\nd) Quelle fraction du drapeau est bleue ?",
+          reponses: [
+            { question: "a)", attendu: "15000" },
+            { question: "b)", attendu: "3750" },
+            { question: "c)", attendu: "5625" },
+            { question: "d)", attendu: "1/4" },
+          ],
           figure: plan("cm", [
             { poly: [[0, 100], [150, 100], [150, 50], [75, 50]], fond: "vert" },
             { poly: [[0, 0], [150, 0], [150, 50], [75, 50]], fond: "orange" },
@@ -581,6 +663,11 @@ export const exercicesAireSurface5e: FicheExercicesData = {
           titre: "Le terrain à bâtir",
           enonce:
             "Voici le plan d'un terrain à bâtir. Le côté du bas fait des angles droits avec les côtés de gauche et de droite ; le côté du haut est penché.\na) Découpe le terrain en un rectangle et un triangle, puis calcule son aire.\nb) Le terrain est vendu $85$ € le m². Quel est son prix ?\nc) On y construit une maison rectangulaire de $12$ m sur $9$ m (en orange). Quelle aire reste-t-il pour le jardin ?",
+          reponses: [
+            { question: "a)", attendu: "1000" },
+            { question: "b)", attendu: "85000" },
+            { question: "c)", attendu: "892" },
+          ],
           figure: plan("m", [
             { poly: [[0, 0], [40, 0], [40, 30], [0, 20]], fond: "vert" },
             { poly: [[5, 4], [17, 4], [17, 13], [5, 13]], fond: "orange" },
@@ -598,6 +685,11 @@ export const exercicesAireSurface5e: FicheExercicesData = {
           titre: "L'échange de terrains",
           enonce:
             "Agathe possède un terrain en forme de parallélogramme : sa base mesure $36$ m et sa hauteur $25$ m. Basile lui propose de l'échanger contre un terrain triangulaire, dont un côté mesure $45$ m le long de la route.\na) Calcule l'aire du terrain d'Agathe.\nb) Pour que l'échange soit juste, les deux terrains doivent avoir la même aire. Quelle doit être la hauteur du triangle, relative au côté de la route ?\nc) Chloé propose un autre triangle, de même base et de même hauteur que le parallélogramme d'Agathe, $36$ m et $25$ m. Son terrain est-il aussi grand ? Explique.",
+          reponses: [
+            { question: "a)", attendu: "900" },
+            { question: "b)", attendu: "40" },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $36 \\times 25 = 900$ m².\nb) Le triangle doit avoir une aire de $900$ m². Avec une base de $45$ m : $45 \\times$ hauteur $\\div 2 = 900$.\nJe défais le ÷ 2 : $45 \\times$ hauteur $= 1\\,800$.\nJe défais la multiplication : $1\\,800 \\div 45 = 40$.\nContrôle : $45 \\times 40 \\div 2 = 1\\,800 \\div 2 = 900$ m².\nc) $36 \\times 25 \\div 2 = 900 \\div 2 = 450$ m² : c'est la MOITIÉ du terrain d'Agathe.\nUn triangle est la moitié d'un parallélogramme de même base et de même hauteur : c'est de là que vient le ÷ 2.\n⛔ Le piège du b) : oublier le ÷ 2 et répondre $900 \\div 45 = 20$ m. Avec $20$ m, le triangle ne ferait que $450$ m².\nRéponse : a) $900$ m² ; b) $40$ m ; c) non, $450$ m², la moitié.",
           schema: ecranSeulement(

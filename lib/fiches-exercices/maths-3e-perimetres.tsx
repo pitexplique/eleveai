@@ -266,6 +266,13 @@ export const exercicesPerimetres3e: FicheExercicesData = {
         {
           enonce:
             "Pour chaque situation, dire si l'on cherche un périmètre ou une aire, et dans quelle unité on répondra.\na) Poser un grillage autour d'un jardin.\nb) Semer du gazon dans ce jardin.\nc) Poser une plinthe au pied des murs d'une chambre.\nd) Coudre un galon tout autour d'une nappe.\ne) Le jardin est un rectangle de $12$ m sur $7$ m. Quelle longueur de grillage faut-il pour l'entourer ?",
+          reponses: [
+            { question: "a)", attendu: ["périmètre", "un périmètre"] },
+            { question: "b)", attendu: ["aire", "une aire"] },
+            { question: "c)", attendu: ["périmètre", "un périmètre"] },
+            { question: "d)", attendu: ["périmètre", "un périmètre"] },
+            { question: "e)", attendu: "38" },
+          ],
           correction:
             "Je me pose une seule question : est-ce que je fais le TOUR, ou est-ce que je RECOUVRE ?\na) Le grillage fait le tour du jardin : c'est un périmètre, en mètres.\nb) Le gazon recouvre le jardin : c'est une aire, en m². Ce n'est pas le sujet de cette feuille.\nc) La plinthe longe le bas des murs, elle fait le tour de la chambre : un périmètre, en mètres.\nd) Le galon borde la nappe : un périmètre, en centimètres ou en mètres.\ne) Je suis le contour : $12 + 7 + 12 + 7 = 38$ m. C'est aussi $2 \\times (12 + 7) = 38$ m.\n⛔ Le piège : calculer $12 \\times 7 = 84$. C'est l'aire du jardin, en m² : la quantité de gazon, pas la longueur de grillage.\nRéponse : a), c) et d) sont des périmètres, b) est une aire ; il faut $38$ m de grillage.",
           schema: plan({
@@ -282,6 +289,10 @@ export const exercicesPerimetres3e: FicheExercicesData = {
         },
         {
           enonce: "Calculer le périmètre de chaque figure.\na) Un rectangle de $13{,}5$ cm sur $8$ cm.\nb) Un carré de côté $9{,}4$ cm.",
+          reponses: [
+            { question: "a)", attendu: "43" },
+            { question: "b)", attendu: "37,6" },
+          ],
           correction:
             "a) Sur le contour d'un rectangle, la longueur et la largeur apparaissent chacune DEUX fois. $P = 2 \\times (13{,}5 + 8) = 2 \\times 21{,}5 = 43$ cm.\nJe vérifie en faisant le tour : $13{,}5 + 8 + 13{,}5 + 8 = 43$.\nb) Les quatre côtés d'un carré sont égaux : $P = 4 \\times 9{,}4 = 37{,}6$ cm.\n⛔ Le piège : écrire $13{,}5 \\times 8 = 108$. C'est l'aire du rectangle, en cm² ; un périmètre s'obtient en ADDITIONNANT des côtés.\nRéponse : $43$ cm ; $37{,}6$ cm.",
           schema: plan({
@@ -302,6 +313,10 @@ export const exercicesPerimetres3e: FicheExercicesData = {
         {
           enonce:
             "Le pentagone $ABCDE$ a pour côtés $AB = 9$ cm, $BC = 4$ cm, $CD = 5$ cm, $DE = 6$ cm et $EA = 8$ cm.\na) Combien de côtés faut-il additionner ?\nb) Calculer son périmètre.",
+          reponses: [
+            { question: "a)", attendu: "5" },
+            { question: "b)", attendu: "32" },
+          ],
           correction:
             "a) « Penta » veut dire cinq : un pentagone a $5$ côtés, et je dois les compter tous.\nb) Je pars de $A$ et je fais le tour dans l'ordre, sans en sauter : $AB + BC + CD + DE + EA = 9 + 4 + 5 + 6 + 8 = 32$ cm.\n⭐ Aucune formule ici : pour un polygone quelconque, le périmètre est la somme de ses côtés, et c'est tout.\n⛔ Le piège : oublier le dernier côté, $EA$, celui qui referme la figure. Sans lui, on trouve $24$ cm.\nRéponse : le périmètre vaut $32$ cm.",
           schema: plan({
@@ -326,6 +341,12 @@ export const exercicesPerimetres3e: FicheExercicesData = {
         {
           enonce:
             "Calculer la longueur de chaque cercle : d'abord la valeur exacte (avec $\\pi$), puis une valeur arrondie au dixième.\na) Un cercle de rayon $7$ cm.\nb) Un cercle de diamètre $15$ cm.",
+          reponses: [
+            { question: "a) exact", attendu: ["14π"], exact: true },
+            { question: "a) arr.", attendu: "44", tolerance: 0.05 },
+            { question: "b) exact", attendu: ["15π"], exact: true },
+            { question: "b) arr.", attendu: "47,1", tolerance: 0.05 },
+          ],
           correction:
             "Je regarde d'abord CE QUI EST DONNÉ : le rayon, ou le diamètre.\na) Le rayon est donné : $L = 2\\pi r = 2 \\times \\pi \\times 7 = 14\\pi$ cm. À la calculatrice, $14\\pi \\approx 43{,}98$, soit environ $44{,}0$ cm au dixième.\nb) Le diamètre est donné : $L = \\pi d = 15\\pi$ cm. À la calculatrice, $15\\pi \\approx 47{,}12$, soit environ $47{,}1$ cm.\n⭐ Contrôle : un cercle mesure un peu plus de trois fois son diamètre. $3 \\times 14 = 42$ et $3 \\times 15 = 45$ : c'est cohérent.\n⛔ Le piège : écrire $\\pi r^2 = \\pi \\times 7^2 \\approx 153{,}94$. C'est l'AIRE du disque, en cm² : le carré sur le rayon trahit une surface.\n⛔ Autre piège au b) : $2 \\times \\pi \\times 15 \\approx 94{,}25$ cm. Le diamètre contient déjà deux rayons : le résultat est doublé.\nRéponse : $14\\pi \\approx 44{,}0$ cm ; $15\\pi \\approx 47{,}1$ cm.",
           schema: plan({
@@ -342,6 +363,10 @@ export const exercicesPerimetres3e: FicheExercicesData = {
         {
           enonce:
             "Pour mesurer un arbre, les forestiers entourent son tronc d'un mètre ruban, à $1{,}30$ m du sol. Le ruban indique $2{,}2$ m. On considère que le tronc est un cercle.\na) Quelle formule relie la longueur $L$ d'un cercle et son diamètre $d$ ?\nb) En déduire le diamètre du tronc, arrondi au centimètre.",
+          reponses: [
+            { question: "a)", attendu: "πd" },
+            { question: "b)", attendu: ["70", "0,7"] },
+          ],
           correction:
             "a) $L = \\pi d$.\nb) Je connais $L$ et je cherche $d$ : je remonte le calcul. $\\pi \\times d = 2{,}2$, donc $d = 2{,}2 \\div \\pi \\approx 0{,}70$ m, soit environ $70$ cm.\n⭐ Contrôle : $\\pi \\times 0{,}70 \\approx 2{,}20$ m. Et un diamètre fait un peu moins du tiers du tour : $2{,}2 \\div 3 \\approx 0{,}73$, c'est cohérent.\n⛔ Le piège : diviser par $2\\pi$. On trouve $2{,}2 \\div (2\\pi) \\approx 0{,}35$ m : c'est le RAYON, la moitié du diamètre.\nRéponse : le tronc a un diamètre d'environ $70$ cm.",
           schema: plan({
@@ -355,6 +380,10 @@ export const exercicesPerimetres3e: FicheExercicesData = {
         },
         {
           enonce: "Un triangle a pour côtés $45$ cm, $0{,}6$ m et $750$ mm. Calculer son périmètre, en centimètres puis en mètres.",
+          reponses: [
+            { question: "cm", attendu: "180" },
+            { question: "m", attendu: "1,8" },
+          ],
           correction:
             "On n'additionne que des longueurs écrites dans la MÊME unité. Je convertis tout en centimètres.\n$0{,}6$ m $= 60$ cm, car $1$ m $= 100$ cm.\n$750$ mm $= 75$ cm, car $10$ mm $= 1$ cm.\nPuis je fais le tour : $45 + 60 + 75 = 180$ cm, soit $1{,}8$ m.\n⛔ Le piège : additionner les nombres tels quels, $45 + 0{,}6 + 750 = 795{,}6$. Ce résultat ne veut rien dire : il mélange des centimètres, des mètres et des millimètres.\nRéponse : le périmètre vaut $180$ cm, soit $1{,}8$ m.",
           schema: plan({
@@ -370,6 +399,10 @@ export const exercicesPerimetres3e: FicheExercicesData = {
         {
           enonce:
             "a) Un rectangle a un périmètre de $34$ m et une longueur de $11$ m. Quelle est sa largeur ?\nb) Un carré a un périmètre de $50$ cm. Quelle est la longueur de son côté ?",
+          reponses: [
+            { question: "a)", attendu: "6" },
+            { question: "b)", attendu: "12,5" },
+          ],
           correction:
             "a) Le tour d'un rectangle, c'est une longueur et une largeur, DEUX fois. La moitié du périmètre donne donc une longueur plus une largeur : $34 \\div 2 = 17$ m.\nPuis $17 - 11 = 6$ m : la largeur mesure $6$ m.\nJe vérifie : $2 \\times (11 + 6) = 34$.\nb) Le carré a quatre côtés égaux : $50 \\div 4 = 12{,}5$ cm. Je vérifie : $4 \\times 12{,}5 = 50$.\n⛔ Le piège au a) : calculer $34 - 11 = 23$ m. On n'a retiré qu'UNE longueur, alors que le tour en contient deux.\nRéponse : la largeur mesure $6$ m ; le côté du carré, $12{,}5$ cm.",
           schema: plan({
@@ -387,6 +420,10 @@ export const exercicesPerimetres3e: FicheExercicesData = {
         {
           enonce:
             "Une figure est un demi-disque de diamètre $10$ cm.\na) Calculer la longueur de l'arc (la partie courbe), arrondie au dixième.\nb) Calculer le périmètre de toute la figure, arrondi au dixième.",
+          reponses: [
+            { question: "a)", attendu: "15,7", tolerance: 0.05 },
+            { question: "b)", attendu: "25,7", tolerance: 0.05 },
+          ],
           correction:
             "a) L'arc est la moitié d'un cercle de diamètre $10$ cm. Le cercle entier mesure $\\pi \\times 10 = 10\\pi$ cm ; l'arc en est la moitié : $5\\pi \\approx 15{,}7$ cm.\nb) Le contour de la figure a DEUX morceaux : l'arc, et le diamètre qui la referme. $5\\pi + 10 \\approx 25{,}7$ cm.\n⭐ Je garde $5\\pi$ jusqu'au bout et j'arrondis à la fin : $5\\pi + 10 \\approx 25{,}71$.\n⛔ Le piège : s'arrêter à l'arc au b). Un demi-cercle seul n'est pas une figure fermée : c'est son diamètre qui la referme.\nRéponse : l'arc mesure environ $15{,}7$ cm, la figure environ $25{,}7$ cm.",
           schema: plan({
@@ -416,6 +453,11 @@ export const exercicesPerimetres3e: FicheExercicesData = {
         {
           enonce:
             "Dans un rectangle de $10$ cm sur $9$ cm, on retire un rectangle de $6$ cm sur $5$ cm, dans le coin en haut à droite. Il reste une figure en L.\na) Calculer les longueurs de ses six côtés.\nb) Calculer son périmètre.\nc) Comparer avec le périmètre du grand rectangle.",
+          reponses: [
+            { question: "a)", attendu: "10 ; 4 ; 6 ; 5 ; 4 ; 9" },
+            { question: "b)", attendu: "38" },
+            { question: "c)", attendu: ["égal", "égaux", "le même", "identique", "autant", "pareil"] },
+          ],
           correction:
             "a) Je fais le tour à partir du coin en bas à gauche. En bas : $10$ cm. À droite, il reste la hauteur du grand rectangle moins celle du morceau retiré : $9 - 5 = 4$ cm. Puis vers la gauche, la largeur du morceau retiré : $6$ cm. Puis vers le haut : $5$ cm. En haut, il reste $10 - 6 = 4$ cm. Enfin, à gauche : $9$ cm.\nb) $10 + 4 + 6 + 5 + 4 + 9 = 38$ cm.\nc) Le grand rectangle a pour périmètre $2 \\times (10 + 9) = 38$ cm : le même ! Les deux côtés du coin ont seulement été « repliés » vers l'intérieur : $6$ cm à l'horizontale, $5$ cm à la verticale, rien de perdu.\n⛔ Le piège : découper le L en deux rectangles, $10$ sur $4$ et $4$ sur $5$, et additionner leurs périmètres : $28 + 18 = 46$ cm. Le trait de découpe, $4$ cm, est alors compté deux fois alors qu'il est À L'INTÉRIEUR : $46 - 2 \\times 4 = 38$.\nRéponse : le L a pour périmètre $38$ cm, autant que le grand rectangle.",
           schema: plan({
@@ -435,6 +477,10 @@ export const exercicesPerimetres3e: FicheExercicesData = {
         {
           enonce:
             "Une fenêtre est formée d'un rectangle de $1{,}2$ m de large et $1{,}5$ m de haut, surmonté d'un demi-cercle de diamètre $1{,}2$ m. On pose un joint tout autour de la fenêtre.\nQuelle longueur de joint faut-il ? Donner la valeur exacte, puis l'arrondi au centimètre.",
+          reponses: [
+            { question: "exacte", attendu: ["4,2+0,6π", "0,6π+4,2"], exact: true },
+            { question: "arrondi", attendu: "6,08", tolerance: 0.005 },
+          ],
           correction:
             "Je suis le contour de la fenêtre, morceau par morceau.\nLe bas : $1{,}2$ m. Les deux côtés : $1{,}5 + 1{,}5 = 3$ m.\nL'arc du haut : un demi-cercle de rayon $1{,}2 \\div 2 = 0{,}6$ m, donc $\\pi \\times 0{,}6 = 0{,}6\\pi$ m.\nTotal : $1{,}2 + 3 + 0{,}6\\pi = 4{,}2 + 0{,}6\\pi$ m, soit environ $6{,}08$ m.\n⛔ Le piège : compter aussi le haut du rectangle, $1{,}2$ m. Il est en pointillés sur le dessin : c'est un trait INTÉRIEUR, caché sous l'arc. On trouverait environ $7{,}28$ m.\nRéponse : il faut $4{,}2 + 0{,}6\\pi \\approx 6{,}08$ m de joint.",
           schema: plan({
@@ -452,6 +498,11 @@ export const exercicesPerimetres3e: FicheExercicesData = {
         {
           enonce:
             "La roue d'un vélo de route a un diamètre de $68$ cm, pneu compris.\na) Quelle distance le vélo parcourt-il quand la roue fait un tour ? Arrondir au millimètre.\nb) Combien de tours la roue fait-elle pendant une sortie de $10$ km ?\nc) Le compteur a compté $1\\,500$ tours. Quelle distance le vélo a-t-il parcourue, au mètre près ?",
+          reponses: [
+            { question: "a)", attendu: ["213,6", "2,136 m"], tolerance: 0.05 },
+            { question: "b)", attendu: "4681", tolerance: 0.5 },
+            { question: "c)", attendu: "3204", tolerance: 0.5 },
+          ],
           correction:
             "a) En un tour, le pneu se « déroule » sur la route : le vélo avance de la longueur du cercle. $L = \\pi d = 68\\pi \\approx 213{,}6$ cm, soit environ $2{,}136$ m.\nb) $10$ km $= 10\\,000$ m $= 1\\,000\\,000$ cm. Nombre de tours : $1\\,000\\,000 \\div (68\\pi) \\approx 4\\,681$ tours.\nc) $1\\,500 \\times 68\\pi \\approx 320\\,442$ cm, soit environ $3\\,204$ m.\n⛔ Le piège : arrondir trop tôt. Avec un tour arrondi à $2{,}1$ m, on trouve $10\\,000 \\div 2{,}1 \\approx 4\\,762$ tours : $81$ de trop. Je garde $68\\pi$ dans la calculatrice jusqu'au bout.\nRéponse : $213{,}6$ cm par tour, environ $4\\,681$ tours pour $10$ km, et environ $3\\,204$ m pour $1\\,500$ tours.",
           schema: plan({
@@ -468,6 +519,10 @@ export const exercicesPerimetres3e: FicheExercicesData = {
         {
           enonce:
             "Une chambre rectangulaire mesure $4{,}2$ m sur $3{,}6$ m. On pose une plinthe au pied des murs, sauf devant la porte, large de $0{,}9$ m. Les plinthes sont vendues en baguettes de $2{,}4$ m.\na) Quelle longueur de plinthe faut-il ?\nb) Combien de baguettes faut-il acheter ?",
+          reponses: [
+            { question: "a)", attendu: "14,7" },
+            { question: "b)", attendu: "7" },
+          ],
           correction:
             "a) La plinthe fait le tour de la pièce : je calcule le périmètre, $2 \\times (4{,}2 + 3{,}6) = 2 \\times 7{,}8 = 15{,}6$ m.\nPuis je retire la porte, où il n'y a pas de plinthe : $15{,}6 - 0{,}9 = 14{,}7$ m.\nb) $14{,}7 \\div 2{,}4 = 6{,}125$. Six baguettes ne donnent que $6 \\times 2{,}4 = 14{,}4$ m : il manquerait $0{,}3$ m. Il faut donc en acheter $7$.\n⛔ Le piège au b) : arrondir $6{,}125$ à $6$. Ici, on arrondit TOUJOURS au-dessus : une baguette entamée s'achète entière.\n⛔ Et le calcul $4{,}2 \\times 3{,}6 = 15{,}12$ donne l'aire du sol, en m² : la surface du parquet, pas la longueur de plinthe.\nRéponse : $14{,}7$ m de plinthe, soit $7$ baguettes.",
           schema: plan({
@@ -486,6 +541,13 @@ export const exercicesPerimetres3e: FicheExercicesData = {
         {
           enonce:
             "Un hexagone régulier a six côtés de $6$ cm. Ses six sommets sont sur un cercle de rayon $6$ cm.\na) Calculer le périmètre de l'hexagone.\nb) Calculer la longueur du cercle, au centième.\nc) Lequel est le plus long ? Pour chacun, calculer le quotient « longueur du tour ÷ diamètre du cercle ».",
+          reponses: [
+            { question: "a)", attendu: "36" },
+            { question: "b)", attendu: "37,70", tolerance: 0.005 },
+            { question: "c) long", attendu: ["le cercle", "cercle"] },
+            { question: "c) hexa", attendu: "3" },
+            { question: "c) cerc.", attendu: "π" },
+          ],
           correction:
             "a) Six côtés égaux : $6 \\times 6 = 36$ cm.\nb) $L = 2\\pi r = 2 \\times \\pi \\times 6 = 12\\pi \\approx 37{,}70$ cm.\nc) Le cercle est plus long, d'environ $37{,}70 - 36 = 1{,}70$ cm : entre deux sommets, l'arc fait un petit détour, alors que le côté va tout droit.\nLe diamètre mesure $12$ cm. Hexagone : $36 \\div 12 = 3$. Cercle : $12\\pi \\div 12 = \\pi \\approx 3{,}14$.\n⭐ C'est l'idée d'Archimède : un polygone collé au cercle donne une valeur approchée de $\\pi$. Avec $6$ côtés on trouve $3$ ; avec $96$ côtés, il obtenait déjà environ $3{,}14$.\n⛔ Le piège : croire que le cercle et l'hexagone ont le même tour parce qu'ils ont les mêmes sommets. Le plus court chemin entre deux points est la ligne droite : l'hexagone est plus court.\nRéponse : $36$ cm contre environ $37{,}70$ cm ; les quotients valent $3$ et $\\pi$.",
           schema: plan({
@@ -506,6 +568,10 @@ export const exercicesPerimetres3e: FicheExercicesData = {
         {
           enonce:
             "Un jardinier veut un potager rectangulaire de $24$ m², dont les côtés mesurent un nombre entier de mètres. Il posera une bordure tout autour.\na) Donner les quatre rectangles possibles.\nb) Calculer le périmètre de chacun.\nc) Lequel demande le moins de bordure ?",
+          reponses: [
+            { question: "b)", attendu: "50 ; 28 ; 22 ; 20" },
+            { question: "c)", attendu: ["4sur6", "6sur4", "4×6", "6×4", "4x6", "6x4"], exact: true },
+          ],
           correction:
             "a) Je cherche deux entiers dont le produit fait $24$ : $1$ et $24$, $2$ et $12$, $3$ et $8$, $4$ et $6$.\nb) $2 \\times (1 + 24) = 50$ m ; $2 \\times (2 + 12) = 28$ m ; $2 \\times (3 + 8) = 22$ m ; $2 \\times (4 + 6) = 20$ m.\nc) Le rectangle de $4$ m sur $6$ m : $20$ m seulement, contre $50$ m pour le plus allongé.\n⭐ Plus le rectangle se rapproche d'un carré, plus son tour est court. Un carré de $24$ m² aurait un côté de $\\sqrt{24} \\approx 4{,}90$ m et un périmètre d'environ $19{,}6$ m, mais ses côtés ne sont pas entiers.\n⛔ Le piège : croire que même surface veut dire même bordure. Ici, la même surface demande de $20$ à $50$ m de bordure.\nRéponse : $50$, $28$, $22$ et $20$ m ; le $4$ sur $6$ demande le moins de bordure.",
           schema: plan({
@@ -540,6 +606,11 @@ export const exercicesPerimetres3e: FicheExercicesData = {
         {
           enonce:
             "Dans un carré de $8$ cm de côté, on découpe une encoche en demi-disque de diamètre $4$ cm, au milieu du côté du haut.\na) Calculer le périmètre du carré de départ.\nb) Calculer le périmètre de la figure obtenue, arrondi au centième.\nc) On a enlevé un morceau. Le périmètre a-t-il diminué ?",
+          reponses: [
+            { question: "a)", attendu: "32" },
+            { question: "b)", attendu: "34,28", tolerance: 0.005 },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $4 \\times 8 = 32$ cm.\nb) Je suis le nouveau contour. Trois côtés entiers : $3 \\times 8 = 24$ cm. Le côté entaillé garde deux bouts : $(8 - 4) \\div 2 = 2$ cm de chaque côté de l'encoche, soit $4$ cm. Et l'encoche est un demi-cercle de rayon $2$ cm : $\\pi \\times 2 = 2\\pi$ cm.\nTotal : $24 + 4 + 2\\pi = 28 + 2\\pi \\approx 34{,}28$ cm.\nc) Non : il a AUGMENTÉ, de $32$ à environ $34{,}28$ cm. Le segment droit de $4$ cm a été remplacé par un détour de $2\\pi \\approx 6{,}28$ cm.\n⛔ Le piège : compter encore le segment de $4$ cm (en pointillés), qui n'est plus sur le bord, ou retirer l'arc au lieu de l'ajouter.\nRéponse : $32$ cm au départ, environ $34{,}28$ cm après : enlever de la surface peut allonger le tour.",
           schema: plan({
@@ -559,6 +630,12 @@ export const exercicesPerimetres3e: FicheExercicesData = {
         {
           enonce:
             "a) Un triangle a pour côtés $3$ cm, $4$ cm et $5$ cm. On l'agrandit : toutes ses longueurs sont multipliées par $2{,}5$. Calculer les nouveaux côtés, puis les deux périmètres.\nb) On triple le rayon d'un cercle de rayon $4$ cm. Par combien sa longueur est-elle multipliée ?",
+          reponses: [
+            { question: "a) côtés", attendu: "7,5 ; 10 ; 12,5" },
+            { question: "a) P av.", attendu: "12" },
+            { question: "a) P ap.", attendu: "30" },
+            { question: "b)", attendu: "3" },
+          ],
           correction:
             "a) Nouveaux côtés : $3 \\times 2{,}5 = 7{,}5$ cm ; $4 \\times 2{,}5 = 10$ cm ; $5 \\times 2{,}5 = 12{,}5$ cm.\nPérimètres : $3 + 4 + 5 = 12$ cm avant, $7{,}5 + 10 + 12{,}5 = 30$ cm après. Et $12 \\times 2{,}5 = 30$ : le périmètre est multiplié par $2{,}5$, comme chaque côté.\nb) Avant : $2\\pi \\times 4 = 8\\pi \\approx 25{,}13$ cm. Après, avec un rayon de $12$ cm : $2\\pi \\times 12 = 24\\pi \\approx 75{,}40$ cm. Et $24\\pi \\div 8\\pi = 3$ : la longueur est multipliée par $3$.\n⭐ Un périmètre est une somme de longueurs : si chaque longueur est multipliée par $k$, la somme l'est aussi.\n⛔ Le piège : AJOUTER au lieu de multiplier, $3 + 2{,}5$, $4 + 2{,}5$, $5 + 2{,}5$. Le triangle obtenu, de côtés $5{,}5$ ; $6{,}5$ ; $7{,}5$, n'a plus la même forme.\nRéponse : $12$ cm puis $30$ cm ; la longueur du cercle est multipliée par $3$.",
           schema: plan({
@@ -592,6 +669,11 @@ export const exercicesPerimetres3e: FicheExercicesData = {
           titre: "La piste de 400 m",
           enonce:
             "Une piste d'athlétisme standard est formée de deux lignes droites de $84{,}39$ m et de deux virages en demi-cercle. Au bord intérieur de la piste (la « corde »), les virages ont un rayon de $36{,}5$ m.\na) Calculer la longueur de la corde, au centimètre.\nb) Le règlement mesure la course du couloir 1 à $30$ cm de la corde : dans les virages, le rayon vaut $36{,}8$ m. Calculer cette longueur. Que retrouve-t-on ?\nc) Dans le couloir 8, les virages de la ligne de course ont un rayon de $45{,}24$ m. Quelle distance court un athlète du couloir 8 en un tour ? Pourquoi les coureurs du 400 m ne partent-ils pas sur la même ligne ?",
+          reponses: [
+            { question: "a)", attendu: "398,12", tolerance: 0.005 },
+            { question: "b)", attendu: "400", tolerance: 0.005 },
+            { question: "c)", attendu: "453,03", tolerance: 0.005 },
+          ],
           correction:
             "a) Je suis le contour : deux lignes droites et deux demi-cercles. Deux demi-cercles de même rayon font un cercle entier.\nLignes droites : $2 \\times 84{,}39 = 168{,}78$ m. Virages : $2\\pi \\times 36{,}5 = 73\\pi \\approx 229{,}34$ m.\nCorde : $168{,}78 + 73\\pi \\approx 398{,}12$ m.\nb) Lignes droites : toujours $168{,}78$ m. Virages : $2\\pi \\times 36{,}8 = 73{,}6\\pi \\approx 231{,}22$ m. Total : $168{,}78 + 73{,}6\\pi \\approx 400{,}00$ m. On retrouve les $400$ m : la piste est dessinée pour que la ligne de course, et non la corde, mesure $400$ m.\nc) $168{,}78 + 2\\pi \\times 45{,}24 = 168{,}78 + 90{,}48\\pi \\approx 453{,}03$ m. Le coureur du couloir 8 ferait $53$ m de plus que celui du couloir 1 : on le fait partir environ $53$ m plus loin. C'est le départ « en décalé ».\n⛔ Le piège : ajouter les deux diamètres de $73$ m, en pointillés sur le dessin. Ils sont À L'INTÉRIEUR du terrain : personne ne court dessus.\nRéponse : la corde mesure environ $398{,}12$ m, la ligne de course du couloir 1 environ $400{,}00$ m, et celle du couloir 8 environ $453{,}03$ m.",
           schema: plan({
@@ -613,6 +695,10 @@ export const exercicesPerimetres3e: FicheExercicesData = {
           titre: "La boucle du parc",
           enonce:
             "Un parc a la forme d'un rectangle de $300$ m sur $200$ m dont un coin est arrondi : il est remplacé par un quart de cercle de rayon $100$ m. Une coureuse fait le tour du parc en suivant son bord.\na) Calculer la longueur d'un tour, au mètre près.\nb) Combien de tours complets doit-elle faire pour courir au moins $10$ km ?",
+          reponses: [
+            { question: "a)", attendu: "957", tolerance: 0.5 },
+            { question: "b)", attendu: "11" },
+          ],
           correction:
             "a) Je suis le bord à partir du coin en bas à gauche. En bas : $300$ m. À droite, le côté est raccourci par l'arrondi : $200 - 100 = 100$ m. Puis le quart de cercle : $\\dfrac{2\\pi \\times 100}{4} = 50\\pi \\approx 157{,}08$ m. En haut, raccourci lui aussi : $300 - 100 = 200$ m. À gauche : $200$ m.\nTotal : $300 + 100 + 50\\pi + 200 + 200 = 800 + 50\\pi \\approx 957$ m.\nb) $10$ km $= 10\\,000$ m, et $10\\,000 \\div (800 + 50\\pi) \\approx 10{,}45$. Dix tours ne font qu'environ $9\\,571$ m : il en faut $11$.\n⛔ Le piège : compter le coin comme s'il était carré, $2 \\times (300 + 200) = 1\\,000$ m. L'arrondi coupe le coin et raccourcit chaque tour d'environ $43$ m.\nRéponse : un tour mesure environ $957$ m ; il faut $11$ tours pour dépasser $10$ km.",
           schema: plan({
@@ -634,6 +720,11 @@ export const exercicesPerimetres3e: FicheExercicesData = {
           titre: "Une corde autour de la Terre",
           enonce:
             "On assimile l'équateur à un cercle de rayon $6\\,378$ km.\na) Calculer la longueur de l'équateur, au kilomètre près.\nb) On tend une corde tout autour de l'équateur, collée au sol. Puis on l'allonge pour qu'elle flotte partout à $1$ m au-dessus du sol. De combien de mètres faut-il l'allonger ?\nc) Même question avec une corde autour d'un ballon de rayon $11$ cm. Qu'observe-t-on ?",
+          reponses: [
+            { question: "a)", attendu: "40074", tolerance: 0.5 },
+            { question: "b)", attendu: "6,28", tolerance: 0.005 },
+            { question: "c)", attendu: "6,28", tolerance: 0.005 },
+          ],
           correction:
             "a) $L = 2\\pi \\times 6\\,378 = 12\\,756\\pi \\approx 40\\,074$ km : le tour de la Terre fait environ $40\\,000$ km.\nb) Je travaille en mètres, avec $R$ le rayon de la Terre. La corde soulevée est un cercle de rayon $R + 1$.\nAllongement : $2\\pi(R + 1) - 2\\pi R = 2\\pi R + 2\\pi - 2\\pi R = 2\\pi \\approx 6{,}28$ m.\nc) Même calcul avec $r = 0{,}11$ m : $2\\pi(r + 1) - 2\\pi r = 2\\pi \\approx 6{,}28$ m. EXACTEMENT le même allongement !\n⭐ Le rayon disparaît du calcul : ajouter $1$ m au rayon ajoute toujours $2\\pi$ m au tour, que le cercle soit une planète ou un ballon.\n⛔ Le piège : calculer les deux longueurs en kilomètres, les arrondir, puis les soustraire. $2\\pi \\times 6\\,378{,}001$ et $2\\pi \\times 6\\,378$, arrondis au kilomètre, donnent tous les deux $40\\,074$ : on trouverait $0$.\nRéponse : l'équateur mesure environ $40\\,074$ km, et il suffit de $6{,}28$ m de corde en plus, pour la Terre comme pour le ballon.",
           schema: plan({
@@ -652,6 +743,12 @@ export const exercicesPerimetres3e: FicheExercicesData = {
           titre: "Cent vingt mètres de grillage",
           enonce:
             "Une éleveuse dispose de $120$ m de grillage, qu'elle veut utiliser en entier pour un enclos.\na) L'enclos est carré. Quelle est la longueur de son côté ?\nb) L'enclos est un rectangle dont la longueur est le double de la largeur. Quelles sont ses dimensions ?\nc) L'enclos est un cercle. Quel est son diamètre, au centimètre ?\nd) L'enclos est un rectangle adossé à une rivière : ce côté-là n'a pas besoin de grillage. Les deux côtés perpendiculaires à la rivière mesurent $30$ m. Combien mesure le côté parallèle à la rivière ?",
+          reponses: [
+            { question: "a)", attendu: "30" },
+            { question: "b)", attendu: "40 ; 20" },
+            { question: "c)", attendu: "38,2", tolerance: 0.005 },
+            { question: "d)", attendu: "60" },
+          ],
           correction:
             "Dans les quatre cas, le grillage fait le tour de l'enclos : la longueur grillagée vaut $120$ m. Je remonte le calcul.\na) $4 \\times c = 120$, donc $c = 120 \\div 4 = 30$ m.\nb) Si la largeur vaut $l$, la longueur vaut $2l$, et le tour vaut $l + 2l + l + 2l = 6l$. Donc $6l = 120$ et $l = 20$ m ; la longueur vaut $40$ m. Je vérifie : $2 \\times (40 + 20) = 120$.\nc) $\\pi \\times d = 120$, donc $d = 120 \\div \\pi \\approx 38{,}20$ m.\nd) Le grillage ne couvre que trois côtés : $30 + 30 + x = 120$, donc $x = 120 - 60 = 60$ m.\n⛔ Le piège au d) : répartir le grillage sur quatre côtés. La rivière ferme l'enclos toute seule : le côté qui la longe ne consomme pas de grillage.\nRéponse : $30$ m ; $40$ m sur $20$ m ; environ $38{,}20$ m ; $60$ m.",
           schema: plan({

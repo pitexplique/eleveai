@@ -378,6 +378,12 @@ export const exercicesEntierCalculMental6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Calcule de tête, en passant par la dizaine.\na) $58 + 7$\nb) $76 + 9$\nc) $149 + 6$\nd) $395 + 8$",
+          reponses: [
+            { question: "a)", attendu: "65" },
+            { question: "b)", attendu: "85" },
+            { question: "c)", attendu: "155" },
+            { question: "d)", attendu: "403" },
+          ],
           correction:
             "Je complète d'abord jusqu'au nombre rond suivant. Puis j'ajoute le reste.\na) $58 + 2 = 60$, puis $60 + 5 = 65$.\nb) $76 + 4 = 80$, puis $80 + 5 = 85$.\nc) $149 + 1 = 150$, puis $150 + 5 = 155$.\nd) $395 + 5 = 400$, puis $400 + 3 = 403$.\n⛔ Le piège : oublier ce qui reste à ajouter. Au d), j'ai ajouté $5$ sur $8$ : il reste $3$.\nRéponse : a) $65$ ; b) $85$ ; c) $155$ ; d) $403$.",
           schema: droiteRel(394, 404, 1, [
@@ -389,6 +395,12 @@ export const exercicesEntierCalculMental6e: FicheExercicesData = {
         },
         {
           enonce: "Calcule de tête, en passant par la dizaine.\na) $63 - 8$\nb) $142 - 5$\nc) $91 - 6$\nd) $204 - 7$",
+          reponses: [
+            { question: "a)", attendu: "55" },
+            { question: "b)", attendu: "137" },
+            { question: "c)", attendu: "85" },
+            { question: "d)", attendu: "197" },
+          ],
           correction:
             "Je descends d'abord jusqu'au nombre rond juste en dessous. Puis j'enlève le reste.\na) $63 - 3 = 60$, puis $60 - 5 = 55$.\nb) $142 - 2 = 140$, puis $140 - 3 = 137$.\nc) $91 - 1 = 90$, puis $90 - 5 = 85$.\nd) $204 - 4 = 200$, puis $200 - 3 = 197$.\n⛔ Le piège au d) : calculer $7 - 4 = 3$ et écrire $203$. On enlève $7$, pas $4$ : je passe sous $200$.\nRéponse : a) $55$ ; b) $137$ ; c) $85$ ; d) $197$.",
           schema: droiteRel(195, 205, 1, [
@@ -400,6 +412,12 @@ export const exercicesEntierCalculMental6e: FicheExercicesData = {
         },
         {
           enonce: "Calcule de tête.\na) $7 \\times 8$\nb) $6 \\times 9$\nc) $40 \\times 7$\nd) $30 \\times 50$",
+          reponses: [
+            { question: "a)", attendu: "56" },
+            { question: "b)", attendu: "54" },
+            { question: "c)", attendu: "280" },
+            { question: "d)", attendu: "1500" },
+          ],
           correction:
             "a) et b) sont dans les tables : $7 \\times 8 = 56$ et $6 \\times 9 = 54$.\nc) $40$, c'est $4 \\times 10$. Je calcule $4 \\times 7 = 28$, puis j'ajoute le zéro : $280$.\nd) Je calcule sans les zéros : $3 \\times 5 = 15$.\nIl y a deux zéros en tout. Je les ajoute : $1\\,500$.\n⛔ Le piège au d) : écrire $150$. Je compte TOUS les zéros des deux nombres.\nRéponse : a) $56$ ; b) $54$ ; c) $280$ ; d) $1\\,500$.",
           schema: ecranSeulement(
@@ -412,6 +430,12 @@ export const exercicesEntierCalculMental6e: FicheExercicesData = {
         },
         {
           enonce: "Calcule de tête.\na) $42 \\div 6$\nb) $81 \\div 9$\nc) $560 \\div 8$\nd) $3\\,600 \\div 9$",
+          reponses: [
+            { question: "a)", attendu: "7" },
+            { question: "b)", attendu: "9" },
+            { question: "c)", attendu: "70" },
+            { question: "d)", attendu: "400" },
+          ],
           correction:
             "Diviser, c'est chercher dans une table : combien de fois le diviseur ?\na) $6 \\times 7 = 42$, donc $42 \\div 6 = 7$.\nb) $9 \\times 9 = 81$, donc $81 \\div 9 = 9$.\nc) $560$, c'est $56$ dizaines. Et $56 \\div 8 = 7$. Donc $560 \\div 8 = 70$.\nd) $3\\,600$, c'est $36$ centaines. Et $36 \\div 9 = 4$. Donc $3\\,600 \\div 9 = 400$.\n⛔ Le piège au c) : répondre $7$. Ce sont $7$ dizaines : $70$.\nRéponse : a) $7$ ; b) $9$ ; c) $70$ ; d) $400$.",
           schema: rangement(42, 6),
@@ -419,6 +443,13 @@ export const exercicesEntierCalculMental6e: FicheExercicesData = {
         },
         {
           enonce: "Calcule de tête.\na) $37 \\times 100$\nb) $405 \\times 10$\nc) $26 \\times 1\\,000$\nd) $5\\,800 \\div 100$\ne) $730 \\div 10$",
+          reponses: [
+            { question: "a)", attendu: "3700" },
+            { question: "b)", attendu: "4050" },
+            { question: "c)", attendu: "26000" },
+            { question: "d)", attendu: "58" },
+            { question: "e)", attendu: "73" },
+          ],
           correction:
             "Fois $10$ : chaque chiffre glisse d'un rang vers la gauche. J'écris un $0$ à la fin.\nFois $100$ : deux rangs, deux zéros. Fois $1\\,000$ : trois rangs, trois zéros.\na) $37 \\times 100 = 3\\,700$.\nb) $405 \\times 10 = 4\\,050$.\nc) $26 \\times 1\\,000 = 26\\,000$.\nDivisé par $10$ ou $100$ : les chiffres glissent vers la droite. J'enlève les zéros de la fin.\nd) $5\\,800 \\div 100 = 58$.\ne) $730 \\div 10 = 73$.\n⛔ Le piège au b) : écrire $4\\,005$. Le zéro s'ajoute à la FIN du nombre.\nRéponse : a) $3\\,700$ ; b) $4\\,050$ ; c) $26\\,000$ ; d) $58$ ; e) $73$.",
           schema: ecranSeulement(numeration(["37", "3700"], { noms: ["départ", "× 100"] })),
@@ -426,6 +457,12 @@ export const exercicesEntierCalculMental6e: FicheExercicesData = {
         },
         {
           enonce: "Calcule de tête.\na) le double de $45$\nb) la moitié de $76$\nc) le quart de $200$\nd) la moitié de $130$",
+          reponses: [
+            { question: "a)", attendu: "90" },
+            { question: "b)", attendu: "38" },
+            { question: "c)", attendu: "50" },
+            { question: "d)", attendu: "65" },
+          ],
           correction:
             "Le double : fois $2$. La moitié : divisé par $2$. Le quart : la moitié de la moitié.\na) Double de $40$ : $80$. Double de $5$ : $10$. Donc $80 + 10 = 90$.\nb) Moitié de $70$ : $35$. Moitié de $6$ : $3$. Donc $35 + 3 = 38$.\nc) Moitié de $200$ : $100$. Moitié de $100$ : $50$. Donc $50$.\nd) Moitié de $100$ : $50$. Moitié de $30$ : $15$. Donc $50 + 15 = 65$.\n⛔ Le piège au c) : répondre $100$. Le quart, c'est couper en $4$ : deux fois la moitié.\nRéponse : a) $90$ ; b) $38$ ; c) $50$ ; d) $65$.",
           schema: ecranSeulement(barre("76", [{ valeur: 38, texte: "38" }, { valeur: 38, texte: "38" }])),
@@ -433,6 +470,12 @@ export const exercicesEntierCalculMental6e: FicheExercicesData = {
         },
         {
           enonce: "Calcule de tête : arrondis, puis corrige.\na) $57 + 19$\nb) $245 + 98$\nc) $83 - 29$\nd) $312 - 99$",
+          reponses: [
+            { question: "a)", attendu: "76" },
+            { question: "b)", attendu: "343" },
+            { question: "c)", attendu: "54" },
+            { question: "d)", attendu: "213" },
+          ],
           correction:
             "$19$ est presque $20$. $98$ est presque $100$. J'utilise le nombre rond, puis je corrige.\na) $57 + 20 = 77$. J'ai ajouté $1$ de trop : $77 - 1 = 76$.\nb) $245 + 100 = 345$. J'ai ajouté $2$ de trop : $345 - 2 = 343$.\nc) $83 - 30 = 53$. J'ai enlevé $1$ de trop. Je le rends : $53 + 1 = 54$.\nd) $312 - 100 = 212$. J'ai enlevé $1$ de trop : $212 + 1 = 213$.\n⛔ Le piège au c) : corriger dans le mauvais sens, et trouver $52$. J'ai trop enlevé : je rajoute.\nRéponse : a) $76$ ; b) $343$ ; c) $54$ ; d) $213$.",
           schema: droiteRel(50, 85, 1, [
@@ -444,6 +487,12 @@ export const exercicesEntierCalculMental6e: FicheExercicesData = {
         },
         {
           enonce: "Calcule de tête, en choisissant le bon ordre.\na) $24 \\times 5$\nb) $16 \\times 25$\nc) $4 \\times 17 \\times 25$\nd) $2 \\times 36 \\times 5$",
+          reponses: [
+            { question: "a)", attendu: "120" },
+            { question: "b)", attendu: "400" },
+            { question: "c)", attendu: "1700" },
+            { question: "d)", attendu: "360" },
+          ],
           correction:
             "a) Fois $5$, c'est fois $10$, puis la moitié. $24 \\times 10 = 240$. La moitié de $240$ est $120$.\nb) $16 = 4 \\times 4$, et $4 \\times 25 = 100$. Donc $16 \\times 25 = 4 \\times 100 = 400$.\nc) Je regroupe $4$ et $25$ : $4 \\times 25 = 100$. Puis $100 \\times 17 = 1\\,700$.\nd) Je regroupe $2$ et $5$ : $2 \\times 5 = 10$. Puis $10 \\times 36 = 360$.\n⭐ Dans une multiplication, je peux changer l'ordre. Le résultat ne change pas.\n⛔ Le piège au c) : calculer dans l'ordre, $4 \\times 17$ d'abord. C'est juste, mais bien plus long.\nRéponse : a) $120$ ; b) $400$ ; c) $1\\,700$ ; d) $360$.",
           schema: ecranSeulement(
@@ -470,6 +519,10 @@ export const exercicesEntierCalculMental6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Calcule de tête. Cherche les nombres qui vont bien ensemble.\na) $17 + 36 + 23 + 14$\nb) $125 + 48 + 75 + 52$",
+          reponses: [
+            { question: "a)", attendu: "90" },
+            { question: "b)", attendu: "300" },
+          ],
           correction:
             "Je cherche des paires qui font un nombre rond.\na) $17 + 23 = 40$ : les unités $7$ et $3$ font $10$.\n$36 + 14 = 50$ : les unités $6$ et $4$ font $10$.\nPuis $40 + 50 = 90$.\nb) $125 + 75 = 200$. Et $48 + 52 = 100$.\nPuis $200 + 100 = 300$.\n⭐ Dans une addition, je peux changer l'ordre des nombres.\n⛔ Le piège : additionner dans l'ordre, sans regarder. C'est plus long, et on se trompe plus.\nRéponse : a) $90$ ; b) $300$.",
           schema: barre("90", [
@@ -482,6 +535,11 @@ export const exercicesEntierCalculMental6e: FicheExercicesData = {
         },
         {
           enonce: "On paie avec un billet. Combien nous rend-on ?\na) On achète pour $27$ €. On paie avec $50$ €.\nb) On achète pour $58$ €. On paie avec $100$ €.\nc) On achète pour $385$ €. On paie avec $400$ €.",
+          reponses: [
+            { question: "a)", attendu: "23" },
+            { question: "b)", attendu: "42" },
+            { question: "c)", attendu: "15" },
+          ],
           correction:
             "Rendre la monnaie, c'est chercher ce qui manque. Je complète par étapes.\na) $27 + 3 = 30$, puis $30 + 20 = 50$. On me rend $3 + 20 = 23$ €.\nb) $58 + 2 = 60$, puis $60 + 40 = 100$. On me rend $2 + 40 = 42$ €.\nc) $385 + 5 = 390$, puis $390 + 10 = 400$. On me rend $5 + 10 = 15$ €.\n⛔ Le piège : ne rendre que la dernière étape, $20$ € au a). J'additionne toutes les étapes.\nRéponse : a) $23$ € ; b) $42$ € ; c) $15$ €.",
           schema: droiteRel(25, 50, 1, [
@@ -493,6 +551,12 @@ export const exercicesEntierCalculMental6e: FicheExercicesData = {
         },
         {
           enonce: "Calcule de tête, en coupant un nombre en deux morceaux.\na) $23 \\times 4$\nb) $15 \\times 6$\nc) $12 \\times 13$\nd) $31 \\times 7$",
+          reponses: [
+            { question: "a)", attendu: "92" },
+            { question: "b)", attendu: "90" },
+            { question: "c)", attendu: "156" },
+            { question: "d)", attendu: "217" },
+          ],
           correction:
             "Je coupe un nombre en dizaines et en unités. Je multiplie chaque morceau, puis j'additionne.\na) $20 \\times 4 = 80$ et $3 \\times 4 = 12$. Donc $80 + 12 = 92$.\nb) $10 \\times 6 = 60$ et $5 \\times 6 = 30$. Donc $60 + 30 = 90$.\nc) $12 \\times 10 = 120$ et $12 \\times 3 = 36$. Donc $120 + 36 = 156$.\nd) $30 \\times 7 = 210$ et $1 \\times 7 = 7$. Donc $210 + 7 = 217$.\n⛔ Le piège au a) : oublier le morceau des unités, et répondre $80$.\n⭐ Le rectangle le montre : les deux morceaux forment le tout.\nRéponse : a) $92$ ; b) $90$ ; c) $156$ ; d) $217$.",
           schema: aire(4, [20, 3]),
@@ -500,6 +564,12 @@ export const exercicesEntierCalculMental6e: FicheExercicesData = {
         },
         {
           enonce: "Calcule de tête, en coupant le nombre à diviser.\na) $84 \\div 4$\nb) $75 \\div 5$\nc) $126 \\div 6$\nd) $96 \\div 3$",
+          reponses: [
+            { question: "a)", attendu: "21" },
+            { question: "b)", attendu: "15" },
+            { question: "c)", attendu: "21" },
+            { question: "d)", attendu: "32" },
+          ],
           correction:
             "Je coupe le nombre en morceaux faciles à diviser. Je divise chaque morceau, puis j'additionne.\na) $84 = 80 + 4$. $80 \\div 4 = 20$ et $4 \\div 4 = 1$. Donc $21$.\nb) $75 = 50 + 25$. $50 \\div 5 = 10$ et $25 \\div 5 = 5$. Donc $15$.\nc) $126 = 120 + 6$. $120 \\div 6 = 20$ et $6 \\div 6 = 1$. Donc $21$.\nd) $96 = 90 + 6$. $90 \\div 3 = 30$ et $6 \\div 3 = 2$. Donc $32$.\n⭐ Contrôle : $5 \\times 15 = 75$. La multiplication vérifie la division.\n⛔ Le piège : diviser un seul morceau, et oublier l'autre.\nRéponse : a) $21$ ; b) $15$ ; c) $21$ ; d) $32$.",
           schema: ecranSeulement(aire(5, [10, 5])),
@@ -508,6 +578,10 @@ export const exercicesEntierCalculMental6e: FicheExercicesData = {
         {
           enonce:
             "Pour calculer $48 + 35$, trois élèves font ainsi.\nLéa : $48 + 30 = 78$, puis $78 + 5 = 83$.\nTom : $50 + 35 = 85$, puis $85 - 2 = 83$.\nInès : $40 + 30 = 70$, $8 + 5 = 13$, puis $70 + 13 = 83$.\na) Qui a raison ?\nb) Explique l'idée de Tom.\nc) Calcule $199 + 57$ avec l'idée de Tom.",
+          reponses: [
+            { question: "a)", attendu: ["tous les trois", "les trois", "tous", "Léa, Tom et Inès"], exact: true },
+            { question: "c)", attendu: "256" },
+          ],
           correction:
             "a) Les trois trouvent $83$. Les trois ont raison : il y a plusieurs chemins.\nb) Tom remplace $48$ par $50$, un nombre rond.\nIl a ajouté $2$ de trop. Il les enlève à la fin.\nc) $199$ est presque $200$. Je calcule $200 + 57 = 257$.\nJ'ai ajouté $1$ de trop : $257 - 1 = 256$.\n⭐ Je choisis le chemin le plus simple pour MES nombres.\n⛔ Le piège au c) : corriger en ajoutant $1$, et trouver $258$.\nRéponse : a) tous les trois ; c) $256$.",
           schema: ecranSeulement(
@@ -521,6 +595,11 @@ export const exercicesEntierCalculMental6e: FicheExercicesData = {
         },
         {
           enonce: "Sans poser l'opération, trouve le bon résultat parmi les trois.\na) $49 \\times 21$ : $129$ ; $1\\,029$ ; $10\\,029$\nb) $398 + 205$ : $503$ ; $603$ ; $703$\nc) $812 - 395$ : $317$ ; $417$ ; $517$",
+          reponses: [
+            { question: "a)", attendu: "1029" },
+            { question: "b)", attendu: "603" },
+            { question: "c)", attendu: "417" },
+          ],
           correction:
             "J'arrondis chaque nombre. Le calcul devient facile : c'est l'ordre de grandeur.\na) $49$ est presque $50$, et $21$ presque $20$. $50 \\times 20 = 1\\,000$.\nLe bon résultat est $1\\,029$.\nb) $400 + 200 = 600$. Le bon résultat est $603$.\nc) $800 - 400 = 400$. Le bon résultat est $417$.\n⛔ Le piège : choisir au hasard. L'ordre de grandeur élimine les résultats trop loin.\nRéponse : a) $1\\,029$ ; b) $603$ ; c) $417$.",
           schema: ecranSeulement(
@@ -535,6 +614,15 @@ export const exercicesEntierCalculMental6e: FicheExercicesData = {
         {
           enonce:
             "Pour $4$ personnes, une recette de crêpes demande $250$ g de farine, $3$ œufs et $50$ cl de lait.\na) Combien faut-il de chaque ingrédient pour $12$ personnes ?\nb) Et pour $8$ personnes ?\nc) Une boîte contient $6$ œufs. Combien de boîtes faut-il acheter pour $12$ personnes ?",
+          reponses: [
+            { question: "a) g", attendu: "750" },
+            { question: "a) œufs", attendu: "9" },
+            { question: "a) cl", attendu: "150" },
+            { question: "b) g", attendu: "500" },
+            { question: "b) œufs", attendu: "6" },
+            { question: "b) cl", attendu: "100" },
+            { question: "c)", attendu: "2" },
+          ],
           correction:
             "a) $12$ personnes, c'est $3$ fois $4$ personnes. Je multiplie tout par $3$.\nFarine : $250 \\times 3 = 750$ g. Œufs : $3 \\times 3 = 9$. Lait : $50 \\times 3 = 150$ cl.\nb) $8$ personnes, c'est le double de $4$. Je multiplie tout par $2$.\nFarine : $500$ g. Œufs : $6$. Lait : $100$ cl.\nc) Il faut $9$ œufs. Une boîte en donne $6$ : ce n'est pas assez.\nDeux boîtes en donnent $12$. Il faut acheter $2$ boîtes.\n⛔ Le piège au a) : ajouter $8$ partout, car $12 = 4 + 8$. On multiplie, on n'ajoute pas.\nRéponse : a) $750$ g, $9$ œufs, $150$ cl ; b) $500$ g, $6$ œufs, $100$ cl ; c) $2$ boîtes.",
           schema: table(["ingrédient", "4 pers.", "12 pers."], [
@@ -546,6 +634,11 @@ export const exercicesEntierCalculMental6e: FicheExercicesData = {
         },
         {
           enonce: "Les $6$ joueuses d'une équipe de volley gagnent $90$ € à un tournoi. Elles partagent en parts égales.\na) Combien reçoit chaque joueuse ?\nb) Et si elles avaient été $5$ ?\nc) Et si elles avaient été $9$ ?",
+          reponses: [
+            { question: "a)", attendu: "15" },
+            { question: "b)", attendu: "18" },
+            { question: "c)", attendu: "10" },
+          ],
           correction:
             "Partager en parts égales, c'est diviser.\na) $90 = 60 + 30$. $60 \\div 6 = 10$ et $30 \\div 6 = 5$. Chaque joueuse reçoit $15$ €.\nb) $90 = 50 + 40$. $50 \\div 5 = 10$ et $40 \\div 5 = 8$. Chacune recevrait $18$ €.\nc) $9 \\times 10 = 90$. Chacune recevrait $10$ €.\n⭐ Contrôle : $6 \\times 15 = 90$.\n⛔ Le piège : croire que la part grandit quand on est plus nombreux. C'est l'inverse.\nRéponse : a) $15$ € ; b) $18$ € ; c) $10$ €.",
           schema: barre("90 €", [
@@ -575,6 +668,12 @@ export const exercicesEntierCalculMental6e: FicheExercicesData = {
           titre: "La sortie au parc animalier",
           enonce:
             "Une classe de $24$ élèves va au parc animalier, avec $3$ adultes.\nUn billet enfant coûte $9$ €. Un billet adulte coûte $15$ €.\na) Combien coûtent les billets des élèves ?\nb) Combien coûtent les billets des adultes ?\nc) Le budget de la sortie est de $300$ €. Combien reste-t-il après les billets ?\nd) Le car coûte $240$ €. Les élèves le paient à parts égales. Combien paie chaque élève ?",
+          reponses: [
+            { question: "a)", attendu: "216" },
+            { question: "b)", attendu: "45" },
+            { question: "c)", attendu: "39" },
+            { question: "d)", attendu: "10" },
+          ],
           correction:
             "a) $24 \\times 9$ : je calcule $24 \\times 10 = 240$.\nChaque billet coûte $1$ € de moins que $10$ €. J'enlève donc $24$.\n$240 - 24 = 216$. Les billets des élèves coûtent $216$ €.\nb) $3 \\times 15 = 45$. Les billets des adultes coûtent $45$ €.\nc) Tous les billets : $216 + 45 = 261$ €.\nIl reste $300 - 261 = 39$ €.\nd) $240 \\div 24 = 10$. Chaque élève paie $10$ € pour le car.\n⛔ Le piège au a) : enlever $1$ au lieu de $24$. Les $24$ billets coûtent chacun $1$ € de moins.\nRéponse : a) $216$ € ; b) $45$ € ; c) $39$ € ; d) $10$ €.",
           schema: barre("300 €", [
@@ -588,6 +687,11 @@ export const exercicesEntierCalculMental6e: FicheExercicesData = {
           titre: "Les tours de piste",
           enonce:
             "Sur la piste du stade, un tour mesure $400$ m. Lina s'entraîne pour courir $10$ km.\na) Combien de mètres fait-elle en $8$ tours ?\nb) $10$ km, c'est $10\\,000$ m. Combien de tours faut-il pour faire $10$ km ?\nc) Lina a déjà fait $17$ tours. Combien de mètres lui reste-t-il ?",
+          reponses: [
+            { question: "a)", attendu: "3200" },
+            { question: "b)", attendu: "25" },
+            { question: "c)", attendu: "3200" },
+          ],
           correction:
             "a) $8 \\times 400$ : je calcule $8 \\times 4 = 32$, puis j'ajoute deux zéros. Elle fait $3\\,200$ m.\nb) $5$ tours font $5 \\times 400 = 2\\,000$ m.\nEt $10\\,000$ m, c'est $5$ fois $2\\,000$ m. Il faut donc $5 \\times 5 = 25$ tours.\nc) Il lui reste $25 - 17 = 8$ tours. C'est $3\\,200$ m, comme au a) !\n⭐ Autre chemin : $17 \\times 400 = 6\\,800$, et $10\\,000 - 6\\,800 = 3\\,200$.\n⛔ Le piège au b) : diviser $10$ par $400$. Je passe d'abord les kilomètres en mètres.\nRéponse : a) $3\\,200$ m ; b) $25$ tours ; c) $3\\,200$ m.",
           schema: barre("10 000 m", [
@@ -600,6 +704,11 @@ export const exercicesEntierCalculMental6e: FicheExercicesData = {
           titre: "La pyramide de nombres",
           enonce:
             "Dans une pyramide, chaque brique est la somme des deux briques juste en dessous.\na) Complète de tête la pyramide dessinée.\nb) Une autre pyramide a trois étages. Son sommet vaut $120$.\nAu milieu, une brique vaut $45$. En bas, la brique du centre vaut $20$.\nTrouve les autres briques.",
+          reponses: [
+            { question: "a) haut", attendu: "194" },
+            { question: "b) mil.", attendu: "75" },
+            { question: "b) bas", attendu: "25 ; 55" },
+          ],
           figure: pyramide([["?"], ["?", "?"], ["?", "?", "?"], ["38", "12", "25", "45"]]),
           correction:
             "a) Je pars du bas. Chaque brique est la somme des deux briques dessous.\nDeuxième étage : $38 + 12 = 50$ ; $12 + 25 = 37$ ; $25 + 45 = 70$.\nTroisième étage : $50 + 37 = 87$ ; $37 + 70 = 107$.\nSommet : $87 + 107 = 194$.\nb) Je pars du haut. $45$ et la brique cachée font $120$ : elle vaut $120 - 45 = 75$.\nEn bas : $45 - 20 = 25$ et $75 - 20 = 55$.\n⭐ Contrôle : $25 + 20 = 45$ et $20 + 55 = 75$.\n⛔ Le piège au b) : additionner en descendant. Vers le bas, on soustrait.\nRéponse : a) le sommet vaut $194$ ; b) $75$ au milieu, $25$ et $55$ en bas.",
@@ -610,6 +719,11 @@ export const exercicesEntierCalculMental6e: FicheExercicesData = {
           titre: "La tirelire",
           enonce:
             "Chloé met de l'argent dans sa tirelire chaque semaine.\nLa 1re semaine, $5$ €. La 2e, $10$ €. La 3e, $15$ €. Chaque semaine, $5$ € de plus.\na) Combien met-elle la 8e semaine ?\nb) Combien a-t-elle en tout après $8$ semaines ?\nc) Elle veut un skate à $250$ €. Après combien de semaines peut-elle l'acheter ?",
+          reponses: [
+            { question: "a)", attendu: "40" },
+            { question: "b)", attendu: "180" },
+            { question: "c)", attendu: "10" },
+          ],
           correction:
             "a) La 8e semaine, elle met $8 \\times 5 = 40$ €.\nb) J'additionne $5 + 10 + 15 + 20 + 25 + 30 + 35 + 40$.\nJe fais des paires : $5 + 40 = 45$ ; $10 + 35 = 45$ ; $15 + 30 = 45$ ; $20 + 25 = 45$.\nQuatre paires de $45$ : $4 \\times 45 = 180$. Elle a $180$ €.\nc) 9e semaine : elle met $45$ €. Total : $180 + 45 = 225$ €. Pas assez.\n10e semaine : elle met $50$ €. Total : $225 + 50 = 275$ €. C'est assez.\nElle peut l'acheter après $10$ semaines.\n⛔ Le piège au b) : répondre $40$ €. On veut tout l'argent, pas celui d'une semaine.\nRéponse : a) $40$ € ; b) $180$ € ; c) $10$ semaines.",
           schema: table(["semaine", "elle met", "total"], [

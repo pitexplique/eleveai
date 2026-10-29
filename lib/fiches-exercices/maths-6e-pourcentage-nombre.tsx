@@ -307,6 +307,11 @@ export const exercicesPourcentageNombre6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "La grille a $100$ carreaux.\na) Combien de carreaux sont coloriés ?\nb) Quel pourcentage de la grille est colorié ?\nc) Quel pourcentage n'est pas colorié ?",
+          reponses: [
+            { question: "a)", attendu: "37" },
+            { question: "b)", attendu: "37" },
+            { question: "c)", attendu: "63" },
+          ],
           figure: grille(10, 10, [{ n: 37, nom: "" }]),
           correction:
             "a) Je compte les lignes pleines : $3$ lignes de $10$, soit $30$ carreaux. Plus $7$ carreaux : $30 + 7 = 37$.\nb) $37$ carreaux sur $100$ : c'est $37\\,\\%$.\nc) $100 - 37 = 63$ carreaux blancs : $63\\,\\%$.\n⭐ Contrôle : $37\\,\\% + 63\\,\\% = 100\\,\\%$. Toute la grille fait $100\\,\\%$.\n⛔ Le piège : écrire $0{,}37\\,\\%$. Sur une grille de $100$ carreaux, le nombre de carreaux EST le pourcentage.\nRéponse : a) $37$ ; b) $37\\,\\%$ ; c) $63\\,\\%$.",
@@ -314,6 +319,12 @@ export const exercicesPourcentageNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Écris chaque pourcentage en fraction sur $100$. Puis simplifie quand c'est facile.\na) $30\\,\\%$\nb) $7\\,\\%$\nc) $90\\,\\%$\nd) $100\\,\\%$",
+          reponses: [
+            { question: "a)", attendu: "3/10" },
+            { question: "b)", attendu: "7/100" },
+            { question: "c)", attendu: "9/10" },
+            { question: "d)", attendu: "1" },
+          ],
           correction:
             "« Pour cent » veut dire « sur $100$ ». Le pourcentage va en haut, $100$ va en bas.\na) $30\\,\\% = \\dfrac{30}{100}$. Je divise le haut et le bas par $10$ : $\\dfrac{30}{100} = \\dfrac{3}{10}$.\nb) $7\\,\\% = \\dfrac{7}{100}$. Elle ne se simplifie pas.\nc) $90\\,\\% = \\dfrac{90}{100}$. Je divise par $10$ : $\\dfrac{90}{100} = \\dfrac{9}{10}$.\nd) $100\\,\\% = \\dfrac{100}{100} = 1$ : c'est le tout.\n⛔ Le piège : écrire $\\dfrac{7}{10}$ pour $7\\,\\%$. Un pourcentage se lit toujours sur $100$.\nRéponse : a) $\\dfrac{30}{100} = \\dfrac{3}{10}$ ; b) $\\dfrac{7}{100}$ ; c) $\\dfrac{90}{100} = \\dfrac{9}{10}$ ; d) $\\dfrac{100}{100} = 1$.",
           schema: ecranSeulement(
@@ -328,6 +339,13 @@ export const exercicesPourcentageNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Écris chaque fraction en pourcentage.\na) $\\dfrac{7}{10}$\nb) $\\dfrac{1}{4}$\nc) $\\dfrac{4}{5}$\nd) $\\dfrac{9}{20}$\ne) $\\dfrac{1}{2}$",
+          reponses: [
+            { question: "a)", attendu: "70" },
+            { question: "b)", attendu: "25" },
+            { question: "c)", attendu: "80" },
+            { question: "d)", attendu: "45" },
+            { question: "e)", attendu: "50" },
+          ],
           correction:
             "Je cherche la fraction égale qui a $100$ en bas. Je multiplie le haut ET le bas par le même nombre.\na) $10 \\times 10 = 100$ : $\\dfrac{7}{10} = \\dfrac{70}{100} = 70\\,\\%$.\nb) $4 \\times 25 = 100$ : $\\dfrac{1}{4} = \\dfrac{25}{100} = 25\\,\\%$. C'est le quart.\nc) $5 \\times 20 = 100$ : $\\dfrac{4}{5} = \\dfrac{80}{100} = 80\\,\\%$.\nd) $20 \\times 5 = 100$ : $\\dfrac{9}{20} = \\dfrac{45}{100} = 45\\,\\%$.\ne) $2 \\times 50 = 100$ : $\\dfrac{1}{2} = \\dfrac{50}{100} = 50\\,\\%$. C'est la moitié.\n⛔ Le piège : écrire $\\dfrac{4}{5} = 4\\,\\%$. Le nombre du haut est le pourcentage seulement si le bas vaut $100$.\nRéponse : a) $70\\,\\%$ ; b) $25\\,\\%$ ; c) $80\\,\\%$ ; d) $45\\,\\%$ ; e) $50\\,\\%$.",
           schema: ecranSeulement(
@@ -343,6 +361,12 @@ export const exercicesPourcentageNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Écris chaque pourcentage en décimal, ou chaque décimal en pourcentage.\na) $65\\,\\%$\nb) $8\\,\\%$\nc) $0{,}3$\nd) $0{,}04$",
+          reponses: [
+            { question: "a)", attendu: ["0,65"], exact: true },
+            { question: "b)", attendu: ["0,08"], exact: true },
+            { question: "c)", attendu: "30" },
+            { question: "d)", attendu: "4" },
+          ],
           correction:
             "$p\\,\\%$, ce sont $p$ centièmes.\na) $65\\,\\% = \\dfrac{65}{100} = 0{,}65$.\nb) $8\\,\\% = \\dfrac{8}{100} = 0{,}08$ : huit centièmes.\nc) $0{,}3$, ce sont $3$ dixièmes, soit $30$ centièmes : $0{,}3 = \\dfrac{30}{100} = 30\\,\\%$.\nd) $0{,}04$, ce sont $4$ centièmes : $0{,}04 = \\dfrac{4}{100} = 4\\,\\%$.\n⛔ Le piège du b) : écrire $8\\,\\% = 0{,}8$. Mais $0{,}8$, ce sont $80$ centièmes : c'est $80\\,\\%$.\nRéponse : a) $0{,}65$ ; b) $0{,}08$ ; c) $30\\,\\%$ ; d) $4\\,\\%$.",
           schema: droiteRel(0, 1, 0.1, [
@@ -355,6 +379,13 @@ export const exercicesPourcentageNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Un parc compte $100$ arbres. $45\\,\\%$ sont des chênes. $30\\,\\%$ sont des hêtres. $15\\,\\%$ sont des pins. Les autres sont des bouleaux.\na) Combien y a-t-il de chênes ? De hêtres ? De pins ?\nb) Quel pourcentage d'arbres sont des bouleaux ? Combien d'arbres est-ce ?",
+          reponses: [
+            { question: "a) chêne", attendu: "45" },
+            { question: "a) hêtre", attendu: "30" },
+            { question: "a) pins", attendu: "15" },
+            { question: "b) %", attendu: "10" },
+            { question: "b) nb", attendu: "10" },
+          ],
           correction:
             "Il y a $100$ arbres : un pourcentage donne directement un nombre d'arbres.\na) $45\\,\\%$ de $100$ arbres : $45$ chênes. Puis $30$ hêtres et $15$ pins.\nb) Le tout fait $100\\,\\%$. $100 - 45 - 30 - 15 = 10$ : $10\\,\\%$ de bouleaux, soit $10$ arbres.\n⛔ Le piège : croire que ça marche pour n'importe quel groupe. « $45\\,\\%$ = $45$ arbres » est vrai seulement quand il y a $100$ arbres.\nRéponse : a) $45$ chênes, $30$ hêtres et $15$ pins ; b) $10\\,\\%$, soit $10$ bouleaux.",
           schema: ecranSeulement(
@@ -368,6 +399,12 @@ export const exercicesPourcentageNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Calcule de tête.\na) $50\\,\\%$ de $64$\nb) $25\\,\\%$ de $36$\nc) $10\\,\\%$ de $250$\nd) $75\\,\\%$ de $40$",
+          reponses: [
+            { question: "a)", attendu: "32" },
+            { question: "b)", attendu: "9" },
+            { question: "c)", attendu: "25" },
+            { question: "d)", attendu: "30" },
+          ],
           correction:
             "J'utilise les repères.\na) $50\\,\\%$, c'est la moitié : $64 \\div 2 = 32$.\nb) $25\\,\\%$, c'est le quart : $36 \\div 4 = 9$.\nc) $10\\,\\%$, c'est le dixième : $250 \\div 10 = 25$.\nd) $75\\,\\%$, ce sont trois quarts. Un quart : $40 \\div 4 = 10$. Trois quarts : $3 \\times 10 = 30$.\n⛔ Le piège du b) : diviser par $25$. $25\\,\\%$, c'est le QUART : je divise par $4$.\nRéponse : a) $32$ ; b) $9$ ; c) $25$ ; d) $30$.",
           schema: pourcents("40", "", [
@@ -378,6 +415,12 @@ export const exercicesPourcentageNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Calcule en passant par $10\\,\\%$.\na) $20\\,\\%$ de $80$\nb) $30\\,\\%$ de $90$\nc) $5\\,\\%$ de $60$\nd) $40\\,\\%$ de $15$",
+          reponses: [
+            { question: "a)", attendu: "16" },
+            { question: "b)", attendu: "27" },
+            { question: "c)", attendu: "3" },
+            { question: "d)", attendu: "6" },
+          ],
           correction:
             "D'abord $10\\,\\%$ : je divise par $10$. Puis j'adapte.\na) $10\\,\\%$ de $80$, c'est $8$. Donc $20\\,\\%$, c'est $2 \\times 8 = 16$.\nb) $10\\,\\%$ de $90$, c'est $9$. Donc $30\\,\\%$, c'est $3 \\times 9 = 27$.\nc) $10\\,\\%$ de $60$, c'est $6$. Et $5\\,\\%$, c'est la moitié : $6 \\div 2 = 3$.\nd) $10\\,\\%$ de $15$, c'est $1{,}5$. Donc $40\\,\\%$, c'est $4 \\times 1{,}5 = 6$.\n⛔ Le piège : croire que $20\\,\\%$ de $80$ font $20$. Le pourcentage n'est pas le résultat : c'est une part de $80$.\nRéponse : a) $16$ ; b) $27$ ; c) $3$ ; d) $6$.",
           schema: ecranSeulement(
@@ -392,6 +435,12 @@ export const exercicesPourcentageNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Vrai ou faux ? Explique.\na) $100\\,\\%$ d'un gâteau, c'est tout le gâteau.\nb) $50\\,\\%$ de $30$ élèves, ce sont $50$ élèves.\nc) $10\\,\\% = \\dfrac{1}{10}$.\nd) $60\\,\\% = 0{,}6$.",
+          reponses: [
+            { question: "a)", attendu: ["vrai", "oui"] },
+            { question: "b)", attendu: ["faux", "non"] },
+            { question: "c)", attendu: ["vrai", "oui"] },
+            { question: "d)", attendu: ["vrai", "oui"] },
+          ],
           correction:
             "a) Vrai. $100\\,\\%$, c'est $100$ sur $100$ : le tout.\nb) Faux. $50\\,\\%$, c'est la moitié : $30 \\div 2 = 15$ élèves. On ne peut pas avoir $50$ élèves dans un groupe de $30$ !\nc) Vrai. $10\\,\\% = \\dfrac{10}{100}$, et $\\dfrac{10}{100} = \\dfrac{1}{10}$ : un dixième.\nd) Vrai. $60\\,\\% = \\dfrac{60}{100} = 0{,}6$.\n⛔ Le piège du b) : prendre le pourcentage pour un nombre d'élèves. Un pourcentage est une PART du groupe.\nRéponse : a) vrai ; b) faux, ce sont $15$ élèves ; c) vrai ; d) vrai.",
           schema: ecranSeulement(grille(10, 10, [{ n: 10, nom: "10 %" }])),
@@ -413,6 +462,11 @@ export const exercicesPourcentageNombre6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Au jardin, on sème $50$ graines de tournesol. $42$ graines germent.\na) Écris la part des graines qui germent en fraction.\nb) Écris-la sur $100$. Quel est le pourcentage de graines qui germent ?\nc) Quel pourcentage ne germe pas ?",
+          reponses: [
+            { question: "a)", attendu: "42/50" },
+            { question: "b)", attendu: "84" },
+            { question: "c)", attendu: "16" },
+          ],
           correction:
             "a) $42$ graines sur $50$ : $\\dfrac{42}{50}$.\nb) $50 \\times 2 = 100$ : je multiplie le haut et le bas par $2$. $\\dfrac{42}{50} = \\dfrac{84}{100}$, soit $84\\,\\%$.\nc) $100 - 84 = 16$ : $16\\,\\%$ ne germent pas. C'est $8$ graines sur $50$.\n⛔ Le piège : dire « $42\\,\\%$ ». $42$ est un nombre de graines sur $50$, pas sur $100$.\nRéponse : a) $\\dfrac{42}{50}$ ; b) $84\\,\\%$ ; c) $16\\,\\%$.",
           schema: pourcents("50", "graines", [
@@ -423,6 +477,11 @@ export const exercicesPourcentageNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Un sac à dos coûte $40$ €. Il est soldé à $-25\\,\\%$.\na) Combien d'euros de réduction ?\nb) Quel est le nouveau prix ?\nc) Un autre sac à $40$ € est soldé à $-10\\,\\%$. Quel est son nouveau prix ?",
+          reponses: [
+            { question: "a)", attendu: "10" },
+            { question: "b)", attendu: "30" },
+            { question: "c)", attendu: "36" },
+          ],
           correction:
             "a) $25\\,\\%$, c'est le quart : $40 \\div 4 = 10$ € de réduction.\nb) $40 - 10 = 30$ €.\nc) $10\\,\\%$ de $40$ : $40 \\div 10 = 4$ €. Nouveau prix : $40 - 4 = 36$ €.\n⭐ Sur la barre : on paie les $75\\,\\%$ qui restent, soit $30$ €.\n⛔ Le piège : retirer $25$ € au prix. On retire $25\\,\\%$ du prix, c'est-à-dire $10$ €.\nRéponse : a) $10$ € ; b) $30$ € ; c) $36$ €.",
           schema: pourcents("40", "euros", [
@@ -433,6 +492,10 @@ export const exercicesPourcentageNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Quel est le plus grand ?\na) $50\\,\\%$ de $30$, ou $10\\,\\%$ de $200$ ?\nb) $25\\,\\%$ de $80$, ou $75\\,\\%$ de $24$ ?",
+          reponses: [
+            { question: "a)", attendu: ["10 % de 200", "10% de 200", "20"], exact: true },
+            { question: "b)", attendu: ["25 % de 80", "25% de 80", "20"], exact: true },
+          ],
           correction:
             "Je calcule les deux, puis je compare.\na) $50\\,\\%$ de $30$ : la moitié, $15$. $10\\,\\%$ de $200$ : le dixième, $20$.\nOr $20 > 15$ : c'est $10\\,\\%$ de $200$.\nb) $25\\,\\%$ de $80$ : le quart, $20$. $75\\,\\%$ de $24$ : $24 \\div 4 = 6$, puis $3 \\times 6 = 18$.\nOr $20 > 18$ : c'est $25\\,\\%$ de $80$.\n⛔ Le piège : choisir le plus grand pourcentage sans calculer. Un grand pourcentage d'un PETIT nombre peut donner peu.\nRéponse : a) $10\\,\\%$ de $200$ ; b) $25\\,\\%$ de $80$.",
           schema: table(["calcul", "idée", "résultat"], [
@@ -445,6 +508,17 @@ export const exercicesPourcentageNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Écris chaque nombre en pourcentage, en fraction sur $100$ et en décimal.\na) $40\\,\\%$\nb) $\\dfrac{15}{100}$\nc) $0{,}2$\nd) $\\dfrac{3}{25}$",
+          reponses: [
+            { question: "a) frac", attendu: ["40/100"], exact: true },
+            { question: "a) déc", attendu: ["0,4"], exact: true },
+            { question: "b) %", attendu: "15" },
+            { question: "b) déc", attendu: ["0,15"], exact: true },
+            { question: "c) frac", attendu: ["20/100"], exact: true },
+            { question: "c) %", attendu: "20" },
+            { question: "d) frac", attendu: ["12/100"], exact: true },
+            { question: "d) %", attendu: "12" },
+            { question: "d) déc", attendu: ["0,12"], exact: true },
+          ],
           correction:
             "a) $40\\,\\% = \\dfrac{40}{100} = 0{,}4$.\nb) $\\dfrac{15}{100} = 15\\,\\% = 0{,}15$.\nc) $0{,}2$, ce sont $2$ dixièmes, soit $20$ centièmes : $0{,}2 = \\dfrac{20}{100} = 20\\,\\%$.\nd) $25 \\times 4 = 100$ : $\\dfrac{3}{25} = \\dfrac{12}{100} = 12\\,\\% = 0{,}12$.\n⛔ Le piège du c) : écrire $0{,}2 = 2\\,\\%$. Mais $2\\,\\%$, c'est $0{,}02$.\nRéponse : a) $\\dfrac{40}{100}$ et $0{,}4$ ; b) $15\\,\\%$ et $0{,}15$ ; c) $\\dfrac{20}{100}$ et $20\\,\\%$ ; d) $\\dfrac{12}{100}$, $12\\,\\%$ et $0{,}12$.",
           schema: ecranSeulement(
@@ -459,6 +533,12 @@ export const exercicesPourcentageNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Une bibliothèque a $300$ livres. $40\\,\\%$ sont des romans. $35\\,\\%$ sont des BD. Les autres sont des documentaires.\na) Quel pourcentage des livres sont des documentaires ?\nb) Combien y a-t-il de romans ? De BD ? De documentaires ?",
+          reponses: [
+            { question: "a)", attendu: "25" },
+            { question: "b) rom.", attendu: "120" },
+            { question: "b) BD", attendu: "105" },
+            { question: "b) doc.", attendu: "75" },
+          ],
           correction:
             "a) Le tout fait $100\\,\\%$. $100 - 40 - 35 = 25$ : $25\\,\\%$ de documentaires.\nb) $1\\,\\%$ de $300$ livres : $300 \\div 100 = 3$ livres.\nRomans : $40 \\times 3 = 120$. BD : $35 \\times 3 = 105$. Documentaires : $25 \\times 3 = 75$.\n⭐ Contrôle : $120 + 105 + 75 = 300$ livres.\n⛔ Le piège : répondre « $40$ romans ». Il y a $300$ livres, pas $100$ : $40\\,\\%$ font plus que $40$.\nRéponse : a) $25\\,\\%$ ; b) $120$ romans, $105$ BD et $75$ documentaires.",
           schema: camembert([
@@ -470,6 +550,11 @@ export const exercicesPourcentageNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Un jeu se télécharge. Il pèse $800$ Mo en tout.\na) La barre indique $25\\,\\%$. Combien de Mo sont téléchargés ?\nb) Plus tard, elle indique $60\\,\\%$. Combien de Mo sont téléchargés ?\nc) Combien de Mo reste-t-il alors ?",
+          reponses: [
+            { question: "a)", attendu: "200" },
+            { question: "b)", attendu: "480" },
+            { question: "c)", attendu: "320" },
+          ],
           correction:
             "a) $25\\,\\%$, c'est le quart : $800 \\div 4 = 200$ Mo.\nb) $10\\,\\%$ de $800$, c'est $80$ Mo. Donc $60\\,\\%$, c'est $6 \\times 80 = 480$ Mo.\nc) $800 - 480 = 320$ Mo. C'est aussi $40\\,\\%$ de $800$.\n⛔ Le piège : croire que $60\\,\\%$ veut dire $60$ Mo. Le pourcentage parle des $800$ Mo.\nRéponse : a) $200$ Mo ; b) $480$ Mo ; c) $320$ Mo.",
           schema: pourcents("800", "Mo", [
@@ -480,6 +565,11 @@ export const exercicesPourcentageNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Trois élèves se trompent. Explique l'erreur, puis corrige.\na) Hugo : « $20\\,\\%$ de $50$, c'est $20$. »\nb) Jade : « $\\dfrac{2}{5} = 25\\,\\%$. »\nc) Malo : « $0{,}7 = 7\\,\\%$. »",
+          reponses: [
+            { question: "a)", attendu: "10" },
+            { question: "b)", attendu: "40" },
+            { question: "c)", attendu: "70" },
+          ],
           correction:
             "a) Hugo recopie le pourcentage. $10\\,\\%$ de $50$, c'est $5$. Donc $20\\,\\%$, c'est $2 \\times 5 = 10$.\nb) Jade colle les deux chiffres. Il faut $100$ en bas : $\\dfrac{2}{5} = \\dfrac{40}{100} = 40\\,\\%$.\nc) Malo se trompe de rang. $0{,}7$, ce sont $7$ dixièmes, soit $70$ centièmes : $0{,}7 = 70\\,\\%$.\n⛔ Le piège commun : oublier que « pour cent » veut dire « sur $100$ ».\nRéponse : a) $10$ ; b) $40\\,\\%$ ; c) $70\\,\\%$.",
           schema: ecranSeulement(grille(10, 10, [{ n: 70, nom: "70 %" }])),
@@ -487,6 +577,12 @@ export const exercicesPourcentageNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Un réservoir d'eau de pluie contient $60$ L quand il est plein. Il est rempli à $35\\,\\%$.\na) Calcule $10\\,\\%$ de $60$ L, puis $5\\,\\%$ de $60$ L.\nb) Combien de litres contient le réservoir ?\nc) Combien de litres faut-il pour le remplir ?",
+          reponses: [
+            { question: "a) 10 %", attendu: "6" },
+            { question: "a) 5 %", attendu: "3" },
+            { question: "b)", attendu: "21" },
+            { question: "c)", attendu: "39" },
+          ],
           correction:
             "a) $10\\,\\%$ de $60$ : $60 \\div 10 = 6$ L. Et $5\\,\\%$, c'est la moitié : $3$ L.\nb) $35\\,\\%$, c'est $10\\,\\% + 10\\,\\% + 10\\,\\% + 5\\,\\%$. Donc $6 + 6 + 6 + 3 = 21$ L.\nc) $60 - 21 = 39$ L.\n⭐ Contrôle : il manque $65\\,\\%$. Et $65\\,\\%$ de $60$, c'est $6 \\times 6 + 3 = 39$ L.\n⛔ Le piège : répondre $35$ L. Le réservoir contient $35\\,\\%$ de $60$ L, pas $35$ L.\nRéponse : a) $6$ L et $3$ L ; b) $21$ L ; c) $39$ L.",
           schema: pourcents("60", "litres", [
@@ -512,6 +608,14 @@ export const exercicesPourcentageNombre6e: FicheExercicesData = {
         {
           titre: "Le sondage de la classe",
           enonce: "Dans une classe de $20$ élèves, chacun choisit son sport préféré. $8$ élèves choisissent le football, $3$ la natation, $5$ le basket et $4$ le handball.\na) Écris la part de chaque sport en fraction, puis en pourcentage.\nb) Vérifie que le total fait $100\\,\\%$.\nc) Un collège de $500$ élèves a les mêmes pourcentages. Combien d'élèves préfèrent le football ?",
+          reponses: [
+            { question: "a) foot", attendu: "40" },
+            { question: "a) nat.", attendu: "15" },
+            { question: "a) bask.", attendu: "25" },
+            { question: "a) hand", attendu: "20" },
+            { question: "b)", attendu: ["oui", "vrai"] },
+            { question: "c)", attendu: "200" },
+          ],
           correction:
             "a) $20 \\times 5 = 100$ : je multiplie le haut et le bas par $5$.\nFootball : $\\dfrac{8}{20} = \\dfrac{40}{100}$, soit $40\\,\\%$.\nNatation : $\\dfrac{3}{20} = \\dfrac{15}{100}$, soit $15\\,\\%$.\nBasket : $\\dfrac{5}{20} = \\dfrac{25}{100}$, soit $25\\,\\%$.\nHandball : $\\dfrac{4}{20} = \\dfrac{20}{100}$, soit $20\\,\\%$.\nb) $40 + 15 + 25 + 20 = 100$ : c'est bien $100\\,\\%$.\nc) $10\\,\\%$ de $500$, c'est $50$ élèves. Donc $40\\,\\%$, c'est $4 \\times 50 = 200$ élèves.\n⛔ Le piège du a) : dire « $8\\,\\%$ » pour le football. $8$ élèves sur $20$, ce n'est pas $8$ sur $100$.\nRéponse : a) $40\\,\\%$, $15\\,\\%$, $25\\,\\%$ et $20\\,\\%$ ; b) oui ; c) $200$ élèves.",
           schema: camembert([
@@ -525,6 +629,14 @@ export const exercicesPourcentageNombre6e: FicheExercicesData = {
         {
           titre: "La fête de fin d'année",
           enonce: "Le budget de la fête est de $150$ €. On dépense $40\\,\\%$ pour le repas, $30\\,\\%$ pour la décoration et $10\\,\\%$ pour la musique. Le reste est pour les boissons.\na) Quel pourcentage du budget va aux boissons ?\nb) Calcule chaque dépense en euros.\nc) Finalement, la musique coûte $6$ € de moins. Quel pourcentage du budget représente-t-elle alors ?",
+          reponses: [
+            { question: "a)", attendu: "20" },
+            { question: "b) repas", attendu: "60" },
+            { question: "b) déco", attendu: "45" },
+            { question: "b) mus.", attendu: "15" },
+            { question: "b) bois.", attendu: "30" },
+            { question: "c)", attendu: "6" },
+          ],
           correction:
             "a) $100 - 40 - 30 - 10 = 20$ : $20\\,\\%$ pour les boissons.\nb) $10\\,\\%$ de $150$ €, c'est $15$ €.\nRepas : $4 \\times 15 = 60$ €. Décoration : $3 \\times 15 = 45$ €. Musique : $15$ €. Boissons : $2 \\times 15 = 30$ €.\n⭐ Contrôle : $60 + 45 + 15 + 30 = 150$ €.\nc) La musique coûte $15 - 6 = 9$ €. Sa part : $\\dfrac{9}{150}$.\nJe divise le haut et le bas par $3$ : $\\dfrac{3}{50}$. Puis je multiplie par $2$ : $\\dfrac{6}{100}$, soit $6\\,\\%$.\n⛔ Le piège du c) : retirer $6$ au pourcentage, et dire $4\\,\\%$. On a retiré $6$ EUROS, pas $6\\,\\%$.\nRéponse : a) $20\\,\\%$ ; b) $60$ €, $45$ €, $15$ € et $30$ € ; c) $6\\,\\%$.",
           schema: grille(10, 10, [
@@ -537,6 +649,12 @@ export const exercicesPourcentageNombre6e: FicheExercicesData = {
         {
           titre: "Les deux bouteilles",
           enonce: "La bouteille A contient $50$ cL de boisson, dont $20\\,\\%$ de jus de fruit. La bouteille B contient $100$ cL de boisson, dont $12\\,\\%$ de jus de fruit.\na) Combien de cL de jus contient la bouteille A ?\nb) Combien de cL de jus contient la bouteille B ?\nc) Quelle bouteille contient le plus de jus ? Quelle boisson est la plus riche en jus ?",
+          reponses: [
+            { question: "a)", attendu: "10" },
+            { question: "b)", attendu: "12" },
+            { question: "c) + jus", attendu: ["B", "la bouteille B", "bouteille B"], exact: true },
+            { question: "c) riche", attendu: ["A", "la bouteille A", "bouteille A"], exact: true },
+          ],
           correction:
             "a) $10\\,\\%$ de $50$ cL, c'est $5$ cL. Donc $20\\,\\%$, c'est $2 \\times 5 = 10$ cL de jus.\nb) La bouteille B contient $100$ cL : $12\\,\\%$, ce sont $12$ cL de jus.\nc) $12 > 10$ : la bouteille B contient le plus de jus.\nMais la boisson A est la plus riche : $20\\,\\%$ de jus, contre $12\\,\\%$ pour B.\n⛔ Le piège : croire que le plus grand pourcentage donne toujours la plus grande quantité. Ça dépend aussi du TOUT : $50$ cL ou $100$ cL.\nRéponse : a) $10$ cL ; b) $12$ cL ; c) B contient le plus de jus ; A est la plus riche en jus.",
           schema: table(["", "A", "B"], [
@@ -549,6 +667,12 @@ export const exercicesPourcentageNombre6e: FicheExercicesData = {
         {
           titre: "Les deux magasins",
           enonce: "Un vélo coûte $200$ € dans deux magasins. Le magasin A fait $-30\\,\\%$. Le magasin B fait $-50$ €.\na) Quel est le prix dans le magasin A ?\nb) Quel est le prix dans le magasin B ?\nc) Où le vélo est-il le moins cher ?\nd) La remise de $50$ € du magasin B, c'est quel pourcentage de $200$ € ?",
+          reponses: [
+            { question: "a)", attendu: "140" },
+            { question: "b)", attendu: "150" },
+            { question: "c)", attendu: ["A", "le magasin A", "magasin A"], exact: true },
+            { question: "d)", attendu: "25" },
+          ],
           correction:
             "a) $10\\,\\%$ de $200$ €, c'est $20$ €. Donc $30\\,\\%$, c'est $3 \\times 20 = 60$ € de remise. Prix : $200 - 60 = 140$ €.\nb) $200 - 50 = 150$ €.\nc) $140 < 150$ : le magasin A est le moins cher.\nd) La part : $\\dfrac{50}{200}$. Je divise le haut et le bas par $2$ : $\\dfrac{25}{100}$, soit $25\\,\\%$.\n⛔ Le piège : croire que « $-50$ € » est la plus grosse remise, parce que $50 > 30$. Je compare des euros avec des euros : $60$ € contre $50$ €.\nRéponse : a) $140$ € ; b) $150$ € ; c) le magasin A ; d) $25\\,\\%$.",
           schema: table(["magasin", "remise", "prix payé"], [

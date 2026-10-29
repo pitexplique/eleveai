@@ -265,6 +265,10 @@ export const exercicesAlgebreProbleme6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Léo et Mia ont $30$ billes à eux deux. Mia a $6$ billes de plus que Léo. Combien de billes a chacun ?",
+          reponses: [
+            { question: "Léo", attendu: "12" },
+            { question: "Mia", attendu: "18" },
+          ],
           correction:
             "Je dessine une barre pour Léo et une pour Mia.\nLa barre de Mia, c'est celle de Léo plus $6$.\nJe retire les $6$ billes en plus : $30 - 6 = 24$.\nIl reste $2$ barres égales : $24 \\div 2 = 12$.\nLéo a $12$ billes. Mia a $12 + 6 = 18$ billes.\n⭐ Je vérifie : $12 + 18 = 30$.\n⛔ Le piège : partager $30$ en deux, $15$ et $15$. Mia n'aurait pas $6$ billes de plus.\nRéponse : Léo a $12$ billes, Mia a $18$ billes.",
           schema: barres(
@@ -278,6 +282,10 @@ export const exercicesAlgebreProbleme6e: FicheExercicesData = {
         },
         {
           enonce: "Un livre et un cahier coûtent $11$ € ensemble. Le livre coûte $7$ € de plus que le cahier.\na) Dessine le schéma en barres.\nb) Combien coûte le cahier ? Et le livre ?",
+          reponses: [
+            { question: "cahier", attendu: "2" },
+            { question: "livre", attendu: "9" },
+          ],
           correction:
             "a) Une barre pour le cahier. Pour le livre : la même barre, plus $7$ €.\nb) Je retire les $7$ € en plus : $11 - 7 = 4$.\nIl reste deux barres égales : $4 \\div 2 = 2$.\nLe cahier coûte $2$ €. Le livre coûte $2 + 7 = 9$ €.\n⭐ Je vérifie : $2 + 9 = 11$.\n⛔ Le piège : répondre $4$ €. Ces $4$ € sont pour DEUX barres.\nRéponse : le cahier coûte $2$ €, le livre $9$ €.",
           schema: barres(
@@ -291,6 +299,10 @@ export const exercicesAlgebreProbleme6e: FicheExercicesData = {
         },
         {
           enonce: "Une classe compte $24$ élèves. Il y a deux fois plus de filles que de garçons. Combien y a-t-il de garçons ? Et de filles ?",
+          reponses: [
+            { question: "garçons", attendu: "8" },
+            { question: "filles", attendu: "16" },
+          ],
           correction:
             "Les garçons : une part. Les filles : deux parts, le double.\nEn tout, il y a $1 + 2 = 3$ parts égales.\n$3$ parts font $24$ élèves : $24 \\div 3 = 8$.\nIl y a $8$ garçons, et $2 \\times 8 = 16$ filles.\n⭐ Je vérifie : $8 + 16 = 24$.\n⛔ Le piège : partager $24$ en $2$, à cause de « deux fois ». Il y a $3$ parts, pas $2$.\nRéponse : $8$ garçons et $16$ filles.",
           schema: ecranSeulement(
@@ -306,6 +318,9 @@ export const exercicesAlgebreProbleme6e: FicheExercicesData = {
         },
         {
           enonce: "Un sac contient $2$ pommes pareilles et $1$ melon. Le sac pèse $900$ g. Le melon pèse $500$ g. Combien pèse une pomme ?",
+          reponses: [
+            { attendu: "200" },
+          ],
           correction:
             "Je dessine le sac : deux pommes, puis le melon.\nJe retire le melon : $900 - 500 = 400$ g.\nIl reste deux pommes pareilles : $400 \\div 2 = 200$ g.\n⭐ Je vérifie : $200 + 200 + 500 = 900$.\n⛔ Le piège : s'arrêter à $400$ g. C'est le poids des DEUX pommes.\nRéponse : une pomme pèse $200$ g.",
           schema: barres(
@@ -316,6 +331,11 @@ export const exercicesAlgebreProbleme6e: FicheExercicesData = {
         },
         {
           enonce: "Voici un motif de carrés faits avec des allumettes.\na) Compte les allumettes des étapes $1$, $2$ et $3$.\nb) Combien d'allumettes ajoute-t-on à chaque étape ?\nc) Combien d'allumettes à l'étape $4$ ? À l'étape $5$ ?",
+          reponses: [
+            { question: "a)", attendu: "4 ; 7 ; 10" },
+            { question: "b)", attendu: "3" },
+            { question: "c)", attendu: "13 ; 16" },
+          ],
           figure: motif("carres", [1, 2, 3]),
           correction:
             "a) Étape $1$ : $4$ allumettes. Étape $2$ : $7$. Étape $3$ : $10$.\nb) De $4$ à $7$, puis de $7$ à $10$, j'ajoute $3$ allumettes.\nUn carré collé au dernier demande $3$ allumettes, pas $4$.\nc) Étape $4$ : $10 + 3 = 13$. Étape $5$ : $13 + 3 = 16$.\n⛔ Le piège : compter $4$ allumettes par carré. Deux carrés voisins PARTAGENT une allumette.\nRéponse : $4$, $7$, $10$ ; $3$ de plus à chaque étape ; $13$ et $16$.",
@@ -332,6 +352,11 @@ export const exercicesAlgebreProbleme6e: FicheExercicesData = {
         },
         {
           enonce: "Voici un motif de carreaux en forme de L.\na) Combien de carreaux à chaque étape dessinée ?\nb) Combien de carreaux à l'étape $4$ ?\nc) Et à l'étape $10$ ?",
+          reponses: [
+            { question: "a)", attendu: "1 ; 3 ; 5" },
+            { question: "b)", attendu: "7" },
+            { question: "c)", attendu: "19" },
+          ],
           figure: motif("L", [1, 2, 3]),
           correction:
             "a) Étape $1$ : $1$ carreau. Étape $2$ : $3$. Étape $3$ : $5$.\nb) À chaque étape, j'ajoute $2$ carreaux : un en haut, un à droite.\nÉtape $4$ : $5 + 2 = 7$ carreaux.\nc) De l'étape $1$ à l'étape $10$, il y a $9$ ajouts de $2$.\n$1 + 9 \\times 2 = 19$ carreaux.\n⛔ Le piège : compter $10$ ajouts. L'étape $1$ n'a pas d'ajout.\nRéponse : $1$, $3$, $5$ ; $7$ ; $19$.",
@@ -339,6 +364,10 @@ export const exercicesAlgebreProbleme6e: FicheExercicesData = {
         },
         {
           enonce: "$2$ stylos et $1$ gomme coûtent $5$ €. $3$ stylos et $1$ gomme coûtent $6{,}50$ €. Les stylos ont tous le même prix. Combien coûte un stylo ? Et la gomme ?",
+          reponses: [
+            { question: "stylo", attendu: "1,5" },
+            { question: "gomme", attendu: "2" },
+          ],
           correction:
             "Je dessine les deux achats l'un sous l'autre.\nLe deuxième a juste un stylo de plus.\nCe stylo coûte la différence : $6{,}50 - 5 = 1{,}50$ €.\nDans le premier achat, les $2$ stylos coûtent $2 \\times 1{,}50 = 3$ €.\nLa gomme coûte $5 - 3 = 2$ €.\n⭐ Je vérifie : $3 \\times 1{,}50 + 2 = 6{,}50$.\nRéponse : un stylo coûte $1{,}50$ €, la gomme $2$ €.",
           schema: barres([
@@ -349,6 +378,11 @@ export const exercicesAlgebreProbleme6e: FicheExercicesData = {
         },
         {
           enonce: "Voici un motif de triangles faits avec des allumettes.\na) Combien d'allumettes à chaque étape dessinée ?\nb) Combien en ajoute-t-on à chaque étape ?\nc) Combien d'allumettes à l'étape $5$ ?",
+          reponses: [
+            { question: "a)", attendu: "3 ; 5 ; 7 ; 9" },
+            { question: "b)", attendu: "2" },
+            { question: "c)", attendu: "11" },
+          ],
           figure: motif("triangles", [1, 2, 3, 4]),
           correction:
             "a) Étape $1$ : $3$. Étape $2$ : $5$. Étape $3$ : $7$. Étape $4$ : $9$.\nb) J'ajoute $2$ allumettes à chaque étape.\nLe nouveau triangle réutilise un côté du triangle d'avant.\nc) Étape $5$ : $9 + 2 = 11$ allumettes.\n⛔ Le piège : compter $3$ allumettes par triangle, $5 \\times 3 = 15$. Les triangles voisins partagent un côté.\nRéponse : $3$, $5$, $7$, $9$ ; $2$ ; $11$ allumettes.",
@@ -370,6 +404,11 @@ export const exercicesAlgebreProbleme6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Trois équipes ont couru $57$ km en tout. Les Verts ont couru $4$ km de plus que les Bleus. Les Rouges ont couru $5$ km de plus que les Bleus. Combien de km chaque équipe a-t-elle couru ?",
+          reponses: [
+            { question: "Bleus", attendu: "16" },
+            { question: "Verts", attendu: "20" },
+            { question: "Rouges", attendu: "21" },
+          ],
           correction:
             "Je dessine trois barres. Celle des Bleus est la plus courte.\nLes Verts : la barre des Bleus, plus $4$ km.\nLes Rouges : la barre des Bleus, plus $5$ km.\nJe retire ce qui dépasse : $57 - 4 - 5 = 48$.\nIl reste $3$ barres égales : $48 \\div 3 = 16$.\nBleus : $16$ km. Verts : $16 + 4 = 20$ km. Rouges : $16 + 5 = 21$ km.\n⭐ Je vérifie : $16 + 20 + 21 = 57$.\nRéponse : Bleus $16$ km, Verts $20$ km, Rouges $21$ km.",
           schema: barres(
@@ -384,6 +423,10 @@ export const exercicesAlgebreProbleme6e: FicheExercicesData = {
         },
         {
           enonce: "Deux sacs de riz pèsent $17$ kg ensemble. Le petit sac pèse $3$ kg de moins que le grand. Combien pèse chaque sac ?",
+          reponses: [
+            { question: "grand", attendu: "10" },
+            { question: "petit", attendu: "7" },
+          ],
           correction:
             "Je dessine les deux sacs. Au petit, il manque $3$ kg pour être comme le grand.\nJ'ajoute ces $3$ kg : $17 + 3 = 20$.\nJ'ai alors deux grands sacs : $20 \\div 2 = 10$.\nLe grand sac pèse $10$ kg. Le petit pèse $10 - 3 = 7$ kg.\n⭐ Je vérifie : $10 + 7 = 17$.\n⭐ Autre chemin : je retire $3$ kg au grand. $17 - 3 = 14$, et $14 \\div 2 = 7$ : c'est le petit.\n⛔ Le piège : oublier la barre en pointillés. Les $3$ kg qui manquent ne sont pas dans les $17$ kg.\nRéponse : le grand sac pèse $10$ kg, le petit $7$ kg.",
           schema: ecranSeulement(
@@ -399,6 +442,10 @@ export const exercicesAlgebreProbleme6e: FicheExercicesData = {
         },
         {
           enonce: "Au café, $2$ croissants et $1$ jus coûtent $4{,}50$ €. $2$ croissants et $3$ jus coûtent $8{,}50$ €. Combien coûte un jus ? Et un croissant ?",
+          reponses: [
+            { question: "jus", attendu: "2" },
+            { question: "croiss.", attendu: "1,25" },
+          ],
           correction:
             "Je compare les deux commandes. La deuxième a $2$ jus de plus.\nCes $2$ jus coûtent : $8{,}50 - 4{,}50 = 4$ €.\nUn jus coûte $4 \\div 2 = 2$ €.\nDans la première commande : $4{,}50 - 2 = 2{,}50$ € pour $2$ croissants.\nUn croissant coûte $2{,}50 \\div 2 = 1{,}25$ €.\n⭐ Je vérifie : $2 \\times 1{,}25 + 3 \\times 2 = 8{,}50$.\n⛔ Le piège : croire que $4$ € est le prix d'UN jus. Il y a $2$ jus de plus.\nRéponse : un jus coûte $2$ €, un croissant $1{,}25$ €.",
           schema: ecranSeulement(
@@ -411,6 +458,10 @@ export const exercicesAlgebreProbleme6e: FicheExercicesData = {
         },
         {
           enonce: "Un gâteau pèse autant que $3$ pommes. $2$ gâteaux et $1$ pomme pèsent $1\\,400$ g. Combien pèse une pomme ? Et un gâteau ?",
+          reponses: [
+            { question: "pomme", attendu: "200" },
+            { question: "gâteau", attendu: "600" },
+          ],
           correction:
             "J'échange chaque gâteau contre $3$ pommes : c'est le même poids.\n$2$ gâteaux, c'est $2 \\times 3 = 6$ pommes.\nAvec la pomme en plus, j'ai $6 + 1 = 7$ pommes.\n$7$ pommes pèsent $1\\,400$ g : $1\\,400 \\div 7 = 200$ g.\nUn gâteau pèse $3 \\times 200 = 600$ g.\n⭐ Je vérifie : $600 + 600 + 200 = 1\\,400$.\n⛔ Le piège : partager $1\\,400$ en $3$, parce qu'il y a $3$ objets. Ils n'ont pas le même poids.\nRéponse : une pomme pèse $200$ g, un gâteau $600$ g.",
           schema: barres(
@@ -424,6 +475,9 @@ export const exercicesAlgebreProbleme6e: FicheExercicesData = {
         },
         {
           enonce: "On reprend le motif de carrés de l'exercice $5$. Il a $4$ allumettes à l'étape $1$, puis $3$ de plus à chaque étape.\na) Combien d'allumettes à l'étape $20$ ?\nb) Emma calcule $20 \\times 4 = 80$. Pourquoi est-ce faux ?",
+          reponses: [
+            { question: "a)", attendu: "61" },
+          ],
           correction:
             "a) De l'étape $1$ à l'étape $20$, il y a $19$ ajouts de $3$ allumettes.\n$4 + 19 \\times 3 = 4 + 57 = 61$ allumettes.\nb) Emma compte $4$ allumettes pour chaque carré.\nMais deux carrés voisins partagent une allumette.\nChaque nouveau carré n'en demande que $3$.\n⭐ Autre façon de voir : $1$ allumette au début, puis $3$ par carré. $1 + 20 \\times 3 = 61$.\nRéponse : $61$ allumettes ; Emma compte deux fois les allumettes partagées.",
           schema: ecranSeulement(
@@ -438,6 +492,10 @@ export const exercicesAlgebreProbleme6e: FicheExercicesData = {
         },
         {
           enonce: "On reprend le motif de triangles de l'exercice $8$. Il a $3$ allumettes à l'étape $1$, puis $2$ de plus à chaque étape. Tom a une boîte de $50$ allumettes.\na) Quelle est la plus grande étape qu'il peut construire ?\nb) Combien d'allumettes lui reste-t-il ?",
+          reponses: [
+            { question: "a)", attendu: "24" },
+            { question: "b)", attendu: "1" },
+          ],
           correction:
             "Il faut $3$ allumettes pour commencer. Il en reste $50 - 3 = 47$ pour les ajouts.\nChaque ajout demande $2$ allumettes : $47 \\div 2 = 23$, et il reste $1$.\nTom fait $23$ ajouts après l'étape $1$ : il arrive à l'étape $24$.\nL'étape $24$ demande $3 + 23 \\times 2 = 49$ allumettes.\nIl reste $50 - 49 = 1$ allumette.\n⛔ Le piège : oublier l'étape $1$ et répondre « étape $23$ ».\nRéponse : l'étape $24$ ; il reste $1$ allumette.",
           schema: ecranSeulement(
@@ -452,6 +510,10 @@ export const exercicesAlgebreProbleme6e: FicheExercicesData = {
         },
         {
           enonce: "Une ficelle de $35$ cm est coupée en deux morceaux. Le grand morceau est $4$ fois plus long que le petit. Combien mesure chaque morceau ?",
+          reponses: [
+            { question: "petit", attendu: "7" },
+            { question: "grand", attendu: "28" },
+          ],
           correction:
             "Le petit morceau : $1$ part. Le grand : $4$ parts pareilles.\nEn tout : $1 + 4 = 5$ parts égales.\n$35 \\div 5 = 7$ : une part mesure $7$ cm.\nLe petit mesure $7$ cm, le grand $4 \\times 7 = 28$ cm.\n⭐ Je vérifie : $7 + 28 = 35$.\n⛔ Le piège : diviser $35$ par $4$. Il y a $5$ parts, pas $4$.\nRéponse : $7$ cm et $28$ cm.",
           schema: ecranSeulement(
@@ -467,6 +529,10 @@ export const exercicesAlgebreProbleme6e: FicheExercicesData = {
         },
         {
           enonce: "Sur une balance, $3$ cubes et $1$ boule pèsent autant que $2$ cubes et $4$ boules. Une boule pèse $20$ g.\na) Un cube pèse autant que combien de boules ?\nb) Combien pèse un cube ?",
+          reponses: [
+            { question: "a)", attendu: "3" },
+            { question: "b)", attendu: "60" },
+          ],
           correction:
             "J'enlève $2$ cubes de chaque côté. La balance reste en équilibre.\nIl reste $1$ cube et $1$ boule d'un côté, $4$ boules de l'autre.\nJ'enlève $1$ boule de chaque côté.\nIl reste $1$ cube d'un côté, $3$ boules de l'autre.\na) Un cube pèse autant que $3$ boules.\nb) $3 \\times 20 = 60$ g.\n⭐ Je vérifie : $3 \\times 60 + 20 = 200$ et $2 \\times 60 + 4 \\times 20 = 200$.\n⛔ Le piège : enlever d'un seul côté. On enlève la même chose des DEUX côtés.\nRéponse : un cube pèse autant que $3$ boules, soit $60$ g.",
           schema: barres([
@@ -492,6 +558,12 @@ export const exercicesAlgebreProbleme6e: FicheExercicesData = {
         {
           titre: "La tirelire",
           enonce: "Zoé et Hugo ont $84$ € à eux deux. Zoé a $12$ € de plus que Hugo.\na) Dessine le schéma en barres.\nb) Combien chacun a-t-il ?\nc) Zoé donne $6$ € à Hugo. Combien a maintenant chacun ?\nd) Ils achètent ensemble un jeu à $50$ €. Chacun paie la moitié. Combien reste-t-il à chacun ?",
+          reponses: [
+            { question: "b) Zoé", attendu: "48" },
+            { question: "b) Hugo", attendu: "36" },
+            { question: "c)", attendu: "42" },
+            { question: "d)", attendu: "17" },
+          ],
           correction:
             "a) Une barre pour Hugo. Pour Zoé : la même barre, plus $12$ €.\nb) Je retire les $12$ € en plus : $84 - 12 = 72$.\nDeux barres égales : $72 \\div 2 = 36$.\nHugo a $36$ €. Zoé a $36 + 12 = 48$ €.\nc) Zoé : $48 - 6 = 42$ €. Hugo : $36 + 6 = 42$ €.\nIls ont la même somme : Zoé a donné la moitié de son avance.\nd) Chacun paie $50 \\div 2 = 25$ €.\nIl reste à chacun $42 - 25 = 17$ €.\n⭐ Je vérifie : $17 + 17 + 50 = 84$.\n⛔ Le piège : partager $84$ en deux dès le début. Zoé a plus que Hugo.\nRéponse : Hugo $36$ €, Zoé $48$ € ; puis $42$ € chacun ; il reste $17$ € à chacun.",
           schema: barres(
@@ -506,6 +578,12 @@ export const exercicesAlgebreProbleme6e: FicheExercicesData = {
         {
           titre: "Le banquet",
           enonce: "Pour une fête, on colle des tables carrées en ligne. On place les chaises comme sur le dessin.\na) Combien de chaises pour $1$, $2$ et $3$ tables ?\nb) Combien de chaises ajoute chaque nouvelle table ?\nc) Combien de chaises pour $10$ tables ?\nd) $30$ personnes viennent. Combien de tables faut-il coller ?",
+          reponses: [
+            { question: "a)", attendu: "4 ; 6 ; 8" },
+            { question: "b)", attendu: "2" },
+            { question: "c)", attendu: "22" },
+            { question: "d)", attendu: "14" },
+          ],
           figure: motif("tables", [1, 2, 3]),
           correction:
             "a) $1$ table : $4$ chaises. $2$ tables : $6$ chaises. $3$ tables : $8$ chaises.\nb) Une table de plus ajoute $2$ chaises : une devant, une derrière.\nLes chaises des deux bouts ne changent pas.\nc) De $1$ à $10$ tables, il y a $9$ ajouts de $2$ chaises.\n$4 + 9 \\times 2 = 22$ chaises.\nd) Avec $1$ table, il y a $4$ chaises. Il en manque $30 - 4 = 26$.\n$26 \\div 2 = 13$ tables de plus.\nIl faut $1 + 13 = 14$ tables.\n⭐ Je vérifie : $4 + 13 \\times 2 = 30$.\n⛔ Le piège : compter $4$ chaises par table, $10 \\times 4 = 40$. Les tables collées perdent des places.\nRéponse : $4$, $6$, $8$ ; $2$ ; $22$ chaises ; $14$ tables.",
@@ -523,6 +601,13 @@ export const exercicesAlgebreProbleme6e: FicheExercicesData = {
         {
           titre: "Les randonneurs",
           enonce: "Ana, Ben et Chloé portent $30$ kg de matériel à eux trois. Ana porte $2$ kg de plus que Ben. Chloé porte le double de Ben.\na) Dessine le schéma en barres.\nb) Combien porte chacun ?\nc) Ils veulent porter tous la même masse. Combien Chloé doit-elle donner à Ben ? Et à Ana ?",
+          reponses: [
+            { question: "b) Ben", attendu: "7" },
+            { question: "b) Ana", attendu: "9" },
+            { question: "b) Chloé", attendu: "14" },
+            { question: "c) Ben", attendu: "3" },
+            { question: "c) Ana", attendu: "1" },
+          ],
           correction:
             "a) Ben : $1$ barre. Ana : la barre de Ben, plus $2$ kg. Chloé : $2$ barres.\nb) Je retire les $2$ kg d'Ana : $30 - 2 = 28$.\nIl reste $1 + 1 + 2 = 4$ barres égales : $28 \\div 4 = 7$.\nBen porte $7$ kg. Ana porte $7 + 2 = 9$ kg. Chloé porte $2 \\times 7 = 14$ kg.\n⭐ Je vérifie : $7 + 9 + 14 = 30$.\nc) La même masse pour tous : $30 \\div 3 = 10$ kg.\nBen doit recevoir $10 - 7 = 3$ kg. Ana doit recevoir $10 - 9 = 1$ kg.\nChloé donne $3 + 1 = 4$ kg, et garde $14 - 4 = 10$ kg.\n⛔ Le piège : compter $3$ barres. Chloé en a DEUX à elle seule.\nRéponse : Ben $7$ kg, Ana $9$ kg, Chloé $14$ kg.\nChloé donne $3$ kg à Ben et $1$ kg à Ana.",
           schema: barres(
@@ -538,6 +623,12 @@ export const exercicesAlgebreProbleme6e: FicheExercicesData = {
         {
           titre: "Les places de cinéma",
           enonce: "Au cinéma, $2$ places adulte et $3$ places enfant coûtent $44$ €. Une place adulte coûte $2$ € de plus qu'une place enfant.\na) Combien coûte une place enfant ? Une place adulte ?\nb) Combien coûtent $3$ places adulte et $2$ places enfant ?\nc) Une famille a $60$ €. Peut-elle payer $2$ places adulte et $4$ places enfant ?",
+          reponses: [
+            { question: "enfant", attendu: "8" },
+            { question: "adulte", attendu: "10" },
+            { question: "b)", attendu: "46" },
+            { question: "c)", attendu: ["oui"] },
+          ],
           correction:
             "a) Une place adulte, c'est une place enfant plus $2$ €.\nJ'échange : $2$ places adulte, c'est $2$ places enfant plus $4$ €.\nLes $44$ € paient donc $5$ places enfant, plus $4$ €.\n$44 - 4 = 40$, et $40 \\div 5 = 8$.\nUne place enfant coûte $8$ €. Une place adulte coûte $8 + 2 = 10$ €.\n⭐ Je vérifie : $2 \\times 10 + 3 \\times 8 = 44$.\nb) $3 \\times 10 + 2 \\times 8 = 30 + 16 = 46$ €.\nc) $2 \\times 10 + 4 \\times 8 = 20 + 32 = 52$ €. C'est moins que $60$ € : oui.\nIl lui reste $60 - 52 = 8$ €.\n⛔ Le piège : partager $44$ en $5$ places. Les places adulte coûtent plus cher.\nRéponse : $8$ € et $10$ € ; $46$ € ; oui, et il reste $8$ €.",
           schema: barres(

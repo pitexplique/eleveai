@@ -405,6 +405,10 @@ export const exercicesThales4e: FicheExercicesData = {
         {
           enonce:
             "Voici deux figures. Sur la figure a), les chevrons indiquent que $(MN) // (BC)$. Sur la figure b), il n'y a aucun codage.\nPour chaque figure, peut-on utiliser le théorème de Thalès ? Justifier.",
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: ["non", "faux"] },
+          ],
           figure: deux(
             thales({ A: [0, 0], B: [9, 0], C: [3.6, 4.8], M: [6, 0], N: [2.4, 3.2], titre: "a)" }),
             thales({ A: [0, 0], B: [9, 0], C: [4.8, 6.4], M: [5.4, 0], N: [3.36, 4.48], noms: { A: "R", M: "S", B: "T", N: "U", C: "V" }, paralleles: false, neutre: true, titre: "b)" }),
@@ -420,6 +424,11 @@ export const exercicesThales4e: FicheExercicesData = {
         {
           enonce:
             "Sur la figure, $E$ est sur $[DF]$, $G$ est sur $[DH]$, et $(EG) // (FH)$.\na) Quel est le sommet commun ? Nommer le petit et le grand triangle.\nb) Écrire les trois rapports égaux donnés par le théorème de Thalès.",
+          reponses: [
+            { question: "a) somm.", attendu: "D" },
+            { question: "a) petit", attendu: ["DEG", "DGE", "EDG", "EGD", "GDE", "GED"] },
+            { question: "a) grand", attendu: ["DFH", "DHF", "FDH", "FHD", "HDF", "HFD"] },
+          ],
           figure: thales({ A: [0, 0], B: [8, 0], C: [2.1, 7.2], M: [3.2, 0], N: [0.84, 2.88], noms: { A: "D", M: "E", B: "F", N: "G", C: "H" } }),
           correction:
             "a) Les côtés $[DF]$ et $[DH]$ partent tous les deux de $D$ : c'est le sommet commun. Le petit triangle est $DEG$, le grand est $DFH$.\nb) Je range les côtés face à face : $DE$ va avec $DF$ (même côté), $DG$ avec $DH$ (même côté), et $EG$ avec $FH$ (les deux parallèles). J'écris le petit triangle en haut, le grand en bas, dans le même ordre.\n⛔ Le piège : écrire $\\dfrac{DE}{EF}$. $[EF]$ n'est un côté d'aucun des deux triangles : dans les deux premiers rapports, chaque longueur part de $D$.\nRéponse : $\\dfrac{DE}{DF} = \\dfrac{DG}{DH} = \\dfrac{EG}{FH}$.",
@@ -429,6 +438,11 @@ export const exercicesThales4e: FicheExercicesData = {
         {
           enonce:
             "$M$ est sur $[AB]$, $N$ est sur $[AC]$ et $(MN) // (BC)$. On donne $AM = 3{,}5$ cm et $MB = 1{,}5$ cm.\na) Calculer $AB$.\nb) Calculer le rapport $\\dfrac{AM}{AB}$.\nc) Sans rien mesurer, que vaut $\\dfrac{AN}{AC}$ ?",
+          reponses: [
+            { question: "a)", attendu: "5" },
+            { question: "b)", attendu: "0,7" },
+            { question: "c)", attendu: "0,7" },
+          ],
           correction:
             "a) $M$ est sur le segment $[AB]$ : $AB = AM + MB = 3{,}5 + 1{,}5 = 5$ cm.\nb) $\\dfrac{AM}{AB} = \\dfrac{3{,}5}{5} = 0{,}7$. Ce rapport compare une PARTIE, $AM$, au TOUT, $AB$ : $M$ est aux sept dixièmes du chemin de $A$ vers $B$.\nc) $(MN) // (BC)$ : d'après le théorème de Thalès, $\\dfrac{AN}{AC} = \\dfrac{AM}{AB}$, donc $\\dfrac{AN}{AC} = 0{,}7$. $N$ est lui aussi aux sept dixièmes de $[AC]$.\n⛔ Le piège : calculer $\\dfrac{AM}{MB} = \\dfrac{3{,}5}{1{,}5}$. C'est le rapport de deux morceaux, pas celui d'une partie au tout.\nRéponse : $AB = 5$ cm ; $\\dfrac{AM}{AB} = 0{,}7$ ; $\\dfrac{AN}{AC} = 0{,}7$.",
           schema: thales({ A: [0, 0], B: [5, 0], C: [3, 4], M: [3.5, 0], N: [2.1, 2.8], cotes: { AM: "3,5 cm", MB: "1,5 cm", AB: "AB = 5 cm" }, trouve: ["AB"] }),
@@ -437,6 +451,9 @@ export const exercicesThales4e: FicheExercicesData = {
         {
           enonce:
             "Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$ et $(MN) // (BC)$. On donne $AM = 6$ cm, $AB = 8$ cm et $AC = 10$ cm. Calculer $AN$.",
+          reponses: [
+            { attendu: "7,5" },
+          ],
           correction:
             "Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$ et $(MN) // (BC)$. D'après le théorème de Thalès : $\\dfrac{AM}{AB} = \\dfrac{AN}{AC} = \\dfrac{MN}{BC}$.\nJe garde le rapport où tout est connu et celui qui contient $AN$ : $\\dfrac{6}{8} = \\dfrac{AN}{10}$.\nC'est un tableau de proportionnalité (sous la figure). Produit en croix : $AN = \\dfrac{10 \\times 6}{8} = 7{,}5$ cm.\n⭐ Contrôle : $AN$ est plus court que $AC$, normal pour un côté du petit triangle.\n⛔ Le piège : écrire $\\dfrac{6}{8} = \\dfrac{10}{AN}$. Le petit triangle reste en haut dans les DEUX rapports.\nRéponse : $AN = 7{,}5$ cm.",
           schema: deux(
@@ -448,6 +465,9 @@ export const exercicesThales4e: FicheExercicesData = {
         {
           enonce:
             "Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$ et $(MN) // (BC)$. On donne $AM = 3$ cm, $AB = 7{,}5$ cm et $MN = 2$ cm. Calculer $BC$.",
+          reponses: [
+            { attendu: "5" },
+          ],
           correction:
             "Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$ et $(MN) // (BC)$. D'après le théorème de Thalès : $\\dfrac{AM}{AB} = \\dfrac{AN}{AC} = \\dfrac{MN}{BC}$.\nJe cherche $BC$, un côté du GRAND triangle : il est en bas du rapport $\\dfrac{MN}{BC}$. J'écris $\\dfrac{3}{7{,}5} = \\dfrac{2}{BC}$.\nProduit en croix : $BC = \\dfrac{7{,}5 \\times 2}{3} = 5$ cm.\n⭐ Contrôle : $BC$ est plus long que $MN$, et $\\dfrac{2}{5} = 0{,}4$, comme $\\dfrac{3}{7{,}5} = 0{,}4$.\n⛔ Le piège : croire que Thalès ne donne que les côtés du petit triangle. L'égalité des rapports marche dans les deux sens.\nRéponse : $BC = 5$ cm.",
           schema: thales({ A: [0, 0], B: [7.5, 0], C: [4.5, 4], M: [3, 0], N: [1.8, 1.6], cotes: { AM: "3 cm", AB: "AB = 7,5 cm", MN: "2 cm", BC: "5 cm" }, trouve: ["BC"] }),
@@ -456,6 +476,9 @@ export const exercicesThales4e: FicheExercicesData = {
         {
           enonce:
             "Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$ et $(MN) // (BC)$. On donne $AN = 4$ cm, $AC = 10$ cm et $BC = 6{,}5$ cm. Calculer $MN$.",
+          reponses: [
+            { attendu: "2,6" },
+          ],
           correction:
             "Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$ et $(MN) // (BC)$. D'après le théorème de Thalès : $\\dfrac{AM}{AB} = \\dfrac{AN}{AC} = \\dfrac{MN}{BC}$.\nJe cherche $MN$, et je connais $AN$, $AC$ et $BC$ : je prends le deuxième et le troisième rapport. $\\dfrac{4}{10} = \\dfrac{MN}{6{,}5}$.\n$MN = \\dfrac{6{,}5 \\times 4}{10} = 2{,}6$ cm.\n⛔ Le piège : croire qu'il faut toujours le premier rapport, $\\dfrac{AM}{AB}$. Ici, je ne connais ni $AM$ ni $AB$ : je prends les deux rapports où tout est connu, sauf l'inconnue.\nRéponse : $MN = 2{,}6$ cm.",
           schema: thales({ A: [0, 0], B: [7.5, 6], C: [10, 0], M: [3, 2.4], N: [4, 0], cotes: { AN: "4 cm", AC: "AC = 10 cm", BC: "6,5 cm", MN: "2,6 cm" }, trouve: ["MN"] }),
@@ -464,6 +487,11 @@ export const exercicesThales4e: FicheExercicesData = {
         {
           enonce:
             "Les points $A$, $M$, $B$ sont alignés dans cet ordre, ainsi que $A$, $N$, $C$. On mesure $AM = 2{,}4$ cm, $AB = 4$ cm, $AN = 3$ cm et $AC = 5$ cm.\na) Calculer $\\dfrac{AM}{AB}$ et $\\dfrac{AN}{AC}$.\nb) Ces rapports sont-ils égaux ? Vérifier aussi par les produits en croix.",
+          reponses: [
+            { question: "a) AM/AB", attendu: "0,6" },
+            { question: "a) AN/AC", attendu: "0,6" },
+            { question: "b)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "Ici, personne ne dit que les droites sont parallèles : je ne peux PAS écrire le théorème. Je calcule chaque rapport tout seul.\na) $\\dfrac{AM}{AB} = \\dfrac{2{,}4}{4} = 0{,}6$ et $\\dfrac{AN}{AC} = \\dfrac{3}{5} = 0{,}6$.\nb) Ils sont égaux. Par les produits en croix : $2{,}4 \\times 5 = 12$ et $4 \\times 3 = 12$. Même résultat.\n⭐ Comme les points sont aussi alignés dans le même ordre, la réciproque du théorème de Thalès permettra de conclure que $(MN) // (BC)$.\n⛔ Le piège : commencer par « d'après le théorème de Thalès ». Le théorème SUPPOSE les droites parallèles ; ici, c'est justement ce qu'on cherche à savoir.\nRéponse : les deux rapports valent $0{,}6$ : ils sont égaux.",
           schema: thales({ A: [0, 0], B: [4, 0], C: [3, 4], M: [2.4, 0], N: [1.8, 2.4], cotes: { AM: "2,4 cm", AB: "AB = 4 cm", AN: "3 cm", AC: "AC = 5 cm" } }),
@@ -472,6 +500,9 @@ export const exercicesThales4e: FicheExercicesData = {
         {
           enonce:
             "Les points $A$, $M$, $B$ sont alignés dans cet ordre, ainsi que $A$, $N$, $C$. On mesure $AM = 4$ cm, $AB = 9$ cm, $AN = 3$ cm et $AC = 7$ cm. Les droites $(MN)$ et $(BC)$ sont-elles parallèles ?",
+          reponses: [
+            { attendu: ["non", "faux"] },
+          ],
           correction:
             "Je compare $\\dfrac{AM}{AB} = \\dfrac{4}{9}$ et $\\dfrac{AN}{AC} = \\dfrac{3}{7}$. Les divisions ne tombent pas juste ($0{,}444\\ldots$ et $0{,}428\\ldots$) : je compare par les produits en croix.\n$4 \\times 7 = 28$ et $9 \\times 3 = 27$. $28 \\neq 27$ : les rapports ne sont pas égaux.\nSi les droites étaient parallèles, le théorème de Thalès dirait que les rapports sont égaux. Ils ne le sont pas : $(MN)$ et $(BC)$ ne sont pas parallèles.\n⛔ Le piège : se fier au dessin. Les deux droites font un angle de moins de $2$ degrés : à l'œil, elles ont l'air parallèles. Seul le calcul tranche.\nRéponse : non, $(MN)$ et $(BC)$ ne sont pas parallèles.",
           schema: thales({ A: [0, 0], B: [9, 0], C: [4.2, 5.6], M: [4, 0], N: [1.8, 2.4], cotes: { AM: "4 cm", AB: "AB = 9 cm", AN: "3 cm", AC: "AC = 7 cm" }, paralleles: false }),
@@ -494,6 +525,10 @@ export const exercicesThales4e: FicheExercicesData = {
         {
           enonce:
             "Dans le triangle $RST$, $U \\in [RS]$, $V \\in [RT]$ et $(UV) // (ST)$. On donne $RU = 4{,}5$ cm, $RS = 7{,}5$ cm, $RT = 9$ cm et $ST = 6$ cm. Calculer $RV$ et $UV$, en rédigeant.",
+          reponses: [
+            { question: "RV", attendu: "5,4" },
+            { question: "UV", attendu: "3,6" },
+          ],
           correction:
             "Je commence par la configuration, puis le théorème, puis le calcul.\nDans le triangle $RST$, $U \\in [RS]$, $V \\in [RT]$ et $(UV) // (ST)$.\nD'après le théorème de Thalès : $\\dfrac{RU}{RS} = \\dfrac{RV}{RT} = \\dfrac{UV}{ST}$, soit $\\dfrac{4{,}5}{7{,}5} = \\dfrac{RV}{9} = \\dfrac{UV}{6}$.\nCalcul de $RV$ : $RV = \\dfrac{9 \\times 4{,}5}{7{,}5} = 5{,}4$ cm.\nCalcul de $UV$ : $UV = \\dfrac{6 \\times 4{,}5}{7{,}5} = 3{,}6$ cm.\n⭐ Le coefficient : $\\dfrac{4{,}5}{7{,}5} = 0{,}6$. Chaque côté du petit triangle vaut $0{,}6$ fois le côté du grand : $0{,}6 \\times 9 = 5{,}4$ et $0{,}6 \\times 6 = 3{,}6$.\n⛔ Le piège : sauter la première phrase. Sans « $(UV) // (ST)$ » écrit, le calcul n'est pas justifié.\nRéponse : $RV = 5{,}4$ cm et $UV = 3{,}6$ cm.",
           schema: thales({ A: [0, 0], B: [7.5, 0], C: [6.75, 5.95294], M: [4.5, 0], N: [4.05, 3.571764], noms: { A: "R", M: "U", B: "S", N: "V", C: "T" }, cotes: { AM: "4,5 cm", AB: "RS = 7,5 cm", AC: "RT = 9 cm", BC: "6 cm", AN: "5,4 cm", MN: "3,6 cm" }, trouve: ["AN", "MN"] }),
@@ -502,6 +537,11 @@ export const exercicesThales4e: FicheExercicesData = {
         {
           enonce:
             "Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$ et $(MN) // (BC)$. On donne $AM = 5$ cm, $MB = 3$ cm et $AN = 7{,}5$ cm.\na) Calculer $AB$.\nb) Calculer $AC$, puis $NC$.",
+          reponses: [
+            { question: "a) AB", attendu: "8" },
+            { question: "b) AC", attendu: "12" },
+            { question: "b) NC", attendu: "4,5" },
+          ],
           correction:
             "a) $M$ est sur le segment $[AB]$ : $AB = AM + MB = 5 + 3 = 8$ cm.\nb) Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$ et $(MN) // (BC)$. D'après le théorème de Thalès : $\\dfrac{AM}{AB} = \\dfrac{AN}{AC}$, soit $\\dfrac{5}{8} = \\dfrac{7{,}5}{AC}$.\nProduit en croix : $AC = \\dfrac{8 \\times 7{,}5}{5} = 12$ cm.\nPuis $NC = AC - AN = 12 - 7{,}5 = 4{,}5$ cm.\n⛔ Le piège : écrire $\\dfrac{AM}{MB} = \\dfrac{AN}{AC}$, avec $MB = 3$. On trouverait $AC = \\dfrac{3 \\times 7{,}5}{5} = 4{,}5$ cm : plus court que $AN$, c'est impossible. Chaque longueur des rapports part de $A$.\nRéponse : $AB = 8$ cm, $AC = 12$ cm et $NC = 4{,}5$ cm.",
           schema: thales({ A: [0, 0], B: [8, 0], C: [9.6, 7.2], M: [5, 0], N: [6, 4.5], cotes: { AM: "5 cm", MB: "3 cm", AN: "7,5 cm", NC: "4,5 cm" }, trouve: ["NC"] }),
@@ -510,6 +550,9 @@ export const exercicesThales4e: FicheExercicesData = {
         {
           enonce:
             "Une rampe de chargement $[AC]$ relie le sol au plateau d'un camion. Le plateau est à $BC = 1$ m du sol, et le pied $A$ de la rampe est à $AB = 4$ m du camion : le triangle $ABC$ est rectangle en $B$. Un pied de soutien vertical $[MN]$ est placé à $AM = 3$ m de $A$, entre le sol et la rampe.\na) Expliquer pourquoi $(MN) // (BC)$.\nb) Calculer la hauteur $MN$ du pied de soutien.",
+          reponses: [
+            { question: "b)", attendu: "0,75" },
+          ],
           correction:
             "a) Le pied de soutien $(MN)$ et l'arrière du camion $(BC)$ sont tous les deux perpendiculaires au sol $(AB)$. Or deux droites perpendiculaires à une même droite sont parallèles : $(MN) // (BC)$.\nb) Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$ et $(MN) // (BC)$. D'après le théorème de Thalès : $\\dfrac{AM}{AB} = \\dfrac{AN}{AC} = \\dfrac{MN}{BC}$, soit $\\dfrac{3}{4} = \\dfrac{MN}{1}$.\n$MN = \\dfrac{1 \\times 3}{4} = 0{,}75$ m.\n⛔ Le piège : écrire Thalès sans avoir justifié le parallélisme. L'énoncé ne dit pas « $(MN) // (BC)$ » : c'est à moi de le prouver, avant tout calcul.\nRéponse : les deux droites sont perpendiculaires au sol, donc parallèles ; le pied mesure $0{,}75$ m.",
           schema: thales({ A: [0, 0], B: [4, 0], C: [4, 1], M: [3, 0], N: [3, 0.75], cotes: { AM: "3 m", AB: "AB = 4 m", BC: "1 m", MN: "0,75 m" }, trouve: ["MN"], droits: ["B", "M"], interieur: true }),
@@ -518,6 +561,9 @@ export const exercicesThales4e: FicheExercicesData = {
         {
           enonce:
             "Les points $A$, $M$, $B$ sont alignés dans cet ordre, ainsi que $A$, $N$, $C$. On donne $AM = 2{,}8$ cm, $AB = 7$ cm, $AN = 3{,}4$ cm, $AC = 8{,}5$ cm et $BC = 6$ cm.\na) Démontrer que $(MN) // (BC)$.\nb) En déduire $MN$.",
+          reponses: [
+            { question: "b)", attendu: "2,4" },
+          ],
           correction:
             "a) Je ne sais pas encore si les droites sont parallèles : c'est la réciproque qu'il faut.\nD'une part, $\\dfrac{AM}{AB} = \\dfrac{2{,}8}{7} = 0{,}4$. D'autre part, $\\dfrac{AN}{AC} = \\dfrac{3{,}4}{8{,}5} = 0{,}4$.\nLes rapports sont égaux, et les points $A$, $M$, $B$ et $A$, $N$, $C$ sont alignés dans le même ordre. D'après la réciproque du théorème de Thalès, $(MN) // (BC)$.\nb) MAINTENANT je sais que les droites sont parallèles : je peux me servir du théorème. Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$ et $(MN) // (BC)$. D'après le théorème de Thalès : $\\dfrac{AM}{AB} = \\dfrac{MN}{BC}$, soit $\\dfrac{2{,}8}{7} = \\dfrac{MN}{6}$.\n$MN = \\dfrac{6 \\times 2{,}8}{7} = 2{,}4$ cm.\n⛔ Le piège : mélanger les deux. La réciproque PROUVE le parallélisme ; le théorème s'en SERT pour calculer. L'une, puis l'autre.\nRéponse : $(MN) // (BC)$, et $MN = 2{,}4$ cm.",
           schema: thales({ A: [0, 0], B: [7, 0], C: [6.089286, 5.930481], M: [2.8, 0], N: [2.435714, 2.372192], cotes: { AM: "2,8 cm", AB: "AB = 7 cm", AN: "3,4 cm", AC: "AC = 8,5 cm", BC: "6 cm", MN: "2,4 cm" }, trouve: ["MN"] }),
@@ -526,6 +572,9 @@ export const exercicesThales4e: FicheExercicesData = {
         {
           enonce:
             "Les points $A$, $M$, $B$ sont alignés dans cet ordre, ainsi que $A$, $N$, $C$. On donne $AM = 3{,}2$ cm, $AB = 8$ cm, $AN = 2{,}8$ cm et $AC = 6{,}8$ cm. Un élève écrit : « $\\dfrac{AM}{AB} = 0{,}4$ et $\\dfrac{AN}{AC} \\approx 0{,}4$, donc $(MN) // (BC)$. »\nA-t-il raison ? Rédiger la bonne réponse.",
+          reponses: [
+            { attendu: ["non", "faux"] },
+          ],
           correction:
             "Je recalcule les deux rapports. $\\dfrac{AM}{AB} = \\dfrac{3{,}2}{8} = 0{,}4$, mais $\\dfrac{AN}{AC} = \\dfrac{2{,}8}{6{,}8} \\approx 0{,}41$ : la division ne tombe pas juste.\nPour trancher sans arrondi, les produits en croix : $3{,}2 \\times 6{,}8 = 21{,}76$ et $8 \\times 2{,}8 = 22{,}4$. Ils sont différents : les rapports ne sont PAS égaux.\nSi $(MN)$ et $(BC)$ étaient parallèles, le théorème de Thalès donnerait deux rapports égaux. Ce n'est pas le cas : $(MN)$ et $(BC)$ ne sont pas parallèles.\n⛔ Le piège : arrondir, puis conclure. « Presque égal », ça ne compte pas : la réciproque demande des rapports EXACTEMENT égaux.\nRéponse : l'élève a tort, $(MN)$ et $(BC)$ ne sont pas parallèles.",
           schema: thales({ A: [0, 0], B: [8, 0], C: [4.08, 5.44], M: [3.2, 0], N: [1.68, 2.24], cotes: { AM: "3,2 cm", AB: "AB = 8 cm", AN: "2,8 cm", AC: "AC = 6,8 cm" }, paralleles: false }),
@@ -534,6 +583,9 @@ export const exercicesThales4e: FicheExercicesData = {
         {
           enonce:
             "Voici la copie d'un élève : « $(MN) // (BC)$, $AM = 4$ cm, $AB = 10$ cm et $BC = 7$ cm. D'après le théorème de Thalès, $\\dfrac{AM}{AB} = \\dfrac{BC}{MN}$, donc $MN = \\dfrac{7 \\times 10}{4} = 17{,}5$ cm. »\na) Sans refaire le calcul, pourquoi ce résultat est-il impossible ?\nb) Trouver l'erreur, puis corriger.",
+          reponses: [
+            { question: "b)", attendu: "2,8" },
+          ],
           correction:
             "a) $[MN]$ est un côté du PETIT triangle $AMN$, et $[BC]$ le côté qui lui correspond dans le grand : $MN$ doit être plus court que $BC = 7$ cm. $17{,}5$ cm, c'est plus du double : impossible.\nb) L'erreur : dans $\\dfrac{BC}{MN}$, le grand triangle est en haut, alors que dans $\\dfrac{AM}{AB}$ c'est le petit. Il faut le même ordre partout : $\\dfrac{AM}{AB} = \\dfrac{MN}{BC}$, soit $\\dfrac{4}{10} = \\dfrac{MN}{7}$.\n$MN = \\dfrac{7 \\times 4}{10} = 2{,}8$ cm.\n⭐ Contrôle : $2{,}8$ est bien plus petit que $7$, et $\\dfrac{2{,}8}{7} = 0{,}4$, comme $\\dfrac{4}{10}$.\n⛔ Le piège : le rapport retourné. Petit sur grand, trois fois de suite : jamais un rapport à l'envers.\nRéponse : $MN = 2{,}8$ cm, et non $17{,}5$ cm.",
           schema: thales({ A: [0, 0], B: [10, 0], C: [5.8, 5.6], M: [4, 0], N: [2.32, 2.24], cotes: { AM: "4 cm", AB: "AB = 10 cm", BC: "7 cm", MN: "2,8 cm" }, trouve: ["MN"] }),
@@ -542,6 +594,11 @@ export const exercicesThales4e: FicheExercicesData = {
         {
           enonce:
             "Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$ et $(MN) // (BC)$. On connaît les trois côtés du grand triangle, $AB = 10$ cm, $AC = 12$ cm et $BC = 8$ cm, et on sait que $AN = 4{,}8$ cm.\na) Quel coefficient fait passer du grand triangle au petit ?\nb) Recopier et compléter le tableau des longueurs.",
+          reponses: [
+            { question: "a)", attendu: "0,4" },
+            { question: "b) AM", attendu: "4" },
+            { question: "b) MN", attendu: "3,2" },
+          ],
           figure: tableauThales(["AM", "AN", "MN"], ["AB", "AC", "BC"], ["?", "4,8", "?"], ["10", "12", "8"]),
           correction:
             "D'après le théorème de Thalès, les côtés du petit triangle $AMN$ sont proportionnels à ceux du grand triangle $ABC$ : c'est un tableau de proportionnalité.\na) La seule colonne complète est celle de $AN$ et $AC$ : le coefficient vaut $\\dfrac{4{,}8}{12} = 0{,}4$.\nb) Je complète chaque colonne par le produit en croix : $AM = \\dfrac{10 \\times 4{,}8}{12} = 4$ cm et $MN = \\dfrac{8 \\times 4{,}8}{12} = 3{,}2$ cm. C'est la même chose que multiplier par $0{,}4$.\n⛔ Le piège : prendre le coefficient dans le mauvais sens, $\\dfrac{12}{4{,}8} = 2{,}5$. Il fait passer du petit au grand, et donnerait $AM = 25$ cm : plus long que $AB$.\nRéponse : le coefficient vaut $0{,}4$ ; $AM = 4$ cm et $MN = 3{,}2$ cm.",
@@ -554,6 +611,13 @@ export const exercicesThales4e: FicheExercicesData = {
         {
           enonce:
             "Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$ et $(MN) // (BC)$. Le petit triangle $AMN$ a pour côtés $AM = 3$ cm, $AN = 4{,}2$ cm et $MN = 2{,}4$ cm, et on sait que $AB = 5$ cm.\na) Calculer $AC$ et $BC$.\nb) Calculer le périmètre de chacun des deux triangles.\nc) Le périmètre du petit triangle s'obtient-il avec le même coefficient que ses côtés ?",
+          reponses: [
+            { question: "a) AC", attendu: "7" },
+            { question: "a) BC", attendu: "4" },
+            { question: "b) AMN", attendu: "9,6" },
+            { question: "b) ABC", attendu: "16" },
+            { question: "c)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$ et $(MN) // (BC)$. D'après le théorème de Thalès : $\\dfrac{AM}{AB} = \\dfrac{AN}{AC} = \\dfrac{MN}{BC}$, soit $\\dfrac{3}{5} = \\dfrac{4{,}2}{AC} = \\dfrac{2{,}4}{BC}$.\n$AC = \\dfrac{5 \\times 4{,}2}{3} = 7$ cm et $BC = \\dfrac{5 \\times 2{,}4}{3} = 4$ cm.\nb) Périmètre de $AMN$ : $3 + 4{,}2 + 2{,}4 = 9{,}6$ cm. Périmètre de $ABC$ : $5 + 7 + 4 = 16$ cm.\nc) $\\dfrac{9{,}6}{16} = 0{,}6$, et le coefficient de Thalès vaut $\\dfrac{3}{5} = 0{,}6$. Oui : chaque côté est multiplié par $0{,}6$, donc leur somme aussi.\n⛔ Le piège : croire qu'on passe du petit périmètre au grand en ajoutant $MB = 2$ cm. Ce ne sont pas des longueurs qu'on ajoute : tous les côtés sont multipliés.\nRéponse : $AC = 7$ cm, $BC = 4$ cm ; périmètres $9{,}6$ cm et $16$ cm ; oui, le même coefficient $0{,}6$.",
           schema: deux(
@@ -579,6 +643,10 @@ export const exercicesThales4e: FicheExercicesData = {
           titre: "La cordelette dans la tente",
           enonce:
             "Laura monte sa tente pour un bivouac. Vue de face, la tente est un triangle $ABC$ : le sommet $A$ en haut, le sol $[BC]$ large de $1{,}5$ m, et deux pans de toile $[AB]$ et $[AC]$ de $1{,}25$ m. Elle tend une cordelette $[MN]$ parallèle au sol, attachée en $M$ sur $[AB]$ et en $N$ sur $[AC]$, avec $AM = 0{,}5$ m.\na) Pourquoi est-ce une configuration de Thalès ?\nb) Quelle est la longueur de la cordelette ?\nc) Pour faire sécher une serviette, il lui faut $0{,}9$ m de cordelette. À quelle distance du sommet, le long de la toile, doit-elle l'attacher ?",
+          reponses: [
+            { question: "b)", attendu: "0,6" },
+            { question: "c)", attendu: "0,75" },
+          ],
           correction:
             "a) $M$ est sur $[AB]$, $N$ sur $[AC]$, et la cordelette est parallèle au sol : $(MN) // (BC)$. Le petit triangle $AMN$ est dans le grand triangle $ABC$.\nb) Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$ et $(MN) // (BC)$. D'après le théorème de Thalès : $\\dfrac{AM}{AB} = \\dfrac{AN}{AC} = \\dfrac{MN}{BC}$, soit $\\dfrac{0{,}5}{1{,}25} = \\dfrac{MN}{1{,}5}$.\n$MN = \\dfrac{1{,}5 \\times 0{,}5}{1{,}25} = 0{,}6$ m.\nc) Cette fois, je connais $MN = 0{,}9$ m et je cherche $AM$ : $\\dfrac{AM}{1{,}25} = \\dfrac{0{,}9}{1{,}5}$.\n$AM = \\dfrac{1{,}25 \\times 0{,}9}{1{,}5} = 0{,}75$ m.\n⭐ Plus la cordelette est longue, plus elle est attachée bas : $0{,}75$ m, c'est plus loin du sommet que $0{,}5$ m.\n⛔ Le piège : mesurer depuis le sol. Les longueurs des rapports partent du sommet $A$ : c'est $AM$, pas $MB$.\nRéponse : $0{,}6$ m de cordelette ; pour $0{,}9$ m, il faut l'attacher à $0{,}75$ m du sommet.",
           schema: deux(
@@ -591,6 +659,10 @@ export const exercicesThales4e: FicheExercicesData = {
           titre: "Le service au tennis",
           enonce:
             "Sur un court de tennis, la ligne de fond est à $11{,}885$ m du filet, et la ligne de service, de l'autre côté, à $6{,}40$ m du filet. Le filet mesure $0{,}914$ m de haut en son milieu. On modélise un service « à plat » par une ligne droite : la balle part du point $C$, à la verticale du point $B$ de la ligne de fond, passe au ras du haut du filet $N$ et touche le sol en $A$, sur la ligne de service. $M$ est le pied du filet.\na) Pourquoi $(MN)$ et $(BC)$ sont-elles parallèles ?\nb) À quelle hauteur $BC$ faut-il frapper la balle ? Arrondir au centimètre.\nc) Un joueur frappe à $2{,}40$ m de haut. En ligne droite, à quelle hauteur sa balle passerait-elle au-dessus du pied du filet ? Conclure.",
+          reponses: [
+            { question: "b)", attendu: "2,61", tolerance: 0.005 },
+            { question: "c)", attendu: "0,84", tolerance: 0.005 },
+          ],
           correction:
             "a) Le filet et la verticale du joueur sont tous les deux perpendiculaires au sol : $(MN) // (BC)$. $A$, $M$, $B$ sont alignés au sol, et $A$, $N$, $C$ sur la trajectoire.\nb) D'abord la distance au sol : $AB = AM + MB = 6{,}4 + 11{,}885 = 18{,}285$ m.\nDans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$ et $(MN) // (BC)$. D'après le théorème de Thalès : $\\dfrac{AM}{AB} = \\dfrac{MN}{BC}$, soit $\\dfrac{6{,}4}{18{,}285} = \\dfrac{0{,}914}{BC}$.\n$BC = \\dfrac{18{,}285 \\times 0{,}914}{6{,}4} \\approx 2{,}61$ m.\nc) Cette fois $BC = 2{,}4$ m, et je cherche la hauteur de la balle à l'aplomb du filet : $MN = \\dfrac{2{,}4 \\times 6{,}4}{18{,}285} \\approx 0{,}84$ m.\n$0{,}84$ m, c'est moins que $0{,}914$ m : en ligne droite, la balle finirait dans le filet.\n⭐ Une vraie balle ne suit pas une droite : la pesanteur et l'effet (le « lift ») la font plonger après le filet. C'est pour ça qu'on peut servir sans mesurer $2{,}61$ m bras levé.\n⛔ Le piège : prendre $11{,}885$ m pour $AB$. La balle voyage de $B$ jusqu'à $A$, au-delà du filet : $AB = 18{,}285$ m.\nRéponse : il faudrait frapper à environ $2{,}61$ m ; à $2{,}40$ m, la balle passerait à $0{,}84$ m, sous le haut du filet.",
           schema: thales({ A: [0, 0], B: [18.285, 0], C: [18.285, 2.611327], M: [6.4, 0], N: [6.4, 0.914], cotes: { AM: "6,4 m", MB: "11,885 m", MN: "0,914 m", BC: "2,61 m" }, trouve: ["BC"], interieur: true, decale: { MN: [0, -14] } }),
@@ -600,6 +672,11 @@ export const exercicesThales4e: FicheExercicesData = {
           titre: "Le trait de côte recule",
           enonce:
             "Selon le GIEC (2021), le niveau moyen des mers pourrait monter de $0{,}28$ m à $1{,}01$ m d'ici 2100, selon nos émissions. Sur une plage en pente régulière, le pied de la dune $C$ est $3$ m plus haut que la mer, et à $24$ m à l'horizontale du bord de l'eau $A$ : le point $B$ est sous $C$, au niveau de la mer. Si la mer monte de $MN = 0{,}6$ m, le nouveau bord de l'eau est en $N$, sur la pente, à la verticale du point $M$ de $[AB]$.\na) Pourquoi $(MN) // (BC)$ ?\nb) De combien de mètres le bord de l'eau avance-t-il (la longueur $AM$) ? Quelle largeur de plage reste-t-il devant la dune ?\nc) Même question si la mer monte de $1$ m.",
+          reponses: [
+            { question: "b) AM", attendu: "4,8" },
+            { question: "b) reste", attendu: "19,2" },
+            { question: "c) AM", attendu: "8" },
+          ],
           correction:
             "a) $(MN)$ et $(BC)$ sont verticales toutes les deux : elles sont parallèles. $A$, $M$, $B$ sont sur l'ancien niveau de la mer, et $A$, $N$, $C$ sur la pente de la plage.\nb) Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$ et $(MN) // (BC)$. D'après le théorème de Thalès : $\\dfrac{AM}{AB} = \\dfrac{MN}{BC}$, soit $\\dfrac{AM}{24} = \\dfrac{0{,}6}{3}$.\n$AM = \\dfrac{24 \\times 0{,}6}{3} = 4{,}8$ m. Il reste $24 - 4{,}8 = 19{,}2$ m de plage devant la dune.\nc) $AM = \\dfrac{24 \\times 1}{3} = 8$ m : la mer avance de $8$ m, un tiers de la plage.\n⭐ Ici, chaque mètre de hausse fait avancer la mer de $8$ m : c'est le rapport $\\dfrac{24}{3}$. Sur une plage plus plate, le recul serait encore plus grand. (C'est un modèle simple : les vagues et l'érosion font reculer la côte davantage.)\n⛔ Le piège : croire que la mer avance de $0{,}6$ m. Elle MONTE de $0{,}6$ m, mais elle AVANCE à l'horizontale de bien plus : c'est $AM$, pas $MN$.\nRéponse : la mer avance de $4{,}8$ m et il reste $19{,}2$ m de plage ; elle avancerait de $8$ m si elle montait de $1$ m.",
           schema: thales({ A: [0, 0], B: [24, 0], C: [24, 12], M: [4.8, 0], N: [4.8, 2.4], cotes: { AM: "4,8 m", AB: "AB = 24 m", MN: "0,6 m", BC: "3 m" }, trouve: ["AM"], echelle: false, droits: ["B", "M"] }),
@@ -609,6 +686,11 @@ export const exercicesThales4e: FicheExercicesData = {
           titre: "L'éclipse totale de Soleil",
           enonce:
             "Pendant une éclipse totale, la Lune cache juste le Soleil. On modélise : l'œil est en $A$ ; le diamètre $[MN]$ de la Lune et le diamètre $[BC]$ du Soleil sont parallèles, avec $A$, $M$, $B$ alignés et $A$, $N$, $C$ alignés. Valeurs arrondies : la Lune mesure $3\\,500$ km de diamètre et se trouve à $AM = 380\\,000$ km ; le Soleil mesure $1\\,400\\,000$ km de diamètre.\na) Combien de fois le Soleil est-il plus large que la Lune ?\nb) Calculer la distance $AB$ de la Terre au Soleil.\nc) La vraie distance moyenne est d'environ $150$ millions de km. Le modèle est-il bon ?",
+          reponses: [
+            { question: "a)", attendu: "400" },
+            { question: "b)", attendu: "152000000" },
+            { question: "c)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) $1\\,400\\,000 \\div 3\\,500 = 400$ : le Soleil est $400$ fois plus large que la Lune.\nb) Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$ et $(MN) // (BC)$. D'après le théorème de Thalès : $\\dfrac{AM}{AB} = \\dfrac{MN}{BC}$, soit $\\dfrac{380\\,000}{AB} = \\dfrac{3\\,500}{1\\,400\\,000}$.\n$AB = \\dfrac{380\\,000 \\times 1\\,400\\,000}{3\\,500} = 152\\,000\\,000$ km.\n⭐ Plus simple : le Soleil est $400$ fois plus large, il est donc $400$ fois plus loin, $400 \\times 380\\,000 = 152\\,000\\,000$ km. C'est cette coïncidence qui rend les éclipses totales possibles.\nc) $152$ millions de km contre environ $150$ millions : l'écart est de $2$ millions de km, à peine plus de $1$ %. Avec des valeurs arrondies, c'est un très bon résultat.\n⛔ Le piège : écrire $\\dfrac{AM}{AB} = \\dfrac{BC}{MN}$. Les deux rapports doivent comparer la Lune (le petit triangle) au Soleil (le grand) dans le même ordre ; sinon on trouverait $AB = 950$ km, plus près que la Lune !\nRéponse : $400$ fois ; $AB = 152\\,000\\,000$ km, très proche des $150$ millions de km réels.",
           schema: thales({ A: [0, 0], B: [-3, 12], C: [3, 12], M: [-1, 4], N: [1, 4], cotes: { AM: "380 000 km", AB: "152 000 000 km", MN: "3 500 km", BC: "1 400 000 km" }, trouve: ["AB"], echelle: false, remplir: true, decale: { MN: [55, 12] } }),

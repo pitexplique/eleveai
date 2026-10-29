@@ -277,6 +277,13 @@ export const exercicesPerimetres4e: FicheExercicesData = {
         {
           enonce:
             "Pour chaque situation, dire si l'on cherche un périmètre ou une aire.\na) Coller une baguette tout autour d'un cadre photo.\nb) Couvrir le fond du cadre d'un papier de couleur.\nc) Faire courir une guirlande autour d'une fenêtre.\nd) Tondre une pelouse.\ne) Le cadre est un rectangle de $15$ cm sur $10$ cm. Quelle longueur de baguette faut-il ?",
+          reponses: [
+            { question: "a)", attendu: "périmètre" },
+            { question: "b)", attendu: "aire" },
+            { question: "c)", attendu: "périmètre" },
+            { question: "d)", attendu: "aire" },
+            { question: "e)", attendu: "50" },
+          ],
           correction:
             "Je me pose une seule question : est-ce que je fais le TOUR, ou est-ce que je RECOUVRE ?\na) La baguette fait le tour du cadre : c'est un périmètre, en cm.\nb) Le papier recouvre le fond : c'est une aire, en cm².\nc) La guirlande fait le tour de la fenêtre : un périmètre, en m.\nd) La tondeuse passe sur toute la pelouse : une aire, en m².\ne) Je fais le tour du cadre : $15 + 10 + 15 + 10 = 50$ cm. Avec la formule : $2 \\times (15 + 10) = 50$ cm.\n⛔ Le piège : calculer $15 \\times 10 = 150$. C'est l'aire du cadre, en cm² : la quantité de papier, pas la longueur de baguette.\nRéponse : a) et c) sont des périmètres, b) et d) des aires ; il faut $50$ cm de baguette.",
           schema: plan({
@@ -293,6 +300,11 @@ export const exercicesPerimetres4e: FicheExercicesData = {
         },
         {
           enonce: "Calculer le périmètre de chaque rectangle.\na) Un rectangle de $14$ cm sur $6{,}5$ cm.\nb) Un rectangle de $1{,}2$ m sur $45$ cm. Donner le résultat en cm, puis en m.",
+          reponses: [
+            { question: "a)", attendu: "41" },
+            { question: "b) cm", attendu: "330" },
+            { question: "b) m", attendu: "3,3" },
+          ],
           correction:
             "a) Sur le tour d'un rectangle, la longueur et la largeur passent chacune DEUX fois. $P = 2 \\times (14 + 6{,}5) = 2 \\times 20{,}5 = 41$ cm.\nJe vérifie en faisant le tour : $14 + 6{,}5 + 14 + 6{,}5 = 41$.\nb) Les deux longueurs ne sont pas dans la même unité : je convertis d'abord. $1{,}2$ m $= 120$ cm.\n$P = 2 \\times (120 + 45) = 2 \\times 165 = 330$ cm, soit $3{,}3$ m.\n⛔ Le piège au b) : calculer $2 \\times (1{,}2 + 45) = 92{,}4$. Ce nombre mélange des mètres et des centimètres : il ne veut rien dire.\nRéponse : $41$ cm ; $330$ cm, soit $3{,}3$ m.",
           schema: deux(
@@ -319,6 +331,10 @@ export const exercicesPerimetres4e: FicheExercicesData = {
         },
         {
           enonce: "a) Calculer le périmètre d'un carré de côté $7{,}5$ cm.\nb) Un carré a un périmètre de $46$ m. Quelle est la longueur de son côté ?",
+          reponses: [
+            { question: "a)", attendu: "30" },
+            { question: "b)", attendu: "11,5" },
+          ],
           correction:
             "a) Les quatre côtés d'un carré sont égaux : $P = 4 \\times 7{,}5 = 30$ cm.\nb) Cette fois, je connais le tour et je cherche le côté : je remonte le calcul. Le tour contient QUATRE côtés égaux, donc je divise par $4$ : $46 \\div 4 = 11{,}5$ m.\nJe vérifie : $4 \\times 11{,}5 = 46$.\n⛔ Le piège au b) : diviser par $2$, comme pour un rectangle, et trouver $46 \\div 2 = 23$ m. Un carré de côté $23$ m aurait un tour de $92$ m.\nRéponse : $30$ cm ; le côté mesure $11{,}5$ m.",
           schema: deux(
@@ -346,6 +362,10 @@ export const exercicesPerimetres4e: FicheExercicesData = {
         },
         {
           enonce: "Calculer le périmètre de chaque triangle.\na) Un triangle de côtés $9$ cm, $6{,}5$ cm et $11$ cm.\nb) Un triangle équilatéral de côté $8{,}5$ cm.",
+          reponses: [
+            { question: "a)", attendu: "26,5" },
+            { question: "b)", attendu: "25,5" },
+          ],
           correction:
             "a) Un triangle n'a pas de formule raccourcie : j'additionne ses trois côtés, sans en sauter. $9 + 6{,}5 + 11 = 26{,}5$ cm.\nb) « Équilatéral » veut dire que les trois côtés sont égaux. $P = 3 \\times 8{,}5 = 25{,}5$ cm.\n⛔ Le piège au b) : répondre $8{,}5$ cm parce qu'un seul nombre est écrit. L'énoncé donne UN côté, mais le triangle en a trois, tous de $8{,}5$ cm.\nRéponse : $26{,}5$ cm ; $25{,}5$ cm.",
           schema: deux(
@@ -370,6 +390,9 @@ export const exercicesPerimetres4e: FicheExercicesData = {
         },
         {
           enonce: "Un triangle isocèle a un périmètre de $31$ cm. Sa base mesure $9$ cm. Calculer la longueur de chacun des deux côtés égaux.",
+          reponses: [
+            { attendu: "11" },
+          ],
           correction:
             "Je fais le tour : la base, puis deux côtés égaux. Le tour vaut $31$ cm.\nJe retire d'abord la base : $31 - 9 = 22$ cm. Il reste les DEUX côtés égaux ensemble.\nJe partage en deux : $22 \\div 2 = 11$ cm.\nJe vérifie : $9 + 11 + 11 = 31$.\n⛔ Le piège : s'arrêter à $22$ cm. Ce nombre est la somme des deux côtés égaux, pas la longueur d'un seul.\nRéponse : chacun des deux côtés égaux mesure $11$ cm.",
           schema: plan({
@@ -384,6 +407,9 @@ export const exercicesPerimetres4e: FicheExercicesData = {
         },
         {
           enonce: "Un rectangle a un périmètre de $52$ m et une largeur de $9{,}5$ m. Quelle est sa longueur ?",
+          reponses: [
+            { attendu: "16,5" },
+          ],
           correction:
             "Le tour d'un rectangle, c'est une longueur et une largeur, DEUX fois. La moitié du périmètre donne donc une longueur plus une largeur : $52 \\div 2 = 26$ m.\nPuis je retire la largeur : $26 - 9{,}5 = 16{,}5$ m.\nJe vérifie : $2 \\times (16{,}5 + 9{,}5) = 2 \\times 26 = 52$.\n⛔ Le piège : calculer $52 - 9{,}5 = 42{,}5$ m. On n'a retiré qu'UNE largeur, alors que le tour en contient deux, et il reste deux longueurs.\nRéponse : la longueur mesure $16{,}5$ m.",
           schema: plan({
@@ -401,6 +427,10 @@ export const exercicesPerimetres4e: FicheExercicesData = {
         {
           enonce:
             "On pose un triangle équilatéral de côté $6{,}5$ cm sur un carré de côté $6{,}5$ cm : la figure ressemble à une maison.\na) Combien de côtés a le contour de la maison ?\nb) Calculer son périmètre.",
+          reponses: [
+            { question: "a)", attendu: "5" },
+            { question: "b)", attendu: "32,5" },
+          ],
           correction:
             "a) Je suis le contour du doigt : trois côtés du carré (le bas et les deux murs), puis les deux côtés du toit. Le côté du haut du carré est COLLÉ au triangle : il est à l'intérieur, il n'est plus sur le tour. Le contour a $5$ côtés.\nb) Les cinq côtés mesurent tous $6{,}5$ cm : $5 \\times 6{,}5 = 32{,}5$ cm.\n⛔ Le piège : additionner les deux périmètres, $4 \\times 6{,}5 + 3 \\times 6{,}5 = 26 + 19{,}5 = 45{,}5$ cm. Le côté caché est alors compté deux fois, une pour chaque figure : $45{,}5 - 2 \\times 6{,}5 = 32{,}5$.\nRéponse : le contour a $5$ côtés, et la maison a un périmètre de $32{,}5$ cm.",
           schema: plan({
@@ -418,6 +448,10 @@ export const exercicesPerimetres4e: FicheExercicesData = {
         },
         {
           enonce: "Un quadrilatère a pour côtés $0{,}4$ m, $25$ cm, $300$ mm et $2{,}2$ dm. Calculer son périmètre, en centimètres puis en mètres.",
+          reponses: [
+            { question: "cm", attendu: "117" },
+            { question: "m", attendu: "1,17" },
+          ],
           correction:
             "On n'additionne que des longueurs écrites dans la MÊME unité. Je convertis tout en centimètres.\n$0{,}4$ m $= 40$ cm, car $1$ m $= 100$ cm.\n$300$ mm $= 30$ cm, car $10$ mm $= 1$ cm.\n$2{,}2$ dm $= 22$ cm, car $1$ dm $= 10$ cm.\nPuis je fais le tour : $40 + 25 + 30 + 22 = 117$ cm, soit $1{,}17$ m.\n⛔ Le piège : additionner les nombres tels quels, $0{,}4 + 25 + 300 + 2{,}2 = 327{,}6$. Ce résultat mélange quatre unités : il ne veut rien dire.\nRéponse : le périmètre vaut $117$ cm, soit $1{,}17$ m.",
           schema: plan({
@@ -449,6 +483,12 @@ export const exercicesPerimetres4e: FicheExercicesData = {
         {
           enonce:
             "Un escalier vu de côté a la forme ci-dessous : $12$ cm de base, $9$ cm de haut, et trois marches identiques.\na) Calculer la largeur et la hauteur d'une marche.\nb) Calculer le périmètre de la figure.\nc) Comparer avec le périmètre d'un rectangle de $12$ cm sur $9$ cm.",
+          reponses: [
+            { question: "a) larg", attendu: "4" },
+            { question: "a) haut", attendu: "3" },
+            { question: "b)", attendu: "42" },
+            { question: "c)", attendu: ["42", "le même", "égal", "égaux", "identique", "pareil"] },
+          ],
           figure: plan({
             unite: "cm",
             morceaux: [
@@ -481,6 +521,10 @@ export const exercicesPerimetres4e: FicheExercicesData = {
         },
         {
           enonce: "Le triangle $ABC$ est rectangle en $B$, avec $AB = 15$ cm et $BC = 8$ cm.\na) Calculer la longueur $AC$.\nb) En déduire le périmètre du triangle.",
+          reponses: [
+            { question: "a)", attendu: "17" },
+            { question: "b)", attendu: "40" },
+          ],
           correction:
             "a) Il manque un côté : je ne peux pas encore faire le tour. Le triangle est rectangle en $B$, donc son hypoténuse est $[AC]$, le côté en face de l'angle droit. Le théorème de Pythagore donne : $AC^2 = AB^2 + BC^2 = 15^2 + 8^2 = 225 + 64 = 289$.\nDonc $AC = \\sqrt{289} = 17$ cm.\nb) Je fais le tour : $15 + 8 + 17 = 40$ cm.\n⛔ Le piège : s'arrêter à $15 + 8 = 23$ cm. Un triangle a TROIS côtés ; celui qu'on ne connaît pas est sur le contour, lui aussi.\nRéponse : $AC = 17$ cm, et le périmètre vaut $40$ cm.",
           schema: plan({
@@ -495,6 +539,10 @@ export const exercicesPerimetres4e: FicheExercicesData = {
         },
         {
           enonce: "Une figure est un quart de disque de rayon $8$ cm.\na) Calculer la longueur de l'arc (la partie courbe), arrondie au centième.\nb) Calculer le périmètre de toute la figure, arrondi au centième.",
+          reponses: [
+            { question: "a)", attendu: "12,57", tolerance: 0.005 },
+            { question: "b)", attendu: "28,57", tolerance: 0.005 },
+          ],
           correction:
             "a) L'arc est le quart d'un cercle de rayon $8$ cm. Le cercle entier mesure $2 \\times \\pi \\times 8 = 16\\pi$ cm ; l'arc en est le quart : $16\\pi \\div 4 = 4\\pi \\approx 12{,}57$ cm.\nb) Je suis le contour : un rayon, l'arc, puis l'autre rayon qui revient au centre. $8 + 4\\pi + 8 = 16 + 4\\pi \\approx 28{,}57$ cm.\n⭐ Je garde $4\\pi$ dans la calculatrice et j'arrondis à la fin.\n⛔ Le piège : s'arrêter à l'arc au b). Les deux rayons ferment la figure : ils sont sur le contour.\nRéponse : l'arc mesure environ $12{,}57$ cm, la figure environ $28{,}57$ cm.",
           schema: plan({
@@ -510,6 +558,11 @@ export const exercicesPerimetres4e: FicheExercicesData = {
         {
           enonce:
             "Un triangle équilatéral de côté $14$ cm et un rectangle ont le même périmètre. La longueur du rectangle est le double de sa largeur.\na) Calculer le périmètre du triangle.\nb) Calculer les dimensions du rectangle.",
+          reponses: [
+            { question: "a)", attendu: "42" },
+            { question: "b) long", attendu: "14" },
+            { question: "b) larg", attendu: "7" },
+          ],
           correction:
             "a) Trois côtés égaux : $3 \\times 14 = 42$ cm.\nb) Le rectangle a donc un tour de $42$ cm. J'appelle $l$ sa largeur ; sa longueur vaut $2l$. En faisant le tour : $l + 2l + l + 2l = 6l$.\nDonc $6l = 42$, et $l = 42 \\div 6 = 7$ cm. La longueur vaut $2 \\times 7 = 14$ cm.\nJe vérifie : $2 \\times (14 + 7) = 42$.\n⛔ Le piège : écrire $3l = 42$, en comptant la longueur et la largeur une seule fois. On trouve $l = 14$ et un rectangle de $28$ cm sur $14$ cm, dont le tour fait $84$ cm.\nRéponse : $42$ cm ; le rectangle mesure $14$ cm sur $7$ cm.",
           schema: deux(
@@ -537,6 +590,10 @@ export const exercicesPerimetres4e: FicheExercicesData = {
         {
           enonce:
             "Un potager a la forme d'un trapèze rectangle : ses deux côtés parallèles mesurent $7$ m et $4$ m, et le côté perpendiculaire à ces deux-là mesure $4$ m.\na) Calculer la longueur du côté oblique.\nb) On pose une bordure tout autour, vendue $3{,}25$ € le mètre. Quel est le prix de la bordure ?",
+          reponses: [
+            { question: "a)", attendu: "5" },
+            { question: "b)", attendu: "65" },
+          ],
           figure: plan({
             unite: "m",
             morceaux: [
@@ -563,6 +620,13 @@ export const exercicesPerimetres4e: FicheExercicesData = {
         {
           enonce:
             "Un rectangle mesure $5{,}5$ cm sur $3{,}5$ cm. On l'agrandit : toutes ses longueurs sont multipliées par $3$.\na) Calculer les dimensions du nouveau rectangle.\nb) Calculer les deux périmètres. Par combien le périmètre est-il multiplié ?",
+          reponses: [
+            { question: "a) long", attendu: "16,5" },
+            { question: "a) larg", attendu: "10,5" },
+            { question: "b) avant", attendu: "18" },
+            { question: "b) après", attendu: "54" },
+            { question: "b) ×", attendu: "3" },
+          ],
           correction:
             "a) $5{,}5 \\times 3 = 16{,}5$ cm et $3{,}5 \\times 3 = 10{,}5$ cm.\nb) Avant : $2 \\times (5{,}5 + 3{,}5) = 2 \\times 9 = 18$ cm. Après : $2 \\times (16{,}5 + 10{,}5) = 2 \\times 27 = 54$ cm.\nEt $54 \\div 18 = 3$ : le périmètre est multiplié par $3$, comme chaque côté. C'est normal : le périmètre est une SOMME de côtés, et chaque côté a été multiplié par $3$.\n⭐ L'aire, elle, n'obéit pas à la même règle : elle passe de $19{,}25$ cm² à $173{,}25$ cm², elle est multipliée par $9$.\n⛔ Le piège : AJOUTER $3$ au lieu de multiplier. Le rectangle de $8{,}5$ cm sur $6{,}5$ cm n'a plus la même forme, et son tour fait $30$ cm.\nRéponse : $16{,}5$ cm sur $10{,}5$ cm ; $18$ cm puis $54$ cm, le périmètre est multiplié par $3$.",
           schema: plan({
@@ -583,6 +647,11 @@ export const exercicesPerimetres4e: FicheExercicesData = {
         {
           enonce:
             "Une croix est formée de cinq carrés de $3$ cm de côté : un au centre, et un collé sur chacun de ses quatre côtés.\na) Combien de côtés de $3$ cm y a-t-il sur le contour de la croix ?\nb) Calculer son périmètre.\nc) Comparer avec le périmètre du plus petit carré qui contient la croix.",
+          reponses: [
+            { question: "a)", attendu: "12" },
+            { question: "b)", attendu: "36" },
+            { question: "c)", attendu: ["36", "le même", "égal", "égaux", "identique", "pareil"] },
+          ],
           figure: plan({
             unite: "cm",
             morceaux: [
@@ -632,6 +701,12 @@ export const exercicesPerimetres4e: FicheExercicesData = {
         {
           enonce:
             "Un panneau a la forme d'un octogone régulier (huit côtés égaux) de $30$ cm de côté. On colle un ruban réfléchissant sur tout son bord.\na) Quelle longueur de ruban faut-il, en cm puis en m ?\nb) Un panneau en forme de triangle équilatéral a le même périmètre. Quel est son côté ?\nc) Même question pour un panneau carré.",
+          reponses: [
+            { question: "a) cm", attendu: "240" },
+            { question: "a) m", attendu: "2,4" },
+            { question: "b)", attendu: "80" },
+            { question: "c)", attendu: "60" },
+          ],
           correction:
             "a) « Octo » veut dire huit : le bord a $8$ côtés de $30$ cm. $8 \\times 30 = 240$ cm, soit $2{,}4$ m.\nb) Le triangle a le même tour, $240$ cm, partagé en $3$ côtés égaux : $240 \\div 3 = 80$ cm.\nc) Le carré : $240 \\div 4 = 60$ cm.\n⭐ Moins il y a de côtés, plus chacun est long, pour un même tour.\n⛔ Le piège : diviser toujours par $4$, par habitude du carré. Au b), $240 \\div 4 = 60$ cm donnerait un triangle de $180$ cm de tour.\nRéponse : $240$ cm, soit $2{,}4$ m ; $80$ cm ; $60$ cm.",
           schema: plan({
@@ -668,6 +743,11 @@ export const exercicesPerimetres4e: FicheExercicesData = {
           titre: "Le tour du terrain de football",
           enonce:
             "Un terrain de football mesure $105$ m de long et $68$ m de large. Pour s'échauffer, une joueuse court le long des lignes qui le bordent.\na) Quelle distance parcourt-elle en un tour ?\nb) Combien de tours complets doit-elle faire pour courir au moins $5$ km ?\nc) Le rond central a un rayon de $9{,}15$ m. Quelle est la longueur de sa ligne, au centième ?",
+          reponses: [
+            { question: "a)", attendu: "346" },
+            { question: "b)", attendu: "15" },
+            { question: "c)", attendu: "57,49", tolerance: 0.005 },
+          ],
           correction:
             "a) Le bord du terrain est un rectangle : $P = 2 \\times (105 + 68) = 2 \\times 173 = 346$ m.\nb) $5$ km $= 5\\,000$ m. $5\\,000 \\div 346 \\approx 14{,}45$. Quatorze tours ne font que $14 \\times 346 = 4\\,844$ m : il manque un peu. Il faut $15$ tours, soit $5\\,190$ m.\nc) Le rond central est un cercle : $2 \\times \\pi \\times 9{,}15 = 18{,}3\\pi \\approx 57{,}49$ m.\n⛔ Le piège : calculer $105 \\times 68 = 7\\,140$. C'est l'aire du terrain, en m² : la pelouse à tondre, pas la distance d'un tour.\n⛔ Et la ligne médiane, en pointillés, est À L'INTÉRIEUR : la joueuse ne court pas dessus.\nRéponse : $346$ m par tour, $15$ tours pour dépasser $5$ km, et environ $57{,}49$ m pour le rond central.",
           schema: plan({
@@ -688,6 +768,11 @@ export const exercicesPerimetres4e: FicheExercicesData = {
           titre: "Le court de tennis",
           enonce:
             "Un court de tennis mesure $23{,}77$ m de long. Il est large de $10{,}97$ m pour le double, mais le simple se joue dans un couloir plus étroit, de $8{,}23$ m.\na) Calculer le périmètre du court de double.\nb) Calculer le périmètre du court de simple.\nc) Calculer l'écart entre les deux, et l'expliquer à l'aide des largeurs.",
+          reponses: [
+            { question: "a)", attendu: "69,48" },
+            { question: "b)", attendu: "64" },
+            { question: "c)", attendu: "5,48" },
+          ],
           correction:
             "a) Double : $2 \\times (23{,}77 + 10{,}97) = 2 \\times 34{,}74 = 69{,}48$ m.\nb) Simple : $2 \\times (23{,}77 + 8{,}23) = 2 \\times 32 = 64$ m.\nc) $69{,}48 - 64 = 5{,}48$ m. Les longueurs sont les mêmes ; seules les largeurs changent, de $10{,}97 - 8{,}23 = 2{,}74$ m. Et une largeur passe DEUX fois dans le tour : $2 \\times 2{,}74 = 5{,}48$ m.\n⛔ Le piège : répondre $2{,}74$ m, l'écart d'une seule largeur. Le tour contient deux largeurs, l'écart est doublé.\nRéponse : $69{,}48$ m pour le double, $64$ m pour le simple, soit $5{,}48$ m d'écart.",
           schema: plan({
@@ -709,6 +794,16 @@ export const exercicesPerimetres4e: FicheExercicesData = {
           titre: "Le flocon de neige",
           enonce:
             "On part d'un triangle équilatéral de $27$ cm de côté (étape 0). À chaque étape, on coupe chaque segment du contour en trois parts égales, et on remplace la part du milieu par deux segments de même longueur, qui forment une pointe vers l'extérieur.\na) Calculer le périmètre à l'étape 0.\nb) À l'étape 1, combien le contour a-t-il de segments, et de quelle longueur ? Calculer le périmètre.\nc) Même question aux étapes 2 et 3.\nd) Par combien le périmètre est-il multiplié à chaque étape ? En déduire le périmètre à l'étape 4.",
+          reponses: [
+            { question: "a)", attendu: "81" },
+            { question: "b) nb", attendu: "12" },
+            { question: "b) long", attendu: "9" },
+            { question: "b) P", attendu: "108" },
+            { question: "c) P2", attendu: "144" },
+            { question: "c) P3", attendu: "192" },
+            { question: "d) ×", attendu: "4/3" },
+            { question: "d) P4", attendu: "256" },
+          ],
           correction:
             "a) Trois côtés de $27$ cm : $3 \\times 27 = 81$ cm.\nb) Chaque côté devient $4$ segments de $27 \\div 3 = 9$ cm : j'en enlève un (le milieu), j'en ajoute deux (la pointe). Le contour a $3 \\times 4 = 12$ segments : $12 \\times 9 = 108$ cm.\nc) Étape 2 : $12 \\times 4 = 48$ segments de $9 \\div 3 = 3$ cm, soit $48 \\times 3 = 144$ cm. Étape 3 : $48 \\times 4 = 192$ segments de $1$ cm, soit $192$ cm.\nd) À chaque étape, chaque segment est remplacé par $4$ segments trois fois plus courts : le périmètre est multiplié par $\\dfrac{4}{3}$. Je vérifie : $81 \\times \\dfrac{4}{3} = 108$. À l'étape 4 : $192 \\times \\dfrac{4}{3} = 256$ cm.\n⭐ La figure reste toujours dans le même cadre, et pourtant son tour grandit sans fin. C'est le « paradoxe de la côte » : plus on mesure une côte rocheuse de près, plus elle paraît longue.\n⛔ Le piège : croire que le tour ne change pas, puisqu'on enlève un segment de $9$ cm pour en mettre deux de $9$ cm. On enlève UN segment et on en ajoute DEUX : chaque côté gagne $9$ cm, $81 + 3 \\times 9 = 108$.\nRéponse : $81$ cm, $108$ cm, $144$ cm, $192$ cm, puis $256$ cm à l'étape 4 ; le périmètre est multiplié par $\\dfrac{4}{3}$ à chaque étape.",
           schema: deux(
@@ -747,6 +842,12 @@ export const exercicesPerimetres4e: FicheExercicesData = {
           titre: "La clôture du pré",
           enonce:
             "Un pré a la forme d'un triangle rectangle dont les deux côtés de l'angle droit mesurent $60$ m et $45$ m. On veut le clôturer.\na) Calculer la longueur du troisième côté.\nb) Calculer la longueur de grillage nécessaire.\nc) On plante un poteau tous les $2{,}5$ m, en commençant par un coin. Combien faut-il de poteaux ?\nd) Le grillage coûte $2{,}40$ € le mètre et un poteau $4{,}50$ €. Quel est le prix total ?",
+          reponses: [
+            { question: "a)", attendu: "75" },
+            { question: "b)", attendu: "180" },
+            { question: "c)", attendu: "72" },
+            { question: "d)", attendu: "756" },
+          ],
           correction:
             "a) Le troisième côté est l'hypoténuse. Par le théorème de Pythagore : $60^2 + 45^2 = 3\\,600 + 2\\,025 = 5\\,625$, donc il mesure $\\sqrt{5\\,625} = 75$ m.\nb) Je fais le tour : $60 + 45 + 75 = 180$ m de grillage.\nc) Sur un tour FERMÉ, chaque intervalle de $2{,}5$ m commence par un poteau : $180 \\div 2{,}5 = 72$ poteaux. Et chaque côté tombe juste, avec un poteau à chaque coin : $60 \\div 2{,}5 = 24$, $45 \\div 2{,}5 = 18$, $75 \\div 2{,}5 = 30$, et $24 + 18 + 30 = 72$.\nd) Grillage : $180 \\times 2{,}40 = 432$ €. Poteaux : $72 \\times 4{,}50 = 324$ €. Total : $432 + 324 = 756$ €.\n⛔ Le piège au c) : compter $72 + 1 = 73$ poteaux, comme le long d'une route. Ici, on revient au point de départ : le dernier poteau est le premier.\nRéponse : $75$ m ; $180$ m de grillage ; $72$ poteaux ; $756$ € en tout.",
           schema: plan({

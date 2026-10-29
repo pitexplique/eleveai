@@ -286,6 +286,12 @@ export const exercicesFractionNombre5e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Complète pour que les deux fractions soient égales.\na) $\\dfrac{2}{3} = \\dfrac{\\ldots}{12}$\nb) $\\dfrac{5}{7} = \\dfrac{20}{\\ldots}$\nc) $\\dfrac{18}{24} = \\dfrac{\\ldots}{4}$\nd) $\\dfrac{7}{\\ldots} = \\dfrac{21}{30}$",
+          reponses: [
+            { question: "a)", attendu: "8" },
+            { question: "b)", attendu: "28" },
+            { question: "c)", attendu: "3" },
+            { question: "d)", attendu: "10" },
+          ],
           correction:
             "Deux fractions sont égales quand on passe de l'une à l'autre en multipliant (ou en divisant) le haut ET le bas par le même nombre.\na) Pour passer de $3$ à $12$, je multiplie par $4$. Je multiplie aussi le haut : $2 \\times 4 = 8$. Donc $\\dfrac{2}{3} = \\dfrac{8}{12}$.\nb) De $5$ à $20$ : je multiplie par $4$. En bas aussi : $7 \\times 4 = 28$. Donc $\\dfrac{5}{7} = \\dfrac{20}{28}$.\nc) De $24$ à $4$ : je divise par $6$. En haut aussi : $18 \\div 6 = 3$. Donc $\\dfrac{18}{24} = \\dfrac{3}{4}$.\nd) De $21$ à $7$ : je divise par $3$. En bas aussi : $30 \\div 3 = 10$. Donc $\\dfrac{7}{10} = \\dfrac{21}{30}$.\n⛔ Le piège : AJOUTER le même nombre en haut et en bas. $\\dfrac{2 + 9}{3 + 9} = \\dfrac{11}{12}$ n'est pas égal à $\\dfrac{2}{3}$ : sur le dessin, on verrait tout de suite la différence.\nRéponse : a) $8$ ; b) $28$ ; c) $3$ ; d) $10$.",
           schema: comparer([2, 3], [8, 12]),
@@ -293,6 +299,9 @@ export const exercicesFractionNombre5e: FicheExercicesData = {
         },
         {
           enonce: "Parmi ces fractions, lesquelles sont égales à $\\dfrac{3}{8}$ ?\n$\\dfrac{6}{16}$ ; $\\dfrac{4}{9}$ ; $\\dfrac{9}{24}$ ; $\\dfrac{12}{30}$ ; $\\dfrac{15}{40}$",
+          reponses: [
+            { attendu: ["6/16 ; 9/24 ; 15/40", "6/16 ; 15/40 ; 9/24", "9/24 ; 6/16 ; 15/40", "9/24 ; 15/40 ; 6/16", "15/40 ; 6/16 ; 9/24", "15/40 ; 9/24 ; 6/16"], exact: true },
+          ],
           correction:
             "Pour chaque fraction, je cherche par quel nombre on a multiplié le haut et le bas de $\\dfrac{3}{8}$ : il doit être le MÊME.\n$\\dfrac{6}{16}$ : $3 \\times 2 = 6$ et $8 \\times 2 = 16$. Égale.\n$\\dfrac{4}{9}$ : pour passer de $3$ à $4$, aucune multiplication par un entier ne marche. On a ajouté $1$ en haut et en bas : pas égale.\n$\\dfrac{9}{24}$ : $3 \\times 3 = 9$ et $8 \\times 3 = 24$. Égale.\n$\\dfrac{12}{30}$ : $3 \\times 4 = 12$, mais $8 \\times 4 = 32$, pas $30$. Pas égale : elle vaut $\\dfrac{2}{5}$.\n$\\dfrac{15}{40}$ : $3 \\times 5 = 15$ et $8 \\times 5 = 40$. Égale.\n⛔ Le piège : garder $\\dfrac{12}{30}$ parce que $12$ est dans la table de $3$. Le haut ET le bas doivent être multipliés par le même nombre.\nRéponse : $\\dfrac{6}{16}$, $\\dfrac{9}{24}$ et $\\dfrac{15}{40}$.",
           schema: ecranSeulement(comparer([3, 8], [6, 16])),
@@ -300,6 +309,12 @@ export const exercicesFractionNombre5e: FicheExercicesData = {
         },
         {
           enonce: "Simplifie chaque fraction jusqu'à sa forme la plus simple.\na) $\\dfrac{14}{21}$\nb) $\\dfrac{25}{40}$\nc) $\\dfrac{36}{48}$\nd) $\\dfrac{42}{70}$",
+          reponses: [
+            { question: "a)", attendu: ["2/3"], exact: true },
+            { question: "b)", attendu: ["5/8"], exact: true },
+            { question: "c)", attendu: ["3/4"], exact: true },
+            { question: "d)", attendu: ["3/5"], exact: true },
+          ],
           correction:
             "Simplifier, c'est diviser le haut et le bas par un même diviseur. Je cherche le plus grand possible, puis je vérifie qu'on ne peut plus continuer.\na) $14$ et $21$ sont dans la table de $7$ : $\\dfrac{14}{21} = \\dfrac{14 \\div 7}{21 \\div 7} = \\dfrac{2}{3}$.\nb) $25$ et $40$ se terminent par $5$ et par $0$ : je divise par $5$. $\\dfrac{25}{40} = \\dfrac{5}{8}$.\nc) $36$ et $48$ sont dans la table de $12$ : $\\dfrac{36}{48} = \\dfrac{3}{4}$. En deux fois, c'est aussi bien : $\\dfrac{36}{48} = \\dfrac{18}{24} = \\dfrac{3}{4}$.\nd) $42$ et $70$ sont dans la table de $14$ : $\\dfrac{42}{70} = \\dfrac{3}{5}$.\n⛔ Le piège : s'arrêter trop tôt. $\\dfrac{18}{24}$ est bien égale à $\\dfrac{36}{48}$, mais elle se simplifie encore, par $6$.\nRéponse : a) $\\dfrac{2}{3}$ ; b) $\\dfrac{5}{8}$ ; c) $\\dfrac{3}{4}$ ; d) $\\dfrac{3}{5}$.",
           schema: comparer([14, 21], [2, 3]),
@@ -307,6 +322,16 @@ export const exercicesFractionNombre5e: FicheExercicesData = {
         },
         {
           enonce: "Écris chaque quotient sous la forme d'une fraction, puis donne son écriture décimale.\na) $7 \\div 4$\nb) $2 \\div 5$\nc) $13 \\div 10$\nd) $11 \\div 20$",
+          reponses: [
+            { question: "a) frac.", attendu: ["7/4"], exact: true },
+            { question: "a) déc.", attendu: ["1,75"], exact: true },
+            { question: "b) frac.", attendu: ["2/5"], exact: true },
+            { question: "b) déc.", attendu: ["0,4"], exact: true },
+            { question: "c) frac.", attendu: ["13/10"], exact: true },
+            { question: "c) déc.", attendu: ["1,3"], exact: true },
+            { question: "d) frac.", attendu: ["11/20"], exact: true },
+            { question: "d) déc.", attendu: ["0,55"], exact: true },
+          ],
           correction:
             "Une fraction est un quotient : $\\dfrac{a}{b} = a \\div b$. Le nombre qu'on divise va EN HAUT.\na) $7 \\div 4 = \\dfrac{7}{4}$. Je pose la division : $7 \\div 4 = 1{,}75$.\nb) $2 \\div 5 = \\dfrac{2}{5}$. Avec des dixièmes : $\\dfrac{2}{5} = \\dfrac{4}{10} = 0{,}4$.\nc) $13 \\div 10 = \\dfrac{13}{10} = 1{,}3$ : treize dixièmes.\nd) $11 \\div 20 = \\dfrac{11}{20}$. Avec des centièmes : $\\dfrac{11}{20} = \\dfrac{55}{100} = 0{,}55$.\n⛔ Le piège : écrire $\\dfrac{4}{7}$ pour $7 \\div 4$. Le numérateur est le nombre qu'on divise.\n⭐ $\\dfrac{7}{4}$ et $\\dfrac{13}{10}$ sont plus grands que $1$ : leur numérateur dépasse leur dénominateur.\nRéponse : a) $\\dfrac{7}{4} = 1{,}75$ ; b) $\\dfrac{2}{5} = 0{,}4$ ; c) $\\dfrac{13}{10} = 1{,}3$ ; d) $\\dfrac{11}{20} = 0{,}55$.",
           schema: droiteRel(0, 2, 0.1, [
@@ -319,6 +344,13 @@ export const exercicesFractionNombre5e: FicheExercicesData = {
         },
         {
           enonce: "Écris chaque nombre sous la forme d'une fraction, la plus simple possible.\na) $0{,}3$\nb) $1{,}2$\nc) $0{,}08$\nd) $-0{,}5$\ne) $7$",
+          reponses: [
+            { question: "a)", attendu: ["3/10"], exact: true },
+            { question: "b)", attendu: ["6/5"], exact: true },
+            { question: "c)", attendu: ["2/25"], exact: true },
+            { question: "d)", attendu: ["-1/2"], exact: true },
+            { question: "e)", attendu: ["7/1"], exact: true },
+          ],
           correction:
             "Un nombre décimal se lit en dixièmes, en centièmes… : c'est une fraction de dénominateur $10$, $100$…\na) $0{,}3$ : trois dixièmes, $\\dfrac{3}{10}$. Elle ne se simplifie pas.\nb) $1{,}2$ : douze dixièmes, $\\dfrac{12}{10}$. Je simplifie par $2$ : $\\dfrac{12}{10} = \\dfrac{6}{5}$.\nc) $0{,}08$ : huit centièmes, $\\dfrac{8}{100}$. Je simplifie par $4$ : $\\dfrac{8}{100} = \\dfrac{2}{25}$.\nd) $-0{,}5$ est l'opposé de $0{,}5$, et $0{,}5 = \\dfrac{5}{10} = \\dfrac{1}{2}$. Donc $-0{,}5 = -\\dfrac{1}{2}$.\ne) $7 = \\dfrac{7}{1}$ : un entier est aussi une fraction.\n⭐ Tous ces nombres s'écrivent comme quotient de deux entiers : ce sont des nombres rationnels, positifs ou négatifs.\n⛔ Le piège du c) : écrire $\\dfrac{8}{10}$. Le $8$ est au rang des CENTIÈMES : $0{,}08 = \\dfrac{8}{100}$.\nRéponse : a) $\\dfrac{3}{10}$ ; b) $\\dfrac{6}{5}$ ; c) $\\dfrac{2}{25}$ ; d) $-\\dfrac{1}{2}$ ; e) $\\dfrac{7}{1}$.",
           schema: ecranSeulement(
@@ -334,6 +366,12 @@ export const exercicesFractionNombre5e: FicheExercicesData = {
         },
         {
           enonce: "Compare avec $<$, $>$ ou $=$.\na) $\\dfrac{5}{9}$ et $\\dfrac{7}{9}$\nb) $\\dfrac{4}{7}$ et $\\dfrac{4}{11}$\nc) $\\dfrac{3}{4}$ et $\\dfrac{11}{12}$\nd) $\\dfrac{9}{8}$ et $1$",
+          reponses: [
+            { question: "a)", attendu: ["<"] },
+            { question: "b)", attendu: [">"] },
+            { question: "c)", attendu: ["<"] },
+            { question: "d)", attendu: [">"] },
+          ],
           correction:
             "a) Même dénominateur : des neuvièmes. Le plus grand numérateur gagne : $\\dfrac{5}{9} < \\dfrac{7}{9}$.\nb) Même numérateur : $4$ parts dans les deux cas. Mais un septième est plus gros qu'un onzième : plus on partage, plus les parts sont petites. $\\dfrac{4}{7} > \\dfrac{4}{11}$.\nc) $12$ est un multiple de $4$ : je redécoupe. $\\dfrac{3}{4} = \\dfrac{9}{12}$, et $\\dfrac{9}{12} < \\dfrac{11}{12}$. Donc $\\dfrac{3}{4} < \\dfrac{11}{12}$.\nd) $1 = \\dfrac{8}{8}$, et $\\dfrac{9}{8} > \\dfrac{8}{8}$ : $\\dfrac{9}{8} > 1$. Le numérateur dépasse le dénominateur.\n⛔ Le piège du b) : croire que $\\dfrac{4}{11}$ est plus grand « parce que $11 > 7$ ». Un grand dénominateur fait de PETITES parts.\nRéponse : a) $<$ ; b) $>$ ; c) $<$ ; d) $>$.",
           schema: comparer([9, 12], [11, 12]),
@@ -341,6 +379,11 @@ export const exercicesFractionNombre5e: FicheExercicesData = {
         },
         {
           enonce: "Donne l'opposé de chaque nombre, puis place les nombres et leurs opposés sur une droite graduée en quarts.\na) $\\dfrac{3}{4}$\nb) $-\\dfrac{5}{4}$\nc) $\\dfrac{1}{2}$",
+          reponses: [
+            { question: "a)", attendu: "-3/4" },
+            { question: "b)", attendu: "5/4" },
+            { question: "c)", attendu: "-1/2" },
+          ],
           correction:
             "L'opposé d'un nombre est de l'autre côté de zéro, à la même distance. Je change seulement le signe.\na) L'opposé de $\\dfrac{3}{4}$ est $-\\dfrac{3}{4}$.\nb) L'opposé de $-\\dfrac{5}{4}$ est $\\dfrac{5}{4}$.\nc) L'opposé de $\\dfrac{1}{2}$ est $-\\dfrac{1}{2}$. Sur une droite graduée en quarts, $\\dfrac{1}{2}$ est à deux graduations de zéro, car $\\dfrac{1}{2} = \\dfrac{2}{4}$.\nPour placer : chaque unité est coupée en $4$. $\\dfrac{3}{4}$ est à $3$ graduations à droite de zéro, $-\\dfrac{3}{4}$ à $3$ graduations à gauche.\n⛔ Le piège : retourner la fraction et écrire $\\dfrac{4}{3}$. L'opposé ne touche qu'au SIGNE ; le numérateur et le dénominateur ne bougent pas.\n⭐ Un nombre et son opposé ont une somme nulle : ils sont à la même distance de zéro, de part et d'autre.\nRéponse : a) $-\\dfrac{3}{4}$ ; b) $\\dfrac{5}{4}$ ; c) $-\\dfrac{1}{2}$.",
           schema: droiteRel(-1.5, 1.5, 0.25, [
@@ -355,6 +398,13 @@ export const exercicesFractionNombre5e: FicheExercicesData = {
         },
         {
           enonce: "Sans calculer, dis si chaque fraction est plus petite que $1$, égale à $1$ ou plus grande que $1$.\n$\\dfrac{7}{5}$ ; $\\dfrac{3}{4}$ ; $\\dfrac{12}{12}$ ; $\\dfrac{9}{10}$ ; $\\dfrac{11}{10}$",
+          reponses: [
+            { question: "7/5", attendu: ["plus grande", "plus grande que 1", "> 1", "supérieure"] },
+            { question: "3/4", attendu: ["plus petite", "plus petite que 1", "< 1", "inférieure"] },
+            { question: "12/12", attendu: ["égale", "égale à 1", "= 1"] },
+            { question: "9/10", attendu: ["plus petite", "plus petite que 1", "< 1", "inférieure"] },
+            { question: "11/10", attendu: ["plus grande", "plus grande que 1", "> 1", "supérieure"] },
+          ],
           correction:
             "Le dénominateur dit en combien de parts on coupe l'unité ; le numérateur, combien on en prend. Je compare les deux.\n$\\dfrac{7}{5}$ : $7$ parts, alors que $5$ font l'unité. Plus grande que $1$.\n$\\dfrac{3}{4}$ : $3$ parts sur les $4$ de l'unité. Plus petite que $1$.\n$\\dfrac{12}{12}$ : toutes les parts. Égale à $1$.\n$\\dfrac{9}{10}$ : il manque une part. Plus petite que $1$.\n$\\dfrac{11}{10}$ : une part de plus que l'unité. Plus grande que $1$.\n⭐ Numérateur plus petit que le dénominateur : plus petite que $1$. Numérateur plus grand : plus grande que $1$.\nRéponse : plus petites que $1$ : $\\dfrac{3}{4}$ et $\\dfrac{9}{10}$ ; égale à $1$ : $\\dfrac{12}{12}$ ; plus grandes que $1$ : $\\dfrac{7}{5}$ et $\\dfrac{11}{10}$.",
           schema: ecranSeulement(
@@ -384,6 +434,13 @@ export const exercicesFractionNombre5e: FicheExercicesData = {
       exercices: [
         {
           enonce: "a) Simplifie $\\dfrac{18}{45}$ et $\\dfrac{28}{70}$ jusqu'à leur forme la plus simple.\nb) Que remarques-tu ?\nc) Écris une fraction égale aux deux, de dénominateur $100$. Quelle est son écriture décimale ?",
+          reponses: [
+            { question: "a) 18/45", attendu: ["2/5"], exact: true },
+            { question: "a) 28/70", attendu: ["2/5"], exact: true },
+            { question: "b)", attendu: ["égales", "elles sont égales"] },
+            { question: "c) frac.", attendu: ["40/100"], exact: true },
+            { question: "c) déc.", attendu: ["0,4"], exact: true },
+          ],
           correction:
             "a) $18$ et $45$ sont dans la table de $9$ : $\\dfrac{18}{45} = \\dfrac{18 \\div 9}{45 \\div 9} = \\dfrac{2}{5}$.\n$28$ et $70$ sont dans la table de $14$ : $\\dfrac{28}{70} = \\dfrac{28 \\div 14}{70 \\div 14} = \\dfrac{2}{5}$. En deux fois, c'est aussi bien : $\\dfrac{28}{70} = \\dfrac{14}{35} = \\dfrac{2}{5}$.\nb) Les deux fractions ont la même forme simplifiée : elles sont égales, $\\dfrac{18}{45} = \\dfrac{28}{70}$. Ce sont deux écritures du même nombre.\nc) Pour passer de $5$ à $100$, je multiplie par $20$ : $\\dfrac{2}{5} = \\dfrac{2 \\times 20}{5 \\times 20} = \\dfrac{40}{100}$. Et $\\dfrac{40}{100} = 0{,}4$.\n⛔ Le piège : conclure que $\\dfrac{18}{45}$ et $\\dfrac{28}{70}$ sont différentes parce que leurs nombres n'ont rien à voir. Seule la forme simplifiée permet de décider.\nRéponse : a) $\\dfrac{2}{5}$ et $\\dfrac{2}{5}$ ; b) elles sont égales ; c) $\\dfrac{40}{100} = 0{,}4$.",
           schema: table(["fraction", "je divise par", "plus simple"], [
@@ -395,6 +452,9 @@ export const exercicesFractionNombre5e: FicheExercicesData = {
         },
         {
           enonce: "Range ces fractions dans l'ordre croissant.\n$\\dfrac{5}{8}$ ; $\\dfrac{1}{2}$ ; $\\dfrac{3}{4}$ ; $\\dfrac{9}{16}$ ; $\\dfrac{11}{16}$",
+          reponses: [
+            { attendu: ["1/2 < 9/16 < 5/8 < 11/16 < 3/4", "1/2 ; 9/16 ; 5/8 ; 11/16 ; 3/4"], exact: true },
+          ],
           correction:
             "Pour comparer, je redécoupe tout en parts de même taille. $16$ est un multiple de $2$, de $4$ et de $8$ : je passe en seizièmes.\n$\\dfrac{5}{8} = \\dfrac{10}{16}$ ; $\\dfrac{1}{2} = \\dfrac{8}{16}$ ; $\\dfrac{3}{4} = \\dfrac{12}{16}$.\nJe range les numérateurs : $8 < 9 < 10 < 11 < 12$.\n⛔ Le piège : ranger d'après les numérateurs écrits, $1 < 3 < 5 < 9 < 11$, et mettre $\\dfrac{3}{4}$ en deuxième. Les parts n'ont pas la même taille : il faut d'abord redécouper.\nRéponse : $\\dfrac{1}{2} < \\dfrac{9}{16} < \\dfrac{5}{8} < \\dfrac{11}{16} < \\dfrac{3}{4}$.",
           schema: droiteRel(0.5, 0.75, 0.0625, [
@@ -416,6 +476,13 @@ export const exercicesFractionNombre5e: FicheExercicesData = {
         {
           enonce:
             "Trois classes de 5e ont voté pour la sortie de fin d'année. En 5e A, $18$ élèves sur $24$ veulent aller au musée des sciences ; en 5e B, $20$ sur $30$ ; en 5e C, $21$ sur $28$.\na) Pour chaque classe, écris la fraction des élèves qui veulent aller au musée, puis simplifie-la.\nb) Deux classes ont exactement la même proportion : lesquelles ?\nc) Dans quelle classe le musée a-t-il le moins de succès, en proportion ?",
+          reponses: [
+            { question: "5e A", attendu: ["3/4"], exact: true },
+            { question: "5e B", attendu: ["2/3"], exact: true },
+            { question: "5e C", attendu: ["3/4"], exact: true },
+            { question: "b)", attendu: ["A et C", "5e A et 5e C", "la 5e A et la 5e C"] },
+            { question: "c)", attendu: ["5e B", "B", "la 5e B"] },
+          ],
           correction:
             "a) 5e A : $\\dfrac{18}{24}$. Je divise par $6$ : $\\dfrac{18}{24} = \\dfrac{3}{4}$.\n5e B : $\\dfrac{20}{30}$. Je divise par $10$ : $\\dfrac{20}{30} = \\dfrac{2}{3}$.\n5e C : $\\dfrac{21}{28}$. Je divise par $7$ : $\\dfrac{21}{28} = \\dfrac{3}{4}$.\nb) La 5e A et la 5e C ont la même fraction simplifiée, $\\dfrac{3}{4}$ : même proportion, alors que leurs nombres d'élèves sont différents.\nc) Je compare $\\dfrac{2}{3}$ et $\\dfrac{3}{4}$ en douzièmes : $\\dfrac{2}{3} = \\dfrac{8}{12}$ et $\\dfrac{3}{4} = \\dfrac{9}{12}$. Donc $\\dfrac{2}{3} < \\dfrac{3}{4}$ : c'est en 5e B que le musée a le moins de succès.\n⛔ Le piège : répondre la 5e A, parce que $18$ est le plus petit nombre de votants. On compare des PARTS de classe : la 5e B a plus de votants pour le musée ($20$), mais dans une classe plus grande.\nRéponse : a) $\\dfrac{3}{4}$, $\\dfrac{2}{3}$, $\\dfrac{3}{4}$ ; b) la 5e A et la 5e C ; c) la 5e B.",
           schema: table(["classe", "fraction", "simplifiée"], [
@@ -427,6 +494,13 @@ export const exercicesFractionNombre5e: FicheExercicesData = {
         },
         {
           enonce: "a) Donne l'opposé de $-\\dfrac{7}{10}$, de $\\dfrac{13}{4}$ et de $-\\dfrac{6}{6}$.\nb) Écris $-\\dfrac{7}{10}$ et son opposé en écriture décimale, puis place-les sur une droite graduée.\nc) Vrai ou faux : « l'opposé d'une fraction est toujours négatif » ?",
+          reponses: [
+            { question: "a) 1", attendu: "7/10" },
+            { question: "a) 2", attendu: "-13/4" },
+            { question: "a) 3", attendu: "1" },
+            { question: "b)", attendu: "-0,7 ; 0,7" },
+            { question: "c)", attendu: ["faux", "non"] },
+          ],
           correction:
             "a) Je change seulement le signe. L'opposé de $-\\dfrac{7}{10}$ est $\\dfrac{7}{10}$. L'opposé de $\\dfrac{13}{4}$ est $-\\dfrac{13}{4}$. Et $-\\dfrac{6}{6} = -1$ : son opposé est $1$.\nb) $\\dfrac{7}{10} = 0{,}7$, donc $-\\dfrac{7}{10} = -0{,}7$. Sur la droite, ils sont de part et d'autre de zéro, chacun à $7$ dixièmes de zéro.\nc) Faux : l'opposé de $-\\dfrac{7}{10}$ est $\\dfrac{7}{10}$, qui est positif.\n⛔ Le piège : prendre $\\dfrac{10}{7}$ pour l'opposé de $\\dfrac{7}{10}$. Retourner une fraction, ce n'est pas prendre son opposé.\nRéponse : a) $\\dfrac{7}{10}$ ; $-\\dfrac{13}{4}$ ; $1$ ; b) $-0{,}7$ et $0{,}7$ ; c) faux.",
           schema: ecranSeulement(
@@ -440,6 +514,15 @@ export const exercicesFractionNombre5e: FicheExercicesData = {
         {
           enonce:
             "Une tablette de chocolat a $24$ carreaux. Inès en mange $\\dfrac{1}{3}$, Hugo $\\dfrac{3}{8}$ et Sam $\\dfrac{5}{12}$, chacun sur sa propre tablette.\na) Écris chaque fraction avec le dénominateur $24$.\nb) Combien de carreaux chacun a-t-il mangés ?\nc) Range les trois enfants, de celui qui a mangé le moins à celui qui a mangé le plus.",
+          reponses: [
+            { question: "a) Inès", attendu: ["8/24"], exact: true },
+            { question: "a) Hugo", attendu: ["9/24"], exact: true },
+            { question: "a) Sam", attendu: ["10/24"], exact: true },
+            { question: "b) Inès", attendu: "8" },
+            { question: "b) Hugo", attendu: "9" },
+            { question: "b) Sam", attendu: "10" },
+            { question: "c)", attendu: ["Inès, Hugo, Sam", "Inès ; Hugo ; Sam"], exact: true },
+          ],
           correction:
             "a) $24$ est un multiple de $3$, de $8$ et de $12$ : je passe en vingt-quatrièmes.\n$\\dfrac{1}{3} = \\dfrac{1 \\times 8}{3 \\times 8} = \\dfrac{8}{24}$ ; $\\dfrac{3}{8} = \\dfrac{3 \\times 3}{8 \\times 3} = \\dfrac{9}{24}$ ; $\\dfrac{5}{12} = \\dfrac{5 \\times 2}{12 \\times 2} = \\dfrac{10}{24}$.\nb) Un carreau, c'est $\\dfrac{1}{24}$ de la tablette : Inès a mangé $8$ carreaux, Hugo $9$, Sam $10$.\nc) $8 < 9 < 10$ : Inès, puis Hugo, puis Sam.\n⛔ Le piège : croire qu'Inès a mangé le plus parce que son dénominateur est le plus petit. Ce n'est vrai qu'à numérateurs égaux ; ici, ils sont différents.\nRéponse : a) $\\dfrac{8}{24}$, $\\dfrac{9}{24}$, $\\dfrac{10}{24}$ ; b) $8$, $9$ et $10$ carreaux ; c) Inès, Hugo, Sam.",
           schema: barres([
@@ -451,6 +534,9 @@ export const exercicesFractionNombre5e: FicheExercicesData = {
         },
         {
           enonce: "Je suis une fraction égale à $\\dfrac{3}{5}$. La somme de mon numérateur et de mon dénominateur vaut $40$. Qui suis-je ?",
+          reponses: [
+            { attendu: ["15/25"], exact: true },
+          ],
           correction:
             "Les fractions égales à $\\dfrac{3}{5}$ s'obtiennent en multipliant $3$ et $5$ par le même nombre : $\\dfrac{6}{10}$, $\\dfrac{9}{15}$, $\\dfrac{12}{20}$, $\\dfrac{15}{25}$…\nJ'additionne le haut et le bas à chaque fois : $3 + 5 = 8$ ; $6 + 10 = 16$ ; $9 + 15 = 24$ ; $12 + 20 = 32$ ; $15 + 25 = 40$.\nLa somme augmente de $8$ à chaque fois : on arrive à $40$ au cinquième essai, avec $\\dfrac{15}{25}$.\nContrôle : $\\dfrac{15}{25} = \\dfrac{15 \\div 5}{25 \\div 5} = \\dfrac{3}{5}$.\n⛔ Le piège : partager $40$ en deux et proposer $\\dfrac{20}{20}$. Cette fraction vaut $1$, pas $\\dfrac{3}{5}$.\nRéponse : je suis $\\dfrac{15}{25}$.",
           schema: ecranSeulement(
@@ -466,6 +552,11 @@ export const exercicesFractionNombre5e: FicheExercicesData = {
         },
         {
           enonce: "On s'intéresse au nombre $\\dfrac{17}{4}$.\na) Écris-le comme une division, puis donne son écriture décimale.\nb) Entre quels nombres entiers consécutifs se trouve-t-il ?\nc) Complète : $\\dfrac{17}{4} = 4 + \\dfrac{\\ldots}{4}$.\nd) Place-le sur une droite graduée en quarts.",
+          reponses: [
+            { question: "a)", attendu: "4,25" },
+            { question: "b)", attendu: "4 ; 5" },
+            { question: "c)", attendu: ["1", "1/4"] },
+          ],
           correction:
             "a) $\\dfrac{17}{4} = 17 \\div 4$. Je pose la division : $4 \\times 4 = 16$, il reste $1$, et $1 \\div 4 = 0{,}25$. Donc $\\dfrac{17}{4} = 4{,}25$.\nb) $4 < 4{,}25 < 5$ : il est entre $4$ et $5$.\nc) $4 = \\dfrac{16}{4}$, et il reste $\\dfrac{1}{4}$ : $\\dfrac{17}{4} = 4 + \\dfrac{1}{4}$.\nd) Chaque unité est coupée en $4$. Je compte $17$ quarts depuis zéro : $4$ unités entières ($16$ quarts), puis encore $1$ quart.\n⛔ Le piège : lire $\\dfrac{17}{4}$ comme « $17$ virgule $4$ ». La barre de fraction est une division, pas une virgule.\nRéponse : a) $17 \\div 4 = 4{,}25$ ; b) entre $4$ et $5$ ; c) $\\dfrac{1}{4}$.",
           schema: droiteRel(3, 6, 0.25, [{ value: 4.25, label: "17/4" }], { nombres: 1, sauts: [{ de: 4, vers: 4.25, label: "1/4" }] }),
@@ -489,6 +580,17 @@ export const exercicesFractionNombre5e: FicheExercicesData = {
           titre: "Les tirs au but",
           enonce:
             "À l'entraînement de handball, Emma réussit $7$ tirs sur $10$, Lou $11$ tirs sur $16$ et Nina $3$ tirs sur $4$ (chiffres d'un modèle).\na) Écris la fraction des tirs réussis par chaque joueuse.\nb) Compare Emma et Nina en écrivant leurs fractions avec le dénominateur $20$.\nc) Compare Emma et Lou avec le dénominateur $80$.\nd) Range les trois joueuses, de la plus adroite à la moins adroite.\ne) Lou tire encore $4$ fois et marque les $4$ tirs. A-t-elle rattrapé Nina ?",
+          reponses: [
+            { question: "a) Emma", attendu: "7/10" },
+            { question: "a) Lou", attendu: "11/16" },
+            { question: "a) Nina", attendu: "3/4" },
+            { question: "b) Emma", attendu: ["14/20"], exact: true },
+            { question: "b) Nina", attendu: ["15/20"], exact: true },
+            { question: "c) Emma", attendu: ["56/80"], exact: true },
+            { question: "c) Lou", attendu: ["55/80"], exact: true },
+            { question: "d)", attendu: ["Nina, Emma, Lou", "Nina ; Emma ; Lou"], exact: true },
+            { question: "e)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) Emma : $\\dfrac{7}{10}$ ; Lou : $\\dfrac{11}{16}$ ; Nina : $\\dfrac{3}{4}$.\nb) $\\dfrac{7}{10} = \\dfrac{14}{20}$ et $\\dfrac{3}{4} = \\dfrac{15}{20}$. Donc $\\dfrac{7}{10} < \\dfrac{3}{4}$ : Nina est plus adroite qu'Emma.\nc) $\\dfrac{7}{10} = \\dfrac{56}{80}$ et $\\dfrac{11}{16} = \\dfrac{55}{80}$. Donc $\\dfrac{11}{16} < \\dfrac{7}{10}$ : Emma est un peu plus adroite que Lou.\nd) Nina, puis Emma, puis Lou.\ne) Lou a maintenant tiré $16 + 4 = 20$ fois et marqué $11 + 4 = 15$ tirs : $\\dfrac{15}{20}$. Je simplifie par $5$ : $\\dfrac{15}{20} = \\dfrac{3}{4}$. Elle a rattrapé Nina, exactement.\n⛔ Le piège : dire que Lou est la meilleure parce qu'elle a marqué $11$ buts, le plus grand nombre. On compare des PARTS de tirs réussis, pas des nombres de buts.\nRéponse : d) Nina, Emma, Lou ; e) oui : $\\dfrac{15}{20} = \\dfrac{3}{4}$.",
           schema: barres([
@@ -502,6 +604,15 @@ export const exercicesFractionNombre5e: FicheExercicesData = {
           titre: "Le jardin partagé",
           enonce:
             "Un jardin partagé est découpé en $60$ parcelles identiques. La famille Martin en cultive $12$, la famille Diallo $15$ et l'école $20$. Le reste est une prairie fleurie.\na) Écris la part du jardin de chacun sous forme de fraction simplifiée.\nb) Qui cultive la plus grande part ? Justifie en comparant les fractions.\nc) Combien de parcelles la prairie occupe-t-elle ? Quelle fraction du jardin est-ce ? Peut-on la simplifier ?",
+          reponses: [
+            { question: "Martin", attendu: ["1/5"], exact: true },
+            { question: "Diallo", attendu: ["1/4"], exact: true },
+            { question: "école", attendu: ["1/3"], exact: true },
+            { question: "b)", attendu: ["l'école", "école"] },
+            { question: "c) parc.", attendu: "13" },
+            { question: "c) frac.", attendu: ["13/60"], exact: true },
+            { question: "simplif.", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) Martin : $\\dfrac{12}{60}$, je divise par $12$ : $\\dfrac{12}{60} = \\dfrac{1}{5}$. Diallo : $\\dfrac{15}{60}$, je divise par $15$ : $\\dfrac{15}{60} = \\dfrac{1}{4}$. L'école : $\\dfrac{20}{60}$, je divise par $20$ : $\\dfrac{20}{60} = \\dfrac{1}{3}$.\nb) Les trois fractions ont le même numérateur, $1$. Un tiers est plus gros qu'un quart, lui-même plus gros qu'un cinquième : $\\dfrac{1}{5} < \\dfrac{1}{4} < \\dfrac{1}{3}$. C'est l'école qui cultive la plus grande part. Contrôle en parcelles : $12 < 15 < 20$.\nc) $12 + 15 + 20 = 47$ parcelles sont cultivées, donc la prairie en occupe $60 - 47 = 13$. C'est $\\dfrac{13}{60}$ du jardin.\nLes diviseurs de $13$ sont $1$ et $13$, et $60$ n'est pas dans la table de $13$ : $\\dfrac{13}{60}$ ne se simplifie pas.\n⛔ Le piège du b) : croire que $\\dfrac{1}{5}$ est la plus grande part parce que $5$ est le plus grand nombre. À numérateurs égaux, plus le dénominateur est grand, plus la part est petite.\nRéponse : a) $\\dfrac{1}{5}$, $\\dfrac{1}{4}$, $\\dfrac{1}{3}$ ; b) l'école ; c) $13$ parcelles, $\\dfrac{13}{60}$, qui ne se simplifie pas.",
           schema: parcelles(6, 10, [
@@ -515,6 +626,13 @@ export const exercicesFractionNombre5e: FicheExercicesData = {
           titre: "Les fractions de l'heure",
           enonce:
             "Une heure compte $60$ minutes.\na) Quelle fraction de l'heure représentent $20$ minutes ? Simplifie-la.\nb) Même question pour $45$ minutes.\nc) Un film dure $90$ minutes. Écris sa durée en heures sous forme de fraction simplifiée, puis en écriture décimale.\nd) Léna affirme : « $1{,}3$ h, c'est $1$ h $30$ min. » A-t-elle raison ?",
+          reponses: [
+            { question: "a)", attendu: ["1/3"], exact: true },
+            { question: "b)", attendu: ["3/4"], exact: true },
+            { question: "c) frac.", attendu: ["3/2"], exact: true },
+            { question: "c) déc.", attendu: ["1,5"], exact: true },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $20$ minutes sur $60$ : $\\dfrac{20}{60}$. Je divise par $20$ : $\\dfrac{20}{60} = \\dfrac{1}{3}$. Vingt minutes, c'est un tiers d'heure.\nb) $\\dfrac{45}{60}$. Je divise par $15$ : $\\dfrac{45}{60} = \\dfrac{3}{4}$. Trois quarts d'heure, comme sur le cadran.\nc) $\\dfrac{90}{60}$. Je divise par $30$ : $\\dfrac{90}{60} = \\dfrac{3}{2}$. Et $3 \\div 2 = 1{,}5$ : le film dure $1{,}5$ h.\nd) Non. $1{,}3$ h, c'est $1$ h et $3$ dixièmes d'heure. Un dixième d'heure, c'est $60 \\div 10 = 6$ minutes, donc trois dixièmes font $18$ minutes : $1{,}3$ h, c'est $1$ h $18$ min. Et $1$ h $30$ min, c'est $1{,}5$ h, la durée du film.\n⛔ Le piège : lire les chiffres après la virgule comme des minutes. Une heure a $60$ minutes, pas $100$.\nRéponse : a) $\\dfrac{1}{3}$ ; b) $\\dfrac{3}{4}$ ; c) $\\dfrac{3}{2}$ h, soit $1{,}5$ h ; d) non, $1{,}3$ h, c'est $1$ h $18$ min.",
           schema: disque(9, 12, "45 min = 3/4 h"),
@@ -524,6 +642,13 @@ export const exercicesFractionNombre5e: FicheExercicesData = {
           titre: "La fraction mystère",
           enonce:
             "Je suis une fraction de dénominateur $12$.\nIndice 1 : je suis plus grande que $\\dfrac{1}{2}$.\nIndice 2 : je suis plus petite que $\\dfrac{5}{6}$.\nIndice 3 : mon numérateur est impair.\nIndice 4 : on peut me simplifier.\na) Écris $\\dfrac{1}{2}$ et $\\dfrac{5}{6}$ avec le dénominateur $12$.\nb) Qui suis-je ?\nc) Écris-moi sous ma forme la plus simple.\nd) Quel est mon opposé ?",
+          reponses: [
+            { question: "a) 1/2", attendu: ["6/12"], exact: true },
+            { question: "a) 5/6", attendu: ["10/12"], exact: true },
+            { question: "b)", attendu: ["9/12"], exact: true },
+            { question: "c)", attendu: ["3/4"], exact: true },
+            { question: "d)", attendu: "-3/4" },
+          ],
           correction:
             "a) $\\dfrac{1}{2} = \\dfrac{6}{12}$ et $\\dfrac{5}{6} = \\dfrac{10}{12}$.\nb) En douzièmes, je suis entre $\\dfrac{6}{12}$ et $\\dfrac{10}{12}$, sans être l'une ni l'autre : mon numérateur est $7$, $8$ ou $9$.\nIndice 3 : il est impair, il reste $7$ ou $9$.\nIndice 4 : $\\dfrac{7}{12}$ ne se simplifie pas, car $12$ n'est pas dans la table de $7$. $\\dfrac{9}{12}$ se simplifie par $3$. Je suis $\\dfrac{9}{12}$.\nc) $\\dfrac{9}{12} = \\dfrac{9 \\div 3}{12 \\div 3} = \\dfrac{3}{4}$.\nd) Mon opposé est $-\\dfrac{9}{12}$, c'est-à-dire $-\\dfrac{3}{4}$.\n⛔ Le piège : chercher un numérateur entre $1$ et $5$, les numérateurs de $\\dfrac{1}{2}$ et de $\\dfrac{5}{6}$. Les parts n'ont pas la même taille : il faut d'abord le même dénominateur.\nRéponse : b) $\\dfrac{9}{12}$ ; c) $\\dfrac{3}{4}$ ; d) $-\\dfrac{3}{4}$.",
           schema: barres([

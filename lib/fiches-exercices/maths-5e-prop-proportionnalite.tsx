@@ -173,6 +173,9 @@ export const exercicesPropProportionnalite5e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Une boulangerie affiche ces prix pour ses croissants. Le prix est-il proportionnel au nombre de croissants ?",
+          reponses: [
+            { attendu: ["oui", "vrai"] },
+          ],
           figure: tableau(["Croissants", "2", "5", "8"], ["Prix (€)", "2,40", "6", "9,60"], true),
           correction:
             "Je divise chaque prix par le nombre de croissants qui lui correspond.\n$2{,}40 \\div 2 = 1{,}20$ ; $6 \\div 5 = 1{,}20$ ; $9{,}60 \\div 8 = 1{,}20$.\nLes trois quotients sont égaux : le prix est proportionnel au nombre de croissants.\nLe coefficient est $1{,}2$ : c'est le prix d'UN croissant, $1{,}20$ €.\n⛔ Le piège : ne vérifier que la première colonne. Il faut que TOUTES les colonnes donnent le même quotient.\nRéponse : oui, le prix est proportionnel, avec le coefficient $1{,}2$.",
@@ -181,6 +184,9 @@ export const exercicesPropProportionnalite5e: FicheExercicesData = {
         },
         {
           enonce: "Voici l'âge de Léa et celui de son grand frère, à trois moments de leur vie. L'âge du frère est-il proportionnel à celui de Léa ?",
+          reponses: [
+            { attendu: ["non", "faux"] },
+          ],
           figure: tableau(["Âge de Léa", "4", "8", "12"], ["Âge du frère", "7", "11", "15"], true),
           correction:
             "Je regarde ce qui se passe quand l'âge de Léa double : de $4$ à $8$ ans.\nSi c'était proportionnel, l'âge du frère doublerait aussi : $7 \\times 2 = 14$.\nOr il a $11$ ans, pas $14$ : ce n'est PAS proportionnel.\nCe qui reste toujours pareil, c'est l'écart : le frère a toujours $3$ ans de plus. On AJOUTE $3$, on ne multiplie pas.\n⛔ Le piège : croire que « les deux âges grandissent ensemble » suffit. Ajouter toujours le même nombre, ce n'est pas multiplier par le même nombre.\nRéponse : non, l'âge du frère n'est pas proportionnel à celui de Léa.",
@@ -189,6 +195,9 @@ export const exercicesPropProportionnalite5e: FicheExercicesData = {
         },
         {
           enonce: "Sur une piste d'athlétisme, la distance parcourue est proportionnelle au nombre de tours. Complète le tableau en utilisant les colonnes déjà remplies, sans calculer la longueur d'un tour.",
+          reponses: [
+            { attendu: "2400 ; 3200 ; 6400" },
+          ],
           figure: tableau(["Tours", "2", "6", "8", "16"], ["Distance (m)", "800", "?", "?", "?"], true),
           correction:
             "$6$ tours, c'est $3$ fois $2$ tours : la distance est $3$ fois plus grande. $3 \\times 800 = 2\\,400$.\n$8$ tours, c'est $2$ tours plus $6$ tours : j'additionne les deux colonnes. $800 + 2\\,400 = 3\\,200$.\n$16$ tours, c'est le double de $8$ tours : $2 \\times 3\\,200 = 6\\,400$.\n⭐ Contrôle : $800 \\div 2 = 400$. Un tour fait $400$ m, la longueur d'une piste d'athlétisme. Et $16 \\times 400 = 6\\,400$.\n⛔ Le piège : voir « $4$ tours de plus » entre $2$ et $6$, et ajouter $4$ m. On ajoute $4$ TOURS, pas $4$ mètres.\nRéponse : $2\\,400$ m, $3\\,200$ m et $6\\,400$ m.",
@@ -197,6 +206,10 @@ export const exercicesPropProportionnalite5e: FicheExercicesData = {
         },
         {
           enonce: "Sous une douche, l'eau coule toujours au même débit. En $5$ minutes, il coule $60$ L d'eau (un modèle).\na) Calcule le coefficient qui fait passer de la durée au volume d'eau.\nb) Que représente ce nombre ?\nc) Quel volume d'eau coule en $8$ minutes ?",
+          reponses: [
+            { question: "a)", attendu: "12" },
+            { question: "c)", attendu: "96" },
+          ],
           correction:
             "a) Pour passer de la durée au volume, je divise le volume par la durée : $60 \\div 5 = 12$.\nb) C'est le volume d'eau qui coule en UNE minute : $12$ L par minute.\nc) En $8$ minutes, il coule $8$ fois plus : $8 \\times 12 = 96$ L.\n⛔ Le piège : diviser dans l'autre sens, $5 \\div 60$. On cherche des litres PAR minute : les litres sont au-dessus de la division.\nRéponse : le coefficient est $12$, soit $12$ L par minute ; en $8$ minutes, il coule $96$ L.",
           schema: ecranSeulement(tableauCoef(["Durée (min)", "Eau (L)"], ["5", "1", "8"], ["60", "!12", "!96"], "12")),
@@ -204,6 +217,9 @@ export const exercicesPropProportionnalite5e: FicheExercicesData = {
         },
         {
           enonce: "Un pack de $6$ briques de lait coûte $5{,}40$ €. Chaque brique a le même prix. Combien coûtent $11$ briques ?",
+          reponses: [
+            { attendu: "9,90" },
+          ],
           correction:
             "Je passe par l'unité : le prix d'UNE brique.\n$5{,}40 \\div 6 = 0{,}90$ : une brique coûte $0{,}90$ €.\nPour $11$ briques : $11 \\times 0{,}90 = 9{,}90$.\n⭐ Contrôle : $11$ briques, c'est un peu moins que le double de $6$. Le prix doit être un peu moins que $2 \\times 5{,}40 = 10{,}80$ €. C'est le cas.\n⛔ Le piège : « $5$ briques de plus, donc $5$ € de plus », et répondre $10{,}40$ €. On ajoute $5$ briques à $0{,}90$ € chacune, pas $5$ €.\nRéponse : $11$ briques coûtent $9{,}90$ €.",
           schema: ecranSeulement(tableauCoef(["Briques", "Prix (€)"], ["6", "1", "11"], ["5,40", "!0,90", "!9,90"], "0,9")),
@@ -211,6 +227,10 @@ export const exercicesPropProportionnalite5e: FicheExercicesData = {
         },
         {
           enonce: "Une voiture consomme $6$ L d'essence pour $100$ km (un modèle). La consommation est proportionnelle à la distance.\na) Combien consomme-t-elle pour $50$ km ?\nb) Pour $250$ km ?",
+          reponses: [
+            { question: "a)", attendu: "3" },
+            { question: "b)", attendu: "15" },
+          ],
           correction:
             "a) $50$ km, c'est la moitié de $100$ km : elle consomme la moitié de $6$ L, soit $3$ L.\nb) $250$ km, c'est $100 + 100 + 50$ : j'additionne les colonnes. $6 + 6 + 3 = 15$ L.\n⭐ Autre chemin : $250$ km, c'est $2{,}5$ fois $100$ km, et $2{,}5 \\times 6 = 15$.\n⛔ Le piège : « $150$ km de plus, donc $150$ L de plus ». Des litres et des kilomètres ne s'ajoutent pas : on multiplie.\nRéponse : $3$ L pour $50$ km, $15$ L pour $250$ km.",
           schema: ecranSeulement(tableauCoef(["Distance (km)", "Essence (L)"], ["100", "50", "250"], ["6", "!3", "!15"], "0,06")),
@@ -218,6 +238,11 @@ export const exercicesPropProportionnalite5e: FicheExercicesData = {
         },
         {
           enonce: "Dans un rucher, la masse de miel récoltée est proportionnelle au nombre de ruches (un modèle). Voici le tableau de l'apicultrice.\na) Calcule le coefficient. Que représente-t-il ?\nb) Complète les deux cases vides.",
+          reponses: [
+            { question: "a)", attendu: "14" },
+            { question: "b) ruche", attendu: "6" },
+            { question: "b) miel", attendu: "140" },
+          ],
           figure: tableau(["Ruches", "4", "?", "10"], ["Miel (kg)", "56", "84", "?"], true),
           correction:
             "a) La première colonne est complète : $56 \\div 4 = 14$. Le coefficient est $14$ : chaque ruche donne $14$ kg de miel.\nb) Dernière colonne : je DESCENDS des ruches vers le miel, je multiplie. $10 \\times 14 = 140$ kg.\nDeuxième colonne : je REMONTE du miel vers les ruches, je fais l'inverse, je divise. $84 \\div 14 = 6$ ruches.\n⭐ Contrôle : $6 \\times 14 = 84$.\n⛔ Le piège : multiplier aussi pour remonter, $84 \\times 14$. On trouverait plus de mille ruches : pour remonter, on divise.\nRéponse : le coefficient est $14$ kg par ruche ; les cases valent $6$ ruches et $140$ kg.",
@@ -226,6 +251,12 @@ export const exercicesPropProportionnalite5e: FicheExercicesData = {
         },
         {
           enonce: "Le graphique donne le prix payé (en €, axe vertical) selon la masse de pommes achetée (en kg, axe horizontal).\na) Lis le prix de $3$ kg de pommes.\nb) Quelle masse de pommes achète-t-on avec $8$ € ?\nc) Le prix est-il proportionnel à la masse ? Donne le coefficient.",
+          reponses: [
+            { question: "a)", attendu: "6" },
+            { question: "b)", attendu: "4" },
+            { question: "c)", attendu: ["oui", "vrai"] },
+            { question: "c) coef.", attendu: "2" },
+          ],
           figure: repere([-1, 6, -1, 12], [{ pts: [[0, 0], [5.5, 11]] }], [], undefined, true),
           correction:
             "a) Je pars de $3$ sur l'axe horizontal, je monte jusqu'à la droite, puis je lis sur l'axe vertical : $6$ €.\nb) Cette fois je pars de $8$ sur l'axe VERTICAL, je vais jusqu'à la droite, puis je descends : $4$ kg.\nc) Les points sont sur une droite qui passe par l'origine : $0$ kg coûte $0$ €. C'est la marque de la proportionnalité.\nLe coefficient : $6 \\div 3 = 2$. Le kilogramme de pommes coûte $2$ €.\n⛔ Le piège du b) : calculer $8 \\times 2 = 16$ et répondre « $16$ kg ». Ce serait le prix de $8$ kg. Ici, $8$ est un PRIX : je pars de l'axe des prix, ou je divise, $8 \\div 2 = 4$.\nRéponse : $6$ € ; $4$ kg ; oui, avec le coefficient $2$ (soit $2$ € le kilogramme).",
@@ -248,6 +279,12 @@ export const exercicesPropProportionnalite5e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Deux piscines affichent leurs tarifs.\na) Dans chaque piscine, le prix est-il proportionnel au nombre d'entrées ?\nb) Dans la piscine B, combien coûte une entrée quand on en achète $10$ ?\nc) Mia veut nager $10$ fois. Combien économise-t-elle en choisissant la piscine B ?",
+          reponses: [
+            { question: "a) A", attendu: ["oui", "vrai"] },
+            { question: "a) B", attendu: ["non", "faux"] },
+            { question: "b)", attendu: "3,20" },
+            { question: "c)", attendu: "8" },
+          ],
           figure: deux(
             tableau(["Entrées", "1", "5", "10"], ["Prix (€)", "4", "20", "40"], true),
             tableau(["Entrées", "1", "5", "10"], ["Prix (€)", "4", "18", "32"], true),
@@ -259,6 +296,9 @@ export const exercicesPropProportionnalite5e: FicheExercicesData = {
         },
         {
           enonce: "L'eau de mer contient en moyenne environ $35$ g de sel par litre. La masse de sel est proportionnelle au volume d'eau. Complète le tableau. Attention : les deux dernières cases sont en kilogrammes.",
+          reponses: [
+            { attendu: "700 ; 17,5 ; 70" },
+          ],
           figure: tableau(["Eau de mer (L)", "1", "20", "500", "2 000"], ["Sel", "35 g", "? g", "? kg", "? kg"], true),
           correction:
             "Le coefficient est $35$ : chaque litre donne $35$ g de sel. Je multiplie le volume par $35$.\n$20 \\times 35 = 700$ : $700$ g de sel.\n$500 \\times 35 = 17\\,500$ g. Pour passer en kilogrammes, je divise par $1\\,000$ : $17{,}5$ kg.\n$2\\,000 \\times 35 = 70\\,000$ g, soit $70$ kg.\n⭐ Contrôle : $2\\,000$ L, c'est $4$ fois $500$ L, et $4 \\times 17{,}5 = 70$.\n⛔ Le piège : écrire « $17\\,500$ kg » dans la case. Le calcul donne des grammes : je convertis avant d'écrire.\nRéponse : $700$ g ; $17{,}5$ kg ; $70$ kg.",
@@ -267,6 +307,9 @@ export const exercicesPropProportionnalite5e: FicheExercicesData = {
         },
         {
           enonce: "Au magasin de bricolage, la corde se vend au mètre. $6$ m de corde coûtent $9$ €. Sami écrit : « de $6$ m à $10$ m, j'ajoute $4$ ; donc de $9$ € j'ajoute aussi $4$ : $10$ m coûtent $13$ € ».\na) Explique son erreur.\nb) Trouve le vrai prix de $10$ m de corde, de deux façons différentes.",
+          reponses: [
+            { question: "b)", attendu: "15" },
+          ],
           correction:
             "a) Sami ajoute le même nombre en haut et en bas. Or, quand c'est proportionnel, on MULTIPLIE par le même nombre. Avec sa réponse, $6$ m reviennent à $9 \\div 6 = 1{,}50$ € le mètre, mais $10$ m à $1{,}30$ € le mètre : impossible si le prix est au mètre.\nb) Première façon, le coefficient : $9 \\div 6 = 1{,}5$. Donc $10 \\times 1{,}5 = 15$ €.\nDeuxième façon, les colonnes : $2$ m, c'est $6$ m divisé par $3$, donc $9 \\div 3 = 3$ €. Et $10$ m, c'est $5$ fois $2$ m : $5 \\times 3 = 15$ €.\n⛔ Le piège : ajouter $4$ m en haut, c'est ajouter $4 \\times 1{,}5 = 6$ € en bas, pas $4$ €.\nRéponse : $10$ m de corde coûtent $15$ €.",
           schema: ecranSeulement(tableauCoef(["Corde (m)", "Prix (€)"], ["6", "2", "10"], ["9", "!3", "!15"], "1,5")),
@@ -274,6 +317,10 @@ export const exercicesPropProportionnalite5e: FicheExercicesData = {
         },
         {
           enonce: "Voici la recette d'un smoothie pour $4$ verres. Calcule les quantités pour $6$ verres, puis pour $10$ verres.",
+          reponses: [
+            { question: "6 verres", attendu: "3 ; 450 ; 180" },
+            { question: "10 v.", attendu: "5 ; 750 ; 300" },
+          ],
           figure: table(["Ingrédient", "4 verres"], [
             ["Bananes", "2"],
             ["Lait (mL)", "300"],
@@ -292,6 +339,14 @@ export const exercicesPropProportionnalite5e: FicheExercicesData = {
         },
         {
           enonce: "Aya (en bleu) et Noé (en orange) partent en randonnée, chacun à son rythme, toujours le même. Le graphique donne la distance parcourue (en km, axe vertical) selon la durée de marche (en heures, axe horizontal).\na) Pourquoi la distance est-elle proportionnelle à la durée, pour chacun ?\nb) Lis la distance parcourue par chacun en $2$ h.\nc) Calcule le coefficient de chacun. Que représente-t-il ?\nd) Le refuge est à $12$ km. Combien de temps met chacun pour y arriver ?",
+          reponses: [
+            { question: "b) Aya", attendu: "8" },
+            { question: "b) Noé", attendu: "6" },
+            { question: "c) Aya", attendu: "4" },
+            { question: "c) Noé", attendu: "3" },
+            { question: "d) Aya", attendu: "3" },
+            { question: "d) Noé", attendu: "4" },
+          ],
           figure: repere([-1, 4, -1, 13], [{ pts: [[0, 0], [3, 12]] }, { pts: [[0, 0], [3, 9]], couleur: ORANGE }], [], undefined, true),
           correction:
             "a) Chaque graphique est une droite qui passe par l'origine : au départ, $0$ h et $0$ km. C'est la marque de la proportionnalité.\nb) Je pars de $2$ sur l'axe horizontal. Aya : $8$ km. Noé : $6$ km.\nc) Aya : $8 \\div 2 = 4$. Noé : $6 \\div 2 = 3$. C'est la distance parcourue en UNE heure : Aya marche à $4$ km par heure, Noé à $3$ km par heure.\nd) Aya : $12 \\div 4 = 3$ h. Noé : $12 \\div 3 = 4$ h. Noé arrive une heure après Aya.\n⭐ La droite la plus pentue est celle du marcheur le plus rapide : son coefficient est le plus grand.\n⛔ Le piège : pour Noé, la réponse sort du graphique. Je ne la lis pas, je la calcule avec le coefficient.\nRéponse : $8$ km et $6$ km ; $4$ et $3$ km par heure ; $3$ h pour Aya, $4$ h pour Noé.",
@@ -299,6 +354,11 @@ export const exercicesPropProportionnalite5e: FicheExercicesData = {
         },
         {
           enonce: "Un loueur de kayaks fait payer $5$ € pour le gilet et la pagaie, puis $6$ € par heure.\na) Vérifie les prix du tableau.\nb) Le prix est-il proportionnel à la durée ?\nc) Léo dit : « $2$ h coûtent $17$ €, donc $4$ h coûtent le double, $34$ € ». A-t-il raison ? Combien coûtent $4$ h ?",
+          reponses: [
+            { question: "b)", attendu: ["non", "faux"] },
+            { question: "c) Léo", attendu: ["non", "faux"] },
+            { question: "c) 4 h", attendu: "29" },
+          ],
           figure: tableau(["Durée (h)", "1", "2", "3"], ["Prix (€)", "11", "17", "23"], true),
           correction:
             "a) $1$ h : $5 + 6 = 11$ €. $2$ h : $5 + 2 \\times 6 = 17$ €. $3$ h : $5 + 3 \\times 6 = 23$ €. Le tableau est juste.\nb) De $1$ h à $2$ h, la durée double. Le prix devrait doubler : $2 \\times 11 = 22$ €. Or il vaut $17$ € : ce n'est PAS proportionnel. C'est le forfait de $5$ € qui casse la proportionnalité.\nc) Léo a tort : en doublant $17$ €, il paie DEUX fois le gilet. Le bon prix : $5 + 4 \\times 6 = 29$ €.\n⛔ Le piège : utiliser la proportionnalité (doubler, le coefficient) sans avoir vérifié que la situation est proportionnelle.\nRéponse : non, ce n'est pas proportionnel ; $4$ h coûtent $29$ €.",
@@ -307,6 +367,9 @@ export const exercicesPropProportionnalite5e: FicheExercicesData = {
         },
         {
           enonce: "Au supermarché, un paquet de riz de $500$ g coûte $1{,}35$ € et un sac de $2$ kg coûte $4{,}80$ €. Lequel est le plus avantageux ?",
+          reponses: [
+            { attendu: ["le sac de 2 kg", "le sac", "sac", "le grand sac", "2 kg"] },
+          ],
           correction:
             "Je ne peux pas comparer $1{,}35$ € et $4{,}80$ € : les masses ne sont pas les mêmes. Je ramène tout à la même masse.\n$2$ kg, c'est $2\\,000$ g, soit $4$ paquets de $500$ g.\n$4$ petits paquets coûtent $4 \\times 1{,}35 = 5{,}40$ €. Le grand sac coûte $4{,}80$ € pour la même masse.\n⭐ Autre chemin, le prix d'UN kilogramme : petits paquets, $2 \\times 1{,}35 = 2{,}70$ € ; grand sac, $4{,}80 \\div 2 = 2{,}40$ €.\n⛔ Le piège : choisir le petit paquet « parce qu'il coûte moins cher ». Il coûte moins, mais il contient moins.\nRéponse : le sac de $2$ kg est le plus avantageux.",
           schema: ecranSeulement(
@@ -320,6 +383,11 @@ export const exercicesPropProportionnalite5e: FicheExercicesData = {
         },
         {
           enonce: "Dans une pépinière, tous les plants de tomates ont le même prix. $7$ plants coûtent $17{,}50$ € et $3$ plants coûtent $7{,}50$ €. Sans chercher d'abord le prix d'un plant :\na) Trouve le prix de $10$ plants.\nb) Trouve le prix de $4$ plants.\nc) Déduis-en le prix d'un plant.",
+          reponses: [
+            { question: "a)", attendu: "25" },
+            { question: "b)", attendu: "10" },
+            { question: "c)", attendu: "2,50" },
+          ],
           correction:
             "a) $10$ plants, c'est $7$ plants plus $3$ plants : j'additionne les deux colonnes. $17{,}50 + 7{,}50 = 25$ €.\nb) $4$ plants, c'est $7$ plants moins $3$ plants : je soustrais. $17{,}50 - 7{,}50 = 10$ €.\nc) $1$ plant, c'est $4$ plants moins $3$ plants : $10 - 7{,}50 = 2{,}50$ €.\n⭐ Contrôle avec le coefficient : $7 \\times 2{,}50 = 17{,}50$ et $10 \\times 2{,}50 = 25$.\n⛔ Le piège : additionner le haut d'une colonne avec le bas d'une autre. On additionne des colonnes ENTIÈRES : plants avec plants, euros avec euros.\nRéponse : $25$ € ; $10$ € ; un plant coûte $2{,}50$ €.",
           schema: ecranSeulement(tableauCoef(["Plants", "Prix (€)"], ["7", "3", "10", "4", "1"], ["17,50", "7,50", "!25", "!10", "!2,50"], "2,5")),
@@ -342,6 +410,12 @@ export const exercicesPropProportionnalite5e: FicheExercicesData = {
         {
           titre: "Le pressoir à pommes",
           enonce: "Au pressoir d'un village, $10$ kg de pommes donnent $6$ L de jus (un modèle). La quantité de jus est proportionnelle à la masse de pommes.\na) Quelle quantité de jus donne $1$ kg de pommes ?\nb) Une famille apporte $45$ kg de pommes. Combien de litres de jus obtient-elle ?\nc) Un voisin veut $15$ L de jus. Quelle masse de pommes doit-il apporter ?\nd) Le jus des $45$ kg est versé dans des bouteilles de $75$ cL. Combien de bouteilles remplit-on ?",
+          reponses: [
+            { question: "a)", attendu: "0,6" },
+            { question: "b)", attendu: "27" },
+            { question: "c)", attendu: "25" },
+            { question: "d)", attendu: "36" },
+          ],
           correction:
             "a) Je passe à l'unité : $6 \\div 10 = 0{,}6$. Un kilogramme de pommes donne $0{,}6$ L de jus. C'est le coefficient.\nb) $45 \\times 0{,}6 = 27$ : la famille obtient $27$ L de jus.\nc) Je remonte du jus vers les pommes : je divise. $15 \\div 0{,}6 = 25$ : il doit apporter $25$ kg de pommes.\nd) Je mets tout dans la même unité : $27$ L $= 2\\,700$ cL. Puis $2\\,700 \\div 75 = 36$ : on remplit $36$ bouteilles.\n⭐ Contrôle du c) : $25$ kg, c'est $2{,}5$ fois $10$ kg, et $2{,}5 \\times 6 = 15$ L.\n⛔ Le piège du d) : diviser $27$ par $75$. Des litres et des centilitres ne se divisent pas entre eux sans conversion.\nRéponse : $0{,}6$ L ; $27$ L ; $25$ kg ; $36$ bouteilles.",
           schema: tableauCoef(["Pommes (kg)", "Jus (L)"], ["10", "1", "45", "!25"], ["6", "!0,6", "!27", "15"], "0,6"),
@@ -350,6 +424,12 @@ export const exercicesPropProportionnalite5e: FicheExercicesData = {
         {
           titre: "Le robinet qui goutte",
           enonce: "Un robinet qui goutte perd $0{,}5$ L d'eau en $20$ minutes (un modèle). L'eau perdue est proportionnelle à la durée.\na) Combien de litres perd-il en $1$ heure ?\nb) En $1$ jour ?\nc) En $1$ an, soit $365$ jours ?\nd) Une douche de $5$ minutes utilise $60$ L (exercice 4). À combien de douches correspond l'eau perdue en un an ?",
+          reponses: [
+            { question: "a)", attendu: "1,5" },
+            { question: "b)", attendu: "36" },
+            { question: "c)", attendu: "13140" },
+            { question: "d)", attendu: "219" },
+          ],
           correction:
             "a) $1$ heure, c'est $60$ minutes, soit $3$ fois $20$ minutes : $3 \\times 0{,}5 = 1{,}5$ L.\nb) $1$ jour, c'est $24$ heures : $24 \\times 1{,}5 = 36$ L.\nc) $365 \\times 36 = 13\\,140$ L en un an.\nd) $13\\,140 \\div 60 = 219$ : c'est l'eau de $219$ douches.\n⭐ Une petite goutte, mais plus de $13\\,000$ litres par an : c'est pour cela qu'on répare un robinet qui fuit.\n⛔ Le piège du a) : multiplier $0{,}5$ par $1$ parce qu'on demande « $1$ heure ». Les $0{,}5$ L sont perdus en $20$ MINUTES : je convertis l'heure en minutes d'abord.\nRéponse : $1{,}5$ L ; $36$ L ; $13\\,140$ L ; $219$ douches.",
           schema: ecranSeulement(
@@ -365,6 +445,14 @@ export const exercicesPropProportionnalite5e: FicheExercicesData = {
         {
           titre: "Deux tarifs de photos",
           enonce: "Pour imprimer des photos, un magasin propose deux tarifs.\nTarif A : $0{,}15$ € la photo.\nTarif B : $3$ € de frais d'envoi, puis $0{,}10$ € la photo.\na) Calcule le prix de $10$, de $40$ et de $100$ photos avec chaque tarif.\nb) Lequel des deux tarifs est proportionnel au nombre de photos ? Pourquoi l'autre ne l'est-il pas ?\nc) Quel tarif choisir pour $40$ photos ? Pour $100$ photos ?\nd) Pour combien de photos les deux tarifs coûtent-ils la même chose ?",
+          reponses: [
+            { question: "a) A", attendu: "1,50 ; 6 ; 15" },
+            { question: "a) B", attendu: "4 ; 7 ; 13" },
+            { question: "b)", attendu: ["A", "tarif A", "le tarif A"] },
+            { question: "c) 40", attendu: ["A", "tarif A", "le tarif A"] },
+            { question: "c) 100", attendu: ["B", "tarif B", "le tarif B"] },
+            { question: "d)", attendu: "60" },
+          ],
           correction:
             "a) Tarif A : $10 \\times 0{,}15 = 1{,}50$ € ; $40 \\times 0{,}15 = 6$ € ; $100 \\times 0{,}15 = 15$ €.\nTarif B : $3 + 10 \\times 0{,}10 = 4$ € ; $3 + 40 \\times 0{,}10 = 7$ € ; $3 + 100 \\times 0{,}10 = 13$ €.\nb) Le tarif A est proportionnel : je multiplie toujours par $0{,}15$. Le tarif B ne l'est pas : $0$ photo coûte déjà $3$ €, et de $10$ à $100$ photos le prix ne fait pas $\\times 10$.\nc) Pour $40$ photos, A est moins cher ($6$ € contre $7$ €). Pour $100$ photos, B est moins cher ($13$ € contre $15$ €).\nd) Chaque photo coûte $0{,}05$ € de moins avec B, mais B part avec $3$ € de frais. Il faut $3 \\div 0{,}05 = 60$ photos pour rattraper les frais.\nJe vérifie : A, $60 \\times 0{,}15 = 9$ € ; B, $3 + 60 \\times 0{,}10 = 9$ €.\n⛔ Le piège : croire qu'un tarif est toujours le meilleur. Ici, A gagne en dessous de $60$ photos, B au-dessus.\nRéponse : A est proportionnel ; A pour $40$ photos, B pour $100$ ; les deux coûtent $9$ € pour $60$ photos.",
           schema: table(["Photos", "A (€)", "B (€)"], [
@@ -378,6 +466,13 @@ export const exercicesPropProportionnalite5e: FicheExercicesData = {
         {
           titre: "Les pas de Tom",
           enonce: "Tom compte ses pas : $10$ pas mesurent $8$ m. Ses pas ont toujours la même longueur.\na) Quelle est la longueur d'un pas de Tom, en mètres puis en centimètres ?\nb) Un tour de piste d'athlétisme mesure $400$ m. Combien de pas fait-il pour un tour ?\nc) Le soir, sa montre a compté $9\\,000$ pas. Quelle distance a-t-il parcourue, en kilomètres ?\nd) Il veut marcher $10$ km. Combien de pas doit-il faire ?",
+          reponses: [
+            { question: "a) en m", attendu: "0,8" },
+            { question: "a) en cm", attendu: "80" },
+            { question: "b)", attendu: "500" },
+            { question: "c)", attendu: "7,2" },
+            { question: "d)", attendu: "12500" },
+          ],
           correction:
             "a) Je passe à l'unité : $8 \\div 10 = 0{,}8$. Un pas mesure $0{,}8$ m, soit $80$ cm. C'est le coefficient : $0{,}8$ m par pas.\nb) Je remonte des mètres vers les pas : je divise. $400 \\div 0{,}8 = 500$ pas.\nc) $9\\,000 \\times 0{,}8 = 7\\,200$ m, soit $7{,}2$ km.\nd) $10$ km $= 10\\,000$ m. Puis $10\\,000 \\div 0{,}8 = 12\\,500$ pas.\n⭐ Contrôle du d) : $10$ km, c'est $25$ tours de piste de $400$ m, et $25 \\times 500 = 12\\,500$.\n⛔ Le piège du d) : diviser $10$ par $0{,}8$ sans convertir, et trouver $12{,}5$ pas pour $10$ km. Le coefficient est en mètres : je mets la distance en mètres.\nRéponse : $0{,}8$ m soit $80$ cm ; $500$ pas ; $7{,}2$ km ; $12\\,500$ pas.",
           schema: tableauCoef(["Pas", "Distance (m)"], ["10", "1", "!500", "9 000", "!12 500"], ["8", "!0,8", "400", "!7 200", "10 000"], "0,8"),

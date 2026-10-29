@@ -259,6 +259,10 @@ export const exercicesProportionnalite4e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Dans ce tableau, la série A et la série B donnent chacune un nombre pour chaque valeur de $x$.\na) La série A est-elle proportionnelle à $x$ ? Justifie.\nb) Même question pour la série B.",
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: ["non", "faux"] },
+          ],
           figure: table(["x", "série A", "série B"], [
             ["3", "10,5", "7"],
             ["5", "17,5", "11"],
@@ -277,6 +281,9 @@ export const exercicesProportionnalite4e: FicheExercicesData = {
         },
         {
           enonce: "Voici trois graphiques : la droite bleue (d1), la droite orange (d2) et la ligne verte (d3).\nLequel représente une situation de proportionnalité ? Justifie pour chacun.",
+          reponses: [
+            { attendu: ["d1", "(d1)", "la droite bleue", "bleue"] },
+          ],
           figure: repere([-1, 6, -1, 11], [
             { pts: [[0, 0], [5, 10]] },
             { pts: [[0, 3], [5, 8]], couleur: ORANGE },
@@ -292,6 +299,9 @@ export const exercicesProportionnalite4e: FicheExercicesData = {
         },
         {
           enonce: "Le prix des noix de cajou est proportionnel à leur masse. Complète le tableau, en commençant par le coefficient.",
+          reponses: [
+            { question: "coef.", attendu: "3,2" },
+          ],
           figure: tableauCoef(["Masse (kg)", "Prix (€)"], ["2", "5", "7,5", "…"], ["6,40", "…", "…", "41,60"], "?"),
           correction:
             "Le coefficient : je divise un prix par sa masse, sur une colonne complète. $6{,}40 \\div 2 = 3{,}2$. Pour passer de la masse au prix, je multiplie par $3{,}2$.\n$5 \\times 3{,}2 = 16$ et $7{,}5 \\times 3{,}2 = 24$.\nDans la dernière colonne, je connais le prix : je fais le chemin inverse, je DIVISE. $41{,}60 \\div 3{,}2 = 13$.\n⛔ Le piège : multiplier $41{,}60$ par $3{,}2$. Pour remonter du prix à la masse, on divise par le coefficient.\nRéponse : le coefficient est $3{,}2$ ; les cases valent $16$ €, $24$ € et $13$ kg.",
@@ -300,6 +310,10 @@ export const exercicesProportionnalite4e: FicheExercicesData = {
         },
         {
           enonce: "Un lot de $8$ piles coûte $9{,}60$ €. Le prix est proportionnel au nombre de piles.\na) Combien coûte une pile ?\nb) Combien coûtent $5$ piles ? Et $14$ piles ?",
+          reponses: [
+            { question: "a)", attendu: "1,2" },
+            { question: "b)", attendu: "6 ; 16,8" },
+          ],
           correction:
             "Je reviens d'abord à l'unité : le prix d'UNE pile.\na) $9{,}60 \\div 8 = 1{,}2$. Une pile coûte $1{,}20$ €.\nb) $5 \\times 1{,}2 = 6$ et $14 \\times 1{,}2 = 16{,}8$.\n⭐ Contrôle : $14$ piles, c'est $8 + 5 + 1$ piles, et $9{,}60 + 6 + 1{,}20 = 16{,}80$.\n⛔ Le piège : chercher le prix de $5$ piles en enlevant $3$ € au prix du lot, « parce qu'il y a $3$ piles de moins ». Il faut passer par le prix d'une pile.\nRéponse : a) $1{,}20$ € ; b) $6$ € et $16{,}80$ €.",
           schema: ecranSeulement(
@@ -314,6 +328,11 @@ export const exercicesProportionnalite4e: FicheExercicesData = {
         },
         {
           enonce: "Chaque tableau est un tableau de proportionnalité. Calcule $x$ par le produit en croix.\na) $4$ correspond à $7$, et $12$ correspond à $x$.\nb) $15$ correspond à $6$, et $25$ correspond à $x$.\nc) $2{,}5$ correspond à $9$, et $7$ correspond à $x$.",
+          reponses: [
+            { question: "a)", attendu: "21" },
+            { question: "b)", attendu: "10" },
+            { question: "c)", attendu: "25,2" },
+          ],
           correction:
             "Dans un tableau de proportionnalité, les produits en croix sont égaux. Je multiplie les deux nombres de la diagonale complète, puis je divise par le nombre qui reste.\na) $x = \\dfrac{12 \\times 7}{4} = 21$.\nb) $x = \\dfrac{25 \\times 6}{15} = 10$.\nc) $x = \\dfrac{7 \\times 9}{2{,}5} = 25{,}2$.\n⭐ Contrôle du b) : $6 \\div 15 = 0{,}4$ et $10 \\div 25 = 0{,}4$. Même coefficient.\n⛔ Le piège : multiplier les deux nombres d'une même COLONNE, par exemple $15 \\times 6$. Les nombres qu'on multiplie sont en DIAGONALE.\nRéponse : a) $21$ ; b) $10$ ; c) $25{,}2$.",
           schema: croix(["premier", "second"], ["2,5", "7"], ["9", "x"], "x = 7 × 9 ÷ 2,5 = 25,2"),
@@ -321,6 +340,12 @@ export const exercicesProportionnalite4e: FicheExercicesData = {
         },
         {
           enonce: "Un arrosage au goutte-à-goutte donne de l'eau de façon régulière. Le graphique donne le volume d'eau versé (en litres, verticalement) selon la durée (en minutes, horizontalement).\na) Pourquoi le volume est-il proportionnel à la durée ?\nb) Lis sur le graphique le volume versé en $4$ minutes.\nc) Calcule le volume versé en $30$ minutes.\nd) En combien de minutes verse-t-il $60$ litres ?\ne) On note $t$ la durée (en min) et $V$ le volume (en L). Écris la relation qui donne $V$ en fonction de $t$.",
+          reponses: [
+            { question: "b)", attendu: "6" },
+            { question: "c)", attendu: "45" },
+            { question: "d)", attendu: "40" },
+            { question: "e)", attendu: "1,5t" },
+          ],
           figure: repere([-1, 7, -1, 10], [{ pts: [[0, 0], [6, 9]] }], [], undefined, true),
           correction:
             "a) Le graphique est une droite qui passe par l'origine : le volume est proportionnel à la durée.\nb) Je pars de $4$ sur l'axe HORIZONTAL (les minutes), je monte jusqu'à la droite, puis je lis sur l'axe vertical : $6$ litres.\nc) Le coefficient : $6 \\div 4 = 1{,}5$ litre par minute. $30 \\times 1{,}5 = 45$ litres.\nd) Je fais le chemin inverse : $60 \\div 1{,}5 = 40$ minutes.\ne) Le coefficient est $1{,}5$ : je multiplie toujours la durée par $1{,}5$. La relation s'écrit $V = 1{,}5 \\times t$. Contrôle sur le graphique : pour $t = 4$, $1{,}5 \\times 4 = 6$.\n⛔ Le piège du b) : partir de $4$ sur l'axe vertical, et lire $2{,}7$ environ. Les minutes sont sur l'axe horizontal.\nRéponse : a) une droite par l'origine ; b) $6$ L ; c) $45$ L ; d) $40$ minutes ; e) $V = 1{,}5 \\times t$.",
@@ -329,6 +354,10 @@ export const exercicesProportionnalite4e: FicheExercicesData = {
         },
         {
           enonce: "Pour $3$ personnes, une recette de pâte à crumble demande $240$ g de farine. La quantité de farine est proportionnelle au nombre de personnes.\nLéo dit : « Pour $5$ personnes, il faut $242$ g : j'ajoute $2$, comme pour les personnes. »\nZoé dit : « Pour $6$ personnes, il faut $480$ g. Pour $5$ personnes, j'enlève la part d'une personne. »\nQui a raison ? Calcule la quantité de farine pour $5$ personnes.",
+          reponses: [
+            { question: "qui ?", attendu: ["Zoé", "Zoé a raison"] },
+            { question: "farine", attendu: "400" },
+          ],
           correction:
             "Léo se trompe : dans une situation de proportionnalité, on MULTIPLIE, on n'ajoute pas. Passer de $3$ à $5$ personnes ne fait pas ajouter $2$ g.\nZoé a raison. $6$ personnes, c'est le double de $3$ : $240 \\times 2 = 480$ g.\nLa part d'une personne : $240 \\div 3 = 80$ g.\nPour $5$ personnes : $480 - 80 = 400$ g. Ou directement : $5 \\times 80 = 400$ g.\n⛔ Le piège : ajouter l'écart, comme Léo. $242$ g pour $5$ personnes, ce serait presque la même quantité que pour $3$ !\nRéponse : Zoé a raison ; il faut $400$ g de farine.",
           schema: ecranSeulement(tableauCoef(["personnes", "farine (g)"], ["3", "1", "5", "6"], ["240", "!80", "!400", "!480"], "80")),
@@ -336,6 +365,12 @@ export const exercicesProportionnalite4e: FicheExercicesData = {
         },
         {
           enonce: "Proportionnel ou pas ? Justifie par un calcul ou par un contre-exemple.\na) Le prix payé à la pompe et le nombre de litres d'essence.\nb) Le prix d'une location de trottinette : $1$ € pour la déverrouiller, puis $0{,}25$ € la minute, et la durée.\nc) Le périmètre d'un carré et la longueur de son côté.\nd) L'aire d'un carré et la longueur de son côté.",
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: ["non", "faux"] },
+            { question: "c)", attendu: ["oui", "vrai"] },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) Oui : chaque litre coûte le même prix. Le coefficient est le prix d'un litre.\nb) Non : pour $10$ minutes je paie $1 + 10 \\times 0{,}25 = 3{,}5$ €, pour $20$ minutes $1 + 20 \\times 0{,}25 = 6$ €. La durée double, le prix ne double pas, à cause du $1$ € de départ.\nc) Oui : le périmètre vaut toujours $4 \\times$ le côté. Le coefficient est $4$.\nd) Non : un côté de $1$ cm donne $1$ cm², un côté de $2$ cm donne $4$ cm², un côté de $3$ cm donne $9$ cm². Les quotients $1$, $2$ et $3$ ne sont pas égaux.\n⛔ Le piège du d) : « quand le côté augmente, l'aire augmente, donc c'est proportionnel ». Deux grandeurs qui grandissent ensemble ne sont pas forcément proportionnelles.\nRéponse : a) oui ; b) non ; c) oui ; d) non.",
           schema: ecranSeulement(
@@ -363,6 +398,9 @@ export const exercicesProportionnalite4e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Un imprimeur fixe un prix proportionnel au nombre de flyers imprimés : $250$ flyers coûtent $35$ €.\na) Complète le tableau SANS calculer le coefficient, en additionnant ou en multipliant des colonnes.\nb) Calcule le coefficient, puis vérifie tes réponses.",
+          reponses: [
+            { question: "b)", attendu: "0,14" },
+          ],
           figure: tableauCoef(["flyers", "prix (€)"], ["250", "500", "750", "1 250"], ["35", "…", "…", "…"], "?"),
           correction:
             "a) $500$ flyers, c'est $2$ fois $250$ : $35 \\times 2 = 70$ €.\n$750 = 250 + 500$ : j'additionne les colonnes, $35 + 70 = 105$ €.\n$1\\,250 = 500 + 750$ : $70 + 105 = 175$ €.\nb) Le coefficient : $35 \\div 250 = 0{,}14$. Un flyer coûte $0{,}14$ €.\nVérification : $500 \\times 0{,}14 = 70$ ; $750 \\times 0{,}14 = 105$ ; $1\\,250 \\times 0{,}14 = 175$.\n⛔ Le piège : calculer le coefficient « à l'envers », $250 \\div 35 \\approx 7{,}14$. Le coefficient qui passe du haut au bas se calcule : bas divisé par haut.\nRéponse : $70$ €, $105$ € et $175$ € ; le coefficient est $0{,}14$.",
@@ -371,6 +409,9 @@ export const exercicesProportionnalite4e: FicheExercicesData = {
         },
         {
           enonce: "Une imprimante 3D utilise $38$ g de fil de plastique en $2$ h $30$ min. La masse de fil est proportionnelle à la durée d'impression (chiffres d'un modèle).\nQuelle masse de fil utilise-t-elle en $4$ h ?",
+          reponses: [
+            { attendu: "60,8" },
+          ],
           correction:
             "D'abord la même unité : $2$ h $30$ min, c'est $2{,}5$ h, car $30$ min est une demi-heure.\nPuis le produit en croix : $2{,}5$ h correspond à $38$ g, $4$ h correspond à $x$ g.\n$x = \\dfrac{4 \\times 38}{2{,}5} = 60{,}8$.\n⭐ Contrôle : en $1$ h, $38 \\div 2{,}5 = 15{,}2$ g ; en $4$ h, $4 \\times 15{,}2 = 60{,}8$ g.\n⛔ Le piège : écrire $2{,}30$ h. $30$ minutes ne font pas $0{,}30$ h : une heure compte $60$ minutes, pas $100$.\nRéponse : elle utilise $60{,}8$ g de fil en $4$ h.",
           schema: croix(["durée (h)", "masse (g)"], ["2,5", "4"], ["38", "x"], "x = 4 × 38 ÷ 2,5 = 60,8"),
@@ -378,6 +419,9 @@ export const exercicesProportionnalite4e: FicheExercicesData = {
         },
         {
           enonce: "Au magasin, le même miel est vendu en deux pots : un pot de $450$ g à $2{,}97$ € et un pot de $750$ g à $4{,}80$ €.\nQuel pot est le plus avantageux ? Justifie en calculant le prix d'un kilogramme.",
+          reponses: [
+            { attendu: ["750", "le grand pot", "grand pot", "grand"] },
+          ],
           correction:
             "Pour comparer, je ramène les deux pots à la même quantité : $1$ kg, soit $1\\,000$ g.\nPetit pot : $450$ g, c'est $0{,}45$ kg. $2{,}97 \\div 0{,}45 = 6{,}6$. Le kilo revient à $6{,}60$ €.\nGrand pot : $750$ g, c'est $0{,}75$ kg. $4{,}80 \\div 0{,}75 = 6{,}4$. Le kilo revient à $6{,}40$ €.\n$6{,}40 < 6{,}60$ : le grand pot est plus avantageux.\n⛔ Le piège : choisir le petit pot « parce qu'il coûte moins cher ». Il coûte moins, mais il contient moins : seul le prix pour la même quantité permet de comparer.\nRéponse : le pot de $750$ g, à $6{,}40$ € le kilo.",
           schema: ecranSeulement(
@@ -390,6 +434,12 @@ export const exercicesProportionnalite4e: FicheExercicesData = {
         },
         {
           enonce: "Pour louer un vélo, le tarif A coûte $3$ € l'heure. Le tarif B coûte $4$ € à la location, puis $2$ € l'heure. Le graphique donne le prix (en €) selon la durée (en heures) : la droite bleue pour A, la droite orange pour B.\na) Quel tarif est proportionnel à la durée ? Justifie avec le graphique.\nb) Pour quelle durée les deux tarifs coûtent-ils le même prix ? Quel est ce prix ?\nc) Pour une location de $6$ h, quel tarif choisir ?",
+          reponses: [
+            { question: "a)", attendu: ["A", "tarif A", "le tarif A"] },
+            { question: "b) durée", attendu: "4" },
+            { question: "b) prix", attendu: "12" },
+            { question: "c)", attendu: ["B", "tarif B", "le tarif B"] },
+          ],
           figure: repere([-1, 7, -2, 13], [
             { pts: [[0, 0], [4.2, 12.6]] },
             { pts: [[0, 4], [4.5, 13]], couleur: ORANGE },
@@ -404,6 +454,10 @@ export const exercicesProportionnalite4e: FicheExercicesData = {
         },
         {
           enonce: "Pour un mortier, un maçon mélange toujours $1$ sac de ciment de $25$ kg avec $75$ kg de sable. Les masses de ciment et de sable sont proportionnelles.\na) Quelle masse de ciment faut-il pour $180$ kg de sable ?\nb) Combien de sacs de ciment faut-il acheter ?",
+          reponses: [
+            { question: "a)", attendu: "60" },
+            { question: "b)", attendu: "3" },
+          ],
           correction:
             "a) Produit en croix : $75$ kg de sable correspondent à $25$ kg de ciment, $180$ kg de sable correspondent à $x$ kg.\n$x = \\dfrac{180 \\times 25}{75} = 60$. Il faut $60$ kg de ciment.\nb) Un sac pèse $25$ kg : $60 \\div 25 = 2{,}4$ sacs. On ne peut pas acheter $0{,}4$ sac : il faut en acheter $3$.\n⭐ Contrôle : il y a toujours $3$ fois plus de sable que de ciment, et $3 \\times 60 = 180$.\n⛔ Le piège : arrondir à $2$ sacs. Avec $2$ sacs, soit $50$ kg, il manquerait $10$ kg de ciment.\nRéponse : a) $60$ kg ; b) $3$ sacs.",
           schema: ecranSeulement(croix(["sable (kg)", "ciment (kg)"], ["75", "180"], ["25", "x"], "x = 180 × 25 ÷ 75 = 60")),
@@ -411,6 +465,10 @@ export const exercicesProportionnalite4e: FicheExercicesData = {
         },
         {
           enonce: "En classe de physique, on suspend des masses à un ressort et on mesure son allongement (chiffres d'un modèle).\na) L'allongement est-il proportionnel à la masse, pour toutes les mesures ?\nb) Pour les mesures où il l'est, quel est le coefficient ?\nc) Quel allongement prévoir pour une masse de $120$ g ?",
+          reponses: [
+            { question: "b)", attendu: "0,024" },
+            { question: "c)", attendu: "2,88" },
+          ],
           figure: table(["masse (g)", "allongement (cm)"], [
             ["50", "1,2"],
             ["100", "2,4"],
@@ -430,6 +488,10 @@ export const exercicesProportionnalite4e: FicheExercicesData = {
         },
         {
           enonce: "Une trailleuse monte une pente à vitesse régulière : elle gagne $540$ m d'altitude en $45$ min. Le dénivelé est proportionnel à la durée.\na) Quel dénivelé gagne-t-elle en $1$ h $20$ min ?\nb) Combien de temps lui faut-il pour gagner $1\\,200$ m ?",
+          reponses: [
+            { question: "a)", attendu: "960" },
+            { question: "b)", attendu: ["1h40", "1h40min", "100min", "100"] },
+          ],
           correction:
             "Je mets les durées en minutes : $1$ h $20$ min, c'est $60 + 20 = 80$ min.\na) Produit en croix : $45$ min correspondent à $540$ m, $80$ min correspondent à $x$ m. $x = \\dfrac{80 \\times 540}{45} = 960$. Elle gagne $960$ m.\nb) $540$ m correspondent à $45$ min, $1\\,200$ m correspondent à $t$ min. $t = \\dfrac{1\\,200 \\times 45}{540} = 100$. Il lui faut $100$ min, soit $1$ h $40$ min.\n⭐ Contrôle : en $1$ min, elle gagne $540 \\div 45 = 12$ m. Et $12 \\times 80 = 960$, $12 \\times 100 = 1\\,200$.\n⛔ Le piège : écrire $1$ h $20$ min $= 1{,}20$ h. En heures, c'est $1 + \\dfrac{20}{60}$, pas $1{,}20$. Les minutes évitent la question.\nRéponse : a) $960$ m ; b) $1$ h $40$ min.",
           schema: ecranSeulement(croix(["durée (min)", "dénivelé (m)"], ["45", "80"], ["540", "x"], "x = 80 × 540 ÷ 45 = 960")),
@@ -437,6 +499,9 @@ export const exercicesProportionnalite4e: FicheExercicesData = {
         },
         {
           enonce: "Ce tableau est un tableau de proportionnalité. Complète-le SANS calculer le coefficient, en écrivant chaque nombre du haut comme une somme ou une différence de nombres déjà connus. Vérifie ensuite avec le coefficient, puis écris la relation qui donne $y$ en fonction de $x$.",
+          reponses: [
+            { question: "y", attendu: "2,4x" },
+          ],
           figure: tableauCoef(["x", "y"], ["7", "11", "18", "4", "29"], ["16,8", "26,4", "…", "…", "…"], "?"),
           correction:
             "$18 = 7 + 11$ : j'additionne les colonnes, $16{,}8 + 26{,}4 = 43{,}2$.\n$4 = 11 - 7$ : je soustrais, $26{,}4 - 16{,}8 = 9{,}6$.\n$29 = 18 + 11$ : $43{,}2 + 26{,}4 = 69{,}6$.\nVérification par le coefficient : $16{,}8 \\div 7 = 2{,}4$. Puis $18 \\times 2{,}4 = 43{,}2$ ; $4 \\times 2{,}4 = 9{,}6$ ; $29 \\times 2{,}4 = 69{,}6$.\nLa relation : je multiplie toujours $x$ par $2{,}4$, donc $y = 2{,}4 \\times x$.\n⛔ Le piège : chercher un calcul compliqué. Quand les nombres du haut se combinent, les nombres du bas se combinent de la même façon.\nRéponse : $43{,}2$ ; $9{,}6$ ; $69{,}6$ ; $y = 2{,}4 \\times x$.",
@@ -461,6 +526,13 @@ export const exercicesProportionnalite4e: FicheExercicesData = {
           titre: "La pâte à pain",
           enonce:
             "Un boulanger prépare toujours sa pâte avec les mêmes proportions : pour $1\\,000$ g de farine, $650$ g d'eau, $18$ g de sel et $20$ g de levure (chiffres d'un modèle).\na) Il n'a que $455$ g d'eau. Quelle masse de farine doit-il prendre ? Et de sel, et de levure ?\nb) Quelle masse de pâte obtient-il avec $1\\,000$ g de farine ?\nc) Avec $5$ kg de farine, combien de pains de $350$ g peut-il façonner ?",
+          reponses: [
+            { question: "farine", attendu: "700" },
+            { question: "sel", attendu: "12,6" },
+            { question: "levure", attendu: "14" },
+            { question: "b)", attendu: "1688" },
+            { question: "c)", attendu: "24" },
+          ],
           figure: table(["ingrédient", "pour 1 000 g", "avec 455 g d'eau"], [
             ["farine (g)", "1 000", "?"],
             ["eau (g)", "650", "455"],
@@ -475,6 +547,11 @@ export const exercicesProportionnalite4e: FicheExercicesData = {
           titre: "Les ombres au soleil",
           enonce:
             "Au même moment d'une journée ensoleillée, la longueur de l'ombre d'un objet vertical est proportionnelle à sa hauteur. Un bâton de $1{,}5$ m a une ombre de $2{,}4$ m. Au même moment, un arbre a une ombre de $14$ m.\na) Quelle est la hauteur de l'arbre ?\nb) Quelle est la longueur de l'ombre d'une personne de $1{,}6$ m ?\nc) Une tour a une ombre de $30{,}4$ m. Quelle est sa hauteur ?",
+          reponses: [
+            { question: "a)", attendu: "8,75" },
+            { question: "b)", attendu: "2,56" },
+            { question: "c)", attendu: "19" },
+          ],
           figure: ombres([
             { h: 1.5, o: 2.4, hauteur: "1,5 m", ombre: "2,4 m" },
             { h: 8.75, o: 14, hauteur: "?", ombre: "14 m" },
@@ -487,6 +564,11 @@ export const exercicesProportionnalite4e: FicheExercicesData = {
           titre: "Les panneaux solaires",
           enonce:
             "Sur un toit bien orienté, l'électricité produite en un an est proportionnelle à la surface de panneaux solaires : $12$ m² de panneaux produisent $2\\,280$ kWh par an (chiffres d'un modèle).\na) Combien produisent $20$ m² de panneaux ?\nb) Une famille consomme $4\\,560$ kWh par an. Quelle surface de panneaux produirait autant ?\nc) Un panneau mesure $1{,}7$ m². Combien de panneaux faut-il poser pour atteindre au moins cette surface ?",
+          reponses: [
+            { question: "a)", attendu: "3800" },
+            { question: "b)", attendu: "24" },
+            { question: "c)", attendu: "15" },
+          ],
           correction:
             "Je reviens à l'unité : $1$ m² produit $2\\,280 \\div 12 = 190$ kWh par an.\na) $20 \\times 190 = 3\\,800$ kWh par an.\nb) Je fais le chemin inverse : $4\\,560 \\div 190 = 24$ m².\n⭐ Contrôle : $4\\,560$, c'est le double de $2\\,280$, donc il faut le double de $12$ m², soit $24$ m².\nc) $24 \\div 1{,}7 \\approx 14{,}1$. Avec $14$ panneaux, on n'a que $14 \\times 1{,}7 = 23{,}8$ m², pas assez. Il faut $15$ panneaux.\n⛔ Le piège du c) : répondre $14$ panneaux, ou $14{,}1$. On ne pose pas un morceau de panneau, et $14$ ne suffisent pas.\nRéponse : a) $3\\,800$ kWh ; b) $24$ m² ; c) $15$ panneaux.",
           schema: ecranSeulement(tableauCoef(["surface (m²)", "production (kWh)"], ["12", "1", "20", "24"], ["2 280", "!190", "!3 800", "4 560"], "190")),
@@ -496,6 +578,12 @@ export const exercicesProportionnalite4e: FicheExercicesData = {
           titre: "Les pompes du bassin",
           enonce:
             "Pour vider un bassin, on utilise des pompes toutes identiques. Avec $1$ pompe, il faut $12$ h. Avec $2$ pompes, $6$ h. Avec $3$ pompes, $4$ h.\na) Combien de temps faut-il avec $4$ pompes ? Avec $6$ pompes ?\nb) La durée est-elle proportionnelle au nombre de pompes ? Justifie.\nc) Quel calcul donne toujours le même résultat, pour chaque colonne ?\nd) Combien de pompes faut-il pour vider le bassin en $1$ h $30$ min ?",
+          reponses: [
+            { question: "a) 4", attendu: "3" },
+            { question: "a) 6", attendu: "2" },
+            { question: "b)", attendu: ["non", "faux"] },
+            { question: "d)", attendu: "8" },
+          ],
           figure: table(["pompes", "durée (h)"], [
             ["1", "12"],
             ["2", "6"],

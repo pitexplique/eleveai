@@ -234,6 +234,12 @@ export const exercicesAireUnite6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Choisis la bonne unité : cm, cm², m ou m².\na) Une feuille de classeur a une surface d'environ $600$ …\nb) Un couloir mesure environ $12$ … de long.\nc) Une chambre a une surface d'environ $11$ …\nd) Un timbre mesure environ $3$ … de large.",
+          reponses: [
+            { question: "a)", attendu: ["cm²", "cm2"] },
+            { question: "b)", attendu: ["m"] },
+            { question: "c)", attendu: ["m²", "m2"] },
+            { question: "d)", attendu: ["cm"] },
+          ],
           correction:
             "Une longueur se dit en cm ou en m. Une surface se dit en cm² ou en m².\na) C'est une surface, et une feuille est petite : $600$ cm².\nb) C'est une longueur, et un couloir est grand : $12$ m.\nc) C'est une surface, et une chambre est grande : $11$ m².\nd) C'est une longueur, et un timbre est petit : $3$ cm.\n⛔ Le piège : écrire une surface en cm. Le cm mesure un trait, pas une surface.\nRéponse : a) cm² ; b) m ; c) m² ; d) cm.",
           schema: ecranSeulement(
@@ -249,6 +255,9 @@ export const exercicesAireUnite6e: FicheExercicesData = {
         },
         {
           enonce: "Chaque carreau est un carré de $1$ cm de côté.\nQuelle est l'aire de la figure ?",
+          reponses: [
+            { attendu: "13" },
+          ],
           figure: plan("cm", [
             { grille: [0, 0, 7, 3] },
             { poly: [[0, 0], [7, 0], [7, 1], [5, 1], [5, 3], [2, 3], [2, 1], [0, 1]], fond: "bleu" },
@@ -259,6 +268,11 @@ export const exercicesAireUnite6e: FicheExercicesData = {
         },
         {
           enonce: "Chaque carreau est un carré de $1$ cm de côté.\na) Combien de carreaux entiers la maison recouvre-t-elle ?\nb) Combien de demi-carreaux ?\nc) Quelle est son aire ?",
+          reponses: [
+            { question: "a)", attendu: "10" },
+            { question: "b)", attendu: "4" },
+            { question: "c)", attendu: "12" },
+          ],
           figure: plan("cm", [
             { grille: [0, 0, 5, 4] },
             { poly: [[0, 0], [4, 0], [4, 2], [2, 4], [0, 2]], fond: "orange" },
@@ -269,6 +283,9 @@ export const exercicesAireUnite6e: FicheExercicesData = {
         },
         {
           enonce: "Ali et Lou mesurent le même rectangle de $4$ cm sur $2$ cm.\nAli le couvre de carrés de $1$ cm de côté. Lou utilise des carrés de $2$ cm de côté.\na) Combien de carrés utilise chacun ?\nb) Ali dit « $8$ », Lou dit « $2$ ». Qui a raison ?",
+          reponses: [
+            { question: "a)", attendu: "8 ; 2" },
+          ],
           figure: plan("cm", [
             { grille: [0, 0, 4, 2] },
             { grille: [5, 0, 9, 2], pas: 2 },
@@ -283,6 +300,11 @@ export const exercicesAireUnite6e: FicheExercicesData = {
         },
         {
           enonce: "Ce carré a $1$ m de côté. On le découpe en carrés de $1$ dm de côté.\na) Combien de petits carrés y a-t-il dans une rangée ?\nb) Combien y a-t-il de rangées ?\nc) Complète : $1$ m² = … dm².",
+          reponses: [
+            { question: "a)", attendu: "10" },
+            { question: "b)", attendu: "10" },
+            { question: "c)", attendu: "100" },
+          ],
           figure: plan("dm", [
             { grille: [0, 0, 10, 10] },
             { poly: [[0, 0], [10, 0], [10, 10], [0, 10]], fond: "bleu" },
@@ -296,6 +318,12 @@ export const exercicesAireUnite6e: FicheExercicesData = {
         },
         {
           enonce: "Convertis.\na) $4$ dm² en cm²\nb) $6$ m² en dm²\nc) $800$ cm² en dm²\nd) $250$ dm² en m²",
+          reponses: [
+            { question: "a)", attendu: "400" },
+            { question: "b)", attendu: "600" },
+            { question: "c)", attendu: "8" },
+            { question: "d)", attendu: "2,5" },
+          ],
           correction:
             "Entre deux unités voisines, il y a toujours $100$ petits carrés.\na) $1$ dm² $= 100$ cm². $4 \\times 100 = 400$ cm².\nb) $1$ m² $= 100$ dm². $6 \\times 100 = 600$ dm².\nc) Il faut $100$ cm² pour $1$ dm². $800 \\div 100 = 8$ dm².\nd) Il faut $100$ dm² pour $1$ m². $250 \\div 100 = 2{,}5$ m².\n⛔ Le piège : multiplier par $10$, comme pour les longueurs. Pour les aires, c'est $100$.\nRéponse : a) $400$ cm² ; b) $600$ dm² ; c) $8$ dm² ; d) $2{,}5$ m².",
           schema: ecranSeulement(carreCent("dm", 0)),
@@ -303,6 +331,12 @@ export const exercicesAireUnite6e: FicheExercicesData = {
         },
         {
           enonce: "Vrai ou faux ?\na) $1$ cm² est l'aire d'un carré de $1$ cm de côté.\nb) Un rectangle de $1$ cm sur $2$ cm a une aire de $1$ cm².\nc) $1$ km² est l'aire d'un carré de $1$ km de côté.\nd) $1$ mm² est plus grand que $1$ cm².",
+          reponses: [
+            { question: "a)", attendu: ["vrai", "oui"] },
+            { question: "b)", attendu: ["faux", "non"] },
+            { question: "c)", attendu: ["vrai", "oui"] },
+            { question: "d)", attendu: ["faux", "non"] },
+          ],
           figure: plan("cm", [
             { grille: [0, 0, 4, 2] },
             { poly: [[0, 0], [1, 0], [1, 1], [0, 1]], fond: "bleu" },
@@ -316,6 +350,11 @@ export const exercicesAireUnite6e: FicheExercicesData = {
         },
         {
           enonce: "Complète avec la bonne unité : m², dm² ou cm².\na) $3$ m² = $300$ …\nb) $500$ cm² = $5$ …\nc) $7$ dm² = $700$ …",
+          reponses: [
+            { question: "a)", attendu: ["dm²", "dm2"] },
+            { question: "b)", attendu: ["dm²", "dm2"] },
+            { question: "c)", attendu: ["cm²", "cm2"] },
+          ],
           correction:
             "Je regarde si le nombre grandit ou diminue.\na) $300 = 3 \\times 100$. Le nombre grandit : l'unité est plus petite. $3$ m² $= 300$ dm².\nb) $5 = 500 \\div 100$. Le nombre diminue : l'unité est plus grande. $500$ cm² $= 5$ dm².\nc) $700 = 7 \\times 100$. L'unité est plus petite. $7$ dm² $= 700$ cm².\n⛔ Le piège : se tromper de sens. Un nombre plus grand va avec une unité plus petite.\nRéponse : a) dm² ; b) dm² ; c) cm².",
           schema: ecranSeulement(carreCent("m", 0)),
@@ -337,6 +376,10 @@ export const exercicesAireUnite6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Chaque carreau mesure $1$ cm de côté.\na) Compte les carreaux entiers et les demi-carreaux de la figure A. Quelle est son aire ?\nb) Quelle est l'aire du rectangle B ?\nc) Explique comment découper A pour obtenir B.",
+          reponses: [
+            { question: "a)", attendu: "8" },
+            { question: "b)", attendu: "8" },
+          ],
           figure: plan("cm", [
             { grille: [0, 0, 12, 2] },
             { poly: [[0, 0], [4, 0], [6, 2], [2, 2]], fond: "bleu" },
@@ -358,6 +401,11 @@ export const exercicesAireUnite6e: FicheExercicesData = {
         },
         {
           enonce: "Voici le plan d'un studio. Chaque carreau représente $1$ m².\na) Quelle est l'aire de chaque pièce ?\nb) Quelle est l'aire du studio ?\nc) Une annonce dit : « studio de $35$ m² ». Est-ce vrai ?",
+          reponses: [
+            { question: "a)", attendu: "20 ; 6 ; 6" },
+            { question: "b)", attendu: "32" },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           figure: plan("m", [
             { grille: [0, 0, 8, 4] },
             { poly: [[0, 0], [5, 0], [5, 4], [0, 4]], fond: "bleu" },
@@ -373,6 +421,11 @@ export const exercicesAireUnite6e: FicheExercicesData = {
         },
         {
           enonce: "Une nappe a une aire de $1{,}5$ m².\nUne serviette a une aire de $16$ dm².\na) Écris l'aire de la nappe en dm².\nb) Écris l'aire de la serviette en cm².\nc) Sans rien perdre, combien de serviettes peut-on découper dans la nappe ?",
+          reponses: [
+            { question: "a)", attendu: "150" },
+            { question: "b)", attendu: "1600" },
+            { question: "c)", attendu: "9" },
+          ],
           correction:
             "a) $1$ m² $= 100$ dm². $1{,}5 \\times 100 = 150$ dm².\nb) $1$ dm² $= 100$ cm². $16 \\times 100 = 1\\,600$ cm².\nc) Je compare dans la même unité : des dm².\n$9 \\times 16 = 144$ : $9$ serviettes, il reste $6$ dm².\n$10 \\times 16 = 160$ : c'est trop.\n⛔ Le piège : diviser $1{,}5$ par $16$. La nappe et la serviette ne sont pas dans la même unité.\nRéponse : a) $150$ dm² ; b) $1\\,600$ cm² ; c) $9$ serviettes.",
           schema: ecranSeulement(carreCent("m", 16)),
@@ -380,6 +433,10 @@ export const exercicesAireUnite6e: FicheExercicesData = {
         },
         {
           enonce: "Un carreau de faïence est un carré de $20$ cm de côté.\na) Combien de carrés de $1$ dm de côté contient-il ? Donne son aire en dm².\nb) On veut couvrir $2$ m² de mur. Combien de carreaux faut-il ?",
+          reponses: [
+            { question: "a)", attendu: "4" },
+            { question: "b)", attendu: "50" },
+          ],
           figure: plan("cm", [
             { grille: [0, 0, 20, 20], pas: 10 },
             { poly: [[0, 0], [20, 0], [20, 20], [0, 20]], fond: "bleu" },
@@ -392,6 +449,11 @@ export const exercicesAireUnite6e: FicheExercicesData = {
         },
         {
           enonce: "Chaque carreau mesure $1$ cm de côté.\na) Calcule l'aire de A et celle de B.\nb) Calcule le périmètre de A et celui de B.\nc) Deux figures de même aire ont-elles toujours le même périmètre ?",
+          reponses: [
+            { question: "a)", attendu: "8 ; 8" },
+            { question: "b)", attendu: "18 ; 12" },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           figure: plan("cm", [
             { grille: [0, 0, 8, 4] },
             { poly: [[0, 3], [8, 3], [8, 4], [0, 4]], fond: "bleu" },
@@ -412,6 +474,11 @@ export const exercicesAireUnite6e: FicheExercicesData = {
         },
         {
           enonce: "Chaque carreau mesure $1$ cm de côté. Voici trois carrés.\na) Combien de carreaux recouvre chaque carré ?\nb) Le côté passe de $1$ cm à $2$ cm. Par combien l'aire est-elle multipliée ?\nc) Un carré a un côté $10$ fois plus grand. Combien de petits carreaux contient-il ?",
+          reponses: [
+            { question: "a)", attendu: "1 ; 4 ; 9" },
+            { question: "b)", attendu: "4" },
+            { question: "c)", attendu: "100" },
+          ],
           figure: plan("cm", [
             { grille: [0, 0, 9, 3] },
             { poly: [[0, 0], [1, 0], [1, 1], [0, 1]], fond: "bleu" },
@@ -424,6 +491,10 @@ export const exercicesAireUnite6e: FicheExercicesData = {
         },
         {
           enonce: "Tom dit : « $1$ dm $= 10$ cm, donc $1$ dm² $= 10$ cm². »\na) Sur le dessin, les cases orange sont celles que Tom a comptées. Qu'a-t-il oublié ?\nb) Combien de cm² y a-t-il vraiment dans $1$ dm² ?\nc) Convertis $5$ dm² en cm².",
+          reponses: [
+            { question: "b)", attendu: "100" },
+            { question: "c)", attendu: "500" },
+          ],
           figure: carreCent("dm", 10, false),
           correction:
             "a) Tom a compté une seule rangée de $10$ carrés.\nMais le carré de $1$ dm a $10$ rangées.\nb) $10 \\times 10 = 100$. Donc $1$ dm² $= 100$ cm².\nc) $5 \\times 100 = 500$ cm².\n⛔ Le piège de Tom : prendre le $10$ des longueurs. Pour les aires, c'est $10 \\times 10 = 100$.\nRéponse : a) les $9$ autres rangées ; b) $100$ cm² ; c) $500$ cm².",
@@ -447,6 +518,11 @@ export const exercicesAireUnite6e: FicheExercicesData = {
           titre: "Le bac potager",
           enonce:
             "Nina a un bac potager carré de $1$ m de côté.\nUne salade a besoin d'un carré de $20$ cm de côté, soit $4$ dm².\na) Quelle est l'aire du bac, en dm² ?\nb) Combien de salades peut-elle planter au plus ?\nc) Elle plante $12$ salades. Dans le reste, elle sème des radis : un radis par dm². Combien de radis ?",
+          reponses: [
+            { question: "a)", attendu: "100" },
+            { question: "b)", attendu: "25" },
+            { question: "c)", attendu: "52" },
+          ],
           figure: plan("dm", [
             { grille: [0, 0, 10, 10] },
             { poly: [[0, 0], [10, 0], [10, 10], [0, 10]], fond: "vert" },
@@ -462,6 +538,12 @@ export const exercicesAireUnite6e: FicheExercicesData = {
           titre: "La mosaïque",
           enonce:
             "Voici une mosaïque carrée. Chaque carreau mesure $1$ cm de côté.\nAu centre, un losange orange. Le reste est bleu.\na) Quelle est l'aire de toute la mosaïque ?\nb) Compte les carreaux entiers et les demi-carreaux du losange. Quelle est son aire ?\nc) Quelle est l'aire de la partie bleue ?\nd) Écris l'aire de la mosaïque en dm².",
+          reponses: [
+            { question: "a)", attendu: "36" },
+            { question: "b)", attendu: "8" },
+            { question: "c)", attendu: "28" },
+            { question: "d)", attendu: "0,36" },
+          ],
           figure: plan("cm", [
             { grille: [0, 0, 6, 6] },
             { poly: [[0, 0], [6, 0], [6, 6], [0, 6]], fond: "bleu" },
@@ -475,6 +557,12 @@ export const exercicesAireUnite6e: FicheExercicesData = {
           titre: "La salle de jeux",
           enonce:
             "Voici le plan d'une salle de jeux. Chaque carreau représente $1$ m².\nOn la couvre de dalles de moquette carrées de $50$ cm de côté.\na) Quelle est l'aire de la salle ?\nb) Une dalle a une aire de $25$ dm². Combien de dalles faut-il pour $1$ m² ?\nc) Combien de dalles faut-il pour toute la salle ?\nd) Les dalles se vendent par paquets de $10$. Combien de paquets faut-il ?",
+          reponses: [
+            { question: "a)", attendu: "22" },
+            { question: "b)", attendu: "4" },
+            { question: "c)", attendu: "88" },
+            { question: "d)", attendu: "9" },
+          ],
           figure: plan("m", [
             { grille: [0, 0, 7, 4] },
             { poly: [[0, 0], [7, 0], [7, 2], [4, 2], [4, 4], [0, 4]], fond: "bleu" },
@@ -489,6 +577,13 @@ export const exercicesAireUnite6e: FicheExercicesData = {
           titre: "Du timbre à la ville",
           enonce:
             "Choisis la bonne unité : mm², cm², dm², m² ou km².\na) Un timbre a une aire d'environ $6$ …\nb) Un écran de téléphone a une aire d'environ $1$ …\nc) Un terrain de football a une aire d'environ $7\\,000$ …\nd) Une grande ville a une aire d'environ $100$ …\ne) Une tête d'épingle a une aire d'environ $1$ …",
+          reponses: [
+            { question: "a)", attendu: ["cm²", "cm2"] },
+            { question: "b)", attendu: ["dm²", "dm2"] },
+            { question: "c)", attendu: ["m²", "m2"] },
+            { question: "d)", attendu: ["km²", "km2"] },
+            { question: "e)", attendu: ["mm²", "mm2"] },
+          ],
           correction:
             "Chaque unité est l'aire d'un carré : de $1$ mm, $1$ cm, $1$ dm, $1$ m ou $1$ km de côté.\na) Un timbre, c'est quelques carrés de $1$ cm : $6$ cm².\nb) Un écran tient à peu près dans un carré de $1$ dm : $1$ dm².\nc) Un terrain, c'est des milliers de carrés de $1$ m : $7\\,000$ m².\nd) Une ville, c'est des carrés de $1$ km : $100$ km².\ne) Une tête d'épingle est un carré de $1$ mm : $1$ mm².\n⛔ Le piège : répondre au hasard. J'imagine chaque carré à côté de l'objet.\nRéponse : a) cm² ; b) dm² ; c) m² ; d) km² ; e) mm².",
           schema: ecranSeulement(

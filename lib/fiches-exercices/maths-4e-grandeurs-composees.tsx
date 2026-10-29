@@ -491,6 +491,9 @@ export const exercicesGrandeursComposees4e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Une plaque de cuisson de $1{,}5$ kW chauffe une casserole pendant $40$ min. Quelle énergie consomme-t-elle, en kWh ?",
+          reponses: [
+            { attendu: ["1", "1 kWh"] },
+          ],
           correction:
             "L'énergie est une grandeur produit : puissance × durée. Pour obtenir des kWh, je multiplie des kW par des HEURES.\nJe convertis la durée : $40$ min $= \\dfrac{40}{60}$ h $= \\dfrac{2}{3}$ h.\n$E = 1{,}5 \\times \\dfrac{2}{3} = 1$ kWh.\n⭐ Sur le dessin, l'énergie est l'AIRE du rectangle : la durée en largeur, la puissance en hauteur. En une heure entière, ce serait $1{,}5$ kWh ; en $40$ min, les deux tiers.\n⛔ Le piège : écrire $40$ min $= 0{,}40$ h. Une heure compte $60$ minutes, pas $100$ : on trouverait $1{,}5 \\times 0{,}40 = 0{,}6$ kWh au lieu de $1$.\nRéponse : la plaque consomme $1$ kWh.",
           schema: produit(
@@ -506,6 +509,9 @@ export const exercicesGrandeursComposees4e: FicheExercicesData = {
         },
         {
           enonce: "Une nageuse parcourt $1\\,500$ m en $25$ min, à allure régulière. Quelle est sa vitesse moyenne, en mètres par minute ?",
+          reponses: [
+            { attendu: ["60", "60 m/min"] },
+          ],
           correction:
             "La vitesse est une grandeur quotient : distance ÷ durée. L'unité demandée, m/min, me dit l'ordre : des mètres DIVISÉS par des minutes.\n$v = 1\\,500 \\div 25 = 60$ m/min.\nCela veut dire : $60$ m pour UNE minute. Sur le dessin, toutes les $5$ minutes, elle avance de $5 \\times 60 = 300$ m.\n⛔ Le piège : diviser dans l'autre sens, $25 \\div 1\\,500 \\approx 0{,}017$. Ce nombre est en min/m, le temps pour UN mètre : ce n'est pas une vitesse.\nRéponse : sa vitesse moyenne est $60$ m/min.",
           schema: trajets(1500, [
@@ -520,6 +526,16 @@ export const exercicesGrandeursComposees4e: FicheExercicesData = {
         {
           enonce:
             "Pour chaque calcul, écrire l'unité du résultat, la lire à voix haute, et dire s'il s'agit d'une grandeur produit ou d'une grandeur quotient.\na) Un prix en euros divisé par un volume en litres.\nb) Une puissance en watts multipliée par une durée en heures.\nc) Un nombre d'habitants divisé par une aire en km².\nd) Une masse en grammes divisée par un volume en cm³.",
+          reponses: [
+            { question: "a) unité", attendu: ["€/L"] },
+            { question: "a) type", attendu: ["quotient", "grandeur quotient"] },
+            { question: "b) unité", attendu: ["Wh"] },
+            { question: "b) type", attendu: ["produit", "grandeur produit"] },
+            { question: "c) unité", attendu: ["hab/km²", "hab/km2"] },
+            { question: "c) type", attendu: ["quotient", "grandeur quotient"] },
+            { question: "d) unité", attendu: ["g/cm³", "g/cm3"] },
+            { question: "d) type", attendu: ["quotient", "grandeur quotient"] },
+          ],
           correction:
             "L'unité du résultat subit la MÊME opération que les nombres : je multiplie ou je divise les unités.\na) € ÷ L donne €/L, qui se lit « euros par litre » : grandeur quotient. C'est le prix affiché à la pompe.\nb) W × h donne Wh, qui se lit « wattheure » : grandeur produit.\nc) habitants ÷ km² donne hab/km², « habitants par kilomètre carré » : grandeur quotient, la densité de population.\nd) g ÷ cm³ donne g/cm³, « grammes par centimètre cube » : grandeur quotient, la masse volumique.\n⭐ Le repère : une barre trahit une division ; deux unités collées trahissent une multiplication.\n⛔ Le piège : lire « €/L » comme « des euros et des litres ». La barre se lit « par » : c'est le prix de UN litre.\nRéponse : €/L (quotient) ; Wh (produit) ; hab/km² (quotient) ; g/cm³ (quotient).",
           schema: tableau([
@@ -534,6 +550,11 @@ export const exercicesGrandeursComposees4e: FicheExercicesData = {
         {
           enonce:
             "Sur l'étiquette d'un sachet de riz, on lit : $2{,}40$ €/kg.\na) Que signifie cette indication ?\nb) Combien coûtent $3$ kg de ce riz ?\nc) Combien coûtent $500$ g ?\nd) Quelle masse de riz peut-on acheter avec $6$ € ?",
+          reponses: [
+            { question: "b)", attendu: "7,2" },
+            { question: "c)", attendu: "1,2" },
+            { question: "d)", attendu: "2,5" },
+          ],
           correction:
             "a) La barre se lit « par » : $2{,}40$ € PAR kilogramme, c'est-à-dire $2{,}40$ € pour UN kilo. C'est un prix au kilo, une grandeur quotient.\nb) $3$ kilos coûtent trois fois plus : $3 \\times 2{,}40 = 7{,}20$ €.\nc) Le prix est donné par kilo : je convertis d'abord, $500$ g $= 0{,}5$ kg. Puis $0{,}5 \\times 2{,}40 = 1{,}20$ €.\nd) Je divise l'argent par le prix d'un kilo : $6 \\div 2{,}40 = 2{,}5$ kg. L'unité le confirme : des € divisés par des €/kg donnent des kg.\n⛔ Le piège : calculer $500 \\times 2{,}40 = 1\\,200$ €. Des grammes multipliés par des €/kg ne donnent pas des euros : je convertis AVANT de multiplier.\nRéponse : $2{,}40$ € pour $1$ kg ; $7{,}20$ € ; $1{,}20$ € ; $2{,}5$ kg.",
           schema: tableau([
@@ -544,6 +565,11 @@ export const exercicesGrandeursComposees4e: FicheExercicesData = {
         },
         {
           enonce: "Convertir en mètres.\na) $3{,}7$ km\nb) $45$ mm\nc) $280$ cm",
+          reponses: [
+            { question: "a)", attendu: "3700" },
+            { question: "b)", attendu: "0,045" },
+            { question: "c)", attendu: "2,8" },
+          ],
           correction:
             "Chaque unité de longueur vaut $10$ fois la suivante : km, hm, dam, m, dm, cm, mm. Dans le tableau, je place le chiffre des unités du nombre dans la colonne de son unité, puis je lis le nombre avec la virgule dans la colonne des mètres.\na) $1$ km $= 1\\,000$ m, donc $3{,}7$ km $= 3{,}7 \\times 1\\,000 = 3\\,700$ m.\nb) $1$ m $= 1\\,000$ mm, donc $45$ mm $= 45 \\div 1\\,000 = 0{,}045$ m.\nc) $1$ m $= 100$ cm, donc $280$ cm $= 280 \\div 100 = 2{,}8$ m.\n⭐ Contrôle : vers une unité plus GRANDE, le nombre devient plus PETIT ; vers une unité plus petite, il grandit.\n⛔ Le piège : écrire $45$ mm $= 0{,}45$ m. Il y a TROIS rangs du millimètre au mètre, pas deux.\nRéponse : $3\\,700$ m ; $0{,}045$ m ; $2{,}8$ m.",
           schema: conversion(["km", "hm", "dam", "m", "dm", "cm", "mm"], 1, [
@@ -556,6 +582,12 @@ export const exercicesGrandeursComposees4e: FicheExercicesData = {
         {
           enonce:
             "a) Un carré de $1$ cm de côté est découpé en carrés de $1$ mm de côté (figure). Combien y en a-t-il ? En déduire combien de mm² vaut $1$ cm².\nb) Convertir : $6$ cm² en mm² ; $45\\,000$ cm² en m² ; $3{,}2$ dm² en cm².",
+          reponses: [
+            { question: "a)", attendu: "100" },
+            { question: "b) mm²", attendu: "600" },
+            { question: "b) m²", attendu: "4,5" },
+            { question: "b) cm²", attendu: "320" },
+          ],
           figure: grilleMm(false),
           correction:
             "a) Le côté de $1$ cm mesure $10$ mm : il y a $10$ rangées de $10$ petits carrés, soit $10 \\times 10 = 100$ carrés de $1$ mm². Donc $1$ cm² $= 100$ mm².\nC'est la conséquence de $1$ cm $= 10$ mm : une aire multiplie DEUX longueurs, le facteur $10$ compte deux fois.\nb) D'une unité d'aire à la suivante, le facteur est $100$ : dans le tableau, chaque unité a DEUX colonnes.\n$6$ cm² $= 6 \\times 100 = 600$ mm².\n$1$ m² $= 100 \\times 100 = 10\\,000$ cm², donc $45\\,000$ cm² $= 45\\,000 \\div 10\\,000 = 4{,}5$ m².\n$1$ dm² $= 100$ cm², donc $3{,}2$ dm² $= 3{,}2 \\times 100 = 320$ cm².\n⛔ Le piège : écrire $6$ cm² $= 60$ mm², avec le facteur des longueurs. Le dessin compte $100$ petits carrés, pas $10$.\nRéponse : $1$ cm² $= 100$ mm² ; $600$ mm² ; $4{,}5$ m² ; $320$ cm².",
@@ -572,6 +604,13 @@ export const exercicesGrandeursComposees4e: FicheExercicesData = {
         {
           enonce:
             "Sans faire aucun calcul, dire si chaque résultat est possible. S'il ne l'est pas, dire si c'est l'unité ou la valeur qui cloche.\na) L'aire d'un jardin : $540$ m.\nb) La vitesse d'un escargot : $3$ m/h.\nc) Le volume d'eau d'une piscine : $75$ m².\nd) La vitesse d'un marcheur : $50$ km/h.\ne) L'énergie consommée par un four en une soirée : $2$ kWh.",
+          reponses: [
+            { question: "a)", attendu: ["unité", "l'unité"] },
+            { question: "b)", attendu: ["possible", "oui", "plausible"] },
+            { question: "c)", attendu: ["unité", "l'unité"] },
+            { question: "d)", attendu: ["valeur", "la valeur"] },
+            { question: "e)", attendu: ["possible", "oui", "plausible"] },
+          ],
           correction:
             "Je pose deux questions, dans cet ordre : l'unité est-elle celle de la grandeur cherchée ? Puis : la valeur est-elle plausible ?\na) Une aire se mesure en m², pas en m : l'UNITÉ cloche. $540$ m est une longueur.\nb) m/h est bien une unité de vitesse, et $3$ m par heure, c'est moins d'un millimètre par seconde : c'est plausible pour un escargot.\nc) Un volume se mesure en m³ : l'UNITÉ cloche. $75$ m² serait la surface de l'eau, pas son volume.\nd) km/h est bien une unité de vitesse, mais un marcheur fait environ $5$ km/h : c'est la VALEUR qui cloche, dix fois trop grande.\ne) kWh est bien une unité d'énergie, et $2$ kWh est plausible pour un four.\n⛔ Le piège : croire que l'unité suffit. Au d), l'unité est parfaite et le résultat est pourtant absurde : il faut aussi l'ordre de grandeur.\nRéponse : a) et c) sont faux par l'unité ; d) est faux par la valeur ; b) et e) sont possibles.",
           schema: tableau([
@@ -587,6 +626,11 @@ export const exercicesGrandeursComposees4e: FicheExercicesData = {
         {
           enonce:
             "Un petit cube d'aluminium a $2$ cm d'arête. Il pèse $21{,}6$ g.\na) Calculer son volume.\nb) Calculer la masse volumique de l'aluminium, en g/cm³.\nc) Quelle serait la masse d'une plaque d'aluminium de $50$ cm³ ?",
+          reponses: [
+            { question: "a)", attendu: "8" },
+            { question: "b)", attendu: ["2,7", "2,7 g/cm³"] },
+            { question: "c)", attendu: "135" },
+          ],
           correction:
             "a) $V = 2 \\times 2 \\times 2 = 8$ cm³ : le cube se découpe en $8$ petits cubes de $1$ cm³.\nb) La masse volumique est une grandeur quotient : masse ÷ volume, en g/cm³. $21{,}6 \\div 8 = 2{,}7$ g/cm³.\nCela veut dire que chaque cm³ d'aluminium pèse $2{,}7$ g : c'est ce qu'écrit le dessin sur chaque petit cube.\nc) $50$ cm³ pèsent $50$ fois plus : $50 \\times 2{,}7 = 135$ g.\n⛔ Le piège : diviser le volume par la masse, $8 \\div 21{,}6 \\approx 0{,}37$. Le résultat serait en cm³/g, le volume de UN gramme : pas une masse volumique.\nRéponse : $8$ cm³ ; $2{,}7$ g/cm³ ; $135$ g.",
           schema: cube(2, "2 cm", ["8 cm³", "21,6 g"], "chaque cube de 1 cm³ : 2,7 g"),
@@ -610,6 +654,11 @@ export const exercicesGrandeursComposees4e: FicheExercicesData = {
         {
           enonce:
             "La vitesse de pointe d'un guépard a été mesurée à $29$ m/s.\na) Convertir cette vitesse en km/h.\nb) Sur autoroute, la vitesse est limitée à $130$ km/h. Convertir en m/s, arrondi au dixième.\nc) Un guépard lancé irait-il plus vite qu'une voiture sur l'autoroute ?",
+          reponses: [
+            { question: "a)", attendu: ["104,4", "104,4 km/h"] },
+            { question: "b)", attendu: ["36,1", "36,1 m/s"], tolerance: 0.05 },
+            { question: "c)", attendu: ["non", "la voiture", "voiture"] },
+          ],
           correction:
             "a) $29$ m/s, c'est $29$ m en UNE seconde. Une heure compte $60 \\times 60 = 3\\,600$ s : en une heure, $29 \\times 3\\,600 = 104\\,400$ m, soit $104{,}4$ km. Donc $29$ m/s $= 104{,}4$ km/h.\n⭐ Le raccourci : multiplier par $3\\,600$ puis diviser par $1\\,000$, c'est multiplier par $3{,}6$. $29 \\times 3{,}6 = 104{,}4$.\nb) Dans l'autre sens, je divise par $3{,}6$ : $130 \\div 3{,}6 \\approx 36{,}1$ m/s. (En une heure, $130\\,000$ m ; en une seconde, $130\\,000 \\div 3\\,600 \\approx 36{,}1$ m.)\nc) $104{,}4$ km/h $< 130$ km/h : la voiture va plus vite. Et le guépard ne tient sa pointe que quelques secondes.\n⛔ Le piège : ne multiplier que par $60$, et trouver $29 \\times 60 = 1\\,740$ m. C'est la distance en UNE MINUTE, pas en une heure.\nRéponse : $104{,}4$ km/h ; environ $36{,}1$ m/s ; la voiture est plus rapide.",
           schema: tableau([
@@ -624,6 +673,11 @@ export const exercicesGrandeursComposees4e: FicheExercicesData = {
         {
           enonce:
             "Un radiateur électrique de $1\\,500$ W fonctionne $6$ h par jour pendant les $30$ jours de novembre. On compte $0{,}20$ € le kWh.\na) Quelle énergie consomme-t-il en une journée, en kWh ?\nb) En tout le mois ?\nc) Combien cela coûte-t-il ?",
+          reponses: [
+            { question: "a)", attendu: ["9", "9 kWh"] },
+            { question: "b)", attendu: ["270", "270 kWh"] },
+            { question: "c)", attendu: "54" },
+          ],
           correction:
             "a) Pour des kWh, il me faut des kW : $1\\,500$ W $= 1{,}5$ kW, car $1$ kW $= 1\\,000$ W. Énergie par jour : $1{,}5 \\times 6 = 9$ kWh.\nb) $9 \\times 30 = 270$ kWh.\nc) $0{,}20$ € par kWh : $270 \\times 0{,}20 = 54$ €. L'unité le confirme : des kWh multipliés par des €/kWh donnent des €.\n⛔ Le piège : multiplier les watts tels quels, $1\\,500 \\times 6 = 9\\,000$, et écrire $9\\,000$ kWh. Ce sont $9\\,000$ Wh, mille fois moins : la facture du mois serait de $54\\,000$ € !\nRéponse : $9$ kWh par jour ; $270$ kWh dans le mois ; $54$ €.",
           schema: tableau([
@@ -638,6 +692,12 @@ export const exercicesGrandeursComposees4e: FicheExercicesData = {
         {
           enonce:
             "Un terrain de basket aux normes internationales est un rectangle de $28$ m sur $15$ m.\na) Calculer son aire en m².\nb) Convertir cette aire en cm².\nc) Pour repeindre le sol, une peinture couvre $12$ m² par litre. Combien de litres faut-il ?\nd) Elle est vendue en pots de $2{,}5$ L. Combien de pots faut-il acheter ?",
+          reponses: [
+            { question: "a)", attendu: "420" },
+            { question: "b)", attendu: "4200000" },
+            { question: "c)", attendu: "35" },
+            { question: "d)", attendu: "14" },
+          ],
           correction:
             "a) L'aire est une grandeur produit : $28 \\times 15 = 420$ m². Sur le dessin, on compte $28$ colonnes de $15$ carrés de $1$ m².\nb) $1$ m $= 100$ cm, donc $1$ m² $= 100 \\times 100 = 10\\,000$ cm². $420 \\times 10\\,000 = 4\\,200\\,000$ cm².\nc) $12$ m²/L veut dire $12$ m² pour UN litre. Je divise l'aire par ce rendement : $420 \\div 12 = 35$ L. Unités : des m² divisés par des m²/L donnent des L.\nd) $35 \\div 2{,}5 = 14$ pots.\n⛔ Le piège : convertir avec le facteur $100$ et écrire $42\\,000$ cm². C'est cent fois trop peu : dans le tableau, le m² prend DEUX colonnes.\nRéponse : $420$ m² ; $4\\,200\\,000$ cm² ; $35$ L ; $14$ pots.",
           schema: deux(
@@ -649,6 +709,12 @@ export const exercicesGrandeursComposees4e: FicheExercicesData = {
         {
           enonce:
             "La France métropolitaine compte environ $66$ millions d'habitants pour une superficie d'environ $550\\,000$ km². Paris compte environ $2{,}1$ millions d'habitants sur $105$ km².\na) Calculer la densité de population de la France métropolitaine, en habitants par km².\nb) Calculer celle de Paris.\nc) Combien de fois Paris est-il plus dense ? Arrondir à l'unité.\nd) Un élève calcule $550\\,000 \\div 66\\,000\\,000$. Quelle est l'unité de son résultat, et que mesure-t-il ?",
+          reponses: [
+            { question: "a)", attendu: ["120", "120 hab/km²"] },
+            { question: "b)", attendu: ["20000", "20000 hab/km²"] },
+            { question: "c)", attendu: "167", tolerance: 0.5 },
+            { question: "d) unité", attendu: ["km²/hab", "km2/hab"] },
+          ],
           correction:
             "a) La densité est une grandeur quotient : habitants ÷ km², en hab/km². $66\\,000\\,000 \\div 550\\,000 = 120$ hab/km². Le dessin place ces $120$ habitants dans un carré de $1$ km de côté.\nb) $2\\,100\\,000 \\div 105 = 20\\,000$ hab/km².\nc) $20\\,000 \\div 120 \\approx 167$ : Paris est environ $167$ fois plus dense.\nd) Il a divisé des km² par des habitants : son résultat, $\\approx 0{,}0083$, est en km²/hab. C'est la surface pour UN habitant, environ $8\\,300$ m² : pas une densité.\n⛔ Le piège : diviser dans le mauvais sens. L'unité cherchée, hab/km², dit ce qui est en haut : les habitants.\nRéponse : $120$ hab/km² ; $20\\,000$ hab/km² ; environ $167$ fois ; des km² par habitant.",
           schema: points(12, 10, "1 km² : 120 habitants"),
@@ -657,6 +723,10 @@ export const exercicesGrandeursComposees4e: FicheExercicesData = {
         {
           enonce:
             "Une coureuse boucle $10$ km en $50$ min. Sarah calcule $50 \\div 10 = 5$ et annonce : « elle court à $5$ km/min ».\na) Quelle est la vraie unité du nombre $5$ calculé par Sarah ? Que signifie-t-il ?\nb) Calculer la vitesse moyenne de la coureuse, en km/h.\nc) Sans calcul compliqué, montrer que « $5$ km/min » est absurde.",
+          reponses: [
+            { question: "a) unité", attendu: ["min/km"] },
+            { question: "b)", attendu: ["12", "12 km/h"] },
+          ],
           correction:
             "a) Sarah a divisé des MINUTES par des KILOMÈTRES : l'unité est la min/km. $5$ min/km veut dire $5$ minutes pour UN kilomètre. Les coureurs appellent ça l'allure : c'est utile, mais ce n'est pas une vitesse.\nb) Une vitesse, c'est distance ÷ durée. Je convertis : $50$ min $= \\dfrac{50}{60}$ h $= \\dfrac{5}{6}$ h. $v = 10 \\div \\dfrac{5}{6} = 10 \\times \\dfrac{6}{5} = 12$ km/h.\n⭐ Autre chemin : $1$ km en $5$ min, donc en $60$ min, $60 \\div 5 = 12$ km. On retrouve $12$ km/h.\nc) $5$ km par minute, ce serait $5 \\times 60 = 300$ km en une heure : la vitesse d'un TGV, pas d'une coureuse.\n⛔ Le piège : recopier une unité sans la calculer. L'unité subit la même division que les nombres : des minutes divisées par des kilomètres donnent des min/km.\nRéponse : $5$ min/km, soit $5$ minutes par kilomètre ; $12$ km/h ; « $5$ km/min » ferait $300$ km/h.",
           schema: trajets(10, [
@@ -671,6 +741,12 @@ export const exercicesGrandeursComposees4e: FicheExercicesData = {
         {
           enonce:
             "La glace a une masse volumique de $0{,}92$ g/cm³, l'eau liquide de $1$ g/cm³.\na) Un glaçon est un cube de $3$ cm d'arête. Calculer son volume, puis sa masse.\nb) Une fois fondu, quel volume d'eau donne-t-il ?\nc) On met au congélateur une bouteille pleine de $1$ L d'eau, soit $1\\,000$ cm³. Quel volume occupera la glace, au cm³ près ? Pourquoi la bouteille peut-elle éclater ?",
+          reponses: [
+            { question: "a) V", attendu: "27" },
+            { question: "a) masse", attendu: "24,84" },
+            { question: "b)", attendu: "24,84" },
+            { question: "c)", attendu: "1087", tolerance: 0.5 },
+          ],
           correction:
             "a) $V = 3 \\times 3 \\times 3 = 27$ cm³. La masse est le volume multiplié par la masse volumique : $27 \\times 0{,}92 = 24{,}84$ g. Unités : des cm³ multipliés par des g/cm³ donnent des g.\nb) La masse ne change pas en fondant : $24{,}84$ g d'eau. Pour l'eau, $1$ g occupe $1$ cm³ : le glaçon donne $24{,}84$ cm³ d'eau, moins que ses $27$ cm³ de glace.\nc) $1\\,000$ cm³ d'eau pèsent $1\\,000$ g. Gelée, cette masse occupe un volume égal à la masse divisée par la masse volumique : $1\\,000 \\div 0{,}92 \\approx 1\\,087$ cm³. La glace prend $87$ cm³ de plus que l'eau : la bouteille, pleine, n'a pas la place.\n⛔ Le piège : multiplier au lieu de diviser au c), $1\\,000 \\times 0{,}92 = 920$ cm³. Le contrôle par l'unité le dit : des g multipliés par des g/cm³ ne donnent pas des cm³.\nRéponse : $27$ cm³ et $24{,}84$ g ; $24{,}84$ cm³ d'eau ; environ $1\\,087$ cm³ de glace.",
           schema: barres(1200, [
@@ -682,6 +758,12 @@ export const exercicesGrandeursComposees4e: FicheExercicesData = {
         {
           enonce:
             "Un pommeau de douche classique débite $12$ L/min ; un pommeau économe, $6$ L/min. Une douche dure $7$ min.\na) Quel volume d'eau consomme une douche avec chaque pommeau ?\nb) Quelle économie fait-on en une année, à une douche par jour ($365$ douches) ? Donner le résultat en litres, puis en m³.",
+          reponses: [
+            { question: "a) class", attendu: "84" },
+            { question: "a) éco", attendu: "42" },
+            { question: "b) L", attendu: "15330" },
+            { question: "b) m³", attendu: "15,33" },
+          ],
           correction:
             "a) Le débit est de $12$ L pour UNE minute. En $7$ min : $12 \\times 7 = 84$ L. Avec le pommeau économe : $6 \\times 7 = 42$ L.\nUnités : des L/min multipliés par des min donnent des L. Sur le dessin, chaque volume est l'AIRE d'un rectangle : le débit en hauteur, la durée en largeur.\nb) Économie par douche : $84 - 42 = 42$ L. En un an : $42 \\times 365 = 15\\,330$ L.\n$1$ m³ $= 1\\,000$ L, donc $15\\,330$ L $= 15\\,330 \\div 1\\,000 = 15{,}33$ m³.\n⛔ Le piège : écrire le résultat en « L/min ». $84$ L/min serait un débit ; le volume d'une douche se mesure en litres : les minutes se sont simplifiées.\nRéponse : $84$ L et $42$ L par douche ; $15\\,330$ L, soit $15{,}33$ m³ par an.",
           schema: produit(
@@ -698,6 +780,11 @@ export const exercicesGrandeursComposees4e: FicheExercicesData = {
         {
           enonce:
             "Lou fait $18$ km à vélo en $45$ min. Enzo, en roller, avance à $7$ m/s.\na) Calculer la vitesse de Lou en km/h.\nb) Convertir la vitesse d'Enzo en km/h.\nc) Qui va le plus vite ? Quelle distance chacun parcourt-il en une heure ?",
+          reponses: [
+            { question: "a)", attendu: ["24", "24 km/h"] },
+            { question: "b)", attendu: ["25,2", "25,2 km/h"] },
+            { question: "c)", attendu: ["Enzo"] },
+          ],
           correction:
             "a) $45$ min $= \\dfrac{45}{60}$ h $= 0{,}75$ h. $v = 18 \\div 0{,}75 = 24$ km/h.\n⭐ Autre chemin : $45$ min, c'est trois quarts d'heure. $18$ km en trois quarts d'heure, donc $6$ km par quart d'heure, et $4 \\times 6 = 24$ km en une heure.\nb) $7$ m/s : en une heure, $7 \\times 3\\,600 = 25\\,200$ m, soit $25{,}2$ km. Donc $25{,}2$ km/h.\nc) Pour comparer, il faut la MÊME unité : $25{,}2 > 24$. Enzo va un peu plus vite. En une heure, Lou fait $24$ km et Enzo $25{,}2$ km.\n⛔ Le piège : comparer $7$ et $24$ directement. Des m/s et des km/h ne se comparent pas : $1$ m/s vaut $3{,}6$ km/h.\nRéponse : $24$ km/h ; $25{,}2$ km/h ; Enzo va plus vite, $25{,}2$ km contre $24$ km en une heure.",
           schema: trajets(26, [
@@ -724,6 +811,11 @@ export const exercicesGrandeursComposees4e: FicheExercicesData = {
           titre: "Onze jours sans se poser",
           enonce:
             "En octobre 2022, une jeune barge rousse, un oiseau migrateur équipé d'une balise, a volé sans escale de l'Alaska jusqu'en Tasmanie : environ $13\\,560$ km en $11$ jours, sans se poser une seule fois.\na) Quelle distance a-t-elle parcourue en moyenne par jour ? Arrondir au km.\nb) Calculer sa vitesse moyenne en km/h, arrondie au dixième.\nc) Convertir cette vitesse en m/s, arrondie au dixième.\nd) Un site titre : « la barge a volé à $1\\,233$ km/h ». Quelle erreur a-t-il faite ?",
+          reponses: [
+            { question: "a)", attendu: "1233", tolerance: 0.5 },
+            { question: "b)", attendu: ["51,4", "51,4 km/h"], tolerance: 0.05 },
+            { question: "c)", attendu: ["14,3", "14,3 m/s"], tolerance: 0.05 },
+          ],
           correction:
             "a) Distance ÷ nombre de jours : $13\\,560 \\div 11 \\approx 1\\,233$ km par jour.\nb) Pour des km/h, il me faut des heures : $11 \\times 24 = 264$ h. $v = 13\\,560 \\div 264 \\approx 51{,}4$ km/h.\nc) Je divise par $3{,}6$ : $51{,}36 \\div 3{,}6 \\approx 14{,}3$ m/s. (Autre chemin : $13\\,560\\,000$ m en $264 \\times 3\\,600 = 950\\,400$ s, et $13\\,560\\,000 \\div 950\\,400 \\approx 14{,}3$.)\nd) $1\\,233$ est le nombre de km par JOUR, pas par heure : le site a gardé des jours et écrit des heures. Et $1\\,233$ km/h dépasserait un avion de ligne, environ $900$ km/h : l'ordre de grandeur aurait dû l'alerter.\n⛔ Le piège : diviser par des jours et écrire des km/h. L'unité de durée doit être la même dans le calcul et dans la réponse.\nRéponse : environ $1\\,233$ km par jour ; environ $51{,}4$ km/h ; environ $14{,}3$ m/s ; des km par jour pris pour des km/h.",
           schema: trajets(13560, [
@@ -735,6 +827,12 @@ export const exercicesGrandeursComposees4e: FicheExercicesData = {
           titre: "Le Rhône et nos robinets",
           enonce:
             "Le Rhône, à Beaucaire, a un débit moyen d'environ $1\\,700$ m³/s. En France, chaque habitant utilise en moyenne environ $150$ L d'eau par jour à la maison, et la France métropolitaine compte environ $66$ millions d'habitants.\na) Quel volume d'eau passe à Beaucaire en une journée, c'est-à-dire en $86\\,400$ s ?\nb) Quel volume d'eau les habitants utilisent-ils à la maison en une journée ? Donner le résultat en litres, puis en m³.\nc) Combien de temps faut-il au Rhône pour débiter ce volume ? Arrondir à la minute.\nd) Vérifier par les unités que le calcul du c) donne bien une durée.",
+          reponses: [
+            { question: "a)", attendu: "146880000" },
+            { question: "b) L", attendu: "9900000000" },
+            { question: "b) m³", attendu: "9900000" },
+            { question: "c)", attendu: ["97", "1h37", "1h37min"], tolerance: 0.5 },
+          ],
           correction:
             "a) Débit × durée : $1\\,700 \\times 86\\,400 = 146\\,880\\,000$ m³. Unités : des m³/s multipliés par des s donnent des m³.\nb) $66\\,000\\,000 \\times 150 = 9\\,900\\,000\\,000$ L. Comme $1$ m³ $= 1\\,000$ L : $9\\,900\\,000\\,000 \\div 1\\,000 = 9\\,900\\,000$ m³.\nc) La durée est le volume divisé par le débit : $9\\,900\\,000 \\div 1\\,700 \\approx 5\\,824$ s. En minutes : $5\\,824 \\div 60 \\approx 97$ min, soit $1$ h $37$ min.\nd) Des m³ divisés par des m³/s : les m³ se simplifient, il reste des s. C'est bien une durée.\n⭐ Toute l'eau des maisons françaises d'une journée passe à Beaucaire en moins de deux heures : le dessin la place sur les $24$ h du jour, moins de $7$ % du débit.\n⛔ Le piège : diviser des litres par des m³/s, $9\\,900\\,000\\,000 \\div 1\\,700$. Le résultat serait mille fois trop grand : je convertis en m³ AVANT de diviser.\nRéponse : $146\\,880\\,000$ m³ ; $9\\,900\\,000\\,000$ L, soit $9\\,900\\,000$ m³ ; environ $1$ h $37$ min.",
           schema: trajets(1440, [
@@ -750,6 +848,12 @@ export const exercicesGrandeursComposees4e: FicheExercicesData = {
           titre: "Le corps humain, un appareil de 100 W",
           enonce:
             "Au repos, le corps d'un adulte dépense de l'énergie à peu près comme un appareil de $100$ W qui ne s'éteint jamais.\na) Quelle énergie le corps dépense-t-il en $24$ h ? Donner le résultat en Wh, puis en kWh.\nb) Un four de $2{,}4$ kW consomme la même énergie en combien de temps ?\nc) À $0{,}20$ € le kWh, combien coûterait cette énergie sur une facture d'électricité ?\nd) Un élève écrit : « $100 \\times 24 = 2\\,400$ kWh ». Qu'en penser ?",
+          reponses: [
+            { question: "a) Wh", attendu: ["2400", "2400 Wh"] },
+            { question: "a) kWh", attendu: ["2,4", "2,4 kWh"] },
+            { question: "b)", attendu: "1" },
+            { question: "c)", attendu: "0,48" },
+          ],
           correction:
             "a) Énergie $=$ puissance × durée : $100 \\times 24 = 2\\,400$ Wh. Comme $1$ kWh $= 1\\,000$ Wh : $2\\,400$ Wh $= 2{,}4$ kWh.\nb) La durée est l'énergie divisée par la puissance : $2{,}4 \\div 2{,}4 = 1$ h. Une journée entière de notre corps, c'est une heure de four.\n⭐ Sur le dessin, les deux rectangles ont la même AIRE : l'un est long et très bas ($24$ h à $0{,}1$ kW), l'autre court et haut ($1$ h à $2{,}4$ kW).\nc) $2{,}4 \\times 0{,}20 = 0{,}48$ € : moins de cinquante centimes par jour.\nd) Il a multiplié des WATTS par des heures : il obtient des Wh, pas des kWh. $2\\,400$ kWh, c'est mille fois trop, et cela coûterait $2\\,400 \\times 0{,}20 = 480$ € par jour.\n⛔ Le piège : oublier que le préfixe kilo vaut $1\\,000$. $100$ W, c'est $0{,}1$ kW.\nRéponse : $2\\,400$ Wh, soit $2{,}4$ kWh ; $1$ h ; $0{,}48$ € ; il confond Wh et kWh.",
           schema: produit(
@@ -767,6 +871,12 @@ export const exercicesGrandeursComposees4e: FicheExercicesData = {
           titre: "Le record de l'heure",
           enonce:
             "Le 8 octobre 2022, sur la piste de $250$ m du vélodrome de Granges, en Suisse, le cycliste Filippo Ganna a parcouru $56{,}792$ km en une heure : c'est le record de l'heure.\na) Quelle était sa vitesse moyenne en km/h ? Il n'y a presque rien à calculer : pourquoi ?\nb) Convertir cette vitesse en m/s, arrondie au dixième.\nc) Combien de tours de piste complets a-t-il faits ?\nd) Combien de temps durait un tour, en moyenne ? Arrondir au dixième de seconde.\ne) Un journal écrit « $56{,}792$ m/s ». Montrer que c'est absurde.",
+          reponses: [
+            { question: "a)", attendu: ["56,792", "56,792 km/h"] },
+            { question: "b)", attendu: ["15,8", "15,8 m/s"], tolerance: 0.05 },
+            { question: "c)", attendu: "227" },
+            { question: "d)", attendu: "15,8", tolerance: 0.05 },
+          ],
           correction:
             "a) km/h veut dire « kilomètres POUR UNE heure ». Il a roulé exactement une heure : la distance parcourue EST la vitesse moyenne, $56{,}792$ km/h.\nb) $56{,}792$ km $= 56\\,792$ m, et $1$ h $= 3\\,600$ s. $56\\,792 \\div 3\\,600 \\approx 15{,}8$ m/s.\nc) $56\\,792 \\div 250 = 227{,}168$ : $227$ tours complets, et un petit bout du suivant.\nd) En $3\\,600$ s, il fait $227{,}168$ tours : $3\\,600 \\div 227{,}168 \\approx 15{,}8$ s par tour. (Autre chemin : $250$ m à $15{,}78$ m/s, et $250 \\div 15{,}78 \\approx 15{,}8$ s.)\ne) $56{,}792 \\times 3{,}6 \\approx 204$ : ce serait $204$ km/h, la vitesse d'une voiture de course, pas celle d'un vélo. L'unité est bien une unité de vitesse, mais la VALEUR est absurde.\n⛔ Le piège : diviser des kilomètres par des secondes, $56{,}792 \\div 3\\,600 \\approx 0{,}016$. On obtient des km/s, un nombre minuscule : je convertis d'abord en mètres.\nRéponse : $56{,}792$ km/h ; environ $15{,}8$ m/s ; $227$ tours ; environ $15{,}8$ s par tour ; $204$ km/h, c'est absurde.",
           schema: trajets(60, [

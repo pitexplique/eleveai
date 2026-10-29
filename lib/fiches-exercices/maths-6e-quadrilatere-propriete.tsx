@@ -303,6 +303,11 @@ export const exercicesQuadrilaterePropriete6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "$ABCD$ est un rectangle.\na) Combien mesurent $[CD]$ et $[DA]$ ?\nb) Combien a-t-il de paires de côtés parallèles ?",
+          reponses: [
+            { question: "a) CD", attendu: "7" },
+            { question: "a) DA", attendu: "4" },
+            { question: "b)", attendu: "2" },
+          ],
           figure: quad({ A: [0, 0], B: [7, 0], C: [7, 4], D: [0, 4] }, { cotes: { AB: "7 cm", BC: "4 cm" }, droits: ["A", "B", "C", "D"] }),
           correction:
             "a) Dans un rectangle, les côtés opposés ont la même longueur.\n$[CD]$ est opposé à $[AB]$ : $CD = 7$ cm.\n$[DA]$ est opposé à $[BC]$ : $DA = 4$ cm.\nb) Les côtés opposés d'un rectangle sont parallèles.\n$[AB]$ va avec $[CD]$. $[BC]$ va avec $[DA]$.\nCela fait $2$ paires.\n⛔ Le piège : croire que les $4$ côtés d'un rectangle sont égaux.\nRéponse : a) $CD = 7$ cm et $DA = 4$ cm ; b) $2$ paires.",
@@ -310,6 +315,10 @@ export const exercicesQuadrilaterePropriete6e: FicheExercicesData = {
         },
         {
           enonce: "$EFGH$ est un losange. Le côté $[EF]$ mesure $6$ cm.\na) Combien mesurent ses trois autres côtés ?\nb) Calcule son périmètre.",
+          reponses: [
+            { question: "a)", attendu: "6" },
+            { question: "b)", attendu: "24" },
+          ],
           figure: ecranSeulement(quad({ A: [0, 0], B: [6, 0], C: [8.53571, 5.437847], D: [2.53571, 5.437847] }, { noms: { A: "E", B: "F", C: "G", D: "H" }, cotes: { AB: "6 cm" }, egaux: [["AB", "BC", "CD", "DA"]] })),
           correction:
             "a) Un losange a $4$ côtés de même longueur.\nLes trois autres côtés mesurent aussi $6$ cm.\nb) Le périmètre est le tour complet.\n$4 \\times 6 = 24$.\n⛔ Le piège : croire que les côtés « penchés » sont plus courts.\nRéponse : a) $6$ cm chacun ; b) $24$ cm.",
@@ -317,6 +326,9 @@ export const exercicesQuadrilaterePropriete6e: FicheExercicesData = {
         },
         {
           enonce: "$RSTU$ est un rectangle.\nSa diagonale $[RT]$ mesure $10$ cm.\nCombien mesure l'autre diagonale ?",
+          reponses: [
+            { attendu: "10" },
+          ],
           figure: quad({ A: [0, 0], B: [8, 0], C: [8, 6], D: [0, 6] }, { noms: { A: "R", B: "S", C: "T", D: "U" }, droits: ["A", "B", "C", "D"], diagonales: true }),
           correction:
             "Les deux diagonales sont $[RT]$ et $[SU]$.\nDans un rectangle, les diagonales ont la même longueur.\nDonc $SU = 10$ cm.\n⭐ Je peux vérifier avec le compas sur la figure.\n⛔ Le piège : chercher un calcul. Il suffit de connaître la propriété.\nRéponse : $SU = 10$ cm.",
@@ -324,6 +336,9 @@ export const exercicesQuadrilaterePropriete6e: FicheExercicesData = {
         },
         {
           enonce: "Les diagonales de ce losange se coupent en $O$.\nQuel angle font-elles entre elles ?\nVérifie avec ton équerre.",
+          reponses: [
+            { attendu: ["90", "angle droit", "un angle droit"] },
+          ],
           figure: quad({ A: [-4, 0], B: [0, -2.5], C: [4, 0], D: [0, 2.5] }, { egaux: [["AB", "BC", "CD", "DA"]], centre: "O" }),
           correction:
             "Dans un losange, les diagonales sont perpendiculaires.\nElles se coupent donc à angle droit.\nL'angle vaut $90°$.\n⛔ Le piège : croire que c'est vrai seulement pour un carré.\nRéponse : $90°$, un angle droit.",
@@ -332,6 +347,12 @@ export const exercicesQuadrilaterePropriete6e: FicheExercicesData = {
         },
         {
           enonce: "Donne la nature de chaque quadrilatère.\na) Il a $4$ angles droits.\nb) Il a $4$ côtés égaux.\nc) Il a $4$ angles droits et $4$ côtés égaux.\nd) Ses côtés opposés sont parallèles, deux à deux.",
+          reponses: [
+            { question: "a)", attendu: ["rectangle", "un rectangle"] },
+            { question: "b)", attendu: ["losange", "un losange"] },
+            { question: "c)", attendu: ["carré", "un carré"] },
+            { question: "d)", attendu: ["parallélogramme", "un parallélogramme"] },
+          ],
           correction:
             "a) $4$ angles droits : c'est un rectangle.\nb) $4$ côtés égaux : c'est un losange.\nc) Les deux à la fois : c'est un carré.\nd) Deux paires de côtés parallèles : c'est un parallélogramme.\n⭐ Rectangle, losange et carré sont des parallélogrammes particuliers.\n⛔ Le piège au c) : répondre « rectangle ». C'est vrai, mais « carré » est plus précis.\nRéponse : a) rectangle ; b) losange ; c) carré ; d) parallélogramme.",
           schema: ecranSeulement(quad({ A: [0, 0], B: [5, 0], C: [6.5, 3], D: [1.5, 3] }, { paralleles: [["AB", "CD"], ["BC", "DA"]] })),
@@ -339,6 +360,9 @@ export const exercicesQuadrilaterePropriete6e: FicheExercicesData = {
         },
         {
           enonce: "Un quadrilatère a $4$ côtés égaux.\nPeut-on être sûr que c'est un carré ?\nObserve les deux figures.",
+          reponses: [
+            { attendu: ["non"] },
+          ],
           figure: deux(
             quad({ A: [0, 0], B: [4, 0], C: [6, 3.464102], D: [2, 3.464102] }, { egaux: [["AB", "BC", "CD", "DA"]] }),
             quad({ A: [0, 0], B: [4, 0], C: [4, 4], D: [0, 4] }, { egaux: [["AB", "BC", "CD", "DA"]], droits: ["A", "B", "C", "D"] }),
@@ -385,6 +409,12 @@ export const exercicesQuadrilaterePropriete6e: FicheExercicesData = {
         },
         {
           enonce: "Vrai ou faux ?\na) Les diagonales d'un carré ont la même longueur.\nb) Les diagonales d'un losange ont toujours la même longueur.\nc) Les diagonales d'un rectangle sont toujours perpendiculaires.\nd) Les diagonales d'un carré sont perpendiculaires.",
+          reponses: [
+            { question: "a)", attendu: ["vrai", "oui"] },
+            { question: "b)", attendu: ["faux", "non"] },
+            { question: "c)", attendu: ["faux", "non"] },
+            { question: "d)", attendu: ["vrai", "oui"] },
+          ],
           correction:
             "a) Vrai. Un carré est un rectangle : ses diagonales ont la même longueur.\nb) Faux. Sur la figure, une diagonale du losange est plus longue que l'autre.\nc) Faux. Sur la figure, les diagonales du rectangle ne font pas un angle droit.\nd) Vrai. Un carré est un losange : ses diagonales sont perpendiculaires.\n⛔ Le piège : mélanger les deux propriétés.\nRectangle : même longueur. Losange : perpendiculaires. Carré : les deux.\nRéponse : a) vrai ; b) faux ; c) faux ; d) vrai.",
           schema: ecranSeulement(deux(quad({ A: [0, 0], B: [6, 0], C: [6, 3], D: [0, 3] }, { droits: ["A", "B", "C", "D"], diagonales: true }), quad({ A: [-3.5, 0], B: [0, -2], C: [3.5, 0], D: [0, 2] }, { egaux: [["AB", "BC", "CD", "DA"]], diagDroit: true }))),
@@ -392,6 +422,9 @@ export const exercicesQuadrilaterePropriete6e: FicheExercicesData = {
         },
         {
           enonce: "Construis un rectangle $EFGH$ de $6$ cm sur $3{,}5$ cm.\nÉcris les étapes, puis calcule son périmètre.",
+          reponses: [
+            { attendu: "19" },
+          ],
           correction:
             "Je trace $[EF]$ de $6$ cm.\nEn $E$ et en $F$, je trace deux angles droits à l'équerre.\nJe place $H$ à $3{,}5$ cm de $E$.\nJe place $G$ à $3{,}5$ cm de $F$, du même côté.\nJe relie $G$ et $H$.\n⭐ Contrôle : $[GH]$ mesure bien $6$ cm.\nPérimètre : $6 + 3{,}5 + 6 + 3{,}5 = 19$ cm.\n⛔ Le piège : placer $G$ et $H$ de part et d'autre de $[EF]$.\nRéponse : le périmètre vaut $19$ cm.",
           schema: ecranSeulement(quad({ A: [0, 0], B: [6, 0], C: [6, 3.5], D: [0, 3.5] }, { noms: { A: "E", B: "F", C: "G", D: "H" }, cotes: { AB: "6 cm", BC: "3,5 cm" }, droits: ["A", "B", "C", "D"] })),
@@ -406,6 +439,9 @@ export const exercicesQuadrilaterePropriete6e: FicheExercicesData = {
         },
         {
           enonce: "Les deux quadrilatères ont $4$ angles droits.\nOn connaît deux côtés de chacun.\nLequel est sûrement un carré ?",
+          reponses: [
+            { attendu: ["IJKL"] },
+          ],
           figure: deux(
             quad({ A: [0, 0], B: [5, 0], C: [5, 5], D: [0, 5] }, { noms: { A: "I", B: "J", C: "K", D: "L" }, cotes: { AB: "5 cm", BC: "5 cm" }, droits: ["A", "B", "C", "D"] }),
             quad({ A: [0, 0], B: [5, 0], C: [5, 4], D: [0, 4] }, { noms: { A: "M", B: "N", C: "P", D: "Q" }, cotes: { AB: "5 cm", CD: "5 cm" }, droits: ["A", "B", "C", "D"] }),
@@ -424,6 +460,11 @@ export const exercicesQuadrilaterePropriete6e: FicheExercicesData = {
         },
         {
           enonce: "Observe les codages de $KLMN$.\na) Combien de paires de côtés parallèles sont codées ?\nb) Quelle est la nature de $KLMN$ ?\nc) Peut-on dire que c'est un rectangle ?",
+          reponses: [
+            { question: "a)", attendu: "2" },
+            { question: "b)", attendu: ["parallélogramme", "un parallélogramme"] },
+            { question: "c)", attendu: ["non"] },
+          ],
           figure: quad({ A: [0, 0], B: [5.5, 0], C: [7, 3.2], D: [1.5, 3.2] }, { noms: { A: "K", B: "L", C: "M", D: "N" }, paralleles: [["AB", "CD"], ["BC", "DA"]] }),
           correction:
             "a) Les petites flèches vertes marquent des côtés parallèles.\n$[KL]$ et $[MN]$ en ont une. $[LM]$ et $[NK]$ en ont deux.\nCela fait $2$ paires.\nb) Deux paires de côtés parallèles : c'est un parallélogramme.\nc) Aucun angle droit n'est codé.\nJe ne peux donc pas dire que c'est un rectangle.\n⛔ Le piège : conclure « rectangle » dès qu'on voit des côtés parallèles.\nRéponse : a) $2$ paires ; b) un parallélogramme ; c) non.",
@@ -455,6 +496,12 @@ export const exercicesQuadrilaterePropriete6e: FicheExercicesData = {
           titre: "Le terrain de sport",
           enonce:
             "Un jardinier trace un terrain de sport rectangulaire.\nIl mesure $100$ m sur $60$ m.\na) Quel est son périmètre ?\nb) Il trace la ligne du milieu, parallèle aux petits côtés. Quelle est la nature de chaque moitié ? Donne ses mesures.\nc) Il mesure les deux diagonales : $115$ m et $118$ m. Son terrain est-il un vrai rectangle ?",
+          reponses: [
+            { question: "a)", attendu: "320" },
+            { question: "b) nat.", attendu: ["rectangle", "un rectangle"] },
+            { question: "b) mes.", attendu: "50 ; 60" },
+            { question: "c)", attendu: ["non"] },
+          ],
           figure: ecranSeulement(quad({ A: [0, 0], B: [100, 0], C: [100, 60], D: [0, 60] }, { cotes: { AB: "100 m", BC: "60 m" }, droits: ["A", "B", "C", "D"], diagonales: true })),
           correction:
             "a) Les côtés opposés d'un rectangle sont égaux.\n$100 + 60 + 100 + 60 = 320$ m.\nb) La ligne du milieu coupe la longueur en deux : $100 \\div 2 = 50$ m.\nChaque moitié garde les angles droits : c'est un rectangle.\nIl mesure $50$ m sur $60$ m.\nc) Dans un rectangle, les deux diagonales ont la même longueur.\nIci, $115$ m et $118$ m sont différents.\nLe terrain n'est donc pas un vrai rectangle.\n⛔ Le piège au b) : croire que chaque moitié est un carré.\nRéponse : a) $320$ m ; b) un rectangle de $50$ m sur $60$ m ; c) non.",
@@ -464,6 +511,11 @@ export const exercicesQuadrilaterePropriete6e: FicheExercicesData = {
           titre: "Le foulard",
           enonce:
             "Un foulard carré mesure $80$ cm de côté. Sur le dessin, un carreau vaut $20$ cm.\nOn marque le milieu de chaque bord : $M$, $N$, $P$ et $Q$.\nOn coud un galon qui relie ces quatre points.\na) Combien de carreaux mesure un bord du foulard ?\nb) Compare les quatre côtés de $MNPQ$.\nc) Vérifie ses angles à l'équerre. Quelle est la nature de $MNPQ$ ?",
+          reponses: [
+            { question: "a)", attendu: "4" },
+            { question: "b)", attendu: ["égaux", "ils sont égaux", "égales", "de même longueur"] },
+            { question: "c)", attendu: ["carré", "un carré"] },
+          ],
           figure: quad({ A: [2, 0], B: [4, 2], C: [2, 4], D: [0, 2] }, { noms: { A: "M", B: "N", C: "P", D: "Q" }, grille: true, cadre: [[0, 0], [4, 0], [4, 4], [0, 4]] }),
           correction:
             "a) $80 \\div 20 = 4$ carreaux.\nb) Chaque côté de $MNPQ$ traverse un carré de $2$ carreaux sur $2$.\nC'est chaque fois la diagonale d'un même carré.\nLes $4$ côtés sont donc égaux : $MNPQ$ est un losange.\nc) À l'équerre, les $4$ angles sont droits.\nUn losange avec $4$ angles droits est un carré.\n⛔ Le piège : croire qu'un carré posé sur la pointe est seulement un losange.\nRéponse : a) $4$ carreaux ; b) ils sont égaux ; c) un carré.",
@@ -474,6 +526,13 @@ export const exercicesQuadrilaterePropriete6e: FicheExercicesData = {
           titre: "Les pailles",
           enonce:
             "Léna relie $4$ pailles de $12$ cm avec des trombones. Son quadrilatère peut se déformer.\na) Quelle est sa nature ? Quel est son périmètre ?\nb) Elle l'écrase un peu. Est-ce toujours la même nature ?\nc) Peut-elle obtenir un carré ? Comment ?\nd) Peut-elle obtenir un rectangle qui n'est pas un carré ?",
+          reponses: [
+            { question: "a) nat.", attendu: ["losange", "un losange"] },
+            { question: "a) P", attendu: "48" },
+            { question: "b)", attendu: ["oui"] },
+            { question: "c)", attendu: ["oui"] },
+            { question: "d)", attendu: ["non"] },
+          ],
           figure: ecranSeulement(deux(quad({ A: [0, 0], B: [12, 0], C: [19.713451, 9.192533], D: [7.713451, 9.192533] }, { cotes: { AB: "12 cm" }, egaux: [["AB", "BC", "CD", "DA"]] }), quad({ A: [0, 0], B: [12, 0], C: [12, 12], D: [0, 12] }, { cotes: { AB: "12 cm" }, egaux: [["AB", "BC", "CD", "DA"]], droits: ["A", "B", "C", "D"] }))),
           correction:
             "a) $4$ côtés de $12$ cm : c'est un losange.\n$4 \\times 12 = 48$ cm.\nb) Les pailles gardent leur longueur.\nLes $4$ côtés restent égaux : c'est toujours un losange.\nc) Oui. Elle le redresse jusqu'à ce que ses angles soient droits.\nAvec $4$ côtés égaux et $4$ angles droits, c'est un carré.\nd) Non. Ses côtés restent tous égaux.\nUn rectangle avec $4$ côtés égaux est forcément un carré.\n⛔ Le piège : croire que la figure change de nature quand elle s'aplatit.\nRéponse : a) un losange, $48$ cm ; b) oui ; c) oui, avec des angles droits ; d) non.",
@@ -483,6 +542,9 @@ export const exercicesQuadrilaterePropriete6e: FicheExercicesData = {
           titre: "Le jardin partagé",
           enonce:
             "Un jardin partagé est clôturé par des piquets. Un carreau vaut $1$ m.\nOn a planté les piquets $A$, $B$ et $C$.\na) Où planter $D$ pour que le jardin soit un rectangle ?\nb) Quelle longueur de grillage faut-il pour faire le tour ?\nc) On veut plutôt un jardin carré. On garde $A$ et $B$. Où placer $C$ et $D$ ?",
+          reponses: [
+            { question: "b)", attendu: "20" },
+          ],
           figure: quad({ A: [0, 0], B: [6, 0], C: [6, 4], D: [0, 4] }, { grille: true, ouvert: true, droits: ["B"] }),
           correction:
             "a) $[AB]$ fait $6$ carreaux. $[BC]$ fait $4$ carreaux.\nL'angle en $B$ est droit.\nDans un rectangle, $[DA]$ est parallèle à $[BC]$ et de même longueur.\nJe monte de $4$ carreaux au-dessus de $A$ : c'est $D$.\nb) $6 + 4 + 6 + 4 = 20$ m.\nc) Un carré a $4$ côtés égaux : chaque côté fait $6$ m, comme $[AB]$.\nJe place $C$ à $6$ carreaux au-dessus de $B$.\nJe place $D$ à $6$ carreaux au-dessus de $A$.\n⛔ Le piège au c) : laisser $C$ à sa place. $[BC]$ ne ferait que $4$ m.\nRéponse : a) $4$ carreaux au-dessus de $A$ ; b) $20$ m ; c) $6$ carreaux au-dessus de $B$ et de $A$.",

@@ -208,6 +208,9 @@ export const exercicesAireSurface6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Chaque carreau est un carré de $1$ cm de côté.\nCalcule l'aire de ce rectangle.",
+          reponses: [
+            { attendu: "45" },
+          ],
           figure: plan("cm", [
             { grille: [0, 0, 9, 5] },
             { poly: [[0, 0], [9, 0], [9, 5], [0, 5]], fond: "bleu" },
@@ -220,6 +223,9 @@ export const exercicesAireSurface6e: FicheExercicesData = {
         },
         {
           enonce: "Un carré a un côté de $11$ cm.\nCalcule son aire.",
+          reponses: [
+            { attendu: "121" },
+          ],
           correction:
             "Dans un carré, les côtés sont égaux.\nAire $=$ côté $\\times$ côté : $11 \\times 11 = 121$ cm².\n⛔ Le piège : calculer $11 + 11 = 22$, ou $4 \\times 11 = 44$. Ce n'est pas l'aire.\nRéponse : l'aire du carré est $121$ cm².",
           schema: ecranSeulement(
@@ -234,6 +240,9 @@ export const exercicesAireSurface6e: FicheExercicesData = {
         },
         {
           enonce: "Un tapis rectangulaire mesure $2{,}5$ m sur $1{,}6$ m.\nQuelle est son aire ?",
+          reponses: [
+            { attendu: "4" },
+          ],
           correction:
             "C'est un rectangle : longueur $\\times$ largeur.\n$2{,}5 \\times 1{,}6 = 4$ m².\nJe vérifie l'ordre de grandeur : à peu près $2{,}5 \\times 2 = 5$. Le résultat $4$ est proche.\n⛔ Le piège : mal placer la virgule, et trouver $40$ m² ou $0{,}4$ m².\nRéponse : l'aire du tapis est $4$ m².",
           schema: ecranSeulement(
@@ -247,6 +256,9 @@ export const exercicesAireSurface6e: FicheExercicesData = {
         },
         {
           enonce: "Une pièce carrée a une aire de $100$ m².\nCombien mesure un côté ?",
+          reponses: [
+            { attendu: "10" },
+          ],
           correction:
             "Je cherche un nombre qui, multiplié par lui-même, donne $100$.\n$10 \\times 10 = 100$.\nDonc le côté mesure $10$ m.\n⛔ Le piège : diviser $100$ par $4$ et trouver $25$ m. Cela, c'est pour le périmètre.\nRéponse : un côté mesure $10$ m.",
           schema: ecranSeulement(
@@ -275,6 +287,9 @@ export const exercicesAireSurface6e: FicheExercicesData = {
         },
         {
           enonce: "Un potager rectangulaire a une aire de $54$ m².\nSa largeur est $6$ m. Quelle est sa longueur ?",
+          reponses: [
+            { attendu: "9" },
+          ],
           correction:
             "Aire $=$ longueur $\\times$ largeur. Donc longueur $\\times 6 = 54$.\nJe fais le calcul à l'envers : $54 \\div 6 = 9$ m.\nJe vérifie : $9 \\times 6 = 54$ m².\n⛔ Le piège : diviser par $2$, comme pour un périmètre.\nRéponse : la longueur est $9$ m.",
           schema: ecranSeulement(
@@ -289,6 +304,9 @@ export const exercicesAireSurface6e: FicheExercicesData = {
         },
         {
           enonce: "Calcule l'aire de cette figure en L.\nIl faut d'abord trouver les côtés qui manquent.",
+          reponses: [
+            { attendu: "36" },
+          ],
           figure: plan("cm", [
             { poly: [[0, 0], [8, 0], [8, 3], [3, 3], [3, 7], [0, 7]], fond: "bleu" },
             { droit: [[0, 0], [8, 0], [0, 7]] },
@@ -304,6 +322,9 @@ export const exercicesAireSurface6e: FicheExercicesData = {
         },
         {
           enonce: "Chaque carreau mesure $1$ cm de côté.\nEmma dit : « A a la plus grande aire, car il est le plus long. »\nA-t-elle raison ?",
+          reponses: [
+            { attendu: ["non", "faux"] },
+          ],
           figure: plan("cm", [
             { grille: [0, 0, 17, 5] },
             { poly: [[0, 0], [10, 0], [10, 3], [0, 3]], fond: "bleu" },
@@ -331,6 +352,9 @@ export const exercicesAireSurface6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Une terrasse rectangulaire mesure $8$ m sur $5$ m.\nAu milieu, il y a un bassin de $3$ m sur $2$ m.\nQuelle est l'aire de la terrasse, sans le bassin ?",
+          reponses: [
+            { attendu: "34" },
+          ],
           figure: plan("m", [
             { poly: [[0, 0], [8, 0], [8, 5], [0, 5]], fond: "orange" },
             { poly: [[2.5, 1.5], [5.5, 1.5], [5.5, 3.5], [2.5, 3.5]], fond: "trou" },
@@ -345,6 +369,9 @@ export const exercicesAireSurface6e: FicheExercicesData = {
         },
         {
           enonce: "Chaque carreau mesure $1$ cm de côté.\na) Calcule l'aire du U en le découpant en trois rectangles.\nb) Vérifie avec une autre méthode : le grand rectangle, moins le creux.",
+          reponses: [
+            { question: "a)", attendu: "26" },
+          ],
           figure: plan("cm", [
             { grille: [0, 0, 7, 5] },
             { poly: [[0, 0], [7, 0], [7, 5], [5, 5], [5, 2], [2, 2], [2, 5], [0, 5]], fond: "vert" },
@@ -366,6 +393,12 @@ export const exercicesAireSurface6e: FicheExercicesData = {
         },
         {
           enonce: "Un rectangle mesure $11$ cm sur $5$ cm.\na) Calcule son périmètre et son aire.\nb) Un carré a le même périmètre. Combien mesure son côté ?\nc) Lequel a la plus grande aire ?",
+          reponses: [
+            { question: "a) P", attendu: "32" },
+            { question: "a) aire", attendu: "55" },
+            { question: "b)", attendu: "8" },
+            { question: "c)", attendu: ["le carré", "carré"] },
+          ],
           correction:
             "a) Le tour : $11 + 5 = 16$, puis $2 \\times 16 = 32$ cm.\nL'aire : $11 \\times 5 = 55$ cm².\nb) Le carré a $4$ côtés égaux : $32 \\div 4 = 8$ cm.\nc) L'aire du carré : $8 \\times 8 = 64$ cm².\n$64 > 55$ : le carré a la plus grande aire.\n⛔ Le piège : croire qu'un même tour donne une même aire.\nRéponse : a) $32$ cm et $55$ cm² ; b) $8$ cm ; c) le carré.",
           schema: ecranSeulement(
@@ -382,6 +415,10 @@ export const exercicesAireSurface6e: FicheExercicesData = {
         },
         {
           enonce: "On repeint un mur de $4$ m de large et $2{,}5$ m de haut.\nDans ce mur, il y a une porte de $0{,}8$ m sur $2$ m.\na) Quelle surface faut-il peindre ?\nb) Un pot de peinture couvre $5$ m². Combien de pots faut-il ?",
+          reponses: [
+            { question: "a)", attendu: "8,4" },
+            { question: "b)", attendu: "2" },
+          ],
           figure: plan("m", [
             { poly: [[0, 0], [4, 0], [4, 2.5], [0, 2.5]], fond: "bleu" },
             { poly: [[0.6, 0], [1.4, 0], [1.4, 2], [0.6, 2]], fond: "trou" },
@@ -396,6 +433,12 @@ export const exercicesAireSurface6e: FicheExercicesData = {
         },
         {
           enonce: "Un panneau d'affichage mesure $1{,}5$ m sur $1$ m.\nOn y colle des affiches carrées de $50$ cm de côté.\na) Quelle est l'aire du panneau, en m² puis en dm² ?\nb) Quelle est l'aire d'une affiche, en dm² ?\nc) Combien d'affiches peut-on coller, sans les superposer ?",
+          reponses: [
+            { question: "a) m²", attendu: "1,5" },
+            { question: "a) dm²", attendu: "150" },
+            { question: "b)", attendu: "25" },
+            { question: "c)", attendu: "6" },
+          ],
           figure: plan("cm", [
             { grille: [0, 0, 150, 100], pas: 50 },
             { poly: [[0, 0], [150, 0], [150, 100], [0, 100]], fond: "vert" },
@@ -409,6 +452,9 @@ export const exercicesAireSurface6e: FicheExercicesData = {
         },
         {
           enonce: "Trois terrains sont à vendre.\nA : un rectangle de $30$ m sur $20$ m.\nB : un carré de $25$ m de côté.\nC : un rectangle de $40$ m sur $15$ m.\nLequel a la plus grande aire ?",
+          reponses: [
+            { attendu: ["B", "le terrain B", "terrain B"] },
+          ],
           correction:
             "A : $30 \\times 20 = 600$ m².\nB : $25 \\times 25 = 625$ m².\nC : $40 \\times 15 = 600$ m².\nA et C ont la même aire. B est le plus grand.\n⛔ Le piège : choisir C, parce qu'il a le plus long côté.\nRéponse : le terrain B, avec $625$ m².",
           schema: ecranSeulement(tableau(["Terrain", "A", "B", "C"], ["aire en m²", "600", "625", "600"], true)),
@@ -416,6 +462,9 @@ export const exercicesAireSurface6e: FicheExercicesData = {
         },
         {
           enonce: "Voici le plan d'une place en forme de croix.\nTous ses côtés mesurent $2$ m. Tous ses angles sont droits.\nCalcule l'aire de la place.",
+          reponses: [
+            { attendu: "20" },
+          ],
           figure: plan("m", [
             { poly: [[2, 0], [4, 0], [4, 2], [6, 2], [6, 4], [4, 4], [4, 6], [2, 6], [2, 4], [0, 4], [0, 2], [2, 2]], fond: "orange" },
             { trait: [[2, 2], [4, 2]], tirets: true },
@@ -431,6 +480,10 @@ export const exercicesAireSurface6e: FicheExercicesData = {
         },
         {
           enonce: "Chaque carreau mesure $1$ cm de côté.\nLe petit rectangle orange mesure $3$ cm sur $2$ cm.\nOn double sa longueur et sa largeur : on obtient le grand rectangle bleu.\na) Calcule les deux aires.\nb) L'aire a-t-elle doublé ?",
+          reponses: [
+            { question: "a)", attendu: "6 ; 24" },
+            { question: "b)", attendu: ["non", "faux"] },
+          ],
           figure: plan("cm", [
             { grille: [0, 0, 6, 4] },
             { poly: [[0, 0], [6, 0], [6, 4], [0, 4]], fond: "bleu" },
@@ -458,6 +511,12 @@ export const exercicesAireSurface6e: FicheExercicesData = {
           titre: "Le parquet de la chambre",
           enonce:
             "Voici le plan de la chambre de Sami. Tous les angles sont droits.\nOn veut y poser du parquet.\na) Trouve les deux côtés qui manquent.\nb) Calcule l'aire de la chambre.\nc) Un paquet de parquet couvre $2$ m². Combien de paquets faut-il ?\nd) Un paquet coûte $30$ €. Quel est le prix ?",
+          reponses: [
+            { question: "a)", attendu: "2 ; 2" },
+            { question: "b)", attendu: "26" },
+            { question: "c)", attendu: "13" },
+            { question: "d)", attendu: "390" },
+          ],
           figure: plan("m", [
             { poly: [[0, 0], [6, 0], [6, 3], [4, 3], [4, 5], [0, 5]], fond: "orange" },
             { droit: [[4, 3], [6, 3], [4, 5]] },
@@ -474,6 +533,13 @@ export const exercicesAireSurface6e: FicheExercicesData = {
           titre: "La pelouse du jardin",
           enonce:
             "Un jardin rectangulaire mesure $15$ m sur $10$ m.\nIl y a une allée de $1$ m de large sur toute la longueur.\nDans un coin, un potager carré de $4$ m de côté.\nLe reste est en pelouse.\na) Calcule l'aire du jardin, de l'allée et du potager.\nb) Calcule l'aire de la pelouse.\nc) Un sac de graines suffit pour $25$ m². Combien de sacs faut-il ?",
+          reponses: [
+            { question: "jardin", attendu: "150" },
+            { question: "allée", attendu: "15" },
+            { question: "potager", attendu: "16" },
+            { question: "b)", attendu: "119" },
+            { question: "c)", attendu: "5" },
+          ],
           figure: plan("m", [
             { poly: [[0, 0], [15, 0], [15, 10], [0, 10]], fond: "vert" },
             { poly: [[0, 0], [15, 0], [15, 1], [0, 1]], fond: "trou" },
@@ -491,6 +557,10 @@ export const exercicesAireSurface6e: FicheExercicesData = {
           titre: "Le carrelage de la salle de bain",
           enonce:
             "Le sol d'une salle de bain est un rectangle de $2{,}4$ m sur $1{,}8$ m.\nOn le couvre de carreaux carrés de $30$ cm de côté.\na) Combien de carreaux dans une rangée ? Combien de rangées ?\nb) Combien de carreaux faut-il en tout ?\nc) Vérifie avec les aires : celle du sol et celle d'un carreau, en dm².",
+          reponses: [
+            { question: "a)", attendu: "8 ; 6" },
+            { question: "b)", attendu: "48" },
+          ],
           figure: plan("cm", [
             { grille: [0, 0, 240, 180], pas: 30 },
             { poly: [[0, 0], [240, 0], [240, 180], [0, 180]], fond: "bleu" },
@@ -506,6 +576,10 @@ export const exercicesAireSurface6e: FicheExercicesData = {
           titre: "L'enclos des lapins",
           enonce:
             "Hugo a $24$ m de grillage pour faire un enclos rectangulaire.\nLes côtés mesurent un nombre entier de mètres.\na) Longueur plus largeur font combien ?\nb) Écris tous les rectangles possibles, avec leur aire.\nc) Lequel donne le plus de place aux lapins ?",
+          reponses: [
+            { question: "a)", attendu: "12" },
+            { question: "c)", attendu: ["le carré", "carré", "6 × 6"] },
+          ],
           schema: table(["Longueur", "Largeur", "Aire"], [
             ["11 m", "1 m", "11 m²"],
             ["10 m", "2 m", "20 m²"],

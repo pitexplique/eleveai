@@ -14,7 +14,7 @@
 import { useMemo, useRef, useState } from "react";
 import katex from "katex";
 import { CheckCircle2, CircleAlert, Keyboard, XCircle } from "lucide-react";
-import { saisieEnLatex, TOUCHES_MATHS, type ToucheMaths } from "@/lib/fiches-exercices/saisie-maths";
+import { saisieEnLatex, touchesPourClasse, type ToucheMaths } from "@/lib/fiches-exercices/saisie-maths";
 import { saisieJuste, type ReponseAttendue } from "@/lib/fiches-exercices/verifier-saisie";
 
 function Apercu({ saisie }: { saisie: string }) {
@@ -35,11 +35,14 @@ export default function ReponseExercice({
   reponses,
   idBase,
   clavierMaths,
+  classe,
 }: {
   reponses: ReponseAttendue[];
   /** Unique sur la page, pour les `id` des champs. */
   idBase: string;
   clavierMaths: boolean;
+  /** La classe de la fiche : le clavier n'offre que les touches de son niveau. */
+  classe: string;
 }) {
   const [saisies, setSaisies] = useState<string[]>(() => reponses.map(() => ""));
   const [clavier, setClavier] = useState(clavierMaths);
@@ -133,7 +136,7 @@ export default function ReponseExercice({
 
       {clavier ? (
         <div className="grid grid-cols-6 gap-1" role="group" aria-label="Clavier maths">
-          {TOUCHES_MATHS.map((t) => (
+          {touchesPourClasse(classe).map((t) => (
             <button
               key={t.label}
               type="button"

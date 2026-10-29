@@ -332,6 +332,10 @@ export const exercicesTriangles3e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Dans le triangle $ABC$, $\\widehat{A} = 48°$ et $\\widehat{B} = 67°$.\na) Calculer $\\widehat{C}$.\nb) Le triangle est-il isocèle ?",
+          reponses: [
+            { question: "a)", attendu: "65" },
+            { question: "b)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) Les trois angles d'un triangle font toujours $180°$. Il ne m'en manque qu'un : je retranche les deux connus.\nJ'additionne d'abord les deux angles connus : $48 + 67 = 115$.\nJe retranche de $180$ : $\\widehat{C} = 180° - 115° = 65°$.\nJe vérifie : $48 + 67 + 65 = 180$. C'est juste.\nb) Les trois angles $48°$, $67°$ et $65°$ sont tous différents : aucun couple d'angles égaux, donc le triangle n'est pas isocèle.\n⛔ Le piège : retrancher de $360°$, le tour complet. On trouverait $245°$ : plus qu'un angle plat, impossible dans un triangle.\nRéponse : $\\widehat{C} = 65°$, et le triangle n'est pas isocèle.",
           schema: tri({ A: [0, 0], B: [6, 0], C: [4.078, 4.529] }, { angles: { A: "48°", B: "67°", C: "65°" }, trouve: ["C"] }),
@@ -340,6 +344,9 @@ export const exercicesTriangles3e: FicheExercicesData = {
         {
           enonce:
             "Une échelle $[PH]$ est posée contre un mur vertical : son pied $P$ est sur le sol horizontal, son sommet $H$ contre le mur. Avec $M$ le pied du mur, le triangle $PMH$ est rectangle en $M$. Pour qu'elle ne glisse pas, l'échelle fait un angle de $75°$ avec le sol.\nQuel angle fait-elle avec le mur ?",
+          reponses: [
+            { attendu: "15" },
+          ],
           correction:
             "Le triangle $PMH$ est rectangle en $M$ : l'angle droit prend déjà $90°$ sur les $180°$.\nIl reste $180 - 90 = 90$ degrés pour les deux autres angles, $\\widehat{P}$ et $\\widehat{H}$.\nDonc $\\widehat{H} = 90° - 75° = 15°$.\nJe vérifie : $75 + 90 + 15 = 180$.\n⛔ Le piège : calculer $180° - 75° = 105°$ en oubliant l'angle droit. Un angle de plus de $90°$ ne tient pas à côté d'un angle droit dans un triangle.\nRéponse : l'échelle fait un angle de $15°$ avec le mur.",
           schema: tri({ A: [0, 0], B: [1, 0], C: [1, 3.732] }, { noms: { A: "P", B: "M", C: "H" }, angles: { A: "75°", C: "15°" }, trouve: ["C"], droit: "B" }),
@@ -347,6 +354,9 @@ export const exercicesTriangles3e: FicheExercicesData = {
         },
         {
           enonce: "Chaque pointe d'une étoile régulière à cinq branches est un triangle isocèle dont l'angle au sommet mesure $36°$.\nCalculer ses deux angles à la base.",
+          reponses: [
+            { attendu: ["72", "72 ; 72"] },
+          ],
           correction:
             "Le triangle est isocèle : ses deux angles à la base sont ÉGAUX.\nJe retire d'abord l'angle au sommet : $180 - 36 = 144$. Il reste $144°$ pour les deux angles à la base.\nJe partage en deux parts égales : $144 \\div 2 = 72$.\nJe vérifie : $36 + 72 + 72 = 180$.\n⛔ Le piège : diviser $180$ par deux, soit $90°$ chacun, sans retirer le sommet. Contrôle : $36 + 90 + 90 = 216$, beaucoup trop.\nRéponse : les deux angles à la base mesurent $72°$ chacun.",
           schema: tri({ A: [0, 0], B: [3, 0], C: [1.5, 4.617] }, { angles: { A: "72°", B: "72°", C: "36°" }, trouve: ["A", "B"], egaux: ["BC", "CA"] }),
@@ -354,6 +364,10 @@ export const exercicesTriangles3e: FicheExercicesData = {
         },
         {
           enonce: "Le pignon d'un chalet est un triangle isocèle. Ses deux angles à la base mesurent chacun $38°$.\nCalculer l'angle au sommet, sous le faîte du toit. Quelle est la nature de ce triangle ?",
+          reponses: [
+            { question: "angle", attendu: "104" },
+            { question: "nature", attendu: ["isocèle obtusangle", "obtusangle isocèle"] },
+          ],
           correction:
             "Les deux angles à la base sont égaux : ensemble, ils font $38 + 38 = 76$ degrés.\nL'angle au sommet prend le reste : $180 - 76 = 104$.\nJe vérifie : $38 + 38 + 104 = 180$.\n$104°$ dépasse $90°$ : le triangle est isocèle ET obtusangle.\n⛔ Le piège : calculer $180 - 38 = 142$, en ne retirant qu'UN angle à la base. Il y en a deux.\nRéponse : l'angle au sommet mesure $104°$ ; le pignon est un triangle isocèle obtusangle.",
           schema: tri({ A: [0, 0], B: [6, 0], C: [3, 2.344] }, { angles: { A: "38°", B: "38°", C: "104°" }, trouve: ["C"], egaux: ["BC", "CA"] }),
@@ -362,6 +376,12 @@ export const exercicesTriangles3e: FicheExercicesData = {
         {
           enonce:
             "Donner la nature de chaque triangle (il peut en avoir deux).\na) $DEF$ avec $DE = EF = FD = 7$ cm.\nb) $GHI$ avec $\\widehat{G} = 30°$, $\\widehat{H} = 75°$ et $\\widehat{I} = 75°$.\nc) $JKL$ avec $\\widehat{J} = 45°$ et $\\widehat{K} = 45°$.\nd) $MNO$ avec $MN = 6$ cm, $NO = 6$ cm et $MO = 8$ cm.",
+          reponses: [
+            { question: "a)", attendu: ["équilatéral", "équilatéral et isocèle"] },
+            { question: "b)", attendu: ["isocèle", "isocèle en G"] },
+            { question: "c)", attendu: ["rectangle isocèle", "isocèle rectangle", "rectangle isocèle en L"] },
+            { question: "d)", attendu: ["isocèle", "isocèle en N"] },
+          ],
           correction:
             "Je regarde les côtés (des côtés égaux ?), puis les angles (un angle droit ? deux angles égaux ?).\na) Trois côtés égaux : $DEF$ est équilatéral. Il est AUSSI isocèle, puisqu'il a au moins deux côtés égaux.\nb) Deux angles égaux, $\\widehat{H} = \\widehat{I} = 75°$ : $GHI$ est isocèle en $G$, le sommet de l'angle différent.\nc) Je calcule le troisième angle : $\\widehat{L} = 180° - 45° - 45° = 90°$. $JKL$ est rectangle en $L$, et ses deux angles de $45°$ sont égaux : il est aussi isocèle. C'est un triangle rectangle isocèle.\nd) $MN = NO$ : $MNO$ est isocèle en $N$. Pas équilatéral : le troisième côté mesure $8$ cm.\n⛔ Le piège au c) : s'arrêter à « isocèle ». Un triangle peut cumuler deux natures : je calcule toujours le troisième angle.\nRéponse : a) équilatéral, donc isocèle ; b) isocèle en $G$ ; c) rectangle isocèle en $L$ ; d) isocèle en $N$.",
           schema: deux(
@@ -372,6 +392,11 @@ export const exercicesTriangles3e: FicheExercicesData = {
         },
         {
           enonce: "Peut-on construire un triangle avec ces trois longueurs ?\na) $4$ cm, $6$ cm et $11$ cm.\nb) $5$ cm, $7$ cm et $9$ cm.\nc) $10$ cm, $2$ cm et $9$ cm.",
+          reponses: [
+            { question: "a)", attendu: ["non", "faux"] },
+            { question: "b)", attendu: ["oui", "vrai"] },
+            { question: "c)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "Je repère la PLUS GRANDE longueur, et je la compare à la somme des deux autres.\na) La plus grande est $11$. $4 + 6 = 10$, et $10 < 11$ : les deux petits côtés, mis bout à bout, n'atteignent pas l'autre bout du grand. Pas de triangle.\nb) La plus grande est $9$. $5 + 7 = 12$, et $12 > 9$ : le triangle existe.\nc) La plus grande est $10$, même écrite en premier. $2 + 9 = 11$, et $11 > 10$ : le triangle existe.\n⛔ Le piège : tester un autre côté que le plus grand. Au a), $4 < 6 + 11$ est vrai, et pourtant le triangle n'existe pas. Seul le plus grand côté décide.\nRéponse : a) non ; b) oui ; c) oui.",
           schema: longueurs([{ grand: 11, petits: [4, 6] }, { grand: 9, petits: [5, 7] }, { grand: 10, petits: [2, 9] }]),
@@ -379,6 +404,11 @@ export const exercicesTriangles3e: FicheExercicesData = {
         },
         {
           enonce: "Existe-t-il un triangle qui a ces trois angles ?\na) $62°$, $58°$ et $60°$.\nb) $95°$, $45°$ et $45°$.\nc) $30°$, $90°$ et $60°$.",
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: ["non", "faux"] },
+            { question: "c)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "Un triangle existe avec ces angles seulement si leur somme vaut EXACTEMENT $180°$.\na) $62 + 58 + 60 = 180$ : oui.\nb) $95 + 45 + 45 = 185$ : non, $5°$ de trop. Avec $95°$ et $45°$, le troisième angle est forcé : $180 - 95 - 45 = 40$, pas $45$.\nc) $30 + 90 + 60 = 180$ : oui, c'est un triangle rectangle.\n⛔ Le piège au b) : « $185$, c'est presque $180$, ça passe ». La somme vaut $180$ exactement : à $185°$, les côtés ne se referment pas.\nRéponse : a) oui ; b) non ; c) oui.",
           schema: deux(
@@ -390,6 +420,11 @@ export const exercicesTriangles3e: FicheExercicesData = {
         {
           enonce:
             "Les panneaux de danger du code de la route sont des triangles équilatéraux.\na) Deux angles d'un triangle mesurent $60°$. Calculer le troisième.\nb) Combien mesure chaque angle d'un panneau de danger ?\nc) Un grand panneau d'autoroute a-t-il de plus grands angles qu'un petit panneau de ville ?",
+          reponses: [
+            { question: "a)", attendu: "60" },
+            { question: "b)", attendu: "60" },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $180 - 60 - 60 = 60$ : le troisième angle mesure lui aussi $60°$. Trois angles égaux : ce triangle est équilatéral.\nb) Un triangle équilatéral a trois angles égaux qui se partagent $180°$ : $180 \\div 3 = 60$. Chaque angle mesure $60°$.\nc) Non. Les deux sont équilatéraux : leurs angles mesurent tous $60°$. La taille change les CÔTÉS, jamais les angles.\n⛔ Le piège : croire qu'un plus grand triangle a de plus grands angles. La somme reste $180°$ quelle que soit la taille.\nRéponse : chaque angle mesure $60°$, sur tous les panneaux de danger.",
           schema: tri({ A: [0, 0], B: [4, 0], C: [2, 3.464] }, { angles: { A: "60°", B: "60°", C: "60°" }, trouve: ["C"], egaux: ["AB", "BC", "CA"] }),
@@ -413,6 +448,13 @@ export const exercicesTriangles3e: FicheExercicesData = {
         {
           enonce:
             "Les angles d'un triangle $ABC$ mesurent, en degrés, $\\widehat{A} = x$, $\\widehat{B} = 2x$ et $\\widehat{C} = 3x$.\na) Écrire une équation et trouver $x$.\nb) En déduire les trois angles.\nc) Quelle est la nature du triangle ?",
+          reponses: [
+            { question: "a)", attendu: "30" },
+            { question: "b) A", attendu: "30" },
+            { question: "b) B", attendu: "60" },
+            { question: "b) C", attendu: "90" },
+            { question: "c)", attendu: ["rectangle", "rectangle en C"] },
+          ],
           correction:
             "a) La somme des trois angles vaut $180°$ : $x + 2x + 3x = 180$, soit $6x = 180$, donc $x = 180 \\div 6 = 30$.\nb) $\\widehat{A} = 30°$, $\\widehat{B} = 2 \\times 30° = 60°$ et $\\widehat{C} = 3 \\times 30° = 90°$.\nJe vérifie : $30 + 60 + 90 = 180$.\nc) $\\widehat{C} = 90°$ : le triangle est rectangle en $C$.\n⛔ Le piège : s'arrêter à $x = 30$. L'inconnue n'est pas la réponse : il faut encore calculer $2x$ et $3x$.\nRéponse : $30°$, $60°$ et $90°$ ; le triangle $ABC$ est rectangle en $C$.",
           schema: tri({ A: [0, 0], B: [6, 0], C: [4.5, 2.598] }, { angles: { A: "30°", B: "60°", C: "90°" }, trouve: ["A", "B", "C"], droit: "C" }),
@@ -421,6 +463,11 @@ export const exercicesTriangles3e: FicheExercicesData = {
         {
           enonce:
             "Un triangle a deux côtés de $5$ cm et $9$ cm. Son troisième côté mesure $L$ cm, un nombre entier.\na) Montrer que $L$ doit être plus grand que $4$ et plus petit que $14$.\nb) Combien de valeurs de $L$ sont possibles ? Les donner.\nc) Pour quelles valeurs de $L$ le triangle est-il isocèle ?",
+          reponses: [
+            { question: "b) nb", attendu: "9" },
+            { question: "b) L", attendu: "5 ; 6 ; 7 ; 8 ; 9 ; 10 ; 11 ; 12 ; 13" },
+            { question: "c)", attendu: "5 ; 9" },
+          ],
           correction:
             "a) Le côté $L$ doit être plus petit que la somme des deux autres : $L < 5 + 9$, soit $L < 14$.\nLe côté de $9$ cm doit lui aussi être plus petit que la somme des deux autres : $9 < 5 + L$, soit $L > 4$.\nb) Les entiers strictement entre $4$ et $14$ : $5$, $6$, $7$, $8$, $9$, $10$, $11$, $12$, $13$. Il y en a $13 - 5 + 1 = 9$.\nc) Isocèle : deux côtés égaux. $L = 5$ (deux côtés de $5$ cm) ou $L = 9$ (deux côtés de $9$ cm).\n⛔ Le piège : garder $L = 4$ ou $L = 14$. Avec $4 + 5 = 9$, les trois sommets sont alignés : le triangle est aplati, ce n'en est plus un.\nRéponse : $9$ valeurs, de $5$ à $13$ cm ; isocèle pour $L = 5$ ou $L = 9$.",
           schema: deux(
@@ -432,6 +479,11 @@ export const exercicesTriangles3e: FicheExercicesData = {
         {
           enonce:
             "On veut construire un triangle $ABC$ avec $AB = 8$ cm, $\\widehat{A} = 35°$ et $\\widehat{B} = 50°$.\na) Calculer $\\widehat{C}$. Quelle est la nature du triangle ?\nb) Décrire les étapes de la construction, à la règle et au rapporteur.\nc) Un camarade veut aussi imposer $\\widehat{C} = 90°$. Est-ce possible ?",
+          reponses: [
+            { question: "a)", attendu: "95" },
+            { question: "a) type", attendu: ["obtusangle", "obtusangle en C"] },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $\\widehat{C} = 180° - 35° - 50° = 95°$. Un angle de plus de $90°$ : le triangle est obtusangle en $C$.\nb) Je trace le segment $[AB]$ de $8$ cm. Au rapporteur, je trace en $A$ une demi-droite qui fait $35°$ avec $[AB]$, puis en $B$ une demi-droite qui fait $50°$ avec $[BA]$, du MÊME côté. Elles se coupent en $C$.\nc) Non. Dès que $\\widehat{A}$ et $\\widehat{B}$ sont choisis, $\\widehat{C}$ est forcé : c'est $95°$. On ne choisit pas le troisième angle, on le calcule.\n⭐ Contrôle sur ma figure : je mesure $\\widehat{C}$ au rapporteur, je dois lire environ $95°$.\n⛔ Le piège au b) : tracer les deux demi-droites de part et d'autre de $[AB]$. Elles ne se couperaient jamais.\nRéponse : $\\widehat{C} = 95°$, le triangle est obtusangle ; un côté et ses deux angles suffisent à le construire.",
           schema: tri({ A: [0, 0], B: [8, 0], C: [5.039, 3.529] }, { cotes: { AB: "8 cm" }, angles: { A: "35°", B: "50°", C: "95°" }, trouve: ["C"] }),
@@ -440,6 +492,12 @@ export const exercicesTriangles3e: FicheExercicesData = {
         {
           enonce:
             "Dans chaque cas, les données déterminent-elles UN SEUL triangle, à la position près ?\na) Trois côtés : $6$ cm, $8$ cm et $9$ cm.\nb) Deux côtés, $5$ cm et $7$ cm, et l'angle de $30°$ compris entre eux.\nc) Trois angles : $40°$, $65°$ et $75°$.\nd) Trois angles : $40°$, $65°$ et $80°$.",
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: ["oui", "vrai"] },
+            { question: "c)", attendu: ["non", "une infinité"] },
+            { question: "d)", attendu: ["aucun", "non"] },
+          ],
           correction:
             "a) Oui. $9 < 6 + 8 = 14$ : le triangle existe, et trois longueurs le fixent entièrement. C'est pour ça qu'une charpente en triangles ne se déforme pas.\nb) Oui. Je trace l'angle de $30°$, je reporte $5$ cm sur un côté et $7$ cm sur l'autre : le troisième côté est imposé.\nc) Non. $40 + 65 + 75 = 180$ : ces angles conviennent, mais à une infinité de triangles, petits ou grands, qui ont tous la même FORME. Il manque une longueur.\nd) Aucun : $40 + 65 + 80 = 185$, pas $180$. Ce triangle n'existe pas.\n⛔ Le piège au c) : croire que trois données suffisent toujours. Les angles fixent la forme ; seule une longueur fixe la taille.\nRéponse : a) oui ; b) oui ; c) non, une infinité ; d) aucun.",
           schema: deux(
@@ -451,6 +509,13 @@ export const exercicesTriangles3e: FicheExercicesData = {
         {
           enonce:
             "Un élève a deux équerres dans sa trousse.\na) La première a un angle droit, et ses deux côtés de l'angle droit ont la même longueur. Donner sa nature et ses trois angles.\nb) La seconde a un angle droit et un angle de $30°$. Calculer son troisième angle.\nc) En posant un angle de chaque équerre côte à côte, peut-on former un angle de $75°$ ? de $105°$ ?",
+          reponses: [
+            { question: "a) type", attendu: ["rectangle isocèle", "isocèle rectangle"] },
+            { question: "a) °", attendu: "90 ; 45 ; 45" },
+            { question: "b)", attendu: "60" },
+            { question: "c) 75°", attendu: ["oui", "vrai"] },
+            { question: "c) 105°", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) Deux côtés égaux : elle est isocèle. Un angle droit : elle est rectangle. C'est un triangle rectangle isocèle.\nSes deux angles à la base sont égaux et se partagent $180 - 90 = 90$ degrés : $90 \\div 2 = 45$. Ses angles : $90°$, $45°$ et $45°$.\nb) $180 - 90 - 30 = 60$ : le troisième angle mesure $60°$.\nc) $45 + 30 = 75$ et $45 + 60 = 105$ : les deux sont possibles.\n⛔ Le piège au a) : croire qu'un triangle rectangle ne peut pas être isocèle. Les familles se cumulent : ici, les deux côtés égaux sont ceux de l'angle droit.\nRéponse : a) rectangle isocèle, $90°$, $45°$ et $45°$ ; b) $60°$ ; c) oui pour les deux.",
           schema: deux(
@@ -462,6 +527,10 @@ export const exercicesTriangles3e: FicheExercicesData = {
         {
           enonce:
             "Dans le triangle $ABC$, $\\widehat{A} = 45°$. On prolonge le côté $[AC]$ au-delà de $C$ : l'angle formé en $C$ par ce prolongement et le côté $[CB]$ mesure $120°$.\na) Calculer $\\widehat{ACB}$.\nb) Calculer $\\widehat{B}$.\nc) Comparer $120°$ et $\\widehat{A} + \\widehat{B}$. Est-ce un hasard ?",
+          reponses: [
+            { question: "a)", attendu: "60" },
+            { question: "b)", attendu: "75" },
+          ],
           correction:
             "a) L'angle $\\widehat{ACB}$ et l'angle de $120°$ sont côte à côte sur la droite $(AC)$ : ensemble, ils forment un angle plat. $\\widehat{ACB} = 180° - 120° = 60°$.\nb) $\\widehat{B} = 180° - 45° - 60° = 75°$.\nc) $\\widehat{A} + \\widehat{B} = 45 + 75 = 120$ : exactement l'angle extérieur. Ce n'est pas un hasard : l'angle extérieur et $\\widehat{A} + \\widehat{B}$ complètent tous les deux $\\widehat{ACB}$ pour faire $180°$. Ils sont donc égaux, dans tout triangle.\n⛔ Le piège au a) : prendre $120°$ pour un angle du triangle. Il est DEHORS ; l'angle du triangle est son voisin.\nRéponse : $\\widehat{ACB} = 60°$ et $\\widehat{B} = 75°$ ; $45 + 75 = 120$, et c'est vrai dans tout triangle.",
           schema: tri({ A: [0, 0], B: [6, 0], C: [4.732, 4.732] }, { angles: { A: "45°", B: "75°", C: "60°" }, trouve: ["B", "C"], exterieur: { en: "C", depuis: "A", label: "120°" } }),
@@ -470,6 +539,11 @@ export const exercicesTriangles3e: FicheExercicesData = {
         {
           enonce:
             "Sur le plan d'une ville, trois stations de tramway $A$, $B$ et $C$ vérifient $AB = 4$ km, $BC = 6$ km et $AC = 10$ km.\na) Ces trois longueurs forment-elles un vrai triangle ?\nb) Où se trouve la station $B$ ?\nc) Et si l'on avait $AC = 10{,}5$ km ? Et $AC = 9$ km ?",
+          reponses: [
+            { question: "a)", attendu: ["non", "faux"] },
+            { question: "c) 10,5", attendu: ["non", "impossible"] },
+            { question: "c) 9", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) La plus grande longueur est $AC = 10$. $AB + BC = 4 + 6 = 10$ : la somme est ÉGALE au plus grand côté, pas plus grande. Le triangle est aplati.\nb) Passer par $B$ ne rallonge pas le trajet de $A$ à $C$ : $B$ est SUR le segment $[AC]$, à $4$ km de $A$. Les trois stations sont alignées.\nc) Avec $10{,}5$ : $4 + 6 = 10$ et $10 < 10{,}5$, impossible, même aplati. Avec $9$ : $10 > 9$, un vrai triangle existe.\n⛔ Le piège : conclure « égal, donc ça marche ». Un vrai triangle demande une inégalité STRICTE ; l'égalité, ce sont trois points alignés.\nRéponse : les stations sont alignées, $B$ est sur $[AC]$ ; $10{,}5$ km est impossible, $9$ km donne un vrai triangle.",
           schema: longueurs([{ grand: 10, petits: [4, 6] }, { grand: 10.5, petits: [4, 6] }, { grand: 9, petits: [4, 6] }], "km"),
@@ -477,6 +551,9 @@ export const exercicesTriangles3e: FicheExercicesData = {
         },
         {
           enonce: "a) Un triangle isocèle a un angle de $110°$. Calculer ses deux autres angles.\nb) Un autre triangle isocèle a un angle de $54°$. Montrer qu'il y a DEUX triangles possibles, et donner leurs angles.",
+          reponses: [
+            { question: "a)", attendu: ["35", "35 ; 35"] },
+          ],
           correction:
             "a) Un angle de $110°$ ne peut pas être un angle à la base : il y en aurait deux, et $110 + 110 = 220$ dépasse $180$. C'est donc l'angle au sommet. Les deux angles à la base se partagent $180 - 110 = 70$ degrés : $70 \\div 2 = 35$ chacun.\nb) Premier cas : $54°$ est l'angle au sommet. Les angles à la base valent $(180 - 54) \\div 2 = 126 \\div 2 = 63$ degrés. Angles : $54°$, $63°$, $63°$.\nSecond cas : $54°$ est un angle à la base. L'autre angle à la base vaut aussi $54°$, et le sommet $180 - 54 - 54 = 72$ degrés. Angles : $54°$, $54°$, $72°$.\n⛔ Le piège au b) : ne voir qu'un cas. L'énoncé ne dit pas OÙ est l'angle de $54°$ : je teste les deux places.\nRéponse : a) $35°$ et $35°$ ; b) $54°$, $63°$, $63°$ ou bien $54°$, $54°$, $72°$.",
           schema: deux(
@@ -503,6 +580,11 @@ export const exercicesTriangles3e: FicheExercicesData = {
           titre: "Le pont en treillis",
           enonce:
             "Beaucoup de ponts métalliques portent une poutre en treillis « Warren », brevetée en 1848 : une rangée de triangles, pointe en haut puis pointe en bas, entre deux barres horizontales. Dans le modèle d'origine, tous les triangles sont équilatéraux.\na) Quel angle fait une barre oblique avec la barre du bas ?\nb) En un nœud de la barre du haut, trois angles sont côte à côte sous la barre, chacun pris dans un triangle différent. Calculer leur somme. Qu'en déduire pour la barre du haut ?\nc) Un ingénieur remplace les triangles équilatéraux par des triangles isocèles identiques, d'angle au sommet $50°$. Calculer leurs angles à la base, puis refaire le b).",
+          reponses: [
+            { question: "a)", attendu: "60" },
+            { question: "b)", attendu: "180" },
+            { question: "c)", attendu: ["65", "65 ; 65"] },
+          ],
           correction:
             "a) Chaque triangle est équilatéral : ses trois angles mesurent $180 \\div 3 = 60$ degrés. La barre oblique fait $60°$ avec la barre du bas.\nb) Au nœud, je trouve l'angle d'un triangle pointe en bas, l'angle au sommet d'un triangle pointe en haut, puis l'angle d'un autre triangle pointe en bas : $60 + 60 + 60 = 180$. Trois angles côte à côte qui font $180°$ forment un angle plat : les morceaux de barre à gauche et à droite du nœud sont dans le prolongement l'un de l'autre. La barre du haut est bien droite.\nc) Angles à la base : $(180 - 50) \\div 2 = 130 \\div 2 = 65$ degrés chacun. Au nœud : un angle à la base, l'angle au sommet, un angle à la base, soit $65 + 50 + 65 = 180$. Encore un angle plat : la barre reste droite.\n⭐ Ce n'est pas un hasard : au nœud, je retrouve les trois angles d'UN triangle, dont la somme vaut toujours $180°$.\n⛔ Le piège au c) : croire que seuls les triangles équilatéraux s'emboîtent en ligne droite. Des triangles isocèles identiques, alternés, le font aussi.\nRéponse : $60°$ ; au nœud, la somme vaut $180°$ et la barre est droite ; avec $50°$ au sommet, les angles à la base valent $65°$ et la barre reste droite.",
           schema: (
@@ -517,6 +599,10 @@ export const exercicesTriangles3e: FicheExercicesData = {
           titre: "La pyramide du Louvre",
           enonce:
             "La pyramide du Louvre, à Paris, a une base carrée de $35{,}42$ m de côté. Ses quatre faces sont des triangles isocèles identiques, dont les angles à la base mesurent environ $58°$.\na) Calculer l'angle au sommet d'une face.\nb) Les deux arêtes obliques d'une face ont la même longueur. Un touriste affirme qu'elles mesurent $17$ m. Est-ce possible ?\nc) Montrer que chaque arête mesure forcément plus de $17{,}71$ m.",
+          reponses: [
+            { question: "a)", attendu: "64" },
+            { question: "b)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) Les deux angles à la base sont égaux : $58 + 58 = 116$. L'angle au sommet vaut $180 - 116 = 64$ degrés.\nb) La base est ici le plus grand côté. Pour que la face existe, elle doit être plus petite que la somme des deux arêtes : $17 + 17 = 34$, et $34 < 35{,}42$. Deux arêtes de $17$ m, partant des deux bouts de la base, ne se rejoindraient pas. Impossible.\nc) Avec deux arêtes de longueur $a$, il faut $a + a > 35{,}42$, soit $2a > 35{,}42$, donc $a > 35{,}42 \\div 2 = 17{,}71$ m.\n⭐ En réalité, chaque arête mesure environ $33$ m : bien plus que $17{,}71$ m.\n⛔ Le piège au b) : tester un petit côté. $17 < 17 + 35{,}42$ est vrai, et pourtant la face n'existe pas. C'est le PLUS GRAND côté, la base, qu'il faut comparer à la somme des deux autres.\nRéponse : l'angle au sommet mesure environ $64°$ ; des arêtes de $17$ m sont impossibles, il leur faut plus de $17{,}71$ m.",
           schema: tri({ A: [0, 0], B: [35.42, 0], C: [17.71, 28.342] }, { cotes: { AB: "35,42 m" }, angles: { A: "58°", B: "58°", C: "64°" }, trouve: ["C"], egaux: ["BC", "CA"] }),
@@ -526,6 +612,10 @@ export const exercicesTriangles3e: FicheExercicesData = {
           titre: "Paris, Lyon, Marseille",
           enonce:
             "À vol d'oiseau, Paris est à $391$ km de Lyon, Lyon à $278$ km de Marseille, et Paris à $660$ km de Marseille.\na) Ces trois villes forment-elles un vrai triangle ?\nb) Un avion va de Paris à Marseille avec une escale à Lyon, en ligne droite à chaque fois. Combien de kilomètres fait-il de plus que le vol direct ?\nc) Que peut-on dire de la position de Lyon ?\nd) Un site affiche : Paris-Lyon $391$ km, Lyon-Marseille $278$ km, Paris-Marseille $680$ km. Pourquoi est-ce forcément faux ?",
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: "9" },
+          ],
           correction:
             "a) Le plus grand côté est Paris-Marseille, $660$ km. $391 + 278 = 669$, et $669 > 660$ : c'est un vrai triangle, de justesse.\nb) Avec l'escale : $391 + 278 = 669$ km. En direct : $660$ km. Il fait $669 - 660 = 9$ km de plus.\nc) La somme dépasse à peine le grand côté : le triangle est presque aplati. Lyon est presque sur la ligne droite de Paris à Marseille, le détour ne fait que $9$ km sur $660$.\nd) $391 + 278 = 669$, et $669 < 680$ : le trajet avec escale serait plus COURT que le vol direct. Or la ligne droite est le plus court chemin : c'est impossible.\n⛔ Le piège : croire que « presque plat » veut dire « pas un triangle ». Tant que $669 > 660$, même de peu, les trois villes ne sont pas alignées.\nRéponse : un vrai triangle, très aplati ; l'escale à Lyon rallonge le trajet de $9$ km seulement.",
           schema: tri({ A: [0, 0], B: [233.2, -617.4], C: [187.2, -343.3] }, { noms: { A: "Paris", B: "Marseille", C: "Lyon" }, cotes: { AB: "660 km", CA: "391 km", BC: "278 km" } }),
@@ -535,6 +625,12 @@ export const exercicesTriangles3e: FicheExercicesData = {
           titre: "La voile du dériveur",
           enonce:
             "La grand-voile d'un petit voilier est un triangle $ATE$ : $A$ est le point d'amure, en bas du mât ; $T$ la tête, en haut du mât ; $E$ le point d'écoute, au bout de la bôme. Le mât est perpendiculaire à la bôme. Le guindant $AT$ mesure $9$ m et la bordure $AE$ mesure $3{,}6$ m.\na) L'angle en tête mesure environ $22°$. Calculer l'angle au point d'écoute.\nb) Entre quelles valeurs la chute $TE$, le troisième côté, doit-elle se trouver ?\nc) Le voilier commande une chute de $12{,}8$ m. Qu'en penser ?\nd) Pour découper la voile, le voilier connaît $AT$, $AE$ et l'angle droit entre eux. Y a-t-il un seul triangle possible ?",
+          reponses: [
+            { question: "a)", attendu: "68" },
+            { question: "b)", attendu: "5,4 ; 12,6" },
+            { question: "c)", attendu: ["impossible", "non"] },
+            { question: "d)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) Le triangle $ATE$ est rectangle en $A$ : ses deux angles aigus font $90°$ ensemble. $\\widehat{E} = 90° - 22° = 68°$.\nb) La chute est plus petite que la somme des deux autres côtés : $TE < 9 + 3{,}6 = 12{,}6$.\nEt le guindant, $9$ m, doit être plus petit que $3{,}6 + TE$ : $TE > 9 - 3{,}6 = 5{,}4$.\nDonc $5{,}4 < TE < 12{,}6$, en mètres.\nc) $12{,}8 > 12{,}6$ : impossible, les trois côtés ne se refermeraient pas.\nd) Oui : deux côtés et l'angle compris entre eux déterminent un seul triangle. La chute n'est pas à choisir, elle est imposée.\n⛔ Le piège au b) : ne donner que la borne du haut. La chute doit aussi être assez LONGUE : trop courte, elle ne relierait pas le haut du mât au bout de la bôme.\nRéponse : l'angle au point d'écoute mesure $68°$ ; la chute est entre $5{,}4$ m et $12{,}6$ m, donc $12{,}8$ m est impossible ; les données fixent une seule voile.",
           schema: tri({ A: [0, 0], B: [3.6, 0], C: [0, 9] }, { noms: { A: "A", B: "E", C: "T" }, cotes: { AB: "3,6 m", CA: "9 m" }, angles: { B: "68°", C: "22°" }, trouve: ["B"], droit: "A" }),

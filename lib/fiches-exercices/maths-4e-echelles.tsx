@@ -394,6 +394,12 @@ export const exercicesEchelles4e: FicheExercicesData = {
         {
           enonce:
             "Une carte de randonnée est à l'échelle $\\dfrac{1}{20\\,000}$.\na) Que représente $1$ cm sur cette carte, en centimètres, puis en mètres ?\nb) Que représentent $5$ cm sur cette carte ?\nc) Cette carte est-elle une réduction ou un agrandissement de la réalité ?",
+          reponses: [
+            { question: "a) cm", attendu: "20000" },
+            { question: "a) m", attendu: "200" },
+            { question: "b)", attendu: ["1", "1000", "100000"] },
+            { question: "c)", attendu: ["réduction", "une réduction"] },
+          ],
           correction:
             "a) L'échelle $\\dfrac{1}{20\\,000}$ se lit : $1$ cm sur la carte pour $20\\,000$ cm en vrai, dans la même unité.\nJe convertis : $1$ m $= 100$ cm, donc $20\\,000$ cm $= 20\\,000 \\div 100 = 200$ m.\nb) Je vais vers la réalité, donc je multiplie : $5 \\times 200 = 1\\,000$ m, soit $1$ km.\nc) La réalité est $20\\,000$ fois plus grande que la carte : c'est une réduction, de rapport $\\dfrac{1}{20\\,000}$, un nombre plus petit que $1$.\n⛔ Le piège : lire « $1$ cm pour $20\\,000$ m ». Les deux nombres de l'échelle sont dans la MÊME unité : $20\\,000$ m feraient $20$ km pour un seul centimètre.\nRéponse : $1$ cm représente $20\\,000$ cm, soit $200$ m ; $5$ cm représentent $1$ km ; c'est une réduction.",
           schema: regle({ n: 5, par: 200, unite: "m", pas: 1, marque: 5 }),
@@ -402,6 +408,13 @@ export const exercicesEchelles4e: FicheExercicesData = {
         {
           enonce:
             "Un lac mesure $1$ km de long. On le cherche sur trois cartes : au $\\dfrac{1}{10\\,000}$, au $\\dfrac{1}{40\\,000}$ et au $\\dfrac{1}{200\\,000}$.\na) Quelle longueur, en cm, le lac a-t-il sur chaque carte ?\nb) Sur quelle carte paraît-il le plus grand ? Laquelle montre le plus de détails ?",
+          reponses: [
+            { question: "a) 10k", attendu: "10" },
+            { question: "a) 40k", attendu: "2,5" },
+            { question: "a) 200k", attendu: "0,5" },
+            { question: "b) grand", attendu: "1/10000" },
+            { question: "b) détail", attendu: "1/10000" },
+          ],
           correction:
             "a) Je convertis d'abord : $1$ km $= 100\\,000$ cm. Puis je vais vers la carte, donc je divise.\nAu $\\dfrac{1}{10\\,000}$ : $100\\,000 \\div 10\\,000 = 10$ cm.\nAu $\\dfrac{1}{40\\,000}$ : $100\\,000 \\div 40\\,000 = 2{,}5$ cm.\nAu $\\dfrac{1}{200\\,000}$ : $100\\,000 \\div 200\\,000 = 0{,}5$ cm.\nb) Le lac paraît le plus grand au $\\dfrac{1}{10\\,000}$ : la carte au PLUS PETIT dénominateur est celle qui montre le plus de détails.\n⛔ Le piège : croire qu'un grand nombre fait une grande carte. Plus le dénominateur est grand, plus la réalité a été réduite : au $\\dfrac{1}{200\\,000}$, le lac ne fait qu'un demi-centimètre.\nRéponse : $10$ cm, $2{,}5$ cm et $0{,}5$ cm ; la carte au $\\dfrac{1}{10\\,000}$ est la plus détaillée.",
           schema: barres([{ label: "au 1/10 000 : 10 cm", cm: 10 }, { label: "au 1/40 000 : 2,5 cm", cm: 2.5 }, { label: "au 1/200 000 : 0,5 cm", cm: 0.5 }]),
@@ -409,6 +422,9 @@ export const exercicesEchelles4e: FicheExercicesData = {
         },
         {
           enonce: "Sur un plan de ville à l'échelle $\\dfrac{1}{5\\,000}$, la gare et le stade sont à $7{,}4$ cm l'un de l'autre. Quelle est la distance réelle, en mètres ?",
+          reponses: [
+            { attendu: "370" },
+          ],
           correction:
             "Je vais du plan vers la réalité : la réalité est plus grande, donc je multiplie par $5\\,000$.\n$7{,}4 \\times 5\\,000 = 37\\,000$ cm.\nJe convertis : $37\\,000 \\div 100 = 370$ m.\n⭐ Contrôle : au $\\dfrac{1}{5\\,000}$, $1$ cm vaut $50$ m ; $7{,}4$ cm valent donc un peu moins de $8 \\times 50 = 400$ m.\n⛔ Le piège : oublier la conversion et répondre « $37\\,000$ m », soit $37$ km entre la gare et le stade d'une même ville.\nRéponse : la gare et le stade sont à $370$ m l'un de l'autre.",
           schema: regle({ n: 8, par: 50, unite: "m", pas: 2, marque: 7.4 }),
@@ -416,6 +432,9 @@ export const exercicesEchelles4e: FicheExercicesData = {
         },
         {
           enonce: "Un terrain de rugby mesure $100$ m entre ses deux lignes d'essai. On le dessine sur un plan à l'échelle $\\dfrac{1}{2\\,000}$. Quelle est sa longueur sur le plan, en cm ?",
+          reponses: [
+            { attendu: "5" },
+          ],
           correction:
             "Je vais de la réalité vers le plan : le plan est plus petit, donc je divise par $2\\,000$.\nMais d'abord je convertis, pour avoir les deux longueurs dans la même unité : $100$ m $= 100 \\times 100 = 10\\,000$ cm.\n$10\\,000 \\div 2\\,000 = 5$ cm.\n⛔ Le piège : diviser les mètres directement, $100 \\div 2\\,000 = 0{,}05$, et écrire « $0{,}05$ cm ». Ce $0{,}05$ est en MÈTRES : $0{,}05$ m, ce sont bien $5$ cm. Je convertis AVANT de diviser.\nRéponse : le terrain mesure $5$ cm sur le plan.",
           schema: regle({ n: 5, par: 20, unite: "m", pas: 1, marque: 5 }),
@@ -423,6 +442,10 @@ export const exercicesEchelles4e: FicheExercicesData = {
         },
         {
           enonce: "Un rectangle mesure $3$ cm sur $2$ cm. On l'agrandit : dans le nouveau rectangle, la longueur mesure $7{,}5$ cm.\na) Quel est le rapport d'agrandissement ?\nb) Quelle est la largeur du nouveau rectangle ?",
+          reponses: [
+            { question: "a)", attendu: "2,5" },
+            { question: "b)", attendu: "5" },
+          ],
           correction:
             "a) Je trouve le rapport en DIVISANT une longueur de l'agrandissement par la longueur qui lui correspond : $k = 7{,}5 \\div 3 = 2{,}5$.\nb) Toutes les longueurs sont multipliées par le même rapport : largeur $= 2 \\times 2{,}5 = 5$ cm.\n⭐ Contrôle : $\\dfrac{7{,}5}{3} = \\dfrac{5}{2} = 2{,}5$ ; les deux côtés ont bien le même rapport, la forme est conservée.\n⛔ Le piège : ajouter. La longueur a gagné $4{,}5$ cm, mais la largeur ne gagne pas $4{,}5$ cm : $2 + 4{,}5 = 6{,}5$ cm donnerait un rectangle d'une autre forme, presque carré.\nRéponse : $k = 2{,}5$ et la largeur mesure $5$ cm.",
           schema: dessin([{ pts: [[0, 0], [3, 0], [3, 2], [0, 2]], cotes: ["3 cm", "", "", "2 cm"], nom: "modèle" }, { pts: [[5, 0], [12.5, 0], [12.5, 5], [5, 5]], cotes: ["7,5 cm", "5 cm"], nom: "× 2,5", fond: "orange" }]),
@@ -430,6 +453,10 @@ export const exercicesEchelles4e: FicheExercicesData = {
         },
         {
           enonce: "Un triangle rectangle a des côtés de $12$ cm, $16$ cm et $20$ cm. On le réduit avec le rapport $\\dfrac{3}{4}$.\na) Calculer les longueurs des côtés du triangle réduit.\nb) Le triangle réduit est-il encore rectangle ? Pourquoi ?",
+          reponses: [
+            { question: "a)", attendu: "9 ; 12 ; 15" },
+            { question: "b)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) Réduire avec le rapport $\\dfrac{3}{4}$, c'est multiplier chaque longueur par $\\dfrac{3}{4} = 0{,}75$.\n$12 \\times 0{,}75 = 9$ cm ; $16 \\times 0{,}75 = 12$ cm ; $20 \\times 0{,}75 = 15$ cm.\nb) Oui : une réduction change les longueurs, mais JAMAIS les angles. L'angle droit reste droit.\n⭐ Contrôle avec Pythagore : $9^2 + 12^2 = 81 + 144 = 225 = 15^2$.\n⛔ Le piège : enlever $3$ ou $4$ cm à chaque côté. Un rapport se MULTIPLIE : on n'enlève pas la même longueur partout, on garde les mêmes proportions.\nRéponse : $9$ cm, $12$ cm et $15$ cm ; le triangle réduit est rectangle, comme le modèle.",
           schema: dessin([{ pts: [[0, 0], [16, 0], [0, 12]], cotes: ["16 cm", "20 cm", "12 cm"], nom: "modèle", droit: 0 }, { pts: [[34, 0], [46, 0], [34, 9]], cotes: ["12 cm", "15 cm", "9 cm"], nom: "× 3/4", fond: "orange", droit: 0 }]),
@@ -437,6 +464,11 @@ export const exercicesEchelles4e: FicheExercicesData = {
         },
         {
           enonce: "Un rectangle de $4$ cm sur $1$ cm est agrandi avec le rapport $3$.\na) Quelles sont les dimensions du rectangle agrandi ?\nb) Calculer l'aire de chacun des deux rectangles.\nc) Par combien l'aire a-t-elle été multipliée ?",
+          reponses: [
+            { question: "a)", attendu: "12 ; 3" },
+            { question: "b)", attendu: "4 ; 36" },
+            { question: "c)", attendu: "9" },
+          ],
           correction:
             "a) Je multiplie chaque longueur par $3$ : $4 \\times 3 = 12$ cm et $1 \\times 3 = 3$ cm.\nb) Petit rectangle : $4 \\times 1 = 4$ cm². Grand rectangle : $12 \\times 3 = 36$ cm².\nc) $36 \\div 4 = 9$ : l'aire a été multipliée par $9$, c'est-à-dire par $3 \\times 3 = 3^2$.\n⭐ Le dessin le montre sans calcul : le petit rectangle tient $3$ fois dans la longueur ET $3$ fois dans la largeur, soit $9$ fois en tout.\n⛔ Le piège : multiplier l'aire par $3$ et répondre $12$ cm². La longueur ET la largeur sont multipliées par $3$ : l'aire l'est donc deux fois.\nRéponse : $12$ cm sur $3$ cm ; $4$ cm² et $36$ cm² ; l'aire est multipliée par $9$.",
           schema: dessin([{ pts: [[0, 0], [4, 0], [4, 1], [0, 1]], cotes: ["4 cm", "", "", "1 cm"], nom: "modèle" }, { pts: [[6, 0], [18, 0], [18, 3], [6, 3]], cotes: ["12 cm", "3 cm"], nom: "rapport 3", fond: "orange", grille: [3, 3] }]),
@@ -444,6 +476,11 @@ export const exercicesEchelles4e: FicheExercicesData = {
         },
         {
           enonce: "Une boîte en forme de pavé droit mesure $2$ cm de long, $1$ cm de large et $1$ cm de haut. On l'agrandit avec le rapport $3$.\na) Quelles sont les dimensions de la grande boîte ?\nb) Calculer les deux volumes.\nc) Par combien le volume a-t-il été multiplié ?",
+          reponses: [
+            { question: "a)", attendu: "6 ; 3 ; 3" },
+            { question: "b)", attendu: "2 ; 54" },
+            { question: "c)", attendu: "27" },
+          ],
           correction:
             "a) Je multiplie chaque longueur par $3$ : $2 \\times 3 = 6$ cm, $1 \\times 3 = 3$ cm et $1 \\times 3 = 3$ cm.\nb) Petite boîte : $2 \\times 1 \\times 1 = 2$ cm³. Grande boîte : $6 \\times 3 \\times 3 = 54$ cm³.\nc) $54 \\div 2 = 27$ : le volume est multiplié par $27 = 3 \\times 3 \\times 3 = 3^3$.\n⭐ Pourquoi : un volume est le produit de TROIS longueurs, et chacune a été multipliée par $3$. Le dessin le montre : la grande boîte est faite de $27$ petites.\n⛔ Le piège : répondre « trois fois plus grand, donc $3 \\times 2 = 6$ cm³ ». Le rapport $3$ porte sur les longueurs, pas sur le volume.\nRéponse : $6$ cm, $3$ cm et $3$ cm ; $2$ cm³ et $54$ cm³ ; le volume est multiplié par $27$.",
           schema: paves([{ dims: [2, 1, 1], cotes: ["2 cm", "1 cm", "1 cm"], nom: "modèle" }, { dims: [6, 3, 3], cotes: ["6 cm", "3 cm", "3 cm"], nom: "rapport 3", grille: 3 }]),
@@ -467,6 +504,12 @@ export const exercicesEchelles4e: FicheExercicesData = {
         {
           enonce:
             "Sur une carte à l'échelle $\\dfrac{1}{100\\,000}$, un itinéraire à vélo mesure $13{,}5$ cm.\na) Quelle est sa longueur réelle, en cm puis en km ?\nb) Un autre itinéraire fait $21$ km. Quelle longueur a-t-il sur la carte ?\nc) Compléter : sur cette carte, $1$ cm représente…",
+          reponses: [
+            { question: "a) cm", attendu: "1350000" },
+            { question: "a) km", attendu: "13,5" },
+            { question: "b)", attendu: "21" },
+            { question: "c)", attendu: ["1", "1000", "100000"] },
+          ],
           correction:
             "a) Je vais vers la réalité : je multiplie. $13{,}5 \\times 100\\,000 = 1\\,350\\,000$ cm.\nJe convertis : $1$ km $= 100\\,000$ cm, donc $1\\,350\\,000 \\div 100\\,000 = 13{,}5$ km.\nb) Je vais vers la carte : je convertis, puis je divise. $21$ km $= 2\\,100\\,000$ cm, et $2\\,100\\,000 \\div 100\\,000 = 21$ cm.\nc) $1$ cm représente $100\\,000$ cm, c'est-à-dire exactement $1$ km. Sur cette carte, les centimètres se lisent directement en kilomètres.\n⛔ Le piège : diviser par $1\\,000$ pour passer des cm aux km. $1\\,350\\,000 \\div 1\\,000 = 1\\,350$ : une balade à vélo de $1\\,350$ km ! Des cm aux km, il y a DEUX conversions : $\\div 100$ vers les mètres, puis $\\div 1\\,000$.\nRéponse : $13{,}5$ km ; $21$ cm ; $1$ cm représente $1$ km.",
           schema: tableauEch(["carte (cm)", "réel (cm)", "réel (km)"], [
@@ -479,6 +522,12 @@ export const exercicesEchelles4e: FicheExercicesData = {
         {
           enonce:
             "Un architecte doit dessiner le plan d'une maison rectangulaire de $15$ m sur $9{,}6$ m, sur une feuille A4 de $29{,}7$ cm sur $21$ cm. Il hésite entre les échelles $\\dfrac{1}{50}$ et $\\dfrac{1}{100}$.\na) Calculer les dimensions de la maison sur le plan, pour chaque échelle.\nb) Quelle échelle doit-il choisir ?\nc) Laquelle donnerait le plan le plus détaillé, si la feuille était assez grande ?",
+          reponses: [
+            { question: "a) 1/50", attendu: "30 ; 19,2" },
+            { question: "a) 1/100", attendu: "15 ; 9,6" },
+            { question: "b)", attendu: "1/100" },
+            { question: "c)", attendu: "1/50" },
+          ],
           correction:
             "a) Je convertis d'abord : $15$ m $= 1\\,500$ cm et $9{,}6$ m $= 960$ cm. Vers le plan, je divise.\nAu $\\dfrac{1}{50}$ : $1\\,500 \\div 50 = 30$ cm et $960 \\div 50 = 19{,}2$ cm.\nAu $\\dfrac{1}{100}$ : $1\\,500 \\div 100 = 15$ cm et $960 \\div 100 = 9{,}6$ cm.\nb) Au $\\dfrac{1}{50}$, la maison fait $30$ cm de long : plus que les $29{,}7$ cm de la feuille. Il doit choisir le $\\dfrac{1}{100}$ : $15$ cm sur $9{,}6$ cm tiennent largement.\nc) Le $\\dfrac{1}{50}$ : le plus petit dénominateur donne le plus grand dessin, donc le plus de détails.\n⛔ Le piège : garder le $\\dfrac{1}{50}$ parce que « $30$ cm, c'est presque $29{,}7$ cm ». Un plan qui dépasse de $3$ mm est coupé, et il faut encore des marges.\nRéponse : $30$ cm sur $19{,}2$ cm au $\\dfrac{1}{50}$, $15$ cm sur $9{,}6$ cm au $\\dfrac{1}{100}$ ; il choisit le $\\dfrac{1}{100}$.",
           schema: deux(
@@ -490,6 +539,11 @@ export const exercicesEchelles4e: FicheExercicesData = {
         {
           enonce:
             "Une photo mesure $10$ cm sur $15$ cm. On veut l'agrandir en poster, sans la déformer : la largeur du poster doit être de $40$ cm.\na) Quel est le rapport d'agrandissement ?\nb) Quelle sera la longueur du poster ?\nc) Léo propose d'ajouter $30$ cm à chaque côté. Quelles dimensions obtient-il ? Pourquoi sa photo sera-t-elle déformée ?",
+          reponses: [
+            { question: "a)", attendu: "4" },
+            { question: "b)", attendu: "60" },
+            { question: "c)", attendu: "40 ; 45" },
+          ],
           correction:
             "a) Je divise la nouvelle largeur par l'ancienne : $k = 40 \\div 10 = 4$.\nb) Toutes les longueurs sont multipliées par $4$ : $15 \\times 4 = 60$ cm.\nc) Léo obtient $10 + 30 = 40$ cm sur $15 + 30 = 45$ cm. Mais $45 \\div 15 = 3$, alors que $40 \\div 10 = 4$ : les deux côtés n'ont pas été multipliés par le même nombre. La photo est étirée en largeur, les visages sont élargis.\n⭐ Le signe : chez Léo, le poster est presque carré ($40$ sur $45$), alors que la photo est nettement plus longue que large.\n⛔ Le piège : ajouter la même longueur partout. Un agrandissement MULTIPLIE toutes les longueurs par le même nombre ; ajouter garde les écarts, pas la forme.\nRéponse : $k = 4$ ; le poster mesure $40$ cm sur $60$ cm ; Léo obtiendrait $40$ cm sur $45$ cm, une image déformée.",
           schema: deux(
@@ -501,6 +555,11 @@ export const exercicesEchelles4e: FicheExercicesData = {
         {
           enonce:
             "Un terrain de basket mesure $28$ m sur $15$ m. Sur un plan, sa longueur est de $11{,}2$ cm.\na) À quelle échelle le plan est-il dessiné ?\nb) Quelle est la largeur du terrain sur le plan ?\nc) Le cercle central a un rayon de $1{,}8$ m. Quel est son rayon sur le plan, en mm ?",
+          reponses: [
+            { question: "a)", attendu: "1/250" },
+            { question: "b)", attendu: "6" },
+            { question: "c)", attendu: "7,2" },
+          ],
           correction:
             "a) Je mets les deux longueurs dans la même unité : $28$ m $= 2\\,800$ cm. Puis je divise la réalité par le plan : $2\\,800 \\div 11{,}2 = 250$. L'échelle est $\\dfrac{1}{250}$.\nb) Vers le plan, je divise : $15$ m $= 1\\,500$ cm, et $1\\,500 \\div 250 = 6$ cm.\nc) $1{,}8$ m $= 180$ cm, et $180 \\div 250 = 0{,}72$ cm, soit $7{,}2$ mm.\n⭐ Contrôle : $11{,}2 \\div 6 \\approx 1{,}87$ et $28 \\div 15 \\approx 1{,}87$. Le plan a bien la forme du terrain.\n⛔ Le piège : diviser $28$ par $11{,}2$ et annoncer une échelle $\\dfrac{1}{2{,}5}$. Des mètres et des centimètres ne se divisent pas entre eux : je convertis d'abord.\nRéponse : l'échelle est $\\dfrac{1}{250}$ ; la largeur mesure $6$ cm ; le rayon mesure $7{,}2$ mm.",
           schema: dessin([{ pts: [[0, 0], [11.2, 0], [11.2, 6], [0, 6]], cotes: ["11,2 cm", "", "", "6 cm"], nom: "le plan au 1/250" }, { pts: [[5.6, 0], [5.6, 6]] }, { cercle: [5.6, 3, 0.72] }]),
@@ -509,6 +568,11 @@ export const exercicesEchelles4e: FicheExercicesData = {
         {
           enonce:
             "Au bas d'une carte, l'échelle est dessinée : un segment de $3$ cm porte l'indication « $2{,}4$ km ».\na) Que représente $1$ cm sur cette carte ?\nb) Écrire l'échelle de la carte sous la forme $\\dfrac{1}{d}$.\nc) Sur la carte, deux refuges sont à $8{,}5$ cm l'un de l'autre. Quelle distance les sépare, en km ?",
+          reponses: [
+            { question: "a)", attendu: ["800", "0,8", "80000"] },
+            { question: "b)", attendu: "1/80000" },
+            { question: "c)", attendu: "6,8" },
+          ],
           correction:
             "a) $3$ cm pour $2{,}4$ km : je ramène à $1$ cm en divisant par $3$. $2{,}4 \\div 3 = 0{,}8$ km, soit $800$ m.\nb) Je convertis dans la même unité : $0{,}8$ km $= 80\\,000$ cm. Donc $1$ cm représente $80\\,000$ cm : l'échelle est $\\dfrac{1}{80\\,000}$.\nc) Je vais vers la réalité : $8{,}5 \\times 0{,}8 = 6{,}8$ km.\n⭐ Autre chemin : $8{,}5 \\times 80\\,000 = 680\\,000$ cm $= 6{,}8$ km.\n⛔ Le piège : écrire l'échelle « $\\dfrac{3}{2{,}4}$ ». Une échelle compare deux longueurs dans la MÊME unité, avec $1$ en haut.\nRéponse : $1$ cm représente $800$ m ; l'échelle est $\\dfrac{1}{80\\,000}$ ; les refuges sont à $6{,}8$ km.",
           schema: regle({ n: 9, par: 0.8, unite: "km", pas: 3, marque: 8.5 }),
@@ -517,6 +581,12 @@ export const exercicesEchelles4e: FicheExercicesData = {
         {
           enonce:
             "Un logo carré est imprimé sur un tee-shirt : son aire est de $36$ cm². Sur une casquette, on imprime une réduction du même logo, d'aire $4$ cm².\na) Par combien l'aire a-t-elle été divisée ?\nb) Par combien les longueurs ont-elles été divisées ? Quel est le rapport de réduction ?\nc) Quelle est la longueur du côté de chaque logo ?",
+          reponses: [
+            { question: "a)", attendu: "9" },
+            { question: "b) div.", attendu: "3" },
+            { question: "b) k", attendu: "1/3" },
+            { question: "c)", attendu: "6 ; 2" },
+          ],
           correction:
             "a) $36 \\div 4 = 9$ : l'aire a été divisée par $9$.\nb) Les aires se multiplient par $k^2$ : je cherche le nombre qui, multiplié par lui-même, donne $9$. C'est $3$, car $3 \\times 3 = 9$. Les longueurs ont été divisées par $3$ : le rapport de réduction est $k = \\dfrac{1}{3}$.\nc) Grand logo : $6 \\times 6 = 36$, son côté mesure $6$ cm. Petit logo : $2 \\times 2 = 4$, son côté mesure $2$ cm. Et $6 \\div 3 = 2$ : c'est cohérent.\n⛔ Le piège : dire « l'aire est divisée par $9$, donc le rapport est $\\dfrac{1}{9}$ ». Le côté mesurerait $6 \\div 9 \\approx 0{,}67$ cm, et l'aire $0{,}67 \\times 0{,}67 \\approx 0{,}45$ cm², pas $4$.\nRéponse : l'aire est divisée par $9$, les longueurs par $3$ ; $k = \\dfrac{1}{3}$ ; les côtés mesurent $6$ cm et $2$ cm.",
           schema: dessin([{ pts: [[0, 0], [6, 0], [6, 6], [0, 6]], cotes: ["6 cm", "", "", "6 cm"], nom: "36 cm²", grille: [3, 3] }, { pts: [[8, 0], [10, 0], [10, 2], [8, 2]], cotes: ["2 cm", "2 cm"], nom: "4 cm²", fond: "orange" }]),
@@ -525,6 +595,12 @@ export const exercicesEchelles4e: FicheExercicesData = {
         {
           enonce:
             "Une pelouse rectangulaire mesure $8$ m sur $5$ m. Pour la semer, on compte $30$ g de graines par m². On l'agrandit en multipliant ses deux dimensions par $1{,}5$.\na) Quelles sont les nouvelles dimensions ?\nb) Calculer l'aire de l'ancienne et de la nouvelle pelouse. Par combien l'aire a-t-elle été multipliée ?\nc) Quelle masse de graines faut-il pour la nouvelle pelouse ?",
+          reponses: [
+            { question: "a)", attendu: "12 ; 7,5" },
+            { question: "b) aires", attendu: "40 ; 90" },
+            { question: "b) ×", attendu: "2,25" },
+            { question: "c)", attendu: ["2,7", "2700"] },
+          ],
           correction:
             "a) $8 \\times 1{,}5 = 12$ m et $5 \\times 1{,}5 = 7{,}5$ m.\nb) Ancienne : $8 \\times 5 = 40$ m². Nouvelle : $12 \\times 7{,}5 = 90$ m². $90 \\div 40 = 2{,}25$ : l'aire est multipliée par $2{,}25$, c'est $1{,}5 \\times 1{,}5 = 1{,}5^2$.\nc) Les graines se comptent à l'AIRE : $90 \\times 30 = 2\\,700$ g, soit $2{,}7$ kg.\n⭐ Autre chemin : l'ancienne pelouse demandait $40 \\times 30 = 1\\,200$ g ; avec le facteur $k^2$, $1\\,200 \\times 2{,}25 = 2\\,700$ g.\n⛔ Le piège : multiplier les graines par $1{,}5$, comme les longueurs : $1\\,200 \\times 1{,}5 = 1\\,800$ g. Il manquerait $900$ g de graines : un tiers de la pelouse resterait nu.\nRéponse : $12$ m sur $7{,}5$ m ; $40$ m² puis $90$ m², soit $2{,}25$ fois plus ; il faut $2{,}7$ kg de graines.",
           schema: dessin([{ pts: [[0, 0], [8, 0], [8, 5], [0, 5]], cotes: ["8 m", "", "", "5 m"], nom: "40 m²" }, { pts: [[11, 0], [23, 0], [23, 7.5], [11, 7.5]], cotes: ["12 m", "7,5 m"], nom: "90 m²", fond: "vert" }]),
@@ -533,6 +609,13 @@ export const exercicesEchelles4e: FicheExercicesData = {
         {
           enonce:
             "Un aquarium a la forme d'un pavé droit de $40$ cm de long, $25$ cm de large et $30$ cm de haut.\na) Calculer son volume en cm³, puis en litres.\nb) Le magasin vend un modèle agrandi avec le rapport $2$. Quelles sont ses dimensions et son volume, en litres ?\nc) Le vendeur dit : « deux fois plus grand, donc deux fois plus d'eau ». A-t-il raison ?",
+          reponses: [
+            { question: "a) cm³", attendu: "30000" },
+            { question: "a) L", attendu: "30" },
+            { question: "b) dim.", attendu: "80 ; 50 ; 60" },
+            { question: "b) L", attendu: "240" },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $40 \\times 25 \\times 30 = 30\\,000$ cm³. Comme $1$ L $= 1\\,000$ cm³, cela fait $30$ L.\nb) Chaque dimension est multipliée par $2$ : $80$ cm, $50$ cm et $60$ cm. Volume : $80 \\times 50 \\times 60 = 240\\,000$ cm³, soit $240$ L.\nc) Non : $240 \\div 30 = 8$. Le grand aquarium contient $8$ fois plus d'eau, car $2 \\times 2 \\times 2 = 2^3 = 8$.\n⛔ Le piège : croire le vendeur et prévoir $60$ L. Il manquerait $180$ L d'eau ; et $240$ L d'eau pèsent environ $240$ kg, que le meuble doit porter.\nRéponse : $30$ L ; $80$ cm, $50$ cm et $60$ cm pour $240$ L ; le vendeur a tort, il y a $8$ fois plus d'eau.",
           schema: paves([{ dims: [40, 25, 30], cotes: ["40 cm", "25 cm", "30 cm"], nom: "30 L" }, { dims: [80, 50, 60], cotes: ["80 cm", "50 cm", "60 cm"], nom: "240 L", grille: 2 }]),
@@ -556,6 +639,14 @@ export const exercicesEchelles4e: FicheExercicesData = {
           titre: "Le marathon au bout d'une ficelle",
           enonce:
             "Un marathon mesure $42{,}195$ km. Un club veut reporter le tracé de la course, déplié, sur une ficelle, à l'échelle d'une carte.\na) Convertir $42{,}195$ km en cm.\nb) Quelle longueur de ficelle faut-il pour une carte au $\\dfrac{1}{25\\,000}$ ? au $\\dfrac{1}{50\\,000}$ ? au $\\dfrac{1}{100\\,000}$ ? Arrondir au cm.\nc) La ficelle doit tenir sur une table de $50$ cm. Quelle carte choisir ?\nd) À quelle échelle la ficelle mesurerait-elle exactement $1$ m ?",
+          reponses: [
+            { question: "a)", attendu: "4219500" },
+            { question: "b) 25k", attendu: "169", tolerance: 0.5 },
+            { question: "b) 50k", attendu: "84", tolerance: 0.5 },
+            { question: "b) 100k", attendu: "42", tolerance: 0.5 },
+            { question: "c)", attendu: "1/100000" },
+            { question: "d)", attendu: "1/42195" },
+          ],
           correction:
             "a) $1$ km $= 100\\,000$ cm, donc $42{,}195 \\times 100\\,000 = 4\\,219\\,500$ cm.\nb) Vers la carte, je divise par le dénominateur.\nAu $\\dfrac{1}{25\\,000}$ : $4\\,219\\,500 \\div 25\\,000 = 168{,}78$, environ $169$ cm.\nAu $\\dfrac{1}{50\\,000}$ : $4\\,219\\,500 \\div 50\\,000 = 84{,}39$, environ $84$ cm.\nAu $\\dfrac{1}{100\\,000}$ : $4\\,219\\,500 \\div 100\\,000 = 42{,}195$, environ $42$ cm.\nc) Seule la carte au $\\dfrac{1}{100\\,000}$ donne une ficelle plus courte que $50$ cm. Doubler le dénominateur divise la longueur par deux.\nd) Je veux $100$ cm de ficelle : $4\\,219\\,500 \\div 100 = 42\\,195$. L'échelle serait $\\dfrac{1}{42\\,195}$.\n⛔ Le piège : choisir la carte au plus petit dénominateur « parce qu'elle est plus précise ». Elle l'est, mais son tracé fait $1{,}69$ m : il ne tient pas sur la table.\nRéponse : $4\\,219\\,500$ cm ; environ $169$ cm, $84$ cm et $42$ cm ; il faut la carte au $\\dfrac{1}{100\\,000}$ ; à l'échelle $\\dfrac{1}{42\\,195}$, la ficelle mesurerait $1$ m.",
           schema: barres([{ label: "au 1/25 000 : 169 cm", cm: 168.78 }, { label: "au 1/50 000 : 84 cm", cm: 84.39 }, { label: "au 1/100 000 : 42 cm", cm: 42.195 }], { cm: 50, label: "table : 50 cm" }),
@@ -565,6 +656,14 @@ export const exercicesEchelles4e: FicheExercicesData = {
           titre: "Le bassin olympique et le petit bassin",
           enonce:
             "Un bassin olympique mesure $50$ m de long, $25$ m de large et $2$ m de profondeur. Une piscine de quartier a un bassin de $25$ m sur $12{,}5$ m, profond de $1$ m.\na) Montrer que le petit bassin est une réduction du grand. Quel est le rapport $k$ ?\nb) Calculer l'aire de la surface de l'eau de chaque bassin. Retrouver le rapport des aires avec $k$.\nc) Calculer le volume d'eau de chaque bassin. Retrouver le rapport des volumes avec $k$.\nd) Une bâche couvre exactement le petit bassin. Combien de bâches identiques faut-il pour couvrir le grand ?",
+          reponses: [
+            { question: "a)", attendu: "0,5" },
+            { question: "b) aires", attendu: "1250 ; 312,5" },
+            { question: "b) rapp.", attendu: "0,25" },
+            { question: "c) vol.", attendu: "2500 ; 312,5" },
+            { question: "c) rapp.", attendu: "0,125" },
+            { question: "d)", attendu: "4" },
+          ],
           correction:
             "a) Je divise chaque dimension du petit bassin par celle du grand : $25 \\div 50 = 0{,}5$ ; $12{,}5 \\div 25 = 0{,}5$ ; $1 \\div 2 = 0{,}5$. Les trois rapports sont égaux : c'est une réduction de rapport $k = 0{,}5$, c'est-à-dire $\\dfrac{1}{2}$.\nb) Grand : $50 \\times 25 = 1\\,250$ m². Petit : $25 \\times 12{,}5 = 312{,}5$ m². $312{,}5 \\div 1\\,250 = 0{,}25$, et $k^2 = 0{,}5 \\times 0{,}5 = 0{,}25$ : l'aire est divisée par $4$.\nc) Grand : $50 \\times 25 \\times 2 = 2\\,500$ m³. Petit : $25 \\times 12{,}5 \\times 1 = 312{,}5$ m³. $312{,}5 \\div 2\\,500 = 0{,}125$, et $k^3 = 0{,}5 \\times 0{,}5 \\times 0{,}5 = 0{,}125$ : le volume est divisé par $8$.\nd) Une bâche couvre une AIRE : il en faut $4$ pour le grand bassin, comme le montre le dessin.\n⭐ En litres, avec $1$ m³ $= 1\\,000$ L : le grand bassin contient $2\\,500\\,000$ L, le petit $312\\,500$ L.\n⛔ Le piège : croire qu'un bassin « deux fois plus petit » contient deux fois moins d'eau. Deux fois moins long, moins large ET moins profond : huit fois moins d'eau.\nRéponse : $k = 0{,}5$ ; $1\\,250$ m² et $312{,}5$ m², rapport $0{,}25$ ; $2\\,500$ m³ et $312{,}5$ m³, rapport $0{,}125$ ; il faut $4$ bâches.",
           schema: dessin([{ pts: [[0, 0], [50, 0], [50, 25], [0, 25]], cotes: ["50 m", "", "", "25 m"], nom: "bassin olympique", grille: [2, 2] }, { pts: [[56, 0], [81, 0], [81, 12.5], [56, 12.5]], cotes: ["25 m", "12,5 m"], nom: "petit", fond: "orange" }]),
@@ -574,6 +673,14 @@ export const exercicesEchelles4e: FicheExercicesData = {
           titre: "Les grêlons",
           enonce:
             "Un grêlon de $1$ cm de diamètre pèse environ $0{,}5$ g. Lors des orages violents, on ramasse des grêlons de $4$ cm, parfois de $8$ cm. On considère que tous les grêlons ont la même forme et sont faits de la même glace.\na) Un grêlon de $4$ cm est un agrandissement de celui de $1$ cm. Quel est le rapport $k$ ?\nb) Par combien son volume est-il multiplié ? En déduire sa masse.\nc) Même question pour un grêlon de $8$ cm.\nd) Le grêlon de $8$ cm n'est que deux fois plus large que celui de $4$ cm. Combien de fois plus lourd est-il ?",
+          reponses: [
+            { question: "a)", attendu: "4" },
+            { question: "b) ×", attendu: "64" },
+            { question: "b) g", attendu: "32" },
+            { question: "c) ×", attendu: "512" },
+            { question: "c) g", attendu: "256" },
+            { question: "d)", attendu: "8" },
+          ],
           correction:
             "a) $k = 4 \\div 1 = 4$ : toutes les longueurs sont multipliées par $4$.\nb) Le volume est multiplié par $k^3 = 4 \\times 4 \\times 4 = 64$. La glace est la même : la masse suit le volume, elle est aussi multipliée par $64$. $0{,}5 \\times 64 = 32$ g.\n⭐ Le dessin range chaque grêlon dans une boîte cubique : la grande boîte contient $4 \\times 4 \\times 4 = 64$ petites.\nc) $k = 8$, et $8^3 = 8 \\times 8 \\times 8 = 512$. Masse : $0{,}5 \\times 512 = 256$ g, plus qu'une plaquette de beurre de $250$ g.\nd) De $4$ cm à $8$ cm, le rapport n'est que $2$, mais la masse est multipliée par $2^3 = 8$ : $32 \\times 8 = 256$ g. Doubler la taille, c'est multiplier la masse par huit.\n⛔ Le piège : penser qu'un grêlon $4$ fois plus large pèse $4$ fois plus, soit $2$ g. Il pèse $32$ g : une masse se compte au VOLUME, avec $k^3$.\nRéponse : $k = 4$ ; volume et masse multipliés par $64$, soit $32$ g ; par $512$ pour $8$ cm, soit $256$ g ; $8$ fois plus lourd.",
           schema: paves([{ dims: [1, 1, 1], cotes: ["1 cm", "", ""], nom: "0,5 g" }, { dims: [4, 4, 4], cotes: ["4 cm", "", ""], nom: "32 g", grille: 4 }]),
@@ -583,6 +690,12 @@ export const exercicesEchelles4e: FicheExercicesData = {
           titre: "La forêt qui disparaît",
           enonce:
             "Entre août 2022 et juillet 2023, environ $9\\,000$ km² de forêt ont été détruits en Amazonie brésilienne. On veut représenter cette surface sur une carte au $\\dfrac{1}{1\\,000\\,000}$.\na) Que représente $1$ cm sur cette carte, en km ?\nb) Que représente un carré de $1$ cm de côté sur la carte ? Donner son aire réelle en km².\nc) Quelle aire, en cm², les $9\\,000$ km² occupent-ils sur la carte ? Donner la largeur d'un rectangle de $10$ cm de long qui la représente.\nd) Inès répond : « $1$ cm pour $10$ km, donc $9\\,000$ km² font $900$ cm² ». Quelle est son erreur ?",
+          reponses: [
+            { question: "a)", attendu: "10" },
+            { question: "b)", attendu: "100" },
+            { question: "c) cm²", attendu: "90" },
+            { question: "c) larg.", attendu: "9" },
+          ],
           correction:
             "a) $1$ cm représente $1\\,000\\,000$ cm. Je convertis : $1\\,000\\,000 \\div 100\\,000 = 10$ km.\nb) Chaque côté du carré représente $10$ km : c'est un carré de $10$ km sur $10$ km, d'aire $10 \\times 10 = 100$ km².\nc) Chaque cm² de carte vaut $100$ km², donc $9\\,000 \\div 100 = 90$ cm². Un rectangle de $10$ cm de long doit avoir une largeur de $90 \\div 10 = 9$ cm.\nd) Inès a divisé l'aire par $10$, le rapport des LONGUEURS. Une aire se divise par $10 \\times 10 = 100$. Sa carte montrerait une forêt détruite dix fois trop grande.\n⭐ Contrôle : $10$ cm sur la carte font $100$ km, $9$ cm font $90$ km, et $100 \\times 90 = 9\\,000$ km².\n⛔ Le piège : traiter une aire comme une longueur. Sur une carte, les aires se lisent avec le carré du rapport.\nRéponse : $1$ cm représente $10$ km ; $1$ cm² représente $100$ km² ; $90$ cm², par exemple un rectangle de $10$ cm sur $9$ cm ; Inès a oublié de mettre le rapport au carré.",
           schema: deux(

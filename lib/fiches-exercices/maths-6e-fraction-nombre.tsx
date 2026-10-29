@@ -321,6 +321,11 @@ export const exercicesFractionNombre6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Quelle fraction de chaque barre est coloriée en bleu ?\nÉcris-la en chiffres, puis en lettres.",
+          reponses: [
+            { question: "A", attendu: ["2/3"], exact: true },
+            { question: "B", attendu: ["4/7"], exact: true },
+            { question: "C", attendu: ["7/10"], exact: true },
+          ],
           figure: barres([
             { d: 3, label: "A", parts: [2] },
             { d: 7, label: "B", parts: [4] },
@@ -332,6 +337,13 @@ export const exercicesFractionNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Écris chaque fraction en chiffres.\na) cinq huitièmes\nb) neuf dixièmes\nc) un demi\nd) onze centièmes\ne) Écris en lettres : $\\dfrac{3}{7}$.",
+          reponses: [
+            { question: "a)", attendu: ["5/8"], exact: true },
+            { question: "b)", attendu: ["9/10"], exact: true },
+            { question: "c)", attendu: ["1/2"], exact: true },
+            { question: "d)", attendu: ["11/100"], exact: true },
+            { question: "e)", attendu: ["trois septièmes"], exact: true },
+          ],
           correction:
             "Le mot en « -ième » donne le dénominateur : il va EN BAS.\na) « huitièmes » : $8$ en bas. « cinq » : $5$ en haut. $\\dfrac{5}{8}$.\nb) « dixièmes » : $10$ en bas. $\\dfrac{9}{10}$.\nc) « un demi » : une part sur deux. $\\dfrac{1}{2}$.\nd) « centièmes » : $100$ en bas. $\\dfrac{11}{100}$.\ne) $\\dfrac{3}{7}$ se lit « trois septièmes ».\n⛔ Le piège : écrire $\\dfrac{8}{5}$ pour « cinq huitièmes ». Je lis d'abord le haut, puis le bas.\nRéponse : a) $\\dfrac{5}{8}$ ; b) $\\dfrac{9}{10}$ ; c) $\\dfrac{1}{2}$ ; d) $\\dfrac{11}{100}$ ; e) trois septièmes.",
           schema: ecranSeulement(
@@ -346,6 +358,11 @@ export const exercicesFractionNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Une tablette de chocolat a $12$ carreaux égaux.\na) Combien de carreaux faut-il colorier pour représenter $\\dfrac{5}{12}$ de la tablette ?\nb) Et pour représenter $\\dfrac{7}{12}$ ?\nc) Au a), quelle fraction de la tablette reste blanche ?",
+          reponses: [
+            { question: "a)", attendu: "5" },
+            { question: "b)", attendu: "7" },
+            { question: "c)", attendu: "7/12" },
+          ],
           correction:
             "Le dénominateur $12$ dit : la tablette est coupée en $12$ carreaux égaux. C'est bien le cas.\na) Le numérateur $5$ dit combien j'en prends : je colorie $5$ carreaux.\nb) Pour $\\dfrac{7}{12}$, je colorie $7$ carreaux.\nc) $12 - 5 = 7$ carreaux restent blancs : c'est $\\dfrac{7}{12}$ de la tablette.\n⛔ Le piège : colorier $12$ carreaux. Le nombre du haut dit combien je colorie ; celui du bas, combien il y a de carreaux en tout.\nRéponse : a) $5$ carreaux ; b) $7$ carreaux ; c) $\\dfrac{7}{12}$.",
           schema: grille(3, 4, [{ n: 5, nom: "5/12" }], "7/12"),
@@ -353,6 +370,9 @@ export const exercicesFractionNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Sur quelles barres la partie bleue représente-t-elle $\\dfrac{1}{4}$ de la barre ?",
+          reponses: [
+            { attendu: ["A et D", "A ; D"] },
+          ],
           figure: decoupes([
             { label: "A", largeurs: [1, 1, 1, 1], colorie: 1 },
             { label: "B", largeurs: [1, 3, 2, 2], colorie: 1 },
@@ -365,6 +385,12 @@ export const exercicesFractionNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Écris chaque fraction décimale sous la forme d'un nombre décimal.\na) $\\dfrac{7}{10}$\nb) $\\dfrac{23}{100}$\nc) $\\dfrac{4}{100}$\nd) $\\dfrac{15}{10}$",
+          reponses: [
+            { question: "a)", attendu: ["0,7"], exact: true },
+            { question: "b)", attendu: ["0,23"], exact: true },
+            { question: "c)", attendu: ["0,04"], exact: true },
+            { question: "d)", attendu: ["1,5"], exact: true },
+          ],
           correction:
             "Le dénominateur dit le rang : $10$, ce sont des dixièmes ; $100$, des centièmes.\na) $7$ dixièmes : $\\dfrac{7}{10} = 0{,}7$.\nb) $23$ centièmes : $\\dfrac{23}{100} = 0{,}23$.\nc) $4$ centièmes : le $4$ va au rang des centièmes. $\\dfrac{4}{100} = 0{,}04$.\nd) $15$ dixièmes, c'est $10$ dixièmes (une unité) et $5$ dixièmes : $\\dfrac{15}{10} = 1{,}5$.\n⛔ Le piège du c) : écrire $0{,}4$. Ça, ce sont $4$ DIXIÈMES. Des centièmes s'écrivent avec deux chiffres après la virgule.\nRéponse : a) $0{,}7$ ; b) $0{,}23$ ; c) $0{,}04$ ; d) $1{,}5$.",
           schema: ecranSeulement(
@@ -379,6 +405,13 @@ export const exercicesFractionNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Écris chaque nombre sous la forme d'une fraction décimale.\na) $0{,}3$\nb) $0{,}09$\nc) $1{,}7$\nd) $0{,}5$, puis trouve une fraction plus simple.",
+          reponses: [
+            { question: "a)", attendu: ["3/10"], exact: true },
+            { question: "b)", attendu: ["9/100"], exact: true },
+            { question: "c)", attendu: ["17/10"], exact: true },
+            { question: "d)", attendu: ["5/10"], exact: true },
+            { question: "d) simp.", attendu: ["1/2"], exact: true },
+          ],
           correction:
             "Je lis le nombre jusqu'à son dernier chiffre : dixièmes ou centièmes.\na) $0{,}3$ : trois dixièmes. $0{,}3 = \\dfrac{3}{10}$.\nb) $0{,}09$ : neuf centièmes. $0{,}09 = \\dfrac{9}{100}$.\nc) $1{,}7$ : une unité et $7$ dixièmes, soit $17$ dixièmes. $1{,}7 = \\dfrac{17}{10}$.\nd) $0{,}5$ : cinq dixièmes. $0{,}5 = \\dfrac{5}{10}$. Et $5$ dixièmes, c'est la moitié de l'unité : $\\dfrac{5}{10} = \\dfrac{1}{2}$.\n⛔ Le piège du c) : écrire $\\dfrac{7}{10}$ et oublier l'unité. $1{,}7$ est plus grand que $1$ : sa fraction aussi.\nRéponse : a) $\\dfrac{3}{10}$ ; b) $\\dfrac{9}{100}$ ; c) $\\dfrac{17}{10}$ ; d) $\\dfrac{5}{10} = \\dfrac{1}{2}$.",
           schema: ecranSeulement(
@@ -392,6 +425,12 @@ export const exercicesFractionNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Compare avec $<$, $>$ ou $=$.\na) $\\dfrac{4}{9}$ et $\\dfrac{7}{9}$\nb) $\\dfrac{3}{8}$ et $\\dfrac{3}{5}$\nc) $\\dfrac{11}{10}$ et $\\dfrac{9}{10}$\nd) $\\dfrac{2}{7}$ et $\\dfrac{2}{9}$",
+          reponses: [
+            { question: "a)", attendu: "<" },
+            { question: "b)", attendu: "<" },
+            { question: "c)", attendu: ">" },
+            { question: "d)", attendu: ">" },
+          ],
           correction:
             "a) Même dénominateur : des neuvièmes. Le plus grand numérateur gagne. $\\dfrac{4}{9} < \\dfrac{7}{9}$.\nb) Même numérateur : $3$ parts de chaque côté. Mais un cinquième est plus gros qu'un huitième. $\\dfrac{3}{8} < \\dfrac{3}{5}$.\nc) Des dixièmes, et $11 > 9$. $\\dfrac{11}{10} > \\dfrac{9}{10}$.\nd) Même numérateur. Un septième est plus gros qu'un neuvième. $\\dfrac{2}{7} > \\dfrac{2}{9}$.\n⛔ Le piège du b) : croire que $\\dfrac{3}{8}$ est plus grand « parce que $8 > 5$ ». Plus je coupe, plus les parts sont PETITES.\nRéponse : a) $<$ ; b) $<$ ; c) $>$ ; d) $>$.",
           schema: comparer([3, 8], [3, 5]),
@@ -399,6 +438,15 @@ export const exercicesFractionNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Pour chaque fraction, trouve les deux nombres entiers qui l'encadrent, puis écris-la sous la forme « entier + fraction ».\na) $\\dfrac{5}{3}$\nb) $\\dfrac{7}{3}$\nc) $\\dfrac{10}{3}$\nd) $\\dfrac{6}{3}$",
+          reponses: [
+            { question: "a) entre", attendu: "1 ; 2" },
+            { question: "a) forme", attendu: ["1 + 2/3"], exact: true },
+            { question: "b) entre", attendu: "2 ; 3" },
+            { question: "b) forme", attendu: ["2 + 1/3"], exact: true },
+            { question: "c) entre", attendu: "3 ; 4" },
+            { question: "c) forme", attendu: ["3 + 1/3"], exact: true },
+            { question: "d)", attendu: "2" },
+          ],
           correction:
             "Trois tiers font une unité : $\\dfrac{3}{3} = 1$. Je fais des paquets de $3$ tiers.\na) $5$ tiers, c'est $3$ tiers et $2$ tiers. $\\dfrac{5}{3} = 1 + \\dfrac{2}{3}$ : entre $1$ et $2$.\nb) $7$ tiers, c'est $6$ tiers et $1$ tiers. $\\dfrac{7}{3} = 2 + \\dfrac{1}{3}$ : entre $2$ et $3$.\nc) $10$ tiers, c'est $9$ tiers et $1$ tiers. $\\dfrac{10}{3} = 3 + \\dfrac{1}{3}$ : entre $3$ et $4$.\nd) $6$ tiers, ce sont deux paquets pile. $\\dfrac{6}{3} = 2$ : c'est un nombre entier.\n⛔ Le piège : croire qu'une fraction est toujours plus petite que $1$. Dès que le haut dépasse le bas, elle dépasse $1$.\nRéponse : a) entre $1$ et $2$, $1 + \\dfrac{2}{3}$ ; b) entre $2$ et $3$, $2 + \\dfrac{1}{3}$ ; c) entre $3$ et $4$, $3 + \\dfrac{1}{3}$ ; d) $\\dfrac{6}{3} = 2$.",
           schema: droiteRel(0, 4, 1 / 3, [
@@ -425,6 +473,12 @@ export const exercicesFractionNombre6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "a) Complète : $\\dfrac{1}{3} = \\dfrac{2}{\\ldots} = \\dfrac{\\ldots}{9} = \\dfrac{4}{\\ldots}$\nb) Simplifie au maximum : $\\dfrac{10}{15}$, puis $\\dfrac{18}{24}$.\nc) Noé simplifie $\\dfrac{6}{9}$ : il enlève $3$ en haut et en bas, et trouve $\\dfrac{3}{6}$. A-t-il raison ?",
+          reponses: [
+            { question: "a)", attendu: ["6 ; 3 ; 12"], exact: true },
+            { question: "b) 10/15", attendu: ["2/3"], exact: true },
+            { question: "b) 18/24", attendu: ["3/4"], exact: true },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           correction:
             "Deux fractions sont égales quand je multiplie, ou je divise, le haut ET le bas par le même nombre.\na) En haut, $1 \\times 2 = 2$ ; donc en bas, $3 \\times 2 = 6$ : $\\dfrac{2}{6}$.\nEn bas, $3 \\times 3 = 9$ ; donc en haut, $1 \\times 3 = 3$ : $\\dfrac{3}{9}$.\nEn haut, $1 \\times 4 = 4$ ; donc en bas, $3 \\times 4 = 12$ : $\\dfrac{4}{12}$.\nb) $10$ et $15$ sont dans la table de $5$ : $10 \\div 5 = 2$ et $15 \\div 5 = 3$. Donc $\\dfrac{10}{15} = \\dfrac{2}{3}$.\n$18$ et $24$ sont pairs : $\\dfrac{18}{24} = \\dfrac{9}{12}$. Puis $9$ et $12$ sont dans la table de $3$ : $\\dfrac{9}{12} = \\dfrac{3}{4}$. Plus rien ne divise à la fois $3$ et $4$ : c'est fini.\nc) Non. Enlever $3$ en haut et en bas change la fraction : $\\dfrac{3}{6}$, c'est la moitié. Il faut diviser : $6 \\div 3 = 2$ et $9 \\div 3 = 3$, donc $\\dfrac{6}{9} = \\dfrac{2}{3}$.\n⛔ Le piège : AJOUTER ou ENLEVER le même nombre en haut et en bas. Ça ne donne jamais une fraction égale. Je multiplie ou je divise.\nRéponse : a) $\\dfrac{1}{3} = \\dfrac{2}{6} = \\dfrac{3}{9} = \\dfrac{4}{12}$ ; b) $\\dfrac{2}{3}$ et $\\dfrac{3}{4}$ ; c) non, $\\dfrac{6}{9} = \\dfrac{2}{3}$.",
           schema: ecranSeulement(
@@ -438,6 +492,11 @@ export const exercicesFractionNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Compare en redécoupant.\na) $\\dfrac{3}{5}$ et $\\dfrac{7}{10}$\nb) $\\dfrac{5}{8}$ et $\\dfrac{1}{2}$\nc) $\\dfrac{2}{3}$ et $\\dfrac{5}{6}$",
+          reponses: [
+            { question: "a)", attendu: "<" },
+            { question: "b)", attendu: ">" },
+            { question: "c)", attendu: "<" },
+          ],
           correction:
             "Un dénominateur est le double de l'autre : je coupe chaque part en deux.\na) $\\dfrac{3}{5} = \\dfrac{3 \\times 2}{5 \\times 2} = \\dfrac{6}{10}$. Et $\\dfrac{6}{10} < \\dfrac{7}{10}$, donc $\\dfrac{3}{5} < \\dfrac{7}{10}$.\nb) Ici, $8 = 2 \\times 4$ : $\\dfrac{1}{2} = \\dfrac{1 \\times 4}{2 \\times 4} = \\dfrac{4}{8}$. Et $\\dfrac{5}{8} > \\dfrac{4}{8}$, donc $\\dfrac{5}{8} > \\dfrac{1}{2}$.\nc) $\\dfrac{2}{3} = \\dfrac{2 \\times 2}{3 \\times 2} = \\dfrac{4}{6}$. Et $\\dfrac{4}{6} < \\dfrac{5}{6}$, donc $\\dfrac{2}{3} < \\dfrac{5}{6}$.\n⛔ Le piège du b) : comparer $5$ et $1$, puis $8$ et $2$, chacun de son côté. Je compare les numérateurs seulement quand les parts ont la même taille.\nRéponse : a) $\\dfrac{3}{5} < \\dfrac{7}{10}$ ; b) $\\dfrac{5}{8} > \\dfrac{1}{2}$ ; c) $\\dfrac{2}{3} < \\dfrac{5}{6}$.",
           schema: barres([
@@ -449,6 +508,9 @@ export const exercicesFractionNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Range ces fractions dans l'ordre croissant.\n$\\dfrac{7}{10}$ ; $\\dfrac{1}{2}$ ; $\\dfrac{3}{10}$ ; $\\dfrac{9}{10}$ ; $\\dfrac{1}{5}$",
+          reponses: [
+            { attendu: ["1/5 < 3/10 < 1/2 < 7/10 < 9/10", "1/5 ; 3/10 ; 1/2 ; 7/10 ; 9/10"], exact: true },
+          ],
           correction:
             "Je passe tout en dixièmes, puis en décimal.\n$\\dfrac{1}{2} = \\dfrac{5}{10} = 0{,}5$ et $\\dfrac{1}{5} = \\dfrac{2}{10} = 0{,}2$.\n$\\dfrac{7}{10} = 0{,}7$ ; $\\dfrac{3}{10} = 0{,}3$ ; $\\dfrac{9}{10} = 0{,}9$.\nJe range : $0{,}2 < 0{,}3 < 0{,}5 < 0{,}7 < 0{,}9$.\n⛔ Le piège : mettre $\\dfrac{1}{2}$ et $\\dfrac{1}{5}$ au début parce que leur numérateur est $1$. Leurs parts sont plus grosses : il faut redécouper.\nRéponse : $\\dfrac{1}{5} < \\dfrac{3}{10} < \\dfrac{1}{2} < \\dfrac{7}{10} < \\dfrac{9}{10}$.",
           schema: ecranSeulement(
@@ -464,6 +526,11 @@ export const exercicesFractionNombre6e: FicheExercicesData = {
         },
         {
           enonce: "a) Complète : $\\dfrac{13}{5} = 2 + \\dfrac{\\ldots}{5}$.\nb) Entre quels nombres entiers se trouve $\\dfrac{13}{5}$ ?\nc) Range dans l'ordre croissant : $\\dfrac{13}{5}$ ; $2 + \\dfrac{1}{5}$ ; $3$ ; $\\dfrac{9}{5}$.",
+          reponses: [
+            { question: "a)", attendu: "3" },
+            { question: "b)", attendu: "2 ; 3" },
+            { question: "c)", attendu: ["9/5 < 2 + 1/5 < 13/5 < 3", "9/5 ; 2 + 1/5 ; 13/5 ; 3"], exact: true },
+          ],
           correction:
             "Cinq cinquièmes font une unité : $\\dfrac{5}{5} = 1$.\na) $13$ cinquièmes, c'est $10$ cinquièmes et $3$ cinquièmes. Or $\\dfrac{10}{5} = 2$. Donc $\\dfrac{13}{5} = 2 + \\dfrac{3}{5}$.\nb) $2 < \\dfrac{13}{5} < 3$.\nc) Je compte tout en cinquièmes. $2 + \\dfrac{1}{5}$, ce sont $10$ cinquièmes et $1$ : $11$ cinquièmes. Et $3$, ce sont $15$ cinquièmes.\nJe range les numérateurs : $9 < 11 < 13 < 15$.\n⛔ Le piège : lire $2 + \\dfrac{1}{5}$ comme « $2$ fois $\\dfrac{1}{5}$ ». Le « $+$ » veut dire : $2$ unités entières, PLUS un cinquième.\nRéponse : a) $3$ ; b) entre $2$ et $3$ ; c) $\\dfrac{9}{5} < 2 + \\dfrac{1}{5} < \\dfrac{13}{5} < 3$.",
           schema: droiteRel(1, 3, 0.2, [
@@ -475,6 +542,12 @@ export const exercicesFractionNombre6e: FicheExercicesData = {
         },
         {
           enonce: "La droite est graduée en cinquièmes.\na) Lis l'abscisse des points A, B et C, en fraction.\nb) Lesquels sont plus grands que $1$ ?",
+          reponses: [
+            { question: "a) A", attendu: ["3/5"], exact: true },
+            { question: "a) B", attendu: ["7/5"], exact: true },
+            { question: "a) C", attendu: ["9/5"], exact: true },
+            { question: "b)", attendu: ["B et C", "B ; C"] },
+          ],
           figure: droiteRel(0, 2, 0.2, [
             { value: 0.6, label: "A" },
             { value: 1.4, label: "B" },
@@ -486,6 +559,13 @@ export const exercicesFractionNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Écris chaque nombre de trois façons : en fraction décimale, en nombre décimal et en lettres.\na) $\\dfrac{45}{100}$\nb) $0{,}8$\nc) $\\dfrac{3}{5}$\nd) $2{,}07$",
+          reponses: [
+            { question: "a) déc", attendu: ["0,45"], exact: true },
+            { question: "b) frac", attendu: ["8/10"], exact: true },
+            { question: "c) frac", attendu: ["6/10"], exact: true },
+            { question: "c) déc", attendu: ["0,6"], exact: true },
+            { question: "d) frac", attendu: ["207/100"], exact: true },
+          ],
           correction:
             "a) $\\dfrac{45}{100} = 0{,}45$ : quarante-cinq centièmes.\nb) $0{,}8 = \\dfrac{8}{10}$ : huit dixièmes.\nc) $\\dfrac{3}{5}$ n'est pas une fraction décimale. Je redécoupe : $5 \\times 2 = 10$. Donc $\\dfrac{3}{5} = \\dfrac{6}{10} = 0{,}6$ : six dixièmes.\nd) $2{,}07 = \\dfrac{207}{100}$ : deux cent sept centièmes, soit $2$ unités et $7$ centièmes.\n⛔ Le piège du d) : écrire $\\dfrac{207}{10}$. Le $7$ est au rang des CENTIÈMES : il y a deux chiffres après la virgule.\nRéponse : a) $0{,}45$ ; b) $\\dfrac{8}{10}$ ; c) $\\dfrac{6}{10} = 0{,}6$ ; d) $\\dfrac{207}{100}$.",
           schema: ecranSeulement(
@@ -500,6 +580,11 @@ export const exercicesFractionNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Trois élèves se trompent. Explique chaque erreur, puis corrige.\na) Tom : « $\\dfrac{1}{8}$ est plus grand que $\\dfrac{1}{6}$, car $8 > 6$. »\nb) Léa : « $0{,}7 = \\dfrac{7}{100}$. »\nc) Sam : « $\\dfrac{3}{2}$ est plus petit que $1$, car une fraction est toujours plus petite que $1$. »",
+          reponses: [
+            { question: "a)", attendu: ["1/8 < 1/6", "1/6 > 1/8"], exact: true },
+            { question: "b)", attendu: ["7/10", "0,7 = 7/10"], exact: true },
+            { question: "c)", attendu: ["3/2 > 1", "1 < 3/2"], exact: true },
+          ],
           correction:
             "a) Tom lit le dénominateur à l'envers. Couper en $8$ fait des parts plus PETITES que couper en $6$. Donc $\\dfrac{1}{8} < \\dfrac{1}{6}$.\nb) Dans $0{,}7$, le $7$ est au rang des dixièmes. Donc $0{,}7 = \\dfrac{7}{10}$. Et $\\dfrac{7}{100}$, c'est $0{,}07$.\nc) $\\dfrac{2}{2} = 1$, et $\\dfrac{3}{2}$ a une moitié de plus : $\\dfrac{3}{2} = 1 + \\dfrac{1}{2}$. Donc $\\dfrac{3}{2} > 1$.\n⛔ Le piège de Tom est le plus fréquent : un grand nombre en bas fait de PETITES parts.\n⭐ Une fraction dépasse $1$ dès que son numérateur dépasse son dénominateur.\nRéponse : a) $\\dfrac{1}{8} < \\dfrac{1}{6}$ ; b) $0{,}7 = \\dfrac{7}{10}$ ; c) $\\dfrac{3}{2} > 1$.",
           schema: ecranSeulement(comparer([1, 8], [1, 6])),
@@ -507,6 +592,13 @@ export const exercicesFractionNombre6e: FicheExercicesData = {
         },
         {
           enonce: "Trois gourdes de $1$ L sont en partie remplies. La gourde A est remplie aux $\\dfrac{7}{10}$, la gourde B à moitié, la gourde C aux $\\dfrac{3}{5}$.\na) Écris chaque remplissage en dixièmes de litre, puis en décimal.\nb) Range les gourdes de la plus remplie à la moins remplie.\nc) Quelle fraction de litre manque-t-il dans la gourde A pour qu'elle soit pleine ?",
+          reponses: [
+            { question: "a) A", attendu: "0,7" },
+            { question: "a) B", attendu: "0,5" },
+            { question: "a) C", attendu: "0,6" },
+            { question: "b)", attendu: ["A, C, B", "A ; C ; B", "A > C > B"], exact: true },
+            { question: "c)", attendu: "3/10" },
+          ],
           correction:
             "a) A : $\\dfrac{7}{10} = 0{,}7$ L.\nB : à moitié, $\\dfrac{1}{2} = \\dfrac{5}{10} = 0{,}5$ L.\nC : $\\dfrac{3}{5} = \\dfrac{6}{10} = 0{,}6$ L.\nb) $0{,}7 > 0{,}6 > 0{,}5$ : A, puis C, puis B.\nc) Pleine, c'est $\\dfrac{10}{10}$. Il manque $10 - 7 = 3$ dixièmes : $\\dfrac{3}{10}$ L, soit $0{,}3$ L.\n⛔ Le piège : comparer $7$, $1$ et $3$, les nombres du haut. Les parts n'ont pas la même taille : je passe d'abord tout en dixièmes.\nRéponse : a) $0{,}7$ L ; $0{,}5$ L ; $0{,}6$ L ; b) A, C, B ; c) $\\dfrac{3}{10}$ L.",
           schema: barres([
@@ -533,6 +625,16 @@ export const exercicesFractionNombre6e: FicheExercicesData = {
         {
           titre: "L'élection du délégué",
           enonce: "Dans une classe de $25$ élèves, tout le monde vote une fois. Inès a $12$ voix, Hugo $9$ voix et Lina $4$ voix.\na) Quelle fraction des voix chaque élève a-t-il ?\nb) Écris ces fractions en centièmes, puis en décimal.\nc) Inès a-t-elle plus de la moitié des voix ?\nd) Hugo et Lina ensemble ont-ils plus de voix qu'Inès ?",
+          reponses: [
+            { question: "a) Inès", attendu: "12/25" },
+            { question: "a) Hugo", attendu: "9/25" },
+            { question: "a) Lina", attendu: "4/25" },
+            { question: "b) Inès", attendu: "0,48" },
+            { question: "b) Hugo", attendu: "0,36" },
+            { question: "b) Lina", attendu: "0,16" },
+            { question: "c)", attendu: ["non", "faux"] },
+            { question: "d)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) Le tout, ce sont les $25$ voix. Inès : $\\dfrac{12}{25}$ ; Hugo : $\\dfrac{9}{25}$ ; Lina : $\\dfrac{4}{25}$.\nb) $25 \\times 4 = 100$ : je multiplie le haut et le bas par $4$.\n$\\dfrac{12}{25} = \\dfrac{48}{100} = 0{,}48$ ; $\\dfrac{9}{25} = \\dfrac{36}{100} = 0{,}36$ ; $\\dfrac{4}{25} = \\dfrac{16}{100} = 0{,}16$.\nc) La moitié, c'est $0{,}5$. Or $0{,}48 < 0{,}5$ : non, il lui manque un peu.\nd) Ensemble : $9 + 4 = 13$ voix, contre $12$ pour Inès. Oui, un peu plus.\n⛔ Le piège du c) : dire oui parce qu'Inès a le plus de voix. Avoir le plus de voix ne veut pas dire en avoir plus de la moitié.\nRéponse : a) $\\dfrac{12}{25}$, $\\dfrac{9}{25}$, $\\dfrac{4}{25}$ ; b) $0{,}48$ ; $0{,}36$ ; $0{,}16$ ; c) non ; d) oui, $13$ voix contre $12$.",
           schema: grille(5, 5, [
@@ -545,6 +647,13 @@ export const exercicesFractionNombre6e: FicheExercicesData = {
         {
           titre: "La randonnée",
           enonce: "Un sentier de $3$ km a une borne tous les quarts de kilomètre. Le pont est à $\\dfrac{5}{4}$ km du départ, la cascade à $\\dfrac{9}{4}$ km et le refuge à $2{,}5$ km.\na) Écris $\\dfrac{9}{4}$ sous la forme « entier + fraction », puis en décimal.\nb) Écris $2{,}5$ km en quarts de kilomètre.\nc) Dans quel ordre rencontre-t-on les trois lieux ?\nd) Combien de quarts de kilomètre séparent la cascade du refuge ?",
+          reponses: [
+            { question: "a) forme", attendu: ["2 + 1/4"], exact: true },
+            { question: "a) déc", attendu: "2,25" },
+            { question: "b)", attendu: ["10/4"], exact: true },
+            { question: "c)", attendu: ["pont, cascade, refuge", "le pont, la cascade, le refuge", "pont ; cascade ; refuge", "le pont ; la cascade ; le refuge"], exact: true },
+            { question: "d)", attendu: ["1", "1/4"] },
+          ],
           correction:
             "Quatre quarts font un kilomètre : $\\dfrac{4}{4} = 1$.\na) $9$ quarts, c'est $8$ quarts et $1$ quart. $\\dfrac{9}{4} = 2 + \\dfrac{1}{4}$. Un quart, c'est $0{,}25$ : $\\dfrac{9}{4} = 2{,}25$ km.\nb) $2{,}5$ km, c'est $2$ km et une moitié. $2$ km font $8$ quarts, une moitié fait $2$ quarts : $\\dfrac{10}{4}$ km.\nc) En quarts : le pont à $5$, la cascade à $9$, le refuge à $10$. Ordre : le pont, la cascade, puis le refuge.\nd) $10 - 9 = 1$ : un seul quart de kilomètre, soit $0{,}25$ km.\n⛔ Le piège du a) : écrire $\\dfrac{9}{4} = 9{,}4$. La barre de fraction n'est pas une virgule : $\\dfrac{9}{4}$, ce sont $9$ quarts.\nRéponse : a) $2 + \\dfrac{1}{4} = 2{,}25$ km ; b) $\\dfrac{10}{4}$ km ; c) le pont, la cascade, le refuge ; d) $1$ quart de kilomètre.",
           schema: droiteRel(0, 3, 0.25, [
@@ -557,6 +666,15 @@ export const exercicesFractionNombre6e: FicheExercicesData = {
         {
           titre: "Le vitrail",
           enonce: "Un vitrail a $24$ carreaux égaux : $8$ bleus, $6$ jaunes, et les autres blancs.\na) Combien de carreaux sont blancs ?\nb) Écris la fraction du vitrail occupée par chaque couleur.\nc) Trouve une fraction plus simple, égale à celle du bleu, puis à celle du jaune.\nd) Les carreaux blancs couvrent-ils plus ou moins de la moitié du vitrail ?",
+          reponses: [
+            { question: "a)", attendu: "10" },
+            { question: "b) bleu", attendu: "8/24" },
+            { question: "b) jaune", attendu: "6/24" },
+            { question: "b) blanc", attendu: "10/24" },
+            { question: "c) bleu", attendu: ["1/3", "2/6", "4/12"], exact: true },
+            { question: "c) jaune", attendu: ["1/4", "3/12"], exact: true },
+            { question: "d)", attendu: ["moins", "moins de la moitié"], exact: true },
+          ],
           figure: grille(4, 6, [
             { n: 8, nom: "bleu" },
             { n: 6, nom: "jaune", color: JAUNE },
@@ -568,6 +686,12 @@ export const exercicesFractionNombre6e: FicheExercicesData = {
         {
           titre: "Qui suis-je ?",
           enonce: "Je suis une fraction de dénominateur $10$.\nIndice 1 : je suis plus grande que $\\dfrac{1}{2}$.\nIndice 2 : je suis plus petite que $\\dfrac{9}{10}$.\nIndice 3 : mon numérateur est pair.\nIndice 4 : en décimal, mon chiffre des dixièmes est plus grand que $7$.\na) Écris $\\dfrac{1}{2}$ en dixièmes.\nb) Qui suis-je ?\nc) Écris-moi en décimal, puis avec le dénominateur $5$.",
+          reponses: [
+            { question: "a)", attendu: ["5/10"], exact: true },
+            { question: "b)", attendu: "8/10" },
+            { question: "c) déc", attendu: ["0,8"], exact: true },
+            { question: "c) /5", attendu: ["4/5"], exact: true },
+          ],
           correction:
             "a) $\\dfrac{1}{2} = \\dfrac{5}{10}$.\nb) Indices 1 et 2 : mon numérateur est entre $5$ et $9$. Il vaut donc $6$, $7$ ou $8$.\nIndice 3 : il est pair, il reste $6$ ou $8$.\nIndice 4 : $\\dfrac{6}{10} = 0{,}6$ et $\\dfrac{8}{10} = 0{,}8$. Seul $8$ est plus grand que $7$. Je suis $\\dfrac{8}{10}$.\nc) $\\dfrac{8}{10} = 0{,}8$. Et en divisant le haut et le bas par $2$ : $\\dfrac{8}{10} = \\dfrac{4}{5}$.\n⛔ Le piège : chercher un numérateur entre $1$ et $9$, les numérateurs de $\\dfrac{1}{2}$ et de $\\dfrac{9}{10}$. Il faut d'abord des parts de même taille : des dixièmes.\nRéponse : b) $\\dfrac{8}{10}$ ; c) $0{,}8$ et $\\dfrac{4}{5}$.",
           schema: droiteRel(0, 1, 0.1, [

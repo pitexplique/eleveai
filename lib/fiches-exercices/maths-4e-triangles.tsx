@@ -356,6 +356,10 @@ export const exercicesTriangles4e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Dans le triangle $RST$, $\\widehat{R} = 57°$ et $\\widehat{S} = 71°$.\na) Calculer $\\widehat{T}$.\nb) Quel est le plus grand angle du triangle ?",
+          reponses: [
+            { question: "a)", attendu: "52" },
+            { question: "b)", attendu: ["S", "angle S", "l'angle S"] },
+          ],
           correction:
             "a) Les trois angles d'un triangle font toujours $180°$ : il ne m'en manque qu'un.\nJ'additionne les deux angles connus : $57 + 71 = 128$.\nJe retranche de $180$ : $\\widehat{T} = 180° - 128° = 52°$.\nJe vérifie : $57 + 71 + 52 = 180$.\nb) Je compare $57°$, $71°$ et $52°$ : le plus grand angle est $\\widehat{S}$, qui mesure $71°$.\n⛔ Le piège : retrancher un seul angle, $180 - 57 = 123$. Il faut retirer les DEUX angles connus.\nRéponse : $\\widehat{T} = 52°$ ; le plus grand angle est $\\widehat{S}$.",
           schema: tri({ A: [0, 0], B: [6, 0], C: [3.921, 6.0378] }, { noms: { A: "R", B: "S", C: "T" }, angles: { A: "57°", B: "71°", C: "52°" }, trouve: ["C"] }),
@@ -363,6 +367,10 @@ export const exercicesTriangles4e: FicheExercicesData = {
         },
         {
           enonce: "Le triangle $KLM$ est rectangle en $K$, et $\\widehat{L} = 28°$.\na) Calculer $\\widehat{M}$.\nb) Un triangle rectangle peut-il avoir un angle de $95°$ ?",
+          reponses: [
+            { question: "a)", attendu: "62" },
+            { question: "b)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) L'angle droit prend déjà $90°$ sur les $180°$ : il reste $180 - 90 = 90$ degrés pour les deux autres angles.\nDonc $\\widehat{M} = 90° - 28° = 62°$.\nJe vérifie : $90 + 28 + 62 = 180$.\nb) Avec l'angle droit, on aurait déjà $90 + 95 = 185$ degrés : plus que $180°$. Impossible.\n⭐ Dans un triangle rectangle, les deux autres angles sont toujours aigus.\n⛔ Le piège : calculer $180° - 28° = 152°$ en oubliant l'angle droit. Un angle de $152°$ ne tient pas à côté d'un angle droit.\nRéponse : $\\widehat{M} = 62°$ ; non, pas d'angle de $95°$ dans un triangle rectangle.",
           schema: tri({ A: [0, 0], B: [5, 0], C: [0, 2.6585] }, { noms: { A: "K", B: "L", C: "M" }, angles: { B: "28°", C: "62°" }, trouve: ["C"], droit: "A" }),
@@ -370,6 +378,11 @@ export const exercicesTriangles4e: FicheExercicesData = {
         },
         {
           enonce: "Peut-on construire un triangle avec ces trois longueurs ?\na) $3$ cm, $8$ cm et $4$ cm.\nb) $6$ cm, $6$ cm et $10$ cm.\nc) $2{,}5$ cm, $6$ cm et $3{,}5$ cm.",
+          reponses: [
+            { question: "a)", attendu: ["non", "faux"] },
+            { question: "b)", attendu: ["oui", "vrai"] },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           correction:
             "Je repère la PLUS GRANDE longueur, et je la compare à la somme des deux autres.\na) La plus grande est $8$. $3 + 4 = 7$, et $7 < 8$ : les deux petits côtés, mis bout à bout, n'atteignent pas le bout du grand. Pas de triangle.\nb) La plus grande est $10$. $6 + 6 = 12$, et $12 > 10$ : le triangle existe.\nc) La plus grande est $6$. $2{,}5 + 3{,}5 = 6$ : la somme est ÉGALE au grand côté. Les trois points sont alignés, le triangle est plat.\n⛔ Le piège au c) : dire « oui » parce que la somme n'est pas plus petite. Il faut qu'elle soit strictement plus GRANDE ; l'égalité donne un triangle aplati, qui n'en est pas un vrai.\nRéponse : a) non ; b) oui ; c) non, il est plat.",
           schema: longueurs([{ grand: 8, petits: [3, 4] }, { grand: 10, petits: [6, 6] }, { grand: 6, petits: [2.5, 3.5] }]),
@@ -378,6 +391,11 @@ export const exercicesTriangles4e: FicheExercicesData = {
         {
           enonce:
             "Sur la figure, les droites $(d_1)$, $(d_2)$ et $(d_3)$ coupent le côté $[BC]$ du triangle $ABC$. Les codages sont justes.\na) Laquelle est la hauteur issue de $A$ ?\nb) Laquelle est la médiatrice de $[BC]$ ?\nc) Laquelle est la médiane issue de $A$ ?",
+          reponses: [
+            { question: "a)", attendu: ["(d3)", "d3"] },
+            { question: "b)", attendu: ["(d2)", "d2"] },
+            { question: "c)", attendu: ["(d1)", "d1"] },
+          ],
           figure: tri({ A: [9, 6], B: [0, 0], C: [10, 0] }, { milieux: ["BC"], lignes: [{ de: [9, 6], vers: [4.3333, -1], couleur: "gris", nom: "(d1)", ou: [4.1, -1.6], ancre: "end" }, { de: [5, -0.4], vers: [5, 6.8], couleur: "gris", nom: "(d2)", ou: [5, 7.4] }, { de: [9, 6], vers: [9, -1], couleur: "gris", nom: "(d3)", ou: [9, -1.6] }], carres: [[[5, 0], [5, 6.8], [0, 0]], [[9, 0], [9, 6], [0, 0]]] }),
           correction:
             "Pour chaque droite, je vérifie DEUX conditions : par où elle passe, et si elle coupe $[BC]$ à angle droit.\n$(d_3)$ passe par le sommet $A$ et coupe $[BC]$ à angle droit (le petit carré) : c'est la hauteur issue de $A$.\n$(d_2)$ coupe $[BC]$ à angle droit en son MILIEU (les traits codent deux moitiés égales), mais elle ne passe pas par $A$ : c'est la médiatrice de $[BC]$.\n$(d_1)$ passe par $A$ et par le milieu de $[BC]$, sans angle droit : c'est la médiane issue de $A$.\n⛔ Le piège : confondre $(d_2)$ et $(d_3)$, toutes deux perpendiculaires à $[BC]$. La hauteur part du SOMMET ; la médiatrice part du MILIEU.\nRéponse : a) $(d_3)$ ; b) $(d_2)$ ; c) $(d_1)$.",
@@ -387,6 +405,10 @@ export const exercicesTriangles4e: FicheExercicesData = {
         {
           enonce:
             "Les triangles $ABC$ et $DEF$ vérifient $AB = DE = 5$ cm, $AC = DF = 7$ cm et $\\widehat{A} = \\widehat{D} = 44°$.\na) Ces triangles sont-ils égaux ? Citer le cas d'égalité.\nb) On mesure $BC = 4{,}9$ cm. Combien mesure $EF$ ?",
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: "4,9" },
+          ],
           correction:
             "a) Je regarde où est l'angle connu : en $A$, il est ENTRE les côtés $[AB]$ et $[AC]$. De même, en $D$, il est entre $[DE]$ et $[DF]$.\nDeux côtés égaux deux à deux et l'angle compris entre eux égal : c'est un cas d'égalité. Les triangles $ABC$ et $DEF$ sont égaux.\nb) Des triangles égaux ont TOUS leurs côtés égaux deux à deux. Je suis l'ordre des lettres : $A$ va avec $D$, $B$ avec $E$, $C$ avec $F$. Donc $[BC]$ va avec $[EF]$, et $EF = BC = 4{,}9$ cm.\n⭐ Sur le dessin, $DEF$ est retourné : il reste superposable à $ABC$, comme un calque qu'on retourne.\n⛔ Le piège : ne pas vérifier la PLACE de l'angle. Avec l'angle de $44°$ en $B$ au lieu de $A$, il ne serait plus entre les deux côtés connus, et ce ne serait plus un cas d'égalité.\nRéponse : a) oui, deux côtés et l'angle compris entre eux ; b) $EF = 4{,}9$ cm.",
           schema: deux(
@@ -398,6 +420,9 @@ export const exercicesTriangles4e: FicheExercicesData = {
         {
           enonce:
             "Les triangles $ABC$ et $DEF$ sont semblables : $A$ correspond à $D$, $B$ à $E$ et $C$ à $F$. On sait que $AB = 8$ cm, $AC = 6$ cm, $BC = 4$ cm, $DF = 9$ cm et $EF = 6$ cm.\nCalculer $DE$.",
+          reponses: [
+            { attendu: "12" },
+          ],
           correction:
             "Dans deux triangles semblables, les côtés du grand sont ceux du petit multipliés par un MÊME nombre, le rapport.\nJe cherche un couple de côtés correspondants que je connais tous les deux : $[AC]$ et $[DF]$. Le rapport vaut $9 \\div 6 = 1{,}5$.\nJe vérifie avec l'autre couple : $4 \\times 1{,}5 = 6$, c'est bien $EF$.\nJ'applique le rapport au côté $[AB]$ : $DE = 8 \\times 1{,}5 = 12$ cm.\n⛔ Le piège : AJOUTER au lieu de multiplier. $9 - 6 = 3$, et $8 + 3 = 11$ : faux, car $4 + 3 = 7$, pas $6$. Un agrandissement multiplie les longueurs.\nRéponse : $DE = 12$ cm.",
           schema: deux(
@@ -409,6 +434,9 @@ export const exercicesTriangles4e: FicheExercicesData = {
         {
           enonce:
             "On veut construire le triangle $LMN$ tel que $LM = 6{,}5$ cm, $LN = 4{,}5$ cm et $\\widehat{MLN} = 55°$. Voici les étapes du protocole, dans le désordre.\n(1) Placer le point $N$ sur cette demi-droite, à $4{,}5$ cm de $L$.\n(2) Tracer le segment $[LM]$ de $6{,}5$ cm.\n(3) Tracer le segment $[MN]$.\n(4) Au rapporteur, tracer une demi-droite d'origine $L$ qui fait un angle de $55°$ avec $[LM]$.\nRemettre les étapes dans l'ordre.",
+          reponses: [
+            { attendu: ["(2), (4), (1), (3)", "(2) ; (4) ; (1) ; (3)", "(2)(4)(1)(3)", "2 ; 4 ; 1 ; 3", "2-4-1-3"], exact: true },
+          ],
           correction:
             "Je commence par ce qui se trace SANS RIEN CHERCHER : un segment de longueur connue. C'est l'étape (2), $[LM]$ de $6{,}5$ cm.\nL'angle de $55°$ est en $L$ : je le reporte au rapporteur à partir de $[LM]$, étape (4).\nLe point $N$ est sur cette demi-droite, à $4{,}5$ cm de $L$ : étape (1).\nIl ne reste qu'à fermer le triangle : étape (3).\n⭐ Deux côtés et l'angle compris entre eux : c'est un cas d'égalité, donc ce protocole donne toujours le même triangle.\n⛔ Le piège : placer $N$ avant d'avoir tracé la demi-droite. Sans elle, on sait seulement que $N$ est à $4{,}5$ cm de $L$ : il pourrait être n'importe où sur un cercle.\nRéponse : (2), (4), (1), (3).",
           schema: tri({ A: [0, 0], B: [6.5, 0], C: [2.5811, 3.6862] }, { noms: { A: "L", B: "M", C: "N" }, cotes: { AB: "6,5 cm", CA: "4,5 cm" }, angles: { A: "55°" }, lignes: [{ de: [0, 0], vers: [3.6135, 5.1607], couleur: "gris", pointilles: true }] }),
@@ -416,6 +444,10 @@ export const exercicesTriangles4e: FicheExercicesData = {
         },
         {
           enonce: "Dans le triangle $DEF$, l'angle $\\widehat{D}$ mesure $116°$.\na) Ce triangle peut-il avoir un angle droit ?\nb) On sait de plus que $\\widehat{E} = \\widehat{F}$. Calculer ces deux angles.",
+          reponses: [
+            { question: "a)", attendu: ["non", "faux"] },
+            { question: "b)", attendu: "32" },
+          ],
           correction:
             "a) Avec un angle droit en plus, j'aurais déjà $116 + 90 = 206$ degrés : plus que $180°$. Impossible : ses deux autres angles sont aigus.\nb) Il reste $180 - 116 = 64$ degrés pour $\\widehat{E}$ et $\\widehat{F}$ ensemble.\nIls sont égaux : je partage en deux, $64 \\div 2 = 32$.\nJe vérifie : $116 + 32 + 32 = 180$.\n⛔ Le piège : diviser $180$ par deux sans retirer $\\widehat{D}$, soit $90°$ chacun. Contrôle : $116 + 90 + 90 = 296$, bien trop.\nRéponse : a) non ; b) $\\widehat{E} = \\widehat{F} = 32°$.",
           schema: tri({ A: [0, 0], B: [6, 0], C: [3, 1.8746] }, { noms: { A: "E", B: "F", C: "D" }, angles: { A: "32°", B: "32°", C: "116°" }, trouve: ["A", "B"], egaux: ["BC", "CA"] }),
@@ -439,6 +471,11 @@ export const exercicesTriangles4e: FicheExercicesData = {
         {
           enonce:
             "Un jardinier a posé deux bordures droites de $7$ m et $12$ m, qui se touchent en un coin. Il veut fermer un potager triangulaire avec une troisième bordure de $L$ mètres, un nombre entier.\na) Entre quelles valeurs $L$ doit-il se trouver ?\nb) Combien de longueurs entières sont possibles ?\nc) Le potager peut-il avoir un périmètre de $40$ m ?",
+          reponses: [
+            { question: "a)", attendu: ["5<L<19"], exact: true },
+            { question: "b)", attendu: "13" },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) La troisième bordure est plus petite que la somme des deux autres : $L < 7 + 12 = 19$.\nEt la bordure de $12$ m doit être plus petite que $7 + L$ : il faut $L > 12 - 7 = 5$.\nDonc $5 < L < 19$.\nb) Les entiers strictement entre $5$ et $19$ vont de $6$ à $18$ : il y en a $18 - 6 + 1 = 13$.\nc) Un périmètre de $40$ m demanderait $L = 40 - 7 - 12 = 21$. Or $21 > 19$ : impossible.\n⛔ Le piège : oublier la borne BASSE. Avec $L = 4$, on aurait $7 + 4 = 11 < 12$ : les deux petites bordures ne rejoindraient pas les bouts de la grande.\nRéponse : $5 < L < 19$ ; $13$ longueurs, de $6$ à $18$ m ; un périmètre de $40$ m est impossible.",
           schema: deux(
@@ -450,6 +487,11 @@ export const exercicesTriangles4e: FicheExercicesData = {
         {
           enonce:
             "Les angles d'un triangle $ABC$ mesurent, en degrés, $\\widehat{A} = x$, $\\widehat{B} = x + 20$ et $\\widehat{C} = 2x$.\na) Écrire une équation, puis trouver $x$.\nb) En déduire les trois angles. Le triangle est-il rectangle ?",
+          reponses: [
+            { question: "a)", attendu: "40" },
+            { question: "b)", attendu: "40 ; 60 ; 80" },
+            { question: "b) rect?", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) La somme des trois angles vaut $180°$ : $x + (x + 20) + 2x = 180$.\nJe regroupe les $x$ : $4x + 20 = 180$, donc $4x = 160$ et $x = 160 \\div 4 = 40$.\nb) $\\widehat{A} = 40°$, $\\widehat{B} = 40° + 20° = 60°$ et $\\widehat{C} = 2 \\times 40° = 80°$.\nJe vérifie : $40 + 60 + 80 = 180$.\nAucun angle ne vaut $90°$ : le triangle n'est pas rectangle. Ses trois angles sont aigus.\n⛔ Le piège : oublier le $+ 20$ et écrire $4x = 180$, soit $x = 45$. Contrôle : $45 + 65 + 90 = 200$, pas $180$.\nRéponse : $x = 40$ ; les angles valent $40°$, $60°$ et $80°$ ; le triangle n'est pas rectangle.",
           schema: tri({ A: [0, 0], B: [6, 0], C: [4.0419, 3.3915] }, { angles: { A: "40°", B: "60°", C: "80°" }, trouve: ["A", "B", "C"] }),
@@ -458,6 +500,11 @@ export const exercicesTriangles4e: FicheExercicesData = {
         {
           enonce:
             "Dans le triangle $ABC$, $BC = 4$ cm et l'angle $\\widehat{B}$ est obtus. La hauteur issue de $A$ coupe la droite $(BC)$ en $H$, avec $AH = 3$ cm.\na) Le point $H$ est-il sur le segment $[BC]$ ? Comment tracer cette hauteur ?\nb) Calculer l'aire du triangle $ABC$.\nc) Un élève dit : « cette hauteur n'existe pas, puisqu'elle ne coupe pas $[BC]$. » A-t-il raison ?",
+          reponses: [
+            { question: "a)", attendu: ["non", "faux"] },
+            { question: "b)", attendu: "6" },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) L'angle en $B$ est obtus : le sommet $A$ dépasse, du côté de $B$, au-dessus de la droite $(BC)$. Le pied $H$ tombe donc HORS du segment $[BC]$.\nPour tracer la hauteur, je prolonge d'abord le côté $[CB]$ au-delà de $B$ (en pointillés), puis je trace la perpendiculaire à $(BC)$ qui passe par $A$.\nb) L'aire d'un triangle vaut base fois hauteur divisé par $2$, avec la hauteur relative à cette base : $\\dfrac{BC \\times AH}{2} = \\dfrac{4 \\times 3}{2} = 6$ cm².\nc) Non. La hauteur passe par le sommet et coupe à angle droit la DROITE qui porte le côté opposé, pas forcément le segment. Dans un triangle obtus, deux des trois hauteurs tombent dehors.\n⛔ Le piège : chercher le pied de la hauteur sur le segment $[BC]$, et tracer à la place une droite qui n'est pas perpendiculaire.\nRéponse : $H$ est sur le prolongement de $[CB]$ ; l'aire vaut $6$ cm² ; l'élève a tort.",
           schema: tri({ A: [-2, 3], B: [0, 0], C: [4, 0] }, { cotes: { BC: "4 cm" }, lignes: [{ de: [0, 0], vers: [-2.8, 0], couleur: "gris", pointilles: true }, { de: [-2, 3], vers: [-2, 0], couleur: "orange", nom: "3 cm", ou: [-2.25, 1.5], ancre: "end" }], carres: [[[-2, 0], [-2, 3], [0, 0]]], points: [{ en: [-2, 0], nom: "H", vers: "bas" }] }),
@@ -466,6 +513,11 @@ export const exercicesTriangles4e: FicheExercicesData = {
         {
           enonce:
             "Les triangles $MNP$ et $RST$ vérifient $MN = RS = 6$ cm, $\\widehat{M} = \\widehat{R} = 42°$ et $\\widehat{N} = \\widehat{S} = 65°$.\na) Montrer que ces triangles sont égaux.\nb) Calculer $\\widehat{P}$ et $\\widehat{T}$.\nc) On mesure $RT = 5{,}7$ cm et $ST = 4{,}2$ cm. En déduire $MP$ et $NP$.",
+          reponses: [
+            { question: "b)", attendu: "73" },
+            { question: "c) MP", attendu: "5,7" },
+            { question: "c) NP", attendu: "4,2" },
+          ],
           correction:
             "a) Les côtés $[MN]$ et $[RS]$ ont la même longueur, $6$ cm. Les angles qui touchent $[MN]$, en $M$ et en $N$, sont égaux à ceux qui touchent $[RS]$, en $R$ et en $S$.\nUn côté et les deux angles qui le touchent : c'est un cas d'égalité. Les triangles $MNP$ et $RST$ sont égaux.\nb) $\\widehat{P} = 180° - 42° - 65° = 73°$, et de même $\\widehat{T} = 73°$.\nc) Je suis l'ordre des lettres : $M$ va avec $R$, $N$ avec $S$, $P$ avec $T$. Donc $[MP]$ va avec $[RT]$, et $[NP]$ avec $[ST]$.\n$MP = RT = 5{,}7$ cm et $NP = ST = 4{,}2$ cm.\n⛔ Le piège : associer les côtés au hasard, par exemple $[MP]$ avec $[ST]$. C'est l'ordre des lettres qui fait la correspondance, pas la place sur le dessin.\nRéponse : les triangles sont égaux ; $\\widehat{P} = \\widehat{T} = 73°$ ; $MP = 5{,}7$ cm et $NP = 4{,}2$ cm.",
           schema: deux(
@@ -477,6 +529,10 @@ export const exercicesTriangles4e: FicheExercicesData = {
         {
           enonce:
             "Dans le triangle $ABC$, $\\widehat{A} = 58°$ et $\\widehat{B} = 52°$. Dans le triangle $DEF$, $\\widehat{D} = 58°$ et $\\widehat{F} = 70°$.\na) Montrer que ces deux triangles sont semblables.\nb) On sait que $AB = 6$ cm, $DE = 9$ cm et $AC = 5$ cm. Calculer $DF$.\nc) Ces triangles sont-ils égaux ?",
+          reponses: [
+            { question: "b)", attendu: "7,5" },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) Je calcule les angles qui manquent. Dans $ABC$ : $\\widehat{C} = 180° - 58° - 52° = 70°$. Dans $DEF$ : $\\widehat{E} = 180° - 58° - 70° = 52°$.\nLes deux triangles ont des angles de $58°$, $52°$ et $70°$ : leurs angles sont égaux deux à deux, ils sont semblables. $A$ va avec $D$, $B$ avec $E$, $C$ avec $F$.\nb) $[AB]$ va avec $[DE]$ : le rapport vaut $9 \\div 6 = 1{,}5$.\n$[AC]$ va avec $[DF]$ : $DF = 5 \\times 1{,}5 = 7{,}5$ cm.\nc) Non : $DE = 9$ cm alors que $AB = 6$ cm. Même forme, mais pas la même taille.\n⛔ Le piège : comparer les angles donnés sans calculer les autres. $\\widehat{B} = 52°$ et $\\widehat{F} = 70°$ ne se ressemblent pas ; c'est le troisième angle qui révèle la correspondance.\nRéponse : les triangles sont semblables ; $DF = 7{,}5$ cm ; ils ne sont pas égaux.",
           schema: deux(
@@ -488,6 +544,10 @@ export const exercicesTriangles4e: FicheExercicesData = {
         {
           enonce:
             "On veut construire le triangle $EFG$ tel que $EF = 7$ cm, $EG = 4{,}5$ cm et $FG = 5{,}5$ cm.\na) Vérifier que ce triangle existe.\nb) Écrire un protocole de construction à la règle et au compas.\nc) Deux élèves suivent ce protocole. Obtiennent-ils le même triangle ? Pourquoi ?\nd) Et si l'on demandait $FG = 12$ cm ?",
+          reponses: [
+            { question: "c)", attendu: ["oui", "vrai"] },
+            { question: "d)", attendu: ["impossible", "c'est impossible", "non", "il n'existe pas", "n'existe pas"] },
+          ],
           correction:
             "a) Le plus grand côté est $EF = 7$ cm, et $4{,}5 + 5{,}5 = 10$. Comme $10 > 7$, le triangle existe.\nb) Je trace le segment $[EF]$ de $7$ cm. Je trace un arc de cercle de centre $E$ et de rayon $4{,}5$ cm, puis un arc de centre $F$ et de rayon $5{,}5$ cm, du même côté de $[EF]$. Le point $G$ est à l'intersection des deux arcs. Je trace $[EG]$ et $[FG]$.\nc) Oui, à la position près : leurs deux triangles ont les mêmes trois côtés. Trois côtés égaux deux à deux, c'est un cas d'égalité : les deux figures sont superposables.\nd) Le plus grand côté serait $12$, et $7 + 4{,}5 = 11{,}5 < 12$. Les deux arcs ne se couperaient jamais : pas de triangle.\n⛔ Le piège : commencer par un arc, avant d'avoir tracé $[EF]$. Un arc a besoin de son CENTRE, et les centres sont les extrémités du segment.\nRéponse : le triangle existe ; protocole : $[EF]$, puis deux arcs, $G$ à leur intersection ; le même triangle pour tous (les trois côtés) ; avec $12$ cm, c'est impossible.",
           schema: tri({ A: [0, 0], B: [7, 0], C: [2.7857, 3.5341] }, { noms: { A: "E", B: "F", C: "G" }, cotes: { AB: "7 cm", BC: "5,5 cm", CA: "4,5 cm" }, arcs: true }),
@@ -496,6 +556,12 @@ export const exercicesTriangles4e: FicheExercicesData = {
         {
           enonce:
             "Dans chaque cas, les deux triangles sont-ils égaux, seulement semblables, ou l'un d'eux n'existe-t-il pas ?\na) Les deux triangles ont des angles de $30°$, $70°$ et $80°$.\nb) Côtés de $5$, $6$ et $8$ cm pour l'un ; de $8$, $5$ et $6$ cm pour l'autre.\nc) Côtés de $3$, $4$ et $6$ cm pour l'un ; de $6$, $8$ et $12$ cm pour l'autre.\nd) Côtés de $3$, $4$ et $6$ cm pour l'un ; de $2$, $3$ et $6$ cm pour l'autre.",
+          reponses: [
+            { question: "a)", attendu: ["semblables", "semblable", "seulement semblables"] },
+            { question: "b)", attendu: ["égaux", "égal"] },
+            { question: "c)", attendu: ["semblables", "semblable", "seulement semblables"] },
+            { question: "d)", attendu: ["n'existe pas", "le second n'existe pas", "l'un n'existe pas", "le deuxième n'existe pas"] },
+          ],
           correction:
             "a) Mêmes angles : même FORME. Mais aucune longueur n'est donnée, rien ne fixe la taille. Ils sont semblables, pas forcément égaux.\nb) Je range les côtés : $5$, $6$, $8$ dans les deux cas. Trois côtés égaux deux à deux : c'est un cas d'égalité, les triangles sont égaux.\nc) Je range, puis je divise : $6 \\div 3 = 2$, $8 \\div 4 = 2$, $12 \\div 6 = 2$. Tous les côtés sont multipliés par $2$ : semblables, pas égaux.\nd) Pour le second, le plus grand côté vaut $6$, et $2 + 3 = 5 < 6$ : ce triangle n'existe pas.\n⛔ Le piège au a) : croire que trois angles égaux suffisent pour l'égalité. Trois angles ne sont PAS un cas d'égalité : il manque toujours une longueur.\nRéponse : a) semblables ; b) égaux ; c) semblables, de rapport $2$ ; d) le second n'existe pas.",
           schema: deux(
@@ -507,6 +573,10 @@ export const exercicesTriangles4e: FicheExercicesData = {
         {
           enonce:
             "Trois villages $A$, $B$ et $C$ sont placés sur un plan à l'échelle $1$ cm pour $1$ km. La commune veut installer une antenne à la MÊME distance des trois villages.\na) Où sont les points à égale distance de $A$ et de $B$ ?\nb) Comment trouver le point $O$ où installer l'antenne ?\nc) Sur le plan, on mesure $OA = 4{,}5$ cm. À quelle distance des villages est l'antenne ?",
+          reponses: [
+            { question: "a)", attendu: ["la médiatrice de [AB]", "médiatrice de [AB]", "sur la médiatrice de [AB]", "médiatrice"] },
+            { question: "c)", attendu: "4,5" },
+          ],
           correction:
             "a) Les points à égale distance de $A$ et de $B$ sont sur la médiatrice de $[AB]$ : la droite qui passe par le milieu de $[AB]$ et le coupe à angle droit.\nb) Je trace la médiatrice de $[AB]$ et celle de $[AC]$. Leur point d'intersection $O$ est à égale distance de $A$ et de $B$, et de $A$ et de $C$ : donc des trois villages.\n⭐ Du coup, $O$ est aussi à égale distance de $B$ et de $C$ : la troisième médiatrice passe par $O$. Les trois médiatrices se coupent en un même point.\nc) Sur le plan, $1$ cm représente $1$ km : $OA = 4{,}5$ km. Comme $OA = OB = OC$, l'antenne est à environ $4{,}5$ km de chaque village. Le cercle de centre $O$ passe par les trois villages.\n⛔ Le piège : tracer les HAUTEURS du triangle. Elles passent par les sommets, mais leur point commun n'est pas à égale distance des villages.\nRéponse : sur la médiatrice de $[AB]$ ; $O$ est le point commun des médiatrices ; l'antenne est à environ $4{,}5$ km de chaque village.",
           schema: tri({ A: [0, 0], B: [8, 0], C: [2, 6] }, { lignes: [{ de: [4, -1.5], vers: [4, 5], couleur: "bleu" }, { de: [-1.4, 3.8], vers: [6.4, 1.2], couleur: "bleu" }, { de: [3, 1], vers: [6.5, 4.5], couleur: "bleu" }], carres: [[[4, 0], [4, 5], [8, 0]], [[1, 3], [2, 6], [-1.4, 3.8]], [[5, 3], [2, 6], [6.5, 4.5]]], points: [{ en: [4, 2], nom: "O", vers: "droite" }], cercle: { centre: [4, 2], rayon: 4.4721 } }),
@@ -530,6 +600,12 @@ export const exercicesTriangles4e: FicheExercicesData = {
           titre: "La largeur de la rivière",
           enonce:
             "Pour mesurer la largeur d'une rivière sans la traverser, on plante deux piquets $A$ et $B$ sur une rive, à $60$ m l'un de l'autre. Sur l'autre rive se trouve un arbre $C$. Avec un viseur, on mesure $\\widehat{CAB} = 70°$ et $\\widehat{CBA} = 60°$. Les deux rives sont parallèles.\na) Calculer l'angle $\\widehat{ACB}$.\nb) Pourquoi ces mesures déterminent-elles un seul triangle ?\nc) On reconstruit ce triangle sur papier à l'échelle $\\dfrac{1}{1\\,000}$. Quelle longueur donner à $[AB]$ ? Le dessin est-il égal au vrai triangle, ou semblable ?\nd) Sur le dessin, la hauteur issue de $C$ mesure $6{,}4$ cm. Quelle est la largeur de la rivière ?",
+          reponses: [
+            { question: "a)", attendu: "50" },
+            { question: "c) AB", attendu: "6" },
+            { question: "c) nat.", attendu: ["semblable", "semblables"] },
+            { question: "d)", attendu: "64" },
+          ],
           correction:
             "a) $\\widehat{ACB} = 180° - 70° - 60° = 50°$.\nb) On connaît un côté, $[AB]$, et les deux angles qui le touchent : c'est un cas d'égalité. Tous les triangles construits avec ces mesures sont superposables : il n'y en a qu'un.\nc) $60$ m $= 6\\,000$ cm, et $6\\,000 \\div 1\\,000 = 6$ : je trace $[AB]$ de $6$ cm, puis je reporte au rapporteur $70°$ en $A$ et $60°$ en $B$. Le dessin a les mêmes angles que le vrai triangle, mais des côtés $1\\,000$ fois plus courts : il est semblable, pas égal.\nd) La largeur de la rivière, c'est la distance de l'arbre $C$ à la rive $(AB)$ : la longueur de la hauteur issue de $C$, perpendiculaire à $(AB)$. Sur le papier, $6{,}4$ cm ; en vrai, $6{,}4 \\times 1\\,000 = 6\\,400$ cm, soit $64$ m.\n⭐ C'est la triangulation : de 1792 à 1798, Delambre et Méchain ont mesuré ainsi, triangle après triangle, la distance de Dunkerque à Barcelone, pour définir le mètre.\n⛔ Le piège au d) : prendre $AC$ ou $BC$ pour la largeur. Ce sont des chemins EN BIAIS ; la largeur se mesure à angle droit des rives.\nRéponse : $\\widehat{ACB} = 50°$ ; un côté et ses deux angles donnent un seul triangle ; $6$ cm sur le papier, un dessin semblable ; la rivière mesure environ $64$ m de large.",
           schema: tri({ A: [0, 0], B: [60, 0], C: [23.1996, 63.7402] }, { cotes: { AB: "60 m" }, angles: { A: "70°", B: "60°", C: "50°" }, trouve: ["C"], lignes: [{ de: [-8, 63.7402], vers: [70, 63.7402], couleur: "gris", pointilles: true }, { de: [-8, 0], vers: [70, 0], couleur: "gris", pointilles: true }, { de: [23.1996, 63.7402], vers: [23.1996, 0], couleur: "orange", nom: "≈ 64 m", ou: [27, 30], ancre: "start" }], carres: [[[23.1996, 0], [23.1996, 63.7402], [60, 0]]], points: [{ en: [23.1996, 0], nom: "H", vers: "bas" }] }),
@@ -539,6 +615,10 @@ export const exercicesTriangles4e: FicheExercicesData = {
           titre: "L'ombre de l'obélisque",
           enonce:
             "Place de la Concorde, à Paris, se dresse l'obélisque de Louxor. Un matin, son ombre au sol mesure $18$ m. Au même moment, un bâton vertical de $1{,}5$ m a une ombre de $1{,}2$ m. Le sol est horizontal, et les rayons du soleil sont parallèles.\na) Expliquer pourquoi le triangle « bâton, ombre, rayon » et le triangle « obélisque, ombre, rayon » ont les mêmes angles.\nb) En déduire qu'ils sont semblables, et calculer le rapport.\nc) Calculer la hauteur de l'obélisque. La comparer à sa hauteur officielle, environ $23$ m.",
+          reponses: [
+            { question: "b)", attendu: "15" },
+            { question: "c)", attendu: "22,5" },
+          ],
           correction:
             "a) Les deux triangles ont un angle droit : le bâton et l'obélisque sont verticaux, le sol est horizontal.\nLes rayons sont parallèles : ils font avec le sol le même angle dans les deux triangles (sur un dessin à l'échelle, je lis environ $51°$).\nLe troisième angle vaut donc, dans les deux, $180° - 90° - 51° = 39°$ : les trois angles sont égaux deux à deux.\nb) Mêmes angles : les deux triangles sont semblables. Les ombres se correspondent : le rapport vaut $18 \\div 1{,}2 = 15$.\nc) La hauteur de l'obélisque correspond à celle du bâton : $1{,}5 \\times 15 = 22{,}5$ m.\nC'est proche des $23$ m officiels : l'écart d'un demi-mètre vient de la précision des mesures d'ombre.\n⛔ Le piège : renverser le rapport, $1{,}2 \\div 18$, et trouver un obélisque de $10$ cm. Le rapport va du PETIT triangle vers le GRAND : il est plus grand que $1$.\nRéponse : les angles sont égaux deux à deux ; le rapport vaut $15$ ; l'obélisque mesure environ $22{,}5$ m.",
           schema: deux(
@@ -551,6 +631,9 @@ export const exercicesTriangles4e: FicheExercicesData = {
           titre: "La ferme de charpente",
           enonce:
             "Une ferme de charpente est un triangle $ABC$ : l'entrait $[BC]$, horizontal, mesure $8$ m, et les deux arbalétriers $[AB]$ et $[AC]$ mesurent $5$ m chacun. Le poinçon $[AH]$ relie le sommet $A$ au milieu $H$ de $[BC]$.\na) Vérifier que ce triangle peut exister.\nb) Montrer que les triangles $ABH$ et $ACH$ sont égaux.\nc) En déduire que le poinçon est perpendiculaire à l'entrait. Que représente la droite $(AH)$ pour le triangle $ABC$ ?\nd) L'angle $\\widehat{ABC}$ mesure environ $37°$. Calculer l'angle au sommet $\\widehat{BAC}$.",
+          reponses: [
+            { question: "d)", attendu: "106" },
+          ],
           correction:
             "a) Le plus grand côté est $BC = 8$ m, et $5 + 5 = 10 > 8$ : le triangle existe.\nb) Je compare les côtés : $AB = AC = 5$ m ; $BH = HC = 4$ m, car $H$ est le milieu de $[BC]$ ; et $[AH]$ est un côté COMMUN aux deux triangles. Trois côtés égaux deux à deux : les triangles $ABH$ et $ACH$ sont égaux.\nc) Des triangles égaux ont leurs angles égaux deux à deux : $\\widehat{AHB} = \\widehat{AHC}$. Or ces deux angles sont côte à côte sur la droite $(BC)$ : ensemble, ils font $180°$. Chacun vaut donc $180 \\div 2 = 90$ degrés : le poinçon est perpendiculaire à l'entrait.\n$(AH)$ passe par le sommet $A$ et coupe $[BC]$ à angle droit : c'est la hauteur issue de $A$. Elle coupe aussi $[BC]$ en son milieu, à angle droit : c'est la médiatrice de $[BC]$, et encore la médiane issue de $A$.\nd) Les triangles $ABH$ et $ACH$ étant égaux, $\\widehat{ACB} = \\widehat{ABC}$, environ $37°$. Donc $\\widehat{BAC} \\approx 180° - 37° - 37° = 106°$.\n⛔ Le piège au c) : AFFIRMER l'angle droit parce qu'il « se voit » sur la figure. Il se démontre, ici par un cas d'égalité.\nRéponse : le triangle existe ; $ABH$ et $ACH$ sont égaux par leurs trois côtés ; $(AH)$ est à la fois hauteur, médiatrice et médiane ; $\\widehat{BAC} \\approx 106°$.",
           schema: tri({ A: [4, 3], B: [0, 0], C: [8, 0] }, { cotes: { AB: "5 m", CA: "5 m" }, angles: { A: "≈ 106°", B: "≈ 37°", C: "≈ 37°" }, trouve: ["A"], egaux: ["AB", "CA"], milieux: ["BC"], lignes: [{ de: [4, 3], vers: [4, 0], couleur: "orange" }], carres: [[[4, 0], [4, 3], [8, 0]]], points: [{ en: [4, 0], nom: "H", vers: "bas" }] }),
@@ -560,6 +643,14 @@ export const exercicesTriangles4e: FicheExercicesData = {
           titre: "La course d'orientation",
           enonce:
             "En course d'orientation, les coureurs lisent une carte à l'échelle $\\dfrac{1}{10\\,000}$. Trois balises $A$, $B$ et $C$ vérifient $AB = 1{,}2$ km et $BC = 0{,}9$ km.\na) Quelles longueurs mesure-t-on sur la carte pour $AB$ et $BC$ ?\nb) Entre quelles valeurs se trouve la distance $AC$ ?\nc) Un coureur affirme que $AC = 2{,}3$ km. Qu'en penser ?\nd) Sur la carte, on mesure $AC = 13$ cm. Quelle est la vraie distance $AC$ ? Combien de mètres le détour par $B$ ajoute-t-il ?",
+          reponses: [
+            { question: "a) AB", attendu: "12" },
+            { question: "a) BC", attendu: "9" },
+            { question: "b)", attendu: ["0,3<AC<2,1"], exact: true },
+            { question: "c)", attendu: ["impossible", "c'est impossible", "non", "faux"] },
+            { question: "d) AC", attendu: ["1,3 km", "1300 m"] },
+            { question: "d) dét.", attendu: ["800 m", "0,8 km"] },
+          ],
           correction:
             "a) $1{,}2$ km $= 120\\,000$ cm, et $120\\,000 \\div 10\\,000 = 12$ : $12$ cm sur la carte. De même, $0{,}9$ km donne $9$ cm. Le triangle de la carte est semblable au vrai : mêmes angles, longueurs divisées par $10\\,000$.\nb) $AC$ est plus petit que la somme des deux autres : $AC < 1{,}2 + 0{,}9 = 2{,}1$ km. Et $AB$ doit être plus petit que $BC + AC$ : $AC > 1{,}2 - 0{,}9 = 0{,}3$ km. Donc $0{,}3 < AC < 2{,}1$, en kilomètres.\nc) $2{,}3 > 2{,}1$ : impossible. Aller de $A$ à $C$ tout droit serait plus LONG que de passer par $B$ ; or la ligne droite est le plus court chemin.\nd) $13$ cm sur la carte : $13 \\times 10\\,000 = 130\\,000$ cm, soit $1{,}3$ km. Par $B$ : $1{,}2 + 0{,}9 = 2{,}1$ km ; le détour ajoute $2{,}1 - 1{,}3 = 0{,}8$ km, soit $800$ m.\n⛔ Le piège au b) : oublier la borne basse. Avec $AC = 0{,}2$ km, on aurait $0{,}9 + 0{,}2 = 1{,}1 < 1{,}2$ : le triangle ne se refermerait pas.\nRéponse : $12$ cm et $9$ cm ; $0{,}3 < AC < 2{,}1$ km ; $2{,}3$ km est impossible ; $AC = 1{,}3$ km, et le détour ajoute $800$ m.",
           schema: deux(

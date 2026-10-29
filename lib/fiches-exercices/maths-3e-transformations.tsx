@@ -89,6 +89,11 @@ export const exercicesTransformations3e: FicheExercicesData = {
         {
           enonce:
             "Sur le quadrillage, on a tracé le triangle $ABC$ et la droite grise $(d)$.\na) Construire le triangle $A'B'C'$, image de $ABC$ par la symétrie d'axe $(d)$.\nb) Donner les coordonnées de $A'$, $B'$ et $C'$.",
+          reponses: [
+            { question: "b) A'", attendu: "(9 ; 3)" },
+            { question: "b) B'", attendu: "(7 ; 3)" },
+            { question: "b) C'", attendu: "(9 ; 7)" },
+          ],
           figure: trace(
             [-1, 11],
             [{ pts: [[3, 3], [5, 3], [3, 7]] }, { pts: [[6, 1], [6, 10]], couleur: GRIS }],
@@ -110,6 +115,11 @@ export const exercicesTransformations3e: FicheExercicesData = {
         {
           enonce:
             "Sur le quadrillage, on a tracé le triangle $DEF$ et placé le point $O$.\nConstruire le triangle $D'E'F'$, image de $DEF$ par la symétrie de centre $O$, et donner les coordonnées de ses sommets.",
+          reponses: [
+            { question: "D'", attendu: "(9 ; 4)" },
+            { question: "E'", attendu: "(7 ; 2)" },
+            { question: "F'", attendu: "(7 ; 4)" },
+          ],
           figure: trace(
             [-1, 11],
             [{ pts: [[3, 6], [5, 8], [5, 6]] }],
@@ -132,6 +142,10 @@ export const exercicesTransformations3e: FicheExercicesData = {
         {
           enonce:
             "Sur le quadrillage, on a tracé le triangle $ABC$ et placé le point $A'$.\nConstruire l'image de $ABC$ par la translation qui transforme $A$ en $A'$, et donner les coordonnées de $B'$ et $C'$.",
+          reponses: [
+            { question: "B'", attendu: "(9 ; 3)" },
+            { question: "C'", attendu: "(6 ; 6)" },
+          ],
           figure: trace(
             [-1, 11],
             [{ pts: [[2, 5], [5, 5], [2, 8]] }],
@@ -155,6 +169,11 @@ export const exercicesTransformations3e: FicheExercicesData = {
         {
           enonce:
             "Sur le quadrillage, on a tracé le triangle $ABC$ et placé le point $O$.\nConstruire l'image de $ABC$ par la rotation de centre $O$, d'angle 90°, dans le sens CONTRAIRE des aiguilles d'une montre. Donner les coordonnées de $A'$, $B'$ et $C'$.",
+          reponses: [
+            { question: "A'", attendu: "(5 ; 6)" },
+            { question: "B'", attendu: "(5 ; 8)" },
+            { question: "C'", attendu: "(3 ; 6)" },
+          ],
           figure: trace(
             [-1, 11],
             [{ pts: [[7, 4], [9, 4], [7, 6]] }],
@@ -177,6 +196,11 @@ export const exercicesTransformations3e: FicheExercicesData = {
         {
           enonce:
             "Sur le quadrillage, le triangle orange $A'B'C'$ est-il l'image du triangle bleu $ABC$ par une homothétie de centre $O$ ?\na) Les points $O$, $A$, $A'$ sont-ils alignés ? Et $O$, $B$, $B'$ ? Et $O$, $C$, $C'$ ?\nb) Comparer $OA'$ et $OA$ en comptant les carreaux, puis $OB'$ et $OB$.\nc) Conclure, et donner le rapport.",
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "c)", attendu: ["oui", "vrai"] },
+            { question: "c) k", attendu: "2" },
+          ],
           figure: trace(
             [-1, 11],
             [{ pts: [[3, 3], [5, 3], [3, 5]] }, { pts: [[4, 4], [8, 4], [4, 8]], couleur: ORANGE }],
@@ -200,6 +224,10 @@ export const exercicesTransformations3e: FicheExercicesData = {
         {
           enonce:
             "On a placé les points $O$, $A$ et $B$ sur le quadrillage.\na) Placer $A'$, l'image de $A$ par l'homothétie de centre $O$ et de rapport $3$.\nb) Placer $B'$, l'image de $B$ par l'homothétie de centre $O$ et de rapport $\\dfrac{1}{2}$.",
+          reponses: [
+            { question: "a) A'", attendu: "(9 ; 6)" },
+            { question: "b) B'", attendu: "(5 ; 5)" },
+          ],
           figure: trace([-1, 11], [], [{ x: 3, y: 3, label: "O" }, { x: 5, y: 4, label: "A" }, { x: 7, y: 7, label: "B" }]),
           correction:
             "Pour placer l'image d'un point, je pars TOUJOURS du centre $O$ : je lis le déplacement de $O$ vers le point, je le multiplie par $k$, et je le refais depuis $O$.\na) De $O$ à $A$ : $2$ à droite, $1$ en haut. Multiplié par $3$ : $6$ à droite, $3$ en haut. Depuis $O$ : $A'(9\\,;\\,6)$.\nb) De $O$ à $B$ : $4$ à droite, $4$ en haut. Multiplié par $\\dfrac{1}{2}$ : $2$ à droite, $2$ en haut. Depuis $O$ : $B'(5\\,;\\,5)$, le milieu de $[OB]$.\n⭐ Contrôle : $O$, $A$, $A'$ sont sur la même droite grise, et $A'$ est trois fois plus loin de $O$ que $A$. Un rapport entre $0$ et $1$ rapproche le point du centre.\n⛔ Le piège au a) : partir de $A$ et refaire trois fois le déplacement depuis $A$. On arriverait en $(11\\,;\\,7)$ : quatre fois plus loin de $O$, pas trois.\nRéponse : $A'(9\\,;\\,6)$ et $B'(5\\,;\\,5)$.",
@@ -216,6 +244,11 @@ export const exercicesTransformations3e: FicheExercicesData = {
         {
           enonce:
             "Dans chaque cas, $A'$ est l'image de $A$ par une homothétie de centre $O$. Donner son rapport $k$.\na) $OA = 2{,}5$ cm, $OA' = 7{,}5$ cm, et $A'$ est sur la demi-droite $[OA)$.\nb) $OA = 6$ cm, $OA' = 4$ cm, et $A'$ est sur la demi-droite $[OA)$.\nc) $OA = 5$ cm, $OA' = 3$ cm, et $O$ est ENTRE $A$ et $A'$.",
+          reponses: [
+            { question: "a)", attendu: "3" },
+            { question: "b)", attendu: "2/3" },
+            { question: "c)", attendu: "-0,6" },
+          ],
           correction:
             "Le rapport se lit en divisant une distance de l'IMAGE par la distance de DÉPART : $OA' \\div OA$. Puis son signe dit de quel côté de $O$ se trouve l'image.\na) $7{,}5 \\div 2{,}5 = 3$. $A'$ est du même côté que $A$ : $k = 3$, un agrandissement.\nb) $4 \\div 6 = \\dfrac{2}{3}$. Même côté : $k = \\dfrac{2}{3}$, une réduction.\nc) $3 \\div 5 = 0{,}6$. Mais $O$ est entre $A$ et $A'$ : l'image est de l'autre côté du centre, donc $k = -0{,}6$.\n⛔ Le piège au a) : calculer une différence, $7{,}5 - 2{,}5 = 5$. Le rapport est un QUOTIENT.\n⛔ Le piège au c) : oublier le signe. Avec $k = 0{,}6$, $A'$ serait entre $O$ et $A$, du même côté.\nRéponse : $k = 3$ ; $k = \\dfrac{2}{3}$ ; $k = -0{,}6$.",
           micros: ["sym_homothetie_rapport"],
@@ -223,6 +256,12 @@ export const exercicesTransformations3e: FicheExercicesData = {
         {
           enonce:
             "Sur le quadrillage, $ABCD$ est un carré de $1$ carreau de côté. On construit son image $A'B'C'D'$ par l'homothétie de centre $O$ et de rapport $-3$.\na) Placer $A'$ et $C'$, puis tracer $A'B'C'D'$.\nb) Quelle est la longueur du côté de $A'B'C'D'$ ? Son aire, en carreaux ?\nc) Que deviennent les angles droits ?",
+          reponses: [
+            { question: "a) A'", attendu: "(5 ; 5)" },
+            { question: "a) C'", attendu: "(2 ; 2)" },
+            { question: "b) côté", attendu: "3" },
+            { question: "b) aire", attendu: "9" },
+          ],
           figure: trace(
             [-1, 11],
             [{ pts: [[9, 9], [10, 9], [10, 10], [9, 10]] }],
@@ -259,6 +298,15 @@ export const exercicesTransformations3e: FicheExercicesData = {
         {
           enonce:
             "Sur le quadrillage : le triangle $ABC$, la droite verticale $(d_1)$ et la droite horizontale $(d_2)$, qui se coupent en $I$.\na) Construire $A'B'C'$, l'image de $ABC$ par la symétrie d'axe $(d_1)$.\nb) Construire $A''B''C''$, l'image de $A'B'C'$ par la symétrie d'axe $(d_2)$.\nc) Quelle transformation, en un seul geste, envoie $ABC$ sur $A''B''C''$ ?",
+          reponses: [
+            { question: "a) A'", attendu: "(8 ; 6)" },
+            { question: "a) B'", attendu: "(6 ; 6)" },
+            { question: "a) C'", attendu: "(8 ; 8)" },
+            { question: "b) A''", attendu: "(8 ; 4)" },
+            { question: "b) B''", attendu: "(6 ; 4)" },
+            { question: "b) C''", attendu: "(8 ; 2)" },
+            { question: "c)", attendu: ["symétrie centrale", "symétrie de centre I", "une symétrie centrale"] },
+          ],
           figure: trace(
             [-1, 11],
             [{ pts: [[2, 6], [4, 6], [2, 8]] }, { pts: [[5, 1], [5, 10]], couleur: GRIS }, { pts: [[1, 5], [10, 5]], couleur: GRIS }],
@@ -282,6 +330,11 @@ export const exercicesTransformations3e: FicheExercicesData = {
         {
           enonce:
             "Sur le quadrillage, on a tracé le triangle $ABC$ et placé le point $O$.\na) Construire l'image $A'B'C'$ de $ABC$ par l'homothétie de centre $O$ et de rapport $-2$.\nb) Comparer les deux triangles : taille, orientation, position de $O$.",
+          reponses: [
+            { question: "a) A'", attendu: "(4 ; 4)" },
+            { question: "a) B'", attendu: "(2 ; 4)" },
+            { question: "a) C'", attendu: "(4 ; 2)" },
+          ],
           figure: trace(
             [-1, 11],
             [{ pts: [[7, 7], [8, 7], [7, 8]] }],
@@ -305,6 +358,10 @@ export const exercicesTransformations3e: FicheExercicesData = {
         {
           enonce:
             "Sur le quadrillage, le triangle orange $A'B'C'$ est l'image du triangle bleu $ABC$ par une homothétie.\na) Retrouver son centre $O$.\nb) Calculer son rapport.",
+          reponses: [
+            { question: "a) O", attendu: "(10 ; 3)" },
+            { question: "b)", attendu: "2" },
+          ],
           figure: trace(
             [-1, 11],
             [{ pts: [[8, 4], [8, 6], [6, 4]] }, { pts: [[6, 5], [6, 9], [2, 5]], couleur: ORANGE }],
@@ -328,6 +385,13 @@ export const exercicesTransformations3e: FicheExercicesData = {
         {
           enonce:
             "Une photo de $10$ cm sur $15$ cm est agrandie en un tirage de $20$ cm sur $30$ cm. Sur le quadrillage, un carreau représente $5$ cm, et le coin $O$ reste en place.\na) Montrer que l'agrandissement est une homothétie de centre $O$, et donner son rapport.\nb) Calculer l'aire de chaque photo. Par combien l'aire est-elle multipliée ?\nc) Le papier photo se paie au cm². Le grand tirage demande-t-il deux fois plus de papier ?",
+          reponses: [
+            { question: "a)", attendu: "2" },
+            { question: "b) petit", attendu: "150" },
+            { question: "b) grand", attendu: "600" },
+            { question: "b) ×", attendu: "4" },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           figure: trace(
             [-1, 11],
             [{ pts: [[2, 2], [4, 2], [4, 5], [2, 5]] }],
@@ -349,6 +413,13 @@ export const exercicesTransformations3e: FicheExercicesData = {
         {
           enonce:
             "Un drapeau est planté en $O$ : le mât va de $O$ à $A$, la toile est le triangle $ABC$.\na) Construire son image par la rotation de centre $O$ et d'angle 90°, dans le sens des aiguilles d'une montre.\nb) Construire son image par la rotation de centre $O$ et d'angle 180°.\nc) Quelle autre transformation donne la même image qu'au b) ?",
+          reponses: [
+            { question: "a) A'", attendu: "(9 ; 5)" },
+            { question: "a) B'", attendu: "(8 ; 3)" },
+            { question: "b) A''", attendu: "(6 ; 2)" },
+            { question: "b) B''", attendu: "(4 ; 3)" },
+            { question: "c)", attendu: ["symétrie centrale", "symétrie de centre O", "une symétrie centrale"] },
+          ],
           figure: trace(
             [-1, 11],
             [{ pts: [[6, 5], [6, 8]] }, { pts: [[6, 8], [8, 7], [6, 6]] }],
@@ -373,6 +444,11 @@ export const exercicesTransformations3e: FicheExercicesData = {
         {
           enonce:
             "Sur le quadrillage, $ABCD$ est un carré de $2$ carreaux de côté.\na) Construire son image $A'B'C'D'$ par l'homothétie de centre $O$ et de rapport $1{,}5$.\nb) Calculer le côté, le périmètre et l'aire de $A'B'C'D'$, en carreaux.",
+          reponses: [
+            { question: "b) côté", attendu: "3" },
+            { question: "b) périm", attendu: "12" },
+            { question: "b) aire", attendu: "9" },
+          ],
           figure: trace(
             [-1, 11],
             [{ pts: [[4, 4], [6, 4], [6, 6], [4, 6]] }],
@@ -395,6 +471,13 @@ export const exercicesTransformations3e: FicheExercicesData = {
         {
           enonce:
             "Vrai ou faux ? Justifier.\na) Une homothétie de rapport $-1$ est une symétrie centrale.\nb) Une homothétie de rapport $0{,}8$ agrandit la figure.\nc) Une homothétie conserve les angles.\nd) Une translation est une homothétie.\ne) Une homothétie de rapport $2$ double l'aire d'une figure.",
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: ["non", "faux"] },
+            { question: "c)", attendu: ["oui", "vrai"] },
+            { question: "d)", attendu: ["non", "faux"] },
+            { question: "e)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) VRAI. Avec $k = -1$, $OA' = OA$ et $A'$ est de l'autre côté de $O$ : $O$ est le milieu de $[AA']$. Le dessin le montre sur le triangle $ABC$.\nb) FAUX. $0{,}8$ est entre $0$ et $1$ : les longueurs sont multipliées par $0{,}8$, la figure est RÉDUITE.\nc) VRAI. L'image a la même forme : les angles ne changent pas, seules les longueurs changent.\nd) FAUX. Dans une translation, les droites $(AA')$ et $(BB')$ sont parallèles : elles ne se coupent jamais, il n'y a pas de centre.\ne) FAUX. L'aire est multipliée par $2^2 = 4$.\n⛔ Le piège au e) : confondre le rapport des longueurs et celui des aires.\nRéponse : vrai, faux, vrai, faux, faux.",
           schema: trace(
@@ -412,6 +495,12 @@ export const exercicesTransformations3e: FicheExercicesData = {
         {
           enonce:
             "Un triangle $T$ a une aire de $12$ cm². Son image $T'$ par une homothétie de centre $O$ a une aire de $108$ cm².\na) Par combien l'aire a-t-elle été multipliée ?\nb) Quelles sont les valeurs possibles du rapport $k$ ?\nc) Le plus grand côté de $T$ mesure $5$ cm. Combien mesure celui de $T'$ ?\nd) On sait en plus que $O$ est entre $T$ et $T'$. Quel est le rapport ?",
+          reponses: [
+            { question: "a)", attendu: "9" },
+            { question: "b)", attendu: "3 ; -3" },
+            { question: "c)", attendu: "15" },
+            { question: "d)", attendu: "-3" },
+          ],
           correction:
             "a) $108 \\div 12 = 9$ : l'aire est multipliée par $9$.\nb) L'aire est multipliée par $k^2$, donc $k^2 = 9$. Deux nombres ont pour carré $9$ : $k = 3$ ou $k = -3$.\nc) Dans les deux cas, les longueurs sont multipliées par $3$ : $5 \\times 3 = 15$ cm.\nd) $O$ entre la figure et son image : l'image est de l'autre côté du centre, le rapport est négatif. $k = -3$.\n⛔ Le piège au b) : répondre $k = 9$. Avec $k = 9$, l'aire serait multipliée par $81$.\nRéponse : $\\times 9$ ; $k = 3$ ou $k = -3$ ; $15$ cm ; $k = -3$.",
           micros: ["sym_homothetie_rapport", "sym_transformation_effet", "sym_transformation_defi"],
@@ -433,6 +522,11 @@ export const exercicesTransformations3e: FicheExercicesData = {
           titre: "La chambre noire",
           enonce:
             "Dans une boîte fermée, un petit trou $O$ laisse passer la lumière : l'image d'un arbre se forme sur la paroi du fond, à l'envers. C'est une homothétie de centre $O$. L'arbre mesure $12$ m de haut et se trouve à $30$ m du trou ; la paroi est à $20$ cm du trou.\na) Pourquoi le rapport est-il négatif ?\nb) Calculer le rapport $k$.\nc) Quelle est la hauteur de l'image ?\nd) On recule la paroi à $30$ cm du trou. Quelle hauteur a maintenant l'image ?",
+          reponses: [
+            { question: "b)", attendu: "-1/150" },
+            { question: "c)", attendu: "8" },
+            { question: "d)", attendu: "12" },
+          ],
           correction:
             "a) Les rayons passent par le trou $O$ : l'arbre est d'un côté de $O$, son image de l'autre. Le haut de l'arbre arrive en bas de la paroi. Image de l'autre côté du centre : $k < 0$.\nb) Je mets tout dans la même unité : $30$ m $= 3\\,000$ cm. Le rapport des distances au trou : $20 \\div 3\\,000 = \\dfrac{1}{150}$. Avec le signe : $k = -\\dfrac{1}{150}$.\nc) $12$ m $= 1\\,200$ cm, et $1\\,200 \\div 150 = 8$ : l'image mesure $8$ cm, la tête en bas.\nd) Nouveau rapport : $30 \\div 3\\,000 = \\dfrac{1}{100}$. L'image mesure $1\\,200 \\div 100 = 12$ cm.\n⭐ Le schéma n'est pas à l'échelle : on y a pris un rapport de $-\\dfrac{1}{2}$ pour qu'il tienne sur le quadrillage. Le haut $B$ de l'arbre arrive en $B'$, en bas.\n⛔ Le piège au b) : diviser $20$ par $30$ sans convertir. Les deux distances doivent être dans la même unité.\nRéponse : $k = -\\dfrac{1}{150}$, une image de $8$ cm, puis de $12$ cm.",
           schema: trace(
@@ -451,6 +545,14 @@ export const exercicesTransformations3e: FicheExercicesData = {
           titre: "Le vidéoprojecteur",
           enonce:
             "Dans un vidéoprojecteur, une lampe éclaire une petite plaque de $2$ cm de large et $1{,}5$ cm de haut, placée à $4$ cm de la lampe. L'image se forme sur un mur à $3$ m de la lampe. On admet que l'image est l'agrandissement de la plaque par une homothétie de centre la lampe.\na) Calculer le rapport de cette homothétie.\nb) Quelles sont la largeur et la hauteur de l'image ?\nc) Par combien l'aire est-elle multipliée ? Calculer l'aire de l'image en m².\nd) À quelle distance du mur faut-il placer la lampe pour obtenir une image de $2$ m de large ?",
+          reponses: [
+            { question: "a)", attendu: "75" },
+            { question: "b) larg.", attendu: ["1,5m", "150cm"] },
+            { question: "b) haut.", attendu: ["112,5cm", "1,125m"] },
+            { question: "c) ×", attendu: "5625" },
+            { question: "c) m²", attendu: "1,6875" },
+            { question: "d)", attendu: ["4m", "400cm"] },
+          ],
           correction:
             "a) Même unité : $3$ m $= 300$ cm. Le rapport des distances à la lampe : $300 \\div 4 = 75$. L'image est du même côté que la plaque : $k = 75$.\nb) Largeur : $2 \\times 75 = 150$ cm, soit $1{,}5$ m. Hauteur : $1{,}5 \\times 75 = 112{,}5$ cm.\nc) L'aire est multipliée par $75^2 = 5\\,625$. La plaque mesure $2 \\times 1{,}5 = 3$ cm², l'image $3 \\times 5\\,625 = 16\\,875$ cm², soit $1{,}6875$ m².\n⭐ Contrôle : $1{,}5 \\times 1{,}125 = 1{,}6875$ m².\nd) Il faut $200 \\div 2 = 100$ comme rapport. La distance lampe-mur est alors $4 \\times 100 = 400$ cm, soit $4$ m.\n⛔ Le piège au c) : multiplier l'aire par $75$. On trouverait $225$ cm², la taille d'une carte postale et demie, pas celle d'un écran.\nRéponse : $k = 75$ ; $1{,}5$ m sur $1{,}125$ m ; aire $\\times 5\\,625$, soit $1{,}6875$ m² ; la lampe à $4$ m du mur.",
           micros: ["sym_homothetie_rapport", "sym_transformation_effet"],
@@ -459,6 +561,14 @@ export const exercicesTransformations3e: FicheExercicesData = {
           titre: "La frise",
           enonce:
             "Une frise se construit à partir d'un motif. Sur le quadrillage, le motif 1 (bleu, sommets $A_1$ et $B_1$) a été reproduit trois fois : motif 2 en orange, motif 3 en vert, motif 4 en violet.\na) Quelle transformation envoie le motif 1 sur le motif 2 ?\nb) Sur le motif 3 ?\nc) Sur le motif 4 ?\nd) Quelle transformation envoie le motif 3 sur le motif 4 ?\ne) Pour prolonger la frise, on applique au motif 2 la transformation du a). Donner les coordonnées de $A_5$ et $B_5$.",
+          reponses: [
+            { question: "a)", attendu: ["translation", "une translation"] },
+            { question: "b)", attendu: ["symétrie axiale", "une symétrie axiale"] },
+            { question: "c)", attendu: ["symétrie centrale", "symétrie de centre I", "une symétrie centrale"] },
+            { question: "d)", attendu: ["symétrie axiale", "une symétrie axiale"] },
+            { question: "e) A5", attendu: "(8 ; 6)" },
+            { question: "e) B5", attendu: "(10 ; 7)" },
+          ],
           figure: trace(
             [-1, 11],
             [
@@ -490,6 +600,11 @@ export const exercicesTransformations3e: FicheExercicesData = {
           titre: "La carte de randonnée",
           enonce:
             "Une carte de randonnée est à l'échelle $\\dfrac{1}{25\\,000}$ : elle est une réduction du terrain, de rapport $\\dfrac{1}{25\\,000}$.\na) Sur la carte, un sentier mesure $4{,}8$ cm. Quelle est sa longueur réelle, en km ?\nb) Un lac occupe $3$ cm² sur la carte. Quelle est son aire réelle, en m², puis en hectares ?\nc) Un randonneur calcule : « $3 \\times 25\\,000 = 75\\,000$ cm², soit $7{,}5$ m² ». Qu'en penser ?",
+          reponses: [
+            { question: "a)", attendu: "1,2" },
+            { question: "b) m²", attendu: "187500" },
+            { question: "b) ha", attendu: "18,75" },
+          ],
           correction:
             "a) Du terrain à la carte, les longueurs sont divisées par $25\\,000$ ; de la carte au terrain, je multiplie : $4{,}8 \\times 25\\,000 = 120\\,000$ cm, soit $1{,}2$ km.\nb) Les aires, elles, sont multipliées par le CARRÉ : $25\\,000^2 = 625\\,000\\,000$.\n$3 \\times 625\\,000\\,000 = 1\\,875\\,000\\,000$ cm². Comme $1$ m² $= 10\\,000$ cm², cela fait $187\\,500$ m².\nEt $1$ ha $= 10\\,000$ m² : le lac couvre $18{,}75$ ha.\nc) Il a multiplié l'aire par $25\\,000$ au lieu de $25\\,000^2$. Un lac de $7{,}5$ m², c'est une flaque : le résultat est absurde.\n⛔ Le piège : l'échelle d'une carte vaut pour les LONGUEURS. Pour une aire, elle compte deux fois.\nRéponse : le sentier mesure $1{,}2$ km et le lac $187\\,500$ m², soit $18{,}75$ ha.",
           micros: ["sym_homothetie_rapport", "sym_transformation_effet", "sym_transformation_defi"],

@@ -252,6 +252,13 @@ export const exercicesRelatifNombre5e: FicheExercicesData = {
         {
           enonce:
             "Écris chaque information avec un nombre relatif.\na) Une épave repose à $12$ m sous le niveau de la mer.\nb) Un club gagne $35$ € à sa tombola.\nc) Il fait $4{,}5$ degrés en dessous de zéro.\nd) L'ascenseur s'arrête au troisième étage.\ne) La voiture est garée au deuxième sous-sol.",
+          reponses: [
+            { question: "a)", attendu: "-12" },
+            { question: "b)", attendu: "+35" },
+            { question: "c)", attendu: "-4,5" },
+            { question: "d)", attendu: "+3" },
+            { question: "e)", attendu: "-2" },
+          ],
           correction:
             "Je cherche d'abord le signe : au-dessus, un gain, un étage, c'est positif ; au-dessous, une perte, un sous-sol, c'est négatif.\na) Sous le niveau de la mer : négatif. L'épave est à $-12$ m.\nb) Un gain : positif. Le club gagne $+35$ €.\nc) En dessous de zéro : négatif. Il fait $-4{,}5$ °C.\nd) Au-dessus du rez-de-chaussée : positif. C'est l'étage $+3$.\ne) Sous le rez-de-chaussée : négatif. C'est l'étage $-2$.\n⛔ Le piège : oublier le signe moins et écrire $4{,}5$ °C au c). Sans son signe, la température serait au-dessus de zéro : ce n'est plus le même temps.\nRéponse : a) $-12$ ; b) $+35$ ; c) $-4{,}5$ ; d) $+3$ ; e) $-2$.",
           schema: ecranSeulement(
@@ -267,6 +274,11 @@ export const exercicesRelatifNombre5e: FicheExercicesData = {
         },
         {
           enonce: "Pour chaque nombre, dis s'il est positif, négatif, ou ni l'un ni l'autre.\n$-7$ ; $3{,}2$ ; $0$ ; $-0{,}5$ ; $+8$ ; $-1$",
+          reponses: [
+            { question: "négatifs", attendu: "-7 ; -0,5 ; -1" },
+            { question: "positifs", attendu: "3,2 ; +8" },
+            { question: "0", attendu: ["ni l'un ni l'autre", "ni positif ni négatif", "aucun des deux"] },
+          ],
           correction:
             "Un nombre négatif porte le signe moins : il est à gauche de zéro.\nUn nombre positif est à droite de zéro. Son signe plus peut s'écrire ou non : $3{,}2$ et $+3{,}2$, c'est le même nombre.\nNégatifs : $-7$, $-0{,}5$ et $-1$.\nPositifs : $3{,}2$ et $+8$.\n$0$ n'est ni positif ni négatif : c'est la frontière entre les deux.\n⛔ Le piège : croire que $-0{,}5$ est positif parce qu'il est « tout près de zéro ». Il est à gauche de zéro : il est négatif.",
           schema: ecranSeulement(
@@ -282,6 +294,13 @@ export const exercicesRelatifNombre5e: FicheExercicesData = {
         },
         {
           enonce: "Voici une droite graduée.\na) Combien vaut une graduation ?\nb) Lis l'abscisse des points A, B, C et D.",
+          reponses: [
+            { question: "a)", attendu: "0,5" },
+            { question: "b) A", attendu: "-2,5" },
+            { question: "b) B", attendu: "-1" },
+            { question: "b) C", attendu: "0,5" },
+            { question: "b) D", attendu: "2,5" },
+          ],
           figure: droiteRel(-3, 3, 0.5, [
             { value: -2.5, label: "A" },
             { value: -1, label: "B" },
@@ -306,6 +325,12 @@ export const exercicesRelatifNombre5e: FicheExercicesData = {
         },
         {
           enonce: "Complète par $<$ ou $>$.\na) $-8$ … $3$\nb) $-6$ … $-9$\nc) $-2{,}5$ … $-2$\nd) $0$ … $-0{,}1$",
+          reponses: [
+            { question: "a)", attendu: ["<"] },
+            { question: "b)", attendu: [">"] },
+            { question: "c)", attendu: ["<"] },
+            { question: "d)", attendu: [">"] },
+          ],
           correction:
             "Sur la droite graduée, le plus grand est le plus à droite.\na) Un négatif est toujours plus petit qu'un positif : $-8 < 3$.\nb) Deux négatifs : le plus grand est le plus proche de zéro. $-6$ est plus proche de zéro que $-9$, donc $-6 > -9$.\nc) $-2$ est plus proche de zéro que $-2{,}5$, donc $-2{,}5 < -2$.\nd) Tout négatif est plus petit que zéro : $0 > -0{,}1$.\n⛔ Le piège : écrire $-6 < -9$ au b), « parce que $6 < 9$ ». Chez les négatifs, c'est l'inverse : plus on s'éloigne de zéro vers la gauche, plus le nombre est petit.\nRéponse : a) $<$ ; b) $>$ ; c) $<$ ; d) $>$.",
           schema: ecranSeulement(
@@ -318,6 +343,12 @@ export const exercicesRelatifNombre5e: FicheExercicesData = {
         },
         {
           enonce: "Donne l'opposé de chaque nombre.\na) $-13$\nb) $7{,}2$\nc) $-0{,}6$\nd) $0$",
+          reponses: [
+            { question: "a)", attendu: "13" },
+            { question: "b)", attendu: "-7,2" },
+            { question: "c)", attendu: "0,6" },
+            { question: "d)", attendu: "0" },
+          ],
           correction:
             "L'opposé d'un nombre est à la même distance de zéro, de l'autre côté. Je change seulement le signe.\na) L'opposé de $-13$ est $13$.\nb) L'opposé de $7{,}2$ est $-7{,}2$.\nc) L'opposé de $-0{,}6$ est $0{,}6$.\nd) L'opposé de $0$ est $0$ : c'est le seul nombre qui est son propre opposé.\n⛔ Le piège : croire que l'opposé d'un nombre est toujours négatif. L'opposé de $-13$ est positif.\nRéponse : a) $13$ ; b) $-7{,}2$ ; c) $0{,}6$ ; d) $0$.",
           schema: ecranSeulement(
@@ -330,6 +361,12 @@ export const exercicesRelatifNombre5e: FicheExercicesData = {
         },
         {
           enonce: "Donne la distance à zéro de chaque nombre.\na) $-9$\nb) $4$\nc) $-3{,}5$\nd) $0$",
+          reponses: [
+            { question: "a)", attendu: "9" },
+            { question: "b)", attendu: "4" },
+            { question: "c)", attendu: "3,5" },
+            { question: "d)", attendu: "0" },
+          ],
           correction:
             "La distance à zéro compte les unités entre le nombre et zéro. C'est une distance : elle n'a jamais de signe moins.\na) De $-9$ à $0$, il y a $9$ unités. La distance à zéro de $-9$ est $9$.\nb) De $0$ à $4$ : $4$.\nc) De $-3{,}5$ à $0$ : $3{,}5$.\nd) $0$ est sur zéro : sa distance à zéro est $0$.\n⛔ Le piège : répondre $-9$ au a). Une distance ne peut pas être négative, pas plus qu'une longueur.\n⭐ $-9$ et $9$ ont la même distance à zéro : ils sont opposés.\nRéponse : a) $9$ ; b) $4$ ; c) $3{,}5$ ; d) $0$.",
           schema: ecranSeulement(
@@ -343,6 +380,9 @@ export const exercicesRelatifNombre5e: FicheExercicesData = {
         },
         {
           enonce: "Range ces nombres dans l'ordre croissant.\n$2$ ; $-5$ ; $-1{,}5$ ; $0$ ; $-7$ ; $3{,}5$",
+          reponses: [
+            { attendu: ["-7 < -5 < -1,5 < 0 < 2 < 3,5", "-7 ; -5 ; -1,5 ; 0 ; 2 ; 3,5"], exact: true },
+          ],
           correction:
             "Croissant : du plus petit au plus grand, donc de gauche à droite sur la droite graduée.\nD'abord les négatifs, du plus loin de zéro au plus proche : $-7$, puis $-5$, puis $-1{,}5$.\nPuis zéro, puis les positifs : $0$, $2$, $3{,}5$.\n⛔ Le piège : commencer par $-1{,}5$, le négatif le plus proche de zéro. Le plus petit de tous est le plus loin à gauche : $-7$.\nRéponse : $-7 < -5 < -1{,}5 < 0 < 2 < 3{,}5$.",
           schema: droiteRel(-8, 4, 1, [
@@ -371,6 +411,12 @@ export const exercicesRelatifNombre5e: FicheExercicesData = {
         {
           enonce:
             "Voici les températures relevées à 8 h pendant une semaine de février, dans une ville de l'est de la France.\na) Quel jour a-t-il fait le plus froid ? Le plus chaud ?\nb) Quels jours la température était-elle en dessous de zéro ?\nc) Range les cinq températures dans l'ordre décroissant.",
+          reponses: [
+            { question: "a) froid", attendu: ["mercredi"] },
+            { question: "a) chaud", attendu: ["mardi"] },
+            { question: "b)", attendu: "lundi ; mercredi ; vendredi" },
+            { question: "c)", attendu: ["2 > 0 > -1,5 > -3 > -6", "2 ; 0 ; -1,5 ; -3 ; -6"], exact: true },
+          ],
           figure: tableau(["jour", "lun.", "mar.", "mer.", "jeu.", "ven."], ["°C", -3, 2, -6, 0, -1.5], true),
           correction:
             "Je place les cinq températures sur un axe vertical, comme un thermomètre : plus c'est haut, plus il fait chaud.\na) La plus basse est $-6$ °C : le mercredi est le jour le plus froid. La plus haute est $2$ °C : le mardi est le plus chaud.\nb) En dessous de zéro, ce sont les négatifs : lundi ($-3$ °C), mercredi ($-6$ °C) et vendredi ($-1{,}5$ °C). Jeudi, à $0$ °C, il ne faisait ni au-dessus ni en dessous de zéro.\nc) Décroissant : du plus grand au plus petit, du haut vers le bas du thermomètre.\n⛔ Le piège : écrire $-1{,}5$ avant $0$. Zéro est plus grand que tous les négatifs.\nRéponse : $2 > 0 > -1{,}5 > -3 > -6$.",
@@ -386,6 +432,11 @@ export const exercicesRelatifNombre5e: FicheExercicesData = {
         {
           enonce:
             "Au football, la « différence de buts » d'une équipe, c'est le nombre de buts marqués moins le nombre de buts encaissés. Voici celles de cinq équipes d'un championnat : les Aigles $+7$ ; les Loups $-3$ ; les Ours $0$ ; les Lynx $-11$ ; les Faucons $+2$.\na) Quelles équipes ont encaissé plus de buts qu'elles n'en ont marqué ?\nb) Range les équipes de la meilleure différence de buts à la moins bonne.\nc) Les Loups et les Lynx ont le même nombre de points. Au classement, c'est la meilleure différence de buts qui passe devant. Laquelle est devant ?",
+          reponses: [
+            { question: "a)", attendu: ["Loups ; Lynx", "les Loups ; les Lynx"] },
+            { question: "b)", attendu: ["Aigles ; Faucons ; Ours ; Loups ; Lynx", "Aigles, Faucons, Ours, Loups, Lynx"], exact: true },
+            { question: "c)", attendu: ["Loups", "les Loups"] },
+          ],
           correction:
             "a) Une équipe qui encaisse plus qu'elle ne marque a une différence NÉGATIVE : ce sont les Loups ($-3$) et les Lynx ($-11$). Les Ours, à $0$, ont marqué autant qu'ils ont encaissé.\nb) La meilleure différence est la plus grande : je range dans l'ordre décroissant, du haut vers le bas de l'axe.\n$+7 > +2 > 0 > -3 > -11$ : les Aigles, les Faucons, les Ours, les Loups, les Lynx.\nc) Je compare $-3$ et $-11$ : deux négatifs, le plus proche de zéro est le plus grand. $-3 > -11$.\nRéponse : les Loups passent devant les Lynx.\n⛔ Le piège : croire que $-11$ est « meilleur » parce que $11$ est plus grand que $3$. Une différence de $-11$, c'est onze buts de plus encaissés que marqués.",
           schema: axeVertical(-12, 8, 2, [
@@ -399,6 +450,14 @@ export const exercicesRelatifNombre5e: FicheExercicesData = {
         },
         {
           enonce: "Sur cette droite graduée, l'unité est partagée en cinq.\na) Combien vaut une graduation ?\nb) Lis l'abscisse des points K, L, M et N.\nc) Le point P a pour abscisse l'opposé de celle de L. Où est-il ?",
+          reponses: [
+            { question: "a)", attendu: "0,2" },
+            { question: "b) K", attendu: "-0,6" },
+            { question: "b) L", attendu: "0,4" },
+            { question: "b) M", attendu: "-0,2" },
+            { question: "b) N", attendu: "0,8" },
+            { question: "c)", attendu: "-0,4" },
+          ],
           figure: droiteRel(-1, 1, 0.2, [
             { value: -0.6, label: "K" },
             { value: -0.2, label: "M" },
@@ -424,6 +483,12 @@ export const exercicesRelatifNombre5e: FicheExercicesData = {
         {
           enonce:
             "Vrai ou faux ? Justifie avec la droite graduée ou avec un exemple.\na) $-12 < -10$.\nb) Un nombre négatif est toujours plus petit qu'un nombre positif.\nc) L'opposé d'un nombre est toujours négatif.\nd) Deux nombres qui ont la même distance à zéro sont égaux.",
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: ["oui", "vrai"] },
+            { question: "c)", attendu: ["non", "faux"] },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) Vrai. $-12$ est plus loin de zéro que $-10$, à gauche : il est plus petit.\nb) Vrai. Un négatif est à gauche de zéro, un positif à droite : le positif est toujours plus à droite.\nc) Faux. Contre-exemple : l'opposé de $-4$ est $4$, qui est positif.\nd) Faux. Contre-exemple : $5$ et $-5$ sont tous les deux à $5$ unités de zéro, mais ils ne sont pas égaux : ils sont opposés.\n⛔ Le piège du c) : croire que « opposé » veut dire « négatif ». L'opposé change le côté, dans un sens comme dans l'autre.\nRéponse : a) vrai ; b) vrai ; c) faux ; d) faux.",
           schema: ecranSeulement(
@@ -439,6 +504,13 @@ export const exercicesRelatifNombre5e: FicheExercicesData = {
         {
           enonce:
             "Sur une frise chronologique, on compte les années à partir de la naissance de Jésus-Christ. Une date « avant J.-C. » s'écrit avec un nombre négatif.\nPremiers Jeux olympiques antiques : $776$ av. J.-C.\nBataille d'Alésia : $52$ av. J.-C.\nFin de l'Empire romain d'Occident : $476$.\nCouronnement de Charlemagne : $800$.\na) Écris chaque date avec un nombre relatif.\nb) Range les quatre événements du plus ancien au plus récent.\nc) Quel événement est le plus proche de zéro sur la frise ?",
+          reponses: [
+            { question: "a) JO", attendu: "-776" },
+            { question: "a) Alés.", attendu: "-52" },
+            { question: "a) Emp.", attendu: "476" },
+            { question: "a) Char.", attendu: "800" },
+            { question: "c)", attendu: ["Alésia", "la bataille d'Alésia", "bataille d'Alésia"] },
+          ],
           correction:
             "a) Avant J.-C. : négatif. Les Jeux olympiques : $-776$. Alésia : $-52$. Après J.-C. : positif. Fin de l'Empire romain d'Occident : $476$. Charlemagne : $800$.\nb) Le plus ancien est le plus à gauche sur la frise, c'est-à-dire le plus petit nombre.\nEntre $-776$ et $-52$ : $-776$ est plus loin de zéro, il est plus petit. Les Jeux olympiques sont donc plus anciens qu'Alésia.\n$-776 < -52 < 476 < 800$.\nc) Je compare les distances à zéro : $776$ ; $52$ ; $476$ ; $800$. La plus petite est $52$.\n⛔ Le piège : ranger Alésia avant les Jeux olympiques parce que $52 < 776$. Avant J.-C., plus le nombre est grand, plus c'est ANCIEN.\nRéponse : b) les Jeux olympiques, Alésia, la fin de l'Empire romain, Charlemagne ; c) la bataille d'Alésia.",
           schema: droiteRel(-1000, 1000, 250, [
@@ -451,6 +523,9 @@ export const exercicesRelatifNombre5e: FicheExercicesData = {
         },
         {
           enonce: "Range ces nombres dans l'ordre décroissant.\n$-3{,}05$ ; $-3{,}5$ ; $-3$ ; $-3{,}45$ ; $-3{,}4$",
+          reponses: [
+            { attendu: ["-3 > -3,05 > -3,4 > -3,45 > -3,5", "-3 ; -3,05 ; -3,4 ; -3,45 ; -3,5"], exact: true },
+          ],
           correction:
             "Ce sont cinq négatifs. Le plus grand est le plus proche de zéro : je compare leurs distances à zéro.\nLes distances : $3{,}05$ ; $3{,}5$ ; $3$ ; $3{,}45$ ; $3{,}4$.\nJe les range de la plus petite à la plus grande : $3 < 3{,}05 < 3{,}4 < 3{,}45 < 3{,}5$. Pour comparer $3{,}05$ et $3{,}5$, j'écris $3{,}50$ : $5$ centièmes contre $50$ centièmes.\nLa plus petite distance donne le plus grand nombre.\n⛔ Le piège : croire que $-3{,}05$ est plus petit que $-3{,}5$ parce qu'il « a plus de chiffres ». $-3{,}05$ est plus proche de zéro : il est plus grand.\nRéponse : $-3 > -3{,}05 > -3{,}4 > -3{,}45 > -3{,}5$.",
           schema: droiteRel(-3.6, -2.9, 0.05, [
@@ -465,6 +540,10 @@ export const exercicesRelatifNombre5e: FicheExercicesData = {
         {
           enonce:
             "a) Écris tous les nombres entiers relatifs compris entre $-4{,}5$ et $2{,}3$.\nb) Combien y en a-t-il ?\nc) Écris un nombre décimal compris entre $-1$ et $-0{,}9$.",
+          reponses: [
+            { question: "a)", attendu: "-4 ; -3 ; -2 ; -1 ; 0 ; 1 ; 2" },
+            { question: "b)", attendu: "7" },
+          ],
           correction:
             "a) Je place $-4{,}5$ et $2{,}3$ sur une droite graduée, puis je relève les entiers qui sont entre les deux.\n$-4{,}5$ est entre $-5$ et $-4$ : le premier entier à sa droite est $-4$.\n$2{,}3$ est entre $2$ et $3$ : le dernier entier à sa gauche est $2$.\nLes entiers : $-4$ ; $-3$ ; $-2$ ; $-1$ ; $0$ ; $1$ ; $2$.\nb) Il y en a $7$.\nc) Entre $-1$ et $-0{,}9$, j'écris les deux nombres avec deux chiffres après la virgule : $-1{,}00$ et $-0{,}90$. Le nombre $-0{,}95$ convient, et il y en a bien d'autres.\n⛔ Le piège : oublier $0$, ou commencer à $-5$. $-5$ est plus petit que $-4{,}5$ : il est en dehors.",
           schema: ecranSeulement(
@@ -500,6 +579,13 @@ export const exercicesRelatifNombre5e: FicheExercicesData = {
           titre: "Le tournoi de golf",
           enonce:
             "Au golf, on compte les coups par rapport au « par », le nombre de coups prévu. Un score de $-3$ veut dire trois coups de MOINS que prévu : c'est très bien. Le plus petit score gagne.\nVoici les scores de cinq joueuses à la fin d'un tournoi : Anna $-4$ ; Bérénice $+2$ ; Chloé $-1$ ; Daria $0$ ; Emma $-6$.\na) Classe les joueuses de la gagnante à la dernière.\nb) Quelle joueuse a joué exactement le nombre de coups prévu ?\nc) Parmi les autres, quelle joueuse est la plus proche du par ?\nd) Farah a un score opposé à celui de Bérénice. Écris son score, et dis à quelle place elle se glisse dans le classement.",
+          reponses: [
+            { question: "a)", attendu: ["Emma ; Anna ; Chloé ; Daria ; Bérénice", "Emma, Anna, Chloé, Daria, Bérénice"], exact: true },
+            { question: "b)", attendu: ["Daria"] },
+            { question: "c)", attendu: ["Chloé"] },
+            { question: "d) score", attendu: "-2" },
+            { question: "d) place", attendu: ["3", "3e", "troisième"] },
+          ],
           correction:
             "a) Le plus petit score gagne : je range dans l'ordre croissant.\n$-6 < -4 < -1 < 0 < +2$ : Emma, Anna, Chloé, Daria, Bérénice.\nb) Le nombre de coups prévu, c'est un score de $0$ : c'est Daria.\nc) La plus proche du par a la plus petite distance à zéro, sans compter Daria : Emma $6$, Anna $4$, Chloé $1$, Bérénice $2$. C'est Chloé.\nd) L'opposé de $+2$ est $-2$. Or $-4 < -2 < -1$ : Farah se glisse entre Anna et Chloé, à la troisième place.\n⛔ Le piège du c) : répondre Bérénice parce que $+2$ est « le plus petit nombre sans moins ». On compare les distances à zéro : $1$ est plus petit que $2$.",
           schema: table(["joueuse", "score", "écart au par"], [
@@ -516,6 +602,12 @@ export const exercicesRelatifNombre5e: FicheExercicesData = {
           titre: "L'ascenseur",
           enonce:
             "Dans un immeuble, les étages vont du troisième sous-sol, l'étage $-3$, au huitième étage, l'étage $+8$. Le rez-de-chaussée est l'étage $0$.\nSamir prend l'ascenseur au deuxième sous-sol. Il monte de $6$ étages, puis il redescend de $7$ étages.\na) À quel étage arrive-t-il après la montée ? Et à la fin ?\nb) Son amie Inès habite à l'étage opposé à l'étage de départ de Samir. Quel est cet étage ?\nc) À la fin, qui est le plus loin du rez-de-chaussée : Samir ou Inès ?",
+          reponses: [
+            { question: "a) mont.", attendu: "4" },
+            { question: "a) fin", attendu: "-3" },
+            { question: "b)", attendu: "2" },
+            { question: "c)", attendu: ["Samir"] },
+          ],
           correction:
             "a) Je compte les étages un par un sur l'axe, sans oublier le rez-de-chaussée.\nDépart : $-2$. Six étages vers le haut : $-1$, $0$, $1$, $2$, $3$, $4$. Après la montée, Samir est au quatrième étage, l'étage $4$.\nSept étages vers le bas depuis $4$ : $3$, $2$, $1$, $0$, $-1$, $-2$, $-3$. À la fin, il est au troisième sous-sol, l'étage $-3$.\nb) L'opposé de $-2$ est $2$ : Inès habite au deuxième étage.\nc) Samir est à $3$ étages du rez-de-chaussée, Inès à $2$ étages. Samir est le plus loin.\n⛔ Le piège : oublier le rez-de-chaussée en comptant, et arriver au troisième étage au lieu du quatrième. L'étage $0$ est un étage comme les autres.",
           schema: axeVertical(-3, 8, 1, [
@@ -533,6 +625,11 @@ export const exercicesRelatifNombre5e: FicheExercicesData = {
           titre: "Le nombre mystère",
           enonce:
             "Je suis un nombre relatif écrit avec un seul chiffre après la virgule.\nIndice 1 : je suis négatif.\nIndice 2 : ma distance à zéro est strictement comprise entre $3$ et $4$.\nIndice 3 : je suis plus grand que $-3{,}3$.\nIndice 4 : mon chiffre des dixièmes est pair.\na) Écris tous les nombres qui respectent les indices 1 et 2.\nb) Garde ceux qui respectent aussi l'indice 3.\nc) Qui suis-je ?",
+          reponses: [
+            { question: "a)", attendu: "-3,9 ; -3,8 ; -3,7 ; -3,6 ; -3,5 ; -3,4 ; -3,3 ; -3,2 ; -3,1" },
+            { question: "b)", attendu: "-3,2 ; -3,1" },
+            { question: "c)", attendu: "-3,2" },
+          ],
           correction:
             "a) Négatif, avec une distance à zéro entre $3$ et $4$ : je suis entre $-4$ et $-3$, sans être ni l'un ni l'autre. Avec un seul chiffre après la virgule : $-3{,}9$ ; $-3{,}8$ ; $-3{,}7$ ; $-3{,}6$ ; $-3{,}5$ ; $-3{,}4$ ; $-3{,}3$ ; $-3{,}2$ ; $-3{,}1$.\nb) Plus grand que $-3{,}3$ : plus à droite que $-3{,}3$ sur la droite graduée, donc plus proche de zéro. Il reste $-3{,}2$ et $-3{,}1$. ($-3{,}3$ lui-même n'est pas plus grand que $-3{,}3$.)\nc) Le chiffre des dixièmes de $-3{,}2$ est $2$, pair ; celui de $-3{,}1$ est $1$, impair.\nRéponse : je suis $-3{,}2$.\n⛔ Le piège : garder $-3{,}4$ au b) parce que « $4$ est plus grand que $3$ ». Pour des négatifs, plus grand veut dire plus proche de zéro.",
           schema: droiteRel(-4, -3, 0.1, [
@@ -546,6 +643,17 @@ export const exercicesRelatifNombre5e: FicheExercicesData = {
           titre: "La coupe d'une île",
           enonce:
             "Voici une petite île vue en coupe : le sommet est à $320$ m au-dessus de la mer, le phare à $35$ m au-dessus, la plage au niveau de la mer, un récif à $8$ m sous la mer et une épave à $45$ m sous la mer.\na) Écris chaque altitude avec un nombre relatif.\nb) Range-les de la plus basse à la plus haute.\nc) Léo affirme : « $-45$ est plus grand que $-8$, puisque $45$ est plus grand que $8$. » Explique son erreur.\nd) Une plongeuse descend à une profondeur égale à la hauteur du phare. Écris son altitude. Est-elle plus bas que le récif ? Que l'épave ?",
+          reponses: [
+            { question: "a) som.", attendu: "320" },
+            { question: "a) phare", attendu: "35" },
+            { question: "a) plage", attendu: "0" },
+            { question: "a) récif", attendu: "-8" },
+            { question: "a) épave", attendu: "-45" },
+            { question: "b)", attendu: ["-45 < -8 < 0 < 35 < 320", "-45 ; -8 ; 0 ; 35 ; 320"], exact: true },
+            { question: "d) alt.", attendu: "-35" },
+            { question: "d) récif", attendu: ["oui", "vrai"] },
+            { question: "d) épave", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) Au-dessus de la mer : positif ; au-dessous : négatif. Sommet $+320$ m ; phare $+35$ m ; plage $0$ m ; récif $-8$ m ; épave $-45$ m.\nb) De la plus basse à la plus haute, c'est l'ordre croissant : $-45 < -8 < 0 < 35 < 320$.\nc) Léo compare les distances à zéro, pas les nombres. L'épave, à $45$ m sous la mer, est plus BAS que le récif : $-45 < -8$. Pour des négatifs, le plus loin de zéro est le plus petit.\nd) Elle descend de $35$ m sous la mer : son altitude est $-35$ m, l'opposé de celle du phare.\n$-35 < -8$ : elle est plus bas que le récif. $-35 > -45$ : elle est moins bas que l'épave.\n⭐ Contrôle sur l'axe : la plongeuse est entre le récif et l'épave.",
           schema: axeVertical(-100, 350, 50, [

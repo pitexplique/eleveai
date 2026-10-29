@@ -196,6 +196,9 @@ export const exercicesPropProportionnalite6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Voici le prix d'entrée d'un musée selon le nombre de visiteurs. Le prix est-il proportionnel au nombre de visiteurs ?",
+          reponses: [
+            { attendu: ["oui"] },
+          ],
           figure: tableau(["Visiteurs", "2", "4", "5"], ["Prix (€)", "14", "28", "35"], true),
           correction:
             "Je divise chaque prix par le nombre de visiteurs.\n$14 \\div 2 = 7$ ; $28 \\div 4 = 7$ ; $35 \\div 5 = 7$.\nLes trois résultats sont égaux : c'est proportionnel.\nLe coefficient est $7$ : une entrée coûte $7$ €.\n⛔ Le piège : ne vérifier que la première colonne. Il faut vérifier TOUTES les colonnes.\nRéponse : oui, c'est proportionnel, avec le coefficient $7$.",
@@ -204,6 +207,9 @@ export const exercicesPropProportionnalite6e: FicheExercicesData = {
         },
         {
           enonce: "Un glacier affiche ses prix. Le prix est-il proportionnel au nombre de boules ?",
+          reponses: [
+            { attendu: ["non"] },
+          ],
           figure: tableau(["Boules", "1", "2", "3"], ["Prix (€)", "2", "3,50", "5"], true),
           correction:
             "Je regarde ce qui se passe quand le nombre de boules double : de $1$ à $2$ boules.\nSi c'était proportionnel, le prix doublerait aussi : $2 \\times 2 = 4$ €.\nOr $2$ boules coûtent $3{,}50$ €, pas $4$ €.\nPour $3$ boules, ce serait $3 \\times 2 = 6$ €. Or le prix est $5$ €.\n⛔ Le piège : « le prix monte avec les boules, donc c'est proportionnel ». Il monte, mais il ne double pas.\nRéponse : non, ce n'est pas proportionnel.",
@@ -216,6 +222,10 @@ export const exercicesPropProportionnalite6e: FicheExercicesData = {
         },
         {
           enonce: "La farine est proportionnelle au nombre de gâteaux. Complète le tableau avec les colonnes déjà remplies, sans chercher la farine d'un seul gâteau.",
+          reponses: [
+            { question: "5", attendu: "750" },
+            { question: "10", attendu: "1500" },
+          ],
           figure: tableau(["Gâteaux", "2", "3", "5", "10"], ["Farine (g)", "300", "450", "?", "?"], true),
           correction:
             "$5$ gâteaux, c'est $2$ gâteaux plus $3$ gâteaux. J'additionne les deux colonnes : $300 + 450 = 750$.\n$10$ gâteaux, c'est le double de $5$ gâteaux : $2 \\times 750 = 1\\,500$.\n⭐ Contrôle : un gâteau demande $300 \\div 2 = 150$ g, et $10 \\times 150 = 1\\,500$.\n⛔ Le piège : voir « $2$ gâteaux de plus » entre $3$ et $5$, et ajouter $2$ g. J'ajoute des GÂTEAUX, pas des grammes.\nRéponse : $750$ g et $1\\,500$ g.",
@@ -224,6 +234,10 @@ export const exercicesPropProportionnalite6e: FicheExercicesData = {
         },
         {
           enonce: "$3$ paquets de biscuits contiennent $24$ biscuits. Tous les paquets sont pareils.\na) Calcule le coefficient qui fait passer des paquets aux biscuits. Que veut dire ce nombre ?\nb) Combien de biscuits dans $5$ paquets ? Dans $7$ paquets ?",
+          reponses: [
+            { question: "a)", attendu: "8" },
+            { question: "b)", attendu: "40 ; 56" },
+          ],
           correction:
             "a) Je divise les biscuits par les paquets : $24 \\div 3 = 8$.\nLe coefficient est $8$ : il y a $8$ biscuits dans UN paquet.\nb) Je multiplie par $8$ : $5 \\times 8 = 40$ et $7 \\times 8 = 56$.\n⛔ Le piège : diviser dans l'autre sens, $3 \\div 24$. Je cherche des biscuits PAR paquet : les biscuits sont en premier.\nRéponse : le coefficient est $8$ ; $40$ biscuits et $56$ biscuits.",
           schema: ecranSeulement(tableauCoef(["Paquets", "Biscuits"], ["3", "5", "7"], ["24", "!40", "!56"], "8")),
@@ -231,6 +245,9 @@ export const exercicesPropProportionnalite6e: FicheExercicesData = {
         },
         {
           enonce: "$6$ bouteilles de lait coûtent $9$ €. Elles ont toutes le même prix. Combien coûtent $10$ bouteilles ?",
+          reponses: [
+            { attendu: "15" },
+          ],
           correction:
             "Je passe par l'unité : le prix d'UNE bouteille.\n$9 \\div 6 = 1{,}50$ : une bouteille coûte $1{,}50$ €.\nPour $10$ bouteilles : $10 \\times 1{,}50 = 15$.\n⭐ Contrôle : $10$ bouteilles, c'est un peu moins que $12$, le double de $6$. Le prix doit être un peu moins que $18$ €.\n⛔ Le piège : « $4$ bouteilles de plus, donc $4$ € de plus », et répondre $13$ €. J'ajoute $4$ bouteilles à $1{,}50$ € chacune.\nRéponse : $10$ bouteilles coûtent $15$ €.",
           schema: partage("9 €", 6, "1,50 €"),
@@ -238,6 +255,9 @@ export const exercicesPropProportionnalite6e: FicheExercicesData = {
         },
         {
           enonce: "Inès fabrique des bracelets, tous pareils. Pour $3$ bracelets, elle utilise $45$ perles. Combien de perles lui faut-il pour $7$ bracelets ?",
+          reponses: [
+            { attendu: "105" },
+          ],
           correction:
             "Je cherche d'abord les perles d'UN bracelet : $45 \\div 3 = 15$.\nPuis pour $7$ bracelets : $7 \\times 15 = 105$.\n⭐ Contrôle : $7$ bracelets, c'est un peu plus que le double de $3$. Il faut un peu plus que $90$ perles.\n⛔ Le piège : ajouter $4$ perles parce qu'il y a $4$ bracelets de plus.\nRéponse : il lui faut $105$ perles.",
           schema: ecranSeulement(tableauCoef(["Bracelets", "Perles"], ["3", "1", "7"], ["45", "!15", "!105"], "15")),
@@ -245,6 +265,10 @@ export const exercicesPropProportionnalite6e: FicheExercicesData = {
         },
         {
           enonce: "Toutes les caisses de pommes pèsent la même masse. Complète les deux cases vides.",
+          reponses: [
+            { question: "caisses", attendu: "5" },
+            { question: "kg", attendu: "144" },
+          ],
           figure: tableau(["Caisses", "2", "?", "8"], ["Pommes (kg)", "36", "90", "?"], true),
           correction:
             "La première colonne est complète : $36 \\div 2 = 18$. Le coefficient est $18$ : une caisse pèse $18$ kg.\nDernière colonne : je DESCENDS des caisses vers les kilogrammes, je multiplie. $8 \\times 18 = 144$.\nDeuxième colonne : je REMONTE des kilogrammes vers les caisses, je divise. $90 \\div 18 = 5$.\n⭐ Contrôle : $5 \\times 18 = 90$.\n⛔ Le piège : multiplier aussi pour remonter. Pour remonter, je divise.\nRéponse : $5$ caisses et $144$ kg.",
@@ -253,6 +277,9 @@ export const exercicesPropProportionnalite6e: FicheExercicesData = {
         },
         {
           enonce: "$3$ tickets de manège coûtent $7{,}50$ €. Sans chercher le prix d'un ticket, trouve le prix de $6$ tickets, de $9$ tickets, puis de $12$ tickets.",
+          reponses: [
+            { attendu: "15 ; 22,5 ; 30" },
+          ],
           correction:
             "$6$ tickets, c'est $2$ fois $3$ tickets : $2 \\times 7{,}50 = 15$.\n$9$ tickets, c'est $3$ fois $3$ tickets : $3 \\times 7{,}50 = 22{,}50$.\n$12$ tickets, c'est $4$ fois $3$ tickets : $4 \\times 7{,}50 = 30$.\n⭐ Autre chemin : $12$ tickets, c'est $6 + 6$, et $15 + 15 = 30$.\n⛔ Le piège : ajouter $3$ € à chaque fois qu'on ajoute $3$ tickets.\nRéponse : $15$ €, $22{,}50$ € et $30$ €.",
           schema: ecranSeulement(tableauCoef(["Tickets", "Prix (€)"], ["3", "6", "9", "12"], ["7,50", "!15", "!22,50", "!30"], "2,5")),
@@ -274,6 +301,11 @@ export const exercicesPropProportionnalite6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Pour louer un vélo, il y a deux tarifs.\nTarif A : $4$ € par heure.\nTarif B : $5$ € pour le casque, puis $3$ € par heure.\na) Complète le tableau.\nb) Quel tarif est proportionnel à la durée ?\nc) Quel tarif choisir pour $4$ h ? Pour $6$ h ?",
+          reponses: [
+            { question: "b)", attendu: ["A", "tarif A", "le tarif A"] },
+            { question: "c) 4 h", attendu: ["A", "tarif A", "le tarif A"] },
+            { question: "c) 6 h", attendu: ["B", "tarif B", "le tarif B"] },
+          ],
           figure: table(["Durée", "Tarif A (€)", "Tarif B (€)"], [
             ["1 h", "?", "?"],
             ["2 h", "?", "?"],
@@ -292,6 +324,10 @@ export const exercicesPropProportionnalite6e: FicheExercicesData = {
         },
         {
           enonce: "Voici une recette de soupe pour $4$ personnes. Calcule les quantités pour $6$ personnes, puis pour $10$ personnes.",
+          reponses: [
+            { question: "6 pers.", attendu: "12 ; 3 ; 1,5" },
+            { question: "10 pers.", attendu: "20 ; 5 ; 2,5" },
+          ],
           figure: table(["Ingrédient", "4 personnes"], [
             ["Carottes", "8"],
             ["Poireaux", "2"],
@@ -308,6 +344,9 @@ export const exercicesPropProportionnalite6e: FicheExercicesData = {
         },
         {
           enonce: "Pour $2$ tartes aux pommes, il faut $6$ pommes. Tom écrit : « $5$ tartes, c'est $3$ tartes de plus. Donc il faut $3$ pommes de plus : $9$ pommes. »\na) Explique son erreur.\nb) Combien faut-il de pommes pour $5$ tartes ?",
+          reponses: [
+            { question: "b)", attendu: "15" },
+          ],
           correction:
             "a) Tom ajoute le même nombre en haut et en bas. Quand c'est proportionnel, on MULTIPLIE, on n'ajoute pas le même nombre.\nb) Une tarte demande $6 \\div 2 = 3$ pommes.\nPour $5$ tartes : $5 \\times 3 = 15$ pommes.\n⭐ Contrôle avec l'idée de Tom, corrigée : $3$ tartes de plus, c'est $3 \\times 3 = 9$ pommes de plus. Et $6 + 9 = 15$.\n⛔ Le piège : ajouter $3$ TARTES en haut, ce n'est pas ajouter $3$ POMMES en bas.\nRéponse : il faut $15$ pommes.",
           schema: ecranSeulement(tableauCoef(["Tartes", "Pommes"], ["2", "1", "5"], ["6", "!3", "!15"], "3")),
@@ -315,6 +354,9 @@ export const exercicesPropProportionnalite6e: FicheExercicesData = {
         },
         {
           enonce: "Au magasin, un paquet de gâteaux de $200$ g coûte $1{,}50$ €. Un paquet de $500$ g coûte $3{,}50$ €. Lequel est le moins cher, pour la même masse ?",
+          reponses: [
+            { attendu: ["500 g", "le paquet de 500 g", "le grand paquet", "le grand"] },
+          ],
           correction:
             "Je ne peux pas comparer $1{,}50$ € et $3{,}50$ € : les masses ne sont pas les mêmes.\nJe cherche le prix de $100$ g dans chaque paquet.\nPetit paquet : $200$ g, c'est $2$ fois $100$ g. $1{,}50 \\div 2 = 0{,}75$ €.\nGrand paquet : $500$ g, c'est $5$ fois $100$ g. $3{,}50 \\div 5 = 0{,}70$ €.\n$0{,}70$ € est moins que $0{,}75$ € : le grand paquet est moins cher.\n⛔ Le piège : choisir le petit paquet « parce qu'il coûte moins ». Il coûte moins, mais il contient moins.\nRéponse : le paquet de $500$ g est le moins cher.",
           schema: table(["Paquet", "Prix", "Prix de 100 g"], [
@@ -325,6 +367,11 @@ export const exercicesPropProportionnalite6e: FicheExercicesData = {
         },
         {
           enonce: "On accroche des masses à un ressort. L'allongement du ressort est proportionnel à la masse.\na) Trouve l'allongement pour $300$ g, puis pour $50$ g.\nb) Le ressort s'allonge de $7$ cm. Quelle masse a-t-on accrochée ?",
+          reponses: [
+            { question: "a) 300 g", attendu: "6" },
+            { question: "a) 50 g", attendu: "1" },
+            { question: "b)", attendu: "350" },
+          ],
           figure: tableau(["Masse (g)", "100", "300", "50", "?"], ["Allongement (cm)", "2", "?", "?", "7"], true),
           correction:
             "a) $300$ g, c'est $3$ fois $100$ g : $3 \\times 2 = 6$ cm.\n$50$ g, c'est la moitié de $100$ g : $2 \\div 2 = 1$ cm.\nb) $7$ cm, c'est $6$ cm plus $1$ cm. J'additionne les deux colonnes : $300 + 50 = 350$ g.\n⭐ Contrôle : $350$ g, c'est $3{,}5$ fois $100$ g, et $3{,}5 \\times 2 = 7$ cm.\n⛔ Le piège : additionner deux colonnes, mais pas les bonnes. Je cherche celles dont les allongements font $7$.\nRéponse : $6$ cm ; $1$ cm ; $350$ g.",
@@ -338,6 +385,11 @@ export const exercicesPropProportionnalite6e: FicheExercicesData = {
         },
         {
           enonce: "$2$ kg de bananes coûtent $3{,}60$ €.\na) Quel est le prix d'un kilogramme ? C'est le coefficient.\nb) Combien coûtent $3$ kg ? Et $5$ kg ?\nc) Avec $9$ €, combien de kilogrammes de bananes peut-on acheter ?",
+          reponses: [
+            { question: "a)", attendu: "1,8" },
+            { question: "b)", attendu: "5,4 ; 9" },
+            { question: "c)", attendu: "5" },
+          ],
           correction:
             "a) Je passe à l'unité : $3{,}60 \\div 2 = 1{,}80$. Un kilogramme coûte $1{,}80$ €.\nb) $3 \\times 1{,}80 = 5{,}40$ € et $5 \\times 1{,}80 = 9$ €.\nc) $9$ €, c'est le prix de $5$ kg : je l'ai trouvé au b).\n⭐ Autre chemin : je remonte des euros vers les kilogrammes, je divise. $9 \\div 1{,}80 = 5$.\n⛔ Le piège : prendre $3{,}60$ € pour le prix d'un kilogramme. C'est le prix de $2$ kg.\nRéponse : $1{,}80$ € ; $5{,}40$ € et $9$ € ; $5$ kg.",
           schema: ecranSeulement(tableauCoef(["Bananes (kg)", "Prix (€)"], ["2", "1", "3", "5"], ["3,60", "!1,80", "!5,40", "!9"], "1,8")),
@@ -345,6 +397,12 @@ export const exercicesPropProportionnalite6e: FicheExercicesData = {
         },
         {
           enonce: "Un escargot avance toujours à la même allure : $6$ cm en $4$ minutes (un modèle).\na) De combien avance-t-il en $1$ minute ?\nb) En $10$ minutes ?\nc) En $1$ heure ? Donne la réponse en cm, puis en m.",
+          reponses: [
+            { question: "a)", attendu: "1,5" },
+            { question: "b)", attendu: "15" },
+            { question: "c) cm", attendu: "90" },
+            { question: "c) m", attendu: "0,9" },
+          ],
           correction:
             "a) Je passe à l'unité : $6 \\div 4 = 1{,}5$. Il avance de $1{,}5$ cm en une minute.\nb) $10 \\times 1{,}5 = 15$ cm.\nc) $1$ heure, c'est $60$ minutes. $60 \\times 1{,}5 = 90$ cm.\nEt $90$ cm $= 0{,}9$ m : moins d'un mètre en une heure !\n⛔ Le piège du c) : calculer avec $1$ au lieu de $60$. L'allure est donnée en MINUTES : je mets l'heure en minutes.\nRéponse : $1{,}5$ cm ; $15$ cm ; $90$ cm, soit $0{,}9$ m.",
           schema: ecranSeulement(tableauCoef(["Durée (min)", "Distance (cm)"], ["4", "1", "10", "60"], ["6", "!1,5", "!15", "!90"], "1,5")),
@@ -352,6 +410,11 @@ export const exercicesPropProportionnalite6e: FicheExercicesData = {
         },
         {
           enonce: "Un jardinier tond une pelouse en $60$ minutes. Léna dit : « Avec $2$ jardiniers, il faudra $120$ minutes. C'est proportionnel ! »\na) A-t-elle raison ?\nb) Les jardiniers travaillent au même rythme. Combien de temps faut-il à $2$ jardiniers ? À $3$ jardiniers ?",
+          reponses: [
+            { question: "a)", attendu: ["non", "faux"] },
+            { question: "b) 2", attendu: "30" },
+            { question: "b) 3", attendu: "20" },
+          ],
           correction:
             "a) Non. Avec plus de jardiniers, on va plus VITE : le temps diminue, il ne double pas.\nb) À $2$, chacun tond la moitié de la pelouse : $60 \\div 2 = 30$ minutes.\nÀ $3$, chacun tond un tiers : $60 \\div 3 = 20$ minutes.\nQuand les jardiniers doublent, le temps est divisé par $2$ : ce n'est pas proportionnel.\n⛔ Le piège : « plus de jardiniers, donc plus de temps ». Je me demande toujours si le résultat a du sens.\nRéponse : Léna a tort ; $30$ minutes à $2$, $20$ minutes à $3$.",
           schema: table(["Jardiniers", "Durée"], [
@@ -378,6 +441,12 @@ export const exercicesPropProportionnalite6e: FicheExercicesData = {
         {
           titre: "Le pique-nique",
           enonce: "La classe prépare un pique-nique : un sandwich pour chacun des $28$ élèves. Pour $4$ sandwichs, il faut $1$ baguette et $100$ g de fromage.\na) Combien de baguettes faut-il ?\nb) Quelle masse de fromage faut-il ?\nc) Une baguette coûte $1{,}10$ €. Le fromage coûte $1{,}50$ € les $100$ g. Quel est le prix total ?\nd) Combien cela coûte-t-il par élève ?",
+          reponses: [
+            { question: "a)", attendu: "7" },
+            { question: "b)", attendu: "700" },
+            { question: "c)", attendu: "18,2" },
+            { question: "d)", attendu: "0,65" },
+          ],
           correction:
             "a) $28$ sandwichs, c'est $7$ fois $4$ sandwichs : $28 \\div 4 = 7$. Il faut $7$ baguettes.\nb) $7$ fois plus de fromage : $7 \\times 100 = 700$ g.\nc) Pain : $7 \\times 1{,}10 = 7{,}70$ €.\nFromage : $700$ g, c'est $7$ fois $100$ g. $7 \\times 1{,}50 = 10{,}50$ €.\nTotal : $7{,}70 + 10{,}50 = 18{,}20$ €.\nd) $18{,}20 \\div 28 = 0{,}65$ €.\n⭐ Le nombre $7$ sert partout : il y a $7$ fois plus de sandwichs, donc $7$ fois plus de tout.\n⛔ Le piège : oublier que le fromage est vendu par $100$ g, et multiplier $700$ par $1{,}50$.\nRéponse : $7$ baguettes ; $700$ g ; $18{,}20$ € ; $0{,}65$ € par élève.",
           schema: tableauCoef(["Sandwichs", "Fromage (g)"], ["4", "28"], ["100", "!700"], "25"),
@@ -386,6 +455,11 @@ export const exercicesPropProportionnalite6e: FicheExercicesData = {
         {
           titre: "La roue du vélo",
           enonce: "Quand la roue du vélo de Sami fait un tour, le vélo avance de $2$ m.\na) De combien avance le vélo en $10$ tours ? En $50$ tours ? En $500$ tours ?\nb) Combien de tours de roue pour faire $1$ km ?\nc) Un soir, la roue a fait $3\\,500$ tours. Quelle distance Sami a-t-il parcourue, en km ?",
+          reponses: [
+            { question: "a)", attendu: "20 ; 100 ; 1000" },
+            { question: "b)", attendu: "500" },
+            { question: "c)", attendu: "7" },
+          ],
           correction:
             "a) Le coefficient est $2$ : je multiplie les tours par $2$.\n$10 \\times 2 = 20$ m ; $50 \\times 2 = 100$ m ; $500 \\times 2 = 1\\,000$ m.\nb) $1$ km $= 1\\,000$ m. C'est la réponse du a) : il faut $500$ tours.\nc) $3\\,500 \\times 2 = 7\\,000$ m, soit $7$ km.\n⛔ Le piège du b) : chercher « $1$ km » sans le convertir en mètres. Le coefficient est en mètres.\nRéponse : $20$ m, $100$ m, $1\\,000$ m ; $500$ tours ; $7$ km.",
           schema: tableauCoef(["Tours", "Distance (m)"], ["1", "10", "50", "500", "3 500"], ["2", "!20", "!100", "!1 000", "!7 000"], "2"),
@@ -394,6 +468,11 @@ export const exercicesPropProportionnalite6e: FicheExercicesData = {
         {
           titre: "Le plein d'essence",
           enonce: "À la station, l'essence coûte $1{,}80$ € le litre (un modèle).\na) Combien coûtent $10$ L ? Et $45$ L ?\nb) Avec $27$ €, combien de litres peut-on mettre ?\nc) La voiture consomme $5$ L pour faire $100$ km. Avec les litres du b), combien de kilomètres peut-elle faire ?",
+          reponses: [
+            { question: "a)", attendu: "18 ; 81" },
+            { question: "b)", attendu: "15" },
+            { question: "c)", attendu: "300" },
+          ],
           correction:
             "a) Le coefficient est $1{,}80$ : le prix d'UN litre.\n$10 \\times 1{,}80 = 18$ € et $45 \\times 1{,}80 = 81$ €.\nb) Je remonte des euros vers les litres : je divise. $27 \\div 1{,}80 = 15$ L.\n⭐ Contrôle : $15 \\times 1{,}80 = 27$.\nc) $15$ L, c'est $3$ fois $5$ L. La voiture roule $3$ fois $100$ km : $3 \\times 100 = 300$ km.\n⛔ Le piège du b) : multiplier $27$ par $1{,}80$. Je cherche des litres : je divise.\nRéponse : $18$ € et $81$ € ; $15$ L ; $300$ km.",
           schema: tableauCoef(["Essence (L)", "Prix (€)"], ["1", "10", "45", "!15"], ["1,80", "!18", "!81", "27"], "1,8"),
@@ -402,6 +481,14 @@ export const exercicesPropProportionnalite6e: FicheExercicesData = {
         {
           titre: "La salle d'escalade",
           enonce: "Une salle d'escalade propose deux tarifs.\nTarif A : $8$ € la séance.\nTarif B : une carte à $30$ €, puis $5$ € la séance.\na) Combien coûtent $5$ séances avec chaque tarif ?\nb) Quel tarif est proportionnel au nombre de séances ?\nc) Calcule le prix de $8$, $10$ et $12$ séances avec chaque tarif.\nd) À partir de combien de séances le tarif B devient-il moins cher ?",
+          reponses: [
+            { question: "a) A", attendu: "40" },
+            { question: "a) B", attendu: "55" },
+            { question: "b)", attendu: ["A", "tarif A", "le tarif A"] },
+            { question: "c) A", attendu: "64 ; 80 ; 96" },
+            { question: "c) B", attendu: "70 ; 80 ; 90" },
+            { question: "d)", attendu: "11" },
+          ],
           correction:
             "a) Tarif A : $5 \\times 8 = 40$ €. Tarif B : $30 + 5 \\times 5 = 55$ €.\nb) Le tarif A est proportionnel : je multiplie toujours par $8$. Le tarif B ne l'est pas : $0$ séance coûte déjà $30$ €.\nc) Tarif A : $8 \\times 8 = 64$ ; $10 \\times 8 = 80$ ; $12 \\times 8 = 96$.\nTarif B : $30 + 8 \\times 5 = 70$ ; $30 + 10 \\times 5 = 80$ ; $30 + 12 \\times 5 = 90$.\nd) Pour $10$ séances, les deux coûtent $80$ €. J'essaie $11$ séances : A, $11 \\times 8 = 88$ € ; B, $30 + 11 \\times 5 = 85$ €.\nÀ partir de $11$ séances, B est moins cher.\n⛔ Le piège : croire que la carte est toujours une bonne affaire. Elle ne l'est que si on vient souvent.\nRéponse : $40$ € et $55$ € ; A ; B devient moins cher à partir de $11$ séances.",
           schema: table(["Séances", "A (€)", "B (€)"], [

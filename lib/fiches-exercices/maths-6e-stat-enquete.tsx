@@ -185,6 +185,9 @@ export const exercicesStatEnquete6e: FicheExercicesData = {
         {
           enonce:
             "Tu veux savoir combien de livres les élèves de ta classe lisent par mois. Voici les étapes, dans le désordre.\nA : ranger les réponses dans un tableau.\nB : poser la question à chaque élève.\nC : écrire la question exacte.\nD : lire le tableau pour conclure.\nRemets les étapes dans l'ordre.",
+          reponses: [
+            { attendu: ["C, B, A, D", "C B A D", "C-B-A-D"] },
+          ],
           correction:
             "Je me demande : qu'est-ce qui doit être prêt avant chaque étape ?\nPour poser la question, il faut d'abord l'écrire : C vient en premier.\nEnsuite, je pose la question à chaque élève : B.\nPuis je range les réponses dans un tableau : A.\nEnfin, je lis le tableau pour conclure : D.\n⛔ Le piège : commencer par le tableau ou le calcul. Sans question précise, les réponses ne se comptent pas.\nRéponse : C, B, A, D.",
           schema: etapes(["1. écrire la question", "2. poser la question", "3. ranger dans un tableau", "4. lire et conclure"]),
@@ -201,6 +204,9 @@ export const exercicesStatEnquete6e: FicheExercicesData = {
         {
           enonce:
             "Tu veux savoir comment les élèves viennent au collège. Quelle question choisir ? Explique.\nA : « Tu viens à pied, j'espère ? »\nB : « Comment viens-tu au collège : bus, vélo, à pied ou voiture ? »\nC : « Que penses-tu du bus ? »",
+          reponses: [
+            { attendu: ["B", "la question B", "question B"] },
+          ],
           correction:
             "Une bonne question donne des réponses courtes, qu'on peut compter.\nA souffle la réponse : « j'espère » pousse à dire « oui ».\nC donne une réponse différente pour chaque élève : impossible de les compter.\nB propose quatre réponses possibles. Chaque élève en choisit une.\nJe peux préparer mon tableau : une ligne par réponse.\n⛔ Le piège : une question qui oriente. Elle fausse toutes les réponses d'un coup.\nRéponse : la question B.",
           schema: ecranSeulement(
@@ -216,6 +222,9 @@ export const exercicesStatEnquete6e: FicheExercicesData = {
         {
           enonce:
             "Tu mesures la hauteur de quatre plants de tomates. Plant $1$ : $18$ cm. Plant $2$ : $25$ cm. Plant $3$ : $12$ cm. Plant $4$ : $30$ cm.\na) Range ces mesures dans un tableau à deux colonnes.\nb) Où écris-tu l'unité ?\nc) Quel plant est le plus haut ?",
+          reponses: [
+            { question: "c)", attendu: ["4", "plant 4", "le plant 4"] },
+          ],
           correction:
             "a) Une colonne dit QUEL plant. L'autre colonne donne sa hauteur.\nJ'écris une ligne par plant.\nb) J'écris l'unité une seule fois, en haut : « hauteur (cm) ».\nDans les cases, je n'écris que les nombres.\nc) Le plus grand nombre est $30$ : c'est le plant $4$.\n⛔ Le piège : répéter « cm » dans chaque case, ou l'oublier partout. Sans unité, $30$ ne veut rien dire.\nRéponse : c) le plant $4$, avec $30$ cm.",
           schema: grille(["plant", "hauteur (cm)"], [
@@ -229,6 +238,10 @@ export const exercicesStatEnquete6e: FicheExercicesData = {
         {
           enonce:
             "Lou pèse quatre pommes. Elle note : $150$ g ; $0{,}2$ kg ; $180$ g ; $0{,}12$ kg.\na) Quel est le problème ?\nb) Écris toutes les masses en grammes.\nc) Quelle pomme est la plus lourde ?",
+          reponses: [
+            { question: "b)", attendu: "150 ; 200 ; 180 ; 120" },
+            { question: "c)", attendu: ["2", "pomme 2", "la pomme 2"] },
+          ],
           correction:
             "a) Les masses ne sont pas dans la même unité : des grammes et des kilogrammes.\nOn ne peut pas les comparer comme ça.\nb) $1$ kg $= 1\\,000$ g.\n$0{,}2$ kg $= 200$ g. Et $0{,}12$ kg $= 120$ g.\nLes quatre masses : $150$ g, $200$ g, $180$ g, $120$ g.\nc) La plus grande est $200$ g : c'est la pomme $2$.\n⛔ Le piège : croire que $0{,}2$ est plus petit que $150$. Avant de comparer, je mets tout dans la même unité.\nRéponse : b) $150$ g, $200$ g, $180$ g, $120$ g ; c) la pomme $2$.",
           schema: ecranSeulement(
@@ -244,6 +257,9 @@ export const exercicesStatEnquete6e: FicheExercicesData = {
         {
           enonce:
             "$16$ élèves disent leur saison préférée : E pour été, H pour hiver, P pour printemps, A pour automne. Voici leurs réponses :\nE H E P A E H E P E A E H P E E\na) Range ces réponses dans un tableau d'effectifs.\nb) Vérifie ton total.\nc) Quelle est la saison préférée ?",
+          reponses: [
+            { question: "c)", attendu: ["été", "l'été"] },
+          ],
           correction:
             "a) Je fais une ligne par saison. Je lis la liste une seule fois.\nPour chaque lettre, je fais un trait dans la bonne ligne.\nÉté : $8$. Hiver : $3$. Printemps : $3$. Automne : $2$.\nb) $8 + 3 + 3 + 2 = 16$. C'est le nombre d'élèves : personne n'est oublié.\nc) Le plus grand effectif est $8$ : l'été.\n⛔ Le piège : relire la liste une fois pour chaque lettre. On en saute facilement une.\nRéponse : été $8$, hiver $3$, printemps $3$, automne $2$ ; l'été.",
           schema: grille(["saison", "traits", "effectif"], [
@@ -258,6 +274,12 @@ export const exercicesStatEnquete6e: FicheExercicesData = {
         {
           enonce:
             "Un glacier note les cornets vendus un samedi.\na) Combien de cornets à la fraise ?\nb) Quel parfum a vendu $41$ cornets ?\nc) Quel parfum s'est le moins vendu ?\nd) Combien de cornets à la vanille de plus qu'au citron ?",
+          reponses: [
+            { question: "a)", attendu: "27" },
+            { question: "b)", attendu: ["chocolat", "le chocolat"] },
+            { question: "c)", attendu: ["citron", "le citron"] },
+            { question: "d)", attendu: "16" },
+          ],
           figure: grille(["parfum", "cornets"], [
             ["vanille", "34"],
             ["chocolat", "41"],
@@ -271,6 +293,9 @@ export const exercicesStatEnquete6e: FicheExercicesData = {
         {
           enonce:
             "On a interrogé $30$ élèves sur l'instrument qu'ils voudraient apprendre. Le tableau est presque complet. Trouve l'effectif du violon.",
+          reponses: [
+            { attendu: "7" },
+          ],
           figure: grille(["instrument", "effectif"], [
             ["guitare", "11"],
             ["piano", "7"],
@@ -299,6 +324,10 @@ export const exercicesStatEnquete6e: FicheExercicesData = {
         {
           enonce:
             "$25$ élèves disent combien de livres ils ont lus pendant les vacances :\n2 0 1 3 1 2 0 4 1 2 1 0 3 2 1 1 2 0 1 3 2 1 4 1 2\na) Range ces réponses dans un tableau d'effectifs, de $0$ à $4$ livres.\nb) Vérifie ton total.\nc) Combien d'élèves ont lu au moins $2$ livres ?\nd) Combien d'élèves n'ont lu aucun livre ?",
+          reponses: [
+            { question: "c)", attendu: "12" },
+            { question: "d)", attendu: "4" },
+          ],
           correction:
             "a) Une ligne par réponse possible : $0$, $1$, $2$, $3$ et $4$ livres.\nJe lis la liste une fois, un trait par réponse.\n$0$ livre : $4$. $1$ livre : $9$. $2$ livres : $7$. $3$ livres : $3$. $4$ livres : $2$.\nb) $4 + 9 + 7 + 3 + 2 = 25$ : le compte est bon.\nc) « Au moins $2$ », c'est $2$, $3$ ou $4$ livres : $7 + 3 + 2 = 12$ élèves.\nd) C'est la ligne du $0$ : $4$ élèves.\n⛔ Le piège : oublier la ligne du $0$. Ces élèves ont répondu, ils comptent aussi.\nRéponse : c) $12$ élèves ; d) $4$ élèves.",
           schema: grille(["livres", "traits", "effectif"], [
@@ -314,6 +343,11 @@ export const exercicesStatEnquete6e: FicheExercicesData = {
         {
           enonce:
             "Chaque matin, la classe lit le pluviomètre du collège. Lundi : $4$ mm. Mardi : $0$ mm. Mercredi : $12$ mm. Jeudi : $7$ mm. Vendredi : $0$ mm. Samedi : $3$ mm. Dimanche : $9$ mm.\na) Construis le tableau des relevés.\nb) Combien de jours sans pluie ?\nc) Combien de pluie est tombée dans la semaine ?\nd) Quel jour a été le plus pluvieux ?",
+          reponses: [
+            { question: "b)", attendu: "2" },
+            { question: "c)", attendu: "35" },
+            { question: "d)", attendu: ["mercredi", "le mercredi"] },
+          ],
           correction:
             "a) Une colonne pour le jour, une colonne « pluie (mm) ». Une ligne par jour.\nb) Je compte les $0$ : mardi et vendredi. Cela fait $2$ jours.\nc) $4 + 0 + 12 + 7 + 0 + 3 + 9 = 35$ mm.\nd) Le plus grand nombre est $12$ : mercredi.\n⛔ Le piège : ne pas écrire les jours à $0$ mm. On a bien mesuré ces jours-là : il n'est rien tombé. Le $0$ est une vraie mesure.\nRéponse : b) $2$ jours ; c) $35$ mm ; d) mercredi.",
           schema: ecranSeulement(
@@ -340,6 +374,12 @@ export const exercicesStatEnquete6e: FicheExercicesData = {
         {
           enonce:
             "Ce tableau donne le nombre d'élèves inscrits aux clubs du collège.\na) Combien d'élèves de 5e font de la robotique ?\nb) Combien d'élèves font du théâtre, en tout ?\nc) Combien d'élèves de 6e sont inscrits à un club ?\nd) Quel club a plus d'élèves de 5e que de 6e ?",
+          reponses: [
+            { question: "a)", attendu: "11" },
+            { question: "b)", attendu: "21" },
+            { question: "c)", attendu: "27" },
+            { question: "d)", attendu: ["robotique", "la robotique"] },
+          ],
           figure: grille(["club", "6e", "5e"], [
             ["échecs", "8", "5"],
             ["théâtre", "12", "9"],
@@ -352,6 +392,10 @@ export const exercicesStatEnquete6e: FicheExercicesData = {
         {
           enonce:
             "Pendant $10$ minutes, Nora observe une mare. Elle note chaque animal qu'elle voit : G pour grenouille, L pour libellule, C pour canard, T pour tortue.\nL G L C L G L T L G C L L G L C L G L L\na) Range ses notes dans un tableau d'effectifs.\nb) Vérifie ton total.\nc) Quel animal a-t-elle vu le plus souvent ?\nd) Nora a-t-elle vu $20$ animaux différents ?",
+          reponses: [
+            { question: "c)", attendu: ["libellule", "la libellule"] },
+            { question: "d)", attendu: ["non", "pas forcément"] },
+          ],
           correction:
             "a) Une ligne par animal. Un trait par lettre, en lisant la liste une fois.\nLibellule : $11$. Grenouille : $5$. Canard : $3$. Tortue : $1$.\nb) $11 + 5 + 3 + 1 = 20$ : il y a bien $20$ lettres.\nc) La libellule : $11$ fois.\nd) Pas forcément. Une même libellule peut passer plusieurs fois.\nNora a noté $20$ passages, pas $20$ animaux différents.\n⛔ Le piège : croire que chaque note est un nouvel animal. Je me demande toujours ce que je compte vraiment.\nRéponse : c) la libellule ; d) pas forcément.",
           schema: ecranSeulement(
@@ -368,6 +412,10 @@ export const exercicesStatEnquete6e: FicheExercicesData = {
         {
           enonce:
             "En sport, on chronomètre quatre élèves sur $50$ m. Ana : $9{,}2$ s. Bilel : $8{,}7$ s. Chloé : $10{,}1$ s. Dan : $9$ s.\na) Range ces temps dans un tableau.\nb) Classe les élèves du plus rapide au plus lent.\nc) Quel est l'écart entre le plus rapide et le plus lent ?",
+          reponses: [
+            { question: "b)", attendu: ["Bilel, Dan, Ana, Chloé", "Bilel Dan Ana Chloé", "Bilel-Dan-Ana-Chloé"] },
+            { question: "c)", attendu: "1,4" },
+          ],
           correction:
             "a) Une colonne « élève », une colonne « temps (s) ». J'écris $9$ s sous la forme $9{,}0$ : les nombres s'alignent mieux.\nb) Le plus rapide met le MOINS de temps.\nJe range les temps du plus petit au plus grand : $8{,}7$ ; $9{,}0$ ; $9{,}2$ ; $10{,}1$.\nL'ordre est : Bilel, Dan, Ana, Chloé.\nc) $10{,}1 - 8{,}7 = 1{,}4$ s.\n⛔ Le piège : croire que le plus grand temps gagne. En course, le plus petit temps gagne.\nRéponse : b) Bilel, Dan, Ana, Chloé ; c) $1{,}4$ s.",
           schema: ecranSeulement(
@@ -383,6 +431,11 @@ export const exercicesStatEnquete6e: FicheExercicesData = {
         {
           enonce:
             "Voici les tarifs d'une piscine.\na) Combien paie un adulte qui vient avec deux enfants ?\nb) Léo, $11$ ans, viendra $10$ fois cette année. Vaut-il mieux payer chaque entrée ou prendre la carte ?\nc) Combien Léo économise-t-il ?",
+          reponses: [
+            { question: "a)", attendu: "11" },
+            { question: "b)", attendu: ["la carte", "carte", "prendre la carte"] },
+            { question: "c)", attendu: "5" },
+          ],
           figure: grille(["entrée", "prix (€)"], [
             ["enfant", "3"],
             ["adulte", "5"],
@@ -395,6 +448,10 @@ export const exercicesStatEnquete6e: FicheExercicesData = {
         {
           enonce:
             "Tu vas demander à $25$ élèves : « Combien d'animaux as-tu à la maison ? » Les réponses possibles sont $0$, $1$, $2$, ou « $3$ et plus ».\na) Combien de lignes de réponses aura ton tableau d'effectifs ?\nb) Faut-il une ligne pour « $0$ » ?\nc) Comment vérifier, à la fin, que tu n'as oublié personne ?",
+          reponses: [
+            { question: "a)", attendu: "4" },
+            { question: "b)", attendu: ["oui"] },
+          ],
           correction:
             "a) Une ligne par réponse possible, pas une par élève.\nIl y a $4$ réponses possibles : $4$ lignes, plus la ligne du total.\nb) Oui. Un élève sans animal donne la réponse « $0$ ». Il faut une ligne pour lui.\nc) J'additionne les effectifs. La somme doit faire $25$.\nSi je trouve $24$, j'ai oublié quelqu'un. Si je trouve $26$, j'ai compté quelqu'un deux fois.\n⛔ Le piège : faire $25$ lignes, une par élève. Le tableau ne recopie pas : il COMPTE.\nRéponse : a) $4$ lignes ; b) oui ; c) la somme doit faire $25$.",
           schema: grille(["animaux", "traits", "effectif"], [
@@ -424,6 +481,10 @@ export const exercicesStatEnquete6e: FicheExercicesData = {
           titre: "L'enquête sur le sommeil",
           enonce:
             "Ta classe veut savoir combien d'heures dorment les élèves, un soir d'école.\na) Écris une question précise à poser.\nb) Voici les réponses de $20$ élèves, en heures :\n9 10 9 8 9 10 11 9 8 9 10 9 9 10 8 9 11 10 9 9\nConstruis le tableau des effectifs.\nc) Vérifie ton total.\nd) Combien d'élèves dorment $10$ heures ou plus ?\ne) Peut-on dire : « Les enfants de $11$ ans dorment $9$ heures » ?",
+          reponses: [
+            { question: "d)", attendu: "7" },
+            { question: "e)", attendu: ["non"] },
+          ],
           correction:
             "a) Par exemple : « Combien d'heures as-tu dormi hier soir, arrondi à l'heure ? »\nLa réponse est un nombre : je peux compter.\nb) Les réponses vont de $8$ à $11$ : quatre lignes.\n$8$ h : $3$. $9$ h : $10$. $10$ h : $5$. $11$ h : $2$.\nc) $3 + 10 + 5 + 2 = 20$ : le compte est bon.\nd) $10$ h ou plus : $5 + 2 = 7$ élèves.\ne) Non. On a interrogé $20$ élèves d'une seule classe, un seul soir.\nOn peut seulement dire : dans cette classe, ce soir-là, $9$ h est la réponse la plus fréquente.\n⛔ Le piège : parler de tous les enfants avec une petite enquête.\nRéponse : d) $7$ élèves ; e) non.",
           schema: grille(["sommeil (h)", "traits", "effectif"], [
@@ -439,6 +500,11 @@ export const exercicesStatEnquete6e: FicheExercicesData = {
           titre: "Le carnet du jardinier",
           enonce:
             "Un jardinier mesure deux plants chaque semaine. Il note tout dans ce tableau.\na) Une case pose problème. Laquelle ? Corrige-la.\nb) En semaine $3$, quel plant est le plus haut ?\nc) De combien le plant A a-t-il grandi entre la semaine $1$ et la semaine $4$ ?\nd) Et le plant B ?",
+          reponses: [
+            { question: "b)", attendu: ["A", "le plant A", "plant A"] },
+            { question: "c)", attendu: "16" },
+            { question: "d)", attendu: "11" },
+          ],
           figure: grille(["semaine", "plant A (cm)", "plant B (cm)"], [
             ["1", "4", "5"],
             ["2", "9", "8"],
@@ -453,6 +519,12 @@ export const exercicesStatEnquete6e: FicheExercicesData = {
           titre: "Deux sondages, deux résultats",
           enonce:
             "Sam et Lina veulent connaître le sport préféré des élèves du collège. Sam interroge $30$ élèves du club de foot. Lina tire au sort $30$ élèves dans toutes les classes.\na) Quel sport gagne chez Sam ? Et chez Lina ?\nb) Vérifie les deux totaux.\nc) Quel sondage faut-il croire ? Explique.\nd) Chez Lina, combien d'élèves n'ont pas choisi le foot ?",
+          reponses: [
+            { question: "a) Sam", attendu: ["foot", "le foot", "football"] },
+            { question: "a) Lina", attendu: ["foot", "le foot", "football"] },
+            { question: "c)", attendu: ["Lina", "celui de Lina"] },
+            { question: "d)", attendu: "21" },
+          ],
           figure: grille(["sport", "Sam", "Lina"], [
             ["foot", "24", "9"],
             ["danse", "1", "7"],
@@ -467,6 +539,12 @@ export const exercicesStatEnquete6e: FicheExercicesData = {
           titre: "La pesée du pain",
           enonce:
             "La cantine pèse le pain jeté chaque jour. Lundi : $2{,}5$ kg. Mardi : $1\\,800$ g. Jeudi : $3$ kg. Vendredi : $900$ g. Le mercredi, la cantine est fermée.\na) Écris toutes les masses en grammes.\nb) Construis le tableau des relevés.\nc) Combien de pain jeté dans la semaine ? Donne la réponse en g, puis en kg.\nd) Faut-il écrire « $0$ » pour le mercredi ?",
+          reponses: [
+            { question: "a)", attendu: "2500 ; 1800 ; 3000 ; 900" },
+            { question: "c) g", attendu: "8200" },
+            { question: "c) kg", attendu: "8,2" },
+            { question: "d)", attendu: ["non"] },
+          ],
           correction:
             "a) $1$ kg $= 1\\,000$ g.\nLundi : $2{,}5$ kg $= 2\\,500$ g. Jeudi : $3$ kg $= 3\\,000$ g.\nMardi et vendredi sont déjà en grammes : $1\\,800$ g et $900$ g.\nb) Une colonne « jour », une colonne « pain jeté (g) ». Une ligne par jour de cantine.\nc) $2\\,500 + 1\\,800 + 3\\,000 + 900 = 8\\,200$ g.\n$8\\,200$ g $= 8{,}2$ kg.\nd) Non. Le mercredi, on n'a rien mesuré : il n'y a pas de repas.\nÉcrire $0$ ferait croire qu'on a pesé et trouvé $0$ g.\n⛔ Le piège : additionner $2{,}5 + 1\\,800 + 3 + 900$. Je convertis d'abord, puis j'additionne.\nRéponse : c) $8\\,200$ g, soit $8{,}2$ kg ; d) non.",
           schema: grille(["jour", "pain jeté (g)"], [

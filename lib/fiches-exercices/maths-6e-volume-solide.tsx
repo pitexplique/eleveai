@@ -172,6 +172,10 @@ export const exercicesVolumeSolide6e: FicheExercicesData = {
         {
           enonce:
             "Ce solide est fait de cubes de $1$ cm de côté. Aucun cube ne flotte.\na) Combien y a-t-il de cubes ?\nb) Quel est le volume du solide ?",
+          reponses: [
+            { question: "a)", attendu: "11" },
+            { question: "b)", attendu: "11" },
+          ],
           figure: cubes([{ h: [[1, 1, 2], [2, 2, 3]] }]),
           correction:
             "Je compte pile par pile.\nRangée de devant : $1$, $1$ et $2$ cubes. Cela fait $4$.\nRangée de derrière : $2$, $2$ et $3$ cubes. Cela fait $7$.\nEn tout : $4 + 7 = 11$ cubes.\nUn cube de $1$ cm de côté vaut $1$ cm³.\n⛔ Le piège : oublier les cubes cachés. Derrière, les cubes du bas ne se voient pas. Pourtant, ils portent ceux du haut.\nRéponse : a) $11$ cubes ; b) $11$ cm³.",
@@ -180,6 +184,12 @@ export const exercicesVolumeSolide6e: FicheExercicesData = {
         {
           enonce:
             "Le dessin montre trois unités.\nRecopie chaque mesure avec la bonne unité : cm, cm² ou cm³.\na) La longueur d'un crayon : $15$ …\nb) La place prise par un dé à jouer : $8$ …\nc) La surface d'une carte postale : $150$ …\nd) Le volume d'une boîte à chaussures : $6\\,000$ …",
+          reponses: [
+            { question: "a)", attendu: ["cm"] },
+            { question: "b)", attendu: ["cm³", "cm3"] },
+            { question: "c)", attendu: ["cm²", "cm2"] },
+            { question: "d)", attendu: ["cm³", "cm3"] },
+          ],
           figure: unites(),
           correction:
             "Une longueur se mesure en cm. C'est un trait.\nUne aire se mesure en cm². Ce sont des carrés.\nUn volume se mesure en cm³. Ce sont des cubes.\na) Un crayon, c'est une longueur : $15$ cm.\nb) La place prise, c'est un volume : $8$ cm³.\nc) Une surface, c'est une aire : $150$ cm².\nd) Un volume : $6\\,000$ cm³.\n⛔ Le piège : écrire cm² pour un volume. Le petit $3$ dit « trois directions » : longueur, largeur, hauteur.\nRéponse : a) cm ; b) cm³ ; c) cm² ; d) cm³.",
@@ -188,6 +198,10 @@ export const exercicesVolumeSolide6e: FicheExercicesData = {
         {
           enonce:
             "Sur une boîte, on lit : « volume $30$ cm³ ».\na) Combien de cubes de $1$ cm³ faut-il pour la remplir ?\nb) Le dessin montre la boîte pleine. Vérifie en comptant les cubes.",
+          reponses: [
+            { question: "a)", attendu: "30" },
+            { question: "b)", attendu: ["oui"] },
+          ],
           figure: cubes([{ h: [[2, 2, 2, 2, 2], [2, 2, 2, 2, 2], [2, 2, 2, 2, 2]] }]),
           correction:
             "a) « $30$ cm³ », cela veut dire $30$ cubes de $1$ cm³.\nb) Je compte une couche. Il y a $5$ cubes de long et $3$ rangées.\n$5 \\times 3 = 15$ cubes dans une couche.\nIl y a $2$ couches : $15 \\times 2 = 30$ cubes.\nLe compte tombe juste.\n⭐ Le nombre devant cm³ est le nombre de cubes unités.\nRéponse : a) $30$ cubes ; b) oui, $30$ cubes.",
@@ -195,6 +209,11 @@ export const exercicesVolumeSolide6e: FicheExercicesData = {
         },
         {
           enonce: "Voici deux solides en cubes de $1$ cm³.\na) Lequel semble le plus gros ?\nb) Compte les cubes de chacun.\nc) Lequel a le plus grand volume ?",
+          reponses: [
+            { question: "b) A", attendu: "12" },
+            { question: "b) B", attendu: "15" },
+            { question: "c)", attendu: ["B"] },
+          ],
           figure: cubes([
             { h: [[3, 3], [3, 3]], nom: "A" },
             { h: [[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1]], nom: "B" },
@@ -205,6 +224,9 @@ export const exercicesVolumeSolide6e: FicheExercicesData = {
         },
         {
           enonce: "Noah colle ces deux pièces l'une contre l'autre.\nChaque cube vaut $1$ cm³.\nQuel est le volume du nouveau solide ?",
+          reponses: [
+            { attendu: "12" },
+          ],
           figure: cubes([
             { h: [[2, 1, 1], [1, 1, 1]], nom: "pièce 1" },
             { h: [[1, 1], [2, 1]], nom: "pièce 2" },
@@ -216,6 +238,11 @@ export const exercicesVolumeSolide6e: FicheExercicesData = {
         {
           enonce:
             "Cette tour est faite de cubes de $1$ cm³. Tous ses étages sont pareils.\na) Combien de cubes y a-t-il dans un étage ?\nb) Combien y a-t-il d'étages ?\nc) Quel est son volume ?",
+          reponses: [
+            { question: "a)", attendu: "6" },
+            { question: "b)", attendu: "4" },
+            { question: "c)", attendu: "24" },
+          ],
           figure: cubes([{ h: [[4, 4, 4], [4, 4, 4]] }]),
           correction:
             "a) Un étage a $3$ cubes de long et $2$ rangées.\n$3 \\times 2 = 6$ cubes dans un étage.\nb) Je compte les étages sur le côté : il y en a $4$.\nc) $4$ étages de $6$ cubes : $6 \\times 4 = 24$ cubes.\n⭐ Des étages pareils : je compte un étage, puis je multiplie.\n⛔ Le piège : compter seulement les faces visibles. La tour est pleine.\nRéponse : a) $6$ ; b) $4$ ; c) $24$ cm³.",
@@ -224,6 +251,12 @@ export const exercicesVolumeSolide6e: FicheExercicesData = {
         {
           enonce:
             "Complète.\na) Un solide de $16$ cubes de $1$ cm³ a un volume de … cm³.\nb) Une benne contient $9$ m³ de sable. Cela fait combien de cubes de $1$ m³ ?\nc) Dans « $45$ cm³ », quel nombre dit le volume ? Quelle est l'unité ?",
+          reponses: [
+            { question: "a)", attendu: "16" },
+            { question: "b)", attendu: "9" },
+            { question: "c) nb", attendu: "45" },
+            { question: "c) unité", attendu: ["cm³", "cm3"] },
+          ],
           correction:
             "a) Chaque cube vaut $1$ cm³. $16$ cubes font donc $16$ cm³.\nLe dessin montre ces $16$ cubes : $8$ colonnes de $2$.\nb) « $9$ m³ », c'est $9$ cubes de $1$ m de côté.\nc) Le nombre est $45$. L'unité est le cm³.\n⭐ Le nombre compte les cubes. L'unité dit leur taille.\nRéponse : a) $16$ cm³ ; b) $9$ cubes ; c) $45$, en cm³.",
           schema: ecranSeulement(cubes([{ h: [[2, 2, 2, 2], [2, 2, 2, 2]] }])),
@@ -231,6 +264,9 @@ export const exercicesVolumeSolide6e: FicheExercicesData = {
         },
         {
           enonce: "Une boîte mesure $5$ cm de long, $4$ cm de large et $2$ cm de haut.\nCombien de cubes de $1$ cm³ faut-il pour la remplir ?",
+          reponses: [
+            { attendu: "40" },
+          ],
           correction:
             "Au fond, je pose $5$ cubes sur $4$ rangées.\n$5 \\times 4 = 20$ cubes dans le fond.\nLa boîte a $2$ cm de haut : il y a $2$ couches.\n$20 \\times 2 = 40$ cubes.\nC'est la formule : longueur × largeur × hauteur.\n$5 \\times 4 \\times 2 = 40$.\n⛔ Le piège : additionner, $5 + 4 + 2 = 11$. Il faut multiplier.\nRéponse : $40$ cubes, soit $40$ cm³.",
           schema: ecranSeulement(cubes([{ h: [[2, 2, 2, 2, 2], [2, 2, 2, 2, 2], [2, 2, 2, 2, 2], [2, 2, 2, 2, 2]] }])),
@@ -254,6 +290,11 @@ export const exercicesVolumeSolide6e: FicheExercicesData = {
         {
           enonce:
             "Un escalier en cubes de $1$ cm³ a $4$ marches et $2$ rangées.\na) Combien de cubes compte une rangée ?\nb) Quel est le volume de l'escalier ?\nc) On ajoute une marche de $5$ cubes au bout de chaque rangée. Quel est le nouveau volume ?",
+          reponses: [
+            { question: "a)", attendu: "10" },
+            { question: "b)", attendu: "20" },
+            { question: "c)", attendu: "30" },
+          ],
           figure: cubes([{ h: [[1, 2, 3, 4], [1, 2, 3, 4]] }]),
           correction:
             "a) Une rangée : $1 + 2 + 3 + 4 = 10$ cubes.\nb) Il y a $2$ rangées pareilles.\n$10 \\times 2 = 20$ cubes. Le volume est $20$ cm³.\nc) J'ajoute $5$ cubes par rangée, soit $5 \\times 2 = 10$ cubes.\n$20 + 10 = 30$ cubes.\n⛔ Le piège : oublier la rangée de derrière. Elle est cachée, mais elle compte.\nRéponse : a) $10$ cubes ; b) $20$ cm³ ; c) $30$ cm³.",
@@ -262,6 +303,10 @@ export const exercicesVolumeSolide6e: FicheExercicesData = {
         {
           enonce:
             "Quatre boîtes à bijoux ont ces volumes.\nA : $18$ cm³ ; B : $25$ cm³ ; C : $9$ cm³ ; D : $21$ cm³.\na) Range-les de la plus petite à la plus grande.\nb) Combien de cm³ la plus grande a-t-elle de plus que la plus petite ?\nc) Sofia dit : « la boîte E fait $20$ cm² ». Qu'est-ce qui ne va pas ?",
+          reponses: [
+            { question: "a)", attendu: ["C, A, D, B", "C A D B", "C-A-D-B"] },
+            { question: "b)", attendu: "16" },
+          ],
           figure: diagramme("barres", [
             { label: "A", value: 18 },
             { label: "B", value: 25 },
@@ -275,6 +320,11 @@ export const exercicesVolumeSolide6e: FicheExercicesData = {
         {
           enonce:
             "Ce solide est fait de cubes de $1$ cm³.\na) Quel est son volume ?\nb) Léo le coupe en deux morceaux. L'un a $6$ cubes. Combien en a l'autre ?\nc) Il recolle les deux morceaux autrement. Quel est le nouveau volume ?",
+          reponses: [
+            { question: "a)", attendu: "14" },
+            { question: "b)", attendu: "8" },
+            { question: "c)", attendu: "14" },
+          ],
           figure: cubes([{ h: [[3, 2, 2], [3, 2, 2]] }]),
           correction:
             "a) Devant : $3 + 2 + 2 = 7$ cubes. Derrière, pareil : $7$ cubes.\nEn tout : $7 + 7 = 14$ cubes, donc $14$ cm³.\nb) Couper ne fait disparaître aucun cube.\n$14 - 6 = 8$ cubes.\nc) $6 + 8 = 14$. Le volume reste $14$ cm³.\n⭐ La forme change, le volume ne change pas.\n⛔ Le piège : croire qu'une autre forme donne un autre volume.\nRéponse : a) $14$ cm³ ; b) $8$ cubes ; c) $14$ cm³.",
@@ -283,6 +333,11 @@ export const exercicesVolumeSolide6e: FicheExercicesData = {
         {
           enonce:
             "Un carton est rempli de cubes de $1$ cm³.\nIl a $6$ cubes de long, $3$ de large et $2$ de haut.\na) Combien de cubes y a-t-il dans la couche du bas ?\nb) Quel est le volume du carton ?\nc) On enlève la couche du haut. Quel volume reste-t-il ?",
+          reponses: [
+            { question: "a)", attendu: "18" },
+            { question: "b)", attendu: "36" },
+            { question: "c)", attendu: "18" },
+          ],
           correction:
             "a) $6 \\times 3 = 18$ cubes dans la couche du bas.\nb) Il y a $2$ couches : $18 \\times 2 = 36$ cubes, soit $36$ cm³.\nAvec la formule : $6 \\times 3 \\times 2 = 36$.\nc) Il reste une couche : $36 - 18 = 18$ cm³.\n⛔ Le piège : compter seulement les cubes visibles. Le carton est plein.\nRéponse : a) $18$ cubes ; b) $36$ cm³ ; c) $18$ cm³.",
           schema: ecranSeulement(cubes([{ h: [[2, 2, 2, 2, 2, 2], [2, 2, 2, 2, 2, 2], [2, 2, 2, 2, 2, 2]] }])),
@@ -291,6 +346,12 @@ export const exercicesVolumeSolide6e: FicheExercicesData = {
         {
           enonce:
             "Deux boîtes sont remplies de cubes de $1$ cm³.\nA : $3$ cm de long, $2$ cm de large, $4$ cm de haut.\nB : $5$ cm de long, $5$ cm de large, $1$ cm de haut.\na) Calcule le volume de chaque boîte.\nb) Laquelle contient le plus ? De combien ?",
+          reponses: [
+            { question: "a) A", attendu: "24" },
+            { question: "a) B", attendu: "25" },
+            { question: "b)", attendu: ["B"] },
+            { question: "b) écart", attendu: "1" },
+          ],
           correction:
             "a) A : $3 \\times 2 \\times 4 = 24$ cm³.\nB : $5 \\times 5 \\times 1 = 25$ cm³.\nb) $25 > 24$. B contient le plus, de $25 - 24 = 1$ cm³.\n⭐ Un seul cube d'écart. Pourtant, A a l'air bien plus grande.\n⛔ Le piège : choisir la plus haute. Je calcule avant de répondre.\nRéponse : B, de $1$ cm³.",
           schema: ecranSeulement(
@@ -304,6 +365,11 @@ export const exercicesVolumeSolide6e: FicheExercicesData = {
         {
           enonce:
             "Un jardin partagé a un bac à terre. Il mesure $3$ m de long, $2$ m de large et $1$ m de haut.\na) Quel est le volume du bac, en m³ ?\nb) Un camion livre $8$ m³ de terre. Le bac peut-il tout contenir ?\nc) Combien de m³ restent sur le camion ?",
+          reponses: [
+            { question: "a)", attendu: "6" },
+            { question: "b)", attendu: ["non"] },
+            { question: "c)", attendu: "2" },
+          ],
           correction:
             "a) Je découpe le bac en cubes de $1$ m de côté.\nIl y a $3$ cubes devant et $3$ derrière : $3 \\times 2 = 6$ cubes.\nChaque cube vaut $1$ m³. Le volume est $6$ m³.\nb) $8 > 6$. Non, le bac est trop petit.\nc) $8 - 6 = 2$ m³ restent sur le camion.\n⚠️ Le piège : l'unité. Ici, un cube fait $1$ m de côté. C'est un m³, pas un cm³.\nRéponse : a) $6$ m³ ; b) non ; c) $2$ m³.",
           schema: ecranSeulement(cubes([{ h: [[1, 1, 1], [1, 1, 1]] }])),
@@ -311,6 +377,11 @@ export const exercicesVolumeSolide6e: FicheExercicesData = {
         },
         {
           enonce: "Ce solide ressemble à un escalier posé dans un coin. Aucun cube ne flotte.\na) Combien de cubes y a-t-il à l'étage du bas ?\nb) Compte les cubes étage par étage.\nc) Combien de cubes y a-t-il en tout ?",
+          reponses: [
+            { question: "a)", attendu: "16" },
+            { question: "b)", attendu: "16 ; 9 ; 4 ; 1" },
+            { question: "c)", attendu: "30" },
+          ],
           figure: cubes([{ h: [[4, 3, 2, 1], [3, 3, 2, 1], [2, 2, 2, 1], [1, 1, 1, 1]] }]),
           correction:
             "Je compte étage par étage, en partant du bas.\nÉtage du bas : un carré de $4$ sur $4$. $4 \\times 4 = 16$ cubes.\nDeuxième étage : un carré de $3$ sur $3$. $3 \\times 3 = 9$ cubes.\nTroisième étage : $2 \\times 2 = 4$ cubes.\nEn haut : $1$ cube.\nEn tout : $16 + 9 + 4 + 1 = 30$ cubes.\n⛔ Le piège : compter les faces qu'on voit. Beaucoup de cubes sont cachés derrière.\nRéponse : a) $16$ cubes ; b) $16$, $9$, $4$ et $1$ ; c) $30$ cubes.",
@@ -319,6 +390,11 @@ export const exercicesVolumeSolide6e: FicheExercicesData = {
         {
           enonce:
             "Un château en cubes de $1$ cm³ a deux tours et un mur.\nChaque tour a $2$ cubes de long, $2$ de large et $4$ de haut.\nLe mur a $2$ cubes de long, $2$ de large et $2$ de haut.\na) Calcule le volume d'une tour.\nb) Calcule le volume du mur.\nc) Quel est le volume du château ?",
+          reponses: [
+            { question: "a)", attendu: "16" },
+            { question: "b)", attendu: "8" },
+            { question: "c)", attendu: "40" },
+          ],
           correction:
             "a) Une tour : $2 \\times 2 \\times 4 = 16$ cm³.\nb) Le mur : $2 \\times 2 \\times 2 = 8$ cm³.\nc) J'additionne les morceaux.\n$16 + 16 + 8 = 40$ cm³.\n⛔ Le piège : oublier la deuxième tour. Je compte $16$ deux fois.\nRéponse : a) $16$ cm³ ; b) $8$ cm³ ; c) $40$ cm³.",
           schema: ecranSeulement(cubes([{ h: [[4, 4, 2, 2, 4, 4], [4, 4, 2, 2, 4, 4]] }])),
@@ -342,6 +418,12 @@ export const exercicesVolumeSolide6e: FicheExercicesData = {
           titre: "La boîte de sucres",
           enonce:
             "Une boîte de sucres est pleine. Chaque sucre est un petit cube.\nLa boîte a $5$ sucres de long, $4$ de large et $3$ couches.\na) Combien de sucres y a-t-il dans une couche ?\nb) Combien de sucres y a-t-il dans la boîte ?\nc) Mamie met $2$ sucres dans son café chaque jour. Combien de jours dure la boîte ?\nd) Après $10$ jours, combien de couches pleines reste-t-il ?",
+          reponses: [
+            { question: "a)", attendu: "20" },
+            { question: "b)", attendu: "60" },
+            { question: "c)", attendu: "30" },
+            { question: "d)", attendu: "2" },
+          ],
           figure: cubes([{ h: [[3, 3, 3, 3, 3], [3, 3, 3, 3, 3], [3, 3, 3, 3, 3], [3, 3, 3, 3, 3]] }]),
           correction:
             "a) Une couche : $5 \\times 4 = 20$ sucres.\nb) $3$ couches : $20 \\times 3 = 60$ sucres.\nc) Chaque jour, $2$ sucres partent.\n$60 \\div 2 = 30$ jours.\nd) En $10$ jours, Mamie prend $10 \\times 2 = 20$ sucres.\n$20$ sucres, c'est une couche entière.\nIl reste $3 - 1 = 2$ couches pleines.\n⛔ Le piège : ne compter que les sucres du dessus. Il y a trois couches.\nRéponse : $20$ sucres par couche, $60$ en tout. La boîte dure $30$ jours. Après $10$ jours, il reste $2$ couches.",
@@ -351,6 +433,11 @@ export const exercicesVolumeSolide6e: FicheExercicesData = {
           titre: "Le côté qui double",
           enonce:
             "Inès a un cube de $2$ cm de côté. Il est fait de petits cubes de $1$ cm³.\nElle construit un cube de $4$ cm de côté.\na) Combien de petits cubes y a-t-il dans le petit cube ?\nb) Et dans le grand cube ?\nc) Le côté est $2$ fois plus long. Le volume est-il $2$ fois plus grand ?",
+          reponses: [
+            { question: "a)", attendu: "8" },
+            { question: "b)", attendu: "64" },
+            { question: "c)", attendu: ["non"] },
+          ],
           figure: cubes([
             { h: [[2, 2], [2, 2]], nom: "2 cm" },
             { h: [[4, 4, 4, 4], [4, 4, 4, 4], [4, 4, 4, 4], [4, 4, 4, 4]], nom: "4 cm" },
@@ -363,6 +450,12 @@ export const exercicesVolumeSolide6e: FicheExercicesData = {
           titre: "Le déménagement",
           enonce:
             "La famille Martin déménage.\nLa caisse du camion mesure $4$ m de long, $2$ m de large et $2$ m de haut.\na) Quel est le volume de la caisse, en m³ ?\nb) Il faut charger une armoire de $2$ m³, un canapé de $3$ m³ et $8$ cartons de $1$ m³. Quel volume cela fait-il ?\nc) Y a-t-il assez de place ? Combien de m³ restent libres ?",
+          reponses: [
+            { question: "a)", attendu: "16" },
+            { question: "b)", attendu: "13" },
+            { question: "c)", attendu: ["oui"] },
+            { question: "c) reste", attendu: "3" },
+          ],
           correction:
             "a) $4 \\times 2 \\times 2 = 16$ m³.\nLe dessin montre les $16$ cubes de $1$ m³.\nb) Les $8$ cartons font $8 \\times 1 = 8$ m³.\nJ'additionne tout : $2 + 3 + 8 = 13$ m³.\nc) $13 < 16$ : il y a assez de place.\n$16 - 13 = 3$ m³ restent libres.\n⚠️ En vrai, les meubles laissent des trous entre eux. Le calcul dit seulement que c'est possible.\nRéponse : $16$ m³ ; $13$ m³ à charger ; oui, il reste $3$ m³.",
           schema: cubes([{ h: [[2, 2, 2, 2], [2, 2, 2, 2]] }]),
@@ -372,6 +465,11 @@ export const exercicesVolumeSolide6e: FicheExercicesData = {
           titre: "Vingt-quatre cubes",
           enonce:
             "Tom a $24$ cubes de $1$ cm³. Il veut faire un pavé plein avec tous.\na) Peut-il faire un pavé de $6$ cubes de long, $2$ de large et $2$ de haut ?\nb) Et un pavé de $4$ de long, $3$ de large et $2$ de haut ?\nc) Trouve un autre pavé avec les $24$ cubes.\nd) Ces pavés ont-ils le même volume ?",
+          reponses: [
+            { question: "a)", attendu: ["oui"] },
+            { question: "b)", attendu: ["oui"] },
+            { question: "d)", attendu: ["oui"] },
+          ],
           correction:
             "a) $6 \\times 2 \\times 2 = 24$. Oui, il utilise les $24$ cubes.\nb) $4 \\times 3 \\times 2 = 24$. Oui, lui aussi.\nc) Par exemple : $12$ de long, $2$ de large, $1$ de haut.\nEn effet, $12 \\times 2 \\times 1 = 24$.\nd) Oui. Chaque pavé a $24$ cubes, donc $24$ cm³.\n⭐ Des formes différentes peuvent avoir le même volume.\n⛔ Le piège : croire que le plus long est le plus gros. Tous ont $24$ cubes.\nRéponse : a) oui ; b) oui ; c) par exemple $12 \\times 2 \\times 1$ ; d) oui, $24$ cm³.",
           schema: cubes([

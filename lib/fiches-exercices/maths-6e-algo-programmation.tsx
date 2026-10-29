@@ -290,6 +290,11 @@ export const exercicesAlgoProgrammation6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Lis ce programme.\na) Combien de blocs y a-t-il sous le drapeau ?\nb) Quel est le 2e bloc ?\nc) De combien de pas le lutin avance-t-il en tout ?",
+          reponses: [
+            { question: "a)", attendu: ["3", "3 blocs"] },
+            { question: "b)", attendu: ["dire Bonjour !", "Bonjour !"] },
+            { question: "c)", attendu: ["50", "50 pas"] },
+          ],
           figure: scratch(["quand drapeau vert cliqué", "avancer de 30", "dire 'Bonjour !'", "avancer de 20"]),
           correction:
             "Je lis les blocs de haut en bas.\na) Sous le drapeau, je compte $3$ blocs.\nb) Le 1er bloc fait avancer. Le 2e fait parler : « dire Bonjour ! ».\nc) J'additionne seulement les blocs « avancer » : $30 + 20 = 50$.\n⛔ Le piège : compter le drapeau comme une action. Il sert seulement à lancer le programme.\nRéponse : a) $3$ blocs ; b) « dire Bonjour ! » ; c) $50$ pas.",
@@ -297,6 +302,11 @@ export const exercicesAlgoProgrammation6e: FicheExercicesData = {
         },
         {
           enonce: "Le lutin part en regardant vers la droite.\na) Vers où regarde-t-il après le premier « tourner » ?\nb) Et après le deuxième ?\nc) De combien de pas avance-t-il en tout ?",
+          reponses: [
+            { question: "a)", attendu: ["vers le haut", "en haut", "haut"] },
+            { question: "b)", attendu: ["vers la gauche", "à gauche", "gauche"] },
+            { question: "c)", attendu: ["60", "60 pas"] },
+          ],
           figure: scratch(["quand drapeau vert cliqué", "avancer de 20", "tourner à gauche de 90°", "avancer de 20", "tourner à gauche de 90°", "avancer de 20"]),
           correction:
             "« tourner à gauche de 90° » fait un quart de tour vers la gauche.\na) Il regardait vers la droite. Après un quart de tour, il regarde vers le haut.\nb) Encore un quart de tour à gauche : il regarde vers la gauche.\nc) $20 + 20 + 20 = 60$ pas.\n⛔ Le piège : croire que « tourner » fait avancer. Il change seulement la direction.\nRéponse : a) vers le haut ; b) vers la gauche ; c) $60$ pas.",
@@ -305,6 +315,10 @@ export const exercicesAlgoProgrammation6e: FicheExercicesData = {
         },
         {
           enonce: "Un programme répète $6$ fois le bloc « avancer de 15 ».\na) Combien de fois ce bloc est-il exécuté ?\nb) De combien de pas le lutin avance-t-il en tout ?",
+          reponses: [
+            { question: "a)", attendu: "6" },
+            { question: "b)", attendu: ["90", "90 pas"] },
+          ],
           figure: ecranSeulement(scratch(["quand drapeau vert cliqué", "répéter 6 fois", "  avancer de 15"])),
           correction:
             "Le bloc est DANS la boucle « répéter 6 fois ».\na) Il est donc exécuté $6$ fois.\nb) À chaque fois, le lutin avance de $15$ pas.\n$6 \\times 15 = 90$.\n⛔ Le piège : lire le bloc une seule fois et répondre $15$.\nRéponse : a) $6$ fois ; b) $90$ pas.",
@@ -312,6 +326,9 @@ export const exercicesAlgoProgrammation6e: FicheExercicesData = {
         },
         {
           enonce: "Ce programme est long.\nRéécris-le avec un bloc « répéter ».\nQue trace-t-il si le stylo est posé ?",
+          reponses: [
+            { attendu: ["un carré", "carré"] },
+          ],
           figure: scratch(["quand drapeau vert cliqué", "avancer de 25", "tourner à droite de 90°", "avancer de 25", "tourner à droite de 90°", "avancer de 25", "tourner à droite de 90°", "avancer de 25", "tourner à droite de 90°"]),
           correction:
             "Je cherche ce qui revient : « avancer de 25 », puis « tourner à droite de 90° ».\nCe groupe de deux blocs revient $4$ fois.\nJe le mets dans « répéter 4 fois ».\nLe programme passe de $8$ blocs à $3$ blocs.\nLe lutin fait $4$ côtés de $25$ pas, avec $4$ angles droits : c'est un carré.\n⛔ Le piège : mettre un seul bloc dans la boucle. Il faut les deux, dans le même ordre.\nRéponse : le programme ci-dessous. Il trace un carré.",
@@ -320,6 +337,11 @@ export const exercicesAlgoProgrammation6e: FicheExercicesData = {
         },
         {
           enonce: "Lis ce programme.\na) Quel est le premier message du lutin ?\nb) Parle-t-il avant ou après avoir avancé ?\nc) Combien de messages dit-il ?\nd) De combien de pas avance-t-il en tout ?",
+          reponses: [
+            { question: "a)", attendu: ["Je pars !"] },
+            { question: "c)", attendu: "2" },
+            { question: "d)", attendu: ["50", "50 pas"] },
+          ],
           figure: scratch(["quand drapeau vert cliqué", "dire 'Je pars !'", "avancer de 40", "tourner à droite de 90°", "avancer de 10", "dire 'Arrivé !'"]),
           correction:
             "Je lis les blocs dans l'ordre, de haut en bas.\na) Le 1er bloc sous le drapeau est « dire Je pars ! ».\nb) Il dit « Je pars ! » avant d'avancer.\nIl dit « Arrivé ! » à la fin, après avoir avancé.\nc) Il y a deux blocs « dire » : $2$ messages.\nd) $40 + 10 = 50$ pas.\n⛔ Le piège : croire que « tourner à droite de 90° » fait avancer de $90$ pas.\nRéponse : a) « Je pars ! » ; b) avant, puis après ; c) $2$ ; d) $50$ pas.",
@@ -327,6 +349,11 @@ export const exercicesAlgoProgrammation6e: FicheExercicesData = {
         },
         {
           enonce: "Le stylo est posé : le lutin dessine en avançant.\nLe programme répète $4$ fois : « avancer de 40 », puis « tourner à gauche de 90° ».\na) Quelle figure trace-t-il ?\nb) Combien mesure un côté ?\nc) Quel est le périmètre de la figure ?",
+          reponses: [
+            { question: "a)", attendu: ["un carré", "carré"] },
+            { question: "b)", attendu: ["40", "40 pas"] },
+            { question: "c)", attendu: ["160", "160 pas"] },
+          ],
           figure: ecranSeulement(scratch(["quand drapeau vert cliqué", "stylo en position d'écriture", "répéter 4 fois", "  avancer de 40", "  tourner à gauche de 90°"])),
           correction:
             "La boucle fait $4$ tours.\nÀ chaque tour : un côté de $40$ pas, puis un quart de tour.\na) $4$ côtés égaux et $4$ angles droits : c'est un carré.\nb) Un côté mesure $40$ pas.\nc) $4 \\times 40 = 160$ pas.\n⭐ Après $4$ quarts de tour, le lutin regarde de nouveau vers la droite.\nRéponse : a) un carré ; b) $40$ pas ; c) $160$ pas.",
@@ -342,6 +369,10 @@ export const exercicesAlgoProgrammation6e: FicheExercicesData = {
         },
         {
           enonce: "Un programme répète $5$ fois deux blocs : « avancer de 10 », puis « dire Hop ! ».\na) Combien de fois le lutin dit-il « Hop ! » ?\nb) De combien de pas avance-t-il en tout ?",
+          reponses: [
+            { question: "a)", attendu: "5" },
+            { question: "b)", attendu: ["50", "50 pas"] },
+          ],
           figure: ecranSeulement(scratch(["quand drapeau vert cliqué", "répéter 5 fois", "  avancer de 10", "  dire 'Hop !'"])),
           correction:
             "Les deux blocs sont DANS la boucle.\nIls sont donc exécutés à chaque tour.\na) $5$ tours : le lutin dit « Hop ! » $5$ fois.\nb) $5 \\times 10 = 50$ pas.\n⛔ Le piège : croire que la boucle ne répète que le premier bloc.\nRéponse : a) $5$ fois ; b) $50$ pas.",
@@ -363,6 +394,9 @@ export const exercicesAlgoProgrammation6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Le lutin part en regardant vers la droite.\na) Dessine son trajet sur ton cahier.\nb) De combien de pas avance-t-il en tout ?\nc) Où arrive-t-il par rapport à son départ ?",
+          reponses: [
+            { question: "b)", attendu: ["150", "150 pas"] },
+          ],
           figure: scratch(["quand drapeau vert cliqué", "avancer de 60", "tourner à gauche de 90°", "avancer de 30", "tourner à gauche de 90°", "avancer de 60"]),
           correction:
             "a) Il avance de $60$ vers la droite.\nIl tourne à gauche : il regarde vers le haut. Il monte de $30$.\nIl tourne encore à gauche : il regarde vers la gauche. Il revient de $60$.\nb) $60 + 30 + 60 = 150$ pas.\nc) Il est allé $60$ pas à droite, puis revenu de $60$.\nIl est $30$ pas plus haut que son départ.\n⛔ Le piège : oublier que le 2e « tourner » le fait repartir vers la gauche.\nRéponse : b) $150$ pas ; c) $30$ pas au-dessus du départ.",
@@ -371,6 +405,12 @@ export const exercicesAlgoProgrammation6e: FicheExercicesData = {
         },
         {
           enonce: "Le stylo est posé.\na) Quelle figure trace ce programme ?\nb) Donne ses deux longueurs.\nc) Calcule son périmètre.\nd) Combien de blocs « avancer » sont exécutés ?",
+          reponses: [
+            { question: "a)", attendu: ["un rectangle", "rectangle"] },
+            { question: "b)", attendu: "80 ; 40" },
+            { question: "c)", attendu: ["240", "240 pas"] },
+            { question: "d)", attendu: "4" },
+          ],
           figure: scratch(["quand drapeau vert cliqué", "stylo en position d'écriture", "répéter 2 fois", "  avancer de 80", "  tourner à gauche de 90°", "  avancer de 40", "  tourner à gauche de 90°"]),
           correction:
             "a) Un tour de boucle trace deux côtés : $80$ pas, puis $40$ pas.\nIl y a $2$ tours : $4$ côtés en tout.\nLes côtés d'en face sont égaux et les coins sont droits : c'est un rectangle.\nb) $80$ pas et $40$ pas.\nc) $80 + 40 + 80 + 40 = 240$ pas.\nd) $2$ blocs « avancer » par tour, et $2$ tours : $2 \\times 2 = 4$.\n⛔ Le piège : croire que « répéter 2 fois » trace seulement $2$ côtés.\nRéponse : a) un rectangle ; b) $80$ et $40$ pas ; c) $240$ pas ; d) $4$.",
@@ -379,6 +419,11 @@ export const exercicesAlgoProgrammation6e: FicheExercicesData = {
         },
         {
           enonce: "Le stylo est posé.\na) Quelle figure trace ce programme ?\nb) De combien de degrés le lutin tourne-t-il en tout ?\nc) Zoé met « tourner à gauche de 60° ». La figure se ferme-t-elle ?",
+          reponses: [
+            { question: "a)", attendu: ["un triangle équilatéral", "triangle équilatéral"] },
+            { question: "b)", attendu: "360" },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           figure: scratch(["quand drapeau vert cliqué", "stylo en position d'écriture", "répéter 3 fois", "  avancer de 60", "  tourner à gauche de 120°"]),
           correction:
             "a) $3$ tours : $3$ côtés de $60$ pas.\nLa figure se referme : c'est un triangle.\nSes $3$ côtés sont égaux : c'est un triangle équilatéral.\nb) $3 \\times 120 = 360$ degrés : un tour complet.\nc) Avec $60°$, le lutin tourne de $3 \\times 60 = 180$ degrés seulement.\nIl ne revient pas au départ : la figure reste ouverte.\n⛔ Le piège : mettre l'angle du triangle, $60°$. Le lutin doit tourner de $120°$.\nRéponse : a) un triangle équilatéral ; b) $360°$ ; c) non.",
@@ -410,6 +455,11 @@ export const exercicesAlgoProgrammation6e: FicheExercicesData = {
         },
         {
           enonce: "Le lutin part en regardant vers la droite.\na) Combien de marches trace-t-il ?\nb) De combien de pas avance-t-il en tout ?\nc) Où arrive-t-il par rapport à son départ ?\nd) Vers où regarde-t-il à la fin ?",
+          reponses: [
+            { question: "a)", attendu: "3" },
+            { question: "b)", attendu: ["120", "120 pas"] },
+            { question: "d)", attendu: ["vers la droite", "à droite", "droite"] },
+          ],
           figure: scratch(["quand drapeau vert cliqué", "répéter 3 fois", "  avancer de 20", "  tourner à gauche de 90°", "  avancer de 20", "  tourner à droite de 90°"]),
           correction:
             "Un tour de boucle trace une marche.\nIl avance de $20$, tourne vers le haut, monte de $20$.\nPuis il tourne à droite : il regarde de nouveau vers la droite.\na) $3$ tours : $3$ marches.\nb) Un tour : $20 + 20 = 40$ pas. Trois tours : $3 \\times 40 = 120$ pas.\nc) Il va $3 \\times 20 = 60$ pas à droite et $60$ pas plus haut.\nd) Vers la droite, comme au départ.\n⛔ Le piège : oublier le « tourner à droite ». Le lutin continuerait à tourner vers la gauche.\nRéponse : a) $3$ ; b) $120$ pas ; c) $60$ pas à droite et $60$ plus haut ; d) vers la droite.",
@@ -441,6 +491,11 @@ export const exercicesAlgoProgrammation6e: FicheExercicesData = {
           titre: "Le robot du potager",
           enonce:
             "Un robot sème des graines dans un potager. Il part en regardant vers la droite.\na) Combien de graines sème-t-il ?\nb) De combien de pas avance-t-il en tout ?\nc) Combien de pas séparent les deux rangées ?\nd) Où finit-il par rapport à son départ ?",
+          reponses: [
+            { question: "a)", attendu: "8" },
+            { question: "b)", attendu: ["260", "260 pas"] },
+            { question: "c)", attendu: ["20", "20 pas"] },
+          ],
           figure: scratch(["quand drapeau vert cliqué", "répéter 4 fois", "  avancer de 30", "  dire 'Graine !'", "tourner à gauche de 90°", "avancer de 20", "tourner à gauche de 90°", "répéter 4 fois", "  avancer de 30", "  dire 'Graine !'"]),
           correction:
             "a) La première boucle fait $4$ tours. À chaque tour, le robot dit « Graine ! ».\nLa seconde boucle aussi : $4 + 4 = 8$ graines.\nb) Première rangée : $4 \\times 30 = 120$ pas.\nPuis $20$ pas pour changer de rangée.\nSeconde rangée : encore $120$ pas.\n$120 + 20 + 120 = 260$ pas.\nc) Entre les deux « tourner », il avance de $20$ : les rangées sont à $20$ pas.\nd) Après deux quarts de tour à gauche, il revient vers la gauche.\nIl finit $20$ pas au-dessus de son départ.\n⛔ Le piège : compter les blocs « dire » écrits ($2$) au lieu des blocs exécutés ($8$).\nRéponse : a) $8$ ; b) $260$ pas ; c) $20$ pas ; d) $20$ pas au-dessus du départ.",
@@ -451,6 +506,11 @@ export const exercicesAlgoProgrammation6e: FicheExercicesData = {
           titre: "La course d'orientation",
           enonce:
             "Sami court une course d'orientation. Un pas vaut $1$ m. Il part tout droit.\nIl avance de 50, puis tourne à droite de 90°.\nIl avance de 30, puis tourne à droite de 90°.\nIl avance de 50, puis tourne à droite de 90°.\nEnfin, il avance de 30.\na) Quelle figure trace-t-il ?\nb) Quelle distance court-il ?\nc) Réécris le programme avec « répéter 2 fois ».\nd) Il fait $3$ fois ce parcours. Quelle distance court-il ?",
+          reponses: [
+            { question: "a)", attendu: ["un rectangle", "rectangle"] },
+            { question: "b)", attendu: "160" },
+            { question: "d)", attendu: "480" },
+          ],
           correction:
             "a) $4$ côtés : $50$, $30$, $50$, $30$. Et trois quarts de tour à droite.\nLes côtés d'en face sont égaux et les coins sont droits : c'est un rectangle.\nb) $50 + 30 + 50 + 30 = 160$ pas, soit $160$ m.\nc) Le groupe « avancer de 50, tourner, avancer de 30, tourner » revient $2$ fois.\nRépéter 2 fois : avancer de 50, tourner à droite de 90°, avancer de 30, tourner à droite de 90°.\nd) $3 \\times 160 = 480$ m.\n⭐ La boucle ajoute un dernier quart de tour : Sami regarde de nouveau devant lui.\nRéponse : a) un rectangle ; b) $160$ m ; d) $480$ m.",
           schema: ecranSeulement(lutin([[[0, 0], [50, 0], [50, -30], [0, -30], [0, 0]]], "un rectangle de 50 sur 30", { cotes: 2 })),
@@ -460,6 +520,11 @@ export const exercicesAlgoProgrammation6e: FicheExercicesData = {
           titre: "Le nid d'abeilles",
           enonce:
             "Une alvéole de ruche a $6$ côtés égaux.\nPour la tracer, le lutin répète $6$ fois : avancer de 30, puis tourner à gauche.\na) De combien de degrés doit-il tourner ?\nb) Quel est le périmètre de l'alvéole ?\nc) Avec « tourner à gauche de 72° », combien de tours faut-il pour fermer la figure ?",
+          reponses: [
+            { question: "a)", attendu: "60" },
+            { question: "b)", attendu: ["180", "180 pas"] },
+            { question: "c)", attendu: "5" },
+          ],
           correction:
             "Pour fermer une figure, le lutin fait un tour complet : $360°$ en tout.\na) Il tourne $6$ fois : $360 \\div 6 = 60$. Il tourne de $60°$.\nb) $6 \\times 30 = 180$ pas.\nc) $360 \\div 72 = 5$ : il faut $5$ tours. La figure a $5$ côtés.\n⛔ Le piège : croire que l'angle est toujours $90°$. C'est vrai pour le carré et le rectangle.\nRéponse : a) $60°$ ; b) $180$ pas ; c) $5$ tours.",
           schema: ecranSeulement(lutin([[[0, 0], [30, 0], [45, 25.980762], [30, 51.961524], [0, 51.961524], [-15, 25.980762], [0, 0]]], "6 côtés de 30 pas")),
@@ -469,6 +534,11 @@ export const exercicesAlgoProgrammation6e: FicheExercicesData = {
           titre: "La chasse au trésor",
           enonce:
             "Le lutin cherche un trésor. Il part en regardant vers la droite.\nLe trésor est $40$ pas à droite et $40$ pas plus haut que le départ.\na) Dessine le trajet du lutin.\nb) De combien de pas avance-t-il en tout ?\nc) Trouve-t-il le trésor ?\nd) Combien de blocs « avancer » sont exécutés ?",
+          reponses: [
+            { question: "b)", attendu: ["80", "80 pas"] },
+            { question: "c)", attendu: ["oui"] },
+            { question: "d)", attendu: "4" },
+          ],
           figure: scratch(["quand drapeau vert cliqué", "avancer de 30", "tourner à gauche de 90°", "répéter 2 fois", "  avancer de 20", "tourner à droite de 90°", "avancer de 10", "dire 'Trésor !'"]),
           correction:
             "a) Il avance de $30$ vers la droite. Il tourne à gauche : il regarde vers le haut.\nLa boucle le fait monter $2$ fois de $20$ : $40$ pas.\nIl tourne à droite et avance de $10$ vers la droite.\nb) $30 + 20 + 20 + 10 = 80$ pas.\nc) Il est allé $30 + 10 = 40$ pas à droite et $40$ pas plus haut.\nC'est la place du trésor : il le trouve.\nd) $1$ bloc avant la boucle, $2$ dans la boucle, $1$ après : $4$.\n⛔ Le piège au d) : compter les blocs écrits ($3$) au lieu des blocs exécutés.\nRéponse : b) $80$ pas ; c) oui ; d) $4$.",

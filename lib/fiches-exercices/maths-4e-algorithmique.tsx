@@ -132,6 +132,9 @@ export const exercicesAlgorithmique4e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Dans un jeu, la variable billes compte les billes d'un joueur. Que dit le lutin à la fin ?",
+          reponses: [
+            { attendu: "15" },
+          ],
           figure: programme(["mettre billes à 20", "ajouter 6 à billes", "mettre billes à 9", "ajouter 6 à billes", "dire billes"]),
           correction:
             "Je suis la variable billes, bloc par bloc.\n« mettre billes à 20 » : billes vaut $20$.\n« ajouter 6 » : $20 + 6 = 26$.\n« mettre billes à 9 » ÉCRASE le $26$ : billes vaut $9$.\n« ajouter 6 » : $9 + 6 = 15$.\nRéponse : le lutin dit $15$.\n⛔ Le piège : tout additionner, $20 + 6 + 9 + 6 = 41$. « mettre à » ne s'ajoute pas : il remplace.",
@@ -140,6 +143,10 @@ export const exercicesAlgorithmique4e: FicheExercicesData = {
         },
         {
           enonce: "Un élève veut ÉCHANGER les valeurs de a et de b.\na) Que dit le lutin ?\nb) L'échange a-t-il réussi ? Sinon, corrige le programme.",
+          reponses: [
+            { question: "a)", attendu: "10 ; 10" },
+            { question: "b)", attendu: ["non", "faux"] },
+          ],
           figure: programme(["mettre a à 4", "mettre b à 10", "mettre a à b", "mettre b à a", "dire a", "dire b"]),
           correction:
             "Je note a et b après chaque bloc.\nAprès les deux premiers blocs : a vaut $4$ et b vaut $10$.\n« mettre a à b » : a prend la valeur de b, $10$. Le $4$ est perdu.\n« mettre b à a » : b prend la valeur de a, qui vaut maintenant $10$.\na) Réponse : le lutin dit $10$, puis $10$.\nb) Non : b devait valoir $4$. Je range d'abord a dans une troisième variable c : « mettre c à a », puis « mettre a à b », puis « mettre b à c ». Le lutin dit alors $10$, puis $4$.\n⛔ Le piège : croire que « mettre a à b » échange les deux cases. Il COPIE b dans a, et l'ancien a est effacé.",
@@ -154,6 +161,13 @@ export const exercicesAlgorithmique4e: FicheExercicesData = {
         {
           enonce:
             "La variable v vaut $7$. Pour chaque condition, dis si elle est vraie ou fausse.\na) « v > 7 »\nb) « v ≥ 7 »\nc) « v < 9 »\nd) « v = 7 »\ne) « v + 8 > 15 »",
+          reponses: [
+            { question: "a)", attendu: ["faux", "non"] },
+            { question: "b)", attendu: ["vrai", "oui"] },
+            { question: "c)", attendu: ["vrai", "oui"] },
+            { question: "d)", attendu: ["vrai", "oui"] },
+            { question: "e)", attendu: ["faux", "non"] },
+          ],
           correction:
             "v vaut $7$ : je remplace v par $7$ dans chaque condition.\na) $7 > 7$ est faux : $7$ n'est pas STRICTEMENT plus grand que $7$.\nb) $7 \\geq 7$ est vrai : « ≥ » accepte l'égalité.\nc) $7 < 9$ est vrai.\nd) $7 = 7$ est vrai.\ne) $7 + 8 = 15$, et $15 > 15$ est faux.\nRéponse : faux, vrai, vrai, vrai, faux.\n⛔ Le piège : l'égalité. Avec « > », la valeur exacte du seuil donne toujours faux.",
           schema: trace(["condition", "avec v = 7"], [["v > 7", "faux"], ["v ≥ 7", "vrai"], ["v < 9", "vrai"], ["v = 7", "vrai"], ["v + 8 > 15", "faux"]]),
@@ -161,6 +175,11 @@ export const exercicesAlgorithmique4e: FicheExercicesData = {
         },
         {
           enonce: "À la pression normale, l'eau gèle à $0$ °C. Que dit le lutin si on répond $-4$ ? $0$ ? $15$ ?",
+          reponses: [
+            { question: "-4", attendu: "glace" },
+            { question: "0", attendu: "glace" },
+            { question: "15", attendu: ["eau liquide", "liquide"] },
+          ],
           figure: programme(["demander 'Température ?'", "si réponse ≤ 0 alors", "  dire 'glace'", "sinon", "  dire 'eau liquide'"]),
           correction:
             "Le programme teste « réponse ≤ 0 » : la condition est vraie si la réponse est plus petite que $0$ OU égale à $0$.\nAvec $-4$ : $-4 \\leq 0$ est vrai, le lutin dit « glace ».\nAvec $0$ : $0 \\leq 0$ est vrai, le lutin dit « glace ».\nAvec $15$ : $15 \\leq 0$ est faux, seule la branche « sinon » s'exécute : le lutin dit « eau liquide ».\nRéponse : « glace », « glace », « eau liquide ».\n⛔ Le piège : le $0$. « ≤ » inclut l'égalité : à $0$ °C pile, le programme dit « glace ».\n⭐ À $120$ °C, ce programme dirait encore « eau liquide », alors que l'eau bout à $100$ °C : un programme ne sait que ce qu'on lui a écrit.",
@@ -169,6 +188,11 @@ export const exercicesAlgorithmique4e: FicheExercicesData = {
         },
         {
           enonce: "Une piscine affiche ses tarifs avec ce programme (tarifs choisis pour l'exercice). Quel prix dit-il pour un enfant de $3$ ans ? De $6$ ans ? De $11$ ans ?",
+          reponses: [
+            { question: "3 ans", attendu: "2" },
+            { question: "6 ans", attendu: "4" },
+            { question: "11 ans", attendu: "4" },
+          ],
           figure: programme(["mettre prix à 4", "demander 'Âge ?'", "si réponse < 6 alors", "  mettre prix à 2", "dire prix"]),
           correction:
             "Le prix est d'abord mis à $4$. Le bloc du « si » peut le changer, mais seulement si la condition est vraie.\n$3$ ans : $3 < 6$ est vrai, le prix passe à $2$. Le lutin dit $2$.\n$6$ ans : $6 < 6$ est faux. Le bloc du « si » est sauté, le prix reste $4$. Le lutin dit $4$.\n$11$ ans : $11 < 6$ est faux, le prix reste $4$.\nRéponse : $2$ €, $4$ €, $4$ €.\n⛔ Le piège : croire qu'un « si » sans « sinon » arrête tout quand la condition est fausse. Le programme saute seulement le bloc du « si » et continue : « dire prix » s'exécute toujours.",
@@ -178,6 +202,9 @@ export const exercicesAlgorithmique4e: FicheExercicesData = {
         {
           enonce:
             "Un manège accepte les personnes qui mesurent AU MOINS $120$ cm. Par quelle condition faut-il remplacer les pointillés : « t > 120 », « t ≥ 120 », « t < 120 » ou « t = 120 » ?",
+          reponses: [
+            { attendu: ["t ≥ 120", "t>=120"] },
+          ],
           figure: programme(["demander 'Taille en cm ?'", "mettre t à réponse", "si ... alors", "  dire 'tu peux monter'", "sinon", "  dire 'trop petit'"]),
           correction:
             "« Au moins $120$ » veut dire $120$ ou plus : $120$ est accepté.\nJe teste aux bornes, avec $119$, $120$ et $121$.\n« t > 120 » refuse $120$ : ce n'est pas elle. « t < 120 » et « t = 120 » refusent $121$ : ce n'est pas elles.\n« t ≥ 120 » refuse $119$, accepte $120$ et $121$.\nRéponse : « si t ≥ 120 alors ».\n⛔ Le piège : écrire « t > 120 ». Un enfant qui mesure $120$ cm pile resterait au bord du manège.",
@@ -192,6 +219,11 @@ export const exercicesAlgorithmique4e: FicheExercicesData = {
         {
           enonce:
             "L'OMS conseille de se protéger du soleil dès que l'indice UV atteint $3$. Ce programme n'alerte qu'à partir de $6$.\na) Modifie UN bloc pour suivre le conseil de l'OMS.\nb) Que dit le programme corrigé pour un indice de $2$, de $3$ et de $5$ ?",
+          reponses: [
+            { question: "b) 2", attendu: "risque faible" },
+            { question: "b) 3", attendu: ["protège-toi", "protege toi"] },
+            { question: "b) 5", attendu: ["protège-toi", "protege toi"] },
+          ],
           figure: programme(["demander 'Indice UV ?'", "si réponse ≥ 6 alors", "  dire 'protège-toi'", "sinon", "  dire 'risque faible'"]),
           correction:
             "a) Seul le seuil change : je remplace « réponse ≥ 6 » par « réponse ≥ 3 ». Le reste du programme ne bouge pas.\nb) $2 \\geq 3$ est faux : « risque faible ». $3 \\geq 3$ est vrai : « protège-toi ». $5 \\geq 3$ est vrai : « protège-toi ».\nRéponse : « risque faible », « protège-toi », « protège-toi ».\n⭐ Avant la correction, l'indice $5$ donnait « risque faible » : c'est justement le cas que l'OMS veut couvrir.\n⛔ Le piège : écrire « réponse > 3 ». À l'indice $3$, où l'OMS conseille déjà de se protéger, l'alerte ne se déclencherait pas.",
@@ -205,6 +237,9 @@ export const exercicesAlgorithmique4e: FicheExercicesData = {
         },
         {
           enonce: "Une gourde contient $50$ cL d'eau. À chaque pause, on en boit $7$ cL. Que dit le lutin après les $4$ pauses ?",
+          reponses: [
+            { attendu: "22" },
+          ],
           figure: programme(["mettre gourde à 50", "répéter 4 fois", "  ajouter -7 à gourde", "dire gourde"]),
           correction:
             "« ajouter -7 » enlève $7$ à chaque tour. La gourde part de $50$.\nTour 1 : $50 - 7 = 43$. Tour 2 : $43 - 7 = 36$. Tour 3 : $36 - 7 = 29$. Tour 4 : $29 - 7 = 22$.\nContrôle : on a bu $4 \\times 7 = 28$ cL, et $50 - 28 = 22$.\nRéponse : le lutin dit $22$ : il reste $22$ cL.\n⛔ Le piège : lire « ajouter » et faire des additions, $50 + 28 = 78$ cL, plus que la gourde n'en contenait ! Ajouter un nombre négatif, c'est retirer.",
@@ -229,6 +264,12 @@ export const exercicesAlgorithmique4e: FicheExercicesData = {
         {
           enonce:
             "Aux États-Unis, les températures se donnent en degrés Fahrenheit (°F). Ce programme convertit des degrés Celsius (°C).\na) Que dit le lutin avec $20$ ?\nb) Avec $100$, la température où l'eau bout ?\nc) Avec $-40$ ? Que remarques-tu ?\nd) Écris le calcul du programme avec la lettre $c$.",
+          reponses: [
+            { question: "a)", attendu: "68" },
+            { question: "b)", attendu: "212" },
+            { question: "c)", attendu: "-40" },
+            { question: "d)", attendu: "1,8c + 32" },
+          ],
           figure: programme(["demander 'Degrés Celsius ?'", "mettre c à réponse", "mettre f à c * 9 / 5 + 32", "dire f"]),
           correction:
             "a) Le programme respecte les priorités : d'abord la multiplication et la division, de gauche à droite, puis l'addition.\nAvec $20$ : $20 \\times 9 = 180$, puis $180 \\div 5 = 36$, puis $36 + 32 = 68$. Réponse : $68$ °F.\nb) Avec $100$ : $100 \\times 9 = 900$, $900 \\div 5 = 180$, $180 + 32 = 212$. Réponse : l'eau bout à $212$ °F.\nc) Avec $-40$ : $-40 \\times 9 = -360$, $-360 \\div 5 = -72$, $-72 + 32 = -40$. Réponse : $-40$ °C, c'est aussi $-40$ °F : les deux échelles se rejoignent là.\nd) Multiplier par $9$ puis diviser par $5$, c'est multiplier par $1{,}8$. Réponse : le programme calcule $c \\times 1{,}8 + 32$, soit $1{,}8c + 32$.\n⛔ Le piège : ajouter $32$ en premier, $(20 + 32) \\times 9 \\div 5 = 93{,}6$. L'ordinateur respecte les priorités, comme sur une copie.",
@@ -238,6 +279,11 @@ export const exercicesAlgorithmique4e: FicheExercicesData = {
         {
           enonce:
             "En Ligue 1, une victoire rapporte $3$ points, un match nul $1$ point, une défaite $0$ point.\na) Complète le bloc « mettre pts à … ».\nb) Une équipe finit la saison avec $20$ victoires, $8$ nuls et $6$ défaites. Que dit le lutin ?\nc) Un élève a écrit « mettre pts à 3 * (v + n) ». Que dirait son programme ? Pourquoi est-ce faux ?",
+          reponses: [
+            { question: "a)", attendu: "3v + n" },
+            { question: "b)", attendu: "68" },
+            { question: "c)", attendu: "84" },
+          ],
           figure: programme(["demander 'Victoires ?'", "mettre v à réponse", "demander 'Nuls ?'", "mettre n à réponse", "mettre pts à ...", "dire pts"]),
           correction:
             "a) Chaque victoire vaut $3$ points : v victoires valent $3 \\times v$. Chaque nul vaut $1$ point : n nuls valent n points. Les défaites ne rapportent rien.\nJe complète : « mettre pts à 3 * v + n ».\nb) $3 \\times 20 + 8 = 60 + 8 = 68$. Réponse : le lutin dit $68$.\nc) Son programme dirait $3 \\times (20 + 8) = 3 \\times 28 = 84$. Il donne $3$ points à chaque nul, au lieu de $1$.\n⛔ Le piège : les parenthèses. « 3 * (v + n) » multiplie AUSSI les nuls par $3$ ; sans parenthèses, seul v est multiplié.",
@@ -247,6 +293,11 @@ export const exercicesAlgorithmique4e: FicheExercicesData = {
         {
           enonce:
             "Dans un jeu de plateau, chaque lancer de dé rapporte des pièces : $3$ pour un six, $1$ sinon.\na) On lance $6$, $2$, $6$, $5$, $1$. Que dit le lutin ?\nb) Quel est le plus petit nombre de pièces possible en $5$ lancers ? Le plus grand ?",
+          reponses: [
+            { question: "a)", attendu: "9" },
+            { question: "b) min", attendu: "5" },
+            { question: "b) max", attendu: "15" },
+          ],
           figure: programme(["mettre pièces à 0", "répéter 5 fois", "  demander 'Dé ?'", "  si réponse = 6 alors", "    ajouter 3 à pièces", "  sinon", "    ajouter 1 à pièces", "dire pièces"]),
           correction:
             "a) Je fais un tableau, une ligne par tour de boucle. À chaque tour, UNE seule des deux branches s'exécute.\nTour 1 : $6$, la condition est vraie, j'ajoute $3$ : pièces vaut $3$.\nTour 2 : $2$, la condition est fausse, j'ajoute $1$ : $4$.\nTour 3 : $6$ : $4 + 3 = 7$. Tour 4 : $5$ : $8$. Tour 5 : $1$ : $9$.\nRéponse : le lutin dit $9$.\nb) Sans aucun six : $5 \\times 1 = 5$. Avec cinq six : $5 \\times 3 = 15$.\nRéponse : au moins $5$ pièces, au plus $15$.\n⛔ Le piège : exécuter les deux branches quand on fait six, $3 + 1 = 4$ pièces. On trouverait $11$ au lieu de $9$.",
@@ -256,6 +307,12 @@ export const exercicesAlgorithmique4e: FicheExercicesData = {
         {
           enonce:
             "Une compagnie aérienne accepte en cabine les valises de $12$ kg AU PLUS (valeur choisie pour l'exercice).\na) Que dit ce programme pour $11$ kg, $12$ kg et $13$ kg ?\nb) Quelle valise est mal traitée ?\nc) Corrige le bloc faux.",
+          reponses: [
+            { question: "a) 11", attendu: "en cabine" },
+            { question: "a) 12", attendu: "en soute" },
+            { question: "a) 13", attendu: "en soute" },
+            { question: "b)", attendu: "12" },
+          ],
           figure: programme(["demander 'Poids en kg ?'", "si réponse < 12 alors", "  dire 'en cabine'", "sinon", "  dire 'en soute'"]),
           correction:
             "a) $11 < 12$ est vrai : « en cabine ». $12 < 12$ est faux : « en soute ». $13 < 12$ est faux : « en soute ».\nRéponse : « en cabine », « en soute », « en soute ».\nb) « Au plus $12$ kg » veut dire $12$ kg ou moins : la valise de $12$ kg pile a droit à la cabine. Réponse : c'est la valise de $12$ kg qui est mal traitée.\nc) J'écris « si réponse ≤ 12 alors ». Je reteste aux bornes : $11$ et $12$ vont en cabine, $13$ en soute.\n⛔ Le piège : tester seulement $5$ kg et $20$ kg. Le programme faux y répond juste : l'erreur ne se voit qu'au seuil exact.",
@@ -270,6 +327,11 @@ export const exercicesAlgorithmique4e: FicheExercicesData = {
         {
           enonce:
             "Le lutin part vers la droite et laisse une trace quand il avance.\na) Quelle figure trace ce programme ? Donne ses dimensions.\nb) Quelle est la longueur totale du tracé ?\nc) Modifie le programme pour qu'il trace un carré de côté $50$.",
+          reponses: [
+            { question: "a) nom", attendu: ["rectangle", "un rectangle"] },
+            { question: "a) dim", attendu: "80 ; 30" },
+            { question: "b)", attendu: "220" },
+          ],
           figure: programme(["stylo en position d'écriture", "répéter 2 fois", "  avancer de 80", "  tourner à gauche de 90", "  avancer de 30", "  tourner à gauche de 90"]),
           correction:
             "a) Je suis le lutin : $80$ pas vers la droite, un quart de tour à gauche, $30$ pas vers le haut, un quart de tour à gauche. Puis la même chose une deuxième fois, et il revient à son point de départ.\nRéponse : un rectangle de $80$ pas sur $30$ pas.\nb) $2 \\times (80 + 30) = 2 \\times 110 = 220$. Réponse : le tracé mesure $220$ pas.\nc) Un carré a $4$ côtés égaux : je répète $4$ fois « avancer de 50 » puis « tourner à gauche de 90 ». Le tracé mesure alors $4 \\times 50 = 200$ pas.\n⛔ Le piège : garder « répéter 2 fois » avec un seul « avancer » dans la boucle. Le lutin ne tracerait que deux côtés du carré.",
@@ -284,6 +346,11 @@ export const exercicesAlgorithmique4e: FicheExercicesData = {
         {
           enonce:
             "Léa a $35$ € et met $12$ € de côté chaque semaine. Elle veut s'acheter un casque de vélo à $100$ €.\na) Que dit le lutin ?\nb) Combien Léa a-t-elle alors ?\nc) Son frère calcule $65 \\div 12 \\approx 5{,}4$ et annonce $5$ semaines. A-t-il raison ?",
+          reponses: [
+            { question: "a)", attendu: "6" },
+            { question: "b)", attendu: "107" },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           figure: programme(["mettre argent à 35", "mettre sem à 0", "répéter jusqu'à argent ≥ 100", "  ajouter 12 à argent", "  ajouter 1 à sem", "dire sem"]),
           correction:
             "a) Avant chaque tour, le programme teste « argent ≥ 100 ». Tant que c'est faux, il ajoute $12$ € et une semaine.\nL'argent passe à $47$, $59$, $71$, $83$, $95$, puis $107$.\nAprès $5$ semaines, $95 \\geq 100$ est faux : la boucle continue. Après $6$ semaines, $107 \\geq 100$ est vrai : elle s'arrête.\nRéponse : le lutin dit $6$.\nb) $35 + 6 \\times 12 = 35 + 72 = 107$. Réponse : Léa a $107$ €.\nc) Non : en $5$ semaines, elle n'a que $35 + 5 \\times 12 = 95$ €. Il lui manque $5$ € : il faut une sixième semaine.\n⛔ Le piège : arrondir $5{,}4$ à $5$. Ici, il faut monter à l'entier SUIVANT : $5$ semaines ne suffisent pas.",
@@ -293,6 +360,12 @@ export const exercicesAlgorithmique4e: FicheExercicesData = {
         {
           enonce:
             "Le pH dit si une solution est acide (moins de $7$), neutre ($7$) ou basique (plus de $7$).\na) Que dit le lutin pour le jus de citron (pH environ $2$), l'eau pure ($7$) et l'eau de mer (pH moyen $8{,}1$) ?\nb) Combien de blocs « dire » s'exécutent à chaque fois ?",
+          reponses: [
+            { question: "citron", attendu: "acide" },
+            { question: "eau", attendu: "neutre" },
+            { question: "mer", attendu: "basique" },
+            { question: "b)", attendu: "1" },
+          ],
           figure: programme(["demander 'pH ?'", "si réponse < 7 alors", "  dire 'acide'", "sinon", "  si réponse = 7 alors", "    dire 'neutre'", "  sinon", "    dire 'basique'"]),
           correction:
             "Le deuxième « si » est RANGÉ dans le « sinon » du premier : il n'est testé que si le pH n'est pas plus petit que $7$.\na) Jus de citron, $2$ : $2 < 7$ est vrai. Le lutin dit « acide », et tout le « sinon » est sauté.\nEau pure, $7$ : $7 < 7$ est faux, je passe au « sinon ». $7 = 7$ est vrai : « neutre ».\nEau de mer, $8{,}1$ : $8{,}1 < 7$ est faux, puis $8{,}1 = 7$ est faux : « basique ».\nRéponse : « acide », « neutre », « basique ».\nb) Réponse : à chaque fois, UN SEUL bloc « dire » s'exécute.\n⛔ Le piège : croire que pour le citron, le programme teste aussi « = 7 ». Le second test est dans le « sinon » : il ne tourne que si le premier est faux.\n⭐ Le pH moyen des océans était d'environ $8{,}2$ avant l'ère industrielle. En absorbant du CO₂, l'océan devient moins basique : c'est l'acidification des océans.",
@@ -302,6 +375,12 @@ export const exercicesAlgorithmique4e: FicheExercicesData = {
         {
           enonce:
             "Un thermostat allume le chauffage quand la pièce est sous $19$ °C, la température conseillée dans les pièces à vivre.\na) Que dit le programme pour $17$, $19$ et $21$ °C ?\nb) Réécris-le avec une variable consigne, pour que le seuil se change en UN seul bloc.\nc) La nuit, on conseille $16$ °C dans les chambres. Quel bloc changes-tu ? Que dit alors le programme pour $17$ °C ?",
+          reponses: [
+            { question: "a) 17", attendu: "on chauffe" },
+            { question: "a) 19", attendu: "on arrête" },
+            { question: "a) 21", attendu: "on arrête" },
+            { question: "c)", attendu: "on arrête" },
+          ],
           figure: programme(["demander 'Température ?'", "si réponse < 19 alors", "  dire 'on chauffe'", "sinon", "  dire 'on arrête'"]),
           correction:
             "a) $17 < 19$ est vrai : « on chauffe ». $19 < 19$ est faux : « on arrête ». $21 < 19$ est faux : « on arrête ».\nRéponse : « on chauffe », « on arrête », « on arrête ».\nb) Je range le seuil dans une variable, en haut du programme : « mettre consigne à 19 », puis je teste « réponse < consigne ». Le programme dit exactement la même chose qu'avant.\nc) Je ne change qu'un bloc : « mettre consigne à 16 ». Avec $17$ : $17 < 16$ est faux. Réponse : le programme dit « on arrête ».\n⭐ Une variable pour le seuil, c'est la molette d'un vrai thermostat : on la tourne, on ne réécrit pas le programme.\n⛔ Le piège : un seuil écrit à plusieurs endroits. On en change un, on oublie l'autre. Avec une variable, il n'est écrit qu'UNE fois.",
@@ -326,6 +405,10 @@ export const exercicesAlgorithmique4e: FicheExercicesData = {
           titre: "Le comptage des hirondelles",
           enonce:
             "Chaque printemps, des bénévoles comptent les couples d'hirondelles d'un village (relevé fictif) : $520$, puis $480$, $495$, $450$ et $410$. Ce programme compte les années de baisse.\na) Que dit le lutin ?\nb) Un élève déplace « mettre avant à réponse » juste après le « demander » de la boucle. Que dit alors le lutin ? Pourquoi ?\nc) Complète le programme pour qu'il dise aussi la perte totale entre la première et la dernière année.",
+          reponses: [
+            { question: "a)", attendu: "3" },
+            { question: "b)", attendu: "0" },
+          ],
           figure: programme(["demander 'Année 1 ?'", "mettre avant à réponse", "mettre baisses à 0", "répéter 4 fois", "  demander 'Année suivante ?'", "  si réponse < avant alors", "    ajouter 1 à baisses", "  mettre avant à réponse", "dire baisses"]),
           correction:
             "a) La variable avant retient le nombre de l'année d'avant. À chaque tour, je compare le nouveau nombre à avant, PUIS je mets avant à jour.\n$480 < 520$ : baisse, baisses vaut $1$. $495 < 480$ : faux. $450 < 495$ : baisse, $2$. $410 < 450$ : baisse, $3$.\nRéponse : le lutin dit $3$.\nb) avant vaudrait déjà la réponse au moment du test : « réponse < avant » compare un nombre à lui-même, et c'est toujours faux. Réponse : le lutin dit $0$.\nc) Je garde le premier nombre dans une variable : « mettre premier à réponse », au début. À la fin, réponse contient le dernier nombre : j'ajoute « dire premier - réponse ».\nRéponse : le lutin dit $3$, puis $520 - 410 = 110$ : $110$ couples perdus en quatre ans.\n⛔ Le piège : l'ORDRE des blocs dans la boucle. La mise à jour de avant doit venir APRÈS le test, sinon le programme a oublié l'année d'avant.",
@@ -341,6 +424,10 @@ export const exercicesAlgorithmique4e: FicheExercicesData = {
           titre: "La monnaie rendue",
           enonce:
             "Une caisse automatique doit rendre $13$ € avec des billets de $5$ € et des pièces de $2$ €. Ce programme s'occupe des billets.\na) Que dit le lutin ?\nb) Complète le programme pour qu'il rende ensuite des pièces de $2$ €, puis dise le nombre de pièces et ce qui reste.\nc) Que dit le programme complet si la caisse doit rendre $17$ € ?",
+          reponses: [
+            { question: "a)", attendu: "2 ; 3" },
+            { question: "c)", attendu: "3 ; 2 ; 1 ; 0" },
+          ],
           figure: programme(["mettre reste à 13", "mettre billets à 0", "répéter jusqu'à reste < 5", "  ajouter -5 à reste", "  ajouter 1 à billets", "dire billets", "dire reste"]),
           correction:
             "a) Tant que reste n'est pas plus petit que $5$, la caisse donne un billet : reste perd $5$, billets gagne $1$.\nreste vaut $13$, puis $8$, puis $3$. $3 < 5$ : la boucle s'arrête.\nRéponse : le lutin dit $2$ (billets), puis $3$ (euros qui restent).\nb) J'ajoute la même boucle pour les pièces : « mettre pièces à 0 », « répéter jusqu'à reste < 2 » avec « ajouter -2 à reste » et « ajouter 1 à pièces » dedans, puis « dire pièces » et « dire reste ».\nAvec $13$ €, reste passe de $3$ à $1$. Réponse : le lutin dit $2$, $3$, puis $1$ (pièce) et $1$ (euro qui reste).\nc) Avec $17$ € : reste vaut $17$, $12$, $7$, $2$ : $3$ billets. Puis $2$, $0$ : $1$ pièce.\nRéponse : le lutin dit $3$, $2$, $1$, puis $0$ : il ne reste rien, car $3 \\times 5 + 2 = 17$.\n⛔ Le piège : écrire « répéter jusqu'à reste ≤ 5 ». Avec $15$ €, la caisse s'arrêterait à $5$ € sans donner le dernier billet.",
@@ -356,6 +443,13 @@ export const exercicesAlgorithmique4e: FicheExercicesData = {
           titre: "Le pass ou le ticket",
           enonce:
             "Dans une ville (tarifs choisis pour l'exercice), un ticket de bus coûte $2$ € et un pass mensuel $30$ €. Ce programme conseille un voyageur.\na) Que dit-il pour $10$, $15$ et $20$ trajets par mois ?\nb) Que représente la variable a ?\nc) Pour $15$ trajets, les deux choix coûtent-ils la même chose ? Modifie le programme pour qu'il dise « même prix » dans ce cas.\nd) À partir de combien de trajets le pass est-il moins cher ?",
+          reponses: [
+            { question: "a) 10", attendu: "garde les tickets" },
+            { question: "a) 15", attendu: "garde les tickets" },
+            { question: "a) 20", attendu: "prends le pass" },
+            { question: "c)", attendu: ["oui", "vrai"] },
+            { question: "d)", attendu: "16" },
+          ],
           figure: programme(["demander 'Trajets par mois ?'", "mettre t à réponse", "mettre a à 2 * t", "si a > 30 alors", "  dire 'prends le pass'", "sinon", "  dire 'garde les tickets'"]),
           correction:
             "a) $10$ trajets : a vaut $20$, et $20 > 30$ est faux : « garde les tickets ».\n$15$ trajets : a vaut $30$, et $30 > 30$ est faux : « garde les tickets ».\n$20$ trajets : a vaut $40$, et $40 > 30$ est vrai : « prends le pass ».\nb) a est le prix du mois si l'on paie chaque trajet avec un ticket, à $2$ € le trajet.\nc) Oui : $2 \\times 15 = 30$, le prix du pass. Dans le « sinon », je range un second test : « si a = 30 alors dire 'même prix' », avec « dire 'garde les tickets' » dans son « sinon ».\nd) Le pass est moins cher quand $2 \\times t > 30$, c'est-à-dire quand t dépasse $15$. Réponse : à partir de $16$ trajets, qui coûtent $32$ € en tickets.\n⛔ Le piège : répondre $15$. À $15$ trajets, les deux choix coûtent pareil : le pass n'est pas MOINS cher.",
@@ -371,6 +465,11 @@ export const exercicesAlgorithmique4e: FicheExercicesData = {
           titre: "L'escalier du lutin",
           enonce:
             "Le lutin part vers la droite et laisse une trace.\na) Dessine le tracé. Combien mesure-t-il ?\nb) Où arrive le lutin par rapport à son point de départ ?\nc) On veut un escalier de $5$ marches qui arrive au même endroit. Quelle longueur faut-il donner à chaque « avancer » ? Écris le programme.\nd) Combien mesure alors le tracé ? Que remarques-tu ?",
+          reponses: [
+            { question: "a)", attendu: "120" },
+            { question: "c)", attendu: "12" },
+            { question: "d)", attendu: "120" },
+          ],
           figure: programme(["stylo en position d'écriture", "répéter 3 fois", "  avancer de 20", "  tourner à gauche de 90", "  avancer de 20", "  tourner à droite de 90"]),
           correction:
             "a) Dans la boucle : $20$ pas vers la droite, un quart de tour à gauche, $20$ pas vers le haut, un quart de tour à droite pour repartir vers la droite. C'est une marche d'escalier, répétée $3$ fois.\nLe tracé mesure $3 \\times (20 + 20) = 120$ pas.\nb) Le lutin a fait $3 \\times 20 = 60$ pas vers la droite, et $60$ vers le haut. Réponse : il arrive $60$ pas plus à droite et $60$ pas plus haut.\nc) $5$ marches doivent monter de $60$ : chaque « avancer » vaut $60 \\div 5 = 12$. Je change « répéter 3 fois » en « répéter 5 fois », et les deux « avancer de 20 » en « avancer de 12 ».\nd) $5 \\times (12 + 12) = 120$. Réponse : le tracé mesure encore $120$ pas.\n⭐ Avec $10$ marches de $6$, on trouve toujours $120$ : l'escalier ressemble de plus en plus à une pente, mais il ne raccourcit jamais.\n⛔ Le piège : tourner deux fois à gauche. Le lutin ferait demi-tour et tracerait un carré de côté $20$ au lieu de monter.",

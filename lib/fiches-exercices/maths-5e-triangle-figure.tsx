@@ -327,6 +327,10 @@ export const exercicesTriangleFigure5e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Voici le triangle $RST$.\na) Quels sont ses sommets ? Ses côtés ?\nb) Quel est le côté opposé au sommet $R$ ?\nc) Quels côtés forment l'angle $\\widehat{RST}$ ?",
+          reponses: [
+            { question: "b)", attendu: ["[ST]", "[TS]"] },
+            { question: "c)", attendu: ["[SR] ; [ST]", "[RS] ; [ST]", "[SR] ; [TS]", "[RS] ; [TS]"] },
+          ],
           figure: tri({ A: [0, 0], B: [6, 0], C: [2.2, 3.4] }, { noms: { A: "R", B: "S", C: "T" } }),
           correction:
             "a) Les sommets sont les trois points : $R$, $S$ et $T$. Les côtés sont les trois segments qui les relient : $[RS]$, $[ST]$ et $[TR]$.\nb) Le côté opposé à $R$ est celui qui NE touche PAS $R$ : c'est $[ST]$.\nc) L'angle $\\widehat{RST}$ a pour sommet $S$, la lettre du milieu. Ses côtés partent de $S$ : ce sont $[SR]$ et $[ST]$.\n⛔ Le piège au b) : répondre $[RS]$ ou $[RT]$. Ces côtés partent de $R$ ; le côté opposé est en face de lui.\nRéponse : a) $R$, $S$, $T$ et $[RS]$, $[ST]$, $[TR]$ ; b) $[ST]$ ; c) $[SR]$ et $[ST]$.",
@@ -334,6 +338,10 @@ export const exercicesTriangleFigure5e: FicheExercicesData = {
         },
         {
           enonce: "Observe le codage de chaque triangle, puis donne sa nature. Attention : un triangle peut avoir deux noms.",
+          reponses: [
+            { question: "KLM", attendu: ["rectangle isocèle", "isocèle rectangle", "rectangle isocèle en K"] },
+            { question: "PQR", attendu: ["équilatéral"] },
+          ],
           figure: deux(
             tri({ A: [0, 0], B: [4, 0], C: [0, 4] }, { noms: { A: "K", B: "L", C: "M" }, droit: "A", egaux: ["AB", "CA"] }),
             tri({ A: [0, 0], B: [4, 0], C: [2, 3.4641] }, { noms: { A: "P", B: "Q", C: "R" }, egaux: ["AB", "BC", "CA"] }),
@@ -345,6 +353,12 @@ export const exercicesTriangleFigure5e: FicheExercicesData = {
         {
           enonce:
             "Donne la nature de chaque triangle.\na) Ses côtés mesurent $6{,}5$ cm, $4$ cm et $6{,}5$ cm.\nb) Ses angles mesurent $90°$, $33°$ et $57°$.\nc) Ses trois côtés mesurent $5{,}2$ cm.\nd) Ses côtés mesurent $3$ cm, $5$ cm et $6$ cm.",
+          reponses: [
+            { question: "a)", attendu: ["isocèle", "triangle isocèle"] },
+            { question: "b)", attendu: ["rectangle", "triangle rectangle"] },
+            { question: "c)", attendu: ["équilatéral", "triangle équilatéral"] },
+            { question: "d)", attendu: ["aucune", "aucune nature particulière", "quelconque", "aucun nom"] },
+          ],
           correction:
             "a) Deux côtés ont la même longueur, $6{,}5$ cm : le triangle est isocèle.\nb) Un angle mesure $90°$ : le triangle est rectangle.\nc) Trois côtés égaux : le triangle est équilatéral.\nd) Trois longueurs différentes et aucun angle droit annoncé : il n'a pas de nom particulier.\n⛔ Le piège au d) : le dire rectangle « parce qu'il en a l'air ». Sans angle droit donné ou mesuré, on ne peut pas l'affirmer.\nRéponse : a) isocèle ; b) rectangle ; c) équilatéral ; d) aucune nature particulière.",
           schema: ecranSeulement(tri({ A: [0, 0], B: [4, 0], C: [2, 6.1847] }, { cotes: { AB: "4 cm", BC: "6,5 cm", CA: "6,5 cm" }, egaux: ["BC", "CA"] })),
@@ -352,6 +366,11 @@ export const exercicesTriangleFigure5e: FicheExercicesData = {
         },
         {
           enonce: "Peut-on construire un triangle avec ces trois longueurs ?\na) $4$ cm, $9$ cm et $4$ cm.\nb) $5$ cm, $11$ cm et $7$ cm.\nc) $3{,}5$ cm, $8{,}5$ cm et $5$ cm.",
+          reponses: [
+            { question: "a)", attendu: ["non", "faux"] },
+            { question: "b)", attendu: ["oui", "vrai"] },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           correction:
             "Je repère le PLUS GRAND côté, et je le compare à la somme des deux autres.\na) Le plus grand est $9$. $4 + 4 = 8$, et $8 < 9$ : les deux petits côtés, mis bout à bout, n'atteignent pas le bout du grand. Pas de triangle.\nb) Le plus grand est $11$. $5 + 7 = 12$, et $12 > 11$ : le triangle existe.\nc) Le plus grand est $8{,}5$. $3{,}5 + 5 = 8{,}5$ : la somme est ÉGALE au grand côté. Les trois sommets sont alignés, le triangle est aplati.\n⛔ Le piège au c) : répondre « oui » parce que la somme n'est pas plus petite. Il faut qu'elle soit strictement plus grande.\nRéponse : a) non ; b) oui ; c) non, il est aplati.",
           schema: longueurs([{ grand: 9, petits: [4, 4] }, { grand: 11, petits: [5, 7] }, { grand: 8.5, petits: [3.5, 5] }]),
@@ -359,6 +378,9 @@ export const exercicesTriangleFigure5e: FicheExercicesData = {
         },
         {
           enonce: "Dans le triangle $DEF$, $\\widehat{D} = 64°$ et $\\widehat{E} = 49°$. Calcule $\\widehat{F}$.",
+          reponses: [
+            { attendu: "67" },
+          ],
           figure: tri({ A: [0, 0], B: [6, 0], C: [2.1565, 4.4215] }, { noms: { A: "D", B: "E", C: "F" }, angles: { A: "64°", B: "49°", C: "?" }, trouve: ["C"] }),
           correction:
             "Les trois angles d'un triangle font toujours $180°$ : il ne m'en manque qu'un.\nJ'additionne les deux angles connus : $64 + 49 = 113$.\nJe retranche de $180$ : $\\widehat{F} = 180° - 113° = 67°$.\nJe vérifie : $64 + 49 + 67 = 180$.\n⛔ Le piège : retrancher un seul angle, $180 - 64 = 116$. Il faut retirer les DEUX angles connus.\nRéponse : $\\widehat{F} = 67°$.",
@@ -366,6 +388,9 @@ export const exercicesTriangleFigure5e: FicheExercicesData = {
         },
         {
           enonce: "Le triangle $KLM$ est rectangle en $L$, et $\\widehat{K} = 38°$. Calcule $\\widehat{M}$.",
+          reponses: [
+            { attendu: "52" },
+          ],
           correction:
             "Rectangle en $L$ : l'angle $\\widehat{L}$ mesure $90°$.\nLes trois angles font $180°$ : $90 + 38 = 128$, puis $180 - 128 = 52$.\nDonc $\\widehat{M} = 52°$.\n⭐ Raccourci : dans un triangle rectangle, les deux angles aigus font $90°$ ensemble. $90 - 38 = 52$.\n⛔ Le piège : oublier l'angle droit et calculer $180 - 38 = 142$. Un angle de $142°$ ne tient pas à côté d'un angle droit.\nRéponse : $\\widehat{M} = 52°$.",
           schema: ecranSeulement(tri({ A: [0, 0], B: [5, 0], C: [0, 3.9064] }, { noms: { A: "L", B: "K", C: "M" }, droit: "A", angles: { B: "38°", C: "52°" }, trouve: ["C"] })),
@@ -373,6 +398,10 @@ export const exercicesTriangleFigure5e: FicheExercicesData = {
         },
         {
           enonce: "Le triangle $ABC$ est isocèle en $A$, et son angle au sommet $\\widehat{A}$ mesure $34°$. Calcule $\\widehat{B}$ et $\\widehat{C}$.",
+          reponses: [
+            { question: "B", attendu: "73" },
+            { question: "C", attendu: "73" },
+          ],
           correction:
             "Isocèle en $A$ : les deux angles à la base, $\\widehat{B}$ et $\\widehat{C}$, sont égaux.\nIl reste $180 - 34 = 146$ degrés pour ces deux angles ensemble.\nJe partage en deux : $146 \\div 2 = 73$. Donc $\\widehat{B} = \\widehat{C} = 73°$.\nJe vérifie : $34 + 73 + 73 = 180$.\n⛔ Le piège : s'arrêter à $146$, ou donner $146°$ à chaque angle. $146$ degrés, c'est pour les DEUX angles réunis.\nRéponse : $\\widehat{B} = \\widehat{C} = 73°$.",
           schema: ecranSeulement(tri({ A: [2, 6.5417], B: [0, 0], C: [4, 0] }, { angles: { A: "34°", B: "73°", C: "73°" }, trouve: ["B", "C"], egaux: ["AB", "CA"] })),
@@ -403,6 +432,9 @@ export const exercicesTriangleFigure5e: FicheExercicesData = {
         {
           enonce:
             "Nina a deux baguettes de $5$ cm et de $9$ cm. Elle cherche une troisième baguette pour fermer un triangle. Elle a le choix entre $3$ cm, $4$ cm, $5$ cm, $13$ cm, $14$ cm et $15$ cm.\nLesquelles conviennent ?",
+          reponses: [
+            { attendu: "5 ; 13" },
+          ],
           correction:
             "Je teste chaque baguette avec l'inégalité triangulaire : le plus grand côté doit être plus petit que la somme des deux autres.\n$3$ cm : le plus grand est $9$, et $5 + 3 = 8 < 9$. Non.\n$4$ cm : $5 + 4 = 9$, égal à $9$ : aplati. Non.\n$5$ cm : $5 + 5 = 10 > 9$. Oui.\n$13$ cm : cette fois le plus grand est $13$, et $5 + 9 = 14 > 13$. Oui.\n$14$ cm : $5 + 9 = 14$, égal : aplati. Non.\n$15$ cm : $14 < 15$. Non.\n⛔ Le piège : ne tester que les petites baguettes. Une baguette de $13$ cm devient le plus grand côté : c'est elle qu'on compare à $5 + 9$.\nRéponse : les baguettes de $5$ cm et de $13$ cm.",
           schema: ecranSeulement(longueurs([{ grand: 9, petits: [5, 4] }, { grand: 14, petits: [5, 9] }])),
@@ -410,6 +442,9 @@ export const exercicesTriangleFigure5e: FicheExercicesData = {
         },
         {
           enonce: "On veut construire le triangle $RST$ tel que $RS = 6$ cm, $\\widehat{R} = 42°$ et $\\widehat{S} = 76°$.\na) Écris les étapes de la construction.\nb) Sans rapporteur, donne la mesure de $\\widehat{T}$.",
+          reponses: [
+            { question: "b)", attendu: "62" },
+          ],
           correction:
             "a) Je trace d'abord le côté connu, $[RS]$, de $6$ cm.\nEn $R$, je pose le rapporteur (centre sur $R$, $0$ sur $[RS]$) et je trace une demi-droite qui fait $42°$ avec $[RS]$.\nEn $S$, je fais de même avec $76°$, du même côté de $[RS]$.\n$T$ est le point où les deux demi-droites se coupent.\nb) Les angles font $180°$ : $42 + 76 = 118$, et $180 - 118 = 62$. Donc $\\widehat{T} = 62°$.\n⛔ Le piège : tracer l'angle de $76°$ en $R$. Chaque angle se trace à SON sommet : $\\widehat{R}$ en $R$, $\\widehat{S}$ en $S$.\nRéponse : b) $\\widehat{T} = 62°$.",
           schema: tri({ A: [0, 0], B: [6, 0], C: [4.9, 4.412] }, { noms: { A: "R", B: "S", C: "T" }, cotes: { AB: "6 cm" }, angles: { A: "42°", B: "76°", C: "62°" }, trouve: ["C"] }),
@@ -418,6 +453,10 @@ export const exercicesTriangleFigure5e: FicheExercicesData = {
         {
           enonce:
             "On veut construire le triangle $EFG$ tel que $EF = 5$ cm, $EG = 6$ cm et $\\widehat{FEG} = 108°$.\na) Écris les étapes de la construction.\nb) Sur ta figure, mesure $FG$ au millimètre.\nc) Le triangle a-t-il un angle obtus ?",
+          reponses: [
+            { question: "b)", attendu: "8,9", tolerance: 0.1 },
+            { question: "c)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) Je trace $[EF]$ de $5$ cm.\nL'angle de $108°$ est en $E$, ENTRE $[EF]$ et $[EG]$ : je pose le rapporteur en $E$, le $0$ sur $[EF]$, et je trace une demi-droite à $108°$.\nSur cette demi-droite, je place $G$ à $6$ cm de $E$. Je trace $[FG]$.\nb) Je mesure : $FG \\approx 8{,}9$ cm.\nc) Oui : l'angle $\\widehat{FEG}$ mesure $108°$, plus que $90°$.\n⭐ C'est aussi le plus grand côté, $[FG]$, qui fait face au plus grand angle.\n⛔ Le piège : tracer l'angle de $108°$ en $F$. L'énoncé dit $\\widehat{FEG}$ : la lettre du milieu, $E$, est le sommet.\nRéponse : b) $FG \\approx 8{,}9$ cm ; c) oui, en $E$.",
           schema: ecranSeulement(tri({ A: [0, 0], B: [5, 0], C: [-1.8541, 5.7063] }, { noms: { A: "E", B: "F", C: "G" }, cotes: { AB: "5 cm", BC: "≈ 8,9 cm", CA: "6 cm" }, angles: { A: "108°" } })),
@@ -425,6 +464,10 @@ export const exercicesTriangleFigure5e: FicheExercicesData = {
         },
         {
           enonce: "Un triangle $ABC$ a deux angles connus : $\\widehat{B} = 72°$ et $\\widehat{A} = 36°$.\na) Calcule $\\widehat{C}$.\nb) Quelle est la nature du triangle ? Quels côtés sont égaux ?",
+          reponses: [
+            { question: "a)", attendu: "72" },
+            { question: "b)", attendu: ["isocèle", "triangle isocèle", "isocèle en A"] },
+          ],
           correction:
             "a) $72 + 36 = 108$, et $180 - 108 = 72$. Donc $\\widehat{C} = 72°$.\nb) Les angles $\\widehat{B}$ et $\\widehat{C}$ sont égaux : le triangle est isocèle.\nLes deux côtés égaux partent du troisième sommet, $A$ : $AB = AC$.\n⛔ Le piège : croire que $[BC]$ fait partie des côtés égaux parce qu'il touche les deux angles égaux. C'est la BASE : les côtés égaux sont les deux autres.\nRéponse : a) $\\widehat{C} = 72°$ ; b) isocèle en $A$, avec $AB = AC$.",
           schema: ecranSeulement(tri({ A: [1.5, 4.6165], B: [0, 0], C: [3, 0] }, { angles: { A: "36°", B: "72°", C: "72°" }, trouve: ["C"], egaux: ["AB", "CA"] })),
@@ -433,6 +476,12 @@ export const exercicesTriangleFigure5e: FicheExercicesData = {
         {
           enonce:
             "Ces triangles peuvent-ils exister ? Justifie.\na) Des angles de $95°$, $45°$ et $40°$.\nb) Deux angles de $100°$ et $90°$.\nc) Des angles de $61°$, $59°$ et $62°$.\nd) Un triangle rectangle avec deux autres angles de $48°$ et $42°$.",
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: ["non", "faux"] },
+            { question: "c)", attendu: ["non", "faux"] },
+            { question: "d)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "Je regarde si la somme des trois angles fait exactement $180°$.\na) $95 + 45 + 40 = 180$ : oui, il existe, et il a un angle obtus.\nb) $100 + 90 = 190$ : c'est déjà plus que $180$. Non.\nc) $61 + 59 + 62 = 182$ : non, il y a $2$ degrés de trop.\nd) $90 + 48 + 42 = 180$ : oui.\n⛔ Le piège au c) : trouver « à peu près $180$ » et dire oui. La somme doit être EXACTEMENT $180°$.\nRéponse : a) oui ; b) non ; c) non ; d) oui.",
           schema: ecranSeulement(tri({ A: [0, 0], B: [6, 0], C: [2.7375, 2.7375] }, { angles: { A: "45°", B: "40°", C: "95°" } })),
@@ -440,6 +489,10 @@ export const exercicesTriangleFigure5e: FicheExercicesData = {
         },
         {
           enonce: "Dans le triangle $ABC$, $\\widehat{A} = 44°$ et $\\widehat{B} = 68°$.\na) Calcule $\\widehat{C}$.\nb) Quelle est la nature du triangle ?\nc) Quels côtés sont égaux ?",
+          reponses: [
+            { question: "a)", attendu: "68" },
+            { question: "b)", attendu: ["isocèle", "triangle isocèle", "isocèle en A"] },
+          ],
           figure: tri({ A: [1, 2.4751], B: [0, 0], C: [2, 0] }, { angles: { A: "44°", B: "68°", C: "?" }, trouve: ["C"] }),
           correction:
             "a) $44 + 68 = 112$, et $180 - 112 = 68$. Donc $\\widehat{C} = 68°$.\nb) $\\widehat{B} = \\widehat{C} = 68°$ : deux angles égaux, le triangle est isocèle.\nc) Les côtés égaux partent du sommet $A$, celui dont l'angle est différent : $AB = AC$.\n⛔ Le piège au c) : répondre $BC$. Le côté $[BC]$ est la base : il est en face de l'angle $\\widehat{A}$, le seul différent.\nRéponse : a) $\\widehat{C} = 68°$ ; b) isocèle ; c) $AB = AC$.",
@@ -447,6 +500,10 @@ export const exercicesTriangleFigure5e: FicheExercicesData = {
         },
         {
           enonce: "Sur la figure, $B$, $C$ et $D$ sont alignés. On sait que $\\widehat{BAC} = 55°$ et $\\widehat{ACD} = 128°$.\na) Calcule $\\widehat{ACB}$.\nb) Calcule $\\widehat{ABC}$.",
+          reponses: [
+            { question: "a)", attendu: "52" },
+            { question: "b)", attendu: "73" },
+          ],
           figure: tri({ A: [1.4063, 4.5997], B: [0, 0], C: [5, 0] }, { angles: { A: "55°", B: "?" }, trouve: ["B"], lignes: [{ de: [5, 0], vers: [7.5, 0], couleur: "gris" }], points: [{ en: [7.5, 0], nom: "D", vers: "bas" }], libres: [{ en: [5, 0], de: [7.5, 0], vers: [1.4063, 4.5997], label: "128°" }] }),
           correction:
             "a) $B$, $C$ et $D$ sont alignés : les angles $\\widehat{ACB}$ et $\\widehat{ACD}$ forment un angle plat. $\\widehat{ACB} = 180° - 128° = 52°$.\nb) Dans le triangle $ABC$, les angles font $180°$ : $55 + 52 = 107$, et $180 - 107 = 73$. Donc $\\widehat{ABC} = 73°$.\n⛔ Le piège : prendre $128°$ pour un angle du triangle. Il est DEHORS, entre $[CA]$ et le prolongement $[CD]$ : on ne peut pas le mettre dans la somme.\nRéponse : a) $\\widehat{ACB} = 52°$ ; b) $\\widehat{ABC} = 73°$.",
@@ -454,6 +511,9 @@ export const exercicesTriangleFigure5e: FicheExercicesData = {
         },
         {
           enonce: "Construis le triangle $MNP$, isocèle en $M$, de base $[NP]$ de $6$ cm, dont les angles à la base mesurent $34°$.\na) Écris les étapes.\nb) Combien mesure l'angle $\\widehat{NMP}$ ?",
+          reponses: [
+            { question: "b)", attendu: "112" },
+          ],
           correction:
             "a) Je trace la base $[NP]$ de $6$ cm.\nEn $N$, je trace au rapporteur une demi-droite à $34°$ de $[NP]$. En $P$, je fais de même, du même côté.\n$M$ est le point où elles se coupent. Le triangle est isocèle en $M$ : je peux vérifier au compas que $MN = MP$.\nb) $34 + 34 = 68$, et $180 - 68 = 112$. Donc $\\widehat{NMP} = 112°$ : un angle obtus.\n⛔ Le piège : mettre $34°$ en $M$. Les angles à la BASE sont en $N$ et en $P$, les deux bouts de $[NP]$.\nRéponse : b) $\\widehat{NMP} = 112°$.",
           schema: tri({ A: [0, 0], B: [6, 0], C: [3, 2.0235] }, { noms: { A: "N", B: "P", C: "M" }, cotes: { AB: "6 cm" }, angles: { A: "34°", B: "34°", C: "112°" }, trouve: ["C"], egaux: ["BC", "CA"] }),
@@ -477,6 +537,13 @@ export const exercicesTriangleFigure5e: FicheExercicesData = {
           titre: "La tente",
           enonce:
             "Vue de face, une tente a la forme d'un triangle $ABC$ : le sol $[AB]$ mesure $2{,}4$ m, les deux pans $[AC]$ et $[BC]$ mesurent $1{,}5$ m chacun. Les mesures sont des modèles.\na) Quelle est la nature du triangle $ABC$ ?\nb) Pourrait-on monter la tente avec deux pans de $1{,}1$ m ?\nc) On mesure $\\widehat{A} \\approx 37°$. Donne $\\widehat{B}$, puis $\\widehat{C}$.\nd) L'angle au sommet est-il aigu ou obtus ?",
+          reponses: [
+            { question: "a)", attendu: ["isocèle", "triangle isocèle", "isocèle en C"] },
+            { question: "b)", attendu: ["non", "faux"] },
+            { question: "c) B", attendu: "37" },
+            { question: "c) C", attendu: "106" },
+            { question: "d)", attendu: ["obtus"] },
+          ],
           figure: tri({ A: [0, 0], B: [2.4, 0], C: [1.2, 0.9] }, { cotes: { AB: "2,4 m", BC: "1,5 m", CA: "1,5 m" }, angles: { A: "37°", C: "?" }, trouve: ["C"], egaux: ["BC", "CA"] }),
           correction:
             "a) $AC = BC = 1{,}5$ m : deux côtés égaux, le triangle est isocèle en $C$.\nb) Avec deux pans de $1{,}1$ m : $1{,}1 + 1{,}1 = 2{,}2$, plus petit que $2{,}4$. Les pans ne se rejoindraient pas au-dessus du sol : impossible.\nc) Isocèle en $C$ : les angles à la base sont égaux, $\\widehat{B} \\approx 37°$.\nPuis $37 + 37 = 74$, et $180 - 74 = 106$ : $\\widehat{C} \\approx 106°$.\nd) $106°$ est plus grand que $90°$ : l'angle au sommet est obtus. La tente est large et basse.\n⛔ Le piège au b) : croire que des pans plus courts donnent seulement une tente plus basse. En dessous de $1{,}2$ m chacun, ils n'atteignent même plus le milieu du sol.\nRéponse : a) isocèle en $C$ ; b) non ; c) $\\widehat{B} \\approx 37°$ et $\\widehat{C} \\approx 106°$ ; d) obtus.",
@@ -486,6 +553,11 @@ export const exercicesTriangleFigure5e: FicheExercicesData = {
           titre: "Les trois refuges",
           enonce:
             "Trois refuges de montagne $A$, $B$ et $C$ sont reliés en ligne droite. On sait que $AB = 9$ km et $BC = 5$ km. Les distances sont des modèles.\na) Entre quelles valeurs la distance $AC$ peut-elle être ?\nb) Si $AC = 4$ km, que peut-on dire des trois refuges ?\nc) Un randonneur affirme que $AC = 15$ km. Est-ce possible ?\nd) En fait, $AC = 7$ km. Construis le plan, à l'échelle $1$ cm pour $1$ km.",
+          reponses: [
+            { question: "a)", attendu: "4 ; 14" },
+            { question: "b)", attendu: ["alignés", "ils sont alignés"] },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $AC$ doit être plus petit que la somme des deux autres : $AC < 9 + 5 = 14$.\nEt $AB$, qui mesure $9$, doit être plus petit que $5 + AC$ : il faut $AC > 9 - 5 = 4$.\nDonc $AC$ est entre $4$ km et $14$ km.\nb) Avec $AC = 4$ : $4 + 5 = 9$, exactement $AB$. Les refuges sont alignés : $C$ est sur le segment $[AB]$.\nc) $15$ km dépasse $9 + 5 = 14$ km : impossible, même en passant par $B$ on ferait moins.\nd) Je vérifie : $5 + 7 = 12 > 9$. Je trace $[AB]$ de $9$ cm, un arc de centre $A$ et de rayon $7$ cm, un arc de centre $B$ et de rayon $5$ cm. $C$ est au croisement.\n⛔ Le piège au a) : oublier la valeur basse. Avec $AC = 3$ km, on aurait $3 + 5 = 8 < 9$ : pas de triangle.\nRéponse : a) entre $4$ et $14$ km ; b) ils sont alignés ; c) non ; d) voir le plan.",
           schema: longueurs([{ grand: 9, petits: [4, 5] }, { grand: 15, petits: [9, 5] }], "km"),
@@ -495,6 +567,16 @@ export const exercicesTriangleFigure5e: FicheExercicesData = {
           titre: "Le triangle d'or",
           enonce:
             "Le triangle $ABC$ est isocèle en $A$, avec $\\widehat{BAC} = 36°$. Le segment $[BD]$ partage l'angle $\\widehat{ABC}$ en deux angles égaux, $x$ et $y$.\na) Calcule $\\widehat{ABC}$ et $\\widehat{ACB}$.\nb) Calcule $x$ et $y$.\nc) Calcule $\\widehat{BDC}$. Quelle est la nature du triangle $BDC$ ?\nd) Calcule $\\widehat{ADB}$. Quelle est la nature du triangle $ABD$ ?",
+          reponses: [
+            { question: "a) ABC", attendu: "72" },
+            { question: "a) ACB", attendu: "72" },
+            { question: "b) x", attendu: "36" },
+            { question: "b) y", attendu: "36" },
+            { question: "c) BDC", attendu: "72" },
+            { question: "c) nat.", attendu: ["isocèle", "triangle isocèle", "isocèle en B"] },
+            { question: "d) ADB", attendu: "108" },
+            { question: "d) nat.", attendu: ["isocèle", "triangle isocèle", "isocèle en D"] },
+          ],
           figure: tri({ A: [0, 3.0777], B: [-1, 0], C: [1, 0] }, { angles: { A: "36°" }, egaux: ["AB", "CA"], lignes: [{ de: [-1, 0], vers: [0.618, 1.1756], couleur: "orange" }], points: [{ en: [0.618, 1.1756], nom: "D", vers: "droite" }], libres: [{ en: [-1, 0], de: [1, 0], vers: [0.618, 1.1756], label: "x" }, { en: [-1, 0], de: [0.618, 1.1756], vers: [0, 3.0777], label: "y" }] }),
           correction:
             "a) Isocèle en $A$ : $\\widehat{ABC} = \\widehat{ACB}$. Il reste $180 - 36 = 144$ degrés, partagés en deux : $144 \\div 2 = 72$. Donc $\\widehat{ABC} = \\widehat{ACB} = 72°$.\nb) $[BD]$ partage $72°$ en deux : $x = y = 72 \\div 2 = 36$, soit $36°$.\nc) Dans le triangle $BDC$ : $x + \\widehat{C} = 36 + 72 = 108$, donc $\\widehat{BDC} = 180 - 108 = 72$, soit $72°$.\nLes angles en $C$ et en $D$ sont égaux : $BDC$ est isocèle en $B$.\nd) $A$, $D$ et $C$ sont alignés : $\\widehat{ADB} = 180 - 72 = 108$, soit $108°$.\nDans $ABD$, les angles en $A$ et en $B$ mesurent tous les deux $36°$ : $ABD$ est isocèle en $D$.\n⛔ Le piège : ne voir qu'un triangle isocèle, le grand. La figure en cache DEUX autres, et c'est en calculant les angles qu'on les trouve.\nRéponse : a) $72°$ et $72°$ ; b) $x = y = 36°$ ; c) $72°$, $BDC$ isocèle en $B$ ; d) $108°$, $ABD$ isocèle en $D$.",
@@ -504,6 +586,12 @@ export const exercicesTriangleFigure5e: FicheExercicesData = {
           titre: "Le bateau et les deux phares",
           enonce:
             "Deux phares $A$ et $B$ sont à $6$ km l'un de l'autre sur une côte droite. Depuis $A$, on voit un bateau $C$ avec un angle $\\widehat{BAC} = 58°$ ; depuis $B$, avec un angle $\\widehat{ABC} = 64°$. Les mesures sont des modèles.\na) Calcule $\\widehat{ACB}$.\nb) Quelle est la nature du triangle $ABC$ ? Déduis-en, sans rien mesurer, la distance entre le bateau et le phare $B$.\nc) Construis le triangle à l'échelle $1$ cm pour $1$ km.\nd) Mesure $AC$ sur ta figure : à quelle distance du phare $A$ est le bateau ?",
+          reponses: [
+            { question: "a)", attendu: "58" },
+            { question: "b) nat.", attendu: ["isocèle", "triangle isocèle", "isocèle en B"] },
+            { question: "b) BC", attendu: "6" },
+            { question: "d)", attendu: "6,4", tolerance: 0.1 },
+          ],
           correction:
             "a) $58 + 64 = 122$, et $180 - 122 = 58$. Donc $\\widehat{ACB} = 58°$.\nb) $\\widehat{A} = \\widehat{C} = 58°$ : le triangle est isocèle. Les côtés égaux partent de $B$, le sommet de l'angle différent : $BA = BC$.\nDonc $BC = 6$ km : le bateau est à $6$ km du phare $B$.\nc) Je trace $[AB]$ de $6$ cm, puis les angles de $58°$ en $A$ et de $64°$ en $B$. $C$ est au croisement des deux demi-droites.\nd) Je mesure $AC \\approx 6{,}4$ cm : le bateau est à environ $6{,}4$ km du phare $A$.\n⭐ Contrôle : $[AC]$ fait face au plus grand angle, $64°$ : c'est bien le plus grand côté.\n⛔ Le piège au b) : sortir la règle. Deux angles égaux donnent un triangle isocèle, et la longueur se déduit sans mesure.\nRéponse : a) $58°$ ; b) isocèle en $B$, $BC = 6$ km ; d) environ $6{,}4$ km.",
           schema: tri({ A: [0, 0], B: [6, 0], C: [3.3698, 5.3928] }, { cotes: { AB: "6 km", BC: "6 km" }, angles: { A: "58°", B: "64°", C: "58°" }, trouve: ["C"], egaux: ["AB", "BC"] }),

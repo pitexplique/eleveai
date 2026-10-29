@@ -295,6 +295,11 @@ export const exercicesCercleDisque6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Sur la figure, O est le centre du cercle.\nComment s'appellent les segments $[OA]$, $[BC]$ et $[DE]$ ?",
+          reponses: [
+            { question: "[OA]", attendu: ["un rayon", "rayon"] },
+            { question: "[BC]", attendu: ["un diamètre", "diamètre"] },
+            { question: "[DE]", attendu: ["une corde", "corde"] },
+          ],
           figure: plan({
             ronds: [{ centre: [0, 0], r: 3 }],
             points: [
@@ -317,6 +322,10 @@ export const exercicesCercleDisque6e: FicheExercicesData = {
         },
         {
           enonce: "a) Un cercle a un rayon de $8$ cm. Quel est son diamètre ?\nb) Un autre cercle a un diamètre de $9$ cm. Quel est son rayon ?",
+          reponses: [
+            { question: "a)", attendu: "16" },
+            { question: "b)", attendu: "4,5" },
+          ],
           correction:
             "a) Le diamètre vaut deux rayons.\n$8 \\times 2 = 16$ cm.\nb) Le rayon est la moitié du diamètre.\n$9 \\div 2 = 4{,}5$ cm.\n⛔ Le piège : diviser quand il faut multiplier. Le diamètre est toujours le plus long.\nRéponse : a) $16$ cm ; b) $4{,}5$ cm.",
           schema: ecranSeulement(
@@ -335,6 +344,11 @@ export const exercicesCercleDisque6e: FicheExercicesData = {
         },
         {
           enonce: "Le disque a pour centre O et pour rayon $3$ cm.\nOn sait que $OM = 3$ cm, $ON = 2$ cm et $OP = 4$ cm.\na) Quel point est sur le cercle ?\nb) Quels points sont dans le disque ?\nc) Quel point est en dehors ?",
+          reponses: [
+            { question: "a)", attendu: ["M"] },
+            { question: "b)", attendu: ["M ; N"] },
+            { question: "c)", attendu: ["P"] },
+          ],
           figure: plan({
             ronds: [{ centre: [0, 0], r: 3, disque: true }],
             points: [
@@ -350,6 +364,10 @@ export const exercicesCercleDisque6e: FicheExercicesData = {
         },
         {
           enonce: "Un disque de $2$ cm de diamètre a un tour de $6{,}28$ cm.\nLe tour est proportionnel au diamètre.\na) Quel est le tour d'un disque de $6$ cm de diamètre ?\nb) Et d'un disque de $20$ cm de diamètre ?",
+          reponses: [
+            { question: "a)", attendu: "18,84" },
+            { question: "b)", attendu: "62,8" },
+          ],
           correction:
             "a) $6$ cm, c'est $3$ fois $2$ cm, car $2 \\times 3 = 6$.\nLe tour est donc $3$ fois plus grand : $6{,}28 \\times 3 = 18{,}84$ cm.\nb) $20$ cm, c'est $10$ fois $2$ cm.\n$6{,}28 \\times 10 = 62{,}8$ cm.\n⛔ Le piège : ajouter. $6$ cm, ce n'est pas « $4$ cm de plus » : c'est « $3$ fois plus ».\nRéponse : a) $18{,}84$ cm ; b) $62{,}8$ cm.",
           schema: mesures(["Diamètre", "Tour"], [["2 cm", "6,28 cm"], ["6 cm", "18,84 cm"], ["20 cm", "62,8 cm"]]),
@@ -357,6 +375,9 @@ export const exercicesCercleDisque6e: FicheExercicesData = {
         },
         {
           enonce: "Un biscuit rond a un diamètre de $7$ cm.\nOn l'entoure d'un ruban.\nQuelle longueur de ruban faut-il ? On prend $\\pi \\approx 3{,}14$.",
+          reponses: [
+            { attendu: "21,98", tolerance: 0.05 },
+          ],
           correction:
             "Le ruban fait le tour du biscuit : c'est son périmètre.\nPérimètre $= \\pi \\times$ diamètre.\n$3{,}14 \\times 7 = 21{,}98$ cm.\n⭐ Je vérifie : c'est un peu plus de $3$ fois $7$, donc un peu plus de $21$.\n⚠️ Le résultat est approché, car $3{,}14$ n'est qu'une valeur approchée de $\\pi$.\nRéponse : environ $21{,}98$ cm de ruban.",
           schema: ecranSeulement(
@@ -370,6 +391,9 @@ export const exercicesCercleDisque6e: FicheExercicesData = {
         },
         {
           enonce: "Un CD est un disque de $6$ cm de rayon.\nCalcule son périmètre. On prend $\\pi \\approx 3{,}14$.",
+          reponses: [
+            { attendu: "37,68", tolerance: 0.05 },
+          ],
           correction:
             "La formule utilise le diamètre. Je le cherche d'abord.\n$6 \\times 2 = 12$ cm.\nPérimètre : $3{,}14 \\times 12 = 37{,}68$ cm.\n⛔ Le piège : calculer $3{,}14 \\times 6 = 18{,}84$. Avec le rayon, on ne trouve que la moitié du tour.\nRéponse : environ $37{,}68$ cm.",
           schema: ecranSeulement(
@@ -384,6 +408,12 @@ export const exercicesCercleDisque6e: FicheExercicesData = {
         {
           enonce:
             "Le chien Pixel est attaché à un piquet P par une laisse de $3$ m.\nSa gamelle G est à $2{,}5$ m de P. Sa niche N est à $3$ m de P. Sa balle B est à $3{,}5$ m de P.\na) Quelle est la forme de la zone où il peut aller ?\nb) Peut-il atteindre G, N et B ?",
+          reponses: [
+            { question: "a)", attendu: ["un disque", "disque"] },
+            { question: "b) G", attendu: ["oui", "vrai"] },
+            { question: "b) N", attendu: ["oui", "vrai"] },
+            { question: "b) B", attendu: ["non", "faux"] },
+          ],
           figure: plan({
             ronds: [{ centre: [0, 0], r: 3, disque: true, couleur: VERT }],
             points: [
@@ -399,6 +429,9 @@ export const exercicesCercleDisque6e: FicheExercicesData = {
         },
         {
           enonce: "La roue d'une brouette a un tour de $125{,}6$ cm.\nQuel est son diamètre ? On prend $\\pi \\approx 3{,}14$. La calculatrice est permise.",
+          reponses: [
+            { attendu: "40", tolerance: 0.05 },
+          ],
           correction:
             "Tour $= 3{,}14 \\times$ diamètre.\nJe fais le calcul à l'envers : je divise par $3{,}14$.\n$125{,}6 \\div 3{,}14 = 40$ cm.\nJe vérifie : $3{,}14 \\times 40 = 125{,}6$. C'est juste.\n⛔ Le piège : multiplier encore par $3{,}14$. On cherche le diamètre : on remonte le calcul.\nRéponse : $40$ cm.",
           schema: ecranSeulement(deroule([{ d: 40, diametre: "d = 40 cm", tour: "tour : 125,6 cm" }])),
@@ -421,6 +454,10 @@ export const exercicesCercleDisque6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Deux points A et B sont à $6$ cm l'un de l'autre.\na) Où sont les points à $4$ cm de A ?\nb) Où sont les points à $3$ cm de B ?\nc) Combien de points sont à la fois à $4$ cm de A et à $3$ cm de B ?\nd) Et à la fois à $1$ cm de A et à $2$ cm de B ?",
+          reponses: [
+            { question: "c)", attendu: "2" },
+            { question: "d)", attendu: ["aucun", "0"] },
+          ],
           correction:
             "a) Sur le cercle de centre A et de rayon $4$ cm.\nb) Sur le cercle de centre B et de rayon $3$ cm.\nc) Je trace les deux cercles. Ils se coupent en deux points, M et N.\nM et N sont sur les deux cercles à la fois.\nd) Les deux cercles sont trop petits : $1 + 2 = 3$, moins que $6$.\nIls ne se touchent pas. Il n'y a aucun point.\n⛔ Le piège : chercher un seul point. Deux cercles qui se coupent ont deux points communs.\nRéponse : a) et b) sur deux cercles ; c) $2$ points ; d) aucun.",
           schema: plan({
@@ -440,6 +477,10 @@ export const exercicesCercleDisque6e: FicheExercicesData = {
         },
         {
           enonce: "Lina mesure le tour de trois objets ronds avec une ficelle.\na) Pour chaque objet, calcule tour ÷ diamètre. Arrondis au centième.\nb) Que remarques-tu ?\nc) Sans mesurer, donne le tour d'un disque de $30$ cm de diamètre.",
+          reponses: [
+            { question: "a)", attendu: "3,14" },
+            { question: "c)", attendu: "94,2", tolerance: 0.05 },
+          ],
           figure: mesures(["Objet", "Diamètre", "Tour"], [["verre", "8 cm", "25,1 cm"], ["assiette", "24 cm", "75,4 cm"], ["bassine", "40 cm", "125,6 cm"]]),
           correction:
             "a) Verre : $25{,}1 \\div 8 \\approx 3{,}14$.\nAssiette : $75{,}4 \\div 24 \\approx 3{,}14$.\nBassine : $125{,}6 \\div 40 = 3{,}14$.\nb) On trouve toujours à peu près $3{,}14$. C'est le nombre $\\pi$.\nLe tour est proportionnel au diamètre.\nc) $3{,}14 \\times 30 = 94{,}2$ cm.\n⚠️ Une ficelle ne mesure pas parfaitement. C'est pour cela qu'on arrondit.\nRéponse : a) environ $3{,}14$ chaque fois ; b) toujours le même nombre ; c) $94{,}2$ cm.",
@@ -447,6 +488,11 @@ export const exercicesCercleDisque6e: FicheExercicesData = {
         },
         {
           enonce: "La roue d'un vélo d'enfant a un diamètre de $50$ cm.\na) Quelle distance le vélo parcourt-il quand la roue fait un tour ?\nb) Et en $10$ tours ? Donne la réponse en mètres.\nc) Combien de tours faut-il pour parcourir $314$ m ?",
+          reponses: [
+            { question: "a)", attendu: "157", tolerance: 0.1 },
+            { question: "b)", attendu: "15,7", tolerance: 0.01 },
+            { question: "c)", attendu: "200", tolerance: 0.5 },
+          ],
           correction:
             "a) En un tour, le vélo avance de la longueur du tour de la roue.\n$3{,}14 \\times 50 = 157$ cm.\nb) $157 \\times 10 = 1\\,570$ cm, soit $15{,}7$ m.\nc) Je mets tout en cm : $314$ m $= 31\\,400$ cm.\n$31\\,400 \\div 157 = 200$ tours.\n⛔ Le piège : diviser des mètres par des centimètres. Je mets tout dans la même unité.\nRéponse : a) $157$ cm ; b) $15{,}7$ m ; c) $200$ tours.",
           schema: deroule([{ d: 50, diametre: "d = 50 cm", tour: "1 tour : 157 cm" }]),
@@ -454,6 +500,9 @@ export const exercicesCercleDisque6e: FicheExercicesData = {
         },
         {
           enonce: "Une fenêtre est un rectangle surmonté d'un demi-disque.\nLe rectangle mesure $8$ dm de large et $10$ dm de haut.\nOn pose un joint tout autour de la fenêtre. Quelle longueur de joint faut-il ?",
+          reponses: [
+            { attendu: "40,56", tolerance: 0.05 },
+          ],
           figure: piste("fenetre", 10, 8, { L: "10 dm", d: "8 dm" }),
           correction:
             "Le tour se fait en trois morceaux.\nLes deux côtés droits : $10 + 10 = 20$ dm.\nLe bas : $8$ dm.\nLe haut est un demi-cercle de diamètre $8$ dm.\nUn cercle entier ferait $3{,}14 \\times 8 = 25{,}12$ dm.\nLa moitié : $25{,}12 \\div 2 = 12{,}56$ dm.\nEn tout : $20 + 8 + 12{,}56 = 40{,}56$ dm.\n⛔ Le piège : compter le trait en pointillés. Il est à l'intérieur : le joint n'y passe pas.\nRéponse : environ $40{,}56$ dm.",
@@ -461,6 +510,13 @@ export const exercicesCercleDisque6e: FicheExercicesData = {
         },
         {
           enonce: "A, B et C sont sur le cercle de centre O. On sait que $OA = 4{,}5$ cm.\na) Combien mesurent $OB$ et $OC$ ?\nb) $[AB]$ passe par O. Comment s'appelle $[AB]$ ? Quelle est sa longueur ?\nc) $[AC]$ ne passe pas par O. Comment s'appelle $[AC]$ ? Est-il plus long que $[AB]$ ?",
+          reponses: [
+            { question: "a)", attendu: "4,5" },
+            { question: "b) nom", attendu: ["un diamètre", "diamètre"] },
+            { question: "b) long.", attendu: "9" },
+            { question: "c) nom", attendu: ["une corde", "corde"] },
+            { question: "c) long?", attendu: ["non", "plus courte", "plus court"] },
+          ],
           figure: plan({
             ronds: [{ centre: [0, 0], r: 4.5 }],
             points: [
@@ -480,6 +536,12 @@ export const exercicesCercleDisque6e: FicheExercicesData = {
         },
         {
           enonce: "La grande aiguille d'une horloge mesure $12$ cm.\nEn une heure, son bout fait un tour complet.\na) Quel est le rayon de ce cercle ? Et son diamètre ?\nb) Quelle distance parcourt le bout de l'aiguille en une heure ?\nc) Et en un quart d'heure ?",
+          reponses: [
+            { question: "a) rayon", attendu: "12" },
+            { question: "a) diam.", attendu: "24" },
+            { question: "b)", attendu: "75,36", tolerance: 0.05 },
+            { question: "c)", attendu: "18,84", tolerance: 0.05 },
+          ],
           figure: plan({
             ronds: [{ centre: [0, 0], r: 12 }],
             points: [
@@ -494,6 +556,10 @@ export const exercicesCercleDisque6e: FicheExercicesData = {
         },
         {
           enonce: "La roue A a un diamètre de $30$ cm. Son tour mesure $94{,}2$ cm.\nLa roue B a un diamètre $3$ fois plus grand.\na) Quel est le diamètre de B ?\nb) Trouve le tour de B sans la formule.\nc) Vérifie avec la formule.",
+          reponses: [
+            { question: "a)", attendu: "90" },
+            { question: "b)", attendu: "282,6", tolerance: 0.05 },
+          ],
           correction:
             "a) $30 \\times 3 = 90$ cm.\nb) Le tour est proportionnel au diamètre.\nDiamètre $3$ fois plus grand, tour $3$ fois plus grand.\n$94{,}2 \\times 3 = 282{,}6$ cm.\nc) $3{,}14 \\times 90 = 282{,}6$ cm. On retrouve le même nombre.\n⛔ Le piège : ajouter $60$ cm au tour, comme au diamètre. Le tour est multiplié, pas augmenté.\nRéponse : a) $90$ cm ; b) et c) $282{,}6$ cm.",
           schema: ecranSeulement(
@@ -506,6 +572,9 @@ export const exercicesCercleDisque6e: FicheExercicesData = {
         },
         {
           enonce: "Un rapporteur a la forme d'un demi-disque de $10$ cm de diamètre.\nQuel est le périmètre du rapporteur ?",
+          reponses: [
+            { attendu: "25,7", tolerance: 0.05 },
+          ],
           figure: piste("demi", 0, 10, { d: "10 cm" }),
           correction:
             "Le tour a deux morceaux : l'arrondi et le côté droit.\nUn cercle entier ferait $3{,}14 \\times 10 = 31{,}4$ cm.\nL'arrondi est la moitié : $31{,}4 \\div 2 = 15{,}7$ cm.\nLe côté droit est le diamètre : $10$ cm.\n$15{,}7 + 10 = 25{,}7$ cm.\n⛔ Le piège : oublier le côté droit. Le périmètre fait tout le tour.\nRéponse : environ $25{,}7$ cm.",
@@ -529,6 +598,12 @@ export const exercicesCercleDisque6e: FicheExercicesData = {
           titre: "La piste du collège",
           enonce:
             "La piste d'un collège a deux lignes droites de $80$ m.\nSes deux virages sont des demi-cercles de $60$ m de diamètre.\na) Quelle longueur font les deux lignes droites ?\nb) Les deux virages forment un cercle entier. Quelle est sa longueur ?\nc) Quelle est la longueur d'un tour de piste ?\nd) Sami fait $3$ tours. Court-il plus de $1$ km ?",
+          reponses: [
+            { question: "a)", attendu: "160" },
+            { question: "b)", attendu: "188,4", tolerance: 0.2 },
+            { question: "c)", attendu: "348,4", tolerance: 0.2 },
+            { question: "d)", attendu: ["oui", "vrai"] },
+          ],
           figure: piste("stade", 80, 60, { L: "80 m", d: "60 m" }),
           correction:
             "a) $80 + 80 = 160$ m.\nb) Deux demi-cercles font un cercle de $60$ m de diamètre.\n$3{,}14 \\times 60 = 188{,}4$ m.\nc) $160 + 188{,}4 = 348{,}4$ m.\nd) $348{,}4 \\times 3 = 1\\,045{,}2$ m.\n$1$ km $= 1\\,000$ m, et $1\\,045{,}2 > 1\\,000$.\nOui, Sami court un peu plus de $1$ km.\n⛔ Le piège : compter un seul virage. La piste en a deux.\nRéponse : a) $160$ m ; b) $188{,}4$ m ; c) $348{,}4$ m ; d) oui, $1\\,045{,}2$ m.",
@@ -538,6 +613,11 @@ export const exercicesCercleDisque6e: FicheExercicesData = {
           titre: "La roue du géomètre",
           enonce:
             "Une géomètre mesure un chemin avec une roue. La roue fait $1$ m de tour, soit $100$ cm.\nÀ chaque tour, un compteur fait « clic ».\na) Elle entend $45$ clics. Quelle est la longueur du chemin ?\nb) Quel est le diamètre de la roue, au millimètre près ? La calculatrice est permise.\nc) Une roue de diamètre $2$ fois plus grand aurait quel tour ?",
+          reponses: [
+            { question: "a)", attendu: "45" },
+            { question: "b)", attendu: "31,8", tolerance: 0.05 },
+            { question: "c)", attendu: "2" },
+          ],
           correction:
             "a) Un clic, c'est $1$ m. $45$ clics : $45 \\times 1 = 45$ m.\nb) Tour $= 3{,}14 \\times$ diamètre.\nJe fais le calcul à l'envers : $100 \\div 3{,}14 \\approx 31{,}8$ cm.\nc) Le tour est proportionnel au diamètre.\nDiamètre $2$ fois plus grand : tour $2$ fois plus grand, soit $2$ m.\n⛔ Le piège : croire que la roue fait $1$ m de diamètre. C'est son tour qui fait $1$ m.\nRéponse : a) $45$ m ; b) environ $31{,}8$ cm ; c) $2$ m.",
           schema: ecranSeulement(deroule([{ d: 31.85, diametre: "d = 31,8 cm", tour: "tour : 100 cm" }])),
@@ -547,6 +627,14 @@ export const exercicesCercleDisque6e: FicheExercicesData = {
           titre: "Les deux arroseurs",
           enonce:
             "Deux arroseurs A et B sont à $7$ m l'un de l'autre.\nA arrose jusqu'à $5$ m. B arrose jusqu'à $4$ m.\nP est à $4$ m de A et à $4$ m de B.\nQ est à $6$ m de A et à $2$ m de B.\nR est à $3$ m de A et à $6$ m de B.\nS est à $6$ m de A et à $5$ m de B.\na) Quelle forme a la zone arrosée par A ?\nb) Pour chaque plante, dis qui l'arrose.\nc) Quelle plante reste au sec ?",
+          reponses: [
+            { question: "a)", attendu: ["un disque", "disque"] },
+            { question: "b) P", attendu: ["A et B"] },
+            { question: "b) Q", attendu: ["B"] },
+            { question: "b) R", attendu: ["A"] },
+            { question: "b) S", attendu: ["aucun", "personne"] },
+            { question: "c)", attendu: ["S"] },
+          ],
           figure: plan({
             ronds: [
               { centre: [0, 0], r: 5, disque: true },
@@ -569,6 +657,12 @@ export const exercicesCercleDisque6e: FicheExercicesData = {
           titre: "La ronde dans la cour",
           enonce:
             "$24$ élèves font une ronde en se tenant la main. Chacun occupe $1{,}2$ m du tour.\na) Quelle est la longueur du tour de la ronde ?\nb) Quel est son diamètre, au dixième près ? La calculatrice est permise.\nc) La cour est un carré de $10$ m de côté. La ronde y tient-elle ?\nd) $6$ élèves de plus arrivent. Tient-elle encore ?",
+          reponses: [
+            { question: "a)", attendu: "28,8" },
+            { question: "b)", attendu: "9,2", tolerance: 0.05 },
+            { question: "c)", attendu: ["oui", "vrai"] },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $24 \\times 1{,}2 = 28{,}8$ m.\nb) Tour $= 3{,}14 \\times$ diamètre. Je fais le calcul à l'envers.\n$28{,}8 \\div 3{,}14 \\approx 9{,}2$ m.\nc) $9{,}2 < 10$ : oui, la ronde tient, de justesse.\nd) Avec $30$ élèves : $30 \\times 1{,}2 = 36$ m de tour.\n$36 \\div 3{,}14 \\approx 11{,}5$ m de diamètre.\n$11{,}5 > 10$ : non, elle ne tient plus.\n⛔ Le piège : comparer le tour, $28{,}8$ m, au côté de la cour. C'est le diamètre qui doit tenir.\nRéponse : a) $28{,}8$ m ; b) environ $9{,}2$ m ; c) oui ; d) non.",
           schema: plan({

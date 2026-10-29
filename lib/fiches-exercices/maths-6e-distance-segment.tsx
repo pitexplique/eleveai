@@ -240,6 +240,12 @@ export const exercicesDistanceSegment6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Voici trois tracés. Écris le nom de chacun avec le bon symbole.\nLequel des trois a une longueur ?",
+          reponses: [
+            { question: "1)", attendu: ["(AB)", "(BA)"], exact: true },
+            { question: "2)", attendu: ["[CD]", "[DC]"], exact: true },
+            { question: "3)", attendu: ["[EF)"], exact: true },
+            { question: "longueur", attendu: ["[CD]", "le segment [CD]", "2", "CD"], exact: true },
+          ],
           figure: geo({ segs: [{ de: [0, 4], vers: [9, 4] }, { de: [2, 2], vers: [6, 2] }, { de: [2, 0], vers: [9, 0] }], points: [{ en: [2, 4], nom: "A" }, { en: [6, 4], nom: "B" }, { en: [2, 2], nom: "C" }, { en: [6, 2], nom: "D" }, { en: [2, 0], nom: "E" }, { en: [6, 0], nom: "F" }], textes: [{ en: [-0.9, 4], t: "1", couleur: VIOLET }, { en: [-0.9, 2], t: "2", couleur: VIOLET }, { en: [-0.9, 0], t: "3", couleur: VIOLET }] }),
           correction:
             "Tracé $1$ : il passe par $A$ et $B$, et il ne s'arrête pas. C'est la droite $(AB)$.\nTracé $2$ : il s'arrête en $C$ et en $D$. C'est le segment $[CD]$.\nTracé $3$ : il part de $E$ et passe par $F$, sans s'arrêter. C'est la demi-droite $[EF)$.\nSeul le segment a une longueur. On la note $CD$, sans crochets.\n⛔ Le piège : écrire $[AB]$ pour une droite. Les crochets veulent dire : ça s'arrête là.\nRéponse : $1$ : $(AB)$ ; $2$ : $[CD]$ ; $3$ : $[EF)$. Le segment $[CD]$ a une longueur.",
@@ -247,6 +253,12 @@ export const exercicesDistanceSegment6e: FicheExercicesData = {
         },
         {
           enonce: "Complète avec $(AB)$, $[AB]$ ou $AB$.\na) La longueur … est égale à $6$ cm.\nb) Le point $M$ est sur …, entre $A$ et $B$.\nc) La droite … ne s'arrête jamais.\nd) Léo écrit « $[AB] = 6$ cm ». Corrige-le.",
+          reponses: [
+            { question: "a)", attendu: ["AB", "BA"], exact: true },
+            { question: "b)", attendu: ["[AB]", "[BA]"], exact: true },
+            { question: "c)", attendu: ["(AB)", "(BA)"], exact: true },
+            { question: "d)", attendu: ["AB = 6 cm", "AB = 6"], exact: true },
+          ],
           correction:
             "a) Une longueur est un nombre : $AB = 6$ cm.\nb) Entre $A$ et $B$, c'est le segment : $M$ est sur $[AB]$.\nc) Une droite s'écrit avec des parenthèses : $(AB)$.\nd) $[AB]$ est un dessin, pas un nombre. Léo doit écrire $AB = 6$ cm.\n⛔ Le piège : mettre des crochets autour d'une longueur. Un dessin ne peut pas être égal à $6$ cm.\nRéponse : a) $AB$ ; b) $[AB]$ ; c) $(AB)$ ; d) $AB = 6$ cm.",
           schema: ecranSeulement(geo({ segs: [{ de: [-1.5, 0], vers: [7.5, 0], couleur: GRIS, pointilles: true }, { de: [0, 0], vers: [6, 0] }], points: [{ en: [0, 0], nom: "A" }, { en: [6, 0], nom: "B" }, { en: [2.5, 0], nom: "M" }], cotes: [{ de: [0, 0], vers: [6, 0], t: "6 cm", cote: -1 }], textes: [{ en: [7.3, 0.7], t: "(AB)", couleur: GRIS }] })),
@@ -254,6 +266,9 @@ export const exercicesDistanceSegment6e: FicheExercicesData = {
         },
         {
           enonce: "Le segment $[PQ]$ est posé au-dessus d'une règle graduée en cm.\nLis sa longueur $PQ$.",
+          reponses: [
+            { attendu: "6,5" },
+          ],
           figure: geo({ segs: [{ de: [1, 0.6], vers: [7.5, 0.6] }], points: [{ en: [1, 0.6], nom: "P" }, { en: [7.5, 0.6], nom: "Q" }], regle: { de: 0, a: 10, y: 0 } }),
           correction:
             "$P$ n'est pas sur le $0$ de la règle. $P$ est sur $1$, et $Q$ est sur $7{,}5$.\nJe calcule l'écart : $7{,}5 - 1 = 6{,}5$.\n⛔ Le piège : lire $7{,}5$ cm. Ce serait juste si $P$ était sur le $0$.\nRéponse : $PQ = 6{,}5$ cm.",
@@ -261,6 +276,9 @@ export const exercicesDistanceSegment6e: FicheExercicesData = {
         },
         {
           enonce: "$M$ est le milieu du segment $[RS]$, et $RS = 9$ cm.\nCombien mesure $RM$ ?",
+          reponses: [
+            { attendu: "4,5" },
+          ],
           correction:
             "Le milieu coupe le segment en deux longueurs égales.\n$RM$ est la moitié de $RS$ : $9 \\div 2 = 4{,}5$.\n⛔ Le piège : répondre $18$ cm, le double. Le milieu donne la MOITIÉ.\nRéponse : $RM = 4{,}5$ cm.",
           schema: ecranSeulement(geo({ segs: [{ de: [0, 0], vers: [9, 0] }], points: [{ en: [0, 0], nom: "R" }, { en: [4.5, 0], nom: "M" }, { en: [9, 0], nom: "S" }], codes: [{ de: [0, 0], vers: [4.5, 0], n: 1 }, { de: [4.5, 0], vers: [9, 0], n: 1 }], cotes: [{ de: [0, 0], vers: [9, 0], t: "9 cm", cote: -1 }] })),
@@ -268,6 +286,9 @@ export const exercicesDistanceSegment6e: FicheExercicesData = {
         },
         {
           enonce: "$K$ est le milieu du segment $[TU]$, et $TK = 3{,}8$ cm.\nCombien mesure $TU$ ?",
+          reponses: [
+            { attendu: "7,6" },
+          ],
           correction:
             "$TK$ est une moitié de $[TU]$. L'autre moitié, $KU$, mesure aussi $3{,}8$ cm.\n$TU = 3{,}8 + 3{,}8 = 7{,}6$.\n⛔ Le piège : diviser par $2$. On connaît la moitié : pour avoir le tout, on DOUBLE.\nRéponse : $TU = 7{,}6$ cm.",
           schema: ecranSeulement(geo({ segs: [{ de: [0, 0], vers: [7.6, 0] }], points: [{ en: [0, 0], nom: "T" }, { en: [3.8, 0], nom: "K" }, { en: [7.6, 0], nom: "U" }], codes: [{ de: [0, 0], vers: [3.8, 0], n: 1 }, { de: [3.8, 0], vers: [7.6, 0], n: 1 }], cotes: [{ de: [0, 0], vers: [3.8, 0], t: "3,8 cm", cote: -1 }, { de: [3.8, 0], vers: [7.6, 0], t: "3,8 cm", cote: -1 }] })),
@@ -275,6 +296,9 @@ export const exercicesDistanceSegment6e: FicheExercicesData = {
         },
         {
           enonce: "Le segment $[GH]$ est posé au-dessus d'une règle.\nSur quelle graduation faut-il placer son milieu $I$ ?",
+          reponses: [
+            { attendu: "5,5" },
+          ],
           figure: geo({ segs: [{ de: [2, 0.6], vers: [9, 0.6] }], points: [{ en: [2, 0.6], nom: "G" }, { en: [9, 0.6], nom: "H" }], regle: { de: 0, a: 10, y: 0 } }),
           correction:
             "$G$ est sur $2$ et $H$ est sur $9$. Donc $GH = 9 - 2 = 7$ cm.\nLa moitié : $7 \\div 2 = 3{,}5$ cm.\nDepuis $G$, j'avance de $3{,}5$ : $2 + 3{,}5 = 5{,}5$.\n⛔ Le piège : placer $I$ sur $4{,}5$, la moitié de $9$. Mais $G$ n'est pas sur le $0$.\nRéponse : $I$ est sur la graduation $5{,}5$.",
@@ -283,6 +307,9 @@ export const exercicesDistanceSegment6e: FicheExercicesData = {
         },
         {
           enonce: "Pour aller de $A$ à $B$, trois chemins sont dessinés.\nSans mesurer, lequel est le plus court ? Pourquoi ?",
+          reponses: [
+            { attendu: ["2", "le chemin 2", "chemin 2", "[AB]", "le segment [AB]"], exact: true },
+          ],
           figure: geo({ segs: [{ de: [0, 0], vers: [3, 3], couleur: VIOLET }, { de: [3, 3], vers: [8, 0], couleur: VIOLET }, { de: [0, 0], vers: [8, 0], couleur: BLEU }, { de: [0, 0], vers: [2, -2], couleur: ORANGE }, { de: [2, -2], vers: [6, -2], couleur: ORANGE }, { de: [6, -2], vers: [8, 0], couleur: ORANGE }], points: [{ en: [0, 0], nom: "A", vers: "gauche" }, { en: [8, 0], nom: "B", vers: "droite" }], textes: [{ en: [3, 3.7], t: "1", couleur: VIOLET }, { en: [4, 0.6], t: "2", couleur: BLEU }, { en: [4, -2.7], t: "3", couleur: ORANGE }] }),
           correction:
             "Le chemin $2$ va tout droit : c'est le segment $[AB]$.\nLe chemin le plus court entre deux points est toujours le segment qui les relie.\nLes chemins $1$ et $3$ font des détours : ils sont plus longs.\n⭐ C'est pour ça qu'on appelle $AB$ la distance entre $A$ et $B$.\n⛔ Le piège : croire qu'un chemin avec des coins peut être aussi court. Chaque détour ajoute de la longueur.\nRéponse : le chemin $2$, le segment $[AB]$.",
@@ -290,6 +317,10 @@ export const exercicesDistanceSegment6e: FicheExercicesData = {
         },
         {
           enonce: "On sait que $AC = 4$ cm et $CB = 3$ cm.\na) $AB$ peut-il mesurer $9$ cm ?\nb) Quelle est la plus grande longueur possible pour $AB$ ?\nc) Où est $C$ dans ce cas ?",
+          reponses: [
+            { question: "a)", attendu: ["non", "faux"] },
+            { question: "b)", attendu: "7" },
+          ],
           correction:
             "Le chemin de $A$ à $B$ par $C$ mesure $4 + 3 = 7$ cm.\nLe segment $[AB]$ est le chemin le plus court. Donc $AB$ ne peut pas dépasser $7$ cm.\na) Non : $9$ cm, c'est plus que $7$ cm.\nb) La plus grande longueur est $7$ cm.\nc) $AB = 7$ cm seulement quand $C$ est SUR le segment $[AB]$.\n⛔ Le piège : croire que $AB$ vaut toujours $7$ cm. Si $C$ n'est pas sur $[AB]$, $AB$ est plus petit.\nRéponse : a) non ; b) $7$ cm ; c) sur le segment $[AB]$.",
           schema: ecranSeulement(deux(geo({ segs: [{ de: [0, 0], vers: [7, 0] }], points: [{ en: [0, 0], nom: "A" }, { en: [4, 0], nom: "C" }, { en: [7, 0], nom: "B" }], cotes: [{ de: [0, 0], vers: [4, 0], t: "4 cm", cote: -1 }, { de: [4, 0], vers: [7, 0], t: "3 cm", cote: -1 }] }), geo({ segs: [{ de: [0, 0], vers: [3.583, 1.778] }, { de: [3.583, 1.778], vers: [6, 0] }, { de: [0, 0], vers: [6, 0], couleur: ORANGE }], points: [{ en: [0, 0], nom: "A", vers: "gauche" }, { en: [3.583, 1.778], nom: "C" }, { en: [6, 0], nom: "B", vers: "droite" }], cotes: [{ de: [0, 0], vers: [3.583, 1.778], t: "4 cm" }, { de: [3.583, 1.778], vers: [6, 0], t: "3 cm" }, { de: [0, 0], vers: [6, 0], t: "6 cm", cote: -1 }] }))),
@@ -318,6 +349,10 @@ export const exercicesDistanceSegment6e: FicheExercicesData = {
         },
         {
           enonce: "Sur la figure, $OA = OB = 4$ cm et $AB = 6$ cm.\nTom dit : « $O$ est le milieu de $[AB]$. » A-t-il raison ?\nOù est le vrai milieu $M$ ? Combien mesure $AM$ ?",
+          reponses: [
+            { question: "raison ?", attendu: ["non", "faux"] },
+            { question: "AM", attendu: "3" },
+          ],
           figure: geo({ segs: [{ de: [0, 0], vers: [6, 0] }, { de: [0, 0], vers: [3, 2.646] }, { de: [3, 2.646], vers: [6, 0] }], points: [{ en: [0, 0], nom: "A", vers: "gauche" }, { en: [6, 0], nom: "B", vers: "droite" }, { en: [3, 2.646], nom: "O" }], cotes: [{ de: [0, 0], vers: [3, 2.646], t: "4 cm" }, { de: [3, 2.646], vers: [6, 0], t: "4 cm" }, { de: [0, 0], vers: [6, 0], t: "6 cm", cote: -1 }] }),
           correction:
             "Pour être le milieu de $[AB]$, il faut DEUX choses.\nLe point doit être à la même distance de $A$ et de $B$. $O$ l'est.\nIl doit aussi être SUR le segment $[AB]$. $O$ ne l'est pas.\nDonc Tom a tort.\nLe vrai milieu $M$ est sur $[AB]$ : $AM = 6 \\div 2 = 3$ cm.\n⛔ Le piège : oublier que le milieu est SUR le segment. Beaucoup de points sont à égale distance de $A$ et de $B$.\nRéponse : non ; $M$ est sur $[AB]$, avec $AM = 3$ cm.",
@@ -326,6 +361,10 @@ export const exercicesDistanceSegment6e: FicheExercicesData = {
         },
         {
           enonce: "On connaît $EF = 4{,}5$ cm et $FG = 6{,}5$ cm.\na) Si $EG = 11$ cm, le point $F$ est-il sur le segment $[EG]$ ?\nb) Et si $EG = 9$ cm ?",
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: ["non", "faux"] },
+          ],
           correction:
             "Je calcule le chemin qui passe par $F$ : $EF + FG = 4{,}5 + 6{,}5 = 11$ cm.\na) $EG = 11$ cm : le passage par $F$ ne rallonge rien.\nDonc $F$ est sur le segment $[EG]$. Les trois points sont alignés.\nb) $EG = 9$ cm : le chemin par $F$ est plus long que le segment.\nDonc $F$ n'est pas sur $[EG]$.\n⛔ Le piège : dire « presque égal, donc aligné ». Il faut une égalité EXACTE.\nRéponse : a) oui ; b) non.",
           schema: ecranSeulement(deux(geo({ segs: [{ de: [0, 0], vers: [11, 0] }], points: [{ en: [0, 0], nom: "E" }, { en: [4.5, 0], nom: "F" }, { en: [11, 0], nom: "G" }], cotes: [{ de: [0, 0], vers: [4.5, 0], t: "4,5 cm", cote: -1 }, { de: [4.5, 0], vers: [11, 0], t: "6,5 cm", cote: -1 }] }), geo({ segs: [{ de: [0, 0], vers: [3.278, 3.083] }, { de: [3.278, 3.083], vers: [9, 0] }, { de: [0, 0], vers: [9, 0], couleur: ORANGE }], points: [{ en: [0, 0], nom: "E", vers: "gauche" }, { en: [3.278, 3.083], nom: "F" }, { en: [9, 0], nom: "G", vers: "droite" }], cotes: [{ de: [0, 0], vers: [3.278, 3.083], t: "4,5 cm" }, { de: [3.278, 3.083], vers: [9, 0], t: "6,5 cm" }, { de: [0, 0], vers: [9, 0], t: "9 cm", cote: -1 }] }))),
@@ -333,6 +372,10 @@ export const exercicesDistanceSegment6e: FicheExercicesData = {
         },
         {
           enonce: "Trace un segment $[AB]$ de $7$ cm. Place son milieu $M$.\nPlace le point $N$ sur $[AB]$, avec $AN = 2$ cm.\nCalcule $NM$, puis $NB$.",
+          reponses: [
+            { question: "NM", attendu: "1,5" },
+            { question: "NB", attendu: "5" },
+          ],
           correction:
             "$M$ est le milieu : $AM = 7 \\div 2 = 3{,}5$ cm.\nSur le segment, l'ordre est $A$, $N$, $M$, $B$.\n$NM = AM - AN = 3{,}5 - 2 = 1{,}5$ cm.\n$NB = AB - AN = 7 - 2 = 5$ cm.\n⭐ Contrôle : $AN + NM + MB = 2 + 1{,}5 + 3{,}5 = 7$ cm.\n⛔ Le piège : calculer $3{,}5 + 2$. $N$ est ENTRE $A$ et $M$ : je soustrais.\nRéponse : $NM = 1{,}5$ cm et $NB = 5$ cm.",
           schema: ecranSeulement(geo({ segs: [{ de: [0, 0], vers: [7, 0] }], points: [{ en: [0, 0], nom: "A" }, { en: [2, 0], nom: "N", couleur: ORANGE }, { en: [3.5, 0], nom: "M" }, { en: [7, 0], nom: "B" }], codes: [{ de: [0, 0], vers: [3.5, 0], n: 1 }, { de: [3.5, 0], vers: [7, 0], n: 1 }], cotes: [{ de: [0, 0], vers: [2, 0], t: "2 cm", cote: -1 }, { de: [3.5, 0], vers: [7, 0], t: "3,5 cm", cote: -1 }] })),
@@ -340,6 +383,10 @@ export const exercicesDistanceSegment6e: FicheExercicesData = {
         },
         {
           enonce: "$AB = 16$ cm. $M$ est le milieu de $[AB]$.\n$N$ est le milieu de $[AM]$, et $P$ est le milieu de $[NM]$.\nCalcule $AP$, puis $PB$.",
+          reponses: [
+            { question: "AP", attendu: "6" },
+            { question: "PB", attendu: "10" },
+          ],
           figure: geo({ segs: [{ de: [0, 0], vers: [16, 0] }], points: [{ en: [0, 0], nom: "A" }, { en: [4, 0], nom: "N" }, { en: [6, 0], nom: "P", couleur: ORANGE }, { en: [8, 0], nom: "M" }, { en: [16, 0], nom: "B" }], codes: [{ de: [0, 0], vers: [8, 0], n: 1 }, { de: [8, 0], vers: [16, 0], n: 1 }, { de: [0, 0], vers: [4, 0], n: 2 }, { de: [4, 0], vers: [8, 0], n: 2 }], cotes: [{ de: [0, 0], vers: [16, 0], t: "16 cm", cote: -1 }] }),
           correction:
             "$AM = 16 \\div 2 = 8$ cm.\n$AN = 8 \\div 2 = 4$ cm. Et $NM = 4$ cm aussi.\n$NP = 4 \\div 2 = 2$ cm.\n$AP = AN + NP = 4 + 2 = 6$ cm.\n$PB = AB - AP = 16 - 6 = 10$ cm.\n⛔ Le piège : diviser $16$ par $2$ trois fois, et répondre $2$ cm.\n$AP$ n'est pas le dernier morceau : c'est $AN + NP$.\nRéponse : $AP = 6$ cm et $PB = 10$ cm.",
@@ -347,6 +394,11 @@ export const exercicesDistanceSegment6e: FicheExercicesData = {
         },
         {
           enonce: "Un randonneur va de $A$ à $B$ en passant par le refuge $R$.\n$AR = 3{,}2$ km et $RB = 4{,}1$ km. En ligne droite, $AB = 5{,}8$ km.\na) Quelle est la longueur de son trajet ?\nb) Combien de kilomètres fait-il de plus que la ligne droite ?\nc) Le refuge est-il sur le segment $[AB]$ ?",
+          reponses: [
+            { question: "a)", attendu: "7,3" },
+            { question: "b)", attendu: "1,5" },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           figure: geo({ segs: [{ de: [0, 0], vers: [2.334, 2.19], couleur: VERT }, { de: [2.334, 2.19], vers: [5.8, 0], couleur: VERT }, { de: [0, 0], vers: [5.8, 0], couleur: GRIS, pointilles: true }], points: [{ en: [0, 0], nom: "A", vers: "gauche" }, { en: [2.334, 2.19], nom: "R" }, { en: [5.8, 0], nom: "B", vers: "droite" }], cotes: [{ de: [0, 0], vers: [2.334, 2.19], t: "3,2 km" }, { de: [2.334, 2.19], vers: [5.8, 0], t: "4,1 km" }, { de: [0, 0], vers: [5.8, 0], t: "5,8 km", cote: -1 }] }),
           correction:
             "a) Le trajet : $3{,}2 + 4{,}1 = 7{,}3$ km.\nb) $7{,}3 - 5{,}8 = 1{,}5$ km de plus.\nc) Non. $AR + RB$ est plus grand que $AB$.\nSi $R$ était sur $[AB]$, on aurait $AR + RB = AB$.\n⛔ Le piège : croire que le trajet et la ligne droite ont la même longueur. Le détour par $R$ rallonge.\nRéponse : a) $7{,}3$ km ; b) $1{,}5$ km ; c) non.",
@@ -354,6 +406,10 @@ export const exercicesDistanceSegment6e: FicheExercicesData = {
         },
         {
           enonce: "Les points $A$, $B$ et $C$ sont alignés, dans cet ordre.\n$AB = 2{,}7$ cm et $BC = 4{,}6$ cm.\na) Calcule $AC$.\nb) Le point $D$ n'est pas sur la droite $(AC)$. Compare $AD + DC$ et $AC$.",
+          reponses: [
+            { question: "a)", attendu: "7,3" },
+            { question: "b)", attendu: ["plus grand", "AD + DC > AC", ">", "AD + DC est plus grand"], exact: true },
+          ],
           correction:
             "a) $B$ est sur le segment $[AC]$. Donc $AC = AB + BC$.\n$AC = 2{,}7 + 4{,}6 = 7{,}3$ cm.\nb) $D$ n'est pas sur $[AC]$ : le chemin par $D$ est un détour.\nDonc $AD + DC$ est plus grand que $AC$ : plus de $7{,}3$ cm.\n⛔ Le piège : écrire $AD + DC = AC$. L'égalité marche seulement pour un point du segment.\nRéponse : a) $AC = 7{,}3$ cm ; b) $AD + DC$ est plus grand que $AC$.",
           schema: ecranSeulement(geo({ segs: [{ de: [0, 0], vers: [7.3, 0] }, { de: [0, 0], vers: [3.5, 2.5], couleur: ORANGE }, { de: [3.5, 2.5], vers: [7.3, 0], couleur: ORANGE }], points: [{ en: [0, 0], nom: "A", vers: "gauche" }, { en: [2.7, 0], nom: "B", vers: "bas" }, { en: [7.3, 0], nom: "C", vers: "droite" }, { en: [3.5, 2.5], nom: "D", couleur: ORANGE }], cotes: [{ de: [0, 0], vers: [7.3, 0], t: "7,3 cm", cote: -1 }] })),
@@ -361,6 +417,10 @@ export const exercicesDistanceSegment6e: FicheExercicesData = {
         },
         {
           enonce: "$M$ est le milieu du segment $[AB]$. Sur la règle, on voit $A$ et $M$, mais pas $B$.\nSur quelle graduation faut-il placer $B$ ? Combien mesure $AB$ ?",
+          reponses: [
+            { question: "B", attendu: "6,5" },
+            { question: "AB", attendu: "5" },
+          ],
           figure: geo({ segs: [{ de: [1.5, 0.6], vers: [4, 0.6] }], points: [{ en: [1.5, 0.6], nom: "A" }, { en: [4, 0.6], nom: "M" }], regle: { de: 0, a: 8, y: 0 } }),
           correction:
             "$A$ est sur $1{,}5$ et $M$ est sur $4$. Donc $AM = 4 - 1{,}5 = 2{,}5$ cm.\n$M$ est le milieu : $MB = AM = 2{,}5$ cm.\n$B$ est après $M$ : $4 + 2{,}5 = 6{,}5$.\n$AB = 2{,}5 + 2{,}5 = 5$ cm.\n⛔ Le piège : placer $B$ sur $8$, le double de $4$. Je double la LONGUEUR $AM$, pas la graduation.\nRéponse : $B$ sur la graduation $6{,}5$ ; $AB = 5$ cm.",
@@ -385,6 +445,11 @@ export const exercicesDistanceSegment6e: FicheExercicesData = {
           titre: "Le raccourci du parc",
           enonce:
             "Pour traverser un parc, Inès longe deux allées : $400$ m, puis $300$ m. Le coin est $C$.\nUn raccourci va tout droit de l'entrée $E$ à la sortie $S$.\na) Le raccourci est-il plus court que $700$ m ? Pourquoi ?\nb) Peut-il mesurer $90$ m ?\nc) Sur le plan, on mesure $500$ m. Combien de mètres Inès gagne-t-elle ?",
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: ["non", "faux"] },
+            { question: "c)", attendu: "200" },
+          ],
           figure: geo({ segs: [{ de: [0, 0], vers: [400, 0], couleur: VERT }, { de: [400, 0], vers: [400, 300], couleur: VERT }, { de: [0, 0], vers: [400, 300], couleur: ORANGE, pointilles: true }], points: [{ en: [0, 0], nom: "E", vers: "gauche" }, { en: [400, 0], nom: "C", vers: "droite" }, { en: [400, 300], nom: "S", vers: "droite" }], cotes: [{ de: [0, 0], vers: [400, 0], t: "400 m", cote: -1 }, { de: [400, 0], vers: [400, 300], t: "300 m", cote: -1 }] }),
           correction:
             "a) Oui. Le trajet par $C$ mesure $400 + 300 = 700$ m.\nLe raccourci est le segment $[ES]$ : c'est le chemin le plus court.\n$C$ n'est pas sur $[ES]$. Donc $ES$ est plus petit que $700$ m.\nb) Non. Je regarde un autre chemin : de $E$ à $C$ en passant par $S$.\nIl est plus long que le segment $[EC]$ : $ES + 300$ est plus grand que $400$.\nAvec $90$ m, on aurait $90 + 300 = 390$ m. C'est moins que $400$ m : impossible.\nc) $700 - 500 = 200$ m gagnés.\n⛔ Le piège au b) : croire qu'un raccourci peut être aussi court qu'on veut.\nIl mesure au moins $400 - 300 = 100$ m.\nRéponse : a) oui, moins de $700$ m ; b) non ; c) $200$ m.",
@@ -394,6 +459,12 @@ export const exercicesDistanceSegment6e: FicheExercicesData = {
           titre: "La ligne de tram",
           enonce:
             "Trois stations de tram : $S_1$, $S_2$ et $S_3$.\n$S_1S_2 = 1{,}8$ km, $S_2S_3 = 2{,}7$ km et $S_1S_3 = 4{,}5$ km.\na) Les trois stations sont-elles alignées ? Justifie.\nb) On construit la station $S_4$ au milieu de $[S_1S_3]$. Calcule $S_1S_4$.\nc) Calcule la distance $S_2S_4$, en km puis en m.",
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: "2,25" },
+            { question: "c) km", attendu: "0,45" },
+            { question: "c) m", attendu: "450" },
+          ],
           figure: geo({ segs: [{ de: [0, 0], vers: [4.5, 0], couleur: GRIS }], points: [{ en: [0, 0], nom: "S1" }, { en: [1.8, 0], nom: "S2" }, { en: [4.5, 0], nom: "S3" }], cotes: [{ de: [0, 0], vers: [1.8, 0], t: "1,8 km", cote: -1 }, { de: [1.8, 0], vers: [4.5, 0], t: "2,7 km", cote: -1 }] }),
           correction:
             "a) $1{,}8 + 2{,}7 = 4{,}5$ km. C'est exactement $S_1S_3$.\nDonc $S_2$ est sur le segment $[S_1S_3]$ : les trois stations sont alignées.\nb) $S_1S_4 = 4{,}5 \\div 2 = 2{,}25$ km.\nc) Sur le segment, l'ordre est $S_1$, $S_2$, $S_4$, $S_3$.\n$S_2S_4 = 2{,}25 - 1{,}8 = 0{,}45$ km, soit $450$ m.\n⛔ Le piège au c) : ajouter au lieu de soustraire. $S_2$ et $S_4$ sont sur la même ligne, du même côté.\nRéponse : a) oui ; b) $2{,}25$ km ; c) $0{,}45$ km, soit $450$ m.",
@@ -404,6 +475,13 @@ export const exercicesDistanceSegment6e: FicheExercicesData = {
           titre: "Le ruban plié",
           enonce:
             "Un ruban mesure $1{,}2$ m, soit $120$ cm.\nOn le plie en deux, puis encore en deux. On le déplie : les plis font des marques.\na) Combien y a-t-il de marques ? Où sont-elles, depuis le bout gauche ?\nb) Combien mesure chaque morceau ?\nc) Si on plie encore une fois en deux, combien de morceaux obtient-on ? De quelle longueur ?",
+          reponses: [
+            { question: "a) nb", attendu: "3" },
+            { question: "a) où", attendu: "30 ; 60 ; 90" },
+            { question: "b)", attendu: "30" },
+            { question: "c) nb", attendu: "8" },
+            { question: "c) long.", attendu: "15" },
+          ],
           figure: geo({ segs: [{ de: [0, 0], vers: [120, 0], couleur: VIOLET }], points: [{ en: [0, 0], nom: "G" }, { en: [120, 0], nom: "D" }], cotes: [{ de: [0, 0], vers: [120, 0], t: "120 cm", cote: -1 }] }),
           correction:
             "Le premier pli est au milieu : à $120 \\div 2 = 60$ cm.\nLe deuxième pli coupe chaque moitié en son milieu : à $30$ cm et à $90$ cm.\na) $3$ marques : à $30$ cm, $60$ cm et $90$ cm.\nb) $4$ morceaux égaux : $120 \\div 4 = 30$ cm chacun.\nc) Encore un pli : $8$ morceaux de $120 \\div 8 = 15$ cm.\n⛔ Le piège au a) : compter $4$ marques pour $4$ morceaux. Entre $4$ morceaux, il n'y a que $3$ plis.\nRéponse : a) $3$ marques, à $30$, $60$ et $90$ cm ; b) $30$ cm ; c) $8$ morceaux de $15$ cm.",
@@ -414,6 +492,13 @@ export const exercicesDistanceSegment6e: FicheExercicesData = {
           titre: "La carte au trésor",
           enonce:
             "Sur une carte, $1$ cm représente $20$ m.\nLe puits $P$ et l'arbre $A$ sont à $7$ cm l'un de l'autre. Le trésor $T$ est au milieu de $[PA]$.\na) Calcule $PT$ sur la carte, puis en vrai.\nb) Le rocher $R$ est à $2$ cm de $P$ et à $5$ cm de $A$. Est-il sur le segment $[PA]$ ?\nc) Calcule la distance $RT$ sur la carte, puis en vrai.",
+          reponses: [
+            { question: "a) carte", attendu: "3,5" },
+            { question: "a) vrai", attendu: "70" },
+            { question: "b)", attendu: ["oui", "vrai"] },
+            { question: "c) carte", attendu: "1,5" },
+            { question: "c) vrai", attendu: "30" },
+          ],
           figure: geo({ segs: [{ de: [0, 0], vers: [7, 0], couleur: GRIS, pointilles: true }], points: [{ en: [0, 0], nom: "P" }, { en: [2, 0], nom: "R" }, { en: [7, 0], nom: "A" }], cotes: [{ de: [0, 0], vers: [7, 0], t: "7 cm", cote: -1 }] }),
           correction:
             "a) $PT = 7 \\div 2 = 3{,}5$ cm sur la carte.\nEn vrai : $3{,}5 \\times 20 = 70$ m.\nb) $PR + RA = 2 + 5 = 7$ cm. C'est exactement $PA$.\nDonc $R$ est sur le segment $[PA]$.\nc) Sur le segment, l'ordre est $P$, $R$, $T$, $A$.\n$RT = PT - PR = 3{,}5 - 2 = 1{,}5$ cm sur la carte.\nEn vrai : $1{,}5 \\times 20 = 30$ m.\n⛔ Le piège : oublier l'échelle. Sur la carte, ce sont des cm. Sur le terrain, des mètres.\nRéponse : a) $3{,}5$ cm, soit $70$ m ; b) oui ; c) $1{,}5$ cm, soit $30$ m.",

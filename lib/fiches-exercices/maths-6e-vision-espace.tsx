@@ -255,6 +255,12 @@ export const exercicesVisionEspace6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Ce solide est fait de cubes. Aucun cube ne flotte.\na) Combien de cubes y a-t-il à l'étage du bas ?\nb) Et au deuxième étage ? Et au troisième ?\nc) Combien de cubes y a-t-il en tout ?",
+          reponses: [
+            { question: "a)", attendu: "9" },
+            { question: "b) 2e", attendu: "6" },
+            { question: "b) 3e", attendu: "3" },
+            { question: "c)", attendu: "18" },
+          ],
           figure: cubes([{ h: [[2, 1, 1], [3, 2, 1], [3, 3, 2]] }]),
           correction:
             "Je compte étage par étage, en partant du bas.\nÉtage du bas : $3$ rangées de $3$ cubes. $3 \\times 3 = 9$ cubes.\nDeuxième étage : je compte les piles de $2$ cubes ou plus. Il y en a $6$.\nTroisième étage : les piles de $3$ cubes. Il y en a $3$.\nEn tout : $9 + 6 + 3 = 18$ cubes.\n⛔ Le piège : compter les faces qu'on voit. Les cubes du bas, derrière, sont cachés.\nRéponse : a) $9$ ; b) $6$ et $3$ ; c) $18$ cubes.",
@@ -262,6 +268,10 @@ export const exercicesVisionEspace6e: FicheExercicesData = {
         },
         {
           enonce: "On regarde ce solide d'en haut.\na) Combien de carreaux a sa vue de dessus ?\nb) Combien de cubes a le solide ?\nc) Pourquoi ces deux nombres sont-ils différents ?",
+          reponses: [
+            { question: "a)", attendu: "5" },
+            { question: "b)", attendu: "6" },
+          ],
           figure: cubes([{ h: [[1, 0, 0], [2, 1, 1], [0, 0, 1]] }]),
           correction:
             "a) D'en haut, chaque pile donne un seul carreau.\nIl y a $5$ piles, donc $5$ carreaux.\nLe dessin montre cette vue de dessus.\nb) Une pile a $2$ cubes. Les autres ont $1$ cube.\n$2 + 1 + 1 + 1 + 1 = 6$ cubes.\nc) D'en haut, on ne voit pas le cube du dessous de la pile de $2$.\n⛔ Le piège : croire que la vue de dessus compte les cubes. Elle compte les piles.\nRéponse : a) $5$ carreaux ; b) $6$ cubes ; c) un cube est caché sous un autre.",
@@ -270,6 +280,9 @@ export const exercicesVisionEspace6e: FicheExercicesData = {
         },
         {
           enonce: "On regarde ce solide de face : on voit sa longueur et sa hauteur.\nQuelle vue, A, B ou C, est sa vue de face ?",
+          reponses: [
+            { attendu: ["B"] },
+          ],
           figure: cubes(
             [{ h: [[1, 2, 1], [3, 1, 2]] }],
             [
@@ -284,6 +297,11 @@ export const exercicesVisionEspace6e: FicheExercicesData = {
         },
         {
           enonce: "Un pavé plein est fait de cubes : $5$ de long, $2$ de large, $3$ de haut.\na) Combien de carreaux a sa vue de dessus ?\nb) Et sa vue de face ?\nc) Et sa vue de droite ?",
+          reponses: [
+            { question: "a)", attendu: "10" },
+            { question: "b)", attendu: "15" },
+            { question: "c)", attendu: "6" },
+          ],
           correction:
             "a) De dessus, je vois la longueur et la largeur.\n$5 \\times 2 = 10$ carreaux.\nb) De face, je vois la longueur et la hauteur.\n$5 \\times 3 = 15$ carreaux.\nc) De droite, je vois la largeur et la hauteur.\n$2 \\times 3 = 6$ carreaux.\n⛔ Le piège : compter tous les cubes. Une vue montre une seule face, sans profondeur.\nRéponse : a) $10$ ; b) $15$ ; c) $6$.",
           schema: ecranSeulement(
@@ -300,6 +318,11 @@ export const exercicesVisionEspace6e: FicheExercicesData = {
         },
         {
           enonce: "Ce pavé est dessiné en perspective cavalière.\na) Combien d'arêtes sont en traits pleins ?\nb) Combien sont en pointillés ? Pourquoi ?\nc) Quelle face est dessinée sans déformation ?",
+          reponses: [
+            { question: "a)", attendu: "9" },
+            { question: "b)", attendu: "3" },
+            { question: "c)", attendu: ["ABCD", "la face ABCD"] },
+          ],
           figure: cavalier(4, 3, 2, { noms: true }),
           correction:
             "Un pavé a $12$ arêtes.\na) Je compte les traits pleins : $9$ arêtes.\nb) Il reste $12 - 9 = 3$ arêtes, en pointillés : $[AE]$, $[EF]$ et $[EH]$.\nCe sont les arêtes cachées. On ne les voit pas de face.\nc) La face de devant, $ABCD$. C'est un vrai rectangle.\nLes autres faces sont penchées : leurs rectangles deviennent des parallélogrammes.\n⛔ Le piège : tracer les arêtes cachées en traits pleins. On ne sait plus ce qui est devant.\nRéponse : a) $9$ ; b) $3$, les arêtes cachées ; c) la face $ABCD$.",
@@ -307,6 +330,9 @@ export const exercicesVisionEspace6e: FicheExercicesData = {
         },
         {
           enonce: "Un seul de ces trois dessins est un patron de cube.\nLequel ? Explique pourquoi les deux autres ne marchent pas.",
+          reponses: [
+            { attendu: ["B"] },
+          ],
           figure: carreaux([
             { nom: "A", lignes: ["###", "###"] },
             { nom: "B", lignes: [".#..", "####", ".#.."] },
@@ -318,6 +344,9 @@ export const exercicesVisionEspace6e: FicheExercicesData = {
         },
         {
           enonce: "Voici la vue de dessus d'un empilement.\nChaque nombre dit combien de cubes sont empilés sur ce carreau.\nCombien de cubes y a-t-il en tout ?",
+          reponses: [
+            { attendu: "12" },
+          ],
           figure: carreaux([{ nom: "vue de dessus", lignes: ["21.", "312", "111"] }]),
           correction:
             "Chaque nombre compte les cubes d'une pile.\nJ'additionne ligne par ligne.\nLigne du haut : $2 + 1 = 3$.\nLigne du milieu : $3 + 1 + 2 = 6$.\nLigne du bas : $1 + 1 + 1 = 3$.\nEn tout : $3 + 6 + 3 = 12$ cubes.\nLe dessin montre l'empilement.\n⛔ Le piège : compter les carreaux. Il y en a $8$, mais une pile peut avoir plusieurs cubes.\nRéponse : $12$ cubes.",
@@ -326,6 +355,9 @@ export const exercicesVisionEspace6e: FicheExercicesData = {
         },
         {
           enonce: "Voici un solide et deux de ses vues, P et Q.\nL'une est la vue de gauche, l'autre la vue de droite.\nLaquelle est la vue de droite ?",
+          reponses: [
+            { attendu: ["Q"] },
+          ],
           figure: cubes(
             [{ h: [[1, 1, 3], [2, 1, 1]] }],
             [
@@ -354,6 +386,11 @@ export const exercicesVisionEspace6e: FicheExercicesData = {
       exercices: [
         {
           enonce: "Un escalier a $3$ marches : $1$, $2$ et $3$ cubes. Il a $2$ rangées pareilles.\na) Dessine sa vue de face. Combien de carreaux a-t-elle ?\nb) Combien de carreaux a sa vue de droite ?\nc) Combien de carreaux a sa vue de gauche ?",
+          reponses: [
+            { question: "a)", attendu: "6" },
+            { question: "b)", attendu: "6" },
+            { question: "c)", attendu: "6" },
+          ],
           correction:
             "a) De face, je vois les marches : $1$, $2$ et $3$ carreaux.\n$1 + 2 + 3 = 6$ carreaux.\nb) De droite, je vois la plus haute marche : $3$ cubes de haut, $2$ rangées.\n$3 \\times 2 = 6$ carreaux, en rectangle.\nc) De gauche, je vois d'abord la petite marche. Mais les grandes, derrière, dépassent.\nJe vois donc aussi un rectangle de $6$ carreaux.\n⛔ Le piège : dessiner une seule marche à gauche. Une vue montre tout ce qui dépasse.\nRéponse : a) $6$ ; b) $6$ ; c) $6$.",
           schema: ecranSeulement(
@@ -370,6 +407,9 @@ export const exercicesVisionEspace6e: FicheExercicesData = {
         },
         {
           enonce: "Voici trois vues d'un solide : dessus, face, droite.\nQuel solide, A, B ou C, a ces trois vues ?",
+          reponses: [
+            { attendu: ["B"] },
+          ],
           figure: cubes(
             [
               { h: [[1, 1], [2, 1]], nom: "A" },
@@ -388,6 +428,13 @@ export const exercicesVisionEspace6e: FicheExercicesData = {
         },
         {
           enonce: "Ce solide est fait de cubes. Aucun cube ne flotte.\na) Compte les cubes étage par étage.\nb) Combien de cubes y a-t-il en tout ?\nc) Combien faut-il en ajouter pour faire un cube plein de $3$ sur $3$ sur $3$ ?",
+          reponses: [
+            { question: "a) bas", attendu: "9" },
+            { question: "a) 2e", attendu: "5" },
+            { question: "a) 3e", attendu: "2" },
+            { question: "b)", attendu: "16" },
+            { question: "c)", attendu: "11" },
+          ],
           figure: cubes([{ h: [[3, 1, 1], [3, 2, 1], [2, 2, 1]] }]),
           correction:
             "a) Étage du bas : les $9$ piles ont au moins $1$ cube. $9$ cubes.\nDeuxième étage : les piles de $2$ cubes ou plus. J'en compte $5$.\nTroisième étage : les piles de $3$ cubes. Il y en a $2$.\nb) $9 + 5 + 2 = 16$ cubes.\nc) Un cube plein de $3$ sur $3$ sur $3$ : $3 \\times 3 \\times 3 = 27$ cubes.\n$27 - 16 = 11$ cubes à ajouter.\n⛔ Le piège : compter seulement les cubes visibles. Plusieurs sont cachés derrière la pile de $3$.\nRéponse : a) $9$, $5$ et $2$ ; b) $16$ cubes ; c) $11$ cubes.",
@@ -395,6 +442,11 @@ export const exercicesVisionEspace6e: FicheExercicesData = {
         },
         {
           enonce: "On plie ce patron pour faire un cube.\na) Quelle face sera en face de A ?\nb) Et en face de B ? Et en face de C ?",
+          reponses: [
+            { question: "a)", attendu: ["D"] },
+            { question: "b) B", attendu: ["E"] },
+            { question: "b) C", attendu: ["F"] },
+          ],
           figure: carreaux([{ nom: "patron", lignes: ["AB..", ".CD.", "..EF"] }]),
           correction:
             "Je plie en pensée, carré par carré.\nA touche B. B touche C. Deux faces qui se touchent sont voisines, pas opposées.\nEn pliant, D vient se poser au-dessus de A.\nDe même, E se pose en face de B, et F en face de C.\n⭐ Dans cet escalier, une face est opposée à celle qui est deux cases plus loin.\n⛔ Le piège : choisir une face qui touche. Elle est voisine, pas en face.\nRéponse : a) D ; b) E en face de B, F en face de C.",
@@ -402,6 +454,13 @@ export const exercicesVisionEspace6e: FicheExercicesData = {
         },
         {
           enonce: "Une tour de $4$ cubes est debout sur la table.\na) Combien de carreaux ont sa vue de dessus et sa vue de face ?\nb) On couche la tour vers la droite. Réponds de nouveau.\nc) Son nombre de cubes a-t-il changé ?",
+          reponses: [
+            { question: "a) dess.", attendu: "1" },
+            { question: "a) face", attendu: "4" },
+            { question: "b) dess.", attendu: "4" },
+            { question: "b) face", attendu: "4" },
+            { question: "c)", attendu: ["non"] },
+          ],
           correction:
             "a) Debout, d'en haut, je vois le cube du sommet : $1$ carreau.\nDe face, je vois la tour entière : $4$ carreaux, l'un sur l'autre.\nb) Couchée, d'en haut, je vois les $4$ cubes en ligne : $4$ carreaux.\nDe face, je vois aussi $4$ carreaux, côte à côte.\nc) Non, elle a toujours $4$ cubes.\n⛔ Le piège : croire que les vues restent les mêmes. Elles dépendent de la position du solide.\nRéponse : a) $1$ et $4$ ; b) $4$ et $4$ ; c) non.",
           schema: ecranSeulement(
@@ -420,6 +479,12 @@ export const exercicesVisionEspace6e: FicheExercicesData = {
         },
         {
           enonce: "Maé dessine un cube de $4$ cm de côté en perspective cavalière.\na) Quelle forme a la face de devant ? Quelle taille ?\nb) Elle trace les arêtes de biais plus courtes : $2$ cm. Le vrai cube a-t-il des arêtes de $2$ cm ?\nc) Combien d'arêtes seront en pointillés ?",
+          reponses: [
+            { question: "a) forme", attendu: ["carré", "un carré"] },
+            { question: "a) côté", attendu: "4" },
+            { question: "b)", attendu: ["non"] },
+            { question: "c)", attendu: "3" },
+          ],
           correction:
             "a) La face de devant est dessinée sans déformation. C'est un carré de $4$ cm de côté.\nb) Non. Toutes les arêtes du vrai cube mesurent $4$ cm.\nSur le dessin, les arêtes de biais sont raccourcies. Cela donne l'impression de profondeur.\nc) Un cube a $12$ arêtes. $3$ sont cachées : elles sont en pointillés.\n⛔ Le piège : mesurer une arête sur le dessin. Une arête de biais n'a pas sa vraie longueur.\nRéponse : a) un carré de $4$ cm ; b) non, toutes font $4$ cm ; c) $3$.",
           schema: ecranSeulement(cavalier(4, 4, 4, { cotes: { longueur: "4 cm", hauteur: "4 cm", profondeur: "4 cm" } })),
@@ -427,6 +492,11 @@ export const exercicesVisionEspace6e: FicheExercicesData = {
         },
         {
           enonce: "Un pavé plein est fait de $4$ cubes de long, $3$ de large et $2$ de haut.\nOn le regarde de devant, d'en haut et de droite.\na) Combien de cubes a-t-il ?\nb) Un cube est caché s'il a un voisin devant, au-dessus et à droite. Combien sont cachés ?\nc) Combien de cubes voit-on, au moins un peu ?",
+          reponses: [
+            { question: "a)", attendu: "24" },
+            { question: "b)", attendu: "6" },
+            { question: "c)", attendu: "18" },
+          ],
           correction:
             "a) $4 \\times 3 \\times 2 = 24$ cubes.\nb) Un cube de l'étage du haut se voit d'en haut. Les cachés sont donc en bas.\nIls ne sont pas dans la rangée de devant : il reste $3 - 1 = 2$ rangées.\nIls ne sont pas dans la colonne de droite : il reste $4 - 1 = 3$ colonnes.\n$3 \\times 2 = 6$ cubes cachés.\nc) $24 - 6 = 18$ cubes visibles.\n⛔ Le piège : compter seulement les cubes visibles. Les $6$ cachés comptent dans le volume.\nRéponse : a) $24$ ; b) $6$ ; c) $18$.",
           schema: ecranSeulement(cubes([{ h: [[2, 2, 2, 2], [2, 2, 2, 2], [2, 2, 2, 2]] }])),
@@ -434,6 +504,9 @@ export const exercicesVisionEspace6e: FicheExercicesData = {
         },
         {
           enonce: "Voici un empilement de cubes.\na) Dessine sa vue de dessus. Écris dans chaque carreau le nombre de cubes de la pile.\nb) Combien de cubes y a-t-il en tout ?",
+          reponses: [
+            { question: "b)", attendu: "10" },
+          ],
           figure: cubes([{ h: [[1, 2, 1], [2, 3, 1]] }]),
           correction:
             "a) Je dessine $2$ lignes de $3$ carreaux. La ligne du bas est la rangée de devant.\nDevant, les piles ont $1$, $2$ et $1$ cubes.\nDerrière, elles ont $2$, $3$ et $1$ cubes.\nb) $1 + 2 + 1 = 4$ et $2 + 3 + 1 = 6$.\n$4 + 6 = 10$ cubes.\n⛔ Le piège : oublier une pile de derrière. Je vérifie : $6$ carreaux, $6$ piles.\nRéponse : $10$ cubes.",
@@ -458,6 +531,13 @@ export const exercicesVisionEspace6e: FicheExercicesData = {
           titre: "Le cube peint",
           enonce:
             "Un grand cube est fait de $4$ cubes sur $4$ sur $4$. On peint tout l'extérieur en rouge. Puis on le démonte.\na) Combien de petits cubes y a-t-il ?\nb) Combien ont $3$ faces rouges ?\nc) Combien ont $2$ faces rouges ?\nd) Combien ont $1$ face rouge ?\ne) Combien n'ont aucune face rouge ?",
+          reponses: [
+            { question: "a)", attendu: "64" },
+            { question: "b)", attendu: "8" },
+            { question: "c)", attendu: "24" },
+            { question: "d)", attendu: "24" },
+            { question: "e)", attendu: "8" },
+          ],
           correction:
             "a) $4 \\times 4 \\times 4 = 64$ petits cubes.\nb) $3$ faces rouges : ce sont les coins. Un cube a $8$ coins.\nc) $2$ faces rouges : ils sont sur une arête, sans les coins.\nSur chaque arête, il y en a $4 - 2 = 2$. Le cube a $12$ arêtes : $12 \\times 2 = 24$.\nd) $1$ face rouge : ils sont au milieu d'une face.\nSur chaque face, il y en a $2 \\times 2 = 4$. Le cube a $6$ faces : $6 \\times 4 = 24$.\ne) Aucune face : ils sont à l'intérieur, $2 \\times 2 \\times 2 = 8$.\nJe vérifie : $8 + 24 + 24 + 8 = 64$.\n⛔ Le piège : compter un coin trois fois, sur trois faces.\nRéponse : $64$ ; $8$ ; $24$ ; $24$ ; $8$.",
           schema: ecranSeulement(cubes([{ h: [[4, 4, 4, 4], [4, 4, 4, 4], [4, 4, 4, 4], [4, 4, 4, 4]] }])),
@@ -467,6 +547,11 @@ export const exercicesVisionEspace6e: FicheExercicesData = {
           titre: "Mêmes vues, pas le même solide",
           enonce:
             "Timéo et Zoé ont construit ces deux solides.\na) Combien de cubes a chaque solide ?\nb) Dessine les vues de dessus, de face et de droite de chacun.\nc) Que remarques-tu ?\nd) Avec ces trois vues, combien de cubes faut-il au minimum ?",
+          reponses: [
+            { question: "a) Timéo", attendu: "6" },
+            { question: "a) Zoé", attendu: "8" },
+            { question: "d)", attendu: "6" },
+          ],
           figure: cubes([
             { h: [[2, 1], [1, 2]], nom: "Timéo" },
             { h: [[2, 2], [2, 2]], nom: "Zoé" },
@@ -486,6 +571,12 @@ export const exercicesVisionEspace6e: FicheExercicesData = {
           titre: "Les caisses de l'entrepôt",
           enonce:
             "Dans un entrepôt, des caisses cubiques sont empilées.\nLe plan donne le nombre de caisses de chaque pile. Le bas du plan est le devant.\na) Combien de caisses y a-t-il ?\nb) Un drone filme d'en haut. Combien de carreaux voit-il ?\nc) Une caméra filme de face. Dessine ce qu'elle voit. Combien de carreaux ?\nd) Une autre filme de droite. Combien de carreaux ?",
+          reponses: [
+            { question: "a)", attendu: "25" },
+            { question: "b)", attendu: "12" },
+            { question: "c)", attendu: "11" },
+            { question: "d)", attendu: "9" },
+          ],
           figure: carreaux([{ nom: "plan", lignes: ["1232", "2231", "3321"] }]),
           correction:
             "a) J'additionne ligne par ligne.\n$1 + 2 + 3 + 2 = 8$ ; $2 + 2 + 3 + 1 = 8$ ; $3 + 3 + 2 + 1 = 9$.\n$8 + 8 + 9 = 25$ caisses.\nb) D'en haut, chaque pile donne un carreau : $4 \\times 3 = 12$ carreaux.\nc) De face, je garde la plus haute pile de chaque colonne.\nColonnes : $3$, $3$, $3$ et $2$. Cela fait $3 + 3 + 3 + 2 = 11$ carreaux.\nd) De droite, je garde la plus haute pile de chaque ligne : $3$, $3$ et $3$.\n$3 \\times 3 = 9$ carreaux.\n⛔ Le piège : ne regarder que la ligne de devant. Les piles de derrière dépassent.\nRéponse : $25$ caisses ; $12$ ; $11$ ; $9$ carreaux.",
@@ -501,6 +592,14 @@ export const exercicesVisionEspace6e: FicheExercicesData = {
           titre: "Le dé à jouer",
           enonce:
             "Sur un dé à jouer, deux faces opposées font toujours $7$ en tout.\nVoici le patron d'un dé. Trois faces n'ont pas encore leur nombre : R, S et T.\na) Quelle face sera en face de $1$ ? En face de $2$ ? En face de $3$ ?\nb) Quel nombre faut-il écrire sur R, sur S et sur T ?",
+          reponses: [
+            { question: "a) 1", attendu: ["T"] },
+            { question: "a) 2", attendu: ["R"] },
+            { question: "a) 3", attendu: ["S"] },
+            { question: "b) R", attendu: "5" },
+            { question: "b) S", attendu: "4" },
+            { question: "b) T", attendu: "6" },
+          ],
           figure: carreaux([{ nom: "patron du dé", lignes: [".1..", "23RS", ".T.."] }]),
           correction:
             "a) Je plie en pensée.\nLes $4$ carrés de la ligne du milieu font le tour du dé.\nDans ce tour, $2$ est en face de R, et $3$ est en face de S.\nLe carré du haut et celui du bas ferment le dé : $1$ est en face de T.\nb) Deux faces opposées font $7$.\nR est en face de $2$ : $7 - 2 = 5$.\nS est en face de $3$ : $7 - 3 = 4$.\nT est en face de $1$ : $7 - 1 = 6$.\n⛔ Le piège : prendre une face voisine. $2$ et $3$ se touchent : ils ne sont pas opposés.\nRéponse : a) T en face de $1$, R en face de $2$, S en face de $3$ ; b) R : $5$, S : $4$, T : $6$.",

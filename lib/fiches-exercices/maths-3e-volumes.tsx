@@ -380,6 +380,11 @@ export const exercicesVolumes3e: FicheExercicesData = {
         {
           enonce:
             "Une boîte est remplie, sans aucun vide, de petits cubes de $1$ cm d'arête : $6$ cubes dans la longueur, $5$ dans la largeur, et $4$ couches en hauteur (figure).\na) Combien de cubes y a-t-il dans la couche du fond ?\nb) Combien de cubes y a-t-il en tout ?\nc) Quel est le volume de la boîte, en cm³ ?",
+          reponses: [
+            { question: "a)", attendu: "30" },
+            { question: "b)", attendu: "120" },
+            { question: "c)", attendu: "120" },
+          ],
           figure: pave(6, 5, 4, {}, { grille: true }),
           correction:
             "a) La couche du fond est un rectangle de $6$ cubes sur $5$ : $6 \\times 5 = 30$ cubes.\nb) Il y a $4$ couches identiques, empilées : $30 \\times 4 = 120$ cubes.\nc) Chaque petit cube occupe $1$ cm³, et la boîte en contient $120$ : son volume est $120$ cm³. C'est exactement $6 \\times 5 \\times 4$, les trois dimensions multipliées. Voilà pourquoi la formule du pavé est un produit, et pourquoi l'unité porte un petit $3$.\n⛔ Le piège : additionner, $6 + 5 + 4 = 15$. On compterait seulement les cubes posés le long de trois arêtes, pas tous ceux qui remplissent la boîte.\nRéponse : $30$ cubes par couche, $120$ cubes en tout, $120$ cm³.",
@@ -388,6 +393,9 @@ export const exercicesVolumes3e: FicheExercicesData = {
         },
         {
           enonce: "Un carton de déménagement est un pavé droit de $55$ cm de long, $35$ cm de large et $30$ cm de haut. Calculer son volume en cm³.",
+          reponses: [
+            { attendu: "57750" },
+          ],
           correction:
             "Le carton est un pavé droit : je multiplie ses trois dimensions.\nJe calcule d'abord l'aire du fond : $55 \\times 35 = 1\\,925$ cm².\nPuis je multiplie par la hauteur : $V = 1\\,925 \\times 30 = 57\\,750$ cm³.\n⛔ Le piège : écrire $55 + 35 + 30 = 120$. Une somme de centimètres donne des centimètres, jamais des cm³ : l'unité trahit l'erreur.\nRéponse : $V = 57\\,750$ cm³.",
           schema: pave(55, 35, 30, { L: "55 cm", l: "35 cm", h: "30 cm" }),
@@ -396,6 +404,9 @@ export const exercicesVolumes3e: FicheExercicesData = {
         {
           enonce:
             "Une tente canadienne a la forme d'un prisme droit couché. Sa base, l'entrée, est un triangle de $1{,}6$ m de large et $1{,}2$ m de haut ; la tente mesure $2{,}1$ m de long. Calculer son volume.",
+          reponses: [
+            { attendu: "2,016" },
+          ],
           correction:
             "Un prisme droit se calcule en deux temps : l'aire de la base, puis fois la hauteur du prisme, qui est ici la longueur de la tente.\nLa base est le TRIANGLE de l'entrée. Aire d'un triangle : base fois hauteur, divisé par $2$. $1{,}6 \\times 1{,}2 \\div 2 = 0{,}96$ m².\nJe multiplie par la longueur : $V = 0{,}96 \\times 2{,}1 = 2{,}016$ m³.\n⛔ Le piège : oublier la division par $2$ du triangle, et trouver $1{,}6 \\times 1{,}2 \\times 2{,}1 = 4{,}032$ m³. C'est le volume d'une boîte, deux fois plus grande que la tente.\nRéponse : $V = 2{,}016$ m³, environ $2$ m³.",
           schema: avec(prisme(1.6, 0, 1.2, 2.1, { larg: "1,6 m", toit: "1,2 m", long: "2,1 m" }), "en orange, la base : un triangle"),
@@ -403,6 +414,9 @@ export const exercicesVolumes3e: FicheExercicesData = {
         },
         {
           enonce: "Un verre a la forme d'un cylindre de $7$ cm de diamètre et de $10$ cm de hauteur, mesurés à l'intérieur. Calculer son volume, arrondi au centième de cm³.",
+          reponses: [
+            { attendu: "384,85", tolerance: 0.005 },
+          ],
           correction:
             "La formule du cylindre demande le RAYON, la moitié du diamètre : $r = 7 \\div 2 = 3{,}5$ cm.\nAire du disque de base : $\\pi \\times 3{,}5^2 = 12{,}25\\pi$ cm².\nJe multiplie par la hauteur : $V = 12{,}25\\pi \\times 10 = 122{,}5\\pi \\approx 384{,}85$ cm³.\nJe garde $\\pi$ jusqu'au bout et je n'arrondis qu'à la fin.\n⛔ Le piège : mettre le diamètre dans la formule. $\\pi \\times 7^2 \\times 10 = 490\\pi \\approx 1\\,539{,}38$ cm³ : quatre fois trop, puisque le rayon est élevé au carré.\nRéponse : $V = 122{,}5\\pi \\approx 384{,}85$ cm³.",
           schema: cylindre(3.5, 10, { r: "r = 3,5 cm", h: "10 cm" }),
@@ -411,6 +425,9 @@ export const exercicesVolumes3e: FicheExercicesData = {
         {
           enonce:
             "Un cornet de glace est un cône de révolution : son ouverture est un disque de rayon $2{,}5$ cm, et il mesure $12$ cm de la pointe à l'ouverture. Calculer son volume, arrondi au centième.",
+          reponses: [
+            { attendu: "78,54", tolerance: 0.005 },
+          ],
           correction:
             "Un cône a le TIERS du volume du cylindre de même base et de même hauteur : $V = \\dfrac{1}{3} \\times \\pi r^2 \\times h$.\nAire de la base : $\\pi \\times 2{,}5^2 = 6{,}25\\pi$ cm².\nLe cylindre de même base et même hauteur : $6{,}25\\pi \\times 12 = 75\\pi$ cm³.\nLe cône en est le tiers : $V = 75\\pi \\div 3 = 25\\pi \\approx 78{,}54$ cm³.\n⛔ Le piège : oublier le $\\dfrac{1}{3}$ et répondre $75\\pi \\approx 235{,}62$ cm³. C'est le volume d'un gobelet cylindrique, trois fois plus grand que le cornet.\nRéponse : $V = 25\\pi \\approx 78{,}54$ cm³.",
           schema: cone(2.5, 12, { r: "r = 2,5 cm", h: "12 cm" }, { pointeEnBas: true }),
@@ -419,6 +436,9 @@ export const exercicesVolumes3e: FicheExercicesData = {
         {
           enonce:
             "Une boule de pétanque mesure $8$ cm de diamètre (le règlement autorise de $7{,}05$ cm à $8$ cm). Calculer la place qu'elle occupe, c'est-à-dire son volume, arrondi au centième.",
+          reponses: [
+            { attendu: "268,08", tolerance: 0.005 },
+          ],
           correction:
             "La formule de la boule demande le rayon : $r = 8 \\div 2 = 4$ cm.\n$V = \\dfrac{4}{3}\\pi r^3$, avec le rayon AU CUBE : $4^3 = 4 \\times 4 \\times 4 = 64$.\n$V = \\dfrac{4}{3} \\times \\pi \\times 64 = \\dfrac{256}{3}\\pi \\approx 268{,}08$ cm³.\n⛔ Le piège : écrire $4\\pi r^2 = 4\\pi \\times 16 = 64\\pi \\approx 201{,}06$. Ça, c'est l'AIRE de la surface de la boule, en cm². Un carré annonce une aire ; un volume demande un cube.\nRéponse : $V = \\dfrac{256}{3}\\pi \\approx 268{,}08$ cm³.",
           schema: boule(4, { r: "r = 4 cm", tour: "diamètre : 8 cm" }),
@@ -427,6 +447,11 @@ export const exercicesVolumes3e: FicheExercicesData = {
         {
           enonce:
             "Un dé à jouer est un cube de $2$ cm d'arête. Un dé géant, pour jouer dans le jardin, en est un agrandissement : son arête mesure $6$ cm.\na) Quel est le coefficient d'agrandissement $k$ ?\nb) Par combien le volume est-il multiplié ?\nc) Calculer le volume du dé géant de deux façons.",
+          reponses: [
+            { question: "a)", attendu: "3" },
+            { question: "b)", attendu: "27" },
+            { question: "c)", attendu: "216" },
+          ],
           correction:
             "a) Toutes les longueurs sont multipliées par $k = 6 \\div 2 = 3$.\nb) Un volume multiplie trois longueurs, et chacune est multipliée par $3$ : le volume est multiplié par $k^3 = 3 \\times 3 \\times 3 = 27$.\nc) Petit dé : $2^3 = 8$ cm³. Avec le coefficient : $8 \\times 27 = 216$ cm³. Directement : $6^3 = 6 \\times 6 \\times 6 = 216$ cm³. Les deux chemins donnent le même résultat.\n⛔ Le piège : multiplier le volume par $k = 3$ et trouver $24$ cm³. Pour remplir le grand dé, il faut $27$ petits dés, pas $3$ : $3$ dans la longueur, $3$ dans la largeur, $3$ en hauteur.\nRéponse : $k = 3$ ; le volume est multiplié par $27$ ; le dé géant fait $216$ cm³.",
           schema: ensemble(
@@ -438,6 +463,11 @@ export const exercicesVolumes3e: FicheExercicesData = {
         {
           enonce:
             "Compléter, en se souvenant que $1$ dm³ $= 1$ L.\na) $3{,}4$ m³ $= \\ldots$ L\nb) $750$ cm³ $= \\ldots$ L\nc) $45$ L $= \\ldots$ m³",
+          reponses: [
+            { question: "a)", attendu: "3400" },
+            { question: "b)", attendu: "0,75" },
+            { question: "c)", attendu: "0,045" },
+          ],
           correction:
             "Un cube de $1$ dm d'arête mesure $10$ cm sur $10$ cm sur $10$ cm : il contient $10 \\times 10 \\times 10 = 1\\,000$ petits cubes de $1$ cm³. Donc $1$ dm³ $= 1\\,000$ cm³ $= 1$ L. De même, $1$ m³ $= 1\\,000$ dm³ $= 1\\,000$ L. D'une unité de volume à la suivante, on multiplie par $1\\,000$, pas par $10$.\na) $3{,}4$ m³ $= 3{,}4 \\times 1\\,000$ dm³ $= 3\\,400$ dm³, soit $3\\,400$ L.\nb) $750$ cm³ $= 750 \\div 1\\,000$ dm³ $= 0{,}75$ dm³, soit $0{,}75$ L.\nc) $45$ L $= 45$ dm³ $= 45 \\div 1\\,000$ m³ $= 0{,}045$ m³.\n⛔ Le piège : décaler la virgule d'un seul rang, comme pour des longueurs, et écrire $3{,}4$ m³ $= 34$ L. En volume, chaque rang d'unité compte trois chiffres.\nRéponse : $3\\,400$ L ; $0{,}75$ L ; $0{,}045$ m³.",
           schema: avec(pave(10, 10, 10, { L: "10 cm = 1 dm", h: "1 dm", l: "1 dm" }, { grille: true }), "1 dm³ = 1 000 cm³ = 1 L"),
@@ -460,6 +490,11 @@ export const exercicesVolumes3e: FicheExercicesData = {
         {
           enonce:
             "Le bassin d'une piscine municipale est un pavé droit de $25$ m de long, $12{,}5$ m de large et $1{,}8$ m de profondeur.\na) Calculer son volume en m³.\nb) Combien de litres d'eau faut-il pour le remplir ?\nc) La pompe débite $50$ m³ par heure. Combien de temps faut-il pour le remplir ? Répondre en heures et minutes.",
+          reponses: [
+            { question: "a)", attendu: "562,5" },
+            { question: "b)", attendu: "562500" },
+            { question: "c)", attendu: ["11h15min", "11h15", "675min", "11,25h"] },
+          ],
           correction:
             "a) Le bassin est un pavé droit. D'abord la surface de l'eau : $25 \\times 12{,}5 = 312{,}5$ m². Puis fois la profondeur : $V = 312{,}5 \\times 1{,}8 = 562{,}5$ m³.\nb) $1$ m³ $= 1\\,000$ L, donc $562{,}5 \\times 1\\,000 = 562\\,500$ L.\nc) Je divise le volume par le débit : $562{,}5 \\div 50 = 11{,}25$ h. Et $0{,}25$ h, c'est $0{,}25 \\times 60 = 15$ min.\n⛔ Le piège : convertir avec $1$ m³ $= 100$ L et annoncer $56\\,250$ L. Un mètre cube, c'est $10 \\times 10 \\times 10 = 1\\,000$ cubes d'un litre. Et $11{,}25$ h ne veut pas dire $11$ h $25$ min.\nRéponse : $562{,}5$ m³, soit $562\\,500$ L, remplis en $11$ h $15$ min.",
           schema: pave(25, 12.5, 1.8, { L: "25 m", l: "12,5 m", h: "1,8 m" }, { eau: true }),
@@ -468,6 +503,11 @@ export const exercicesVolumes3e: FicheExercicesData = {
         {
           enonce:
             "Un hangar agricole a la forme d'un prisme droit (figure). Sa façade est un rectangle de $8$ m de large et $3$ m de haut, surmonté d'un toit triangulaire de $2$ m de haut. Le hangar mesure $10$ m de long.\na) Calculer l'aire de la façade.\nb) Calculer le volume du hangar.\nc) Le chauffage prévu convient pour $300$ m³ au plus. Suffit-il ?",
+          reponses: [
+            { question: "a)", attendu: "32" },
+            { question: "b)", attendu: "320" },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           figure: prisme(8, 3, 2, 10, { larg: "8 m", mur: "3 m", toit: "2 m", long: "10 m" }),
           correction:
             "a) La façade est la BASE du prisme. Je la découpe en un rectangle et un triangle. Rectangle : $8 \\times 3 = 24$ m². Triangle de base $8$ m et de hauteur $2$ m : $8 \\times 2 \\div 2 = 8$ m². Façade : $24 + 8 = 32$ m².\nb) Le prisme est couché : sa hauteur, la distance entre ses deux façades, est la longueur du hangar, $10$ m. $V = 32 \\times 10 = 320$ m³.\nc) $320 > 300$ : le chauffage ne suffit pas.\n⛔ Le piège : prendre pour hauteur du prisme les $3$ m du mur, ou les $5$ m du faîte. La hauteur d'un prisme relie ses deux bases : ici, c'est la longueur.\nRéponse : façade de $32$ m², volume de $320$ m³ ; le chauffage ne suffit pas.",
@@ -477,6 +517,12 @@ export const exercicesVolumes3e: FicheExercicesData = {
         {
           enonce:
             "Une cuve de récupération d'eau de pluie est un cylindre de $1{,}2$ m de diamètre et $1{,}5$ m de haut.\na) Calculer son volume exact en m³, puis arrondi au millième.\nb) Combien de litres contient-elle pleine, arrondi au litre ?\nc) Elle est remplie aux trois quarts. Combien de litres contient-elle, arrondi au litre ?",
+          reponses: [
+            { question: "a) exact", attendu: "0,54π" },
+            { question: "a) arr.", attendu: "1,696", tolerance: 0.0005 },
+            { question: "b)", attendu: "1696", tolerance: 0.5 },
+            { question: "c)", attendu: "1272", tolerance: 0.5 },
+          ],
           correction:
             "a) Rayon : $1{,}2 \\div 2 = 0{,}6$ m. Aire de la base : $\\pi \\times 0{,}6^2 = 0{,}36\\pi$ m². $V = 0{,}36\\pi \\times 1{,}5 = 0{,}54\\pi \\approx 1{,}696$ m³.\nb) $1$ m³ $= 1\\,000$ L : $0{,}54\\pi \\times 1\\,000 = 540\\pi \\approx 1\\,696$ L.\nc) $\\dfrac{3}{4} \\times 540\\pi = 405\\pi \\approx 1\\,272$ L. Je pars de la valeur exacte, pas de l'arrondi.\n⛔ Le piège : oublier de diviser le diamètre par $2$. Avec $1{,}2$ comme rayon, on trouverait $2{,}16\\pi \\approx 6{,}786$ m³, quatre fois trop.\nRéponse : $0{,}54\\pi \\approx 1{,}696$ m³ ; environ $1\\,696$ L pleine ; environ $1\\,272$ L aux trois quarts.",
           schema: cylindre(0.6, 1.5, { r: "r = 0,6 m", h: "1,5 m" }),
@@ -485,6 +531,11 @@ export const exercicesVolumes3e: FicheExercicesData = {
         {
           enonce:
             "Un ballon de football de taille 5, celle des matchs d'adultes, a une circonférence comprise entre $68$ et $70$ cm (Lois du jeu, loi 2). On prend $69$ cm.\na) Calculer son rayon, arrondi au centième.\nb) Calculer son volume, arrondi au cm³, puis en litres, arrondi au dixième.\nc) Un élève écrit $V = 4\\pi r^2$. Qu'a-t-il calculé ?",
+          reponses: [
+            { question: "a)", attendu: "10,98", tolerance: 0.005 },
+            { question: "b) cm³", attendu: "5547", tolerance: 0.5 },
+            { question: "b) L", attendu: "5,5", tolerance: 0.05 },
+          ],
           correction:
             "a) La circonférence est le tour du ballon, le périmètre d'un grand cercle : $2\\pi r = 69$. Donc $r = \\dfrac{69}{2\\pi} \\approx 10{,}98$ cm.\nb) $V = \\dfrac{4}{3}\\pi r^3$. Je tape $r$ avec la valeur gardée par la calculatrice, pas avec l'arrondi : $V \\approx 5\\,547$ cm³. Comme $1\\,000$ cm³ $= 1$ L, $V \\approx 5{,}5$ L.\nc) $4\\pi r^2 \\approx 1\\,515$ : c'est l'AIRE du cuir du ballon, en cm², pas son volume. Il manque le cube du rayon, et le facteur $\\dfrac{1}{3}$.\n⛔ Le piège : prendre $69$ cm pour le diamètre, ou pour le rayon. La circonférence fait le tour : je la divise par $2\\pi$ pour retrouver le rayon.\nRéponse : $r \\approx 10{,}98$ cm ; $V \\approx 5\\,547$ cm³, environ $5{,}5$ L.",
           schema: boule(10.98, { r: "r ≈ 10,98 cm", tour: "le tour : 69 cm" }),
@@ -493,6 +544,10 @@ export const exercicesVolumes3e: FicheExercicesData = {
         {
           enonce:
             "La pyramide de Khéops, en Égypte, a une base carrée d'environ $230$ m de côté ; à sa construction, elle mesurait environ $147$ m de haut.\na) Calculer son volume d'origine en m³.\nb) Combien de bassins de piscine de $562{,}5$ m³ pourrait-on remplir avec ce volume ?",
+          reponses: [
+            { question: "a)", attendu: "2592100" },
+            { question: "b)", attendu: "4608", tolerance: 0.5 },
+          ],
           correction:
             "a) Une pyramide a le TIERS du volume du prisme de même base et même hauteur : $V = \\dfrac{1}{3} \\times \\mathcal{B} \\times h$.\nAire de la base : $230 \\times 230 = 52\\,900$ m².\nLe prisme de même base et même hauteur : $52\\,900 \\times 147 = 7\\,776\\,300$ m³.\nLa pyramide en est le tiers : $V = 7\\,776\\,300 \\div 3 = 2\\,592\\,100$ m³.\nb) $2\\,592\\,100 \\div 562{,}5 \\approx 4\\,608{,}2$ : plus de $4\\,600$ bassins.\n⛔ Le piège : oublier le $\\dfrac{1}{3}$ et annoncer $7\\,776\\,300$ m³, le volume d'une tour carrée de même base et de même hauteur.\nRéponse : environ $2\\,592\\,100$ m³, de quoi remplir plus de $4\\,600$ bassins.",
           schema: pyramide(230, 147, { c: "230 m", h: "147 m" }),
@@ -501,6 +556,12 @@ export const exercicesVolumes3e: FicheExercicesData = {
         {
           enonce:
             "Un verre à cocktail est un cône, pointe en bas : $9$ cm de haut, ouverture de rayon $4{,}5$ cm. On y verse du jus jusqu'à $6$ cm de hauteur, mesurés depuis la pointe.\na) Calculer le volume du verre plein, arrondi au centième.\nb) Le jus forme un petit cône, réduction du grand. Quel est le coefficient $k$ ?\nc) En déduire le volume de jus, puis le vérifier par un calcul direct.\nd) Le verre semble rempli aux deux tiers. Quelle part de son volume contient-il vraiment ?",
+          reponses: [
+            { question: "a)", attendu: "190,85", tolerance: 0.005 },
+            { question: "b)", attendu: "2/3" },
+            { question: "c)", attendu: "56,55", tolerance: 0.005 },
+            { question: "d)", attendu: "8/27" },
+          ],
           correction:
             "a) $V = \\dfrac{1}{3} \\times \\pi \\times 4{,}5^2 \\times 9 = \\dfrac{1}{3} \\times 20{,}25\\pi \\times 9 = 60{,}75\\pi \\approx 190{,}85$ cm³.\nb) Les hauteurs se comptent depuis la pointe, le sommet commun des deux cônes : $k = 6 \\div 9 = \\dfrac{2}{3}$.\nc) Une réduction de rapport $k$ multiplie le volume par $k^3 = \\dfrac{2}{3} \\times \\dfrac{2}{3} \\times \\dfrac{2}{3} = \\dfrac{8}{27}$. Jus : $60{,}75\\pi \\times \\dfrac{8}{27} = 18\\pi \\approx 56{,}55$ cm³. Vérification : le petit cône a pour rayon $4{,}5 \\times \\dfrac{2}{3} = 3$ cm et pour hauteur $6$ cm, donc $\\dfrac{1}{3} \\times \\pi \\times 3^2 \\times 6 = 18\\pi$. Les deux chemins sont d'accord.\nd) $\\dfrac{8}{27} \\approx 0{,}296$ : moins de $30$ % du verre, alors qu'il semble plein aux deux tiers.\n⛔ Le piège : multiplier par $k = \\dfrac{2}{3}$ et trouver $40{,}5\\pi \\approx 127{,}23$ cm³. Le volume se réduit par $k^3$, pas par $k$ : le haut du verre, le plus large, contient presque tout.\nRéponse : $60{,}75\\pi \\approx 190{,}85$ cm³ ; $k = \\dfrac{2}{3}$ ; $18\\pi \\approx 56{,}55$ cm³ ; $\\dfrac{8}{27}$ du verre, moins de $30$ %.",
           schema: ensemble(
@@ -512,6 +573,12 @@ export const exercicesVolumes3e: FicheExercicesData = {
         {
           enonce:
             "Une cuve à eau est un pavé droit de $2{,}5$ m sur $2$ m sur $1{,}6$ m. Un bureau d'études en fait une maquette à l'échelle $\\dfrac{1}{20}$.\na) Calculer le volume de la vraie cuve, en m³ puis en litres.\nb) Par combien faut-il diviser ce volume pour obtenir celui de la maquette ?\nc) Combien de litres contient la maquette ? Vérifier en calculant ses dimensions.",
+          reponses: [
+            { question: "a) m³", attendu: "8" },
+            { question: "a) L", attendu: "8000" },
+            { question: "b)", attendu: "8000" },
+            { question: "c)", attendu: "1" },
+          ],
           correction:
             "a) $V = 2{,}5 \\times 2 \\times 1{,}6 = 8$ m³, soit $8 \\times 1\\,000 = 8\\,000$ L.\nb) Toutes les longueurs sont divisées par $20$ : $k = \\dfrac{1}{20}$. Le volume est multiplié par $k^3 = \\dfrac{1}{20 \\times 20 \\times 20} = \\dfrac{1}{8\\,000}$ : on le divise par $8\\,000$.\nc) $8\\,000 \\div 8\\,000 = 1$ L. Vérification : la maquette mesure $250 \\div 20 = 12{,}5$ cm, $200 \\div 20 = 10$ cm et $160 \\div 20 = 8$ cm. $12{,}5 \\times 10 \\times 8 = 1\\,000$ cm³ $= 1$ dm³ $= 1$ L.\n⛔ Le piège : diviser le volume par $20$ et annoncer $400$ L pour une maquette qu'on tient dans une main.\nRéponse : $8$ m³, soit $8\\,000$ L ; on divise par $8\\,000$ ; la maquette contient $1$ L.",
           schema: ensemble(
@@ -523,6 +590,12 @@ export const exercicesVolumes3e: FicheExercicesData = {
         {
           enonce:
             "On compare trois solides : un cube de $6$ cm d'arête, un cylindre de $6$ cm de diamètre et $6$ cm de haut, une boule de $6$ cm de diamètre.\na) Calculer leurs volumes, en valeur exacte puis arrondis au centième.\nb) Les ranger du plus petit au plus grand.\nc) Quelle fraction du cylindre la boule occupe-t-elle ?",
+          reponses: [
+            { question: "a) cube", attendu: "216" },
+            { question: "a) cyl.", attendu: "169,65", tolerance: 0.005 },
+            { question: "a) boule", attendu: "113,10", tolerance: 0.005 },
+            { question: "c)", attendu: "2/3" },
+          ],
           correction:
             "a) Cube : $V = 6^3 = 216$ cm³.\nCylindre : le rayon vaut $3$ cm, $V = \\pi \\times 3^2 \\times 6 = 54\\pi \\approx 169{,}65$ cm³.\nBoule : le rayon vaut $3$ cm, $V = \\dfrac{4}{3}\\pi \\times 3^3 = \\dfrac{4}{3} \\times 27\\pi = 36\\pi \\approx 113{,}10$ cm³.\nb) $36\\pi < 54\\pi < 216$ : la boule, puis le cylindre, puis le cube. Chacun tient dans le suivant.\nc) $\\dfrac{36\\pi}{54\\pi} = \\dfrac{2}{3}$ : la boule occupe les deux tiers du cylindre qui l'enferme. Archimède l'avait démontré, il y a plus de $2\\,000$ ans.\n⛔ Le piège : mettre $6$ dans les formules du cylindre et de la boule. C'est le diamètre ; le rayon vaut $3$.\nRéponse : $216$ cm³, $54\\pi \\approx 169{,}65$ cm³ et $36\\pi \\approx 113{,}10$ cm³ ; la boule, le cylindre, le cube ; les deux tiers.",
           schema: ensemble(
@@ -550,6 +623,11 @@ export const exercicesVolumes3e: FicheExercicesData = {
           titre: "Le silo à grain",
           enonce:
             "Un silo à grain est formé d'un cylindre de $6$ m de diamètre et $10$ m de haut, posé sur un cône, pointe en bas, de même diamètre et de $2{,}4$ m de haut (figure).\na) Calculer le volume du silo, en valeur exacte puis arrondi au dixième de m³.\nb) On admet qu'un mètre cube de blé pèse environ $0{,}78$ tonne. Quelle masse de blé contient le silo plein, arrondie à la tonne ?\nc) Une benne de camion transporte $30$ m³. Combien de bennes faut-il pour vider le silo ?",
+          reponses: [
+            { question: "a)", attendu: "305,4", tolerance: 0.05 },
+            { question: "b)", attendu: "238", tolerance: 0.5 },
+            { question: "c)", attendu: "11" },
+          ],
           figure: silo(3, 10, 2.4, { r: "6 m de diamètre", hc: "10 m", hk: "2,4 m" }),
           correction:
             "a) Rayon : $6 \\div 2 = 3$ m. La base commune est un disque d'aire $\\pi \\times 3^2 = 9\\pi$ m².\nCylindre : $9\\pi \\times 10 = 90\\pi$ m³.\nCône : le tiers du cylindre de même base et même hauteur, $\\dfrac{1}{3} \\times 9\\pi \\times 2{,}4 = 7{,}2\\pi$ m³.\nSilo : $90\\pi + 7{,}2\\pi = 97{,}2\\pi \\approx 305{,}4$ m³.\nb) $97{,}2\\pi \\times 0{,}78 \\approx 238$ t.\nc) $97{,}2\\pi \\div 30 \\approx 10{,}18$. Dix bennes ne suffisent pas : il en faut $11$.\n⛔ Le piège : oublier le tiers du cône, $9\\pi \\times 2{,}4 = 21{,}6\\pi$, et trouver $111{,}6\\pi \\approx 350{,}6$ m³ : $45$ m³ de blé qui n'existent pas.\nRéponse : $97{,}2\\pi \\approx 305{,}4$ m³ ; environ $238$ tonnes de blé ; $11$ bennes.",
@@ -560,6 +638,11 @@ export const exercicesVolumes3e: FicheExercicesData = {
           titre: "La Terre et la Lune",
           enonce:
             "On assimile la Terre et la Lune à deux boules. Rayon moyen de la Terre : $6\\,371$ km ; rayon moyen de la Lune : $1\\,737{,}4$ km (NASA).\na) Calculer le volume de la Terre, puis celui de la Lune, en km³, en écriture scientifique avec quatre chiffres significatifs.\nb) Combien de Lunes faudrait-il pour faire le volume de la Terre ?\nc) Retrouver ce résultat sans calculer aucun volume, avec le rapport des rayons.\nd) Un élève affirme : « le rayon de la Terre vaut environ $3{,}7$ fois celui de la Lune, donc la Terre contient $3{,}7$ Lunes ». Que lui répondre ?",
+          reponses: [
+            { question: "a) Terre", attendu: ["1,083×10^12"], exact: true },
+            { question: "a) Lune", attendu: ["2,197×10^10"], exact: true },
+            { question: "b)", attendu: "49", tolerance: 0.5 },
+          ],
           correction:
             "a) $V = \\dfrac{4}{3}\\pi r^3$, avec le rayon au cube.\nTerre : $\\dfrac{4}{3}\\pi \\times 6\\,371^3 \\approx 1{,}083 \\times 10^{12}$ km³, plus de mille milliards de km³.\nLune : $\\dfrac{4}{3}\\pi \\times 1\\,737{,}4^3 \\approx 2{,}197 \\times 10^{10}$ km³.\nb) Je divise, avec les valeurs gardées par la calculatrice : $\\dfrac{V_T}{V_L} \\approx 49{,}3$. Il faudrait environ $49$ Lunes.\nc) Toutes les boules ont la même forme : la Terre est un agrandissement de la Lune, de rapport $k = 6\\,371 \\div 1\\,737{,}4 \\approx 3{,}667$. Le volume est multiplié par $k^3 \\approx 49{,}3$. Même résultat, sans $\\pi$ ni formule.\nd) Le rapport des RAYONS n'est pas celui des volumes. Le volume est multiplié par $k^3$, pas par $k$ : environ $49$ Lunes, pas $3{,}7$.\n⛔ Le piège : appliquer $k$ au volume. D'une longueur à un volume, il y a trois dimensions, donc un cube.\nRéponse : environ $1{,}083 \\times 10^{12}$ km³ et $2{,}197 \\times 10^{10}$ km³ ; environ $49$ Lunes, soit $k^3$ avec $k \\approx 3{,}667$.",
           schema: ensemble(
@@ -572,6 +655,12 @@ export const exercicesVolumes3e: FicheExercicesData = {
           titre: "La pluie sur le toit",
           enonce:
             "Une maison récupère l'eau de pluie de son toit, qui couvre $80$ m² au sol, dans une cuve cylindrique de $1$ m de diamètre et $1{,}2$ m de haut.\na) Calculer le volume de la cuve en litres, arrondi au litre.\nb) Il tombe $12$ mm de pluie. L'eau reçue par le toit forme une couche de $80$ m² de base et de $12$ mm d'épaisseur. Quel volume d'eau cela représente-t-il, en litres ?\nc) Cette pluie suffit-elle à remplir la cuve vide ?\nd) Quelle hauteur de pluie, arrondie au dixième de mm, remplit exactement la cuve ?",
+          reponses: [
+            { question: "a)", attendu: "942", tolerance: 0.5 },
+            { question: "b)", attendu: "960" },
+            { question: "c)", attendu: ["oui", "vrai"] },
+            { question: "d)", attendu: "11,8", tolerance: 0.05 },
+          ],
           correction:
             "a) Rayon : $0{,}5$ m. $V = \\pi \\times 0{,}5^2 \\times 1{,}2 = 0{,}3\\pi$ m³. En litres : $0{,}3\\pi \\times 1\\,000 = 300\\pi \\approx 942$ L.\nb) La couche d'eau est un prisme très plat : base de $80$ m², hauteur de $12$ mm. Je convertis AVANT de multiplier : $12$ mm $= 0{,}012$ m. $V = 80 \\times 0{,}012 = 0{,}96$ m³, soit $960$ L. À retenir : $1$ mm de pluie, c'est $1$ L d'eau par m².\nc) $960 > 942$ : oui, la cuve se remplit, et environ $18$ L débordent.\nd) Je cherche l'épaisseur $e$ telle que $80 \\times e = 0{,}3\\pi$ : $e = 0{,}3\\pi \\div 80 \\approx 0{,}011\\,78$ m, soit environ $11{,}8$ mm.\n⛔ Le piège : multiplier $80$ par $12$ sans convertir, et annoncer $960$ m³, mille fois trop. Les longueurs d'un même calcul doivent être dans la même unité.\nRéponse : environ $942$ L ; $960$ L ; oui, de justesse ; environ $11{,}8$ mm.",
           schema: ensemble(
@@ -584,6 +673,13 @@ export const exercicesVolumes3e: FicheExercicesData = {
           titre: "La boule de glace qui fond",
           enonce:
             "Un cornet est un cône de $3$ cm de rayon et de $10$ cm de profondeur. On pose dessus une boule de glace de $3$ cm de rayon, sans rien mettre à l'intérieur du cornet.\na) Calculer le volume du cornet et celui de la boule, en valeur exacte puis arrondis au centième.\nb) La glace fond, et on admet que son volume ne change pas. Le cornet déborde-t-il ? De combien ?\nc) Quelle profondeur faudrait-il au cornet, avec le même rayon, pour contenir exactement la boule fondue ?",
+          reponses: [
+            { question: "a) cône", attendu: "94,25", tolerance: 0.005 },
+            { question: "a) boule", attendu: "113,10", tolerance: 0.005 },
+            { question: "b)", attendu: ["oui", "vrai"] },
+            { question: "b) cm³", attendu: "18,85", tolerance: 0.005 },
+            { question: "c)", attendu: "12" },
+          ],
           correction:
             "a) Cornet : $\\dfrac{1}{3} \\times \\pi \\times 3^2 \\times 10 = 30\\pi \\approx 94{,}25$ cm³.\nBoule : $\\dfrac{4}{3}\\pi \\times 3^3 = 36\\pi \\approx 113{,}10$ cm³.\nb) $36\\pi > 30\\pi$ : le cornet déborde, de $36\\pi - 30\\pi = 6\\pi \\approx 18{,}85$ cm³.\nc) Je cherche $h$ tel que $\\dfrac{1}{3} \\times 9\\pi \\times h = 36\\pi$, c'est-à-dire $3\\pi h = 36\\pi$, donc $h = 12$ cm.\n⛔ Le piège : oublier le tiers du cône. On trouverait $90\\pi$ pour le cornet, et on croirait qu'il peut contenir deux boules et demie.\nRéponse : $30\\pi \\approx 94{,}25$ cm³ et $36\\pi \\approx 113{,}10$ cm³ ; il déborde d'environ $18{,}85$ cm³ ; il faudrait $12$ cm de profondeur.",
           schema: ensemble(

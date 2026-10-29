@@ -197,6 +197,12 @@ export const exercicesPuissances4e: FicheExercicesData = {
         {
           enonce:
             "a) Écris sous la forme d'une puissance : $6 \\times 6 \\times 6 \\times 6 \\times 6$.\nb) Écris sous la forme d'une puissance : $(-4) \\times (-4)$.\nc) Dans $11^4$, quelle est la base ? Quel est l'exposant ? Écris le produit.",
+          reponses: [
+            { question: "a)", attendu: ["6^5"], exact: true },
+            { question: "b)", attendu: ["(-4)^2"], exact: true },
+            { question: "c) base", attendu: "11" },
+            { question: "c) expo.", attendu: "4" },
+          ],
           correction:
             "a) Je compte les facteurs : le $6$ apparaît cinq fois, donc $6 \\times 6 \\times 6 \\times 6 \\times 6 = 6^5$.\nb) Le nombre répété est $-4$ tout entier : je garde les parenthèses, $(-4) \\times (-4) = (-4)^2$.\nc) La base est $11$, le nombre répété ; l'exposant est $4$, le nombre de facteurs : $11^4 = 11 \\times 11 \\times 11 \\times 11$.\n⛔ Le piège : écrire $6 \\times 5$ au lieu de $6^5$. L'exposant COMPTE les facteurs, il n'en est pas un : $6 \\times 5 = 30$, alors que $6^5 = 7\\,776$.\nRéponse : a) $6^5$ ; b) $(-4)^2$ ; c) base $11$, exposant $4$.",
           schema: tableau([
@@ -209,6 +215,12 @@ export const exercicesPuissances4e: FicheExercicesData = {
         },
         {
           enonce: "Calcule sans calculatrice :\na) $2^6$\nb) $5^3$\nc) $9^2$\nd) $8^0$",
+          reponses: [
+            { question: "a)", attendu: "64" },
+            { question: "b)", attendu: "125" },
+            { question: "c)", attendu: "81" },
+            { question: "d)", attendu: "1" },
+          ],
           correction:
             "a) J'écris le produit : $2^6 = 2 \\times 2 \\times 2 \\times 2 \\times 2 \\times 2 = 64$. J'avance pas à pas, en doublant : $2$, $4$, $8$, $16$, $32$, $64$.\nb) $5^3 = 5 \\times 5 \\times 5 = 125$ : $5 \\times 5 = 25$, puis $25 \\times 5 = 125$.\nc) $9^2 = 9 \\times 9 = 81$.\nd) Je descends l'échelle en divisant par $8$ : $8^2 = 64$, $8^1 = 8$, puis $8^0 = 8 \\div 8 = 1$.\n⛔ Le piège : écrire $2^6 = 12$. Ça, c'est $2 \\times 6$. Six facteurs $2$ donnent $64$, pas $12$.\nRéponse : $2^6 = 64$ ; $5^3 = 125$ ; $9^2 = 81$ ; $8^0 = 1$.",
           schema: (
@@ -232,6 +244,12 @@ export const exercicesPuissances4e: FicheExercicesData = {
         },
         {
           enonce: "Calcule :\na) $(-3)^4$\nb) $-3^4$\nc) $(-5)^3$\nd) $(-1)^7$",
+          reponses: [
+            { question: "a)", attendu: "81" },
+            { question: "b)", attendu: "-81" },
+            { question: "c)", attendu: "-125" },
+            { question: "d)", attendu: "-1" },
+          ],
           correction:
             "a) La base est $-3$, entre parenthèses : $(-3)^4 = (-3) \\times (-3) \\times (-3) \\times (-3) = 81$. Quatre facteurs négatifs, un nombre PAIR : le résultat est positif.\nb) Sans parenthèses, l'exposant ne porte que sur le $3$ : $-3^4 = -(3 \\times 3 \\times 3 \\times 3) = -81$.\nc) $(-5)^3 = (-5) \\times (-5) \\times (-5) = -125$. Trois facteurs négatifs, un nombre IMPAIR : le résultat est négatif.\nd) Sept facteurs $-1$, un nombre impair : $(-1)^7 = -1$.\n⛔ Le piège : lire $-3^4$ comme $(-3)^4$. Les parenthèses décident de la base : $(-3)^4$ vaut $81$, mais $-3^4$ vaut $-81$.\nRéponse : a) $81$ ; b) $-81$ ; c) $-125$ ; d) $-1$.",
           schema: tableau([
@@ -245,6 +263,14 @@ export const exercicesPuissances4e: FicheExercicesData = {
         {
           enonce:
             "a) Écris $2^{-4}$ sous forme de fraction, puis en écriture décimale.\nb) Même question pour $5^{-1}$.\nc) Écris $3^{-2}$ sous forme de fraction. Est-ce un nombre négatif ?",
+          reponses: [
+            { question: "a) frac.", attendu: ["1/16"], exact: true },
+            { question: "a) déc.", attendu: ["0,0625"], exact: true },
+            { question: "b) frac.", attendu: ["1/5"], exact: true },
+            { question: "b) déc.", attendu: ["0,2"], exact: true },
+            { question: "c) frac.", attendu: ["1/9"], exact: true },
+            { question: "c) nég.?", attendu: ["non", "faux"] },
+          ],
           correction:
             "Un exposant négatif désigne un INVERSE : $a^{-n} = \\dfrac{1}{a^n}$.\na) $2^{-4} = \\dfrac{1}{2^4} = \\dfrac{1}{16}$, et $1 \\div 16 = 0{,}0625$.\nb) $5^{-1} = \\dfrac{1}{5^1} = \\dfrac{1}{5} = 0{,}2$.\nc) $3^{-2} = \\dfrac{1}{3^2} = \\dfrac{1}{9}$. Non : c'est un nombre POSITIF, plus petit que $1$.\n⭐ Le tableau le montre sans rien admettre : à chaque marche vers la droite, je divise par $2$. Après $2^0 = 1$, la division continue : $0{,}5$, puis $0{,}25$…\n⛔ Le piège : croire que $2^{-4}$ vaut $-16$. Le signe moins porte sur l'EXPOSANT : il annonce un inverse, pas un opposé.\nRéponse : $2^{-4} = \\dfrac{1}{16} = 0{,}0625$ ; $5^{-1} = \\dfrac{1}{5} = 0{,}2$ ; $3^{-2} = \\dfrac{1}{9}$, un nombre positif.",
           schema: tableau([
@@ -256,6 +282,12 @@ export const exercicesPuissances4e: FicheExercicesData = {
         {
           enonce:
             "a) Écris en écriture décimale : $10^7$, puis $10^{-5}$.\nb) Écris sous la forme d'une puissance de $10$ : $10\\,000$, puis $0{,}000001$.",
+          reponses: [
+            { question: "a) 1er", attendu: ["10000000"], exact: true },
+            { question: "a) 2e", attendu: ["0,00001"], exact: true },
+            { question: "b) 1er", attendu: ["10^4"], exact: true },
+            { question: "b) 2e", attendu: ["10^(-6)"], exact: true },
+          ],
           correction:
             "a) $10^7$ : un $1$ suivi de sept zéros, $10^7 = 10\\,000\\,000$, dix millions.\n$10^{-5}$ : le $1$ se place au cinquième rang après la virgule, $10^{-5} = 0{,}00001$.\nb) $10\\,000$ s'écrit avec quatre zéros : $10\\,000 = 10^4$.\nDans $0{,}000001$, le $1$ est au sixième rang après la virgule : $0{,}000001 = 10^{-6}$.\n⛔ Le piège : compter TOUS les zéros de $0{,}000001$, celui d'avant la virgule compris, et écrire $10^{-7}$. Je compte les RANGS après la virgule : le $1$ est au sixième.\nRéponse : $10^7 = 10\\,000\\,000$ ; $10^{-5} = 0{,}00001$ ; $10\\,000 = 10^4$ ; $0{,}000001 = 10^{-6}$.",
           schema: tableau([
@@ -267,6 +299,11 @@ export const exercicesPuissances4e: FicheExercicesData = {
         },
         {
           enonce: "Écris en écriture décimale :\na) $6{,}4 \\times 10^3$\nb) $271 \\times 10^{-2}$\nc) $0{,}05 \\times 10^4$",
+          reponses: [
+            { question: "a)", attendu: ["6400"], exact: true },
+            { question: "b)", attendu: ["2,71"], exact: true },
+            { question: "c)", attendu: ["500"], exact: true },
+          ],
           correction:
             "a) Multiplier par $10^3$, c'est multiplier par $1\\,000$ : la virgule avance de trois rangs vers la droite. $6{,}4 \\times 10^3 = 6\\,400$.\nb) $10^{-2} = 0{,}01$ : multiplier par $0{,}01$, c'est diviser par $100$. La virgule recule de deux rangs vers la gauche : $271 \\times 10^{-2} = 2{,}71$.\nc) Quatre rangs vers la droite : $0{,}05 \\times 10^4 = 500$.\n⛔ Le piège : dans b), croire que l'exposant négatif rend le résultat négatif, et écrire $-2{,}71$. Un exposant négatif fait RECULER la virgule ; le nombre reste positif.\nRéponse : a) $6\\,400$ ; b) $2{,}71$ ; c) $500$.",
           schema: tableau([
@@ -278,6 +315,12 @@ export const exercicesPuissances4e: FicheExercicesData = {
         },
         {
           enonce: "Donne la notation scientifique de :\na) $72\\,000$\nb) $0{,}00039$\nc) $506$\nd) $0{,}8$",
+          reponses: [
+            { question: "a)", attendu: ["7,2×10^4"], exact: true },
+            { question: "b)", attendu: ["3,9×10^(-4)"], exact: true },
+            { question: "c)", attendu: ["5,06×10^2"], exact: true },
+            { question: "d)", attendu: ["8×10^(-1)"], exact: true },
+          ],
           correction:
             "La notation scientifique est $a \\times 10^n$ avec un seul chiffre non nul avant la virgule : $1 \\leqslant a < 10$.\na) Je place la virgule après le $7$ : $7{,}2$. Pour revenir à $72\\,000$, elle doit avancer de quatre rangs vers la droite : $72\\,000 = 7{,}2 \\times 10^{4}$.\nb) Le premier chiffre non nul est le $3$ : $3{,}9$. Pour revenir à $0{,}00039$, la virgule recule de quatre rangs, l'exposant est négatif : $0{,}00039 = 3{,}9 \\times 10^{-4}$.\nc) Deux rangs vers la droite, et je garde le $0$ du milieu : $506 = 5{,}06 \\times 10^{2}$.\nd) Un rang vers la gauche : $0{,}8 = 8 \\times 10^{-1}$.\n⛔ Le piège : dans c), perdre le zéro du milieu et écrire $5{,}6 \\times 10^2$. Or $5{,}6 \\times 10^2 = 560$, pas $506$.\nRéponse : a) $7{,}2 \\times 10^{4}$ ; b) $3{,}9 \\times 10^{-4}$ ; c) $5{,}06 \\times 10^{2}$ ; d) $8 \\times 10^{-1}$.",
           schema: tableau([
@@ -290,6 +333,11 @@ export const exercicesPuissances4e: FicheExercicesData = {
         {
           enonce:
             "Compare, en écrivant le signe qui convient :\na) $4{,}1 \\times 10^{6}$ et $9{,}7 \\times 10^{5}$\nb) $2{,}3 \\times 10^{-3}$ et $2{,}3 \\times 10^{-2}$\nc) $6{,}05 \\times 10^{4}$ et $6{,}5 \\times 10^{4}$",
+          reponses: [
+            { question: "a)", attendu: ">" },
+            { question: "b)", attendu: "<" },
+            { question: "c)", attendu: "<" },
+          ],
           correction:
             "Je regarde d'abord les exposants ; je ne compare les nombres devant que si les exposants sont égaux.\na) $6 > 5$ : un million contre cent mille. Même si $9{,}7 > 4{,}1$, le nombre devant ne rattrape pas un rang de plus : $4{,}1 \\times 10^{6} > 9{,}7 \\times 10^{5}$.\nb) Les exposants sont négatifs, et $-2 > -3$ : $10^{-2} = 0{,}01$ est plus grand que $10^{-3} = 0{,}001$. Donc $2{,}3 \\times 10^{-3} < 2{,}3 \\times 10^{-2}$.\nc) Même exposant : je compare $6{,}05$ et $6{,}5$, c'est-à-dire $6{,}05$ et $6{,}50$. Donc $6{,}05 \\times 10^{4} < 6{,}5 \\times 10^{4}$.\n⛔ Le piège : dans a), choisir $9{,}7 \\times 10^{5}$ parce que $9{,}7$ est plus grand que $4{,}1$. En clair, c'est $4\\,100\\,000$ contre $970\\,000$ : les barres le montrent.\nRéponse : a) $>$ ; b) $<$ ; c) $<$.",
           schema: (
@@ -325,6 +373,11 @@ export const exercicesPuissances4e: FicheExercicesData = {
         {
           enonce:
             "Calcule en écrivant chaque puissance de $10$ en clair, puis donne le résultat sous la forme d'une puissance de $10$ :\n$A = 10^6 \\times 10^3$\n$B = 10^{-2} \\times 10^{-3}$\n$C = 10^7 \\div 10^4$",
+          reponses: [
+            { question: "A", attendu: ["10^9"], exact: true },
+            { question: "B", attendu: ["10^(-5)"], exact: true },
+            { question: "C", attendu: ["10^3"], exact: true },
+          ],
           correction:
             "Je ne cherche pas de règle : j'écris les nombres, je calcule, je compte les zéros.\n$A = 1\\,000\\,000 \\times 1\\,000 = 1\\,000\\,000\\,000$. Six zéros, puis trois de plus : neuf zéros. Donc $A = 10^9$, un milliard.\n$B = 0{,}01 \\times 0{,}001 = 0{,}00001$. Le $1$ est au cinquième rang après la virgule : $B = 10^{-5}$.\n$C = 10\\,000\\,000 \\div 10\\,000 = 1\\,000$. Diviser par $10\\,000$ retire quatre zéros aux sept : $C = 10^3$.\n⛔ Le piège : multiplier les exposants dans A, $6 \\times 3$, et écrire $10^{18}$. Je vérifie en clair : un million fois mille, c'est un milliard, avec neuf zéros.\nRéponse : $A = 10^9$ ; $B = 10^{-5}$ ; $C = 10^3$.",
           schema: tableau([
@@ -338,6 +391,14 @@ export const exercicesPuissances4e: FicheExercicesData = {
         {
           enonce:
             "Calcule, en respectant les priorités :\n$A = 2^5 + 3^3$\n$B = 4^2 \\times 10^3$\n$C = 5 \\times 2^3 - 6^2$\n$D = (2 + 3)^2$ et $E = 2^2 + 3^2$. Sont-ils égaux ?",
+          reponses: [
+            { question: "A", attendu: "59" },
+            { question: "B", attendu: "16000" },
+            { question: "C", attendu: "4" },
+            { question: "D", attendu: "25" },
+            { question: "E", attendu: "13" },
+            { question: "égaux ?", attendu: ["non", "faux"] },
+          ],
           correction:
             "Je calcule chaque puissance AVANT les multiplications et les additions.\n$A = 2^5 + 3^3 = 32 + 27 = 59$.\n$B = 4^2 \\times 10^3 = 16 \\times 1\\,000 = 16\\,000$.\n$C = 5 \\times 2^3 - 6^2 = 5 \\times 8 - 36 = 40 - 36 = 4$.\n$D$ : la parenthèse d'abord, $(2 + 3)^2 = 5^2 = 25$. Et $E = 2^2 + 3^2 = 4 + 9 = 13$. Ils ne sont pas égaux.\n⭐ Le dessin le montre : le carré de côté $2 + 3$ contient le carré de $2$ ($4$ cases) et le carré de $3$ ($9$ cases), mais aussi deux rectangles de $2$ sur $3$ ($6$ cases chacun). $4 + 9 + 6 + 6 = 25$.\n⛔ Le piège : croire que $(2 + 3)^2 = 2^2 + 3^2$. Il manque les deux rectangles, soit $12$ cases.\nRéponse : $A = 59$ ; $B = 16\\,000$ ; $C = 4$ ; $D = 25$ et $E = 13$, donc $D$ et $E$ ne sont pas égaux.",
           schema: carreDecoupe,
@@ -346,6 +407,14 @@ export const exercicesPuissances4e: FicheExercicesData = {
         {
           enonce:
             "On donne $A = 2^{-1}$, $B = -2^{1}$, $C = 4^{0}$, $D = (-1)^{5}$ et $E = 2^{1}$.\na) Écris chaque nombre en écriture décimale.\nb) Range-les dans l'ordre croissant.\nc) $A$ et $B$ se ressemblent. Explique ce qui les sépare.",
+          reponses: [
+            { question: "a) A", attendu: "0,5" },
+            { question: "a) B", attendu: "-2" },
+            { question: "a) C", attendu: "1" },
+            { question: "a) D", attendu: "-1" },
+            { question: "a) E", attendu: "2" },
+            { question: "b)", attendu: ["B<D<A<C<E", "-2<-1<0,5<1<2"], exact: true },
+          ],
           correction:
             "a) $A = 2^{-1} = \\dfrac{1}{2} = 0{,}5$ : l'exposant négatif donne l'INVERSE de $2$.\n$B = -2^{1} = -2$ : le signe moins est devant, c'est l'OPPOSÉ de $2$.\n$C = 4^{0} = 1$ : tout nombre non nul à la puissance $0$ vaut $1$.\n$D = (-1)^{5} = -1$ : cinq facteurs négatifs, un nombre impair.\n$E = 2^{1} = 2$.\nb) Je place les cinq points sur la droite graduée et je lis de gauche à droite.\nc) Dans $A$, le moins est sur l'exposant : il annonce un inverse, et $A$ est positif. Dans $B$, le moins est devant le nombre : il annonce un opposé, et $B$ est négatif.\n⛔ Le piège : placer $A$ à gauche de zéro. Un exposant négatif ne rend jamais négative une puissance d'un nombre positif.\nRéponse : $B < D < A < C < E$, soit $-2 < -1 < 0{,}5 < 1 < 2$.",
           schema: droiteGraduee([
@@ -360,6 +429,11 @@ export const exercicesPuissances4e: FicheExercicesData = {
         {
           enonce:
             "Ces écritures ne sont pas des notations scientifiques. Corrige-les, en passant par l'écriture décimale.\na) $23 \\times 10^{5}$\nb) $0{,}47 \\times 10^{-2}$\nc) $715 \\times 10^{-6}$",
+          reponses: [
+            { question: "a)", attendu: ["2,3×10^6"], exact: true },
+            { question: "b)", attendu: ["4,7×10^(-3)"], exact: true },
+            { question: "c)", attendu: ["7,15×10^(-4)"], exact: true },
+          ],
           correction:
             "Le nombre devant doit être entre $1$ et $10$. Je passe par l'écriture décimale, puis je repars de zéro.\na) $23 \\times 10^{5} = 2\\,300\\,000$ : la virgule avance de cinq rangs. Puis $2\\,300\\,000 = 2{,}3 \\times 10^{6}$.\nb) $0{,}47 \\times 10^{-2} = 0{,}47 \\times 0{,}01 = 0{,}0047$. Puis $0{,}0047 = 4{,}7 \\times 10^{-3}$.\nc) La virgule recule de six rangs : $715 \\times 10^{-6} = 0{,}000715$. Puis $0{,}000715 = 7{,}15 \\times 10^{-4}$.\n⭐ Contrôle : en a), le nombre devant est divisé par $10$ et l'exposant gagne $1$ ; en b), il est multiplié par $10$ et l'exposant perd $1$ ; en c), il est divisé par $100$ et l'exposant gagne $2$.\n⛔ Le piège : bouger la virgule et l'exposant dans le MÊME sens, et écrire $2{,}3 \\times 10^{4}$ au a). Ce nombre vaut $23\\,000$, cent fois trop peu.\nRéponse : a) $2{,}3 \\times 10^{6}$ ; b) $4{,}7 \\times 10^{-3}$ ; c) $7{,}15 \\times 10^{-4}$.",
           schema: tableau([
@@ -372,6 +446,11 @@ export const exercicesPuissances4e: FicheExercicesData = {
         {
           enonce:
             "Écris chaque grandeur en notation scientifique.\na) Le diamètre du Soleil : environ $1\\,400\\,000$ km.\nb) La longueur d'une bactérie Escherichia coli : environ $0{,}000002$ m.\nc) Le nombre de cellules d'un corps humain adulte : environ $30\\,000\\,000\\,000\\,000$.\nd) Pour c), un camarade écrit $30 \\times 10^{12}$. Est-ce juste ?",
+          reponses: [
+            { question: "a)", attendu: ["1,4×10^6"], exact: true },
+            { question: "b)", attendu: ["2×10^(-6)"], exact: true },
+            { question: "c)", attendu: ["3×10^13"], exact: true },
+          ],
           correction:
             "a) Je place la virgule après le $1$ : $1{,}4$. Pour revenir au nombre, six rangs vers la droite : $1\\,400\\,000 = 1{,}4 \\times 10^{6}$ km.\nb) Le premier chiffre non nul est le $2$. Pour revenir à $0{,}000002$, la virgule recule de six rangs : $0{,}000002 = 2 \\times 10^{-6}$ m, deux millionièmes de mètre.\nc) Après le $3$, il y a treize zéros : le zéro de $30$, puis quatre paquets de trois. $30\\,000\\,000\\,000\\,000 = 3 \\times 10^{13}$ cellules.\nd) $30 \\times 10^{12}$ vaut bien le même nombre : le calcul est juste. Mais $30$ a deux chiffres avant la virgule : ce n'est pas une notation scientifique.\n⛔ Le piège : dans c), ne compter que les zéros des paquets de trois ($12$) et écrire $3 \\times 10^{12}$. J'oublierais le zéro de $30$ : le nombre serait dix fois trop petit.\nRéponse : a) $1{,}4 \\times 10^{6}$ km ; b) $2 \\times 10^{-6}$ m ; c) $3 \\times 10^{13}$ cellules ; d) juste en valeur, mais pas scientifique.",
           schema: tableau([
@@ -384,6 +463,9 @@ export const exercicesPuissances4e: FicheExercicesData = {
         {
           enonce:
             "Range dans l'ordre croissant :\n$7{,}5 \\times 10^{-3}$ ; $1{,}2 \\times 10^{-2}$ ; $9 \\times 10^{-4}$ ; $0{,}008$ ; $3{,}4 \\times 10^{-3}$.",
+          reponses: [
+            { attendu: ["9×10^(-4)<3,4×10^(-3)<7,5×10^(-3)<0,008<1,2×10^(-2)", "9×10^(-4)<3,4×10^(-3)<7,5×10^(-3)<8×10^(-3)<1,2×10^(-2)"], exact: true },
+          ],
           correction:
             "J'écris d'abord $0{,}008$ en notation scientifique : $0{,}008 = 8 \\times 10^{-3}$.\nJe range par exposant. Le plus petit est $-4$, puis vient $-3$, puis $-2$.\nExposant $-4$ : $9 \\times 10^{-4}$ est le plus petit nombre.\nExposant $-3$ : trois nombres. Je compare $3{,}4$ ; $7{,}5$ et $8$.\nExposant $-2$ : $1{,}2 \\times 10^{-2}$ est le plus grand.\n⛔ Le piège : croire que $9 \\times 10^{-4}$ est le plus grand parce que $9$ est le plus grand nombre devant. Son exposant est le plus petit : $0{,}0009$, c'est moins d'un millième.\nRéponse : $9 \\times 10^{-4} < 3{,}4 \\times 10^{-3} < 7{,}5 \\times 10^{-3} < 0{,}008 < 1{,}2 \\times 10^{-2}$.",
           schema: tableau([
@@ -396,6 +478,11 @@ export const exercicesPuissances4e: FicheExercicesData = {
         {
           enonce:
             "Calcule, puis donne le résultat en notation scientifique. Écris les puissances de $10$ en clair.\n$A = 5 \\times 10^{3} \\times 4 \\times 10^{2}$\n$B = \\dfrac{9 \\times 10^{5}}{3 \\times 10^{2}}$\n$C = 2{,}5 \\times 10^{-2} \\times 4$",
+          reponses: [
+            { question: "A", attendu: ["2×10^6"], exact: true },
+            { question: "B", attendu: ["3×10^3"], exact: true },
+            { question: "C", attendu: ["1×10^(-1)", "10^(-1)"], exact: true },
+          ],
           correction:
             "Dans un produit, j'ai le droit de changer l'ordre des facteurs : je regroupe les nombres d'un côté, les puissances de $10$ de l'autre.\n$A = (5 \\times 4) \\times (10^{3} \\times 10^{2}) = 20 \\times (1\\,000 \\times 100) = 20 \\times 100\\,000 = 2\\,000\\,000$. Donc $A = 2 \\times 10^{6}$.\n$B = \\dfrac{9}{3} \\times \\dfrac{100\\,000}{100} = 3 \\times 1\\,000 = 3\\,000$. Donc $B = 3 \\times 10^{3}$.\n$C = (2{,}5 \\times 4) \\times 10^{-2} = 10 \\times 0{,}01 = 0{,}1$. Donc $C = 1 \\times 10^{-1}$.\n⛔ Le piège : s'arrêter à $20 \\times 10^{5}$ pour A. Le calcul est juste, mais $20$ a deux chiffres avant la virgule : il faut encore écrire $20 = 2 \\times 10$.\nRéponse : $A = 2 \\times 10^{6}$ ; $B = 3 \\times 10^{3}$ ; $C = 1 \\times 10^{-1}$.",
           schema: tableau([
@@ -409,6 +496,12 @@ export const exercicesPuissances4e: FicheExercicesData = {
         {
           enonce:
             "Vrai ou faux ? Justifie en écrivant les produits ou en calculant.\na) $2^3 \\times 2^2 = 2^5$\nb) $3^2 + 3^2 = 3^4$\nc) $10^{-2} < 10^{-3}$\nd) $5^2 \\times 2^2 = 10^2$",
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: ["non", "faux"] },
+            { question: "c)", attendu: ["non", "faux"] },
+            { question: "d)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) $2^3 \\times 2^2 = (2 \\times 2 \\times 2) \\times (2 \\times 2)$ : cinq facteurs $2$ en tout. VRAI, les deux valent $32$.\nb) $3^2 + 3^2 = 9 + 9 = 18$, alors que $3^4 = 81$. FAUX : une somme n'est pas un produit.\nc) $10^{-2} = 0{,}01$ et $10^{-3} = 0{,}001$ : c'est $0{,}01$ le plus grand. FAUX, c'est l'inverse.\nd) $5^2 \\times 2^2 = 25 \\times 4 = 100$ et $10^2 = 100$. VRAI : $(5 \\times 5) \\times (2 \\times 2) = (5 \\times 2) \\times (5 \\times 2)$.\n⛔ Le piège : répondre « vrai » au b) en additionnant les exposants. $3^2 + 3^2$, c'est deux fois $3^2$, soit $2 \\times 9 = 18$ : rien à voir avec $3^4$.\nRéponse : a) vrai ; b) faux ; c) faux ; d) vrai.",
           schema: tableau([
@@ -437,6 +530,12 @@ export const exercicesPuissances4e: FicheExercicesData = {
           titre: "Le parc éolien",
           enonce:
             "Une éolienne terrestre produit environ $5 \\times 10^{6}$ kWh d'électricité par an. Un parc en compte $40$.\na) Combien de kWh le parc produit-il par an ? Donne le résultat en clair, puis en notation scientifique.\nb) Un foyer consomme environ $5 \\times 10^{3}$ kWh par an. Combien de foyers le parc peut-il alimenter ?\nc) En 2023, la France a consommé environ $4{,}5 \\times 10^{11}$ kWh d'électricité. Combien de parcs comme celui-ci faudrait-il pour tout produire ?",
+          reponses: [
+            { question: "a) clair", attendu: ["200000000"], exact: true },
+            { question: "a) sci.", attendu: ["2×10^8"], exact: true },
+            { question: "b)", attendu: "40000" },
+            { question: "c)", attendu: "2250" },
+          ],
           correction:
             "a) Production du parc $=$ nombre d'éoliennes $\\times$ production d'une éolienne. $5 \\times 10^{6} = 5\\,000\\,000$, donc $40 \\times 5\\,000\\,000 = 200\\,000\\,000$ kWh. En notation scientifique : $2 \\times 10^{8}$ kWh.\nb) Nombre de foyers $=$ production $\\div$ consommation d'un foyer. $200\\,000\\,000 \\div 5\\,000 = 40\\,000$ foyers.\n⭐ Contrôle : $40\\,000 \\times 5\\,000 = 200\\,000\\,000$.\nc) $4{,}5 \\times 10^{11} = 450\\,000\\,000\\,000$. Je retire huit zéros aux deux nombres : $450\\,000\\,000\\,000 \\div 200\\,000\\,000 = 4\\,500 \\div 2 = 2\\,250$ parcs.\n⛔ Le piège : dans c), diviser les nombres devant, $4{,}5 \\div 2 = 2{,}25$, et oublier les puissances de $10$. L'exposant dit la taille : $10^{11}$ contre $10^{8}$, trois rangs d'écart, mille fois plus.\nRéponse : a) $2 \\times 10^{8}$ kWh ; b) $40\\,000$ foyers ; c) environ $2\\,250$ parcs.",
           schema: tableau([
@@ -450,6 +549,13 @@ export const exercicesPuissances4e: FicheExercicesData = {
           titre: "La piscine en gouttes d'eau",
           enonce:
             "Un bassin olympique mesure $50$ m de long et $25$ m de large ; on prend $2$ m de profondeur.\na) Calcule son volume en m³. Sachant que $1$ m³ $= 10^{3}$ L et $1$ L $= 10^{3}$ mL, écris ce volume en litres, puis en millilitres, en notation scientifique.\nb) Il faut $20$ gouttes d'eau pour faire $1$ mL. Quel est le volume d'une goutte, en mL ? Écris-le en notation scientifique.\nc) Combien de gouttes faut-il pour remplir le bassin ?",
+          reponses: [
+            { question: "a) m³", attendu: "2500" },
+            { question: "a) L", attendu: ["2,5×10^6"], exact: true },
+            { question: "a) mL", attendu: ["2,5×10^9"], exact: true },
+            { question: "b)", attendu: ["5×10^(-2)"], exact: true },
+            { question: "c)", attendu: "5×10^10" },
+          ],
           correction:
             "a) Le bassin est un pavé : $50 \\times 25 \\times 2 = 2\\,500$ m³.\nEn litres : $2\\,500 \\times 1\\,000 = 2\\,500\\,000$ L, soit $2{,}5 \\times 10^{6}$ L.\nEn millilitres : $2\\,500\\,000 \\times 1\\,000 = 2\\,500\\,000\\,000$ mL, soit $2{,}5 \\times 10^{9}$ mL.\nb) Une goutte : $1 \\div 20 = 0{,}05$ mL, soit $5 \\times 10^{-2}$ mL.\nc) Nombre de gouttes $=$ volume $\\div$ volume d'une goutte. Diviser par $0{,}05$, c'est multiplier par $20$ : $2\\,500\\,000\\,000 \\times 20 = 50\\,000\\,000\\,000$, soit $5 \\times 10^{10}$ gouttes, cinquante milliards.\n⛔ Le piège : dans c), trouver MOINS de gouttes que de millilitres. Une goutte est plus petite qu'un millilitre : il faut vingt gouttes par millilitre, donc beaucoup plus de gouttes.\nRéponse : a) $2\\,500$ m³, soit $2{,}5 \\times 10^{6}$ L et $2{,}5 \\times 10^{9}$ mL ; b) $5 \\times 10^{-2}$ mL ; c) $5 \\times 10^{10}$ gouttes.",
           schema: tableau([
@@ -463,6 +569,11 @@ export const exercicesPuissances4e: FicheExercicesData = {
           titre: "Du plus léger au plus lourd",
           enonce:
             "Voici des masses d'animaux, en kilogrammes :\nbaleine bleue : $1{,}5 \\times 10^{5}$ ; abeille : $1 \\times 10^{-4}$ ; éléphant d'Afrique : $6 \\times 10^{3}$ ; colibri d'Elena : $2 \\times 10^{-3}$ ; être humain : $7 \\times 10^{1}$.\na) Range ces masses dans l'ordre croissant.\nb) Combien de fois la baleine est-elle plus lourde que l'éléphant ?\nc) Combien d'abeilles pèsent autant qu'un colibri ?\nd) Écris la masse de l'abeille en grammes.",
+          reponses: [
+            { question: "b)", attendu: "25" },
+            { question: "c)", attendu: "20" },
+            { question: "d)", attendu: "0,1" },
+          ],
           correction:
             "a) Tous les exposants sont différents : je range par exposant, $-4 < -3 < 1 < 3 < 5$, sans regarder les nombres devant. Ordre : abeille, colibri, être humain, éléphant, baleine.\nb) En clair : $1{,}5 \\times 10^{5} = 150\\,000$ kg et $6 \\times 10^{3} = 6\\,000$ kg. Je retire trois zéros aux deux : $150\\,000 \\div 6\\,000 = 150 \\div 6 = 25$.\nc) $2 \\times 10^{-3} = 0{,}002$ kg et $1 \\times 10^{-4} = 0{,}0001$ kg. Je multiplie les deux par $10\\,000$ : $0{,}002 \\div 0{,}0001 = 20 \\div 1 = 20$.\nd) $1$ kg $= 10^{3}$ g : $0{,}0001 \\times 1\\,000 = 0{,}1$ g.\n⛔ Le piège : croire que l'abeille est plus lourde que le colibri parce que $4 > 3$. Avec des exposants négatifs, $-4$ est PLUS PETIT que $-3$ : $0{,}0001$ contre $0{,}002$.\nRéponse : a) abeille, colibri, être humain, éléphant, baleine ; b) $25$ fois ; c) $20$ abeilles ; d) $0{,}1$ g.",
           schema: tableau([
@@ -476,6 +587,14 @@ export const exercicesPuissances4e: FicheExercicesData = {
           titre: "Le tableau de Roland-Garros",
           enonce:
             "Le tableau du simple messieurs de Roland-Garros compte $128$ joueurs. À chaque tour, les joueurs s'affrontent deux par deux et le perdant est éliminé.\na) Écris $128$ comme une puissance de $2$. Combien de tours faut-il pour désigner le vainqueur ?\nb) Combien de joueurs restent en quarts de finale, c'est-à-dire après $4$ tours ? Quelle fraction des $128$ joueurs est-ce ? Écris-la comme une puissance de $2$.\nc) Combien de matchs se jouent en tout ?\nd) Un tournoi de ping-pong réunit $1\\,024$ joueurs. Combien de tours faut-il ?",
+          reponses: [
+            { question: "a) 128", attendu: ["2^7"], exact: true },
+            { question: "a) tours", attendu: "7" },
+            { question: "b) nb", attendu: "8" },
+            { question: "b) frac.", attendu: ["2^(-4)"], exact: true },
+            { question: "c)", attendu: "127" },
+            { question: "d)", attendu: "10" },
+          ],
           correction:
             "a) Je divise par $2$ jusqu'à $1$ : $128$, $64$, $32$, $16$, $8$, $4$, $2$, $1$. Sept divisions, donc sept facteurs $2$ : $128 = 2 \\times 2 \\times 2 \\times 2 \\times 2 \\times 2 \\times 2 = 2^7$. Chaque tour divise le nombre de joueurs par $2$ : il faut $7$ tours.\nb) Après $4$ tours : $128 \\div 2 \\div 2 \\div 2 \\div 2 = 8$ joueurs. La fraction est $\\dfrac{8}{128} = \\dfrac{1}{16} = \\dfrac{1}{2^4} = 2^{-4}$.\nc) Chaque match élimine un joueur, et il faut en éliminer $127$ pour garder le vainqueur : $64 + 32 + 16 + 8 + 4 + 2 + 1 = 127$ matchs.\nd) Je double à partir de $1$ : $1\\,024 = 2^{10}$, donc $10$ tours. Huit fois plus de joueurs, et seulement trois tours de plus.\n⛔ Le piège : croire qu'il faut $64$ tours, ou $128$. Le nombre de tours est l'EXPOSANT, le nombre de divisions par $2$ : pas un nombre de joueurs.\nRéponse : a) $128 = 2^7$, soit $7$ tours ; b) $8$ joueurs, soit $2^{-4}$ du tableau ; c) $127$ matchs ; d) $10$ tours.",
           schema: (
