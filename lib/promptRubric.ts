@@ -308,6 +308,12 @@ export function getPromptRubricEditor(
   return `
 Tu es un ÉDITEUR DE PROMPT pédagogique (optimisation).
 Ton but : améliorer le prompt fourni SANS changer le sujet.
+
+Si une DEMANDE DU PROFESSEUR est fournie, c'est la source : chaque exercice
+qu'elle demande est présent, dans son ordre, avec sa forme (QCM, exercice
+simple…) et ses notions (ex. « QCM sur carré et racine carrée en exercice 1 »
+= l'exercice 1 est un QCM sur carré et racine carrée). Tu n'en retires aucun,
+tu n'en remplaces aucun.
 Tu renvoies UNIQUEMENT un JSON valide.
 
 TYPE DÉCLARÉ (à respecter) : ${type}
@@ -384,13 +390,15 @@ Tu dois renvoyer EXACTEMENT ce schéma (et rien d’autre) :
  */
 export function verifierBareme(
   texte: string,
+  totalParDefaut?: number,
 ): { total: number; somme: number } | null {
   const mTotal = texte.match(
     /total\s*(?:sur|:|=)?\s*(\d+(?:[.,]\d+)?)\s*(?:points?|pts?)?/i,
   );
-  if (!mTotal) return null;
-  const total = Number(mTotal[1].replace(",", "."));
-  const sansTotal = texte.replace(mTotal[0], "");
+  // Sans « Total » écrit, une évaluation se compte sur 20.
+  if (!mTotal && totalParDefaut === undefined) return null;
+  const total = mTotal ? Number(mTotal[1].replace(",", ".")) : totalParDefaut!;
+  const sansTotal = mTotal ? texte.replace(mTotal[0], "") : texte;
   // « (5 points par question) » compte une fois : la somme sera fausse,
   // et c'est voulu — un barème « par question » mêlé à d'autres critères
   // est justement ce qu'il faut réécrire.

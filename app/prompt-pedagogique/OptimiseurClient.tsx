@@ -349,6 +349,7 @@ export default function OptimiseurClient() {
     p: string,
     report: ScoreReport,
     signal?: AbortSignal,
+    demande?: string,
   ) => {
     const res = await fetch("/api/optimiseur/improve", {
       method: "POST",
@@ -356,6 +357,9 @@ export default function OptimiseurClient() {
       signal,
       body: JSON.stringify({
         prompt: p,
+        // La demande tapée par le prof, à chaque tour : sans elle, le 2e tour
+        // ne voit plus que le prompt du 1er et oublie les exercices demandés.
+        demande,
         scoreReport: report,
         model,
         temperature: formatTemp(temperatureImprove),
@@ -507,7 +511,7 @@ export default function OptimiseurClient() {
         if (!optimisationOn) break;
         if (ctrl.signal.aborted) break;
 
-        const improved = await improveOnce(p, report, ctrl.signal);
+        const improved = await improveOnce(p, report, ctrl.signal, initial);
 
         const next = String(improved.improvedPrompt || "").trim();
         if (!next || next.length < 20) {

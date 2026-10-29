@@ -204,6 +204,7 @@ export async function POST(req: Request) {
     const body = await req.json().catch(() => ({}));
 
     const prompt = String(body?.prompt || "").trim();
+    const demande = String(body?.demande || "").trim().slice(0, 4000);
     const scoreReport = body?.scoreReport ?? null;
 
     const model = pickModel(body?.model);
@@ -267,7 +268,10 @@ JSON attendu:
 `.trim();
 
     const user = `
-PROMPT ACTUEL:
+${demande && demande !== prompt ? `DEMANDE DU PROFESSEUR (la source, à respecter à la lettre) :
+"""${demande}"""
+
+` : ""}PROMPT ACTUEL:
 """${prompt}"""
 
 SCORE REPORT:
@@ -319,7 +323,7 @@ ${scoreReport ? JSON.stringify(scoreReport).slice(0, 8000) : "null"}
     // ou s'il manque le corrigé (29/10/2026).
     const defauts = (texte: string) => {
       const d: string[] = [];
-      const b = verifierBareme(texte);
+      const b = verifierBareme(texte, type === "evaluation" ? 20 : undefined);
       if (b && b.somme !== b.total)
         d.push(
           `Le total annoncé est ${b.total} points, mais les points écrits font ${b.somme} : UN SEUL barème, par question, dont la somme fait exactement ${b.total} ; les critères de réussite ne portent pas de points à eux seuls.`,
