@@ -629,13 +629,9 @@ export default function ParcoursClient() {
             🟢 maîtrisé, 🟡 à revoir, 🔴 fragile.
           </p>
 
-          {eleve ? (
-            <div className="mt-5 rounded-3xl border border-emerald-200 bg-emerald-50 p-4 text-sm font-black text-emerald-900">
-              Connecté : {eleve.nom ?? "Élève"} ·{" "}
-              {eleve.code_etablissement ?? ""} ·{" "}
-              {eleve.code_eleve ?? eleve.code_utilisateur ?? ""}
-            </div>
-          ) : (
+          {/* 29/10/2026 : le bandeau « Connecté : prénom · email » est retiré
+              (demande de Frédéric). Seul l'avertissement hors connexion reste. */}
+          {!eleve && (
             <div className="mt-5 rounded-3xl border border-amber-200 bg-amber-50 p-4 text-sm font-black text-amber-900">
               Tu peux faire l&apos;évaluation sans connexion, mais il faudra être
               connecté pour enregistrer ta note.
