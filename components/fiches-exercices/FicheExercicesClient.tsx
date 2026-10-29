@@ -32,6 +32,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import ModeClasse from "@/components/fiches/ModeClasse";
+import ReponseExercice from "@/components/fiches-exercices/ReponseExercice";
 import TexteMath from "@/components/fiches/TexteMath";
 import VideoNotion from "@/components/fiches/VideoNotion";
 import { slidesDepuisExercices } from "@/lib/fiches-exercices/slides";
@@ -242,8 +243,9 @@ export default function FicheExercicesClient({ fiche }: { fiche: FicheExercicesD
                       <li
                         key={ex.enonce}
                         data-exercice={numero}
-                        className={`min-w-0 rounded-2xl border bg-white p-4 ${st.bordure}`}
+                        className={`min-w-0 rounded-2xl border bg-white p-4 ${ex.reponses?.length ? "grid gap-4 lg:grid-cols-[minmax(0,1fr)_19rem] print:block" : ""} ${st.bordure}`}
                       >
+                        <div className="min-w-0">
                         <p className="font-bold text-slate-900">
                           <span className={`mr-2 inline-flex h-6 min-w-6 items-center justify-center rounded-full px-1.5 text-xs font-black ${st.pastille}`}>
                             {numero}
@@ -283,6 +285,17 @@ export default function FicheExercicesClient({ fiche }: { fiche: FicheExercicesD
                             ) : null}
                           </div>
                         </details>
+                        </div>
+                        {/* ⭐ LA RÉPONSE À DROITE (un prof, 29/10/2026) : l'élève
+                            écrit et valide SANS voir la correction, sans IA :
+                            seulement si la fiche a écrit ses `reponses`. */}
+                        {ex.reponses?.length ? (
+                          <ReponseExercice
+                            reponses={ex.reponses}
+                            idBase={`reponse-${numero}`}
+                            clavierMaths={fiche.matiere === "maths"}
+                          />
+                        ) : null}
                       </li>
                     );
                   })}

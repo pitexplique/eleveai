@@ -19,6 +19,7 @@
 // piège nommé — c'est ce qui le distingue de la ligne de la fiche de cours.
 
 import type { ReactNode } from "react";
+import type { ReponseAttendue } from "@/lib/fiches-exercices/verifier-saisie";
 
 export type NiveauExercice = 1 | 2 | 3;
 
@@ -55,6 +56,14 @@ export type ExerciceCorrige = {
   /** Les micro-compétences du coach que l'exercice fait travailler (ids de
    *  `lib/tutor-v4/knowledge/<matière>/<classe>/microSkills.ts`). */
   micros?: string[];
+  /**
+   * ⭐ LES RÉPONSES ATTENDUES (un prof, 29/10/2026 : l'élève entre sa réponse
+   * à droite et la valide sans voir la correction). Une entrée par
+   * sous-question. Vérifiées dans le navigateur, SANS IA (Frédéric : « je veux
+   * pas passer par l'IA ») — voir lib/fiches-exercices/verifier-saisie.ts.
+   * Facultatives : sans elles, l'exercice n'a pas de champ réponse.
+   */
+  reponses?: ReponseAttendue[];
 };
 
 export type SerieExercices = {
