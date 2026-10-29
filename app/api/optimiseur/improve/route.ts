@@ -315,22 +315,35 @@ ${scoreReport ? JSON.stringify(scoreReport).slice(0, 8000) : "null"}
       ? parsed.changes.map(String).slice(0, 12)
       : [];
 
-    // Barème : une seconde passe si les points ne font pas le total.
-    const bareme = verifierBareme(improvedPrompt);
-    if (bareme && bareme.somme !== bareme.total) {
+    // Évaluation : une seconde passe si le barème ne fait pas le total
+    // ou s'il manque le corrigé (29/10/2026).
+    const defauts = (texte: string) => {
+      const d: string[] = [];
+      const b = verifierBareme(texte);
+      if (b && b.somme !== b.total)
+        d.push(
+          `Le total annoncé est ${b.total} points, mais les points écrits font ${b.somme} : UN SEUL barème, par question, dont la somme fait exactement ${b.total} ; les critères de réussite ne portent pas de points à eux seuls.`,
+        );
+      if (type === "evaluation" && !/corrig/i.test(texte))
+        d.push(
+          "Il manque la section « CORRIGÉ (séparé) » : la réponse attendue de chaque question, calculée et vérifiée.",
+        );
+      return d;
+    };
+    const aReparer = defauts(improvedPrompt);
+    if (aReparer.length > 0) {
       const reparation = await openai.chat.completions.create({
         model,
         temperature: 0,
-        max_tokens: 1500,
+        max_tokens: 1800,
         response_format: { type: "json_object" },
         messages: [
           { role: "system", content: system },
           {
             role: "user",
             content: `
-Ce prompt annonce un total de ${bareme.total} points, mais ses points écrits font ${bareme.somme}.
-Réécris-le avec UN SEUL barème, par question, dont la somme fait exactement ${bareme.total}.
-Les critères de réussite ne portent plus de points à eux seuls.
+Corrige ce prompt :
+${aReparer.map((x) => `- ${x}`).join("\n")}
 Garde tout le reste (sujet, niveau, durée, public).
 
 PROMPT:
@@ -343,19 +356,16 @@ PROMPT:
         reparation.choices?.[0]?.message?.content?.trim() || "",
       );
       const texteRepare = String(repare?.improvedPrompt || "").trim();
-      const bareme2 = texteRepare ? verifierBareme(texteRepare) : null;
-      if (texteRepare.length >= 40 && (!bareme2 || bareme2.somme === bareme2.total)) {
+      const restent = texteRepare.length >= 40 ? defauts(texteRepare) : aReparer;
+      if (texteRepare.length >= 40 && restent.length < aReparer.length) {
         improvedPrompt = texteRepare;
-        changes = [
-          ...changes.slice(0, 11),
-          `Barème corrigé : les points font maintenant ${bareme.total}.`,
-        ];
-      } else {
-        changes = [
-          ...changes.slice(0, 11),
-          `⚠️ Barème à vérifier : les points écrits font ${bareme.somme}, pas ${bareme.total}.`,
-        ];
       }
+      changes = [
+        ...changes.slice(0, 12 - Math.max(1, restent.length)),
+        ...(restent.length === 0
+          ? ["Barème et corrigé vérifiés."]
+          : restent.map((x) => `⚠️ À vérifier : ${x}`)),
+      ];
     }
 
     if (!isNonEmptyString(improvedPrompt) || improvedPrompt.length < 40) {

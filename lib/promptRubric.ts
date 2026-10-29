@@ -105,6 +105,11 @@ EXIGENCES SPÉCIFIQUES (ÉVALUATION) :
   s'applique pas (Pythagore : « rectangle en A » écrit dans CHAQUE question).
 - Une section « CORRIGÉ (séparé) » donne la réponse attendue de chaque question,
   calculée et vérifiée (ex. BC = 10 cm).
+- Vocabulaire exact du programme : « ABC rectangle en A » (A est un sommet,
+  pas un angle), « réciproque » quand on prouve qu'un triangle est rectangle.
+- Questions VARIÉES : pas deux fois le même calcul ; mêler les cas (calculer
+  l'hypoténuse, un côté de l'angle droit, une valeur non entière arrondie,
+  prouver qu'un triangle est ou n'est pas rectangle, un problème concret).
 - La checklist ne vérifie que ce que le prompt contient : pas de mise en commun
   ni de différenciation si elles n'y sont pas.
 - Critères de réussite mesurables (observables).

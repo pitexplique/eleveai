@@ -539,10 +539,31 @@ export default function OptimiseurClient() {
     }
   };
 
-  const copy = async (txt: string) => {
+  // 29/10/2026 — Frédéric : « quand on fait copier, on ne sait pas si ça a
+  // fonctionné » : le bouton copié passe au vert « ✅ Copié ! » 2 secondes.
+  const [copie, setCopie] = useState<string | null>(null);
+  // Si le presse-papiers refuse, l'ancienne méthode (zone de texte cachée) ;
+  // si elle échoue aussi, le bouton le dit au lieu de ne rien faire.
+  const copy = async (txt: string, cle: string) => {
+    let ok = false;
     try {
       await navigator.clipboard.writeText(txt);
-    } catch {}
+      ok = true;
+    } catch {
+      try {
+        const zone = document.createElement("textarea");
+        zone.value = txt;
+        zone.style.position = "fixed";
+        zone.style.opacity = "0";
+        document.body.appendChild(zone);
+        zone.select();
+        ok = document.execCommand("copy");
+        zone.remove();
+      } catch {}
+    }
+    const marque = ok ? cle : `${cle}:echec`;
+    setCopie(marque);
+    window.setTimeout(() => setCopie((c) => (c === marque ? null : c)), 2000);
   };
 
 // ✅ PREMIUM handlers (Option 1) — FIX: use refs to avoid stale prompt/report
@@ -1056,15 +1077,17 @@ const startPremium = async () => {
             <h2 className="text-lg font-bold text-[#0047B6]">1) Prompt</h2>
             <button
               type="button"
-              onClick={() => copy((promptRef.current || prompt || "").trim())}
+              onClick={() => copy((promptRef.current || prompt || "").trim(), "prompt")}
               disabled={!((promptRef.current || prompt || "").trim())}
-              className={`px-3 py-2 rounded-lg text-xs font-semibold border ${
-                ((promptRef.current || prompt || "").trim())
+              className={`px-3 py-2 rounded-lg text-xs font-semibold border transition ${
+                copie === "prompt"
+                  ? "bg-emerald-600 text-white border-emerald-600"
+                  : ((promptRef.current || prompt || "").trim())
                   ? "bg-slate-900 text-white border-slate-900"
                   : "bg-slate-100 text-slate-400 border-slate-200"
               }`}
             >
-              📋 Copier
+              {copie === "prompt" ? "✅ Copié !" : copie === "prompt:echec" ? "❌ Copie impossible" : "📋 Copier"}
             </button>
           </div>
 
@@ -1257,7 +1280,7 @@ const startPremium = async () => {
                 .slice()
                 .reverse()
                 .slice(0, 10)
-                .map((h) => (
+                .map((h, idx) => (
                   <div key={h.iter} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
                     <div className="flex items-center justify-between gap-2">
                       <div>
@@ -1273,10 +1296,14 @@ const startPremium = async () => {
 
                       <button
                         type="button"
-                        onClick={() => copy(h.prompt)}
-                        className="px-2 py-1 text-[11px] font-semibold border rounded-md bg-white border-slate-300 hover:bg-slate-100"
+                        onClick={() => copy(h.prompt, `hist-${idx}`)}
+                        className={`px-2 py-1 text-[11px] font-semibold border rounded-md transition ${
+                          copie === `hist-${idx}`
+                            ? "bg-emerald-600 text-white border-emerald-600"
+                            : "bg-white border-slate-300 hover:bg-slate-100"
+                        }`}
                       >
-                        📋 Copier
+                        {copie === `hist-${idx}` ? "✅ Copié !" : copie === `hist-${idx}:echec` ? "❌ Copie impossible" : "📋 Copier"}
                       </button>
                     </div>
 
@@ -1375,10 +1402,14 @@ const startPremium = async () => {
                     </button>
                     <button
                       type="button"
-                      onClick={() => copy(premiumResult.improvedPrompt)}
-                      className="px-3 py-2 rounded-lg text-xs font-bold border bg-white hover:bg-slate-50"
+                      onClick={() => copy(premiumResult.improvedPrompt, "premium")}
+                      className={`px-3 py-2 rounded-lg text-xs font-bold border transition ${
+                        copie === "premium"
+                          ? "bg-emerald-600 text-white border-emerald-600"
+                          : "bg-white hover:bg-slate-50"
+                      }`}
                     >
-                      Copier
+                      {copie === "premium" ? "✅ Copié !" : copie === "premium:echec" ? "❌ Copie impossible" : "Copier"}
                     </button>
                   </div>
                 </div>
