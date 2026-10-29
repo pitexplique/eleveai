@@ -570,7 +570,7 @@ export const exercicesThales3e: FicheExercicesData = {
             "Dans un appareil photo, les rayons de lumière se croisent au centre $A$ de l'objectif. On modélise : l'objet $[BC]$ et son image $[MN]$ sur le capteur sont parallèles, de part et d'autre de $A$, avec $B$, $A$, $M$ alignés et $C$, $A$, $N$ alignés. Le capteur d'un appareil « plein format » mesure $36$ mm sur $24$ mm, et il est à $AM = 50$ mm de l'objectif.\na) Quelle est la configuration ?\nb) On photographie un mur à $AB = 10$ m. Le capteur le voit sur toute sa largeur, $MN = 36$ mm. Quelle largeur de mur tient sur la photo ?\nc) La tour Eiffel mesure $330$ m. On tient l'appareil pour que le grand côté du capteur, $36$ mm, soit vertical. À quelle distance minimale faut-il se placer pour que toute la tour tienne sur la photo ? Arrondir au mètre supérieur.",
           reponses: [
             { question: "a)", attendu: ["papillon", "configuration papillon"] },
-            { question: "b)", attendu: ["7,2m", "7200mm"] },
+            { question: "b)", attendu: ["7,2 m", "7200mm"] },
             { question: "c)", attendu: "459" },
           ],
           correction:

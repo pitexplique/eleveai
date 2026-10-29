@@ -323,7 +323,7 @@ export const exercicesPythagore3e: FicheExercicesData = {
           enonce:
             "Pour qu'un fauteuil roulant puisse entrer dans un bâtiment public, la réglementation française impose une rampe de pente au plus $5$ % : elle monte d'au plus $5$ cm pour $100$ cm parcourus à l'horizontale. Une entrée est $50$ cm plus haute que le trottoir.\na) Quelle longueur horizontale faut-il au minimum pour la rampe ?\nb) Calculer alors la longueur de la rampe elle-même, arrondie au centimètre.\nc) Un menuisier pense qu'il faut « beaucoup plus » de planche que la longueur horizontale. A-t-il raison ?",
           reponses: [
-            { question: "a)", attendu: ["10m", "1000cm"] },
+            { question: "a)", attendu: ["10 m", "1000cm"] },
             { question: "b)", attendu: "10,01", tolerance: 0.005 },
             { question: "c)", attendu: ["non", "faux"] },
           ],

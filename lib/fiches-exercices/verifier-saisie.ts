@@ -159,6 +159,26 @@ function sansMembreGauche(s: string): string {
 const UNITE =
   /\s*([\p{L}€]+\s*\/\s*\p{L}+[²³23]?|kwh|wh|kw|w|ha|mm|cm|dm|km|m|g|kg|mg|t|l|cl|ml|dl|s|min|h|ans?|jours?|€|°|%|cm²|m²|km²|dm²|mm²|cm³|m³|dm³|mm³|cm2|m2|km2|dm2|cm3|m3|dm3)\s*$/iu;
 
+/**
+ * Enlève l'unité finale, mais SEULEMENT derrière un nombre nu : « 7 140 m² »,
+ * « 3/4 L », « 2π cm ». ⛔ Dans « 15 - 2t » ou « 13 - 6,5h », la lettre finale
+ * est une inconnue, pas des tonnes ni des heures (trouvé sur la fiche 4e
+ * « dépendance », 29/10/2026) : l'expression reste entière.
+ */
+function sansUnite(s: string, strict = false): string {
+  // Côté élève, un MOT après un nombre se lit comme une unité : « 36 cubes »,
+  // « 12 élèves », « 5 paniers » (vu sur la fiche 4e « volumes »).
+  const mot = /^(\s*[-−]?[\d\s.,]*\d)\s+\p{L}{2,}[\p{L}\s'’-]*$/u.exec(s);
+  if (!strict && mot) return mot[1];
+  const m = UNITE.exec(s);
+  if (!m) return s;
+  // Strict : une unité d'UNE lettre (m, t, h, g…) doit être séparée par un
+  // espace — « 3t » collé est un produit.
+  if (strict && /^\p{L}$/u.test(m[1]) && !/^\s/.test(m[0])) return s;
+  const reste = s.slice(0, m.index);
+  return /^\s*[-−]?[\d\s.,]+(\/[\d\s.,]+)?π?\s*$/.test(reste) ? reste : s;
+}
+
 /** « g(2) = 7 » → « g(2) » ; « 7 » → null. Le membre de gauche d'une réponse. */
 function membreGauche(s: string): string | null {
   const t = s.trim().replace(/^S\s*=\s*/i, "");
@@ -180,7 +200,7 @@ function texteNormalise(s: string): string {
 
 /** Pour `exact` : la même écriture, aux variantes de clavier près. */
 function formeNormalisee(s: string): string {
-  return texteNormalise(s.replace(UNITE, ""))
+  return texteNormalise(sansUnite(s))
     .replace(/[×·x](?=10)/g, "*")
     .replace(/[×·]/g, "*")
     .replace(/[−–]/g, "-")
@@ -251,14 +271,16 @@ export function saisieJuste(saisie: string, attendue: ReponseAttendue): boolean 
 
 function egaux(a: string, b: string, tolerance: number): boolean {
   if (texteNormalise(a) === texteNormalise(b)) return true;
-  // L'unité ne s'enlève que si la réponse attendue est un NOMBRE : dans « 3a »
-  // ou « 2m + 1 », la lettre finale est une inconnue, pas des ares ni des mètres.
-  const nombre = !/\p{L}/u.test(b.replace(UNITE, "").replace(/π|pi/g, ""));
-  try {
-    return nombre
-      ? memesValeurs(a.replace(UNITE, ""), b.replace(UNITE, ""), tolerance)
-      : memesValeurs(a, b, tolerance);
-  } catch {
-    return false;
-  }
+  // La réponse ATTENDUE est lue strictement (« 3t » y est 3 × t) ; celle de
+  // l'élève avec indulgence (« 3t » y est 3 tonnes).
+  const essais: [string, string][] = [[sansUnite(a), sansUnite(b, true)]];
+  // « 22,5 % » = 0,225 : le pourcentage compté en centièmes.
+  if (/%\s*$/.test(a) || /%\s*$/.test(b)) essais.push([a, b]);
+  return essais.some(([x, y]) => {
+    try {
+      return memesValeurs(x, y, tolerance);
+    } catch {
+      return false;
+    }
+  });
 }

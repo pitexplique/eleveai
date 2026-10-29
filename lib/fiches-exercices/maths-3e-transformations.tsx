@@ -547,11 +547,11 @@ export const exercicesTransformations3e: FicheExercicesData = {
             "Dans un vidéoprojecteur, une lampe éclaire une petite plaque de $2$ cm de large et $1{,}5$ cm de haut, placée à $4$ cm de la lampe. L'image se forme sur un mur à $3$ m de la lampe. On admet que l'image est l'agrandissement de la plaque par une homothétie de centre la lampe.\na) Calculer le rapport de cette homothétie.\nb) Quelles sont la largeur et la hauteur de l'image ?\nc) Par combien l'aire est-elle multipliée ? Calculer l'aire de l'image en m².\nd) À quelle distance du mur faut-il placer la lampe pour obtenir une image de $2$ m de large ?",
           reponses: [
             { question: "a)", attendu: "75" },
-            { question: "b) larg.", attendu: ["1,5m", "150cm"] },
-            { question: "b) haut.", attendu: ["112,5cm", "1,125m"] },
+            { question: "b) larg.", attendu: ["1,5 m", "150cm"] },
+            { question: "b) haut.", attendu: ["112,5cm", "1,125 m"] },
             { question: "c) ×", attendu: "5625" },
             { question: "c) m²", attendu: "1,6875" },
-            { question: "d)", attendu: ["4m", "400cm"] },
+            { question: "d)", attendu: ["4 m", "400cm"] },
           ],
           correction:
             "a) Même unité : $3$ m $= 300$ cm. Le rapport des distances à la lampe : $300 \\div 4 = 75$. L'image est du même côté que la plaque : $k = 75$.\nb) Largeur : $2 \\times 75 = 150$ cm, soit $1{,}5$ m. Hauteur : $1{,}5 \\times 75 = 112{,}5$ cm.\nc) L'aire est multipliée par $75^2 = 5\\,625$. La plaque mesure $2 \\times 1{,}5 = 3$ cm², l'image $3 \\times 5\\,625 = 16\\,875$ cm², soit $1{,}6875$ m².\n⭐ Contrôle : $1{,}5 \\times 1{,}125 = 1{,}6875$ m².\nd) Il faut $200 \\div 2 = 100$ comme rapport. La distance lampe-mur est alors $4 \\times 100 = 400$ cm, soit $4$ m.\n⛔ Le piège au c) : multiplier l'aire par $75$. On trouverait $225$ cm², la taille d'une carte postale et demie, pas celle d'un écran.\nRéponse : $k = 75$ ; $1{,}5$ m sur $1{,}125$ m ; aire $\\times 5\\,625$, soit $1{,}6875$ m² ; la lampe à $4$ m du mur.",

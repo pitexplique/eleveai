@@ -369,7 +369,7 @@ export const exercicesFonctions3e: FicheExercicesData = {
             { question: "a) arr.", attendu: ["600", "6"] },
             { question: "b)", attendu: ["11", "1100"] },
             { question: "c)", attendu: "3 ; 5 ; 8" },
-            { question: "d)", attendu: ["9h", "9"] },
+            { question: "d)", attendu: ["9 h", "9"] },
             { question: "e)", attendu: "600" },
           ],
           figure: repere([0, 10, -1, 13], ALTITUDE_18),

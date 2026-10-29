@@ -388,8 +388,8 @@ export const exercicesProportionnalite3e: FicheExercicesData = {
           enonce:
             "Un automobiliste fait un trajet de $80$ km. À l'aller, il roule à $80$ km/h. Au retour, dans les bouchons, il roule à $40$ km/h.\na) Combien de temps dure l'aller ? Et le retour ?\nb) Quelle est sa vitesse moyenne sur l'aller-retour ?\nc) Un ami répond « $60$ km/h, la moyenne de $80$ et de $40$ ». Pourquoi est-ce faux ?",
           reponses: [
-            { question: "a) aller", attendu: ["1h", "60min"] },
-            { question: "a) ret.", attendu: ["2h", "120min"] },
+            { question: "a) aller", attendu: ["1 h", "60min"] },
+            { question: "a) ret.", attendu: ["2 h", "120min"] },
             { question: "b)", attendu: "53,3", tolerance: 0.05 },
           ],
           correction:
