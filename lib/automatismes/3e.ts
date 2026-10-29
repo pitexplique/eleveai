@@ -1873,7 +1873,9 @@ export const automatismes3e: AutoNiveau = {
     { id: "angles", label: "Angles", generateurs: [sommeAngles, anglesVocabulaire, angles5e] },
     { id: "mesures", label: "Périmètres et aires", generateurs: [perimetres, aires] },
     { id: "solides", label: "Solides et volumes", generateurs: [solides, volumes] },
-    { id: "pythagore", label: "Pythagore et cosinus", generateurs: [pythagore, trigoQuelCalcul, cosinusLongueur] },
+    // 29/10 : un prof les veut séparés, pour travailler l'un sans l'autre.
+    { id: "pythagore", label: "Pythagore", generateurs: [pythagore] },
+    { id: "cosinus", label: "Cosinus", generateurs: [trigoQuelCalcul, cosinusLongueur] },
     { id: "thales", label: "Thalès", generateurs: [thalesEgalite, thalesLongueur] },
     // Données et probabilités
     { id: "stats", label: "Moyenne, médiane, fréquence", generateurs: [moyenne, mediane, frequence] },
