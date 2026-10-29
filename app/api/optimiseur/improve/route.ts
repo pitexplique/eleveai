@@ -6,7 +6,7 @@ import { openai } from "@/lib/openai";
 import {
   RUBRIC_VERSION,
   DEFAULT_MODEL_IMPROVE,
-  normalizePromptType,
+  typeEffectif,
   normalizeAudience,
   getPromptRubricEditor,
   verifierBareme,
@@ -209,7 +209,7 @@ export async function POST(req: Request) {
     const model = pickModel(body?.model);
     const temperature = pickTemperature(body?.temperature, 0);
 
-    const type = normalizePromptType(body?.type);
+    const type = typeEffectif(body?.type, prompt);
     const audience = normalizeAudience(body?.audience);
 
     if (!prompt) {

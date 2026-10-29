@@ -36,6 +36,7 @@ import {
   DEFAULT_MAX_ITERS,
   DEFAULT_TARGET_SCORE,
   RUBRIC_VERSION,
+  typeDepuisTexte,
   type PromptType,
 } from "@/lib/promptRubric";
 
@@ -268,7 +269,14 @@ export default function OptimiseurClient() {
   const [temperatureImprove, setTemperatureImprove] = useState<number>(0);
 
   // ✅ Type de ressource (chips)
-  const [promptType, setPromptType] = useState<PromptType>("seance");
+  const [promptType, setPromptTypeBrut] = useState<PromptType>("seance");
+  // Tant que le prof n'a pas cliqué une pastille, le texte choisit le type :
+  // « contrôle pythagore 4e » allume « Évaluation » (29/10/2026).
+  const typeChoisiALaMain = useRef(false);
+  const setPromptType = (t: PromptType) => {
+    typeChoisiALaMain.current = true;
+    setPromptTypeBrut(t);
+  };
 
   // ✅ Audience (chips)
   const [audience, setAudience] = useState<Audience>("profs");
@@ -1066,6 +1074,10 @@ const startPremium = async () => {
               const v = e.target.value;
               setPrompt(v);
               promptRef.current = v; // ✅ always latest
+              if (!typeChoisiALaMain.current) {
+                const t = typeDepuisTexte(v);
+                if (t) setPromptTypeBrut(t);
+              }
             }}
             placeholder="Colle ici ton prompt à optimiser…"
             className="w-full min-h-[220px] border rounded-xl px-3 py-2 text-[12px] font-mono bg-slate-50"

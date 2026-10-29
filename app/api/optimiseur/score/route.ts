@@ -5,7 +5,7 @@ import { openai } from "@/lib/openai";
 import {
   RUBRIC_VERSION,
   DEFAULT_MODEL_SCORE,
-  normalizePromptType,
+  typeEffectif,
   normalizeAudience,
   getPromptRubricScore,
   type PromptType,
@@ -180,7 +180,7 @@ export async function POST(req: Request) {
     const body = await req.json().catch(() => ({}));
     const prompt = String(body?.prompt || "").trim();
 
-    const type = normalizePromptType(body?.meta?.type);
+    const type = typeEffectif(body?.meta?.type, prompt);
     const audience = normalizeAudience(body?.meta?.audience);
 
     const model = pickModel(body?.model) ?? DEFAULT_MODEL_SCORE;

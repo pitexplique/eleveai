@@ -33,6 +33,34 @@ export function normalizePromptType(t: unknown): PromptType {
   return "autre";
 }
 
+/**
+ * Le type dit par le texte lui-même (« contrôle pythagore 4e » = évaluation).
+ * null si le texte ne dit rien de net.
+ */
+export function typeDepuisTexte(texte: string): PromptType | null {
+  const t = String(texte || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+  if (/\b(controle|evaluation|eval|ds|devoir surveille|interro\w*|examen|brevet blanc|bac blanc)\b/.test(t))
+    return "evaluation";
+  if (/\bsequence\b/.test(t)) return "sequence";
+  if (/\b(fiche|methode)\b/.test(t)) return "fiche";
+  if (/\bprojet\b/.test(t)) return "projet";
+  if (/\b(seance|cours|lecon)\b/.test(t)) return "seance";
+  return null;
+}
+
+/**
+ * Une demande courte (ce que tape le prof, pas un prompt déjà développé)
+ * l'emporte sur le type choisi : le choix par défaut est « Séance ».
+ */
+export function typeEffectif(declare: unknown, texte: string): PromptType {
+  const type = normalizePromptType(declare);
+  if (String(texte || "").trim().length > 300) return type;
+  return typeDepuisTexte(texte) ?? type;
+}
+
 export function normalizeAudience(a: unknown): Audience {
   const s = String(a || "").toLowerCase().trim();
   if (
@@ -69,6 +97,16 @@ EXIGENCES SPÉCIFIQUES (ÉVALUATION) :
   la justification fait partie de la question qu'elle accompagne.
 - Les durées tiennent ensemble (la correction collective est une autre séance
   si elle ne rentre pas dans la durée annoncée).
+- Une évaluation n'est PAS une séance : toute la durée est le contrôle,
+  individuel, sans introduction, travail de groupe ni mise en commun.
+- Les questions sont ÉCRITES EN ENTIER dans le prompt (au moins 3, chacune
+  avec ses points), pas décrites (« des exercices variés… »).
+- Chaque question donne TOUTES ses hypothèses : sans elles, la propriété ne
+  s'applique pas (Pythagore : « rectangle en A » écrit dans CHAQUE question).
+- Une section « CORRIGÉ (séparé) » donne la réponse attendue de chaque question,
+  calculée et vérifiée (ex. BC = 10 cm).
+- La checklist ne vérifie que ce que le prompt contient : pas de mise en commun
+  ni de différenciation si elles n'y sont pas.
 - Critères de réussite mesurables (observables).
 - Différenciation Base/Attendu/Défi si activée.
 - Version élève sans réponses ; correction séparée si demandée.
