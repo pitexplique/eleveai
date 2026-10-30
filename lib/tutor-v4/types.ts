@@ -369,6 +369,14 @@ export type TutorSessionV4 = {
     label: string;
     steps: number;
   };
+  /**
+   * ⭐ 30/10/2026 — LES MICROS COCHÉES PAR LE PROF. Frédéric : « lors du
+   * contrôle j'ai fait 3 notions sur 8 dans fractions 6e, je veux les tester
+   * que sur trois ». Quand la liste est là, le coach ne sert QUE ces
+   * micro-compétences — démarrage, changement de micro, remédiation compris.
+   * `undefined` = toute la notion, comme avant.
+   */
+  microsAutorisees?: string[];
 };
 
 export type StartTutorV4Input = {
@@ -383,6 +391,8 @@ export type StartTutorV4Input = {
    * coach se comporte comme avant, il recommence simplement à zéro.
    */
   seenQuestionIds?: string[];
+  /** Les micros cochées par le prof (voir `TutorSessionV4.microsAutorisees`). */
+  microsAutorisees?: string[];
 };
 
 export type StartTutorV4Response = {

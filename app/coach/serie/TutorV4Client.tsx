@@ -539,10 +539,19 @@ export default function TutorV4Page() {
   const [classBoard, setClassBoard] = useState(false);
   // Micro-compétences repliées : on n'affiche le détail qu'au clic.
   const [expandedMicroId, setExpandedMicroId] = useState<string | null>(null);
+  /* ⭐ 30/10/2026 — LES MICROS DU CONTRÔLE. Frédéric : « lors du contrôle j'ai
+     fait 3 notions sur 8 dans fractions 6e, je veux les tester que sur
+     trois ». Le prof coche les micro-compétences (une case = 0 ou 1) ; le
+     coach, simple comme complet, ne sert plus que celles-là. `null` = toute la
+     notion. L'adresse les porte (`?micros=id1,id2`) : le lien donné aux
+     élèves ouvre directement sur les bonnes micros. */
+  const [microsChoisis, setMicrosChoisis] = useState<string[] | null>(null);
+  const [lienCopie, setLienCopie] = useState(false);
 
   const hasInitializedFromUrl = useRef(false);
   const hasStartedFromUrl = useRef(false);
 const initialMicroIdRef = useRef<string | null>(null);
+const initialMicrosRef = useRef<string[] | null>(null);
 const initialUrlClasseRef = useRef<Classe | null>(null);
 const initialUrlNotionRef = useRef<string | null>(null);
 const hasPreservedInitialUrlNotionRef = useRef(false);
@@ -790,6 +799,10 @@ useEffect(() => {
   const urlNotion = searchParams.get("notion");
   const urlMicroId = searchParams.get("microId");
   const urlDisplayMode = normalizeDisplayMode(searchParams.get("display"));
+  const urlMicros = (searchParams.get("micros") ?? "")
+    .split(",")
+    .map((id) => id.trim())
+    .filter(Boolean);
 
   const options = getNotionOptions(urlClasse, urlMatiere);
   const initialNotion =
@@ -804,6 +817,8 @@ useEffect(() => {
   setDisplayMode(urlDisplayMode ?? defaultDisplayModeForClasse(urlClasse));
 
   initialMicroIdRef.current = urlMicroId;
+  initialMicrosRef.current = urlMicros.length ? urlMicros : null;
+  setMicrosChoisis(initialMicrosRef.current);
   hasInitializedFromUrl.current = true;
   setUrlInitDone(true);
 }, [searchParams]);
@@ -845,11 +860,11 @@ useEffect(() => {
 useEffect(() => {
   if (!urlInitDone) return;
   if (hasStartedFromUrl.current) return;
-  if (!initialMicroIdRef.current) return;
+  if (!initialMicroIdRef.current && !initialMicrosRef.current) return;
   if (!notion) return;
 
   hasStartedFromUrl.current = true;
-  void startSession(initialMicroIdRef.current);
+  void startSession(initialMicroIdRef.current ?? undefined);
 }, [urlInitDone, notion]);
 
   useEffect(() => {
@@ -993,6 +1008,60 @@ useEffect(() => {
     if (!notion) return [];
     return notionMicroMap[notion] ?? [];
   }, [notion, notionMicroMap]);
+
+  /* Lu par `startSession`, qui peut partir dans le même clic que la case
+     cochée : l'état React, lui, n'est pas encore à jour. */
+  const microsChoisisRef = useRef<string[] | null>(null);
+  microsChoisisRef.current = microsChoisis;
+
+  function microEstChoisie(microId: string) {
+    return !microsChoisis || microsChoisis.includes(microId);
+  }
+
+  function basculerMicroChoisie(microId: string) {
+    const base = microsChoisis ?? notionMicros;
+    const suivant = base.includes(microId)
+      ? base.filter((id) => id !== microId)
+      : notionMicros.filter((id) => id === microId || base.includes(id));
+    // Au moins une micro ; toutes cochées = toute la notion.
+    if (suivant.length === 0) return;
+    setMicrosChoisis(suivant.length === notionMicros.length ? null : suivant);
+  }
+
+  function toutesLesMicros(coche: boolean) {
+    setMicrosChoisis(coche ? null : notionMicros.slice(0, 1));
+  }
+
+  /* L'adresse de la séance : classe, notion, micros cochées, vue. */
+  function adresseAvecMicros(vue: TutorDisplayMode) {
+    const params = new URLSearchParams();
+    params.set("matiere", matiere);
+    params.set("classe", classe);
+    if (notion) params.set("notion", notion);
+    if (microsChoisis) params.set("micros", microsChoisis.join(","));
+    params.set("display", vue);
+    return `${window.location.pathname}?${params.toString()}`;
+  }
+
+  /* Relance la mission sur les micros cochées et met l'adresse à jour : un
+     rechargement, ou le lien copié, retombe sur les mêmes micros. */
+  function lancerAvecMicrosChoisies() {
+    router.replace(adresseAvecMicros(displayMode), { scroll: false });
+    void startSession(
+      activeMicroId && microEstChoisie(activeMicroId) ? activeMicroId : undefined
+    );
+  }
+
+  async function copierLienEleves() {
+    const lien = `${window.location.origin}${adresseAvecMicros("simple")}`;
+    try {
+      await navigator.clipboard.writeText(lien);
+      setLienCopie(true);
+      window.setTimeout(() => setLienCopie(false), 2000);
+    } catch {
+      window.prompt("Lien à donner aux élèves :", lien);
+    }
+  }
 
 useEffect(() => {
   if (displayMode !== "simple") return;
@@ -1175,6 +1244,9 @@ function continueAfterExplanation() {
     // sans attendre la mise à jour d'état (changement de notion par le prof).
     const activeNotion = notionOverride ?? notion;
     if (!activeNotion) return;
+    // Les micros cochées appartiennent à LEUR notion : ailleurs, toute la notion.
+    const microsSeance =
+      activeNotion === notion ? microsChoisisRef.current ?? undefined : undefined;
 
     try {
       // La séance qui se termine part avant d'être remise à zéro.
@@ -1206,6 +1278,7 @@ function continueAfterExplanation() {
           matiere,
           notion: activeNotion,
           microId: targetMicroId,
+          micros: microsSeance,
           displayMode,
           /* Ce que cet élève a déjà vu, gardé d'une séance à l'autre : sans
              cela le coach lui reposerait les questions d'hier. */
@@ -1258,6 +1331,8 @@ function continueAfterExplanation() {
     // Reclic sur la notion déjà en cours : on ne relance pas inutilement.
     if (notionId === notion && pair) return;
     setNotion(notionId);
+    setMicrosChoisis(null);
+    microsChoisisRef.current = null;
     setExpandedMicroId(null);
     void startSession(undefined, notionId);
   }
@@ -2475,6 +2550,45 @@ function handleInputKeyDown(
               Clique sur une micro-compétence pour voir le détail.
             </div>
 
+            {/* La case de chaque micro : 1 = elle tombe dans la séance. */}
+            <div className="mb-3 rounded-2xl border border-indigo-200 bg-indigo-50 p-3">
+              <div className="flex items-center justify-between gap-2">
+                <p className="text-xs font-black text-indigo-900">
+                  🎯 Micros de la séance :{" "}
+                  {microsChoisis ? microsChoisis.length : notionMicros.length}/
+                  {notionMicros.length}
+                </p>
+                <button
+                  type="button"
+                  onClick={() => toutesLesMicros(!!microsChoisis)}
+                  className="text-[11px] font-bold text-indigo-700 underline hover:text-indigo-900"
+                >
+                  {microsChoisis ? "Tout cocher" : "Tout décocher"}
+                </button>
+              </div>
+              <p className="mt-1 text-[11px] text-indigo-800">
+                Coche celles du contrôle : le coach (simple et complet) ne pose
+                plus que celles-là.
+              </p>
+              <div className="mt-2 grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={lancerAvecMicrosChoisies}
+                  disabled={busy}
+                  className="rounded-xl bg-indigo-600 px-2 py-2 text-xs font-black text-white shadow hover:bg-indigo-500 disabled:opacity-50"
+                >
+                  ▶ Lancer
+                </button>
+                <button
+                  type="button"
+                  onClick={() => void copierLienEleves()}
+                  className="rounded-xl border border-indigo-300 bg-white px-2 py-2 text-xs font-black text-indigo-800 shadow-sm hover:bg-indigo-100"
+                >
+                  {lienCopie ? "✓ Lien copié" : "🔗 Lien élèves"}
+                </button>
+              </div>
+            </div>
+
             <div className="space-y-2">
               {notionMicros.map((microId) => {
                 const status = microStatuses[microId] ?? "idle";
@@ -2486,14 +2600,25 @@ function handleInputKeyDown(
                 };
                 const isActive = activeMicroId === microId;
                 const isOpen = expandedMicroId === microId;
+                const choisie = microEstChoisie(microId);
 
                 return (
                   <div
                     key={microId}
-                    className={`rounded-2xl border shadow-sm ${statusClasses(
+                    className={`flex items-start rounded-2xl border shadow-sm ${statusClasses(
                       status
-                    )} ${isActive ? "ring-2 ring-slate-900/20" : ""}`}
+                    )} ${isActive ? "ring-2 ring-slate-900/20" : ""} ${
+                      choisie ? "" : "opacity-45"
+                    }`}
                   >
+                    <input
+                      type="checkbox"
+                      checked={choisie}
+                      onChange={() => basculerMicroChoisie(microId)}
+                      aria-label={`Séance : ${microLabel(microId, classe, matiere)}`}
+                      className="ml-3 mt-2.5 h-4 w-4 shrink-0 accent-indigo-600"
+                    />
+                    <div className="min-w-0 flex-1">
                     {/* Ligne repliée : une seule ligne, détail au clic. */}
                     <button
                       type="button"
@@ -2537,13 +2662,14 @@ function handleInputKeyDown(
                         <button
                           type="button"
                           onClick={() => handleMicroClick(microId)}
-                          disabled={busy || wrongAnswerPanelOpen}
+                          disabled={busy || wrongAnswerPanelOpen || !choisie}
                           className="w-full rounded-xl bg-slate-900 px-3 py-2 text-xs font-black text-white shadow hover:bg-slate-800 disabled:opacity-50"
                         >
                           S’entraîner sur cette compétence
                         </button>
                       </div>
                     ) : null}
+                    </div>
                   </div>
                 );
               })}

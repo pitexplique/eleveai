@@ -4,7 +4,7 @@ import { startTutorSessionV4 } from "@/lib/tutor-v4/tutorEngineV4";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { classe, matiere, notion, microId, displayMode, seenQuestionIds } = body;
+    const { classe, matiere, notion, microId, displayMode, seenQuestionIds, micros } = body;
 
     if (
       typeof classe !== "string" ||
@@ -31,6 +31,11 @@ export async function POST(req: NextRequest) {
          borne la longueur de son côté. */
       seenQuestionIds: Array.isArray(seenQuestionIds)
         ? seenQuestionIds.filter((v: unknown): v is string => typeof v === "string")
+        : undefined,
+      /* Les micros cochées par le prof : le moteur ne garde que celles de la
+         notion. */
+      microsAutorisees: Array.isArray(micros)
+        ? micros.filter((v: unknown): v is string => typeof v === "string").slice(0, 50)
         : undefined,
     });
 

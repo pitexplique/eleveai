@@ -362,6 +362,27 @@ function tryBuildPair(args: {
   }
 }
 
+/** Sans liste cochée par le prof, toutes les micros sont permises. */
+function estAutorisee(microsAutorisees: string[] | undefined, microId: string) {
+  return !microsAutorisees?.length || microsAutorisees.includes(microId);
+}
+
+/**
+ * Ne garde que les micros cochées qui existent dans la notion. Une liste vide
+ * à l'arrivée vaut « toute la notion » : un lien abîmé ne bloque pas l'élève.
+ */
+function nettoyerMicrosAutorisees(
+  knowledge: KnowledgePack,
+  notionId: string,
+  microIds: string[] | undefined
+): string[] | undefined {
+  if (!microIds?.length) return undefined;
+  const garde = microIds.filter((id) =>
+    knowledge.microSkills.some((m) => m.id === id && m.notionId === notionId)
+  );
+  return garde.length ? garde : undefined;
+}
+
 /**
  * Cherche une micro suivante dans la même notion si la micro courante
  * n'a pas assez de questions ou si on veut faire progresser l'élève.
@@ -377,6 +398,7 @@ function findNextAvailableMicroInNotion(args: {
   recentQuestionIds: string[];
   preferExactStar?: boolean;
   allowSingleItem?: boolean;
+  microsAutorisees?: string[];
 }): { micro: KnowledgeMicroSkill; pair: TutorQuestionPair } | null {
   const {
     knowledge,
@@ -389,6 +411,7 @@ function findNextAvailableMicroInNotion(args: {
     recentQuestionIds,
     preferExactStar,
     allowSingleItem,
+    microsAutorisees,
   } = args;
 
   const candidates: KnowledgeMicroSkill[] = [];
@@ -397,6 +420,7 @@ function findNextAvailableMicroInNotion(args: {
   const pushCandidate = (m: KnowledgeMicroSkill | null | undefined) => {
     if (!m) return;
     if (m.notionId !== notionId) return;
+    if (!estAutorisee(microsAutorisees, m.id)) return;
     if (seen.has(m.id)) return;
     seen.add(m.id);
     candidates.push(m);
@@ -411,6 +435,12 @@ function findNextAvailableMicroInNotion(args: {
 
   for (const m of notionMicros) {
     pushCandidate(m);
+  }
+
+  /* Le prof n'a coché qu'UNE micro (ou les autres n'ont plus de question) :
+     on reste dessus plutôt que de s'arrêter. */
+  if (microsAutorisees?.length) {
+    pushCandidate(knowledge.microSkills.find((m) => m.id === currentMicroId));
   }
 
   for (const micro of candidates) {
@@ -480,12 +510,22 @@ export async function startTutorSessionV4(
     throw new Error("Notion inconnue");
   }
 
+  const microsAutorisees = nettoyerMicrosAutorisees(
+    knowledge,
+    notion.id,
+    input.microsAutorisees
+  );
+
   const requestedMicro =
     input.microId ? findMicro(knowledge, input.microId) : null;
 
   const firstMicro =
-    requestedMicro && requestedMicro.notionId === notion.id
+    requestedMicro &&
+    requestedMicro.notionId === notion.id &&
+    estAutorisee(microsAutorisees, requestedMicro.id)
       ? requestedMicro
+      : microsAutorisees
+      ? findMicro(knowledge, microsAutorisees[0])
       : selectWeakestMicroInNotion(knowledge, notion.id, mastery.micro);
 
   if (!firstMicro) {
@@ -525,6 +565,7 @@ export async function startTutorSessionV4(
       recentQuestionIds: memoireLongue,
       preferExactStar: isSimpleMode,
     allowSingleItem: isSimpleMode,
+      microsAutorisees,
     });
 
     if (!fallback) {
@@ -553,6 +594,7 @@ export async function startTutorSessionV4(
 
     notionFocus: notion.id,
     microFocus: actualMicro.id,
+    microsAutorisees,
 
     recommendedDifficulty,
     recommendedStar,
@@ -695,6 +737,12 @@ export async function jumpToMicroV4(
     );
   }
 
+  if (!estAutorisee(session.microsAutorisees, targetMicro.id)) {
+    throw new Error(
+      `La micro-compétence ${microId} n'a pas été choisie pour cette séance.`
+    );
+  }
+
   const isSimpleMode = session.displayMode === "simple";
 
   let pair = tryBuildPair({
@@ -719,6 +767,7 @@ export async function jumpToMicroV4(
       recentQuestionIds: memoireDe(session),
       preferExactStar: isSimpleMode,
     allowSingleItem: isSimpleMode,
+      microsAutorisees: session.microsAutorisees,
     });
 
     if (!fallback) {
@@ -1045,7 +1094,8 @@ export async function answerTutorV4(
     !session.remediationReturnTo &&
     suspectedPrereq &&
     suspectedPrereq.confidence === "high" &&
-    suspectedPrereq.microId !== session.microFocus
+    suspectedPrereq.microId !== session.microFocus &&
+    estAutorisee(session.microsAutorisees, suspectedPrereq.microId)
   ) {
     const targetMicro = findMicro(knowledge, suspectedPrereq.microId);
 
@@ -1093,6 +1143,8 @@ export async function answerTutorV4(
 
     for (const target of ranked) {
       if (target.microId === session.microFocus) continue;
+      // Contrôle ciblé : pas de détour par une micro que le prof n'a pas cochée.
+      if (!estAutorisee(session.microsAutorisees, target.microId)) continue;
 
       session.mode = "coaching";
       session.recommendedStar = 1;
@@ -1149,6 +1201,7 @@ export async function answerTutorV4(
         recentQuestionIds: memoireDe(session),
         preferExactStar: isSimpleMode,
     allowSingleItem: isSimpleMode,
+        microsAutorisees: session.microsAutorisees,
       });
 
       if (fallback) {
