@@ -3789,6 +3789,168 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cm1&matiere=maths&notion=tableau&microId=tableau_lire&display=simple"
  },
+ "cm2-frac-comparer": {
+  "fichier": "cm2/maths/fractions/04-comparer/eleveai-maths-cm2-frac-comparer.mp4",
+  "poster": "cm2/maths/fractions/04-comparer/eleveai-maths-cm2-frac-comparer.png",
+  "vignette": "cm2/maths/fractions/04-comparer/eleveai-maths-cm2-frac-comparer.vignette.webp",
+  "titre": "1/4 ou 1/8 d'énergie : lequel est le plus grand ? — Comparer des fractions — épisode 4 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=fraction&microId=fraction_comparer&display=simple"
+ },
+ "cm2-frac-comparer-short": {
+  "fichier": "cm2/maths/fractions/04-comparer/eleveai-maths-cm2-frac-comparer-short.mp4",
+  "poster": "cm2/maths/fractions/04-comparer/eleveai-maths-cm2-frac-comparer-short.png",
+  "vignette": "cm2/maths/fractions/04-comparer/eleveai-maths-cm2-frac-comparer-short.vignette.webp",
+  "titre": "Un gâteau pour 2 éléphants ou pour 10 fourmis ? 🐘 — CM2 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=fraction&microId=fraction_comparer&display=simple"
+ },
+ "cm2-frac-decimale": {
+  "fichier": "cm2/maths/fractions/06-decimale/eleveai-maths-cm2-frac-decimale.mp4",
+  "poster": "cm2/maths/fractions/06-decimale/eleveai-maths-cm2-frac-decimale.png",
+  "vignette": "cm2/maths/fractions/06-decimale/eleveai-maths-cm2-frac-decimale.vignette.webp",
+  "titre": "7 centièmes de litre : 0,7 ou 0,07 ? — Les fractions décimales — épisode 6 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=fraction&microId=fraction_decimale&display=simple"
+ },
+ "cm2-frac-decimale-short": {
+  "fichier": "cm2/maths/fractions/06-decimale/eleveai-maths-cm2-frac-decimale-short.mp4",
+  "poster": "cm2/maths/fractions/06-decimale/eleveai-maths-cm2-frac-decimale-short.png",
+  "vignette": "cm2/maths/fractions/06-decimale/eleveai-maths-cm2-frac-decimale-short.vignette.webp",
+  "titre": "7 centimes = 0,7 € ? Le glacier se trompe ! 🍦 — CM2 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=fraction&microId=fraction_decimale&display=simple"
+ },
+ "cm2-frac-defi": {
+  "fichier": "cm2/maths/fractions/07-defi/eleveai-maths-cm2-frac-defi.mp4",
+  "poster": "cm2/maths/fractions/07-defi/eleveai-maths-cm2-frac-defi.png",
+  "vignette": "cm2/maths/fractions/07-defi/eleveai-maths-cm2-frac-defi.vignette.webp",
+  "titre": "Défi fractions : 3 énigmes dans le tram — Défi fractions — épisode 7 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=fraction&microId=fraction_defi&display=simple"
+ },
+ "cm2-frac-defi-short": {
+  "fichier": "cm2/maths/fractions/07-defi/eleveai-maths-cm2-frac-defi-short.mp4",
+  "poster": "cm2/maths/fractions/07-defi/eleveai-maths-cm2-frac-defi-short.png",
+  "vignette": "cm2/maths/fractions/07-defi/eleveai-maths-cm2-frac-defi-short.vignette.webp",
+  "titre": "Course d'escargots : qui est en tête ? 🐌 — CM2 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=fraction&microId=fraction_defi&display=simple"
+ },
+ "cm2-frac-droite": {
+  "fichier": "cm2/maths/fractions/03-droite/eleveai-maths-cm2-frac-droite.mp4",
+  "poster": "cm2/maths/fractions/03-droite/eleveai-maths-cm2-frac-droite.png",
+  "vignette": "cm2/maths/fractions/03-droite/eleveai-maths-cm2-frac-droite.vignette.webp",
+  "titre": "Tom nage 3/4 du bassin : où est-il ? — Fraction et droite graduée — épisode 3 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=fraction&microId=fraction_droite&display=simple"
+ },
+ "cm2-frac-droite-short": {
+  "fichier": "cm2/maths/fractions/03-droite/eleveai-maths-cm2-frac-droite-short.mp4",
+  "poster": "cm2/maths/fractions/03-droite/eleveai-maths-cm2-frac-droite-short.png",
+  "vignette": "cm2/maths/fractions/03-droite/eleveai-maths-cm2-frac-droite-short.vignette.webp",
+  "titre": "La route de la Lune : 5 traits, mais 4 parts ! 🚀 — CM2 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=fraction&microId=fraction_droite&display=simple"
+ },
+ "cm2-frac-equivalente": {
+  "fichier": "cm2/maths/fractions/05-equivalente/eleveai-maths-cm2-frac-equivalente.mp4",
+  "poster": "cm2/maths/fractions/05-equivalente/eleveai-maths-cm2-frac-equivalente.png",
+  "vignette": "cm2/maths/fractions/05-equivalente/eleveai-maths-cm2-frac-equivalente.vignette.webp",
+  "titre": "3/4 de la plate-bande = 6/8 ? Les fractions égales — Fractions égales — épisode 5 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=fraction&microId=fraction_equivalente&display=simple"
+ },
+ "cm2-frac-equivalente-short": {
+  "fichier": "cm2/maths/fractions/05-equivalente/eleveai-maths-cm2-frac-equivalente-short.mp4",
+  "poster": "cm2/maths/fractions/05-equivalente/eleveai-maths-cm2-frac-equivalente-short.png",
+  "vignette": "cm2/maths/fractions/05-equivalente/eleveai-maths-cm2-frac-equivalente-short.vignette.webp",
+  "titre": "Quelle assiette a le plus de pizza ? 🍕 — CM2 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=fraction&microId=fraction_equivalente&display=simple"
+ },
+ "cm2-frac-lire": {
+  "fichier": "cm2/maths/fractions/01-lire/eleveai-maths-cm2-frac-lire.mp4",
+  "poster": "cm2/maths/fractions/01-lire/eleveai-maths-cm2-frac-lire.png",
+  "vignette": "cm2/maths/fractions/01-lire/eleveai-maths-cm2-frac-lire.vignette.webp",
+  "titre": "3 carrés sur 8 offerts : comment lire 3/8 ? — Lire une fraction — épisode 1 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=fraction&microId=fraction_lire&display=simple"
+ },
+ "cm2-frac-lire-short": {
+  "fichier": "cm2/maths/fractions/01-lire/eleveai-maths-cm2-frac-lire-short.mp4",
+  "poster": "cm2/maths/fractions/01-lire/eleveai-maths-cm2-frac-lire-short.png",
+  "vignette": "cm2/maths/fractions/01-lire/eleveai-maths-cm2-frac-lire-short.vignette.webp",
+  "titre": "Pourquoi dit-on « 1 quart d'heure » ? ⏰ — CM2 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=fraction&microId=fraction_lire&display=simple"
+ },
+ "cm2-frac-mixte-ecrire": {
+  "fichier": "cm2/maths/fractions/10-mixte-ecrire/eleveai-maths-cm2-frac-mixte-ecrire.mp4",
+  "poster": "cm2/maths/fractions/10-mixte-ecrire/eleveai-maths-cm2-frac-mixte-ecrire.png",
+  "vignette": "cm2/maths/fractions/10-mixte-ecrire/eleveai-maths-cm2-frac-mixte-ecrire.vignette.webp",
+  "titre": "7/4 de batterie : combien de batteries entières ? — L'écriture mixte — épisode 10 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=fraction_mixte&microId=fraction_mixte_ecrire&display=simple"
+ },
+ "cm2-frac-mixte-ecrire-short": {
+  "fichier": "cm2/maths/fractions/10-mixte-ecrire/eleveai-maths-cm2-frac-mixte-ecrire-short.mp4",
+  "poster": "cm2/maths/fractions/10-mixte-ecrire/eleveai-maths-cm2-frac-mixte-ecrire-short.png",
+  "vignette": "cm2/maths/fractions/10-mixte-ecrire/eleveai-maths-cm2-frac-mixte-ecrire-short.vignette.webp",
+  "titre": "9 quarts de pizza : plus qu'une pizza ! 🍕 — CM2 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=fraction_mixte&microId=fraction_mixte_ecrire&display=simple"
+ },
+ "cm2-frac-mixte-regrouper": {
+  "fichier": "cm2/maths/fractions/11-mixte-regrouper/eleveai-maths-cm2-frac-mixte-regrouper.mp4",
+  "poster": "cm2/maths/fractions/11-mixte-regrouper/eleveai-maths-cm2-frac-mixte-regrouper.png",
+  "vignette": "cm2/maths/fractions/11-mixte-regrouper/eleveai-maths-cm2-frac-mixte-regrouper.vignette.webp",
+  "titre": "3 oranges et 1 quart : combien de quarts ? — Regrouper en une fraction — épisode 11 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=fraction_mixte&microId=fraction_mixte_regrouper&display=simple"
+ },
+ "cm2-frac-mixte-regrouper-short": {
+  "fichier": "cm2/maths/fractions/11-mixte-regrouper/eleveai-maths-cm2-frac-mixte-regrouper-short.mp4",
+  "poster": "cm2/maths/fractions/11-mixte-regrouper/eleveai-maths-cm2-frac-mixte-regrouper-short.png",
+  "vignette": "cm2/maths/fractions/11-mixte-regrouper/eleveai-maths-cm2-frac-mixte-regrouper-short.vignette.webp",
+  "titre": "3 cartons et 2 bouteilles : combien de quarts ? 🧃 — CM2 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=fraction_mixte&microId=fraction_mixte_regrouper&display=simple"
+ },
+ "cm2-frac-representer": {
+  "fichier": "cm2/maths/fractions/02-representer/eleveai-maths-cm2-frac-representer.mp4",
+  "poster": "cm2/maths/fractions/02-representer/eleveai-maths-cm2-frac-representer.png",
+  "vignette": "cm2/maths/fractions/02-representer/eleveai-maths-cm2-frac-representer.vignette.webp",
+  "titre": "6 places, 4 œufs : quelle fraction ? — Représenter une fraction — épisode 2 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=fraction&microId=fraction_representer&display=simple"
+ },
+ "cm2-frac-representer-short": {
+  "fichier": "cm2/maths/fractions/02-representer/eleveai-maths-cm2-frac-representer-short.mp4",
+  "poster": "cm2/maths/fractions/02-representer/eleveai-maths-cm2-frac-representer-short.png",
+  "vignette": "cm2/maths/fractions/02-representer/eleveai-maths-cm2-frac-representer-short.vignette.webp",
+  "titre": "Couper un carré en 4 : de combien de façons ? ✂️ — CM2 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=fraction&microId=fraction_representer&display=simple"
+ },
  "cm2-proba-comparer": {
   "fichier": "cm2/maths/probabilites/03-comparer/eleveai-maths-cm2-proba-comparer.mp4",
   "poster": "cm2/maths/probabilites/03-comparer/eleveai-maths-cm2-proba-comparer.png",
