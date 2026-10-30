@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 
 import { useEleve } from "@/context/EleveContext";
 import ClassementAvis from "@/components/points/ClassementAvis";
+import CartePassions from "./CartePassions";
 import BulletinDashboard from "@/components/bulletin/BulletinDashboard";
 import type { Bulletin } from "@/lib/bulletin/types";
 import { prenomFromNom } from "@/lib/prenom";
@@ -507,6 +508,8 @@ export default function DashboardEleveClient() {
               — il descend en bas de page, après les outils. Voir la bande en
               fin de composant. */}
         </div>
+
+        <CartePassions />
 
         {bulletin && (
           <div className="mt-6">
