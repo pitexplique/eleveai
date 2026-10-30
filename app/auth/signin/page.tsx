@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { useEleve } from "@/context/EleveContext";
+import { chargerPassions } from "@/lib/passions";
 
 const RESEND_COOLDOWN_SECONDS = 30;
 const INDEPENDENT_ETABLISSEMENT_CODE = "INDEPENDANT";
@@ -212,8 +213,31 @@ export default function SignInPage() {
     if (type === "admin") {
       router.push(destination ?? "/dashboard");
     } else {
-      router.push(destination ?? "/");
+      allerApresConnexion(type, destination ?? "/", {
+        code_etablissement: INDEPENDENT_ETABLISSEMENT_CODE,
+        code_eleve: getEmailUserCode(profile),
+        token: token ?? null,
+      });
     }
+  };
+
+  // ⭐ UN ÉLÈVE QUI N'A PAS ENCORE DIT CE QU'IL AIME passe d'abord par
+  // /passions (30/10/2026, Frédéric : « quand les élèves se connectent, ce
+  // serait bien qu'ils sélectionnent leurs centres d'intérêt »). Il peut
+  // toujours dire « Plus tard » : on le renvoie alors là où il allait.
+  const allerApresConnexion = async (
+    type: string | null | undefined,
+    suite: string,
+    compte: { code_etablissement: string; code_eleve: string; token: string | null }
+  ) => {
+    if (type === "eleve" && !suite.startsWith("/passions")) {
+      const passions = await chargerPassions({ acces_id: "", ...compte }).catch(() => null);
+      if (!passions?.length) {
+        router.push(`/passions?next=${encodeURIComponent(suite)}`);
+        return;
+      }
+    }
+    router.push(suite);
   };
 
   // Jeton de session signé pour /api/resultats et /api/dashboard.
@@ -559,7 +583,11 @@ export default function SignInPage() {
       // si la personne s'était connectée POUR quelque chose de précis.
       // Le tableau de bord — élève, prof ou principal — reste à un clic depuis
       // « Mon espace » et le menu du compte.
-      router.push(destination ?? "/");
+      allerApresConnexion(session.role, destination ?? "/", {
+        code_etablissement: session.code_etablissement,
+        code_eleve: session.code_utilisateur,
+        token: data.token ?? null,
+      });
     } catch (err: any) {
       console.error("Unexpected etablissement login error:", err);
       setErrorEtab(err?.message || "Erreur inattendue. Réessayez.");

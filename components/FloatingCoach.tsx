@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useEleve } from "@/context/EleveContext";
+import { lirePassions } from "@/lib/passions";
 
 type CoachMessage = { role: "eleve" | "coach"; content: string };
 
@@ -62,6 +63,8 @@ export default function FloatingCoach({ enBas }: { enBas?: boolean } = {}) {
           codeUtilisateur,
           studentQuestion: trimmed,
           history,
+          // Ses passions (/passions) : l'IA prend ses exemples dedans.
+          passions: lirePassions(eleve) ?? [],
         }),
       });
       const data = (await res.json().catch(() => ({}))) as { answer?: string; error?: string };

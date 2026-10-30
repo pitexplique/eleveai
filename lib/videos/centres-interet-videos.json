@@ -1,0 +1,790 @@
+{
+ "seconde-stats-lire-serie": [
+  "sport"
+ ],
+ "seconde-stats-lire-serie-short": [
+  "sport"
+ ],
+ "seconde-stats-moyenne": [
+  "espace",
+  "sciences"
+ ],
+ "seconde-stats-moyenne-short": [
+  "espace",
+  "sciences"
+ ],
+ "seconde-stats-moyenne-ponderee": [
+  "sport"
+ ],
+ "seconde-stats-moyenne-ponderee-short": [
+  "sport"
+ ],
+ "seconde-stats-mediane-quartiles": [
+  "musique"
+ ],
+ "seconde-stats-mediane-quartiles-short": [
+  "musique"
+ ],
+ "seconde-stats-frequence": [
+  "technologie-ia",
+  "histoire-geographie"
+ ],
+ "seconde-stats-frequence-short": [
+  "technologie-ia",
+  "histoire-geographie"
+ ],
+ "seconde-stats-ecart-interquartile": [
+  "meteo-climat",
+  "nature-ecologie"
+ ],
+ "seconde-stats-ecart-interquartile-short": [
+  "meteo-climat",
+  "nature-ecologie"
+ ],
+ "seconde-stats-linearite-moyenne": [
+  "cinema-series",
+  "technologie-ia"
+ ],
+ "seconde-stats-linearite-moyenne-short": [
+  "cinema-series",
+  "technologie-ia"
+ ],
+ "seconde-stats-ecart-type": [
+  "transports",
+  "histoire-geographie"
+ ],
+ "seconde-stats-ecart-type-short": [
+  "transports",
+  "histoire-geographie"
+ ],
+ "seconde-stats-interpreter": [
+  "argent-budget",
+  "reseaux-sociaux"
+ ],
+ "seconde-stats-interpreter-short": [
+  "argent-budget",
+  "reseaux-sociaux"
+ ],
+ "premiere-commun-stats-rep-barres": [
+  "technologie-ia"
+ ],
+ "premiere-commun-stats-rep-barres-short": [
+  "technologie-ia"
+ ],
+ "premiere-commun-stats-rep-circulaire": [
+  "nature-ecologie",
+  "sciences"
+ ],
+ "premiere-commun-stats-rep-circulaire-short": [
+  "nature-ecologie",
+  "sciences"
+ ],
+ "premiere-commun-stats-rep-choisir": [
+  "jeux-video",
+  "argent-budget"
+ ],
+ "premiere-commun-stats-rep-choisir-short": [
+  "jeux-video",
+  "argent-budget"
+ ],
+ "premiere-commun-stats-rep-commenter": [
+  "sport",
+  "corps-sante"
+ ],
+ "premiere-commun-stats-rep-commenter-short": [
+  "sport",
+  "corps-sante"
+ ],
+ "premiere-commun-stats-filtre-effectif": [
+  "histoire-geographie",
+  "art-design"
+ ],
+ "premiere-commun-stats-filtre-effectif-short": [
+  "histoire-geographie",
+  "art-design"
+ ],
+ "stmg-stats-boite": [
+  "argent-budget",
+  "histoire-geographie"
+ ],
+ "stmg-stats-boite-short": [
+  "argent-budget",
+  "histoire-geographie"
+ ],
+ "stmg-stats-tab-marges": [
+  "corps-sante"
+ ],
+ "stmg-stats-tab-marges-short": [
+  "corps-sante"
+ ],
+ "stmg-stats-freq-marginale": [
+  "histoire-geographie",
+  "transports"
+ ],
+ "stmg-stats-freq-marginale-short": [
+  "histoire-geographie",
+  "transports"
+ ],
+ "stmg-stats-freq-conditionnelle": [
+  "sport",
+  "corps-sante"
+ ],
+ "stmg-stats-freq-conditionnelle-short": [
+  "sport",
+  "corps-sante"
+ ],
+ "stmg-stats-freq-completer": [
+  "transports",
+  "technologie-ia"
+ ],
+ "stmg-stats-freq-completer-short": [
+  "transports",
+  "technologie-ia"
+ ],
+ "stmg-stats-freq-interpreter": [
+  "corps-sante",
+  "transports"
+ ],
+ "stmg-stats-freq-interpreter-short": [
+  "corps-sante",
+  "transports"
+ ],
+ "premiere-commun-stats-lire-graphique": [
+  "meteo-climat",
+  "nature-ecologie"
+ ],
+ "premiere-commun-stats-lire-graphique-short": [
+  "meteo-climat",
+  "nature-ecologie"
+ ],
+ "stmg-stats-lire-graphique": [
+  "meteo-climat",
+  "nature-ecologie"
+ ],
+ "stmg-stats-lire-graphique-short": [
+  "meteo-climat",
+  "nature-ecologie"
+ ],
+ "premiere-commun-stats-graphiques-usuels": [
+  "cinema-series"
+ ],
+ "premiere-commun-stats-graphiques-usuels-short": [
+  "cinema-series"
+ ],
+ "stmg-stats-diagrammes-usuels": [
+  "cinema-series"
+ ],
+ "stmg-stats-diagrammes-usuels-short": [
+  "cinema-series"
+ ],
+ "premiere-commun-stats-graphique-donnees": [
+  "sport"
+ ],
+ "premiere-commun-stats-graphique-donnees-short": [
+  "sport"
+ ],
+ "stmg-stats-graphique-donnees": [
+  "sport"
+ ],
+ "stmg-stats-graphique-donnees-short": [
+  "sport"
+ ],
+ "premiere-commun-stats-tab-lire": [
+  "histoire-geographie",
+  "sciences"
+ ],
+ "premiere-commun-stats-tab-lire-short": [
+  "histoire-geographie",
+  "sciences"
+ ],
+ "stmg-stats-tab-lire": [
+  "histoire-geographie",
+  "sciences"
+ ],
+ "stmg-stats-tab-lire-short": [
+  "histoire-geographie",
+  "sciences"
+ ],
+ "premiere-commun-stats-tab-completer": [
+  "espace",
+  "technologie-ia"
+ ],
+ "premiere-commun-stats-tab-completer-short": [
+  "espace",
+  "technologie-ia"
+ ],
+ "stmg-stats-tab-completer": [
+  "espace",
+  "technologie-ia"
+ ],
+ "stmg-stats-tab-completer-short": [
+  "espace",
+  "technologie-ia"
+ ],
+ "premiere-commun-stats-tab-construire": [
+  "musique"
+ ],
+ "premiere-commun-stats-tab-construire-short": [
+  "musique"
+ ],
+ "stmg-stats-tab-dresser": [
+  "musique"
+ ],
+ "stmg-stats-tab-dresser-short": [
+  "musique"
+ ],
+ "premiere-commun-stats-nuage-lire": [
+  "sport"
+ ],
+ "premiere-commun-stats-nuage-lire-short": [
+  "sport"
+ ],
+ "stmg-stats-nuage-lire": [
+  "sport"
+ ],
+ "stmg-stats-nuage-lire-short": [
+  "sport"
+ ],
+ "premiere-commun-stats-nuage-construire": [
+  "transports"
+ ],
+ "premiere-commun-stats-nuage-construire-short": [
+  "transports"
+ ],
+ "stmg-stats-nuage-representer": [
+  "transports"
+ ],
+ "stmg-stats-nuage-representer-short": [
+  "transports"
+ ],
+ "premiere-commun-stats-nuage-tendance": [
+  "histoire-geographie",
+  "meteo-climat"
+ ],
+ "premiere-commun-stats-nuage-tendance-short": [
+  "histoire-geographie",
+  "meteo-climat"
+ ],
+ "stmg-stats-nuage-tendance": [
+  "histoire-geographie",
+  "meteo-climat"
+ ],
+ "stmg-stats-nuage-tendance-short": [
+  "histoire-geographie",
+  "meteo-climat"
+ ],
+ "premiere-commun-stats-filtre-sous-ensemble": [
+  "cinema-series"
+ ],
+ "premiere-commun-stats-filtre-sous-ensemble-short": [
+  "cinema-series"
+ ],
+ "stmg-stats-filtre-sous-ensemble": [
+  "cinema-series"
+ ],
+ "stmg-stats-filtre-sous-ensemble-short": [
+  "cinema-series"
+ ],
+ "premiere-commun-stats-filtre-et": [
+  "nature-ecologie",
+  "sciences"
+ ],
+ "premiere-commun-stats-filtre-et-short": [
+  "nature-ecologie",
+  "sciences"
+ ],
+ "stmg-stats-filtre-et": [
+  "nature-ecologie",
+  "sciences"
+ ],
+ "stmg-stats-filtre-et-short": [
+  "nature-ecologie",
+  "sciences"
+ ],
+ "premiere-commun-stats-filtre-ou": [
+  "art-design"
+ ],
+ "premiere-commun-stats-filtre-ou-short": [
+  "art-design"
+ ],
+ "stmg-stats-filtre-ou": [
+  "art-design"
+ ],
+ "stmg-stats-filtre-ou-short": [
+  "art-design"
+ ],
+ "premiere-commun-stats-filtre-non": [
+  "espace",
+  "sciences"
+ ],
+ "premiere-commun-stats-filtre-non-short": [
+  "espace",
+  "sciences"
+ ],
+ "stmg-stats-filtre-non": [
+  "espace",
+  "sciences"
+ ],
+ "stmg-stats-filtre-non-short": [
+  "espace",
+  "sciences"
+ ],
+ "stmg-stats-ajust-pertinence": [
+  "musique",
+  "transports"
+ ],
+ "stmg-stats-ajust-pertinence-short": [
+  "musique",
+  "transports"
+ ],
+ "stmg-stats-ajust-au-juge": [
+  "argent-budget",
+  "technologie-ia"
+ ],
+ "stmg-stats-ajust-au-juge-short": [
+  "argent-budget",
+  "technologie-ia"
+ ],
+ "stmg-stats-ajust-equation": [
+  "corps-sante",
+  "sciences"
+ ],
+ "stmg-stats-ajust-equation-short": [
+  "corps-sante",
+  "sciences"
+ ],
+ "stmg-stats-ajust-calculer": [
+  "nature-ecologie",
+  "sciences"
+ ],
+ "stmg-stats-ajust-calculer-short": [
+  "nature-ecologie",
+  "sciences"
+ ],
+ "stmg-stats-interpoler": [
+  "histoire-geographie"
+ ],
+ "stmg-stats-interpoler-short": [
+  "histoire-geographie"
+ ],
+ "stmg-stats-extrapoler": [
+  "transports",
+  "nature-ecologie"
+ ],
+ "stmg-stats-extrapoler-short": [
+  "transports",
+  "nature-ecologie"
+ ],
+ "stmg-stats-limites": [
+  "reseaux-sociaux",
+  "technologie-ia"
+ ],
+ "stmg-stats-limites-short": [
+  "reseaux-sociaux",
+  "technologie-ia"
+ ],
+ "stmg-stats-mc-principe": [
+  "argent-budget",
+  "technologie-ia"
+ ],
+ "stmg-stats-mc-principe-short": [
+  "argent-budget",
+  "technologie-ia"
+ ],
+ "stmg-stats-mc-calculer": [
+  "corps-sante"
+ ],
+ "stmg-stats-mc-calculer-short": [
+  "corps-sante"
+ ],
+ "stmg-stats-mc-comparer": [
+  "transports"
+ ],
+ "stmg-stats-mc-comparer-short": [
+  "transports"
+ ],
+ "stmg-stats-cv-appliquer": [
+  "argent-budget",
+  "transports"
+ ],
+ "stmg-stats-cv-appliquer-short": [
+  "argent-budget",
+  "transports"
+ ],
+ "stmg-stats-cv-lire": [
+  "technologie-ia",
+  "sciences"
+ ],
+ "stmg-stats-cv-lire-short": [
+  "technologie-ia",
+  "sciences"
+ ],
+ "stmg-stats-cv-revenir": [
+  "histoire-geographie"
+ ],
+ "stmg-stats-cv-revenir-short": [
+  "histoire-geographie"
+ ],
+ "6e-frac-lire-ecrire": [
+  "nature-ecologie"
+ ],
+ "6e-frac-lire-ecrire-short": [
+  "jeux-video",
+  "jeux-defis"
+ ],
+ "6e-frac-representer": [
+  "art-design"
+ ],
+ "6e-frac-representer-short": [
+  "cuisine",
+  "jeux-defis"
+ ],
+ "6e-frac-egale": [
+  "cuisine"
+ ],
+ "6e-frac-egale-short": [
+  "cuisine",
+  "jeux-defis"
+ ],
+ "6e-frac-decimal": [
+  "sport"
+ ],
+ "6e-frac-decimal-short": [
+  "musique",
+  "technologie-ia"
+ ],
+ "6e-frac-comparer": [
+  "transports"
+ ],
+ "6e-frac-comparer-short": [
+  "jeux-defis",
+  "argent-budget"
+ ],
+ "6e-frac-mixte": [
+  "musique",
+  "technologie-ia"
+ ],
+ "6e-frac-mixte-short": [
+  "animaux",
+  "sciences"
+ ],
+ "6e-frac-defi": [
+  "espace",
+  "sciences"
+ ],
+ "6e-frac-defi-short": [
+  "histoire-geographie",
+  "art-design"
+ ],
+ "6e-frac-quantite": [
+  "musique"
+ ],
+ "6e-frac-additionner": [
+  "sciences"
+ ],
+ "6e-frac-multiplier-entier": [
+  "animaux"
+ ],
+ "6e-frac-calcul-defi": [
+  "sport",
+  "histoire-geographie"
+ ],
+ "6e-frac-pourcentage-fraction": [
+  "jeux-video"
+ ],
+ "6e-frac-pourcentage-fraction-short": [
+  "sport",
+  "jeux-defis"
+ ],
+ "6e-frac-pourcentage-decimal": [
+  "nature-ecologie",
+  "corps-sante"
+ ],
+ "6e-frac-pourcentage-decimal-short": [
+  "argent-budget",
+  "jeux-defis"
+ ],
+ "4e-frac-egale": [
+  "cinema-series",
+  "technologie-ia"
+ ],
+ "4e-frac-egale-short": [
+  "art-design"
+ ],
+ "4e-frac-simplifier": [
+  "nature-ecologie"
+ ],
+ "4e-frac-simplifier-short": [
+  "jeux-defis",
+  "art-design"
+ ],
+ "4e-frac-decimal": [
+  "meteo-climat",
+  "sciences"
+ ],
+ "4e-frac-decimal-short": [
+  "reseaux-sociaux"
+ ],
+ "4e-frac-rationnel": [
+  "sport"
+ ],
+ "4e-frac-rationnel-short": [
+  "jeux-defis"
+ ],
+ "4e-frac-comparer": [
+  "technologie-ia",
+  "transports"
+ ],
+ "4e-frac-comparer-short": [
+  "argent-budget",
+  "cuisine"
+ ],
+ "4e-frac-additionner": [
+  "animaux",
+  "nature-ecologie"
+ ],
+ "4e-frac-additionner-short": [
+  "histoire-geographie",
+  "jeux-defis"
+ ],
+ "4e-frac-multiplier": [
+  "sciences",
+  "nature-ecologie"
+ ],
+ "4e-frac-multiplier-short": [
+  "art-design",
+  "jeux-defis"
+ ],
+ "4e-frac-inverse": [
+  "art-design",
+  "reseaux-sociaux"
+ ],
+ "4e-frac-inverse-short": [
+  "jeux-defis",
+  "cinema-series"
+ ],
+ "4e-frac-diviser": [
+  "corps-sante",
+  "sciences"
+ ],
+ "4e-frac-diviser-short": [
+  "nature-ecologie",
+  "art-design"
+ ],
+ "4e-frac-quantite": [
+  "cinema-series"
+ ],
+ "4e-frac-quantite-short": [
+  "cuisine",
+  "jeux-defis"
+ ],
+ "4e-frac-oppose": [
+  "nature-ecologie",
+  "sciences"
+ ],
+ "4e-frac-oppose-short": [
+  "sport",
+  "jeux-defis"
+ ],
+ "4e-frac-defi": [
+  "corps-sante",
+  "sciences"
+ ],
+ "4e-frac-defi-short": [
+  "reseaux-sociaux",
+  "jeux-defis"
+ ],
+ "5e-frac-egale": [
+  "animaux"
+ ],
+ "5e-frac-egale-short": [
+  "jeux-defis",
+  "art-design"
+ ],
+ "5e-frac-simplifier": [
+  "sport"
+ ],
+ "5e-frac-simplifier-short": [
+  "cuisine",
+  "jeux-defis"
+ ],
+ "5e-frac-rationnel": [
+  "art-design"
+ ],
+ "5e-frac-rationnel-short": [
+  "cuisine",
+  "jeux-defis"
+ ],
+ "5e-frac-comparer": [
+  "animaux",
+  "nature-ecologie"
+ ],
+ "5e-frac-comparer-short": [
+  "animaux",
+  "jeux-defis"
+ ],
+ "5e-frac-oppose": [
+  "sciences",
+  "nature-ecologie"
+ ],
+ "5e-frac-oppose-short": [
+  "animaux",
+  "jeux-defis"
+ ],
+ "5e-frac-additionner": [
+  "musique"
+ ],
+ "5e-frac-additionner-short": [
+  "jeux-defis",
+  "art-design"
+ ],
+ "5e-frac-multiplier": [
+  "nature-ecologie",
+  "art-design"
+ ],
+ "5e-frac-multiplier-short": [
+  "cuisine",
+  "jeux-defis"
+ ],
+ "5e-frac-quantite": [
+  "transports"
+ ],
+ "5e-frac-quantite-short": [
+  "animaux",
+  "corps-sante"
+ ],
+ "5e-frac-calcul-defi": [
+  "argent-budget",
+  "histoire-geographie"
+ ],
+ "5e-frac-calcul-defi-short": [
+  "jeux-video",
+  "jeux-defis"
+ ],
+ "cm1-frac-lire": [
+  "cuisine"
+ ],
+ "cm1-frac-lire-short": [
+  "sciences",
+  "jeux-defis"
+ ],
+ "cm1-frac-representer": [
+  "animaux",
+  "cuisine"
+ ],
+ "cm1-frac-representer-short": [
+  "art-design",
+  "jeux-defis"
+ ],
+ "cm1-frac-droite": [
+  "sport"
+ ],
+ "cm1-frac-droite-short": [
+  "espace"
+ ],
+ "cm1-frac-comparer": [
+  "jeux-video"
+ ],
+ "cm1-frac-comparer-short": [
+  "animaux",
+  "cuisine"
+ ],
+ "cm1-frac-equivalente": [
+  "nature-ecologie"
+ ],
+ "cm1-frac-equivalente-short": [
+  "cuisine",
+  "jeux-defis"
+ ],
+ "cm1-frac-decimale": [
+  "sciences"
+ ],
+ "cm1-frac-decimale-short": [
+  "argent-budget"
+ ],
+ "cm1-frac-defi": [
+  "transports"
+ ],
+ "cm1-frac-defi-short": [
+  "animaux",
+  "jeux-defis"
+ ],
+ "cm1-frac-unite": [
+  "musique"
+ ],
+ "cm1-frac-unite-short": [
+  "espace",
+  "jeux-defis"
+ ],
+ "cm1-frac-superieure-1": [
+  "sport"
+ ],
+ "cm1-frac-superieure-1-short": [
+  "jeux-video",
+  "jeux-defis"
+ ],
+ "cm2-frac-lire": [
+  "cuisine"
+ ],
+ "cm2-frac-lire-short": [
+  "sciences",
+  "jeux-defis"
+ ],
+ "cm2-frac-representer": [
+  "animaux",
+  "cuisine"
+ ],
+ "cm2-frac-representer-short": [
+  "art-design",
+  "jeux-defis"
+ ],
+ "cm2-frac-droite": [
+  "sport"
+ ],
+ "cm2-frac-droite-short": [
+  "espace"
+ ],
+ "cm2-frac-comparer": [
+  "jeux-video"
+ ],
+ "cm2-frac-comparer-short": [
+  "animaux",
+  "cuisine"
+ ],
+ "cm2-frac-equivalente": [
+  "nature-ecologie"
+ ],
+ "cm2-frac-equivalente-short": [
+  "cuisine",
+  "jeux-defis"
+ ],
+ "cm2-frac-decimale": [
+  "sciences"
+ ],
+ "cm2-frac-decimale-short": [
+  "argent-budget"
+ ],
+ "cm2-frac-defi": [
+  "transports"
+ ],
+ "cm2-frac-defi-short": [
+  "animaux",
+  "jeux-defis"
+ ],
+ "cm2-frac-mixte-ecrire": [
+  "technologie-ia",
+  "sciences"
+ ],
+ "cm2-frac-mixte-ecrire-short": [
+  "cuisine",
+  "jeux-defis"
+ ],
+ "cm2-frac-mixte-regrouper": [
+  "corps-sante",
+  "cuisine"
+ ],
+ "cm2-frac-mixte-regrouper-short": [
+  "transports",
+  "jeux-defis"
+ ]
+}

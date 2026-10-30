@@ -113,6 +113,7 @@ import { ficheClasseSource, ficheHrefPourCoach } from "@/lib/fiches/registre";
 import { MarkdownMath } from "@/components/MarkdownMath";
 import BoiteAOutils from "@/components/BoiteAOutils";
 import FloatingCoach from "@/components/FloatingCoach";
+import BandeauPassions from "./BandeauPassions";
 import Image from "next/image";
 
 import { useRouter, useSearchParams } from "next/navigation";
@@ -1932,6 +1933,9 @@ function handleInputKeyDown(
             Question suivante →
           </button>
         ) : null}
+        <div className="mx-auto mt-4 max-w-3xl px-2 print:hidden">
+          <BandeauPassions />
+        </div>
         <div className="flex justify-center print:hidden">
           <FloatingCoach enBas />
         </div>
@@ -1950,6 +1954,9 @@ function handleInputKeyDown(
   >
     <div className="mx-auto max-w-7xl">
        {remediationBanner}
+      <div className="mb-3">
+        <BandeauPassions />
+      </div>
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_340px]">
         {/* ⛔ `min-w-0` : SANS LUI LA PAGE EST PLUS LARGE QUE L'ÉCRAN
             (09/09/2026, signalé par Frédéric — « en mode téléphone l'écran est

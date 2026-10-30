@@ -136,3 +136,113 @@ export const CENTRES_INTERET: CentreInteret[] = [
 ];
 
 export const CENTRE_PAR_ID = new Map(CENTRES_INTERET.map((c) => [c.id, c]));
+
+// ─── L'ICÔNE ET LES PRÉCISIONS, pour que l'ÉLÈVE choisisse (30/10/2026) ───────
+//
+// Frédéric : « quand les élèves se connectent, ce serait bien qu'ils
+// sélectionnent leurs centres d'intérêt » — « mets une icône ou une image »
+// (ses 6e lisent mal) — et « j'ai un élève de 6e qui adore la lutte » : « Sport »
+// est trop large pour accrocher CET élève-là. D'où un deuxième niveau, et une
+// case libre « Autre ». ⭐ Le but : partir de la passion pour amener l'élève,
+// petit à petit, vers les maths (« je faisais des cours sur le rugby à un élève
+// de soutien scolaire : là il comprenait »).
+// Les vidéos restent étiquetées au premier niveau ; une précision (« lutte »)
+// dit à Frédéric quelle vidéo écrire ensuite (tableau /admin/passions).
+
+export type PrecisionCentre = { id: string; nom: string; emoji: string };
+
+export const EMOJI_CENTRE: Record<string, string> = {
+  sport: "⚽",
+  musique: "🎵",
+  animaux: "🐢",
+  "nature-ecologie": "🌋",
+  "meteo-climat": "🌀",
+  espace: "🚀",
+  "jeux-video": "🎮",
+  "jeux-defis": "🧩",
+  "reseaux-sociaux": "📱",
+  "technologie-ia": "🤖",
+  cuisine: "🍳",
+  "cinema-series": "🎬",
+  "corps-sante": "❤️",
+  "argent-budget": "💰",
+  transports: "✈️",
+  "histoire-geographie": "🗺️",
+  "art-design": "🎨",
+  sciences: "🔬",
+};
+
+export const PRECISIONS_CENTRE: Record<string, PrecisionCentre[]> = {
+  sport: [
+    { id: "football", nom: "Football", emoji: "⚽" },
+    { id: "rugby", nom: "Rugby", emoji: "🏉" },
+    { id: "lutte", nom: "Lutte", emoji: "🤼" },
+    { id: "judo-karate-boxe", nom: "Judo, karaté, boxe", emoji: "🥋" },
+    { id: "basket", nom: "Basket", emoji: "🏀" },
+    { id: "handball-volley", nom: "Hand, volley", emoji: "🤾" },
+    { id: "natation", nom: "Natation", emoji: "🏊" },
+    { id: "surf", nom: "Surf, mer", emoji: "🏄" },
+    { id: "course-trail", nom: "Course, trail", emoji: "🏃" },
+    { id: "velo", nom: "Vélo, BMX", emoji: "🚴" },
+    { id: "tennis", nom: "Tennis, badminton", emoji: "🎾" },
+    { id: "danse", nom: "Danse", emoji: "💃" },
+  ],
+  musique: [
+    { id: "rap", nom: "Rap", emoji: "🎤" },
+    { id: "chant", nom: "Chant", emoji: "🎙️" },
+    { id: "instrument", nom: "Jouer d'un instrument", emoji: "🎸" },
+    { id: "maloya-sega", nom: "Maloya, séga", emoji: "🥁" },
+    { id: "electro-dj", nom: "Électro, DJ", emoji: "🎧" },
+  ],
+  animaux: [
+    { id: "chiens-chats", nom: "Chiens et chats", emoji: "🐶" },
+    { id: "chevaux", nom: "Chevaux", emoji: "🐴" },
+    { id: "animaux-marins", nom: "Animaux marins", emoji: "🐋" },
+    { id: "dinosaures", nom: "Dinosaures", emoji: "🦖" },
+  ],
+  "jeux-video": [
+    { id: "construction", nom: "Construction", emoji: "🧱" },
+    { id: "combat-action", nom: "Action, combat", emoji: "⚔️" },
+    { id: "course-auto", nom: "Course auto", emoji: "🏎️" },
+    { id: "foot-console", nom: "Sport sur console", emoji: "🕹️" },
+  ],
+  transports: [
+    { id: "voitures-motos", nom: "Voitures, motos", emoji: "🏍️" },
+    { id: "avions", nom: "Avions", emoji: "🛩️" },
+    { id: "bateaux", nom: "Bateaux", emoji: "⛵" },
+  ],
+  "art-design": [
+    { id: "dessin-manga", nom: "Dessin, manga", emoji: "✏️" },
+    { id: "mode", nom: "Mode", emoji: "👗" },
+    { id: "photo", nom: "Photo", emoji: "📷" },
+  ],
+};
+
+/**
+ * Une passion enregistrée : « sport », « sport:lutte » ou « autre:pétanque ».
+ * Le premier niveau sert à trouver les vidéos ; le reste informe Frédéric.
+ */
+export function centreDePassion(passion: string): string | null {
+  const [centre] = passion.split(":");
+  return CENTRE_PAR_ID.has(centre) ? centre : null;
+}
+
+export function libellePassion(passion: string): { nom: string; emoji: string } {
+  const [centre, precision] = passion.split(":");
+  if (centre === "autre") return { nom: precision ?? "Autre", emoji: "⭐" };
+  const p = precision ? PRECISIONS_CENTRE[centre]?.find((x) => x.id === precision) : null;
+  if (p) return { nom: p.nom, emoji: p.emoji };
+  return { nom: CENTRE_PAR_ID.get(centre)?.nom ?? centre, emoji: EMOJI_CENTRE[centre] ?? "⭐" };
+}
+
+/** Valide une passion envoyée par le navigateur (liste fermée + « autre:» court). */
+export function passionValide(passion: unknown): passion is string {
+  if (typeof passion !== "string" || passion.length > 60) return false;
+  const [centre, precision, ...reste] = passion.split(":");
+  if (reste.length) return false;
+  if (centre === "autre") return !!precision && precision.trim().length >= 2;
+  if (!CENTRE_PAR_ID.has(centre)) return false;
+  return !precision || !!PRECISIONS_CENTRE[centre]?.some((x) => x.id === precision);
+}
+
+export const MAX_PASSIONS = 3;

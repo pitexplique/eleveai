@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { openai } from "@/lib/openai";
+import { libellePassion, passionValide } from "@/lib/videos/centres-interet";
 
 type AccueilChatBody = {
   codeEtablissement?: string;
@@ -9,6 +10,8 @@ type AccueilChatBody = {
   // Derniers échanges du fil (retour élève du 11/06/2026 : sans historique,
   // le coach resaluait et se répétait à chaque message).
   history?: Array<{ role?: string; content?: string }>;
+  /** Ses passions (/passions), ex. « sport:lutte ». */
+  passions?: unknown[];
 };
 
 const OPENAI_MODEL = "gpt-4.1-mini";
@@ -88,6 +91,17 @@ export async function POST(req: Request) {
     // Retour de Gaetan (11/06/2026) : le coach redisait "Salut Gaetan" a chaque
     // message. On l'interdit explicitement des qu'il y a un historique, au lieu
     // de compter sur le modele pour le deviner.
+    // ⭐ SES PASSIONS (30/10/2026). Frédéric : « à un élève de soutien scolaire,
+    // je faisais des cours sur le rugby : là, il comprenait ». Liste fermée
+    // (passionValide) ; seul le court « autre: » vient de ce que l'élève a écrit.
+    const passions = (Array.isArray(body.passions) ? body.passions : [])
+      .filter(passionValide)
+      .slice(0, 3)
+      .map((p) => libellePassion(p).nom);
+    const consignePassions = passions.length
+      ? `L'eleve aime : ${passions.join(", ")}. Quand c'est utile, prends ton exemple dans l'une de ces passions pour expliquer (un vrai exemple chiffre, pas une simple mention).`
+      : "";
+
     const conversationStarted = history.length > 0;
     const consigneSalutation = conversationStarted
       ? "La conversation a DEJA commence : ne dis NI bonjour NI le prenom de l'eleve, reponds directement a sa question."
@@ -109,7 +123,10 @@ export async function POST(req: Request) {
             "Aide sans faire tout le travail a la place de l'eleve.",
             "Si la question demande un exercice precis, invite l'eleve a aller dans « Évaluation annuelle » ou le Coach.",
             "N'utilise pas de LaTeX.",
-          ].join("\n"),
+            consignePassions,
+          ]
+            .filter(Boolean)
+            .join("\n"),
         },
         ...history,
         {
