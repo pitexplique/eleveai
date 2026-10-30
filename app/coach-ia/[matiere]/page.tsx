@@ -591,9 +591,34 @@ export default function CoachIA() {
   const tousDeplies =
     notionsAvecMicrosIds.length > 0 && notionsAvecMicrosIds.every(estDepliee);
 
+  /* ⭐ 30/10/2026 — LES MICROS DU CONTRÔLE SE COCHENT ICI. Frédéric : « au
+     contrôle j'ai fait 3 notions sur 8 dans fractions 6e », puis « la
+     sélection doit se faire dans le coach, qui l'envoie au tutor complet et
+     simple ». Une case par micro (notion dépliée) ; GO part alors avec
+     `?micros=`, et le tutor ne sert plus que celles-là — ses cases, en mode
+     complet, arrivent cochées pareil. */
+  const [microsCochees, setMicrosCochees] = useState<Record<string, string[]>>({});
+
+  function basculerMicroCochee(notionId: string, microId: string) {
+    setMicrosCochees((prev) => {
+      const avant = prev[notionId] ?? [];
+      const ordre = notionMicroMap[notionId] ?? [];
+      const apres = avant.includes(microId)
+        ? avant.filter((id) => id !== microId)
+        : ordre.filter((id) => id === microId || avant.includes(id));
+      return { ...prev, [notionId]: apres };
+    });
+  }
+
   function handleClick(notionId: string, microId: string) {
+    const cochees = microsCochees[notionId] ?? [];
+    // Une micro hors de la sélection ouverte à la main : la sélection ne suit pas.
+    const avecSelection = cochees.length > 0 && cochees.includes(microId);
+    const micros = avecSelection
+      ? `&micros=${encodeURIComponent(cochees.join(","))}`
+      : "";
     router.push(
-      `/coach/serie?classe=${encodeURIComponent(classe)}&matiere=${encodeURIComponent(matiere)}&notion=${encodeURIComponent(notionId)}&microId=${encodeURIComponent(microId)}&${displayParamForClasse(classe)}`
+      `/coach/serie?classe=${encodeURIComponent(classe)}&matiere=${encodeURIComponent(matiere)}&notion=${encodeURIComponent(notionId)}&microId=${encodeURIComponent(microId)}${micros}&${displayParamForClasse(classe)}`
     );
   }
 
@@ -1113,11 +1138,23 @@ export default function CoachIA() {
                               garde sa couleur. */}
                           <button
                             type="button"
-                            onClick={() => handleClick(notionId, micros[0])}
+                            onClick={() =>
+                              handleClick(notionId, (microsCochees[notionId] ?? [])[0] ?? micros[0])
+                            }
                             aria-label={`Commencer : ${libelleNotion(notionId)}`}
+                            title={
+                              microsCochees[notionId]?.length
+                                ? `Seulement les ${microsCochees[notionId].length} séries cochées`
+                                : undefined
+                            }
                             className={[CASE_GO, "rounded-full bg-green-600 font-black tracking-wide text-white shadow-sm transition hover:bg-green-700"].join(" ")}
                           >
                             GO
+                            {microsCochees[notionId]?.length ? (
+                              <span className="rounded-full bg-white/25 px-1 text-[10px]">
+                                {microsCochees[notionId].length}
+                              </span>
+                            ) : null}
                             <Play className="h-3 w-3 fill-current" aria-hidden="true" />
                           </button>
                           {ficheHref ? (
@@ -1177,6 +1214,14 @@ export default function CoachIA() {
                             const microVideos = videosParMicro[microId] ?? [];
                             return (
                             <li key={microId} className="flex items-stretch gap-1">
+                              <input
+                                type="checkbox"
+                                checked={(microsCochees[notionId] ?? []).includes(microId)}
+                                onChange={() => basculerMicroCochee(notionId, microId)}
+                                aria-label={`Cocher pour le contrôle : ${microLabels[microId] || microId}`}
+                                title="Cocher : GO ne posera que les séries cochées"
+                                className="mt-2 h-4 w-4 shrink-0 cursor-pointer accent-green-600"
+                              />
                               <button
                                 type="button"
                                 onClick={() => handleClick(notionId, microId)}
