@@ -68,3 +68,20 @@ Sources (31/10) : douche 12 à 20 L/min selon le pommeau (Castorama ; Kelwatt, P
 ]
 ```
 Question en commentaire : « 250 g de chocolat coûtent 3 €. Combien coûte 1 kg ? » (12 €).
+
+## 6e 05-resoudre (lot 1, rendu le 31/10)
+**Paysage** `6e-prop-resoudre` — 3:23, ceinture verte — centres `sport`, `football`, `argent-budget`
+```json
+[
+  {"t":"01:13","question":"4 ballons coûtent 36 €. Combien coûtent 6 ballons ?","choix":["38 €","54 €","216 €"],"reponse":1,"explication":"1 ballon : 36 ÷ 4 = 9 €. 6 ballons : 6 × 9 = 54 €."},
+  {"t":"02:06","question":"3 gourdes coûtent 12 €. Combien coûtent 9 gourdes ?","choix":["36 €","18 €","21 €"],"reponse":0,"explication":"9 gourdes, c'est 3 fois 3 gourdes. 3 × 12 = 36 €."}
+]
+```
+**Short** `6e-prop-resoudre-short` — 1:23, ceinture blanche — centres `musique`
+```json
+[
+  {"t":"00:50","question":"4 places de concert coûtent 100 €. Et 8 places ?","choix":["104 €","200 €","400 €"],"reponse":1,"explication":"8, c'est le double de 4. Le double de 100 = 200 €."}
+]
+```
+Question en commentaire : « Combien coûtent 10 places, et quel chemin prends-tu ? » (250 €).
+Défauts mineurs connus : les coureurs passent un instant sur le nom de leur chemin ; dans le short, le tableau couvre « Ceinture blanche » pendant la question.
