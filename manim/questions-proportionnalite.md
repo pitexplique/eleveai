@@ -187,3 +187,20 @@ Défauts mineurs connus (short) : « A4 » mord sur le bas de la feuille ; « 68
 Question en commentaire : « Une course de 10 km : combien de cm sur la carte ? » (40 cm).
 Chiffres réels (31/10) : marathon 42,195 km, semi 21,0975 km (World Athletics, Wikipédia).
 Défauts mineurs connus : « 1/50 000 » (écran 06) s'affiche 1,2 s après le « 1 » dit ; étiquettes « × 25 000 » proches de leur flèche ; short : le cadre de la carte finale mord sur « Ceinture blanche ». L'audit ne contrôle pas les grands nombres à espace (« 25 000 » sort en AUDIT-ABSENT).
+
+## 6e 13-pourcentage-calcul (lot 3, rendu le 31/10)
+**Paysage** `6e-prop-pourcentage-calcul` — 3:15, ceinture verte — centres `velo`, `argent-budget`
+```json
+[
+  {"t":"00:42","question":"Combien font 10 % de 150 € ?","choix":["15 €","140 €","1 500 €"],"reponse":0,"explication":"150 ÷ 10 = 15 €."},
+  {"t":"01:47","question":"Un casque coûte 40 €. Combien font 25 % de 40 € ?","choix":["15 €","25 €","10 €"],"reponse":2,"explication":"25 %, c'est le quart : 40 ÷ 4 = 10 €."}
+]
+```
+**Short** `6e-prop-pourcentage-calcul-short` — 0:52, ceinture blanche — centres `jeux-defis`
+```json
+[
+  {"t":"00:23","question":"10 % de 70 ?","choix":["7","60","700"],"reponse":0,"explication":"70 ÷ 10 = 7."}
+]
+```
+Question en commentaire : « Combien font 20 % de 70 ? » (14).
+Défauts mineurs connus : short, le titre « 10 % en 1 seconde » disparaît à partir de la question ; paysage, les « 8 € » écrits dans la grille sont petits. `BarrePourcent` : passer `etiquette=False` (l'étiquette n'attend pas la voix) ; `remplir()` ne fait qu'une couleur → `.grille.colorier(…)` par rangée.
