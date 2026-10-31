@@ -116,7 +116,7 @@ const outils = [
   { label: "Calcul rapide", href: "/calcul-rapide" },
   { label: "Tables de multiplication à imprimer", href: "/tables-de-multiplication" },
   { label: "English Maths", href: "/english-maths" },
-  { label: "Défis du jour", href: "/defis-du-jour" },
+  // « Défis du jour » retiré d'ici le 31/10/2026 : il est déjà dans les rituels du jour, en tête du pied de page.
   { label: "Cartes de révision", href: "/cahier-vacances-cartes" },
   { label: "Qui suis-je ? à imprimer", href: "/qui-suis-je-a-imprimer" },
   { label: "Concours général", href: "/concours-general" },
@@ -242,8 +242,11 @@ const mathsClasses = [
   { label: "4e", slug: "4e" },
   { label: "3e", slug: "3e" },
   { label: "Seconde", slug: "seconde" },
+  // 31/10/2026 : la 1re sans spé et la STMG ont leur coach, elles manquaient ici.
+  { label: "Première", slug: "premiere" },
   { label: "Première Spé", slug: "premiere-spe" },
   { label: "Terminale Spé", slug: "terminale-spe" },
+  { label: "STMG", slug: "stmg" },
 ];
 
 const francaisClasses = [
