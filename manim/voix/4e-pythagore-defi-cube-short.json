@@ -1,5 +1,7 @@
 {
   "00-accroche": "Le défi du cube. Combien de triangles rectangles ?",
   "01-image": "Un cube. Trois sommets : un triangle. Celui-ci a un angle droit. Celui-là aussi. Et celui-là ?",
+  "01q-question": "Question ! Trois sommets d'une même face, comme A, B et C. Le triangle a-t-il un angle droit ? A : oui, en B. B : non. C : oui, en A. Mets pause, et choisis !",
+  "01r-reponse": "Réponse A : oui, en B. AB et BC sont deux arêtes de la face.",
   "02-question": "Combien de triangles rectangles se cachent dans un cube ? Réponds en commentaire !"
 }

@@ -9,6 +9,14 @@
 # Les comptes, vérifiés par le calcul : 56 triangles = 24 sur les faces (1, 1, 2)
 # + 24 en biais (1, 2, 3) + 8 équilatéraux (2, 2, 2).
 #
+# ⭐ 31/10/2026 : refonte « questions-pauses » (manim/questions-pythagore.md, Ép. 8) :
+# paysage Q1 entre 01-cube et 02-faces (4 par face), Q2 entre 03-biais et 04-total (48),
+# compte à rebours de 5 s, le cube reste à gauche pendant la question ; fin du 19/10 ;
+# short : 1 question-pause après 01-image (3 s). Module commun : pythagore_pauses.py.
+# Marques mot à mot : 4e-pythagore-defi-cube[-short].marques.json (ici). Avant tout rendu :
+#   AUDIT=1 BORDS=1 python -m manim render --dry_run manim/scripts/4e/pythagore_defi_cube.py DefiCube4e
+#   AUDIT=1 BORDS=1 python -m manim render --dry_run -r 1080,1920 manim/scripts/4e/pythagore_defi_cube.py DefiCubeShort4e
+#
 # Deux scènes : la paysage (la correction) et le short (la question seule, publié AVANT).
 # Voix : manim/voix/4e-pythagore-defi-cube.json et 4e-pythagore-defi-cube-short.json.
 # Rendu paysage : python -m manim render -qh --disable_caching manim/scripts/4e/pythagore_defi_cube.py DefiCube4e -o eleveai-maths-4e-pythagore-defi-cube --media_dir manim/scripts/4e/media
@@ -30,6 +38,7 @@ from manim import *  # noqa: E402
 from charte import *  # noqa: E402
 from gabarit_sixieme import Short6e  # noqa: E402
 from signes_expression_2de import ceinture, echelle_ceintures  # noqa: E402
+from pythagore_pauses import PausesPaysage, PausesShort, sans_audit  # noqa: E402
 
 ROUGE_TRI = "#EF4444"
 SOMMETS = {"A": (0, 0, 0), "B": (1, 0, 0), "C": (1, 1, 0), "D": (0, 1, 0),
@@ -88,17 +97,18 @@ class _Cube:
                        fill_color=couleur, fill_opacity=0.35)
 
 
-class DefiCube4e(_Cube, Notion4e):
+class DefiCube4e(PausesPaysage, _Cube, Notion4e):
     nom_voix = "4e-pythagore-defi-cube"
 
     def t(self, texte, font_size=34, color=WHITE):
         return Text(texte, font_size=font_size, color=color)
 
-    def compteur(self, n, libelle="triangles rectangles", couleur=ROUGE_TRI, x=-3.6, taille=64):
-        return VGroup(self.t(str(n), taille, couleur), self.t(libelle, 30, couleur)).arrange(RIGHT, buff=0.3) \
-            .move_to(P(x, -3.25))
+    def compteur(self, n, libelle="triangles rectangles", couleur=ROUGE_TRI, x=-3.4, taille=64):
+        # (31/10) le compteur se LIT (il n'est pas dit nombre par nombre) : hors audit.
+        return sans_audit(VGroup(self.t(str(n), taille, couleur), self.t(libelle, 30, couleur))
+                          .arrange(RIGHT, buff=0.3).move_to(P(x, -3.1)))  # 31/10 : marge du bas
 
-    def defiler(self, triangles, debut, duree, couleur=ROUGE_TRI, libelle="triangles rectangles", x=-3.6):
+    def defiler(self, triangles, debut, duree, couleur=ROUGE_TRI, libelle="triangles rectangles", x=-3.4):
         """Chaque triangle remplace le précédent ; le compteur avance d'un cran."""
         for k, t in enumerate(triangles):
             nouveau = self.tri(t, couleur)
@@ -129,6 +139,36 @@ class DefiCube4e(_Cube, Notion4e):
         self.play(FadeIn(echelle_ceintures("orange").move_to(P(-0.6, -2.4))))
         self.attendre_voix(marge=1.5)
 
+    # ── (31/10) les questions-pauses : le cube reste à gauche, la question à droite ─
+
+    def remettre_cube(self, traits, lettres, *autres):
+        """Après une question (écran effacé) : le cube revient tel qu'il était."""
+        self.clear()
+        self.add_mascotte(scale=0.45)
+        self.add(traits, lettres, *autres)
+
+    def question_etroite(self, *a, **k):
+        """La colonne de la question un peu plus étroite (x = 2,6, largeur 5,6) : la phrase
+        verte ne passe pas sur Ti-Margo. Réglage d'instance ; le module commun n'est pas touché."""
+        self.LARG = 5.6
+        try:
+            return self.ecran_question(*a, x_col=2.6, **k)
+        finally:
+            del self.LARG
+
+    def question_face(self, traits, lettres):
+        self.question_etroite("01q-question", "01r-reponse",
+                            ["Sur une seule face carrée,", "combien de triangles", "rectangles ?"],
+                            ["2", "4", "6"], 1, ["On enlève un sommet sur quatre :", "4 façons."],
+                            figure=VGroup(traits, lettres))
+        self.remettre_cube(traits, lettres)
+
+    def question_total(self, traits, lettres):
+        self.question_etroite("03q-question", "03r-reponse",
+                            ["Alors, combien de triangles", "rectangles en tout ?"],
+                            ["24", "48", "56"], 1, [], figure=VGroup(traits, lettres))
+        self.remettre_cube(traits, lettres, self.cpt)
+
     # ── le déroulé sur UN même écran : le cube reste, les triangles défilent ─
 
     def construct(self):
@@ -143,10 +183,9 @@ class DefiCube4e(_Cube, Notion4e):
         self.cpt = self.compteur(0)
         xr = 2.9
 
-        # 01 : le cube
+        # 01 : le cube — (31/10) le cube et ses lettres ensemble : « On choisit » arrive vite
         self.dire("01-cube")
-        self.play(Create(traits), run_time=1.6)
-        self.play(FadeIn(lettres))
+        self.play(Create(traits), FadeIn(lettres), run_time=1.2)
         self.au_mot("On choisit trois")
         exemple = self.tri("ACH", BLEU_CALCUL)
         self.play(FadeIn(exemple))
@@ -155,36 +194,50 @@ class DefiCube4e(_Cube, Notion4e):
         q = self.t("Combien ont un angle droit ?", 34, BLEU_CALCUL).move_to(P(xr, 2.2))
         self.play(FadeIn(q))
         self.attendre_voix()
+        self.question_face(traits, lettres)
 
-        # 02 : les faces
+        # 02 : les faces — (31/10) chaque nombre À SON MOT (marques) ; la numérotation
+        # « 1. » et « 2 arêtes + 1 diagonale » (dites « Première », « deux… une ») hors audit.
         self.dire("02-faces")
-        self.play(FadeOut(q))
-        panneau1 = VGroup(self.t("1. Sur les faces", 38, JAUNE_TITRE).move_to(P(xr, 2.2)))
+        panneau1 = VGroup(sans_audit(self.t("1. Sur les faces", 38, JAUNE_TITRE).move_to(P(xr, 2.2))))
         self.play(FadeIn(panneau1[0]), FadeIn(self.cpt))
         self.au_mot("deux arêtes et une diagonale")
-        panneau1.add(self.t("2 arêtes + 1 diagonale de face", 28).move_to(P(xr, 1.5)))
+        panneau1.add(sans_audit(self.t("2 arêtes + 1 diagonale de face", 28).move_to(P(xr, 1.5))))
         self.play(FadeIn(panneau1[1]))
         self.au_mot("Une face en contient 4")
-        self.defiler(faces[:4], 1, 0.5)
+        self.defiler(faces[:3], 1, 0.3)
+        self.au_nb("contient 4")
         panneau1.add(self.t("4 par face", 30, ROUGE_TRI).move_to(P(xr, 0.8)))
-        self.play(FadeIn(panneau1[2]))
-        self.au_mot("Le cube a 6 faces")
-        self.defiler(faces[4:], 5, 0.2)
-        panneau1.add(self.t("6 × 4 = 24", 44, ROUGE_TRI).move_to(P(xr, 0.0)))
-        self.play(FadeIn(panneau1[3]))
+        self.play(FadeIn(panneau1[2]), run_time=0.3)
+        self.defiler(faces[3:4], 4, 0.3)
+        six, fois4, egal = (self.t(x, 44, ROUGE_TRI) for x in ("6", "× 4", "= 24"))
+        VGroup(six, fois4, egal).arrange(RIGHT, buff=0.2).move_to(P(xr, 0.0))
+        panneau1.add(six, fois4, egal)
+        self.au_nb("Le cube a 6")
+        self.defiler(faces[4:10], 5, 0.12)
+        self.au_mot("6 fois 4")
+        self.play(FadeIn(six), run_time=0.2)
+        self.au_nb("6 fois 4")
+        self.play(FadeIn(fois4), run_time=0.2)
+        self.defiler(faces[10:17], 11, 0.1)
+        self.au_nb("4, 24")
+        self.play(FadeIn(egal), run_time=0.25)
+        self.defiler(faces[17:], 18, 0.1)
         self.attendre_voix()
 
-        # 03 : en biais — le panneau des faces se range en une ligne de résumé
+        # 03 : en biais — le panneau des faces se range en une ligne de résumé (rappel : hors audit)
         self.dire("03-biais")
-        resume1 = self.t("sur les faces : 24", 28, ROUGE_TRI).move_to(P(xr, 2.75))
+        resume1 = sans_audit(self.t("sur les faces : 24", 28, ROUGE_TRI).move_to(P(xr, 2.75)))
         self.play(FadeOut(self.courant), ReplacementTransform(panneau1, resume1))
         self.courant = None
-        panneau2 = VGroup(self.t("2. En biais", 38, JAUNE_TITRE).move_to(P(xr, 2.05)))
+        panneau2 = VGroup(sans_audit(self.t("2. En biais", 38, JAUNE_TITRE).move_to(P(xr, 2.05))))
         self.play(FadeIn(panneau2[0]))
         self.au_mot("Une arête, une diagonale de face")
-        panneau2.add(self.t("1 arête + 1 diagonale de face", 26).move_to(P(xr, 1.45)),
-                     self.t("+ 1 grande diagonale", 26).move_to(P(xr, 1.0)))
-        self.play(FadeIn(panneau2[1]), FadeIn(panneau2[2]))
+        panneau2.add(sans_audit(self.t("1 arête + 1 diagonale de face", 26).move_to(P(xr, 1.45))),
+                     sans_audit(self.t("+ 1 grande diagonale", 26).move_to(P(xr, 1.0))))
+        self.play(FadeIn(panneau2[1]))
+        self.au_mot("et la grande diagonale")
+        self.play(FadeIn(panneau2[2]))
         self.au_mot("Par exemple ABG")
         abg = self.tri("ABG")
         self.play(FadeIn(abg), Transform(self.cpt, self.compteur(25)))
@@ -195,50 +248,76 @@ class DefiCube4e(_Cube, Notion4e):
         self.au_mot("l'angle en B est droit")
         rond = Circle(radius=0.3, color=BLEU_CALCUL, stroke_width=5).move_to(self.pt("B"))
         self.play(Create(rond), FadeIn(self.t("angle droit en B", 28, BLEU_CALCUL).move_to(P(xr, 0.3))))
-        self.au_mot("La réciproque le confirme")
-        verif = VGroup(self.t("AG² = 3", 32, ORANGE_RETENUE), self.t("AB² + BG² = 1 + 2 = 3", 32, BLEU_CALCUL))             .arrange(DOWN, buff=0.15).move_to(P(xr, -0.7))
-        self.play(FadeIn(verif))
+        # (31/10) la vérification morceau par morceau, chaque nombre quand il est dit
+        ag = self.t("AG² = 3", 32, ORANGE_RETENUE)
+        ab2, un1, plus2, eg3 = (self.t(x, 32, BLEU_CALCUL) for x in ("AB² + BG²", "= 1", "+ 2", "= 3"))
+        l2 = VGroup(ab2, un1, plus2, eg3).arrange(RIGHT, buff=0.15)
+        VGroup(ag, l2).arrange(DOWN, buff=0.15).move_to(P(xr, -0.7))
+        self.au_nb("vaut 3")
+        self.play(FadeIn(ag), run_time=0.3)
+        self.au_mot("et AB au carré")
+        self.play(FadeIn(ab2), run_time=0.3)
+        self.au_mot("1 plus 2")
+        self.play(FadeIn(un1), run_time=0.2)
+        self.au_nb("1 plus 2")
+        self.play(FadeIn(plus2), run_time=0.2)
+        self.au_nb("aussi 3")
+        self.play(FadeIn(eg3), run_time=0.3)
         self.au_mot("Il y en a 24")
-        self.play(FadeOut(face), FadeOut(rond), FadeOut(ab))
+        self.play(FadeOut(face), FadeOut(rond), FadeOut(ab), run_time=0.4)
         self.courant = abg
-        self.defiler(biais[1:], 26, 0.2)
+        self.defiler(biais[1:], 26, 0.15)
         self.attendre_voix()
-
-        # 04 : le total — le panneau de droite se vide
-        self.dire("04-total")
-        a_effacer = [m for m in self.mobjects if isinstance(m, (Text, VGroup)) and m is not self.cpt
-                     and m is not lettres and m is not traits and m.get_center()[0] > 0.5 and m.get_center()[1] > -2.8]
-        self.play(FadeOut(self.courant), *[FadeOut(m) for m in a_effacer])
         self.courant = None
-        bilan = VGroup(self.t("sur les faces : 24", 34, ROUGE_TRI), self.t("en biais : 24", 34, ROUGE_TRI),
-                       self.t("24 + 24 = 48", 56, VERT_OK)).arrange(DOWN, buff=0.35).move_to(P(xr, 0.8))
-        self.play(FadeIn(bilan[0]), FadeIn(bilan[1]))
-        self.play(Write(bilan[2]), self.cpt.animate.scale(1.2))
-        self.play(Circumscribe(bilan[2], color=VERT_OK))
+        self.question_total(traits, lettres)  # (31/10) l'écran est effacé : le panneau de droite est vide
+
+        # 04 : le total — (31/10) chaque 24, puis le 48, à son mot
+        self.dire("04-total")
+        f24, b24 = self.t("sur les faces : 24", 34, ROUGE_TRI), self.t("en biais : 24", 34, ROUGE_TRI)
+        somme, e48 = self.t("24 + 24", 56, VERT_OK), self.t("= 48", 56, VERT_OK)
+        total = VGroup(somme, e48).arrange(RIGHT, buff=0.25)
+        bilan = VGroup(f24, b24, total).arrange(DOWN, buff=0.35).move_to(P(xr, 0.8))
+        self.au_nb("24")
+        self.play(FadeIn(f24), run_time=0.3)
+        self.au_nb("plus 24")
+        self.play(FadeIn(b24), FadeIn(somme), run_time=0.3)
+        self.au_nb("24 : 48")
+        self.play(Write(e48), self.cpt.animate.scale(1.15), run_time=0.5)
+        self.play(Circumscribe(total, color=VERT_OK))
         self.attendre_voix()
 
         # 05 : le piège, les équilatéraux — leur compteur à droite, l'autre reste à 48
         self.dire("05-piege")
-        self.play(FadeOut(bilan[0]), FadeOut(bilan[1]), bilan[2].animate.scale(0.6).move_to(P(xr, 2.6)))
+        self.play(FadeOut(f24), FadeOut(b24), total.animate.scale(0.6).move_to(P(xr, 2.6)))
         self.au_mot("trois diagonales de faces")
         self.cpt_rect = self.cpt
         self.cpt = self.compteur(0, "équilatéraux", ORANGE_RETENUE, x=3.4, taille=48)
-        self.play(FadeIn(self.cpt))
-        self.defiler(equi, 1, 0.35, couleur=ORANGE_RETENUE, libelle="équilatéraux", x=3.4)
+        self.play(FadeIn(self.cpt), run_time=0.3)
+        self.defiler(equi[:4], 1, 0.3, couleur=ORANGE_RETENUE, libelle="équilatéraux", x=3.4)
         self.au_mot("aucun angle droit")
-        self.play(FadeIn(self.t("équilatéral : aucun angle droit", 30, ORANGE_RETENUE).move_to(P(xr, 1.4))))
-        self.au_mot("En tout, 56")
-        self.play(FadeOut(self.courant), Write(self.t("56 = 48 + 8", 52, JAUNE_TITRE).move_to(P(xr, 0.2))))
+        self.play(FadeIn(self.t("équilatéral : aucun angle droit", 30, ORANGE_RETENUE).move_to(P(xr, 1.4))),
+                  run_time=0.4)
+        self.defiler(equi[4:], 5, 0.25, couleur=ORANGE_RETENUE, libelle="équilatéraux", x=3.4)
+        e56, e48b, e8 = (self.t(x, 52, JAUNE_TITRE) for x in ("56", "= 48", "+ 8"))
+        VGroup(e56, e48b, e8).arrange(RIGHT, buff=0.2).move_to(P(xr, 0.2))
+        self.au_nb("En tout, 56")
+        self.play(FadeOut(self.courant), FadeIn(e56), run_time=0.3)
+        self.au_nb("48 rectangles")
+        self.play(FadeIn(e48b), run_time=0.3)
+        self.au_nb("et 8")
+        self.play(FadeIn(e8), run_time=0.3)
         self.attendre_voix()
 
         # 06 : la fin
         self.dire("06-fin")
+        # (31/10) les deux compteurs s'effacent : la phrase du bas passait dessus
+        self.play(FadeOut(self.cpt), FadeOut(self.cpt_rect), run_time=0.3)
         self.play(Write(self.chute("Tu en avais trouvé combien ? Dis-le en commentaire !", color=VERT_OK, font_size=30)))
         self.attendre_voix(marge=1.0)
         self.page_abonnement(voix="07-abonne")
 
 
-class DefiCubeShort4e(_Cube, Short6e):
+class DefiCubeShort4e(PausesShort, _Cube, Short6e):
     nom_voix = "4e-pythagore-defi-cube-short"
 
     def construct(self):
@@ -288,18 +367,25 @@ class DefiCubeShort4e(_Cube, Short6e):
             courant = tri
         self.attendre_voix(marge=0.6)
 
+        # ── 01q : la question-pause (3 s) ──
+        self.ecran_question("01q-question", "01r-reponse",
+                            ["Trois sommets d'une même face,", "comme A, B et C.", "Le triangle a-t-il un angle droit ?"],
+                            ["oui, en B", "non", "oui, en A"], 0, ["AB et BC sont deux arêtes", "de la face."])
+
         self.clear()
         self.margo_bas()
         self.dire("02-question")
-        self.play(Write(self.grand("À toi !", font_size=52, color=JAUNE_TITRE).move_to(P(0, 2.8))))
         self.origine, self.arete = P(-0.75, -0.05), 1.3
         traits, lettres = self.dessiner_cube(font_size=20)
         self.add(traits, lettres)
+        # (31/10) « Combien » est le premier mot : titre et question paraissent ensemble
         self.au_mot("Combien de triangles")
-        self.play(FadeIn(self.grand("Combien de triangles", font_size=32, color=BLEU_CALCUL).move_to(P(0, -0.75))),
-                  FadeIn(self.grand("rectangles dans un cube ?", font_size=32, color=BLEU_CALCUL).move_to(P(0, -1.2))))
+        self.play(Write(self.grand("À toi !", font_size=52, color=JAUNE_TITRE).move_to(P(0, 2.8))),
+                  FadeIn(self.grand("Combien de triangles", font_size=32, color=BLEU_CALCUL).move_to(P(0, -0.75))),
+                  FadeIn(self.grand("rectangles dans un cube ?", font_size=32, color=BLEU_CALCUL).move_to(P(0, -1.2))),
+                  run_time=0.8)
         self.au_mot("Réponds en commentaire")
         rep = VGroup(self.grand("en commentaire !", font_size=34, color=VERT_OK),
-                     self.grand("@eleveai974", font_size=34, color=BLEU_CALCUL)).arrange(DOWN, buff=0.12)
+                     sans_audit(self.grand("@eleveai974", font_size=34, color=BLEU_CALCUL))).arrange(DOWN, buff=0.12)
         self.play(FadeIn(rep.move_to(P(0, -2.0))))
         self.attendre_voix(marge=1.5)

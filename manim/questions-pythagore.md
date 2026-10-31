@@ -34,6 +34,7 @@ Finale à corriger : « … Alors l'épisode 2 t'attend : reconnaître l'hypoté
   - r : « Réponse B : 9. 3 au carré, c'est 3 fois 3. »
 
 ## Ép. 2 — Reconnaître l'hypoténuse (`4e-pythagore-reconnaitre`, micro `pythagore_reconnaitre`)
+✅ RENDU 31/10 : paysage 3:02 (Q1 t=00:58, Q2 t=01:38), short 0:55 (Q t=00:18).
 Finale à corriger : « … Alors l'épisode 3 t'attend : calculer l'hypoténuse. »
 **Paysage**
 - Q1 après `04-methode` :
@@ -121,6 +122,7 @@ Finale à corriger : « … Alors l'épisode 3 t'attend : calculer l'hypoténuse
   - r : « Réponse B : la réciproque. On cherche l'angle droit. »
 
 ## Ép. 8 — Défi du cube (`4e-pythagore-defi-cube`, micro `pythagore_defi`, ceinture orange)
+✅ RENDU 31/10 : paysage 2:32 (Q1 t=00:20, Q2 t=01:32), short 0:49 (Q t=00:16).
 **Paysage**
 - Q1 entre `01-cube` et `02-faces` :
   - q : « Question ! Sur une seule face carrée, combien de triangles rectangles ? A : 2. B : 4. C : 6. Mets pause, et choisis ! »

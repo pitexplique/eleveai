@@ -14,7 +14,16 @@
 # faire ». Page de garde = le nom de la notion + sa question ; puis l'échelle.
 # Le bilan « Ce que tu sais faire maintenant » est à la FIN, en questions.
 #
-# Voix : manim/voix/4e-pythagore-reconnaitre.json (Julie, débit −7).
+# ⭐ 31/10/2026 : refonte « questions-pauses » (manim/questions-pythagore.md, Ép. 2) :
+# Q1 après 04-methode (MNP rectangle en N), Q2 après 05-tourne (la rampe de skate),
+# compte à rebours de 5 s ; finale « Ce que tu as appris » vers l'épisode 3 ; fin du 19/10.
+# Module commun : pythagore_pauses.py (le mixin n'est QUE sur PythagoreReconnaitre4e :
+# Notion4e, P et echelle_ceintures, importés par toute la série, sont inchangés).
+# Marques mot à mot : 4e-pythagore-reconnaitre.marques.json (ici). Avant tout rendu :
+#   AUDIT=1 BORDS=1 python -m manim render --dry_run manim/scripts/4e/pythagore_reconnaitre.py PythagoreReconnaitre4e
+#
+# Voix : manim/voix/4e-pythagore-reconnaitre.json (Julie, débit −7) ;
+# clés 04q/04r/05q/05r, 08-finale et 09-abonne ajoutées ou changées le 31/10.
 # Rendu : python -m manim render -qh --disable_caching manim/scripts/4e/pythagore_reconnaitre.py PythagoreReconnaitre4e -o eleveai-maths-4e-pythagore-reconnaitre --media_dir manim/scripts/4e/media
 # Puis copier le mp4 dans manim/sorties/4e/maths/pythagore/01-hypotenuse/ (la série a SON dossier, 12/10).
 # En ligne : https://youtu.be/TBM5bum-xj4
@@ -34,6 +43,9 @@ from gabarit_sixieme import Notion6e
 from gabarit_trigo import COUL_HYP
 from signes_expression_2de import echelle_ceintures
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from pythagore_pauses import PausesPaysage, sans_audit  # noqa: E402
+
 COUL_DROIT = BLEU_CALCUL  # l'angle droit, comme dans le short
 
 
@@ -45,7 +57,7 @@ def P(x, y):
     return np.array([x, y, 0.0])
 
 
-class PythagoreReconnaitre4e(Notion4e):
+class PythagoreReconnaitre4e(PausesPaysage, Notion4e):
     nom_voix = "4e-pythagore-reconnaitre"
 
     def t(self, texte, font_size=34, color=WHITE):
@@ -80,7 +92,7 @@ class PythagoreReconnaitre4e(Notion4e):
     def case_et_echelle(self):
         """La case créole, le sol et l'échelle. A au pied du mur, C en haut, B au pied de l'échelle."""
         A, B, C = P(-3.2, -2.2), P(-0.4, -2.2), P(-3.2, 1.4)
-        sol = Line(P(-6.8, -2.2), P(1.4, -2.2), color=GRAY_B, stroke_width=5)
+        sol = Line(P(-6.5, -2.2), P(1.4, -2.2), color=GRAY_B, stroke_width=5)  # 31/10 : marge de 3 %
         mur = Rectangle(width=3.0, height=3.9, stroke_color=WHITE, stroke_width=3,
                         fill_color="#14B8A6", fill_opacity=0.35).move_to(P(-4.7, -0.25))
         toit = Polygon(P(-6.5, 1.7), P(-2.9, 1.7), P(-4.7, 3.1), stroke_color=WHITE, stroke_width=3,
@@ -175,6 +187,11 @@ class PythagoreReconnaitre4e(Notion4e):
         self.play(Circumscribe(nom, color=COUL_HYP))
         self.attendre_voix()
 
+    def titre(self, texte):
+        """(31/10) Le titre d'écran SANS animation propre : il paraît avec le dessin, pour que
+        les premiers mots de la voix ne soient pas en retard (titre_ecran joue 1 s de Write)."""
+        return sans_audit(Text(texte, font_size=40, color=JAUNE_TITRE).to_edge(UP))
+
     # ── 03 : la définition ──────────────────────────────────────────────────
 
     def ecran_definition(self):
@@ -201,7 +218,7 @@ class PythagoreReconnaitre4e(Notion4e):
         for i, (seg, lg) in enumerate(cotes):
             cible = Line(P(x0, y0 - 0.55 * i), P(x0 + lg, y0 - 0.55 * i),
                          color=seg.get_color(), stroke_width=seg.get_stroke_width())
-            self.play(ReplacementTransform(seg, cible), run_time=0.8)
+            self.play(ReplacementTransform(seg, cible), run_time=0.5)
         self.play(Write(self.t("le plus long des trois", 34, COUL_HYP).move_to(P(3.5, -2.0))))
         self.attendre_voix()
 
@@ -211,21 +228,24 @@ class PythagoreReconnaitre4e(Notion4e):
         self.clear()
         self.add_mascotte()
         self.dire("04-methode")
-        self.titre_ecran("Trouver l'hypoténuse")
         A, B, C = P(-5.4, -1.8), P(-1.4, -1.8), P(-5.4, 1.2)
         contour, carre, hyp, lab = self.tri_rect(A, B, C, lettres="ABC")
-        self.play(Create(contour), FadeIn(lab))
+        # (31/10) « Un : » est le PREMIER mot : titre, triangle et étape 1 ensemble.
         self.au_mot("Un : je repère")
-        e1 = self.t("1. Je repère l'angle droit.", 32).move_to(P(3.1, 1.8))
-        self.play(FadeIn(e1), GrowFromCenter(carre))
-        self.play(Indicate(carre, color=COUL_DROIT, scale_factor=1.8))
+        e1 = sans_audit(self.t("1. Je repère l'angle droit.", 32)).move_to(P(3.1, 1.8))
+        self.play(FadeIn(self.titre("Trouver l'hypoténuse")), Create(contour), FadeIn(lab), FadeIn(e1),
+                  run_time=0.6)
+        self.au_mot("petit carré")
+        self.play(GrowFromCenter(carre), run_time=0.4)
+        self.play(Indicate(carre, color=COUL_DROIT, scale_factor=1.8), run_time=0.8)
         self.au_mot("Deux : je prends")
-        e2 = self.t("2. Le côté qui ne le touche pas.", 32).move_to(P(3.1, 1.0))
-        self.play(FadeIn(e2))
+        e2 = sans_audit(self.t("2. Le côté qui ne le touche pas.", 32)).move_to(P(3.1, 1.0))
+        self.play(FadeIn(e2), run_time=0.4)
+        self.au_mot("qui ne touche pas")
         touche = VGroup(Line(A, B), Line(A, C)).set_stroke(GRAY_B, 8)
-        self.play(Create(touche))
-        self.play(FadeOut(touche))
-        self.play(Create(hyp))
+        self.play(Create(touche), run_time=0.6)
+        self.play(FadeOut(touche), run_time=0.4)
+        self.play(Create(hyp), run_time=0.6)
         self.au_mot("rectangle en A")
         r = self.t("ABC rectangle en A", 34, BLEU_CALCUL).move_to(P(3.1, -0.1))
         self.play(FadeIn(r))
@@ -237,13 +257,37 @@ class PythagoreReconnaitre4e(Notion4e):
         self.play(Circumscribe(res, color=VERT_OK))
         self.attendre_voix()
 
+    # ── 04q : question-pause 1 (le côté sans la lettre de l'angle droit) ────
+
+    def question_etroite(self, *a, ecart=None, **k):
+        """(31/10) La colonne de la question un peu plus étroite (x = 2,6, largeur 5,6) :
+        la phrase verte ne passe plus sur Ti-Margo (coin bas-droit). Réglages d'instance,
+        rendus ensuite ; le module commun n'est pas touché."""
+        self.LARG = 5.6
+        if ecart is not None:
+            self.ECART = ecart
+        try:
+            return self.ecran_question(*a, x_col=2.6, **k)
+        finally:
+            del self.LARG
+            if ecart is not None:
+                del self.ECART
+
+    def question_mnp(self):
+        N, M, Pp = P(-4.6, -1.7), P(-4.6, 1.3), P(-0.9, -1.7)
+        contour, carre, _, lab = self.tri_rect(N, M, Pp, lettres="NMP")
+        self.question_etroite("04q-question", "04r-reponse",
+                            ["MNP est rectangle en N.", "Quelle est son hypoténuse ?"],
+                            ["[MN]", "[MP]", "[NP]"], 1,
+                            ["Rectangle en N : je prends", "le côté sans la lettre N."],
+                            figure=VGroup(contour, carre, sans_audit(lab)))
+
     # ── 05 : le triangle tourné ─────────────────────────────────────────────
 
     def ecran_tourne(self):
         self.clear()
         self.add_mascotte()
         self.dire("05-tourne")
-        self.titre_ecran("Piège 1 : le triangle est tourné")
         # Trois triangles rectangles ; l'hypoténuse en haut, à droite, en biais.
         tris = [
             (P(-4.6, -1.6), P(-6.1, -0.1), P(-3.1, -0.1)),   # angle droit en bas : hypoténuse en HAUT
@@ -251,7 +295,8 @@ class PythagoreReconnaitre4e(Notion4e):
             (P(3.0, -0.2), P(4.6, 1.4), P(4.6, -1.8)),       # hypoténuse VERTICALE
         ]
         objets = [self.tri_rect(*sommets) for sommets in tris]
-        self.play(*[Create(o[0]) for o in objets])
+        self.play(FadeIn(self.titre("Piège 1 : le triangle est tourné")), *[Create(o[0]) for o in objets],
+                  run_time=0.8)
         self.au_mot("Peu importe")
         for contour, carre, hyp, _ in objets:
             self.play(GrowFromCenter(carre), run_time=0.5)
@@ -261,20 +306,38 @@ class PythagoreReconnaitre4e(Notion4e):
         self.play(Write(self.chute("Toujours EN FACE de l'angle droit.", color=COUL_HYP, font_size=34)))
         self.attendre_voix()
 
+    # ── 05q : question-pause 2 (la rampe de skate : en face de l'angle droit) ─
+
+    def question_rampe(self):
+        S, M, R = P(-1.4, -1.9), P(-1.4, 0.9), P(-5.6, -1.9)  # pied du mur, haut du mur, bas de la rampe
+        sol = Line(P(-6.4, -1.9), P(-0.6, -1.9), color=GRAY_B, stroke_width=5)
+        mur = Rectangle(width=0.5, height=3.0, stroke_color=WHITE, stroke_width=3,
+                        fill_color="#14B8A6", fill_opacity=0.35).move_to(P(-1.15, -0.4))
+        rampe = Line(R, M, color=WHITE, stroke_width=8)  # pas en orange : ce serait la réponse
+        carre = self.carre_droit(S, LEFT, UP, s=0.35)
+        noms = sans_audit(VGroup(self.t("le sol", 28, GRAY_B).move_to(P(-3.5, -2.35)),
+                                 self.t("le mur", 28).move_to(P(-1.15, 1.35)),
+                                 self.t("la rampe", 28).move_to(P(-4.1, 0.0)).rotate(np.arctan2(2.8, 4.2))))
+        self.question_etroite("05q-question", "05r-reponse",
+                            ["Une rampe de skate :", "le sol, le mur et la rampe",
+                             "font un triangle rectangle.", "Quel côté est l'hypoténuse ?"],
+                            ["le sol", "la rampe", "le mur"], 1,
+                            ["Le sol et le mur font l'angle droit,", "la rampe est en face."],
+                            figure=VGroup(sol, mur, rampe, carre, noms), ecart=0.22)
+
     # ── 06 : pas d'angle droit ──────────────────────────────────────────────
 
     def ecran_sans_angle_droit(self):
         self.clear()
         self.add_mascotte()
         self.dire("06-sans-angle-droit")
-        self.titre_ecran("Piège 2 : pas d'angle droit")
         tri = Polygon(P(-5.6, -1.6), P(-1.2, -1.2), P(-3.6, 1.6), color=WHITE, stroke_width=4)
-        self.play(Create(tri))
-        self.play(FadeIn(self.t("aucun angle droit", 32, GRAY_B).move_to(P(-3.4, -2.3))))
+        self.play(FadeIn(self.titre("Piège 2 : pas d'angle droit")), Create(tri),
+                  FadeIn(self.t("aucun angle droit", 32, GRAY_B).move_to(P(-3.4, -2.3))), run_time=0.8)
         self.au_mot("Alors pas d'hypoténuse")
         non = self.t("pas d'hypoténuse", 44, ROUGE_ERREUR).move_to(P(3.0, 0.8))
-        self.play(Write(non))
-        self.play(Wiggle(non))
+        self.play(Write(non), run_time=0.5)
+        self.play(Wiggle(non), run_time=0.7)
         self.au_mot("Ce mot n'existe")
         self.play(FadeIn(self.t("seulement dans un", 32).move_to(P(3.0, -0.4))),
                   FadeIn(self.t("triangle rectangle", 36, COUL_DROIT).move_to(P(3.0, -1.0))))
@@ -323,17 +386,17 @@ class PythagoreReconnaitre4e(Notion4e):
         self.play(Circumscribe(res, color=VERT_OK))
         self.attendre_voix()
 
-    # ── 08 : ce que tu sais faire maintenant ────────────────────────────────
+    # ── 08 : ce que tu as appris (31/10 : titre en haut et centré) ──────────
 
     def ecran_finale(self):
         self.clear()
         self.add_mascotte(scale=0.65)
         self.dire("08-finale")
-        self.play(Write(self.t("Ce que tu sais faire maintenant", 44, JAUNE_TITRE).to_edge(UP)))
+        self.play(Write(self.t("Ce que tu as appris", 44, JAUNE_TITRE).to_edge(UP)))
         questions = [
-            ("Repérer l'angle droit", "Repérer l'angle droit ?"),
-            ("Trouver le côté en face", "Trouver le côté en face, même si le triangle est tourné ?"),
-            ("Savoir qu'il n'y a pas", "Savoir qu'il n'y a pas d'hypoténuse sans angle droit ?"),
+            ("Repérer l'angle droit", "Repérer l'angle droit."),
+            ("Trouver le côté en face", "Trouver le côté en face, même si le triangle est tourné."),
+            ("Savoir qu'il n'y a pas", "Savoir qu'il n'y a pas d'hypoténuse sans angle droit."),
         ]
         lignes = VGroup(*[VGroup(self.coche(), self.t(txt, 30)).arrange(RIGHT, buff=0.3)
                           for _, txt in questions])
@@ -342,8 +405,8 @@ class PythagoreReconnaitre4e(Notion4e):
             self.au_mot(mot)
             self.play(FadeIn(l[1], shift=RIGHT * 0.2), run_time=0.6)
             self.play(Create(l[0]), run_time=0.4)
-        self.au_mot("Alors l'épisode 2")
-        self.play(Write(self.chute("L'épisode 2 t'attend !", color=VERT_OK, font_size=40)))
+        self.au_nb("Alors l'épisode 3")
+        self.play(Write(self.chute("Épisode 3 : calculer l'hypoténuse", color=VERT_OK, font_size=38)))
         self.attendre_voix(marge=1.0)
 
     # ── déroulé ─────────────────────────────────────────────────────────────
@@ -354,7 +417,9 @@ class PythagoreReconnaitre4e(Notion4e):
         self.ecran_angle_droit()
         self.ecran_definition()
         self.ecran_methode()
+        self.question_mnp()
         self.ecran_tourne()
+        self.question_rampe()
         self.ecran_sans_angle_droit()
         self.ecran_defi()
         self.ecran_correction()
