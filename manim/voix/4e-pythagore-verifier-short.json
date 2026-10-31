@@ -1,5 +1,7 @@
 {
   "00-accroche": "La corde à 13 nœuds. Les deux calculs sont-ils égaux ?",
   "01-image": "Une corde à 13 nœuds. On la tend : 3, 4 et 5 intervalles. 5 au carré : 25. 3 au carré plus 4 au carré : 25. Les deux sont égaux !",
+  "01q-question": "Question ! Côtés 5, 12 et 13. Combien vaut 13 au carré ? A : 26. B : 169. C : 139. Mets pause, et choisis !",
+  "01r-reponse": "Réponse B : 169. 13 fois 13, et pas 13 fois 2.",
   "02-question": "Une corde fait un triangle de 6, 8 et 10 intervalles. Combien font 10 au carré, et 6 au carré plus 8 au carré ? Réponds en commentaire !"
 }

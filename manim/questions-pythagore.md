@@ -80,6 +80,7 @@ Finale à corriger : « … Alors l'épisode 3 t'attend : calculer l'hypoténuse
   - r : « Réponse B : 12 mètres. 169 moins 25 : 144, et la racine de 144, c'est 12. »
 
 ## Ép. 5 — Vérifier l'égalité (`4e-pythagore-verifier`, micro `pythagore_reciproque_verifier`)
+✅ RENDU 31/10 : paysage 4:42 (Q1 t=01:18, Q2 t=02:37), short 1:01 (Q t=00:21).
 **Paysage**
 - Q1 après `04-piege` :
   - q : « Question ! Un triangle a des côtés de 6, 8 et 10 centimètres. Combien font 6 au carré plus 8 au carré ? A : 14. B : 100. C : 196. Mets pause, et choisis ! »
@@ -94,6 +95,7 @@ Finale à corriger : « … Alors l'épisode 3 t'attend : calculer l'hypoténuse
   - r : « Réponse B : 169. 13 fois 13, et pas 13 fois 2. »
 
 ## Ép. 6 — La réciproque (`4e-pythagore-reciproque`, micro `pythagore_reciproque_conclure`)
+✅ RENDU 31/10 : paysage 4:31 (Q1 t=01:27, Q2 t=02:46), short 1:00 (Q t=00:20).
 **Paysage**
 - Q1 après `04-sommet` :
   - q : « Question ! Le triangle RST a pour côtés RS égale 5, ST égale 13 et RT égale 12. L'égalité est vérifiée. En quel sommet est l'angle droit ? A : en R. B : en S. C : en T. Mets pause, et choisis ! »
