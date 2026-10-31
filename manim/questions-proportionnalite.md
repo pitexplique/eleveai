@@ -118,3 +118,19 @@ Défaut mineur connu : figure petite sur « Ce que tu as appris » de la paysage
 ]
 ```
 Question en commentaire : « Le bateau est à 15 cm du trésor. Combien de pas ? » (300).
+
+## 07-echelle-comprendre (lot 2, COMMUN 6e/4e, rendu le 31/10)
+**Paysages** `6e-prop-echelle-comprendre` et `4e-prop-echelle-comprendre` — 3:38, ceinture verte — centres `construction`, `art-design` (mêmes t)
+```json
+[
+  {"t":"00:57","question":"Sur le plan au 1 cm pour 10 m, le bâtiment B mesure 5 cm. Combien mesure-t-il en vrai ?","choix":["15 m","50 m","5 m"],"reponse":1,"explication":"1 cm représente 10 m, donc 5 cm représentent 5 × 10 = 50 m."},
+  {"t":"01:52","question":"La maquette est au 1/200 : que veut dire ce 200 ?","choix":["1 cm sur la maquette = 200 cm en vrai","La maquette mesure 200 cm","200 cm sur la maquette = 1 cm en vrai"],"reponse":0,"explication":"1/200 : 1 cm sur la maquette représente 200 cm en vrai. 4 cm → 4 × 200 = 800 cm = 8 m."}
+]
+```
+**Short** `6e-prop-echelle-comprendre-short` = `4e-prop-echelle-comprendre-short` — 1:08, ceinture blanche — centres `voitures-motos`, `avions`
+```json
+[
+  {"t":"00:24","question":"Un avion miniature au 1/100 mesure 40 cm. Combien mesure le vrai ?","choix":["140 cm","4 000 cm","400 cm"],"reponse":1,"explication":"Au 1/100, on multiplie par 100 : 40 × 100 = 4 000 cm = 40 m, un avion de ligne !"}
+]
+```
+Question en commentaire : la figurine de 3 cm au 1/60 (180 cm = 1,80 m). Sources : 1/43 ≈ 10 cm (voiture-miniature.com) ; A320 37,57 m, 737-800 39,47 m (dimensions.com). Intitulés à vérifier sur le texte exact du script avant le manifeste.
