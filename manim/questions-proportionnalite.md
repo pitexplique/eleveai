@@ -308,3 +308,54 @@ Short : on pave les BOÎTES carrées (des disques ne pavent pas un disque). Deux
 ```
 Question en commentaire : « Un dé 4 fois plus grand dans chaque sens : combien de petits dés faut-il ? » (64).
 Défaut mineur : « 40 L » et « 80 L » barrés d'une croix rouge, un peu durs à lire. Le short importe les pavés en perspective du script paysage.
+
+## 4e 14-grandeur-produit (lot 4, rendu le 31/10)
+**Paysage** `4e-prop-grandeur-produit` — 3:42, ceinture verte — centres `sciences`, `argent-budget`
+```json
+[
+  {"t":"00:54","question":"Un four de 3 kW chauffe pendant 2 h. Quelle énergie consomme-t-il ?","choix":["6 kWh","1,5 kW/h","5 kWh"],"reponse":0,"explication":"3 kW × 2 h = 6 kWh."},
+  {"t":"01:58","question":"Laquelle est une grandeur produit ?","choix":["une aire, en m²","une vitesse, en km/h","un prix, en €/kg"],"reponse":0,"explication":"Une aire, c'est une longueur fois une largeur : un produit."}
+]
+```
+**Short** `4e-prop-grandeur-produit-short` — 1:08, ceinture blanche — centres `sport`
+```json
+[
+  {"t":"00:31","question":"105 m × 68 m : quelle est l'unité du résultat ?","choix":["m","m²","m³"],"reponse":1,"explication":"Deux longueurs multipliées donnent des mètres carrés."}
+]
+```
+Question en commentaire : « Un terrain de basket mesure 28 m sur 15 m. Quelle est son aire ? » (420 m²).
+Sources : EDF tarif réglementé au 1/08/2025 ≈ 0,1952 €/kWh ; FIFA 105 × 68 m ; FIBA 28 × 15 m. Défauts mineurs : la coche de la question 2 frôle « m² » ; « pour un seul radiateur ! » un peu petit.
+
+## 4e 15-grandeur-quotient (lot 4, rendu le 31/10)
+**Paysage** `4e-prop-grandeur-quotient` — 3:21, ceinture verte — centres `transports`, `argent-budget`
+```json
+[
+  {"t":"00:53","question":"Un train : 450 km en 3 heures. Sa vitesse moyenne ?","choix":["150 km/h","150 h/km","1 350 km/h"],"reponse":0,"explication":"450 km ÷ 3 h = 150 km/h."},
+  {"t":"02:03","question":"4 kg de pommes : 10 €. Le prix au kilo ?","choix":["0,40 €/kg","2,50 €/kg","40 €/kg"],"reponse":1,"explication":"10 € ÷ 4 kg = 2,50 €/kg."}
+]
+```
+**Short** `4e-prop-grandeur-quotient-short` — 1:15, ceinture blanche — centres `musique`, `corps-sante`
+```json
+[
+  {"t":"00:33","question":"60 battements en 30 secondes. Combien de BPM ?","choix":["120 BPM","30 BPM","2 BPM"],"reponse":0,"explication":"30 s : une demi-minute. 1 min : 60 × 2 = 120 BPM."}
+]
+```
+Question en commentaire : « Une chanson fait 25 battements en 10 secondes. Combien de BPM ? » (150).
+Sources : TGV jusqu'à 320 km/h (sites secondaires) ; cœur au repos 60 à 100 /min (procédure de soins du CHUV).
+
+## 4e 16-grandeur-unite (lot 4, rendu le 31/10)
+**Paysage** `4e-prop-grandeur-unite` — 3:29, ceinture verte — centres `histoire-geographie`
+```json
+[
+  {"t":"00:55","question":"Que veut dire 20 000 hab/km² ?","choix":["20 000 hab pour 1 km²","20 000 km² pour 1 hab","20 000 hab en tout"],"reponse":0,"explication":"« Par » veut dire « pour 1 » : 20 000 habitants pour 1 km²."},
+  {"t":"01:46","question":"On divise des litres (L) par des minutes (min). L'unité du résultat ?","choix":["L/min","min/L","L × min"],"reponse":0,"explication":"L ÷ min = L/min : des litres par minute, c'est un débit."}
+]
+```
+**Short** `4e-prop-grandeur-unite-short` — 1:15, ceinture blanche — centres `espace`, `sciences`
+```json
+[
+  {"t":"00:31","question":"300 000 km/s, ça veut dire…","choix":["300 000 km en 1 s","300 000 s pour 1 km","300 000 km en tout"],"reponse":0,"explication":"« Par » veut dire « pour 1 » : 300 000 km en 1 seconde."}
+]
+```
+Question en commentaire : « La Lune est à environ 384 000 km. Combien de secondes sa lumière met-elle pour arriver jusqu'à nous ? » (≈ 1,3 s).
+Sources : Insee, Paris ≈ 2,1 millions (population légale 2022) sur 105 km² ; c = 299 792 km/s (BIPM) ; Terre-Lune 384 400 km (NASA). Le trajet Lune → Terre dure 1,28 s à l'écran (clin d'œil à la réponse). Défauts mineurs : les coches touchent presque « km² » (paysage) et « 1 s » (short). Deux rendus HD du short. La paysage hérite de `PropAgrandissementRapportBase` (ép. 11).
