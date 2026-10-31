@@ -451,19 +451,19 @@ export const echelles6eBank: TutorBankItemV4[] = [
     microId: "echelle_distance_reelle",
     difficulty: 3,
     theme: "reunion",
-    text: "Sur une carte de La Réunion, 1 cm représente 4 km. Saint-Denis et Saint-Pierre sont distants de 9 cm sur la carte. Quelle distance cela fait-il en km ?",
+    text: "Sur une carte de La Réunion, 1 cm représente 4 km. Saint-Denis et Saint-Pierre sont distants de 13 cm sur la carte. Quelle distance à vol d'oiseau cela fait-il en km ?",
     format: "short",
-    expected: ["36"],
+    expected: ["52"],
     comparator: "number_equal",
-    hint: "9 fois plus sur la carte, donc 9 fois plus en vrai.",
+    hint: "13 fois plus sur la carte, donc 13 fois plus en vrai.",
     explanation: ex(
       "du plan vers la réalité, on AGRANDIT : la longueur réelle est plus grande que celle de la carte.",
       "on multiplie la distance sur la carte par ce que vaut 1 cm en réalité.",
-      "1 cm vaut 4 km. Pour 9 cm, on multiplie par 9 des deux côtés : 9 × 4 = 36 km.",
-      "la distance réelle est d'environ 36 km."
+      "1 cm vaut 4 km. Pour 13 cm, on multiplie par 13 des deux côtés : 13 × 4 = 52 km.",
+      "à vol d'oiseau, les deux villes sont à environ 52 km l'une de l'autre."
     ),
     tags: ["prop_echelle", "reelle", "974", "canvas", "short"],
-    canvas: versLeReel("1 cm ↔ 4 km", "9 cm", "Distance réelle ?"),
+    canvas: versLeReel("1 cm ↔ 4 km", "13 cm", "Distance réelle ?"),
   },
   {
     kind: "fixed",
