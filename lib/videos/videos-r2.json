@@ -2873,6 +2873,78 @@
   "youtube": null,
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_echelle&microId=echelle_defi&display=simple"
  },
+ "6e-prop-pourcentage-calcul": {
+  "fichier": "6e/maths/proportionnalite/13-pourcentage-calcul/eleveai-maths-6e-prop-pourcentage-calcul.mp4",
+  "poster": "6e/maths/proportionnalite/13-pourcentage-calcul/eleveai-maths-6e-prop-pourcentage-calcul.png",
+  "vignette": "6e/maths/proportionnalite/13-pourcentage-calcul/eleveai-maths-6e-prop-pourcentage-calcul.vignette.webp",
+  "titre": "Combien coûte le vélo soldé à 10 % ? — Calculer un pourcentage — épisode 13 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=pourcentage_nombre&microId=pourcentage_calcul_simple&display=simple"
+ },
+ "6e-prop-pourcentage-calcul-short": {
+  "fichier": "6e/maths/proportionnalite/13-pourcentage-calcul/eleveai-maths-6e-prop-pourcentage-calcul-short.mp4",
+  "poster": "6e/maths/proportionnalite/13-pourcentage-calcul/eleveai-maths-6e-prop-pourcentage-calcul-short.png",
+  "vignette": "6e/maths/proportionnalite/13-pourcentage-calcul/eleveai-maths-6e-prop-pourcentage-calcul-short.vignette.webp",
+  "titre": "10 % de n'importe quel nombre, en 1 seconde ⚡ — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=pourcentage_nombre&microId=pourcentage_calcul_simple&display=simple"
+ },
+ "6e-prop-pourcentage-comprendre": {
+  "fichier": "6e/maths/proportionnalite/11-pourcentage-comprendre/eleveai-maths-6e-prop-pourcentage-comprendre.mp4",
+  "poster": "6e/maths/proportionnalite/11-pourcentage-comprendre/eleveai-maths-6e-prop-pourcentage-comprendre.png",
+  "vignette": "6e/maths/proportionnalite/11-pourcentage-comprendre/eleveai-maths-6e-prop-pourcentage-comprendre.vignette.webp",
+  "titre": "Pourquoi 45 % de chats au refuge ? — Comprendre un pourcentage — épisode 11 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=pourcentage_nombre&microId=pourcentage_comprendre&display=simple"
+ },
+ "6e-prop-pourcentage-comprendre-short": {
+  "fichier": "6e/maths/proportionnalite/11-pourcentage-comprendre/eleveai-maths-6e-prop-pourcentage-comprendre-short.mp4",
+  "poster": "6e/maths/proportionnalite/11-pourcentage-comprendre/eleveai-maths-6e-prop-pourcentage-comprendre-short.png",
+  "vignette": "6e/maths/proportionnalite/11-pourcentage-comprendre/eleveai-maths-6e-prop-pourcentage-comprendre-short.vignette.webp",
+  "titre": "Ton téléphone affiche 1 % : il reste combien ? 🔋 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=pourcentage_nombre&microId=pourcentage_comprendre&display=simple"
+ },
+ "6e-prop-pourcentage-defi": {
+  "fichier": "6e/maths/proportionnalite/14-pourcentage-defi/eleveai-maths-6e-prop-pourcentage-defi.mp4",
+  "poster": "6e/maths/proportionnalite/14-pourcentage-defi/eleveai-maths-6e-prop-pourcentage-defi.png",
+  "vignette": "6e/maths/proportionnalite/14-pourcentage-defi/eleveai-maths-6e-prop-pourcentage-defi.vignette.webp",
+  "titre": "Quel groupe remplit le mieux sa salle ? — Défis sur les pourcentages — épisode 14 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=pourcentage_nombre&microId=pourcentage_defi&display=simple"
+ },
+ "6e-prop-pourcentage-defi-short": {
+  "fichier": "6e/maths/proportionnalite/14-pourcentage-defi/eleveai-maths-6e-prop-pourcentage-defi-short.mp4",
+  "poster": "6e/maths/proportionnalite/14-pourcentage-defi/eleveai-maths-6e-prop-pourcentage-defi-short.png",
+  "vignette": "6e/maths/proportionnalite/14-pourcentage-defi/eleveai-maths-6e-prop-pourcentage-defi-short.vignette.webp",
+  "titre": "Le meilleur buteur marque le moins de buts ? ⚽ — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=pourcentage_nombre&microId=pourcentage_defi&display=simple"
+ },
+ "6e-prop-pourcentage-lire": {
+  "fichier": "6e/maths/proportionnalite/12-pourcentage-lire/eleveai-maths-6e-prop-pourcentage-lire.mp4",
+  "poster": "6e/maths/proportionnalite/12-pourcentage-lire/eleveai-maths-6e-prop-pourcentage-lire.png",
+  "vignette": "6e/maths/proportionnalite/12-pourcentage-lire/eleveai-maths-6e-prop-pourcentage-lire.vignette.webp",
+  "titre": "Que cache le 70 % du chocolat ? — Lire un pourcentage — épisode 12 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=pourcentage_nombre&microId=pourcentage_lire&display=simple"
+ },
+ "6e-prop-pourcentage-lire-short": {
+  "fichier": "6e/maths/proportionnalite/12-pourcentage-lire/eleveai-maths-6e-prop-pourcentage-lire-short.mp4",
+  "poster": "6e/maths/proportionnalite/12-pourcentage-lire/eleveai-maths-6e-prop-pourcentage-lire-short.png",
+  "vignette": "6e/maths/proportionnalite/12-pourcentage-lire/eleveai-maths-6e-prop-pourcentage-lire-short.vignette.webp",
+  "titre": "Ton tee-shirt cache des maths ! 👕 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=pourcentage_nombre&microId=pourcentage_lire&display=simple"
+ },
  "4e-prop-echelle-plan": {
   "fichier": "4e/maths/proportionnalite/09-echelle-plan/eleveai-maths-4e-prop-echelle-plan.mp4",
   "poster": "4e/maths/proportionnalite/09-echelle-plan/eleveai-maths-4e-prop-echelle-plan.png",

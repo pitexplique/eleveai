@@ -14,7 +14,6 @@ Réponds toujours en français. Ne pose pas de questions : tranche, avance, list
 Les 2 mp4 présents et immobiles → `python scripts/verifier-bords-video.py <mp4>` = « 0 instants » ; planche de 12 images (PyAV, outil à recréer dans ton scratchpad) regardée ; `t` des questions-pauses (début de l'écran « Question ! ») par les `*_marques.json` ou la planche ; noter `questions` + centres + durées + question en commentaire dans `manim/questions-proportionnalite.md` (modèle des sections 07-10) ; commit par chemin (scripts + `*_marques.json` + questions). S'il manque des fichiers et que rien ne bouge depuis longtemps : agent neuf (« lis et applique le brief » + mission).
 
 ## Suite
-1. Finir les rendus du lot 3 (dont le 14).
-2. Passe finale du lot 3 par un agent, comme `1020970a` (miniatures, manifeste avec microId 6e, `fiche-youtube.md`, R2, bilans, `brancher-videos-coach --ecrire`) ; vérifier que les JSON ne contiennent QUE des ajouts `6e-prop-pourcentage*` ; commit par chemin.
+1. ✅ 31/10 : LOT 3 FINI. Rendus 11-13 (autre session), 14 `cdfb0559` ; passe finale FAITE et COMMITÉE (8 vidéos 6e : manifeste, R2, bilans, coach ; microId `pourcentage_comprendre`, `pourcentage_lire`, `pourcentage_calcul_simple`, `pourcentage_defi` ; miniatures et `fiche-youtube.md` hors git dans les dossiers de sortie, accroches/chapitres à relire par Frédéric).
 3. Puis lot 4 (4e agrandissements + grandeurs composées), voix à écrire puis à faire valider (coller la voix en entier, s'arrêter là).
 4. Publier sur YouTube les paysages AVANT leurs shorts (lots 2 et 3 ; les 4e des épisodes communs portent `meme_video_que`).

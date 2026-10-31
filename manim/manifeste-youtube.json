@@ -47345,6 +47345,589 @@
       "centres": [
         "course-trail"
       ]
+    },
+    {
+      "id": "6e-prop-pourcentage-comprendre",
+      "notionId": "pourcentage_nombre",
+      "microId": "pourcentage_comprendre",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/proportionnalite/11-pourcentage-comprendre/eleveai-maths-6e-prop-pourcentage-comprendre.mp4",
+      "miniature": "6e/maths/proportionnalite/11-pourcentage-comprendre/eleveai-maths-6e-prop-pourcentage-comprendre.png",
+      "titre": "Pourquoi 45 % de chats au refuge ? — Comprendre un pourcentage — épisode 11 · Maths 6e",
+      "accroche": "Clara est vétérinaire dans un refuge pour animaux. Le refuge accueille 100 animaux, dont 45 chats. Sur sa fiche, elle écrit : 45 % de chats. Pourquoi 45 % ?\n\nDans cette vidéo :\n• pour cent veut dire « sur 100 » : 45 %, c'est 45 cases sur 100\n• le reste : 100 − 45 = 55, donc 55 % ; 45 % + 55 % = 100 %, c'est tout le refuge\n• le piège : 25 chats sur 50 animaux, ce n'est pas 25 %, c'est la moitié, donc 50 %\n• un pourcentage est une proportion : on ramène le total à 100 avec un tableau (× 2, × 5, × 10)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Un refuge a 10 animaux. 7 sont des chats. Quel pourcentage de chats ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/pourcentage-nombre\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/pourcentage-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=pourcentage_nombre&microId=pourcentage_comprendre&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Clara, vétérinaire au refuge"
+        ],
+        [
+          "00:21",
+          "Pour cent veut dire : sur 100"
+        ],
+        [
+          "00:40",
+          "Le reste, et 100 % = tout"
+        ],
+        [
+          "01:01",
+          "Question : 30 chiens sur 100"
+        ],
+        [
+          "01:28",
+          "Le piège : 25 sur 50"
+        ],
+        [
+          "01:50",
+          "Ramener à 100 avec le tableau"
+        ],
+        [
+          "02:07",
+          "Question : 5 lapins sur 20"
+        ],
+        [
+          "02:41",
+          "À toi de jouer"
+        ],
+        [
+          "02:54",
+          "Correction"
+        ],
+        [
+          "03:07",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/pourcentage-nombre",
+      "tags": [
+        "comprendre un pourcentage",
+        "pour cent",
+        "sur 100",
+        "pourcentage",
+        "vétérinaire",
+        "refuge",
+        "animaux",
+        "proportionnalité",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:01",
+          "question": "Un refuge de 100 animaux. 30 sont des chiens. Quel pourcentage de chiens ?",
+          "choix": [
+            "30 %",
+            "70 %",
+            "3 %"
+          ],
+          "reponse": 0,
+          "explication": "30 sur 100, c'est 30 %."
+        },
+        {
+          "t": "02:07",
+          "question": "Un refuge a 20 animaux. 5 sont des lapins. Quel pourcentage de lapins ?",
+          "choix": [
+            "5 %",
+            "25 %",
+            "20 %"
+          ],
+          "reponse": 1,
+          "explication": "20 × 5 = 100, alors 5 × 5 = 25 : 25 sur 100, c'est 25 %."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "chiens-chats"
+      ]
+    },
+    {
+      "id": "6e-prop-pourcentage-comprendre-short",
+      "notionId": "pourcentage_nombre",
+      "microId": "pourcentage_comprendre",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-prop-pourcentage-comprendre",
+      "fichier": "6e/maths/proportionnalite/11-pourcentage-comprendre/eleveai-maths-6e-prop-pourcentage-comprendre-short.mp4",
+      "miniature": "6e/maths/proportionnalite/11-pourcentage-comprendre/eleveai-maths-6e-prop-pourcentage-comprendre-short.png",
+      "titre": "Ton téléphone affiche 1 % : il reste combien ? 🔋 — 6e #Shorts",
+      "accroche": "Ton téléphone affiche 1 %. Imagine la batterie en 100 petites cases : 1 %, c'est 1 case sur 100, presque vide ! Et 100 %, ce sont les 100 cases : la batterie est pleine.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : La batterie affiche 75 %. Combien de cases sont vides ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=pourcentage_nombre&microId=pourcentage_comprendre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentage #proportionnalité #6e #collège",
+      "tags": [
+        "pourcentage",
+        "comprendre un pourcentage",
+        "pour cent",
+        "sur 100",
+        "batterie",
+        "téléphone",
+        "proportionnalité",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:19",
+          "question": "La batterie affiche 50 %. Elle est remplie à…",
+          "choix": [
+            "la moitié",
+            "50 cases sur 50",
+            "5 cases"
+          ],
+          "reponse": 0,
+          "explication": "50 cases sur 100 : la moitié."
+        }
+      ],
+      "centres": [
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "6e-prop-pourcentage-lire",
+      "notionId": "pourcentage_nombre",
+      "microId": "pourcentage_lire",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/proportionnalite/12-pourcentage-lire/eleveai-maths-6e-prop-pourcentage-lire.mp4",
+      "miniature": "6e/maths/proportionnalite/12-pourcentage-lire/eleveai-maths-6e-prop-pourcentage-lire.png",
+      "titre": "Que cache le 70 % du chocolat ? — Lire un pourcentage — épisode 12 · Maths 6e",
+      "accroche": "Emma est chocolatière. Sur sa tablette de chocolat noir, elle écrit : 70 % de cacao. Qu'est-ce que ça veut dire ?\n\nDans cette vidéo :\n• 70 %, c'est 70 sur 100 : dans 100 g de chocolat, 70 g de cacao\n• une tablette de 200 g : le tableau de proportionnalité, 2 fois plus, 140 g de cacao\n• le piège : 70 g, c'est pour 100 g ; dans une tablette de 50 g, 35 g seulement\n• les pourcentages partout : 100 % coton, 0 % de sucre ajouté\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Emma prépare un chocolat à 80 % de cacao. Combien de cacao pour une tablette de 300 g ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/pourcentage-nombre\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/pourcentage-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=pourcentage_nombre&microId=pourcentage_lire&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Emma, chocolatière"
+        ],
+        [
+          "00:19",
+          "70 % : 70 g sur 100 g"
+        ],
+        [
+          "00:33",
+          "Une tablette de 200 g : le tableau"
+        ],
+        [
+          "00:51",
+          "Question : le chocolat au lait"
+        ],
+        [
+          "01:20",
+          "Le piège : la tablette de 50 g"
+        ],
+        [
+          "01:40",
+          "Des pourcentages partout"
+        ],
+        [
+          "01:55",
+          "Question : la pâte à tartiner"
+        ],
+        [
+          "02:25",
+          "À toi de jouer"
+        ],
+        [
+          "02:40",
+          "Correction"
+        ],
+        [
+          "02:53",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/pourcentage-nombre",
+      "tags": [
+        "lire un pourcentage",
+        "pourcentage sur une étiquette",
+        "pourcentage",
+        "chocolat",
+        "chocolatière",
+        "cacao",
+        "étiquette",
+        "proportionnalité",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:51",
+          "question": "Un chocolat au lait contient 30 % de cacao. Combien de cacao dans 100 g ?",
+          "choix": [
+            "70 g",
+            "30 g",
+            "3 g"
+          ],
+          "reponse": 1,
+          "explication": "30 %, c'est 30 sur 100 : 30 g de cacao dans 100 g."
+        },
+        {
+          "t": "01:55",
+          "question": "Une pâte à tartiner contient 20 % de noisettes. Combien de noisettes dans un pot de 200 g ?",
+          "choix": [
+            "20 g",
+            "220 g",
+            "40 g"
+          ],
+          "reponse": 2,
+          "explication": "20 g pour 100 g. 200 g, c'est 2 fois plus : 40 g de noisettes."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "6e-prop-pourcentage-lire-short",
+      "notionId": "pourcentage_nombre",
+      "microId": "pourcentage_lire",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-prop-pourcentage-lire",
+      "fichier": "6e/maths/proportionnalite/12-pourcentage-lire/eleveai-maths-6e-prop-pourcentage-lire-short.mp4",
+      "miniature": "6e/maths/proportionnalite/12-pourcentage-lire/eleveai-maths-6e-prop-pourcentage-lire-short.png",
+      "titre": "Ton tee-shirt cache des maths ! 👕 — 6e #Shorts",
+      "accroche": "Regarde l'étiquette de ton tee-shirt : coton 60 %, polyester 40 %. 60 %, c'est 60 sur 100 : dans 100 g de tissu, il y a 60 g de coton.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Un sweat de 200 g contient 60 % de coton. Combien de grammes de coton ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=pourcentage_nombre&microId=pourcentage_lire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentage #proportionnalité #6e #collège",
+      "tags": [
+        "pourcentage",
+        "lire un pourcentage",
+        "étiquette",
+        "tee-shirt",
+        "vêtements",
+        "coton",
+        "mode",
+        "proportionnalité",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:22",
+          "question": "Combien de polyester dans ce tee-shirt de 100 g ?",
+          "choix": [
+            "40 g",
+            "60 g",
+            "4 g"
+          ],
+          "reponse": 0,
+          "explication": "40 %, c'est 40 g sur 100 g."
+        }
+      ],
+      "centres": [
+        "mode"
+      ]
+    },
+    {
+      "id": "6e-prop-pourcentage-calcul",
+      "notionId": "pourcentage_nombre",
+      "microId": "pourcentage_calcul_simple",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/proportionnalite/13-pourcentage-calcul/eleveai-maths-6e-prop-pourcentage-calcul.mp4",
+      "miniature": "6e/maths/proportionnalite/13-pourcentage-calcul/eleveai-maths-6e-prop-pourcentage-calcul.png",
+      "titre": "Combien coûte le vélo soldé à 10 % ? — Calculer un pourcentage — épisode 13 · Maths 6e",
+      "accroche": "Karim vend des vélos. Un vélo coûte 80 €. Pendant les soldes, il fait 10 % de réduction. Combien d'euros en moins ?\n\nDans cette vidéo :\n• 10 %, c'est un dixième : on divise par 10 (10 % de 80 € = 8 €, le vélo passe à 72 €)\n• 50 %, c'est la moitié : on divise par 2 ; 25 %, c'est le quart : on divise par 4\n• le piège : 20 % de 80 €, ce n'est pas 80 − 20 ; c'est 2 fois 10 %, donc 16 €\n• pour 20 % ou 30 %, on part de 10 %\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Une trottinette coûte 120 €. Karim fait 30 % de réduction. Combien d'euros en moins ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/pourcentage-nombre\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/pourcentage-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=pourcentage_nombre&microId=pourcentage_calcul_simple&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Karim, vendeur de vélos"
+        ],
+        [
+          "00:20",
+          "10 % : on divise par 10"
+        ],
+        [
+          "00:42",
+          "Question : 10 % de 150 €"
+        ],
+        [
+          "01:08",
+          "50 % et 25 % : la moitié, le quart"
+        ],
+        [
+          "01:28",
+          "Le piège : 20 % de 80 €"
+        ],
+        [
+          "01:47",
+          "Question : le casque de vélo"
+        ],
+        [
+          "02:18",
+          "À toi de jouer"
+        ],
+        [
+          "02:32",
+          "Correction"
+        ],
+        [
+          "02:50",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/pourcentage-nombre",
+      "tags": [
+        "calculer un pourcentage",
+        "pourcentage d'un nombre",
+        "10 %",
+        "50 %",
+        "25 %",
+        "soldes",
+        "réduction",
+        "vélo",
+        "vendeur",
+        "proportionnalité",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:42",
+          "question": "Combien font 10 % de 150 € ?",
+          "choix": [
+            "15 €",
+            "140 €",
+            "1 500 €"
+          ],
+          "reponse": 0,
+          "explication": "150 ÷ 10 = 15 €."
+        },
+        {
+          "t": "01:47",
+          "question": "Un casque coûte 40 €. Combien font 25 % de 40 € ?",
+          "choix": [
+            "15 €",
+            "25 €",
+            "10 €"
+          ],
+          "reponse": 2,
+          "explication": "25 %, c'est le quart : 40 ÷ 4 = 10 €."
+        }
+      ],
+      "centres": [
+        "velo",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "6e-prop-pourcentage-calcul-short",
+      "notionId": "pourcentage_nombre",
+      "microId": "pourcentage_calcul_simple",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-prop-pourcentage-calcul",
+      "fichier": "6e/maths/proportionnalite/13-pourcentage-calcul/eleveai-maths-6e-prop-pourcentage-calcul-short.mp4",
+      "miniature": "6e/maths/proportionnalite/13-pourcentage-calcul/eleveai-maths-6e-prop-pourcentage-calcul-short.png",
+      "titre": "10 % de n'importe quel nombre, en 1 seconde ⚡ — 6e #Shorts",
+      "accroche": "10 %, c'est un dixième : on divise par 10. 10 % de 350 ? 35. 10 % de 90 ? 9. 10 % de 2 000 ? 200. Prêt pour la suite ?\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Combien font 20 % de 70 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=pourcentage_nombre&microId=pourcentage_calcul_simple&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentage #proportionnalité #6e #collège",
+      "tags": [
+        "pourcentage",
+        "calculer un pourcentage",
+        "10 %",
+        "calcul mental",
+        "astuce",
+        "diviser par 10",
+        "proportionnalité",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:23",
+          "question": "10 % de 70 ?",
+          "choix": [
+            "7",
+            "60",
+            "700"
+          ],
+          "reponse": 0,
+          "explication": "70 ÷ 10 = 7."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-prop-pourcentage-defi",
+      "notionId": "pourcentage_nombre",
+      "microId": "pourcentage_defi",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/proportionnalite/14-pourcentage-defi/eleveai-maths-6e-prop-pourcentage-defi.mp4",
+      "miniature": "6e/maths/proportionnalite/14-pourcentage-defi/eleveai-maths-6e-prop-pourcentage-defi.png",
+      "titre": "Quel groupe remplit le mieux sa salle ? — Défis sur les pourcentages — épisode 14 · Maths 6e",
+      "accroche": "Thomas organise un festival de musique. Il a 200 billets à vendre. Le premier jour, il en vend 30 %. Combien de billets ?\n\nDans cette vidéo :\n• 30 % de 200 billets : 30 pour 100, donc 2 fois plus, 60 billets\n• comparer deux parts : 18 places sur 20, on ramène à 100 (× 5), 90 %, mieux que 85 %\n• le piège : 18 places sur 20, ce n'est pas 18 % ; il faut toujours ramener à 100\n• pour trouver une quantité : on lit le pourcentage, puis on complète le tableau\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Sur 200 spectateurs, 25 % viennent à vélo. Combien de spectateurs à vélo ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/pourcentage-nombre\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/pourcentage-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=pourcentage_nombre&microId=pourcentage_defi&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Thomas, organisateur de festival"
+        ],
+        [
+          "00:19",
+          "30 % de 200 billets : le tableau"
+        ],
+        [
+          "00:31",
+          "Question : 50 % des billets"
+        ],
+        [
+          "01:02",
+          "Comparer : ramener à 100"
+        ],
+        [
+          "01:28",
+          "Le piège : 18 places, pas 18 %"
+        ],
+        [
+          "01:39",
+          "Question : les crêpes"
+        ],
+        [
+          "02:11",
+          "À toi de jouer"
+        ],
+        [
+          "02:25",
+          "Correction"
+        ],
+        [
+          "02:35",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/pourcentage-nombre",
+      "tags": [
+        "défis pourcentages",
+        "comparer des pourcentages",
+        "problème de pourcentage",
+        "pourcentage",
+        "festival",
+        "musique",
+        "billets",
+        "proportionnalité",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:31",
+          "question": "Deuxième jour : 50 % des 200 billets. Combien ?",
+          "choix": [
+            "50 billets",
+            "100 billets",
+            "150 billets"
+          ],
+          "reponse": 1,
+          "explication": "50 %, c'est la moitié. 200 ÷ 2 = 100 billets."
+        },
+        {
+          "t": "01:39",
+          "question": "Un stand vend 12 crêpes sur 50. Quel pourcentage ?",
+          "choix": [
+            "12 %",
+            "24 %",
+            "62 %"
+          ],
+          "reponse": 1,
+          "explication": "50 × 2 = 100. 12 × 2 = 24. 24 %."
+        }
+      ],
+      "centres": [
+        "musique",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-prop-pourcentage-defi-short",
+      "notionId": "pourcentage_nombre",
+      "microId": "pourcentage_defi",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-prop-pourcentage-defi",
+      "fichier": "6e/maths/proportionnalite/14-pourcentage-defi/eleveai-maths-6e-prop-pourcentage-defi-short.mp4",
+      "miniature": "6e/maths/proportionnalite/14-pourcentage-defi/eleveai-maths-6e-prop-pourcentage-defi-short.png",
+      "titre": "Le meilleur buteur marque le moins de buts ? ⚽ — 6e #Shorts",
+      "accroche": "Léo tire 20 fois et marque 10 buts. Sam tire 100 fois et marque 40 buts. Léo : 10 sur 20, la moitié, 50 %. Sam : 40 sur 100, 40 %. Léo marque moins de buts, mais il vise mieux !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Un joueur marque 18 buts sur 25 tirs. Combien de pour cent ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=pourcentage_nombre&microId=pourcentage_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentage #proportionnalité #6e #collège",
+      "tags": [
+        "pourcentage",
+        "comparer des pourcentages",
+        "football",
+        "buteur",
+        "tirs au but",
+        "énigme",
+        "proportionnalité",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:22",
+          "question": "Lina : 15 buts sur 50 tirs. Quel pourcentage ?",
+          "choix": [
+            "15 %",
+            "30 %",
+            "35 %"
+          ],
+          "reponse": 1,
+          "explication": "50 × 2 = 100. 15 × 2 = 30 %."
+        }
+      ],
+      "centres": [
+        "football",
+        "jeux-defis"
+      ]
     }
   ]
 }
