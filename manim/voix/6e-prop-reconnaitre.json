@@ -1,0 +1,17 @@
+{
+  "00-garde": "Reconnaître la proportionnalité. Deux fois plus, est-ce toujours deux fois plus cher ?",
+  "01-situation": "Voici Inès. Elle tient la caisse d'un cinéma. 1 place coûte 7 €. Un groupe demande 2 places, puis 4 places. Combien vont-ils payer ?",
+  "02-tableau": "Inès remplit son tableau. 1 place : 7 €. 2 places : 2 fois 7, égale 14 €. 4 places : 4 fois 7, égale 28 €. D'une ligne à l'autre, on multiplie toujours par 7.",
+  "03-proportionnel": "Deux fois plus de places, deux fois plus cher. Le nombre de places et le prix sont proportionnels : on passe de l'un à l'autre en multipliant toujours par le même nombre.",
+  "04-contre-exemple": "Mais tout n'est pas proportionnel. Voici Karim, pédiatre. À 1 an, un bébé mesure environ 75 cm. À 10 ans, un enfant mesure environ 140 cm. Si c'était proportionnel, il mesurerait 10 fois 75, égale 750 cm. Plus de 7 mètres ! L'âge et la taille ne sont pas proportionnels.",
+  "05-question": "Question ! 2 places coûtent 14 €. Le prix est proportionnel. Combien coûtent 6 places ? A : 18 €. B : 42 €. C : 21 €. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 6 places, c'est 3 fois 2 places. On paie donc 3 fois 14, égale 42 €.",
+  "06-piege": "Attention au piège ! Au parc aquatique, 2 entrées coûtent 6 €, et 4 entrées coûtent 11 €. 4 entrées, c'est le double de 2 entrées. Le double de 6, c'est 12. Or on paie 11 €. Ce n'est pas proportionnel.",
+  "07-forfait": "Autre cas : la salle de sport. 10 € par mois, plus 20 € d'inscription. 1 mois : 30 €. 2 mois : 40 €. Deux fois plus de mois, mais pas deux fois plus cher. Ce n'est pas proportionnel.",
+  "08-question": "Question ! Quel tableau est proportionnel ? A : 1 kilo, 3 € ; 2 kilos, 5 €. B : 1 kilo, 3 € ; 2 kilos, 6 €. C : 1 kilo, 3 € ; 2 kilos, 4 €. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. 2 kilos, c'est le double de 1 kilo, et 6 €, c'est le double de 3 €. On multiplie toujours par 3.",
+  "09-defi": "À toi de jouer ! Inès vend du pop-corn. 1 paquet : 4 €. 3 paquets : 12 €. 5 paquets : 18 €. Le prix est-il proportionnel ? Mets pause, et cherche !",
+  "09b-correction": "Correction. 1 paquet coûte 4 € : on multiplie par 4. 3 fois 4, égale 12 : ça marche. Mais 5 fois 4, égale 20, et pas 18. Ce n'est pas proportionnel.",
+  "10-finale": "Ce que tu as appris. Deux grandeurs sont proportionnelles quand on passe de l'une à l'autre en multipliant toujours par le même nombre. Deux fois plus, c'est deux fois plus. S'il y a un forfait, ou si le prix ne suit pas, ce n'est pas proportionnel.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}
