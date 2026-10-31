@@ -2433,19 +2433,19 @@
   "coach": "/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_comparer&display=simple"
  },
  "6e-frac-decimal": {
-  "fichier": "6e/maths/fractions/04-decimal/eleveai-maths-6e-frac-decimal.mp4",
-  "poster": "6e/maths/fractions/04-decimal/eleveai-maths-6e-frac-decimal.png",
-  "vignette": "6e/maths/fractions/04-decimal/eleveai-maths-6e-frac-decimal.vignette.webp",
-  "titre": "3 lancers sur 4 : la fraction avec une virgule — Fraction et nombre décimal — épisode 4 · Maths 6e",
+  "fichier": "6e/maths/fractions/04-decimal/eleveai-maths-6e-frac-decimal-v2.mp4",
+  "poster": "6e/maths/fractions/04-decimal/eleveai-maths-6e-frac-decimal-v2.png",
+  "vignette": "6e/maths/fractions/04-decimal/eleveai-maths-6e-frac-decimal-v2.vignette.webp",
+  "titre": "7/10 de mètre sur un ruban à virgules — Fraction et nombre décimal — épisode 4 · Maths 6e",
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_decimal&display=simple"
  },
  "6e-frac-decimal-short": {
-  "fichier": "6e/maths/fractions/04-decimal/eleveai-maths-6e-frac-decimal-short.mp4",
-  "poster": "6e/maths/fractions/04-decimal/eleveai-maths-6e-frac-decimal-short.png",
-  "vignette": "6e/maths/fractions/04-decimal/eleveai-maths-6e-frac-decimal-short.vignette.webp",
-  "titre": "3 minutes sur 4 : que doit afficher l'appli ? 🎵 — 6e #Shorts",
+  "fichier": "6e/maths/fractions/04-decimal/eleveai-maths-6e-frac-decimal-v2-short.mp4",
+  "poster": "6e/maths/fractions/04-decimal/eleveai-maths-6e-frac-decimal-v2-short.png",
+  "vignette": "6e/maths/fractions/04-decimal/eleveai-maths-6e-frac-decimal-v2-short.vignette.webp",
+  "titre": "Scier à 13/10 de mètre : il coupe où ? 🪚 — 6e #Shorts",
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_decimal&display=simple"

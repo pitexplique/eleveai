@@ -38078,77 +38078,74 @@
       "ceinture": "verte",
       "serie": "Maths 6e",
       "type": "longue",
-      "fichier": "6e/maths/fractions/04-decimal/eleveai-maths-6e-frac-decimal.mp4",
-      "miniature": "6e/maths/fractions/04-decimal/eleveai-maths-6e-frac-decimal.png",
-      "titre": "3 lancers sur 4 : la fraction avec une virgule — Fraction et nombre décimal — épisode 4 · Maths 6e",
-      "accroche": "Kenza est entraîneuse de basket. Au dernier match, Lou a marqué 3 lancers francs sur 4. Kenza veut l'écrire sur sa tablette, avec une virgule. Comment faire ?\n\nDans cette vidéo :\n• une fraction, c'est une division : on pose 3 ÷ 4 = 0,75\n• à connaître par cœur : 1/2 = 0,5 ; 1/4 = 0,25 ; 3/4 = 0,75 ; 1/5 = 0,2 ; 1/10 = 0,1\n• le piège : 3/4 n'est pas 3,4, jamais de virgule entre les deux nombres\n• 0,75 = 75 centièmes = 75 %\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Lou marque 4 lancers francs sur 5 : écris-le en fraction, en nombre décimal, puis en pourcentage.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/fraction-nombre\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/fraction-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_decimal&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
+      "fichier": "6e/maths/fractions/04-decimal/eleveai-maths-6e-frac-decimal-v2.mp4",
+      "miniature": "6e/maths/fractions/04-decimal/eleveai-maths-6e-frac-decimal-v2.png",
+      "titre": "7/10 de mètre sur un ruban à virgules — Fraction et nombre décimal — épisode 4 · Maths 6e",
+      "accroche": "Maëlys est couturière. Elle coupe du tissu pour un costume de théâtre. Sur son patron, c'est écrit : 7/10 de mètre. Mais son mètre ruban, lui, n'affiche que des virgules. Où couper ?\n\nDans cette vidéo :\n• sur la droite graduée en dixièmes : la fraction AU-DESSUS du point, le décimal EN DESSOUS\n• 7/10 = 0,7 : le dénominateur 10 donne un chiffre après la virgule\n• plus grand que 1 : 13/10 = 1 + 3/10 = 1,3\n• avec 100, deux chiffres : 25/100 = 0,25\n• le piège : 7/100, ce n'est pas 0,7, c'est 0,07\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Maëlys coupe 1,6 m de dentelle : écris-le avec une fraction de dénominateur 10, puis place-le sur la droite.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/fraction-nombre\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/fraction-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_decimal&display=simple\n\n🍰 Cette vidéo fait partie de la série Fractions d'EleveAI, du CM1 à la terminale.",
       "chapitres": [
         [
           "00:00",
-          "Une fraction avec une virgule ?"
+          "Le patron de Maëlys : 7/10 de mètre"
         ],
         [
-          "00:22",
-          "Une fraction, c'est une division"
+          "00:16",
+          "Un dixième sur la droite"
         ],
         [
-          "00:33",
-          "Poser 3 ÷ 4"
+          "00:29",
+          "Compter : 7/10 = 0,7"
         ],
         [
-          "01:05",
-          "Sur la droite graduée"
+          "00:45",
+          "Question : 4/10 en décimal"
         ],
         [
-          "01:18",
-          "Question : 1/4 en décimal"
+          "01:16",
+          "Plus grand que 1 : 13/10"
         ],
         [
-          "01:47",
-          "Le piège : 3/4 = 3,4 ?"
+          "01:26",
+          "13/10 = 1 + 3/10 = 1,3"
         ],
         [
-          "02:07",
-          "À connaître par cœur"
+          "01:39",
+          "La règle du dénominateur 10"
         ],
         [
-          "02:29",
-          "Question : 2/5 en décimal"
+          "01:44",
+          "Avec 100 : les centièmes"
         ],
         [
-          "03:02",
-          "7/4 : plus que 1"
+          "02:00",
+          "Le piège : 7/100 = 0,07"
         ],
         [
-          "03:15",
-          "Vers le pourcentage"
+          "02:13",
+          "Question : 0,37 en centièmes"
         ],
         [
-          "03:32",
-          "Question : 0,75 en pourcentage"
-        ],
-        [
-          "04:09",
+          "02:41",
           "À toi de jouer"
         ],
         [
-          "04:26",
+          "02:56",
           "Correction"
         ],
         [
-          "04:46",
+          "03:06",
           "Ce que tu as appris"
         ]
       ],
       "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/fraction-nombre",
       "tags": [
         "fraction et décimal",
+        "fraction décimale",
         "écriture décimale",
-        "quotient",
-        "pourcentage",
-        "basket",
-        "entraîneuse",
-        "lancers francs",
+        "droite graduée",
+        "dixièmes",
+        "centièmes",
+        "couture",
+        "couturière",
         "fractions",
         "maths",
         "6e",
@@ -38159,41 +38156,30 @@
       ],
       "questions": [
         {
-          "t": "01:18",
-          "question": "Quelle est l'écriture décimale de 1/4 ?",
+          "t": "00:45",
+          "question": "Au-dessus d'un point, on lit 4/10. Qu'écrit-on dessous ?",
           "choix": [
-            "1,4",
-            "0,25",
-            "4,1"
-          ],
-          "reponse": 1,
-          "explication": "1 ÷ 4 = 0,25 ; 1,4 colle les deux nombres : faux."
-        },
-        {
-          "t": "02:29",
-          "question": "Quelle est l'écriture décimale de 2/5 ?",
-          "choix": [
-            "2,5",
+            "4,10",
             "0,4",
-            "0,2"
+            "0,04"
           ],
           "reponse": 1,
-          "explication": "2 ÷ 5 = 0,4 (ou 1/5 = 0,2 donc 2/5 = 0,4)."
+          "explication": "4/10 = 0,4 : quatre dixièmes, le 4 se place juste après la virgule."
         },
         {
-          "t": "03:32",
-          "question": "0,75 en pourcentage, c'est combien ?",
+          "t": "02:13",
+          "question": "0,37, c'est combien de centièmes ?",
           "choix": [
-            "0,75 %",
-            "7,5 %",
-            "75 %"
+            "37",
+            "3,7",
+            "370"
           ],
-          "reponse": 2,
-          "explication": "0,75 = 75 centièmes = 75 % ; 0,75 % ne fait même pas 1 case sur 100."
+          "reponse": 0,
+          "explication": "On enlève la virgule : 0,37 = 37/100."
         }
       ],
       "centres": [
-        "sport"
+        "art-design"
       ]
     },
     {
@@ -38205,16 +38191,17 @@
       "serie": "Maths 6e",
       "type": "short",
       "renvoie_vers": "6e-frac-decimal",
-      "fichier": "6e/maths/fractions/04-decimal/eleveai-maths-6e-frac-decimal-short.mp4",
-      "miniature": "6e/maths/fractions/04-decimal/eleveai-maths-6e-frac-decimal-short.png",
-      "titre": "3 minutes sur 4 : que doit afficher l'appli ? 🎵 — 6e #Shorts",
-      "accroche": "Hugo, ingénieur du son, crée une appli de musique. Sa chanson dure 4 minutes, on en a écouté 3 : 3/4 de la chanson. L'appli, elle, calcule 3 ÷ 4 = 0,75… et affiche 75 % !\n\n🥋 Ceinture jaune.\n👉 À toi : tu as écouté 1 minute sur 4. Quel pourcentage affiche l'appli ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_decimal&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #6e #collège",
+      "fichier": "6e/maths/fractions/04-decimal/eleveai-maths-6e-frac-decimal-v2-short.mp4",
+      "miniature": "6e/maths/fractions/04-decimal/eleveai-maths-6e-frac-decimal-v2-short.png",
+      "titre": "Scier à 13/10 de mètre : il coupe où ? 🪚 — 6e #Shorts",
+      "accroche": "Rayan est menuisier. Son plan dit : scier à 13/10 de mètre. Sa règle n'a que des virgules… 10 dixièmes font déjà 1 mètre, plus 3 dixièmes : 13/10 = 1,3. Au-dessus, la fraction ; en dessous, le décimal : même point !\n\n🥋 Ceinture jaune.\n👉 À toi : 17/10, ça s'écrit comment avec une virgule ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_decimal&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fractions #6e #collège",
       "tags": [
         "fraction et décimal",
-        "pourcentage",
-        "barre de lecture",
-        "musique",
-        "ingénieur du son",
+        "fraction décimale",
+        "droite graduée",
+        "dixièmes",
+        "menuisier",
+        "menuiserie",
         "fractions",
         "maths",
         "6e",
@@ -38224,22 +38211,9 @@
         "ceinture jaune",
         "Shorts"
       ],
-      "questions": [
-        {
-          "t": "00:29",
-          "question": "À la moitié de la chanson, l'appli affiche :",
-          "choix": [
-            "12 %",
-            "50 %",
-            "0,5 %"
-          ],
-          "reponse": 1,
-          "explication": "1/2 = 0,5 = 50 %."
-        }
-      ],
+      "questions": [],
       "centres": [
-        "musique",
-        "technologie-ia"
+        "art-design"
       ]
     },
     {

@@ -1,0 +1,18 @@
+{
+  "01-situation": "Maëlys est couturière. Elle coupe du tissu pour un costume de théâtre. Sur son patron, c'est écrit : 7 dixièmes de mètre. Mais son mètre ruban, lui, n'affiche que des virgules. Où couper ?",
+  "02-dixiemes": "Sur le ruban, entre 0 et 1 mètre, il y a 10 petits intervalles égaux. Chacun vaut un dixième : 1 sur 10. En dessous, on écrit 0,1.",
+  "03-compter": "Un dixième, deux, trois, quatre, cinq, six, sept dixièmes. Au-dessus du trait : 7 dixièmes. En dessous : 0,7. C'est le même point, donc le même nombre.",
+  "04-question": "Question ! Au-dessus d'un point, on lit 4 dixièmes. Qu'écrit-on dessous ? A : 4,10. B : 0,4. C : 0,04. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B : 0,4. Quatre dixièmes : le 4 se place juste après la virgule.",
+  "05-plus-que-1": "Pour la manche, Maëlys a besoin de 13 dixièmes de mètre. Plus grand que 1 ? Oui : 10 dixièmes font déjà 1 mètre.",
+  "06-treize": "13 dixièmes, c'est 10 dixièmes plus 3 dixièmes : 1 plus 3 dixièmes. Au-dessus du point : 13 dixièmes. En dessous : 1,3.",
+  "07-regle": "Voilà la règle : le dénominateur 10 donne un chiffre après la virgule.",
+  "08-centiemes": "Et avec 100 ? Un centimètre, c'est un centième de mètre : 1 centième, égale 0,01. 25 centièmes, c'est 0,25 : deux chiffres après la virgule.",
+  "09-piege": "Attention : 7 centièmes, ce n'est pas 0,7 ! C'est 0,07. Avec 100, il faut deux chiffres après la virgule : on ajoute un zéro.",
+  "10-question": "Question ! 0,37, c'est combien de centièmes ? A : 37. B : 3,7. C : 370. Mets pause, et choisis !",
+  "10b-reponse": "Réponse A : 37. On enlève la virgule : 37 centièmes.",
+  "11-defi": "Ton défi : Maëlys coupe 1,6 mètre de dentelle. Écris-le avec une fraction de dénominateur 10, puis place-le sur la droite. Mets pause, et cherche !",
+  "11b-correction": "Correction : 1,6 égale 16 dixièmes, égale 1 plus 6 dixièmes. On passe 1, et on avance de 6 dixièmes.",
+  "12-finale": "Ce que tu as appris. 7 dixièmes égale 0,7 : un chiffre après la virgule. 13 dixièmes égale 1 plus 3 dixièmes, égale 1,3. 7 centièmes égale 0,07, pas 0,7. Sur la droite, la fraction et le décimal, c'est le même point.",
+  "13-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

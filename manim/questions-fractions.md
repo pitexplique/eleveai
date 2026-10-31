@@ -27,7 +27,15 @@ Recopié des rapports des agents au fil des lots (consigne : `manim/consigne-vid
   [{"t":"01:02","question":"4 parts sur 6, c'est combien de tiers ?","choix":["4/3","2/3","1/3"],"reponse":1,"explication":"4/6 : ÷ 2 en haut et en bas → 2/3."}]
   ```
 
-### 04-decimal (fraction_decimal) — lot A, 25/10
+### 04-decimal (fraction_decimal) — v2 du 31/10 (REMPLACE le lot A ci-dessous, mêmes ids)
+- Paysage `6e-frac-decimal` = `eleveai-maths-6e-frac-decimal-v2.mp4` (3:37, verte, Maëlys couturière : 7/10 de mètre sur un mètre ruban à virgules ; droite graduée, fraction AU-DESSUS, décimal EN DESSOUS ; 13/10 = 1 + 3/10 = 1,3 ; piège 7/100 = 0,07 ; défi 1,6 = 16/10). Centres : `["art-design"]`.
+  ```json
+  [{"t":"00:45","question":"Au-dessus d'un point, on lit 4/10. Qu'écrit-on dessous ?","choix":["4,10","0,4","0,04"],"reponse":1,"explication":"4/10 = 0,4 : quatre dixièmes, le 4 se place juste après la virgule."},
+   {"t":"02:13","question":"0,37, c'est combien de centièmes ?","choix":["37","3,7","370"],"reponse":0,"explication":"On enlève la virgule : 0,37 = 37/100."}]
+  ```
+- Short `6e-frac-decimal-short` = `eleveai-maths-6e-frac-decimal-v2-short.mp4` (JAUNE, Rayan menuisier : scier à 13/10 m = 1,3 m). Centres : `["art-design"]`. Pas de question-pause (voix validée) ; commentaire : « 17/10 avec une virgule ? » (1,7).
+
+### 04-decimal (fraction_decimal) — lot A, 25/10 (ANCIENNE version, remplacée le 31/10)
 - Paysage `6e-frac-decimal` (5:15, verte, Kenza entraîneuse de basket : 3 lancers francs sur 4 = 3 ÷ 4 = 0,75 = 75 % ; piège 3/4 ≠ 3,4 ; défi 4/5 = 0,8 = 80 %). Centres : `["sport"]`.
   ```json
   [{"t":"01:18","question":"Quelle est l'écriture décimale de 1/4 ?","choix":["1,4","0,25","4,1"],"reponse":1,"explication":"1 ÷ 4 = 0,25 ; 1,4 colle les deux nombres : faux."},
