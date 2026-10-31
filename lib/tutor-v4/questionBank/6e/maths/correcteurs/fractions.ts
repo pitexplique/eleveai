@@ -84,23 +84,6 @@ function partsPourFraction(q: TutorGeneratedQuestionV4): string[] {
   return verifierAttendu(q, (t.d / b) * a);
 }
 
-/** « 3/4 L de lait… (3/4, c’est 3 ÷ 4.) » : la valeur décimale, l'unité, le rappel du quotient. */
-function fractionEnDecimal(q: TutorGeneratedQuestionV4, qcm: boolean, sup1: boolean): string[] {
-  const m = q.text.match(/(\d+)\/(\d+) (L|kg|m|km)\b/);
-  if (!m) return ["fraction suivie d'une unité introuvable"];
-  const [n, d, u] = [Number(m[1]), Number(m[2]), m[3]];
-  const p: string[] = [];
-  if (!q.text.includes(`${n} ÷ ${d}`)) p.push(`le texte doit dire « ${n}/${d}, c’est ${n} ÷ ${d} »`);
-  let r = d;
-  while (r % 2 === 0) r /= 2;
-  while (r % 5 === 0) r /= 5;
-  if (r !== 1) p.push(`${n}/${d} n'a pas d'écriture décimale finie`);
-  if (sup1 ? n <= d : n >= d) p.push(`${n}/${d} ${sup1 ? "devrait dépasser 1" : "devrait être plus petit que 1"}`);
-  if (n / d > 3) p.push(`${n / d} ${u} : peu plausible`);
-  if (!qcm && !String(q.expected[0]).endsWith(` ${u}`)) p.push(`la réponse attendue devrait porter l'unité ${u}`);
-  return [...p, ...(qcm ? verifierQcm(q, n / d) : verifierAttendu(q, n / d))];
-}
-
 /** « la plus grande » / « la plus petite » : la bonne valeur parmi des fractions. */
 function extreme(q: TutorGeneratedQuestionV4, fr: [number, number][]): { v: number; p: string[] } {
   const grande = /plus grande|le plus possible/.test(q.text);
@@ -545,9 +528,6 @@ export const CORRECTEURS: CorrecteursMaths = {
     for (const [n, d] of fr) if (d > 12 || n > 25) p.push(`${n}/${d} : trop grand pour la 6e`);
     return p;
   },
-  fraction_decimal_tpl_1: (q) => fractionEnDecimal(q, false, false),
-  fraction_decimal_tpl_quotient: (q) => fractionEnDecimal(q, false, true),
-  fraction_decimal_qcm_tpl_1: (q) => fractionEnDecimal(q, true, false),
   fraction_representer_tpl_1: (q) => [
     ...partsPourFraction(q),
     ...(totalParts(q.text) && fractionsDe(q.text)[0]?.[1] !== totalParts(q.text)!.d ? ["le dénominateur n'est pas le nombre de parts (★1)"] : []),

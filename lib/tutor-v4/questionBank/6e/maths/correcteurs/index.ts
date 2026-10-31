@@ -15,6 +15,7 @@ import { CORRECTEURS as donnees } from "./donnees";
 import { CORRECTEURS as durees } from "./durees";
 import { CORRECTEURS as echelles } from "./echelles";
 import { CORRECTEURS as entiers } from "./entiers";
+import { CORRECTEURS as fractionDecimal } from "./fraction-decimal";
 import { CORRECTEURS as fractions } from "./fractions";
 import { CORRECTEURS as fractionsCalcul } from "./fractions-calcul";
 import { CORRECTEURS as longueurs } from "./longueurs";
@@ -47,6 +48,7 @@ export const CORRECTEURS_6E: CorrecteursMaths = {
   ...durees,
   ...echelles,
   ...entiers,
+  ...fractionDecimal,
   ...fractions,
   ...fractionsCalcul,
   ...longueurs,

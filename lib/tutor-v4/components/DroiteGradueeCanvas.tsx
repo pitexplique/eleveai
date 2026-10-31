@@ -11,6 +11,8 @@ type NumberLinePoint = {
   value: number;
   label?: string;
   color?: string;
+  /** Écrit SOUS l'axe, à l'aplomb du point (ex. « 0,7 » sous 7/10). */
+  below?: string;
 };
 
 function clamp(value: number, min: number, max: number) {
@@ -62,6 +64,16 @@ export default function DroiteGradueeCanvas({ figure }: Props) {
   const axisStartX = valueToX(min, min, max, leftPad, rightPad, width);
   const axisEndX = valueToX(max, min, max, leftPad, rightPad, width);
 
+  // Graduations secondaires, sans valeur écrite (les dixièmes entre 0 et 1).
+  const minorStep = figure.minorStep ?? 0;
+  const minorTicks: number[] = [];
+  if (minorStep > 0 && (max - min) / minorStep <= 60) {
+    for (let v = min; v <= max + 1e-9; v += minorStep) {
+      const t = Number(v.toFixed(10));
+      if (!ticks.some((m) => Math.abs(m - t) < 1e-9)) minorTicks.push(t);
+    }
+  }
+
   return (
     <div className="mx-auto w-full max-w-[320px] rounded-xl border border-slate-200 bg-white p-2 shadow-sm">
       <svg
@@ -97,6 +109,24 @@ export default function DroiteGradueeCanvas({ figure }: Props) {
           strokeLinecap="round"
           strokeLinejoin="round"
         />
+
+        {/* Graduations secondaires */}
+        {showTicks &&
+          minorTicks.map((tick) => {
+            const x = valueToX(tick, min, max, leftPad, rightPad, width);
+            return (
+              <line
+                key={`minor-${tick}`}
+                x1={x}
+                y1={axisY - 5}
+                x2={x}
+                y2={axisY + 5}
+                stroke="#0f172a"
+                strokeWidth={1.4}
+                strokeLinecap="round"
+              />
+            );
+          })}
 
         {/* Graduations */}
         {showTicks &&
@@ -165,12 +195,29 @@ export default function DroiteGradueeCanvas({ figure }: Props) {
                 />
 
                 {/* label du point */}
+                {/* l'autre écriture, sous l'axe */}
+                {pt.below ? (
+                  <text
+                    x={x}
+                    y={axisY + 46}
+                    textAnchor="middle"
+                    fontSize="14"
+                    fontWeight="900"
+                    fill={pointColor}
+                    stroke="white"
+                    strokeWidth="2"
+                    paintOrder="stroke"
+                  >
+                    {pt.below}
+                  </text>
+                ) : null}
+
                 {showPointLabels && pt.label ? (
                   <>
                     <rect
-                      x={x - 16}
+                      x={x - Math.max(16, pt.label.length * 4.5 + 5)}
                       y={axisY - 52}
-                      width={32}
+                      width={Math.max(32, pt.label.length * 9 + 10)}
                       height={20}
                       rx={5}
                       fill="white"

@@ -2,6 +2,7 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 import { entiersBank } from "./entiers.bank";
 import { fractionsBank } from "./fractions.bank";
+import { fractionDecimalBank } from "./fraction-decimal.bank";
 import { fractionsCalculBank } from "./fractions-calcul.bank";
 import { algebreBank } from "./algebre.bank";
 import { decimauxBank } from "./decimaux.bank";
@@ -44,6 +45,7 @@ export const maths6eQuestionBank: TutorBankItemV4[] = [
   ...decimauxBank,
   ...demiDroiteBank,
   ...fractionsBank,
+  ...fractionDecimalBank,
   ...fractionsCalculBank,
   ...algebreBank,
   ...pourcentagesBank,

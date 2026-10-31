@@ -160,6 +160,8 @@ export type NumberLineCanvasPoint = {
   value: number;
   label?: string;
   color?: string;
+  /** Écrit sous l'axe, à l'aplomb du point (l'autre écriture du nombre). */
+  below?: string;
 };
 
 /**
@@ -190,6 +192,8 @@ export type NumberLineCanvasData = {
   min?: number;
   max?: number;
   step?: number;
+  /** Graduations secondaires sans valeur écrite (ex. 0,1 entre 0 et 1). */
+  minorStep?: number;
   points?: NumberLineCanvasPoint[];
   intervalles?: NumberLineCanvasIntervalle[];
   display?: {
@@ -1499,6 +1503,8 @@ export type DroiteGradueePoint = {
   value: number;
   label?: string;
   color?: string;
+  /** Écrit sous l'axe, à l'aplomb du point (l'autre écriture du nombre). */
+  below?: string;
 };
 
 export type DroiteGradueeCanvasData = {
@@ -1507,6 +1513,8 @@ export type DroiteGradueeCanvasData = {
   min?: number;
   max?: number;
   step?: number;
+  /** Graduations secondaires sans valeur écrite (ex. 0,1 entre 0 et 1). */
+  minorStep?: number;
 
   points?: DroiteGradueePoint[];
   /** Voir `NumberLineCanvasIntervalle`. */
