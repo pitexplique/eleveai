@@ -110,6 +110,7 @@ Finale à corriger : « … Alors l'épisode 3 t'attend : calculer l'hypoténuse
   - r : « Réponse B : 100. C'est égal : le coin est droit. »
 
 ## Ép. 7 — Rédiger (`4e-pythagore-rediger`, micro `pythagore_rediger`)
+✅ RENDU 31/10 : paysage 4:16 (Q1 t=01:33, Q2 t=02:19), short 0:56 (Q t=00:15).
 **Paysage**
 - Q1 après `04-mots` :
   - q : « Question ! ABC est rectangle en A, et on cherche BC. On utilise : A : le théorème. B : la réciproque. C : les deux. Mets pause, et choisis ! »
@@ -139,6 +140,7 @@ Finale à corriger : « … Alors l'épisode 3 t'attend : calculer l'hypoténuse
   - r : « Réponse A : oui, en B. AB et BC sont deux arêtes de la face. »
 
 ## 3e — Pythagore dans un solide (`3e-pythagore-solide`, micro `pythagore_solide`)
+✅ RENDU 31/10 : paysage 5:00 (Q1 t=01:54, Q2 t=02:44), short 1:02 (Q t=00:14).
 **Paysage** (ceinture verte)
 - Q1 après `06-piege` :
   - q : « Question ! Combien vaut 1 virgule 5 au carré ? A : 2 virgule 25. B : 1 virgule 25. C : 3. Mets pause, et choisis ! »

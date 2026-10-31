@@ -1,5 +1,7 @@
 {
   "00-accroche": "Théorème ou réciproque ? Lequel écrire ?",
   "01-image": "L'angle droit, tu le connais ? Théorème : tu calcules une longueur. Tu le cherches ? Réciproque : tu prouves qu'il est là.",
+  "01q-question": "Question ! Un triangle a pour côtés 7, 24 et 25. Est-il rectangle ? Pour le savoir : A : le théorème. B : la réciproque. C : aucun des deux. Mets pause, et choisis !",
+  "01r-reponse": "Réponse B : la réciproque. On cherche l'angle droit.",
   "02-question": "RST est rectangle en S, RS égale 9, ST égale 12. Pour trouver RT, théorème ou réciproque ? Réponds en commentaire !"
 }

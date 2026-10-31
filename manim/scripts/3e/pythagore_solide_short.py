@@ -6,6 +6,10 @@
 # le calcul qui s'écrit en même temps (67,24 − 3,24 = 64, OA = 8 cm).
 # Question en commentaire : le cornet de glace 13 / 5 → 12 cm.
 # Voix validée le 13/10 : manim/voix/3e-pythagore-solide-short.json.
+# ⭐ 31/10/2026 : + 1 question-pause après 01-image (questions-pythagore.md, 3e),
+# compte à rebours de 3 s, module commun ../4e/pythagore_pauses.py ; marques mot à mot :
+# 3e-pythagore-solide-short.marques.json (ici). Avant tout rendu :
+#   AUDIT=1 BORDS=1 python -m manim render --dry_run -r 1080,1920 manim/scripts/3e/pythagore_solide_short.py ShortGobelet3e
 #
 # Rendu : python -m manim render -qh -r 1080,1920 --disable_caching manim/scripts/3e/pythagore_solide_short.py ShortGobelet3e -o eleveai-maths-3e-pythagore-solide-short --media_dir manim/scripts/3e/media
 # Puis copier le mp4 dans manim/sorties/3e/maths/pythagore/01-gobelet-brevet/.
@@ -25,17 +29,21 @@ from manim import *  # noqa: E402
 
 from charte import *  # noqa: E402
 from gabarit_sixieme import Short6e  # noqa: E402
+from pythagore_pauses import PausesShort, sans_audit  # noqa: E402
 from signes_expression_2de import ceinture  # noqa: E402
 
 
-class ShortGobelet3e(Short6e):
+class ShortGobelet3e(PausesShort, Short6e):
     nom_voix = "3e-pythagore-solide-short"
+    Y_TETE, ECART, FS_C = 2.7, 0.16, 24  # (31/10) question sur 3 lignes : la phrase garde sa taille
 
     t = PythagoreCarreRacine4e.t
     carre_droit = PythagoreReconnaitre4e.carre_droit
     gobelet = PythagoreSolide3e.gobelet
     triangle_cache = PythagoreSolide3e.triangle_cache
     lettre = PythagoreSolide3e.lettre
+    morceler = PythagoreSolide3e.morceler        # (31/10) chaque nombre à son mot
+    poser_copie = PythagoreSolide3e.poser_copie
 
     def construct(self):
         self.margo_bas()
@@ -56,14 +64,15 @@ class ShortGobelet3e(Short6e):
 
         # ── 01 ──
         self.dire("01-image")
-        self.play(FadeOut(q))
+        self.play(FadeOut(q), run_time=0.2)
         self.au_mot("On remet la pointe")
-        self.play(Create(g["pointe"]), run_time=1.2)
-        self.play(FadeIn(Dot(g["O"], radius=0.06)), FadeIn(self.lettre("O", g["O"], DOWN, size=26)))
+        self.play(Create(g["pointe"]), run_time=1.0)
+        dO, lO = Dot(g["O"], radius=0.06), self.lettre("O", g["O"], DOWN, size=26)
+        self.play(FadeIn(dO), FadeIn(lO), run_time=0.4)
         fond, oa, ad, od, carre = self.triangle_cache(g)
         self.au_mot("La hauteur OA")
-        self.play(FadeIn(self.lettre("A", g["A"], LEFT, size=24)), FadeIn(self.lettre("D", g["D"], RIGHT, size=24)),
-                  Create(oa), Create(ad))
+        lA, lD = self.lettre("A", g["A"], LEFT, size=24), self.lettre("D", g["D"], RIGHT, size=24)
+        self.play(FadeIn(lA), FadeIn(lD), Create(oa), Create(ad))
         self.au_mot("le triangle OAD s'allume")
         self.play(Create(od), FadeIn(fond), GrowFromCenter(carre))
         self.play(carre.animate.scale(2.2))
@@ -72,19 +81,27 @@ class ShortGobelet3e(Short6e):
         self.play(Write(l1))
         self.attendre_voix(marge=0.3)
 
+        # ── 01q : la question-pause (3 s), puis le gobelet revient tel quel ──
+        self.ecran_question("01q-question", "01r-reponse",
+                            ["Le triangle OAD", "est rectangle en A.", "Son hypoténuse ?"],
+                            ["OA", "OD", "AD"], 1, ["OD, le bord du cône."])
+        self.clear()
+        self.margo_bas()
+        self.add(titre, badge, g["corps"], g["pointe"], dO, lO, lA, lD, fond, oa, ad, od, carre)
+
         # ── 02 ──
         self.dire("02-calcul")
-        self.play(FadeOut(l1))
         y1, y2, y3 = -1.3, -1.78, -2.3
-        self.au_mot("OD égale")
+        self.au_mot("8 virgule 2")
         self.play(FadeIn(self.t("8,2", 22, COUL_HYP).next_to((g["O"] + g["D"]) / 2, RIGHT, buff=0.12)))
-        self.au_mot("AD égale")
+        self.au_mot("1 virgule 8")
         self.play(FadeIn(self.t("1,8", 20, COUL_DROIT).next_to(Line(g["A"], g["D"]), UP, buff=0.22)),
                   FadeIn(self.t("?", 26, COTE).next_to(Line(g["O"], g["A"]), LEFT, buff=0.12)))
-        self.au_mot("67 virgule 24")
-        self.play(Write(self.grand("OA² = 8,2² − 1,8²", font_size=30).move_to(P(0, y1))))
-        self.play(FadeIn(self.grand("= 67,24 − 3,24 = 64", font_size=30).move_to(P(0, y2))))
-        self.au_mot("OA égale 8")
+        self.play(FadeIn(self.grand("OA² = 8,2² − 1,8²", font_size=30).move_to(P(0, y1))), run_time=0.4)
+        l2 = self.morceler(["= 67,24", "− 3,24", "= 64"], 30, WHITE)
+        l2.scale_to_fit_width(min(l2.width, config.frame_width - 0.6)).move_to(P(0, y2))  # comme grand()
+        self.poser_copie([l2], self._pos("AD égale"))
+        self.au_nb("OA égale 8")
         res = self.grand("OA = 8 cm", font_size=40, color=VERT_OK).move_to(P(0, y3))
         self.play(Write(res), oa.animate.set_color(VERT_OK))
         self.play(Circumscribe(res, color=VERT_OK))
@@ -94,7 +111,7 @@ class ShortGobelet3e(Short6e):
         self.clear()
         self.margo_bas()
         self.dire("03-question")
-        self.play(Write(self.grand("À toi !", font_size=56, color=JAUNE_TITRE).move_to(P(0, 2.85))))
+        self.play(FadeIn(self.grand("À toi !", font_size=56, color=JAUNE_TITRE).move_to(P(0, 2.85))), run_time=0.3)
         # Le cornet : la boule en haut, la pointe en bas.
         B, S = P(0, 1.65), P(0, -0.65)
         r = 0.95
@@ -104,11 +121,11 @@ class ShortGobelet3e(Short6e):
         boule = Arc(radius=r, start_angle=0, angle=PI, color=WHITE, stroke_width=3,
                     fill_color="#F9A8D4", fill_opacity=0.6).move_arc_center_to(B)
         self.au_mot("Un cornet")
-        self.play(FadeIn(cornet), FadeIn(boule))
-        self.au_mot("le bord mesure")
+        self.play(FadeIn(cornet), FadeIn(boule), run_time=0.8)
+        self.au_nb("mesure 13")
         bord = Line(S, B + RIGHT * r, color=COUL_HYP, stroke_width=7)
         self.play(Create(bord), FadeIn(self.t("13 cm", 24, COUL_HYP).next_to(bord.get_center() + DOWN * 0.3, RIGHT, buff=0.15)))
-        self.au_mot("le rayon 5")
+        self.au_nb("rayon 5")
         ray = Line(B, B + RIGHT * r, color=COUL_DROIT, stroke_width=6)
         self.play(Create(ray), FadeIn(self.t("5 cm", 24, COUL_DROIT).next_to(B + RIGHT * r, RIGHT, buff=0.12)))
         self.au_mot("Quelle est sa hauteur")
@@ -117,6 +134,6 @@ class ShortGobelet3e(Short6e):
         self.play(FadeIn(self.grand("Quelle est sa hauteur ?", font_size=30, color=COTE).move_to(P(0, -1.2))))
         self.au_mot("Réponds en commentaire")
         rep = VGroup(self.grand("en commentaire !", font_size=34, color=VERT_OK),
-                     self.grand("@eleveai974", font_size=34, color=BLEU_CALCUL)).arrange(DOWN, buff=0.12)
+                     sans_audit(self.grand("@eleveai974", font_size=34, color=BLEU_CALCUL))).arrange(DOWN, buff=0.12)
         self.play(FadeIn(rep.move_to(P(0, -2.0))))
         self.attendre_voix(marge=1.5)

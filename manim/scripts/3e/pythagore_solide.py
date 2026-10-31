@@ -14,10 +14,18 @@
 #   pyramide, pavé                   → 07-partout
 #   pavé en deux étapes (défi)       → 09-defi, 09b-correction
 #
-# Voix : manim/voix/3e-pythagore-solide.json (Julie, débit −7), validée le 13/10 (« go »).
+# ⭐ 31/10/2026 : refonte « questions-pauses » (manim/questions-pythagore.md, 3e) :
+# Q1 après 06-piege (1,5²), Q2 après 07-partout (hauteur d'un cône), compte à rebours
+# de 5 s ; fin du 19/10. Module commun : ../4e/pythagore_pauses.py (importé, pas copié).
+# Marques mot à mot : 3e-pythagore-solide.marques.json (ici). Avant tout rendu :
+#   AUDIT=1 BORDS=1 python -m manim render --dry_run manim/scripts/3e/pythagore_solide.py PythagoreSolide3e
+#
+# Voix : manim/voix/3e-pythagore-solide.json (Julie, débit −7), validée le 13/10 (« go ») ;
+# clés 06q/06r/07q/07r et 11-abonne ajoutées ou changées le 31/10.
 # Rendu : python -m manim render -qh --disable_caching manim/scripts/3e/pythagore_solide.py PythagoreSolide3e -o eleveai-maths-3e-pythagore-solide --media_dir manim/scripts/3e/media
 # Puis copier le mp4 dans manim/sorties/3e/maths/pythagore/01-gobelet-brevet/.
 
+import re
 import sys
 from pathlib import Path
 
@@ -26,6 +34,7 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "4e"))
 
 from pythagore_hypotenuse import COTE, COUL_DROIT, COUL_HYP, P, PythagoreHypotenuse4e, echelle_ceintures  # noqa: E402
+from pythagore_pauses import PausesPaysage, sans_audit  # noqa: E402
 
 from manim import *  # noqa: E402
 
@@ -46,13 +55,18 @@ def pointilles(a, b, color=GRAY_B, width=3):
     return DashedLine(a, b, color=color, stroke_width=width, dash_length=0.12)
 
 
-class PythagoreSolide3e(PythagoreHypotenuse4e):
+# Le mixin EN PREMIER, sauf si la scène parente (ép. 3, un autre agent) l'a déjà : MRO cohérent.
+_BASES = ((PythagoreHypotenuse4e,) if issubclass(PythagoreHypotenuse4e, PausesPaysage)
+          else (PausesPaysage, PythagoreHypotenuse4e))
+
+
+class PythagoreSolide3e(*_BASES):
     nom_voix = "3e-pythagore-solide"
     identite = "Maths 3e — EleveAI"
 
     # ── le gobelet ──────────────────────────────────────────────────────────
 
-    def gobelet(self, cx=-4.0, yO=-3.4, yB=2.2, rB=2.4, ech=1.0):
+    def gobelet(self, cx=-4.0, yO=-3.0, yB=2.2, rB=2.4, ech=1.0):  # (31/10) yO −3,4 → −3,0 : 3 % du bas
         """Le gobelet (tronc de cône) et sa pointe imaginaire.
 
         Au brevet OA : OB = 8 : 20 ; le dessin prend 0,45 au lieu de 0,4 pour
@@ -90,7 +104,61 @@ class PythagoreSolide3e(PythagoreHypotenuse4e):
     def lettre(self, nom, pt, direction, size=32, color=WHITE):
         return self.t(nom, size, color).move_to(pt + direction * 0.32)
 
-    # ── 00 : page de garde ──────────────────────────────────────────────────
+    # ── (31/10) MORCEAU PAR MORCEAU (copie des helpers de 4e/pythagore_rediger.py) ─
+
+    def morceler(self, morceaux, font_size, color):
+        """Une ligne en morceaux (des Text), posés EXACTEMENT comme la ligne entière."""
+        txts = [m[0] if isinstance(m, tuple) else m for m in morceaux]
+        F = self.t(" ".join(txts), font_size, color)
+        ms = [self.t(x, font_size, color) for x in txts]
+        n = [len([c for c in x if not c.isspace()]) for x in txts]
+        if len(F) == sum(n) and all(len(m) == k for m, k in zip(ms, n)):
+            i = 0
+            for m, k in zip(ms, n):
+                m.shift(F[i].get_center() - m[0].get_center())
+                i += k
+        else:
+            VGroup(*ms).arrange(RIGHT, buff=0.14 * font_size / 30)
+        for m, x in zip(ms, txts):
+            if re.fullmatch(r"\d\.", x.strip()):
+                sans_audit(m)  # le « 1. » de la copie se dit « Un : »
+        g = VGroup(*ms)
+        g.morceaux, g.cues = ms, [m[1] if isinstance(m, tuple) else None for m in morceaux]
+        return g
+
+    def copie_m(self, lignes, x, y0, pas, font_size):
+        """Comme copie(), mais chaque ligne = liste de morceaux (str, ou (str, extrait de la voix))."""
+        g = VGroup()
+        for k, spec in enumerate(lignes):
+            l = self.morceler(spec[0], font_size, spec[1])
+            retrait = spec[2] if len(spec) > 2 else 0.0
+            l.move_to(P(0, y0 - k * pas)).align_to(P(x + retrait, 0), LEFT)
+            g.add(l)
+        return g
+
+    def poser_copie(self, lignes, depuis=0):
+        """Chaque morceau paraît à SON mot : l'extrait donné, sinon son 1er mot et son dernier
+        nombre ; un extrait "" = dans la MÊME animation que le morceau d'avant."""
+        groupes = []
+        for l in lignes:
+            for m, cue in zip(l.morceaux, l.cues):
+                if cue == "" and groupes:
+                    groupes[-1][1].append(m)
+                else:
+                    groupes.append((cue, [m]))
+        for cue, ms in groupes:
+            if cue is not None and cue != "":
+                j = self._texte_voix.find(cue, depuis + 1 if depuis else 0)  # après le morceau d'avant
+                if j < 0:
+                    raise ValueError(f"« {cue} » absent de la voix après {depuis}")
+                self._attendre_pos(j)
+                depuis = j
+            elif cue is None:
+                i, depuis = self._cue(ms[0], depuis)
+                if i is not None:
+                    self._attendre_pos(i)
+            self.play(*[FadeIn(m, shift=RIGHT * 0.15) for m in ms], run_time=0.3)
+        return depuis    # ── 00 : page de garde ──────────────────────────────────────────────────
 
     def page_de_garde(self):
         self.clear()
@@ -121,10 +189,13 @@ class PythagoreSolide3e(PythagoreHypotenuse4e):
         self.play(FadeIn(self.ligne("un tronc de cône", 2.0, 40, CORPS, x=2.6)))
         self.au_mot("coupé la pointe")
         self.play(FadeIn(self.ligne("= un cône sans sa pointe", 1.3, 32, WHITE, x=2.6)))
-        self.au_mot("brevet 2026")
-        badge = self.t("Brevet 2026 — exercice 2", 32, JAUNE_TITRE)
+        # (31/10) dans l'ordre de la voix : « l'exercice 2 du brevet 2026 », chacun à son mot
+        badge = self.morceler([("Exercice 2", "2 du brevet"), "— brevet 2026"], 32, JAUNE_TITRE)
         cadre = SurroundingRectangle(badge, color=JAUNE_TITRE, buff=0.18, corner_radius=0.1)
-        self.play(FadeIn(VGroup(badge, cadre).move_to(P(2.6, 0.2))))
+        VGroup(badge, cadre).move_to(P(2.6, 0.2))
+        self.au_mot("C'est l'exercice")
+        self.play(Create(cadre), run_time=0.3)
+        self.poser_copie([badge], self._pos("C'est l'exercice"))
         self.au_mot("la hauteur de la partie coupée")
         q = self.t("?", 60, COTE).move_to((g["A"] + g["O"]) / 2)
         self.play(FadeIn(q, scale=1.6))
@@ -205,10 +276,10 @@ class PythagoreSolide3e(PythagoreHypotenuse4e):
         self.play(od.animate.set_stroke(width=16))
         self.play(od.animate.set_stroke(width=9))
         self.play(FadeIn(self.ligne("hypoténuse : OD", 1.8, 38, COUL_HYP, x=2.6)))
-        self.au_mot("On connaît OD")
+        self.au_mot("8 virgule 2")  # (31/10) à son nombre
         l_od = self.t("8,2 cm", 30, COUL_HYP).next_to((g["O"] + g["D"]) / 2, RIGHT, buff=0.2)
         self.play(FadeIn(l_od), FadeIn(self.ligne("OD = 8,2 cm", 0.9, 36, COUL_HYP, x=2.6)))
-        self.au_mot("Et le rayon AD")
+        self.au_mot("1 virgule 8")
         l_ad = self.t("1,8 cm", 26, COUL_DROIT).next_to(Line(g["A"], g["D"]), UP, buff=0.32)
         self.play(FadeIn(l_ad), FadeIn(self.ligne("AD = 1,8 cm", 0.2, 36, COUL_DROIT, x=2.6)))
         self.au_mot("On cherche OA")
@@ -231,17 +302,19 @@ class PythagoreSolide3e(PythagoreHypotenuse4e):
         x0 = 2.0
         self.au_mot("OA au carré égale")
         self.play(Write(self.ligne("OA² = OD² − AD²", 2.0, 40, x=x0)))
-        self.au_mot("8 virgule 2 au carré")
-        self.play(FadeIn(self.ligne("8,2² = 67,24", 1.15, 36, COUL_HYP, x=x0)))
-        self.au_mot("1 virgule 8 au carré")
-        self.play(FadeIn(self.ligne("1,8² = 3,24", 0.45, 36, COUL_DROIT, x=x0)))
-        self.au_mot("67 virgule 24 moins")
-        diff = self.ligne("OA² = 67,24 − 3,24 = 64", -0.35, 38, x=x0)
-        self.play(Write(diff))
-        self.au_mot("OA égale racine")
+        # (31/10) chaque nombre à son mot (marques) : 0 avance.
+        l1 = self.morceler(["8,2²", "= 67,24"], 36, COUL_HYP).move_to(P(x0, 1.15))
+        l2 = self.morceler(["1,8²", "= 3,24"], 36, COUL_DROIT).move_to(P(x0, 0.45))
+        l3 = self.morceler(["OA² = 67,24", "− 3,24", "= 64"], 38, WHITE).move_to(P(x0, -0.35))
+        self.poser_copie([l1, l2, l3], self._pos("moins AD"))
         res = VGroup(self.t("OA =", 44, VERT_OK), self.radical(64, font_size=44, color=VERT_OK),
                      self.t("= 8 cm", 44, VERT_OK)).arrange(RIGHT, buff=0.2).move_to(P(x0, -1.35))
-        self.play(Write(res), oa.animate.set_color(VERT_OK))
+        self.au_mot("OA égale racine")
+        self.play(FadeIn(res[0]), oa.animate.set_color(VERT_OK), run_time=0.4)
+        self.au_nb("racine de 64")
+        self.play(FadeIn(res[1]), run_time=0.3)
+        self.au_nb("64 : 8")
+        self.play(FadeIn(res[2]), run_time=0.3)
         self.play(res.animate.scale(1.3))
         self.play(res.animate.scale(1 / 1.3))
         self.attendre_voix()
@@ -252,15 +325,15 @@ class PythagoreSolide3e(PythagoreHypotenuse4e):
         self.clear()
         self.add_mascotte()
         self.dire("06-piege")
-        self.titre_ecran("Le piège : le carré d'un décimal")
-        self.au_mot("ce n'est pas 64")
-        faux = self.ligne("8,2² = 64,4", 1.9, 46, ROUGE_ERREUR, x=-2.6)
-        self.play(Write(faux))
+        # (31/10) titre plus vif : la voix dit « 8 virgule 2 » dès la 1re seconde
+        self.play(Write(Text("Le piège : le carré d'un décimal", font_size=40, color=JAUNE_TITRE).to_edge(UP)),
+                  run_time=0.5)
+        faux = self.morceler(["8,2²", "= 64,4"], 46, ROUGE_ERREUR).move_to(P(-2.6, 1.9))
+        self.poser_copie([faux])  # (31/10) « 8,2 » puis « 64,4 », chacun à son mot
         self.play(FadeIn(self.ligne("8² = 64 et 2² = 4, recollés", 1.15, 26, ROUGE_ERREUR, x=-2.6)))
         self.play(Create(Line(faux.get_left(), faux.get_right(), color=ROUGE_ERREUR, stroke_width=6)))
-        self.au_mot("On multiplie")
-        juste = self.ligne("8,2 × 8,2 = 67,24", 0.2, 44, VERT_OK, x=-2.6)
-        self.play(Write(juste))
+        juste = self.morceler([("8,2 × 8,2", "8 virgule 2 par"), "= 67,24"], 44, VERT_OK).move_to(P(-2.6, 0.2))
+        self.poser_copie([juste], self._pos("On multiplie"))
         # Le carré de côté 8,2 : 64 au centre, et les bandes que l'erreur oublie.
         u = 0.36
         o = P(1.4, -2.2)
@@ -273,12 +346,12 @@ class PythagoreSolide3e(PythagoreHypotenuse4e):
         b2.next_to(g8, UP, buff=0)
         coin = Square(e).set_stroke(WHITE, 2).set_fill(ORANGE_RETENUE, 0.9)
         coin.next_to(b1, UP, buff=0)
-        self.play(FadeIn(g8), FadeIn(self.t("64", 34).move_to(g8)))
-        self.play(FadeIn(b1), FadeIn(b2), FadeIn(coin))
+        self.play(FadeIn(g8), FadeIn(self.t("64", 34).move_to(g8)), run_time=0.5)  # (31/10) resserré
+        self.play(FadeIn(b1), FadeIn(b2), FadeIn(coin), run_time=0.5)
         self.play(FadeIn(self.t("1,6", 22, ORANGE_RETENUE).next_to(b1, RIGHT, buff=0.1)),
                   FadeIn(self.t("1,6", 22, ORANGE_RETENUE).next_to(b2, UP, buff=0.1)),
-                  FadeIn(self.t("0,04", 20, ORANGE_RETENUE).next_to(coin, UR, buff=0.05)))
-        self.play(FadeIn(self.ligne("64 + 1,6 + 1,6 + 0,04 = 67,24", -0.6, 26, ORANGE_RETENUE, x=-2.6)))
+                  FadeIn(self.t("0,04", 20, ORANGE_RETENUE).next_to(coin, UR, buff=0.05)), run_time=0.5)
+        self.play(FadeIn(self.ligne("64 + 1,6 + 1,6 + 0,04 = 67,24", -0.6, 26, ORANGE_RETENUE, x=-2.6)), run_time=0.5)
         self.au_mot("Le carré d'un décimal")
         self.play(Write(self.chute("Le carré d'un décimal se calcule entier, sans couper.",
                                    color=VERT_OK, font_size=30)))
@@ -363,6 +436,23 @@ class PythagoreSolide3e(PythagoreHypotenuse4e):
                                    color=JAUNE_TITRE, font_size=32)))
         self.attendre_voix()
 
+    # ── 06q / 07q : les questions-pauses ──────────────────────────────────
+
+    def question_decimal(self):
+        self.ecran_question("06q-question", "06r-reponse", ["Combien vaut 1,5² ?"], ["2,25", "1,25", "3"], 0,
+                            [["1,5 × 1,5,", "calculé entier."]])
+
+    def question_cone(self):
+        cone, (O, S, A) = self.petit_cone(P(-4.1, 0.0))
+        fig = VGroup(cone, self.colorie(O, S, A)).scale(1.25)
+        self.LARG, self.FS_Q = 7.0, 32  # (31/10) la question tient sur 3 lignes lisibles
+        self.ecran_question("07q-question", "07r-reponse",
+                            ["Un cône : la génératrice", ["mesure 10 cm,", "le rayon 6 cm."], "Sa hauteur ?"],
+                            ["8 cm", "4 cm", "11,7 cm"], 0,
+                            ["La génératrice est l'hypoténuse :", ["100", "− 36", "= 64,", "√64", "= 8."]],
+                            figure=fig, x_col=2.3)
+        del self.LARG, self.FS_Q
+
     # ── 08 : rédiger au brevet ──────────────────────────────────────────────
 
     def ecran_rediger(self):
@@ -370,24 +460,24 @@ class PythagoreSolide3e(PythagoreHypotenuse4e):
         self.add_mascotte()
         self.dire("08-rediger")
         self.titre_ecran("Comment rédiger au brevet")
+        # (31/10) chaque morceau à son mot (marques) ; le numéro de ligne se dit « Ligne un ».
         lignes = [
-            ("Ligne un", "Le triangle OAD est rectangle en A.", WHITE),
-            ("Ligne deux", "D'après le théorème de Pythagore : OD² = OA² + AD²", WHITE),
-            ("Ligne trois", "OA² = 67,24 − 3,24 = 64", WHITE),
-            ("Ligne quatre", "OA = √64 = 8 cm", VERT_OK),
+            ("Ligne un", [("Le triangle OAD est rectangle en A.", "le triangle")], WHITE),
+            ("Ligne deux", [("D'après le théorème de Pythagore :", "d'après"), ("OD² = OA² + AD²", "OD au carré")], WHITE),
+            ("Ligne trois", [("OA²", "OA au carré"), "= 67,24", "− 3,24", "= 64"], WHITE),
+            ("Ligne quatre", [("OA = √64", "OA égale"), "= 8 cm"], VERT_OK),
         ]
         ys = [1.9, 0.9, -0.1, -1.1]
-        for (mot, texte, coul), yy in zip(lignes, ys):
-            self.au_mot(mot)
+        for (mot, morceaux, coul), yy in zip(lignes, ys):
             chiffre = {"un": "1", "deux": "2", "trois": "3", "quatre": "4"}[mot.split()[1]]
-            num = self.t(chiffre, 34, JAUNE_TITRE)
-            num.move_to(P(-6.0, yy))
-            txt = self.t(texte, 32, coul)
-            txt.next_to(num, RIGHT, buff=0.45)
+            num = sans_audit(self.t(chiffre, 34, JAUNE_TITRE)).move_to(P(-6.0, yy))
+            txt = self.morceler(morceaux, 32, coul).next_to(num, RIGHT, buff=0.45)
             if txt.get_right()[0] > 6.4:
                 txt.scale_to_fit_width(6.4 - txt.get_left()[0])
                 txt.next_to(num, RIGHT, buff=0.45)
-            self.play(FadeIn(num), Write(txt), run_time=1.2)
+            self.au_mot(mot)
+            self.play(FadeIn(num), run_time=0.3)
+            self.poser_copie([txt], self._pos(mot))
             if mot == "Ligne quatre":
                 self.play(Circumscribe(txt, color=VERT_OK))
         self.attendre_voix()
@@ -410,11 +500,11 @@ class PythagoreSolide3e(PythagoreHypotenuse4e):
         pv, p, lettres = self.pave_defi()
         self.au_mot("Une boîte")
         self.play(FadeIn(pv), FadeIn(lettres))
-        self.au_mot("AB égale 4")
+        self.au_nb("AB égale 4")
         self.play(FadeIn(self.t("4 cm", 28, COTE).next_to(Line(p["A"], p["B"]), DOWN, buff=0.35)))
-        self.au_mot("BC égale 3")
+        self.au_nb("BC égale 3")
         self.play(FadeIn(self.t("3 cm", 28, COTE).next_to((p["B"] + p["C"]) / 2, DR, buff=0.12)))
-        self.au_mot("la hauteur CG")
+        self.au_nb("CG égale 12")
         self.play(FadeIn(self.t("12 cm", 28, COTE).next_to(Line(p["C"], p["G"]), RIGHT, buff=0.35)))
         self.au_mot("Combien mesure")
         ag = DashedLine(p["A"], p["G"], color=COUL_HYP, stroke_width=6)
@@ -436,18 +526,22 @@ class PythagoreSolide3e(PythagoreHypotenuse4e):
         t1 = self.colorie(p["B"], p["C"], p["A"], s=0.16)
         self.play(FadeIn(t1))
         self.play(FadeIn(self.ligne("ABC rectangle en B", 2.0, 30, COUL_DROIT, x=x0)))
-        self.au_mot("AC au carré")
-        self.play(Write(self.ligne("AC² = 4² + 3² = 16 + 9 = 25", 1.35, 32, x=x0)))
+        ac = self.morceler([("AC² = 4² + 3²", "AC au carré"), "= 16", "+ 9", "= 25"], 32, WHITE).move_to(P(x0, 1.35))
+        d = self.poser_copie([ac], self._pos("Dans le fond"))  # (31/10) chaque nombre à son mot
         self.au_mot("Puis ACG")
         t2 = self.colorie(p["C"], p["G"], p["A"], s=0.18)
         self.play(FadeOut(t1), FadeIn(t2))
         self.play(FadeIn(self.ligne("ACG rectangle en C", 0.55, 30, COUL_DROIT, x=x0)))
-        self.au_mot("AG au carré")
-        self.play(Write(self.ligne("AG² = 25 + 12² = 25 + 144 = 169", -0.1, 32, x=x0)))
-        self.au_mot("AG égale racine")
+        ag = self.morceler([("AG²", "AG au carré"), "= 25 + 12²", "= 25 + 144", "= 169"], 30, WHITE).move_to(P(x0 + 0.25, -0.1))  # (31/10) ne touche plus le pavé
+        self.poser_copie([ag], self._pos("Puis ACG"))
         res = VGroup(self.t("AG =", 44, VERT_OK), self.radical(169, font_size=44, color=VERT_OK),
                      self.t("= 13 cm", 44, VERT_OK)).arrange(RIGHT, buff=0.2).move_to(P(x0, -1.1))
-        self.play(Write(res))
+        self.au_mot("AG égale racine")
+        self.play(FadeIn(res[0]), run_time=0.4)
+        self.au_nb("racine de 169")
+        self.play(FadeIn(res[1]), run_time=0.3)
+        self.au_nb("169 : 13")
+        self.play(FadeIn(res[2]), run_time=0.3)
         self.play(Circumscribe(res, color=VERT_OK))
         self.attendre_voix()
 
@@ -483,7 +577,9 @@ class PythagoreSolide3e(PythagoreHypotenuse4e):
         self.ecran_hypotenuse()
         self.ecran_calcul()
         self.ecran_piege()
+        self.question_decimal()
         self.ecran_partout()
+        self.question_cone()
         self.ecran_rediger()
         self.ecran_defi()
         self.ecran_correction()
