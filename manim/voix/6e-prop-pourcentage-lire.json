@@ -1,0 +1,16 @@
+{
+  "00-garde": "Lire un pourcentage sur une étiquette. Que cache 70 % ?",
+  "01-situation": "Voici Emma. Elle est chocolatière. Sur sa tablette de chocolat noir, elle écrit : 70 % de cacao. Qu'est-ce que ça veut dire ?",
+  "02-lire": "70 %, c'est 70 sur 100. Sur 100 g de chocolat, il y a 70 g de cacao. Le reste, 30 g, c'est surtout du sucre.",
+  "03-tableau": "Et une tablette de 200 g ? On complète le tableau. 100 g de chocolat, 70 g de cacao. 200 g, c'est 2 fois plus. 70 fois 2, égale 140 g de cacao.",
+  "04-question": "Question ! Un chocolat au lait contient 30 % de cacao. Combien de cacao dans 100 g ? A : 70 g. B : 30 g. C : 3 g. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 30 %, c'est 30 sur 100 : 30 g de cacao dans 100 g.",
+  "05-piege": "Attention au piège ! 70 %, ce n'est pas 70 g dans n'importe quelle tablette. 70 g, c'est pour 100 g. Dans une tablette de 50 g, deux fois moins : 70 divisé par 2, égale 35 g.",
+  "06-autres": "Les pourcentages sont partout. Sur un tee-shirt : 100 % coton. Tout est en coton. Sur une boisson : 0 % de sucre ajouté. On n'a ajouté aucun sucre.",
+  "07-question": "Question ! Une pâte à tartiner contient 20 % de noisettes. Combien de noisettes dans un pot de 200 g ? A : 20 g. B : 220 g. C : 40 g. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. 20 g pour 100 g. 200 g, c'est 2 fois plus : 40 g de noisettes.",
+  "08-defi": "À toi de jouer ! Emma prépare un chocolat à 80 % de cacao. Combien de cacao pour une tablette de 300 g ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 80 g de cacao pour 100 g. 300 g, c'est 3 fois plus. 80 fois 3, égale 240 g de cacao.",
+  "09-finale": "Ce que tu as appris. Lire un pourcentage : 70 %, c'est 70 pour 100. Pour une autre quantité, on complète un tableau de proportionnalité.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -1,0 +1,16 @@
+{
+  "00-garde": "Que veut dire pour cent ? Trois mots, et tu sauras tout.",
+  "01-situation": "Voici Clara. Elle est vétérinaire dans un refuge pour animaux. Le refuge accueille 100 animaux. 45 sont des chats. Sur sa fiche, Clara écrit : 45 % de chats.",
+  "02-sur-100": "Pourquoi 45 % ? Voici 100 cases, une case par animal. 45 cases sont des chats. 45 sur 100. Pour cent veut dire : sur 100. 45 %, c'est 45 sur 100.",
+  "03-reste": "Et les autres animaux ? 100 moins 45, égale 55. 55 cases sur 100 : 55 %. Les chats et les autres : 45 % plus 55 %, égale 100 %. 100 %, c'est tout le refuge.",
+  "04-question": "Question ! Dans un refuge de 100 animaux, 30 sont des chiens. Quel pourcentage de chiens ? A : 30 %. B : 70 %. C : 3 %. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. 30 sur 100, c'est 30 %.",
+  "05-piege": "Attention au piège ! Un petit refuge n'a que 50 animaux. 25 sont des chats. Est-ce 25 % ? Non ! 25 sur 50, c'est la moitié. Sur 100, la moitié, c'est 50. Donc 50 % de chats.",
+  "06-tableau": "Un pourcentage, c'est une proportion. On complète le tableau. 25 chats pour 50 animaux. Pour 100 animaux, 2 fois plus : 50 chats. 50 sur 100 : 50 %.",
+  "07-question": "Question ! Un refuge a 20 animaux. 5 sont des lapins. Quel pourcentage de lapins ? A : 5 %. B : 25 %. C : 20 %. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. 20 fois 5, égale 100. Alors 5 fois 5, égale 25. 25 sur 100 : 25 %.",
+  "08-defi": "À toi de jouer ! Un refuge a 10 animaux. 7 sont des chats. Quel pourcentage de chats ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 10 fois 10, égale 100. Alors 7 fois 10, égale 70. 70 sur 100 : 70 % de chats.",
+  "09-finale": "Ce que tu as appris. Pour cent veut dire sur 100. 100 %, c'est le tout. Si le total n'est pas 100, on le ramène à 100 avec un tableau de proportionnalité.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

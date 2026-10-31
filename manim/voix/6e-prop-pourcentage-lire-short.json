@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Ton tee-shirt cache des maths. Regarde l'étiquette !",
+  "01-etiquette": "Coton : 60 %. Polyester : 40 %. Le tee-shirt pèse 100 g.",
+  "02-lire": "60 %, c'est 60 sur 100. Dans 100 g de tissu, 60 g de coton.",
+  "03-question": "Question ! Combien de polyester dans ce tee-shirt de 100 g ? A : 40 g. B : 60 g. C : 4 g. Mets pause, et choisis !",
+  "03b-reponse": "Réponse A. 40 %, c'est 40 g sur 100 g.",
+  "04-commentaire": "Et toi ? Un sweat de 200 g contient 60 % de coton. Combien de grammes de coton ? Réponds en commentaire !"
+}

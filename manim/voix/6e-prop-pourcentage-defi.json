@@ -1,0 +1,15 @@
+{
+  "00-garde": "Défis sur les pourcentages. Qui a le meilleur score ?",
+  "01-situation": "Voici Thomas. Il organise un festival de musique. Il a 200 billets à vendre. Le premier jour, il en vend 30 %. Combien de billets ?",
+  "02-tableau": "30 %, c'est 30 sur 100. Pour 100 billets, 30 vendus. 200 billets, c'est 2 fois plus : 30 fois 2, égale 60 billets.",
+  "03-question": "Question ! Le deuxième jour, Thomas vend 50 % des 200 billets. Combien ? A : 50 billets. B : 100 billets. C : 150 billets. Mets pause, et choisis !",
+  "03b-reponse": "Réponse B. 50 %, c'est la moitié. 200 divisé par 2, égale 100 billets.",
+  "04-comparer": "Il compare deux groupes. Le groupe A remplit 18 places sur 20. Le groupe B remplit 85 % de sa salle. Lequel remplit le mieux ? On ramène à 100. 20 fois 5, égale 100. 18 fois 5, égale 90. Le groupe A : 90 %. Il gagne !",
+  "05-piege": "Attention au piège ! 18 places, ce n'est pas 18 %. Le total est 20, pas 100. Il faut toujours ramener à 100.",
+  "06-question": "Question ! Un stand vend 12 crêpes sur 50. Quel pourcentage ? A : 12 %. B : 24 %. C : 62 %. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. 50 fois 2, égale 100. 12 fois 2, égale 24. 24 %.",
+  "07-defi": "À toi de jouer ! Sur 200 spectateurs, 25 % viennent à vélo. Combien de spectateurs à vélo ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 25 %, c'est le quart. 200 divisé par 4, égale 50 spectateurs à vélo.",
+  "08-finale": "Ce que tu as appris. Pour comparer des parts, on les ramène toutes sur 100. Pour trouver une quantité, on lit le pourcentage, puis on complète le tableau.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

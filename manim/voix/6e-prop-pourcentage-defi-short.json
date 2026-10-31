@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Celui qui marque le moins de buts est le meilleur buteur ?",
+  "01-joueurs": "Léo tire 20 fois et marque 10 buts. Sam tire 100 fois et marque 40 buts.",
+  "02-calcul": "Léo : 10 sur 20, c'est la moitié. 50 %. Sam : 40 sur 100 : 40 %. Léo vise mieux !",
+  "03-question": "Question ! Lina marque 15 buts sur 50 tirs. Quel pourcentage ? A : 15 %. B : 30 %. C : 35 %. Mets pause, et choisis !",
+  "03b-reponse": "Réponse B. 50 fois 2, égale 100. 15 fois 2, égale 30 %.",
+  "04-commentaire": "Et toi ? Un joueur marque 18 buts sur 25 tirs. Combien de pour cent ? Réponds en commentaire !"
+}

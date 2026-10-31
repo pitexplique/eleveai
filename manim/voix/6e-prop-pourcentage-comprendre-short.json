@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Ton téléphone affiche 1 %. Il reste combien ?",
+  "01-batterie": "Imagine la batterie en 100 petites cases. 1 %, c'est 1 case sur 100. Presque vide !",
+  "02-cent": "100 %, ce sont les 100 cases. La batterie est pleine.",
+  "03-question": "Question ! La batterie affiche 50 %. Elle est remplie à… A : la moitié. B : 50 cases sur 50. C : 5 cases. Mets pause, et choisis !",
+  "03b-reponse": "Réponse A. 50 cases sur 100 : la moitié.",
+  "04-commentaire": "Et toi ? La batterie affiche 75 %. Combien de cases sont vides ? Réponds en commentaire !"
+}
