@@ -43,5 +43,16 @@ Créé et validé par le PILOTE (6e 01-reconnaitre), lecture seule pour les agen
 - **Lot 5 — 4e, une paysage par micro** pour `prop_proportionnalite`, `prop_ratio`, `prop_pourcentages` (18 micros ; PAYSAGE SEULEMENT, les shorts existent). Après les lots 1 à 4.
 - Ensuite : CM1/CM2 (épisodes communs), 5e, 3e, lycée.
 
+## ⭐ Leçons du pilote et du lot 1 (31/10) — à appliquer dans tous les lots suivants
+- Modèles : `manim/scripts/6e/prop_*.py` (pilote reconnaitre ; lot 1 tableau, coefficient, unite, resoudre, defi), base `prop_commun.py`.
+- `ligne_rep` de `prop_commun.py` redessine la réponse plus grande que la phrase remplacée (chevauchements, bords) → reprendre la surcharge écrite dans `prop_tableau.py`.
+- `tb.remplir(r, c)` sans valeur réaffiche « ? » → toujours passer la valeur (`remplir(1, 1, 24)`) ; `plus_bas()` de `prop_tableau.py` pour un « + » sous le tableau.
+- `Unite` est très large : l'agrandir peu ; ses textes attendent leurs mots dans la voix → voir le contournement de `prop_unite.py`.
+- Un agrandissement d'insistance sur « Ce que tu as appris » a touché le bord (épisode 04) : garder de la marge.
+- Dans un short (cadre de 4,5 de large), la flèche latérale « × k » ne tient pas : étiquette au-dessus du tableau ou pastille (`prop_coefficient_short.py`, `prop_resoudre_short.py`).
+- `scripts/cues2marques.py` jette un mot répété deux fois de suite (« égale 36 ? 36 divisé ») : ajouter la marque à la main.
+- Le dossier temporaire est partagé entre agents : chacun range ses outils dans un sous-dossier à son nom.
+- Ceintures : orange est SOUS la verte (judo) ; un défi garde la verte.
+
 ## Rapport final (court, en français)
 Par épisode : fichiers, durées, décor/métier/source, centres, ceinture(s), `questions` (t mesuré), planches vues, résultat de `verifier-bords-video.py`, soucis restants. Le chef d'orchestre recopie `questions` et `centres` dans `manim/questions-proportionnalite.md`.
