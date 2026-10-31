@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Une grande pizza ou deux petites : laquelle te nourrit le plus ?",
+  "01-pizzas": "La petite pizza mesure 15 cm de large. La grande, 30 cm : 2 fois plus large.",
+  "02-surface": "Par la surface, la grande vaut 4 petites ! Elle est 2 fois plus large dans tous les sens : 2 fois 2, égale 4.",
+  "03-surprise": "Une grande pizza vaut donc plus que deux petites. Elle en vaut 4 !",
+  "04-question": "Question ! Une pizza de 45 cm et une pizza de 15 cm. La grande vaut combien de petites ? A : 3. B : 9. C : 27. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 3 fois plus large : 3 fois 3, égale 9 petites pizzas.",
+  "05-commentaire": "Et toi ? Une pizza géante de 60 cm vaut combien de pizzas de 15 cm ? Réponds en commentaire !"
+}

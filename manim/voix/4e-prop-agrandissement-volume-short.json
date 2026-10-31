@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Combien de petits dés faut-il pour construire un dé géant ?",
+  "01-geant": "Le dé géant est 2 fois plus grand dans chaque sens.",
+  "02-empiler": "2 dés en longueur, 2 en largeur, 2 en hauteur. 2 fois 2 fois 2, égale 8 dés ! Pas 2.",
+  "03-question": "Question ! Un dé 3 fois plus grand dans chaque sens. Combien de petits dés ? A : 3. B : 9. C : 27. Mets pause, et choisis !",
+  "03b-reponse": "Réponse C. 3 fois 3 fois 3, égale 27 dés.",
+  "04-commentaire": "Et toi ? Un dé 4 fois plus grand dans chaque sens : combien de petits dés faut-il ? Réponds en commentaire !"
+}

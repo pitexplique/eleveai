@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Ces trois résultats sont faux. Trouve l'erreur sans calculer !",
+  "01-chambre": "La surface d'une chambre : 12 mètres cubes ? Faux ! Une surface, c'est des mètres carrés.",
+  "02-scooter": "Un scooter roule à 45 heures par kilomètre ? Faux ! Une vitesse, c'est des kilomètres par heure.",
+  "03-gourde": "Une gourde contient 75 cm ? Faux ! Une contenance, c'est un volume : des litres ou des centilitres.",
+  "04-question": "Question ! Un élève écrit : la piscine contient 400 mètres carrés d'eau. A : c'est juste. B : c'est faux, l'eau se mesure en mètres cubes. C : c'est juste, si on arrondit. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. L'eau remplit un volume : des mètres cubes, ou des litres.",
+  "05-commentaire": "Et toi ? Un terrain de handball mesure 40 m sur 20 m. Un élève écrit : 800 mètres cubes. Corrige-le : quelle est son aire, avec la bonne unité ? Réponds en commentaire !"
+}

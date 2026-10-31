@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Peux-tu faire le tour de la Terre en une seconde ? La lumière, oui !",
+  "01-lumiere": "La lumière va à environ 300 000 kilomètres par seconde.",
+  "02-lire": "Kilomètres par seconde : 300 000 km pour 1 seconde.",
+  "03-tours": "Le tour de la Terre fait environ 40 000 km. 300 000 divisé par 40 000, égale 7,5. En 1 seconde, la lumière fait 7 tours et demi de la Terre !",
+  "04-question": "Question ! 300 000 kilomètres par seconde, ça veut dire… A : 300 000 km en 1 seconde. B : 300 000 secondes pour 1 km. C : 300 000 km en tout. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. « Par » veut dire « pour 1 » : 300 000 km en 1 seconde.",
+  "05-commentaire": "Et toi ? La Lune est à environ 384 000 km. Combien de secondes sa lumière met-elle pour arriver jusqu'à nous ? Réponds en commentaire !"
+}

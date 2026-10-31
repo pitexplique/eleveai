@@ -1,0 +1,17 @@
+{
+  "00-garde": "Les kilowattheures. Pourquoi multiplie-t-on ?",
+  "01-situation": "Voici Rayan. Il est électricien. Une famille trouve sa facture d'électricité trop chère. Rayan regarde le radiateur de la chambre : 2 kilowatts. Il chauffe 5 heures par jour. Quelle énergie consomme-t-il ?",
+  "02-produit": "L'énergie, c'est la puissance fois la durée. 2 kilowatts fois 5 heures, égale 10 kilowattheures. On multiplie les nombres, et aussi les unités : kilowatt fois heure, égale kilowattheure.",
+  "03-famille": "Une grandeur qui vient d'une multiplication s'appelle une grandeur produit. Tu en connais déjà une : l'aire. Mètre fois mètre, égale mètre carré. L'unité garde la trace de la multiplication.",
+  "04-question": "Question ! Un four de 3 kilowatts chauffe pendant 2 heures. Quelle énergie consomme-t-il ? A : 6 kilowattheures. B : 1,5 kilowatt par heure. C : 5 kilowattheures. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. 3 kilowatts fois 2 heures, égale 6 kilowattheures.",
+  "05-piege": "Attention au piège ! On n'additionne pas des kilowatts et des heures : 3 plus 2 ne veut rien dire. Et on ne divise pas : des kilowatts par heure, ce n'est pas une énergie. Le kilowattheure, c'est kilowatt fois heure.",
+  "06-quotient": "L'autre famille, c'est la grandeur quotient. Elle vient d'une division. La vitesse : des kilomètres divisés par des heures, en kilomètres par heure. Une barre dans l'unité : c'est un quotient. Pas de barre : c'est un produit.",
+  "07-question": "Question ! Laquelle est une grandeur produit ? A : une aire, en mètres carrés. B : une vitesse, en kilomètres par heure. C : un prix, en euros par kilo. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. Une aire, c'est une longueur fois une largeur : un produit.",
+  "08-facture": "Et la facture ? En France, au tarif réglementé d'EDF du 1er août 2025, 1 kilowattheure coûte environ 0,20 euro. 10 kilowattheures : 10 fois 0,20, égale 2 euros. 2 euros par jour, pour un seul radiateur !",
+  "09-defi": "À toi de jouer ! Un chauffe-eau de 3 kilowatts fonctionne pendant 4 heures. Quelle énergie consomme-t-il ? Et combien coûte-t-elle, à 0,20 euro le kilowattheure ? Mets pause, et cherche !",
+  "09b-correction": "Correction. 3 kilowatts fois 4 heures, égale 12 kilowattheures. 12 fois 0,20, égale 2,40 euros.",
+  "10-finale": "Ce que tu as appris. Une grandeur produit vient d'une multiplication. On multiplie les nombres et les unités : kilowatt fois heure, égale kilowattheure ; mètre fois mètre, égale mètre carré. Et on n'additionne jamais deux grandeurs différentes.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

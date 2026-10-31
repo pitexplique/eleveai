@@ -1,0 +1,16 @@
+{
+  "00-garde": "Lire une unité composée. Que veut dire « habitants par kilomètre carré » ?",
+  "01-situation": "Voici Malik. Il est géographe : il étudie où vivent les gens. D'après l'Insee, Paris compte environ 2 100 000 habitants, sur 105 kilomètres carrés. Combien d'habitants pour 1 kilomètre carré ?",
+  "02-calcul": "On divise les habitants par les kilomètres carrés. 2 100 000 divisé par 105, égale 20 000. L'unité se divise aussi : des habitants divisés par des kilomètres carrés. 20 000 habitants par kilomètre carré.",
+  "03-lire": "La barre se lit « par ». Et « par » veut dire : pour 1. 20 000 habitants par kilomètre carré : 20 000 habitants pour 1 kilomètre carré. C'est la densité de population.",
+  "04-question": "Question ! Que veut dire 20 000 habitants par kilomètre carré ? A : 20 000 habitants pour 1 kilomètre carré. B : 20 000 kilomètres carrés pour 1 habitant. C : 20 000 habitants en tout. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. « Par » veut dire « pour 1 » : 20 000 habitants pour 1 kilomètre carré.",
+  "05-regle": "La règle : l'unité subit la même opération que les nombres. On multiplie : kilowatt fois heure, égale kilowattheure. On divise : kilomètre divisé par heure, égale kilomètre par heure. Habitant divisé par kilomètre carré, égale habitant par kilomètre carré.",
+  "06-question": "Question ! On divise des litres par des minutes. Quelle est l'unité du résultat ? A : des litres par minute. B : des minutes par litre. C : des litres fois minutes. Mets pause, et choisis !",
+  "06b-reponse": "Réponse A. Des litres divisés par des minutes : des litres par minute. C'est un débit.",
+  "07-piege": "Attention au piège ! Un stagiaire divise 105 par 2 100 000. Il obtient des kilomètres carrés par habitant : la place pour 1 habitant. Ça existe, mais ce n'est plus une densité. L'ordre de la division donne l'ordre de l'unité.",
+  "08-defi": "À toi de jouer ! Un village compte 600 habitants sur 12 kilomètres carrés. Quelle est sa densité, unité comprise ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 600 divisé par 12, égale 50. 50 habitants par kilomètre carré : 50 habitants pour 1 kilomètre carré. Paris est 400 fois plus dense !",
+  "09-finale": "Ce que tu as appris. L'unité se calcule comme les nombres. Une barre se lit « par », et « par » veut dire « pour 1 ». On écrit l'unité à chaque ligne : elle dit ce que le résultat mesure.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

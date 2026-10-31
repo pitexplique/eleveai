@@ -1,0 +1,17 @@
+{
+  "00-garde": "Un aquarium deux fois plus grand. Combien d'eau faut-il ?",
+  "01-situation": "Voici Louise. Elle est soigneuse dans un aquarium public. Elle s'occupe des poissons-clowns. Leur bac mesure 40 cm de long, 20 cm de large et 25 cm de haut. Elle veut un bac 2 fois plus grand dans chaque dimension.",
+  "02-volume": "Le petit bac : 40 fois 20 fois 25, égale 20 000 centimètres cubes. 1 000 centimètres cubes font 1 litre. 20 000 centimètres cubes, c'est 20 litres.",
+  "03-cubes": "Le grand bac mesure 80 cm, 40 cm et 50 cm. On y range des petits bacs : 2 en longueur, 2 en largeur, 2 en hauteur. 2 fois 2 fois 2, égale 8 petits bacs ! 20 litres fois 8, égale 160 litres.",
+  "04-question": "Question ! On double toutes les longueurs d'un cube de 1 litre. Quel est son nouveau volume ? A : 2 litres. B : 4 litres. C : 8 litres. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C. 2 fois 2 fois 2, égale 8. Le cube contient 8 litres.",
+  "05-regle": "Un volume, c'est trois longueurs multipliées. Avec un rapport k, le volume est multiplié par k fois k fois k : k au cube. Les longueurs fois 2, les aires fois 4, les volumes fois 8.",
+  "06-piege": "Attention au piège ! Louise ne prévoit ni 40 litres, ni 80 litres. 40 litres, c'est fois 2 : comme pour une longueur. 80 litres, c'est fois 4 : comme pour une aire. Pour un volume, c'est fois 8 : 160 litres.",
+  "07-question": "Question ! Un bac de 10 litres est agrandi avec un rapport 3. Quel est son nouveau volume ? A : 30 litres. B : 90 litres. C : 270 litres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. 3 fois 3 fois 3, égale 27. 10 fois 27, égale 270 litres.",
+  "08-maquette": "Et dans l'autre sens ? Louise fabrique une maquette du bassin des requins, au rapport 1 sur 10. Les longueurs sont divisées par 10. Le volume est divisé par 10 fois 10 fois 10, égale 1 000. Le bassin contient 500 000 litres. La maquette n'en contient pas 50 000 : 500 000 divisé par 1 000, égale 500 litres.",
+  "09-defi": "À toi de jouer ! Un bac de 50 litres est agrandi avec un rapport 2. Louise met 1 poisson pour 10 litres d'eau. Combien de poissons dans le grand bac ? Mets pause, et cherche !",
+  "09b-correction": "Correction. Avec un rapport 2, le volume est multiplié par 8. 50 fois 8, égale 400 litres. 1 poisson pour 10 litres : 400 divisé par 10, égale 40 poissons.",
+  "10-finale": "Ce que tu as appris. Si les longueurs sont multipliées par k, le volume est multiplié par k au cube. Rapport 2 : le volume fois 8. Rapport 3 : le volume fois 27. Une maquette au 1 sur 10 contient 1 000 fois moins.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

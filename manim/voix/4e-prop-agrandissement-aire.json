@@ -1,0 +1,19 @@
+{
+  "00-garde": "Un gâteau deux fois plus grand. Faut-il deux fois plus de décor ?",
+  "01-situation": "Voici Adam. Il est pâtissier. Il fait un gâteau carré de 20 cm de côté. Sur le dessus, il pose une feuille de pâte à sucre. Pour un mariage, on lui commande le même gâteau, 2 fois plus grand. Lui faut-il 2 fois plus de pâte à sucre ?",
+  "02-aire": "Le dessus du petit gâteau : 20 cm fois 20 cm, égale 400 centimètres carrés. Le grand gâteau a 40 cm de côté. 40 fois 40, égale 1 600 centimètres carrés.",
+  "03-carreaux": "On pose des petits gâteaux sur le grand : il en tient 4 ! 2 fois plus long, 2 fois plus large : 2 fois 2, égale 4. L'aire est multipliée par 4. Il faut 4 fois plus de pâte à sucre.",
+  "04-question": "Question ! On double toutes les longueurs d'un carré. Par combien son aire est-elle multipliée ? A : 2. B : 4. C : 8. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 2 fois 2, égale 4. L'aire est multipliée par 4.",
+  "05-trois": "Et un gâteau 3 fois plus grand ? Il a 60 cm de côté. 3 fois 3, égale 9 : il tient 9 petits gâteaux. 400 fois 9, égale 3 600 centimètres carrés. Avec un rapport k, l'aire est multipliée par k fois k : k au carré.",
+  "06-piege": "Attention au piège ! Un apprenti multiplie l'aire par 3 seulement : 1 200 centimètres carrés. Pas assez de pâte à sucre ! Une aire, c'est deux longueurs multipliées. Chacune est multipliée par 3. Donc l'aire est multipliée par 9.",
+  "07-question": "Question ! Le dessus d'un gâteau a une aire de 300 centimètres carrés. On l'agrandit avec un rapport 2. Quelle est la nouvelle aire ? A : 600 centimètres carrés. B : 1 200 centimètres carrés. C : 2 400 centimètres carrés. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Avec un rapport 2, l'aire est multipliée par 4. 300 fois 4, égale 1 200 centimètres carrés.",
+  "08-retrouver": "Dans l'autre sens, maintenant. Une cliente veut 25 fois plus de décor. Par combien Adam multiplie-t-il le côté ? Quel nombre, multiplié par lui-même, donne 25 ? 5 fois 5, égale 25. Le côté est multiplié par 5, pas par 25.",
+  "09-question": "Question ! L'aire d'un gâteau a été multipliée par 9. Par combien ses longueurs ont-elles été multipliées ? A : 9. B : 3. C : 81. Mets pause, et choisis !",
+  "09b-reponse": "Réponse B. 3 fois 3, égale 9. Les longueurs ont été multipliées par 3.",
+  "10-defi": "À toi de jouer ! Le dessus d'une tarte a une aire de 150 centimètres carrés. Adam l'agrandit avec un rapport 4. Quelle est la nouvelle aire ? Mets pause, et cherche !",
+  "10b-correction": "Correction. Avec un rapport 4, l'aire est multipliée par 4 fois 4, égale 16. 150 fois 16, égale 2 400 centimètres carrés.",
+  "11-finale": "Ce que tu as appris. Si les longueurs sont multipliées par k, l'aire est multipliée par k au carré. Rapport 2 : l'aire fois 4. Rapport 3 : l'aire fois 9. Jamais l'aire fois k.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

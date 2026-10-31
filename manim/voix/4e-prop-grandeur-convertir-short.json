@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Usain Bolt court-il plus vite qu'une voiture en ville ?",
+  "01-record": "En 2009, à Berlin, Usain Bolt court le 100 mètres en 9,58 secondes. C'est toujours le record du monde.",
+  "02-convertir": "Il court à environ 10 mètres par seconde. En 1 heure, il y a 3 600 secondes. 10 mètres fois 3 600, égale 36 000 mètres : 36 km. Donc 36 kilomètres par heure.",
+  "03-surprise": "Dans une zone à 30 kilomètres par heure, Bolt irait plus vite que les voitures !",
+  "04-question": "Question ! 10 mètres par seconde, ça fait combien de kilomètres par heure ? A : 10. B : 36. C : 600. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 10 fois 3 600, égale 36 000 mètres en 1 heure : 36 kilomètres par heure.",
+  "05-commentaire": "Et toi ? Une cycliste roule à 5 mètres par seconde. Combien de kilomètres par heure ? Réponds en commentaire !"
+}

@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Le plus gros paquet est-il toujours le moins cher ?",
+  "01-paquets": "Des céréales. Le petit paquet : 500 g pour 3 euros. Le gros paquet : 750 g pour 4,80 euros.",
+  "02-kilo": "On ramène au kilo. Le petit : 2 paquets font 1 kg. 3 fois 2, égale 6 euros par kilo. Le gros : 4,80 divisé par 3, égale 1,60 euro les 250 g. Fois 4 : 6,40 euros par kilo.",
+  "03-surprise": "Surprise : le petit paquet est moins cher au kilo !",
+  "04-question": "Question ! Un paquet de 1 kg à 5 euros, ou un paquet de 2 kg à 11 euros. Lequel est le moins cher au kilo ? A : le paquet de 1 kg. B : le paquet de 2 kg. C : c'est pareil. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. 11 divisé par 2, égale 5,50 euros par kilo. C'est plus cher que 5 euros !",
+  "05-commentaire": "Et toi ? Du jus d'orange : 1,5 litre pour 2,70 euros, ou 2 litres pour 3,40 euros. Lequel est le moins cher au litre ? Réponds en commentaire !"
+}

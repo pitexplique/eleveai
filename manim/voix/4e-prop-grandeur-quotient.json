@@ -1,0 +1,16 @@
+{
+  "00-garde": "Les kilomètres par heure. Que divise-t-on, et par quoi ?",
+  "01-situation": "Voici Manon. Elle est conductrice de TGV. Sur la ligne à grande vitesse, son train parcourt 600 km en 2 heures. À quelle vitesse moyenne roule-t-elle ?",
+  "02-diviser": "La vitesse, c'est la distance divisée par la durée. 600 kilomètres divisés par 2 heures, égale 300 kilomètres par heure. La barre de l'unité se lit : par.",
+  "03-sens": "300 kilomètres par heure, ça veut dire : 300 km en 1 heure. Une grandeur quotient dit ce qu'il y a pour une seule unité. Et c'est une moyenne : le train accélère et freine. Sur certaines lignes, un TGV roule jusqu'à 320 kilomètres par heure.",
+  "04-question": "Question ! Un train parcourt 450 km en 3 heures. Quelle est sa vitesse moyenne ? A : 150 kilomètres par heure. B : 150 heures par kilomètre. C : 1 350 kilomètres par heure. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. 450 kilomètres divisés par 3 heures, égale 150 kilomètres par heure.",
+  "05-piege": "Attention au piège ! Un stagiaire divise 2 heures par 600 kilomètres. Il obtient des heures par kilomètre : le temps pour faire 1 km. Ce n'est pas une vitesse. L'unité dit l'ordre : les kilomètres en haut, les heures en bas.",
+  "06-prix": "Les quotients sont partout. Au marché, 3 kg de tomates coûtent 6 euros. Le prix au kilo : 6 euros divisés par 3 kg, égale 2 euros par kilo. Des euros pour 1 kilo.",
+  "07-question": "Question ! 4 kg de pommes coûtent 10 euros. Quel est le prix au kilo ? A : 0,40 euro par kilo. B : 2,50 euros par kilo. C : 40 euros par kilo. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. 10 euros divisés par 4 kg, égale 2,50 euros par kilo.",
+  "08-defi": "À toi de jouer ! Une cycliste parcourt 160 km en 4 heures. Quelle est sa vitesse moyenne ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 160 kilomètres divisés par 4 heures, égale 40 kilomètres par heure.",
+  "09-finale": "Ce que tu as appris. Une grandeur quotient vient d'une division. La barre de l'unité se lit « par » : kilomètres par heure, euros par kilo. On divise dans l'ordre de l'unité : ce qui est en haut par ce qui est en bas.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

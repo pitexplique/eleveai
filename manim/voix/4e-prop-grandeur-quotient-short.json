@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Ton cœur bat-il plus vite que ta chanson préférée ?",
+  "01-coeur": "Au repos, le cœur d'un adulte bat en général entre 60 et 100 fois par minute.",
+  "02-bpm": "Une chanson se mesure en BPM : battements par minute. Un DJ compte 30 battements en 15 secondes. 15 secondes, c'est un quart de minute. En 1 minute : 30 fois 4, égale 120 BPM.",
+  "03-surprise": "120 BPM : la chanson va plus vite qu'un cœur au repos !",
+  "04-question": "Question ! Une chanson fait 60 battements en 30 secondes. Combien de BPM ? A : 120 BPM. B : 30 BPM. C : 2 BPM. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. 30 secondes, c'est une demi-minute. En 1 minute : 60 fois 2, égale 120 BPM.",
+  "05-commentaire": "Et toi ? Une chanson fait 25 battements en 10 secondes. Combien de BPM ? Réponds en commentaire !"
+}

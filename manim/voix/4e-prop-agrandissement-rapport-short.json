@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Agrandir une photo en ajoutant des centimètres ? Regarde ce qui arrive.",
+  "01-photo": "Une photo de chat : 4 cm de large, 6 cm de haut.",
+  "02-ajouter": "On ajoute 4 cm partout : 8 cm sur 10 cm. Le chat est tout écrasé !",
+  "03-multiplier": "On multiplie tout par 2 : 8 cm sur 12 cm. Le chat garde sa forme. Il est juste 2 fois plus grand !",
+  "04-question": "Question ! Une photo de 5 cm sur 7 cm est agrandie avec un rapport 3. Elle mesure… A : 8 cm sur 10 cm. B : 15 cm sur 21 cm. C : 15 cm sur 7 cm. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 5 fois 3, égale 15. 7 fois 3, égale 21. On multiplie tout.",
+  "05-commentaire": "Et toi ? Une photo de 6 cm sur 9 cm est agrandie : sa largeur devient 30 cm. Combien mesure sa hauteur ? Réponds en commentaire !"
+}

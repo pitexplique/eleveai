@@ -1,0 +1,18 @@
+{
+  "00-garde": "Vérifier un résultat par son unité. Ce résultat peut-il être juste ?",
+  "01-situation": "Voici Enzo. Il est pisciniste : il construit des piscines. Ce mois-ci, un bassin de 50 m sur 25 m, et 2 m de profondeur : la taille d'une piscine olympique. Son apprenti remplit la fiche du chantier. Enzo vérifie chaque ligne.",
+  "02-impossible": "Première ligne : volume d'eau, 2 500 mètres carrés. Sans refaire le calcul, Enzo raye. Un volume, c'est trois longueurs multipliées : des mètres cubes. Des mètres carrés, c'est une aire. L'unité seule suffit.",
+  "03-choisir": "Chaque grandeur a son unité. Le tour du bassin, c'est une longueur, en mètres. Le fond, c'est une aire, en mètres carrés. L'eau, c'est un volume, en mètres cubes.",
+  "04-question": "Question ! Quelle unité pour l'aire du fond du bassin ? A : le mètre. B : le mètre carré. C : le mètre cube. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 50 m fois 25 m, égale 1 250 mètres carrés. Deux longueurs : une aire.",
+  "05-litres": "Deuxième ligne : 2 500 mètres cubes, égale 250 000 litres. Enzo fronce les sourcils. Un mètre cube, c'est un cube de 10 décimètres de côté. 10 fois 10 fois 10, égale 1 000 litres. Pas 100 ! 2 500 mètres cubes, c'est 2 500 000 litres.",
+  "06-question": "Question ! Combien de litres y a-t-il dans 1 mètre cube ? A : 100 litres. B : 1 000 litres. C : 10 litres. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. 10 fois 10 fois 10 décimètres cubes : 1 000 litres. Un mètre cube d'eau pèse une tonne !",
+  "07-additionner": "Troisième ligne : l'apprenti additionne le tour du bassin et l'aire du fond. 150 mètres plus 1 250 mètres carrés. On n'additionne pas une longueur et une aire : ce ne sont pas les mêmes grandeurs.",
+  "08-question": "Question ! Peut-on additionner 150 m et 1 250 mètres carrés ? A : oui, ça fait 1 400 m. B : oui, ça fait 1 400 mètres carrés. C : non, ce ne sont pas les mêmes grandeurs. Mets pause, et choisis !",
+  "08b-reponse": "Réponse C. Des mètres et des mètres carrés ne s'additionnent pas.",
+  "09-defi": "À toi de jouer ! La pompe remplit le bassin à 50 mètres cubes par heure. L'apprenti écrit : 2 500 divisé par 50, égale 50 mètres cubes. Quelle unité doit-il écrire ? Et le résultat est-il plausible ? Mets pause, et cherche !",
+  "09b-correction": "Correction. Des mètres cubes divisés par des mètres cubes par heure, ça donne des heures. 50 heures : un peu plus de 2 jours. C'est plausible pour une si grande piscine.",
+  "10-finale": "Ce que tu as appris. L'unité contrôle le résultat : une longueur en mètres, une aire en mètres carrés, un volume en mètres cubes. 1 mètre cube, c'est 1 000 litres. On n'additionne jamais deux grandeurs différentes.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

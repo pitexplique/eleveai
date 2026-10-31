@@ -1,0 +1,17 @@
+{
+  "00-garde": "Défis sur les grandeurs composées. Une récolte, étape par étape.",
+  "01-situation": "Voici Fatou. Elle est agricultrice : elle cultive du blé. Son champ est un rectangle de 400 m sur 250 m. Combien de tonnes de blé va-t-elle récolter ? Et combien de temps faudra-t-il pour l'arroser ?",
+  "02-aire": "Étape 1 : l'aire. 400 mètres fois 250 mètres, égale 100 000 mètres carrés. Les agriculteurs comptent en hectares. 1 hectare, c'est un carré de 100 m de côté : 10 000 mètres carrés. 100 000 divisé par 10 000, égale 10 hectares.",
+  "03-rendement": "Étape 2 : le rendement. L'an dernier, 3 hectares lui ont donné 21 tonnes. 21 tonnes divisées par 3 hectares, égale 7 tonnes par hectare. D'après Agreste, la moyenne française était d'environ 7,4 tonnes par hectare en 2025. Pour 10 hectares : 7 fois 10, égale 70 tonnes.",
+  "04-question": "Question ! 4 hectares donnent 28 tonnes de blé. Quel est le rendement ? A : 7 tonnes par hectare. B : 7 hectares par tonne. C : 112 tonnes par hectare. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. 28 tonnes divisées par 4 hectares, égale 7 tonnes par hectare.",
+  "05-arrosage": "Étape 3 : l'arrosage. Fatou doit verser 600 mètres cubes d'eau. Sa pompe débite 40 mètres cubes par heure. 600 divisé par 40, égale 15. Des mètres cubes divisés par des mètres cubes par heure : des heures. La pompe tourne 15 heures.",
+  "06-question": "Question ! Une pompe tourne 2,5 heures. Combien de temps, en heures et minutes ? A : 2 heures 50 minutes. B : 2 heures 30 minutes. C : 250 minutes. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. 0,5 heure, c'est la moitié de 60 minutes : 30 minutes. 2 heures 30 minutes.",
+  "07-prix": "Étape 4 : les graines. Le magasin A vend 30 kg pour 45 euros. Le magasin B, 50 kg pour 70 euros. On ramène au prix d'un kilo. A : 45 divisé par 30, égale 1,50 euro par kilo. B : 70 divisé par 50, égale 1,40 euro par kilo. Le magasin B est moins cher au kilo, même si on paie plus.",
+  "08-piege": "Attention au piège ! Fatou n'additionne pas ses 10 hectares et ses 70 tonnes : 80 ne voudrait rien dire. Une ligne, une grandeur, une unité.",
+  "09-defi": "À toi de jouer ! Fatou doit verser 900 mètres cubes d'eau, avec sa pompe de 40 mètres cubes par heure. Combien de temps, en heures et minutes ? Mets pause, et cherche !",
+  "09b-correction": "Correction. 900 divisé par 40, égale 22,5 heures. 0,5 heure, c'est 30 minutes. La pompe tourne 22 heures 30 minutes.",
+  "10-finale": "Ce que tu as appris. Dans un défi, on avance étape par étape, avec l'unité à chaque ligne. On calcule d'abord la grandeur pour 1 unité, puis on multiplie. Et on convertit : 1 hectare, c'est 10 000 mètres carrés ; 1 heure, c'est 60 minutes.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

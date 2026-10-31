@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Combien de chambres tiennent sur un terrain de foot ?",
+  "01-terrain": "La FIFA recommande un terrain de 105 m de long et 68 m de large.",
+  "02-aire": "Son aire : 105 mètres fois 68 mètres, égale 7 140 mètres carrés. Mètre fois mètre : mètre carré !",
+  "03-chambres": "Une chambre fait environ 10 mètres carrés. 7 140 divisé par 10, égale 714 chambres sur la pelouse !",
+  "04-question": "Question ! 105 mètres fois 68 mètres. Quelle est l'unité du résultat ? A : le mètre. B : le mètre carré. C : le mètre cube. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. Deux longueurs multipliées donnent des mètres carrés.",
+  "05-commentaire": "Et toi ? Un terrain de basket mesure 28 m sur 15 m. Quelle est son aire ? Réponds en commentaire !"
+}
