@@ -36,6 +36,23 @@ Défauts connus du rendu paysage (corrigés dans le module pour la suite) : trai
 ```
 Question en commentaire : « Combien coûtent 20 cookies ? » (30 €).
 
+## 6e 03-coefficient (lot 1, rendu le 31/10)
+**Paysage** `6e-prop-coefficient` — 3:33, ceinture verte — centres `nature-ecologie`, `sciences`
+```json
+[
+  {"t":"01:04","question":"4 minutes de douche : 40 litres. Quel est le coefficient ?","choix":["36","10","4"],"reponse":1,"explication":"40 ÷ 4 = 10. On vérifie : 4 × 10 = 40."},
+  {"t":"02:06","question":"Le coefficient est 12. Combien de minutes pour 84 litres ?","choix":["7 minutes","72 minutes","96 minutes"],"reponse":0,"explication":"On remonte, donc on divise : 84 ÷ 12 = 7 minutes."}
+]
+```
+**Short** `6e-prop-coefficient-short` — 1:03, ceinture blanche — centres `animaux`
+```json
+[
+  {"t":"00:26","question":"En 4 secondes, combien de battements ?","choix":["54","200","450"],"reponse":1,"explication":"4 × 50 = 200 battements."}
+]
+```
+Question en commentaire : « Combien de battements en 1 heure ? » (180 000).
+Sources (31/10) : douche 12 à 20 L/min selon le pommeau (Castorama ; Kelwatt, Parc du Verdon : 15-20 L/min classique) ; colibri 22 à ~80 battements/s selon l'espèce (Larousse), 40 à 50 (Slate).
+
 ## 6e 04-unite (lot 1, rendu le 31/10)
 **Paysage** `6e-prop-unite` — 2:59, ceinture verte — centres `cuisine`
 ```json
