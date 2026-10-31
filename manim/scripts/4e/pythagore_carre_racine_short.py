@@ -4,6 +4,10 @@
 # BAS l'écriture qui se remplit AU MÊME RYTHME (4, 4 × 4, = 16, 4² = 16, √16 = 4).
 # Carreaux ORANGE, côté BLEU, comme dans la paysage (FLaSgGr-lAA).
 # Voix validée le 12/10 : manim/voix/4e-pythagore-carre-racine-short.json.
+# ⭐ 31/10/2026 : + 1 question-pause après 01-image (questions-pythagore.md, Ép. 1),
+# compte à rebours de 3 s, module commun pythagore_pauses.py ; marques mot à mot :
+# 4e-pythagore-carre-racine-short.marques.json. Avant tout rendu :
+#   AUDIT=1 BORDS=1 python -m manim render --dry_run -r 1080,1920 manim/scripts/4e/pythagore_carre_racine_short.py ShortCarreRacine4e
 #
 # Rendu : python -m manim render -qh -r 1080,1920 --disable_caching manim/scripts/4e/pythagore_carre_racine_short.py ShortCarreRacine4e -o eleveai-maths-4e-pythagore-carre-racine-short --media_dir manim/scripts/4e/media
 # Puis copier le mp4 dans manim/sorties/4e/maths/pythagore/02-carre-racine/.
@@ -19,10 +23,11 @@ from manim import *  # noqa: E402
 
 from charte import *  # noqa: E402
 from gabarit_sixieme import Short6e  # noqa: E402
+from pythagore_pauses import PausesShort, sans_audit  # noqa: E402
 from signes_expression_2de import ceinture  # noqa: E402
 
 
-class ShortCarreRacine4e(Short6e):
+class ShortCarreRacine4e(PausesShort, Short6e):
     nom_voix = "4e-pythagore-carre-racine-short"
 
     # Les dessins de la paysage, repris tels quels (même carrelage, mêmes couleurs).
@@ -52,7 +57,6 @@ class ShortCarreRacine4e(Short6e):
         self.play(Create(terrasse))
 
         self.au_mot("4 carreaux sur un côté")
-        self.play(LaggedStart(*[FadeIn(c, scale=0.6) for c in g.rangees[0]], lag_ratio=0.25))
         acc = Brace(g, LEFT, color=COTE, buff=0.12)
         quatre_h = self.t("4", 30, COTE).next_to(acc, LEFT, buff=0.08)
         y1, y2, y3 = -0.4, -1.1, -1.8
@@ -60,7 +64,8 @@ class ShortCarreRacine4e(Short6e):
         fois = self.t("× 4", 46, COTE)
         seize = self.t("= 16", 46, CARREAU)
         VGroup(quatre_b, fois, seize).arrange(RIGHT, buff=0.18).move_to(P(0, y1))
-        self.play(FadeIn(acc), FadeIn(quatre_h), FadeIn(quatre_b))
+        self.play(LaggedStart(*[FadeIn(c, scale=0.6) for c in g.rangees[0]], lag_ratio=0.25),
+                  FadeIn(acc), FadeIn(quatre_h), FadeIn(quatre_b), run_time=1.0)
 
         self.au_mot("4 rangées de 4")
         for k, r in enumerate(g.rangees[1:]):
@@ -73,7 +78,10 @@ class ShortCarreRacine4e(Short6e):
         self.play(Indicate(g, color=CARREAU, scale_factor=1.05), FadeIn(seize))
         self.au_mot("4 au carré")
         ligne2 = VGroup(self.carre_de(4, 50, VERT_OK), self.t("= 16", 50, VERT_OK)).arrange(RIGHT, buff=0.3)
-        self.play(Write(ligne2.move_to(P(0, y2))))
+        ligne2.move_to(P(0, y2))
+        self.play(Write(ligne2[0]), run_time=0.5)
+        self.au_nb("égale 16")
+        self.play(Write(ligne2[1]), run_time=0.5)
         self.play(Circumscribe(ligne2, color=VERT_OK))
 
         self.au_mot("Et à l'envers")
@@ -83,6 +91,11 @@ class ShortCarreRacine4e(Short6e):
         self.play(Write(ligne3.move_to(P(0, y3))))
         self.attendre_voix(marge=0.4)
 
+        # ── 01q : la question-pause (3 s) ──
+        self.ecran_question("01q-question", "01r-reponse",
+                            ["Une terrasse de", "3 carreaux sur 3.", "Combien de carreaux ?"],
+                            ["6", "9", "33"], 1, [["3²", "= 3 × 3"]])
+
         # ── 02 : la question ──
         self.clear()
         self.margo_bas()
@@ -90,14 +103,14 @@ class ShortCarreRacine4e(Short6e):
         self.play(Write(self.grand("À toi !", font_size=56, color=JAUNE_TITRE).move_to(P(0, 2.55))))
         self.au_mot("64 carreaux")
         g8 = self.grille(8, t=0.2, centre=(0.25, 0.95))
-        self.play(LaggedStart(*[FadeIn(r) for r in g8.rangees], lag_ratio=0.15))
-        self.play(FadeIn(self.grand("64 carreaux", font_size=34, color=CARREAU).move_to(P(0, -0.1))))
+        self.play(LaggedStart(*[FadeIn(r) for r in g8.rangees], lag_ratio=0.15),
+                  FadeIn(self.grand("64 carreaux", font_size=34, color=CARREAU).move_to(P(0, -0.1))), run_time=1.2)
         self.au_mot("Combien de carreaux sur un côté")
         acc8 = Brace(g8, LEFT, color=COTE, buff=0.1)
-        self.play(FadeIn(acc8), FadeIn(self.t("?", 36, COTE).next_to(acc8, LEFT, buff=0.08)))
-        self.play(FadeIn(self.grand("Combien sur un côté ?", font_size=30).move_to(P(0, -0.8))))
+        self.play(FadeIn(acc8), FadeIn(self.t("?", 36, COTE).next_to(acc8, LEFT, buff=0.08)), run_time=0.6)
+        self.play(FadeIn(self.grand("Combien sur un côté ?", font_size=30).move_to(P(0, -0.8))), run_time=0.6)
         self.au_mot("Réponds en commentaire")
         rep = VGroup(self.grand("en commentaire !", font_size=36, color=VERT_OK),
-                     self.grand("@eleveai974", font_size=36, color=BLEU_CALCUL)).arrange(DOWN, buff=0.14)
+                     sans_audit(self.grand("@eleveai974", font_size=36, color=BLEU_CALCUL))).arrange(DOWN, buff=0.14)
         self.play(FadeIn(rep.move_to(P(0, -1.8))))
         self.attendre_voix(marge=1.5)
