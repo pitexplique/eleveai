@@ -221,3 +221,21 @@ Défauts mineurs connus : short, le titre « 10 % en 1 seconde » disparaît à 
 ```
 Question en commentaire : « La batterie affiche 75 %. Combien de cases sont vides ? » (25).
 `BarrePourcent` mode « chargement » trop limité pour un short → classe `Batterie` dans `prop_pourcentage_comprendre_short.py` (réutilisable).
+
+## 6e 12-pourcentage-lire (lot 3, rendu le 31/10)
+**Paysage** `6e-prop-pourcentage-lire` — 3:14, ceinture verte — centres `cuisine`
+```json
+[
+  {"t":"00:51","question":"Un chocolat au lait contient 30 % de cacao. Combien de cacao dans 100 g ?","choix":["70 g","30 g","3 g"],"reponse":1,"explication":"30 %, c'est 30 sur 100 : 30 g de cacao dans 100 g."},
+  {"t":"01:55","question":"Une pâte à tartiner contient 20 % de noisettes. Combien de noisettes dans un pot de 200 g ?","choix":["20 g","220 g","40 g"],"reponse":2,"explication":"20 g pour 100 g. 200 g, c'est 2 fois plus : 40 g de noisettes."}
+]
+```
+**Short** `6e-prop-pourcentage-lire-short` — 0:58, ceinture blanche — centres `mode`
+```json
+[
+  {"t":"00:22","question":"Combien de polyester dans ce tee-shirt de 100 g ?","choix":["40 g","60 g","4 g"],"reponse":0,"explication":"40 %, c'est 40 g sur 100 g."}
+]
+```
+Question en commentaire : « Un sweat de 200 g contient 60 % de coton. Combien de grammes de coton ? » (120).
+Fait réel (31/10) : dans un chocolat noir à 70 %, le reste est surtout du sucre (allodocteurs.fr, Test-Achats).
+⚠️ Leçon : un `Indicate` coloré sur toute la grille de `BarrePourcent` la colore entière un instant (on croit voir 100 %) → `Circumscribe` ou un cadre (corrigé dans la paysage ET le short).
