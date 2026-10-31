@@ -305,6 +305,9 @@ function MobileSection({
 //      vient justement d'éviter. Il reste dans /espace-eleves et dans la
 //      matrice.
 //   ⭐ « Guide de survie » entre, et il ouvre CELUI DE SA CLASSE.
+// ⛔ 31/10/2026 : le menu de l'élève connecté est éteint (« laisse que Mon espace »).
+const MENU_ELEVE_VISIBLE = false;
+
 const MENU_ELEVE: { href: string; label: string; court: string }[] = [
   { href: "/coach-ia/maths", label: "🧠 Coach", court: "🧠 Coach" },
   // 14/09/2026 : « Parcours » devient « Évaluation annuelle » (Frédéric : « c'est
@@ -837,7 +840,11 @@ export default function Header() {
           }
         >
           {rechercheAuCentre && <RechercheEntete />}
-          {eleve && !isStaff ? (
+          {/* ⛔ 31/10/2026 — Frédéric : « quand l'élève est connecté, enlève
+              matières, guide, dictée, etc. ; laisse que Mon espace ». Le menu
+              est DÉBRANCHÉ, pas supprimé : `MENU_ELEVE_VISIBLE` le rallume, ici
+              et dans le tiroir du téléphone. */}
+          {MENU_ELEVE_VISIBLE && eleve && !isStaff ? (
             /* Élève CONNECTÉ → son menu de travail.
                Coach et Parcours en tête : ce sont les deux seuls endroits qui
                gardent une trace de ce qu'il a fait. */
@@ -1194,7 +1201,7 @@ export default function Header() {
               </div>
             )}
 
-            {eleve && !isStaff ? (
+            {MENU_ELEVE_VISIBLE && eleve && !isStaff ? (
               /* Élève connecté → son menu, puis toutes ses matières */
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-2">
