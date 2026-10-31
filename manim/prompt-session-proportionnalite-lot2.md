@@ -17,7 +17,7 @@ Réponds toujours en français. Ne pose pas de questions : tranche, avance, list
 - **07-echelle-comprendre** : FINI, vérifié (bords 0, planche bonne), COMMITÉ avec ses questions (`4ecd6e1e`).
 - **09-echelle-plan** : FINI, planches regardées, bords 0, COMMITÉ avec ses questions (défauts mineurs du short notés).
 - **10 défi 6e** : FINI, planches regardées (bonnes), bords 0, COMMITÉ avec ses questions.
-- **10 défi 4e** : FINI, planches regardées, bords 0, COMMITÉ avec ses questions. ⇒ **LOT 2 : TOUS LES RENDUS FINIS** ; prochaine étape = passe finale (point 2 de la Suite).
+- **10 défi 4e** : FINI, planches regardées, bords 0, COMMITÉ avec ses questions. ⇒ **LOT 2 : TOUS LES RENDUS FINIS** ; passe finale lancée par un agent à ~14 h (rien commité par lui) : si la session s'est fermée, vérifier `git diff` de `manim/manifeste-youtube.json`, `lib/videos/videos-r2.json`, `lib/videos/bilans-videos.json` et les fichiers coach, puis finir / committer les seules lignes `*-prop-echelle*`.
 - Leçons : `EchelleCarte` du module est inutilisable → reprendre la figure `Correspondance` de `prop_echelle_reelle.py` ; rendus avec `PYTHONIOENCODING=utf-8`.
 - ✅ Banque 6e : Saint-Denis–Saint-Pierre corrigé (13 cm → 52 km à vol d'oiseau, `244f1d9f`).
 - ⛔ Frédéric, 31/10 : La Réunion ne fait que ~4 % → contextes 974 rares (≈ 1 sur 25).
