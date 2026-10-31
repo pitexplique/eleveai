@@ -45269,6 +45269,885 @@
         "transports",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "6e-prop-reconnaitre",
+      "notionId": "prop_proportionnalite",
+      "microId": "prop_reconnaitre",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/proportionnalite/01-reconnaitre/eleveai-maths-6e-prop-reconnaitre.mp4",
+      "miniature": "6e/maths/proportionnalite/01-reconnaitre/eleveai-maths-6e-prop-reconnaitre.png",
+      "titre": "Deux fois plus, deux fois plus cher ? — Reconnaître la proportionnalité — épisode 1 · Maths 6e",
+      "accroche": "Inès est caissière dans un cinéma : 1 place coûte 7 €. Un groupe demande 2 places, puis 4 places. Combien vont-ils payer ? Et deux fois plus, est-ce toujours deux fois plus cher ?\n\nDans cette vidéo :\n• proportionnel : on passe d'une ligne à l'autre en multipliant toujours par le même nombre (ici × 7)\n• deux fois plus de places, deux fois plus cher\n• le contre-exemple de Karim, pédiatre : l'âge et la taille ne sont pas proportionnels (75 cm à 1 an, pas 7,50 m à 10 ans !)\n• les pièges : un tarif qui baisse au parc aquatique, un forfait à la salle de sport\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Inès vend du pop-corn : 1 paquet 4 €, 3 paquets 12 €, 5 paquets 18 €. Le prix est-il proportionnel ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/prop-proportionnalite\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/prop-proportionnalite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&microId=prop_reconnaitre&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Inès, caissière au cinéma"
+        ],
+        [
+          "00:21",
+          "Le tableau : × 7"
+        ],
+        [
+          "00:39",
+          "Proportionnel, c'est quoi ?"
+        ],
+        [
+          "00:51",
+          "L'âge et la taille"
+        ],
+        [
+          "01:20",
+          "Question : 6 places"
+        ],
+        [
+          "01:53",
+          "Le piège du parc aquatique"
+        ],
+        [
+          "02:12",
+          "Le forfait de la salle de sport"
+        ],
+        [
+          "02:31",
+          "Question : quel tableau ?"
+        ],
+        [
+          "03:06",
+          "À toi de jouer"
+        ],
+        [
+          "03:24",
+          "Correction"
+        ],
+        [
+          "03:41",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/prop-proportionnalite",
+      "tags": [
+        "reconnaître la proportionnalité",
+        "proportionnel ou pas",
+        "tableau de proportionnalité",
+        "coefficient",
+        "cinéma",
+        "caissière",
+        "pédiatre",
+        "proportionnalité",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:20",
+          "question": "2 places coûtent 14 €. Le prix est proportionnel. Combien coûtent 6 places ?",
+          "choix": [
+            "18 €",
+            "42 €",
+            "21 €"
+          ],
+          "reponse": 1,
+          "explication": "6 places, c'est 3 fois 2 places : 3 × 14 = 42 €."
+        },
+        {
+          "t": "02:31",
+          "question": "Quel tableau est proportionnel ?",
+          "choix": [
+            "1 kg : 3 € ; 2 kg : 5 €",
+            "1 kg : 3 € ; 2 kg : 6 €",
+            "1 kg : 3 € ; 2 kg : 4 €"
+          ],
+          "reponse": 1,
+          "explication": "2 kg, c'est le double de 1 kg, et 6 €, le double de 3 € : on multiplie toujours par 3."
+        }
+      ],
+      "centres": [
+        "cinema-series",
+        "corps-sante",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "6e-prop-reconnaitre-short",
+      "notionId": "prop_proportionnalite",
+      "microId": "prop_reconnaitre",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-prop-reconnaitre",
+      "fichier": "6e/maths/proportionnalite/01-reconnaitre/eleveai-maths-6e-prop-reconnaitre-short.mp4",
+      "miniature": "6e/maths/proportionnalite/01-reconnaitre/eleveai-maths-6e-prop-reconnaitre-short.png",
+      "titre": "Et si ta taille était proportionnelle à ton âge ? 🦒 — 6e #Shorts",
+      "accroche": "À 1 an, un bébé mesure environ 75 cm. Si la taille était proportionnelle à l'âge, à 12 ans on mesurerait 12 × 75 = 900 cm : 9 mètres, plus haut qu'une girafe ! En vrai, à 12 ans, on mesure environ 1,50 m : l'âge et la taille ne sont pas proportionnels.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : si la taille était proportionnelle à l'âge, combien mesurerait-on à 40 ans ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&microId=prop_reconnaitre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #proportionnalité #6e #collège",
+      "tags": [
+        "proportionnalité",
+        "proportionnel ou pas",
+        "taille et âge",
+        "girafe",
+        "pédiatre",
+        "proportionnalité",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:35",
+          "question": "1 place de cinéma coûte 7 €, 3 places coûtent 21 €. C'est proportionnel ?",
+          "choix": [
+            "oui",
+            "non",
+            "on ne peut pas savoir"
+          ],
+          "reponse": 0,
+          "explication": "3 × 7 = 21 : on multiplie toujours par 7."
+        }
+      ],
+      "centres": [
+        "corps-sante",
+        "animaux",
+        "cinema-series"
+      ]
+    },
+    {
+      "id": "6e-prop-tableau",
+      "notionId": "prop_proportionnalite",
+      "microId": "prop_table",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/proportionnalite/02-tableau/eleveai-maths-6e-prop-tableau.mp4",
+      "miniature": "6e/maths/proportionnalite/02-tableau/eleveai-maths-6e-prop-tableau.png",
+      "titre": "Les potions du jeu vidéo — Compléter un tableau de proportionnalité — épisode 2 · Maths 6e",
+      "accroche": "Noah est game designer : il invente des jeux vidéo. Dans la boutique de son jeu, 2 potions coûtent 10 pièces. Combien coûtent 4 potions, 6 potions, 1 potion ? Comment trouver les cases vides sans tout recalculer ?\n\nDans cette vidéo :\n• le double : 4 potions, c'est 2 fois 2 potions, donc 2 fois 10 pièces\n• additionner deux colonnes : 6 = 2 + 4, donc 10 + 20 = 30 pièces\n• la moitié : 1 potion, c'est la moitié de 2 potions, 5 pièces\n• le piège : ajouter le même nombre aux deux lignes (2 potions de plus, ce n'est pas 2 pièces de plus)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 4 boucliers coûtent 12 pièces. Combien coûtent 8 boucliers, 2 boucliers et 10 boucliers ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/prop-proportionnalite\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/prop-proportionnalite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&microId=prop_table&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Noah, game designer"
+        ],
+        [
+          "00:23",
+          "Le tableau des potions"
+        ],
+        [
+          "00:34",
+          "Le double, puis additionner deux colonnes"
+        ],
+        [
+          "00:58",
+          "Question : 6 coffres"
+        ],
+        [
+          "01:29",
+          "La moitié"
+        ],
+        [
+          "01:39",
+          "Le piège : ajouter"
+        ],
+        [
+          "01:52",
+          "Question : 4 épées"
+        ],
+        [
+          "02:25",
+          "À toi de jouer"
+        ],
+        [
+          "02:39",
+          "Correction"
+        ],
+        [
+          "02:58",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/prop-proportionnalite",
+      "tags": [
+        "compléter un tableau de proportionnalité",
+        "linéarité",
+        "additionner deux colonnes",
+        "double et moitié",
+        "jeux vidéo",
+        "game designer",
+        "proportionnalité",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:58",
+          "question": "3 coffres coûtent 12 pièces. Combien coûtent 6 coffres ?",
+          "choix": [
+            "15 pièces",
+            "24 pièces",
+            "18 pièces"
+          ],
+          "reponse": 1,
+          "explication": "6 coffres, c'est le double de 3 coffres : 12 × 2 = 24 pièces."
+        },
+        {
+          "t": "01:52",
+          "question": "1 épée coûte 7 pièces. 3 épées coûtent 21 pièces. Combien coûtent 4 épées ?",
+          "choix": [
+            "28 pièces",
+            "25 pièces",
+            "22 pièces"
+          ],
+          "reponse": 0,
+          "explication": "4 = 1 + 3, on additionne les prix : 7 + 21 = 28 pièces."
+        }
+      ],
+      "centres": [
+        "jeux-video"
+      ]
+    },
+    {
+      "id": "6e-prop-tableau-short",
+      "notionId": "prop_proportionnalite",
+      "microId": "prop_table",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-prop-tableau",
+      "fichier": "6e/maths/proportionnalite/02-tableau/eleveai-maths-6e-prop-tableau-short.mp4",
+      "miniature": "6e/maths/proportionnalite/02-tableau/eleveai-maths-6e-prop-tableau-short.png",
+      "titre": "Un tableau rempli en 10 secondes, sans calculatrice 🍪 — 6e #Shorts",
+      "accroche": "À la pâtisserie, 2 cookies coûtent 3 €. 4 = 2 + 2, donc 3 + 3 = 6 €. 6 = 2 + 4, donc 3 + 6 = 9 €. 10 = 4 + 6, donc 6 + 9 = 15 €. On additionne les colonnes : pas une seule multiplication !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : combien coûtent 20 cookies ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&microId=prop_table&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #proportionnalité #6e #collège",
+      "tags": [
+        "tableau de proportionnalité",
+        "linéarité",
+        "additionner deux colonnes",
+        "cookies",
+        "pâtisserie",
+        "proportionnalité",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:35",
+          "question": "Et 12 cookies ?",
+          "choix": [
+            "18 €",
+            "14 €",
+            "36 €"
+          ],
+          "reponse": 0,
+          "explication": "12 = 6 + 6, donc 9 + 9 = 18 €."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "6e-prop-coefficient",
+      "notionId": "prop_proportionnalite",
+      "microId": "prop_coeff",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/proportionnalite/03-coefficient/eleveai-maths-6e-prop-coefficient.mp4",
+      "miniature": "6e/maths/proportionnalite/03-coefficient/eleveai-maths-6e-prop-coefficient.png",
+      "titre": "Combien de litres sous la douche ? — Le coefficient de proportionnalité — épisode 3 · Maths 6e",
+      "accroche": "Léa est ingénieure de l'eau. Elle mesure l'eau d'une douche : environ 12 litres par minute. Combien de litres en 2, 5 ou 10 minutes ? Quel est le nombre magique de son tableau ?\n\nDans cette vidéo :\n• le coefficient de proportionnalité : on multiplie toujours la ligne du haut par 12\n• le trouver par une division : 36 litres en 3 minutes, 36 ÷ 3 = 12\n• attention au sens : × 12 pour descendre, ÷ 12 pour remonter\n• le piège : chercher un nombre à ajouter (+ 11) au lieu de multiplier\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Le robinet de la cantine perd 6 litres en 2 jours. Quel est le coefficient ? Combien de litres perd-il en 30 jours ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/prop-proportionnalite\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/prop-proportionnalite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&microId=prop_coeff&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Léa, ingénieure de l'eau"
+        ],
+        [
+          "00:17",
+          "Le tableau de la douche"
+        ],
+        [
+          "00:34",
+          "Le coefficient : × 12"
+        ],
+        [
+          "00:47",
+          "Trouver le coefficient"
+        ],
+        [
+          "01:04",
+          "Question : 40 litres en 4 minutes"
+        ],
+        [
+          "01:33",
+          "Attention au sens : ÷ 12"
+        ],
+        [
+          "01:49",
+          "Le piège : ajouter 11"
+        ],
+        [
+          "02:06",
+          "Question : 84 litres"
+        ],
+        [
+          "02:37",
+          "À toi de jouer"
+        ],
+        [
+          "02:55",
+          "Correction"
+        ],
+        [
+          "03:09",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/prop-proportionnalite",
+      "tags": [
+        "coefficient de proportionnalité",
+        "tableau de proportionnalité",
+        "trouver le coefficient",
+        "eau",
+        "douche",
+        "ingénieure",
+        "proportionnalité",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:04",
+          "question": "4 minutes de douche : 40 litres. Quel est le coefficient ?",
+          "choix": [
+            "36",
+            "10",
+            "4"
+          ],
+          "reponse": 1,
+          "explication": "40 ÷ 4 = 10. On vérifie : 4 × 10 = 40."
+        },
+        {
+          "t": "02:06",
+          "question": "Le coefficient est 12. Combien de minutes pour 84 litres ?",
+          "choix": [
+            "7 minutes",
+            "72 minutes",
+            "96 minutes"
+          ],
+          "reponse": 0,
+          "explication": "On remonte, donc on divise : 84 ÷ 12 = 7 minutes."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "sciences"
+      ]
+    },
+    {
+      "id": "6e-prop-coefficient-short",
+      "notionId": "prop_proportionnalite",
+      "microId": "prop_coeff",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-prop-coefficient",
+      "fichier": "6e/maths/proportionnalite/03-coefficient/eleveai-maths-6e-prop-coefficient-short.mp4",
+      "miniature": "6e/maths/proportionnalite/03-coefficient/eleveai-maths-6e-prop-coefficient-short.png",
+      "titre": "Combien de battements d'ailes pour un colibri en 1 minute ? 🐦 — 6e #Shorts",
+      "accroche": "Un colibri bat des ailes environ 50 fois par seconde. 2 secondes : 2 × 50 = 100 battements ; 10 secondes : 500. Le coefficient est 50 : on multiplie toujours les secondes par 50. En 1 minute, 60 × 50 = 3 000 battements !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : combien de battements en 1 heure ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&microId=prop_coeff&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #proportionnalité #6e #collège",
+      "tags": [
+        "coefficient de proportionnalité",
+        "colibri",
+        "animaux",
+        "battements d'ailes",
+        "proportionnalité",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:26",
+          "question": "En 4 secondes, combien de battements ?",
+          "choix": [
+            "54",
+            "200",
+            "450"
+          ],
+          "reponse": 1,
+          "explication": "4 × 50 = 200 battements."
+        }
+      ],
+      "centres": [
+        "animaux"
+      ]
+    },
+    {
+      "id": "6e-prop-unite",
+      "notionId": "prop_proportionnalite",
+      "microId": "prop_unite",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/proportionnalite/04-unite/eleveai-maths-6e-prop-unite.mp4",
+      "miniature": "6e/maths/proportionnalite/04-unite/eleveai-maths-6e-prop-unite.png",
+      "titre": "Une recette pour 4, et vous êtes 6 ? — Passer par l'unité — épisode 4 · Maths 6e",
+      "accroche": "Yanis est pâtissier. Sa recette de gâteau est pour 4 personnes : 200 g de farine. Ce soir, ils sont 6 à table. 6 n'est ni le double ni la moitié de 4 : combien de farine faut-il ?\n\nDans cette vidéo :\n• passer par l'unité : pour 1 personne, 200 ÷ 4 = 50 g\n• puis multiplier : pour 6 personnes, 6 × 50 = 300 g\n• deux étapes : d'abord on divise pour revenir à 1, puis on multiplie\n• le piège : 2 personnes de plus, ce n'est pas 2 g de farine de plus\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Pour 8 crêpes, Yanis met 400 mL de lait. Combien de lait pour 10 crêpes ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/prop-proportionnalite\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/prop-proportionnalite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&microId=prop_unite&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Yanis, pâtissier"
+        ],
+        [
+          "00:22",
+          "Ni double, ni moitié : diviser pour 1"
+        ],
+        [
+          "00:41",
+          "Puis multiplier : deux étapes"
+        ],
+        [
+          "00:59",
+          "Question : 1 mangue"
+        ],
+        [
+          "01:25",
+          "Le piège : 202 g ?"
+        ],
+        [
+          "01:41",
+          "Question : 7 cahiers"
+        ],
+        [
+          "02:12",
+          "À toi de jouer"
+        ],
+        [
+          "02:25",
+          "Correction"
+        ],
+        [
+          "02:37",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/prop-proportionnalite",
+      "tags": [
+        "passer par l'unité",
+        "retour à l'unité",
+        "recette",
+        "proportionnalité",
+        "pâtissier",
+        "cuisine",
+        "proportionnalité",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:59",
+          "question": "5 mangues coûtent 15 €. Combien coûte 1 mangue ?",
+          "choix": [
+            "10 €",
+            "3 €",
+            "75 €"
+          ],
+          "reponse": 1,
+          "explication": "15 ÷ 5 = 3 € pour 1 mangue."
+        },
+        {
+          "t": "01:41",
+          "question": "3 cahiers coûtent 9 €. Combien coûtent 7 cahiers ?",
+          "choix": [
+            "13 €",
+            "21 €",
+            "63 €"
+          ],
+          "reponse": 1,
+          "explication": "1 cahier : 9 ÷ 3 = 3 €. 7 cahiers : 7 × 3 = 21 €."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "6e-prop-unite-short",
+      "notionId": "prop_proportionnalite",
+      "microId": "prop_unite",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-prop-unite",
+      "fichier": "6e/maths/proportionnalite/04-unite/eleveai-maths-6e-prop-unite-short.mp4",
+      "miniature": "6e/maths/proportionnalite/04-unite/eleveai-maths-6e-prop-unite-short.png",
+      "titre": "Le grand paquet est-il toujours le moins cher ? 🛒 — 6e #Shorts",
+      "accroche": "Au supermarché : un petit paquet de céréales de 500 g à 2 €, un grand paquet de 1 kg à 5 €. On compare le prix pour 1 kg : 2 petits paquets, 2 × 2 = 4 €. Petits paquets : 4 € le kilo ; grand paquet : 5 € le kilo. Surprise : le grand est plus cher !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 250 g de chocolat coûtent 3 €. Combien coûte 1 kg ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&microId=prop_unite&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #proportionnalité #6e #collège",
+      "tags": [
+        "prix au kilo",
+        "passer par l'unité",
+        "comparer des prix",
+        "supermarché",
+        "argent",
+        "proportionnalité",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:37",
+          "question": "3 yaourts : 2 €. Pack de 12 : 9 €. Meilleur prix ?",
+          "choix": [
+            "les 3 yaourts",
+            "le pack de 12",
+            "c'est pareil"
+          ],
+          "reponse": 0,
+          "explication": "12 = 4 × 3 : 4 × 2 = 8 €. Moins cher que 9 € !"
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "6e-prop-resoudre",
+      "notionId": "prop_proportionnalite",
+      "microId": "prop_direct",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/proportionnalite/05-resoudre/eleveai-maths-6e-prop-resoudre.mp4",
+      "miniature": "6e/maths/proportionnalite/05-resoudre/eleveai-maths-6e-prop-resoudre.png",
+      "titre": "15 maillots, trois chemins — Résoudre un problème de proportionnalité — épisode 5 · Maths 6e",
+      "accroche": "Maëlle gère le matériel d'un club de foot. 10 maillots coûtent 50 €, et l'équipe a besoin de 15 maillots. Combien va-t-elle payer ? Trois chemins mènent à la même réponse.\n\nDans cette vidéo :\n• d'abord vérifier : est-ce bien proportionnel ?\n• chemin 1, l'unité : 1 maillot 5 €, donc 15 maillots 75 €\n• chemin 2, les colonnes : 15 = 10 + 5, donc 50 + 25 = 75 €\n• chemin 3, le coefficient : le prix, c'est toujours 5 fois le nombre de maillots\n• le piège : 20 € pour imprimer le logo, une seule fois, et ce n'est plus proportionnel\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 6 paires de chaussettes coûtent 18 €. Combien coûtent 10 paires ? Choisis ton chemin.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/prop-proportionnalite\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/prop-proportionnalite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&microId=prop_direct&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Maëlle et les maillots du club"
+        ],
+        [
+          "00:20",
+          "D'abord : est-ce proportionnel ?"
+        ],
+        [
+          "00:30",
+          "Chemin 1 : l'unité"
+        ],
+        [
+          "00:43",
+          "Chemin 2 : les colonnes"
+        ],
+        [
+          "00:57",
+          "Chemin 3 : le coefficient"
+        ],
+        [
+          "01:13",
+          "Question : 6 ballons"
+        ],
+        [
+          "01:45",
+          "Le piège : le logo à 20 €"
+        ],
+        [
+          "02:06",
+          "Question : 9 gourdes"
+        ],
+        [
+          "02:35",
+          "À toi de jouer"
+        ],
+        [
+          "02:48",
+          "Correction"
+        ],
+        [
+          "03:00",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/prop-proportionnalite",
+      "tags": [
+        "résoudre un problème de proportionnalité",
+        "passage par l'unité",
+        "linéarité",
+        "coefficient",
+        "football",
+        "club de foot",
+        "proportionnalité",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:13",
+          "question": "4 ballons coûtent 36 €. Combien coûtent 6 ballons ?",
+          "choix": [
+            "38 €",
+            "54 €",
+            "216 €"
+          ],
+          "reponse": 1,
+          "explication": "1 ballon : 36 ÷ 4 = 9 €. 6 ballons : 6 × 9 = 54 €."
+        },
+        {
+          "t": "02:06",
+          "question": "3 gourdes coûtent 12 €. Combien coûtent 9 gourdes ?",
+          "choix": [
+            "36 €",
+            "18 €",
+            "21 €"
+          ],
+          "reponse": 0,
+          "explication": "9 gourdes, c'est 3 fois 3 gourdes. 3 × 12 = 36 €."
+        }
+      ],
+      "centres": [
+        "sport",
+        "football",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "6e-prop-resoudre-short",
+      "notionId": "prop_proportionnalite",
+      "microId": "prop_direct",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-prop-resoudre",
+      "fichier": "6e/maths/proportionnalite/05-resoudre/eleveai-maths-6e-prop-resoudre-short.mp4",
+      "miniature": "6e/maths/proportionnalite/05-resoudre/eleveai-maths-6e-prop-resoudre-short.png",
+      "titre": "Trois chemins pour un même calcul : lequel est le plus rapide ? 🎵 — 6e #Shorts",
+      "accroche": "4 places de concert coûtent 100 €. Combien coûtent 6 places ? Chemin 1, l'unité : 100 ÷ 4 = 25 €, puis 6 × 25 = 150 €. Chemin 2, les colonnes : 2 places 50 €, et 100 + 50 = 150 €. Chemin 3, le coefficient : 6 × 25 = 150 €. Même arrivée pour les trois !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : combien coûtent 10 places, et quel chemin prends-tu ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&microId=prop_direct&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #proportionnalité #6e #collège",
+      "tags": [
+        "problème de proportionnalité",
+        "passage par l'unité",
+        "linéarité",
+        "coefficient",
+        "concert",
+        "musique",
+        "proportionnalité",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:50",
+          "question": "4 places de concert coûtent 100 €. Et 8 places ?",
+          "choix": [
+            "104 €",
+            "200 €",
+            "400 €"
+          ],
+          "reponse": 1,
+          "explication": "8, c'est le double de 4. Le double de 100 = 200 €."
+        }
+      ],
+      "centres": [
+        "musique"
+      ]
+    },
+    {
+      "id": "6e-prop-defi",
+      "notionId": "prop_proportionnalite",
+      "microId": "prop_defi",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/proportionnalite/06-defi/eleveai-maths-6e-prop-defi.mp4",
+      "miniature": "6e/maths/proportionnalite/06-defi/eleveai-maths-6e-prop-defi.png",
+      "titre": "Deux cars, deux fois plus long ? — Défis de proportionnalité — épisode 6 · Maths 6e",
+      "accroche": "Chloé conduit un car scolaire. Demain, sortie scolaire : 250 km. Son car consomme 30 litres de gazole pour 100 km. Combien de litres faut-il ? Et sauras-tu éviter tous les pièges ?\n\nDans cette vidéo :\n• découper un grand nombre : 250 = 100 + 100 + 50, donc 30 + 30 + 15 = 75 litres\n• le défi piège : avec 2 cars, le trajet ne dure pas 2 fois plus longtemps\n• avant de calculer, se demander si c'est vraiment proportionnel\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Au musée, 8 entrées coûtent 36 €. La classe a 24 élèves. Combien coûte l'entrée pour toute la classe ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/prop-proportionnalite\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/prop-proportionnalite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&microId=prop_defi&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Chloé, conductrice de car"
+        ],
+        [
+          "00:23",
+          "Découper 250"
+        ],
+        [
+          "00:33",
+          "Le calcul : 75 litres"
+        ],
+        [
+          "00:47",
+          "Question : 300 km"
+        ],
+        [
+          "01:21",
+          "Le défi piège : deux cars"
+        ],
+        [
+          "01:38",
+          "Question : deux gâteaux"
+        ],
+        [
+          "02:10",
+          "À toi de jouer"
+        ],
+        [
+          "02:26",
+          "Correction"
+        ],
+        [
+          "02:40",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/prop-proportionnalite",
+      "tags": [
+        "défis proportionnalité",
+        "problème de proportionnalité",
+        "proportionnel ou pas",
+        "consommation",
+        "car scolaire",
+        "conductrice de car",
+        "proportionnalité",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:47",
+          "question": "Le car consomme 30 litres pour 100 km. Combien pour 300 km ?",
+          "choix": [
+            "90 litres",
+            "230 litres",
+            "33 litres"
+          ],
+          "reponse": 0,
+          "explication": "300 km, c'est 3 fois 100 km : 3 × 30 = 90 litres."
+        },
+        {
+          "t": "01:38",
+          "question": "Un gâteau cuit en 30 minutes. Combien de temps pour 2 gâteaux, dans le même four, en même temps ?",
+          "choix": [
+            "60 minutes",
+            "30 minutes",
+            "15 minutes"
+          ],
+          "reponse": 1,
+          "explication": "Les deux gâteaux cuisent en même temps : toujours 30 minutes. Ce n'est pas proportionnel."
+        }
+      ],
+      "centres": [
+        "transports",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-prop-defi-short",
+      "notionId": "prop_proportionnalite",
+      "microId": "prop_defi",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-prop-defi",
+      "fichier": "6e/maths/proportionnalite/06-defi/eleveai-maths-6e-prop-defi-short.mp4",
+      "miniature": "6e/maths/proportionnalite/06-defi/eleveai-maths-6e-prop-defi-short.png",
+      "titre": "L'énigme des chats qui piège même les adultes 🐱 — 6e #Shorts",
+      "accroche": "3 chats attrapent 3 souris en 3 minutes. Combien de chats faut-il pour attraper 100 souris en 100 minutes ? Ensemble, les 3 chats attrapent 1 souris par minute : en 100 minutes, 100 souris. Les mêmes 3 chats suffisent !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : combien de souris ces 3 chats attrapent-ils en 1 heure ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&microId=prop_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #proportionnalité #6e #collège",
+      "tags": [
+        "énigme",
+        "défi maths",
+        "proportionnalité",
+        "chats",
+        "logique",
+        "proportionnalité",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:13",
+          "question": "3 chats attrapent 3 souris en 3 minutes. Combien de chats pour 100 souris en 100 minutes ?",
+          "choix": [
+            "100 chats",
+            "3 chats",
+            "33 chats"
+          ],
+          "reponse": 1,
+          "explication": "Ensemble, les 3 chats attrapent 1 souris par minute : en 100 minutes, 100 souris. Les mêmes 3 chats suffisent."
+        }
+      ],
+      "centres": [
+        "chiens-chats",
+        "jeux-defis"
+      ]
     }
   ]
 }

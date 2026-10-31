@@ -2801,6 +2801,114 @@
   "youtube": null,
   "coach": "/coach/serie?classe=6e&matiere=maths&notion=proba_experience&microId=proba_vocabulaire&display=simple"
  },
+ "6e-prop-coefficient": {
+  "fichier": "6e/maths/proportionnalite/03-coefficient/eleveai-maths-6e-prop-coefficient.mp4",
+  "poster": "6e/maths/proportionnalite/03-coefficient/eleveai-maths-6e-prop-coefficient.png",
+  "vignette": "6e/maths/proportionnalite/03-coefficient/eleveai-maths-6e-prop-coefficient.vignette.webp",
+  "titre": "Combien de litres sous la douche ? — Le coefficient de proportionnalité — épisode 3 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&microId=prop_coeff&display=simple"
+ },
+ "6e-prop-coefficient-short": {
+  "fichier": "6e/maths/proportionnalite/03-coefficient/eleveai-maths-6e-prop-coefficient-short.mp4",
+  "poster": "6e/maths/proportionnalite/03-coefficient/eleveai-maths-6e-prop-coefficient-short.png",
+  "vignette": "6e/maths/proportionnalite/03-coefficient/eleveai-maths-6e-prop-coefficient-short.vignette.webp",
+  "titre": "Combien de battements d'ailes pour un colibri en 1 minute ? 🐦 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&microId=prop_coeff&display=simple"
+ },
+ "6e-prop-defi": {
+  "fichier": "6e/maths/proportionnalite/06-defi/eleveai-maths-6e-prop-defi.mp4",
+  "poster": "6e/maths/proportionnalite/06-defi/eleveai-maths-6e-prop-defi.png",
+  "vignette": "6e/maths/proportionnalite/06-defi/eleveai-maths-6e-prop-defi.vignette.webp",
+  "titre": "Deux cars, deux fois plus long ? — Défis de proportionnalité — épisode 6 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&microId=prop_defi&display=simple"
+ },
+ "6e-prop-defi-short": {
+  "fichier": "6e/maths/proportionnalite/06-defi/eleveai-maths-6e-prop-defi-short.mp4",
+  "poster": "6e/maths/proportionnalite/06-defi/eleveai-maths-6e-prop-defi-short.png",
+  "vignette": "6e/maths/proportionnalite/06-defi/eleveai-maths-6e-prop-defi-short.vignette.webp",
+  "titre": "L'énigme des chats qui piège même les adultes 🐱 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&microId=prop_defi&display=simple"
+ },
+ "6e-prop-reconnaitre": {
+  "fichier": "6e/maths/proportionnalite/01-reconnaitre/eleveai-maths-6e-prop-reconnaitre.mp4",
+  "poster": "6e/maths/proportionnalite/01-reconnaitre/eleveai-maths-6e-prop-reconnaitre.png",
+  "vignette": "6e/maths/proportionnalite/01-reconnaitre/eleveai-maths-6e-prop-reconnaitre.vignette.webp",
+  "titre": "Deux fois plus, deux fois plus cher ? — Reconnaître la proportionnalité — épisode 1 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&microId=prop_reconnaitre&display=simple"
+ },
+ "6e-prop-reconnaitre-short": {
+  "fichier": "6e/maths/proportionnalite/01-reconnaitre/eleveai-maths-6e-prop-reconnaitre-short.mp4",
+  "poster": "6e/maths/proportionnalite/01-reconnaitre/eleveai-maths-6e-prop-reconnaitre-short.png",
+  "vignette": "6e/maths/proportionnalite/01-reconnaitre/eleveai-maths-6e-prop-reconnaitre-short.vignette.webp",
+  "titre": "Et si ta taille était proportionnelle à ton âge ? 🦒 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&microId=prop_reconnaitre&display=simple"
+ },
+ "6e-prop-resoudre": {
+  "fichier": "6e/maths/proportionnalite/05-resoudre/eleveai-maths-6e-prop-resoudre.mp4",
+  "poster": "6e/maths/proportionnalite/05-resoudre/eleveai-maths-6e-prop-resoudre.png",
+  "vignette": "6e/maths/proportionnalite/05-resoudre/eleveai-maths-6e-prop-resoudre.vignette.webp",
+  "titre": "15 maillots, trois chemins — Résoudre un problème de proportionnalité — épisode 5 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&microId=prop_direct&display=simple"
+ },
+ "6e-prop-resoudre-short": {
+  "fichier": "6e/maths/proportionnalite/05-resoudre/eleveai-maths-6e-prop-resoudre-short.mp4",
+  "poster": "6e/maths/proportionnalite/05-resoudre/eleveai-maths-6e-prop-resoudre-short.png",
+  "vignette": "6e/maths/proportionnalite/05-resoudre/eleveai-maths-6e-prop-resoudre-short.vignette.webp",
+  "titre": "Trois chemins pour un même calcul : lequel est le plus rapide ? 🎵 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&microId=prop_direct&display=simple"
+ },
+ "6e-prop-tableau": {
+  "fichier": "6e/maths/proportionnalite/02-tableau/eleveai-maths-6e-prop-tableau.mp4",
+  "poster": "6e/maths/proportionnalite/02-tableau/eleveai-maths-6e-prop-tableau.png",
+  "vignette": "6e/maths/proportionnalite/02-tableau/eleveai-maths-6e-prop-tableau.vignette.webp",
+  "titre": "Les potions du jeu vidéo — Compléter un tableau de proportionnalité — épisode 2 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&microId=prop_table&display=simple"
+ },
+ "6e-prop-tableau-short": {
+  "fichier": "6e/maths/proportionnalite/02-tableau/eleveai-maths-6e-prop-tableau-short.mp4",
+  "poster": "6e/maths/proportionnalite/02-tableau/eleveai-maths-6e-prop-tableau-short.png",
+  "vignette": "6e/maths/proportionnalite/02-tableau/eleveai-maths-6e-prop-tableau-short.vignette.webp",
+  "titre": "Un tableau rempli en 10 secondes, sans calculatrice 🍪 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&microId=prop_table&display=simple"
+ },
+ "6e-prop-unite": {
+  "fichier": "6e/maths/proportionnalite/04-unite/eleveai-maths-6e-prop-unite.mp4",
+  "poster": "6e/maths/proportionnalite/04-unite/eleveai-maths-6e-prop-unite.png",
+  "vignette": "6e/maths/proportionnalite/04-unite/eleveai-maths-6e-prop-unite.vignette.webp",
+  "titre": "Une recette pour 4, et vous êtes 6 ? — Passer par l'unité — épisode 4 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&microId=prop_unite&display=simple"
+ },
+ "6e-prop-unite-short": {
+  "fichier": "6e/maths/proportionnalite/04-unite/eleveai-maths-6e-prop-unite-short.mp4",
+  "poster": "6e/maths/proportionnalite/04-unite/eleveai-maths-6e-prop-unite-short.png",
+  "vignette": "6e/maths/proportionnalite/04-unite/eleveai-maths-6e-prop-unite-short.vignette.webp",
+  "titre": "Le grand paquet est-il toujours le moins cher ? 🛒 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&microId=prop_unite&display=simple"
+ },
  "6e-stats-comparer": {
   "fichier": "6e/maths/statistiques/08-comparer/eleveai-maths-6e-stats-comparer.mp4",
   "poster": "6e/maths/statistiques/08-comparer/eleveai-maths-6e-stats-comparer.png",
