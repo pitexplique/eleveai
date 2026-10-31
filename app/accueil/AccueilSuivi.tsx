@@ -93,7 +93,7 @@ const ETAPES = [
 
 /* Ce qui reste ouvert à tous, pour toujours. */
 const GRATUIT = [
-  "Le coach, sur tout le programme, micro-compétence par micro-compétence",
+  "Le coach de maths, sur tout le programme, micro-compétence par micro-compétence",
   "Les vidéos, avec leurs questions-pauses",
   "Les résultats gardés dans le compte de l'élève",
   "Pour le prof : ses classes, la séance en direct, le bilan par micro",
@@ -178,7 +178,7 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
         <div aria-hidden="true" className="absolute -right-16 top-32 h-72 w-72 rounded-full bg-sky-100/80 blur-3xl" />
         <div className="relative mx-auto max-w-6xl px-4 pb-10 pt-10 text-center sm:pt-14">
           <h1 className="text-3xl font-black leading-tight text-teal-900 sm:text-5xl">
-            Le coach qui suit chaque élève, micro-compétence par micro-compétence
+            Le coach de maths qui suit chaque élève, micro-compétence par micro-compétence
           </h1>
           <p className="mx-auto mt-3 max-w-2xl text-lg text-slate-700">
             Chacun s&apos;entraîne à son niveau. Ses résultats sont gardés. Son professeur et ses parents voient où il en est.
@@ -196,7 +196,7 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
           </div>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link href="/coach-ia/maths" className="rounded-full bg-teal-700 px-6 py-3 font-black text-white shadow hover:bg-teal-800">
-              Commencer avec le coach
+              Commencer avec le coach de maths
             </Link>
             {/* ⭐ 31/10/2026 — Frédéric : « le prof, il voit quelque chose pour
                 lui » ; les vidéos, « il s'en fiche un peu » : ce qui l'intéresse,
@@ -315,7 +315,7 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
                 {GRATUIT.map((g) => <Puce key={g}>{g}</Puce>)}
               </ul>
               <Link href="/coach-ia/maths" className="mt-6 block rounded-full bg-emerald-600 px-5 py-3 text-center font-black text-white hover:bg-emerald-700">
-                Commencer
+                Commencer avec le coach de maths
               </Link>
             </div>
 
@@ -366,7 +366,7 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
           <div>
             <h2 className="text-2xl font-black">Qui est derrière EleveAI ?</h2>
             <p className="mt-1 text-slate-700">
-              Frédéric, professeur de mathématiques et statisticien à La Réunion. Il construit le coach pour des élèves de tous niveaux, y compris ceux qui lisent difficilement, et le corrige chaque semaine à partir des erreurs des élèves.
+              Frédéric, professeur de mathématiques et statisticien à La Réunion. Il construit le coach de maths pour des élèves de tous niveaux, y compris ceux qui lisent difficilement, et le corrige chaque semaine à partir des erreurs des élèves.
             </p>
           </div>
         </section>
