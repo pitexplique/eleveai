@@ -169,3 +169,21 @@ Chiffre réel : sauropode « de film » de 40 m, plausible (Argentinosaurus 30-4
 Question en commentaire : « Un terrain de basket mesure 28 m. Combien de cm sur ton dessin ? » (5,6 cm).
 Chiffres réels (31/10) : foot 105 × 68 m (FIFA, IFAB loi 1 = fourchette), surface de réparation 40,32 m, A4 21 × 29,7 cm (ISO 216), basket 28 × 15 m (FIBA).
 Défauts mineurs connus (short) : « A4 » mord sur le bas de la feuille ; « 68 ÷ 5 = 13,6 cm » frôle Ti Margo. Le script importe `Correspondance`, `cartouche`, `carte_awa`, `gras` de `prop_echelle_reelle.py` : ne pas modifier ce dernier sans re-vérifier le 09.
+
+## 4e 10-echelle-defi (lot 2, rendu le 31/10)
+**Paysage** `4e-prop-echelle-defi` — 3:46, ceinture verte — centres `course-trail`, `nature-ecologie`
+```json
+[
+  {"t":"01:04","question":"Carte au 1/25 000. Un lac mesure 2 cm sur la carte. Combien en vrai ?","choix":["50 m","500 m","5 km"],"reponse":1,"explication":"2 × 25 000 = 50 000 cm, c'est 500 m."},
+  {"t":"02:12","question":"Sur une carte, 5 cm représentent 1 km. Quelle est l'échelle ?","choix":["1/5","1/20 000","1/200"],"reponse":1,"explication":"1 km = 100 000 cm ; 100 000 ÷ 5 = 20 000. L'échelle est 1/20 000."}
+]
+```
+**Short** `4e-prop-echelle-defi-short` — 1:06, ceinture blanche — centres `course-trail`
+```json
+[
+  {"t":"00:29","question":"Un semi-marathon fait environ 21 km. Sur la carte au 1/25 000 ?","choix":["84 cm","21 cm","5 cm"],"reponse":0,"explication":"1 km mesure 4 cm : 21 × 4 = 84 cm."}
+]
+```
+Question en commentaire : « Une course de 10 km : combien de cm sur la carte ? » (40 cm).
+Chiffres réels (31/10) : marathon 42,195 km, semi 21,0975 km (World Athletics, Wikipédia).
+Défauts mineurs connus : « 1/50 000 » (écran 06) s'affiche 1,2 s après le « 1 » dit ; étiquettes « × 25 000 » proches de leur flèche ; short : le cadre de la carte finale mord sur « Ceinture blanche ». L'audit ne contrôle pas les grands nombres à espace (« 25 000 » sort en AUDIT-ABSENT).
