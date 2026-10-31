@@ -151,3 +151,21 @@ Question en commentaire : la figurine de 3 cm au 1/60 (180 cm = 1,80 m). Sources
 ```
 Question en commentaire : « La tête mesure 3 cm sur la figurine. Et dans le film ? » (6 m ; grand pour un sauropode réel, mais juste au 1 cm ↔ 2 m de la figurine).
 Chiffre réel : sauropode « de film » de 40 m, plausible (Argentinosaurus 30-40 m, Patagotitan ≈ 37 m) ; figurine 20 cm inventée.
+
+## 09-echelle-plan (lot 2, COMMUN 6e/4e, rendu le 31/10)
+**Paysages** `6e-prop-echelle-plan` et `4e-prop-echelle-plan` — 3:32, ceinture verte — centres `nature-ecologie`, `art-design` (mêmes t)
+```json
+[
+  {"t":"00:54","question":"1 cm représente 10 m. Un mur mesure 40 m. Combien de cm sur le plan ?","choix":["400 cm","30 cm","4 cm"],"reponse":2,"explication":"40 ÷ 10 = 4 cm."},
+  {"t":"01:52","question":"Sur une carte, 1 cm représente 4 km. Un trajet mesure 30 km. Combien de cm sur la carte ?","choix":["7,5 cm","120 cm","26 cm"],"reponse":0,"explication":"28 km, c'est 7 fois 4 km : 7 cm. Il reste 2 km, la moitié de 4 km : un demi-centimètre. En tout : 7,5 cm."}
+]
+```
+**Short** `6e-prop-echelle-plan-short` = `4e-prop-echelle-plan-short` — 1:15, ceinture blanche — centres `football`
+```json
+[
+  {"t":"00:35","question":"La surface de réparation fait environ 40 m de large. Sur ton dessin (1 cm représente 5 m) ?","choix":["8 cm","200 cm","35 cm"],"reponse":0,"explication":"40 ÷ 5 = 8 cm."}
+]
+```
+Question en commentaire : « Un terrain de basket mesure 28 m. Combien de cm sur ton dessin ? » (5,6 cm).
+Chiffres réels (31/10) : foot 105 × 68 m (FIFA, IFAB loi 1 = fourchette), surface de réparation 40,32 m, A4 21 × 29,7 cm (ISO 216), basket 28 × 15 m (FIBA).
+Défauts mineurs connus (short) : « A4 » mord sur le bas de la feuille ; « 68 ÷ 5 = 13,6 cm » frôle Ti Margo. Le script importe `Correspondance`, `cartouche`, `carte_awa`, `gras` de `prop_echelle_reelle.py` : ne pas modifier ce dernier sans re-vérifier le 09.
