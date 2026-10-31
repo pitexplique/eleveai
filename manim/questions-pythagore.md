@@ -49,6 +49,7 @@ Finale à corriger : « … Alors l'épisode 3 t'attend : calculer l'hypoténuse
   - r : « Réponse A : AB. Le côté sans la lettre C. »
 
 ## Ép. 3 — Calculer l'hypoténuse (`4e-pythagore-hypotenuse`, micro `pythagore_calculer_hypotenuse`)
+✅ RENDU 31/10 : paysage 4:50 (Q1 t=01:34, Q2 t=03:11), short 1:05 (Q t=00:23).
 **Paysage**
 - Q1 après `04-methode` (AVANT les pièges, qui montrent ensuite ces deux erreurs) :
   - q : « Question ! Un écran de télévision mesure 80 centimètres de large et 60 centimètres de haut. Combien mesure sa diagonale ? A : 140 centimètres. B : 100 centimètres. C : 10000 centimètres. Mets pause, et choisis ! »
@@ -63,6 +64,7 @@ Finale à corriger : « … Alors l'épisode 3 t'attend : calculer l'hypoténuse
   - r : « Réponse B : 15 mètres. 81 plus 144 : 225, et la racine de 225, c'est 15. »
 
 ## Ép. 4 — Calculer un côté (`4e-pythagore-cote`, micro `pythagore_calculer_cote`)
+✅ RENDU 31/10 : paysage 4:11 (Q1 t=01:15, Q2 t=02:32), short 1:00 (Q t=00:18).
 **Paysage**
 - Q1 après `04-methode` (avant le piège) :
   - q : « Question ! Un pompier pose une échelle de 5 mètres, son pied à 3 mètres du mur. À quelle hauteur touche-t-elle le mur ? A : 4 mètres. B : 2 mètres. C : 5 virgule 8 mètres. Mets pause, et choisis ! »

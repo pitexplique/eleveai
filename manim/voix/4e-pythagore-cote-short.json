@@ -1,5 +1,7 @@
 {
   "00-accroche": "La largeur cachée. Combien mesure la largeur ?",
   "01-image": "Le champ de cannes : diagonale 50 mètres, longueur 40 mètres. 50 au carré moins 40 au carré : 900. Racine de 900 : 30 mètres.",
+  "01q-question": "Question ! Diagonale 13 mètres, longueur 5 mètres. La largeur ? A : 8 mètres. B : 12 mètres. C : 13 virgule 9 mètres. Mets pause, et choisis !",
+  "01r-reponse": "Réponse B : 12 mètres. 169 moins 25 : 144, et la racine de 144, c'est 12.",
   "02-question": "Un terrain : diagonale 100 mètres, longueur 80 mètres. Combien mesure sa largeur ? Réponds en commentaire !"
 }

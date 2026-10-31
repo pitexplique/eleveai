@@ -4,10 +4,14 @@
   "02-hypotenuse": "La diagonale est toujours en face de l'angle droit : c'est l'hypoténuse, et cette fois on la connaît. Ce qu'on cherche, c'est un côté de l'angle droit.",
   "03-carreaux": "L'égalité ne change pas : le carré de l'hypoténuse égale la somme des deux autres. 25 carreaux, c'est 16 carreaux plus ceux du côté cherché. Il en reste 25 moins 16 : 9. Le côté mesure 3.",
   "04-methode": "La méthode. Un : j'écris l'égalité, l'hypoténuse seule d'un côté. Deux : je soustrais. Largeur au carré égale 50 au carré moins 40 au carré : 2500 moins 1600, 900. Trois : je prends la racine. Racine carrée de 900 : 30. La largeur mesure 30 mètres.",
+  "04q-question": "Question ! Un pompier pose une échelle de 5 mètres, son pied à 3 mètres du mur. À quelle hauteur touche-t-elle le mur ? A : 4 mètres. B : 2 mètres. C : 5 virgule 8 mètres. Mets pause, et choisis !",
+  "04r-reponse": "Réponse A : 4 mètres. 25 moins 9 : 16, et la racine carrée de 16, c'est 4.",
   "05-piege": "Le piège : additionner par habitude. 2500 plus 1600 : 4100. Racine de 4100 : environ 64 mètres. Plus long que la diagonale ! C'est impossible : un côté de l'angle droit est toujours plus court que l'hypoténuse.",
   "07-arrondi": "Un exemple avec arrondi. Le triangle KLM est rectangle en L. L'hypoténuse KM mesure 9 centimètres, et KL mesure 5 centimètres. 81 moins 25 : 56. Racine de 56 : environ 7 virgule 5 centimètres.",
+  "07q-question": "Question ! L'hypoténuse mesure 13 centimètres, un côté 12 centimètres. Combien mesure l'autre côté ? A : 1 centimètre. B : 5 centimètres. C : 17 virgule 7 centimètres. Mets pause, et choisis !",
+  "07r-reponse": "Réponse B : 5 centimètres. 169 moins 144 : 25, et la racine de 25, c'est 5.",
   "08-defi": "À toi de jouer. Le triangle RST est rectangle en S, avec RT égale 10 centimètres et RS égale 6 centimètres. Combien mesure ST ? Mets pause, et cherche !",
   "08b-correction": "Correction. Rectangle en S : l'hypoténuse est RT. ST au carré égale 10 au carré moins 6 au carré : 100 moins 36, 64. ST égale racine carrée de 64 : 8 centimètres. Contrôle : 8 est plus court que 10.",
-  "09-finale": "Ce que tu sais faire maintenant. Repérer que l'hypoténuse est connue ? Soustraire les carrés, puis prendre la racine ? Vérifier que le côté trouvé est plus court que l'hypoténuse ? Alors l'épisode 5 t'attend : vérifier une égalité avec trois longueurs.",
-  "10-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+  "09-finale": "Ce que tu as appris. Repérer que l'hypoténuse est connue ? Soustraire les carrés, puis prendre la racine ? Vérifier que le côté trouvé est plus court que l'hypoténuse ? Alors l'épisode 5 t'attend : vérifier une égalité avec trois longueurs.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
 }
