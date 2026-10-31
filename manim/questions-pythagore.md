@@ -19,6 +19,7 @@ Shorts : leur fin actuelle « Réponds en commentaire ! » reste ; s'ils ont un 
 
 ## Ép. 1 — Carré et racine (`4e-pythagore-carre-racine`, micro `pythagore_carre_racine`)
 Finale à corriger : « … Alors l'épisode 2 t'attend : reconnaître l'hypoténuse. »
+✅ RENDU 31/10 (`a17f5bdd`) : paysage 3:18 (Q1 t=00:54, Q2 t=01:52), short 0:53 (Q t=00:21). ⚠️ Titre de finale resté « Ce que tu sais faire maintenant » (les autres passent à « Ce que tu as appris ») ; écran 06 « côté = √25 = 5 » écrit mais pas dit.
 **Paysage**
 - Q1 après `03-piege` :
   - q : « Question ! Combien vaut 6 au carré ? A : 12. B : 36. C : 66. Mets pause, et choisis ! »

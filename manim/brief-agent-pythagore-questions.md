@@ -21,5 +21,13 @@ Le nouveau mp4 REMPLACE l'ancien dans `manim/sorties/<classe>/maths/pythagore/<N
 
 ⛔ NE COMMITTE RIEN. ⛔ Ne lance jamais la lecture d'une vidéo. ⛔ Pas de miniature, manifeste, R2, YouTube. Écris par morceaux de ≤ 150 lignes. Jamais deux rendus simultanés de ton côté.
 
+## Leçons du pilote (ép. 1, commit a17f5bdd — à lire : `pythagore_pauses.py` + `pythagore_carre_racine.py`)
+1. Héritage : `class X(PausesPaysage, Notion4e)` / `class S(PausesShort, Short6e)` (le mixin EN PREMIER).
+2. Marques mot à mot : `scripts/marques_dump.ps1 -Fichier voix/<nom>.json -Sortie scripts/4e/<nom_voix>.marques.json -Debit -7 -Hauteur 6`, puis `python scripts/cues2marques.py <json> <sortie>.cues.tsv <sortie>`.
+3. `self.ecran_question("NNq-…", "NNr-…", question=[…], choix=[3], bonne=i, phrase=[…])` ; fin : `self.page_abonnement(voix="NN-abonne")` ; `au_nb()` pour un nombre au mot.
+4. ⚠️ Une fois calés sur les vraies marques, les ANCIENS écrans sortent en avance/retard : il faut les recaler TOUS (le pilote a recalé ses 9 écrans).
+5. `generer-voix.ps1` écrit dans le dossier courant : lance-le depuis un dossier temporaire avec un JSON réduit aux clés nouvelles, puis recopie.
+6. Titre de finale : remplace « Ce que tu sais faire maintenant » par « Ce que tu as appris » (voix ET écran), en haut et centré.
+
 ## Rapport final COURT
 Fichiers touchés, durées avant/après, liste `questions` JSON par vidéo (t "MM:SS" MESURÉ sur le rendu, question, choix, reponse 0/1/2, explication), bords, ce que tu as vu sur les planches, soucis restants.
