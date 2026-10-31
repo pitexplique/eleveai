@@ -134,3 +134,20 @@ Question en commentaire : « Le bateau est à 15 cm du trésor. Combien de pas ?
 ]
 ```
 Question en commentaire : la figurine de 3 cm au 1/60 (180 cm = 1,80 m). Sources : 1/43 ≈ 10 cm (voiture-miniature.com) ; A320 37,57 m, 737-800 39,47 m (dimensions.com). Intitulés à vérifier sur le texte exact du script avant le manifeste.
+
+## 6e 10-echelle-defi (lot 2, rendu le 31/10)
+**Paysage** `6e-prop-echelle-defi` — 2:43, ceinture verte — centres `cinema-series`, `art-design`
+```json
+[
+  {"t":"00:36","question":"Sur un plan, 5 cm représentent 20 m. Que représente 1 cm ?","choix":["4 m","100 m","15 m"],"reponse":0,"explication":"20 ÷ 5 = 4 m pour 1 cm."},
+  {"t":"01:17","question":"Sur le plan de Jade, 1 cm représente 4 m. Un pont mesure 7 cm. Combien mesure-t-il en vrai ?","choix":["11 m","28 m","1,75 m"],"reponse":1,"explication":"7 × 4 = 28 m."}
+]
+```
+**Short** `6e-prop-echelle-defi-short` — 0:57, ceinture blanche — centres `dinosaures`, `cinema-series`
+```json
+[
+  {"t":"00:22","question":"La queue de la figurine mesure 8 cm. Dans le film ?","choix":["16 m","10 m","4 m"],"reponse":0,"explication":"8 × 2 = 16 m."}
+]
+```
+Question en commentaire : « La tête mesure 3 cm sur la figurine. Et dans le film ? » (6 m ; grand pour un sauropode réel, mais juste au 1 cm ↔ 2 m de la figurine).
+Chiffre réel : sauropode « de film » de 40 m, plausible (Argentinosaurus 30-40 m, Patagotitan ≈ 37 m) ; figurine 20 cm inventée.

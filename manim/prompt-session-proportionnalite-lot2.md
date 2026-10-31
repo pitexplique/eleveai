@@ -15,7 +15,8 @@ Réponds toujours en français. Ne pose pas de questions : tranche, avance, list
 ## État au relais (31/10, 12 h 10)
 - **08** : FINI, vérifié, COMMITÉ (`05b2260f`) avec ses questions.
 - **07-echelle-comprendre** : FINI, vérifié (bords 0, planche bonne), COMMITÉ avec ses questions (`4ecd6e1e`).
-- **09-echelle-plan** et **10 défi 6e** : agents lancés à 11 h 35 depuis la session du 31/10 midi ; au relais, paysage 6e du 09 rendue, 4e en cours ; défi 6e : scripts + marques écrits, rendus en cours. Leurs rapports seront PERDUS si la session se ferme : vérifier sur disque (`manim/scripts/6e/prop_echelle_plan*`, `prop_echelle_defi*`, mp4 dans `09-echelle-plan/` et `6e/.../10-echelle-defi/`). Si les mp4 sont tous là : bords + planches + `t` + commit par chemin ; s'il en manque et que rien ne bouge : agent neuf.
+- **09-echelle-plan** (agent lancé à 11 h 35 depuis la session du 31/10 midi ; au relais, paysage 6e du 09 rendue, 4e en cours ) Leurs rapports seront PERDUS si la session se ferme : vérifier sur disque (`manim/scripts/6e/prop_echelle_plan*`, `prop_echelle_defi*`, mp4 dans `09-echelle-plan/` et `6e/.../10-echelle-defi/`). Si les mp4 sont tous là : bords + planches + `t` + commit par chemin ; s'il en manque et que rien ne bouge : agent neuf.
+- **10 défi 6e** : FINI, planches regardées (bonnes), bords 0, COMMITÉ avec ses questions.
 - **10 défi 4e : PAS lancé.** Mission ci-dessous.
 - Leçons : `EchelleCarte` du module est inutilisable → reprendre la figure `Correspondance` de `prop_echelle_reelle.py` ; rendus avec `PYTHONIOENCODING=utf-8`.
 - ✅ Banque 6e : Saint-Denis–Saint-Pierre corrigé (13 cm → 52 km à vol d'oiseau, `244f1d9f`).
