@@ -204,3 +204,20 @@ Défauts mineurs connus : « 1/50 000 » (écran 06) s'affiche 1,2 s après le �
 ```
 Question en commentaire : « Combien font 20 % de 70 ? » (14).
 Défauts mineurs connus : short, le titre « 10 % en 1 seconde » disparaît à partir de la question ; paysage, les « 8 € » écrits dans la grille sont petits. `BarrePourcent` : passer `etiquette=False` (l'étiquette n'attend pas la voix) ; `remplir()` ne fait qu'une couleur → `.grille.colorier(…)` par rangée.
+
+## 6e 11-pourcentage-comprendre (lot 3, rendu le 31/10)
+**Paysage** `6e-prop-pourcentage-comprendre` — 3:28, ceinture verte — centres `animaux`, `chiens-chats`
+```json
+[
+  {"t":"01:01","question":"Un refuge de 100 animaux. 30 sont des chiens. Quel pourcentage de chiens ?","choix":["30 %","70 %","3 %"],"reponse":0,"explication":"30 sur 100, c'est 30 %."},
+  {"t":"02:07","question":"Un refuge a 20 animaux. 5 sont des lapins. Quel pourcentage de lapins ?","choix":["5 %","25 %","20 %"],"reponse":1,"explication":"20 × 5 = 100, alors 5 × 5 = 25 : 25 sur 100, c'est 25 %."}
+]
+```
+**Short** `6e-prop-pourcentage-comprendre-short` — 0:55, ceinture blanche — centres `technologie-ia`
+```json
+[
+  {"t":"00:19","question":"La batterie affiche 50 %. Elle est remplie à…","choix":["la moitié","50 cases sur 50","5 cases"],"reponse":0,"explication":"50 cases sur 100 : la moitié."}
+]
+```
+Question en commentaire : « La batterie affiche 75 %. Combien de cases sont vides ? » (25).
+`BarrePourcent` mode « chargement » trop limité pour un short → classe `Batterie` dans `prop_pourcentage_comprendre_short.py` (réutilisable).
