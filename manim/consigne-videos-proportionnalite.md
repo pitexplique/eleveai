@@ -9,7 +9,7 @@ Frédéric enseigne cette année en **6e et en 4e** : ses élèves verront ces v
 - **Déjà faits, ne pas refaire** : 4e `prop_proportionnalite`, `prop_ratio`, `prop_pourcentages` ont UNE paysage par notion + UN short par micro (`4e-prop-*-short-*`, manifeste) ; 6e `pourcentage_fraction` et `pourcentage_decimal` sont couverts par la série fractions (6e 12 et 13) ; anciennes paysages 6e `a2zNZzxuo4M` (proportionnalité) et `pAPkXW4EDsU` (pourcentages), muettes et à remplacer.
 
 ## ⭐⭐ Le fil rouge : les erreurs
-Les erreurs de SES copies priment (demandées à Frédéric le 31/10 ; les inscrire ici dès qu'il répond, ne jamais en inventer). En attendant, les leurres classiques :
+Frédéric, 31/10 : « pas d'erreur particulière » sur ses copies. Les leurres des questions-pauses sont donc les erreurs classiques ci-dessous (ne pas en inventer d'autres) :
 1. **Ajouter au lieu de multiplier** : « 3 pour 5 €, donc 6 pour 8 € » (+3 partout).
 2. **Croire tout proportionnel** : l'âge et la taille, un forfait avec abonnement, un tarif dégressif.
 3. **Inverser le coefficient** (÷ au lieu de ×, ou la mauvaise ligne).
