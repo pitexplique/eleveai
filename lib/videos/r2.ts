@@ -43,3 +43,20 @@ export function toutesLesVideos(): VideoR2[] {
 
 /** Adresse publique d'un fichier ; chaque segment encodé (accents, espaces). */
 export const urlR2 = (rel: string) => `${BASE_VIDEOS}/${rel.split("/").map(encodeURIComponent).join("/")}`;
+
+/**
+ * La paysage de chaque notion du coach, « classe/notion » → id du manifeste :
+ * celle de toute la notion (sans micro) d'abord, puis une publiée. Pour les
+ * boutons « Regarder la vidéo » qui ne connaissent que la notion (/parcours).
+ */
+export function paysageParNotion(): Record<string, string> {
+  const choix: Record<string, { id: string; rang: number }> = {};
+  for (const [id, v] of Object.entries(LIGNES)) {
+    if (v.short || !v.coach) continue;
+    const q = new URLSearchParams(v.coach.split("?")[1]);
+    const cle = `${q.get("classe")}/${q.get("notion")}`;
+    const rang = (q.get("microId") ? 2 : 0) + (v.youtube ? 0 : 1);
+    if (!choix[cle] || rang < choix[cle].rang) choix[cle] = { id, rang };
+  }
+  return Object.fromEntries(Object.entries(choix).map(([cle, c]) => [cle, c.id]));
+}

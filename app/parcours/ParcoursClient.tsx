@@ -9,7 +9,6 @@ import { MarkdownMath } from "@/components/MarkdownMath";
 import BoutonSignalerQuestion from "@/components/signalement/BoutonSignalerQuestion";
 import { saveResultat } from "@/lib/resultats";
 import { useEleve } from "@/context/EleveContext";
-import { buildLearningVideoHref } from "@/lib/videoSearch";
 
 import type {
   ParcoursAnswer,
@@ -153,7 +152,16 @@ function shuffleArray<T>(array: T[]): T[] {
   return copy;
 }
 
-export default function ParcoursClient() {
+// La galerie /video de chaque classe, quand la notion n'a pas encore sa vidéo.
+const DOSSIER_VIDEOS: Partial<Record<ParcoursClasse, string>> = {
+  ce1: "cp",
+  ce2: "cm1",
+  "premiere-spe": "premiere",
+  "terminale-spe": "terminale",
+};
+
+/** `videosNotions` : « classe/notion » → id de sa paysage R2 (page serveur). */
+export default function ParcoursClient({ videosNotions }: { videosNotions: Record<string, string> }) {
   const eleveContext = useEleve() as unknown as {
     eleve?: EleveSession | null;
     currentUser?: EleveSession | null;
@@ -1005,14 +1013,11 @@ export default function ParcoursClient() {
               const userAnswer = answers[index] ?? "";
               const expected = q.question.expected ?? [];
               const correct = isCorrectAnswer(userAnswer, expected);
-              const learningVideoHref = buildLearningVideoHref({
-                matiere: "maths",
-                niveau: classe,
-                notionLabel: q.notionLabel,
-                notionId: q.notionId,
-                questionText: q.question.text,
-                type: q.question.format,
-              });
+              // ⛔ 31/10 : notre vidéo R2 (lecteur du site), plus YouTube.
+              const videoId = videosNotions[`${classe}/${q.notionId}`];
+              const learningVideoHref = videoId
+                ? `/video/${encodeURIComponent(videoId)}`
+                : `/video?classe=${DOSSIER_VIDEOS[classe] ?? classe}`;
 
               return (
                 <article

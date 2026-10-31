@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import ParcoursClient from "./ParcoursClient";
 import BoiteAOutils from "@/components/BoiteAOutils";
 import FloatingCoach from "@/components/FloatingCoach";
+import { paysageParNotion } from "@/lib/videos/r2";
 
 // ⚠️ PAS DE « - EleveAI » DANS LE TITRE : le layout racine applique déjà le
 // gabarit « %s — EleveAI ». L'ancien titre donnait donc, en vrai, « Parcours
@@ -18,7 +19,8 @@ export const metadata: Metadata = {
 export default function ParcoursPage() {
   return (
     <>
-      <ParcoursClient />
+      {/* « Regarder la vidéo » : nos paysages R2, plus une recherche YouTube (31/10). */}
+      <ParcoursClient videosNotions={paysageParNotion()} />
       <BoiteAOutils />
       <FloatingCoach />
     </>
