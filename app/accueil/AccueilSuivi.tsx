@@ -33,6 +33,7 @@ import {
   Check,
   ClipboardList,
   Eye,
+  FileText,
   GraduationCap,
   Mail,
   MonitorPlay,
@@ -40,7 +41,9 @@ import {
   Save,
   Sparkles,
   Target,
+  Timer,
   Users,
+  Zap,
 } from "lucide-react";
 import { PROGRAMME_CLASSES, listerToutesLesNotions } from "@/lib/programme";
 import { toutesLesVideos } from "@/lib/videos/r2";
@@ -84,6 +87,13 @@ const TEINTE = ["bg-slate-100 text-slate-400", "bg-red-100 text-red-700", "bg-am
 const SYMBOLE = ["·", "✗", "~", "✓"];
 
 /* « Comment ça marche » : le chemin d'un élève, en quatre images. */
+const ACCES_DIRECTS = [
+  { href: "/automatismes-maths", label: "Automatismes", Icone: Zap, couleur: "text-amber-500" },
+  { href: "/fiches-exercices", label: "Fiches d'exercices", Icone: FileText, couleur: "text-sky-600" },
+  { href: "/video", label: "Vidéos", Icone: PlayCircle, couleur: "text-rose-600" },
+  { href: "/calcul-rapide", label: "Calcul rapide", Icone: Timer, couleur: "text-orange-600" },
+];
+
 const ETAPES = [
   { Icone: Users, titre: "Je choisis ma classe", texte: "Du CP à la Terminale, le programme officiel découpé en micro-compétences." },
   { Icone: ClipboardList, titre: "Le coach m'évalue", texte: "Quelques questions suffisent pour trouver ce qui est acquis et ce qui manque." },
@@ -194,35 +204,31 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
               Chaque réponse est gardée. Le prof voit les erreurs de toute sa classe ; les parents voient les progrès de leur enfant.
             </Nuage>
           </div>
+          {/* Deux portes principales : le coach, et l'évaluation (« Faire le
+              point » du coach) qui situe l'élève. */}
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link href="/coach-ia/maths" className="rounded-full bg-teal-700 px-6 py-3 font-black text-white shadow hover:bg-teal-800">
+            <Link href="/coach-ia/maths" className="rounded-full bg-teal-700 px-8 py-4 text-lg font-black text-white shadow-lg hover:bg-teal-800">
               Commencer avec le coach de maths
             </Link>
-            {/* ⭐ 31/10/2026 — Frédéric : « le prof, il voit quelque chose pour
-                lui » ; les vidéos, « il s'en fiche un peu » : ce qui l'intéresse,
-                ce sont les automatismes et les fiches d'exercices, juste après le
-                coach, pour cliquer tout de suite. Les mêmes portes que l'ancien
-                accueil (AccueilCoach.tsx). */}
-            <Link href="/automatismes-maths" className="rounded-full bg-amber-400 px-6 py-3 font-black text-slate-900 shadow hover:bg-amber-500">
-              Commencer avec les automatismes
-            </Link>
-            <Link href="/fiches-exercices" className="rounded-full bg-sky-700 px-6 py-3 font-black text-white shadow hover:bg-sky-800">
-              Commencer avec les fiches d&apos;exercices
-            </Link>
-            <Link href="/video" className="rounded-full bg-rose-600 px-6 py-3 font-black text-white shadow hover:bg-rose-700">
-              Commencer avec les vidéos
-            </Link>
-            {/* « Faire le point » du coach : l'évaluation qui situe l'élève. */}
-            <Link href="/parcours" className="rounded-full bg-violet-700 px-6 py-3 font-black text-white shadow hover:bg-violet-800">
+            <Link href="/parcours" className="rounded-full bg-white px-8 py-4 text-lg font-black text-teal-800 shadow ring-2 ring-teal-600 hover:bg-teal-50">
               Commencer par une évaluation
             </Link>
-            <Link href="/calcul-rapide" className="rounded-full bg-orange-600 px-6 py-3 font-black text-white shadow hover:bg-orange-700">
-              Commencer avec le calcul rapide
-            </Link>
-            <Link href="/auth/signin?inscription=1" className="rounded-full bg-white px-6 py-3 font-black text-teal-800 ring-1 ring-teal-300 hover:bg-teal-50">
-              Créer un compte pour garder mes résultats
-            </Link>
           </div>
+          {/* ⭐ 31/10/2026 — Frédéric : « le prof, il voit quelque chose pour
+              lui » : les automatismes et les fiches d'exercices tout de suite,
+              puis les vidéos et le calcul rapide. Accès directs, même style. */}
+          <p className="mt-6 text-sm font-bold text-slate-500">Ou va directement à :</p>
+          <div className="mt-2 flex flex-wrap justify-center gap-2">
+            {ACCES_DIRECTS.map(({ href, label, Icone, couleur }) => (
+              <Link key={href} href={href} className="flex items-center gap-2 rounded-full bg-white px-4 py-2 font-bold text-slate-800 shadow-sm ring-1 ring-slate-200 hover:ring-teal-400">
+                <Icone className={`h-4 w-4 ${couleur}`} aria-hidden />
+                {label}
+              </Link>
+            ))}
+          </div>
+          <Link href="/auth/signin?inscription=1" className="mt-5 inline-block font-bold text-teal-800 underline underline-offset-4 hover:text-teal-900">
+            Créer un compte pour garder mes résultats
+          </Link>
         </div>
       </section>
 
