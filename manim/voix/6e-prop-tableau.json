@@ -1,0 +1,17 @@
+{
+  "00-garde": "Compléter un tableau de proportionnalité. Comment trouver les cases vides sans tout recalculer ?",
+  "01-situation": "Voici Noah. Il est game designer : il invente des jeux vidéo. Dans la boutique de son jeu, 2 potions coûtent 10 pièces. Il doit afficher le prix de 4 potions, de 6 potions, et de 1 potion.",
+  "02-tableau": "Il range tout dans un tableau. En haut, le nombre de potions. En bas, le prix en pièces. 2 potions : 10 pièces.",
+  "03-double": "4 potions, c'est le double de 2 potions. Le prix double aussi : 10 fois 2, égale 20 pièces.",
+  "04-addition": "Et 6 potions ? 6, c'est 2 plus 4. On additionne les prix : 10 plus 20, égale 30 pièces. Dans un tableau de proportionnalité, on peut additionner deux colonnes.",
+  "05-question": "Question ! 3 coffres coûtent 12 pièces. Combien coûtent 6 coffres ? A : 15 pièces. B : 24 pièces. C : 18 pièces. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 6 coffres, c'est le double de 3 coffres. Le prix double : 12 fois 2, égale 24 pièces.",
+  "06-moitie": "Et 1 potion ? 1, c'est la moitié de 2. On divise le prix par 2 : 10 divisé par 2, égale 5 pièces.",
+  "07-piege": "Attention au piège ! On n'ajoute pas le même nombre aux deux lignes. 2 potions de plus, ce n'est pas 2 pièces de plus ! 4 potions coûtent 20 pièces, et pas 12.",
+  "08-question": "Question ! 1 épée coûte 7 pièces. 3 épées coûtent 21 pièces. Combien coûtent 4 épées ? A : 28 pièces. B : 25 pièces. C : 22 pièces. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. 4, c'est 1 plus 3. On additionne les prix : 7 plus 21, égale 28 pièces.",
+  "09-defi": "À toi de jouer ! 4 boucliers coûtent 12 pièces. Combien coûtent 8 boucliers, 2 boucliers, et 10 boucliers ? Mets pause, et cherche !",
+  "09b-correction": "Correction. 8, c'est le double de 4 : 12 fois 2, égale 24 pièces. 2, c'est la moitié de 4 : 12 divisé par 2, égale 6 pièces. 10, c'est 8 plus 2 : 24 plus 6, égale 30 pièces.",
+  "10-finale": "Ce que tu as appris. Dans un tableau de proportionnalité, quand une colonne double, le prix double aussi. On peut prendre la moitié, ou additionner deux colonnes. Mais on n'ajoute jamais le même nombre aux deux lignes.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

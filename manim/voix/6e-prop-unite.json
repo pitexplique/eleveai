@@ -1,0 +1,17 @@
+{
+  "00-garde": "Passer par l'unité. Une recette pour 4, comment la faire pour 6 ?",
+  "01-situation": "Voici Yanis. Il est pâtissier. Sa recette de gâteau est pour 4 personnes : 200 g de farine. Ce soir, ils sont 6 à table. Combien de farine faut-il ?",
+  "02-ni-double": "6 n'est ni le double, ni la moitié de 4. Alors on passe par 1 personne : c'est l'unité.",
+  "03-diviser": "Pour 4 personnes : 200 g. Pour 1 personne, 4 fois moins : 200 divisé par 4, égale 50 g.",
+  "04-multiplier": "Pour 6 personnes, 6 fois plus : 6 fois 50, égale 300 g. Yanis prend 300 g de farine.",
+  "05-etapes": "Deux étapes. D'abord on divise, pour revenir à 1. Puis on multiplie, pour aller au nombre voulu.",
+  "06-question": "Question ! 5 mangues coûtent 15 €. Combien coûte 1 mangue ? A : 10 €. B : 3 €. C : 75 €. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. 15 divisé par 5, égale 3 € pour 1 mangue.",
+  "07-piege": "Attention au piège ! De 4 à 6 personnes, on ajoute 2 personnes. Mais on n'ajoute pas 2 g de farine ! 202 g, ce serait faux. On passe par 1 personne.",
+  "08-question": "Question ! 3 cahiers coûtent 9 €. Combien coûtent 7 cahiers ? A : 13 €. B : 21 €. C : 63 €. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. 1 cahier : 9 divisé par 3, égale 3 €. 7 cahiers : 7 fois 3, égale 21 €.",
+  "09-defi": "À toi de jouer ! Pour 8 crêpes, Yanis met 400 mL de lait. Combien de lait pour 10 crêpes ? Mets pause, et cherche !",
+  "09b-correction": "Correction. Pour 1 crêpe : 400 divisé par 8, égale 50 mL. Pour 10 crêpes : 10 fois 50, égale 500 mL de lait.",
+  "10-finale": "Ce que tu as appris. Quand ni le double ni la moitié ne marchent, on passe par l'unité. D'abord on divise, pour trouver la valeur pour 1. Puis on multiplie, pour le nombre voulu.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

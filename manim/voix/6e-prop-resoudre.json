@@ -1,0 +1,17 @@
+{
+  "00-garde": "Résoudre un problème de proportionnalité. Trois chemins, une seule réponse.",
+  "01-situation": "Voici Maëlle. Elle gère le matériel d'un club de foot. 10 maillots coûtent 50 €. L'équipe a besoin de 15 maillots. Combien va-t-elle payer ?",
+  "02-verifier": "D'abord : est-ce proportionnel ? Chaque maillot coûte le même prix. Oui : deux fois plus de maillots, deux fois plus cher.",
+  "03-chemin1": "Chemin 1 : l'unité. 1 maillot : 50 divisé par 10, égale 5 €. 15 maillots : 15 fois 5, égale 75 €.",
+  "04-chemin2": "Chemin 2 : les colonnes. 5 maillots, c'est la moitié de 10 : 25 €. Et 15, c'est 10 plus 5 : 50 plus 25, égale 75 €.",
+  "05-chemin3": "Chemin 3 : le coefficient. Le prix, c'est toujours 5 fois le nombre de maillots. 15 fois 5, égale 75 €. Trois chemins, la même réponse : 75 €.",
+  "06-question": "Question ! 4 ballons coûtent 36 €. Combien coûtent 6 ballons ? A : 38 €. B : 54 €. C : 216 €. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. 1 ballon : 36 divisé par 4, égale 9 €. 6 ballons : 6 fois 9, égale 54 €.",
+  "07-piege": "Attention au piège ! Avant de calculer, vérifie que c'est proportionnel. Pour imprimer le logo du club, on paie 20 € une seule fois, puis 5 € par maillot. 1 maillot : 25 €. 2 maillots : 30 €. Ce n'est plus proportionnel !",
+  "08-question": "Question ! 3 gourdes coûtent 12 €. Combien coûtent 9 gourdes ? A : 36 €. B : 18 €. C : 21 €. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. 9 gourdes, c'est 3 fois 3 gourdes. 3 fois 12, égale 36 €.",
+  "09-defi": "À toi de jouer ! 6 paires de chaussettes coûtent 18 €. Combien coûtent 10 paires ? Choisis ton chemin. Mets pause, et cherche !",
+  "09b-correction": "Correction. Par l'unité : 1 paire, 18 divisé par 6, égale 3 €. 10 paires : 10 fois 3, égale 30 €.",
+  "10-finale": "Ce que tu as appris. D'abord, on vérifie que la situation est proportionnelle. Puis on choisit son chemin : l'unité, les colonnes, ou le coefficient. Tous mènent à la même réponse.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

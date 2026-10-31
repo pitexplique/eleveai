@@ -1,0 +1,10 @@
+{
+  "00-accroche": "Le grand paquet est-il toujours le moins cher ?",
+  "01-paquets": "Au supermarché : un petit paquet de céréales, 500 g, 2 €. Un grand paquet, 1 kg, 5 €.",
+  "02-comparer": "Le grand semble plus avantageux. Vérifions ! On compare le prix pour 1 kilo.",
+  "03-deux-petits": "1 kg, c'est 2 petits paquets de 500 g. 2 fois 2 €, égale 4 €.",
+  "04-surprise": "Petits paquets : 4 € le kilo. Grand paquet : 5 € le kilo. Surprise : le grand est plus cher !",
+  "05-question": "Question ! 3 yaourts coûtent 2 €. Un pack de 12 yaourts coûte 9 €. Quel est le meilleur prix ? A : les 3 yaourts. B : le pack de 12. C : c'est pareil. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 12 yaourts, c'est 4 fois 3 yaourts : 4 fois 2, égale 8 €. Moins cher que le pack à 9 € !",
+  "06-commentaire": "Et toi ? 250 g de chocolat coûtent 3 €. Combien coûte 1 kg ? Réponds en commentaire !"
+}

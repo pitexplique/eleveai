@@ -1,0 +1,15 @@
+{
+  "00-garde": "Défis de proportionnalité. Sauras-tu éviter tous les pièges ?",
+  "01-situation": "Voici Chloé. Elle conduit un car scolaire. Demain, sortie scolaire : 250 km en tout. Son car consomme 30 litres de gazole pour 100 km. Combien de litres faut-il ?",
+  "02-decouper": "250 n'est ni le double, ni le triple de 100. On découpe : 250, c'est 100 plus 100 plus 50.",
+  "03-calcul": "100 km : 30 litres. 50 km, la moitié : 15 litres. 250 km : 30 plus 30 plus 15, égale 75 litres.",
+  "04-question": "Question ! Le car consomme 30 litres pour 100 km. Combien pour 300 km ? A : 90 litres. B : 230 litres. C : 33 litres. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. 300 km, c'est 3 fois 100 km. 3 fois 30, égale 90 litres.",
+  "05-piege": "Un défi piège ! Avec 1 car, le trajet dure 2 heures. Avec 2 cars, combien de temps ? Pas 4 heures ! Les deux cars roulent en même temps : toujours 2 heures. Ce n'est pas proportionnel.",
+  "06-question": "Question ! Un gâteau cuit en 30 minutes. Combien de temps pour 2 gâteaux, dans le même four, en même temps ? A : 60 minutes. B : 30 minutes. C : 15 minutes. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. Les deux gâteaux cuisent en même temps : toujours 30 minutes. Ce n'est pas proportionnel.",
+  "07-defi": "À toi de jouer ! Au musée, 8 entrées coûtent 36 €. La classe a 24 élèves. Combien coûte l'entrée pour toute la classe ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 24, c'est 3 fois 8. Le prix est 3 fois plus grand : 3 fois 36, égale 108 €. La sortie coûte 108 €.",
+  "08-finale": "Ce que tu as appris. Un grand nombre se découpe : 250, c'est 100 plus 100 plus 50. Et avant de calculer, on se demande si c'est vraiment proportionnel : deux cars ne roulent pas deux fois plus longtemps.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

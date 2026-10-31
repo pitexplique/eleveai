@@ -1,0 +1,10 @@
+{
+  "00-accroche": "Trois chemins pour un même calcul. Lequel est le plus rapide ?",
+  "01-concert": "4 places de concert coûtent 100 €. Combien coûtent 6 places ?",
+  "02-chemin1": "Chemin 1, l'unité. 1 place : 100 divisé par 4, égale 25 €. 6 places : 6 fois 25, égale 150 €.",
+  "03-chemin2": "Chemin 2, les colonnes. 2 places, la moitié de 4 : 50 €. 6, c'est 4 plus 2 : 100 plus 50, égale 150 €.",
+  "04-chemin3": "Chemin 3, le coefficient. Le prix, c'est 25 fois le nombre de places. 6 fois 25, égale 150 €. Même arrivée pour les trois !",
+  "05-question": "Question ! Et 8 places ? A : 104 €. B : 200 €. C : 400 €. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 8, c'est le double de 4. Le double de 100, égale 200 €.",
+  "06-commentaire": "Et toi ? Combien coûtent 10 places, et quel chemin prends-tu ? Réponds en commentaire !"
+}

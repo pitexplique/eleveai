@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Une énigme de chats. Elle piège même les adultes !",
+  "01-enonce": "3 chats attrapent 3 souris en 3 minutes.",
+  "02-question-enigme": "Combien de chats faut-il pour attraper 100 souris en 100 minutes ?",
+  "03-question": "Question ! A : 100 chats. B : 3 chats. C : 33 chats. Mets pause, et choisis !",
+  "04-reponse": "Réponse B : 3 chats ! Ensemble, les 3 chats attrapent 3 souris en 3 minutes. Cela fait 1 souris par minute.",
+  "05-explication": "En 100 minutes, ils attrapent donc 100 souris. Les mêmes 3 chats suffisent !",
+  "06-commentaire": "Et toi ? Combien de souris ces 3 chats attrapent-ils en 1 heure ? Réponds en commentaire !"
+}

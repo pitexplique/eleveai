@@ -1,0 +1,10 @@
+{
+  "00-accroche": "Combien de fois un colibri bat-il des ailes en 1 minute ?",
+  "01-colibri": "Un colibri bat des ailes environ 50 fois par seconde. Si vite qu'on ne voit plus ses ailes !",
+  "02-tableau": "2 secondes : 2 fois 50, égale 100 battements. 10 secondes : 500 battements.",
+  "03-coefficient": "Le coefficient est 50 : on multiplie toujours les secondes par 50.",
+  "04-question": "Question ! En 4 secondes ? A : 54. B : 200. C : 450. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 4 fois 50, égale 200 battements.",
+  "05-minute": "Et en 1 minute, 60 secondes : 60 fois 50, égale 3 000 battements !",
+  "06-commentaire": "Et toi ? Combien de battements en 1 heure ? Réponds en commentaire !"
+}

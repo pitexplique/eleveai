@@ -1,0 +1,10 @@
+{
+  "00-accroche": "Un tableau rempli en 10 secondes, sans calculatrice ?",
+  "01-cookies": "À la pâtisserie, 2 cookies coûtent 3 €.",
+  "02-quatre": "4 cookies ? 4, c'est 2 plus 2. Donc 3 plus 3 : 6 €.",
+  "03-six": "6 cookies ? 6, c'est 2 plus 4. Donc 3 plus 6 : 9 €.",
+  "04-dix": "10 cookies ? 10, c'est 4 plus 6. Donc 6 plus 9 : 15 €. Pas une seule multiplication !",
+  "05-question": "Question ! Et 12 cookies ? A : 18 €. B : 14 €. C : 36 €. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 12, c'est 6 plus 6. Donc 9 plus 9 : 18 €.",
+  "06-commentaire": "Et toi ? Combien coûtent 20 cookies ? Réponds en commentaire !"
+}
