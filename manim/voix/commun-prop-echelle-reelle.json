@@ -1,0 +1,16 @@
+{
+  "00-garde": "Du plan vers la réalité. Comment lire une vraie distance sur une carte ?",
+  "01-situation": "Voici Awa. Elle est cartographe : elle dessine des cartes. Sur sa carte, 1 cm représente 5 km. Une route mesure 4 cm sur la carte. Combien mesure-t-elle en vrai ?",
+  "02-multiplier": "Du plan vers la réalité, on multiplie. 4 cm, c'est 4 fois 1 cm. Donc 4 fois 5 km, égale 20 km.",
+  "03-tableau": "On le range dans un tableau. En haut, la carte en cm. En bas, la réalité en km. 1 cm : 5 km. 4 cm : 20 km. On multiplie toujours par 5.",
+  "04-question": "Question ! Sur cette carte, 1 cm représente 5 km. Un chemin mesure 7 cm. Quelle est sa vraie longueur ? A : 12 km. B : 35 km. C : 1,4 km. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 7 fois 5, égale 35 km.",
+  "05-moitie": "Et une longueur avec une virgule ? Un sentier mesure 2,5 cm sur la carte. 2 cm : 10 km. Un demi-centimètre : la moitié de 5, égale 2,5 km. En tout : 12,5 km.",
+  "06-piege": "Attention au piège ! Sur un plan, 1 cm représente 5 m. Un élève trouve qu'un couloir de 6 cm mesure 1,2 m. Il a divisé ! Du plan vers la réalité, la réalité est plus grande : on multiplie. 6 fois 5, égale 30 m.",
+  "07-question": "Question ! Sur un plan, 1 cm représente 10 m. Un couloir mesure 3,5 cm sur le plan. Quelle est sa vraie longueur ? A : 35 m. B : 13,5 m. C : 0,35 m. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 3 cm : 30 m. Un demi-centimètre : 5 m. En tout : 35 m.",
+  "08-defi": "À toi de jouer ! Sur une autre carte d'Awa, 1 cm représente 4 km. Deux villages sont à 9 cm l'un de l'autre. Quelle est la vraie distance ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 9 fois 4, égale 36 km. Les deux villages sont à 36 km l'un de l'autre.",
+  "09-finale": "Ce que tu as appris. Pour passer du plan à la réalité, on multiplie par ce que vaut 1 cm. La réalité est toujours plus grande que le plan. Et on écrit l'unité : cm sur le plan, m ou km en vrai.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

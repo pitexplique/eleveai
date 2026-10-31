@@ -1,0 +1,16 @@
+{
+  "00-garde": "De la réalité vers le plan. Comment dessiner un grand terrain sur une petite feuille ?",
+  "01-situation": "Voici Hugo. Il est paysagiste : il dessine des jardins avant de les planter. Le jardin de l'école mesure 70 m de long. Sur son plan, 1 cm représente 10 m. Combien de cm doit-il tracer ?",
+  "02-diviser": "De la réalité vers le plan, tout devient plus petit : on divise. Combien de fois 10 m dans 70 m ? 70 divisé par 10, égale 7. Hugo trace 7 cm.",
+  "03-tableau": "Dans le tableau, on remonte : du bas vers le haut. 10 m : 1 cm. 70 m : 7 cm. On divise par 10.",
+  "04-question": "Question ! 1 cm représente 10 m. Un mur mesure 40 m. Combien de cm sur le plan ? A : 400 cm. B : 30 cm. C : 4 cm. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C. 40 divisé par 10, égale 4 cm.",
+  "05-autre": "Avec une autre échelle : 1 cm représente 8 m. Un mur de 24 m : 24 divisé par 8, égale 3. On trace 3 cm.",
+  "06-piege": "Attention au piège ! Pour dessiner, on ne multiplie pas. 70 fois 10, ce serait 700 cm : 7 mètres de dessin ! Plus grand que la classe. Sur un plan, tout est plus petit.",
+  "07-question": "Question ! Sur une carte, 1 cm représente 4 km. Un trajet mesure 30 km. Combien de cm sur la carte ? A : 7,5 cm. B : 120 cm. C : 26 cm. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 28 km, c'est 7 fois 4 km : 7 cm. Il reste 2 km, la moitié de 4 km : un demi-centimètre. En tout : 7,5 cm.",
+  "08-defi": "À toi de jouer ! Hugo dessine un potager rectangulaire de 30 m sur 15 m. Sur son plan, 1 cm représente 5 m. Quelles sont les dimensions du potager sur le plan ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 30 divisé par 5, égale 6 cm. 15 divisé par 5, égale 3 cm. Hugo dessine un rectangle de 6 cm sur 3 cm.",
+  "09-finale": "Ce que tu as appris. Pour passer de la réalité au plan, on divise par ce que vaut 1 cm. Le plan est toujours plus petit. On vérifie : le dessin doit tenir sur la feuille.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

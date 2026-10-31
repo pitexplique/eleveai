@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Une carte au trésor. Sauras-tu trouver le coffre ?",
+  "01-echelle": "Sur la carte, il est écrit : 1 cm représente 20 pas.",
+  "02-tresor": "Le trésor est à 6 cm du grand palmier.",
+  "03-calcul": "6 fois 20, égale 120. Il faut faire 120 pas !",
+  "04-question": "Question ! Du palmier au rocher, il y a 4 cm. Combien de pas ? A : 24 pas. B : 80 pas. C : 5 pas. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 4 fois 20, égale 80 pas.",
+  "05-commentaire": "Et toi ? Le bateau est à 15 cm du trésor. Combien de pas faut-il faire ? Réponds en commentaire !"
+}

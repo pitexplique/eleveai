@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Cette petite voiture cache un nombre secret.",
+  "01-voiture": "Elle mesure 10 cm. Sous la voiture, il est écrit : 1 sur 43.",
+  "02-sens": "Cela veut dire : la vraie voiture est 43 fois plus grande.",
+  "03-calcul": "10 fois 43, égale 430 cm. La vraie voiture mesure 4 mètres 30 !",
+  "04-question": "Question ! Un avion miniature au 1 sur 100 mesure 40 cm. Combien mesure le vrai ? A : 140 cm. B : 4 000 cm. C : 400 cm. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 40 fois 100, égale 4 000 cm : 40 mètres, la taille d'un avion de ligne !",
+  "05-commentaire": "Et toi ? Une figurine de 3 cm est au 1 sur 60. Combien mesure la vraie personne ? Réponds en commentaire !"
+}

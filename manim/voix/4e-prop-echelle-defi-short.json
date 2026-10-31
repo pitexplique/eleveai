@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Un marathon sur une carte de randonnée, ça mesure combien ?",
+  "01-marathon": "Un marathon, c'est 42 km et 195 m de course.",
+  "02-echelle": "Sur une carte au 1 sur 25 000, 1 km mesure 4 cm.",
+  "03-calcul": "Environ 42 km : 42 fois 4, égale 168 cm. Presque 1 mètre 70 de carte : la taille d'un adulte !",
+  "04-question": "Question ! Un semi-marathon fait environ 21 km. Sur la carte ? A : 84 cm. B : 21 cm. C : 5 cm. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. 21 fois 4, égale 84 cm.",
+  "05-commentaire": "Et toi ? Combien de cm pour une course de 10 km ? Réponds en commentaire !"
+}

@@ -1,0 +1,17 @@
+{
+  "00-garde": "Défis sur les échelles. Les cartes de randonnée au 1 sur 25 000.",
+  "01-situation": "Voici Mathis. Il est guide de montagne. Ses cartes de randonnée sont à l'échelle 1 sur 25 000. Le sentier jusqu'au sommet mesure 12 cm sur la carte. Combien de kilomètres va-t-il marcher ?",
+  "02-calcul": "1 sur 25 000 : 1 cm sur la carte représente 25 000 cm en vrai. 12 cm représentent 12 fois 25 000, égale 300 000 cm.",
+  "03-convertir": "On convertit. 100 cm font 1 m : 300 000 cm, c'est 3 000 m. Et 1 000 m font 1 km : 3 000 m, c'est 3 km. Mathis marchera 3 km.",
+  "04-astuce": "Une astuce : au 1 sur 25 000, 4 cm sur la carte font 100 000 cm, c'est-à-dire 1 km.",
+  "05-question": "Question ! Carte au 1 sur 25 000. Un lac mesure 2 cm de long sur la carte. Combien en vrai ? A : 50 m. B : 500 m. C : 5 km. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 2 fois 25 000, égale 50 000 cm. C'est 500 m.",
+  "06-retrouver": "Défi : retrouver l'échelle. Deux refuges sont à 3 km l'un de l'autre. Sur une autre carte, ils sont à 6 cm. 3 km, c'est 300 000 cm. 300 000 divisé par 6, égale 50 000. L'échelle est 1 sur 50 000.",
+  "07-piege": "Attention au piège ! Il faut la même unité des deux côtés. 6 cm pour 3 km : l'échelle n'est pas 1 sur 2 ! On convertit d'abord les km en cm.",
+  "08-question": "Question ! Sur une carte, 5 cm représentent 1 km. Quelle est l'échelle ? A : 1 sur 5. B : 1 sur 20 000. C : 1 sur 200. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. 1 km, c'est 100 000 cm. 100 000 divisé par 5, égale 20 000. L'échelle est 1 sur 20 000.",
+  "09-defi": "À toi de jouer ! Mathis prépare une sortie de 7,5 km. Combien de cm doit mesurer le trajet sur sa carte au 1 sur 25 000 ? Mets pause, et cherche !",
+  "09b-correction": "Correction. 7,5 km, c'est 750 000 cm. 750 000 divisé par 25 000, égale 30. Le trajet mesure 30 cm sur la carte.",
+  "10-finale": "Ce que tu as appris. L'échelle 1 sur 25 000 veut dire : 1 cm sur la carte, 25 000 cm en vrai. On met les deux longueurs dans la même unité. Pour retrouver l'échelle, on divise la longueur réelle par la longueur sur la carte.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

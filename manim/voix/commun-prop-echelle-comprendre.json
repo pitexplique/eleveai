@@ -1,0 +1,18 @@
+{
+  "00-garde": "Comprendre une échelle. Comment un plan tient-il sur une feuille ?",
+  "01-situation": "Voici Sofiane. Il est architecte. Il dessine le plan d'un nouveau collège. Le vrai bâtiment mesure 80 m de long. Impossible de le dessiner en vrai sur une feuille !",
+  "02-reduire": "Alors Sofiane réduit tout, de la même façon. Sur son plan, il écrit : 1 cm sur le plan correspond à 10 m dans la réalité. C'est l'échelle du plan.",
+  "03-proportionnel": "1 cm sur le plan, c'est 10 m en vrai. 2 cm, c'est 20 m. 3 cm, c'est 30 m. Le plan et la réalité sont proportionnels : on multiplie toujours par le même nombre.",
+  "04-batiment": "Le bâtiment de 80 m mesure donc 8 cm sur le plan. Il tient sur la feuille !",
+  "05-question": "Question ! Sur ce plan, 1 cm correspond à 10 m. Que représentent 5 cm ? A : 15 m. B : 50 m. C : 5 m. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 5 cm, c'est 5 fois 1 cm. Donc 5 fois 10 m, égale 50 m.",
+  "06-fraction": "Une échelle s'écrit aussi comme une fraction. Une maquette à l'échelle 1 sur 200 : 1 cm sur la maquette représente 200 cm en vrai. La même unité des deux côtés !",
+  "07-maquette": "Sur la maquette du collège, une salle mesure 4 cm. En vrai : 4 fois 200, égale 800 cm. C'est-à-dire 8 m.",
+  "08-question": "Question ! Une maquette est à l'échelle 1 sur 200. Que veut dire ce 200 ? A : 1 cm sur la maquette représente 200 cm en vrai. B : la maquette mesure 200 cm. C : 200 cm sur la maquette représentent 1 cm en vrai. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. Le 1 est sur la maquette, le 200 est dans la réalité : la réalité est 200 fois plus grande.",
+  "09-piege": "Attention au piège ! Avec 1 cm pour 10 m, 3 cm, ce n'est pas 13 m. On n'ajoute pas : on multiplie. 3 cm, c'est 3 fois 10 m, égale 30 m.",
+  "10-defi": "À toi de jouer ! Sur le plan de Sofiane, 1 cm correspond à 10 m. Le terrain de sport mesure 6 cm sur le plan. Quelle est sa longueur réelle ? Mets pause, et cherche !",
+  "10b-correction": "Correction. 6 cm, c'est 6 fois 1 cm. 6 fois 10, égale 60 m. Le terrain mesure 60 m.",
+  "11-finale": "Ce que tu as appris. Une échelle dit ce que vaut 1 cm du plan dans la réalité. Le plan et la réalité sont proportionnels. À l'échelle 1 sur 200, la réalité est 200 fois plus grande que le plan.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

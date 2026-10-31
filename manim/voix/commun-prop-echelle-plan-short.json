@@ -1,0 +1,10 @@
+{
+  "00-accroche": "Un stade de foot entier sur ta feuille ? C'est possible !",
+  "01-terrain": "Un terrain de foot mesure environ 105 m de long et 68 m de large.",
+  "02-echelle": "Sur ton dessin, 1 cm représente 5 m. On divise par 5.",
+  "03-calcul": "105 divisé par 5, égale 21 cm. 68 divisé par 5, égale 13,6 cm.",
+  "04-surprise": "21 cm : c'est pile la largeur d'une feuille A4 ! Le stade tient sur ta feuille.",
+  "05-question": "Question ! La surface de réparation fait environ 40 m de large. Sur ton dessin ? A : 8 cm. B : 200 cm. C : 35 cm. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 40 divisé par 5, égale 8 cm.",
+  "06-commentaire": "Et toi ? Un terrain de basket mesure 28 m de long. Combien de cm sur ton dessin ? Réponds en commentaire !"
+}

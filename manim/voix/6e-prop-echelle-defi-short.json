@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Au cinéma, ce dinosaure géant est… une figurine !",
+  "01-figurine": "La figurine mesure 20 cm. Dans le film, le dinosaure paraît mesurer 40 m.",
+  "02-echelle": "Que vaut 1 cm de figurine ? 40 divisé par 20, égale 2. 1 cm représente 2 m.",
+  "03-question": "Question ! La queue de la figurine mesure 8 cm. Dans le film ? A : 16 m. B : 10 m. C : 4 m. Mets pause, et choisis !",
+  "03b-reponse": "Réponse A. 8 fois 2, égale 16 m. Une queue de 16 mètres !",
+  "04-commentaire": "Et toi ? La bouche de la figurine mesure 3 cm. Combien de mètres dans le film ? Réponds en commentaire !"
+}
