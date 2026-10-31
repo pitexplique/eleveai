@@ -216,6 +216,9 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
             <Link href="/parcours" className="rounded-full bg-violet-700 px-6 py-3 font-black text-white shadow hover:bg-violet-800">
               Commencer par une évaluation
             </Link>
+            <Link href="/calcul-rapide" className="rounded-full bg-orange-600 px-6 py-3 font-black text-white shadow hover:bg-orange-700">
+              Commencer avec le calcul rapide
+            </Link>
             <Link href="/auth/signin?inscription=1" className="rounded-full bg-white px-6 py-3 font-black text-teal-800 ring-1 ring-teal-300 hover:bg-teal-50">
               Créer un compte pour garder mes résultats
             </Link>
