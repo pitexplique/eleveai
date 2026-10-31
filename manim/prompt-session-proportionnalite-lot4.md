@@ -7,7 +7,13 @@ Réponds toujours en français. Ne pose pas de questions : tranche, avance, list
 ## Où on en est
 - Lots pilote, 1, 2 (`1020970a`) et 3 (6e pourcentages : rendus + passe finale `954f8d84`) FINIS. Questions + centres : `manim/questions-proportionnalite.md`. Consigne : `manim/consigne-videos-proportionnalite.md`.
 - **Lot 4 : voix VALIDÉES par Frédéric le 31/10** : `manim/voix/4e-prop-<slug>[-short].json`. Brief des agents : `manim/brief-agent-proportionnalite-lot4.md`.
-- **Aucun rendu lancé.**
+- **31/10 au soir : épisodes 11 à 16 RENDUS, vérifiés (bords 0, planches) et COMMITÉS** avec leurs questions dans `manim/questions-proportionnalite.md` (sections « 4e 11 » à « 4e 16 »). Frédéric a arrêté là pour la journée.
+- **À FAIRE : lancer 17 `grandeur-convertir`, 18 `grandeur-coherence`, 19 `grandeur-defi`** (3 agents NEUFS, lignes du tableau ci-dessous), puis la passe finale.
+- Leçons des épisodes 11-16, à donner aux agents 17-19 :
+  - `scripts/cues2marques.py` jette les répétitions : poser une marque par occurrence (outil de l'agent 13 : convertisseur maison, ou ajout à la main) ;
+  - l'AUDIT cherche « 1600 » quand la voix dit « 1 600 » (AUDIT-ABSENT sans gravité) ; `question_pause` audite à tort les choix pendant la réponse (surcharge dans `prop_grandeur_unite.py`) ;
+  - garder la dernière ligne d'un short au-dessus de la tête de Ti Margo, et la coche verte loin du texte des choix (frôlements en 11, 14, 16) ;
+  - modèles récents : `manim/scripts/4e/prop_agrandissement_*.py` et `prop_grandeur_{produit,quotient,unite}*.py` (`PropAgrandissementRapportBase` de l'épisode 11 est réutilisable).
 
 ## Missions des agents (une par épisode : paysage + short ; 3 agents à la fois, NEUFS : « lis et applique le brief `manim/brief-agent-proportionnalite-lot4.md` » + la mission)
 | NN | slug | script (manim/scripts/4e/) | micro | paysage : décor, centres | short : jeu, centres |
@@ -27,7 +33,7 @@ Classe `Prop<Slug>4e` ; sorties `manim/sorties/4e/maths/proportionnalite/<NN>-<s
 Les 2 mp4 présents et immobiles → `python scripts/verifier-bords-video.py <mp4>` = « 0 instants » ; planche de 12 images (PyAV, outil à recréer dans ton scratchpad) regardée ; `t` des questions-pauses ; noter `questions` + centres + durées + question en commentaire dans `manim/questions-proportionnalite.md` (modèle des sections « 6e 11 » à « 6e 14 », titre « 4e NN-slug ») ; commit par chemin (scripts + `*_marques.json` + questions).
 
 ## Suite
-1. Rendus 11 → 19 (3 par 3).
+1. Rendus 17 → 19 (11 → 16 FAITS).
 2. Passe finale du lot 4 par un agent, comme `954f8d84` (miniatures, manifeste avec microId 4e ci-dessus, `fiche-youtube.md`, R2 limité au préfixe `eleveai-maths-4e-prop-agrandissement*`/`grandeur*`, bilans, `brancher-videos-coach --ecrire --id …`) ; vérifier que les JSON ne contiennent QUE des ajouts `4e-prop-agrandissement*`/`4e-prop-grandeur*` ; commit par chemin.
 3. Lot 5 (4e, une paysage par micro pour `prop_proportionnalite`, `prop_ratio`, `prop_pourcentages`, 18 paysages) : voix à écrire puis à faire valider (coller la voix en entier, s'arrêter là).
 4. Publier sur YouTube les paysages AVANT leurs shorts (lots 2, 3, 4).
