@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 
 import { saveResultat } from "@/lib/resultats";
 import { useEleve } from "@/context/EleveContext";
-import { buildLearningVideoHref } from "@/lib/videoSearch";
+import { DOSSIERS_VIDEOS, lienVideoDefi, type VideoDefi } from "@/lib/calcul-rapide/videos";
 
 import type {
   CalculRapideItem,
@@ -392,7 +392,7 @@ function getScoreMessage(score: number, total: number) {
   };
 }
 
-export default function CalculRapideDefiClient() {
+export default function CalculRapideDefiClient({ videos }: { videos: VideoDefi[] }) {
   const eleveContext = useEleve() as unknown as {
     eleve?: EleveSession | null;
     currentUser?: EleveSession | null;
@@ -911,14 +911,12 @@ export default function CalculRapideDefiClient() {
     ...(currentQuestion.expected ?? []),
     ...currentQuestion.generatedExpected,
   ];
-  const learningVideoHref = buildLearningVideoHref({
-    matiere: "maths",
-    niveau,
-    notionId: currentQuestion.notionId,
-    microId: currentQuestion.microId,
-    questionText: currentQuestion.displayText,
-    type: String(currentQuestion.type),
-  });
+  const learningVideoHref = lienVideoDefi(
+    videos,
+    DOSSIERS_VIDEOS[niveau][0],
+    currentQuestion.notionId,
+    currentQuestion.microId
+  );
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-950 via-[#062A4F] to-slate-950 px-4 py-8 text-white">
@@ -1002,8 +1000,8 @@ export default function CalculRapideDefiClient() {
                     Tu ne comprends pas la notion ?
                   </p>
                   <p className="mt-1 text-sm font-bold text-slate-700">
-                    Regarde une video d'explication avant de repondre, puis
-                    reviens au defi.
+                    Regarde une vidéo d'explication avant de répondre, puis
+                    reviens au défi.
                   </p>
                 </div>
 
@@ -1014,7 +1012,7 @@ export default function CalculRapideDefiClient() {
                   onClick={() => setPaused(true)}
                   className="inline-flex shrink-0 items-center justify-center rounded-full bg-sky-600 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-sky-500"
                 >
-                  Regarder la video
+                  Regarder la vidéo
                 </a>
               </div>
             </div>
