@@ -102,3 +102,19 @@ Défauts mineurs connus : les coureurs passent un instant sur le nom de leur che
 ```
 Question en commentaire : « Combien de souris ces 3 chats attrapent-ils en 1 heure ? » (60).
 Défaut mineur connu : figure petite sur « Ce que tu as appris » de la paysage.
+
+## 08-echelle-reelle (lot 2, COMMUN 6e/4e, rendu le 31/10)
+**Paysages** `6e-prop-echelle-reelle` et `4e-prop-echelle-reelle` — 3:36, ceinture verte — centres `histoire-geographie`, `transports` (mêmes t)
+```json
+[
+  {"t":"00:56","question":"Sur cette carte, 1 cm représente 5 km. Un chemin mesure 7 cm. Quelle est sa vraie longueur ?","choix":["12 km","35 km","1,4 km"],"reponse":1,"explication":"7 × 5 = 35 km."},
+  {"t":"02:10","question":"Sur un plan, 1 cm représente 10 m. Un couloir mesure 3,5 cm. Quelle est sa vraie longueur ?","choix":["35 m","13,5 m","0,35 m"],"reponse":0,"explication":"3 cm : 30 m ; un demi-centimètre : 5 m ; en tout 35 m."}
+]
+```
+**Short** `6e-prop-echelle-reelle-short` = `4e-prop-echelle-reelle-short` — 0:55, ceinture blanche — centres `jeux-defis`, `histoire-geographie`
+```json
+[
+  {"t":"00:19","question":"Du palmier au rocher : 4 cm. Combien de pas ?","choix":["24 pas","80 pas","5 pas"],"reponse":1,"explication":"4 × 20 = 80 pas."}
+]
+```
+Question en commentaire : « Le bateau est à 15 cm du trésor. Combien de pas ? » (300).
