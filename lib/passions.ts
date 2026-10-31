@@ -73,3 +73,44 @@ export function aDitPlusTard() {
     return false;
   }
 }
+
+// ─── L'AVATAR (31/10/2026, lib/avatars.ts) : même rangement que les passions ──
+
+const cleAvatar = (eleve: Eleve | null | undefined) => cle(eleve).replace(CLE_ANONYME, "eleveai_avatar");
+
+export function lireAvatar(eleve: Eleve | null | undefined): string | null {
+  try {
+    return localStorage.getItem(cleAvatar(eleve));
+  } catch {
+    return null;
+  }
+}
+
+export async function enregistrerAvatar(eleve: Eleve | null | undefined, avatar: string) {
+  try {
+    localStorage.setItem(cleAvatar(eleve), avatar);
+  } catch {}
+  if (!eleve?.token) return;
+  await fetch("/api/passions", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${eleve.token}` },
+    body: JSON.stringify({ avatar }),
+  }).catch(() => null);
+}
+
+/** Pour un connecté : la base fait foi (autre poste). */
+export async function chargerAvatar(eleve: Eleve | null | undefined): Promise<string | null> {
+  const local = lireAvatar(eleve);
+  if (!eleve?.token) return local;
+  const d = await fetch("/api/passions", { headers: { Authorization: `Bearer ${eleve.token}` } })
+    .then((r) => (r.ok ? r.json() : null))
+    .catch(() => null);
+  const enBase = (d?.avatar as string | null | undefined) ?? null;
+  if (enBase) {
+    try {
+      localStorage.setItem(cleAvatar(eleve), enBase);
+    } catch {}
+    return enBase;
+  }
+  return local;
+}

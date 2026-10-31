@@ -7,6 +7,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Menu, X, GraduationCap, LogOut, ChevronDown } from "lucide-react";
 import { track } from "@vercel/analytics";
 import { useEleve } from "@/context/EleveContext";
+import AvatarRond from "@/components/AvatarRond";
+import { lireAvatar } from "@/lib/passions";
 import { createClient } from "@/lib/supabase/client";
 import { ouvrirEcrireAuProf } from "@/lib/ecrireAuProf";
 import { urlGuidePour } from "@/lib/matrice/guides";
@@ -507,6 +509,15 @@ export default function Header() {
   }
 
   const eleveLabel = eleve?.nom || eleve?.code_eleve || "Élève";
+  // L'avatar choisi dans « Mon espace » (31/10/2026) : lu dans le navigateur
+  // seulement — pas de requête à chaque page ; « Mon espace » le synchronise.
+  const [avatar, setAvatar] = useState<string | null>(null);
+  useEffect(() => {
+    const lire = () => setAvatar(eleve ? lireAvatar(eleve) : null);
+    lire();
+    window.addEventListener("eleveai-avatar", lire);
+    return () => window.removeEventListener("eleveai-avatar", lire);
+  }, [eleve]);
   const eleveClasse = eleve?.classe?.toUpperCase() ?? null;
   const typeUtilisateur = eleve?.type_utilisateur ?? null;
   const isProf = typeUtilisateur === "prof";
@@ -909,7 +920,8 @@ export default function Header() {
               {/* 28/10 : « Mon espace » et « Participer » retirés de la barre
                   (Frédéric) : le tableau de bord est la 1re ligne du menu du
                   compte ; avis, erreurs et bêta testeurs passent au pied de page. */}
-              <div className="hidden lg:block">
+              <div className="hidden items-center gap-2 lg:flex">
+                {!isStaff && <AvatarRond avatar={avatar} taille="s" />}
                 <MenuCompte
                   nom={eleveLabel}
                   sousTitre={dashboardSousTitre}

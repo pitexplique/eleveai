@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useEleve } from "@/context/EleveContext";
 import ClassementAvis from "@/components/points/ClassementAvis";
 import CartePassions from "./CartePassions";
+import CarteAvatar from "./CarteAvatar";
 import BulletinDashboard from "@/components/bulletin/BulletinDashboard";
 import type { Bulletin } from "@/lib/bulletin/types";
 import { prenomFromNom } from "@/lib/prenom";
@@ -509,6 +510,7 @@ export default function DashboardEleveClient() {
               fin de composant. */}
         </div>
 
+        <CarteAvatar />
         <CartePassions />
 
         {bulletin && (

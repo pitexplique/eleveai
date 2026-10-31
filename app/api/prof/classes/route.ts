@@ -46,6 +46,14 @@ export async function GET(req: Request) {
       .eq("type_utilisateur", "eleve")
       .order("code_utilisateur");
     eleves = data ?? [];
+    // L'avatar choisi par chaque élève (lib/avatars.ts, 31/10/2026). Table ou
+    // colonne absente : on s'en passe.
+    const { data: av } = await admin
+      .from("passions_eleves")
+      .select("code_etablissement, code_utilisateur, avatar")
+      .in("code_etablissement", codes);
+    const avatars = new Map((av ?? []).map((a: any) => [`${a.code_etablissement}·${a.code_utilisateur}`, a.avatar ?? null]));
+    eleves = eleves.map((e) => ({ ...e, avatar: avatars.get(`${e.code_etablissement}·${e.code_utilisateur}`) ?? null }));
   }
 
   return NextResponse.json({

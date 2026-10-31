@@ -8,12 +8,14 @@
 import Link from "next/link";
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import { useEleve } from "@/context/EleveContext";
+import AvatarRond from "@/components/AvatarRond";
 
 type EleveClasse = {
   code_utilisateur: string;
   nom: string | null;
   mot_de_passe: string | null;
   actif: boolean;
+  avatar?: string | null;
 };
 
 type Classe = {
@@ -361,7 +363,10 @@ export default function MesClassesClient() {
                           className="border-t border-slate-100"
                         >
                           <td className="py-1.5 font-mono font-bold">
-                            {e.code_utilisateur}
+                            <span className="inline-flex items-center gap-2">
+                              <AvatarRond avatar={e.avatar} taille="s" />
+                              {e.code_utilisateur}
+                            </span>
                           </td>
                           <td className="py-1.5">
                             <input

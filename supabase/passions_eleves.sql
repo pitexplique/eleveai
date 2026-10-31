@@ -27,3 +27,7 @@ create table if not exists public.passions_eleves (
 
 -- RLS activé sans policy : seule /api/passions (clé service role) lit et écrit.
 alter table public.passions_eleves enable row level security;
+
+-- 31/10/2026 : L'AVATAR (lib/avatars.ts) — une icône + une couleur, « 🐢|bleu ».
+-- Pas de photo : Frédéric ne veut rien de téléversé.
+alter table public.passions_eleves add column if not exists avatar text null;
