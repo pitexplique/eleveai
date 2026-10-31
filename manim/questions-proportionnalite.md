@@ -239,3 +239,20 @@ Question en commentaire : « La batterie affiche 75 %. Combien de cases sont vid
 Question en commentaire : « Un sweat de 200 g contient 60 % de coton. Combien de grammes de coton ? » (120).
 Fait réel (31/10) : dans un chocolat noir à 70 %, le reste est surtout du sucre (allodocteurs.fr, Test-Achats).
 ⚠️ Leçon : un `Indicate` coloré sur toute la grille de `BarrePourcent` la colore entière un instant (on croit voir 100 %) → `Circumscribe` ou un cadre (corrigé dans la paysage ET le short).
+
+## 6e 14-pourcentage-defi (lot 3, rendu le 31/10)
+**Paysage** `6e-prop-pourcentage-defi` — 2:55, ceinture verte — centres `musique`, `jeux-defis`
+```json
+[
+  {"t":"00:31","question":"Deuxième jour : 50 % des 200 billets. Combien ?","choix":["50 billets","100 billets","150 billets"],"reponse":1,"explication":"50 %, c'est la moitié. 200 ÷ 2 = 100 billets."},
+  {"t":"01:39","question":"Un stand vend 12 crêpes sur 50. Quel pourcentage ?","choix":["12 %","24 %","62 %"],"reponse":1,"explication":"50 × 2 = 100. 12 × 2 = 24. 24 %."}
+]
+```
+**Short** `6e-prop-pourcentage-defi-short` — 1:01, ceinture blanche — centres `football`, `jeux-defis`
+```json
+[
+  {"t":"00:22","question":"Lina : 15 buts sur 50 tirs. Quel pourcentage ?","choix":["15 %","30 %","35 %"],"reponse":1,"explication":"50 × 2 = 100. 15 × 2 = 30 %."}
+]
+```
+Question en commentaire : « Un joueur marque 18 buts sur 25 tirs. Combien de pour cent ? » (72 %).
+Leçon du 12 appliquée : `Circumscribe` au lieu d'`Indicate` sur les grilles et les jauges. Défaut mineur : sur l'écran du piège, « pas » est un peu plus haut que les nombres dans « Le total : 20, pas 100 ».
