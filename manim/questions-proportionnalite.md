@@ -256,3 +256,55 @@ Fait réel (31/10) : dans un chocolat noir à 70 %, le reste est surtout du sucr
 ```
 Question en commentaire : « Un joueur marque 18 buts sur 25 tirs. Combien de pour cent ? » (72 %).
 Leçon du 12 appliquée : `Circumscribe` au lieu d'`Indicate` sur les grilles et les jauges. Défaut mineur : sur l'écran du piège, « pas » est un peu plus haut que les nombres dans « Le total : 20, pas 100 ».
+
+## 4e 11-agrandissement-rapport (lot 4, rendu le 31/10)
+**Paysage** `4e-prop-agrandissement-rapport` — 4:08, ceinture verte — centres `art-design`, `reseaux-sociaux`
+```json
+[
+  {"t":"00:54","question":"Une photo mesure 8 cm sur 12 cm. On l'agrandit avec un rapport 2. Quelle est sa nouvelle longueur ?","choix":["14 cm","24 cm","10 cm"],"reponse":1,"explication":"12 × 2 = 24 cm. On multiplie, on n'ajoute pas."},
+  {"t":"02:19","question":"Un timbre mesure 3 cm de haut. Son agrandissement mesure 15 cm de haut. Quel est le rapport d'agrandissement ?","choix":["12","18","5"],"reponse":2,"explication":"15 ÷ 3 = 5. Le rapport est 5."}
+]
+```
+**Short** `4e-prop-agrandissement-rapport-short` — 1:22, ceinture blanche — centres `animaux`, `reseaux-sociaux`
+```json
+[
+  {"t":"00:30","question":"Une photo de 5 cm sur 7 cm est agrandie avec un rapport 3. Elle mesure…","choix":["8 cm sur 10 cm","15 cm sur 21 cm","15 cm sur 7 cm"],"reponse":1,"explication":"5 × 3 = 15 ; 7 × 3 = 21. On multiplie tout."}
+]
+```
+Question en commentaire : « Une photo de 6 cm sur 9 cm est agrandie : sa largeur devient 30 cm. Combien mesure sa hauteur ? » (45 cm).
+Défauts mineurs : short, « On multiplie tout. » effleure la tête de Ti Margo ; paysage, le timbre de 3 cm est minuscule (vrai rapport 5), « + 20 cm » barré mord un peu la flèche rouge.
+
+## 4e 12-agrandissement-aire (lot 4, rendu le 31/10)
+**Paysage** `4e-prop-agrandissement-aire` — 4:30, ceinture verte — centres `cuisine`
+```json
+[
+  {"t":"00:59","question":"On double toutes les longueurs d'un carré. Son aire est multipliée par…","choix":["2","4","8"],"reponse":1,"explication":"2 × 2 = 4. L'aire est multipliée par 4."},
+  {"t":"02:06","question":"Le dessus d'un gâteau : 300 cm². On l'agrandit avec un rapport 2. Quelle est la nouvelle aire ?","choix":["600 cm²","1 200 cm²","2 400 cm²"],"reponse":1,"explication":"Rapport 2 : aire × 4. 300 cm² × 4 = 1 200 cm²."},
+  {"t":"03:08","question":"L'aire d'un gâteau a été multipliée par 9. Et ses longueurs ?","choix":["× 9","× 3","× 81"],"reponse":1,"explication":"3 × 3 = 9. Les longueurs : × 3."}
+]
+```
+**Short** `4e-prop-agrandissement-aire-short` — 1:07, ceinture blanche — centres `cuisine`
+```json
+[
+  {"t":"00:29","question":"Une pizza de 45 cm et une pizza de 15 cm. La grande vaut combien de petites ?","choix":["3","9","27"],"reponse":1,"explication":"3 fois plus large : 3 × 3 = 9 petites pizzas."}
+]
+```
+Question en commentaire : « Une pizza géante de 60 cm vaut combien de pizzas de 15 cm ? » (16).
+Short : on pave les BOÎTES carrées (des disques ne pavent pas un disque). Deux rendus HD du short (un contact au bord à 28,5 s au premier).
+
+## 4e 13-agrandissement-volume (lot 4, rendu le 31/10)
+**Paysage** `4e-prop-agrandissement-volume` — 4:01, ceinture verte — centres `animaux`, `sciences`
+```json
+[
+  {"t":"00:59","question":"On double toutes les longueurs d'un cube de 1 L. Son nouveau volume ?","choix":["2 L","4 L","8 L"],"reponse":2,"explication":"2 × 2 × 2 = 8 ; le cube contient 8 L."},
+  {"t":"02:03","question":"Un bac de 10 L est agrandi avec un rapport 3. Son nouveau volume ?","choix":["30 L","90 L","270 L"],"reponse":2,"explication":"3 × 3 × 3 = 27 ; 10 × 27 = 270 L."}
+]
+```
+**Short** `4e-prop-agrandissement-volume-short` — 0:50, ceinture blanche — centres `jeux-defis`
+```json
+[
+  {"t":"00:17","question":"Un dé 3 fois plus grand dans chaque sens. Combien de petits dés ?","choix":["3","9","27"],"reponse":2,"explication":"3 × 3 × 3 = 27 dés."}
+]
+```
+Question en commentaire : « Un dé 4 fois plus grand dans chaque sens : combien de petits dés faut-il ? » (64).
+Défaut mineur : « 40 L » et « 80 L » barrés d'une croix rouge, un peu durs à lire. Le short importe les pavés en perspective du script paysage.
