@@ -85,3 +85,20 @@ Question en commentaire : « 250 g de chocolat coûtent 3 €. Combien coûte 1 
 ```
 Question en commentaire : « Combien coûtent 10 places, et quel chemin prends-tu ? » (250 €).
 Défauts mineurs connus : les coureurs passent un instant sur le nom de leur chemin ; dans le short, le tableau couvre « Ceinture blanche » pendant la question.
+
+## 6e 06-defi (lot 1, rendu le 31/10)
+**Paysage** `6e-prop-defi` — 3:03, ceinture verte — centres `transports`, `jeux-defis`
+```json
+[
+  {"t":"00:47","question":"Le car consomme 30 litres pour 100 km. Combien pour 300 km ?","choix":["90 litres","230 litres","33 litres"],"reponse":0,"explication":"300 km, c'est 3 fois 100 km : 3 × 30 = 90 litres."},
+  {"t":"01:38","question":"Un gâteau cuit en 30 minutes. Combien de temps pour 2 gâteaux, dans le même four, en même temps ?","choix":["60 minutes","30 minutes","15 minutes"],"reponse":1,"explication":"Les deux gâteaux cuisent en même temps : toujours 30 minutes. Ce n'est pas proportionnel."}
+]
+```
+**Short** `6e-prop-defi-short` — 0:54, ceinture blanche — centres `chiens-chats`, `jeux-defis`
+```json
+[
+  {"t":"00:13","question":"3 chats attrapent 3 souris en 3 minutes. Combien de chats pour 100 souris en 100 minutes ?","choix":["100 chats","3 chats","33 chats"],"reponse":1,"explication":"Ensemble, les 3 chats attrapent 1 souris par minute : en 100 minutes, 100 souris. Les mêmes 3 chats suffisent."}
+]
+```
+Question en commentaire : « Combien de souris ces 3 chats attrapent-ils en 1 heure ? » (60).
+Défaut mineur connu : figure petite sur « Ce que tu as appris » de la paysage.
