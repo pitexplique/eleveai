@@ -149,7 +149,7 @@ Question en commentaire : la figurine de 3 cm au 1/60 (180 cm = 1,80 m). Sources
   {"t":"00:22","question":"La queue de la figurine mesure 8 cm. Dans le film ?","choix":["16 m","10 m","4 m"],"reponse":0,"explication":"8 × 2 = 16 m."}
 ]
 ```
-Question en commentaire : « La tête mesure 3 cm sur la figurine. Et dans le film ? » (6 m ; grand pour un sauropode réel, mais juste au 1 cm ↔ 2 m de la figurine).
+Question en commentaire : « La bouche mesure 3 cm sur la figurine. Et dans le film ? » (6 m ; grand pour un sauropode réel, mais juste au 1 cm ↔ 2 m de la figurine).
 Chiffre réel : sauropode « de film » de 40 m, plausible (Argentinosaurus 30-40 m, Patagotitan ≈ 37 m) ; figurine 20 cm inventée.
 
 ## 09-echelle-plan (lot 2, COMMUN 6e/4e, rendu le 31/10)

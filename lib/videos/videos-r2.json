@@ -2837,6 +2837,150 @@
   "youtube": null,
   "coach": "/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&microId=prop_defi&display=simple"
  },
+ "4e-prop-echelle-comprendre": {
+  "fichier": "4e/maths/proportionnalite/07-echelle-comprendre/eleveai-maths-4e-prop-echelle-comprendre.mp4",
+  "poster": "4e/maths/proportionnalite/07-echelle-comprendre/eleveai-maths-4e-prop-echelle-comprendre.png",
+  "vignette": "4e/maths/proportionnalite/07-echelle-comprendre/eleveai-maths-4e-prop-echelle-comprendre.vignette.webp",
+  "titre": "Un collège entier sur une feuille ? — Comprendre une échelle — épisode 7 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_echelle&microId=echelle_comprendre&display=simple"
+ },
+ "4e-prop-echelle-comprendre-short": {
+  "fichier": "4e/maths/proportionnalite/07-echelle-comprendre/eleveai-maths-4e-prop-echelle-comprendre-short.mp4",
+  "poster": "4e/maths/proportionnalite/07-echelle-comprendre/eleveai-maths-4e-prop-echelle-comprendre-short.png",
+  "vignette": "4e/maths/proportionnalite/07-echelle-comprendre/eleveai-maths-4e-prop-echelle-comprendre-short.vignette.webp",
+  "titre": "Le nombre secret caché sous les petites voitures 🚗 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_echelle&microId=echelle_comprendre&display=simple"
+ },
+ "4e-prop-echelle-defi": {
+  "fichier": "4e/maths/proportionnalite/10-echelle-defi/eleveai-maths-4e-prop-echelle-defi.mp4",
+  "poster": "4e/maths/proportionnalite/10-echelle-defi/eleveai-maths-4e-prop-echelle-defi.png",
+  "vignette": "4e/maths/proportionnalite/10-echelle-defi/eleveai-maths-4e-prop-echelle-defi.vignette.webp",
+  "titre": "Combien de km sur la carte de randonnée ? — Défis sur les échelles — épisode 10 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_echelle&microId=echelle_defi&display=simple"
+ },
+ "4e-prop-echelle-defi-short": {
+  "fichier": "4e/maths/proportionnalite/10-echelle-defi/eleveai-maths-4e-prop-echelle-defi-short.mp4",
+  "poster": "4e/maths/proportionnalite/10-echelle-defi/eleveai-maths-4e-prop-echelle-defi-short.png",
+  "vignette": "4e/maths/proportionnalite/10-echelle-defi/eleveai-maths-4e-prop-echelle-defi-short.vignette.webp",
+  "titre": "Un marathon sur une carte de randonnée, ça mesure combien ? 🏃 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_echelle&microId=echelle_defi&display=simple"
+ },
+ "4e-prop-echelle-plan": {
+  "fichier": "4e/maths/proportionnalite/09-echelle-plan/eleveai-maths-4e-prop-echelle-plan.mp4",
+  "poster": "4e/maths/proportionnalite/09-echelle-plan/eleveai-maths-4e-prop-echelle-plan.png",
+  "vignette": "4e/maths/proportionnalite/09-echelle-plan/eleveai-maths-4e-prop-echelle-plan.vignette.webp",
+  "titre": "Un jardin de 70 m sur ta feuille ? — De la réalité vers le plan — épisode 9 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_echelle&microId=echelle_distance_plan&display=simple"
+ },
+ "4e-prop-echelle-plan-short": {
+  "fichier": "4e/maths/proportionnalite/09-echelle-plan/eleveai-maths-4e-prop-echelle-plan-short.mp4",
+  "poster": "4e/maths/proportionnalite/09-echelle-plan/eleveai-maths-4e-prop-echelle-plan-short.png",
+  "vignette": "4e/maths/proportionnalite/09-echelle-plan/eleveai-maths-4e-prop-echelle-plan-short.vignette.webp",
+  "titre": "Un stade de foot entier sur ta feuille ? ⚽ — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_echelle&microId=echelle_distance_plan&display=simple"
+ },
+ "4e-prop-echelle-reelle": {
+  "fichier": "4e/maths/proportionnalite/08-echelle-reelle/eleveai-maths-4e-prop-echelle-reelle.mp4",
+  "poster": "4e/maths/proportionnalite/08-echelle-reelle/eleveai-maths-4e-prop-echelle-reelle.png",
+  "vignette": "4e/maths/proportionnalite/08-echelle-reelle/eleveai-maths-4e-prop-echelle-reelle.vignette.webp",
+  "titre": "Combien de km sur la carte d'Awa ? — Du plan vers la réalité — épisode 8 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_echelle&microId=echelle_distance_reelle&display=simple"
+ },
+ "4e-prop-echelle-reelle-short": {
+  "fichier": "4e/maths/proportionnalite/08-echelle-reelle/eleveai-maths-4e-prop-echelle-reelle-short.mp4",
+  "poster": "4e/maths/proportionnalite/08-echelle-reelle/eleveai-maths-4e-prop-echelle-reelle-short.png",
+  "vignette": "4e/maths/proportionnalite/08-echelle-reelle/eleveai-maths-4e-prop-echelle-reelle-short.vignette.webp",
+  "titre": "Sauras-tu trouver le trésor grâce à l'échelle ? 🗺️ — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_echelle&microId=echelle_distance_reelle&display=simple"
+ },
+ "6e-prop-echelle-comprendre": {
+  "fichier": "6e/maths/proportionnalite/07-echelle-comprendre/eleveai-maths-6e-prop-echelle-comprendre.mp4",
+  "poster": "6e/maths/proportionnalite/07-echelle-comprendre/eleveai-maths-6e-prop-echelle-comprendre.png",
+  "vignette": "6e/maths/proportionnalite/07-echelle-comprendre/eleveai-maths-6e-prop-echelle-comprendre.vignette.webp",
+  "titre": "Un collège entier sur une feuille ? — Comprendre une échelle — épisode 7 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=prop_echelle&microId=echelle_comprendre&display=simple"
+ },
+ "6e-prop-echelle-comprendre-short": {
+  "fichier": "6e/maths/proportionnalite/07-echelle-comprendre/eleveai-maths-6e-prop-echelle-comprendre-short.mp4",
+  "poster": "6e/maths/proportionnalite/07-echelle-comprendre/eleveai-maths-6e-prop-echelle-comprendre-short.png",
+  "vignette": "6e/maths/proportionnalite/07-echelle-comprendre/eleveai-maths-6e-prop-echelle-comprendre-short.vignette.webp",
+  "titre": "Le nombre secret caché sous les petites voitures 🚗 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=prop_echelle&microId=echelle_comprendre&display=simple"
+ },
+ "6e-prop-echelle-defi": {
+  "fichier": "6e/maths/proportionnalite/10-echelle-defi/eleveai-maths-6e-prop-echelle-defi.mp4",
+  "poster": "6e/maths/proportionnalite/10-echelle-defi/eleveai-maths-6e-prop-echelle-defi.png",
+  "vignette": "6e/maths/proportionnalite/10-echelle-defi/eleveai-maths-6e-prop-echelle-defi.vignette.webp",
+  "titre": "L'échelle effacée de la maquettiste — Défis sur les échelles — épisode 10 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=prop_echelle&microId=echelle_defi&display=simple"
+ },
+ "6e-prop-echelle-defi-short": {
+  "fichier": "6e/maths/proportionnalite/10-echelle-defi/eleveai-maths-6e-prop-echelle-defi-short.mp4",
+  "poster": "6e/maths/proportionnalite/10-echelle-defi/eleveai-maths-6e-prop-echelle-defi-short.png",
+  "vignette": "6e/maths/proportionnalite/10-echelle-defi/eleveai-maths-6e-prop-echelle-defi-short.vignette.webp",
+  "titre": "Ce dinosaure géant du film est… une figurine ! 🦕 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=prop_echelle&microId=echelle_defi&display=simple"
+ },
+ "6e-prop-echelle-plan": {
+  "fichier": "6e/maths/proportionnalite/09-echelle-plan/eleveai-maths-6e-prop-echelle-plan.mp4",
+  "poster": "6e/maths/proportionnalite/09-echelle-plan/eleveai-maths-6e-prop-echelle-plan.png",
+  "vignette": "6e/maths/proportionnalite/09-echelle-plan/eleveai-maths-6e-prop-echelle-plan.vignette.webp",
+  "titre": "Un jardin de 70 m sur ta feuille ? — De la réalité vers le plan — épisode 9 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=prop_echelle&microId=echelle_distance_plan&display=simple"
+ },
+ "6e-prop-echelle-plan-short": {
+  "fichier": "6e/maths/proportionnalite/09-echelle-plan/eleveai-maths-6e-prop-echelle-plan-short.mp4",
+  "poster": "6e/maths/proportionnalite/09-echelle-plan/eleveai-maths-6e-prop-echelle-plan-short.png",
+  "vignette": "6e/maths/proportionnalite/09-echelle-plan/eleveai-maths-6e-prop-echelle-plan-short.vignette.webp",
+  "titre": "Un stade de foot entier sur ta feuille ? ⚽ — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=prop_echelle&microId=echelle_distance_plan&display=simple"
+ },
+ "6e-prop-echelle-reelle": {
+  "fichier": "6e/maths/proportionnalite/08-echelle-reelle/eleveai-maths-6e-prop-echelle-reelle.mp4",
+  "poster": "6e/maths/proportionnalite/08-echelle-reelle/eleveai-maths-6e-prop-echelle-reelle.png",
+  "vignette": "6e/maths/proportionnalite/08-echelle-reelle/eleveai-maths-6e-prop-echelle-reelle.vignette.webp",
+  "titre": "Combien de km sur la carte d'Awa ? — Du plan vers la réalité — épisode 8 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=prop_echelle&microId=echelle_distance_reelle&display=simple"
+ },
+ "6e-prop-echelle-reelle-short": {
+  "fichier": "6e/maths/proportionnalite/08-echelle-reelle/eleveai-maths-6e-prop-echelle-reelle-short.mp4",
+  "poster": "6e/maths/proportionnalite/08-echelle-reelle/eleveai-maths-6e-prop-echelle-reelle-short.png",
+  "vignette": "6e/maths/proportionnalite/08-echelle-reelle/eleveai-maths-6e-prop-echelle-reelle-short.vignette.webp",
+  "titre": "Sauras-tu trouver le trésor grâce à l'échelle ? 🗺️ — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=prop_echelle&microId=echelle_distance_reelle&display=simple"
+ },
  "6e-prop-reconnaitre": {
   "fichier": "6e/maths/proportionnalite/01-reconnaitre/eleveai-maths-6e-prop-reconnaitre.mp4",
   "poster": "6e/maths/proportionnalite/01-reconnaitre/eleveai-maths-6e-prop-reconnaitre.png",

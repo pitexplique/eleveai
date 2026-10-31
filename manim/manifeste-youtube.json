@@ -46148,6 +46148,1203 @@
         "chiens-chats",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "6e-prop-echelle-comprendre",
+      "notionId": "prop_echelle",
+      "microId": "echelle_comprendre",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/proportionnalite/07-echelle-comprendre/eleveai-maths-6e-prop-echelle-comprendre.mp4",
+      "miniature": "6e/maths/proportionnalite/07-echelle-comprendre/eleveai-maths-6e-prop-echelle-comprendre.png",
+      "titre": "Un collège entier sur une feuille ? — Comprendre une échelle — épisode 7 · Maths 6e",
+      "accroche": "Sofiane est architecte. Il dessine le plan d'un nouveau collège : le vrai bâtiment mesure 80 m de long. Impossible de le dessiner en vrai sur une feuille ! Comment le faire tenir sur son plan ?\n\nDans cette vidéo :\n• une échelle : 1 cm sur le plan correspond à 10 m dans la réalité\n• le plan et la réalité sont proportionnels : 1 cm → 10 m, 2 cm → 20 m, 3 cm → 30 m (× 10)\n• le bâtiment de 80 m tient en 8 cm sur le plan\n• l'échelle écrite comme une fraction : la maquette au 1/200 (même unité des deux côtés : 4 cm → 800 cm = 8 m)\n• le piège : 3 cm, ce n'est pas 13 m ; on n'ajoute pas, on multiplie\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Sur le plan de Sofiane, 1 cm correspond à 10 m. Le terrain de sport mesure 6 cm sur le plan. Quelle est sa longueur réelle ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/prop-echelle\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/prop-echelle\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=prop_echelle&microId=echelle_comprendre&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Sofiane, architecte"
+        ],
+        [
+          "00:21",
+          "L'échelle du plan"
+        ],
+        [
+          "00:34",
+          "Plan et réalité : × 10"
+        ],
+        [
+          "00:57",
+          "Question : 5 cm"
+        ],
+        [
+          "01:26",
+          "L'échelle 1/200"
+        ],
+        [
+          "01:40",
+          "La maquette du collège"
+        ],
+        [
+          "01:52",
+          "Question : que veut dire ce 200 ?"
+        ],
+        [
+          "02:30",
+          "Le piège : 3 cm = 13 m ?"
+        ],
+        [
+          "02:45",
+          "À toi de jouer"
+        ],
+        [
+          "03:02",
+          "Correction"
+        ],
+        [
+          "03:14",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/prop-echelle",
+      "tags": [
+        "comprendre une échelle",
+        "échelle d'un plan",
+        "échelle 1/200",
+        "maquette",
+        "plan",
+        "architecte",
+        "architecture",
+        "échelle",
+        "proportionnalité",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:57",
+          "question": "Sur ce plan, 1 cm correspond à 10 m. Que représentent 5 cm ?",
+          "choix": [
+            "15 m",
+            "50 m",
+            "5 m"
+          ],
+          "reponse": 1,
+          "explication": "5 cm, c'est 5 fois 1 cm. Donc 5 × 10 m = 50 m."
+        },
+        {
+          "t": "01:52",
+          "question": "À l'échelle 1/200, que veut dire ce 200 ?",
+          "choix": [
+            "1 cm sur la maquette → 200 cm en vrai",
+            "La maquette mesure 200 cm",
+            "200 cm sur la maquette → 1 cm en vrai"
+          ],
+          "reponse": 0,
+          "explication": "Le 1 est sur la maquette, le 200 est dans la réalité : la réalité est 200 fois plus grande."
+        }
+      ],
+      "centres": [
+        "construction",
+        "art-design"
+      ]
+    },
+    {
+      "id": "6e-prop-echelle-comprendre-short",
+      "notionId": "prop_echelle",
+      "microId": "echelle_comprendre",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-prop-echelle-comprendre",
+      "fichier": "6e/maths/proportionnalite/07-echelle-comprendre/eleveai-maths-6e-prop-echelle-comprendre-short.mp4",
+      "miniature": "6e/maths/proportionnalite/07-echelle-comprendre/eleveai-maths-6e-prop-echelle-comprendre-short.png",
+      "titre": "Le nombre secret caché sous les petites voitures 🚗 — 6e #Shorts",
+      "accroche": "Une petite voiture mesure 10 cm. Dessous, il est écrit : 1/43. Cela veut dire : la vraie voiture est 43 fois plus grande. 10 × 43 = 430 cm : la vraie voiture mesure 4,30 m ! Et un avion miniature au 1/100 de 40 cm ? 4 000 cm, 40 m : un avion de ligne.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Une figurine de 3 cm est au 1/60. Combien mesure la vraie personne ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=prop_echelle&microId=echelle_comprendre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #échelle #proportionnalité #6e #collège",
+      "tags": [
+        "échelle",
+        "comprendre une échelle",
+        "maquette",
+        "voiture miniature",
+        "1/43",
+        "avion",
+        "modélisme",
+        "proportionnalité",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:24",
+          "question": "Un avion miniature au 1/100 mesure 40 cm. Combien mesure le vrai ?",
+          "choix": [
+            "140 cm",
+            "4 000 cm",
+            "400 cm"
+          ],
+          "reponse": 1,
+          "explication": "Au 1/100, on multiplie par 100 : 40 × 100 = 4 000 cm = 40 m, un avion de ligne !"
+        }
+      ],
+      "centres": [
+        "voitures-motos",
+        "avions"
+      ]
+    },
+    {
+      "id": "4e-prop-echelle-comprendre",
+      "notionId": "prop_echelle",
+      "microId": "echelle_comprendre",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "meme_video_que": "6e-prop-echelle-comprendre",
+      "fichier": "4e/maths/proportionnalite/07-echelle-comprendre/eleveai-maths-4e-prop-echelle-comprendre.mp4",
+      "miniature": "4e/maths/proportionnalite/07-echelle-comprendre/eleveai-maths-4e-prop-echelle-comprendre.png",
+      "titre": "Un collège entier sur une feuille ? — Comprendre une échelle — épisode 7 · Maths 4e",
+      "accroche": "Sofiane est architecte. Il dessine le plan d'un nouveau collège : le vrai bâtiment mesure 80 m de long. Impossible de le dessiner en vrai sur une feuille ! Comment le faire tenir sur son plan ?\n\nDans cette vidéo :\n• une échelle : 1 cm sur le plan correspond à 10 m dans la réalité\n• le plan et la réalité sont proportionnels : 1 cm → 10 m, 2 cm → 20 m, 3 cm → 30 m (× 10)\n• le bâtiment de 80 m tient en 8 cm sur le plan\n• l'échelle écrite comme une fraction : la maquette au 1/200 (même unité des deux côtés : 4 cm → 800 cm = 8 m)\n• le piège : 3 cm, ce n'est pas 13 m ; on n'ajoute pas, on multiplie\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Sur le plan de Sofiane, 1 cm correspond à 10 m. Le terrain de sport mesure 6 cm sur le plan. Quelle est sa longueur réelle ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/prop-echelle\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/prop-echelle\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_echelle&microId=echelle_comprendre&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Sofiane, architecte"
+        ],
+        [
+          "00:21",
+          "L'échelle du plan"
+        ],
+        [
+          "00:34",
+          "Plan et réalité : × 10"
+        ],
+        [
+          "00:57",
+          "Question : 5 cm"
+        ],
+        [
+          "01:26",
+          "L'échelle 1/200"
+        ],
+        [
+          "01:40",
+          "La maquette du collège"
+        ],
+        [
+          "01:52",
+          "Question : que veut dire ce 200 ?"
+        ],
+        [
+          "02:30",
+          "Le piège : 3 cm = 13 m ?"
+        ],
+        [
+          "02:45",
+          "À toi de jouer"
+        ],
+        [
+          "03:02",
+          "Correction"
+        ],
+        [
+          "03:14",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/prop-echelle",
+      "tags": [
+        "comprendre une échelle",
+        "échelle d'un plan",
+        "échelle 1/200",
+        "maquette",
+        "plan",
+        "architecte",
+        "architecture",
+        "échelle",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:57",
+          "question": "Sur ce plan, 1 cm correspond à 10 m. Que représentent 5 cm ?",
+          "choix": [
+            "15 m",
+            "50 m",
+            "5 m"
+          ],
+          "reponse": 1,
+          "explication": "5 cm, c'est 5 fois 1 cm. Donc 5 × 10 m = 50 m."
+        },
+        {
+          "t": "01:52",
+          "question": "À l'échelle 1/200, que veut dire ce 200 ?",
+          "choix": [
+            "1 cm sur la maquette → 200 cm en vrai",
+            "La maquette mesure 200 cm",
+            "200 cm sur la maquette → 1 cm en vrai"
+          ],
+          "reponse": 0,
+          "explication": "Le 1 est sur la maquette, le 200 est dans la réalité : la réalité est 200 fois plus grande."
+        }
+      ],
+      "centres": [
+        "construction",
+        "art-design"
+      ]
+    },
+    {
+      "id": "4e-prop-echelle-comprendre-short",
+      "notionId": "prop_echelle",
+      "microId": "echelle_comprendre",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-prop-echelle-comprendre",
+      "meme_video_que": "6e-prop-echelle-comprendre-short",
+      "fichier": "4e/maths/proportionnalite/07-echelle-comprendre/eleveai-maths-4e-prop-echelle-comprendre-short.mp4",
+      "miniature": "4e/maths/proportionnalite/07-echelle-comprendre/eleveai-maths-4e-prop-echelle-comprendre-short.png",
+      "titre": "Le nombre secret caché sous les petites voitures 🚗 — 4e #Shorts",
+      "accroche": "Une petite voiture mesure 10 cm. Dessous, il est écrit : 1/43. Cela veut dire : la vraie voiture est 43 fois plus grande. 10 × 43 = 430 cm : la vraie voiture mesure 4,30 m ! Et un avion miniature au 1/100 de 40 cm ? 4 000 cm, 40 m : un avion de ligne.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Une figurine de 3 cm est au 1/60. Combien mesure la vraie personne ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_echelle&microId=echelle_comprendre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #échelle #proportionnalité #4e #collège",
+      "tags": [
+        "échelle",
+        "comprendre une échelle",
+        "maquette",
+        "voiture miniature",
+        "1/43",
+        "avion",
+        "modélisme",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:24",
+          "question": "Un avion miniature au 1/100 mesure 40 cm. Combien mesure le vrai ?",
+          "choix": [
+            "140 cm",
+            "4 000 cm",
+            "400 cm"
+          ],
+          "reponse": 1,
+          "explication": "Au 1/100, on multiplie par 100 : 40 × 100 = 4 000 cm = 40 m, un avion de ligne !"
+        }
+      ],
+      "centres": [
+        "voitures-motos",
+        "avions"
+      ]
+    },
+    {
+      "id": "6e-prop-echelle-reelle",
+      "notionId": "prop_echelle",
+      "microId": "echelle_distance_reelle",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/proportionnalite/08-echelle-reelle/eleveai-maths-6e-prop-echelle-reelle.mp4",
+      "miniature": "6e/maths/proportionnalite/08-echelle-reelle/eleveai-maths-6e-prop-echelle-reelle.png",
+      "titre": "Combien de km sur la carte d'Awa ? — Du plan vers la réalité — épisode 8 · Maths 6e",
+      "accroche": "Awa est cartographe : elle dessine des cartes. Sur sa carte, 1 cm représente 5 km. Une route mesure 4 cm sur la carte. Combien mesure-t-elle en vrai ?\n\nDans cette vidéo :\n• du plan vers la réalité, on multiplie : 4 cm, c'est 4 fois 5 km, 20 km\n• le tableau : la carte en cm en haut, la réalité en km en bas, × 5\n• une longueur à virgule : 2,5 cm = 2 cm + un demi-centimètre, soit 10 km + 2,5 km = 12,5 km\n• le piège : diviser au lieu de multiplier (un couloir de 6 cm ne mesure pas 1,2 m, mais 30 m)\n• toujours écrire l'unité : cm sur le plan, m ou km en vrai\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Sur une autre carte d'Awa, 1 cm représente 4 km. Deux villages sont à 9 cm l'un de l'autre. Quelle est la vraie distance ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/prop-echelle\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/prop-echelle\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=prop_echelle&microId=echelle_distance_reelle&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Awa, cartographe"
+        ],
+        [
+          "00:24",
+          "Du plan vers la réalité : on multiplie"
+        ],
+        [
+          "00:37",
+          "Le tableau : × 5"
+        ],
+        [
+          "00:56",
+          "Question : 7 cm"
+        ],
+        [
+          "01:29",
+          "Une longueur à virgule"
+        ],
+        [
+          "01:49",
+          "Le piège : il a divisé"
+        ],
+        [
+          "02:10",
+          "Question : 3,5 cm"
+        ],
+        [
+          "02:44",
+          "À toi de jouer"
+        ],
+        [
+          "03:02",
+          "Correction"
+        ],
+        [
+          "03:12",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/prop-echelle",
+      "tags": [
+        "du plan vers la réalité",
+        "distance réelle",
+        "lire une carte",
+        "échelle d'une carte",
+        "cartographe",
+        "carte",
+        "géographie",
+        "échelle",
+        "proportionnalité",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:56",
+          "question": "Sur cette carte, 1 cm représente 5 km. Un chemin mesure 7 cm. Quelle est sa vraie longueur ?",
+          "choix": [
+            "12 km",
+            "35 km",
+            "1,4 km"
+          ],
+          "reponse": 1,
+          "explication": "7 × 5 = 35 km."
+        },
+        {
+          "t": "02:10",
+          "question": "Sur un plan, 1 cm représente 10 m. Un couloir mesure 3,5 cm. Quelle est sa vraie longueur ?",
+          "choix": [
+            "35 m",
+            "13,5 m",
+            "0,35 m"
+          ],
+          "reponse": 0,
+          "explication": "3 cm : 30 m ; un demi-centimètre : 5 m ; en tout 35 m."
+        }
+      ],
+      "centres": [
+        "histoire-geographie",
+        "transports"
+      ]
+    },
+    {
+      "id": "6e-prop-echelle-reelle-short",
+      "notionId": "prop_echelle",
+      "microId": "echelle_distance_reelle",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-prop-echelle-reelle",
+      "fichier": "6e/maths/proportionnalite/08-echelle-reelle/eleveai-maths-6e-prop-echelle-reelle-short.mp4",
+      "miniature": "6e/maths/proportionnalite/08-echelle-reelle/eleveai-maths-6e-prop-echelle-reelle-short.png",
+      "titre": "Sauras-tu trouver le trésor grâce à l'échelle ? 🗺️ — 6e #Shorts",
+      "accroche": "Sur la carte au trésor, il est écrit : 1 cm représente 20 pas. Le trésor est à 6 cm du grand palmier. 6 × 20 = 120 : il faut faire 120 pas !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Le bateau est à 15 cm du trésor. Combien de pas faut-il faire ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=prop_echelle&microId=echelle_distance_reelle&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #échelle #proportionnalité #6e #collège",
+      "tags": [
+        "échelle",
+        "carte au trésor",
+        "du plan vers la réalité",
+        "distance réelle",
+        "jeu",
+        "énigme",
+        "proportionnalité",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:19",
+          "question": "Du palmier au rocher : 4 cm. Combien de pas ?",
+          "choix": [
+            "24 pas",
+            "80 pas",
+            "5 pas"
+          ],
+          "reponse": 1,
+          "explication": "4 × 20 = 80 pas."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "histoire-geographie"
+      ]
+    },
+    {
+      "id": "4e-prop-echelle-reelle",
+      "notionId": "prop_echelle",
+      "microId": "echelle_distance_reelle",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "meme_video_que": "6e-prop-echelle-reelle",
+      "fichier": "4e/maths/proportionnalite/08-echelle-reelle/eleveai-maths-4e-prop-echelle-reelle.mp4",
+      "miniature": "4e/maths/proportionnalite/08-echelle-reelle/eleveai-maths-4e-prop-echelle-reelle.png",
+      "titre": "Combien de km sur la carte d'Awa ? — Du plan vers la réalité — épisode 8 · Maths 4e",
+      "accroche": "Awa est cartographe : elle dessine des cartes. Sur sa carte, 1 cm représente 5 km. Une route mesure 4 cm sur la carte. Combien mesure-t-elle en vrai ?\n\nDans cette vidéo :\n• du plan vers la réalité, on multiplie : 4 cm, c'est 4 fois 5 km, 20 km\n• le tableau : la carte en cm en haut, la réalité en km en bas, × 5\n• une longueur à virgule : 2,5 cm = 2 cm + un demi-centimètre, soit 10 km + 2,5 km = 12,5 km\n• le piège : diviser au lieu de multiplier (un couloir de 6 cm ne mesure pas 1,2 m, mais 30 m)\n• toujours écrire l'unité : cm sur le plan, m ou km en vrai\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Sur une autre carte d'Awa, 1 cm représente 4 km. Deux villages sont à 9 cm l'un de l'autre. Quelle est la vraie distance ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/prop-echelle\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/prop-echelle\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_echelle&microId=echelle_distance_reelle&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Awa, cartographe"
+        ],
+        [
+          "00:24",
+          "Du plan vers la réalité : on multiplie"
+        ],
+        [
+          "00:37",
+          "Le tableau : × 5"
+        ],
+        [
+          "00:56",
+          "Question : 7 cm"
+        ],
+        [
+          "01:29",
+          "Une longueur à virgule"
+        ],
+        [
+          "01:49",
+          "Le piège : il a divisé"
+        ],
+        [
+          "02:10",
+          "Question : 3,5 cm"
+        ],
+        [
+          "02:44",
+          "À toi de jouer"
+        ],
+        [
+          "03:02",
+          "Correction"
+        ],
+        [
+          "03:12",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/prop-echelle",
+      "tags": [
+        "du plan vers la réalité",
+        "distance réelle",
+        "lire une carte",
+        "échelle d'une carte",
+        "cartographe",
+        "carte",
+        "géographie",
+        "échelle",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:56",
+          "question": "Sur cette carte, 1 cm représente 5 km. Un chemin mesure 7 cm. Quelle est sa vraie longueur ?",
+          "choix": [
+            "12 km",
+            "35 km",
+            "1,4 km"
+          ],
+          "reponse": 1,
+          "explication": "7 × 5 = 35 km."
+        },
+        {
+          "t": "02:10",
+          "question": "Sur un plan, 1 cm représente 10 m. Un couloir mesure 3,5 cm. Quelle est sa vraie longueur ?",
+          "choix": [
+            "35 m",
+            "13,5 m",
+            "0,35 m"
+          ],
+          "reponse": 0,
+          "explication": "3 cm : 30 m ; un demi-centimètre : 5 m ; en tout 35 m."
+        }
+      ],
+      "centres": [
+        "histoire-geographie",
+        "transports"
+      ]
+    },
+    {
+      "id": "4e-prop-echelle-reelle-short",
+      "notionId": "prop_echelle",
+      "microId": "echelle_distance_reelle",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-prop-echelle-reelle",
+      "meme_video_que": "6e-prop-echelle-reelle-short",
+      "fichier": "4e/maths/proportionnalite/08-echelle-reelle/eleveai-maths-4e-prop-echelle-reelle-short.mp4",
+      "miniature": "4e/maths/proportionnalite/08-echelle-reelle/eleveai-maths-4e-prop-echelle-reelle-short.png",
+      "titre": "Sauras-tu trouver le trésor grâce à l'échelle ? 🗺️ — 4e #Shorts",
+      "accroche": "Sur la carte au trésor, il est écrit : 1 cm représente 20 pas. Le trésor est à 6 cm du grand palmier. 6 × 20 = 120 : il faut faire 120 pas !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Le bateau est à 15 cm du trésor. Combien de pas faut-il faire ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_echelle&microId=echelle_distance_reelle&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #échelle #proportionnalité #4e #collège",
+      "tags": [
+        "échelle",
+        "carte au trésor",
+        "du plan vers la réalité",
+        "distance réelle",
+        "jeu",
+        "énigme",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:19",
+          "question": "Du palmier au rocher : 4 cm. Combien de pas ?",
+          "choix": [
+            "24 pas",
+            "80 pas",
+            "5 pas"
+          ],
+          "reponse": 1,
+          "explication": "4 × 20 = 80 pas."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "histoire-geographie"
+      ]
+    },
+    {
+      "id": "6e-prop-echelle-plan",
+      "notionId": "prop_echelle",
+      "microId": "echelle_distance_plan",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/proportionnalite/09-echelle-plan/eleveai-maths-6e-prop-echelle-plan.mp4",
+      "miniature": "6e/maths/proportionnalite/09-echelle-plan/eleveai-maths-6e-prop-echelle-plan.png",
+      "titre": "Un jardin de 70 m sur ta feuille ? — De la réalité vers le plan — épisode 9 · Maths 6e",
+      "accroche": "Hugo est paysagiste : il dessine des jardins avant de les planter. Le jardin de l'école mesure 70 m de long. Sur son plan, 1 cm représente 10 m. Combien de cm doit-il tracer ?\n\nDans cette vidéo :\n• de la réalité vers le plan, tout devient plus petit : on divise (70 ÷ 10 = 7 cm)\n• le tableau : on remonte du bas vers le haut, ÷ 10\n• une autre échelle : 1 cm pour 8 m, un mur de 24 m → 3 cm\n• le piège : multiplier (70 × 10 = 700 cm, 7 mètres de dessin !)\n• une longueur qui ne tombe pas juste : 30 km à 1 cm pour 4 km → 7,5 cm\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Hugo dessine un potager rectangulaire de 30 m sur 15 m. Sur son plan, 1 cm représente 5 m. Quelles sont les dimensions du potager sur le plan ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/prop-echelle\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/prop-echelle\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=prop_echelle&microId=echelle_distance_plan&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Hugo, paysagiste"
+        ],
+        [
+          "00:24",
+          "De la réalité vers le plan : on divise"
+        ],
+        [
+          "00:41",
+          "Le tableau : ÷ 10"
+        ],
+        [
+          "00:54",
+          "Question : un mur de 40 m"
+        ],
+        [
+          "01:24",
+          "Une autre échelle"
+        ],
+        [
+          "01:36",
+          "Le piège : 700 cm ?"
+        ],
+        [
+          "01:52",
+          "Question : 30 km"
+        ],
+        [
+          "02:37",
+          "À toi de jouer"
+        ],
+        [
+          "02:54",
+          "Correction"
+        ],
+        [
+          "03:10",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/prop-echelle",
+      "tags": [
+        "de la réalité vers le plan",
+        "distance sur le plan",
+        "dessiner à l'échelle",
+        "échelle",
+        "paysagiste",
+        "jardin",
+        "potager",
+        "échelle",
+        "proportionnalité",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:54",
+          "question": "1 cm représente 10 m. Un mur mesure 40 m. Combien de cm sur le plan ?",
+          "choix": [
+            "400 cm",
+            "30 cm",
+            "4 cm"
+          ],
+          "reponse": 2,
+          "explication": "40 ÷ 10 = 4 cm."
+        },
+        {
+          "t": "01:52",
+          "question": "Sur une carte, 1 cm représente 4 km. Un trajet mesure 30 km. Combien de cm sur la carte ?",
+          "choix": [
+            "7,5 cm",
+            "120 cm",
+            "26 cm"
+          ],
+          "reponse": 0,
+          "explication": "28 km, c'est 7 fois 4 km : 7 cm. Il reste 2 km, la moitié de 4 km : un demi-centimètre. En tout : 7,5 cm."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "art-design"
+      ]
+    },
+    {
+      "id": "6e-prop-echelle-plan-short",
+      "notionId": "prop_echelle",
+      "microId": "echelle_distance_plan",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-prop-echelle-plan",
+      "fichier": "6e/maths/proportionnalite/09-echelle-plan/eleveai-maths-6e-prop-echelle-plan-short.mp4",
+      "miniature": "6e/maths/proportionnalite/09-echelle-plan/eleveai-maths-6e-prop-echelle-plan-short.png",
+      "titre": "Un stade de foot entier sur ta feuille ? ⚽ — 6e #Shorts",
+      "accroche": "Un terrain de foot mesure environ 105 m de long et 68 m de large. Sur ton dessin, 1 cm représente 5 m : on divise par 5. 105 ÷ 5 = 21 cm, et 68 ÷ 5 = 13,6 cm. 21 cm, c'est pile la largeur d'une feuille A4 : le stade tient sur ta feuille !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Un terrain de basket mesure 28 m de long. Combien de cm sur ton dessin ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=prop_echelle&microId=echelle_distance_plan&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #échelle #proportionnalité #6e #collège",
+      "tags": [
+        "échelle",
+        "de la réalité vers le plan",
+        "terrain de foot",
+        "football",
+        "stade",
+        "feuille A4",
+        "proportionnalité",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:35",
+          "question": "La surface de réparation fait environ 40 m de large. Sur ton dessin (1 cm représente 5 m) ?",
+          "choix": [
+            "8 cm",
+            "200 cm",
+            "35 cm"
+          ],
+          "reponse": 0,
+          "explication": "40 ÷ 5 = 8 cm."
+        }
+      ],
+      "centres": [
+        "football"
+      ]
+    },
+    {
+      "id": "4e-prop-echelle-plan",
+      "notionId": "prop_echelle",
+      "microId": "echelle_distance_plan",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "meme_video_que": "6e-prop-echelle-plan",
+      "fichier": "4e/maths/proportionnalite/09-echelle-plan/eleveai-maths-4e-prop-echelle-plan.mp4",
+      "miniature": "4e/maths/proportionnalite/09-echelle-plan/eleveai-maths-4e-prop-echelle-plan.png",
+      "titre": "Un jardin de 70 m sur ta feuille ? — De la réalité vers le plan — épisode 9 · Maths 4e",
+      "accroche": "Hugo est paysagiste : il dessine des jardins avant de les planter. Le jardin de l'école mesure 70 m de long. Sur son plan, 1 cm représente 10 m. Combien de cm doit-il tracer ?\n\nDans cette vidéo :\n• de la réalité vers le plan, tout devient plus petit : on divise (70 ÷ 10 = 7 cm)\n• le tableau : on remonte du bas vers le haut, ÷ 10\n• une autre échelle : 1 cm pour 8 m, un mur de 24 m → 3 cm\n• le piège : multiplier (70 × 10 = 700 cm, 7 mètres de dessin !)\n• une longueur qui ne tombe pas juste : 30 km à 1 cm pour 4 km → 7,5 cm\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Hugo dessine un potager rectangulaire de 30 m sur 15 m. Sur son plan, 1 cm représente 5 m. Quelles sont les dimensions du potager sur le plan ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/prop-echelle\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/prop-echelle\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_echelle&microId=echelle_distance_plan&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Hugo, paysagiste"
+        ],
+        [
+          "00:24",
+          "De la réalité vers le plan : on divise"
+        ],
+        [
+          "00:41",
+          "Le tableau : ÷ 10"
+        ],
+        [
+          "00:54",
+          "Question : un mur de 40 m"
+        ],
+        [
+          "01:24",
+          "Une autre échelle"
+        ],
+        [
+          "01:36",
+          "Le piège : 700 cm ?"
+        ],
+        [
+          "01:52",
+          "Question : 30 km"
+        ],
+        [
+          "02:37",
+          "À toi de jouer"
+        ],
+        [
+          "02:54",
+          "Correction"
+        ],
+        [
+          "03:10",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/prop-echelle",
+      "tags": [
+        "de la réalité vers le plan",
+        "distance sur le plan",
+        "dessiner à l'échelle",
+        "échelle",
+        "paysagiste",
+        "jardin",
+        "potager",
+        "échelle",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:54",
+          "question": "1 cm représente 10 m. Un mur mesure 40 m. Combien de cm sur le plan ?",
+          "choix": [
+            "400 cm",
+            "30 cm",
+            "4 cm"
+          ],
+          "reponse": 2,
+          "explication": "40 ÷ 10 = 4 cm."
+        },
+        {
+          "t": "01:52",
+          "question": "Sur une carte, 1 cm représente 4 km. Un trajet mesure 30 km. Combien de cm sur la carte ?",
+          "choix": [
+            "7,5 cm",
+            "120 cm",
+            "26 cm"
+          ],
+          "reponse": 0,
+          "explication": "28 km, c'est 7 fois 4 km : 7 cm. Il reste 2 km, la moitié de 4 km : un demi-centimètre. En tout : 7,5 cm."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "art-design"
+      ]
+    },
+    {
+      "id": "4e-prop-echelle-plan-short",
+      "notionId": "prop_echelle",
+      "microId": "echelle_distance_plan",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-prop-echelle-plan",
+      "meme_video_que": "6e-prop-echelle-plan-short",
+      "fichier": "4e/maths/proportionnalite/09-echelle-plan/eleveai-maths-4e-prop-echelle-plan-short.mp4",
+      "miniature": "4e/maths/proportionnalite/09-echelle-plan/eleveai-maths-4e-prop-echelle-plan-short.png",
+      "titre": "Un stade de foot entier sur ta feuille ? ⚽ — 4e #Shorts",
+      "accroche": "Un terrain de foot mesure environ 105 m de long et 68 m de large. Sur ton dessin, 1 cm représente 5 m : on divise par 5. 105 ÷ 5 = 21 cm, et 68 ÷ 5 = 13,6 cm. 21 cm, c'est pile la largeur d'une feuille A4 : le stade tient sur ta feuille !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Un terrain de basket mesure 28 m de long. Combien de cm sur ton dessin ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_echelle&microId=echelle_distance_plan&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #échelle #proportionnalité #4e #collège",
+      "tags": [
+        "échelle",
+        "de la réalité vers le plan",
+        "terrain de foot",
+        "football",
+        "stade",
+        "feuille A4",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:35",
+          "question": "La surface de réparation fait environ 40 m de large. Sur ton dessin (1 cm représente 5 m) ?",
+          "choix": [
+            "8 cm",
+            "200 cm",
+            "35 cm"
+          ],
+          "reponse": 0,
+          "explication": "40 ÷ 5 = 8 cm."
+        }
+      ],
+      "centres": [
+        "football"
+      ]
+    },
+    {
+      "id": "6e-prop-echelle-defi",
+      "notionId": "prop_echelle",
+      "microId": "echelle_defi",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/proportionnalite/10-echelle-defi/eleveai-maths-6e-prop-echelle-defi.mp4",
+      "miniature": "6e/maths/proportionnalite/10-echelle-defi/eleveai-maths-6e-prop-echelle-defi.png",
+      "titre": "L'échelle effacée de la maquettiste — Défis sur les échelles — épisode 10 · Maths 6e",
+      "accroche": "Jade est maquettiste : elle fabrique des décors miniatures pour le cinéma. Sur son plan, une maison de 12 m mesure 3 cm. Mais l'échelle est effacée ! Que vaut 1 cm ?\n\nDans cette vidéo :\n• retrouver l'échelle : 3 cm pour 12 m, donc 1 cm pour 12 ÷ 3 = 4 m\n• le piège : on ne retrouve pas une échelle avec une soustraction (pas 1 cm pour 10 m)\n• utiliser l'échelle retrouvée : un pont de 7 cm mesure 7 × 4 = 28 m\n• × pour aller vers la réalité, ÷ pour aller vers le plan\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Un terrain rectangulaire mesure 40 m sur 20 m. Sur le plan, 1 cm représente 5 m. Quel est le périmètre du rectangle dessiné ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/prop-echelle\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/prop-echelle\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=prop_echelle&microId=echelle_defi&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Jade, maquettiste"
+        ],
+        [
+          "00:23",
+          "Retrouver ce que vaut 1 cm"
+        ],
+        [
+          "00:36",
+          "Question : 5 cm pour 20 m"
+        ],
+        [
+          "01:01",
+          "Le piège de la soustraction"
+        ],
+        [
+          "01:17",
+          "Question : le pont"
+        ],
+        [
+          "01:46",
+          "À toi de jouer"
+        ],
+        [
+          "02:03",
+          "Correction"
+        ],
+        [
+          "02:20",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/prop-echelle",
+      "tags": [
+        "retrouver une échelle",
+        "défis échelles",
+        "problème d'échelle",
+        "maquette",
+        "maquettiste",
+        "cinéma",
+        "décors",
+        "échelle",
+        "proportionnalité",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:36",
+          "question": "Sur un plan, 5 cm représentent 20 m. Que représente 1 cm ?",
+          "choix": [
+            "4 m",
+            "100 m",
+            "15 m"
+          ],
+          "reponse": 0,
+          "explication": "20 ÷ 5 = 4 m pour 1 cm."
+        },
+        {
+          "t": "01:17",
+          "question": "Sur le plan de Jade, 1 cm représente 4 m. Un pont mesure 7 cm. Combien mesure-t-il en vrai ?",
+          "choix": [
+            "11 m",
+            "28 m",
+            "1,75 m"
+          ],
+          "reponse": 1,
+          "explication": "7 × 4 = 28 m."
+        }
+      ],
+      "centres": [
+        "cinema-series",
+        "art-design"
+      ]
+    },
+    {
+      "id": "6e-prop-echelle-defi-short",
+      "notionId": "prop_echelle",
+      "microId": "echelle_defi",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-prop-echelle-defi",
+      "fichier": "6e/maths/proportionnalite/10-echelle-defi/eleveai-maths-6e-prop-echelle-defi-short.mp4",
+      "miniature": "6e/maths/proportionnalite/10-echelle-defi/eleveai-maths-6e-prop-echelle-defi-short.png",
+      "titre": "Ce dinosaure géant du film est… une figurine ! 🦕 — 6e #Shorts",
+      "accroche": "Au cinéma, le dinosaure paraît mesurer 40 m. Mais c'est une figurine de 20 cm ! Que vaut 1 cm de figurine ? 40 ÷ 20 = 2 : 1 cm représente 2 m. Sa queue de 8 cm ? 8 × 2 = 16 m dans le film.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : La bouche de la figurine mesure 3 cm. Combien de mètres dans le film ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=prop_echelle&microId=echelle_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #échelle #proportionnalité #6e #collège",
+      "tags": [
+        "retrouver une échelle",
+        "échelle",
+        "dinosaure",
+        "figurine",
+        "cinéma",
+        "effets spéciaux",
+        "proportionnalité",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:22",
+          "question": "La queue de la figurine mesure 8 cm. Dans le film ?",
+          "choix": [
+            "16 m",
+            "10 m",
+            "4 m"
+          ],
+          "reponse": 0,
+          "explication": "8 × 2 = 16 m."
+        }
+      ],
+      "centres": [
+        "dinosaures",
+        "cinema-series"
+      ]
+    },
+    {
+      "id": "4e-prop-echelle-defi",
+      "notionId": "prop_echelle",
+      "microId": "echelle_defi",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/proportionnalite/10-echelle-defi/eleveai-maths-4e-prop-echelle-defi.mp4",
+      "miniature": "4e/maths/proportionnalite/10-echelle-defi/eleveai-maths-4e-prop-echelle-defi.png",
+      "titre": "Combien de km sur la carte de randonnée ? — Défis sur les échelles — épisode 10 · Maths 4e",
+      "accroche": "Mathis est guide de montagne. Ses cartes de randonnée sont à l'échelle 1/25 000. Le sentier jusqu'au sommet mesure 12 cm sur la carte. Combien de kilomètres va-t-il marcher ?\n\nDans cette vidéo :\n• 1/25 000 : 1 cm sur la carte représente 25 000 cm en vrai (12 cm → 300 000 cm)\n• convertir : 300 000 cm = 3 000 m = 3 km\n• l'astuce : au 1/25 000, 4 cm sur la carte font 1 km\n• retrouver une échelle : 6 cm pour 3 km, soit 300 000 ÷ 6 = 50 000, l'échelle 1/50 000\n• le piège : la même unité des deux côtés (6 cm pour 3 km, ce n'est pas 1/2)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Mathis prépare une sortie de 7,5 km. Combien de cm doit mesurer le trajet sur sa carte au 1/25 000 ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/prop-echelle\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/prop-echelle\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_echelle&microId=echelle_defi&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Mathis, guide de montagne"
+        ],
+        [
+          "00:24",
+          "1/25 000 : 12 × 25 000"
+        ],
+        [
+          "00:38",
+          "Convertir en km, et l'astuce : 4 cm = 1 km"
+        ],
+        [
+          "01:04",
+          "Question : le lac"
+        ],
+        [
+          "01:35",
+          "Retrouver l'échelle : 1/50 000"
+        ],
+        [
+          "01:58",
+          "Le piège des unités"
+        ],
+        [
+          "02:12",
+          "Question : 5 cm pour 1 km"
+        ],
+        [
+          "02:46",
+          "À toi de jouer"
+        ],
+        [
+          "03:03",
+          "Correction"
+        ],
+        [
+          "03:19",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/prop-echelle",
+      "tags": [
+        "échelle 1/25 000",
+        "retrouver une échelle",
+        "convertir les unités",
+        "carte de randonnée",
+        "guide de montagne",
+        "randonnée",
+        "montagne",
+        "échelle",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:04",
+          "question": "Carte au 1/25 000. Un lac mesure 2 cm sur la carte. Combien en vrai ?",
+          "choix": [
+            "50 m",
+            "500 m",
+            "5 km"
+          ],
+          "reponse": 1,
+          "explication": "2 × 25 000 = 50 000 cm, c'est 500 m."
+        },
+        {
+          "t": "02:12",
+          "question": "Sur une carte, 5 cm représentent 1 km. Quelle est l'échelle ?",
+          "choix": [
+            "1/5",
+            "1/20 000",
+            "1/200"
+          ],
+          "reponse": 1,
+          "explication": "1 km = 100 000 cm ; 100 000 ÷ 5 = 20 000. L'échelle est 1/20 000."
+        }
+      ],
+      "centres": [
+        "course-trail",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "4e-prop-echelle-defi-short",
+      "notionId": "prop_echelle",
+      "microId": "echelle_defi",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-prop-echelle-defi",
+      "fichier": "4e/maths/proportionnalite/10-echelle-defi/eleveai-maths-4e-prop-echelle-defi-short.mp4",
+      "miniature": "4e/maths/proportionnalite/10-echelle-defi/eleveai-maths-4e-prop-echelle-defi-short.png",
+      "titre": "Un marathon sur une carte de randonnée, ça mesure combien ? 🏃 — 4e #Shorts",
+      "accroche": "Un marathon, c'est 42 km et 195 m de course. Sur une carte au 1/25 000, 1 km mesure 4 cm. Environ 42 km : 42 × 4 = 168 cm. Presque 1,70 m de carte : la taille d'un adulte !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Combien de cm pour une course de 10 km ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_echelle&microId=echelle_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #échelle #proportionnalité #4e #collège",
+      "tags": [
+        "échelle 1/25 000",
+        "marathon",
+        "course à pied",
+        "carte de randonnée",
+        "trail",
+        "conversion",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:29",
+          "question": "Un semi-marathon fait environ 21 km. Sur la carte au 1/25 000 ?",
+          "choix": [
+            "84 cm",
+            "21 cm",
+            "5 cm"
+          ],
+          "reponse": 0,
+          "explication": "1 km mesure 4 cm : 21 × 4 = 84 cm."
+        }
+      ],
+      "centres": [
+        "course-trail"
+      ]
     }
   ]
 }
