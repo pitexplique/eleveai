@@ -14,7 +14,7 @@ Réponds toujours en français. Ne pose pas de questions : tranche, avance, list
 
 ## État au relais (31/10, 12 h 10)
 - **08** : FINI, vérifié, COMMITÉ (`05b2260f`) avec ses questions.
-- **07-echelle-comprendre** : 4 mp4 rendus (paysages 6e/4e 3:38, short 6e = 4e), bords 0 sur les trois fichiers vérifiés, planche paysage regardée (bonne). Sources COMMITÉES. ⚠️ RESTE : planche du short à regarder, mesurer les `t` des 2 questions-pauses de la paysage (≈ 01:00 et ≈ 01:55, à mesurer exactement par `prop_echelle_comprendre_marques.json` ou une planche serrée) et celle du short, puis les écrire dans `manim/questions-proportionnalite.md` (centres : voir l'en-tête du script).
+- **07-echelle-comprendre** : FINI, vérifié (bords 0, planche bonne), COMMITÉ avec ses questions (`4ecd6e1e`).
 - **09-echelle-plan** et **10 défi 6e** : agents lancés à 11 h 35 depuis la session du 31/10 midi ; au relais, paysage 6e du 09 rendue, 4e en cours ; défi 6e : scripts + marques écrits, rendus en cours. Leurs rapports seront PERDUS si la session se ferme : vérifier sur disque (`manim/scripts/6e/prop_echelle_plan*`, `prop_echelle_defi*`, mp4 dans `09-echelle-plan/` et `6e/.../10-echelle-defi/`). Si les mp4 sont tous là : bords + planches + `t` + commit par chemin ; s'il en manque et que rien ne bouge : agent neuf.
 - **10 défi 4e : PAS lancé.** Mission ci-dessous.
 - Leçons : `EchelleCarte` du module est inutilisable → reprendre la figure `Correspondance` de `prop_echelle_reelle.py` ; rendus avec `PYTHONIOENCODING=utf-8`.
