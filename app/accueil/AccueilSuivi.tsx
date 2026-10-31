@@ -88,6 +88,8 @@ const SYMBOLE = ["·", "✗", "~", "✓"];
 
 /* « Comment ça marche » : le chemin d'un élève, en quatre images. */
 const ACCES_DIRECTS = [
+  // « Faire le point » du coach : l'évaluation qui situe l'élève.
+  { href: "/parcours", label: "Commencer par une évaluation", Icone: ClipboardList, couleur: "text-violet-700" },
   { href: "/automatismes-maths", label: "Automatismes", Icone: Zap, couleur: "text-amber-500" },
   { href: "/fiches-exercices", label: "Fiches d'exercices", Icone: FileText, couleur: "text-sky-600" },
   { href: "/video", label: "Vidéos", Icone: PlayCircle, couleur: "text-rose-600" },
@@ -204,14 +206,14 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
               Chaque réponse est gardée. Le prof voit les erreurs de toute sa classe ; les parents voient les progrès de leur enfant.
             </Nuage>
           </div>
-          {/* Deux portes principales : le coach, et l'évaluation (« Faire le
-              point » du coach) qui situe l'élève. */}
+          {/* Deux portes principales : le coach, et le compte qui garde les
+              résultats (le suivi). */}
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link href="/coach-ia/maths" className="rounded-full bg-teal-700 px-8 py-4 text-lg font-black text-white shadow-lg hover:bg-teal-800">
               Commencer avec le coach de maths
             </Link>
-            <Link href="/parcours" className="rounded-full bg-white px-8 py-4 text-lg font-black text-teal-800 shadow ring-2 ring-teal-600 hover:bg-teal-50">
-              Commencer par une évaluation
+            <Link href="/auth/signin?inscription=1" className="rounded-full bg-white px-8 py-4 text-lg font-black text-teal-800 shadow ring-2 ring-teal-600 hover:bg-teal-50">
+              Créer un compte pour garder mes résultats
             </Link>
           </div>
           {/* ⭐ 31/10/2026 — Frédéric : « le prof, il voit quelque chose pour
@@ -226,9 +228,6 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
               </Link>
             ))}
           </div>
-          <Link href="/auth/signin?inscription=1" className="mt-5 inline-block font-bold text-teal-800 underline underline-offset-4 hover:text-teal-900">
-            Créer un compte pour garder mes résultats
-          </Link>
         </div>
       </section>
 
