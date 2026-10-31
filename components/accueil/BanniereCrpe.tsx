@@ -29,6 +29,9 @@
 // promet donc plus le samedi : les deux tests, le suivi au quotidien, et la
 // visio annoncée SANS DATE (« en préparation »). ⛔ Le mot « gratuit » ne décrit
 // pas l'offre (règle du 22/08) : la chose se dit par le verbe.
+// ⛔ 31/10/2026 — « en préparation » RETIRÉ (Frédéric : « tu enlèves "en
+// préparation" tant que je n'ai pas le feu vert du rectorat ») : la visio
+// payante attend l'accord écrit du cumul. À remettre avec ce feu vert.
 
 import Image from "next/image";
 import Link from "next/link";
@@ -73,11 +76,11 @@ export default function BanniereCrpe({ place }: { place: "haut" | "colonnes" }) 
               {/* ⚠️ Deux longueurs : la phrase entière doublerait la hauteur sur
                   un téléphone. */}
               <span className="sm:hidden">
-                Deux tests pour se situer, un suivi au quotidien. Cours en visio en préparation.
+                Deux tests pour se situer, un suivi au quotidien.
               </span>
               <span className="hidden sm:inline">
                 Deux tests pour se situer en maths et en orthographe (personne ne
-                paie), un suivi au quotidien, et des cours en visio en préparation.
+                paie), et un suivi au quotidien.
               </span>
             </p>
           </div>

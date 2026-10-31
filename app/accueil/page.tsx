@@ -75,77 +75,29 @@
 // jour où elles seront sur R2, sans retoucher la page.
 // ⛔ Fond blanc forcé dans AccueilCoach : en mode sombre, sans fond posé, le
 // navigateur peignait la page en noir (Frédéric, 23/10 : « on voit rien »).
-import AccueilMatieres from "./AccueilMatieres";
-import JournalClient from "../accueil-journal/JournalClient";
-import { donneesDuJournal } from "../accueil-journal/donnees";
-import AccueilCoach, { type VideoVitrine } from "./AccueilCoach";
-import { toutesLesVideos, urlR2, type VideoR2 } from "@/lib/videos/r2";
+// ⭐⭐⭐⭐ REFONTE DU 31/10/2026 — « LE COACH QUI SUIT CHAQUE ÉLÈVE ».
+// Frédéric : « quand je tape dans Google "fais-moi une fiche de cours sur
+// Pythagore en PDF", il me la génère » → on ne met plus les fiches en vitrine,
+// on met le SUIVI (micro-compétences, vidéos, résultats gardés, le prof qui voit
+// les erreurs de ses classes), façon IXL. Maquette sur /accueil/nouvelle, puis :
+// « change accueil comme nouvelle, sauf que tu enlèves "en préparation" tant
+// que je n'ai pas le feu vert du rectorat ».
+// 👉 LE CONTENU VIT DANS ./AccueilSuivi.tsx ; `offresFamille={false}` ici.
+// ⛔ Ne passer `offresFamille` à vrai qu'avec l'accord ÉCRIT du rectorat (cumul).
+// 👉 RETOUR ARRIÈRE : l'accueil du 23/10 (AccueilCoach + journal plié) est
+// entier dans le commit 3104f1c2 :
+//     git show 3104f1c2:app/accueil/page.tsx > app/accueil/page.tsx
+// (AccueilCoach.tsx, AccueilMatieres.tsx et le journal restent sur le disque).
+// ⚠️ Les liens ne portent plus `?from=accueil` : la mesure des départs depuis
+// l'accueil s'arrête avec cette version (à remettre si on veut la suivre).
+import AccueilSuivi from "./AccueilSuivi";
 
 // ⭐ LES MÉTADONNÉES VIVENT DANS ./metadata.ts, ET NULLE PART AILLEURS.
-// Elles étaient écrites ici en dur pendant qu'un fichier metadata.ts existait à
-// côté, jamais importé, annonçant un autre titre. Deux vérités pour un seul
-// écran, dont une fausse. Un seul endroit désormais — et c'est là qu'on lit
-// pourquoi le titre est en `absolute` et pourquoi cette page porte la seule
-// canonique posée à la main du site.
 export { metadata } from "./metadata";
 
+// Les compteurs (micro-compétences, vidéos) se recalculent toutes les heures.
 export const revalidate = 3600;
 
-/** Le dossier de R2 → la classe du coach (`/coach-ia/maths?classe=…`). */
-const CLASSE_DU_DOSSIER: Record<string, string> = {
-  terminale: "terminale-spe",
-  premiere: "premiere-spe",
-  "premiere-commun": "premiere",
-  seconde: "seconde",
-  stmg: "stmg",
-  "3e": "3e",
-  "4e": "4e",
-  "5e": "5e",
-  "6e": "6e",
-  cm2: "cm2",
-  cm1: "cm1",
-  cp: "cp",
-};
-const DEHORS = new Set(["974", "maths-en-vrai"]);
-
-/* Comme sur le journal : seulement des paysages AVEC miniature (sinon la
-   vignette est souvent un écran noir). */
-const vitrine = (v: VideoR2): VideoVitrine => ({ id: v.id, titre: v.titre, vignette: urlR2(v.vignette!) });
-const montrable = (v: VideoR2) => !v.short && Boolean(v.poster) && Boolean(v.vignette);
-
-/** `n` vidéos qui avancent chaque jour dans la liste, en boucle. */
-function duJour(liste: VideoR2[], jour: number, n: number): VideoVitrine[] {
-  if (liste.length === 0) return [];
-  const debut = (jour * n) % liste.length;
-  return Array.from({ length: Math.min(n, liste.length) }, (_, i) => vitrine(liste[(debut + i) % liste.length]));
-}
-
 export default function AccueilPage() {
-  const journal = donneesDuJournal();
-  const toutes = toutesLesVideos();
-  const parClasse: Record<string, VideoVitrine[]> = {};
-  for (const [dossier, classe] of Object.entries(CLASSE_DU_DOSSIER)) {
-    const liste = toutes.filter((v) => v.fichier.split("/")[0] === dossier && montrable(v));
-    parClasse[classe] = duJour(liste, journal.jour, 4);
-  }
-  const dehors = duJour(
-    toutes.filter((v) => DEHORS.has(v.fichier.split("/")[0]) && montrable(v)),
-    journal.jour,
-    4,
-  );
-  const totalVideos = toutes.filter((v) => v.vignette && !v.fichier.startsWith("atelier-video-essais")).length;
-
-  // ⏸ 29/10/2026 : les classes des pays ne se calculent plus ici — le choix du
-  // pays a quitté l'accueil pour l'en-tête (components/SelecteurPaysEntete.tsx).
-
-  return (
-    <AccueilCoach
-      totalVideos={totalVideos}
-      parClasse={parClasse}
-      dehors={dehors}
-      une={journal.une.paysage ? { ...journal.une.paysage, classe: journal.une.classe } : null}
-      defi={journal.defi}
-      metier={journal.metier}
-    />
-  );
+  return <AccueilSuivi offresFamille={false} />;
 }
