@@ -329,8 +329,10 @@ class PythagoreSolide3e(*_BASES):
         self.play(Write(Text("Le piège : le carré d'un décimal", font_size=40, color=JAUNE_TITRE).to_edge(UP)),
                   run_time=0.5)
         faux = self.morceler(["8,2²", "= 64,4"], 46, ROUGE_ERREUR).move_to(P(-2.6, 1.9))
-        self.poser_copie([faux])  # (31/10) « 8,2 » puis « 64,4 », chacun à son mot
-        self.play(FadeIn(self.ligne("8² = 64 et 2² = 4, recollés", 1.15, 26, ROUGE_ERREUR, x=-2.6)))
+        d = self.poser_copie([faux])  # (31/10) « 8,2 » puis « 64,4 », chacun à son mot
+        # (01/11) l'erreur est DITE (« 8 au carré, 64, et 2 au carré, 4, recollés »), morceau par morceau
+        err = self.morceler(["8²", "= 64", "et 2²", "= 4,", ("recollés", "recollés")], 26, ROUGE_ERREUR).move_to(P(-2.6, 1.15))
+        self.poser_copie([err], self._pos("L'erreur"))
         self.play(Create(Line(faux.get_left(), faux.get_right(), color=ROUGE_ERREUR, stroke_width=6)))
         juste = self.morceler([("8,2 × 8,2", "8 virgule 2 par"), "= 67,24"], 44, VERT_OK).move_to(P(-2.6, 0.2))
         self.poser_copie([juste], self._pos("On multiplie"))
@@ -346,12 +348,22 @@ class PythagoreSolide3e(*_BASES):
         b2.next_to(g8, UP, buff=0)
         coin = Square(e).set_stroke(WHITE, 2).set_fill(ORANGE_RETENUE, 0.9)
         coin.next_to(b1, UP, buff=0)
-        self.play(FadeIn(g8), FadeIn(self.t("64", 34).move_to(g8)), run_time=0.5)  # (31/10) resserré
-        self.play(FadeIn(b1), FadeIn(b2), FadeIn(coin), run_time=0.5)
+        # (01/11) le dessin est DIT : « le carré de 8 fait 64, deux bandes de 1,6, un coin de 0,04 »
+        self.au_mot("Sur le dessin")
+        self.play(FadeIn(g8), run_time=0.4)
+        self.au_nb("fait 64")
+        self.play(FadeIn(self.t("64", 34).move_to(g8)), run_time=0.3)
+        self.au_mot("deux bandes")
+        self.play(FadeIn(b1), FadeIn(b2), run_time=0.3)
+        self.au_mot("1 virgule 6")
         self.play(FadeIn(self.t("1,6", 22, ORANGE_RETENUE).next_to(b1, RIGHT, buff=0.1)),
-                  FadeIn(self.t("1,6", 22, ORANGE_RETENUE).next_to(b2, UP, buff=0.1)),
-                  FadeIn(self.t("0,04", 20, ORANGE_RETENUE).next_to(coin, UR, buff=0.05)), run_time=0.5)
-        self.play(FadeIn(self.ligne("64 + 1,6 + 1,6 + 0,04 = 67,24", -0.6, 26, ORANGE_RETENUE, x=-2.6)), run_time=0.5)
+                  FadeIn(self.t("1,6", 22, ORANGE_RETENUE).next_to(b2, UP, buff=0.1)), run_time=0.3)
+        self.au_mot("un coin")
+        self.play(FadeIn(coin), run_time=0.3)
+        self.au_mot("0 virgule 04")
+        self.play(FadeIn(self.t("0,04", 20, ORANGE_RETENUE).next_to(coin, UR, buff=0.05)), run_time=0.3)
+        somme = self.morceler(["64", "+ 1,6", "+ 1,6", "+ 0,04", "= 67,24"], 26, ORANGE_RETENUE).move_to(P(-2.6, -0.6))
+        self.poser_copie([somme], self._pos("0 virgule 04") + 5)
         self.au_mot("Le carré d'un décimal")
         self.play(Write(self.chute("Le carré d'un décimal se calcule entier, sans couper.",
                                    color=VERT_OK, font_size=30)))
@@ -465,7 +477,7 @@ class PythagoreSolide3e(*_BASES):
             ("Ligne un", [("Le triangle OAD est rectangle en A.", "le triangle")], WHITE),
             ("Ligne deux", [("D'après le théorème de Pythagore :", "d'après"), ("OD² = OA² + AD²", "OD au carré")], WHITE),
             ("Ligne trois", [("OA²", "OA au carré"), "= 67,24", "− 3,24", "= 64"], WHITE),
-            ("Ligne quatre", [("OA = √64", "OA égale"), "= 8 cm"], VERT_OK),
+            ("Ligne quatre", [("OA =", "OA égale"), "√64", "= 8 cm"], VERT_OK),  # (01/11) √64 dit
         ]
         ys = [1.9, 0.9, -0.1, -1.1]
         for (mot, morceaux, coul), yy in zip(lignes, ys):
@@ -526,13 +538,13 @@ class PythagoreSolide3e(*_BASES):
         t1 = self.colorie(p["B"], p["C"], p["A"], s=0.16)
         self.play(FadeIn(t1))
         self.play(FadeIn(self.ligne("ABC rectangle en B", 2.0, 30, COUL_DROIT, x=x0)))
-        ac = self.morceler([("AC² = 4² + 3²", "AC au carré"), "= 16", "+ 9", "= 25"], 32, WHITE).move_to(P(x0, 1.35))
+        ac = self.morceler([("AC²", "AC au carré"), "= 4²", "+ 3²", "= 16", "+ 9", "= 25"], 32, WHITE).move_to(P(x0, 1.35))  # (01/11) 4², 3² dits
         d = self.poser_copie([ac], self._pos("Dans le fond"))  # (31/10) chaque nombre à son mot
         self.au_mot("Puis ACG")
         t2 = self.colorie(p["C"], p["G"], p["A"], s=0.18)
         self.play(FadeOut(t1), FadeIn(t2))
         self.play(FadeIn(self.ligne("ACG rectangle en C", 0.55, 30, COUL_DROIT, x=x0)))
-        ag = self.morceler([("AG²", "AG au carré"), "= 25 + 12²", "= 25 + 144", "= 169"], 30, WHITE).move_to(P(x0 + 0.25, -0.1))  # (31/10) ne touche plus le pavé
+        ag = self.morceler([("AG²", "AG au carré"), "= 25", "+ 12²", "= 25", "+ 144", "= 169"], 30, WHITE).move_to(P(x0 + 0.25, -0.1))  # (31/10) ne touche plus le pavé ; (01/11) 12² dit
         self.poser_copie([ag], self._pos("Puis ACG"))
         res = VGroup(self.t("AG =", 44, VERT_OK), self.radical(169, font_size=44, color=VERT_OK),
                      self.t("= 13 cm", 44, VERT_OK)).arrange(RIGHT, buff=0.2).move_to(P(x0, -1.1))
@@ -559,7 +571,18 @@ class PythagoreSolide3e(*_BASES):
         ]
         lignes = VGroup(*[VGroup(self.coche(), self.t(txt, 28)).arrange(RIGHT, buff=0.3) for _, txt in points])
         lignes.arrange(DOWN, aligned_edge=LEFT, buff=0.55).move_to(P(-0.4, 0.5))
+        # (01/11) « 8,2² = 67,24 » est dit : sur la 3e ligne, chaque nombre à son mot
+        l3 = lignes[2][1]
+        mots = self.morceler([("Le carré d'un décimal se calcule entier :", "Le carré d'un décimal"),
+                              "8,2²", "= 67,24."], 28, WHITE)
+        mots.move_to(l3, aligned_edge=LEFT)
+        lignes[2].remove(l3)
+        lignes[2].add(mots)
         for (mot, _), l in zip(points, lignes):
+            if l[1] is mots:
+                self.poser_copie([mots], self._pos(mot) - 1)
+                self.play(Create(l[0]), run_time=0.4)
+                continue
             self.au_mot(mot)
             self.play(FadeIn(l[1], shift=RIGHT * 0.2), run_time=0.6)
             self.play(Create(l[0]), run_time=0.4)

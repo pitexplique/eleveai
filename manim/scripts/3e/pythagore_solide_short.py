@@ -30,7 +30,7 @@ from manim import *  # noqa: E402
 from charte import *  # noqa: E402
 from gabarit_sixieme import Short6e  # noqa: E402
 from pythagore_pauses import PausesShort, sans_audit  # noqa: E402
-from signes_expression_2de import ceinture  # noqa: E402
+from signes_expression_2de import echelle_ceintures  # noqa: E402
 
 
 class ShortGobelet3e(PausesShort, Short6e):
@@ -52,10 +52,11 @@ class ShortGobelet3e(PausesShort, Short6e):
         self.dire("00-accroche")
         titre = VGroup(self.grand("Le triangle caché", font_size=42, color=JAUNE_TITRE),
                        self.grand("dans un gobelet", font_size=34, color=JAUNE_TITRE)).arrange(DOWN, buff=0.1)
-        titre.move_to(P(0, 2.95))
-        badge = VGroup(ceinture("#F97316", 0.8).scale(0.7), self.grand("Ceinture orange", font_size=22, color="#F97316"))
-        badge.arrange(RIGHT, buff=0.18).move_to(P(0, 2.25))
-        g = self.gobelet(cx=0.0, yO=-0.45, yB=1.6, rB=1.25, ech=0.75)
+        titre.move_to(P(0, 3.2))  # (01/11) plus haut : l'échelle passe dessous sans toucher le gobelet
+        # (01/11) l'ÉCHELLE ENTIÈRE des ceintures sous le titre (REGLES.md, 13/10), pas le badge seul
+        badge = echelle_ceintures("orange").scale_to_fit_width(config.frame_width * 0.7)
+        badge.next_to(titre, DOWN, buff=0.14)
+        g = self.gobelet(cx=0.0, yO=-0.52, yB=1.5, rB=1.25, ech=0.75)  # (01/11) un peu plus bas : air sous l'échelle
         self.play(FadeIn(titre), FadeIn(badge), FadeIn(g["corps"]), run_time=0.9)
         self.au_mot("Où est-il")
         q = self.grand("Où est-il ?", font_size=40, color=BLEU_CALCUL).move_to(P(0, -1.4))
@@ -97,10 +98,12 @@ class ShortGobelet3e(PausesShort, Short6e):
         self.au_mot("1 virgule 8")
         self.play(FadeIn(self.t("1,8", 20, COUL_DROIT).next_to(Line(g["A"], g["D"]), UP, buff=0.22)),
                   FadeIn(self.t("?", 26, COTE).next_to(Line(g["O"], g["A"]), LEFT, buff=0.12)))
-        self.play(FadeIn(self.grand("OA² = 8,2² − 1,8²", font_size=30).move_to(P(0, y1))), run_time=0.4)
+        # (01/11) la première ligne est DITE (« OA au carré égale 8 virgule 2 au carré moins… »)
+        l1 = self.morceler([("OA²", "OA au carré"), "= 8,2²", "− 1,8²"], 30, WHITE)
+        l1.scale_to_fit_width(min(l1.width, config.frame_width - 0.6)).move_to(P(0, y1))
         l2 = self.morceler(["= 67,24", "− 3,24", "= 64"], 30, WHITE)
         l2.scale_to_fit_width(min(l2.width, config.frame_width - 0.6)).move_to(P(0, y2))  # comme grand()
-        self.poser_copie([l2], self._pos("AD égale"))
+        self.poser_copie([l1, l2], self._pos("AD égale"))
         self.au_nb("OA égale 8")
         res = self.grand("OA = 8 cm", font_size=40, color=VERT_OK).move_to(P(0, y3))
         self.play(Write(res), oa.animate.set_color(VERT_OK))
@@ -113,8 +116,8 @@ class ShortGobelet3e(PausesShort, Short6e):
         self.dire("03-question")
         self.play(FadeIn(self.grand("À toi !", font_size=56, color=JAUNE_TITRE).move_to(P(0, 2.85))), run_time=0.3)
         # Le cornet : la boule en haut, la pointe en bas.
-        B, S = P(0, 1.65), P(0, -0.65)
-        r = 0.95
+        B, S = P(0, 1.4), P(0, -0.6)  # (01/11) plus bas, plus petit : « À toi ! » ne mord plus sur la boule
+        r = 0.82
         cornet = VGroup(Polygon(B + LEFT * r, B + RIGHT * r, S, stroke_color=WHITE, stroke_width=3,
                                 fill_color="#D97706", fill_opacity=0.45),
                         arc_ellipse(B, r, 0.22, 0, TAU))
