@@ -431,3 +431,13 @@ Sources : essence 1,80 €/L = ordre de grandeur (SP95-E10 ≈ 1,70 €/L en moy
 ]
 ```
 Sources : chocolaterie, recettes et quantités inventées (75 g de chocolat, 15 g de sucre par tablette). Premier agent figé, relancé. Défauts mineurs : sur « Ce que tu as appris », le tableau est petit et laisse un vide ; « 112 500 tablettes » réduit pour tenir dans sa carte.
+
+## 4e 22-graphique (lot 5, rendu le 01/11)
+**Paysage** `4e-prop-graphique` — 3:52, ceinture verte — centres `animaux-marins`, `sciences`
+```json
+[
+  {"t":"01:02","question":"Sur un graphique, des points sont alignés sur une droite qui ne passe pas par l'origine. Est-ce proportionnel ?","choix":["oui","non","seulement si la droite monte"],"reponse":1,"explication":"Il faut les deux : des points alignés, et une droite qui passe par l'origine."},
+  {"t":"02:32","question":"Sur la droite de la pression de l'eau, quelle profondeur pour 1,5 bar ?","choix":["15 m","150 m","1,5 m"],"reponse":0,"explication":"1 bar tous les 10 m : 1,5 × 10 = 15 m."}
+]
+```
+Sources : eau de mer ≈ 1 bar tous les 10 m (1 025 kg/m³ × 9,81 × 10 m ≈ 1,0 bar) ; air ≈ 1 bar en surface (1,013 bar) ; pression totale = 1 + profondeur ÷ 10 (manuels de plongée, niveau 1 FFESSM) ; Noé et ses plongées inventés. Défauts mineurs : le choix C « seulement si la droite monte » est écrit plus petit (≈ 20 pt) ; phrase de réponse de la question 1 assez petite.
