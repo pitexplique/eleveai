@@ -573,3 +573,13 @@ Sources : Mehdi, baskets et prix inventés. Corrigé à la vérification : « 18
 ]
 ```
 Sources : Sacha, compte d'un club de sport, abonnés et vues inventés. Défauts mineurs : énoncés des questions en petits caractères ; flèche 2 000 → 2 400 un peu en biais au piège (le mot « abonnés » sous la boîte).
+
+## 4e 37-pourcentage-defi (lot 5, rendu le 01/11)
+**Paysage** `4e-prop-pourcentage-defi` — 4:02, ceinture verte — centres `cinema-series`, `argent-budget`
+```json
+[
+  {"t":"00:40","question":"− 20 %, puis − 10 % : est-ce − 30 % en tout ?","choix":["Oui : 20 + 10 = 30 %","Non : 28 %","Non : 2 %"],"reponse":1,"explication":"0,8 × 0,9 = 0,72 : on paie 72 % du prix, donc la remise totale est de 28 %, pas de 30 % (7,20 €, pas 7 €)."},
+  {"t":"02:15","question":"Le prix du pop-corn passe de 5 € à 6 €. Quelle hausse ?","choix":["+ 1 %","+ 20 %","≈ + 16,7 %"],"reponse":1,"explication":"6 − 5 = 1 € de plus ; 1 ÷ 5 (le prix de départ) = 0,2, soit + 20 %."}
+]
+```
+Sources : Julia, cinéma, prix et entrées inventés. Corrigé à la vérification : le cadre de « ≈ − 16,7 % » touchait le « 6 » de « 1 ÷ 6 » au piège, l'étiquette « × 0,9 » frôlait la boîte « 7,20 € » (écartés) ; rendu HD refait, bords 0. Défauts mineurs : « 1 € » et « 150 » serrés dans les morceaux des barres.
