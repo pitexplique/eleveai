@@ -28,11 +28,13 @@ from charte import *  # noqa: E402
 from gabarit_sixieme import Short6e  # noqa: E402
 from pythagore_pauses import PausesShort, sans_audit  # noqa: E402
 from gabarit_trigo import COUL_HYP  # noqa: E402
-from signes_expression_2de import ceinture  # noqa: E402
+from signes_expression_2de import echelle_ceintures  # noqa: E402
 
 CANNE = "#3F7D20"
 # Le champ : 40 m sur 30 m, à l'échelle exacte (0,06 unité par mètre → 2,4 × 1,8).
 SO, SE, NE, NO = P(-1.2, -0.15), P(1.2, -0.15), P(1.2, 1.65), P(-1.2, 1.65)
+# (01/11) le haut de l'écran 00 : titre, échelle des ceintures, accroche (au-dessus du champ, haut 1,65).
+Y_TITRE, Y_ECHELLE, Y_ACCROCHE = 3.27, 2.5, 1.96
 
 
 class ShortRaccourci4e(PausesShort, Short6e):
@@ -41,15 +43,19 @@ class ShortRaccourci4e(PausesShort, Short6e):
     t = PythagoreCarreRacine4e.t
     Y_BAS = -2.55  # (31/10) la phrase de correction peut descendre jusqu'au-dessus de Ti-Margo (son haut ≈ −3)
 
+    def echelle_short(self, couleur):
+        """L'échelle des sept ceintures, 70 % de la largeur, entre le titre et l'accroche."""
+        return echelle_ceintures(couleur).scale_to_fit_width(config.frame_width * 0.7).move_to(P(0, Y_ECHELLE))
+
     def construct(self):
         self.margo_bas()
 
         # ── 00 ──
         self.dire("00-accroche")
-        titre = self.grand("Le raccourci", font_size=48, color=JAUNE_TITRE).move_to(P(0, 2.85))
-        badge = VGroup(ceinture("#F5F5F5", 0.8).scale(0.7), self.grand("Ceinture blanche", font_size=22))
-        badge.arrange(RIGHT, buff=0.18).move_to(P(0, 2.3))
-        q = self.grand("Combien de mètres en diagonale ?", font_size=26, color=BLEU_CALCUL).move_to(P(0, 1.9))
+        # (01/11) l'ÉCHELLE ENTIÈRE des ceintures sous le titre (REGLES.md, 13/10), entre le titre et l'accroche.
+        titre = self.grand("Le raccourci", font_size=48, color=JAUNE_TITRE).move_to(P(0, Y_TITRE))
+        badge = self.echelle_short("blanche")
+        q = self.grand("Combien de mètres en diagonale ?", font_size=26, color=BLEU_CALCUL).move_to(P(0, Y_ACCROCHE))
         self.play(FadeIn(titre), FadeIn(badge), run_time=0.8)
         self.au_mot("Combien")
         self.play(FadeIn(q))
@@ -74,11 +80,17 @@ class ShortRaccourci4e(PausesShort, Short6e):
         m = Dot(SO, radius=0.1, color=JAUNE_TITRE)
         self.add(m)
         bords = VGroup(Line(SO, SE), Line(SE, NE)).set_stroke(COTE, 6)
-        l_bords = self.grand("30 + 40 = 70 m", font_size=32, color=COTE).move_to(P(0, y1))
+        # (01/11) la voix dit « 30 plus 40, 70 mètres » : chaque morceau à son nombre.
+        l_bords = VGroup(*[self.t(x, 32, COTE) for x in ("30", "+ 40", "= 70 m")]).arrange(RIGHT, buff=0.15)
+        l_bords.move_to(P(0, y1))
         self.play(Create(bords[0]), m.animate.move_to(SE), run_time=0.5, rate_func=linear)
         self.play(Create(bords[1]), m.animate.move_to(NE), run_time=0.4, rate_func=linear)
-        self.au_nb("bords : 70")
-        self.play(FadeIn(l_bords), run_time=0.3)
+        self.au_nb("bords : 30")
+        self.play(FadeIn(l_bords[0]), run_time=0.3)
+        self.au_nb("30 plus 40")
+        self.play(FadeIn(l_bords[1]), run_time=0.3)
+        self.au_nb("40, 70")
+        self.play(FadeIn(l_bords[2]), run_time=0.3)
 
         self.au_mot("En diagonale")
         self.play(m.animate.move_to(SO), run_time=0.3)
@@ -88,7 +100,7 @@ class ShortRaccourci4e(PausesShort, Short6e):
         self.play(Create(diag), m.animate.move_to(NE), run_time=1.0, rate_func=linear)
         self.au_nb("diagonale : 30")
         self.play(FadeIn(carres[0]), run_time=0.3)
-        self.au_nb("plus 40")
+        self.au_nb("carré plus 40")
         self.play(FadeIn(carres[1]), run_time=0.3)
         self.au_nb("carré, 2500")
         self.play(FadeIn(carres[2]), run_time=0.3)

@@ -231,11 +231,13 @@ class PythagoreCote4e(PythagoreHypotenuse4e):
         faux2 = self.morceaux([self.radical("4 100", font_size=42, color=ROUGE_ERREUR), "≈ 64 m"], 0.7, 42,
                               ROUGE_ERREUR, x=-0.3, buff=0.2)
         self.poser(faux2, ["Racine de 4100", "environ 64"], anim=Write, run_time=0.4)
-        self.au_mot("Plus long que la diagonale")
+        # (01/11) la voix redit « 64 mètres » : la barre « 64 m ? » paraît sur ce mot, la diagonale ensuite.
         b64 = Line(P(-5.5, -0.5), P(-5.5 + 64 * 0.11, -0.5), color=ROUGE_ERREUR, stroke_width=12)
         b50 = Line(P(-5.5, -1.1), P(-5.5 + 50 * 0.11, -1.1), color=COUL_HYP, stroke_width=12)
-        self.play(Create(b50), FadeIn(self.t("la diagonale", 26, COUL_HYP).next_to(b50, RIGHT, buff=0.2)),
-                  Create(b64), FadeIn(self.t("64 m ?", 26, ROUGE_ERREUR).next_to(b64, RIGHT, buff=0.2)), run_time=0.7)
+        self.au_nb("mètres. 64")
+        self.play(Create(b64), FadeIn(self.t("64 m ?", 26, ROUGE_ERREUR).next_to(b64, RIGHT, buff=0.2)), run_time=0.5)
+        self.au_mot("plus long que la diagonale")
+        self.play(Create(b50), FadeIn(self.t("la diagonale", 26, COUL_HYP).next_to(b50, RIGHT, buff=0.2)), run_time=0.5)
         self.au_mot("C'est impossible")
         self.play(Create(Line(faux1.get_left(), faux1.get_right(), color=ROUGE_ERREUR, stroke_width=6)), run_time=0.5)
         self.au_mot("un côté de l'angle droit")
@@ -264,8 +266,9 @@ class PythagoreCote4e(PythagoreHypotenuse4e):
         self.play(FadeIn(self.t("5 cm", 30, COTE).next_to(Line(L, K), LEFT, buff=0.15)),
                   FadeIn(self.t("LM = ?", 30, COTE).next_to(Line(L, Mx), DOWN, buff=0.15)), run_time=0.4)
         # (31/10) chaque nombre À SON MOT ; la calculatrice (« 7,48… ») se LIT, la voix dit « environ 7,5 ».
-        cal = self.morceaux(["LM² = 9² − 5² =", "81", "− 25", "= 56"], 1.4, 36, x=2.6)
-        self.poser(cal, [None, "centimètres. 81", "moins 25", "25 : 56"], run_time=0.35)
+        # (01/11) la voix dit l'égalité (« LM au carré égale 9 au carré moins 5 au carré ») : à son mot.
+        cal = self.morceaux(["LM² =", "9²", "− 5² =", "81", "− 25", "= 56"], 1.4, 36, x=2.6)
+        self.poser(cal, ["LM au carré", "égale 9", "moins 5", "carré : 81", "moins 25", "25, 56"], run_time=0.3)
         rac = VGroup(self.radical(56, font_size=40), sans_audit(self.t("= 7,48…", 40, BLEU_CALCUL)))
         rac.arrange(RIGHT, buff=0.2)
         ecran = SurroundingRectangle(rac, color=GRAY_B, buff=0.25, corner_radius=0.1)

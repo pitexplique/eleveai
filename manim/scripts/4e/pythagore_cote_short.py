@@ -19,7 +19,9 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from pythagore_hypotenuse_short import CANNE, NE, NO, SE, SO, ShortRaccourci4e  # noqa: E402  (pose les chemins)
+from pythagore_hypotenuse_short import (  # noqa: E402  (pose les chemins)
+    CANNE, NE, NO, SE, SO, Y_ACCROCHE, Y_TITRE, ShortRaccourci4e,
+)
 from pythagore_carre_racine import COTE, P  # noqa: E402
 from pythagore_pauses import sans_audit  # noqa: E402
 
@@ -27,21 +29,26 @@ from manim import *  # noqa: E402
 
 from charte import *  # noqa: E402
 from gabarit_trigo import COUL_HYP  # noqa: E402
-from signes_expression_2de import ceinture  # noqa: E402
 
 
 class ShortLargeur4e(ShortRaccourci4e):
     nom_voix = "4e-pythagore-cote-short"
+
+    def poser_short(self, ligne, reperes, run_time=0.3):
+        """Pose ligne[k] quand la voix dit reperes[k] (au_nb s'il y a un nombre, au_mot sinon)."""
+        for m, r in zip(ligne, reperes):
+            (self.au_nb if any(ch.isdigit() for ch in r) else self.au_mot)(r)
+            self.play(FadeIn(m), run_time=run_time)
 
     def construct(self):
         self.margo_bas()
 
         # ── 00 ──
         self.dire("00-accroche")
-        titre = self.grand("La largeur cachée", font_size=44, color=JAUNE_TITRE).move_to(P(0, 2.85))
-        badge = VGroup(ceinture("#F5F5F5", 0.8).scale(0.7), self.grand("Ceinture blanche", font_size=22))
-        badge.arrange(RIGHT, buff=0.18).move_to(P(0, 2.3))
-        q = self.grand("Combien mesure la largeur ?", font_size=26, color=BLEU_CALCUL).move_to(P(0, 1.9))
+        # (01/11) l'ÉCHELLE ENTIÈRE des ceintures sous le titre (echelle_short de l'ép. 3).
+        titre = self.grand("La largeur cachée", font_size=44, color=JAUNE_TITRE).move_to(P(0, Y_TITRE))
+        badge = self.echelle_short("blanche")
+        q = self.grand("Combien mesure la largeur ?", font_size=26, color=BLEU_CALCUL).move_to(P(0, Y_ACCROCHE))
         self.play(FadeIn(titre), FadeIn(badge), run_time=0.8)
         self.au_mot("Combien")
         self.play(FadeIn(q))
@@ -82,8 +89,12 @@ class ShortLargeur4e(ShortRaccourci4e):
         self.au_nb("900 : 30")
         self.play(Write(res[1]), Transform(q_l, self.t("30 m", 24, VERT_OK).next_to(larg, RIGHT, buff=0.06)),
                   run_time=0.4)
+        # (01/11) la voix dit le contrôle (« 30 mètres, c'est plus court que 50 mètres : c'est cohérent »).
+        ctrl = VGroup(*[self.t(x, 26, VERT_OK) for x in ("30 m", "< 50 m", ": c'est cohérent")]).arrange(RIGHT, buff=0.12)
+        if ctrl.width > config.frame_width - 0.6:
+            ctrl.scale_to_fit_width(config.frame_width - 0.6)
+        self.poser_short(ctrl.move_to(P(0, y3)), ["mètres. 30", "que 50", "c'est cohérent"])
         self.play(Circumscribe(res, color=VERT_OK))
-        self.play(FadeIn(self.grand("30 m < 50 m : c'est cohérent", font_size=26, color=VERT_OK).move_to(P(0, y3))))
         self.attendre_voix(marge=0.4)
 
         # ── 01q : la question-pause (3 s) ──

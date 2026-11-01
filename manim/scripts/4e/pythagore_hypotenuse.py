@@ -313,12 +313,15 @@ class PythagoreHypotenuse4e(PausesPaysage, Notion4e):
         self.dire("06-piege-racine")
         # (31/10) titre = ce que dit la voix ; les nombres de l'axe À LEUR MOT (« 50 est entre 40 et 70 »).
         self.titre_ecran("Deuxième piège : oublier la racine")
+        # (01/11) la voix dit l'erreur écrite (« Diagonale égale 2500 mètres ? Non ! »), puis
+        # « 2 500, » paraît sur le 2e « 2500 » et « c'est diagonale² » sur « c'est le carré ».
         faux = self.ligne("diagonale = 2 500 m", 1.8, 46, ROUGE_ERREUR, x=-0.5)
-        self.au_nb("racine. 2500")
+        self.au_nb("égale 2500")
         self.play(Write(faux), run_time=0.6)
-        self.au_mot("c'est le carré de la diagonale")
-        self.play(Create(Line(faux.get_left(), faux.get_right(), color=ROUGE_ERREUR, stroke_width=6)),
-                  FadeIn(self.ligne("2 500, c'est diagonale²", 1.0, 34, ORANGE_RETENUE, x=-0.5)), run_time=0.5)
+        self.au_mot("Non !")
+        self.play(Create(Line(faux.get_left(), faux.get_right(), color=ROUGE_ERREUR, stroke_width=6)), run_time=0.4)
+        vrai = self.morceaux(["2 500,", "c'est diagonale²"], 1.0, 34, ORANGE_RETENUE, x=-0.5)
+        self.poser(vrai, ["Non ! 2500", "c'est le carré de la diagonale"], run_time=0.4)
         self.au_mot("Pour contrôler")
         axe = NumberLine(x_range=[0, 80, 10], length=10, include_numbers=False, color=WHITE).move_to(P(-0.5, -0.6))
         self.play(Create(axe), run_time=0.8)
@@ -364,8 +367,9 @@ class PythagoreHypotenuse4e(PausesPaysage, Notion4e):
         self.play(FadeIn(self.t("7 cm", 30, COTE).next_to(Line(A, B), DOWN, buff=0.15)), run_time=0.4)
         self.wait(0.3)
         # (31/10) chaque nombre À SON MOT ; « 8,602… » sur « 6 0 2 » (la voix l'épelle).
-        cal = self.morceaux(["5² + 7² =", "25", "+ 49", "= 74"], 1.6, 38, x=2.7)
-        self.poser(cal, [None, "centimètres. 25", "plus 49", "49 : 74"], run_time=0.35)
+        # (01/11) la voix dit « 5 au carré plus 7 au carré » : chaque morceau à son mot.
+        cal = self.morceaux(["5²", "+ 7² =", "25", "+ 49", "= 74"], 1.6, 38, x=2.7)
+        self.poser(cal, ["centimètres. 5", "plus 7", "carré : 25", "plus 49", "soit 74"], run_time=0.35)
         r74 = self.radical(74, font_size=40)
         val = sans_audit(self.t("= 8,602…", 40, BLEU_CALCUL))
         rac = VGroup(r74, val).arrange(RIGHT, buff=0.2)
