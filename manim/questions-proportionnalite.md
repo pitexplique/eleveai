@@ -533,3 +533,13 @@ Sources : Bastien et recettes de terreau inventés. Deux rendus HD (le cadre « 
 ]
 ```
 Sources : Awa, Djibril, Marius, Inaya, cachets (1 200 €, 2 000 €) et ventes de tee-shirts (1 500 €) inventés. Défauts mineurs : l'énoncé des questions commence par « 90 € » (ou « 600 € ») seul sur sa ligne, pour le calage ; « 150 € » petits dans les blocs du défi.
+
+## 4e 32-ratio-defi (lot 5, rendu le 01/11)
+**Paysage** `4e-prop-ratio-defi` — 4:20, ceinture verte — centres `sport` (précision `basket`)
+```json
+[
+  {"t":"00:33","question":"Les 6 matchs d'écart : combien de parts ?","choix":["2 parts","8 parts","5 parts"],"reponse":0,"explication":"5 − 3 = 2 parts = 6 matchs, donc 1 part = 3 matchs : 15 + 9 = 24 matchs."},
+  {"t":"01:55","question":"40 min, ratio 3 : 1. Titulaire : ? min","choix":["30 min","10 min","≈ 13 min"],"reponse":0,"explication":"3 + 1 = 4 parts ; 40 ÷ 4 = 10 min ; titulaire : 3 × 10 = 30 min."}
+]
+```
+Sources : match FIBA de 40 min (4 quart-temps de 10 min, règles officielles FIBA) ; Nathan, matchs et paniers inventés. Vérifié : la question 1 (00:33) vient juste après l'exposé du ratio 5 : 3 et des « 6 matchs de plus ». Défauts mineurs : lignes de réponse sous les cartes petites ; trait rouge épais sur « Défaites = 6 matchs » au piège.
