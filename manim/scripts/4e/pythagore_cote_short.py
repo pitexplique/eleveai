@@ -31,6 +31,20 @@ from charte import *  # noqa: E402
 from gabarit_trigo import COUL_HYP  # noqa: E402
 
 
+
+def hors_ligne(lab, a, b, cote, marge=0.14):
+    """(01/11) Pose l'étiquette `lab` près du milieu de [ab], du côté `cote`, sans toucher le segment."""
+    m = (a + b) / 2
+    d = (b - a) / np.linalg.norm(b - a)
+    n = np.array([-d[1], d[0], 0.0])
+    if np.dot(n, cote) < 0:
+        n = -n
+    lab.move_to(m)
+    w, h = lab.width / 2, lab.height / 2
+    # distance au segment du coin le plus proche = |n · centre| − (w|nx| + h|ny|)
+    lab.shift(n * (w * abs(n[0]) + h * abs(n[1]) + marge))
+    return lab
+
 class ShortLargeur4e(ShortRaccourci4e):
     nom_voix = "4e-pythagore-cote-short"
 
@@ -114,7 +128,7 @@ class ShortLargeur4e(ShortRaccourci4e):
         self.au_mot("diagonale 100")
         self.play(Create(Line(r.get_corner(DL), r.get_corner(UR), color=COUL_HYP, stroke_width=7)), run_time=0.4)
         self.au_nb("diagonale 100")
-        self.play(FadeIn(self.t("100 m", 26, COUL_HYP).move_to(r.get_center() + UL * 0.35)), run_time=0.3)
+        self.play(FadeIn(hors_ligne(self.t("100 m", 26, COUL_HYP), r.get_corner(DL), r.get_corner(UR), UL)), run_time=0.3)  # (01/11) ne touche plus la diagonale
         self.au_nb("longueur 80")
         self.play(FadeIn(self.t("80 m", 26, COTE).next_to(r, DOWN, buff=0.08)), run_time=0.3)
         self.au_mot("Combien mesure sa largeur")

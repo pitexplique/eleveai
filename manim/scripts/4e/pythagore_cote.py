@@ -363,9 +363,9 @@ class PythagoreCote4e(PythagoreHypotenuse4e):
         self.dire("09-finale")
         self.play(Write(self.t("Ce que tu as appris", 44, JAUNE_TITRE).to_edge(UP)))
         questions = [
-            ("Repérer que l'hypoténuse", "Repérer que l'hypoténuse est connue ?"),
-            ("Soustraire les carrés", "Soustraire les carrés, puis prendre la racine ?"),
-            ("Vérifier que le côté", "Vérifier que le côté trouvé est plus court que l'hypoténuse ?"),
+            ("Repérer que l'hypoténuse", "Repérer que l'hypoténuse est connue."),
+            ("Soustraire les carrés", "Soustraire les carrés, puis prendre la racine."),
+            ("Vérifier que le côté", "Vérifier que le côté trouvé est plus court que l'hypoténuse."),
         ]
         lignes = VGroup(*[VGroup(self.coche(), self.t(txt, 28)).arrange(RIGHT, buff=0.3) for _, txt in questions])
         lignes.arrange(DOWN, aligned_edge=LEFT, buff=0.55).move_to(P(-0.3, 0.5))

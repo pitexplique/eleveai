@@ -325,9 +325,9 @@ class PythagoreRediger4e(*_BASES):
         self.dire("07-finale")
         self.play(Write(self.t("Ce que tu as appris", 44, JAUNE_TITRE).to_edge(UP)))
         questions = [
-            ("Choisir entre", "Choisir entre le théorème et la réciproque ?"),
-            ("Rédiger le théorème", "Rédiger le théorème en quatre lignes ?"),
-            ("Rédiger la réciproque", "Rédiger la réciproque en quatre lignes ?"),
+            ("Choisir entre", "Choisir entre le théorème et la réciproque."),
+            ("Rédiger le théorème", "Rédiger le théorème en quatre lignes."),
+            ("Rédiger la réciproque", "Rédiger la réciproque en quatre lignes."),
         ]
         lignes = VGroup(*[VGroup(self.coche(), self.t(txt, 30)).arrange(RIGHT, buff=0.3) for _, txt in questions])
         lignes.arrange(DOWN, aligned_edge=LEFT, buff=0.55).move_to(P(-0.3, 0.6))

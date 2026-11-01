@@ -29,6 +29,20 @@ from pythagore_pauses import sans_audit  # noqa: E402
 BETON = "#9CA3AF"
 
 
+
+def hors_ligne(lab, a, b, cote, marge=0.14):
+    """(01/11) Pose l'étiquette `lab` près du milieu de [ab], du côté `cote`, sans toucher le segment."""
+    m = (a + b) / 2
+    d = (b - a) / np.linalg.norm(b - a)
+    n = np.array([-d[1], d[0], 0.0])
+    if np.dot(n, cote) < 0:
+        n = -n
+    lab.move_to(m)
+    w, h = lab.width / 2, lab.height / 2
+    # distance au segment du coin le plus proche = |n · centre| − (w|nx| + h|ny|)
+    lab.shift(n * (w * abs(n[0]) + h * abs(n[1]) + marge))
+    return lab
+
 class ShortDalle4e(ShortCorde4e):
     nom_voix = "4e-pythagore-reciproque-short"
 
@@ -48,7 +62,7 @@ class ShortDalle4e(ShortCorde4e):
 
         # ── 01 ── (31/10) chaque nombre à SON mot (marques)
         self.dire("01-image")
-        u = 0.022
+        u = 0.020  # (01/11) dalle un peu plus petite : le haut ne frôle plus l'accroche
         A = P(-0.7, -0.3)  # (01/11) un peu plus bas : l'accroche est descendue (lignes du bas aussi)
         B, C = A + RIGHT * 60 * u, A + UP * 80 * u
         fond = Polygon(A, B, B + (C - A), C, stroke_width=0, fill_color=BETON, fill_opacity=0.3)
@@ -61,7 +75,7 @@ class ShortDalle4e(ShortCorde4e):
                   FadeIn(self.t("80", 26, COTE).next_to(Line(A, C), LEFT, buff=0.08)), run_time=0.5)
         self.au_nb("et 100")
         self.play(Create(DashedLine(B, C, color=JAUNE_TITRE, stroke_width=6, dash_length=0.12)),
-                  FadeIn(self.t("100", 26, JAUNE_TITRE).move_to((B + C) / 2 + UR * 0.25)), run_time=0.6)
+                  FadeIn(hors_ligne(self.t("100", 26, JAUNE_TITRE), B, C, UR)), run_time=0.6)  # (01/11) ne touche plus la diagonale
 
         def ligne(morceaux, y, color):
             ms = VGroup(*[self.grand(x, font_size=24, color=color) for x, _ in morceaux]).arrange(RIGHT, buff=0.1)

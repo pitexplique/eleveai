@@ -472,9 +472,9 @@ class PythagoreHypotenuse4e(PausesPaysage, Notion4e):
         self.dire("09-finale")
         self.play(Write(self.t("Ce que tu as appris", 44, JAUNE_TITRE).to_edge(UP)))
         questions = [
-            ("Écrire l'égalité", "Écrire l'égalité de Pythagore ?"),
-            ("Additionner les carrés", "Additionner les carrés, puis prendre la racine ?"),
-            ("Arrondir", "Arrondir quand la racine ne tombe pas juste ?"),
+            ("Écrire l'égalité", "Écrire l'égalité de Pythagore."),
+            ("Additionner les carrés", "Additionner les carrés, puis prendre la racine."),
+            ("Arrondir", "Arrondir quand la racine ne tombe pas juste."),
         ]
         lignes = VGroup(*[VGroup(self.coche(), self.t(txt, 30)).arrange(RIGHT, buff=0.3) for _, txt in questions])
         lignes.arrange(DOWN, aligned_edge=LEFT, buff=0.55).move_to(P(-0.3, 0.5))
