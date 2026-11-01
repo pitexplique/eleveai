@@ -6267,7 +6267,7 @@
       "microId": "pythagore_reconnaitre",
       "serie": "Maths 4e",
       "type": "longue",
-      "duree": "03:02",
+      "duree": "03:03",
       "fichier": "4e/maths/pythagore/01-hypotenuse/eleveai-maths-4e-pythagore-reconnaitre.mp4",
       "miniature": "4e/maths/pythagore/01-hypotenuse/eleveai-maths-4e-pythagore-reconnaitre.png",
       "titre": "L'hypoténuse : le plus long côté, sans rien mesurer — Pythagore, épisode 1 · Maths 4e",
@@ -6354,7 +6354,7 @@
       "microId": "pythagore_carre_racine",
       "serie": "Maths 4e",
       "type": "longue",
-      "duree": "03:18",
+      "duree": "03:27",
       "fichier": "4e/maths/pythagore/02-carre-racine/eleveai-maths-4e-pythagore-carre-racine.mp4",
       "miniature": "4e/maths/pythagore/02-carre-racine/eleveai-maths-4e-pythagore-carre-racine.png",
       "titre": "Le carré et la racine carrée, avec des carreaux — Pythagore, épisode 2 · Maths 4e",
@@ -6381,28 +6381,28 @@
           "La racine carrée"
         ],
         [
-          "01:40",
+          "01:43",
           "Un aller-retour"
         ],
         [
-          "01:52",
+          "01:55",
           "Question : √81"
         ],
         [
-          "02:17",
+          "02:20",
           "Pourquoi pour Pythagore"
         ],
         [
-          "02:29",
+          "02:37",
           "Défi"
         ],
         [
-          "02:40",
+          "02:48",
           "Correction"
         ],
         [
-          "02:52",
-          "Ce que tu sais faire"
+          "03:01",
+          "Ce que tu as appris"
         ]
       ],
       "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/pythagore-theoreme",
@@ -6430,7 +6430,7 @@
           "explication": "6² = 6 × 6 = 36, et pas 6 × 2."
         },
         {
-          "t": "01:52",
+          "t": "01:55",
           "question": "√81 = ?",
           "choix": [
             "9",
@@ -6450,7 +6450,7 @@
       "ceinture": "blanche",
       "serie": "Maths 4e",
       "type": "short",
-      "duree": "00:54",
+      "duree": "00:55",
       "renvoie_vers": "4e-pythagore-reconnaitre",
       "fichier": "4e/maths/pythagore/01-hypotenuse/eleveai-maths-4e-pythagore-reconnaitre-short.mp4",
       "miniature": "4e/maths/pythagore/01-hypotenuse/eleveai-maths-4e-pythagore-reconnaitre-short.png",
@@ -6493,7 +6493,7 @@
       "ceinture": "blanche",
       "serie": "Maths 4e",
       "type": "short",
-      "duree": "00:52",
+      "duree": "00:55",
       "renvoie_vers": "4e-pythagore-carre-racine",
       "fichier": "4e/maths/pythagore/02-carre-racine/eleveai-maths-4e-pythagore-carre-racine-short.mp4",
       "miniature": "4e/maths/pythagore/02-carre-racine/eleveai-maths-4e-pythagore-carre-racine-short.png",
@@ -6514,7 +6514,7 @@
       ],
       "questions": [
         {
-          "t": "00:21",
+          "t": "00:24",
           "question": "Terrasse de 3 carreaux sur 3 : combien de carreaux ?",
           "choix": [
             "6",
@@ -6533,7 +6533,7 @@
       "microId": "pythagore_calculer_hypotenuse",
       "serie": "Maths 4e",
       "type": "longue",
-      "duree": "04:50",
+      "duree": "04:57",
       "fichier": "4e/maths/pythagore/03-hypotenuse-calcul/eleveai-maths-4e-pythagore-hypotenuse.mp4",
       "miniature": "4e/maths/pythagore/03-hypotenuse-calcul/eleveai-maths-4e-pythagore-hypotenuse.png",
       "titre": "Calculer l'hypoténuse : le raccourci du champ de cannes — Pythagore, épisode 3 · Maths 4e",
@@ -6568,23 +6568,23 @@
           "Piège 2 : oublier la racine"
         ],
         [
-          "02:46",
+          "02:51",
           "Quand la racine ne tombe pas juste"
         ],
         [
-          "03:11",
+          "03:18",
           "Question : 3 cm et 6 cm"
         ],
         [
-          "03:48",
+          "03:55",
           "Défi"
         ],
         [
-          "04:03",
+          "04:10",
           "Correction"
         ],
         [
-          "04:25",
+          "04:32",
           "Ce que tu as appris"
         ]
       ],
@@ -6614,7 +6614,7 @@
           "explication": "60² + 80² = 3 600 + 6 400 = 10 000 ; √10 000 = 100 cm."
         },
         {
-          "t": "03:11",
+          "t": "03:18",
           "question": "Côtés de l'angle droit 3 cm et 6 cm : l'hypoténuse ≈ ?",
           "choix": [
             "9 cm",
@@ -6634,7 +6634,7 @@
       "ceinture": "blanche",
       "serie": "Maths 4e",
       "type": "short",
-      "duree": "01:04",
+      "duree": "01:06",
       "renvoie_vers": "4e-pythagore-hypotenuse",
       "fichier": "4e/maths/pythagore/03-hypotenuse-calcul/eleveai-maths-4e-pythagore-hypotenuse-short.mp4",
       "miniature": "4e/maths/pythagore/03-hypotenuse-calcul/eleveai-maths-4e-pythagore-hypotenuse-short.png",
@@ -6656,7 +6656,7 @@
       ],
       "questions": [
         {
-          "t": "00:23",
+          "t": "00:25",
           "question": "Cour de 9 m sur 12 m : sa diagonale ?",
           "choix": [
             "21 m",
@@ -6675,7 +6675,7 @@
       "microId": "pythagore_calculer_cote",
       "serie": "Maths 4e",
       "type": "longue",
-      "duree": "04:11",
+      "duree": "04:16",
       "fichier": "4e/maths/pythagore/04-cote/eleveai-maths-4e-pythagore-cote.mp4",
       "miniature": "4e/maths/pythagore/04-cote/eleveai-maths-4e-pythagore-cote.png",
       "titre": "Calculer un côté de l'angle droit : la largeur du champ de cannes — Pythagore, épisode 4 · Maths 4e",
@@ -6706,23 +6706,23 @@
           "Le piège : additionner par habitude"
         ],
         [
-          "02:10",
+          "02:12",
           "Avec un arrondi"
         ],
         [
-          "02:32",
+          "02:37",
           "Question : 13 cm et 12 cm"
         ],
         [
-          "03:08",
+          "03:13",
           "Défi"
         ],
         [
-          "03:24",
+          "03:29",
           "Correction"
         ],
         [
-          "03:44",
+          "03:50",
           "Ce que tu as appris"
         ]
       ],
@@ -6753,7 +6753,7 @@
           "explication": "5² − 3² = 25 − 9 = 16 ; √16 = 4 m."
         },
         {
-          "t": "02:32",
+          "t": "02:37",
           "question": "Hypoténuse 13 cm, un côté 12 cm : l'autre côté ?",
           "choix": [
             "1 cm",
@@ -6773,7 +6773,7 @@
       "ceinture": "blanche",
       "serie": "Maths 4e",
       "type": "short",
-      "duree": "01:00",
+      "duree": "01:04",
       "renvoie_vers": "4e-pythagore-cote",
       "fichier": "4e/maths/pythagore/04-cote/eleveai-maths-4e-pythagore-cote-short.mp4",
       "miniature": "4e/maths/pythagore/04-cote/eleveai-maths-4e-pythagore-cote-short.png",
@@ -6794,7 +6794,7 @@
       ],
       "questions": [
         {
-          "t": "00:18",
+          "t": "00:22",
           "question": "Diagonale 13 m, longueur 5 m : la largeur ?",
           "choix": [
             "8 m",
@@ -6813,7 +6813,7 @@
       "microId": "pythagore_reciproque_verifier",
       "serie": "Maths 4e",
       "type": "longue",
-      "duree": "04:42",
+      "duree": "04:49",
       "fichier": "4e/maths/pythagore/05-verifier/eleveai-maths-4e-pythagore-verifier.mp4",
       "miniature": "4e/maths/pythagore/05-verifier/eleveai-maths-4e-pythagore-verifier.png",
       "titre": "La réciproque de Pythagore (1/2) : vérifier l'égalité avec la corde à 13 nœuds — Pythagore, épisode 5 · Maths 4e",
@@ -6824,47 +6824,47 @@
           "La corde à 13 nœuds"
         ],
         [
-          "00:26",
+          "00:28",
           "Étape 1 : le plus grand côté"
         ],
         [
-          "00:38",
+          "00:40",
           "Étapes 2 et 3 : deux calculs, puis on compare"
         ],
         [
-          "01:03",
+          "01:05",
           "Le piège : écrire « = » trop tôt"
         ],
         [
-          "01:18",
+          "01:25",
           "Question : 6, 8 et 10 cm"
         ],
         [
-          "01:49",
+          "01:56",
           "Quand ce n'est pas égal"
         ],
         [
-          "02:11",
+          "02:17",
           "Les longueurs dans le désordre"
         ],
         [
-          "02:37",
+          "02:44",
           "Question : AB = 8, BC = 5, AC = 6"
         ],
         [
-          "03:18",
+          "03:25",
           "Défi"
         ],
         [
-          "03:34",
+          "03:41",
           "Correction"
         ],
         [
-          "03:53",
+          "04:00",
           "Des triplets à connaître"
         ],
         [
-          "04:18",
+          "04:25",
           "Ce que tu as appris"
         ]
       ],
@@ -6884,7 +6884,7 @@
       ],
       "questions": [
         {
-          "t": "01:18",
+          "t": "01:25",
           "question": "Côtés 6, 8 et 10 cm : 6² + 8² = ?",
           "choix": [
             "14",
@@ -6895,7 +6895,7 @@
           "explication": "36 + 64 = 100, autant que 10²."
         },
         {
-          "t": "02:37",
+          "t": "02:44",
           "question": "AB = 8, BC = 5, AC = 6 : égalité vérifiée ?",
           "choix": [
             "oui : 64 et 64",
@@ -6954,7 +6954,7 @@
       "microId": "pythagore_reciproque_conclure",
       "serie": "Maths 4e",
       "type": "longue",
-      "duree": "04:30",
+      "duree": "04:32",
       "fichier": "4e/maths/pythagore/06-reciproque/eleveai-maths-4e-pythagore-reciproque.mp4",
       "miniature": "4e/maths/pythagore/06-reciproque/eleveai-maths-4e-pythagore-reciproque.png",
       "titre": "La réciproque de Pythagore (2/2) : conclure et rédiger, la dalle du maçon — Pythagore, épisode 6 · Maths 4e",
@@ -7001,7 +7001,7 @@
           "Correction"
         ],
         [
-          "04:01",
+          "04:02",
           "Ce que tu as appris"
         ]
       ],
@@ -7052,7 +7052,7 @@
       "ceinture": "blanche",
       "serie": "Maths 4e",
       "type": "short",
-      "duree": "00:59",
+      "duree": "01:00",
       "renvoie_vers": "4e-pythagore-reciproque",
       "fichier": "4e/maths/pythagore/06-reciproque/eleveai-maths-4e-pythagore-reciproque-short.mp4",
       "miniature": "4e/maths/pythagore/06-reciproque/eleveai-maths-4e-pythagore-reciproque-short.png",
@@ -7092,7 +7092,7 @@
       "microId": "pythagore_rediger",
       "serie": "Maths 4e",
       "type": "longue",
-      "duree": "04:15",
+      "duree": "04:35",
       "fichier": "4e/maths/pythagore/07-rediger/eleveai-maths-4e-pythagore-rediger.mp4",
       "miniature": "4e/maths/pythagore/07-rediger/eleveai-maths-4e-pythagore-rediger.png",
       "titre": "Théorème ou réciproque ? Rédiger avec Pythagore — Pythagore, épisode 7 · Maths 4e",
@@ -7107,35 +7107,35 @@
           "Le théorème, en quatre lignes"
         ],
         [
-          "00:50",
+          "00:52",
           "La réciproque, en quatre lignes"
         ],
         [
-          "01:19",
+          "01:23",
           "Où se place « rectangle en »"
         ],
         [
-          "01:33",
+          "01:36",
           "Question : théorème ou réciproque ?"
         ],
         [
-          "02:00",
+          "02:04",
           "Le piège : mélanger les deux"
         ],
         [
-          "02:19",
+          "02:23",
           "Question : la phrase juste"
         ],
         [
-          "02:53",
+          "02:57",
           "Défi : deux questions"
         ],
         [
-          "03:17",
+          "03:20",
           "Correction"
         ],
         [
-          "03:51",
+          "04:10",
           "Ce que tu as appris"
         ]
       ],
@@ -7156,7 +7156,7 @@
       ],
       "questions": [
         {
-          "t": "01:33",
+          "t": "01:36",
           "question": "ABC est rectangle en A, on cherche BC. On utilise :",
           "choix": [
             "le théorème",
@@ -7167,7 +7167,7 @@
           "explication": "On connaît l'angle droit et on calcule une longueur : le théorème."
         },
         {
-          "t": "02:19",
+          "t": "02:23",
           "question": "Quelle phrase est juste ?",
           "choix": [
             "D'après le théorème de Pythagore, ABC est rectangle.",
@@ -7228,7 +7228,7 @@
       "ceinture": "orange",
       "serie": "Maths 4e",
       "type": "longue",
-      "duree": "02:32",
+      "duree": "02:37",
       "fichier": "4e/maths/pythagore/08-defi-cube/eleveai-maths-4e-pythagore-defi-cube.mp4",
       "miniature": "4e/maths/pythagore/08-defi-cube/eleveai-maths-4e-pythagore-defi-cube.png",
       "titre": "Combien de triangles rectangles dans un cube ? Le défi de Pythagore, corrigé · Maths 4e",
@@ -7259,7 +7259,7 @@
           "Le total, et le piège"
         ],
         [
-          "02:19",
+          "02:24",
           "Et toi ?"
         ]
       ],
@@ -7924,7 +7924,7 @@
       "ceinture": "verte",
       "serie": "Maths 3e",
       "type": "longue",
-      "duree": "04:59",
+      "duree": "05:35",
       "fichier": "3e/maths/pythagore/01-gobelet-brevet/eleveai-maths-3e-pythagore-solide.mp4",
       "miniature": "3e/maths/pythagore/01-gobelet-brevet/eleveai-maths-3e-pythagore-solide.png",
       "titre": "Pythagore dans un solide : le gobelet du brevet 2026 · Maths 3e",
@@ -7955,31 +7955,31 @@
           "Le piège : le carré d'un décimal"
         ],
         [
-          "01:54",
+          "02:18",
           "Question : 1,5²"
         ],
         [
-          "02:21",
+          "02:45",
           "Le même geste dans tous les solides"
         ],
         [
-          "02:44",
+          "03:08",
           "Question : la hauteur du cône"
         ],
         [
-          "03:21",
+          "03:45",
           "Comment rédiger au brevet"
         ],
         [
-          "03:46",
+          "04:12",
           "Défi : la grande diagonale d'un pavé"
         ],
         [
-          "04:06",
+          "04:32",
           "Correction"
         ],
         [
-          "04:32",
+          "05:03",
           "Ce que tu as appris"
         ]
       ],
@@ -8006,7 +8006,7 @@
       ],
       "questions": [
         {
-          "t": "01:54",
+          "t": "02:18",
           "question": "1,5² = ?",
           "choix": [
             "2,25",
@@ -8017,7 +8017,7 @@
           "explication": "1,5 × 1,5 = 2,25 : le carré d'un décimal se calcule entier."
         },
         {
-          "t": "02:44",
+          "t": "03:08",
           "question": "Cône : génératrice 10 cm, rayon 6 cm. Sa hauteur ?",
           "choix": [
             "8 cm",
@@ -8037,7 +8037,7 @@
       "ceinture": "orange",
       "serie": "Maths 3e",
       "type": "short",
-      "duree": "01:01",
+      "duree": "01:07",
       "renvoie_vers": "3e-pythagore-solide",
       "fichier": "3e/maths/pythagore/01-gobelet-brevet/eleveai-maths-3e-pythagore-solide-short.mp4",
       "miniature": "3e/maths/pythagore/01-gobelet-brevet/eleveai-maths-3e-pythagore-solide-short.png",
