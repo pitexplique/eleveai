@@ -493,3 +493,13 @@ Sources : 1,5 kWh par panneau et par jour de soleil = ordre de grandeur d'un pan
 ]
 ```
 Sources : Kenza, jeu, quêtes, niveaux, packs et boss inventés. Défauts mineurs : phrase de réponse de la question 2 assez petite ; « 1 050 » réduit dans sa case.
+
+## 4e 28-ratio-ecrire (lot 5, rendu le 01/11)
+**Paysage** `4e-prop-ratio-ecrire` — 3:29, ceinture verte — centres `art-design` (précision `dessin-manga`)
+```json
+[
+  {"t":"00:50","question":"10 pots de rouge pour 15 pots de blanc. Quel est le ratio simplifié, rouge pour blanc ?","choix":["2 : 3","3 : 2","5 : 10"],"reponse":0,"explication":"10 et 15 se divisent par 5 : 2 pour 3. Rouge pour blanc, dans cet ordre."},
+  {"t":"01:57","question":"Bleu pour jaune : 3 pour 2. Tom a 10 pots de jaune. Combien de bleu ?","choix":["15 pots","11 pots","environ 6,7 pots"],"reponse":0,"explication":"10, c'est 2 fois 5. Donc le bleu, c'est 3 fois 5, égale 15 pots."}
+]
+```
+Sources : Tom, recettes de couleurs et pots inventés. Barres de parts (une rangée par couleur, valeur d'une part dans chaque bloc), piège « + 9 » barré. Défauts mineurs : phrases de réponse sous les cartes petites ; dans la correction, l'étiquette « 3 parts » frôle la ligne « 8 et 12 ÷ 4 ».
