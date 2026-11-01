@@ -48343,6 +48343,1380 @@
         "football",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "4e-prop-agrandissement-rapport",
+      "notionId": "prop_echelle",
+      "microId": "agrandissement_rapport",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/proportionnalite/11-agrandissement-rapport/eleveai-maths-4e-prop-agrandissement-rapport.mp4",
+      "miniature": "4e/maths/proportionnalite/11-agrandissement-rapport/eleveai-maths-4e-prop-agrandissement-rapport.png",
+      "titre": "Agrandir une photo sans écraser le visage ? — Agrandissement et réduction — épisode 11 · Maths 4e",
+      "accroche": "Nina est photographe. Une cliente veut sa photo de 10 cm sur 15 cm en grand, pour son salon : Nina doit l'agrandir avec un rapport 3. Que deviennent les longueurs ? Et pourquoi ne pas simplement ajouter des centimètres ?\n\nDans cette vidéo :\n• agrandir avec un rapport 3, c'est multiplier toutes les longueurs par 3 : 10 cm × 3 = 30 cm, 15 cm × 3 = 45 cm\n• les angles ne changent pas : la forme est gardée, seulement plus grande\n• le piège : ajouter 20 cm à chaque côté écrase le visage ; ajouter déforme, multiplier garde la forme\n• trouver le rapport : on divise une longueur de l'image par celle du modèle (24 ÷ 6 = 4, pas 24 − 6)\n• une réduction de rapport 1/4 divise les longueurs par 4\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Nina agrandit une photo de 9 cm sur 13 cm avec un rapport 4. Quelles sont les dimensions du poster ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/prop-echelle\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/prop-echelle\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_echelle&microId=agrandissement_rapport&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Nina, photographe"
+        ],
+        [
+          "00:22",
+          "Agrandir : multiplier par 3"
+        ],
+        [
+          "00:42",
+          "La forme ne change pas"
+        ],
+        [
+          "00:54",
+          "Question : rapport 2"
+        ],
+        [
+          "01:29",
+          "Le piège : ajouter 20 cm"
+        ],
+        [
+          "01:53",
+          "Trouver le rapport : diviser"
+        ],
+        [
+          "02:19",
+          "Question : le timbre"
+        ],
+        [
+          "02:50",
+          "Réduire : rapport 1/4"
+        ],
+        [
+          "03:12",
+          "À toi de jouer"
+        ],
+        [
+          "03:27",
+          "Correction"
+        ],
+        [
+          "03:43",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/prop-echelle",
+      "tags": [
+        "agrandissement",
+        "réduction",
+        "rapport d'agrandissement",
+        "multiplier les longueurs",
+        "photo",
+        "photographe",
+        "poster",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:54",
+          "question": "Une photo mesure 8 cm sur 12 cm. On l'agrandit avec un rapport 2. Quelle est sa nouvelle longueur ?",
+          "choix": [
+            "14 cm",
+            "24 cm",
+            "10 cm"
+          ],
+          "reponse": 1,
+          "explication": "12 × 2 = 24 cm. On multiplie, on n'ajoute pas."
+        },
+        {
+          "t": "02:19",
+          "question": "Un timbre mesure 3 cm de haut. Son agrandissement mesure 15 cm de haut. Quel est le rapport d'agrandissement ?",
+          "choix": [
+            "12",
+            "18",
+            "5"
+          ],
+          "reponse": 2,
+          "explication": "15 ÷ 3 = 5. Le rapport est 5."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "reseaux-sociaux"
+      ]
+    },
+    {
+      "id": "4e-prop-agrandissement-rapport-short",
+      "notionId": "prop_echelle",
+      "microId": "agrandissement_rapport",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-prop-agrandissement-rapport",
+      "fichier": "4e/maths/proportionnalite/11-agrandissement-rapport/eleveai-maths-4e-prop-agrandissement-rapport-short.mp4",
+      "miniature": "4e/maths/proportionnalite/11-agrandissement-rapport/eleveai-maths-4e-prop-agrandissement-rapport-short.png",
+      "titre": "Agrandir la photo du chat en ajoutant des cm ? 🐱 — 4e #Shorts",
+      "accroche": "Une photo de chat : 4 cm de large, 6 cm de haut. On ajoute 4 cm partout : 8 cm sur 10 cm, le chat est tout écrasé ! On multiplie tout par 2 : 8 cm sur 12 cm, le chat garde sa forme. Il est juste 2 fois plus grand.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Une photo de 6 cm sur 9 cm est agrandie : sa largeur devient 30 cm. Combien mesure sa hauteur ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_echelle&microId=agrandissement_rapport&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #agrandissement #proportionnalité #4e #collège",
+      "tags": [
+        "agrandissement",
+        "rapport d'agrandissement",
+        "multiplier ou ajouter",
+        "photo",
+        "chat",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:30",
+          "question": "Une photo de 5 cm sur 7 cm est agrandie avec un rapport 3. Elle mesure…",
+          "choix": [
+            "8 cm sur 10 cm",
+            "15 cm sur 21 cm",
+            "15 cm sur 7 cm"
+          ],
+          "reponse": 1,
+          "explication": "5 × 3 = 15 ; 7 × 3 = 21. On multiplie tout."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "reseaux-sociaux"
+      ]
+    },
+    {
+      "id": "4e-prop-agrandissement-aire",
+      "notionId": "prop_echelle",
+      "microId": "agrandissement_aire",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/proportionnalite/12-agrandissement-aire/eleveai-maths-4e-prop-agrandissement-aire.mp4",
+      "miniature": "4e/maths/proportionnalite/12-agrandissement-aire/eleveai-maths-4e-prop-agrandissement-aire.png",
+      "titre": "Pourquoi 4 fois plus de pâte à sucre ? — Agrandissement et aires — épisode 12 · Maths 4e",
+      "accroche": "Adam est pâtissier. Son gâteau carré de 20 cm de côté est recouvert de pâte à sucre. Pour un mariage, on lui commande le même gâteau, 2 fois plus grand. Lui faut-il 2 fois plus de pâte à sucre ?\n\nDans cette vidéo :\n• 20 cm × 20 cm = 400 cm² ; 40 cm × 40 cm = 1 600 cm² : le grand gâteau tient 4 petits\n• rapport 2 : l'aire est multipliée par 2 × 2 = 4 ; rapport 3 : par 3 × 3 = 9\n• avec un rapport k, l'aire est multipliée par k au carré\n• le piège : multiplier l'aire par 3 seulement (une aire, ce sont deux longueurs multipliées)\n• dans l'autre sens : une aire × 25, ce sont des longueurs × 5\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Le dessus d'une tarte a une aire de 150 cm². Adam l'agrandit avec un rapport 4. Quelle est la nouvelle aire ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/prop-echelle\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/prop-echelle\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_echelle&microId=agrandissement_aire&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Adam, pâtissier"
+        ],
+        [
+          "00:26",
+          "Les deux aires : 400 et 1 600 cm²"
+        ],
+        [
+          "00:43",
+          "4 petits gâteaux dans le grand"
+        ],
+        [
+          "00:59",
+          "Question : on double le carré"
+        ],
+        [
+          "01:24",
+          "Rapport 3 : l'aire × 9"
+        ],
+        [
+          "01:45",
+          "Le piège : l'aire × 3"
+        ],
+        [
+          "02:06",
+          "Question : 300 cm²"
+        ],
+        [
+          "02:45",
+          "Dans l'autre sens : 25 = 5 × 5"
+        ],
+        [
+          "03:08",
+          "Question : l'aire × 9"
+        ],
+        [
+          "03:36",
+          "À toi de jouer"
+        ],
+        [
+          "03:52",
+          "Correction"
+        ],
+        [
+          "04:06",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/prop-echelle",
+      "tags": [
+        "agrandissement et aire",
+        "aire multipliée par k²",
+        "rapport d'agrandissement",
+        "aire",
+        "pâtissier",
+        "gâteau",
+        "pâtisserie",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:59",
+          "question": "On double toutes les longueurs d'un carré. Son aire est multipliée par…",
+          "choix": [
+            "2",
+            "4",
+            "8"
+          ],
+          "reponse": 1,
+          "explication": "2 × 2 = 4. L'aire est multipliée par 4."
+        },
+        {
+          "t": "02:06",
+          "question": "Le dessus d'un gâteau : 300 cm². On l'agrandit avec un rapport 2. Quelle est la nouvelle aire ?",
+          "choix": [
+            "600 cm²",
+            "1 200 cm²",
+            "2 400 cm²"
+          ],
+          "reponse": 1,
+          "explication": "Rapport 2 : aire × 4. 300 cm² × 4 = 1 200 cm²."
+        },
+        {
+          "t": "03:08",
+          "question": "L'aire d'un gâteau a été multipliée par 9. Et ses longueurs ?",
+          "choix": [
+            "× 9",
+            "× 3",
+            "× 81"
+          ],
+          "reponse": 1,
+          "explication": "3 × 3 = 9. Les longueurs : × 3."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "4e-prop-agrandissement-aire-short",
+      "notionId": "prop_echelle",
+      "microId": "agrandissement_aire",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-prop-agrandissement-aire",
+      "fichier": "4e/maths/proportionnalite/12-agrandissement-aire/eleveai-maths-4e-prop-agrandissement-aire-short.mp4",
+      "miniature": "4e/maths/proportionnalite/12-agrandissement-aire/eleveai-maths-4e-prop-agrandissement-aire-short.png",
+      "titre": "Une grande pizza ou deux petites : laquelle nourrit le plus ? 🍕 — 4e #Shorts",
+      "accroche": "La petite pizza mesure 15 cm de large, la grande 30 cm : 2 fois plus large. Elle est 2 fois plus large dans tous les sens : 2 × 2 = 4. Par la surface, la grande pizza vaut 4 petites, pas 2 !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Une pizza géante de 60 cm vaut combien de pizzas de 15 cm ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_echelle&microId=agrandissement_aire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #agrandissement #proportionnalité #4e #collège",
+      "tags": [
+        "agrandissement et aire",
+        "aire",
+        "pizza",
+        "surface",
+        "cuisine",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:29",
+          "question": "Une pizza de 45 cm et une pizza de 15 cm. La grande vaut combien de petites ?",
+          "choix": [
+            "3",
+            "9",
+            "27"
+          ],
+          "reponse": 1,
+          "explication": "3 fois plus large : 3 × 3 = 9 petites pizzas."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "4e-prop-agrandissement-volume",
+      "notionId": "prop_echelle",
+      "microId": "agrandissement_volume",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/proportionnalite/13-agrandissement-volume/eleveai-maths-4e-prop-agrandissement-volume.mp4",
+      "miniature": "4e/maths/proportionnalite/13-agrandissement-volume/eleveai-maths-4e-prop-agrandissement-volume.png",
+      "titre": "Un bac 2 fois plus grand, 8 fois plus d'eau ? — Agrandissement et volumes — épisode 13 · Maths 4e",
+      "accroche": "Louise est soigneuse dans un aquarium public. Le bac de ses poissons-clowns mesure 40 cm sur 20 cm sur 25 cm. Elle veut un bac 2 fois plus grand dans chaque dimension. Combien de litres d'eau lui faudra-t-il ?\n\nDans cette vidéo :\n• le petit bac : 40 × 20 × 25 = 20 000 cm³, soit 20 L\n• le grand bac contient 2 × 2 × 2 = 8 petits bacs : 160 L\n• avec un rapport k, le volume est multiplié par k au cube : longueurs × 2, aires × 4, volumes × 8\n• le piège : prévoir 40 L (× 2, comme une longueur) ou 80 L (× 4, comme une aire)\n• une maquette au 1/10 contient 1 000 fois moins : 500 000 L → 500 L\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Un bac de 50 L est agrandi avec un rapport 2. Louise met 1 poisson pour 10 L d'eau. Combien de poissons dans le grand bac ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/prop-echelle\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/prop-echelle\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_echelle&microId=agrandissement_volume&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Louise, soigneuse d'aquarium"
+        ],
+        [
+          "00:25",
+          "Le petit bac : 20 litres"
+        ],
+        [
+          "00:38",
+          "8 petits bacs dans le grand"
+        ],
+        [
+          "00:59",
+          "Question : le cube de 1 L"
+        ],
+        [
+          "01:27",
+          "La règle : k au cube"
+        ],
+        [
+          "01:43",
+          "Le piège : 40 L ou 80 L"
+        ],
+        [
+          "02:03",
+          "Question : rapport 3"
+        ],
+        [
+          "02:36",
+          "La maquette au 1/10"
+        ],
+        [
+          "03:02",
+          "À toi de jouer"
+        ],
+        [
+          "03:19",
+          "Correction"
+        ],
+        [
+          "03:35",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/prop-echelle",
+      "tags": [
+        "agrandissement et volume",
+        "volume multiplié par k³",
+        "rapport d'agrandissement",
+        "volume",
+        "litres",
+        "aquarium",
+        "soigneuse",
+        "poissons",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:59",
+          "question": "On double toutes les longueurs d'un cube de 1 L. Son nouveau volume ?",
+          "choix": [
+            "2 L",
+            "4 L",
+            "8 L"
+          ],
+          "reponse": 2,
+          "explication": "2 × 2 × 2 = 8 ; le cube contient 8 L."
+        },
+        {
+          "t": "02:03",
+          "question": "Un bac de 10 L est agrandi avec un rapport 3. Son nouveau volume ?",
+          "choix": [
+            "30 L",
+            "90 L",
+            "270 L"
+          ],
+          "reponse": 2,
+          "explication": "3 × 3 × 3 = 27 ; 10 × 27 = 270 L."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "sciences"
+      ]
+    },
+    {
+      "id": "4e-prop-agrandissement-volume-short",
+      "notionId": "prop_echelle",
+      "microId": "agrandissement_volume",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-prop-agrandissement-volume",
+      "fichier": "4e/maths/proportionnalite/13-agrandissement-volume/eleveai-maths-4e-prop-agrandissement-volume-short.mp4",
+      "miniature": "4e/maths/proportionnalite/13-agrandissement-volume/eleveai-maths-4e-prop-agrandissement-volume-short.png",
+      "titre": "Combien de petits dés pour construire un dé géant ? 🎲 — 4e #Shorts",
+      "accroche": "Le dé géant est 2 fois plus grand dans chaque sens : 2 dés en longueur, 2 en largeur, 2 en hauteur. 2 × 2 × 2 = 8 dés, pas 2 !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Un dé 4 fois plus grand dans chaque sens : combien de petits dés faut-il ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_echelle&microId=agrandissement_volume&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #agrandissement #proportionnalité #4e #collège",
+      "tags": [
+        "agrandissement et volume",
+        "volume",
+        "cube",
+        "dé",
+        "jeux",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:17",
+          "question": "Un dé 3 fois plus grand dans chaque sens. Combien de petits dés ?",
+          "choix": [
+            "3",
+            "9",
+            "27"
+          ],
+          "reponse": 2,
+          "explication": "3 × 3 × 3 = 27 dés."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "4e-prop-grandeur-produit",
+      "notionId": "grandeur_composee",
+      "microId": "grandeur_produit",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/proportionnalite/14-grandeur-produit/eleveai-maths-4e-prop-grandeur-produit.mp4",
+      "miniature": "4e/maths/proportionnalite/14-grandeur-produit/eleveai-maths-4e-prop-grandeur-produit.png",
+      "titre": "Combien coûte un radiateur allumé 5 h ? — Les grandeurs produits — épisode 14 · Maths 4e",
+      "accroche": "Rayan est électricien. Une famille trouve sa facture d'électricité trop chère. Le radiateur de la chambre a une puissance de 2 kW et chauffe 5 heures par jour. Quelle énergie consomme-t-il, et combien coûte-t-elle ?\n\nDans cette vidéo :\n• l'énergie, c'est la puissance fois la durée : 2 kW × 5 h = 10 kWh\n• on multiplie les nombres ET les unités : kilowatt × heure = kilowattheure ; mètre × mètre = mètre carré\n• une grandeur produit vient d'une multiplication ; une grandeur quotient (km/h) vient d'une division\n• le piège : additionner des kW et des heures, ou les diviser\n• la facture : au tarif réglementé d'EDF du 1er août 2025, environ 0,20 € le kWh, soit 2 € par jour\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Un chauffe-eau de 3 kW fonctionne pendant 4 heures. Quelle énergie consomme-t-il ? Et combien coûte-t-elle, à 0,20 € le kWh ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/grandeur-composee\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/grandeur-composee\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=grandeur_composee&microId=grandeur_produit&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Rayan, électricien"
+        ],
+        [
+          "00:23",
+          "Puissance × durée = énergie"
+        ],
+        [
+          "00:38",
+          "Une grandeur produit : comme l'aire"
+        ],
+        [
+          "00:54",
+          "Question : le four"
+        ],
+        [
+          "01:23",
+          "Le piège : additionner kW et h"
+        ],
+        [
+          "01:40",
+          "L'autre famille : les quotients"
+        ],
+        [
+          "01:58",
+          "Question : quelle grandeur produit ?"
+        ],
+        [
+          "02:27",
+          "La facture : 2 € par jour"
+        ],
+        [
+          "02:47",
+          "À toi de jouer"
+        ],
+        [
+          "03:05",
+          "Correction"
+        ],
+        [
+          "03:16",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/grandeur-composee",
+      "tags": [
+        "grandeur produit",
+        "grandeurs composées",
+        "kilowattheure",
+        "énergie",
+        "puissance",
+        "électricien",
+        "facture d'électricité",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:54",
+          "question": "Un four de 3 kW chauffe pendant 2 h. Quelle énergie consomme-t-il ?",
+          "choix": [
+            "6 kWh",
+            "1,5 kW/h",
+            "5 kWh"
+          ],
+          "reponse": 0,
+          "explication": "3 kW × 2 h = 6 kWh."
+        },
+        {
+          "t": "01:58",
+          "question": "Laquelle est une grandeur produit ?",
+          "choix": [
+            "une aire, en m²",
+            "une vitesse, en km/h",
+            "un prix, en €/kg"
+          ],
+          "reponse": 0,
+          "explication": "Une aire, c'est une longueur fois une largeur : un produit."
+        }
+      ],
+      "centres": [
+        "sciences",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "4e-prop-grandeur-produit-short",
+      "notionId": "grandeur_composee",
+      "microId": "grandeur_produit",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-prop-grandeur-produit",
+      "fichier": "4e/maths/proportionnalite/14-grandeur-produit/eleveai-maths-4e-prop-grandeur-produit-short.mp4",
+      "miniature": "4e/maths/proportionnalite/14-grandeur-produit/eleveai-maths-4e-prop-grandeur-produit-short.png",
+      "titre": "Combien de chambres tiennent sur un terrain de foot ? ⚽ — 4e #Shorts",
+      "accroche": "La FIFA recommande un terrain de 105 m sur 68 m. Son aire : 105 m × 68 m = 7 140 m² (mètre fois mètre : mètre carré). Une chambre fait environ 10 m² : 7 140 ÷ 10 = 714 chambres sur la pelouse !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Un terrain de basket mesure 28 m sur 15 m. Quelle est son aire ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=grandeur_composee&microId=grandeur_produit&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #grandeurs #proportionnalité #4e #collège",
+      "tags": [
+        "grandeur produit",
+        "aire",
+        "m²",
+        "terrain de foot",
+        "football",
+        "sport",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:31",
+          "question": "105 m × 68 m : quelle est l'unité du résultat ?",
+          "choix": [
+            "m",
+            "m²",
+            "m³"
+          ],
+          "reponse": 1,
+          "explication": "Deux longueurs multipliées donnent des mètres carrés."
+        }
+      ],
+      "centres": [
+        "sport"
+      ]
+    },
+    {
+      "id": "4e-prop-grandeur-quotient",
+      "notionId": "grandeur_composee",
+      "microId": "grandeur_quotient",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/proportionnalite/15-grandeur-quotient/eleveai-maths-4e-prop-grandeur-quotient.mp4",
+      "miniature": "4e/maths/proportionnalite/15-grandeur-quotient/eleveai-maths-4e-prop-grandeur-quotient.png",
+      "titre": "À quelle vitesse roule le TGV de Manon ? — Les grandeurs quotients — épisode 15 · Maths 4e",
+      "accroche": "Manon est conductrice de TGV. Sur la ligne à grande vitesse, son train parcourt 600 km en 2 heures. À quelle vitesse moyenne roule-t-elle ?\n\nDans cette vidéo :\n• la vitesse, c'est la distance divisée par la durée : 600 km ÷ 2 h = 300 km/h\n• la barre de l'unité se lit « par » : 300 km/h, c'est 300 km en 1 heure\n• une vitesse moyenne : le train accélère et freine\n• le piège : diviser 2 h par 600 km donne des h/km, pas une vitesse ; l'unité dit l'ordre\n• le prix au kilo est aussi un quotient : 6 € ÷ 3 kg = 2 €/kg\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Une cycliste parcourt 160 km en 4 heures. Quelle est sa vitesse moyenne ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/grandeur-composee\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/grandeur-composee\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=grandeur_composee&microId=grandeur_quotient&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Manon, conductrice de TGV"
+        ],
+        [
+          "00:19",
+          "Distance ÷ durée = vitesse"
+        ],
+        [
+          "00:33",
+          "300 km/h : 300 km en 1 heure"
+        ],
+        [
+          "00:53",
+          "Question : le train"
+        ],
+        [
+          "01:28",
+          "Le piège : 2 h ÷ 600 km"
+        ],
+        [
+          "01:47",
+          "Le prix au kilo"
+        ],
+        [
+          "02:03",
+          "Question : les pommes"
+        ],
+        [
+          "02:35",
+          "À toi de jouer"
+        ],
+        [
+          "02:57",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/grandeur-composee",
+      "tags": [
+        "grandeur quotient",
+        "grandeurs composées",
+        "vitesse moyenne",
+        "km/h",
+        "prix au kilo",
+        "TGV",
+        "conductrice de train",
+        "train",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:53",
+          "question": "Un train : 450 km en 3 heures. Sa vitesse moyenne ?",
+          "choix": [
+            "150 km/h",
+            "150 h/km",
+            "1 350 km/h"
+          ],
+          "reponse": 0,
+          "explication": "450 km ÷ 3 h = 150 km/h."
+        },
+        {
+          "t": "02:03",
+          "question": "4 kg de pommes : 10 €. Le prix au kilo ?",
+          "choix": [
+            "0,40 €/kg",
+            "2,50 €/kg",
+            "40 €/kg"
+          ],
+          "reponse": 1,
+          "explication": "10 € ÷ 4 kg = 2,50 €/kg."
+        }
+      ],
+      "centres": [
+        "transports",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "4e-prop-grandeur-quotient-short",
+      "notionId": "grandeur_composee",
+      "microId": "grandeur_quotient",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-prop-grandeur-quotient",
+      "fichier": "4e/maths/proportionnalite/15-grandeur-quotient/eleveai-maths-4e-prop-grandeur-quotient-short.mp4",
+      "miniature": "4e/maths/proportionnalite/15-grandeur-quotient/eleveai-maths-4e-prop-grandeur-quotient-short.png",
+      "titre": "Ton cœur bat-il plus vite que ta chanson préférée ? 🎵 — 4e #Shorts",
+      "accroche": "Au repos, le cœur d'un adulte bat en général entre 60 et 100 fois par minute. Une chanson se mesure en BPM, battements par minute. Un DJ compte 30 battements en 15 secondes, un quart de minute : 30 × 4 = 120 BPM. La chanson va plus vite qu'un cœur au repos !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Une chanson fait 25 battements en 10 secondes. Combien de BPM ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=grandeur_composee&microId=grandeur_quotient&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #grandeurs #proportionnalité #4e #collège",
+      "tags": [
+        "grandeur quotient",
+        "BPM",
+        "battements par minute",
+        "cœur",
+        "musique",
+        "DJ",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:33",
+          "question": "60 battements en 30 secondes. Combien de BPM ?",
+          "choix": [
+            "120 BPM",
+            "30 BPM",
+            "2 BPM"
+          ],
+          "reponse": 0,
+          "explication": "30 s : une demi-minute. 1 min : 60 × 2 = 120 BPM."
+        }
+      ],
+      "centres": [
+        "musique",
+        "corps-sante"
+      ]
+    },
+    {
+      "id": "4e-prop-grandeur-unite",
+      "notionId": "grandeur_composee",
+      "microId": "grandeur_unite_composee",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/proportionnalite/16-grandeur-unite/eleveai-maths-4e-prop-grandeur-unite.mp4",
+      "miniature": "4e/maths/proportionnalite/16-grandeur-unite/eleveai-maths-4e-prop-grandeur-unite.png",
+      "titre": "20 000 habitants par km², ça veut dire quoi ? — L'unité composée — épisode 16 · Maths 4e",
+      "accroche": "Malik est géographe : il étudie où vivent les gens. D'après l'Insee, Paris compte environ 2 100 000 habitants sur 105 km². Combien d'habitants pour 1 km² ? Et comment écrire l'unité du résultat ?\n\nDans cette vidéo :\n• 2 100 000 ÷ 105 = 20 000 : l'unité se divise aussi, 20 000 hab/km²\n• la barre se lit « par », et « par » veut dire « pour 1 » : 20 000 habitants pour 1 km², c'est la densité\n• la règle : l'unité subit la même opération que les nombres (kW × h = kWh ; km ÷ h = km/h)\n• le piège : 105 ÷ 2 100 000 donne des km² par habitant, ce n'est plus une densité\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Un village compte 600 habitants sur 12 km². Quelle est sa densité, unité comprise ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/grandeur-composee\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/grandeur-composee\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=grandeur_composee&microId=grandeur_unite_composee&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Malik, géographe"
+        ],
+        [
+          "00:23",
+          "Diviser les nombres et les unités"
+        ],
+        [
+          "00:40",
+          "« Par » veut dire « pour 1 »"
+        ],
+        [
+          "00:55",
+          "Question : 20 000 hab/km²"
+        ],
+        [
+          "01:25",
+          "La règle : l'unité suit le calcul"
+        ],
+        [
+          "01:46",
+          "Question : L ÷ min"
+        ],
+        [
+          "02:17",
+          "Le piège : diviser à l'envers"
+        ],
+        [
+          "02:36",
+          "À toi de jouer"
+        ],
+        [
+          "02:51",
+          "Correction"
+        ],
+        [
+          "03:06",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/grandeur-composee",
+      "tags": [
+        "unité composée",
+        "grandeurs composées",
+        "densité de population",
+        "habitants par km²",
+        "géographe",
+        "géographie",
+        "Paris",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:55",
+          "question": "Que veut dire 20 000 hab/km² ?",
+          "choix": [
+            "20 000 hab pour 1 km²",
+            "20 000 km² pour 1 hab",
+            "20 000 hab en tout"
+          ],
+          "reponse": 0,
+          "explication": "« Par » veut dire « pour 1 » : 20 000 habitants pour 1 km²."
+        },
+        {
+          "t": "01:46",
+          "question": "On divise des litres (L) par des minutes (min). L'unité du résultat ?",
+          "choix": [
+            "L/min",
+            "min/L",
+            "L × min"
+          ],
+          "reponse": 0,
+          "explication": "L ÷ min = L/min : des litres par minute, c'est un débit."
+        }
+      ],
+      "centres": [
+        "histoire-geographie"
+      ]
+    },
+    {
+      "id": "4e-prop-grandeur-unite-short",
+      "notionId": "grandeur_composee",
+      "microId": "grandeur_unite_composee",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-prop-grandeur-unite",
+      "fichier": "4e/maths/proportionnalite/16-grandeur-unite/eleveai-maths-4e-prop-grandeur-unite-short.mp4",
+      "miniature": "4e/maths/proportionnalite/16-grandeur-unite/eleveai-maths-4e-prop-grandeur-unite-short.png",
+      "titre": "Faire le tour de la Terre en une seconde ? La lumière, oui ! 💡 — 4e #Shorts",
+      "accroche": "La lumière va à environ 300 000 km/s : 300 000 km pour 1 seconde. Le tour de la Terre fait environ 40 000 km. 300 000 ÷ 40 000 = 7,5 : en 1 seconde, la lumière fait 7 tours et demi de la Terre !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : La Lune est à environ 384 000 km. Combien de secondes sa lumière met-elle pour arriver jusqu'à nous ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=grandeur_composee&microId=grandeur_unite_composee&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #grandeurs #proportionnalité #4e #collège",
+      "tags": [
+        "unité composée",
+        "km/s",
+        "vitesse de la lumière",
+        "lumière",
+        "Terre",
+        "espace",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:31",
+          "question": "300 000 km/s, ça veut dire…",
+          "choix": [
+            "300 000 km en 1 s",
+            "300 000 s pour 1 km",
+            "300 000 km en tout"
+          ],
+          "reponse": 0,
+          "explication": "« Par » veut dire « pour 1 » : 300 000 km en 1 seconde."
+        }
+      ],
+      "centres": [
+        "espace",
+        "sciences"
+      ]
+    },
+    {
+      "id": "4e-prop-grandeur-convertir",
+      "notionId": "grandeur_composee",
+      "microId": "grandeur_convertir",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/proportionnalite/17-grandeur-convertir/eleveai-maths-4e-prop-grandeur-convertir.mp4",
+      "miniature": "4e/maths/proportionnalite/17-grandeur-convertir/eleveai-maths-4e-prop-grandeur-convertir.png",
+      "titre": "Combien de carreaux pour 6 m² de cuisine ? — Convertir des aires — épisode 17 · Maths 4e",
+      "accroche": "Aïcha est carreleuse. Elle doit carreler le sol d'une cuisine de 6 m² avec des carreaux de 20 cm sur 20 cm. Combien de carreaux faut-il ? D'abord, la même unité partout.\n\nDans cette vidéo :\n• 1 m = 100 cm : 2,5 m = 250 cm\n• 1 m² = 100 cm × 100 cm = 10 000 cm², pas 100 cm²\n• la cuisine : 60 000 cm² ÷ 400 cm² = 150 carreaux\n• le piège : 6 m² = 600 cm² donnerait un carreau et demi pour toute la cuisine\n• un débit : 12 L/min, c'est 12 × 60 = 720 L/h (1 h = 60 min, pas 100)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Aïcha carrelle un mur de 2 m², avec des carreaux de 10 cm sur 10 cm. Combien de carreaux faut-il ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/grandeur-composee\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/grandeur-composee\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=grandeur_composee&microId=grandeur_convertir&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Aïcha, carreleuse"
+        ],
+        [
+          "00:25",
+          "Les longueurs : 1 m = 100 cm"
+        ],
+        [
+          "00:40",
+          "Les aires : 1 m² = 10 000 cm²"
+        ],
+        [
+          "00:56",
+          "Question : 1 m² en cm²"
+        ],
+        [
+          "01:22",
+          "La cuisine : 150 carreaux"
+        ],
+        [
+          "01:39",
+          "Le piège : 6 m² = 600 cm² ?"
+        ],
+        [
+          "02:01",
+          "Un débit : L/min en L/h"
+        ],
+        [
+          "02:18",
+          "Question : le robinet"
+        ],
+        [
+          "02:49",
+          "À toi de jouer"
+        ],
+        [
+          "03:05",
+          "Correction"
+        ],
+        [
+          "03:19",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/grandeur-composee",
+      "tags": [
+        "convertir des aires",
+        "m² en cm²",
+        "conversion",
+        "grandeurs composées",
+        "débit",
+        "carreleuse",
+        "carrelage",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:56",
+          "question": "Combien de cm² dans 1 m² ?",
+          "choix": [
+            "100 cm²",
+            "1 000 cm²",
+            "10 000 cm²"
+          ],
+          "reponse": 2,
+          "explication": "1 m² = 100 cm × 100 cm = 10 000 cm² : le facteur 100 compte deux fois."
+        },
+        {
+          "t": "02:18",
+          "question": "Un robinet coule 10 L/min. Combien de L/h ?",
+          "choix": [
+            "1 000 L/h",
+            "600 L/h",
+            "10 L/h"
+          ],
+          "reponse": 1,
+          "explication": "1 h = 60 min, et pas 100 : 10 × 60 = 600 L/h."
+        }
+      ],
+      "centres": [
+        "art-design"
+      ]
+    },
+    {
+      "id": "4e-prop-grandeur-convertir-short",
+      "notionId": "grandeur_composee",
+      "microId": "grandeur_convertir",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-prop-grandeur-convertir",
+      "fichier": "4e/maths/proportionnalite/17-grandeur-convertir/eleveai-maths-4e-prop-grandeur-convertir-short.mp4",
+      "miniature": "4e/maths/proportionnalite/17-grandeur-convertir/eleveai-maths-4e-prop-grandeur-convertir-short.png",
+      "titre": "Usain Bolt court-il plus vite qu'une voiture en ville ? 🏃 — 4e #Shorts",
+      "accroche": "En 2009, à Berlin, Usain Bolt court le 100 m en 9,58 s : toujours le record du monde. Il court à environ 10 m/s. En 1 heure, il y a 3 600 secondes : 10 m × 3 600 = 36 000 m = 36 km. Donc 36 km/h : dans une zone à 30 km/h, Bolt irait plus vite que les voitures !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Une cycliste roule à 5 m/s. Combien de km/h ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=grandeur_composee&microId=grandeur_convertir&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #grandeurs #proportionnalité #4e #collège",
+      "tags": [
+        "convertir une vitesse",
+        "m/s en km/h",
+        "conversion",
+        "Usain Bolt",
+        "record du monde",
+        "athlétisme",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:37",
+          "question": "10 m/s, ça fait combien de km/h ?",
+          "choix": [
+            "10 km/h",
+            "36 km/h",
+            "600 km/h"
+          ],
+          "reponse": 1,
+          "explication": "En 1 h = 3 600 s : 10 × 3 600 = 36 000 m = 36 km. Donc 36 km/h."
+        }
+      ],
+      "centres": [
+        "sport",
+        "transports"
+      ]
+    },
+    {
+      "id": "4e-prop-grandeur-coherence",
+      "notionId": "grandeur_composee",
+      "microId": "grandeur_coherence",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/proportionnalite/18-grandeur-coherence/eleveai-maths-4e-prop-grandeur-coherence.mp4",
+      "miniature": "4e/maths/proportionnalite/18-grandeur-coherence/eleveai-maths-4e-prop-grandeur-coherence.png",
+      "titre": "2 500 m² d'eau dans la piscine ? — Vérifier un résultat par son unité — épisode 18 · Maths 4e",
+      "accroche": "Enzo est pisciniste : il construit des piscines. Ce mois-ci, un bassin de 50 m sur 25 m et 2 m de profondeur, la taille d'une piscine olympique. Son apprenti remplit la fiche du chantier ; Enzo vérifie chaque ligne, souvent sans refaire le calcul.\n\nDans cette vidéo :\n• un volume d'eau en m² ? Impossible : un volume, ce sont trois longueurs multipliées, des m³\n• une longueur en m, une aire en m², un volume en m³\n• 1 m³ = 10 × 10 × 10 dm³ = 1 000 L, pas 100 L\n• le piège : additionner 150 m et 1 250 m², une longueur et une aire\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : La pompe remplit le bassin à 50 m³/h. L'apprenti écrit : 2 500 ÷ 50 = 50 m³. Quelle unité doit-il écrire ? Et le résultat est-il plausible ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/grandeur-composee\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/grandeur-composee\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=grandeur_composee&microId=grandeur_coherence&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Enzo, pisciniste"
+        ],
+        [
+          "00:27",
+          "Un volume en m² ? Impossible"
+        ],
+        [
+          "00:46",
+          "Longueur, aire, volume : leurs unités"
+        ],
+        [
+          "01:00",
+          "Question : l'aire du fond"
+        ],
+        [
+          "01:28",
+          "1 m³ = 1 000 litres"
+        ],
+        [
+          "01:52",
+          "Question : les litres d'un m³"
+        ],
+        [
+          "02:19",
+          "Le piège : additionner m et m²"
+        ],
+        [
+          "02:34",
+          "Question : 150 m + 1 250 m²"
+        ],
+        [
+          "03:05",
+          "À toi de jouer"
+        ],
+        [
+          "03:27",
+          "Correction"
+        ],
+        [
+          "03:41",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/grandeur-composee",
+      "tags": [
+        "vérifier par l'unité",
+        "cohérence des unités",
+        "m², m³, litres",
+        "grandeurs composées",
+        "piscine",
+        "pisciniste",
+        "bassin olympique",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:00",
+          "question": "Quelle unité pour l'aire du fond du bassin ?",
+          "choix": [
+            "le mètre (m)",
+            "le mètre carré (m²)",
+            "le mètre cube (m³)"
+          ],
+          "reponse": 1,
+          "explication": "50 m × 25 m = 1 250 m². Deux longueurs multipliées : une aire."
+        },
+        {
+          "t": "01:52",
+          "question": "Combien de litres y a-t-il dans 1 m³ ?",
+          "choix": [
+            "100 L",
+            "1 000 L",
+            "10 L"
+          ],
+          "reponse": 1,
+          "explication": "10 × 10 × 10 = 1 000 dm³, et 1 dm³ = 1 L : 1 000 L."
+        },
+        {
+          "t": "02:34",
+          "question": "Peut-on additionner 150 m et 1 250 m² ?",
+          "choix": [
+            "oui, ça fait 1 400 m",
+            "oui, ça fait 1 400 m²",
+            "non, pas les mêmes grandeurs"
+          ],
+          "reponse": 2,
+          "explication": "Une longueur et une aire ne s'additionnent pas."
+        }
+      ],
+      "centres": [
+        "sport",
+        "sciences"
+      ]
+    },
+    {
+      "id": "4e-prop-grandeur-coherence-short",
+      "notionId": "grandeur_composee",
+      "microId": "grandeur_coherence",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-prop-grandeur-coherence",
+      "fichier": "4e/maths/proportionnalite/18-grandeur-coherence/eleveai-maths-4e-prop-grandeur-coherence-short.mp4",
+      "miniature": "4e/maths/proportionnalite/18-grandeur-coherence/eleveai-maths-4e-prop-grandeur-coherence-short.png",
+      "titre": "Trois résultats faux : trouve l'erreur sans calculer ! 🔎 — 4e #Shorts",
+      "accroche": "La surface d'une chambre : 12 m³ ? Faux, une surface, ce sont des m². Un scooter à 45 h/km ? Faux, une vitesse, ce sont des km/h. Une gourde de 75 cm ? Faux, une contenance, ce sont des litres ou des centilitres. L'unité seule suffit !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Un terrain de handball mesure 40 m sur 20 m. Un élève écrit : 800 m³. Corrige-le : quelle est son aire, avec la bonne unité ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=grandeur_composee&microId=grandeur_coherence&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #grandeurs #proportionnalité #4e #collège",
+      "tags": [
+        "vérifier par l'unité",
+        "cohérence des unités",
+        "m², m³",
+        "erreurs",
+        "énigme",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:33",
+          "question": "Un élève écrit : la piscine contient 400 m² d'eau.",
+          "choix": [
+            "c'est juste",
+            "faux : des m³",
+            "juste si on arrondit"
+          ],
+          "reponse": 1,
+          "explication": "L'eau remplit un volume : des mètres cubes, ou des litres."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "4e-prop-grandeur-defi",
+      "notionId": "grandeur_composee",
+      "microId": "grandeur_defi",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/proportionnalite/19-grandeur-defi/eleveai-maths-4e-prop-grandeur-defi.mp4",
+      "miniature": "4e/maths/proportionnalite/19-grandeur-defi/eleveai-maths-4e-prop-grandeur-defi.png",
+      "titre": "Combien de tonnes de blé dans le champ de Fatou ? — Défis sur les grandeurs — épisode 19 · Maths 4e",
+      "accroche": "Fatou est agricultrice : elle cultive du blé. Son champ est un rectangle de 400 m sur 250 m. Combien de tonnes de blé va-t-elle récolter ? Combien de temps faudra-t-il pour l'arroser ? Et où acheter ses graines ?\n\nDans cette vidéo :\n• l'aire : 400 m × 250 m = 100 000 m², soit 10 hectares (1 ha = 10 000 m²)\n• le rendement : 21 t ÷ 3 ha = 7 t/ha, donc 70 t pour 10 ha (moyenne française 2025 : environ 7,4 t/ha, Agreste)\n• l'arrosage : 600 m³ ÷ 40 m³/h = 15 h\n• le prix au kilo : 1,50 €/kg contre 1,40 €/kg, le plus gros sac est ici le moins cher au kilo\n• le piège : additionner 10 ha et 70 t ; une ligne, une grandeur, une unité\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Fatou doit verser 900 m³ d'eau avec sa pompe de 40 m³/h. Combien de temps, en heures et minutes ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/grandeur-composee\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/grandeur-composee\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=grandeur_composee&microId=grandeur_defi&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Fatou, agricultrice"
+        ],
+        [
+          "00:23",
+          "Étape 1 : l'aire en hectares"
+        ],
+        [
+          "00:44",
+          "Étape 2 : le rendement"
+        ],
+        [
+          "01:09",
+          "Question : 28 t sur 4 ha"
+        ],
+        [
+          "01:39",
+          "Étape 3 : l'arrosage"
+        ],
+        [
+          "02:00",
+          "Question : 2,5 h"
+        ],
+        [
+          "02:33",
+          "Étape 4 : le prix au kilo"
+        ],
+        [
+          "03:04",
+          "Le piège : 10 ha + 70 t"
+        ],
+        [
+          "03:17",
+          "À toi de jouer"
+        ],
+        [
+          "03:33",
+          "Correction"
+        ],
+        [
+          "03:47",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/grandeur-composee",
+      "tags": [
+        "défis grandeurs composées",
+        "rendement",
+        "hectare",
+        "débit",
+        "prix au kilo",
+        "agricultrice",
+        "blé",
+        "agriculture",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:09",
+          "question": "4 ha : 28 t de blé. Quel est le rendement ?",
+          "choix": [
+            "7 t/ha",
+            "7 ha/t",
+            "112 t/ha"
+          ],
+          "reponse": 0,
+          "explication": "28 t ÷ 4 ha = 7 t/ha : on ramène à 1 hectare."
+        },
+        {
+          "t": "02:00",
+          "question": "Une pompe tourne 2,5 h. En heures et minutes ?",
+          "choix": [
+            "2 h 50 min",
+            "2 h 30 min",
+            "250 min"
+          ],
+          "reponse": 1,
+          "explication": "0,5 h, c'est la moitié de 60 min : 30 min. Donc 2 h 30 min."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "4e-prop-grandeur-defi-short",
+      "notionId": "grandeur_composee",
+      "microId": "grandeur_defi",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-prop-grandeur-defi",
+      "fichier": "4e/maths/proportionnalite/19-grandeur-defi/eleveai-maths-4e-prop-grandeur-defi-short.mp4",
+      "miniature": "4e/maths/proportionnalite/19-grandeur-defi/eleveai-maths-4e-prop-grandeur-defi-short.png",
+      "titre": "Le plus gros paquet est-il toujours le moins cher ? 🛒 — 4e #Shorts",
+      "accroche": "Des céréales : le petit paquet, 500 g pour 3 € ; le gros, 750 g pour 4,80 €. On ramène au kilo. Le petit : 2 paquets font 1 kg, 6 €/kg. Le gros : 4,80 ÷ 3 = 1,60 € les 250 g, fois 4 : 6,40 €/kg. Surprise : le petit paquet est moins cher au kilo !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Du jus d'orange : 1,5 L pour 2,70 €, ou 2 L pour 3,40 €. Lequel est le moins cher au litre ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=grandeur_composee&microId=grandeur_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #grandeurs #proportionnalité #4e #collège",
+      "tags": [
+        "prix au kilo",
+        "comparer des prix",
+        "grandeur quotient",
+        "supermarché",
+        "céréales",
+        "argent",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:40",
+          "question": "1 kg à 5 €, ou 2 kg à 11 € : le moins cher au kilo ?",
+          "choix": [
+            "le 1 kg",
+            "le 2 kg",
+            "c'est pareil"
+          ],
+          "reponse": 0,
+          "explication": "11 € ÷ 2 kg = 5,50 €/kg : plus cher que 5 €/kg !"
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "cuisine"
+      ]
     }
   ]
 }

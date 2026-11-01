@@ -2837,6 +2837,168 @@
   "youtube": null,
   "coach": "/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&microId=prop_defi&display=simple"
  },
+ "4e-prop-agrandissement-aire": {
+  "fichier": "4e/maths/proportionnalite/12-agrandissement-aire/eleveai-maths-4e-prop-agrandissement-aire.mp4",
+  "poster": "4e/maths/proportionnalite/12-agrandissement-aire/eleveai-maths-4e-prop-agrandissement-aire.png",
+  "vignette": "4e/maths/proportionnalite/12-agrandissement-aire/eleveai-maths-4e-prop-agrandissement-aire.vignette.webp",
+  "titre": "Pourquoi 4 fois plus de pâte à sucre ? — Agrandissement et aires — épisode 12 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_echelle&microId=agrandissement_aire&display=simple"
+ },
+ "4e-prop-agrandissement-aire-short": {
+  "fichier": "4e/maths/proportionnalite/12-agrandissement-aire/eleveai-maths-4e-prop-agrandissement-aire-short.mp4",
+  "poster": "4e/maths/proportionnalite/12-agrandissement-aire/eleveai-maths-4e-prop-agrandissement-aire-short.png",
+  "vignette": "4e/maths/proportionnalite/12-agrandissement-aire/eleveai-maths-4e-prop-agrandissement-aire-short.vignette.webp",
+  "titre": "Une grande pizza ou deux petites : laquelle nourrit le plus ? 🍕 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_echelle&microId=agrandissement_aire&display=simple"
+ },
+ "4e-prop-agrandissement-rapport": {
+  "fichier": "4e/maths/proportionnalite/11-agrandissement-rapport/eleveai-maths-4e-prop-agrandissement-rapport.mp4",
+  "poster": "4e/maths/proportionnalite/11-agrandissement-rapport/eleveai-maths-4e-prop-agrandissement-rapport.png",
+  "vignette": "4e/maths/proportionnalite/11-agrandissement-rapport/eleveai-maths-4e-prop-agrandissement-rapport.vignette.webp",
+  "titre": "Agrandir une photo sans écraser le visage ? — Agrandissement et réduction — épisode 11 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_echelle&microId=agrandissement_rapport&display=simple"
+ },
+ "4e-prop-agrandissement-rapport-short": {
+  "fichier": "4e/maths/proportionnalite/11-agrandissement-rapport/eleveai-maths-4e-prop-agrandissement-rapport-short.mp4",
+  "poster": "4e/maths/proportionnalite/11-agrandissement-rapport/eleveai-maths-4e-prop-agrandissement-rapport-short.png",
+  "vignette": "4e/maths/proportionnalite/11-agrandissement-rapport/eleveai-maths-4e-prop-agrandissement-rapport-short.vignette.webp",
+  "titre": "Agrandir la photo du chat en ajoutant des cm ? 🐱 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_echelle&microId=agrandissement_rapport&display=simple"
+ },
+ "4e-prop-agrandissement-volume": {
+  "fichier": "4e/maths/proportionnalite/13-agrandissement-volume/eleveai-maths-4e-prop-agrandissement-volume.mp4",
+  "poster": "4e/maths/proportionnalite/13-agrandissement-volume/eleveai-maths-4e-prop-agrandissement-volume.png",
+  "vignette": "4e/maths/proportionnalite/13-agrandissement-volume/eleveai-maths-4e-prop-agrandissement-volume.vignette.webp",
+  "titre": "Un bac 2 fois plus grand, 8 fois plus d'eau ? — Agrandissement et volumes — épisode 13 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_echelle&microId=agrandissement_volume&display=simple"
+ },
+ "4e-prop-agrandissement-volume-short": {
+  "fichier": "4e/maths/proportionnalite/13-agrandissement-volume/eleveai-maths-4e-prop-agrandissement-volume-short.mp4",
+  "poster": "4e/maths/proportionnalite/13-agrandissement-volume/eleveai-maths-4e-prop-agrandissement-volume-short.png",
+  "vignette": "4e/maths/proportionnalite/13-agrandissement-volume/eleveai-maths-4e-prop-agrandissement-volume-short.vignette.webp",
+  "titre": "Combien de petits dés pour construire un dé géant ? 🎲 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_echelle&microId=agrandissement_volume&display=simple"
+ },
+ "4e-prop-grandeur-coherence": {
+  "fichier": "4e/maths/proportionnalite/18-grandeur-coherence/eleveai-maths-4e-prop-grandeur-coherence.mp4",
+  "poster": "4e/maths/proportionnalite/18-grandeur-coherence/eleveai-maths-4e-prop-grandeur-coherence.png",
+  "vignette": "4e/maths/proportionnalite/18-grandeur-coherence/eleveai-maths-4e-prop-grandeur-coherence.vignette.webp",
+  "titre": "2 500 m² d'eau dans la piscine ? — Vérifier un résultat par son unité — épisode 18 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=grandeur_composee&microId=grandeur_coherence&display=simple"
+ },
+ "4e-prop-grandeur-coherence-short": {
+  "fichier": "4e/maths/proportionnalite/18-grandeur-coherence/eleveai-maths-4e-prop-grandeur-coherence-short.mp4",
+  "poster": "4e/maths/proportionnalite/18-grandeur-coherence/eleveai-maths-4e-prop-grandeur-coherence-short.png",
+  "vignette": "4e/maths/proportionnalite/18-grandeur-coherence/eleveai-maths-4e-prop-grandeur-coherence-short.vignette.webp",
+  "titre": "Trois résultats faux : trouve l'erreur sans calculer ! 🔎 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=grandeur_composee&microId=grandeur_coherence&display=simple"
+ },
+ "4e-prop-grandeur-convertir": {
+  "fichier": "4e/maths/proportionnalite/17-grandeur-convertir/eleveai-maths-4e-prop-grandeur-convertir.mp4",
+  "poster": "4e/maths/proportionnalite/17-grandeur-convertir/eleveai-maths-4e-prop-grandeur-convertir.png",
+  "vignette": "4e/maths/proportionnalite/17-grandeur-convertir/eleveai-maths-4e-prop-grandeur-convertir.vignette.webp",
+  "titre": "Combien de carreaux pour 6 m² de cuisine ? — Convertir des aires — épisode 17 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=grandeur_composee&microId=grandeur_convertir&display=simple"
+ },
+ "4e-prop-grandeur-convertir-short": {
+  "fichier": "4e/maths/proportionnalite/17-grandeur-convertir/eleveai-maths-4e-prop-grandeur-convertir-short.mp4",
+  "poster": "4e/maths/proportionnalite/17-grandeur-convertir/eleveai-maths-4e-prop-grandeur-convertir-short.png",
+  "vignette": "4e/maths/proportionnalite/17-grandeur-convertir/eleveai-maths-4e-prop-grandeur-convertir-short.vignette.webp",
+  "titre": "Usain Bolt court-il plus vite qu'une voiture en ville ? 🏃 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=grandeur_composee&microId=grandeur_convertir&display=simple"
+ },
+ "4e-prop-grandeur-defi": {
+  "fichier": "4e/maths/proportionnalite/19-grandeur-defi/eleveai-maths-4e-prop-grandeur-defi.mp4",
+  "poster": "4e/maths/proportionnalite/19-grandeur-defi/eleveai-maths-4e-prop-grandeur-defi.png",
+  "vignette": "4e/maths/proportionnalite/19-grandeur-defi/eleveai-maths-4e-prop-grandeur-defi.vignette.webp",
+  "titre": "Combien de tonnes de blé dans le champ de Fatou ? — Défis sur les grandeurs — épisode 19 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=grandeur_composee&microId=grandeur_defi&display=simple"
+ },
+ "4e-prop-grandeur-defi-short": {
+  "fichier": "4e/maths/proportionnalite/19-grandeur-defi/eleveai-maths-4e-prop-grandeur-defi-short.mp4",
+  "poster": "4e/maths/proportionnalite/19-grandeur-defi/eleveai-maths-4e-prop-grandeur-defi-short.png",
+  "vignette": "4e/maths/proportionnalite/19-grandeur-defi/eleveai-maths-4e-prop-grandeur-defi-short.vignette.webp",
+  "titre": "Le plus gros paquet est-il toujours le moins cher ? 🛒 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=grandeur_composee&microId=grandeur_defi&display=simple"
+ },
+ "4e-prop-grandeur-produit": {
+  "fichier": "4e/maths/proportionnalite/14-grandeur-produit/eleveai-maths-4e-prop-grandeur-produit.mp4",
+  "poster": "4e/maths/proportionnalite/14-grandeur-produit/eleveai-maths-4e-prop-grandeur-produit.png",
+  "vignette": "4e/maths/proportionnalite/14-grandeur-produit/eleveai-maths-4e-prop-grandeur-produit.vignette.webp",
+  "titre": "Combien coûte un radiateur allumé 5 h ? — Les grandeurs produits — épisode 14 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=grandeur_composee&microId=grandeur_produit&display=simple"
+ },
+ "4e-prop-grandeur-produit-short": {
+  "fichier": "4e/maths/proportionnalite/14-grandeur-produit/eleveai-maths-4e-prop-grandeur-produit-short.mp4",
+  "poster": "4e/maths/proportionnalite/14-grandeur-produit/eleveai-maths-4e-prop-grandeur-produit-short.png",
+  "vignette": "4e/maths/proportionnalite/14-grandeur-produit/eleveai-maths-4e-prop-grandeur-produit-short.vignette.webp",
+  "titre": "Combien de chambres tiennent sur un terrain de foot ? ⚽ — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=grandeur_composee&microId=grandeur_produit&display=simple"
+ },
+ "4e-prop-grandeur-quotient": {
+  "fichier": "4e/maths/proportionnalite/15-grandeur-quotient/eleveai-maths-4e-prop-grandeur-quotient.mp4",
+  "poster": "4e/maths/proportionnalite/15-grandeur-quotient/eleveai-maths-4e-prop-grandeur-quotient.png",
+  "vignette": "4e/maths/proportionnalite/15-grandeur-quotient/eleveai-maths-4e-prop-grandeur-quotient.vignette.webp",
+  "titre": "À quelle vitesse roule le TGV de Manon ? — Les grandeurs quotients — épisode 15 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=grandeur_composee&microId=grandeur_quotient&display=simple"
+ },
+ "4e-prop-grandeur-quotient-short": {
+  "fichier": "4e/maths/proportionnalite/15-grandeur-quotient/eleveai-maths-4e-prop-grandeur-quotient-short.mp4",
+  "poster": "4e/maths/proportionnalite/15-grandeur-quotient/eleveai-maths-4e-prop-grandeur-quotient-short.png",
+  "vignette": "4e/maths/proportionnalite/15-grandeur-quotient/eleveai-maths-4e-prop-grandeur-quotient-short.vignette.webp",
+  "titre": "Ton cœur bat-il plus vite que ta chanson préférée ? 🎵 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=grandeur_composee&microId=grandeur_quotient&display=simple"
+ },
+ "4e-prop-grandeur-unite": {
+  "fichier": "4e/maths/proportionnalite/16-grandeur-unite/eleveai-maths-4e-prop-grandeur-unite.mp4",
+  "poster": "4e/maths/proportionnalite/16-grandeur-unite/eleveai-maths-4e-prop-grandeur-unite.png",
+  "vignette": "4e/maths/proportionnalite/16-grandeur-unite/eleveai-maths-4e-prop-grandeur-unite.vignette.webp",
+  "titre": "20 000 habitants par km², ça veut dire quoi ? — L'unité composée — épisode 16 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=grandeur_composee&microId=grandeur_unite_composee&display=simple"
+ },
+ "4e-prop-grandeur-unite-short": {
+  "fichier": "4e/maths/proportionnalite/16-grandeur-unite/eleveai-maths-4e-prop-grandeur-unite-short.mp4",
+  "poster": "4e/maths/proportionnalite/16-grandeur-unite/eleveai-maths-4e-prop-grandeur-unite-short.png",
+  "vignette": "4e/maths/proportionnalite/16-grandeur-unite/eleveai-maths-4e-prop-grandeur-unite-short.vignette.webp",
+  "titre": "Faire le tour de la Terre en une seconde ? La lumière, oui ! 💡 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=grandeur_composee&microId=grandeur_unite_composee&display=simple"
+ },
  "4e-prop-echelle-comprendre": {
   "fichier": "4e/maths/proportionnalite/07-echelle-comprendre/eleveai-maths-4e-prop-echelle-comprendre.mp4",
   "poster": "4e/maths/proportionnalite/07-echelle-comprendre/eleveai-maths-4e-prop-echelle-comprendre.png",
