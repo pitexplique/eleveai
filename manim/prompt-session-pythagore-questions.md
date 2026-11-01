@@ -34,3 +34,8 @@ Puis passe finale (même méthode que `1a89da9a`) : manifeste (`questions` t, `d
   - shorts ép. 4 et ép. 6 : étiquette « 100 m » / « 100 » posée sur la diagonale orange ; short ép. 6 : la dalle frôle l'accroche.
 - Phrases de voix ajoutées par les agents : dans leurs rapports, résumées à Frédéric (il les relit).
 - PUIS la passe finale (voir plus haut) : manifeste (`questions` : les t ont bougé, `duree`, chapitres), R2, bilans, fiches YouTube, suppression des `*.avant-corrections.mp4`. Les 7 premiers épisodes en local sont donc plus récents que R2.
+
+## ✅ 01/11 ~15 h 40 : CORRECTIONS FINIES
+- 3e gobelet : `6b60e8b4` (paysage 5:35, short 1:07). Ép. 3, 4, 7 (finales en phrases avec un point) + shorts ép. 4 et 6 (étiquette de la diagonale, dalle) : `bca9c2a9`.
+- Passe finale `cde60612` : manifeste (t, durées, chapitres), R2 18/18 même taille, fiches YouTube regénérées ; feuilles bilan Pythagore inchangées (elles ne lisent ni les t ni le titre de fin). `*.avant-corrections.*` supprimés.
+- ⛔ Toujours rien sur YouTube ; rien de poussé (rituel du soir).
