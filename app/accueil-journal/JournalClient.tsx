@@ -39,6 +39,7 @@ import { genererDefi, type DefiGenere, type Theme } from "@/lib/accueil/defis";
 import RechercheEntete from "@/components/accueil/RechercheEntete";
 import BanniereCrpe from "@/components/accueil/BanniereCrpe";
 import BandePays from "@/components/accueil/BandePays";
+import type { Arbre } from "@/lib/accueil/arbre-du-jour";
 
 export type VideoJournal = { id: string; titre: string; short: boolean; vignette: string };
 
@@ -107,6 +108,7 @@ const COULEUR_MAGAZINE = {
   grands: "bg-slate-200",
   rdv: "bg-amber-100",
   videotheque: "bg-white",
+  arbre: "bg-lime-200",
 } as const;
 
 type Rubrique = keyof typeof COULEUR_MAGAZINE;
@@ -489,6 +491,38 @@ function Chiffre({ mise, chiffre }: { mise: Mise; chiffre: ChiffreDuJour }) {
       <p className={`${t.titre} text-5xl leading-none`}>{chiffre.chiffre}</p>
       <p className={`${t.texte} mt-3 leading-snug`}>{chiffre.texte}</p>
     </Bloc>
+  );
+}
+
+/* ⭐ L'ARBRE DU JOUR (01/11/2026) — celui où grimpe Ti Margo sur la page
+   d'entrée eleveai.fr/. Frédéric : « Ti Margo monte sur un arbre, avec son
+   contexte, que l'on mettra dans le journal ». Données : lib/accueil/arbre-du-jour.ts. */
+function ArbreDuJour({ mise, arbre }: { mise: Mise; arbre: Arbre }) {
+  const t = TON[mise];
+  return (
+    <div id="arbre-du-jour" className="scroll-mt-24">
+      <Bloc mise={mise} quoi="arbre" rubrique={`L'arbre du jour · ${arbre.pays}`}>
+        <div className="flex items-start gap-4">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/cahier-vacances/ti-margo-112.webp" alt="" width={90} height={112} className="hidden h-24 w-auto shrink-0 sm:block" />
+          <div className="min-w-0">
+            <h2 className={`${t.titre} text-2xl leading-tight first-letter:uppercase`}>
+              Aujourd&rsquo;hui, Ti Margo grimpe sur {arbre.nom}
+            </h2>
+            <p className={`${t.texte} mt-2 leading-snug`}>{arbre.contexte}</p>
+            <p className={`${t.texte} mt-3 leading-snug`}>
+              <span className="font-black">À toi&nbsp;: </span>
+              {arbre.question}
+            </p>
+            <details className="mt-2">
+              <summary className={`cursor-pointer font-black ${t.lien}`}>Voir la réponse</summary>
+              <p className={`${t.texte} mt-1 leading-snug`}>{arbre.reponse}</p>
+            </details>
+            <p className={`${t.texte} mt-3 italic leading-snug`}>{arbre.metier}</p>
+          </div>
+        </div>
+      </Bloc>
+    </div>
   );
 }
 
@@ -966,6 +1000,8 @@ export default function JournalClient(props: {
   shorts: VideoJournal[];
   reel: VideoJournal[];
   videotheque: { videos: VideoVitrine[]; total: number };
+  /** L'arbre où grimpe Ti Margo sur la page d'entrée (monté par /journal). */
+  arbre?: Arbre;
   /** Monté par /accueil : le Quotidien, sans sélecteur (son choix du 18/10). */
   accueil?: boolean;
 }) {
@@ -1052,6 +1088,11 @@ export default function JournalClient(props: {
         {/* ⭐ LA CHAÎNE VIDÉO, JUSTE SOUS LE COACH (Frédéric, 20/10 : « tu peux
             monter vidéo », « ça doit l'envoyer sur la chaîne vidéo »). */}
         <div className={mise === "fil" ? "mt-4" : "mt-6"}>{blocs.videotheque}</div>
+        {props.arbre && (
+          <div className={mise === "fil" ? "mt-4" : "mt-6"}>
+            <ArbreDuJour mise={mise} arbre={props.arbre} />
+          </div>
+        )}
 
         {mise === "quotidien" && (
           <div className="mt-6 space-y-8">

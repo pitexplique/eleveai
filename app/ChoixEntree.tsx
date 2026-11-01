@@ -6,6 +6,11 @@
 // branches. Choisis le chemin que tu vas prendre. » Et : « qu'on n'atterrisse
 // pas directement sur la page d'accueil ».
 //
+// ⭐ L'ARBRE CHANGE CHAQUE JOUR (« Ti Margo monte sur un arbre, avec son
+// contexte, que l'on mettra dans le journal ») : chêne, mélèze, hêtre, érable,
+// arganier, baobab, fromager, parfois le tamarin des Hauts — un par pays,
+// tiré par lib/accueil/arbre-du-jour.ts ; son histoire est dans le Journal.
+//
 // Ti Margo grimpe le tronc, hésite à la fourche (un bout de chaque branche),
 // file vers la branche que le doigt survole, et court jusqu'au bout de celle
 // qu'on clique avant que la page change.
@@ -17,6 +22,7 @@
 
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import BandePays from "@/components/accueil/BandePays";
+import type { Arbre } from "@/lib/accueil/arbre-du-jour";
 
 type Branche = "g" | "d";
 type Chemin = "coach" | "journal" | "accueil";
@@ -42,7 +48,63 @@ function compter(chemin: Chemin) {
   }
 }
 
-export default function ChoixEntree({ suite }: { suite: string }) {
+/** Le feuillage au bout d'une branche (x = 20 à gauche, 80 à droite, x = 50 la couronne
+ *  du milieu), selon l'arbre du jour. Il déborde SOUS les panneaux pour qu'on voie l'arbre. */
+function Feuillage({ x, d, petit = false }: { x: number; d: Arbre["dessin"]; petit?: boolean }) {
+  // Décalage vers l'intérieur de l'arbre : vers la droite à gauche, et inversement.
+  const X = (dx: number) => x + (x < 50 ? dx : -dx);
+  const k = petit ? 0.6 : 1;
+  const y = petit ? 44 : 38;
+  if (d.forme === "cone") {
+    const cone = (dx: number, haut: number, large: number, bas: number) =>
+      `${X(dx * k) - large * k},${y + bas * k} ${X(dx * k)},${y + haut * k} ${X(dx * k) + large * k},${y + bas * k}`;
+    return (
+      <g>
+        <g fill={d.fonce}>
+          <polygon points={cone(-9, -10, 6.5, 16)} />
+          <polygon points={cone(9, -14, 6.5, 12)} />
+          <polygon points={cone(0, -22, 8, 14)} />
+        </g>
+        <g fill={d.clair}>
+          <polygon points={cone(0, -15, 4.5, 6)} />
+          <polygon points={cone(-9, -4, 3.5, 11)} />
+          <polygon points={cone(9, -8, 3.5, 7)} />
+        </g>
+      </g>
+    );
+  }
+  if (d.forme === "parasol") {
+    return (
+      <g>
+        <g fill={d.fonce}>
+          <ellipse cx={X(1 * k)} cy={y} rx={18 * k} ry={7 * k} />
+          <ellipse cx={X(-8 * k)} cy={y + 5 * k} rx={9 * k} ry={4 * k} />
+          <ellipse cx={X(7 * k)} cy={y - 5 * k} rx={11 * k} ry={4.5 * k} />
+        </g>
+        <g fill={d.clair}>
+          <ellipse cx={X(2 * k)} cy={y - 2 * k} rx={11 * k} ry={3.2 * k} />
+          <ellipse cx={X(-8 * k)} cy={y + 4 * k} rx={5 * k} ry={2 * k} />
+        </g>
+      </g>
+    );
+  }
+  return (
+    <g>
+      <g fill={d.fonce} opacity="0.95">
+        <circle cx={X(-1 * k)} cy={y} r={13 * k} />
+        <circle cx={X(10 * k)} cy={y - 5 * k} r={9 * k} />
+        <circle cx={X(-11 * k)} cy={y + 6 * k} r={8 * k} />
+        <circle cx={X(4 * k)} cy={y + 8 * k} r={8 * k} />
+      </g>
+      <g fill={d.clair}>
+        <circle cx={X(3 * k)} cy={y - 3 * k} r={7 * k} />
+        <circle cx={X(-7 * k)} cy={y + 4 * k} r={5 * k} />
+      </g>
+    </g>
+  );
+}
+
+export default function ChoixEntree({ suite, arbre }: { suite: string; arbre: Arbre }) {
   const coach = `/coach-ia/maths${suite}`;
   const journal = `/journal${suite}`;
   const accueil = `/accueil${suite}`;
@@ -169,8 +231,16 @@ export default function ChoixEntree({ suite }: { suite: string }) {
         <h1 className="mt-1 text-center text-3xl font-black leading-tight sm:text-5xl">
           Quel chemin prends-tu&nbsp;?
         </h1>
+        {/* L'arbre du jour (lib/accueil/arbre-du-jour.ts) : son histoire est dans le Journal. */}
         <p className="mt-2 text-center text-base font-semibold text-slate-700 sm:text-lg">
-          Ti Margo t&apos;attend à la fourche.
+          Aujourd&apos;hui, Ti Margo grimpe sur {arbre.unNom} ({arbre.pays}).{" "}
+          <a
+            href={`${journal}#arbre-du-jour`}
+            onClick={() => compter("journal")}
+            className="whitespace-nowrap font-black text-emerald-800 underline underline-offset-4 hover:text-emerald-950"
+          >
+            Son histoire →
+          </a>
         </p>
 
         {/* L'arbre : un carré, les deux panneaux posés au bout des branches. */}
@@ -180,32 +250,21 @@ export default function ChoixEntree({ suite }: { suite: string }) {
             <ellipse cx="50" cy="104" rx="70" ry="12" fill="#86c46d" />
             <ellipse cx="50" cy="103" rx="58" ry="8" fill="#9ed37f" />
             {/* les feuillages, derrière les branches */}
-            <g fill="#4f9d3a" opacity="0.95">
-              <circle cx="18" cy="31" r="10" />
-              <circle cx="28" cy="27" r="8" />
-              <circle cx="11" cy="38" r="6" />
-              <circle cx="82" cy="31" r="10" />
-              <circle cx="72" cy="27" r="8" />
-              <circle cx="89" cy="38" r="6" />
-            </g>
-            <g fill="#6cbf4f">
-              <circle cx="22" cy="28" r="6.5" />
-              <circle cx="14" cy="34" r="4.5" />
-              <circle cx="78" cy="28" r="6.5" />
-              <circle cx="86" cy="34" r="4.5" />
-            </g>
+            <Feuillage x={50} d={arbre.dessin} petit />
+            <Feuillage x={20} d={arbre.dessin} />
+            <Feuillage x={80} d={arbre.dessin} />
             {/* le tronc et les deux branches */}
-            <g fill="none" stroke="#7a4b2a" strokeLinecap="round">
-              <path d={TRONC} strokeWidth="9" />
+            <g fill="none" stroke={arbre.dessin.tronc} strokeLinecap="round">
+              <path d={TRONC} strokeWidth={arbre.dessin.epaisseur} />
               <path d="M50 60 C44 50 34 44 22 36" strokeWidth="5.5" />
               <path d="M50 60 C56 50 66 44 78 36" strokeWidth="5.5" />
             </g>
-            <g fill="none" stroke="#5d371d" strokeLinecap="round" strokeWidth="0.6" opacity="0.6">
+            <g fill="none" stroke="#000" strokeLinecap="round" strokeWidth="0.6" opacity="0.2">
               <path d="M48 92 C47 82 49 74 48 64" />
               <path d="M52 88 C53 80 51 72 52 66" />
             </g>
             {/* deux petites feuilles le long de chaque branche */}
-            <g fill="#4f9d3a">
+            <g fill={arbre.dessin.fonce}>
               <ellipse cx="38" cy="45" rx="2.6" ry="1.3" transform="rotate(-35 38 45)" />
               <ellipse cx="62" cy="45" rx="2.6" ry="1.3" transform="rotate(35 62 45)" />
               <ellipse cx="44" cy="54" rx="2.2" ry="1.1" transform="rotate(20 44 54)" />

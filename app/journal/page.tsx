@@ -5,6 +5,7 @@
 import type { Metadata } from "next";
 import JournalClient from "../accueil-journal/JournalClient";
 import { donneesDuJournal } from "../accueil-journal/donnees";
+import { arbreDuJour } from "@/lib/accueil/arbre-du-jour";
 
 export const metadata: Metadata = {
   title: { absolute: "Le Journal d'EleveAI — une chose utile à apprendre chaque jour" },
@@ -16,5 +17,6 @@ export const metadata: Metadata = {
 export const revalidate = 3600;
 
 export default function Journal() {
-  return <JournalClient {...donneesDuJournal()} accueil />;
+  // L'arbre du jour, celui où grimpe Ti Margo sur eleveai.fr/ (encadré #arbre-du-jour).
+  return <JournalClient {...donneesDuJournal()} arbre={arbreDuJour()} accueil />;
 }

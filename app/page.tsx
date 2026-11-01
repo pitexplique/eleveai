@@ -11,6 +11,7 @@
 // description, ses liens) ; cette fourche n'a rien à lui dire.
 import type { Metadata } from "next";
 import ChoixEntree from "./ChoixEntree";
+import { arbreDuJour, arbreParSlug } from "@/lib/accueil/arbre-du-jour";
 
 export const metadata: Metadata = {
   title: "EleveAI — quel chemin prends-tu ?",
@@ -23,10 +24,12 @@ export default async function Home({
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const params = (await searchParams) ?? {};
+  // ?arbre=baobab : voir un arbre précis (aperçu) ; il ne suit pas vers le coach ou le Journal.
+  const apercu = typeof params.arbre === "string" ? arbreParSlug(params.arbre) : undefined;
   const qs = new URLSearchParams(
-    Object.entries(params).flatMap(([k, v]) =>
+    Object.entries(params).filter(([k]) => k !== "arbre").flatMap(([k, v]) =>
       v === undefined ? [] : Array.isArray(v) ? v.map((x) => [k, x]) : [[k, v]],
     ) as [string, string][],
   ).toString();
-  return <ChoixEntree suite={qs ? `?${qs}` : ""} />;
+  return <ChoixEntree suite={qs ? `?${qs}` : ""} arbre={apercu ?? arbreDuJour()} />;
 }
