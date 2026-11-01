@@ -25,6 +25,8 @@
 // ⛔ Page serveur, statique : les compteurs viennent du programme et de R2.
 
 import Link from "next/link";
+import { Roboto_Slab } from "next/font/google";
+import { CollinesAccueil, MontgolfiereAccueil, SoleilAccueil } from "@/components/accueil/dessins/PaysageAccueil";
 import {
   ArrowRight,
   BarChart3,
@@ -127,12 +129,22 @@ const VISIO = [
   "Pas besoin de caméra ni de micro pour l'élève",
 ];
 
+// Le titre et les nuages en lettres à empattements fines, plus douces que le gras.
+const slab = Roboto_Slab({ subsets: ["latin"], weight: ["300", "700"], display: "swap" });
+
+// Un vrai nuage : deux bosses blanches posées sur la carte.
 function Nuage({ Icone, titre, children }: { Icone: typeof Target; titre: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-[2rem] border border-white/70 bg-white/90 px-5 py-5 text-center shadow-sm backdrop-blur">
-      <Icone className="mx-auto h-7 w-7 text-teal-700" aria-hidden="true" />
-      <h2 className="mt-2 text-xl font-black text-slate-900">{titre}</h2>
-      <p className="mt-1 text-sm leading-relaxed text-slate-600">{children}</p>
+    <div className="relative mt-6">
+      <span aria-hidden="true" className="absolute -top-6 left-[22%] h-20 w-20 rounded-full bg-white ring-1 ring-sky-200" />
+      <span aria-hidden="true" className="absolute -top-9 right-[24%] h-24 w-24 rounded-full bg-white ring-1 ring-sky-200" />
+      <div className="relative rounded-[2.5rem] bg-white px-5 pb-5 pt-4 text-center shadow-sm ring-1 ring-sky-200">
+        {/* Cache les traits des bosses à l'intérieur du nuage */}
+        <span aria-hidden="true" className="absolute inset-x-6 top-0 h-6 bg-white" />
+        <Icone className="relative mx-auto h-7 w-7 text-teal-600" aria-hidden="true" />
+        <h2 className={`${slab.className} relative mt-1 text-2xl font-light text-teal-700`}>{titre}</h2>
+        <p className="relative mt-1 text-sm leading-relaxed text-slate-600">{children}</p>
+      </div>
     </div>
   );
 }
@@ -183,14 +195,17 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
         <RechercheEntete variante="page" />
       </div>
       {/* 1. LA PROMESSE ET LES TROIS NUAGES */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-teal-50 via-sky-50 to-white">
+      <section className="relative overflow-hidden bg-gradient-to-b from-sky-100 via-emerald-50 to-emerald-50">
         {/* ⚠️ Pas l'image de l'accueil actuel en fond : elle porte son propre
-            texte (« EleveAI », « CP à Terminale »…), qui se mêlait au titre. */}
-        <div aria-hidden="true" className="absolute -left-20 top-10 h-64 w-64 rounded-full bg-emerald-100/70 blur-3xl" />
-        <div aria-hidden="true" className="absolute -right-16 top-32 h-72 w-72 rounded-full bg-sky-100/80 blur-3xl" />
-        <div className="relative mx-auto max-w-6xl px-4 pb-10 pt-10 text-center sm:pt-14">
-          <h1 className="text-3xl font-black leading-tight text-teal-900 sm:text-5xl">
-            EleveAI, c&apos;est l&apos;apprentissage personnalisé.
+            texte (« EleveAI », « CP à Terminale »…), qui se mêlait au titre.
+            ⭐ 01/11 : un paysage de maths dessiné (« plus joli IXL », « avec un
+            beau dessin ») : le ciel sur ordinateur, les collines partout. */}
+        <SoleilAccueil className="absolute left-6 top-6 hidden h-24 w-24 lg:block xl:left-16" />
+        <MontgolfiereAccueil className="absolute right-4 top-4 hidden h-40 w-44 lg:block xl:right-14" />
+        <CollinesAccueil className="absolute inset-x-0 bottom-0 h-[170px] w-full sm:h-[230px]" />
+        <div className="relative mx-auto max-w-6xl px-4 pb-[150px] pt-10 text-center sm:pb-[210px] sm:pt-12">
+          <h1 className={`${slab.className} text-4xl font-light leading-tight text-sky-700 sm:text-6xl`}>
+            <span className="font-bold text-teal-700">EleveAI</span> <span className="font-bold">c&apos;est</span> l&apos;apprentissage personnalisé
           </h1>
           <p className="mx-auto mt-3 max-w-2xl text-lg text-slate-700">
             Le coach te suit et garde tes progrès.
