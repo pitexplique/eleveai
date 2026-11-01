@@ -359,3 +359,20 @@ Sources : TGV jusqu'à 320 km/h (sites secondaires) ; cœur au repos 60 à 100 /
 ```
 Question en commentaire : « La Lune est à environ 384 000 km. Combien de secondes sa lumière met-elle pour arriver jusqu'à nous ? » (≈ 1,3 s).
 Sources : Insee, Paris ≈ 2,1 millions (population légale 2022) sur 105 km² ; c = 299 792 km/s (BIPM) ; Terre-Lune 384 400 km (NASA). Le trajet Lune → Terre dure 1,28 s à l'écran (clin d'œil à la réponse). Défauts mineurs : les coches touchent presque « km² » (paysage) et « 1 s » (short). Deux rendus HD du short. La paysage hérite de `PropAgrandissementRapportBase` (ép. 11).
+
+## 4e 19-grandeur-defi (lot 4, rendu le 01/11)
+**Paysage** `4e-prop-grandeur-defi` — 4:15, ceinture verte — centres `nature-ecologie`, `argent-budget`
+```json
+[
+  {"t":"01:09","question":"4 ha : 28 t de blé. Quel est le rendement ?","choix":["7 t/ha","7 ha/t","112 t/ha"],"reponse":0,"explication":"28 t ÷ 4 ha = 7 t/ha : on ramène à 1 hectare."},
+  {"t":"02:00","question":"Une pompe tourne 2,5 h. En heures et minutes ?","choix":["2 h 50 min","2 h 30 min","250 min"],"reponse":1,"explication":"0,5 h, c'est la moitié de 60 min : 30 min. Donc 2 h 30 min."}
+]
+```
+**Short** `4e-prop-grandeur-defi-short` — 1:29, ceinture blanche — centres `argent-budget`, `cuisine`
+```json
+[
+  {"t":"00:40","question":"1 kg à 5 €, ou 2 kg à 11 € : le moins cher au kilo ?","choix":["le 1 kg","le 2 kg","c'est pareil"],"reponse":0,"explication":"11 € ÷ 2 kg = 5,50 €/kg : plus cher que 5 €/kg !"}
+]
+```
+Question en commentaire : « 1,5 L pour 2,70 € ou 2 L pour 3,40 € : lequel est le moins cher au litre ? » (2 L : 1,70 €/L contre 1,80 €/L).
+Sources : Agreste, blé tendre 2025 ≈ 7,4 t/ha ; champ, pompe, magasins et prix des céréales inventés. Défauts mineurs : les cadres verts de « 70 t » et « 15 h » frôlent le mot qui les précède. Le convertisseur de marques de l'agent pose une marque par occurrence même à travers la ponctuation (« 21 tonnes. 21 tonnes »).
