@@ -394,3 +394,20 @@ Sources : Agreste, blé tendre 2025 ≈ 7,4 t/ha ; champ, pompe, magasins et pri
 ```
 Question en commentaire : « Un terrain de handball mesure 40 m sur 20 m. Un élève écrit 800 m³. Corrige-le : son aire, avec la bonne unité ! » (800 m²).
 Sources : bassin olympique 50 × 25 m, 2 m de profondeur au moins (World Aquatics FR 2) ; handball 40 × 20 m (IHF) ; pompe de 50 m³/h inventée. Défauts mineurs : dans le short, la roue avant du scooter frôle « 45 h/km » barré ; dans la paysage, le choix C de la question 3 tient sur deux lignes.
+
+## 4e 17-grandeur-convertir (lot 4, rendu le 01/11)
+**Paysage** `4e-prop-grandeur-convertir` — 3:46, ceinture verte — centres `art-design`
+```json
+[
+  {"t":"00:56","question":"Combien de cm² dans 1 m² ?","choix":["100 cm²","1 000 cm²","10 000 cm²"],"reponse":2,"explication":"1 m² = 100 cm × 100 cm = 10 000 cm² : le facteur 100 compte deux fois."},
+  {"t":"02:18","question":"Un robinet coule 10 L/min. Combien de L/h ?","choix":["1 000 L/h","600 L/h","10 L/h"],"reponse":1,"explication":"1 h = 60 min, et pas 100 : 10 × 60 = 600 L/h."}
+]
+```
+**Short** `4e-prop-grandeur-convertir-short` — 1:16, ceinture blanche — centres `sport`, `transports`
+```json
+[
+  {"t":"00:37","question":"10 m/s, ça fait combien de km/h ?","choix":["10 km/h","36 km/h","600 km/h"],"reponse":1,"explication":"En 1 h = 3 600 s : 10 × 3 600 = 36 000 m = 36 km. Donc 36 km/h."}
+]
+```
+Question en commentaire : « Une cycliste roule à 5 m/s. Combien de km/h ? » (18 km/h).
+Sources : Bolt, 100 m en 9,58 s, Berlin, 16/08/2009 (World Athletics) ; robinet ≈ 10 à 12 L/min (ADEME via Selectra ; Parc du Luberon, fiche Robinets) ; cuisine, carreaux, mur et cycliste inventés. Deux rendus HD par vidéo (étiquettes « 20 cm »/« 10 cm » qui se chevauchaient ; « Record du monde ! » qui touchait le bord en entrant). Défaut mineur : à la fin du short, le cadre « 10 m/s = 36 km/h » touche presque le bas du tableau.
