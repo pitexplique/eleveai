@@ -38,7 +38,8 @@ Faits à vérifier et sourcer en tête des scripts : saut environ 6 fois plus ha
 - Vérifier chaque épisode soi-même : mp4 présents et immobiles, `verifier-bords-video.py` = 0 instants, planche de 12 images regardée, `questions` + centres notés dans une section « CM » de `manim/questions-proportionnalite.md`, puis commit par chemin (scripts + `*_marques.json` + questions, jamais `media-*` ni `*.cues.tsv`).
 
 ## ⏭ Reste à faire (lot CM-A rendu en entier le 01/11)
-- Passe finale du lot CM-A (14 mp4 : 4 paysages CM1, 2 paysages CM2, shorts copiés) : miniatures, manifeste, `fiche-youtube.md`, R2, coach CM1 + CM2, fichiers pays du primaire.
+- ✅ Passe finale du lot CM-A FAITE le 01/11 (voir `git log`, « passe finale ») : 12 entrées au manifeste (`cm1-prop-<slug>[-short]` ×8, `cm2-prop-<slug>[-short]` ×4 ; chapitres par dry run + `renderer.time`, questions et centres de la section CM de `manim/questions-proportionnalite.md` ; fiche de cours seulement en CM2, il n'y a pas de fiche proportionnalité CM1) ; table R2 + bilans ; R2 36/36 (`rclone check`) et HTTP 200 ; 12 vidéos branchées au coach (`/video/<id>`) ; pays du primaire : Belgique P4/P5, Suisse romande cycle 2 (MSN 23-b2), Québec (SOP A3/B2), 0 erreur de couverture. Miniatures, vignettes et `fiche-youtube.md` hors git dans les 6 dossiers de sortie (titres à relire par Frédéric). Reste : publier sur YouTube, chaque paysage AVANT son short.
+- Outils de la passe finale (à recopier pour le lot B) : scratchpad de la session du 01/11 après-midi, `miniatures_cma.py`, `construire_cma.py`, `appliquer_manifeste.py`, `appliquer_r2_bilans.mjs`, `temps/lancer.sh` (⚠️ `sys.path` : `cm1` AVANT `6e`, sinon `prop_tableau` 6e est importé).
 - Écrire les voix du lot CM-B et les faire valider par Frédéric.
 
 ## Après la validation

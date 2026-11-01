@@ -4293,6 +4293,78 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cm1&matiere=maths&notion=probabilite&microId=probabilite_vocabulaire&display=simple"
  },
+ "cm1-prop-fois-moins": {
+  "fichier": "cm1/maths/proportionnalite/03-fois-moins/eleveai-maths-cm1-prop-fois-moins.mp4",
+  "poster": "cm1/maths/proportionnalite/03-fois-moins/eleveai-maths-cm1-prop-fois-moins.png",
+  "vignette": "cm1/maths/proportionnalite/03-fois-moins/eleveai-maths-cm1-prop-fois-moins.vignette.webp",
+  "titre": "2 fois moins de murs, combien de peinture ? — Fois moins — épisode 3 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=proportionnalite&microId=prop_fois_moins&display=simple"
+ },
+ "cm1-prop-fois-moins-short": {
+  "fichier": "cm1/maths/proportionnalite/03-fois-moins/eleveai-maths-cm1-prop-fois-moins-short.mp4",
+  "poster": "cm1/maths/proportionnalite/03-fois-moins/eleveai-maths-cm1-prop-fois-moins-short.png",
+  "vignette": "cm1/maths/proportionnalite/03-fois-moins/eleveai-maths-cm1-prop-fois-moins-short.vignette.webp",
+  "titre": "Combien de moustiques Ti Margo attrape-t-il ? 🦎 — CM1 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=proportionnalite&microId=prop_fois_moins&display=simple"
+ },
+ "cm1-prop-fois-plus": {
+  "fichier": "cm1/maths/proportionnalite/02-fois-plus/eleveai-maths-cm1-prop-fois-plus.mp4",
+  "poster": "cm1/maths/proportionnalite/02-fois-plus/eleveai-maths-cm1-prop-fois-plus.png",
+  "vignette": "cm1/maths/proportionnalite/02-fois-plus/eleveai-maths-cm1-prop-fois-plus.vignette.webp",
+  "titre": "3 fois plus de rangées, combien de salades ? — Fois plus — épisode 2 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=proportionnalite&microId=prop_fois_plus&display=simple"
+ },
+ "cm1-prop-fois-plus-short": {
+  "fichier": "cm1/maths/proportionnalite/02-fois-plus/eleveai-maths-cm1-prop-fois-plus-short.mp4",
+  "poster": "cm1/maths/proportionnalite/02-fois-plus/eleveai-maths-cm1-prop-fois-plus-short.png",
+  "vignette": "cm1/maths/proportionnalite/02-fois-plus/eleveai-maths-cm1-prop-fois-plus-short.vignette.webp",
+  "titre": "Sur la Lune, tu sauterais 6 fois plus haut ! 🚀 — CM1 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=proportionnalite&microId=prop_fois_plus&display=simple"
+ },
+ "cm1-prop-reconnaitre": {
+  "fichier": "cm1/maths/proportionnalite/01-reconnaitre/eleveai-maths-cm1-prop-reconnaitre.mp4",
+  "poster": "cm1/maths/proportionnalite/01-reconnaitre/eleveai-maths-cm1-prop-reconnaitre.png",
+  "vignette": "cm1/maths/proportionnalite/01-reconnaitre/eleveai-maths-cm1-prop-reconnaitre.vignette.webp",
+  "titre": "10 paniers, combien de points ? — Reconnaître la proportionnalité — épisode 1 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=proportionnalite&microId=prop_reconnaitre&display=simple"
+ },
+ "cm1-prop-reconnaitre-short": {
+  "fichier": "cm1/maths/proportionnalite/01-reconnaitre/eleveai-maths-cm1-prop-reconnaitre-short.mp4",
+  "poster": "cm1/maths/proportionnalite/01-reconnaitre/eleveai-maths-cm1-prop-reconnaitre-short.png",
+  "vignette": "cm1/maths/proportionnalite/01-reconnaitre/eleveai-maths-cm1-prop-reconnaitre-short.vignette.webp",
+  "titre": "5 musiciens jouent-ils 5 fois plus longtemps ? 🎵 — CM1 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=proportionnalite&microId=prop_reconnaitre&display=simple"
+ },
+ "cm1-prop-tableau": {
+  "fichier": "cm1/maths/proportionnalite/04-tableau/eleveai-maths-cm1-prop-tableau.mp4",
+  "poster": "cm1/maths/proportionnalite/04-tableau/eleveai-maths-cm1-prop-tableau.png",
+  "vignette": "cm1/maths/proportionnalite/04-tableau/eleveai-maths-cm1-prop-tableau.vignette.webp",
+  "titre": "1 wagon : 20 places. 5 wagons ? — Compléter un tableau de proportionnalité — épisode 4 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=proportionnalite&microId=prop_tableau&display=simple"
+ },
+ "cm1-prop-tableau-short": {
+  "fichier": "cm1/maths/proportionnalite/04-tableau/eleveai-maths-cm1-prop-tableau-short.mp4",
+  "poster": "cm1/maths/proportionnalite/04-tableau/eleveai-maths-cm1-prop-tableau-short.png",
+  "vignette": "cm1/maths/proportionnalite/04-tableau/eleveai-maths-cm1-prop-tableau-short.vignette.webp",
+  "titre": "Combien de pattes pour 100 fourmis ? 🐜 — CM1 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=proportionnalite&microId=prop_tableau&display=simple"
+ },
  "cm1-stats-graphique-completer": {
   "fichier": "cm1/maths/statistiques/06-graphique-completer/eleveai-maths-cm1-stats-graphique-completer.mp4",
   "poster": "cm1/maths/statistiques/06-graphique-completer/eleveai-maths-cm1-stats-graphique-completer.png",
@@ -4688,6 +4760,42 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=probabilite&microId=probabilite_vocabulaire&display=simple"
+ },
+ "cm2-prop-reconnaitre": {
+  "fichier": "cm2/maths/proportionnalite/01-reconnaitre/eleveai-maths-cm2-prop-reconnaitre.mp4",
+  "poster": "cm2/maths/proportionnalite/01-reconnaitre/eleveai-maths-cm2-prop-reconnaitre.png",
+  "vignette": "cm2/maths/proportionnalite/01-reconnaitre/eleveai-maths-cm2-prop-reconnaitre.vignette.webp",
+  "titre": "10 paniers, combien de points ? — Reconnaître la proportionnalité — épisode 1 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=proportionnalite&microId=prop_reconnaitre&display=simple"
+ },
+ "cm2-prop-reconnaitre-short": {
+  "fichier": "cm2/maths/proportionnalite/01-reconnaitre/eleveai-maths-cm2-prop-reconnaitre-short.mp4",
+  "poster": "cm2/maths/proportionnalite/01-reconnaitre/eleveai-maths-cm2-prop-reconnaitre-short.png",
+  "vignette": "cm2/maths/proportionnalite/01-reconnaitre/eleveai-maths-cm2-prop-reconnaitre-short.vignette.webp",
+  "titre": "5 musiciens jouent-ils 5 fois plus longtemps ? 🎵 — CM2 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=proportionnalite&microId=prop_reconnaitre&display=simple"
+ },
+ "cm2-prop-tableau": {
+  "fichier": "cm2/maths/proportionnalite/04-tableau/eleveai-maths-cm2-prop-tableau.mp4",
+  "poster": "cm2/maths/proportionnalite/04-tableau/eleveai-maths-cm2-prop-tableau.png",
+  "vignette": "cm2/maths/proportionnalite/04-tableau/eleveai-maths-cm2-prop-tableau.vignette.webp",
+  "titre": "1 wagon : 20 places. 5 wagons ? — Compléter un tableau de proportionnalité — épisode 4 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=proportionnalite&microId=prop_tableau&display=simple"
+ },
+ "cm2-prop-tableau-short": {
+  "fichier": "cm2/maths/proportionnalite/04-tableau/eleveai-maths-cm2-prop-tableau-short.mp4",
+  "poster": "cm2/maths/proportionnalite/04-tableau/eleveai-maths-cm2-prop-tableau-short.png",
+  "vignette": "cm2/maths/proportionnalite/04-tableau/eleveai-maths-cm2-prop-tableau-short.vignette.webp",
+  "titre": "Combien de pattes pour 100 fourmis ? 🐜 — CM2 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=proportionnalite&microId=prop_tableau&display=simple"
  },
  "cm2-stats-graphique-completer": {
   "fichier": "cm2/maths/statistiques/06-graphique-completer/eleveai-maths-cm2-stats-graphique-completer.mp4",

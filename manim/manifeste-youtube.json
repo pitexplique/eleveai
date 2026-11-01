@@ -51543,6 +51543,855 @@
         "cinema-series",
         "argent-budget"
       ]
+    },
+    {
+      "id": "cm1-prop-reconnaitre",
+      "notionId": "proportionnalite",
+      "microId": "prop_reconnaitre",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/proportionnalite/01-reconnaitre/eleveai-maths-cm1-prop-reconnaitre.mp4",
+      "miniature": "cm1/maths/proportionnalite/01-reconnaitre/eleveai-maths-cm1-prop-reconnaitre.png",
+      "titre": "10 paniers, combien de points ? — Reconnaître la proportionnalité — épisode 1 · Maths CM1",
+      "accroche": "Adam est entraîneur de basket. Un panier vaut 2 points. Combien de points pour 3 paniers ? Et pour 10 paniers ? Et quand peut-on multiplier ?\n\nDans cette vidéo :\n• 1 panier : 2 points, 3 paniers : 6 points, 10 paniers : 20 points ; on multiplie toujours par 2\n• les points sont proportionnels aux paniers\n• le piège : Lili a 2 ans, Bob 5 ans ; quand Lili aura 4 ans, Bob aura 7 ans, pas 10 : on ajoute 3, ce n'est pas proportionnel\n• la méthode : on vérifie chaque colonne\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une fleuriste fait des bouquets : 1 bouquet, 5 fleurs ; 2 bouquets, 10 fleurs ; 3 bouquets, 16 fleurs. Est-ce proportionnel ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=proportionnalite&microId=prop_reconnaitre&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Adam, entraîneur de basket"
+        ],
+        [
+          "00:15",
+          "1 panier = 2 points : fois 2"
+        ],
+        [
+          "00:43",
+          "Question : roues, kilos ou degrés ?"
+        ],
+        [
+          "01:20",
+          "Lili et Bob : 3 ans de plus"
+        ],
+        [
+          "01:47",
+          "Question : l'âge de Bob"
+        ],
+        [
+          "02:18",
+          "La méthode : chaque colonne"
+        ],
+        [
+          "02:30",
+          "À toi de jouer"
+        ],
+        [
+          "02:49",
+          "Correction"
+        ],
+        [
+          "03:06",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "reconnaître la proportionnalité",
+        "situation de proportionnalité",
+        "multiplier par le même nombre",
+        "basket",
+        "entraîneur de basket",
+        "sport",
+        "proportionnalité",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:43",
+          "question": "Où multiplie-t-on toujours par le même nombre ?",
+          "choix": [
+            "1 vélo : 2 roues ; 3 vélos : 6 roues",
+            "Tom, 10 ans : 30 kilos ; 20 ans : 70 kilos",
+            "8 heures : 20 degrés ; midi : 28 degrés"
+          ],
+          "reponse": 0,
+          "explication": "Le nombre de roues, c'est toujours 2 fois le nombre de vélos : 3 × 2 = 6."
+        },
+        {
+          "t": "01:47",
+          "question": "Lili a 2 ans, Bob a 5 ans. Quand Lili aura 10 ans, quel âge aura Bob ?",
+          "choix": [
+            "25 ans",
+            "13 ans",
+            "20 ans"
+          ],
+          "reponse": 1,
+          "explication": "Bob a toujours 3 ans de plus : 10 + 3 = 13 ans. On ajoute, on ne multiplie pas."
+        }
+      ],
+      "centres": [
+        "sport"
+      ]
+    },
+    {
+      "id": "cm1-prop-reconnaitre-short",
+      "notionId": "proportionnalite",
+      "microId": "prop_reconnaitre",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-prop-reconnaitre",
+      "fichier": "cm1/maths/proportionnalite/01-reconnaitre/eleveai-maths-cm1-prop-reconnaitre-short.mp4",
+      "miniature": "cm1/maths/proportionnalite/01-reconnaitre/eleveai-maths-cm1-prop-reconnaitre-short.png",
+      "titre": "5 musiciens jouent-ils 5 fois plus longtemps ? 🎵 — CM1 #Shorts",
+      "accroche": "1 musicien joue une chanson en 3 minutes. 5 musiciens, ensemble, la même chanson : 15 minutes ? Non ! Ils jouent en même temps : toujours 3 minutes. On ne multiplie pas toujours !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 1 tee-shirt sèche au soleil en 2 heures. 5 tee-shirts étendus en même temps sèchent en combien de temps ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=proportionnalite&microId=prop_reconnaitre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #proportionnalité #cm1 #primaire",
+      "tags": [
+        "piège de proportionnalité",
+        "pas proportionnel",
+        "musiciens",
+        "musique",
+        "énigme",
+        "proportionnalité",
+        "maths",
+        "CM1",
+        "école",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:26",
+          "question": "1 œuf cuit en 10 minutes. 3 œufs, dans la même casserole, cuisent en…",
+          "choix": [
+            "30 minutes",
+            "10 minutes",
+            "13 minutes"
+          ],
+          "reponse": 1,
+          "explication": "Les 3 œufs cuisent en même temps : 10 minutes. On ne multiplie pas toujours !"
+        }
+      ],
+      "centres": [
+        "musique",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm2-prop-reconnaitre",
+      "notionId": "proportionnalite",
+      "microId": "prop_reconnaitre",
+      "classe": "cm2",
+      "ceinture": "jaune",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/proportionnalite/01-reconnaitre/eleveai-maths-cm2-prop-reconnaitre.mp4",
+      "miniature": "cm2/maths/proportionnalite/01-reconnaitre/eleveai-maths-cm2-prop-reconnaitre.png",
+      "titre": "10 paniers, combien de points ? — Reconnaître la proportionnalité — épisode 1 · Maths CM2",
+      "accroche": "Adam est entraîneur de basket. Un panier vaut 2 points. Combien de points pour 3 paniers ? Et pour 10 paniers ? Et quand peut-on multiplier ?\n\nDans cette vidéo :\n• 1 panier : 2 points, 3 paniers : 6 points, 10 paniers : 20 points ; on multiplie toujours par 2\n• les points sont proportionnels aux paniers\n• le piège : Lili a 2 ans, Bob 5 ans ; quand Lili aura 4 ans, Bob aura 7 ans, pas 10 : on ajoute 3, ce n'est pas proportionnel\n• la méthode : on vérifie chaque colonne\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : une fleuriste fait des bouquets : 1 bouquet, 5 fleurs ; 2 bouquets, 10 fleurs ; 3 bouquets, 16 fleurs. Est-ce proportionnel ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/cm2/proportionnalite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=proportionnalite&microId=prop_reconnaitre&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Adam, entraîneur de basket"
+        ],
+        [
+          "00:15",
+          "1 panier = 2 points : fois 2"
+        ],
+        [
+          "00:43",
+          "Question : roues, kilos ou degrés ?"
+        ],
+        [
+          "01:20",
+          "Lili et Bob : 3 ans de plus"
+        ],
+        [
+          "01:47",
+          "Question : l'âge de Bob"
+        ],
+        [
+          "02:18",
+          "La méthode : chaque colonne"
+        ],
+        [
+          "02:30",
+          "À toi de jouer"
+        ],
+        [
+          "02:49",
+          "Correction"
+        ],
+        [
+          "03:06",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/cm2/proportionnalite",
+      "tags": [
+        "reconnaître la proportionnalité",
+        "situation de proportionnalité",
+        "multiplier par le même nombre",
+        "basket",
+        "entraîneur de basket",
+        "sport",
+        "proportionnalité",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:43",
+          "question": "Où multiplie-t-on toujours par le même nombre ?",
+          "choix": [
+            "1 vélo : 2 roues ; 3 vélos : 6 roues",
+            "Tom, 10 ans : 30 kilos ; 20 ans : 70 kilos",
+            "8 heures : 20 degrés ; midi : 28 degrés"
+          ],
+          "reponse": 0,
+          "explication": "Le nombre de roues, c'est toujours 2 fois le nombre de vélos : 3 × 2 = 6."
+        },
+        {
+          "t": "01:47",
+          "question": "Lili a 2 ans, Bob a 5 ans. Quand Lili aura 10 ans, quel âge aura Bob ?",
+          "choix": [
+            "25 ans",
+            "13 ans",
+            "20 ans"
+          ],
+          "reponse": 1,
+          "explication": "Bob a toujours 3 ans de plus : 10 + 3 = 13 ans. On ajoute, on ne multiplie pas."
+        }
+      ],
+      "centres": [
+        "sport"
+      ]
+    },
+    {
+      "id": "cm2-prop-reconnaitre-short",
+      "notionId": "proportionnalite",
+      "microId": "prop_reconnaitre",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-prop-reconnaitre",
+      "fichier": "cm2/maths/proportionnalite/01-reconnaitre/eleveai-maths-cm2-prop-reconnaitre-short.mp4",
+      "miniature": "cm2/maths/proportionnalite/01-reconnaitre/eleveai-maths-cm2-prop-reconnaitre-short.png",
+      "titre": "5 musiciens jouent-ils 5 fois plus longtemps ? 🎵 — CM2 #Shorts",
+      "accroche": "1 musicien joue une chanson en 3 minutes. 5 musiciens, ensemble, la même chanson : 15 minutes ? Non ! Ils jouent en même temps : toujours 3 minutes. On ne multiplie pas toujours !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 1 tee-shirt sèche au soleil en 2 heures. 5 tee-shirts étendus en même temps sèchent en combien de temps ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=proportionnalite&microId=prop_reconnaitre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #proportionnalité #cm2 #primaire",
+      "tags": [
+        "piège de proportionnalité",
+        "pas proportionnel",
+        "musiciens",
+        "musique",
+        "énigme",
+        "proportionnalité",
+        "maths",
+        "CM2",
+        "école",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:26",
+          "question": "1 œuf cuit en 10 minutes. 3 œufs, dans la même casserole, cuisent en…",
+          "choix": [
+            "30 minutes",
+            "10 minutes",
+            "13 minutes"
+          ],
+          "reponse": 1,
+          "explication": "Les 3 œufs cuisent en même temps : 10 minutes. On ne multiplie pas toujours !"
+        }
+      ],
+      "centres": [
+        "musique",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm1-prop-fois-plus",
+      "notionId": "proportionnalite",
+      "microId": "prop_fois_plus",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/proportionnalite/02-fois-plus/eleveai-maths-cm1-prop-fois-plus.mp4",
+      "miniature": "cm1/maths/proportionnalite/02-fois-plus/eleveai-maths-cm1-prop-fois-plus.png",
+      "titre": "3 fois plus de rangées, combien de salades ? — Fois plus — épisode 2 · Maths CM1",
+      "accroche": "Fatou est maraîchère. Dans son jardin, 1 rangée a 6 salades. Si elle plante 2 fois, puis 3 fois plus de rangées, combien de salades aura-t-elle ?\n\nDans cette vidéo :\n• 2 fois plus de rangées, donc 2 fois plus de salades : 6 × 2 = 12\n• 3 fois plus de rangées : 12 × 3 = 36 salades\n• on multiplie les deux quantités par le même nombre\n• le piège : 3 fois plus, ce n'est pas 3 de plus (36 salades, et pas 15)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 2 ruches donnent 20 kilos de miel en un an. Combien donnent 4 ruches ? Et 10 ruches ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=proportionnalite&microId=prop_fois_plus&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Fatou, maraîchère : 1 rangée = 6 salades"
+        ],
+        [
+          "00:21",
+          "2 fois plus : 12 salades"
+        ],
+        [
+          "00:31",
+          "3 fois plus : 36 salades"
+        ],
+        [
+          "00:41",
+          "Question : 5 sachets de graines"
+        ],
+        [
+          "01:13",
+          "Le piège : 3 de plus"
+        ],
+        [
+          "01:27",
+          "Question : les pieds de tomates"
+        ],
+        [
+          "01:57",
+          "À toi de jouer"
+        ],
+        [
+          "02:13",
+          "Correction"
+        ],
+        [
+          "02:27",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "fois plus",
+        "raisonnement fois plus",
+        "multiplier",
+        "maraîchère",
+        "jardin",
+        "salades",
+        "nature",
+        "proportionnalité",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:41",
+          "question": "1 sachet : 4 graines. Combien de graines dans 5 sachets ?",
+          "choix": [
+            "9 graines",
+            "20 graines",
+            "24 graines"
+          ],
+          "reponse": 1,
+          "explication": "5 fois plus de sachets, donc 5 fois plus de graines : 4 × 5 = 20 graines."
+        },
+        {
+          "t": "01:27",
+          "question": "2 rangées donnent 10 pieds de tomates. 3 fois plus de rangées donnent…",
+          "choix": [
+            "13 pieds",
+            "30 pieds",
+            "12 pieds"
+          ],
+          "reponse": 1,
+          "explication": "3 fois plus de rangées, donc 3 fois plus de pieds : 10 × 3 = 30 pieds de tomates."
+        }
+      ],
+      "centres": [
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "cm1-prop-fois-plus-short",
+      "notionId": "proportionnalite",
+      "microId": "prop_fois_plus",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-prop-fois-plus",
+      "fichier": "cm1/maths/proportionnalite/02-fois-plus/eleveai-maths-cm1-prop-fois-plus-short.mp4",
+      "miniature": "cm1/maths/proportionnalite/02-fois-plus/eleveai-maths-cm1-prop-fois-plus-short.png",
+      "titre": "Sur la Lune, tu sauterais 6 fois plus haut ! 🚀 — CM1 #Shorts",
+      "accroche": "Sur Terre, tu sautes à peu près 30 centimètres de haut. Sur la Lune, on saute environ 6 fois plus haut : 30 × 6 = 180 centimètres, presque la hauteur d'une porte !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Ti Margo saute 10 centimètres sur Terre. Combien sur la Lune ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=proportionnalite&microId=prop_fois_plus&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #proportionnalité #cm1 #primaire",
+      "tags": [
+        "fois plus",
+        "Lune",
+        "gravité",
+        "saut",
+        "espace",
+        "astronaute",
+        "proportionnalité",
+        "maths",
+        "CM1",
+        "école",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:19",
+          "question": "Un champion saute 2 mètres de haut sur Terre. Sur la Lune, il saute…",
+          "choix": [
+            "8 mètres",
+            "12 mètres",
+            "6 mètres"
+          ],
+          "reponse": 1,
+          "explication": "6 fois plus haut : 2 × 6 = 12 mètres, la hauteur d'un immeuble de 4 étages."
+        }
+      ],
+      "centres": [
+        "espace",
+        "sport"
+      ]
+    },
+    {
+      "id": "cm1-prop-fois-moins",
+      "notionId": "proportionnalite",
+      "microId": "prop_fois_moins",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/proportionnalite/03-fois-moins/eleveai-maths-cm1-prop-fois-moins.mp4",
+      "miniature": "cm1/maths/proportionnalite/03-fois-moins/eleveai-maths-cm1-prop-fois-moins.png",
+      "titre": "2 fois moins de murs, combien de peinture ? — Fois moins — épisode 3 · Maths CM1",
+      "accroche": "Malik est peintre en bâtiment. Pour peindre 6 murs, il lui faut 12 litres de peinture. Et pour 3 murs ? Et pour 2 murs ?\n\nDans cette vidéo :\n• 3 murs, c'est 2 fois moins que 6 : 12 ÷ 2 = 6 litres\n• 2 murs, c'est 3 fois moins : 12 ÷ 3 = 4 litres\n• on divise les deux quantités par le même nombre\n• le piège : 3 fois moins, ce n'est pas 3 de moins (4 litres, et pas 9)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : pour peindre 10 volets, Malik utilise 20 litres. Combien pour 5 volets ? Et pour 2 volets ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=proportionnalite&microId=prop_fois_moins&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Malik, peintre : 6 murs = 12 litres"
+        ],
+        [
+          "00:21",
+          "2 fois moins : 6 litres"
+        ],
+        [
+          "00:34",
+          "3 fois moins : 4 litres"
+        ],
+        [
+          "00:45",
+          "Question : 4 murs"
+        ],
+        [
+          "01:22",
+          "Le piège : 3 de moins"
+        ],
+        [
+          "01:35",
+          "Question : 1 seul mur"
+        ],
+        [
+          "02:06",
+          "À toi de jouer"
+        ],
+        [
+          "02:20",
+          "Correction"
+        ],
+        [
+          "02:35",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "fois moins",
+        "raisonnement fois moins",
+        "diviser",
+        "peintre en bâtiment",
+        "peinture",
+        "art",
+        "proportionnalité",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:45",
+          "question": "8 murs : 24 litres. Combien pour 4 murs ?",
+          "choix": [
+            "12 litres",
+            "22 litres",
+            "48 litres"
+          ],
+          "reponse": 0,
+          "explication": "4 murs, c'est 2 fois moins que 8 murs : 24 ÷ 2 = 12 litres. 48, c'est 2 fois plus : la mauvaise direction."
+        },
+        {
+          "t": "01:35",
+          "question": "5 murs : 15 litres. Combien pour 1 seul mur ?",
+          "choix": [
+            "10 litres",
+            "3 litres",
+            "75 litres"
+          ],
+          "reponse": 1,
+          "explication": "1 mur, c'est 5 fois moins que 5 murs : 15 ÷ 5 = 3 litres."
+        }
+      ],
+      "centres": [
+        "art-design"
+      ]
+    },
+    {
+      "id": "cm1-prop-fois-moins-short",
+      "notionId": "proportionnalite",
+      "microId": "prop_fois_moins",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-prop-fois-moins",
+      "fichier": "cm1/maths/proportionnalite/03-fois-moins/eleveai-maths-cm1-prop-fois-moins-short.mp4",
+      "miniature": "cm1/maths/proportionnalite/03-fois-moins/eleveai-maths-cm1-prop-fois-moins-short.png",
+      "titre": "Combien de moustiques Ti Margo attrape-t-il ? 🦎 — CM1 #Shorts",
+      "accroche": "En 6 minutes, Ti Margo attrape 30 moustiques. Et en 2 minutes ? C'est 3 fois moins de temps, donc 3 fois moins de moustiques : 30 ÷ 3 = 10 moustiques.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : combien de moustiques Ti Margo attrape-t-il en 3 minutes ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=proportionnalite&microId=prop_fois_moins&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #proportionnalité #cm1 #primaire",
+      "tags": [
+        "fois moins",
+        "diviser",
+        "Ti Margo",
+        "margouillat",
+        "moustiques",
+        "animaux",
+        "proportionnalité",
+        "maths",
+        "CM1",
+        "école",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:22",
+          "question": "Et en 1 minute ?",
+          "choix": [
+            "5 moustiques",
+            "24 moustiques",
+            "180 moustiques"
+          ],
+          "reponse": 0,
+          "explication": "1 minute, c'est 6 fois moins que 6 minutes : 30 ÷ 6 = 5 moustiques."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm1-prop-tableau",
+      "notionId": "proportionnalite",
+      "microId": "prop_tableau",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/proportionnalite/04-tableau/eleveai-maths-cm1-prop-tableau.mp4",
+      "miniature": "cm1/maths/proportionnalite/04-tableau/eleveai-maths-cm1-prop-tableau.png",
+      "titre": "1 wagon : 20 places. 5 wagons ? — Compléter un tableau de proportionnalité — épisode 4 · Maths CM1",
+      "accroche": "Léna conduit un petit train touristique. Chaque wagon a 20 places. Combien de places pour 2, 3, 4 ou 5 wagons ? Un tableau range tout.\n\nDans cette vidéo :\n• d'en haut à en bas, on multiplie par 20 : 2 × 20 = 40, 3 × 20 = 60, 5 × 20 = 100\n• autre chemin, les colonnes : 4 wagons, c'est 2 fois plus que 2 wagons, donc 40 × 2 = 80 places\n• le piège : un wagon de plus, ce n'est pas une place de plus (80, et pas 61)\n• on n'ajoute jamais le même nombre\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : dans un autre train, 2 wagons ont 50 places. Combien de places pour 4 wagons, 6 wagons, et 1 wagon ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=proportionnalite&microId=prop_tableau&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Léna, conductrice de train"
+        ],
+        [
+          "00:19",
+          "Le tableau : 1 wagon, 20 places"
+        ],
+        [
+          "00:30",
+          "Fois 20 : d'en haut à en bas"
+        ],
+        [
+          "00:49",
+          "Question : 4 wagons"
+        ],
+        [
+          "01:21",
+          "Les colonnes : 2 fois plus"
+        ],
+        [
+          "01:35",
+          "Le piège : 61 places ?"
+        ],
+        [
+          "01:50",
+          "Question : par quel nombre ?"
+        ],
+        [
+          "02:29",
+          "À toi de jouer"
+        ],
+        [
+          "02:44",
+          "Correction"
+        ],
+        [
+          "03:04",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "tableau de proportionnalité",
+        "compléter un tableau",
+        "multiplier par le même nombre",
+        "train",
+        "conductrice",
+        "transports",
+        "proportionnalité",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:49",
+          "question": "Combien de places pour 4 wagons ? (1 wagon = 20 places)",
+          "choix": [
+            "24 places",
+            "80 places",
+            "60 places"
+          ],
+          "reponse": 1,
+          "explication": "On multiplie par 20 : 4 × 20 = 80 places. 24 = 20 + 4 : on a ajouté au lieu de multiplier."
+        },
+        {
+          "t": "01:50",
+          "question": "2 wagons = 30 places ; 6 wagons = 90 places. Par quel nombre passe-t-on d'en haut à en bas ?",
+          "choix": [
+            "× 15",
+            "+ 28",
+            "× 3"
+          ],
+          "reponse": 0,
+          "explication": "2 × 15 = 30 et 6 × 15 = 90. Fois 3, c'est pour passer d'une colonne à l'autre."
+        }
+      ],
+      "centres": [
+        "transports"
+      ]
+    },
+    {
+      "id": "cm1-prop-tableau-short",
+      "notionId": "proportionnalite",
+      "microId": "prop_tableau",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-prop-tableau",
+      "fichier": "cm1/maths/proportionnalite/04-tableau/eleveai-maths-cm1-prop-tableau-short.mp4",
+      "miniature": "cm1/maths/proportionnalite/04-tableau/eleveai-maths-cm1-prop-tableau-short.png",
+      "titre": "Combien de pattes pour 100 fourmis ? 🐜 — CM1 #Shorts",
+      "accroche": "Une fourmi a 6 pattes. 2 fourmis : 12 pattes. 10 fourmis : 60 pattes. Et 100 fourmis ? 6 × 100 = 600 pattes, sans les compter une par une !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 10 fourmis et 10 araignées : combien de pattes en tout ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=proportionnalite&microId=prop_tableau&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #proportionnalité #cm1 #primaire",
+      "tags": [
+        "tableau de proportionnalité",
+        "fourmis",
+        "araignées",
+        "pattes",
+        "insectes",
+        "animaux",
+        "proportionnalité",
+        "maths",
+        "CM1",
+        "école",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:18",
+          "question": "Une araignée a 8 pattes. 5 araignées ont…",
+          "choix": [
+            "13 pattes",
+            "40 pattes",
+            "85 pattes"
+          ],
+          "reponse": 1,
+          "explication": "On multiplie par 8 : 5 × 8 = 40 pattes."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "sciences"
+      ]
+    },
+    {
+      "id": "cm2-prop-tableau",
+      "notionId": "proportionnalite",
+      "microId": "prop_tableau",
+      "classe": "cm2",
+      "ceinture": "jaune",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/proportionnalite/04-tableau/eleveai-maths-cm2-prop-tableau.mp4",
+      "miniature": "cm2/maths/proportionnalite/04-tableau/eleveai-maths-cm2-prop-tableau.png",
+      "titre": "1 wagon : 20 places. 5 wagons ? — Compléter un tableau de proportionnalité — épisode 4 · Maths CM2",
+      "accroche": "Léna conduit un petit train touristique. Chaque wagon a 20 places. Combien de places pour 2, 3, 4 ou 5 wagons ? Un tableau range tout.\n\nDans cette vidéo :\n• d'en haut à en bas, on multiplie par 20 : 2 × 20 = 40, 3 × 20 = 60, 5 × 20 = 100\n• autre chemin, les colonnes : 4 wagons, c'est 2 fois plus que 2 wagons, donc 40 × 2 = 80 places\n• le piège : un wagon de plus, ce n'est pas une place de plus (80, et pas 61)\n• on n'ajoute jamais le même nombre\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : dans un autre train, 2 wagons ont 50 places. Combien de places pour 4 wagons, 6 wagons, et 1 wagon ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/cm2/proportionnalite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=proportionnalite&microId=prop_tableau&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Léna, conductrice de train"
+        ],
+        [
+          "00:19",
+          "Le tableau : 1 wagon, 20 places"
+        ],
+        [
+          "00:30",
+          "Fois 20 : d'en haut à en bas"
+        ],
+        [
+          "00:49",
+          "Question : 4 wagons"
+        ],
+        [
+          "01:21",
+          "Les colonnes : 2 fois plus"
+        ],
+        [
+          "01:35",
+          "Le piège : 61 places ?"
+        ],
+        [
+          "01:50",
+          "Question : par quel nombre ?"
+        ],
+        [
+          "02:29",
+          "À toi de jouer"
+        ],
+        [
+          "02:44",
+          "Correction"
+        ],
+        [
+          "03:04",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/cm2/proportionnalite",
+      "tags": [
+        "tableau de proportionnalité",
+        "compléter un tableau",
+        "multiplier par le même nombre",
+        "train",
+        "conductrice",
+        "transports",
+        "proportionnalité",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:49",
+          "question": "Combien de places pour 4 wagons ? (1 wagon = 20 places)",
+          "choix": [
+            "24 places",
+            "80 places",
+            "60 places"
+          ],
+          "reponse": 1,
+          "explication": "On multiplie par 20 : 4 × 20 = 80 places. 24 = 20 + 4 : on a ajouté au lieu de multiplier."
+        },
+        {
+          "t": "01:50",
+          "question": "2 wagons = 30 places ; 6 wagons = 90 places. Par quel nombre passe-t-on d'en haut à en bas ?",
+          "choix": [
+            "× 15",
+            "+ 28",
+            "× 3"
+          ],
+          "reponse": 0,
+          "explication": "2 × 15 = 30 et 6 × 15 = 90. Fois 3, c'est pour passer d'une colonne à l'autre."
+        }
+      ],
+      "centres": [
+        "transports"
+      ]
+    },
+    {
+      "id": "cm2-prop-tableau-short",
+      "notionId": "proportionnalite",
+      "microId": "prop_tableau",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-prop-tableau",
+      "fichier": "cm2/maths/proportionnalite/04-tableau/eleveai-maths-cm2-prop-tableau-short.mp4",
+      "miniature": "cm2/maths/proportionnalite/04-tableau/eleveai-maths-cm2-prop-tableau-short.png",
+      "titre": "Combien de pattes pour 100 fourmis ? 🐜 — CM2 #Shorts",
+      "accroche": "Une fourmi a 6 pattes. 2 fourmis : 12 pattes. 10 fourmis : 60 pattes. Et 100 fourmis ? 6 × 100 = 600 pattes, sans les compter une par une !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 10 fourmis et 10 araignées : combien de pattes en tout ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=proportionnalite&microId=prop_tableau&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #proportionnalité #cm2 #primaire",
+      "tags": [
+        "tableau de proportionnalité",
+        "fourmis",
+        "araignées",
+        "pattes",
+        "insectes",
+        "animaux",
+        "proportionnalité",
+        "maths",
+        "CM2",
+        "école",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:18",
+          "question": "Une araignée a 8 pattes. 5 araignées ont…",
+          "choix": [
+            "13 pattes",
+            "40 pattes",
+            "85 pattes"
+          ],
+          "reponse": 1,
+          "explication": "On multiplie par 8 : 5 × 8 = 40 pattes."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "sciences"
+      ]
     }
   ]
 }
