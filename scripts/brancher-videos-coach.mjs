@@ -76,12 +76,23 @@ const estShort = (url) => /\/shorts\/|[?&]format=short\b/.test(url ?? "");
 
 // ── La base d'abord : ce qui est déjà branché, par ID YouTube ────────────────
 const db = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
-const { data: existant, error } = await db
-  .from("notion_ressources")
-  .select("classe, notion_id, micro_id, url")
-  .eq("matiere", "maths")
-  .eq("type", "video");
-if (error) throw error;
+// ⛔ 01/11/2026 : Supabase coupe une lecture à 1 000 lignes (la table en a plus) ;
+// sans pagination, des vidéos branchées paraissaient « à brancher » et --ecrire
+// aurait créé des doublons. On lit donc par pages, dans un ordre stable (id).
+const PAGE = 1000;
+const existant = [];
+for (let debut = 0; ; debut += PAGE) {
+  const { data, error } = await db
+    .from("notion_ressources")
+    .select("classe, notion_id, micro_id, url")
+    .eq("matiere", "maths")
+    .eq("type", "video")
+    .order("id")
+    .range(debut, debut + PAGE - 1);
+  if (error) throw error;
+  existant.push(...data);
+  if (data.length < PAGE) break;
+}
 
 const cle = (r) => `${r.classe}|${r.notion_id}|${r.micro_id ?? ""}`;
 const parPlace = new Map();
