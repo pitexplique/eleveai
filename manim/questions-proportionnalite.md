@@ -523,3 +523,13 @@ Sources : Salomé et recettes inventées (5 : 3, soit 60 % d'eau, plausible pour
 ]
 ```
 Sources : Bastien et recettes de terreau inventés. Deux rendus HD (le cadre « = la valeur d'une part » touchait le bord droit en entrant). Défauts mineurs : phrases de réponse petites ; « seaux » écrit petit dans les blocs.
+
+## 4e 31-ratio-partager (lot 5, rendu le 01/11)
+**Paysage** `4e-prop-ratio-partager` — 4:16, ceinture verte — centres `musique`, `argent-budget` (précision `rap`)
+```json
+[
+  {"t":"01:06","question":"90 € partagés selon le ratio 1 : 2. Combien pour chacun ?","choix":["45 € et 45 €","30 € et 60 €","90 € et 180 €"],"reponse":1,"explication":"1 + 2 = 3 parts ; 90 ÷ 3 = 30 € par part ; 30 € pour l'un, 2 × 30 = 60 € pour l'autre."},
+  {"t":"02:29","question":"600 € partagés selon le ratio 3 : 1. Combien pour le premier ?","choix":["200 €","450 €","300 €"],"reponse":1,"explication":"3 + 1 = 4 parts ; 600 ÷ 4 = 150 € ; le premier reçoit 3 × 150 = 450 €."}
+]
+```
+Sources : Awa, Djibril, Marius, Inaya, cachets (1 200 €, 2 000 €) et ventes de tee-shirts (1 500 €) inventés. Défauts mineurs : l'énoncé des questions commence par « 90 € » (ou « 600 € ») seul sur sa ligne, pour le calage ; « 150 € » petits dans les blocs du défi.
