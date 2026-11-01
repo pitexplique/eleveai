@@ -483,3 +483,13 @@ Sources : tournoi, eau (1,5 L par joueur), packs à 3 €, barres, bus à 150 �
 ]
 ```
 Sources : 1,5 kWh par panneau et par jour de soleil = ordre de grandeur d'un panneau d'environ 400 W ; Maël, maisons et défi (24 kWh → 16 panneaux) inventés. Défauts mineurs : à la correction, le cadre vert passe tout près de « ÷ 1,5 » ; repère un peu petit sur « Ce que tu as appris ».
+
+## 4e 27-defi (lot 5, rendu le 01/11)
+**Paysage** `4e-prop-defi` — 4:14, ceinture verte — centres `jeux-video`
+```json
+[
+  {"t":"00:45","question":"3 quêtes rapportent 450 pièces. Combien rapportent 7 quêtes ?","choix":["454 pièces","1 050 pièces","1 350 pièces"],"reponse":1,"explication":"1 quête : 450 ÷ 3 = 150 pièces. 7 quêtes : 150 × 7 = 1 050 pièces."},
+  {"t":"02:14","question":"800 pièces coûtent 5 €. Combien coûtent 400 pièces ?","choix":["2,50 €","10 €","1 €"],"reponse":0,"explication":"400, c'est la moitié de 800. Donc la moitié de 5 € : 2,50 €."}
+]
+```
+Sources : Kenza, jeu, quêtes, niveaux, packs et boss inventés. Défauts mineurs : phrase de réponse de la question 2 assez petite ; « 1 050 » réduit dans sa case.
