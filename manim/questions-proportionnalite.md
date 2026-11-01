@@ -643,3 +643,19 @@ Sources : gravité lunaire 1,62 m/s² ≈ 1/6 (NASA, via Space.com) ; ruche 10 k
 ]
 ```
 t relevés au dry run (durées HD identiques). Aucun fait réel cité (2 L par mur : ordre de grandeur ≈ 10 m²/L/couche). Bords 0 (les deux). Marques régénérées avec une variante de cues2marques qui date aussi le mot après un nombre (scratchpad `agent-fois-moins/cues2marques2.py`). Défaut mineur : écran 01, rangée des murs serrée près de la tête de Malik.
+
+### CM 04 — tableau (COMMUN : ids `cm1-prop-tableau[-short]` et `cm2-prop-tableau[-short]`, mêmes `questions` ; micro `prop_tableau`)
+- Paysage (3:28, CM1 verte / CM2 jaune, garde CM2 collée ; Léna conductrice d'un petit train touristique : 1 wagon = 20 places, × 20 ; colonnes × 2 ; piège 61 barré ; défi 2 wagons = 50 places → 100, 150, 25). Centres : `["transports"]`.
+```json
+"questions": [
+ {"t":"00:49","question":"Combien de places pour 4 wagons ? (1 wagon = 20 places)","choix":["24 places","80 places","60 places"],"reponse":1,"explication":"On multiplie par 20 : 4 × 20 = 80 places. 24 = 20 + 4 : on a ajouté au lieu de multiplier."},
+ {"t":"01:50","question":"2 wagons = 30 places ; 6 wagons = 90 places. Par quel nombre passe-t-on d'en haut à en bas ?","choix":["× 15","+ 28","× 3"],"reponse":0,"explication":"2 × 15 = 30 et 6 × 15 = 90. Fois 3, c'est pour passer d'une colonne à l'autre."}
+]
+```
+- Short (0:53, blanche, fourmis 6 pattes : 2 → 12, 10 → 60, 100 → 600). Centres : `["animaux","sciences"]`. Question en commentaire : « 10 fourmis et 10 araignées : combien de pattes ? » (140).
+```json
+"questions": [
+ {"t":"00:18","question":"Une araignée a 8 pattes. 5 araignées ont…","choix":["13 pattes","40 pattes","85 pattes"],"reponse":1,"explication":"On multiplie par 8 : 5 × 8 = 40 pattes."}
+]
+```
+Sources : 6 pattes (insecte), 8 pattes (arachnide), Muséum de Tours + Vikidia. Bords 0 (les 4 mp4). Paysage CM1 rendue 2 fois en HD (réponses des questions trop petites à la 1re). Défauts mineurs : les 100 mini-fourmis font un bloc de traits ; rangée des 5 araignées petite.

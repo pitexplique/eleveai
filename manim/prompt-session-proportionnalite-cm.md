@@ -34,8 +34,12 @@ Faits à vérifier et sourcer en tête des scripts : saut environ 6 fois plus ha
 
 ## État des rendus (01/11, à reprendre ici si la session change)
 - ✅ FINIS, vérifiés (bords 0) et commités : 01 reconnaitre `c19cb1ce`, 02 fois-plus `d82c8fdd`, 03 fois-moins `4530a4da` ; questions + centres dans la section CM de `manim/questions-proportionnalite.md`.
-- 04 tableau : agent lancé le 01/11 vers 13 h 35. S'il manque des fichiers et que rien ne bouge depuis longtemps : agent NEUF (« lis et applique le brief » + mission ci-dessous). Mission : `manim/scripts/cm1/prop_tableau.py` (`PropTableauCM1` verte / `PropTableauCM2` jaune, garde CM2 collée) + `prop_tableau_short.py` ; voix `cm-prop-tableau[-short].json` ; sorties `manim/sorties/<cm1|cm2>/maths/proportionnalite/04-tableau/` ; media_dir `manim/scripts/cm1/media-prop-tableau[-short]` ; modèle `manim/scripts/6e/prop_tableau.py` (`TableauProp`, flèche latérale « × 20 », flèches du haut « × 2 » entre colonnes).
+- ✅ 04 tableau FINI (voir `git log`), bords 0. Pour mémoire, sa mission : `manim/scripts/cm1/prop_tableau.py` (`PropTableauCM1` verte / `PropTableauCM2` jaune, garde CM2 collée) + `prop_tableau_short.py` ; voix `cm-prop-tableau[-short].json` ; sorties `manim/sorties/<cm1|cm2>/maths/proportionnalite/04-tableau/` ; media_dir `manim/scripts/cm1/media-prop-tableau[-short]` ; modèle `manim/scripts/6e/prop_tableau.py` (`TableauProp`, flèche latérale « × 20 », flèches du haut « × 2 » entre colonnes).
 - Vérifier chaque épisode soi-même : mp4 présents et immobiles, `verifier-bords-video.py` = 0 instants, planche de 12 images regardée, `questions` + centres notés dans une section « CM » de `manim/questions-proportionnalite.md`, puis commit par chemin (scripts + `*_marques.json` + questions, jamais `media-*` ni `*.cues.tsv`).
+
+## ⏭ Reste à faire (lot CM-A rendu en entier le 01/11)
+- Passe finale du lot CM-A (14 mp4 : 4 paysages CM1, 2 paysages CM2, shorts copiés) : miniatures, manifeste, `fiche-youtube.md`, R2, coach CM1 + CM2, fichiers pays du primaire.
+- Écrire les voix du lot CM-B et les faire valider par Frédéric.
 
 ## Après la validation
 1. Brief des agents (modèle `manim/brief-agent-proportionnalite-lot3.md`, adapté au CM) ; WAV ; scripts ; dry run (0 RETARD, 0 AUDIT-AVANCE) ; planche ; UN rendu HD ; `verifier-bords-video.py` ; section CM dans `manim/questions-proportionnalite.md`.
