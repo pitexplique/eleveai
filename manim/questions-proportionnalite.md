@@ -659,3 +659,21 @@ t relevés au dry run (durées HD identiques). Aucun fait réel cité (2 L par m
 ]
 ```
 Sources : 6 pattes (insecte), 8 pattes (arachnide), Muséum de Tours + Vikidia. Bords 0 (les 4 mp4). Paysage CM1 rendue 2 fois en HD (réponses des questions trop petites à la 1re). Défauts mineurs : les 100 mini-fourmis font un bloc de traits ; rangée des 5 araignées petite.
+
+## CM1 / CM2 — lot CM-B (01/11/2026 ; voix validées `1b10f19d`, brief `manim/brief-agent-proportionnalite-cm-b.md`)
+
+### CM2 06 — quatrieme (micro `prop_quatrieme`, CM2 seul)
+- Paysage `cm2-prop-quatrieme` (3:14, ceinture verte, Yanis météorologue : pluie 3 h = 12 mm, passage par 1 h (÷ 3 puis × 5) → 20 mm ; piège + 2 h ≠ + 2 mm (14 barré) ; défi satellite 15 photos en 5 min → 24 en 8 min). Centres : `["meteo-climat"]`.
+```json
+"questions": [
+ {"t":"01:01","question":"Une averse donne 20 mm en 4 heures. Combien en 1 heure ?","choix":["5 mm","16 mm","80 mm"],"reponse":0,"explication":"1 heure, c'est 4 fois moins : 20 ÷ 4 = 5 mm. 16 = 20 − 4 : on a enlevé au lieu de diviser."},
+ {"t":"01:51","question":"La neige tombe toujours aussi fort : 6 cm en 2 heures. Combien en 7 heures ?","choix":["11 cm","21 cm","42 cm"],"reponse":1,"explication":"En 1 heure : 6 ÷ 2 = 3 cm. En 7 heures : 3 × 7 = 21 cm."}
+]
+```
+- Short `cm2-prop-quatrieme-short` (1:00, ceinture blanche, guépard ≈ 90 m en 3 s → 30 m en 1 s → 150 m en 5 s). Centres : `["animaux","sport"]`. Question en commentaire : « 7 secondes à fond ? » (210 m).
+```json
+"questions": [
+ {"t":"00:24","question":"Le guépard parcourt 90 m en 3 s. Et en 4 secondes ?","choix":["91 m","120 m","360 m"],"reponse":1,"explication":"30 m en 1 seconde : 30 × 4 = 120 m."}
+]
+```
+Sources : guépard ≈ 110-120 km/h en pointe (Futura-Sciences ; Zoo de Montpellier, livret enseignant ; Vikidia), 30 m/s = 108 km/h. Bords 0 (les deux). Paysage rendue 2 fois en HD (flèches de la correction sur le titre à la 1re). Défaut mineur : « pour 1. » un peu décalé sur l'écran final.
