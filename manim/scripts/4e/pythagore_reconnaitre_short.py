@@ -6,7 +6,8 @@
 # Voix validée le 12/10 : manim/voix/4e-pythagore-reconnaitre-short.json.
 # ⭐ 31/10/2026 : + 1 question-pause après 01-image (questions-pythagore.md, Ép. 2),
 # compte à rebours de 3 s, module commun pythagore_pauses.py ; marques mot à mot :
-# 4e-pythagore-reconnaitre-short.marques.json. Avant tout rendu :
+# 4e-pythagore-reconnaitre-short.marques.json. 01/11 (corrections) : échelle entière des
+# ceintures sous le titre (la voix ne change pas). Avant tout rendu :
 #   AUDIT=1 BORDS=1 python -m manim render --dry_run -r 1080,1920 manim/scripts/4e/pythagore_reconnaitre_short.py ShortHypotenuse4e
 #
 # Rendu : python -m manim render -qh -r 1080,1920 --disable_caching manim/scripts/4e/pythagore_reconnaitre_short.py ShortHypotenuse4e -o eleveai-maths-4e-pythagore-reconnaitre-short --media_dir manim/scripts/4e/media
@@ -25,7 +26,7 @@ from manim import *
 from charte import *
 from gabarit_sixieme import Short6e
 from gabarit_trigo import COUL_HYP
-from signes_expression_2de import ceinture
+from signes_expression_2de import echelle_ceintures
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from pythagore_pauses import PausesShort, sans_audit  # noqa: E402
@@ -50,10 +51,12 @@ class ShortHypotenuse4e(PausesShort, Short6e):
 
         # ── 00 : le titre, la ceinture, la question ──
         self.dire("00-accroche")
-        titre = self.grand("L'hypoténuse", font_size=44, color=JAUNE_TITRE).move_to(P(0, 2.85))
-        badge = VGroup(ceinture("#F5F5F5", 0.8).scale(0.7), self.grand("Ceinture blanche", font_size=22))
-        badge.arrange(RIGHT, buff=0.18).move_to(P(0, 2.3))
-        q = self.grand("Quel côté est le plus long ?", font_size=28, color=BLEU_CALCUL).move_to(P(0, 1.9))
+        # (01/11) l'ÉCHELLE ENTIÈRE des ceintures sous le titre (REGLES.md l. 78), sans toucher
+        # ni le titre, ni l'accroche, ni la case (toit en haut à y ≈ 1,74).
+        titre = self.grand("L'hypoténuse", font_size=44, color=JAUNE_TITRE).move_to(P(0, 3.3))
+        badge = sans_audit(echelle_ceintures("blanche").scale_to_fit_width(config.frame_width * 0.7))
+        badge.move_to(P(0, 2.6))
+        q = self.grand("Quel côté est le plus long ?", font_size=28, color=BLEU_CALCUL).move_to(P(0, 2.0))
         self.play(FadeIn(titre), FadeIn(badge), run_time=0.8)
         self.au_mot("Quel côté")
         self.play(FadeIn(q))

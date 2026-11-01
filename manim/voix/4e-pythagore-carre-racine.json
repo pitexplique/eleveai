@@ -5,13 +5,13 @@
   "03-piege": "Le piège : 3 au carré n'est pas 3 fois 2. 3 fois 2, c'est 6 : un rectangle de 3 sur 2. 3 au carré, c'est un carré de 3 sur 3 : 9 carreaux.",
   "03q-question": "Question ! Combien vaut 6 au carré ? A : 12. B : 36. C : 66. Mets pause, et choisis !",
   "03r-reponse": "Réponse B : 36. 6 au carré, c'est 6 fois 6, et pas 6 fois 2.",
-  "04-racine": "Maintenant, le chemin inverse. On a 49 carreaux, rangés en carré. Combien sur un côté ? On cherche le nombre qui, multiplié par lui-même, donne 49 : c'est 7. On écrit : racine carrée de 49 égale 7.",
-  "05-aller-retour": "Carré et racine carrée font un aller-retour. 6 au carré : 36. Racine carrée de 36 : on revient à 6.",
+  "04-racine": "Maintenant, le chemin inverse. On a 49 carreaux, rangés en carré. Combien sur un côté ? On cherche le nombre qui, multiplié par lui-même, donne 49 : c'est 7, car 7 fois 7 égale 49. On écrit : racine carrée de 49 égale 7.",
+  "05-aller-retour": "Carré et racine carrée font un aller-retour. 6 au carré, 6 fois 6 : 36. Racine carrée de 36 : on revient à 6.",
   "05q-question": "Question ! Combien vaut la racine carrée de 81 ? A : 9. B : 40 virgule 5. C : 18. Mets pause, et choisis !",
   "05r-reponse": "Réponse A : 9. 9 fois 9 égale 81 : la racine ne divise pas par 2.",
-  "06-pourquoi": "Pourquoi en parler maintenant ? Le théorème de Pythagore parle de carrés construits sur les côtés. Et pour retrouver une longueur, on prendra la racine carrée.",
+  "06-pourquoi": "Pourquoi en parler maintenant ? Le théorème de Pythagore parle de carrés construits sur les côtés. Et pour retrouver une longueur, on prendra la racine carrée. Ici, racine carrée de 25 : 5.",
   "07-defi": "À toi de jouer. Combien vaut 4 au carré ? Et la racine carrée de 100 ? Mets pause, et cherche !",
-  "07b-correction": "Correction. 4 au carré, c'est 4 fois 4 : 16, et pas 8. Racine carrée de 100 : 10, car 10 fois 10 égale 100.",
-  "08-finale": "Ce que tu sais faire maintenant. Calculer un carré, sans le confondre avec fois 2 ? Trouver une racine carrée, en cherchant le nombre qui, multiplié par lui-même, redonne le nombre ? Alors l'épisode 2 t'attend : reconnaître l'hypoténuse.",
+  "07b-correction": "Correction. 4 au carré, c'est 4 fois 4 : 16, et pas 4 fois 2 égale 8. Racine carrée de 100 : 10, car 10 fois 10 égale 100.",
+  "08-finale": "Ce que tu as appris. Calculer un carré, sans le confondre avec fois 2. Trouver une racine carrée, en cherchant le nombre qui, multiplié par lui-même, redonne le nombre. Alors l'épisode 2 t'attend : reconnaître l'hypoténuse.",
   "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
 }

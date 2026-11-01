@@ -6,7 +6,8 @@
 # Voix validée le 12/10 : manim/voix/4e-pythagore-carre-racine-short.json.
 # ⭐ 31/10/2026 : + 1 question-pause après 01-image (questions-pythagore.md, Ép. 1),
 # compte à rebours de 3 s, module commun pythagore_pauses.py ; marques mot à mot :
-# 4e-pythagore-carre-racine-short.marques.json. Avant tout rendu :
+# 4e-pythagore-carre-racine-short.marques.json. 01/11 (corrections) : échelle entière des
+# ceintures sous le titre ; « racine carrée de 16 égale 4 » dit (clé 01-image). Avant tout rendu :
 #   AUDIT=1 BORDS=1 python -m manim render --dry_run -r 1080,1920 manim/scripts/4e/pythagore_carre_racine_short.py ShortCarreRacine4e
 #
 # Rendu : python -m manim render -qh -r 1080,1920 --disable_caching manim/scripts/4e/pythagore_carre_racine_short.py ShortCarreRacine4e -o eleveai-maths-4e-pythagore-carre-racine-short --media_dir manim/scripts/4e/media
@@ -24,7 +25,7 @@ from manim import *  # noqa: E402
 from charte import *  # noqa: E402
 from gabarit_sixieme import Short6e  # noqa: E402
 from pythagore_pauses import PausesShort, sans_audit  # noqa: E402
-from signes_expression_2de import ceinture  # noqa: E402
+from signes_expression_2de import echelle_ceintures  # noqa: E402
 
 
 class ShortCarreRacine4e(PausesShort, Short6e):
@@ -40,9 +41,11 @@ class ShortCarreRacine4e(PausesShort, Short6e):
 
         # ── 00 : titre, ceinture, question ──
         self.dire("00-accroche")
-        titre = self.grand("Le carré", font_size=48, color=JAUNE_TITRE).move_to(P(0, 2.85))
-        badge = VGroup(ceinture("#F5F5F5", 0.8).scale(0.7), self.grand("Ceinture blanche", font_size=22))
-        badge.arrange(RIGHT, buff=0.18).move_to(P(0, 2.3))
+        # (01/11) l'ÉCHELLE ENTIÈRE des ceintures sous le titre (REGLES.md l. 78), sans toucher
+        # ni le titre, ni l'accroche, ni la terrasse (haut à y ≈ 1,66).
+        titre = self.grand("Le carré", font_size=48, color=JAUNE_TITRE).move_to(P(0, 3.3))
+        badge = sans_audit(echelle_ceintures("blanche").scale_to_fit_width(config.frame_width * 0.7))
+        badge.move_to(P(0, 2.6))
         q = self.grand("Combien de carreaux ?", font_size=30, color=BLEU_CALCUL).move_to(P(0, 1.9))
         self.play(FadeIn(titre), FadeIn(badge), run_time=0.8)
         self.au_mot("Combien")
@@ -86,9 +89,13 @@ class ShortCarreRacine4e(PausesShort, Short6e):
 
         self.au_mot("Et à l'envers")
         self.play(Indicate(acc, color=COTE), Indicate(quatre_h, color=COTE, scale_factor=1.5))
-        self.au_mot("C'est la racine carrée")
+        # (01/11) « racine carrée de 16 égale 4 » est DIT : chaque morceau à son mot.
         ligne3 = VGroup(self.radical(16, font_size=50, color=COTE), self.t("= 4", 50, COTE)).arrange(RIGHT, buff=0.25)
-        self.play(Write(ligne3.move_to(P(0, y3))))
+        ligne3.move_to(P(0, y3))
+        self.au_nb("racine carrée de 16")
+        self.play(Write(ligne3[0]), run_time=0.5)
+        self.au_nb("16 égale 4")
+        self.play(Write(ligne3[1]), run_time=0.4)
         self.attendre_voix(marge=0.4)
 
         # ── 01q : la question-pause (3 s) ──

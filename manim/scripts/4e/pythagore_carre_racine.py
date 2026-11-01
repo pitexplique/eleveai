@@ -17,7 +17,8 @@
 # Carreaux en ORANGE, longueur du côté en BLEU, comme dans le short.
 #
 # Voix : manim/voix/4e-pythagore-carre-racine.json (Julie, débit −7), validée le 12/10 (« go ») ;
-# clés 03q/03r/05q/05r, 08-finale et 09-abonne ajoutées ou changées le 31/10.
+# clés 03q/03r/05q/05r, 08-finale et 09-abonne ajoutées ou changées le 31/10 ;
+# 01/11 (corrections) : 04-racine, 05-aller-retour, 06-pourquoi, 07b-correction, 08-finale.
 # Rendu : python -m manim render -qh --disable_caching manim/scripts/4e/pythagore_carre_racine.py PythagoreCarreRacine4e -o eleveai-maths-4e-pythagore-carre-racine --media_dir manim/scripts/4e/media
 # Puis copier le mp4 dans manim/sorties/4e/maths/pythagore/02-carre-racine/.
 # En ligne : https://youtu.be/FLaSgGr-lAA (sur sa micro dans le coach, sans QR).
@@ -242,7 +243,14 @@ class PythagoreCarreRacine4e(PausesPaysage, Notion4e):
         self.play(FadeIn(self.t("? × ? = 49", 44).move_to(P(3.0, 0.6))), run_time=0.5)
         self.au_nb("c'est 7")
         sept = self.t("7", 40, COTE).move_to(q)
-        self.play(Transform(q, sept), FadeIn(self.t("7 × 7 = 49", 44, COTE).move_to(P(3.0, -0.3))), run_time=0.6)
+        self.play(Transform(q, sept), run_time=0.4)
+        # (01/11) « car 7 fois 7 égale 49 » est DIT : chaque morceau à son mot.
+        f77, e49 = self.t("7 × 7", 44, COTE), self.t("= 49", 44, COTE)
+        self.ecriture(f77, e49, buff=0.2).move_to(P(3.0, -0.3))
+        self.au_nb("car 7 fois 7")
+        self.play(FadeIn(f77), run_time=0.4)
+        self.au_nb("7 égale 49")
+        self.play(FadeIn(e49), run_time=0.4)
         r49, e7 = self.radical(49, font_size=72, color=VERT_OK), self.t("= 7", 72, VERT_OK)
         rac = VGroup(r49, e7).arrange(RIGHT, buff=0.25).move_to(P(3.0, -1.6))
         self.au_nb("racine carrée de 49")
@@ -264,8 +272,10 @@ class PythagoreCarreRacine4e(PausesPaysage, Notion4e):
         self.au_nb("6 au carré")
         aller = CurvedArrow(P(-2.5, 0.6), P(2.4, 0.6), angle=-PI / 3, color=CARREAU, stroke_width=6)
         self.play(FadeIn(six), Create(aller), run_time=0.7)
-        self.au_nb("au carré : 36")
-        self.play(FadeIn(self.t("au carré : 6 × 6", 34, CARREAU).move_to(P(0, 2.3))), FadeIn(trente), run_time=0.6)
+        self.au_nb("6 fois 6")  # (01/11) la voix dit « 6 fois 6 »
+        self.play(FadeIn(self.t("au carré : 6 × 6", 34, CARREAU).move_to(P(0, 2.3))), run_time=0.4)
+        self.au_nb("6 : 36")
+        self.play(FadeIn(trente), run_time=0.4)
         self.au_mot("Racine carrée de 36")
         retour = CurvedArrow(P(2.4, -0.6), P(-2.5, -0.6), angle=-PI / 3, color=COTE, stroke_width=6)
         self.play(Create(retour), run_time=0.7)
@@ -304,11 +314,13 @@ class PythagoreCarreRacine4e(PausesPaysage, Notion4e):
             self.play(LaggedStart(*[FadeIn(k) for k in c], lag_ratio=0.03), run_time=0.6)
         self.add(tri)
         self.play(FadeIn(self.t("des carrés sur les côtés", 34).move_to(P(3.2, 1.4))), run_time=0.5)
-        self.au_mot("pour retrouver une longueur")
+        # (01/11) « Ici, racine carrée de 25 : 5. » est DIT : chaque morceau à son mot.
         ligne = VGroup(self.t("côté =", 44, COTE), self.radical(25, font_size=44, color=COTE),
                        self.t("= 5", 44, COTE)).arrange(RIGHT, buff=0.2).move_to(P(3.2, 0.1))
-        self.play(Write(ligne))
-        self.play(Indicate(Line(C, B), color=COTE))
+        self.au_nb("racine carrée de 25")
+        self.play(FadeIn(ligne[0]), Write(ligne[1]), Indicate(Line(C, B), color=COTE), run_time=0.6)
+        self.au_nb("25 : 5")
+        self.play(Write(ligne[2]), run_time=0.4)
         self.attendre_voix()
 
     # ── 07 : défi ───────────────────────────────────────────────────────────
@@ -341,8 +353,15 @@ class PythagoreCarreRacine4e(PausesPaysage, Notion4e):
         self.play(Write(f44), run_time=0.4)
         self.au_nb("4 : 16")
         self.play(Write(e16), run_time=0.4)
-        self.au_nb("et pas 8")
-        self.play(FadeIn(self.t("et pas 4 × 2 = 8", 32, ROUGE_ERREUR).move_to(P(2.7, 0.5))), run_time=0.5)
+        # (01/11) « et pas 4 fois 2 égale 8 » est DIT : chaque morceau à son mot.
+        p4, f2, e8 = (self.t(x, 32, ROUGE_ERREUR) for x in ("et pas 4", "× 2", "= 8"))
+        self.ecriture(p4, f2, e8, buff=0.15).move_to(P(2.7, 0.5))
+        self.au_nb("et pas 4")
+        self.play(FadeIn(p4), run_time=0.3)
+        self.au_nb("4 fois 2")
+        self.play(FadeIn(f2), run_time=0.3)
+        self.au_nb("2 égale 8")
+        self.play(FadeIn(e8), run_time=0.3)
         self.au_mot("Racine carrée de 100")
         g10 = self.grille(10, t=0.23, centre=(-1.6, -0.6), color=COTE, opacite=0.6)
         r100, e10 = self.radical(100, font_size=44, color=VERT_OK), self.t("= 10", 44, VERT_OK)
@@ -360,26 +379,29 @@ class PythagoreCarreRacine4e(PausesPaysage, Notion4e):
         self.play(FadeIn(e100), run_time=0.4)
         self.attendre_voix()
 
-    # ── 08 : ce que tu sais faire maintenant ────────────────────────────────
+    # ── 08 : ce que tu as appris (01/11 : titre en haut et centré) ──────────
 
     def ecran_finale(self):
         self.clear()
         self.add_mascotte(scale=0.65)
         self.dire("08-finale")
-        self.play(Write(self.t("Ce que tu sais faire maintenant", 44, JAUNE_TITRE).to_edge(UP)))
-        # (31/10) chaque morceau à SON mot : le « × 2 » quand la voix dit « fois 2 ».
+        # (01/11) « Ce que tu as appris » (voix ET écran), en haut et centré ; des phrases
+        # avec un point, comme l'ép. 2. Chaque morceau à SON mot (le « × 2 » au « fois 2 »).
+        self.play(Write(self.t("Ce que tu as appris", 44, JAUNE_TITRE).to_edge(UP)))
         questions = [
-            (("Calculer un carré", "Calculer un carré,"), ("fois 2", "sans le confondre avec × 2 ?")),
-            (("Trouver une racine", "Trouver une racine carrée :"), ("en cherchant", "quel nombre × lui-même ?")),
+            (("Calculer un carré", "Calculer un carré,"), ("fois 2", "sans le confondre avec × 2.")),
+            (("Trouver une racine", "Trouver une racine carrée, en cherchant"),
+             ("multiplié par", "le nombre qui, × lui-même, redonne le nombre.")),
         ]
-        lignes = VGroup(*[VGroup(self.coche(), VGroup(self.t(a[1], 30), self.t(b[1], 30)).arrange(RIGHT, buff=0.18))
-                          .arrange(RIGHT, buff=0.3) for a, b in questions])
-        lignes.arrange(DOWN, aligned_edge=LEFT, buff=0.6).move_to(P(-0.3, 0.7))
+        lignes = VGroup(*[VGroup(self.coche(), VGroup(self.t(a[1], 30), self.t(b[1], 30))
+                                 .arrange(DOWN, aligned_edge=LEFT, buff=0.14)).arrange(RIGHT, buff=0.3)
+                          for a, b in questions])
+        lignes.arrange(DOWN, aligned_edge=LEFT, buff=0.6).move_to(P(-0.3, 0.6))
         for (a, b), l in zip(questions, lignes):
             self.au_mot(a[0])
             self.play(FadeIn(l[1][0], shift=RIGHT * 0.2), run_time=0.5)
             self.play(Create(l[0]), run_time=0.3)
-            self.au_nb(b[0])
+            self.au_nb(b[0])  # sans nombre : le 1er mot de l'extrait
             self.play(FadeIn(l[1][1], shift=RIGHT * 0.2), run_time=0.5)
         self.au_nb("Alors l'épisode 2")
         self.play(Write(self.chute("Épisode 2 : reconnaître l'hypoténuse", color=VERT_OK, font_size=38)))
