@@ -451,3 +451,13 @@ Sources : eau de mer ≈ 1 bar tous les 10 m (1 025 kg/m³ × 9,81 × 10 m ≈ 1
 ]
 ```
 Sources : 12 m²/L par couche = rendement courant d'une peinture murale (Castorama : 5 à 20 m²/L ; Levis Mur Velours 11 m²/L ; Brico.be Perfection 12 m²/L) ; 9 m²/L du défi plausible (SPS Finess 7 à 9 m²/L) ; Yasmine, pièces et piscine de peinture inventées. Défauts mineurs : la question 1 est écrite « Avec 4 L : 48 m². » (plus court que la voix, pour le calage) ; la réponse de la question 2 commence par « On remonte : ».
+
+## 4e 24-quatrieme (lot 5, rendu le 01/11)
+**Paysage** `4e-prop-quatrieme` — 4:15, ceinture verte — centres `mode`
+```json
+[
+  {"t":"01:28","question":"5 m de tissu coûtent 40 €. Pour le prix de 8 m, quel calcul est juste ?","choix":["40 × 8 ÷ 5","5 × 8 ÷ 40","40 × 5 ÷ 8"],"reponse":0,"explication":"On multiplie les deux nombres en diagonale, 40 et 8, et on divise par le troisième, 5 : 320 ÷ 5 = 64 €."},
+  {"t":"02:38","question":"3 m de tissu pour 4 tee-shirts. Combien de tee-shirts avec 15 m ?","choix":["20 tee-shirts","11,25 tee-shirts","16 tee-shirts"],"reponse":0,"explication":"4 × 15 ÷ 3 = 60 ÷ 3 = 20 tee-shirts."}
+]
+```
+Sources : Malo, sweats, tissu, boutons et prix inventés. Seul épisode du lot avec le produit en croix (diagonale fuchsia, troisième nombre encadré, mauvaise diagonale barrée, écran « Pourquoi ça marche ? » qui le relie au passage à l'unité). Défauts mineurs : un « ? » bleu apparaît 0,3 s dans la case du 8 pendant la réponse de la question 1 ; « Ce que tu as appris » écrit assez petit ; le trait de la diagonale passe tout près des chiffres.
