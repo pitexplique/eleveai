@@ -190,10 +190,10 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
         <div aria-hidden="true" className="absolute -right-16 top-32 h-72 w-72 rounded-full bg-sky-100/80 blur-3xl" />
         <div className="relative mx-auto max-w-6xl px-4 pb-10 pt-10 text-center sm:pt-14">
           <h1 className="text-3xl font-black leading-tight text-teal-900 sm:text-5xl">
-            Le coach de maths qui suit chaque élève, micro-compétence par micro-compétence
+            Bloqué en maths ? On reprend là où tu en es.
           </h1>
           <p className="mx-auto mt-3 max-w-2xl text-lg text-slate-700">
-            Chacun s&apos;entraîne à son niveau. Ses résultats sont gardés. Son professeur et ses parents voient où il en est.
+            Le coach te suit et garde tes progrès.
           </p>
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
             <Nuage Icone={GraduationCap} titre="Tout le programme">
