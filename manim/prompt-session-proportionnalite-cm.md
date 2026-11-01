@@ -32,6 +32,11 @@ Faits à vérifier et sourcer en tête des scripts : saut environ 6 fois plus ha
 ### Lot CM-B — à écrire après la validation du lot A
 05 coefficient (commun, prop_coefficient), 06 quatrieme (CM2, prop_quatrieme : passage par l'unité, pas de produit en croix), 07 probleme (commun, prop_probleme), 08 defi (commun, prop_defi : comparer deux offres par la valeur pour un). Puis CM2 pourcentages (5 micros) et échelles (4 micros).
 
+## État des rendus (01/11, à reprendre ici si la session change)
+- 01 reconnaitre, 02 fois-plus, 03 fois-moins : 3 agents lancés le 01/11 (fichiers `manim/scripts/cm1/prop_<slug>[_short].py`, sorties ci-dessus). S'il manque des fichiers et que rien ne bouge depuis longtemps : agent NEUF (« lis et applique le brief » + la ligne du tableau).
+- 04 tableau : PAS lancé. Mission : `manim/scripts/cm1/prop_tableau.py` (`PropTableauCM1` verte / `PropTableauCM2` jaune, garde CM2 collée) + `prop_tableau_short.py` ; voix `cm-prop-tableau[-short].json` ; sorties `manim/sorties/<cm1|cm2>/maths/proportionnalite/04-tableau/` ; media_dir `manim/scripts/cm1/media-prop-tableau[-short]` ; modèle `manim/scripts/6e/prop_tableau.py` (`TableauProp`, flèche latérale « × 20 », flèches du haut « × 2 » entre colonnes).
+- Vérifier chaque épisode soi-même : mp4 présents et immobiles, `verifier-bords-video.py` = 0 instants, planche de 12 images regardée, `questions` + centres notés dans une section « CM » de `manim/questions-proportionnalite.md`, puis commit par chemin (scripts + `*_marques.json` + questions, jamais `media-*` ni `*.cues.tsv`).
+
 ## Après la validation
 1. Brief des agents (modèle `manim/brief-agent-proportionnalite-lot3.md`, adapté au CM) ; WAV ; scripts ; dry run (0 RETARD, 0 AUDIT-AVANCE) ; planche ; UN rendu HD ; `verifier-bords-video.py` ; section CM dans `manim/questions-proportionnalite.md`.
 2. Passe finale : miniatures, manifeste (`centres`, `questions`, `microId`), fiches YouTube, R2, coach (`brancher-videos-coach.mjs` pagine depuis `7627c2df`).
