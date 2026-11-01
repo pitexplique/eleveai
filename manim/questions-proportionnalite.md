@@ -473,3 +473,13 @@ Sources : Malo, sweats, tissu, boutons et prix inventés. Seul épisode du lot a
 Sources : tournoi, eau (1,5 L par joueur), packs à 3 €, barres, bus à 150 € et match de 20 min inventés (150 € la journée d'autocar, c'est bas). Défauts mineurs : phrases de réponse en petits caractères ; à la question 1, l'écran écrit « 26 packs : pas assez » quand la voix dit « il manquerait de l'eau ».
 
 ⚠️ Centres (lot 5) : le champ `centres` du manifeste ne prend que les 18 centres de `lib/videos/centres-interet.ts` ; les « précisions » du tableau des épisodes se ramènent à leur parent (`PRECISIONS_CENTRE`) : animaux-marins → animaux, football/basket/tennis → sport, mode/dessin-manga → art-design, rap → musique, voitures-motos → transports ; `construction` (précision de jeux-video) est écartée.
+
+## 4e 26-relation (lot 5, rendu le 01/11)
+**Paysage** `4e-prop-relation` — 3:45, ceinture verte — centres `sciences`, `nature-ecologie`
+```json
+[
+  {"t":"01:00","question":"x = 4 → y = 20 ; x = 7 → y = 35. Quelle est la relation ?","choix":["y = x + 16","y = 5 × x","y = 4 × x"],"reponse":1,"explication":"20 ÷ 4 = 5 et 35 ÷ 7 = 5. Donc y = 5 × x."},
+  {"t":"02:25","question":"Avec y = 1,5 × x, combien d'énergie pour 12 panneaux ?","choix":["13,5 kWh","18 kWh","8 kWh"],"reponse":1,"explication":"y = 1,5 × 12 = 18 kWh."}
+]
+```
+Sources : 1,5 kWh par panneau et par jour de soleil = ordre de grandeur d'un panneau d'environ 400 W ; Maël, maisons et défi (24 kWh → 16 panneaux) inventés. Défauts mineurs : à la correction, le cadre vert passe tout près de « ÷ 1,5 » ; repère un peu petit sur « Ce que tu as appris ».
