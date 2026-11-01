@@ -553,3 +553,13 @@ Sources : match FIBA de 40 min (4 quart-temps de 10 min, règles officielles FIB
 ]
 ```
 Sources : Lou, match de tennis et chiffres inventés. Corrigé à la vérification : le cadre vert « = 60 % » de la correction touchait le « 100 » (décalé), les grilles des joueuses A et B se touchaient presque (écartées) ; rendu HD refait, bords 0. Défaut mineur : trait rouge épais sur « 25 sur 50 = 25 % » au piège.
+
+## 4e 34-pourcentage-mental (lot 5, rendu le 01/11)
+**Paysage** `4e-prop-pourcentage-mental` — 3:45, ceinture verte — centres `argent-budget`, `art-design` (précision `mode`)
+```json
+[
+  {"t":"00:53","question":"20 % de 60 €, de tête ?","choix":["12 €","20 €","40 €"],"reponse":0,"explication":"10 % de 60 = 6 €. 20 % : le double, 12 €."},
+  {"t":"02:17","question":"5 % de 80 €, de tête ?","choix":["4 €","75 €","16 €"],"reponse":0,"explication":"10 % de 80 = 8 €. 5 % : la moitié, 4 €."}
+]
+```
+Sources : Mehdi, baskets et prix inventés. Corrigé à la vérification : « 180 € » (accolade) collé à « 200 % », cadre « = 180 € » contre le « € » voisin, « 10 € » barré collé à « pas » (écartés) ; rendu HD refait, bords 0. Défauts mineurs : « 9 € » serrés dans les morceaux de la barre ; valeurs des morceaux petites dans les questions.
