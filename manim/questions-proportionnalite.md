@@ -593,3 +593,21 @@ Sources : Julia, cinéma, prix et entrées inventés. Corrigé à la vérificati
 ]
 ```
 Sources : Léna, scooter (2 400 €), moto (8 000 €, 5 000 €) et casque (200 €) inventés. Corrigé à la vérification : à la question 2, la coche verte touchait « une baisse de 10 % » (choix raccourcis sans « une ») ; rendu HD refait, bords 0. Défauts mineurs : phrases de réponse sous les cartes petites ; étiquette « − 15 % » de la barre proche du « = 85 % ».
+
+## CM1 / CM2 — lot CM-A (01/11/2026 ; voix validées `357ff852`, brief `manim/brief-agent-proportionnalite-cm.md`)
+
+### CM1 02 — fois-plus (micro `prop_fois_plus`)
+- Paysage `cm1-prop-fois-plus` (2:50, ceinture verte, Fatou maraîchère : 1 rangée = 6 salades en billes, × 2, × 3 ; piège 12 + 3 = 15 barré ; défi ruches 20 kg → 40, 100). Centres : `["nature-ecologie"]`.
+```json
+"questions": [
+ {"t":"00:41","question":"1 sachet : 4 graines. Combien de graines dans 5 sachets ?","choix":["9 graines","20 graines","24 graines"],"reponse":1,"explication":"5 fois plus de sachets, donc 5 fois plus de graines : 4 × 5 = 20 graines."},
+ {"t":"01:27","question":"2 rangées donnent 10 pieds de tomates. 3 fois plus de rangées donnent…","choix":["13 pieds","30 pieds","12 pieds"],"reponse":1,"explication":"3 fois plus de rangées, donc 3 fois plus de pieds : 10 × 3 = 30 pieds de tomates."}
+]
+```
+- Short `cm1-prop-fois-plus-short` (0:59, ceinture blanche, sauter 6 fois plus haut sur la Lune : 30 cm → 180 cm). Centres : `["espace","sport"]`. Question en commentaire : « Ti Margo saute 10 cm sur Terre : combien sur la Lune ? » (60 cm).
+```json
+"questions": [
+ {"t":"00:19","question":"Un champion saute 2 mètres de haut sur Terre. Sur la Lune, il saute…","choix":["8 mètres","12 mètres","6 mètres"],"reponse":1,"explication":"6 fois plus haut : 2 × 6 = 12 mètres, la hauteur d'un immeuble de 4 étages."}
+]
+```
+Sources : gravité lunaire 1,62 m/s² ≈ 1/6 (NASA, via Space.com) ; ruche 10 kg/an un peu bas (FranceAgriMer 2026 : 15,2 kg en 2024, 12 kg sous 50 ruches), gardé comme ordre de grandeur. Bords 0 (les deux). Défauts mineurs laissés : coche du piège proche du « 36 » ; une étoile du décor passe sur « 180 cm » à 0:08 du short.
