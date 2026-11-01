@@ -1,0 +1,17 @@
+{
+  "00-garde": "La quatrième proportionnelle. L'atelier de Malo.",
+  "01-situation": "Voici Malo. Il est styliste : il crée des sweats. Pour 6 sweats, il lui faut 9 mètres de tissu. Une boutique lui en commande 14. Combien de mètres de tissu doit-il acheter ?",
+  "02-tableau": "Dans le tableau : 6 sweats, 9 mètres. 14 sweats, point d'interrogation. Trois nombres connus, un seul à trouver : c'est une quatrième proportionnelle.",
+  "03-unite": "On sait déjà passer par l'unité. 1 sweat : 9 divisé par 6, égale 1,5 mètre. 14 sweats : 1,5 fois 14, égale 21 mètres.",
+  "04-croix": "En 4e, on apprend un raccourci : le produit en croix. On multiplie les deux nombres en diagonale, 9 et 14, et on divise par le troisième, 6. 9 fois 14, égale 126. 126 divisé par 6, égale 21 mètres. Le même résultat.",
+  "05-pourquoi": "Pourquoi ça marche ? 9 fois 14, divisé par 6, c'est la même chose que 9 divisé par 6, puis fois 14. C'est exactement le passage à l'unité, fait dans un autre ordre.",
+  "06-question": "Question ! 5 mètres de tissu coûtent 40 euros. Pour le prix de 8 mètres, quel calcul est juste ? A : 40 fois 8, divisé par 5. B : 5 fois 8, divisé par 40. C : 40 fois 5, divisé par 8. Mets pause, et choisis !",
+  "06b-reponse": "Réponse A. On multiplie les deux nombres en diagonale, 40 et 8, et on divise par le troisième, 5. 320 divisé par 5, égale 64 euros.",
+  "07-piege": "Attention au piège ! Avec la mauvaise diagonale, on calcule 6 fois 14, divisé par 9 : environ 9,3 mètres. C'est faux. Pour te protéger, estime d'abord : 14 sweats, c'est un peu plus que le double de 6. Il faut donc un peu plus que le double de 9 mètres : plus de 18 mètres. 21 mètres, c'est cohérent.",
+  "08-question": "Question ! 3 mètres de tissu pour 4 tee-shirts. Combien de tee-shirts avec 15 mètres ? A : 20 tee-shirts. B : 11,25 tee-shirts. C : 16 tee-shirts. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. 4 fois 15, divisé par 3. 60 divisé par 3, égale 20 tee-shirts.",
+  "09-defi": "À toi de jouer ! Pour 6 sweats, Malo coud 48 boutons. Combien de boutons pour 25 sweats ? Mets pause, et cherche !",
+  "09b-correction": "Correction. 48 fois 25, divisé par 6. 48 fois 25, égale 1 200. 1 200 divisé par 6, égale 200 boutons. On vérifie avec l'unité : 8 boutons par sweat, fois 25, égale 200.",
+  "10-finale": "Ce que tu as appris. Quand trois nombres sont connus dans un tableau de proportionnalité, on trouve le quatrième par le passage à l'unité, ou par le produit en croix : on multiplie les deux nombres en diagonale, et on divise par le troisième. Mais d'abord, on vérifie que la situation est proportionnelle, et on estime le résultat.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

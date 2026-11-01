@@ -1,0 +1,17 @@
+{
+  "00-garde": "Partager selon un ratio. Le concert d'Awa.",
+  "01-situation": "Voici Awa. Elle est productrice de musique. Après un concert, il reste 1 200 euros à partager entre deux rappeurs, Djibril et Marius. Djibril a écrit plus de textes : ils choisissent de partager selon le ratio 3 pour 2.",
+  "02-parts": "Première étape : compter les parts. 3 parts pour Djibril, 2 parts pour Marius : 3 plus 2, égale 5 parts en tout.",
+  "03-part": "Deuxième étape : la valeur d'une part. 1 200 euros divisés par 5, égale 240 euros par part.",
+  "04-calcul": "Troisième étape : chacun reçoit ses parts. Djibril : 3 fois 240, égale 720 euros. Marius : 2 fois 240, égale 480 euros. On vérifie : 720 plus 480, égale 1 200 euros. Le compte est bon.",
+  "05-question": "Question ! 90 euros partagés selon le ratio 1 pour 2. Combien pour chacun ? A : 45 euros et 45 euros. B : 30 euros et 60 euros. C : 90 euros et 180 euros. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 1 plus 2, égale 3 parts. 90 divisé par 3, égale 30 euros par part. 30 euros pour l'un, 2 fois 30, égale 60 euros pour l'autre.",
+  "06-trois": "Et à trois ? Au concert suivant, une DJ, Inaya, les rejoint. Ils partagent 2 000 euros selon le ratio 4 pour 3 pour 3. 4 plus 3 plus 3, égale 10 parts. 2 000 divisé par 10, égale 200 euros par part. Djibril : 4 fois 200, égale 800 euros. Marius et Inaya : 3 fois 200, égale 600 euros chacun.",
+  "07-piege": "Attention au piège ! Le ratio 3 pour 2 ne veut pas dire diviser 1 200 par 3, puis par 2. On divise toujours le total par le nombre de parts en tout.",
+  "08-question": "Question ! 600 euros partagés selon le ratio 3 pour 1. Combien pour le premier ? A : 200 euros. B : 450 euros. C : 300 euros. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. 3 plus 1, égale 4 parts. 600 divisé par 4, égale 150 euros. Le premier reçoit 3 fois 150, égale 450 euros.",
+  "09-defi": "À toi de jouer ! Awa partage 1 500 euros de ventes de tee-shirts entre trois artistes, selon le ratio 2 pour 3 pour 5. Combien pour chacun ? Mets pause, et cherche !",
+  "09b-correction": "Correction. 2 plus 3 plus 5, égale 10 parts. 1 500 divisé par 10, égale 150 euros par part. 2 fois 150, égale 300 euros. 3 fois 150, égale 450 euros. 5 fois 150, égale 750 euros. Et 300 plus 450 plus 750, égale 1 500 euros.",
+  "10-finale": "Ce que tu as appris. Pour partager selon un ratio : on compte les parts en tout, on divise le total pour trouver la valeur d'une part, puis chacun reçoit ses parts. Et on vérifie que la somme redonne le total.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

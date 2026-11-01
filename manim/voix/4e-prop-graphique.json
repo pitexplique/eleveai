@@ -1,0 +1,17 @@
+{
+  "00-garde": "Proportionnalité et graphique. La plongée de Noé.",
+  "01-situation": "Voici Noé. Il est biologiste marin : il plonge pour compter les poissons d'un récif. Plus il descend, plus l'eau appuie sur lui. Cette pression est-elle proportionnelle à la profondeur ?",
+  "02-tableau": "Dans la mer, l'eau ajoute environ 1 bar tous les 10 mètres. 10 mètres : 1 bar. 20 mètres : 2 bars. 30 mètres : 3 bars. On multiplie toujours la profondeur par le même nombre : 0,1. La pression de l'eau est proportionnelle à la profondeur.",
+  "03-graphique": "Plaçons ces points dans un repère. En bas, la profondeur, en mètres. À gauche, la pression de l'eau, en bars. Les points sont alignés. Et la droite passe par l'origine : 0 mètre, 0 bar. C'est la marque de la proportionnalité.",
+  "04-question": "Question ! Sur un graphique, des points sont alignés sur une droite qui ne passe pas par l'origine. Est-ce proportionnel ? A : oui. B : non. C : seulement si la droite monte. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. Il faut les deux : des points alignés, et une droite qui passe par l'origine.",
+  "05-air": "Mais au-dessus de la mer, il y a l'air. À la surface, il appuie déjà avec environ 1 bar. La pression totale, c'est 1 bar plus la pression de l'eau. 0 mètre : 1 bar. 10 mètres : 2 bars. 20 mètres : 3 bars. Les points sont encore alignés, mais la droite part de 1 bar. Elle ne passe pas par l'origine : la pression totale n'est pas proportionnelle à la profondeur.",
+  "06-piege": "Attention au piège ! À 10 mètres, la pression totale est de 2 bars. À 20 mètres, elle n'est pas de 4 bars, mais de 3. Doubler la profondeur ne double pas la pression totale.",
+  "07-lire": "Le graphique sert aussi à lire des valeurs. Sur la droite de la pression de l'eau, on part de 25 mètres, on monte jusqu'à la droite, puis on va à gauche : 2,5 bars.",
+  "08-question": "Question ! Sur la droite de la pression de l'eau, quelle profondeur pour 1,5 bar ? A : 15 mètres. B : 150 mètres. C : 1,5 mètre. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. 1 bar tous les 10 mètres. 1,5 fois 10, égale 15 mètres.",
+  "09-defi": "À toi de jouer ! Noé descend à 40 mètres. Quelle est la pression de l'eau ? Et la pression totale ? Mets pause, et cherche !",
+  "09b-correction": "Correction. Pression de l'eau : 40 fois 0,1, égale 4 bars. Pression totale : 1 plus 4, égale 5 bars.",
+  "10-finale": "Ce que tu as appris. Sur un graphique, deux grandeurs sont proportionnelles quand les points sont alignés sur une droite qui passe par l'origine. Une droite qui part d'ailleurs : ce n'est pas proportionnel. Et un graphique se lit dans les deux sens.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

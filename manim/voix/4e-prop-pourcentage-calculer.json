@@ -1,0 +1,17 @@
+{
+  "00-garde": "Calculer et interpréter un pourcentage. Le match commenté par Lou.",
+  "01-situation": "Voici Lou. Elle est journaliste sportive : elle commente un match de tennis. La joueuse A a réussi 18 premiers services sur 25. La joueuse B, 33 sur 50. Laquelle sert le mieux ?",
+  "02-sur100": "18 sur 25, et 33 sur 50 : on ne peut pas comparer directement. On ramène tout à 100. Un pourcentage, c'est une proportion sur 100.",
+  "03-calcul": "Joueuse A : 18 sur 25. 25 fois 4, égale 100. Donc 18 fois 4, égale 72. 18 sur 25, c'est 72 sur 100 : 72 %. Joueuse B : 33 sur 50. 50 fois 2, égale 100. 33 fois 2, égale 66 : 66 %. La joueuse A sert le mieux, même avec moins de services réussis.",
+  "04-question": "Question ! 12 réussites sur 20 essais. Quel pourcentage de réussite ? A : 12 %. B : 60 %. C : 8 %. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 20 fois 5, égale 100. 12 fois 5, égale 60. 12 sur 20, c'est 60 %.",
+  "05-tableau": "Pourquoi ça marche ? Un pourcentage est une situation de proportionnalité. Dans un tableau : 25 services, 18 réussis. 100 services, 72 réussis. On a multiplié les deux lignes par 4.",
+  "06-de": "Dans l'autre sens : prendre un pourcentage d'un nombre. Le match dure 150 minutes. La joueuse A a servi pendant 40 % du temps. 40 %, c'est 40 sur 100, soit 0,4. 0,4 fois 150, égale 60 minutes.",
+  "07-piege": "Attention au piège ! 25 sur 50, ce n'est pas 25 %. C'est 50 %, la moitié. Un pourcentage se lit toujours sur 100 : on ramène d'abord à 100.",
+  "08-question": "Question ! 30 % de 80 euros, c'est combien ? A : 24 euros. B : 30 euros. C : 50 euros. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. 0,3 fois 80, égale 24 euros.",
+  "09-defi": "À toi de jouer ! Dans un match, une joueuse gagne 45 points sur 75 joués. Quel pourcentage de points gagnés ? Mets pause, et cherche !",
+  "09b-correction": "Correction. 45 divisé par 75, égale 0,6. 0,6, c'est 60 sur 100 : 60 %.",
+  "10-finale": "Ce que tu as appris. Un pourcentage est une proportion sur 100. Pour le trouver, on ramène à 100, ou on divise, puis on lit le résultat sur 100. Pour prendre un pourcentage d'un nombre, on multiplie : 40 %, c'est fois 0,4.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

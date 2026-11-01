@@ -1,0 +1,16 @@
+{
+  "00-garde": "Défis sur les ratios. L'équipe de Nathan.",
+  "01-situation": "Voici Nathan. Il entraîne une équipe de basket. Il aime les chiffres : victoires, paniers, minutes de jeu. Trois défis l'attendent cette saison.",
+  "02-defi1": "Défi 1. Le ratio victoires pour défaites est 5 pour 3. L'équipe a gagné 6 matchs de plus qu'elle n'en a perdu. Combien de matchs a-t-elle joués ?",
+  "03-question": "Question ! Les 6 matchs d'écart, combien de parts du ratio cela représente-t-il ? A : 2 parts. B : 8 parts. C : 5 parts. Mets pause, et choisis !",
+  "03b-reponse": "Réponse A. L'écart, c'est 5 parts moins 3 parts, égale 2 parts. 2 parts valent 6 matchs : 1 part vaut 3 matchs. Victoires : 5 fois 3, égale 15. Défaites : 3 fois 3, égale 9. 15 plus 9, égale 24 matchs.",
+  "04-defi2": "Défi 2 : le temps de jeu. Un match de basket dure 40 minutes, d'après les règles FIBA. Nathan partage ce temps entre deux joueurs au même poste, selon le ratio 5 pour 3. 5 plus 3, égale 8 parts. 40 divisé par 8, égale 5 minutes par part. Le titulaire joue 5 fois 5, égale 25 minutes. Le remplaçant, 3 fois 5, égale 15 minutes.",
+  "05-question": "Question ! 40 minutes partagées selon le ratio 3 pour 1. Combien de minutes pour le titulaire ? A : 30 minutes. B : 10 minutes. C : environ 13 minutes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 3 plus 1, égale 4 parts. 40 divisé par 4, égale 10 minutes. Le titulaire : 3 fois 10, égale 30 minutes.",
+  "06-defi3": "Défi 3 : les paniers. Paniers à 2 points, paniers à 3 points et lancers francs, dans le ratio 6 pour 2 pour 3. Le meneur a réussi 4 paniers à 3 points. 4 divisé par 2, égale 2 : une part vaut 2. Paniers à 2 points : 6 fois 2, égale 12. Lancers francs : 3 fois 2, égale 6.",
+  "07-piege": "Attention au piège ! Dans le défi 1, 6 n'est pas le nombre de défaites : c'est l'écart. Avant de calculer, on se demande toujours : ce nombre, c'est une part, l'écart, ou le total ?",
+  "08-defi": "À toi de jouer ! Une autre équipe a un ratio victoires pour défaites de 7 pour 2. Elle a joué 27 matchs. Combien de victoires ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 7 plus 2, égale 9 parts. 27 divisé par 9, égale 3 matchs par part. Victoires : 7 fois 3, égale 21.",
+  "09-finale": "Ce que tu as appris. Dans un défi de ratio, on repère ce que représente le nombre connu : une part, l'écart, ou le total. On en déduit la valeur d'une part, puis tout le reste. Et on vérifie à la fin.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

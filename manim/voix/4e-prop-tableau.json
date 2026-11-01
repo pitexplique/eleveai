@@ -1,0 +1,17 @@
+{
+  "00-garde": "Compléter un tableau de proportionnalité. L'atelier d'Inès.",
+  "01-situation": "Voici Inès. Elle est chocolatière. Pour 4 tablettes, elle utilise 300 grammes de chocolat. Aujourd'hui, elle a trois commandes : 8 tablettes, 2 tablettes et 12 tablettes. Combien de chocolat pour chacune ?",
+  "02-tableau": "On range tout dans un tableau. En haut, le nombre de tablettes. En bas, la masse de chocolat, en grammes. 4 tablettes, 300 grammes. Chaque tablette demande autant de chocolat : la masse est proportionnelle au nombre de tablettes.",
+  "03-multiplier": "Première méthode : multiplier une colonne. 8 tablettes, c'est 4 fois 2. Donc 300 fois 2, égale 600 grammes. 2 tablettes, c'est 4 divisé par 2. Donc 300 divisé par 2, égale 150 grammes.",
+  "04-additionner": "Deuxième méthode : additionner deux colonnes. 12 tablettes, c'est 8 plus 4. Donc 600 plus 300, égale 900 grammes. On additionne en haut, on additionne en bas.",
+  "05-question": "Question ! 2 tablettes : 150 grammes. 4 tablettes : 300 grammes. Combien pour 6 tablettes ? A : 450 grammes. B : 302 grammes. C : 600 grammes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 6, c'est 2 plus 4. Donc 150 plus 300, égale 450 grammes.",
+  "06-coefficient": "Troisième méthode : le coefficient. 300 divisé par 4, égale 75. Chaque tablette demande 75 grammes. Pour passer de la ligne du haut à la ligne du bas, on multiplie par 75. 10 tablettes : 10 fois 75, égale 750 grammes.",
+  "07-piege": "Attention au piège ! De 4 à 6 tablettes, on ajoute 2. Alors on ajoute 2 grammes, et on trouve 302 grammes ? Non ! En proportionnalité, on n'ajoute pas le même nombre en haut et en bas. On multiplie, ou on additionne des colonnes entières.",
+  "08-question": "Question ! Le coefficient est 75. Combien de tablettes avec 1 500 grammes de chocolat ? A : 20 tablettes. B : 112 500 tablettes. C : 1 425 tablettes. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. Pour remonter de la ligne du bas à la ligne du haut, on fait l'inverse : on divise par 75. 1 500 divisé par 75, égale 20 tablettes.",
+  "09-defi": "À toi de jouer ! Pour 4 tablettes, Inès met aussi 60 grammes de sucre. Combien de sucre pour 14 tablettes ? Mets pause, et cherche !",
+  "09b-correction": "Correction. 14, c'est 12 plus 2. Pour 12 tablettes : 60 fois 3, égale 180 grammes. Pour 2 tablettes : 60 divisé par 2, égale 30 grammes. 180 plus 30, égale 210 grammes de sucre.",
+  "10-finale": "Ce que tu as appris. Pour compléter un tableau de proportionnalité, on multiplie une colonne, on additionne deux colonnes, ou on utilise le coefficient. Mais on n'ajoute jamais le même nombre en haut et en bas.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

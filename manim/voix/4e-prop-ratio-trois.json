@@ -1,0 +1,17 @@
+{
+  "00-garde": "Un ratio à trois termes. Le terreau de Bastien.",
+  "01-situation": "Voici Bastien. Il est horticulteur : il fait pousser des fleurs et des légumes. Son terreau maison mélange trois ingrédients : du compost, de la terre et du sable, dans le ratio 3 pour 4 pour 1.",
+  "02-lire": "On l'écrit 3, deux-points, 4, deux-points, 1. Pour 3 seaux de compost, il met 4 seaux de terre et 1 seau de sable. L'ordre est celui des ingrédients : compost, terre, sable.",
+  "03-quotients": "Comme avec deux termes : le compost divisé par 3, égale la terre divisée par 4, égale le sable divisé par 1. Ce quotient commun, c'est la valeur d'une part.",
+  "04-calcul": "Bastien a 6 seaux de sable. Le sable divisé par 1 : une part vaut 6 seaux. Compost : 3 fois 6, égale 18 seaux. Terre : 4 fois 6, égale 24 seaux. Un seul nombre connu suffit pour trouver les deux autres.",
+  "05-question": "Question ! Ratio compost pour terre pour sable : 3 pour 4 pour 1. Bastien met 12 seaux de compost. Combien de sable ? A : 4 seaux. B : 16 seaux. C : 36 seaux. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 12 divisé par 3, égale 4 : une part vaut 4 seaux. Sable : 1 fois 4, égale 4 seaux. Et 16 seaux, c'est la terre : 4 fois 4.",
+  "06-simplifier": "Un ratio à trois termes se simplifie aussi : on divise les trois nombres par le même nombre. 6 pour 9 pour 12 : tout se divise par 3. Ça donne 2 pour 3 pour 4.",
+  "07-piege": "Attention au piège ! On ne simplifie pas un seul nombre. 6 pour 9 pour 12, ce n'est pas 2 pour 9 pour 12. Les trois termes changent ensemble.",
+  "08-question": "Question ! Simplifie le ratio 10 pour 15 pour 25. A : 2 pour 3 pour 5. B : 2 pour 15 pour 25. C : 1 pour 1,5 pour 25. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. 10, 15 et 25 se divisent tous par 5 : 2 pour 3 pour 5.",
+  "09-defi": "À toi de jouer ! Pour ses tomates, Bastien mélange compost, terre et sable dans le ratio 2 pour 5 pour 1. Il met 15 seaux de terre. Combien de compost, et combien de sable ? Mets pause, et cherche !",
+  "09b-correction": "Correction. 15 divisé par 5, égale 3 : une part vaut 3 seaux. Compost : 2 fois 3, égale 6 seaux. Sable : 1 fois 3, égale 3 seaux.",
+  "10-finale": "Ce que tu as appris. Un ratio à trois termes se lit comme un ratio à deux termes : chaque quantité, divisée par son nombre du ratio, donne la même valeur d'une part. On la trouve avec le nombre connu, puis on calcule tous les autres. Et on simplifie les trois termes ensemble.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

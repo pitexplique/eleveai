@@ -1,0 +1,16 @@
+{
+  "00-garde": "Ratio et quotients égaux. Le pain de Salomé.",
+  "01-situation": "Voici Salomé. Elle est boulangère. Sa pâte à pain suit le ratio farine pour eau : 5 pour 3. Ce matin, elle a 20 kilos de farine. Combien d'eau doit-elle verser ?",
+  "02-definition": "Dire que la farine et l'eau sont dans le ratio 5 pour 3, c'est dire : la farine divisée par 5, égale l'eau divisée par 3. Ce quotient commun, c'est la valeur d'une part.",
+  "03-calcul": "Farine : 20 kilos. 20 divisé par 5, égale 4. Une part vaut 4 kilos. Donc l'eau divisée par 3 égale 4, elle aussi. L'eau, c'est 3 fois 4, égale 12 kilos. 12 kilos d'eau, c'est 12 litres.",
+  "04-question": "Question ! Ratio farine pour eau : 5 pour 3. Avec 35 kilos de farine, combien d'eau ? A : 33 kilos. B : 21 kilos. C : environ 58 kilos. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 35 divisé par 5, égale 7. L'eau divisée par 3 égale 7 : l'eau, c'est 3 fois 7, égale 21 kilos.",
+  "05-verifier": "On peut aussi vérifier un mélange. 15 kilos de farine pour 9 kilos d'eau : 15 divisé par 5, égale 3. 9 divisé par 3, égale 3. Les deux quotients sont égaux : le ratio est respecté. 15 kilos de farine pour 10 kilos d'eau : 10 divisé par 3, environ 3,33. Pas égaux : la pâte sera trop molle.",
+  "06-piege": "Attention au piège ! Un ratio n'est pas un écart. 5 pour 3, ce n'est pas « 2 kilos de farine de plus que d'eau ». Avec 20 kilos de farine, l'eau n'est pas 18 kilos, mais 12.",
+  "07-question": "Question ! Ratio sel pour levure : 2 pour 1. Quel mélange respecte ce ratio ? A : 30 grammes de sel, 15 grammes de levure. B : 30 grammes de sel, 29 grammes de levure. C : 15 grammes de sel, 30 grammes de levure. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 30 divisé par 2, égale 15. 15 divisé par 1, égale 15. Les quotients sont égaux.",
+  "08-defi": "À toi de jouer ! Pour des brioches, le ratio beurre pour sucre est 3 pour 2. Salomé met 450 grammes de beurre. Combien de sucre ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 450 divisé par 3, égale 150. Le sucre divisé par 2 égale 150 : le sucre, c'est 2 fois 150, égale 300 grammes.",
+  "09-finale": "Ce que tu as appris. a et b sont dans le ratio 5 pour 3 quand a divisé par 5 égale b divisé par 3. Ce quotient, c'est la valeur d'une part. On la calcule avec le nombre connu, puis on trouve l'autre.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

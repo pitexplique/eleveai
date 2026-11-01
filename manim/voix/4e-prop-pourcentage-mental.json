@@ -1,0 +1,17 @@
+{
+  "00-garde": "Les pourcentages de tête. La boutique de Mehdi.",
+  "01-situation": "Voici Mehdi. Il est vendeur dans une boutique de baskets. Aujourd'hui, c'est le jour des promotions, et la calculatrice est en panne. Il va tout calculer de tête.",
+  "02-dix": "La clé, c'est 10 %. 10 %, c'est un dixième : on divise par 10. 10 % de 90 euros, égale 9 euros. 10 % de 120 euros, égale 12 euros.",
+  "03-vingt-trente": "À partir de 10 %, tout devient facile. 20 %, c'est le double de 10 %. 20 % de 90 euros : 9 fois 2, égale 18 euros. 30 %, c'est le triple : 9 fois 3, égale 27 euros.",
+  "04-question": "Question ! 20 % de 60 euros, de tête ? A : 12 euros. B : 20 euros. C : 40 euros. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. 10 % de 60, égale 6. 20 %, c'est le double : 12 euros.",
+  "05-cinq": "5 %, c'est la moitié de 10 %. 5 % de 120 euros : 10 % font 12 euros, et la moitié, égale 6 euros. Et 15 %, c'est 10 % plus 5 % : 12 plus 6, égale 18 euros.",
+  "06-cent": "Et les grands pourcentages ? 100 %, c'est le nombre entier : 100 % de 90 euros, égale 90 euros. 200 %, c'est le double : 200 % de 90 euros, égale 180 euros. Et 50 %, la moitié : 45 euros.",
+  "07-piege": "Attention au piège ! 10 % de 90 euros, ce n'est pas 90 moins 10. On ne retire pas 10 euros : on divise par 10. 10 % de 90 euros, c'est 9 euros.",
+  "08-question": "Question ! 5 % de 80 euros, de tête ? A : 4 euros. B : 75 euros. C : 16 euros. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. 10 % de 80, égale 8. 5 %, c'est la moitié : 4 euros.",
+  "09-defi": "À toi de jouer ! Une paire à 70 euros est en promotion de 30 %. Combien d'euros de réduction ? Et le nouveau prix ? Mets pause, et cherche !",
+  "09b-correction": "Correction. 10 % de 70, égale 7. 30 %, c'est le triple : 21 euros de réduction. 70 moins 21, égale 49 euros.",
+  "10-finale": "Ce que tu as appris. Tout part de 10 % : on divise par 10. 20 %, c'est le double ; 30 %, le triple ; 5 %, la moitié. 100 %, c'est le nombre lui-même, et 200 %, son double. Pas besoin de calculatrice !",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

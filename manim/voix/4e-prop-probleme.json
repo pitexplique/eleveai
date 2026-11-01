@@ -1,0 +1,17 @@
+{
+  "00-garde": "Résoudre un problème de proportionnalité. Le tournoi de Sofia.",
+  "01-situation": "Voici Sofia. Elle organise un tournoi de foot : 16 équipes de 10 joueurs. Elle doit prévoir l'eau, les goûters et le bus. Par où commencer ?",
+  "02-eau": "D'abord, on repère les grandeurs. 16 équipes de 10 joueurs : 16 fois 10, égale 160 joueurs. Chaque joueur boit 1,5 litre d'eau. L'eau est proportionnelle au nombre de joueurs : 160 fois 1,5, égale 240 litres.",
+  "03-packs": "Les packs d'eau : 6 bouteilles de 1,5 litre, pour 3 euros. Un pack contient 6 fois 1,5, égale 9 litres. 240 divisé par 9, égale environ 26,7 packs.",
+  "04-question": "Question ! Il faut environ 26,7 packs d'eau. Combien Sofia doit-elle en acheter ? A : 26 packs. B : 27 packs. C : 26,7 packs. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. Avec 26 packs, il manquerait de l'eau, et on n'achète pas un morceau de pack. On arrondit au-dessus : 27 packs. 27 fois 3 euros, égale 81 euros.",
+  "05-gouter": "Les goûters. 4 barres de céréales coûtent 2,40 euros. 1 barre : 2,40 divisé par 4, égale 0,60 euro. 160 barres : 160 fois 0,60, égale 96 euros.",
+  "06-piege": "Attention au piège ! Tout n'est pas proportionnel. Le bus coûte 150 euros, qu'il y ait 30 ou 50 passagers. Avant de calculer, on se demande toujours : est-ce proportionnel ?",
+  "07-question": "Question ! Un match dure 20 minutes devant 100 spectateurs. Devant 200 spectateurs, combien de temps dure-t-il ? A : 40 minutes. B : 10 minutes. C : toujours 20 minutes. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. La durée d'un match ne dépend pas du nombre de spectateurs : ce n'est pas proportionnel.",
+  "08-total": "On rassemble : 81 euros d'eau, 96 euros de goûters, 150 euros de bus. 81 plus 96 plus 150, égale 327 euros. Sofia peut présenter son budget.",
+  "09-defi": "À toi de jouer ! L'an prochain, 20 équipes de 10 joueurs, toujours 1,5 litre par joueur. Combien de litres d'eau ? Mets pause, et cherche !",
+  "09b-correction": "Correction. 20 fois 10, égale 200 joueurs. 200 fois 1,5, égale 300 litres d'eau.",
+  "10-finale": "Ce que tu as appris. Pour résoudre un problème, on repère les grandeurs, on vérifie qu'elles sont proportionnelles, puis on calcule étape par étape, avec l'unité à chaque ligne. Et on regarde si le résultat a du sens : on n'achète pas 0,7 pack.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

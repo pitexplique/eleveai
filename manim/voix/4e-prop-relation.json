@@ -1,0 +1,17 @@
+{
+  "00-garde": "Trouver la relation entre deux grandeurs. Les panneaux de Maël.",
+  "01-situation": "Voici Maël. Il installe des panneaux solaires sur les toits. Une cliente demande : « Si je mets plus de panneaux, combien d'énergie je produis par jour ? » Maël veut une formule, valable pour n'importe quel nombre de panneaux.",
+  "02-tableau": "Il note ses mesures, un jour de soleil. 2 panneaux : 3 kilowattheures. 4 panneaux : 6 kilowattheures. 10 panneaux : 15 kilowattheures. À chaque fois, l'énergie, c'est le nombre de panneaux fois 1,5.",
+  "03-relation": "On appelle x le nombre de panneaux, et y l'énergie, en kilowattheures. La relation s'écrit : y égale 1,5 fois x. Le nombre 1,5, c'est le coefficient de proportionnalité. On le trouve sur n'importe quelle colonne : y divisé par x.",
+  "04-question": "Question ! Un tableau : x vaut 4, y vaut 20 ; x vaut 7, y vaut 35. Quelle est la relation ? A : y égale x plus 16. B : y égale 5 fois x. C : y égale 4 fois x. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 20 divisé par 4, égale 5. 35 divisé par 7, égale 5. Donc y égale 5 fois x.",
+  "05-verifier": "Et pourquoi pas y égale x plus 16 ? Pour 4, ça donne 20. Mais pour 7, ça donne 23, pas 35. Une relation doit marcher pour toutes les colonnes.",
+  "06-graphique": "On peut aussi lire la relation sur un graphique. Les points de Maël sont alignés avec l'origine. On prend un point de la droite : 2 panneaux, 3 kilowattheures. 3 divisé par 2, égale 1,5. On retrouve y égale 1,5 fois x.",
+  "07-piege": "Attention au piège ! Le coefficient, c'est y divisé par x, et pas x divisé par y. 2 divisé par 3 donnerait environ 0,67 : une relation fausse.",
+  "08-question": "Question ! Avec y égale 1,5 fois x, combien d'énergie pour 12 panneaux ? A : 13,5 kilowattheures. B : 18 kilowattheures. C : 8 kilowattheures. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. y égale 1,5 fois 12, égale 18 kilowattheures.",
+  "09-defi": "À toi de jouer ! Avec les mêmes panneaux, une maison produit 24 kilowattheures par jour. Combien de panneaux a-t-elle ? Mets pause, et cherche !",
+  "09b-correction": "Correction. 1,5 fois x égale 24. Donc x égale 24 divisé par 1,5, égale 16 panneaux.",
+  "10-finale": "Ce que tu as appris. Quand deux grandeurs sont proportionnelles, la relation s'écrit y égale k fois x. On trouve k en divisant y par x, sur un tableau ou sur un graphique. Et on vérifie que la relation marche pour toutes les colonnes.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

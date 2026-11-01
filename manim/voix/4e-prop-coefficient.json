@@ -1,0 +1,16 @@
+{
+  "00-garde": "Coefficient et passage à l'unité. Les murs de Yasmine.",
+  "01-situation": "Voici Yasmine. Elle est peintre en bâtiment. Avec 3 litres de peinture, elle couvre 36 mètres carrés de mur. Dans sa camionnette, il reste 5 litres. Quelle surface peut-elle peindre ?",
+  "02-unite": "Première méthode : le passage à l'unité. 3 litres couvrent 36 mètres carrés. 1 litre couvre 3 fois moins : 36 divisé par 3, égale 12 mètres carrés. 5 litres couvrent 5 fois plus : 12 fois 5, égale 60 mètres carrés.",
+  "03-coefficient": "Deuxième méthode : le coefficient. Dans le tableau, en haut les litres, en bas les mètres carrés. Pour passer de 3 à 36, on multiplie par 12. Ce 12, c'est le coefficient de proportionnalité. Il a une unité : 12 mètres carrés par litre. 5 fois 12, égale 60 mètres carrés.",
+  "04-question": "Question ! 4 litres couvrent 48 mètres carrés. Quel est le coefficient ? A : 12 mètres carrés par litre. B : 44 mètres carrés par litre. C : 192 mètres carrés par litre. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. 48 divisé par 4, égale 12 mètres carrés par litre. On divise, on ne soustrait pas.",
+  "05-retour": "Et dans l'autre sens ? Le salon fait 84 mètres carrés. Pour remonter des mètres carrés aux litres, on divise par le coefficient : 84 divisé par 12, égale 7 litres.",
+  "06-piege": "Attention au piège ! Beaucoup multiplient au lieu de diviser : 84 fois 12, égale 1 008 litres. Une piscine de peinture ! Pour aller de la ligne du bas à la ligne du haut, on fait l'opération inverse : on divise par 12.",
+  "07-question": "Question ! Le coefficient est 12 mètres carrés par litre. Combien de litres pour 30 mètres carrés ? A : 360 litres. B : 2,5 litres. C : 18 litres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. On remonte vers les litres : 30 divisé par 12, égale 2,5 litres.",
+  "08-defi": "À toi de jouer ! Une autre peinture : 2 litres couvrent 18 mètres carrés. Combien de litres pour un couloir de 45 mètres carrés ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 1 litre couvre 18 divisé par 2, égale 9 mètres carrés. Pour 45 mètres carrés : 45 divisé par 9, égale 5 litres.",
+  "09-finale": "Ce que tu as appris. Le passage à l'unité : on cherche la valeur pour 1, puis on multiplie. Le coefficient : le nombre par lequel on multiplie la ligne du haut pour obtenir celle du bas, avec son unité. Pour remonter, on divise par le coefficient.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -1,0 +1,16 @@
+{
+  "00-garde": "Défis sur la proportionnalité. Le jeu de Kenza.",
+  "01-situation": "Voici Kenza. Elle est game designer : elle invente les règles d'un jeu vidéo. Dans son jeu, on gagne des points d'expérience, les XP, et des pièces d'or. Elle doit tout régler pour que le jeu soit juste.",
+  "02-xp": "Défi 1. Une quête de 5 minutes rapporte 150 XP. Les XP sont proportionnels au temps de jeu. Combien pour une quête de 12 minutes ? 1 minute : 150 divisé par 5, égale 30 XP. 12 minutes : 30 fois 12, égale 360 XP.",
+  "03-question": "Question ! 3 quêtes rapportent 450 pièces. Combien rapportent 7 quêtes ? A : 454 pièces. B : 1 050 pièces. C : 1 350 pièces. Mets pause, et choisis !",
+  "03b-reponse": "Réponse B. 1 quête : 450 divisé par 3, égale 150 pièces. 7 quêtes : 150 fois 7, égale 1 050 pièces.",
+  "04-niveaux": "Défi 2. Pour passer au niveau 2, il faut 100 XP. Pour le niveau 3, 200 XP. Pour le niveau 4, 400 XP. Est-ce proportionnel au numéro du niveau ? Du niveau 2 au niveau 4, le numéro double. Mais les XP sont multipliés par 4. Ce n'est pas proportionnel : chaque niveau demande le double du précédent.",
+  "05-boutique": "Défi 3. Dans la boutique du jeu, 800 pièces coûtent 5 euros, en vrai. Kenza veut que les joueurs sachent ce qu'ils dépensent. 2 000 pièces, combien d'euros ? 2 000, c'est 800 fois 2,5. Donc 5 fois 2,5, égale 12,50 euros.",
+  "06-question": "Question ! 800 pièces coûtent 5 euros. Combien coûtent 400 pièces ? A : 2,50 euros. B : 10 euros. C : 1 euro. Mets pause, et choisis !",
+  "06b-reponse": "Réponse A. 400, c'est la moitié de 800. Donc la moitié de 5 euros : 2,50 euros.",
+  "07-piege": "Attention au piège ! Le plus gros pack n'est pas toujours le plus avantageux. Pack A : 800 pièces pour 5 euros. Pack B : 2 000 pièces pour 15 euros. Pour 1 euro, A donne 800 divisé par 5, égale 160 pièces. B donne 2 000 divisé par 15 : environ 133 pièces. Le gros pack est moins avantageux !",
+  "08-defi": "À toi de jouer ! Un boss rapporte 90 XP par minute de combat. Le combat dure 4 minutes et 20 secondes. Combien d'XP ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 4 minutes : 90 fois 4, égale 360 XP. 20 secondes, c'est le tiers d'une minute : 90 divisé par 3, égale 30 XP. 360 plus 30, égale 390 XP.",
+  "09-finale": "Ce que tu as appris. Dans un défi, on vérifie d'abord si c'est proportionnel. Puis on choisit sa méthode : passage à l'unité, coefficient, ou additionner des morceaux. Et pour comparer deux offres, on ramène à la même quantité.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

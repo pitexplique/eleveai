@@ -1,0 +1,16 @@
+{
+  "00-garde": "Reconnaître la proportionnalité. Le taxi de Hugo.",
+  "01-situation": "Voici Hugo. Il est chauffeur de taxi. Une cliente monte : « 10 kilomètres, ça fera combien ? » Hugo répond : « 4 euros pour monter, puis 2 euros par kilomètre. » Le prix est-il proportionnel à la distance ?",
+  "02-tableau": "Faisons un tableau. 10 kilomètres : 4 plus 20, égale 24 euros. 20 kilomètres : 4 plus 40, égale 44 euros. La distance double : 10, puis 20. Mais le prix ne double pas : 44 euros, et pas 48. Le prix n'est pas proportionnel à la distance.",
+  "03-quotients": "Pour vérifier, on divise chaque prix par sa distance. 24 divisé par 10, égale 2,4. 44 divisé par 20, égale 2,2. Les quotients ne sont pas égaux : ce n'est pas proportionnel. Dans une situation de proportionnalité, on multiplie toujours par le même nombre : le coefficient.",
+  "04-question": "Question ! Un vélo-taxi : 5 kilomètres, 15 euros ; 8 kilomètres, 24 euros. Le prix est-il proportionnel ? A : oui, le coefficient est 3. B : non, car 24 moins 15 ne fait pas 3. C : on ne peut pas savoir. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. 15 divisé par 5, égale 3. 24 divisé par 8, égale 3. Même quotient : 3 euros par kilomètre.",
+  "05-graphique": "On peut aussi dessiner. Pour le vélo-taxi, les points sont alignés avec l'origine : 0 kilomètre, 0 euro. Pour le taxi de Hugo, les points sont alignés, mais la droite part de 4 euros. Elle ne passe pas par l'origine : ce n'est pas proportionnel.",
+  "06-piege": "Attention au piège ! L'âge et la taille. À 2 ans, un enfant mesure environ 85 centimètres. À 20 ans, il ne mesure pas 10 fois plus : 8 mètres 50, impossible ! Deux grandeurs qui augmentent ensemble ne sont pas forcément proportionnelles.",
+  "07-question": "Question ! Laquelle de ces situations est proportionnelle ? A : le prix de l'essence et le nombre de litres. B : un forfait de téléphone à 10 euros, et le nombre d'appels. C : la taille et l'âge. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 1 litre à 1,80 euro, 10 litres à 18 euros : on multiplie toujours par 1,80. Le forfait, lui, ne change pas. Et la taille s'arrête de grandir.",
+  "08-defi": "À toi de jouer ! Une salle d'escalade : 1 entrée coûte 12 euros, 3 entrées coûtent 30 euros. Le prix est-il proportionnel au nombre d'entrées ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 12 divisé par 1, égale 12. 30 divisé par 3, égale 10. Les quotients ne sont pas égaux : ce n'est pas proportionnel. C'est un tarif dégressif : plus on achète d'entrées, moins chacune coûte cher.",
+  "09-finale": "Ce que tu as appris. Deux grandeurs sont proportionnelles quand on passe de l'une à l'autre en multipliant toujours par le même nombre. On le vérifie avec les quotients, ou sur un graphique : des points alignés avec l'origine. Un prix de départ, un forfait : ce n'est plus proportionnel.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

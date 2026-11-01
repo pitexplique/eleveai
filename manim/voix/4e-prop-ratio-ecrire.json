@@ -1,0 +1,17 @@
+{
+  "00-garde": "Exprimer un ratio. Les couleurs de Tom.",
+  "01-situation": "Voici Tom. Il est coloriste : il met en couleur des mangas. Pour le vert de la forêt, il mélange 6 pots de bleu et 4 pots de jaune. Comment noter cette recette, pour refaire exactement le même vert ?",
+  "02-ratio": "On écrit un ratio : bleu pour jaune, 6 pour 4. On l'écrit aussi 6, deux-points, 4. L'ordre compte : d'abord le bleu, puis le jaune.",
+  "03-simplifier": "Comme une fraction, un ratio se simplifie. 6 et 4 se divisent par 2 : le ratio 6 pour 4, c'est le ratio 3 pour 2. 3 pots de bleu pour 2 pots de jaune : le même vert, en plus petite quantité.",
+  "04-question": "Question ! 10 pots de rouge pour 15 pots de blanc. Quel est le ratio simplifié, rouge pour blanc ? A : 2 pour 3. B : 3 pour 2. C : 5 pour 10. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. 10 et 15 se divisent par 5 : 2 pour 3. Rouge pour blanc, dans cet ordre.",
+  "05-utiliser": "Tom veut beaucoup de vert : il met 12 pots de bleu. Combien de jaune ? Le ratio est 3 pour 2. 12, c'est 3 fois 4. Donc le jaune, c'est 2 fois 4, égale 8 pots.",
+  "06-piege": "Attention au piège ! On croit qu'il suffit d'ajouter. 3 bleus et 2 jaunes ; on ajoute 9 bleus, alors on ajoute 9 jaunes : 12 bleus, 11 jaunes ? Non ! Le vert deviendrait beaucoup trop jaune. Un ratio se multiplie, il ne s'ajoute pas.",
+  "07-question": "Question ! Bleu pour jaune : 3 pour 2. Tom a 10 pots de jaune. Combien de bleu ? A : 15 pots. B : 11 pots. C : environ 6,7 pots. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 10, c'est 2 fois 5. Donc le bleu, c'est 3 fois 5, égale 15 pots.",
+  "08-parts": "Un ratio dit aussi les parts du tout. 3 pour 2 : 3 parts de bleu, 2 parts de jaune, 5 parts en tout. Le bleu fait 3 parts sur 5 du mélange.",
+  "09-defi": "À toi de jouer ! Pour le ciel, Tom mélange 8 pots de blanc et 12 pots de bleu. Écris le ratio blanc pour bleu, puis simplifie-le. Mets pause, et cherche !",
+  "09b-correction": "Correction. Blanc pour bleu : 8 pour 12. 8 et 12 se divisent par 4 : 2 pour 3.",
+  "10-finale": "Ce que tu as appris. Un ratio compare deux quantités, dans un ordre : a pour b. Il se simplifie comme une fraction. Et pour garder la même recette, on multiplie les deux nombres par le même nombre.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}
