@@ -411,3 +411,23 @@ Sources : bassin olympique 50 × 25 m, 2 m de profondeur au moins (World Aquatic
 ```
 Question en commentaire : « Une cycliste roule à 5 m/s. Combien de km/h ? » (18 km/h).
 Sources : Bolt, 100 m en 9,58 s, Berlin, 16/08/2009 (World Athletics) ; robinet ≈ 10 à 12 L/min (ADEME via Selectra ; Parc du Luberon, fiche Robinets) ; cuisine, carreaux, mur et cycliste inventés. Deux rendus HD par vidéo (étiquettes « 20 cm »/« 10 cm » qui se chevauchaient ; « Record du monde ! » qui touchait le bord en entrant). Défaut mineur : à la fin du short, le cadre « 10 m/s = 36 km/h » touche presque le bas du tableau.
+
+## 4e 20-reconnaitre (lot 5, rendu le 01/11)
+**Paysage** `4e-prop-reconnaitre` — 4:15, ceinture verte — centres `transports`, `argent-budget`
+```json
+[
+  {"t":"01:12","question":"Un vélo-taxi : 5 km → 15 € ; 8 km → 24 €. Le prix est-il proportionnel ?","choix":["Oui, le coefficient est 3.","Non, car 24 − 15 ≠ 3.","On ne peut pas savoir."],"reponse":0,"explication":"15 ÷ 5 = 3 et 24 ÷ 8 = 3 : même quotient, 3 € par km."},
+  {"t":"02:33","question":"Laquelle de ces situations est proportionnelle ?","choix":["L'essence et les litres","Forfait de 10 € et appels","La taille et l'âge"],"reponse":0,"explication":"1 L → 1,80 € ; 10 L → 18 € : toujours × 1,80. Le forfait ne change pas, la taille s'arrête de grandir."}
+]
+```
+Sources : essence 1,80 €/L = ordre de grandeur (SP95-E10 ≈ 1,70 €/L en moyenne 2025, ≈ 1,90 €/L au 30/06/2026, prix-carburant.eu) ; taille à 2 ans ≈ 85 cm (médiane OMS 85,7 cm filles, 87,1 cm garçons) ; taxi, vélo-taxi et salle d'escalade inventés. Premier agent figé, relancé. Défauts mineurs : phrase de réponse des questions écrite petite ; une demi-seconde de noir avant « À toi de jouer ».
+
+## 4e 21-tableau (lot 5, rendu le 01/11)
+**Paysage** `4e-prop-tableau` — 4:12, ceinture verte — centres `cuisine`
+```json
+[
+  {"t":"01:17","question":"2 tablettes : 150 g. 4 tablettes : 300 g. Combien pour 6 tablettes ?","choix":["450 g","302 g","600 g"],"reponse":0,"explication":"6 = 2 + 4, donc 150 + 300 = 450 g."},
+  {"t":"02:35","question":"Le coefficient est 75. Combien de tablettes avec 1 500 g de chocolat ?","choix":["20 tablettes","112 500 tablettes","1 425 tablettes"],"reponse":0,"explication":"Pour remonter de la ligne du bas à celle du haut, on divise par 75 : 1 500 ÷ 75 = 20 tablettes."}
+]
+```
+Sources : chocolaterie, recettes et quantités inventées (75 g de chocolat, 15 g de sucre par tablette). Premier agent figé, relancé. Défauts mineurs : sur « Ce que tu as appris », le tableau est petit et laisse un vide ; « 112 500 tablettes » réduit pour tenir dans sa carte.
