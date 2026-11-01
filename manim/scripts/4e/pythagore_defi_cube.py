@@ -37,7 +37,7 @@ from manim import *  # noqa: E402
 
 from charte import *  # noqa: E402
 from gabarit_sixieme import Short6e  # noqa: E402
-from signes_expression_2de import ceinture, echelle_ceintures  # noqa: E402
+from signes_expression_2de import echelle_ceintures  # noqa: E402
 from pythagore_pauses import PausesPaysage, PausesShort, sans_audit  # noqa: E402
 
 ROUGE_TRI = "#EF4444"
@@ -277,10 +277,12 @@ class DefiCube4e(PausesPaysage, _Cube, Notion4e):
         somme, e48 = self.t("24 + 24", 56, VERT_OK), self.t("= 48", 56, VERT_OK)
         total = VGroup(somme, e48).arrange(RIGHT, buff=0.25)
         bilan = VGroup(f24, b24, total).arrange(DOWN, buff=0.35).move_to(P(xr, 0.8))
-        self.au_nb("24")
+        self.au_nb("faces, 24")  # (01/11) la voix dit aussi « sur les faces », « en biais »
         self.play(FadeIn(f24), run_time=0.3)
-        self.au_nb("plus 24")
-        self.play(FadeIn(b24), FadeIn(somme), run_time=0.3)
+        self.au_nb("biais, 24")
+        self.play(FadeIn(b24), run_time=0.3)
+        self.au_nb("24 plus 24")
+        self.play(FadeIn(somme), run_time=0.3)
         self.au_nb("24 : 48")
         self.play(Write(e48), self.cpt.animate.scale(1.15), run_time=0.5)
         self.play(Circumscribe(total, color=VERT_OK))
@@ -323,10 +325,13 @@ class DefiCubeShort4e(PausesShort, _Cube, Short6e):
     def construct(self):
         self.margo_bas()
         self.dire("00-accroche")
-        titre = self.grand("Le défi du cube", font_size=44, color=JAUNE_TITRE).move_to(P(0, 2.85))
-        badge = VGroup(ceinture("#F97316", 0.8).scale(0.7), self.grand("Ceinture orange", font_size=22))
-        badge.arrange(RIGHT, buff=0.18).move_to(P(0, 2.3))
-        q = self.grand("Combien de triangles rectangles ?", font_size=26, color=BLEU_CALCUL).move_to(P(0, 1.9))
+        # (01/11) l'ÉCHELLE ENTIÈRE des ceintures sous le titre (REGLES.md, 13/10), pas le badge seul ;
+        # titre un peu plus haut : l'échelle ne touche ni lui, ni la question, ni le cube.
+        titre = self.grand("Le défi du cube", font_size=44, color=JAUNE_TITRE).move_to(P(0, 3.15))
+        badge = echelle_ceintures("orange").scale_to_fit_width(config.frame_width * 0.7)
+        badge.next_to(titre, DOWN, buff=0.16)
+        q = self.grand("Combien de triangles rectangles ?", font_size=26, color=BLEU_CALCUL)
+        q.next_to(badge, DOWN, buff=0.16)
         self.play(FadeIn(titre), FadeIn(badge), run_time=0.8)
         self.au_mot("Combien")
         self.play(FadeIn(q))

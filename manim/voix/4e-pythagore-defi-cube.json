@@ -7,7 +7,7 @@
   "03-biais": "Deuxième famille, plus cachée : en biais, à l'intérieur du cube. Une arête, une diagonale de face, et la grande diagonale du cube. Par exemple ABG : l'arête AB est perpendiculaire à toute la face BCGF, donc l'angle en B est droit. La réciproque le confirme : avec des arêtes de 1, AG au carré vaut 3, et AB au carré plus BG au carré, 1 plus 2, aussi 3. Il y en a 24, eux aussi.",
   "03q-question": "Question ! Alors, combien de triangles rectangles en tout ? A : 24. B : 48. C : 56. Mets pause, et choisis !",
   "03r-reponse": "Réponse B : 48.",
-  "04-total": "24 plus 24 : 48 triangles rectangles.",
+  "04-total": "Sur les faces, 24. En biais, 24. 24 plus 24 : 48 triangles rectangles.",
   "05-piege": "Et les autres ? Avec trois diagonales de faces, on obtient un triangle équilatéral : aucun angle droit. Il y en a 8. En tout, 56 triangles : 48 rectangles, et 8 équilatéraux.",
   "06-fin": "Et toi, tu en avais trouvé combien ? Dis-le en commentaire !",
   "07-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"

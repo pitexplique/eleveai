@@ -23,7 +23,7 @@ from manim import *  # noqa: E402
 
 from charte import *  # noqa: E402
 from pythagore_pauses import PausesShort, sans_audit  # noqa: E402
-from signes_expression_2de import ceinture  # noqa: E402
+from signes_expression_2de import echelle_ceintures  # noqa: E402
 
 # Le mixin EN PREMIER, sauf si le short parent (ép. 5, un autre agent) l'a déjà : MRO cohérent.
 _BASES = (ShortCorde4e,) if issubclass(ShortCorde4e, PausesShort) else (PausesShort, ShortCorde4e)
@@ -43,9 +43,10 @@ class ShortTheoremeOuReciproque4e(*_BASES):
         # ── 00 ──
         self.dire("00-accroche")
         titre = self.grand("Théorème ou réciproque ?", font_size=36, color=JAUNE_TITRE).move_to(P(0, 2.85))
-        badge = VGroup(ceinture("#F5F5F5", 0.8).scale(0.7), self.grand("Ceinture blanche", font_size=22))
-        badge.arrange(RIGHT, buff=0.18).move_to(P(0, 2.3))
-        q = self.grand("Lequel écrire ?", font_size=30, color=BLEU_CALCUL).move_to(P(0, 1.85))
+        # (01/11) l'ÉCHELLE ENTIÈRE des ceintures sous le titre (REGLES.md, 13/10), pas le badge seul
+        badge = echelle_ceintures("blanche").scale_to_fit_width(config.frame_width * 0.7)
+        badge.next_to(titre, DOWN, buff=0.16)
+        q = self.grand("Lequel écrire ?", font_size=30, color=BLEU_CALCUL).next_to(badge, DOWN, buff=0.14)
         self.play(FadeIn(titre), FadeIn(badge), run_time=0.8)
         self.au_mot("Lequel")
         self.play(FadeIn(q))
@@ -55,7 +56,7 @@ class ShortTheoremeOuReciproque4e(*_BASES):
         self.dire("01-image")
         A1, B1, C1, t1 = self.triangle(P(-2.0, 0.1))
         A2, B2, C2, t2 = self.triangle(P(0.35, 0.1))
-        sep = DashedLine(P(0.05, 1.7), P(0.05, -2.2), color=GRAY_B, stroke_width=2)
+        sep = DashedLine(P(0.05, 1.45), P(0.05, -2.2), color=GRAY_B, stroke_width=2)
         self.play(Create(t1), Create(t2), Create(sep))
         self.au_mot("tu le connais")
         carre = self.carre_droit(A1, RIGHT, UP, s=0.2)

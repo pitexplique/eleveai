@@ -169,7 +169,7 @@ class PythagoreRediger4e(*_BASES):
             (["1.", ("Le triangle ABC est rectangle en A.", "le triangle")], JAUNE_TITRE),
             (["2.", ("D'après le théorème de Pythagore :", "d'après")], WHITE),
             ([("BC² = AB² + AC².", "BC au carré égale AB")], WHITE, 0.45),
-            (["3.", ("BC²", "BC au carré"), "= 6² + 8² = 36", "+ 64", "= 100."], BLEU_CALCUL),
+            (["3.", ("BC²", "BC au carré"), "= 6²", "+ 8²", "= 36", "+ 64", "= 100."], BLEU_CALCUL),  # (01/11) 6², 8² dits
             (["4.", ("BC", "BC égale"), "= √100", "= 10 cm."], VERT_OK),
         ], x=-3.4, y0=1.6, pas=0.66, font_size=30)
         self.poser_copie(lignes)
@@ -187,7 +187,7 @@ class PythagoreRediger4e(*_BASES):
         self.add(contour, lab, etiq)
         lignes = self.copie_m([
             (["1.", ("Le plus grand côté est [EF].", "le plus grand")], WHITE),
-            (["2.", ("D'une part :", "d'une part"), ("EF²", "EF au carré"), "= 13² = 169."], COUL_HYP),
+            (["2.", ("D'une part :", "d'une part"), ("EF²", "EF au carré"), "= 13²", "= 169."], COUL_HYP),  # (01/11) 13² dit
             ([("D'autre part :", "D'autre part"), ("DE² + DF²", "DE au carré"), "= 25", "+ 144", "= 169."],
              COTE, 0.45),
             (["3.", ("Donc EF² = DE² + DF².", "donc")], BLEU_CALCUL),
@@ -301,16 +301,16 @@ class PythagoreRediger4e(*_BASES):
         self.titre_ecran("Correction")
         g = self.copie_m([
             (["1.", ("Angle droit connu :", "Question un"), "le THÉORÈME."], COUL_HYP),
-            ([("RST est rectangle en S.", "")], WHITE),
-            ([("D'après le théorème de Pythagore :", "")], WHITE),
-            ([("RT²", "RT au carré"), "= 9² + 12² = 81", "+ 144", "= 225"], BLEU_CALCUL),
+            ([("RST est rectangle en S.", "RST est rectangle")], WHITE),  # (01/11) dit
+            ([("D'après le théorème de Pythagore :", "d'après le théorème")], WHITE),
+            ([("RT²", "RT au carré"), "= 9²", "+ 12²", "= 81", "+ 144", "= 225"], BLEU_CALCUL),
             ([("RT", "RT égale"), "= √225", "= 15 cm."], VERT_OK),
         ], x=-6.35, y0=1.8, pas=0.56, font_size=22)
         d = self.copie_m([
             (["2.", ("Angle droit cherché :", "Question deux"), "la RÉCIPROQUE."], VERT_OK),
-            ([("Le plus grand côté mesure 17.", "17 au carré")], WHITE),
-            ([("D'une part :", ""), ("17²", ""), "= 289."], COUL_HYP),
-            ([("D'autre part :", "D'autre part"), "8²", "+ 15²", "= 64 + 225 = 289."], COTE),
+            ([("Le plus grand côté mesure", "Le plus grand côté"), "17."], WHITE),  # (01/11) dit
+            ([("D'une part :", "D'une part"), "17²", "= 289."], COUL_HYP),
+            ([("D'autre part :", "D'autre part"), "8²", "+ 15²", "= 64", "+ 225", "= 289."], COTE),
             ([("C'est égal : d'après la réciproque,", "C'est égal")], JAUNE_TITRE),
             ([("le triangle est rectangle.", "le triangle est rectangle")], JAUNE_TITRE),
         ], x=0.1, y0=1.8, pas=0.56, font_size=22)
@@ -335,10 +335,14 @@ class PythagoreRediger4e(*_BASES):
             self.au_mot(mot)
             self.play(FadeIn(l[1], shift=RIGHT * 0.2), run_time=0.6)
             self.play(Create(l[0]), run_time=0.4)
-        self.au_mot("Tu as terminé")
-        bravo = self.t("Série Pythagore terminée. Bravo !", 44, VERT_OK).move_to(P(0, -1.6))
-        self.play(Write(bravo))
-        self.play(Flash(bravo, color=VERT_OK, line_length=0.4))
+        # (01/11) la série finit par le défi du cube (ép. 8) : « Bravo ! Pour finir la série… »
+        self.au_mot("Bravo")
+        bravo = self.t("Bravo !", 44, VERT_OK).move_to(P(0, -1.35))
+        self.play(Write(bravo), run_time=0.5)
+        self.play(Flash(bravo, color=VERT_OK, line_length=0.4), run_time=0.6)
+        self.au_mot("Pour finir")
+        suite = self.t("Pour finir la série, le défi du cube t'attend.", 32, COUL_HYP).move_to(P(-0.6, -2.25))
+        self.play(FadeIn(suite, shift=UP * 0.15))
         self.attendre_voix(marge=1.0)
 
     # ── déroulé ─────────────────────────────────────────────────────────────
