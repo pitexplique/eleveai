@@ -563,3 +563,13 @@ Sources : Lou, match de tennis et chiffres inventés. Corrigé à la vérificati
 ]
 ```
 Sources : Mehdi, baskets et prix inventés. Corrigé à la vérification : « 180 € » (accolade) collé à « 200 % », cadre « = 180 € » contre le « € » voisin, « 10 € » barré collé à « pas » (écartés) ; rendu HD refait, bords 0. Défauts mineurs : « 9 € » serrés dans les morceaux de la barre ; valeurs des morceaux petites dans les questions.
+
+## 4e 36-pourcentage-evolution (lot 5, rendu le 01/11)
+**Paysage** `4e-prop-pourcentage-evolution` — 3:59, ceinture verte — centres `reseaux-sociaux`
+```json
+[
+  {"t":"01:03","question":"Un compte passe de 400 à 500 abonnés. Quelle évolution ?","choix":["+ 100 %","+ 25 %","+ 20 %"],"reponse":1,"explication":"500 − 400 = 100 ; 100 sur 400, le nombre de départ : 0,25, soit + 25 %."},
+  {"t":"02:28","question":"Une vidéo passe de 50 000 à 40 000 vues par jour. Quelle évolution ?","choix":["− 10 %","− 25 %","− 20 %"],"reponse":2,"explication":"50 000 − 40 000 = 10 000 ; 10 000 sur 50 000, le nombre de départ : 0,2, soit − 20 %."}
+]
+```
+Sources : Sacha, compte d'un club de sport, abonnés et vues inventés. Défauts mineurs : énoncés des questions en petits caractères ; flèche 2 000 → 2 400 un peu en biais au piège (le mot « abonnés » sous la boîte).
