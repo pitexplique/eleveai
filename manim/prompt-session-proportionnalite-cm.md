@@ -18,7 +18,7 @@ Frédéric, 01/11 : « il faut commencer les vidéos CM1 CM2 ». La consigne `ma
 Sorties `manim/sorties/<cm1|cm2>/maths/proportionnalite/<NN>-<slug>/eleveai-maths-<cm1|cm2>-prop-<slug>[-short].mp4` ; ids du manifeste `<cm1|cm2>-prop-<slug>[-short]`.
 Niveau CM : 9-11 ans, phrases très courtes, débit −10, « ÷ » écrit (la voix dit « divisé par »), aucun produit en croix, centres de la tranche 9-11 (pas d'argent, de réseaux sociaux ni de cinéma).
 
-### Lot CM-A — voix ÉCRITES le 01/11, À FAIRE VALIDER par Frédéric (aucun rendu avant son oui)
+### Lot CM-A — voix VALIDÉES par Frédéric le 01/11 (`357ff852`) ; brief des agents `manim/brief-agent-proportionnalite-cm.md` ; rendus 01-03 lancés le 01/11, 04 ensuite
 | NN | slug | micro(s) | classes | paysage (métier, décor) | centres | short | centres short |
 |---|---|---|---|---|---|---|---|
 | 01 | reconnaitre | prop_reconnaitre | CM1 + CM2 | Adam, entraîneur de basket : 1 panier = 2 points ; contre-exemple âges Lili/Bob (+3) ; défi bouquets 5, 10, 16 | sport | 1 musicien ou 5 : toujours 3 min ; œufs 10 min | musique, jeux-defis |
