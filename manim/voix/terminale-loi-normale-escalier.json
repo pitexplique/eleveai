@@ -1,0 +1,19 @@
+{
+  "00-accroche": "À la fête foraine, un jeu : tu lâches une bille en haut d'une planche pleine de clous. Elle rebondit, rebondit, et tombe dans une case. Où va-t-elle finir ?",
+  "01-titre": "L'escalier et la cloche. Comment la loi binomiale devient la loi normale.",
+  "02-un-clou": "Un seul clou : à gauche ou à droite, une chance sur deux. Deux cases, deux marches de même hauteur. On centre en 0 : les marches vont de moins 2 à 2, et leur pas vaut 2.",
+  "03-rangees": "Chaque rangée de clous est une épreuve de Bernoulli de paramètre un demi. Avec n rangées, la case d'arrivée suit la loi binomiale de paramètres n et un demi. Il y a n plus 1 cases.",
+  "04-question1": "Question ! Avec 4 rangées, combien de chemins mènent à la case du milieu ? A : 4. B : 6. C : 16. Mets pause, et choisis !",
+  "05-reponse1": "B : 6. C'est 2 parmi 4 : 6 chemins sur 16. La case du milieu est la plus haute.",
+  "06-curseur": "Faisons bouger le curseur. 4 rangées, 16 rangées, 64 rangées. On centre et on réduit : l'écart-type vaut racine de n sur 2, donc le pas des marches vaut 2 sur racine de n.",
+  "07-aire": "Chaque marche a pour hauteur sa probabilité divisée par le pas. Ainsi, l'aire totale de l'escalier vaut toujours 1.",
+  "08-question2": "Question ! Avec 64 rangées, quel est le pas des marches ? A : 0,25. B : 0,5. C : 2. Mets pause, et choisis !",
+  "09-reponse2": "A : 0,25. Racine de 64 vaut 8, et 2 divisé par 8 donne 0,25.",
+  "10-limite": "Quand n tend vers l'infini, le pas tend vers 0. Les marches disparaissent : l'escalier devient la courbe en cloche de la loi normale. 1 sur racine de 2 pi, fois e puissance moins x carré sur 2.",
+  "11-histoire": "C'est le théorème de Moivre-Laplace. Abraham de Moivre l'a découvert en 1733, Pierre-Simon Laplace l'a généralisé en 1812. Et Francis Galton a construit cette planche à la fin du dix-neuvième siècle.",
+  "12-question3": "Question ! La cloche est la plus haute en 0. Que vaut cette hauteur ? A : 1. B : 1 sur racine de 2 pi, environ 0,4. C : 0,5. Mets pause, et choisis !",
+  "13-reponse3": "B. En x égale 0, e puissance 0 vaut 1 : il reste 1 sur racine de 2 pi, environ 0,4.",
+  "14-partout": "Cette cloche est partout : la taille des élèves d'un collège, les erreurs de mesure d'un laboratoire, le poids des paquets à l'usine. Statisticiens, ingénieurs qualité et météorologues s'en servent chaque jour.",
+  "15-appris": "Ce que tu as appris. La loi binomiale se dessine en escalier. Centrée et réduite, ses marches ont un pas de 2 sur racine de n. Quand n tend vers l'infini, l'escalier devient la loi normale.",
+  "16-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}
