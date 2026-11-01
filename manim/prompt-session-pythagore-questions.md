@@ -17,3 +17,8 @@ Frédéric : « pas sur YouTube, on verra plus tard ». YouTube garde les ancien
 - Ép. 7 : la fin dit « Tu as terminé la série » alors que le défi du cube vient après.
 - Quelques calculs sont écrits sans être dits (AUDIT-ABSENT / AUDIT-TARD listés dans les rapports).
 - Module commun : une phrase de correction longue passe sur Ti Margo quand la question a une figure (contourné dans chaque script) ; les morceaux d'une même ligne ne sont pas alignés en hauteur.
+
+## ⏳ 01/11 : CORRECTIONS en cours (sa demande « corrige-les »)
+Brief `manim/brief-agent-pythagore-corrections.md` (`d0379629`). 4 agents lancés depuis la session précédente : ép. 1+2, ép. 3+4, ép. 5+6, ép. 7+8+3e. Les mp4 corrigés remplacent les actuels ; l'ancien est gardé en `*.avant-corrections.mp4`.
+Si la session est perdue avant leur fin : regarder quels `*.avant-corrections.mp4` existent (= vidéo refaite), `git status` sur `manim/scripts/4e/pythagore_*`, `manim/scripts/3e/pythagore_solide*`, `manim/voix/*pythagore*` et les marques ; vérifier (bords, une image de question), committer PAR CHEMIN.
+Puis passe finale (même méthode que `1a89da9a`) : manifeste (`questions` t, `duree`, chapitres par dry run), R2 (`r2-videos.ps1 -Rclone "copyto …"`, vérif curl -sI = taille locale), `lib/videos/bilans-videos.json`, `python scripts/fiches-youtube.py pythagore`, puis supprimer les `*.avant-corrections.mp4`. ⛔ Rien sur YouTube. Pas de push sans le rituel du soir.
