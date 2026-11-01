@@ -49717,6 +49717,1832 @@
         "argent-budget",
         "cuisine"
       ]
+    },
+    {
+      "id": "4e-prop-reconnaitre",
+      "notionId": "prop_proportionnalite",
+      "microId": "prop_reconnaitre",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/proportionnalite/20-reconnaitre/eleveai-maths-4e-prop-reconnaitre.mp4",
+      "miniature": "4e/maths/proportionnalite/20-reconnaitre/eleveai-maths-4e-prop-reconnaitre.png",
+      "titre": "20 km en taxi, le double de 10 km ? — Reconnaître la proportionnalité — épisode 20 · Maths 4e",
+      "accroche": "Hugo est chauffeur de taxi : 4 € pour monter, puis 2 € par kilomètre. 10 km coûtent 24 €. Et 20 km, deux fois plus ? Le prix est-il proportionnel à la distance ?\n\nDans cette vidéo :\n• le tableau : 10 km → 24 €, 20 km → 44 € ; la distance double, le prix ne double pas (44 €, pas 48 €)\n• les quotients : 24 ÷ 10 = 2,4 et 44 ÷ 20 = 2,2 ; pas égaux, ce n'est pas proportionnel\n• le graphique : des points alignés sur une droite qui passe par l'origine ; celle du taxi part de 4 €\n• le piège : l'âge et la taille augmentent ensemble, mais ne sont pas proportionnels\n• un prix de départ ou un forfait casse la proportionnalité\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une salle d'escalade : 1 entrée coûte 12 €, 3 entrées coûtent 30 €. Le prix est-il proportionnel au nombre d'entrées ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/prop-proportionnalite\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/prop-proportionnalite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&microId=prop_reconnaitre&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Hugo, chauffeur de taxi"
+        ],
+        [
+          "00:23",
+          "Le tableau : 24 € puis 44 €"
+        ],
+        [
+          "00:47",
+          "Les quotients : 2,4 et 2,2"
+        ],
+        [
+          "01:13",
+          "Question : le vélo-taxi"
+        ],
+        [
+          "01:53",
+          "Le graphique : passer par l'origine"
+        ],
+        [
+          "02:13",
+          "Le piège : l'âge et la taille"
+        ],
+        [
+          "02:33",
+          "Question : laquelle est proportionnelle ?"
+        ],
+        [
+          "03:12",
+          "À toi de jouer"
+        ],
+        [
+          "03:27",
+          "Correction"
+        ],
+        [
+          "03:46",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/prop-proportionnalite",
+      "tags": [
+        "reconnaître la proportionnalité",
+        "situation de proportionnalité",
+        "quotients égaux",
+        "coefficient de proportionnalité",
+        "graphique",
+        "taxi",
+        "chauffeur de taxi",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:12",
+          "question": "Un vélo-taxi : 5 km → 15 € ; 8 km → 24 €. Le prix est-il proportionnel ?",
+          "choix": [
+            "Oui, le coefficient est 3.",
+            "Non, car 24 − 15 ≠ 3.",
+            "On ne peut pas savoir."
+          ],
+          "reponse": 0,
+          "explication": "15 ÷ 5 = 3 et 24 ÷ 8 = 3 : même quotient, 3 € par km."
+        },
+        {
+          "t": "02:33",
+          "question": "Laquelle de ces situations est proportionnelle ?",
+          "choix": [
+            "L'essence et les litres",
+            "Forfait de 10 € et appels",
+            "La taille et l'âge"
+          ],
+          "reponse": 0,
+          "explication": "1 L → 1,80 € ; 10 L → 18 € : toujours × 1,80. Le forfait ne change pas, la taille s'arrête de grandir."
+        }
+      ],
+      "centres": [
+        "transports",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "4e-prop-tableau",
+      "notionId": "prop_proportionnalite",
+      "microId": "prop_table",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/proportionnalite/21-tableau/eleveai-maths-4e-prop-tableau.mp4",
+      "miniature": "4e/maths/proportionnalite/21-tableau/eleveai-maths-4e-prop-tableau.png",
+      "titre": "Combien de chocolat pour 12 tablettes ? — Le tableau de proportionnalité — épisode 21 · Maths 4e",
+      "accroche": "Inès est chocolatière : pour 4 tablettes, elle utilise 300 g de chocolat. Trois commandes arrivent : 8, 2 et 12 tablettes. Combien de chocolat pour chacune ?\n\nDans cette vidéo :\n• multiplier une colonne : 8 = 4 × 2, donc 300 × 2 = 600 g ; 2 = 4 ÷ 2, donc 300 ÷ 2 = 150 g\n• additionner deux colonnes : 12 = 8 + 4, donc 600 + 300 = 900 g\n• le coefficient : 300 ÷ 4 = 75 g par tablette ; pour remonter, on divise par 75\n• le piège : de 4 à 6 tablettes, on n'ajoute pas 2 g (302 g) ; on multiplie, ou on additionne des colonnes entières\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : pour 4 tablettes, Inès met aussi 60 g de sucre. Combien de sucre pour 14 tablettes ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/prop-proportionnalite\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/prop-proportionnalite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&microId=prop_table&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Inès, chocolatière"
+        ],
+        [
+          "00:24",
+          "Le tableau : 4 tablettes, 300 g"
+        ],
+        [
+          "00:42",
+          "Multiplier une colonne"
+        ],
+        [
+          "01:02",
+          "Additionner deux colonnes"
+        ],
+        [
+          "01:17",
+          "Question : 6 tablettes"
+        ],
+        [
+          "01:52",
+          "Le coefficient : 75 g par tablette"
+        ],
+        [
+          "02:15",
+          "Le piège : ajouter 2 g"
+        ],
+        [
+          "02:35",
+          "Question : 1 500 g de chocolat"
+        ],
+        [
+          "03:15",
+          "À toi de jouer"
+        ],
+        [
+          "03:29",
+          "Correction"
+        ],
+        [
+          "03:49",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/prop-proportionnalite",
+      "tags": [
+        "tableau de proportionnalité",
+        "compléter un tableau",
+        "linéarité",
+        "coefficient de proportionnalité",
+        "chocolat",
+        "chocolatière",
+        "cuisine",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:17",
+          "question": "2 tablettes : 150 g. 4 tablettes : 300 g. Combien pour 6 tablettes ?",
+          "choix": [
+            "450 g",
+            "302 g",
+            "600 g"
+          ],
+          "reponse": 0,
+          "explication": "6 = 2 + 4, donc 150 + 300 = 450 g."
+        },
+        {
+          "t": "02:35",
+          "question": "Le coefficient est 75. Combien de tablettes avec 1 500 g de chocolat ?",
+          "choix": [
+            "20 tablettes",
+            "112 500 tablettes",
+            "1 425 tablettes"
+          ],
+          "reponse": 0,
+          "explication": "Pour remonter de la ligne du bas à celle du haut, on divise par 75 : 1 500 ÷ 75 = 20 tablettes."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "4e-prop-graphique",
+      "notionId": "prop_proportionnalite",
+      "microId": "prop_graphique",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/proportionnalite/22-graphique/eleveai-maths-4e-prop-graphique.mp4",
+      "miniature": "4e/maths/proportionnalite/22-graphique/eleveai-maths-4e-prop-graphique.png",
+      "titre": "À 20 m de fond, 2 fois plus de pression ? — Proportionnalité et graphique — épisode 22 · Maths 4e",
+      "accroche": "Noé est biologiste marin : il plonge pour compter les poissons d'un récif. Plus il descend, plus l'eau appuie sur lui. Cette pression est-elle proportionnelle à la profondeur ? Un graphique le dit d'un coup d'œil.\n\nDans cette vidéo :\n• l'eau de mer ajoute environ 1 bar tous les 10 m : 10 m → 1 bar, 20 m → 2 bars, 30 m → 3 bars\n• sur un graphique, la proportionnalité se voit : des points alignés sur une droite qui passe par l'origine\n• avec l'air (environ 1 bar en surface), la pression totale part de 1 bar : alignée, mais pas proportionnelle\n• le piège : à 20 m, la pression totale n'est pas 4 bars, mais 3\n• un graphique se lit dans les deux sens : 25 m → 2,5 bars\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Noé descend à 40 m. Quelle est la pression de l'eau ? Et la pression totale ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/prop-proportionnalite\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/prop-proportionnalite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&microId=prop_graphique&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Noé, biologiste marin"
+        ],
+        [
+          "00:20",
+          "1 bar tous les 10 m"
+        ],
+        [
+          "00:42",
+          "Le graphique : une droite par l'origine"
+        ],
+        [
+          "01:02",
+          "Question : une droite qui ne passe pas par 0"
+        ],
+        [
+          "01:33",
+          "Avec l'air : la droite part de 1 bar"
+        ],
+        [
+          "02:03",
+          "Le piège : 4 bars à 20 m ?"
+        ],
+        [
+          "02:18",
+          "Lire le graphique : 25 m"
+        ],
+        [
+          "02:32",
+          "Question : 1,5 bar"
+        ],
+        [
+          "03:02",
+          "À toi de jouer"
+        ],
+        [
+          "03:15",
+          "Correction"
+        ],
+        [
+          "03:27",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/prop-proportionnalite",
+      "tags": [
+        "proportionnalité et graphique",
+        "droite passant par l'origine",
+        "lire un graphique",
+        "pression",
+        "plongée",
+        "biologiste marin",
+        "océan",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:02",
+          "question": "Sur un graphique, des points sont alignés sur une droite qui ne passe pas par l'origine. Est-ce proportionnel ?",
+          "choix": [
+            "oui",
+            "non",
+            "seulement si la droite monte"
+          ],
+          "reponse": 1,
+          "explication": "Il faut les deux : des points alignés, et une droite qui passe par l'origine."
+        },
+        {
+          "t": "02:32",
+          "question": "Sur la droite de la pression de l'eau, quelle profondeur pour 1,5 bar ?",
+          "choix": [
+            "15 m",
+            "150 m",
+            "1,5 m"
+          ],
+          "reponse": 0,
+          "explication": "1 bar tous les 10 m : 1,5 × 10 = 15 m."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "sciences"
+      ]
+    },
+    {
+      "id": "4e-prop-coefficient",
+      "notionId": "prop_proportionnalite",
+      "microId": "prop_coeff",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/proportionnalite/23-coefficient/eleveai-maths-4e-prop-coefficient.mp4",
+      "miniature": "4e/maths/proportionnalite/23-coefficient/eleveai-maths-4e-prop-coefficient.png",
+      "titre": "5 litres de peinture, combien de m² ? — Coefficient et passage à l'unité — épisode 23 · Maths 4e",
+      "accroche": "Yasmine est peintre en bâtiment : avec 3 litres de peinture, elle couvre 36 m² de mur. Il lui reste 5 litres dans sa camionnette. Quelle surface peut-elle peindre ? Et combien de litres pour un salon de 84 m² ?\n\nDans cette vidéo :\n• le passage à l'unité : 1 litre couvre 36 ÷ 3 = 12 m², donc 5 litres couvrent 12 × 5 = 60 m²\n• le coefficient de proportionnalité a une unité : 12 m² par litre\n• dans l'autre sens, on divise par le coefficient : 84 ÷ 12 = 7 litres\n• le piège : 84 × 12 = 1 008 litres, une piscine de peinture !\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une autre peinture : 2 litres couvrent 18 m². Combien de litres pour un couloir de 45 m² ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/prop-proportionnalite\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/prop-proportionnalite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&microId=prop_coeff&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Yasmine, peintre en bâtiment"
+        ],
+        [
+          "00:22",
+          "Le passage à l'unité : 12 m² par litre"
+        ],
+        [
+          "00:42",
+          "Le coefficient et son unité"
+        ],
+        [
+          "01:06",
+          "Question : 4 L pour 48 m²"
+        ],
+        [
+          "01:40",
+          "Dans l'autre sens : diviser"
+        ],
+        [
+          "01:55",
+          "Le piège : 1 008 litres"
+        ],
+        [
+          "02:13",
+          "Question : 30 m²"
+        ],
+        [
+          "02:46",
+          "À toi de jouer"
+        ],
+        [
+          "03:01",
+          "Correction"
+        ],
+        [
+          "03:14",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/prop-proportionnalite",
+      "tags": [
+        "coefficient de proportionnalité",
+        "passage à l'unité",
+        "retour à l'unité",
+        "m² par litre",
+        "peinture",
+        "peintre en bâtiment",
+        "bâtiment",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:06",
+          "question": "Avec 4 L : 48 m². Quel est le coefficient ?",
+          "choix": [
+            "12 m²/L",
+            "44 m²/L",
+            "192 m²/L"
+          ],
+          "reponse": 0,
+          "explication": "48 ÷ 4 = 12 m²/L. On divise, on ne soustrait pas."
+        },
+        {
+          "t": "02:13",
+          "question": "Le coefficient est 12 m²/L. Combien de litres pour 30 m² ?",
+          "choix": [
+            "360 L",
+            "2,5 L",
+            "18 L"
+          ],
+          "reponse": 1,
+          "explication": "On remonte vers les litres : 30 ÷ 12 = 2,5 L."
+        }
+      ],
+      "centres": [
+        "art-design"
+      ]
+    },
+    {
+      "id": "4e-prop-quatrieme",
+      "notionId": "prop_proportionnalite",
+      "microId": "prop_quatrieme",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/proportionnalite/24-quatrieme/eleveai-maths-4e-prop-quatrieme.mp4",
+      "miniature": "4e/maths/proportionnalite/24-quatrieme/eleveai-maths-4e-prop-quatrieme.png",
+      "titre": "Combien de tissu pour 14 sweats ? — La quatrième proportionnelle — épisode 24 · Maths 4e",
+      "accroche": "Malo est styliste : pour 6 sweats, il lui faut 9 m de tissu. Une boutique lui en commande 14. Combien de mètres de tissu doit-il acheter ? Trois nombres connus, un seul à trouver : c'est une quatrième proportionnelle.\n\nDans cette vidéo :\n• par le passage à l'unité : 9 ÷ 6 = 1,5 m par sweat, puis 1,5 × 14 = 21 m\n• le produit en croix : on multiplie les deux nombres en diagonale, et on divise par le troisième : 9 × 14 ÷ 6 = 21 m\n• pourquoi ça marche : c'est le passage à l'unité, fait dans un autre ordre\n• le piège : la mauvaise diagonale (6 × 14 ÷ 9 ≈ 9,3 m) ; on estime d'abord : plus de 18 m\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : pour 6 sweats, Malo coud 48 boutons. Combien de boutons pour 25 sweats ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/prop-proportionnalite\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/prop-proportionnalite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&microId=prop_quatrieme&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Malo, styliste"
+        ],
+        [
+          "00:21",
+          "Trois nombres connus, un à trouver"
+        ],
+        [
+          "00:35",
+          "Par l'unité : 1,5 m par sweat"
+        ],
+        [
+          "00:49",
+          "Le produit en croix"
+        ],
+        [
+          "01:12",
+          "Pourquoi ça marche ?"
+        ],
+        [
+          "01:27",
+          "Question : le bon calcul"
+        ],
+        [
+          "02:10",
+          "Le piège : la mauvaise diagonale"
+        ],
+        [
+          "02:37",
+          "Question : les tee-shirts"
+        ],
+        [
+          "03:10",
+          "À toi de jouer"
+        ],
+        [
+          "03:23",
+          "Correction"
+        ],
+        [
+          "03:45",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/prop-proportionnalite",
+      "tags": [
+        "quatrième proportionnelle",
+        "produit en croix",
+        "passage à l'unité",
+        "tableau de proportionnalité",
+        "couture",
+        "styliste",
+        "mode",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:28",
+          "question": "5 m de tissu coûtent 40 €. Pour le prix de 8 m, quel calcul est juste ?",
+          "choix": [
+            "40 × 8 ÷ 5",
+            "5 × 8 ÷ 40",
+            "40 × 5 ÷ 8"
+          ],
+          "reponse": 0,
+          "explication": "On multiplie les deux nombres en diagonale, 40 et 8, et on divise par le troisième, 5 : 320 ÷ 5 = 64 €."
+        },
+        {
+          "t": "02:38",
+          "question": "3 m de tissu pour 4 tee-shirts. Combien de tee-shirts avec 15 m ?",
+          "choix": [
+            "20 tee-shirts",
+            "11,25 tee-shirts",
+            "16 tee-shirts"
+          ],
+          "reponse": 0,
+          "explication": "4 × 15 ÷ 3 = 60 ÷ 3 = 20 tee-shirts."
+        }
+      ],
+      "centres": [
+        "art-design"
+      ]
+    },
+    {
+      "id": "4e-prop-probleme",
+      "notionId": "prop_proportionnalite",
+      "microId": "prop_probleme",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/proportionnalite/25-probleme/eleveai-maths-4e-prop-probleme.mp4",
+      "miniature": "4e/maths/proportionnalite/25-probleme/eleveai-maths-4e-prop-probleme.png",
+      "titre": "Le budget d'un tournoi de foot ? — Résoudre un problème de proportionnalité — épisode 25 · Maths 4e",
+      "accroche": "Sofia organise un tournoi de foot : 16 équipes de 10 joueurs. Elle doit prévoir l'eau, les goûters et le bus. Combien va coûter la journée ? Par où commencer ?\n\nDans cette vidéo :\n• repérer les grandeurs : 16 × 10 = 160 joueurs, 1,5 L d'eau chacun, soit 240 L\n• les packs de 9 L : 240 ÷ 9 ≈ 26,7, donc 27 packs (on arrondit au-dessus), 81 €\n• les goûters : 1 barre = 2,40 ÷ 4 = 0,60 €, 160 barres = 96 €\n• le piège : le bus coûte 150 €, qu'il y ait 30 ou 50 passagers ; tout n'est pas proportionnel\n• le budget : 81 + 96 + 150 = 327 €\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : l'an prochain, 20 équipes de 10 joueurs, toujours 1,5 L par joueur. Combien de litres d'eau ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/prop-proportionnalite\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/prop-proportionnalite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&microId=prop_probleme&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Sofia et son tournoi de foot"
+        ],
+        [
+          "00:19",
+          "L'eau : 240 litres"
+        ],
+        [
+          "00:39",
+          "Les packs : environ 26,7"
+        ],
+        [
+          "00:55",
+          "Question : combien de packs ?"
+        ],
+        [
+          "01:35",
+          "Les goûters : 96 €"
+        ],
+        [
+          "01:54",
+          "Le piège : le bus à 150 €"
+        ],
+        [
+          "02:10",
+          "Question : la durée du match"
+        ],
+        [
+          "02:42",
+          "Le budget : 327 €"
+        ],
+        [
+          "02:59",
+          "À toi de jouer"
+        ],
+        [
+          "03:14",
+          "Correction"
+        ],
+        [
+          "03:24",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/prop-proportionnalite",
+      "tags": [
+        "problème de proportionnalité",
+        "résoudre un problème",
+        "passage à l'unité",
+        "budget",
+        "arrondir",
+        "tournoi",
+        "football",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:55",
+          "question": "Il faut environ 26,7 packs. Combien Sofia doit-elle en acheter ?",
+          "choix": [
+            "26 packs",
+            "27 packs",
+            "26,7 packs"
+          ],
+          "reponse": 1,
+          "explication": "Avec 26 packs, il manquerait de l'eau, et on n'achète pas un morceau de pack : on arrondit au-dessus, 27 packs ; 27 × 3 € = 81 €."
+        },
+        {
+          "t": "02:10",
+          "question": "Un match dure 20 min devant 100 spectateurs. Devant 200 spectateurs, combien de temps dure-t-il ?",
+          "choix": [
+            "40 minutes",
+            "10 minutes",
+            "Toujours 20 minutes"
+          ],
+          "reponse": 2,
+          "explication": "La durée d'un match ne dépend pas du nombre de spectateurs : ce n'est pas proportionnel."
+        }
+      ],
+      "centres": [
+        "sport",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "4e-prop-relation",
+      "notionId": "prop_proportionnalite",
+      "microId": "prop_relation",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/proportionnalite/26-relation/eleveai-maths-4e-prop-relation.mp4",
+      "miniature": "4e/maths/proportionnalite/26-relation/eleveai-maths-4e-prop-relation.png",
+      "titre": "Combien d'énergie pour 12 panneaux solaires ? — La relation y = k × x — épisode 26 · Maths 4e",
+      "accroche": "Maël installe des panneaux solaires sur les toits. Une cliente demande : « Si je mets plus de panneaux, combien d'énergie je produis par jour ? » Maël veut une formule, valable pour n'importe quel nombre de panneaux.\n\nDans cette vidéo :\n• le tableau : 2 panneaux → 3 kWh, 4 → 6 kWh, 10 → 15 kWh : toujours × 1,5\n• la relation : y = 1,5 × x ; le coefficient k, c'est y ÷ x\n• vérifier : y = x + 16 marche pour 4, pas pour 7 ; une relation doit marcher pour toutes les colonnes\n• sur le graphique, un point de la droite suffit : 3 ÷ 2 = 1,5\n• le piège : x ÷ y (2 ÷ 3 ≈ 0,67) donne une relation fausse\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : avec les mêmes panneaux, une maison produit 24 kWh par jour. Combien de panneaux a-t-elle ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/prop-proportionnalite\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/prop-proportionnalite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&microId=prop_relation&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Maël, installateur solaire"
+        ],
+        [
+          "00:22",
+          "Le tableau : toujours × 1,5"
+        ],
+        [
+          "00:40",
+          "La relation : y = 1,5 × x"
+        ],
+        [
+          "01:00",
+          "Question : quelle relation ?"
+        ],
+        [
+          "01:36",
+          "Vérifier toutes les colonnes"
+        ],
+        [
+          "01:50",
+          "Sur le graphique : y ÷ x"
+        ],
+        [
+          "02:11",
+          "Le piège : x ÷ y"
+        ],
+        [
+          "02:25",
+          "Question : 12 panneaux"
+        ],
+        [
+          "02:54",
+          "À toi de jouer"
+        ],
+        [
+          "03:08",
+          "Correction"
+        ],
+        [
+          "03:20",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/prop-proportionnalite",
+      "tags": [
+        "relation de proportionnalité",
+        "y = kx",
+        "coefficient de proportionnalité",
+        "formule",
+        "panneaux solaires",
+        "énergie solaire",
+        "kilowattheure",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:00",
+          "question": "x = 4 → y = 20 ; x = 7 → y = 35. Quelle est la relation ?",
+          "choix": [
+            "y = x + 16",
+            "y = 5 × x",
+            "y = 4 × x"
+          ],
+          "reponse": 1,
+          "explication": "20 ÷ 4 = 5 et 35 ÷ 7 = 5. Donc y = 5 × x."
+        },
+        {
+          "t": "02:25",
+          "question": "Avec y = 1,5 × x, combien d'énergie pour 12 panneaux ?",
+          "choix": [
+            "13,5 kWh",
+            "18 kWh",
+            "8 kWh"
+          ],
+          "reponse": 1,
+          "explication": "y = 1,5 × 12 = 18 kWh."
+        }
+      ],
+      "centres": [
+        "sciences",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "4e-prop-defi",
+      "notionId": "prop_proportionnalite",
+      "microId": "prop_defi",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/proportionnalite/27-defi/eleveai-maths-4e-prop-defi.mp4",
+      "miniature": "4e/maths/proportionnalite/27-defi/eleveai-maths-4e-prop-defi.png",
+      "titre": "Le plus gros pack, le meilleur ? — Défis sur la proportionnalité — épisode 27 · Maths 4e",
+      "accroche": "Kenza est game designer : elle invente les règles d'un jeu vidéo. Points d'expérience, niveaux, pièces d'or, packs de la boutique : elle doit tout régler pour que le jeu soit juste. Trois défis de proportionnalité.\n\nDans cette vidéo :\n• défi 1 : 150 XP en 5 min, donc 30 XP par minute et 360 XP en 12 min\n• défi 2 : 100, 200, 400 XP pour les niveaux 2, 3, 4 ; le numéro double, les XP sont multipliés par 4 : pas proportionnel\n• défi 3 : 800 pièces pour 5 €, donc 2 000 pièces = 5 × 2,5 = 12,50 €\n• le piège : pour 1 €, le pack A donne 160 pièces, le gros pack B environ 133 ; le plus gros n'est pas le plus avantageux\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : un boss rapporte 90 XP par minute de combat. Le combat dure 4 min 20 s. Combien d'XP ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/prop-proportionnalite\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/prop-proportionnalite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&microId=prop_defi&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Kenza, game designer"
+        ],
+        [
+          "00:22",
+          "Défi 1 : les XP d'une quête"
+        ],
+        [
+          "00:45",
+          "Question : 7 quêtes"
+        ],
+        [
+          "01:23",
+          "Défi 2 : les niveaux"
+        ],
+        [
+          "01:51",
+          "Défi 3 : la boutique"
+        ],
+        [
+          "02:14",
+          "Question : 400 pièces"
+        ],
+        [
+          "02:44",
+          "Le piège : le plus gros pack"
+        ],
+        [
+          "03:12",
+          "À toi de jouer"
+        ],
+        [
+          "03:28",
+          "Correction"
+        ],
+        [
+          "03:48",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/prop-proportionnalite",
+      "tags": [
+        "défis proportionnalité",
+        "passage à l'unité",
+        "comparer des offres",
+        "prix unitaire",
+        "jeu vidéo",
+        "game designer",
+        "gaming",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:45",
+          "question": "3 quêtes rapportent 450 pièces. Combien rapportent 7 quêtes ?",
+          "choix": [
+            "454 pièces",
+            "1 050 pièces",
+            "1 350 pièces"
+          ],
+          "reponse": 1,
+          "explication": "1 quête : 450 ÷ 3 = 150 pièces. 7 quêtes : 150 × 7 = 1 050 pièces."
+        },
+        {
+          "t": "02:14",
+          "question": "800 pièces coûtent 5 €. Combien coûtent 400 pièces ?",
+          "choix": [
+            "2,50 €",
+            "10 €",
+            "1 €"
+          ],
+          "reponse": 0,
+          "explication": "400, c'est la moitié de 800. Donc la moitié de 5 € : 2,50 €."
+        }
+      ],
+      "centres": [
+        "jeux-video"
+      ]
+    },
+    {
+      "id": "4e-prop-ratio-ecrire",
+      "notionId": "prop_ratio",
+      "microId": "prop_rapport",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/proportionnalite/28-ratio-ecrire/eleveai-maths-4e-prop-ratio-ecrire.mp4",
+      "miniature": "4e/maths/proportionnalite/28-ratio-ecrire/eleveai-maths-4e-prop-ratio-ecrire.png",
+      "titre": "Comment refaire exactement le même vert ? — Exprimer un ratio — épisode 28 · Maths 4e",
+      "accroche": "Tom est coloriste : il met en couleur des mangas. Pour le vert de la forêt, il mélange 6 pots de bleu et 4 pots de jaune. Comment noter cette recette, pour refaire exactement le même vert en plus grande quantité ?\n\nDans cette vidéo :\n• un ratio : bleu pour jaune, 6 pour 4, noté 6 : 4 ; l'ordre compte\n• il se simplifie comme une fraction : 6 : 4 = 3 : 2\n• l'utiliser : 12 pots de bleu = 3 × 4, donc 2 × 4 = 8 pots de jaune\n• le piège : ajouter 9 pots de chaque couleur change le vert ; un ratio se multiplie, il ne s'ajoute pas\n• les parts du tout : 3 : 2, c'est 5 parts, le bleu en fait 3 sur 5\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : pour le ciel, Tom mélange 8 pots de blanc et 12 pots de bleu. Écris le ratio blanc pour bleu, puis simplifie-le.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/prop-ratio\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/prop-ratio\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_ratio&microId=prop_rapport&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Tom, coloriste de manga"
+        ],
+        [
+          "00:21",
+          "Le ratio 6 : 4"
+        ],
+        [
+          "00:33",
+          "Simplifier : 3 : 2"
+        ],
+        [
+          "00:50",
+          "Question : rouge pour blanc"
+        ],
+        [
+          "01:21",
+          "Utiliser le ratio : 12 pots de bleu"
+        ],
+        [
+          "01:37",
+          "Le piège : ajouter 9 pots"
+        ],
+        [
+          "01:57",
+          "Question : 10 pots de jaune"
+        ],
+        [
+          "02:29",
+          "Les parts du tout : 3 sur 5"
+        ],
+        [
+          "02:41",
+          "À toi de jouer"
+        ],
+        [
+          "03:05",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/prop-ratio",
+      "tags": [
+        "ratio",
+        "exprimer un ratio",
+        "simplifier un ratio",
+        "mélange",
+        "couleurs",
+        "manga",
+        "coloriste",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:50",
+          "question": "10 pots de rouge pour 15 pots de blanc. Quel est le ratio simplifié, rouge pour blanc ?",
+          "choix": [
+            "2 : 3",
+            "3 : 2",
+            "5 : 10"
+          ],
+          "reponse": 0,
+          "explication": "10 et 15 se divisent par 5 : 2 pour 3. Rouge pour blanc, dans cet ordre."
+        },
+        {
+          "t": "01:57",
+          "question": "Bleu pour jaune : 3 pour 2. Tom a 10 pots de jaune. Combien de bleu ?",
+          "choix": [
+            "15 pots",
+            "11 pots",
+            "environ 6,7 pots"
+          ],
+          "reponse": 0,
+          "explication": "10, c'est 2 fois 5. Donc le bleu, c'est 3 fois 5, égale 15 pots."
+        }
+      ],
+      "centres": [
+        "art-design"
+      ]
+    },
+    {
+      "id": "4e-prop-ratio-quotients",
+      "notionId": "prop_ratio",
+      "microId": "prop_ratio_quotients",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/proportionnalite/29-ratio-quotients/eleveai-maths-4e-prop-ratio-quotients.mp4",
+      "miniature": "4e/maths/proportionnalite/29-ratio-quotients/eleveai-maths-4e-prop-ratio-quotients.png",
+      "titre": "Combien d'eau pour 20 kilos de farine ? — Ratio et quotients égaux — épisode 29 · Maths 4e",
+      "accroche": "Salomé est boulangère. Sa pâte à pain suit le ratio farine pour eau 5 : 3. Ce matin, elle a 20 kilos de farine. Combien d'eau doit-elle verser ?\n\nDans cette vidéo :\n• le ratio 5 : 3, c'est une égalité de quotients : farine ÷ 5 = eau ÷ 3, la valeur d'une part\n• 20 ÷ 5 = 4 kg la part, donc l'eau = 3 × 4 = 12 kg, soit 12 litres\n• vérifier un mélange : 15 kg et 9 kg donnent 3 et 3, le ratio est respecté ; 15 kg et 10 kg, non\n• le piège : 5 : 3 n'est pas un écart de 2 ; avec 20 kg de farine, l'eau n'est pas 18 kg, mais 12\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : pour des brioches, le ratio beurre pour sucre est 3 : 2. Salomé met 450 g de beurre. Combien de sucre ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/prop-ratio\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/prop-ratio\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_ratio&microId=prop_ratio_quotients&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Salomé, boulangère"
+        ],
+        [
+          "00:20",
+          "5 : 3, des quotients égaux"
+        ],
+        [
+          "00:33",
+          "Une part vaut 4 kilos"
+        ],
+        [
+          "00:53",
+          "Question : 35 kilos de farine"
+        ],
+        [
+          "01:29",
+          "Vérifier un mélange"
+        ],
+        [
+          "01:56",
+          "Le piège : un ratio n'est pas un écart"
+        ],
+        [
+          "02:12",
+          "Question : sel et levure"
+        ],
+        [
+          "02:50",
+          "À toi de jouer"
+        ],
+        [
+          "03:07",
+          "Correction"
+        ],
+        [
+          "03:22",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/prop-ratio",
+      "tags": [
+        "ratio",
+        "égalité de quotients",
+        "valeur d'une part",
+        "pâte à pain",
+        "boulangère",
+        "boulangerie",
+        "cuisine",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:53",
+          "question": "Farine : eau = 5 : 3. 35 kg de farine : eau ?",
+          "choix": [
+            "33 kg",
+            "21 kg",
+            "≈ 58 kg"
+          ],
+          "reponse": 1,
+          "explication": "35 ÷ 5 = 7 kg : une part vaut 7 kg, donc l'eau = 3 × 7 = 21 kg."
+        },
+        {
+          "t": "02:12",
+          "question": "Sel : levure = 2 : 1. Lequel respecte ce ratio ?",
+          "choix": [
+            "30 g : 15 g",
+            "30 g : 29 g",
+            "15 g : 30 g"
+          ],
+          "reponse": 0,
+          "explication": "30 ÷ 2 = 15 et 15 ÷ 1 = 15 : les quotients sont égaux."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "4e-prop-ratio-trois",
+      "notionId": "prop_ratio",
+      "microId": "prop_ratio_trois",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/proportionnalite/30-ratio-trois/eleveai-maths-4e-prop-ratio-trois.mp4",
+      "miniature": "4e/maths/proportionnalite/30-ratio-trois/eleveai-maths-4e-prop-ratio-trois.png",
+      "titre": "Comment doser compost, terre et sable ? — Un ratio à trois termes — épisode 30 · Maths 4e",
+      "accroche": "Bastien est horticulteur : il fait pousser des fleurs et des légumes. Son terreau maison mélange compost, terre et sable dans le ratio 3 : 4 : 1. Il a 6 seaux de sable : combien de compost et de terre ?\n\nDans cette vidéo :\n• lire un ratio à trois termes : 3 : 4 : 1, dans l'ordre compost, terre, sable\n• trois quotients égaux : compost ÷ 3 = terre ÷ 4 = sable ÷ 1, la valeur d'une part\n• 6 seaux de sable : une part vaut 6, compost 3 × 6 = 18, terre 4 × 6 = 24\n• simplifier les trois termes ensemble : 6 : 9 : 12 = 2 : 3 : 4\n• le piège : 6 : 9 : 12, ce n'est pas 2 : 9 : 12\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : pour ses tomates, Bastien mélange compost, terre et sable dans le ratio 2 : 5 : 1. Il met 15 seaux de terre. Combien de compost, et combien de sable ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/prop-ratio\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/prop-ratio\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_ratio&microId=prop_ratio_trois&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Bastien, horticulteur"
+        ],
+        [
+          "00:20",
+          "Lire le ratio 3 : 4 : 1"
+        ],
+        [
+          "00:36",
+          "Trois quotients égaux"
+        ],
+        [
+          "00:48",
+          "6 seaux de sable : tout le reste"
+        ],
+        [
+          "01:08",
+          "Question : 12 seaux de compost"
+        ],
+        [
+          "01:47",
+          "Simplifier : 6 : 9 : 12"
+        ],
+        [
+          "02:01",
+          "Le piège : un seul nombre simplifié"
+        ],
+        [
+          "02:14",
+          "Question : 10 : 15 : 25"
+        ],
+        [
+          "02:44",
+          "À toi de jouer"
+        ],
+        [
+          "03:03",
+          "Correction"
+        ],
+        [
+          "03:18",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/prop-ratio",
+      "tags": [
+        "ratio à trois termes",
+        "simplifier un ratio",
+        "valeur d'une part",
+        "terreau",
+        "horticulteur",
+        "jardinage",
+        "nature",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:08",
+          "question": "Ratio compost : terre : sable = 3 : 4 : 1. Bastien met 12 seaux de compost. Combien de sable ?",
+          "choix": [
+            "4 seaux",
+            "16 seaux",
+            "36 seaux"
+          ],
+          "reponse": 0,
+          "explication": "12 ÷ 3 = 4 seaux : une part. Sable = 1 × 4 = 4 seaux. 16 seaux, c'est la terre (4 × 4)."
+        },
+        {
+          "t": "02:14",
+          "question": "Simplifie le ratio 10 : 15 : 25.",
+          "choix": [
+            "2 : 3 : 5",
+            "2 : 15 : 25",
+            "1 : 1,5 : 25"
+          ],
+          "reponse": 0,
+          "explication": "10, 15 et 25 se divisent tous par 5 : 2 : 3 : 5."
+        }
+      ],
+      "centres": [
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "4e-prop-ratio-partager",
+      "notionId": "prop_ratio",
+      "microId": "prop_ratio_partager",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/proportionnalite/31-ratio-partager/eleveai-maths-4e-prop-ratio-partager.mp4",
+      "miniature": "4e/maths/proportionnalite/31-ratio-partager/eleveai-maths-4e-prop-ratio-partager.png",
+      "titre": "Comment partager 1 200 € entre deux rappeurs ? — Partager selon un ratio — épisode 31 · Maths 4e",
+      "accroche": "Awa est productrice de musique. Après un concert, il reste 1 200 € à partager entre deux rappeurs, Djibril et Marius. Djibril a écrit plus de textes : ils choisissent le ratio 3 : 2. Combien pour chacun ?\n\nDans cette vidéo :\n• compter les parts : 3 + 2 = 5 parts en tout\n• la valeur d'une part : 1 200 ÷ 5 = 240 €\n• chacun ses parts : 3 × 240 = 720 € et 2 × 240 = 480 € ; on vérifie, 720 + 480 = 1 200 €\n• à trois : 2 000 € selon 4 : 3 : 3, 10 parts de 200 €\n• le piège : on ne divise pas par 3 puis par 2 ; on divise le total par le nombre de parts\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Awa partage 1 500 € de ventes de tee-shirts entre trois artistes, selon le ratio 2 : 3 : 5. Combien pour chacun ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/prop-ratio\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/prop-ratio\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_ratio&microId=prop_ratio_partager&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Awa, productrice de musique"
+        ],
+        [
+          "00:23",
+          "Compter les parts : 5"
+        ],
+        [
+          "00:34",
+          "Une part : 240 €"
+        ],
+        [
+          "00:44",
+          "Chacun ses parts : 720 € et 480 €"
+        ],
+        [
+          "01:06",
+          "Question : 90 € selon 1 : 2"
+        ],
+        [
+          "01:47",
+          "À trois : 4 : 3 : 3"
+        ],
+        [
+          "02:16",
+          "Le piège : diviser par 3, puis par 2"
+        ],
+        [
+          "02:29",
+          "Question : 600 € selon 3 : 1"
+        ],
+        [
+          "03:06",
+          "À toi de jouer"
+        ],
+        [
+          "03:22",
+          "Correction"
+        ],
+        [
+          "03:53",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/prop-ratio",
+      "tags": [
+        "partager selon un ratio",
+        "partage proportionnel",
+        "valeur d'une part",
+        "ratio",
+        "musique",
+        "rap",
+        "productrice de musique",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:06",
+          "question": "90 € partagés selon le ratio 1 : 2. Combien pour chacun ?",
+          "choix": [
+            "45 € et 45 €",
+            "30 € et 60 €",
+            "90 € et 180 €"
+          ],
+          "reponse": 1,
+          "explication": "1 + 2 = 3 parts ; 90 ÷ 3 = 30 € par part ; 30 € pour l'un, 2 × 30 = 60 € pour l'autre."
+        },
+        {
+          "t": "02:29",
+          "question": "600 € partagés selon le ratio 3 : 1. Combien pour le premier ?",
+          "choix": [
+            "200 €",
+            "450 €",
+            "300 €"
+          ],
+          "reponse": 1,
+          "explication": "3 + 1 = 4 parts ; 600 ÷ 4 = 150 € ; le premier reçoit 3 × 150 = 450 €."
+        }
+      ],
+      "centres": [
+        "musique",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "4e-prop-ratio-defi",
+      "notionId": "prop_ratio",
+      "microId": "prop_ratio_defi",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/proportionnalite/32-ratio-defi/eleveai-maths-4e-prop-ratio-defi.mp4",
+      "miniature": "4e/maths/proportionnalite/32-ratio-defi/eleveai-maths-4e-prop-ratio-defi.png",
+      "titre": "Combien de matchs l'équipe de Nathan a-t-elle joués ? — Défis sur les ratios — épisode 32 · Maths 4e",
+      "accroche": "Nathan entraîne une équipe de basket. Victoires, paniers, minutes de jeu : il aime les chiffres. Le ratio victoires pour défaites est 5 : 3, et l'équipe a gagné 6 matchs de plus qu'elle n'en a perdu. Combien de matchs a-t-elle joués ?\n\nDans cette vidéo :\n• défi 1 : l'écart 5 − 3 = 2 parts vaut 6 matchs, donc 1 part = 3 matchs : 15 victoires, 9 défaites, 24 matchs\n• défi 2 : 40 min de match (règles FIBA) selon 5 : 3, 8 parts de 5 min : 25 min et 15 min\n• défi 3 : un ratio à trois termes, 6 : 2 : 3, et 4 paniers à 3 points : une part vaut 2\n• le piège : 6 n'est pas le nombre de défaites, c'est l'écart ; ce nombre, c'est une part, l'écart ou le total ?\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une autre équipe a un ratio victoires pour défaites de 7 : 2. Elle a joué 27 matchs. Combien de victoires ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/prop-ratio\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/prop-ratio\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_ratio&microId=prop_ratio_defi&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Nathan, entraîneur de basket"
+        ],
+        [
+          "00:19",
+          "Défi 1 : 6 victoires d'écart"
+        ],
+        [
+          "00:33",
+          "Question : combien de parts ?"
+        ],
+        [
+          "01:20",
+          "Défi 2 : le temps de jeu"
+        ],
+        [
+          "01:55",
+          "Question : 40 min selon 3 : 1"
+        ],
+        [
+          "02:35",
+          "Défi 3 : les paniers"
+        ],
+        [
+          "03:03",
+          "Le piège : l'écart n'est pas une part"
+        ],
+        [
+          "03:20",
+          "À toi de jouer"
+        ],
+        [
+          "03:38",
+          "Correction"
+        ],
+        [
+          "03:53",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/prop-ratio",
+      "tags": [
+        "défis ratios",
+        "ratio",
+        "écart",
+        "partage",
+        "basket",
+        "entraîneur",
+        "sport",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:33",
+          "question": "Les 6 matchs d'écart : combien de parts ?",
+          "choix": [
+            "2 parts",
+            "8 parts",
+            "5 parts"
+          ],
+          "reponse": 0,
+          "explication": "5 − 3 = 2 parts = 6 matchs, donc 1 part = 3 matchs : 15 + 9 = 24 matchs."
+        },
+        {
+          "t": "01:55",
+          "question": "40 min, ratio 3 : 1. Titulaire : ? min",
+          "choix": [
+            "30 min",
+            "10 min",
+            "≈ 13 min"
+          ],
+          "reponse": 0,
+          "explication": "3 + 1 = 4 parts ; 40 ÷ 4 = 10 min ; titulaire : 3 × 10 = 30 min."
+        }
+      ],
+      "centres": [
+        "sport"
+      ]
+    },
+    {
+      "id": "4e-prop-pourcentage-calculer",
+      "notionId": "prop_pourcentages",
+      "microId": "prop_pourcentage",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/proportionnalite/33-pourcentage-calculer/eleveai-maths-4e-prop-pourcentage-calculer.mp4",
+      "miniature": "4e/maths/proportionnalite/33-pourcentage-calculer/eleveai-maths-4e-prop-pourcentage-calculer.png",
+      "titre": "18 sur 25 ou 33 sur 50 : qui sert le mieux ? — Calculer un pourcentage — épisode 33 · Maths 4e",
+      "accroche": "Lou est journaliste sportive : elle commente un match de tennis. La joueuse A a réussi 18 premiers services sur 25, la joueuse B 33 sur 50. Laquelle sert le mieux ?\n\nDans cette vidéo :\n• un pourcentage, c'est une proportion sur 100 : on ramène tout à 100\n• 18 sur 25 = 72 sur 100 = 72 % ; 33 sur 50 = 66 % : la joueuse A sert le mieux\n• pourquoi ça marche : un pourcentage est une situation de proportionnalité (× 4 sur les deux lignes)\n• prendre un pourcentage d'un nombre : 40 % de 150 min = 0,4 × 150 = 60 min\n• le piège : 25 sur 50, ce n'est pas 25 %, mais 50 %\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : dans un match, une joueuse gagne 45 points sur 75 joués. Quel pourcentage de points gagnés ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/prop-pourcentages\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/prop-pourcentages\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_pourcentages&microId=prop_pourcentage&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Lou, journaliste sportive"
+        ],
+        [
+          "00:23",
+          "Ramener à 100"
+        ],
+        [
+          "00:37",
+          "72 % contre 66 %"
+        ],
+        [
+          "01:10",
+          "Question : 12 sur 20"
+        ],
+        [
+          "01:43",
+          "Pourquoi ça marche : un tableau"
+        ],
+        [
+          "02:01",
+          "Prendre 40 % de 150 minutes"
+        ],
+        [
+          "02:23",
+          "Le piège : 25 sur 50 = 25 % ?"
+        ],
+        [
+          "02:38",
+          "Question : 30 % de 80 €"
+        ],
+        [
+          "03:04",
+          "À toi de jouer"
+        ],
+        [
+          "03:18",
+          "Correction"
+        ],
+        [
+          "03:31",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/prop-pourcentages",
+      "tags": [
+        "pourcentage",
+        "calculer un pourcentage",
+        "proportion",
+        "appliquer un pourcentage",
+        "tennis",
+        "journaliste sportive",
+        "sport",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:10",
+          "question": "12 réussites sur 20 essais. Quel pourcentage de réussite ?",
+          "choix": [
+            "12 %",
+            "60 %",
+            "8 %"
+          ],
+          "reponse": 1,
+          "explication": "20 × 5 = 100 et 12 × 5 = 60 : 12 sur 20, c'est 60 %."
+        },
+        {
+          "t": "02:38",
+          "question": "30 % de 80 €, c'est combien ?",
+          "choix": [
+            "24 €",
+            "30 €",
+            "50 €"
+          ],
+          "reponse": 0,
+          "explication": "0,3 × 80 = 24 €."
+        }
+      ],
+      "centres": [
+        "sport"
+      ]
+    },
+    {
+      "id": "4e-prop-pourcentage-mental",
+      "notionId": "prop_pourcentages",
+      "microId": "prop_pourcentage_mental",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/proportionnalite/34-pourcentage-mental/eleveai-maths-4e-prop-pourcentage-mental.mp4",
+      "miniature": "4e/maths/proportionnalite/34-pourcentage-mental/eleveai-maths-4e-prop-pourcentage-mental.png",
+      "titre": "20 % de 90 € sans calculatrice ? — Les pourcentages de tête — épisode 34 · Maths 4e",
+      "accroche": "Mehdi est vendeur dans une boutique de baskets. C'est le jour des promotions, et la calculatrice est en panne. Il va tout calculer de tête, en partant de 10 %.\n\nDans cette vidéo :\n• 10 %, c'est un dixième : on divise par 10 ; 10 % de 90 € = 9 €\n• 20 %, c'est le double : 18 € ; 30 %, le triple : 27 €\n• 5 %, c'est la moitié de 10 % ; 15 % = 10 % + 5 %\n• 100 %, c'est le nombre lui-même ; 200 %, son double ; 50 %, la moitié\n• le piège : 10 % de 90 €, ce n'est pas 90 − 10 ; on divise par 10\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une paire à 70 € est en promotion de 30 %. Combien d'euros de réduction ? Et le nouveau prix ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/prop-pourcentages\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/prop-pourcentages\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_pourcentages&microId=prop_pourcentage_mental&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Mehdi, vendeur de baskets"
+        ],
+        [
+          "00:18",
+          "La clé : 10 %"
+        ],
+        [
+          "00:34",
+          "20 % et 30 % : le double, le triple"
+        ],
+        [
+          "00:53",
+          "Question : 20 % de 60 €"
+        ],
+        [
+          "01:20",
+          "5 % et 15 %"
+        ],
+        [
+          "01:39",
+          "100 %, 200 % et 50 %"
+        ],
+        [
+          "02:01",
+          "Le piège : 90 − 10 ?"
+        ],
+        [
+          "02:17",
+          "Question : 5 % de 80 €"
+        ],
+        [
+          "02:45",
+          "À toi de jouer"
+        ],
+        [
+          "03:00",
+          "Correction"
+        ],
+        [
+          "03:16",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/prop-pourcentages",
+      "tags": [
+        "pourcentages de tête",
+        "calcul mental",
+        "10 %",
+        "réduction",
+        "promotion",
+        "baskets",
+        "vendeur",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:53",
+          "question": "20 % de 60 €, de tête ?",
+          "choix": [
+            "12 €",
+            "20 €",
+            "40 €"
+          ],
+          "reponse": 0,
+          "explication": "10 % de 60 = 6 €. 20 % : le double, 12 €."
+        },
+        {
+          "t": "02:17",
+          "question": "5 % de 80 €, de tête ?",
+          "choix": [
+            "4 €",
+            "75 €",
+            "16 €"
+          ],
+          "reponse": 0,
+          "explication": "10 % de 80 = 8 €. 5 % : la moitié, 4 €."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "art-design"
+      ]
+    },
+    {
+      "id": "4e-prop-pourcentage-coefficient",
+      "notionId": "prop_pourcentages",
+      "microId": "prop_coeff_multiplicateur",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/proportionnalite/35-pourcentage-coefficient/eleveai-maths-4e-prop-pourcentage-coefficient.mp4",
+      "miniature": "4e/maths/proportionnalite/35-pourcentage-coefficient/eleveai-maths-4e-prop-pourcentage-coefficient.png",
+      "titre": "+5 % sur 2 400 €, en un seul calcul ? — Le coefficient multiplicateur — épisode 35 · Maths 4e",
+      "accroche": "Léna vend des motos. Le fabricant annonce une hausse de 5 % sur un scooter à 2 400 €, puis une remise de 15 % sur une moto à 8 000 €. Léna veut les nouveaux prix, en un seul calcul.\n\nDans cette vidéo :\n• une hausse de 5 % : 100 % + 5 % = 105 %, on multiplie par 1,05 : 2 400 × 1,05 = 2 520 €\n• une baisse de 15 % : 100 % − 15 % = 85 %, on multiplie par 0,85 : 8 000 × 0,85 = 6 800 €\n• lire un coefficient : plus grand que 1, une hausse (1,08 = + 8 %) ; plus petit que 1, une baisse (0,7 = − 30 %)\n• le piège : × 0,15 donne la remise (1 200 €), pas le nouveau prix\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une moto à 5 000 € augmente de 4 %. Quel est le coefficient multiplicateur ? Et le nouveau prix ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/prop-pourcentages\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/prop-pourcentages\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_pourcentages&microId=prop_coeff_multiplicateur&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Léna, vendeuse de motos"
+        ],
+        [
+          "00:25",
+          "Une hausse de 5 % : × 1,05"
+        ],
+        [
+          "00:51",
+          "Une baisse de 15 % : × 0,85"
+        ],
+        [
+          "01:09",
+          "Question : une hausse de 20 %"
+        ],
+        [
+          "01:43",
+          "Lire un coefficient"
+        ],
+        [
+          "02:01",
+          "Le piège : × 0,15"
+        ],
+        [
+          "02:21",
+          "Question : × 0,9"
+        ],
+        [
+          "03:05",
+          "À toi de jouer"
+        ],
+        [
+          "03:20",
+          "Correction"
+        ],
+        [
+          "03:35",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/prop-pourcentages",
+      "tags": [
+        "coefficient multiplicateur",
+        "hausse en pourcentage",
+        "baisse en pourcentage",
+        "évolution",
+        "moto",
+        "scooter",
+        "vendeuse",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:09",
+          "question": "Une hausse de 20 %. Par quel nombre multiplie-t-on le prix ?",
+          "choix": [
+            "0,20",
+            "1,20",
+            "0,80"
+          ],
+          "reponse": 1,
+          "explication": "100 % + 20 % = 120 %, soit 1,20. Multiplier par 0,20 donnerait seulement la hausse, pas le nouveau prix."
+        },
+        {
+          "t": "02:21",
+          "question": "Un casque coûte 200 €. On multiplie son prix par 0,9. Que s'est-il passé ?",
+          "choix": [
+            "hausse de 9 %",
+            "baisse de 90 %",
+            "baisse de 10 %"
+          ],
+          "reponse": 2,
+          "explication": "0,9 = 90 % ; 100 % − 90 % = 10 % : une baisse de 10 %. Le casque coûte 200 × 0,9 = 180 €."
+        }
+      ],
+      "centres": [
+        "transports",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "4e-prop-pourcentage-evolution",
+      "notionId": "prop_pourcentages",
+      "microId": "prop_evolution",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/proportionnalite/36-pourcentage-evolution/eleveai-maths-4e-prop-pourcentage-evolution.mp4",
+      "miniature": "4e/maths/proportionnalite/36-pourcentage-evolution/eleveai-maths-4e-prop-pourcentage-evolution.png",
+      "titre": "De 2 000 à 2 500 abonnés : + combien de % ? — Une évolution en pourcentage — épisode 36 · Maths 4e",
+      "accroche": "Sacha est community manager : il gère le compte d'un club de sport sur les réseaux sociaux. En janvier, 2 000 abonnés ; en février, 2 500. La présidente du club demande : « De combien de pour cent ça a augmenté ? »\n\nDans cette vidéo :\n• une évolution se calcule sur la valeur de départ : 500 ÷ 2 000 = 0,25, soit + 25 %\n• avec le coefficient : 2 500 ÷ 2 000 = 1,25, soit 125 %, donc + 25 %\n• la baisse de 2 500 à 2 000 : 500 ÷ 2 500 = 0,2, soit − 20 %\n• le piège : + 20 % puis − 20 % ne ramène pas au départ (2 000 → 2 400 → 1 920)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : les likes d'une publication passent de 800 à 1 040. Quelle évolution en pourcentage ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/prop-pourcentages\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/prop-pourcentages\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_pourcentages&microId=prop_evolution&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Sacha, community manager"
+        ],
+        [
+          "00:25",
+          "500 sur 2 000 : + 25 %"
+        ],
+        [
+          "00:48",
+          "Le coefficient : 1,25"
+        ],
+        [
+          "01:03",
+          "Question : de 400 à 500"
+        ],
+        [
+          "01:37",
+          "La baisse : − 20 %"
+        ],
+        [
+          "02:00",
+          "Le piège : + 20 % puis − 20 %"
+        ],
+        [
+          "02:28",
+          "Question : de 50 000 à 40 000 vues"
+        ],
+        [
+          "03:03",
+          "À toi de jouer"
+        ],
+        [
+          "03:17",
+          "Correction"
+        ],
+        [
+          "03:30",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/prop-pourcentages",
+      "tags": [
+        "évolution en pourcentage",
+        "taux d'évolution",
+        "hausse",
+        "baisse",
+        "coefficient multiplicateur",
+        "réseaux sociaux",
+        "community manager",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:03",
+          "question": "Un compte passe de 400 à 500 abonnés. Quelle évolution ?",
+          "choix": [
+            "+ 100 %",
+            "+ 25 %",
+            "+ 20 %"
+          ],
+          "reponse": 1,
+          "explication": "500 − 400 = 100 ; 100 sur 400, le nombre de départ : 0,25, soit + 25 %."
+        },
+        {
+          "t": "02:28",
+          "question": "Une vidéo passe de 50 000 à 40 000 vues par jour. Quelle évolution ?",
+          "choix": [
+            "− 10 %",
+            "− 25 %",
+            "− 20 %"
+          ],
+          "reponse": 2,
+          "explication": "50 000 − 40 000 = 10 000 ; 10 000 sur 50 000, le nombre de départ : 0,2, soit − 20 %."
+        }
+      ],
+      "centres": [
+        "reseaux-sociaux"
+      ]
+    },
+    {
+      "id": "4e-prop-pourcentage-defi",
+      "notionId": "prop_pourcentages",
+      "microId": "prop_pourcentage_defi",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/proportionnalite/37-pourcentage-defi/eleveai-maths-4e-prop-pourcentage-defi.mp4",
+      "miniature": "4e/maths/proportionnalite/37-pourcentage-defi/eleveai-maths-4e-prop-pourcentage-defi.png",
+      "titre": "− 20 % puis − 10 % : une remise de 30 % ? — Défis sur les pourcentages — épisode 37 · Maths 4e",
+      "accroche": "Julia dirige un cinéma. Prix des places, entrées, pop-corn : avant la sortie d'un grand film, elle doit tout calculer. La place coûte 10 € ; le mercredi, − 20 %, puis encore − 10 % avec la carte étudiant. Est-ce une remise de 30 % ?\n\nDans cette vidéo :\n• défi 1 : des remises successives se multiplient : 10 × 0,8 × 0,9 = 7,20 €, soit − 28 %, pas − 30 %\n• défi 2 : de 1 200 à 1 500 entrées : 300 ÷ 1 200 = 0,25, soit + 25 %\n• défi 3 : 35 % de 1 500, de tête : 30 % (450) + 5 % (75) = 525 pop-corns\n• le piège : de 6 € à 5 €, ce n'est pas − 20 %, mais environ − 16,7 % ; on calcule sur la valeur de départ\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une place à 12 € augmente de 10 %, puis baisse de 10 %. Quel est le prix final ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/prop-pourcentages\n• 20 exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/prop-pourcentages\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=prop_pourcentages&microId=prop_pourcentage_defi&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Julia, directrice de cinéma"
+        ],
+        [
+          "00:18",
+          "Défi 1 : deux remises"
+        ],
+        [
+          "00:40",
+          "Question : 20 % + 10 % = 30 % ?"
+        ],
+        [
+          "01:25",
+          "Défi 2 : les entrées"
+        ],
+        [
+          "01:46",
+          "Défi 3 : le pop-corn de tête"
+        ],
+        [
+          "02:14",
+          "Question : de 5 € à 6 €"
+        ],
+        [
+          "02:49",
+          "Le piège : de 6 € à 5 €"
+        ],
+        [
+          "03:06",
+          "À toi de jouer"
+        ],
+        [
+          "03:20",
+          "Correction"
+        ],
+        [
+          "03:39",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/prop-pourcentages",
+      "tags": [
+        "défis pourcentages",
+        "pourcentages successifs",
+        "coefficient multiplicateur",
+        "évolution",
+        "cinéma",
+        "directrice de cinéma",
+        "pop-corn",
+        "proportionnalité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:40",
+          "question": "− 20 %, puis − 10 % : est-ce − 30 % en tout ?",
+          "choix": [
+            "Oui : 20 + 10 = 30 %",
+            "Non : 28 %",
+            "Non : 2 %"
+          ],
+          "reponse": 1,
+          "explication": "0,8 × 0,9 = 0,72 : on paie 72 % du prix, donc la remise totale est de 28 %, pas de 30 % (7,20 €, pas 7 €)."
+        },
+        {
+          "t": "02:15",
+          "question": "Le prix du pop-corn passe de 5 € à 6 €. Quelle hausse ?",
+          "choix": [
+            "+ 1 %",
+            "+ 20 %",
+            "≈ + 16,7 %"
+          ],
+          "reponse": 1,
+          "explication": "6 − 5 = 1 € de plus ; 1 ÷ 5 (le prix de départ) = 0,2, soit + 20 %."
+        }
+      ],
+      "centres": [
+        "cinema-series",
+        "argent-budget"
+      ]
     }
   ]
 }

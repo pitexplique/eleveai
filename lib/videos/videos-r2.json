@@ -1038,6 +1038,78 @@
   "youtube": "umcj7pFUwvI",
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=proba_experience&microId=proba_vocabulaire&display=simple"
  },
+ "4e-prop-coefficient": {
+  "fichier": "4e/maths/proportionnalite/23-coefficient/eleveai-maths-4e-prop-coefficient.mp4",
+  "poster": "4e/maths/proportionnalite/23-coefficient/eleveai-maths-4e-prop-coefficient.png",
+  "vignette": "4e/maths/proportionnalite/23-coefficient/eleveai-maths-4e-prop-coefficient.vignette.webp",
+  "titre": "5 litres de peinture, combien de m² ? — Coefficient et passage à l'unité — épisode 23 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&microId=prop_coeff&display=simple"
+ },
+ "4e-prop-defi": {
+  "fichier": "4e/maths/proportionnalite/27-defi/eleveai-maths-4e-prop-defi.mp4",
+  "poster": "4e/maths/proportionnalite/27-defi/eleveai-maths-4e-prop-defi.png",
+  "vignette": "4e/maths/proportionnalite/27-defi/eleveai-maths-4e-prop-defi.vignette.webp",
+  "titre": "Le plus gros pack, le meilleur ? — Défis sur la proportionnalité — épisode 27 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&microId=prop_defi&display=simple"
+ },
+ "4e-prop-graphique": {
+  "fichier": "4e/maths/proportionnalite/22-graphique/eleveai-maths-4e-prop-graphique.mp4",
+  "poster": "4e/maths/proportionnalite/22-graphique/eleveai-maths-4e-prop-graphique.png",
+  "vignette": "4e/maths/proportionnalite/22-graphique/eleveai-maths-4e-prop-graphique.vignette.webp",
+  "titre": "À 20 m de fond, 2 fois plus de pression ? — Proportionnalité et graphique — épisode 22 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&microId=prop_graphique&display=simple"
+ },
+ "4e-prop-pourcentage-calculer": {
+  "fichier": "4e/maths/proportionnalite/33-pourcentage-calculer/eleveai-maths-4e-prop-pourcentage-calculer.mp4",
+  "poster": "4e/maths/proportionnalite/33-pourcentage-calculer/eleveai-maths-4e-prop-pourcentage-calculer.png",
+  "vignette": "4e/maths/proportionnalite/33-pourcentage-calculer/eleveai-maths-4e-prop-pourcentage-calculer.vignette.webp",
+  "titre": "18 sur 25 ou 33 sur 50 : qui sert le mieux ? — Calculer un pourcentage — épisode 33 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_pourcentages&microId=prop_pourcentage&display=simple"
+ },
+ "4e-prop-pourcentage-coefficient": {
+  "fichier": "4e/maths/proportionnalite/35-pourcentage-coefficient/eleveai-maths-4e-prop-pourcentage-coefficient.mp4",
+  "poster": "4e/maths/proportionnalite/35-pourcentage-coefficient/eleveai-maths-4e-prop-pourcentage-coefficient.png",
+  "vignette": "4e/maths/proportionnalite/35-pourcentage-coefficient/eleveai-maths-4e-prop-pourcentage-coefficient.vignette.webp",
+  "titre": "+5 % sur 2 400 €, en un seul calcul ? — Le coefficient multiplicateur — épisode 35 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_pourcentages&microId=prop_coeff_multiplicateur&display=simple"
+ },
+ "4e-prop-pourcentage-defi": {
+  "fichier": "4e/maths/proportionnalite/37-pourcentage-defi/eleveai-maths-4e-prop-pourcentage-defi.mp4",
+  "poster": "4e/maths/proportionnalite/37-pourcentage-defi/eleveai-maths-4e-prop-pourcentage-defi.png",
+  "vignette": "4e/maths/proportionnalite/37-pourcentage-defi/eleveai-maths-4e-prop-pourcentage-defi.vignette.webp",
+  "titre": "− 20 % puis − 10 % : une remise de 30 % ? — Défis sur les pourcentages — épisode 37 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_pourcentages&microId=prop_pourcentage_defi&display=simple"
+ },
+ "4e-prop-pourcentage-evolution": {
+  "fichier": "4e/maths/proportionnalite/36-pourcentage-evolution/eleveai-maths-4e-prop-pourcentage-evolution.mp4",
+  "poster": "4e/maths/proportionnalite/36-pourcentage-evolution/eleveai-maths-4e-prop-pourcentage-evolution.png",
+  "vignette": "4e/maths/proportionnalite/36-pourcentage-evolution/eleveai-maths-4e-prop-pourcentage-evolution.vignette.webp",
+  "titre": "De 2 000 à 2 500 abonnés : + combien de % ? — Une évolution en pourcentage — épisode 36 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_pourcentages&microId=prop_evolution&display=simple"
+ },
+ "4e-prop-pourcentage-mental": {
+  "fichier": "4e/maths/proportionnalite/34-pourcentage-mental/eleveai-maths-4e-prop-pourcentage-mental.mp4",
+  "poster": "4e/maths/proportionnalite/34-pourcentage-mental/eleveai-maths-4e-prop-pourcentage-mental.png",
+  "vignette": "4e/maths/proportionnalite/34-pourcentage-mental/eleveai-maths-4e-prop-pourcentage-mental.vignette.webp",
+  "titre": "20 % de 90 € sans calculatrice ? — Les pourcentages de tête — épisode 34 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_pourcentages&microId=prop_pourcentage_mental&display=simple"
+ },
  "4e-prop-pourcentages": {
   "fichier": "4e/maths/paysage/fr/prop-pourcentages/eleveai-maths-4e-prop-pourcentages.mp4",
   "poster": "4e/maths/paysage/fr/prop-pourcentages/eleveai-maths-4e-prop-pourcentages.png",
@@ -1100,6 +1172,15 @@
   "short": true,
   "youtube": "Vr30yjvQnsY",
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_pourcentages&microId=prop_pourcentage&display=simple"
+ },
+ "4e-prop-probleme": {
+  "fichier": "4e/maths/proportionnalite/25-probleme/eleveai-maths-4e-prop-probleme.mp4",
+  "poster": "4e/maths/proportionnalite/25-probleme/eleveai-maths-4e-prop-probleme.png",
+  "vignette": "4e/maths/proportionnalite/25-probleme/eleveai-maths-4e-prop-probleme.vignette.webp",
+  "titre": "Le budget d'un tournoi de foot ? — Résoudre un problème de proportionnalité — épisode 25 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&microId=prop_probleme&display=simple"
  },
  "4e-prop-proportionnalite": {
   "fichier": "4e/maths/paysage/fr/prop-proportionnalite/eleveai-maths-4e-prop-proportionnalite.mp4",
@@ -1182,6 +1263,15 @@
   "youtube": "Xco1oGJUsjo",
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&microId=prop_coeff&display=simple"
  },
+ "4e-prop-quatrieme": {
+  "fichier": "4e/maths/proportionnalite/24-quatrieme/eleveai-maths-4e-prop-quatrieme.mp4",
+  "poster": "4e/maths/proportionnalite/24-quatrieme/eleveai-maths-4e-prop-quatrieme.png",
+  "vignette": "4e/maths/proportionnalite/24-quatrieme/eleveai-maths-4e-prop-quatrieme.vignette.webp",
+  "titre": "Combien de tissu pour 14 sweats ? — La quatrième proportionnelle — épisode 24 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&microId=prop_quatrieme&display=simple"
+ },
  "4e-prop-ratio": {
   "fichier": "4e/maths/paysage/fr/prop-ratio/eleveai-maths-4e-prop-ratio.mp4",
   "poster": "4e/maths/paysage/fr/prop-ratio/eleveai-maths-4e-prop-ratio.png",
@@ -1190,6 +1280,42 @@
   "short": false,
   "youtube": "9hMxwfwLIGE",
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_ratio&display=simple"
+ },
+ "4e-prop-ratio-defi": {
+  "fichier": "4e/maths/proportionnalite/32-ratio-defi/eleveai-maths-4e-prop-ratio-defi.mp4",
+  "poster": "4e/maths/proportionnalite/32-ratio-defi/eleveai-maths-4e-prop-ratio-defi.png",
+  "vignette": "4e/maths/proportionnalite/32-ratio-defi/eleveai-maths-4e-prop-ratio-defi.vignette.webp",
+  "titre": "Combien de matchs l'équipe de Nathan a-t-elle joués ? — Défis sur les ratios — épisode 32 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_ratio&microId=prop_ratio_defi&display=simple"
+ },
+ "4e-prop-ratio-ecrire": {
+  "fichier": "4e/maths/proportionnalite/28-ratio-ecrire/eleveai-maths-4e-prop-ratio-ecrire.mp4",
+  "poster": "4e/maths/proportionnalite/28-ratio-ecrire/eleveai-maths-4e-prop-ratio-ecrire.png",
+  "vignette": "4e/maths/proportionnalite/28-ratio-ecrire/eleveai-maths-4e-prop-ratio-ecrire.vignette.webp",
+  "titre": "Comment refaire exactement le même vert ? — Exprimer un ratio — épisode 28 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_ratio&microId=prop_rapport&display=simple"
+ },
+ "4e-prop-ratio-partager": {
+  "fichier": "4e/maths/proportionnalite/31-ratio-partager/eleveai-maths-4e-prop-ratio-partager.mp4",
+  "poster": "4e/maths/proportionnalite/31-ratio-partager/eleveai-maths-4e-prop-ratio-partager.png",
+  "vignette": "4e/maths/proportionnalite/31-ratio-partager/eleveai-maths-4e-prop-ratio-partager.vignette.webp",
+  "titre": "Comment partager 1 200 € entre deux rappeurs ? — Partager selon un ratio — épisode 31 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_ratio&microId=prop_ratio_partager&display=simple"
+ },
+ "4e-prop-ratio-quotients": {
+  "fichier": "4e/maths/proportionnalite/29-ratio-quotients/eleveai-maths-4e-prop-ratio-quotients.mp4",
+  "poster": "4e/maths/proportionnalite/29-ratio-quotients/eleveai-maths-4e-prop-ratio-quotients.png",
+  "vignette": "4e/maths/proportionnalite/29-ratio-quotients/eleveai-maths-4e-prop-ratio-quotients.vignette.webp",
+  "titre": "Combien d'eau pour 20 kilos de farine ? — Ratio et quotients égaux — épisode 29 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_ratio&microId=prop_ratio_quotients&display=simple"
  },
  "4e-prop-ratio-short-ecart": {
   "fichier": "4e/maths/shorts/fr/prop-ratio/eleveai-maths-4e-prop-ratio-short-ecart.mp4",
@@ -1235,6 +1361,42 @@
   "short": true,
   "youtube": "jPp_eBkzxg8",
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_ratio&microId=prop_ratio_trois&display=simple"
+ },
+ "4e-prop-ratio-trois": {
+  "fichier": "4e/maths/proportionnalite/30-ratio-trois/eleveai-maths-4e-prop-ratio-trois.mp4",
+  "poster": "4e/maths/proportionnalite/30-ratio-trois/eleveai-maths-4e-prop-ratio-trois.png",
+  "vignette": "4e/maths/proportionnalite/30-ratio-trois/eleveai-maths-4e-prop-ratio-trois.vignette.webp",
+  "titre": "Comment doser compost, terre et sable ? — Un ratio à trois termes — épisode 30 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_ratio&microId=prop_ratio_trois&display=simple"
+ },
+ "4e-prop-reconnaitre": {
+  "fichier": "4e/maths/proportionnalite/20-reconnaitre/eleveai-maths-4e-prop-reconnaitre.mp4",
+  "poster": "4e/maths/proportionnalite/20-reconnaitre/eleveai-maths-4e-prop-reconnaitre.png",
+  "vignette": "4e/maths/proportionnalite/20-reconnaitre/eleveai-maths-4e-prop-reconnaitre.vignette.webp",
+  "titre": "20 km en taxi, le double de 10 km ? — Reconnaître la proportionnalité — épisode 20 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&microId=prop_reconnaitre&display=simple"
+ },
+ "4e-prop-relation": {
+  "fichier": "4e/maths/proportionnalite/26-relation/eleveai-maths-4e-prop-relation.mp4",
+  "poster": "4e/maths/proportionnalite/26-relation/eleveai-maths-4e-prop-relation.png",
+  "vignette": "4e/maths/proportionnalite/26-relation/eleveai-maths-4e-prop-relation.vignette.webp",
+  "titre": "Combien d'énergie pour 12 panneaux solaires ? — La relation y = k × x — épisode 26 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&microId=prop_relation&display=simple"
+ },
+ "4e-prop-tableau": {
+  "fichier": "4e/maths/proportionnalite/21-tableau/eleveai-maths-4e-prop-tableau.mp4",
+  "poster": "4e/maths/proportionnalite/21-tableau/eleveai-maths-4e-prop-tableau.png",
+  "vignette": "4e/maths/proportionnalite/21-tableau/eleveai-maths-4e-prop-tableau.vignette.webp",
+  "titre": "Combien de chocolat pour 12 tablettes ? — Le tableau de proportionnalité — épisode 21 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&microId=prop_table&display=simple"
  },
  "4e-pythagore-carre-racine": {
   "fichier": "4e/maths/pythagore/02-carre-racine/eleveai-maths-4e-pythagore-carre-racine.mp4",
