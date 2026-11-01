@@ -376,3 +376,21 @@ Sources : Insee, Paris ≈ 2,1 millions (population légale 2022) sur 105 km² ;
 ```
 Question en commentaire : « 1,5 L pour 2,70 € ou 2 L pour 3,40 € : lequel est le moins cher au litre ? » (2 L : 1,70 €/L contre 1,80 €/L).
 Sources : Agreste, blé tendre 2025 ≈ 7,4 t/ha ; champ, pompe, magasins et prix des céréales inventés. Défauts mineurs : les cadres verts de « 70 t » et « 15 h » frôlent le mot qui les précède. Le convertisseur de marques de l'agent pose une marque par occurrence même à travers la ponctuation (« 21 tonnes. 21 tonnes »).
+
+## 4e 18-grandeur-coherence (lot 4, rendu le 01/11)
+**Paysage** `4e-prop-grandeur-coherence` — 4:05, ceinture verte — centres `sport`, `sciences`
+```json
+[
+  {"t":"01:00","question":"Quelle unité pour l'aire du fond du bassin ?","choix":["le mètre (m)","le mètre carré (m²)","le mètre cube (m³)"],"reponse":1,"explication":"50 m × 25 m = 1 250 m². Deux longueurs multipliées : une aire."},
+  {"t":"01:52","question":"Combien de litres y a-t-il dans 1 m³ ?","choix":["100 L","1 000 L","10 L"],"reponse":1,"explication":"10 × 10 × 10 = 1 000 dm³, et 1 dm³ = 1 L : 1 000 L."},
+  {"t":"02:34","question":"Peut-on additionner 150 m et 1 250 m² ?","choix":["oui, ça fait 1 400 m","oui, ça fait 1 400 m²","non, pas les mêmes grandeurs"],"reponse":2,"explication":"Une longueur et une aire ne s'additionnent pas."}
+]
+```
+**Short** `4e-prop-grandeur-coherence-short` — 1:17, ceinture blanche — centres `jeux-defis`
+```json
+[
+  {"t":"00:33","question":"Un élève écrit : la piscine contient 400 m² d'eau.","choix":["c'est juste","faux : des m³","juste si on arrondit"],"reponse":1,"explication":"L'eau remplit un volume : des mètres cubes, ou des litres."}
+]
+```
+Question en commentaire : « Un terrain de handball mesure 40 m sur 20 m. Un élève écrit 800 m³. Corrige-le : son aire, avec la bonne unité ! » (800 m²).
+Sources : bassin olympique 50 × 25 m, 2 m de profondeur au moins (World Aquatics FR 2) ; handball 40 × 20 m (IHF) ; pompe de 50 m³/h inventée. Défauts mineurs : dans le short, la roue avant du scooter frôle « 45 h/km » barré ; dans la paysage, le choix C de la question 3 tient sur deux lignes.
