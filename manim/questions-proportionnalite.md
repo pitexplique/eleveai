@@ -433,7 +433,7 @@ Sources : essence 1,80 €/L = ordre de grandeur (SP95-E10 ≈ 1,70 €/L en moy
 Sources : chocolaterie, recettes et quantités inventées (75 g de chocolat, 15 g de sucre par tablette). Premier agent figé, relancé. Défauts mineurs : sur « Ce que tu as appris », le tableau est petit et laisse un vide ; « 112 500 tablettes » réduit pour tenir dans sa carte.
 
 ## 4e 22-graphique (lot 5, rendu le 01/11)
-**Paysage** `4e-prop-graphique` — 3:52, ceinture verte — centres `animaux-marins`, `sciences`
+**Paysage** `4e-prop-graphique` — 3:52, ceinture verte — centres `animaux`, `sciences` (précision `animaux-marins`)
 ```json
 [
   {"t":"01:02","question":"Sur un graphique, des points sont alignés sur une droite qui ne passe pas par l'origine. Est-ce proportionnel ?","choix":["oui","non","seulement si la droite monte"],"reponse":1,"explication":"Il faut les deux : des points alignés, et une droite qui passe par l'origine."},
@@ -443,7 +443,7 @@ Sources : chocolaterie, recettes et quantités inventées (75 g de chocolat, 15 
 Sources : eau de mer ≈ 1 bar tous les 10 m (1 025 kg/m³ × 9,81 × 10 m ≈ 1,0 bar) ; air ≈ 1 bar en surface (1,013 bar) ; pression totale = 1 + profondeur ÷ 10 (manuels de plongée, niveau 1 FFESSM) ; Noé et ses plongées inventés. Défauts mineurs : le choix C « seulement si la droite monte » est écrit plus petit (≈ 20 pt) ; phrase de réponse de la question 1 assez petite.
 
 ## 4e 23-coefficient (lot 5, rendu le 01/11)
-**Paysage** `4e-prop-coefficient` — 3:41, ceinture verte — centres `construction`, `art-design`
+**Paysage** `4e-prop-coefficient` — 3:41, ceinture verte — centres `art-design` (la précision `construction` dépend de `jeux-video` : écartée)
 ```json
 [
   {"t":"01:06","question":"Avec 4 L : 48 m². Quel est le coefficient ?","choix":["12 m²/L","44 m²/L","192 m²/L"],"reponse":0,"explication":"48 ÷ 4 = 12 m²/L. On divise, on ne soustrait pas."},
@@ -453,7 +453,7 @@ Sources : eau de mer ≈ 1 bar tous les 10 m (1 025 kg/m³ × 9,81 × 10 m ≈ 1
 Sources : 12 m²/L par couche = rendement courant d'une peinture murale (Castorama : 5 à 20 m²/L ; Levis Mur Velours 11 m²/L ; Brico.be Perfection 12 m²/L) ; 9 m²/L du défi plausible (SPS Finess 7 à 9 m²/L) ; Yasmine, pièces et piscine de peinture inventées. Défauts mineurs : la question 1 est écrite « Avec 4 L : 48 m². » (plus court que la voix, pour le calage) ; la réponse de la question 2 commence par « On remonte : ».
 
 ## 4e 24-quatrieme (lot 5, rendu le 01/11)
-**Paysage** `4e-prop-quatrieme` — 4:15, ceinture verte — centres `mode`
+**Paysage** `4e-prop-quatrieme` — 4:15, ceinture verte — centres `art-design` (précision `mode`)
 ```json
 [
   {"t":"01:28","question":"5 m de tissu coûtent 40 €. Pour le prix de 8 m, quel calcul est juste ?","choix":["40 × 8 ÷ 5","5 × 8 ÷ 40","40 × 5 ÷ 8"],"reponse":0,"explication":"On multiplie les deux nombres en diagonale, 40 et 8, et on divise par le troisième, 5 : 320 ÷ 5 = 64 €."},
@@ -461,3 +461,15 @@ Sources : 12 m²/L par couche = rendement courant d'une peinture murale (Castora
 ]
 ```
 Sources : Malo, sweats, tissu, boutons et prix inventés. Seul épisode du lot avec le produit en croix (diagonale fuchsia, troisième nombre encadré, mauvaise diagonale barrée, écran « Pourquoi ça marche ? » qui le relie au passage à l'unité). Défauts mineurs : un « ? » bleu apparaît 0,3 s dans la case du 8 pendant la réponse de la question 1 ; « Ce que tu as appris » écrit assez petit ; le trait de la diagonale passe tout près des chiffres.
+
+## 4e 25-probleme (lot 5, rendu le 01/11)
+**Paysage** `4e-prop-probleme` — 3:51, ceinture verte — centres `sport`, `argent-budget` (précision `football`)
+```json
+[
+  {"t":"00:55","question":"Il faut environ 26,7 packs. Combien Sofia doit-elle en acheter ?","choix":["26 packs","27 packs","26,7 packs"],"reponse":1,"explication":"Avec 26 packs, il manquerait de l'eau, et on n'achète pas un morceau de pack : on arrondit au-dessus, 27 packs ; 27 × 3 € = 81 €."},
+  {"t":"02:10","question":"Un match dure 20 min devant 100 spectateurs. Devant 200 spectateurs, combien de temps dure-t-il ?","choix":["40 minutes","10 minutes","Toujours 20 minutes"],"reponse":2,"explication":"La durée d'un match ne dépend pas du nombre de spectateurs : ce n'est pas proportionnel."}
+]
+```
+Sources : tournoi, eau (1,5 L par joueur), packs à 3 €, barres, bus à 150 € et match de 20 min inventés (150 € la journée d'autocar, c'est bas). Défauts mineurs : phrases de réponse en petits caractères ; à la question 1, l'écran écrit « 26 packs : pas assez » quand la voix dit « il manquerait de l'eau ».
+
+⚠️ Centres (lot 5) : le champ `centres` du manifeste ne prend que les 18 centres de `lib/videos/centres-interet.ts` ; les « précisions » du tableau des épisodes se ramènent à leur parent (`PRECISIONS_CENTRE`) : animaux-marins → animaux, football/basket/tennis → sport, mode/dessin-manga → art-design, rap → musique, voitures-motos → transports ; `construction` (précision de jeux-video) est écartée.

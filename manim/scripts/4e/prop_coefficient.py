@@ -15,7 +15,7 @@
 #
 # Décor et métier : Yasmine, PEINTRE EN BÂTIMENT (ses pots, son rouleau, sa
 # camionnette, un salon, un couloir) ; la piscine de peinture du piège.
-# Centres d'intérêt : construction, art-design.
+# Centres d'intérêt : art-design (« construction » est une précision de jeux-video).
 # Chiffre réel (WebSearch, 01/11/2026) : 12 m²/L par couche = rendement courant
 # d'une peinture murale (Castorama « calculer votre besoin en peinture » : 5 à
 # 20 m²/L selon le produit ; Levis Mur Velours 11 m²/L ; Brico.be Perfection
