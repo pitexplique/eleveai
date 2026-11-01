@@ -543,3 +543,13 @@ Sources : Awa, Djibril, Marius, Inaya, cachets (1 200 €, 2 000 €) et ventes 
 ]
 ```
 Sources : match FIBA de 40 min (4 quart-temps de 10 min, règles officielles FIBA) ; Nathan, matchs et paniers inventés. Vérifié : la question 1 (00:33) vient juste après l'exposé du ratio 5 : 3 et des « 6 matchs de plus ». Défauts mineurs : lignes de réponse sous les cartes petites ; trait rouge épais sur « Défaites = 6 matchs » au piège.
+
+## 4e 33-pourcentage-calculer (lot 5, rendu le 01/11)
+**Paysage** `4e-prop-pourcentage-calculer` — 3:58, ceinture verte — centres `sport` (précision `tennis`)
+```json
+[
+  {"t":"01:10","question":"12 réussites sur 20 essais. Quel pourcentage de réussite ?","choix":["12 %","60 %","8 %"],"reponse":1,"explication":"20 × 5 = 100 et 12 × 5 = 60 : 12 sur 20, c'est 60 %."},
+  {"t":"02:38","question":"30 % de 80 €, c'est combien ?","choix":["24 €","30 €","50 €"],"reponse":0,"explication":"0,3 × 80 = 24 €."}
+]
+```
+Sources : Lou, match de tennis et chiffres inventés. Corrigé à la vérification : le cadre vert « = 60 % » de la correction touchait le « 100 » (décalé), les grilles des joueuses A et B se touchaient presque (écartées) ; rendu HD refait, bords 0. Défaut mineur : trait rouge épais sur « 25 sur 50 = 25 % » au piège.
