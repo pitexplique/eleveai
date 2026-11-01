@@ -203,14 +203,12 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
         <SoleilAccueil className="absolute left-6 top-6 hidden h-24 w-24 lg:block xl:left-16" />
         <MontgolfiereAccueil className="absolute right-4 top-4 hidden h-40 w-44 lg:block xl:right-14" />
         <CollinesAccueil className="absolute inset-x-0 bottom-0 h-[170px] w-full sm:h-[230px]" />
-        <div className="relative mx-auto max-w-6xl px-4 pb-[150px] pt-10 text-center sm:pb-[210px] sm:pt-12">
-          <h1 className={`${slab.className} text-4xl font-light leading-tight text-sky-700 sm:text-6xl`}>
+        <div className="relative mx-auto max-w-6xl px-4 pb-[150px] pt-6 text-center sm:pb-[210px] sm:pt-6">
+          {/* Comme IXL : le titre seul, tout en haut, sur une ligne (ordinateur). */}
+          <h1 className={`${slab.className} text-3xl font-light leading-tight text-sky-700 sm:text-4xl lg:whitespace-nowrap lg:text-5xl`}>
             <span className="font-bold text-teal-700">EleveAI</span> <span className="font-bold">c&apos;est</span> l&apos;apprentissage personnalisé
           </h1>
-          <p className="mx-auto mt-3 max-w-2xl text-lg text-slate-700">
-            Le coach te suit et garde tes progrès.
-          </p>
-          <div className="mt-8 grid gap-4 sm:grid-cols-3">
+          <div className="mt-6 grid gap-4 sm:grid-cols-3">
             <Nuage Icone={GraduationCap} titre="Tout le programme">
               Du CP à la Terminale : {totalMicros.toLocaleString("fr-FR")} micro-compétences de maths et {totalVideos.toLocaleString("fr-FR")}+ vidéos, rangées comme le programme officiel.
             </Nuage>
