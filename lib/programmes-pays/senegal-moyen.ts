@@ -12,6 +12,9 @@
 // le programme en vigueur » : https://apprendre.auf.org/wp-content/uploads/2021/08/fascicule_adem_math_6e.pdf
 // (idem _5e, _4e, _3e). Une révision a été lancée en 2017 (rencontre nationale
 // de juillet 2017), mais aucun nouveau programme n'a été publié en ligne.
+// Vérifié le 01/11/2026 : aucun programme plus récent trouvé en ligne (ni
+// ministère ni IGEN), le programme de 2006 est toujours en vigueur. Le même
+// jour, renvois revus micro par micro dans les banques du coach.
 // Langue : les mathématiques sont enseignées en FRANÇAIS à tous les niveaux.
 // Le programme n'a pas de codes officiels : AN n = n-ième chapitre des
 // « Activités numériques », AG n = des « Activités géométriques », dans l'ordre
@@ -44,8 +47,11 @@ export const SENEGAL_6E: ProgrammePays = {
       code: "AN 1", domaine: AN,
       texte: "Nombres décimaux arithmétiques : entiers naturels, chiffres, unités, dizaines, centaines ; partie entière, partie décimale ; ensembles ℕ et 𝔻 ; autres systèmes de numération.",
       couverture: "partielle",
-      micros: m("6e", "entier_lire_ecrire", "entier_rang", "entier_decomposer", "decimal_lire_ecrire", "decimal_rang"),
-      note: "Manquent les autres systèmes de numération (base 2, base 5, chiffres romains) et la notation des ensembles ℕ et 𝔻.",
+      micros: [
+        ...m("6e", "entier_lire_ecrire", "entier_rang", "entier_decomposer", "decimal_lire_ecrire", "decimal_rang"),
+        ...m("seconde", "reels_ensembles"),
+      ],
+      note: "Manquent les autres systèmes de numération (base 2, base 5, chiffres romains). Les ensembles ℕ et 𝔻 (« 5 appartient-il à ℕ ? ») sont en seconde chez nous.",
     },
     {
       code: "AN 2", domaine: AN,
@@ -125,9 +131,9 @@ export const SENEGAL_6E: ProgrammePays = {
     {
       code: "AG 2", domaine: AG,
       texte: "Le cercle : centre, rayon, diamètre, disque, arc, corde, périmètre ; intérieur et extérieur ; cercles sécants, tangents, disjoints.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: m("6e", "cercle_vocabulaire", "cercle_ensemble", "cercle_distance", "cercle_perimetre"),
-      note: "Manque la position de deux cercles (sécants, tangents, disjoints) selon la distance des centres.",
+      note: "La position de deux cercles est dans cercle_distance (★5 : deux points, un seul ou aucun selon AB comparé à r + r′) ; seule la tangence intérieure n'y est pas.",
     },
     {
       code: "AG 3", domaine: AG,
@@ -295,8 +301,11 @@ export const SENEGAL_5E: ProgrammePays = {
       code: "AG 5", domaine: AG,
       texte: "Trapèze : propriétés, trapèze isocèle, trapèze rectangle.",
       couverture: "partielle",
-      micros: m("6e", "quadrilatere_identifier_nature", "quadrilatere_distinguer"),
-      note: "Rien sur les propriétés du trapèze isocèle ni sur l'aire du trapèze.",
+      micros: [
+        ...m("6e", "quadrilatere_identifier_nature", "quadrilatere_distinguer"),
+        ...m("4e", "aire_figure"),
+      ],
+      note: "L'aire du trapèze rectangle (découpé en rectangle + triangle) est dans aire_figure (4e, ★4) ; rien sur les propriétés du trapèze isocèle (angles à la base, diagonales égales, axe).",
     },
     {
       code: "AG 6-8", domaine: AG,
@@ -331,13 +340,13 @@ export const SENEGAL_4E: ProgrammePays = {
     {
       code: "AN 1", domaine: AN,
       texte: "Nombres rationnels : définition, écritures, valeur absolue, simplification, opérations dans ℚ, comparaison, opérations et inégalités, approximation décimale, intervalles.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
         ...m("4e", "fraction_rationnel", "fraction_egale", "fraction_simplifier", "fraction_comparer", "fraction_additionner", "fraction_multiplier", "fraction_inverse", "fraction_diviser", "fraction_oppose", "fraction_decimal"),
         ...m("5e", "relatif_valeur_absolue"),
-        ...m("seconde", "intervalle_representer", "reels_encadrement"),
+        ...m("seconde", "intervalle_representer", "reels_encadrement", "inequation_resoudre"),
       ],
-      note: "Manquent les règles de l'ordre (si a < b alors a + c < b + c ; multiplier par un négatif renverse) : même trou qu'au Maroc.",
+      note: "Les règles de l'ordre (multiplier par un négatif change le sens de l'inégalité) sont entraînées dans inequation_resoudre (seconde), pas en tant que telles au collège.",
     },
     {
       code: "AN 2", domaine: AN,
@@ -376,13 +385,15 @@ export const SENEGAL_4E: ProgrammePays = {
     {
       code: "AN 6", domaine: AN,
       texte: "Statistique : série brute, série ordonnée, effectif, mode, fréquence, pourcentage, moyenne ; diagrammes en bâtons, en bandes, circulaire et semi-circulaire.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
         ...m("4e", "stat_lire_tableau", "stat_lire_graphique", "stat_effectif", "stat_frequence", "stat_moyenne"),
         ...m("5e", "stat_donnee_organiser", "stat_representer"),
         ...m("6e", "stat_donnee_lire_circulaire"),
+        ...m("3e", "stat_lire_tableau"),
+        ...m("premiere", "info_rep_circulaire"),
       ],
-      note: "Manque le MODE, et la construction d'un diagramme circulaire ou semi-circulaire (angle proportionnel à l'effectif).",
+      note: "Angle d'un secteur circulaire (effectif × 360 ÷ N) : stat_representer (5e) ; semi-circulaire (180°) : info_rep_circulaire (1re) ; le mode se travaille comme « la réponse la plus fréquente » (stat_lire_tableau 3e), sans le mot « mode ».",
     },
 
     {
@@ -488,9 +499,9 @@ export const SENEGAL_3E: ProgrammePays = {
       couverture: "partielle",
       micros: [
         ...m("3e", "equation_resoudre_developper", "equation_produit_nul"),
-        ...m("seconde", "inequation_resoudre", "signes_produit", "signes_resoudre_inequation", "reference_valeur_absolue"),
+        ...m("seconde", "inequation_resoudre", "signes_produit", "signes_resoudre_inequation", "reference_valeur_absolue", "valeur_absolue_distance"),
       ],
-      note: "Les équations avec valeur absolue (|2x − 1| = 3) n'ont pas de micro.",
+      note: "valeur_absolue_distance (seconde) résout |x| = 5 et |x + 1| = 3 ; manquent |ax + b| = c avec a ≠ 1 (|2x − 1| = 3) et |ax + b| = |cx + d|.",
     },
     {
       code: "AN 3", domaine: AN,
@@ -510,10 +521,10 @@ export const SENEGAL_3E: ProgrammePays = {
       texte: "Statistique : regroupement en classes d'égales amplitudes, centre de classe, histogramme, diagramme des effectifs cumulés, classe modale, médiane, moyenne.",
       couverture: "partielle",
       micros: [
-        ...m("3e", "stat_effectif_frequence", "stat_moyenne", "stat_mediane", "stat_interpreter"),
+        ...m("3e", "stat_effectif_frequence", "stat_moyenne", "stat_mediane", "stat_interpreter", "stat_lire_graphique"),
         ...m("seconde", "stat_moyenne_ponderee"),
       ],
-      note: "Manquent les séries en CLASSES : centre de classe, histogramme, effectifs cumulés, classe modale, moyenne par les centres.",
+      note: "Lire un histogramme et cumuler des classes : stat_lire_graphique (3e) ; médiane par les effectifs cumulés : stat_mediane (3e). Manquent centre de classe, classe modale, moyenne par les centres, diagramme des effectifs cumulés.",
     },
     {
       code: "AN 6", domaine: AN,
@@ -547,8 +558,9 @@ export const SENEGAL_3E: ProgrammePays = {
       micros: [
         ...m("3e", "trigo_triangle_rectangle", "trigo_cosinus", "trigo_sinus", "trigo_tangente", "trigo_calculer_longueur", "trigo_calculer_angle", "trigo_choisir_rapport"),
         ...m("seconde", "geo_trig_identite"),
+        ...m("premiere-spe", "trig_valeurs"),
       ],
-      note: "Manquent les valeurs remarquables (cos 60° = 1/2, sin 45° = √2/2) et sin x = cos(90° − x).",
+      note: "sin 30° = cos 60° apparaît dans trigo_sinus (3e) ; les valeurs remarquables sont dans trig_valeurs (1re spé) mais en RADIANS (π/6, π/4, π/3) : manque une micro en degrés (cos 60° = 1/2, sin 45° = √2/2) et sin x = cos(90° − x) en règle.",
     },
     {
       code: "AG 4", domaine: AG,
@@ -567,8 +579,11 @@ export const SENEGAL_3E: ProgrammePays = {
       code: "AG 6", domaine: AG,
       texte: "Repérage dans le plan : coordonnées d'un vecteur, distance de deux points, équation générale et réduite d'une droite, vecteur directeur ; équations d'une médiane, d'une hauteur, d'une médiatrice.",
       couverture: "partielle",
-      micros: m("seconde", "vecteur_coordonnees", "repere_distance", "droite_pente_ordonne", "droite_equation_reduite", "droite_equation_cartesienne", "droite_vecteur_directeur", "droite_parallelisme"),
-      note: "Manquent les droites PERPENDICULAIRES par les coordonnées, donc les équations d'une hauteur et d'une médiatrice.",
+      micros: [
+        ...m("seconde", "vecteur_coordonnees", "repere_distance", "droite_pente_ordonne", "droite_equation_reduite", "droite_equation_cartesienne", "droite_vecteur_directeur", "droite_parallelisme"),
+        ...m("premiere-spe", "gr_droites"),
+      ],
+      note: "Deux droites perpendiculaires se reconnaissent à leurs équations dans gr_droites (1re spé, par les vecteurs normaux) ; manquent la méthode du collège (a × a′ = −1) et les équations d'une hauteur et d'une médiatrice.",
     },
     {
       code: "AG 7", domaine: AG,
@@ -576,9 +591,9 @@ export const SENEGAL_3E: ProgrammePays = {
       couverture: "partielle",
       micros: [
         ...m("3e", "sym_symetrie_translation_rotation", "sym_transformation_effet"),
-        ...m("4e", "sym_translation", "sym_rotation"),
+        ...m("4e", "sym_translation", "sym_rotation", "sym_transformation_defi"),
       ],
-      note: "La COMPOSÉE de deux transformations (deux symétries d'axes parallèles = une translation) n'a pas de micro.",
+      note: "sym_transformation_defi (4e, ★5) compose deux translations, deux symétries de même centre ou de même axe, deux rotations de même centre ; manquent les cas du programme : deux symétries centrales de centres différents, deux symétries axiales d'axes parallèles (une translation), perpendiculaires (une symétrie centrale) ou sécants (une rotation).",
     },
   ],
 };

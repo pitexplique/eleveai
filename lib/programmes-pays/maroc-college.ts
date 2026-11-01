@@ -9,8 +9,8 @@
 // (« 1.A.P.I.C », « 2.A.P.I.C »), diffusée par les blogs d'enseignants
 // (alra2id-educ.blogspot.com, octobre 2019). Tableaux « Contenu du programme /
 // Capacités attendues / Orientations pédagogiques » et répartition semestrielle
-// avec les horaires, relus le 25/10/2026. Les titres des chapitres concordent
-// avec AlloSchool (source du 3AC).
+// avec les horaires, relus le 25/10/2026 ; le 3AC (pages 22-31 du même PDF)
+// est dans ./maroc-3ac.ts. Renvois revus le 01/11/2026 contre tout le catalogue.
 // Langue : au collège public, les maths ont été enseignées en ARABE jusqu'à la
 // fin des années 2010 ; les sections internationales (option française) les
 // enseignent en français depuis 2014, et la loi-cadre 51-17 (2019) fait passer
@@ -134,8 +134,9 @@ export const MAROC_1AC: ProgrammePays = {
       micros: [
         ...m("6e", "mediatrice_propriete", "mediatrice_construire", "circonscrit_concourantes", "circonscrit_construire", "bissectrice_definition", "bissectrice_construire"),
         ...m("4e", "triangle_droites"),
+        ...m("seconde", "geo_projete_orthogonal"),
       ],
-      note: "Manquent la bissectrice comme lieu des points ÉQUIDISTANTS des côtés, le cercle inscrit, l'orthocentre et la distance d'un point à une droite.",
+      note: "Manquent la bissectrice comme lieu des points ÉQUIDISTANTS des côtés, le cercle inscrit et l'orthocentre. La distance d'un point à une droite (projeté orthogonal) est en seconde chez nous.",
     },
 
     // ── Semestre 2 ──────────────────────────────────────────────────────────
@@ -200,8 +201,13 @@ export const MAROC_1AC: ProgrammePays = {
       code: "S2-9", domaine: GS,
       texte: "Droite graduée (lire et placer une abscisse, distance de deux points d'abscisses connues) ; repère du plan (lire et placer des coordonnées).",
       couverture: "partielle",
-      micros: [...m("6e", "abscisse_lire", "abscisse_placer"), ...m("5e", "relatif_placer"), ...m("4e", "repere_plan")],
-      note: "Manque la distance de deux points d'une droite graduée comme différence de leurs abscisses (relatifs compris).",
+      micros: [
+        ...m("6e", "abscisse_lire", "abscisse_placer"),
+        ...m("5e", "relatif_placer"),
+        ...m("4e", "repere_plan"),
+        ...m("seconde", "valeur_absolue_distance"),
+      ],
+      note: "Manque la distance de deux points d'une droite graduée comme différence de leurs abscisses (relatifs compris) : seule la valeur absolue de seconde (|x − 4| = distance de x à 4) s'en approche.",
     },
     {
       code: "S2-10", domaine: GS,
@@ -298,8 +304,12 @@ export const MAROC_2AC: ProgrammePays = {
       code: "S2-3", domaine: AN,
       texte: "Ordre et opérations : comparer deux rationnels, ordre et addition, ordre et multiplication par un positif.",
       couverture: "partielle",
-      micros: [...m("4e", "fraction_comparer"), ...m("3e", "fraction_rationnel_comparer"), ...m("seconde", "comparer_difference_quotient")],
-      note: "Manquent les règles de l'ordre comme notion (si a < b alors a + c < b + c ; multiplier par un positif conserve l'ordre) : même trou qu'au 3AC.",
+      micros: [
+        ...m("4e", "fraction_comparer"),
+        ...m("3e", "fraction_rationnel_comparer"),
+        ...m("seconde", "comparer_difference_quotient", "inequation_resoudre"),
+      ],
+      note: "Manquent les règles de l'ordre comme notion (si a < b alors a + c < b + c ; multiplier par un positif conserve l'ordre) : même trou qu'au 3AC ; les inéquations de seconde les font seulement pratiquer.",
     },
     {
       code: "S2-4", domaine: GS,
@@ -313,9 +323,13 @@ export const MAROC_2AC: ProgrammePays = {
     {
       code: "S2-5", domaine: GS,
       texte: "Statistiques : effectifs cumulés, fréquences cumulées, moyenne ; diagrammes en bâtons, en barres, courbe (ligne brisée).",
-      couverture: "partielle",
-      micros: [...m("4e", "stat_effectif", "stat_frequence", "stat_moyenne", "stat_lire_graphique"), ...m("5e", "stat_representer")],
-      note: "Manquent les effectifs et fréquences CUMULÉS (même trou qu'au 3AC).",
+      couverture: "complete",
+      micros: [
+        ...m("4e", "stat_effectif", "stat_frequence", "stat_moyenne", "stat_lire_graphique"),
+        ...m("5e", "stat_representer"),
+        ...m("3e", "stat_lire_tableau", "stat_effectif_frequence"),
+      ],
+      note: "Les effectifs et fréquences cumulés sont travaillés dans les micros de 3e « Lire un tableau statistique » et « Déterminer un effectif et une fréquence ».",
     },
     {
       code: "S2-6", domaine: AG,
@@ -355,7 +369,7 @@ export const MAROC_2AC: ProgrammePays = {
       texte: "Pyramide, cône de révolution, prisme droit : patrons, représentation, aire latérale, volumes.",
       couverture: "partielle",
       micros: [...m("4e", "vision_representation", "volume_prisme"), ...m("3e", "volume_solide_reconnaitre", "section_cone_pyramide")],
-      note: "Manquent le volume de la pyramide et du cône (V = B × h ÷ 3) et l'aire latérale : trou déjà relevé au 3AC.",
+      note: "Manquent le volume de la pyramide et du cône (V = B × h ÷ 3) et l'aire latérale : même trou qu'au 3AC.",
     },
   ],
 };

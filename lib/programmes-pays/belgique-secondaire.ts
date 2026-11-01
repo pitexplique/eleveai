@@ -6,9 +6,15 @@
 // document 49935). PDF : https://ifpc.cfwb.be/v5/documents/tc/refMATH.pdf (157 p.,
 // texte lisible). Relevé le 25/10/2026 : 1re secondaire p. 108-119, 2e p. 120-129,
 // 3e p. 130-137.
-// Entrée en vigueur progressive : P1-P2 en 2022, P3-P4 en 2023, P5 en 2024… et la
-// 3e secondaire en 2028 (les « Socles de compétences » restent la référence des
-// années pas encore atteintes). Le tronc commun va de la 1re primaire (6 ans) à la
+// Entrée en vigueur progressive : P1-P2 en 2022, P3-P4 en 2023, P5 en 2024, P6 en
+// 2025 ; S1 depuis septembre 2026 (décret du 27 mai 2026 sur la 1re secondaire),
+// S2 en 2027, S3 en 2028 (les « Socles de compétences » restent la référence des
+// années pas encore atteintes).
+// ⚠️ Vérifié le 01/11/2026 : le référentiel de maths lui-même n'a pas changé, MAIS
+// le gouvernement MR-Engagés a approuvé un avant-projet qui adapte S2-S3 : 6 à 8
+// périodes d'« activités orientantes » en S3, CESI à la place du CE1D (dernier
+// CE1D en juin 2027). Pas de vote du texte S2-S3 trouvé à cette date : S2 et S3
+// sont à revoir quand il sera adopté (les attendus de maths pourraient bouger). Le tronc commun va de la 1re primaire (6 ans) à la
 // 3e secondaire (14-15 ans) : S1 a l'âge de notre 5e, S3 celui de notre 3e.
 // Le référentiel n'a pas de codes par énoncé : il range chaque année en CHAMPS
 // (1 géométrie, 2 grandeurs, 3 nombres et algèbre, 4 données et statistique) et
@@ -57,7 +63,7 @@ export const BELGIQUE_S1: ProgrammePays = {
       ],
       note: "Manquent les polygones réguliers, les médianes et hauteurs concourantes (centre de gravité, orthocentre).",
     },
-    { code: "1.2 SF1", domaine: GEO, texte: "Interpréter et utiliser les symboles géométriques : point, segment, demi-droite, droite, angle, parallèles, perpendiculaires ; codage.", couverture: "partielle", micros: m("6e", "distance_definition"), note: "Seule la notation (AB), [AB], AB est entraînée ; ni // ni ⊥ ni le codage des figures." },
+    { code: "1.2 SF1", domaine: GEO, texte: "Interpréter et utiliser les symboles géométriques : point, segment, demi-droite, droite, angle, parallèles, perpendiculaires ; codage.", couverture: "partielle", micros: [...m("6e", "distance_definition"), ...m("ce2", "ce2_angle_droit_codage", "ce2_segments_codage"), ...m("cm2", "droite_parallele", "droite_perpendiculaire")], note: "Notation (AB), [AB], AB (6e) et codage de l'angle droit et des longueurs égales (CE2) entraînés ; les symboles // et ⊥ n'ont pas de micro." },
     {
       code: "1.2 SF2", domaine: GEO, texte: "Construire des figures : mesurer et construire un angle au rapporteur ; triangle (côté et deux angles, deux côtés et l'angle compris, trois côtés), isocèle, équilatéral ; losange, parallélogramme.",
       couverture: "complete", micros: [...m("6e", "angle_mesurer", "angle_tracer", "quadrilatere_completer_construire"), ...m("5e", "triangle_construire", "para_construire")],
@@ -198,12 +204,12 @@ export const BELGIQUE_S2: ProgrammePays = {
     { code: "3.2 C1", domaine: NBR, texte: "Résoudre des problèmes avec les outils algébriques ; traduire une situation par une expression ou une équation ; rédiger un énoncé.", couverture: "complete", micros: m("4e", "equation_probleme", "equation_traduire", "litteral_expression_traduire") },
     {
       code: "4.1 Sv1", domaine: STA, texte: "Vocabulaire : population, échantillon, variable, modalité, effectif et effectif cumulé, fréquence et fréquence cumulée, étendue ; moyenne, mode, médiane (variable discrète).",
-      couverture: "partielle", micros: m("4e", "stat_effectif", "stat_frequence", "stat_moyenne", "stat_mediane", "stat_etendue"), note: "Effectifs et fréquences cumulés, mode et échantillon n'ont pas de micro.",
+      couverture: "partielle", micros: [...m("4e", "stat_effectif", "stat_frequence", "stat_moyenne", "stat_mediane", "stat_etendue", "proba_frequence_echantillon"), ...m("seconde", "echantillon_fluctuation")], note: "L'échantillon est vu côté probabilités (4e, seconde) ; effectifs et fréquences cumulés et le mode n'ont pas de micro.",
     },
     {
       code: "4.1 SF1", domaine: STA, texte: "Traiter, calculer, présenter : tableau de distribution (groupé ou non), effectif à partir de la fréquence, moyenne, mode, médiane ; diagrammes en bâtonnets, à bandes, circulaire ; diagramme par outil numérique.",
-      couverture: "partielle", micros: [...m("4e", "stat_frequence", "stat_moyenne", "stat_mediane"), ...m("5e", "stat_representer"), ...m("6e", "stat_construire_tableau")],
-      note: "Manquent les cumulés, les classes, le mode et la construction du diagramme circulaire.",
+      couverture: "partielle", micros: [...m("4e", "stat_frequence", "stat_moyenne", "stat_mediane"), ...m("5e", "stat_representer"), ...m("6e", "stat_construire_tableau"), ...m("premiere", "auto_stat_moyenne")],
+      note: "La moyenne de données groupées en classes existe (automatismes de 1re) ; manquent les cumulés, le mode et la construction du diagramme circulaire.",
     },
     { code: "4.1 C1", domaine: STA, texte: "Lire et interpréter : modalité répondant à « au moins », « au plus » ; décrire dans plusieurs registres ; choisir un paramètre ou un support.", couverture: "complete", micros: [...m("4e", "stat_interpreter", "stat_lire_graphique", "stat_probleme"), ...m("5e", "stat_representation_choisir")] },
   ],
@@ -251,13 +257,13 @@ export const BELGIQUE_S3: ProgrammePays = {
     { code: "3.2 SF2", domaine: NBR, texte: "Résoudre ax + b = cx + d, une équation produit nul, une équation par le produit en croix ; vérifier ; écrire une équation de deux solutions données.", couverture: "complete", micros: [...m("3e", "equation_resoudre_developper", "equation_produit_nul", "equation_verifier"), ...m("4e", "prop_quatrieme")] },
     { code: "3.2 SF3", domaine: NBR, texte: "Calculer avec des puissances de 10 à exposants entiers ; valeur approchée d'une racine à la calculatrice ; ordre de grandeur, plausibilité.", couverture: "partielle", micros: [...m("3e", "entier_puissance_dix", "entier_puissance_ecriture_scientifique", "entier_racine_calculer"), ...m("4e", "ordre_estimer")], note: "La calculatrice n'est pas entraînée." },
     { code: "3.2 C1", domaine: NBR, texte: "Résoudre des problèmes avec les nombres, les opérations et les outils algébriques ; rédiger un énoncé.", couverture: "complete", micros: [...m("3e", "equation_probleme"), ...m("4e", "equation_traduire")] },
-    { code: "4.1 Sv1", domaine: STA, texte: "Notions : population, variable, classes et centres de classes ; variable discrète ou continue ; bâtonnets, bandes ou histogramme.", couverture: "partielle", micros: m("3e", "stat_lire_tableau", "stat_lire_graphique"), note: "Les séries en classes et l'histogramme n'ont pas de micro." },
+    { code: "4.1 Sv1", domaine: STA, texte: "Notions : population, variable, classes et centres de classes ; variable discrète ou continue ; bâtonnets, bandes ou histogramme.", couverture: "partielle", micros: [...m("3e", "stat_lire_tableau", "stat_lire_graphique"), ...m("premiere", "auto_stat_lire_graphique", "auto_stat_moyenne")], note: "Lire un histogramme et calculer avec des classes : automatismes de 1re ; variable discrète / continue non travaillée." },
     {
       code: "4.1 SF1", domaine: STA, texte: "Traiter et calculer : effectifs et fréquences (cumulés), effectif d'une classe, moyenne d'une variable continue, médiane approchée sur la courbe des effectifs cumulés.",
-      couverture: "partielle", micros: [...m("3e", "stat_effectif_frequence", "stat_moyenne", "stat_mediane"), ...m("seconde", "stat_moyenne_ponderee", "stat_mediane_quartiles")],
-      note: "Manquent les cumulés, la moyenne par centres de classes et la médiane lue sur la courbe des cumulés.",
+      couverture: "partielle", micros: [...m("3e", "stat_effectif_frequence", "stat_moyenne", "stat_mediane"), ...m("seconde", "stat_moyenne_ponderee", "stat_mediane_quartiles"), ...m("premiere", "auto_stat_moyenne")],
+      note: "Moyenne par classes : automatismes de 1re ; manquent les cumulés et la médiane lue sur la courbe des cumulés.",
     },
-    { code: "4.1 SF2", domaine: STA, texte: "Présenter : tableau de distribution en classes, histogramme, histogramme par outil numérique.", couverture: "absente", micros: [], note: "Micro « histogramme et classes » à écrire." },
+    { code: "4.1 SF2", domaine: STA, texte: "Présenter : tableau de distribution en classes, histogramme, histogramme par outil numérique.", couverture: "partielle", micros: m("premiere", "auto_stat_lire_graphique", "auto_stat_graphique_donnees"), note: "On LIT un histogramme (automatismes de 1re) ; le construire et faire le tableau en classes : micro à écrire." },
     { code: "4.1 C1", domaine: STA, texte: "Interpréter en contexte, critiquer des informations sur une même situation, choisir un paramètre ou un support.", couverture: "complete", micros: [...m("3e", "stat_interpreter"), ...m("seconde", "stat_interpreter")] },
   ],
 };

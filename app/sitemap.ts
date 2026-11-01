@@ -1339,7 +1339,7 @@ const VIDEOS_UNE: VideoSitemap[] = (UNE_COURANTE?.diapos ?? [])
    classe qui a sa matrice (/pays/<pays>?classe=<clé>, l'adresse canonique de
    la page). Les classes grisées, sans matrice, n'y sont pas (noindex). La
    liste suit lib/programmes-pays : un pays ajouté entre seul au sitemap. */
-const LASTMOD_PAYS = new Date("2026-10-25");
+const LASTMOD_PAYS = new Date("2026-11-01");
 
 /* ⭐ 27/10/2026 — Frédéric : « rajouter cartes-mentales maths dans sitemaps ».
    Le hub, puis une adresse par notion du coach (lib/videos/bilans-notions.json,

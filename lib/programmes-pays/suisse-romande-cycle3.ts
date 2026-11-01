@@ -5,6 +5,9 @@
 // (« la version 2024 intégrant l'Éducation numérique est la référence »),
 // domaine MSN, discipline Mathématiques, objectifs MSN 31 à MSN 35.
 // Site : https://portail.ciip.ch/per (ancien plandetudes.ch, qui y redirige).
+// Vérifié le 01/11/2026 : toujours en vigueur (aucune version plus récente que
+// la 3.0 de 2024 ; l'API des tableaux répond toujours). Renvois revus le même
+// jour contre le catalogue (racine cubique STMG, isoler une lettre).
 // Relevé le 25/10/2026 dans les TABLEAUX « Progression des apprentissages » du
 // PER, lus par l'API publique du site :
 //   https://per.ciip.ch/api/bdper/objectifs-apprentissage/{45,48,51,54,151}/tableau
@@ -50,7 +53,7 @@ const GM = "MSN 34 — Grandeurs et mesures";
 const MOD = "MSN 35 — Modélisation";
 
 const SOURCE = "https://portail.ciip.ch/per";
-const VERSION = "Plan d'études romand (CIIP), version 3.0 août 2024, MSN 31 à 35, relevé le 25/10/2026";
+const VERSION = "Plan d'études romand (CIIP), version 3.0 août 2024, MSN 31 à 35, relevé le 25/10/2026, vérifié le 01/11/2026";
 
 // Lignes communes à plusieurs années (même texte dans le PER).
 const PROBLEMES = c(
@@ -153,8 +156,8 @@ export const SUISSE_9H: ProgrammePays = {
       "complete",
       [...m("cm2", "solide_reconnaitre", "solide_sommet_arete_face"), ...m("4e", "vision_reconnaitre")]),
     c("MSN 31-g", ESP, "Développements et construction de solides : cube, parallélépipède rectangle, prisme droit.", "partielle",
-      [...m("cm2", "solide_patron"), ...m("6e", "vision_representation")],
-      "On reconnaît un patron ; pas de micro qui fait CONSTRUIRE le développement d'un prisme droit."),
+      [...m("cm2", "solide_patron"), ...m("ce2", "ce2_solide_patron"), ...m("6e", "vision_representation")],
+      "Le patron du cube se construit (CE2) et se reconnaît (CM2) ; pas de micro qui fait CONSTRUIRE le développement d'un pavé ou d'un prisme droit."),
     PERSPECTIVE,
     c("MSN 31-i", ESP,
       "Isométries (translation, symétrie axiale, rotation, symétrie centrale) : reconnaissance, caractéristiques (vecteur, axe, centre, conservation des grandeurs), construction de l'image d'une figure.",
@@ -258,9 +261,9 @@ export const SUISSE_10H: ProgrammePays = {
       [...m("4e", "fraction_egale", "fraction_simplifier", "fraction_comparer", "fraction_decimal", "abscisse_fraction"), ...m("5e", "relatif_comparer"), ...m("6e", "pourcentage_fraction")]),
     c("MSN 32-e", NB, "Puissance aᵇ (a décimal, b dans ℕ ; a dans ℚ en Niv 2).", "complete",
       m("4e", "puissance_comprendre", "puissance_calculer", "puissance_comparer")),
-    c("MSN 32-f", NB, "Notation scientifique a·10ⁿ (n dans ℕ en Niv 1s, dans ℤ en Niv 2-3) ; racine carrée et racine cubique dans ℝ+.", "partielle",
-      [...m("4e", "puissance_dix", "puissance_exposant_negatif", "puissance_notation_scientifique"), ...m("3e", "entier_racine_comprendre", "entier_racine_calculer")],
-      "Pas de micro « racine cubique »."),
+    c("MSN 32-f", NB, "Notation scientifique a·10ⁿ (n dans ℕ en Niv 1s, dans ℤ en Niv 2-3) ; racine carrée et racine cubique dans ℝ+.", "complete",
+      [...m("4e", "puissance_dix", "puissance_exposant_negatif", "puissance_notation_scientifique"), ...m("3e", "entier_racine_comprendre", "entier_racine_calculer"), ...m("stmg", "fct_eq_racine_cubique")],
+      "La racine cubique est une micro de STMG (x³ = c, ∛)."),
     NUMERATION,
     c("MSN 32-g", NB, "Priorités des opérations (y compris parenthèses).", "complete", m("4e", "relatif_calcul")),
     c("MSN 32-h", NB, "Propriétés des puissances (a, b, m, n dans ℕ) : produit, quotient, puissance de puissance, produit de puissances de même exposant (Niv 2-3).", "complete",
@@ -308,9 +311,9 @@ export const SUISSE_10H: ProgrammePays = {
     c("MSN 34-f", GM, "Volume et aire du cylindre (Niv 2-3) ; volume (par décomposition et par formule) et aire de prismes droits ; volume d'un solide décomposé en solides simples.", "partielle",
       [...m("4e", "volume_prisme", "volume_cylindre", "volume_lien_aire"), ...m("5e", "volume_assemblage")],
       "Volumes couverts ; pas de micro « aire latérale ou totale » d'un prisme ou d'un cylindre."),
-    c("MSN 34-h", GM, "Calcul d'une grandeur manquante à partir de celles qui sont connues (hauteur d'un triangle à partir de sa base et de son aire…).", "partielle",
-      m("4e", "aire_probleme", "aire_perimetre_probleme"),
-      "Pas de micro dédiée « retrouver une dimension à partir de l'aire ou du volume »."),
+    c("MSN 34-h", GM, "Calcul d'une grandeur manquante à partir de celles qui sont connues (hauteur d'un triangle à partir de sa base et de son aire…).", "complete",
+      [...m("4e", "aire_probleme", "aire_perimetre_probleme"), ...m("seconde", "expr_exprimer_variable"), ...m("premiere", "auto_alg_isoler_variable", "auto_alg_application_formule")],
+      "Retrouver une dimension = isoler une lettre dans la formule (A = bh/2 → h = 2A/b) : micros de seconde et d'automatismes de 1re."),
     c("MSN 34-i", GM, "Utilisation du théorème de Pythagore (Niv 2-3).", "complete",
       m("4e", "pythagore_reconnaitre", "pythagore_calculer_hypotenuse", "pythagore_calculer_cote", "pythagore_reciproque_verifier", "pythagore_rediger")),
   ],
@@ -348,13 +351,13 @@ export const SUISSE_11H: ProgrammePays = {
     CALCULATRICE,
     c("MSN 32-a2", NB, "Situations aléatoires traitées à l'aide de notions de probabilités (Niv 2-3) : dénombrement, cas favorables et cas possibles.", "complete",
       m("3e", "proba_vocabulaire", "proba_issue", "proba_equiprobabilite", "proba_calculer", "proba_evenement_contraire", "proba_deux_epreuve")),
-    c("MSN 32-f", NB, "Notation scientifique a·10ⁿ ; racine carrée et racine cubique dans ℝ+.", "partielle",
-      m("3e", "entier_puissance_ecriture_scientifique", "entier_racine_comprendre", "entier_racine_encadrer"),
-      "Pas de micro « racine cubique »."),
+    c("MSN 32-f", NB, "Notation scientifique a·10ⁿ ; racine carrée et racine cubique dans ℝ+.", "complete",
+      [...m("3e", "entier_puissance_ecriture_scientifique", "entier_racine_comprendre", "entier_racine_encadrer"), ...m("stmg", "fct_eq_racine_cubique")],
+      "La racine cubique est une micro de STMG (x³ = c, ∛)."),
     NUMERATION,
     c("MSN 32-h", NB, "Racines carrées (cubiques), y compris extraction d'entiers : √(a·b) = √a·√b, √(a/b) = √a/√b, √(a²·b) = a√b (Niv 3).", "partielle",
-      m("seconde", "racine_produit", "racine_simplification", "racine_carre_de_a2"),
-      "Les racines carrées sont couvertes (micros de seconde), pas les racines cubiques."),
+      [...m("seconde", "racine_produit", "racine_simplification", "racine_carre_de_a2"), ...m("stmg", "fct_eq_racine_cubique")],
+      "Les racines carrées sont couvertes (micros de seconde) ; la racine cubique existe (STMG), pas l'extraction ∛(a³·b) = a∛b."),
     c("MSN 32-i", NB, "Calcul réfléchi avec des rationnels sous forme décimale (Niv 2-3) ; carrés parfaits pour en extraire la racine.", "complete",
       [...m("4e", "relatif_calcul"), ...m("3e", "entier_racine_carre_parfait")]),
     c("MSN 32-j", NB, "Calcul réfléchi avec les entiers relatifs de −100 à +100 (+, −, ×, ÷) (Niv 1).", "complete",
@@ -413,9 +416,9 @@ export const SUISSE_11H: ProgrammePays = {
     c("MSN 34-f2", GM, "Volume et aire d'une pyramide (Niv 2-3) et d'une sphère (Niv 3) ; volume d'un cône (Niv 2-3).", "partielle",
       m("3e", "volume_boule"),
       "Volume de la boule couvert ; manquent le volume de la pyramide et du cône (trou commun à tous les pays) et l'aire de la sphère."),
-    c("MSN 34-h", GM, "Calcul d'une grandeur manquante à partir de celles qui sont connues.", "partielle",
-      [...m("4e", "aire_probleme"), ...m("seconde", "expr_exprimer_variable")],
-      "Pas de micro dédiée « retrouver une dimension à partir de l'aire ou du volume »."),
+    c("MSN 34-h", GM, "Calcul d'une grandeur manquante à partir de celles qui sont connues.", "complete",
+      [...m("4e", "aire_probleme"), ...m("seconde", "expr_exprimer_variable"), ...m("premiere", "auto_alg_isoler_variable", "auto_alg_application_formule")],
+      "Isoler une lettre dans une formule connue : micros de seconde et d'automatismes de 1re."),
     c("MSN 34-i", GM, "Utilisation du théorème de Pythagore (Niv 1 ; Niv 2-3), y compris dans l'espace (Niv 3).", "complete",
       m("3e", "pythagore_reconnaitre", "pythagore_calculer_hypotenuse", "pythagore_calculer_cote", "pythagore_reciproque", "pythagore_solide")),
     c("MSN 34-j", GM, "Proportionnalité des figures semblables et théorème de Thalès (Niv 2-3).", "complete",

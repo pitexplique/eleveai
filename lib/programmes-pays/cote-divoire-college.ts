@@ -24,6 +24,9 @@
 // en 3e seulement ; vecteurs, coordonnées, équations de droites, systèmes et
 // inéquations à deux inconnues en 4e-3e (chez nous en seconde) ; angles
 // inscrits, pyramides et cônes (volumes, troncs) en 3e.
+// Vérifié le 01/11/2026 : les fascicules « CND 0923 » sont toujours ceux du
+// site de la DPFC (les documents 2025-2026 trouvés concernent le primaire) ;
+// toujours en vigueur. Le même jour, renvois revus dans les banques du coach.
 
 import type { Classe } from "@/lib/tutor-v4/catalog";
 import type { ProgrammePays, RenvoiMicro } from "./types";
@@ -56,8 +59,9 @@ export const COTE_DIVOIRE_6E: ProgrammePays = {
       micros: [
         ...m("5e", "div_multiple_diviseur", "div_critere_2_5_10", "div_critere_3_9", "div_lister_diviseurs"),
         ...m("cm2", "entier_multiple"),
+        ...m("seconde", "reels_ensembles", "logique_appartenance_inclusion"),
       ],
-      note: "Manquent les symboles ∈ / ∉ et le nombre d'entiers consécutifs de m à n (n − m + 1).",
+      note: "Les symboles ∈ / ∉ et ℕ sont en seconde chez nous (reels_ensembles, logique_appartenance_inclusion) ; manque le nombre d'entiers consécutifs de m à n (n − m + 1).",
     },
     {
       code: "C1-L2", domaine: CALC,
@@ -310,12 +314,15 @@ export const COTE_DIVOIRE_4E: ProgrammePays = {
     {
       code: "C2-L1", domaine: DONN,
       texte: "Statistique : mode, moyenne d'une série quantitative ; diagramme semi-circulaire (construire, lire, en tirer un tableau).",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
         ...m("4e", "stat_moyenne", "stat_lire_graphique"),
         ...m("6e", "stat_donnee_lire_circulaire"),
+        ...m("5e", "stat_representer"),
+        ...m("3e", "stat_lire_tableau"),
+        ...m("premiere", "info_rep_circulaire"),
       ],
-      note: "Ni le mode ni la construction d'un diagramme semi-circulaire n'ont de micro.",
+      note: "Angle d'un secteur (effectif × 360 ÷ N) : stat_representer (5e) ; demi-disque de 180° : info_rep_circulaire (1re) ; le mode se travaille comme « la réponse la plus fréquente » (stat_lire_tableau 3e), sans le mot « mode ».",
     },
     {
       code: "C3-L1", domaine: GPLAN,
@@ -328,8 +335,11 @@ export const COTE_DIVOIRE_4E: ProgrammePays = {
       code: "C3-L2", domaine: GPLAN,
       texte: "Distances : distance d'un point à une droite, de deux droites parallèles ; bissectrice (propriété directe et réciproque : équidistance des côtés), construction au compas.",
       couverture: "partielle",
-      micros: m("6e", "bissectrice_definition", "bissectrice_construire", "bissectrice_probleme"),
-      note: "Pas de micro « distance d'un point à une droite » ni « bissectrice = points équidistants des côtés ».",
+      micros: [
+        ...m("6e", "bissectrice_definition", "bissectrice_construire", "bissectrice_probleme"),
+        ...m("seconde", "geo_projete_orthogonal"),
+      ],
+      note: "La distance d'un point à une droite (par le projeté orthogonal) est en seconde chez nous ; manquent la distance de deux parallèles et « bissectrice = points équidistants des côtés ».",
     },
     {
       code: "C3-L3", domaine: GPLAN,
@@ -429,10 +439,10 @@ export const COTE_DIVOIRE_3E: ProgrammePays = {
       texte: "Statistique : classes de même amplitude, classe modale, effectifs et fréquences cumulés croissants, polygone des effectifs cumulés, médiane (discrète et continue, lecture graphique), moyenne d'une série en classes, diagramme circulaire.",
       couverture: "partielle",
       micros: [
-        ...m("3e", "stat_effectif_frequence", "stat_moyenne", "stat_mediane", "stat_interpreter"),
+        ...m("3e", "stat_effectif_frequence", "stat_moyenne", "stat_mediane", "stat_interpreter", "stat_lire_graphique"),
         ...m("6e", "stat_donnee_lire_circulaire"),
       ],
-      note: "Manquent les séries en classes, les effectifs cumulés et leur polygone, la médiane par lecture graphique.",
+      note: "Lire un histogramme et cumuler des classes : stat_lire_graphique (3e) ; médiane par les effectifs cumulés : stat_mediane (3e). Manquent classe modale, moyenne d'une série en classes, polygone des effectifs cumulés et médiane lue sur ce polygone.",
     },
     {
       code: "C3-L1", domaine: GPLAN,
@@ -476,8 +486,11 @@ export const COTE_DIVOIRE_3E: ProgrammePays = {
       code: "C3-L6", domaine: GPLAN,
       texte: "Équations de droites : coefficient directeur (calcul, lecture), équation par deux points, par un point et un vecteur directeur, parallèle ou perpendiculaire à une droite donnée ; appartenance d'un point.",
       couverture: "partielle",
-      micros: m("seconde", "droite_pente_ordonne", "droite_vecteur_directeur", "droite_equation_reduite", "droite_parallelisme"),
-      note: "La perpendicularité par les coefficients directeurs (a × a′ = −1) n'a pas de micro.",
+      micros: [
+        ...m("seconde", "droite_pente_ordonne", "droite_vecteur_directeur", "droite_equation_reduite", "droite_parallelisme"),
+        ...m("premiere-spe", "gr_droites"),
+      ],
+      note: "Deux droites perpendiculaires se reconnaissent à leurs équations dans gr_droites (1re spé, par les vecteurs normaux) ; la méthode du collège (a × a′ = −1) n'a pas de micro.",
     },
     {
       code: "C3-L7", domaine: GESP,
