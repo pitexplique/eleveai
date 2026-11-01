@@ -503,3 +503,13 @@ Sources : Kenza, jeu, quêtes, niveaux, packs et boss inventés. Défauts mineur
 ]
 ```
 Sources : Tom, recettes de couleurs et pots inventés. Barres de parts (une rangée par couleur, valeur d'une part dans chaque bloc), piège « + 9 » barré. Défauts mineurs : phrases de réponse sous les cartes petites ; dans la correction, l'étiquette « 3 parts » frôle la ligne « 8 et 12 ÷ 4 ».
+
+## 4e 29-ratio-quotients (lot 5, rendu le 01/11)
+**Paysage** `4e-prop-ratio-quotients` — 3:46, ceinture verte — centres `cuisine`
+```json
+[
+  {"t":"00:53","question":"Farine : eau = 5 : 3. 35 kg de farine : eau ?","choix":["33 kg","21 kg","≈ 58 kg"],"reponse":1,"explication":"35 ÷ 5 = 7 kg : une part vaut 7 kg, donc l'eau = 3 × 7 = 21 kg."},
+  {"t":"02:12","question":"Sel : levure = 2 : 1. Lequel respecte ce ratio ?","choix":["30 g : 15 g","30 g : 29 g","15 g : 30 g"],"reponse":0,"explication":"30 ÷ 2 = 15 et 15 ÷ 1 = 15 : les quotients sont égaux."}
+]
+```
+Sources : Salomé et recettes inventées (5 : 3, soit 60 % d'eau, plausible pour une pâte à pain). Défauts mineurs : sur « Vérifier un mélange », le rectangle rouge du dépassement recouvre en partie le dernier « 3,33 kg » ; dans la correction, la rangée « Sucre » change de couleur (orange au lieu de rose) ; « 4 kg » serrés dans les blocs.
