@@ -662,6 +662,22 @@ Sources : 6 pattes (insecte), 8 pattes (arachnide), Muséum de Tours + Vikidia. 
 
 ## CM1 / CM2 — lot CM-B (01/11/2026 ; voix validées `1b10f19d`, brief `manim/brief-agent-proportionnalite-cm-b.md`)
 
+### CM 05 — coefficient (COMMUN : ids `cm1-prop-coefficient[-short]` et `cm2-prop-coefficient[-short]`, mêmes `questions` ; micro `prop_coefficient`)
+- Paysage (3:06, CM1 verte / CM2 jaune, garde CM2 collée ; Nora pâtissière : 4 gâteaux = 12 œufs, coefficient « × 3 », 7 → 21, 10 → 30 ; piège l'écart 8 (32 barré) ; défi 6 pizzas = 18 tomates → 9 pizzas = 27). Centres : `["cuisine"]`.
+```json
+"questions": [
+ {"t":"00:52","question":"5 crêpes demandent 10 cuillères de sucre. Quel est le coefficient ?","choix":["5","2","15"],"reponse":1,"explication":"5 × 2 = 10 : le coefficient est 2, 2 cuillères pour 1 crêpe. 5, c'est 10 − 5 : on a enlevé au lieu de multiplier."},
+ {"t":"01:42","question":"3 tartes demandent 15 pommes. Combien de pommes pour 8 tartes ?","choix":["20 pommes","40 pommes","120 pommes"],"reponse":1,"explication":"15 ÷ 3 = 5 : 5 pommes pour 1 tarte. Donc 8 × 5 = 40 pommes."}
+]
+```
+- Short (0:56, blanche, cœur au repos ≈ 80 battements par minute ; récré de 15 min = 1 200). Centres : `["corps-sante"]`. Question en commentaire : « en 1 heure, 60 minutes ? » (4 800).
+```json
+"questions": [
+ {"t":"00:21","question":"Le cœur bat environ 80 fois par minute. Et en 10 minutes ?","choix":["90 battements","800 battements","8 000 battements"],"reponse":1,"explication":"On multiplie par 80 : 10 × 80 = 800 battements."}
+]
+```
+Sources : fréquence cardiaque au repos d'un enfant de 10 ans 70-110/min (American Heart Association, citée par Whoop) ; 75-118 pour les 5-12 ans (Gambin). Bords 0 (les 4 mp4). Paysage rendue 2 fois en HD (« × 3 » sur « 4 × 8 = 32 » à la 1re) ; short rendu 2 fois (coche contre « 800 battements »). Défauts mineurs : libellé « Battements » un peu petit dans le short ; visage de Nora en petit masqué par la toque.
+
 ### CM2 06 — quatrieme (micro `prop_quatrieme`, CM2 seul)
 - Paysage `cm2-prop-quatrieme` (3:14, ceinture verte, Yanis météorologue : pluie 3 h = 12 mm, passage par 1 h (÷ 3 puis × 5) → 20 mm ; piège + 2 h ≠ + 2 mm (14 barré) ; défi satellite 15 photos en 5 min → 24 en 8 min). Centres : `["meteo-climat"]`.
 ```json
