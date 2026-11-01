@@ -190,7 +190,7 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
         <div aria-hidden="true" className="absolute -right-16 top-32 h-72 w-72 rounded-full bg-sky-100/80 blur-3xl" />
         <div className="relative mx-auto max-w-6xl px-4 pb-10 pt-10 text-center sm:pt-14">
           <h1 className="text-3xl font-black leading-tight text-teal-900 sm:text-5xl">
-            Bloqué en maths ? On reprend là où tu en es.
+            EleveAI, c&apos;est l&apos;apprentissage personnalisé.
           </h1>
           <p className="mx-auto mt-3 max-w-2xl text-lg text-slate-700">
             Le coach te suit et garde tes progrès.
