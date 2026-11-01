@@ -25,3 +25,12 @@ Puis passe finale (même méthode que `1a89da9a`) : manifeste (`questions` t, `d
 
 - Short ép. 4 (« À toi ! ») : le « m » de « 100 m » touche la diagonale orange (défaut ancien, vu le 01/11) : à corriger si on re-rend ce short.
 - Short ép. 6 (dalle) : l'étiquette « 100 » chevauche la diagonale orange, et le haut de la dalle frôle l'accroche « Le coin est-il droit ? » (vu le 01/11) : à corriger avec le short ép. 4 (même défaut d'étiquette), puis re-rendre ces 2 shorts.
+
+## État au 01/11 ~10 h 30 (session précédente à 60 % de contexte)
+- ✅ Corrigés, vérifiés (bords 0, images regardées), commités : ép. 1-2 `5e111477`, ép. 3-4 `9a26ca7c`, ép. 5-6 `adfebb88`, ép. 7-8 (commit « Pythagore ép. 7 et 8 corrigés »).
+- ⏳ 3e GOBELET PAS FINI : l'agent s'est bloqué pendant le rendu HD de la paysage. Les mp4 de `manim/sorties/3e/maths/pythagore/01-gobelet-brevet/` sont encore les ANCIENS (même taille que `*.avant-corrections.mp4`). Ses modifications NON commitées et NON vérifiées : `manim/scripts/3e/pythagore_solide.py`, `pythagore_solide_short.py`, `manim/voix/3e-pythagore-solide[-short].json`, `manim/scripts/3e/3e-pythagore-solide[-short].marques.json`. À faire : relire le diff, dry run (AUDIT=1 BORDS=1, 0 alerte), planche basse déf, UN rendu HD par vidéo, `verifier-bords-video.py`, planche finale ; corrections attendues : échelle des ceintures (orange) dans le short, « À toi ! » qui mordait le cornet, non-dits « √64 », « 12² », somme 64 + 1,6 + 1,6 + 0,04.
+- ⏳ À re-rendre aussi (défauts vus par moi sur les images) : 
+  - ép. 7 paysage : la finale « Ce que tu as appris » garde des « ? » à chaque point (voix `07-finale` et écran) → phrases avec un point, comme les ép. 1-6 ;
+  - shorts ép. 4 et ép. 6 : étiquette « 100 m » / « 100 » posée sur la diagonale orange ; short ép. 6 : la dalle frôle l'accroche.
+- Phrases de voix ajoutées par les agents : dans leurs rapports, résumées à Frédéric (il les relit).
+- PUIS la passe finale (voir plus haut) : manifeste (`questions` : les t ont bougé, `duree`, chapitres), R2, bilans, fiches YouTube, suppression des `*.avant-corrections.mp4`. Les 7 premiers épisodes en local sont donc plus récents que R2.
