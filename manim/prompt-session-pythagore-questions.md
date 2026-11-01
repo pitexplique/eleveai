@@ -24,3 +24,4 @@ Si la session est perdue avant leur fin : regarder quels `*.avant-corrections.mp
 Puis passe finale (même méthode que `1a89da9a`) : manifeste (`questions` t, `duree`, chapitres par dry run), R2 (`r2-videos.ps1 -Rclone "copyto …"`, vérif curl -sI = taille locale), `lib/videos/bilans-videos.json`, `python scripts/fiches-youtube.py pythagore`, puis supprimer les `*.avant-corrections.mp4`. ⛔ Rien sur YouTube. Pas de push sans le rituel du soir.
 
 - Short ép. 4 (« À toi ! ») : le « m » de « 100 m » touche la diagonale orange (défaut ancien, vu le 01/11) : à corriger si on re-rend ce short.
+- Short ép. 6 (dalle) : l'étiquette « 100 » chevauche la diagonale orange, et le haut de la dalle frôle l'accroche « Le coin est-il droit ? » (vu le 01/11) : à corriger avec le short ép. 4 (même défaut d'étiquette), puis re-rendre ces 2 shorts.
