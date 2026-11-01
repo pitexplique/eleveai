@@ -583,3 +583,13 @@ Sources : Sacha, compte d'un club de sport, abonnés et vues inventés. Défauts
 ]
 ```
 Sources : Julia, cinéma, prix et entrées inventés. Corrigé à la vérification : le cadre de « ≈ − 16,7 % » touchait le « 6 » de « 1 ÷ 6 » au piège, l'étiquette « × 0,9 » frôlait la boîte « 7,20 € » (écartés) ; rendu HD refait, bords 0. Défauts mineurs : « 1 € » et « 150 » serrés dans les morceaux des barres.
+
+## 4e 35-pourcentage-coefficient (lot 5, rendu le 01/11)
+**Paysage** `4e-prop-pourcentage-coefficient` — 4:01, ceinture verte — centres `transports`, `argent-budget` (précision `voitures-motos`)
+```json
+[
+  {"t":"01:09","question":"Une hausse de 20 %. Par quel nombre multiplie-t-on le prix ?","choix":["0,20","1,20","0,80"],"reponse":1,"explication":"100 % + 20 % = 120 %, soit 1,20. Multiplier par 0,20 donnerait seulement la hausse, pas le nouveau prix."},
+  {"t":"02:21","question":"Un casque coûte 200 €. On multiplie son prix par 0,9. Que s'est-il passé ?","choix":["hausse de 9 %","baisse de 90 %","baisse de 10 %"],"reponse":2,"explication":"0,9 = 90 % ; 100 % − 90 % = 10 % : une baisse de 10 %. Le casque coûte 200 × 0,9 = 180 €."}
+]
+```
+Sources : Léna, scooter (2 400 €), moto (8 000 €, 5 000 €) et casque (200 €) inventés. Corrigé à la vérification : à la question 2, la coche verte touchait « une baisse de 10 % » (choix raccourcis sans « une ») ; rendu HD refait, bords 0. Défauts mineurs : phrases de réponse sous les cartes petites ; étiquette « − 15 % » de la barre proche du « = 85 % ».
