@@ -16,6 +16,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type MouseEvent } from "react";
+import BandePays from "@/components/accueil/BandePays";
 
 type Branche = "g" | "d";
 type Chemin = "coach" | "journal" | "accueil";
@@ -158,7 +159,12 @@ export default function ChoixEntree({ suite }: { suite: string }) {
 
   return (
     <main className="fixed inset-0 z-[200] overflow-y-auto bg-gradient-to-b from-sky-200 via-sky-50 to-emerald-50 text-slate-900">
-      <div className="mx-auto flex min-h-full max-w-5xl flex-col items-center justify-center px-4 pb-6 pt-5 sm:pt-8">
+      <div className="mx-auto flex min-h-full max-w-5xl flex-col items-center justify-center px-4 pb-6 pt-3 sm:pt-5">
+        {/* Les pays, tout en haut (Frédéric, 01/11 : « rajoute en haut les pays ») :
+            la même bande que le Journal, chaque pays mène à son coach. */}
+        <div className="mb-4 w-full max-w-4xl [&>section]:justify-center [&>section]:bg-white/80">
+          <BandePays />
+        </div>
         <p className="text-sm font-black tracking-wide text-emerald-800 sm:text-base">EleveAI</p>
         <h1 className="mt-1 text-center text-3xl font-black leading-tight sm:text-5xl">
           Quel chemin prends-tu&nbsp;?
