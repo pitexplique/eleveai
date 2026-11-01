@@ -513,3 +513,13 @@ Sources : Tom, recettes de couleurs et pots inventés. Barres de parts (une rang
 ]
 ```
 Sources : Salomé et recettes inventées (5 : 3, soit 60 % d'eau, plausible pour une pâte à pain). Défauts mineurs : sur « Vérifier un mélange », le rectangle rouge du dépassement recouvre en partie le dernier « 3,33 kg » ; dans la correction, la rangée « Sucre » change de couleur (orange au lieu de rose) ; « 4 kg » serrés dans les blocs.
+
+## 4e 30-ratio-trois (lot 5, rendu le 01/11)
+**Paysage** `4e-prop-ratio-trois` — 3:46, ceinture verte — centres `nature-ecologie`
+```json
+[
+  {"t":"01:08","question":"Ratio compost : terre : sable = 3 : 4 : 1. Bastien met 12 seaux de compost. Combien de sable ?","choix":["4 seaux","16 seaux","36 seaux"],"reponse":0,"explication":"12 ÷ 3 = 4 seaux : une part. Sable = 1 × 4 = 4 seaux. 16 seaux, c'est la terre (4 × 4)."},
+  {"t":"02:14","question":"Simplifie le ratio 10 : 15 : 25.","choix":["2 : 3 : 5","2 : 15 : 25","1 : 1,5 : 25"],"reponse":0,"explication":"10, 15 et 25 se divisent tous par 5 : 2 : 3 : 5."}
+]
+```
+Sources : Bastien et recettes de terreau inventés. Deux rendus HD (le cadre « = la valeur d'une part » touchait le bord droit en entrant). Défauts mineurs : phrases de réponse petites ; « seaux » écrit petit dans les blocs.
