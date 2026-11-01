@@ -29,7 +29,7 @@ Niveau CM : 9-11 ans, phrases très courtes, débit −10, « ÷ » écrit (la v
 Questions-pauses : 2 par paysage, 1 par short (choix dans les JSON ; leurres = ajouter au lieu de multiplier, croire tout proportionnel, inverser × et ÷). Questions en commentaire : 01 tee-shirts (2 h), 02 Ti Margo sur la Lune (60 cm), 03 en 3 min (15), 04 fourmis + araignées (140).
 Faits à vérifier et sourcer en tête des scripts : saut environ 6 fois plus haut sur la Lune (gravité ≈ 1/6, NASA) ; ruche ≈ 10 kg de miel par an (ordre de grandeur France) ; fourmi 6 pattes, araignée 8.
 
-### Lot CM-B — voix ÉCRITES le 01/11, À VALIDER par Frédéric (aucun rendu avant son oui)
+### Lot CM-B — voix VALIDÉES par Frédéric le 01/11 (`1b10f19d`) ; brief des agents `manim/brief-agent-proportionnalite-cm-b.md` ; rendus 05-07 lancés le 01/11, 08 ensuite
 | NN | slug | micro | classes | voix | paysage (métier, décor) | centres | short | centres short |
 |---|---|---|---|---|---|---|---|---|
 | 05 | coefficient | prop_coefficient | CM1 + CM2 | `cm-prop-coefficient[-short]` | Nora, pâtissière : 4 gâteaux = 12 œufs, coefficient 3 ; piège l'écart 8 ; défi pizzas 18 tomates → 9 pizzas | cuisine | cœur au repos ≈ 80 battements/min, récré 15 min = 1 200 | corps-sante |
