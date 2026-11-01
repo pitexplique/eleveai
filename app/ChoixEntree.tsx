@@ -25,7 +25,7 @@ import BandePays from "@/components/accueil/BandePays";
 import type { Arbre } from "@/lib/accueil/arbre-du-jour";
 
 type Branche = "g" | "d";
-type Chemin = "coach" | "journal" | "accueil";
+type Chemin = "coach" | "journal";
 
 // Le dessin vit dans un carré 100 × 100. Les deux chemins partagent le tronc.
 const TRONC = "M50 97 C49 85 51 72 50 60";
@@ -105,9 +105,11 @@ function Feuillage({ x, d, petit = false }: { x: number; d: Arbre["dessin"]; pet
 }
 
 export default function ChoixEntree({ suite, arbre }: { suite: string; arbre: Arbre }) {
-  const coach = `/coach-ia/maths${suite}`;
+  // ⭐ « Le coach » mène à l'ACCUEIL (Frédéric, 01/11 : « si je clique sur le
+  // coach, ça doit pas renvoyer à la page d'accueil ? ») : depuis le 31/10,
+  // l'accueil EST la page du coach qui suit chaque élève (AccueilSuivi).
+  const coach = `/accueil${suite}`;
   const journal = `/journal${suite}`;
-  const accueil = `/accueil${suite}`;
 
   const chemins = useRef<Record<Branche, SVGPathElement | null>>({ g: null, d: null });
   const margo = useRef<HTMLDivElement>(null);
@@ -323,14 +325,6 @@ export default function ChoixEntree({ suite, arbre }: { suite: string; arbre: Ar
             </span>
           </a>
         </div>
-
-        <a
-          href={accueil}
-          onClick={(e) => choisir(e, "accueil", accueil)}
-          className="mt-3 text-sm font-semibold text-slate-600 underline underline-offset-4 hover:text-slate-900"
-        >
-          Parent ou professeur&nbsp;? Voir tout le site
-        </a>
       </div>
     </main>
   );
