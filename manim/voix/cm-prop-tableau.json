@@ -1,0 +1,17 @@
+{
+  "00-garde": "Compléter un tableau de proportionnalité. Comment remplir les cases vides ?",
+  "01-situation": "Voici Léna. Elle conduit un petit train touristique. Chaque wagon a 20 places. Combien de places pour 2 wagons, 3 wagons, 5 wagons ?",
+  "02-tableau": "Elle range tout dans un tableau. En haut, le nombre de wagons. En bas, le nombre de places. 1 wagon : 20 places.",
+  "03-fois": "Pour passer d'en haut à en bas, on multiplie par 20. 2 fois 20, égale 40 places. 3 fois 20, égale 60 places.",
+  "04-cinq": "Et 5 wagons ? 5 fois 20, égale 100 places. Le tableau est complet !",
+  "05-question": "Question ! Combien de places pour 4 wagons ? A : 24 places. B : 80 places. C : 60 places. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. On multiplie par 20 : 4 fois 20, égale 80 places. 24, c'est 20 plus 4 : on a ajouté au lieu de multiplier.",
+  "06-colonnes": "Autre chemin : on regarde les colonnes. 4 wagons, c'est 2 fois plus que 2 wagons. Donc 2 fois plus de places : 40 fois 2, égale 80. Même réponse !",
+  "07-piege": "Attention au piège ! Un wagon de plus, ce n'est pas une place de plus. 3 wagons ont 60 places. 4 wagons ont 20 places de plus : 80, et pas 61 !",
+  "08-question": "Question ! Un autre train : 2 wagons, 30 places ; 6 wagons, 90 places. Par quel nombre passe-t-on d'en haut à en bas ? A : fois 15. B : plus 28. C : fois 3. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. 2 fois 15, égale 30. 6 fois 15, égale 90. On multiplie toujours par 15. Fois 3, c'est pour passer d'une colonne à l'autre !",
+  "09-defi": "À toi de jouer ! Dans un autre train, 2 wagons ont 50 places. Combien de places pour 4 wagons, 6 wagons, et 1 wagon ? Mets pause, et cherche !",
+  "09b-correction": "Correction. 4 wagons, c'est 2 fois plus que 2 : 50 fois 2, égale 100 places. 6 wagons, c'est 3 fois plus : 50 fois 3, égale 150 places. 1 wagon, c'est 2 fois moins : 50 divisé par 2, égale 25 places.",
+  "10-finale": "Ce que tu as appris. Pour compléter un tableau de proportionnalité, on multiplie la ligne du haut par le même nombre. On peut aussi faire fois plus ou fois moins entre les colonnes. Et on n'ajoute jamais le même nombre.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

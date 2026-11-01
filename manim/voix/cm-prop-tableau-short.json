@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Combien de pattes dans une file de 100 fourmis ?",
+  "01-une": "Une fourmi a 6 pattes.",
+  "02-tableau": "2 fourmis : 12 pattes. 10 fourmis : 60 pattes. Et 100 fourmis ? 6 fois 100, égale 600 pattes !",
+  "03-question": "Question ! Une araignée a 8 pattes. 5 araignées ont… A : 13 pattes. B : 40 pattes. C : 85 pattes. Mets pause, et choisis !",
+  "03b-reponse": "Réponse B. On multiplie par 8 : 5 fois 8, égale 40 pattes.",
+  "04-commentaire": "Et toi ? 10 fourmis et 10 araignées : combien de pattes en tout ? Réponds en commentaire !"
+}

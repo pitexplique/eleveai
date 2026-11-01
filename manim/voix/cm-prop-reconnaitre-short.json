@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Un piège qui attrape même les adultes. Tu es prêt ?",
+  "01-chanson": "1 musicien joue une chanson en 3 minutes.",
+  "02-cinq": "Et 5 musiciens, ensemble, la même chanson ? 5 fois 3, égale 15 minutes ?",
+  "03-non": "Non ! Ils jouent en même temps. Toujours 3 minutes ! Plus de musiciens, ce n'est pas plus long.",
+  "04-question": "Question ! 1 œuf cuit en 10 minutes. 3 œufs, dans la même casserole, cuisent en… A : 30 minutes. B : 10 minutes. C : 13 minutes. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. Les 3 œufs cuisent en même temps : 10 minutes. On ne multiplie pas toujours !",
+  "05-commentaire": "Et toi ? 1 tee-shirt sèche au soleil en 2 heures. 5 tee-shirts étendus en même temps sèchent en combien de temps ? Réponds en commentaire !"
+}

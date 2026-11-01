@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Ti Margo a très faim. Sauras-tu compter ses moustiques ?",
+  "01-six": "En 6 minutes, Ti Margo attrape 30 moustiques. Miam !",
+  "02-deux": "Et en 2 minutes ? 2 minutes, c'est 3 fois moins de temps. Donc 3 fois moins de moustiques : 30 divisé par 3, égale 10 moustiques.",
+  "03-question": "Question ! Et en 1 minute ? A : 5 moustiques. B : 24 moustiques. C : 180 moustiques. Mets pause, et choisis !",
+  "03b-reponse": "Réponse A. 1 minute, c'est 6 fois moins que 6 minutes. 30 divisé par 6, égale 5 moustiques.",
+  "04-commentaire": "Et toi ? Combien de moustiques Ti Margo attrape-t-il en 3 minutes ? Réponds en commentaire !"
+}

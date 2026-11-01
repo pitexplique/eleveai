@@ -1,0 +1,16 @@
+{
+  "00-garde": "Fois plus. 3 fois plus de rangées : combien de salades ?",
+  "01-situation": "Voici Fatou. Elle est maraîchère : elle fait pousser des légumes. Dans son jardin, 1 rangée a 6 salades.",
+  "02-billes": "On dessine chaque salade par un rond. 1 rangée : 6 ronds.",
+  "03-deux": "2 rangées, c'est 2 fois plus de rangées. Donc 2 fois plus de salades : 6 fois 2, égale 12 salades.",
+  "04-trois": "Fatou plante 3 fois plus de rangées : 6 rangées. Elle aura 3 fois plus de salades : 12 fois 3, égale 36 salades.",
+  "05-question": "Question ! 1 sachet contient 4 graines. Combien de graines dans 5 sachets ? A : 9 graines. B : 20 graines. C : 24 graines. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 5 sachets, c'est 5 fois plus de sachets. Donc 5 fois plus de graines : 4 fois 5, égale 20 graines.",
+  "06-piege": "Attention au piège ! 3 fois plus, ce n'est pas 3 de plus. 2 rangées ont 12 salades. 3 fois plus de rangées : 36 salades, et pas 15 !",
+  "07-question": "Question ! 2 rangées donnent 10 pieds de tomates. 3 fois plus de rangées donnent… A : 13 pieds. B : 30 pieds. C : 12 pieds. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. 3 fois plus de rangées, donc 3 fois plus de pieds : 10 fois 3, égale 30 pieds de tomates.",
+  "08-defi": "À toi de jouer ! Fatou a aussi des ruches. 2 ruches donnent 20 kilos de miel en un an. Combien donnent 4 ruches ? Et 10 ruches ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 4 ruches, c'est 2 fois plus que 2 ruches : 20 fois 2, égale 40 kilos. 10 ruches, c'est 5 fois plus : 20 fois 5, égale 100 kilos de miel.",
+  "09-finale": "Ce que tu as appris. Quand une quantité est 3 fois plus grande, l'autre est aussi 3 fois plus grande. On multiplie les deux par le même nombre. Et 3 fois plus, ce n'est pas 3 de plus !",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -1,0 +1,16 @@
+{
+  "00-garde": "Fois moins. 2 fois moins de murs : combien de peinture ?",
+  "01-situation": "Voici Malik. Il est peintre en bâtiment. Pour peindre 6 murs, il lui faut 12 litres de peinture.",
+  "02-billes": "On dessine les 12 litres : 12 ronds, rangés en 6 colonnes, une par mur.",
+  "03-moitie": "Demain, il ne peint que 3 murs. 3, c'est 2 fois moins que 6. Il lui faut 2 fois moins de peinture : 12 divisé par 2, égale 6 litres.",
+  "04-tiers": "Et pour 2 murs ? 2, c'est 3 fois moins que 6. Donc 3 fois moins de peinture : 12 divisé par 3, égale 4 litres.",
+  "05-question": "Question ! 8 murs demandent 24 litres. Combien pour 4 murs ? A : 12 litres. B : 22 litres. C : 48 litres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 4 murs, c'est 2 fois moins que 8 murs. Donc 2 fois moins de peinture : 24 divisé par 2, égale 12 litres. 48, c'est 2 fois plus : la mauvaise direction !",
+  "06-piege": "Attention au piège ! 3 fois moins, ce n'est pas 3 de moins. Pour 2 murs, on divise 12 par 3 : 4 litres. On n'enlève pas 3 : pas 9 litres !",
+  "07-question": "Question ! 5 murs demandent 15 litres. Combien pour 1 seul mur ? A : 10 litres. B : 3 litres. C : 75 litres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. 1 mur, c'est 5 fois moins que 5 murs. 15 divisé par 5, égale 3 litres pour un mur.",
+  "08-defi": "À toi de jouer ! Pour peindre 10 volets, Malik utilise 20 litres. Combien pour 5 volets ? Et pour 2 volets ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 5 volets, c'est 2 fois moins que 10 : 20 divisé par 2, égale 10 litres. 2 volets, c'est 5 fois moins : 20 divisé par 5, égale 4 litres.",
+  "09-finale": "Ce que tu as appris. Quand une quantité est 2 fois moins grande, l'autre aussi : on divise les deux par le même nombre. Et 3 fois moins, ce n'est pas 3 de moins !",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

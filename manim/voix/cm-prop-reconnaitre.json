@@ -1,0 +1,18 @@
+{
+  "00-garde": "Reconnaître la proportionnalité. Quand peut-on multiplier ?",
+  "01-situation": "Voici Adam. Il est entraîneur de basket. Il compte les points de son équipe. Un panier vaut 2 points.",
+  "02-paniers": "1 panier : 2 points. 2 paniers : 4 points. 3 paniers : 6 points.",
+  "03-fois": "Pour trouver les points, on multiplie toujours par 2. 3 fois 2, égale 6. On dit que les points sont proportionnels aux paniers.",
+  "04-dix": "Alors, 10 paniers ? 10 fois 2, égale 20 points. Pas besoin de compter un par un !",
+  "05-question": "Question ! Où multiplie-t-on toujours par le même nombre ? A : 1 vélo a 2 roues, 3 vélos ont 6 roues. B : à 10 ans, Tom pèse 30 kilos ; à 20 ans, il pèse 70 kilos. C : à 8 heures, il fait 20 degrés ; à midi, 28 degrés. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. Le nombre de roues, c'est toujours 2 fois le nombre de vélos. 3 fois 2, égale 6.",
+  "06-contre": "Mais attention : tout n'est pas proportionnel ! Voici Lili et son frère Bob. Lili a 2 ans. Bob a 5 ans : 3 ans de plus.",
+  "07-piege": "Quand Lili aura 4 ans, le double, Bob n'aura pas 10 ans ! Il aura 7 ans. Bob a toujours 3 ans de plus. On ajoute 3, on ne multiplie pas. Ce n'est pas de la proportionnalité.",
+  "08-question": "Question ! Lili a 2 ans, Bob a 5 ans. Quand Lili aura 10 ans, quel âge aura Bob ? A : 25 ans. B : 13 ans. C : 20 ans. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. Bob a toujours 3 ans de plus : 10 plus 3, égale 13 ans. On ajoute, on ne multiplie pas.",
+  "09-methode": "La méthode : on regarde chaque colonne. Si on multiplie toujours par le même nombre, c'est proportionnel. Sinon, ce n'est pas proportionnel.",
+  "10-defi": "À toi de jouer ! Une fleuriste fait des bouquets. 1 bouquet : 5 fleurs. 2 bouquets : 10 fleurs. 3 bouquets : 16 fleurs. Est-ce proportionnel ? Mets pause, et cherche !",
+  "10b-correction": "Correction. 1 fois 5, égale 5. 2 fois 5, égale 10. Mais 3 fois 5, égale 15, et pas 16 ! On ne multiplie pas toujours par 5 : ce n'est pas proportionnel.",
+  "11-finale": "Ce que tu as appris. Quand on multiplie toujours par le même nombre, c'est proportionnel. Quand on ajoute, comme pour les âges, ce n'est pas proportionnel. Pour savoir, on vérifie chaque colonne.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}
