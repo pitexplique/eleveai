@@ -19,6 +19,10 @@
 # 08-finale et 09-abonne ajoutées ou changées le 31/10.
 # Rendu : python -m manim render -qh --disable_caching manim/scripts/4e/pythagore_verifier.py PythagoreVerifier4e -o eleveai-maths-4e-pythagore-verifier --media_dir manim/scripts/4e/media
 # Puis copier le mp4 dans manim/sorties/4e/maths/pythagore/05-verifier/.
+# ⭐ 01/11/2026 (brief-agent-pythagore-corrections.md) : 0 AUDIT-TARD / ABSENT. Voix 01-corde (« 3, 4 et 5 »)
+# et 04-piege (les deux côtés dits) changées ; titres « Première / Deuxième / Troisième étape » ; chutes,
+# étiquettes et égalités des triplets posées au mot ; carte C de la Q2 en deux morceaux (question_pause
+# recopiée ici) ; morceaux des questions sur la même ligne de base (morceaux_alignes).
 
 import math
 import sys
@@ -32,7 +36,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 # on reprend ses petits dessins ici, et le mixin des questions-pauses vient EN PREMIER.
 from pythagore_carre_racine import COTE, PythagoreCarreRacine4e  # noqa: E402  (pose les chemins)
 from pythagore_reconnaitre import P, Notion4e, PythagoreReconnaitre4e, echelle_ceintures  # noqa: E402
-from pythagore_pauses import PausesPaysage  # noqa: E402
+from pythagore_pauses import PausesPaysage, texte_maths  # noqa: E402
 
 from manim import *  # noqa: E402
 
@@ -40,6 +44,42 @@ from charte import *  # noqa: E402
 from gabarit_trigo import COUL_HYP  # noqa: E402
 
 CORDE = "#D6B47A"
+
+# ── (01/11) la LIGNE DE BASE des morceaux posés côte à côte ─────────────────
+# Le module commun aligne les morceaux d'une ligne sur leur CENTRE : « RS = 5, » (virgule qui
+# descend) et « RST : » ne sont pas à la même hauteur. Contournement ici : chaque morceau porte
+# un « tuteur » invisible, de même étendue au-dessus et au-dessous de sa ligne de base.
+_HORS_BASE = set(",;gjpqyçQJ()[]{}²+=−-×÷≠<>/|«»'’\"*~")
+
+
+def ligne_de_base(t):
+    """La ligne de base d'un Text : le bas médian des glyphes qui s'y posent."""
+    s = [c for c in (getattr(t, "original_text", "") or "") if not c.isspace()]
+    bas = [g.get_bottom()[1] for c, g in zip(s, t) if c not in _HORS_BASE]
+    return float(np.median(bas)) if bas else t.get_bottom()[1]
+
+
+def morceaux_alignes(morceaux, fs, color=WHITE):
+    """Des morceaux (str) pour une ligne du module commun, alignés sur leur ligne de base."""
+    ts = [texte_maths(m, fs, color) if isinstance(m, str) else m for m in morceaux]
+    bases = [ligne_de_base(t) for t in ts]
+    haut = max(t.get_top()[1] - b for t, b in zip(ts, bases)) + 0.02
+    bas = max(b - t.get_bottom()[1] for t, b in zip(ts, bases)) + 0.02
+    out = []
+    for t, b in zip(ts, bases):
+        x = t.get_left()[0]
+        out.append(VGroup(t, Line(np.array([x, b - bas, 0]), np.array([x, b + haut, 0]),
+                                  stroke_width=0, stroke_opacity=0)))
+    return out
+
+
+def poser_en_ligne(ts, buff=0.16):
+    """Range des Text côte à côte, sur la même ligne de base."""
+    g = VGroup(*ts).arrange(RIGHT, buff=buff)
+    b0 = ligne_de_base(ts[0])
+    for t in ts[1:]:
+        t.shift(UP * (b0 - ligne_de_base(t)))
+    return g
 
 
 def tri3(l1, l2, l3, u, origine):
@@ -109,6 +149,60 @@ class PythagoreVerifier4e(PausesPaysage, Notion4e):
         if cue_signe is not None:  # sinon : le signe se joue à part (écran 03)
             self.attendre(cue_signe)
             self.play(GrowFromCenter(signe), run_time=0.5)
+
+    def chute_morceaux(self, morceaux, color, font_size):
+        """(01/11) La phrase du bas en MORCEAUX (même place que chute()), chacun posé à son mot."""
+        ts = [self.t(m, font_size, color) for m in morceaux]
+        g = poser_en_ligne(ts, buff=0.22)
+        modele = self.chute(" ".join(morceaux), color=color, font_size=font_size)
+        if g.width > modele.width * 1.02:
+            g.scale_to_fit_width(modele.width)
+        g.move_to(modele)
+        return ts
+
+    def question_pause(self, cle_q, cle_r, question, choix, bonne, phrase, x_col=0.0):
+        """(01/11) Copie de celle du mixin, à UNE différence près : le contenu d'une carte qui
+        porte `.morceaux_carte` paraît morceau par morceau, chacun à son mot (la carte C
+        « non : 25 et 100 » de l'ép. 5 : le « 25 » est dit 0,7 s avant le « 100 »)."""
+        self.dire(cle_q)
+        t0 = self.renderer.time
+        tete, rebours, q, cartes, pause, ph = self._disposer_q(question, choix, phrase, x_col)
+        self.au_mot("Question")
+        self.play(FadeIn(tete, shift=DOWN * 0.2), run_time=0.4)
+        self._poser(q, self._pos("Question") + 9)
+        j = self._pos("Question")
+        for c, lettre in zip(cartes, "ABC"):
+            j = self._texte_voix.find(f"{lettre} :", j + 1)
+            if j < 0:
+                raise ValueError(f"« {lettre} : » absent de la voix : {self._texte_voix[:60]}…")
+            self._attendre_pos(j)
+            self.play(FadeIn(c[0]), FadeIn(c[1][0], shift=RIGHT * 0.15), run_time=0.2)
+            k = j + 3
+            for m in getattr(c[1][1], "morceaux_carte", None) or [c[1][1]]:
+                i, k = self._cue(m, k)
+                if i is not None:
+                    self._attendre_pos(i)
+                self.play(FadeIn(m, shift=RIGHT * 0.15), run_time=0.2)
+        self.au_mot("Mets pause")
+        self.play(FadeIn(pause, scale=0.8), FadeIn(rebours, scale=0.6), run_time=0.4)
+        self.attendre_voix(marge=0.2)
+        rebours.jouer(self)
+        print(f"QUESTION {cle_q} t={int(t0 // 60):02d}:{int(t0 % 60):02d} ({t0:.2f}) reponse={bonne}", flush=True)
+        self.dire(cle_r)
+        self._attendre_pos(self._pos("Réponse") + 8)  # la lettre dite : la carte s'allume
+        b = cartes[bonne]
+        anims = [b[0].animate.set_stroke(VERT_OK, width=7).set_fill("#052e16", 1),
+                 b[1][0][0].animate.set_fill(VERT_OK)]
+        anims += [cartes[j].animate.set_opacity(0.3) for j in range(3) if j != bonne]
+        self.play(*anims, FadeOut(rebours), FadeOut(pause), run_time=0.3)
+        ok = self.coche(VERT_OK, 0.22).move_to(b[0].get_right() + LEFT * 0.38)
+        self.play(b.animate.scale(1.08), Create(ok), run_time=0.25)
+        self.play(b.animate.scale(1 / 1.08), ok.animate.scale(1 / 1.08, about_point=b.get_center()),
+                  run_time=0.2)
+        fin = self._texte_voix.find(".", self._pos("Réponse"))
+        self._poser(ph, fin + 1 if fin >= 0 else 0)
+        self.attendre_voix(marge=0.8)
+        return t0
 
     def figure(self, l1, l2, l3, noms, u, origine, plus_grand="BC", lettres=None):
         A, B, C = tri3(l1, l2, l3, u, origine)
@@ -180,8 +274,11 @@ class PythagoreVerifier4e(PausesPaysage, Notion4e):
         self.play(FadeIn(self.t("4", 36, COTE).next_to(Line(A, B), DOWN, buff=0.25)), run_time=0.4)
         self.au_nb("5 intervalles")
         self.play(FadeIn(self.t("5", 36, COUL_HYP).move_to((B + C) / 2 + UR * 0.35)), run_time=0.4)
-        self.au_mot("On a trois longueurs")
-        self.play(FadeIn(self.ligne("3, 4 et 5", 0.9, 44, x=3.0)))  # le rappel des trois longueurs dites
+        # (01/11) la voix redit « 3, 4 et 5 » : chaque nombre du rappel à SON mot.
+        rappel = poser_en_ligne([self.t(x, 44) for x in ("3,", "4", "et 5")], buff=0.2).move_to(P(3.0, 0.9))
+        for m, cue in zip(rappel, ("longueurs : 3", "3, 4", "4 et 5")):
+            self.au_nb(cue)
+            self.play(FadeIn(m, shift=UP * 0.12), run_time=0.3)
         self.au_mot("Est-ce qu'elles vérifient")
         self.play(FadeIn(self.ligne("l'égalité de Pythagore ?", 0.0, 36, BLEU_CALCUL, x=3.0)))
         self.attendre_voix()
@@ -203,7 +300,7 @@ class PythagoreVerifier4e(PausesPaysage, Notion4e):
         self.clear()
         self.add_mascotte()
         self.dire("02-plus-grand")
-        self.titre_ecran("Étape 1 : le plus grand côté")
+        self.titre_ecran("Première étape : le plus grand côté")  # (01/11) le titre = la voix
         fig, grand = self.corde_figee()
         fig[1].set_stroke(CORDE)
         self.add(fig)
@@ -220,7 +317,7 @@ class PythagoreVerifier4e(PausesPaysage, Notion4e):
         self.clear()
         self.add_mascotte()
         self.dire("03-deux-calculs")
-        titre = self.titre_ecran("Étape 2 : deux calculs séparés")
+        titre = self.titre_ecran("Deuxième étape : deux calculs séparés")
         fig, _ = self.corde_figee()
         self.add(fig.scale(0.8).move_to(P(-5.0, 0.6)))
         comp = self.comparer([[("le plus grand", "du plus grand")], [("5²", "grand : 5"), ("= 25", "carré, 25")]],
@@ -229,7 +326,7 @@ class PythagoreVerifier4e(PausesPaysage, Notion4e):
                              True, y=0.6, x0=2.1)
         self.jouer_comparaison(comp, None)
         self.au_mot("Troisième étape")
-        self.play(ReplacementTransform(titre, self.t("Étape 3 : on compare", 40, JAUNE_TITRE).to_edge(UP)), run_time=0.6)
+        self.play(ReplacementTransform(titre, self.t("Troisième étape : on compare", 40, JAUNE_TITRE).to_edge(UP)), run_time=0.6)
         self.au_mot("on compare")
         self.play(GrowFromCenter(comp[4]), run_time=0.5)
         self.au_nb("25 et 25")
@@ -252,11 +349,19 @@ class PythagoreVerifier4e(PausesPaysage, Notion4e):
         q = self.t("?", 72, ROUGE_ERREUR).next_to(faux, RIGHT, buff=0.4)
         self.play(FadeIn(q), Wiggle(faux))
         self.play(Create(Line(faux.get_left(), faux.get_right(), color=ROUGE_ERREUR, stroke_width=6)))
-        self.au_mot("On calcule chaque côté à part")
-        bon = VGroup(self.t("5²", 44, COUL_HYP), self.t("|", 44, GRAY_B), self.t("3² + 4²", 44, COTE))
+        # (01/11) la voix dit maintenant les deux côtés : chaque morceau à SON nombre.
+        bon = VGroup(self.t("5²", 44, COUL_HYP), self.t("|", 44, GRAY_B), self.t("3²", 44, COTE), self.t("+ 4²", 44, COTE))
         bon.arrange(RIGHT, buff=0.6).move_to(P(0, -0.2))
-        self.play(FadeIn(bon[0]), FadeIn(bon[1]), FadeIn(bon[2]))
+        bon[3].next_to(bon[2], RIGHT, buff=0.2)
+        bon.move_to(P(0, -0.2))
+        self.au_mot("On calcule chaque côté à part")
         self.play(FadeIn(self.t("chaque côté à part", 30, GRAY_B).next_to(bon, DOWN, buff=0.25)), run_time=0.5)
+        self.au_nb("part : 5")
+        self.play(FadeIn(bon[0]), FadeIn(bon[1]), run_time=0.35)
+        self.au_nb("côté, 3")
+        self.play(FadeIn(bon[2]), run_time=0.3)
+        self.au_nb("plus 4", 2)
+        self.play(FadeIn(bon[3]), run_time=0.3)
         self.au_mot("le signe égal qu'à la fin")
         self.play(Write(self.ligne("le signe « = » : seulement à la fin", -1.8, 40, VERT_OK, x=0)))
         self.attendre_voix()
@@ -277,9 +382,15 @@ class PythagoreVerifier4e(PausesPaysage, Notion4e):
                              [[("les deux autres", "36. 4")], [("4²", "36. 4"), ("+ 5²", "plus 5")],
                               [("= 16", "carré : 16"), ("+ 25", "plus 25"), ("= 41", "25, 41")]],
                              False, y=1.2, x0=1.7)
-        self.jouer_comparaison(comp, "36 et 41")
+        # (01/11) la phrase du bas en morceaux : « 36 » au 36 dit, « ≠ 41 : » au 41 (avec le signe).
+        c36, c41, cfin = self.chute_morceaux(["36", "≠ 41 :", "l'égalité n'est pas vérifiée."], ORANGE_RETENUE, 34)
+        self.jouer_comparaison(comp, None)
+        self.au_nb("36 et")
+        self.play(FadeIn(c36, shift=UP * 0.12), run_time=0.3)
+        self.au_nb("36 et 41")
+        self.play(GrowFromCenter(comp[4]), FadeIn(c41, shift=UP * 0.12), run_time=0.5)
         self.au_mot("L'égalité n'est pas vérifiée")
-        self.play(Write(self.chute("36 ≠ 41 : l'égalité n'est pas vérifiée.", color=ORANGE_RETENUE, font_size=34)))
+        self.play(FadeIn(cfin, shift=UP * 0.12), run_time=0.6)
         self.attendre_voix()
 
     # ── 06 : les longueurs dans le désordre ─────────────────────────────────
@@ -297,12 +408,14 @@ class PythagoreVerifier4e(PausesPaysage, Notion4e):
         self.play(Create(cotes), FadeIn(lab), run_time=0.6)
         donnees = VGroup(*[self.t(x, 34) for x in ("AB = 8", "BC = 17", "AC = 15")]).arrange(RIGHT, buff=0.6)
         donnees.move_to(P(2.4, 2.3))
-        for m, cue in zip(donnees, ("AB égale 8", "BC égale 17", "AC égale 15")):
+        # (01/11) l'étiquette de chaque côté paraît AVEC sa donnée (etiq : AB, AC, BC).
+        for m, e, cue in zip(donnees, (etiq[0], etiq[2], etiq[1]), ("AB égale 8", "BC égale 17", "AC égale 15")):
             self.au_nb(cue)
-            self.play(FadeIn(m), run_time=0.3)
+            self.play(FadeIn(m), FadeIn(e), run_time=0.3)
         self.au_mot("Le plus grand, c'est BC")
         self.play(cotes[2].animate.set_stroke(COUL_HYP, 8), cotes[0].animate.set_stroke(COTE, 6),
-                  cotes[1].animate.set_stroke(COTE, 6), FadeIn(etiq))
+                  cotes[1].animate.set_stroke(COTE, 6), etiq[2].animate.set_color(COUL_HYP),
+                  etiq[0].animate.set_color(COTE), etiq[1].animate.set_color(COTE))
         comp = self.comparer([[("BC²", "c'est BC"), ("= 17²", "BC : 17. 17")], [("= 289", "carré : 289")]],
                              [[("AB²", "289. 8"), ("+ AC²", "plus 15")], [("= 64", "carré : 64"), ("+ 225", "plus 225")],
                               [("= 289", "225, 289")]], True, y=0.9, x0=2.9)
@@ -346,9 +459,13 @@ class PythagoreVerifier4e(PausesPaysage, Notion4e):
                              [[("les deux autres", "169. 5")], [("5²", "169. 5"), ("+ 12²", "plus 12")],
                               [("= 25", "carré : 25"), ("+ 144", "plus 144"), ("= 169", "144, 169")]],
                              True, y=1.4, x0=1.5)
-        self.jouer_comparaison(comp, "Les deux font 169")
+        # (01/11) « 169 = 169 : » au « 169 » dit (avec le signe), la fin de la phrase à son mot.
+        c169, cfin = self.chute_morceaux(["169 = 169 :", "l'égalité est vérifiée."], VERT_OK, 36)
+        self.jouer_comparaison(comp, None)
+        self.au_nb("Les deux font 169")
+        self.play(GrowFromCenter(comp[4]), FadeIn(c169, shift=UP * 0.12), run_time=0.5)
         self.au_mot("l'égalité est vérifiée")
-        self.play(Write(self.chute("169 = 169 : l'égalité est vérifiée.", color=VERT_OK, font_size=36)))
+        self.play(FadeIn(cfin, shift=UP * 0.12), run_time=0.6)
         self.attendre_voix()
 
     # ── 07c : les triplets, et enfin le petit carré ─────────────────────────
@@ -366,17 +483,20 @@ class PythagoreVerifier4e(PausesPaysage, Notion4e):
         A = P(-5.2, -2.2)
         lignes = [("3, 4, 5", "3² + 4² = 5²"), ("6, 8, 10", "6² + 8² = 10²"),
                   ("5, 12, 13", "5² + 12² = 13²"), ("8, 15, 17", "8² + 15² = 17²")]
-        # (31/10) chaque nombre du triplet à SON mot ; l'égalité grise avec le dernier.
+        # (31/10) chaque nombre du triplet à SON mot ; (01/11) l'égalité grise aussi, morceau par
+        # morceau : « 3² » au 3, « + 4² » au 4, « = 5² » au 5 (plus de nombre écrit après sa voix).
         cues = [("connaître : 3", "3, 4", "4, 5"), ("5. 6", "6, 8", "8, 10"), ("10. 5", "5, 12", "12, 13"),
                 ("13. 8", "8, 15", "15, 17")]
         for k, ((mot, txt), cs) in enumerate(zip(lignes, cues)):
-            nbs = VGroup(*[self.t(x, 40, JAUNE_TITRE) for x in [n + "," for n in mot.split(", ")[:2]] + [mot.split(", ")[2]]])
-            nbs.arrange(RIGHT, buff=0.18)
-            l = VGroup(nbs, self.t(txt, 30, GRAY_B)).arrange(RIGHT, buff=0.5).move_to(P(2.6, 1.6 - 0.75 * k))
-            for j, (m, cue) in enumerate(zip(nbs, cs)):
+            n = mot.split(", ")
+            nbs = poser_en_ligne([self.t(x, 40, JAUNE_TITRE) for x in (n[0] + ",", n[1] + ",", n[2])], buff=0.18)
+            eg = poser_en_ligne([self.t(x, 30, GRAY_B) for x in (n[0] + "²", "+ " + n[1] + "²", "= " + n[2] + "²")],
+                                buff=0.14)
+            l = VGroup(nbs, eg).arrange(RIGHT, buff=0.5).move_to(P(2.6, 1.6 - 0.75 * k))
+            eg.shift(UP * (ligne_de_base(nbs[0]) - ligne_de_base(eg[0])))
+            for m, g, cue in zip(nbs, eg, cs):
                 self.au_nb(cue)
-                self.play(FadeIn(m, shift=RIGHT * 0.12), *([FadeIn(l[1], shift=RIGHT * 0.12)] if j == 2 else []),
-                          run_time=0.25)
+                self.play(FadeIn(m, shift=RIGHT * 0.12), FadeIn(g, shift=RIGHT * 0.12), run_time=0.25)
         self.au_mot("le triangle a un angle droit")
         carre = self.carre_droit(A, RIGHT, UP, s=0.42)
         self.play(GrowFromCenter(carre))
@@ -387,14 +507,25 @@ class PythagoreVerifier4e(PausesPaysage, Notion4e):
 
     # ── 04q / 06q : les questions-pauses (questions-pythagore.md, Ép. 5) ──────
 
+    # (01/11) les morceaux d'une ligne alignés sur leur ligne de base (morceaux_alignes).
+    def lq(self, *m):
+        return morceaux_alignes(m, self.FS_Q)
+
+    def lph(self, *m):
+        return morceaux_alignes(m, self.FS_PH, VERT_OK)
+
     def question_somme(self):
-        self.ecran_question("04q-question", "04r-reponse", [["Côtés 6,", "8", "et 10 cm :"], ["6²", "+ 8²", "= ?"]],
-                            ["14", "100", "196"], 1, [["36", "+ 64", "= 100,"], ["autant que", "10²."]])
+        self.ecran_question("04q-question", "04r-reponse", [self.lq("Côtés 6,", "8", "et 10 cm :"), self.lq("6²", "+ 8²", "= ?")],
+                            ["14", "100", "196"], 1, [self.lph("36", "+ 64", "= 100,"), self.lph("autant que", "10².")])
 
     def question_desordre(self):
-        self.ecran_question("06q-question", "06r-reponse", [["AB = 8,", "BC = 5,", "AC = 6."], "L'égalité est-elle vérifiée ?"],
-                            ["oui : 64 et 64", "non : 64 et 61", "non : 25 et 100"], 1,
-                            [["Le plus grand : AB,", "8²", "= 64 ;"], ["25", "+ 36", "= 61."]])
+        # (01/11) la carte C en DEUX morceaux : « non : 25 » au 25 dit, « et 100 » au 100.
+        c1, c2 = morceaux_alignes(["non : 25", "et 100"], self.FS_C)
+        carte_c = VGroup(c1, c2).arrange(RIGHT, buff=0.18)
+        carte_c.morceaux_carte = [c1, c2]
+        self.ecran_question("06q-question", "06r-reponse", [self.lq("AB = 8,", "BC = 5,", "AC = 6."), "L'égalité est-elle vérifiée ?"],
+                            ["oui : 64 et 64", "non : 64 et 61", carte_c], 1,
+                            [self.lph("Le plus grand : AB,", "8²", "= 64 ;"), self.lph("25", "+ 36", "= 61.")])
 
     # ── 08 : ce que tu as appris (31/10 : titre en haut et centré) ──────────
 

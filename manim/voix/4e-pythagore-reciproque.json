@@ -11,7 +11,7 @@
   "06q-question": "Question ! Pour prouver qu'un triangle est rectangle, on cite : A : le théorème de Pythagore. B : la réciproque du théorème de Pythagore. C : la définition de l'hypoténuse. Mets pause, et choisis !",
   "06r-reponse": "Réponse B : la réciproque. Le théorème part de l'angle droit, il ne le prouve pas.",
   "07-defi": "À toi de jouer. Le triangle KLM a pour côtés KL égale 9 centimètres, LM égale 12 centimètres et KM égale 15 centimètres. Est-il rectangle ? Si oui, en quel sommet ? Mets pause, et cherche !",
-  "07b-correction": "Correction. Le plus grand côté est KM. D'une part, KM au carré égale 225. D'autre part, KL au carré plus LM au carré égale 81 plus 144 : 225. L'égalité est vérifiée. D'après la réciproque du théorème de Pythagore, KLM est rectangle en L.",
+  "07b-correction": "Correction. Le plus grand côté est KM. D'une part, KM au carré égale 15 au carré : 225. D'autre part, KL au carré plus LM au carré égale 81 plus 144 : 225. L'égalité est vérifiée. D'après la réciproque du théorème de Pythagore, KLM est rectangle en L.",
   "08-finale": "Ce que tu as appris. Comparer d'une part et d'autre part. Citer la réciproque pour conclure. Trouver le sommet de l'angle droit, en face du plus grand côté. Dire non quand l'égalité n'est pas vérifiée. Alors l'épisode 7 t'attend : rédiger avec Pythagore ou sa réciproque.",
   "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
 }

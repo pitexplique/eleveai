@@ -19,6 +19,7 @@
 # 08-finale et 09-abonne ajoutées ou changées le 31/10.
 # Rendu : python -m manim render -qh --disable_caching manim/scripts/4e/pythagore_reciproque.py PythagoreReciproque4e -o eleveai-maths-4e-pythagore-reciproque --media_dir manim/scripts/4e/media
 # Puis copier le mp4 dans manim/sorties/4e/maths/pythagore/06-reciproque/.
+# ⭐ 01/11/2026 : voix 07b-correction (« KM au carré égale 15 au carré : 225 ») ; ligne RST alignée.
 
 import sys
 from pathlib import Path
@@ -214,7 +215,8 @@ class PythagoreReciproque4e(PythagoreVerifier4e):
         # Trois lignes de question : un peu plus serré (réglages du mixin, surchargés pour CET écran).
         self.FS_Q, self.ECART = 34, 0.26
         self.ecran_question("04q-question", "04r-reponse",
-                            [["RST :", "RS = 5,", "ST = 13,", "RT = 12."], "L'égalité est vérifiée.", "L'angle droit est en ?"],
+                            [self.lq("RST :", "RS = 5,", "ST = 13,", "RT = 12."), "L'égalité est vérifiée.",
+                             "L'angle droit est en ?"],  # (01/11) morceaux sur la même ligne de base
                             ["en R", "en S", "en T"], 0,
                             ["[ST] est le plus grand côté :", "l'angle droit est en R,", "le sommet qui n'est pas sur [ST]."])
         del self.FS_Q, self.ECART  # retour aux réglages du mixin
@@ -317,7 +319,8 @@ class PythagoreReciproque4e(PythagoreVerifier4e):
         self.add(cotes, lab, let)
         lignes = self.copie([
             ([("Le plus grand côté est [KM].", "Le plus grand côté")], WHITE),
-            ([("D'une part :", "D'une part"), ("KM² = 15²", "part, KM"), ("= 225.", "égale 225")], COUL_HYP),
+            ([("D'une part :", "D'une part"), ("KM²", "part, KM"), ("= 15²", "égale 15"), ("= 225.", "carré : 225")],
+             COUL_HYP),  # (01/11) la voix dit « 15 au carré »
             ([("D'autre part :", "D'autre part"), ("KL² + LM²", "part, KL"), ("= 81", "égale 81"), ("+ 144", "plus 144"),
               ("= 225.", "144 : 225")], COTE),
             ([("Donc KM² = KL² + LM².", "L'égalité est vérifiée")], VERT_OK),

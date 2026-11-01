@@ -11,18 +11,19 @@
 #
 # Rendu : python -m manim render -qh -r 1080,1920 --disable_caching manim/scripts/4e/pythagore_reciproque_short.py ShortDalle4e -o eleveai-maths-4e-pythagore-reciproque-short --media_dir manim/scripts/4e/media
 # Puis copier le mp4 dans manim/sorties/4e/maths/pythagore/06-reciproque/.
+# ⭐ 01/11/2026 : échelle entière des ceintures ; « 10 000 = 10 000 » au dernier 10000 dit ; lignes de base.
 
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from pythagore_verifier_short import COTE, COUL_HYP, P, ShortCorde4e  # noqa: E402  (pose les chemins)
+from pythagore_verifier_short import COTE, COUL_HYP, P, ShortCorde4e, echelle_short  # noqa: E402  (pose les chemins)
+from pythagore_verifier import morceaux_alignes, poser_en_ligne  # noqa: E402
 
 from manim import *  # noqa: E402
 
 from charte import *  # noqa: E402
-from signes_expression_2de import ceinture  # noqa: E402
 from pythagore_pauses import sans_audit  # noqa: E402
 
 BETON = "#9CA3AF"
@@ -36,10 +37,10 @@ class ShortDalle4e(ShortCorde4e):
 
         # ── 00 ──
         self.dire("00-accroche")
-        titre = self.grand("La dalle du maçon", font_size=42, color=JAUNE_TITRE).move_to(P(0, 2.85))
-        badge = VGroup(ceinture("#F5F5F5", 0.8).scale(0.7), self.grand("Ceinture blanche", font_size=22))
-        badge.arrange(RIGHT, buff=0.18).move_to(P(0, 2.3))
-        q = self.grand("Le coin est-il droit ?", font_size=28, color=BLEU_CALCUL).move_to(P(0, 1.9))
+        # (01/11) l'échelle entière sous le titre ; titre, accroche et dalle écartés pour qu'elle ne touche rien.
+        titre = self.grand("La dalle du maçon", font_size=42, color=JAUNE_TITRE).move_to(P(0, 2.9))
+        q = self.grand("Le coin est-il droit ?", font_size=28, color=BLEU_CALCUL).move_to(P(0, 1.75))
+        badge = echelle_short("blanche").move_to(P(0, (titre.get_bottom()[1] + q.get_top()[1]) / 2))
         self.play(FadeIn(titre), FadeIn(badge), run_time=0.8)
         self.au_mot("Le coin")
         self.play(FadeIn(q))
@@ -48,7 +49,7 @@ class ShortDalle4e(ShortCorde4e):
         # ── 01 ── (31/10) chaque nombre à SON mot (marques)
         self.dire("01-image")
         u = 0.022
-        A = P(-0.7, -0.25)
+        A = P(-0.7, -0.3)  # (01/11) un peu plus bas : l'accroche est descendue (lignes du bas aussi)
         B, C = A + RIGHT * 60 * u, A + UP * 80 * u
         fond = Polygon(A, B, B + (C - A), C, stroke_width=0, fill_color=BETON, fill_opacity=0.3)
         self.play(FadeIn(fond), run_time=0.6)
@@ -68,9 +69,9 @@ class ShortDalle4e(ShortCorde4e):
             return ms, [c for _, c in morceaux]
 
         g, cg = ligne([("d'une part :", ("D'une part", 1)), ("100²", ("part, 100", 1)), ("= 10 000", ("carré : 10000", 1))],
-                      -0.8, COUL_HYP)
+                      -0.92, COUL_HYP)
         d, cd = ligne([("d'autre part :", ("D'autre part", 1)), ("60²", ("part, 60", 1)), ("+ 80²", ("plus 80", 1)),
-                       ("= 10 000", ("carré : 10000", 2))], -1.3, COTE)
+                       ("= 10 000", ("carré : 10000", 2))], -1.4, COTE)
         if d.width > 3.9:  # (31/10) en morceaux, la ligne déborde : les deux lignes à la même taille
             f = 3.9 / d.width
             d.scale(f)
@@ -78,27 +79,31 @@ class ShortDalle4e(ShortCorde4e):
         for k, (m, (cue, n)) in enumerate(list(zip(g, cg)) + list(zip(d, cd))):
             (self.au_nb if any(c.isdigit() for c in cue) else self.au_mot)(cue, n)
             extra = [Create(Line(B, C, color=COUL_HYP, stroke_width=6))] if k == 0 else []
-            self.play(FadeIn(m), *extra, run_time=0.35)
+            # (01/11) « 10 000 = 10 000 » paraît avec le dernier 10000 dit (avant : 1,4 s après).
+            dernier = k == len(g) + len(d) - 1
+            if dernier:
+                extra.append(Write(self.grand("10 000 = 10 000", font_size=34, color=VERT_OK).move_to(P(0, -1.9))))
+            self.play(FadeIn(m), *extra, run_time=0.5 if dernier else 0.35)
         self.au_mot("C'est égal")
-        self.play(Write(self.grand("10 000 = 10 000", font_size=34, color=VERT_OK).move_to(P(0, -1.82))), run_time=0.5)
         carre = self.carre_droit(A, RIGHT, UP, s=0.25)
         self.play(GrowFromCenter(carre), Flash(A + UR * 0.12, color=BLEU_CALCUL, line_length=0.25), run_time=0.5)
         self.au_mot("le coin est droit")
-        self.play(FadeIn(self.grand("le coin est droit !", font_size=32, color=VERT_OK).move_to(P(0, -2.3))))
+        self.play(FadeIn(self.grand("le coin est droit !", font_size=32, color=VERT_OK).move_to(P(0, -2.38))))
         self.attendre_voix(marge=0.5)
 
         # ── 01q : la question-pause (3 s) ──
         self.ecran_question("01q-question", "01r-reponse",
-                            [["Table :", "6,", "8", "et 10 dm."], ["10²", "= 100 ;", "6²", "+ 8² = ?"]],
-                            ["14", "100", "48"], 1, [["C'est égal :", "le coin est droit."]])
+                            [morceaux_alignes(["Table :", "6,", "8", "et 10 dm."], self.FS_Q),
+                             morceaux_alignes(["10²", "= 100 ;", "6²", "+ 8² = ?"], self.FS_Q)],  # (01/11) ligne de base
+                            ["14", "100", "48"], 1, [morceaux_alignes(["C'est égal :", "le coin est droit."], self.FS_PH, VERT_OK)])
 
         # ── 02 ──
         self.clear()
         self.margo_bas()
         self.dire("02-question")
         self.play(Write(self.grand("À toi !", font_size=56, color=JAUNE_TITRE).move_to(P(0, 2.55))))
-        l1 = VGroup(self.grand("30,", font_size=42, color=JAUNE_TITRE),
-                    self.grand("40 et 51 cm", font_size=42, color=JAUNE_TITRE)).arrange(RIGHT, buff=0.16)
+        l1 = poser_en_ligne([self.grand("30,", font_size=42, color=JAUNE_TITRE),
+                             self.grand("40 et 51 cm", font_size=42, color=JAUNE_TITRE)], buff=0.16)
         if l1.width > 3.9:
             l1.scale_to_fit_width(3.9)
         lignes = VGroup(self.grand("Une autre dalle :", font_size=32), l1,

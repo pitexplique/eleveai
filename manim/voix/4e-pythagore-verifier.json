@@ -1,9 +1,9 @@
 {
   "00-garde": "Vérifier une égalité avec trois longueurs. Une corde à 13 nœuds : pourquoi les bâtisseurs s'en servent-ils ?",
-  "01-corde": "Une corde avec 13 nœuds, régulièrement espacés : 12 intervalles. On la tend en triangle : 3 intervalles, 4 intervalles, 5 intervalles. On a trois longueurs. Est-ce qu'elles vérifient l'égalité de Pythagore ?",
+  "01-corde": "Une corde avec 13 nœuds, régulièrement espacés : 12 intervalles. On la tend en triangle : 3 intervalles, 4 intervalles, 5 intervalles. On a trois longueurs : 3, 4 et 5. Est-ce qu'elles vérifient l'égalité de Pythagore ?",
   "02-plus-grand": "Première étape : repérer le plus grand côté. Ici, 5. C'est lui qui joue le rôle de l'hypoténuse : son carré va seul d'un côté.",
   "03-deux-calculs": "Deuxième étape : deux calculs, séparés. D'un côté, le carré du plus grand : 5 au carré, 25. De l'autre, la somme des carrés des deux autres : 3 au carré plus 4 au carré, 9 plus 16, 25. Troisième étape : on compare. 25 et 25 : l'égalité est vérifiée.",
-  "04-piege": "Le piège : écrire tout de suite 5 au carré égale 3 au carré plus 4 au carré. On ne sait pas encore si c'est égal ! On calcule chaque côté à part, et on n'écrit le signe égal qu'à la fin.",
+  "04-piege": "Le piège : écrire tout de suite 5 au carré égale 3 au carré plus 4 au carré. On ne sait pas encore si c'est égal ! On calcule chaque côté à part : 5 au carré d'un côté, 3 au carré plus 4 au carré de l'autre. Et on n'écrit le signe égal qu'à la fin.",
   "04q-question": "Question ! Un triangle a des côtés de 6, 8 et 10 centimètres. Combien font 6 au carré plus 8 au carré ? A : 14. B : 100. C : 196. Mets pause, et choisis !",
   "04r-reponse": "Réponse B : 100. 36 plus 64 : 100, autant que 10 au carré.",
   "05-pas-egal": "Avec d'autres longueurs : 4, 5 et 6 centimètres. Le plus grand : 6. 6 au carré : 36. 4 au carré plus 5 au carré : 16 plus 25, 41. 36 et 41 : différents. L'égalité n'est pas vérifiée.",

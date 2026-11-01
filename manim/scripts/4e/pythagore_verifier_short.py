@@ -12,6 +12,7 @@
 #
 # Rendu : python -m manim render -qh -r 1080,1920 --disable_caching manim/scripts/4e/pythagore_verifier_short.py ShortCorde4e -o eleveai-maths-4e-pythagore-verifier-short --media_dir manim/scripts/4e/media
 # Puis copier le mp4 dans manim/sorties/4e/maths/pythagore/05-verifier/.
+# ⭐ 01/11/2026 : la ceinture = l'ÉCHELLE ENTIÈRE sous le titre (echelle_short) ; lignes de base alignées.
 
 import sys
 from pathlib import Path
@@ -27,9 +28,15 @@ from charte import *  # noqa: E402
 from gabarit_sixieme import Short6e  # noqa: E402
 from gabarit_trigo import COUL_HYP  # noqa: E402
 from pythagore_pauses import PausesShort, sans_audit  # noqa: E402
-from signes_expression_2de import ceinture  # noqa: E402
+from pythagore_verifier import morceaux_alignes, poser_en_ligne  # noqa: E402
+from signes_expression_2de import ceinture, echelle_ceintures  # noqa: E402,F401  (ceinture : pour les héritiers)
 
 CORDE = "#D6B47A"
+
+
+def echelle_short(nom="blanche"):
+    """(01/11) La ceinture d'un short = l'ÉCHELLE ENTIÈRE (REGLES.md l. 78), sous le titre."""
+    return echelle_ceintures(nom).scale_to_fit_width(config.frame_width * 0.7)
 
 
 class ShortCorde4e(PausesShort, Short6e):
@@ -43,10 +50,10 @@ class ShortCorde4e(PausesShort, Short6e):
 
         # ── 00 ──
         self.dire("00-accroche")
-        titre = self.grand("La corde à 13 nœuds", font_size=40, color=JAUNE_TITRE).move_to(P(0, 2.85))
-        badge = VGroup(ceinture("#F5F5F5", 0.8).scale(0.7), self.grand("Ceinture blanche", font_size=22))
-        badge.arrange(RIGHT, buff=0.18).move_to(P(0, 2.3))
-        q = self.grand("Les deux calculs sont-ils égaux ?", font_size=26, color=BLEU_CALCUL).move_to(P(0, 1.9))
+        # (01/11) l'échelle entière sous le titre ; titre et accroche écartés pour qu'elle ne touche rien.
+        titre = self.grand("La corde à 13 nœuds", font_size=40, color=JAUNE_TITRE).move_to(P(0, 2.9))
+        q = self.grand("Les deux calculs sont-ils égaux ?", font_size=26, color=BLEU_CALCUL).move_to(P(0, 1.75))
+        badge = echelle_short("blanche").move_to(P(0, (titre.get_bottom()[1] + q.get_top()[1]) / 2))
         self.play(FadeIn(badge), run_time=0.6)
         self.au_nb("La corde à 13")  # (31/10) le titre quand la voix dit « 13 »
         self.play(FadeIn(titre), run_time=0.5)
@@ -103,16 +110,17 @@ class ShortCorde4e(PausesShort, Short6e):
         self.attendre_voix(marge=0.5)
 
         # ── 01q : la question-pause (3 s) ──
-        self.ecran_question("01q-question", "01r-reponse", [["Côtés 5,", "12 et 13."], ["Combien vaut", "13² ?"]],
-                            ["26", "169", "139"], 1, [["13 × 13,"], ["et pas", "13", "× 2."]])
+        # (01/11) les morceaux d'une ligne alignés sur leur ligne de base.
+        lq, lph = (lambda *m: morceaux_alignes(m, self.FS_Q)), (lambda *m: morceaux_alignes(m, self.FS_PH, VERT_OK))
+        self.ecran_question("01q-question", "01r-reponse", [lq("Côtés 5,", "12 et 13."), lq("Combien vaut", "13² ?")],
+                            ["26", "169", "139"], 1, [["13 × 13,"], lph("et pas", "13", "× 2.")])
 
         # ── 02 ──
         self.clear()
         self.margo_bas()
         self.dire("02-question")
         self.play(Write(self.grand("À toi !", font_size=56, color=JAUNE_TITRE).move_to(P(0, 2.55))))
-        l0 = VGroup(*[self.grand(x, font_size=30, color=CORDE) for x in ("6,", "8 et", "10 intervalles")])
-        l0.arrange(RIGHT, buff=0.14)
+        l0 = poser_en_ligne([self.grand(x, font_size=30, color=CORDE) for x in ("6,", "8 et", "10 intervalles")], buff=0.14)
         l2 = VGroup(self.grand("6²", font_size=40, color=COTE), self.grand("+ 8² = ?", font_size=40, color=COTE))
         l2.arrange(RIGHT, buff=0.16)
         lignes = VGroup(l0, self.grand("10² = ?", font_size=40, color=COUL_HYP), l2).arrange(DOWN, buff=0.3).move_to(P(0, 0.9))
