@@ -596,6 +596,22 @@ Sources : Léna, scooter (2 400 €), moto (8 000 €, 5 000 €) et casque (200
 
 ## CM1 / CM2 — lot CM-A (01/11/2026 ; voix validées `357ff852`, brief `manim/brief-agent-proportionnalite-cm.md`)
 
+### CM 01 — reconnaitre (COMMUN : ids `cm1-prop-reconnaitre[-short]` et `cm2-prop-reconnaitre[-short]`, mêmes `questions` ; micro `prop_reconnaitre`)
+- Paysage (3:30, CM1 verte / CM2 jaune, garde CM2 collée ; Adam entraîneur de basket : 1 panier = 2 points, 10 → 20 ; Lili 2 ans / Bob 5 ans, + 3 ; défi bouquets 5, 10, 16 barré). Centres : `["sport"]`.
+```json
+"questions": [
+ {"t":"00:43","question":"Où multiplie-t-on toujours par le même nombre ?","choix":["1 vélo : 2 roues ; 3 vélos : 6 roues","Tom, 10 ans : 30 kilos ; 20 ans : 70 kilos","8 heures : 20 degrés ; midi : 28 degrés"],"reponse":0,"explication":"Le nombre de roues, c'est toujours 2 fois le nombre de vélos : 3 × 2 = 6."},
+ {"t":"01:47","question":"Lili a 2 ans, Bob a 5 ans. Quand Lili aura 10 ans, quel âge aura Bob ?","choix":["25 ans","13 ans","20 ans"],"reponse":1,"explication":"Bob a toujours 3 ans de plus : 10 + 3 = 13 ans. On ajoute, on ne multiplie pas."}
+]
+```
+- Short (1:08, blanche, 1 musicien ou 5 : toujours 3 minutes). Centres : `["musique","jeux-defis"]`. Question en commentaire : « 5 tee-shirts étendus en même temps sèchent en combien de temps ? » (2 heures).
+```json
+"questions": [
+ {"t":"00:26","question":"1 œuf cuit en 10 minutes. 3 œufs, dans la même casserole, cuisent en…","choix":["30 minutes","10 minutes","13 minutes"],"reponse":1,"explication":"Les 3 œufs cuisent en même temps : 10 minutes. On ne multiplie pas toujours !"}
+]
+```
+Aucun fait réel à sourcer. Bords 0 (les trois mp4). Défauts mineurs : tableau de rappel petit sur « Ce que tu as appris » ; « On ne multiplie pas toujours ! » petit dans le short.
+
 ### CM1 02 — fois-plus (micro `prop_fois_plus`)
 - Paysage `cm1-prop-fois-plus` (2:50, ceinture verte, Fatou maraîchère : 1 rangée = 6 salades en billes, × 2, × 3 ; piège 12 + 3 = 15 barré ; défi ruches 20 kg → 40, 100). Centres : `["nature-ecologie"]`.
 ```json
