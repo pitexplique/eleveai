@@ -693,3 +693,19 @@ Sources : fréquence cardiaque au repos d'un enfant de 10 ans 70-110/min (Americ
 ]
 ```
 Sources : guépard ≈ 110-120 km/h en pointe (Futura-Sciences ; Zoo de Montpellier, livret enseignant ; Vikidia), 30 m/s = 108 km/h. Bords 0 (les deux). Paysage rendue 2 fois en HD (flèches de la correction sur le titre à la 1re). Défaut mineur : « pour 1. » un peu décalé sur l'écran final.
+
+### CM 07 — probleme (COMMUN : ids `cm1-prop-probleme[-short]` et `cm2-prop-probleme[-short]`, mêmes `questions` ; micro `prop_probleme`)
+- Paysage (3:15, CM1 verte / CM2 jaune, garde CM2 collée ; Zoé ingénieure en robots : panneau des 4 étapes qui se cochent ; 2 robots = 6 piles, 5 = 15, 7 = 2 + 5 → 6 + 15 = 21 ; phrase réponse ; piège la donnée inutile 30 cm barrée ; défi 3 robots = 9 vis, 4 = 12 → 7 = 21). Centres : `["technologie-ia"]`.
+```json
+"questions": [
+ {"t":"00:55","question":"Avec ce tableau, combien de piles pour 10 robots ?","choix":["25 piles","30 piles","60 piles"],"reponse":1,"explication":"10 robots, c'est 2 fois plus que 5 robots : 15 × 2 = 30 piles."},
+ {"t":"01:48","question":"2 robots ont 4 capteurs. Chaque robot a 3 roues. Combien de capteurs pour 6 robots ?","choix":["18 capteurs","12 capteurs","8 capteurs"],"reponse":1,"explication":"6 robots, c'est 3 fois plus que 2 robots : 4 × 3 = 12 capteurs. Les 3 roues ne servaient à rien."}
+]
+```
+- Short (1:03, blanche, Station spatiale : tour de la Terre en ≈ 1 h 30, ≈ 16 levers de soleil par jour, 7 jours → 112). Centres : `["espace","sciences"]`. Question en commentaire : « une astronaute reste 10 jours » (160).
+```json
+"questions": [
+ {"t":"00:25","question":"16 levers de soleil par jour : et en 3 jours ?","choix":["19 levers","48 levers","316 levers"],"reponse":1,"explication":"3 jours, c'est 3 fois plus qu'un jour : 16 × 3 = 48 levers de soleil."}
+]
+```
+Sources : NASA Earth Observatory, « Sunrise to Sunset » (Earth Matters, 15/01/2016) : ≈ 16 levers par jour ; ESA : période ≈ 92 min (15,5 à 15,9 tours par jour, d'où « environ »). Bords 0 (les 4 mp4). Paysage rendue 4 fois en HD : coches qui disparaissaient à l'écran 06, puis les « + » de la correction contre « 7 = 3 + 4 » et contre le titre (tableau à 1,2, calculs fs 42, phrase fs 40). Défauts mineurs : la grille des 7 soleils du short frôle le tableau ; pendant la question 2, le tableau n'arrive qu'avec la réponse.
