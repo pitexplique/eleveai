@@ -627,3 +627,19 @@ Aucun fait réel à sourcer. Bords 0 (les trois mp4). Défauts mineurs : tableau
 ]
 ```
 Sources : gravité lunaire 1,62 m/s² ≈ 1/6 (NASA, via Space.com) ; ruche 10 kg/an un peu bas (FranceAgriMer 2026 : 15,2 kg en 2024, 12 kg sous 50 ruches), gardé comme ordre de grandeur. Bords 0 (les deux). Défauts mineurs laissés : coche du piège proche du « 36 » ; une étoile du décor passe sur « 180 cm » à 0:08 du short.
+
+### CM1 03 — fois-moins (micro `prop_fois_moins`)
+- Paysage `cm1-prop-fois-moins` (2:55, ceinture verte, Malik peintre en bâtiment : 6 murs = 12 L en billes, ÷ 2 → 6 L, ÷ 3 → 4 L ; piège 12 − 3 = 9 barré ; défi 10 volets = 20 L → 10 L, 4 L). Centres : `["art-design"]`.
+```json
+"questions": [
+ {"t":"00:45","question":"8 murs : 24 litres. Combien pour 4 murs ?","choix":["12 litres","22 litres","48 litres"],"reponse":0,"explication":"4 murs, c'est 2 fois moins que 8 murs : 24 ÷ 2 = 12 litres. 48, c'est 2 fois plus : la mauvaise direction."},
+ {"t":"01:35","question":"5 murs : 15 litres. Combien pour 1 seul mur ?","choix":["10 litres","3 litres","75 litres"],"reponse":1,"explication":"1 mur, c'est 5 fois moins que 5 murs : 15 ÷ 5 = 3 litres."}
+]
+```
+- Short `cm1-prop-fois-moins-short` (0:59, ceinture blanche, Ti-Margo attrape 30 moustiques en 6 minutes). Centres : `["animaux","jeux-defis"]`. Question en commentaire : « en 3 minutes ? » (15).
+```json
+"questions": [
+ {"t":"00:22","question":"Et en 1 minute ?","choix":["5 moustiques","24 moustiques","180 moustiques"],"reponse":0,"explication":"1 minute, c'est 6 fois moins que 6 minutes : 30 ÷ 6 = 5 moustiques."}
+]
+```
+t relevés au dry run (durées HD identiques). Aucun fait réel cité (2 L par mur : ordre de grandeur ≈ 10 m²/L/couche). Bords 0 (les deux). Marques régénérées avec une variante de cues2marques qui date aussi le mot après un nombre (scratchpad `agent-fois-moins/cues2marques2.py`). Défaut mineur : écran 01, rangée des murs serrée près de la tête de Malik.
