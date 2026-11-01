@@ -1,20 +1,32 @@
-// app/page.tsx
-import { redirect } from "next/navigation";
+// app/page.tsx — eleveai.fr/ : la PAGE D'ENTRÉE, « Quel chemin prends-tu ? » (01/11/2026).
+//
+// Frédéric : « qu'on n'atterrisse pas directement sur la page d'accueil » →
+// plus de redirection vers /accueil : un arbre à deux branches, le coach ou le
+// Journal d'EleveAI, et Ti Margo qui grimpe (./ChoixEntree.tsx). Les clics
+// sont comptés dans Supabase (supabase/choix_entree.sql).
+// 👉 RETOUR ARRIÈRE : `git show c70cfe69:app/page.tsx > app/page.tsx` (le redirect).
+// ⚠️ On TRANSMET toujours la query aux deux chemins : les liens de campagne
+// (?utm_source=...) arrivant sur / perdaient leurs UTM → trafic invisible.
+// ⚠️ noindex : pour Google, la page d'entrée reste /accueil (son titre, sa
+// description, ses liens) ; cette fourche n'a rien à lui dire.
+import type { Metadata } from "next";
+import ChoixEntree from "./ChoixEntree";
+
+export const metadata: Metadata = {
+  title: "EleveAI — quel chemin prends-tu ?",
+  robots: { index: false, follow: true },
+};
 
 export default async function Home({
   searchParams,
 }: {
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
 }) {
-  // La page d'entrée du site est l'accueil-journal. On TRANSMET la query :
-  // les liens de campagne (?utm_source=...) arrivaient sur / et perdaient
-  // leurs UTM dans ce redirect → trafic YouTube invisible dans les stats.
   const params = (await searchParams) ?? {};
   const qs = new URLSearchParams(
     Object.entries(params).flatMap(([k, v]) =>
       v === undefined ? [] : Array.isArray(v) ? v.map((x) => [k, x]) : [[k, v]],
     ) as [string, string][],
   ).toString();
-  redirect(qs ? `/accueil?${qs}` : "/accueil");
+  return <ChoixEntree suite={qs ? `?${qs}` : ""} />;
 }
-
