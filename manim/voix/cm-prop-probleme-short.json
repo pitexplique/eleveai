@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Dans l'espace, on voit le Soleil se lever 16 fois par jour !",
+  "01-station": "La Station spatiale fait le tour de la Terre en une heure et demie. Ses astronautes voient environ 16 levers de soleil par jour.",
+  "02-semaine": "Combien en une semaine ? 1 jour : 16 levers. 7 jours : 16 fois 7, égale 112 levers de soleil !",
+  "03-question": "Question ! Et en 3 jours ? A : 19 levers. B : 48 levers. C : 316 levers. Mets pause, et choisis !",
+  "03b-reponse": "Réponse B. 3 jours, c'est 3 fois plus qu'un jour : 16 fois 3, égale 48 levers de soleil.",
+  "04-commentaire": "Et toi ? Une astronaute reste 10 jours dans la station. Combien de levers de soleil voit-elle ? Réponds en commentaire !"
+}

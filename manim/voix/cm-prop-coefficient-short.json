@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Combien de fois ton cœur bat-il pendant une récré ?",
+  "01-minute": "Au repos, le cœur d'un enfant bat environ 80 fois par minute.",
+  "02-recre": "80, c'est le coefficient : 80 battements pour 1 minute. Une récré de 15 minutes ? 15 fois 80, égale 1 200 battements !",
+  "03-question": "Question ! Et en 10 minutes ? A : 90 battements. B : 800 battements. C : 8 000 battements. Mets pause, et choisis !",
+  "03b-reponse": "Réponse B. On multiplie par 80 : 10 fois 80, égale 800 battements.",
+  "04-commentaire": "Et toi ? Combien de battements en 1 heure, c'est-à-dire en 60 minutes ? Réponds en commentaire !"
+}

@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Léo ou Maya : qui court le plus vite ? Attention, piège !",
+  "01-donnees": "Léo court 600 mètres en 3 minutes. Maya court 1 000 mètres en 4 minutes.",
+  "02-unite": "On cherche pour 1 minute. Léo : 600 divisé par 3, égale 200 mètres. Maya : 1 000 divisé par 4, égale 250 mètres. Maya est la plus rapide !",
+  "03-question": "Question ! Sam court 900 mètres en 3 minutes. Est-il plus rapide que Maya ? A : oui. B : non. C : ils vont aussi vite. Mets pause, et choisis !",
+  "03b-reponse": "Réponse A. 900 divisé par 3, égale 300 mètres par minute. 300, c'est plus que 250 : Sam est plus rapide.",
+  "04-commentaire": "Et toi ? Inès court 1 200 mètres en 6 minutes. Va-t-elle plus vite que Léo, moins vite, ou aussi vite ? Réponds en commentaire !"
+}

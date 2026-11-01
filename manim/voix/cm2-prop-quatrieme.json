@@ -1,0 +1,17 @@
+{
+  "00-garde": "La quatrième proportionnelle. Comment trouver le nombre qui manque ?",
+  "01-situation": "Voici Yanis. Il est météorologue : il étudie le temps qu'il fait. Ce matin, la pluie tombe toujours aussi fort. En 3 heures, son pluviomètre recueille 12 millimètres d'eau. Et en 5 heures ?",
+  "02-tableau": "Dans le tableau : 3 heures, 12 millimètres. 5 heures : une case vide. Le nombre qui manque s'appelle la quatrième proportionnelle.",
+  "03-bloque": "Mais 5, ce n'est ni le double, ni la moitié de 3. Fois plus ou fois moins ne marche pas directement.",
+  "04-unite": "Alors, on passe par 1 heure. 1 heure, c'est 3 fois moins que 3 heures : 12 divisé par 3, égale 4 millimètres.",
+  "05-cinq": "Puis 5 heures, c'est 5 fois plus que 1 heure : 4 fois 5, égale 20 millimètres. La case vide vaut 20 !",
+  "06-question": "Question ! Une autre averse donne 20 millimètres en 4 heures. Combien en 1 heure ? A : 5 millimètres. B : 16 millimètres. C : 80 millimètres. Mets pause, et choisis !",
+  "06b-reponse": "Réponse A. 1 heure, c'est 4 fois moins que 4 heures : 20 divisé par 4, égale 5 millimètres. 16, c'est 20 moins 4 : on a enlevé au lieu de diviser.",
+  "07-piege": "Attention au piège ! De 3 heures à 5 heures, on ajoute 2 heures. Mais on n'ajoute pas 2 millimètres : pas 14 ! On passe par 1 heure, et on trouve 20 millimètres.",
+  "08-question": "Question ! La neige tombe toujours aussi fort : 6 centimètres en 2 heures. Combien en 7 heures ? A : 11 centimètres. B : 21 centimètres. C : 42 centimètres. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. En 1 heure : 6 divisé par 2, égale 3 centimètres. En 7 heures : 3 fois 7, égale 21 centimètres.",
+  "09-defi": "À toi de jouer ! Un satellite météo prend 15 photos de la Terre en 5 minutes. Combien de photos en 8 minutes ? Mets pause, et cherche !",
+  "09b-correction": "Correction. En 1 minute : 15 divisé par 5, égale 3 photos. En 8 minutes : 3 fois 8, égale 24 photos.",
+  "10-finale": "Ce que tu as appris. Pour trouver la quatrième proportionnelle, on passe par 1 : on divise pour trouver la valeur pour 1, puis on multiplie. Et on n'ajoute jamais le même nombre.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

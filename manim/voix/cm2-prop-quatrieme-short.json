@@ -1,0 +1,8 @@
+{
+  "00-accroche": "L'animal le plus rapide du monde. Sauras-tu calculer sa course ?",
+  "01-trois": "Lancé à fond, le guépard parcourt environ 90 mètres en 3 secondes.",
+  "02-unite": "En 1 seconde ? 3 fois moins : 90 divisé par 3, égale 30 mètres. En 5 secondes : 30 fois 5, égale 150 mètres !",
+  "03-question": "Question ! Et en 4 secondes ? A : 91 mètres. B : 120 mètres. C : 360 mètres. Mets pause, et choisis !",
+  "03b-reponse": "Réponse B. 30 mètres en 1 seconde : 30 fois 4, égale 120 mètres.",
+  "04-commentaire": "Et toi ? Le guépard court 7 secondes à fond. Combien de mètres parcourt-il ? Réponds en commentaire !"
+}

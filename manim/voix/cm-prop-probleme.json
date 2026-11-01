@@ -1,0 +1,17 @@
+{
+  "00-garde": "Résoudre un problème de proportionnalité. Par où commencer ?",
+  "01-situation": "Voici Zoé. Elle est ingénieure : elle fabrique des petits robots pour une école. Chaque robot mesure 30 centimètres. 2 robots ont besoin de 6 piles. 5 robots, de 15 piles. Combien de piles pour 7 robots ?",
+  "02-chercher": "Étape 1 : que cherche-t-on ? Le nombre de piles pour 7 robots.",
+  "03-tableau": "Étape 2 : on range les données dans un tableau. 2 robots : 6 piles. 5 robots : 15 piles. 7 robots : la case vide.",
+  "04-calcul": "Étape 3 : on calcule. 7 robots, c'est 2 robots plus 5 robots. Donc on ajoute leurs piles : 6 plus 15, égale 21 piles.",
+  "05-question": "Question ! Avec ce tableau, combien de piles pour 10 robots ? A : 25 piles. B : 30 piles. C : 60 piles. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 10 robots, c'est 2 fois plus que 5 robots. Donc 2 fois plus de piles : 15 fois 2, égale 30 piles.",
+  "06-phrase": "Étape 4 : on répond par une phrase. Zoé a besoin de 21 piles pour 7 robots.",
+  "07-piege": "Attention au piège ! Un problème peut cacher un nombre inutile. Chaque robot mesure 30 centimètres : ce nombre ne sert pas à compter les piles. On le laisse de côté !",
+  "08-question": "Question ! 2 robots ont 4 capteurs. Chaque robot a 3 roues. Combien de capteurs pour 6 robots ? A : 18 capteurs. B : 12 capteurs. C : 8 capteurs. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. 6 robots, c'est 3 fois plus que 2 robots : 4 fois 3, égale 12 capteurs. Les 3 roues ne servaient à rien ici !",
+  "09-defi": "À toi de jouer ! 3 robots ont besoin de 9 vis. 4 robots, de 12 vis. Combien de vis pour 7 robots ? Écris aussi ta phrase réponse. Mets pause, et cherche !",
+  "09b-correction": "Correction. 7 robots, c'est 3 robots plus 4 robots. Donc 9 plus 12, égale 21 vis. La phrase : il faut 21 vis pour 7 robots.",
+  "10-finale": "Ce que tu as appris. Pour résoudre un problème, on cherche la question, on range les données dans un tableau, on calcule, puis on répond par une phrase. Et on laisse de côté les nombres inutiles.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}
