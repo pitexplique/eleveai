@@ -441,3 +441,13 @@ Sources : chocolaterie, recettes et quantités inventées (75 g de chocolat, 15 
 ]
 ```
 Sources : eau de mer ≈ 1 bar tous les 10 m (1 025 kg/m³ × 9,81 × 10 m ≈ 1,0 bar) ; air ≈ 1 bar en surface (1,013 bar) ; pression totale = 1 + profondeur ÷ 10 (manuels de plongée, niveau 1 FFESSM) ; Noé et ses plongées inventés. Défauts mineurs : le choix C « seulement si la droite monte » est écrit plus petit (≈ 20 pt) ; phrase de réponse de la question 1 assez petite.
+
+## 4e 23-coefficient (lot 5, rendu le 01/11)
+**Paysage** `4e-prop-coefficient` — 3:41, ceinture verte — centres `construction`, `art-design`
+```json
+[
+  {"t":"01:06","question":"Avec 4 L : 48 m². Quel est le coefficient ?","choix":["12 m²/L","44 m²/L","192 m²/L"],"reponse":0,"explication":"48 ÷ 4 = 12 m²/L. On divise, on ne soustrait pas."},
+  {"t":"02:13","question":"Le coefficient est 12 m²/L. Combien de litres pour 30 m² ?","choix":["360 L","2,5 L","18 L"],"reponse":1,"explication":"On remonte vers les litres : 30 ÷ 12 = 2,5 L."}
+]
+```
+Sources : 12 m²/L par couche = rendement courant d'une peinture murale (Castorama : 5 à 20 m²/L ; Levis Mur Velours 11 m²/L ; Brico.be Perfection 12 m²/L) ; 9 m²/L du défi plausible (SPS Finess 7 à 9 m²/L) ; Yasmine, pièces et piscine de peinture inventées. Défauts mineurs : la question 1 est écrite « Avec 4 L : 48 m². » (plus court que la voix, pour le calage) ; la réponse de la question 2 commence par « On remonte : ».
