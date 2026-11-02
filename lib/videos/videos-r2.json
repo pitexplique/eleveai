@@ -4293,6 +4293,42 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cm1&matiere=maths&notion=probabilite&microId=probabilite_vocabulaire&display=simple"
  },
+ "cm1-prop-coefficient": {
+  "fichier": "cm1/maths/proportionnalite/05-coefficient/eleveai-maths-cm1-prop-coefficient.mp4",
+  "poster": "cm1/maths/proportionnalite/05-coefficient/eleveai-maths-cm1-prop-coefficient.png",
+  "vignette": "cm1/maths/proportionnalite/05-coefficient/eleveai-maths-cm1-prop-coefficient.vignette.webp",
+  "titre": "4 gâteaux, 12 œufs. Et pour 7 ? — Le coefficient de proportionnalité — épisode 5 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=proportionnalite&microId=prop_coefficient&display=simple"
+ },
+ "cm1-prop-coefficient-short": {
+  "fichier": "cm1/maths/proportionnalite/05-coefficient/eleveai-maths-cm1-prop-coefficient-short.mp4",
+  "poster": "cm1/maths/proportionnalite/05-coefficient/eleveai-maths-cm1-prop-coefficient-short.png",
+  "vignette": "cm1/maths/proportionnalite/05-coefficient/eleveai-maths-cm1-prop-coefficient-short.vignette.webp",
+  "titre": "Combien de fois ton cœur bat pendant la récré ? ❤️ — CM1 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=proportionnalite&microId=prop_coefficient&display=simple"
+ },
+ "cm1-prop-defi": {
+  "fichier": "cm1/maths/proportionnalite/08-defi/eleveai-maths-cm1-prop-defi.mp4",
+  "poster": "cm1/maths/proportionnalite/08-defi/eleveai-maths-cm1-prop-defi.png",
+  "vignette": "cm1/maths/proportionnalite/08-defi/eleveai-maths-cm1-prop-defi.vignette.webp",
+  "titre": "3 sacs, 24 kg ou 5 sacs, 35 kg ? — Le grand défi de la proportionnalité — épisode 8 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=proportionnalite&microId=prop_defi&display=simple"
+ },
+ "cm1-prop-defi-short": {
+  "fichier": "cm1/maths/proportionnalite/08-defi/eleveai-maths-cm1-prop-defi-short.mp4",
+  "poster": "cm1/maths/proportionnalite/08-defi/eleveai-maths-cm1-prop-defi-short.png",
+  "vignette": "cm1/maths/proportionnalite/08-defi/eleveai-maths-cm1-prop-defi-short.vignette.webp",
+  "titre": "Léo ou Maya : qui court le plus vite ? 🏃 — CM1 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=proportionnalite&microId=prop_defi&display=simple"
+ },
  "cm1-prop-fois-moins": {
   "fichier": "cm1/maths/proportionnalite/03-fois-moins/eleveai-maths-cm1-prop-fois-moins.mp4",
   "poster": "cm1/maths/proportionnalite/03-fois-moins/eleveai-maths-cm1-prop-fois-moins.png",
@@ -4328,6 +4364,24 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm1&matiere=maths&notion=proportionnalite&microId=prop_fois_plus&display=simple"
+ },
+ "cm1-prop-probleme": {
+  "fichier": "cm1/maths/proportionnalite/07-probleme/eleveai-maths-cm1-prop-probleme.mp4",
+  "poster": "cm1/maths/proportionnalite/07-probleme/eleveai-maths-cm1-prop-probleme.png",
+  "vignette": "cm1/maths/proportionnalite/07-probleme/eleveai-maths-cm1-prop-probleme.vignette.webp",
+  "titre": "2 robots : 6 piles. Et 7 robots ? — Résoudre un problème de proportionnalité — épisode 7 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=proportionnalite&microId=prop_probleme&display=simple"
+ },
+ "cm1-prop-probleme-short": {
+  "fichier": "cm1/maths/proportionnalite/07-probleme/eleveai-maths-cm1-prop-probleme-short.mp4",
+  "poster": "cm1/maths/proportionnalite/07-probleme/eleveai-maths-cm1-prop-probleme-short.png",
+  "vignette": "cm1/maths/proportionnalite/07-probleme/eleveai-maths-cm1-prop-probleme-short.vignette.webp",
+  "titre": "16 levers de soleil par jour dans l'espace ! 🚀 — CM1 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=proportionnalite&microId=prop_probleme&display=simple"
  },
  "cm1-prop-reconnaitre": {
   "fichier": "cm1/maths/proportionnalite/01-reconnaitre/eleveai-maths-cm1-prop-reconnaitre.mp4",
@@ -4760,6 +4814,78 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=probabilite&microId=probabilite_vocabulaire&display=simple"
+ },
+ "cm2-prop-coefficient": {
+  "fichier": "cm2/maths/proportionnalite/05-coefficient/eleveai-maths-cm2-prop-coefficient.mp4",
+  "poster": "cm2/maths/proportionnalite/05-coefficient/eleveai-maths-cm2-prop-coefficient.png",
+  "vignette": "cm2/maths/proportionnalite/05-coefficient/eleveai-maths-cm2-prop-coefficient.vignette.webp",
+  "titre": "4 gâteaux, 12 œufs. Et pour 7 ? — Le coefficient de proportionnalité — épisode 5 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=proportionnalite&microId=prop_coefficient&display=simple"
+ },
+ "cm2-prop-coefficient-short": {
+  "fichier": "cm2/maths/proportionnalite/05-coefficient/eleveai-maths-cm2-prop-coefficient-short.mp4",
+  "poster": "cm2/maths/proportionnalite/05-coefficient/eleveai-maths-cm2-prop-coefficient-short.png",
+  "vignette": "cm2/maths/proportionnalite/05-coefficient/eleveai-maths-cm2-prop-coefficient-short.vignette.webp",
+  "titre": "Combien de fois ton cœur bat pendant la récré ? ❤️ — CM2 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=proportionnalite&microId=prop_coefficient&display=simple"
+ },
+ "cm2-prop-defi": {
+  "fichier": "cm2/maths/proportionnalite/08-defi/eleveai-maths-cm2-prop-defi.mp4",
+  "poster": "cm2/maths/proportionnalite/08-defi/eleveai-maths-cm2-prop-defi.png",
+  "vignette": "cm2/maths/proportionnalite/08-defi/eleveai-maths-cm2-prop-defi.vignette.webp",
+  "titre": "3 sacs, 24 kg ou 5 sacs, 35 kg ? — Le grand défi de la proportionnalité — épisode 8 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=proportionnalite&microId=prop_defi&display=simple"
+ },
+ "cm2-prop-defi-short": {
+  "fichier": "cm2/maths/proportionnalite/08-defi/eleveai-maths-cm2-prop-defi-short.mp4",
+  "poster": "cm2/maths/proportionnalite/08-defi/eleveai-maths-cm2-prop-defi-short.png",
+  "vignette": "cm2/maths/proportionnalite/08-defi/eleveai-maths-cm2-prop-defi-short.vignette.webp",
+  "titre": "Léo ou Maya : qui court le plus vite ? 🏃 — CM2 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=proportionnalite&microId=prop_defi&display=simple"
+ },
+ "cm2-prop-probleme": {
+  "fichier": "cm2/maths/proportionnalite/07-probleme/eleveai-maths-cm2-prop-probleme.mp4",
+  "poster": "cm2/maths/proportionnalite/07-probleme/eleveai-maths-cm2-prop-probleme.png",
+  "vignette": "cm2/maths/proportionnalite/07-probleme/eleveai-maths-cm2-prop-probleme.vignette.webp",
+  "titre": "2 robots : 6 piles. Et 7 robots ? — Résoudre un problème de proportionnalité — épisode 7 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=proportionnalite&microId=prop_probleme&display=simple"
+ },
+ "cm2-prop-probleme-short": {
+  "fichier": "cm2/maths/proportionnalite/07-probleme/eleveai-maths-cm2-prop-probleme-short.mp4",
+  "poster": "cm2/maths/proportionnalite/07-probleme/eleveai-maths-cm2-prop-probleme-short.png",
+  "vignette": "cm2/maths/proportionnalite/07-probleme/eleveai-maths-cm2-prop-probleme-short.vignette.webp",
+  "titre": "16 levers de soleil par jour dans l'espace ! 🚀 — CM2 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=proportionnalite&microId=prop_probleme&display=simple"
+ },
+ "cm2-prop-quatrieme": {
+  "fichier": "cm2/maths/proportionnalite/06-quatrieme/eleveai-maths-cm2-prop-quatrieme.mp4",
+  "poster": "cm2/maths/proportionnalite/06-quatrieme/eleveai-maths-cm2-prop-quatrieme.png",
+  "vignette": "cm2/maths/proportionnalite/06-quatrieme/eleveai-maths-cm2-prop-quatrieme.vignette.webp",
+  "titre": "3 h de pluie : 12 mm. Et en 5 h ? — La quatrième proportionnelle — épisode 6 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=proportionnalite&microId=prop_quatrieme&display=simple"
+ },
+ "cm2-prop-quatrieme-short": {
+  "fichier": "cm2/maths/proportionnalite/06-quatrieme/eleveai-maths-cm2-prop-quatrieme-short.mp4",
+  "poster": "cm2/maths/proportionnalite/06-quatrieme/eleveai-maths-cm2-prop-quatrieme-short.png",
+  "vignette": "cm2/maths/proportionnalite/06-quatrieme/eleveai-maths-cm2-prop-quatrieme-short.vignette.webp",
+  "titre": "Le guépard : combien de mètres en 5 secondes ? 🐆 — CM2 #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=proportionnalite&microId=prop_quatrieme&display=simple"
  },
  "cm2-prop-reconnaitre": {
   "fichier": "cm2/maths/proportionnalite/01-reconnaitre/eleveai-maths-cm2-prop-reconnaitre.mp4",

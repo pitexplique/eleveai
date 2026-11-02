@@ -52392,6 +52392,973 @@
         "animaux",
         "sciences"
       ]
+    },
+    {
+      "id": "cm1-prop-coefficient",
+      "notionId": "proportionnalite",
+      "microId": "prop_coefficient",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/proportionnalite/05-coefficient/eleveai-maths-cm1-prop-coefficient.mp4",
+      "miniature": "cm1/maths/proportionnalite/05-coefficient/eleveai-maths-cm1-prop-coefficient.png",
+      "titre": "4 gâteaux, 12 œufs. Et pour 7 ? — Le coefficient de proportionnalité — épisode 5 · Maths CM1",
+      "accroche": "Nora est pâtissière. Pour 4 gâteaux, elle utilise 12 œufs. Combien d'œufs pour 7 gâteaux ? Il suffit de trouver le bon nombre : le coefficient.\n\nDans cette vidéo :\n• de 4 à 12, on multiplie par 3 : le coefficient est 3, 3 œufs pour 1 gâteau\n• 7 gâteaux : 7 × 3 = 21 œufs ; 10 gâteaux : 10 × 3 = 30 œufs\n• le piège : le coefficient n'est pas l'écart ; de 4 à 12 l'écart est 8, mais 4 × 8 = 32, pas 12\n• le coefficient donne la valeur pour 1\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : pour 6 pizzas, Nora met 18 tomates. Quel est le coefficient ? Combien de tomates pour 9 pizzas ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=proportionnalite&microId=prop_coefficient&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Nora, pâtissière : 4 gâteaux, 12 œufs"
+        ],
+        [
+          "00:33",
+          "Le coefficient : 4 × 3 = 12"
+        ],
+        [
+          "00:52",
+          "Question : le coefficient des crêpes"
+        ],
+        [
+          "01:24",
+          "Le piège : l'écart 8"
+        ],
+        [
+          "01:42",
+          "Question : 8 tartes"
+        ],
+        [
+          "02:16",
+          "À toi de jouer"
+        ],
+        [
+          "02:31",
+          "Correction"
+        ],
+        [
+          "02:44",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "coefficient de proportionnalité",
+        "tableau de proportionnalité",
+        "multiplier par le même nombre",
+        "pâtisserie",
+        "pâtissière",
+        "cuisine",
+        "proportionnalité",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:52",
+          "question": "5 crêpes demandent 10 cuillères de sucre. Quel est le coefficient ?",
+          "choix": [
+            "5",
+            "2",
+            "15"
+          ],
+          "reponse": 1,
+          "explication": "5 × 2 = 10 : le coefficient est 2, 2 cuillères pour 1 crêpe. 5, c'est 10 − 5 : on a enlevé au lieu de multiplier."
+        },
+        {
+          "t": "01:42",
+          "question": "3 tartes demandent 15 pommes. Combien de pommes pour 8 tartes ?",
+          "choix": [
+            "20 pommes",
+            "40 pommes",
+            "120 pommes"
+          ],
+          "reponse": 1,
+          "explication": "15 ÷ 3 = 5 : 5 pommes pour 1 tarte. Donc 8 × 5 = 40 pommes."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "cm1-prop-coefficient-short",
+      "notionId": "proportionnalite",
+      "microId": "prop_coefficient",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-prop-coefficient",
+      "fichier": "cm1/maths/proportionnalite/05-coefficient/eleveai-maths-cm1-prop-coefficient-short.mp4",
+      "miniature": "cm1/maths/proportionnalite/05-coefficient/eleveai-maths-cm1-prop-coefficient-short.png",
+      "titre": "Combien de fois ton cœur bat pendant la récré ? ❤️ — CM1 #Shorts",
+      "accroche": "Au repos, le cœur d'un enfant bat environ 80 fois par minute. 80, c'est le coefficient : 80 battements pour 1 minute. Une récré de 15 minutes ? 15 × 80 = 1 200 battements !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : combien de battements en 1 heure, c'est-à-dire en 60 minutes ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=proportionnalite&microId=prop_coefficient&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #proportionnalité #cm1 #primaire",
+      "tags": [
+        "coefficient de proportionnalité",
+        "cœur",
+        "battements",
+        "corps humain",
+        "santé",
+        "proportionnalité",
+        "maths",
+        "CM1",
+        "école",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:21",
+          "question": "Le cœur bat environ 80 fois par minute. Et en 10 minutes ?",
+          "choix": [
+            "90 battements",
+            "800 battements",
+            "8 000 battements"
+          ],
+          "reponse": 1,
+          "explication": "On multiplie par 80 : 10 × 80 = 800 battements."
+        }
+      ],
+      "centres": [
+        "corps-sante"
+      ]
+    },
+    {
+      "id": "cm2-prop-coefficient",
+      "notionId": "proportionnalite",
+      "microId": "prop_coefficient",
+      "classe": "cm2",
+      "ceinture": "jaune",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/proportionnalite/05-coefficient/eleveai-maths-cm2-prop-coefficient.mp4",
+      "miniature": "cm2/maths/proportionnalite/05-coefficient/eleveai-maths-cm2-prop-coefficient.png",
+      "titre": "4 gâteaux, 12 œufs. Et pour 7 ? — Le coefficient de proportionnalité — épisode 5 · Maths CM2",
+      "accroche": "Nora est pâtissière. Pour 4 gâteaux, elle utilise 12 œufs. Combien d'œufs pour 7 gâteaux ? Il suffit de trouver le bon nombre : le coefficient.\n\nDans cette vidéo :\n• de 4 à 12, on multiplie par 3 : le coefficient est 3, 3 œufs pour 1 gâteau\n• 7 gâteaux : 7 × 3 = 21 œufs ; 10 gâteaux : 10 × 3 = 30 œufs\n• le piège : le coefficient n'est pas l'écart ; de 4 à 12 l'écart est 8, mais 4 × 8 = 32, pas 12\n• le coefficient donne la valeur pour 1\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : pour 6 pizzas, Nora met 18 tomates. Quel est le coefficient ? Combien de tomates pour 9 pizzas ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/cm2/proportionnalite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=proportionnalite&microId=prop_coefficient&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Nora, pâtissière : 4 gâteaux, 12 œufs"
+        ],
+        [
+          "00:33",
+          "Le coefficient : 4 × 3 = 12"
+        ],
+        [
+          "00:52",
+          "Question : le coefficient des crêpes"
+        ],
+        [
+          "01:24",
+          "Le piège : l'écart 8"
+        ],
+        [
+          "01:42",
+          "Question : 8 tartes"
+        ],
+        [
+          "02:16",
+          "À toi de jouer"
+        ],
+        [
+          "02:31",
+          "Correction"
+        ],
+        [
+          "02:44",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/cm2/proportionnalite",
+      "tags": [
+        "coefficient de proportionnalité",
+        "tableau de proportionnalité",
+        "multiplier par le même nombre",
+        "pâtisserie",
+        "pâtissière",
+        "cuisine",
+        "proportionnalité",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:52",
+          "question": "5 crêpes demandent 10 cuillères de sucre. Quel est le coefficient ?",
+          "choix": [
+            "5",
+            "2",
+            "15"
+          ],
+          "reponse": 1,
+          "explication": "5 × 2 = 10 : le coefficient est 2, 2 cuillères pour 1 crêpe. 5, c'est 10 − 5 : on a enlevé au lieu de multiplier."
+        },
+        {
+          "t": "01:42",
+          "question": "3 tartes demandent 15 pommes. Combien de pommes pour 8 tartes ?",
+          "choix": [
+            "20 pommes",
+            "40 pommes",
+            "120 pommes"
+          ],
+          "reponse": 1,
+          "explication": "15 ÷ 3 = 5 : 5 pommes pour 1 tarte. Donc 8 × 5 = 40 pommes."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "cm2-prop-coefficient-short",
+      "notionId": "proportionnalite",
+      "microId": "prop_coefficient",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-prop-coefficient",
+      "fichier": "cm2/maths/proportionnalite/05-coefficient/eleveai-maths-cm2-prop-coefficient-short.mp4",
+      "miniature": "cm2/maths/proportionnalite/05-coefficient/eleveai-maths-cm2-prop-coefficient-short.png",
+      "titre": "Combien de fois ton cœur bat pendant la récré ? ❤️ — CM2 #Shorts",
+      "accroche": "Au repos, le cœur d'un enfant bat environ 80 fois par minute. 80, c'est le coefficient : 80 battements pour 1 minute. Une récré de 15 minutes ? 15 × 80 = 1 200 battements !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : combien de battements en 1 heure, c'est-à-dire en 60 minutes ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=proportionnalite&microId=prop_coefficient&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #proportionnalité #cm2 #primaire",
+      "tags": [
+        "coefficient de proportionnalité",
+        "cœur",
+        "battements",
+        "corps humain",
+        "santé",
+        "proportionnalité",
+        "maths",
+        "CM2",
+        "école",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:21",
+          "question": "Le cœur bat environ 80 fois par minute. Et en 10 minutes ?",
+          "choix": [
+            "90 battements",
+            "800 battements",
+            "8 000 battements"
+          ],
+          "reponse": 1,
+          "explication": "On multiplie par 80 : 10 × 80 = 800 battements."
+        }
+      ],
+      "centres": [
+        "corps-sante"
+      ]
+    },
+    {
+      "id": "cm2-prop-quatrieme",
+      "notionId": "proportionnalite",
+      "microId": "prop_quatrieme",
+      "classe": "cm2",
+      "ceinture": "jaune",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/proportionnalite/06-quatrieme/eleveai-maths-cm2-prop-quatrieme.mp4",
+      "miniature": "cm2/maths/proportionnalite/06-quatrieme/eleveai-maths-cm2-prop-quatrieme.png",
+      "titre": "3 h de pluie : 12 mm. Et en 5 h ? — La quatrième proportionnelle — épisode 6 · Maths CM2",
+      "accroche": "Yanis est météorologue. La pluie tombe toujours aussi fort : en 3 heures, son pluviomètre recueille 12 millimètres. Combien en 5 heures ? 5 n'est ni le double ni la moitié de 3 : on passe par 1 heure.\n\nDans cette vidéo :\n• 1 heure, c'est 3 fois moins que 3 heures : 12 ÷ 3 = 4 millimètres\n• 5 heures, c'est 5 fois plus que 1 heure : 4 × 5 = 20 millimètres\n• le piège : 2 heures de plus, ce n'est pas 2 millimètres de plus (20, et pas 14)\n• la méthode : on divise pour trouver la valeur pour 1, puis on multiplie\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : un satellite météo prend 15 photos de la Terre en 5 minutes. Combien de photos en 8 minutes ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/cm2/proportionnalite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=proportionnalite&microId=prop_quatrieme&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Yanis, météorologue : 12 mm en 3 heures"
+        ],
+        [
+          "00:22",
+          "La case vide : la quatrième proportionnelle"
+        ],
+        [
+          "00:42",
+          "Par 1 heure : 4 mm, puis 20 mm"
+        ],
+        [
+          "01:01",
+          "Question : 20 mm en 4 heures"
+        ],
+        [
+          "01:37",
+          "Le piège : 14 mm ?"
+        ],
+        [
+          "01:51",
+          "Question : la neige en 7 heures"
+        ],
+        [
+          "02:27",
+          "À toi de jouer"
+        ],
+        [
+          "02:41",
+          "Correction"
+        ],
+        [
+          "02:53",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/cm2/proportionnalite",
+      "tags": [
+        "quatrième proportionnelle",
+        "passage par l'unité",
+        "règle de trois",
+        "pluie",
+        "météorologue",
+        "météo",
+        "proportionnalité",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:01",
+          "question": "Une averse donne 20 mm en 4 heures. Combien en 1 heure ?",
+          "choix": [
+            "5 mm",
+            "16 mm",
+            "80 mm"
+          ],
+          "reponse": 0,
+          "explication": "1 heure, c'est 4 fois moins : 20 ÷ 4 = 5 mm. 16 = 20 − 4 : on a enlevé au lieu de diviser."
+        },
+        {
+          "t": "01:51",
+          "question": "La neige tombe toujours aussi fort : 6 cm en 2 heures. Combien en 7 heures ?",
+          "choix": [
+            "11 cm",
+            "21 cm",
+            "42 cm"
+          ],
+          "reponse": 1,
+          "explication": "En 1 heure : 6 ÷ 2 = 3 cm. En 7 heures : 3 × 7 = 21 cm."
+        }
+      ],
+      "centres": [
+        "meteo-climat"
+      ]
+    },
+    {
+      "id": "cm2-prop-quatrieme-short",
+      "notionId": "proportionnalite",
+      "microId": "prop_quatrieme",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-prop-quatrieme",
+      "fichier": "cm2/maths/proportionnalite/06-quatrieme/eleveai-maths-cm2-prop-quatrieme-short.mp4",
+      "miniature": "cm2/maths/proportionnalite/06-quatrieme/eleveai-maths-cm2-prop-quatrieme-short.png",
+      "titre": "Le guépard : combien de mètres en 5 secondes ? 🐆 — CM2 #Shorts",
+      "accroche": "Lancé à fond, le guépard parcourt environ 90 mètres en 3 secondes. En 1 seconde : 90 ÷ 3 = 30 mètres. En 5 secondes : 30 × 5 = 150 mètres !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : le guépard court 7 secondes à fond. Combien de mètres parcourt-il ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=proportionnalite&microId=prop_quatrieme&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #proportionnalité #cm2 #primaire",
+      "tags": [
+        "quatrième proportionnelle",
+        "passage par l'unité",
+        "guépard",
+        "vitesse",
+        "animaux",
+        "proportionnalité",
+        "maths",
+        "CM2",
+        "école",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:24",
+          "question": "Le guépard parcourt 90 m en 3 s. Et en 4 secondes ?",
+          "choix": [
+            "91 m",
+            "120 m",
+            "360 m"
+          ],
+          "reponse": 1,
+          "explication": "30 m en 1 seconde : 30 × 4 = 120 m."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "sport"
+      ]
+    },
+    {
+      "id": "cm1-prop-probleme",
+      "notionId": "proportionnalite",
+      "microId": "prop_probleme",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/proportionnalite/07-probleme/eleveai-maths-cm1-prop-probleme.mp4",
+      "miniature": "cm1/maths/proportionnalite/07-probleme/eleveai-maths-cm1-prop-probleme.png",
+      "titre": "2 robots : 6 piles. Et 7 robots ? — Résoudre un problème de proportionnalité — épisode 7 · Maths CM1",
+      "accroche": "Zoé est ingénieure : elle fabrique des petits robots pour une école. 2 robots ont besoin de 6 piles, 5 robots de 15 piles. Combien de piles pour 7 robots ? On avance en 4 étapes.\n\nDans cette vidéo :\n• étape 1 : que cherche-t-on ? étape 2 : on range les données dans un tableau\n• étape 3 : 7 robots, c'est 2 robots plus 5 robots, donc 6 + 15 = 21 piles\n• étape 4 : on répond par une phrase : il faut 21 piles pour 7 robots\n• le piège : un nombre inutile (chaque robot mesure 30 cm) ; on le barre\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 3 robots ont besoin de 9 vis, 4 robots de 12 vis. Combien de vis pour 7 robots ? Écris aussi ta phrase réponse.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=proportionnalite&microId=prop_probleme&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Zoé, ingénieure : que cherche-t-on ?"
+        ],
+        [
+          "00:31",
+          "Étape 2 : le tableau"
+        ],
+        [
+          "00:43",
+          "Étape 3 : 6 + 15 = 21 piles"
+        ],
+        [
+          "00:55",
+          "Question : 10 robots"
+        ],
+        [
+          "01:25",
+          "Étape 4 : la phrase ; le nombre inutile"
+        ],
+        [
+          "01:48",
+          "Question : les capteurs"
+        ],
+        [
+          "02:23",
+          "À toi de jouer"
+        ],
+        [
+          "02:39",
+          "Correction"
+        ],
+        [
+          "02:53",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "problème de proportionnalité",
+        "résoudre un problème",
+        "phrase réponse",
+        "robots",
+        "ingénieure",
+        "technologie",
+        "proportionnalité",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:55",
+          "question": "Avec ce tableau, combien de piles pour 10 robots ?",
+          "choix": [
+            "25 piles",
+            "30 piles",
+            "60 piles"
+          ],
+          "reponse": 1,
+          "explication": "10 robots, c'est 2 fois plus que 5 robots : 15 × 2 = 30 piles."
+        },
+        {
+          "t": "01:48",
+          "question": "2 robots ont 4 capteurs. Chaque robot a 3 roues. Combien de capteurs pour 6 robots ?",
+          "choix": [
+            "18 capteurs",
+            "12 capteurs",
+            "8 capteurs"
+          ],
+          "reponse": 1,
+          "explication": "6 robots, c'est 3 fois plus que 2 robots : 4 × 3 = 12 capteurs. Les 3 roues ne servaient à rien."
+        }
+      ],
+      "centres": [
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "cm1-prop-probleme-short",
+      "notionId": "proportionnalite",
+      "microId": "prop_probleme",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-prop-probleme",
+      "fichier": "cm1/maths/proportionnalite/07-probleme/eleveai-maths-cm1-prop-probleme-short.mp4",
+      "miniature": "cm1/maths/proportionnalite/07-probleme/eleveai-maths-cm1-prop-probleme-short.png",
+      "titre": "16 levers de soleil par jour dans l'espace ! 🚀 — CM1 #Shorts",
+      "accroche": "La Station spatiale fait le tour de la Terre en une heure et demie. Ses astronautes voient environ 16 levers de soleil par jour. En une semaine : 16 × 7 = 112 levers de soleil !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : une astronaute reste 10 jours dans la station. Combien de levers de soleil voit-elle ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=proportionnalite&microId=prop_probleme&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #proportionnalité #cm1 #primaire",
+      "tags": [
+        "proportionnalité",
+        "Station spatiale",
+        "astronaute",
+        "lever de soleil",
+        "espace",
+        "sciences",
+        "maths",
+        "CM1",
+        "école",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:25",
+          "question": "16 levers de soleil par jour : et en 3 jours ?",
+          "choix": [
+            "19 levers",
+            "48 levers",
+            "316 levers"
+          ],
+          "reponse": 1,
+          "explication": "3 jours, c'est 3 fois plus qu'un jour : 16 × 3 = 48 levers de soleil."
+        }
+      ],
+      "centres": [
+        "espace",
+        "sciences"
+      ]
+    },
+    {
+      "id": "cm2-prop-probleme",
+      "notionId": "proportionnalite",
+      "microId": "prop_probleme",
+      "classe": "cm2",
+      "ceinture": "jaune",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/proportionnalite/07-probleme/eleveai-maths-cm2-prop-probleme.mp4",
+      "miniature": "cm2/maths/proportionnalite/07-probleme/eleveai-maths-cm2-prop-probleme.png",
+      "titre": "2 robots : 6 piles. Et 7 robots ? — Résoudre un problème de proportionnalité — épisode 7 · Maths CM2",
+      "accroche": "Zoé est ingénieure : elle fabrique des petits robots pour une école. 2 robots ont besoin de 6 piles, 5 robots de 15 piles. Combien de piles pour 7 robots ? On avance en 4 étapes.\n\nDans cette vidéo :\n• étape 1 : que cherche-t-on ? étape 2 : on range les données dans un tableau\n• étape 3 : 7 robots, c'est 2 robots plus 5 robots, donc 6 + 15 = 21 piles\n• étape 4 : on répond par une phrase : il faut 21 piles pour 7 robots\n• le piège : un nombre inutile (chaque robot mesure 30 cm) ; on le barre\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : 3 robots ont besoin de 9 vis, 4 robots de 12 vis. Combien de vis pour 7 robots ? Écris aussi ta phrase réponse.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/cm2/proportionnalite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=proportionnalite&microId=prop_probleme&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Zoé, ingénieure : que cherche-t-on ?"
+        ],
+        [
+          "00:31",
+          "Étape 2 : le tableau"
+        ],
+        [
+          "00:43",
+          "Étape 3 : 6 + 15 = 21 piles"
+        ],
+        [
+          "00:55",
+          "Question : 10 robots"
+        ],
+        [
+          "01:25",
+          "Étape 4 : la phrase ; le nombre inutile"
+        ],
+        [
+          "01:48",
+          "Question : les capteurs"
+        ],
+        [
+          "02:23",
+          "À toi de jouer"
+        ],
+        [
+          "02:39",
+          "Correction"
+        ],
+        [
+          "02:53",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/cm2/proportionnalite",
+      "tags": [
+        "problème de proportionnalité",
+        "résoudre un problème",
+        "phrase réponse",
+        "robots",
+        "ingénieure",
+        "technologie",
+        "proportionnalité",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:55",
+          "question": "Avec ce tableau, combien de piles pour 10 robots ?",
+          "choix": [
+            "25 piles",
+            "30 piles",
+            "60 piles"
+          ],
+          "reponse": 1,
+          "explication": "10 robots, c'est 2 fois plus que 5 robots : 15 × 2 = 30 piles."
+        },
+        {
+          "t": "01:48",
+          "question": "2 robots ont 4 capteurs. Chaque robot a 3 roues. Combien de capteurs pour 6 robots ?",
+          "choix": [
+            "18 capteurs",
+            "12 capteurs",
+            "8 capteurs"
+          ],
+          "reponse": 1,
+          "explication": "6 robots, c'est 3 fois plus que 2 robots : 4 × 3 = 12 capteurs. Les 3 roues ne servaient à rien."
+        }
+      ],
+      "centres": [
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "cm2-prop-probleme-short",
+      "notionId": "proportionnalite",
+      "microId": "prop_probleme",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-prop-probleme",
+      "fichier": "cm2/maths/proportionnalite/07-probleme/eleveai-maths-cm2-prop-probleme-short.mp4",
+      "miniature": "cm2/maths/proportionnalite/07-probleme/eleveai-maths-cm2-prop-probleme-short.png",
+      "titre": "16 levers de soleil par jour dans l'espace ! 🚀 — CM2 #Shorts",
+      "accroche": "La Station spatiale fait le tour de la Terre en une heure et demie. Ses astronautes voient environ 16 levers de soleil par jour. En une semaine : 16 × 7 = 112 levers de soleil !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : une astronaute reste 10 jours dans la station. Combien de levers de soleil voit-elle ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=proportionnalite&microId=prop_probleme&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #proportionnalité #cm2 #primaire",
+      "tags": [
+        "proportionnalité",
+        "Station spatiale",
+        "astronaute",
+        "lever de soleil",
+        "espace",
+        "sciences",
+        "maths",
+        "CM2",
+        "école",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:25",
+          "question": "16 levers de soleil par jour : et en 3 jours ?",
+          "choix": [
+            "19 levers",
+            "48 levers",
+            "316 levers"
+          ],
+          "reponse": 1,
+          "explication": "3 jours, c'est 3 fois plus qu'un jour : 16 × 3 = 48 levers de soleil."
+        }
+      ],
+      "centres": [
+        "espace",
+        "sciences"
+      ]
+    },
+    {
+      "id": "cm1-prop-defi",
+      "notionId": "proportionnalite",
+      "microId": "prop_defi",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/proportionnalite/08-defi/eleveai-maths-cm1-prop-defi.mp4",
+      "miniature": "cm1/maths/proportionnalite/08-defi/eleveai-maths-cm1-prop-defi.png",
+      "titre": "3 sacs, 24 kg ou 5 sacs, 35 kg ? — Le grand défi de la proportionnalité — épisode 8 · Maths CM1",
+      "accroche": "Ilyes est soigneur dans un parc animalier. Il commande des graines pour les perroquets. Offre A : 3 sacs, 24 kilos. Offre B : 5 sacs, 35 kilos. Dans quelle offre les sacs sont-ils les plus lourds ?\n\nDans cette vidéo :\n• on ne compare pas les totaux : l'offre B a plus de kilos, mais aussi plus de sacs\n• on cherche la valeur pour 1 sac : A, 24 ÷ 3 = 8 kilos ; B, 35 ÷ 5 = 7 kilos ; les sacs A sont les plus lourds\n• parfois les offres se valent : 12 ÷ 2 = 6 et 18 ÷ 3 = 6 litres par seau\n• la méthode : la valeur pour 1, puis on compare\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : trois offres de croquettes : A, 2 sacs, 18 kilos ; B, 3 sacs, 24 kilos ; C, 5 sacs, 50 kilos. Dans quelle offre les sacs sont-ils les plus lourds ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=proportionnalite&microId=prop_defi&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Ilyes, soigneur : deux offres de graines"
+        ],
+        [
+          "00:25",
+          "Attention : pas les totaux"
+        ],
+        [
+          "00:36",
+          "La valeur pour 1 sac"
+        ],
+        [
+          "00:56",
+          "Question : les bananes des singes"
+        ],
+        [
+          "01:38",
+          "Quand les offres se valent"
+        ],
+        [
+          "01:57",
+          "Question : le foin"
+        ],
+        [
+          "02:40",
+          "À toi de jouer"
+        ],
+        [
+          "03:03",
+          "Correction"
+        ],
+        [
+          "03:22",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "comparer des offres",
+        "valeur pour 1",
+        "passage par l'unité",
+        "parc animalier",
+        "soigneur animalier",
+        "animaux",
+        "proportionnalité",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:56",
+          "question": "Offre A : 2 caisses, 20 bananes. Offre B : 4 caisses, 36 bananes. Où les caisses ont-elles le plus de bananes ?",
+          "choix": [
+            "l'offre A",
+            "l'offre B",
+            "elles se valent"
+          ],
+          "reponse": 0,
+          "explication": "Offre A : 20 ÷ 2 = 10 bananes par caisse. Offre B : 36 ÷ 4 = 9. 10, c'est plus que 9."
+        },
+        {
+          "t": "01:57",
+          "question": "Offre A : 4 sacs de foin, 40 kilos. Offre B : 6 sacs, 60 kilos. Où les sacs sont-ils les plus lourds ?",
+          "choix": [
+            "l'offre A",
+            "l'offre B",
+            "elles se valent"
+          ],
+          "reponse": 2,
+          "explication": "40 ÷ 4 = 10 et 60 ÷ 6 = 10 : 10 kilos par sac des deux côtés. L'offre B a plus de foin en tout, mais pas des sacs plus lourds."
+        }
+      ],
+      "centres": [
+        "animaux"
+      ]
+    },
+    {
+      "id": "cm1-prop-defi-short",
+      "notionId": "proportionnalite",
+      "microId": "prop_defi",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-prop-defi",
+      "fichier": "cm1/maths/proportionnalite/08-defi/eleveai-maths-cm1-prop-defi-short.mp4",
+      "miniature": "cm1/maths/proportionnalite/08-defi/eleveai-maths-cm1-prop-defi-short.png",
+      "titre": "Léo ou Maya : qui court le plus vite ? 🏃 — CM1 #Shorts",
+      "accroche": "Léo court 600 mètres en 3 minutes. Maya court 1 000 mètres en 4 minutes. Pour 1 minute : Léo 600 ÷ 3 = 200 mètres, Maya 1 000 ÷ 4 = 250 mètres. Maya est la plus rapide !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Inès court 1 200 mètres en 6 minutes. Va-t-elle plus vite que Léo, moins vite, ou aussi vite ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=proportionnalite&microId=prop_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #proportionnalité #cm1 #primaire",
+      "tags": [
+        "comparer des vitesses",
+        "valeur pour 1",
+        "course",
+        "défi",
+        "sport",
+        "proportionnalité",
+        "maths",
+        "CM1",
+        "école",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:27",
+          "question": "Sam court 900 mètres en 3 minutes. Est-il plus rapide que Maya ?",
+          "choix": [
+            "oui",
+            "non",
+            "ils vont aussi vite"
+          ],
+          "reponse": 0,
+          "explication": "900 ÷ 3 = 300 mètres par minute. 300, c'est plus que 250 : Sam est plus rapide."
+        }
+      ],
+      "centres": [
+        "sport",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm2-prop-defi",
+      "notionId": "proportionnalite",
+      "microId": "prop_defi",
+      "classe": "cm2",
+      "ceinture": "jaune",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/proportionnalite/08-defi/eleveai-maths-cm2-prop-defi.mp4",
+      "miniature": "cm2/maths/proportionnalite/08-defi/eleveai-maths-cm2-prop-defi.png",
+      "titre": "3 sacs, 24 kg ou 5 sacs, 35 kg ? — Le grand défi de la proportionnalité — épisode 8 · Maths CM2",
+      "accroche": "Ilyes est soigneur dans un parc animalier. Il commande des graines pour les perroquets. Offre A : 3 sacs, 24 kilos. Offre B : 5 sacs, 35 kilos. Dans quelle offre les sacs sont-ils les plus lourds ?\n\nDans cette vidéo :\n• on ne compare pas les totaux : l'offre B a plus de kilos, mais aussi plus de sacs\n• on cherche la valeur pour 1 sac : A, 24 ÷ 3 = 8 kilos ; B, 35 ÷ 5 = 7 kilos ; les sacs A sont les plus lourds\n• parfois les offres se valent : 12 ÷ 2 = 6 et 18 ÷ 3 = 6 litres par seau\n• la méthode : la valeur pour 1, puis on compare\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : trois offres de croquettes : A, 2 sacs, 18 kilos ; B, 3 sacs, 24 kilos ; C, 5 sacs, 50 kilos. Dans quelle offre les sacs sont-ils les plus lourds ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/cm2/proportionnalite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=proportionnalite&microId=prop_defi&display=simple\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Ilyes, soigneur : deux offres de graines"
+        ],
+        [
+          "00:25",
+          "Attention : pas les totaux"
+        ],
+        [
+          "00:36",
+          "La valeur pour 1 sac"
+        ],
+        [
+          "00:56",
+          "Question : les bananes des singes"
+        ],
+        [
+          "01:38",
+          "Quand les offres se valent"
+        ],
+        [
+          "01:57",
+          "Question : le foin"
+        ],
+        [
+          "02:40",
+          "À toi de jouer"
+        ],
+        [
+          "03:03",
+          "Correction"
+        ],
+        [
+          "03:22",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/cm2/proportionnalite",
+      "tags": [
+        "comparer des offres",
+        "valeur pour 1",
+        "passage par l'unité",
+        "parc animalier",
+        "soigneur animalier",
+        "animaux",
+        "proportionnalité",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:56",
+          "question": "Offre A : 2 caisses, 20 bananes. Offre B : 4 caisses, 36 bananes. Où les caisses ont-elles le plus de bananes ?",
+          "choix": [
+            "l'offre A",
+            "l'offre B",
+            "elles se valent"
+          ],
+          "reponse": 0,
+          "explication": "Offre A : 20 ÷ 2 = 10 bananes par caisse. Offre B : 36 ÷ 4 = 9. 10, c'est plus que 9."
+        },
+        {
+          "t": "01:57",
+          "question": "Offre A : 4 sacs de foin, 40 kilos. Offre B : 6 sacs, 60 kilos. Où les sacs sont-ils les plus lourds ?",
+          "choix": [
+            "l'offre A",
+            "l'offre B",
+            "elles se valent"
+          ],
+          "reponse": 2,
+          "explication": "40 ÷ 4 = 10 et 60 ÷ 6 = 10 : 10 kilos par sac des deux côtés. L'offre B a plus de foin en tout, mais pas des sacs plus lourds."
+        }
+      ],
+      "centres": [
+        "animaux"
+      ]
+    },
+    {
+      "id": "cm2-prop-defi-short",
+      "notionId": "proportionnalite",
+      "microId": "prop_defi",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-prop-defi",
+      "fichier": "cm2/maths/proportionnalite/08-defi/eleveai-maths-cm2-prop-defi-short.mp4",
+      "miniature": "cm2/maths/proportionnalite/08-defi/eleveai-maths-cm2-prop-defi-short.png",
+      "titre": "Léo ou Maya : qui court le plus vite ? 🏃 — CM2 #Shorts",
+      "accroche": "Léo court 600 mètres en 3 minutes. Maya court 1 000 mètres en 4 minutes. Pour 1 minute : Léo 600 ÷ 3 = 200 mètres, Maya 1 000 ÷ 4 = 250 mètres. Maya est la plus rapide !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Inès court 1 200 mètres en 6 minutes. Va-t-elle plus vite que Léo, moins vite, ou aussi vite ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=proportionnalite&microId=prop_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #proportionnalité #cm2 #primaire",
+      "tags": [
+        "comparer des vitesses",
+        "valeur pour 1",
+        "course",
+        "défi",
+        "sport",
+        "proportionnalité",
+        "maths",
+        "CM2",
+        "école",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:27",
+          "question": "Sam court 900 mètres en 3 minutes. Est-il plus rapide que Maya ?",
+          "choix": [
+            "oui",
+            "non",
+            "ils vont aussi vite"
+          ],
+          "reponse": 0,
+          "explication": "900 ÷ 3 = 300 mètres par minute. 300, c'est plus que 250 : Sam est plus rapide."
+        }
+      ],
+      "centres": [
+        "sport",
+        "jeux-defis"
+      ]
     }
   ]
 }
