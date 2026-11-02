@@ -709,3 +709,19 @@ Sources : guépard ≈ 110-120 km/h en pointe (Futura-Sciences ; Zoo de Montpell
 ]
 ```
 Sources : NASA Earth Observatory, « Sunrise to Sunset » (Earth Matters, 15/01/2016) : ≈ 16 levers par jour ; ESA : période ≈ 92 min (15,5 à 15,9 tours par jour, d'où « environ »). Bords 0 (les 4 mp4). Paysage rendue 4 fois en HD : coches qui disparaissaient à l'écran 06, puis les « + » de la correction contre « 7 = 3 + 4 » et contre le titre (tableau à 1,2, calculs fs 42, phrase fs 40). Défauts mineurs : la grille des 7 soleils du short frôle le tableau ; pendant la question 2, le tableau n'arrive qu'avec la réponse.
+
+### CM 08 — defi (COMMUN : ids `cm1-prop-defi[-short]` et `cm2-prop-defi[-short]`, mêmes `questions` ; micro `prop_defi`)
+- Paysage (3:45, CM1 verte / CM2 jaune, garde CM2 collée ; Ilyes soigneur de parc animalier : offre A 3 sacs 24 kg, offre B 5 sacs 35 kg → 8 et 7 kg par sac ; piège les totaux ; offres égales 12 ÷ 2 = 18 ÷ 3 = 6 L ; défi 3 offres de croquettes 9, 8, 10 → C). Centres : `["animaux"]`.
+```json
+"questions": [
+ {"t":"00:56","question":"Offre A : 2 caisses, 20 bananes. Offre B : 4 caisses, 36 bananes. Où les caisses ont-elles le plus de bananes ?","choix":["l'offre A","l'offre B","elles se valent"],"reponse":0,"explication":"Offre A : 20 ÷ 2 = 10 bananes par caisse. Offre B : 36 ÷ 4 = 9. 10, c'est plus que 9."},
+ {"t":"01:57","question":"Offre A : 4 sacs de foin, 40 kilos. Offre B : 6 sacs, 60 kilos. Où les sacs sont-ils les plus lourds ?","choix":["l'offre A","l'offre B","elles se valent"],"reponse":2,"explication":"40 ÷ 4 = 10 et 60 ÷ 6 = 10 : 10 kilos par sac des deux côtés. L'offre B a plus de foin en tout, mais pas des sacs plus lourds."}
+]
+```
+- Short (1:10, blanche, Léo 600 m en 3 min, Maya 1 000 m en 4 min → 200 et 250 m par minute). Centres : `["sport","jeux-defis"]`. Question en commentaire : « Inès court 1 200 m en 6 minutes » (aussi vite que Léo, 200 m par minute).
+```json
+"questions": [
+ {"t":"00:27","question":"Sam court 900 mètres en 3 minutes. Est-il plus rapide que Maya ?","choix":["oui","non","ils vont aussi vite"],"reponse":0,"explication":"900 ÷ 3 = 300 mètres par minute. 300, c'est plus que 250 : Sam est plus rapide."}
+]
+```
+Bords 0 (les 4 mp4). Paysage rendue 3 fois en HD : le cadre vert de l'offre A chevauchait le titre « Offre B » dans « Ce que tu as appris » (carte B descendue de 0,45) ; la coche de la carte C touchait « elles se valent » (texte arrêté à 1,1 du bord droit dans `_disposer_q`).
