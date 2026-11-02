@@ -11535,7 +11535,7 @@
   "titre": "L'escalier et la cloche : comment la loi binomiale devient la loi normale · Maths Tle spé",
   "short": false,
   "youtube": null,
-  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=loi_binomiale&display=simple"
+  "coach": null
  },
  "terminale-loi-normale-escalier-short": {
   "fichier": "terminale/maths/probabilites/loi-normale-escalier/eleveai-maths-terminale-loi-normale-escalier-short.mp4",
@@ -11544,6 +11544,6 @@
   "titre": "300 rangées de clous : l'escalier devient… quoi ? 🔔 — Tle #Shorts",
   "short": true,
   "youtube": null,
-  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=loi_binomiale&display=simple"
+  "coach": null
  }
 }
