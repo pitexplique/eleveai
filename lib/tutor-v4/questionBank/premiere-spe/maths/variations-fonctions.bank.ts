@@ -10,6 +10,7 @@
 // PÉRIMÈTRE BO Première spé. Conventions : LaTeX, règle QCM. Canvas : fonctionGraphique.
 
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
+import { renfortVariations } from "@/lib/tutor-v4/questionBank/premiere-spe/maths/variations-fonctions-renfort";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -191,7 +192,7 @@ function quatreChoixVar(correct: string, distracteurs: readonly string[]): strin
   return sortie;
 }
 
-export const variationsFonctionsBank: TutorBankItemV4[] = [
+const anciens: TutorBankItemV4[] = [
   /* ===================== VAR_SIGNE_DERIVEE ===================== */
   {
     kind: "fixed",
@@ -3973,4 +3974,27 @@ export const variationsFonctionsBank: TutorBankItemV4[] = [
       };
     },
   },
+];
+
+/* 02/11/2026 — Frédéric : « enlève les questions fixes sauf pour des cas
+   spéciaux ». Les générateurs de variations-fonctions-renfort.ts remplacent
+   tout (y compris les anciens gabarits, dont plusieurs « open ») ; on ne garde
+   que quelques questions de cours, une par micro environ. */
+const CAS_SPECIAUX = new Set([
+  "premiere_var_sg_fixed_1",
+  "premiere_var_sg_fixed_5",
+  "premiere_var_tab_fixed_8",
+  "premiere_var_ext_fixed_7",
+  "premiere_var_opt_fixed_8",
+  "premiere_var_cst_fixed_4",
+  "premiere_var_lc_fixed_4",
+  "premiere_var_et_fixed_2",
+  "premiere_var_ineg_fixed_5",
+  "premiere_var_pos_fixed_5",
+  "premiere_var_sd_fixed_6",
+]);
+
+export const variationsFonctionsBank: TutorBankItemV4[] = [
+  ...anciens.filter((i) => CAS_SPECIAUX.has(i.id)),
+  ...renfortVariations,
 ];
