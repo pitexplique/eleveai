@@ -18,6 +18,7 @@
 //   purement numériques.
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { renfortDerivation } from "./derivation-renfort";
 
 // Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
 // finissent par coïncider dès qu'un paramètre tombe sur une valeur particulière
@@ -58,7 +59,7 @@ function monome(coeff: number, exposant: number): string {
   return `${c}${x}`;
 }
 
-export const derivationBank: TutorBankItemV4[] = [
+const anciens: TutorBankItemV4[] = [
   /* =========================================================
      DERIVATION_FORMULES — Formules de dérivation
   ========================================================= */
@@ -1948,4 +1949,23 @@ export const derivationBank: TutorBankItemV4[] = [
     ),
     tags: ["terminale-spe", "derivation", "type_bac", "tangente", "qcm"],
   },
+];
+
+/* 02/11/2026 — Frédéric : questions figées « seulement pour des cas
+   spéciaux ». Les générateurs de derivation-renfort.ts remplacent tout ; on ne
+   garde que six questions de cours : les formules du produit, du quotient et
+   de u^n, l'équation de la tangente, l'extremum quand f' change de signe, et
+   la méthode pour chercher un maximum. */
+const CAS_SPECIAUX = new Set([
+  "terminale_spe_derivation_spq_fixed_5",
+  "terminale_spe_derivation_spq_fixed_6",
+  "terminale_spe_derivation_composee_fixed_1",
+  "terminale_spe_derivation_variation_fixed_4",
+  "terminale_spe_derivation_tangente_fixed_1",
+  "terminale_spe_derivation_optimisation_fixed_1",
+]);
+
+export const derivationBank: TutorBankItemV4[] = [
+  ...anciens.filter((i) => CAS_SPECIAUX.has(i.id)),
+  ...renfortDerivation,
 ];
