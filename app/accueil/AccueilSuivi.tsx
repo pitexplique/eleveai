@@ -1,5 +1,5 @@
 // L'ACCUEIL « SUIVI D'ÉLÈVE » (31/10/2026) — monté par /accueil (sans les offres)
-// et par la maquette /accueil/nouvelle (avec les offres « en préparation »).
+// et par la maquette /accueil/nouvelle — ✅ 02/11 : /accueil montre aussi les offres (ouverture fin décembre).
 //
 // ⭐ LE VIRAGE, dans les mots de Frédéric : « quand je tape dans Google "fais-moi
 // une fiche de cours sur Pythagore en PDF", il me la génère ». On ne vend donc
@@ -105,17 +105,21 @@ const ETAPES = [
   { Icone: BarChart3, titre: "Je vois mes progrès", texte: "Mes résultats sont gardés : je reprends demain là où je me suis arrêté." },
 ];
 
-/* Ce qui reste ouvert à tous, pour toujours. */
+/* Ce qui reste ouvert à tous, pour toujours.
+   ⭐ 02/11 : le coach garde la vidéo de chaque micro (avis de déontologie : le
+   coach utilisé en classe ne renvoie jamais vers une offre). Ce qui se vend en
+   plus, c'est la vidéothèque entière : 3 500 vidéos sur le site, 500 sur YouTube. */
 const GRATUIT = [
   "Le coach de maths, sur tout le programme, micro-compétence par micro-compétence",
-  "Les vidéos, avec leurs questions-pauses",
+  "Dans le coach, la vidéo de chaque micro-compétence, avec ses questions-pauses",
   "Les résultats gardés dans le compte de l'élève",
   "Pour le prof : ses classes, la séance en direct, le bilan par micro",
   "Les feuilles d'exercices corrigées",
 ];
 
-/* Ce qui sera proposé aux familles — APRÈS l'accord du rectorat. */
+/* Ce qui sera proposé aux familles — à l'ouverture, fin décembre 2026. */
 const SUIVI_FAMILLE = [
+  { Icone: PlayCircle, texte: "Toute la vidéothèque : 3 500 vidéos du CP à la Terminale, dont 3 000 qu'on ne trouve pas sur YouTube" },
   { Icone: ClipboardList, texte: "Un bilan de départ : la carte de votre enfant sur toute sa classe" },
   { Icone: Mail, texte: "Un compte rendu chaque semaine : ce qui est acquis, les erreurs qui reviennent, les 3 choses à revoir" },
   { Icone: CalendarCheck, texte: "10 minutes par jour choisies par le coach, et la préparation ciblée d'un contrôle" },
@@ -328,11 +332,12 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
         </section>
 
         {/* 5. GRATUIT / POUR LES FAMILLES
-            ⏸ Les deux offres payantes attendent l'accord écrit du rectorat :
-            « en préparation », prix envisagés, aucun bouton de paiement. */}
+            ✅ 02/11 : le rectorat n'exige aucune autorisation ; les offres
+            ouvrent fin décembre, quand les vidéos seront faites. Prix adapté à
+            chaque pays. Toujours aucun bouton de paiement avant l'ouverture. */}
         <section className="mt-12">
           <h2 className="text-2xl font-black sm:text-3xl">
-            {offresFamille ? "Ce qui est ouvert à tous, et ce qui viendra pour les familles" : "Pour les élèves et les professeurs"}
+            {offresFamille ? "Ce qui est ouvert à tous, et ce qui s'ouvre aux familles fin décembre" : "Pour les élèves et les professeurs"}
           </h2>
           <div className={`mt-6 grid gap-5 ${offresFamille ? "lg:grid-cols-3" : ""}`}>
             <div className="rounded-3xl border-2 border-emerald-300 bg-emerald-50/50 p-6">
@@ -350,7 +355,7 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
             {offresFamille && (
               <>
             <div className="rounded-3xl border border-slate-200 p-6">
-              <p className="text-sm font-black uppercase tracking-wide text-sky-700">En préparation</p>
+              <p className="text-sm font-black uppercase tracking-wide text-sky-700">Ouverture fin décembre 2026</p>
               <h3 className="mt-1 flex items-center gap-2 text-2xl font-black">
                 <Eye className="h-6 w-6 text-sky-700" aria-hidden="true" /> Le suivi famille
               </h3>
@@ -363,11 +368,12 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
                   </li>
                 ))}
               </ul>
-              <p className="mt-5 text-lg font-black">4,95 € par mois <span className="text-sm font-bold text-slate-500">· prix envisagé</span></p>
+              <p className="mt-5 text-lg font-black">4,95 € par mois en France</p>
+              <p className="text-sm text-slate-500">Un prix adapté à chaque pays, et sans engagement.</p>
             </div>
 
             <div className="rounded-3xl border border-slate-200 p-6">
-              <p className="text-sm font-black uppercase tracking-wide text-violet-700">En préparation</p>
+              <p className="text-sm font-black uppercase tracking-wide text-violet-700">À partir de janvier 2027</p>
               <h3 className="mt-1 flex items-center gap-2 text-2xl font-black">
                 <MonitorPlay className="h-6 w-6 text-violet-700" aria-hidden="true" /> Les cours en visio
               </h3>
@@ -375,14 +381,15 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
               <ul className="mt-4 space-y-2 text-slate-800">
                 {VISIO.map((v) => <Puce key={v}>{v}</Puce>)}
               </ul>
-              <p className="mt-5 text-lg font-black">12 € la séance <span className="text-sm font-bold text-slate-500">· prix envisagé</span></p>
+              <p className="mt-5 text-lg font-black">12 € la séance en France</p>
+              <p className="text-sm text-slate-500">Un prix adapté à chaque pays.</p>
             </div>
               </>
             )}
           </div>
           {offresFamille && (
             <p className="mt-4 text-sm text-slate-500">
-            Les offres pour les familles ouvriront plus tard. Elles ne s&apos;adressent ni aux établissements, ni aux élèves de son professeur.
+            Le suivi famille ouvre fin décembre 2026, les cours en visio en janvier. Ces offres ne s&apos;adressent ni aux établissements, ni aux élèves de son professeur.
           </p>
           )}
         </section>

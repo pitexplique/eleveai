@@ -84,6 +84,11 @@
 // que je n'ai pas le feu vert du rectorat ».
 // 👉 LE CONTENU VIT DANS ./AccueilSuivi.tsx ; `offresFamille={false}` ici.
 // ⛔ Ne passer `offresFamille` à vrai qu'avec l'accord ÉCRIT du rectorat (cumul).
+// ✅ 02/11/2026 — PASSÉ À VRAI. Frédéric a téléphoné au rectorat : aucune
+// autorisation n'est nécessaire pour être indépendant (la limite d'heures ne
+// vaut que s'il est salarié d'une autre entreprise). Et : « dans la page
+// d'accueil on croit que tout est gratuit ». Les offres sont annoncées pour fin
+// décembre (quand les vidéos seront faites) ; toujours aucun bouton de paiement.
 // 👉 RETOUR ARRIÈRE : l'accueil du 23/10 (AccueilCoach + journal plié) est
 // entier dans le commit 3104f1c2 :
 //     git show 3104f1c2:app/accueil/page.tsx > app/accueil/page.tsx
@@ -99,5 +104,5 @@ export { metadata } from "./metadata";
 export const revalidate = 3600;
 
 export default function AccueilPage() {
-  return <AccueilSuivi offresFamille={false} />;
+  return <AccueilSuivi offresFamille />;
 }
