@@ -823,3 +823,35 @@ Source : ordres de grandeur de physiologie (eau ≈ 60 %, sang ≈ 7 %). Bords 0
 ]
 ```
 Source : Citepa, Secten 2024. Bords 0 (2 mp4). Défauts mineurs : étiquettes « 30 % » / « 20 % » du short qui débordent un peu de leurs tranches ; pendant la question du short, l'écran n'a que du texte.
+
+### STMG 05 — nature-pourcentage (id `stmg-prop-nature-pourcentage[-short]` ; micro `auto_evo_nature_pourcentage`)
+- Paysage (3:41, orange ; Moussa, journaliste de données sportives : médailles françaises Tokyo 33 (10 or) → Paris 2024 64 (16 or) ; proportion ou évolution, points ou pour cent ; défi 200 000 € / 110 000). Centres : `["sport"]`.
+```json
+"questions": [
+ {"t":"01:14","question":"« Les ventes ont progressé de 32 % en un an. » Ce pourcentage est :","choix":["une proportion","une évolution","les deux"],"reponse":1,"explication":"On compare les ventes à deux dates : c'est une évolution."},
+ {"t":"02:06","question":"La part de l'or passe de 30 % à 25 %. Elle a baissé de :","choix":["5 %","5 points","25 %"],"reponse":1,"explication":"Entre deux proportions, la différence se compte en points : 30 − 25 = 5 points."}
+]
+```
+- Short (1:08, blanche, « Points ou pour cent ? » : e-commerce 10 % → 11 % du commerce de détail). Centres : `["argent-budget"]`. Question en commentaire : 20 % → 25 % (5 points, + 25 %).
+```json
+"questions": [
+ {"t":"00:23","question":"Une part passe de 20 % à 30 %. Elle a augmenté de :","choix":["10 %","10 points, soit 50 %","30 %"],"reponse":1,"explication":"30 − 20 = 10 points. 10 ÷ 20 = 0,5 : + 50 %."}
+]
+```
+Sources : tableaux officiels des médailles (Tokyo 2021, Paris 2024) ; Fevad, 2024. Bords 0 (2 mp4). Défauts mineurs : loupe du short sur l'étiquette « 11 % » ; figure de « Ce que tu as appris » petite.
+
+### STMG 06 — taux-equivalent (id `stmg-prop-taux-equivalent[-short]` ; micro `suiteT_taux_equivalent_proportionnel`, notion `suite_comparer`, terminale)
+- Paysage (4:06, bleue ; Emma, conseillère bancaire : Livret A 3 % par an ; proportionnel 0,25 % → 3,04 % ; équivalent 1,03^(1/12) ≈ 1,002466 → ≈ 0,247 % ; piège 1 % par mois ≠ 12 % ; défi trimestres 12 % → 3 % / 2,87 %). Centres : `["argent-budget"]`.
+```json
+"questions": [
+ {"t":"01:12","question":"Un taux annuel de 6 %. Quel est le taux mensuel proportionnel ?","choix":["0,5 %","72 %","6 %"],"reponse":0,"explication":"6 % ÷ 12 = 0,5 % par mois. B multiplie par 12 au lieu de diviser."},
+ {"t":"02:31","question":"Quel taux mensuel redonne exactement 3 % sur l'année ?","choix":["0,25 %","≈ 0,247 %","3 %"],"reponse":1,"explication":"1,002466 puissance 12 = 1,03. A est le taux proportionnel : il donne 3,04 %."}
+]
+```
+- Short (1:03, blanche, « La tirelire » : 100 € à + 1 % par mois → 112,68 €). Centres : `["argent-budget","jeux-defis"]`. Question en commentaire : 2 % par mois pendant 12 mois (≈ 26,8 %).
+```json
+"questions": [
+ {"t":"00:20","question":"1 % par mois pendant 12 mois. Combien sur l'année ?","choix":["12 %","≈ 12,7 %","1 %"],"reponse":1,"explication":"1,01 puissance 12 ≈ 1,1268 : ≈ 12,7 %. Les intérêts rapportent des intérêts."}
+]
+```
+Source : service-public.fr (Livret A à 3 % du 01/08/2023 au 31/01/2025 ; intérêts mensuels = hypothèse écrite à l'écran). Bords 0 (2 mp4). Défauts mineurs : numéros de mois qui s'effacent quand les cases s'animent.
