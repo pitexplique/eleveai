@@ -725,3 +725,37 @@ Sources : NASA Earth Observatory, « Sunrise to Sunset » (Earth Matters, 15/01/
 ]
 ```
 Bords 0 (les 4 mp4). Paysage rendue 3 fois en HD : le cadre vert de l'offre A chevauchait le titre « Offre B » dans « Ce que tu as appris » (carte B descendue de 0,45) ; la coche de la carte C touchait « elles se valent » (texte arrêté à 1,1 du bord droit dans `_disposer_q`).
+
+## LYCÉE — 2de, 1re automatismes, STMG (02/11/2026 ; voix validées `54283f04`, brief `manim/brief-agent-proportionnalite-lycee.md`)
+
+### 1re 04 — partie-tout (id `premiere-prop-partie-tout[-short]` ; micro `auto_prop_partie_connaissant_tout`)
+- Paysage (3:44, jaune ; Jade, ingénieure spatiale : ISS ≈ 90 % de la pesanteur, 800 N → 720 N ; Mars 38 %, Lune 16,5 % ; piège le complément 10 %). Centres : `["espace","sciences"]`.
+```json
+"questions": [
+ {"t":"01:04","question":"Sur Mars : environ 38 % de la force sur Terre. Poids au sol : 800 N. Sur Mars ?","choix":["304 N","838 N","21 N"],"reponse":0,"explication":"0,38 × 800 = 304 N. B : 800 + 38 ; C : 800 ÷ 38."},
+ {"t":"02:05","question":"Sur la Lune : environ 16,5 % de la force sur Terre. Un robot : 10 000 N au sol. Sur la Lune ?","choix":["1 650 N","165 N","8 350 N"],"reponse":0,"explication":"0,165 × 10 000 = 1 650 N. B : la virgule ; C : ce qui manque, 83,5 %."}
+]
+```
+- Short (0:59, blanche, mise à jour 60 Go, 35 % → 21 Go). Centres : `["jeux-video"]`. Question en commentaire : il reste 65 % (39 Go).
+```json
+"questions": [
+ {"t":"00:20","question":"La barre affiche 45 %. Combien de Go ?","choix":["27 Go","15 Go","105 Go"],"reponse":0,"explication":"0,45 × 60 = 27 Go."}
+]
+```
+Sources : NASA (ISS ≈ 400 km, g ≈ 8,7 m/s²) ; NASA Planetary Fact Sheets (Lune 1,62, Mars 3,71 m/s²). Bords 0 (2 mp4). Short rendu deux fois en HD (planche basse déf. sautée). Défauts mineurs : l'étiquette « 720 N » disparaît pendant la rotation de la station ; texte de la question 2 petit.
+
+### 2de 01 — proportion (id `seconde-prop-proportion[-short]` ; micro `info_proportion`)
+- Paysage (3:53, verte ; Aïcha, ingénieure forestière : forêt 17,6 Mha sur ≈ 55 → 32 % ; 75 % privée ; 4,4 Mha publics = 25 % de la forêt mais 8 % du territoire). Centres : `["nature-ecologie","histoire-geographie"]`.
+```json
+"questions": [
+ {"t":"00:53","question":"Les forêts des communes couvrent environ 2,8 millions d'hectares, sur les 17,6 millions de la forêt. Quelle proportion de la forêt ?","choix":["16 %","2,8 %","6,3"],"reponse":0,"explication":"2,8 ÷ 17,6 ≈ 0,16, soit 16 %. B recopie la partie, C divise le tout par la partie."},
+ {"t":"02:08","question":"4,4 millions d'hectares de forêt publique, sur 55 millions d'hectares de territoire. Quel pourcentage du territoire ?","choix":["25 %","8 %","32 %"],"reponse":1,"explication":"4,4 ÷ 55 = 0,08, soit 8 %. A se trompe de référence (c'est la part de la forêt), C c'est toute la forêt."}
+]
+```
+- Short (0:53, blanche, taux de j'aime 150 / 2 000 = 7,5 %). Centres : `["reseaux-sociaux"]`. Question en commentaire : 1 200 vues, 54 j'aime (4,5 %).
+```json
+"questions": [
+ {"t":"00:16","question":"500 vues, 40 j'aime. Quel taux ?","choix":["8 %","40 %","12,5"],"reponse":0,"explication":"40 ÷ 500 = 0,08, soit 8 %."}
+]
+```
+Sources : SDES / IGN 2024 (17,6 Mha = 32 %) ; ministère de l'Écologie 2022 (≈ 75 % privée, 16 % communale, 9 % domaniale). Bords 0 (2 mp4). Défauts mineurs : textes des questions assez petits ; l'énoncé de la question 2 écrit « 4,4 Mha » (la figure dit « forêt publique »).
