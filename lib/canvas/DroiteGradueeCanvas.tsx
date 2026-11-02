@@ -12,6 +12,8 @@ type NumberLinePoint = {
   value: number;
   label?: string;
   color?: string;
+  /** Écrit sous l'axe, à l'aplomb du point (l'autre écriture du nombre). */
+  below?: string;
 };
 
 function clamp(value: number, min: number, max: number) {
@@ -74,6 +76,19 @@ export default function DroiteGradueeCanvas({ figure }: Props) {
     ticks.push(Math.round(v * 1000000) / 1000000);
   }
 
+  // Graduations secondaires, sans valeur écrite (les dixièmes entre 0 et 1).
+  // ⛔ 03/11/2026 : `minorStep` n'avait été ajouté qu'au composant de
+  // `lib/tutor-v4/components`, que le coach n'utilise pas : la micro 6e
+  // « Relier fraction et décimal » montrait une droite sans ses dixièmes.
+  const minorStep = figure.minorStep ?? 0;
+  const minorTicks: number[] = [];
+  if (minorStep > 0 && (max - min) / minorStep <= 60) {
+    for (let v = min; v <= max + 1e-9; v += minorStep) {
+      const t = Math.round(v * 1000000) / 1000000;
+      if (!ticks.some((m) => Math.abs(m - t) < 1e-9)) minorTicks.push(t);
+    }
+  }
+
   const axisStartX = valueToX(min, min, max, leftPad, rightPad, width);
   const axisEndX = valueToX(max, min, max, leftPad, rightPad, width);
 
@@ -119,7 +134,8 @@ export default function DroiteGradueeCanvas({ figure }: Props) {
   // donc 56 pour l'étage du bas, plus un cran par étage supplémentaire.
   const hautNecessaire = 56 + CRAN * (etages - 1);
   const axisY = Math.max(Math.round(height / 2), hautNecessaire);
-  const hauteurTotale = Math.max(height, axisY + BAS);
+  // L'écriture sous l'axe (`below`) se dessine à axisY + 46 : 20 px de plus.
+  const hauteurTotale = Math.max(height, axisY + BAS + (points.some((p) => p.below) ? 20 : 0));
 
   return (
     <div className="mx-auto w-full max-w-[320px] rounded-xl border border-slate-200 bg-white p-2 shadow-sm">
@@ -183,6 +199,24 @@ export default function DroiteGradueeCanvas({ figure }: Props) {
           strokeLinecap="round"
           strokeLinejoin="round"
         />
+
+        {/* Graduations secondaires */}
+        {showTicks &&
+          minorTicks.map((tick) => {
+            const x = valueToX(tick, min, max, leftPad, rightPad, width);
+            return (
+              <line
+                key={`minor-${tick}`}
+                x1={x}
+                y1={axisY - 5}
+                x2={x}
+                y2={axisY + 5}
+                stroke="#0f172a"
+                strokeWidth={1.4}
+                strokeLinecap="round"
+              />
+            );
+          })}
 
         {/* Graduations */}
         {showTicks &&
@@ -281,6 +315,23 @@ export default function DroiteGradueeCanvas({ figure }: Props) {
                 />
 
                 <circle cx={x} cy={axisY - 24} r={5} fill={pointColor} />
+
+                {/* l'autre écriture, sous l'axe */}
+                {pt.below ? (
+                  <text
+                    x={x}
+                    y={axisY + 46}
+                    textAnchor="middle"
+                    fontSize="14"
+                    fontWeight="900"
+                    fill={pointColor}
+                    stroke="white"
+                    strokeWidth="2"
+                    paintOrder="stroke"
+                  >
+                    {pt.below}
+                  </text>
+                ) : null}
 
                 {showPointLabels && pt.label ? (
                   (() => {
