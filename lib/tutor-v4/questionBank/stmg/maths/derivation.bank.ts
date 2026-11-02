@@ -27,6 +27,7 @@
 // « problèmes d'optimisation » sont cités comme l'usage principal.
 
 import type { CanvasFigure, TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { renfortDerivation } from "./derivation-renfort";
 
 /* ─────────────────────────── outils ─────────────────────────── */
 
@@ -184,7 +185,7 @@ const PRODUCTIONS = [
   { objet: "des sacs isothermes", unite: "sacs", un: "un sac", chacun: "chacun", genre: "m" },
 ] as const;
 
-export const derivationBank: TutorBankItemV4[] = [
+const anciens: TutorBankItemV4[] = [
   /* ═══════════════════ der_secante_tracer ═══════════════════ */
 
   {
@@ -3086,4 +3087,33 @@ export const derivationBank: TutorBankItemV4[] = [
       };
     },
   },
+];
+
+/* 02/11/2026 — renfort (derivation-renfort.ts). Mesure du 02/11 : 2 à 149
+   squelettes par micro, 1,7 à 18 répétitions sur 20. On garde les gabarits
+   qui varient déjà (30 squelettes et plus, ou des pièges bien pensés) et qui
+   respectent les consignes (QCM ou réponse courte, jamais « open ») ; les
+   générateurs du renfort remplacent les autres. */
+const GARDES = new Set([
+  "stmg_der_tg_equation_tpl_1",
+  "stmg_der_tg_verifier_tpl_1",
+  "stmg_der_f_somme_tpl_1",
+  "stmg_der_f_somme_tpl_2",
+  "stmg_der_f_somme_tpl_valeur",
+  "stmg_der_f_kf_tpl_fraction",
+  "stmg_der_f_kf_tpl_facteur",
+  "stmg_der_p_degre2_tpl_2",
+  "stmg_der_p_degre3_tpl_1",
+  "stmg_der_p_degre3_tpl_2",
+  "stmg_der_p_nd_tpl_1",
+  "stmg_der_p_nombre_derive_tpl_2",
+  "stmg_der_p_factorisee_tpl_1",
+  "stmg_der_v_signe_tpl_1",
+  "stmg_der_v_tableau_tpl_2",
+  "stmg_der_v_extremum_tpl_1",
+]);
+
+export const derivationBank: TutorBankItemV4[] = [
+  ...anciens.filter((i) => GARDES.has(i.id)),
+  ...renfortDerivation,
 ];
