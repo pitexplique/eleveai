@@ -8147,6 +8147,114 @@
   "youtube": null,
   "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_variance&display=simple"
  },
+ "premiere-prop-appliquer": {
+  "fichier": "premiere/maths/proportionnalite/03-appliquer/eleveai-maths-premiere-prop-appliquer.mp4",
+  "poster": "premiere/maths/proportionnalite/03-appliquer/eleveai-maths-premiere-prop-appliquer.png",
+  "vignette": "premiere/maths/proportionnalite/03-appliquer/eleveai-maths-premiere-prop-appliquer.vignette.webp",
+  "titre": "Combien de kilos d'eau dans ton corps ? — Appliquer une proportion — épisode 3 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_proportion&microId=auto_prop_appliquer&display=simple"
+ },
+ "premiere-prop-appliquer-short": {
+  "fichier": "premiere/maths/proportionnalite/03-appliquer/eleveai-maths-premiere-prop-appliquer-short.mp4",
+  "poster": "premiere/maths/proportionnalite/03-appliquer/eleveai-maths-premiere-prop-appliquer-short.png",
+  "vignette": "premiere/maths/proportionnalite/03-appliquer/eleveai-maths-premiere-prop-appliquer-short.vignette.webp",
+  "titre": "8 % de 50 ? Le truc des pros du calcul mental 🧠 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_proportion&microId=auto_prop_appliquer&display=simple"
+ },
+ "premiere-prop-calculer": {
+  "fichier": "premiere/maths/proportionnalite/01-calculer/eleveai-maths-premiere-prop-calculer.mp4",
+  "poster": "premiere/maths/proportionnalite/01-calculer/eleveai-maths-premiere-prop-calculer.png",
+  "vignette": "premiere/maths/proportionnalite/01-calculer/eleveai-maths-premiere-prop-calculer.vignette.webp",
+  "titre": "Le nucléaire fait-il 67 % de notre électricité ? — Calculer une proportion — épisode 1 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_proportion&microId=auto_prop_calculer&display=simple"
+ },
+ "premiere-prop-calculer-short": {
+  "fichier": "premiere/maths/proportionnalite/01-calculer/eleveai-maths-premiere-prop-calculer-short.mp4",
+  "poster": "premiere/maths/proportionnalite/01-calculer/eleveai-maths-premiere-prop-calculer-short.png",
+  "vignette": "premiere/maths/proportionnalite/01-calculer/eleveai-maths-premiere-prop-calculer-short.vignette.webp",
+  "titre": "Le refrain prend combien de ta chanson ? 🎵 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_proportion&microId=auto_prop_calculer&display=simple"
+ },
+ "premiere-prop-formes": {
+  "fichier": "premiere/maths/proportionnalite/02-formes/eleveai-maths-premiere-prop-formes.mp4",
+  "poster": "premiere/maths/proportionnalite/02-formes/eleveai-maths-premiere-prop-formes.png",
+  "vignette": "premiere/maths/proportionnalite/02-formes/eleveai-maths-premiere-prop-formes.vignette.webp",
+  "titre": "3 % de l'eau est douce : 0,3 ou 0,03 ? — Fraction, décimal, pourcentage — épisode 2 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_proportion&microId=auto_prop_formes&display=simple"
+ },
+ "premiere-prop-formes-short": {
+  "fichier": "premiere/maths/proportionnalite/02-formes/eleveai-maths-premiere-prop-formes-short.mp4",
+  "poster": "premiere/maths/proportionnalite/02-formes/eleveai-maths-premiere-prop-formes-short.png",
+  "vignette": "premiere/maths/proportionnalite/02-formes/eleveai-maths-premiere-prop-formes-short.vignette.webp",
+  "titre": "Trouve l'intrus : 1/2, 0,5, 5 %, 50 % 🧩 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_proportion&microId=auto_prop_formes&display=simple"
+ },
+ "premiere-prop-partie-tout": {
+  "fichier": "premiere/maths/proportionnalite/04-partie-tout/eleveai-maths-premiere-prop-partie-tout.mp4",
+  "poster": "premiere/maths/proportionnalite/04-partie-tout/eleveai-maths-premiere-prop-partie-tout.png",
+  "vignette": "premiere/maths/proportionnalite/04-partie-tout/eleveai-maths-premiere-prop-partie-tout.vignette.webp",
+  "titre": "Dans l'ISS, pèse-t-on vraiment zéro ? — La partie connaissant le tout — épisode 4 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_partie_tout&microId=auto_prop_partie_connaissant_tout&display=simple"
+ },
+ "premiere-prop-partie-tout-short": {
+  "fichier": "premiere/maths/proportionnalite/04-partie-tout/eleveai-maths-premiere-prop-partie-tout-short.mp4",
+  "poster": "premiere/maths/proportionnalite/04-partie-tout/eleveai-maths-premiere-prop-partie-tout-short.png",
+  "vignette": "premiere/maths/proportionnalite/04-partie-tout/eleveai-maths-premiere-prop-partie-tout-short.vignette.webp",
+  "titre": "Ta mise à jour de 60 Go en est où ? 🎮 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_partie_tout&microId=auto_prop_partie_connaissant_tout&display=simple"
+ },
+ "premiere-prop-pourcentage-de-pourcentage": {
+  "fichier": "premiere/maths/proportionnalite/06-pourcentage-de-pourcentage/eleveai-maths-premiere-prop-pourcentage-de-pourcentage.mp4",
+  "poster": "premiere/maths/proportionnalite/06-pourcentage-de-pourcentage/eleveai-maths-premiere-prop-pourcentage-de-pourcentage.png",
+  "vignette": "premiere/maths/proportionnalite/06-pourcentage-de-pourcentage/eleveai-maths-premiere-prop-pourcentage-de-pourcentage.vignette.webp",
+  "titre": "31 % de 38 %, ça fait combien ? — Un pourcentage d'un pourcentage — épisode 6 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_partie_tout&microId=auto_prop_pourcentage_de_pourcentage&display=simple"
+ },
+ "premiere-prop-pourcentage-de-pourcentage-short": {
+  "fichier": "premiere/maths/proportionnalite/06-pourcentage-de-pourcentage/eleveai-maths-premiere-prop-pourcentage-de-pourcentage-short.mp4",
+  "poster": "premiere/maths/proportionnalite/06-pourcentage-de-pourcentage/eleveai-maths-premiere-prop-pourcentage-de-pourcentage-short.png",
+  "vignette": "premiere/maths/proportionnalite/06-pourcentage-de-pourcentage/eleveai-maths-premiere-prop-pourcentage-de-pourcentage-short.vignette.webp",
+  "titre": "50 % de 50 %, ça fait 100 % ? ⚽ — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_partie_tout&microId=auto_prop_pourcentage_de_pourcentage&display=simple"
+ },
+ "premiere-prop-tout-partie": {
+  "fichier": "premiere/maths/proportionnalite/05-tout-partie/eleveai-maths-premiere-prop-tout-partie.mp4",
+  "poster": "premiere/maths/proportionnalite/05-tout-partie/eleveai-maths-premiere-prop-tout-partie.png",
+  "vignette": "premiere/maths/proportionnalite/05-tout-partie/eleveai-maths-premiere-prop-tout-partie.vignette.webp",
+  "titre": "Transports : 126,8 Mt, mais sur combien ? — Le tout connaissant la partie — épisode 5 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_partie_tout&microId=auto_prop_tout_connaissant_partie&display=simple"
+ },
+ "premiere-prop-tout-partie-short": {
+  "fichier": "premiere/maths/proportionnalite/05-tout-partie/eleveai-maths-premiere-prop-tout-partie-short.mp4",
+  "poster": "premiere/maths/proportionnalite/05-tout-partie/eleveai-maths-premiere-prop-tout-partie-short.png",
+  "vignette": "premiere/maths/proportionnalite/05-tout-partie/eleveai-maths-premiere-prop-tout-partie-short.vignette.webp",
+  "titre": "30 % de batterie = 1 200 mAh. Et pleine ? 🔋 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_partie_tout&microId=auto_prop_tout_connaissant_partie&display=simple"
+ },
  "puissances": {
   "fichier": "seconde/maths/paysage/fr/puissances/eleveai-maths-seconde-puissances.mp4",
   "poster": null,
@@ -8596,6 +8704,42 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=seconde&matiere=maths&notion=probabilites_ensemble_fini&microId=proba_vocabulaire&display=simple"
+ },
+ "seconde-prop-pourcentage-de-pourcentage": {
+  "fichier": "seconde/maths/proportionnalite/02-pourcentage-de-pourcentage/eleveai-maths-seconde-prop-pourcentage-de-pourcentage.mp4",
+  "poster": "seconde/maths/proportionnalite/02-pourcentage-de-pourcentage/eleveai-maths-seconde-prop-pourcentage-de-pourcentage.png",
+  "vignette": "seconde/maths/proportionnalite/02-pourcentage-de-pourcentage/eleveai-maths-seconde-prop-pourcentage-de-pourcentage.vignette.webp",
+  "titre": "31 % de 38 %, ça fait combien ? — Un pourcentage d'un pourcentage — épisode 2 · Maths 2de",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=information_chiffree_evolutions&microId=info_pourcentage_de_pourcentage&display=simple"
+ },
+ "seconde-prop-pourcentage-de-pourcentage-short": {
+  "fichier": "seconde/maths/proportionnalite/02-pourcentage-de-pourcentage/eleveai-maths-seconde-prop-pourcentage-de-pourcentage-short.mp4",
+  "poster": "seconde/maths/proportionnalite/02-pourcentage-de-pourcentage/eleveai-maths-seconde-prop-pourcentage-de-pourcentage-short.png",
+  "vignette": "seconde/maths/proportionnalite/02-pourcentage-de-pourcentage/eleveai-maths-seconde-prop-pourcentage-de-pourcentage-short.vignette.webp",
+  "titre": "50 % de 50 %, ça fait 100 % ? ⚽ — 2de #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=information_chiffree_evolutions&microId=info_pourcentage_de_pourcentage&display=simple"
+ },
+ "seconde-prop-proportion": {
+  "fichier": "seconde/maths/proportionnalite/01-proportion/eleveai-maths-seconde-prop-proportion.mp4",
+  "poster": "seconde/maths/proportionnalite/01-proportion/eleveai-maths-seconde-prop-proportion.png",
+  "vignette": "seconde/maths/proportionnalite/01-proportion/eleveai-maths-seconde-prop-proportion.vignette.webp",
+  "titre": "La forêt couvre-t-elle 32 % de la France ? — Calculer une proportion — épisode 1 · Maths 2de",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=information_chiffree_evolutions&microId=info_proportion&display=simple"
+ },
+ "seconde-prop-proportion-short": {
+  "fichier": "seconde/maths/proportionnalite/01-proportion/eleveai-maths-seconde-prop-proportion-short.mp4",
+  "poster": "seconde/maths/proportionnalite/01-proportion/eleveai-maths-seconde-prop-proportion-short.png",
+  "vignette": "seconde/maths/proportionnalite/01-proportion/eleveai-maths-seconde-prop-proportion-short.vignette.webp",
+  "titre": "Ton taux de j'aime, comme les pros 📱 — 2de #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=information_chiffree_evolutions&microId=info_proportion&display=simple"
  },
  "seconde-signes-expression": {
   "fichier": "seconde/maths/paysage/fr/signes-expression/eleveai-maths-seconde-signes-expression.mp4",
@@ -9676,6 +9820,114 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=stmg&matiere=maths&notion=va_loi_probabilite&microId=va_ecritures&display=simple"
+ },
+ "stmg-prop-appliquer": {
+  "fichier": "stmg/maths/proportionnalite/03-appliquer/eleveai-maths-stmg-prop-appliquer.mp4",
+  "poster": "stmg/maths/proportionnalite/03-appliquer/eleveai-maths-stmg-prop-appliquer.png",
+  "vignette": "stmg/maths/proportionnalite/03-appliquer/eleveai-maths-stmg-prop-appliquer.vignette.webp",
+  "titre": "Combien de kilos d'eau dans ton corps ? — Appliquer une proportion — épisode 3 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_proportion&microId=auto_prop_appliquer&display=simple"
+ },
+ "stmg-prop-appliquer-short": {
+  "fichier": "stmg/maths/proportionnalite/03-appliquer/eleveai-maths-stmg-prop-appliquer-short.mp4",
+  "poster": "stmg/maths/proportionnalite/03-appliquer/eleveai-maths-stmg-prop-appliquer-short.png",
+  "vignette": "stmg/maths/proportionnalite/03-appliquer/eleveai-maths-stmg-prop-appliquer-short.vignette.webp",
+  "titre": "8 % de 50 ? Le truc des pros du calcul mental 🧠 — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_proportion&microId=auto_prop_appliquer&display=simple"
+ },
+ "stmg-prop-calculer": {
+  "fichier": "stmg/maths/proportionnalite/01-calculer/eleveai-maths-stmg-prop-calculer.mp4",
+  "poster": "stmg/maths/proportionnalite/01-calculer/eleveai-maths-stmg-prop-calculer.png",
+  "vignette": "stmg/maths/proportionnalite/01-calculer/eleveai-maths-stmg-prop-calculer.vignette.webp",
+  "titre": "Le nucléaire fait-il 67 % de notre électricité ? — Calculer une proportion — épisode 1 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_proportion&microId=auto_prop_calculer&display=simple"
+ },
+ "stmg-prop-calculer-short": {
+  "fichier": "stmg/maths/proportionnalite/01-calculer/eleveai-maths-stmg-prop-calculer-short.mp4",
+  "poster": "stmg/maths/proportionnalite/01-calculer/eleveai-maths-stmg-prop-calculer-short.png",
+  "vignette": "stmg/maths/proportionnalite/01-calculer/eleveai-maths-stmg-prop-calculer-short.vignette.webp",
+  "titre": "Le refrain prend combien de ta chanson ? 🎵 — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_proportion&microId=auto_prop_calculer&display=simple"
+ },
+ "stmg-prop-formes": {
+  "fichier": "stmg/maths/proportionnalite/02-formes/eleveai-maths-stmg-prop-formes.mp4",
+  "poster": "stmg/maths/proportionnalite/02-formes/eleveai-maths-stmg-prop-formes.png",
+  "vignette": "stmg/maths/proportionnalite/02-formes/eleveai-maths-stmg-prop-formes.vignette.webp",
+  "titre": "3 % de l'eau est douce : 0,3 ou 0,03 ? — Fraction, décimal, pourcentage — épisode 2 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_proportion&microId=auto_prop_formes&display=simple"
+ },
+ "stmg-prop-formes-short": {
+  "fichier": "stmg/maths/proportionnalite/02-formes/eleveai-maths-stmg-prop-formes-short.mp4",
+  "poster": "stmg/maths/proportionnalite/02-formes/eleveai-maths-stmg-prop-formes-short.png",
+  "vignette": "stmg/maths/proportionnalite/02-formes/eleveai-maths-stmg-prop-formes-short.vignette.webp",
+  "titre": "Trouve l'intrus : 1/2, 0,5, 5 %, 50 % 🧩 — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_proportion&microId=auto_prop_formes&display=simple"
+ },
+ "stmg-prop-nature-pourcentage": {
+  "fichier": "stmg/maths/proportionnalite/05-nature-pourcentage/eleveai-maths-stmg-prop-nature-pourcentage.mp4",
+  "poster": "stmg/maths/proportionnalite/05-nature-pourcentage/eleveai-maths-stmg-prop-nature-pourcentage.png",
+  "vignette": "stmg/maths/proportionnalite/05-nature-pourcentage/eleveai-maths-stmg-prop-nature-pourcentage.vignette.webp",
+  "titre": "64 médailles : la part de l'or a-t-elle baissé ? — Proportion ou évolution — épisode 5 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_taux&microId=auto_evo_nature_pourcentage&display=simple"
+ },
+ "stmg-prop-nature-pourcentage-short": {
+  "fichier": "stmg/maths/proportionnalite/05-nature-pourcentage/eleveai-maths-stmg-prop-nature-pourcentage-short.mp4",
+  "poster": "stmg/maths/proportionnalite/05-nature-pourcentage/eleveai-maths-stmg-prop-nature-pourcentage-short.png",
+  "vignette": "stmg/maths/proportionnalite/05-nature-pourcentage/eleveai-maths-stmg-prop-nature-pourcentage-short.vignette.webp",
+  "titre": "+1 point ou +10 % ? Le piège des infos 📰 — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_taux&microId=auto_evo_nature_pourcentage&display=simple"
+ },
+ "stmg-prop-pourcentage-de-pourcentage": {
+  "fichier": "stmg/maths/proportionnalite/04-pourcentage-de-pourcentage/eleveai-maths-stmg-prop-pourcentage-de-pourcentage.mp4",
+  "poster": "stmg/maths/proportionnalite/04-pourcentage-de-pourcentage/eleveai-maths-stmg-prop-pourcentage-de-pourcentage.png",
+  "vignette": "stmg/maths/proportionnalite/04-pourcentage-de-pourcentage/eleveai-maths-stmg-prop-pourcentage-de-pourcentage.vignette.webp",
+  "titre": "31 % de 38 %, ça fait combien ? — Un pourcentage d'un pourcentage — épisode 4 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_proportion&microId=auto_prop_de_proportion&display=simple"
+ },
+ "stmg-prop-pourcentage-de-pourcentage-short": {
+  "fichier": "stmg/maths/proportionnalite/04-pourcentage-de-pourcentage/eleveai-maths-stmg-prop-pourcentage-de-pourcentage-short.mp4",
+  "poster": "stmg/maths/proportionnalite/04-pourcentage-de-pourcentage/eleveai-maths-stmg-prop-pourcentage-de-pourcentage-short.png",
+  "vignette": "stmg/maths/proportionnalite/04-pourcentage-de-pourcentage/eleveai-maths-stmg-prop-pourcentage-de-pourcentage-short.vignette.webp",
+  "titre": "50 % de 50 %, ça fait 100 % ? ⚽ — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_proportion&microId=auto_prop_de_proportion&display=simple"
+ },
+ "stmg-prop-taux-equivalent": {
+  "fichier": "stmg/maths/proportionnalite/06-taux-equivalent/eleveai-maths-stmg-prop-taux-equivalent.mp4",
+  "poster": "stmg/maths/proportionnalite/06-taux-equivalent/eleveai-maths-stmg-prop-taux-equivalent.png",
+  "vignette": "stmg/maths/proportionnalite/06-taux-equivalent/eleveai-maths-stmg-prop-taux-equivalent.vignette.webp",
+  "titre": "3 % par an : combien par mois ? — Taux proportionnel, taux équivalent — épisode 6 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=suite_comparer&microId=suiteT_taux_equivalent_proportionnel&display=simple"
+ },
+ "stmg-prop-taux-equivalent-short": {
+  "fichier": "stmg/maths/proportionnalite/06-taux-equivalent/eleveai-maths-stmg-prop-taux-equivalent-short.mp4",
+  "poster": "stmg/maths/proportionnalite/06-taux-equivalent/eleveai-maths-stmg-prop-taux-equivalent-short.png",
+  "vignette": "stmg/maths/proportionnalite/06-taux-equivalent/eleveai-maths-stmg-prop-taux-equivalent-short.vignette.webp",
+  "titre": "1 % par mois, ça fait 12 % par an ? 🐷 — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=suite_comparer&microId=suiteT_taux_equivalent_proportionnel&display=simple"
  },
  "stmg-stats-ajust-au-juge": {
   "fichier": "stmg/maths/statistiques/21-ajust-au-juge/eleveai-maths-stmg-stats-ajust-au-juge.mp4",

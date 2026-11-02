@@ -53462,6 +53462,1977 @@
         "ceinture noire",
         "Shorts"
       ]
+    },
+    {
+      "id": "seconde-prop-proportion",
+      "notionId": "information_chiffree_evolutions",
+      "microId": "info_proportion",
+      "classe": "seconde",
+      "ceinture": "verte",
+      "serie": "Maths 2de",
+      "type": "longue",
+      "fichier": "seconde/maths/proportionnalite/01-proportion/eleveai-maths-seconde-prop-proportion.mp4",
+      "miniature": "seconde/maths/proportionnalite/01-proportion/eleveai-maths-seconde-prop-proportion.png",
+      "titre": "La forêt couvre-t-elle 32 % de la France ? — Calculer une proportion — épisode 1 · Maths 2de",
+      "accroche": "Aïcha est ingénieure forestière. La forêt couvre 17,6 millions d'hectares en France métropolitaine, sur environ 55. Quelle part du territoire ? Et la forêt publique : 25 % ou 8 % ?\n\nDans cette vidéo :\n• une proportion = la partie ÷ le tout : 17,6 ÷ 55 ≈ 0,32, soit 32 %\n• en fraction, en décimal, en pourcentage : trois écritures du même nombre\n• le même nombre, deux touts : 4,4 Mha publics = 25 % de la forêt, mais 8 % du territoire\n• le piège : toujours se demander « pour cent de quoi ? »\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : les forêts de l'État couvrent environ 1,6 million d'hectares : quel pourcentage de la forêt ? et du territoire ?\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/seconde/information-chiffree-evolutions\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/seconde/information-chiffree-evolutions\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=information_chiffree_evolutions&microId=info_proportion&display=simple\n\nSource : SDES / IGN, 2024 ; ministère de l'Écologie, 2022.\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Aïcha, ingénieure forestière"
+        ],
+        [
+          "00:22",
+          "17,6 ÷ 55 ≈ 32 %"
+        ],
+        [
+          "00:39",
+          "75 % privée, 25 % publique"
+        ],
+        [
+          "00:53",
+          "Question : les forêts des communes"
+        ],
+        [
+          "01:34",
+          "4,4 Mha : 25 % ou 8 % ?"
+        ],
+        [
+          "01:52",
+          "Le piège : pour cent de quoi ?"
+        ],
+        [
+          "02:08",
+          "Question : la part du territoire"
+        ],
+        [
+          "02:50",
+          "À toi de jouer"
+        ],
+        [
+          "03:10",
+          "Correction"
+        ],
+        [
+          "03:29",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/information-chiffree-evolutions",
+      "tags": [
+        "proportion",
+        "calculer une proportion",
+        "pourcentage",
+        "information chiffrée",
+        "forêt",
+        "ingénieure forestière",
+        "écologie",
+        "proportionnalité",
+        "pourcentages",
+        "maths",
+        "seconde",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:53",
+          "question": "Les forêts des communes couvrent environ 2,8 millions d'hectares, sur les 17,6 millions de la forêt. Quelle proportion de la forêt ?",
+          "choix": [
+            "16 %",
+            "2,8 %",
+            "6,3"
+          ],
+          "reponse": 0,
+          "explication": "2,8 ÷ 17,6 ≈ 0,16, soit 16 %. B recopie la partie, C divise le tout par la partie."
+        },
+        {
+          "t": "02:08",
+          "question": "4,4 millions d'hectares de forêt publique, sur 55 millions d'hectares de territoire. Quel pourcentage du territoire ?",
+          "choix": [
+            "25 %",
+            "8 %",
+            "32 %"
+          ],
+          "reponse": 1,
+          "explication": "4,4 ÷ 55 = 0,08, soit 8 %. A se trompe de référence (c'est la part de la forêt), C c'est toute la forêt."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "histoire-geographie"
+      ]
+    },
+    {
+      "id": "seconde-prop-proportion-short",
+      "notionId": "information_chiffree_evolutions",
+      "microId": "info_proportion",
+      "classe": "seconde",
+      "ceinture": "blanche",
+      "serie": "Maths 2de",
+      "type": "short",
+      "renvoie_vers": "seconde-prop-proportion",
+      "fichier": "seconde/maths/proportionnalite/01-proportion/eleveai-maths-seconde-prop-proportion-short.mp4",
+      "miniature": "seconde/maths/proportionnalite/01-proportion/eleveai-maths-seconde-prop-proportion-short.png",
+      "titre": "Ton taux de j'aime, comme les pros 📱 — 2de #Shorts",
+      "accroche": "Ta vidéo fait 2 000 vues et 150 j'aime. Ton taux de j'aime ? 150 ÷ 2 000 = 0,075, soit 7,5 %. C'est le calcul que font les créateurs de contenu !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 1 200 vues et 54 j'aime : quel taux ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=information_chiffree_evolutions&microId=info_proportion&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #seconde #lycee",
+      "tags": [
+        "taux d'engagement",
+        "j'aime",
+        "réseaux sociaux",
+        "proportion",
+        "pourcentage",
+        "proportionnalité",
+        "maths",
+        "seconde",
+        "lycée",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "500 vues, 40 j'aime. Quel taux ?",
+          "choix": [
+            "8 %",
+            "40 %",
+            "12,5"
+          ],
+          "reponse": 0,
+          "explication": "40 ÷ 500 = 0,08, soit 8 %."
+        }
+      ],
+      "centres": [
+        "reseaux-sociaux"
+      ]
+    },
+    {
+      "id": "seconde-prop-pourcentage-de-pourcentage",
+      "notionId": "information_chiffree_evolutions",
+      "microId": "info_pourcentage_de_pourcentage",
+      "classe": "seconde",
+      "ceinture": "verte",
+      "serie": "Maths 2de",
+      "type": "longue",
+      "fichier": "seconde/maths/proportionnalite/02-pourcentage-de-pourcentage/eleveai-maths-seconde-prop-pourcentage-de-pourcentage.mp4",
+      "miniature": "seconde/maths/proportionnalite/02-pourcentage-de-pourcentage/eleveai-maths-seconde-prop-pourcentage-de-pourcentage.png",
+      "titre": "31 % de 38 %, ça fait combien ? — Un pourcentage d'un pourcentage — épisode 2 · Maths 2de",
+      "accroche": "Karim est analyste du commerce en ligne. En 2024, les Français ont dépensé 175,3 milliards d'euros en ligne ; environ 38 % pour des produits, et 31 % de ces produits passent par des places de marché. Quelle part du total ?\n\nDans cette vidéo :\n• une proportion d'une proportion : on multiplie les deux, en décimal : 0,31 × 0,38 ≈ 0,118, soit ≈ 11,8 %\n• on le voit sur un carré de 100 % découpé deux fois\n• vérification en euros : 0,31 × 66,9 ≈ 20,7 milliards\n• le piège : additionner 31 % et 38 % (69 %)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 40 % des salariés sont cadres, et 15 % des cadres télétravaillent : quelle part des salariés ? et sur 2 500 salariés ?\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/seconde/information-chiffree-evolutions\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/seconde/information-chiffree-evolutions\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=information_chiffree_evolutions&microId=info_pourcentage_de_pourcentage&display=simple\n\nSource : Fevad, bilan du e-commerce 2024.\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Karim, analyste du commerce en ligne"
+        ],
+        [
+          "00:32",
+          "31 % de 38 % : quelle part ?"
+        ],
+        [
+          "00:44",
+          "Le carré de 100 % découpé"
+        ],
+        [
+          "01:02",
+          "On multiplie : 0,31 × 0,38"
+        ],
+        [
+          "01:25",
+          "Question : 50 % de 40 %"
+        ],
+        [
+          "02:01",
+          "Le piège : additionner"
+        ],
+        [
+          "02:18",
+          "Question : les internes de terminale"
+        ],
+        [
+          "03:10",
+          "À toi de jouer"
+        ],
+        [
+          "03:30",
+          "Correction"
+        ],
+        [
+          "03:45",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/information-chiffree-evolutions",
+      "tags": [
+        "pourcentage de pourcentage",
+        "proportion de proportion",
+        "multiplier les pourcentages",
+        "e-commerce",
+        "analyste",
+        "commerce en ligne",
+        "proportionnalité",
+        "pourcentages",
+        "maths",
+        "seconde",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:25",
+          "question": "Combien font 50 % de 40 % ?",
+          "choix": [
+            "90 %",
+            "20 %",
+            "2 000 %"
+          ],
+          "reponse": 1,
+          "explication": "0,5 × 0,4 = 0,2 = 20 %. A additionne les deux pourcentages ; C multiplie 50 par 40 sans les écrire en décimal."
+        },
+        {
+          "t": "02:18",
+          "question": "Un lycée compte 1 200 élèves. 30 % sont en terminale, et parmi eux, 25 % sont internes. Combien d'internes en terminale ?",
+          "choix": [
+            "90",
+            "660",
+            "300"
+          ],
+          "reponse": 0,
+          "explication": "0,3 × 0,25 = 0,075 = 7,5 % du lycée ; 0,075 × 1 200 = 90 élèves. B additionne 30 et 25 % ; C prend 25 % de tout le lycée."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "seconde-prop-pourcentage-de-pourcentage-short",
+      "notionId": "information_chiffree_evolutions",
+      "microId": "info_pourcentage_de_pourcentage",
+      "classe": "seconde",
+      "ceinture": "blanche",
+      "serie": "Maths 2de",
+      "type": "short",
+      "renvoie_vers": "seconde-prop-pourcentage-de-pourcentage",
+      "fichier": "seconde/maths/proportionnalite/02-pourcentage-de-pourcentage/eleveai-maths-seconde-prop-pourcentage-de-pourcentage-short.mp4",
+      "miniature": "seconde/maths/proportionnalite/02-pourcentage-de-pourcentage/eleveai-maths-seconde-prop-pourcentage-de-pourcentage-short.png",
+      "titre": "50 % de 50 %, ça fait 100 % ? ⚽ — 2de #Shorts",
+      "accroche": "20 tirs, la moitié cadrés : 10. La moitié des cadrés finissent au fond : 5 buts. 5 sur 20, c'est 25 % : 50 % de 50 % = 25 %, pas 100 % !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 60 % de tirs cadrés, dont 30 % de buts : quelle part des tirs devient un but ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=information_chiffree_evolutions&microId=info_pourcentage_de_pourcentage&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #seconde #lycee",
+      "tags": [
+        "football",
+        "tirs cadrés",
+        "sport",
+        "pourcentage de pourcentage",
+        "statistiques",
+        "proportionnalité",
+        "maths",
+        "seconde",
+        "lycée",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:25",
+          "question": "40 % des tirs sont cadrés, et 50 % des tirs cadrés sont des buts. Quelle part des tirs devient un but ?",
+          "choix": [
+            "90 %",
+            "20 %",
+            "10 %"
+          ],
+          "reponse": 1,
+          "explication": "0,4 × 0,5 = 0,2, soit 20 % des tirs."
+        }
+      ],
+      "centres": [
+        "sport"
+      ]
+    },
+    {
+      "id": "premiere-prop-pourcentage-de-pourcentage",
+      "notionId": "auto_partie_tout",
+      "microId": "auto_prop_pourcentage_de_pourcentage",
+      "classe": "premiere",
+      "ceinture": "orange",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "fichier": "premiere/maths/proportionnalite/06-pourcentage-de-pourcentage/eleveai-maths-premiere-prop-pourcentage-de-pourcentage.mp4",
+      "miniature": "premiere/maths/proportionnalite/06-pourcentage-de-pourcentage/eleveai-maths-premiere-prop-pourcentage-de-pourcentage.png",
+      "titre": "31 % de 38 %, ça fait combien ? — Un pourcentage d'un pourcentage — épisode 6 · Maths 1re",
+      "accroche": "Karim est analyste du commerce en ligne. En 2024, les Français ont dépensé 175,3 milliards d'euros en ligne ; environ 38 % pour des produits, et 31 % de ces produits passent par des places de marché. Quelle part du total ?\n\nDans cette vidéo :\n• une proportion d'une proportion : on multiplie les deux, en décimal : 0,31 × 0,38 ≈ 0,118, soit ≈ 11,8 %\n• on le voit sur un carré de 100 % découpé deux fois\n• vérification en euros : 0,31 × 66,9 ≈ 20,7 milliards\n• le piège : additionner 31 % et 38 % (69 %)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : 40 % des salariés sont cadres, et 15 % des cadres télétravaillent : quelle part des salariés ? et sur 2 500 salariés ?\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-partie-tout\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_partie_tout&microId=auto_prop_pourcentage_de_pourcentage&display=simple\n\nSource : Fevad, bilan du e-commerce 2024.\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Karim, analyste du commerce en ligne"
+        ],
+        [
+          "00:32",
+          "31 % de 38 % : quelle part ?"
+        ],
+        [
+          "00:44",
+          "Le carré de 100 % découpé"
+        ],
+        [
+          "01:02",
+          "On multiplie : 0,31 × 0,38"
+        ],
+        [
+          "01:25",
+          "Question : 50 % de 40 %"
+        ],
+        [
+          "02:01",
+          "Le piège : additionner"
+        ],
+        [
+          "02:18",
+          "Question : les internes de terminale"
+        ],
+        [
+          "03:10",
+          "À toi de jouer"
+        ],
+        [
+          "03:30",
+          "Correction"
+        ],
+        [
+          "03:45",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "pourcentage de pourcentage",
+        "proportion de proportion",
+        "multiplier les pourcentages",
+        "e-commerce",
+        "analyste",
+        "commerce en ligne",
+        "proportionnalité",
+        "pourcentages",
+        "maths",
+        "1re",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:25",
+          "question": "Combien font 50 % de 40 % ?",
+          "choix": [
+            "90 %",
+            "20 %",
+            "2 000 %"
+          ],
+          "reponse": 1,
+          "explication": "0,5 × 0,4 = 0,2 = 20 %. A additionne les deux pourcentages ; C multiplie 50 par 40 sans les écrire en décimal."
+        },
+        {
+          "t": "02:18",
+          "question": "Un lycée compte 1 200 élèves. 30 % sont en terminale, et parmi eux, 25 % sont internes. Combien d'internes en terminale ?",
+          "choix": [
+            "90",
+            "660",
+            "300"
+          ],
+          "reponse": 0,
+          "explication": "0,3 × 0,25 = 0,075 = 7,5 % du lycée ; 0,075 × 1 200 = 90 élèves. B additionne 30 et 25 % ; C prend 25 % de tout le lycée."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "premiere-prop-pourcentage-de-pourcentage-short",
+      "notionId": "auto_partie_tout",
+      "microId": "auto_prop_pourcentage_de_pourcentage",
+      "classe": "premiere",
+      "ceinture": "blanche",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-prop-pourcentage-de-pourcentage",
+      "fichier": "premiere/maths/proportionnalite/06-pourcentage-de-pourcentage/eleveai-maths-premiere-prop-pourcentage-de-pourcentage-short.mp4",
+      "miniature": "premiere/maths/proportionnalite/06-pourcentage-de-pourcentage/eleveai-maths-premiere-prop-pourcentage-de-pourcentage-short.png",
+      "titre": "50 % de 50 %, ça fait 100 % ? ⚽ — 1re #Shorts",
+      "accroche": "20 tirs, la moitié cadrés : 10. La moitié des cadrés finissent au fond : 5 buts. 5 sur 20, c'est 25 % : 50 % de 50 % = 25 %, pas 100 % !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 60 % de tirs cadrés, dont 30 % de buts : quelle part des tirs devient un but ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_partie_tout&microId=auto_prop_pourcentage_de_pourcentage&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #1re #lycee",
+      "tags": [
+        "football",
+        "tirs cadrés",
+        "sport",
+        "pourcentage de pourcentage",
+        "statistiques",
+        "proportionnalité",
+        "maths",
+        "1re",
+        "lycée",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:25",
+          "question": "40 % des tirs sont cadrés, et 50 % des tirs cadrés sont des buts. Quelle part des tirs devient un but ?",
+          "choix": [
+            "90 %",
+            "20 %",
+            "10 %"
+          ],
+          "reponse": 1,
+          "explication": "0,4 × 0,5 = 0,2, soit 20 % des tirs."
+        }
+      ],
+      "centres": [
+        "sport"
+      ]
+    },
+    {
+      "id": "stmg-prop-pourcentage-de-pourcentage",
+      "notionId": "auto_proportion",
+      "microId": "auto_prop_de_proportion",
+      "classe": "stmg",
+      "ceinture": "orange",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/proportionnalite/04-pourcentage-de-pourcentage/eleveai-maths-stmg-prop-pourcentage-de-pourcentage.mp4",
+      "miniature": "stmg/maths/proportionnalite/04-pourcentage-de-pourcentage/eleveai-maths-stmg-prop-pourcentage-de-pourcentage.png",
+      "titre": "31 % de 38 %, ça fait combien ? — Un pourcentage d'un pourcentage — épisode 4 · Maths STMG",
+      "accroche": "Karim est analyste du commerce en ligne. En 2024, les Français ont dépensé 175,3 milliards d'euros en ligne ; environ 38 % pour des produits, et 31 % de ces produits passent par des places de marché. Quelle part du total ?\n\nDans cette vidéo :\n• une proportion d'une proportion : on multiplie les deux, en décimal : 0,31 × 0,38 ≈ 0,118, soit ≈ 11,8 %\n• on le voit sur un carré de 100 % découpé deux fois\n• vérification en euros : 0,31 × 66,9 ≈ 20,7 milliards\n• le piège : additionner 31 % et 38 % (69 %)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : 40 % des salariés sont cadres, et 15 % des cadres télétravaillent : quelle part des salariés ? et sur 2 500 salariés ?\n\nPour s'entraîner :\n• les exercices corrigés (automatismes de 1re) : https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-proportion\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=auto_proportion&microId=auto_prop_de_proportion&display=simple\n\nSource : Fevad, bilan du e-commerce 2024.\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Karim, analyste du commerce en ligne"
+        ],
+        [
+          "00:32",
+          "31 % de 38 % : quelle part ?"
+        ],
+        [
+          "00:44",
+          "Le carré de 100 % découpé"
+        ],
+        [
+          "01:02",
+          "On multiplie : 0,31 × 0,38"
+        ],
+        [
+          "01:25",
+          "Question : 50 % de 40 %"
+        ],
+        [
+          "02:01",
+          "Le piège : additionner"
+        ],
+        [
+          "02:18",
+          "Question : les internes de terminale"
+        ],
+        [
+          "03:10",
+          "À toi de jouer"
+        ],
+        [
+          "03:30",
+          "Correction"
+        ],
+        [
+          "03:45",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "pourcentage de pourcentage",
+        "proportion de proportion",
+        "multiplier les pourcentages",
+        "e-commerce",
+        "analyste",
+        "commerce en ligne",
+        "proportionnalité",
+        "pourcentages",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:25",
+          "question": "Combien font 50 % de 40 % ?",
+          "choix": [
+            "90 %",
+            "20 %",
+            "2 000 %"
+          ],
+          "reponse": 1,
+          "explication": "0,5 × 0,4 = 0,2 = 20 %. A additionne les deux pourcentages ; C multiplie 50 par 40 sans les écrire en décimal."
+        },
+        {
+          "t": "02:18",
+          "question": "Un lycée compte 1 200 élèves. 30 % sont en terminale, et parmi eux, 25 % sont internes. Combien d'internes en terminale ?",
+          "choix": [
+            "90",
+            "660",
+            "300"
+          ],
+          "reponse": 0,
+          "explication": "0,3 × 0,25 = 0,075 = 7,5 % du lycée ; 0,075 × 1 200 = 90 élèves. B additionne 30 et 25 % ; C prend 25 % de tout le lycée."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "stmg-prop-pourcentage-de-pourcentage-short",
+      "notionId": "auto_proportion",
+      "microId": "auto_prop_de_proportion",
+      "classe": "stmg",
+      "ceinture": "blanche",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-prop-pourcentage-de-pourcentage",
+      "fichier": "stmg/maths/proportionnalite/04-pourcentage-de-pourcentage/eleveai-maths-stmg-prop-pourcentage-de-pourcentage-short.mp4",
+      "miniature": "stmg/maths/proportionnalite/04-pourcentage-de-pourcentage/eleveai-maths-stmg-prop-pourcentage-de-pourcentage-short.png",
+      "titre": "50 % de 50 %, ça fait 100 % ? ⚽ — STMG #Shorts",
+      "accroche": "20 tirs, la moitié cadrés : 10. La moitié des cadrés finissent au fond : 5 buts. 5 sur 20, c'est 25 % : 50 % de 50 % = 25 %, pas 100 % !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 60 % de tirs cadrés, dont 30 % de buts : quelle part des tirs devient un but ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=auto_proportion&microId=auto_prop_de_proportion&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #stmg #lycee",
+      "tags": [
+        "football",
+        "tirs cadrés",
+        "sport",
+        "pourcentage de pourcentage",
+        "statistiques",
+        "proportionnalité",
+        "maths",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:25",
+          "question": "40 % des tirs sont cadrés, et 50 % des tirs cadrés sont des buts. Quelle part des tirs devient un but ?",
+          "choix": [
+            "90 %",
+            "20 %",
+            "10 %"
+          ],
+          "reponse": 1,
+          "explication": "0,4 × 0,5 = 0,2, soit 20 % des tirs."
+        }
+      ],
+      "centres": [
+        "sport"
+      ]
+    },
+    {
+      "id": "premiere-prop-calculer",
+      "notionId": "auto_proportion",
+      "microId": "auto_prop_calculer",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "fichier": "premiere/maths/proportionnalite/01-calculer/eleveai-maths-premiere-prop-calculer.mp4",
+      "miniature": "premiere/maths/proportionnalite/01-calculer/eleveai-maths-premiere-prop-calculer.png",
+      "titre": "Le nucléaire fait-il 67 % de notre électricité ? — Calculer une proportion — épisode 1 · Maths 1re",
+      "accroche": "Léa est ingénieure du réseau électrique. En 2024, la France a produit environ 539 TWh d'électricité, dont 361,7 TWh d'origine nucléaire. Quelle proportion ?\n\nDans cette vidéo :\n• la méthode : la partie ÷ le tout : 361,7 ÷ 539 ≈ 0,671, soit 67,1 %\n• une proportion est toujours entre 0 et 1 (entre 0 % et 100 %)\n• le piège : diviser par le reste au lieu du tout (204 % : impossible !)\n• le bon réflexe : nommer la partie et le tout avant de calculer\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : la part du solaire, puis celle du nucléaire et de l'hydraulique ensemble.\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-proportion\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_proportion&microId=auto_prop_calculer&display=simple\n\nSource : RTE, Bilan électrique 2024.\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Léa, ingénieure du réseau électrique"
+        ],
+        [
+          "00:28",
+          "La partie ÷ le tout"
+        ],
+        [
+          "00:43",
+          "361,7 ÷ 539 ≈ 67,1 %"
+        ],
+        [
+          "01:14",
+          "Question : l'hydraulique"
+        ],
+        [
+          "02:00",
+          "Le piège : diviser par le reste"
+        ],
+        [
+          "02:30",
+          "Question : l'éolien"
+        ],
+        [
+          "03:13",
+          "À toi de jouer"
+        ],
+        [
+          "03:30",
+          "Correction"
+        ],
+        [
+          "03:58",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "proportion",
+        "calculer une proportion",
+        "partie sur tout",
+        "automatismes",
+        "électricité",
+        "nucléaire",
+        "énergie",
+        "proportionnalité",
+        "pourcentages",
+        "maths",
+        "1re",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:14",
+          "question": "L'hydraulique : 75,1 TWh sur 539. Quelle proportion ?",
+          "choix": [
+            "13,9 %",
+            "75,1 %",
+            "7,2"
+          ],
+          "reponse": 0,
+          "explication": "75,1 ÷ 539 ≈ 0,139 = 13,9 %. B recopie la partie sans diviser ; C divise le tout par la partie (l'inverse)."
+        },
+        {
+          "t": "02:30",
+          "question": "L'éolien : 46,8 TWh sur 539. Quelle proportion ?",
+          "choix": [
+            "8,7 %",
+            "46,8 %",
+            "9,5 %"
+          ],
+          "reponse": 0,
+          "explication": "46,8 ÷ 539 ≈ 0,087 = 8,7 %. C divise par le reste, 492,2, au lieu du total."
+        }
+      ],
+      "centres": [
+        "sciences",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "premiere-prop-calculer-short",
+      "notionId": "auto_proportion",
+      "microId": "auto_prop_calculer",
+      "classe": "premiere",
+      "ceinture": "blanche",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-prop-calculer",
+      "fichier": "premiere/maths/proportionnalite/01-calculer/eleveai-maths-premiere-prop-calculer-short.mp4",
+      "miniature": "premiere/maths/proportionnalite/01-calculer/eleveai-maths-premiere-prop-calculer-short.png",
+      "titre": "Le refrain prend combien de ta chanson ? 🎵 — 1re #Shorts",
+      "accroche": "Une chanson de 200 secondes. Le refrain revient 4 fois, 20 secondes chaque fois : 80 secondes. 80 ÷ 200 = 0,4 : le refrain, c'est 40 % de la chanson !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un refrain de 30 secondes, 3 fois, dans une chanson de 3 minutes : quel pourcentage ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_proportion&microId=auto_prop_calculer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #1re #lycee",
+      "tags": [
+        "musique",
+        "refrain",
+        "chanson",
+        "proportion",
+        "pourcentage",
+        "proportionnalité",
+        "maths",
+        "1re",
+        "lycée",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:14",
+          "question": "80 s de refrain sur 200 s. Quelle proportion ?",
+          "choix": [
+            "80 %",
+            "40 %",
+            "2,5"
+          ],
+          "reponse": 1,
+          "explication": "80 ÷ 200 = 0,4 = 40 % de la chanson."
+        }
+      ],
+      "centres": [
+        "musique"
+      ]
+    },
+    {
+      "id": "stmg-prop-calculer",
+      "notionId": "auto_proportion",
+      "microId": "auto_prop_calculer",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/proportionnalite/01-calculer/eleveai-maths-stmg-prop-calculer.mp4",
+      "miniature": "stmg/maths/proportionnalite/01-calculer/eleveai-maths-stmg-prop-calculer.png",
+      "titre": "Le nucléaire fait-il 67 % de notre électricité ? — Calculer une proportion — épisode 1 · Maths STMG",
+      "accroche": "Léa est ingénieure du réseau électrique. En 2024, la France a produit environ 539 TWh d'électricité, dont 361,7 TWh d'origine nucléaire. Quelle proportion ?\n\nDans cette vidéo :\n• la méthode : la partie ÷ le tout : 361,7 ÷ 539 ≈ 0,671, soit 67,1 %\n• une proportion est toujours entre 0 et 1 (entre 0 % et 100 %)\n• le piège : diviser par le reste au lieu du tout (204 % : impossible !)\n• le bon réflexe : nommer la partie et le tout avant de calculer\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : la part du solaire, puis celle du nucléaire et de l'hydraulique ensemble.\n\nPour s'entraîner :\n• les exercices corrigés (automatismes de 1re) : https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-proportion\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=auto_proportion&microId=auto_prop_calculer&display=simple\n\nSource : RTE, Bilan électrique 2024.\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Léa, ingénieure du réseau électrique"
+        ],
+        [
+          "00:28",
+          "La partie ÷ le tout"
+        ],
+        [
+          "00:43",
+          "361,7 ÷ 539 ≈ 67,1 %"
+        ],
+        [
+          "01:14",
+          "Question : l'hydraulique"
+        ],
+        [
+          "02:00",
+          "Le piège : diviser par le reste"
+        ],
+        [
+          "02:30",
+          "Question : l'éolien"
+        ],
+        [
+          "03:13",
+          "À toi de jouer"
+        ],
+        [
+          "03:30",
+          "Correction"
+        ],
+        [
+          "03:58",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "proportion",
+        "calculer une proportion",
+        "partie sur tout",
+        "automatismes",
+        "électricité",
+        "nucléaire",
+        "énergie",
+        "proportionnalité",
+        "pourcentages",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:14",
+          "question": "L'hydraulique : 75,1 TWh sur 539. Quelle proportion ?",
+          "choix": [
+            "13,9 %",
+            "75,1 %",
+            "7,2"
+          ],
+          "reponse": 0,
+          "explication": "75,1 ÷ 539 ≈ 0,139 = 13,9 %. B recopie la partie sans diviser ; C divise le tout par la partie (l'inverse)."
+        },
+        {
+          "t": "02:30",
+          "question": "L'éolien : 46,8 TWh sur 539. Quelle proportion ?",
+          "choix": [
+            "8,7 %",
+            "46,8 %",
+            "9,5 %"
+          ],
+          "reponse": 0,
+          "explication": "46,8 ÷ 539 ≈ 0,087 = 8,7 %. C divise par le reste, 492,2, au lieu du total."
+        }
+      ],
+      "centres": [
+        "sciences",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "stmg-prop-calculer-short",
+      "notionId": "auto_proportion",
+      "microId": "auto_prop_calculer",
+      "classe": "stmg",
+      "ceinture": "blanche",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-prop-calculer",
+      "fichier": "stmg/maths/proportionnalite/01-calculer/eleveai-maths-stmg-prop-calculer-short.mp4",
+      "miniature": "stmg/maths/proportionnalite/01-calculer/eleveai-maths-stmg-prop-calculer-short.png",
+      "titre": "Le refrain prend combien de ta chanson ? 🎵 — STMG #Shorts",
+      "accroche": "Une chanson de 200 secondes. Le refrain revient 4 fois, 20 secondes chaque fois : 80 secondes. 80 ÷ 200 = 0,4 : le refrain, c'est 40 % de la chanson !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un refrain de 30 secondes, 3 fois, dans une chanson de 3 minutes : quel pourcentage ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=auto_proportion&microId=auto_prop_calculer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #stmg #lycee",
+      "tags": [
+        "musique",
+        "refrain",
+        "chanson",
+        "proportion",
+        "pourcentage",
+        "proportionnalité",
+        "maths",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:14",
+          "question": "80 s de refrain sur 200 s. Quelle proportion ?",
+          "choix": [
+            "80 %",
+            "40 %",
+            "2,5"
+          ],
+          "reponse": 1,
+          "explication": "80 ÷ 200 = 0,4 = 40 % de la chanson."
+        }
+      ],
+      "centres": [
+        "musique"
+      ]
+    },
+    {
+      "id": "premiere-prop-formes",
+      "notionId": "auto_proportion",
+      "microId": "auto_prop_formes",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "fichier": "premiere/maths/proportionnalite/02-formes/eleveai-maths-premiere-prop-formes.mp4",
+      "miniature": "premiere/maths/proportionnalite/02-formes/eleveai-maths-premiere-prop-formes.png",
+      "titre": "3 % de l'eau est douce : 0,3 ou 0,03 ? — Fraction, décimal, pourcentage — épisode 2 · Maths 1re",
+      "accroche": "Samuel est hydrologue. Sur Terre, 97 % de l'eau est salée et 3 % est douce. Comment écrire ces 3 % en fraction, en décimal ? Et quelle part de l'eau douce est gelée ?\n\nDans cette vidéo :\n• 3 % = 3/100 = 0,03 : trois écritures, un seul nombre\n• environ 2/3 de l'eau douce est gelée : 2/3 ≈ 0,67 ≈ 67 %\n• pour passer du pourcentage au décimal, on divise par 100\n• le piège : 3 % n'est pas 0,3\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : 1/8 en décimal et en pourcentage, puis trouver l'intrus.\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-proportion\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_proportion&microId=auto_prop_formes&display=simple\n\nSource : USGS (ordres de grandeur).\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Samuel, hydrologue"
+        ],
+        [
+          "00:24",
+          "3 % = 3/100 = 0,03"
+        ],
+        [
+          "00:38",
+          "Passer d'une écriture à l'autre"
+        ],
+        [
+          "00:58",
+          "2/3 de l'eau douce est gelée"
+        ],
+        [
+          "01:13",
+          "Question : 3 sur 4 en pourcentage"
+        ],
+        [
+          "01:48",
+          "Le piège : 3 % = 0,3 ?"
+        ],
+        [
+          "02:09",
+          "Question : 8 % en décimal"
+        ],
+        [
+          "02:40",
+          "À toi de jouer"
+        ],
+        [
+          "03:00",
+          "Correction"
+        ],
+        [
+          "03:17",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "fraction décimal pourcentage",
+        "écritures d'une proportion",
+        "automatismes",
+        "eau douce",
+        "hydrologue",
+        "écologie",
+        "proportionnalité",
+        "pourcentages",
+        "maths",
+        "1re",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:13",
+          "question": "Comment s'écrit 3 sur 4 en pourcentage ?",
+          "choix": [
+            "34 %",
+            "75 %",
+            "3,4 %"
+          ],
+          "reponse": 1,
+          "explication": "3 ÷ 4 = 0,75 ; × 100 : 75 %. A et C collent les chiffres 3 et 4."
+        },
+        {
+          "t": "02:09",
+          "question": "Comment s'écrit 8 % en nombre décimal ?",
+          "choix": [
+            "0,8",
+            "0,08",
+            "8,0"
+          ],
+          "reponse": 1,
+          "explication": "8 ÷ 100 = 0,08. A, c'est 80 % ; C, c'est 800 %."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "sciences"
+      ]
+    },
+    {
+      "id": "premiere-prop-formes-short",
+      "notionId": "auto_proportion",
+      "microId": "auto_prop_formes",
+      "classe": "premiere",
+      "ceinture": "blanche",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-prop-formes",
+      "fichier": "premiere/maths/proportionnalite/02-formes/eleveai-maths-premiere-prop-formes-short.mp4",
+      "miniature": "premiere/maths/proportionnalite/02-formes/eleveai-maths-premiere-prop-formes-short.png",
+      "titre": "Trouve l'intrus : 1/2, 0,5, 5 %, 50 % 🧩 — 1re #Shorts",
+      "accroche": "Trois de ces nombres sont égaux, un seul est l'intrus. 1/2 = 0,5 = 50 %. Et 5 % ? C'est 0,05 : l'intrus !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : trouve l'intrus parmi 1/5, 0,2, 20 %, 0,5 et 2/10. Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_proportion&microId=auto_prop_formes&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #1re #lycee",
+      "tags": [
+        "intrus",
+        "énigme",
+        "fraction",
+        "décimal",
+        "pourcentage",
+        "proportionnalité",
+        "maths",
+        "1re",
+        "lycée",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:19",
+          "question": "Trouve l'intrus : 3/4, 0,75, 7,5 %",
+          "choix": [
+            "3/4",
+            "0,75",
+            "7,5 %"
+          ],
+          "reponse": 2,
+          "explication": "3/4 = 0,75 = 75 % ; 7,5 % = 0,075."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "stmg-prop-formes",
+      "notionId": "auto_proportion",
+      "microId": "auto_prop_formes",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/proportionnalite/02-formes/eleveai-maths-stmg-prop-formes.mp4",
+      "miniature": "stmg/maths/proportionnalite/02-formes/eleveai-maths-stmg-prop-formes.png",
+      "titre": "3 % de l'eau est douce : 0,3 ou 0,03 ? — Fraction, décimal, pourcentage — épisode 2 · Maths STMG",
+      "accroche": "Samuel est hydrologue. Sur Terre, 97 % de l'eau est salée et 3 % est douce. Comment écrire ces 3 % en fraction, en décimal ? Et quelle part de l'eau douce est gelée ?\n\nDans cette vidéo :\n• 3 % = 3/100 = 0,03 : trois écritures, un seul nombre\n• environ 2/3 de l'eau douce est gelée : 2/3 ≈ 0,67 ≈ 67 %\n• pour passer du pourcentage au décimal, on divise par 100\n• le piège : 3 % n'est pas 0,3\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : 1/8 en décimal et en pourcentage, puis trouver l'intrus.\n\nPour s'entraîner :\n• les exercices corrigés (automatismes de 1re) : https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-proportion\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=auto_proportion&microId=auto_prop_formes&display=simple\n\nSource : USGS (ordres de grandeur).\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Samuel, hydrologue"
+        ],
+        [
+          "00:24",
+          "3 % = 3/100 = 0,03"
+        ],
+        [
+          "00:38",
+          "Passer d'une écriture à l'autre"
+        ],
+        [
+          "00:58",
+          "2/3 de l'eau douce est gelée"
+        ],
+        [
+          "01:13",
+          "Question : 3 sur 4 en pourcentage"
+        ],
+        [
+          "01:48",
+          "Le piège : 3 % = 0,3 ?"
+        ],
+        [
+          "02:09",
+          "Question : 8 % en décimal"
+        ],
+        [
+          "02:40",
+          "À toi de jouer"
+        ],
+        [
+          "03:00",
+          "Correction"
+        ],
+        [
+          "03:17",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "fraction décimal pourcentage",
+        "écritures d'une proportion",
+        "automatismes",
+        "eau douce",
+        "hydrologue",
+        "écologie",
+        "proportionnalité",
+        "pourcentages",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:13",
+          "question": "Comment s'écrit 3 sur 4 en pourcentage ?",
+          "choix": [
+            "34 %",
+            "75 %",
+            "3,4 %"
+          ],
+          "reponse": 1,
+          "explication": "3 ÷ 4 = 0,75 ; × 100 : 75 %. A et C collent les chiffres 3 et 4."
+        },
+        {
+          "t": "02:09",
+          "question": "Comment s'écrit 8 % en nombre décimal ?",
+          "choix": [
+            "0,8",
+            "0,08",
+            "8,0"
+          ],
+          "reponse": 1,
+          "explication": "8 ÷ 100 = 0,08. A, c'est 80 % ; C, c'est 800 %."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "sciences"
+      ]
+    },
+    {
+      "id": "stmg-prop-formes-short",
+      "notionId": "auto_proportion",
+      "microId": "auto_prop_formes",
+      "classe": "stmg",
+      "ceinture": "blanche",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-prop-formes",
+      "fichier": "stmg/maths/proportionnalite/02-formes/eleveai-maths-stmg-prop-formes-short.mp4",
+      "miniature": "stmg/maths/proportionnalite/02-formes/eleveai-maths-stmg-prop-formes-short.png",
+      "titre": "Trouve l'intrus : 1/2, 0,5, 5 %, 50 % 🧩 — STMG #Shorts",
+      "accroche": "Trois de ces nombres sont égaux, un seul est l'intrus. 1/2 = 0,5 = 50 %. Et 5 % ? C'est 0,05 : l'intrus !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : trouve l'intrus parmi 1/5, 0,2, 20 %, 0,5 et 2/10. Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=auto_proportion&microId=auto_prop_formes&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #stmg #lycee",
+      "tags": [
+        "intrus",
+        "énigme",
+        "fraction",
+        "décimal",
+        "pourcentage",
+        "proportionnalité",
+        "maths",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:19",
+          "question": "Trouve l'intrus : 3/4, 0,75, 7,5 %",
+          "choix": [
+            "3/4",
+            "0,75",
+            "7,5 %"
+          ],
+          "reponse": 2,
+          "explication": "3/4 = 0,75 = 75 % ; 7,5 % = 0,075."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "premiere-prop-appliquer",
+      "notionId": "auto_proportion",
+      "microId": "auto_prop_appliquer",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "fichier": "premiere/maths/proportionnalite/03-appliquer/eleveai-maths-premiere-prop-appliquer.mp4",
+      "miniature": "premiere/maths/proportionnalite/03-appliquer/eleveai-maths-premiere-prop-appliquer.png",
+      "titre": "Combien de kilos d'eau dans ton corps ? — Appliquer une proportion — épisode 3 · Maths 1re",
+      "accroche": "Clara est infirmière. Le corps humain contient environ 60 % d'eau. Pour un patient de 70 kg, combien de kilos d'eau ?\n\nDans cette vidéo :\n• trois méthodes pour 42 kg : 70 ÷ 100 × 60, puis 0,6 × 70, puis 60 % = 3/5\n• appliquer une proportion = multiplier le tout par la proportion\n• le piège : 60 %, c'est 0,6, pas 6 ni 0,06 (6 × 70 = 420 kg : plus que le patient !)\n• le réflexe : sous 100 %, le résultat est plus petit que la quantité de départ\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : un patient de 80 kg : combien de kilos d'eau ? et de sang ?\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-proportion\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_proportion&microId=auto_prop_appliquer&display=simple\n\nSource : ordres de grandeur de physiologie.\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Clara, infirmière : 60 % d'eau"
+        ],
+        [
+          "00:22",
+          "Méthode 1 : ÷ 100 puis × 60"
+        ],
+        [
+          "00:41",
+          "Méthode 2 : × 0,6"
+        ],
+        [
+          "01:00",
+          "Méthode 3 : 3/5"
+        ],
+        [
+          "01:16",
+          "Question : 15 % de 80 kg"
+        ],
+        [
+          "01:47",
+          "Le piège : 6 ou 0,06 ?"
+        ],
+        [
+          "02:09",
+          "Question : le sang"
+        ],
+        [
+          "02:51",
+          "À toi de jouer"
+        ],
+        [
+          "03:08",
+          "Correction"
+        ],
+        [
+          "03:19",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "appliquer une proportion",
+        "pourcentage d'une quantité",
+        "automatismes",
+        "corps humain",
+        "infirmière",
+        "santé",
+        "proportionnalité",
+        "pourcentages",
+        "maths",
+        "1re",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:16",
+          "question": "Combien font 15 % de 80 kg ?",
+          "choix": [
+            "12 kg",
+            "65 kg",
+            "5,3 kg"
+          ],
+          "reponse": 0,
+          "explication": "0,15 × 80 = 12 kg. B : 80 − 15 ; C : 80 ÷ 15."
+        },
+        {
+          "t": "02:09",
+          "question": "Le sang : environ 7 % de la masse du corps. Une patiente de 60 kg ?",
+          "choix": [
+            "4,2 kg",
+            "42 kg",
+            "0,42 kg"
+          ],
+          "reponse": 0,
+          "explication": "7 % = 0,07 ; 0,07 × 60 = 4,2 kg. B : 0,7 ; C : 0,007."
+        }
+      ],
+      "centres": [
+        "corps-sante"
+      ]
+    },
+    {
+      "id": "premiere-prop-appliquer-short",
+      "notionId": "auto_proportion",
+      "microId": "auto_prop_appliquer",
+      "classe": "premiere",
+      "ceinture": "blanche",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-prop-appliquer",
+      "fichier": "premiere/maths/proportionnalite/03-appliquer/eleveai-maths-premiere-prop-appliquer-short.mp4",
+      "miniature": "premiere/maths/proportionnalite/03-appliquer/eleveai-maths-premiere-prop-appliquer-short.png",
+      "titre": "8 % de 50 ? Le truc des pros du calcul mental 🧠 — 1re #Shorts",
+      "accroche": "8 % de 50, c'est dur ? Retourne-le : 50 % de 8, c'est la moitié de 8 = 4. a % de b = b % de a, toujours !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : combien font 4 % de 75 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_proportion&microId=auto_prop_appliquer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #1re #lycee",
+      "tags": [
+        "calcul mental",
+        "astuce",
+        "pourcentage",
+        "défi",
+        "proportionnalité",
+        "maths",
+        "1re",
+        "lycée",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:17",
+          "question": "Combien font 12 % de 25 ?",
+          "choix": [
+            "3",
+            "13",
+            "0,3"
+          ],
+          "reponse": 0,
+          "explication": "12 % de 25 = 25 % de 12 : le quart de 12 = 3."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "stmg-prop-appliquer",
+      "notionId": "auto_proportion",
+      "microId": "auto_prop_appliquer",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/proportionnalite/03-appliquer/eleveai-maths-stmg-prop-appliquer.mp4",
+      "miniature": "stmg/maths/proportionnalite/03-appliquer/eleveai-maths-stmg-prop-appliquer.png",
+      "titre": "Combien de kilos d'eau dans ton corps ? — Appliquer une proportion — épisode 3 · Maths STMG",
+      "accroche": "Clara est infirmière. Le corps humain contient environ 60 % d'eau. Pour un patient de 70 kg, combien de kilos d'eau ?\n\nDans cette vidéo :\n• trois méthodes pour 42 kg : 70 ÷ 100 × 60, puis 0,6 × 70, puis 60 % = 3/5\n• appliquer une proportion = multiplier le tout par la proportion\n• le piège : 60 %, c'est 0,6, pas 6 ni 0,06 (6 × 70 = 420 kg : plus que le patient !)\n• le réflexe : sous 100 %, le résultat est plus petit que la quantité de départ\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : un patient de 80 kg : combien de kilos d'eau ? et de sang ?\n\nPour s'entraîner :\n• les exercices corrigés (automatismes de 1re) : https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-proportion\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=auto_proportion&microId=auto_prop_appliquer&display=simple\n\nSource : ordres de grandeur de physiologie.\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Clara, infirmière : 60 % d'eau"
+        ],
+        [
+          "00:22",
+          "Méthode 1 : ÷ 100 puis × 60"
+        ],
+        [
+          "00:41",
+          "Méthode 2 : × 0,6"
+        ],
+        [
+          "01:00",
+          "Méthode 3 : 3/5"
+        ],
+        [
+          "01:16",
+          "Question : 15 % de 80 kg"
+        ],
+        [
+          "01:47",
+          "Le piège : 6 ou 0,06 ?"
+        ],
+        [
+          "02:09",
+          "Question : le sang"
+        ],
+        [
+          "02:51",
+          "À toi de jouer"
+        ],
+        [
+          "03:08",
+          "Correction"
+        ],
+        [
+          "03:19",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "appliquer une proportion",
+        "pourcentage d'une quantité",
+        "automatismes",
+        "corps humain",
+        "infirmière",
+        "santé",
+        "proportionnalité",
+        "pourcentages",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:16",
+          "question": "Combien font 15 % de 80 kg ?",
+          "choix": [
+            "12 kg",
+            "65 kg",
+            "5,3 kg"
+          ],
+          "reponse": 0,
+          "explication": "0,15 × 80 = 12 kg. B : 80 − 15 ; C : 80 ÷ 15."
+        },
+        {
+          "t": "02:09",
+          "question": "Le sang : environ 7 % de la masse du corps. Une patiente de 60 kg ?",
+          "choix": [
+            "4,2 kg",
+            "42 kg",
+            "0,42 kg"
+          ],
+          "reponse": 0,
+          "explication": "7 % = 0,07 ; 0,07 × 60 = 4,2 kg. B : 0,7 ; C : 0,007."
+        }
+      ],
+      "centres": [
+        "corps-sante"
+      ]
+    },
+    {
+      "id": "stmg-prop-appliquer-short",
+      "notionId": "auto_proportion",
+      "microId": "auto_prop_appliquer",
+      "classe": "stmg",
+      "ceinture": "blanche",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-prop-appliquer",
+      "fichier": "stmg/maths/proportionnalite/03-appliquer/eleveai-maths-stmg-prop-appliquer-short.mp4",
+      "miniature": "stmg/maths/proportionnalite/03-appliquer/eleveai-maths-stmg-prop-appliquer-short.png",
+      "titre": "8 % de 50 ? Le truc des pros du calcul mental 🧠 — STMG #Shorts",
+      "accroche": "8 % de 50, c'est dur ? Retourne-le : 50 % de 8, c'est la moitié de 8 = 4. a % de b = b % de a, toujours !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : combien font 4 % de 75 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=auto_proportion&microId=auto_prop_appliquer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #stmg #lycee",
+      "tags": [
+        "calcul mental",
+        "astuce",
+        "pourcentage",
+        "défi",
+        "proportionnalité",
+        "maths",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:17",
+          "question": "Combien font 12 % de 25 ?",
+          "choix": [
+            "3",
+            "13",
+            "0,3"
+          ],
+          "reponse": 0,
+          "explication": "12 % de 25 = 25 % de 12 : le quart de 12 = 3."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "premiere-prop-partie-tout",
+      "notionId": "auto_partie_tout",
+      "microId": "auto_prop_partie_connaissant_tout",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "fichier": "premiere/maths/proportionnalite/04-partie-tout/eleveai-maths-premiere-prop-partie-tout.mp4",
+      "miniature": "premiere/maths/proportionnalite/04-partie-tout/eleveai-maths-premiere-prop-partie-tout.png",
+      "titre": "Dans l'ISS, pèse-t-on vraiment zéro ? — La partie connaissant le tout — épisode 4 · Maths 1re",
+      "accroche": "Jade est ingénieure spatiale. À 400 km d'altitude, dans la Station spatiale internationale, la pesanteur vaut encore environ 90 % de celle du sol. Un astronaute pèse 800 N au sol : et là-haut ?\n\nDans cette vidéo :\n• la partie = la proportion × le tout : 0,9 × 800 = 720 N\n• sur Mars, 38 % ; sur la Lune, 16,5 % : on multiplie de la même façon\n• le piège : ce qui manque, c'est le complément, 10 % : 0,1 × 800 = 80 N\n• vérifier : 720 + 80 = 800, le tout\n• 720 N, presque autant qu'au sol : on flotte parce que la station tombe sans cesse autour de la Terre\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : une lycéenne pèse environ 600 N au sol : combien sur Mars, à 38 % ? et sur la Lune, à 16,5 % ?\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-partie-tout\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_partie_tout&microId=auto_prop_partie_connaissant_tout&display=simple\n\nSource : NASA ; NASA Planetary Fact Sheets.\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Jade, ingénieure spatiale"
+        ],
+        [
+          "00:26",
+          "Le tout : 800 N au sol"
+        ],
+        [
+          "00:36",
+          "0,9 × 800 = 720 N"
+        ],
+        [
+          "00:52",
+          "Pourquoi flotte-t-il ?"
+        ],
+        [
+          "01:04",
+          "Question : sur Mars"
+        ],
+        [
+          "01:43",
+          "Le piège : ce qui manque"
+        ],
+        [
+          "02:05",
+          "Question : sur la Lune"
+        ],
+        [
+          "02:49",
+          "À toi de jouer"
+        ],
+        [
+          "03:08",
+          "Correction"
+        ],
+        [
+          "03:21",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "partie connaissant le tout",
+        "appliquer un pourcentage",
+        "automatismes",
+        "ISS",
+        "ingénieure spatiale",
+        "espace",
+        "proportionnalité",
+        "pourcentages",
+        "maths",
+        "1re",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:04",
+          "question": "Sur Mars : environ 38 % de la force sur Terre. Poids au sol : 800 N. Sur Mars ?",
+          "choix": [
+            "304 N",
+            "838 N",
+            "21 N"
+          ],
+          "reponse": 0,
+          "explication": "0,38 × 800 = 304 N. B : 800 + 38 ; C : 800 ÷ 38."
+        },
+        {
+          "t": "02:05",
+          "question": "Sur la Lune : environ 16,5 % de la force sur Terre. Un robot : 10 000 N au sol. Sur la Lune ?",
+          "choix": [
+            "1 650 N",
+            "165 N",
+            "8 350 N"
+          ],
+          "reponse": 0,
+          "explication": "0,165 × 10 000 = 1 650 N. B : la virgule ; C : ce qui manque, 83,5 %."
+        }
+      ],
+      "centres": [
+        "espace",
+        "sciences"
+      ]
+    },
+    {
+      "id": "premiere-prop-partie-tout-short",
+      "notionId": "auto_partie_tout",
+      "microId": "auto_prop_partie_connaissant_tout",
+      "classe": "premiere",
+      "ceinture": "blanche",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-prop-partie-tout",
+      "fichier": "premiere/maths/proportionnalite/04-partie-tout/eleveai-maths-premiere-prop-partie-tout-short.mp4",
+      "miniature": "premiere/maths/proportionnalite/04-partie-tout/eleveai-maths-premiere-prop-partie-tout-short.png",
+      "titre": "Ta mise à jour de 60 Go en est où ? 🎮 — 1re #Shorts",
+      "accroche": "Ta mise à jour pèse 60 Go et la barre affiche 35 %. Combien de Go déjà téléchargés ? 0,35 × 60 = 21 Go !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : il reste 65 % : combien de Go ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_partie_tout&microId=auto_prop_partie_connaissant_tout&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #1re #lycee",
+      "tags": [
+        "jeux vidéo",
+        "mise à jour",
+        "téléchargement",
+        "pourcentage",
+        "gaming",
+        "proportionnalité",
+        "maths",
+        "1re",
+        "lycée",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:20",
+          "question": "La barre affiche 45 %. Combien de Go ?",
+          "choix": [
+            "27 Go",
+            "15 Go",
+            "105 Go"
+          ],
+          "reponse": 0,
+          "explication": "0,45 × 60 = 27 Go."
+        }
+      ],
+      "centres": [
+        "jeux-video"
+      ]
+    },
+    {
+      "id": "premiere-prop-tout-partie",
+      "notionId": "auto_partie_tout",
+      "microId": "auto_prop_tout_connaissant_partie",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "fichier": "premiere/maths/proportionnalite/05-tout-partie/eleveai-maths-premiere-prop-tout-partie.mp4",
+      "miniature": "premiere/maths/proportionnalite/05-tout-partie/eleveai-maths-premiere-prop-tout-partie.png",
+      "titre": "Transports : 126,8 Mt, mais sur combien ? — Le tout connaissant la partie — épisode 5 · Maths 1re",
+      "accroche": "Hugo est consultant en climat. En 2023, les transports ont émis 126,8 millions de tonnes de CO2e, soit 34 % des émissions de la France. Quel est le total ?\n\nDans cette vidéo :\n• par 1 % : 126,8 ÷ 34 ≈ 3,73, puis × 100\n• en une division : le tout = la partie ÷ la proportion : 126,8 ÷ 0,34 ≈ 373 Mt\n• le piège : multiplier (43,1) au lieu de diviser : le tout doit être plus grand que la partie\n• vérifier : 0,34 × 373 ≈ 126,8\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : 434 élèves font 35 % d'un lycée : combien d'élèves en tout ?\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-partie-tout\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_partie_tout&microId=auto_prop_tout_connaissant_partie&display=simple\n\nSource : Citepa, Secten 2024.\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Hugo, consultant en climat"
+        ],
+        [
+          "00:31",
+          "Méthode 1 : par 1 %"
+        ],
+        [
+          "00:54",
+          "Méthode 2 : ÷ 0,34"
+        ],
+        [
+          "01:16",
+          "On vérifie"
+        ],
+        [
+          "01:29",
+          "Question : les élèves de théâtre"
+        ],
+        [
+          "02:08",
+          "Le piège : 43,1 Mt ?"
+        ],
+        [
+          "02:30",
+          "Question : le total de 2022"
+        ],
+        [
+          "03:16",
+          "À toi de jouer"
+        ],
+        [
+          "03:34",
+          "Correction"
+        ],
+        [
+          "03:49",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "tout connaissant la partie",
+        "retrouver le total",
+        "automatismes",
+        "émissions de CO2",
+        "climat",
+        "transports",
+        "proportionnalité",
+        "pourcentages",
+        "maths",
+        "1re",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:29",
+          "question": "18 % des élèves d'un lycée font du théâtre : 45 élèves. Combien d'élèves en tout ?",
+          "choix": [
+            "250",
+            "8,1",
+            "53,1"
+          ],
+          "reponse": 0,
+          "explication": "45 ÷ 0,18 = 250 élèves. B : 45 × 0,18 ; C : + 18 % à 45."
+        },
+        {
+          "t": "02:30",
+          "question": "En 2022 : 131,2 Mt, soit 33,1 % du total. Quel était le total ?",
+          "choix": [
+            "396 Mt",
+            "43 Mt",
+            "175 Mt"
+          ],
+          "reponse": 0,
+          "explication": "131,2 ÷ 0,331 ≈ 396 Mt. B multiplie ; C ajoute 33,1 %."
+        }
+      ],
+      "centres": [
+        "meteo-climat",
+        "transports"
+      ]
+    },
+    {
+      "id": "premiere-prop-tout-partie-short",
+      "notionId": "auto_partie_tout",
+      "microId": "auto_prop_tout_connaissant_partie",
+      "classe": "premiere",
+      "ceinture": "blanche",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-prop-tout-partie",
+      "fichier": "premiere/maths/proportionnalite/05-tout-partie/eleveai-maths-premiere-prop-tout-partie-short.mp4",
+      "miniature": "premiere/maths/proportionnalite/05-tout-partie/eleveai-maths-premiere-prop-tout-partie-short.png",
+      "titre": "30 % de batterie = 1 200 mAh. Et pleine ? 🔋 — 1re #Shorts",
+      "accroche": "Ton téléphone affiche 30 % : 1 200 mAh. Combien quand il est plein ? 1 200 ÷ 0,3 = 4 000 mAh. On divise, car le tout est plus grand !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 20 % = 900 mAh : quelle capacité totale ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_partie_tout&microId=auto_prop_tout_connaissant_partie&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #1re #lycee",
+      "tags": [
+        "batterie",
+        "téléphone",
+        "technologie",
+        "pourcentage",
+        "mAh",
+        "proportionnalité",
+        "maths",
+        "1re",
+        "lycée",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:18",
+          "question": "25 % de batterie = 1 000 mAh. Capacité totale ?",
+          "choix": [
+            "4 000",
+            "250",
+            "1 250"
+          ],
+          "reponse": 0,
+          "explication": "25 % = un quart. 4 × 1 000 = 4 000 mAh."
+        }
+      ],
+      "centres": [
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "stmg-prop-nature-pourcentage",
+      "notionId": "auto_evo_taux",
+      "microId": "auto_evo_nature_pourcentage",
+      "classe": "stmg",
+      "ceinture": "orange",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/proportionnalite/05-nature-pourcentage/eleveai-maths-stmg-prop-nature-pourcentage.mp4",
+      "miniature": "stmg/maths/proportionnalite/05-nature-pourcentage/eleveai-maths-stmg-prop-nature-pourcentage.png",
+      "titre": "64 médailles : la part de l'or a-t-elle baissé ? — Proportion ou évolution — épisode 5 · Maths STMG",
+      "accroche": "Moussa est journaliste de données sportives. La France passe de 33 médailles à Tokyo à 64 à Paris en 2024. Le nombre de médailles évolue, mais la part de l'or ? Deux pourcentages, deux natures.\n\nDans cette vidéo :\n• une proportion compare une partie à un tout, au même moment\n• une évolution compare deux valeurs à deux dates\n• entre deux proportions, l'écart se compte en points, pas en %\n• le piège : la part de l'or baisse alors que le nombre de médailles d'or monte\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : « 45 % du stock est importé », « le chiffre d'affaires a chuté de 45 % » : laquelle est une proportion ? et que vaut un chiffre d'affaires de 200 000 € après la chute ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_taux&microId=auto_evo_nature_pourcentage&display=simple\n\nSource : tableaux officiels des médailles (Tokyo 2021, Paris 2024).\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Moussa, journaliste de données sportives"
+        ],
+        [
+          "00:23",
+          "16 sur 64 : une proportion"
+        ],
+        [
+          "00:38",
+          "De 33 à 64 : une évolution"
+        ],
+        [
+          "01:02",
+          "Les mots qui les distinguent"
+        ],
+        [
+          "01:14",
+          "Question : les ventes + 32 %"
+        ],
+        [
+          "01:41",
+          "Le piège : la part de l'or"
+        ],
+        [
+          "02:06",
+          "Question : points ou pour cent ?"
+        ],
+        [
+          "02:37",
+          "À toi de jouer"
+        ],
+        [
+          "03:01",
+          "Correction"
+        ],
+        [
+          "03:18",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "proportion ou évolution",
+        "points de pourcentage",
+        "taux d'évolution",
+        "médailles",
+        "journaliste",
+        "sport",
+        "proportionnalité",
+        "pourcentages",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:14",
+          "question": "« Les ventes ont progressé de 32 % en un an. » Ce pourcentage est :",
+          "choix": [
+            "une proportion",
+            "une évolution",
+            "les deux"
+          ],
+          "reponse": 1,
+          "explication": "On compare les ventes à deux dates : c'est une évolution."
+        },
+        {
+          "t": "02:06",
+          "question": "La part de l'or passe de 30 % à 25 %. Elle a baissé de :",
+          "choix": [
+            "5 %",
+            "5 points",
+            "25 %"
+          ],
+          "reponse": 1,
+          "explication": "Entre deux proportions, la différence se compte en points : 30 − 25 = 5 points."
+        }
+      ],
+      "centres": [
+        "sport"
+      ]
+    },
+    {
+      "id": "stmg-prop-nature-pourcentage-short",
+      "notionId": "auto_evo_taux",
+      "microId": "auto_evo_nature_pourcentage",
+      "classe": "stmg",
+      "ceinture": "blanche",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-prop-nature-pourcentage",
+      "fichier": "stmg/maths/proportionnalite/05-nature-pourcentage/eleveai-maths-stmg-prop-nature-pourcentage-short.mp4",
+      "miniature": "stmg/maths/proportionnalite/05-nature-pourcentage/eleveai-maths-stmg-prop-nature-pourcentage-short.png",
+      "titre": "+1 point ou +10 % ? Le piège des infos 📰 — STMG #Shorts",
+      "accroche": "Le e-commerce passe de 10 % à 11 % du commerce de détail. +1 % ? Non : +1 point. Et en évolution : 1 ÷ 10 = +10 % !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : une part passe de 20 % à 25 % : combien de points ? quel pourcentage d'évolution ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_taux&microId=auto_evo_nature_pourcentage&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #stmg #lycee",
+      "tags": [
+        "points de pourcentage",
+        "médias",
+        "e-commerce",
+        "évolution",
+        "pourcentage",
+        "proportionnalité",
+        "maths",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:23",
+          "question": "Une part passe de 20 % à 30 %. Elle a augmenté de :",
+          "choix": [
+            "10 %",
+            "10 points, soit 50 %",
+            "30 %"
+          ],
+          "reponse": 1,
+          "explication": "30 − 20 = 10 points. 10 ÷ 20 = 0,5 : + 50 %."
+        }
+      ],
+      "centres": [
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "stmg-prop-taux-equivalent",
+      "notionId": "suite_comparer",
+      "microId": "suiteT_taux_equivalent_proportionnel",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/proportionnalite/06-taux-equivalent/eleveai-maths-stmg-prop-taux-equivalent.mp4",
+      "miniature": "stmg/maths/proportionnalite/06-taux-equivalent/eleveai-maths-stmg-prop-taux-equivalent.png",
+      "titre": "3 % par an : combien par mois ? — Taux proportionnel, taux équivalent — épisode 6 · Maths STMG",
+      "accroche": "Emma est conseillère bancaire. Le Livret A rapporte 3 % par an. Un client demande : « et par mois ? » Deux réponses : 0,25 % ou environ 0,247 %. Laquelle est juste ?\n\nDans cette vidéo :\n• le taux proportionnel : 3 % ÷ 12 = 0,25 % par mois\n• mais 1,0025 puissance 12 ≈ 1,0304 : on obtient 3,04 % par an, pas 3 %\n• le taux équivalent : (1 + t) puissance 12 = 1,03, donc t ≈ 0,247 % par mois\n• le piège : 1 % par mois ne fait pas 12 % par an, mais ≈ 12,68 %\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : 12 % par an : taux trimestriel proportionnel et taux trimestriel équivalent.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=suite_comparer&microId=suiteT_taux_equivalent_proportionnel&display=simple\n\nSource : service-public.fr (Livret A à 3 % du 1er août 2023 au 31 janvier 2025).\n\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Emma, conseillère bancaire"
+        ],
+        [
+          "00:24",
+          "Le taux proportionnel : 3 % ÷ 12"
+        ],
+        [
+          "00:36",
+          "Le test : 1,0025 puissance 12"
+        ],
+        [
+          "00:58",
+          "Les intérêts des intérêts"
+        ],
+        [
+          "01:12",
+          "Question : 6 % par an"
+        ],
+        [
+          "01:45",
+          "Le taux équivalent"
+        ],
+        [
+          "02:11",
+          "Le piège : 1 % par mois"
+        ],
+        [
+          "02:31",
+          "Question : redonner 3 %"
+        ],
+        [
+          "03:08",
+          "À toi de jouer"
+        ],
+        [
+          "03:23",
+          "Correction"
+        ],
+        [
+          "03:41",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "taux équivalent",
+        "taux proportionnel",
+        "intérêts composés",
+        "suites géométriques",
+        "Livret A",
+        "conseillère bancaire",
+        "argent",
+        "proportionnalité",
+        "pourcentages",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:12",
+          "question": "Un taux annuel de 6 %. Quel est le taux mensuel proportionnel ?",
+          "choix": [
+            "0,5 %",
+            "72 %",
+            "6 %"
+          ],
+          "reponse": 0,
+          "explication": "6 % ÷ 12 = 0,5 % par mois. B multiplie par 12 au lieu de diviser."
+        },
+        {
+          "t": "02:31",
+          "question": "Quel taux mensuel redonne exactement 3 % sur l'année ?",
+          "choix": [
+            "0,25 %",
+            "≈ 0,247 %",
+            "3 %"
+          ],
+          "reponse": 1,
+          "explication": "1,002466 puissance 12 = 1,03. A est le taux proportionnel : il donne 3,04 %."
+        }
+      ],
+      "centres": [
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "stmg-prop-taux-equivalent-short",
+      "notionId": "suite_comparer",
+      "microId": "suiteT_taux_equivalent_proportionnel",
+      "classe": "stmg",
+      "ceinture": "blanche",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-prop-taux-equivalent",
+      "fichier": "stmg/maths/proportionnalite/06-taux-equivalent/eleveai-maths-stmg-prop-taux-equivalent-short.mp4",
+      "miniature": "stmg/maths/proportionnalite/06-taux-equivalent/eleveai-maths-stmg-prop-taux-equivalent-short.png",
+      "titre": "1 % par mois, ça fait 12 % par an ? 🐷 — STMG #Shorts",
+      "accroche": "100 € dans une tirelire qui gagne 1 % par mois. Au bout d'un an : 112 € ? Non, 112,68 € ! Les intérêts rapportent des intérêts.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 2 % par mois pendant 12 mois : combien sur l'année ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=suite_comparer&microId=suiteT_taux_equivalent_proportionnel&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #stmg #lycee",
+      "tags": [
+        "tirelire",
+        "intérêts composés",
+        "épargne",
+        "argent",
+        "pourcentage",
+        "proportionnalité",
+        "maths",
+        "STMG",
+        "lycée",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:20",
+          "question": "1 % par mois pendant 12 mois. Combien sur l'année ?",
+          "choix": [
+            "12 %",
+            "≈ 12,7 %",
+            "1 %"
+          ],
+          "reponse": 1,
+          "explication": "1,01 puissance 12 ≈ 1,1268 : ≈ 12,7 %. Les intérêts rapportent des intérêts."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "jeux-defis"
+      ]
     }
   ]
 }
