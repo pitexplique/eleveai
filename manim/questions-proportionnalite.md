@@ -855,3 +855,19 @@ Sources : tableaux officiels des médailles (Tokyo 2021, Paris 2024) ; Fevad, 20
 ]
 ```
 Source : service-public.fr (Livret A à 3 % du 01/08/2023 au 31/01/2025 ; intérêts mensuels = hypothèse écrite à l'écran). Bords 0 (2 mp4). Défauts mineurs : numéros de mois qui s'effacent quand les cases s'animent.
+
+### 2de 02 / 1re 06 / STMG 04 — pourcentage de pourcentage (COMMUN : ids `seconde-prop-pourcentage-de-pourcentage[-short]`, `premiere-…`, `stmg-…`, mêmes `questions` ; micros `info_pourcentage_de_pourcentage` (2de), `auto_prop_pourcentage_de_pourcentage` (1re), `auto_prop_de_proportion` (STMG))
+- Paysage (4:08, 2de verte, 1re et STMG orange, gardes collées ; Karim, analyste du commerce en ligne : e-commerce 175,3 Md€, produits ≈ 38 %, places de marché 31 % des produits → 31 % de 38 % ≈ 11,8 % ≈ 20,7 Md€ ; piège : additionner ; défi 40 % × 15 %). Centres : `["argent-budget","technologie-ia"]`.
+```json
+"questions": [
+ {"t":"01:25","question":"Combien font 50 % de 40 % ?","choix":["90 %","20 %","2 000 %"],"reponse":1,"explication":"0,5 × 0,4 = 0,2 = 20 %. A additionne les deux pourcentages ; C multiplie 50 par 40 sans les écrire en décimal."},
+ {"t":"02:18","question":"Un lycée compte 1 200 élèves. 30 % sont en terminale, et parmi eux, 25 % sont internes. Combien d'internes en terminale ?","choix":["90","660","300"],"reponse":0,"explication":"0,3 × 0,25 = 0,075 = 7,5 % du lycée ; 0,075 × 1 200 = 90 élèves. B additionne 30 et 25 % ; C prend 25 % de tout le lycée."}
+]
+```
+- Short (1:13, blanche, « Tirs et buts » : 20 tirs, 10 cadrés, 5 buts → 50 % de 50 % = 25 %). Centres : `["sport"]`. Question en commentaire : 60 % cadrés dont 30 % de buts (18 %, 9 buts sur 50).
+```json
+"questions": [
+ {"t":"00:25","question":"40 % des tirs sont cadrés, et 50 % des tirs cadrés sont des buts. Quelle part des tirs devient un but ?","choix":["90 %","20 %","10 %"],"reponse":1,"explication":"0,4 × 0,5 = 0,2, soit 20 % des tirs."}
+]
+```
+Source : Fevad, bilan du e-commerce 2024. Bords 0 (6 mp4). Défauts mineurs : lignes de calcul serrées dans la paysage.
