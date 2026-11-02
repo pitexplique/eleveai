@@ -11,6 +11,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Play } from "lucide-react";
 import SelecteurPays from "@/components/SelecteurPays";
+import { OFFRE_PAYS } from "@/lib/tarifs";
 import RessourcesMicro from "@/components/pays/RessourcesMicro";
 import { ficheExercicesHrefPourCoach } from "@/lib/fiches-exercices/registre";
 import { ficheHrefPourCoach } from "@/lib/fiches/registre";
@@ -209,6 +210,13 @@ export default async function PaysPage({
               Programme {DU_PAYS[info.slug] ?? `de ${info.nom}`} : séries
               d&apos;exercices avec correction et score&nbsp;!
             </p>
+            {/* ⭐ 02/11/2026 : l'offre en FCFA (familles, visio, écoles) vit sur
+                /offre/<pays> — Sénégal et Côte d'Ivoire seulement. */}
+            {OFFRE_PAYS[info.slug] && (
+              <Link prefetch={false} href={`/offre/${info.slug}`} className="mt-2 inline-block text-sm font-bold text-sky-700 underline">
+                Le suivi famille et l&apos;offre aux écoles {DU_PAYS[info.slug] ?? `de ${info.nom}`} →
+              </Link>
+            )}
             <div className="mt-3 flex flex-wrap items-center gap-2">
               <SelecteurPays paysActuel={info.slug} />
               {p ? (

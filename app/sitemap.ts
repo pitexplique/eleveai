@@ -1361,6 +1361,10 @@ const cartesMentalesRoutes: RouteConfig[] = [
 ];
 const paysRoutes: RouteConfig[] = PAYS.flatMap((info) => [
   { path: `/pays/${info.slug}`, priority: 0.8, changeFrequency: "weekly" as const, lastMod: LASTMOD_PAYS },
+  // 02/11/2026 : l'offre en FCFA (Sénégal, Côte d'Ivoire) — /offre/<pays>.
+  ...(["senegal", "cote-divoire"].includes(info.slug)
+    ? [{ path: `/offre/${info.slug}`, priority: 0.8, changeFrequency: "monthly" as const, lastMod: LASTMOD_PAYS }]
+    : []),
   ...programmesDuPays(info.slug)
     .slice(1) // la première classe est déjà servie par /pays/<pays>
     .map((p) => ({

@@ -352,3 +352,40 @@ export const ETABLISSEMENT_ETRANGER = {
   minimumEleves: 50,
   delaiReponse: "48 heures",
 };
+
+/**
+ * ⭐ LES OFFRES DU SÉNÉGAL ET DE LA CÔTE D'IVOIRE (02/11/2026, /offre/<pays>).
+ * Wave et Orange Money ne prélèvent pas chaque mois : on vend des DURÉES
+ * PRÉPAYÉES, comme un forfait téléphone, avec un rappel avant la fin.
+ * ⚠️ Le paiement mobile passe par un intermédiaire (CinetPay, PayDunya) dont le
+ * compte n'est pas encore ouvert : la page dit « prévu », jamais « disponible ».
+ * Les écoles paient par virement, sur facture.
+ */
+export const DUREES_FCFA: { duree: string; prix: string; note?: string }[] = [
+  { duree: "1 mois", prix: "1 000 FCFA" },
+  { duree: "3 mois", prix: "2 500 FCFA", note: "500 FCFA de moins qu'au mois" },
+  { duree: "L'année scolaire", prix: "8 000 FCFA", note: "deux mois de moins qu'au mois" },
+];
+export const VISIO_FCFA = "3 000 FCFA";
+
+export const OFFRE_PAYS: Record<
+  string,
+  { nom: string; drapeau: string; du: string; villes: string; examens: string; paiements: string }
+> = {
+  senegal: {
+    nom: "Sénégal",
+    drapeau: "🇸🇳",
+    du: "du Sénégal",
+    villes: "Dakar, Thiès, Saint-Louis, Ziguinchor, Kaolack",
+    examens: "le BFEM et le Bac",
+    paiements: "Wave, Orange Money, Free Money ou carte bancaire",
+  },
+  "cote-divoire": {
+    nom: "Côte d'Ivoire",
+    drapeau: "🇨🇮",
+    du: "de Côte d'Ivoire",
+    villes: "Abidjan, Bouaké, Yamoussoukro, San-Pédro, Korhogo",
+    examens: "le BEPC et le Bac",
+    paiements: "Wave, Orange Money, MTN MoMo, Moov Money ou carte bancaire",
+  },
+};
