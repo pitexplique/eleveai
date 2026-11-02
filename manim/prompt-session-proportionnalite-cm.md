@@ -1,4 +1,4 @@
-Prompt — vidéos CM1/CM2, lot PROPORTIONNALITÉ CM-A (01/11/2026)
+Prompt — vidéos CM1/CM2, série PROPORTIONNALITÉ CM, lots CM-A et CM-B FINIS (02/11/2026)
 
 Réponds toujours en français. Ne pose pas de questions : tranche, avance, liste tes choix à la fin.
 
@@ -29,7 +29,7 @@ Niveau CM : 9-11 ans, phrases très courtes, débit −10, « ÷ » écrit (la v
 Questions-pauses : 2 par paysage, 1 par short (choix dans les JSON ; leurres = ajouter au lieu de multiplier, croire tout proportionnel, inverser × et ÷). Questions en commentaire : 01 tee-shirts (2 h), 02 Ti Margo sur la Lune (60 cm), 03 en 3 min (15), 04 fourmis + araignées (140).
 Faits à vérifier et sourcer en tête des scripts : saut environ 6 fois plus haut sur la Lune (gravité ≈ 1/6, NASA) ; ruche ≈ 10 kg de miel par an (ordre de grandeur France) ; fourmi 6 pattes, araignée 8.
 
-### Lot CM-B — voix VALIDÉES par Frédéric le 01/11 (`1b10f19d`) ; brief des agents `manim/brief-agent-proportionnalite-cm-b.md` ; rendus 05-07 lancés le 01/11, 08 ensuite
+### Lot CM-B — voix VALIDÉES par Frédéric le 01/11 (`1b10f19d`) ; brief des agents `manim/brief-agent-proportionnalite-cm-b.md` ; ✅ RENDUS (05 `e5b8e48e`, 06 `de674310`, 07 `b0919260`, 08 `df532454`, bords 0) et passe finale FAITE le 02/11 (`b8564150`)
 | NN | slug | micro | classes | voix | paysage (métier, décor) | centres | short | centres short |
 |---|---|---|---|---|---|---|---|---|
 | 05 | coefficient | prop_coefficient | CM1 + CM2 | `cm-prop-coefficient[-short]` | Nora, pâtissière : 4 gâteaux = 12 œufs, coefficient 3 ; piège l'écart 8 ; défi pizzas 18 tomates → 9 pizzas | cuisine | cœur au repos ≈ 80 battements/min, récré 15 min = 1 200 | corps-sante |
@@ -38,14 +38,16 @@ Faits à vérifier et sourcer en tête des scripts : saut environ 6 fois plus ha
 | 08 | defi | prop_defi | CM1 + CM2 | `cm-prop-defi[-short]` | Ilyes, soigneur de parc animalier : offres de sacs de graines, valeur pour 1 sac ; offres égales ; défi 3 offres de croquettes | animaux | Léo, Maya, Sam : mètres par minute | sport, jeux-defis |
 
 Questions en commentaire : 05 en 60 min (4 800), 06 en 7 s (210 m), 07 en 10 jours (160), 08 Inès 1 200 m en 6 min (aussi vite que Léo). Faits à sourcer en tête des scripts : fréquence cardiaque d'un enfant de 9-11 ans au repos (≈ 70-110/min), guépard ≈ 100-110 km/h (≈ 30 m/s), Station spatiale ≈ 16 orbites et levers de soleil par jour (NASA).
-Puis : CM2 pourcentages (5 micros) et échelles (4 micros).
+⏭ SUITE : CM2 pourcentages (5 micros) et échelles (4 micros) : écrire les voix, les coller à Frédéric, s'arrêter jusqu'à son oui.
 
 ## État des rendus (01/11, à reprendre ici si la session change)
 - ✅ FINIS, vérifiés (bords 0) et commités : 01 reconnaitre `c19cb1ce`, 02 fois-plus `d82c8fdd`, 03 fois-moins `4530a4da` ; questions + centres dans la section CM de `manim/questions-proportionnalite.md`.
 - ✅ 04 tableau FINI (voir `git log`), bords 0. Pour mémoire, sa mission : `manim/scripts/cm1/prop_tableau.py` (`PropTableauCM1` verte / `PropTableauCM2` jaune, garde CM2 collée) + `prop_tableau_short.py` ; voix `cm-prop-tableau[-short].json` ; sorties `manim/sorties/<cm1|cm2>/maths/proportionnalite/04-tableau/` ; media_dir `manim/scripts/cm1/media-prop-tableau[-short]` ; modèle `manim/scripts/6e/prop_tableau.py` (`TableauProp`, flèche latérale « × 20 », flèches du haut « × 2 » entre colonnes).
 - Vérifier chaque épisode soi-même : mp4 présents et immobiles, `verifier-bords-video.py` = 0 instants, planche de 12 images regardée, `questions` + centres notés dans une section « CM » de `manim/questions-proportionnalite.md`, puis commit par chemin (scripts + `*_marques.json` + questions, jamais `media-*` ni `*.cues.tsv`).
 
-## ⏭ Reste à faire (lot CM-A rendu en entier le 01/11)
+## ⏭ Reste à faire
+- ✅ Passe finale du lot CM-B FAITE le 02/11 (`b8564150`) : 14 entrées au manifeste (05 coefficient, 06 quatrième CM2 seul, 07 problème, 08 défi), R2 42/42 (`rclone check`) + HTTP 200, table R2 + bilans, 14 vidéos branchées au coach, pays : Belgique P4/P5 et Suisse romande MSN 23-b2 renvoient aussi à `prop_coefficient` et `prop_defi` (Québec : pas de proportionnalité au primaire), 0 erreur de couverture. Miniatures, vignettes et `fiche-youtube.md` hors git dans les 7 dossiers de sortie (titres à relire par Frédéric). Reste : publier sur YouTube, chaque paysage AVANT son short. Outils : scratchpad de la session du 02/11 (`miniatures_cmb.py`, `construire_cmb.py`, `appliquer_manifeste.py`, `appliquer_r2_bilans.mjs`, `pays_cmb.py`, `temps/lancer.sh`).
+- Défauts mineurs notés dans `manim/questions-proportionnalite.md` (section CM-B), sans gravité.
 - ✅ Passe finale du lot CM-A FAITE le 01/11 (voir `git log`, « passe finale ») : 12 entrées au manifeste (`cm1-prop-<slug>[-short]` ×8, `cm2-prop-<slug>[-short]` ×4 ; chapitres par dry run + `renderer.time`, questions et centres de la section CM de `manim/questions-proportionnalite.md` ; fiche de cours seulement en CM2, il n'y a pas de fiche proportionnalité CM1) ; table R2 + bilans ; R2 36/36 (`rclone check`) et HTTP 200 ; 12 vidéos branchées au coach (`/video/<id>`) ; pays du primaire : Belgique P4/P5, Suisse romande cycle 2 (MSN 23-b2), Québec (SOP A3/B2), 0 erreur de couverture. Miniatures, vignettes et `fiche-youtube.md` hors git dans les 6 dossiers de sortie (titres à relire par Frédéric). Reste : publier sur YouTube, chaque paysage AVANT son short.
 - Outils de la passe finale (à recopier pour le lot B) : scratchpad de la session du 01/11 après-midi, `miniatures_cma.py`, `construire_cma.py`, `appliquer_manifeste.py`, `appliquer_r2_bilans.mjs`, `temps/lancer.sh` (⚠️ `sys.path` : `cm1` AVANT `6e`, sinon `prop_tableau` 6e est importé).
 - Écrire les voix du lot CM-B et les faire valider par Frédéric.
