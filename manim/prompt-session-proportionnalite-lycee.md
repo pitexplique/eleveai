@@ -21,7 +21,7 @@ Banques du coach lues : `lib/tutor-v4/questionBank/seconde/maths/information-chi
   - stmg : 01-calculer, 02-formes, 03-appliquer, 04-pourcentage-de-pourcentage (micro `auto_prop_de_proportion`), 05-nature-pourcentage, 06-taux-equivalent
 - Ceintures proposées (à confirmer par Frédéric avec les voix) : automatismes 1re/STMG (calculer, formes, appliquer, partie-tout, tout-partie) JAUNE ; seconde proportion VERTE ; pourcentage de pourcentage : seconde VERTE, 1re et STMG ORANGE ; nature du pourcentage ORANGE ; taux équivalent (terminale) BLEUE ; shorts BLANCHE.
 
-## Les épisodes (voix écrites le 02/11, EN ATTENTE du oui de Frédéric)
+## Les épisodes (voix VALIDÉES par Frédéric le 02/11, « oui, lance les rendus » ; commit des voix `54283f04`)
 | voix | micro(s) | paysage (prénom, métier, décor) | centres | short | centres short |
 |---|---|---|---|---|---|
 | `lycee-prop-calculer` | auto_prop_calculer (1re, STMG) | Léa, ingénieure du réseau électrique : 2024, 361,7 TWh nucléaire sur ≈ 539 → 67,1 % ; piège diviser par le reste (204 %) ; hydraulique 75,1, éolien 46,8, solaire 24,8 | sciences, nature-ecologie | refrain 80 s sur 200 s = 40 % | musique |
@@ -48,8 +48,9 @@ Questions en commentaire : calculer 90/180 = 50 % ; formes l'intrus 0,5 ; appliq
 - Livret A : 3 % du 1er août 2023 au 31 janvier 2025 (service-public.fr).
 
 ## ⏭ Reste à faire
-1. ⏳ Attendre le oui de Frédéric sur les 18 voix (aucun rendu avant).
-2. Brief des agents `manim/brief-agent-proportionnalite-lycee.md` (modèle `manim/brief-agent-proportionnalite-cm.md`, adapté : cadre lycée, ton sérieux, sources en en-tête, sous-classes 2 ou 3 classes, `canvas_proportion.py` en lecture seule). Modèles : `manim/scripts/6e/prop_*.py`, `manim/scripts/4e/prop_*.py` (lot 5, pourcentages), `manim/scripts/cm1/prop_*.py` (épisodes communs). Scripts communs dans `manim/scripts/premiere/prop_<slug>.py` (sous-classes `Prop<Slug>Premiere`, `…Stmg`, `…Seconde`).
+1. ✅ Voix validées le 02/11. Ceintures proposées retenues.
+   Vagues d'agents (brief `manim/brief-agent-proportionnalite-lycee.md`) : vague 1 lancée le 02/11 = calculer (1re + STMG), seconde proportion, 1re partie-tout ; vague 2 = formes, appliquer, tout-partie ; vague 3 = pourcentage de pourcentage (2de + 1re + STMG), nature du pourcentage, taux équivalent. Scripts `manim/scripts/<premiere|seconde|stmg>/prop_lycee_<slug>[_short].py`.
+2. ✅ Brief écrit : `manim/brief-agent-proportionnalite-lycee.md` (modèle `manim/brief-agent-proportionnalite-cm.md`, adapté : cadre lycée, ton sérieux, sources en en-tête, sous-classes 2 ou 3 classes, `canvas_proportion.py` en lecture seule). Modèles : `manim/scripts/6e/prop_*.py`, `manim/scripts/4e/prop_*.py` (lot 5, pourcentages), `manim/scripts/cm1/prop_*.py` (épisodes communs). Scripts communs dans `manim/scripts/premiere/prop_<slug>.py` (sous-classes `Prop<Slug>Premiere`, `…Stmg`, `…Seconde`).
 3. 3 agents neufs au plus ; vérifier soi-même chaque épisode (dry run 0 RETARD / 0 AUDIT-AVANCE, `scripts/verifier-bords-video.py` = 0 instant, planche) ; section « Lycée » dans `manim/questions-proportionnalite.md`.
 4. Passe finale comme `e9b19c20` / `b8564150` : miniatures, manifeste (chapitres par dry run), `python scripts/fiches-youtube.py`, R2 (seulement nos fichiers, `rclone check`), table R2 + bilans, `node scripts/brancher-videos-coach.mjs --id … --ecrire`. Outils de la passe CM-A : scratchpad `7a13429e-…` (`miniatures_cma.py`, `construire_cma.py`, `appliquer_manifeste.py`, `appliquer_r2_bilans.mjs`, `temps/lancer.sh`). Manifeste, `lib/videos/videos-r2.json` et `bilans-videos.json` ont des lignes non commitées d'autres sessions : index = HEAD + nos ajouts (`git hash-object -w` + `git update-index --cacheinfo`).
 
