@@ -12,6 +12,7 @@
 // PÉRIMÈTRE BO Première spé. Conventions : LaTeX, règle QCM. Canvas : fonctionGraphique (courbe + tangente).
 
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
+import { renfortDerivation } from "./derivation-renfort";
 
 function shuffle<T>(arr: readonly T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
@@ -97,7 +98,7 @@ function polyTex(k: number, n: 2 | 3, b: number, c: number): string {
   return `${tete}${tb}${tc}`;
 }
 
-export const derivationBank: TutorBankItemV4[] = [
+const anciens: TutorBankItemV4[] = [
   /* ===================== DER_TAUX ===================== */
   {
     kind: "fixed",
@@ -3953,4 +3954,31 @@ export const derivationBank: TutorBankItemV4[] = [
       };
     },
   },
+];
+
+/* 02/11/2026 — Frédéric : « enlève les questions fixes sauf pour des cas
+   spéciaux ». Les générateurs de derivation-renfort.ts remplacent tout (plus
+   aucune question « open ») ; on ne garde que des questions de cours : la
+   formule du taux, la définition de f'(a), l'interprétation géométrique,
+   l'équation de la tangente, (uv)', (u/v)', (1/v)', g(ax + b), la
+   dérivabilité de √x, |x| non dérivable en 0 et « continue n'implique pas
+   dérivable », et le piège « remplacer h par 0 trop tôt ». */
+const CAS_SPECIAUX = new Set([
+  "premiere_der_taux_fixed_1",
+  "premiere_der_taux_fixed_3",
+  "premiere_der_taux_fixed_11",
+  "premiere_der_us_fixed_10",
+  "premiere_der_op_fixed_3",
+  "premiere_der_op_fixed_7",
+  "premiere_der_quo_fixed_1",
+  "premiere_der_ca_fixed_1",
+  "premiere_der_va_fixed_1",
+  "premiere_der_va_fixed_5",
+  "premiere_der_tan_fixed_1",
+  "premiere_der_def_fixed_2",
+]);
+
+export const derivationBank: TutorBankItemV4[] = [
+  ...anciens.filter((i) => CAS_SPECIAUX.has(i.id)),
+  ...renfortDerivation,
 ];
