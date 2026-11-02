@@ -17,6 +17,7 @@
 //   courbe/tangente avec un canvas "fonctionGraphique" (rendu KaTeX/SVG existant).
 
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
+import { renfortConvexite } from "./convexite-renfort";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -160,7 +161,7 @@ const expTangenteCanvas: CanvasFigure = {
   misesEnEvidence: [{ point: { x: 0, y: 1, label: "A", couleur: "#dc2626" } }],
 };
 
-export const convexiteBank: TutorBankItemV4[] = [
+const anciens: TutorBankItemV4[] = [
   /* =========================================================
      CONVEXITE_RECONNAITRE — Reconnaître convexe / concave
   ========================================================= */
@@ -1558,4 +1559,20 @@ export const convexiteBank: TutorBankItemV4[] = [
     ),
     tags: ["terminale-spe", "convexite", "type_bac", "qcm"],
   },
+];
+
+/* 02/11/2026 — Frédéric : « enlève les questions fixes sauf pour des cas
+   spéciaux ». Les générateurs de convexite-renfort.ts remplacent tout ; on ne
+   garde que quatre questions de cours : la définition, la méthode (signe de
+   f''), la caractérisation du point d'inflexion et le piège classique x⁴. */
+const CAS_SPECIAUX = new Set([
+  "terminale_spe_convexite_reconnaitre_fixed_1",
+  "terminale_spe_convexite_d2_fixed_6",
+  "terminale_spe_convexite_inflexion_fixed_2",
+  "terminale_spe_convexite_defi_fixed_2",
+]);
+
+export const convexiteBank: TutorBankItemV4[] = [
+  ...anciens.filter((i) => CAS_SPECIAUX.has(i.id)),
+  ...renfortConvexite,
 ];
