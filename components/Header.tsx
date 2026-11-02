@@ -408,8 +408,10 @@ function MenuCompte({
                 Les deux lignes « classe » : profs seulement. */}
             {[
               { label: "Tableau de bord", href: dashboardHref },
+              // 02/11 : les passions ne s'imposent plus à la connexion ;
+              // elles se choisissent d'ici (Frédéric).
               ...(estEleve
-                ? []
+                ? [{ label: "Mes passions", href: "/passions" }]
                 : [
                     { label: "Créer une classe", href: "/prof/classes#nouvelle-classe" },
                     { label: "Gérer une classe", href: "/prof/classes" },
@@ -1139,6 +1141,11 @@ export default function Header() {
                   </button>
                 </div>
                 <div className={`mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs font-bold ${paper ? "text-[#1d1c16]/70" : "text-white/70"}`}>
+                  {!isStaff && (
+                    <Link prefetch={false} href="/passions" onClick={() => setMobileOpen(false)}>
+                      Mes passions
+                    </Link>
+                  )}
                   <Link prefetch={false} href="/votre-avis" onClick={() => setMobileOpen(false)}>
                     Donner mon avis
                   </Link>
