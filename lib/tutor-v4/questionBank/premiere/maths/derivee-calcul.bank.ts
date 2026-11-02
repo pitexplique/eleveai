@@ -21,6 +21,7 @@
 // Les questions de variations portent la courbe : le tableau se lit dessus.
 
 import type { CanvasFigure, TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { renfortDeriveeCalcul } from "./derivee-calcul-renfort";
 
 /* ─────────────────────────── outils ─────────────────────────── */
 
@@ -87,7 +88,7 @@ function canvasCourbe(a: number, b: number, c: number, titre?: string): CanvasFi
   };
 }
 
-export const deriveeCalculBank: TutorBankItemV4[] = [
+const anciens: TutorBankItemV4[] = [
   /* ═══════════════ der_derivee_constante ═══════════════ */
 
   {
@@ -865,4 +866,19 @@ export const deriveeCalculBank: TutorBankItemV4[] = [
       };
     },
   },
+];
+
+/* 02/11/2026 — Frédéric : « enlève les questions fixes sauf pour des cas
+   spéciaux ». Mesure du 02/11 : 1 à 12 squelettes par micro, 9 à 19
+   répétitions sur 20. Les générateurs de derivee-calcul-renfort.ts remplacent tout ;
+   on ne garde que trois questions de cours : la dérivée de x², celle de x³ et la règle de la somme. */
+const CAS_SPECIAUX = new Set([
+  "premiere_der_carre_cube_fixed_1",
+  "premiere_der_carre_cube_fixed_2",
+  "premiere_der_somme_fixed_1",
+]);
+
+export const deriveeCalculBank: TutorBankItemV4[] = [
+  ...anciens.filter((i) => CAS_SPECIAUX.has(i.id)),
+  ...renfortDeriveeCalcul,
 ];

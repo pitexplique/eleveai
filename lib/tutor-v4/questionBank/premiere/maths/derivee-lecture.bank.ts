@@ -17,6 +17,7 @@
 // avec des mots, elle ne veut plus rien dire.
 
 import type { CanvasFigure, TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { renfortDeriveeLecture } from "./derivee-lecture-renfort";
 
 /* ─────────────────────────── outils ─────────────────────────── */
 
@@ -101,7 +102,7 @@ function canvasTangente(
   };
 }
 
-export const deriveeLectureBank: TutorBankItemV4[] = [
+const anciens: TutorBankItemV4[] = [
   /* ═══════════════ der_tangente_lire ═══════════════ */
 
   {
@@ -942,4 +943,18 @@ export const deriveeLectureBank: TutorBankItemV4[] = [
       };
     },
   },
+];
+
+/* 02/11/2026 — Frédéric : « enlève les questions fixes sauf pour des cas
+   spéciaux ». Mesure du 02/11 : 1 à 12 squelettes par micro, 9 à 19
+   répétitions sur 20. Les générateurs de derivee-lecture-renfort.ts remplacent tout ;
+   on ne garde que deux questions de cours : le sens de f'(12) (sujet d'Asie 2026) et le nombre dérivé comme coefficient directeur de la tangente. */
+const CAS_SPECIAUX = new Set([
+  "premiere_der_sens_fixed_1",
+  "premiere_der_coefficient_fixed_1",
+]);
+
+export const deriveeLectureBank: TutorBankItemV4[] = [
+  ...anciens.filter((i) => CAS_SPECIAUX.has(i.id)),
+  ...renfortDeriveeLecture,
 ];
