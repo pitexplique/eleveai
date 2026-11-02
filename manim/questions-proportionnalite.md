@@ -759,3 +759,19 @@ Sources : NASA (ISS ≈ 400 km, g ≈ 8,7 m/s²) ; NASA Planetary Fact Sheets (L
 ]
 ```
 Sources : SDES / IGN 2024 (17,6 Mha = 32 %) ; ministère de l'Écologie 2022 (≈ 75 % privée, 16 % communale, 9 % domaniale). Bords 0 (2 mp4). Défauts mineurs : textes des questions assez petits ; l'énoncé de la question 2 écrit « 4,4 Mha » (la figure dit « forêt publique »).
+
+### 1re 01 / STMG 01 — calculer (COMMUN : ids `premiere-prop-calculer[-short]` et `stmg-prop-calculer[-short]`, mêmes `questions` ; micro `auto_prop_calculer`)
+- Paysage (4:20, jaune, garde STMG collée ; Léa, ingénieure du réseau électrique : 361,7 TWh nucléaire sur ≈ 539 → 67,1 % ; piège diviser par le reste → 204 % ; défi solaire 4,6 %, nucléaire + hydraulique 81 %). Centres : `["sciences","nature-ecologie"]`.
+```json
+"questions": [
+ {"t":"01:14","question":"L'hydraulique : 75,1 TWh sur 539. Quelle proportion ?","choix":["13,9 %","75,1 %","7,2"],"reponse":0,"explication":"75,1 ÷ 539 ≈ 0,139 = 13,9 %. B recopie la partie sans diviser ; C divise le tout par la partie (l'inverse)."},
+ {"t":"02:30","question":"L'éolien : 46,8 TWh sur 539. Quelle proportion ?","choix":["8,7 %","46,8 %","9,5 %"],"reponse":0,"explication":"46,8 ÷ 539 ≈ 0,087 = 8,7 %. C divise par le reste, 492,2, au lieu du total."}
+]
+```
+- Short (0:55, blanche, refrain 4 × 20 s sur 200 s = 40 %). Centres : `["musique"]`. Question en commentaire : 3 × 30 s sur 3 min (50 %).
+```json
+"questions": [
+ {"t":"00:14","question":"80 s de refrain sur 200 s. Quelle proportion ?","choix":["80 %","40 %","2,5"],"reponse":1,"explication":"80 ÷ 200 = 0,4 = 40 % de la chanson."}
+]
+```
+Source : RTE, Bilan électrique 2024 (principaux résultats). Bords 0 (4 mp4). Défauts mineurs : explications sous les choix petites ; pointillés qui traversent l'étiquette « 67,1 % ».
