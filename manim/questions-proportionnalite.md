@@ -775,3 +775,51 @@ Sources : SDES / IGN 2024 (17,6 Mha = 32 %) ; ministère de l'Écologie 2022 (�
 ]
 ```
 Source : RTE, Bilan électrique 2024 (principaux résultats). Bords 0 (4 mp4). Défauts mineurs : explications sous les choix petites ; pointillés qui traversent l'étiquette « 67,1 % ».
+
+### 1re 02 / STMG 02 — formes (COMMUN : ids `premiere-prop-formes[-short]` et `stmg-prop-formes[-short]`, mêmes `questions` ; micro `auto_prop_formes`)
+- Paysage (3:43, jaune, garde STMG collée ; Samuel, hydrologue : 97 % d'eau salée, 3 % douce = 3/100 = 0,03 ; ≈ 2/3 de l'eau douce gelée ; piège 3 % ≠ 0,3 ; défi 1/8 = 0,125 = 12,5 %, l'intrus 2,5 %). Centres : `["nature-ecologie","sciences"]`.
+```json
+"questions": [
+ {"t":"01:13","question":"Comment s'écrit 3 sur 4 en pourcentage ?","choix":["34 %","75 %","3,4 %"],"reponse":1,"explication":"3 ÷ 4 = 0,75 ; × 100 : 75 %. A et C collent les chiffres 3 et 4."},
+ {"t":"02:09","question":"Comment s'écrit 8 % en nombre décimal ?","choix":["0,8","0,08","8,0"],"reponse":1,"explication":"8 ÷ 100 = 0,08. A, c'est 80 % ; C, c'est 800 %."}
+]
+```
+- Short (1:04, blanche, trouve l'intrus : 1/2, 0,5, 5 %, 50 %). Centres : `["jeux-defis"]`. Question en commentaire : l'intrus parmi 1/5, 0,2, 20 %, 0,5, 2/10 (0,5).
+```json
+"questions": [
+ {"t":"00:19","question":"Trouve l'intrus : 3/4, 0,75, 7,5 %","choix":["3/4","0,75","7,5 %"],"reponse":2,"explication":"3/4 = 0,75 = 75 % ; 7,5 % = 0,075."}
+]
+```
+Source : USGS (ordre de grandeur). Bords 0 (4 mp4). Défauts mineurs : quelques étiquettes reprennent un nombre déjà dit (AUDIT-TARD sans gravité).
+
+### 1re 03 / STMG 03 — appliquer (COMMUN : ids `premiere-prop-appliquer[-short]` et `stmg-prop-appliquer[-short]`, mêmes `questions` ; micro `auto_prop_appliquer`)
+- Paysage (3:43, jaune, garde STMG collée ; Clara, infirmière : corps ≈ 60 % d'eau, 70 kg → 42 kg par trois méthodes ; piège 6 ou 0,06 ; sang ≈ 7 % ; défi 80 kg → 48 kg d'eau, 5,6 kg de sang). Centres : `["corps-sante"]`.
+```json
+"questions": [
+ {"t":"01:16","question":"Combien font 15 % de 80 kg ?","choix":["12 kg","65 kg","5,3 kg"],"reponse":0,"explication":"0,15 × 80 = 12 kg. B : 80 − 15 ; C : 80 ÷ 15."},
+ {"t":"02:09","question":"Le sang : environ 7 % de la masse du corps. Une patiente de 60 kg ?","choix":["4,2 kg","42 kg","0,42 kg"],"reponse":0,"explication":"7 % = 0,07 ; 0,07 × 60 = 4,2 kg. B : 0,7 ; C : 0,007."}
+]
+```
+- Short (0:50, blanche, 8 % de 50 = 50 % de 8 = 4). Centres : `["jeux-defis"]`. Question en commentaire : 4 % de 75 (3).
+```json
+"questions": [
+ {"t":"00:17","question":"Combien font 12 % de 25 ?","choix":["3","13","0,3"],"reponse":0,"explication":"12 % de 25 = 25 % de 12 : le quart de 12 = 3."}
+]
+```
+Source : ordres de grandeur de physiologie (eau ≈ 60 %, sang ≈ 7 %). Bords 0 (4 mp4). Défauts mineurs : phrase de réponse verte petite.
+
+### 1re 05 — tout-partie (id `premiere-prop-tout-partie[-short]` ; micro `auto_prop_tout_connaissant_partie`)
+- Paysage (4:11, jaune ; Hugo, consultant en climat : transports 126,8 Mt = 34 % → ≈ 373 Mt, par 1 % puis par division ; piège 43,1 ; défi 434 élèves = 35 % → 1 240). Centres : `["meteo-climat","transports"]`.
+```json
+"questions": [
+ {"t":"01:29","question":"18 % des élèves d'un lycée font du théâtre : 45 élèves. Combien d'élèves en tout ?","choix":["250","8,1","53,1"],"reponse":0,"explication":"45 ÷ 0,18 = 250 élèves. B : 45 × 0,18 ; C : + 18 % à 45."},
+ {"t":"02:30","question":"En 2022 : 131,2 Mt, soit 33,1 % du total. Quel était le total ?","choix":["396 Mt","43 Mt","175 Mt"],"reponse":0,"explication":"131,2 ÷ 0,331 ≈ 396 Mt. B multiplie ; C ajoute 33,1 %."}
+]
+```
+- Short (1:00, blanche, batterie 30 % = 1 200 mAh → 4 000). Centres : `["technologie-ia"]`. Question en commentaire : 20 % = 900 mAh (4 500).
+```json
+"questions": [
+ {"t":"00:18","question":"25 % de batterie = 1 000 mAh. Capacité totale ?","choix":["4 000","250","1 250"],"reponse":0,"explication":"25 % = un quart. 4 × 1 000 = 4 000 mAh."}
+]
+```
+Source : Citepa, Secten 2024. Bords 0 (2 mp4). Défauts mineurs : étiquettes « 30 % » / « 20 % » du short qui débordent un peu de leurs tranches ; pendant la question du short, l'écran n'a que du texte.
