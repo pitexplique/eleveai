@@ -1,0 +1,7 @@
+{
+  "00-accroche": "Trouve l'intrus ! 1 sur 2. 0,5. 5 %. 50 %.",
+  "01-image": "1 sur 2, c'est 0,5, c'est 50 %. L'intrus, c'est 5 % : c'est 0,05, dix fois moins !",
+  "02-question": "Question ! Trouve l'intrus : A : 3 sur 4. B : 0,75. C : 7,5 %. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C. 3 sur 4 égale 0,75, soit 75 %. 7,5 %, c'est 0,075.",
+  "03-commentaire": "À toi : trouve l'intrus ! 1 sur 5. 0,2. 20 %. 0,5. 2 sur 10. Réponds en commentaire !"
+}

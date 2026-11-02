@@ -1,0 +1,7 @@
+{
+  "00-accroche": "Ta mise à jour fait 60 gigas. La barre affiche 35 %. Combien de gigas sont déjà là ?",
+  "01-image": "35 %, c'est 0,35. 0,35 fois 60, égale 21 gigas déjà téléchargés.",
+  "02-question": "Question ! La barre affiche 45 %. Combien de gigas ? A : 27 gigas. B : 15 gigas. C : 105 gigas. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A. 0,45 fois 60, égale 27 gigas.",
+  "03-commentaire": "À toi : à 35 %, il reste 65 % à télécharger. Combien de gigas ? Réponds en commentaire !"
+}

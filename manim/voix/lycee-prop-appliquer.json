@@ -1,0 +1,16 @@
+{
+  "00-garde": "Appliquer un pourcentage. Combien font 60 % d'une quantité ?",
+  "01-situation": "Voici Clara. Elle est infirmière. Le corps d'un adulte contient environ 60 % d'eau. Son patient pèse 70 kilos. Combien de kilos d'eau dans son corps ?",
+  "02-methode1": "Première méthode : 60 %, c'est 60 sur 100. On divise par 100, puis on multiplie par 60. 70 divisé par 100, égale 0,7. 0,7 fois 60, égale 42 kilos.",
+  "03-methode2": "Deuxième méthode, la plus rapide : 60 %, c'est 0,6. On multiplie : 0,6 fois 70, égale 42 kilos. Prendre 60 % d'une quantité, c'est la multiplier par 0,6.",
+  "04-methode3": "Troisième méthode : 60 %, c'est 3 sur 5. 70 divisé par 5, égale 14. 14 fois 3, égale 42 kilos. Trois chemins, un seul résultat.",
+  "05-question": "Question ! Combien font 15 % de 80 kilos ? A : 12 kilos. B : 65 kilos. C : 5,3 kilos. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 0,15 fois 80, égale 12 kilos. B soustrait 15 à 80, et C divise 80 par 15.",
+  "06-piege": "Attention au piège ! 60 %, c'est 0,6, pas 6 ni 0,06. 6 fois 70, égale 420 kilos : plus que le patient ! Vérifie toujours : sous 100 %, le résultat est plus petit que la quantité de départ.",
+  "07-question": "Question ! Le sang représente environ 7 % de la masse du corps. Pour une patiente de 60 kilos ? A : 4,2 kilos. B : 42 kilos. C : 0,42 kilo. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 7 %, c'est 0,07. 0,07 fois 60, égale 4,2 kilos. B prend 7 % pour 0,7, et C pour 0,007.",
+  "08-defi": "À toi de jouer ! Un patient pèse 80 kilos. Combien de kilos d'eau dans son corps, à 60 % ? Et combien de kilos de sang, à 7 % ? Mets pause, et cherche !",
+  "08b-correction": "Eau : 0,6 fois 80, égale 48 kilos. Sang : 0,07 fois 80, égale 5,6 kilos.",
+  "09-finale": "Ce que tu as appris. Prendre un pourcentage d'une quantité, c'est la multiplier par ce pourcentage écrit en décimal : 60 %, c'est fois 0,6. Et sous 100 %, le résultat est plus petit.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

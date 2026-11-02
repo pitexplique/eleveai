@@ -1,0 +1,16 @@
+{
+  "00-garde": "Un pourcentage d'un pourcentage. 31 % de 38 %, cela fait combien ?",
+  "01-situation": "Voici Karim. Il est analyste dans le commerce en ligne. En 2024, les Français ont dépensé 175,3 milliards d'euros en ligne. Environ 38 % pour acheter des produits, le reste pour des services. Et parmi ces achats de produits, 31 % passent par des places de marché.",
+  "02-question-du-jour": "Quelle part de tout le commerce en ligne passe par les places de marché ? 31 % ? Non : 31 % d'une partie seulement, les produits.",
+  "03-carre": "Dessinons le tout : un carré de 100 %. Les produits : une bande de 38 %. Dans cette bande, on en prend 31 % : un petit rectangle. Sa part du carré, c'est 31 % de 38 %.",
+  "04-calcul": "Un pourcentage d'un pourcentage, c'est un produit. 0,31 fois 0,38, égale 0,1178, soit environ 11,8 %. Vérification en euros : environ 20,7 milliards sur 175,3, soit encore 11,8 %.",
+  "05-question": "Question ! Combien font 50 % de 40 % ? A : 90 %. B : 20 %. C : 2 000 %. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 0,5 fois 0,4, égale 0,2, soit 20 %. A additionne les deux pourcentages, et C multiplie 50 par 40 sans les écrire en décimal.",
+  "06-piege": "Attention au piège ! On n'additionne jamais deux pourcentages qui ne portent pas sur le même tout. 38 plus 31, égale 69 % : c'est faux. Le petit rectangle est plus petit que la bande, jamais plus grand.",
+  "07-question": "Question ! Un lycée compte 1 200 élèves. 30 % sont en terminale, et parmi eux, 25 % sont internes. Combien d'internes en terminale ? A : 90. B : 660. C : 300. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 0,3 fois 0,25, égale 0,075, soit 7,5 % du lycée. 0,075 fois 1 200, égale 90 élèves. B additionne 30 et 25 %, et C prend 25 % de tout le lycée.",
+  "08-defi": "À toi de jouer ! Dans une entreprise, 40 % des salariés sont cadres, et 15 % des cadres télétravaillent chaque jour. Quelle part des salariés ? Et sur 2 500 salariés, combien de personnes ? Mets pause, et cherche !",
+  "08b-correction": "0,4 fois 0,15, égale 0,06, soit 6 % des salariés. 0,06 fois 2 500, égale 150 personnes.",
+  "09-finale": "Ce que tu as appris. Un pourcentage d'un pourcentage se calcule en multipliant les deux proportions écrites en décimal. Le résultat est plus petit que chacune. On ne les additionne jamais.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

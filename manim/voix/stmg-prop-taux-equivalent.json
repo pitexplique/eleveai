@@ -1,0 +1,17 @@
+{
+  "00-garde": "Taux proportionnel, taux équivalent. 3 % par an, cela fait combien par mois ?",
+  "01-situation": "Voici Emma. Elle est conseillère bancaire. En 2024, le Livret A rapportait 3 % par an. Un client lui demande : et par mois ? Imaginons que les intérêts soient ajoutés chaque mois.",
+  "02-proportionnel": "Première idée : 3 divisé par 12, égale 0,25 % par mois. C'est le taux proportionnel : on partage le taux annuel en 12.",
+  "03-test": "Testons-le. Chaque mois, le capital est multiplié par 1,0025. Sur 12 mois : 1,0025 puissance 12, égale environ 1,0304. Cela fait 3,04 % sur l'année, un peu plus que 3 % !",
+  "04-pourquoi": "Pourquoi ? Les intérêts de chaque mois rapportent eux-mêmes des intérêts les mois suivants. Appliquer un taux 12 fois, c'est élever son coefficient à la puissance 12, pas le multiplier par 12.",
+  "05-question": "Question ! Un taux annuel de 6 %. Quel est le taux mensuel proportionnel ? A : 0,5 %. B : 72 %. C : 6 %. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 6 divisé par 12, égale 0,5 % par mois. B multiplie par 12 au lieu de diviser.",
+  "06-equivalent": "Le taux équivalent est celui qui redonne exactement 3 % sur l'année. On cherche t tel que 1 plus t, puissance 12, égale 1,03. Donc 1 plus t égale 1,03 puissance 1 sur 12, environ 1,002466. Le taux mensuel équivalent : environ 0,247 %.",
+  "07-piege": "Le piège : croire que 1 % par mois fait 12 % par an. 1,01 puissance 12, égale environ 1,1268 : c'est 12,68 % ! Le taux équivalent est toujours un peu plus petit que le taux proportionnel.",
+  "08-question": "Question ! Quel taux mensuel redonne exactement 3 % sur l'année ? A : 0,25 %. B : environ 0,247 %. C : 3 %. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. 1,002466 puissance 12, égale 1,03. A est le taux proportionnel : il donne 3,04 %.",
+  "09-defi": "À toi de jouer ! Un taux annuel de 12 %. Quel est le taux trimestriel proportionnel ? Et le taux trimestriel équivalent ? Mets pause, et cherche !",
+  "09b-correction": "Proportionnel : 12 divisé par 4, égale 3 % par trimestre. Équivalent : 1,12 puissance 1 sur 4, égale environ 1,0287, soit environ 2,87 % par trimestre.",
+  "10-finale": "Ce que tu as appris. Le taux proportionnel se divise : taux annuel divisé par le nombre de périodes. Le taux équivalent redonne exactement le taux annuel : avec la puissance 1 sur n. Il est un peu plus petit.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

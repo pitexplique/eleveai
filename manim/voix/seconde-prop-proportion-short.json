@@ -1,0 +1,7 @@
+{
+  "00-accroche": "Ta vidéo a fait 2 000 vues et 150 j'aime. Quel est ton taux de j'aime ?",
+  "01-image": "150 divisé par 2 000, égale 0,075, soit 7,5 % des personnes qui l'ont vue.",
+  "02-question": "Question ! 500 vues, 40 j'aime. Quel taux ? A : 8 %. B : 40 %. C : 12,5. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A. 40 divisé par 500, égale 0,08, soit 8 %.",
+  "03-commentaire": "À toi : 1 200 vues et 54 j'aime. Quel taux de j'aime ? Réponds en commentaire !"
+}

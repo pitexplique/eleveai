@@ -1,0 +1,16 @@
+{
+  "00-garde": "Calculer une proportion. Quelle part du tout représente une partie ?",
+  "01-situation": "Voici Léa. Elle est ingénieure chez le gestionnaire du réseau électrique. En 2024, la France a produit environ 539 térawattheures d'électricité. Le nucléaire en a produit 361,7. Quelle part de l'électricité vient du nucléaire ?",
+  "02-methode": "Une proportion, c'est la partie divisée par le tout. La partie : 361,7. Le tout : 539. Proportion égale partie divisé par total.",
+  "03-calcul": "361,7 divisé par 539, égale environ 0,671. Pour l'écrire en pourcentage, on multiplie par 100 : 67,1 %. Environ deux tiers de l'électricité française vient du nucléaire.",
+  "04-sens": "Une proportion est toujours entre 0 et 1, c'est-à-dire entre 0 % et 100 %. La partie est dans le tout : elle ne peut pas le dépasser.",
+  "05-question": "Question ! L'hydraulique, les barrages, a produit 75,1 térawattheures sur 539. Quelle proportion ? A : 13,9 %. B : 75,1 %. C : 7,2. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 75,1 divisé par 539, égale environ 0,139, soit 13,9 %. B recopie la partie sans la diviser. C divise le total par la partie : c'est l'inverse.",
+  "06-piege": "Attention au piège ! On divise par le TOUT, pas par le reste. Le reste, hors nucléaire : 539 moins 361,7, égale 177,3. 361,7 divisé par 177,3, égale environ 2,04, soit 204 %. Plus de 100 % : impossible pour une partie !",
+  "07-question": "Question ! L'éolien a produit 46,8 térawattheures sur 539. Quelle proportion ? A : 8,7 %. B : 46,8 %. C : 9,5 %. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 46,8 divisé par 539, égale environ 0,087, soit 8,7 %. C divise par le reste, 492,2, au lieu du total.",
+  "08-defi": "À toi de jouer ! Un : le solaire a produit 24,8 térawattheures. Quelle proportion ? Deux : quelle part pour le nucléaire et l'hydraulique ensemble ? Mets pause, et cherche !",
+  "08b-correction": "Un : 24,8 divisé par 539, égale environ 0,046, soit 4,6 %. Deux : 361,7 plus 75,1, égale 436,8. 436,8 divisé par 539, égale environ 0,81, soit 81 %.",
+  "09-finale": "Ce que tu as appris. Une proportion, c'est la partie divisée par le tout. On la multiplie par 100 pour l'écrire en pourcentage. Elle est toujours entre 0 % et 100 %.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

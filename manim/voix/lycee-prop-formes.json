@@ -1,0 +1,16 @@
+{
+  "00-garde": "Une proportion, trois écritures. Fraction, nombre décimal, pourcentage : est-ce le même nombre ?",
+  "01-situation": "Voici Samuel. Il est hydrologue : il étudie l'eau de la planète. Sur toute l'eau de la Terre, environ 97 % est salée, dans les océans. Seulement 3 % est de l'eau douce.",
+  "02-trois": "3 %, cela veut dire 3 sur 100. En fraction : 3 sur 100. En nombre décimal : 0,03. Trois écritures, un seul nombre.",
+  "03-passer": "Pour passer d'un pourcentage au décimal, on divise par 100 : 97 % égale 0,97. Pour revenir au pourcentage, on multiplie par 100. Et une fraction ? On divise le numérateur par le dénominateur.",
+  "04-glace": "Et cette eau douce ? Environ les deux tiers sont gelés, dans les glaciers et les calottes polaires. 2 divisé par 3, égale environ 0,67, soit environ 67 %.",
+  "05-question": "Question ! Comment s'écrit 3 sur 4 en pourcentage ? A : 34 %. B : 75 %. C : 3,4 %. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 3 divisé par 4, égale 0,75. Fois 100 : 75 %. A et C collent les chiffres 3 et 4 : ce n'est pas un calcul.",
+  "06-piege": "Attention au piège ! 3 %, ce n'est pas 0,3. 0,3, c'est 30 sur 100, donc 30 %. 3 %, c'est 0,03 : dix fois moins. Diviser par 100, c'est décaler la virgule de deux rangs.",
+  "07-question": "Question ! Comment s'écrit 8 % en nombre décimal ? A : 0,8. B : 0,08. C : 8,0. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. 8 divisé par 100, égale 0,08. A, c'est 80 %, et C, c'est 800 %.",
+  "08-defi": "À toi de jouer ! Un : écris 1 sur 8 en nombre décimal, puis en pourcentage. Deux : laquelle de ces écritures n'est pas égale à 2 sur 5 : 0,4 ; 40 % ; 2,5 % ? Mets pause, et cherche !",
+  "08b-correction": "Un : 1 divisé par 8, égale 0,125, soit 12,5 %. Deux : 2 divisé par 5, égale 0,4, soit 40 %. L'intrus est 2,5 %.",
+  "09-finale": "Ce que tu as appris. Une proportion s'écrit en fraction, en décimal ou en pourcentage. Du pourcentage au décimal, on divise par 100. Et 3 %, c'est 0,03, pas 0,3.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

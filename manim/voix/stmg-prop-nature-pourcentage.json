@@ -1,0 +1,16 @@
+{
+  "00-garde": "Proportion ou évolution ? Deux pourcentages qui ne disent pas la même chose.",
+  "01-situation": "Voici Moussa. Il est journaliste de données dans le sport. Aux Jeux de Paris 2024, la France a gagné 64 médailles, dont 16 en or. Aux Jeux de Tokyo, elle en avait gagné 33.",
+  "02-proportion": "Premier pourcentage : 16 divisé par 64, égale 0,25. 25 % des médailles françaises sont en or. C'est une proportion : une partie d'un tout, au même moment.",
+  "03-evolution": "Deuxième pourcentage : de 33 à 64 médailles. 64 moins 33, égale 31. 31 divisé par 33, égale environ 0,94. Le nombre de médailles a augmenté d'environ 94 %. C'est une évolution : on compare deux dates.",
+  "04-reperer": "Pour les reconnaître : « 25 % des médailles », c'est une proportion. « Augmenter de », « baisser de », « passer de… à », c'est une évolution.",
+  "05-question": "Question ! « Les ventes ont progressé de 32 % en un an. » Ce pourcentage est : A : une proportion. B : une évolution. C : les deux. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. On compare les ventes à deux dates : c'est une évolution.",
+  "06-piege": "Attention au piège ! À Tokyo, 10 médailles d'or sur 33 : environ 30 %. À Paris, 16 sur 64 : 25 %. L'or a augmenté de 60 %, de 10 à 16 médailles, et pourtant sa part a baissé. Une proportion et une évolution ne s'additionnent pas et ne se comparent pas.",
+  "07-question": "Question ! La part de l'or passe de 30 % à 25 %. Elle a baissé de : A : 5 %. B : 5 points. C : 25 %. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Entre deux proportions, la différence se compte en points : 30 moins 25, égale 5 points.",
+  "08-defi": "À toi de jouer ! Deux phrases. Un : « 45 % du stock est importé ». Deux : « le chiffre d'affaires a chuté de 45 % ». Laquelle est une proportion ? Et si le chiffre d'affaires valait 200 000 euros, combien vaut-il après la chute ? Mets pause, et cherche !",
+  "08b-correction": "La phrase un est une proportion, une part du stock. La phrase deux est une évolution. Après une baisse de 45 %, il reste 55 % : 0,55 fois 200 000, égale 110 000 euros.",
+  "09-finale": "Ce que tu as appris. Une proportion compare une partie à un tout, au même moment. Une évolution compare deux valeurs à deux dates. Avant de calculer, demande-toi lequel des deux tu lis.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

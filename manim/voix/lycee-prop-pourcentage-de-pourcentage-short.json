@@ -1,0 +1,7 @@
+{
+  "00-accroche": "50 % de tirs cadrés, 50 % de buts. Ça fait 100 % ?",
+  "01-image": "20 tirs. La moitié sont cadrés : 10. La moitié des tirs cadrés finissent au fond : 5 buts. 5 sur 20, c'est 25 %. 50 % de 50 %, égale 25 %.",
+  "02-question": "Question ! 40 % des tirs sont cadrés, et 50 % des tirs cadrés sont des buts. Quelle part des tirs devient un but ? A : 90 %. B : 20 %. C : 10 %. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B. 0,4 fois 0,5, égale 0,2, soit 20 % des tirs.",
+  "03-commentaire": "À toi : 60 % des tirs sont cadrés, et 30 % des tirs cadrés sont des buts. Quelle part des tirs ? Et sur 50 tirs, combien de buts ? Réponds en commentaire !"
+}

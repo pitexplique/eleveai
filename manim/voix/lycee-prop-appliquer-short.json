@@ -1,0 +1,7 @@
+{
+  "00-accroche": "Combien font 8 % de 50 ? Sans calculatrice, en une seconde !",
+  "01-image": "L'astuce : 8 % de 50, c'est pareil que 50 % de 8. Et 50 %, c'est la moitié : 4 !",
+  "02-question": "Question ! Combien font 12 % de 25 ? A : 3. B : 13. C : 0,3. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A. 12 % de 25, c'est 25 % de 12 : le quart de 12, égale 3.",
+  "03-commentaire": "À toi : combien font 4 % de 75 ? Réponds en commentaire !"
+}

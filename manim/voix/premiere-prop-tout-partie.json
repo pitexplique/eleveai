@@ -1,0 +1,16 @@
+{
+  "00-garde": "Retrouver le tout connaissant une partie. 34 % font 126,8 : combien fait 100 % ?",
+  "01-situation": "Voici Hugo. Il est consultant en climat : il aide les entreprises à réduire leurs émissions. En 2023, les transports ont émis 126,8 millions de tonnes de gaz à effet de serre en France. C'est 34 % de toutes les émissions du pays. Quel est le total ?",
+  "02-unite": "Première méthode : par 1 %. 34 % font 126,8. 1 %, c'est 34 fois moins : 126,8 divisé par 34, égale environ 3,73. 100 %, c'est 100 fois plus : environ 373 millions de tonnes.",
+  "03-division": "Deuxième méthode, directe : 34 % du total égale 126,8. Donc 0,34 fois le total égale 126,8. Le total égale 126,8 divisé par 0,34, environ 373 millions de tonnes.",
+  "04-verifier": "On vérifie dans l'autre sens : 0,34 fois 373, égale environ 126,8. Et le tout est plus grand que la partie : c'est rassurant.",
+  "05-question": "Question ! 18 % des élèves d'un lycée font du théâtre : 45 élèves. Combien d'élèves en tout ? A : 250. B : 8,1. C : 53,1. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 45 divisé par 0,18, égale 250 élèves. B multiplie 45 par 0,18, et C ajoute 18 % à 45.",
+  "06-piege": "Attention au piège ! Multiplier 126,8 par 0,34 donne 43,1 : plus petit que la partie, impossible pour un total. Et ajouter 34 % à 126,8 ne donne rien non plus. Pour remonter au tout, on divise par le taux.",
+  "07-question": "Question ! En 2022, les transports émettaient 131,2 millions de tonnes, soit 33,1 % du total. Quel était le total ? A : 396 millions de tonnes. B : 43 millions de tonnes. C : 175 millions de tonnes. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 131,2 divisé par 0,331, égale environ 396 millions de tonnes. B multiplie au lieu de diviser, et C ajoute 33,1 %.",
+  "08-defi": "À toi de jouer ! Dans un lycée, 35 % des élèves sont demi-pensionnaires, soit 434 élèves. Combien d'élèves compte le lycée ? Vérifie ta réponse. Mets pause, et cherche !",
+  "08b-correction": "434 divisé par 0,35, égale 1 240 élèves. Vérification : 0,35 fois 1 240, égale 434.",
+  "09-finale": "Ce que tu as appris. Pour retrouver le tout, on divise la partie par le taux écrit en décimal. On peut aussi passer par 1 %. Et on vérifie : le taux fois le tout redonne la partie.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

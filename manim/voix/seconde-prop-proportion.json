@@ -1,0 +1,16 @@
+{
+  "00-garde": "Proportion d'une sous-population. Un pourcentage, mais pour cent de quoi ?",
+  "01-situation": "Voici Aïcha. Elle est ingénieure forestière. En 2024, la forêt couvre 17,6 millions d'hectares en France métropolitaine, sur un territoire d'environ 55 millions d'hectares.",
+  "02-calcul": "La proportion de forêt : la partie divisée par le tout. 17,6 divisé par 55, égale 0,32, soit 32 % du territoire. Presque un hectare sur trois.",
+  "03-sous-population": "Dans cette forêt, environ trois hectares sur quatre appartiennent à des propriétaires privés : 75 %. Le reste, 25 %, est une forêt publique, à l'État ou aux communes.",
+  "04-question": "Question ! Les forêts des communes couvrent environ 2,8 millions d'hectares, sur les 17,6 millions de la forêt. Quelle proportion de la forêt ? A : 16 %. B : 2,8 %. C : 6,3. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. 2,8 divisé par 17,6, égale environ 0,16, soit 16 %. B recopie la partie, et C divise le tout par la partie.",
+  "05-reference": "La forêt publique : 25 % de 17,6, égale 4,4 millions d'hectares. Mais par rapport au territoire ? 4,4 divisé par 55, égale 0,08, soit 8 %.",
+  "06-piege": "Voilà le piège ! Le même nombre, 4,4 millions d'hectares, fait 25 % de la forêt, mais 8 % du territoire. Un pourcentage ne veut rien dire tant qu'on n'a pas dit : pour cent de quoi.",
+  "07-question": "Question ! 4,4 millions d'hectares de forêt publique, sur 55 millions d'hectares de territoire. Quel pourcentage du territoire ? A : 25 %. B : 8 %. C : 32 %. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. 4,4 divisé par 55, égale 0,08, soit 8 %. A se trompe de référence : c'est la part de la forêt. C, c'est toute la forêt.",
+  "08-defi": "À toi de jouer ! Les forêts de l'État couvrent environ 1,6 million d'hectares. Quel pourcentage de la forêt, 17,6 millions ? Quel pourcentage du territoire, 55 millions ? Mets pause, et cherche !",
+  "08b-correction": "De la forêt : 1,6 divisé par 17,6, égale environ 0,09, soit 9 %. Du territoire : 1,6 divisé par 55, égale environ 0,029, soit 2,9 %.",
+  "09-finale": "Ce que tu as appris. La proportion d'une sous-population, c'est son effectif divisé par l'effectif de référence. Change la référence, et le pourcentage change. Dis toujours : pour cent de quoi.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -1,0 +1,7 @@
+{
+  "00-accroche": "Ta batterie affiche 30 %. Il reste 1 200 milliampères-heures. Quelle est sa capacité totale ?",
+  "01-image": "30 % font 1 200. Donc 10 % font 400, et 100 % font 4 000 milliampères-heures.",
+  "02-question": "Question ! 25 % de batterie, c'est 1 000 milliampères-heures. Quelle capacité totale ? A : 4 000. B : 250. C : 1 250. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A. 25 %, c'est un quart. 4 fois 1 000, égale 4 000 milliampères-heures.",
+  "03-commentaire": "À toi : 20 % de batterie, c'est 900 milliampères-heures. Quelle capacité totale ? Réponds en commentaire !"
+}

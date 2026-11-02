@@ -1,0 +1,7 @@
+{
+  "00-accroche": "Le refrain, c'est quelle part de ta chanson ?",
+  "01-image": "Une chanson de 3 minutes 20, soit 200 secondes. Le refrain revient 4 fois, 20 secondes chaque fois : 80 secondes.",
+  "02-question": "Question ! 80 secondes de refrain sur 200. Quelle proportion ? A : 80 %. B : 40 %. C : 2,5. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B. 80 divisé par 200, égale 0,4, soit 40 % de la chanson.",
+  "03-commentaire": "À toi : un refrain de 30 secondes revient 3 fois dans une chanson de 3 minutes. Quelle proportion ? Réponds en commentaire !"
+}

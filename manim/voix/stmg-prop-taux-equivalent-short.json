@@ -1,0 +1,7 @@
+{
+  "00-accroche": "1 % par mois, ça fait 12 % par an ?",
+  "01-image": "100 euros. Plus 1 % chaque mois : 101, puis 102,01, puis 103,03… Au bout de 12 mois : environ 112,68 euros. Pas 112 !",
+  "02-question": "Question ! 1 % par mois pendant 12 mois. Combien sur l'année ? A : 12 %. B : environ 12,7 %. C : 1 %. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B. 1,01 puissance 12, égale environ 1,1268 : environ 12,7 %. Les intérêts rapportent des intérêts.",
+  "03-commentaire": "À toi : 2 % par mois pendant 12 mois. Quel taux sur l'année ? Réponds en commentaire !"
+}
