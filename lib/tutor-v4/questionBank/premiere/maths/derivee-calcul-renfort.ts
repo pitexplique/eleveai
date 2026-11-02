@@ -581,15 +581,17 @@ function genDeg3Erreur() {
 function genNdDepuisFprime() {
   const deg = rc([1, 2]);
   const p: P = deg === 1 ? [rc([-7, -3, 2, 5, 8]), rc([-4, -2, 3, 6])] : [rc([-5, -1, 4, 7]), rc([-6, -2, 3, 5]), rc([-3, -1, 2, 3])];
-  const a = rc([-3, -2, -1, 1, 2, 3, 4]);
+  const tournure = randomInt(0, 3);
+  // Coût marginal et vitesse : quantité ou temps positif.
+  const a = tournure >= 2 ? rc([1, 2, 3, 4, 5]) : rc([-3, -2, -1, 1, 2, 3, 4]);
   const val = ev(p, a);
   const pr = rc(PRODUITS);
-  const text = rc([
+  const text = ([
     `On a $f'(x) = ${tex(p)}$. Calcule $f'(${a})$.`,
     `La dérivée d’une fonction $g$ est $g'(x) = ${tex(p)}$. Que vaut $g'(${a})$ ?`,
     `Pour ${pr.ent}, le coût marginal est $C'(q) = ${tex(p, "q")}$. Calcule $C'(${a})$.`,
     `La vitesse d’un robot est $v(t) = d'(t) = ${tex(p, "t")}$. Calcule $d'(${a})$.`,
-  ]);
+  ])[tournure];
   const calc = deg === 1 ? `${n(p[1])} \\times ${par(a)} ${p[0] < 0 ? "-" : "+"} ${n(Math.abs(p[0]))}` : `${n(p[2])} \\times ${par(a)}^2 ${p[1] < 0 ? "-" : "+"} ${n(Math.abs(p[1]))} \\times ${par(a)} ${p[0] < 0 ? "-" : "+"} ${n(Math.abs(p[0]))}`;
   return court(text, val, expl("$f'(a)$ s’obtient en remplaçant $x$ par $a$ dans $f'(x)$.", "on remplace, avec des parenthèses autour des nombres négatifs.", `$${calc} = ${n(val)}$.`, `le nombre dérivé vaut $${n(val)}$.`));
 }
