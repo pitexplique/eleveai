@@ -11527,5 +11527,23 @@
   "short": false,
   "youtube": "ZZiXPXBTXIQ",
   "coach": "/coach/serie?classe=seconde&matiere=maths&notion=arithmetique_entiers&display=simple"
+ },
+ "terminale-loi-normale-escalier": {
+  "fichier": "terminale/maths/probabilites/loi-normale-escalier/eleveai-maths-terminale-loi-normale-escalier.mp4",
+  "poster": "terminale/maths/probabilites/loi-normale-escalier/eleveai-maths-terminale-loi-normale-escalier.png",
+  "vignette": "terminale/maths/probabilites/loi-normale-escalier/eleveai-maths-terminale-loi-normale-escalier.vignette.webp",
+  "titre": "L'escalier et la cloche : comment la loi binomiale devient la loi normale · Maths Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=loi_binomiale&display=simple"
+ },
+ "terminale-loi-normale-escalier-short": {
+  "fichier": "terminale/maths/probabilites/loi-normale-escalier/eleveai-maths-terminale-loi-normale-escalier-short.mp4",
+  "poster": "terminale/maths/probabilites/loi-normale-escalier/eleveai-maths-terminale-loi-normale-escalier-short.png",
+  "vignette": "terminale/maths/probabilites/loi-normale-escalier/eleveai-maths-terminale-loi-normale-escalier-short.vignette.webp",
+  "titre": "300 rangées de clous : l'escalier devient… quoi ? 🔔 — Tle #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=loi_binomiale&display=simple"
  }
 }

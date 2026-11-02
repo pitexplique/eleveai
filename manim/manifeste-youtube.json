@@ -53359,6 +53359,111 @@
         "sport",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "terminale-loi-normale-escalier",
+      "notionId": "loi_binomiale",
+      "classe": "terminale-spe",
+      "ceinture": "noire",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "prioritaire": true,
+      "fichier": "terminale/maths/probabilites/loi-normale-escalier/eleveai-maths-terminale-loi-normale-escalier.mp4",
+      "miniature": "terminale/maths/probabilites/loi-normale-escalier/eleveai-maths-terminale-loi-normale-escalier.png",
+      "titre": "L'escalier et la cloche : comment la loi binomiale devient la loi normale · Maths Tle spé",
+      "accroche": "À la fête foraine, une bille tombe sur une planche pleine de clous. À chaque clou : gauche ou droite, une chance sur deux. Où va-t-elle finir ?\n\nDans cette vidéo :\n• chaque rangée de clous est une épreuve de Bernoulli : la case d'arrivée suit la loi binomiale B(n ; 1/2)\n• centrée et réduite, la binomiale se dessine en escalier : des marches de pas 2/√n, d'aire totale 1\n• on fait bouger le curseur : 4, 16, 64 rangées… les marches se resserrent\n• quand n tend vers l'infini, l'escalier devient la cloche de la loi normale : 1/√(2π) · e^(−x²/2)\n• Moivre (1733), Laplace (1812) et la planche de Galton\n• la cloche est partout : tailles, erreurs de mesure, poids des paquets à l'usine\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture noire.\n\nPour s'entraîner :\n• la série du coach sur la loi binomiale : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=loi_binomiale&microId=binomiale_calculer&display=simple\n• la courbe en cloche, de Pascal à Gauss : https://www.eleveai.fr/loi-normale\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "La planche de clous de la fête foraine"
+        ],
+        [
+          "00:19",
+          "Un clou, deux marches"
+        ],
+        [
+          "00:32",
+          "Les rangées : la loi binomiale"
+        ],
+        [
+          "00:45",
+          "Question : combien de chemins ?"
+        ],
+        [
+          "01:11",
+          "Le curseur : 4, 16, 64 rangées"
+        ],
+        [
+          "01:35",
+          "Question : le pas des marches"
+        ],
+        [
+          "02:04",
+          "La limite : la loi normale"
+        ],
+        [
+          "02:19",
+          "Moivre, Laplace et Galton"
+        ],
+        [
+          "02:36",
+          "Question : la hauteur de la cloche"
+        ],
+        [
+          "03:07",
+          "La cloche est partout"
+        ],
+        [
+          "03:22",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "loi normale",
+        "loi binomiale",
+        "théorème de Moivre-Laplace",
+        "planche de Galton",
+        "courbe en cloche",
+        "centrer réduire",
+        "Moivre",
+        "Laplace",
+        "Galton",
+        "probabilités",
+        "maths",
+        "terminale",
+        "spé maths",
+        "lycée",
+        "EleveAI",
+        "ceinture noire"
+      ]
+    },
+    {
+      "id": "terminale-loi-normale-escalier-short",
+      "notionId": "loi_binomiale",
+      "classe": "terminale-spe",
+      "ceinture": "noire",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "prioritaire": true,
+      "renvoie_vers": "terminale-loi-normale-escalier",
+      "fichier": "terminale/maths/probabilites/loi-normale-escalier/eleveai-maths-terminale-loi-normale-escalier-short.mp4",
+      "miniature": "terminale/maths/probabilites/loi-normale-escalier/eleveai-maths-terminale-loi-normale-escalier-short.png",
+      "titre": "300 rangées de clous : l'escalier devient… quoi ? 🔔 — Tle #Shorts",
+      "accroche": "Une bille tombe sur un clou : gauche ou droite, une chance sur deux. Un clou, deux cases, deux marches. Ajoute des rangées : 4, 16, 300… les marches se resserrent, de pas 2/√n. Et l'escalier de la loi binomiale devient une courbe lisse : la cloche de la loi normale.\n\n🥋 Ceinture noire.\n👉 À toi : avec 100 rangées, quel est le pas des marches ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=loi_binomiale&microId=binomiale_calculer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #loinormale #probabilités #terminale #bac",
+      "tags": [
+        "loi normale",
+        "loi binomiale",
+        "planche de Galton",
+        "courbe en cloche",
+        "Moivre-Laplace",
+        "probabilités",
+        "maths",
+        "terminale",
+        "bac",
+        "EleveAI",
+        "ceinture noire",
+        "Shorts"
+      ]
     }
   ]
 }
