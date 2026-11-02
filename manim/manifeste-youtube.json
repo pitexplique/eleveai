@@ -53370,7 +53370,7 @@
       "fichier": "terminale/maths/probabilites/loi-normale-escalier/eleveai-maths-terminale-loi-normale-escalier.mp4",
       "miniature": "terminale/maths/probabilites/loi-normale-escalier/eleveai-maths-terminale-loi-normale-escalier.png",
       "titre": "L'escalier et la cloche : comment la loi binomiale devient la loi normale · Maths Tle spé",
-      "accroche": "À la fête foraine, une bille tombe sur une planche pleine de clous. À chaque clou : gauche ou droite, une chance sur deux. Où va-t-elle finir ?\n\nDans cette vidéo :\n• chaque rangée de clous est une épreuve de Bernoulli : la case d'arrivée suit la loi binomiale B(n ; 1/2)\n• centrée et réduite, la binomiale se dessine en escalier : des marches de pas 2/√n, d'aire totale 1\n• on fait bouger le curseur : 4, 16, 64 rangées… les marches se resserrent\n• quand n tend vers l'infini, l'escalier devient la cloche de la loi normale : 1/√(2π) · e^(−x²/2)\n• Moivre (1733), Laplace (1812) et la planche de Galton\n• la cloche est partout : tailles, erreurs de mesure, poids des paquets à l'usine\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture noire.\n\nPour s'entraîner :\n• la courbe en cloche, de Pascal à Gauss : https://www.eleveai.fr/loi-normale\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "accroche": "À la fête foraine, une bille tombe sur une planche pleine de clous. À chaque clou : gauche ou droite, une chance sur deux. Où va-t-elle finir ?\n\nDans cette vidéo :\n• chaque rangée de clous est une épreuve de Bernoulli : la case d'arrivée suit la loi binomiale B(n ; 1/2)\n• centrée et réduite, la binomiale se dessine en escalier : des marches de pas 2/√n, d'aire totale 1\n• on fait bouger le curseur : 4, 16, 64 rangées… les marches se resserrent\n• quand n tend vers l'infini, l'escalier devient la cloche de la loi normale : 1/√(2π) · e^(−x²/2)\n• Moivre (1733), Laplace (1812) et la planche de Galton\n• la cloche est partout : tailles, erreurs de mesure, poids des paquets à l'usine\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture noire.\n\nPour s'entraîner :\n• la série du coach sur la concentration et la loi des grands nombres : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=concentration_echantillonnage&display=simple\n• la courbe en cloche, de Pascal à Gauss : https://www.eleveai.fr/loi-normale\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
       "chapitres": [
         [
           "00:00",
@@ -53434,7 +53434,8 @@
         "lycée",
         "EleveAI",
         "ceinture noire"
-      ]
+      ],
+      "notionId": "concentration_echantillonnage"
     },
     {
       "id": "terminale-loi-normale-escalier-short",
