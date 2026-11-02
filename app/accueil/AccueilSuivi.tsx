@@ -50,6 +50,7 @@ import {
 import { PROGRAMME_CLASSES, listerToutesLesNotions } from "@/lib/programme";
 import { toutesLesVideos } from "@/lib/videos/r2";
 import RechercheEntete from "@/components/accueil/RechercheEntete";
+import { PRIX_MENSUEL, PRIX_VISIO, montant } from "@/lib/tarifs";
 
 /** La classe du coach → son dossier de vidéos sur R2 (et la clé de /video). */
 const DOSSIER_VIDEO: Record<string, string> = {
@@ -368,7 +369,7 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
                   </li>
                 ))}
               </ul>
-              <p className="mt-5 text-lg font-black">4,95 € par mois en France</p>
+              <p className="mt-5 text-lg font-black">{montant(PRIX_MENSUEL)} par mois en France</p>
               <p className="text-sm text-slate-500">Un prix adapté à chaque pays, et sans engagement.</p>
             </div>
 
@@ -381,7 +382,7 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
               <ul className="mt-4 space-y-2 text-slate-800">
                 {VISIO.map((v) => <Puce key={v}>{v}</Puce>)}
               </ul>
-              <p className="mt-5 text-lg font-black">12 € la séance en France</p>
+              <p className="mt-5 text-lg font-black">{montant(PRIX_VISIO)} la séance en France</p>
               <p className="text-sm text-slate-500">Un prix adapté à chaque pays.</p>
             </div>
               </>

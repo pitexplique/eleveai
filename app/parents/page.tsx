@@ -29,15 +29,23 @@ import type { Metadata } from "next";
 // exercices ciblés et volumes d'aide passent derrière la caisse. Ici l'enfant a
 // tout, et ce qui s'achète est la fenêtre du PARENT. Ce n'est pas une nuance de
 // formulation : c'est la seule chose que la page a à dire.
-import { VENTE } from "@/lib/legal/editeur";
+// ⭐ 02/11/2026 — ALIGNÉE SUR LA GRILLE 2026 (lib/tarifs.ts) et sur /tarifs :
+// le suivi famille ouvre fin décembre, prix par pays, vidéothèque entière
+// (3 500 vidéos, 500 sur YouTube). L'enfant garde le coach sans abonnement.
 import {
   ENSEIGNANT,
+  OUVERTURE_SUIVI,
   PERIODE_ANNUELLE,
   PRIX_ANNUEL,
   PRIX_MENSUEL,
-  PRIX_PUBLICS,
+  PRIX_PAR_PAYS,
+  VIDEOS_SITE,
+  VIDEOS_YOUTUBE,
   montant,
 } from "@/lib/tarifs";
+
+const nombre = (n: number) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+const PRIX_FCFA = PRIX_PAR_PAYS.find((p) => p.suivi.includes("FCFA"))?.suivi;
 
 export const metadata: Metadata = {
   title: "Parents",
@@ -45,13 +53,7 @@ export const metadata: Metadata = {
      la SERP : ce texte est ce que Google affiche sous le lien, et il s'y
      périme plus lentement que la page — une grille annoncée ici survit des
      semaines à la carte qui l'a produite (« 4,90 €/mois », voir lib/tarifs.ts). */
-  description: PRIX_PUBLICS
-    ? `Une IA qui explique, jamais qui fait à la place. Encadrée par un enseignant, sans publicité, données protégées. Votre enfant ne paie jamais ; la vue du parent est à ${montant(
-        PRIX_MENSUEL,
-      )} par mois ou ${montant(
-        PRIX_ANNUEL,
-      )} ${PERIODE_ANNUELLE}, sur une seule adresse courriel et quel que soit le nombre d'enfants.`
-    : `Une IA qui explique, jamais qui fait à la place. Encadrée par un enseignant, sans publicité, données protégées. Votre enfant ne paie jamais : le coach, les exercices, les parcours et les évaluations restent ouverts sans limite de temps.`,
+  description: `Une IA qui explique, jamais qui fait à la place. Votre enfant s'entraîne sur tout le programme sans abonnement. Le suivi famille — ${VIDEOS_SITE} vidéos, un bilan chaque semaine — ouvre ${OUVERTURE_SUIVI} : ${montant(PRIX_MENSUEL)} par mois en France, un prix adapté à chaque pays.`,
   alternates: { canonical: "https://www.eleveai.fr/parents" },
 };
 
@@ -107,13 +109,7 @@ const faq = [
        ⚠️ Ne pas supprimer la question : une FAQ de page parents sans ligne sur
        le coût donne à croire qu'on l'esquive. */
     q: "Combien ça coûte, pour moi ?",
-    a: PRIX_PUBLICS
-      ? `Votre enfant, lui, ne paie jamais : le coach, les exercices, les parcours et les évaluations restent ouverts sans limite de temps. L'offre famille est à ${montant(
-          PRIX_MENSUEL,
-        )} par mois sans engagement, ou ${montant(
-          PRIX_ANNUEL,
-        )} ${PERIODE_ANNUELLE} — sur une seule adresse courriel et pour toute la maison quel que soit le nombre d'enfants. Elle ouvre votre vue à vous : son bulletin, sa semaine, et quoi reprendre ensuite.`
-      : `Votre enfant, lui, ne paie jamais : le coach, les exercices, les parcours et les évaluations restent ouverts sans limite de temps, et il garde ses résultats. Une formule d'abonnement destinée aux parents — votre vue à vous : son bulletin, sa semaine, et quoi reprendre ensuite — est en cours de réexamen : aucun tarif n'est publié aujourd'hui, et rien n'est encaissé.`,
+    a: `Rien pour essayer : votre enfant s'entraîne sur tout le programme sans abonnement. Le suivi famille ouvre ${OUVERTURE_SUIVI} : ${montant(PRIX_MENSUEL)} par mois en France sans engagement, ou ${montant(PRIX_ANNUEL)} ${PERIODE_ANNUELLE}, pour tous les enfants de la maison. Hors de France, le prix suit le niveau de vie du pays.`,
   },
   {
     // ⭐ LA QUESTION QUE POSE LA COMPARAISON AVEC LES CONCURRENTS, et la seule
@@ -122,11 +118,15 @@ const faq = [
     // d'aide). Ici, non. ⛔ Le jour où une limite apparaîtrait côté élève,
     // c'est CETTE réponse qui devient un mensonge — la relire avant.
     q: "Si je ne m'abonne pas, mon enfant est-il limité ?",
-    a: "Non, et c'est la règle qui gouverne tout le reste. Il a le coach en entier, tous les exercices, tous les parcours, les cahiers et les évaluations, sans compte et sans limite de temps. L'abonnement n'ajoute rien à son travail : il ouvre votre fenêtre à vous. Un enfant dont la famille ne s'abonne pas travaille exactement comme les autres.",
+    a: `Non. Il garde le coach en entier, la vidéo de chaque micro-compétence dans le coach, les exercices, les parcours, les évaluations et ses résultats. L'abonnement ajoute votre vue à vous (bilan, compte rendu, alertes) et la vidéothèque entière : ${nombre(VIDEOS_SITE)} vidéos, dont ${nombre(VIDEOS_SITE - VIDEOS_YOUTUBE)} qu'on ne trouve pas sur YouTube.`,
   },
   {
     q: "Je suis enseignant — est-ce que ça change quelque chose ?",
-    a: `Votre compte à vous ne se paie pas, sur une adresse académique en ${ENSEIGNANT.verification}. ⚠️ Pour vous, à titre personnel : cela ne couvre pas les familles de vos élèves, qui s'abonnent comme les autres. Vos élèves, eux, n'ont jamais rien à payer.`,
+    a: `Votre compte à vous ne se paie pas, sur une adresse académique en ${ENSEIGNANT.verification}. ⚠️ Pour vous, à titre personnel : cela ne couvre pas les familles de vos élèves, qui s'abonnent comme les autres.`,
+  },
+  {
+    q: "Nous vivons hors de France : le prix est-il le même ?",
+    a: `Non, il suit le niveau de vie du pays : par exemple ${PRIX_FCFA} par mois au Sénégal ou en Côte d'Ivoire. Le tableau complet est sur la page des offres.`,
   },
 ];
 
@@ -164,7 +164,7 @@ export default function ParentsPage() {
               href="/tarifs"
               className="rounded-2xl bg-white px-7 py-3.5 text-base font-black text-slate-800 ring-1 ring-slate-200 transition hover:bg-slate-50"
             >
-              Voir l'offre famille
+              Voir les offres
             </Link>
           </div>
         </section>
@@ -337,12 +337,11 @@ export default function ParentsPage() {
             différence avec les concurrents se voit d'un coup d'œil. */}
         <section>
           <h2 className="text-center text-2xl font-black sm:text-3xl">
-            Votre enfant ne paie jamais. Vous, vous choisissez.
+            Votre enfant s&apos;entraîne sans abonnement. Vous, vous choisissez de le suivre.
           </h2>
           <p className="mx-auto mt-2 max-w-2xl text-center text-sm font-semibold text-slate-500">
-            Ailleurs, ne pas s&apos;abonner rétrécit le travail de l&apos;enfant.
-            Ici, l&apos;abonnement n&apos;ajoute rien à ce qu&apos;il fait — il
-            ouvre ce que vous, vous voyez.
+            Sans abonnement, il garde le coach sur tout le programme. Le suivi
+            famille ajoute votre vue à vous et la vidéothèque entière.
           </p>
 
           <div className="mt-8 grid gap-4 lg:grid-cols-2">
@@ -364,17 +363,17 @@ export default function ParentsPage() {
                   deux éléments distincts. Les deux colonnes suivent maintenant
                   la même structure — un titre, une précision dessous. */}
               <p className="mt-2 text-3xl font-black leading-tight text-emerald-600">
-                Il ne paie rien
+                Ouvert à tous
               </p>
               <p className="mt-1 text-base font-black text-slate-500">
-                sans compte, sans limite
+                sans abonnement
               </p>
               <ul className="mt-4 space-y-2.5">
                 {[
-                  ["🧭", "Le coach qui explique, en entier"],
+                  ["🧭", "Le coach qui explique, sur tout le programme"],
+                  ["🎬", "Dans le coach, la vidéo de chaque micro-compétence"],
                   ["✏️", "Tous les exercices et tous les parcours"],
-                  ["📕", "Les cahiers de vacances"],
-                  ["📋", "Les évaluations"],
+                  ["📋", "Les évaluations, et ses résultats gardés"],
                   ["⏳", "Sans limite de temps, et sans adresse e-mail à donner"],
                 ].map(([emoji, texte]) => (
                   <li key={texte} className="flex gap-2.5 text-sm font-semibold leading-relaxed text-slate-700">
@@ -384,8 +383,7 @@ export default function ParentsPage() {
                 ))}
               </ul>
               <p className="mt-4 rounded-2xl bg-emerald-50 px-4 py-3 text-sm font-black leading-relaxed text-emerald-800">
-                Un enfant dont la famille ne s&apos;abonne pas travaille
-                exactement comme les autres.
+                Sans abonnement, il s&apos;entraîne sur tout son programme.
               </p>
             </div>
 
@@ -414,29 +412,22 @@ export default function ParentsPage() {
                   le prix annuel ne s'affiche jamais sans sa période (article 8
                   des CGV), donc garder l'un sans l'autre serait un défaut de
                   mention, pas une demi-mesure. */}
-              {PRIX_PUBLICS ? (
-                <>
-                  <p className="mt-2 text-3xl font-black leading-tight text-slate-900">
-                    {montant(PRIX_MENSUEL)}
-                    <span className="ml-1 align-middle text-base font-black text-slate-500">
-                      par mois
-                    </span>
-                  </p>
-                  <p className="mt-1 text-sm font-bold text-slate-500">
-                    Sans engagement, ou {montant(PRIX_ANNUEL)} {PERIODE_ANNUELLE}.
-                  </p>
-                </>
-              ) : (
-                <p className="mt-2 text-sm font-bold text-slate-500">
-                  La formule est en cours de réexamen : aucun tarif n&apos;est
-                  publié, et rien n&apos;est encaissé.
-                </p>
-              )}
+              <p className="mt-2 text-3xl font-black leading-tight text-slate-900">
+                {montant(PRIX_MENSUEL)}
+                <span className="ml-1 align-middle text-base font-black text-slate-500">
+                  par mois
+                </span>
+              </p>
+              <p className="mt-1 text-sm font-bold text-slate-500">
+                En France, sans engagement, ou {montant(PRIX_ANNUEL)} {PERIODE_ANNUELLE}.
+                Un prix adapté à chaque pays.
+              </p>
               <ul className="mt-4 space-y-2.5">
                 {[
-                  ["📊", "Son bulletin : où il en est, matière par matière"],
-                  ["🗓️", "Sa semaine : ce qu'il a travaillé, et quand"],
-                  ["📌", "Ce qu'il faut reprendre ensuite"],
+                  ["🎬", `Toute la vidéothèque : ${nombre(VIDEOS_SITE)} vidéos, ${nombre(VIDEOS_YOUTUBE)} seulement sur YouTube`],
+                  ["📊", "Un bilan de départ, puis un compte rendu chaque semaine"],
+                  ["📌", "Les erreurs qui reviennent, et les 3 choses à revoir"],
+                  ["🔔", "Une alerte quand il décroche sur une notion"],
                   ["👪", "Une seule adresse courriel, quel que soit le nombre d'enfants"],
                 ].map(([emoji, texte]) => (
                   <li key={texte} className="flex gap-2.5 text-sm font-semibold leading-relaxed text-slate-700">
@@ -445,31 +436,15 @@ export default function ParentsPage() {
                   </li>
                 ))}
               </ul>
-              {VENTE.ouverte ? (
-                <Link
-                  href="/tarifs"
-                  className="mt-5 inline-flex rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-black text-white transition hover:bg-slate-700"
-                >
-                  Voir l&apos;offre famille →
-                </Link>
-              ) : (
-                <>
-                  <Link
-                    href="/tarifs"
-                    className="mt-5 inline-flex rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-black text-white transition hover:bg-slate-700"
-                  >
-                    Voir l&apos;offre famille →
-                  </Link>
-                  {/* ⚠️ MÊME FORMULE QUE /espace-profs ET /tarifs : le prix est
-                      ferme, et rien n'est encaissé tant que l'espace n'est pas
-                      prêt. Annoncer un prix n'engage pas ; encaisser, oui. */}
-                  <p className="mt-2 text-xs font-bold text-slate-500">
-                    L&apos;espace famille se construit en ce moment. Le prix
-                    ci-dessus est ferme, et rien n&apos;est encaissé tant
-                    qu&apos;il n&apos;est pas prêt.
-                  </p>
-                </>
-              )}
+              <Link
+                href="/tarifs"
+                className="mt-5 inline-flex rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-black text-white transition hover:bg-slate-700"
+              >
+                Voir les offres et les prix par pays →
+              </Link>
+              <p className="mt-2 text-xs font-bold text-slate-500">
+                Ouverture {OUVERTURE_SUIVI}. Rien n&apos;est encaissé avant.
+              </p>
             </div>
           </div>
 
@@ -522,9 +497,8 @@ export default function ParentsPage() {
               collège » (lead B2B). Le dernier geste de la page est maintenant
               le même que le premier : essayer, sans rien devoir. */}
           <p className="mx-auto mt-3 max-w-xl font-semibold text-emerald-50">
-            Commencez par le faire essayer — il n&apos;a ni compte à créer ni
-            rien à payer. L&apos;abonnement, c&apos;est pour vous, et plus tard
-            si vous le voulez.
+            Commencez par le faire essayer, sans compte à créer. Le suivi
+            famille ouvre {OUVERTURE_SUIVI}, si vous le voulez.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Link
@@ -537,7 +511,7 @@ export default function ParentsPage() {
               href="/tarifs"
               className="rounded-2xl border border-white/40 bg-white/10 px-7 py-3.5 text-base font-black text-white transition hover:bg-white/20"
             >
-              Voir l&apos;offre famille
+              Voir les offres
             </Link>
           </div>
         </section>

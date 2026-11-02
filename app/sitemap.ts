@@ -460,6 +460,8 @@ const ROUTES: RouteConfig[] = [
   // ⚠️ Elle vise une requête locale et étroite — « préparation CRPE Réunion »,
   // « maths CRPE Saint-Pierre ». Ne pas espérer du volume : ce qui compte est
   // qu'un candidat de l'île qui cherche exactement ça la trouve.
+  // ✅ 02/11/2026 : /tarifs revient (offres de l'ouverture, fin décembre).
+  { path: "/tarifs",            priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/formation-crpe",    priority: 0.8,  changeFrequency: "weekly",  lastMod: LASTMOD_CRPE },
   // 15/10/2026 : le test de positionnement CRPE, gratuit, qui renvoie au samedi.
   { path: "/formation-crpe/test", priority: 0.7, changeFrequency: "monthly", lastMod: LASTMOD_CRPE },

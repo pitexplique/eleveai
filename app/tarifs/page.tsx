@@ -10,66 +10,34 @@ import TarifsClient from "./TarifsClient";
 // encore. C'est exactement la leçon de `retirer-du-sitemap-ne-ferme-rien` :
 // retirer une carte n'éteint pas une page, il faut éteindre les quatre
 // endroits — la carte, la description, le JSON-LD et le llms.txt.
-import { PERIODE_ANNUELLE, PRIX_ANNUEL, PRIX_MENSUEL, montant } from "@/lib/tarifs";
+import { ETABLISSEMENT_ETRANGER, OUVERTURE_SUIVI, PRIX_MENSUEL, VIDEOS_SITE, montant } from "@/lib/tarifs";
 
 const url = "https://www.eleveai.fr/tarifs";
 
-// ⚠️ CES TEXTES SONT CE QUE GOOGLE AFFICHE DANS SES RÉSULTATS. Ils annonçaient
-// « Abonnement famille 4,90 €/mois » et « formules mensuelle et annuelle » —
-// une offre aux particuliers qui n'est pas ouverte. Corriger la carte sur la
-// page sans corriger la description, c'est laisser la promesse dans la SERP,
-// là où elle est justement le plus lue.
-// ⛔ Aucun prix recopié ici : ils viennent de `lib/tarifs.ts`, comme sur la
-// page. C'est exactement ce couple-là qui s'était désaccordé en juin.
-// ⛔ Le mot « gratuit » ne s'écrit plus sur cette page (Frédéric, 21/08) : il y
-// figurait sept fois, sur une page qui demande de l'argent. La description suit
-// le texte visible — c'est la condition pour que Google la retienne (leçon du
-// 08/08, app/accueil/metadata.ts).
+// ⭐ 02/11/2026 — LA PAGE SE RALLUME, refaite autour de la grille 2026
+// (lib/tarifs.ts). Le rectorat n'exige aucune autorisation pour être
+// indépendant ; ouverture fin décembre. ⚠️ Ce texte est ce que Google affiche :
+// il suit le texte visible, et ses prix viennent des constantes.
 const resume =
-  `Plusieurs portes pour apprendre, progresser et s'évaluer : cinq matières du CP au Bac, coachs, parcours, rituels, cahiers et fiches. ` +
-  `Le suivi par les parents est à ${montant(PRIX_MENSUEL)} par mois sans engagement, ou ${montant(PRIX_ANNUEL)} ${PERIODE_ANNUELLE} — une seule adresse courriel, tous les enfants de la maison. ` +
-  `Les enseignants ont un compte gratuit, à titre personnel, ouvert sur leur adresse académique. Et l'élève ne paie jamais : le coach, les exercices et les évaluations restent ouverts.`;
+  `Le coach de maths reste ouvert à tous. Le suivi famille (${montant(PRIX_MENSUEL)} par mois en France, un prix adapté à chaque pays) ouvre ${OUVERTURE_SUIVI} : ` +
+  `${VIDEOS_SITE} vidéos, un bilan chaque semaine, les cours en visio. Offre aux établissements hors de France : ${ETABLISSEMENT_ETRANGER.parEleveEtParAn} par élève et par an.`;
 
 export const metadata: Metadata = {
-  // ⚠️ Le titre suit le <h1> : une description ou un titre qui ne dit plus la
-  // même chose que la page se fait remplacer par Google (leçon du 08/08).
-  title: "Tarifs — apprendre, progresser, s'évaluer",
+  title: "Offres — le suivi famille, la visio, les établissements hors de France",
   description: resume,
   alternates: { canonical: url },
-  /* ⛔⛔ `noindex` LE 09/09/2026 — LA PAGE EST ÉTEINTE, PAS SUPPRIMÉE.
-     Frédéric : « on la supprime pas, on l'éteint en attente de réflexion »,
-     puis « je veux plus voir des prix ». Le répertoire, le client et tout le
-     texte RESTENT : c'est `PRIX_PUBLICS` dans lib/tarifs.ts qui commande, et
-     rallumer tient en une ligne.
-     ⚠️ `follow: false` AUSSI, et ce n'est pas symétrique par confort : la page
-     porte des liens vers /cgv et /pourquoi-nos-tarifs-sont-justes qu'on ne veut
-     pas voir recrawlés depuis une grille en réexamen.
-     ⚠️ Le `noindex` ne suffit à rien seul — voir `retirer-du-sitemap-ne-ferme-rien`.
-     Il va avec la ligne retirée du sitemap et les liens internes coupés (pied
-     de page, en-tête, accueil, programme, français de l'étranger). */
-  robots: { index: false, follow: false },
+  /* ✅ 02/11/2026 : `noindex` levé (il datait du 09/09, « je veux plus voir des
+     prix »), la page revient au sitemap. */
   openGraph: {
     type: "website",
     url,
-    title: "Tarifs EleveAI — deux formules pour les familles",
+    title: "Les offres d'EleveAI",
     description: resume,
     siteName: "EleveAI",
     locale: "fr_FR",
-    images: [
-      {
-        url: "/preview.jpg",
-        width: 1200,
-        height: 630,
-        alt: "EleveAI — les tarifs pour les familles et pour les classes",
-      },
-    ],
+    images: [{ url: "/preview.jpg", width: 1200, height: 630, alt: "EleveAI — les offres" }],
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Tarifs EleveAI — deux formules pour les familles",
-    description: resume,
-    images: ["/preview.jpg"],
-  },
+  twitter: { card: "summary_large_image", title: "Les offres d'EleveAI", description: resume, images: ["/preview.jpg"] },
 };
 
 export default function Page() {

@@ -1,6 +1,14 @@
 // lib/tarifs.ts
 //
-// UN SEUL ENDROIT POUR LES PRIX (grille du 01/09/2026).
+// UN SEUL ENDROIT POUR LES PRIX (grille du 01/09/2026, REFAITE LE 02/11/2026).
+//
+// ⭐⭐ 02/11/2026 — LA GRILLE DE L'OUVERTURE (fin décembre 2026). Le rectorat
+// n'exige aucune autorisation pour être indépendant. Frédéric : suivi à
+// 4,95 € par mois, « offre par pays », visio, et « une offre établissement
+// étranger ». YouTube aura 500 vidéos, le site 3 500 : la vidéothèque entière
+// fait partie du suivi. Tout est en bas de ce fichier (« GRILLE 2026 »).
+// ⚠️ Ce qui suit, jusqu'à cette grille, raconte la grille du 01/09 (2,50 € /
+// 19,90 €) : historique, les deux constantes ont pris les nouveaux prix.
 //
 // Ils vivaient en trois exemplaires : la carte de `/tarifs`, la FAQ de la même
 // page, et la description que Google affiche dans ses résultats. La grille a
@@ -157,7 +165,7 @@ export const PRIX_PUBLICS = false;
  * ⚠️ Il se dit toujours AU MOIS. « 30 € par an » est le même montant et le
  * mauvais nombre — c'est celui qui fait renoncer.
  */
-export const PRIX_MENSUEL = 2.5;
+export const PRIX_MENSUEL = 4.95; // 02/11/2026 (était 2,50 €)
 
 /**
  * ⭐ 19,90 € POUR L'ANNÉE SCOLAIRE — la formule à recommander.
@@ -167,7 +175,7 @@ export const PRIX_MENSUEL = 2.5;
  * suivant, il s'arrête avec l'année scolaire. Le taire, c'est vendre onze mois
  * pour cinq — et c'est le genre de silence qui se retrouve en litige.
  */
-export const PRIX_ANNUEL = 19.9;
+export const PRIX_ANNUEL = 39; // 02/11/2026 (était 19,90 €)
 
 /**
  * La période que couvre l'abonnement annuel. ⛔ MENTION OBLIGATOIRE : elle
@@ -293,3 +301,54 @@ export function montant(valeur: number): string {
 export function pourcent(valeur: number): string {
   return `${valeur} %`;
 }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   GRILLE 2026 — CE QUI OUVRE FIN DÉCEMBRE (décidé le 02/11/2026).
+
+   ⭐ CE QUI SE VEND, ET POURQUOI : l'IA explique tout, sans rien demander. On ne
+   vend donc pas l'explication. On vend ce qu'elle ne fait pas : le SUIVI
+   (où en est l'enfant, dans le programme de son pays), la VIDÉOTHÈQUE entière
+   (3 500 vidéos sur le site, 500 seulement sur YouTube) et un PROFESSEUR en
+   visio. Le coach et la vidéo de chaque micro restent ouverts à tous (avis de
+   déontologie : le coach utilisé en classe ne renvoie jamais vers une offre).
+   ⛔ Jamais à ses élèves actuels ou anciens. Établissements : HORS DE FRANCE
+   seulement (l'inspecteur refuse le logiciel dans un collège français, 31/10).
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/** Les dates d'ouverture, dites partout pareil. */
+export const OUVERTURE_SUIVI = "fin décembre 2026";
+export const OUVERTURE_VISIO = "janvier 2027";
+
+/** La séance de visio en groupe (1 h 30), en France. */
+export const PRIX_VISIO = 12;
+
+/** Le rapport qui fait vendre la vidéothèque. */
+export const VIDEOS_SITE = 3500;
+export const VIDEOS_YOUTUBE = 500;
+
+/**
+ * ⭐ UN PRIX PAR PAYS (Frédéric, 02/11 : « offre par pays est bien aussi »).
+ * 4,95 € est raisonnable en France, trop cher à Dakar : le prix suit le niveau
+ * de vie. Écrits en toutes lettres ici, et seulement ici.
+ */
+export const PRIX_PAR_PAYS: { zone: string; pays: string; suivi: string; visio: string }[] = [
+  { zone: "France et Europe francophone", pays: "France (outre-mer compris), Belgique, Luxembourg, Monaco", suivi: "4,95 €", visio: "12 €" },
+  { zone: "Suisse romande", pays: "Genève, Vaud, Neuchâtel, Jura, Fribourg, Valais", suivi: "5 CHF", visio: "12 CHF" },
+  { zone: "Canada francophone", pays: "Québec, Nouveau-Brunswick, Ontario", suivi: "6,95 $ CA", visio: "17 $ CA" },
+  { zone: "Maghreb", pays: "Maroc, Tunisie, Algérie", suivi: "2,50 €", visio: "6 €" },
+  { zone: "Afrique de l'Ouest et centrale", pays: "Sénégal, Côte d'Ivoire, Cameroun, Gabon, Bénin, Togo, Burkina Faso, Mali, Niger, Congo", suivi: "1 000 FCFA", visio: "3 000 FCFA" },
+  { zone: "Océan Indien, Caraïbes et autres pays", pays: "Madagascar, Maurice, Comores, Haïti, RD Congo, Guinée…", suivi: "1 €", visio: "3 €" },
+];
+
+/**
+ * ⭐ L'OFFRE AUX ÉTABLISSEMENTS HORS DE FRANCE (02/11/2026).
+ * Écoles privées, bilingues ou confessionnelles qui suivent le programme
+ * français ou celui d'un pays francophone. ⛔ Pas d'établissement situé en
+ * France. Le prix se dit PAR ÉLÈVE ET PAR AN, comptes des professeurs inclus.
+ */
+export const ETABLISSEMENT_ETRANGER = {
+  parEleveEtParAn: "2 €",
+  parEleveEtParAnAfrique: "1 300 FCFA",
+  minimumEleves: 50,
+  delaiReponse: "48 heures",
+};
