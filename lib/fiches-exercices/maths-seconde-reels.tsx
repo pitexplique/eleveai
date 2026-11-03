@@ -94,6 +94,16 @@ export const exercicesReelsSeconde: FicheExercicesData = {
           // ⚠️ Lettré a) à d) après la mesure du mode classe (21/09) : d'un seul
           // bloc, le corrigé tenait sur UNE diapo et la dépassait de 207 px.
           enonce: "Pour chaque nombre, donner le plus petit ensemble parmi $\\mathbb{N}$, $\\mathbb{Z}$, $\\mathbb{D}$, $\\mathbb{Q}$ et $\\mathbb{R}$ qui le contient.\na) $7$ et $-4$\nb) $0{,}35$ et $\\dfrac{3}{8}$\nc) $\\dfrac{2}{3}$ et $\\sqrt{16}$\nd) $\\sqrt{2}$ et $\\pi$",
+          reponses: [
+            { question: "a) 7", attendu: ["ℕ", "N"] },
+            { question: "a) -4", attendu: ["ℤ", "Z"] },
+            { question: "b) 0,35", attendu: ["𝔻", "D"] },
+            { question: "b) 3/8", attendu: ["𝔻", "D"] },
+            { question: "c) 2/3", attendu: ["ℚ", "Q"] },
+            { question: "c) √16", attendu: ["ℕ", "N"] },
+            { question: "d) √2", attendu: ["ℝ", "R"] },
+            { question: "d) π", attendu: ["ℝ", "R"] },
+          ],
           correction:
             "On cherche l'écriture la plus simple de chaque nombre, puis le plus petit ensemble.\na) $7$ est un entier positif : $\\mathbb{N}$. $-4$ est un entier négatif : $\\mathbb{Z}$.\nb) $0{,}35$ a une écriture décimale qui s'arrête : $\\mathbb{D}$. $\\dfrac{3}{8} = 0{,}375$ : $\\mathbb{D}$ aussi.\nc) $\\dfrac{2}{3} = 0{,}666\\ldots$ ne s'arrête jamais : c'est une fraction, $\\mathbb{Q}$. Et $\\sqrt{16} = 4$ : $\\mathbb{N}$.\n⛔ Le piège : ranger $\\sqrt{16}$ dans $\\mathbb{R}$ parce qu'il y a une racine. On calcule d'abord : c'est $4$.\nd) $\\sqrt{2}$ et $\\pi$ ne sont pas des fractions : $\\mathbb{R}$.",
           schema: tableau("Le plus petit ensemble", ["ensemble", "parce que"], [
@@ -106,6 +116,12 @@ export const exercicesReelsSeconde: FicheExercicesData = {
         },
         {
           enonce: "Vrai ou faux ? Justifier.\na) $-3 \\in \\mathbb{N}$\nb) $\\dfrac{1}{4} \\in \\mathbb{D}$\nc) $\\dfrac{1}{3} \\in \\mathbb{D}$\nd) Tout nombre entier est un nombre décimal.",
+          reponses: [
+            { question: "a)", attendu: ["faux", "non"] },
+            { question: "b)", attendu: ["vrai", "oui"] },
+            { question: "c)", attendu: ["faux", "non"] },
+            { question: "d)", attendu: ["vrai", "oui"] },
+          ],
           correction:
             "a) FAUX. $\\mathbb{N}$ ne contient que les entiers positifs ou nuls. $-3$ est dans $\\mathbb{Z}$.\nb) VRAI. $\\dfrac{1}{4} = 0{,}25$ : l'écriture décimale s'arrête.\nc) FAUX. $\\dfrac{1}{3} = 0{,}333\\ldots$ : l'écriture décimale ne s'arrête jamais. L'exercice 15 le démontre.\nd) VRAI. $5 = 5{,}0$ : un entier est un décimal sans chiffre après la virgule. C'est pour cela que $\\mathbb{Z} \\subset \\mathbb{D}$.\n⭐ Le symbole $\\in$ se lit « appartient à ».",
           micros: ["reels_ensembles"],
@@ -127,6 +143,11 @@ export const exercicesReelsSeconde: FicheExercicesData = {
         },
         {
           enonce: "Traduire chaque intervalle par une inégalité, puis le dessiner.\na) $[-1\\,;\\,4[$\nb) $]{-\\infty}\\,;\\,3]$\nc) $]0\\,;\\,+\\infty[$",
+          reponses: [
+            { question: "a)", attendu: ["-1≤x<4", "-1<=x<4"] },
+            { question: "b)", attendu: ["x≤3", "x<=3"] },
+            { question: "c)", attendu: ["x>0", "0<x"] },
+          ],
           correction:
             "Un crochet tourné vers le nombre donne $\\leqslant$ ; tourné à l'envers, il donne $<$.\na) $[-1\\,;\\,4[$ : $-1 \\leqslant x < 4$. On prend $-1$, pas $4$.\nb) $]{-\\infty}\\,;\\,3]$ : $x \\leqslant 3$. Pas de borne à gauche : tous les nombres plus petits que $3$.\nc) $]0\\,;\\,+\\infty[$ : $x > 0$. Les nombres strictement positifs.\n⛔ Le piège au a) : écrire $-1 < x < 4$. Le crochet « $[$ » devant $-1$ est tourné vers lui : $-1$ est compris.",
           schema: droite(-2, 5, 1, { intervalle: { de: -1, a: 4, deInclus: true, aInclus: false, label: "[−1 ; 4[" } }),
@@ -134,24 +155,47 @@ export const exercicesReelsSeconde: FicheExercicesData = {
         },
         {
           enonce: "Vrai ou faux ?\na) $3 \\in ]{-2}\\,;\\,3[$\nb) $-2 \\in [-2\\,;\\,5]$\nc) $2{,}99 \\in ]{-2}\\,;\\,3[$\nd) $\\pi \\in [3{,}14\\,;\\,3{,}15]$",
+          reponses: [
+            { question: "a)", attendu: ["faux", "non"] },
+            { question: "b)", attendu: ["vrai", "oui"] },
+            { question: "c)", attendu: ["vrai", "oui"] },
+            { question: "d)", attendu: ["vrai", "oui"] },
+          ],
           correction:
             "a) FAUX. Le crochet est tourné à l'envers devant $3$ : $3$ n'est pas compris.\nb) VRAI. Le crochet est tourné vers $-2$ : il est compris.\nc) VRAI. $-2 < 2{,}99 < 3$ : il est entre les bornes, même s'il est tout près de $3$.\nd) VRAI. $\\pi \\approx 3{,}14159$, et $3{,}14 \\leqslant 3{,}14159 \\leqslant 3{,}15$.\n⛔ Le piège au c) : croire qu'un nombre si proche de $3$ est exclu avec lui. Seul $3$ est exclu ; $2{,}99$, $2{,}999$ et $2{,}9999$ sont dedans.",
           micros: ["intervalle_appartenance"],
         },
         {
           enonce: "Encadrer.\na) $\\sqrt{30}$ entre deux entiers qui se suivent.\nb) $\\sqrt{30}$ au dixième.\nc) $\\dfrac{22}{7}$ au centième. Ce nombre est-il plus grand que $\\pi$ ?",
+          reponses: [
+            { question: "a)", attendu: ["5<√(30)<6", "5 ; 6"], ordre: true },
+            { question: "b)", attendu: ["5,4<√(30)<5,5", "5,4 ; 5,5"], ordre: true },
+            { question: "c) encadrement", attendu: ["3,14<22/7<3,15", "3,14 ; 3,15"], ordre: true },
+            { question: "c) plus grand que π ?", attendu: ["vrai", "oui"] },
+          ],
           correction:
             "a) On cherche deux carrés autour de $30$ : $5^2 = 25$ et $6^2 = 36$. Comme $25 < 30 < 36$, on a $5 < \\sqrt{30} < 6$.\nb) On essaie les dixièmes : $5{,}4^2 = 29{,}16$ et $5{,}5^2 = 30{,}25$. Donc $5{,}4 < \\sqrt{30} < 5{,}5$.\nc) $\\dfrac{22}{7} \\approx 3{,}1428$, donc $3{,}14 < \\dfrac{22}{7} < 3{,}15$.\nEt $\\pi \\approx 3{,}1416$ : $\\dfrac{22}{7}$ est un peu plus GRAND que $\\pi$, d'environ $0{,}0013$.\n⭐ Archimède utilisait déjà $\\dfrac{22}{7}$ pour $\\pi$ : c'est une bonne valeur approchée, pas la valeur exacte.",
           micros: ["reels_encadrement"],
         },
         {
           enonce: "Calculer.\na) $|-8|$\nb) $|3 - 7|$\nc) $|\\pi - 4|$\nd) $|\\sqrt{2} - 1|$",
+          reponses: [
+            { question: "a)", attendu: "8" },
+            { question: "b)", attendu: "4" },
+            { question: "c)", attendu: "4-π" },
+            { question: "d)", attendu: "√(2)-1" },
+          ],
           correction:
             "Si le nombre dans les barres est positif, on le garde. S'il est négatif, on prend son opposé.\na) $|-8| = 8$.\nb) $3 - 7 = -4$, donc $|3 - 7| = 4$.\nc) $\\pi \\approx 3{,}14$, donc $\\pi - 4$ est négatif. $|\\pi - 4| = 4 - \\pi \\approx 0{,}86$.\nd) $\\sqrt{2} \\approx 1{,}41$, donc $\\sqrt{2} - 1$ est positif. $|\\sqrt{2} - 1| = \\sqrt{2} - 1 \\approx 0{,}41$.\n⛔ Le piège au c) : écrire $|\\pi - 4| = \\pi - 4$. Ce nombre est négatif, et une valeur absolue ne l'est jamais.",
           micros: ["valeur_absolue_distance"],
         },
         {
           enonce: "Calculer la distance entre les deux nombres, avec une valeur absolue.\na) $-3$ et $5$\nb) $-7$ et $-2$\nc) $2{,}5$ et $-1{,}5$",
+          reponses: [
+            { question: "a)", attendu: "8" },
+            { question: "b)", attendu: "5" },
+            { question: "c)", attendu: "4" },
+          ],
           correction:
             "La distance entre $a$ et $b$ est $|a - b|$, ou $|b - a|$ : c'est la même chose.\na) $|5 - (-3)| = |8| = 8$.\nb) $|-2 - (-7)| = |5| = 5$.\nc) $|2{,}5 - (-1{,}5)| = |4| = 4$.\n⭐ On vérifie le a) sur la droite : de $-3$ à $0$, il y a $3$ ; de $0$ à $5$, il y a $5$ ; en tout, $8$.\n⛔ Le piège au a) : calculer $5 - 3 = 2$. On soustrait $-3$, donc on AJOUTE $3$.",
           micros: ["valeur_absolue_distance", "reels_droite_graduee"],
@@ -172,6 +216,9 @@ export const exercicesReelsSeconde: FicheExercicesData = {
       exercices: [
         {
           enonce: "Résoudre $|x - 3| = 5$, avec la droite graduée puis par le calcul.",
+          reponses: [
+            { attendu: "-2 ; 8" },
+          ],
           correction:
             "Avec la droite : $|x - 3|$ est la distance entre $x$ et $3$. On cherche les nombres à la distance $5$ de $3$ : on part de $3$ et on fait $5$ pas de chaque côté. On trouve $3 - 5 = -2$ et $3 + 5 = 8$.\nPar le calcul : le nombre $x - 3$ vaut $5$ ou $-5$. Donc $x = 8$ ou $x = -2$.\nLes solutions sont $-2$ et $8$.\n⛔ Le piège : ne garder que $x = 8$. Il y a toujours deux nombres à une distance donnée, un de chaque côté.",
           schema: droite(-4, 10, 2, {
@@ -185,12 +232,20 @@ export const exercicesReelsSeconde: FicheExercicesData = {
         },
         {
           enonce: "Résoudre.\na) $|x + 2| = 4$\nb) $|x| = -3$",
+          reponses: [
+            { question: "a)", attendu: "-6 ; 2" },
+            { question: "b)", attendu: ["∅", "aucune", "aucune solution"] },
+          ],
           correction:
             "a) $|x + 2| = |x - (-2)|$ : c'est la distance entre $x$ et $-2$. Les nombres à la distance $4$ de $-2$ sont $-2 - 4 = -6$ et $-2 + 4 = 2$.\nLes solutions sont $-6$ et $2$.\nb) Une distance n'est jamais négative : l'équation n'a AUCUNE solution.\n⛔ Le piège au a) : partir de $2$ au lieu de $-2$, et trouver $-2$ et $6$. On vérifie : $|6 + 2| = 8$, pas $4$.",
           micros: ["valeur_absolue_distance"],
         },
         {
           enonce: "Écrire l'ensemble des solutions sous forme d'intervalle.\na) $|x - 1| \\leqslant 3$\nb) $|x + 3| < 2$",
+          reponses: [
+            { question: "a)", attendu: "[-2 ; 4]" },
+            { question: "b)", attendu: "]-5 ; -1[" },
+          ],
           correction:
             "a) Les nombres à une distance de $1$ inférieure ou égale à $3$. On va de $1 - 3 = -2$ à $1 + 3 = 4$, bornes comprises : $[-2\\,;\\,4]$.\nb) $|x + 3|$ est la distance entre $x$ et $-3$. On va de $-3 - 2 = -5$ à $-3 + 2 = -1$, bornes exclues : $]{-5}\\,;\\,-1[$.\n⭐ Le centre de l'intervalle est le nombre de la valeur absolue ($1$, puis $-3$) ; sa demi-largeur est le nombre de droite ($3$, puis $2$).\n⛔ Le piège au b) : garder les bornes. Le signe $<$ est strict : $-5$ et $-1$ sont à la distance $2$ exactement, donc exclus.",
           schema: droite(-3, 5, 1, { intervalle: { de: -2, a: 4, deInclus: true, aInclus: true, label: "|x − 1| ≤ 3" } }),
@@ -198,12 +253,20 @@ export const exercicesReelsSeconde: FicheExercicesData = {
         },
         {
           enonce: "Écrire chaque intervalle avec une valeur absolue.\na) $[2\\,;\\,8]$\nb) $]{-4}\\,;\\,0[$",
+          reponses: [
+            { question: "a)", attendu: ["|x-5|≤3", "|x-5|<=3"] },
+            { question: "b)", attendu: "|x+2|<2" },
+          ],
           correction:
             "On cherche le CENTRE (le milieu des bornes) et la demi-largeur.\na) Centre : $\\dfrac{2 + 8}{2} = 5$. Demi-largeur : $8 - 5 = 3$. Bornes comprises : $|x - 5| \\leqslant 3$.\nb) Centre : $\\dfrac{-4 + 0}{2} = -2$. Demi-largeur : $0 - (-2) = 2$. Bornes exclues : $|x + 2| < 2$.\n⭐ On vérifie le a) sur les bornes : $|2 - 5| = 3$ et $|8 - 5| = 3$. ✓",
           micros: ["valeur_absolue_distance", "intervalle_representer"],
         },
         {
           enonce: "Soient $I = [-3\\,;\\,4[$ et $J = ]1\\,;\\,6]$.\na) Dessiner $I$ et $J$ sur la même droite.\nb) Écrire les nombres qui sont à la fois dans $I$ et dans $J$ (l'intersection $I \\cap J$).\nc) Écrire les nombres qui sont dans $I$ ou dans $J$ (la réunion $I \\cup J$).",
+          reponses: [
+            { question: "b)", attendu: "]1 ; 4[" },
+            { question: "c)", attendu: "[-3 ; 6]" },
+          ],
           correction:
             "a) $I$ va de $-3$ (compris) à $4$ (exclu) ; $J$ va de $1$ (exclu) à $6$ (compris). Ils se chevauchent entre $1$ et $4$.\nb) Dans les deux à la fois : de $1$ à $4$, sans $1$ (hors de $J$) et sans $4$ (hors de $I$). $I \\cap J = ]1\\,;\\,4[$.\nc) Dans l'un ou l'autre : de $-3$ à $6$, sans trou au milieu. $I \\cup J = [-3\\,;\\,6]$.\n⛔ Le piège au b) : écrire $[1\\,;\\,4]$. Une borne de l'intersection n'est comprise que si elle est dans LES DEUX intervalles.",
           schema: tableau("I = [−3 ; 4[ et J = ]1 ; 6]", ["dans I", "dans J"], [
@@ -217,18 +280,31 @@ export const exercicesReelsSeconde: FicheExercicesData = {
         },
         {
           enonce: "Un élève mesure un crayon et lit $12{,}4$ cm. Sa règle est précise au millimètre : la vraie longueur $L$ vérifie $|L - 12{,}4| \\leqslant 0{,}1$.\na) Écrire l'ensemble des valeurs possibles de $L$ sous forme d'intervalle.\nb) Le crayon peut-il mesurer $12{,}45$ cm ? Et $12{,}55$ cm ?",
+          reponses: [
+            { question: "a)", attendu: "[12,3 ; 12,5]" },
+            { question: "b) 12,45 cm", attendu: ["vrai", "oui"] },
+            { question: "b) 12,55 cm", attendu: ["faux", "non"] },
+          ],
           correction:
             "a) $L$ est à moins de $0{,}1$ de $12{,}4$ : de $12{,}4 - 0{,}1 = 12{,}3$ à $12{,}4 + 0{,}1 = 12{,}5$, bornes comprises. $L \\in [12{,}3\\,;\\,12{,}5]$.\nb) $|12{,}45 - 12{,}4| = 0{,}05$, qui est bien $\\leqslant 0{,}1$ : c'est possible.\n$|12{,}55 - 12{,}4| = 0{,}15$, qui dépasse $0{,}1$ : c'est impossible.\n⭐ Une mesure n'est jamais un nombre exact : c'est un intervalle. La valeur absolue dit sa largeur.",
           micros: ["valeur_absolue_distance", "reels_encadrement"],
         },
         {
           enonce: "a) Démontrer que $\\dfrac{1}{3}$ n'est pas un nombre décimal.\nb) Parmi $\\dfrac{7}{40}$, $\\dfrac{5}{12}$ et $\\dfrac{13}{20}$, lesquels sont décimaux ?",
+          reponses: [
+            { question: "b)", attendu: "7/40 ; 13/20" },
+          ],
           correction:
             "a) Un décimal s'écrit $\\dfrac{a}{10^n}$, avec $a$ entier. Supposons que $\\dfrac{1}{3} = \\dfrac{a}{10^n}$.\nAlors $10^n = 3a$ : $10^n$ serait un multiple de $3$.\nOr la somme des chiffres de $10^n$ ($1$ suivi de zéros) vaut $1$ : $10^n$ n'est pas divisible par $3$. C'est impossible, donc $\\dfrac{1}{3}$ n'est pas décimal.\nb) $\\dfrac{7}{40} = 0{,}175$ : décimal. $\\dfrac{13}{20} = 0{,}65$ : décimal.\n$\\dfrac{5}{12} = 0{,}41666\\ldots$ : pas décimal. Le facteur $3$ de $12 = 2^2 \\times 3$ l'en empêche, comme pour $\\dfrac{1}{3}$.\n⭐ La règle : une fraction irréductible est décimale quand son dénominateur n'a pas d'autre facteur premier que $2$ et $5$.",
           micros: ["reels_ensembles"],
         },
         {
           enonce: "Encadrer $\\sqrt{7}$, d'abord entre deux entiers, puis au dixième, puis au centième.",
+          reponses: [
+            { question: "entre deux entiers", attendu: ["2<√(7)<3", "2 ; 3"], ordre: true },
+            { question: "au dixième", attendu: ["2,6<√(7)<2,7", "2,6 ; 2,7"], ordre: true },
+            { question: "au centième", attendu: ["2,64<√(7)<2,65", "2,64 ; 2,65"], ordre: true },
+          ],
           correction:
             "On élève au carré des nombres de plus en plus proches.\nEntre deux entiers : $2^2 = 4$ et $3^2 = 9$, donc $2 < \\sqrt{7} < 3$.\nAu dixième : $2{,}6^2 = 6{,}76$ et $2{,}7^2 = 7{,}29$, donc $2{,}6 < \\sqrt{7} < 2{,}7$.\nAu centième : $2{,}64^2 = 6{,}9696$ et $2{,}65^2 = 7{,}0225$, donc $2{,}64 < \\sqrt{7} < 2{,}65$.\n⭐ À chaque étape, l'encadrement devient dix fois plus étroit. C'est ce que fait la calculatrice, en beaucoup plus vite.",
           micros: ["reels_encadrement"],
@@ -256,6 +332,10 @@ export const exercicesReelsSeconde: FicheExercicesData = {
         {
           titre: "La pièce à 0,2 mm près",
           enonce: "Une usine fabrique des pièces qui doivent mesurer $50$ mm, à $0{,}2$ mm près. Une pièce de longueur $L$ est acceptée si $|L - 50| \\leqslant 0{,}2$.\na) Écrire l'ensemble des longueurs acceptées sous forme d'intervalle.\nb) On mesure quatre pièces : $49{,}75$ ; $50{,}1$ ; $50{,}25$ ; $49{,}8$. Lesquelles sont acceptées ?",
+          reponses: [
+            { question: "a)", attendu: "[49,8 ; 50,2]" },
+            { question: "b)", attendu: "50,1 ; 49,8" },
+          ],
           correction:
             "a) De $50 - 0{,}2 = 49{,}8$ à $50 + 0{,}2 = 50{,}2$, bornes comprises : $[49{,}8\\,;\\,50{,}2]$.\nb) On calcule l'écart à $50$ de chaque pièce.\n$|49{,}75 - 50| = 0{,}25$ : refusée. $|50{,}1 - 50| = 0{,}1$ : acceptée.\n$|50{,}25 - 50| = 0{,}25$ : refusée. $|49{,}8 - 50| = 0{,}2$ : acceptée, tout juste.\nDeux pièces sont acceptées : $50{,}1$ et $49{,}8$.\n⛔ Le piège : refuser $49{,}8$. L'inégalité est large ($\\leqslant$) : un écart de $0{,}2$ exactement est accepté.",
           schema: droite(49.6, 50.4, 0.2, {
@@ -266,6 +346,11 @@ export const exercicesReelsSeconde: FicheExercicesData = {
         {
           titre: "Le sondage",
           enonce: "Un sondage donne $52\\,\\%$ des voix à une candidate, avec une marge d'erreur de $3$ points. La vraie proportion $p$ (en %) vérifie donc $|p - 52| \\leqslant 3$.\na) Écrire les valeurs possibles de $p$ sous forme d'intervalle.\nb) Peut-on affirmer que la candidate aura plus de $50\\,\\%$ des voix ?\nc) Quelle marge d'erreur faudrait-il, au plus, pour pouvoir l'affirmer ?",
+          reponses: [
+            { question: "a)", attendu: "[49 ; 55]" },
+            { question: "b)", attendu: ["faux", "non"] },
+            { question: "c)", attendu: "2" },
+          ],
           correction:
             "a) De $52 - 3 = 49$ à $52 + 3 = 55$ : $p \\in [49\\,;\\,55]$.\nb) Non. L'intervalle contient des valeurs sous $50$, comme $49$ : la candidate peut perdre.\nc) Il faut que toutes les valeurs possibles dépassent $50$, donc que $52 - m > 50$, soit $m < 2$. La marge d'erreur doit être inférieure à $2$ points.\n⛔ Le piège : lire « $52\\,\\%$ » et conclure qu'elle gagne. Un sondage ne donne pas un nombre, il donne un INTERVALLE.",
           schema: droite(46, 56, 2, {
@@ -276,6 +361,14 @@ export const exercicesReelsSeconde: FicheExercicesData = {
         {
           titre: "Deux relais téléphoniques",
           enonce: "Sur une route droite, on repère chaque point par sa borne kilométrique $x$. Un relais en $A$ (borne $12$) capte à moins de $5$ km ; un relais en $B$ (borne $20$) capte à moins de $8$ km.\na) Traduire « capté par $A$ » avec une valeur absolue, puis en intervalle.\nb) Même question pour $B$.\nc) Sur quelle portion de route capte-t-on les deux relais ?\nd) Sur quelle portion capte-t-on au moins un relais ?",
+          reponses: [
+            { question: "a) valeur absolue", attendu: "|x-12|<5" },
+            { question: "a) intervalle", attendu: "]7 ; 17[" },
+            { question: "b) valeur absolue", attendu: "|x-20|<8" },
+            { question: "b) intervalle", attendu: "]12 ; 28[" },
+            { question: "c)", attendu: "]12 ; 17[" },
+            { question: "d)", attendu: "]7 ; 28[" },
+          ],
           correction:
             "a) Capté par $A$ : $|x - 12| < 5$, soit $x \\in ]7\\,;\\,17[$.\nb) Capté par $B$ : $|x - 20| < 8$, soit $x \\in ]12\\,;\\,28[$.\nc) Les deux à la fois : l'intersection, $]12\\,;\\,17[$. On capte les deux relais entre les bornes $12$ et $17$.\nd) Au moins un : la réunion, $]7\\,;\\,28[$. Les zones se chevauchent, il n'y a pas de trou.\n⭐ Au point $A$ lui-même (borne $12$), on ne capte pas $B$ : $|12 - 20| = 8$, et il faut moins de $8$.",
           micros: ["valeur_absolue_distance", "intervalle_representer", "intervalle_appartenance"],
