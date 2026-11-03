@@ -479,7 +479,7 @@ export const fichePythagore3e: FicheCoursData = {
     "L'hypoténuse est opposée à l'angle droit, et c'est le plus long côté.",
     "Rectangle en $A$ : $BC^2 = AB^2 + AC^2$.",
     "Hypoténuse cherchée : on additionne. Hypoténuse donnée : on soustrait.",
-    "La réciproque part de l'égalité et conclut à l'angle droit — jamais l'inverse.",
+    "La réciproque : si $BC^2 = AB^2 + AC^2$, alors le triangle $ABC$ est rectangle en $A$. Si l'égalité est fausse, il n'est pas rectangle.",
     "Quatre temps : hypothèse, théorème nommé, calcul, conclusion avec l'unité.",
     "$3$-$4$-$5$, $6$-$8$-$10$, $5$-$12$-$13$ : des triplets à reconnaître d'un coup d'œil.",
   ],
