@@ -311,6 +311,9 @@ const ROUTES: RouteConfig[] = [
   // pour les feuilles et refait pour les familles, deux lignes plus bas.
   // ⚠️ Les index de famille se dérivent donc du registre, comme les feuilles.
   { path: "/fiches-ecriture", priority: 0.9,  changeFrequency: "weekly", lastMod: LASTMOD_974 },
+  // ⭐ Le cahier A4 complet (03/11/2026) : couverture, 10 chiffres, 20 lettres,
+  // diplômes ; fait pour un élève de 6e avec AESH qui apprend à écrire.
+  { path: "/fiches-ecriture/mon-cahier", priority: 0.9, changeFrequency: "monthly", lastMod: new Date("2026-11-03") },
   { path: "/simulateur-cyclone", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_MACHINES },
   { path: "/simulateur-sucre", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_MACHINES },
   { path: "/simulateur-fromage", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_MACHINES },
