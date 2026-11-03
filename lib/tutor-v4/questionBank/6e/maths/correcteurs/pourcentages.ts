@@ -319,8 +319,11 @@ function corrigerPctDemande(q: TutorGeneratedQuestionV4): string[] {
   const { pcts, autres } = donnees(q.text);
   const prop = proprieteDemandee(q.text);
   if (!prop) return ["question illisible"];
-  const donne = new RegExp(`(\\d+)(?: %)? (?:des )?\\S+ ${echapper(prop)}`).exec(q.text.slice(0, q.text.lastIndexOf(".", q.text.length - 2)));
-  const reste = q.text.includes(`Les autres ${prop}.`);
+  // 03/11/2026 : la propriété demandée est-elle écrite AVANT la question ? Sinon
+  // (objets « binaires » : « Sur 100 cases, 37 sont coloriées. Quel pourcentage
+  // des cases sont blanches ? »), on demande le reste.
+  const donne = q.text.slice(0, q.text.lastIndexOf(".", q.text.length - 2)).includes(prop);
+  const reste = q.text.includes(`Les autres ${prop}.`) || !donne;
   if (pcts.length) {
     const p = pcts[0];
     const juste = donne && !reste ? p : 100 - p;
@@ -415,4 +418,10 @@ export const CORRECTEURS: CorrecteursMaths = avecRegleMotsCles({
   pourcentage_comprendre_qcm_tpl_sens: corrigerSens,
   pourcentage_comprendre_qcm_tpl_1: corrigerQuelPct,
   pourcentage_comprendre_tpl_cent: corrigerComprendre,
+  // 03/11/2026 : les situations montées à ★3 (mêmes questions, mêmes correcteurs).
+  pourcentage_comprendre_tpl_situation: corrigerComprendre,
+  pourcentage_comprendre_qcm_tpl_situation: corrigerSens,
+  pourcentage_decimal_tpl_inverse_situation: corrigerDecimalVersPct,
+  pourcentage_decimal_tpl_situation: corrigerPctVersDecimal,
+  pourcentage_lire_qcm_tpl_reduc_situation: corrigerReduc,
 });

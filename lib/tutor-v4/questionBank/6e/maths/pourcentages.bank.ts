@@ -108,7 +108,70 @@ const SITUATIONS_PCT: readonly SitPct[] = [
   { tot: (N) => `Un musée reçoit ${N} visiteurs dans la matinée.`, nom: "visiteurs", adj: "sont des enfants", autre: "sont des adultes", max: 300 },
   { tot: (N) => `À la piscine, ${N} enfants passent le test de natation.`, nom: "enfants", adj: "réussissent le test", autre: "échouent", max: 200 },
   { tot: (N) => `Un producteur de La Réunion récolte ${N} ananas.`, nom: "ananas", adj: "sont déjà mûrs", autre: "ne sont pas encore mûrs", max: 300 },
+  // 03/11/2026 : des MÉTIERS (vocations), pour les questions ★3 et plus.
+  { tot: (N) => `Une vétérinaire soigne ${N} animaux dans le mois.`, nom: "animaux", adj: "sont des chats", autre: "ne sont pas des chats", max: 300 },
+  { tot: (N) => `Un boulanger prépare ${N} viennoiseries ce matin.`, nom: "viennoiseries", adj: "sont des croissants", autre: "ne sont pas des croissants", max: 300 },
+  { tot: (N) => `Une biologiste observe ${N} cellules au microscope.`, nom: "cellules", adj: "sont en train de se diviser", autre: "ne se divisent pas", max: 300 },
+  { tot: (N) => `Un développeur teste ${N} programmes.`, nom: "programmes", adj: "fonctionnent du premier coup", autre: "ont un bug", max: 200 },
+  { tot: (N) => `Une astronome photographie ${N} étoiles.`, nom: "étoiles", adj: "sont des étoiles doubles", autre: "sont des étoiles seules", max: 300 },
 ];
+
+/* ⛔⛔ 03/11/2026 — D'ABORD DES QUESTIONS SIMPLES (Frédéric) : « le contexte est
+   réservé aux étoiles ★3 et plus ». À ★1 et ★2 : ni prénom, ni métier, ni
+   situation de la vie. Des OBJETS DE MATHS (cases d'une grille, jetons, boules,
+   nombres d'une liste…) et une phrase courte. SITUATIONS_PCT sert à ★3 et plus.
+   ⛔ Le nom tient en un seul mot (le correcteur relit « Combien de <nom> … »). */
+type SitSimple = { nom: string; adj: string; autre: string; binaire: boolean };
+// ⭐ 03/11/2026 (règle de longueur, REGLES-6E.md) : ★1 en 12 mots au plus, ★2 en 15.
+// Les données tiennent en « Sur 100 jetons, 37 % sont rouges. » ; adj et autre
+// en deux mots. `binaire` : rien d'autre que adj ou autre (une case est coloriée
+// ou blanche) — on peut demander le reste sans écrire « Les autres… ».
+const SIMPLES_PCT: readonly SitSimple[] = [
+  { nom: "cases", adj: "sont coloriées", autre: "sont blanches", binaire: true },
+  { nom: "carreaux", adj: "sont grisés", autre: "sont blancs", binaire: true },
+  { nom: "jetons", adj: "sont rouges", autre: "sont verts", binaire: false },
+  { nom: "boules", adj: "sont vertes", autre: "sont jaunes", binaire: false },
+  { nom: "triangles", adj: "sont rouges", autre: "sont bleus", binaire: false },
+  { nom: "cubes", adj: "sont bleus", autre: "sont jaunes", binaire: false },
+  { nom: "nombres", adj: "sont pairs", autre: "sont impairs", binaire: true },
+  { nom: "parts", adj: "sont hachurées", autre: "sont blanches", binaire: true },
+  { nom: "points", adj: "sont rouges", autre: "sont noirs", binaire: false },
+  { nom: "perles", adj: "sont blanches", autre: "sont noires", binaire: false },
+  { nom: "carrés", adj: "sont coloriés", autre: "sont blancs", binaire: true },
+  { nom: "disques", adj: "sont rouges", autre: "sont bleus", binaire: false },
+  { nom: "lancers", adj: "donnent pile", autre: "donnent face", binaire: true },
+  { nom: "étoiles", adj: "sont jaunes", autre: "sont bleues", binaire: false },
+  { nom: "cercles", adj: "sont pleins", autre: "sont vides", binaire: true },
+  { nom: "étoiles", adj: "sont pleines", autre: "sont vides", binaire: true },
+  { nom: "ampoules", adj: "sont allumées", autre: "sont éteintes", binaire: true },
+  { nom: "cases", adj: "sont cochées", autre: "sont vides", binaire: true },
+  { nom: "jetons", adj: "montrent pile", autre: "montrent face", binaire: true },
+];
+const BINAIRES = SIMPLES_PCT.filter((x) => x.binaire);
+/** « Sur 100 jetons, 37 % sont rouges. » (ou « 37 sont rouges » sans %). */
+const surS = (N: number, s: SitSimple, k: number, pct: boolean) => `Sur ${N} ${s.nom}, ${k}${pct ? " %" : ""} ${s.adj}.`;
+/** Les mêmes données sous trois formes courtes (« Parmi 100 cases… », « 100 cases : … »). */
+const donneesS = (N: number, s: SitSimple, k: number, pct: boolean) => {
+  const kk = `${k}${pct ? " %" : ""} ${s.adj}`;
+  return pick([`Sur ${N} ${s.nom}, ${kk}.`, `Parmi ${N} ${s.nom}, ${kk}.`, `${N} ${s.nom} : ${kk}.`]);
+};
+
+/** Un pourcentage SANS situation (★1-★2), en 6 mots au plus (aucun autre nombre que p). */
+const PHRASES_SIMPLES: readonly ((p: number) => string)[] = [
+  (p) => `Une figure est coloriée à ${p} %.`,
+  (p) => `${p} % des cases sont coloriées.`,
+  (p) => `${p} % des jetons sont rouges.`,
+  (p) => `Une bande est grisée à ${p} %.`,
+  (p) => `On colorie ${p} % d’un carré.`,
+  (p) => `${p} % des nombres sont pairs.`,
+  (p) => `Un disque est colorié à ${p} %.`,
+  (p) => `Un rectangle est hachuré à ${p} %.`,
+  (p) => `On lit ${p} %.`,
+  (p) => `${p} % des boules sont vertes.`,
+  (p) => `Une barre est remplie à ${p} %.`,
+  (p) => `On prend ${p} % d’un nombre.`,
+];
+const phraseSimple = (p: number) => pick(PHRASES_SIMPLES)(p);
 
 /** Un pourcentage lu dans la vie courante (aucun autre nombre que p). */
 const PHRASES_PCT: readonly ((p: number, P: Prenom) => string)[] = [
@@ -130,24 +193,15 @@ const PHRASES_PCT: readonly ((p: number, P: Prenom) => string)[] = [
 ];
 const phrasePct = (p: number) => pick(PHRASES_PCT)(p, pick(PRENOMS));
 
-/** 100 éléments, deux pourcentages dans une phrase : on demande l'un des deux. */
+/** 100 éléments, deux pourcentages dans une phrase : on demande l'un des deux (★2, 15 mots au plus). */
 function lireDeuxCategories() {
-  const s = pick(SITUATIONS_PCT);
-  const P = pick(PRENOMS);
+  const s = pick(SIMPLES_PCT);
   const p = randomInt(2, 18) * 5 + pick([0, 0, 1, 2, 3]);
   const premier = Math.random() < 0.5;
   const r = premier ? p : 100 - p;
   const phrase = premier ? s.adj : s.autre;
-  const question = pick([
-    `Combien ${deNu(s.nom)} ${phrase} ?`,
-    `Trouve le nombre ${deNu(s.nom)} qui ${phrase}.`,
-    `Calcule combien ${deNu(s.nom)} ${phrase}.`,
-  ]);
-  const donnees = pick([
-    `${p} % des ${s.nom} ${s.adj} et ${100 - p} % ${s.autre}.`,
-    `On lit dans un bilan : ${p} % des ${s.nom} ${s.adj}, ${100 - p} % ${s.autre}.`,
-  ]);
-  return { text: `${s.tot(100, P)} ${donnees} ${question}`, r, s };
+  const [a, b] = Math.random() < 0.5 ? [`${p} % ${s.adj}`, `${100 - p} % ${s.autre}`] : [`${100 - p} % ${s.autre}`, `${p} % ${s.adj}`];
+  return { text: `Sur 100 ${s.nom}, ${a} et ${b}. Combien ${deNu(s.nom)} ${phrase} ?`, r, s: { nom: s.nom } };
 }
 
 /**
@@ -156,7 +210,7 @@ function lireDeuxCategories() {
  * ⛔ Pas « Calcule # % de #. », « Quel est… », « Que vaut… » : ce sont les
  * phrases des items figés de la micro.
  */
-function appliquerPct(ps: readonly number[], nu: number) {
+function appliquerPct(ps: readonly number[], nu: number, simple = false) {
   const p = pick(ps);
   if (Math.random() < nu) {
     const n = totalPour(p, 200, 10);
@@ -166,8 +220,19 @@ function appliquerPct(ps: readonly number[], nu: number) {
       `Complète : ${p} % de ${n} = …`,
       `Trouve ${p} % de ${n}.`,
       `Calcule mentalement ${p} % de ${n}.`,
+      `Combien valent ${p} % de ${n} ?`,
+      `Cherche le résultat de ${p} % de ${n}.`,
+      `Prends ${p} % de ${n}. Quel nombre obtiens-tu ?`,
+      `Écris le nombre égal à ${p} % de ${n}.`,
+      `${p} % de ${n} = … Complète.`,
     ]);
     return { text, p, n, r: (p * n) / 100 };
+  }
+  if (simple) {
+    // 03/11/2026 : ★2, « Sur 60 jetons, 25 % sont rouges. Combien de jetons sont rouges ? »
+    const s = pick(SIMPLES_PCT);
+    const n = totalPour(p, 300);
+    return { text: `${surS(n, s, p, true)} Combien ${deNu(s.nom)} ${s.adj} ?`, p, n, r: (p * n) / 100 };
   }
   const s = pick(SITUATIONS_PCT);
   const n = totalPour(p, s.max);
@@ -229,10 +294,30 @@ const QUANTITES_PCT: readonly SitQte[] = [
   { f: (n, p, P) => `Un sac de croquettes pour le chien ${de(P.n)} pèse ${n} kg. Le chien en a déjà mangé ${p} %. Combien de kilogrammes a-t-il mangés ?`, u: "kg", min: 4, max: 20 },
 ];
 
+/** 03/11/2026 : p % d'une GRANDEUR sans situation (★2) : un segment, une masse,
+ *  une durée… La question nomme l'unité (le correcteur la relit). */
+const QUANTITES_SIMPLES: readonly SitQte[] = [
+  { f: (n, p) => `Un segment mesure ${n} cm. Combien de centimètres font ${p} % de sa longueur ?`, u: "cm", min: 20, max: 400 },
+  { f: (n, p) => `Calcule ${p} % de ${n} kg. Donne le résultat en kilogrammes.`, u: "kg", min: 20, max: 400 },
+  { f: (n, p) => `Une masse vaut ${n} g. Combien de grammes font ${p} % de cette masse ?`, u: "g", min: 20, max: 600 },
+  { f: (n, p) => `Une durée vaut ${n} minutes. Combien de minutes font ${p} % de cette durée ?`, u: "min", min: 20, max: 200 },
+  { f: (n, p) => `Un récipient contient ${n} L. Combien de litres font ${p} % de ce volume ?`, u: "L", min: 20, max: 400 },
+  { f: (n, p) => `Une distance vaut ${n} km. Combien de kilomètres font ${p} % de cette distance ?`, u: "km", min: 20, max: 400 },
+  { f: (n, p) => `Le périmètre d’un rectangle vaut ${n} cm. Combien de centimètres font ${p} % de ce périmètre ?`, u: "cm", min: 20, max: 400 },
+  { f: (n, p) => `Trouve ${p} % de ${n} L. Donne le résultat en litres.`, u: "L", min: 20, max: 400 },
+  { f: (n, p) => `Calcule ${p} % de ${n} g. Donne le résultat en grammes.`, u: "g", min: 20, max: 600 },
+  { f: (n, p) => `Un côté d’un carré mesure ${n} cm. Combien de centimètres font ${p} % de ce côté ?`, u: "cm", min: 20, max: 200 },
+  { f: (n, p) => `Trouve ${p} % de ${n} minutes. Donne le résultat en minutes.`, u: "min", min: 20, max: 200 },
+  { f: (n, p) => `Calcule ${p} % de ${n} km. Donne le résultat en kilomètres.`, u: "km", min: 20, max: 400 },
+  { f: (n, p) => `Un volume vaut ${n} L. Combien de litres font ${p} % de ce volume ?`, u: "L", min: 20, max: 400 },
+  { f: (n, p) => `Une longueur vaut ${n} cm. Combien de centimètres font ${p} % de cette longueur ?`, u: "cm", min: 20, max: 400 },
+  { f: (n, p) => `Une masse vaut ${n} kg. Combien de kilogrammes font ${p} % de cette masse ?`, u: "kg", min: 20, max: 400 },
+];
+
 /** p % d'une quantité avec unité, prise dans la table. */
-function genQuantite(ps: readonly number[]) {
+function genQuantite(ps: readonly number[], table: readonly SitQte[] = QUANTITES_PCT) {
   for (;;) {
-    const s = pick(QUANTITES_PCT);
+    const s = pick(table);
     const p = pick(ps);
     const st = pasEntier(p);
     if (Math.floor(s.max / st) < Math.ceil(s.min / st)) continue;
@@ -282,7 +367,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     difficulty: 1,
     theme: "neutral",
     // 08/10/2026 : précise et corrigée strictement (Frédéric).
-    text: "Sur une affiche, on lit « 50 % ». 50 %, c’est :",
+    text: "50 %, c’est :",
     format: "qcm",
     choices: ["la moitié", "le quart", "le tiers", "le double"],
     expected: ["la moitié"],
@@ -373,8 +458,9 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     notionId: "pourcentage_nombre",
     microId: "pourcentage_comprendre",
     difficulty: 2,
-    theme: "reunion",
-    text: "Dans une classe de 100 élèves imaginaires à La Réunion, 30 % aiment le football. Combien cela représente-t-il d’élèves ?",
+    // 03/11/2026 : ★2, donc sans situation (la classe de La Réunion est partie).
+    theme: "neutral",
+    text: "Sur 100 cases, 30 % sont coloriées. Combien de cases sont coloriées ?",
     format: "short",
     expected: ["30"],
     comparator: "number_equal",
@@ -383,9 +469,9 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Définition : un pourcentage exprime une proportion sur 100.\n\n" +
       "Méthode : on ramène la situation à une proportion sur 100 ou à une part simple.\n\n" +
       "Calcul : " +
-      ("30 % signifie 30 sur 100. Dans une classe de 100 élèves, cela représente donc 30 élèves.") +
+      ("30 % signifie 30 sur 100. Sur 100 cases, cela représente donc 30 cases.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["pourcentage_nombre", "comprendre", "reunion"],
+    tags: ["pourcentage_nombre", "comprendre"],
   },
 
   // =========================
@@ -676,7 +762,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     microId: "pourcentage_lire",
     difficulty: 2,
     theme: "neutral",
-    text: "Dans une classe de 100 élèves, 20 % portent des lunettes. Combien d’élèves cela représente-t-il ?",
+    text: "Sur 100 jetons, 20 % sont rouges. Combien de jetons sont rouges ?",
     format: "short",
     expected: ["20"],
     comparator: "number_equal",
@@ -685,7 +771,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Définition : un pourcentage exprime une proportion sur 100.\n\n" +
       "Méthode : on ramène la situation à une proportion sur 100 ou à une part simple.\n\n" +
       "Calcul : " +
-      ("Dans un groupe de 100 élèves, 20 % signifie 20 sur 100. Cela représente donc 20 élèves.") +
+      ("Sur 100 jetons, 20 % signifie 20 sur 100. Cela représente donc 20 jetons.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["pourcentage_nombre", "lecture"],
   },
@@ -698,7 +784,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     microId: "pourcentage_lire",
     difficulty: 2,
     theme: "neutral",
-    text: "Sur 100 bonbons, 60 % sont rouges. Combien y a-t-il de bonbons rouges ?",
+    text: "Sur 100 boules, 60 % sont rouges. Combien y a-t-il de boules rouges ?",
     format: "short",
     expected: ["60"],
     comparator: "number_equal",
@@ -707,7 +793,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Définition : un pourcentage exprime une proportion sur 100.\n\n" +
       "Méthode : on ramène la situation à une proportion sur 100 ou à une part simple.\n\n" +
       "Calcul : " +
-      ("Sur 100 bonbons, 60 % signifie 60 sur 100. Il y a donc 60 bonbons rouges.") +
+      ("Sur 100 boules, 60 % signifie 60 sur 100. Il y a donc 60 boules rouges.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["pourcentage_nombre", "lecture"],
   },
@@ -720,7 +806,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     microId: "pourcentage_lire",
     difficulty: 2,
     theme: "neutral",
-    text: "Dans un groupe de 100 personnes, 8 % aiment les échecs. Combien cela représente-t-il ?",
+    text: "Sur 100 nombres, 8 % sont pairs. Combien de nombres sont pairs ?",
     format: "short",
     expected: ["8"],
     comparator: "number_equal",
@@ -729,7 +815,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Définition : un pourcentage exprime une proportion sur 100.\n\n" +
       "Méthode : on ramène la situation à une proportion sur 100 ou à une part simple.\n\n" +
       "Calcul : " +
-      ("8 % signifie 8 sur 100. Dans un groupe de 100 personnes, cela représente 8 personnes.") +
+      ("8 % signifie 8 sur 100. Sur 100 nombres, cela représente 8 nombres.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["pourcentage_nombre", "lecture"],
   },
@@ -742,7 +828,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     microId: "pourcentage_lire",
     difficulty: 2,
     theme: "neutral",
-    text: "Dans un groupe de 100 personnes, 15 % aiment le théâtre. Combien cela fait-il ?",
+    text: "Sur 100 carreaux, 15 % sont grisés. Combien de carreaux sont grisés ?",
     format: "qcm",
     choices: ["5", "10", "15", "25"],
     expected: ["15"],
@@ -752,7 +838,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Définition : un pourcentage exprime une proportion sur 100.\n\n" +
       "Méthode : on ramène la situation à une proportion sur 100 ou à une part simple.\n\n" +
       "Calcul : " +
-      ("15 % signifie 15 sur 100. Dans un groupe de 100 personnes, cela fait donc 15 personnes.") +
+      ("15 % signifie 15 sur 100. Sur 100 carreaux, cela fait donc 15 carreaux.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["pourcentage_nombre", "lecture", "qcm"],
   },
@@ -930,7 +1016,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     microId: "pourcentage_defi",
     difficulty: 1,
     theme: "neutral",
-    text: "Dans une collection de 100 cartes, 8 % sont brillantes. Combien y a-t-il de cartes brillantes ?",
+    text: "Sur 100 perles, 8 % sont blanches. Combien y a-t-il de perles blanches ?",
     format: "short",
     expected: ["8"],
     comparator: "number_equal",
@@ -939,7 +1025,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Définition : un pourcentage exprime une proportion sur 100.\n\n" +
       "Méthode : on ramène la situation à une proportion sur 100 ou à une part simple.\n\n" +
       "Calcul : " +
-      ("8 % signifie 8 sur 100. Dans une collection de 100 cartes, cela représente 8 cartes brillantes.") +
+      ("8 % signifie 8 sur 100. Sur 100 perles, cela représente 8 perles blanches.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["pourcentage_nombre", "defi"],
   },
@@ -952,7 +1038,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     microId: "pourcentage_defi",
     difficulty: 2,
     theme: "neutral",
-    text: "Le prix d’un article est 20 €. On calcule 5 % de 20 €. Combien vaut ce pourcentage ?",
+    text: "On prend 5 % de 20. Quel nombre obtient-on ?",
     format: "short",
     expected: ["1", "1,0", "1.0"],
     comparator: "number_equal",
@@ -961,7 +1047,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       "Définition : un pourcentage exprime une proportion sur 100.\n\n" +
       "Méthode : on ramène la situation à une proportion sur 100 ou à une part simple.\n\n" +
       "Calcul : " +
-      ("5 % de 20 €, c’est 0,05 × 20 = 1. Ce pourcentage vaut donc 1 €.") +
+      ("5 % de 20, c’est 20 × 5 ÷ 100 = 1. On obtient donc 1.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["pourcentage_nombre", "defi"],
   },
@@ -1079,27 +1165,21 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     tags: ["pourcentage_nombre", "comprendre", "template"],
     // 06/10 : une situation, et deux questions — « sur combien ? » (100, même si
     // le groupe n'a pas 100 éléments : le piège) ou « sur 100, combien ? ».
+    // 03/11/2026 : ★1 en 12 mots, ★2 en 15 mots au plus (REGLES-6E.md).
     generate: () => {
-      const s = pick(SITUATIONS_PCT);
-      const P = pick(PRENOMS);
+      const s = pick(SIMPLES_PCT);
       const p = pick([5, 10, 20, 25, 30, 40, 50, 60, 75, 80]);
-      const N = pick([true, false]) ? 100 : totalPour(p, s.max);
-      const debut = `${s.tot(N, P)} ${p} % des ${s.nom} ${s.adj}.`;
       const surCombien = Math.random() < 0.5;
       const text = surCombien
-        ? `${debut} ${pick([`« ${p} % » veut dire ${p} sur combien ?`, `Complète : « ${p} % », c’est ${p} sur …`, `Dans cette phrase, ${p} % signifie ${p} sur quel nombre ?`])}`
-        : `${debut} ${pick([`Sur 100 ${s.nom}, combien ${s.adj} ?`, `Imagine 100 ${s.nom} : combien ${s.adj} ?`, `Pour 100 ${s.nom}, combien ${s.adj} ?`])}`;
+        ? `${p} % des ${s.nom} ${s.adj}. ${pick([`${p} %, c’est ${p} sur combien ?`, `Complète : ${p} %, c’est ${p} sur …`, `${p} % veut dire ${p} sur combien ?`])}`
+        : `${surS(100, s, p, true)} ${pick([`Combien ${deNu(s.nom)} ${s.adj} ?`, `Combien ${s.adj} ?`])}`;
       const r = surCombien ? 100 : p;
       return {
         text,
         format: "short",
         expected: [String(r)],
         comparator: "number_equal",
-        explanation: expl(
-          `${p} % veut dire ${p} sur 100 : sur 100 ${s.nom}, ${p} ${s.adj}.` +
-            (N !== 100 ? ` Attention : le pourcentage se lit toujours sur 100, même s’il y a ${N} ${s.nom}.` : "") +
-            ` Réponse : ${r}.`,
-        ),
+        explanation: expl(`${p} % veut dire ${p} sur 100 : sur 100 ${s.nom}, ${p} ${s.adj}. Réponse : ${r}.`),
       };
     },
   },
@@ -1114,22 +1194,17 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Le symbole % veut dire « sur 100 ».",
     tags: ["pourcentage_nombre", "comprendre", "qcm", "template"],
+    // 03/11/2026 : ★1 en 12 mots, ★2 en 15 mots au plus (REGLES-6E.md).
     generate: () => {
-      const s = pick(SITUATIONS_PCT);
-      const P = pick(PRENOMS);
+      const s = pick(SIMPLES_PCT);
       const p = pick([5, 10, 20, 25, 30, 40, 50, 60, 75, 80]);
-      const N = totalPour(p, s.max);
+      const N = totalPour(p, 300);
       const bonne = `${p} ${s.nom} sur 100`;
       const leurres = [`${p} ${s.nom} sur 10`, `100 ${s.nom} sur ${p}`, `${p} ${s.nom} sur 1 000`];
       if (N !== 100) leurres.push(`${p} ${s.nom} sur ${N}`);
-      const question = pick([
-        `Que veut dire « ${p} % » ici ?`,
-        `Quelle phrase dit la même chose que « ${p} % » ?`,
-        `Choisis le sens de « ${p} % ».`,
-        `« ${p} % », cela veut dire :`,
-      ]);
+      const question = pick([`Que veut dire « ${p} % » ?`, `« ${p} % », cela veut dire :`, `Choisis le sens de « ${p} % ».`]);
       return {
-        text: `${s.tot(N, P)} ${p} % des ${s.nom} ${s.adj}. ${question}`,
+        text: `${surS(N, s, p, true)} ${question}`,
         format: "qcm",
         choices: choixQcm(bonne, leurres),
         expected: [bonne],
@@ -1150,19 +1225,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     hint: "Le symbole % signifie “sur 100”.",
     tags: ["pourcentage_nombre", "comprendre", "qcm", "template"],
     // 06/10 : le sens inverse — « k sur 100 », c'est k %.
+    // 03/11/2026 : ★1 en 12 mots, ★2 en 15 mots au plus (REGLES-6E.md).
     generate: () => {
-      const s = pick(SITUATIONS_PCT);
-      const P = pick(PRENOMS);
+      const s = pick(SIMPLES_PCT);
       const k = randomInt(2, 98);
       const bonne = `${k} %`;
-      const question = pick([
-        `Quel pourcentage des ${s.nom} ${s.adj} ?`,
-        `Quelle part des ${s.nom} ${s.adj}, en pourcentage ?`,
-        `Écris en pourcentage la part des ${s.nom} qui ${s.adj}.`,
-        `Combien de pour cent des ${s.nom} ${s.adj} ?`,
-      ]);
+      const question = pick([`Quel pourcentage ${s.adj} ?`, "Écris cette part en pourcentage.", `Combien de pour cent ${s.adj} ?`]);
       return {
-        text: `${s.tot(100, P)} ${k} ${s.nom} ${s.adj}. ${question}`,
+        text: `${surS(100, s, k, false)} ${question}`,
         format: "qcm",
         choices: choixQcm(bonne, [`${100 - k} %`, "100 %", ...(k + 10 < 100 ? [`${k + 10} %`] : []), ...(k > 5 ? [`${k - 5} %`] : [])]),
         expected: [bonne],
@@ -1182,14 +1252,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Sur 100, le nombre compté est directement le pourcentage.",
     tags: ["pourcentage_nombre", "comprendre", "template"],
+    // 03/11/2026 : ★1 en 12 mots, ★2 en 15 mots au plus (REGLES-6E.md).
     generate: () => {
-      const s = pick(SITUATIONS_PCT);
-      const P = pick(PRENOMS);
+      const s = pick(SIMPLES_PCT);
       const k = randomInt(2, 98);
       const versPct = Math.random() < 0.5;
       const text = versPct
-        ? `${s.tot(100, P)} ${k} ${s.nom} ${s.adj}. ${pick([`Quel pourcentage cela représente-t-il ?`, `Cela fait combien de pour cent ?`, `Écris cette part en pourcentage.`])}`
-        : `${s.tot(100, P)} ${k} % des ${s.nom} ${s.adj}. ${pick([`Combien ${deNu(s.nom)} ${s.adj} ?`, `Calcule le nombre ${deNu(s.nom)} qui ${s.adj}.`, `Trouve combien ${deNu(s.nom)} ${s.adj}.`])}`;
+        ? `${surS(100, s, k, false)} ${pick([`Quel pourcentage ${s.adj} ?`, "Cela fait combien de pour cent ?", "Écris cette part en pourcentage."])}`
+        : `${surS(100, s, k, true)} ${pick([`Combien ${deNu(s.nom)} ${s.adj} ?`, `Calcule le nombre ${deNu(s.nom)} qui ${s.adj}.`])}`;
       return {
         text,
         format: "short",
@@ -1218,16 +1288,17 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Écris le pourcentage sur 100.",
     tags: ["pourcentage_nombre", "fraction", "template"],
+    // 03/11/2026 : ★1 en 12 mots, ★2 en 15 mots au plus (REGLES-6E.md).
     generate: () => {
       const p = pick([5, 10, 15, 20, 25, 30, 40, 45, 50, 60, 75, 80, 90]);
       const question = pick([
-        `Écris ${p} % sous forme d’une fraction de dénominateur 100.`,
-        `Quelle fraction de dénominateur 100 vaut ${p} % ?`,
-        `Complète avec une fraction : ${p} % = …`,
-        `Traduis ${p} % par une fraction sur 100.`,
+        `Écris ${p} % en fraction sur 100.`,
+        `Quelle fraction sur 100 vaut ${p} % ?`,
+        `Complète : ${p} % = …/100`,
+        `Écris ${p} % sous forme de fraction.`,
       ]);
       return {
-        text: Math.random() < 0.75 ? `${phrasePct(p)} ${question}` : question,
+        text: Math.random() < 0.6 ? `${phraseSimple(p)} ${question}` : question,
         format: "short",
         expected: [`${p}/100`, `${p} / 100`],
         comparator: "fraction_decimal_equivalent",
@@ -1246,22 +1317,18 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Une fraction sur 100 s’écrit directement en pourcentage : 37/100 = 37 %.",
     tags: ["pourcentage_nombre", "fraction", "template"],
+    // 03/11/2026 : ★1 en 12 mots, ★2 en 15 mots au plus (REGLES-6E.md).
     generate: () => {
       const k = randomInt(2, 98);
-      const question = pick([
+      let text = pick([
         `Écris ${k}/100 sous forme de pourcentage.`,
         `Quel pourcentage est égal à ${k}/100 ?`,
         `Complète : ${k}/100 = … %`,
         `Combien de pour cent font ${k}/100 ?`,
       ]);
-      let text = question;
-      if (Math.random() < 0.8) {
-        const s = pick(SITUATIONS_PCT);
-        text = `${s.tot(100, pick(PRENOMS))} ${k} ${s.nom} ${s.adj} : c’est ${k}/100 des ${s.nom}. ${pick([
-          "Écris cette fraction en pourcentage.",
-          "Quel pourcentage cela fait-il ?",
-          `Quel pourcentage des ${s.nom} ${s.adj} ?`,
-        ])}`;
+      if (Math.random() < 0.6) {
+        const s = pick(SIMPLES_PCT);
+        text = `Sur 100 ${s.nom}, ${k} ${s.adj} : c’est ${k}/100. ${pick(["Quel pourcentage est-ce ?", "Écris-le en pourcentage.", "Donne ce pourcentage."])}`;
       }
       return {
         text,
@@ -1293,7 +1360,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
         `Quelle écriture en fraction correspond à ${p} % ?`,
       ]);
       return {
-        text: Math.random() < 0.75 ? `${phrasePct(p)} ${question}` : question,
+        text: Math.random() < 0.75 ? `${phraseSimple(p)} ${question}` : question,
         format: "qcm",
         // 1/10 = 10/100 : le leurre « 1/p » serait juste pour p = 10.
         choices: choixQcm(good, [`${p}/10`, `100/${p}`, `${100 - p}/100`, ...(p !== 10 ? [`1/${p}`] : [])]),
@@ -1330,7 +1397,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
         `${bonne.p} % représente…`,
       ]);
       return {
-        text: Math.random() < 0.8 ? `${phrasePct(bonne.p)} ${question}` : question,
+        text: Math.random() < 0.8 ? `${phraseSimple(bonne.p)} ${question}` : question,
         format: "qcm",
         choices: choixQcm(bonne.c, PARTS.map((x) => x.c)),
         expected: [bonne.c],
@@ -1366,7 +1433,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       ]);
 
       return {
-        text: Math.random() < 0.8 ? `${phrasePct(p)} ${question}` : question,
+        text: Math.random() < 0.8 ? `${phraseSimple(p)} ${question}` : question,
         format: "short",
         expected: [formatComma(dec), `${p}/100`, `${p} / 100`],
         comparator: "fraction_decimal_equivalent",
@@ -1402,7 +1469,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       ]);
 
       return {
-        text: Math.random() < 0.8 ? `${phrasePct(p)} ${question}` : question,
+        text: Math.random() < 0.8 ? `${phraseSimple(p)} ${question}` : question,
         format: "qcm",
         choices: choixQcm(good, leurres),
         expected: [good],
@@ -1426,6 +1493,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "0,35 = 35 centièmes = 35/100 = 35 %.",
     tags: ["pourcentage_nombre", "decimal", "template"],
+    // 03/11/2026 : ★1 en 12 mots, ★2 en 15 mots au plus (REGLES-6E.md).
     generate: () => {
       const p = pick([5, 8, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 65, 70, 75, 80, 90, 95]);
       const d = percentToDecimalString(p);
@@ -1433,16 +1501,13 @@ export const pourcentagesBank: TutorBankItemV4[] = [
         `Écris ${d} sous forme de pourcentage.`,
         `Quel pourcentage est égal à ${d} ?`,
         `Complète : ${d} = … %`,
+        `${d}, c’est combien de pour cent ?`,
+        `Transforme ${d} en pourcentage.`,
+        `Donne le pourcentage égal à ${d}.`,
       ]);
-      if (Math.random() < 0.75) {
-        const s = pick(SITUATIONS_PCT);
-        const P = pick(PRENOMS);
-        text = `${P.n} calcule la part des ${s.nom} qui ${s.adj} : ${il(P)} trouve ${d}. ${pick([
-          "Écris cette part en pourcentage.",
-          "Quel pourcentage est-ce ?",
-          `Quel pourcentage des ${s.nom} ${s.adj} ?`,
-          "Cela fait combien de pour cent ?",
-        ])}`;
+      if (Math.random() < 0.6) {
+        const s = pick(SIMPLES_PCT.filter((x) => x.nom !== "parts")); // pas « la part des parts »
+        text = `La part des ${s.nom} qui ${s.adj} vaut ${d}. ${pick(["Écris-la en pourcentage.", "Quel pourcentage est-ce ?", "Cela fait combien de pour cent ?"])}`;
       }
       return {
         text,
@@ -1471,12 +1536,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       const fausses = ps.slice(1).map((p, i) =>
         i === 0 ? `${p} % = ${formatComma(p / 10)}` : i === 1 ? `${p} % = ${p < 10 ? `0,${p}` : formatComma(p)}` : `${p} % = ${formatComma(p === 50 ? 5 : (100 - p) / 100)}`,
       );
-      const P = pick(PRENOMS);
+      // 03/11/2026 : ★2, plus de prénom dans la consigne.
       const consigne = pick([
         "Quelle égalité est vraie ?",
         "Une seule égalité est juste. Laquelle ?",
-        `${P.n} a écrit quatre égalités. Laquelle est juste ?`,
-        `Aide ${P.n} : quelle égalité est correcte ?`,
+        "Voici quatre égalités. Laquelle est juste ?",
+        "Quelle égalité est correcte ?",
+        "Choisis la seule égalité juste.",
+        "Parmi ces égalités, laquelle est exacte ?",
       ]);
       return {
         text: consigne,
@@ -1558,23 +1625,26 @@ export const pourcentagesBank: TutorBankItemV4[] = [
         { p: 20, c: "le cinquième" },
       ];
       const b = pick(PARTS);
-      const P = pick(PRENOMS);
-      const ARTICLES = ["les baskets", "les vélos", "les jeux de société", "les maillots de foot", "les sacs à dos", "les livres de cuisine", "les guitares", "les tentes de camping", "les rollers", "les casques audio", "les puzzles", "les raquettes de tennis", "les cannes à pêche", "les pots de fleurs"];
-      const article = pick(ARTICLES);
-      const lieu = pick([`Dans un magasin, ${P.n} voit l’affiche`, `Sur un site internet, ${P.n} lit`, `Au rayon, une étiquette annonce`, `Pendant les soldes, ${P.n} remarque l’affiche`]);
-      const question = pick([
-        "Quelle part du prix est enlevée ?",
-        "Quelle part du prix ne paie-t-on pas ?",
-        "De quelle part le prix baisse-t-il ?",
-        "Que retire-t-on du prix ?",
+      // 03/11/2026 : ★2, une figure et un geste (les soldes sont montés à ★3 :
+      // pourcentage_lire_qcm_tpl_reduc_situation).
+      const F = pick([
+        { gn: "d’une bande", du: "de la bande" }, { gn: "d’un disque", du: "du disque" },
+        { gn: "d’un rectangle", du: "du rectangle" }, { gn: "d’une grille", du: "de la grille" },
+        { gn: "d’un carré", du: "du carré" }, { gn: "d’un triangle", du: "du triangle" },
+        { gn: "d’une figure", du: "de la figure" }, { gn: "d’une barre", du: "de la barre" },
       ]);
+      const g = pick([
+        { on: "On colorie", q: "colorie-t-on" }, { on: "On enlève", q: "enlève-t-on" },
+        { on: "On grise", q: "grise-t-on" }, { on: "On prend", q: "prend-on" }, { on: "On hachure", q: "hachure-t-on" },
+      ]);
+      const question = pick([`Quelle part ${F.du} ${g.q} ?`, `Cela fait quelle part ${F.du} ?`, `Quelle part ${F.du} est-ce ?`]);
       return {
-        text: `${lieu} « −${b.p} % sur ${article} ». ${question}`,
+        text: `${g.on} ${b.p} % ${F.gn}. ${question}`,
         format: "qcm",
         choices: choixQcm(b.c, PARTS.map((x) => x.c)),
         expected: [b.c],
         comparator: "mcq_exact",
-        explanation: expl(`${b.p} % = ${b.p}/100, c’est ${b.c}. On enlève ${b.c} du prix.`),
+        explanation: expl(`${b.p} % = ${b.p}/100, c’est ${b.c}.`),
       };
     },
   },
@@ -1625,7 +1695,8 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     tags: ["pourcentage_nombre", "calcul", "template"],
     // 06/10 : 10 %, 25 %, 50 % — calcul nu (forme variée) ou dans une situation.
     generate: () => {
-      const c = appliquerPct([10, 25, 50], 0.35);
+      // 03/11/2026 : ★2, des objets de maths (SIMPLES_PCT), plus de situation.
+      const c = appliquerPct([10, 25, 50], 0.35, true);
       return {
         text: c.text,
         format: "short",
@@ -1645,8 +1716,9 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     difficulty: 2,
     theme: "neutral",
     hint: "10 % = le dixième ; 50 % = la moitié ; 25 % = le quart.",
-    tags: ["pourcentage_nombre", "calcul", "template", "contexte"],
-    generate: () => ({ ...genQuantite([10, 25, 50]), format: "short", comparator: "number_equal" }),
+    tags: ["pourcentage_nombre", "calcul", "template"],
+    // 03/11/2026 : ★2, des grandeurs sans situation (segment, masse, durée…).
+    generate: () => ({ ...genQuantite([10, 25, 50], QUANTITES_SIMPLES), format: "short", comparator: "number_equal" }),
   },
   {
     kind: "template",
@@ -1789,20 +1861,16 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Le groupe entier, c’est 100 %.",
     tags: ["pourcentage_nombre", "defi", "template"],
+    // 03/11/2026 : ★1 en 12 mots, ★2 en 15 mots au plus (REGLES-6E.md).
     generate: () => {
-      const s = pick(SITUATIONS_PCT);
-      const P = pick(PRENOMS);
+      // ★1 : un objet « binaire » (colorié ou blanc), pas de phrase « Les autres… ».
+      const s = pick(BINAIRES);
       const k = randomInt(2, 98);
       const autre = Math.random() < 0.6;
       const phrase = autre ? s.autre : s.adj;
-      const question = pick([
-        `Quel pourcentage des ${s.nom} ${phrase} ?`,
-        `Combien de pour cent des ${s.nom} ${phrase} ?`,
-        `Écris en pourcentage la part des ${s.nom} qui ${phrase}.`,
-      ]);
       const r = autre ? 100 - k : k;
       return {
-        text: `${s.tot(100, P)} ${k} ${s.nom} ${s.adj}. Les autres ${s.autre}. ${question}`,
+        text: `${donneesS(100, s, k, false)} Quel pourcentage des ${s.nom} ${phrase} ?`,
         format: "short",
         expected: [String(r), `${r} %`],
         comparator: "number_equal",
@@ -1825,18 +1893,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Le groupe entier, c’est 100 %. Ne te laisse pas distraire par le nombre total.",
     tags: ["pourcentage_nombre", "defi", "template"],
+    // 03/11/2026 : ★1 en 12 mots, ★2 en 15 mots au plus (REGLES-6E.md).
     generate: () => {
-      const s = pick(SITUATIONS_PCT);
-      const P = pick(PRENOMS);
+      const s = pick(BINAIRES);
       const p = randomInt(1, 19) * 5;
-      const N = totalPour(p, s.max);
-      const question = pick([
-        `Quel pourcentage des ${s.nom} ${s.autre} ?`,
-        `Combien de pour cent des ${s.nom} ${s.autre} ?`,
-        `Écris en pourcentage la part des ${s.nom} qui ${s.autre}.`,
-      ]);
+      const N = totalPour(p, 300);
+      const question = pick([`Quel pourcentage des ${s.nom} ${s.autre} ?`, `Combien de pour cent des ${s.nom} ${s.autre} ?`]);
       return {
-        text: `${s.tot(N, P)} ${p} % des ${s.nom} ${s.adj}. Les autres ${s.autre}. ${question}`,
+        text: `${donneesS(N, s, p, true)} ${question}`,
         format: "short",
         expected: [String(100 - p), `${100 - p} %`],
         comparator: "number_equal",
@@ -1881,14 +1945,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
 
   // ===== TOP-UP — POURCENTAGE_LIRE =====
   { kind: "fixed", id: "pourcentage_lire_topup_1", niveau: "6e", matiere: "maths", notionId: "pourcentage_nombre", microId: "pourcentage_lire", difficulty: 2, theme: "neutral",
-    text: "Dans une classe de 100 élèves, 40 % aiment le sport. Combien d’élèves cela représente-t-il ?", format: "short", expected: ["40"], comparator: "number_equal",
-    hint: "40 % = 40 sur 100.", explanation: expl("Sur 100 élèves, 40 % signifie 40 sur 100. Cela représente donc 40 élèves."), tags: ["pourcentage_nombre", "lecture"] },
+    text: "Sur 100 cubes, 40 % sont bleus. Combien de cubes sont bleus ?", format: "short", expected: ["40"], comparator: "number_equal",
+    hint: "40 % = 40 sur 100.", explanation: expl("Sur 100 cubes, 40 % signifie 40 sur 100. Cela représente donc 40 cubes."), tags: ["pourcentage_nombre", "lecture"] },
   { kind: "fixed", id: "pourcentage_lire_topup_2", niveau: "6e", matiere: "maths", notionId: "pourcentage_nombre", microId: "pourcentage_lire", difficulty: 2, theme: "neutral",
-    text: "Un article affiche « −50 % ». Quelle fraction du prix est enlevée ?", format: "qcm", choices: ["la moitié", "le quart", "le tiers", "rien"], expected: ["la moitié"], comparator: "mcq_exact",
-    hint: "50 % = 50 sur 100 = 1/2.", explanation: expl("50 % signifie 50 sur 100, soit 1/2 : on enlève la moitié du prix."), tags: ["pourcentage_nombre", "lecture", "qcm"] },
+    text: "On enlève 50 % d’une bande. Quelle part de la bande est enlevée ?", format: "qcm", choices: ["la moitié", "le quart", "le tiers", "rien"], expected: ["la moitié"], comparator: "mcq_exact",
+    hint: "50 % = 50 sur 100 = 1/2.", explanation: expl("50 % signifie 50 sur 100, soit 1/2 : on enlève la moitié de la bande."), tags: ["pourcentage_nombre", "lecture", "qcm"] },
   { kind: "fixed", id: "pourcentage_lire_topup_3", niveau: "6e", matiere: "maths", notionId: "pourcentage_nombre", microId: "pourcentage_lire", difficulty: 2, theme: "neutral",
-    text: "Sur 100 voitures, 25 % sont rouges. Combien de voitures sont rouges ?", format: "short", expected: ["25"], comparator: "number_equal",
-    hint: "25 % = 25 sur 100.", explanation: expl("Sur 100 voitures, 25 % signifie 25 sur 100 : cela représente 25 voitures rouges."), tags: ["pourcentage_nombre", "lecture"] },
+    text: "Sur 100 points, 25 % sont rouges. Combien de points sont rouges ?", format: "short", expected: ["25"], comparator: "number_equal",
+    hint: "25 % = 25 sur 100.", explanation: expl("Sur 100 points, 25 % signifie 25 sur 100 : cela représente 25 points rouges."), tags: ["pourcentage_nombre", "lecture"] },
 
   // =========================
   // GÉNÉRATEURS DU 29/09/2026 — L'ÉVALUATION PAR CHAPITRES
@@ -2175,6 +2239,186 @@ export const pourcentagesBank: TutorBankItemV4[] = [
             (r1 === r2 ? `Les deux valent ${r1} : c’est pareil.` : `Réponse : ${bonne} (${Math.max(r1, r2)} contre ${Math.min(r1, r2)}).`) +
             " Le plus grand pourcentage ne donne pas forcément le plus grand nombre.",
         ),
+      };
+    },
+  },
+
+  // =========================
+  // 03/11/2026 — LES SITUATIONS MONTÉES À ★3 (les ★1-★2 sont devenues simples)
+  // =========================
+  {
+    kind: "template",
+    id: "pourcentage_comprendre_tpl_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "pourcentage_nombre",
+    microId: "pourcentage_comprendre",
+    difficulty: 3,
+    theme: "neutral",
+    // 03/11/2026 : les situations de la vie, montées à ★3 (tpl_1 est devenu simple).
+    hint: "Un pourcentage signifie toujours “sur 100”.",
+    tags: ["pourcentage_nombre", "comprendre", "template"],
+    // 06/10 : une situation, et deux questions — « sur combien ? » (100, même si
+    // le groupe n'a pas 100 éléments : le piège) ou « sur 100, combien ? ».
+    generate: () => {
+      const s = pick(SITUATIONS_PCT);
+      const P = pick(PRENOMS);
+      const p = pick([5, 10, 20, 25, 30, 40, 50, 60, 75, 80]);
+      const N = pick([true, false]) ? 100 : totalPour(p, s.max);
+      const debut = `${s.tot(N, P)} ${p} % des ${s.nom} ${s.adj}.`;
+      const surCombien = Math.random() < 0.5;
+      const text = surCombien
+        ? `${debut} ${pick([`« ${p} % » veut dire ${p} sur combien ?`, `Complète : « ${p} % », c’est ${p} sur …`, `Dans cette phrase, ${p} % signifie ${p} sur quel nombre ?`])}`
+        : `${debut} ${pick([`Sur 100 ${s.nom}, combien ${s.adj} ?`, `Imagine 100 ${s.nom} : combien ${s.adj} ?`, `Pour 100 ${s.nom}, combien ${s.adj} ?`])}`;
+      const r = surCombien ? 100 : p;
+      return {
+        text,
+        format: "short",
+        expected: [String(r)],
+        comparator: "number_equal",
+        explanation: expl(
+          `${p} % veut dire ${p} sur 100 : sur 100 ${s.nom}, ${p} ${s.adj}.` +
+            (N !== 100 ? ` Attention : le pourcentage se lit toujours sur 100, même s’il y a ${N} ${s.nom}.` : "") +
+            ` Réponse : ${r}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "pourcentage_comprendre_qcm_tpl_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "pourcentage_nombre",
+    microId: "pourcentage_comprendre",
+    difficulty: 3,
+    theme: "neutral",
+    // 03/11/2026 : les situations de la vie, montées à ★3 (qcm_tpl_sens est devenu simple).
+    hint: "Le symbole % veut dire « sur 100 ».",
+    tags: ["pourcentage_nombre", "comprendre", "qcm", "template"],
+    generate: () => {
+      const s = pick(SITUATIONS_PCT);
+      const P = pick(PRENOMS);
+      const p = pick([5, 10, 20, 25, 30, 40, 50, 60, 75, 80]);
+      const N = totalPour(p, s.max);
+      const bonne = `${p} ${s.nom} sur 100`;
+      const leurres = [`${p} ${s.nom} sur 10`, `100 ${s.nom} sur ${p}`, `${p} ${s.nom} sur 1 000`];
+      if (N !== 100) leurres.push(`${p} ${s.nom} sur ${N}`);
+      const question = pick([
+        `Que veut dire « ${p} % » ici ?`,
+        `Quelle phrase dit la même chose que « ${p} % » ?`,
+        `Choisis le sens de « ${p} % ».`,
+        `« ${p} % », cela veut dire :`,
+      ]);
+      return {
+        text: `${s.tot(N, P)} ${p} % des ${s.nom} ${s.adj}. ${question}`,
+        format: "qcm",
+        choices: choixQcm(bonne, leurres),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: expl(`Le symbole % veut dire « sur 100 » : ${p} % des ${s.nom}, c’est ${p} ${s.nom} sur 100. On compte toujours sur 100, quel que soit le nombre total.`),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "pourcentage_decimal_tpl_inverse_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "pourcentage_nombre",
+    microId: "pourcentage_decimal",
+    difficulty: 3,
+    theme: "neutral",
+    // 03/11/2026 : la situation de pourcentage_decimal_tpl_inverse, montée à ★3.
+    hint: "0,35 = 35 centièmes = 35/100 = 35 %.",
+    tags: ["pourcentage_nombre", "decimal", "template", "contexte"],
+    generate: () => {
+      const p = pick([5, 8, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 65, 70, 75, 80, 90, 95]);
+      const d = percentToDecimalString(p);
+      const s = pick(SITUATIONS_PCT);
+      const P = pick(PRENOMS);
+      return {
+        text: `${P.n} calcule la part des ${s.nom} qui ${s.adj} : ${il(P)} trouve ${d}. ${pick([
+          "Écris cette part en pourcentage.",
+          "Quel pourcentage est-ce ?",
+          `Quel pourcentage des ${s.nom} ${s.adj} ?`,
+          "Cela fait combien de pour cent ?",
+        ])}`,
+        format: "short",
+        expected: [String(p), `${p} %`],
+        comparator: "number_equal",
+        explanation: expl(`${d}, c’est ${p} centièmes, donc ${p}/100, donc ${p} %. On multiplie par 100 : ${d} × 100 = ${p}.`),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "pourcentage_decimal_tpl_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "pourcentage_nombre",
+    microId: "pourcentage_decimal",
+    difficulty: 3,
+    theme: "neutral",
+    // 03/11/2026 : un pourcentage lu dans la vie (PHRASES_PCT), monté à ★3.
+    hint: "Un pourcentage s’écrit en décimal en divisant par 100.",
+    tags: ["pourcentage_nombre", "decimal", "template", "contexte"],
+    generate: () => {
+      const p = pick([5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 75, 80, 90]);
+      const dec = formatComma(p / 100);
+      const question = pick([
+        `Écris ${p} % sous forme d’un nombre décimal.`,
+        `Quel nombre décimal vaut ${p} % ?`,
+        `Donne ${p} % en écriture décimale.`,
+        `Transforme ${p} % en nombre décimal.`,
+      ]);
+      return {
+        text: `${phrasePct(p)} ${question}`,
+        format: "short",
+        expected: [dec, `${p}/100`, `${p} / 100`],
+        comparator: "fraction_decimal_equivalent",
+        explanation: expl(`${p} % signifie ${p}/100. En écriture décimale, cela donne ${dec}.`),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "pourcentage_lire_qcm_tpl_reduc_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "pourcentage_nombre",
+    microId: "pourcentage_lire",
+    difficulty: 3,
+    theme: "neutral",
+    // 03/11/2026 : les affiches de soldes de pourcentage_lire_qcm_tpl_reduc, montées à ★3.
+    hint: "50 % = la moitié ; 25 % = le quart ; 10 % = le dixième.",
+    tags: ["pourcentage_nombre", "lecture", "qcm", "template", "contexte"],
+    generate: () => {
+      const PARTS = [
+        { p: 50, c: "la moitié" },
+        { p: 25, c: "le quart" },
+        { p: 75, c: "les trois quarts" },
+        { p: 10, c: "le dixième" },
+        { p: 20, c: "le cinquième" },
+      ];
+      const b = pick(PARTS);
+      const P = pick(PRENOMS);
+      const ARTICLES = ["les baskets", "les vélos", "les jeux de société", "les maillots de foot", "les sacs à dos", "les livres de cuisine", "les guitares", "les tentes de camping", "les rollers", "les casques audio", "les puzzles", "les raquettes de tennis", "les cannes à pêche", "les pots de fleurs"];
+      const article = pick(ARTICLES);
+      const lieu = pick([`Dans un magasin, ${P.n} voit l’affiche`, `Sur un site internet, ${P.n} lit`, `Au rayon, une étiquette annonce`, `Pendant les soldes, ${P.n} remarque l’affiche`, `Une libraire installe l’affiche`, `Un vendeur de vélos accroche l’affiche`]);
+      const question = pick([
+        "Quelle part du prix est enlevée ?",
+        "Quelle part du prix ne paie-t-on pas ?",
+        "De quelle part le prix baisse-t-il ?",
+        "Que retire-t-on du prix ?",
+      ]);
+      return {
+        text: `${lieu} « −${b.p} % sur ${article} ». ${question}`,
+        format: "qcm",
+        choices: choixQcm(b.c, PARTS.map((x) => x.c)),
+        expected: [b.c],
+        comparator: "mcq_exact",
+        explanation: expl(`${b.p} % = ${b.p}/100, c’est ${b.c}. On enlève ${b.c} du prix.`),
       };
     },
   },
