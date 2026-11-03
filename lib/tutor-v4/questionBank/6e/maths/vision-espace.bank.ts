@@ -121,6 +121,8 @@ const enL: Cube[] = [
 
 type QV = TutorGeneratedQuestionV4;
 const pickV = <T,>(a: readonly T[]): T => a[Math.floor(Math.random() * a.length)];
+/** « de faces », « d’arêtes » (élision devant une voyelle). */
+const deQ = (mot: string) => (/^[aeiouéèâ]/.test(mot) ? `d’${mot}` : `de ${mot}`);
 const ilV = (p: Prenom) => (p.f ? "elle" : "il");
 const IlV = (p: Prenom) => (p.f ? "Elle" : "Il");
 /** « 12 carreaux », « 1 carreau », « 8 cubes ». */
@@ -143,6 +145,40 @@ const CUBES_VIE: { dit: (p: Prenom) => string }[] = [
   { dit: (p) => `${p.nom} fabrique un mur avec des glaçons cubiques.` },
   { dit: (p) => `${p.nom} range des boîtes cubiques sur une étagère.` },
   { dit: (p) => `Au centre de loisirs, ${p.nom} empile des coussins cubiques.` },
+  // 03/11/2026 : des métiers (vocations), réservés aux étoiles ★3 et plus.
+  { dit: (p) => `${p.nom} est architecte : pour une maquette, ${ilV(p)} assemble des cubes.` },
+  { dit: (p) => `${p.nom} travaille dans un entrepôt et empile des colis cubiques.` },
+  { dit: (p) => `${p.nom} est maçon${p.f ? "ne" : ""} et monte un muret de blocs cubiques.` },
+  { dit: (p) => `${p.nom}, chimiste, range des cristaux de sel cubiques au microscope.` },
+  { dit: (p) => `${p.nom} est développeu${p.f ? "se" : "r"} de jeux vidéo et modélise des blocs cubiques.` },
+];
+/* ⛔⛔ 03/11/2026 — D'ABORD DES QUESTIONS SIMPLES (Frédéric) : « le contexte est
+   réservé aux étoiles ★3 et plus ». À ★1-★2 : ni prénom, ni métier, ni situation ;
+   le dessin (canvas) reste, la phrase va droit au but. Et COURTE (REGLES-6E.md) :
+   ★1 en 12 mots au plus, ★2 en 15 (ponctuation comprise, comme le script de mesure). */
+const motsV = (t: string) => t.trim().split(/\s+/).length;
+/** Une intro et une question tirée parmi celles qui tiennent dans `max` mots. */
+function courtV(intro: string, questions: string[], max = 15) {
+  const ok = questions.filter((q) => motsV(`${intro} ${q}`) <= max);
+  const plusCourte = [...questions].sort((a, b) => motsV(a) - motsV(b))[0];
+  return `${intro} ${ok.length ? pickV(ok) : plusCourte}`;
+}
+/** Les trois dimensions d'un pavé, sans phrase autour, dans un ordre tiré au hasard
+ *  (« Hauteur 2, longueur 4, largeur 3. ») : la variété des énoncés courts. */
+function dimsSimples(L: number, l: number, h: number, prefixe = Math.random() < 0.5) {
+  const d = shuffle([`longueur ${L}`, `largeur ${l}`, `hauteur ${h}`]);
+  const t = `${d[0]}, ${d[1]}, ${d[2]}.`;
+  return prefixe ? `Pavé : ${t}` : t.charAt(0).toUpperCase() + t.slice(1);
+}
+/** Les questions « combien de cubes ? » d'un pavé (★2). */
+const COMBIEN_CUBES = [
+  "Combien de cubes en tout ?",
+  "Compte tous les cubes, même cachés.",
+  "Combien de cubes y a-t-il ?",
+  "Quel est le nombre de cubes ?",
+  "Combien de cubes forment ce pavé ?",
+  "Trouve le nombre total de cubes.",
+  "Calcule le nombre de cubes.",
 ];
 const ctxV = (p: Prenom = pickV(PRENOMS)) => pickV(CUBES_VIE).dit(p);
 const VUES = [
@@ -211,6 +247,15 @@ function genVisionVues(etoile: 2 | 3 | 4): QV {
         assemblage(pave(L, l, hh)),
       );
   }
+  if (etoile === 2) {
+    const v = vue.nom;
+    return courteV(
+      courtV(dimsSimples(L, l, hh), [`Combien de carreaux en vue ${v} ?`, `Vue ${v} : combien de carreaux ?`, `Compte les carreaux de la vue ${v}.`, `Trace la vue ${v}. Combien de carreaux ?`, `Combien de carreaux compte la vue ${v} ?`, `Colorie la vue ${v}. Combien de carreaux ?`, `Combien de carreaux a la vue ${v} ?`, `Quelle est l’aire de la vue ${v}, en carreaux ?`, `Trouve le nombre de carreaux en vue ${v}.`]),
+      n, "carreau",
+      `Cette vue montre un rectangle de ${dims[vue.a]} sur ${dims[vue.b]} : ${dims[vue.a]} × ${dims[vue.b]} = ${n} carreaux. La troisième dimension part vers l’arrière et ne se voit pas.`,
+      assemblage(pave(L, l, hh)),
+    );
+  }
   return courteV(
     `${ctxV(p)} ${IlV(p)} forme un pavé plein de ${direPave(L, l, hh)}. ${pickV([`Combien de carreaux contient sa ${vue.dit} ?`, `Sur sa ${vue.dit}, combien de carreaux y a-t-il ?`, `${p.nom} dessine la ${vue.dit}. Combien de carreaux ?`])}`,
     n, "carreau",
@@ -224,7 +269,30 @@ function genVisionDenombrer(etoile: 2 | 3 | 4 | 5): QV {
   const p = pickV(PRENOMS);
   if (etoile <= 3) {
     const L = randomInt(2, 5), l = randomInt(2, 4), h = randomInt(2, etoile === 2 ? 3 : 4);
-    const famille = etoile === 2 ? "pave" : pickV(["pave", "etages", "ajouter"] as const);
+    const famille = pickV(["pave", "etages", "ajouter"] as const);
+    if (etoile === 2) {
+      // ★2 : simple, sans prénom ni situation (le dessin reste).
+      if (famille === "etages")
+        return courteV(
+          courtV(pickV([`${h} étages de ${L} cubes sur ${l}.`, `${h} étages identiques de ${L} cubes sur ${l}.`, `${h} étages pareils de ${L} cubes sur ${l}.`]), [...COMBIEN_CUBES, "Combien de cubes compte l’assemblage ?", "Trouve le nombre de cubes."]),
+          L * l * h, "cube",
+          `Un étage contient ${L} × ${l} = ${L * l} cubes. Avec ${h} étages : ${L * l} × ${h} = ${L * l * h} cubes.`,
+          assemblage(pave(L, l, h)),
+        );
+      if (famille === "ajouter")
+        return courteV(
+          courtV(dimsSimples(L, l, h, false), ["On ajoute un étage identique. Combien de cubes ?", "Ajoute un étage identique : combien de cubes ?", "On ajoute un étage identique. Combien de cubes de plus ?", "Ajoute un étage identique. Compte les cubes ajoutés."]),
+          L * l, "cube",
+          `Un étage est un rectangle de ${L} sur ${l} : ${L} × ${l} = ${L * l} cubes à ajouter.`,
+          assemblage(pave(L, l, h)),
+        );
+      return courteV(
+        courtV(dimsSimples(L, l, h), COMBIEN_CUBES),
+        L * l * h, "cube",
+        `Un étage contient ${L} × ${l} = ${L * l} cubes, et il y a ${h} étages : ${L * l} × ${h} = ${L * l * h} cubes. Les cubes cachés comptent aussi.`,
+        assemblage(pave(L, l, h)),
+      );
+    }
     if (famille === "etages") {
       return courteV(
         `${ctxV(p)} Chaque étage est un rectangle de ${L} cubes sur ${l}. Il y a ${h} étages identiques. ${pickV(["Combien de cubes en tout ?", "Combien de cubes a-t-" + ilV(p) + " utilisés ?"])}`,
@@ -304,15 +372,37 @@ const OBJETS_SOLIDES: { dit: string; solide: string }[] = [
   { dit: "le toit d’un clocher", solide: "une pyramide à base carrée" },
   { dit: "une pyramide d’Égypte", solide: "une pyramide à base carrée" },
 ];
-function genVisionRepresentation(etoile: 2 | 3 | 4): QV {
+function genVisionRepresentation(etoile: 2 | 3 | 4 | "objets"): QV {
   const p = pickV(PRENOMS);
   if (etoile === 2) {
+    // ★2 : le solide nommé directement, sans objet de la vie ni prénom.
+    const s = pickV(SOLIDES);
+    const [quoi, n] = pickV([["faces", s.faces], ["arêtes", s.aretes], ["sommets", s.sommets]] as const);
+    const autres = [...new Set([4, 5, 6, 8, 9, 12].filter((k) => k !== n))].sort(() => Math.random() - 0.5).slice(0, 3);
+    const de = `d’${s.nom}`;
+    const Nom = s.nom.charAt(0).toUpperCase() + s.nom.slice(1);
+    return qcmV(
+      pickV([
+        `Combien ${deQ(quoi)} a ${s.nom} ?`,
+        `${Nom} : combien ${deQ(quoi)} ?`,
+        `Quel est le nombre ${deQ(quoi)} ${de} ?`,
+        `Compte les ${quoi} ${de}. Combien y en a-t-il ?`,
+        `Ce solide est ${s.nom}. Combien ${deQ(quoi)} a-t-il ?`,
+        `Combien ${s.nom} compte-t-il ${deQ(quoi)} ?`.replace(/^Combien une (.*) compte-t-il/, "Combien une $1 compte-t-elle"),
+      ]),
+      `${n} ${quoi}`,
+      autres.map((k) => `${k} ${quoi}`),
+      `${Nom} a ${s.faces} faces (${s.detail}), ${s.aretes} arêtes et ${s.sommets} sommets.`,
+    );
+  }
+  if (etoile === "objets") {
+    // ★3 (03/11/2026) : l'ancien ★2 avec un objet de la vie (dé, tente, pyramide…).
     const o = pickV(OBJETS_SOLIDES);
     const s = SOLIDES.find((x) => x.nom === o.solide)!;
     const [quoi, n] = pickV([["faces", s.faces], ["arêtes", s.aretes], ["sommets", s.sommets]] as const);
     const autres = [...new Set([4, 5, 6, 8, 9, 12].filter((k) => k !== n))].sort(() => Math.random() - 0.5).slice(0, 3);
     return qcmV(
-      `${p.nom} observe ${o.dit} : c’est ${o.solide}. ${pickV([`Combien de ${quoi} a ce solide ?`, `Combien de ${quoi} compte-t-${ilV(p)} ?`])}`,
+      `${p.nom} observe ${o.dit} : c’est ${o.solide}. ${pickV([`Combien ${deQ(quoi)} a ce solide ?`, `Combien ${deQ(quoi)} compte-t-${ilV(p)} ?`])}`,
       `${n} ${quoi}`,
       autres.map((k) => `${k} ${quoi}`),
       `${o.solide.charAt(0).toUpperCase() + o.solide.slice(1)} a ${s.faces} faces (${s.detail}), ${s.aretes} arêtes et ${s.sommets} sommets.`,
@@ -398,7 +488,7 @@ export const visionEspaceBank: TutorBankItemV4[] = [
     microId: "vision_vues",
     difficulty: 2,
     theme: "neutral",
-    text: "Un pavé est formé de cubes : 4 de long, 3 de large, 2 de haut. Sa vue de dessus est un rectangle. Combien de carreaux contient-elle ?",
+    text: "Longueur 4, largeur 3, hauteur 2. Combien de carreaux en vue de dessus ?",
     format: "short",
     expected: ["12 carreaux"],
     comparator: "number_equal",
@@ -418,7 +508,7 @@ export const visionEspaceBank: TutorBankItemV4[] = [
     microId: "vision_vues",
     difficulty: 2,
     theme: "neutral",
-    text: "Le même pavé (4 de long, 3 de large, 2 de haut) est regardé de face, c'est-à-dire en voyant sa longueur et sa hauteur. Combien de carreaux contient cette vue ?",
+    text: "Longueur 4, largeur 3, hauteur 2. Combien de carreaux en vue de face ?",
     format: "short",
     expected: ["8 carreaux"],
     comparator: "number_equal",
@@ -550,7 +640,7 @@ export const visionEspaceBank: TutorBankItemV4[] = [
     microId: "vision_denombrer",
     difficulty: 2,
     theme: "neutral",
-    text: "Un pavé plein est formé de cubes : 3 de long, 2 de large, 2 de haut. Combien de cubes contient-il ?",
+    text: "Longueur 3, largeur 2, hauteur 2. Combien de cubes contient ce pavé ?",
     format: "short",
     expected: ["12 cubes"],
     comparator: "number_equal",
@@ -690,7 +780,7 @@ export const visionEspaceBank: TutorBankItemV4[] = [
     microId: "vision_representation",
     difficulty: 2,
     theme: "neutral",
-    text: "Sur une représentation en perspective cavalière, comment dessine-t-on les arêtes cachées ?",
+    text: "En perspective cavalière, comment trace-t-on les arêtes cachées ?",
     format: "qcm",
     choices: [
       "en pointillés",
@@ -800,6 +890,20 @@ export const visionEspaceBank: TutorBankItemV4[] = [
     hint: "Compte les faces, puis les arêtes (les bords), puis les sommets (les coins).",
     tags: ["vision_espace", "representation", "template", "solides"],
     generate: () => genVisionRepresentation(2),
+  },
+  {
+    kind: "template",
+    id: "vision_representation_tpl_objets",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "vision_espace",
+    microId: "vision_representation",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Reconnais le solide, puis compte ses faces, ses arêtes (les bords) ou ses sommets (les coins).",
+    tags: ["vision_espace", "representation", "template", "solides"],
+    // 03/11/2026 : les objets de la vie (dé, tente, pyramide d'Égypte…) montent à ★3.
+    generate: () => genVisionRepresentation("objets"),
   },
   {
     kind: "template",

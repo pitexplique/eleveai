@@ -37,8 +37,12 @@ const cubesDuCanvas = (q: Q): Cube[] | null => {
 // ─── Lire l'assemblage décrit ───────────────────────────────────────────────
 type Assemblage = { cubes: Cube[]; colonnes: number[][] };
 function lirePave(t: string): [number, number, number] | null {
+  // 03/11/2026 : à ★2, « Longueur 4, largeur 3, hauteur 2. » (énoncés courts).
   const m = t.match(/(\d+) cubes de long, (\d+) de large et (\d+) de haut/);
-  return m ? [Number(m[1]), Number(m[2]), Number(m[3])] : null;
+  if (m) return [Number(m[1]), Number(m[2]), Number(m[3])];
+  const d = (nom: string) => t.match(new RegExp(`${nom} (\\d+)[,.]`, "i"))?.[1];
+  const [L, l, h] = [d("longueur"), d("largeur"), d("hauteur")];
+  return L && l && h ? [Number(L), Number(l), Number(h)] : null;
 }
 function lireColonnes(t: string): number[][] | null {
   const m = t.match(/Rangée de devant, de gauche à droite : ([\d, et]+) cubes\. Rangée de derrière : ([\d, et]+) cubes\./);
@@ -95,7 +99,7 @@ const corrVues: CorrecteurMaths = (q) => {
     const qui = (x: string) => (/dessus/.test(x) ? v.dessus : /face/.test(x) ? v.face : /droite/.test(x) ? v.droite : -1);
     return [...p, ...uneSeule(q, (x) => (x === "aucune des trois" ? ![v.dessus, v.face, v.droite].includes(n) : qui(x) === n), `la vue à ${n} carreaux`)];
   }
-  const m = t.match(/vue (de dessus|de face|de droite)/);
+  const m = t.match(/[Vv]ue (de dessus|de face|de droite)/);
   if (!m) return [...p, `vue introuvable : ${t}`];
   const n = m[1] === "de dessus" ? v.dessus : m[1] === "de face" ? v.face : v.droite;
   return [...p, ...reponse(q, n, "carreau")];
@@ -105,8 +109,9 @@ const corrVues: CorrecteurMaths = (q) => {
 const corrDenombrer: CorrecteurMaths = (q) => {
   const t = q.text;
   let m: RegExpMatchArray | null;
-  if ((m = t.match(/Chaque étage est un rectangle de (\d+) cubes sur (\d+)\. Il y a (\d+) étages/))) {
-    const [L, l, h] = [Number(m[1]), Number(m[2]), Number(m[3])];
+  const court = t.match(/^(\d+) étages (?:identiques |pareils )?de (\d+) cubes sur (\d+)\./);
+  if (court || (m = t.match(/Chaque étage est un rectangle de (\d+) cubes sur (\d+)\. Il y a (\d+) étages/))) {
+    const [L, l, h] = court ? [Number(court[2]), Number(court[3]), Number(court[1])] : [Number(m![1]), Number(m![2]), Number(m![3])];
     const p = canvasConforme(q, construire(`${L} cubes de long, ${l} de large et ${h} de haut`)!);
     return [...p, ...reponse(q, L * l * h, "cube")];
   }
@@ -122,7 +127,7 @@ const corrDenombrer: CorrecteurMaths = (q) => {
   if (!a) return [`assemblage introuvable : ${t}`];
   const p = canvasConforme(q, a);
   const total = a.cubes.length;
-  if (/ajoute un étage identique/.test(t)) return [...p, ...reponse(q, a.colonnes.flat().length, "cube")];
+  if (/[Aa]joute un étage identique/.test(t)) return [...p, ...reponse(q, a.colonnes.flat().length, "cube")];
   if ((m = t.match(/pavé plein de (\d+) cubes de long, (\d+) de large et (\d+) de haut\. .*(?:ajouter|manque)/))) {
     const [L, l, H] = [Number(m[1]), Number(m[2]), Number(m[3])];
     if (L !== a.colonnes[0].length || l !== a.colonnes.length) p.push("le pavé visé n'a pas la taille du quadrillage");
@@ -178,6 +183,15 @@ const corrRepresentation: CorrecteurMaths = (q) => {
     const n = m[2] === "faces" ? s.faces : m[2] === "arêtes" ? s.aretes : s.sommets;
     return [...p, ...uneSeule(q, (x) => x === `${n} ${m![2]}`, `les ${m[2]} d’${m[1]}`)];
   }
+  // 03/11/2026 : ★2 simple, le solide nommé sans objet de la vie.
+  const solide = t.match(/(un cube|un pavé droit|une pyramide à base carrée|un prisme droit à base triangulaire)/i);
+  const quoi = t.match(/faces|arêtes|sommets/);
+  if (solide && quoi) {
+    const nom = solide[1].toLowerCase();
+    const s = SOLIDES[nom];
+    const n = quoi[0] === "faces" ? s.faces : quoi[0] === "arêtes" ? s.aretes : s.sommets;
+    return uneSeule(q, (x) => x === `${n} ${quoi[0]}`, `les ${quoi[0]} d’${nom}`);
+  }
   return [`question non reconnue : ${t}`];
 };
 
@@ -208,6 +222,7 @@ export const CORRECTEURS: CorrecteursMaths = {
 
   vision_representation_tpl_1: corrRepresentation,
   vision_representation_tpl_faces_aretes: corrRepresentation,
+  vision_representation_tpl_objets: corrRepresentation,
   vision_representation_tpl_ouverte: corrRepresentation,
 
   vision_defi_tpl_1: corrDefi,
