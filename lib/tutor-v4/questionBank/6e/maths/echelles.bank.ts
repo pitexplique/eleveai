@@ -180,6 +180,14 @@ function tirerDoc(demi = false) {
   return { d, P, k, cm, reel: Math.round(cm * k * 100) / 100, objet: pick(d.objets), docTxt: d.doc(proprio) };
 }
 
+/** ★1-★2 (03/11/2026) : un papier SANS situation — un plan, une carte, une maquette. */
+const PAPIERS_SIMPLES: readonly { un: string; court: string; u: "m" | "km"; ks: readonly number[] }[] = [
+  { un: "un plan", court: "le plan", u: "m", ks: [1, 2, 5, 10, 20, 25, 50, 100] },
+  { un: "une carte", court: "la carte", u: "km", ks: [1, 2, 4, 5, 10, 20] },
+  { un: "une carte", court: "la carte", u: "m", ks: [50, 100, 200, 250, 500] },
+  { un: "une maquette", court: "la maquette", u: "m", ks: [1, 2, 5] },
+];
+
 export const echelles6eBank: TutorBankItemV4[] = [
   // =========================
   // ECHELLE_COMPRENDRE — ce que dit une échelle
@@ -193,7 +201,8 @@ export const echelles6eBank: TutorBankItemV4[] = [
     microId: "echelle_comprendre",
     difficulty: 2,
     theme: "neutral",
-    text: "Sur le plan d'un collège, on lit : « 1 cm sur le plan correspond à 10 m dans la réalité ». Que représentent 3 cm sur ce plan ?",
+    // 03/11/2026 : ★2, donc sans situation (le plan du collège est parti).
+    text: "Sur un plan, 1 cm représente 10 m. Que représentent 3 cm, en m ?",
     format: "short",
     expected: ["30"],
     comparator: "number_equal",
@@ -310,6 +319,60 @@ export const echelles6eBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "2 cm, c'est 2 fois 1 cm : la longueur réelle est 2 fois plus grande.",
     tags: ["prop_echelle", "comprendre", "template"],
+    // ⛔ 03/11/2026 — ★2 = question SIMPLE (Frédéric : « le contexte est réservé
+    // aux trois étoiles ») : un plan ou une carte, sans prénom ni lieu. Les
+    // tournures avec situation sont montées dans `…_tpl_lire_situation` (★3).
+    generate: () => {
+      const s = pick(PAPIERS_SIMPLES);
+      const k = pick(s.ks);
+      const cm = randomInt(2, 10);
+      const reel = cm * k;
+      const { un, court, u } = s;
+      const mots = u === "m" ? "mètres" : "kilomètres";
+      // ⛔ 03/11/2026 — ★2 : 15 mots au plus (REGLES-6E.md). Une phrase courte
+      // pour l'échelle × une question courte (squelettes variés).
+      const echelle = pick([
+        `Sur ${un}, 1 cm représente ${k} ${u}.`,
+        `Échelle : 1 cm pour ${k} ${u}.`,
+        `1 cm sur ${court} représente ${k} ${u}.`,
+        `Sur ${un}, 1 cm pour ${k} ${u}.`,
+      ]);
+      const question = pick([
+        `Que représentent ${cm} cm, en ${u} ?`,
+        `Combien de ${mots} pour ${cm} cm ?`,
+        `${cm} cm représentent combien de ${mots} ?`,
+        `Longueur réelle de ${cm} cm, en ${u} ?`,
+        `Combien représentent ${cm} cm, en ${u} ?`,
+        `Et ${cm} cm, en ${mots} ?`,
+      ]);
+      const text = `${echelle} ${question}`;
+      return {
+        text,
+        format: "short",
+        expected: [`${nombre(reel)} ${u}`, nombre(reel)],
+        comparator: "number_equal",
+        explanation: ex(
+          "une échelle indique à quelle longueur réelle correspond une longueur du plan.",
+          "on utilise la linéarité : autant de fois 1 cm, autant de fois la longueur réelle.",
+          `1 cm vaut ${k} ${u}. Or ${cm} cm, c'est ${cm} fois 1 cm : ${cm} × ${k} = ${nombre(reel)} ${u}.`,
+          `${cm} cm représentent ${nombre(reel)} ${u}.`
+        ),
+        canvas: correspondance(`1 cm ↔ ${k} ${u}`, "1 cm", `${k} ${u}`, `Et ${cm} cm ?`),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "6e_echelle_comprendre_tpl_lire_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "prop_echelle",
+    microId: "echelle_comprendre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "2 cm, c'est 2 fois 1 cm : la longueur réelle est 2 fois plus grande.",
+    tags: ["prop_echelle", "comprendre", "template"],
+    // 03/11/2026 : les tournures avec situation de `…_tpl_lire`, montées à ★3.
     generate: () => {
       const { d, P, k, cm, reel, docTxt, objet } = tirerDoc();
       const text = pick([

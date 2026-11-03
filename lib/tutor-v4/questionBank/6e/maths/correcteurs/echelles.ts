@@ -194,6 +194,7 @@ function corrigerFermee(q: TutorGeneratedQuestionV4): string[] {
 export const CORRECTEURS: CorrecteursMaths = avecRegleMotsCles({
   "6e_echelle_comprendre_tpl_1": corrigerVersReel,
   "6e_echelle_comprendre_tpl_lire": corrigerVersReel,
+  "6e_echelle_comprendre_tpl_lire_situation": corrigerVersReel,
   "6e_echelle_comprendre_qcm_tpl_fraction": corrigerSensFraction,
   "6e_echelle_comprendre_tpl_ouverte": corrigerFermee,
   "6e_echelle_reelle_tpl_1": corrigerVersReel,
