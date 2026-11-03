@@ -1,4 +1,5 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type { QuadrilatereCanvasData, FigureLibreCanvasData } from "@/lib/tutor-v4/types_canvas";
 import { PRENOMS, pick, de, type Prenom } from "./entiers.bank";
 
 // Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
@@ -117,6 +118,101 @@ const SURFACES_GRANDES: { de: string; min: number; max: number }[] = [
 ];
 const AUTRES_UNITES = ["kg", "g", "L"];
 
+/* ⛔⛔ 03/11/2026 — D'ABORD LE GESTE NU (Frédéric, ../REGLES-6E.md) : à ★1 et
+   ★2, ni prénom, ni objet de la vie, ni lieu — « un rectangle de 6 cm sur
+   4 cm », 12 mots au plus à ★1, 15 à ★2, verbe d'action en tête. Les
+   situations (timbre, chambre, potager, carrelage…) servent à partir de ★3 :
+   les gabarits « _ctx3 » les gardent. La variété vient des nombres, des unités,
+   du nom de la figure, de la tournure, et du dessin quand il remplace la lecture. */
+const UNITES_NUES = ["cm", "cm", "dm", "m"];
+const NOMS_RECT = ["", "", "", "ABCD", "EFGH", "MNOP"];
+/** Un rectangle (ou un carré) dessiné, ses côtés écrits dessus : l'élève lit la figure, pas une phrase. */
+function quadriCote(L: number, l: number, u: string, carre: boolean): QuadrilatereCanvasData {
+  const w = 180;
+  const h = carre ? w : Math.max(50, Math.round((w * l) / L));
+  const x0 = 50;
+  const y0 = 50;
+  return {
+    kind: "quadrilatere" as const,
+    points: { A: { x: x0, y: y0 }, B: { x: x0 + w, y: y0 }, C: { x: x0 + w, y: y0 + h }, D: { x: x0, y: y0 + h } },
+    sideLabels: carre ? { AB: `${nf(L)} ${u}` } : { AB: `${nf(L)} ${u}`, BC: `${nf(l)} ${u}` },
+    display: { showPoints: true, showLabels: true, showSides: true, showAngles: false },
+    marks: {
+      rightAnglesAt: ["A", "B", "C", "D"],
+      equalSides: carre ? [["AB", "BC"], ["BC", "CD"], ["CD", "DA"]] : [["AB", "CD"], ["BC", "DA"]],
+    },
+  };
+}
+
+/** ★1-★2 : quelle unité pour une aire ? La figure et ses côtés, sans objet. */
+function genAireComprendreUniteNue() {
+  const u = pick(UNITES_NUES);
+  const autre = pick(AUTRES_UNITES);
+  const choices = shuffle([`${u}²`, u, `${u}³`, autre]);
+  const explication = expl(
+    `Une aire mesure une surface : elle s’écrit avec une unité CARRÉE. ${u} mesure une longueur, ${u}³ un volume. Ici l’aire s’écrit en ${u}².`
+  );
+  if (Math.random() < 0.55) {
+    const c = randomInt(2, 12);
+    const L = randomInt(4, 12);
+    const l = randomInt(2, L - 1);
+    const text = pick([
+      `Un carré mesure ${c} ${u} de côté. Son aire s’écrit en…`,
+      `Côté du carré : ${c} ${u}. Quelle unité pour son aire ?`,
+      `Un rectangle mesure ${L} ${u} sur ${l} ${u}. Son aire s’écrit en…`,
+    ]);
+    return { text, format: "qcm" as const, choices, expected: [`${u}²`], comparator: "mcq_exact" as const, explanation: explication };
+  }
+  const n = randomInt(4, 90);
+  const N = nf(n);
+  const text = pick([
+    "Laquelle de ces mesures est une aire ?",
+    "Choisis la mesure d’une aire.",
+    "Quelle écriture donne une aire ?",
+    "Trouve la mesure qui est une aire.",
+  ]);
+  return {
+    text,
+    format: "qcm" as const,
+    choices: shuffle([`${N} ${u}²`, `${N} ${u}`, `${N} ${u}³`, `${N} ${autre}`]),
+    expected: [`${N} ${u}²`],
+    comparator: "mcq_exact" as const,
+    explanation: expl(`Une aire s’écrit avec une unité carrée. ${N} ${u} est une longueur, ${N} ${u}³ un volume. L’aire est donc ${N} ${u}².`),
+  };
+}
+
+/** ★2 : le tour, l'intérieur ou l'espace d'une figure nue — périmètre, aire ou volume. */
+const FIGURES_PLANES = ["carré", "rectangle", "triangle", "disque", "losange", "hexagone"];
+const SOLIDES = ["cube", "pavé droit"];
+function genAireComprendreGrandeurNue() {
+  const r = Math.random();
+  const [quoi, rep, f] =
+    r < 0.45
+      ? [pick(["l’intérieur", "la surface"]), "l’aire", pick(FIGURES_PLANES)]
+      : r < 0.85
+        ? [pick(["le tour", "le contour", "le bord"]), "le périmètre", pick(FIGURES_PLANES)]
+        : ["l’espace", "le volume", pick(SOLIDES)];
+  const text = pick([
+    `On mesure ${quoi} d’un ${f}. Quelle grandeur est-ce ?`,
+    `Quelle grandeur mesure ${quoi} d’un ${f} ?`,
+    `${maj(quoi)} d’un ${f} : quelle grandeur mesure-t-on ?`,
+  ]);
+  const pourquoi =
+    rep === "l’aire"
+      ? "L’intérieur, toute la surface : on mesure l’aire."
+      : rep === "le périmètre"
+        ? "On ne s’occupe que du bord, tout autour : on mesure le périmètre."
+        : "L’espace occupé par un solide : on mesure le volume.";
+  return {
+    text,
+    format: "qcm" as const,
+    choices: shuffle(["l’aire", "le périmètre", "le volume", "la masse"]),
+    expected: [rep],
+    comparator: "mcq_exact" as const,
+    explanation: expl(pourquoi),
+  };
+}
+
 function genAireComprendreUnite() {
   const grande = Math.random() < 0.5;
   const o = pick(grande ? SURFACES_GRANDES : SURFACES_PETITES);
@@ -230,6 +326,47 @@ const QUESTIONS_AIRE_COUVERTE = [
   "Calcule l’aire totale.",
   "Combien mesure l’aire de cette surface ?",
 ];
+
+/** ★2 nu : des lignes de carreaux unités, dessinées (on compte) ou écrites (on additionne). */
+function genAireCompterLignesNue() {
+  const u = pick(["cm²", "cm²", "dm²", "m²"]);
+  const n = randomInt(2, 4);
+  const lignes = Array.from({ length: n }, () => randomInt(2, 8));
+  const total = lignes.reduce((a, b) => a + b, 0);
+  const explication = expl(
+    `Chaque carreau a une aire de 1 ${u}. On compte tous les carreaux : ${lignes.join(" + ")} = ${total}. L’aire est donc ${total} ${u}.`
+  );
+  const base = { format: "short" as const, expected: avecUnite(total, u), comparator: "number_equal" as const, explanation: explication };
+  if (n === 4 || Math.random() < 0.5) {
+    // Le dessin : une ligne de carreaux par rangée, calées à gauche.
+    const filledCells: FigureLibreCanvasData["grid"]["filledCells"] = [];
+    lignes.forEach((k, r) => {
+      for (let c = 0; c < k; c++) filledCells.push([r, c]);
+    });
+    return {
+      ...base,
+      text: pick([
+        `Un carreau fait 1 ${u}. Calcule l’aire de la figure.`,
+        `Chaque carreau mesure 1 ${u}. Quelle est l’aire de la figure ?`,
+        `Compte les carreaux de 1 ${u}. Écris l’aire de la figure.`,
+      ]),
+      canvas: {
+        kind: "figure_libre" as const,
+        grid: { rows: n + 1, cols: 10, filledCells },
+        display: { showGrid: true, showFilled: true, showPerimeter: true },
+        size: { cellSize: 26, padding: 14 },
+      },
+    };
+  }
+  const liste = lignes.slice(0, -1).join(", ") + " et " + lignes[n - 1];
+  return {
+    ...base,
+    text: pick([
+      `Lignes de ${liste} carreaux de 1 ${u}. Calcule l’aire.`,
+      `Écris l’aire : ${liste} carreaux de 1 ${u} par ligne.`,
+    ]),
+  };
+}
 
 function genAireCompterLignes() {
   const ctx = pick(PAVAGES);
@@ -437,7 +574,76 @@ function tirerRectangle(etoile: 1 | 2 | 3) {
   return { p, o, u: o.u as string, L, l };
 }
 
+/** ★1-★2 : un rectangle nu, écrit ou dessiné. */
+function genAireRectangleNu(etoile: 1 | 2) {
+  const u = pick(UNITES_NUES);
+  const L = randomInt(3, etoile === 1 ? 10 : 15);
+  const l = randomInt(2, L - 1);
+  const Ls = `${L} ${u}`;
+  const ls = `${l} ${u}`;
+  const nom = pick(NOMS_RECT);
+  const leR = nom ? `le rectangle ${nom}` : "un rectangle";
+  const duR = nom ? `du rectangle ${nom}` : "d’un rectangle";
+  const base = {
+    format: "short" as const,
+    expected: avecUnite(L * l, `${u}²`),
+    comparator: "number_equal" as const,
+    explanation: expl(
+      `L’aire d’un rectangle est longueur × largeur : ${L} × ${l} = ${L * l}. Des ${u} fois des ${u} donnent des ${u}² : l’aire est ${L * l} ${u}².`
+    ),
+  };
+  if (Math.random() < 0.25)
+    return {
+      ...base,
+      text: pick(["Calcule l’aire du rectangle ABCD.", "Quelle est l’aire du rectangle ABCD ?", "Observe le rectangle. Calcule son aire."]),
+      canvas: quadriCote(L, l, u, false),
+    };
+  const formes = [
+    `Calcule l’aire ${duR} de ${Ls} sur ${ls}.`,
+    `${maj(leR)} mesure ${Ls} sur ${ls}. Calcule son aire.`,
+    `Longueur ${Ls}, largeur ${ls}. Calcule l’aire du rectangle${nom ? ` ${nom}` : ""}.`,
+    `Trouve l’aire ${duR} de ${Ls} sur ${ls}.`,
+  ];
+  if (etoile === 2)
+    formes.push(
+      `Longueur ${Ls} et largeur ${ls} : calcule l’aire du rectangle${nom ? ` ${nom}` : ""}.`,
+      `Quelle est l’aire ${duR} de ${ls} sur ${Ls} ?`,
+    );
+  return { ...base, text: pick(formes) };
+}
+
+/** ★1-★2 : un carré nu, écrit ou dessiné. */
+function genAireCarreNu(etoile: 1 | 2) {
+  const u = pick(UNITES_NUES);
+  const c = randomInt(2, etoile === 1 ? 10 : 15);
+  const cs = `${c} ${u}`;
+  const nom = pick(["", "", "", "ABCD", "EFGH", "RSTU"]);
+  const leC = nom ? `le carré ${nom}` : "un carré";
+  const duC = nom ? `du carré ${nom}` : "d’un carré";
+  const base = {
+    format: "short" as const,
+    expected: avecUnite(c * c, `${u}²`),
+    comparator: "number_equal" as const,
+    explanation: expl(`L’aire d’un carré est côté × côté : ${c} × ${c} = ${c * c}. L’aire est ${c * c} ${u}².`),
+  };
+  if (Math.random() < 0.25)
+    return {
+      ...base,
+      text: pick(["Calcule l’aire du carré ABCD.", "Quelle est l’aire du carré ABCD ?", "Observe le carré. Calcule son aire."]),
+      canvas: quadriCote(c, c, u, true),
+    };
+  const formes = [
+    `Calcule l’aire ${duC} de côté ${cs}.`,
+    `${maj(leC)} mesure ${cs} de côté. Calcule son aire.`,
+    `Trouve l’aire ${duC} de ${cs} de côté.`,
+    `Côté du carré${nom ? ` ${nom}` : ""} : ${cs}. Calcule son aire.`,
+  ];
+  if (etoile === 2) formes.push(`Quelle est l’aire ${duC} de côté ${cs} ?`, `${maj(leC)} a pour côté ${cs}. Quelle est son aire ?`);
+  return { ...base, text: pick(formes) };
+}
+
 function genAireRectangle(etoile: 1 | 2 | 3) {
+  if (etoile < 3) return genAireRectangleNu(etoile as 1 | 2);
   const { p, o, u, L, l } = tirerRectangle(etoile);
   const A = L * l;
   const Ls = `${nf(L)} ${u}`;
@@ -481,6 +687,7 @@ function genAireRectangle(etoile: 1 | 2 | 3) {
 }
 
 function genAireCarre(etoile: 1 | 2 | 3) {
+  if (etoile < 3) return genAireCarreNu(etoile as 1 | 2);
   const p = pick(PRENOMS);
   const geometrie = Math.random() < (etoile === 1 ? 0.35 : 0.15);
   const o = geometrie ? null : pick(CARRES.filter((x) => etoile > 1 || petitsCotes(x)));
@@ -543,6 +750,34 @@ const QUESTIONS_DEUX_AIRES: { q: string; grand: boolean }[] = [
   { q: "Donne la plus grande aire.", grand: true },
   { q: "Quelle aire est la plus petite ?", grand: false },
 ];
+
+/** ★2 nu : deux aires dans la même unité, on garde la plus grande ou la plus petite. */
+function genAireComparerDeuxNu() {
+  const [u, lo, hi] = pick([["cm²", 10, 300], ["dm²", 5, 90], ["m²", 4, 150]] as [string, number, number][]);
+  const a = randomInt(lo, hi);
+  let b = randomInt(lo, hi);
+  while (b === a) b = randomInt(lo, hi);
+  const grand = Math.random() < 0.5;
+  const mot = grand ? "grande" : "petite";
+  const A = `${a} ${u}`;
+  const B = `${b} ${u}`;
+  const text = pick([
+    `Compare ${A} et ${B}. Écris la plus ${mot} aire.`,
+    `Figure A : ${A}. Figure B : ${B}. Écris la plus ${mot}.`,
+    `Quelle est la plus ${mot} aire : ${A} ou ${B} ?`,
+    `Écris la plus ${mot} aire : ${A} ou ${B}.`,
+  ]);
+  const r = grand ? Math.max(a, b) : Math.min(a, b);
+  return {
+    text,
+    format: "short" as const,
+    expected: avecUnite(r, u),
+    comparator: "number_equal" as const,
+    explanation: expl(
+      `Les deux aires sont dans la même unité (${u}) : on compare les nombres. ${Math.min(a, b)} < ${Math.max(a, b)}. La plus ${mot} est ${r} ${u}.`
+    ),
+  };
+}
 
 function genAireComparerDeux() {
   const ctx = pick(CTX_DEUX_AIRES);
@@ -785,6 +1020,26 @@ const POTS: { action: (o: Lieu) => string; objet: string; objets: string; couvre
 ];
 const duLieu = (o: { nom: string; f: boolean }) => (/^[aeiou]/.test(o.nom) ? `de l’${o.nom}` : o.f ? `de la ${o.nom}` : `du ${o.nom}`);
 const leLieu = (o: { nom: string; f: boolean }) => (/^[aeiou]/.test(o.nom) ? `l’${o.nom}` : o.f ? `la ${o.nom}` : `le ${o.nom}`);
+
+/** ★2 nu : la surface à couvrir, en m², d'un rectangle donné par ses côtés. */
+function genAireProblemeSimpleNu() {
+  const L = randomInt(3, 20);
+  const l = randomInt(2, L - 1);
+  const A = L * l;
+  const text = pick([
+    `Un rectangle mesure ${L} m sur ${l} m. Combien de m² couvre-t-il ?`,
+    `Combien de m² couvre un rectangle de ${L} m sur ${l} m ?`,
+    `Longueur ${L} m, largeur ${l} m. Quelle aire faut-il couvrir ?`,
+    `Calcule la surface en m² d’un rectangle de ${l} m sur ${L} m.`,
+  ]);
+  return {
+    text,
+    format: "short" as const,
+    expected: avecUnite(A, "m²"),
+    comparator: "number_equal" as const,
+    explanation: expl(`L’aire du rectangle est longueur × largeur : ${L} × ${l} = ${A}. Il faut couvrir ${A} m².`),
+  };
+}
 
 function genAireProblemeSimple() {
   const p = pick(PRENOMS);
@@ -1050,7 +1305,8 @@ export const airesBank: TutorBankItemV4[] = [
     matiere: "maths",
     notionId: "aire_unite",
     microId: "aire_comprendre",
-    difficulty: 2,
+    // 03/11/2026 : un lieu (jardin, La Réunion) = un contexte, donc ★3 (REGLES-6E.md).
+    difficulty: 3,
     theme: "reunion",
     text: "Pour mesurer la surface d’un jardin à La Réunion, on peut utiliser…",
     format: "qcm",
@@ -2122,7 +2378,7 @@ export const airesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Une aire se mesure en unités carrées.",
     tags: ["aire_unite", "comprendre", "template"],
-    generate: () => genAireComprendreUnite(),
+    generate: () => genAireComprendreUniteNue(),
   },
   {
     kind: "template",
@@ -2135,7 +2391,21 @@ export const airesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Couvrir une surface, c’est l’aire ; faire le tour, c’est le périmètre.",
     tags: ["aire_unite", "comprendre", "template"],
-    generate: () => (Math.random() < 0.7 ? genAireComprendreGrandeur() : genAireComprendreUnite()),
+    generate: () => (Math.random() < 0.7 ? genAireComprendreGrandeurNue() : genAireComprendreUniteNue()),
+  },
+  {
+    // 03/11/2026 : les situations (timbre, potager, gazon, clôture…) passent à ★3.
+    kind: "template",
+    id: "aire_comprendre_tpl_ctx3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "aire_unite",
+    microId: "aire_comprendre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Couvrir une surface, c’est l’aire ; faire le tour, c’est le périmètre.",
+    tags: ["aire_unite", "comprendre", "template"],
+    generate: () => (Math.random() < 0.6 ? genAireComprendreGrandeur() : genAireComprendreUnite()),
   },
 
   // =========================
@@ -2149,6 +2419,20 @@ export const airesBank: TutorBankItemV4[] = [
     notionId: "aire_unite",
     microId: "aire_compter",
     difficulty: 2,
+    theme: "neutral",
+    hint: "Compte les carreaux unités.",
+    tags: ["aire_unite", "compter", "template"],
+    generate: () => genAireCompterLignesNue(),
+  },
+  {
+    // 03/11/2026 : mosaïque, patchwork, dalles… passent à ★3.
+    kind: "template",
+    id: "aire_compter_tpl_ctx3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "aire_unite",
+    microId: "aire_compter",
+    difficulty: 3,
     theme: "neutral",
     hint: "Compte les carreaux unités.",
     tags: ["aire_unite", "compter", "template"],
@@ -2273,6 +2557,20 @@ export const airesBank: TutorBankItemV4[] = [
     tags: ["aire_surface", "comparer", "template"],
     // ⛔ 06/10/2026 — était en contains_keyword avec « 15 » comme mot-clé :
     // « 15 » acceptait « 150 ». Comparateur numérique, unité comprise.
+    generate: () => genAireComparerDeuxNu(),
+  },
+  {
+    // 03/11/2026 : chambres, potagers, tentes… passent à ★3.
+    kind: "template",
+    id: "aire_comparer_tpl_ctx3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_comparer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Compare les deux nombres.",
+    tags: ["aire_surface", "comparer", "template"],
     generate: () => genAireComparerDeux(),
   },
   {
@@ -2345,6 +2643,20 @@ export const airesBank: TutorBankItemV4[] = [
     notionId: "aire_surface",
     microId: "aire_probleme",
     difficulty: 2,
+    theme: "neutral",
+    hint: "Aire du rectangle = longueur × largeur.",
+    tags: ["aire_surface", "probleme", "template"],
+    generate: () => genAireProblemeSimpleNu(),
+  },
+  {
+    // 03/11/2026 : carrelage, moquette, parquet dans une pièce passent à ★3.
+    kind: "template",
+    id: "aire_probleme_tpl_ctx3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_probleme",
+    difficulty: 3,
     theme: "neutral",
     hint: "Le sol est un rectangle : longueur × largeur.",
     tags: ["aire_surface", "probleme", "template"],
@@ -2456,7 +2768,7 @@ export const airesBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "aire_comprendre_topup_4", niveau: "6e", matiere: "maths",
     notionId: "aire_unite", microId: "aire_comprendre", difficulty: 2, theme: "neutral",
-    text: "Un carreau mesure 1 cm². Une figure recouvre exactement 12 carreaux. Quelle est son aire ?",
+    text: "Un carreau fait 1 cm². Une figure couvre 12 carreaux. Quelle est son aire ?",
     format: "short", expected: ["12 cm²"], comparator: "number_equal",
     hint: "Chaque carreau vaut 1 cm².",
     explanation: expl("On compte les carreaux : 12 carreaux de 1 cm² donnent une aire de 12 cm²."),
@@ -2506,7 +2818,7 @@ export const airesBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "aire_rectangle_topup_1", niveau: "6e", matiere: "maths",
     notionId: "aire_surface", microId: "aire_rectangle", difficulty: 1, theme: "neutral",
-    text: "Quelle est l’aire d’un rectangle de longueur 6 cm et de largeur 4 cm ?",
+    text: "Calcule l’aire d’un rectangle de 6 cm sur 4 cm.",
     format: "short", expected: ["24 cm²"], comparator: "number_equal",
     hint: "Aire = Longueur × largeur.",
     explanation: expl("L’aire d’un rectangle est Longueur × largeur. Ici, 6 × 4 = 24, donc l’aire est 24 cm²."),
@@ -2515,7 +2827,7 @@ export const airesBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "aire_rectangle_topup_2", niveau: "6e", matiere: "maths",
     notionId: "aire_surface", microId: "aire_rectangle", difficulty: 2, theme: "neutral",
-    text: "Quelle est l’aire d’un rectangle de longueur 8 cm et de largeur 3 cm ?",
+    text: "Quelle est l’aire d’un rectangle de 8 cm sur 3 cm ?",
     format: "short", expected: ["24 cm²"], comparator: "number_equal",
     hint: "8 × 3.",
     explanation: expl("L’aire d’un rectangle est Longueur × largeur. Ici, 8 × 3 = 24, donc l’aire est 24 cm²."),
@@ -2544,8 +2856,9 @@ export const airesBank: TutorBankItemV4[] = [
   // ========== TOP-UP — AIRE_COMPARER ==========
   {
     kind: "fixed", id: "aire_comparer_topup_1", niveau: "6e", matiere: "maths",
-    notionId: "aire_surface", microId: "aire_comparer", difficulty: 2, theme: "neutral",
-    text: "Un carré de côté 4 cm et un rectangle de 5 cm sur 3 cm : quelle figure a la plus grande aire ?",
+    // 03/11/2026 : deux aires à calculer puis comparer = deux étapes, donc ★3.
+    notionId: "aire_surface", microId: "aire_comparer", difficulty: 3, theme: "neutral",
+    text: "Carré de côté 4 cm, rectangle de 5 cm sur 3 cm. Lequel a la plus grande aire ?",
     format: "qcm", choices: ["le carré", "le rectangle", "elles ont la même aire"], expected: ["le carré"], comparator: "mcq_exact",
     hint: "Calcule les deux aires puis compare.",
     explanation: expl("Aire du carré : 4 × 4 = 16 cm². Aire du rectangle : 5 × 3 = 15 cm². 16 > 15, donc le carré a la plus grande aire."),
@@ -2563,16 +2876,16 @@ export const airesBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "aire_comparer_topup_3", niveau: "6e", matiere: "maths",
     notionId: "aire_surface", microId: "aire_comparer", difficulty: 1, theme: "neutral",
-    text: "Une figure A a une aire de 20 cm², une figure B une aire de 15 cm². Laquelle a la plus grande aire ?",
-    format: "qcm", choices: ["la figure A", "la figure B", "elles sont égales"], expected: ["la figure A"], comparator: "mcq_exact",
+    text: "Choisis la plus grande aire.",
+    format: "qcm", choices: ["15 cm²", "20 cm²"], expected: ["20 cm²"], comparator: "mcq_exact",
     hint: "Compare 20 et 15.",
-    explanation: expl("On compare les deux aires : 20 cm² est plus grand que 15 cm². La figure A a la plus grande aire."),
+    explanation: expl("Les deux aires sont en cm² : on compare les nombres. 20 > 15, donc la plus grande aire est 20 cm²."),
     tags: ["aire_surface", "comparer", "qcm"],
   },
   {
     kind: "fixed", id: "aire_comparer_topup_4", niveau: "6e", matiere: "maths",
     notionId: "aire_surface", microId: "aire_comparer", difficulty: 2, theme: "neutral",
-    text: "Une figure mesure 30 cm² et une autre 18 cm². Combien de cm² d’aire en plus a la première ?",
+    text: "Aire de A : 30 cm². Aire de B : 18 cm². Calcule l’écart.",
     format: "short", expected: ["12 cm²"], comparator: "number_equal",
     hint: "Calcule 30 − 18.",
     explanation: expl("On calcule l’écart des deux aires : 30 - 18 = 12, donc 12 cm² de plus."),
@@ -2613,19 +2926,19 @@ export const airesBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "aire_probleme_topup_1", niveau: "6e", matiere: "maths",
     notionId: "aire_surface", microId: "aire_probleme", difficulty: 2, theme: "neutral",
-    text: "Un terrain rectangulaire mesure 20 m de long et 15 m de large. Quelle est son aire ?",
+    text: "Un rectangle mesure 20 m sur 15 m. Calcule son aire.",
     format: "short", expected: ["300 m²"], comparator: "number_equal",
     hint: "Aire = Longueur × largeur.",
-    explanation: expl("L’aire du terrain est Longueur × largeur : 20 × 15 = 300, donc 300 m²."),
+    explanation: expl("L’aire du rectangle est Longueur × largeur : 20 × 15 = 300, donc 300 m²."),
     tags: ["aire_surface", "probleme"],
   },
   {
     kind: "fixed", id: "aire_probleme_topup_2", niveau: "6e", matiere: "maths",
     notionId: "aire_surface", microId: "aire_probleme", difficulty: 2, theme: "neutral",
-    text: "Une pièce carrée mesure 4 m de côté. Quelle est son aire ?",
+    text: "Un carré mesure 4 m de côté. Quelle est son aire ?",
     format: "short", expected: ["16 m²"], comparator: "number_equal",
     hint: "Aire d’un carré = côté × côté.",
-    explanation: expl("L’aire de la pièce est côté × côté : 4 × 4 = 16, donc 16 m²."),
+    explanation: expl("L’aire du carré est côté × côté : 4 × 4 = 16, donc 16 m²."),
     tags: ["aire_surface", "probleme"],
   },
   {
@@ -2674,7 +2987,7 @@ export const airesBank: TutorBankItemV4[] = [
     microId: "aire_convertir",
     difficulty: 2,
     theme: "neutral",
-    text: "Un carré de 1 dm de côté est découpé en carrés de 1 cm de côté. Combien en obtient-on ?",
+    text: "Ce carré mesure 1 dm de côté. Compte ses carrés de 1 cm.",
     format: "short",
     expected: ["100"],
     comparator: "number_equal",

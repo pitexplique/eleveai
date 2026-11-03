@@ -79,10 +79,26 @@ function classeObjet(t: string): "cm" | "m" | null {
   return petit === grand ? null : petit ? "cm" : "m";
 }
 
+/** ★1-★2 nus (03/11/2026) : pas d'objet ; l'unité vient des côtés écrits, sinon une seule unité carrée. */
+function corrigerComprendreUniteNue(q: Q): string[] {
+  const p: string[] = [];
+  const carrees = (q.choices ?? []).filter((c) => /²/.test(c));
+  if (carrees.length !== 1) p.push(`il faut une seule unité carrée parmi : ${(q.choices ?? []).join(" | ")}`);
+  if (q.expected[0] !== carrees[0]) p.push(`l'attendue « ${q.expected[0]} » n'est pas la mesure d'aire`);
+  const cotes = new Set(mesures(q.text, LONGUEUR).map((x) => x.u));
+  if (cotes.size > 1) p.push("côtés dans deux unités différentes");
+  const u = lireReponse(q.expected[0]).u || q.expected[0];
+  if (cotes.size === 1 && u !== `${[...cotes][0]}²`) p.push(`côtés en ${[...cotes][0]}, aire attendue en « ${u} »`);
+  if (/\d/.test(q.expected[0]) && new Set((q.choices ?? []).map((c) => lireReponse(c).v)).size !== 1)
+    p.push(`les propositions n'ont pas toutes le même nombre : ${(q.choices ?? []).join(" | ")}`);
+  if (PRENOMS.some((x) => new RegExp(`(^|[^\\p{L}])${x.nom}(?![\\p{L}])`, "u").test(q.text))) p.push("prénom dans un énoncé nu");
+  return p;
+}
+
 function corrigerComprendreUnite(q: Q): string[] {
   const p: string[] = [];
   const classe = classeObjet(q.text);
-  if (!classe) return ["objet introuvable ou ambigu dans le texte"];
+  if (!classe) return corrigerComprendreUniteNue(q);
   const carrees = (q.choices ?? []).filter((c) => /²/.test(c));
   if (carrees.length !== 1) p.push(`il faut une seule unité carrée parmi : ${(q.choices ?? []).join(" | ")}`);
   if (q.expected[0] !== carrees[0]) p.push(`l'attendue « ${q.expected[0]} » n'est pas la mesure d'aire`);
@@ -99,13 +115,15 @@ function corrigerComprendreUnite(q: Q): string[] {
   return [...p, ...accordPronom(q.text)];
 }
 
-const COUVRIR = ["gazon", "peindre", "toute la table", "carreler", "moquette", "place son tapis", "tissu", "semer", "recouvrir"];
-const TOUR = ["clôture", "autour", "galon"];
-const REMPLIR = ["remplir"];
+// Les énoncés nus (03/11/2026) : « l’intérieur d’un carré », « le tour d’un losange », « l’espace d’un cube ».
+const COUVRIR = ["l’intérieur", "la surface", "gazon", "peindre", "toute la table", "carreler", "moquette", "place son tapis", "tissu", "semer", "recouvrir"];
+const TOUR = ["clôture", "autour", "galon", "le tour", "le contour", "le bord"];
+const REMPLIR = ["remplir", "l’espace"];
 
 function corrigerComprendreGrandeur(q: Q): string[] {
   const t = q.text;
-  const n = [COUVRIR.some((m) => t.includes(m)), TOUR.some((m) => t.includes(m)), REMPLIR.some((m) => t.includes(m))];
+  const b = t.toLowerCase(); // « Le bord d’un carré : … » en tête de phrase
+  const n = [COUVRIR.some((m) => b.includes(m)), TOUR.some((m) => b.includes(m)), REMPLIR.some((m) => b.includes(m))];
   if (n.filter(Boolean).length !== 1) return ["action ambiguë : couvrir, faire le tour ou remplir ?"];
   const juste = n[0] ? "l’aire" : n[1] ? "le périmètre" : "le volume";
   const p: string[] = [];
@@ -115,9 +133,8 @@ function corrigerComprendreGrandeur(q: Q): string[] {
 }
 
 function corrigerComprendre(q: Q): string[] {
-  return /unité|mesures|écritures/.test(q.text) && !/Que doit|Quelle grandeur|Quelle mesure lui/.test(q.text)
-    ? corrigerComprendreUnite(q)
-    : corrigerComprendreGrandeur(q);
+  // Les propositions disent le type de question : « l’aire, le périmètre… » ou des unités.
+  return (q.choices ?? []).includes("l’aire") ? corrigerComprendreGrandeur(q) : corrigerComprendreUnite(q);
 }
 
 // ─── aire_compter ───────────────────────────────────────────────────────────
@@ -136,6 +153,14 @@ function corrigerCompter(q: Q): string[] {
   const u = uniteCarre(q.text);
   if (!u) return ["le carré unité (« 1 cm² ») est absent ou en double"];
   const n = comptes(q.text);
+  // ★2 dessiné (03/11/2026) : on compte les cases coloriées de la figure.
+  const cv = q.canvas as { kind?: string; grid?: { filledCells?: [number, number][] } } | undefined;
+  if (cv?.kind === "figure_libre") {
+    if (n.length) return [`figure dessinée ET nombres dans le texte : ${n.join(", ")}`];
+    const cases = cv.grid?.filledCells ?? [];
+    if (new Set(cases.map((c) => c.join(","))).size !== cases.length) return ["deux cases coloriées au même endroit"];
+    return verifierReponse(q, cases.length, u);
+  }
   const parRangees = /rangée/.test(q.text);
   if (parRangees && n.length !== 2) return [`il faut deux nombres (rangées, carrés par rangée), lu : ${n.join(", ")}`];
   if (!parRangees && (n.length < 2 || n.length > 4)) return [`il faut 2 à 4 lignes, lu : ${n.join(", ")}`];
@@ -187,8 +212,14 @@ function plausibles(ls: { v: number; u: string }[]): string[] {
   return p;
 }
 
+/** Le texte, plus les côtés écrits sur la figure quand il y en a une (03/11/2026). */
+function texteEtCotes(q: Q): string {
+  const lab = (q.canvas as { sideLabels?: Record<string, string> } | undefined)?.sideLabels;
+  return lab ? `${q.text} ${Object.values(lab).join(" et ")}` : q.text;
+}
+
 function corrigerRectangle(q: Q): string[] {
-  const ls = mesures(q.text, LONGUEUR);
+  const ls = mesures(texteEtCotes(q), LONGUEUR);
   if (ls.length !== 2) return [`il faut deux longueurs dans le texte, lu : ${ls.map((x) => `${x.v} ${x.u}`).join(", ")}`];
   if (ls[0].u !== ls[1].u) return ["les deux côtés ne sont pas dans la même unité"];
   const u = `${ls[0].u}²`;
@@ -200,7 +231,7 @@ function corrigerRectangle(q: Q): string[] {
 }
 
 function corrigerCarre(q: Q): string[] {
-  const ls = mesures(q.text, LONGUEUR);
+  const ls = mesures(texteEtCotes(q), LONGUEUR);
   if (ls.length !== 1) return [`il faut une seule longueur (le côté), lu : ${ls.map((x) => `${x.v} ${x.u}`).join(", ")}`];
   if (!/carré/.test(q.text)) return ["le texte ne dit pas que c'est un carré"];
   const u = `${ls[0].u}²`;
@@ -394,6 +425,10 @@ export const CORRECTEURS: CorrecteursMaths = {
   aire_defi_tpl_1: corrigerCoteManquant,
   aire_defi_tpl_2: corrigerCarreInverse,
   aire_probleme_tpl_e2: corrigerProbleme,
+  aire_probleme_tpl_ctx3: corrigerProbleme,
+  aire_comparer_tpl_ctx3: corrigerComparerDeux,
+  aire_compter_tpl_ctx3: corrigerCompter,
+  aire_comprendre_tpl_ctx3: corrigerComprendre,
   aire_probleme_tpl_1: corrigerProbleme,
   aire_probleme_qcm_tpl_1: corrigerProbleme,
   aire_decomposer_tpl_e3: corrigerParties,

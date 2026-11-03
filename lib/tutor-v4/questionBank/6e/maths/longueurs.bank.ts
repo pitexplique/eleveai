@@ -579,7 +579,8 @@ function genDefiDeuxUnites() {
     ])(`${L(g, c.grande)} ${L(b, c.base)}`))}\n${pick([
       `Écris cette longueur en ${NOM_UNITE[t]}.`,
       `Combien cela fait-il en ${NOM_UNITE[t]} ?`,
-      `Convertis-la en ${t}.`,
+      // « Convertis-la » ne s'accordait pas à « Un segment », « On a mesuré ».
+      `Convertis en ${NOM_UNITE[t]}.`,
     ])}`,
     format: "short" as const,
     expected: attendu(r, t),
