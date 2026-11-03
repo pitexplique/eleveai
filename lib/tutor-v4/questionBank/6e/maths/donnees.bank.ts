@@ -78,10 +78,16 @@ function gab(
   tags: string[],
   generate: () => Q,
 ): TutorBankItemV4 {
-  return { kind: "template", id, niveau: "6e", matiere: "maths", notionId, microId, difficulty, theme: "neutral", hint, tags, generate };
+  // 03/11/2026 : une situation vide (★1-★2) laisse une espace en tête ou en double.
+  const net = (): Q => {
+    const q = generate();
+    return { ...q, text: q.text.replace(/ {2,}/g, " ").trim() };
+  };
+  return { kind: "template", id, niveau: "6e", matiere: "maths", notionId, microId, difficulty, theme: "neutral", hint, tags, generate: net };
 }
 
-type Cat = { label: string; gn: string };
+/** `color` : la couleur de la barre ou du secteur, quand la catégorie EST une couleur. */
+type Cat = { label: string; gn: string; color?: string };
 const cat = (label: string, gn: string): Cat => ({ label, gn });
 const jours = (n: number) =>
   ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"].slice(0, n).map((j) => cat(j, `le ${j.toLowerCase()}`));
@@ -103,6 +109,8 @@ type CtxStat = {
   grandeur?: { mot: string; fem: boolean };
   /** Le nom de l'axe vertical gradué (sinon, l'unité). */
   axeY?: string;
+  /** 03/11/2026 : un relevé SANS histoire (★1-★2) — ni prénom, ni situation. */
+  simple?: boolean;
 };
 
 const SPORTS = [
@@ -270,6 +278,32 @@ const CTX_STAT: CtxStat[] = [
   },
 ];
 
+/* ⛔⛔ 03/11/2026 — D'ABORD DES QUESTIONS SIMPLES (Frédéric) : « le contexte est
+   réservé aux étoiles ★3 et plus ». Ses 6e lisent difficilement : à ★1 et ★2,
+   un tableau ou un diagramme de nombres SANS histoire — des objets de couleur
+   (billes, jetons…), ni prénom, ni métier, ni situation de la vie. Chaque barre
+   ou secteur est peint de SA couleur. Les relevés de la vie (CTX_STAT, CTX_DOUBLE,
+   CTX_COURBE) restent servis à partir de ★3. */
+const COULEURS: Cat[] = [
+  ["Rouge", "rouge", "#ef4444"], ["Bleu", "bleue", "#3b82f6"], ["Vert", "verte", "#22c55e"], ["Jaune", "jaune", "#facc15"],
+  ["Violet", "violette", "#a855f7"], ["Orange", "orange", "#f97316"], ["Marron", "marron", "#a16207"], ["Gris", "grise", "#9ca3af"],
+].map(([x, f, color]) => ({ label: x, gn: `de couleur ${f}`, color })); // « de couleur bleue » : la couleur s'accorde
+const OBJETS_SIMPLES = ["jetons", "cubes", "perles", "boutons", "étoiles", "pions", "ballons", "carreaux"];
+const CTX_SIMPLE: CtxStat[] = OBJETS_SIMPLES.map((o) => ({
+  simple: true,
+  titre: `${maj(o)} de chaque couleur`,
+  entete: `Nombre ${deMot(o)}`,
+  unite: o,
+  quel: "Quelle couleur",
+  intro: () => "",
+  combien: (c: Cat) => pick([`combien y a-t-il ${deMot(o)} ${c.gn}`, `combien compte-t-on ${deMot(o)} ${c.gn}`]),
+  tout: () => `combien y a-t-il ${deMot(o)}`,
+  cats: COULEURS,
+  min: 2,
+  max: 20,
+}));
+const ctxSimple = () => pick(CTX_SIMPLE);
+
 type Support = "tableau" | "barres" | "batons" | "camembert" | "courbe";
 const NOM_SUPPORT: Record<Support, string> = {
   tableau: "le tableau",
@@ -381,6 +415,29 @@ const CTX_COURBE: CtxCourbe[] = [
     base: [5, 10, 20, 25, 35, 40], n: 6, step: 5, stepMilieu: 10, croissante: true,
   },
 ];
+/** 03/11/2026 : deux courbes SANS histoire pour ★1-★2 (une mesure, un moment). */
+const CTX_COURBE_SIMPLE: CtxCourbe[] = [
+  {
+    simple: true,
+    titre: "Température heure par heure", entete: "Température (°C)", unite: "°C", quel: "À quelle heure", axeY: "°C",
+    grandeur: { mot: "température", fem: true },
+    intro: () => "",
+    combien: (c) => `quelle température, en °C, relève-t-on ${c.gn}`,
+    tout: () => "",
+    cats: ["8 h", "10 h", "12 h", "14 h", "16 h", "18 h"].map((h) => cat(h, `à ${h}`)), min: 4, max: 30,
+    base: [10, 14, 20, 24, 18, 12], n: 5, step: 2, stepMilieu: 2,
+  },
+  {
+    simple: true,
+    titre: "Hauteur d’une plante", entete: "Hauteur (cm)", unite: "cm", quel: "Quelle semaine", axeY: "cm",
+    grandeur: { mot: "hauteur", fem: true },
+    intro: () => "",
+    combien: (c) => `quelle hauteur, en cm, mesure la plante ${c.gn}`,
+    tout: () => "",
+    cats: [1, 2, 3, 4, 5, 6].map((k) => cat(`Semaine ${k}`, `à la semaine ${k}`)), min: 5, max: 50,
+    base: [5, 10, 15, 25, 30, 40], n: 6, step: 5, stepMilieu: 10, croissante: true,
+  },
+];
 
 /** Une courbe tirée autour des valeurs typiques, posée sur son axe gradué. */
 function tirerCourbe(C: CtxCourbe = pick(CTX_COURBE), milieu = false): Serie {
@@ -468,7 +525,7 @@ function figure(s: Serie, opts: { cache?: number; surligne?: number; lirePart?: 
     return statGraphCanvas({
       graphType: "camembert",
       title: s.ctx.titre,
-      data: s.cats.map((c, i) => ({ label: c.label, value: s.v[i] })),
+      data: s.cats.map((c, i) => ({ label: c.label, value: s.v[i], ...(c.color ? { color: c.color } : {}) })),
       display: {
         showLabels: true,
         showValues: !opts.sansTotal,
@@ -482,12 +539,12 @@ function figure(s: Serie, opts: { cache?: number; surligne?: number; lirePart?: 
       headers: [s.ctx.entete],
       rows: s.cats.map((c, i) => ({ label: c.label, values: [i === opts.cache ? "?" : s.v[i]] })),
       ...(opts.surligne !== undefined ? { highlight: { cell: { row: opts.surligne, col: 0 } } } : {}),
-      caption: `Relevé ${de(s.p.nom)}.`,
+      caption: s.ctx.simple ? "Tableau des effectifs." : `Relevé ${de(s.p.nom)}.`,
     });
   return statGraphCanvas({
     graphType: s.support,
     title: s.ctx.titre,
-    data: s.cats.map((c, i) => ({ label: c.label, value: s.v[i] })),
+    data: s.cats.map((c, i) => ({ label: c.label, value: s.v[i], ...(c.color ? { color: c.color } : {}) })),
     display: {
       showLabels: true,
       showValues: !s.axe,
@@ -521,11 +578,25 @@ function pg(s: Serie, max: boolean): string {
 }
 /** Le début de l'énoncé : la situation, parfois réduite au titre de la figure. */
 function amorce(s: Serie): string {
+  // 03/11/2026 : sans histoire (★1-★2), rien, ou le seul titre de la figure.
+  if (s.ctx.simple) return pick(["", "", `${maj(supp(s))} s’intitule « ${s.ctx.titre} ».`]);
   return pick([
     () => s.ctx.intro(s.p),
     () => s.ctx.intro(s.p),
     () => `${maj(supp(s))} ${de(s.p.nom)} s’intitule « ${s.ctx.titre} ».`,
   ])();
+}
+
+/* ⭐ 03/11/2026 — RÈGLE DE LONGUEUR (lib/tutor-v4/questionBank/6e/REGLES-6E.md) :
+   ★1 en 12 mots au plus, ★2 en 15. Les relevés SANS histoire ont leurs propres
+   tournures, courtes, verbe d'action ou question directe, la couleur écrite en
+   minuscules (« de couleur bleue »). */
+/** « de couleur bleue » : le nom accordé de la catégorie dans une phrase. */
+const gnc = (c: Cat) => c.gn;
+function texteLireSimple(s: Serie, q: string): string {
+  if (s.support === "camembert") return `${maj(q)} ?`;
+  if (s.axe) return pick([`Lis l’axe gradué. ${maj(q)} ?`, `${maj(q)} ? Lis l’axe gradué.`]);
+  return pick([`${maj(q)} ?`, `Lis ${supp(s) === "le tableau" ? "le tableau" : "le graphique"}. ${maj(q)} ?`, `Regarde la figure. ${maj(q)} ?`]);
 }
 
 /** K1 — lire une valeur. */
@@ -537,7 +608,7 @@ function qLire(s: Serie, i?: number): Q {
   }
   const c = s.cats[i];
   const q = s.ctx.combien(c, s.p);
-  const text = s.axe
+  const text = s.ctx.simple ? texteLireSimple(s, q) : s.axe
     ? pick([
         () => `${amorce(s)} Lis ${supp(s)} sur son axe gradué. ${maj(q)} ?`,
         () => `${amorce(s)} Les nombres ne sont pas écrits : sers-toi de l’axe gradué. ${maj(q)} ?`,
@@ -579,7 +650,7 @@ function qLire(s: Serie, i?: number): Q {
   const div = 2 * x === t ? 2 : 4 * x === t ? 4 : 0;
   if (s.support === "camembert" && div) {
     const mot = div === 2 ? "la moitié" : "le quart";
-    r.text = `${r.text} Le total est écrit sous le disque.`;
+    r.text = s.ctx.simple ? `${r.text} ${pick(["Aide-toi du total.", "Lis le total."])}` : `${r.text} Le total est écrit sous le disque.`;
     r.explanation = se(
       "dans un diagramme circulaire, la taille du secteur montre la part du total.",
       `on regarde quelle part du disque occupe « ${c.label} », puis on prend cette part du total.`,
@@ -594,7 +665,15 @@ function qLire(s: Serie, i?: number): Q {
 /** K3 — l'effectif total. */
 function qTotal(s: Serie): Q {
   const t = somme(s.v);
-  const text = pick([
+  const o = motU(s);
+  const text = s.ctx.simple ? pick([
+    `Combien y a-t-il ${deMot(o)} en tout ?`,
+    `Additionne tout. Combien ${deMot(o)} en tout ?`,
+    `Calcule le nombre total ${deMot(o)}.`,
+    `Combien ${deMot(o)} compte-t-on au total ?`,
+    `Additionne tous les secteurs. Combien ${deMot(o)} en tout ?`,
+    `Quel est le nombre total ${deMot(o)} ?`,
+  ]) : pick([
     () => `${amorce(s)} ${maj(s.ctx.tout(s.p))} en tout ?`,
     () => `${amorce(s)} D’après ${supp(s)}, ${s.ctx.tout(s.p)} au total ?`,
     () => `${amorce(s)} Additionne toutes les valeurs. Combien ${deMot(motU(s))} y a-t-il en tout ?`,
@@ -623,7 +702,12 @@ function qDiff(s: Serie): Q {
   const B = s.cats[j].label;
   const d = s.v[i] - s.v[j];
   const u = s.ctx.unite;
-  const text = pick([
+  const [gA, gB] = [gnc(s.cats[i]), gnc(s.cats[j])];
+  const text = s.ctx.simple ? pick([
+    `Combien ${deMot(u)} ${gA} de plus que ${gB} ?`,
+    `Calcule l’écart, en ${u}, entre la couleur ${gA.replace("de couleur ", "")} et la couleur ${gB.replace("de couleur ", "")}.`,
+    `Soustrais. Combien ${deMot(u)} ${gA} de plus que ${gB} ?`,
+  ]) : pick([
     () => `${amorce(s)} Combien ${deMot(motU(s))} de plus pour ${A} que pour ${B} ?`,
     () => `${amorce(s)} ${A} a combien ${deMot(motU(s))} de plus ${que(B)} ?`,
     () => `${amorce(s)} Combien ${deMot(motU(s))} séparent ${A} et ${B} ?`,
@@ -681,7 +765,12 @@ function choixLabels(s: Serie, bon: number): string[] {
 function qExtreme(s: Serie, max = Math.random() < 0.6): Q {
   const k = s.v.indexOf(max ? Math.max(...s.v) : Math.min(...s.v));
   const qu = s.ctx.quel;
-  const text = max
+  const o = motU(s);
+  const text = s.ctx.simple
+    ? pick(max
+        ? [`Quelle couleur a le plus grand effectif ?`, `Quelle couleur arrive en tête ?`, `Quelle couleur ${deMot(o)} a le plus grand effectif ?`, `Compare les nombres. Quelle couleur arrive en tête ?`, `Quelle couleur ${deMot(o)} arrive en tête ?`]
+        : [`Quelle couleur a le plus petit effectif ?`, `Quelle couleur arrive en dernier ?`, `Quelle couleur ${deMot(o)} a le plus petit effectif ?`, `Compare les nombres. Quelle couleur arrive en dernier ?`, `Quelle couleur ${deMot(o)} arrive en dernier ?`])
+    : max
     ? pick([
         () => `${amorce(s)} ${qu} a ${pg(s, true)} ?`,
         () => `${amorce(s)} D’après ${supp(s)}, ${qu.toLowerCase()} arrive en tête ?`,
@@ -828,10 +917,17 @@ function qVrai(s: Serie, modeles: ("plusQue" | "max" | "min" | "total" | "ecart"
   const prem = vraies.filter((x) => (modeles[0] === "plusQue" ? / a plus .+ que / : modeles[0] === "max" ? / a le plus / : modeles[0] === "min" ? / a le moins / : modeles[0] === "total" ? /en tout/ : modeles[0] === "ecart" ? /de plus que/ : modeles[0] === "moitie" ? /moitié/ : /double/).test(x));
   const juste = pick(prem.length ? prem : vraies);
   const pieges = shuffle([...new Set(fausses)]).slice(0, 3);
-  const text = pick([
+  const text = s.ctx.simple ? pick([
+    "Quelle phrase est vraie ?",
+    "Lis la figure. Quelle phrase est vraie ?",
+    "Quelle affirmation est juste ?",
+    "Une seule phrase dit vrai : laquelle ?",
+    `Compare les ${motU(s)}. Quelle phrase est vraie ?`,
+    "Lis les nombres. Quelle affirmation est juste ?",
+  ]) : pick([
     () => `${amorce(s)} Lis ${supp(s)}. Quelle phrase est vraie ?`,
     () => `${amorce(s)} Quelle affirmation est juste ?`,
-    () => `${amorce(s)} ${s.p.nom} écrit quatre phrases. Une seule dit vrai : laquelle ?`,
+    () => `${amorce(s)} ${s.ctx.simple ? "Voici quatre phrases." : `${s.p.nom} écrit quatre phrases.`} Une seule dit vrai : laquelle ?`,
     () => `${amorce(s)} Laquelle de ces conclusions est correcte ?`,
   ])();
   return {
@@ -852,8 +948,7 @@ function qVrai(s: Serie, modeles: ("plusQue" | "max" | "min" | "total" | "ecart"
 
 /** K12 — la catégorie qui fait la moitié (ou le quart) du total, sur un diagramme circulaire. */
 /** Un diagramme circulaire dont UN secteur fait exactement la moitié (ou le quart) du total. */
-function tirerSeriePart(quart: boolean): { s: Serie; k: number } {
-  const ctx = pick(CTX_STAT);
+function tirerSeriePart(quart: boolean, ctx: CtxStat = pick(CTX_STAT)): { s: Serie; k: number } {
   const n = quart ? 4 : pick([3, 4]);
   const cats = tirerSans(ctx.cats, n);
   // Les autres font 1 (moitié) ou 3 (quart) fois la part cherchée.
@@ -916,6 +1011,8 @@ type CtxDouble = {
   totalCol: (k: Cat, p: Prenom) => [string, string];
   min: number;
   max: number;
+  /** 03/11/2026 : un tableau SANS histoire (★1-★2). */
+  simple?: boolean;
 };
 const FILLES_GARCONS = [cat("Filles", "filles"), cat("Garçons", "garçons")];
 const WEEKEND = [cat("Samedi", "le samedi"), cat("Dimanche", "le dimanche"), cat("Mercredi", "le mercredi")];
@@ -994,9 +1091,40 @@ const CTX_DOUBLE: CtxDouble[] = [
   },
 ];
 
+/* 03/11/2026 — Tableaux à double entrée SANS histoire (★1-★2) : des objets de
+   couleur rangés dans des boîtes, ou des figures de couleur. */
+const BOITES = ["A", "B", "C"].map((x) => cat(`Boîte ${x}`, `dans la boîte ${x}`));
+const FORMES = [
+  cat("Carrés", "carrés"), cat("Triangles", "triangles"), cat("Disques", "disques"),
+  cat("Rectangles", "rectangles"), cat("Losanges", "losanges"), cat("Hexagones", "hexagones"),
+];
+const CTX_DOUBLE_SIMPLE: CtxDouble[] = [
+  ...["jetons", "cubes", "perles", "boutons", "pions"].map((o): CtxDouble => ({
+    simple: true,
+    titre: `${maj(o)} rangés par boîte`.replace(/^Perles rangés/, "Perles rangées"),
+    intro: () => "",
+    lignes: COULEURS, cols: BOITES,
+    cellule: (r, k) => [`combien ${deMot(o)} ${r.gn} sont ${k.gn}`, o],
+    totalLigne: (r) => [`combien y a-t-il ${deMot(o)} ${r.gn} en tout`, o],
+    totalCol: (k) => [`combien y a-t-il ${deMot(o)} ${k.gn} en tout`, o],
+    min: 1, max: 20,
+  })),
+  {
+    simple: true,
+    titre: "Figures de chaque couleur",
+    intro: () => "",
+    lignes: FORMES, cols: COULEURS.slice(0, 4),
+    cellule: (r, k) => [`combien y a-t-il ${deMot(r.gn)} ${k.gn}`, r.gn],
+    totalLigne: (r) => [`combien y a-t-il ${deMot(r.gn)} en tout`, r.gn],
+    totalCol: (k) => [`combien de figures sont ${k.gn} en tout`, "figures"],
+    min: 1, max: 15,
+  },
+];
+
 type Double = { ctx: CtxDouble; p: Prenom; lignes: Cat[]; cols: Cat[]; v: number[][] };
-function tirerDouble(nl: number, nc: number): Double {
-  const ctx = pick(CTX_DOUBLE);
+/** « le tableau », ou « le tableau de Léa » quand il y a une histoire. */
+const leTableau = (d: Double) => (d.ctx.simple ? "le tableau" : `le tableau ${de(d.p.nom)}`);
+function tirerDouble(nl: number, nc: number, ctx: CtxDouble = pick(CTX_DOUBLE)): Double {
   const cols = ctx.cols.slice(0, Math.min(nc, ctx.cols.length));
   const lignes = tirerSans(ctx.lignes, nl);
   return { ctx, p: pick(PRENOMS), lignes, cols, v: lignes.map(() => cols.map(() => entre(ctx.min, ctx.max))) };
@@ -1019,7 +1147,9 @@ function qCellule(d: Double, aide = false): Q {
   const k = d.cols[j];
   const [q, u] = d.ctx.cellule(r, k, d.p);
   const intro = d.ctx.intro(d.p);
-  const text = aide
+  const text = d.ctx.simple
+    ? pick([`${maj(q)} ?`, `Lis la case. ${maj(q)} ?`, `Lis le tableau. ${maj(q)} ?`])
+    : aide
     ? pick([
         () => `${intro} Cherche la ligne ${r.label} et la colonne ${k.label}. ${maj(q)} ?`,
         () => `${intro} Lis la case au croisement de la ligne ${r.label} et de la colonne ${k.label}. ${maj(q)} ?`,
@@ -1027,7 +1157,7 @@ function qCellule(d: Double, aide = false): Q {
     : pick([
         () => `${intro} ${maj(q)} ?`,
         () => `${intro} Lis le tableau. ${maj(q)} ?`,
-        () => `D’après le tableau ${de(d.p.nom)}, ${q} ?`,
+        () => `D’après ${leTableau(d)}, ${q} ?`,
       ])();
   return {
     text,
@@ -1083,7 +1213,7 @@ function qTotalDouble(d: Double, sens: "ligne" | "colonne"): Q {
     const [q, u] = d.ctx.totalLigne(r, d.p);
     const t = somme(d.v[i]);
     return {
-      text: pick([() => `${intro} ${maj(q)} ?`, () => `${intro} Additionne la ligne ${r.label}. ${maj(q)} ?`, () => `D’après le tableau ${de(d.p.nom)}, ${q} ?`])(),
+      text: pick([() => `${intro} ${maj(q)} ?`, () => `${intro} Additionne la ligne ${r.label}. ${maj(q)} ?`, () => `D’après ${leTableau(d)}, ${q} ?`])(),
       format: "short",
       expected: [`${t} ${u}`],
       comparator: "number_equal",
@@ -1102,7 +1232,7 @@ function qTotalDouble(d: Double, sens: "ligne" | "colonne"): Q {
   const col = d.v.map((l) => l[j]);
   const t = somme(col);
   return {
-    text: pick([() => `${intro} ${maj(q)} ?`, () => `${intro} Additionne la colonne ${k.label}. ${maj(q)} ?`, () => `D’après le tableau ${de(d.p.nom)}, ${q} ?`])(),
+    text: pick([() => `${intro} ${maj(q)} ?`, () => `${intro} Additionne la colonne ${k.label}. ${maj(q)} ?`, () => `D’après ${leTableau(d)}, ${q} ?`])(),
     format: "short",
     expected: [`${t} ${u}`],
     comparator: "number_equal",
@@ -1165,14 +1295,19 @@ const POPULATIONS: Population[] = [
   },
 ];
 
-function qPlanifierQuestion(): Q {
-  const s = pick(SUJETS_ENQUETE);
-  const p = pick(PRENOMS);
-  const text = pick([
-    () => `${p.nom} prépare une enquête sur ${s.quoi} des élèves de sa classe. Quelle question doit-${il(p)} poser ?`,
-    () => `${p.nom} veut connaître ${s.quoi} de ses camarades. Quelle question permet de compter les réponses ?`,
-    () => `Pour une enquête sur ${s.quoi}, ${p.nom} hésite entre quatre questions. Laquelle est la meilleure ?`,
-  ])();
+/** ★2 (03/11/2026) : sans prénom ni situation ; le sujet de l'enquête est dans les propositions. */
+function qPlanifierQuestion(s: SujetEnquete = pick(SUJETS_ENQUETE)): Q {
+  const text =
+    pick([
+      "Quelle question d’enquête permet de compter les réponses ?",
+      "Quelle est la meilleure question d’enquête ?",
+      "Quelle question convient à une enquête ?",
+      "Quelle question donne des réponses précises, faciles à compter ?",
+      "Pour une enquête, quelle question faut-il poser ?",
+      "Quelle question d’enquête est précise et neutre ?",
+      "Choisis la bonne question d’enquête.",
+      "Quelle question permet de ranger les réponses ?",
+    ]) + pick(["", "", " Une seule est bien posée.", " Lis les quatre questions."]);
   return {
     text,
     format: "qcm",
@@ -1186,6 +1321,18 @@ function qPlanifierQuestion(): Q {
       "on garde la question précise et neutre.",
     ),
   };
+}
+
+/** ★3 (03/11/2026) : la même question, portée par une situation et un prénom. */
+function qPlanifierQuestionSituation(): Q {
+  const s = pick(SUJETS_ENQUETE);
+  const p = pick(PRENOMS);
+  const text = pick([
+    () => `${p.nom} prépare une enquête sur ${s.quoi} des élèves de sa classe. Quelle question doit-${il(p)} poser ?`,
+    () => `${p.nom} veut connaître ${s.quoi} de ses camarades. Quelle question permet de compter les réponses ?`,
+    () => `Pour une enquête sur ${s.quoi}, ${p.nom} hésite entre quatre questions. Laquelle est la meilleure ?`,
+  ])();
+  return { ...qPlanifierQuestion(s), text };
 }
 
 function qPlanifierQui(): Q {
@@ -1243,6 +1390,19 @@ function qPlanifierJuger(): Q {
   };
 }
 
+/** ★2 (03/11/2026) : des mesures SANS histoire — la grandeur seule, l'unité de la colonne. */
+const MESURES_SIMPLES = [
+  { quoi: (n: number) => `${n} longueurs`, col: "Longueur (cm)" },
+  { quoi: (n: number) => `${n} masses`, col: "Masse (g)" },
+  { quoi: (n: number) => `${n} durées`, col: "Durée (min)" },
+  { quoi: (n: number) => `${n} températures`, col: "Température (°C)" },
+  { quoi: (n: number) => `${n} hauteurs`, col: "Hauteur (cm)" },
+  { quoi: (n: number) => `${n} tailles`, col: "Taille (cm)" },
+  { quoi: (n: number) => `${n} distances`, col: "Distance (m)" },
+  { quoi: (n: number) => `${n} contenances`, col: "Contenance (L)" },
+  { quoi: (n: number) => `${n} largeurs`, col: "Largeur (mm)" },
+  { quoi: (n: number) => `${n} masses`, col: "Masse (kg)" },
+];
 /** Des mesures à consigner : la grandeur, l'objet mesuré, l'unité de la colonne. */
 const MESURES = [
   { quoi: (n: number) => `la taille de ${n} camarades`, col: "Taille (cm)" },
@@ -1256,14 +1416,17 @@ const MESURES = [
   { quoi: (n: number) => `la longueur de ${n} sauts en longueur`, col: "Longueur (cm)" },
   { quoi: (n: number) => `le nombre de pas de ${n} élèves pour traverser la cour`, col: "Nombre de pas" },
 ];
-function qLignesMesure(): Q {
-  const m = pick(MESURES);
-  const n = entre(5, 24);
-  const p = pick(PRENOMS);
+/** ★2 (03/11/2026) : sans prénom ni situation (les MESURES de la vie restent pour plus tard). */
+function qLignesMesure(m: { quoi: (n: number) => string; col: string } = pick(MESURES_SIMPLES), n = entre(5, 24)): Q {
   const text = pick([
-    () => `${p.nom} doit relever ${m.quoi(n)} dans un tableau. Combien de lignes de données faut-il, sans compter l’en-tête ?`,
-    () => `${p.nom} prépare un tableau pour noter ${m.quoi(n)}. Une ligne par mesure. Combien de lignes de données en tout ?`,
-    () => `Pour consigner ${m.quoi(n)}, ${p.nom} trace un tableau. L’en-tête est « ${m.col} ». Combien de lignes de mesures faut-il prévoir ?`,
+    () => `On note ${m.quoi(n)}, une par ligne. Combien de lignes de données faut-il ?`,
+    () => `Un tableau reçoit ${m.quoi(n)}. Combien de lignes de données, sans l’en-tête ?`,
+    () => `Combien de lignes de données faut-il pour noter ${m.quoi(n)} ?`,
+    () => `On relève ${m.quoi(n)}. Une mesure par ligne. Combien de lignes de données ?`,
+    () => `Range ${m.quoi(n)} dans un tableau, une par ligne. Combien de lignes de données ?`,
+    () => `Écris ${m.quoi(n)} dans un tableau. Combien de lignes de données faut-il ?`,
+    () => `Combien de lignes de données pour ${m.quoi(n)} ? L’en-tête ne compte pas.`,
+    () => `Note ${m.quoi(n)}, une par ligne. Combien de lignes faut-il ?`,
   ])();
   return {
     text,
@@ -1298,6 +1461,18 @@ function valeurConvertible(c: (typeof CONVERSIONS)[number]): number {
   if (c.de === "min") return pick([2, 3, 1.5, 4, 2.5, 5]);
   if (c.de === "h") return pick([1.5, 2, 1.25, 2.5, 3, 0.75]);
   return pick([1.5, 2, 0.75, 1.25, 5, 10]);
+}
+/** ★3 (03/11/2026) : les mesures de la vie, avec un prénom. */
+function qLignesMesureSituation(): Q {
+  const m = pick(MESURES);
+  const n = entre(5, 24);
+  const p = pick(PRENOMS);
+  const text = pick([
+    () => `${p.nom} doit relever ${m.quoi(n)} dans un tableau. Combien de lignes de données faut-il, sans compter l’en-tête ?`,
+    () => `${p.nom} prépare un tableau pour noter ${m.quoi(n)}. Une ligne par mesure. Combien de lignes de données en tout ?`,
+    () => `Pour consigner ${m.quoi(n)}, ${p.nom} trace un tableau. L’en-tête est « ${m.col} ». Combien de lignes de mesures faut-il prévoir ?`,
+  ])();
+  return { ...qLignesMesure(m, n), text };
 }
 function qConvertirMesure(): Q {
   const c = pick(CONVERSIONS);
@@ -1468,27 +1643,28 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "stat_donnee_lire_tableau",
     difficulty: 1,
     theme: "neutral",
-    text: "Dans le tableau, combien d’élèves ont choisi le football ?",
+    // 03/11/2026 : ★1, un tableau sans histoire.
+    text: "Combien y a-t-il de perles de couleur rouge ?",
     format: "short",
     expected: ["12"],
     comparator: "number_equal",
-    hint: "Lis la ligne Football.",
+    hint: "Lis la ligne Rouge.",
     explanation:
       "Définition : lire un tableau, c’est repérer la bonne ligne et la bonne colonne.\n\n" +
-      "Méthode : on cherche la ligne Football, puis on lit la valeur indiquée.\n\n" +
-      "Observation : la ligne Football indique 12 élèves.\n\n" +
-      "Conclusion : 12 élèves ont choisi le football.",
+      "Méthode : on cherche la ligne Rouge, puis on lit la valeur indiquée.\n\n" +
+      "Observation : la ligne Rouge indique 12 perles.\n\n" +
+      "Conclusion : il y a 12 perles rouges.",
     tags: ["stat_donnee", "tableau", "lecture", "canvas"],
     canvas: tableauDonneesCanvas({
-      title: "Activités choisies",
-      headers: ["Nombre d’élèves"],
+      title: "Perles de chaque couleur",
+      headers: ["Nombre de perles"],
       rows: [
-        { label: "Football", values: [12] },
-        { label: "Natation", values: [8] },
-        { label: "Danse", values: [10] },
+        { label: "Rouge", values: [12] },
+        { label: "Bleu", values: [8] },
+        { label: "Vert", values: [10] },
       ],
       highlight: { cell: { row: 0, col: 0 } },
-      caption: "Résultats d’un sondage dans une classe de 6e.",
+      caption: "Tableau des effectifs.",
     }),
   },
 
@@ -1496,7 +1672,8 @@ export const donneesBank: TutorBankItemV4[] = [
     "6e_stat_stat_stat_donnee_lire_tableau_tpl_1", "stat_enquete", "stat_donnee_lire_tableau", 2,
     "Repère la bonne ligne dans le tableau.",
     ["stat_donnee", "tableau", "lecture", "template", "canvas"],
-    () => qLire(tirerSerie(entre(4, 5), "tableau")),
+    // 03/11/2026 : ★2, un tableau sans histoire (CTX_SIMPLE).
+    () => qLire(tirerSerie(entre(4, 5), "tableau", ctxSimple())),
   ),
 
   {
@@ -1541,25 +1718,27 @@ export const donneesBank: TutorBankItemV4[] = [
     difficulty: 1,
     theme: "neutral",
     // ⭐ 21/10/2026 : les nombres ne sont plus écrits, on les lit sur l'axe gradué (de 5 en 5).
-    text: "Sur le graphique, combien d’élèves ont choisi la lecture ? Lis l’axe gradué.",
+    // 03/11/2026 : ★1, un graphique sans histoire.
+    text: "Lis l’axe gradué. Combien y a-t-il de jetons de couleur bleue ?",
     format: "short",
     expected: ["10"],
     comparator: "number_equal",
-    hint: "Pars du haut du bâton Lecture et suis la ligne jusqu’à l’axe.",
+    hint: "Pars du haut du bâton Bleu et suis la ligne jusqu’à l’axe.",
     explanation:
       "Définition : lire un graphique, c’est repérer une catégorie et la valeur associée.\n\n" +
-      "Méthode : on cherche le bâton Lecture, puis on lit sa hauteur sur l’axe gradué (de 5 en 5).\n\n" +
-      "Observation : je pars du haut du bâton Lecture, je suis la ligne jusqu’à l’axe : je tombe sur la graduation 10. Attention : 5 est le pas de l’axe, pas la valeur.\n\n" +
-      "Conclusion : 10 élèves ont choisi la lecture.",
+      "Méthode : on cherche le bâton Bleu, puis on lit sa hauteur sur l’axe gradué (de 5 en 5).\n\n" +
+      "Observation : je pars du haut du bâton Bleu, je suis la ligne jusqu’à l’axe : je tombe sur la graduation 10. Attention : 5 est le pas de l’axe, pas la valeur.\n\n" +
+      "Conclusion : il y a 10 jetons bleus.",
     tags: ["stat_donnee", "graphique", "lecture", "axe_gradue", "canvas"],
     canvas: statGraphCanvas({
       graphType: "batons",
+      title: "Jetons de chaque couleur",
       data: [
-        { label: "Sport", value: 15 },
-        { label: "Lecture", value: 10 },
-        { label: "Jeux", value: 20 },
+        { label: "Rouge", value: 15, color: "#ef4444" },
+        { label: "Bleu", value: 10, color: "#3b82f6" },
+        { label: "Vert", value: 20, color: "#22c55e" },
       ],
-      display: { showLabels: true, showValues: false, showAxis: true, step: 5, axeY: "élèves", highlightIndex: 1 },
+      display: { showLabels: true, showValues: false, showAxis: true, step: 5, axeY: "jetons", highlightIndex: 1 },
     }),
   },
 
@@ -1568,7 +1747,8 @@ export const donneesBank: TutorBankItemV4[] = [
     "Pars du haut de la barre (ou du point), suis la ligne jusqu’à l’axe gradué et lis le nombre.",
     ["stat_donnee", "graphique", "axe_gradue", "courbe", "template", "canvas"],
     // ⭐ 21/10 : une fois sur quatre, une COURBE (sur les graduations).
-    () => (Math.random() < 0.25 ? qLire(tirerCourbe()) : qLire(serieLue(entre(4, 5), pick(["barres", "batons"] as const)))),
+    // 03/11/2026 : ★2, des courbes et des barres sans histoire (les métiers sont à ★3+).
+    () => (Math.random() < 0.25 ? qLire(tirerCourbe(pick(CTX_COURBE_SIMPLE))) : qLire(serieLue(entre(4, 5), pick(["barres", "batons"] as const), ctxSimple()))),
   ),
 
   {
@@ -1612,27 +1792,28 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "stat_donnee_prelever",
     difficulty: 2,
     theme: "neutral",
-    text: "Dans le tableau, combien de filles ont choisi la natation ?",
+    // 03/11/2026 : ★2, un tableau à double entrée sans histoire.
+    text: "Dans le tableau, combien y a-t-il de triangles de couleur rouge ?",
     format: "short",
     expected: ["6"],
     comparator: "number_equal",
-    hint: "Cherche la ligne Natation et la colonne Filles.",
+    hint: "Cherche la ligne Triangles et la colonne Rouge.",
     explanation:
       "Définition : prélever une information, c’est retrouver une donnée précise.\n\n" +
       "Méthode : on cherche la bonne ligne et la bonne colonne.\n\n" +
-      "Observation : à la ligne Natation et dans la colonne Filles, on lit 6.\n\n" +
-      "Conclusion : 6 filles ont choisi la natation.",
+      "Observation : à la ligne Triangles et dans la colonne Rouge, on lit 6.\n\n" +
+      "Conclusion : il y a 6 triangles rouges.",
     tags: ["stat_donnee", "prelever", "tableau_double_entree", "canvas"],
     canvas: tableauDonneesCanvas({
-      title: "Activités choisies",
-      headers: ["Filles", "Garçons"],
+      title: "Figures de chaque couleur",
+      headers: ["Rouge", "Bleu"],
       rows: [
-        { label: "Football", values: [5, 9] },
-        { label: "Natation", values: [6, 7] },
-        { label: "Danse", values: [8, 3] },
+        { label: "Carrés", values: [5, 9] },
+        { label: "Triangles", values: [6, 7] },
+        { label: "Disques", values: [8, 3] },
       ],
       highlight: { cell: { row: 1, col: 0 } },
-      caption: "Tableau à deux variables : activité et groupe.",
+      caption: "Tableau à deux variables : forme et couleur.",
     }),
   },
 
@@ -1684,7 +1865,7 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "stat_donnee_comparer",
     difficulty: 2,
     theme: "neutral",
-    text: "Dans le tableau, quelle activité a été choisie par le plus d’élèves ?",
+    text: "Dans le tableau, quelle ligne a le plus grand nombre ?",
     format: "qcm",
     choices: ["Football", "Natation", "Danse", "Aucune"],
     expected: ["Football"],
@@ -1929,7 +2110,8 @@ export const donneesBank: TutorBankItemV4[] = [
     "6e_stat_stat_stat_donnee_prelever_tpl_2_cellule_surlignee", "stat_donnee", "stat_donnee_prelever", 2,
     "Suis la ligne avec le doigt jusqu’à la bonne colonne : la case est surlignée.",
     ["stat_donnee", "prelever", "cellule", "template", "canvas"],
-    () => qCellule(tirerDouble(3, 2), true),
+    // 03/11/2026 : ★2, un tableau à double entrée sans histoire.
+    () => qCellule(tirerDouble(3, 2, pick(CTX_DOUBLE_SIMPLE)), true),
   ),
 
   {
@@ -2241,24 +2423,25 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "stat_donnee_lire_circulaire",
     difficulty: 1,
     theme: "neutral",
-    text: "Dans ce diagramme circulaire, combien d’élèves viennent à l’école en bus ?",
+    // 03/11/2026 : ★1, un disque sans histoire.
+    text: "Combien y a-t-il de perles de couleur bleue ? Aide-toi du total.",
     format: "short",
     expected: ["10"],
     comparator: "number_equal",
-    hint: "Le secteur « Bus » occupe quelle part du disque ? Le total est écrit dessous.",
+    hint: "Le secteur « Bleu » occupe quelle part du disque ? Le total est écrit dessous.",
     explanation:
       "Définition : un diagramme circulaire partage un disque en secteurs, un par catégorie.\n\n" +
       "Méthode : on regarde quelle part du disque occupe le secteur demandé, puis on prend cette part du total.\n\n" +
-      "Observation : le secteur « Bus » occupe la moitié du disque. Le total est 20 : 20 ÷ 2 = 10.\n\n" +
-      "Conclusion : 10 élèves viennent en bus.",
+      "Observation : le secteur « Bleu » occupe la moitié du disque. Le total est 20 : 20 ÷ 2 = 10.\n\n" +
+      "Conclusion : il y a 10 perles bleues.",
     tags: ["stat_donnee", "circulaire", "camembert", "lecture", "canvas"],
     canvas: statGraphCanvas({
       graphType: "camembert",
-      title: "Comment viens-tu à l’école ?",
+      title: "Perles de chaque couleur",
       data: [
-        { label: "À pied", value: 6 },
-        { label: "Bus", value: 10 },
-        { label: "Voiture", value: 4 },
+        { label: "Rouge", value: 6, color: "#ef4444" },
+        { label: "Bleu", value: 10, color: "#3b82f6" },
+        { label: "Jaune", value: 4, color: "#facc15" },
       ],
       display: { showLabels: true, showValues: true, highlightIndex: 1 },
     }),
@@ -2273,7 +2456,7 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "stat_donnee_lire_circulaire",
     difficulty: 2,
     theme: "neutral",
-    text: "Dans ce diagramme circulaire, quel est le sport préféré (le plus grand secteur) ?",
+    text: "Dans ce diagramme circulaire, quelle catégorie a le plus grand secteur ?",
     format: "qcm",
     choices: ["Football", "Natation", "Danse", "Basket"],
     expected: ["Football"],
@@ -2306,8 +2489,9 @@ export const donneesBank: TutorBankItemV4[] = [
     notionId: "stat_donnee",
     microId: "stat_donnee_lire_circulaire",
     difficulty: 2,
-    theme: "reunion",
-    text: "Dans ce diagramme circulaire des fruits vendus, quel fruit a été le moins vendu ?",
+    // 03/11/2026 : ★2, la question ne raconte plus le marché.
+    theme: "neutral",
+    text: "Dans ce diagramme circulaire, quelle catégorie a le plus petit secteur ?",
     format: "qcm",
     choices: ["Ananas", "Mangues", "Letchis", "Bananes"],
     expected: ["Ananas"],
@@ -2318,7 +2502,7 @@ export const donneesBank: TutorBankItemV4[] = [
       "Méthode : on cherche le plus petit secteur ou la plus petite valeur.\n\n" +
       "Observation : Mangues = 12, Letchis = 9, Bananes = 7, Ananas = 4. Le plus petit est 4.\n\n" +
       "Conclusion : le fruit le moins vendu est l’ananas.",
-    tags: ["stat_donnee", "circulaire", "camembert", "comparer", "reunion", "canvas"],
+    tags: ["stat_donnee", "circulaire", "camembert", "comparer", "canvas"],
     canvas: statGraphCanvas({
       graphType: "camembert",
       title: "Fruits vendus au marché",
@@ -2375,7 +2559,8 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "stat_donnee_lire_circulaire",
     difficulty: 2,
     theme: "neutral",
-    text: "Dans ce diagramme circulaire, combien d’élèves ont répondu au sondage en tout ?",
+    // 03/11/2026 : ★2, un disque sans histoire.
+    text: "Dans ce diagramme circulaire, combien y a-t-il de jetons en tout ?",
     format: "short",
     expected: ["30"],
     comparator: "number_equal",
@@ -2384,15 +2569,15 @@ export const donneesBank: TutorBankItemV4[] = [
       "Définition : le total d’un diagramme circulaire est la somme de tous les secteurs.\n\n" +
       "Méthode : on additionne toutes les valeurs.\n\n" +
       "Observation : 15 + 9 + 6 = 30.\n\n" +
-      "Conclusion : 30 élèves ont répondu au sondage.",
+      "Conclusion : il y a 30 jetons en tout.",
     tags: ["stat_donnee", "circulaire", "camembert", "total", "canvas"],
     canvas: statGraphCanvas({
       graphType: "camembert",
-      title: "Matière préférée",
+      title: "Jetons de chaque couleur",
       data: [
-        { label: "Maths", value: 15 },
-        { label: "Français", value: 9 },
-        { label: "Sport", value: 6 },
+        { label: "Vert", value: 15, color: "#22c55e" },
+        { label: "Violet", value: 9, color: "#a855f7" },
+        { label: "Orange", value: 6, color: "#f97316" },
       ],
       // 21/10 : la valeur de chaque part est écrite, le total NON (c'est la réponse).
       display: { showLabels: true, showValues: false, valeursParts: true },
@@ -2437,7 +2622,8 @@ export const donneesBank: TutorBankItemV4[] = [
     ["stat_donnee", "circulaire", "camembert", "lecture", "template", "canvas"],
     // ⭐ 21/10 : la part demandée fait la moitié ou le quart du disque ; seul le total est écrit.
     () => {
-      const { s, k } = tirerSeriePart(Math.random() < 0.35);
+      // 03/11/2026 : ★1, un disque sans histoire.
+      const { s, k } = tirerSeriePart(Math.random() < 0.35, ctxSimple());
       return qLire(s, k);
     },
   ),
@@ -2445,14 +2631,14 @@ export const donneesBank: TutorBankItemV4[] = [
     "6e_stat_stat_donnee_lire_circulaire_tpl_2_plus_grand", "stat_donnee", "stat_donnee_lire_circulaire", 2,
     "Le plus grand secteur correspond à la plus grande valeur.",
     ["stat_donnee", "circulaire", "camembert", "comparer", "template", "canvas"],
-    () => qExtreme(tirerSerie(4, "camembert")),
+    () => qExtreme(tirerSerie(4, "camembert", ctxSimple())),
   ),
   gab(
     "6e_stat_stat_donnee_lire_circulaire_tpl_3_total",
     "stat_donnee", "stat_donnee_lire_circulaire", 2,
     "Additionne les valeurs de tous les secteurs.",
     ["stat_donnee", "circulaire", "camembert", "total", "template", "canvas"],
-    () => qTotal(tirerSerie(entre(3, 4), "camembert")),
+    () => qTotal(tirerSerie(entre(3, 4), "camembert", ctxSimple())),
   ),
   gab(
     "6e_stat_stat_donnee_lire_circulaire_tpl_4_difference", "stat_donnee", "stat_donnee_lire_circulaire", 3,
@@ -2467,15 +2653,16 @@ export const donneesBank: TutorBankItemV4[] = [
     id: "6e_stat_lire_tableau_topup_1",
     niveau: "6e", matiere: "maths", notionId: "stat_enquete", microId: "stat_donnee_lire_tableau",
     difficulty: 1, theme: "neutral",
-    text: "Dans le tableau, combien d’élèves font de la natation ?",
+    // 03/11/2026 : ★1, un tableau sans histoire.
+    text: "Dans le tableau, combien y a-t-il de jetons de couleur bleue ?",
     format: "short", expected: ["8"], comparator: "number_equal",
-    hint: "Lis la ligne Natation.",
-    explanation: se("lire un tableau, c’est repérer la bonne ligne et la bonne colonne.", "on cherche la ligne Natation, puis on lit la valeur.", "la ligne Natation indique 8.", "8 élèves font de la natation."),
+    hint: "Lis la ligne Bleu.",
+    explanation: se("lire un tableau, c’est repérer la bonne ligne et la bonne colonne.", "on cherche la ligne Bleu, puis on lit la valeur.", "la ligne Bleu indique 8.", "il y a 8 jetons bleus."),
     tags: ["stat_donnee", "tableau", "lecture", "canvas"],
     canvas: tableauDonneesCanvas({
-      title: "Activités choisies",
-      headers: ["Nombre d’élèves"],
-      rows: [{ label: "Football", values: [12] }, { label: "Natation", values: [8] }, { label: "Danse", values: [10] }],
+      title: "Jetons de chaque couleur",
+      headers: ["Nombre de jetons"],
+      rows: [{ label: "Rouge", values: [12] }, { label: "Bleu", values: [8] }, { label: "Vert", values: [10] }],
     }),
   },
   {
@@ -2483,7 +2670,7 @@ export const donneesBank: TutorBankItemV4[] = [
     id: "6e_stat_lire_tableau_topup_2",
     niveau: "6e", matiere: "maths", notionId: "stat_enquete", microId: "stat_donnee_lire_tableau",
     difficulty: 1, theme: "neutral",
-    text: "Quelle activité a été choisie par 12 élèves ?",
+    text: "Dans le tableau, quelle ligne contient le nombre 12 ?",
     format: "qcm", choices: ["Football", "Natation", "Danse", "Tennis"], expected: ["Football"], comparator: "mcq_exact",
     hint: "Cherche la valeur 12 dans le tableau.",
     explanation: se("un tableau associe une catégorie à une valeur.", "on cherche la ligne dont la valeur est 12.", "la ligne Football indique 12.", "c’est le football qui a été choisi par 12 élèves."),
@@ -2498,16 +2685,17 @@ export const donneesBank: TutorBankItemV4[] = [
     kind: "fixed",
     id: "6e_stat_lire_tableau_topup_3",
     niveau: "6e", matiere: "maths", notionId: "stat_enquete", microId: "stat_donnee_lire_tableau",
-    difficulty: 2, theme: "reunion",
-    text: "Au marché, combien de mangues ont été vendues l’après-midi ?",
+    difficulty: 2, theme: "neutral",
+    // 03/11/2026 : ★2, sans histoire (le marché de La Réunion est parti).
+    text: "Combien y a-t-il de cubes rouges dans la boîte B ?",
     format: "short", expected: ["9"], comparator: "number_equal",
-    hint: "Croise la ligne Mangues et la colonne Après-midi.",
-    explanation: se("un tableau à double entrée croise une ligne et une colonne.", "on cherche la ligne Mangues et la colonne Après-midi.", "à l’intersection, on lit 9.", "9 mangues ont été vendues l’après-midi."),
-    tags: ["stat_donnee", "tableau", "double_entree", "reunion", "canvas"],
+    hint: "Croise la ligne Rouge et la colonne Boîte B.",
+    explanation: se("un tableau à double entrée croise une ligne et une colonne.", "on cherche la ligne Rouge et la colonne Boîte B.", "à l’intersection, on lit 9.", "il y a 9 cubes rouges dans la boîte B."),
+    tags: ["stat_donnee", "tableau", "double_entree", "canvas"],
     canvas: tableauDonneesCanvas({
-      title: "Ventes au marché",
-      headers: ["Matin", "Après-midi"],
-      rows: [{ label: "Mangues", values: [12, 9] }, { label: "Letchis", values: [7, 10] }],
+      title: "Cubes rangés par boîte",
+      headers: ["Boîte A", "Boîte B"],
+      rows: [{ label: "Rouge", values: [12, 9] }, { label: "Bleu", values: [7, 10] }],
       highlight: { cell: { row: 0, col: 1 } },
     }),
   },
@@ -2516,15 +2704,16 @@ export const donneesBank: TutorBankItemV4[] = [
     id: "6e_stat_lire_tableau_topup_4",
     niveau: "6e", matiere: "maths", notionId: "stat_enquete", microId: "stat_donnee_lire_tableau",
     difficulty: 1, theme: "neutral",
-    text: "Combien d’élèves font de la danse ?",
+    // 03/11/2026 : ★1, un tableau sans histoire.
+    text: "Dans le tableau, combien y a-t-il de cubes de couleur verte ?",
     format: "qcm", choices: ["10", "8", "12", "30"], expected: ["10"], comparator: "mcq_exact",
-    hint: "Lis la ligne Danse.",
-    explanation: se("on lit la valeur associée à une catégorie.", "on cherche la ligne Danse.", "la ligne Danse indique 10.", "10 élèves font de la danse."),
+    hint: "Lis la ligne Vert.",
+    explanation: se("on lit la valeur associée à une catégorie.", "on cherche la ligne Vert.", "la ligne Vert indique 10.", "il y a 10 cubes verts."),
     tags: ["stat_donnee", "tableau", "lecture", "qcm", "canvas"],
     canvas: tableauDonneesCanvas({
-      title: "Activités choisies",
-      headers: ["Nombre d’élèves"],
-      rows: [{ label: "Football", values: [12] }, { label: "Natation", values: [8] }, { label: "Danse", values: [10] }],
+      title: "Cubes de chaque couleur",
+      headers: ["Nombre de cubes"],
+      rows: [{ label: "Rouge", values: [12] }, { label: "Bleu", values: [8] }, { label: "Vert", values: [10] }],
     }),
   },
 
@@ -2567,12 +2756,13 @@ export const donneesBank: TutorBankItemV4[] = [
     id: "6e_stat_lire_graphique_topup_1",
     niveau: "6e", matiere: "maths", notionId: "stat_donnee", microId: "stat_donnee_lire_graphique",
     difficulty: 1, theme: "neutral",
-    text: "Dans le graphique, combien d’élèves préfèrent les jeux ? Les nombres ne sont pas écrits : lis l’axe gradué.",
+    // 03/11/2026 : ★1, un graphique sans histoire.
+    text: "Lis l’axe gradué. Combien y a-t-il de disques ?",
     format: "short", expected: ["15"], comparator: "number_equal",
-    hint: "Pars du haut du bâton Jeux, suis la ligne jusqu’à l’axe gradué.",
-    explanation: se("un diagramme en bâtons représente chaque catégorie par une hauteur.", "on repère le bâton Jeux et on lit sa hauteur sur l’axe gradué, de 5 en 5.", "je pars du haut du bâton Jeux, je suis la ligne jusqu’à l’axe : je tombe sur la graduation 15 (pas 10, la graduation voisine).", "15 élèves préfèrent les jeux."),
+    hint: "Pars du haut du bâton Disques, suis la ligne jusqu’à l’axe gradué.",
+    explanation: se("un diagramme en bâtons représente chaque catégorie par une hauteur.", "on repère le bâton Disques et on lit sa hauteur sur l’axe gradué, de 5 en 5.", "je pars du haut du bâton Disques, je suis la ligne jusqu’à l’axe : je tombe sur la graduation 15 (pas 10, la graduation voisine).", "il y a 15 disques."),
     tags: ["stat_donnee", "graphique", "lecture", "axe_gradue", "canvas"],
-    canvas: statGraphCanvas({ graphType: "batons", title: "Loisir préféré", data: [{ label: "Sport", value: 10 }, { label: "Lecture", value: 5 }, { label: "Jeux", value: 15 }], display: { showLabels: true, showValues: false, showAxis: true, step: 5, axeY: "élèves", highlightIndex: 2 } }),
+    canvas: statGraphCanvas({ graphType: "batons", title: "Figures dessinées", data: [{ label: "Carrés", value: 10 }, { label: "Triangles", value: 5 }, { label: "Disques", value: 15 }], display: { showLabels: true, showValues: false, showAxis: true, step: 5, axeY: "figures", highlightIndex: 2 } }),
   },
   {
     kind: "fixed",
@@ -2602,25 +2792,27 @@ export const donneesBank: TutorBankItemV4[] = [
     kind: "fixed",
     id: "6e_stat_lire_graphique_topup_4",
     niveau: "6e", matiere: "maths", notionId: "stat_donnee", microId: "stat_donnee_lire_graphique",
-    difficulty: 1, theme: "reunion",
-    text: "Dans le graphique, combien de letchis ont été vendus ?",
+    difficulty: 1, theme: "neutral",
+    // 03/11/2026 : ★1, sans histoire (les letchis vendus sont partis).
+    text: "Dans le graphique, combien y a-t-il de pions de couleur jaune ?",
     format: "qcm", choices: ["13", "8", "10", "16"], expected: ["13"], comparator: "mcq_exact",
-    hint: "Lis la barre Letchis.",
-    explanation: se("on lit la valeur d’une barre.", "on repère la barre Letchis.", "la barre Letchis vaut 13.", "13 letchis ont été vendus."),
-    tags: ["stat_donnee", "graphique", "lecture", "reunion", "qcm", "canvas"],
-    canvas: statGraphCanvas({ graphType: "batons", title: "Fruits vendus", data: [{ label: "Mangues", value: 10 }, { label: "Ananas", value: 8 }, { label: "Letchis", value: 13 }], display: { showLabels: true, showValues: true, highlightIndex: 2 } }),
+    hint: "Lis le bâton Jaune.",
+    explanation: se("on lit la valeur d’un bâton.", "on repère le bâton Jaune.", "le bâton Jaune vaut 13.", "il y a 13 pions jaunes."),
+    tags: ["stat_donnee", "graphique", "lecture", "qcm", "canvas"],
+    canvas: statGraphCanvas({ graphType: "batons", title: "Pions de chaque couleur", data: [{ label: "Rouge", value: 10, color: "#ef4444" }, { label: "Bleu", value: 8, color: "#3b82f6" }, { label: "Jaune", value: 13, color: "#facc15" }], display: { showLabels: true, showValues: true, highlightIndex: 2 } }),
   },
   {
     kind: "fixed",
     id: "6e_stat_lire_graphique_topup_5",
     niveau: "6e", matiere: "maths", notionId: "stat_donnee", microId: "stat_donnee_lire_graphique",
     difficulty: 1, theme: "neutral",
-    text: "Dans le graphique, combien d’élèves font du sport ? Lis l’axe gradué.",
+    // 03/11/2026 : ★1, un graphique sans histoire.
+    text: "Lis l’axe gradué. Combien y a-t-il de perles de couleur rouge ?",
     format: "short", expected: ["20"], comparator: "number_equal",
-    hint: "Pars du haut de la barre Sport, suis la ligne jusqu’à l’axe gradué.",
-    explanation: se("on lit la hauteur d’une barre sur l’axe gradué.", "on repère la barre Sport ; l’axe va de 5 en 5.", "je pars du haut de la barre Sport, je suis la ligne jusqu’à l’axe : je tombe sur la graduation 20.", "20 élèves font du sport."),
+    hint: "Pars du haut de la barre Rouge, suis la ligne jusqu’à l’axe gradué.",
+    explanation: se("on lit la hauteur d’une barre sur l’axe gradué.", "on repère la barre Rouge ; l’axe va de 5 en 5.", "je pars du haut de la barre Rouge, je suis la ligne jusqu’à l’axe : je tombe sur la graduation 20.", "il y a 20 perles rouges."),
     tags: ["stat_donnee", "graphique", "lecture", "axe_gradue", "canvas"],
-    canvas: statGraphCanvas({ graphType: "barres", title: "Loisir préféré", data: [{ label: "Sport", value: 20 }, { label: "Lecture", value: 10 }, { label: "Jeux", value: 25 }], display: { showLabels: true, showValues: false, showAxis: true, step: 5, axeY: "élèves", highlightIndex: 0 } }),
+    canvas: statGraphCanvas({ graphType: "barres", title: "Perles de chaque couleur", data: [{ label: "Rouge", value: 20, color: "#ef4444" }, { label: "Bleu", value: 10, color: "#3b82f6" }, { label: "Vert", value: 25, color: "#22c55e" }], display: { showLabels: true, showValues: false, showAxis: true, step: 5, axeY: "perles", highlightIndex: 0 } }),
   },
 
   /* ========================= TOP-UP — STAT_DONNEE_PRELEVER ========================= */
@@ -2629,24 +2821,26 @@ export const donneesBank: TutorBankItemV4[] = [
     id: "6e_stat_prelever_topup_1",
     niveau: "6e", matiere: "maths", notionId: "stat_donnee", microId: "stat_donnee_prelever",
     difficulty: 2, theme: "neutral",
-    text: "D’après le tableau, combien d’élèves viennent à l’école à vélo ?",
+    // 03/11/2026 : ★2, un tableau sans histoire.
+    text: "D’après le tableau, combien y a-t-il de boutons de couleur verte ?",
     format: "short", expected: ["7"], comparator: "number_equal",
-    hint: "Cherche la ligne Vélo.",
-    explanation: se("prélever une information, c’est extraire une donnée précise.", "on repère la ligne Vélo.", "la ligne Vélo indique 7.", "7 élèves viennent à vélo."),
+    hint: "Cherche la ligne Vert.",
+    explanation: se("prélever une information, c’est extraire une donnée précise.", "on repère la ligne Vert.", "la ligne Vert indique 7.", "il y a 7 boutons verts."),
     tags: ["stat_donnee", "prelever", "canvas"],
-    canvas: tableauDonneesCanvas({ title: "Comment viens-tu à l’école ?", headers: ["Nombre d’élèves"], rows: [{ label: "À pied", values: [9] }, { label: "Bus", values: [11] }, { label: "Vélo", values: [7] }], highlight: { cell: { row: 2, col: 0 } } }),
+    canvas: tableauDonneesCanvas({ title: "Boutons de chaque couleur", headers: ["Nombre de boutons"], rows: [{ label: "Rouge", values: [9] }, { label: "Bleu", values: [11] }, { label: "Vert", values: [7] }], highlight: { cell: { row: 2, col: 0 } } }),
   },
   {
     kind: "fixed",
     id: "6e_stat_prelever_topup_2",
     niveau: "6e", matiere: "maths", notionId: "stat_donnee", microId: "stat_donnee_prelever",
     difficulty: 2, theme: "neutral",
-    text: "D’après le graphique, quelle est la valeur de la catégorie mise en évidence (Bus) ?",
+    // 03/11/2026 : ★2, un graphique sans histoire.
+    text: "D’après le graphique, quelle est la valeur de la barre mise en évidence ?",
     format: "short", expected: ["11"], comparator: "number_equal",
-    hint: "Lis la barre Bus.",
-    explanation: se("prélever une information, c’est lire une valeur précise.", "on repère la barre Bus.", "la barre Bus vaut 11.", "la valeur cherchée est 11."),
+    hint: "Lis la barre entourée : c’est la barre Bleu.",
+    explanation: se("prélever une information, c’est lire une valeur précise.", "on repère la barre mise en évidence : la barre Bleu.", "la barre Bleu vaut 11.", "la valeur cherchée est 11."),
     tags: ["stat_donnee", "prelever", "graphique", "canvas"],
-    canvas: statGraphCanvas({ graphType: "barres", title: "Comment viens-tu à l’école ?", data: [{ label: "À pied", value: 9 }, { label: "Bus", value: 11 }, { label: "Vélo", value: 7 }], display: { showLabels: true, showValues: true, highlightIndex: 1 } }),
+    canvas: statGraphCanvas({ graphType: "barres", title: "Étoiles de chaque couleur", data: [{ label: "Rouge", value: 9, color: "#ef4444" }, { label: "Bleu", value: 11, color: "#3b82f6" }, { label: "Vert", value: 7, color: "#22c55e" }], display: { showLabels: true, showValues: true, highlightIndex: 1 } }),
   },
   {
     kind: "fixed",
@@ -2679,19 +2873,20 @@ export const donneesBank: TutorBankItemV4[] = [
     id: "6e_stat_comparer_topup_1",
     niveau: "6e", matiere: "maths", notionId: "stat_donnee", microId: "stat_donnee_comparer",
     difficulty: 2, theme: "neutral",
-    text: "Dans le graphique, combien d’élèves de plus font des jeux que de la lecture ?",
+    // 03/11/2026 : ★2, un graphique sans histoire.
+    text: "Combien y a-t-il de jetons verts de plus que de jetons bleus ?",
     format: "short", expected: ["6"], comparator: "number_equal",
     hint: "Calcule 15 − 9.",
-    explanation: se("comparer deux données, c’est calculer leur écart.", "on soustrait la plus petite valeur à la plus grande.", "15 - 9 = 6.", "il y a 6 élèves de plus pour les jeux."),
+    explanation: se("comparer deux données, c’est calculer leur écart.", "on soustrait la plus petite valeur à la plus grande.", "Vert : 15 ; Bleu : 9. 15 − 9 = 6.", "il y a 6 jetons verts de plus."),
     tags: ["stat_donnee", "comparer", "canvas"],
-    canvas: statGraphCanvas({ graphType: "barres", title: "Loisir préféré", data: [{ label: "Sport", value: 12 }, { label: "Lecture", value: 9 }, { label: "Jeux", value: 15 }], display: { showLabels: true, showValues: true } }),
+    canvas: statGraphCanvas({ graphType: "barres", title: "Jetons de chaque couleur", data: [{ label: "Rouge", value: 12, color: "#ef4444" }, { label: "Bleu", value: 9, color: "#3b82f6" }, { label: "Vert", value: 15, color: "#22c55e" }], display: { showLabels: true, showValues: true } }),
   },
   {
     kind: "fixed",
     id: "6e_stat_comparer_topup_2",
     niveau: "6e", matiere: "maths", notionId: "stat_donnee", microId: "stat_donnee_comparer",
     difficulty: 1, theme: "neutral",
-    text: "Quelle activité est la plus choisie ?",
+    text: "Dans le tableau, quelle catégorie a le plus grand effectif ?",
     format: "qcm", choices: ["Football", "Natation", "Danse", "Toutes pareilles"], expected: ["Football"], comparator: "mcq_exact",
     hint: "Cherche la plus grande valeur.",
     explanation: se("comparer, c’est trouver la plus grande valeur.", "on compare 12, 8 et 10.", "le plus grand est 12, pour le football.", "le football est l’activité la plus choisie."),
@@ -2703,24 +2898,26 @@ export const donneesBank: TutorBankItemV4[] = [
     id: "6e_stat_comparer_topup_3",
     niveau: "6e", matiere: "maths", notionId: "stat_donnee", microId: "stat_donnee_comparer",
     difficulty: 2, theme: "neutral",
-    text: "Combien d’élèves de plus font du football que de la natation ?",
+    // 03/11/2026 : ★2, un tableau sans histoire.
+    text: "Combien y a-t-il de cubes rouges de plus que de cubes bleus ?",
     format: "short", expected: ["4"], comparator: "number_equal",
     hint: "Calcule 12 − 8.",
-    explanation: se("comparer deux catégories, c’est calculer la différence.", "on soustrait la plus petite valeur à la plus grande.", "12 - 8 = 4.", "il y a 4 élèves de plus au football."),
+    explanation: se("comparer deux catégories, c’est calculer la différence.", "on soustrait la plus petite valeur à la plus grande.", "Rouge : 12 ; Bleu : 8. 12 − 8 = 4.", "il y a 4 cubes rouges de plus."),
     tags: ["stat_donnee", "comparer", "canvas"],
-    canvas: tableauDonneesCanvas({ title: "Activités choisies", headers: ["Nombre d’élèves"], rows: [{ label: "Football", values: [12] }, { label: "Natation", values: [8] }, { label: "Danse", values: [10] }] }),
+    canvas: tableauDonneesCanvas({ title: "Cubes de chaque couleur", headers: ["Nombre de cubes"], rows: [{ label: "Rouge", values: [12] }, { label: "Bleu", values: [8] }, { label: "Vert", values: [10] }] }),
   },
   {
     kind: "fixed",
     id: "6e_stat_comparer_topup_4",
     niveau: "6e", matiere: "maths", notionId: "stat_donnee", microId: "stat_donnee_comparer",
     difficulty: 2, theme: "neutral",
-    text: "Le football et la danse ont-ils été choisis par le même nombre d’élèves ?",
+    // 03/11/2026 : ★2, un tableau sans histoire.
+    text: "Y a-t-il autant de perles rouges que de perles vertes ?",
     format: "qcm", choices: ["non", "oui"], expected: ["non"], comparator: "mcq_exact",
     hint: "Compare 12 et 10.",
-    explanation: se("comparer, c’est vérifier l’égalité ou non.", "on compare les valeurs Football (12) et Danse (10).", "12 est différent de 10.", "non, ils n’ont pas été choisis par le même nombre d’élèves."),
+    explanation: se("comparer, c’est vérifier l’égalité ou non.", "on compare les valeurs Rouge (12) et Vert (10).", "12 est différent de 10.", "non, il n’y a pas autant de perles rouges que de perles vertes."),
     tags: ["stat_donnee", "comparer", "qcm", "canvas"],
-    canvas: tableauDonneesCanvas({ title: "Activités choisies", headers: ["Nombre d’élèves"], rows: [{ label: "Football", values: [12] }, { label: "Natation", values: [8] }, { label: "Danse", values: [10] }] }),
+    canvas: tableauDonneesCanvas({ title: "Perles de chaque couleur", headers: ["Nombre de perles"], rows: [{ label: "Rouge", values: [12] }, { label: "Bleu", values: [8] }, { label: "Vert", values: [10] }] }),
   },
 
   /* ========================= TOP-UP — STAT_DONNEE_INTERPRETER ========================= */
@@ -2729,9 +2926,9 @@ export const donneesBank: TutorBankItemV4[] = [
     id: "6e_stat_interpreter_topup_1",
     niveau: "6e", matiere: "maths", notionId: "stat_donnee", microId: "stat_donnee_interpreter",
     difficulty: 2, theme: "neutral",
-    text: "D’après ce graphique, quel est le loisir le plus apprécié de la classe ?",
+    text: "D’après ce graphique, quelle catégorie a la plus grande valeur ?",
     format: "qcm", choices: ["Jeux", "Sport", "Lecture", "On ne peut pas savoir"], expected: ["Jeux"], comparator: "mcq_exact",
-    hint: "Le loisir le plus apprécié = la plus grande barre.",
+    hint: "La plus grande valeur = la plus grande barre.",
     explanation: se("interpréter, c’est tirer une conclusion à partir des données.", "on cherche la plus grande valeur.", "Jeux = 15 est la plus grande valeur.", "le loisir le plus apprécié est les jeux."),
     tags: ["stat_donnee", "interpreter", "qcm", "canvas"],
     canvas: statGraphCanvas({ graphType: "barres", title: "Loisir préféré", data: [{ label: "Sport", value: 12 }, { label: "Lecture", value: 9 }, { label: "Jeux", value: 15 }], display: { showLabels: true, showValues: true, highlightIndex: 2 } }),
@@ -2752,10 +2949,11 @@ export const donneesBank: TutorBankItemV4[] = [
     id: "6e_stat_interpreter_topup_3",
     niveau: "6e", matiere: "maths", notionId: "stat_donnee", microId: "stat_donnee_interpreter",
     difficulty: 2, theme: "neutral",
-    text: "D’après le tableau (Football 12, Natation 8, Danse 10), combien d’élèves ont été interrogés en tout ?",
+    // 03/11/2026 : ★2, un tableau de nombres sans histoire.
+    text: "Un tableau donne les effectifs 12, 8 et 10. Quel est l’effectif total ?",
     format: "short", expected: ["30"], comparator: "number_equal",
     hint: "Additionne toutes les valeurs.",
-    explanation: se("interpréter peut demander de calculer un effectif total.", "on additionne toutes les valeurs.", "12 + 8 + 10 = 30.", "30 élèves ont été interrogés."),
+    explanation: se("l’effectif total est la somme de tous les effectifs.", "on additionne toutes les valeurs.", "12 + 8 + 10 = 30.", "l’effectif total est 30."),
     tags: ["stat_donnee", "interpreter", "total"],
   },
   {
@@ -2848,7 +3046,8 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "stat_enquete_planifier",
     difficulty: 2,
     theme: "neutral",
-    text: "Tu veux savoir quel sport est le plus pratiqué dans ta classe. Que faut-il décider EN PREMIER ?",
+    // 03/11/2026 : ★2, sans situation.
+    text: "Avant de lancer une enquête, que faut-il décider EN PREMIER ?",
     format: "qcm",
     choices: [
       "la question exacte à poser et à qui on la pose",
@@ -2961,7 +3160,8 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "stat_enquete_mesurer",
     difficulty: 2,
     theme: "neutral",
-    text: "Tu mesures la taille de cinq camarades. Comment consigner ces mesures ?",
+    // 03/11/2026 : ★2, sans situation.
+    text: "Comment noter 5 tailles et savoir à qui est chaque taille ?",
     format: "qcm",
     choices: [
       "dans un tableau à deux colonnes : le prénom, et la taille",
@@ -3193,7 +3393,7 @@ export const donneesBank: TutorBankItemV4[] = [
     "6e_stat_lire_tableau_tpl_e1", "stat_enquete", "stat_donnee_lire_tableau", 1,
     "Repère la bonne ligne, puis lis le nombre.",
     ["stat_donnee", "tableau", "lecture", "template", "canvas"],
-    () => qLire(tirerSerie(3, "tableau")),
+    () => qLire(tirerSerie(3, "tableau", ctxSimple())),
   ),
   gab(
     "6e_stat_lire_tableau_tpl_e4", "stat_enquete", "stat_donnee_lire_tableau", 4,
@@ -3205,7 +3405,7 @@ export const donneesBank: TutorBankItemV4[] = [
     "6e_stat_lire_graphique_tpl_e1", "stat_donnee", "stat_donnee_lire_graphique", 1,
     "Repère la barre demandée : lis le nombre écrit au-dessus, ou suis la ligne jusqu’à l’axe gradué.",
     ["stat_donnee", "graphique", "lecture", "axe_gradue", "template", "canvas"],
-    () => qLire(serieLue(3, pick(["barres", "batons"] as const))),
+    () => qLire(serieLue(3, pick(["barres", "batons"] as const), ctxSimple())),
   ),
   gab(
     "6e_stat_lire_graphique_tpl_e4", "stat_donnee", "stat_donnee_lire_graphique", 4,
@@ -3229,19 +3429,19 @@ export const donneesBank: TutorBankItemV4[] = [
     "6e_stat_comparer_tpl_e1", "stat_donnee", "stat_donnee_comparer", 1,
     "Compare les trois nombres du tableau.",
     ["stat_donnee", "comparer", "tableau", "template", "canvas"],
-    () => qExtreme(tirerSerie(3, "tableau")),
+    () => qExtreme(tirerSerie(3, "tableau", ctxSimple())),
   ),
   gab(
     "6e_stat_comparer_tpl_e2", "stat_donnee", "stat_donnee_comparer", 2,
     "Pour savoir combien de plus, on soustrait le plus petit du plus grand.",
     ["stat_donnee", "comparer", "difference", "template", "canvas"],
-    () => qDiff(tirerSerie(entre(3, 4), "tableau")),
+    () => qDiff(tirerSerie(entre(3, 4), "tableau", ctxSimple())),
   ),
   gab(
     "6e_stat_interpreter_tpl_e2", "stat_donnee", "stat_donnee_interpreter", 2,
     "Vérifie chaque phrase avec les nombres.",
     ["stat_donnee", "interpreter", "template", "canvas"],
-    () => qVrai(serieLue(3, pick(["barres", "batons", "tableau"] as const)), [pick(["max", "min", "plusQue"] as const), "plusQue", "max", "min"]),
+    () => qVrai(serieLue(3, pick(["barres", "batons", "tableau"] as const), ctxSimple()), [pick(["max", "min", "plusQue"] as const), "plusQue", "max", "min"]),
   ),
   gab(
     "6e_stat_interpreter_tpl_e3", "stat_donnee", "stat_donnee_interpreter", 3,
@@ -3273,13 +3473,26 @@ export const donneesBank: TutorBankItemV4[] = [
     "stat_enquete_planifier_tpl_e2", "stat_enquete", "stat_enquete_planifier", 2,
     "Une bonne question appelle une réponse précise, sans la souffler.",
     ["stat_enquete", "planifier", "question", "template"],
-    qPlanifierQuestion,
+    () => qPlanifierQuestion(),
   ),
   gab(
     "stat_enquete_mesurer_tpl_e2", "stat_enquete", "stat_enquete_mesurer", 2,
     "Une ligne par mesure ; l'en-tête ne compte pas.",
     ["stat_enquete", "mesurer", "template"],
-    qLignesMesure,
+    () => qLignesMesure(),
+  ),
+  // 03/11/2026 : les situations de la vie, montées à ★3 (★2 = sans histoire).
+  gab(
+    "stat_enquete_planifier_tpl_question_situation", "stat_enquete", "stat_enquete_planifier", 3,
+    "Une bonne question appelle une réponse précise, sans la souffler.",
+    ["stat_enquete", "planifier", "question", "template"],
+    qPlanifierQuestionSituation,
+  ),
+  gab(
+    "stat_enquete_mesurer_tpl_lignes_situation", "stat_enquete", "stat_enquete_mesurer", 3,
+    "Une ligne par mesure ; l'en-tête ne compte pas.",
+    ["stat_enquete", "mesurer", "template"],
+    qLignesMesureSituation,
   ),
   gab(
     "6e_stat_defi_tpl_e3", "stat_donnee", "stat_donnee_defi", 3,

@@ -18,8 +18,13 @@ const nombresDuTexte = (t: string) => (t.match(/\d+(?:,\d+)?/g) ?? []).map(val);
 /** L'unité d'une réponse : ce qui suit le nombre. */
 const uniteDe = (s: string) => String(s).replace(/^[\d\s  ,]+/, "").trim();
 const echapper = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+/** 03/11/2026 : les couleurs des tableaux simples s'accordent (« de couleur bleue »). */
+const ACCORDS: Record<string, string> = { Bleu: "Bleue", Vert: "Verte", Violet: "Violette", Gris: "Grise" };
 /** Le libellé est-il cité dans le texte, comme mot entier (« mai » n'est pas dans « semaine ») ? */
-const motif = (label: string) => new RegExp(`(?<![\\p{L}-])${echapper(label)}(?![\\p{L}-])`, "iu");
+const motif = (label: string) => {
+  const formes = ACCORDS[label] ? `(?:${echapper(ACCORDS[label])}|${echapper(label)})` : echapper(label);
+  return new RegExp(`(?<![\\p{L}-])${formes}(?![\\p{L}-])`, "iu");
+};
 const cite = (t: string, label: string) => motif(label).test(t);
 /** Où l'étiquette apparaît dans le texte (pour l'ordre « A … que B »). */
 const position = (t: string, label: string) => t.search(motif(label));
@@ -327,8 +332,10 @@ export const CORRECTEURS: CorrecteursMaths = {
   stat_enquete_planifier_tpl_e2: corrigerQuestionEnquete,
   stat_enquete_planifier_tpl_1: corrigerQuiInterroger,
   stat_enquete_planifier_tpl_ouverte: corrigerJugerEnquete,
+  stat_enquete_planifier_tpl_question_situation: corrigerQuestionEnquete,
   // stat_enquete_mesurer
   stat_enquete_mesurer_tpl_e2: corrigerLignesMesure,
+  stat_enquete_mesurer_tpl_lignes_situation: corrigerLignesMesure,
   stat_enquete_mesurer_tpl_1: corrigerConversion,
   stat_enquete_mesurer_tpl_ouverte: corrigerComparerMesures,
   // stat_construire_tableau
