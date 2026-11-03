@@ -179,8 +179,8 @@ class PropLyceePourcentageDePourcentageBase(PropTableauBase4e):
     def _disposer_q(self, question, choix, phrase):
         """La phrase de la réponse à la taille de la question (36), sous les cartes."""
         tete, q, cartes, pause, rebours, ph = super()._disposer_q(question, choix, phrase)
-        neuve = VGroup(*[self.t(x, self.FS_PH, VERT_OK) for x in phrase]).arrange(DOWN, buff=0.2,
-                                                                                    aligned_edge=LEFT)
+        neuve = VGroup(*[self.t(x, self.FS_PH, VERT_OK) for x in phrase]).arrange(DOWN, buff=0.34,
+                                                                                    aligned_edge=LEFT)  # 03/11 : 0,2 → 0,34
         x0, haut = -6.35, getattr(self, "_ph_haut", 0.2)
         if neuve.width > self.XL - 0.35 - x0:
             neuve.scale_to_fit_width(self.XL - 0.35 - x0)
@@ -335,19 +335,21 @@ class PropLyceePourcentageDePourcentageBase(PropTableauBase4e):
         c = carre(2.6, centre=P(-4.75, 1.3))
         self.add(c)
         xl = -2.3
-        L1 = self.lg([("Un pourcentage d'un pourcentage", WHITE), ("= un produit", AMBRE)], 2.75, 34, xl)
+        # 03/11 : sur deux lignes (sur une, elle tombait à ~22), et les lignes plus aérées
+        L1 = self.lg([("Un pourcentage d'un pourcentage", WHITE)], 2.95, 36, xl)
+        L1b = self.lg([("= un produit", AMBRE)], 2.35, 40, xl + 2.6)
         self.montre("Un pourcentage", FadeIn(L1[0], shift=RIGHT * 0.15), rt=0.45)
-        self.montre("produit", FadeIn(L1[1], scale=1.2), rt=0.4)
-        L2 = self.lg([("0,31 ×", MP), ("0,38", PROD), ("= 0,1178", WHITE)], 1.6, 48, xl + 1.2)
+        self.montre("produit", FadeIn(L1b[0], scale=1.2), rt=0.4)
+        L2 = self.lg([("0,31 ×", MP), ("0,38", PROD), ("= 0,1178", WHITE)], 1.4, 48, xl + 1.2)
         self.jouer(L2, ["0,31", "0,38", "0,1178"])
-        L3 = self.lg([("≈ 11,8 %", VERT_OK)], 0.6, 52, xl + 3.6)
+        L3 = self.lg([("≈ 11,8 %", VERT_OK)], 0.3, 52, xl + 3.6)
         p = self.t("11,8 %", 19, NUIT).move_to(c.rect)
         self.montre("environ 11,8", FadeIn(L3, scale=1.3), FadeIn(p, scale=1.3), rt=0.45)
         cad = SurroundingRectangle(L3, color=VERT_OK, buff=0.15, corner_radius=0.1)
         self.play(Create(cad), Indicate(c.rect, color=WHITE, scale_factor=1.12), run_time=0.5)
-        L4 = self.lg([("Vérification en euros :", GREY_B)], -0.85, 36, -5.9)
+        L4 = self.lg([("Vérification en euros :", GREY_B)], -0.95, 36, -5.9)
         self.montre("Vérification", FadeIn(L4, shift=RIGHT * 0.15), rt=0.4)
-        L5 = self.lg([("≈ 20,7 Md€", MP), ("÷", WHITE), ("175,3 Md€", WHITE), ("≈ 11,8 %", VERT_OK)], -1.65, 44,
+        L5 = self.lg([("≈ 20,7 Md€", MP), ("÷", WHITE), ("175,3 Md€", WHITE), ("≈ 11,8 %", VERT_OK)], -1.95, 44,
                      -5.9)
         self.jouer(L5, ["environ 20,7", None, "175,3", ("encore 11,8")])
         self.insister(L5[3], 1.12, 0.2)
@@ -364,14 +366,14 @@ class PropLyceePourcentageDePourcentageBase(PropTableauBase4e):
             sc.play(FadeIn(c.fond), Create(c.contour), FadeIn(c.bande), run_time=0.4)
 
         def apres(sc):
-            l0 = sc.ligne_rep(0, ["0,5 ×", "0,4 =", "0,2", "= 20 %."])
+            l0 = sc.ligne_rep(0, ["0,5 ×", "0,4 =", "0,2", "= 20 %."], fs=self.FS_PH)
             for m, mot in zip(l0, ["0,5 fois", "fois 0,4", "égale 0,2", "soit 20"]):
                 sc.montre(mot, FadeIn(m, shift=UP * 0.12), rt=0.3)
             p = sc.t("20 %", 26, NUIT).move_to(c.rect)
             sc.play(GrowFromEdge(c.rect, DOWN), FadeIn(p, scale=1.3), run_time=0.5)
-            l1 = sc.ligne_rep(1, ["A : on additionne."])
+            l1 = sc.ligne_rep(1, ["A : on additionne."], fs=self.FS_PH)
             sc.montre("A additionne", FadeIn(l1[0]), rt=0.3)
-            l2 = sc.ligne_rep(2, ["C : 50 × 40,", "sans décimal."])
+            l2 = sc.ligne_rep(2, ["C : 50 × 40,", "sans décimal."], fs=self.FS_PH)
             sc.montre("C multiplie", FadeIn(l2[0], shift=UP * 0.12), rt=0.3)
             sc.montre("sans les", FadeIn(l2[1], shift=UP * 0.12), rt=0.3)
             sc.rep_fini()
@@ -393,12 +395,12 @@ class PropLyceePourcentageDePourcentageBase(PropTableauBase4e):
         sans(fig)
         self.play(FadeIn(fig), run_time=0.4)
         xl = -0.75
-        L1 = self.lg([("On n'additionne jamais", ROUGE_P)], 2.35, 38, xl)
-        L1b = self.lg([("deux pourcentages", WHITE)], 1.8, 38, xl)
+        L1 = self.lg([("On n'additionne jamais", ROUGE_P)], 2.45, 38, xl)  # 03/11 : interligne 0,55 → 0,63
+        L1b = self.lg([("deux pourcentages", WHITE)], 1.82, 38, xl)
         self.montre("On n'additionne", FadeIn(L1, shift=RIGHT * 0.15), rt=0.4)
         self.montre("deux pourcentages", FadeIn(L1b, shift=RIGHT * 0.15), rt=0.35)
-        L2 = self.lg([("qui ne portent pas", WHITE)], 1.25, 38, xl)
-        L2b = self.lg([("sur le même tout.", AMBRE)], 0.7, 38, xl)
+        L2 = self.lg([("qui ne portent pas", WHITE)], 1.19, 38, xl)
+        L2b = self.lg([("sur le même tout.", AMBRE)], 0.56, 38, xl)
         self.montre("qui ne portent", FadeIn(L2, shift=RIGHT * 0.15), rt=0.35)
         self.montre("même tout", FadeIn(L2b, shift=RIGHT * 0.15), Indicate(c.contour, color=AMBRE,
                                                                           scale_factor=1.03), rt=0.5)
@@ -414,7 +416,7 @@ class PropLyceePourcentageDePourcentageBase(PropTableauBase4e):
         self.montre("69 %", FadeIn(L3[2], scale=1.3), Create(g69), rt=0.6)
         fx = self.t("faux !", 40, ROUGE_ERREUR).next_to(L3, DOWN, buff=0.3).align_to(L3, LEFT)
         self.montre("c'est faux", Create(croix(L3, sw=6)), FadeIn(fx, scale=1.3), FadeOut(g69), rt=0.5)
-        L4 = self.lg([("Le petit rectangle", MP), ("<", WHITE), ("la bande", PROD)], -0.15, 38, xl)
+        L4 = self.lg([("Le petit rectangle", MP), ("<", WHITE), ("la bande", PROD)], -0.3, 38, xl)
         self.montre("Le petit rectangle", FadeIn(L4[0], shift=RIGHT * 0.15), Indicate(c.rect, color=WHITE,
                                                                                     scale_factor=1.1), rt=0.5)
         self.montre("que la bande", FadeIn(L4[1]), FadeIn(L4[2], shift=RIGHT * 0.15),
@@ -427,17 +429,19 @@ class PropLyceePourcentageDePourcentageBase(PropTableauBase4e):
         self.add_mascotte()
         c = carre(2.0, 0.3, 0.25, centre=P(-5.3, 2.05))
         xd = -4.0
-        self._ph_haut = 0.55
+        self._ph_haut = 0.6
 
         def avant(sc):
             sc.play(FadeIn(c.fond), Create(c.contour), run_time=0.3)
 
         def donnees(sc):
-            d1 = hors_audit(sc.lg([("1 200 élèves", WHITE)], 2.75, 30, xd))
-            d2 = sc.lg([("30 %", PROD), ("en terminale", PROD)], 2.1, 30, xd)
-            d3 = sc.lg([("25 % d'entre eux", MP), ("internes", MP)], 1.45, 30, xd)
-            if d3.get_right()[0] > sc.XL - 0.3:
-                d3.scale_to_fit_width(sc.XL - 0.3 - xd).align_to(P(xd, 0), LEFT)
+            # 03/11 : les données de l'énoncé en 34 (en 30 réduit, elles tombaient à ~26), sur quatre lignes
+            d1 = hors_audit(sc.lg([("1 200 élèves", WHITE)], 2.85, 34, xd))
+            d2 = sc.lg([("30 %", PROD), ("en terminale", PROD)], 2.28, 34, xd)
+            d3 = VGroup(sc.lg([("25 % d'entre eux", MP)], 1.71, 34, xd), sc.lg([("internes", MP)], 1.14, 34, xd))
+            for d in (d1, d2, *d3):
+                if d.get_right()[0] > sc.XL - 0.3:
+                    d.scale_to_fit_width(sc.XL - 0.3 - xd).align_to(P(xd, 0), LEFT)
             sc.au_mot("1 200")
             sc.play(FadeIn(d1, shift=RIGHT * 0.15), run_time=0.3)
             sc.au_mot("30 %")
@@ -451,18 +455,18 @@ class PropLyceePourcentageDePourcentageBase(PropTableauBase4e):
             sc.au_mot("Combien d'internes")
 
         def apres(sc):
-            l0 = sc.ligne_rep(0, ["0,3 ×", "0,25 =", "0,075", "= 7,5 %"])
+            l0 = sc.ligne_rep(0, ["0,3 ×", "0,25 =", "0,075", "= 7,5 %"], fs=self.FS_PH)
             for m, mot in zip(l0, ["0,3 fois", "fois 0,25", "égale 0,075", "soit 7,5"]):
                 sc.montre(mot, FadeIn(m, shift=UP * 0.12), rt=0.3)
             p = sc.t("7,5 %", 22, WHITE).next_to(c.rect, RIGHT, buff=0.12)
             sc.play(FadeIn(p, scale=1.3), Indicate(c.rect, color=WHITE, scale_factor=1.15), run_time=0.45)
-            l1 = sc.ligne_rep(1, ["0,075 ×", "1 200 =", "90 élèves."])
+            l1 = sc.ligne_rep(1, ["0,075 ×", "1 200 =", "90 élèves."], fs=self.FS_PH)
             hors_audit(l1[1])
             for m, mot in zip(l1, ["0,075 fois", "fois 1 200", "égale 90"]):
                 sc.montre(mot, FadeIn(m, shift=UP * 0.12), rt=0.3)
-            l2 = sc.ligne_rep(2, ["B : 30 + 25 %."])
+            l2 = sc.ligne_rep(2, ["B : 30 + 25 %."], fs=self.FS_PH)
             sc.montre("B additionne", FadeIn(l2[0]), rt=0.3)
-            l3 = sc.ligne_rep(3, ["C : 25 %", "de tout le lycée."])
+            l3 = sc.ligne_rep(3, ["C : 25 %", "de tout le lycée."], fs=self.FS_PH)
             sc.montre("25 % de tout", FadeIn(l3[0], shift=UP * 0.12), rt=0.3)
             sc.montre("de tout", FadeIn(l3[1], shift=UP * 0.12), rt=0.3)
             sc.rep_fini()
@@ -511,12 +515,17 @@ class PropLyceePourcentageDePourcentageBase(PropTableauBase4e):
         L1 = self.lg([("Un :", AMBRE), ("0,4 ×", PROD), ("0,15 =", MP), ("0,06", WHITE), ("= 6 %", VERT_OK)], 1.6,
                      40, xl)
         L2 = self.lg([("Deux :", AMBRE), ("0,06 ×", WHITE), ("2 500 =", WHITE), ("150", VERT_OK)], 0.2, 40, xl)
-        self.add(tit, sans(VGroup(c, b40, t40, b15, t15)), sans(L1[0]), sans(L2[0]))
+        # 03/11 : « Un : » et « Deux : » entrent AVEC leur calcul (« Deux : » attendait seul)
+        self.add(tit, sans(VGroup(c, b40, t40, b15, t15)))
+        sans(L1[0])
+        sans(L2[0])
         p = self.t("6 %", 22, NUIT).move_to(c.rect)
-        self.jouer(VGroup(*L1[1:]), ["0,4 fois", "fois 0,15", "égale 0,06", "soit 6"], extra={3: [FadeIn(p, scale=1.3)]})
+        self.jouer(VGroup(*L1[1:]), ["0,4 fois", "fois 0,15", "égale 0,06", "soit 6"],
+                   extra={0: [FadeIn(L1[0], shift=RIGHT * 0.15)], 3: [FadeIn(p, scale=1.3)]})
         self.play(Create(SurroundingRectangle(L1[4], color=VERT_OK, buff=0.12, corner_radius=0.1)), run_time=0.35)
         hors_audit(L2[2])
-        self.jouer(VGroup(*L2[1:]), ["0,06 fois", "fois 2 500", "égale 150"])
+        self.jouer(VGroup(*L2[1:]), ["0,06 fois", "fois 2 500", "égale 150"],
+                   extra={0: [FadeIn(L2[0], shift=RIGHT * 0.15)]})
         L3 = self.lg([("150 personnes", VERT_OK)], -0.85, 44, xl + 2.2)
         self.play(FadeIn(L3, scale=1.2), run_time=0.35)
         self.play(Create(SurroundingRectangle(L3, color=VERT_OK, buff=0.15, corner_radius=0.1)), run_time=0.35)
