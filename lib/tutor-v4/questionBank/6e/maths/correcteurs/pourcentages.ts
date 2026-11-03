@@ -215,10 +215,15 @@ const echapper = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 export function valeurCategorie(t: string): { valeur: number; quoi: string } | null {
   const { pcts, autres } = donnees(t);
   const derniere = t.slice(t.lastIndexOf(".", t.length - 2) + 1);
-  const prop = derniere.match(/(?:[Cc]ombien (?:d’|de )\S+|qui) (.+?) ?[?.]$/)?.[1];
+  // 03/11/2026 : aussi « Combien sont cochées ? » (sans le nom), et le groupe
+  // écrit sans son verbe (« 71 % cochées »).
+  const prop = derniere.match(/(?:[Cc]ombien (?:(?:d’|de )\S+ )?|qui )(.+?) ?[?.]$/)?.[1];
   const N = autres[0];
   if (!prop || N == null) return null;
-  const m = t.match(new RegExp(`(\\d+) % (?:des \\S+ |de ces \\S+ )?${echapper(prop)}`));
+  const sansVerbe = prop.split(" ").slice(1).join(" ");
+  const m =
+    t.match(new RegExp(`(\\d+) % (?:des \\S+ |de ces \\S+ )?${echapper(prop)}`)) ??
+    (sansVerbe ? t.match(new RegExp(`(\\d+) % ${echapper(sansVerbe)}[,.]`)) : null);
   if (m) return { valeur: (Number(m[1]) * N) / 100, quoi: `${m[1]} % de ${N}` };
   if (pcts.length === 1) return { valeur: ((100 - pcts[0]) * N) / 100, quoi: `le reste : ${100 - pcts[0]} % de ${N}` };
   return null;
@@ -308,7 +313,7 @@ function corrigerPartEnMots(q: TutorGeneratedQuestionV4): string[] {
 function proprieteDemandee(t: string): string | undefined {
   const d = t.slice(t.lastIndexOf(".", t.length - 2) + 1).trim();
   return (
-    d.match(/^(?:Quel pourcentage|Combien de pour cent) des \S+ (.+?) \?$/)?.[1] ??
+    d.match(/^(?:Quel pourcentage|Combien de pour cent)(?: des \S+)? (.+?) \?$/)?.[1] ??
     d.match(/qui (.+?)\.$/)?.[1] ??
     d.match(/^[Cc]ombien (?:d’|de )\S+ (.+?) \?$/)?.[1]
   );

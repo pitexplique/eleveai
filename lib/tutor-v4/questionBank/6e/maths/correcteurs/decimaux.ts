@@ -249,9 +249,9 @@ function arrondiRef(x: number, dec: number) {
 }
 
 function rangDuTexte(t: string): number | null {
-  if (/à l'unité|à l'euro près/.test(t)) return 0;
-  if (/au dixième/.test(t)) return 1;
-  if (/au centième/.test(t)) return 2;
+  if (/[àÀ] l'unité|à l'euro près/.test(t)) return 0;
+  if (/[aA]u dixième/.test(t)) return 1;
+  if (/[aA]u centième/.test(t)) return 2;
   return null;
 }
 

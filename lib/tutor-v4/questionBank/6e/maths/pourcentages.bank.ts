@@ -173,6 +173,15 @@ const PHRASES_SIMPLES: readonly ((p: number) => string)[] = [
 ];
 const phraseSimple = (p: number) => pick(PHRASES_SIMPLES)(p);
 
+/** Nombre de mots comme le compte scripts/mesure-contexte-coach-6e.mjs (« % » et « ? » comptent). */
+const nbMots = (t: string) => t.trim().split(/\s+/).length;
+/** 03/11/2026 : un énoncé tiré parmi ceux qui tiennent dans `lim` mots (★1 : 12, ★2 : 15) ;
+ *  à défaut, le plus court. */
+function tient(lim: number, ...textes: string[]) {
+  const ok = textes.filter((t) => nbMots(t) <= lim);
+  return ok.length ? pick(ok) : textes.reduce((a, b) => (nbMots(b) < nbMots(a) ? b : a));
+}
+
 /** Un pourcentage lu dans la vie courante (aucun autre nombre que p). */
 const PHRASES_PCT: readonly ((p: number, P: Prenom) => string)[] = [
   (p, P) => `Sur l’étiquette d’un jus, ${P.n} lit : « ${p} % de fruits ».`,
@@ -201,7 +210,19 @@ function lireDeuxCategories() {
   const r = premier ? p : 100 - p;
   const phrase = premier ? s.adj : s.autre;
   const [a, b] = Math.random() < 0.5 ? [`${p} % ${s.adj}`, `${100 - p} % ${s.autre}`] : [`${100 - p} % ${s.autre}`, `${p} % ${s.adj}`];
-  return { text: `Sur 100 ${s.nom}, ${a} et ${b}. Combien ${deNu(s.nom)} ${phrase} ?`, r, s: { nom: s.nom } };
+  // 03/11/2026 (15 mots au plus) : le second groupe sans son verbe
+  // (« 100 cases : 29 % sont vides, 71 % cochées. Combien sont cochées ? »).
+  // Le correcteur relit la propriété avec ou sans son verbe.
+  const sansVerbe = (x: string) => x.split(" ").slice(1).join(" ");
+  const [a2, b2] = Math.random() < 0.5 ? [`${p} % ${s.adj}`, `${100 - p} % ${sansVerbe(s.autre)}`] : [`${100 - p} % ${s.autre}`, `${p} % ${sansVerbe(s.adj)}`];
+  const text = tient(
+    15,
+    `Sur 100 ${s.nom}, ${a} et ${b}. Combien ${deNu(s.nom)} ${phrase} ?`,
+    `100 ${s.nom} : ${a2}, ${b2}. Combien ${phrase} ?`,
+    `Sur 100 ${s.nom}, ${a2}, ${b2}. Combien ${phrase} ?`,
+    `Sur 100 ${s.nom} : ${a2} et ${b2}. Combien ${phrase} ?`,
+  );
+  return { text, r, s: { nom: s.nom } };
 }
 
 /**
@@ -303,10 +324,10 @@ const QUANTITES_SIMPLES: readonly SitQte[] = [
   { f: (n, p) => `Une durée vaut ${n} minutes. Combien de minutes font ${p} % de cette durée ?`, u: "min", min: 20, max: 200 },
   { f: (n, p) => `Un récipient contient ${n} L. Combien de litres font ${p} % de ce volume ?`, u: "L", min: 20, max: 400 },
   { f: (n, p) => `Une distance vaut ${n} km. Combien de kilomètres font ${p} % de cette distance ?`, u: "km", min: 20, max: 400 },
-  { f: (n, p) => `Le périmètre d’un rectangle vaut ${n} cm. Combien de centimètres font ${p} % de ce périmètre ?`, u: "cm", min: 20, max: 400 },
+  { f: (n, p) => `Le périmètre d’un rectangle vaut ${n} cm. Combien de centimètres font ${p} % ?`, u: "cm", min: 20, max: 400 },
   { f: (n, p) => `Trouve ${p} % de ${n} L. Donne le résultat en litres.`, u: "L", min: 20, max: 400 },
   { f: (n, p) => `Calcule ${p} % de ${n} g. Donne le résultat en grammes.`, u: "g", min: 20, max: 600 },
-  { f: (n, p) => `Un côté d’un carré mesure ${n} cm. Combien de centimètres font ${p} % de ce côté ?`, u: "cm", min: 20, max: 200 },
+  { f: (n, p) => `Le côté d’un carré mesure ${n} cm. Combien de centimètres font ${p} % ?`, u: "cm", min: 20, max: 200 },
   { f: (n, p) => `Trouve ${p} % de ${n} minutes. Donne le résultat en minutes.`, u: "min", min: 20, max: 200 },
   { f: (n, p) => `Calcule ${p} % de ${n} km. Donne le résultat en kilomètres.`, u: "km", min: 20, max: 400 },
   { f: (n, p) => `Un volume vaut ${n} L. Combien de litres font ${p} % de ce volume ?`, u: "L", min: 20, max: 400 },
@@ -1016,7 +1037,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     microId: "pourcentage_defi",
     difficulty: 1,
     theme: "neutral",
-    text: "Sur 100 perles, 8 % sont blanches. Combien y a-t-il de perles blanches ?",
+    text: "Sur 100 perles, 8 % sont blanches. Combien sont blanches ?",
     format: "short",
     expected: ["8"],
     comparator: "number_equal",
@@ -1170,9 +1191,10 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       const s = pick(SIMPLES_PCT);
       const p = pick([5, 10, 20, 25, 30, 40, 50, 60, 75, 80]);
       const surCombien = Math.random() < 0.5;
+      const amorce = `${p} % des ${s.nom} ${s.adj}.`;
       const text = surCombien
-        ? `${p} % des ${s.nom} ${s.adj}. ${pick([`${p} %, c’est ${p} sur combien ?`, `Complète : ${p} %, c’est ${p} sur …`, `${p} % veut dire ${p} sur combien ?`])}`
-        : `${surS(100, s, p, true)} ${pick([`Combien ${deNu(s.nom)} ${s.adj} ?`, `Combien ${s.adj} ?`])}`;
+        ? tient(12, `${amorce} C’est ${p} sur combien ?`, `${amorce} Complète : c’est ${p} sur …`, `${p} %, c’est ${p} sur combien ?`, `${p} % veut dire ${p} sur combien ?`, `Complète : ${p} %, c’est ${p} sur …`)
+        : tient(12, `${surS(100, s, p, true)} Combien ${deNu(s.nom)} ${s.adj} ?`, `${surS(100, s, p, true)} Combien ${s.adj} ?`);
       const r = surCombien ? 100 : p;
       return {
         text,
@@ -1202,9 +1224,16 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       const bonne = `${p} ${s.nom} sur 100`;
       const leurres = [`${p} ${s.nom} sur 10`, `100 ${s.nom} sur ${p}`, `${p} ${s.nom} sur 1 000`];
       if (N !== 100) leurres.push(`${p} ${s.nom} sur ${N}`);
-      const question = pick([`Que veut dire « ${p} % » ?`, `« ${p} % », cela veut dire :`, `Choisis le sens de « ${p} % ».`]);
+      // 03/11/2026 : ★1 en 12 mots au plus (« % » et « ? » comptent).
+      const text = tient(
+        12,
+        `${surS(N, s, p, true)} ${p} % veut dire :`,
+        `${surS(N, s, p, true)} ${p} %, c’est :`,
+        `${N} ${s.nom} : ${p} % ${s.adj}. ${p} % veut dire :`,
+        `${p} % des ${s.nom} ${s.adj}. Que veut dire ${p} % ?`,
+      );
       return {
-        text: `${surS(N, s, p, true)} ${question}`,
+        text,
         format: "qcm",
         choices: choixQcm(bonne, leurres),
         expected: [bonne],
@@ -1298,7 +1327,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
         `Écris ${p} % sous forme de fraction.`,
       ]);
       return {
-        text: Math.random() < 0.6 ? `${phraseSimple(p)} ${question}` : question,
+        text: Math.random() < 0.6 ? tient(12, `${phraseSimple(p)} ${question}`, question) : question,
         format: "short",
         expected: [`${p}/100`, `${p} / 100`],
         comparator: "fraction_decimal_equivalent",
@@ -1328,7 +1357,8 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       ]);
       if (Math.random() < 0.6) {
         const s = pick(SIMPLES_PCT);
-        text = `Sur 100 ${s.nom}, ${k} ${s.adj} : c’est ${k}/100. ${pick(["Quel pourcentage est-ce ?", "Écris-le en pourcentage.", "Donne ce pourcentage."])}`;
+        const debut = `Sur 100 ${s.nom}, ${k} ${s.adj} : c’est ${k}/100.`;
+        text = tient(12, `${debut} Quel pourcentage est-ce ?`, `${debut} Écris-le en pourcentage.`, `${debut} Donne ce pourcentage.`);
       }
       return {
         text,
@@ -1360,7 +1390,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
         `Quelle écriture en fraction correspond à ${p} % ?`,
       ]);
       return {
-        text: Math.random() < 0.75 ? `${phraseSimple(p)} ${question}` : question,
+        text: Math.random() < 0.75 ? tient(15, `${phraseSimple(p)} ${question}`, question) : question,
         format: "qcm",
         // 1/10 = 10/100 : le leurre « 1/p » serait juste pour p = 10.
         choices: choixQcm(good, [`${p}/10`, `100/${p}`, `${100 - p}/100`, ...(p !== 10 ? [`1/${p}`] : [])]),
@@ -1427,13 +1457,13 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       const question = pick([
         `Écris ${p} % sous forme d’un nombre décimal.`,
         `Quel nombre décimal vaut ${p} % ?`,
-        `Complète : ${p} % = … (un nombre décimal)`,
+        `Complète avec un nombre décimal : ${p} % = …`,
         `Donne ${p} % en écriture décimale.`,
         `Transforme ${p} % en nombre décimal.`,
       ]);
 
       return {
-        text: Math.random() < 0.8 ? `${phraseSimple(p)} ${question}` : question,
+        text: Math.random() < 0.8 ? tient(15, `${phraseSimple(p)} ${question}`, question) : question,
         format: "short",
         expected: [formatComma(dec), `${p}/100`, `${p} / 100`],
         comparator: "fraction_decimal_equivalent",
@@ -1469,7 +1499,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       ]);
 
       return {
-        text: Math.random() < 0.8 ? `${phraseSimple(p)} ${question}` : question,
+        text: Math.random() < 0.8 ? tient(15, `${phraseSimple(p)} ${question}`, question) : question,
         format: "qcm",
         choices: choixQcm(good, leurres),
         expected: [good],
@@ -1507,7 +1537,8 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       ]);
       if (Math.random() < 0.6) {
         const s = pick(SIMPLES_PCT.filter((x) => x.nom !== "parts")); // pas « la part des parts »
-        text = `La part des ${s.nom} qui ${s.adj} vaut ${d}. ${pick(["Écris-la en pourcentage.", "Quel pourcentage est-ce ?", "Cela fait combien de pour cent ?"])}`;
+        const debut = `La part des ${s.nom} qui ${s.adj} vaut ${d}.`;
+        text = tient(15, `${debut} Écris-la en pourcentage.`, `${debut} Quel pourcentage est-ce ?`, `${debut} Cela fait combien de pour cent ?`);
       }
       return {
         text,
@@ -1870,7 +1901,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       const phrase = autre ? s.autre : s.adj;
       const r = autre ? 100 - k : k;
       return {
-        text: `${donneesS(100, s, k, false)} Quel pourcentage des ${s.nom} ${phrase} ?`,
+        text: tient(12, `${donneesS(100, s, k, false)} Quel pourcentage des ${s.nom} ${phrase} ?`, `${surS(100, s, k, false)} Quel pourcentage ${phrase} ?`, `100 ${s.nom} : ${k} ${s.adj}. Quel pourcentage ${phrase} ?`),
         format: "short",
         expected: [String(r), `${r} %`],
         comparator: "number_equal",
@@ -1898,9 +1929,9 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       const s = pick(BINAIRES);
       const p = randomInt(1, 19) * 5;
       const N = totalPour(p, 300);
-      const question = pick([`Quel pourcentage des ${s.nom} ${s.autre} ?`, `Combien de pour cent des ${s.nom} ${s.autre} ?`]);
+      const d = donneesS(N, s, p, true);
       return {
-        text: `${donneesS(N, s, p, true)} ${question}`,
+        text: tient(15, `${d} Quel pourcentage des ${s.nom} ${s.autre} ?`, `${d} Combien de pour cent des ${s.nom} ${s.autre} ?`),
         format: "short",
         expected: [String(100 - p), `${100 - p} %`],
         comparator: "number_equal",

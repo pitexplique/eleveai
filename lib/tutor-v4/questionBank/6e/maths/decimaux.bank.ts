@@ -414,7 +414,7 @@ function genLireEcrire(etoile: 1 | 2, enQcm = false, ctx = false): TutorGenerate
   };
   const debut = ctx ? m.debut(p) : choix(DEBUTS[m.u]);
   const text = `${debut} ${a} ${m.mot} et ${k} ${rangMot}. ${choix(
-    ctx ? [`Écris cette mesure en ${m.mot} avec une virgule.`, `Quelle est cette mesure, écrite avec une virgule ?`] : ["Écris-la avec une virgule.", `Écris-la en ${m.u}.`],
+    ctx ? [`Écris cette mesure en ${m.mot} avec une virgule.`, `Quelle est cette mesure, écrite avec une virgule ?`] : ["Écris cette mesure avec une virgule.", `Écris cette mesure en ${m.u}.`],
   )}`;
   return courte(
     text,
@@ -1070,7 +1070,7 @@ function genEncadrer(etoile: 2 | 3 | 4): TutorGeneratedQuestionV4 {
     ? `${phraseM(ecrit)} ${choix([
         simple ? `Complète ${rang.nom} : ${trou}` : `Encadre ce nombre ${rang.nom} : ${trou}. Quel nombre remplace les points ?`,
         simple ? `Encadre ${rang.nom} : ${trou}` : `${p.nom} l'encadre ${rang.nom} : ${trou}. Complète.`,
-        simple ? `Encadre-la ${rang.nom} : ${trou}` : `Complète cet encadrement ${rang.nom} : ${trou}.`,
+        simple ? `${rang.nom.charAt(0).toUpperCase()}${rang.nom.slice(1)}, complète : ${trou}` : `Complète cet encadrement ${rang.nom} : ${trou}.`,
       ])}`
     : choix([
         `Complète l'encadrement de ${ecrit} ${rang.nom} : ${trou}`,
@@ -2678,7 +2678,7 @@ export const decimauxBank: TutorBankItemV4[] = [
     microId: "decimal_defi",
     difficulty: 2,
     theme: "neutral",
-    text: "La soustraction de deux nombres entiers peut-elle donner un nombre décimal ?",
+    text: "La soustraction de deux nombres entiers peut-elle donner un nombre à virgule ?",
     format: "qcm",
     choices: ["oui", "non"],
     expected: ["non"],
@@ -2688,7 +2688,7 @@ export const decimauxBank: TutorBankItemV4[] = [
       "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
       "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
       "Calcul : " +
-      ("Quand on soustrait deux nombres entiers, le résultat reste un entier. On n’obtient donc pas de nombre décimal dans ce cas.") +
+      ("Quand on soustrait deux nombres entiers, le résultat reste un entier. On n’obtient donc pas de nombre à virgule (un entier est un décimal sans partie décimale).") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["decimal_nombre", "defi", "piege", "qcm"],
   },
