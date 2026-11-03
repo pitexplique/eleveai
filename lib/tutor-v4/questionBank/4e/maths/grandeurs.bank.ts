@@ -361,6 +361,48 @@ const SITUATIONS_FAMILLE = [
   { gn: "le rendement d'un champ de maïs", f: false, unite: "t/ha", famille: "quotient", calcul: "des tonnes ÷ des hectares" },
 ] as const;
 
+/* ⛔ 03/11/2026 — À ★1 ET ★2, AUCUNE SITUATION (Frédéric : « le contexte est
+   réservé aux trois étoiles »). Les gabarits ★2 parlent de la GRANDEUR seule
+   (« une aire », « une vitesse », « l'aire d'un rectangle »), sans four, sans
+   potager, sans train. Les situations restent à ★3 et plus. */
+const SIMPLES_FAMILLE = [
+  { gn: "une aire", f: true, unite: "m²", famille: "produit", calcul: "des mètres × des mètres" },
+  { gn: "une aire", f: true, unite: "cm²", famille: "produit", calcul: "des centimètres × des centimètres" },
+  { gn: "un volume", f: false, unite: "m³", famille: "produit", calcul: "des mètres × des mètres × des mètres" },
+  { gn: "un volume", f: false, unite: "cm³", famille: "produit", calcul: "des centimètres × des centimètres × des centimètres" },
+  { gn: "un volume", f: false, unite: "dm³", famille: "produit", calcul: "des décimètres × des décimètres × des décimètres" },
+  { gn: "une énergie électrique", f: true, unite: "kWh", famille: "produit", calcul: "des kilowatts × des heures" },
+  { gn: "une vitesse", f: true, unite: "km/h", famille: "quotient", calcul: "des kilomètres ÷ des heures" },
+  { gn: "une vitesse", f: true, unite: "m/s", famille: "quotient", calcul: "des mètres ÷ des secondes" },
+  { gn: "un débit", f: false, unite: "L/min", famille: "quotient", calcul: "des litres ÷ des minutes" },
+  { gn: "un débit", f: false, unite: "L/h", famille: "quotient", calcul: "des litres ÷ des heures" },
+  { gn: "un débit", f: false, unite: "m³/h", famille: "quotient", calcul: "des mètres cubes ÷ des heures" },
+  { gn: "une masse volumique", f: true, unite: "g/cm³", famille: "quotient", calcul: "des grammes ÷ des centimètres cubes" },
+  { gn: "une masse volumique", f: true, unite: "kg/m³", famille: "quotient", calcul: "des kilogrammes ÷ des mètres cubes" },
+  { gn: "un rendement", f: false, unite: "t/ha", famille: "quotient", calcul: "des tonnes ÷ des hectares" },
+] as const;
+/** Les calculs-produits SANS situation (★2) : une grandeur, deux facteurs. */
+const CALCULS_SIMPLES: { cherche: string; u: string; ua: string; ub: string; aNom: string; bNom: string; def: string }[] = [
+  ...["m", "cm", "dm"].map((l) => ({
+    cherche: "l'aire d'un rectangle", u: `${l}²`, ua: l, ub: l, aNom: `la longueur (en ${l})`, bNom: `la largeur (en ${l})`,
+    def: `une aire est une grandeur PRODUIT : des longueurs multipliées entre elles (${l} × ${l} = ${l}²)`,
+  })),
+  ...["m", "cm", "dm"].map((l) => ({
+    cherche: "le volume d'un prisme droit", u: `${l}³`, ua: `${l}²`, ub: l, aNom: `l'aire de la base (en ${l}²)`, bNom: `la hauteur (en ${l})`,
+    def: `un volume est une grandeur PRODUIT : une aire multipliée par une longueur (${l}² × ${l} = ${l}³)`,
+  })),
+  ...["m", "cm"].map((l) => ({
+    cherche: "le volume d'un cylindre", u: `${l}³`, ua: `${l}²`, ub: l, aNom: `l'aire de la base (en ${l}²)`, bNom: `la hauteur (en ${l})`,
+    def: `un volume est une grandeur PRODUIT : une aire multipliée par une longueur (${l}² × ${l} = ${l}³)`,
+  })),
+  { cherche: "une énergie électrique", u: "kWh", ua: "kW", ub: "h", aNom: "la puissance (en kW)", bNom: "la durée (en h)",
+    def: "une énergie en kilowattheures est une grandeur PRODUIT : des kilowatts multipliés par des heures (kW × h = kWh)" },
+  { cherche: "une distance", u: "km", ua: "km/h", ub: "h", aNom: "la vitesse (en km/h)", bNom: "la durée (en h)",
+    def: "une distance est ici le PRODUIT d'une vitesse par une durée (km/h × h = km)" },
+  { cherche: "une distance", u: "m", ua: "m/s", ub: "s", aNom: "la vitesse (en m/s)", bNom: "la durée (en s)",
+    def: "une distance est ici le PRODUIT d'une vitesse par une durée (m/s × s = m)" },
+];
+
 // Les unités que l'on FABRIQUE en multipliant ou en divisant.
 const FABRIQUER_UNITE = [
   { ctx: "le débit d'une fontaine", a: "des litres", b: "des minutes", op: "÷", correct: "L/min", inverse: "min/L" },
@@ -402,7 +444,7 @@ export const grandeursBank: TutorBankItemV4[] = [
     microId: "grandeur_produit",
     difficulty: 1,
     theme: "neutral",
-    text: "Une aire s'obtient en multipliant deux longueurs. Comment appelle-t-on une telle grandeur ?",
+    text: "Une aire = longueur × largeur. Quel type de grandeur est-ce ?",
     format: "qcm",
     choices: [
       "une grandeur produit",
@@ -431,15 +473,18 @@ export const grandeursBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Regarde l'unité : un exposant ou un « fois » trahit un produit, une barre trahit un quotient.",
     tags: ["grandeur", "produit", "qcm", "template", "canvas"],
+    // 03/11/2026 : ★2, la grandeur seule (SIMPLES_FAMILLE), sans situation.
     generate: () => {
-      const s = randomChoice(SITUATIONS_FAMILLE);
-      const autre = randomChoice(SITUATIONS_FAMILLE.filter((x) => x.famille !== s.famille));
+      const s = randomChoice(SIMPLES_FAMILLE);
+      const autre = randomChoice(SIMPLES_FAMILLE.filter((x) => x.famille !== s.famille));
       const e = s.f ? "e" : "";
       const text = randomChoice([
-        `${cap(s.gn)} se mesure en ${s.unite}. Est-ce une grandeur produit ou une grandeur quotient ?`,
+        `${cap(s.gn)} se mesure en ${s.unite}. Grandeur produit ou quotient ?`,
         `On exprime ${s.gn} en ${s.unite}. De quelle famille de grandeurs s'agit-il ?`,
-        `Dans un exercice, ${s.gn} est donné${e} en ${s.unite}. Grandeur produit ou grandeur quotient ?`,
+        `${cap(s.gn)} est donné${e} en ${s.unite}. Grandeur produit ou grandeur quotient ?`,
         `Quelle sorte de grandeur est ${s.gn}, mesuré${e} en ${s.unite} ?`,
+        `Regarde l'unité : ${s.gn} en ${s.unite}. Produit ou quotient ?`,
+        `${cap(s.gn)} s'écrit en ${s.unite}. Cette unité vient-elle d'un produit ou d'un quotient ?`,
       ]);
       const correct = `une grandeur ${s.famille}`;
       const op = s.famille === "produit" ? "on multiplie" : "on divise";
@@ -477,8 +522,9 @@ export const grandeursBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "L'unité cherchée raconte l'opération : kWh = kW × h, m² = m × m.",
     tags: ["grandeur", "produit", "qcm", "template"],
+    // 03/11/2026 : ★2, sans situation (CALCULS_SIMPLES).
     generate: () => {
-      const c = randomChoice(CALCULS_PRODUIT)();
+      const c = randomChoice(CALCULS_SIMPLES);
       const text = randomChoice([
         `Pour obtenir ${c.cherche}, en ${c.u}, que fait-on ?`,
         `${cap(c.cherche)} s'exprime en ${c.u}. Quel calcul permet de l'obtenir ?`,
@@ -905,11 +951,17 @@ export const grandeursBank: TutorBankItemV4[] = [
       ]);
       const valeur = randomChoice(c.v);
       const resultat = net(valeur * c.f);
+      // 03/11/2026 : ★2, sans situation : l'objet ne sert plus qu'à donner des
+      // valeurs vraisemblables ; le texte parle de la grandeur seule.
+      const g: string = ({ mesure: "une longueur", pèse: "une masse", contient: "une contenance", dure: "une durée" } as Record<string, string>)[c.verbe] ?? "une mesure";
       const text = randomChoice([
-        `${cap(c.objet)} ${c.verbe} ${fr(valeur)} ${c.de}. Convertis cette mesure en ${c.vers}.`,
-        `${cap(c.objet)} ${c.verbe} ${fr(valeur)} ${c.de}. Combien cela fait-il de ${c.versNom} ?`,
-        `Exprime en ${c.vers} : ${c.objet} qui ${c.verbe} ${fr(valeur)} ${c.de}.`,
-        `On note ${fr(valeur)} ${c.de} pour ${c.objet}. Quelle est cette mesure en ${c.vers} ?`,
+        `Convertis ${fr(valeur)} ${c.de} en ${c.vers}.`,
+        `${fr(valeur)} ${c.de}, combien cela fait-il de ${c.versNom} ?`,
+        `Exprime ${fr(valeur)} ${c.de} en ${c.vers}.`,
+        `Écris ${fr(valeur)} ${c.de} en ${c.vers}.`,
+        `${cap(g)} vaut ${fr(valeur)} ${c.de}. Convertis-la en ${c.vers}.`,
+        `${cap(g)} de ${fr(valeur)} ${c.de} : combien de ${c.versNom} ?`,
+        `Quelle est la mesure en ${c.vers} de ${fr(valeur)} ${c.de} ?`,
       ]);
       return {
         text,
