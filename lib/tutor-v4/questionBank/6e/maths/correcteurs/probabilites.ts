@@ -43,7 +43,8 @@ const horsGuillemets = (t: string) => t.replace(/«[^»]*»/g, "«»");
 /** Les groupes « 3 billes rouges » d'un passage → couleur ↦ effectif. */
 export function lireContenu(t: string): Map<string, number> {
   const m = new Map<string, number>();
-  const re = new RegExp(`(\\d+) ((?:[\\p{L}’-]+ ){1,3}?)${RE_COUL}`, "gu");
+  // 03/11/2026 : {0,3} — « 3 boules rouges, 2 bleues et 1 verte » (le nom une fois, coach ★1-★2).
+  const re = new RegExp(`(\\d+) ((?:[\\p{L}’-]+ ){0,3}?)${RE_COUL}`, "gu");
   for (const x of t.matchAll(re)) m.set(x[3], (m.get(x[3]) ?? 0) + Number(x[1]));
   return m;
 }
@@ -53,6 +54,10 @@ export function lireExperience(t0: string): Exp | null {
   const t = horsGuillemets(t0);
   const n = t.match(/numérot\p{L}* de (\d+) à (\d+)/u);
   if (n) return { kind: "num", a: Number(n[1]), b: Number(n[2]) };
+  // 03/11/2026 : « On lance un dé à 8 faces. », « On lance un dé. » (6 faces), ★1-★2.
+  const d = t.match(/dé à (\d+) faces/);
+  if (d) return { kind: "num", a: 1, b: Number(d[1]) };
+  if (/\bun dé(?!\p{L})/u.test(t)) return { kind: "num", a: 1, b: 6 };
   const c = lireContenu(t);
   if (c.size) return { kind: "urne", contenu: c };
   if (/pièce/.test(t)) return { kind: "piece" };
@@ -86,6 +91,11 @@ export function lireEvenement(lib: string, e: Exp): ((x: number | string) => boo
   let m: RegExpMatchArray | null;
   if (/\bimpair\b/.test(l)) conds.push((v) => v % 2 === 1);
   else if (/\bpair\b/.test(l)) conds.push((v) => v % 2 === 0);
+  // 03/11/2026 : formes courtes du coach ★1-★2.
+  if ((m = l.match(/plus de (\d+)/))) { const k = +m[1]; conds.push((v) => v > k); }
+  if ((m = l.match(/moins de (\d+)/))) { const k = +m[1]; conds.push((v) => v < k); }
+  if ((m = l.match(/(\d+) ou plus/))) { const k = +m[1]; conds.push((v) => v >= k); }
+  if ((m = l.match(/(\d+) ou moins/))) { const k = +m[1]; conds.push((v) => v <= k); }
   if ((m = l.match(/supérieur ou égal à (\d+)/))) { const k = +m[1]; conds.push((v) => v >= k); }
   else if ((m = l.match(/supérieur à (\d+)/))) { const k = +m[1]; conds.push((v) => v > k); }
   if ((m = l.match(/inférieur ou égal à (\d+)/))) { const k = +m[1]; conds.push((v) => v <= k); }
