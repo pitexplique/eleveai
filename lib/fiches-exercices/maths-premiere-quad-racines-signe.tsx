@@ -61,6 +61,9 @@ export const exercicesQuadRacinesSignePremiere: FicheExercicesData = {
       exercices: [
         {
           enonce: "Donner les racines de $f(x) = 3(x - 2)(x + 5)$.",
+          reponses: [
+            { attendu: "2 ; -5" },
+          ],
           correction:
             "Un produit est nul quand l'un de ses facteurs est nul.\n$3$ ne vaut jamais $0$ : il ne donne aucune racine.\n$x - 2 = 0$ donne $x = 2$ ; $x + 5 = 0$ donne $x = -5$.\nLes racines de $f$ sont $2$ et $-5$.\n✔️ $f(-5) = 3 \\times (-7) \\times 0 = 0$.\n⚠️ Le piège : lire « $5$ » dans $(x + 5)$. La racine est le nombre qui ANNULE la parenthèse : $-5$.\nLe tableau le montre : chaque facteur s'annule une fois ; $3$ ne s'annule jamais.",
           schema: ecranSeulement(
@@ -75,6 +78,9 @@ export const exercicesQuadRacinesSignePremiere: FicheExercicesData = {
         },
         {
           enonce: "Donner les racines de $g(x) = -x(2x - 6)$.",
+          reponses: [
+            { attendu: "0 ; 3" },
+          ],
           correction:
             "Les facteurs sont $-x$ et $2x - 6$.\n$-x = 0$ donne $x = 0$.\n$2x - 6 = 0$ donne $2x = 6$, donc $x = 3$.\nLes racines de $g$ sont $0$ et $3$.\n⚠️ Deux pièges : oublier la racine $0$, cachée dans le facteur $x$ ; et répondre $6$ au lieu de $3$ pour $2x - 6 = 0$.\nSur le dessin, la courbe de $g$ coupe l'axe des abscisses en $0$ et en $3$.",
           schema: parabole([-1, 4, -2, 6], [{ q: [-2, 6, 0] }], [{ x: 0, y: 0 }, { x: 3, y: 0 }]),
@@ -83,6 +89,10 @@ export const exercicesQuadRacinesSignePremiere: FicheExercicesData = {
         {
           enonce:
             "Écrire sous forme factorisée :\na) la fonction de degré $2$ de racines $-1$ et $4$, de coefficient $a = 2$ ;\nb) la fonction de degré $2$ de racines $0$ et $3$, de coefficient $a = -1$.",
+          reponses: [
+            { question: "a)", attendu: ["2(x+1)(x-4)","2(x-4)(x+1)"], exact: true },
+            { question: "b)", attendu: ["-x(x-3)","-(x-3)x","-1x(x-3)","-1(x-0)(x-3)"], exact: true },
+          ],
           correction:
             "On applique $f(x) = a(x - x_1)(x - x_2)$.\na) $f(x) = 2(x - (-1))(x - 4) = 2(x + 1)(x - 4)$.\nb) $g(x) = -1 \\times (x - 0)(x - 3) = -x(x - 3)$.\n✔️ On contrôle : $2(x + 1)(x - 4)$ s'annule bien en $-1$ et en $4$ ; $-x(x - 3)$ en $0$ et en $3$.\n⚠️ Le signe moins de la formule change le signe de la racine : $-1$ devient $(x + 1)$.\nSur le dessin, la parabole de $g$ : tournée vers le bas ($a = -1$), elle coupe l'axe en $0$ et en $3$.",
           schema: ecranSeulement(parabole([-1, 4, -2, 3], [{ q: [-1, 3, 0] }], [{ x: 0, y: 0 }, { x: 3, y: 0 }], { axe: 1.5 })),
@@ -90,6 +100,9 @@ export const exercicesQuadRacinesSignePremiere: FicheExercicesData = {
         },
         {
           enonce: "Vérifier que $x^2 - 2x - 8 = (x - 4)(x + 2)$, puis donner les racines de $x^2 - 2x - 8$.",
+          reponses: [
+            { question: "racines", attendu: "4 ; -2" },
+          ],
           correction:
             "On développe la forme factorisée : $(x - 4)(x + 2) = x^2 + 2x - 4x - 8 = x^2 - 2x - 8$ ✔️.\nLes deux écritures sont égales.\nSur la forme factorisée, on lit les racines : $4$ et $-2$.\n⭐ « Vérifier que » : on part de la forme factorisée et on DÉVELOPPE. C'est toujours le sens le plus facile.\n⚠️ $2x - 4x = -2x$ : le terme en $x$ se calcule avec les signes.\nSur le dessin, la courbe de $x^2 - 2x - 8$ coupe l'axe en $-2$ et en $4$ : les racines lues sur les facteurs.",
           schema: parabole([-3, 5, -10, 3], [{ q: [1, -2, -8] }], [{ x: -2, y: 0 }, { x: 4, y: 0 }], { grand: true }),
@@ -120,6 +133,9 @@ export const exercicesQuadRacinesSignePremiere: FicheExercicesData = {
         },
         {
           enonce: "Résoudre l'inéquation $(x - 2)(x + 3) < 0$.",
+          reponses: [
+            { attendu: ["]-3 ; 2[","x ∈ ]-3 ; 2["] },
+          ],
           correction:
             "Racines : $2$ et $-3$. Le coefficient $a$ vaut $1 > 0$.\nLe produit est du signe de $a$ à l'extérieur des racines, du signe contraire entre elles : il est négatif entre $-3$ et $2$.\nL'inégalité est stricte : les racines, où le produit vaut $0$, sont exclues.\nL'ensemble des solutions est $]-3 ; 2[$.\n⚠️ Les crochets : « $< 0$ » exclut les racines, crochets tournés vers l'extérieur. Avec « $\\leqslant 0$ », on aurait $[-3 ; 2]$.",
           schema: ecranSeulement(droite(-5, 4, { de: -3, a: 2, deInclus: false, aInclus: false })),
@@ -129,6 +145,10 @@ export const exercicesQuadRacinesSignePremiere: FicheExercicesData = {
           enonce:
             "La courbe ci-dessous représente une fonction $f$ de degré $2$, et l'on sait que $f(0) = -4$.\na) Lire les racines de $f$.\nb) En déduire que $f(x) = a(x + 2)(x - 4)$, puis trouver $a$ grâce à $f(0) = -4$.",
           figure: parabole([-3, 5, -5, 4], [{ q: [0.5, -1, -4] }], [{ x: -2, y: 0 }, { x: 4, y: 0 }]),
+          reponses: [
+            { question: "a)", attendu: "-2 ; 4" },
+            { question: "b) a", attendu: ["0,5","a = 0,5"] },
+          ],
           correction:
             "a) La courbe coupe l'axe des abscisses en $-2$ et en $4$ : ce sont les racines.\nb) Racines $-2$ et $4$ : $f(x) = a(x - (-2))(x - 4) = a(x + 2)(x - 4)$.\n$f(0) = a \\times 2 \\times (-4) = -8a$. Or $f(0) = -4$ : $-8a = -4$, donc $a = 0{,}5$.\n$f(x) = 0{,}5(x + 2)(x - 4)$.\n✔️ $a = 0{,}5 > 0$ : la parabole est bien tournée vers le haut.\n⭐ Les racines donnent les facteurs ; UN autre point de la courbe donne $a$.",
           micros: ["quad_ecrire_factorisee", "quad_racines_factorisee"],
@@ -151,6 +171,10 @@ export const exercicesQuadRacinesSignePremiere: FicheExercicesData = {
           titre: "L'atelier de céramique",
           enonce:
             "Un atelier de céramique fabrique $x$ centaines de bols par mois ($0 \\leqslant x \\leqslant 12$). Son bénéfice, en milliers d'euros, est $B(x) = -(x - 2)(x - 10)$.\na) Donner les racines de $B$.\nb) Dresser le tableau de signes de $B(x)$ sur $[0 ; 12]$.\nc) Pour quelles productions l'atelier fait-il un bénéfice strictement positif ?",
+          reponses: [
+            { question: "a)", attendu: "2 ; 10" },
+            { question: "c)", attendu: ["]2 ; 10[","x ∈ ]2 ; 10["] },
+          ],
           correction:
             "a) $x - 2 = 0$ donne $2$ ; $x - 10 = 0$ donne $10$. Les racines sont $2$ et $10$.\nb) Trois facteurs : $-1$ (toujours négatif), $x - 2$ et $x - 10$. La règle des signes donne : $B(x)$ négatif sur $[0 ; 2[$, positif sur $]2 ; 10[$, négatif sur $]10 ; 12]$.\nc) $B(x) > 0$ sur $]2 ; 10[$ : l'atelier gagne de l'argent pour une production strictement comprise entre $200$ et $1\\,000$ bols.\n⚠️ En dessous de $200$ bols, les frais fixes ne sont pas couverts ; au-delà de $1\\,000$, il faut embaucher et le bénéfice redevient négatif.",
           schema: tableauSignes(["0", "2", "10", "12"], [
@@ -166,6 +190,11 @@ export const exercicesQuadRacinesSignePremiere: FicheExercicesData = {
           enonce:
             "Une grenouille saute d'une pierre posée au niveau de l'eau, et retombe $10$ dm plus loin. Sa trajectoire est une parabole de coefficient $a = -0{,}1$ ; $x$ et $h(x)$ sont en décimètres, et le saut part de $x = 0$.\na) Quelles sont les racines de $h$ ? Écrire $h(x)$ sous forme factorisée.\nb) Vérifier que $h(x) = -0{,}1x^2 + x$.\nc) Quelle hauteur la grenouille atteint-elle au milieu de son saut ?",
           figure: parabole([-1, 11, -1, 4], [{ q: [-0.1, 1, 0] }], [], { grand: true }),
+          reponses: [
+            { question: "a) racines", attendu: "0 ; 10" },
+            { question: "a) forme factorisée", attendu: ["-0,1x(x-10)","-0,1(x-10)x","-0,1(x-0)(x-10)"], exact: true },
+            { question: "c)", attendu: ["2,5 dm","2,5","25 cm"] },
+          ],
           correction:
             "a) Au départ et à l'arrivée, la hauteur est nulle : les racines sont $0$ et $10$.\n$h(x) = -0{,}1(x - 0)(x - 10) = -0{,}1x(x - 10)$.\nb) On développe : $-0{,}1x(x - 10) = -0{,}1x^2 + 0{,}1 \\times 10x = -0{,}1x^2 + x$ ✔️.\nc) Le milieu du saut est en $x = 5$ : $h(5) = -0{,}1 \\times 5 \\times (-5) = 2{,}5$ dm, soit $25$ cm.\n⚠️ Le facteur $x$ vient de la racine $0$ : $(x - 0) = x$. On ne l'oublie pas.",
           micros: ["quad_ecrire_factorisee", "quad_verifier_developpee", "quad_racines_factorisee"],
@@ -175,6 +204,12 @@ export const exercicesQuadRacinesSignePremiere: FicheExercicesData = {
           enonce:
             "Une nuit de printemps, dans un verger, la température (en °C) $t$ heures après minuit est modélisée par $T(t) = 0{,}5(t - 2)(t - 8)$, pour $t$ entre $0$ et $10$.\na) À quelles heures la température est-elle de $0$ °C ?\nb) Dresser le tableau de signes de $T(t)$ sur $[0 ; 10]$.\nc) Pendant quelles heures gèle-t-il ($T(t) < 0$) ? Le vérifier sur la courbe.\nd) Quelle est la température la plus basse, et à quelle heure ?",
           figure: parabole([-1, 11, -5, 9], [{ q: [0.5, -5, 8] }], [{ x: 2, y: 0 }, { x: 8, y: 0 }], { grand: true }),
+          reponses: [
+            { question: "a)", attendu: ["2 ; 8","2 h ; 8 h"] },
+            { question: "c)", attendu: ["]2 ; 8[","t ∈ ]2 ; 8["] },
+            { question: "d) température", attendu: "-4,5" },
+            { question: "d) heure", attendu: ["5 h","5"] },
+          ],
           correction:
             "a) $T(t) = 0$ pour $t = 2$ ou $t = 8$ : à $2$ h et à $8$ h du matin.\nb) $0{,}5 > 0$ ; $t - 2$ change de signe en $2$, $t - 8$ en $8$. $T(t)$ est positif sur $[0 ; 2[$, négatif sur $]2 ; 8[$, positif sur $]8 ; 10]$.\nc) Il gèle pour $t \\in \\, ]2 ; 8[$ : de $2$ h à $8$ h, soit $6$ heures. Sur la courbe, c'est la partie SOUS l'axe.\nd) Le plus froid est au milieu des racines, à $5$ h : $T(5) = 0{,}5 \\times 3 \\times (-3) = -4{,}5$ °C.\n⭐ Pour protéger les fleurs des arbres, l'arboriculteur sait maintenant QUAND agir : entre $2$ h et $8$ h.",
           schema: ecranSeulement(
@@ -195,6 +230,10 @@ export const exercicesQuadRacinesSignePremiere: FicheExercicesData = {
           titre: "La brasserie artisanale",
           enonce:
             "Le bénéfice d'une brasserie artisanale, en milliers d'euros, pour $x$ milliers de litres de bière, est $B(x) = -x^2 + 9x - 14$. Un élève affirme que $B(x) = -(x - 2)(x - 7)$.\na) Vérifier son affirmation.\nb) En déduire les productions pour lesquelles le bénéfice est nul.\nc) Un autre élève propose $B(x) = (2 - x)(x - 7)$. A-t-il raison ?",
+          reponses: [
+            { question: "b)", attendu: "2 ; 7" },
+            { question: "c)", attendu: ["oui","vrai"] },
+          ],
           correction:
             "a) $(x - 2)(x - 7) = x^2 - 7x - 2x + 14 = x^2 - 9x + 14$, donc $-(x - 2)(x - 7) = -x^2 + 9x - 14$ ✔️.\nb) $B(x) = 0$ pour $x = 2$ ou $x = 7$ : pour $2\\,000$ et $7\\,000$ litres, la brasserie ne gagne ni ne perd rien.\nc) Oui : $2 - x = -(x - 2)$, donc $(2 - x)(x - 7) = -(x - 2)(x - 7)$. C'est la même expression, écrite autrement.\n✔️ En développant : $(2 - x)(x - 7) = 2x - 14 - x^2 + 7x = -x^2 + 9x - 14$.\n⚠️ Une fonction peut avoir plusieurs écritures factorisées justes : on les compare en DÉVELOPPANT.",
           schema: ecranSeulement(parabole([-1, 8, -3, 7], [{ q: [-1, 9, -14] }], [{ x: 2, y: 0 }, { x: 7, y: 0 }])),
@@ -204,6 +243,9 @@ export const exercicesQuadRacinesSignePremiere: FicheExercicesData = {
           titre: "Le potager",
           enonce:
             "Un jardinier entoure un potager rectangulaire de $24$ m de bordure en bois. Un côté mesure $x$ m ($0 \\leqslant x \\leqslant 12$), l'autre $12 - x$ m, et l'aire est $A(x) = x(12 - x)$. Il veut une aire d'au moins $20$ m².\na) Montrer que $A(x) - 20 = -(x - 2)(x - 10)$.\nb) Dresser le tableau de signes de $A(x) - 20$ sur $[0 ; 12]$.\nc) Résoudre $A(x) \\geqslant 20$ et conclure.",
+          reponses: [
+            { question: "c)", attendu: ["[2 ; 10]","x ∈ [2 ; 10]"] },
+          ],
           correction:
             "a) $A(x) - 20 = 12x - x^2 - 20 = -x^2 + 12x - 20$. Et $-(x - 2)(x - 10) = -(x^2 - 12x + 20) = -x^2 + 12x - 20$ ✔️.\nb) Les facteurs $-1$, $x - 2$ et $x - 10$ donnent : négatif sur $[0 ; 2[$, positif sur $]2 ; 10[$, négatif sur $]10 ; 12]$, et nul en $2$ et en $10$.\nc) $A(x) \\geqslant 20$ équivaut à $A(x) - 20 \\geqslant 0$, soit $x \\in [2 ; 10]$ : les racines sont INCLUSES, car l'inégalité est large.\nLe côté doit mesurer entre $2$ m et $10$ m.\n⭐ Pour comparer $A(x)$ à $20$, on étudie le signe de la DIFFÉRENCE $A(x) - 20$.",
           schema: ecranSeulement(
@@ -221,6 +263,11 @@ export const exercicesQuadRacinesSignePremiere: FicheExercicesData = {
           enonce:
             "Pour franchir une rivière, un village a construit un pont en arc. On a représenté l'arche ci-dessous ($x$ et $h(x)$ en mètres), et sa hauteur au milieu est de $4{,}5$ m.\na) Lire les racines de $h$.\nb) Écrire $h(x) = a(x + 3)(x - 3)$ et trouver $a$ grâce à la hauteur au milieu.\nc) Développer $h(x)$.",
           figure: parabole([-4, 4, -1, 6], [{ q: [-0.5, 0, 4.5] }]),
+          reponses: [
+            { question: "a)", attendu: "-3 ; 3" },
+            { question: "b) a", attendu: ["-0,5","a = -0,5"] },
+            { question: "c)", attendu: ["-0,5x^2+4,5","4,5-0,5x^2"], exact: true },
+          ],
           correction:
             "a) L'arche touche l'eau en $-3$ et en $3$ : ce sont les racines. L'arche mesure $6$ m de large.\nb) Au milieu, $x = 0$ : $h(0) = a \\times 3 \\times (-3) = -9a$. Or $h(0) = 4{,}5$ : $-9a = 4{,}5$, donc $a = -0{,}5$.\n$h(x) = -0{,}5(x + 3)(x - 3)$.\nc) $(x + 3)(x - 3) = x^2 - 9$, donc $h(x) = -0{,}5x^2 + 4{,}5$.\n✔️ $a = -0{,}5 < 0$ : l'arche est tournée vers le bas, comme sur le dessin.\n⚠️ $-9a = 4{,}5$ donne $a = \\dfrac{4{,}5}{-9} = -0{,}5$ : le signe moins ne se perd pas.",
           micros: ["quad_ecrire_factorisee", "quad_racines_factorisee", "quad_verifier_developpee"],
@@ -230,6 +277,10 @@ export const exercicesQuadRacinesSignePremiere: FicheExercicesData = {
           enonce:
             "La trésorerie d'une jeune entreprise, en milliers d'euros, $t$ mois après sa création, est modélisée par $S(t) = 0{,}5(t - 1)(t - 7)$, pour $t$ entre $0$ et $9$.\na) Lire sur la courbe les mois où la trésorerie est nulle, puis le retrouver par le calcul.\nb) Dresser le tableau de signes de $S(t)$ sur $[0 ; 9]$.\nc) Pendant combien de mois la trésorerie est-elle négative ?",
           figure: parabole([-1, 9, -5, 9], [{ q: [0.5, -4, 3.5] }], [], { grand: true }),
+          reponses: [
+            { question: "a)", attendu: "1 ; 7" },
+            { question: "c)", attendu: "6" },
+          ],
           correction:
             "a) La courbe coupe l'axe en $1$ et en $7$. Par le calcul : $S(t) = 0$ pour $t - 1 = 0$ ou $t - 7 = 0$, soit $t = 1$ ou $t = 7$.\nb) $0{,}5 > 0$ : $S(t)$ est positif sur $[0 ; 1[$, négatif sur $]1 ; 7[$, positif sur $]7 ; 9]$.\nc) La trésorerie est négative pendant $7 - 1 = 6$ mois : l'entreprise doit emprunter pour tenir jusqu'au septième mois.\n⭐ La courbe et le tableau disent la même chose : SOUS l'axe, c'est le « − » du tableau.",
           schema: ecranSeulement(
@@ -248,6 +299,9 @@ export const exercicesQuadRacinesSignePremiere: FicheExercicesData = {
         },
         {
           enonce: "Résoudre l'inéquation $(x + 4)(x - 1) \\geqslant 0$.",
+          reponses: [
+            { attendu: ["]-∞ ; -4] ∪ [1 ; +∞[","x ∈ ]-∞ ; -4] ∪ [1 ; +∞[","]-∞ ; -4] U [1 ; +∞["] },
+          ],
           correction:
             "Racines : $-4$ et $1$. Le coefficient $a$ vaut $1 > 0$.\nLe produit est du signe de $a$, donc positif, à l'EXTÉRIEUR des racines, et négatif entre elles.\nL'inégalité est large : les racines, où le produit vaut $0$, sont solutions.\nL'ensemble des solutions est $]-\\infty ; -4] \\cup [1 ; +\\infty[$.\n⚠️ La réponse est en DEUX morceaux, réunis par $\\cup$. Répondre $[-4 ; 1]$, c'est donner l'endroit où le produit est NÉGATIF.\n⚠️ Du côté de l'infini, le crochet est toujours ouvert.",
           schema: ecranSeulement(intervalles(-6, 3, [{ a: -4, aInclus: true, label: "solutions" }, { de: 1, deInclus: true, label: "solutions" }])),
@@ -270,6 +324,12 @@ export const exercicesQuadRacinesSignePremiere: FicheExercicesData = {
           titre: "Le lob au football",
           enonce:
             "Un joueur tente un lob. La hauteur du ballon, en mètres, est $h(x) = -0{,}05x(x - 20)$, où $x$ est la distance horizontale parcourue depuis la frappe, en mètres.\na) Où le ballon retombe-t-il ?\nb) Vérifier que $h(x) = -0{,}05x^2 + x$.\nc) Vérifier que $h(x) - 1{,}8 = -0{,}05(x - 2)(x - 18)$.\nd) Dresser le tableau de signes de $h(x) - 1{,}8$ sur $[0 ; 20]$. Sur quelle distance le ballon est-il à plus de $1{,}8$ m du sol ?\ne) Un défenseur placé à $3$ m du tireur touche le ballon jusqu'à $1{,}8$ m de haut. Peut-il l'intercepter ?",
+          reponses: [
+            { question: "a)", attendu: ["20 m","20"] },
+            { question: "d) intervalle", attendu: ["]2 ; 18[","x ∈ ]2 ; 18["] },
+            { question: "d) distance", attendu: ["16 m","16"] },
+            { question: "e)", attendu: ["non","faux"] },
+          ],
           correction:
             "a) $h(x) = 0$ pour $x = 0$ (la frappe) ou $x = 20$ : le ballon retombe à $20$ m.\nb) $-0{,}05x(x - 20) = -0{,}05x^2 + 0{,}05 \\times 20x = -0{,}05x^2 + x$ ✔️.\nc) $-0{,}05(x - 2)(x - 18) = -0{,}05(x^2 - 20x + 36) = -0{,}05x^2 + x - 1{,}8$, et c'est bien $h(x) - 1{,}8$ ✔️.\nd) Le coefficient $-0{,}05$ est négatif : $h(x) - 1{,}8$ est positif ENTRE les racines $2$ et $18$.\nLe ballon est à plus de $1{,}8$ m pour $x \\in \\, ]2 ; 18[$ : sur $16$ m.\ne) $3$ est dans $]2 ; 18[$ : là, le ballon passe au-dessus de $1{,}8$ m. Le défenseur ne peut pas l'intercepter.\n✔️ $h(3) = -0{,}05 \\times 3 \\times (-17) = 2{,}55$ m.",
           schema: tableauSignes(["0", "2", "18", "20"], [
@@ -285,6 +345,11 @@ export const exercicesQuadRacinesSignePremiere: FicheExercicesData = {
           enonce:
             "Une ferme maraîchère bio vend $x$ centaines de paniers de légumes par an ($0 \\leqslant x \\leqslant 12$). Son bénéfice, en milliers d'euros, est $B(x) = -0{,}5x^2 + 7x - 20$.\na) Vérifier que $B(x) = -0{,}5(x - 4)(x - 10)$.\nb) Donner les racines de $B$, et les repérer sur la courbe.\nc) Dresser le tableau de signes de $B(x)$ sur $[0 ; 12]$, puis résoudre $B(x) > 0$.\nd) Calculer $B(7)$ et interpréter.",
           figure: parabole([-1, 12, -4, 6], [{ q: [-0.5, 7, -20] }], [{ x: 4, y: 0 }, { x: 10, y: 0 }], { grand: true }),
+          reponses: [
+            { question: "b)", attendu: "4 ; 10" },
+            { question: "c)", attendu: ["]4 ; 10[","x ∈ ]4 ; 10["] },
+            { question: "d)", attendu: "4,5" },
+          ],
           correction:
             "a) $(x - 4)(x - 10) = x^2 - 10x - 4x + 40 = x^2 - 14x + 40$, et $-0{,}5(x^2 - 14x + 40) = -0{,}5x^2 + 7x - 20$ ✔️.\nb) Les racines sont $4$ et $10$ : les deux points où la courbe coupe l'axe.\nc) Le coefficient $-0{,}5$ est négatif : $B(x)$ est négatif sur $[0 ; 4[$, positif sur $]4 ; 10[$, négatif sur $]10 ; 12]$.\n$B(x) > 0$ pour $x \\in \\, ]4 ; 10[$ : la ferme est bénéficiaire entre $400$ et $1\\,000$ paniers.\nd) $B(7) = -0{,}5 \\times 3 \\times (-3) = 4{,}5$ : pour $700$ paniers, le bénéfice est de $4\\,500$ €. C'est le sommet, au milieu des racines.\n⚠️ Le tableau de signes se fait sur la forme FACTORISÉE : sur $-0{,}5x^2 + 7x - 20$, on ne lit rien.",
           schema: ecranSeulement(
@@ -301,6 +366,11 @@ export const exercicesQuadRacinesSignePremiere: FicheExercicesData = {
           titre: "La crue",
           enonce:
             "Pendant une crue, on mesure chaque jour l'écart $d(t)$ entre le niveau d'une rivière et sa cote d'alerte, en mètres ($d(t) > 0$ : la rivière est au-dessus de la cote). Elle franchit la cote d'alerte aux jours $2$ et $8$, et au jour $0$, elle est $1{,}6$ m en dessous.\na) On modélise $d$ par une fonction de degré $2$. Justifier que $d(t) = a(t - 2)(t - 8)$, puis trouver $a$.\nb) Vérifier que $d(t) = -0{,}1t^2 + t - 1{,}6$.\nc) Dresser le tableau de signes de $d(t)$ sur $[0 ; 10]$. Pendant combien de jours la rivière est-elle au-dessus de la cote d'alerte ?\nd) De combien la dépasse-t-elle au plus fort de la crue ?",
+          reponses: [
+            { question: "a)", attendu: ["-0,1","a = -0,1"] },
+            { question: "c)", attendu: "6" },
+            { question: "d)", attendu: ["0,9 m","0,9"] },
+          ],
           correction:
             "a) $d$ s'annule en $2$ et en $8$ : ce sont ses racines, donc $d(t) = a(t - 2)(t - 8)$.\n$d(0) = a \\times (-2) \\times (-8) = 16a$. Or $d(0) = -1{,}6$ : $16a = -1{,}6$, donc $a = -0{,}1$.\nb) $-0{,}1(t - 2)(t - 8) = -0{,}1(t^2 - 10t + 16) = -0{,}1t^2 + t - 1{,}6$ ✔️.\nc) $a = -0{,}1 < 0$ : $d(t)$ est négatif sur $[0 ; 2[$, positif sur $]2 ; 8[$, négatif sur $]8 ; 10]$.\nLa rivière est au-dessus de la cote d'alerte entre le jour $2$ et le jour $8$ : pendant $6$ jours.\nd) Le plus fort de la crue est au milieu des racines, au jour $5$ : $d(5) = -0{,}1 \\times 3 \\times (-3) = 0{,}9$ m au-dessus de la cote.\n⭐ Connaître ces dates, c'est ce qui permet à une commune d'organiser l'évacuation, puis le retour.",
           schema: tableauSignes(
@@ -320,6 +390,10 @@ export const exercicesQuadRacinesSignePremiere: FicheExercicesData = {
           enonce:
             "Un club de sport compte $x$ centaines d'abonnés ($0 \\leqslant x \\leqslant 12$). Sa recette annuelle est $R(x) = -x^2 + 14x$ et ses coûts sont $C(x) = 3x + 18$, en milliers d'euros. Le dessin montre $R$ (en bleu) et $C$ (en orange), en dizaines de milliers d'euros.\na) Montrer que le bénéfice $B(x) = R(x) - C(x)$ vaut $-x^2 + 11x - 18$, puis que $B(x) = -(x - 2)(x - 9)$.\nb) Pour quels nombres d'abonnés le bénéfice est-il nul ? Où le voit-on sur le dessin ?\nc) Dresser le tableau de signes de $B(x)$, et dire pour quels effectifs le club est bénéficiaire.",
           figure: parabole([-1, 12, -1, 6], [{ q: [-0.1, 1.4, 0] }, { q: [0, 0.3, 1.8], couleur: ORANGE }], [{ x: 2, y: 2.4 }, { x: 9, y: 4.5 }], { grand: true }),
+          reponses: [
+            { question: "b)", attendu: "2 ; 9" },
+            { question: "c)", attendu: ["]2 ; 9[","x ∈ ]2 ; 9["] },
+          ],
           correction:
             "a) $B(x) = -x^2 + 14x - 3x - 18 = -x^2 + 11x - 18$.\nEt $-(x - 2)(x - 9) = -(x^2 - 11x + 18) = -x^2 + 11x - 18$ ✔️.\nb) $B(x) = 0$ pour $x = 2$ ou $x = 9$ : pour $200$ et $900$ abonnés, la recette couvre juste les coûts.\nSur le dessin, ce sont les deux points où la courbe bleue croise la droite orange.\nc) $-(x - 2)(x - 9)$ est négatif sur $[0 ; 2[$, positif sur $]2 ; 9[$, négatif sur $]9 ; 12]$.\nLe club est bénéficiaire entre $200$ et $900$ abonnés, là où la courbe de la recette passe AU-DESSUS de la droite des coûts.\n⚠️ $R(x) - C(x)$ : on soustrait TOUT le coût, $-(3x + 18) = -3x - 18$.",
           schema: ecranSeulement(
