@@ -59,8 +59,8 @@ Questions en commentaire : calculer 90/180 = 50 % ; formes l'intrus 0,5 ; appliq
 
 Ne pousse rien sans le signal du soir de Frédéric.
 
-## ⏳ 03/11 : reprise des DÉFAUTS MINEURS (demande de Frédéric : « reprends les défauts même mineurs »)
-- Brief : `manim/brief-agent-defauts-lycee.md` (temps inchangés : voix, marques, durées ; seulement tailles/positions).
-- 3 agents lancés le 03/11 depuis la session 8004c6a9 : defauts-a (2de 01 proportion, 1re 04 partie-tout, 01 calculer), defauts-b (02 formes, 03 appliquer, 1re 05 tout-partie), defauts-c (STMG 05, STMG 06, pourcentage de pourcentage). Ils écrivent leur rapport dans `side-session-notes/local_ffe0b8f1-eecf-4810-98b6-d50f665c9a36/rapport-defauts-<a|b|c>.md`. NE PAS les relancer.
-- À faire à chaque rapport : `python scripts/verifier-bords-video.py` sur chaque mp4, planche des écrans corrigés regardée, durée ±0,1 s et débuts des « Question ! » ±0,5 s identiques (sinon recalculer chapitres/questions au manifeste) ; puis committer les scripts par chemin.
-- À la fin : renvoyer les 14 dossiers sur R2 (`r2.sh` du scratchpad 8004c6a9 : rclone copy + check par dossier ; même noms, donc rien à changer au manifeste, à la table R2 ni au coach), puis mettre ce prompt à jour. Ne rien pousser.
+## ✅ 03/11 : DÉFAUTS MINEURS repris (demande de Frédéric : « reprends les défauts même mineurs »)
+- Brief : `manim/brief-agent-defauts-lycee.md`. Les 3 agents (vague 4) se sont arrêtés vers 3 h 35 sans rapport ; leurs rendus finis ont été récupérés (appliquer, tout-partie copiés depuis les media_dir), pourcentage de pourcentage rendu par la session de reprise.
+- Commits `727084ed` (8 épisodes) et `72b3a018` (pourcentage de pourcentage). Les 28 mp4 : bords 0, durées identiques à avant (donc chapitres et questions du manifeste inchangés), planches regardées.
+- R2 : envoi des 14 dossiers lancé le 03/11 (`r2.sh` du scratchpad 8004c6a9, rclone copy + check) ; ⏳ à CONTRÔLER : relancer `r2.sh` et attendre « 0 differences, 6 matching » partout. Noms inchangés : rien à faire sur la table R2, le manifeste ni le coach.
+- Reste : publier sur YouTube (chaque paysage AVANT son short). Rien n'est poussé.
