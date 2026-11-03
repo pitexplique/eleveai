@@ -8,7 +8,7 @@ import { Menu, X, GraduationCap, LogOut, ChevronDown } from "lucide-react";
 import { track } from "@vercel/analytics";
 import { useEleve } from "@/context/EleveContext";
 import AvatarRond from "@/components/AvatarRond";
-import { lireAvatar } from "@/lib/passions";
+import { chargerAvatar, lireAvatar } from "@/lib/passions";
 import { createClient } from "@/lib/supabase/client";
 import { ouvrirEcrireAuProf } from "@/lib/ecrireAuProf";
 import { urlGuidePour } from "@/lib/matrice/guides";
@@ -514,12 +514,14 @@ export default function Header() {
   }
 
   const eleveLabel = eleve?.nom || eleve?.code_eleve || "Élève";
-  // L'avatar choisi dans « Mon espace » (31/10/2026) : lu dans le navigateur
-  // seulement — pas de requête à chaque page ; « Mon espace » le synchronise.
+  // L'avatar choisi dans « Mon espace » (31/10/2026) : lu dans le navigateur.
+  // 03/11 : sur un poste où il n'a jamais été rangé (salle informatique), on le
+  // demande UNE fois à la base — sinon il n'apparaissait qu'après « Mon espace ».
   const [avatar, setAvatar] = useState<string | null>(null);
   useEffect(() => {
     const lire = () => setAvatar(eleve ? lireAvatar(eleve) : null);
     lire();
+    if (eleve?.token && !lireAvatar(eleve)) chargerAvatar(eleve).then((a) => a && setAvatar(a));
     window.addEventListener("eleveai-avatar", lire);
     return () => window.removeEventListener("eleveai-avatar", lire);
   }, [eleve]);
@@ -929,8 +931,15 @@ export default function Header() {
               {/* 28/10 : « Mon espace » et « Participer » retirés de la barre
                   (Frédéric) : le tableau de bord est la 1re ligne du menu du
                   compte ; avis, erreurs et bêta testeurs passent au pied de page. */}
+              {/* 03/11/2026 : l'avatar était DANS ce bloc `hidden lg:flex` — sous
+                  1024 px (téléphone, tablette, fenêtre réduite) les élèves ne le
+                  voyaient jamais. Il sort du bloc, et le toucher ouvre « Mon espace ». */}
+              {!isStaff && avatar && (
+                <Link href={dashboardHref} aria-label="Mon avatar (Mon espace)" className="flex">
+                  <AvatarRond avatar={avatar} taille="s" />
+                </Link>
+              )}
               <div className="hidden items-center gap-2 lg:flex">
-                {!isStaff && <AvatarRond avatar={avatar} taille="s" />}
                 <MenuCompte
                   nom={eleveLabel}
                   sousTitre={dashboardSousTitre}

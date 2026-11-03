@@ -18,6 +18,7 @@ export default function CarteAvatar() {
   const [ouvert, setOuvert] = useState(false);
   const [emoji, setEmoji] = useState("🐢");
   const [couleur, setCouleur] = useState("bleu");
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     chargerAvatar(eleve).then((a) => {
@@ -29,7 +30,10 @@ export default function CarteAvatar() {
       }
     });
     chargerPassions(eleve).then((p) => setPassions(p ?? []));
-  }, [eleve]);
+    // Sur l'élève, pas sur l'objet : la classe relue en base recrée l'objet et
+    // remettait l'ancien avatar pendant que l'élève choisissait (03/11/2026).
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [eleve?.code_etablissement, eleve?.code_eleve]);
 
   // Ses passions en tête de la galerie, sans doublon.
   const icones = [...new Set([...passions.map((p) => libellePassion(p).emoji), ...AVATARS])];
@@ -39,6 +43,7 @@ export default function CarteAvatar() {
     await enregistrerAvatar(eleve, a);
     setAvatar(a);
     setOuvert(false);
+    setMessage("✅ Enregistré !");
     window.dispatchEvent(new Event("eleveai-avatar")); // l'en-tête se met à jour
   }
 
@@ -48,14 +53,20 @@ export default function CarteAvatar() {
         {avatar ? <AvatarRond avatar={avatar} taille="l" /> : <span className="text-5xl">🙂</span>}
         <div>
           <h2 className="text-xl font-black text-slate-900">Mon avatar</h2>
-          <p className="text-sm font-semibold text-slate-500">Choisis ton image : pas besoin de photo.</p>
+          <p className="text-sm font-semibold text-slate-500">
+            {ouvert ? "Touche une icône et une couleur, puis « Enregistrer »." : "Choisis ton image : pas besoin de photo."}
+          </p>
         </div>
         <button
-          onClick={() => setOuvert(!ouvert)}
+          onClick={() => {
+            setOuvert(!ouvert);
+            setMessage("");
+          }}
           className="ml-auto rounded-full bg-sky-600 px-5 py-3 text-sm font-black text-white shadow hover:bg-sky-500"
         >
           {avatar ? "✏️ Changer" : "Choisir mon avatar"}
         </button>
+        {message && <span className="w-full text-right font-bold text-emerald-700">{message}</span>}
       </div>
 
       {ouvert && (
@@ -90,7 +101,7 @@ export default function CarteAvatar() {
             onClick={valider}
             className="rounded-2xl bg-emerald-500 px-6 py-3 text-lg font-black text-white shadow hover:bg-emerald-600"
           >
-            C&apos;est mon avatar !
+            💾 Enregistrer
           </button>
         </div>
       )}

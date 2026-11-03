@@ -13,7 +13,6 @@ import {
   CENTRE_PAR_ID,
   EMOJI_CENTRE,
   MAX_PASSIONS,
-  PRECISIONS_CENTRE,
   centreDePassion,
   libellePassion,
   type TrancheAge,
@@ -59,7 +58,6 @@ export default function PassionsClient({ videos }: { videos: VideoPassion[] }) {
   const classe = classeNormalisee(eleve?.classe);
 
   const [choix, setChoix] = useState<string[]>([]);
-  const [ouvert, setOuvert] = useState<string | null>(null); // centre dont on montre les précisions
   const [autre, setAutre] = useState("");
   const [etape, setEtape] = useState<"chargement" | "choisir" | "ressources">("chargement");
 
@@ -95,20 +93,12 @@ export default function PassionsClient({ videos }: { videos: VideoPassion[] }) {
   function basculerCentre(centre: string) {
     if (choisi(centre)) {
       setChoix(choix.filter((p) => p.split(":")[0] !== centre));
-      if (ouvert === centre) setOuvert(null);
       return;
     }
     if (plein) return;
+    // 03/11/2026, Frédéric : « simplement appuyer sur les icônes pour les
+    // sélectionner avec bouton enregistrer ». Plus de « Lequel ? » qui s'ouvre.
     setChoix([...choix, centre]);
-    setOuvert(PRECISIONS_CENTRE[centre] ? centre : null);
-    // « Lequel ? » s'ouvre sous la grille : sur un téléphone, on l'amène à l'écran.
-    if (PRECISIONS_CENTRE[centre])
-      setTimeout(() => document.getElementById("precisions")?.scrollIntoView({ behavior: "smooth", block: "center" }), 50);
-  }
-
-  function preciser(centre: string, precision: string) {
-    const p = `${centre}:${precision}`;
-    setChoix(choix.map((x) => (x.split(":")[0] === centre ? (x === p ? centre : p) : x)));
   }
 
   function ajouterAutre() {
@@ -120,7 +110,6 @@ export default function PassionsClient({ videos }: { videos: VideoPassion[] }) {
 
   async function valider() {
     await enregistrerPassions(eleve, choix);
-    setOuvert(null);
     setEtape("ressources");
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -190,32 +179,6 @@ export default function PassionsClient({ videos }: { videos: VideoPassion[] }) {
               })}
             </div>
 
-            {/* Les précisions : « Quel sport ? » → Lutte */}
-            {ouvert && choisi(ouvert) && (
-              <section id="precisions" className="mt-5 rounded-2xl border-2 border-amber-300 bg-white p-4 shadow">
-                <h2 className="text-xl font-black text-slate-900">
-                  {EMOJI_CENTRE[ouvert]} Lequel ? <span className="text-base font-semibold text-slate-500">(si tu veux)</span>
-                </h2>
-                <div className="mt-3 grid grid-cols-3 gap-2 sm:grid-cols-4 lg:grid-cols-6">
-                  {PRECISIONS_CENTRE[ouvert].map((p) => {
-                    const actif = choix.includes(`${ouvert}:${p.id}`);
-                    return (
-                      <button
-                        key={p.id}
-                        onClick={() => preciser(ouvert, p.id)}
-                        className={`flex flex-col items-center gap-1 rounded-xl border-2 p-2 ${
-                          actif ? "border-amber-500 bg-amber-100 ring-2 ring-amber-300" : "border-slate-200 bg-white hover:border-amber-300"
-                        }`}
-                      >
-                        <span className="text-4xl leading-none">{p.emoji}</span>
-                        <span className="text-xs font-bold text-slate-700">{p.nom}</span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </section>
-            )}
-
             {/* Une passion qui n'est pas dans la liste */}
             <div className="mt-5 flex flex-wrap items-center gap-2 rounded-2xl border border-slate-200 bg-white p-3">
               <span className="text-3xl">⭐</span>
@@ -252,7 +215,7 @@ export default function PassionsClient({ videos }: { videos: VideoPassion[] }) {
                 disabled={choix.length === 0}
                 className="rounded-2xl bg-emerald-500 px-8 py-4 text-xl font-black text-white shadow-lg hover:bg-emerald-600 disabled:opacity-40"
               >
-                C&apos;est parti ! →
+                💾 Enregistrer
               </button>
             </div>
             {!eleve && (
