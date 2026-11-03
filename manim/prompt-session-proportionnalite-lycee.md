@@ -62,5 +62,5 @@ Ne pousse rien sans le signal du soir de Frédéric.
 ## ✅ 03/11 : DÉFAUTS MINEURS repris (demande de Frédéric : « reprends les défauts même mineurs »)
 - Brief : `manim/brief-agent-defauts-lycee.md`. Les 3 agents (vague 4) se sont arrêtés vers 3 h 35 sans rapport ; leurs rendus finis ont été récupérés (appliquer, tout-partie copiés depuis les media_dir), pourcentage de pourcentage rendu par la session de reprise.
 - Commits `727084ed` (8 épisodes) et `72b3a018` (pourcentage de pourcentage). Les 28 mp4 : bords 0, durées identiques à avant (donc chapitres et questions du manifeste inchangés), planches regardées.
-- R2 : envoi des 14 dossiers lancé le 03/11 (`r2.sh` du scratchpad 8004c6a9, rclone copy + check) ; ⏳ à CONTRÔLER : relancer `r2.sh` et attendre « 0 differences, 6 matching » partout. Noms inchangés : rien à faire sur la table R2, le manifeste ni le coach.
+- R2 : les 14 dossiers renvoyés et contrôlés le 03/11 (`r2.sh` : « 0 differences, 6 matching » ×14).
 - Reste : publier sur YouTube (chaque paysage AVANT son short). Rien n'est poussé.
