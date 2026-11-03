@@ -127,6 +127,9 @@ export const exercicesProbabiliteConditionnelleTerminale: FicheExercicesData = {
         {
           enonce:
             "Une entreprise fabrique des vis dans trois usines $U_1$, $U_2$ et $U_3$. On choisit une vis au hasard ; $D$ est l'événement « la vis est défectueuse ». Certaines probabilités de l'arbre sont effacées.\na) Compléter l'arbre.\nb) Calculer $P(U_3 \\cap \\overline{D})$.",
+          reponses: [
+            { question: "b)", attendu: "0.19" },
+          ],
           figure: arbre([
             { label: "U1", proba: "0,5", enfants: [{ label: "D", proba: "0,02" }, { label: "D̄", proba: "?" }] },
             { label: "U2", proba: "0,3", enfants: [{ label: "D", proba: "0,03" }, { label: "D̄", proba: "?" }] },
@@ -139,6 +142,10 @@ export const exercicesProbabiliteConditionnelleTerminale: FicheExercicesData = {
         {
           enonce:
             "Dans une salle de sport, on choisit un abonné au hasard. $C$ : « il fait du cardio » ; $M$ : « il fait de la musculation ». Le tableau donne les probabilités.\na) Calculer $P_C(M)$.\nb) Calculer $P_M(C)$.\nc) Traduire chaque résultat par une phrase.",
+          reponses: [
+            { question: "a)", attendu: "0.25" },
+            { question: "b)", attendu: "0.625" },
+          ],
           figure: tableauProba(
             ["", "M", "non M", "Total"],
             [
@@ -155,6 +162,10 @@ export const exercicesProbabiliteConditionnelleTerminale: FicheExercicesData = {
         {
           enonce:
             "Une urne contient $5$ boules rouges et $3$ boules vertes. On tire successivement trois boules, SANS remise. On note $R_k$ l'événement « la $k$-ième boule est rouge ».\na) Calculer $P(R_1 \\cap R_2)$.\nb) Calculer la probabilité de tirer trois boules rouges.",
+          reponses: [
+            { question: "a)", attendu: "5/14" },
+            { question: "b)", attendu: "5/28" },
+          ],
           correction:
             "a) $P(R_1) = \\dfrac{5}{8}$. Une rouge est partie : il reste $4$ rouges sur $7$ boules, donc $P_{R_1}(R_2) = \\dfrac{4}{7}$.\n$P(R_1 \\cap R_2) = \\dfrac{5}{8} \\times \\dfrac{4}{7} = \\dfrac{20}{56} = \\dfrac{5}{14}$.\nb) Sachant deux rouges tirées, il reste $3$ rouges sur $6$ boules : $P_{R_1 \\cap R_2}(R_3) = \\dfrac{3}{6}$.\n$P(R_1 \\cap R_2 \\cap R_3) = \\dfrac{5}{8} \\times \\dfrac{4}{7} \\times \\dfrac{3}{6} = \\dfrac{60}{336} = \\dfrac{5}{28} \\approx 0{,}179$.\n⚠️ Sans remise, les tirages ne sont PAS indépendants : la composition de l'urne change à chaque tirage, et les probabilités de l'arbre avec elle.\n⭐ Sur le dessin : on ne trace que les branches utiles. Le chemin rouge-rouge-rouge porte $\\dfrac{5}{8}$, puis $\\dfrac{4}{7}$, puis $\\dfrac{3}{6}$.",
           schema: ecranSeulement(
@@ -168,6 +179,9 @@ export const exercicesProbabiliteConditionnelleTerminale: FicheExercicesData = {
         {
           enonce:
             "Un site marchand a trois fournisseurs : $45$ % des colis viennent de $F_1$, $35$ % de $F_2$ et $20$ % de $F_3$. Un colis arrive en retard dans $4$ % des cas s'il vient de $F_1$, $10$ % s'il vient de $F_2$ et $15$ % s'il vient de $F_3$. Calculer la probabilité $P(R)$ qu'un colis pris au hasard arrive en retard.",
+          reponses: [
+            { attendu: "0.083" },
+          ],
           correction:
             "$F_1$, $F_2$ et $F_3$ forment une partition : chaque colis vient d'un fournisseur, et d'un seul.\nFormule des probabilités totales : $P(R) = P(F_1 \\cap R) + P(F_2 \\cap R) + P(F_3 \\cap R)$.\n$P(F_1 \\cap R) = 0{,}45 \\times 0{,}04 = 0{,}018$.\n$P(F_2 \\cap R) = 0{,}35 \\times 0{,}1 = 0{,}035$.\n$P(F_3 \\cap R) = 0{,}2 \\times 0{,}15 = 0{,}03$.\nDonc $P(R) = 0{,}018 + 0{,}035 + 0{,}03 = 0{,}083$ : $8{,}3$ % des colis arrivent en retard.\n⚠️ On n'additionne pas $4$ %, $10$ % et $15$ % : chaque taux est pondéré par la part de son fournisseur.\n⭐ Sur le dessin : on additionne les trois chemins qui finissent par $R$.",
           schema: ecranSeulement(
@@ -182,6 +196,11 @@ export const exercicesProbabiliteConditionnelleTerminale: FicheExercicesData = {
         {
           enonce:
             "On donne $P(A) = 0{,}2$, $P_A(B) = 0{,}9$ et $P(B) = 0{,}3$. Dans l'arbre, la probabilité $P_{\\overline{A}}(B)$ manque.\na) Calculer $P(A \\cap B)$, puis $P(\\overline{A} \\cap B)$.\nb) En déduire $P_{\\overline{A}}(B)$.\nc) Calculer $P_B(A)$.",
+          reponses: [
+            { question: "a)", attendu: "0.18 ; 0.12", ordre: true },
+            { question: "b)", attendu: "0.15" },
+            { question: "c)", attendu: "0.6" },
+          ],
           figure: ecranSeulement(
             arbre([
               { label: "A", proba: "0,2", enfants: [{ label: "B", proba: "0,9" }, { label: "B̄", proba: "0,1" }] },
@@ -195,6 +214,9 @@ export const exercicesProbabiliteConditionnelleTerminale: FicheExercicesData = {
         {
           enonce:
             "Sur un site de vente en ligne : « $40$ % des visiteurs ajoutent un article à leur panier. Parmi eux, $30$ % vont jusqu'au paiement. Un visiteur qui n'a rien mis dans son panier ne paie jamais. » On note $A$ : « le visiteur ajoute un article » et $V$ : « il paie ».\na) Traduire chaque phrase par une probabilité.\nb) Calculer $P(V)$, puis $P_V(A)$. Commenter.",
+          reponses: [
+            { question: "b)", attendu: "0.12 ; 1", ordre: true },
+          ],
           correction:
             "a) « $40$ % des visiteurs ajoutent » : $P(A) = 0{,}4$.\n« Parmi eux, $30$ % paient » : c'est une probabilité SACHANT $A$, $P_A(V) = 0{,}3$.\n« Sans panier, jamais de paiement » : $P_{\\overline{A}}(V) = 0$.\nb) $P(V) = 0{,}4 \\times 0{,}3 + 0{,}6 \\times 0 = 0{,}12$.\n$P_V(A) = \\dfrac{P(A \\cap V)}{P(V)} = \\dfrac{0{,}12}{0{,}12} = 1$ : tout visiteur qui paie avait un panier. C'est logique.\n⚠️ « Parmi eux » signale une probabilité conditionnelle : $30$ % n'est pas $P(V)$, ni $P(A \\cap V)$.\n⭐ Sur le dessin : la branche $\\overline{A} \\to V$ porte $0$, donc un seul chemin mène au paiement.",
           schema: ecranSeulement(
@@ -208,6 +230,10 @@ export const exercicesProbabiliteConditionnelleTerminale: FicheExercicesData = {
         {
           enonce:
             "Dans un club omnisport, $60$ % des membres font de la natation ($N$). Parmi les nageurs, $25$ % font aussi du vélo ($V$). Parmi les non-nageurs, $25$ % font du vélo.\na) Calculer $P(V)$.\nb) Les événements $N$ et $V$ sont-ils indépendants ?",
+          reponses: [
+            { question: "a)", attendu: "0.25" },
+            { question: "b)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) Probabilités totales : $P(V) = 0{,}6 \\times 0{,}25 + 0{,}4 \\times 0{,}25$ $= 0{,}15 + 0{,}1 = 0{,}25$.\nb) $P_N(V) = 0{,}25$ et $P(V) = 0{,}25$ : savoir qu'un membre nage ne change pas la probabilité qu'il fasse du vélo.\n$N$ et $V$ sont indépendants. On le vérifie : $P(N \\cap V) = 0{,}15$ et $P(N) \\times P(V) = 0{,}6 \\times 0{,}25 = 0{,}15$.\n⚠️ Indépendants ne veut pas dire incompatibles : $15$ % des membres font les deux sports.\n⭐ Sur le dessin : les deux moitiés de l'arbre portent les MÊMES probabilités, $0{,}25$ et $0{,}75$. C'est la signature de l'indépendance.",
           schema: ecranSeulement(
@@ -221,6 +247,9 @@ export const exercicesProbabiliteConditionnelleTerminale: FicheExercicesData = {
         {
           enonce:
             "On ne connaît pas $x = P(A)$. On sait que $P_A(B) = 0{,}8$, $P_{\\overline{A}}(B) = 0{,}3$ et $P(B) = 0{,}5$. Déterminer $x$.",
+          reponses: [
+            { attendu: "0.4" },
+          ],
           figure: arbre([
             { label: "A", proba: "x", enfants: [{ label: "B", proba: "0,8" }, { label: "B̄", proba: "0,2" }] },
             { label: "Ā", proba: "1 − x", enfants: [{ label: "B", proba: "0,3" }, { label: "B̄", proba: "0,7" }] },
@@ -246,6 +275,11 @@ export const exercicesProbabiliteConditionnelleTerminale: FicheExercicesData = {
         {
           enonce:
             "Une maladie touche $2$ % d'une population. Un test de dépistage est positif chez $95$ % des malades, et chez $10$ % des personnes saines. On choisit une personne au hasard ; $M$ : « elle est malade », $T$ : « son test est positif ».\na) Construire l'arbre et calculer $P(T)$.\nb) Une personne a un test positif. Quelle est la probabilité qu'elle soit malade ?\nc) Une personne a un test négatif. Quelle est la probabilité qu'elle soit saine ?",
+          reponses: [
+            { question: "a)", attendu: "0.117" },
+            { question: "b)", attendu: ["19/117", "0.162"], tolerance: 0.0011 },
+            { question: "c)", attendu: ["882/883", "0.9989"], tolerance: 0.00011 },
+          ],
           correction:
             "a) $P(M) = 0{,}02$, $P_M(T) = 0{,}95$, $P_{\\overline{M}}(T) = 0{,}1$.\n$P(T) = 0{,}02 \\times 0{,}95 + 0{,}98 \\times 0{,}1$ $= 0{,}019 + 0{,}098 = 0{,}117$.\nb) $P_T(M) = \\dfrac{P(M \\cap T)}{P(T)} = \\dfrac{0{,}019}{0{,}117} \\approx 0{,}162$.\nc) $P(\\overline{M} \\cap \\overline{T}) = 0{,}98 \\times 0{,}9 = 0{,}882$ et $P(\\overline{T}) = 1 - 0{,}117 = 0{,}883$.\n$P_{\\overline{T}}(\\overline{M}) = \\dfrac{0{,}882}{0{,}883} \\approx 0{,}9989$.\n⚠️ Le test « détecte $95$ % des malades », et pourtant un positif n'est malade qu'avec une probabilité de $16$ % environ. On a confondu $P_M(T)$ et $P_T(M)$.\n⭐ Pourquoi ? Sur $10\\,000$ personnes, $190$ malades sont positifs, mais aussi $980$ personnes saines : les faux positifs sont bien plus nombreux, parce que les sains sont bien plus nombreux.\n⭐ Sur le dessin : les deux chemins qui finissent par $T$ pèsent $0{,}019$ et $0{,}098$. Le second est cinq fois plus lourd.",
           schema: arbre([
@@ -257,6 +291,11 @@ export const exercicesProbabiliteConditionnelleTerminale: FicheExercicesData = {
         {
           enonce:
             "En fin de chaîne, un contrôle automatique rejette les pièces qu'il juge défectueuses. $5$ % des pièces sont défectueuses ($D$). Le contrôle rejette $90$ % des pièces défectueuses, mais aussi $4$ % des pièces bonnes. $J$ : « la pièce est rejetée ».\na) Calculer $P(J)$.\nb) Une pièce est rejetée. Quelle est la probabilité qu'elle soit bonne ?\nc) Une pièce est acceptée. Quelle est la probabilité qu'elle soit défectueuse ?",
+          reponses: [
+            { question: "a)", attendu: "0.083" },
+            { question: "b)", attendu: ["38/83", "0.458"], tolerance: 0.0011 },
+            { question: "c)", attendu: ["5/917", "0.0055"], tolerance: 0.00011 },
+          ],
           correction:
             "a) $P(J) = 0{,}05 \\times 0{,}9 + 0{,}95 \\times 0{,}04$ $= 0{,}045 + 0{,}038 = 0{,}083$.\nb) $P_J(\\overline{D}) = \\dfrac{0{,}038}{0{,}083} \\approx 0{,}458$.\nPrès de la moitié des pièces rejetées sont bonnes.\nc) $P(D \\cap \\overline{J}) = 0{,}05 \\times 0{,}1 = 0{,}005$ et $P(\\overline{J}) = 1 - 0{,}083 = 0{,}917$.\n$P_{\\overline{J}}(D) = \\dfrac{0{,}005}{0{,}917} \\approx 0{,}0055$ : moins de $6$ pièces acceptées sur $1\\,000$ sont défectueuses, contre $50$ avant le contrôle.\n⚠️ « Rejette $4$ % des bonnes » est $P_{\\overline{D}}(J)$ ; la question b) demande $P_J(\\overline{D})$. Ce ne sont pas les mêmes.\n⭐ Sur le dessin : deux chemins mènent au rejet, $0{,}045$ et $0{,}038$ ; ils sont presque aussi lourds l'un que l'autre, d'où le « près de la moitié ».",
           schema: ecranSeulement(
@@ -270,6 +309,11 @@ export const exercicesProbabiliteConditionnelleTerminale: FicheExercicesData = {
         {
           enonce:
             "Un sac contient deux pièces : une équilibrée ($E$) et une truquée ($T$), qui tombe sur pile avec la probabilité $0{,}8$. On prend une pièce au hasard et on la lance deux fois. $P_1$ : « pile au premier lancer », $P_2$ : « pile au second ».\na) Calculer $P(P_1)$.\nb) Calculer $P(P_1 \\cap P_2)$.\nc) $P_1$ et $P_2$ sont-ils indépendants ? Expliquer ce résultat.",
+          reponses: [
+            { question: "a)", attendu: "0.65" },
+            { question: "b)", attendu: "0.445" },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $P(P_1) = 0{,}5 \\times 0{,}5 + 0{,}5 \\times 0{,}8$ $= 0{,}25 + 0{,}4 = 0{,}65$.\nb) Une fois la pièce choisie, les deux lancers sont indépendants : on multiplie le long du chemin.\n$P(E \\cap P_1 \\cap P_2) = 0{,}5 \\times 0{,}5 \\times 0{,}5 = 0{,}125$ et $P(T \\cap P_1 \\cap P_2) = 0{,}5 \\times 0{,}8 \\times 0{,}8 = 0{,}32$.\n$P(P_1 \\cap P_2) = 0{,}125 + 0{,}32 = 0{,}445$.\nc) Par symétrie, $P(P_2) = 0{,}65$. Or $P(P_1) \\times P(P_2) = 0{,}65^2 = 0{,}4225 \\neq 0{,}445$ : ils ne sont PAS indépendants.\nEn effet, $P_{P_1}(P_2) = \\dfrac{0{,}445}{0{,}65} \\approx 0{,}685 > 0{,}65$ : un premier pile rend plus probable qu'on tienne la pièce truquée, donc un second pile.\n⚠️ Les lancers sont indépendants SACHANT la pièce, mais pas quand on ignore laquelle on tient.\n⭐ Sur le dessin : deux chemins mènent à « pile puis pile », un par pièce ; on les additionne.",
           schema: arbre3([
@@ -281,6 +325,10 @@ export const exercicesProbabiliteConditionnelleTerminale: FicheExercicesData = {
         {
           enonce:
             "Chaque jour de classe, Lina va au lycée à vélo ou en bus. Si elle prend le vélo un jour, elle le reprend le lendemain avec la probabilité $0{,}7$. Si elle prend le bus, elle prend le vélo le lendemain avec la probabilité $0{,}4$. Le jour $1$, elle prend le vélo. On note $p_n$ la probabilité qu'elle prenne le vélo le jour $n$ : $p_1 = 1$.\na) À l'aide d'un arbre, montrer que $p_{n+1} = 0{,}3p_n + 0{,}4$.\nb) Calculer $p_2$ et $p_3$.\nc) Que renvoie la fonction Python ci-dessous ? Que signifie ce résultat ?",
+          reponses: [
+            { question: "b)", attendu: "0.7 ; 0.61", ordre: true },
+            { question: "c)", attendu: "7" },
+          ],
           figure: programme(["def rang():", "    n = 1", "    p = 1", "    while p - 4/7 >= 0.001:", "        p = 0.3 * p + 0.4", "        n = n + 1", "    return n"]),
           correction:
             "a) Le jour $n$ : vélo avec la probabilité $p_n$, bus avec $1 - p_n$.\nProbabilités totales sur le jour $n + 1$ : $p_{n+1} = 0{,}7p_n + 0{,}4(1 - p_n)$.\nOn développe : $p_{n+1} = 0{,}7p_n + 0{,}4 - 0{,}4p_n = 0{,}3p_n + 0{,}4$.\nb) $p_2 = 0{,}3 \\times 1 + 0{,}4 = 0{,}7$ et $p_3 = 0{,}3 \\times 0{,}7 + 0{,}4 = 0{,}61$.\nc) La boucle calcule les termes tant que l'écart $p_n - \\dfrac{4}{7}$ reste $\\geqslant 0{,}001$. Les termes : $0{,}7$ ; $0{,}61$ ; $0{,}583$ ; $0{,}5749$ ; $0{,}57247$ ; puis $p_7 \\approx 0{,}57174$.\nLa fonction renvoie $7$ : à partir du jour $7$, la probabilité est à moins d'un millième de $\\dfrac{4}{7} \\approx 0{,}571$.\n⭐ D'où vient $\\dfrac{4}{7}$ ? C'est la solution de $\\ell = 0{,}3\\ell + 0{,}4$, soit $0{,}7\\ell = 0{,}4$ : la probabilité qui ne bouge plus d'un jour à l'autre.\n⚠️ Sur le dessin, une graduation vaut $0{,}1$ : les points descendent vers la droite $y \\approx 5{,}71$, c'est-à-dire $p \\approx 0{,}571$.",
@@ -290,6 +338,10 @@ export const exercicesProbabiliteConditionnelleTerminale: FicheExercicesData = {
         {
           enonce:
             "Un filtre anti-spam repère le mot « gratuit ». Dans une messagerie, $30$ % des courriels sont des spams ($S$). Le mot apparaît dans $40$ % des spams et dans $2$ % des autres courriels. $G$ : « le courriel contient le mot ».\na) Calculer $P(G)$, puis $P_G(S)$.\nb) On note maintenant $x$ la part des spams. Montrer que $P_G(S) = \\dfrac{0{,}4x}{0{,}38x + 0{,}02}$.\nc) Pour quelles valeurs de $x$ a-t-on $P_G(S) \\geqslant 0{,}99$ ?",
+          reponses: [
+            { question: "a)", attendu: "0.134 ; 0.12/0.134", ordre: true, tolerance: 0.0011 },
+            { question: "c)", attendu: ["x ≥ 0.832", "x ≥ 99/119", "x ≥ 0,832", "[0.832 ; 1]", "[0,832 ; 1]"] },
+          ],
           correction:
             "a) $P(G) = 0{,}3 \\times 0{,}4 + 0{,}7 \\times 0{,}02$ $= 0{,}12 + 0{,}014 = 0{,}134$.\n$P_G(S) = \\dfrac{0{,}12}{0{,}134} \\approx 0{,}896$.\nb) $P(S \\cap G) = 0{,}4x$ et $P(G) = 0{,}4x + 0{,}02(1 - x) = 0{,}38x + 0{,}02$. On divise.\nc) Le dénominateur est positif : on peut multiplier sans changer le sens.\n$0{,}4x \\geqslant 0{,}99(0{,}38x + 0{,}02)$ équivaut à $0{,}4x \\geqslant 0{,}3762x + 0{,}0198$, soit $0{,}0238x \\geqslant 0{,}0198$.\nDonc $x \\geqslant \\dfrac{0{,}0198}{0{,}0238} \\approx 0{,}832$.\nIl faudrait plus de $83$ % de spams pour que le mot suffise à conclure à $99$ %.\n⚠️ La probabilité « sachant $G$ » dépend de la part des spams : le même filtre est plus ou moins fiable selon la messagerie.\n⭐ Sur le dessin (question a) : sur les deux chemins qui mènent à $G$, celui du spam pèse $0{,}12$, l'autre $0{,}014$.",
           schema: ecranSeulement(
@@ -303,6 +355,10 @@ export const exercicesProbabiliteConditionnelleTerminale: FicheExercicesData = {
         {
           enonce:
             "Une maladie touche $1$ % d'une population. Un test est positif chez $99$ % des malades et chez $5$ % des personnes saines. Quand le test est positif, on le refait ; on admet que, sachant l'état de la personne, les deux tests sont indépendants.\na) Calculer la probabilité qu'une personne positive au premier test soit malade.\nb) Calculer la probabilité qu'une personne positive aux DEUX tests soit malade.",
+          reponses: [
+            { question: "a)", attendu: ["1/6", "0.167"], tolerance: 0.0011 },
+            { question: "b)", attendu: ["0.009801/0.012276", "0.798"], tolerance: 0.0011 },
+          ],
           correction:
             "a) $P(T_1) = 0{,}01 \\times 0{,}99 + 0{,}99 \\times 0{,}05$ $= 0{,}0099 + 0{,}0495 = 0{,}0594$.\n$P_{T_1}(M) = \\dfrac{0{,}0099}{0{,}0594} = \\dfrac{1}{6} \\approx 0{,}167$.\nb) On suit les chemins à trois niveaux :\n$P(M \\cap T_1 \\cap T_2)$ $= 0{,}01 \\times 0{,}99 \\times 0{,}99 = 0{,}009801$.\n$P(\\overline{M} \\cap T_1 \\cap T_2)$ $= 0{,}99 \\times 0{,}05 \\times 0{,}05 = 0{,}002475$.\n$P(T_1 \\cap T_2)$ $= 0{,}009801 + 0{,}002475 = 0{,}012276$.\nDonc la probabilité cherchée vaut $\\dfrac{0{,}009801}{0{,}012276} \\approx 0{,}798$.\nLe second test fait passer la probabilité d'être malade de $17$ % environ à $80$ % environ.\n⚠️ On n'élève pas $P_{T_1}(M)$ au carré : on refait le calcul sur l'arbre complet, avec les chemins à trois branches.\n⭐ Sur le dessin : le faux positif doit se tromper DEUX fois ($0{,}05 \\times 0{,}05$), le vrai positif réussir deux fois ($0{,}99 \\times 0{,}99$).",
           schema: arbre3([
@@ -314,6 +370,10 @@ export const exercicesProbabiliteConditionnelleTerminale: FicheExercicesData = {
         {
           enonce:
             "Une banque classe ses emprunteurs en trois profils : $50$ % sont du profil $A$, $35$ % du profil $B$ et $15$ % du profil $C$. La probabilité de ne pas rembourser (événement $D$) vaut $1$ % pour $A$, $4$ % pour $B$ et $10$ % pour $C$.\na) Calculer $P(D)$.\nb) Un emprunteur ne rembourse pas. De quel profil est-il le plus probablement ?",
+          reponses: [
+            { question: "a)", attendu: "0.034" },
+            { question: "b)", attendu: ["C", "le profil C", "profil C"] },
+          ],
           correction:
             "a) $P(D) = 0{,}5 \\times 0{,}01 + 0{,}35 \\times 0{,}04 + 0{,}15 \\times 0{,}1$, soit $0{,}005 + 0{,}014 + 0{,}015 = 0{,}034$.\nb) On inverse pour chaque profil :\n$P_D(A) = \\dfrac{0{,}005}{0{,}034} \\approx 0{,}147$ ; $P_D(B) = \\dfrac{0{,}014}{0{,}034} \\approx 0{,}412$ ; $P_D(C) = \\dfrac{0{,}015}{0{,}034} \\approx 0{,}441$.\nLe profil $C$ est le plus probable, de peu devant $B$.\nVérification : $0{,}147 + 0{,}412 + 0{,}441 = 1$ (aux arrondis près), car un défaillant a forcément un profil.\n⚠️ Le profil $C$ ne pèse que $15$ % des emprunteurs, mais son risque est dix fois celui de $A$ : il fournit la plus grosse part des défauts.\n⭐ Sur le dessin : les barres montrent, en %, d'où viennent les défauts. Elles ne ressemblent pas du tout aux parts $50$, $35$, $15$ des profils.",
           schema: diagramme("barres", [{ label: "A", value: 15 }, { label: "B", value: 41 }, { label: "C", value: 44 }], 2),
@@ -322,6 +382,11 @@ export const exercicesProbabiliteConditionnelleTerminale: FicheExercicesData = {
         {
           enonce:
             "Une urne contient $2$ boules rouges et $3$ boules vertes. On tire une boule, on la remet, et on AJOUTE une boule de la même couleur ; puis on tire une seconde boule. $R_1$ et $R_2$ : « la première (la seconde) boule est rouge ».\na) Calculer $P(R_2)$.\nb) Sachant que la seconde boule est rouge, quelle est la probabilité que la première l'ait été ?\nc) $R_1$ et $R_2$ sont-ils indépendants ?",
+          reponses: [
+            { question: "a)", attendu: "2/5" },
+            { question: "b)", attendu: "1/2" },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) Si la première est rouge, l'urne contient $3$ rouges sur $6$ : $P_{R_1}(R_2) = \\dfrac{3}{6} = \\dfrac{1}{2}$.\nSi elle est verte, l'urne contient $2$ rouges sur $6$ : $P_{\\overline{R_1}}(R_2) = \\dfrac{2}{6} = \\dfrac{1}{3}$.\n$P(R_2) = \\dfrac{2}{5} \\times \\dfrac{1}{2} + \\dfrac{3}{5} \\times \\dfrac{1}{3} = \\dfrac{1}{5} + \\dfrac{1}{5} = \\dfrac{2}{5}$.\nb) $P_{R_2}(R_1) = \\dfrac{P(R_1 \\cap R_2)}{P(R_2)} = \\dfrac{1/5}{2/5} = \\dfrac{1}{2}$.\nc) $P_{R_1}(R_2) = \\dfrac{1}{2} \\neq \\dfrac{2}{5} = P(R_2)$ : ils ne sont pas indépendants.\n⭐ Surprise : $P(R_2) = P(R_1) = \\dfrac{2}{5}$. Sans rien savoir du premier tirage, la seconde boule a autant de chances d'être rouge que la première.\n⚠️ Même probabilité ne veut pas dire indépendance : le premier tirage modifie l'urne.\n⭐ Sur le dessin : les deux chemins qui finissent par $R_2$ pèsent chacun $\\dfrac{1}{5}$.",
           schema: ecranSeulement(
@@ -350,6 +415,11 @@ export const exercicesProbabiliteConditionnelleTerminale: FicheExercicesData = {
           titre: "Le vaccin et les malades",
           enonce:
             "Pendant un hiver, $40$ % d'une population est vaccinée ($V$) contre une maladie. Un vacciné tombe malade ($G$) avec la probabilité $0{,}08$, un non-vacciné avec la probabilité $0{,}25$.\na) Calculer $P(G)$.\nb) Calculer $P_G(V)$. Un journal écrit : « $18$ % des malades étaient vaccinés, le vaccin ne sert à rien ». Qu'en penser ?\nc) On note $x$ la part des vaccinés. Montrer que $P_G(V) = \\dfrac{0{,}08x}{0{,}25 - 0{,}17x}$.\nd) Quelle part de vaccinés faudrait-il pour que la moitié des malades soient vaccinés ?",
+          reponses: [
+            { question: "a)", attendu: "0.182" },
+            { question: "b)", attendu: ["16/91", "0.176"], tolerance: 0.0011 },
+            { question: "d)", attendu: ["25/33", "0.758"], tolerance: 0.0011 },
+          ],
           correction:
             "a) $P(G) = 0{,}4 \\times 0{,}08 + 0{,}6 \\times 0{,}25$ $= 0{,}032 + 0{,}15 = 0{,}182$.\nb) $P_G(V) = \\dfrac{0{,}032}{0{,}182} \\approx 0{,}176$ : environ $18$ % des malades sont vaccinés.\nMais le journal confond deux questions. Le vaccin protège : $P_V(G) = 0{,}08$ contre $P_{\\overline{V}}(G) = 0{,}25$, le risque est divisé par plus de $3$.\nc) $P(V \\cap G) = 0{,}08x$ et $P(G) = 0{,}08x + 0{,}25(1 - x) = 0{,}25 - 0{,}17x$. On divise.\nd) On résout $\\dfrac{0{,}08x}{0{,}25 - 0{,}17x} = 0{,}5$ : $0{,}08x = 0{,}125 - 0{,}085x$, donc $0{,}165x = 0{,}125$.\n$x = \\dfrac{0{,}125}{0{,}165} \\approx 0{,}758$ : avec environ $76$ % de vaccinés, la moitié des malades seraient vaccinés, alors que le vaccin marche toujours aussi bien.\n⚠️ $P_G(V)$ mesure la part des vaccinés parmi les malades ; l'efficacité se lit sur $P_V(G)$ comparé à $P_{\\overline{V}}(G)$.\n⭐ Sur le tableau : plus la population est vaccinée, plus les malades vaccinés sont nombreux. C'est un effet de la répartition, pas du vaccin.",
           schema: (
@@ -369,6 +439,11 @@ export const exercicesProbabiliteConditionnelleTerminale: FicheExercicesData = {
           titre: "Le dé et les deux urnes",
           enonce:
             "On lance un dé équilibré. S'il donne $6$, on prend l'urne $U_1$ ($3$ boules rouges, $1$ verte) ; sinon, l'urne $U_2$ ($2$ rouges, $3$ vertes). Dans l'urne choisie, on tire successivement deux boules sans remise.\na) Construire l'arbre, puis montrer que la probabilité de tirer deux boules rouges vaut $\\dfrac{1}{6}$.\nb) On a tiré deux rouges. Quelle est la probabilité que ce soit dans l'urne $U_1$ ?\nc) Calculer la probabilité $P(R_1)$ que la première boule soit rouge.\nd) On admet que $P(R_2) = P(R_1)$. Les événements $R_1$ et $R_2$ sont-ils indépendants ?",
+          reponses: [
+            { question: "b)", attendu: "1/2" },
+            { question: "c)", attendu: "11/24" },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) Dans $U_1$ : $P = \\dfrac{3}{4} \\times \\dfrac{2}{3} = \\dfrac{1}{2}$ pour deux rouges. Dans $U_2$ : $\\dfrac{2}{5} \\times \\dfrac{1}{4} = \\dfrac{1}{10}$.\nProbabilités totales : $P(R_1 \\cap R_2) = \\dfrac{1}{6} \\times \\dfrac{1}{2} + \\dfrac{5}{6} \\times \\dfrac{1}{10}$ $= \\dfrac{1}{12} + \\dfrac{1}{12} = \\dfrac{1}{6}$.\nb) $P_{R_1 \\cap R_2}(U_1) = \\dfrac{1/12}{1/6} = \\dfrac{1}{2}$.\nL'urne $U_1$ n'avait qu'une chance sur six d'être choisie ; après deux rouges, c'est une chance sur deux.\nc) $P(R_1) = \\dfrac{1}{6} \\times \\dfrac{3}{4} + \\dfrac{5}{6} \\times \\dfrac{2}{5} = \\dfrac{1}{8} + \\dfrac{1}{3} = \\dfrac{11}{24}$.\nd) $P(R_1) \\times P(R_2) = \\left(\\dfrac{11}{24}\\right)^2 = \\dfrac{121}{576} \\approx 0{,}210$, alors que $P(R_1 \\cap R_2) = \\dfrac{1}{6} \\approx 0{,}167$.\nCe n'est pas égal : $R_1$ et $R_2$ ne sont pas indépendants.\n⚠️ En a), on ne multiplie pas $P(R_1)$ par $P(R_2)$ : on additionne les chemins, urne par urne.\n⭐ Sur le dessin : les deux chemins « rouge, rouge » pèsent chacun $\\dfrac{1}{12}$, alors que les urnes pèsent $\\dfrac{1}{6}$ et $\\dfrac{5}{6}$.",
           schema: arbre3([
@@ -381,6 +456,11 @@ export const exercicesProbabiliteConditionnelleTerminale: FicheExercicesData = {
           titre: "Répondre au hasard",
           enonce:
             "Dans un QCM à $4$ réponses, un élève connaît la réponse d'une question avec la probabilité $0{,}6$. S'il la connaît, il répond juste ; sinon, il répond au hasard. $C$ : « il connaît la réponse » ; $J$ : « il répond juste ».\na) Calculer $P(J)$.\nb) L'élève a répondu juste. Quelle est la probabilité qu'il ait connu la réponse ?\nc) Le QCM propose maintenant $k$ réponses. Montrer que $P_J(C) = \\dfrac{0{,}6k}{0{,}6k + 0{,}4}$.\nd) Combien de réponses faut-il proposer pour que $P_J(C) \\geqslant 0{,}95$ ?",
+          reponses: [
+            { question: "a)", attendu: "0.7" },
+            { question: "b)", attendu: ["6/7", "0.857"], tolerance: 0.0011 },
+            { question: "d)", attendu: "13" },
+          ],
           correction:
             "a) $P(J) = 0{,}6 \\times 1 + 0{,}4 \\times \\dfrac{1}{4} = 0{,}6 + 0{,}1 = 0{,}7$.\nb) $P_J(C) = \\dfrac{0{,}6}{0{,}7} = \\dfrac{6}{7} \\approx 0{,}857$.\nc) Avec $k$ réponses, $P(J) = 0{,}6 + \\dfrac{0{,}4}{k}$. Donc $P_J(C) = \\dfrac{0{,}6}{0{,}6 + \\dfrac{0{,}4}{k}}$ ; on multiplie en haut et en bas par $k$.\nd) Tout est positif : $0{,}6k \\geqslant 0{,}95(0{,}6k + 0{,}4)$ équivaut à $0{,}6k \\geqslant 0{,}57k + 0{,}38$, soit $0{,}03k \\geqslant 0{,}38$.\nDonc $k \\geqslant \\dfrac{0{,}38}{0{,}03} \\approx 12{,}7$ : il faut au moins $13$ réponses.\n⚠️ $k$ est un nombre ENTIER de réponses : on arrondit au-dessus, pas au plus proche.\n⚠️ $P_C(J) = 1$, mais $P_J(C)$ n'est que $0{,}857$ : une bonne réponse ne prouve pas qu'on savait.\n⭐ Sur le tableau : avec $2$ réponses, $0{,}75$ ; avec $4$, $0{,}857$ ; avec $10$, $0{,}938$ ; il faut aller jusqu'à $13$ pour passer $0{,}95$.",
           schema: (
@@ -400,6 +480,11 @@ export const exercicesProbabiliteConditionnelleTerminale: FicheExercicesData = {
           titre: "Le bit qui traverse les relais",
           enonce:
             "Un bit ($0$ ou $1$) traverse une chaîne de relais. Chaque relais transmet le bit reçu correctement avec la probabilité $0{,}9$ et l'inverse avec la probabilité $0{,}1$, indépendamment des autres. On envoie un $1$. On note $p_n$ la probabilité que le bit soit correct après $n$ relais : $p_0 = 1$.\na) À l'aide d'un arbre, montrer que $p_{n+1} = 0{,}8p_n + 0{,}1$.\nb) On pose $v_n = p_n - 0{,}5$. Montrer que $(v_n)$ est géométrique, puis que $p_n = 0{,}5 + 0{,}5 \\times 0{,}8^n$.\nc) Déterminer la limite de $(p_n)$. Interpréter.\nd) Combien de relais au plus peut-on traverser pour que $p_n \\geqslant 0{,}75$ ?\ne) L'émetteur envoie $0$ ou $1$ avec la même probabilité. Après $2$ relais, on reçoit un $1$. Quelle est la probabilité qu'on ait envoyé un $1$ ?",
+          reponses: [
+            { question: "c)", attendu: "0.5" },
+            { question: "d)", attendu: "3" },
+            { question: "e)", attendu: "0.82" },
+          ],
           correction:
             "a) Après $n$ relais, le bit est correct ($p_n$) ou faux ($1 - p_n$). Au relais suivant : correct puis transmis, ou faux puis inversé.\n$p_{n+1} = 0{,}9p_n + 0{,}1(1 - p_n) = 0{,}8p_n + 0{,}1$.\nb) $v_{n+1} = p_{n+1} - 0{,}5 = 0{,}8p_n - 0{,}4$ $= 0{,}8(p_n - 0{,}5) = 0{,}8v_n$.\n$(v_n)$ est géométrique de raison $0{,}8$, avec $v_0 = 0{,}5$. Donc $v_n = 0{,}5 \\times 0{,}8^n$ et $p_n = 0{,}5 + 0{,}5 \\times 0{,}8^n$.\nc) $-1 < 0{,}8 < 1$, donc $0{,}8^n \\to 0$ et $\\lim p_n = 0{,}5$.\nAprès beaucoup de relais, le bit reçu est correct une fois sur deux : il ne dit plus rien sur le bit envoyé.\nd) $p_n \\geqslant 0{,}75$ équivaut à $0{,}5 \\times 0{,}8^n \\geqslant 0{,}25$, soit $0{,}8^n \\geqslant 0{,}5$.\n$0{,}8^3 = 0{,}512$ et $0{,}8^4 = 0{,}4096$ : au plus $3$ relais.\ne) $p_2 = 0{,}82$. On reçoit $1$ si on a envoyé $1$ et qu'il est resté correct, ou envoyé $0$ et qu'il a été inversé.\n$P(\\text{reçu } 1) = 0{,}5 \\times 0{,}82 + 0{,}5 \\times 0{,}18 = 0{,}5$, donc la probabilité cherchée vaut $\\dfrac{0{,}41}{0{,}5} = 0{,}82$.\n⚠️ En d), le sens change : $0{,}8^n$ DIMINUE quand $n$ augmente, donc la condition est vraie pour les PETITS $n$.\n⭐ Sur le dessin, une graduation vaut $0{,}1$ : les points descendent vers la droite $y = 5$, c'est-à-dire $p = 0{,}5$.",
           schema: repere([-1, 9, -1, 11], [], termes(0, [10, 9, 8.2, 7.56, 7.05, 6.64, 6.31, 6.05, 5.84]), 5, true),
