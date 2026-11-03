@@ -19,6 +19,16 @@ const num = (s: string) => Number(s.replace(",", "."));
 export function longueursLues(t: string) {
   return [...t.matchAll(/(\d+(?:,\d+)?)\s?(mm|cm|m|km)\b/g)].map((m) => ({ v: num(m[1]), u: m[2] }));
 }
+/**
+ * Les angles NOMMÉS du texte, par sommet : « l’angle en C mesure 61° »,
+ * « l’angle en C : 61° » ou « $\widehat{C}$ = 61° » → { C: 61 }.
+ */
+export function anglesNommesLus(t: string) {
+  const r: Record<string, number> = {};
+  for (const m of t.matchAll(/[Ll]’angle en ([A-Z])(?: mesure| :) (\d+(?:,\d+)?)°/g)) r[m[1]] = num(m[2]);
+  for (const m of t.matchAll(/\$\\widehat\{([A-Z])\}\$ = (\d+(?:,\d+)?)°/g)) r[m[1]] = num(m[2]);
+  return r;
+}
 /** Les angles écrits dans le texte : « 35° » → 35. */
 export function anglesLus(t: string) {
   return [...t.matchAll(/(\d+(?:,\d+)?)\s?°/g)].map((m) => num(m[1]));
@@ -117,7 +127,7 @@ function corrigerSommetCote(q: Q): string[] {
   const estCote = (u: string, v: string) => u !== v && V.includes(u) && V.includes(v);
   let juste: (c: string) => boolean;
   let m: RegExpMatchArray | null;
-  if (/[Cc]ombien de (sommets|côtés|angles)/.test(t) || /a combien de/.test(t)) juste = (c) => c === "3";
+  if (/[Cc]ombien de (sommets|côtés|angles)/.test(t) || /a combien de/.test(t) || /Compte les (sommets|côtés|angles)/.test(t)) juste = (c) => c === "3";
   else if (/côtés de ce triangle|côtés du triangle|trois côtés/.test(t))
     juste = (c) => {
       const s = [...c.matchAll(/\[([A-Z])([A-Z])\]/g)].map((x) => [x[1], x[2]]);
@@ -208,7 +218,10 @@ function corrigerTypeCoteLongueurs(q: Q): string[] {
   const p: string[] = [];
   const t = q.text;
   decimalesOk(t, p);
-  const ls = longueursLues(t);
+  let ls = longueursLues(t);
+  // ★1 nu : les longueurs ne sont écrites que sur la figure.
+  const f0 = fig(q);
+  if (ls.length === 0 && f0?.sideLabels) ls = Object.values(f0.sideLabels).flatMap((s) => longueursLues(String(s)));
   if (ls.length !== 3) return [`il faut trois longueurs, lu : ${ls.length}`];
   if (new Set(ls.map((l) => l.u)).size !== 1) p.push("unités différentes");
   plausibles(ls, p);
@@ -242,13 +255,13 @@ function corrigerTypeCoteCodages(q: Q): string[] {
   const V = t.match(/triangle ([A-Z])([A-Z])([A-Z])\b/)?.slice(1, 4);
   if (!V) return ["triangle illisible"];
   memesNoms(f, V, p);
-  if (!QUESTION_PRECISE.test(t)) p.push("la question ne demande pas la nature la plus précise");
   const cn = cotesNommes(f);
   const lg = (k: string) => cn[k.split("").sort().join("")];
   const proches = (u: number, v: number) => Math.abs(u - v) / Math.max(u, v) < 0.02;
   let n: string;
-  const eg3 = t.match(/On sait que ([A-Z]{2}) = ([A-Z]{2}) = ([A-Z]{2})\./);
-  const eg2 = t.match(/On sait que ([A-Z]{2}) = ([A-Z]{2}), et que ([A-Z]{2}) est plus (long|court)\./);
+  // « On sait que XY = YZ… » (★3) ou « Dans le triangle N, XY = YZ… » (★2 nu).
+  const eg3 = t.match(/(?:On sait que|On a|Dans le triangle [A-Z]{3},) ([A-Z]{2}) = ([A-Z]{2}) = ([A-Z]{2})\./);
+  const eg2 = t.match(/(?:On sait que|On a|Dans le triangle [A-Z]{3},) ([A-Z]{2}) = ([A-Z]{2}),? et (?:que )?([A-Z]{2}) est plus (long|court)\./);
   if (eg3) {
     n = "équilatéral";
     if (!proches(lg(eg3[1]), lg(eg3[2])) || !proches(lg(eg3[2]), lg(eg3[3]))) p.push("figure : les côtés annoncés égaux ne le sont pas");
@@ -257,7 +270,7 @@ function corrigerTypeCoteCodages(q: Q): string[] {
     const [u, v, w] = [lg(eg2[1]), lg(eg2[2]), lg(eg2[3])];
     if (!proches(u, v)) p.push("figure : les côtés annoncés égaux ne le sont pas");
     if (eg2[4] === "long" ? !(w > u * 1.03) : !(w < u * 0.97)) p.push(`figure : ${eg2[3]} n’est pas plus ${eg2[4]}`);
-  } else if (/trois longueurs différentes/.test(t)) {
+  } else if (/(trois|3) longueurs différentes/.test(t)) {
     n = "quelconque";
     const g = Object.values(cn);
     if (proches(g[0], g[1]) || proches(g[1], g[2]) || proches(g[0], g[2])) p.push("figure : deux côtés égaux pour un triangle quelconque");
@@ -275,6 +288,9 @@ function corrigerTypeCoteCodages(q: Q): string[] {
         if (!lies && n !== "équilatéral" && proches(g[sides[i]], g[sides[j]])) p.push(`côtés ${sides[i]} et ${sides[j]} égaux mais non codés`);
       }
   }
+  // Un équilatéral est aussi isocèle : la question doit alors demander le nom le plus précis.
+  if (n === "équilatéral" && !QUESTION_PRECISE.test(t)) p.push("la question ne demande pas la nature la plus précise");
+  if (!/[Qq]uelle est sa nature|plus précis|le mieux|équilatéral, isocèle ou quelconque/.test(t)) p.push("la question ne demande pas la nature");
   uneSeuleJuste(q, (ch) => ch === n, p);
   return p;
 }
@@ -372,10 +388,10 @@ function anglesDeLaFigure(f: Fig, p: string[]) {
 function anglesNommesOk(t: string, f: Fig, p: string[]) {
   const g = anglesFig(f);
   const noms = nomsFig(f);
-  for (const m of t.matchAll(/[Ll]’angle en ([A-Z]) mesure (\d+(?:,\d+)?)°/g)) {
-    const k = (["A", "B", "C"] as const)[noms.indexOf(m[1])];
-    if (!k) p.push(`sommet ${m[1]} absent de la figure`);
-    else if (Math.abs(g[k] - num(m[2])) > 2) p.push(`figure : angle en ${m[1]} de ${g[k].toFixed(1)}°, ${m[2]}° dans le texte`);
+  for (const [S, v] of Object.entries(anglesNommesLus(t))) {
+    const k = (["A", "B", "C"] as const)[noms.indexOf(S)];
+    if (!k) p.push(`sommet ${S} absent de la figure`);
+    else if (Math.abs(g[k] - v) > 2) p.push(`figure : angle en ${S} de ${g[k].toFixed(1)}°, ${v}° dans le texte`);
   }
 }
 function natureAngles(as: number[]) {
@@ -415,7 +431,48 @@ function corrigerTypeAngle(q: Q): string[] {
 
 // =====================================================================
 // TRIANGLE_DEFI
+/**
+ * ★2 nu : tout est sur la figure — les longueurs écrites sur les côtés et,
+ * s'il existe, le codage de l'angle droit. On relit le dessin comme l'élève.
+ */
+function corrigerDefiReconnaissanceFigure(q: Q, f: Fig): string[] {
+  const p: string[] = [];
+  const t = q.text;
+  if (!/plus précis/.test(t)) p.push("la question ne demande pas la nature la plus précise");
+  memesNoms(f, t.match(/triangle ([A-Z])([A-Z])([A-Z])\b/)?.slice(1, 4) ?? [], p);
+  const lab = f.sideLabels ?? {};
+  const l: Partial<Record<"AB" | "BC" | "CA", number>> = {};
+  for (const k of ["AB", "BC", "CA"] as const) {
+    const m = lab[k] ? longueursLues(String(lab[k]))[0] : undefined;
+    if (m) l[k] = m.v;
+  }
+  const a = anglesFig(f);
+  const droit = f.marks?.rightAngleAt;
+  if (droit && Math.abs(a[droit] - 90) > 1.5) p.push("angle codé droit qui ne l’est pas");
+  for (const k of ["A", "B", "C"] as const) if (k !== droit && Math.abs(a[k] - 90) < 4) p.push(`angle presque droit en ${k} sans codage : figure trompeuse`);
+  const ks = Object.keys(l) as Array<"AB" | "BC" | "CA">;
+  let n: string;
+  if (ks.length === 3) {
+    figureALEchelle(f, l as { AB: number; BC: number; CA: number }, p);
+    const [x, y, z] = ks.map((k) => l[k]!).sort((u, v) => u - v);
+    if (x + y <= z) p.push(`triangle impossible : ${x} + ${y} ≤ ${z}`);
+    if (droit && !egal(x * x + y * y, z * z, 1e-6)) p.push(`angle droit codé mais ${x}² + ${y}² ≠ ${z}²`);
+    const nat = natureDe(x, y, z);
+    n = nat === "équilatéral" ? (droit ? "impossible" : "équilatéral") : nat === "isocèle" ? (droit ? "rectangle isocèle" : "isocèle") : droit ? "rectangle" : "quelconque";
+  } else if (ks.length === 2 && droit) {
+    // Deux côtés écrits : ils doivent être les deux côtés de l'angle droit, et égaux.
+    if (!ks.every((k) => k.includes(droit))) p.push("les longueurs écrites ne sont pas les côtés de l’angle droit");
+    const g = cotesFig(f);
+    if (Math.abs(g[ks[0]] - g[ks[1]]) / g[ks[0]] > 0.02) p.push("figure : les deux côtés de l’angle droit ne sont pas égaux");
+    n = l[ks[0]] === l[ks[1]] ? "rectangle isocèle" : "rectangle";
+    if (n !== "rectangle isocèle") p.push("deux longueurs différentes : le troisième côté manque");
+  } else return [...p, `longueurs illisibles sur la figure (${ks.length})`];
+  uneSeuleJuste(q, (c) => c === n, p);
+  return p;
+}
 function corrigerDefiReconnaissance(q: Q): string[] {
+  const f0 = fig(q);
+  if (f0 && longueursLues(q.text).length === 0) return corrigerDefiReconnaissanceFigure(q, f0);
   const p: string[] = [];
   const t = q.text;
   decimalesOk(t, p);
@@ -431,7 +488,7 @@ function corrigerDefiReconnaissance(q: Q): string[] {
     plausibles(ls, p);
     const [x, y, z] = ls.map((l) => l.v).sort((u, v) => u - v);
     if (x + y <= z) p.push(`triangle impossible : ${x} + ${y} ≤ ${z}`);
-    const droit = /il a un angle droit/.test(t);
+    const droit = /[Ii]l a un angle droit/.test(t);
     const pasDroit = /n’a pas d’angle droit/.test(t);
     // Trois côtés égaux : jamais d'angle droit (trois angles de 60°), inutile de le dire.
     if (droit && pasDroit) return [...p, "angle droit annoncé et nié"];
@@ -568,8 +625,7 @@ function anglesReconstruits(q: Q, p: string[]) {
   const f = fig(q);
   const V = t.match(/triangle ([A-Z])([A-Z])([A-Z])\b/)?.slice(1, 4);
   if (!V) return null;
-  const connus: Record<string, number> = {};
-  for (const m of t.matchAll(/[Ll]’angle en ([A-Z])(?: mesure| :) (\d+(?:,\d+)?)°/g)) connus[m[1]] = num(m[2]);
+  const connus: Record<string, number> = anglesNommesLus(t);
   if (f) {
     memesNoms(f, V, p);
     anglesDeLaFigure(f, p);
@@ -617,7 +673,7 @@ function corrigerAngleManquant(q: Q): string[] {
   const rep = r.connus[r.demande];
   const t = q.text;
   // L'angle demandé ne doit pas être déjà écrit dans le texte.
-  if (new RegExp(`[Ll]’angle en ${r.demande}(?: mesure| :) \\d`).test(t)) p.push("l’angle demandé est déjà donné");
+  if (anglesNommesLus(t)[r.demande] !== undefined) p.push("l’angle demandé est déjà donné");
   if (q.format === "qcm") uneSeuleJuste(q, (c) => mesure(c)?.u === "°" && egal(mesure(c)!.v, rep), p);
   else verifierMesure(q, rep, "°", p);
   return p;
@@ -625,8 +681,9 @@ function corrigerAngleManquant(q: Q): string[] {
 function corrigerSommeDeuxAutres(q: Q): string[] {
   const p: string[] = [];
   const t = q.text;
-  const m = t.match(/L’angle en ([A-Z]) mesure (\d+)°/);
-  if (!m) return ["angle connu illisible"];
+  const lus = Object.entries(anglesNommesLus(t));
+  if (lus.length !== 1) return [`il faut un seul angle connu, lu : ${lus.length}`];
+  const m = ["", lus[0][0], String(lus[0][1])];
   const f = fig(q);
   if (f) {
     memesNoms(f, t.match(/triangle ([A-Z])([A-Z])([A-Z])\b/)?.slice(1, 4) ?? [], p);
@@ -690,7 +747,7 @@ function corrigerDefiAnglesPossibles(q: Q): string[] {
 function corrigerDefiDeuxAngles(q: Q): string[] {
   const p: string[] = [];
   const t = q.text;
-  const droits = (t.match(/angle droit/g) ?? []).length;
+  const droits = (t.match(/angle droit/g) ?? []).length + 2 * (t.match(/deux angles droits/g) ?? []).length;
   const as = [...anglesLus(t), ...Array(droits).fill(90)];
   if (as.length !== 2) return [`il faut deux angles, lu : ${as.length}`];
   for (const m of t.matchAll(/angle obtus de (\d+)°/g)) if (num(m[1]) <= 90) p.push(`« obtus » pour ${m[1]}°`);
@@ -788,6 +845,18 @@ export const CORRECTEURS: CorrecteursMaths = {
   triangle_sommet_cote_tpl_compter: corrigerSommetCote,
   triangle_sommet_cote_tpl_1: corrigerSommetCote,
   triangle_sommet_cote_qcm_tpl_oppose: corrigerSommetCote,
+  // 03/11/2026 : les situations d'avant, passées à ★3.
+  triangle_nommer_tpl_ctx3: corrigerNommer,
+  triangle_sommet_cote_tpl_ctx3: corrigerSommetCote,
+  triangle_type_cote_tpl_longueurs_ctx3: corrigerTypeCoteLongueurs,
+  triangle_type_cote_tpl_codages_ctx3: corrigerTypeCoteCodages,
+  triangle_type_angle_tpl_ctx3: corrigerTypeAngle,
+  triangle_somme_angle_tpl_ctx3: corrigerSommeConnaitre,
+  triangle_somme_angle_tpl_deux_autres_ctx3: corrigerSommeDeuxAutres,
+  triangle_angle_manquant_tpl_ctx3: corrigerAngleManquant,
+  triangle_propriete_defi_tpl_angles_possibles_ctx3: corrigerDefiAnglesPossibles,
+  triangle_propriete_defi_tpl_deux_angles_ctx3: corrigerDefiDeuxAngles,
+  triangle_defi_tpl_reconnaissance_ctx3: corrigerDefiReconnaissance,
 };
 
 // Outils partagés avec les autres correcteurs de géométrie.

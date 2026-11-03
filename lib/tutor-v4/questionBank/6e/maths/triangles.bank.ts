@@ -67,14 +67,14 @@ const OBJETS: Objet[] = [
   { nom: "une parcelle de jardin", u: "m", min: 4, max: 25 },
   { nom: "un cerf-volant", u: "cm", min: 40, max: 95 },
   { nom: "le pignon d’une maison", u: "m", min: 4, max: 10 },
-  { nom: "une tente vue de face", u: "m", min: 1, max: 3 },
+  { nom: "l’entrée d’une tente", u: "m", min: 1, max: 3 },
   { nom: "un morceau de tissu", u: "cm", min: 10, max: 60 },
   { nom: "une pièce de puzzle", u: "cm", min: 3, max: 9 },
   { nom: "un carreau de mosaïque", u: "cm", min: 4, max: 15 },
   { nom: "une étagère d’angle", u: "cm", min: 25, max: 60 },
   { nom: "un champ", u: "m", min: 40, max: 150 },
-  { nom: "une rampe de skate vue de côté", u: "m", min: 1, max: 4 },
-  { nom: "un sandwich coupé en deux", u: "cm", min: 8, max: 14 },
+  { nom: "une rampe de skate", u: "m", min: 1, max: 4 },
+  { nom: "un demi-sandwich", u: "cm", min: 8, max: 14 },
   { nom: "une serviette pliée", u: "cm", min: 15, max: 35 },
   { nom: "un panneau de randonnée", u: "cm", min: 30, max: 80 },
 ];
@@ -82,14 +82,26 @@ const objet = () => pick(OBJETS);
 
 /** La phrase qui pose le triangle `nom` dans sa situation. */
 function situation(nom: string, o: Objet, P: Prenom) {
+  // 03/11/2026 : des phrases courtes, une information chacune (★3 : 25 mots au plus).
   return pick([
     `${P.nom} dessine ${o.nom} : c’est le triangle ${nom}.`,
     `${cap(o.nom)} a la forme du triangle ${nom}.`,
-    `On représente ${o.nom} par le triangle ${nom}.`,
-    `Sur le cahier ${de(P.nom)}, le triangle ${nom} représente ${o.nom}.`,
-    `${P.nom} observe ${o.nom}. Sa forme est celle du triangle ${nom}.`,
+    `Le triangle ${nom} représente ${o.nom}.`,
+    `${P.nom} trace ${o.nom}. C’est le triangle ${nom}.`,
   ]);
 }
+
+/* ⛔⛔ 03/11/2026 — D'ABORD LE GESTE NU (Frédéric, ../REGLES-6E.md) : à ★1 et
+   ★2, ni prénom, ni objet (voile, pignon, tissu…), ni histoire — « Dans le
+   triangle CMS, Ĉ = 61° et M̂ = 50°. Calcule l'angle en S. », 12 mots au plus
+   à ★1, 15 à ★2, verbe d'action en tête. Chaque générateur prend `ctx` :
+   `false` (défaut) donne l'énoncé nu, souvent porté par la FIGURE (longueurs,
+   angles, codages écrits dessus) ; `true` garde les situations d'avant, que
+   les gabarits « _ctx3 » servent à ★3. */
+/** Les dimensions d'un triangle nu : des centimètres, des mètres parfois. */
+const nu = (): Objet => (Math.random() < 0.75 ? { nom: "", u: "cm", min: 3, max: 12 } : { nom: "", u: "m", min: 2, max: 9 });
+/** L'angle d'un sommet écrit comme en classe : $\widehat{C}$. */
+const chapeau = (S: string) => `$\\widehat{${S}}$`;
 
 /** Une lettre qui n'est PAS un sommet du triangle. */
 function autreLettre(sauf: string[]) {
@@ -168,23 +180,31 @@ function dessinQuelconque(noms: [string, string, string]) {
 }
 
 // ----- TRIANGLE_NOMMER
-function genNommerDepuisSommets(): Q {
+function genNommerDepuisSommets(ctx = false): Q {
   const [X, Y, Z] = sommetsTriangle();
   const o = objet();
   const P = prenom();
   const W = autreLettre([X, Y, Z]);
-  const intro = pick([
-    `${P.nom} dessine ${o.nom}. Ses trois sommets sont ${X}, ${Y} et ${Z}.`,
-    `${cap(o.nom)} a trois coins : les points ${X}, ${Y} et ${Z}.`,
-    `Sur le dessin ${de(P.nom)}, ${o.nom} a pour sommets ${X}, ${Y} et ${Z}.`,
-    `On représente ${o.nom} par un triangle. Ses sommets sont ${X}, ${Y} et ${Z}.`,
-  ]);
-  const question = pick([
-    "Comment nomme-t-on ce triangle ?",
-    "Quel nom peut-on donner à ce triangle ?",
-    "Quelle écriture désigne ce triangle ?",
-    "Choisis le bon nom pour ce triangle.",
-  ]);
+  const intro = ctx
+    ? pick([
+        `${P.nom} dessine ${o.nom}. Ses trois sommets sont ${X}, ${Y} et ${Z}.`,
+        `${cap(o.nom)} a trois coins : les points ${X}, ${Y} et ${Z}.`,
+        `Sur le dessin ${de(P.nom)}, ${o.nom} a pour sommets ${X}, ${Y} et ${Z}.`,
+        `On représente ${o.nom} par un triangle. Ses sommets sont ${X}, ${Y} et ${Z}.`,
+      ])
+    : "";
+  const question = ctx
+    ? pick([
+        "Comment nomme-t-on ce triangle ?",
+        "Quel nom peut-on donner à ce triangle ?",
+        "Quelle écriture désigne ce triangle ?",
+        "Choisis le bon nom pour ce triangle.",
+      ])
+    : pick([
+        `Choisis le nom du triangle de sommets ${X}, ${Y} et ${Z}.`,
+        `Un triangle a pour sommets ${X}, ${Y} et ${Z}. Choisis son nom.`,
+        `Trouve le nom du triangle de sommets ${X}, ${Y} et ${Z}.`,
+      ]);
   const juste = `triangle ${shuffle([X, Y, Z]).join("")}`;
   const pieges = shuffle([
     `triangle ${X}${Y}`,
@@ -194,7 +214,7 @@ function genNommerDepuisSommets(): Q {
     `triangle ${X}${W}${Z}`,
   ]).slice(0, 3);
   return {
-    text: `${intro} ${question}`,
+    text: ctx ? `${intro} ${question}` : question,
     format: "qcm",
     choices: shuffle([juste, ...pieges]),
     expected: [juste],
@@ -205,13 +225,13 @@ function genNommerDepuisSommets(): Q {
     canvas: dessinQuelconque(shuffle([X, Y, Z]) as [string, string, string]),
   };
 }
-function genNommerLireNom(): Q {
+function genNommerLireNom(ctx = false): Q {
   const [X, Y, Z] = sommetsTriangle();
   const N = shuffle([X, Y, Z]).join("");
   const o = objet();
   const P = prenom();
   const W = autreLettre([X, Y, Z]);
-  const intro = situation(N, o, P);
+  const intro = ctx ? situation(N, o, P) : pick([`Observe le triangle ${N}.`, `Voici le triangle ${N}.`]);
   const mode = pick(["sommets", "meme", "sommet?", "lettres"] as const);
   const canvas = dessinQuelconque(shuffle([X, Y, Z]) as [string, string, string]);
   if (mode === "sommets") {
@@ -231,11 +251,11 @@ function genNommerLireNom(): Q {
     while (autre === N) autre = shuffle([X, Y, Z]).join("");
     const juste = `triangle ${autre}`;
     return {
-      text: `${intro} ${pick([
-        `Laquelle de ces écritures désigne le même triangle ?`,
-        `${P.nom} veut l’écrire autrement. Quelle écriture convient ?`,
-        `Quel autre nom peut-on lui donner ?`,
-      ])}`,
+      text: `${intro} ${pick(
+        ctx
+          ? [`Laquelle de ces écritures désigne le même triangle ?`, `${P.nom} veut l’écrire autrement. Quelle écriture convient ?`, `Quel autre nom peut-on lui donner ?`]
+          : [`Quel autre nom peut-on lui donner ?`, `Choisis un autre nom pour ce même triangle.`],
+      )}`,
       format: "qcm",
       choices: shuffle([juste, `triangle ${X}${Y}${W}`, `triangle ${Z}${X}`, `segment ${seg(Y, Z)}`]),
       expected: [juste],
@@ -248,7 +268,7 @@ function genNommerLireNom(): Q {
     const T = pick([X, Y, Z, W, W]);
     const oui = T !== W;
     return {
-      text: `${intro} Le point ${T} est-il un sommet de ce triangle ?`,
+      text: ctx ? `${intro} Le point ${T} est-il un sommet de ce triangle ?` : `Le point ${T} est-il un sommet du triangle ${N} ?`,
       format: "qcm",
       choices: shuffle(["oui", "non"]),
       expected: [oui ? "oui" : "non"],
@@ -262,7 +282,7 @@ function genNommerLireNom(): Q {
     };
   }
   return {
-    text: `${intro} ${pick(["Combien de lettres faut-il pour nommer un triangle ?", "Pour nommer ce triangle, combien de lettres utilise-t-on ?"])}`,
+    text: `${intro} ${ctx ? pick(["Combien de lettres faut-il pour nommer un triangle ?", "Pour nommer ce triangle, combien de lettres utilise-t-on ?"]) : "Combien de lettres faut-il pour le nommer ?"}`,
     format: "qcm",
     choices: shuffle(["2", "3", "4", "6"]),
     expected: ["3"],
@@ -274,20 +294,27 @@ function genNommerLireNom(): Q {
 
 // ----- TRIANGLE_SOMMET_COTE
 /** Le triangle d'une situation : nom, sommets, lettre étrangère, intro, figure. */
-function triangleEnSituation() {
+function triangleEnSituation(ctx = true) {
   const [X, Y, Z] = sommetsTriangle();
   const N = shuffle([X, Y, Z]).join("");
   const o = objet();
   const P = prenom();
-  return { X, Y, Z, N, o, P, W: autreLettre([X, Y, Z]), intro: situation(N, o, P), canvas: dessinQuelconque(shuffle([X, Y, Z]) as [string, string, string]) };
+  return { X, Y, Z, N, o, P, W: autreLettre([X, Y, Z]), intro: ctx ? situation(N, o, P) : "", canvas: dessinQuelconque(shuffle([X, Y, Z]) as [string, string, string]) };
 }
-function genSommetCoteCompter(): Q {
-  const { X, Y, Z, N, W, intro, canvas } = triangleEnSituation();
+/** L'énoncé : la situation puis la question (★3), ou la question nue seule (★1-★2). */
+const enonce = (intro: string, ctx: boolean, avec: string[], sans: string[]) => (ctx ? `${intro} ${pick(avec)}` : pick(sans));
+function genSommetCoteCompter(ctx = false): Q {
+  const { X, Y, Z, N, W, intro, canvas } = triangleEnSituation(ctx);
   const mode = pick(["compter", "compter", "cotes", "estCote"] as const);
   if (mode === "compter") {
     const quoi = pick(["sommets", "côtés", "angles"]);
     return {
-      text: `${intro} ${pick([`Combien de ${quoi} a ce triangle ?`, `Combien de ${quoi} compte le triangle ${N} ?`, `Le triangle ${N} a combien de ${quoi} ?`])}`,
+      text: enonce(
+        intro,
+        ctx,
+        [`Combien de ${quoi} a ce triangle ?`, `Combien de ${quoi} compte le triangle ${N} ?`, `Le triangle ${N} a combien de ${quoi} ?`],
+        [`Combien de ${quoi} a le triangle ${N} ?`, `Observe le triangle ${N}. Combien de ${quoi} a-t-il ?`, `Compte les ${quoi} du triangle ${N}.`],
+      ),
       format: "qcm",
       choices: shuffle(["2", "3", "4", "6"]),
       expected: ["3"],
@@ -299,7 +326,12 @@ function genSommetCoteCompter(): Q {
   if (mode === "cotes") {
     const juste = `${seg(X, Y)}, ${seg(Y, Z)} et ${seg(X, Z)}`;
     return {
-      text: `${intro} ${pick(["Quels sont les côtés de ce triangle ?", `Quels sont les côtés du triangle ${N} ?`, "Cite les trois côtés de ce triangle."])}`,
+      text: enonce(
+        intro,
+        ctx,
+        ["Quels sont les côtés de ce triangle ?", `Quels sont les côtés du triangle ${N} ?`, "Cite les trois côtés de ce triangle."],
+        [`Quels sont les côtés du triangle ${N} ?`, `Cite les trois côtés du triangle ${N}.`],
+      ),
       format: "qcm",
       choices: shuffle([juste, `${X}, ${Y} et ${Z}`, `${seg(X, Y)} et ${seg(Y, Z)}`, `${seg(X, Y)}, ${seg(Y, Z)} et ${seg(X, W)}`]),
       expected: [juste],
@@ -311,7 +343,7 @@ function genSommetCoteCompter(): Q {
   const [U, V] = pick([[X, Y], [Y, Z], [X, Z], [X, W], [W, Z]]);
   const oui = U !== W && V !== W;
   return {
-    text: `${intro} Le segment ${seg(U, V)} est-il un côté de ce triangle ?`,
+    text: ctx ? `${intro} Le segment ${seg(U, V)} est-il un côté de ce triangle ?` : `Le segment ${seg(U, V)} est-il un côté du triangle ${N} ?`,
     format: "qcm",
     choices: shuffle(["oui", "non"]),
     expected: [oui ? "oui" : "non"],
@@ -324,13 +356,18 @@ function genSommetCoteCompter(): Q {
     canvas,
   };
 }
-function genSommetCoteRelier(): Q {
-  const { X, Y, Z, N, W, intro, canvas } = triangleEnSituation();
+function genSommetCoteRelier(ctx = false): Q {
+  const { X, Y, Z, N, W, intro, canvas } = triangleEnSituation(ctx);
   const [S, U, V] = shuffle([X, Y, Z]);
   const mode = pick(["relie", "extremites", "pasCote"] as const);
   if (mode === "relie") {
     return {
-      text: `${intro} ${pick([`Quel côté relie les sommets ${U} et ${V} ?`, `Quel côté va de ${U} à ${V} ?`, `Comment s’appelle le côté qui joint ${U} et ${V} ?`])}`,
+      text: enonce(
+        intro,
+        ctx,
+        [`Quel côté relie les sommets ${U} et ${V} ?`, `Quel côté va de ${U} à ${V} ?`, `Comment s’appelle le côté qui joint ${U} et ${V} ?`],
+        [`Dans le triangle ${N}, quel côté relie les sommets ${U} et ${V} ?`, `Quel côté du triangle ${N} va de ${U} à ${V} ?`],
+      ),
       format: "qcm",
       choices: shuffle([seg(U, V), seg(S, U), seg(S, V), seg(U, W)]),
       expected: [seg(U, V)],
@@ -342,7 +379,12 @@ function genSommetCoteRelier(): Q {
   if (mode === "extremites") {
     const juste = `${[U, V].sort().join(" et ")}`;
     return {
-      text: `${intro} ${pick([`Quelles sont les extrémités du côté ${seg(U, V)} ?`, `Le côté ${seg(U, V)} relie quels sommets ?`])}`,
+      text: enonce(
+        intro,
+        ctx,
+        [`Quelles sont les extrémités du côté ${seg(U, V)} ?`, `Le côté ${seg(U, V)} relie quels sommets ?`],
+        [`Dans le triangle ${N}, quelles sont les extrémités du côté ${seg(U, V)} ?`, `Le côté ${seg(U, V)} du triangle ${N} relie quels sommets ?`],
+      ),
       format: "qcm",
       choices: shuffle([juste, `${[S, U].sort().join(" et ")}`, `${[S, V].sort().join(" et ")}`, `${S} seulement`]),
       expected: [juste],
@@ -353,7 +395,12 @@ function genSommetCoteRelier(): Q {
   }
   const intrus = seg(pick([X, Y, Z]), W);
   return {
-    text: `${intro} ${pick(["Lequel de ces segments n’est PAS un côté de ce triangle ?", `Quel segment n’est PAS un côté du triangle ${N} ?`])}`,
+    text: enonce(
+      intro,
+      ctx,
+      ["Quel segment n’est PAS un côté de ce triangle ?", `Quel segment n’est PAS un côté du triangle ${N} ?`],
+      [`Quel segment n’est PAS un côté du triangle ${N} ?`, `Coche le segment qui n’est PAS un côté du triangle ${N}.`],
+    ),
     format: "qcm",
     choices: shuffle([intrus, seg(X, Y), seg(Y, Z), seg(X, Z)]),
     expected: [intrus],
@@ -363,7 +410,7 @@ function genSommetCoteRelier(): Q {
   };
 }
 function genSommetCoteOppose(): Q {
-  const { X, Y, Z, N, intro, canvas } = triangleEnSituation();
+  const { X, Y, Z, N, intro, canvas } = triangleEnSituation(true);
   const [S, U, V] = shuffle([X, Y, Z]);
   if (Math.random() < 0.5) {
     return {
@@ -392,9 +439,9 @@ const NATURES_COTES = ["équilatéral", "isocèle", "quelconque"] as const;
 type NatureCotes = (typeof NATURES_COTES)[number];
 const QUESTION_NATURE = [
   "Quelle est sa nature la plus précise ?",
-  "Quel mot décrit le mieux ce triangle ?",
-  "Choisis le nom le plus précis pour ce triangle.",
-  "Ce triangle est-il équilatéral, isocèle ou quelconque ?",
+  "Quel mot le décrit le mieux ?",
+  "Choisis le nom le plus précis.",
+  "Est-il équilatéral, isocèle ou quelconque ?",
 ];
 function pourquoiNature(n: NatureCotes) {
   return n === "équilatéral"
@@ -407,20 +454,35 @@ function pourquoiNature(n: NatureCotes) {
  * Un triangle de la nature voulue, avec ses longueurs, ses noms, et sa figure
  * à l'échelle : noms[0] et noms[1] sont les sommets A et B du dessin.
  */
-function triangleDeNature(n: NatureCotes) {
-  const o = objet();
+function triangleDeNature(n: NatureCotes, o: Objet = objet()) {
   const [X, Y, Z] = sommetsTriangle();
   const noms = shuffle([X, Y, Z]) as [string, string, string];
   const [lAB, lBC, lCA] = shuffle(longueurs(o, n));
   return { o, X, Y, Z, noms, lAB, lBC, lCA, pts: pointsParCotes(lAB, lBC, lCA) };
 }
-function genTypeCoteLongueurs(): Q {
+function genTypeCoteLongueurs(ctx = false): Q {
   const n = pick(NATURES_COTES);
-  const { o, X, Y, Z, noms, lAB, lBC, lCA, pts } = triangleDeNature(n);
+  const { o, X, Y, Z, noms, lAB, lBC, lCA, pts } = triangleDeNature(n, ctx ? objet() : nu());
   const P = prenom();
   const N = `${X}${Y}${Z}`;
   const u = o.u;
   const [A, B, C] = noms;
+  const canvas = figure(pts, noms, { sideLabels: { AB: `${fr(lAB)} ${u}`, BC: `${fr(lBC)} ${u}`, CA: `${fr(lCA)} ${u}` } });
+  if (!ctx)
+    // ★1 : les longueurs sont écrites sur la figure, l'élève les lit et les compare.
+    return {
+      text: pick([
+        `Observe les longueurs. Le triangle ${N} est-il équilatéral, isocèle ou quelconque ?`,
+        `Lis les côtés du triangle ${N}. Quel mot le décrit le mieux ?`,
+        `Quelle est la nature la plus précise du triangle ${N} ?`,
+      ]),
+      format: "qcm",
+      choices: shuffle([...NATURES_COTES]),
+      expected: [n],
+      comparator: "mcq_exact",
+      explanation: expl(`On compare les trois longueurs de la figure : ${fr(lAB)} ${u}, ${fr(lBC)} ${u} et ${fr(lCA)} ${u}. ${pourquoiNature(n)}`),
+      canvas,
+    };
   const donnees = pick([
     `Ses côtés mesurent ${fr(lAB)} ${u}, ${fr(lBC)} ${u} et ${fr(lCA)} ${u}.`,
     `On mesure ${lg(A, B)} = ${fr(lAB)} ${u}, ${lg(B, C)} = ${fr(lBC)} ${u} et ${lg(C, A)} = ${fr(lCA)} ${u}.`,
@@ -433,12 +495,12 @@ function genTypeCoteLongueurs(): Q {
     expected: [n],
     comparator: "mcq_exact",
     explanation: expl(`On compare les trois longueurs : ${fr(lAB)} ${u}, ${fr(lBC)} ${u} et ${fr(lCA)} ${u}. ${pourquoiNature(n)}`),
-    canvas: figure(pts, noms, { sideLabels: { AB: `${fr(lAB)} ${u}`, BC: `${fr(lBC)} ${u}`, CA: `${fr(lCA)} ${u}` } }),
+    canvas,
   };
 }
-function genTypeCoteCodages(): Q {
+function genTypeCoteCodages(ctx = false): Q {
   const n = pick(NATURES_COTES);
-  const { o, X, Y, Z, noms, lAB, lBC, lCA, pts } = triangleDeNature(n);
+  const { o, X, Y, Z, noms, lAB, lBC, lCA, pts } = triangleDeNature(n, ctx ? objet() : nu());
   const P = prenom();
   const N = `${X}${Y}${Z}`;
   const [A, B, C] = noms;
@@ -450,7 +512,12 @@ function genTypeCoteCodages(): Q {
   const nomCote: Record<Cote, string> = { AB: lg(A, B), BC: lg(B, C), CA: lg(C, A) };
   if (Math.random() < 0.5) {
     return {
-      text: `${situation(N, o, P)} ${pick(["Observe les codages de la figure.", "Regarde les petits traits sur les côtés.", `${P.nom} a codé les côtés de même longueur.`])} ${pick(QUESTION_NATURE)}`,
+      text: ctx
+        ? `${situation(N, o, P)} ${pick(["Observe les codages de la figure.", "Regarde les petits traits sur les côtés.", `${P.nom} a codé les côtés de même longueur.`])} ${pick(QUESTION_NATURE)}`
+        : pick([
+            `Observe les codages. Le triangle ${N} est-il équilatéral, isocèle ou quelconque ?`,
+            `Lis les codages du triangle ${N}. Quelle est sa nature la plus précise ?`,
+          ]),
       format: "qcm",
       choices: shuffle([...NATURES_COTES]),
       expected: [n],
@@ -460,16 +527,36 @@ function genTypeCoteCodages(): Q {
     };
   }
   // Les égalités écrites en toutes lettres, sans nombre.
+  if (!ctx) {
+    // ★2 nu : « Dans le triangle N, XY = YZ… », sans « on sait que ».
+    const [c1, c2] = egaux[0] ?? ["AB", "BC"];
+    const c3 = cotes.find((c) => c !== c1 && c !== c2)!;
+    const text =
+      n === "équilatéral"
+        ? `Dans le triangle ${N}, ${nomCote.AB} = ${nomCote.BC} = ${nomCote.CA}. Quelle est sa nature la plus précise ?`
+        : n === "isocèle"
+          ? `Dans le triangle ${N}, ${nomCote[c1]} = ${nomCote[c2]} et ${nomCote[c3]} est plus ${l[c3] > l[c1] ? "long" : "court"}. Quelle est sa nature ?`
+          : `Les côtés du triangle ${N} ont 3 longueurs différentes. Quelle est sa nature ?`;
+    return {
+      text,
+      format: "qcm",
+      choices: shuffle([...NATURES_COTES]),
+      expected: [n],
+      comparator: "mcq_exact",
+      explanation: expl(pourquoiNature(n)),
+      canvas: figure(pts, noms),
+    };
+  }
   const phrase =
     n === "équilatéral"
-      ? `On sait que ${nomCote.AB} = ${nomCote.BC} = ${nomCote.CA}.`
+      ? `On a ${nomCote.AB} = ${nomCote.BC} = ${nomCote.CA}.`
       : n === "isocèle"
         ? (() => {
             const [c1, c2] = egaux[0];
             const c3 = cotes.find((c) => c !== c1 && c !== c2)!;
-            return `On sait que ${nomCote[c1]} = ${nomCote[c2]}, et que ${nomCote[c3]} est ${l[c3] > l[c1] ? "plus long" : "plus court"}.`;
+            return `On a ${nomCote[c1]} = ${nomCote[c2]}, et ${nomCote[c3]} est ${l[c3] > l[c1] ? "plus long" : "plus court"}.`;
           })()
-        : `On sait que ${nomCote.AB}, ${nomCote.BC} et ${nomCote.CA} ont trois longueurs différentes.`;
+        : `Ses côtés ont 3 longueurs différentes.`;
   return {
     text: `${situation(N, o, P)} ${phrase} ${pick(QUESTION_NATURE)}`,
     format: "qcm",
@@ -577,9 +664,9 @@ function pourquoiAngles(n: NatAngle, g: number) {
       : `Le plus grand angle mesure ${g}°, moins que 90° : les trois angles sont aigus, le triangle est acutangle.`;
 }
 const QUESTION_ANGLES = [
-  "Que peut-on dire de ce triangle ?",
-  "Quel est le type de ce triangle selon ses angles ?",
-  "Choisis la bonne description de ce triangle.",
+  "Quel est son type ?",
+  "Quel est son type selon ses angles ?",
+  "Est-il rectangle, obtusangle ou acutangle ?",
 ];
 /** Un triangle d'angles donnés : le plus grand au sommet du haut (C du dessin). */
 function triangleAngles(n: NatAngle) {
@@ -589,17 +676,23 @@ function triangleAngles(n: NatAngle) {
   const [angA, angB] = shuffle([a, b]);
   return { a, b, g, X, Y, Z, N: `${X}${Y}${Z}`, noms, angA, angB, pts: pointsParAngles(angA, angB), o: objet(), P: prenom() };
 }
-function genTypeAngleMesures(): Q {
+function genTypeAngleMesures(ctx = false): Q {
   const n = pick(["rectangle", "obtus", "aigu"] as const);
   const { g, N, noms, angA, angB, pts, o, P } = triangleAngles(n);
   const [A, B, C] = noms;
   const donnees = pick([
     `Ses angles mesurent ${angA}°, ${angB}° et ${g}°.`,
-    `${P.nom} mesure ses angles au rapporteur : ${g}°, ${angA}° et ${angB}°.`,
-    `L’angle en ${A} mesure ${angA}°, l’angle en ${B} mesure ${angB}° et l’angle en ${C} mesure ${g}°.`,
+    `${P.nom} mesure ses angles : ${g}°, ${angA}° et ${angB}°.`,
   ]);
   return {
-    text: `${situation(N, o, P)} ${donnees} ${pick(QUESTION_ANGLES)}`,
+    // ★1 nu : les trois angles sont écrits sur la figure.
+    text: ctx
+      ? `${situation(N, o, P)} ${donnees} ${pick(QUESTION_ANGLES)}`
+      : pick([
+          `Observe les angles du triangle ${N}. Quel est son type ?`,
+          `Lis les angles. Le triangle ${N} est-il rectangle, obtusangle ou acutangle ?`,
+          `Quel est le type du triangle ${N} selon ses angles ?`,
+        ]),
     format: "qcm",
     choices: shuffle(Object.values(NAT_ANGLES)),
     expected: [NAT_ANGLES[n]],
@@ -608,12 +701,17 @@ function genTypeAngleMesures(): Q {
     canvas: figure(pts, noms, { angleLabels: { A: `${angA}°`, B: `${angB}°`, C: `${g}°` } }),
   };
 }
-function genTypeAngleFigure(): Q {
+function genTypeAngleFigure(ctx = false): Q {
   const n = pick(["rectangle", "obtus", "aigu"] as const);
   const { g, N, noms, angA, angB, pts, o, P } = triangleAngles(n);
   const marque = n === "rectangle" && Math.random() < 0.6;
   return {
-    text: `${situation(N, o, P)} ${pick(["Observe la figure.", "Regarde bien la figure.", `${P.nom} a complété la figure.`])} ${pick(QUESTION_ANGLES)}`,
+    text: ctx
+      ? `${situation(N, o, P)} ${pick(["Observe la figure.", "Regarde bien la figure.", `${P.nom} a complété la figure.`])} ${pick(QUESTION_ANGLES)}`
+      : pick([
+          `Observe la figure. Quel est le type du triangle ${N} selon ses angles ?`,
+          `Regarde la figure. Le triangle ${N} est-il rectangle, obtusangle ou acutangle ?`,
+        ]),
     format: "qcm",
     choices: shuffle(Object.values(NAT_ANGLES)),
     expected: [NAT_ANGLES[n]],
@@ -624,17 +722,21 @@ function genTypeAngleFigure(): Q {
       : figure(pts, noms, { angleLabels: { A: `${angA}°`, B: `${angB}°`, C: `${g}°` } }),
   };
 }
-function genTypeAngleDeux(): Q {
+function genTypeAngleDeux(ctx = false): Q {
   const n = pick(["rectangle", "obtus", "aigu"] as const);
   const { a, b, g, N, o, P } = triangleAngles(n);
   // On donne deux angles ; le troisième est à retrouver (180° en tout).
   const [d1, d2, cache] = shuffle([a, b, g]);
   return {
-    text: `${situation(N, o, P)} ${pick([
-      `Deux de ses angles mesurent ${d1}° et ${d2}°.`,
-      `${P.nom} a mesuré deux de ses angles : ${d1}° et ${d2}°.`,
-      `On connaît deux angles : ${d1}° et ${d2}°.`,
-    ])} ${pick(QUESTION_ANGLES)}`,
+    text: ctx
+      ? `${situation(N, o, P)} ${pick([
+          `Deux de ses angles mesurent ${d1}° et ${d2}°.`,
+          `On connaît deux angles : ${d1}° et ${d2}°.`,
+        ])} ${pick(QUESTION_ANGLES)}`
+      : pick([
+          `Dans le triangle ${N}, deux angles mesurent ${d1}° et ${d2}°. Quel est son type ?`,
+          `Le triangle ${N} a deux angles de ${d1}° et ${d2}°. Quel est son type ?`,
+        ]),
     format: "qcm",
     choices: shuffle(Object.values(NAT_ANGLES)),
     expected: [NAT_ANGLES[n]],
@@ -650,7 +752,66 @@ function quatreDont(juste: string, toutes: readonly string[]) {
   return shuffle([juste, ...shuffle(toutes.filter((x) => x !== juste)).slice(0, 3)]);
 }
 const TRIPLETS_DROITS: Array<[number, number, number]> = [[3, 4, 5], [6, 8, 10], [5, 12, 13], [8, 15, 17], [9, 12, 15], [12, 16, 20], [7, 24, 25], [20, 21, 29]];
-function genDefiReconnaissance(): Q {
+/**
+ * ★2 nu : la figure porte les longueurs et, s'il y en a un, le codage de
+ * l'angle droit ; l'énoncé ne fait que demander la nature la plus précise.
+ * Le sommet particulier (angle droit, sommet principal) est C, en haut.
+ */
+/** Sans codage, un angle de 84° à 96° se prendrait pour un angle droit : on retire. */
+function presqueDroit(x: number, y: number, z: number) {
+  const [p, q, r] = [x, y, z].sort((u, v) => u - v);
+  const deg = (Math.acos((p * p + q * q - r * r) / (2 * p * q)) * 180) / Math.PI;
+  return Math.abs(deg - 90) < 6;
+}
+function genDefiReconnaissanceNue(): Q {
+  const o: Objet = { nom: "", u: "cm", min: 3, max: 12 };
+  const [X, Y, Z] = sommetsTriangle();
+  const N = `${X}${Y}${Z}`;
+  const noms = shuffle([X, Y, Z]) as [string, string, string];
+  const u = o.u;
+  const n = pick(NATURES_DEFI);
+  const L = (x: number) => `${fr(x)} ${u}`;
+  let canvas: TriangleCanvasData;
+  let pourquoi: string;
+  if (n === "équilatéral") {
+    const [a] = longueurs(o, "équilatéral");
+    canvas = figure(pointsParCotes(a, a, a), noms, { sideLabels: { AB: L(a), BC: L(a), CA: L(a) } });
+    pourquoi = "Ses trois côtés sont égaux : il est équilatéral. Ses trois angles mesurent alors 60°, il ne peut pas être rectangle.";
+  } else if (n === "rectangle isocèle") {
+    const [a] = longueurs(o, "équilatéral");
+    canvas = figure(pointsParAngles(45, 45), noms, { sideLabels: { BC: L(a), CA: L(a) }, marks: { rightAngleAt: "C" } });
+    pourquoi = "Il a deux côtés égaux (isocèle) ET un angle droit codé (rectangle) : c’est un triangle rectangle isocèle.";
+  } else if (n === "rectangle") {
+    const [a, b, c] = pick(TRIPLETS_DROITS.filter((tr) => tr[2] <= 15));
+    // BC = a et CA = b se coupent à angle droit en C ; AB = c est le grand côté.
+    canvas = figure(pointsParCotes(c, a, b), noms, { sideLabels: { AB: L(c), BC: L(a), CA: L(b) }, marks: { rightAngleAt: "C" } });
+    pourquoi = "Il a un angle droit codé, et ses trois côtés sont différents : il est rectangle (mais pas isocèle).";
+  } else if (n === "isocèle") {
+    let [a, b] = longueurs(o, "isocèle");
+    while (presqueDroit(b, a, a)) [a, b] = longueurs(o, "isocèle");
+    canvas = figure(pointsParCotes(b, a, a), noms, { sideLabels: { AB: L(b), BC: L(a), CA: L(a) } });
+    pourquoi = "Deux côtés seulement sont égaux, et aucun angle droit n’est codé : il est isocèle.";
+  } else {
+    let [a, b, c] = longueurs(o, "quelconque");
+    while (presqueDroit(a, b, c)) [a, b, c] = longueurs(o, "quelconque");
+    canvas = figure(pointsParCotes(a, b, c), noms, { sideLabels: { AB: L(a), BC: L(b), CA: L(c) } });
+    pourquoi = "Ses trois côtés sont différents, et aucun angle droit n’est codé : il est quelconque.";
+  }
+  return {
+    text: pick([
+      `Observe la figure. Quelle est la nature la plus précise du triangle ${N} ?`,
+      `Lis la figure. Choisis le nom le plus précis du triangle ${N}.`,
+    ]),
+    format: "qcm",
+    choices: quatreDont(n, NATURES_DEFI),
+    expected: [n],
+    comparator: "mcq_exact",
+    explanation: expl(pourquoi),
+    canvas,
+  };
+}
+function genDefiReconnaissance(ctx = false): Q {
+  if (!ctx) return genDefiReconnaissanceNue();
   const o = objet();
   const P = prenom();
   const [X, Y, Z] = sommetsTriangle();
@@ -670,7 +831,7 @@ function genDefiReconnaissance(): Q {
   } else if (n === "rectangle") {
     const k = o.u === "m" && o.max <= 10 ? 0.5 : o.u === "cm" && o.max <= 15 ? 0.5 : pick([1, 2, 3]);
     const [a, b, c] = pick(TRIPLETS_DROITS.filter((tr) => tr[2] * k <= o.max * 1.5)).map((x) => x * k);
-    donnees = `Ses côtés mesurent ${fr(a)} ${u}, ${fr(b)} ${u} et ${fr(c)} ${u}, et il a un angle droit.`;
+    donnees = `Ses côtés mesurent ${fr(a)} ${u}, ${fr(b)} ${u} et ${fr(c)} ${u}. Il a un angle droit.`;
     pourquoi = "Il a un angle droit, et ses trois côtés sont différents : il est rectangle (mais pas isocèle).";
   } else if (n === "isocèle") {
     const [a, b] = longueurs(o, "isocèle");
@@ -682,7 +843,7 @@ function genDefiReconnaissance(): Q {
     pourquoi = "Ses trois côtés sont différents, et il n’a pas d’angle droit : il est quelconque.";
   }
   return {
-    text: `${situation(N, o, P)} ${donnees} ${pick(["Quelle est sa nature la plus précise ?", "Choisis le nom le plus précis pour ce triangle.", "Quel mot décrit le mieux ce triangle ?"])}`,
+    text: `${situation(N, o, P)} ${donnees} ${pick(["Quelle est sa nature la plus précise ?", "Choisis le nom le plus précis."])}`,
     format: "qcm",
     choices: quatreDont(n, NATURES_DEFI),
     expected: [n],
@@ -801,17 +962,28 @@ function genDefiIsoceleCoteManquant(): Q {
 }
 
 // ----- TRIANGLE_SOMME_ANGLE
-function genSommeConnaitre(): Q {
+function genSommeConnaitre(ctx = false): Q {
   const n = pick(["rectangle", "obtus", "aigu"] as const);
   const { a, b, g, X, Y, Z, N, noms, angA, angB, pts, o, P } = triangleAngles(n);
-  const mode = pick(["valeur", "addition", "decoupage"] as const);
+  const mode = ctx ? pick(["valeur", "addition", "decoupage"] as const) : pick(["valeur", "addition"] as const);
+  if (!ctx && mode === "addition")
+    // ★1 nu : les trois angles sont écrits sur la figure, on les additionne.
+    return {
+      text: pick([`Calcule la somme des angles du triangle ${N}.`, `Additionne les angles du triangle ${N}. Que trouves-tu ?`]),
+      format: "short",
+      expected: ["180°"],
+      comparator: "number_equal",
+      explanation: expl(`${angA} + ${angB} + ${g} = 180. On retrouve 180°, comme dans tous les triangles.`),
+      canvas: figure(pts, noms, { angleLabels: { A: `${angA}°`, B: `${angB}°`, C: `${g}°` } }),
+    };
   if (mode === "valeur") {
     return {
-      text: `${situation(N, o, P)} ${pick([
-        `Que vaut la somme des angles de ce triangle ?`,
-        `Si on additionne les angles en ${X}, en ${Y} et en ${Z}, que trouve-t-on ?`,
-        `Combien font ses trois angles réunis ?`,
-      ])}`,
+      text: enonce(
+        situation(N, o, P),
+        ctx,
+        [`Que vaut la somme des angles de ce triangle ?`, `Additionne les angles en ${X}, en ${Y} et en ${Z}. Que trouves-tu ?`, `Combien font ses trois angles réunis ?`],
+        [`Quelle est la somme des angles du triangle ${N} ?`, `Que vaut la somme des 3 angles du triangle ${N} ?`],
+      ),
       format: "qcm",
       choices: shuffle(["90°", "180°", "270°", "360°"]),
       expected: ["180°"],
@@ -832,7 +1004,7 @@ function genSommeConnaitre(): Q {
   }
   const juste = "un angle plat (180°)";
   return {
-    text: `${P.nom} découpe ${o.nom} en papier. ${P.f ? "Elle" : "Il"} déchire les trois coins et les colle côte à côte, les pointes réunies. ${pick(["Quel angle obtient-on ?", `Quel angle forment les trois coins ?`])}`,
+    text: `${P.nom} découpe ${o.nom} en papier. ${P.f ? "Elle" : "Il"} colle ses 3 coins côte à côte, pointes réunies. ${pick(["Quel angle obtient-on ?", `Quel angle forment les 3 coins ?`])}`,
     format: "qcm",
     choices: shuffle([juste, "un angle droit (90°)", "un tour complet (360°)", "un angle de 270°"]),
     expected: [juste],
@@ -840,7 +1012,7 @@ function genSommeConnaitre(): Q {
     explanation: expl("Les trois coins sont les trois angles du triangle. Mis côte à côte, ils forment un angle plat : leur somme vaut 180°."),
   };
 }
-function genSommeDeuxAutres(): Q {
+function genSommeDeuxAutres(ctx = false): Q {
   const n = pick(["rectangle", "obtus", "aigu"] as const);
   const { angA, angB, g, N, noms, pts, o, P } = triangleAngles(n);
   // L'angle connu est celui du sommet S, sur la figure comme dans le texte.
@@ -849,11 +1021,16 @@ function genSommeDeuxAutres(): Q {
   const connu = [angA, angB, g][k];
   const reste = 180 - connu;
   return {
-    text: `${situation(N, o, P)} L’angle en ${S} mesure ${connu}°. ${pick([
-      "Quelle est la somme des deux autres angles ?",
-      "Combien mesurent les deux autres angles réunis ?",
-      "Calcule la somme des deux angles restants.",
-    ])}`,
+    text: ctx
+      ? `${situation(N, o, P)} L’angle en ${S} mesure ${connu}°. ${pick([
+          "Quelle est la somme des deux autres angles ?",
+          "Combien mesurent les deux autres angles réunis ?",
+          "Calcule la somme des deux angles restants.",
+        ])}`
+      : pick([
+          `Dans le triangle ${N}, l’angle en ${S} mesure ${connu}°. Combien font les deux autres angles ?`,
+          `Dans le triangle ${N}, ${chapeau(S)} = ${connu}°. Calcule la somme des deux autres angles.`,
+        ]),
     format: "short",
     expected: [`${reste}°`],
     comparator: "number_equal",
@@ -875,17 +1052,34 @@ function angleManquant() {
 function donneesDeuxAngles(U: string, V: string, a: number, b: number, P: Prenom) {
   return pick([
     `L’angle en ${U} mesure ${a}° et l’angle en ${V} mesure ${b}°.`,
-    `${P.nom} a mesuré l’angle en ${U} : ${a}°, et l’angle en ${V} : ${b}°.`,
-    `On sait que l’angle en ${U} mesure ${a}° et que l’angle en ${V} mesure ${b}°.`,
+    `L’angle en ${U} mesure ${a}°. L’angle en ${V} mesure ${b}°.`,
   ]);
 }
-function genAngleManquantQcm(): Q {
-  const { N, o, P, vals, cache, U, V, rep } = angleManquant();
+/**
+ * ★2 nu : « Dans le triangle CMS, Ĉ = 61° et M̂ = 50°. Calcule l'angle en S. »,
+ * ou la figure seule (deux angles écrits, « ? » sur le troisième). La figure
+ * est toujours là : elle est fidèle aux mesures et remplace la lecture.
+ */
+function angleManquantNu(t: ReturnType<typeof angleManquant>) {
+  const { N, noms, angA, angB, g, pts, vals, cache, U, V } = t;
+  const lab: Record<"A" | "B" | "C", string> = { A: `${angA}°`, B: `${angB}°`, C: `${g}°` };
+  lab[(["A", "B", "C"] as const)[noms.indexOf(cache)]] = "?";
+  const text =
+    Math.random() < 0.6
+      ? `Dans le triangle ${N}, ${chapeau(U)} = ${vals[U]}° et ${chapeau(V)} = ${vals[V]}°. ${pick([`Calcule l’angle en ${cache}.`, `Trouve l’angle en ${cache}.`])}`
+      : pick([`Observe la figure. Calcule l’angle en ${cache} du triangle ${N}.`, `Lis la figure. Combien mesure l’angle en ${cache} du triangle ${N} ?`]);
+  return { text, canvas: figure(pts, noms, { angleLabels: lab }) };
+}
+function genAngleManquantQcm(ctx = false): Q {
+  const t = angleManquant();
+  const { N, o, P, vals, cache, U, V, rep } = t;
   const a = vals[U];
   const b = vals[V];
   const pieges = [180 - a, 180 - b, a + b, 90 - Math.min(a, b), rep + 10, rep - 10].filter((x) => x > 0 && x < 180 && x !== rep);
   return {
-    text: `${situation(N, o, P)} ${donneesDeuxAngles(U, V, a, b, P)} ${pick([`Combien mesure l’angle en ${cache} ?`, `Quelle est la mesure de l’angle en ${cache} ?`, `Trouve l’angle en ${cache}.`])}`,
+    ...(ctx
+      ? { text: `${situation(N, o, P)} ${donneesDeuxAngles(U, V, a, b, P)} ${pick([`Combien mesure l’angle en ${cache} ?`, `Trouve l’angle en ${cache}.`])}` }
+      : angleManquantNu(t)),
     format: "qcm",
     choices: shuffle([`${rep}°`, ...shuffle([...new Set(pieges)]).slice(0, 3).map((x) => `${x}°`)]),
     expected: [`${rep}°`],
@@ -893,12 +1087,15 @@ function genAngleManquantQcm(): Q {
     explanation: expl(`Les trois angles font 180° en tout. L’angle en ${cache} mesure 180 − ${a} − ${b} = ${rep}°.`),
   };
 }
-function genAngleManquantCourt(): Q {
-  const { N, o, P, vals, cache, U, V, rep } = angleManquant();
+function genAngleManquantCourt(ctx = false): Q {
+  const t = angleManquant();
+  const { N, o, P, vals, cache, U, V, rep } = t;
   const a = vals[U];
   const b = vals[V];
   return {
-    text: `${situation(N, o, P)} ${donneesDeuxAngles(U, V, a, b, P)} ${pick([`Calcule l’angle en ${cache}.`, `Combien mesure l’angle en ${cache} ?`, `Quel est le troisième angle ?`])}`,
+    ...(ctx
+      ? { text: `${situation(N, o, P)} ${donneesDeuxAngles(U, V, a, b, P)} ${pick([`Calcule l’angle en ${cache}.`, `Combien mesure l’angle en ${cache} ?`, `Quel est le troisième angle ?`])}` }
+      : angleManquantNu(t)),
     format: "short",
     expected: [`${rep}°`],
     comparator: "number_equal",
@@ -1012,12 +1209,25 @@ function pourquoiPossible(ls: number[], u: string) {
       ? `${fr(x)} + ${fr(y)} = ${fr(s)} ${u}, exactement le plus grand côté : les trois points seraient alignés, le triangle est « aplati ». Ce n’est pas un vrai triangle.`
       : `On additionne les deux plus petits côtés : ${fr(x)} + ${fr(y)} = ${fr(s)} ${u}. C’est plus petit que le plus grand côté (${fr(z)} ${u}) : les deux petits côtés ne se rejoignent pas, le triangle est impossible.`;
 }
-function genPossibleSimple(): Q {
-  const m = pick(MATERIAUX);
+/** ★2 nu : trois longueurs, sans baguette ni bambou. */
+const MATERIAUX_NUS: Materiau[] = [
+  { nom: "", u: "cm", min: 2, max: 15, demi: false },
+  { nom: "", u: "cm", min: 2, max: 12, demi: false },
+  { nom: "", u: "m", min: 1, max: 9, demi: false },
+];
+function genPossibleSimple(ctx = false): Q {
+  const m = pick(ctx ? MATERIAUX : MATERIAUX_NUS);
   const cas = pick(["possible", "impossible"] as const);
   const ls = troisLongueurs(m, cas, 0.2);
+  const [a, b, c] = ls.map((x) => `${fr(x)} ${m.u}`);
   return {
-    text: questionPossible(m, ls),
+    text: ctx
+      ? questionPossible(m, ls)
+      : pick([
+          `Peut-on construire un triangle de côtés ${a}, ${b} et ${c} ?`,
+          `Existe-t-il un triangle de côtés ${a}, ${b} et ${c} ?`,
+          `Un triangle peut-il avoir des côtés de ${a}, ${b} et ${c} ?`,
+        ]),
     format: "qcm",
     choices: shuffle(["oui", "non"]),
     expected: [cas === "possible" ? "oui" : "non"],
@@ -1071,7 +1281,7 @@ function genTroisiemeCote(): Q {
 }
 
 // ----- TRIANGLE_PROPRIETE_DEFI
-function genDefiAnglesPossibles(): Q {
+function genDefiAnglesPossibles(ctx = false): Q {
   const P = prenom();
   const o = objet();
   const ok = Math.random() < 0.5;
@@ -1083,12 +1293,20 @@ function genDefiAnglesPossibles(): Q {
   [a, b, c] = shuffle([a, b, c]);
   const s = a + b + c;
   return {
-    text: pick([
-      `${P.nom} dit avoir dessiné ${o.nom} en forme de triangle, avec des angles de ${a}°, ${b}° et ${c}°. Est-ce possible ?`,
-      `Sur le cahier ${de(P.nom)}, un triangle a des angles de ${a}°, ${b}° et ${c}°. Est-ce possible ?`,
-      `${P.nom} mesure les angles d’un triangle : ${a}°, ${b}° et ${c}°. Ces mesures sont-elles possibles ?`,
-      `${cap(o.nom)} a la forme d’un triangle. ${P.nom} annonce des angles de ${a}°, ${b}° et ${c}°. Est-ce possible ?`,
-    ]),
+    text: pick(
+      ctx
+        ? [
+            `${P.nom} dit avoir dessiné ${o.nom} en forme de triangle, avec des angles de ${a}°, ${b}° et ${c}°. Est-ce possible ?`,
+            `Sur le cahier ${de(P.nom)}, un triangle a des angles de ${a}°, ${b}° et ${c}°. Est-ce possible ?`,
+            `${P.nom} mesure les angles d’un triangle : ${a}°, ${b}° et ${c}°. Ces mesures sont-elles possibles ?`,
+            `${cap(o.nom)} a la forme d’un triangle. ${P.nom} annonce des angles de ${a}°, ${b}° et ${c}°. Est-ce possible ?`,
+          ]
+        : [
+            `Un triangle peut-il avoir des angles de ${a}°, ${b}° et ${c}° ?`,
+            `Existe-t-il un triangle d’angles ${a}°, ${b}° et ${c}° ?`,
+            `Trois angles mesurent ${a}°, ${b}° et ${c}°. Est-ce un triangle possible ?`,
+          ],
+    ),
     format: "qcm",
     choices: shuffle(["oui", "non"]),
     expected: [s === 180 ? "oui" : "non"],
@@ -1096,7 +1314,7 @@ function genDefiAnglesPossibles(): Q {
     explanation: expl(`${a} + ${b} + ${c} = ${s}. ${s === 180 ? "On trouve 180° : c’est possible." : "Ce n’est pas 180° : ce triangle n’existe pas (ou les mesures sont fausses)."}`),
   };
 }
-function genDefiDeuxAngles(): Q {
+function genDefiDeuxAngles(ctx = false): Q {
   const P = prenom();
   const [a, b] = pick([
     [90, 90], [90, randomInt(91, 130)], [randomInt(91, 120), randomInt(91, 120)], [90, randomInt(20, 80)],
@@ -1104,12 +1322,18 @@ function genDefiDeuxAngles(): Q {
   ]);
   const ok = a + b < 180;
   const nomAngle = (x: number) => (x === 90 ? "un angle droit" : x > 90 ? `un angle obtus de ${x}°` : `un angle de ${x}°`);
+  // « un angle droit et un angle droit » se dit « deux angles droits ».
+  const deux = a === 90 && b === 90 ? "deux angles droits" : `${nomAngle(a)} et ${nomAngle(b)}`;
   return {
-    text: pick([
-      `${P.nom} se demande si un triangle peut avoir ${nomAngle(a)} et ${nomAngle(b)}. Est-ce possible ?`,
-      `${P.nom} veut dessiner un triangle avec ${nomAngle(a)} et ${nomAngle(b)}. Est-ce possible ?`,
-      `${P.nom} affirme avoir tracé un triangle avec ${nomAngle(a)} et ${nomAngle(b)}. Est-ce possible ?`,
-    ]),
+    text: pick(
+      ctx
+        ? [
+            `${P.nom} se demande si un triangle peut avoir ${deux}. Est-ce possible ?`,
+            `${P.nom} veut dessiner un triangle avec ${deux}. Est-ce possible ?`,
+            `${P.nom} affirme avoir tracé un triangle avec ${deux}. Est-ce possible ?`,
+          ]
+        : [`Un triangle peut-il avoir ${deux} ?`, `Existe-t-il un triangle avec ${deux} ?`],
+    ),
     format: "qcm",
     choices: shuffle(["oui", "non"]),
     expected: [ok ? "oui" : "non"],
@@ -1264,7 +1488,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_nommer",
     difficulty: 1,
     theme: "neutral",
-    text: "Un triangle a pour sommets D, E et F. Comment peut-on le nommer ?",
+    text: "Un triangle a pour sommets D, E et F. Écris son nom.",
     format: "short",
     // 08/10/2026 : précise et corrigée strictement (Frédéric). L’ordre des lettres est libre.
     expected: ["DEF", "DFE", "EDF", "EFD", "FDE", "FED", "triangle DEF", "triangle DFE", "triangle EDF", "triangle EFD", "triangle FDE", "triangle FED"],
@@ -1304,7 +1528,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_nommer",
     difficulty: 1,
     theme: "neutral",
-    text: "Quel est le bon nom pour un triangle de sommets A, B et C ?",
+    text: "Choisis le nom du triangle de sommets A, B et C.",
     format: "qcm",
     choices: ["triangle AB", "triangle ABC", "triangle AC", "triangle ACBF"],
     expected: ["triangle ABC"],
@@ -1728,7 +1952,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     difficulty: 1,
     theme: "neutral",
     // 08/10/2026 : précise et corrigée strictement (Frédéric).
-    text: "Un triangle a un angle de plus de 90°. Quel est son type ?",
+    text: "Un angle du triangle mesure plus de 90°. Quel est son type ?",
     format: "qcm",
     choices: ["rectangle", "obtusangle", "équilatéral", "isocèle"],
     expected: ["obtusangle"],
@@ -2155,7 +2379,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_propriete_defi",
     difficulty: 1,
     theme: "neutral",
-    text: "Un triangle a deux angles de 40° et 60°. Combien mesure le troisième angle ?",
+    text: "Deux angles d’un triangle mesurent 40° et 60°. Calcule le troisième.",
     format: "short",
     expected: ["80°"],
     comparator: "number_equal",
@@ -2178,12 +2402,20 @@ export const trianglesBank: TutorBankItemV4[] = [
     difficulty: 1,
     theme: "neutral",
     // 08/10/2026 : précise et corrigée strictement (Frédéric). Texte varié : doublon de triangle_type_cote_fixed_1.
-    text: "Dans le triangle ABC, AB = 5 cm, AC = 5 cm et BC = 3 cm. Quel est son type ?",
+    // 03/11/2026 : ★1 nu — les longueurs sont écrites sur la figure (à l'échelle : 3 cm de base, 5 cm de côté).
+    text: "Observe les longueurs. Quel est le type du triangle ABC ?",
     format: "qcm",
     choices: ["isocèle", "équilatéral", "rectangle", "quelconque"],
     expected: ["isocèle"],
     comparator: "mcq_exact",
     hint: "Combien de côtés ont la même longueur ?",
+    canvas: {
+      kind: "triangle",
+      size: { width: 320, height: 250 },
+      points: { A: { x: 160, y: 73 }, B: { x: 115, y: 216 }, C: { x: 205, y: 216 } },
+      sideLabels: { AB: "5 cm", BC: "3 cm", CA: "5 cm" },
+      display: { showPoints: true, showLabels: true, showSides: true },
+    },
     explanation:
       "Définition : un triangle est un polygone qui possède 3 côtés.\n\n" +
       "Méthode : on observe les côtés, les sommets et les angles du triangle.\n\n" +
@@ -2596,7 +2828,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     niveau: "6e", matiere: "maths",
     notionId: "triangle_figure", microId: "triangle_nommer",
     difficulty: 1, theme: "neutral",
-    text: "Un triangle a pour sommets K, L et M. Comment peut-on le nommer ?",
+    text: "Un triangle a pour sommets K, L et M. Écris son nom.",
     format: "short",
     // 08/10/2026 : précise et corrigée strictement (Frédéric). L’ordre des lettres est libre.
     expected: ["KLM", "KML", "LKM", "LMK", "MKL", "MLK", "triangle KLM", "triangle KML", "triangle LKM", "triangle LMK", "triangle MKL", "triangle MLK"],
@@ -2611,7 +2843,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     niveau: "6e", matiere: "maths",
     notionId: "triangle_figure", microId: "triangle_nommer",
     difficulty: 1, theme: "neutral",
-    text: "Un triangle a pour sommets R, S et T. Comment peut-on le nommer ?",
+    text: "Un triangle a pour sommets R, S et T. Écris son nom.",
     format: "short",
     // 08/10/2026 : précise et corrigée strictement (Frédéric). L’ordre des lettres est libre.
     expected: ["RST", "RTS", "SRT", "STR", "TRS", "TSR", "triangle RST", "triangle RTS", "triangle SRT", "triangle STR", "triangle TRS", "triangle TSR"],
@@ -2626,7 +2858,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     niveau: "6e", matiere: "maths",
     notionId: "triangle_figure", microId: "triangle_nommer",
     difficulty: 1, theme: "neutral",
-    text: "Comment note-t-on le triangle dont les sommets sont X, Y et Z ?",
+    text: "Comment note-t-on le triangle de sommets X, Y et Z ?",
     format: "qcm",
     choices: ["triangle XYZ", "segment XYZ", "angle XYZ", "triangle XY"],
     expected: ["triangle XYZ"],
@@ -2730,7 +2962,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     niveau: "6e", matiere: "maths",
     notionId: "triangle_figure", microId: "triangle_sommet_cote",
     difficulty: 2, theme: "neutral",
-    text: "Dans le triangle ABC, lequel de ces segments n’est PAS un côté du triangle ?",
+    text: "Quel segment n’est PAS un côté du triangle ABC ?",
     format: "qcm",
     choices: ["BD", "AB", "BC", "CA"],
     expected: ["BD"],
@@ -2745,7 +2977,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     niveau: "6e", matiere: "maths",
     notionId: "triangle_figure", microId: "triangle_sommet_cote",
     difficulty: 1, theme: "neutral",
-    text: "Un triangle a autant de sommets que de côtés. Combien en a-t-il ?",
+    text: "Un triangle a 3 côtés. Combien a-t-il de sommets ?",
     format: "qcm",
     choices: ["2", "3", "4", "6"],
     expected: ["3"],
@@ -2929,7 +3161,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     niveau: "6e", matiere: "maths",
     notionId: "triangle_propriete", microId: "triangle_somme_angle",
     difficulty: 2, theme: "neutral",
-    text: "Dans un triangle rectangle, un angle vaut 90°. Combien vaut la somme des deux autres angles ?",
+    text: "Un angle d’un triangle mesure 90°. Combien font les deux autres angles ?",
     format: "short",
     expected: ["90°"],
     comparator: "number_equal",
@@ -2943,7 +3175,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     niveau: "6e", matiere: "maths",
     notionId: "triangle_propriete", microId: "triangle_somme_angle",
     difficulty: 2, theme: "neutral",
-    text: "Peut-il exister un triangle dont la somme des angles vaut 200° ?",
+    text: "La somme des angles d’un triangle peut-elle valoir 200° ?",
     format: "qcm",
     choices: ["oui", "non"],
     expected: ["non"],
@@ -3281,5 +3513,155 @@ export const trianglesBank: TutorBankItemV4[] = [
     hint: "Lis TOUS les codages : le petit carré (angle droit) et les petits traits (côtés égaux).",
     tags: ["triangle_figure", "defi", "qcm", "template", "canvas", "codage"],
     generate: () => genDefiCodages(),
+  },
+
+  // =========================
+  // ⛔⛔ 03/11/2026 — LES SITUATIONS PASSENT À ★3 (../REGLES-6E.md)
+  // Les gabarits ★1-★2 donnent l'énoncé nu ; ceux-ci gardent les situations
+  // d'avant (toit, voile, fanion, parcelle, baguettes…) pour l'élève qui sait
+  // déjà le geste. Mêmes générateurs, appelés avec `ctx = true`.
+  // =========================
+  {
+    kind: "template",
+    id: "triangle_nommer_tpl_ctx3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_nommer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On nomme un triangle avec ses trois sommets, dans n’importe quel ordre.",
+    tags: ["triangle_figure", "nommage", "template", "contexte"],
+    generate: () => pick([genNommerDepuisSommets, genNommerLireNom])(true),
+  },
+  {
+    kind: "template",
+    id: "triangle_sommet_cote_tpl_ctx3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_sommet_cote",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un côté relie deux sommets : il porte leurs deux lettres.",
+    tags: ["triangle_figure", "sommets", "cotes", "template", "contexte"],
+    generate: () => pick([genSommetCoteCompter, genSommetCoteRelier])(true),
+  },
+  {
+    kind: "template",
+    id: "triangle_type_cote_tpl_longueurs_ctx3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_type_cote",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Compare les trois longueurs : combien sont égales ?",
+    tags: ["triangle_figure", "cotes", "template", "qcm", "contexte"],
+    generate: () => genTypeCoteLongueurs(true),
+  },
+  {
+    kind: "template",
+    id: "triangle_type_cote_tpl_codages_ctx3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_type_cote",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Deux côtés égaux → isocèle ; trois côtés égaux → équilatéral.",
+    tags: ["triangle_figure", "cotes", "template", "contexte"],
+    generate: () => genTypeCoteCodages(true),
+  },
+  {
+    kind: "template",
+    id: "triangle_type_angle_tpl_ctx3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_type_angle",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Regarde le plus grand angle : 90° droit, plus de 90° obtus, moins de 90° aigu.",
+    tags: ["triangle_figure", "template", "qcm", "angle_mesure", "contexte"],
+    generate: () => pick([genTypeAngleMesures, genTypeAngleFigure, genTypeAngleDeux])(true),
+  },
+  {
+    kind: "template",
+    id: "triangle_somme_angle_tpl_ctx3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangle_propriete",
+    microId: "triangle_somme_angle",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Dans tous les triangles, la somme des trois angles vaut 180°.",
+    tags: ["triangle_figure", "template", "angle_mesure", "contexte"],
+    generate: () => genSommeConnaitre(true),
+  },
+  {
+    kind: "template",
+    id: "triangle_somme_angle_tpl_deux_autres_ctx3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangle_propriete",
+    microId: "triangle_somme_angle",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Les trois angles font 180° : enlève l’angle connu.",
+    tags: ["triangle_figure", "template", "angle_mesure", "contexte"],
+    generate: () => genSommeDeuxAutres(true),
+  },
+  {
+    kind: "template",
+    id: "triangle_angle_manquant_tpl_ctx3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangle_propriete",
+    microId: "triangle_angle_manquant",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Fais 180 moins les deux angles connus.",
+    tags: ["triangle_figure", "template", "angle_mesure", "contexte"],
+    generate: () => pick([genAngleManquantQcm, genAngleManquantCourt])(true),
+  },
+  {
+    kind: "template",
+    id: "triangle_propriete_defi_tpl_angles_possibles_ctx3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangle_propriete",
+    microId: "triangle_propriete_defi",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Additionne les trois angles : un triangle fait toujours 180°.",
+    tags: ["triangle_figure", "defi", "template", "angle_mesure", "qcm", "contexte"],
+    generate: () => genDefiAnglesPossibles(true),
+  },
+  {
+    kind: "template",
+    id: "triangle_propriete_defi_tpl_deux_angles_ctx3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangle_propriete",
+    microId: "triangle_propriete_defi",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Deux angles doivent faire MOINS de 180° pour laisser de la place au troisième.",
+    tags: ["triangle_figure", "defi", "template", "angle_mesure", "qcm", "contexte"],
+    generate: () => genDefiDeuxAngles(true),
+  },
+  {
+    kind: "template",
+    id: "triangle_defi_tpl_reconnaissance_ctx3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_defi",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Regarde d'abord les côtés : combien sont égaux ?",
+    tags: ["triangle_figure", "defi", "template", "contexte"],
+    generate: () => genDefiReconnaissance(true),
   },
 ];
