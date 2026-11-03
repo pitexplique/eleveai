@@ -227,7 +227,11 @@ function questionQuantite(dens: number[], numMin: number, numMax = 9, enMots = f
     d = tirer(dens);
     t = totalMultiple(c, d);
   }
-  const n = enMots ? 1 : entierMixte(Math.min(numMin, d - 1), Math.min(d - 1, numMax));
+  // 03/11/2026 : « Elle en perd 2/4 » — une fraction donnée dans la vie s'écrit
+  // simplifiée (on dit « la moitié », pas « deux quarts ») : n et d premiers entre eux.
+  let n = enMots ? 1 : entierMixte(Math.min(numMin, d - 1), Math.min(d - 1, numMax));
+  for (let k = 0; k < 20 && !enMots && gcd(n, d) !== 1; k++) n = entierMixte(Math.min(numMin, d - 1), Math.min(d - 1, numMax));
+  if (gcd(n, d) !== 1) n = 1;
   const x = tirer(PRENOMS);
   const f = enMots ? FRACTION_EN_MOTS[d] : `${n}/${d}`;
   const part = t / d;
@@ -243,6 +247,44 @@ function questionQuantite(dens: number[], numMin: number, numMax = 9, enMots = f
       `Méthode : on cherche d’abord une part : ${t} ÷ ${d}. Puis on en prend ${n}.\n\n` +
       `Calcul : ${t} ÷ ${d} = ${part}${n > 1 ? ` ; ${n} × ${part} = ${rep}` : ""}.\n\n` +
       `Conclusion : ${f} de ${t}${u}, c’est ${rep}${u}.`,
+  };
+}
+/** « La moitié de 24 », SANS situation (★2) : la même question que
+ *  `questionQuantite(…, true)`, dite simplement. Un seul nombre dans le texte. */
+function questionQuantiteSimple(): TutorGeneratedQuestionV4 {
+  const d = tirer([2, 3, 4]);
+  const t = d * entierMixte(3, d === 2 ? 25 : 15);
+  const W = FRACTION_EN_MOTS[d];
+  const Quel = d === 2 ? "Quelle est" : "Quel est";
+  const rep = t / d;
+  const tournures = [
+    `${Quel} ${W} de ${t} ?`,
+    `Calcule ${W} de ${t}.`,
+    `${Maj(W)} de ${t}, c’est combien ?`,
+    `Combien vaut ${W} de ${t} ?`,
+    `Trouve ${W} de ${t}.`,
+    `Complète : ${W} de ${t} = …`,
+    `Que vaut ${W} de ${t} ?`,
+    `Cherche ${W} de ${t}.`,
+    `Donne ${W} de ${t}.`,
+    `${Maj(W)} de ${t} : quel nombre est-ce ?`,
+    `Écris le nombre qui vaut ${W} de ${t}.`,
+    `Quel nombre obtiens-tu en prenant ${W} de ${t} ?`,
+    `Partage ${t} en parts égales pour trouver ${W}. Quel nombre trouves-tu ?`,
+    `Prends ${W} de ${t}. Combien trouves-tu ?`,
+  ];
+  // Un appui SANS chiffre (le correcteur ne veut qu'un nombre dans le texte).
+  const appui = tirer(["", "", ` Partage en ${["", "", "deux", "trois", "quatre"][d]} parts égales.`, ` Pense à une division.`]);
+  return {
+    text: tirer(tournures) + appui,
+    format: "short",
+    expected: [String(rep)],
+    comparator: "number_equal",
+    explanation:
+      "Définition : prendre n/d d’une quantité, c’est la partager en d parts égales et en prendre n.\n\n" +
+      `Méthode : ${W}, c’est 1/${d} : on partage en ${d} parts égales.\n\n` +
+      `Calcul : ${t} ÷ ${d} = ${rep}.\n\n` +
+      `Conclusion : ${W} de ${t}, c’est ${rep}.`,
   };
 }
 /** Des objets entiers coupés en parts : pour les nombres plus grands que 1. */
@@ -303,11 +345,54 @@ function simplifierPasAPas(n: number, d: number): { p: number; q: number; chaine
 const DEFINITION_EGALE =
   "Définition : deux fractions sont égales quand on passe de l’une à l’autre en multipliant, ou en divisant, le numérateur ET le dénominateur par le MÊME nombre.\n\n";
 
+/* ⛔⛔ 03/11/2026 — D'ABORD DES QUESTIONS SIMPLES (Frédéric) : « le contexte est
+   réservé aux étoiles ★3 et plus ». Ses 6e lisent difficilement : à ★1 et ★2,
+   ni prénom, ni métier, ni situation de la vie. Une FIGURE (un disque, une
+   bande…) partagée en parts égales, un GESTE (colorier, griser…), une phrase
+   courte. La variété vient de la figure, du geste, de la tournure et du NOM
+   des parts (des cinquièmes, des huitièmes), jamais d'une histoire. */
+type Figure = { un: string; le: string; du: string; pl: string; f: boolean };
+const FIGURES: Figure[] = [
+  { un: "un disque", le: "le disque", du: "du disque", pl: "disques", f: false },
+  { un: "un rectangle", le: "le rectangle", du: "du rectangle", pl: "rectangles", f: false },
+  { un: "un carré", le: "le carré", du: "du carré", pl: "carrés", f: false },
+  { un: "une bande", le: "la bande", du: "de la bande", pl: "bandes", f: true },
+  { un: "une barre", le: "la barre", du: "de la barre", pl: "barres", f: true },
+  { un: "une figure", le: "la figure", du: "de la figure", pl: "figures", f: true },
+  { un: "un segment", le: "le segment", du: "du segment", pl: "segments", f: false },
+];
+/** « partagé » / « partagée » selon la figure. */
+const partageF = (F: Figure) => (F.f ? "partagée" : "partagé");
+/** Le geste sur les parts : « On en colorie 3. », « la fraction coloriée ». */
+type Geste = { verbe: string; inf: string; pp: string };
+const GESTES: Geste[] = [
+  { verbe: "colorie", inf: "colorier", pp: "colorié" },
+  { verbe: "grise", inf: "griser", pp: "grisé" },
+  { verbe: "hachure", inf: "hachurer", pp: "hachuré" },
+  { verbe: "prend", inf: "prendre", pp: "pris" },
+];
+/** « coloriée » (une fraction), « coloriées » (des parts). */
+const ppF = (g: Geste) => `${g.pp}e`;
+const ppFs = (g: Geste) => `${g.pp}es`;
+/** « 1 part », « 3 parts ». */
+const parts = (n: number) => (n > 1 ? "parts" : "part");
+/** Le nom des parts : 1/5, c'est « un cinquième » ; 3/5, « trois cinquièmes ». */
+const NOM_DEN: Record<number, [string, string]> = {
+  2: ["demi", "demis"], 3: ["tiers", "tiers"], 4: ["quart", "quarts"], 5: ["cinquième", "cinquièmes"],
+  6: ["sixième", "sixièmes"], 7: ["septième", "septièmes"], 8: ["huitième", "huitièmes"], 9: ["neuvième", "neuvièmes"],
+  10: ["dixième", "dixièmes"], 11: ["onzième", "onzièmes"], 12: ["douzième", "douzièmes"],
+};
+const nomDen = (d: number, n = 2) => (n > 1 ? NOM_DEN[d][1] : NOM_DEN[d][0]);
+const EN_MOTS = ["zéro", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf", "dix", "onze", "douze"];
+/** « trois cinquièmes », « un quart » (n ≤ 12). */
+const fractionEnMots = (n: number, d: number) => `${EN_MOTS[n]} ${nomDen(d, n)}`;
+
 // Partagés avec fractions-calcul.bank.ts (même chantier, même vocabulaire).
-export type { Prenom, Partage };
+export type { Prenom, Partage, Figure, Geste };
 export {
   PRENOMS, PARTAGES, tirer, deuxPrenoms, il, Il, deP, inf, ppParts, partage, deU, egales, uniteN, Maj,
   attendusFraction, simplifyFraction, entierMixte,
+  FIGURES, GESTES, partageF, ppF, ppFs, parts, nomDen, fractionEnMots,
 };
 
 export const fractionsBank: TutorBankItemV4[] = [
@@ -456,8 +541,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     notionId: "fraction_nombre",
     microId: "fraction_lire_ecrire",
     difficulty: 2,
-    theme: "reunion",
-    text: "À La Réunion, 2 parts de gâteau sur 8 ont déjà été mangées. Quelle fraction cela représente-t-il ?",
+    // 03/11/2026 : ★2, donc sans situation (le gâteau de La Réunion est parti).
+    theme: "neutral",
+    text: "Un disque est partagé en 8 parts égales. 2 parts sont coloriées. Quelle fraction du disque est coloriée ?",
     format: "short",
     expected: ["2/8", "2 / 8", "1/4", "1 / 4", "0,25", "0.25"],
     comparator: "fraction_decimal_equivalent",
@@ -466,9 +552,9 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Définition : une fraction représente une part d’un tout partagé en parts égales.\n\n" +
       "Méthode : on repère le numérateur, le dénominateur et les parts concernées.\n\n" +
       "Calcul : " +
-      ("2 parts mangées sur 8 se notent 2/8. Cette fraction se simplifie en 1/4.") +
+      ("2 parts coloriées sur 8 se notent 2/8. Cette fraction se simplifie en 1/4.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fraction_nombre", "lecture", "reunion"],
+    tags: ["fraction_nombre", "lecture", "ecriture"],
   },
 
   // =========================
@@ -594,8 +680,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     notionId: "fraction_nombre",
     microId: "fraction_representer",
     difficulty: 2,
-    theme: "reunion",
-    text: "Un plateau de bonbons piments est partagé en 6 parts égales. Pour représenter 4/6 du plateau, combien de parts faut-il prendre ?",
+    // 03/11/2026 : ★2, donc sans situation (le plateau de bonbons piments est parti).
+    theme: "neutral",
+    text: "Un rectangle est partagé en 6 parts égales. Pour représenter 4/6 du rectangle, combien de parts faut-il colorier ?",
     format: "short",
     expected: ["4", "quatre"],
     comparator: "number_equal",
@@ -604,9 +691,9 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Définition : une fraction représente une part d’un tout partagé en parts égales.\n\n" +
       "Méthode : on repère le numérateur, le dénominateur et les parts concernées.\n\n" +
       "Calcul : " +
-      ("4/6 signifie que l’on prend 4 parts sur 6 parts égales. Il faut donc prendre 4 parts.") +
+      ("4/6 signifie que l’on prend 4 parts sur 6 parts égales. Il faut donc colorier 4 parts.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["fraction_nombre", "representation", "reunion"],
+    tags: ["fraction_nombre", "representation"],
   },
 
   // =========================
@@ -921,7 +1008,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_defi",
     difficulty: 1,
     theme: "neutral",
-    text: "Si une pizza est partagée en 8 parts égales et que tu en manges 4, quelle fraction de la pizza as-tu mangée ?",
+    text: "Un disque est partagé en 8 parts égales. On en colorie 4. Quelle fraction du disque est coloriée ?",
     format: "short",
     expected: ["4/8", "4 / 8", "1/2", "1 / 2", "0,5", "0.5"],
     comparator: "fraction_decimal_equivalent",
@@ -930,7 +1017,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Définition : une fraction représente une part d’un tout partagé en parts égales.\n\n" +
       "Méthode : on repère le numérateur, le dénominateur et les parts concernées.\n\n" +
       "Calcul : " +
-      ("4 parts mangées sur 8 parts égales se notent 4/8. Cette fraction correspond aussi à 1/2.") +
+      ("4 parts coloriées sur 8 parts égales se notent 4/8. Cette fraction correspond aussi à 1/2.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["fraction_nombre", "defi"],
   },
@@ -943,7 +1030,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_defi",
     difficulty: 2,
     theme: "neutral",
-    text: "Dans une boîte de 12 biscuits, Léa mange 1/3 de la boîte. Combien de biscuits mange-t-elle ?",
+    text: "Combien vaut 1/3 de 12 ?",
     format: "short",
     expected: ["4"],
     comparator: "number_equal",
@@ -952,7 +1039,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Définition : une fraction représente une part d’un tout partagé en parts égales.\n\n" +
       "Méthode : on repère le numérateur, le dénominateur et les parts concernées.\n\n" +
       "Calcul : " +
-      ("Le tiers de 12 vaut 12 ÷ 3 = 4. Léa mange donc 4 biscuits.") +
+      ("1/3 de 12, c’est le tiers de 12 : 12 ÷ 3 = 4.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["fraction_nombre", "defi", "quantite"],
   },
@@ -1066,10 +1153,49 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Numérateur = parts prises ; dénominateur = parts totales.",
     tags: ["fraction_nombre", "lecture", "template"],
+    // 03/11/2026 : ★1, une figure et un geste, sans situation (voir FIGURES).
+    generate: () => {
+      const F = tirer(FIGURES);
+      const g = tirer(GESTES);
+      const den = entierMixte(2, 10);
+      const num = entierMixte(1, den - 1);
+      const sont = num > 1 ? `${num} parts sont ${ppFs(g)}` : `1 part est ${ppF(g)}`;
+      const tournures = [
+        `${Maj(F.un)} est ${partageF(F)} en ${den} parts égales. On en ${g.verbe} ${num}. Quelle fraction ${F.du} est ${ppF(g)} ?`,
+        `${Maj(F.le)} a ${den} parts égales. ${Maj(sont)}. Quelle fraction ${F.du} est ${ppF(g)} ?`,
+        `On ${g.verbe} ${num} ${parts(num)} sur les ${den} parts égales ${F.du}. Quelle fraction est-ce ?`,
+        `Complète. ${Maj(F.le)} a ${den} parts égales. On en ${g.verbe} ${num}. La fraction ${ppF(g)} est …/…`,
+        `${Maj(F.un)} est ${partageF(F)} en ${den} parts égales. ${Maj(sont)}. Écris cette fraction ${F.du}.`,
+      ];
+      return {
+        text: tirer(tournures),
+        format: "short",
+        expected: attendusFraction(num, den),
+        comparator: "fraction_decimal_equivalent",
+        explanation: "Définition : une fraction représente une part d’un tout partagé en parts égales.\n\n" +
+          "Méthode : le dénominateur (en bas) compte toutes les parts ; le numérateur (en haut) compte les parts prises.\n\n" +
+          "Calcul : " +
+          `${Maj(F.le)} a ${den} parts en tout : le dénominateur est ${den}. On en ${g.verbe} ${num} : le numérateur est ${num}. La fraction est ${num}/${den}.` +
+          "\n\nConclusion : la fraction est " + fractionString(num, den) + ".",
+      };
+    },
+  },
+  {
+    // 03/11/2026 : les situations de l'ancien gabarit ★1, montées à ★3.
+    kind: "template",
+    id: "fraction_lire_ecrire_tpl_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_lire_ecrire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Numérateur = parts prises ; dénominateur = parts totales.",
+    tags: ["fraction_nombre", "lecture", "situation", "template"],
     generate: () => {
       const s = tirer(PARTAGES);
       const x = tirer(PRENOMS);
-      const den = entierMixte(2, Math.min(s.dMax, 10));
+      const den = entierMixte(2, Math.min(s.dMax, 12));
       const num = entierMixte(1, den - 1);
       const tournures = [
         `${x.p} partage ${s.un} en ${den} ${s.unite} ${egales(s)}. ${Il(x)} en ${s.verbe} ${num}. Quelle fraction ${s.du} a-t-${il(x)} ${s.pp}e ?`,
@@ -1102,9 +1228,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     hint: "Le dénominateur correspond au nombre total de parts.",
     tags: ["fraction_nombre", "lecture", "qcm", "template"],
     generate: () => {
-      const s = tirer(PARTAGES);
-      const x = tirer(PRENOMS);
-      const den = entierMixte(3, Math.min(s.dMax, 12));
+      const F = tirer(FIGURES);
+      const g = tirer(GESTES);
+      const den = entierMixte(3, 12);
       const num = entierMixte(1, den - 1);
       const good = fractionString(num, den);
       const v = num / den;
@@ -1116,11 +1242,13 @@ export const fractionsBank: TutorBankItemV4[] = [
         .filter(([a, b]) => a > 0 && b > 0 && Math.abs(a / b - v) > 1e-9)
         .map(([a, b]) => fractionString(a, b));
       const distractors = shuffle(Array.from(new Set(pieges)).filter((y) => y !== good)).slice(0, 3);
+      // 03/11/2026 : ★2, une figure et un geste, sans situation.
       const tournures = [
-        `${x.p} partage ${s.un} en ${den} ${s.unite} ${egales(s)}. ${Il(x)} en ${s.verbe} ${num}. Choisis la fraction ${s.du} qu’${il(x)} a ${s.pp}e.`,
-        `${Maj(s.un)} a ${den} ${s.unite} ${egales(s)}. ${x.p} en ${s.verbe} ${num}. Quelle fraction ${s.du} cela fait-il ?`,
-        `${x.p} ${s.verbe} ${num} des ${den} ${s.unite} ${egales(s)} ${s.du}. Quelle écriture est la bonne ?`,
-        `Sur les ${den} ${s.unite} ${egales(s)} ${s.du}, ${x.p} en ${s.verbe} ${num}. Quelle fraction ${s.du} est-ce ?`,
+        `${Maj(F.un)} est ${partageF(F)} en ${den} parts égales. On en ${g.verbe} ${num}. Choisis la fraction ${ppF(g)}.`,
+        `${Maj(F.un)} a ${den} parts égales. On en ${g.verbe} ${num}. Quelle fraction ${F.du} cela fait-il ?`,
+        `On ${g.verbe} ${num} des ${den} parts égales ${F.du}. Quelle écriture est la bonne ?`,
+        `Sur les ${den} parts égales ${F.du}, on en ${g.verbe} ${num}. Quelle fraction ${F.du} est-ce ?`,
+        `${Maj(F.le)} a ${den} parts égales et ${num > 1 ? `${num} sont ${ppFs(g)}` : `1 est ${ppF(g)}`}. Quelle fraction ${F.du} est ${ppF(g)} ?`,
       ];
       return {
         text: tirer(tournures),
@@ -1131,7 +1259,7 @@ export const fractionsBank: TutorBankItemV4[] = [
         explanation: "Définition : une fraction représente une part d’un tout partagé en parts égales.\n\n" +
           "Méthode : le dénominateur (en bas) compte toutes les parts ; le numérateur (en haut) compte les parts prises.\n\n" +
           "Calcul : " +
-          `${den} ${s.unite} en tout, ${num} ${num > 1 ? "prises" : "prise"} : ${good}.` +
+          `${den} parts en tout, ${num} ${num > 1 ? ppFs(g) : ppF(g)} : ${good}.` +
           "\n\nConclusion : la bonne écriture est " + good + ".",
       };
     },
@@ -1198,16 +1326,19 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Le numérateur donne le nombre de parts colorées.",
     tags: ["fraction_nombre", "representation", "template"],
+    // 03/11/2026 : ★1, une figure et un geste, sans situation.
     generate: () => {
-      const s = tirer(PARTAGES);
-      const x = tirer(PRENOMS);
-      const den = entierMixte(3, Math.min(s.dMax, 10));
+      const F = tirer(FIGURES);
+      const g = tirer(GESTES);
+      const den = entierMixte(3, 10);
       const num = entierMixte(1, den - 1);
+      const s = { unite: "parts" };
       const tournures = [
-        `${x.p} veut ${inf(s)} ${num}/${den} ${s.du}. ${Maj(s.le)} est ${partage(s)} en ${den} ${s.unite} ${egales(s)}. Combien ${deU(s)} doit-${il(x)} ${inf(s)} ?`,
-        `${Maj(s.le)} ${deP(x)} a ${den} ${s.unite} ${egales(s)}. ${Il(x)} veut en ${inf(s)} ${num}/${den}. Combien ${deU(s)} cela fait-il ?`,
-        `Sur un dessin ${deP(x)}, ${s.le} est ${partage(s)} en ${den} ${s.unite} ${egales(s)}. Combien faut-il en colorier pour montrer ${num}/${den} ?`,
-        `Pour représenter ${num}/${den} ${s.du}, ${x.p} a déjà partagé ${s.le} en ${den} ${s.unite} ${egales(s)}. Combien ${deU(s)} doit-${il(x)} colorier ?`,
+        `${Maj(F.un)} est ${partageF(F)} en ${den} parts égales. Combien de parts faut-il ${g.inf} pour représenter ${num}/${den} ${F.du} ?`,
+        `On veut ${g.inf} ${num}/${den} ${F.du}. ${Maj(F.le)} a ${den} parts égales. Combien de parts faut-il ${g.inf} ?`,
+        `${Maj(F.le)} a ${den} parts égales. Combien de parts faut-il ${g.inf} pour montrer ${num}/${den} ?`,
+        `Pour représenter ${num}/${den}, on partage ${F.le} en ${den} parts égales. Combien de parts faut-il ${g.inf} ?`,
+        `${num}/${den} ${F.du} : combien de parts faut-il ${g.inf}, sur les ${den} parts égales ?`,
       ];
       return {
         text: tirer(tournures),
@@ -1218,7 +1349,7 @@ export const fractionsBank: TutorBankItemV4[] = [
           "Méthode : le dénominateur dit en combien de parts on partage ; le numérateur dit combien on en prend.\n\n" +
           "Calcul : " +
           `Dans ${num}/${den}, le dénominateur ${den} correspond aux ${den} ${s.unite}. Le numérateur ${num} dit combien on en prend : ${num}.` +
-          `\n\nConclusion : ${num} ${uniteN(s, num)}.`,
+          `\n\nConclusion : ${num} ${parts(num)}.`,
       };
     },
   },
@@ -1233,18 +1364,20 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Le dénominateur donne le nombre total de parts.",
     tags: ["fraction_nombre", "representation", "qcm", "template"],
+    // 03/11/2026 : ★2, une figure et un geste, sans situation.
     generate: () => {
-      const s = tirer(PARTAGES);
-      const x = tirer(PRENOMS);
-      const den = entierMixte(4, Math.min(s.dMax, 10));
+      const F = tirer(FIGURES);
+      const g = tirer(GESTES);
+      const den = entierMixte(4, 10);
       // Le numérateur part de 2 : avec 1, le piège « numérateur + dénominateur »
       // valait « dénominateur + 1 », l'autre piège — la même ligne deux fois.
       const num = entierMixte(2, den - 1);
       const tournures = [
-        `${x.p} veut ${inf(s)} ${num}/${den} ${s.du}. En combien ${deU(s)} ${egales(s)} doit-${il(x)} partager ${s.le} ?`,
-        `Pour dessiner ${num}/${den} ${s.du}, ${x.p} partage ${s.le} en ${s.unite} ${egales(s)}. Combien en faut-il au total ?`,
-        `${x.p} représente ${num}/${den} ${s.du}. Combien ${deU(s)} ${egales(s)} faut-il en tout ?`,
-        `Combien ${deU(s)} ${egales(s)} faut-il pour montrer ${num}/${den} ${s.du} ${deP(x)} ?`,
+        `On veut ${g.inf} ${num}/${den} ${F.du}. En combien de parts égales faut-il partager ${F.le} ?`,
+        `Pour représenter ${num}/${den} ${F.du}, on partage ${F.le} en parts égales. Combien en faut-il au total ?`,
+        `Pour ${g.inf} ${num}/${den} ${F.du}, combien de parts égales faut-il en tout ?`,
+        `Combien de parts égales faut-il pour montrer ${num}/${den} ${F.du} ?`,
+        `${num}/${den} ${F.du} : en combien de parts égales partage-t-on ${F.le} ?`,
       ];
 
       return {
@@ -1322,6 +1455,21 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Partage la quantité en parts égales.",
     tags: ["fraction_nombre", "quantite", "template"],
+    // 03/11/2026 : ★2, sans situation (les collections sont montées à ★3).
+    generate: () => questionQuantiteSimple(),
+  },
+  {
+    // 03/11/2026 : « la moitié / le tiers / le quart » en situation, monté de ★2.
+    kind: "template",
+    id: "fraction_quantite_tpl_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fraction_calcul",
+    microId: "fraction_quantite",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Partage la quantité en parts égales.",
+    tags: ["fraction_nombre", "quantite", "situation", "template"],
     generate: () => questionQuantite([2, 3, 4], 1, 1, true),
   },
   {
@@ -1349,8 +1497,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     hint: "Moitié = ÷2 ; quart = ÷4.",
     tags: ["fraction_nombre", "quantite", "qcm", "template"],
     generate: () => {
-      const q = questionQuantite([2, 3, 4], 1, 1, true);
-      const good = Number(String(q.expected[1]));
+      // 03/11/2026 : ★2, sans situation (donc sans unité).
+      const q = questionQuantiteSimple();
+      const good = Number(String(q.expected[0]));
       const base = Number(q.text.match(/\d+/)![0]);
       const d = Math.round(base / good);
       // Les confusions : moitié ↔ quart ↔ tiers, ce qui reste, une part de trop.
@@ -1358,7 +1507,7 @@ export const fractionsBank: TutorBankItemV4[] = [
         Array.from(new Set([base / 2, base / 3, base / 4, base - good, 2 * good, good + 1, good - 1, good + 2]))
           .filter((n) => Number.isInteger(n) && n > 0 && n !== good),
       ).slice(0, 3);
-      const unite = q.expected[0] !== q.expected[1] ? ` ${String(q.expected[0]).split(" ")[1]}` : "";
+      const unite = "";
 
       return {
         text: q.text,
@@ -1390,10 +1539,11 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Même dénominateur : compare les numérateurs.",
     tags: ["fraction_nombre", "comparaison", "template"],
+    // 03/11/2026 : ★2, sans situation ; la figure et le geste donnent la variété.
     generate: () => {
-      const s = tirer(PARTAGES);
-      const [x, y] = deuxPrenoms();
-      const den = entierMixte(3, Math.min(s.dMax, 12));
+      const F = tirer(FIGURES);
+      const g = tirer(GESTES);
+      const den = entierMixte(3, 12);
       const a = entierMixte(1, den - 1);
       let b = entierMixte(1, den - 1);
       while (b === a) b = entierMixte(1, den - 1);
@@ -1402,10 +1552,12 @@ export const fractionsBank: TutorBankItemV4[] = [
       const rep = grande ? Math.max(a, b) : Math.min(a, b);
       const tournures = [
         `Compare ${a}/${den} et ${b}/${den}. Quelle fraction est ${mot} ?`,
-        `${x.p} et ${y.p} ont chacun ${s.un} de la même taille. ${x.p} en ${s.verbe} ${a}/${den}, ${y.p} en ${s.verbe} ${b}/${den}. Écris ${mot} des deux fractions.`,
-        `${x.p} hésite entre ${a}/${den} et ${b}/${den} ${s.du}. Laquelle est ${mot} ?`,
         `Quelle est ${mot} fraction : ${b}/${den} ou ${a}/${den} ?`,
-        `${y.p} a ${s.pp} ${b}/${den} ${s.du} et ${x.p} ${a}/${den}. Quelle fraction est ${mot} ?`,
+        `${a}/${den} et ${b}/${den} : laquelle est ${mot} ?`,
+        `Entre ${a}/${den} et ${b}/${den}, quelle fraction est ${mot} ?`,
+        `${Maj(F.un)} est ${partageF(F)} en ${den} parts égales. Quelle fraction ${F.du} est ${mot} : ${a}/${den} ou ${b}/${den} ?`,
+        `On ${g.verbe} ${a}/${den} ${F.du}, puis ${b}/${den} d’${F.f ? "une autre" : "un autre"}, identique. Quelle fraction est ${mot} ?`,
+        `Sur deux ${F.pl} identiques, on ${g.verbe} ${a}/${den} et ${b}/${den}. Écris ${mot} des deux fractions.`,
       ];
 
       return {
@@ -1480,10 +1632,11 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Quand les dénominateurs sont identiques, le plus grand numérateur donne la plus grande fraction.",
     tags: ["fraction_nombre", "comparaison", "qcm", "template"],
+    // 03/11/2026 : ★2, sans situation.
     generate: () => {
-      const s = tirer(PARTAGES);
-      const x = tirer(PRENOMS);
-      const den = entierMixte(5, Math.max(6, Math.min(s.dMax, 12)));
+      const F = tirer(FIGURES);
+      const g = tirer(GESTES);
+      const den = entierMixte(5, 12);
       const nums = shuffle(Array.from({ length: den - 1 }, (_, i) => i + 1)).slice(0, 4);
       const grande = Math.random() < 0.6;
       const goodNum = grande ? Math.max(...nums) : Math.min(...nums);
@@ -1491,10 +1644,12 @@ export const fractionsBank: TutorBankItemV4[] = [
       const mot = grande ? "la plus grande" : "la plus petite";
       const tournures = [
         `Quelle fraction est ${mot} ?`,
-        `${x.p} partage ${s.un} en ${den} ${s.unite} ${egales(s)}. Quelle fraction ${s.du} est ${mot} ?`,
-        `${x.p} range ces fractions ${s.du}. Laquelle est ${mot} ?`,
         `Parmi ces fractions, choisis ${mot}.`,
-        `${x.p} veut ${inf(s)} ${grande ? "le plus" : "le moins"} possible ${s.du}. Quelle fraction choisit-${il(x)} ?`,
+        `Toutes ces fractions ont le même dénominateur. Laquelle est ${mot} ?`,
+        `Laquelle de ces fractions est ${mot} ?`,
+        `${Maj(F.un)} est ${partageF(F)} en ${den} parts égales. Quelle fraction ${F.du} est ${mot} ?`,
+        `On veut ${g.inf} ${grande ? "le plus" : "le moins"} possible ${F.du}. Quelle fraction faut-il choisir ?`,
+        `Ce sont des fractions ${F.du}. Laquelle est ${mot} ?`,
       ];
 
       return {
@@ -1588,7 +1743,7 @@ export const fractionsBank: TutorBankItemV4[] = [
         `${x.p} cherche la fraction ${mot}. Laquelle choisit-${il(x)} ?`,
         `Aide ${x.p} : quelle fraction est ${mot} ?`,
         `Dans son cahier, ${x.p} doit entourer la fraction ${mot}. Laquelle ?`,
-        `${x.p} a ${s.pp} ${plusGrande ? "plus" : "moins"} ${s.f ? "d’une" : "d’un"} ${s.le.replace(/^(la|le) /, "")} entier${s.f ? "e" : ""}. Quelle fraction a-t-${il(x)} pu ${inf(s)} ?`,
+        `${x.p} a ${s.pp} ${plusGrande ? "plus" : "moins"} ${s.f ? "d’une" : "d’un"} ${s.le.replace(/^(la|le) /, "")} ${s.f ? "entière" : "entier"}. Quelle fraction a-t-${il(x)} pu ${inf(s)} ?`,
       ];
       return {
         text: tirer(tournures),
@@ -1683,18 +1838,23 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "La moitié : le nombre de parts prises est la moitié du nombre total de parts.",
     tags: ["fraction_nombre", "defi", "moitie", "template"],
+    // 03/11/2026 : ★1, une figure et un geste, sans situation.
     generate: () => {
-      const s = tirer(PARTAGES);
-      const x = tirer(PRENOMS);
-      const d = 2 * entierMixte(2, Math.floor(Math.min(s.dMax, 12) / 2));
+      const F = tirer(FIGURES);
+      const g = tirer(GESTES);
+      const s = { unite: "parts" };
+      const d = 2 * entierMixte(2, 6);
       const oui = Math.random() < 0.5;
       let n = d / 2;
       if (!oui) n = d / 2 + tirer([-1, 1]);
+      const sont = n > 1 ? `${n} parts sont ${ppFs(g)}` : `1 part est ${ppF(g)}`;
       const tournures = [
-        `${x.p} partage ${s.un} en ${d} ${s.unite} ${egales(s)}. ${Il(x)} en ${s.verbe} ${n}. A-t-${il(x)} ${s.pp} la moitié ${s.du} ?`,
-        `${Maj(s.un)} a ${d} ${s.unite} ${egales(s)}. ${x.p} en ${s.verbe} ${n}. Est-ce la moitié ${s.du} ?`,
-        `${x.p} dit : « J’ai ${s.pp} ${n} ${uniteN(s, n)} sur ${d}, c’est la moitié. » A-t-${il(x)} raison ?`,
-        `Sur les ${d} ${s.unite} ${egales(s)} ${s.du}, ${x.p} en ${s.verbe} ${n}. ${Il(x)} pense en avoir ${s.pp} la moitié. Vrai ?`,
+        `${Maj(F.un)} est ${partageF(F)} en ${d} parts égales. On en ${g.verbe} ${n}. Est-ce la moitié ${F.du} ?`,
+        `${Maj(F.le)} a ${d} parts égales. ${Maj(sont)}. Est-ce la moitié ${F.du} ?`,
+        `On ${g.verbe} ${n} ${parts(n)} sur les ${d} parts égales ${F.du}. Est-ce la moitié ?`,
+        `${n} ${parts(n)} sur ${d} parts égales : est-ce la moitié ${F.du} ?`,
+        `Est-il vrai que ${n} ${parts(n)} sur ${d} parts égales font la moitié ${F.du} ?`,
+        `${Maj(F.un)} a ${d} parts égales. ${Maj(sont)}. A-t-on ${g.pp} la moitié ${F.du} ?`,
       ];
       return {
         text: tirer(tournures),
@@ -1721,23 +1881,35 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "On multiplie le numérateur et le dénominateur par le même nombre.",
     tags: ["fraction_nombre", "defi", "egalite", "template"],
+    // 03/11/2026 : ★2, une figure et un geste, sans situation. Le gabarit est
+    // presque seul à son étoile : la figure porte la plupart des tirages, pour
+    // que la phrase change (figure × geste × tournure).
     generate: () => {
-      const s = tirer(PARTAGES.filter((p) => p.dMax >= 8));
-      const [x, y] = deuxPrenoms();
+      const F = tirer(FIGURES);
+      const g = tirer(GESTES);
       let b = 2, k = 2;
       do {
         b = entierMixte(2, 6);
         k = entierMixte(2, 4);
-      } while (b * k > Math.max(12, s.dMax));
+      } while (b * k > 12);
       const a = entierMixte(1, b - 1);
       const d = b * k;
-      const tournures = [
-        `${x.p} complète pour que les fractions soient égales : ${a}/${b} = …/${d}. Quel nombre écrit-${il(x)} ?`,
-        `Dans ${s.un} de ${d} ${s.unite} ${egales(s)}, combien ${deU(s)} font ${a}/${b} ${s.du} ? ${x.p} cherche.`,
-        `${x.p} a ${s.pp} ${a}/${b} ${s.du}. ${y.p} veut la même quantité, mais ${s.f ? "sa" : "son"} ${s.le.replace(/^(la|le) /, "")} a ${d} ${s.unite} ${egales(s)}. Combien ${deU(s)} doit-${il(y)} ${inf(s)} ?`,
-        `${x.p} cherche une fraction égale à ${a}/${b} avec ${d} comme dénominateur. Quel est le numérateur ?`,
-        `Quel numérateur manque ? ${a}/${b} = …/${d}. Aide ${x.p}.`,
+      const debut = tirer([`${Maj(F.un)} a ${d} parts égales.`, `${Maj(F.un)} est ${partageF(F)} en ${d} parts égales.`]);
+      const figure = [
+        `${debut} Combien de parts font ${a}/${b} ${F.du} ?`,
+        `${debut} Combien de parts faut-il ${g.inf} pour avoir ${a}/${b} ${F.du} ?`,
+        `${debut} On veut ${g.inf} ${a}/${b} ${F.du}. Combien de parts faut-il ${g.inf} ?`,
+        `${debut} Combien de parts ${ppFs(g)} montrent ${a}/${b} ${F.du} ?`,
       ];
+      const egalite = [
+        `Complète pour que les fractions soient égales : ${a}/${b} = …/${d}`,
+        `Quel numérateur manque ? ${a}/${b} = …/${d}`,
+        `Trouve le nombre qui manque : ${a}/${b} = …/${d}`,
+        `Écris ${a}/${b} avec le dénominateur ${d}. Quel numérateur trouves-tu ?`,
+        `Cherche une fraction égale à ${a}/${b} avec ${d} comme dénominateur. Quel est son numérateur ?`,
+        `Les deux fractions sont égales. Complète : ${a}/${b} = …/${d}`,
+      ];
+      const tournures = Math.random() < 0.8 ? figure : egalite;
       return {
         text: tirer(tournures),
         format: "short",
@@ -1766,30 +1938,45 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Compte les parts colorées puis le nombre total de parts.",
     tags: ["fraction_nombre", "representation", "canvas", "template"],
+    // 03/11/2026 : ★1, la figure seule (une barre ou un disque), sans situation.
+    // Une fois sur quatre, on demande la partie BLANCHE : l'élève doit compter
+    // les parts, pas recopier un nombre.
     generate: () => {
-      const c = tirer(PARTAGES);
-      const x = tirer(PRENOMS);
-      const d = entierMixte(2, Math.min(c.dMax, 10));
+      const d = entierMixte(2, 10);
       const s = { n: entierMixte(1, d - 1), d };
-      const tournures = [
-        `La barre représente ${c.le} ${deP(x)}. Les ${c.unite} ${c.uniteF ? "colorées" : "colorés"} sont ${c.uniteF ? "celles" : "ceux"} qu’${il(x)} a ${ppParts(c)}. Quelle fraction ${c.du} est-ce ?`,
-        `${x.p} a dessiné ${c.le} : la partie colorée montre ce qu’${il(x)} a ${c.pp}. Écris cette fraction ${c.du}.`,
-        `Regarde la barre ${deP(x)}. Quelle fraction de la barre est colorée ?`,
-        `Cette barre est ${c.le} ${deP(x)}, ${partage(c)} en ${c.unite} ${egales(c)}. Quelle fraction ${c.du} est colorée ?`,
-      ];
+      const disque = Math.random() < 0.4;
+      const du = disque ? "du disque" : "de la barre";
+      const blanche = Math.random() < 0.25;
+      const debut = tirer([
+        "",
+        "Regarde la figure. ",
+        `${disque ? "Le disque est partagé" : "La barre est partagée"} en parts égales. `,
+        "Compte toutes les parts, puis les parts colorées. ",
+        "Observe bien les parts. ",
+        `Regarde ${disque ? "le disque" : "la barre"}. `,
+      ]);
+      const question = blanche
+        ? tirer([`Quelle fraction ${du} est blanche ?`, `Quelle fraction ${du} n’est pas colorée ?`, `Écris la fraction ${du} qui reste blanche.`])
+        : tirer([
+            `Quelle fraction ${du} est colorée ?`,
+            `Quelle fraction ${du} est en couleur ?`,
+            `Écris la fraction ${du} qui est colorée.`,
+            `Quelle part ${du} est colorée ? Écris-la en fraction.`,
+          ]);
+      const n = blanche ? s.d - s.n : s.n;
 
       return {
-        text: tirer(tournures),
+        text: debut + question,
         format: "short",
-        expected: attendusFraction(s.n, s.d),
+        expected: attendusFraction(n, s.d),
         comparator: "fraction_decimal_equivalent",
         explanation:
           "Définition : une fraction représente des parts d’un tout partagé en parts égales.\n\n" +
-          "Méthode : on compte les parts colorées puis le nombre total de parts.\n\n" +
-          `Observation : ${s.n} part(s) sont colorées sur ${s.d} parts égales.\n\n` +
-          `Conclusion : la fraction représentée est ${s.n}/${s.d}.`,
+          `Méthode : on compte toutes les parts, puis les parts ${blanche ? "blanches" : "colorées"}.\n\n` +
+          `Observation : ${n} ${parts(n)} ${blanche ? (n > 1 ? "sont blanches" : "est blanche") : n > 1 ? "sont colorées" : "est colorée"} sur ${s.d} parts égales.\n\n` +
+          `Conclusion : la fraction est ${n}/${s.d}.`,
         canvas: fractionCanvas({
-          model: "bar",
+          model: disque ? "circle" : "bar",
           fraction: { numerator: s.n, denominator: s.d, label: "?" },
         }),
       };
@@ -1813,17 +2000,18 @@ export const fractionsBank: TutorBankItemV4[] = [
       const s = { rows, cols, shaded: entierMixte(1, rows * cols - 1) };
       const total = s.rows * s.cols;
       const simp = simplifyFraction(s.shaded, total);
-      const x = tirer(PRENOMS);
-      const lieu = tirer([
-        "le potager", "le carrelage de la cuisine", "la mosaïque", "le jardin", "le parking à vélos",
-        "la boîte de chocolats", "la tablette de chocolat", "la fresque de la classe", "le damier", "la serre",
-        "le tapis de gym", "la boîte d’œufs", "le panneau solaire", "l’aquarium décoré", "la couverture en patchwork",
-      ]);
+      // 03/11/2026 : ★2, la grille seule, sans situation (plus de potager ni de serre).
+      // ⚠️ Le composant écrit « colorées/total » sous la grille : on ne demande
+      // donc JAMAIS la partie blanche ici.
       const tournures = [
-        `La grille représente ${lieu} ${deP(x)}. Quelle fraction est colorée ?`,
-        `${x.p} colorie des cases de la grille ${deLe(lieu)}. Quelle fraction de la grille a-t-${il(x)} coloriée ?`,
-        `Sur le plan ${deLe(lieu)}, ${x.p} a colorié des cases. Écris la fraction de cases coloriées.`,
-        `Regarde la grille ${deLe(lieu)}. Quelle fraction des cases est colorée ?`,
+        `Quelle fraction de la grille est colorée ?`,
+        `Regarde la grille. Quelle fraction des cases est colorée ?`,
+        `Écris la fraction de cases colorées.`,
+        `Compte toutes les cases, puis les cases colorées. Quelle fraction de la grille est colorée ?`,
+        `Les cases de la grille sont égales. Quelle fraction est colorée ?`,
+        `Quelle part de la grille est colorée ? Écris une fraction.`,
+        `Observe la grille. Écris la fraction colorée.`,
+        `Combien de cases sont colorées sur toutes les cases ? Écris la fraction.`,
       ];
 
       return {
@@ -1872,16 +2060,15 @@ export const fractionsBank: TutorBankItemV4[] = [
       const grande = Math.random() < 0.6;
       const mot = grande ? "la plus grande" : "la plus petite";
       const good = (a.n / a.d > b.n / b.d) === grande ? a : b;
-      const [x, y] = deuxPrenoms();
-      const objet = tirer([
-        "barre de céréales", "règle en bois", "baguette", "réglette", "planche", "bande de papier",
-        "corde à sauter", "tablette de chocolat", "frise", "ficelle",
-      ]);
+      // 03/11/2026 : ★2, les deux barres seules, sans situation.
       const tournures = [
         `En observant les deux barres, quelle fraction est ${mot} ?`,
-        `${x.p} et ${y.p} ont chacun une ${objet} de même longueur. Les barres montrent la partie utilisée. Quelle fraction est ${mot} ?`,
         `Regarde les barres colorées. Écris ${mot} des deux fractions.`,
-        `${x.p} compare deux morceaux de ${objet}. D’après les barres, quelle fraction est ${mot} ?`,
+        `Les deux barres ont la même longueur. Quelle fraction est ${mot} ?`,
+        `Compare les parties colorées des deux barres. Quelle fraction est ${mot} ?`,
+        `D’après les barres, quelle fraction est ${mot} ?`,
+        `Quelle barre montre ${mot} fraction ? Écris cette fraction.`,
+        `Regarde bien les deux barres. Laquelle des deux fractions est ${mot} ?`,
       ];
 
       return {
@@ -2254,7 +2441,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       const egalite = `${f} = ${entier} + …/${denominateur}`;
       const tournures = [
         `${x.p} écrit ${f} en écriture mixte : ${egalite}. Quel numérateur manque ?`,
-        `${x.p} a ${numerateur} ${o.unite} de ${o.sing}. Chaque ${o.sing} a ${denominateur} ${o.unite}. ${Il(x)} écrit : ${egalite}. Quel nombre manque ?`,
+        `${x.p} a ${numerateur} ${o.unite} ${/^[aeiouéèh]/.test(o.sing) ? "d’" : "de "}${o.sing}. Chaque ${o.sing} a ${denominateur} ${o.unite}. ${Il(x)} écrit : ${egalite}. Quel nombre manque ?`,
         `Sur la demi-droite ${deP(x)}, le point A est à ${f}. Complète : ${egalite}.`,
         `${x.p} transforme ${f} : ${egalite}. Aide-${x.f ? "la" : "le"} à trouver le numérateur qui manque.`,
         `Dans le cahier ${deP(x)}, il est écrit : ${egalite}. Quel numérateur manque ?`,
@@ -2287,26 +2474,32 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Un entier, c’est toutes les parts : 1 = 4/4 si on compte en quarts.",
     tags: ["fraction_nombre", "mixte", "template"],
+    // 03/11/2026 : ★2, sans situation. Le gabarit est presque seul à son
+    // étoile : la phrase varie par le NOM des parts (des tiers, des quarts…),
+    // qui aide aussi à comprendre : 2 + 1/3, ce sont 2 unités et 1 tiers.
     generate: () => {
-      const o = tirer(ENTIERS_A_PARTAGER);
-      const x = tirer(PRENOMS);
       const d = entierMixte(2, 8);
       const e = entierMixte(1, 3);
       const r = Math.random() < 0.35 ? 0 : entierMixte(1, d - 1);
       const n = e * d + r;
       const ecrit = r ? `${e} + ${r}/${d}` : `${e}`;
-      const entiers = `${e} ${e > 1 ? o.pl : o.sing} ${e > 1 ? (o.f ? "entières" : "entiers") : o.f ? "entière" : "entier"}`;
+      const unites = e > 1 ? `${EN_MOTS[e]} unités` : "une unité";
+      const nom = nomDen(d);
       const tournures = r
         ? [
-            `Complète : ${ecrit} = …/${d}.`.replace("Complète", `${x.p} complète`),
-            `${x.p} a ${entiers} et ${r} ${r > 1 ? o.unite : o.unite.replace(/[sx]$/, "")} d’${o.f ? "une autre" : "un autre"}. Chaque ${o.sing} a ${d} ${o.unite} ${o.uniteF ? "égales" : "égaux"}. Combien de ${o.unite} a-t-${il(x)} en tout ? (${ecrit} = …/${d})`,
-            `Écris ${ecrit} sous la forme d’une seule fraction de dénominateur ${d}. Aide ${x.p}.`,
-            `Quel numérateur manque ? ${ecrit} = …/${d}. ${x.p} hésite.`,
+            `Complète en ${nom} : ${ecrit} = …/${d}.`,
+            `${ecrit}, c’est ${unites} et ${fractionEnMots(r, d)}. Combien de ${nom} en tout ? (${ecrit} = …/${d})`,
+            `Écris ${ecrit} sous la forme d’une seule fraction de dénominateur ${d} (des ${nom}).`,
+            `Quel numérateur manque ? Compte en ${nom} : ${ecrit} = …/${d}`,
+            `Combien de ${nom} y a-t-il dans ${ecrit} ? Complète : ${ecrit} = …/${d}.`,
+            `Une unité, c’est ${EN_MOTS[d]} ${nom}. Complète : ${ecrit} = …/${d}.`,
           ]
         : [
-            `${x.p} a ${entiers}, chacun${o.f ? "e" : ""} coupé${o.f ? "e" : ""} en ${d} ${o.unite} ${o.uniteF ? "égales" : "égaux"}. Combien de ${o.unite} cela fait-il ? (${e} = …/${d})`,
-            `Complète pour ${x.p} : ${e} = …/${d}.`,
-            `${x.p} veut écrire ${e} avec le dénominateur ${d}. Quel numérateur faut-il ?`,
+            `${Maj(unites)}, c’est combien de ${nom} ? (${e} = …/${d})`,
+            `Complète en ${nom} : ${e} = …/${d}.`,
+            `On veut écrire ${e} avec le dénominateur ${d}. Combien de ${nom} faut-il ?`,
+            `Combien de ${nom} font ${unites} ? Complète : ${e} = …/${d}.`,
+            `Une unité, c’est ${EN_MOTS[d]} ${nom}. Complète : ${e} = …/${d}.`,
           ];
       return {
         text: tirer(tournures),
@@ -2535,7 +2728,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_egale",
     difficulty: 1,
     theme: "neutral",
-    text: "Rayan écrit : 7/3 = 14/6. A-t-il raison ?",
+    text: "Est-ce juste : 7/3 = 14/6 ?",
     format: "qcm",
     choices: ["oui", "non"],
     expected: ["oui"],
@@ -2575,14 +2768,36 @@ export const fractionsBank: TutorBankItemV4[] = [
           },
         ),
       ).slice(0, 3);
-      const x = tirer(PRENOMS);
-      const s = tirer(PARTAGES);
-      const tournures = [
+      // 03/11/2026 : ★1, sans situation ; une fraction sous 1 se montre aussi sur une figure.
+      const F = tirer(FIGURES);
+      const g = tirer(GESTES);
+      // Une phrase d'appui (souvent vide) × une question courte : la phrase
+      // change sans raconter d'histoire.
+      const appui = tirer([
+        "",
+        "",
+        "On multiplie le haut ET le bas par le même nombre. ",
+        "Rappel : on multiplie le numérateur et le dénominateur par le même nombre. ",
+        `Pense en ${nomDen(b)}. `,
+        "Une seule réponse est juste. ",
+        "Regarde le numérateur et le dénominateur. ",
+      ]);
+      const question = tirer([
         `Quelle fraction est égale à ${a}/${b} ?`,
-        `${x.p} cherche une fraction égale à ${a}/${b}. Laquelle choisit-${il(x)} ?`,
-        `${x.p} multiplie le numérateur et le dénominateur de ${a}/${b} par le même nombre. Quelle fraction peut-${il(x)} obtenir ?`,
-        `Au tableau, ${x.p} doit écrire une fraction égale à ${a}/${b}. Laquelle est juste ?`,
-        ...(sup ? [] : [`${x.p} a ${s.pp} ${a}/${b} ${s.du}. Quelle fraction dit la même quantité ?`]),
+        `Choisis la fraction égale à ${a}/${b}.`,
+        `Laquelle de ces fractions est égale à ${a}/${b} ?`,
+        `Trouve la fraction égale à ${a}/${b}.`,
+        `Quelle fraction vaut autant que ${a}/${b} ?`,
+      ]);
+      const tournures = [
+        appui + question,
+        appui + question,
+        ...(sup
+          ? []
+          : [
+              `On ${g.verbe} ${a}/${b} ${F.du}. Quelle fraction dit la même quantité ?`,
+              `Sur ${F.un}, ${a}/${b} est ${ppF(g)}. Quelle fraction dit la même chose ?`,
+            ]),
       ];
       return {
         text: tirer(tournures),
@@ -2617,21 +2832,26 @@ export const fractionsBank: TutorBankItemV4[] = [
       const trouEnBas = Math.random() < 0.4;
       const egalite = trouEnBas ? `${a}/${b} = ${a * k}/…` : `${a}/${b} = …/${b * k}`;
       const rep = trouEnBas ? b * k : a * k;
-      const [x, y] = deuxPrenoms();
-      const parts = PARTAGES.filter((p) => p.dMax >= b * k);
-      const s = parts.length ? tirer(parts) : null;
+      // 03/11/2026 : ★1, sans situation (la « même quantité » de deux enfants est montée à ★3).
+      const F = tirer(FIGURES);
+      // ⚠️ L'égalité finit par « … » : elle va en fin de ligne, sans point après.
+      const appui = tirer([
+        "",
+        `On multiplie le haut et le bas par ${k}. `,
+        `On multiplie le numérateur et le dénominateur par ${k}. `,
+        "Les deux fractions sont égales. ",
+        "Le haut et le bas sont multipliés par le même nombre. ",
+        "Attention : le haut ET le bas changent. ",
+      ]);
+      const consigne = tirer(["Quel nombre manque ?", "Complète :", "Trouve le nombre qui manque :", "Écris le nombre qui manque :", "Complète l’égalité :"]);
       const tournures = [
-        // ⚠️ L'égalité finit par « … » : elle va en fin de ligne, sans point après.
-        `Complète : ${egalite}`,
-        `${x.p} complète une égalité de fractions. Quel nombre écrit-${il(x)} ?
-${egalite}`,
-        `Aide ${x.p} : quel nombre manque ?
-${egalite}`,
-        `${x.p} multiplie le haut et le bas par ${k}. Quel nombre manque ?
-${egalite}`,
-        ...(s && !sup && !trouEnBas
+        `${appui}${consigne}\n${egalite}`,
+        `${appui}${consigne}\n${egalite}`,
+        `${appui}${consigne}\n${egalite}`,
+        ...(!sup && !trouEnBas && b * k <= 12
           ? [
-              `${x.p} a ${s.pp} ${a}/${b} ${s.du}. ${y.p} veut la même quantité, mais ${s.f ? "sa" : "son"} ${s.le.replace(/^(la|le) /, "")} a ${b * k} ${s.unite} ${egales(s)}. Combien ${deU(s)} lui faut-il ? (${egalite})`,
+              `${Maj(F.un)} a ${b * k} parts égales. Combien de parts font ${a}/${b} ${F.du} ? (${egalite})`,
+              `${Maj(F.un)} est ${partageF(F)} en ${b * k} parts égales. Complète : ${egalite}`,
             ]
           : []),
       ];
@@ -2689,21 +2909,18 @@ ${egalite}`,
       const trouEnBas = Math.random() < 0.5;
       const egalite = trouEnBas ? `${n}/${d} = ${p}/…` : `${n}/${d} = …/${q}`;
       const rep = trouEnBas ? q : p;
-      const x = tirer(PRENOMS);
-      const tournures = [
-        `Complète : ${egalite}`,
-        `${x.p} divise le haut et le bas par ${k}. Quel nombre manque ?
-${egalite}`,
-        `${x.p} simplifie une fraction. Quel nombre manque ?
-${egalite}`,
-        // Des situations seulement quand le tout est plausible (pas une BD de 4 pages).
-        ...(d >= 8 ? [`Dans un morceau de ${d} mesures, le refrain en occupe ${n}. ${x.p}, ${x.f ? "pianiste" : "guitariste"}, l’écrit en fraction. Quel nombre manque ?
-${egalite}`] : []),
-        ...(d >= 20 ? [`${x.p} a lu ${n} pages d’une BD de ${d} pages. ${Il(x)} simplifie la fraction lue. Quel nombre manque ?
-${egalite}`] : []),
-        ...(d >= 20 ? [`Un entraînement de ${d} minutes compte ${n} minutes de course. ${x.p}, ${x.f ? "l’entraîneuse" : "l’entraîneur"}, l’écrit en fraction. Quel nombre manque ?
-${egalite}`] : []),
-      ];
+      // 03/11/2026 : ★2, sans situation (le refrain, la BD et l'entraînement sont
+      // montés à ★3, dans fraction_egale_tpl_situation).
+      const appui = tirer([
+        "",
+        `On divise le haut et le bas par ${k}. `,
+        `On divise le numérateur et le dénominateur par ${k}. `,
+        "On simplifie la fraction. ",
+        "Les deux fractions sont égales. ",
+        "Le haut et le bas sont divisés par le même nombre. ",
+      ]);
+      const consigne = tirer(["Quel nombre manque ?", "Complète :", "Trouve le nombre qui manque :", "Écris le nombre qui manque :", "Complète l’égalité :"]);
+      const tournures = [`${appui}${consigne}\n${egalite}`];
       const [avant, apres] = trouEnBas ? [n, p] : [d, q];
       return {
         text: tirer(tournures),
@@ -2741,15 +2958,21 @@ ${egalite}`] : []),
       if (cas === "ajoute") c = a + (d - b);
       if (cas === "decale") c = a * k + 1 < d ? a * k + 1 : a * k - 1;
       const oui = c * b === a * d;
-      const [x, y] = deuxPrenoms();
-      const ils = x.f && y.f ? "elles" : "ils";
+      // 03/11/2026 : ★2, les barres seules, sans prénom.
+      const appui = tirer(["Regarde les barres.", "Les deux barres ont la même longueur.", "Compare les parties colorées.", "Observe les deux barres.", "Les barres montrent les deux fractions."]);
+      const question = tirer([
+        `${a}/${b} et ${c}/${d} sont-elles égales ?`,
+        `Est-ce juste : ${a}/${b} = ${c}/${d} ?`,
+        `${a}/${b} et ${c}/${d} représentent-elles la même quantité ?`,
+        `Les fractions ${a}/${b} et ${c}/${d} sont-elles égales ?`,
+      ]);
       const tournures = [
-        `Regarde les barres. ${a}/${b} et ${c}/${d} sont-elles égales ?`,
-        `${x.p} colorie ${a}/${b} d’une bande. ${y.p} colorie ${c}/${d} d’une bande identique. Ont-${ils} colorié la même longueur ?`,
-        `${x.p} dit : « ${a}/${b} = ${c}/${d} ». Regarde les barres : a-t-${il(x)} raison ?`,
-        `Les barres ${deP(x)} montrent ${a}/${b} et ${c}/${d}. Ces deux fractions sont-elles égales ?`,
+        `${appui} ${question}`,
+        `${appui} ${question}`,
+        `${appui} ${question}`,
+        `On colorie ${a}/${b} d’une bande, puis ${c}/${d} d’une bande identique. A-t-on colorié la même longueur ?`,
         ...(cas === "ajoute"
-          ? [`${x.p} ajoute ${d - b} en haut et en bas de ${a}/${b} et trouve ${c}/${d}. Les barres montrent-elles la même quantité ?`]
+          ? [`On ajoute ${d - b} en haut et en bas de ${a}/${b} : on trouve ${c}/${d}. Les barres montrent-elles la même quantité ?`]
           : []),
       ];
       return {
@@ -2796,6 +3019,80 @@ ${egalite}`] : []),
       "Calcul : 6 ÷ 2 = 3 et 8 ÷ 2 = 4. L’erreur de Hugo : 4/6 n’est pas égale à 6/8.\n\n" +
       "Conclusion : 6/8 = 3/4.",
     tags: ["fraction_nombre", "simplifier", "piege", "qcm"],
+  },
+  {
+    // 03/11/2026 : les situations retirées de ★1 et ★2 (le refrain, la BD,
+    // l'entraînement, « la même quantité ») ; d'autres métiers, d'autres domaines.
+    kind: "template",
+    id: "fraction_egale_tpl_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_egale",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Par quel nombre passe-t-on d’un dénominateur à l’autre ? Fais pareil en haut.",
+    tags: ["fraction_nombre", "egalite", "situation", "template"],
+    generate: () => {
+      const x = tirer(PRENOMS);
+      const IL = Il(x);
+      if (Math.random() < 0.6) {
+        // Simplifier une fraction « partie sur tout » : n/d = p/… ou …/q.
+        type Sit = { dMin: number; t: (n: number, d: number) => string };
+        const SITUATIONS: Sit[] = [
+          { dMin: 8, t: (n, d) => `Dans un morceau de ${d} mesures, le refrain en occupe ${n}. ${x.p}, ${x.f ? "pianiste" : "guitariste"}, l’écrit en fraction.` },
+          { dMin: 20, t: (n, d) => `${x.p} a lu ${n} pages d’une BD de ${d} pages. ${IL} simplifie la fraction lue.` },
+          { dMin: 20, t: (n, d) => `Un entraînement de ${d} minutes compte ${n} minutes de course. ${x.p}, ${x.f ? "l’entraîneuse" : "l’entraîneur"}, l’écrit en fraction.` },
+          { dMin: 10, t: (n, d) => `Sur ${d} tirs, ${x.f ? "la basketteuse" : "le basketteur"} ${x.p} en réussit ${n}. ${IL} écrit la fraction des tirs réussis.` },
+          { dMin: 12, t: (n, d) => `${x.f ? "La pâtissière" : "Le pâtissier"} ${x.p} prépare ${d} gâteaux, dont ${n} au chocolat. ${IL} écrit la fraction des gâteaux au chocolat.` },
+          { dMin: 10, t: (n, d) => `L’astronome ${x.p} observe le ciel pendant ${d} nuits ; ${n} sont sans nuages. ${IL} écrit la fraction des nuits claires.` },
+          { dMin: 12, t: (n, d) => `${x.f ? "La jardinière" : "Le jardinier"} ${x.p} a ${d} rangées de semis ; ${n} ont déjà germé. ${IL} écrit la fraction des rangées qui ont germé.` },
+          { dMin: 10, t: (n, d) => `Dans une chorale de ${d} enfants, ${n} chantent la mélodie. ${x.p}, ${x.f ? "la cheffe" : "le chef"} de chœur, l’écrit en fraction.` },
+          { dMin: 20, t: (n, d) => `${x.f ? "L’informaticienne" : "L’informaticien"} ${x.p} a ${d} fichiers à vérifier ; ${n} sont déjà vérifiés. ${IL} écrit la fraction des fichiers vérifiés.` },
+          { dMin: 10, t: (n, d) => `${x.f ? "La vétérinaire" : "Le vétérinaire"} ${x.p} soigne ${d} animaux aujourd’hui, dont ${n} chats. ${IL} écrit la fraction de chats.` },
+        ];
+        for (;;) {
+          const [p, q] = fractionIrreductible(9);
+          const k = tirer([2, 3, 4, 5, 10]);
+          const [n, d] = [p * k, q * k];
+          const ok = SITUATIONS.filter((s) => d >= s.dMin && d <= 60);
+          if (!ok.length) continue;
+          const trouEnBas = Math.random() < 0.5;
+          const egalite = trouEnBas ? `${n}/${d} = ${p}/…` : `${n}/${d} = …/${q}`;
+          return {
+            text: `${tirer(ok).t(n, d)} Quel nombre manque ?\n${egalite}`,
+            format: "short",
+            expected: [String(trouEnBas ? q : p)],
+            comparator: "number_equal",
+            explanation:
+              DEFINITION_EGALE +
+              `Méthode : la partie est ${n}, le tout est ${d} : la fraction est ${n}/${d}. On passe de ${trouEnBas ? `${n} à ${p}` : `${d} à ${q}`} en divisant par ${k}.\n\n` +
+              `Calcul : ${trouEnBas ? `${d} ÷ ${k} = ${q}` : `${n} ÷ ${k} = ${p}`}.\n\n` +
+              `Conclusion : ${n}/${d} = ${p}/${q}.`,
+          };
+        }
+      }
+      // La même quantité avec des parts plus fines : a/b = …/(b × k).
+      const y = tirer(PRENOMS.filter((z) => z.p !== x.p));
+      const s = tirer(PARTAGES.filter((z) => z.dMax >= 8));
+      let a = 1, b = 2, k = 2;
+      do {
+        [a, b] = fractionIrreductible(6);
+        k = tirer([2, 3, 4]);
+      } while (b * k > s.dMax);
+      const egalite = `${a}/${b} = …/${b * k}`;
+      return {
+        text: `${x.p} a ${s.pp} ${a}/${b} ${s.du}. ${y.p} veut la même quantité, mais ${s.f ? "sa" : "son"} ${s.le.replace(/^(la|le) /, "")} a ${b * k} ${s.unite} ${egales(s)}. Combien ${deU(s)} lui faut-il ? (${egalite})`,
+        format: "short",
+        expected: [String(a * k)],
+        comparator: "number_equal",
+        explanation:
+          DEFINITION_EGALE +
+          `Méthode : pour passer de ${b} à ${b * k}, on multiplie par ${k}. On multiplie le numérateur par ${k} aussi.\n\n` +
+          `Calcul : ${a} × ${k} = ${a * k}.\n\n` +
+          `Conclusion : ${a}/${b} = ${a * k}/${b * k} : ${a * k} ${s.unite}.`,
+      };
+    },
   },
   {
     kind: "template",

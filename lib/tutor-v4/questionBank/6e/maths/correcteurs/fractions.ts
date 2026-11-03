@@ -233,6 +233,14 @@ export const CORRECTEURS: CorrecteursMaths = {
   },
   fraction_egale_tpl_multiplier: (q) => egaliteATrou(q, "multiplier"),
   fraction_egale_tpl_diviser: (q) => egaliteATrou(q, "diviser"),
+  // 03/11/2026 : les situations montées à ★3 ; le sens se lit sur l'égalité.
+  fraction_egale_tpl_situation: (q) => {
+    const m = q.text.match(/(\d+)\/(\d+) = (…|\d+)\/(…|\d+)/);
+    if (!m) return ["égalité à trou introuvable"];
+    const [a, b] = [Number(m[1]), Number(m[2])];
+    const plusGrand = m[3] === "…" ? Number(m[4]) > b : Number(m[3]) > a;
+    return egaliteATrou(q, plusGrand ? "multiplier" : "diviser");
+  },
   fraction_egale_tpl_figure: (q) => {
     const fr = fractionsDe(q.text);
     if (fr.length !== 2) return ["deux fractions attendues"];
@@ -302,6 +310,7 @@ export const CORRECTEURS: CorrecteursMaths = {
     return [...p, ...simplifieAuMaximum(q, n, d)];
   },
   fraction_quantite_tpl_1: (q) => quantiteEnMots(q, false),
+  fraction_quantite_tpl_situation: (q) => quantiteEnMots(q, false),
   fraction_quantite_qcm_tpl_1: (q) => quantiteEnMots(q, true),
   fraction_quantite_tpl_2: quantite,
   fraction_mixte_tpl_1: (q) => {
@@ -318,7 +327,7 @@ export const CORRECTEURS: CorrecteursMaths = {
       if (!(c.min <= n / d && n / d <= c.max) || Math.abs(pt - n / d) > 1e-3) p.push("le point A n'est pas à la fraction");
       if (Math.abs(c.step - 1 / d) > 1e-9) p.push("graduation différente de 1/d");
     }
-    const parts = q.text.match(/(\d+) \p{L}+ de \p{L}+\. Chaque \p{L}+ a (\d+)/u);
+    const parts = q.text.match(/(\d+) \p{L}+ (?:de |d’)[\p{L} ]+\. Chaque [\p{L} ]+ a (\d+)/u);
     if (parts && (Number(parts[1]) !== n || Number(parts[2]) !== d)) p.push("la situation ne correspond pas à la fraction");
     return [...p, ...verifierAttendu(q, n - e * d)];
   },
@@ -546,12 +555,18 @@ export const CORRECTEURS: CorrecteursMaths = {
     for (const c of q.choices ?? []) if (c !== q.expected[0] && valeur(c) % b === 0) p.push(`le leurre ${c} permet aussi de représenter ${a}/${b}`);
     return p;
   },
+  // 03/11/2026 : une barre ou un disque ; « blanche » / « n'est pas colorée » demande le reste.
   fraction_representer_canvas_tpl_1_barre: (q) => {
-    const f = (q.canvas as any)?.fraction;
-    if ((q.canvas as any)?.model !== "bar" || !f) return ["barre absente"];
+    const c = q.canvas as any;
+    const f = c?.fraction;
+    if (!["bar", "circle"].includes(c?.model) || !f) return ["barre ou disque absent"];
     if (/\d/.test(q.text)) return ["le texte donne des nombres : la figure doit suffire"];
-    if (f.numerator < 1 || f.numerator >= f.denominator) return ["barre vide ou pleine"];
-    return verifierAttendu(q, f.numerator / f.denominator);
+    if (f.numerator < 1 || f.numerator >= f.denominator) return ["figure vide ou pleine"];
+    const p: string[] = [];
+    if (c.model === "circle" && !/disque/.test(q.text)) p.push("disque dessiné, le texte n'en parle pas");
+    if (c.model === "bar" && !/barre|figure/.test(q.text)) p.push("barre dessinée, le texte n'en parle pas");
+    const blanc = /blanche|n’est pas colorée/.test(q.text);
+    return [...p, ...verifierAttendu(q, blanc ? 1 - f.numerator / f.denominator : f.numerator / f.denominator)];
   },
   fraction_representer_canvas_tpl_2_grille: (q) => {
     const g = (q.canvas as any)?.grid;
@@ -562,6 +577,7 @@ export const CORRECTEURS: CorrecteursMaths = {
     return verifierAttendu(q, g.shaded / total);
   },
   fraction_lire_ecrire_tpl_1: (q) => lireEcrire(q, false),
+  fraction_lire_ecrire_tpl_situation: (q) => lireEcrire(q, false),
   fraction_lire_ecrire_qcm_tpl_1: (q) => lireEcrire(q, true),
   fraction_lire_ecrire_tpl_deux_enfants: (q) => {
     const t = totalParts(q.text);
