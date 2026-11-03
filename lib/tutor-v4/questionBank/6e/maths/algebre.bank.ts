@@ -464,6 +464,10 @@ export const algebreBank: TutorBankItemV4[] = [
     // montant de la prime d'argent (réponse courte), une barre d'un schéma.
     // ⛔ Aucun QCM dont les choix sont des formules : l'élève calcule le NOMBRE.
     generate: () => {
+      // 03/11/2026 : trois phrases fixes, c'était 7 répétitions sur 20 à ★5.
+      // Des débuts et des fins variés (sans chiffre : le correcteur relit les
+      // mêmes phrases-clés).
+      const fin = () => tirer(["", "", " Fais un schéma en barres.", " Dessine les barres d’abord.", " Vérifie ton résultat."]);
       const cas = [
         () => {
           // Écart pair : S ÷ 2 (le leurre « oublier l'écart ») reste entier.
@@ -474,7 +478,7 @@ export const algebreBank: TutorBankItemV4[] = [
           // Leurres : oublier de diviser, donner le plus grand, oublier l'écart (tous distincts).
           const pieges = [S - ecart, petit + ecart, S / 2].map(String);
           return {
-            q: `Deux nombres ont pour somme ${S}. Le plus grand dépasse le plus petit de ${ecart}. Quel est le plus petit ?`,
+            q: `${tirer(["", "Problème. ", "On cherche deux nombres. ", "Sans lettre, avec des barres. "])}${tirer(["Deux nombres ont pour somme", "Deux nombres entiers ont pour somme", "Deux nombres inconnus ont pour somme"])} ${S}. Le plus grand dépasse le plus petit de ${ecart}. Quel est le plus petit ?${fin()}`,
             qcm: { bonne: String(petit), pieges },
             r: `On dessine deux barres. La grande dépasse de ${ecart}. On retire ce morceau : ${S} − ${ecart} = ${2 * petit}. Il reste deux barres égales : ${2 * petit} ÷ 2 = ${petit}. Le plus petit est ${petit}.`,
           };
@@ -486,7 +490,7 @@ export const algebreBank: TutorBankItemV4[] = [
           while (moins === plus) moins = randomInt(10, argent - 10);
           const T = 3 * argent + plus - moins;
           return {
-            q: `Une prime de ${T} € est partagée entre l’or, l’argent et le bronze. L’or a ${plus} € de plus que l’argent, le bronze ${moins} € de moins. Combien reçoit l’argent ?`,
+            q: `${tirer(["Une prime de", "Lors d’une course, une prime de", "Au tournoi d’échecs, une prime de", "Au concours de chant, une prime de", "Au trail, une prime de"])} ${T} € est partagée entre l’or, l’argent et le bronze. L’or a ${plus} € de plus que l’argent, le bronze ${moins} € de moins. ${tirer(["Combien reçoit l’argent ?", "Quelle est la prime de l’argent ?", "Trouve la prime de l’argent."])}${fin()}`,
             rep: argent,
             u: "€",
             r: `On rend les trois barres égales à celle de l’argent. On retire les ${plus} € de trop de l’or. On rajoute les ${moins} € qui manquent au bronze. ${T} − ${plus} + ${moins} = ${3 * argent}. Puis ${3 * argent} ÷ 3 = ${argent}. L’argent reçoit ${argent} €.`,
@@ -497,7 +501,7 @@ export const algebreBank: TutorBankItemV4[] = [
           const part = randomInt(3, 20);
           const T = n * part;
           return {
-            q: `Le schéma montre ${n} barres égales. Elles font ${T} en tout. Combien vaut une barre ?`,
+            q: `${tirer(["Le schéma montre", "On a dessiné", "Ce schéma compte", "Regarde le schéma :"])} ${n} barres égales. Elles font ${T} en tout. ${tirer(["Combien vaut une barre ?", "Quelle est la valeur d’une barre ?", "Trouve la valeur d’une barre."])}`,
             rep: part,
             r: `${n} barres égales font ${T}. Une barre vaut ${T} ÷ ${n} = ${part}. En 6e, le schéma remplace l’équation. En 5e, on écrira une lettre à la place de la barre.`,
             canvas: barres(
@@ -524,12 +528,13 @@ export const algebreBank: TutorBankItemV4[] = [
     microId: "algebre_inconnues",
     difficulty: 2,
     theme: "neutral",
-    text: "Trois ananas identiques coûtent 12 €. Combien coûte un ananas ?",
+    // 03/11/2026 : ★2, donc sans situation (les ananas sont partis).
+    text: "Trois nombres égaux ont pour somme 12. Quel est ce nombre ?",
     format: "short",
     expected: ["4"],
     comparator: "number_equal",
     hint: "Trois parts identiques.",
-    explanation: expl("12 ÷ 3 = 4. Un ananas coûte 4 €."),
+    explanation: expl("Trois parts égales font 12 : une part vaut 12 ÷ 3 = 4. Vérification : 4 + 4 + 4 = 12."),
     tags: ["algebre_probleme", "inconnues", "short"],
   },
   {
@@ -659,8 +664,73 @@ export const algebreBank: TutorBankItemV4[] = [
     microId: "algebre_inconnues",
     difficulty: 2,
     theme: "neutral",
+    hint: "Des parts égales : le total se partage en parts égales.",
+    tags: ["algebre_probleme", "inconnues", "template"],
+    // ⛔ 03/11/2026 — ★2 SANS SITUATION (Frédéric : « le contexte est réservé aux
+    // trois étoiles »). Ni prénom, ni magasin, ni euros : des nombres égaux, des
+    // parts, des barres. Les achats sont partis dans
+    // `algebre_inconnues_tpl_identiques_situation` (★3).
+    generate: () => {
+      const part = randomInt(2, 25);
+      const n = randomInt(2, 8);
+      const total = n * part;
+      const familles = [
+        {
+          intros: [
+            `${n} nombres égaux ont pour somme ${total}.`,
+            `${n} fois le même nombre font ${total}.`,
+            `Le même nombre, additionné ${n} fois, donne ${total}.`,
+            `${n} fois un nombre inconnu font ${total}.`,
+          ],
+          questions: ["Quel est ce nombre ?", "Trouve ce nombre.", "Combien vaut ce nombre ?", "Retrouve ce nombre.", "Quel nombre est-ce ?"],
+          dessin: false,
+        },
+        {
+          intros: [
+            `${total} est partagé en ${n} parts égales.`,
+            `${n} parts égales font ${total} en tout.`,
+            `On partage ${total} en ${n} parts égales.`,
+            `Ensemble, ${n} parts égales valent ${total}.`,
+          ],
+          questions: ["Combien vaut une part ?", "Quelle est la valeur d’une part ?", "Trouve la valeur d’une part.", "Que vaut chaque part ?"],
+          dessin: false,
+        },
+        {
+          intros: [
+            `${n} barres égales valent ${total} en tout.`,
+            `Sur le schéma, ${n} barres identiques font ${total}.`,
+            `${n} barres égales font ${total}.`,
+          ],
+          questions: ["Combien vaut une barre ?", "Quelle est la valeur d’une barre ?", "Trouve la valeur d’une barre.", "Que vaut chaque barre ?"],
+          dessin: true,
+        },
+      ];
+      const F = tirer(familles);
+      // 03/11/2026 (règle des longueurs) : ★2 en 15 mots au plus, sans appui.
+      return {
+        text: `${tirer(F.intros)} ${tirer(F.questions)}`,
+        format: "short",
+        expected: [String(part)],
+        comparator: "number_equal",
+        explanation: expl(`${n} parts égales font ${total} : une part vaut ${total} ÷ ${n} = ${part}. Vérification : ${n} × ${part} = ${total}.`),
+        ...(F.dessin
+          ? { canvas: barres(String(total), Array.from({ length: n }, () => ({ label: "?", unknown: true })), "Combien vaut une barre ?") }
+          : {}),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "algebre_inconnues_tpl_identiques_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "algebre_probleme",
+    microId: "algebre_inconnues",
+    difficulty: 3,
+    theme: "neutral",
     hint: "Des objets identiques : le total se partage en parts égales.",
     tags: ["algebre_probleme", "inconnues", "template"],
+    // 03/11/2026 : les achats d'objets identiques, montés de ★2 à ★3 (contexte).
     generate: () => {
       const a = tirer(ARTICLES);
       const prix = randomInt(a.prix[0], a.prix[1]);
@@ -668,11 +738,15 @@ export const algebreBank: TutorBankItemV4[] = [
       const total = n * prix;
       const x = tirer(PRENOMS);
       const unA = a.f ? "une" : "un";
+      const dUn = a.f ? "d’une" : "d’un";
       const tournures = [
         `${x.p} achète ${n} ${a.pl} identiques pour ${total} €. Combien coûte ${unA} de ces ${a.pl} ?`,
-        `${n} ${a.pl} identiques coûtent ${total} € en tout. Quel est le prix ${a.f ? "d’une" : "d’un"} de ces ${a.pl} ? ${x.p} fait un schéma.`,
-        `${x.p} paie ${total} € pour ${n} ${a.pl}, tous au même prix. Combien coûte ${unA} de ces ${a.pl} ?`,
-        `Pour la classe, ${x.p} commande ${n} ${a.pl} identiques. La facture est de ${total} €. Trouve le prix ${a.f ? "d’une" : "d’un"} de ces ${a.pl}.`,
+        `${n} ${a.pl} identiques coûtent ${total} € en tout. Quel est le prix ${dUn} de ces ${a.pl} ?`,
+        `${x.p} paie ${total} € pour ${n} ${a.pl} au même prix. Combien coûte ${unA} de ces ${a.pl} ?`,
+        `Une animatrice commande ${n} ${a.pl} identiques pour son atelier. La facture est de ${total} €. Trouve le prix ${dUn} de ces ${a.pl}.`,
+        `Un commerçant vend ${n} ${a.pl} identiques et encaisse ${total} €. Quel est le prix ${dUn} de ces ${a.pl} ?`,
+        `En voyage, ${x.p} dépense ${total} € pour ${n} ${a.pl} identiques. Combien coûte ${unA} de ces ${a.pl} ?`,
+        `Une comptable relit une facture : ${n} ${a.pl} identiques pour ${total} €. Quel est le prix ${dUn} de ces ${a.pl} ?`,
       ];
       return {
         text: tirer(tournures),
@@ -792,16 +866,17 @@ export const algebreBank: TutorBankItemV4[] = [
     microId: "algebre_motif",
     difficulty: 2,
     theme: "neutral",
-    text: "On fabrique des maisons avec des allumettes : la première en demande 6, et chaque maison suivante 5 de plus. Combien d'allumettes pour 4 maisons ?",
+    // 03/11/2026 : ★2, donc sans situation (les maisons en allumettes restent à ★3+).
+    text: "Étape 1 : 6. On ajoute 5 à chaque étape. Calcule l'étape 4.",
     format: "short",
     expected: ["21"],
     comparator: "number_equal",
-    hint: "6 pour la première, puis 5 pour chacune des suivantes.",
+    hint: "6 à l'étape 1, puis 5 de plus à chacune des étapes suivantes.",
     explanation: expl(
-      "6 allumettes pour la première maison, puis 3 maisons de plus à 5 allumettes chacune : 6 + 3 × 5 = 6 + 15 = 21 allumettes."
+      "6 à l'étape 1, puis 3 ajouts de 5 pour aller jusqu'à l'étape 4 : 6 + 3 × 5 = 6 + 15 = 21."
     ),
     tags: ["algebre_probleme", "motif", "canvas", "short"],
-    canvas: motif([6, 11, 16, "?"], "+5", "6 pour la première, puis +5 par maison"),
+    canvas: motif([6, 11, 16, "?"], "+5", "6 au départ, puis +5 à chaque étape"),
   },
   {
     kind: "fixed",
@@ -937,13 +1012,26 @@ export const algebreBank: TutorBankItemV4[] = [
       const debut = randomInt(2, 12);
       const pas = randomInt(2, 8);
       const t = [debut, debut + pas, debut + 2 * pas];
-      const m = tirer(MOTIFS);
-      const x = tirer(PRENOMS);
+      // ⛔ 03/11/2026 — ★2 SANS SITUATION : ni prénom, ni objet de la vie. Un
+      // motif de pièces à manipuler (cubes, jetons…) ou de nombres, une phrase
+      // courte. Les motifs « avec une histoire » restent à ★3 (algebre_motif_tpl_1).
+      const m = tirer([
+        { unite: "cubes" }, { unite: "jetons" }, { unite: "carreaux" }, { unite: "allumettes" },
+        { unite: "bâtonnets" }, { unite: "ronds" }, { unite: "triangles" }, { unite: "étoiles" },
+        { unite: "perles" }, { unite: "cercles" }, { unite: "losanges" }, { unite: "points" },
+      ]);
+      // 03/11/2026 (règle des longueurs) : ★2 en 15 mots au plus.
       const tournures = [
-        `${x.p} fabrique des ${m.nom}. Étape 1 : ${t[0]} ${m.unite}. Étape 2 : ${t[1]} ${m.unite}. Étape 3 : ${t[2]} ${m.unite}. Combien ${deM(m)} à l'étape 4 ?`,
-        `Pour ses ${m.nom}, ${x.p} utilise ${t[0]}, puis ${t[1]}, puis ${t[2]} ${m.unite}. Le motif continue pareil. Combien ${deM(m)} à l'étape suivante ?`,
-        `Un motif de ${m.nom} : ${t[0]} ${m.unite}, puis ${t[1]}, puis ${t[2]}. ${x.p} construit l'étape 4. Combien ${deM(m)} lui faut-il ?`,
-        `Voici les trois premières étapes ${deP(x)} : ${t[0]}, ${t[1]} et ${t[2]} ${m.unite}. Trouve le nombre ${deM(m)} de l'étape 4.`,
+        `Motif de ${m.unite} : ${t[0]}, ${t[1]}, ${t[2]}. Combien à l'étape 4 ?`,
+        `Un motif de ${m.unite} : ${t[0]}, puis ${t[1]}, puis ${t[2]}. Et l'étape 4 ?`,
+        `Continue le motif de ${m.unite} : ${t[0]} ; ${t[1]} ; ${t[2]} ; …`,
+        `Quel nombre de ${m.unite} suit ${t[0]}, ${t[1]}, ${t[2]} ?`,
+        `Complète le motif de ${m.unite} : ${t[0]}, ${t[1]}, ${t[2]}, …`,
+        `Un motif de ${m.unite} grandit pareil : ${t[0]}, ${t[1]}, ${t[2]}. Trouve l'étape 4.`,
+        `${t[0]}, ${t[1]}, ${t[2]} ${m.unite}… Combien ${deM(m)} à l'étape 4 ?`,
+        `Le motif de ${m.unite} : ${t[0]}, ${t[1]}, ${t[2]}. Que vaut l'étape 4 ?`,
+        `Écris l'étape 4 du motif de ${m.unite} : ${t[0]}, ${t[1]}, ${t[2]}.`,
+        `Calcule l'étape 4 : ${t[0]}, ${t[1]}, ${t[2]} ${m.unite}.`,
       ];
       return {
         text: tirer(tournures),
@@ -1023,13 +1111,18 @@ export const algebreBank: TutorBankItemV4[] = [
     // nombres ; leurre : « départ + étape × pas », l'ajout de trop), et l'écart
     // entre deux termes. ⛔ Aucun QCM dont les choix sont des formules.
     generate: () => {
+      // 03/11/2026 : trois cas seulement, c'était 16 répétitions sur 20 à ★5.
+      // Chaque cas a désormais plusieurs débuts et plusieurs fins (sans chiffre :
+      // le correcteur relit les mêmes phrases-clés).
+      const avant = (l: string[]) => tirer(l);
+      const apres = () => tirer(["", "", " Ne compte pas un ajout de trop.", " Cherche la structure.", " Inutile de tout dessiner.", " Attention au départ."]);
       const cas = [
         () => {
           const d = randomInt(4, 9);
           const p = randomInt(2, d - 1);
           const n = randomInt(15, 40);
           return {
-            q: `Des maisons en allumettes : la première en demande ${d}, chaque maison ajoutée ${p} de plus. Combien d’allumettes faut-il pour ${n} maisons ?`,
+            q: `${avant(["Des maisons en allumettes", "On construit des maisons en allumettes", "Un motif de maisons en allumettes", "Une rangée de maisons en allumettes"])} : la première en demande ${d}, chaque maison ajoutée ${p} de plus. ${avant(["Combien d’allumettes faut-il", "Combien d’allumettes en tout", "Quel nombre d’allumettes faut-il"])} pour ${n} maisons ?${apres()}`,
             rep: d + (n - 1) * p,
             r: `La première maison demande ${d} allumettes. Ensuite, chaque maison ajoute ${p} allumettes. Pour ${n} maisons, il y a la première et ${n - 1} maisons ajoutées : ${d} + ${n - 1} × ${p} = ${d + (n - 1) * p}.`,
           };
@@ -1041,7 +1134,7 @@ export const algebreBank: TutorBankItemV4[] = [
           const k = randomInt(8, 15);
           const bon = a + (k - 1) * p;
           return {
-            q: `Un motif vaut ${a} à l’étape 1. On ajoute ${p} à chaque étape. Combien vaut l’étape ${k} ?`,
+            q: `${avant(["Un motif", "Un motif de cubes", "Un motif de jetons", "Le motif dessiné", "Une suite de nombres"])} vaut ${a} à l’étape 1. On ajoute ${p} à chaque étape. Combien vaut l’étape ${k} ?${apres()}`,
             qcm: { bonne: String(bon), pieges: [String(a + k * p), String(k * p)] },
             r: `À l’étape 1, on a déjà ${a}. Pour aller à l’étape ${k}, on ajoute ${p} seulement ${k - 1} fois : ${a} + ${k - 1} × ${p} = ${bon}. Calculer ${a} + ${k} × ${p} compterait un ajout de trop.`,
           };
@@ -1050,7 +1143,7 @@ export const algebreBank: TutorBankItemV4[] = [
           const a = randomInt(2, 12);
           const p = randomInt(2, 9);
           return {
-            q: `Un motif commence par ${a}, ${a + p}, ${a + 2 * p}… De combien augmente-t-il à chaque étape ?`,
+            q: `${avant(["Un motif", "Un motif de cubes", "Un motif de carreaux", "Un motif régulier", "Le motif"])} commence par ${a}, ${a + p}, ${a + 2 * p}… De combien augmente-t-il à chaque étape ?${tirer(["", "", " Compare deux étapes qui se suivent.", " Calcule l’écart.", " Regarde la régularité."])}`,
             rep: p,
             r: `On calcule l’écart entre deux nombres qui se suivent : ${a + p} − ${a} = ${p} et ${a + 2 * p} − ${a + p} = ${p}. L’écart est toujours le même : le motif augmente de ${p} à chaque étape.`,
           };

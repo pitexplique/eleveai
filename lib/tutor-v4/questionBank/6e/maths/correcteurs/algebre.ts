@@ -282,8 +282,21 @@ export const CORRECTEURS: CorrecteursMaths = {
   }),
   algebre_barres_tpl_ouverte: avecBarre(ouverte),
   algebre_inconnues_tpl_ouverte: avecBarre(ouverte),
-  // n objets identiques pour T € : un objet = T ÷ n.
+  // 03/11/2026 : ★2 sans situation. n parts (nombres, barres) égales font T :
+  // une part = T ÷ n. Exactement deux nombres, le total est le plus grand.
   algebre_inconnues_tpl_identiques: avecBarre((q) => {
+    const nombres = [...q.text.matchAll(/\d+/g)].map((m) => Number(m[0]));
+    if (nombres.length !== 2) return [`un total et un nombre de parts attendus, lu ${nombres.join(", ")}`];
+    if (/€/.test(q.text)) return ["★2 : pas d'euros (sans situation)"];
+    const [n, total] = [Math.min(...nombres), Math.max(...nombres)];
+    if (total % n) return [`${total} ne se partage pas en ${n}`];
+    const p = attendu(q, total / n);
+    const c = q.canvas as any;
+    if (c && (c.total !== String(total) || c.parts.length !== n)) p.push("le schéma ne reprend pas l'énoncé");
+    return p;
+  }),
+  // n objets identiques pour T € : un objet = T ÷ n (★3, avec situation).
+  algebre_inconnues_tpl_identiques_situation: avecBarre((q) => {
     const T = q.text.match(/(\d+) €/);
     const autres = [...q.text.replace(/\d+ €/g, " ").matchAll(/\d+/g)].map((m) => Number(m[0]));
     if (!T || autres.length !== 1) return ["un prix total et un nombre d'objets attendus"];
