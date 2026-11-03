@@ -82,6 +82,9 @@ export const exercicesInfoAjustementAffinePremiere: FicheExercicesData = {
               { x: 5, y: 9, label: "" },
             ], undefined, true),
           ),
+          reponses: [
+            { attendu: "oui" },
+          ],
           micros: ["info_ajust_pertinence"],
         },
         {
@@ -98,6 +101,9 @@ export const exercicesInfoAjustementAffinePremiere: FicheExercicesData = {
           ]),
           correction:
             "Les nuitées MONTENT de mai à août, puis REDESCENDENT jusqu'en novembre : le nuage a la forme d'une bosse.\nUne droite, elle, ne change jamais de sens : elle monte toujours, ou descend toujours.\nNon : un ajustement affine n'est pas pertinent ici.\n⚠️ On peut toujours CALCULER une droite qui passe « au milieu » des points. Mais elle serait loin de presque tous : elle ne résumerait rien.",
+          reponses: [
+            { attendu: "non" },
+          ],
           micros: ["info_ajust_pertinence"],
         },
         {
@@ -112,6 +118,9 @@ export const exercicesInfoAjustementAffinePremiere: FicheExercicesData = {
           ], undefined, true),
           correction:
             "On lit $A(0 ; 3)$ et $B(4 ; 9)$.\nLe coefficient directeur : $a = \\dfrac{9 - 3}{4 - 0} = \\dfrac{6}{4} = 1{,}5$.\nLa droite coupe l'axe des ordonnées en $3$ : c'est l'ordonnée à l'origine, $b = 3$.\nL'équation est $y = 1{,}5x + 3$.\n✔️ Vérification avec $B$ : $1{,}5 \\times 4 + 3 = 9$.\n⚠️ Le piège : écrire $\\dfrac{4 - 0}{9 - 3}$. On divise ce que la droite MONTE par ce qu'elle AVANCE, dans cet ordre.",
+          reponses: [
+            { attendu: "1,5x + 3" },
+          ],
           micros: ["info_ajust_determiner"],
         },
         {
@@ -124,6 +133,9 @@ export const exercicesInfoAjustementAffinePremiere: FicheExercicesData = {
               { x: 6, y: 7, label: "" },
             ]),
           ),
+          reponses: [
+            { attendu: "5x + 40" },
+          ],
           micros: ["info_ajust_determiner"],
         },
         {
@@ -131,6 +143,9 @@ export const exercicesInfoAjustementAffinePremiere: FicheExercicesData = {
           correction:
             "On remplace $x$ par $5$ : $y = 0{,}8 \\times 5 + 12$.\nLa multiplication d'abord : $0{,}8 \\times 5 = 4$.\nPuis l'addition : $y = 4 + 12 = 16$.\n⚠️ Le piège des priorités : $0{,}8 \\times (5 + 12) = 13{,}6$ n'est pas le bon calcul.",
           schema: ecranSeulement(tableau(["x", "0", "5", "10"], ["y = 0,8x + 12", 12, 16, 20])),
+          reponses: [
+            { attendu: "16" },
+          ],
           micros: ["info_ajust_equation"],
         },
         {
@@ -138,6 +153,9 @@ export const exercicesInfoAjustementAffinePremiere: FicheExercicesData = {
           correction:
             "Cette fois, on connaît $y$ et on cherche $x$ : on résout une équation.\n$2{,}5x + 10 = 30$, donc $2{,}5x = 20$.\n$x = \\dfrac{20}{2{,}5} = 8$.\n✔️ Vérification : $2{,}5 \\times 8 + 10 = 20 + 10 = 30$.\n⭐ Deux questions, deux gestes : « que vaut $y$ ? » se calcule, « pour quel $x$ ? » se résout.",
           schema: ecranSeulement(tableau(["x", "0", "4", "8"], ["y = 2,5x + 10", 10, 20, 30])),
+          reponses: [
+            { attendu: "8" },
+          ],
           micros: ["info_ajust_equation"],
         },
         {
@@ -154,6 +172,9 @@ export const exercicesInfoAjustementAffinePremiere: FicheExercicesData = {
           ], undefined, true),
           correction:
             "On regarde de combien le nombre de vues augmente d'un jour à l'autre : $+1$, $+1$, $+1$, $+2$, $+3$, $+4$.\nLes hausses GRANDISSENT : le nuage se courbe vers le haut.\nUne droite, elle, monte toujours du même pas.\nNon : un ajustement affine n'est pas pertinent. La droite passerait loin des derniers points.\n⭐ Une croissance qui s'accélère ressemble plutôt à une croissance exponentielle.",
+          reponses: [
+            { attendu: "non" },
+          ],
           micros: ["info_ajust_pertinence"],
         },
         {
@@ -164,6 +185,9 @@ export const exercicesInfoAjustementAffinePremiere: FicheExercicesData = {
           schema: ecranSeulement(
             repere([-1, 12, -1, 5], [{ q: [0, -0.15, 4] }], [{ x: 10, y: 2.5, label: "" }], undefined, true),
           ),
+          reponses: [
+            { question: "a)", attendu: "25 cm" },
+          ],
           micros: ["info_ajust_equation"],
         },
       ],
@@ -205,6 +229,11 @@ export const exercicesInfoAjustementAffinePremiere: FicheExercicesData = {
               { x: 6, y: 7, label: "" },
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: "oui" },
+            { question: "b)", attendu: "0,6x + 3,4" },
+            { question: "c)", attendu: ["5,8", "5 800 €"] },
+          ],
           micros: ["info_ajust_pertinence", "info_ajust_determiner", "info_ajust_equation"],
         },
         {
@@ -214,6 +243,11 @@ export const exercicesInfoAjustementAffinePremiere: FicheExercicesData = {
           figure: tableau(["jour de mai", "1", "8", "15", "22", "29"], ["eau (°C)", 10, 11.5, 13, 14, 16]),
           correction:
             "a) $y = 0{,}2 \\times 15 + 9{,}8 = 3 + 9{,}8 = 12{,}8$ °C. Le relevé du $15$ mai est $13$ °C : l'écart est de $0{,}2$ °C.\nb) On résout $0{,}2x + 9{,}8 = 13{,}8$ : $0{,}2x = 4$, donc $x = \\dfrac{4}{0{,}2} = 20$. C'est le $20$ mai.\nc) Selon le modèle, l'eau se réchauffe d'environ $0{,}2$ °C par jour, soit $1{,}4$ °C par semaine.\n⭐ Le modèle ne dit rien d'un jour précis de pluie ou de vent : il donne la TENDANCE du mois.",
+          reponses: [
+            { question: "a) modèle", attendu: "12,8" },
+            { question: "a) écart", attendu: "0,2" },
+            { question: "b)", attendu: "20" },
+          ],
           micros: ["info_ajust_equation"],
         },
         {
@@ -223,6 +257,11 @@ export const exercicesInfoAjustementAffinePremiere: FicheExercicesData = {
           figure: tableau(["semaine", "0", "2", "4", "6", "8"], ["pouls", 72, 70, 66, 63, 60]),
           correction:
             "a) Les deux points : $(0 ; 72)$ et $(8 ; 60)$. $a = \\dfrac{60 - 72}{8 - 0} = \\dfrac{-12}{8} = -1{,}5$.\nLa droite passe par $(0 ; 72)$ : $b = 72$. L'équation est $y = -1{,}5x + 72$.\nb) Semaine $2$ : $-1{,}5 \\times 2 + 72 = 69$, pour $70$ relevé. Semaine $4$ : $-1{,}5 \\times 4 + 72 = 66$, exactement le relevé.\nc) Le pouls au repos baisse d'environ $1{,}5$ battement par minute chaque semaine : le cœur s'entraîne, il bat moins vite pour le même travail.\n⚠️ Le numérateur $60 - 72$ est NÉGATIF : oublier le signe donnerait une droite qui monte.",
+          reponses: [
+            { question: "a)", attendu: "-1,5x + 72" },
+            { question: "b) semaine 2", attendu: "69" },
+            { question: "b) semaine 4", attendu: "66" },
+          ],
           micros: ["info_ajust_determiner", "info_ajust_equation"],
         },
         {
@@ -240,6 +279,9 @@ export const exercicesInfoAjustementAffinePremiere: FicheExercicesData = {
           ], undefined, true),
           correction:
             "Les points montent, descendent, remontent : ils ne suivent aucune direction.\nNon : il n'y a aucune tendance à résumer, un ajustement affine n'a pas de sens.\n⚠️ Un tableur calculerait quand même une droite. Elle ne voudrait rien dire : la note ne dépend pas du mois de naissance.\n⭐ On regarde le nuage AVANT de calculer : c'est le premier réflexe du statisticien.",
+          reponses: [
+            { attendu: "non" },
+          ],
           micros: ["info_ajust_pertinence"],
         },
         {
@@ -268,6 +310,11 @@ export const exercicesInfoAjustementAffinePremiere: FicheExercicesData = {
               { x: 6, y: 3, label: "" },
             ], undefined, true),
           ),
+          reponses: [
+            { question: "a)", attendu: "-1,5x + 12" },
+            { question: "b)", attendu: ["6", "600 €"] },
+            { question: "c)", attendu: ["150 €"] },
+          ],
           micros: ["info_ajust_determiner", "info_ajust_equation"],
         },
         {
@@ -284,6 +331,11 @@ export const exercicesInfoAjustementAffinePremiere: FicheExercicesData = {
           ], undefined, true),
           correction:
             "a) La bleue : $1{,}6 \\times 0 + 1 = 1$ et $1{,}6 \\times 5 + 1 = 9$. Ce sont exactement les relevés, $1$ et $9$.\nL'orange : $0{,}4 \\times 0 + 4 = 4$ et $0{,}4 \\times 5 + 4 = 6$. Elle se trompe de $3$ milliers au début ET à la fin.\nb) On choisit la bleue : elle suit la direction du nuage, avec des points de part et d'autre tout du long.\nL'orange est trop plate : elle passe au-dessus des premiers points et au-dessous des derniers.\n⭐ Une bonne droite d'ajustement laisse des points des DEUX côtés, au début comme à la fin.",
+          reponses: [
+            { question: "a) bleue", attendu: "1 ; 9", ordre: true },
+            { question: "a) orange", attendu: "4 ; 6", ordre: true },
+            { question: "b)", attendu: ["bleue", "la bleue", "la droite bleue"] },
+          ],
           micros: ["info_ajust_determiner", "info_ajust_equation"],
         },
         {
@@ -293,6 +345,10 @@ export const exercicesInfoAjustementAffinePremiere: FicheExercicesData = {
           correction:
             "a) L'équation est de la forme $y = 0{,}5x + b$. $G$ est sur la droite : $8 = 0{,}5 \\times 10 + b$, donc $b = 8 - 5 = 3$.\nL'équation est $y = 0{,}5x + 3$.\nb) $140$ g, c'est $14$ dizaines de grammes : $x = 14$. $y = 0{,}5 \\times 14 + 3 = 7 + 3 = 10$ : le ressort mesure $10$ cm.\nc) Pour $x = 0$, sans aucune masse, $y = 3$ : c'est la longueur du ressort à vide, $3$ cm.\n⚠️ $x = 14$ et non $140$ : l'axe compte en dizaines de grammes.\n⭐ Le coefficient $0{,}5$ dit que le ressort s'allonge de $0{,}5$ cm par dizaine de grammes. Un ressort plus raide aurait un coefficient plus petit.",
           schema: ecranSeulement(tableau(["masse (g)", "0", "100", "120", "140"], ["longueur (cm)", 3, 8, 9, 10])),
+          reponses: [
+            { question: "a)", attendu: "0,5x + 3" },
+            { question: "b)", attendu: "10 cm" },
+          ],
           micros: ["info_ajust_determiner", "info_ajust_equation"],
         },
         {
@@ -302,6 +358,11 @@ export const exercicesInfoAjustementAffinePremiere: FicheExercicesData = {
           correction:
             "a) $2020$, c'est $x = 30$. $y = 0{,}4 \\times 30 + 58 = 12 + 58 = 70$ : $70$ % de citadins.\nb) On résout $0{,}4x + 58 = 74$ : $0{,}4x = 16$, donc $x = \\dfrac{16}{0{,}4} = 40$. C'est l'année $1990 + 40 = 2030$.\nc) $2010$, c'est $x = 20$ : le modèle donne $0{,}4 \\times 20 + 58 = 66$ %. La mesure, $67$ %, est $1$ point AU-DESSUS du modèle.\n⚠️ $x$ n'est pas l'année elle-même : remplacer $x$ par $2020$ donnerait $866$ %, absurde.\n⭐ Le coefficient dit que la part des citadins gagne environ $0{,}4$ point par an : c'est l'exode rural, lu dans une équation.",
           schema: ecranSeulement(tableau(["année", "1990", "2010", "2020", "2030"], ["modèle (%)", 58, 66, 70, 74])),
+          reponses: [
+            { question: "a)", attendu: "70 %" },
+            { question: "b)", attendu: "2030" },
+            { question: "c)", attendu: ["au-dessus", "au dessus", "dessus"] },
+          ],
           micros: ["info_ajust_equation"],
         },
       ],
@@ -343,6 +404,12 @@ export const exercicesInfoAjustementAffinePremiere: FicheExercicesData = {
               { x: 7, y: 11, label: "" },
             ], undefined, true),
           ),
+          reponses: [
+            { question: "a)", attendu: "oui" },
+            { question: "b)", attendu: "1,5x + 0,5" },
+            { question: "c)", attendu: ["65", "6,5"] },
+            { question: "d)", attendu: "6" },
+          ],
           micros: ["info_ajust_pertinence", "info_ajust_determiner", "info_ajust_equation"],
         },
         {
@@ -352,6 +419,11 @@ export const exercicesInfoAjustementAffinePremiere: FicheExercicesData = {
           figure: tableau(["âge (ans)", "2", "4", "6", "8", "10"], ["taille (cm)", 88, 102, 115, 128, 140]),
           correction:
             "a) Les points $(2 ; 88)$ et $(10 ; 140)$ : $a = \\dfrac{140 - 88}{10 - 2} = \\dfrac{52}{8} = 6{,}5$.\n$88 = 6{,}5 \\times 2 + b$, donc $b = 88 - 13 = 75$. L'équation est $y = 6{,}5x + 75$.\nb) $y = 6{,}5 \\times 7 + 75 = 45{,}5 + 75 = 120{,}5$ cm.\nc) $6{,}5x + 75 = 107{,}5$, donc $6{,}5x = 32{,}5$ et $x = 5$ : à $5$ ans.\nd) Entre $2$ et $10$ ans, l'enfant grandit d'environ $6{,}5$ cm par an.\n✔️ Le modèle colle aux relevés : il donne $101$ cm à $4$ ans, $114$ cm à $6$ ans, $127$ cm à $8$ ans, pour $102$, $115$ et $128$ mesurés.\n⚠️ Le modèle donnerait $75$ cm à la naissance, alors qu'un bébé mesure bien moins : une droite d'ajustement ne vaut que sur la plage de ses relevés.",
+          reponses: [
+            { question: "a)", attendu: "6,5x + 75" },
+            { question: "b)", attendu: "120,5 cm" },
+            { question: "c)", attendu: "5 ans" },
+          ],
           micros: ["info_ajust_determiner", "info_ajust_equation"],
         },
         {
@@ -373,6 +445,11 @@ export const exercicesInfoAjustementAffinePremiere: FicheExercicesData = {
               { x: 6, y: 9, label: "" },
             ], undefined, true),
           ),
+          reponses: [
+            { question: "a)", attendu: "oui" },
+            { question: "b)", attendu: "x + 3" },
+            { question: "d)", attendu: ["6 000", "6"] },
+          ],
           micros: ["info_ajust_pertinence", "info_ajust_determiner", "info_ajust_equation"],
         },
         {
@@ -397,6 +474,12 @@ export const exercicesInfoAjustementAffinePremiere: FicheExercicesData = {
               { x: 13, y: 2.5, label: "" },
             ], undefined, true),
           ),
+          reponses: [
+            { question: "a)", attendu: "oui" },
+            { question: "b)", attendu: "-0,25x + 5,75" },
+            { question: "c)", attendu: ["350 km", "3,5"] },
+            { question: "d)", attendu: ["70 km/h", "7"] },
+          ],
           micros: ["info_ajust_pertinence", "info_ajust_determiner", "info_ajust_equation"],
         },
       ],

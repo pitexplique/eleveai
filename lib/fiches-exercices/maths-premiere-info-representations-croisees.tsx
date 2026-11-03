@@ -221,6 +221,11 @@ export const exercicesInfoRepresentationsCroiseesPremiere: FicheExercicesData = 
           ),
           correction:
             "a) Groupe « Basket », barre orange (garçons) : $7$ milliers, soit $7\\,000$ garçons.\nb) On compare les trois barres bleues : $4$, $6$, $5$. C'est le basket, avec $6\\,000$ filles.\nc) Les écarts : football $16 - 4 = 12$ ; basket $7 - 6 = 1$ ; tennis $6 - 5 = 1$. C'est le football : $12\\,000$ licenciés d'écart.\n⚠️ Ne pas oublier l'unité : « $7$ » sur le dessin veut dire $7$ MILLIERS.",
+          reponses: [
+            { question: "a)", attendu: ["7000","7 milliers"] },
+            { question: "b)", attendu: "basket" },
+            { question: "c)", attendu: ["football","foot"] },
+          ],
           micros: ["info_rep_barres"],
         },
         {
@@ -238,6 +243,11 @@ export const exercicesInfoRepresentationsCroiseesPremiere: FicheExercicesData = 
           ),
           correction:
             "a) Le morceau vert (bois) de la barre « Maisons » vaut $30$ % : $30$ % des maisons sont chauffées au bois.\nb) Le morceau orange de la barre « Apparts » : $35$ %.\n⚠️ On lit l'ÉPAISSEUR du morceau ($35$ %), pas la hauteur de son sommet ($60 + 35 = 95$).\nc) Non. On sait que $60$ % des appartements et $40$ % des maisons sont à l'électricité, mais pas COMBIEN il y a de maisons et d'appartements.\n⭐ Une barre à $100$ % donne des parts, jamais des effectifs.",
+          reponses: [
+            { question: "a)", attendu: "30 %" },
+            { question: "b)", attendu: "35 %" },
+            { question: "c)", attendu: ["non","faux"] },
+          ],
           micros: ["info_rep_barres"],
         },
         {
@@ -253,6 +263,12 @@ export const exercicesInfoRepresentationsCroiseesPremiere: FicheExercicesData = 
               { label: "Bâti", value: 10 },
             ]),
           ),
+          reponses: [
+            { question: "Forêts", attendu: "162°" },
+            { question: "Cultures", attendu: "108°" },
+            { question: "Prairies", attendu: "54°" },
+            { question: "Bâti", attendu: "36°" },
+          ],
           micros: ["info_rep_circulaire"],
         },
         {
@@ -268,6 +284,12 @@ export const exercicesInfoRepresentationsCroiseesPremiere: FicheExercicesData = 
               { label: "Loisirs", value: 20 },
             ]),
           ),
+          reponses: [
+            { question: "a) logement", attendu: "40 %" },
+            { question: "a) courses", attendu: "25 %" },
+            { question: "b) logement", attendu: "320 €" },
+            { question: "b) courses", attendu: "200 €" },
+          ],
           micros: ["info_rep_circulaire"],
         },
         {
@@ -281,6 +303,11 @@ export const exercicesInfoRepresentationsCroiseesPremiere: FicheExercicesData = 
           ]),
           correction:
             "a) $\\dfrac{90}{200} = 0{,}45$ : $45$ % des sièges.\nb) Sur un DEMI-disque, $100$ % valent $180°$, donc $1$ % vaut $1{,}8°$.\nGroupe $A$ : $45 \\times 1{,}8 = 81°$.\nGroupe $D$ : $\\dfrac{20}{200} = 10$ %, soit $10 \\times 1{,}8 = 18°$.\n⚠️ Avec $3{,}6°$, on trouverait $162°$ : c'est l'angle d'un disque ENTIER.",
+          reponses: [
+            { question: "a)", attendu: "45 %" },
+            { question: "b) groupe A", attendu: "81°" },
+            { question: "b) groupe D", attendu: "18°" },
+          ],
           micros: ["info_rep_circulaire"],
         },
         {
@@ -299,6 +326,12 @@ export const exercicesInfoRepresentationsCroiseesPremiere: FicheExercicesData = 
               ],
             ),
           ),
+          reponses: [
+            { question: "a)", attendu: ["circulaire","diagramme circulaire","camembert"] },
+            { question: "b)", attendu: ["barres groupées","diagramme en barres groupées"] },
+            { question: "c)", attendu: ["barres empilées à 100 %","barres empilées","diagramme en barres empilées à 100 %","empilées à 100 %"] },
+            { question: "d)", attendu: ["nuage de points","nuage"] },
+          ],
           micros: ["info_rep_choisir"],
         },
         {
@@ -313,6 +346,12 @@ export const exercicesInfoRepresentationsCroiseesPremiere: FicheExercicesData = 
           ),
           correction:
             "a) Justifiée : $4 > 3$ en semaine, $6 > 5$ le week-end.\nb) Non justifiée : de $3$ à $5$ h et de $4$ à $6$ h, ce n'est pas le double ($2 \\times 3 = 6$, $2 \\times 4 = 8$).\nc) Justifiée : $5 - 3 = 2$ et $6 - 4 = 2$.\nd) Non justifiée : le diagramme donne des temps MOYENS, il ne dit rien du nombre de jeunes.\n⭐ Commenter, c'est citer des nombres lus… et ne rien affirmer que le graphique ne montre pas.",
+          reponses: [
+            { question: "a)", attendu: ["justifiée","oui","vrai"] },
+            { question: "b)", attendu: ["non justifiée","non","faux"] },
+            { question: "c)", attendu: ["justifiée","oui","vrai"] },
+            { question: "d)", attendu: ["non justifiée","non","faux"] },
+          ],
           micros: ["info_rep_commenter", "info_rep_barres"],
         },
         {
@@ -338,6 +377,9 @@ export const exercicesInfoRepresentationsCroiseesPremiere: FicheExercicesData = 
               ],
             ),
           ),
+          reponses: [
+            { question: "b)", attendu: "licence" },
+          ],
           micros: ["info_rep_barres"],
         },
       ],
@@ -379,6 +421,12 @@ export const exercicesInfoRepresentationsCroiseesPremiere: FicheExercicesData = 
               " %",
             ),
           ),
+          reponses: [
+            { question: "a)", attendu: ["B","ville B"] },
+            { question: "b) ville A", attendu: "75 %" },
+            { question: "b) ville B", attendu: "60 %" },
+            { question: "c)", attendu: ["barres empilées à 100 %","barres empilées","diagramme en barres empilées à 100 %","empilées à 100 %"] },
+          ],
           micros: ["info_rep_choisir", "info_rep_barres", "info_rep_commenter"],
         },
         {
@@ -397,6 +445,13 @@ export const exercicesInfoRepresentationsCroiseesPremiere: FicheExercicesData = 
           ),
           correction:
             "a) $10$ % en $2000$, $20$ % en $2020$ : la part a doublé.\nb) $2000$ : $0{,}1 \\times 400 = 40$ TWh. $2020$ : $0{,}2 \\times 500 = 100$ TWh.\nLa production renouvelable a été multipliée par $\\dfrac{100}{40} = 2{,}5$.\nc) Non : $0{,}4 \\times 400 = 160$ TWh, puis $0{,}4 \\times 500 = 200$ TWh. Même part, mais d'un total plus grand.\nd) La part du renouvelable double, et sa production fait plus que doubler, car la production totale a augmenté.\n⚠️ Un diagramme à $100$ % cache le total : il faut le connaître pour parler de quantités.",
+          reponses: [
+            { question: "a) 2000", attendu: "10 %" },
+            { question: "a) 2020", attendu: "20 %" },
+            { question: "b) 2000", attendu: "40" },
+            { question: "b) 2020", attendu: "100" },
+            { question: "c)", attendu: ["non","faux"] },
+          ],
           micros: ["info_rep_barres", "info_rep_commenter"],
         },
         {
@@ -412,6 +467,15 @@ export const exercicesInfoRepresentationsCroiseesPremiere: FicheExercicesData = 
               { label: "Autres", value: 30 },
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: ["circulaire","diagramme circulaire","camembert"] },
+            { question: "b) chauffage", attendu: "50 %" },
+            { question: "b) chauffage (angle)", attendu: "180°" },
+            { question: "b) eau chaude", attendu: "20 %" },
+            { question: "b) eau chaude (angle)", attendu: "72°" },
+            { question: "b) autres", attendu: "30 %" },
+            { question: "b) autres (angle)", attendu: "108°" },
+          ],
           micros: ["info_rep_circulaire", "info_rep_choisir"],
         },
         {
@@ -440,6 +504,12 @@ export const exercicesInfoRepresentationsCroiseesPremiere: FicheExercicesData = 
               " %",
             ),
           ),
+          reponses: [
+            { question: "a)", attendu: "140" },
+            { question: "b) en effectif", attendu: ["oui","vrai"] },
+            { question: "b) en proportion", attendu: ["non","faux"] },
+            { question: "c)", attendu: ["barres empilées à 100 %","barres empilées","diagramme en barres empilées à 100 %","empilées à 100 %"] },
+          ],
           micros: ["info_rep_choisir", "info_rep_commenter", "info_rep_barres"],
         },
         {
@@ -453,6 +523,13 @@ export const exercicesInfoRepresentationsCroiseesPremiere: FicheExercicesData = 
           ]),
           correction:
             "a) $180°$ pour $40$ sièges : $180 \\div 40 = 4{,}5°$ par siège.\nVerte : $18 \\times 4{,}5 = 81°$. Bleue : $14 \\times 4{,}5 = 63°$. Orange : $8 \\times 4{,}5 = 36°$.\n✔️ $81 + 63 + 36 = 180°$.\nb) La majorité absolue demande plus de $20$ sièges, soit au moins $21$. Aucune liste ne l'a : la plus grande en a $18$.\nc) Verte + Bleue $= 32$, Verte + Orange $= 26$, Bleue + Orange $= 22$ : les trois alliances ont la majorité.\n⭐ Même la plus petite liste peut faire basculer la majorité : c'est tout l'enjeu d'une coalition.",
+          reponses: [
+            { question: "a) Verte", attendu: "81°" },
+            { question: "a) Bleue", attendu: "63°" },
+            { question: "a) Orange", attendu: "36°" },
+            { question: "b)", attendu: ["non","faux"] },
+            { question: "c)", attendu: ["les trois","toutes","toutes les trois","les 3"] },
+          ],
           micros: ["info_rep_circulaire", "info_rep_commenter"],
         },
         {
@@ -469,6 +546,11 @@ export const exercicesInfoRepresentationsCroiseesPremiere: FicheExercicesData = 
           ),
           correction:
             "a) La barre de $2024$ : $6 + 4 = 10$ centaines, soit $1\\,000$ vélos.\nb) $2022$ : $\\dfrac{2}{8} = 0{,}25$, soit $25$ %. $2024$ : $\\dfrac{6}{10} = 0{,}6$, soit $60$ %.\nc) Les ventes totales augmentent : $800$, $900$, puis $1\\,000$ vélos.\nLes ventes d'électriques triplent ($200$ puis $600$), celles des classiques baissent ($600$ puis $400$).\nEn $2024$, plus de la moitié des vélos vendus sont électriques.\n⭐ Ces barres empilées ne sont PAS à $100$ % : leur hauteur montre aussi le total.",
+          reponses: [
+            { question: "a)", attendu: ["1000","10 centaines"] },
+            { question: "b) 2022", attendu: "25 %" },
+            { question: "b) 2024", attendu: "60 %" },
+          ],
           micros: ["info_rep_barres", "info_rep_commenter"],
         },
         {
@@ -484,6 +566,9 @@ export const exercicesInfoRepresentationsCroiseesPremiere: FicheExercicesData = 
               { label: "Vélo", value: 50 },
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: "125 %" },
+          ],
           micros: ["info_rep_choisir"],
         },
         {
@@ -502,6 +587,12 @@ export const exercicesInfoRepresentationsCroiseesPremiere: FicheExercicesData = 
           ),
           correction:
             "a) Vraie : le morceau « < 2 h » de la barre « Ados » vaut $50$ %.\nb) On ne peut pas savoir : on connaît des PARTS ($20$ % des adultes, $40$ % des enfants), pas le nombre d'enfants et d'adultes.\nc) Vraie : $40$ % des enfants passent plus de $5$ h dehors, contre $20$ % des ados et des adultes.\nd) Vraie : $40 + 40 = 80$ %, ou $100 - 20 = 80$ %.\n⚠️ Le b) est le piège : une barre à $100$ % ne dit jamais combien de personnes elle représente.",
+          reponses: [
+            { question: "a)", attendu: ["vraie","vrai","oui"] },
+            { question: "b)", attendu: ["on ne peut pas savoir","on ne sait pas","ne peut pas savoir","impossible de savoir"] },
+            { question: "c)", attendu: ["vraie","vrai","oui"] },
+            { question: "d)", attendu: ["vraie","vrai","oui"] },
+          ],
           micros: ["info_rep_commenter"],
         },
       ],
@@ -534,6 +625,13 @@ export const exercicesInfoRepresentationsCroiseesPremiere: FicheExercicesData = 
             "empilees",
             " %",
           ),
+          reponses: [
+            { question: "a)", attendu: ["barres empilées à 100 %","barres empilées","diagramme en barres empilées à 100 %","empilées à 100 %"] },
+            { question: "b) pays A (renouv. ; nucl. ; fossiles)", attendu: "20 % ; 70 % ; 10 %", ordre: true },
+            { question: "b) pays B (renouv. ; nucl. ; fossiles)", attendu: "40 % ; 10 % ; 50 %", ordre: true },
+            { question: "c)", attendu: ["B","pays B"] },
+            { question: "d)", attendu: ["B","pays B"] },
+          ],
           micros: ["info_rep_choisir", "info_rep_barres", "info_rep_commenter"],
         },
         {
@@ -549,6 +647,11 @@ export const exercicesInfoRepresentationsCroiseesPremiere: FicheExercicesData = 
           ]),
           correction:
             "a) $1$ % vaut $3{,}6°$. Logement $30 \\times 3{,}6 = 108°$ ; courses $72°$ ; transport $54°$ ; autres $126°$.\nMontants : $0{,}3 \\times 2\\,000 = 600$ € ; $400$ € ; $300$ € ; $700$ €.\nb) Logement $\\dfrac{800}{4\\,000} = 0{,}2$ ; courses $\\dfrac{600}{4\\,000} = 0{,}15$ ; transport $\\dfrac{400}{4\\,000} = 0{,}1$ ; autres $\\dfrac{2\\,200}{4\\,000} = 0{,}55$.\nSoit $20$ %, $15$ %, $10$ %, $55$ %.\nc) En euros, vrai : $800$ € contre $600$ €. En part du budget, faux : $20$ % contre $30$ %.\nd) Deux diagrammes circulaires, ou deux barres empilées à $100$ % : on compare des répartitions.\n⭐ « Dépenser plus » est ambigu : en euros, ou en part du budget ? Un bon commentaire le précise.",
+          reponses: [
+            { question: "a) angles (logement ; courses ; transport ; autres)", attendu: "108 ; 72 ; 54 ; 126", ordre: true },
+            { question: "a) montants (logement ; courses ; transport ; autres)", attendu: "600 ; 400 ; 300 ; 700", ordre: true },
+            { question: "b) (logement ; courses ; transport ; autres)", attendu: "20 % ; 15 % ; 10 % ; 55 %", ordre: true },
+          ],
           micros: ["info_rep_circulaire", "info_rep_choisir", "info_rep_commenter"],
         },
         {
@@ -577,6 +680,13 @@ export const exercicesInfoRepresentationsCroiseesPremiere: FicheExercicesData = 
               " %",
             ),
           ),
+          reponses: [
+            { question: "a)", attendu: "100" },
+            { question: "b) ville (pour ; contre ; sans avis)", attendu: "60 % ; 20 % ; 20 %", ordre: true },
+            { question: "b) campagne (pour ; contre ; sans avis)", attendu: "40 % ; 50 % ; 10 %", ordre: true },
+            { question: "c)", attendu: ["faux","non"] },
+            { question: "d)", attendu: ["barres empilées à 100 %","barres empilées","diagramme en barres empilées à 100 %","empilées à 100 %"] },
+          ],
           micros: ["info_rep_barres", "info_rep_choisir", "info_rep_commenter"],
         },
         {
@@ -593,6 +703,11 @@ export const exercicesInfoRepresentationsCroiseesPremiere: FicheExercicesData = 
               { label: "Groupe D", value: 30 },
             ]),
           ),
+          reponses: [
+            { question: "a) parts (A ; B ; C ; D)", attendu: "40 % ; 30 % ; 20 % ; 10 %", ordre: true },
+            { question: "a) angles (A ; B ; C ; D)", attendu: "72 ; 54 ; 36 ; 18", ordre: true },
+            { question: "b)", attendu: ["A+B ; A+C","AB ; AC"] },
+          ],
           micros: ["info_rep_circulaire", "info_rep_commenter"],
         },
       ],

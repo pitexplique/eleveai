@@ -74,6 +74,10 @@ export const exercicesInfoFrequencesPremiere: FicheExercicesData = {
           ),
           correction:
             "a) Les abonnés en tout : la marge de la ligne, $300$. On divise par le total général : $\\dfrac{300}{500} = 0{,}6$.\nLa fréquence des abonnés est $0{,}6$, soit $60$ %.\nb) Marge de la colonne « Tribune nord » : $\\dfrac{250}{500} = 0{,}5$, soit $50$ %.\n⭐ Une fréquence marginale se lit dans la MARGE, et se divise par le total général.",
+          reponses: [
+            { question: "a)", attendu: "60 %" },
+            { question: "b)", attendu: "50 %" },
+          ],
           micros: ["info_tab_frequence_marginale"],
         },
         {
@@ -94,6 +98,11 @@ export const exercicesInfoFrequencesPremiere: FicheExercicesData = {
               [[0, 1], [0, 3]],
             ),
           ),
+          reponses: [
+            { question: "a)", attendu: "0,25" },
+            { question: "b)", attendu: "40 %" },
+            { question: "c)", attendu: "10 %" },
+          ],
           micros: ["info_tab_frequence_marginale", "info_tab_frequence_conditionnelle"],
         },
         {
@@ -109,6 +118,11 @@ export const exercicesInfoFrequencesPremiere: FicheExercicesData = {
           ),
           correction:
             "a) « Parmi les maisons » : on divise par le total de la ligne « Maison ». $\\dfrac{90}{150} = 0{,}6$, soit $60$ %.\nb) $\\dfrac{10}{100} = 0{,}1$, soit $10$ %.\nc) « Parmi les foyers qui ont un composteur » : on divise par le total de la COLONNE. $\\dfrac{90}{100} = 0{,}9$, soit $90$ %.\n⚠️ Le a) et le c) utilisent la même case, $90$, mais pas le même « parmi » : $60$ % des maisons ont un composteur, et $90$ % des composteurs sont dans des maisons.",
+          reponses: [
+            { question: "a)", attendu: "60 %" },
+            { question: "b)", attendu: "10 %" },
+            { question: "c)", attendu: "90 %" },
+          ],
           micros: ["info_tab_frequence_conditionnelle"],
         },
         {
@@ -126,6 +140,10 @@ export const exercicesInfoFrequencesPremiere: FicheExercicesData = {
               ],
             ),
           ),
+          reponses: [
+            { question: "a)", attendu: "20 %" },
+            { question: "b)", attendu: "30 %" },
+          ],
           micros: ["info_tab_frequence_conditionnelle", "info_tab_interpreter"],
         },
         {
@@ -141,6 +159,11 @@ export const exercicesInfoFrequencesPremiere: FicheExercicesData = {
           ),
           correction:
             "a) « ET », sans « parmi » : la case sur le total général. $\\dfrac{60}{400} = 0{,}15$, soit $15$ %.\nb) « Parmi ceux qui prennent un petit-déjeuner » : sur la ligne. $\\dfrac{60}{300} = 0{,}2$, soit $20$ %.\nc) $\\dfrac{50}{100} = 0{,}5$, soit $50$ %.\n⚠️ Le a) et le b) partent de la même case : $15$ % n'est pas $20$ %. Le dénominateur fait la question.",
+          reponses: [
+            { question: "a)", attendu: "15 %" },
+            { question: "b)", attendu: "20 %" },
+            { question: "c)", attendu: "50 %" },
+          ],
           micros: ["info_tab_frequence_conditionnelle"],
         },
         {
@@ -157,6 +180,11 @@ export const exercicesInfoFrequencesPremiere: FicheExercicesData = {
           ),
           correction:
             "a) Marge de la colonne « Malade » : $\\dfrac{110}{360} \\approx 0{,}31$, soit environ $31$ %.\nb) $\\dfrac{120}{360} = \\dfrac{1}{3} \\approx 0{,}33$ : un arbre sur trois est un sapin.\nc) « Parmi les sapins » : $\\dfrac{60}{120} = 0{,}5$. La moitié des sapins sont malades.\n⭐ On arrondit à la FIN : $\\dfrac{110}{360}$ se tape d'un coup à la calculatrice.",
+          reponses: [
+            { question: "a)", attendu: "31 %", tolerance: 0.01 },
+            { question: "b)", attendu: ["1/3", "0,33"], tolerance: 0.01 },
+            { question: "c)", attendu: "0,5" },
+          ],
           micros: ["info_tab_frequence_marginale", "info_tab_frequence_conditionnelle"],
         },
         {
@@ -170,6 +198,9 @@ export const exercicesInfoFrequencesPremiere: FicheExercicesData = {
               { label: "Club B (%)", value: 25 },
             ]),
           ),
+          reponses: [
+            { attendu: ["A", "club A", "le club A"] },
+          ],
           micros: ["info_tab_interpreter"],
         },
         {
@@ -185,6 +216,11 @@ export const exercicesInfoFrequencesPremiere: FicheExercicesData = {
           ),
           correction:
             "a) Sur la colonne « Temps partiel » : $\\dfrac{90}{180} = 0{,}5$, soit $50$ %.\nb) Sur la ligne « CDD » : $\\dfrac{90}{150} = 0{,}6$, soit $60$ %.\nc) Marge sur le total : $\\dfrac{150}{600} = 0{,}25$, soit $25$ %.\n⭐ Trois questions, trois dénominateurs : $180$, $150$, $600$.",
+          reponses: [
+            { question: "a)", attendu: "50 %" },
+            { question: "b)", attendu: "60 %" },
+            { question: "c)", attendu: "25 %" },
+          ],
           micros: ["info_tab_frequence_conditionnelle", "info_tab_frequence_marginale"],
         },
       ],
@@ -222,6 +258,11 @@ export const exercicesInfoFrequencesPremiere: FicheExercicesData = {
               { label: "Sans plan (%)", value: 50 },
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b) avec plan", attendu: "80 %" },
+            { question: "b) sans plan", attendu: "50 %" },
+          ],
           micros: ["info_tab_interpreter", "info_tab_frequence_conditionnelle"],
         },
         {
@@ -240,6 +281,12 @@ export const exercicesInfoFrequencesPremiere: FicheExercicesData = {
               ],
             ),
           ),
+          reponses: [
+            { question: "b) moins de 35 ans", attendu: "0,4" },
+            { question: "b) nés hors région", attendu: "0,5" },
+            { question: "c) moins de 35 ans", attendu: "0,75" },
+            { question: "c) 35 ans et plus", attendu: "0,33", tolerance: 0.01 },
+          ],
           micros: ["info_tab_frequence_marginale", "info_tab_frequence_conditionnelle", "info_tab_interpreter"],
         },
         {
@@ -281,6 +328,10 @@ export const exercicesInfoFrequencesPremiere: FicheExercicesData = {
               ["Total", "190", "810", "1000"],
             ],
           ),
+          reponses: [
+            { question: "b)", attendu: "19 %" },
+            { question: "c)", attendu: "0,63", tolerance: 0.01 },
+          ],
           micros: ["info_tab_frequence_marginale", "info_tab_frequence_conditionnelle", "info_tab_interpreter"],
         },
         {
@@ -297,6 +348,9 @@ export const exercicesInfoFrequencesPremiere: FicheExercicesData = {
           ),
           correction:
             "a) Ce sont les fréquences conditionnelles : $\\dfrac{15}{20} = 0{,}75$ dans le groupe $A$, $\\dfrac{12}{30} = 0{,}4$ dans le groupe $B$.\nb) C'est une fréquence marginale : $\\dfrac{27}{50} = 0{,}54$, soit $54$ %.\nc) Les deux groupes n'ont pas le même effectif : le groupe $B$ ($30$ élèves) pèse plus que le groupe $A$ ($20$ élèves).\nLa simple moyenne donne le même poids aux deux groupes.\n⛔ On ne fait pas la moyenne de deux fréquences qui ne portent pas sur le même nombre d'individus.",
+          reponses: [
+            { question: "b)", attendu: "54 %" },
+          ],
           micros: ["info_tab_frequence_marginale", "info_tab_interpreter"],
         },
         {
@@ -315,6 +369,11 @@ export const exercicesInfoFrequencesPremiere: FicheExercicesData = {
               ],
             ),
           ),
+          reponses: [
+            { question: "a)", attendu: "150" },
+            { question: "b) télétravail", attendu: "0,8" },
+            { question: "b) sans", attendu: "0,6" },
+          ],
           micros: ["info_tab_interpreter", "info_tab_frequence_conditionnelle"],
         },
         {
@@ -332,6 +391,11 @@ export const exercicesInfoFrequencesPremiere: FicheExercicesData = {
           ),
           correction:
             "a) Sur la ligne « Terminale » : $\\dfrac{170}{200} = 0{,}85$, soit $85$ %.\nb) Sur la colonne « Pas d'ordinateur » : $\\dfrac{80}{170} \\approx 0{,}47$.\nc) Marge sur le total : $\\dfrac{430}{600} \\approx 0{,}72$.\nd) Parmi les secondes : $\\dfrac{120}{200} = 0{,}6$ ; parmi les premières : $\\dfrac{140}{200} = 0{,}7$ ; parmi les terminales : $0{,}85$.\nL'équipement augmente d'une classe à l'autre.\n⭐ Ici les trois classes ont le même effectif : comparer les cases revient au même. C'est l'exception, pas la règle.",
+          reponses: [
+            { question: "a)", attendu: "85 %" },
+            { question: "b)", attendu: "0,47", tolerance: 0.01 },
+            { question: "c)", attendu: "0,72", tolerance: 0.01 },
+          ],
           micros: ["info_tab_frequence_conditionnelle", "info_tab_frequence_marginale", "info_tab_interpreter"],
         },
         {
@@ -354,6 +418,11 @@ export const exercicesInfoFrequencesPremiere: FicheExercicesData = {
               { label: "Sans écran (%)", value: 30 },
             ]),
           ),
+          reponses: [
+            { question: "a) écran", attendu: "70 %" },
+            { question: "a) sans écran", attendu: "30 %" },
+            { question: "b)", attendu: ["non"] },
+          ],
           micros: ["info_tab_frequence_conditionnelle", "info_tab_interpreter"],
         },
       ],
@@ -384,6 +453,12 @@ export const exercicesInfoFrequencesPremiere: FicheExercicesData = {
           ),
           correction:
             "a) $\\dfrac{220}{1\\,000} = 0{,}22$, soit $22$ %.\nb) Avec maths : $\\dfrac{180}{600} = 0{,}3$. Sans maths : $\\dfrac{40}{400} = 0{,}1$.\nc) $\\dfrac{40}{220} \\approx 0{,}18$ : environ $18$ % des admis n'ont pas suivi de maths en plus.\nd) Dans ce modèle, un candidat avec maths est admis trois fois plus souvent ($30$ % contre $10$ %).\nMais être sans maths ne ferme pas la porte : près d'un admis sur cinq est dans ce cas.\n⭐ Deux questions différentes : « mes chances » (b), et « qui sont les admis » (c).",
+          reponses: [
+            { question: "a)", attendu: "22 %" },
+            { question: "b) avec maths", attendu: "0,3" },
+            { question: "b) sans maths", attendu: "0,1" },
+            { question: "c)", attendu: "0,18", tolerance: 0.01 },
+          ],
           micros: ["info_tab_frequence_marginale", "info_tab_frequence_conditionnelle", "info_tab_interpreter"],
         },
         {
@@ -399,6 +474,15 @@ export const exercicesInfoFrequencesPremiere: FicheExercicesData = {
           ),
           correction:
             "a) Sol pauvre : bio $\\dfrac{30}{100} = 0{,}3$, chimique $\\dfrac{10}{50} = 0{,}2$.\nSol riche : bio $\\dfrac{45}{50} = 0{,}9$, chimique $\\dfrac{80}{100} = 0{,}8$.\nSur chaque sol, le bio fait mieux.\nb) Bio : $\\dfrac{30 + 45}{100 + 50} = \\dfrac{75}{150} = 0{,}5$. Chimique : $\\dfrac{10 + 80}{50 + 100} = \\dfrac{90}{150} = 0{,}6$.\nc) Le bio a surtout été essayé sur sol PAUVRE ($100$ plants sur $150$), où l'on récolte mal avec n'importe quel engrais. Le chimique, surtout sur sol riche.\nLe total mélange deux groupes très différents.\nd) Le bio : à sol égal, il fait toujours mieux.\n⭐ C'est le paradoxe de Simpson : une comparaison globale peut s'inverser quand on regarde chaque sous-groupe.",
+          reponses: [
+            { question: "a) pauvre, bio", attendu: "0,3" },
+            { question: "a) pauvre, chimique", attendu: "0,2" },
+            { question: "a) riche, bio", attendu: "0,9" },
+            { question: "a) riche, chimique", attendu: "0,8" },
+            { question: "b) bio", attendu: "0,5" },
+            { question: "b) chimique", attendu: "0,6" },
+            { question: "d)", attendu: ["bio", "le bio", "engrais bio", "l'engrais bio"] },
+          ],
           micros: ["info_tab_frequence_conditionnelle", "info_tab_frequence_marginale", "info_tab_interpreter"],
         },
         {
@@ -412,6 +496,12 @@ export const exercicesInfoFrequencesPremiere: FicheExercicesData = {
             { label: "2 à 10 km", value: 65 },
             { label: "> 10 km", value: 70 },
           ]),
+          reponses: [
+            { question: "a)", attendu: "64 %" },
+            { question: "b) moins de 2 km", attendu: "0,5" },
+            { question: "b) 2 à 10 km", attendu: "0,65" },
+            { question: "b) plus de 10 km", attendu: "0,7" },
+          ],
           micros: ["info_tab_frequence_marginale", "info_tab_frequence_conditionnelle", "info_tab_interpreter"],
         },
         {
@@ -430,6 +520,12 @@ export const exercicesInfoFrequencesPremiere: FicheExercicesData = {
               ],
             ),
           ),
+          reponses: [
+            { question: "b) échauffement", attendu: "0,1" },
+            { question: "b) sans", attendu: "0,3" },
+            { question: "c)", attendu: "60 %" },
+            { question: "d)", attendu: ["oui", "exact", "vrai"] },
+          ],
           micros: ["info_tab_frequence_conditionnelle", "info_tab_interpreter"],
         },
       ],

@@ -135,6 +135,11 @@ export const exercicesInfoTableurPremiere: FicheExercicesData = {
           ]),
           correction:
             "a) B4 : colonne B (les distances), ligne 4. On y lit $15$ : le jour $3$, le club a marché $15$ km.\nC2 : colonne C (les dénivelés), ligne 2. On y lit $450$ : le jour $1$, il a monté $450$ m.\nb) Le dénivelé est dans la colonne C ; le jour $3$ est à la ligne 4. C'est la cellule C4, qui contient $1\\,200$.\n⚠️ La ligne 1 contient les TITRES : le jour $3$ n'est pas à la ligne 3, mais à la ligne 4.",
+          reponses: [
+            { question: "a) B4", attendu: "15" },
+            { question: "a) C2", attendu: "450" },
+            { question: "b)", attendu: ["C4"], exact: true },
+          ],
           micros: ["info_tableur_lire"],
         },
         {
@@ -151,6 +156,11 @@ export const exercicesInfoTableurPremiere: FicheExercicesData = {
           ),
           correction:
             "a) « =B2*1,05 » multiplie le prix de B2 par $1{,}05 = 1 + \\dfrac{5}{100}$ : c'est une HAUSSE de $5$ %. $200 \\times 1{,}05 = 210$.\nb) Recopiée d'une ligne vers le bas, la formule descend d'une ligne : B4 contient « =B3*1,05 ».\nElle affiche $210 \\times 1{,}05 = 220{,}5$, soit $220{,}50$ €.\n⚠️ $1{,}05$ ne veut pas dire « $+1{,}05$ % », ni « $+1{,}05$ € » : c'est un coefficient multiplicateur.",
+          reponses: [
+            { question: "a)", attendu: ["5 %","hausse de 5 %","+5 %","augmentation de 5 %"] },
+            { question: "b) formule", attendu: ["=B3*1,05", "=B3*1.05"], exact: true },
+            { question: "b) valeur", attendu: "220,5" },
+          ],
           micros: ["info_tableur_comprendre_formule", "info_tableur_lire"],
         },
         {
@@ -167,6 +177,9 @@ export const exercicesInfoTableurPremiere: FicheExercicesData = {
               { surligne: ["C2"], barre: ["C2", "=B2*0,8"] },
             ),
           ),
+          reponses: [
+            { attendu: ["=B2*0,8", "=B2*0,80", "=B2*0.8", "=B2*0.80"], exact: true },
+          ],
           micros: ["info_tableur_comprendre_formule"],
         },
         {
@@ -185,6 +198,10 @@ export const exercicesInfoTableurPremiere: FicheExercicesData = {
               { surligne: ["B3"], barre: ["B3", "=B2*1,02"] },
             ),
           ),
+          reponses: [
+            { question: "formule", attendu: ["=B2*1,02", "=B2*1.02"], exact: true },
+            { question: "valeur", attendu: "612" },
+          ],
           micros: ["info_tableur_ecrire_formule"],
         },
         {
@@ -206,6 +223,10 @@ export const exercicesInfoTableurPremiere: FicheExercicesData = {
               { surligne: ["B7"], barre: ["B7", "=SOMME(B2:B6)"] },
             ),
           ),
+          reponses: [
+            { question: "formule", attendu: ["=SOMME(B2:B6)", "=B2+B3+B4+B5+B6"], exact: true },
+            { question: "valeur", attendu: "130" },
+          ],
           micros: ["info_tableur_ecrire_formule"],
         },
         {
@@ -223,6 +244,11 @@ export const exercicesInfoTableurPremiere: FicheExercicesData = {
               { surligne: ["C2", "D2", "E2", "C3"] },
             ),
           ),
+          reponses: [
+            { question: "a) D2", attendu: ["=C2+10", "=10+C2"], exact: true },
+            { question: "a) E2", attendu: ["=D2+10", "=10+D2"], exact: true },
+            { question: "b) C3", attendu: ["=B3+10", "=10+B3"], exact: true },
+          ],
           micros: ["info_tableur_ecrire_formule"],
         },
         {
@@ -239,6 +265,9 @@ export const exercicesInfoTableurPremiere: FicheExercicesData = {
           ]),
           correction:
             "On descend la colonne B jusqu'à la PREMIÈRE valeur qui dépasse $1\\,500$.\nSemaine $2$ : $1\\,250$, pas encore. Semaine $3$ : $1\\,563$, c'est dépassé.\nLa chaîne dépasse $1\\,500$ abonnés à partir de la semaine $3$.\n✔️ $1\\,250 \\times 1{,}25 = 1\\,562{,}5$, arrondi à $1\\,563$.\n⚠️ On répond par la SEMAINE (colonne A), pas par la ligne 5 du tableur, ni par le nombre d'abonnés.",
+          reponses: [
+            { attendu: ["3","semaine 3"] },
+          ],
           micros: ["info_tableur_exploiter_colonne", "info_tableur_lire"],
         },
         {
@@ -254,6 +283,9 @@ export const exercicesInfoTableurPremiere: FicheExercicesData = {
               { label: "Ordures", value: 40 },
             ]),
           ),
+          reponses: [
+            { attendu: ["circulaire","diagramme circulaire","camembert"] },
+          ],
           micros: ["info_tableur_diagramme"],
         },
       ],
@@ -287,6 +319,10 @@ export const exercicesInfoTableurPremiere: FicheExercicesData = {
           ),
           correction:
             "a) $+3$ % par an : on multiplie par $1{,}03$. En B3 : « =B2*1,03 ». $2\\,000 \\times 1{,}03 = 2\\,060$.\nb) « =B3-B2 » calcule la DIFFÉRENCE entre deux années : ce que le capital a gagné, les intérêts. $2\\,060 - 2\\,000 = 60$ €.\nc) On additionne la colonne C : $60 + 61{,}8 + 63{,}65 = 185{,}45$ €. On le retrouve aussi par $2\\,185{,}45 - 2\\,000 = 185{,}45$ €.\nd) Chaque année, les $3$ % portent sur un capital plus GRAND, qui contient les intérêts des années d'avant. Ce sont les intérêts composés.\n⚠️ Trois fois $60$ €, soit $180$ €, serait faux : les intérêts ne sont pas les mêmes chaque année.",
+          reponses: [
+            { question: "a)", attendu: ["=B2*1,03", "=B2*1.03"], exact: true },
+            { question: "c)", attendu: "185,45" },
+          ],
           micros: ["info_tableur_ecrire_formule", "info_tableur_comprendre_formule", "info_tableur_lire"],
         },
         {
@@ -306,6 +342,10 @@ export const exercicesInfoTableurPremiere: FicheExercicesData = {
           ]),
           correction:
             "a) Une baisse de $4$ % : on multiplie par $1 - \\dfrac{4}{100} = 0{,}96$. En B3 : « =B2*0,96 ».\nb) On descend la colonne : année $5$, $4\\,077$ ha, encore au-dessus ; année $6$, $3\\,914$ ha, c'est en dessous.\nLa surface passe sous $4\\,000$ ha à partir de l'année $6$.\nc) Les $4$ % portent chaque année sur la surface QUI RESTE, de plus en plus petite. La perte diminue : $200$ ha la première année, $192$ la deuxième ($4\\,800 \\times 0{,}04$), et ainsi de suite.\nIl faut donc un peu plus de $5$ ans.\n⚠️ Enlever $4$ % chaque année, ce n'est pas enlever toujours le même nombre d'hectares.",
+          reponses: [
+            { question: "a)", attendu: ["=B2*0,96", "=B2*0.96"], exact: true },
+            { question: "b)", attendu: ["6","année 6"] },
+          ],
           micros: ["info_tableur_ecrire_formule", "info_tableur_exploiter_colonne"],
         },
         {
@@ -323,6 +363,12 @@ export const exercicesInfoTableurPremiere: FicheExercicesData = {
           ]),
           correction:
             "a) $+10$ % : on multiplie par $1{,}1$. En B3 : « =B2*1,1 ». $20 \\times 1{,}1 = 22$.\nb) Semaine $5$ : $29{,}28$ km, pas encore. Semaine $6$ : $32{,}21$ km. C'est à partir de la semaine $6$.\nc) En B8 : « =SOMME(B2:B7) ».\nElle vaut $20 + 22 + 24{,}2 + 26{,}62 + 29{,}28 + 32{,}21 = 154{,}31$ km.\n⚠️ La SOMME va de B2 à B7 : B1 contient le titre, et B8 est la cellule du total elle-même.",
+          reponses: [
+            { question: "a)", attendu: ["=B2*1,1", "=B2*1,10", "=B2*1.1", "=B2*1.10"], exact: true },
+            { question: "b)", attendu: ["6","semaine 6"] },
+            { question: "c) formule", attendu: ["=SOMME(B2:B7)", "=B2+B3+B4+B5+B6+B7"], exact: true },
+            { question: "c) valeur", attendu: "154,31" },
+          ],
           micros: ["info_tableur_ecrire_formule", "info_tableur_exploiter_colonne"],
         },
         {
@@ -342,6 +388,12 @@ export const exercicesInfoTableurPremiere: FicheExercicesData = {
           ),
           correction:
             "a) « =B2*C2 » multiplie la puissance par la durée : c'est l'énergie, $E = P \\times t$. Pour le four : $2\\,000 \\times 0{,}5 = 1\\,000$ Wh.\nb) Recopiée vers le bas, la formule devient « =B3*C3 », « =B4*C4 », « =B5*C5 ».\nLave-linge : $1\\,000 \\times 1{,}5 = 1\\,500$ Wh. Ordinateur : $50 \\times 6 = 300$ Wh. Box : $10 \\times 24 = 240$ Wh.\nc) En D6 : « =SOMME(D2:D5) ». Total : $1\\,000 + 1\\,500 + 300 + 240 = 3\\,040$ Wh, soit $3{,}04$ kWh.\nd) $3{,}04 \\times 0{,}25 = 0{,}76$ € pour la journée.\n⭐ La petite box, allumée $24$ h sur $24$, consomme presque autant que l'ordinateur : la durée compte autant que la puissance.",
+          reponses: [
+            { question: "b) (D3 ; D4 ; D5)", attendu: "1500 ; 300 ; 240", ordre: true },
+            { question: "c) formule", attendu: ["=SOMME(D2:D5)", "=D2+D3+D4+D5"], exact: true },
+            { question: "c) en kWh", attendu: "3,04" },
+            { question: "d)", attendu: "0,76 €" },
+          ],
           micros: ["info_tableur_comprendre_formule", "info_tableur_ecrire_formule", "info_tableur_lire"],
         },
         {
@@ -359,6 +411,11 @@ export const exercicesInfoTableurPremiere: FicheExercicesData = {
               { surligne: ["C2"], barre: ["C2", "=B2*1,2"] },
             ),
           ),
+          reponses: [
+            { question: "a) C2", attendu: "54" },
+            { question: "a) D2", attendu: "9" },
+            { question: "b)", attendu: ["=C3/1,2", "=C3/1.2"], exact: true },
+          ],
           micros: ["info_tableur_comprendre_formule", "info_tableur_ecrire_formule"],
         },
         {
@@ -377,6 +434,10 @@ export const exercicesInfoTableurPremiere: FicheExercicesData = {
           ),
           correction:
             "a) La formule ne contient aucune référence de cellule : juste deux NOMBRES. Recopiée, elle reste « =1000*1,03 » partout, et affiche partout $1\\,030$.\nLa barre de formule le montre : en B5, on lit encore « =1000*1,03 ».\nb) Il fallait écrire « =B2*1,03 » : recopiée, elle devient « =B3*1,03 », « =B4*1,03 », et chaque année part de la précédente.\nPrix obtenus : $1\\,030$ € en $2025$, $1\\,060{,}90$ € en $2026$, $1\\,092{,}73$ € en $2027$.\n⭐ Une formule de tableur doit dire « la cellule du DESSUS », pas « le nombre que j'ai lu dedans ».",
+          reponses: [
+            { question: "b) formule", attendu: ["=B2*1,03", "=B2*1.03"], exact: true },
+            { question: "b) prix (2025 ; 2026 ; 2027)", attendu: "1030 ; 1060,90 ; 1092,73", ordre: true },
+          ],
           micros: ["info_tableur_comprendre_formule", "info_tableur_ecrire_formule"],
         },
         {
@@ -393,6 +454,12 @@ export const exercicesInfoTableurPremiere: FicheExercicesData = {
               { label: "Liste D", value: 310 },
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: ["courbe","une courbe","courbes","deux courbes"] },
+            { question: "b)", attendu: ["barres","diagramme en barres","un diagramme en barres"] },
+            { question: "c)", attendu: ["circulaire","diagramme circulaire","camembert"] },
+            { question: "d)", attendu: ["nuage de points","nuage"] },
+          ],
           micros: ["info_tableur_diagramme"],
         },
         {
@@ -410,6 +477,11 @@ export const exercicesInfoTableurPremiere: FicheExercicesData = {
           ]),
           correction:
             "a) Forfait A : $30$ € fois le nombre de mois, écrit en A2. En B2 : « =30*A2 ». Pour $7$ mois : $30 \\times 7 = 210$ €.\nForfait B : $100$ €, plus $20$ € par mois. En C2 : « =100+20*A2 ». Pour $7$ mois : $100 + 20 \\times 7 = 240$ €.\nb) On compare les deux colonnes ligne par ligne. À $10$ mois, les deux coûtent $300$ € : égalité.\nÀ partir de $11$ mois, B est moins cher ($320$ € contre $330$ €).\n⚠️ À $10$ mois, B n'est pas MOINS cher : il coûte AUTANT. La réponse est $11$ mois.\n⭐ Les $100$ € d'inscription se « remboursent » à raison de $10$ € par mois : il faut $10$ mois pour les rattraper.",
+          reponses: [
+            { question: "a) B2", attendu: ["=30*A2", "=A2*30"], exact: true },
+            { question: "a) C2", attendu: ["=100+20*A2", "=20*A2+100", "=100+A2*20", "=A2*20+100"], exact: true },
+            { question: "b)", attendu: ["11","11 mois"] },
+          ],
           micros: ["info_tableur_ecrire_formule", "info_tableur_exploiter_colonne"],
         },
       ],
@@ -452,6 +524,13 @@ export const exercicesInfoTableurPremiere: FicheExercicesData = {
             [],
             4,
           ),
+          reponses: [
+            { question: "a)", attendu: ["=B2*0,9", "=B2*0,90", "=B2*0.9", "=B2*0.90"], exact: true },
+            { question: "b)", attendu: ["7","année 7"] },
+            { question: "c) formule", attendu: ["=C2-80"], exact: true },
+            { question: "c) année", attendu: ["5","année 5"] },
+            { question: "d)", attendu: ["courbe","une courbe","courbes","deux courbes"] },
+          ],
           micros: ["info_tableur_ecrire_formule", "info_tableur_exploiter_colonne", "info_tableur_diagramme"],
         },
         {
@@ -469,6 +548,14 @@ export const exercicesInfoTableurPremiere: FicheExercicesData = {
           ]),
           correction:
             "a) Les années avancent de $10$ en $10$ : en A3, « =A2+10 ». La population est multipliée par $1{,}2$ : en B3, « =B2*1,2 ».\nb) Doubler, c'est dépasser $40\\,000$. En $1850$ : $34\\,560$, pas encore. En $1860$ : $41\\,472$. La population a doublé en $1860$, en $40$ ans.\nc) Entre $1860$ et $1870$ : $49\\,766 - 41\\,472 = 8\\,294$ habitants de plus. Entre $1820$ et $1830$ : $24\\,000 - 20\\,000 = 4\\,000$.\nLe même $+20$ % ajoute deux fois plus d'habitants, parce qu'il s'applique à une ville deux fois plus grande.\nd) Une évolution dans le temps : une courbe, avec les années en abscisse.\n⭐ C'est l'exode rural de la révolution industrielle : les villes-usines grossissent de plus en plus vite.\n⚠️ Deux formules, deux gestes : on AJOUTE $10$ aux années, on MULTIPLIE la population par $1{,}2$.",
+          reponses: [
+            { question: "a) A3", attendu: ["=A2+10", "=10+A2"], exact: true },
+            { question: "a) B3", attendu: ["=B2*1,2", "=B2*1,20", "=B2*1.2", "=B2*1.20"], exact: true },
+            { question: "b)", attendu: "1860" },
+            { question: "c) 1860-1870", attendu: "8294" },
+            { question: "c) 1820-1830", attendu: "4000" },
+            { question: "d)", attendu: ["courbe","une courbe","courbes","deux courbes"] },
+          ],
           micros: ["info_tableur_ecrire_formule", "info_tableur_exploiter_colonne", "info_tableur_diagramme"],
         },
         {
@@ -495,6 +582,12 @@ export const exercicesInfoTableurPremiere: FicheExercicesData = {
               { label: "Ours", value: 12 },
             ], 1),
           ),
+          reponses: [
+            { question: "a) points (Lions ; Aigles ; Loups ; Ours)", attendu: "17 ; 19 ; 18 ; 12", ordre: true },
+            { question: "b) victoires", attendu: "Loups" },
+            { question: "b) points", attendu: "Aigles" },
+            { question: "c)", attendu: ["barres","diagramme en barres","un diagramme en barres"] },
+          ],
           micros: ["info_tableur_comprendre_formule", "info_tableur_ecrire_formule", "info_tableur_diagramme"],
         },
         {
@@ -526,6 +619,14 @@ export const exercicesInfoTableurPremiere: FicheExercicesData = {
               { label: "juin", value: 18 },
             ], 5),
           ),
+          reponses: [
+            { question: "b)", attendu: "juin" },
+            { question: "c) total", attendu: "80" },
+            { question: "c) une formule", attendu: ["=SOMME(C3:C8)", "=B8-B2", "=C3+C4+C5+C6+C7+C8"], exact: true },
+            { question: "d) formule", attendu: ["=C3*4", "=4*C3"], exact: true },
+            { question: "d) coût total", attendu: "320 €" },
+            { question: "e)", attendu: ["barres","diagramme en barres","un diagramme en barres"] },
+          ],
           micros: ["info_tableur_lire", "info_tableur_comprendre_formule", "info_tableur_ecrire_formule", "info_tableur_exploiter_colonne", "info_tableur_diagramme"],
         },
       ],

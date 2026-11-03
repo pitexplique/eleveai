@@ -139,6 +139,10 @@ export const exercicesInfoFiltreDonneesPremiere: FicheExercicesData = {
               { surligne: ["3", "5", "6", "7", "9"] },
             ),
           ),
+          reponses: [
+            { question: "lesquels", attendu: "Col ; Crête ; Forêt ; Pic ; Refuge" },
+            { question: "combien", attendu: "5" },
+          ],
           micros: ["info_filtre_sous_ensemble"],
         },
         {
@@ -162,6 +166,9 @@ export const exercicesInfoFiltreDonneesPremiere: FicheExercicesData = {
               { surligne: ["6", "7"] },
             ),
           ),
+          reponses: [
+            { attendu: "2" },
+          ],
           micros: ["info_filtre_et"],
         },
         {
@@ -174,6 +181,9 @@ export const exercicesInfoFiltreDonneesPremiere: FicheExercicesData = {
             { a: "D < 500 m", b: "chiens", e: "8 sentiers" },
             "union",
           ),
+          reponses: [
+            { attendu: "5" },
+          ],
           micros: ["info_filtre_ou"],
         },
         {
@@ -196,6 +206,9 @@ export const exercicesInfoFiltreDonneesPremiere: FicheExercicesData = {
               { surligne: ["3", "4", "5", "9"] },
             ),
           ),
+          reponses: [
+            { attendu: "4" },
+          ],
           micros: ["info_filtre_non"],
         },
         {
@@ -205,6 +218,9 @@ export const exercicesInfoFiltreDonneesPremiere: FicheExercicesData = {
           correction:
             "ET : les deux conditions à la fois, c'est UNE seule case du tableau.\nLigne « Chat », colonne « Adopté » : $55$.\n$55$ chats ont été adoptés.\n⚠️ Ni $80$ (tous les chats), ni $97$ (tous les adoptés) : le ET est au croisement.",
           schema: ecranSeulement(tableauProba(["", "Adopté", "En attente", "Total"], [["Chien", "42", "18", "60"], ["Chat", "55", "25", "80"], ["Total", "97", "43", "140"]], [[1, 1]])),
+          reponses: [
+            { attendu: "55" },
+          ],
           micros: ["info_filtre_et", "info_filtre_effectif"],
         },
         {
@@ -212,6 +228,9 @@ export const exercicesInfoFiltreDonneesPremiere: FicheExercicesData = {
           correction:
             "OU : au moins l'une des deux conditions.\nLes chats : $80$. Les adoptés : $97$. Les chats adoptés, $55$, sont dans les deux groupes.\n$80 + 97 - 55 = 122$ animaux.\n✔️ Autre chemin : les seuls animaux qui ne sont ni chats ni adoptés sont les chiens en attente, $18$. Et $140 - 18 = 122$.",
           schema: ecranSeulement(tableauProba(["", "Adopté", "En attente", "Total"], [["Chien", "42", "18", "60"], ["Chat", "55", "25", "80"], ["Total", "97", "43", "140"]], [[0, 1], [1, 1], [1, 2]])),
+          reponses: [
+            { attendu: "122" },
+          ],
           micros: ["info_filtre_ou", "info_filtre_effectif"],
         },
         {
@@ -219,6 +238,9 @@ export const exercicesInfoFiltreDonneesPremiere: FicheExercicesData = {
           correction:
             "NON adopté : c'est le total, moins les adoptés.\n$140 - 97 = 43$ animaux.\nOn le lit aussi directement : c'est le total de la colonne « En attente », $18 + 25 = 43$.\nDans le tableau, les deux cases surlignées forment la colonne « En attente ».",
           schema: ecranSeulement(tableauProba(["", "Adopté", "En attente", "Total"], [["Chien", "42", "18", "60"], ["Chat", "55", "25", "80"], ["Total", "97", "43", "140"]], [[0, 2], [1, 2]])),
+          reponses: [
+            { attendu: "43" },
+          ],
           micros: ["info_filtre_non", "info_filtre_effectif"],
         },
         {
@@ -226,6 +248,9 @@ export const exercicesInfoFiltreDonneesPremiere: FicheExercicesData = {
           correction:
             "« Ni chien ni adopté », c'est « NON chien ET NON adopté » : des chats, en attente.\nLigne « Chat », colonne « En attente » : $25$ animaux.\n⚠️ « Ni A ni B » est un ET de deux NON, pas un OU. C'est aussi le contraire de « A OU B » : $140 - (60 + 97 - 42) = 140 - 115 = 25$.\nSur le diagramme, les $25$ chats en attente sont DEHORS : ni dans le cercle « chien », ni dans le cercle « adopté ».",
           schema: ecranSeulement(venn({ aSeul: ["18"], commun: ["42"], bSeul: ["55"], dehors: ["25"] }, { a: "chien", b: "adopté", e: "140 animaux" }, "dehors")),
+          reponses: [
+            { attendu: "25" },
+          ],
           micros: ["info_filtre_non", "info_filtre_et", "info_filtre_effectif"],
         },
       ],
@@ -251,6 +276,12 @@ export const exercicesInfoFiltreDonneesPremiere: FicheExercicesData = {
           correction:
             "a) Une case : ligne « Récente », colonne « Électrique » : $36$ voitures.\nb) Les électriques, $50$, plus les récentes, $120$, moins les $36$ comptées deux fois : $50 + 120 - 36 = 134$ voitures.\nc) Le total moins les électriques : $250 - 50 = 200$. C'est le total de la colonne « Thermique ».\nd) Une case : $116$ voitures.\nThermique ET ancienne, c'est « ni électrique ni récente », le contraire de b) : $250 - 134 = 116$.\n⭐ Sur le diagramme, les $134$ voitures sont dans les cercles ; les $116$ autres, dehors.",
           schema: ecranSeulement(venn({ aSeul: ["14"], commun: ["36"], bSeul: ["84"], dehors: ["116"] }, { a: "électrique", b: "récente", e: "250 voitures" }, "union")),
+          reponses: [
+            { question: "a)", attendu: "36" },
+            { question: "b)", attendu: "134" },
+            { question: "c)", attendu: "200" },
+            { question: "d)", attendu: "116" },
+          ],
           micros: ["info_filtre_et", "info_filtre_ou", "info_filtre_non", "info_filtre_effectif"],
         },
         {
@@ -271,6 +302,11 @@ export const exercicesInfoFiltreDonneesPremiere: FicheExercicesData = {
           correction:
             "a) Les confirmés : Inès, Noah, Léa, Tom. Parmi eux, en compétition : Inès, Léa, Tom. Soit $3$ inscrits.\nb) Moins de $16$ ans : Inès, Maya, Sami, Tom ($4$). En compétition : Inès, Léa, Sami, Tom ($4$). Dans les deux : Inès, Sami, Tom ($3$).\n$4 + 4 - 3 = 5$ inscrits : Inès, Maya, Sami, Tom, Léa.\nc) $8 - 4 = 4$ inscrits : Hugo, Maya, Noah, Zoé.\n⚠️ « Moins de $16$ ans » exclut $16$ : Noah et Zoé, qui ont $16$ ans, ne sont pas gardés.",
           schema: ecranSeulement(venn({ aSeul: ["Maya"], commun: ["Inès", "Sami", "Tom"], bSeul: ["Léa"], dehors: ["Hugo, Noah, Zoé"] }, { a: "A", b: "B", e: "8 inscrits" }, "union")),
+          reponses: [
+            { question: "a)", attendu: "Inès ; Léa ; Tom" },
+            { question: "b)", attendu: "5" },
+            { question: "c)", attendu: "4" },
+          ],
           micros: ["info_filtre_sous_ensemble", "info_filtre_et", "info_filtre_ou", "info_filtre_non"],
         },
         {
@@ -280,6 +316,14 @@ export const exercicesInfoFiltreDonneesPremiere: FicheExercicesData = {
           figure: venn({ aSeul: ["9"], commun: ["3"], bSeul: ["5"], dehors: ["13"] }, { a: "vélo", b: "bus", e: "30 élèves" }),
           correction:
             "a) Le cercle « vélo » entier : $9 + 3 = 12$ élèves. Le cercle « bus » entier : $3 + 5 = 8$ élèves.\nb) La zone commune : $3$ élèves.\nc) Tout ce qui est dans au moins un cercle : $9 + 3 + 5 = 17$ élèves. Par la formule : $12 + 8 - 3 = 17$.\nd) Ceux qui sont hors des deux cercles : $13$ élèves. Vérification : $30 - 17 = 13$.\ne) Tous sauf le cercle « vélo » : $30 - 12 = 18$ élèves, soit $5 + 13$.\n⚠️ « $9$ » n'est pas le nombre de cyclistes : c'est le nombre de cyclistes SANS abonnement. Le cercle entier compte aussi les $3$ du milieu.",
+          reponses: [
+            { question: "a) vélo", attendu: "12" },
+            { question: "a) bus", attendu: "8" },
+            { question: "b)", attendu: "3" },
+            { question: "c)", attendu: "17" },
+            { question: "d)", attendu: "13" },
+            { question: "e)", attendu: "18" },
+          ],
           micros: ["info_filtre_et", "info_filtre_ou", "info_filtre_non", "info_filtre_effectif"],
         },
         {
@@ -289,6 +333,11 @@ export const exercicesInfoFiltreDonneesPremiere: FicheExercicesData = {
           correction:
             "a) On place d'abord le ET : $50$ ont dormi ET fait le sommet. Puis on complète par différence :\nont dormi sans le sommet : $120 - 50 = 70$ ; ont fait le sommet sans dormir : $90 - 50 = 40$.\nIl reste $200 - 50 - 70 - 40 = 40$ randonneurs qui n'ont fait ni l'un ni l'autre.\nb) $120 + 90 - 50 = 160$ randonneurs.\nc) $200 - 90 = 110$ randonneurs.\nd) La case « Pas dormi », « Pas de sommet » : $40$. Vérification : $200 - 160 = 40$.\n⭐ Dans un tableau croisé, on commence toujours par la case du ET : tout le reste s'en déduit.",
           schema: tableauProba(["", "Sommet", "Pas de sommet", "Total"], [["Dormi", "50", "70", "120"], ["Pas dormi", "40", "40", "80"], ["Total", "90", "110", "200"]], [[0, 1]]),
+          reponses: [
+            { question: "b)", attendu: "160" },
+            { question: "c)", attendu: "110" },
+            { question: "d)", attendu: "40" },
+          ],
           micros: ["info_filtre_ou", "info_filtre_non", "info_filtre_effectif"],
         },
         {
@@ -299,6 +348,12 @@ export const exercicesInfoFiltreDonneesPremiere: FicheExercicesData = {
           correction:
             "a) Une case : ligne « Plus de $30$ km », colonne « Sur site » : $15$ salariés. Ce sont eux qui font chaque jour le plus long trajet.\nb) $80 + 60 - 45 = 95$ salariés.\nc) $200 - 80 = 120$ salariés : c'est le total de la colonne « Sur site ».\nd) Une case : $105$ salariés.\nC'est « ni télétravail ni plus de $30$ km », le contraire de b) : $200 - 95 = 105$.\n⭐ Pour réduire les trajets en voiture, et donc le CO₂, l'entreprise regardera d'abord la case a).",
           schema: ecranSeulement(tableauProba(["", "Télétravail", "Sur site", "Total"], [["Plus de 30 km", "45", "15", "60"], ["30 km ou moins", "35", "105", "140"], ["Total", "80", "120", "200"]], [[0, 1], [0, 2], [1, 1]])),
+          reponses: [
+            { question: "a)", attendu: "15" },
+            { question: "b)", attendu: "95" },
+            { question: "c)", attendu: "120" },
+            { question: "d)", attendu: "105" },
+          ],
           micros: ["info_filtre_et", "info_filtre_ou", "info_filtre_non", "info_filtre_effectif"],
         },
         {
@@ -308,6 +363,12 @@ export const exercicesInfoFiltreDonneesPremiere: FicheExercicesData = {
           correction:
             "a) « $A$ ET $B$ » est une partie de $A$, et $A$ est une partie de « $A$ OU $B$ » : effectif de « $A$ ET $B$ » $\\leqslant$ effectif de $A$ $\\leqslant$ effectif de « $A$ OU $B$ ».\nb) « $A$ ET $B$ » : $6$ espèces. « $A$ » : $18$. « $A$ OU $B$ » : $18 + 24 - 6 = 36$. On a bien $6 \\leqslant 18 \\leqslant 36$.\nc) $60 - 36 = 24$ espèces.\n⭐ Ajouter un « et » RESTREINT, ajouter un « ou » ÉLARGIT : c'est vrai pour n'importe quel fichier.",
           schema: ecranSeulement(venn({ aSeul: ["12"], commun: ["6"], bSeul: ["18"], dehors: ["24"] }, { a: "A", b: "B", e: "60 espèces" }, "commun")),
+          reponses: [
+            { question: "b) A ET B", attendu: "6" },
+            { question: "b) A", attendu: "18" },
+            { question: "b) A OU B", attendu: "36" },
+            { question: "c)", attendu: "24" },
+          ],
           micros: ["info_filtre_et", "info_filtre_ou", "info_filtre_non", "info_filtre_effectif"],
         },
         {
@@ -327,6 +388,12 @@ export const exercicesInfoFiltreDonneesPremiere: FicheExercicesData = {
           ]),
           correction:
             "a) « Entre $2$ et $4$ » est un ET sur la même colonne : prix $\\geqslant 2$ ET prix $\\leqslant 4$.\nOn garde Pommes ($2{,}5$), Tomates ($3{,}2$), Kiwis ($4$), Poireaux ($2$) : $4$ produits.\nb) Pommes et Carottes.\nc) Bananes, Avocats, Mangues : $3$ produits.\nd) Bio : Pommes, Bananes, Carottes, Mangues. Moins de $2$ € : Bananes, Carottes, qui sont DÉJÀ bio.\nLe filtre renvoie $4 + 2 - 2 = 4$ produits : exactement les produits bio.\n⭐ Quand un groupe est inclus dans l'autre, le OU ne rajoute personne.\n⚠️ Bornes comprises : les Poireaux ($2$ €) et les Kiwis ($4$ €) sont gardés.",
+          reponses: [
+            { question: "a)", attendu: "4" },
+            { question: "b)", attendu: "Pommes ; Carottes" },
+            { question: "c)", attendu: "3" },
+            { question: "d)", attendu: "4" },
+          ],
           micros: ["info_filtre_sous_ensemble", "info_filtre_et", "info_filtre_ou", "info_filtre_non"],
         },
         {
@@ -346,6 +413,11 @@ export const exercicesInfoFiltreDonneesPremiere: FicheExercicesData = {
           ]),
           correction:
             "a) Moins de $60$ dB : Bibliothèque, Classe, Parc. Parmi eux, à l'intérieur : Bibliothèque et Classe. Soit $2$ lieux.\nb) Le contraire de a) : $8 - 2 = 6$ lieux.\nAvec un OU : NON (calme ET intérieur) = NON calme OU NON intérieur.\nPas calmes : Cantine, Cour, Gymnase, Rue, Concert ($5$). Pas à l'intérieur : Cour, Rue, Parc ($3$). Dans les deux : Cour, Rue ($2$).\n$5 + 3 - 2 = 6$ lieux : on retrouve le même nombre.\nc) Au moins $80$ dB : Cantine ($80$), Gymnase ($85$), Concert ($100$). Soit $3$ lieux.\n⚠️ Le contraire d'un ET est un OU : « pas (calme et dedans) », c'est « bruyant, ou dehors ».",
+          reponses: [
+            { question: "a)", attendu: "Bibliothèque ; Classe" },
+            { question: "b)", attendu: "6" },
+            { question: "c)", attendu: "3" },
+          ],
           micros: ["info_filtre_sous_ensemble", "info_filtre_et", "info_filtre_ou", "info_filtre_non"],
         },
       ],
@@ -381,6 +453,11 @@ export const exercicesInfoFiltreDonneesPremiere: FicheExercicesData = {
           correction:
             "a) Poussette ET hiver : Étang, Rivière, Forêt. Soit $3$ sentiers.\nb) Au moins $500$ m : Gorges, Sommet, Crêtes ($3$). Au moins $10$ km : Gorges, Sommet, Crêtes, Lac ($4$). Dans les deux : $3$.\n$3 + 4 - 3 = 4$ sentiers : Gorges, Sommet, Crêtes, Lac.\nc) Accessibles en poussette : Étang, Prairie, Rivière, Forêt, Tour ($5$). Donc $10 - 5 = 5$ sentiers ne le sont pas.\nd) Poussette ET hiver : $3$ (question a). Poussette sans hiver : Prairie, Tour, $2$. Hiver sans poussette : Belvédère, Lac, $2$. Ni l'un ni l'autre : Gorges, Sommet, Crêtes, $3$.\n✔️ $3 + 2 + 2 + 3 = 10$ sentiers.\n⭐ Le tableau croisé RÉSUME le fichier : on y lit d'un coup les quatre filtres possibles.",
           schema: tableauProba(["", "Hiver", "Pas l'hiver", "Total"], [["Poussette", "3", "2", "5"], ["Sans poussette", "2", "3", "5"], ["Total", "5", "5", "10"]], [[0, 1]]),
+          reponses: [
+            { question: "a)", attendu: "Étang ; Rivière ; Forêt" },
+            { question: "b)", attendu: "4" },
+            { question: "c)", attendu: "5" },
+          ],
           micros: ["info_filtre_sous_ensemble", "info_filtre_et", "info_filtre_ou", "info_filtre_non", "info_filtre_effectif"],
         },
         {
@@ -391,6 +468,12 @@ export const exercicesInfoFiltreDonneesPremiere: FicheExercicesData = {
           correction:
             "a) T1 ET T2 : une case, $660$ électeurs.\nb) T1 OU T2 : $780 + 750 - 660 = 870$ électeurs.\nc) NI T1 NI T2 : la case « Abst. T1 », « Abst. T2 », $330$ électeurs. Vérification : $1\\,200 - 870 = 330$.\nd) Un seul tour : ceux du OU, moins ceux du ET : $870 - 660 = 210$. Ce sont les deux cases $120$ et $90$ : $120 + 90 = 210$.\n⭐ « Au moins un » (le OU) et « un seul » ne sont pas la même question : le premier compte ceux qui ont voté deux fois, le second non.\n⚠️ L'abstention d'un scrutin se lit dans une colonne, celle d'un électeur sur les deux tours dans une seule case.",
           schema: ecranSeulement(venn({ aSeul: ["120"], commun: ["660"], bSeul: ["90"], dehors: ["330"] }, { a: "tour 1", b: "tour 2", e: "1200 inscrits" }, "union")),
+          reponses: [
+            { question: "a)", attendu: "660" },
+            { question: "b)", attendu: "870" },
+            { question: "c)", attendu: "330" },
+            { question: "d)", attendu: "210" },
+          ],
           micros: ["info_filtre_et", "info_filtre_ou", "info_filtre_non", "info_filtre_effectif"],
         },
         {
@@ -410,6 +493,13 @@ export const exercicesInfoFiltreDonneesPremiere: FicheExercicesData = {
           ]),
           correction:
             "a) Les CDI : Comptable, Technicien, Infirmier, Développeur. Tous gagnent au moins $2\\,000$ € : $4$ offres.\nb) CDI : $4$ offres. Télétravail : Comptable, Graphiste, Développeur, Assistant, $4$ offres. Les deux : Comptable, Développeur.\n$4 + 4 - 2 = 6$ offres.\nc) $8 - 6 = 2$ offres : Vendeur et Serveur.\nd) On filtre les CDI, puis on fait la moyenne de leurs salaires : $\\dfrac{2\\,300 + 2\\,100 + 2\\,400 + 2\\,800}{4} = \\dfrac{9\\,600}{4} = 2\\,400$ €.\n⚠️ L'Assistant gagne exactement $2\\,000$ € mais n'est pas en CDI : il ne passe pas le filtre a).\n⭐ Dans un tableur, on filtre d'abord, on calcule ensuite : la moyenne ne porte que sur les lignes gardées.",
+          reponses: [
+            { question: "a)", attendu: "4" },
+            { question: "b)", attendu: "6" },
+            { question: "c) combien", attendu: "2" },
+            { question: "c) lesquelles", attendu: "Vendeur ; Serveur" },
+            { question: "d)", attendu: "2 400 €" },
+          ],
           micros: ["info_filtre_et", "info_filtre_ou", "info_filtre_non"],
         },
         {
@@ -419,6 +509,11 @@ export const exercicesInfoFiltreDonneesPremiere: FicheExercicesData = {
           correction:
             "a) $250 + 180 - 100 = 330$ skieurs.\nb) $400 - 330 = 70$ skieurs : ils ont peut-être un forfait à la semaine, et leur propre matériel.\nc) $400 - 250 = 150$ skieurs.\nd) Le journaliste a additionné $250 + 180 = 430$ sans retirer les $100$ skieurs qui font les deux : il les a comptés deux fois.\nSon résultat dépasse même le nombre de skieurs, $400$ : un signal d'alarme immédiat.\nSur le diagramme : forfait seul $250 - 100 = 150$, location seule $180 - 100 = 80$, les deux $100$, aucun des deux $70$. Et $150 + 100 + 80 + 70 = 400$.",
           schema: ecranSeulement(venn({ aSeul: ["150"], commun: ["100"], bSeul: ["80"], dehors: ["70"] }, { a: "forfait", b: "location", e: "400 skieurs" }, "union")),
+          reponses: [
+            { question: "a)", attendu: "330" },
+            { question: "b)", attendu: "70" },
+            { question: "c)", attendu: "150" },
+          ],
           micros: ["info_filtre_ou", "info_filtre_non", "info_filtre_effectif"],
         },
       ],
