@@ -51,6 +51,7 @@ import { PROGRAMME_CLASSES, listerToutesLesNotions } from "@/lib/programme";
 import { toutesLesVideos } from "@/lib/videos/r2";
 import RechercheEntete from "@/components/accueil/RechercheEntete";
 import { PRIX_MENSUEL, PRIX_VISIO, montant } from "@/lib/tarifs";
+import { PAYS_AVENTURE } from "@/lib/aventure/pays";
 
 /** La classe du coach → son dossier de vidéos sur R2 (et la clé de /video). */
 const DOSSIER_VIDEO: Record<string, string> = {
@@ -213,6 +214,29 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
           <h1 className={`${slab.className} text-3xl font-light leading-tight text-sky-700 sm:text-4xl lg:whitespace-nowrap lg:text-5xl`}>
             <span className="font-bold text-teal-700">EleveAI</span> <span className="font-bold">c&apos;est</span> l&apos;apprentissage personnalisé
           </h1>
+          {/* ⭐ 03/11/2026 — Frédéric : « EleveAI adaptée à huit pays
+              francophones, à mettre dans la page d'accueil ». Sous le titre,
+              visible de tous ; les 8 pays du plan, voir lib/aventure/pays.ts. */}
+          <Link
+            href="/rejoindre-l-aventure"
+            className="mx-auto mt-4 inline-flex flex-wrap items-center justify-center gap-2 rounded-full bg-white/80 px-4 py-2 text-sm font-black text-teal-800 shadow-sm ring-1 ring-teal-200 hover:ring-teal-400 sm:text-base"
+          >
+            Adaptée à 8 pays francophones
+            <span className="flex gap-1">
+              {PAYS_AVENTURE.map((p) => (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  key={p.slug}
+                  src={`/drapeaux/${p.slug}.svg`}
+                  alt={p.nom}
+                  title={p.nom}
+                  width={20}
+                  height={15}
+                  className="h-[15px] w-5 rounded-[3px] object-cover ring-1 ring-black/10"
+                />
+              ))}
+            </span>
+          </Link>
           <div className="mt-6 grid gap-4 sm:grid-cols-3">
             <Nuage Icone={GraduationCap} titre="Tout le programme">
               Du CP à la Terminale : {totalMicros.toLocaleString("fr-FR")} micro-compétences de maths et {totalVideos.toLocaleString("fr-FR")}+ vidéos, rangées comme le programme officiel.
