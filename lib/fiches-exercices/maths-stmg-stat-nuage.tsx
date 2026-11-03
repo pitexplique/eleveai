@@ -94,6 +94,10 @@ export const exercicesStatNuageStmg: FicheExercicesData = {
             { x: 28, y: 6 },
             { x: 30, y: 7 },
           ], { noms: ["température (°C)", "glaces (centaines)"] }),
+          reponses: [
+            { question: "a)", attendu: ["(24 ; 5)", "A(24 ; 5)"], ordre: true },
+            { question: "c)", attendu: "4" },
+          ],
           correction:
             "a) Je descends de $A$ jusqu'à l'axe horizontal : $x = 24$. Je vais jusqu'à l'axe vertical : $y = 5$. Donc $A(24 ; 5)$.\nb) Ce jour-là, il a fait 24 °C et le glacier a vendu 5 centaines de glaces, soit 500 glaces.\nc) « Plus de 400 glaces », c'est $y > 4$ : les points d'ordonnées 5, 5, 6 et 7. Cela fait 4 journées.\n⛔ Le piège : lire $y = 5$ comme 5 glaces. L'axe compte en centaines.\nRéponse : a) $A(24 ; 5)$ ; b) 24 °C et 500 glaces ; c) 4 journées.",
           micros: ["statT_nuage_lire"],
@@ -109,6 +113,9 @@ export const exercicesStatNuageStmg: FicheExercicesData = {
             [2023, 11.27],
             [2024, 11.65],
           ]),
+          reponses: [
+            { question: "a)", attendu: ["année", "l'année", "les années"] },
+          ],
           correction:
             "a) Le temps se place en abscisse : l'année. Le SMIC va en ordonnée.\nb) Chaque ligne du tableau donne un point : $(2019 ; 10{,}03)$, $(2020 ; 10{,}15)$, $(2021 ; 10{,}25)$, $(2022 ; 10{,}57)$, $(2023 ; 11{,}27)$, $(2024 ; 11{,}65)$.\nc) Toutes les valeurs sont entre 10 et 12. En partant de 0, les six points seraient écrasés en haut du dessin. L'axe commence à 10, et le premier nombre est écrit en rouge pour le signaler.\nd) Je place chaque point, sans les relier : entre deux relevés, on ne sait rien.\n⭐ Le nuage monte, et plus vite en 2022 et 2023 : le SMIC suit les prix, et l'inflation a été forte ces deux années-là.\nRéponse : six points, de $(2019 ; 10{,}03)$ à $(2024 ; 11{,}65)$, sur un axe vertical qui part de 10.",
           schema: ecranSeulement(
@@ -135,6 +142,10 @@ export const exercicesStatNuageStmg: FicheExercicesData = {
             { x: 12, y: 26 },
             { x: 14, y: 22 },
           ], { noms: ["température (°C)", "gaz (MWh)"] }),
+          reponses: [
+            { question: "a)", attendu: ["décroissant", "décroissante"] },
+            { question: "b)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) De gauche à droite, les points descendent : le nuage est décroissant.\nb) Oui : une règle posée sur le dessin passe tout près des sept points.\nc) « Quand la température extérieure augmente, la consommation de gaz a tendance à diminuer ; les points se rapprochent d'une droite. »\n⛔ Le piège : lire le nuage de droite à gauche, et le dire croissant. On lit toujours dans le sens des $x$ croissants.\nRéponse : a) décroissant ; b) oui ; c) plus il fait doux, moins le gymnase consomme.",
           micros: ["statT_nuage_tendance"],
@@ -142,6 +153,11 @@ export const exercicesStatNuageStmg: FicheExercicesData = {
         {
           enonce:
             "Une préparatrice physique entraîne une coureuse pour un 5 km. Toutes les deux semaines, elle note son temps.\nSemaine : 0, 2, 4, 6, 8. Temps (min) : 30, 29, 27, 26, 25.\na) Calcule $\\bar{x}$, la moyenne des semaines.\nb) Calcule $\\bar{y}$, la moyenne des temps.\nc) Donne les coordonnées du point moyen $G$.",
+          reponses: [
+            { question: "a)", attendu: "4" },
+            { question: "b)", attendu: "27,4" },
+            { question: "c)", attendu: ["(4 ; 27,4)", "G(4 ; 27,4)"], ordre: true },
+          ],
           correction:
             "a) $\\bar{x} = \\dfrac{0 + 2 + 4 + 6 + 8}{5} = \\dfrac{20}{5} = 4$.\nb) $\\bar{y} = \\dfrac{30 + 29 + 27 + 26 + 25}{5} = \\dfrac{137}{5} = 27{,}4$.\nc) $G(4 ; 27{,}4)$.\n⭐ $G$ n'est pas forcément un point du nuage : c'est le centre des points.\n⛔ Le piège : faire la moyenne du premier et du dernier temps, $\\dfrac{30 + 25}{2} = 27{,}5$. La moyenne se calcule sur les cinq valeurs.\nRéponse : $G(4 ; 27{,}4)$.",
           schema: ecranSeulement(
@@ -169,6 +185,11 @@ export const exercicesStatNuageStmg: FicheExercicesData = {
             [2022, 230.7],
             [2023, 260.3],
           ]),
+          reponses: [
+            { question: "a)", attendu: "(2020 ; 203,7)", ordre: true },
+            { question: "b)", attendu: "185,5" },
+            { question: "c)", attendu: ["2021 ; 2022", "entre 2021 et 2022"] },
+          ],
           correction:
             "a) La ligne 2020 donne le point $(2020 ; 203{,}7)$.\nb) $260{,}3 - 74{,}8 = 185{,}5$ millions d'abonnés de plus.\nc) Je calcule chaque hausse : $19$ ; $23{,}8$ ; $21{,}7$ ; $27{,}8$ ; $36{,}6$ ; $18{,}1$ ; $8{,}9$ ; $29{,}6$ millions.\nLa plus faible est $230{,}7 - 221{,}8 = 8{,}9$ millions, entre 2021 et 2022 : Netflix a perdu des abonnés au début de 2022.\nd) « Quand les années passent, le nombre d'abonnés a tendance à augmenter ; les points se rapprochent d'une droite, avec un creux en 2022. »\n⛔ Le piège au b) : répondre 260,3. C'est le nombre d'abonnés en 2023, pas la hausse.\nRéponse : a) $(2020 ; 203{,}7)$ ; b) $185{,}5$ millions ; c) entre 2021 et 2022 ; d) croissante.",
           schema: ecranSeulement(
@@ -201,6 +222,11 @@ export const exercicesStatNuageStmg: FicheExercicesData = {
             { x: 2023, y: 180.8 },
             { x: 2024, y: 181.3 },
           ], { noms: ["année", "entrées (millions)"] }),
+          reponses: [
+            { question: "a)", attendu: "2020" },
+            { question: "b)", attendu: ["sans tendance", "aucune tendance", "ni croissant ni décroissant"] },
+            { question: "c)", attendu: "32" },
+          ],
           correction:
             "a) $P$ est le sixième point en partant de 2015 : l'année 2020. Les salles ont été fermées une grande partie de l'année, à cause de l'épidémie de Covid-19.\nb) De 2015 à 2019, les cinq points restent à la même hauteur, entre 200 et 250 millions : ni hausse ni baisse. Le nuage est sans tendance.\nc) $213{,}3 - 181{,}3 = 32$ millions d'entrées.\n⭐ Un point isolé comme $P$ s'explique par un événement : on le signale avant de décrire la tendance.\n⛔ Le piège : dire que la fréquentation baisse « en tendance » depuis 2015. La chute vient d'une seule année, et le nuage remonte ensuite.\nRéponse : a) 2020, les salles fermées ; b) sans tendance ; c) 32 millions.",
           micros: ["statT_nuage_lire", "statT_nuage_tendance"],
@@ -208,6 +234,9 @@ export const exercicesStatNuageStmg: FicheExercicesData = {
         {
           enonce:
             "Un agent immobilier place les studios de son agence dans un nuage : en abscisse, la surface en m² ; en ordonnée, le loyer mensuel en CENTAINES d'euros. Un studio de 25 m² est loué 600 € par mois. Quel point le représente : $(25 ; 6)$, $(6 ; 25)$, $(25 ; 600)$ ou $(600 ; 25)$ ?",
+          reponses: [
+            { attendu: "(25 ; 6)", ordre: true },
+          ],
           correction:
             "L'abscisse est la surface : $x = 25$.\nL'ordonnée est le loyer en centaines d'euros : 600 €, ce sont 6 centaines, donc $y = 6$.\nLe point est $(25 ; 6)$.\n⛔ Les deux pièges : $(6 ; 25)$ inverse les deux variables ; $(25 ; 600)$ oublie l'unité de l'axe.\nRéponse : $(25 ; 6)$.",
           schema: ecranSeulement(
@@ -225,6 +254,11 @@ export const exercicesStatNuageStmg: FicheExercicesData = {
             { x: 50, y: 175 },
             { x: 60, y: 160 },
           ], { noms: ["âge (ans)", "FC max (battements/min)"] }),
+          reponses: [
+            { question: "a)", attendu: "180" },
+            { question: "b)", attendu: "195" },
+            { question: "d)", attendu: "190" },
+          ],
           correction:
             "a) Le point d'abscisse 40 est sur la ligne 180 : 180 battements par minute.\nb) Le point d'abscisse 30 est au milieu, entre 190 et 200 : 195 battements par minute.\nc) « Quand l'âge augmente, la FC max a tendance à diminuer ; les points se rapprochent d'une droite. »\nd) $220 - 30 = 190$. La mesure, 195, dépasse la formule de $195 - 190 = 5$ battements : la formule donne un ordre de grandeur, pas la valeur exacte de chacun.\n⛔ Le piège au b) : lire 190 ou 200, la ligne voisine. Le point est entre les deux lignes : c'est le nombre du milieu.\nRéponse : a) 180 ; b) 195 ; c) décroissante ; d) 190, soit 5 de moins que la mesure.",
           micros: ["statT_nuage_lire", "statT_nuage_tendance"],
@@ -247,6 +281,9 @@ export const exercicesStatNuageStmg: FicheExercicesData = {
         {
           enonce:
             "Une conseillère commerciale automobile suit la part des voitures neuves 100 % électriques dans les ventes en France (source : AVERE-France).\n2019 : 1,9 % ; 2020 : 6,7 % ; 2021 : 9,8 % ; 2022 : 13,3 % ; 2023 : 16,8 % ; 2024 : 16,9 %.\nOn note $x$ le rang de l'année (2019 a le rang 1) et $y$ la part, en %.\na) Écris les coordonnées des six points.\nb) Calcule les coordonnées du point moyen $G$.\nc) Construis le nuage et place $G$.\nd) Décris la tendance. Quelle année casse le rythme ?",
+          reponses: [
+            { question: "b)", attendu: ["(3,5 ; 10,9)", "G(3,5 ; 10,9)"], ordre: true },
+          ],
           correction:
             "a) $(1 ; 1{,}9)$, $(2 ; 6{,}7)$, $(3 ; 9{,}8)$, $(4 ; 13{,}3)$, $(5 ; 16{,}8)$, $(6 ; 16{,}9)$.\nb) $\\bar{x} = \\dfrac{1 + 2 + 3 + 4 + 5 + 6}{6} = \\dfrac{21}{6} = 3{,}5$.\n$\\bar{y} = \\dfrac{1{,}9 + 6{,}7 + 9{,}8 + 13{,}3 + 16{,}8 + 16{,}9}{6} = \\dfrac{65{,}4}{6} = 10{,}9$.\nDonc $G(3{,}5 ; 10{,}9)$.\nc) Le nuage est dessiné ci-dessous, $G$ en orange.\nd) Les hausses : $4{,}8$ ; $3{,}1$ ; $3{,}5$ ; $3{,}5$ ; $0{,}1$ point.\n« Quand les années passent, la part des voitures électriques a tendance à augmenter ; de 2020 à 2023, les points se rapprochent d'une droite. » En 2024, la hausse n'est que de $0{,}1$ point : le rythme se casse.\n⭐ Avec les rangs, $\\bar{x} = 3{,}5$ tombe au milieu de 2021 et 2022.\n⛔ Le piège au d) : dire que la part baisse en 2024. Elle monte encore, de $0{,}1$ point : c'est la HAUSSE qui ralentit.\nRéponse : b) $G(3{,}5 ; 10{,}9)$ ; d) croissante, cassée en 2024.",
           schema: ecranSeulement(
@@ -274,6 +311,11 @@ export const exercicesStatNuageStmg: FicheExercicesData = {
             { x: 2010, y: 6.9 },
             { x: 2020, y: 7.8 },
           ], { noms: ["année", "population (milliards)"] }),
+          reponses: [
+            { question: "a)", attendu: ["(1985 ; 4,96)", "G(1985 ; 4,96)"], tolerance: 0.01, ordre: true },
+            { question: "c)", attendu: "0,76", tolerance: 0.01 },
+            { question: "d)", attendu: "3,12" },
+          ],
           correction:
             "a) Les huit années vont de 10 en 10 : leur moyenne est le milieu de 1950 et 2020, $\\bar{x} = 1985$.\n$\\bar{y} = \\dfrac{2{,}5 + 3 + 3{,}7 + 4{,}4 + 5{,}3 + 6{,}1 + 6{,}9 + 7{,}8}{8} = \\dfrac{39{,}7}{8} = 4{,}9625$, soit environ $4{,}96$.\nDonc $G(1985 ; 4{,}96)$.\nb) « Quand les années passent, la population a tendance à augmenter ; les points se rapprochent d'une droite. »\nc) En 70 ans, soit 7 décennies : $7{,}8 - 2{,}5 = 5{,}3$ milliards. $5{,}3 \\div 7 \\approx 0{,}76$ milliard par décennie.\nd) $7{,}8 \\div 2{,}5 = 3{,}12$ : la population a plus que triplé.\n⛔ Le piège au c) : diviser par 8, le nombre de points. Entre 8 relevés, il y a 7 intervalles de dix ans.\nRéponse : a) $G(1985 ; 4{,}96)$ ; b) croissante ; c) environ $0{,}76$ milliard ; d) par $3{,}12$.",
           schema: ecranSeulement(
@@ -302,6 +344,11 @@ export const exercicesStatNuageStmg: FicheExercicesData = {
             { x: 6, y: 24 },
             { x: 7, y: 28 },
           ], { noms: ["publicité (k€)", "ventes (milliers)"] }),
+          reponses: [
+            { question: "a)", attendu: ["(4 ; 8)", "M(4 ; 8)"], ordre: true },
+            { question: "c)", attendu: ["non", "faux"] },
+            { question: "d)", attendu: "24 000" },
+          ],
           correction:
             "L'axe vertical commence à 6 et va de 4 en 4.\na) $M$ a pour abscisse 4 et s'arrête au milieu, entre 6 et 10 : $M(4 ; 8)$. Ce mois-là, 4 k€ de publicité et 8 000 articles vendus.\nb) « Quand la dépense publicitaire augmente, les ventes ont tendance à augmenter ; les six autres points se rapprochent d'une droite. »\nc) Non : la chute du mois $M$ vient de la grève, pas de la publicité. On le signale, et on l'écarte de l'étude.\nd) Le point d'abscisse 6 est au milieu, entre 22 et 26 : 24 milliers, soit 24 000 articles.\n⛔ Le piège au a) : lire 8 articles. L'axe compte en milliers.\nRéponse : a) $M(4 ; 8)$ ; b) croissante ; c) non ; d) 24 000 articles.",
           micros: ["statT_nuage_lire", "statT_nuage_tendance"],
@@ -318,6 +365,10 @@ export const exercicesStatNuageStmg: FicheExercicesData = {
             { x: 10, y: 70 },
             { x: 12, y: 70 },
           ], { noms: ["engrais (dizaines de kg/ha)", "rendement (q/ha)"] }),
+          reponses: [
+            { question: "a)", attendu: "12 ; 8 ; 6 ; 3 ; 1 ; 0", ordre: true },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $52 - 40 = 12$ ; $60 - 52 = 8$ ; $66 - 60 = 6$ ; $69 - 66 = 3$ ; $70 - 69 = 1$ ; $70 - 70 = 0$.\nb) Le nuage est croissant : le rendement ne baisse jamais. Mais les hausses fondent, de 12 à 0 : les points dessinent une courbe qui s'aplatit, pas une droite.\nc) Non. À 4, le rendement est 60 ; à 8, il est 69. $60 \\times 2 = 120$, bien loin de 69.\n⭐ Au-delà d'une certaine dose, l'engrais ne sert plus : il coûte, et il pollue les sols.\n⛔ Le piège : dire « croissant, donc presque aligné ». Croissant dit que les points montent ; aligné dit qu'ils montent toujours du même pas.\nRéponse : a) 12, 8, 6, 3, 1, 0 ; b) croissant, mais pas proche d'une droite ; c) non.",
           micros: ["statT_nuage_tendance"],
@@ -325,6 +376,10 @@ export const exercicesStatNuageStmg: FicheExercicesData = {
         {
           enonce:
             "Une responsable des ressources humaines compare les heures de formation suivies par six employés et leurs erreurs de saisie dans le mois.\nHeures : 0, 5, 10, 15, 20, 25. Erreurs : 42, 38, 33, 30, 24, 21.\na) Calcule les coordonnées du point moyen $G$. Arrondis au dixième.\nb) Construis le nuage et place $G$.\nc) Décris la tendance.\nd) En moyenne, combien d'erreurs en moins pour 5 heures de formation de plus ?",
+          reponses: [
+            { question: "a)", attendu: ["(12,5 ; 31,3)", "G(12,5 ; 31,3)"], tolerance: 0.1, ordre: true },
+            { question: "d)", attendu: ["4,2", "-4,2"], tolerance: 0.1 },
+          ],
           correction:
             "a) $\\bar{x} = \\dfrac{0 + 5 + 10 + 15 + 20 + 25}{6} = \\dfrac{75}{6} = 12{,}5$.\n$\\bar{y} = \\dfrac{42 + 38 + 33 + 30 + 24 + 21}{6} = \\dfrac{188}{6} \\approx 31{,}3$.\nDonc $G(12{,}5 ; 31{,}3)$.\nb) Le nuage est dessiné ci-dessous, $G$ en orange.\nc) « Quand les heures de formation augmentent, les erreurs ont tendance à diminuer ; les points se rapprochent d'une droite. »\nd) De 0 à 25 heures, soit 5 pas de 5 heures : $21 - 42 = -21$ erreurs. $-21 \\div 5 = -4{,}2$ : environ 4,2 erreurs de moins.\n⛔ Le piège au a) : arrondir $\\bar{y}$ à 31. L'énoncé demande le dixième : $31{,}3$.\nRéponse : a) $G(12{,}5 ; 31{,}3)$ ; c) décroissante ; d) environ 4,2 erreurs de moins.",
           schema: ecranSeulement(
@@ -350,6 +405,11 @@ export const exercicesStatNuageStmg: FicheExercicesData = {
             [5, 110],
             [6, 116],
           ]),
+          reponses: [
+            { question: "a)", attendu: "(3 ; 96,1)", ordre: true },
+            { question: "b)", attendu: "12,1 ; 8,3 ; 7,2 ; 6,7 ; 6", ordre: true },
+            { question: "d)", attendu: "6,6", tolerance: 0.1 },
+          ],
           correction:
             "a) La ligne « 3 ans » donne le point $(3 ; 96{,}1)$.\nb) $87{,}8 - 75{,}7 = 12{,}1$ ; $96{,}1 - 87{,}8 = 8{,}3$ ; $103{,}3 - 96{,}1 = 7{,}2$ ; $110 - 103{,}3 = 6{,}7$ ; $116 - 110 = 6$ cm.\nc) « Quand l'âge augmente, la taille a tendance à augmenter. » Mais la croissance ralentit : 12,1 cm la deuxième année, 6 cm la sixième. Les six points dessinent une courbe ; seuls les quatre derniers se rapprochent d'une droite.\nd) $116 - 96{,}1 = 19{,}9$ cm en 3 ans. $19{,}9 \\div 3 \\approx 6{,}6$ cm par an.\n⛔ Le piège au c) : regarder seulement que le nuage monte. Il faut aussi regarder si les hausses restent du même ordre.\nRéponse : a) $(3 ; 96{,}1)$ ; b) 12,1 ; 8,3 ; 7,2 ; 6,7 ; 6 ; c) croissante, en courbe ; d) environ 6,6 cm par an.",
           schema: ecranSeulement(
@@ -375,6 +435,11 @@ export const exercicesStatNuageStmg: FicheExercicesData = {
             { x: 5, y: 35 },
             { x: 6, y: 30 },
           ], { noms: ["rang du mois", "ventes (centaines)"] }),
+          reponses: [
+            { question: "a)", attendu: "2 500" },
+            { question: "b)", attendu: "600 %" },
+            { question: "c)", attendu: ["juin ; juillet ; août", "juin, juillet, août", "juin, juillet et août"] },
+          ],
           correction:
             "Mars a le rang 1, avril 2, mai 3, juin 4, juillet 5, août 6.\na) Le point de rang 4 est sur la ligne 25 : 25 centaines, soit 2 500 tubes.\nb) Mars : 5 centaines ; juillet : 35 centaines. $\\dfrac{35 - 5}{5} = \\dfrac{30}{5} = 6$, soit une hausse de 600 %.\nc) 2 000 tubes, ce sont 20 centaines. Les points au-dessus de 20 : juin (25), juillet (35) et août (30).\nd) « De mars à juillet, les ventes ont tendance à augmenter, de plus en plus vite ; elles baissent en août, à la fin de l'été. » Le nuage ne se rapproche pas d'une droite.\n⛔ Le piège au b) : répondre 30 %. 30 est la hausse en centaines ; le taux d'évolution divise cette hausse par la valeur de départ.\nRéponse : a) 2 500 tubes ; b) + 600 % ; c) juin, juillet, août ; d) hausse puis baisse.",
           micros: ["statT_nuage_lire", "statT_nuage_tendance"],
@@ -382,6 +447,9 @@ export const exercicesStatNuageStmg: FicheExercicesData = {
         {
           enonce:
             "Le trésorier d'un club de football compare, pour les huit clubs de sa division, le classement final et l'affluence moyenne au stade, en milliers de spectateurs.\nClassement : 1, 2, 3, 4, 5, 6, 7, 8. Affluence : 42, 35, 38, 25, 29, 18, 22, 15.\na) Construis le nuage de points.\nb) Calcule les coordonnées du point moyen $G$.\nc) Décris la tendance. Les points se rapprochent-ils d'une droite ?",
+          reponses: [
+            { question: "b)", attendu: ["(4,5 ; 28)", "G(4,5 ; 28)"], ordre: true },
+          ],
           correction:
             "a) Huit points, de $(1 ; 42)$ à $(8 ; 15)$ : le nuage est dessiné ci-dessous.\nb) $\\bar{x} = \\dfrac{1 + 2 + 3 + 4 + 5 + 6 + 7 + 8}{8} = \\dfrac{36}{8} = 4{,}5$.\n$\\bar{y} = \\dfrac{42 + 35 + 38 + 25 + 29 + 18 + 22 + 15}{8} = \\dfrac{224}{8} = 28$.\nDonc $G(4{,}5 ; 28)$.\nc) « Quand le rang au classement augmente, l'affluence a tendance à diminuer. » Le premier attire le plus de monde, le dernier le moins.\nLes points montent et descendent en zigzag autour de cette tendance : ils se rapprochent d'une droite, mais de loin.\n⛔ Le piège : lire « décroissante » comme « les meilleurs clubs attirent moins ». Le rang 1 est le meilleur : un rang plus GRAND est un moins bon classement, donc les mieux classés attirent plus.\nRéponse : b) $G(4{,}5 ; 28)$ ; c) décroissante, points assez dispersés.",
           schema: ecranSeulement(
@@ -427,6 +495,11 @@ export const exercicesStatNuageStmg: FicheExercicesData = {
             [2022, "2 h 01 min 09 s", "Kipchoge"],
             [2023, "2 h 00 min 35 s", "Kiptum"],
           ]),
+          reponses: [
+            { question: "a)", attendu: "295 ; 266 ; 239 ; 218 ; 203 ; 177 ; 99 ; 69 ; 35", ordre: true },
+            { question: "c)", attendu: ["(13,2 ; 177,9)", "G(13,2 ; 177,9)"], tolerance: 0.1, ordre: true },
+            { question: "e)", attendu: ["Kipchoge", "2018"] },
+          ],
           correction:
             "a) Je compte les minutes au-delà de 2 h, fois 60, plus les secondes : 295 ; 266 ; 239 ; 218 ; 203 ; 177 ; 99 ; 69 ; 35.\nb) $(3 ; 295)$, $(7 ; 266)$, $(8 ; 239)$, $(11 ; 218)$, $(13 ; 203)$, $(14 ; 177)$, $(18 ; 99)$, $(22 ; 69)$, $(23 ; 35)$.\nc) $\\bar{x} = \\dfrac{3 + 7 + 8 + 11 + 13 + 14 + 18 + 22 + 23}{9} = \\dfrac{119}{9} \\approx 13{,}2$.\n$\\bar{y} = \\dfrac{295 + 266 + 239 + 218 + 203 + 177 + 99 + 69 + 35}{9} = \\dfrac{1601}{9} \\approx 177{,}9$.\nDonc $G(13{,}2 ; 177{,}9)$.\nd) « Quand les années passent, le record a tendance à baisser ; les points se rapprochent d'une droite. »\nEn 20 ans : $295 - 35 = 260$ secondes. $260 \\div 20 = 13$ secondes par an.\ne) Les gains : 29 ; 27 ; 21 ; 15 ; 26 ; 78 ; 30 ; 34 secondes. Le plus grand, $177 - 99 = 78$ secondes, est celui de Kipchoge en 2018.\n⛔ Le piège au a) : écrire 2 h 04 min 55 s comme 204,55. Une minute compte 60 secondes, pas 100.\nRéponse : c) $G(13{,}2 ; 177{,}9)$ ; d) décroissante, 13 s par an ; e) Kipchoge, 2018, 78 s.",
           schema: ecranSeulement(
@@ -457,6 +530,11 @@ export const exercicesStatNuageStmg: FicheExercicesData = {
             { x: 6, y: 18 },
             { x: 7, y: 27 },
           ], { noms: ["rang du mois", "abonnés (milliers)"] }),
+          reponses: [
+            { question: "a)", attendu: "1 ; 2 ; 3 ; 4 ; 6 ; 9", ordre: true },
+            { question: "b)", attendu: ["(4 ; 10,7)", "G(4 ; 10,7)"], tolerance: 0.1, ordre: true },
+            { question: "c)", attendu: "1,5 ; 1,67 ; 1,6 ; 1,5 ; 1,5 ; 1,5", tolerance: 0.01, ordre: true },
+          ],
           correction:
             "a) $3 - 2 = 1$ ; $5 - 3 = 2$ ; $8 - 5 = 3$ ; $12 - 8 = 4$ ; $18 - 12 = 6$ ; $27 - 18 = 9$ milliers.\nb) $\\bar{x} = \\dfrac{1 + 2 + 3 + 4 + 5 + 6 + 7}{7} = 4$ et $\\bar{y} = \\dfrac{2 + 3 + 5 + 8 + 12 + 18 + 27}{7} = \\dfrac{75}{7} \\approx 10{,}7$. Donc $G(4 ; 10{,}7)$.\nc) $3 \\div 2 = 1{,}5$ ; $5 \\div 3 \\approx 1{,}67$ ; $8 \\div 5 = 1{,}6$ ; $12 \\div 8 = 1{,}5$ ; $18 \\div 12 = 1{,}5$ ; $27 \\div 18 = 1{,}5$.\nd) « Quand les mois passent, le nombre d'abonnés augmente, de plus en plus vite. » Les hausses grandissent : le nuage se courbe vers le haut, il ne se rapproche pas d'une droite.\n⭐ Ce sont les QUOTIENTS qui restent presque constants : environ $\\times 1{,}5$ par mois, soit $+ 50$ % par mois. Une telle série se traite par un changement de variable.\n⛔ Le piège : tracer une droite parce que le nuage monte. Monter ne suffit pas : il faut monter du même pas.\nRéponse : a) 1, 2, 3, 4, 6, 9 ; b) $G(4 ; 10{,}7)$ ; c) environ $1{,}5$ ; d) croissante, en courbe.",
           schema: ecranSeulement(
@@ -476,6 +554,11 @@ export const exercicesStatNuageStmg: FicheExercicesData = {
           titre: "Le prix d'une gourde",
           enonce:
             "Une chargée d'études de marché a vendu une gourde à six prix différents, dans six magasins semblables, pendant un mois.\nPrix (€) : 8, 10, 12, 14, 16, 18. Ventes (centaines) : 52, 47, 41, 37, 30, 25.\na) Construis le nuage de points.\nb) Calcule les coordonnées du point moyen $G$. Arrondis au dixième.\nc) Décris la tendance. En moyenne, combien de centaines de gourdes perd-on par euro de plus ?\nd) La recette est prix × nombre de gourdes vendues. Calcule-la pour chaque prix. Quel prix rapporte le plus ?",
+          reponses: [
+            { question: "b)", attendu: ["(13 ; 38,7)", "G(13 ; 38,7)"], tolerance: 0.1, ordre: true },
+            { question: "c)", attendu: ["-2,7", "2,7"], tolerance: 0.1 },
+            { question: "d)", attendu: "14 €" },
+          ],
           correction:
             "a) Six points, de $(8 ; 52)$ à $(18 ; 25)$ : le nuage est dessiné ci-dessous.\nb) $\\bar{x} = \\dfrac{8 + 10 + 12 + 14 + 16 + 18}{6} = \\dfrac{78}{6} = 13$.\n$\\bar{y} = \\dfrac{52 + 47 + 41 + 37 + 30 + 25}{6} = \\dfrac{232}{6} \\approx 38{,}7$. Donc $G(13 ; 38{,}7)$.\nc) « Quand le prix augmente, les ventes ont tendance à diminuer ; les points se rapprochent d'une droite. »\nDe 8 € à 18 €, soit 10 € de plus : $25 - 52 = -27$ centaines. $-27 \\div 10 = -2{,}7$ : environ 2,7 centaines de gourdes perdues par euro.\nd) 52 centaines, ce sont 5 200 gourdes. $8 \\times 5\\,200 = 41\\,600$ € ; $10 \\times 4\\,700 = 47\\,000$ € ; $12 \\times 4\\,100 = 49\\,200$ € ; $14 \\times 3\\,700 = 51\\,800$ € ; $16 \\times 3\\,000 = 48\\,000$ € ; $18 \\times 2\\,500 = 45\\,000$ €.\nLe prix de 14 € rapporte le plus : 51 800 €.\n⛔ Le piège au d) : choisir 8 €, le prix qui vend le plus de gourdes. Vendre beaucoup n'est pas gagner le plus.\nRéponse : b) $G(13 ; 38{,}7)$ ; c) décroissante, $-2{,}7$ centaines par euro ; d) 14 €.",
           schema: ecranSeulement(
@@ -504,6 +587,11 @@ export const exercicesStatNuageStmg: FicheExercicesData = {
             ["7", 191, 45],
             ["8", 195, 46],
           ]),
+          reponses: [
+            { question: "b)", attendu: ["(181,4 ; 42,1)", "G(181,4 ; 42,1)"], tolerance: 0.1, ordre: true },
+            { question: "d)", attendu: "4" },
+            { question: "e)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) Chaque joueuse donne un point (taille ; pointure), de $(168 ; 38)$ à $(195 ; 46)$ : le nuage est dessiné ci-dessous.\nb) $\\bar{x} = \\dfrac{168 + 172 + 176 + 180 + 183 + 186 + 191 + 195}{8} = \\dfrac{1451}{8} \\approx 181{,}4$.\n$\\bar{y} = \\dfrac{38 + 40 + 40 + 42 + 43 + 43 + 45 + 46}{8} = \\dfrac{337}{8} \\approx 42{,}1$. Donc $G(181{,}4 ; 42{,}1)$.\nc) « Quand la taille augmente, la pointure a tendance à augmenter ; les points se rapprochent d'une droite. »\nd) Au-dessus de $42{,}1$ : 43, 43, 45 et 46. Cela fait 4 joueuses.\ne) Non. La tendance donne un ordre de grandeur, vers 42, mais deux joueuses de même taille peuvent avoir des pieds différents. On lui demande sa pointure.\n⛔ Le piège au a) : mettre la pointure en abscisse. L'énoncé fixe l'ordre : (taille ; pointure).\nRéponse : b) $G(181{,}4 ; 42{,}1)$ ; c) croissante ; d) 4 joueuses ; e) non.",
           schema: ecranSeulement(

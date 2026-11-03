@@ -81,6 +81,10 @@ export const exercicesStatAjustementStmg: FicheExercicesData = {
             { x: 6, y: 30 },
             { x: 7, y: 32 },
           ], { noms: ["charge (t)", "gazole (L/100 km)"] }),
+          reponses: [
+            { question: "b)", attendu: "2 ; 1 ; 2 ; 2 ; 1 ; 2", ordre: true },
+            { question: "c)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) « Quand la charge augmente, la consommation a tendance à augmenter. »\nb) $24 - 22 = 2$ ; $25 - 24 = 1$ ; $27 - 25 = 2$ ; $29 - 27 = 2$ ; $30 - 29 = 1$ ; $32 - 30 = 2$.\nc) Oui : les hausses restent du même ordre, 1 ou 2 litres par tonne. Les points se rapprochent d'une droite, un ajustement affine est pertinent.\n⛔ Le piège : exiger des hausses toutes égales. Des données réelles ne sont jamais parfaitement alignées ; il suffit qu'elles restent du même ordre.\nRéponse : a) croissante ; b) 2, 1, 2, 2, 1, 2 ; c) oui.",
           micros: ["statT_ajust_pertinence"],
@@ -96,6 +100,10 @@ export const exercicesStatAjustementStmg: FicheExercicesData = {
             { x: 5, y: 21 },
             { x: 6, y: 34 },
           ], { noms: ["rang du mois", "tentatives (centaines)"] }),
+          reponses: [
+            { question: "a)", attendu: "2 ; 3 ; 5 ; 8 ; 13", ordre: true },
+            { question: "b)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $5 - 3 = 2$ ; $8 - 5 = 3$ ; $13 - 8 = 5$ ; $21 - 13 = 8$ ; $34 - 21 = 13$.\nb) Non. Les hausses grandissent à chaque mois, de 2 à 13 : le nuage se courbe vers le haut. Une droite passerait au-dessus des points du milieu et sous les points des bords.\n⛔ Le piège : dire « le nuage monte, donc une droite convient ». Monter ne suffit pas : il faut monter du même pas.\nRéponse : a) 2, 3, 5, 8, 13 ; b) non, le nuage se courbe.",
           micros: ["statT_ajust_pertinence"],
@@ -112,6 +120,11 @@ export const exercicesStatAjustementStmg: FicheExercicesData = {
             { x: 24, y: 26 },
             { x: 26, y: 29 },
           ], { noms: ["température (°C)", "nuitées (centaines)"], droites: [[1.4, -7.6], [1.4, -3]] }),
+          reponses: [
+            { question: "a)", attendu: ["(20 ; 20,43)", "G(20 ; 20,43)"], tolerance: 0.01, ordre: true },
+            { question: "b)", attendu: ["d1", "d_1", "d₁"] },
+            { question: "c)", attendu: ["d1", "d_1", "d₁"] },
+          ],
           correction:
             "a) $\\bar{x} = \\dfrac{14 + 16 + 18 + 20 + 22 + 24 + 26}{7} = \\dfrac{140}{7} = 20$ et $\\bar{y} = \\dfrac{12 + 15 + 17 + 21 + 23 + 26 + 29}{7} = \\dfrac{143}{7} \\approx 20{,}43$. Donc $G(20 ; 20{,}43)$.\nb) Pour $x = 20$ : $d_1$ donne $1{,}4 \\times 20 - 7{,}6 = 20{,}4$ ; $d_2$ donne $1{,}4 \\times 20 - 3 = 25$. $d_1$ passe tout près de $G$, $d_2$ bien au-dessus.\nc) $d_1$ : elle passe par $G$, et les points se répartissent de part et d'autre. $d_2$ a la bonne pente, mais tous les points sont en dessous.\n⛔ Le piège : choisir une droite parce qu'elle a la bonne direction. Elle doit aussi passer au milieu des points, c'est-à-dire par $G$.\nRéponse : a) $G(20 ; 20{,}43)$ ; b) $d_1$ ; c) $d_1$.",
           micros: ["statT_ajust_au_juge"],
@@ -119,6 +132,11 @@ export const exercicesStatAjustementStmg: FicheExercicesData = {
         {
           enonce:
             "Le gérant d'une laverie trace au jugé une droite d'ajustement du nombre de lavages par jour, en dizaines, selon le rang de la semaine depuis l'ouverture. Sa droite passe par $A(2 ; 30)$ et $B(8 ; 60)$.\na) Calcule son coefficient directeur $a$.\nb) Calcule son ordonnée à l'origine $b$.\nc) Écris l'équation de la droite.",
+          reponses: [
+            { question: "a)", attendu: "5" },
+            { question: "b)", attendu: "20" },
+            { question: "c)", attendu: "y = 5x + 20" },
+          ],
           correction:
             "a) $a = \\dfrac{60 - 30}{8 - 2} = \\dfrac{30}{6} = 5$.\nb) La droite passe par $A$ : $30 = 5 \\times 2 + b$, donc $b = 30 - 10 = 20$.\nc) $y = 5x + 20$.\nContrôle avec $B$ : $5 \\times 8 + 20 = 60$. C'est bon.\n⭐ Chaque semaine, la laverie gagne environ 5 dizaines, soit 50 lavages par jour.\n⛔ Le piège au a) : calculer $\\dfrac{8 - 2}{60 - 30}$. Le coefficient directeur, c'est la hausse des $y$ divisée par la hausse des $x$.\nRéponse : $y = 5x + 20$.",
           schema: ecranSeulement(
@@ -141,6 +159,9 @@ export const exercicesStatAjustementStmg: FicheExercicesData = {
             { x: 7, y: 9.6 },
             { x: 8, y: 8.4 },
           ], { noms: ["âge (années)", "valeur (k€)"], droites: [[-0.8, 15]] }),
+          reponses: [
+            { question: "a)", attendu: ["10,2", "10 200 €"] },
+          ],
           correction:
             "a) Je remplace $x$ par 6 : $y = -0{,}8 \\times 6 + 15 = -4{,}8 + 15 = 10{,}2$. Environ 10,2 milliers d'euros, soit 10 200 €.\nb) Pour $x = 0$, $y = 15$ : la valeur estimée d'une citadine neuve, 15 000 €.\nc) Chaque année de plus, $y$ baisse de $0{,}8$ : la voiture perd environ 800 € par an.\n⛔ Le piège au a) : oublier le signe moins et trouver $0{,}8 \\times 6 + 15 = 19{,}8$. Une voiture qui vieillit ne prend pas de valeur.\nRéponse : a) environ 10 200 € ; b) la valeur neuve ; c) une perte de 800 € par an.",
           schema: ecranSeulement(
@@ -151,6 +172,11 @@ export const exercicesStatAjustementStmg: FicheExercicesData = {
         {
           enonce:
             "Un directeur d'hôtel modélise le chiffre d'affaires mensuel, en milliers d'euros, par $y = 4x + 25$, où $x$ est le rang du mois (janvier a le rang 1).\na) Quel chiffre d'affaires le modèle donne-t-il pour le mois de rang 3 ?\nb) Pour quel rang le modèle donne-t-il 65 milliers d'euros ?\nc) À quel mois correspond ce rang ?",
+          reponses: [
+            { question: "a)", attendu: "37" },
+            { question: "b)", attendu: "10" },
+            { question: "c)", attendu: "octobre" },
+          ],
           correction:
             "a) $y = 4 \\times 3 + 25 = 12 + 25 = 37$ milliers d'euros.\nb) Je résous $4x + 25 = 65$.\n$4x = 65 - 25 = 40$, donc $x = 40 \\div 4 = 10$.\nc) Le rang 10, c'est octobre.\n⛔ Le piège au b) : remplacer $x$ par 65 et trouver $4 \\times 65 + 25 = 285$. Ici, c'est $y$ qui est connu : on cherche $x$.\nRéponse : a) 37 k€ ; b) le rang 10 ; c) octobre.",
           schema: ecranSeulement(
@@ -161,6 +187,11 @@ export const exercicesStatAjustementStmg: FicheExercicesData = {
         {
           enonce:
             "Une diététicienne suit cinq patients pendant deux mois : $x$ est leur nombre moyen de pas par jour, en milliers ; $y$ leur perte de poids, en kg.\nPas : 3, 4, 6, 8, 9. Perte : 1, 2, 3, 4, 5.\nDeux droites sont proposées : $d_1$ : $y = 0{,}6x - 0{,}6$ et $d_2$ : $y = 0{,}5x + 0{,}5$.\na) Calcule les coordonnées du point moyen $G$.\nb) Quelle droite passe par $G$ ?\nc) Laquelle choisis-tu comme droite d'ajustement au jugé ?",
+          reponses: [
+            { question: "a)", attendu: ["(6 ; 3)", "G(6 ; 3)"], ordre: true },
+            { question: "b)", attendu: ["d1", "d_1", "d₁"] },
+            { question: "c)", attendu: ["d1", "d_1", "d₁"] },
+          ],
           correction:
             "a) $\\bar{x} = \\dfrac{3 + 4 + 6 + 8 + 9}{5} = \\dfrac{30}{5} = 6$ et $\\bar{y} = \\dfrac{1 + 2 + 3 + 4 + 5}{5} = \\dfrac{15}{5} = 3$. Donc $G(6 ; 3)$.\nb) Pour $x = 6$ : $d_1$ donne $0{,}6 \\times 6 - 0{,}6 = 3$, c'est $G$. $d_2$ donne $0{,}5 \\times 6 + 0{,}5 = 3{,}5$ : elle passe au-dessus de $G$.\nc) $d_1$, qui passe par $G$.\n⛔ Le piège : tester la droite avec un seul point du nuage. Le point qui résume tout le nuage, c'est $G$.\nRéponse : a) $G(6 ; 3)$ ; b) $d_1$ ; c) $d_1$.",
           schema: ecranSeulement(
@@ -185,6 +216,9 @@ export const exercicesStatAjustementStmg: FicheExercicesData = {
             { x: 6, y: 41 },
             { x: 8, y: 52 },
           ], { noms: ["durée (h)", "facture (dizaines d'€)"], droites: [[5, 10]] }),
+          reponses: [
+            { question: "b)", attendu: "y = 5x + 10" },
+          ],
           correction:
             "a) La droite coupe l'axe vertical en $(0 ; 10)$ et passe par le nœud $(4 ; 30)$.\nb) $a = \\dfrac{30 - 10}{4 - 0} = \\dfrac{20}{4} = 5$. La droite coupe l'axe vertical à 10 : $b = 10$. Donc $y = 5x + 10$.\nc) $b = 10$ dizaines : 100 € facturés même pour un chantier très court, le déplacement. $a = 5$ dizaines : 50 € par heure de travail.\n⛔ Le piège : lire deux points du NUAGE au lieu de deux points de la DROITE. Les points rouges ne sont pas sur la droite.\nRéponse : a) $(0 ; 10)$ et $(4 ; 30)$ ; b) $y = 5x + 10$ ; c) 100 € de déplacement, 50 € de l'heure.",
           micros: ["statT_ajust_equation"],
@@ -216,6 +250,13 @@ export const exercicesStatAjustementStmg: FicheExercicesData = {
             [2010, 389.9],
             [2020, 414.2],
           ]),
+          reponses: [
+            { question: "a)", attendu: "8,8 ; 13,1 ; 15,6 ; 15,3 ; 20,2 ; 24,3", ordre: true },
+            { question: "b)", attendu: ["(3 ; 358,5)", "G(3 ; 358,5)"], tolerance: 0.1, ordre: true },
+            { question: "c)", attendu: "y = 16,2x + 316,9", tolerance: 0.1 },
+            { question: "d)", attendu: ["non", "faux"] },
+            { question: "e)", attendu: "y = 16,2x + 309,9", tolerance: 0.1 },
+          ],
           correction:
             "a) $8{,}8$ ; $13{,}1$ ; $15{,}6$ ; $15{,}3$ ; $20{,}2$ ; $24{,}3$ ppm. Les hausses grandissent : le nuage se courbe un peu. Une droite reste une approximation acceptable sur ces 60 ans, mais elle va s'écarter des points récents.\nb) $\\bar{x} = \\dfrac{0 + 1 + 2 + 3 + 4 + 5 + 6}{7} = 3$ et $\\bar{y} = \\dfrac{2509{,}6}{7} \\approx 358{,}5$. Donc $G(3 ; 358{,}5)$.\nc) $a = \\dfrac{414{,}2 - 316{,}9}{6 - 0} = \\dfrac{97{,}3}{6} \\approx 16{,}2$. Pour $x = 0$, $y = 316{,}9$ : $b = 316{,}9$. Donc $d$ : $y = 16{,}2x + 316{,}9$.\nd) Pour $x = 3$ : $16{,}2 \\times 3 + 316{,}9 = 365{,}5$. Or $\\bar{y} \\approx 358{,}5$ : $d$ passe 7 ppm au-dessus de $G$. Non.\ne) $b = 358{,}5 - 16{,}2 \\times 3 = 358{,}5 - 48{,}6 = 309{,}9$. Donc $d'$ : $y = 16{,}2x + 309{,}9$.\nPour 2020 ($x = 6$) : $16{,}2 \\times 6 + 309{,}9 = 407{,}1$ ppm, contre 414,2 mesurés : 7,1 ppm d'écart. Le CO₂ monte de plus en plus vite.\n⛔ Le piège au c) : croire qu'une droite qui passe par deux points du nuage est une bonne droite d'ajustement. Elle doit passer au milieu de TOUS les points, donc par $G$.\nRéponse : b) $G(3 ; 358{,}5)$ ; c) $y = 16{,}2x + 316{,}9$ ; d) non ; e) $y = 16{,}2x + 309{,}9$, soit $407{,}1$ ppm en 2020.",
           schema: ecranSeulement(
@@ -243,6 +284,11 @@ export const exercicesStatAjustementStmg: FicheExercicesData = {
             { x: 7, y: 13 },
             { x: 8, y: 15 },
           ], { noms: ["ventes (centaines)", "appels (dizaines)"] }),
+          reponses: [
+            { question: "b)", attendu: ["(5 ; 10)", "G(5 ; 10)"], ordre: true },
+            { question: "c)", attendu: "y = 1,7x + 1,5" },
+            { question: "d)", attendu: "168", tolerance: 1 },
+          ],
           correction:
             "a) $S(5 ; 19)$ : 190 appels, bien plus que ses voisins. Ces appels viennent de la panne, pas des ventes : on écarte $S$.\nb) $\\bar{x} = \\dfrac{2 + 3 + 4 + 6 + 7 + 8}{6} = \\dfrac{30}{6} = 5$ et $\\bar{y} = \\dfrac{5 + 7 + 8 + 12 + 13 + 15}{6} = \\dfrac{60}{6} = 10$. Donc $G(5 ; 10)$.\nc) $b = 10 - 1{,}7 \\times 5 = 10 - 8{,}5 = 1{,}5$. Donc $y = 1{,}7x + 1{,}5$.\nd) 900 appareils, ce sont 9 centaines : $y = 1{,}7 \\times 9 + 1{,}5 = 16{,}8$ dizaines, soit environ 168 appels.\n⛔ Le piège au b) : garder $S$ dans la moyenne. On trouverait $\\bar{y} \\approx 11{,}3$ : la panne tirerait toute la droite vers le haut.\nRéponse : a) $S(5 ; 19)$, on l'écarte ; b) $G(5 ; 10)$ ; c) $y = 1{,}7x + 1{,}5$ ; d) environ 168 appels.",
           micros: ["statT_ajust_pertinence", "statT_ajust_au_juge", "statT_ajust_calculer"],
@@ -250,6 +296,10 @@ export const exercicesStatAjustementStmg: FicheExercicesData = {
         {
           enonce:
             "Une agente de voyages compare la distance d'un trajet en train, en centaines de km, et le prix moyen du billet, en euros.\nDistance : 2, 3, 4, 5, 6, 7, 8. Prix : 35, 44, 52, 62, 70, 81, 90.\nElle trace au jugé la droite $d$ : $y = 9x + 17$.\na) Calcule les coordonnées du point moyen $G$. La droite $d$ passe-t-elle par $G$ ?\nb) Combien de points sont au-dessus de $d$, en dessous, ou dessus ?\nc) Avec $d$, estime le prix d'un trajet de 550 km.\nd) Que représente le nombre 17 ?",
+          reponses: [
+            { question: "a)", attendu: ["(5 ; 62)", "G(5 ; 62)"], ordre: true },
+            { question: "c)", attendu: "66,5 €" },
+          ],
           correction:
             "a) $\\bar{x} = \\dfrac{2 + 3 + 4 + 5 + 6 + 7 + 8}{7} = \\dfrac{35}{7} = 5$ et $\\bar{y} = \\dfrac{35 + 44 + 52 + 62 + 70 + 81 + 90}{7} = \\dfrac{434}{7} = 62$. Donc $G(5 ; 62)$.\nPour $x = 5$ : $9 \\times 5 + 17 = 62$. Oui, $d$ passe par $G$.\nb) La droite donne 35, 44, 53, 62, 71, 80 et 89. Je compare aux prix : 3 points sur la droite, 2 en dessous (52 et 70), 2 au-dessus (81 et 90). La droite est bien équilibrée.\nc) 550 km, c'est $x = 5{,}5$ : $y = 9 \\times 5{,}5 + 17 = 66{,}5$ €.\nd) Pour $x = 0$, $y = 17$ : la part du prix qui ne dépend pas de la distance, environ 17 €.\n⛔ Le piège au c) : remplacer $x$ par 550. L'axe compte en centaines de km.\nRéponse : a) $G(5 ; 62)$, oui ; b) 2 au-dessus, 2 en dessous, 3 dessus ; c) 66,5 € ; d) une part fixe de 17 €.",
           schema: ecranSeulement(
@@ -276,6 +326,11 @@ export const exercicesStatAjustementStmg: FicheExercicesData = {
             { x: 5, y: 19 },
             { x: 6, y: 22 },
           ], { noms: ["factures (centaines)", "saisie (h)"], droites: [[2.8, 5.2], [2, 9]] }),
+          reponses: [
+            { question: "a)", attendu: ["(3,5 ; 15)", "G(3,5 ; 15)"], ordre: true },
+            { question: "b)", attendu: ["Léa", "celle de Léa", "d1", "d_1", "d₁"] },
+            { question: "d)", attendu: "17,8" },
+          ],
           correction:
             "a) $\\bar{x} = \\dfrac{1 + 2 + 3 + 4 + 5 + 6}{6} = 3{,}5$ et $\\bar{y} = \\dfrac{8 + 11 + 13 + 17 + 19 + 22}{6} = \\dfrac{90}{6} = 15$. Donc $G(3{,}5 ; 15)$.\nb) Léa : $2{,}8 \\times 3{,}5 + 5{,}2 = 9{,}8 + 5{,}2 = 15$, c'est $G$. Tom : $2 \\times 3{,}5 + 9 = 16$, il passe au-dessus.\nc) Pour $x = 1$, Tom donne $2 \\times 1 + 9 = 11$ heures au lieu de 8 ; pour $x = 6$, $2 \\times 6 + 9 = 21$ au lieu de 22. Sa droite est trop haute à gauche, trop basse à droite : elle ne monte pas assez vite.\nd) $x = 4{,}5$ : $y = 2{,}8 \\times 4{,}5 + 5{,}2 = 12{,}6 + 5{,}2 = 17{,}8$ heures.\n⛔ Le piège : juger une droite sur un seul point. On regarde $G$, puis les deux bouts du nuage.\nRéponse : a) $G(3{,}5 ; 15)$ ; b) celle de Léa ; c) pente trop faible ; d) 17,8 heures.",
           micros: ["statT_ajust_au_juge", "statT_ajust_calculer"],
@@ -283,6 +338,11 @@ export const exercicesStatAjustementStmg: FicheExercicesData = {
         {
           enonce:
             "Un brasseur ajuste ses ventes de bière, en hectolitres par semaine, selon la température maximale moyenne de la semaine, en °C. Sa droite d'ajustement passe par le point moyen $G(22 ; 45)$ et par le point $P(30 ; 61)$.\na) Trouve l'équation de la droite.\nb) Quelles ventes prévoit-elle pour une semaine à 26 °C ?\nc) À partir de quelle température prévoit-elle 40 hectolitres ?",
+          reponses: [
+            { question: "a)", attendu: "y = 2x + 1" },
+            { question: "b)", attendu: "53" },
+            { question: "c)", attendu: "19,5" },
+          ],
           correction:
             "a) $a = \\dfrac{61 - 45}{30 - 22} = \\dfrac{16}{8} = 2$. La droite passe par $G$ : $45 = 2 \\times 22 + b$, donc $b = 45 - 44 = 1$. Donc $y = 2x + 1$.\nb) $y = 2 \\times 26 + 1 = 53$ hectolitres.\nc) Je résous $2x + 1 = 40$ : $2x = 39$, donc $x = 39 \\div 2 = 19{,}5$ °C.\n⛔ Le piège au a) : calculer $b$ avec $x$ et $y$ inversés, $22 = 2 \\times 45 + b$. Je remplace $x$ par l'abscisse, $y$ par l'ordonnée.\nRéponse : a) $y = 2x + 1$ ; b) 53 hL ; c) 19,5 °C.",
           schema: ecranSeulement(
@@ -293,6 +353,11 @@ export const exercicesStatAjustementStmg: FicheExercicesData = {
         {
           enonce:
             "La gérante d'un self-stockage loue des box de rangement. Elle a ajusté le loyer mensuel $y$, en euros, selon la surface $x$ du box, en m² : $y = 6{,}5x + 20$.\na) Quel loyer le modèle donne-t-il pour un box de 12 m² ?\nb) Un client dispose de 150 € par mois. Quelle surface peut-il louer ?\nc) Un concurrent loue 15 m² pour 100 €. Est-il moins cher que le modèle ?",
+          reponses: [
+            { question: "a)", attendu: "98 €" },
+            { question: "b)", attendu: "20" },
+            { question: "c)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) $y = 6{,}5 \\times 12 + 20 = 78 + 20 = 98$ €.\nb) Je résous $6{,}5x + 20 = 150$ : $6{,}5x = 130$, donc $x = 130 \\div 6{,}5 = 20$ m².\nc) Pour 15 m², le modèle donne $6{,}5 \\times 15 + 20 = 117{,}5$ €. Le concurrent, à 100 €, est moins cher de $117{,}5 - 100 = 17{,}5$ €.\n⛔ Le piège au b) : diviser 150 par 6,5 sans retirer d'abord les 20 € fixes.\nRéponse : a) 98 € ; b) 20 m² ; c) oui, de 17,5 €.",
           schema: ecranSeulement(
@@ -313,6 +378,11 @@ export const exercicesStatAjustementStmg: FicheExercicesData = {
             { x: 7, y: 44 },
             { x: 8, y: 41 },
           ], { noms: ["rang de l'année", "CO₂ (kt)"], droites: [[-5, 80]] }),
+          reponses: [
+            { question: "a)", attendu: "y = -5x + 80" },
+            { question: "b)", attendu: "20" },
+            { question: "c)", attendu: "7" },
+          ],
           correction:
             "a) La droite passe par $(0 ; 80)$ et par $(10 ; 30)$.\n$a = \\dfrac{30 - 80}{10 - 0} = \\dfrac{-50}{10} = -5$ et $b = 80$. Donc $y = -5x + 80$.\nb) $y = -5 \\times 12 + 80 = -60 + 80 = 20$ kilotonnes.\nc) Je résous $-5x + 80 = 50$ : $-5x = -30$, donc $x = 6$. Au-delà du rang 6, la droite passe sous 50 : à partir du rang 7.\n⛔ Le piège au a) : oublier le signe moins. La droite descend : son coefficient directeur est négatif.\nRéponse : a) $y = -5x + 80$ ; b) 20 kt ; c) à partir du rang 7.",
           micros: ["statT_ajust_equation", "statT_ajust_calculer"],
@@ -320,6 +390,11 @@ export const exercicesStatAjustementStmg: FicheExercicesData = {
         {
           enonce:
             "Une conseillère en rénovation énergétique a relevé, sur des maisons semblables isolées de 0 à 30 cm, la consommation de chauffage en kWh par mois. Elle l'ajuste par $y = -12x + 450$, où $x$ est l'épaisseur d'isolant en cm.\na) Que donne le modèle pour 20 cm d'isolant ?\nb) Quelle épaisseur faut-il pour descendre sous 300 kWh par mois ?\nc) Que donne le modèle pour 40 cm ? Qu'en penses-tu ?",
+          reponses: [
+            { question: "a)", attendu: "210" },
+            { question: "b)", attendu: "12,5" },
+            { question: "c)", attendu: "-30" },
+          ],
           correction:
             "a) $y = -12 \\times 20 + 450 = -240 + 450 = 210$ kWh par mois.\nb) Je résous $-12x + 450 = 300$ : $-12x = -150$, donc $x = 12{,}5$. Il faut plus de 12,5 cm d'isolant.\nc) $y = -12 \\times 40 + 450 = -480 + 450 = -30$ kWh : une consommation négative, c'est absurde. L'ajustement n'a été fait qu'entre 0 et 30 cm : au-delà, la droite ne décrit plus rien.\n⛔ Le piège au c) : croire le modèle partout. Une droite d'ajustement ne vaut que là où on a des mesures.\nRéponse : a) 210 kWh ; b) plus de 12,5 cm ; c) $-30$ kWh, absurde.",
           schema: ecranSeulement(
@@ -354,6 +429,12 @@ export const exercicesStatAjustementStmg: FicheExercicesData = {
             [28, 95],
             [30, 100],
           ]),
+          reponses: [
+            { question: "b)", attendu: ["(22,7 ; 81,7)", "G(22,7 ; 81,7)"], tolerance: 0.1, ordre: true },
+            { question: "c)", attendu: "y = 2,5x + 25" },
+            { question: "d)", attendu: "90" },
+            { question: "e)", attendu: "28" },
+          ],
           correction:
             "a) Sept points, de $(15 ; 62)$ à $(30 ; 100)$ : ils montent et se rapprochent d'une droite. Oui, un ajustement affine est pertinent.\nb) $\\bar{x} = \\dfrac{15 + 18 + 20 + 23 + 25 + 28 + 30}{7} = \\dfrac{159}{7} \\approx 22{,}7$ et $\\bar{y} = \\dfrac{62 + 70 + 74 + 83 + 88 + 95 + 100}{7} = \\dfrac{572}{7} \\approx 81{,}7$. Donc $G(22{,}7 ; 81{,}7)$.\nc) $b = 81{,}7 - 2{,}5 \\times 22{,}7 = 81{,}7 - 56{,}75 = 24{,}95$, soit environ 25. Donc $y = 2{,}5x + 25$.\nd) $y = 2{,}5 \\times 26 + 25 = 65 + 25 = 90$ repas.\ne) Je résous $2{,}5x + 25 = 95$ : $2{,}5x = 70$, donc $x = 70 \\div 2{,}5 = 28$ °C.\n⭐ Le coefficient $2{,}5$ se lit : un degré de plus, deux à trois repas de plus.\n⛔ Le piège au c) : arrondir $\\bar{x}$ à 23 avant de calculer $b$. On trouverait $81{,}7 - 57{,}5 = 24{,}2$, puis 24 : l'arrondi se fait à la fin.\nRéponse : b) $G(22{,}7 ; 81{,}7)$ ; c) $y = 2{,}5x + 25$ ; d) 90 repas ; e) 28 °C.",
           schema: ecranSeulement(
@@ -381,6 +462,12 @@ export const exercicesStatAjustementStmg: FicheExercicesData = {
             [30, 1180],
             [40, 1610],
           ]),
+          reponses: [
+            { question: "a)", attendu: ["(23,3 ; 938,3)", "G(23,3 ; 938,3)"], tolerance: 0.1, ordre: true },
+            { question: "b)", attendu: "y = 40x + 5" },
+            { question: "d)", attendu: "1 405" },
+            { question: "e)", attendu: "32" },
+          ],
           correction:
             "a) $\\bar{x} = \\dfrac{10 + 15 + 20 + 25 + 30 + 40}{6} = \\dfrac{140}{6} \\approx 23{,}3$ et $\\bar{y} = \\dfrac{420 + 610 + 800 + 1010 + 1180 + 1610}{6} = \\dfrac{5630}{6} \\approx 938{,}3$. Donc $G(23{,}3 ; 938{,}3)$.\nb) $b = \\bar{y} - 40 \\times \\bar{x} = \\dfrac{5630}{6} - 40 \\times \\dfrac{140}{6} = \\dfrac{5630 - 5600}{6} = 5$. Donc $y = 40x + 5$.\nc) Un salarié de plus, c'est environ 40 k€ de plus par an : le coût moyen d'un salarié pour l'entreprise.\nd) $y = 40 \\times 35 + 5 = 1405$ k€.\ne) Je résous $40x + 5 = 1300$ : $40x = 1295$, donc $x = 1295 \\div 40 = 32{,}375$. Au plus 32 salariés.\n⛔ Le piège au b) : calculer $b$ avec les valeurs arrondies, $938{,}3 - 40 \\times 23{,}3 = 6{,}3$. Avec les fractions exactes, on trouve 5.\n⛔ Le piège au e) : arrondir 32,375 à 33. Avec 33 salariés, on dépasse le budget.\nRéponse : a) $G(23{,}3 ; 938{,}3)$ ; b) $y = 40x + 5$ ; d) 1 405 k€ ; e) 32 salariés.",
           schema: ecranSeulement(
@@ -407,6 +494,13 @@ export const exercicesStatAjustementStmg: FicheExercicesData = {
             { x: 12, y: 23 },
             { x: 14, y: 25 },
           ], { noms: ["artistes", "spectateurs (milliers)"] }),
+          reponses: [
+            { question: "a)", attendu: ["(9 ; 17,2)", "G(9 ; 17,2)"], tolerance: 0.1, ordre: true },
+            { question: "b)", attendu: "y = 1,6x + 2,6" },
+            { question: "c)", attendu: ["oui", "vrai"] },
+            { question: "d)", attendu: ["28,2", "28 200"] },
+            { question: "e)", attendu: "11" },
+          ],
           correction:
             "a) $\\bar{x} = \\dfrac{4 + 6 + 8 + 10 + 12 + 14}{6} = \\dfrac{54}{6} = 9$ et $\\bar{y} = \\dfrac{9 + 12 + 16 + 18 + 23 + 25}{6} = \\dfrac{103}{6} \\approx 17{,}2$. Donc $G(9 ; 17{,}2)$.\nb) Elle passe par $(4 ; 9)$ et $(14 ; 25)$ : $a = \\dfrac{25 - 9}{14 - 4} = \\dfrac{16}{10} = 1{,}6$ et $b = 9 - 1{,}6 \\times 4 = 9 - 6{,}4 = 2{,}6$. Donc $y = 1{,}6x + 2{,}6$.\nc) Pour $x = 9$ : $1{,}6 \\times 9 + 2{,}6 = 17$, à $0{,}2$ de $\\bar{y}$. Oui, elle passe tout près de $G$ : elle convient au jugé.\nd) $y = 1{,}6 \\times 16 + 2{,}6 = 28{,}2$ milliers, soit environ 28 200 spectateurs.\ne) Je résous $1{,}6x + 2{,}6 = 20$ : $1{,}6x = 17{,}4$, donc $x = 17{,}4 \\div 1{,}6 = 10{,}875$. Il faut programmer 11 artistes.\n⛔ Le piège au e) : arrondir 10,875 à 10. Avec 10 artistes, la droite prévoit moins de 20 000 spectateurs.\nRéponse : a) $G(9 ; 17{,}2)$ ; b) $y = 1{,}6x + 2{,}6$ ; c) oui ; d) environ 28 200 ; e) 11 artistes.",
           schema: ecranSeulement(
@@ -432,6 +526,12 @@ export const exercicesStatAjustementStmg: FicheExercicesData = {
             [110, 21],
             [130, 26],
           ]),
+          reponses: [
+            { question: "a)", attendu: "2 ; 3 ; 4 ; 5", ordre: true },
+            { question: "b)", attendu: "y = 0,175x + 3,25" },
+            { question: "c)", attendu: "19" },
+            { question: "d)", attendu: ["(90 ; 18)", "G(90 ; 18)"], ordre: true },
+          ],
           correction:
             "a) $14 - 12 = 2$ ; $17 - 14 = 3$ ; $21 - 17 = 4$ ; $26 - 21 = 5$ kWh.\nb) $a = \\dfrac{26 - 12}{130 - 50} = \\dfrac{14}{80} = 0{,}175$ et $b = 12 - 0{,}175 \\times 50 = 12 - 8{,}75 = 3{,}25$. Donc $y = 0{,}175x + 3{,}25$.\nc) $y = 0{,}175 \\times 90 + 3{,}25 = 15{,}75 + 3{,}25 = 19$ kWh, contre 17 mesurés : la droite surestime de 2 kWh.\nd) $\\bar{x} = \\dfrac{50 + 70 + 90 + 110 + 130}{5} = 90$ et $\\bar{y} = \\dfrac{12 + 14 + 17 + 21 + 26}{5} = \\dfrac{90}{5} = 18$. $G(90 ; 18)$ ; la droite donne 19 en 90 : elle passe au-dessus de $G$.\ne) Peu pertinent : les hausses grandissent, de 2 à 5, le nuage se courbe. La résistance de l'air croît beaucoup plus vite que la vitesse.\n⛔ Le piège : conclure « affine » parce que la consommation augmente avec la vitesse. Elle augmente de plus en plus vite.\nRéponse : b) $y = 0{,}175x + 3{,}25$ ; c) 19 au lieu de 17 ; d) $G(90 ; 18)$, non ; e) peu pertinent.",
           schema: ecranSeulement(

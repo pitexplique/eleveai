@@ -83,6 +83,11 @@ export const exercicesDonneesFrequencesStmg: FicheExercicesData = {
             ["Hommes", 45, 95, 140],
             ["Total", 75, 175, 250],
           ]),
+          reponses: [
+            { question: "a)", attendu: "44 %" },
+            { question: "b)", attendu: "30 %" },
+            { question: "c)", attendu: "38 %" },
+          ],
           correction:
             "La population de référence est la même pour les trois questions : les 250 salariés. Je divise par le total général.\na) La marge « Femmes » : $110 \\div 250 = 0{,}44$, soit 44 %.\nb) La marge « Cadre » : $75 \\div 250 = 0{,}3$, soit 30 %.\nc) La case « Hommes » et « Non-cadre » : $95 \\div 250 = 0{,}38$, soit 38 %.\n⛔ Le piège au c) : diviser 95 par 140, les hommes. La question dit « parmi tous les salariés » : le dénominateur est 250.\nRéponse : a) 44 % ; b) 30 % ; c) 38 %.",
           micros: ["don_freq_marginale"],
@@ -90,6 +95,11 @@ export const exercicesDonneesFrequencesStmg: FicheExercicesData = {
         {
           enonce:
             "Une orthophoniste prépare un jeu de lettres pour ses patients. L'alphabet français compte 26 lettres, dont 6 voyelles : a, e, i, o, u et y.\na) Quelle est la fréquence des voyelles dans l'alphabet ? Donne une fraction simplifiée, puis un pourcentage arrondi au dixième.\nb) Quelle est la fréquence des consonnes, en pourcentage arrondi au dixième ?",
+          reponses: [
+            { question: "a) fraction", attendu: "3/13", exact: true },
+            { question: "a) pourcentage", attendu: "23,1 %" },
+            { question: "b)", attendu: "76,9 %" },
+          ],
           correction:
             "La population de référence : les 26 lettres de l'alphabet.\na) $\\dfrac{6}{26} = \\dfrac{3}{13}$, en simplifiant par 2.\n$6 \\div 26 \\approx 0{,}2308$, soit environ 23,1 %.\nb) Les consonnes : $26 - 6 = 20$ lettres. $20 \\div 26 \\approx 0{,}7692$, soit environ 76,9 %.\nContrôle : $23{,}1 + 76{,}9 = 100$.\n⛔ Le piège : oublier le y. Il compte parmi les six voyelles de l'alphabet.\nRéponse : a) $\\dfrac{3}{13}$, environ 23,1 % ; b) environ 76,9 %.",
           schema: ecranSeulement(
@@ -108,6 +118,11 @@ export const exercicesDonneesFrequencesStmg: FicheExercicesData = {
             ["Pas vu la pub", 108, 792, 900],
             ["Total", 198, 1002, 1200],
           ]),
+          reponses: [
+            { question: "a)", attendu: "30 %" },
+            { question: "b)", attendu: "12 %" },
+            { question: "c)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "« Parmi les internautes qui ont vu la publicité » : la population de référence est la ligne « A vu la pub », 300 personnes.\na) $90 \\div 300 = 0{,}3$, soit 30 %.\nb) Cette fois, la ligne « Pas vu la pub », 900 personnes : $108 \\div 900 = 0{,}12$, soit 12 %.\nc) 30 % contre 12 % : on achète bien plus souvent quand on a vu la publicité. Elle semble efficace.\n⛔ Le piège au b) : comparer 108 à 90 et conclure que la publicité ne sert à rien. Les deux groupes n'ont pas la même taille : je compare des fréquences, pas des effectifs.\nRéponse : a) 30 % ; b) 12 % ; c) oui.",
           micros: ["don_freq_conditionnelle"],
@@ -120,6 +135,11 @@ export const exercicesDonneesFrequencesStmg: FicheExercicesData = {
             ["Chantier", 14, 26, 40],
             ["Total", 32, 128, 160],
           ]),
+          reponses: [
+            { question: "a)", attendu: "35 %" },
+            { question: "b)", attendu: "15 %" },
+            { question: "c)", attendu: "56,3 %" },
+          ],
           correction:
             "a) « Parmi les salariés de chantier » : la ligne « Chantier », 40 salariés. $14 \\div 40 = 0{,}35$, soit 35 %.\nb) La ligne « Bureau », 120 salariés : $18 \\div 120 = 0{,}15$, soit 15 %.\nc) « Parmi les salariés qui ont mal au dos » : cette fois, la COLONNE « Mal de dos », 32 salariés.\n$18 \\div 32 = 0{,}5625$, soit environ 56,3 %.\n⭐ Plus de la moitié des dos douloureux sont au bureau, alors que le chantier est plus de deux fois plus touché (35 % contre 15 %) : le bureau compte simplement beaucoup plus de salariés.\n⛔ Le piège au c) : diviser 18 par 120. La population de référence change avec « parmi » : je relis la question avant chaque division.\nRéponse : a) 35 % ; b) 15 % ; c) environ 56,3 %.",
           micros: ["don_freq_conditionnelle"],
@@ -132,6 +152,10 @@ export const exercicesDonneesFrequencesStmg: FicheExercicesData = {
             ["Étranger", 90, 110, 200],
             ["Total", 150, 350, 500],
           ]),
+          reponses: [
+            { question: "a)", attendu: "45 %" },
+            { question: "b)", attendu: "60 %" },
+          ],
           correction:
             "a) « Parmi les visiteurs étrangers » : la ligne « Étranger », 200 visiteurs. $90 \\div 200 = 0{,}45$, soit 45 %.\nb) « Parmi les visites guidées » : la colonne « Visite guidée », 150 visiteurs. $90 \\div 150 = 0{,}6$, soit 60 %.\nc) La case est la même, 90 étrangers en visite guidée, mais la population de référence change : 200 étrangers au a), 150 visites guidées au b).\n⛔ Le piège : croire qu'une case donne UNE fréquence. Elle en donne deux, une par marge.\nRéponse : a) 45 % ; b) 60 % ; c) on ne divise pas par la même marge.",
           micros: ["don_freq_conditionnelle"],
@@ -144,6 +168,9 @@ export const exercicesDonneesFrequencesStmg: FicheExercicesData = {
             ["Retrait", "?", "?", 120],
             ["Total", "?", "?", 200],
           ]),
+          reponses: [
+            { question: "b)", attendu: "13 %" },
+          ],
           correction:
             "a) Une fréquence conditionnelle donne une CASE : je la calcule sur la marge de sa ligne.\nLivraison retournée : 25 % de 80, $0{,}25 \\times 80 = 20$. Gardée : $80 - 20 = 60$.\nRetrait retourné : 5 % de 120, $0{,}05 \\times 120 = 6$. Gardé : $120 - 6 = 114$.\nLes marges : retournées $20 + 6 = 26$ ; gardées $60 + 114 = 174$. Contrôle : $26 + 174 = 200$.\nb) $26 \\div 200 = 0{,}13$, soit 13 %.\n⛔ Le piège au b) : faire la moyenne $(25 + 5) \\div 2 = 15$ %. Les deux groupes n'ont pas la même taille : je repasse par les effectifs.\nRéponse : a) 20, 60, 6, 114, 26, 174 ; b) 13 %.",
           schema: ecranSeulement(
@@ -163,6 +190,11 @@ export const exercicesDonneesFrequencesStmg: FicheExercicesData = {
             ["25 ans et plus", 140, 1560, 1700],
             ["Total", 200, 1800, 2000],
           ]),
+          reponses: [
+            { question: "a)", attendu: ["vrai", "vraie", "oui"] },
+            { question: "b)", attendu: ["faux", "fausse", "non"] },
+            { question: "c)", attendu: "8,2 %" },
+          ],
           correction:
             "a) La population de référence est « les sinistres », la colonne « Sinistre », 200. $60 \\div 200 = 0{,}3$, soit 30 % : la phrase a) est vraie.\nb) La population de référence est « les moins de 25 ans », la ligne, 300. $60 \\div 300 = 0{,}2$, soit 20 % : la phrase b) est fausse.\nc) La ligne « 25 ans et plus » : $140 \\div 1700 \\approx 0{,}0824$, soit environ 8,2 %.\n⭐ Un jeune conducteur a donc bien plus souvent un sinistre (20 %) qu'un conducteur plus âgé (environ 8,2 %).\n⛔ Le piège : lire les mêmes mots dans les deux phrases. Je cherche ce qui suit « des » : c'est le groupe de référence.\nRéponse : a) vraie, 30 % ; b) fausse, 20 % ; c) environ 8,2 %.",
           micros: ["don_freq_interpreter", "don_freq_conditionnelle"],
@@ -170,6 +202,10 @@ export const exercicesDonneesFrequencesStmg: FicheExercicesData = {
         {
           enonce:
             "Un diplomate prépare une conférence sur l'Organisation des Nations unies, qui compte 193 États membres. 54 d'entre eux sont en Afrique.\na) Quelle est la fréquence des États africains parmi les membres de l'ONU ? Arrondis au dixième de pour cent.\nb) Vrai ou faux : « Plus d'un État membre sur quatre est africain. »",
+          reponses: [
+            { question: "a)", attendu: "28,0 %" },
+            { question: "b)", attendu: ["vrai", "vraie", "oui"] },
+          ],
           correction:
             "La population de référence : les 193 États membres.\na) $54 \\div 193 \\approx 0{,}2798$, soit environ 28,0 %.\nb) Un sur quatre, c'est 25 %. Environ 28,0 % est plus que 25 % : vrai.\nAutre preuve : le quart de 193 est $193 \\div 4 = 48{,}25$, et 54 dépasse $48{,}25$.\n⛔ Le piège au a) : arrondir trop tôt, à 0,28 puis à 28 %. L'énoncé demande le dixième : 28,0 %.\nRéponse : a) environ 28,0 % ; b) vrai.",
           schema: ecranSeulement(
@@ -203,6 +239,13 @@ export const exercicesDonneesFrequencesStmg: FicheExercicesData = {
             ["Bronze", 22, 28, 50],
             ["Total", 64, 75, 139],
           ]),
+          reponses: [
+            { question: "a)", attendu: "25,2 %" },
+            { question: "b)", attendu: "25 %" },
+            { question: "c)", attendu: "25,3 %" },
+            { question: "d)", attendu: "54,3 %" },
+            { question: "e)", attendu: ["vrai", "vraie", "oui"] },
+          ],
           correction:
             "a) Toutes les médailles : la marge « Or » sur le total général. $35 \\div 139 \\approx 0{,}2518$, soit environ 25,2 %.\nb) La colonne « JO », 64 médailles : $16 \\div 64 = 0{,}25$, soit 25 %.\nc) La colonne « Paralympiques », 75 médailles : $19 \\div 75 \\approx 0{,}2533$, soit environ 25,3 %.\nd) Cette fois, la LIGNE « Or », 35 médailles : $19 \\div 35 \\approx 0{,}5429$, soit environ 54,3 %.\ne) Environ 54,3 % est plus que 50 % : vrai. 19 médailles d'or sur 35 sont paralympiques.\n⛔ Le piège au d) : diviser 19 par 75. « Parmi les médailles d'or » : le dénominateur est la marge de l'or, 35.\nRéponse : a) environ 25,2 % ; b) 25 % ; c) environ 25,3 % ; d) environ 54,3 % ; e) vrai.",
           micros: ["don_freq_marginale", "don_freq_conditionnelle", "don_freq_interpreter"],
@@ -210,6 +253,9 @@ export const exercicesDonneesFrequencesStmg: FicheExercicesData = {
         {
           enonce:
             "Une conseillère bancaire étudie 400 clients de son agence (modèle). 30 % ont un crédit en cours. Parmi les clients qui ont un crédit, 40 % ont moins de 35 ans. Parmi ceux qui n'en ont pas, 25 % ont moins de 35 ans.\na) Dresse le tableau croisé crédit × âge, marges comprises.\nb) Parmi les clients de moins de 35 ans, quelle est la fréquence de ceux qui ont un crédit ? Arrondis au dixième de pour cent.",
+          reponses: [
+            { question: "b)", attendu: "40,7 %" },
+          ],
           correction:
             "a) La marge d'abord : 30 % de 400, $0{,}3 \\times 400 = 120$ clients avec un crédit, et $400 - 120 = 280$ sans crédit.\nAvec un crédit, moins de 35 ans : 40 % de 120, $0{,}4 \\times 120 = 48$. Les autres : $120 - 48 = 72$.\nSans crédit, moins de 35 ans : 25 % de 280, $0{,}25 \\times 280 = 70$. Les autres : $280 - 70 = 210$.\nLes colonnes : moins de 35 ans $48 + 70 = 118$ ; 35 ans et plus $72 + 210 = 282$. Contrôle : $118 + 282 = 400$.\nb) « Parmi les moins de 35 ans » : la colonne, 118 clients. $48 \\div 118 \\approx 0{,}4068$, soit environ 40,7 %.\n⛔ Le piège au b) : répondre 40 %. 40 % est la part des jeunes PARMI les clients à crédit ; la question renverse la population de référence.\nRéponse : a) le tableau ci-dessous ; b) environ 40,7 %.",
           schema: ecranSeulement(
@@ -230,6 +276,12 @@ export const exercicesDonneesFrequencesStmg: FicheExercicesData = {
             ["Ordures", 200, 130, 170, 500],
             ["Total", 300, 200, 250, 750],
           ]),
+          reponses: [
+            { question: "a)", attendu: "66,7 %" },
+            { question: "b)", attendu: "12,5 %" },
+            { question: "c)", attendu: "40 %" },
+            { question: "d)", attendu: ["le Centre", "Centre"] },
+          ],
           correction:
             "a) La marge « Ordures » sur le total : $500 \\div 750 \\approx 0{,}6667$, soit environ 66,7 %.\nb) La colonne « Centre », 200 tonnes : $25 \\div 200 = 0{,}125$, soit 12,5 %.\nc) La ligne « Verre », 100 tonnes : $40 \\div 100 = 0{,}4$, soit 40 %.\nd) Nord : $40 + 60 = 100$ tonnes triées, $100 \\div 300 \\approx 0{,}3333$, soit environ 33,3 %.\nCentre : $25 + 45 = 70$, $70 \\div 200 = 0{,}35$, soit 35 %.\nSud : $35 + 45 = 80$, $80 \\div 250 = 0{,}32$, soit 32 %.\nLe Centre trie le mieux, alors qu'il trie le moins de tonnes.\n⛔ Le piège au d) : choisir le Nord, qui trie le plus de tonnes (100). Il produit aussi le plus de déchets : je compare des fréquences.\nRéponse : a) environ 66,7 % ; b) 12,5 % ; c) 40 % ; d) le Centre, 35 %.",
           micros: ["don_freq_marginale", "don_freq_conditionnelle"],
@@ -242,6 +294,12 @@ export const exercicesDonneesFrequencesStmg: FicheExercicesData = {
             ["Hommes", 40, 480, 520],
             ["Total", 170, 830, 1000],
           ]),
+          reponses: [
+            { question: "a)", attendu: "76,5 %" },
+            { question: "b)", attendu: "27,1 %" },
+            { question: "c)", attendu: "7,7 %" },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) La colonne « Temps partiel », 170 salariés : $130 \\div 170 \\approx 0{,}7647$, soit environ 76,5 %.\nb) La ligne « Femmes », 480 salariées : $130 \\div 480 \\approx 0{,}2708$, soit environ 27,1 %.\nc) La ligne « Hommes », 520 salariés : $40 \\div 520 \\approx 0{,}0769$, soit environ 7,7 %.\nd) Non. « Plus des trois quarts » vaut pour les temps partiels, pas pour les femmes. Le titre juste : « Plus des trois quarts des salariés à temps partiel sont des femmes. »\n⭐ Et une femme sur quatre environ travaille à temps partiel, contre moins d'un homme sur dix.\n⛔ Le piège : inverser la population de référence. Le magazine a pris la fréquence du a) pour celle du b).\nRéponse : a) environ 76,5 % ; b) environ 27,1 % ; c) environ 7,7 % ; d) non.",
           micros: ["don_freq_interpreter", "don_freq_conditionnelle"],
@@ -249,6 +307,11 @@ export const exercicesDonneesFrequencesStmg: FicheExercicesData = {
         {
           enonce:
             "Un concepteur de jeux de société étudie le jeu de 52 cartes : 4 couleurs (cœur, carreau, trèfle, pique) de 13 cartes, dont 3 figures (roi, dame, valet) par couleur. Arrondis au dixième de pour cent.\na) Parmi les cœurs, quelle est la fréquence des figures ?\nb) Parmi les figures, quelle est la fréquence des cœurs ?\nc) Quelle est la fréquence des figures dans tout le jeu ?\nd) Compare a) et c). Que remarques-tu ?",
+          reponses: [
+            { question: "a)", attendu: "23,1 %" },
+            { question: "b)", attendu: "25 %" },
+            { question: "c)", attendu: "23,1 %" },
+          ],
           correction:
             "Je range le jeu dans un tableau croisé : 4 lignes (les couleurs), 2 colonnes (figure ou non). Chaque ligne : 3 figures, 10 autres cartes, 13 en tout.\na) La ligne « Cœur », 13 cartes : $3 \\div 13 \\approx 0{,}2308$, soit environ 23,1 %.\nb) La colonne « Figure », $4 \\times 3 = 12$ cartes : $3 \\div 12 = 0{,}25$, soit 25 %.\nc) $12 \\div 52 \\approx 0{,}2308$, soit environ 23,1 %.\nd) Les deux fréquences sont égales : $\\dfrac{3}{13} = \\dfrac{12}{52}$. Savoir que la carte est un cœur ne change pas la part des figures.\n⛔ Le piège au b) : diviser par 52. « Parmi les figures » : le dénominateur est 12.\nRéponse : a) environ 23,1 % ; b) 25 % ; c) environ 23,1 % ; d) elles sont égales.",
           schema: ecranSeulement(
@@ -270,6 +333,10 @@ export const exercicesDonneesFrequencesStmg: FicheExercicesData = {
             ["Autre canal", "?", "?", "?"],
             ["Total", "?", "?", 600],
           ]),
+          reponses: [
+            { question: "b)", attendu: "7 %" },
+            { question: "c)", attendu: "57,1 %" },
+          ],
           correction:
             "a) La marge d'abord : 40 % de 600, $0{,}4 \\times 600 = 240$ candidatures du site, et $600 - 240 = 360$ par un autre canal.\nSite retenues : 10 % de 240, $0{,}1 \\times 240 = 24$ ; non retenues $240 - 24 = 216$.\nAutre canal retenues : 5 % de 360, $0{,}05 \\times 360 = 18$ ; non retenues $360 - 18 = 342$.\nLes colonnes : retenues $24 + 18 = 42$ ; non retenues $216 + 342 = 558$. Contrôle : $42 + 558 = 600$.\nb) $42 \\div 600 = 0{,}07$, soit 7 %.\nc) La colonne « Retenue », 42 : $24 \\div 42 \\approx 0{,}5714$, soit environ 57,1 %.\n⛔ Le piège au c) : répondre 40 %, la part du site parmi TOUTES les candidatures. Parmi les retenues, le site pèse plus.\nRéponse : a) 240, 24, 216, 360, 18, 342, 42, 558 ; b) 7 % ; c) environ 57,1 %.",
           schema: ecranSeulement(
@@ -289,6 +356,11 @@ export const exercicesDonneesFrequencesStmg: FicheExercicesData = {
             ["Non traitée", 20, 30, 50],
             ["Total", 50, 150, 200],
           ]),
+          reponses: [
+            { question: "a)", attendu: "60 %" },
+            { question: "b)", attendu: "20 % ; 40 %", ordre: true },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) « Parmi les parcelles malades » : la colonne, 50 parcelles. $30 \\div 50 = 0{,}6$, soit 60 %. Le pourcentage est juste.\nb) Ligne « Traitée », 150 : $30 \\div 150 = 0{,}2$, soit 20 %.\nLigne « Non traitée », 50 : $20 \\div 50 = 0{,}4$, soit 40 %.\nc) Non. Une parcelle traitée tombe malade deux fois moins souvent (20 % contre 40 %). Si les malades sont surtout des parcelles traitées, c'est que presque toutes les parcelles sont traitées : 150 sur 200.\n⛔ Le piège : juger un traitement « parmi les malades ». Pour comparer, je calcule la fréquence des malades DANS chaque groupe.\nRéponse : a) 60 %, juste ; b) 20 % et 40 % ; c) non, le traitement divise par deux la fréquence de la maladie.",
           micros: ["don_freq_interpreter", "don_freq_conditionnelle"],
@@ -301,6 +373,12 @@ export const exercicesDonneesFrequencesStmg: FicheExercicesData = {
             ["Étranger", 16, 19, 35],
             ["Total", 40, 60, 100],
           ]),
+          reponses: [
+            { question: "a)", attendu: "35 %" },
+            { question: "b)", attendu: "40 %" },
+            { question: "c)", attendu: "45,7 %" },
+            { question: "d)", attendu: "2000" },
+          ],
           correction:
             "Les nombres sont des pourcentages du total : le total général vaut 100.\na) La marge « Étranger » : 35 %.\nb) La colonne « Affaires », 40 : $16 \\div 40 = 0{,}4$, soit 40 %.\nc) La ligne « Étranger », 35 : $16 \\div 35 \\approx 0{,}4571$, soit environ 45,7 %.\nd) 16 % des clients : $0{,}16 \\times 12\\,500 = 2000$ clients.\n⛔ Le piège au b) : répondre 16 %. 16 % est la part de tous les clients ; « parmi les clients d'affaires », je divise par leur marge.\nRéponse : a) 35 % ; b) 40 % ; c) environ 45,7 % ; d) 2000 clients.",
           micros: ["don_freq_conditionnelle", "don_freq_marginale"],
@@ -323,6 +401,10 @@ export const exercicesDonneesFrequencesStmg: FicheExercicesData = {
           titre: "La mutuelle et la téléconsultation",
           enonce:
             "Un chargé d'études d'une mutuelle santé a interrogé 2500 adhérents (modèle). 40 % ont moins de 40 ans. Parmi les moins de 40 ans, 45 % ont déjà fait une téléconsultation ; parmi les 40 ans et plus, 20 %.\na) Dresse le tableau croisé âge × téléconsultation, marges comprises.\nb) Quelle est la fréquence des adhérents qui ont déjà fait une téléconsultation ?\nc) Parmi ceux qui en ont fait une, quelle est la fréquence des moins de 40 ans ?\nd) Un article affirme : « 45 % des utilisateurs de la téléconsultation ont moins de 40 ans. » Corrige-le.",
+          reponses: [
+            { question: "b)", attendu: "30 %" },
+            { question: "c)", attendu: "60 %" },
+          ],
           correction:
             "a) Moins de 40 ans : 40 % de 2500, $0{,}4 \\times 2500 = 1000$ ; 40 ans et plus : $2500 - 1000 = 1500$.\nMoins de 40 ans, téléconsultation : 45 % de 1000, $0{,}45 \\times 1000 = 450$ ; jamais : $1000 - 450 = 550$.\n40 ans et plus, téléconsultation : 20 % de 1500, $0{,}2 \\times 1500 = 300$ ; jamais : $1500 - 300 = 1200$.\nLes colonnes : téléconsultation $450 + 300 = 750$ ; jamais $550 + 1200 = 1750$. Contrôle : $750 + 1750 = 2500$.\nb) $750 \\div 2500 = 0{,}3$, soit 30 %.\nc) La colonne « Téléconsultation », 750 : $450 \\div 750 = 0{,}6$, soit 60 %.\nd) 45 % est la part des utilisateurs PARMI les moins de 40 ans. La phrase juste : « 45 % des moins de 40 ans ont déjà fait une téléconsultation », ou bien « 60 % des utilisateurs ont moins de 40 ans ».\n⛔ Le piège au d) : recopier le pourcentage de l'énoncé sans regarder son groupe de référence.\nRéponse : a) le tableau ci-dessous ; b) 30 % ; c) 60 % ; d) 60 % des utilisateurs ont moins de 40 ans.",
           schema: ecranSeulement(
@@ -344,6 +426,13 @@ export const exercicesDonneesFrequencesStmg: FicheExercicesData = {
             ["Électrique", 70, 80, 150],
             ["Total", 400, 200, 600],
           ]),
+          reponses: [
+            { question: "a)", attendu: "25 %" },
+            { question: "b)", attendu: "40 %" },
+            { question: "c)", attendu: "17,5 %" },
+            { question: "d)", attendu: "53,3 %" },
+            { question: "e)", attendu: ["vrai", "vraie", "oui"] },
+          ],
           correction:
             "a) La marge « Électrique » sur le total : $150 \\div 600 = 0{,}25$, soit 25 %.\nb) La colonne « Entreprise », 200 : $80 \\div 200 = 0{,}4$, soit 40 %.\nc) La colonne « Particulier », 400 : $70 \\div 400 = 0{,}175$, soit 17,5 %.\nd) La ligne « Électrique », 150 : $80 \\div 150 \\approx 0{,}5333$, soit environ 53,3 %.\ne) Environ 53,3 % est plus que 50 % : vrai.\n⭐ Les entreprises n'achètent qu'un tiers des voitures ($200 \\div 600$), mais plus de la moitié des électriques.\n⛔ Le piège au e) : se servir du b), 40 %. La phrase parle des voitures électriques : sa population de référence est la ligne « Électrique ».\nRéponse : a) 25 % ; b) 40 % ; c) 17,5 % ; d) environ 53,3 % ; e) vrai.",
           micros: ["don_freq_marginale", "don_freq_conditionnelle", "don_freq_interpreter"],
@@ -352,6 +441,11 @@ export const exercicesDonneesFrequencesStmg: FicheExercicesData = {
           titre: "Les week-ends de 2026",
           enonce:
             "La planificatrice d'un parc de loisirs prépare l'année 2026. Les quatre trimestres comptent 90, 91, 92 et 92 jours, et chacun compte exactement 26 jours de week-end (samedis et dimanches). Arrondis au dixième de pour cent.\na) Dresse le tableau croisé trimestre × type de jour, marges comprises.\nb) Parmi les jours du 1er trimestre, quelle est la fréquence des jours de week-end ? Parmi ceux du 3e trimestre ?\nc) Parmi les jours de week-end de l'année, quelle est la part du 1er trimestre ?\nd) Quelle est la fréquence des jours de week-end sur toute l'année ?",
+          reponses: [
+            { question: "b)", attendu: "28,9 % ; 28,3 %", ordre: true },
+            { question: "c)", attendu: "25 %" },
+            { question: "d)", attendu: "28,5 %" },
+          ],
           correction:
             "a) Pour chaque trimestre, les jours de semaine : $90 - 26 = 64$ ; $91 - 26 = 65$ ; $92 - 26 = 66$ ; $92 - 26 = 66$.\nLes marges : $26 \\times 4 = 104$ jours de week-end, $64 + 65 + 66 + 66 = 261$ jours de semaine, et $104 + 261 = 365$ jours.\nb) 1er trimestre : $26 \\div 90 \\approx 0{,}2889$, soit environ 28,9 %. 3e trimestre : $26 \\div 92 \\approx 0{,}2826$, soit environ 28,3 %.\nc) La colonne « Week-end », 104 : $26 \\div 104 = 0{,}25$, soit 25 %.\nd) $104 \\div 365 \\approx 0{,}2849$, soit environ 28,5 %.\n⭐ Même effectif, 26, et pourtant des fréquences différentes : le dénominateur change d'un trimestre à l'autre.\n⛔ Le piège au c) : diviser 26 par 90. « Parmi les jours de week-end » : le dénominateur est la marge des week-ends, 104.\nRéponse : a) le tableau ci-dessous ; b) environ 28,9 % et 28,3 % ; c) 25 % ; d) environ 28,5 %.",
           schema: ecranSeulement(
@@ -374,6 +468,12 @@ export const exercicesDonneesFrequencesStmg: FicheExercicesData = {
             ["Site B", 60, 20, 120, 200],
             ["Total", 180, 50, 170, 400],
           ]),
+          reponses: [
+            { question: "a)", attendu: "45 %" },
+            { question: "b)", attendu: "60 % ; 30 %", ordre: true },
+            { question: "c)", attendu: "40" },
+            { question: "d)", attendu: "35 %" },
+          ],
           correction:
             "a) La marge « Voiture seule » : $180 \\div 400 = 0{,}45$, soit 45 %.\nb) Site A, 200 salariés : $120 \\div 200 = 0{,}6$, soit 60 %. Site B : $60 \\div 200 = 0{,}3$, soit 30 %.\nc) Le site B atteint déjà l'objectif. Au site A : 40 % de 200, $0{,}4 \\times 200 = 80$ salariés au plus en voiture seule.\n$120 - 80 = 40$ salariés doivent passer au covoiturage.\nd) Voiture seule : $180 - 40 = 140$ salariés. $140 \\div 400 = 0{,}35$, soit 35 %.\n⛔ Le piège au c) : viser 40 % de 400, soit 160, et croire qu'il suffit de 20 changements. L'objectif est fixé PAR SITE : la population de référence est le site A, 200 salariés.\nRéponse : a) 45 % ; b) 60 % et 30 % ; c) 40 salariés ; d) 35 %.",
           micros: ["don_freq_conditionnelle", "don_freq_marginale", "don_freq_completer"],

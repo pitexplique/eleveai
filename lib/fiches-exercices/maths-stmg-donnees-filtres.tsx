@@ -88,6 +88,11 @@ export const exercicesDonneesFiltresStmg: FicheExercicesData = {
             ["Inès", "Comptabilité", 4, "non"],
             ["Jules", "Logistique", 6, "oui"],
           ]),
+          reponses: [
+            { question: "a)", attendu: ["Alice ; Chloé ; Emma ; Hugo", "Alice, Chloé, Emma et Hugo", "Alice, Chloé, Emma, Hugo"] },
+            { question: "b)", attendu: "6" },
+            { question: "c)", attendu: "5" },
+          ],
           correction:
             "Je lis la colonne du critère, ligne par ligne, et je coche les lignes gardées.\na) Colonne « Service » : Alice, Chloé, Emma et Hugo. 4 salariés.\nb) Colonne « Ancienneté », 5 compris : Bruno, Chloé, Emma, Farid, Gaëlle et Jules. 6 salariés.\nc) Colonne « Télétravail » : Alice, Emma, Farid, Hugo et Jules. 5 salariés.\n⛔ Le piège au b) : oublier Farid. « ≥ 5 » se lit « supérieur OU ÉGAL à 5 » : ses 5 ans comptent.\nRéponse : a) Alice, Chloé, Emma et Hugo, 4 salariés ; b) 6 ; c) 5.",
           micros: ["don_filtre_sous_ensemble"],
@@ -107,6 +112,11 @@ export const exercicesDonneesFiltresStmg: FicheExercicesData = {
             ["Biscuits", 2.8, 40],
             ["Vinaigre balsamique", 20, 4],
           ]),
+          reponses: [
+            { question: "a)", attendu: ["huile d'olive ; foie gras ; champagne", "huile d'olive, foie gras et champagne", "huile d'olive, foie gras, champagne"] },
+            { question: "b)", attendu: "5" },
+            { question: "c)", attendu: ["miel", "le miel"] },
+          ],
           correction:
             "a) Colonne « Prix », strictement plus de 20 € : huile d'olive, foie gras et champagne. 3 produits.\nb) Colonne « Stock », 5 compris : thé vert, miel, confiture, foie gras et vinaigre balsamique. 5 produits.\nc) Stock égal à 0 : le miel seulement.\n⛔ Le piège au a) : garder le vinaigre balsamique, à 20 € pile. « > 20 » ne garde pas le 20.\nRéponse : a) huile d'olive, foie gras et champagne ; b) 5 ; c) le miel.",
           micros: ["don_filtre_sous_ensemble"],
@@ -119,6 +129,10 @@ export const exercicesDonneesFiltresStmg: FicheExercicesData = {
             ["26 ans et plus", 120, 255, 375],
             ["Total", 205, 395, 600],
           ]),
+          reponses: [
+            { question: "a)", attendu: "85" },
+            { question: "b)", attendu: "255" },
+          ],
           correction:
             "a) ET : les deux critères à la fois. Ligne « Moins de 26 ans », colonne « Abonné » : 85 spectateurs.\nb) Ligne « 26 ans et plus », colonne « Non abonné » : 255 spectateurs.\nc) Une case compte les individus qui sont dans sa ligne ET dans sa colonne : c'est exactement le filtre ET.\n⛔ Le piège : lire 205, la marge des abonnés. Elle compte aussi les 26 ans et plus.\nRéponse : a) 85 ; b) 255 ; c) une case croise les deux critères.",
           micros: ["don_filtre_et"],
@@ -131,6 +145,11 @@ export const exercicesDonneesFiltresStmg: FicheExercicesData = {
             ["Cette année", 50, 170, 220],
             ["Total", 120, 280, 400],
           ]),
+          reponses: [
+            { question: "a)", attendu: "230" },
+            { question: "b)", attendu: "230" },
+            { question: "c)", attendu: "330" },
+          ],
           correction:
             "a) OU : l'un des deux critères au moins. J'additionne la marge « Formule premium » et la marge « Plus d'un an », puis je retire la case commune, comptée deux fois : $120 + 180 - 70 = 230$ adhérents.\nb) Ne répondent pas au filtre : ni premium, ni plus d'un an, la case « Cette année » et « Formule simple », 170. Et $400 - 170 = 230$. Les deux chemins donnent 230.\nc) $280 + 220 - 170 = 330$ adhérents.\n⛔ Le piège : $120 + 180 = 300$. Les 70 adhérents premium inscrits depuis plus d'un an seraient comptés deux fois.\nRéponse : a) 230 ; b) $400 - 170 = 230$ ; c) 330.",
           micros: ["don_filtre_ou"],
@@ -144,6 +163,11 @@ export const exercicesDonneesFiltresStmg: FicheExercicesData = {
             ["Hors Europe", 50, 20, 70],
             ["Total", 210, 90, 300],
           ]),
+          reponses: [
+            { question: "a)", attendu: "170" },
+            { question: "b)", attendu: "90" },
+            { question: "c)", attendu: "70" },
+          ],
           correction:
             "NON A : tous ceux qui ne sont pas A. Je retire A du total.\na) $300 - 130 = 170$ réservations. Contrôle : $100 + 70 = 170$, les deux autres lignes.\nb) Ne pas être en été, ici, c'est être en hiver : $300 - 210 = 90$ réservations.\nc) NON (Hors Europe) : les lignes « France » et « Europe hors France ». En hiver : $40 + 30 = 70$ réservations.\n⛔ Le piège au a) : répondre 100, la seule ligne « Europe hors France ». Le contraire de « France » compte aussi le hors Europe.\nRéponse : a) 170 ; b) 90 ; c) 70.",
           micros: ["don_filtre_non"],
@@ -161,6 +185,10 @@ export const exercicesDonneesFiltresStmg: FicheExercicesData = {
             ["L7", "Villeurbanne", 31, 610],
             ["L8", "Lyon", 38, 760],
           ]),
+          reponses: [
+            { question: "a)", attendu: ["L3 ; L4 ; L7", "L3, L4 et L7", "L3, L4, L7"] },
+            { question: "b)", attendu: "L4" },
+          ],
           correction:
             "a) ET : je garde une ligne seulement si les DEUX critères sont vrais.\nSurface ≥ 30 : L2, L3, L4, L6, L7 et L8. Parmi eux, loyer ≤ 700 : L3, L4 et L7. 3 logements.\nb) Parmi L3, L4 et L7, ceux de Lyon : L4 seulement.\n⛔ Le piège : écarter L4, à 30 m² et 700 € pile. « Au moins » et « au plus » gardent la valeur limite.\nRéponse : a) L3, L4 et L7 ; b) L4.",
           micros: ["don_filtre_et"],
@@ -180,6 +208,10 @@ export const exercicesDonneesFiltresStmg: FicheExercicesData = {
             ["Dune", "Roman", 19],
             ["Blacksad", "BD", 6],
           ]),
+          reponses: [
+            { question: "a)", attendu: "7" },
+            { question: "b)", attendu: "2" },
+          ],
           correction:
             "a) OU : je garde une ligne dès qu'UN critère est vrai.\nGenre = BD : Astérix, Persepolis, Tintin, Maus et Blacksad, soit 5.\nEmprunts ≥ 20 : Astérix, Le Petit Prince, Harry Potter et Tintin, soit 4.\nAstérix et Tintin sont dans les deux listes : je ne les compte qu'une fois. $5 + 4 - 2 = 7$ livres.\nb) Les deux critères à la fois : Astérix et Tintin, 2 livres.\n⛔ Le piège au a) : répondre 9. Un livre qui vérifie les deux critères ne va qu'une fois dans la vitrine.\nRéponse : a) 7 ; b) 2.",
           micros: ["don_filtre_ou", "don_filtre_et"],
@@ -187,6 +219,11 @@ export const exercicesDonneesFiltresStmg: FicheExercicesData = {
         {
           enonce:
             "Une diététicienne suit 120 patients (modèle). 50 font du sport chaque semaine, 30 suivent un régime, et 12 font les deux.\na) Combien de patients répondent au filtre « Sport OU Régime » ?\nb) Au filtre « NON (Sport OU Régime) » ?\nc) Au filtre « Régime ET NON Sport » ?",
+          reponses: [
+            { question: "a)", attendu: "68" },
+            { question: "b)", attendu: "52" },
+            { question: "c)", attendu: "18" },
+          ],
           correction:
             "a) $50 + 30 - 12 = 68$ patients : les 12 qui font les deux ne comptent qu'une fois.\nb) Le contraire de « sport OU régime » : ni sport, ni régime. $120 - 68 = 52$ patients.\nc) Les patients au régime, sauf ceux qui font aussi du sport : $30 - 12 = 18$.\n⭐ Le tableau croisé ci-dessous range tout : la case « Pas de sport » et « Pas de régime » est bien 52.\n⛔ Le piège au b) : calculer « NON sport OU NON régime ». Le contraire de « A OU B » est « NI A NI B » : ni l'un, ni l'autre.\nRéponse : a) 68 ; b) 52 ; c) 18.",
           schema: ecranSeulement(
@@ -225,6 +262,11 @@ export const exercicesDonneesFiltresStmg: FicheExercicesData = {
             ["Uranus", "géante", "oui", 19.2],
             ["Neptune", "géante", "oui", 30.1],
           ]),
+          reponses: [
+            { question: "a)", attendu: ["Jupiter ; Saturne", "Jupiter et Saturne"] },
+            { question: "b)", attendu: "6" },
+            { question: "c)", attendu: "4" },
+          ],
           correction:
             "a) Anneaux : Jupiter, Saturne, Uranus et Neptune. Parmi elles, à moins de 10 UA : Jupiter et Saturne. 2 planètes.\nb) Telluriques : Mercure, Vénus, la Terre et Mars, soit 4. À plus de 15 UA : Uranus et Neptune, soit 2. Aucune planète n'est dans les deux listes : $4 + 2 - 0 = 6$ planètes.\nc) Sans anneaux : Mercure, Vénus, la Terre et Mars, soit 4 planètes. Ce sont exactement les telluriques : ici, « NON (Anneaux = oui) » et « Type = tellurique » donnent le même sous-ensemble.\n⛔ Le piège au a) : garder les quatre géantes. ET demande aussi la distance : Uranus et Neptune sont trop loin.\nRéponse : a) Jupiter et Saturne ; b) 6 ; c) 4 planètes, les telluriques.",
           micros: ["don_filtre_et", "don_filtre_ou", "don_filtre_non", "don_filtre_sous_ensemble"],
@@ -247,6 +289,11 @@ export const exercicesDonneesFiltresStmg: FicheExercicesData = {
             ["Pays de la Loire", "oui", 5],
             ["Provence-Alpes-Côte d'Azur", "oui", 6],
           ]),
+          reponses: [
+            { question: "a)", attendu: ["Nouvelle-Aquitaine ; Occitanie", "Nouvelle-Aquitaine et Occitanie"] },
+            { question: "b)", attendu: "7" },
+            { question: "c)", attendu: "5 ; 44", ordre: true },
+          ],
           correction:
             "a) Au moins 10 départements : Auvergne-Rhône-Alpes, Grand Est, Nouvelle-Aquitaine et Occitanie. Parmi elles, avec une façade : Nouvelle-Aquitaine et Occitanie.\nb) Au moins 10 départements : 4 régions. Sans façade : Auvergne-Rhône-Alpes, Bourgogne-Franche-Comté, Centre-Val de Loire, Grand Est et Île-de-France, soit 5. Dans les deux listes : Auvergne-Rhône-Alpes et Grand Est. $4 + 5 - 2 = 7$ régions.\nc) Les 5 régions sans façade. Leurs départements : $12 + 8 + 6 + 10 + 8 = 44$.\n⛔ Le piège au b) : répondre 9, en comptant deux fois Auvergne-Rhône-Alpes et le Grand Est.\nRéponse : a) Nouvelle-Aquitaine et Occitanie ; b) 7 ; c) 5 régions, 44 départements.",
           micros: ["don_filtre_sous_ensemble", "don_filtre_et", "don_filtre_ou", "don_filtre_non"],
@@ -261,6 +308,12 @@ export const exercicesDonneesFiltresStmg: FicheExercicesData = {
             ["Systèmes d'information", 16, 44, 60],
             ["Total", 190, 170, 360],
           ]),
+          reponses: [
+            { question: "a)", attendu: "64" },
+            { question: "b)", attendu: "218" },
+            { question: "c)", attendu: "270" },
+            { question: "d)", attendu: "126" },
+          ],
           correction:
             "a) ET : une case. Ligne « Mercatique », colonne « Filles » : 64 élèves.\nb) OU : marge de la ligne + marge de la colonne − la case commune « RH et communication » et « Filles » : $100 + 190 - 72 = 218$ élèves.\nc) $360 - 90 = 270$ élèves.\nd) Les garçons, sauf ceux de « Systèmes d'information » : $170 - 44 = 126$ élèves.\nContrôle du b) par le contraire : ni RH, ni fille, ce sont les garçons des trois autres spécialités, $52 + 46 + 44 = 142$, et $360 - 142 = 218$.\n⛔ Le piège au b) : oublier de retirer les 72 filles de RH et communication, comptées dans la ligne et dans la colonne.\nRéponse : a) 64 ; b) 218 ; c) 270 ; d) 126.",
           micros: ["don_filtre_et", "don_filtre_ou", "don_filtre_non"],
@@ -280,6 +333,11 @@ export const exercicesDonneesFiltresStmg: FicheExercicesData = {
             [9, 1500, "Japon", "non"],
             [10, 300, "Espagne", "oui"],
           ]),
+          reponses: [
+            { question: "a)", attendu: "2 ; 5 ; 9" },
+            { question: "b)", attendu: "8" },
+            { question: "c)", attendu: "4" },
+          ],
           correction:
             "a) Plus de 500 € : les n° 2, 3, 5, 6, 8 et 9. Parmi eux, hors de France : les n° 2, 5 et 9. 3 paiements.\nb) En ligne : les n° 1, 3, 4, 5, 8 et 10, soit 6. Plus de 1000 € : les n° 3, 6 et 9, soit 3. Le n° 3 est dans les deux listes. $6 + 3 - 1 = 8$ paiements.\nc) Pas en ligne : les n° 2, 6, 7 et 9. 4 paiements.\nContrôle du b) : ne répondent pas au filtre les paiements ni en ligne ni au-dessus de 1000 €, les n° 2 et 7. $10 - 2 = 8$.\n⛔ Le piège au b) : compter deux fois le n° 3, en ligne et à 1250 €.\nRéponse : a) les n° 2, 5 et 9 ; b) 8 ; c) 4.",
           micros: ["don_filtre_et", "don_filtre_ou", "don_filtre_non"],
@@ -292,6 +350,11 @@ export const exercicesDonneesFiltresStmg: FicheExercicesData = {
             ["Pas Instagram", 70, 130, 200],
             ["Total", 250, 250, 500],
           ]),
+          reponses: [
+            { question: "a)", attendu: "180" },
+            { question: "b)", attendu: "370" },
+            { question: "d)", attendu: "190" },
+          ],
           correction:
             "a) La case « Instagram » et « TikTok » : 180 jeunes.\nb) $300 + 250 - 180 = 370$ jeunes. Le contraire : ni Instagram, ni TikTok, la case 130. $500 - 130 = 370$.\nc) 550 dépasse les 500 jeunes interrogés : le stagiaire a fait $300 + 250$ sans retirer les 180 qui utilisent les deux.\nd) Instagram sans TikTok, 120, plus TikTok sans Instagram, 70 : $120 + 70 = 190$. Autre chemin : $370 - 180 = 190$.\n⛔ Le piège : un OU plus grand que le total. C'est le signe qu'on a compté deux fois la case commune.\nRéponse : a) 180 ; b) 370 ; c) on ne peut pas dépasser 500 ; d) 190.",
           micros: ["don_filtre_et", "don_filtre_ou"],
@@ -299,6 +362,12 @@ export const exercicesDonneesFiltresStmg: FicheExercicesData = {
         {
           enonce:
             "La responsable qualité d'une usine de yaourts contrôle 800 pots (modèle). 30 ont un défaut d'étiquette, 20 un défaut de poids, et 8 ont les deux défauts.\na) Combien de pots répondent au filtre « Étiquette fausse OU Poids faux » ?\nb) Combien de pots sont conformes, c'est-à-dire sans aucun défaut ?\nc) Combien de pots ont exactement un défaut ?\nd) Combien répondent au filtre « Étiquette fausse ET NON Poids faux » ?",
+          reponses: [
+            { question: "a)", attendu: "42" },
+            { question: "b)", attendu: "758" },
+            { question: "c)", attendu: "34" },
+            { question: "d)", attendu: "22" },
+          ],
           correction:
             "a) $30 + 20 - 8 = 42$ pots ont au moins un défaut.\nb) Conformes : NON (étiquette fausse OU poids faux). $800 - 42 = 758$ pots.\nc) Au moins un défaut, sauf les deux à la fois : $42 - 8 = 34$ pots.\nd) Les étiquettes fausses, sauf celles qui ont aussi un poids faux : $30 - 8 = 22$ pots.\n⛔ Le piège au b) : retirer 30 et 20 du total, $800 - 50 = 750$. Les 8 pots aux deux défauts seraient retirés deux fois.\nRéponse : a) 42 ; b) 758 ; c) 34 ; d) 22.",
           schema: ecranSeulement(
@@ -313,6 +382,11 @@ export const exercicesDonneesFiltresStmg: FicheExercicesData = {
         {
           enonce:
             "L'organisatrice d'un trail a 250 inscrits (modèle) : 140 hommes et 110 femmes. 90 inscrits sont licenciés dans un club, dont 60 hommes.\na) Combien de femmes ne sont pas licenciées ?\nb) Combien d'inscrits répondent au filtre « Homme OU Licencié » ?\nc) Au filtre « NON (Homme ET Licencié) » ?",
+          reponses: [
+            { question: "a)", attendu: "80" },
+            { question: "b)", attendu: "170" },
+            { question: "c)", attendu: "190" },
+          ],
           correction:
             "Je range d'abord les nombres dans un tableau croisé, sexe × licence.\na) Femmes licenciées : $90 - 60 = 30$. Femmes non licenciées : $110 - 30 = 80$.\nb) $140 + 90 - 60 = 170$ inscrits. Contrôle : le contraire, ce sont les femmes non licenciées, et $250 - 80 = 170$.\nc) Tous, sauf les 60 hommes licenciés : $250 - 60 = 190$ inscrits.\n⛔ Le piège au c) : confondre NON (homme ET licencié) avec « ni homme ni licencié ». Le contraire d'un ET garde tous ceux qui ratent AU MOINS un des deux critères.\nRéponse : a) 80 ; b) 170 ; c) 190.",
           schema: ecranSeulement(
@@ -341,6 +415,12 @@ export const exercicesDonneesFiltresStmg: FicheExercicesData = {
             ["Novembre", 30, 9],
             ["Décembre", 31, 8],
           ]),
+          reponses: [
+            { question: "a)", attendu: ["janvier ; mars ; octobre", "janvier, mars et octobre", "janvier, mars, octobre"] },
+            { question: "b)", attendu: "6" },
+            { question: "c)", attendu: "5" },
+            { question: "d)", attendu: "104" },
+          ],
           correction:
             "a) 31 jours : janvier, mars, mai, juillet, août, octobre et décembre. Parmi eux, 9 jours de week-end : janvier, mars et octobre.\nb) 30 jours : avril, juin, septembre et novembre, soit 4. Au moins 10 jours de week-end : mai et août, soit 2. Aucun mois dans les deux listes : $4 + 2 - 0 = 6$ mois.\nc) Pas 31 jours : février et les 4 mois de 30 jours. $12 - 7 = 5$ mois.\nd) $9 + 8 + 9 + 8 + 10 + 8 + 8 + 10 + 8 + 9 + 9 + 8 = 104$ jours.\n⛔ Le piège au c) : oublier février, qui n'a ni 31 ni 30 jours. NON (Jours = 31) le garde.\nRéponse : a) janvier, mars et octobre ; b) 6 ; c) 5 ; d) 104.",
           micros: ["don_filtre_sous_ensemble", "don_filtre_et", "don_filtre_ou", "don_filtre_non"],
@@ -377,6 +457,12 @@ export const exercicesDonneesFiltresStmg: FicheExercicesData = {
             ["C11", 29, 280, "oui"],
             ["C12", 52, 330, "non"],
           ]),
+          reponses: [
+            { question: "a)", attendu: ["C02 ; C03 ; C06 ; C09 ; C12", "C02, C03, C06, C09 et C12", "C02, C03, C06, C09, C12"] },
+            { question: "b)", attendu: "8" },
+            { question: "c)", attendu: "4" },
+            { question: "d)", attendu: "75 €" },
+          ],
           correction:
             "a) Sans carte : C02, C03, C04, C06, C09, C10 et C12. Parmi eux, au moins 300 € : C02, C03, C06, C09 et C12. 5 clients.\nb) Moins de 30 ans : C01, C04, C06, C09 et C11, soit 5. Avec la carte : C01, C05, C07, C08 et C11, soit 5. C01 et C11 sont dans les deux listes. $5 + 5 - 2 = 8$ SMS.\nContrôle : ne reçoivent rien les clients de 30 ans ou plus sans carte, C02, C03, C10 et C12, et $12 - 4 = 8$.\nc) Ce sont justement ces 4 clients : C02, C03, C10 et C12.\nd) $5 \\times 15 = 75$ €.\n⛔ Le piège au a) : écarter C06, à 300 € pile. « Au moins 300 » garde le 300.\nRéponse : a) C02, C03, C06, C09 et C12 ; b) 8 SMS ; c) 4 ; d) 75 €.",
           micros: ["don_filtre_sous_ensemble", "don_filtre_et", "don_filtre_ou", "don_filtre_non"],
@@ -385,6 +471,12 @@ export const exercicesDonneesFiltresStmg: FicheExercicesData = {
           titre: "Les saisonniers du parc",
           enonce:
             "Le recruteur d'un parc d'attractions a reçu 200 candidatures pour l'été (modèle). 110 candidats parlent anglais, 60 ont le BAFA, et 35 ont les deux.\na) Le poste d'animateur demande l'anglais ET le BAFA. Combien de candidats peuvent l'occuper ?\nb) Le poste d'accueil demande l'anglais OU le BAFA. Combien de candidats ?\nc) Combien de candidats répondent au filtre « BAFA ET NON Anglais » ?\nd) Combien de candidats n'ont ni l'un ni l'autre ? Vérifie avec le b).",
+          reponses: [
+            { question: "a)", attendu: "35" },
+            { question: "b)", attendu: "135" },
+            { question: "c)", attendu: "25" },
+            { question: "d)", attendu: "65" },
+          ],
           correction:
             "a) Les deux à la fois : 35 candidats.\nb) $110 + 60 - 35 = 135$ candidats.\nc) Les titulaires du BAFA, sauf ceux qui parlent aussi anglais : $60 - 35 = 25$ candidats.\nd) Anglais sans BAFA : $110 - 35 = 75$. Ni l'un ni l'autre : $200 - 35 - 75 - 25 = 65$ candidats.\nContrôle : $200 - 135 = 65$. Les deux chemins donnent 65.\n⛔ Le piège au b) : $110 + 60 = 170$. Les 35 candidats qui ont les deux seraient comptés deux fois.\nRéponse : a) 35 ; b) 135 ; c) 25 ; d) 65.",
           schema: ecranSeulement(
@@ -400,6 +492,12 @@ export const exercicesDonneesFiltresStmg: FicheExercicesData = {
           titre: "Les vols de l'aéroport",
           enonce:
             "Une agente d'escale fait le bilan d'une journée (modèle) : 240 vols, dont 90 internationaux. 36 vols ont eu du retard, dont 20 internationaux.\na) Combien de vols répondent au filtre « National ET À l'heure » ?\nb) Au filtre « International OU En retard » ?\nc) Au filtre « NON (En retard) » ?\nd) Au filtre « National OU À l'heure » ? Retrouve-le par le contraire.",
+          reponses: [
+            { question: "a)", attendu: "134" },
+            { question: "b)", attendu: "106" },
+            { question: "c)", attendu: "204" },
+            { question: "d)", attendu: "220" },
+          ],
           correction:
             "Je range les nombres dans un tableau croisé, type de vol × ponctualité.\nVols nationaux : $240 - 90 = 150$. Retards nationaux : $36 - 20 = 16$.\na) $150 - 16 = 134$ vols.\nb) $90 + 36 - 20 = 106$ vols.\nc) $240 - 36 = 204$ vols.\nd) Le contraire de « National OU À l'heure » : international ET en retard, soit 20 vols. $240 - 20 = 220$ vols.\nAutre chemin : $150 + 204 - 134 = 220$.\n⛔ Le piège au d) : additionner 150 et 204, et dépasser les 240 vols. Les 134 vols nationaux à l'heure sont dans les deux groupes.\nRéponse : a) 134 ; b) 106 ; c) 204 ; d) 220.",
           schema: ecranSeulement(
@@ -415,6 +513,12 @@ export const exercicesDonneesFiltresStmg: FicheExercicesData = {
           titre: "Le stock de la pharmacie",
           enonce:
             "Un pharmacien fait l'inventaire de ses 500 références de médicaments (modèle). 320 se vendent sans ordonnance. 150 se conservent au réfrigérateur, dont 40 sans ordonnance.\na) Combien de références répondent au filtre « Avec ordonnance ET Au frais » ?\nb) Au filtre « Sans ordonnance ET NON (Au frais) » ?\nc) Au filtre « Avec ordonnance OU Au frais » ?\nd) Vérifie le c) par le contraire.",
+          reponses: [
+            { question: "a)", attendu: "110" },
+            { question: "b)", attendu: "280" },
+            { question: "c)", attendu: "220" },
+            { question: "d)", attendu: "220" },
+          ],
           correction:
             "Avec ordonnance : $500 - 320 = 180$ références.\na) Au frais, sauf celles sans ordonnance : $150 - 40 = 110$ références.\nb) Sans ordonnance, sauf celles au frais : $320 - 40 = 280$ références.\nc) $180 + 150 - 110 = 220$ références.\nd) Le contraire de « Avec ordonnance OU Au frais » : sans ordonnance ET pas au frais, ce sont les 280 du b). $500 - 280 = 220$. Les deux chemins donnent 220.\n⛔ Le piège au a) : répondre 150. Parmi les 150 références au frais, 40 se vendent sans ordonnance : elles ne passent pas le filtre.\nRéponse : a) 110 ; b) 280 ; c) 220 ; d) $500 - 280 = 220$.",
           schema: ecranSeulement(

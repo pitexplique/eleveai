@@ -85,6 +85,10 @@ export const exercicesStatMoindresCarresStmg: FicheExercicesData = {
         {
           enonce:
             "Une podcasteuse compare le nombre d'épisodes publiés dans le mois et les écoutes, en centaines. Elle teste la droite $d$ : $y = 5x + 8$.\nÉpisodes : 1, 2, 3. Écoutes : 14, 17, 24.\na) Calcule la valeur donnée par $d$ pour chaque nombre d'épisodes.\nb) Calcule chaque écart, puis chaque carré.\nc) Calcule la somme des carrés des écarts.",
+          reponses: [
+            { question: "a)", attendu: "13 ; 18 ; 23", ordre: true },
+            { question: "c)", attendu: "3" },
+          ],
           correction:
             "a) $5 \\times 1 + 8 = 13$ ; $5 \\times 2 + 8 = 18$ ; $5 \\times 3 + 8 = 23$.\nb) Écarts : $14 - 13 = 1$ ; $17 - 18 = -1$ ; $24 - 23 = 1$. Carrés : $1^2 = 1$ ; $(-1)^2 = 1$ ; $1^2 = 1$.\nc) $1 + 1 + 1 = 3$.\n⛔ Le piège au b) : écrire $(-1)^2 = -1$. Le carré d'un nombre négatif est positif.\nRéponse : la somme des carrés des écarts vaut 3.",
           schema: ecranSeulement(
@@ -105,6 +109,9 @@ export const exercicesStatMoindresCarresStmg: FicheExercicesData = {
             [9, 13],
             [11, 7],
           ]),
+          reponses: [
+            { question: "b)", attendu: "4" },
+          ],
           correction:
             "a) Pour 5 € : $-2 \\times 5 + 30 = 20$, écart $21 - 20 = 1$, carré 1.\nPour 7 € : $-2 \\times 7 + 30 = 16$, écart $15 - 16 = -1$, carré 1.\nPour 9 € : $-2 \\times 9 + 30 = 12$, écart $13 - 12 = 1$, carré 1.\nPour 11 € : $-2 \\times 11 + 30 = 8$, écart $7 - 8 = -1$, carré 1.\nb) $1 + 1 + 1 + 1 = 4$.\n⛔ Le piège : additionner les écarts, $1 - 1 + 1 - 1 = 0$, et croire la droite parfaite. Ce sont les CARRÉS qu'on additionne.\nRéponse : la somme des carrés des écarts vaut 4.",
           schema: ecranSeulement(
@@ -120,6 +127,10 @@ export const exercicesStatMoindresCarresStmg: FicheExercicesData = {
         {
           enonce:
             "L'analyste vidéo d'un club de basket compare les minutes jouées par cinq joueuses, en dizaines, et leurs points marqués sur la saison, en dizaines. Le tableur donne, pour deux droites :\n$d_1$ : $y = 3x + 2$, somme des carrés des écarts : 4 ;\n$d_2$ : $y = 3{,}2x + 1{,}4$, somme des carrés des écarts : 3,6.\nMinutes : 1, 2, 3, 4, 5. Points : 4, 9, 10, 15, 17.\na) Laquelle des deux droites est la meilleure au sens des moindres carrés ?\nb) $d_2$ est la droite donnée par la calculatrice. Peut-on trouver une droite dont la somme des carrés des écarts vaut 3 ?",
+          reponses: [
+            { question: "a)", attendu: ["d2", "d_2", "(d2)"] },
+            { question: "b)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $3{,}6 < 4$ : la somme des carrés des écarts de $d_2$ est la plus petite. $d_2$ est la meilleure au sens des moindres carrés.\nb) Non. La droite de la calculatrice est celle des moindres carrés : aucune droite ne fait mieux que 3,6.\n⛔ Le piège au a) : choisir la droite qui a la plus GRANDE somme. Une somme de carrés mesure l'erreur : plus elle est petite, mieux la droite colle au nuage.\nRéponse : a) $d_2$ ; b) non, 3,6 est le minimum.",
           schema: ecranSeulement(
@@ -136,6 +147,11 @@ export const exercicesStatMoindresCarresStmg: FicheExercicesData = {
         {
           enonce:
             "Un chargé d'études d'une agence d'intérim suit le nombre de missions signées, en dizaines, selon le rang de la semaine. Sa calculatrice donne la droite des moindres carrés $y = 1{,}5x + 4$.\nSemaine : 2, 4, 6, 8, 10. Missions : 8, 11, 9, 17, 20.\na) Calcule les coordonnées du point moyen $G$.\nb) Vérifie que $G$ est sur la droite de la calculatrice.\nc) Est-ce un hasard ?",
+          reponses: [
+            { question: "a)", attendu: "(6 ; 13)", ordre: true },
+            { question: "b)", attendu: ["oui", "vrai"] },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $\\bar{x} = \\dfrac{2 + 4 + 6 + 8 + 10}{5} = \\dfrac{30}{5} = 6$ et $\\bar{y} = \\dfrac{8 + 11 + 9 + 17 + 20}{5} = \\dfrac{65}{5} = 13$. Donc $G(6 ; 13)$.\nb) $1{,}5 \\times 6 + 4 = 9 + 4 = 13$ : $G$ est sur la droite.\nc) Non : la droite des moindres carrés passe TOUJOURS par le point moyen. C'est un moyen de contrôler ce qu'on a tapé sur la calculatrice.\n⛔ Le piège au a) : prendre le point du milieu du tableau, $(6 ; 9)$. Le point moyen se calcule avec toutes les valeurs.\nRéponse : a) $G(6 ; 13)$ ; b) oui ; c) non, c'est toujours vrai.",
           schema: ecranSeulement(
@@ -160,6 +176,11 @@ export const exercicesStatMoindresCarresStmg: FicheExercicesData = {
             [8, 24],
             [9, 26],
           ]),
+          reponses: [
+            { question: "a)", attendu: "21 850", tolerance: 10 },
+            { question: "b)", attendu: ["2 110", "2,11"] },
+            { question: "c)", attendu: "18,685", tolerance: 0.01 },
+          ],
           correction:
             "a) 7 000 €, c'est $x = 7$ : $y = 2{,}11 \\times 7 + 7{,}08 = 14{,}77 + 7{,}08 = 21{,}85$ milliers, soit environ 21 850 visiteurs.\nb) Chaque millier d'euros de plus apporte environ 2 110 visiteurs de plus.\nc) $2{,}11 \\times 5{,}5 + 7{,}08 = 11{,}605 + 7{,}08 = 18{,}685$, soit environ $18{,}69$. La droite passe par $G$, mais ses coefficients sont ARRONDIS au centième : le calcul tombe tout près, pas pile.\n⛔ Le piège au a) : remplacer $x$ par 7 000. Le budget est compté en milliers d'euros.\nRéponse : a) environ 21 850 visiteurs ; b) 2 110 visiteurs par millier d'euros ; c) $18{,}685$, à cause des arrondis.",
           micros: ["statT_mc_principe"],
@@ -167,6 +188,10 @@ export const exercicesStatMoindresCarresStmg: FicheExercicesData = {
         {
           enonce:
             "Un stagiaire en contrôle de gestion veut comparer deux droites en ADDITIONNANT les écarts, sans les élever au carré. Pour le nuage $(1 ; 13)$, $(2 ; 15)$, $(3 ; 15)$, $(4 ; 18)$, il teste $d_1$ : $y = 0{,}5x + 14$ et $d_2$ : $y = 2x + 10$.\na) Calcule les écarts de chaque droite, puis leur somme.\nb) Calcule la somme des carrés des écarts de chaque droite.\nc) Quelle droite le stagiaire choisirait-il ? Laquelle est la meilleure au sens des moindres carrés ?",
+          reponses: [
+            { question: "a)", attendu: "0 ; 1", ordre: true },
+            { question: "b)", attendu: "6,5 ; 3", ordre: true },
+          ],
           correction:
             "a) $d_1$ donne $14{,}5$ ; $15$ ; $15{,}5$ ; $16$. Écarts : $-1{,}5$ ; $0$ ; $-0{,}5$ ; $2$. Somme : $0$.\n$d_2$ donne $12$ ; $14$ ; $16$ ; $18$. Écarts : $1$ ; $1$ ; $-1$ ; $0$. Somme : $1$.\nb) $d_1$ : $2{,}25 + 0 + 0{,}25 + 4 = 6{,}5$. $d_2$ : $1 + 1 + 1 + 0 = 3$.\nc) Le stagiaire choisirait $d_1$, dont les écarts se compensent jusqu'à 0. Mais $d_1$ est presque plate et s'écarte des deux bouts du nuage : au sens des moindres carrés, $d_2$ est bien meilleure, $3 < 6{,}5$.\n⛔ Le piège : croire qu'une somme d'écarts nulle veut dire une droite parfaite. Les écarts positifs et négatifs se sont annulés.\nRéponse : a) 0 et 1 ; b) 6,5 et 3 ; c) le stagiaire prendrait $d_1$, la meilleure est $d_2$.",
           schema: ecranSeulement(
@@ -189,6 +214,10 @@ export const exercicesStatMoindresCarresStmg: FicheExercicesData = {
             { x: 4, y: 9 },
             { x: 5, y: 12 },
           ], { noms: ["rang du week-end", "entrées (centaines)"], droites: [[2, 2]], ecarts: true }),
+          reponses: [
+            { question: "a)", attendu: "1 ; -1 ; 1 ; -1 ; 0", ordre: true },
+            { question: "b)", attendu: "4" },
+          ],
           correction:
             "La droite passe par $(1 ; 4)$, $(2 ; 6)$, $(3 ; 8)$, $(4 ; 10)$ et $(5 ; 12)$.\na) Le point d'abscisse 1 est au milieu, entre 4 et 6 : 5, soit un écart $5 - 4 = 1$. En 2 : $5 - 6 = -1$. En 3 : $9 - 8 = 1$. En 4 : $9 - 10 = -1$. En 5 : le point est sur la droite, $12 - 12 = 0$.\nb) $1 + 1 + 1 + 1 + 0 = 4$.\n⛔ Le piège : compter le point sur la droite comme un écart de 1. Un point sur la droite a un écart nul.\nRéponse : a) $1$ ; $-1$ ; $1$ ; $-1$ ; $0$ ; b) 4.",
           micros: ["statT_mc_calculer"],
@@ -218,6 +247,12 @@ export const exercicesStatMoindresCarresStmg: FicheExercicesData = {
             { x: 4, y: 9 },
             { x: 5, y: 10 },
           ], { noms: ["visites (milliers)", "commandes (dizaines)"], droites: [[1.8, 1.2], [2, 1]] }),
+          reponses: [
+            { question: "a)", attendu: "2" },
+            { question: "b)", attendu: "0,8" },
+            { question: "c)", attendu: ["d2", "d_2", "(d2)"] },
+            { question: "d)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) $d_1$ donne 3, 5, 7, 9, 11. Écarts : $0$ ; $0$ ; $-1$ ; $0$ ; $-1$. Carrés : 0, 0, 1, 0, 1. Somme : 2.\nb) $d_2$ donne $3$ ; $4{,}8$ ; $6{,}6$ ; $8{,}4$ ; $10{,}2$. Écarts : $0$ ; $0{,}2$ ; $-0{,}6$ ; $0{,}6$ ; $-0{,}2$. Carrés : $0$ ; $0{,}04$ ; $0{,}36$ ; $0{,}36$ ; $0{,}04$. Somme : $0{,}8$.\nc) $0{,}8 < 2$ : $d_2$ est la meilleure.\nd) Oui : $d_2$ est la droite des moindres carrés, celle de la calculatrice. Aucune droite ne peut avoir une somme plus petite que $0{,}8$.\n⛔ Le piège : préférer $d_1$ parce que trois points tombent pile dessus. Ce qui compte, c'est la somme de TOUS les carrés.\nRéponse : a) 2 ; b) $0{,}8$ ; c) $d_2$ ; d) oui.",
           micros: ["statT_mc_principe", "statT_mc_calculer", "statT_mc_comparer"],
@@ -233,6 +268,9 @@ export const exercicesStatMoindresCarresStmg: FicheExercicesData = {
             { x: 5, y: 19 },
             { x: 6, y: 40, label: "B" },
           ], { noms: ["rang de la semaine", "commandes (centaines)"] }),
+          reponses: [
+            { question: "a)", attendu: "16,6 ; 21,11", ordre: true },
+          ],
           correction:
             "a) Sans $B$ : $2{,}2 \\times 4 + 7{,}8 = 16{,}6$ centaines. Avec $B$ : $4{,}91 \\times 4 + 1{,}47 = 21{,}11$ centaines. On a observé 16 : la droite sans $B$ colle bien mieux.\nb) La droite des moindres carrés rend petite la somme des CARRÉS des écarts. Sans $B$, la droite prévoit $2{,}2 \\times 6 + 7{,}8 = 21$ centaines en semaine 6 : $B$ est $40 - 21 = 19$ centaines au-dessus, et $19^2 = 361$ pèse bien plus que tous les autres carrés réunis. La droite se cabre pour s'en approcher.\nc) Celle sans $B$ : le Black Friday est un événement à part, qui ne dit rien d'une semaine ordinaire.\n⛔ Le piège : croire que la droite des moindres carrés « ignore » un point isolé. Au contraire, elle le suit de près.\nRéponse : a) $16{,}6$ et $21{,}11$, la première ; b) le carré de son grand écart ; c) celle sans $B$.",
           micros: ["statT_mc_principe", "statT_mc_comparer"],
@@ -247,6 +285,11 @@ export const exercicesStatMoindresCarresStmg: FicheExercicesData = {
             [16, 37],
             [18, 30],
           ]),
+          reponses: [
+            { question: "a)", attendu: "3,2" },
+            { question: "b)", attendu: "5" },
+            { question: "c)", attendu: ["d1", "d_1", "(d1)"] },
+          ],
           correction:
             "a) $d_1$ donne $52$ ; $46{,}6$ ; $41{,}2$ ; $35{,}8$ ; $30{,}4$. Écarts : $0$ ; $0{,}4$ ; $-1{,}2$ ; $1{,}2$ ; $-0{,}4$. Carrés : $0$ ; $0{,}16$ ; $1{,}44$ ; $1{,}44$ ; $0{,}16$. Somme : $3{,}2$.\nb) $d_2$ donne 51, 46, 41, 36, 31. Écarts : $1$ ; $1$ ; $-1$ ; $1$ ; $-1$. Carrés : 1, 1, 1, 1, 1. Somme : 5.\nc) $3{,}2 < 5$ : on garde $d_1$.\n⛔ Le piège : calculer $-2{,}7 \\times 12$ sans le signe. $-2{,}7 \\times 12 + 79 = -32{,}4 + 79 = 46{,}6$.\nRéponse : a) $3{,}2$ ; b) 5 ; c) $d_1$.",
           schema: ecranSeulement(
@@ -270,6 +313,13 @@ export const exercicesStatMoindresCarresStmg: FicheExercicesData = {
             { x: 4, y: 4 },
             { x: 5, y: 6 },
           ], { droites: [[0.8, 1.8]], ecarts: true, moyen: [3, 4.2] }),
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: ["non", "faux"] },
+            { question: "c)", attendu: ["oui", "vrai"] },
+            { question: "d)", attendu: ["non", "faux"] },
+            { question: "e)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) Vrai : $0{,}8 \\times 3 + 1{,}8 = 2{,}4 + 1{,}8 = 4{,}2$.\nb) Faux : la droite donne $2{,}6$ ; $3{,}4$ ; $4{,}2$ ; $5$ ; $5{,}8$, et aucun point du nuage n'a ces ordonnées.\nc) Vrai : c'est sa définition.\nd) Faux : les écarts valent $-0{,}6$ ; $0{,}6$ ; $0{,}8$ ; $-1$ ; $0{,}2$. Certains points sont sous la droite.\ne) Vrai : chaque point compte dans la somme des carrés.\n⛔ Le piège au b) : confondre avec la droite au jugé tracée par deux points. La droite des moindres carrés ne passe en général par aucun point.\nRéponse : a) vrai ; b) faux ; c) vrai ; d) faux ; e) vrai.",
           micros: ["statT_mc_principe"],
@@ -284,6 +334,11 @@ export const exercicesStatMoindresCarresStmg: FicheExercicesData = {
             [25, 5.2],
             [30, 5.9],
           ]),
+          reponses: [
+            { question: "a)", attendu: "(20 ; 4,06)", ordre: true },
+            { question: "b)", attendu: "0,076" },
+            { question: "c)", attendu: "192" },
+          ],
           correction:
             "a) $\\bar{x} = \\dfrac{10 + 15 + 20 + 25 + 30}{5} = 20$ et $\\bar{y} = \\dfrac{2{,}1 + 3{,}2 + 3{,}9 + 5{,}2 + 5{,}9}{5} = \\dfrac{20{,}3}{5} = 4{,}06$. Donc $G(20 ; 4{,}06)$.\n$0{,}192 \\times 20 + 0{,}22 = 3{,}84 + 0{,}22 = 4{,}06$ : $G$ est sur la droite.\nb) La droite donne $2{,}14$ ; $3{,}1$ ; $4{,}06$ ; $5{,}02$ ; $5{,}98$. Écarts : $-0{,}04$ ; $0{,}1$ ; $-0{,}16$ ; $0{,}18$ ; $-0{,}08$. Carrés : $0{,}0016$ ; $0{,}01$ ; $0{,}0256$ ; $0{,}0324$ ; $0{,}0064$. Somme : $0{,}076$.\nc) 1 000 km de plus, c'est $0{,}192$ tonne de plus, soit 192 kg pour 1 000 km : 192 grammes par kilomètre.\n⛔ Le piège au b) : arrondir les carrés au centième, et écrire $0{,}04^2 = 0$. On garde tous les chiffres jusqu'à la somme.\nRéponse : a) $G(20 ; 4{,}06)$ ; b) $0{,}076$ ; c) 192 g/km.",
           micros: ["statT_mc_principe", "statT_mc_calculer"],
@@ -291,6 +346,11 @@ export const exercicesStatMoindresCarresStmg: FicheExercicesData = {
         {
           enonce:
             "Un data analyst d'une enseigne de sport compare le budget publicitaire d'un magasin, en milliers d'euros, et ses ventes, en milliers d'articles.\nBudget : 2, 4, 6, 8, 10. Ventes : 7, 8, 12, 13, 16.\nUn collègue a tracé la droite $d_1$ qui passe par le premier et le dernier point : $y = 1{,}125x + 4{,}75$. Le tableur donne la droite des moindres carrés $d_2$ : $y = 1{,}15x + 4{,}3$, et sa somme des carrés des écarts : $1{,}9$.\na) Calcule la somme des carrés des écarts de $d_1$.\nb) Compare les deux droites.\nc) Un troisième collègue annonce une droite de somme $1{,}5$. Qu'en penses-tu ?",
+          reponses: [
+            { question: "a)", attendu: "2,375" },
+            { question: "b)", attendu: ["d2", "d_2", "(d2)"] },
+            { question: "c)", attendu: ["impossible", "non"] },
+          ],
           correction:
             "a) $d_1$ donne $7$ ; $9{,}25$ ; $11{,}5$ ; $13{,}75$ ; $16$. Écarts : $0$ ; $-1{,}25$ ; $0{,}5$ ; $-0{,}75$ ; $0$. Carrés : $0$ ; $1{,}5625$ ; $0{,}25$ ; $0{,}5625$ ; $0$. Somme : $2{,}375$.\nb) $1{,}9 < 2{,}375$ : $d_2$ est meilleure, même si $d_1$ passe exactement par deux points.\nc) C'est impossible : $1{,}9$ est la plus petite somme possible, celle de la droite des moindres carrés. Il s'est trompé dans ses calculs.\n⛔ Le piège : croire qu'une droite qui passe par deux points du nuage est forcément la meilleure.\nRéponse : a) $2{,}375$ ; b) $d_2$ ; c) impossible.",
           schema: ecranSeulement(
@@ -307,6 +367,11 @@ export const exercicesStatMoindresCarresStmg: FicheExercicesData = {
         {
           enonce:
             "Une professeure d'EPS compare, pour cinq élèves, les heures d'entraînement par semaine et le temps au 1 000 m, en secondes.\nHeures : 0, 1, 2, 3, 4. Temps : 300, 290, 276, 268, 256.\nLa calculatrice donne la droite des moindres carrés $y = -11x + 300$.\na) Calcule la somme des carrés des écarts de cette droite.\nb) Calcule le temps moyen $\\bar{y}$, puis la somme des carrés des écarts de la droite horizontale $y = \\bar{y}$, qui ignore l'entraînement.\nc) Compare. Que conclure ?",
+          reponses: [
+            { question: "a)", attendu: "6" },
+            { question: "b) moyenne", attendu: "278" },
+            { question: "b) somme", attendu: "1 216" },
+          ],
           correction:
             "a) La droite donne 300, 289, 278, 267, 256. Écarts : $0$ ; $1$ ; $-2$ ; $1$ ; $0$. Carrés : 0, 1, 4, 1, 0. Somme : 6.\nb) $\\bar{y} = \\dfrac{300 + 290 + 276 + 268 + 256}{5} = \\dfrac{1390}{5} = 278$.\nÉcarts à $y = 278$ : $22$ ; $12$ ; $-2$ ; $-10$ ; $-22$. Carrés : 484, 144, 4, 100, 484. Somme : 1 216.\nc) $6$ contre $1\\,216$ : la droite qui tient compte de l'entraînement colle bien mieux. Le temps baisse d'environ 11 secondes par heure d'entraînement hebdomadaire.\n⛔ Le piège au a) : oublier le signe et calculer $11 \\times 1 + 300 = 311$. La droite descend.\nRéponse : a) 6 ; b) 1 216 ; c) l'entraînement explique bien les temps.",
           schema: ecranSeulement(
@@ -330,6 +395,11 @@ export const exercicesStatMoindresCarresStmg: FicheExercicesData = {
             { x: 12, y: 27 },
             { x: 14, y: 30 },
           ], { noms: ["surface (dizaines de m²)", "prix (dizaines de k€)"], droites: [[1.9, 3.6], [2, 2.6]] }),
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: "0,8 ; 1,2", ordre: true },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $1{,}9 \\times 10 + 3{,}6 = 22{,}6$ et $2 \\times 10 + 2{,}6 = 22{,}6$ : les deux passent par $G$.\nb) $d_1$ donne $15$ ; $18{,}8$ ; $22{,}6$ ; $26{,}4$ ; $30{,}2$. Écarts : $0$ ; $0{,}2$ ; $-0{,}6$ ; $0{,}6$ ; $-0{,}2$. Somme des carrés : $0 + 0{,}04 + 0{,}36 + 0{,}36 + 0{,}04 = 0{,}8$.\n$d_2$ donne $14{,}6$ ; $18{,}6$ ; $22{,}6$ ; $26{,}6$ ; $30{,}6$. Écarts : $0{,}4$ ; $0{,}4$ ; $-0{,}6$ ; $0{,}4$ ; $-0{,}6$. Somme des carrés : $0{,}16 + 0{,}16 + 0{,}36 + 0{,}16 + 0{,}36 = 1{,}2$.\nc) Non. Une infinité de droites passent par $G$ ; la droite des moindres carrés est celle qui a, en plus, la bonne pente. Ici $d_1$, avec $0{,}8 < 1{,}2$.\n⛔ Le piège : s'arrêter au test du point moyen. Il élimine les mauvaises droites, il ne désigne pas la meilleure.\nRéponse : a) oui ; b) $0{,}8$ et $1{,}2$ ; c) non.",
           micros: ["statT_mc_calculer", "statT_mc_comparer"],
@@ -362,6 +432,12 @@ export const exercicesStatMoindresCarresStmg: FicheExercicesData = {
             [2023, 236],
             [2024, 263],
           ]),
+          reponses: [
+            { question: "a)", attendu: "(4,5 ; 166,25)", ordre: true },
+            { question: "c)", attendu: "27,5", tolerance: 0.05 },
+            { question: "d)", attendu: "2,53", tolerance: 0.01 },
+            { question: "e)", attendu: "y = 27,43x + 43,57", tolerance: 0.05 },
+          ],
           correction:
             "a) $\\bar{x} = \\dfrac{1 + 2 + 3 + 4 + 5 + 6 + 7 + 8}{8} = 4{,}5$ et $\\bar{y} = \\dfrac{71 + 96 + 124 + 155 + 180 + 205 + 236 + 263}{8} = \\dfrac{1330}{8} = 166{,}25$. Donc $G(4{,}5 ; 166{,}25)$.\nb) $27{,}52 \\times 4{,}5 + 42{,}39 = 123{,}84 + 42{,}39 = 166{,}23$, à $0{,}02$ de $\\bar{y}$ : l'écart vient de l'arrondi des coefficients.\nc) Chaque année, environ 27,5 millions d'abonnés de plus.\nd) En 2020, $x = 4$ : $27{,}52 \\times 4 + 42{,}39 = 152{,}47$. Écart : $155 - 152{,}47 = 2{,}53$ millions.\ne) $a = \\dfrac{263 - 71}{8 - 1} = \\dfrac{192}{7} \\approx 27{,}43$ et $b = 71 - \\dfrac{192}{7} \\approx 43{,}57$ : $y = 27{,}43x + 43{,}57$.\n$18{,}0 < 22{,}9$ : la droite de la calculatrice colle mieux au nuage, comme prévu. Les deux droites sont pourtant très proches : le nuage est presque aligné.\n⛔ Le piège au d) : calculer l'écart à l'envers, $152{,}47 - 155$. L'écart, c'est la valeur observée moins celle de la droite : ici il est positif, le point est au-dessus de la droite.\nRéponse : a) $G(4{,}5 ; 166{,}25)$ ; c) + 27,5 millions par an ; d) $2{,}53$ millions ; e) $y = 27{,}43x + 43{,}57$, moins bonne.",
           schema: ecranSeulement(
@@ -388,6 +464,13 @@ export const exercicesStatMoindresCarresStmg: FicheExercicesData = {
             [6, 50],
             [8, 62],
           ]),
+          reponses: [
+            { question: "a)", attendu: "(5 ; 46)", ordre: true },
+            { question: "b)", attendu: "4" },
+            { question: "c)", attendu: "3,2" },
+            { question: "d)", attendu: ["d2", "d_2", "(d2)"] },
+            { question: "e)", attendu: "56,4" },
+          ],
           correction:
             "a) $\\bar{x} = \\dfrac{2 + 4 + 6 + 8}{4} = 5$ et $\\bar{y} = \\dfrac{30 + 42 + 50 + 62}{4} = \\dfrac{184}{4} = 46$. Donc $G(5 ; 46)$.\nb) $5 \\times 5 + 21 = 46$ : $d_1$ passe par $G$. Elle donne 31, 41, 51, 61. Écarts : $-1$ ; $1$ ; $-1$ ; $1$. Somme des carrés : $1 + 1 + 1 + 1 = 4$.\nc) $d_2$ donne $30{,}4$ ; $40{,}8$ ; $51{,}2$ ; $61{,}6$. Écarts : $-0{,}4$ ; $1{,}2$ ; $-1{,}2$ ; $0{,}4$. Somme des carrés : $0{,}16 + 1{,}44 + 1{,}44 + 0{,}16 = 3{,}2$.\nd) $3{,}2 < 4$ : on garde $d_2$, la droite des moindres carrés.\ne) 700 nuitées, c'est $x = 7$ : $y = 5{,}2 \\times 7 + 20 = 36{,}4 + 20 = 56{,}4$ m³.\n⛔ Le piège au c) : trouver les écarts de $d_2$ plus grands en 4 et en 6, et conclure qu'elle est moins bonne. On compare les SOMMES, pas les écarts un par un.\nRéponse : a) $G(5 ; 46)$ ; b) 4 ; c) $3{,}2$ ; d) $d_2$ ; e) $56{,}4$ m³.",
           schema: ecranSeulement(
@@ -412,6 +495,11 @@ export const exercicesStatMoindresCarresStmg: FicheExercicesData = {
             [5, 31],
             [6, 34],
           ]),
+          reponses: [
+            { question: "a)", attendu: "(3,5 ; 26)", ordre: true },
+            { question: "b)", attendu: "0,8" },
+            { question: "d)", attendu: "823" },
+          ],
           correction:
             "a) $\\bar{x} = \\dfrac{1 + 2 + 3 + 4 + 5 + 6}{6} = 3{,}5$ et $\\bar{y} = \\dfrac{18 + 21 + 25 + 27 + 31 + 34}{6} = \\dfrac{156}{6} = 26$. Donc $G(3{,}5 ; 26)$. $3{,}2 \\times 3{,}5 + 14{,}8 = 11{,}2 + 14{,}8 = 26$ : $G$ est sur la droite.\nb) La droite donne $18$ ; $21{,}2$ ; $24{,}4$ ; $27{,}6$ ; $30{,}8$ ; $34$. Écarts : $0$ ; $-0{,}2$ ; $0{,}6$ ; $-0{,}6$ ; $0{,}2$ ; $0$. Somme des carrés : $0 + 0{,}04 + 0{,}36 + 0{,}36 + 0{,}04 + 0 = 0{,}8$.\nc) $14{,}8$ k€ : le coût même sans production, les coûts fixes (loyer, machines). $3{,}2$ k€ par centaine : 32 € par casque, le coût variable.\nd) Vendre $x$ centaines de casques à 50 € rapporte $5x$ milliers d'euros. Bénéfice : $5x - (3{,}2x + 14{,}8) = 1{,}8x - 14{,}8$.\n$1{,}8x - 14{,}8 > 0$ donne $x > 14{,}8 \\div 1{,}8 \\approx 8{,}22$ centaines. À partir de 823 casques par mois.\n⛔ Le piège au d) : oublier les coûts fixes, et croire chaque casque bénéficiaire dès le premier. Il faut d'abord payer les 14 800 € fixes.\nRéponse : a) $G(3{,}5 ; 26)$ ; b) $0{,}8$ ; c) coûts fixes et coût par casque ; d) à partir de 823 casques.",
           micros: ["statT_mc_principe", "statT_mc_calculer"],
@@ -427,6 +515,11 @@ export const exercicesStatMoindresCarresStmg: FicheExercicesData = {
             { x: 5, y: 7 },
             { x: 6, y: 10 },
           ], { noms: ["clients (dizaines/h)", "attente (min)"] }),
+          reponses: [
+            { question: "a)", attendu: "(4 ; 6)", ordre: true },
+            { question: "b)", attendu: "2 ; 1,5 ; 1,1", ordre: true },
+            { question: "d)", attendu: "6,85", tolerance: 0.01 },
+          ],
           correction:
             "a) $\\bar{x} = \\dfrac{2 + 3 + 4 + 5 + 6}{5} = 4$ et $\\bar{y} = \\dfrac{3 + 4 + 6 + 7 + 10}{5} = \\dfrac{30}{5} = 6$. Donc $G(4 ; 6)$.\nPaul : $2 \\times 4 - 2 = 6$. Inès : $1{,}5 \\times 4 = 6$. Calculatrice : $1{,}7 \\times 4 - 0{,}8 = 6$. Les trois passent par $G$.\nb) Paul donne 2, 4, 6, 8, 10 : écarts $1$ ; $0$ ; $0$ ; $-1$ ; $0$, somme des carrés 2.\nInès donne $3$ ; $4{,}5$ ; $6$ ; $7{,}5$ ; $9$ : écarts $0$ ; $-0{,}5$ ; $0$ ; $-0{,}5$ ; $1$, somme des carrés $1{,}5$.\nLa calculatrice donne $2{,}6$ ; $4{,}3$ ; $6$ ; $7{,}7$ ; $9{,}4$ : écarts $0{,}4$ ; $-0{,}3$ ; $0$ ; $-0{,}7$ ; $0{,}6$, somme des carrés $0{,}16 + 0{,}09 + 0 + 0{,}49 + 0{,}36 = 1{,}1$.\nc) $1{,}1 < 1{,}5 < 2$ : la calculatrice, puis Inès, puis Paul. Paul a tort : ses trois points pile sur la droite ne compensent pas ses deux écarts de 1.\nd) $x = 4{,}5$ : $y = 1{,}7 \\times 4{,}5 - 0{,}8 = 7{,}65 - 0{,}8 = 6{,}85$ minutes, soit presque 7 minutes.\n⛔ Le piège au c) : compter les points sur la droite. Le critère des moindres carrés regarde tous les écarts à la fois.\nRéponse : a) $G(4 ; 6)$ ; b) 2 ; $1{,}5$ ; $1{,}1$ ; c) calculatrice, Inès, Paul ; non ; d) $6{,}85$ minutes.",
           schema: ecranSeulement(
