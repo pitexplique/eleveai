@@ -78,7 +78,7 @@ function corrigerCalculer(q: Q): string[] {
   const hs = horairesDuTexte(q.text);
   const ds = dureesDuTexte(q.text);
   const question = q.text.split("\n").pop() ?? "";
-  if (/Combien de temps|durée/.test(question)) {
+  if (/combien de temps|durée/i.test(question)) {
     if (hs.length !== 2 || ds.length) return [...p, "durée : il faut deux horaires et aucune durée"];
     const juste = hs[1].v - hs[0].v;
     if (juste <= 0) p.push("la fin est avant le début");

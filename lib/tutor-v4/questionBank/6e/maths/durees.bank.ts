@@ -233,6 +233,95 @@ function genCalculer(etoile: 1 | 2 | 3, sorte?: "fin" | "duree" | "debut") {
   };
 }
 
+/* ⛔ 03/11/2026 — D'ABORD DES QUESTIONS SIMPLES (Frédéric : « le contexte est
+   réservé aux trois étoiles »). À ★1 et ★2 : ni prénom, ni film, ni train — un
+   horaire, une durée, une phrase courte. La variété vient de la tournure, de
+   l'écriture de la durée (« min » / « minutes ») et des nombres. Les
+   situations restent à ★3 (`genCalculer(3)`, problèmes, défis). */
+function genCalculerSimple(etoile: 1 | 2, sorte?: "fin" | "duree") {
+  const s = sorte ?? pick(["fin", "duree"] as const);
+  let debut: number;
+  let d: number;
+  for (;;) {
+    const h1 = randomInt(7, 20);
+    const m1 = randomInt(1, 11) * 5;
+    debut = h1 * 60 + m1;
+    if (etoile === 1) d = randomInt(1, Math.floor((60 - m1) / 5)) * 5;
+    else d = randomInt(3, 30) * 5 + pick([0, 0, 0, 1, 2, 3, 4]);
+    const fin = debut + d;
+    if (etoile === 2 && Math.floor(fin / 60) === h1) continue; // on doit passer l'heure
+    if (fin % 60 === 0) continue;
+    break;
+  }
+  const fin = debut + d;
+  const H = hm(debut);
+  if (s === "fin") {
+    const D = pick([`${d} min`, `${d} minutes`]);
+    // ⛔ 03/11/2026 — 12 mots au plus (★1 comme ★2 : les deux gabarits servent à ★1).
+    const text = pick([
+      `Il est ${H}.\nQuelle heure sera-t-il dans ${D} ?`,
+      `Ajoute ${D} à ${H}.\nQuelle heure obtiens-tu ?`,
+      `Calcule : ${H} + ${D}.\nÉcris l’horaire obtenu.`,
+      `${H} + ${D} = …\nComplète avec un horaire.`,
+      `Avance ${H} de ${D}.\nQuelle heure obtiens-tu ?`,
+      `L’horloge marque ${H}.\nQuelle heure marquera-t-elle dans ${D} ?`,
+      `L’écran indique ${H}.\nQuelle heure indiquera-t-il dans ${D} ?`,
+      `Début : ${H}. Durée : ${D}.\nHeure de fin ?`,
+      `Pars de ${H}.\nQuelle heure est-il ${D} après ?`,
+      `Quelle heure est-il ${D} après ${H} ?`,
+      `Il est ${H}. Attends ${D}.\nQuelle heure est-il ?`,
+      `Avance de ${D} depuis ${H}.\nQuelle heure obtiens-tu ?`,
+      `Que donne ${H} + ${D} ?`,
+      `Il est ${H}.\nEt dans ${D} ?`,
+      `Ajoute ${D} à ${H}.\nÉcris l’horaire obtenu.`,
+      `${D} après ${H}, quelle heure est-il ?`,
+      `Départ à ${H}, durée ${D}.\nHeure d’arrivée ?`,
+      `Calcule ${H} + ${D}.`,
+      `Quelle heure sera-t-il ${D} après ${H} ?`,
+      `L’horloge marque ${H}.\nElle avance de ${D}. Quelle heure ?`,
+    ]);
+    return {
+      text,
+      format: "short" as const,
+      expected: formesHoraire(Math.floor(fin / 60), fin % 60),
+      comparator: "exact_text" as const,
+      explanation: expl(Math.floor(fin / 60) === Math.floor(debut / 60)
+        ? `${H} + ${d} min = ${hm(fin)}.`
+        : `On avance d’abord jusqu’à l’heure ronde : de ${H} à ${Math.floor(debut / 60) + 1} h, il y a ${60 - (debut % 60)} min. Il reste ${ecrireDuree(d - (60 - (debut % 60)))} à ajouter : on arrive à ${hm(fin)}.`),
+      canvas: digital(`${Math.floor(debut / 60)}:${deux(debut % 60)}`, "début"),
+    };
+  }
+  const F = hm(fin);
+  const text = pick([
+    `Calcule la durée de ${H} à ${F}.`,
+    `Quelle durée de ${H} à ${F} ?`,
+    `Combien de temps de ${H} à ${F} ?`,
+    `Calcule la durée entre ${H} et ${F}.`,
+    `Trouve la durée entre ${H} et ${F}.`,
+    `Quelle durée sépare ${H} de ${F} ?`,
+    `Combien de temps entre ${H} et ${F} ?`,
+    `Donne la durée de ${H} à ${F}.`,
+    `Écris la durée de ${H} à ${F}.`,
+    `${H} → ${F} : quelle durée ?`,
+    `De ${H} à ${F}, quelle durée ?`,
+    `Mesure la durée de ${H} à ${F}.`,
+    `Cherche la durée entre ${H} et ${F}.`,
+    `Entre ${H} et ${F}, combien de temps ?`,
+    `Durée entre ${H} et ${F} ?`,
+    `Durée de ${H} à ${F} ?`,
+  ]);
+  return {
+    text,
+    format: "short" as const,
+    expected: formesDuree(d),
+    comparator: "number_equal" as const,
+    explanation: expl(Math.floor(fin / 60) === Math.floor(debut / 60)
+      ? `De ${H} à ${F}, il y a ${d} min.`
+      : `De ${H} à ${Math.floor(debut / 60) + 1} h : ${60 - (debut % 60)} min. Puis de ${Math.floor(debut / 60) + 1} h à ${F} : ${ecrireDuree(fin - (Math.floor(debut / 60) + 1) * 60)}. En tout : ${ecrireDuree(d)}.`),
+    canvas: deuxHorloges({ h: Math.floor(debut / 60), m: debut % 60 }, { h: Math.floor(fin / 60), m: fin % 60 }),
+  };
+}
+
 /** ★4 : l'erreur de « base dix » d'un camarade, à corriger. */
 function genCalculerErreur() {
   const p = pick(PRENOMS);
@@ -320,15 +409,25 @@ const QUESTIONS_CONV = [
   (u: UniteTemps) => `Combien ${deNom(u)} cela représente-t-il ?`,
   (u: UniteTemps) => `Convertis cette durée en ${NOM_TEMPS[u][1]}.`,
 ];
-/** ★1 : k grandes unités → petites unités. */
+/** ★1 : k grandes unités → petites unités. 03/11/2026 : SANS situation (★1). */
 function genConvertirSimple() {
   const c = pick(PAIRES_TEMPS);
-  const pr = pick(PRENOMS);
   const n = randomInt(2, c.kMax);
   const r = n * c.k;
-  const text = Math.random() < 0.75
-    ? `${pick(c.ctx)(pr, qte(n, c.g))}\n${pick(QUESTIONS_CONV)(c.p)}`
-    : pick([`Complète : ${qte(n, c.g)} = … ${NOM_TEMPS[c.p][1]}`, `Combien y a-t-il ${deNom(c.p)} dans ${qte(n, c.g)} ?`]);
+  const G = qte(n, c.g);
+  const P = NOM_TEMPS[c.p][1];
+  const text = Math.random() < 0.3
+    ? `${pick([`Une durée vaut ${G}.`, `Voici une durée : ${G}.`, `On donne la durée ${G}.`])}\n${pick(QUESTIONS_CONV)(c.p)}`
+    : pick([
+        `Complète : ${G} = … ${P}`,
+        `Combien y a-t-il ${deNom(c.p)} dans ${G} ?`,
+        `Convertis ${G} en ${P}.`,
+        `Écris ${G} en ${P}.`,
+        `${majuscule(G)}, c’est combien ${deNom(c.p)} ?`,
+        `Combien ${deNom(c.p)} font ${G} ?`,
+        `Exprime ${G} en ${P}.`,
+        `Trouve le nombre ${deNom(c.p)} dans ${G}.`,
+      ]);
   return {
     text,
     format: "short" as const,
@@ -348,10 +447,10 @@ function composee(a: number, b: number, c: Paire) {
 }
 /** ★2 : minutes → h et min (ou secondes → min et s), et l'inverse. ★3 : heures → jours et heures, jours → semaines et jours, mois → ans et mois. */
 function genConvertirCompose(etoile: 2 | 3, sens: "decomposer" | "regrouper") {
-  const choix = etoile === 2 ? PAIRES_TEMPS.slice(0, 2) : PAIRES_TEMPS.slice(2);
-  const c = pick(choix);
+  if (etoile === 2) return genConvertirComposeSimple(sens);
+  const c = pick(PAIRES_TEMPS.slice(2));
   const pr = pick(PRENOMS);
-  const a = randomInt(1, etoile === 2 ? 5 : 6);
+  const a = randomInt(1, 6);
   const b = randomInt(1, c.k - 1);
   const total = a * c.k + b;
   const ctxPetit = (d: string) => pick(c.ctx)(pr, d);
@@ -374,6 +473,54 @@ function genConvertirCompose(etoile: 2 | 3, sens: "decomposer" | "regrouper") {
     text: Math.random() < 0.75
       ? `${ctxPetit(`${qte(a, c.g)} et ${qte(b, c.p)}`)}\n${pick(QUESTIONS_CONV)(c.p)}`
       : `Écris ${qte(a, c.g)} et ${qte(b, c.p)} en ${NOM_TEMPS[c.p][1]}.`,
+    format: "short" as const,
+    expected: [...new Set([court(total, c.p), qte(total, c.p)])],
+    comparator: "number_equal" as const,
+    explanation: expl(`${qte(a, c.g)} = ${a} × ${c.k} = ${court(a * c.k, c.p)}. On ajoute ${court(b, c.p)} : ${a * c.k} + ${b} = ${court(total, c.p)}.`),
+  };
+}
+/** ★2 (03/11/2026) : la même conversion SANS situation — h et min, min et s. */
+function genConvertirComposeSimple(sens: "decomposer" | "regrouper") {
+  const c = pick(PAIRES_TEMPS.slice(0, 2));
+  const a = randomInt(1, 5);
+  const b = randomInt(1, c.k - 1);
+  const total = a * c.k + b;
+  const Gs = NOM_TEMPS[c.g][1];
+  const Ps = NOM_TEMPS[c.p][1];
+  if (sens === "decomposer") {
+    const T = qte(total, c.p);
+    return {
+      text: pick([
+        `Écris ${T} en ${Gs} et ${Ps}.`,
+        `Convertis ${T} en ${Gs} et ${Ps}.`,
+        `Décompose ${T} en ${Gs} et ${Ps}.`,
+        `${majuscule(T)} : combien cela fait-il ${deNom(c.g)} et ${deNom(c.p)} ?`,
+        `Combien ${deNom(c.g)} et ${deNom(c.p)} y a-t-il dans ${T} ?`,
+        `Complète : ${T} = … ${Gs} et … ${Ps}`,
+        `Exprime ${T} en ${Gs} et ${Ps}.`,
+        `${pick([`Une durée vaut ${T}.`, `Voici une durée : ${T}.`])}\n${pick([
+          `Écris cette durée en ${Gs} et ${Ps}.`,
+          `Combien cela fait-il ${deNom(c.g)} et ${deNom(c.p)} ?`,
+          `Convertis cette durée en ${Gs} et ${Ps}.`,
+        ])}`,
+      ]),
+      format: "short" as const,
+      expected: composee(a, b, c),
+      comparator: "exact_text" as const,
+      explanation: expl(`On cherche combien de fois ${c.k} va dans ${total} : ${a} × ${c.k} = ${a * c.k} et il reste ${total} − ${a * c.k} = ${b}. Donc ${qte(total, c.p)} = ${qte(a, c.g)} et ${qte(b, c.p)}.`),
+    };
+  }
+  const D = `${qte(a, c.g)} et ${qte(b, c.p)}`;
+  return {
+    text: pick([
+      `Écris ${D} en ${Ps}.`,
+      `Convertis ${D} en ${Ps}.`,
+      `Exprime ${D} en ${Ps}.`,
+      `Combien y a-t-il ${deNom(c.p)} dans ${D} ?`,
+      `Complète : ${D} = … ${Ps}`,
+      `${majuscule(D)}, c’est combien ${deNom(c.p)} ?`,
+      `${pick([`Une durée vaut ${D}.`, `Voici une durée : ${D}.`])}\n${pick(QUESTIONS_CONV)(c.p)}`,
+    ]),
     format: "short" as const,
     expected: [...new Set([court(total, c.p), qte(total, c.p)])],
     comparator: "number_equal" as const,
@@ -480,10 +627,27 @@ function dureeDecimale(etoile: 1 | 2 | 3) {
   if (etoile === 3 && partie === 0.5) return dureeDecimale(3);
   return { v: h + partie, min: Math.round((h + partie) * 60) };
 }
+/** ★1-★2 (03/11/2026) : une durée, SANS situation. */
+// ⛔ 03/11/2026 : phrases courtes (★1 12 mots, ★2 15 mots au plus).
+const CTX_DECIMALE_SIMPLE: ((p: Prenom, d: string) => string)[] = [
+  (_p, d) => `Une durée vaut ${d}.`,
+  (_p, d) => `Soit la durée ${d}.`,
+  (_p, d) => `On lit ${d}.`,
+  (_p, d) => `Une activité dure ${d}.`,
+  (_p, d) => `Un chronomètre mesure ${d}.`,
+  (_p, d) => `On donne ${d}.`,
+];
+/** Les questions courtes de ★1-★2, selon le sens de la conversion. */
+const Q_DEC_SIMPLE = {
+  inverse: ["Écris-la en heures décimales.", "Donne-la en heures décimales."],
+  hmin: ["Écris-la en heures et minutes.", "Donne-la en heures et minutes."],
+  min: ["Combien de minutes ?", "Écris-la en minutes.", "Convertis-la en minutes.", "Combien de minutes cela fait-il ?"],
+};
 function genDecimale(etoile: 1 | 2 | 3) {
   const p = pick(PRENOMS);
   const { v, min } = dureeDecimale(etoile);
-  const ctx = pick(CTX_DECIMALE);
+  const simple = etoile !== 3;
+  const ctx = pick(simple ? CTX_DECIMALE_SIMPLE : CTX_DECIMALE);
   const methode = etoile === 1
     ? "0,5 h, c’est une demi-heure, soit 30 min."
     : etoile === 2
@@ -492,7 +656,7 @@ function genDecimale(etoile: 1 | 2 | 3) {
   const sens = pick(["min", "hmin", "inverse"] as const);
   if (sens === "inverse" && min >= 60) {
     return {
-      text: `${ctx(p, ecrireDuree(min))}\n${pick([
+      text: `${ctx(p, ecrireDuree(min))}\n${pick(simple ? Q_DEC_SIMPLE.inverse : [
         "Écris cette durée en heures, avec une virgule.",
         "Quelle est cette durée en heures, sous forme décimale ?",
         "Écris cette durée sous forme décimale, en heures.",
@@ -505,7 +669,7 @@ function genDecimale(etoile: 1 | 2 | 3) {
   }
   if (sens === "hmin" && min >= 60) {
     return {
-      text: `${ctx(p, `${virgule(v)} h`)}\n${pick(["Écris cette durée en heures et minutes.", "Combien cela fait-il d’heures et de minutes ?"])}`,
+      text: `${ctx(p, `${virgule(v)} h`)}\n${pick(simple ? Q_DEC_SIMPLE.hmin : ["Écris cette durée en heures et minutes.", "Combien cela fait-il d’heures et de minutes ?"])}`,
       format: "short" as const,
       expected: formesDuree(min).filter((f) => !/^\d+ min/.test(f)),
       comparator: "number_equal" as const,
@@ -513,7 +677,7 @@ function genDecimale(etoile: 1 | 2 | 3) {
     };
   }
   return {
-    text: `${ctx(p, `${virgule(v)} h`)}\n${pick(["Combien de minutes cela fait-il ?", "Écris cette durée en minutes.", "Combien de minutes cela représente-t-il ?"])}`,
+    text: `${ctx(p, `${virgule(v)} h`)}\n${pick(simple ? Q_DEC_SIMPLE.min : ["Combien de minutes cela fait-il ?", "Écris cette durée en minutes.", "Combien de minutes cela représente-t-il ?"])}`,
     format: "short" as const,
     expected: [`${min} min`, `${min} minutes`],
     comparator: "number_equal" as const,
@@ -791,7 +955,8 @@ export const dureesBank: TutorBankItemV4[] = [
     microId: "duree_calculer",
     difficulty: 2,
     theme: "neutral",
-    text: "Une séance de cinéma commence à 17 h 40 et dure 110 minutes. À quelle heure se termine-t-elle ?",
+    // 03/11/2026 : ★2, donc sans situation (la séance de cinéma est partie).
+    text: "Il est 17 h 40. Quelle heure sera-t-il dans 110 minutes ?",
     format: "short",
     // 08/10/2026 : correction stricte (contains_keyword acceptait 155 pour 55). Espaces ignorés.
     expected: ["19 h 30", "19:30", "19 h 30 min", "19 heures 30", "19 heures 30 minutes"],
@@ -815,7 +980,8 @@ export const dureesBank: TutorBankItemV4[] = [
     microId: "duree_calculer",
     difficulty: 1,
     theme: "neutral",
-    text: "Un cours commence à 8 h 15 et se termine à 9 h 10. Combien de temps dure-t-il ?",
+    // 03/11/2026 : ★1, donc sans situation (le cours est parti).
+    text: "Combien de temps de 8 h 15 à 9 h 10 ?",
     format: "short",
     // 08/10/2026 : correction stricte (contains_keyword acceptait 155 pour 55). « 55 » seul passe (unité omise).
     expected: ["55 min", "55 minutes", "55 mn"],
@@ -836,7 +1002,8 @@ export const dureesBank: TutorBankItemV4[] = [
     microId: "duree_calculer",
     difficulty: 2,
     theme: "neutral",
-    text: "Un train part à 14 h 25 et arrive à 16 h 05. Quelle est la durée du trajet ?",
+    // 03/11/2026 : ★2, donc sans situation (le train est parti).
+    text: "Combien de temps y a-t-il entre 14 h 25 et 16 h 05 ?",
     format: "short",
     // 08/10/2026 : correction stricte (contains_keyword acceptait 155 pour 55).
     expected: ["1 h 40", "1 h 40 min", "1 heure 40", "1 heure 40 minutes", "1 h 40 minutes", "100 min", "100 minutes"],
@@ -876,7 +1043,8 @@ export const dureesBank: TutorBankItemV4[] = [
     microId: "duree_calculer",
     difficulty: 2,
     theme: "neutral",
-    text: "Un élève écrit : 8 h 50 + 20 min = 8 h 70. A-t-il raison ?",
+    // 03/11/2026 : ★2, sans personnage.
+    text: "8 h 50 + 20 min = 8 h 70. Est-ce juste ?",
     format: "qcm",
     choices: [
       "non : 60 minutes font une heure, donc c'est 9 h 10",
@@ -924,7 +1092,8 @@ export const dureesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Passe par l'heure ronde : c'est le chemin le plus court.",
     tags: ["duree_temps", "calculer", "template"],
-    generate: () => genCalculer(2, "fin"),
+    // 03/11/2026 : ★2 sans situation (les situations sont à ★3).
+    generate: () => genCalculerSimple(2, "fin"),
   },
   {
     kind: "template",
@@ -937,7 +1106,7 @@ export const dureesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Compte les minutes une à une, ou de 5 en 5.",
     tags: ["duree_temps", "calculer", "template"],
-    generate: () => genCalculer(1),
+    generate: () => genCalculerSimple(1),
   },
   {
     kind: "template",
@@ -963,7 +1132,7 @@ export const dureesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Compte d'abord jusqu'à l'heure ronde suivante.",
     tags: ["duree_temps", "calculer", "template"],
-    generate: () => genCalculer(2, "duree"),
+    generate: () => genCalculerSimple(2, "duree"),
   },
   {
     kind: "template",
