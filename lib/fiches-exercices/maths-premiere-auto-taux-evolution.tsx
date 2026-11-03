@@ -70,18 +70,28 @@ export const exercicesAutoTauxEvolutionPremiere: FicheExercicesData = {
               { label: "arrivée (× 1,25)", value: 50 },
             ]),
           ),
+          reponses: [
+            { attendu: "25 %" },
+          ],
           micros: ["auto_evo_calculer_taux"],
         },
         {
           enonce: "Une population passe de $250$ à $200$ habitants. Calculer le taux d'évolution.",
           correction:
             "Taux $= \\dfrac{200 - 250}{250} = \\dfrac{-50}{250} = -0{,}2$, soit $-20$ %.\nLe taux est négatif : c'est une baisse de $20$ %.\n⚠️ On écrit toujours « arrivée moins départ » : c'est cet ordre qui donne le bon signe.",
+          reponses: [
+            { attendu: "-20 %" },
+          ],
           micros: ["auto_evo_calculer_taux"],
         },
         {
           enonce: "Un loyer passe de $800$ € à $1\\,200$ €. Calculer le coefficient multiplicateur, puis le taux d'évolution.",
           correction:
             "Coefficient : $\\dfrac{1\\,200}{800} = \\dfrac{12}{8} = 1{,}5$.\nTaux : $1{,}5 - 1 = 0{,}5$, soit $+50$ %.\n⭐ Les deux chemins, l'écart divisé par le départ ou le coefficient moins $1$, donnent le même taux : $\\dfrac{1\\,200 - 800}{800} = 0{,}5$.",
+          reponses: [
+            { question: "coefficient", attendu: "1,5" },
+            { question: "taux", attendu: "50 %" },
+          ],
           micros: ["auto_evo_calculer_taux"],
         },
         {
@@ -89,12 +99,18 @@ export const exercicesAutoTauxEvolutionPremiere: FicheExercicesData = {
           correction:
             "Coefficients : $1{,}1$ puis $1{,}2$.\nCoefficient global : $1{,}1 \\times 1{,}2 = 1{,}32$.\nTaux global : $1{,}32 - 1 = 0{,}32$, soit $+32$ %.\n⚠️ Pas $+30$ % : la deuxième hausse s'applique à un prix déjà augmenté.",
           schema: ecranSeulement(tableau(["étape", "départ", "× 1,1", "× 1,2"], ["prix (€)", 100, 110, 132])),
+          reponses: [
+            { attendu: "32 %" },
+          ],
           micros: ["auto_evo_successives"],
         },
         {
           enonce: "Une quantité augmente de $50$ %, puis diminue de $20$ %. Quel est le taux d'évolution global ?",
           correction:
             "Coefficients : $1{,}5$ puis $0{,}8$.\nCoefficient global : $1{,}5 \\times 0{,}8 = 1{,}2$. Taux global : $+20$ %.\n⚠️ Pas $+30$ % ($50 - 20$) : les taux ne s'additionnent pas, les coefficients se multiplient.",
+          reponses: [
+            { attendu: "20 %" },
+          ],
           micros: ["auto_evo_successives"],
         },
         {
@@ -106,18 +122,29 @@ export const exercicesAutoTauxEvolutionPremiere: FicheExercicesData = {
             { label: "× 0,9", value: 45 },
             { label: "puis × 1,1", value: 49.5 },
           ]),
+          reponses: [
+            { attendu: "49,5 €" },
+          ],
           micros: ["auto_evo_piege_compensation", "auto_evo_successives"],
         },
         {
           enonce: "Un prix a augmenté de $25$ %. Par quel nombre faut-il le multiplier pour revenir au prix de départ ? Quelle baisse cela représente-t-il ?",
           correction:
             "La hausse a multiplié par $1{,}25$. Pour l'annuler : $\\dfrac{1}{1{,}25} = \\dfrac{100}{125} = 0{,}8$.\n$0{,}8 = 1 - 0{,}2$ : une baisse de $20$ %.\nVérification sur $100$ € : $100 \\times 1{,}25 = 125$, puis $125 \\times 0{,}8 = 100$. ✔️\n⚠️ Pas $-25$ % : $125 \\times 0{,}75 = 93{,}75$.",
+          reponses: [
+            { question: "nombre", attendu: "0,8" },
+            { question: "baisse", attendu: ["20 %", "-20 %"] },
+          ],
           micros: ["auto_evo_reciproque"],
         },
         {
           enonce: "a) Un prix a doublé. De quel pourcentage doit-il baisser pour revenir à sa valeur de départ ?\nb) Un prix a baissé de $50$ %. De quel pourcentage doit-il augmenter pour revenir ?",
           correction:
             "a) Doubler, c'est multiplier par $2$. Pour revenir, on multiplie par $\\dfrac{1}{2} = 0{,}5$ : une baisse de $50$ %.\nb) $-50$ %, c'est multiplier par $0{,}5$. Pour revenir, on multiplie par $\\dfrac{1}{0{,}5} = 2$ : une hausse de $100$ %.\n⚠️ En a), baisser de $100$ % donnerait un prix nul : on ne peut pas perdre plus que tout.",
+          reponses: [
+            { question: "a)", attendu: ["50 %", "-50 %"] },
+            { question: "b)", attendu: "100 %" },
+          ],
           micros: ["auto_evo_reciproque"],
         },
       ],
@@ -145,6 +172,11 @@ export const exercicesAutoTauxEvolutionPremiere: FicheExercicesData = {
           ]),
           correction:
             "a) $\\dfrac{240 - 200}{200} = \\dfrac{40}{200} = 0{,}2$ : $+20$ %.\nb) $\\dfrac{300 - 240}{240} = \\dfrac{60}{240} = 0{,}25$ : $+25$ %.\nc) Directement : $\\dfrac{300 - 200}{200} = 0{,}5$ : $+50$ %.\nAvec les coefficients : $1{,}2 \\times 1{,}25 = 1{,}5$. On retrouve $+50$ %. ✔️\n⚠️ $+20$ % puis $+25$ % ne font pas $+45$ % : ils font $+50$ %.",
+          reponses: [
+            { question: "a)", attendu: "20 %" },
+            { question: "b)", attendu: "25 %" },
+            { question: "c)", attendu: "50 %" },
+          ],
           micros: ["auto_evo_calculer_taux", "auto_evo_successives"],
         },
         {
@@ -160,6 +192,10 @@ export const exercicesAutoTauxEvolutionPremiere: FicheExercicesData = {
               { label: "2025 (× 0,8)", value: 8 },
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: "2" },
+            { question: "b)", attendu: "-20 %" },
+          ],
           micros: ["auto_evo_calculer_taux"],
         },
         {
@@ -172,6 +208,10 @@ export const exercicesAutoTauxEvolutionPremiere: FicheExercicesData = {
             { label: "prix (base 1 000)", value: 1071 },
             { label: "salaire (base 1 000)", value: 1070 },
           ]),
+          reponses: [
+            { question: "a)", attendu: "7,1 %" },
+            { question: "b)", attendu: ["non", "il a baissé", "baissé"] },
+          ],
           micros: ["auto_evo_successives"],
         },
         {
@@ -181,6 +221,10 @@ export const exercicesAutoTauxEvolutionPremiere: FicheExercicesData = {
           correction:
             "a) $200 \\times 0{,}7 = 140$ €, puis $140 \\times 0{,}8 = 112$ €.\nb) Coefficient global : $0{,}7 \\times 0{,}8 = 0{,}56$. Taux : $0{,}56 - 1 = -0{,}44$, soit $-44$ %.\nCe n'est pas $-50$ % : à $-50$ %, le manteau coûterait $100$ €, pas $112$ €.\n⚠️ La seconde remise porte sur $140$ €, pas sur $200$ €.",
           schema: tableau(["étape", "départ", "× 0,7", "× 0,8"], ["prix (€)", 200, 140, 112]),
+          reponses: [
+            { question: "a)", attendu: "112 €" },
+            { question: "b)", attendu: "-44 %" },
+          ],
           micros: ["auto_evo_successives"],
         },
         {
@@ -197,6 +241,12 @@ export const exercicesAutoTauxEvolutionPremiere: FicheExercicesData = {
             { x: 2, y: 8, label: "−20 %" },
             { x: 4, y: 10, label: "+25 %" },
           ], 10),
+          reponses: [
+            { question: "a) jour 1", attendu: "10 €" },
+            { question: "a) jour 2", attendu: "8 €" },
+            { question: "a) taux", attendu: "-20 %" },
+            { question: "b)", attendu: "25 %" },
+          ],
           micros: ["auto_evo_calculer_taux", "auto_evo_reciproque"],
         },
         {
@@ -212,6 +262,10 @@ export const exercicesAutoTauxEvolutionPremiere: FicheExercicesData = {
               { label: "puis × 1,2", value: 48 },
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: "48 000" },
+            { question: "b)", attendu: "-4 %" },
+          ],
           micros: ["auto_evo_piege_compensation", "auto_evo_successives"],
         },
         {
@@ -221,6 +275,9 @@ export const exercicesAutoTauxEvolutionPremiere: FicheExercicesData = {
           correction:
             "La hausse multiplie par $1{,}6$. Pour l'annuler, on multiplie par $\\dfrac{1}{1{,}6} = \\dfrac{10}{16} = \\dfrac{5}{8} = 0{,}625$.\n$0{,}625 = 1 - 0{,}375$ : une baisse de $37{,}5$ %.\nVérification avec $200$ € la tonne : $200 \\times 1{,}6 = 320$, puis $320 \\times 0{,}625 = 200$. ✔️\n⚠️ Une baisse de $60$ % ferait tomber le prix à $320 \\times 0{,}4 = 128$ € : bien en dessous du prix de départ.",
           schema: tableau(["étape", "avant", "crise × 1,6", "retour × 0,625"], ["prix (€ la tonne)", 200, 320, 200]),
+          reponses: [
+            { attendu: ["37,5 %", "-37,5 %"] },
+          ],
           micros: ["auto_evo_reciproque"],
         },
         {
@@ -237,6 +294,10 @@ export const exercicesAutoTauxEvolutionPremiere: FicheExercicesData = {
             { x: 2, y: 3, label: "× 0,25" },
             { x: 5, y: 12, label: "× 4" },
           ], 12),
+          reponses: [
+            { question: "a)", attendu: "-75 %" },
+            { question: "b)", attendu: "300 %" },
+          ],
           micros: ["auto_evo_calculer_taux", "auto_evo_reciproque"],
         },
       ],
@@ -271,6 +332,14 @@ export const exercicesAutoTauxEvolutionPremiere: FicheExercicesData = {
               { label: "B 2040", value: 48.6 },
             ]),
           ),
+          reponses: [
+            { question: "a) ville A", attendu: "25 %" },
+            { question: "a) ville B", attendu: "-10 %" },
+            { question: "b) ville A (milliers)", attendu: "62,5" },
+            { question: "b) ville B (milliers)", attendu: "48,6" },
+            { question: "c)", attendu: "56,25 %" },
+            { question: "d)", attendu: ["11 %", "11,1 %"], tolerance: 0.005 },
+          ],
           micros: ["auto_evo_calculer_taux", "auto_evo_successives", "auto_evo_reciproque"],
         },
         {
@@ -284,6 +353,11 @@ export const exercicesAutoTauxEvolutionPremiere: FicheExercicesData = {
             { label: "× 0,6", value: 600 },
             { label: "puis × 1,4", value: 840 },
           ]),
+          reponses: [
+            { question: "a)", attendu: "840" },
+            { question: "b)", attendu: "-16 %" },
+            { question: "c)", attendu: ["66,7 %", "67 %"], tolerance: 0.005 },
+          ],
           micros: ["auto_evo_piege_compensation", "auto_evo_successives", "auto_evo_reciproque"],
         },
         {
@@ -300,6 +374,12 @@ export const exercicesAutoTauxEvolutionPremiere: FicheExercicesData = {
               { label: "an 3", value: 665.5 },
             ]),
           ),
+          reponses: [
+            { question: "a) coefficient", attendu: "1,331" },
+            { question: "a) taux", attendu: "33,1 %" },
+            { question: "b)", attendu: "665,5 €" },
+            { question: "c)", attendu: "15,5 €" },
+          ],
           micros: ["auto_evo_successives", "auto_evo_calculer_taux"],
         },
         {
@@ -312,6 +392,14 @@ export const exercicesAutoTauxEvolutionPremiere: FicheExercicesData = {
           schema: repere([-1, 4, -1, 13], [{ pts: [[0, 10], [1, 8], [2, 5]] }, { pts: [[2, 5], [3, 7.5]], couleur: ORANGE }], [
             { x: 3, y: 7.5, label: "+50 %" },
           ], 10),
+          reponses: [
+            { question: "a) première décennie", attendu: "-20 %" },
+            { question: "a) seconde décennie", attendu: "-37,5 %" },
+            { question: "b) taux global", attendu: "-50 %" },
+            { question: "b) est-ce -57,5 % ?", attendu: ["non", "faux", "impossible"] },
+            { question: "c) surface retrouvée ?", attendu: ["non", "faux", "impossible"] },
+            { question: "c) taux nécessaire", attendu: "100 %" },
+          ],
           micros: ["auto_evo_calculer_taux", "auto_evo_successives", "auto_evo_reciproque", "auto_evo_piege_compensation"],
         },
       ],

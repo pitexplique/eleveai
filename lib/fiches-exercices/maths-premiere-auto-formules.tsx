@@ -60,30 +60,49 @@ export const exercicesAutoFormulesPremiere: FicheExercicesData = {
           enonce: "Calculer la valeur de l'expression $2x^2 - 3x - 4$ pour $x = -1$.",
           correction:
             "On remplace $x$ par $(-1)$, entre parenthèses : $2 \\times (-1)^2 - 3 \\times (-1) - 4$.\nLa puissance d'abord : $(-1)^2 = 1$, donc $2 \\times 1 = 2$.\nLe produit ensuite : $-3 \\times (-1) = +3$.\nLa somme enfin : $2 + 3 - 4 = 1$.\nL'expression vaut $1$.\n⚠️ Sans parenthèses, on écrit $2 \\times -1^2$, et l'erreur de signe arrive.\n⭐ C'est la question du sujet des Centres étrangers, en juin 2026.",
+          reponses: [
+            { attendu: "1" },
+          ],
           micros: ["auto_alg_litteral"],
         },
         {
           enonce: "Calculer la valeur de $-x^2 + 5x$ pour $x = -2$.",
           correction:
             "On remplace : $-(-2)^2 + 5 \\times (-2)$.\nLa puissance d'abord : $(-2)^2 = 4$. Le signe moins devant s'applique APRÈS : $-(-2)^2 = -4$.\nLe produit : $5 \\times (-2) = -10$.\nLa somme : $-4 - 10 = -14$.\n⚠️ Le piège : écrire $-(-2)^2 = +4$. Dans $-x^2$, on élève au carré, PUIS on prend l'opposé.",
+          reponses: [
+            { attendu: "-14" },
+          ],
           micros: ["auto_alg_litteral"],
         },
         {
           enonce: "On donne $a = -3$ et $b = 5$. Calculer $a - b$, $a \\times b$, $-a + 2b$ et $a^2 - b^2$.",
           correction:
             "$a - b = -3 - 5 = -8$.\n$a \\times b = (-3) \\times 5 = -15$ : un négatif fois un positif donne un négatif.\n$-a + 2b = -(-3) + 2 \\times 5 = 3 + 10 = 13$ : l'opposé de $-3$ est $3$.\n$a^2 - b^2 = (-3)^2 - 5^2 = 9 - 25 = -16$.\n⚠️ $-a$ n'est pas forcément négatif : si $a$ est négatif, $-a$ est positif.",
+          reponses: [
+            { question: "a - b", attendu: "-8" },
+            { question: "a × b", attendu: "-15" },
+            { question: "-a + 2b", attendu: "13" },
+            { question: "a² - b²", attendu: "-16" },
+          ],
           micros: ["auto_alg_litteral"],
         },
         {
           enonce: "La résistance d'un appareil est donnée par $R = \\dfrac{U^2}{P}$, où $U$ est la tension en volts et $P$ la puissance en watts. Calculer $R$ pour $U = 20$ et $P = 80$.",
           correction:
             "On remplace chaque lettre par sa valeur : $R = \\dfrac{20^2}{80}$.\nLe carré d'abord : $20^2 = 20 \\times 20 = 400$.\nLa division ensuite : $\\dfrac{400}{80} = 5$.\nLa résistance vaut $5$ ohms.\n⚠️ $20^2$ veut dire $20 \\times 20$, et non $20 \\times 2$.\n⭐ C'est la question du sujet des Antilles, en juin 2026.",
+          reponses: [
+            { attendu: "5" },
+          ],
           micros: ["auto_alg_application_formule"],
         },
         {
           enonce: "La puissance électrique vérifie $P = U \\times I$. Isoler $I$, puis vérifier avec $P = 60$ et $U = 12$.",
           correction:
             "Dans $P = U \\times I$, la lettre $I$ est MULTIPLIÉE par $U$.\nOn divise les deux côtés par $U$ : $\\dfrac{P}{U} = I$.\nDonc $I = \\dfrac{P}{U}$.\nVérification : $I = \\dfrac{60}{12} = 5$, et $12 \\times 5 = 60$. ✔️\n⚠️ Le piège : écrire $I = \\dfrac{U}{P}$. On divise PAR ce qui multipliait $I$, c'est-à-dire par $U$.",
+          reponses: [
+            { question: "I", attendu: ["P/U", "P÷U"], exact: true },
+            { question: "vérification", attendu: "5" },
+          ],
           micros: ["auto_alg_isoler_variable"],
         },
         {
@@ -91,18 +110,28 @@ export const exercicesAutoFormulesPremiere: FicheExercicesData = {
           correction:
             "$t$ est multiplié par $v$ : on divise les deux côtés par $v$. Donc $t = \\dfrac{d}{v}$.\nApplication : $t = \\dfrac{150}{60} = 2{,}5$ heures.\n$0{,}5$ heure, c'est une demi-heure, donc $30$ minutes : le trajet dure $2$ h $30$ min.\n⚠️ $2{,}5$ h ne veut PAS dire $2$ h $50$ : une heure compte $60$ minutes, pas $100$.",
           schema: tableau(["durée", "1 h", "2 h", "2 h 30"], ["distance (km)", 60, 120, 150]),
+          reponses: [
+            { question: "t", attendu: "d/v" },
+            { question: "durée", attendu: ["2,5 h", "2 h 30"] },
+          ],
           micros: ["auto_alg_isoler_variable", "auto_alg_application_formule"],
         },
         {
           enonce: "Écrire $\\dfrac{x}{3} + \\dfrac{x}{6}$ sous la forme d'une seule fraction, la plus simple possible.",
           correction:
             "On met au même dénominateur, $6$ : $\\dfrac{x}{3} = \\dfrac{2x}{6}$.\nDonc $\\dfrac{2x}{6} + \\dfrac{x}{6} = \\dfrac{3x}{6}$.\nOn simplifie par $3$ : $\\dfrac{3x}{6} = \\dfrac{x}{2}$.\n✔️ Vérification avec $x = 6$ : $\\dfrac{6}{3} + \\dfrac{6}{6} = 2 + 1 = 3$, et $\\dfrac{6}{2} = 3$.\n⚠️ Le piège : additionner les dénominateurs, $\\dfrac{2x}{9}$. On n'additionne JAMAIS les dénominateurs.",
+          reponses: [
+            { attendu: ["x/2", "(1/2)x"], exact: true },
+          ],
           micros: ["auto_alg_litteral"],
         },
         {
           enonce: "On a $y = 3x - 6$. Exprimer $x$ en fonction de $y$.",
           correction:
             "On veut $x$ seul. D'abord, on ajoute $6$ des deux côtés : $y + 6 = 3x$.\nEnsuite, $x$ est multiplié par $3$ : on divise les deux côtés par $3$.\nDonc $x = \\dfrac{y + 6}{3}$.\n✔️ Vérification : pour $x = 4$, $y = 12 - 6 = 6$, et $\\dfrac{6 + 6}{3} = 4$.\n⚠️ Le piège : $x = \\dfrac{y}{3} + 6$. On retire ce qui est « le plus loin » de $x$ en premier : le $-6$, puis le $\\times 3$.",
+          reponses: [
+            { attendu: "(y + 6)/3" },
+          ],
           micros: ["auto_alg_isoler_variable", "auto_alg_litteral"],
         },
       ],
@@ -126,6 +155,11 @@ export const exercicesAutoFormulesPremiere: FicheExercicesData = {
           correction:
             "a) $P_{TTC} = 1{,}2 \\times 50 = 60$ €.\nb) $P_{HT}$ est multiplié par $1{,}2$ : on divise par $1{,}2$. Donc $P_{HT} = \\dfrac{P_{TTC}}{1{,}2}$.\nc) $P_{HT} = \\dfrac{90}{1{,}2} = \\dfrac{900}{12} = 75$ €.\n✔️ Vérification : $1{,}2 \\times 75 = 90$.\n⚠️ Le piège : retirer $20$ % de $90$, ce qui donne $72$ €. Faux : les $20$ % se calculent sur le prix HT, pas sur le TTC.",
           schema: tableau(["prix HT (€)", "50", "75", "100"], ["prix TTC (€)", 60, 90, 120]),
+          reponses: [
+            { question: "a)", attendu: "60 €" },
+            { question: "b)", attendu: ["P_TTC/1,2", "PTTC/1,2", "P_TTC÷1,2", "PTTC÷1,2", "P_HT = P_TTC/1,2"], exact: true },
+            { question: "c)", attendu: "75 €" },
+          ],
           micros: ["auto_alg_application_formule", "auto_alg_isoler_variable"],
         },
         {
@@ -135,6 +169,11 @@ export const exercicesAutoFormulesPremiere: FicheExercicesData = {
           correction:
             "a) $1{,}8 \\times 20 + 32 = 36 + 32 = 68$ °F.\n$1{,}8 \\times 0 + 32 = 32$ °F : l'eau gèle à $32$ °F.\n$1{,}8 \\times (-10) + 32 = -18 + 32 = 14$ °F.\nb) D'abord on retire $32$ : $F - 32 = 1{,}8 \\times C$. Puis on divise par $1{,}8$ : $C = \\dfrac{F - 32}{1{,}8}$.\nc) $C = \\dfrac{50 - 32}{1{,}8} = \\dfrac{18}{1{,}8} = 10$ °C. Il fait frais.\n⚠️ Le piège : diviser $50$ par $1{,}8$ avant de retirer $32$. On défait les opérations dans l'ordre INVERSE.",
           schema: tableau(["°C", "−10", "0", "10", "20"], ["°F", 14, 32, 50, 68]),
+          reponses: [
+            { question: "a) 20 °C ; 0 °C ; -10 °C", attendu: "68 ; 32 ; 14", ordre: true },
+            { question: "b)", attendu: ["(F-32)/1,8", "(F-32)÷1,8"], exact: true },
+            { question: "c)", attendu: ["10", "10 °C"] },
+          ],
           micros: ["auto_alg_application_formule", "auto_alg_isoler_variable"],
         },
         {
@@ -143,6 +182,10 @@ export const exercicesAutoFormulesPremiere: FicheExercicesData = {
             "Un train relie deux villes distantes de $450$ km en $2$ h $30$ min.\na) Calculer sa vitesse moyenne avec $v = \\dfrac{d}{t}$.\nb) À cette vitesse, combien de temps faut-il pour parcourir $540$ km ?",
           correction:
             "a) On convertit la durée en heures : $2$ h $30$ min $= 2{,}5$ h.\n$v = \\dfrac{450}{2{,}5} = \\dfrac{4\\,500}{25} = 180$ km/h.\n⚠️ Le piège : écrire $2{,}30$ h. Trente minutes, c'est une DEMI-heure, donc $0{,}5$ h.\nb) On isole $t$ : $v = \\dfrac{d}{t}$ donne $t = \\dfrac{d}{v}$.\n$t = \\dfrac{540}{180} = 3$ heures.",
+          reponses: [
+            { question: "a)", attendu: "180 km/h" },
+            { question: "b)", attendu: "3 h" },
+          ],
           micros: ["auto_alg_application_formule", "auto_alg_isoler_variable"],
         },
         {
@@ -151,6 +194,11 @@ export const exercicesAutoFormulesPremiere: FicheExercicesData = {
             "Le taux de natalité d'une ville, en naissances pour mille habitants, est $n = \\dfrac{N}{P} \\times 1\\,000$, où $N$ est le nombre de naissances dans l'année et $P$ la population (chiffres de modèle).\na) Une ville de $50\\,000$ habitants compte $600$ naissances. Calculer $n$.\nb) Isoler $N$ dans la formule.\nc) Une ville de $80\\,000$ habitants a un taux de natalité de $10$ pour mille. Combien de naissances y a-t-il eu ?",
           correction:
             "a) $n = \\dfrac{600}{50\\,000} \\times 1\\,000 = \\dfrac{600\\,000}{50\\,000} = 12$ naissances pour mille habitants.\nb) On multiplie par $P$, puis on divise par $1\\,000$ : $N = \\dfrac{n \\times P}{1\\,000}$.\nc) $N = \\dfrac{10 \\times 80\\,000}{1\\,000} = \\dfrac{800\\,000}{1\\,000} = 800$ naissances.\n⭐ Un taux « pour mille » permet de comparer des villes de tailles différentes : c'est l'outil des démographes.",
+          reponses: [
+            { question: "a)", attendu: "12" },
+            { question: "b)", attendu: ["n×P/1000", "nP/1000", "P×n/1000", "Pn/1000", "n×P÷1000", "(n×P)/1000"], exact: true },
+            { question: "c)", attendu: "800" },
+          ],
           micros: ["auto_alg_application_formule", "auto_alg_isoler_variable"],
         },
         {
@@ -166,6 +214,11 @@ export const exercicesAutoFormulesPremiere: FicheExercicesData = {
             { label: "4 ans", value: 240 },
             { label: "5 ans", value: 300 },
           ]),
+          reponses: [
+            { question: "a)", attendu: "240 €" },
+            { question: "b)", attendu: ["I/(C×t)", "I/(Ct)", "I/(t×C)", "I/(tC)", "I÷(C×t)"], exact: true },
+            { question: "c)", attendu: "5 ans" },
+          ],
           micros: ["auto_alg_application_formule", "auto_alg_isoler_variable"],
         },
         {
@@ -179,6 +232,11 @@ export const exercicesAutoFormulesPremiere: FicheExercicesData = {
             { label: "Net", value: 2400 },
             { label: "Cotisations", value: 600 },
           ]),
+          reponses: [
+            { question: "a)", attendu: "1 600 €" },
+            { question: "b)", attendu: ["N/0,8", "N÷0,8"], exact: true },
+            { question: "c)", attendu: "3 000 €" },
+          ],
           micros: ["auto_alg_application_formule", "auto_alg_isoler_variable"],
         },
         {
@@ -188,6 +246,11 @@ export const exercicesAutoFormulesPremiere: FicheExercicesData = {
           correction:
             "a) $D = 25\\,000 \\times 4 = 100\\,000$ cm.\nOn convertit : $100\\,000$ cm $= 1\\,000$ m $= 1$ km.\nb) $d$ est multiplié par $25\\,000$ : $d = \\dfrac{D}{25\\,000}$.\nc) D'abord la même unité : $3$ km $= 300\\,000$ cm.\n$d = \\dfrac{300\\,000}{25\\,000} = 12$ cm.\n⚠️ Le piège des unités : $\\dfrac{3}{25\\,000}$ ne veut rien dire en cm. On convertit AVANT de remplacer.",
           schema: tableau(["carte (cm)", "1", "4", "12"], ["réalité (km)", "0,25", "1", "3"]),
+          reponses: [
+            { question: "a)", attendu: "1 km" },
+            { question: "b)", attendu: ["D/25000", "D÷25000"], exact: true },
+            { question: "c)", attendu: "12 cm" },
+          ],
           micros: ["auto_alg_application_formule", "auto_alg_isoler_variable"],
         },
         {
@@ -201,6 +264,10 @@ export const exercicesAutoFormulesPremiere: FicheExercicesData = {
             { label: "100 objets", value: 7 },
             { label: "200 objets", value: 6 },
           ]),
+          reponses: [
+            { question: "b) q = 50 ; 100 ; 200", attendu: "9 ; 7 ; 6", ordre: true },
+            { question: "c)", attendu: "5 €" },
+          ],
           micros: ["auto_alg_litteral", "auto_alg_application_formule"],
         },
       ],
@@ -228,6 +295,14 @@ export const exercicesAutoFormulesPremiere: FicheExercicesData = {
             { label: "Pull", value: 30 },
             { label: "TVA", value: 6 },
           ]),
+          reponses: [
+            { question: "b)", attendu: ["P_TTC/(1+t)", "PTTC/(1+t)", "P_TTC÷(1+t)", "PTTC÷(1+t)", "P_HT = P_TTC/(1+t)"], exact: true },
+            { question: "c) prix HT", attendu: "40 €" },
+            { question: "c) TVA", attendu: "4 €" },
+            { question: "d) prix HT", attendu: "30 €" },
+            { question: "d) TVA", attendu: "6 €" },
+            { question: "e)", attendu: ["le pull", "pull"] },
+          ],
           micros: ["auto_alg_litteral", "auto_alg_isoler_variable", "auto_alg_application_formule"],
         },
         {
@@ -237,6 +312,12 @@ export const exercicesAutoFormulesPremiere: FicheExercicesData = {
           correction:
             "a) On multiplie par $t$, puis on divise par $v$ : $t = \\dfrac{d}{v}$.\nb) Aller : $t = \\dfrac{120}{40} = 3$ h. Retour : $t = \\dfrac{120}{60} = 2$ h.\nc) Distance totale : $240$ km. Durée totale : $3 + 2 = 5$ h.\n$v = \\dfrac{240}{5} = 48$ km/h.\nd) Le camion passe PLUS DE TEMPS à $40$ km/h ($3$ h) qu'à $60$ km/h ($2$ h) : la vitesse lente pèse plus lourd.\n⚠️ Une vitesse moyenne ne se calcule jamais en faisant la moyenne des vitesses : on repart TOUJOURS de $\\dfrac{\\text{distance totale}}{\\text{durée totale}}$.",
           schema: tableau(["trajet", "aller", "retour", "total"], ["durée (h)", 3, 2, 5]),
+          reponses: [
+            { question: "a)", attendu: "d/v" },
+            { question: "b) aller", attendu: "3 h" },
+            { question: "b) retour", attendu: "2 h" },
+            { question: "c)", attendu: "48 km/h" },
+          ],
           micros: ["auto_alg_isoler_variable", "auto_alg_application_formule"],
         },
         {
@@ -246,6 +327,12 @@ export const exercicesAutoFormulesPremiere: FicheExercicesData = {
           figure: repere([-1, 11, -2, 13], [{ q: [0, 1, 2] }], [], undefined, true),
           correction:
             "a) $P = 2 + 7 = 9$ €.\nb) On retire $2$ des deux côtés : $d = P - 2$.\nc) $d = 12 - 2 = 10$ km.\nd) Sur le graphique : on part de $8$ sur l'axe vertical, on va jusqu'à la droite, on descend. On lit $6$ km.\nPar le calcul : $d = 8 - 2 = 6$ km. ✔️\n⭐ Isoler $d$, c'est lire le graphique « à l'envers » : du prix vers la distance.\n⚠️ Le prix n'est PAS proportionnel à la distance : $10$ km coûtent $12$ €, pas le double de $5$ km ($7$ €).",
+          reponses: [
+            { question: "a)", attendu: "9 €" },
+            { question: "b)", attendu: ["P-2", "-2+P"], exact: true },
+            { question: "c)", attendu: "10 km" },
+            { question: "d)", attendu: "6 km" },
+          ],
           micros: ["auto_alg_isoler_variable", "auto_alg_application_formule"],
         },
         {
@@ -259,6 +346,14 @@ export const exercicesAutoFormulesPremiere: FicheExercicesData = {
             { label: "B", value: 120 },
             { label: "C", value: 90 },
           ]),
+          reponses: [
+            { question: "a)", attendu: "40" },
+            { question: "b) formule", attendu: ["d×S", "dS", "S×d", "Sd"], exact: true },
+            { question: "b) population", attendu: ["60 000 000", "60 millions"] },
+            { question: "c) formule", attendu: ["N/d", "N÷d"], exact: true },
+            { question: "c) surface", attendu: "200 000 km²" },
+            { question: "d)", attendu: "A < C < B", ordre: true },
+          ],
           micros: ["auto_alg_isoler_variable", "auto_alg_application_formule"],
         },
       ],

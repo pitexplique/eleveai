@@ -77,12 +77,20 @@ export const exercicesAutoOrdresUnitesPremiere: FicheExercicesData = {
           enonce: "Calculer $4 \\times \\dfrac{3}{5} + 2$. Donner le résultat sous forme de fraction, puis sous forme décimale.",
           correction:
             "La multiplication passe avant l'addition.\n$4 \\times \\dfrac{3}{5} = \\dfrac{12}{5}$.\nPuis on ajoute $2 = \\dfrac{10}{5}$ : $\\dfrac{12}{5} + \\dfrac{10}{5} = \\dfrac{22}{5}$.\nEn décimal : $\\dfrac{22}{5} = \\dfrac{44}{10} = 4{,}4$.\n⚠️ Le piège : calculer d'abord $\\dfrac{3}{5} + 2$. Les priorités ne changent pas avec les fractions.",
+          reponses: [
+            { question: "fraction", attendu: "22/5" },
+            { question: "décimal", attendu: "4,4" },
+          ],
           micros: ["auto_num_calcul_mental"],
         },
         {
           enonce: "Calculer de tête $25$ % de $360$, puis $15$ % de $80$.",
           correction:
             "$25$ %, c'est un quart : $360 \\div 4 = 90$.\n$15$ %, c'est $10$ % plus $5$ %.\n$10$ % de $80$ font $8$ ; $5$ %, la moitié, font $4$.\nDonc $15$ % de $80$ font $8 + 4 = 12$.\n⭐ Découper un pourcentage en morceaux faciles ($10$ %, $5$ %, $1$ %) : c'est le geste du calcul mental.",
+          reponses: [
+            { question: "25 % de 360", attendu: "90" },
+            { question: "15 % de 80", attendu: "12" },
+          ],
           micros: ["auto_num_calcul_mental"],
         },
         {
@@ -90,6 +98,9 @@ export const exercicesAutoOrdresUnitesPremiere: FicheExercicesData = {
           correction:
             "$1$ cm $= 10$ mm, donc $1$ cm³ $= 10 \\times 10 \\times 10 = 1\\,000$ mm³.\nPour passer des mm³ aux cm³, on divise par $1\\,000$ : $3\\,400 \\div 1\\,000 = 3{,}4$.\n$3\\,400$ mm³ $= 3{,}4$ cm³.\n⚠️ Le piège : diviser par $10$, le facteur des longueurs. Pour les volumes, chaque rang du tableau vaut $1\\,000$.\n⭐ Question tombée à l'épreuve anticipée de juin 2026 (Asie).",
           schema: tableau(["unité", "dm³", "cm³", "mm³"], ["3 400 mm³", "0,0034", "3,4", "3 400"]),
+          reponses: [
+            { attendu: "3,4 cm³" },
+          ],
           micros: ["auto_num_conversions"],
         },
         {
@@ -97,24 +108,37 @@ export const exercicesAutoOrdresUnitesPremiere: FicheExercicesData = {
           correction:
             "$1$ m $= 100$ cm, donc $1$ m² $= 100 \\times 100 = 10\\,000$ cm².\n$2{,}5 \\times 10\\,000 = 25\\,000$.\n$2{,}5$ m² $= 25\\,000$ cm².\n⚠️ Le piège : multiplier par $100$. Un carré de $1$ m de côté contient $100$ rangées de $100$ petits carrés de $1$ cm de côté.",
           schema: tableau(["unité", "m²", "dm²", "cm²"], ["2,5 m²", "2,5", "250", "25 000"]),
+          reponses: [
+            { attendu: "25000 cm²" },
+          ],
           micros: ["auto_num_conversions"],
         },
         {
           enonce: "Convertir $90$ km/h en m/s.",
           correction:
             "$90$ km/h, c'est $90$ km en une heure, soit $90\\,000$ m en $3\\,600$ s.\nEn une seconde : $\\dfrac{90\\,000}{3\\,600} = \\dfrac{900}{36} = 25$ m/s.\n⭐ Le raccourci à retenir : de km/h en m/s, on divise par $3{,}6$.\n⚠️ Le piège : diviser par $60$. Une heure compte $3\\,600$ secondes, pas $60$.",
+          reponses: [
+            { attendu: "25 m/s" },
+          ],
           micros: ["auto_num_conversions"],
         },
         {
           enonce: "Écrire $1$ h $45$ min en heures, sous forme décimale. Puis convertir $0{,}3$ h en minutes.",
           correction:
             "$45$ min, c'est $\\dfrac{45}{60} = \\dfrac{3}{4} = 0{,}75$ h. Donc $1$ h $45$ min $= 1{,}75$ h.\n$0{,}3$ h $= 0{,}3 \\times 60 = 18$ min.\n⚠️ Le piège : écrire $1$ h $45$ min $= 1{,}45$ h. Les minutes vont de $60$ en $60$, pas de $100$ en $100$.",
+          reponses: [
+            { question: "en heures", attendu: "1,75 h" },
+            { question: "en minutes", attendu: "18 min" },
+          ],
           micros: ["auto_num_conversions"],
         },
         {
           enonce: "Donner un ordre de grandeur de $0{,}48 \\times 205$.",
           correction:
             "On arrondit chaque facteur à une valeur simple : $0{,}48 \\approx 0{,}5$ et $205 \\approx 200$.\n$0{,}5 \\times 200 = 100$ : le résultat est de l'ordre de $100$.\n✔️ Le calcul exact donne $98{,}4$ : l'estimation est très proche.\n⭐ Multiplier par $0{,}5$, c'est prendre la moitié.",
+          reponses: [
+            { attendu: "100" },
+          ],
           micros: ["auto_num_ordre_grandeur"],
         },
         {
@@ -127,6 +151,9 @@ export const exercicesAutoOrdresUnitesPremiere: FicheExercicesData = {
             { value: 15, label: "max" },
             { value: 16.5, label: "16,5 ?" },
           ]),
+          reponses: [
+            { question: "bonne moyenne", attendu: "12,5" },
+          ],
           micros: ["auto_num_vraisemblance"],
         },
       ],
@@ -151,6 +178,10 @@ export const exercicesAutoOrdresUnitesPremiere: FicheExercicesData = {
           correction:
             "a) $1$ cm sur la carte représente $25\\,000$ cm en réalité.\n$6 \\times 25\\,000 = 150\\,000$ cm.\nOn convertit : $150\\,000$ cm $= 1\\,500$ m $= 1{,}5$ km (on divise par $100$, puis par $1\\,000$).\nb) Durée $=$ distance $\\div$ vitesse $= 1{,}5 \\div 4 = 0{,}375$ h.\nEn minutes : $0{,}375 \\times 60 = 22{,}5$ min, soit $22$ min $30$ s.\n⚠️ Le piège : lire $0{,}375$ h comme $37{,}5$ min. Des heures décimales se convertissent en multipliant par $60$.",
           schema: tableau(["carte (cm)", "1", "4", "6"], ["réel (km)", 0.25, 1, 1.5]),
+          reponses: [
+            { question: "a)", attendu: "1,5 km" },
+            { question: "b)", attendu: ["0,375 h", "22,5 min", "22 min 30 s"] },
+          ],
           micros: ["auto_num_conversions", "auto_num_calcul_mental"],
         },
         {
@@ -160,6 +191,11 @@ export const exercicesAutoOrdresUnitesPremiere: FicheExercicesData = {
           correction:
             "a) $20$ min $= \\dfrac{20}{60} = \\dfrac{1}{3}$ h, donc $2$ h $20$ min $= 2 + \\dfrac{1}{3} = \\dfrac{7}{3}$ h.\nb) $v = 420 \\div \\dfrac{7}{3} = 420 \\times \\dfrac{3}{7} = 60 \\times 3 = 180$ km/h.\nc) Non : $180$ m/s, c'est $180 \\times 3{,}6 = 648$ km/h, plus du double de la vitesse d'un TGV. L'unité est fausse : c'est $180$ km/h.\n⚠️ Le piège : $2$ h $20$ min $= 2{,}2$ h. On trouverait $420 \\div 2{,}2 \\approx 191$ km/h, faux.\n⭐ Le tableau le confirme : en $20$ minutes, le train fait $60$ km ; en $7$ fois $20$ minutes, $420$ km.",
           schema: tableau(["durée", "20 min", "1 h", "2 h 20"], ["distance (km)", 60, 180, 420]),
+          reponses: [
+            { question: "a)", attendu: "7/3" },
+            { question: "b)", attendu: "180 km/h" },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           micros: ["auto_num_conversions", "auto_num_vraisemblance"],
         },
         {
@@ -168,6 +204,9 @@ export const exercicesAutoOrdresUnitesPremiere: FicheExercicesData = {
             "Une région compte $5\\,950\\,000$ habitants (chiffres d'un modèle). Chaque habitant jette en moyenne $0{,}98$ kg de déchets par jour. Donner un ordre de grandeur de la masse de déchets jetée chaque jour dans la région, en tonnes.",
           correction:
             "On arrondit : $5\\,950\\,000 \\approx 6\\,000\\,000$ et $0{,}98 \\approx 1$.\nMasse par jour : $6\\,000\\,000 \\times 1 = 6\\,000\\,000$ kg.\nOn convertit : $1$ t $= 1\\,000$ kg, donc $6\\,000\\,000$ kg $= 6\\,000$ t.\nEnviron $6\\,000$ tonnes par jour.\n✔️ Le calcul exact donne $5\\,831$ tonnes : l'ordre de grandeur est le bon.\n⭐ En un an, c'est de l'ordre de $6\\,000 \\times 365$, environ $2$ millions de tonnes.",
+          reponses: [
+            { attendu: "6000 t" },
+          ],
           micros: ["auto_num_ordre_grandeur", "auto_num_conversions"],
         },
         {
@@ -176,6 +215,9 @@ export const exercicesAutoOrdresUnitesPremiere: FicheExercicesData = {
             "Un article de journal (imaginaire) écrit : « Payé $2\\,000$ € par mois, ce salarié gagne $2\\,400\\,000$ € par an. » L'erreur saute-t-elle aux yeux ? Corriger.",
           correction:
             "Un an compte $12$ mois : le salaire annuel est $2\\,000 \\times 12 = 24\\,000$ €.\n$2\\,400\\,000$ €, c'est $100$ fois trop : à $2\\,000$ € par mois, on ne gagne pas des millions en un an.\n⭐ L'ordre de grandeur suffit : $2\\,000 \\times 12$ est entre $2\\,000 \\times 10 = 20\\,000$ et $2\\,000 \\times 20 = 40\\,000$.\n⚠️ Deux zéros de trop : c'est l'erreur la plus fréquente dans les chiffres. On la voit dès qu'on se demande « est-ce possible ? ».",
+          reponses: [
+            { attendu: "24000 €" },
+          ],
           micros: ["auto_num_vraisemblance", "auto_num_ordre_grandeur"],
         },
         {
@@ -185,6 +227,11 @@ export const exercicesAutoOrdresUnitesPremiere: FicheExercicesData = {
           correction:
             "a) $1$ km² $= 100$ ha : un carré de $1$ km de côté contient $10 \\times 10$ carrés de $100$ m de côté.\n$12$ km² $= 1\\,200$ ha.\n$1$ ha $= 10\\,000$ m², donc $1\\,200$ ha $= 12\\,000\\,000$ m².\nb) Un terrain : $100 \\times 70 = 7\\,000$ m².\n$12\\,000\\,000 \\div 7\\,000 = 12\\,000 \\div 7$, environ $1\\,700$.\nEnviron $1\\,700$ terrains de football.\n⚠️ Le piège : $1$ km² $= 1\\,000$ m². C'est $1\\,000 \\times 1\\,000 = 1\\,000\\,000$ m².",
           schema: tableau(["unité", "km²", "ha", "m²"], ["12 km²", "12", "1 200", "12 000 000"]),
+          reponses: [
+            { question: "a) ha", attendu: "1200 ha" },
+            { question: "a) m²", attendu: "12000000 m²" },
+            { question: "b)", attendu: "1700", tolerance: 100 },
+          ],
           micros: ["auto_num_conversions", "auto_num_ordre_grandeur"],
         },
         {
@@ -193,6 +240,11 @@ export const exercicesAutoOrdresUnitesPremiere: FicheExercicesData = {
             "Dans une ville, il tombe environ $800$ mm de pluie par an (chiffres d'un modèle). Un toit couvre au sol $50$ m².\na) Convertir $800$ mm en mètres.\nb) Quel volume d'eau tombe sur le toit en un an ? Répondre en m³, puis en litres.",
           correction:
             "a) $1$ m $= 1\\,000$ mm, donc $800$ mm $= 0{,}8$ m.\nb) Le volume est celui d'une couche d'eau : surface $\\times$ hauteur $= 50 \\times 0{,}8 = 40$ m³.\n$1$ m³ $= 1\\,000$ L, donc $40$ m³ $= 40\\,000$ L.\n⭐ « $800$ mm de pluie », c'est $800$ litres sur chaque m² : $800 \\times 50 = 40\\,000$ L. Même résultat.\n⚠️ Le piège : calculer $50 \\times 800$ et répondre en m³. Les unités doivent être accordées AVANT de multiplier.",
+          reponses: [
+            { question: "a)", attendu: "0,8 m" },
+            { question: "b) m³", attendu: "40 m³" },
+            { question: "b) L", attendu: "40000 L" },
+          ],
           micros: ["auto_num_conversions", "auto_num_calcul_mental"],
         },
         {
@@ -206,6 +258,10 @@ export const exercicesAutoOrdresUnitesPremiere: FicheExercicesData = {
             { label: "−30 %", value: 42 },
             { label: "puis −10 %", value: 37.8 },
           ]),
+          reponses: [
+            { question: "a)", attendu: "37,80 €" },
+            { question: "b)", attendu: ["non", "faux"] },
+          ],
           micros: ["auto_num_calcul_mental", "auto_num_vraisemblance"],
         },
         {
@@ -218,6 +274,9 @@ export const exercicesAutoOrdresUnitesPremiere: FicheExercicesData = {
             { value: 1789, label: "1789" },
             { value: 2026, label: "2026" },
           ]),
+          reponses: [
+            { attendu: ["86000", "10^5"], tolerance: 1000 },
+          ],
           micros: ["auto_num_ordre_grandeur", "auto_num_calcul_mental"],
         },
       ],
@@ -241,6 +300,11 @@ export const exercicesAutoOrdresUnitesPremiere: FicheExercicesData = {
           correction:
             "a) $800$ km, c'est $8$ fois $100$ km : $8 \\times 6 = 48$ L.\nb) $48 \\times 1{,}90 = 48 \\times 2 - 48 \\times 0{,}10 = 96 - 4{,}80 = 91{,}20$ €.\nc) Ordre de grandeur : $50$ L à $2$ € font $100$ €. $912$ €, c'est dix fois trop : une virgule a glissé.\nd) $v = 800 \\div 8 = 100$ km/h.\n⭐ « Fois $2$, puis on retire un peu » : c'est le geste du calcul mental avec les prix en $,90$.\n⚠️ Le piège au a) : $6 \\times 800 = 4\\,800$ L. La consommation est donnée pour $100$ km, pas pour $1$ km.",
           schema: tableau(["distance (km)", "100", "400", "800"], ["essence (L)", 6, 24, 48]),
+          reponses: [
+            { question: "a)", attendu: "48 L" },
+            { question: "b)", attendu: "91,20 €" },
+            { question: "d)", attendu: "100 km/h" },
+          ],
           micros: ["auto_num_conversions", "auto_num_calcul_mental", "auto_num_ordre_grandeur", "auto_num_vraisemblance"],
         },
         {
@@ -250,6 +314,12 @@ export const exercicesAutoOrdresUnitesPremiere: FicheExercicesData = {
           correction:
             "a) En $10$ ans : $3 \\times 10 = 30$ mm $= 3$ cm.\nEn $100$ ans : $3 \\times 100 = 300$ mm $= 30$ cm.\nb) Non : $3$ m, c'est $300$ cm, dix fois trop. L'élève a confondu millimètres et centimètres.\nc) $1$ m $= 1\\,000$ mm, et $1\\,000 \\div 3 \\approx 333$ : environ $330$ ans.\n⭐ Le graphique est une droite, car la hausse est la même chaque année. En abscisse, les décennies ; en ordonnée, les décimètres ($1$ dm $= 10$ cm). Au bout de $10$ décennies : $3$ dm, soit $30$ cm.\n⚠️ Un modèle simplifie : rien ne dit que le rythme restera le même pendant trois siècles.",
           schema: repere([-1, 11, -1, 4], [{ q: [0, 0.3, 0] }], [{ x: 10, y: 3, label: "10 ; 3" }], undefined, true),
+          reponses: [
+            { question: "a) décennie", attendu: "3 cm" },
+            { question: "a) siècle", attendu: "30 cm" },
+            { question: "b)", attendu: ["non", "faux"] },
+            { question: "c)", attendu: "330" },
+          ],
           micros: ["auto_num_conversions", "auto_num_vraisemblance", "auto_num_calcul_mental"],
         },
         {
@@ -266,6 +336,13 @@ export const exercicesAutoOrdresUnitesPremiere: FicheExercicesData = {
               ["aire", "12 cm²", "12 km²"],
             ],
           ),
+          reponses: [
+            { question: "a)", attendu: "1 km" },
+            { question: "b) dimensions", attendu: "3 km ; 4 km" },
+            { question: "b) km²", attendu: "12 km²" },
+            { question: "b) ha", attendu: "1200 ha" },
+            { question: "d)", attendu: ["3,5 h", "3 h 30 min", "3 h 30"] },
+          ],
           micros: ["auto_num_conversions", "auto_num_vraisemblance", "auto_num_calcul_mental"],
         },
         {
@@ -274,6 +351,11 @@ export const exercicesAutoOrdresUnitesPremiere: FicheExercicesData = {
             "Une salariée gagne $1\\,820$ € par mois, $12$ mois par an. Elle travaille $35$ heures par semaine, $52$ semaines par an (on ne tient pas compte des congés, pour simplifier).\na) Calculer son salaire annuel.\nb) Calculer le nombre d'heures travaillées dans l'année.\nc) En déduire son salaire horaire.\nd) Contrôler le résultat par un ordre de grandeur, sachant qu'un mois compte environ $150$ heures de travail.",
           correction:
             "a) $1\\,820 \\times 12 = 18\\,200 + 3\\,640 = 21\\,840$ €.\nb) $35 \\times 52 = 35 \\times 50 + 35 \\times 2 = 1\\,750 + 70 = 1\\,820$ h.\nc) $\\dfrac{21\\,840}{1\\,820} = 12$ € de l'heure, car $1\\,820 \\times 12 = 21\\,840$ : c'est le calcul du a).\nd) $1\\,820 \\div 150$ est proche de $1\\,800 \\div 150 = 12$ : même ordre de grandeur. ✔️\n⭐ Une coïncidence utile : $1\\,820$ est à la fois le salaire mensuel et le nombre d'heures dans l'année. Le salaire horaire vaut donc le nombre de mois, $12$.\n⚠️ Le piège : diviser le salaire MENSUEL par les heures ANNUELLES, et trouver $1$ € de l'heure. Invraisemblable : on a mélangé deux durées.",
+          reponses: [
+            { question: "a)", attendu: "21840 €" },
+            { question: "b)", attendu: "1820 h" },
+            { question: "c)", attendu: "12 €" },
+          ],
           micros: ["auto_num_calcul_mental", "auto_num_ordre_grandeur", "auto_num_vraisemblance", "auto_num_conversions"],
         },
       ],

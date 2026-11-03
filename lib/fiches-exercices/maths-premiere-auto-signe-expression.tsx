@@ -60,18 +60,27 @@ export const exercicesAutoSigneExpressionPremiere: FicheExercicesData = {
           enonce: "Résoudre l'équation $(x - 3)(x + 5) = 0$.",
           correction:
             "Un produit est nul quand l'un de ses facteurs est nul.\nPremier facteur : $x - 3 = 0$ donne $x = 3$.\nSecond facteur : $x + 5 = 0$ donne $x = -5$.\nLes solutions sont $-5$ et $3$.\n⚠️ Le piège : recopier les nombres des parenthèses, $-3$ et $5$. On RÉSOUT chaque équation, et les signes s'inversent.",
+          reponses: [
+            { attendu: "-5 ; 3" },
+          ],
           micros: ["auto_alg_produit_nul"],
         },
         {
           enonce: "Résoudre l'équation $(2x + 4)(-3x - 9) = 0$.",
           correction:
             "Un produit est nul quand l'un de ses facteurs est nul.\n$2x + 4 = 0$ donne $2x = -4$, donc $x = -2$.\n$-3x - 9 = 0$ donne $-3x = 9$, donc $x = \\dfrac{9}{-3} = -3$.\nLes solutions sont $-3$ et $-2$.\n⚠️ On divise par $-3$, signe compris : $x = -3$, et non $3$.\n⭐ C'est la question du sujet des Centres étrangers, en juin 2026.",
+          reponses: [
+            { attendu: "-3 ; -2" },
+          ],
           micros: ["auto_alg_produit_nul"],
         },
         {
           enonce: "Résoudre l'équation $x(5x - 10) = 0$.",
           correction:
             "Le produit a deux facteurs : $x$ et $5x - 10$.\nPremier facteur : $x = 0$.\nSecond facteur : $5x - 10 = 0$ donne $5x = 10$, donc $x = 2$.\nLes solutions sont $0$ et $2$.\n⛔ Diviser les deux membres par $x$ ferait PERDRE la solution $0$. On ne divise jamais par une expression qui peut être nulle.",
+          reponses: [
+            { attendu: "0 ; 2" },
+          ],
           micros: ["auto_alg_produit_nul"],
         },
         {
@@ -93,6 +102,9 @@ export const exercicesAutoSigneExpressionPremiere: FicheExercicesData = {
           correction:
             "On écrit l'expression dans l'ordre habituel : $5 - x = -x + 5$. Ici $a = -1$, négatif.\nRacine : $5 - x = 0$ donne $x = 5$.\nComme $a < 0$, l'expression est positive AVANT $5$.\nRéponse : $5 - x > 0$ pour $x < 5$.\n⭐ Sur le dessin, la droite $y = 5 - x$ est au-dessus de l'axe des abscisses tant que $x < 5$. « Positif » se lit « au-dessus de l'axe ».",
           schema: repere([-2, 8, -3, 7], [{ q: [0, -1, 5] }], [{ x: 5, y: 0, label: "5" }]),
+          reponses: [
+            { attendu: ["x < 5", "]-∞ ; 5["] },
+          ],
           micros: ["auto_alg_signe_premier_degre"],
         },
         {
@@ -115,6 +127,9 @@ export const exercicesAutoSigneExpressionPremiere: FicheExercicesData = {
             ["$3 - x$", ["+", "+", "-"], ["", "0"]],
             ["$(3 - x)(x + 4)$", ["-", "+", "-"], ["0", "0"]],
           ]),
+          reponses: [
+            { attendu: ["]-4 ; 3[", "[-4 ; 3]", "-4 < x < 3", "-4 ≤ x ≤ 3"] },
+          ],
           micros: ["auto_alg_signe_factorisee"],
         },
       ],
@@ -138,6 +153,9 @@ export const exercicesAutoSigneExpressionPremiere: FicheExercicesData = {
           correction:
             "Être bénéficiaire, c'est avoir $B(x) > 0$ : c'est une question de SIGNE.\nRacine : $4x - 200 = 0$ donne $x = \\dfrac{200}{4} = 50$.\nLe coefficient $4$ est positif : $B(x)$ est négatif avant $50$, positif après.\nÀ $50$ bols, elle ne gagne rien et ne perd rien. Elle est bénéficiaire à partir de $51$ bols.\n⭐ Ce nombre $50$ s'appelle le SEUIL DE RENTABILITÉ : tout commerçant le calcule avant d'ouvrir.",
           schema: tableauSignes(["0", "50", "+∞"], [["$4x - 200$", ["-", "+"], ["0"]]]),
+          reponses: [
+            { attendu: "51" },
+          ],
           micros: ["auto_alg_signe_premier_degre"],
         },
         {
@@ -147,6 +165,9 @@ export const exercicesAutoSigneExpressionPremiere: FicheExercicesData = {
           correction:
             "« Il gèle » veut dire « la température est négative » : c'est une question de signe.\nRacine : $9 - 6h = 0$ donne $6h = 9$, soit $h = \\dfrac{9}{6} = 1{,}5$.\nLe coefficient de $h$ est $-6$, négatif : $T(h)$ est positive avant $1{,}5$, négative après.\nIl gèle à partir de $1{,}5$ km au-dessus du pied, soit $1\\,500$ m.\n⚠️ En résolvant $9 - 6h < 0$ comme une inéquation, on divise par $-6$ : le sens de l'inégalité se RETOURNE. La règle du signe de $a$ évite ce piège.",
           schema: tableauSignes(["0", "1,5", "+∞"], [["$9 - 6h$", ["+", "-"], ["0"]]], "h"),
+          reponses: [
+            { attendu: ["1,5 km", "1 500 m"] },
+          ],
           micros: ["auto_alg_signe_premier_degre"],
         },
         {
@@ -160,6 +181,9 @@ export const exercicesAutoSigneExpressionPremiere: FicheExercicesData = {
             ["$x - 3$", ["-", "-", "+"], ["", "0"]],
             ["$f(x)$", ["+", "-", "+"], ["0", "0"]],
           ]),
+          reponses: [
+            { question: "a)", attendu: "-1 ; 3" },
+          ],
           micros: ["auto_alg_produit_nul", "auto_alg_signe_factorisee"],
         },
         {
@@ -169,6 +193,11 @@ export const exercicesAutoSigneExpressionPremiere: FicheExercicesData = {
           correction:
             "a) $R(x)$ est un produit : il est nul quand $x = 0$ ou quand $60 - 2x = 0$.\n$60 - 2x = 0$ donne $2x = 60$, soit $x = 30$.\nÀ $0$ €, il donne ses sweat-shirts : la recette est nulle.\nÀ $30$ €, il en vend $60 - 60 = 0$ : personne n'achète, la recette est nulle aussi.\nb) $R(10) = 10 \\times (60 - 20) = 10 \\times 40 = 400$ €.\n$R(20) = 20 \\times (60 - 40) = 20 \\times 20 = 400$ €.\n⭐ Deux prix très différents, la même recette : vendre beaucoup pas cher, ou moins mais plus cher.",
           schema: tableau(["prix (€)", "0", "10", "20", "30"], ["recette (€)", 0, 400, 400, 0]),
+          reponses: [
+            { question: "a)", attendu: "0 ; 30" },
+            { question: "b) R(10)", attendu: "400" },
+            { question: "b) R(20)", attendu: "400" },
+          ],
           micros: ["auto_alg_produit_nul"],
         },
         {
@@ -178,6 +207,9 @@ export const exercicesAutoSigneExpressionPremiere: FicheExercicesData = {
           correction:
             "Racine : $3 - 0{,}5t = 0$ donne $0{,}5t = 3$, soit $t = \\dfrac{3}{0{,}5} = 6$.\nLe coefficient de $t$ est $-0{,}5$, négatif : $v(t)$ est positif avant $6$, négatif après.\nLa population augmente jusqu'en $2020 + 6 = 2026$, puis elle diminue.\n⚠️ Une variation négative ne veut pas dire une population négative : la ville PERD des habitants, elle en a encore beaucoup.\n⭐ Diviser par $0{,}5$, c'est multiplier par $2$ : $3 \\div 0{,}5 = 6$.",
           schema: tableauSignes(["0", "6", "+∞"], [["$3 - 0{,}5t$", ["+", "-"], ["0"]]], "t"),
+          reponses: [
+            { attendu: "2026" },
+          ],
           micros: ["auto_alg_signe_premier_degre"],
         },
         {
@@ -189,6 +221,9 @@ export const exercicesAutoSigneExpressionPremiere: FicheExercicesData = {
             ["$2x - 1$", ["-", "-", "+"], ["", "0"]],
             ["$(2x - 1)(x + 3)$", ["+", "-", "+"], ["0", "0"]],
           ]),
+          reponses: [
+            { attendu: ["]-3 ; 1/2[", "]-3 ; 0,5[", "-3 < x < 1/2", "-3 < x < 0,5"] },
+          ],
           micros: ["auto_alg_signe_factorisee"],
         },
         {
@@ -208,6 +243,10 @@ export const exercicesAutoSigneExpressionPremiere: FicheExercicesData = {
           enonce: "a) Résoudre l'équation $x^2 = 7x$.\nb) Résoudre l'équation $x^2 - 16 = 0$ en factorisant.",
           correction:
             "a) On ramène tout d'un côté : $x^2 - 7x = 0$.\nOn factorise par $x$ : $x(x - 7) = 0$.\nProduit nul : $x = 0$ ou $x = 7$.\n⛔ Diviser par $x$ donnerait seulement $x = 7$ : on perdrait la solution $0$.\nb) $x^2 - 16 = x^2 - 4^2 = (x - 4)(x + 4)$.\nProduit nul : $x = 4$ ou $x = -4$.\n⚠️ $x^2 = 16$ a DEUX solutions : $4$ et $-4$, car $(-4)^2 = 16$ aussi.",
+          reponses: [
+            { question: "a)", attendu: "0 ; 7" },
+            { question: "b)", attendu: "-4 ; 4" },
+          ],
           micros: ["auto_alg_produit_nul"],
         },
       ],
@@ -243,6 +282,14 @@ export const exercicesAutoSigneExpressionPremiere: FicheExercicesData = {
               ])}
             </>
           ),
+          reponses: [
+            { question: "a)", attendu: "5 ; 25" },
+            { question: "c)", attendu: ["]5 ; 25[", "5 < p < 25"] },
+            { question: "d) B(10)", attendu: "75" },
+            { question: "d) B(15)", attendu: "100" },
+            { question: "d) B(20)", attendu: "75" },
+            { question: "d) prix conseillé", attendu: "15 €" },
+          ],
           micros: ["auto_alg_produit_nul", "auto_alg_signe_factorisee"],
         },
         {
@@ -261,6 +308,12 @@ export const exercicesAutoSigneExpressionPremiere: FicheExercicesData = {
               {repere([-1, 11, -7, 7], [{ q: [1, -11, 24] }], [{ x: 3, y: 0, label: "2013" }, { x: 8, y: 0, label: "2018" }], undefined, true)}
             </>
           ),
+          reponses: [
+            { question: "a) s(0)", attendu: "24" },
+            { question: "a)", attendu: ["excédent", "en excédent"] },
+            { question: "b)", attendu: "2013 ; 2018" },
+            { question: "c) déficit", attendu: ["]3 ; 8[", "]2013 ; 2018[", "entre 2013 et 2018", "de 2013 à 2018"] },
+          ],
           micros: ["auto_alg_produit_nul", "auto_alg_signe_factorisee"],
         },
         {
@@ -270,6 +323,13 @@ export const exercicesAutoSigneExpressionPremiere: FicheExercicesData = {
           correction:
             "a) $A$ : $150 + 0{,}20 \\times 1\\,000 = 150 + 200 = 350$ €. $B$ : $90 + 0{,}25 \\times 1\\,000 = 90 + 250 = 340$ €.\nb) $A(x) = 150 + 0{,}2x$ et $B(x) = 90 + 0{,}25x$.\n$D(x) = 150 + 0{,}2x - 90 - 0{,}25x = 60 - 0{,}05x$.\nc) Racine : $0{,}05x = 60$, soit $x = \\dfrac{60}{0{,}05} = \\dfrac{6\\,000}{5} = 1\\,200$.\nLe coefficient $-0{,}05$ est négatif : $D(x)$ est positif avant $1\\,200$, négatif après.\n$D(x) > 0$ veut dire « $A$ coûte plus cher que $B$ ».\nConclusion : en dessous de $1\\,200$ kWh par an, choisir $B$ ; au-dessus, choisir $A$.\n⭐ Pour diviser par $0{,}05$, on multiplie le haut et le bas par $100$.",
           schema: tableau(["consommation (kWh)", "800", "1 200", "1 600"], ["A − B (€)", 20, 0, -20]),
+          reponses: [
+            { question: "a) offre A", attendu: "350 €" },
+            { question: "a) offre B", attendu: "340 €" },
+            { question: "b) A(x)", attendu: "150 + 0,2x" },
+            { question: "b) B(x)", attendu: "90 + 0,25x" },
+            { question: "b) D(x)", attendu: "60 - 0,05x" },
+          ],
           micros: ["auto_alg_signe_premier_degre"],
         },
         {
@@ -279,6 +339,12 @@ export const exercicesAutoSigneExpressionPremiere: FicheExercicesData = {
           correction:
             "a) $D(p) - O(p) = 50 - p - (2p - 10) = 50 - p - 2p + 10 = 60 - 3p$.\n⚠️ Le moins devant la parenthèse change TOUS les signes : $-(2p - 10) = -2p + 10$.\nRacine : $3p = 60$, soit $p = 20$. Le coefficient $-3$ est négatif : positif avant $20$, négatif après.\nb) Il manque des fraises quand la demande dépasse l'offre, donc quand $D(p) - O(p) > 0$ : pour un prix inférieur à $20$ €.\nc) À $20$ €, la différence est nulle : l'offre égale la demande. C'est le prix d'équilibre.\nOn échange $D(20) = 50 - 20 = 30$ kilos (et $O(20) = 40 - 10 = 30$ : ✔️).\nRecette : $20 \\times 30 = 600$ €.\n⭐ Au-dessus de $20$ €, il reste des fraises invendues : les prix ont tendance à baisser. En dessous, elles manquent : ils ont tendance à monter.",
           schema: tableauSignes(["5", "20", "50"], [["$60 - 3p$", ["+", "-"], ["0"]]], "p"),
+          reponses: [
+            { question: "b)", attendu: ["p < 20", "[5 ; 20[", "]5 ; 20["] },
+            { question: "c) prix d'équilibre", attendu: "20 €" },
+            { question: "c) quantité", attendu: "30" },
+            { question: "c) recette", attendu: "600 €" },
+          ],
           micros: ["auto_alg_signe_premier_degre"],
         },
       ],

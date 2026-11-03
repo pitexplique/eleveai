@@ -83,12 +83,18 @@ export const exercicesAutoComparerPremiere: FicheExercicesData = {
             { value: 2 / 5, label: "2/5" },
             { value: 3 / 7, label: "3/7" },
           ]),
+          reponses: [
+            { attendu: ["a > b", "b < a", "3/7 > 2/5", "2/5 < 3/7"] },
+          ],
           micros: ["auto_num_comparer_difference"],
         },
         {
           enonce: "Sans calculer $0{,}6^2$, dire lequel est le plus grand : $0{,}6$ ou $0{,}6^2$.",
           correction:
             "Les deux nombres sont positifs : on peut comparer par le quotient.\n$\\dfrac{0{,}6^2}{0{,}6} = 0{,}6$, qui est plus petit que $1$.\nDonc $0{,}6^2 < 0{,}6$.\n✔️ Vérification : $0{,}6^2 = 0{,}36$.\n⚠️ Élever au carré n'agrandit pas toujours : pour un nombre entre $0$ et $1$, le carré est PLUS PETIT que le nombre.",
+          reponses: [
+            { attendu: ["0,6", "0,6 > 0,6^2", "0,6^2 < 0,6"] },
+          ],
           micros: ["auto_num_comparer_quotient"],
         },
         {
@@ -101,6 +107,9 @@ export const exercicesAutoComparerPremiere: FicheExercicesData = {
             { value: 5 / 7, label: "5/7" },
             { value: 5 / 6, label: "5/6" },
           ]),
+          reponses: [
+            { attendu: "5/9 < 5/7 < 5/6", ordre: true },
+          ],
           micros: ["auto_num_fractions_comparer"],
         },
         {
@@ -111,6 +120,9 @@ export const exercicesAutoComparerPremiere: FicheExercicesData = {
             { value: 7 / 12, label: "7/12" },
             { value: 5 / 8, label: "5/8" },
           ]),
+          reponses: [
+            { attendu: ["7/12 < 5/8", "5/8 > 7/12"] },
+          ],
           micros: ["auto_num_fractions_comparer"],
         },
         {
@@ -123,6 +135,9 @@ export const exercicesAutoComparerPremiere: FicheExercicesData = {
             { value: 1 / 9, label: "1/9" },
             { value: 1 / 8, label: "1/8" },
           ]),
+          reponses: [
+            { attendu: "1/12" },
+          ],
           micros: ["auto_num_fractions_comparer"],
         },
         {
@@ -133,18 +148,27 @@ export const exercicesAutoComparerPremiere: FicheExercicesData = {
             { x: 0, y: 0, label: "" },
             { x: 1, y: 1, label: "" },
           ]),
+          reponses: [
+            { attendu: ["x^2 < x", "x > x^2"] },
+          ],
           micros: ["auto_num_comparer_difference"],
         },
         {
           enonce: "Comparer $A = \\dfrac{1}{3} + \\dfrac{1}{4}$ et $B = \\dfrac{1}{2} + \\dfrac{1}{12}$.",
           correction:
             "Tout sur $12$ : $A = \\dfrac{4}{12} + \\dfrac{3}{12} = \\dfrac{7}{12}$ et $B = \\dfrac{6}{12} + \\dfrac{1}{12} = \\dfrac{7}{12}$.\n$A - B = 0$ : les deux nombres sont ÉGAUX.\n⚠️ Une comparaison a trois réponses possibles : plus grand, plus petit… ou égal.",
+          reponses: [
+            { attendu: ["égaux", "égales", "A = B", "B = A"] },
+          ],
           micros: ["auto_num_fractions_comparer", "auto_num_comparer_difference"],
         },
         {
           enonce: "Comparer $a = 3^{20}$ et $b = 9^{9}$, sans les calculer.",
           correction:
             "On écrit tout avec la même base : $9 = 3^2$, donc $b = (3^2)^9 = 3^{18}$.\nQuotient : $\\dfrac{a}{b} = \\dfrac{3^{20}}{3^{18}} = 3^2 = 9$.\n$9 > 1$, donc $a > b$ : $a$ vaut même $9$ fois $b$.\n⚠️ $9^9$ n'est pas « plus grand parce que $9 > 3$ » : l'exposant compte autant que la base.",
+          reponses: [
+            { attendu: ["a > b", "b < a", "3^20 > 9^9", "9^9 < 3^20"] },
+          ],
           micros: ["auto_num_comparer_quotient"],
         },
       ],
@@ -171,6 +195,9 @@ export const exercicesAutoComparerPremiere: FicheExercicesData = {
             { label: "750 g", value: 6 },
             { label: "1 kg", value: 5.8 },
           ]),
+          reponses: [
+            { attendu: ["1 kg", "le paquet de 1 kg", "paquet de 1 kg"] },
+          ],
           micros: ["auto_num_comparer_quotient"],
         },
         {
@@ -185,6 +212,10 @@ export const exercicesAutoComparerPremiere: FicheExercicesData = {
             { label: "B avant", value: 150 },
             { label: "B après", value: 180 },
           ]),
+          reponses: [
+            { question: "a)", attendu: ["B", "la ville B"] },
+            { question: "b)", attendu: ["A", "la ville A"] },
+          ],
           micros: ["auto_num_comparer_quotient", "auto_num_comparer_difference"],
         },
         {
@@ -195,12 +226,18 @@ export const exercicesAutoComparerPremiere: FicheExercicesData = {
             { value: 2 / 3, label: "2/3" },
             { value: 0.67, label: "0,67" },
           ]),
+          reponses: [
+            { attendu: ["0,67 > 2/3", "2/3 < 0,67", "0,67"] },
+          ],
           micros: ["auto_num_fractions_comparer", "auto_num_comparer_difference"],
         },
         {
           enonce: "Comparer $A = \\dfrac{999}{1000}$ et $B = \\dfrac{1000}{1001}$.",
           correction:
             "Différence sur le dénominateur commun $1000 \\times 1001$ :\n$A - B = \\dfrac{999 \\times 1001 - 1000 \\times 1000}{1000 \\times 1001}$.\nAstuce : $999 \\times 1001 = (1000 - 1)(1000 + 1) = 1000^2 - 1$.\nLe numérateur vaut donc $1000^2 - 1 - 1000^2 = -1$ : $A - B < 0$, et $A < B$.\n⭐ Il manque $\\dfrac{1}{1000}$ à $A$ pour faire $1$, et seulement $\\dfrac{1}{1001}$ à $B$ : $B$ est plus près de $1$.",
+          reponses: [
+            { attendu: ["A < B", "B > A", "999/1000 < 1000/1001", "1000/1001 > 999/1000"] },
+          ],
           micros: ["auto_num_comparer_difference"],
         },
         {
@@ -213,6 +250,11 @@ export const exercicesAutoComparerPremiere: FicheExercicesData = {
             { label: "France", value: 120 },
             { label: "Allemagne", value: 235 },
           ]),
+          reponses: [
+            { question: "pays", attendu: ["Allemagne", "l'Allemagne"] },
+            { question: "densité France", attendu: "120" },
+            { question: "densité Allemagne", attendu: "235", tolerance: 1 },
+          ],
           micros: ["auto_num_comparer_quotient"],
         },
         {
@@ -223,6 +265,9 @@ export const exercicesAutoComparerPremiere: FicheExercicesData = {
             { label: "Classe A (%)", value: 60 },
             { label: "Classe B (%)", value: 56 },
           ]),
+          reponses: [
+            { attendu: ["A", "classe A", "la classe A"] },
+          ],
           micros: ["auto_num_fractions_comparer"],
         },
         {
@@ -231,6 +276,9 @@ export const exercicesAutoComparerPremiere: FicheExercicesData = {
             "Une légende raconte qu'un roi devait donner un grain de riz le premier jour, deux le deuxième, quatre le troisième, et ainsi de suite en doublant. Le trentième jour, il doit donner $2^{29}$ grains, et au total depuis le début environ $2^{30}$. Ce total dépasse-t-il un milliard ? On utilisera $2^{10} = 1024$.",
           correction:
             "Un milliard, c'est $10^9 = (10^3)^3 = 1000^3$.\nEt $2^{30} = (2^{10})^3 = 1024^3$.\n$1024 > 1000$, donc $1024^3 > 1000^3$ : $2^{30} > 10^9$.\nOui : le total dépasse un milliard de grains, en un mois seulement.\n⭐ Doubler à chaque étape fait exploser les nombres : c'est la croissance exponentielle, qu'on retrouvera dans l'année.",
+          reponses: [
+            { attendu: ["oui", "vrai"] },
+          ],
           micros: ["auto_num_comparer_quotient"],
         },
         {
@@ -261,6 +309,12 @@ export const exercicesAutoComparerPremiere: FicheExercicesData = {
             "Pour placer une somme pendant deux ans, une banque propose : placement $A$, $+3$ % par an pendant deux ans ; placement $B$, $+6$ % en une seule fois au bout de deux ans.\na) Par quel nombre est multipliée la somme avec $A$ ? avec $B$ ?\nb) Quel placement est le meilleur ? Pour $10\\,000$ €, de combien ?",
           correction:
             "a) $+3$ % revient à multiplier par $1{,}03$, deux fois : $1{,}03^2 = 1{,}0609$. Avec $B$ : $\\times 1{,}06$.\nb) $\\dfrac{1{,}0609}{1{,}06} > 1$ puisque $1{,}0609 > 1{,}06$ : $A$ est meilleur.\nPour $10\\,000$ € : $A$ donne $10\\,609$ €, $B$ donne $10\\,600$ €. L'écart est de $9$ €.\n⭐ La deuxième année, les $3$ % s'appliquent aussi aux intérêts de la première : ce sont les intérêts composés.\n⚠️ $3$ % puis $3$ %, ce n'est pas $6$ % : c'est un peu plus.",
+          reponses: [
+            { question: "a) A", attendu: "1,0609" },
+            { question: "a) B", attendu: "1,06" },
+            { question: "b) meilleur", attendu: ["A", "placement A", "le placement A"] },
+            { question: "b) écart", attendu: "9 €" },
+          ],
           micros: ["auto_num_comparer_quotient"],
         },
         {
@@ -273,6 +327,12 @@ export const exercicesAutoComparerPremiere: FicheExercicesData = {
             { label: "A (millions)", value: 1430 },
             { label: "B (millions)", value: 1410 },
           ]),
+          reponses: [
+            { question: "a)", attendu: "20 millions" },
+            { question: "b) quotient", attendu: "1,014", tolerance: 0.001 },
+            { question: "b) pourcentage", attendu: "1,4 %", tolerance: 0.001 },
+            { question: "c)", attendu: ["les deux", "tous les deux"] },
+          ],
           micros: ["auto_num_comparer_difference", "auto_num_comparer_quotient"],
         },
         {
@@ -287,6 +347,11 @@ export const exercicesAutoComparerPremiere: FicheExercicesData = {
             { label: "Routes", value: 25 },
             { label: "Culture", value: 5 },
           ]),
+          reponses: [
+            { question: "a)", attendu: ["2/5 > 3/10 > 1/4", "écoles > services sociaux > routes"], ordre: true },
+            { question: "b)", attendu: "1/20" },
+            { question: "c)", attendu: "100 000 €" },
+          ],
           micros: ["auto_num_fractions_comparer", "auto_num_comparer_difference"],
         },
         {
@@ -296,6 +361,12 @@ export const exercicesAutoComparerPremiere: FicheExercicesData = {
           correction:
             "a) À $100$ € : $A$ fait payer $80$ €, $B$ fait payer $85$ € : $A$ est meilleure.\nÀ $200$ € : $A$ fait payer $180$ €, $B$ fait payer $170$ € : $B$ est meilleure.\nb) Avec $A$ : $x - 20$. Avec $B$ : $0{,}85x$ (on garde $85$ % du prix).\nc) $(x - 20) - 0{,}85x = 0{,}15x - 20$. Elle est négative quand $0{,}15x < 20$, soit $x < \\dfrac{20}{0{,}15} \\approx 133{,}33$.\nPour un prix inférieur à environ $133$ €, la remise $A$ fait payer moins : elle est la meilleure. Au-delà, c'est $B$.\n⭐ Une remise fixe avantage les petits prix, une remise en pourcentage les gros.",
           schema: tableau(["prix de départ (€)", "100", "133", "200"], ["payé avec A − payé avec B (€)", -5, "≈ 0", 10]),
+          reponses: [
+            { question: "a) 100 €", attendu: "A" },
+            { question: "a) 200 €", attendu: "B" },
+            { question: "b) avec A", attendu: "x - 20" },
+            { question: "b) avec B", attendu: "0,85x" },
+          ],
           micros: ["auto_num_comparer_difference"],
         },
       ],

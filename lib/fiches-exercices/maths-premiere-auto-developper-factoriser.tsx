@@ -67,6 +67,10 @@ export const exercicesAutoDevelopperFactoriserPremiere: FicheExercicesData = {
           enonce: "Développer et réduire $A = 3(2x - 5)$ et $B = -2(x - 4)$.",
           correction:
             "On distribue le facteur de devant à CHAQUE terme de la parenthèse.\n$A = 3 \\times 2x - 3 \\times 5 = 6x - 15$.\n$B = (-2) \\times x + (-2) \\times (-4) = -2x + 8$.\n⚠️ Le piège, dans $B$ : écrire $-2x - 8$. Moins par moins donne PLUS.",
+          reponses: [
+            { question: "A", attendu: ["6x-15", "-15+6x"], exact: true },
+            { question: "B", attendu: ["-2x+8", "8-2x"], exact: true },
+          ],
           micros: ["auto_alg_developper"],
         },
         {
@@ -77,6 +81,9 @@ export const exercicesAutoDevelopperFactoriserPremiere: FicheExercicesData = {
             ["2x", "2x²", "−10x"],
             ["3", "3x", "−15"],
           ]),
+          reponses: [
+            { attendu: ["2x^2-7x-15", "-15-7x+2x^2"], exact: true },
+          ],
           micros: ["auto_alg_developper"],
         },
         {
@@ -89,24 +96,36 @@ export const exercicesAutoDevelopperFactoriserPremiere: FicheExercicesData = {
               ["−5", "−10x", "25"],
             ]),
           ),
+          reponses: [
+            { attendu: ["4x^2-20x+25", "25-20x+4x^2"], exact: true },
+          ],
           micros: ["auto_alg_identites"],
         },
         {
           enonce: "Développer $(3x + 1)(3x - 1)$.",
           correction:
             "C'est $(a + b)(a - b)$ avec $a = 3x$ et $b = 1$ : le résultat est $a^2 - b^2$.\n$(3x)^2 - 1^2 = 9x^2 - 1$.\n⭐ Les deux termes en $x$ s'annulent : $-3x + 3x = 0$. C'est pour cela qu'il ne reste que deux termes.\n⚠️ Le piège : $(3x)^2 = 3x^2$. Le carré porte sur le $3$ ET sur le $x$ : $9x^2$.",
+          reponses: [
+            { attendu: ["9x^2-1", "-1+9x^2"], exact: true },
+          ],
           micros: ["auto_alg_identites"],
         },
         {
           enonce: "Factoriser $6x^2 + 15x$.",
           correction:
             "On cherche ce que les deux termes ont en commun.\n$6x^2 = 3x \\times 2x$ et $15x = 3x \\times 5$ : le facteur commun est $3x$.\nDonc $6x^2 + 15x = 3x(2x + 5)$.\n✔️ On vérifie en développant : $3x \\times 2x + 3x \\times 5 = 6x^2 + 15x$.\n⚠️ Le piège : s'arrêter à $x(6x + 15)$ ou à $3(2x^2 + 5x)$. C'est juste, mais incomplet : on sort le plus grand facteur commun.",
+          reponses: [
+            { attendu: ["3x(2x+5)", "3x(5+2x)", "3x×(2x+5)", "(2x+5)×3x", "(2x+5)3x"], exact: true },
+          ],
           micros: ["auto_alg_factoriser_commun"],
         },
         {
           enonce: "Factoriser $x^2 - 49$.",
           correction:
             "C'est une différence de deux carrés : $x^2 - 7^2$.\nOn applique $a^2 - b^2 = (a - b)(a + b)$ avec $a = x$ et $b = 7$.\n$x^2 - 49 = (x - 7)(x + 7)$.\n⚠️ Le piège : écrire $(x - 49)(x + 49)$. Dans les parenthèses, on met la RACINE : $7$, pas $49$.",
+          reponses: [
+            { attendu: ["(x-7)(x+7)", "(x+7)(x-7)"], exact: true },
+          ],
           micros: ["auto_alg_factoriser_identite"],
         },
         {
@@ -119,12 +138,18 @@ export const exercicesAutoDevelopperFactoriserPremiere: FicheExercicesData = {
               ["5", "5x", "25"],
             ]),
           ),
+          reponses: [
+            { attendu: ["(x+5)^2", "(5+x)^2"], exact: true },
+          ],
           micros: ["auto_alg_factoriser_identite"],
         },
         {
           enonce: "Factoriser $(x + 1)(2x - 3) + (x + 1)(x + 4)$.",
           correction:
             "Le facteur commun est une parenthèse entière : $(x + 1)$.\nOn le sort, et on garde ce qui reste de chaque terme : $(x + 1)\\left[(2x - 3) + (x + 4)\\right]$.\nOn réduit le crochet : $2x - 3 + x + 4 = 3x + 1$.\nDonc l'expression vaut $(x + 1)(3x + 1)$.\n⚠️ Le piège : tout développer. Ce serait juste, mais on voulait un PRODUIT.",
+          reponses: [
+            { attendu: ["(x+1)(3x+1)", "(3x+1)(x+1)", "(1+x)(3x+1)", "(x+1)(1+3x)"], exact: true },
+          ],
           micros: ["auto_alg_factoriser_commun"],
         },
       ],
@@ -151,6 +176,11 @@ export const exercicesAutoDevelopperFactoriserPremiere: FicheExercicesData = {
             ["x", "x²", "3x"],
             ["3", "3x", "9"],
           ]),
+          reponses: [
+            { question: "a)", attendu: ["x^2+6x+9", "9+6x+x^2"], exact: true },
+            { question: "b) gain d'aire", attendu: "6x + 9" },
+            { question: "c)", attendu: "39 ha" },
+          ],
           micros: ["auto_alg_identites", "auto_alg_developper"],
         },
         {
@@ -170,6 +200,12 @@ export const exercicesAutoDevelopperFactoriserPremiere: FicheExercicesData = {
             ],
             2,
           ),
+          reponses: [
+            { question: "a) prix", attendu: "8 - x" },
+            { question: "a) spectateurs", attendu: "200 + 50x" },
+            { question: "c) R(0) ; R(1) ; R(2) ; R(3) ; R(4)", attendu: "1 600 ; 1 750 ; 1 800 ; 1 750 ; 1 600", ordre: true },
+            { question: "c) baisse", attendu: "2 €" },
+          ],
           micros: ["auto_alg_developper"],
         },
         {
@@ -178,6 +214,11 @@ export const exercicesAutoDevelopperFactoriserPremiere: FicheExercicesData = {
             "Un commerçant vend $19$ articles à $21$ €, puis $98$ articles à $102$ €.\na) Écrire $21 \\times 19$ sous la forme $(20 + 1)(20 - 1)$, et calculer de tête.\nb) Même méthode pour $102 \\times 98$.\nc) Calculer de tête $101^2$ avec l'identité $(a + b)^2$.",
           correction:
             "a) $(20 + 1)(20 - 1) = 20^2 - 1^2 = 400 - 1 = 399$ €.\nb) $102 \\times 98 = (100 + 2)(100 - 2) = 100^2 - 2^2 = 10\\,000 - 4 = 9\\,996$ €.\nc) $101^2 = (100 + 1)^2 = 10\\,000 + 2 \\times 100 \\times 1 + 1 = 10\\,201$.\n⭐ Les identités remarquables ne servent pas qu'au calcul littéral : ce sont aussi des outils de calcul mental.\n⚠️ Le piège au c) : $101^2 = 10\\,000 + 1 = 10\\,001$. Le double produit, $200$, ne s'oublie pas.",
+          reponses: [
+            { question: "a)", attendu: "399" },
+            { question: "b)", attendu: "9 996" },
+            { question: "c)", attendu: "10 201" },
+          ],
           micros: ["auto_alg_identites"],
         },
         {
@@ -187,6 +228,11 @@ export const exercicesAutoDevelopperFactoriserPremiere: FicheExercicesData = {
           correction:
             "a) $12x^2 = 6x \\times 2x$ et $30x = 6x \\times 5$ : le facteur commun est $6x$. $C(x) = 6x(2x + 5)$.\nb) $\\dfrac{C(x)}{x} = \\dfrac{6x(2x + 5)}{x} = 6(2x + 5) = 12x + 30$.\nc) Pour $x = 1$ : $42$. Pour $x = 2$ : $54$. Pour $x = 5$ : $90$.\n⭐ La forme factorisée rend la division par $x$ immédiate : on barre le $x$ du facteur commun.\n⚠️ Le piège : $\\dfrac{12x^2 + 30x}{x} = 12x^2 + 30$. Il faut diviser CHAQUE terme par $x$.",
           schema: ecranSeulement(tableau(["x", "1", "2", "5"], ["coût moyen", 42, 54, 90])),
+          reponses: [
+            { question: "a)", attendu: ["6x(2x+5)", "6x(5+2x)", "6x×(2x+5)", "(2x+5)×6x", "(2x+5)6x"], exact: true },
+            { question: "b)", attendu: "12x + 30" },
+            { question: "c)", attendu: "42 ; 54 ; 90", ordre: true },
+          ],
           micros: ["auto_alg_factoriser_commun"],
         },
         {
@@ -195,6 +241,12 @@ export const exercicesAutoDevelopperFactoriserPremiere: FicheExercicesData = {
             "Une place carrée de $x$ mètres de côté est pavée, sauf une fontaine carrée de $4$ m de côté en son centre.\na) Exprimer l'aire pavée en fonction de $x$.\nb) La factoriser.\nc) Calculer de tête l'aire pavée pour $x = 24$. Le pavage coûte $50$ € le m² : quel est le prix ?",
           correction:
             "a) Grand carré moins petit carré : $x^2 - 16$.\nb) C'est une différence de deux carrés, $x^2 - 4^2$ : $x^2 - 16 = (x - 4)(x + 4)$.\nc) $(24 - 4)(24 + 4) = 20 \\times 28 = 560$ m².\nPrix : $560 \\times 50 = 28\\,000$ €.\n⭐ La forme factorisée se calcule de tête : $20 \\times 28$, plutôt que $24^2 - 16$.\n⚠️ Le piège : $(x - 16)(x + 16)$. On met la racine de $16$, c'est-à-dire $4$.",
+          reponses: [
+            { question: "a)", attendu: "x^2 - 16" },
+            { question: "b)", attendu: ["(x-4)(x+4)", "(x+4)(x-4)"], exact: true },
+            { question: "c) aire", attendu: "560 m²" },
+            { question: "c) prix", attendu: "28 000 €" },
+          ],
           micros: ["auto_alg_factoriser_identite"],
         },
         {
@@ -204,6 +256,12 @@ export const exercicesAutoDevelopperFactoriserPremiere: FicheExercicesData = {
           figure: repere([-3, 5, -5, 10], [{ q: [1, -4, 4] }, { q: [1, 0, -4], couleur: ORANGE }], [], undefined, true),
           correction:
             "a) Pour $x = 0$ : à gauche, $(0 - 2)^2 = 4$ ; à droite, $0 - 4 = -4$. Les deux côtés diffèrent : l'égalité est FAUSSE.\nb) $(x - 2)^2 = x^2 - 2 \\times x \\times 2 + 2^2 = x^2 - 4x + 4$.\nc) Non : les deux courbes se coupent en un seul point, $(2\\,;\\,0)$. Partout ailleurs, elles sont séparées.\n⭐ Un seul contre-exemple suffit pour prouver qu'une égalité est fausse.\n⚠️ Le carré ne se distribue pas : $(a - b)^2 \\neq a^2 - b^2$.",
+          reponses: [
+            { question: "a)", attendu: ["fausse", "faux", "non"] },
+            { question: "b)", attendu: ["x^2-4x+4", "4-4x+x^2"], exact: true },
+            { question: "c) confondues ?", attendu: ["non", "faux"] },
+            { question: "c) point", attendu: "(2 ; 0)", ordre: true },
+          ],
           micros: ["auto_alg_identites"],
         },
         {
@@ -219,12 +277,20 @@ export const exercicesAutoDevelopperFactoriserPremiere: FicheExercicesData = {
               { label: "puis −10 %", value: 198 },
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: "198 €" },
+            { question: "b)", attendu: ["1-t^2", "-t^2+1"], exact: true },
+          ],
           micros: ["auto_alg_identites", "auto_alg_developper"],
         },
         {
           enonce: "Factoriser à l'aide d'une identité remarquable :\na) $4x^2 - 12x + 9$ ;\nb) $(x + 3)^2 - 25$.",
           correction:
             "a) Deux carrés, $4x^2 = (2x)^2$ et $9 = 3^2$, et un terme du milieu négatif : on pense à $(a - b)^2$.\nLe double produit vaut $2 \\times 2x \\times 3 = 12x$ : c'est bien lui.\n$4x^2 - 12x + 9 = (2x - 3)^2$.\nb) Une différence de deux carrés : $(x + 3)^2 - 5^2$, avec $a = x + 3$ et $b = 5$.\n$(a - b)(a + b) = (x + 3 - 5)(x + 3 + 5) = (x - 2)(x + 8)$.\n✔️ Test en $x = 0$ : $3^2 - 25 = -16$, et $(-2) \\times 8 = -16$.\n⚠️ Le piège au b) : oublier que $a$ est TOUTE la parenthèse $x + 3$.",
+          reponses: [
+            { question: "a)", attendu: ["(2x-3)^2", "(3-2x)^2"], exact: true },
+            { question: "b)", attendu: ["(x-2)(x+8)", "(x+8)(x-2)"], exact: true },
+          ],
           micros: ["auto_alg_factoriser_identite"],
         },
       ],
@@ -248,6 +314,12 @@ export const exercicesAutoDevelopperFactoriserPremiere: FicheExercicesData = {
           correction:
             "a) L'allée prend $x$ de chaque côté : on retire $2x$ à chaque dimension.\nAire de la pelouse : $(20 - 2x)(12 - 2x) = 240 - 40x - 24x + 4x^2 = 4x^2 - 64x + 240$.\nb) Allée $=$ jardin $-$ pelouse $= 240 - (4x^2 - 64x + 240) = 64x - 4x^2$.\nFacteur commun $4x$ : $64x - 4x^2 = 4x(16 - x)$.\nc) Pour $x = 1$ : $4 \\times 1 \\times 15 = 60$ m². Prix : $60 \\times 25 = 1\\,500$ €.\n✔️ Directement : jardin $240$ m², pelouse $18 \\times 10 = 180$ m², allée $60$ m².\n⚠️ Le piège : retirer $x$ au lieu de $2x$. L'allée longe les DEUX bords de chaque dimension.\n⚠️ Et le signe moins devant la parenthèse change TOUS les signes.",
           schema: tableau(["largeur x (m)", "1", "2", "3"], ["allée (m²)", 60, 112, 156]),
+          reponses: [
+            { question: "a)", attendu: ["4x^2-64x+240", "240-64x+4x^2"], exact: true },
+            { question: "b)", attendu: ["4x(16-x)", "4x(-x+16)", "4x×(16-x)", "(16-x)×4x", "(16-x)4x"], exact: true },
+            { question: "c) aire", attendu: "60 m²" },
+            { question: "c) prix", attendu: "1 500 €" },
+          ],
           micros: ["auto_alg_developper", "auto_alg_factoriser_commun"],
         },
         {
@@ -267,6 +339,11 @@ export const exercicesAutoDevelopperFactoriserPremiere: FicheExercicesData = {
             ],
             2,
           ),
+          reponses: [
+            { question: "a)", attendu: ["-2x^2+40x+1800", "1800+40x-2x^2"], exact: true },
+            { question: "b) R(0) ; R(5) ; R(10) ; R(15) ; R(20)", attendu: "1 800 ; 1 950 ; 2 000 ; 1 950 ; 1 800", ordre: true },
+            { question: "c) prix", attendu: "10 €" },
+          ],
           micros: ["auto_alg_identites", "auto_alg_developper"],
         },
         {
@@ -275,6 +352,11 @@ export const exercicesAutoDevelopperFactoriserPremiere: FicheExercicesData = {
             "Avant les calculatrices, des tables de carrés ont servi à faciliter les multiplications. Voici l'idée.\na) Développer $(a + b)^2 - (a - b)^2$.\nb) Retrouver ce résultat en factorisant l'expression avec $A^2 - B^2 = (A - B)(A + B)$.\nc) En déduire $23 \\times 17$, à l'aide de $40^2$ et de $6^2$.\nd) Un marchand vend $23$ lots à $17$ €. Quelle est sa recette ?",
           correction:
             "a) $(a + b)^2 - (a - b)^2 = (a^2 + 2ab + b^2) - (a^2 - 2ab + b^2) = 4ab$.\nb) Avec $A = a + b$ et $B = a - b$ : $A - B = 2b$ et $A + B = 2a$. L'expression vaut $2b \\times 2a = 4ab$. Même résultat.\nc) On pose $a = 23$ et $b = 17$ : $a + b = 40$ et $a - b = 6$.\n$4 \\times 23 \\times 17 = 40^2 - 6^2 = 1\\,600 - 36 = 1\\,564$.\nDonc $23 \\times 17 = 1\\,564 \\div 4 = 391$.\nd) La recette est de $391$ €.\n⭐ Une multiplication devient une soustraction de deux carrés, lus dans une table, puis une division par $4$.\n⚠️ Le piège au a) : oublier les parenthèses autour de $(a - b)^2$. Le signe moins porte sur ses trois termes.",
+          reponses: [
+            { question: "a)", attendu: "4ab" },
+            { question: "c)", attendu: "391" },
+            { question: "d)", attendu: "391 €" },
+          ],
           micros: ["auto_alg_identites", "auto_alg_factoriser_identite"],
         },
         {
@@ -289,6 +371,13 @@ export const exercicesAutoDevelopperFactoriserPremiere: FicheExercicesData = {
             ["$5 - x$", ["+", "+", "-"], ["", "0"]],
             ["$B(x)$", ["-", "+", "-"], ["0", "0"]],
           ]),
+          reponses: [
+            { question: "a)", attendu: ["-x^2+6x-5", "-5+6x-x^2"], exact: true },
+            { question: "b)", attendu: ["(5-x)(x-1)", "(x-1)(5-x)", "(-x+5)(x-1)", "(x-1)(-x+5)"], exact: true },
+            { question: "c)", attendu: "1 ; 5" },
+            { question: "d) bénéfice maximal", attendu: ["4 000 €", "4"] },
+            { question: "d) production", attendu: ["300 objets", "3"] },
+          ],
           micros: ["auto_alg_factoriser_identite"],
         },
       ],

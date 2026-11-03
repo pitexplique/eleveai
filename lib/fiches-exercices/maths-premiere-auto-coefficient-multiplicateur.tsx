@@ -67,6 +67,11 @@ export const exercicesAutoCoefficientMultiplicateurPremiere: FicheExercicesData 
           correction:
             "Augmenter de $t$ %, c'est garder le prix entier ($1$) et lui ajouter $\\dfrac{t}{100}$.\n$+15$ % : $1 + 0{,}15 = 1{,}15$.\n$+3$ % : $1 + 0{,}03 = 1{,}03$.\n$+100$ % : $1 + 1 = 2$. Augmenter de $100$ %, c'est doubler.\n⚠️ $+3$ % donne $1{,}03$, et non $1{,}3$ : $1{,}3$ ferait $+30$ %.",
           schema: ecranSeulement(tableau(["hausse", "+15 %", "+3 %", "+100 %"], ["coefficient", "1,15", "1,03", "2"])),
+          reponses: [
+            { question: "+15 %", attendu: "1,15" },
+            { question: "+3 %", attendu: "1,03" },
+            { question: "+100 %", attendu: "2" },
+          ],
           micros: ["auto_evo_additif_multiplicatif"],
         },
         {
@@ -77,12 +82,23 @@ export const exercicesAutoCoefficientMultiplicateurPremiere: FicheExercicesData 
             { label: "il reste 20 %", value: 20 },
             { label: "la remise 80 %", value: 80 },
           ]),
+          reponses: [
+            { question: "-30 %", attendu: "0,7" },
+            { question: "-5 %", attendu: "0,95" },
+            { question: "-80 %", attendu: "0,2" },
+          ],
           micros: ["auto_evo_diminution"],
         },
         {
           enonce: "Traduire chaque multiplication par une hausse ou une baisse en pourcentage : $\\times 1{,}08$ ; $\\times 0{,}92$ ; $\\times 1{,}5$ ; $\\times 0{,}6$.",
           correction:
             "On compare le coefficient à $1$ : plus grand que $1$, c'est une hausse ; plus petit, une baisse.\n$1{,}08 = 1 + 0{,}08$ : hausse de $8$ %.\n$0{,}92 = 1 - 0{,}08$ : baisse de $8$ %.\n$1{,}5 = 1 + 0{,}5$ : hausse de $50$ %.\n$0{,}6 = 1 - 0{,}4$ : baisse de $40$ %.\n⚠️ $\\times 0{,}6$ n'est pas « $-60$ % » : on GARDE $60$ %, on perd $40$ %.",
+          reponses: [
+            { question: "× 1,08", attendu: ["8 %", "+8 %", "hausse de 8 %"] },
+            { question: "× 0,92", attendu: ["-8 %", "baisse de 8 %"] },
+            { question: "× 1,5", attendu: ["50 %", "+50 %", "hausse de 50 %"] },
+            { question: "× 0,6", attendu: ["-40 %", "baisse de 40 %"] },
+          ],
           micros: ["auto_evo_additif_multiplicatif", "auto_evo_diminution"],
         },
         {
@@ -93,12 +109,18 @@ export const exercicesAutoCoefficientMultiplicateurPremiere: FicheExercicesData 
             { label: "avant", value: 80 },
             { label: "après (× 1,25)", value: 100 },
           ]),
+          reponses: [
+            { attendu: "100 €" },
+          ],
           micros: ["auto_evo_valeur_finale", "auto_evo_additif_multiplicatif"],
         },
         {
           enonce: "Un pantalon à $60$ € est soldé à $-30$ %. Combien le paie-t-on ?",
           correction:
             "Baisse de $30$ % : il reste $70$ %, le coefficient est $0{,}7$.\n$60 \\times 0{,}7 = 42$ €.\nVérification : la remise vaut $60 \\times 0{,}3 = 18$ €, et $60 - 18 = 42$ €. ✔️\n⭐ Avec le coefficient, un seul calcul suffit : pas besoin de calculer la remise, puis de la soustraire.",
+          reponses: [
+            { attendu: "42 €" },
+          ],
           micros: ["auto_evo_valeur_finale", "auto_evo_diminution"],
         },
         {
@@ -106,18 +128,29 @@ export const exercicesAutoCoefficientMultiplicateurPremiere: FicheExercicesData 
           correction:
             "Le prix de départ, multiplié par $1{,}2$, a donné $72$ €.\nPour revenir en arrière, on DIVISE par $1{,}2$ : $\\dfrac{72}{1{,}2} = \\dfrac{720}{12} = 60$ €.\nVérification : $60 \\times 1{,}2 = 72$. ✔️\n⚠️ Enlever $20$ % à $72$ € donne $57{,}60$ € : c'est faux. Les $20$ % portaient sur le prix de DÉPART, pas sur $72$ €.",
           schema: tableau(["départ (€)", "coefficient", "arrivée (€)"], [60, "× 1,2", 72]),
+          reponses: [
+            { attendu: "60 €" },
+          ],
           micros: ["auto_evo_valeur_initiale"],
         },
         {
           enonce: "Après une baisse de $25$ %, un prix vaut $45$ €. Quel était le prix de départ ?",
           correction:
             "Baisse de $25$ % : coefficient $0{,}75$. Le prix de départ, multiplié par $0{,}75$, a donné $45$ €.\nOn divise : $\\dfrac{45}{0{,}75} = 60$ €.\nDe tête : $0{,}75 = \\dfrac{3}{4}$. Trois quarts du prix font $45$ €, donc un quart fait $15$ €, et le prix entier $4 \\times 15 = 60$ €.\n⚠️ $45 \\times 1{,}25 = 56{,}25$ : ajouter $25$ % au prix soldé ne redonne pas le prix de départ.",
+          reponses: [
+            { attendu: "60 €" },
+          ],
           micros: ["auto_evo_valeur_initiale", "auto_evo_diminution"],
         },
         {
           enonce: "Traduire par un pourcentage : multiplier par $1{,}005$ ; par $0{,}995$ ; par $3$.",
           correction:
             "$1{,}005 = 1 + 0{,}005$ : hausse de $0{,}5$ %.\n$0{,}995 = 1 - 0{,}005$ : baisse de $0{,}5$ %.\n$3 = 1 + 2$ : hausse de $200$ %.\n⚠️ Tripler, c'est $+200$ %, et non $+300$ % : on garde le prix entier, et on en ajoute deux fois autant.\n⭐ $0{,}005 = \\dfrac{0{,}5}{100}$ : un demi pour cent.",
+          reponses: [
+            { question: "× 1,005", attendu: ["0,5 %", "+0,5 %", "hausse de 0,5 %"] },
+            { question: "× 0,995", attendu: ["-0,5 %", "baisse de 0,5 %"] },
+            { question: "× 3", attendu: ["200 %", "+200 %", "hausse de 200 %"] },
+          ],
           micros: ["auto_evo_additif_multiplicatif", "auto_evo_diminution"],
         },
       ],
@@ -146,6 +179,10 @@ export const exercicesAutoCoefficientMultiplicateurPremiere: FicheExercicesData 
             { label: "baskets", value: 72 },
             { label: "T-shirt", value: 10 },
           ]),
+          reponses: [
+            { question: "a) blouson ; baskets ; T-shirt", attendu: "0,6 ; 0,8 ; 0,4", ordre: true },
+            { question: "b) blouson ; baskets ; T-shirt", attendu: "72 ; 72 ; 10", ordre: true },
+          ],
           micros: ["auto_evo_diminution", "auto_evo_valeur_finale"],
         },
         {
@@ -160,6 +197,11 @@ export const exercicesAutoCoefficientMultiplicateurPremiere: FicheExercicesData 
               { label: "hausse des courses", value: 12 },
             ]),
           ),
+          reponses: [
+            { question: "a) salaire", attendu: "1 890 €" },
+            { question: "a) panier", attendu: "153 €" },
+            { question: "b)", attendu: ["oui", "vrai"] },
+          ],
           micros: ["auto_evo_additif_multiplicatif", "auto_evo_valeur_finale"],
         },
         {
@@ -180,6 +222,11 @@ export const exercicesAutoCoefficientMultiplicateurPremiere: FicheExercicesData 
               { label: "2030 × 0,95", value: 38 },
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: "40 000" },
+            { question: "b)", attendu: "42 000" },
+            { question: "c)", attendu: "38 000" },
+          ],
           micros: ["auto_evo_valeur_finale", "auto_evo_diminution"],
         },
         {
@@ -189,6 +236,9 @@ export const exercicesAutoCoefficientMultiplicateurPremiere: FicheExercicesData 
           correction:
             "Le prix d'il y a un an, multiplié par $1{,}1$, a donné $1{,}98$ €.\nOn divise : $\\dfrac{1{,}98}{1{,}1} = \\dfrac{19{,}8}{11} = 1{,}8$, soit $1{,}80$ €.\nVérification : $1{,}8 \\times 1{,}1 = 1{,}8 + 0{,}18 = 1{,}98$. ✔️\n⚠️ Retirer $10$ % de $1{,}98$ € donnerait $1{,}782$ € : faux. Les $10$ % se calculaient sur l'ANCIEN prix, plus petit.",
           schema: tableau(["il y a un an (€)", "coefficient", "aujourd'hui (€)"], ["1,80", "× 1,1", "1,98"]),
+          reponses: [
+            { attendu: "1,80 €" },
+          ],
           micros: ["auto_evo_valeur_initiale"],
         },
         {
@@ -204,6 +254,12 @@ export const exercicesAutoCoefficientMultiplicateurPremiere: FicheExercicesData 
           schema: repere([-1, 6, -1, 13], [{ pts: [[0, 4], [1, 5], [2, 6], [3, 6], [4, 8]] }, { pts: [[4, 8], [5, 10]], couleur: ORANGE }], [
             { x: 5, y: 10, label: "2025" },
           ]),
+          reponses: [
+            { question: "a) 2020 ; 2024", attendu: "4 ; 8", ordre: true },
+            { question: "b) coefficient", attendu: "2" },
+            { question: "b) pourcentage", attendu: ["100 %", "+100 %"] },
+            { question: "c)", attendu: "10" },
+          ],
           micros: ["auto_evo_valeur_finale", "auto_evo_additif_multiplicatif"],
         },
         {
@@ -216,6 +272,9 @@ export const exercicesAutoCoefficientMultiplicateurPremiere: FicheExercicesData 
             { label: "avant (milliers)", value: 15 },
             { label: "après × 0,8", value: 12 },
           ]),
+          reponses: [
+            { attendu: "15 000" },
+          ],
           micros: ["auto_evo_valeur_initiale", "auto_evo_diminution"],
         },
         {
@@ -224,6 +283,9 @@ export const exercicesAutoCoefficientMultiplicateurPremiere: FicheExercicesData 
             "Un glacier des Alpes a perdu $40$ % de sa surface en un siècle (chiffres d'un modèle). Il couvre aujourd'hui $3$ km². Quelle était sa surface il y a cent ans ?",
           correction:
             "Perdre $40$ % : il reste $60$ %, le coefficient est $0{,}6$.\nLa surface d'il y a cent ans, multipliée par $0{,}6$, donne $3$ km². Donc elle vaut $\\dfrac{3}{0{,}6} = \\dfrac{30}{6} = 5$ km².\nVérification : $5 \\times 0{,}6 = 3$. ✔️\n⚠️ $3 \\times 1{,}4 = 4{,}2$ : faux. Pour remonter le temps, on divise par le coefficient ; on n'applique pas « la hausse inverse ».",
+          reponses: [
+            { attendu: "5 km²" },
+          ],
           micros: ["auto_evo_valeur_initiale", "auto_evo_diminution"],
         },
         {
@@ -238,6 +300,10 @@ export const exercicesAutoCoefficientMultiplicateurPremiere: FicheExercicesData 
               { label: "TVA 90 €", value: 90 },
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: "60 €" },
+            { question: "b)", attendu: "450 €" },
+          ],
           micros: ["auto_evo_valeur_finale", "auto_evo_valeur_initiale"],
         },
       ],
@@ -268,6 +334,13 @@ export const exercicesAutoCoefficientMultiplicateurPremiere: FicheExercicesData 
             { label: "2025", value: 6000 },
             { label: "2026 × 0,95", value: 5700 },
           ]),
+          reponses: [
+            { question: "a) 2015 ; 2025", attendu: "3 000 ; 6 000", ordre: true },
+            { question: "a) pourcentage", attendu: ["100 %", "+100 %"] },
+            { question: "b)", attendu: "300 000 €" },
+            { question: "c)", attendu: "5 700 €" },
+            { question: "d)", attendu: "300 000 €" },
+          ],
           micros: ["auto_evo_additif_multiplicatif", "auto_evo_valeur_finale", "auto_evo_diminution", "auto_evo_valeur_initiale"],
         },
         {
@@ -280,6 +353,12 @@ export const exercicesAutoCoefficientMultiplicateurPremiere: FicheExercicesData 
             { label: "net 78 %", value: 78 },
             { label: "cotisations 22 %", value: 22 },
           ]),
+          reponses: [
+            { question: "a) coefficient", attendu: "0,78" },
+            { question: "a) baisse", attendu: ["22 %", "-22 %"] },
+            { question: "b)", attendu: "1 950 €" },
+            { question: "c)", attendu: "2 000 €" },
+          ],
           micros: ["auto_evo_diminution", "auto_evo_additif_multiplicatif", "auto_evo_valeur_finale", "auto_evo_valeur_initiale"],
         },
         {
@@ -299,6 +378,13 @@ export const exercicesAutoCoefficientMultiplicateurPremiere: FicheExercicesData 
               { label: "fin du siècle × 1,25", value: 10 },
             ]),
           ),
+          reponses: [
+            { question: "a) coefficient", attendu: "2" },
+            { question: "a) pourcentage", attendu: ["100 %", "+100 %"] },
+            { question: "b)", attendu: ["60 %", "+60 %"] },
+            { question: "c)", attendu: "5" },
+            { question: "d)", attendu: "10" },
+          ],
           micros: ["auto_evo_additif_multiplicatif", "auto_evo_valeur_initiale", "auto_evo_valeur_finale"],
         },
         {
@@ -314,6 +400,12 @@ export const exercicesAutoCoefficientMultiplicateurPremiere: FicheExercicesData 
             { label: "2022", value: 80 },
             { label: "2023", value: 100 },
           ]),
+          reponses: [
+            { question: "a)", attendu: "20 000" },
+            { question: "b)", attendu: "40 000" },
+            { question: "c)", attendu: "80 000" },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           micros: ["auto_evo_diminution", "auto_evo_valeur_finale", "auto_evo_additif_multiplicatif", "auto_evo_valeur_initiale"],
         },
       ],

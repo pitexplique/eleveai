@@ -80,48 +80,75 @@ export const exercicesAutoFractionsPuissancesPremiere: FicheExercicesData = {
             { value: 0.3, label: "3/10" },
             { value: 0.4, label: "2/5" },
           ]),
+          reponses: [
+            { attendu: "1/10", exact: true },
+          ],
           micros: ["auto_num_fractions_operations"],
         },
         {
           enonce: "Calculer $\\dfrac{3}{4} \\times \\dfrac{2}{9}$.",
           correction:
             "Pour multiplier, pas besoin du même dénominateur : on multiplie en haut, et en bas.\n$\\dfrac{3}{4} \\times \\dfrac{2}{9} = \\dfrac{3 \\times 2}{4 \\times 9} = \\dfrac{6}{36}$.\nOn simplifie par $6$ : $\\dfrac{6}{36} = \\dfrac{1}{6}$.\n⭐ Plus rapide : simplifier AVANT de multiplier. $3$ et $9$ se simplifient par $3$, $2$ et $4$ par $2$. Il reste $\\dfrac{1}{2} \\times \\dfrac{1}{3} = \\dfrac{1}{6}$.\n⚠️ Mettre au même dénominateur est inutile ici : c'est le geste de l'addition, pas du produit.",
+          reponses: [
+            { attendu: "1/6" },
+          ],
           micros: ["auto_num_fractions_operations"],
         },
         {
           enonce: "Calculer $\\dfrac{5}{6} \\div \\dfrac{10}{3}$.",
           correction:
             "Diviser par $\\dfrac{10}{3}$, c'est multiplier par son inverse, $\\dfrac{3}{10}$.\n$\\dfrac{5}{6} \\times \\dfrac{3}{10} = \\dfrac{15}{60}$.\nOn simplifie par $15$ : $\\dfrac{15}{60} = \\dfrac{1}{4}$.\n⚠️ Le piège : retourner la PREMIÈRE fraction. Seule celle par laquelle on divise se retourne.\n✔️ Vérification : $\\dfrac{1}{4} \\times \\dfrac{10}{3} = \\dfrac{10}{12} = \\dfrac{5}{6}$.",
+          reponses: [
+            { attendu: "1/4" },
+          ],
           micros: ["auto_num_fractions_operations"],
         },
         {
           enonce: "Écrire $(5^3)^4 \\times 5^{10}$ sous la forme d'une seule puissance de $5$.",
           correction:
             "D'abord la puissance d'une puissance : on MULTIPLIE les exposants. $(5^3)^4 = 5^{3 \\times 4} = 5^{12}$.\nPuis le produit de deux puissances de $5$ : on AJOUTE les exposants. $5^{12} \\times 5^{10} = 5^{22}$.\n⚠️ Deux règles, deux gestes : multiplier pour $(a^m)^n$, ajouter pour $a^m \\times a^n$. Tout additionner donnerait $5^{17}$ : c'est faux.\n⭐ Question tombée à l'épreuve anticipée de juin 2026 (Asie).",
+          reponses: [
+            { attendu: "5^22", exact: true },
+          ],
           micros: ["auto_num_puissances"],
         },
         {
           enonce: "Calculer $\\dfrac{2^7 \\times 2^{-3}}{2^2}$.",
           correction:
             "Au numérateur, on ajoute les exposants : $2^7 \\times 2^{-3} = 2^{7 + (-3)} = 2^4$.\nPour le quotient, on SOUSTRAIT les exposants : $\\dfrac{2^4}{2^2} = 2^{4 - 2} = 2^2$.\nEt $2^2 = 4$.\n⚠️ Un exposant négatif ne rend pas le nombre négatif : $2^{-3} = \\dfrac{1}{8}$, qui est positif.",
+          reponses: [
+            { attendu: "4" },
+          ],
           micros: ["auto_num_puissances"],
         },
         {
           enonce: "Écrire $\\dfrac{2}{5}$ sous forme décimale, puis sous forme de pourcentage.",
           correction:
             "Sous forme décimale : on multiplie en haut et en bas par $2$. $\\dfrac{2}{5} = \\dfrac{4}{10} = 0{,}4$.\nEn pourcentage : on veut le dénominateur $100$. $\\dfrac{2}{5} = \\dfrac{40}{100} = 40$ %.\n⚠️ Le piège : écrire $0{,}4$ %. Un pourcentage, c'est le décimal multiplié par $100$ : $0{,}4 = 40$ %.\n⭐ Question tombée à l'épreuve anticipée de juin 2026.",
+          reponses: [
+            { question: "décimal", attendu: "0,4" },
+            { question: "%", attendu: "40 %" },
+          ],
           micros: ["auto_num_ecritures"],
         },
         {
           enonce: "Écrire $0{,}125$ sous forme de fraction irréductible, puis en pourcentage.",
           correction:
             "$0{,}125$ a trois chiffres après la virgule : c'est $\\dfrac{125}{1000}$.\nOn simplifie par $125$, car $125 \\times 8 = 1000$ : $\\dfrac{125}{1000} = \\dfrac{1}{8}$.\nEn pourcentage : $0{,}125 \\times 100 = 12{,}5$ %.\n⭐ À connaître par cœur : $\\dfrac{1}{2} = 50$ %, $\\dfrac{1}{4} = 25$ %, $\\dfrac{1}{8} = 12{,}5$ %. Chaque fois qu'on coupe en deux, le pourcentage est divisé par deux.",
+          reponses: [
+            { question: "fraction", attendu: "1/8", exact: true },
+            { question: "%", attendu: "12,5 %" },
+          ],
           micros: ["auto_num_ecritures"],
         },
         {
           enonce: "Donner l'écriture décimale de $3{,}2 \\times 10^4$, puis celle de $5 \\times 10^{-3}$.",
           correction:
             "$10^4 = 10\\,000$ : multiplier par $10^4$ décale la virgule de $4$ rangs vers la droite. $3{,}2 \\times 10^4 = 32\\,000$.\n$10^{-3} = 0{,}001$ : multiplier par $10^{-3}$ décale la virgule de $3$ rangs vers la GAUCHE. $5 \\times 10^{-3} = 0{,}005$.\n⚠️ Le piège : $10^{-3}$ n'est pas $-1\\,000$. L'exposant négatif veut dire « petit », pas « négatif ».",
+          reponses: [
+            { question: "3,2×10^4", attendu: "32000" },
+            { question: "5×10^-3", attendu: "0,005" },
+          ],
           micros: ["auto_num_puissances", "auto_num_ecritures"],
         },
       ],
@@ -150,6 +177,10 @@ export const exercicesAutoFractionsPuissancesPremiere: FicheExercicesData = {
             { label: "Alimentation", value: 600 },
             { label: "Reste", value: 1000 },
           ]),
+          reponses: [
+            { question: "a)", attendu: "5/12" },
+            { question: "b)", attendu: "1000 €" },
+          ],
           micros: ["auto_num_fractions_operations"],
         },
         {
@@ -158,6 +189,10 @@ export const exercicesAutoFractionsPuissancesPremiere: FicheExercicesData = {
             "Dans une région (chiffres d'un modèle), $\\dfrac{2}{3}$ des actifs travaillent dans les services, et parmi eux $\\dfrac{3}{8}$ travaillent dans le commerce. Quelle fraction de tous les actifs travaille dans le commerce ? Donner aussi le pourcentage.",
           correction:
             "« $\\dfrac{3}{8}$ DE $\\dfrac{2}{3}$ » : le mot « de » se traduit par une multiplication.\n$\\dfrac{3}{8} \\times \\dfrac{2}{3} = \\dfrac{6}{24}$.\nOn simplifie par $6$ : $\\dfrac{6}{24} = \\dfrac{1}{4}$.\nEn pourcentage : $\\dfrac{1}{4} = 25$ %. Un actif sur quatre travaille dans le commerce.\n⚠️ Le piège : additionner $\\dfrac{2}{3} + \\dfrac{3}{8}$. Une part d'une part se MULTIPLIE, et le résultat est plus petit que chacune des deux.",
+          reponses: [
+            { question: "fraction", attendu: "1/4" },
+            { question: "%", attendu: "25 %" },
+          ],
           micros: ["auto_num_fractions_operations", "auto_num_ecritures"],
         },
         {
@@ -171,6 +206,9 @@ export const exercicesAutoFractionsPuissancesPremiere: FicheExercicesData = {
             { label: "B", value: 8 },
             { label: "C", value: 6 },
           ]),
+          reponses: [
+            { attendu: ["A < C < B", "A ; C ; B"], ordre: true },
+          ],
           micros: ["auto_num_ecritures"],
         },
         {
@@ -179,6 +217,11 @@ export const exercicesAutoFractionsPuissancesPremiere: FicheExercicesData = {
             "Un pays (chiffres d'un modèle) compte $60$ millions d'habitants, et son État dépense $480$ milliards d'euros par an.\na) Écrire ces deux nombres sous la forme $a \\times 10^n$, avec $1 \\leqslant a < 10$.\nb) Combien l'État dépense-t-il par habitant et par an ?",
           correction:
             "a) Un million, c'est $10^6$ : $60$ millions $= 60 \\times 10^6 = 6 \\times 10^7$.\nUn milliard, c'est $10^9$ : $480$ milliards $= 480 \\times 10^9 = 4{,}8 \\times 10^{11}$.\nb) Par habitant, on divise : $\\dfrac{4{,}8 \\times 10^{11}}{6 \\times 10^7}$.\nLes nombres d'un côté : $\\dfrac{4{,}8}{6} = 0{,}8$. Les puissances de l'autre : $\\dfrac{10^{11}}{10^7} = 10^{11 - 7} = 10^4$.\nRésultat : $0{,}8 \\times 10^4 = 8\\,000$ € par habitant et par an.\n⚠️ Le piège : diviser $11$ par $7$. Pour un quotient de puissances, on SOUSTRAIT les exposants.",
+          reponses: [
+            { question: "a) habitants", attendu: "6×10^7", exact: true },
+            { question: "a) dépenses", attendu: "4,8×10^11", exact: true },
+            { question: "b)", attendu: "8000 €" },
+          ],
           micros: ["auto_num_puissances", "auto_num_ecritures"],
         },
         {
@@ -193,6 +236,11 @@ export const exercicesAutoFractionsPuissancesPremiere: FicheExercicesData = {
             { label: "3e", value: 2 },
             { label: "Reste", value: 1 },
           ]),
+          reponses: [
+            { question: "a)", attendu: "17/18" },
+            { question: "b) fils", attendu: "9 ; 6 ; 2", ordre: true },
+            { question: "b) reste", attendu: "1" },
+          ],
           micros: ["auto_num_fractions_operations"],
         },
         {
@@ -205,6 +253,11 @@ export const exercicesAutoFractionsPuissancesPremiere: FicheExercicesData = {
             { label: "Avant", value: 800 },
             { label: "Après", value: 1000 },
           ]),
+          reponses: [
+            { question: "a) fraction", attendu: "5/4", exact: true },
+            { question: "a) décimal", attendu: "1,25" },
+            { question: "b)", attendu: "25 %" },
+          ],
           micros: ["auto_num_ecritures"],
         },
         {
@@ -214,6 +267,10 @@ export const exercicesAutoFractionsPuissancesPremiere: FicheExercicesData = {
           correction:
             "a) Diviser par $10$, c'est enlever $1$ à l'exposant.\n$2005$ : $10^2$ €. $2010$ : $10^1 = 10$ €. $2015$ : $10^0 = 1$ €. $2020$ : $10^{-1} = 0{,}1$ €.\nb) $\\dfrac{10^3}{10^{-1}} = 10^{3 - (-1)} = 10^4$ : le prix a été divisé par $10\\,000$.\n⭐ $10^0 = 1$ et $10^{-1} = 0{,}1$ : les exposants continuent sous zéro, avec la même règle.\n⚠️ Le piège : $3 - (-1) = 2$. Retirer un nombre négatif, c'est AJOUTER : $3 + 1 = 4$.",
           schema: tableau(["année", "2000", "2005", "2010", "2015", "2020"], ["prix (€)", 1000, 100, 10, 1, 0.1], true),
+          reponses: [
+            { question: "a)", attendu: ["10^2 ; 10^1 ; 10^0 ; 10^-1", "100 ; 10 ; 1 ; 0,1"], ordre: true },
+            { question: "b)", attendu: ["10000", "10^4"] },
+          ],
           micros: ["auto_num_puissances"],
         },
         {
@@ -227,6 +284,12 @@ export const exercicesAutoFractionsPuissancesPremiere: FicheExercicesData = {
           ]),
           correction:
             "a) Un pourcentage est une fraction sur $100$, qu'on simplifie.\nForêts : $\\dfrac{30}{100} = \\dfrac{3}{10}$. Terres agricoles : $\\dfrac{50}{100} = \\dfrac{1}{2}$. Autres : $\\dfrac{20}{100} = \\dfrac{1}{5}$.\nb) Tout sur $10$ : $\\dfrac{3}{10} + \\dfrac{5}{10} + \\dfrac{2}{10} = \\dfrac{10}{10} = 1$. Les trois parts couvrent bien tout le territoire.\nc) $\\dfrac{3}{10}$ de $550\\,000$ : $550\\,000 \\div 10 = 55\\,000$, puis $55\\,000 \\times 3 = 165\\,000$ km².\n⭐ Dans un camembert, la somme des parts vaut toujours $1$, soit $100$ %.",
+          reponses: [
+            { question: "a) forêts", attendu: "3/10", exact: true },
+            { question: "a) agricole", attendu: "1/2", exact: true },
+            { question: "a) autres", attendu: "1/5", exact: true },
+            { question: "c)", attendu: "165000 km²" },
+          ],
           micros: ["auto_num_ecritures", "auto_num_fractions_operations"],
         },
       ],
@@ -254,6 +317,14 @@ export const exercicesAutoFractionsPuissancesPremiere: FicheExercicesData = {
             { label: "Salaire", value: 120 },
             { label: "Prix", value: 125 },
           ]),
+          reponses: [
+            { question: "a) prix", attendu: "25 %" },
+            { question: "a) salaire", attendu: "20 %" },
+            { question: "b) fraction", attendu: "24/25" },
+            { question: "b) décimal", attendu: "0,96" },
+            { question: "c)", attendu: "moins" },
+            { question: "c) %", attendu: "4 %" },
+          ],
           micros: ["auto_num_fractions_operations", "auto_num_ecritures"],
         },
         {
@@ -266,6 +337,17 @@ export const exercicesAutoFractionsPuissancesPremiere: FicheExercicesData = {
             { label: "A (milliers €)", value: 40 },
             { label: "B (milliers €)", value: 60 },
           ]),
+          reponses: [
+            { question: "a) A richesse", attendu: "2,8×10^12", exact: true },
+            { question: "a) A habitants", attendu: "7×10^7", exact: true },
+            { question: "a) B richesse", attendu: "1,8×10^13", exact: true },
+            { question: "a) B habitants", attendu: "3×10^8", exact: true },
+            { question: "b) A", attendu: "40000 €" },
+            { question: "b) B", attendu: "60000 €" },
+            { question: "c) fraction", attendu: "3/2" },
+            { question: "c) décimal", attendu: "1,5" },
+            { question: "c) % de plus", attendu: "50 %" },
+          ],
           micros: ["auto_num_puissances", "auto_num_ecritures"],
         },
         {
@@ -279,6 +361,13 @@ export const exercicesAutoFractionsPuissancesPremiere: FicheExercicesData = {
             { label: "TTC", value: 60 },
             { label: "Soldé", value: 50 },
           ]),
+          reponses: [
+            { question: "a) 20 %", attendu: "1/5", exact: true },
+            { question: "a) TTC", attendu: "6/5" },
+            { question: "b)", attendu: "60 €" },
+            { question: "c)", attendu: "50 €" },
+            { question: "d)", attendu: "17 %" },
+          ],
           micros: ["auto_num_fractions_operations", "auto_num_ecritures"],
         },
         {
@@ -294,6 +383,13 @@ export const exercicesAutoFractionsPuissancesPremiere: FicheExercicesData = {
             { label: "1940", value: 40 },
             { label: "1970", value: 80 },
           ]),
+          reponses: [
+            { question: "a) doublements", attendu: "4" },
+            { question: "a) facteur", attendu: ["16", "2^4"] },
+            { question: "b)", attendu: "80000" },
+            { question: "b) a × 10^n", attendu: "8×10^4", exact: true },
+            { question: "c)", attendu: ["oui", "vrai"] },
+          ],
           micros: ["auto_num_puissances"],
         },
       ],

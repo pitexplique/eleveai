@@ -69,12 +69,20 @@ export const exercicesAutoDroitesPremiere: FicheExercicesData = {
           enonce: "Parmi ces fonctions, lesquelles sont affines ? lesquelles sont linéaires ?\n$f(x) = 3x - 2$ ; $g(x) = -5x$ ; $h(x) = x^2 + 1$ ; $k(x) = \\dfrac{1}{x}$ ; $l(x) = 7$ ; $u(x) = \\dfrac{x}{2} + 4$.",
           correction:
             "Affine : de la forme $ax + b$, sans carré et sans $x$ au dénominateur.\n$f$ est affine ($a = 3$, $b = -2$). $g$ est affine ET linéaire ($b = 0$). $u(x) = \\dfrac{x}{2} + 4 = 0{,}5x + 4$ est affine.\n$l(x) = 7$ est affine aussi, avec $a = 0$ : sa droite est horizontale.\n$h$ (un carré) et $k$ ($x$ au dénominateur) ne sont pas affines : leurs courbes ne sont pas des droites.\n⚠️ $\\dfrac{x}{2}$ est affine, $\\dfrac{1}{x}$ ne l'est pas : tout dépend de la place du $x$.",
+          reponses: [
+            { question: "affines", attendu: "f ; g ; l ; u" },
+            { question: "linéaires", attendu: "g" },
+          ],
           micros: ["auto_fct_lineaire_affine"],
         },
         {
           enonce: "Une fonction linéaire $f$ vérifie $f(4) = 10$. Donner son expression, puis calculer $f(6)$.",
           correction:
             "Linéaire : $f(x) = ax$. Donc $f(4) = 4a = 10$, et $a = \\dfrac{10}{4} = 2{,}5$.\n$f(x) = 2{,}5x$, et $f(6) = 2{,}5 \\times 6 = 15$.\n⭐ Une fonction linéaire traduit la PROPORTIONNALITÉ : $4 \\to 10$, donc $6 \\to 15$, comme dans un tableau de proportionnalité.\n⚠️ Ce raisonnement ne marche pas pour une fonction affine avec $b \\neq 0$.",
+          reponses: [
+            { question: "f(x)", attendu: "2,5x" },
+            { question: "f(6)", attendu: "15" },
+          ],
           micros: ["auto_fct_lineaire_affine"],
         },
         {
@@ -97,6 +105,9 @@ export const exercicesAutoDroitesPremiere: FicheExercicesData = {
             { x: 2, y: 1, label: "" },
             { x: 0, y: 5, label: "" },
           ]),
+          reponses: [
+            { attendu: "y = -2x + 5" },
+          ],
           micros: ["auto_fct_tracer_droite"],
         },
         {
@@ -108,6 +119,9 @@ export const exercicesAutoDroitesPremiere: FicheExercicesData = {
             { x: 0, y: -1, label: "" },
             { x: 2, y: 2, label: "" },
           ]),
+          reponses: [
+            { attendu: "y = 1,5x - 1" },
+          ],
           micros: ["auto_fct_lire_equation_reduite"],
         },
         {
@@ -118,6 +132,9 @@ export const exercicesAutoDroitesPremiere: FicheExercicesData = {
             { x: -1, y: 2, label: "A" },
             { x: -3, y: 4, label: "B" },
           ]),
+          reponses: [
+            { attendu: "-1" },
+          ],
           micros: ["auto_fct_coefficient_directeur"],
         },
         {
@@ -129,6 +146,10 @@ export const exercicesAutoDroitesPremiere: FicheExercicesData = {
             { x: 6, y: 3, label: "B" },
             { x: 0, y: 0, label: "" },
           ])),
+          reponses: [
+            { question: "coefficient directeur", attendu: "0,5" },
+            { question: "équation", attendu: "y = 0,5x" },
+          ],
           micros: ["auto_fct_coefficient_directeur", "auto_fct_lire_equation_reduite"],
         },
         {
@@ -136,6 +157,11 @@ export const exercicesAutoDroitesPremiere: FicheExercicesData = {
           figure: repere([-3, 4, -3, 7], [{ q: [0, 2, 0] }, { q: [0, -1, 3], couleur: ORANGE }, { q: [0, 0, 3], couleur: VERT }]),
           correction:
             "La verte est horizontale : $a = 0$, c'est $y = 3$.\nLa bleue passe par l'origine et monte de $2$ quand on avance de $1$ : c'est $y = 2x$, une fonction linéaire.\nL'orange descend et coupe l'axe vertical en $3$ : c'est $y = -x + 3$.\n⭐ Trois questions suffisent : la droite monte-t-elle ou descend-elle ? Passe-t-elle par l'origine ? Où coupe-t-elle l'axe vertical ?\n⚠️ $y = 3$ et $y = -x + 3$ coupent l'axe vertical au même point : c'est le signe de $a$ qui les distingue.",
+          reponses: [
+            { question: "bleue", attendu: "y = 2x" },
+            { question: "orange", attendu: "y = -x + 3" },
+            { question: "verte", attendu: "y = 3" },
+          ],
           micros: ["auto_fct_lineaire_affine", "auto_fct_lire_equation_reduite"],
         },
       ],
@@ -163,6 +189,12 @@ export const exercicesAutoDroitesPremiere: FicheExercicesData = {
             { x: 0, y: 0, label: "" },
             { x: 3, y: 6, label: "3 km" },
           ], undefined, true),
+          reponses: [
+            { question: "a) T1(x)", attendu: "x + 3" },
+            { question: "a) T2(x)", attendu: "2x" },
+            { question: "a) linéaire", attendu: ["T2", "T_2"] },
+            { question: "c)", attendu: ["moins de 3 km", "x < 3"] },
+          ],
           micros: ["auto_fct_lineaire_affine", "auto_fct_tracer_droite"],
         },
         {
@@ -176,6 +208,12 @@ export const exercicesAutoDroitesPremiere: FicheExercicesData = {
             { x: 0, y: 3, label: "b = 3" },
             { x: 1, y: 5, label: "" },
           ], undefined, true),
+          reponses: [
+            { question: "a) ordonnée à l'origine", attendu: "3" },
+            { question: "a) coefficient directeur", attendu: "2" },
+            { question: "b)", attendu: "y = 2x + 3" },
+            { question: "c)", attendu: "19 €" },
+          ],
           micros: ["auto_fct_lire_equation_reduite"],
         },
         {
@@ -189,6 +227,11 @@ export const exercicesAutoDroitesPremiere: FicheExercicesData = {
             { x: 3, y: 4.5, label: "2010" },
             { x: 5, y: 3.5, label: "2030" },
           ])),
+          reponses: [
+            { question: "a)", attendu: "-0,05" },
+            { question: "b)", attendu: "-0,05x + 6" },
+            { question: "c)", attendu: "3,5 km" },
+          ],
           micros: ["auto_fct_coefficient_directeur", "auto_fct_lire_equation_reduite"],
         },
         {
@@ -202,6 +245,11 @@ export const exercicesAutoDroitesPremiere: FicheExercicesData = {
             { x: 1, y: 2, label: "9 h" },
             { x: 3, y: 6, label: "11 h" },
           ])),
+          reponses: [
+            { question: "a)", attendu: "20" },
+            { question: "b)", attendu: "40 km" },
+            { question: "c)", attendu: "8 h" },
+          ],
           micros: ["auto_fct_coefficient_directeur"],
         },
         {
@@ -211,6 +259,11 @@ export const exercicesAutoDroitesPremiere: FicheExercicesData = {
           figure: tableau(["consommation (centaines de kWh)", "0", "1", "2", "3"], ["facture (€)", 12, 37, 62, 87]),
           correction:
             "a) Quand la consommation augmente de $1$, la facture augmente toujours de $25$ € : $37 - 12 = 62 - 37 = 87 - 62 = 25$. Des hausses égales : la fonction est affine.\nb) $f(x) = 25x + 12$ : $12$ € d'abonnement, payés même sans rien consommer, et $25$ € par centaine de kWh.\nc) Non : pour $0$ kWh, on paie $12$ €, pas $0$. Doubler la consommation ne double pas la facture : $f(2) = 62$, et non $2 \\times 37 = 74$.\n⚠️ Affine n'est pas proportionnel : il faut $b = 0$ pour être linéaire.",
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: "25x + 12" },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           micros: ["auto_fct_lineaire_affine", "auto_fct_lire_equation_reduite"],
         },
         {
@@ -225,6 +278,10 @@ export const exercicesAutoDroitesPremiere: FicheExercicesData = {
             { x: 2, y: 6, label: "" },
             { x: 6, y: 0, label: "vide" },
           ], undefined, true),
+          reponses: [
+            { question: "a)", attendu: "y = -1,5x + 9" },
+            { question: "b)", attendu: "6 jours" },
+          ],
           micros: ["auto_fct_lire_equation_reduite"],
         },
         {
@@ -234,6 +291,11 @@ export const exercicesAutoDroitesPremiere: FicheExercicesData = {
           correction:
             "a) $a = \\dfrac{150\\,000 - 120\\,000}{2021 - 2015} = \\dfrac{30\\,000}{6} = 5\\,000$ : le prix monte de $5\\,000$ € par an.\nb) 2018 : $120\\,000 + 3 \\times 5\\,000 = 135\\,000$ €. 2025 : $150\\,000 + 4 \\times 5\\,000 = 170\\,000$ €.\n⭐ Une évolution affine ajoute la MÊME somme chaque année ; une évolution en pourcentage, non.\n⚠️ Calculer $150\\,000 - 120\\,000$ ne suffit pas : il faut encore diviser par le nombre d'années.",
           schema: ecranSeulement(tableau(["année", "2015", "2018", "2021", "2025"], ["prix (€)", "120 000", "135 000", "150 000", "170 000"])),
+          reponses: [
+            { question: "a)", attendu: "5 000 €" },
+            { question: "b) 2018", attendu: "135 000 €" },
+            { question: "b) 2025", attendu: "170 000 €" },
+          ],
           micros: ["auto_fct_coefficient_directeur"],
         },
         {
@@ -246,6 +308,11 @@ export const exercicesAutoDroitesPremiere: FicheExercicesData = {
             { x: 0, y: 4, label: "" },
             { x: 6, y: 7, label: "2026" },
           ]),
+          reponses: [
+            { question: "a)", attendu: "0,5x + 4" },
+            { question: "b) premier point", attendu: "(0 ; 4)", ordre: true },
+            { question: "c)", attendu: "2026" },
+          ],
           micros: ["auto_fct_tracer_droite", "auto_fct_lire_equation_reduite"],
         },
       ],
@@ -273,6 +340,14 @@ export const exercicesAutoDroitesPremiere: FicheExercicesData = {
             { x: 4, y: 8, label: "40 repas" },
             { x: 0, y: 4, label: "" },
           ], undefined, true),
+          reponses: [
+            { question: "a) R(x)", attendu: "2x" },
+            { question: "a) C(x)", attendu: "x + 4" },
+            { question: "a) linéaire", attendu: "R" },
+            { question: "c)", attendu: "40 repas" },
+            { question: "d) B(x)", attendu: "x - 4" },
+            { question: "d) affine ?", attendu: ["oui", "vrai"] },
+          ],
           micros: ["auto_fct_lineaire_affine", "auto_fct_lire_equation_reduite"],
         },
         {
@@ -285,6 +360,12 @@ export const exercicesAutoDroitesPremiere: FicheExercicesData = {
             { x: 3, y: 6, label: "" },
             { x: 5, y: 10, label: "2040" },
           ], undefined, true),
+          reponses: [
+            { question: "a) par an", attendu: "0,2" },
+            { question: "a) par décennie", attendu: "2" },
+            { question: "b)", attendu: "y = 2x" },
+            { question: "d)", attendu: "2040" },
+          ],
           micros: ["auto_fct_coefficient_directeur", "auto_fct_lire_equation_reduite", "auto_fct_tracer_droite"],
         },
         {
@@ -297,6 +378,11 @@ export const exercicesAutoDroitesPremiere: FicheExercicesData = {
             { x: 3, y: 9, label: "90 cm" },
             { x: 3, y: 8, label: "" },
           ], undefined, true),
+          reponses: [
+            { question: "a) jours 10-20 ; jours 20-30", attendu: "3 ; 4", ordre: true },
+            { question: "b)", attendu: ["non", "faux"] },
+            { question: "c)", attendu: "80 cm" },
+          ],
           micros: ["auto_fct_coefficient_directeur", "auto_fct_lineaire_affine"],
         },
         {
@@ -310,6 +396,14 @@ export const exercicesAutoDroitesPremiere: FicheExercicesData = {
             { x: 0, y: 4, label: "" },
             { x: 0, y: 0, label: "" },
           ], undefined, true),
+          reponses: [
+            { question: "a) A(x)", attendu: "10x + 40" },
+            { question: "a) S(x)", attendu: "15x" },
+            { question: "a) linéaire", attendu: "S" },
+            { question: "b) A : ordonnée à l'origine ; coefficient directeur", attendu: "4 ; 1", ordre: true },
+            { question: "b) S : ordonnée à l'origine ; coefficient directeur", attendu: "0 ; 1,5", ordre: true },
+            { question: "c)", attendu: "10" },
+          ],
           micros: ["auto_fct_lineaire_affine", "auto_fct_lire_equation_reduite", "auto_fct_coefficient_directeur"],
         },
       ],
