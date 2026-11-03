@@ -765,4 +765,12 @@ export const CORRECTEURS: CorrecteursMaths = avecReglesLitteral({
   litteral_expression_comprendre_tpl_2: cCoefficient,
   litteral_expression_comprendre_tpl_3: cLitteralOuNumerique,
   litteral_expression_comprendre_tpl_4: cCoefficient,
+  // 03/11/2026 : les situations de vie montées de ★1-★2 à ★3.
+  litteral_expression_comprendre_tpl_5_lettre_situation: cLaLettre,
+  litteral_expression_comprendre_tpl_6_coef_situation: cCoefficient,
+  litteral_expression_comprendre_tpl_7_constante_situation: cCoefficient,
+  litteral_expression_traduire_tpl_6_situation: cTraduire,
+  litteral_expression_substituer_tpl_6_situation: cSubstituer,
+  litteral_expression_substituer_tpl_7_situation_vie: cSubstituer,
+  litteral_expression_reduire_tpl_6_situation: cReduireSituation,
 });

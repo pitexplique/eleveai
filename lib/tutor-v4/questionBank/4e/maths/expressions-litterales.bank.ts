@@ -25,7 +25,7 @@
  * expression (« 3x + 67 » passait pour 3x + 6) : `number_equal`,
  * `expression_developpee` (Réduis) ou `expression_equivalente` (Traduis).
  */
-import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type { TutorBankItemV4, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -327,7 +327,7 @@ const PHRASES_1: Phrase[] = [
 const TOURNURES_TRADUIRE: ((p: string, l: string) => string)[] = [
   (p) => `Traduis par une expression littérale : « ${p} ».`,
   (p, l) => `Écris en fonction de ${l} : « ${p} ».`,
-  (p, l) => `Un nombre est noté ${l}. Écris l’expression qui correspond à « ${p} ».`,
+  (p) => `Écris l’expression de « ${p} ».`,
   (p) => `Quelle expression littérale correspond à « ${p} » ?`,
   (p) => `Donne l’expression qui traduit la phrase « ${p} ».`,
 ];
@@ -393,6 +393,318 @@ const CONSIGNES_SUBST: ((E: string, l: string, v: number) => string)[] = [
   (E, l, v) => `Si ${l} = ${nbT(v)}, combien vaut ${E} ?`,
   (E, l, v) => `Évalue l’expression ${E} pour ${l} = ${nbT(v)}.`,
 ];
+
+/** 03/11/2026 : `avecSituation` → la situation de vie (★3) ; sinon l'expression seule (★1-★2). */
+function genLaLettre(avecSituation: boolean): TutorGeneratedQuestionV4 {
+  if (avecSituation) {
+    const { S, a, b, expr } = tirerSituation();
+    const t = randomChoice([
+      `${S.decrire(a, b)} ${cap(S.grandeur)} s’écrit ${expr}. Quelle lettre désigne ${S.quoi} ?`,
+      `${cap(S.grandeur)} est donné${S.g === "f" ? "e" : ""} par l’expression ${expr}. Quelle est la lettre de cette expression ?`,
+      `Dans l’expression ${expr}, qui donne ${S.grandeur}, quelle lettre représente un nombre qui peut changer ?`,
+    ]);
+    return {
+      text: t,
+      format: "short",
+      expected: [S.l],
+      comparator: "exact_text",
+      explanation:
+        DEF_EXPR +
+        "Méthode : on cherche le symbole qui n’est pas un nombre et qui peut prendre plusieurs valeurs.\n\n" +
+        `Calcul : dans ${expr}, la lettre est ${S.l} ; elle représente ${S.quoi}.\n\n` +
+        `Conclusion : la lettre est ${S.l}.`,
+    };
+  }
+  const l = randomChoice(LETTRES);
+  const a = randomInt(2, 9);
+  const b = randomInt(1, 12);
+  const E = randomChoice([
+    ecrire([[a, l], [b, ""]]),
+    ecrire([[b, ""], [a, l]]),
+    ecrire([[a, l], [-b, ""]]),
+    ecrire([[b, ""], [-a, l]]),
+    `${a} × ${l} + ${b}`,
+    ecrire([[1, l], [b, ""]]),
+    ecrire([[a, `${l}²`], [b, ""]]),
+  ]);
+  const consigne = randomChoice([
+    `Quelle lettre apparaît dans l’expression ${E} ?`,
+    `L’expression ${E} contient une seule lettre. Laquelle ?`,
+    `Recopie la lettre de l’expression ${E}.`,
+    `Dans ${E}, quelle lettre représente un nombre qui peut changer ?`,
+    `Voici une expression littérale : ${E}. Quelle est sa lettre ?`,
+  ]);
+  return {
+    text: consigne,
+    format: "short",
+    expected: [l],
+    comparator: "exact_text",
+    explanation:
+      DEF_EXPR +
+      "Méthode : on cherche le symbole qui n’est pas un nombre.\n\n" +
+      `Calcul : dans ${E}, la lettre est ${l}.\n\n` +
+      `Conclusion : la lettre est ${l} ; elle représente un nombre qui peut changer.`,
+  };
+}
+
+/** 03/11/2026 : `avecSituation` → la situation de vie (★3) ; sinon l'expression seule (★1-★2). */
+function genCoefficient(avecSituation: boolean): TutorGeneratedQuestionV4 {
+  if (avecSituation) {
+    const { S, a, expr } = tirerSituation((s) => s.signe === 1);
+    const text = randomChoice([
+      `${cap(S.grandeur)} s’écrit ${expr}, où ${S.l} désigne ${S.quoi}. Quel est le coefficient de ${S.l} ?`,
+      `L’expression ${expr} donne ${S.grandeur}. Par quel nombre la lettre ${S.l} est-elle multipliée ?`,
+      `Dans l’expression ${expr} (${S.grandeur}), quel nombre multiplie ${S.l} ?`,
+    ]);
+    return {
+      text,
+      format: "short",
+      expected: [String(a)],
+      comparator: "number_equal",
+      explanation:
+        "Définition : le coefficient est le nombre qui multiplie la lettre.\n\n" +
+        `Méthode : on repère le nombre écrit juste devant ${S.l}.\n\n` +
+        `Calcul : ${ecrire([[a, S.l]])} signifie ${a} × ${S.l}.\n\n` +
+        `Conclusion : le coefficient de ${S.l} est ${a}.`,
+    };
+  }
+  const l = randomChoice(LETTRES);
+  const k = randomInt(2, 12);
+  const c = randomInt(1, 12);
+  const E = randomChoice([
+    ecrire([[k, l], [c, ""]]),
+    ecrire([[c, ""], [k, l]]),
+    ecrire([[k, l], [-c, ""]]),
+    `${l} × ${k} + ${c}`,
+    `${c} + ${k} × ${l}`,
+    ecrire([[k, l]]),
+  ]);
+  const text = randomChoice([
+    `Dans l’expression ${E}, quel est le coefficient de ${l} ?`,
+    `Quel nombre multiplie ${l} dans l’expression ${E} ?`,
+    `Donne le coefficient de ${l} dans ${E}.`,
+    `Par quel nombre ${l} est-il multiplié dans ${E} ?`,
+    `Voici l’expression ${E}. Quel est le coefficient de la lettre ${l} ?`,
+  ]);
+  return {
+    text,
+    format: "short",
+    expected: [String(k)],
+    comparator: "number_equal",
+    explanation:
+      "Définition : le coefficient est le nombre qui multiplie la lettre.\n\n" +
+      `Méthode : on repère le nombre qui multiplie ${l} (${l} × ${k} et ${k}${l} veulent dire la même chose).\n\n` +
+      `Calcul : dans ${E}, ${l} est multiplié par ${k}.\n\n` +
+      `Conclusion : le coefficient de ${l} est ${k}.`,
+  };
+}
+
+/** 03/11/2026 : `avecSituation` → la situation de vie (★3) ; sinon l'expression seule (★1-★2). */
+function genCoefConstante(avecSituation: boolean): TutorGeneratedQuestionV4 {
+  if (avecSituation) {
+    const { S, a, b, expr } = tirerSituation();
+    const coef = S.signe * a;
+    const demandeCoef = Math.random() < 0.5;
+    const text = demandeCoef
+      ? randomChoice([
+          `${S.decrire(a, b)} ${cap(S.grandeur)} s’écrit ${expr}. Quel est le coefficient de ${S.l} ?`,
+          `${S.decrire(a, b)} Dans l’expression ${expr}, quel nombre multiplie ${S.l} (avec son signe) ?`,
+        ])
+      : randomChoice([
+          `${S.decrire(a, b)} ${cap(S.grandeur)} s’écrit ${expr}. Quel est le terme constant de cette expression ?`,
+          `${S.decrire(a, b)} Dans l’expression ${expr}, quel nombre ne dépend pas de ${S.l} ?`,
+        ]);
+    return {
+      text,
+      format: "short",
+      expected: [String(demandeCoef ? coef : b)],
+      comparator: "number_equal",
+      explanation:
+        "Définition : le coefficient multiplie la lettre ; le terme constant est le nombre seul.\n\n" +
+        `Méthode : on lit ${expr} terme par terme, chacun avec son signe.\n\n` +
+        `Calcul : ${S.signe === 1 ? `${ecrire([[a, S.l]])} = ${a} × ${S.l}` : `${b} ${MOINS} ${ecrire([[a, S.l]])} = ${b} + (${MOINS}${a}) × ${S.l}`} ; le nombre seul est ${b}.\n\n` +
+        `Conclusion : ${demandeCoef ? `le coefficient de ${S.l} est ${nbT(coef)}` : `le terme constant est ${b}`}.`,
+    };
+  }
+  const l = randomChoice(LETTRES);
+  const k = randomInt(2, 9) * (Math.random() < 0.5 ? -1 : 1);
+  const c = randomInt(1, 12) * (Math.random() < 0.5 ? -1 : 1);
+  const termes: Terme[] = Math.random() < 0.5 ? [[k, l], [c, ""]] : [[c, ""], [k, l]];
+  const E = ecrire(termes);
+  const demandeCoef = Math.random() < 0.5;
+  const text = demandeCoef
+    ? randomChoice([
+        `Dans l’expression ${E}, quel est le coefficient de ${l} (avec son signe) ?`,
+        `Quel est le coefficient de ${l} dans ${E} ?`,
+        `Donne le nombre qui multiplie ${l} dans ${E}.`,
+      ])
+    : randomChoice([
+        `Dans l’expression ${E}, quel est le terme constant (avec son signe) ?`,
+        `Quel est le nombre seul, sans lettre, de l’expression ${E} ?`,
+        `Donne le terme constant de ${E}.`,
+      ]);
+  return {
+    text,
+    format: "short",
+    expected: [String(demandeCoef ? k : c)],
+    comparator: "number_equal",
+    explanation:
+      "Définition : le coefficient multiplie la lettre ; le terme constant est le nombre seul. Chacun garde le signe écrit devant lui.\n\n" +
+      `Méthode : on écrit ${E} comme une somme : ${termes.map(([cc, ll]) => (ll ? `(${nbT(cc)}) × ${ll}` : `(${nbT(cc)})`)).join(" + ")}.\n\n` +
+      `Calcul : le coefficient de ${l} est ${nbT(k)} ; le terme constant est ${nbT(c)}.\n\n` +
+      `Conclusion : la réponse est ${nbT(demandeCoef ? k : c)}.`,
+  };
+}
+
+/** 03/11/2026 : `avecSituation` → la situation de vie (★3) ; sinon l'expression seule (★1-★2). */
+function genTraduire2(avecSituation: boolean): TutorGeneratedQuestionV4 {
+  if (avecSituation) {
+    const S = randomChoice(SITUATIONS);
+    const [a, b] = S.tirer();
+    const termes: Terme[] = S.signe === 1 ? [[a, S.l], [b, ""]] : [[b, ""], [-a, S.l]];
+    const E = ecrire(termes);
+    const text = randomChoice([
+      `${S.decrire(a, b)} On note ${S.l} ${S.quoi}. Écris ${S.grandeur} en fonction de ${S.l}.`,
+      `${S.decrire(a, b)} Quelle expression donne ${S.grandeur}, si ${S.l} désigne ${S.quoi} ?`,
+      `${S.decrire(a, b)} Exprime ${S.grandeur} à l’aide de la lettre ${S.l} (${S.quoi}).`,
+    ]);
+    return {
+      text,
+      format: "short",
+      expected: [E],
+      comparator: "expression_equivalente",
+      explanation:
+        DEF_TRADUIRE +
+        `Méthode : ${S.signe === 1 ? "on ajoute la partie fixe à la partie qui dépend de " + S.l : "on part de la valeur de départ et on retire ce qui change avec " + S.l}.\n\n` +
+        `Calcul : ${S.signe === 1 ? `${S.l} fois ${a}, c’est ${ecrire([[a, S.l]])} ; on ajoute ${b}` : `on retire ${a} fois ${S.l}, soit ${ecrire([[a, S.l]])}, à ${b}`}.\n\n` +
+        `Conclusion : ${S.grandeur} s’écrit ${E}.`,
+    };
+  }
+  const l = randomChoice(LETTRES);
+  const k = randomInt(4, 9);
+  const c = randomInt(1, 12);
+  const P = randomChoice(PHRASES_2);
+  const E = ecrire(P.t(l, k, c));
+  return {
+    text: randomChoice(TOURNURES_TRADUIRE)(P.p(l, k, c), l),
+    format: "short",
+    expected: [E],
+    comparator: "expression_equivalente",
+    explanation:
+      DEF_TRADUIRE +
+      "Méthode : on traduit chaque morceau de la phrase (double, triple, fois → multiplication ; augmenté, plus → addition ; diminué, moins → soustraction).\n\n" +
+      `Calcul : « ${P.p(l, k, c)} » s’écrit ${E}.\n\n` +
+      `Conclusion : l’expression est ${E}.`,
+  };
+}
+
+/** 03/11/2026 : `avecSituation` → la situation de vie (★3) ; sinon l'expression seule (★1-★2). */
+function genSubstituer1(avecSituation: boolean): TutorGeneratedQuestionV4 {
+  if (avecSituation) {
+    const S = randomChoice(SITUATIONS.filter((s) => s.signe === 1));
+    const [a, b] = S.tirer();
+    const termes: Terme[] = [[a, S.l], [b, ""]];
+    const E = ecrire(termes);
+    const v = S.valeur(a, b);
+    const res = a * v + b;
+    return {
+      text: randomChoice([
+        `${S.decrire(a, b)} L’expression ${E} donne ${S.grandeur}, où ${S.l} est ${S.quoi}. ${S.question(v)}`,
+        `${cap(S.grandeur)} s’écrit ${E}, où ${S.l} désigne ${S.quoi}. ${S.question(v)}`,
+      ]),
+      format: "short",
+      expected: [String(res)],
+      comparator: "number_equal",
+      explanation:
+        DEF_SUBST +
+        `Méthode : on remplace ${S.l} par ${v} dans ${E}.\n\n` +
+        `Calcul : ${detailSubstitution(termes, { [S.l]: v })}.\n\n` +
+        `Conclusion : ${S.grandeur} vaut ${res} ${S.unite}.`,
+    };
+  }
+  const l = randomChoice(LETTRES);
+  const a = randomInt(2, 9);
+  const v = randomInt(2, 9);
+  const b = randomInt(1, 12);
+  const formes: Terme[][] = [
+    [[a, l], [b, ""]],
+    [[b, ""], [a, l]],
+    [[a, l], [-Math.min(b, a * v - 1), ""]],
+    [[1, l], [b, ""]],
+    [[a, l]],
+    [[a * v + b, ""], [-a, l]],
+    [[1, `${l}²`], [b, ""]],
+  ];
+  const termes = randomChoice(formes);
+  const E = ecrire(termes);
+  const res = valeurTermes(termes, { [l]: v });
+  return {
+    text: randomChoice(CONSIGNES_SUBST)(E, l, v),
+    format: "short",
+    expected: [String(res)],
+    comparator: "number_equal",
+    explanation:
+      DEF_SUBST +
+      `Méthode : on remplace ${l} par ${v} ; la multiplication passe avant l’addition.\n\n` +
+      `Calcul : ${detailSubstitution(termes, { [l]: v })}.\n\n` +
+      `Conclusion : pour ${l} = ${v}, l’expression vaut ${res}.`,
+  };
+}
+
+/** 03/11/2026 : `avecSituation` → la situation de vie (★3) ; sinon l'expression seule (★1-★2). */
+function genReduireFigure(avecSituation: boolean): TutorGeneratedQuestionV4 {
+  const l = randomChoice(LETTRES);
+  const a = randomInt(2, 12);
+  const b0 = randomInt(1, 9);
+  const b = b0 === a ? 1 : b0; // jamais deux coefficients égaux (un « rectangle » 4y sur 4y serait un carré)
+  const c3 = randomInt(Math.abs(a - b) + 1, a + b - 1); // troisième côté d’un triangle qui existe
+  if (avecSituation) {
+    const ctx = randomChoice([
+      // ⛔ 08/10 (relecture) : la longueur est la plus grande des deux dimensions.
+      { t: `Un rectangle a pour longueur ${Math.max(a, b)}${l} et pour largeur ${Math.min(a, b) === 1 ? l : `${Math.min(a, b)}${l}`}. Son périmètre s’écrit ${ecrire([[Math.max(a, b), l], [Math.min(a, b), l], [Math.max(a, b), l], [Math.min(a, b), l]])}. Réduis cette expression.`, T: [[a, l], [b, l], [a, l], [b, l]] as Terme[] },
+      // ⛔ 08/10 (correcteur) : « 5x, 3x et x » n'existe pas (5x > 3x + x) ; le troisième côté respecte l'inégalité triangulaire.
+      { t: `Un triangle a des côtés de longueurs ${a}${l}, ${b === 1 ? l : `${b}${l}`} et ${c3 === 1 ? l : `${c3}${l}`}. Écris son périmètre sous forme réduite.`, T: [[a, l], [b, l], [c3, l]] as Terme[] },
+      { t: `Un sac contient ${a}${l} billes rouges et ${b === 1 ? l : `${b}${l}`} billes bleues. Écris le nombre total de billes sous forme réduite.`, T: [[a, l], [b, l]] as Terme[] },
+      { t: `Une ficelle mesure ${a + b}${l} cm ; on en coupe ${b === 1 ? l : `${b}${l}`} cm. Écris la longueur restante sous forme réduite.`, T: [[a + b, l], [-b, l]] as Terme[] },
+    ]);
+    const R = ecrire(regrouper(ctx.T));
+    return {
+      text: ctx.t,
+      format: "short",
+      expected: [R],
+      comparator: "expression_developpee",
+      explanation:
+        DEF_REDUIRE +
+        `Méthode : tous les termes contiennent ${l} : on additionne ou soustrait les coefficients.\n\n` +
+        `Calcul : ${ecrire(ctx.T)} = ${R}.\n\n` +
+        `Conclusion : la forme réduite est ${R}.`,
+    };
+  }
+  const formes: Terme[][] = [
+    [[a, l], [b, l]],
+    [[a + b, l], [-b, l]],
+    [[1, l], [a, l]],
+    [[a, l], [1, l]],
+    [[a, l], [-1, l]],
+    [[a, l], [b, l], [1, l]],
+    [[b, l], [a, l]],
+  ];
+  const termes = randomChoice(formes);
+  const E = ecrire(termes);
+  const R = ecrire(regrouper(termes));
+  const coefs = termes.map(([c]) => c);
+  return {
+    text: randomChoice(CONSIGNES_REDUIRE)(E),
+    format: "short",
+    expected: [R],
+    comparator: "expression_developpee",
+    explanation:
+      DEF_REDUIRE +
+      `Méthode : les termes contiennent tous ${l} ; on calcule avec leurs coefficients (${l} = 1${l}).\n\n` +
+      `Calcul : ${coefs.map((c, i) => (i === 0 ? nbT(c) : c < 0 ? `${MOINS} ${-c}` : `+ ${c}`)).join(" ")} = ${coefs.reduce((s, c) => s + c, 0)}, donc ${E} = ${R}.\n\n` +
+      `Conclusion : la forme réduite est ${R}.`,
+  };
+}
 
 export const expressionsLitteralesBank: TutorBankItemV4[] = [
   // =========================
@@ -496,57 +808,22 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Repère la lettre dans l’expression : c’est elle qui représente un nombre.",
     tags: ["expression", "variable", "template"],
-    generate: () => {
-      if (Math.random() < 0.4) {
-        const { S, a, b, expr } = tirerSituation();
-        const t = randomChoice([
-          `${S.decrire(a, b)} ${cap(S.grandeur)} s’écrit ${expr}. Quelle lettre désigne ${S.quoi} ?`,
-          `${cap(S.grandeur)} est donné${S.g === "f" ? "e" : ""} par l’expression ${expr}. Quelle est la lettre de cette expression ?`,
-          `Dans l’expression ${expr}, qui donne ${S.grandeur}, quelle lettre représente un nombre qui peut changer ?`,
-        ]);
-        return {
-          text: t,
-          format: "short",
-          expected: [S.l],
-          comparator: "exact_text",
-          explanation:
-            DEF_EXPR +
-            "Méthode : on cherche le symbole qui n’est pas un nombre et qui peut prendre plusieurs valeurs.\n\n" +
-            `Calcul : dans ${expr}, la lettre est ${S.l} ; elle représente ${S.quoi}.\n\n` +
-            `Conclusion : la lettre est ${S.l}.`,
-        };
-      }
-      const l = randomChoice(LETTRES);
-      const a = randomInt(2, 9);
-      const b = randomInt(1, 12);
-      const E = randomChoice([
-        ecrire([[a, l], [b, ""]]),
-        ecrire([[b, ""], [a, l]]),
-        ecrire([[a, l], [-b, ""]]),
-        ecrire([[b, ""], [-a, l]]),
-        `${a} × ${l} + ${b}`,
-        ecrire([[1, l], [b, ""]]),
-        ecrire([[a, `${l}²`], [b, ""]]),
-      ]);
-      const consigne = randomChoice([
-        `Quelle lettre apparaît dans l’expression ${E} ?`,
-        `L’expression ${E} contient une seule lettre. Laquelle ?`,
-        `Recopie la lettre de l’expression ${E}.`,
-        `Dans ${E}, quelle lettre représente un nombre qui peut changer ?`,
-        `Voici une expression littérale : ${E}. Quelle est sa lettre ?`,
-      ]);
-      return {
-        text: consigne,
-        format: "short",
-        expected: [l],
-        comparator: "exact_text",
-        explanation:
-          DEF_EXPR +
-          "Méthode : on cherche le symbole qui n’est pas un nombre.\n\n" +
-          `Calcul : dans ${E}, la lettre est ${l}.\n\n` +
-          `Conclusion : la lettre est ${l} ; elle représente un nombre qui peut changer.`,
-      };
-    },
+    // ⛔⛔ 03/11/2026 : à ★1-★2, sans situation de vie (voir genLaLettre).
+    generate: () => genLaLettre(false),
+  },
+  {
+    // 03/11/2026 : la même question, portée par une situation de vie (montée de ★1-★2 à ★3).
+    kind: "template",
+    id: "litteral_expression_comprendre_tpl_5_lettre_situation",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_expression",
+    microId: "litteral_expression_comprendre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Repère la lettre dans l’expression : c’est elle qui représente un nombre.",
+    tags: ["expression", "variable", "situation", "template"],
+    generate: () => genLaLettre(true),
   },
 
   // =========================
@@ -644,46 +921,22 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Traduis la phrase morceau par morceau, dans l’ordre des opérations.",
     tags: ["traduction", "template"],
-    generate: () => {
-      if (Math.random() < 0.4) {
-        const S = randomChoice(SITUATIONS);
-        const [a, b] = S.tirer();
-        const termes: Terme[] = S.signe === 1 ? [[a, S.l], [b, ""]] : [[b, ""], [-a, S.l]];
-        const E = ecrire(termes);
-        const text = randomChoice([
-          `${S.decrire(a, b)} On note ${S.l} ${S.quoi}. Écris ${S.grandeur} en fonction de ${S.l}.`,
-          `${S.decrire(a, b)} Quelle expression donne ${S.grandeur}, si ${S.l} désigne ${S.quoi} ?`,
-          `${S.decrire(a, b)} Exprime ${S.grandeur} à l’aide de la lettre ${S.l} (${S.quoi}).`,
-        ]);
-        return {
-          text,
-          format: "short",
-          expected: [E],
-          comparator: "expression_equivalente",
-          explanation:
-            DEF_TRADUIRE +
-            `Méthode : ${S.signe === 1 ? "on ajoute la partie fixe à la partie qui dépend de " + S.l : "on part de la valeur de départ et on retire ce qui change avec " + S.l}.\n\n` +
-            `Calcul : ${S.signe === 1 ? `${S.l} fois ${a}, c’est ${ecrire([[a, S.l]])} ; on ajoute ${b}` : `on retire ${a} fois ${S.l}, soit ${ecrire([[a, S.l]])}, à ${b}`}.\n\n` +
-            `Conclusion : ${S.grandeur} s’écrit ${E}.`,
-        };
-      }
-      const l = randomChoice(LETTRES);
-      const k = randomInt(4, 9);
-      const c = randomInt(1, 12);
-      const P = randomChoice(PHRASES_2);
-      const E = ecrire(P.t(l, k, c));
-      return {
-        text: randomChoice(TOURNURES_TRADUIRE)(P.p(l, k, c), l),
-        format: "short",
-        expected: [E],
-        comparator: "expression_equivalente",
-        explanation:
-          DEF_TRADUIRE +
-          "Méthode : on traduit chaque morceau de la phrase (double, triple, fois → multiplication ; augmenté, plus → addition ; diminué, moins → soustraction).\n\n" +
-          `Calcul : « ${P.p(l, k, c)} » s’écrit ${E}.\n\n` +
-          `Conclusion : l’expression est ${E}.`,
-      };
-    },
+    // ⛔⛔ 03/11/2026 : à ★1-★2, sans situation de vie (voir genTraduire2).
+    generate: () => genTraduire2(false),
+  },
+  {
+    // 03/11/2026 : la même question, portée par une situation de vie (montée de ★1-★2 à ★3).
+    kind: "template",
+    id: "litteral_expression_traduire_tpl_6_situation",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_expression",
+    microId: "litteral_expression_traduire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Traduis la phrase morceau par morceau, dans l’ordre des opérations.",
+    tags: ["traduction", "situation", "template"],
+    generate: () => genTraduire2(true),
   },
     {
     kind: "fixed",
@@ -1209,56 +1462,22 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Le coefficient est le nombre qui multiplie la lettre.",
     tags: ["expression", "coefficient", "template"],
-    generate: () => {
-      if (Math.random() < 0.4) {
-        const { S, a, expr } = tirerSituation((s) => s.signe === 1);
-        const text = randomChoice([
-          `${cap(S.grandeur)} s’écrit ${expr}, où ${S.l} désigne ${S.quoi}. Quel est le coefficient de ${S.l} ?`,
-          `L’expression ${expr} donne ${S.grandeur}. Par quel nombre la lettre ${S.l} est-elle multipliée ?`,
-          `Dans l’expression ${expr} (${S.grandeur}), quel nombre multiplie ${S.l} ?`,
-        ]);
-        return {
-          text,
-          format: "short",
-          expected: [String(a)],
-          comparator: "number_equal",
-          explanation:
-            "Définition : le coefficient est le nombre qui multiplie la lettre.\n\n" +
-            `Méthode : on repère le nombre écrit juste devant ${S.l}.\n\n` +
-            `Calcul : ${ecrire([[a, S.l]])} signifie ${a} × ${S.l}.\n\n` +
-            `Conclusion : le coefficient de ${S.l} est ${a}.`,
-        };
-      }
-      const l = randomChoice(LETTRES);
-      const k = randomInt(2, 12);
-      const c = randomInt(1, 12);
-      const E = randomChoice([
-        ecrire([[k, l], [c, ""]]),
-        ecrire([[c, ""], [k, l]]),
-        ecrire([[k, l], [-c, ""]]),
-        `${l} × ${k} + ${c}`,
-        `${c} + ${k} × ${l}`,
-        ecrire([[k, l]]),
-      ]);
-      const text = randomChoice([
-        `Dans l’expression ${E}, quel est le coefficient de ${l} ?`,
-        `Quel nombre multiplie ${l} dans l’expression ${E} ?`,
-        `Donne le coefficient de ${l} dans ${E}.`,
-        `Par quel nombre ${l} est-il multiplié dans ${E} ?`,
-        `Voici l’expression ${E}. Quel est le coefficient de la lettre ${l} ?`,
-      ]);
-      return {
-        text,
-        format: "short",
-        expected: [String(k)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : le coefficient est le nombre qui multiplie la lettre.\n\n" +
-          `Méthode : on repère le nombre qui multiplie ${l} (${l} × ${k} et ${k}${l} veulent dire la même chose).\n\n` +
-          `Calcul : dans ${E}, ${l} est multiplié par ${k}.\n\n` +
-          `Conclusion : le coefficient de ${l} est ${k}.`,
-      };
-    },
+    // ⛔⛔ 03/11/2026 : à ★1-★2, sans situation de vie (voir genCoefficient).
+    generate: () => genCoefficient(false),
+  },
+  {
+    // 03/11/2026 : la même question, portée par une situation de vie (montée de ★1-★2 à ★3).
+    kind: "template",
+    id: "litteral_expression_comprendre_tpl_6_coef_situation",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_expression",
+    microId: "litteral_expression_comprendre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le coefficient est le nombre qui multiplie la lettre.",
+    tags: ["expression", "coefficient", "situation", "template"],
+    generate: () => genCoefficient(true),
   },
   {
     kind: "template",
@@ -1345,61 +1564,22 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Le coefficient multiplie la lettre, avec son signe ; le terme constant est le nombre seul, avec son signe.",
     tags: ["expression", "coefficient", "constante", "template"],
-    generate: () => {
-      if (Math.random() < 0.35) {
-        const { S, a, b, expr } = tirerSituation();
-        const coef = S.signe * a;
-        const demandeCoef = Math.random() < 0.5;
-        const text = demandeCoef
-          ? randomChoice([
-              `${S.decrire(a, b)} ${cap(S.grandeur)} s’écrit ${expr}. Quel est le coefficient de ${S.l} ?`,
-              `${S.decrire(a, b)} Dans l’expression ${expr}, quel nombre multiplie ${S.l} (avec son signe) ?`,
-            ])
-          : randomChoice([
-              `${S.decrire(a, b)} ${cap(S.grandeur)} s’écrit ${expr}. Quel est le terme constant de cette expression ?`,
-              `${S.decrire(a, b)} Dans l’expression ${expr}, quel nombre ne dépend pas de ${S.l} ?`,
-            ]);
-        return {
-          text,
-          format: "short",
-          expected: [String(demandeCoef ? coef : b)],
-          comparator: "number_equal",
-          explanation:
-            "Définition : le coefficient multiplie la lettre ; le terme constant est le nombre seul.\n\n" +
-            `Méthode : on lit ${expr} terme par terme, chacun avec son signe.\n\n` +
-            `Calcul : ${S.signe === 1 ? `${ecrire([[a, S.l]])} = ${a} × ${S.l}` : `${b} ${MOINS} ${ecrire([[a, S.l]])} = ${b} + (${MOINS}${a}) × ${S.l}`} ; le nombre seul est ${b}.\n\n` +
-            `Conclusion : ${demandeCoef ? `le coefficient de ${S.l} est ${nbT(coef)}` : `le terme constant est ${b}`}.`,
-        };
-      }
-      const l = randomChoice(LETTRES);
-      const k = randomInt(2, 9) * (Math.random() < 0.5 ? -1 : 1);
-      const c = randomInt(1, 12) * (Math.random() < 0.5 ? -1 : 1);
-      const termes: Terme[] = Math.random() < 0.5 ? [[k, l], [c, ""]] : [[c, ""], [k, l]];
-      const E = ecrire(termes);
-      const demandeCoef = Math.random() < 0.5;
-      const text = demandeCoef
-        ? randomChoice([
-            `Dans l’expression ${E}, quel est le coefficient de ${l} (avec son signe) ?`,
-            `Quel est le coefficient de ${l} dans ${E} ?`,
-            `Donne le nombre qui multiplie ${l} dans ${E}.`,
-          ])
-        : randomChoice([
-            `Dans l’expression ${E}, quel est le terme constant (avec son signe) ?`,
-            `Quel est le nombre seul, sans lettre, de l’expression ${E} ?`,
-            `Donne le terme constant de ${E}.`,
-          ]);
-      return {
-        text,
-        format: "short",
-        expected: [String(demandeCoef ? k : c)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : le coefficient multiplie la lettre ; le terme constant est le nombre seul. Chacun garde le signe écrit devant lui.\n\n" +
-          `Méthode : on écrit ${E} comme une somme : ${termes.map(([cc, ll]) => (ll ? `(${nbT(cc)}) × ${ll}` : `(${nbT(cc)})`)).join(" + ")}.\n\n` +
-          `Calcul : le coefficient de ${l} est ${nbT(k)} ; le terme constant est ${nbT(c)}.\n\n` +
-          `Conclusion : la réponse est ${nbT(demandeCoef ? k : c)}.`,
-      };
-    },
+    // ⛔⛔ 03/11/2026 : à ★1-★2, sans situation de vie (voir genCoefConstante).
+    generate: () => genCoefConstante(false),
+  },
+  {
+    // 03/11/2026 : la même question, portée par une situation de vie (montée de ★1-★2 à ★3).
+    kind: "template",
+    id: "litteral_expression_comprendre_tpl_7_constante_situation",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_expression",
+    microId: "litteral_expression_comprendre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le coefficient multiplie la lettre, avec son signe ; le terme constant est le nombre seul, avec son signe.",
+    tags: ["expression", "coefficient", "constante", "situation", "template"],
+    generate: () => genCoefConstante(true),
   },
 
   // ---------- LITTERAL_EXPRESSION_TRADUIRE ----------
@@ -1574,6 +1754,53 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     notionId: "litteral_expression",
     microId: "litteral_expression_substituer",
     difficulty: 2,
+    theme: "neutral",
+    hint: "Remplace la lettre par la valeur donnée, puis calcule.",
+    tags: ["substitution", "template"],
+    // ⛔⛔ 03/11/2026 : à ★2, l'expression seule (la situation de vie passe au ★3 substituer_tpl_7_situation_vie).
+    generate: () => {
+      const l = randomChoice(LETTRES);
+      const a = randomInt(2, 9);
+      const v = randomInt(2, 10);
+      const b = randomInt(1, Math.min(15, a * v - 1));
+      const c = randomInt(2, 6);
+      const formes: Terme[][] = [
+        [[a, l], [-b, ""]],
+        [[a * v + b, ""], [-a, l]],
+        [[a, l], [b, ""], [c, l]],
+        [[c, `${l}²`], [b, ""]],
+        [[1, `${l}²`], [-1, l]],
+        [[b, ""], [a, l], [-c, ""]],
+      ];
+      const termes = randomChoice(formes);
+      const E = ecrire(termes);
+      const res = valeurTermes(termes, { [l]: v });
+      return {
+        text: randomChoice(CONSIGNES_SUBST)(E, l, v),
+        format: "short",
+        expected: [String(res)],
+        comparator: "number_equal",
+        explanation:
+          DEF_SUBST +
+          `Méthode : on remplace ${l} par ${v} ; la multiplication (et le carré) passent avant l’addition et la soustraction.
+
+` +
+          `Calcul : ${detailSubstitution(termes, { [l]: v })}.
+
+` +
+          `Conclusion : pour ${l} = ${v}, l’expression vaut ${res}.`,
+      };
+    },
+  },
+  {
+    // 03/11/2026 : l'ancien substituer_tpl_2 (situation de vie), monté à ★3.
+    kind: "template",
+    id: "litteral_expression_substituer_tpl_7_situation_vie",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_expression",
+    microId: "litteral_expression_substituer",
+    difficulty: 3,
     theme: "neutral",
     hint: "Remplace la lettre par la valeur donnée, puis calcule.",
     tags: ["substitution", "situation", "template"],
@@ -1802,7 +2029,7 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
         `Quelle est la forme réduite de ${E} ?`,
         `On réduit ${E}. Quel résultat obtient-on ?`,
         `Parmi ces expressions, laquelle est égale à ${E} et réduite ?`,
-        `${E} = ?  Choisis la bonne réduction.`,
+        `Choisis la bonne réduction de ${E}.`,
       ]);
       const lettres = termes.filter(([, x]) => x);
       return {
@@ -2176,57 +2403,22 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Remplace la lettre par le nombre : 3x devient 3 × (le nombre). Puis la multiplication d’abord.",
     tags: ["substitution", "template"],
-    generate: () => {
-      if (Math.random() < 0.35) {
-        const S = randomChoice(SITUATIONS.filter((s) => s.signe === 1));
-        const [a, b] = S.tirer();
-        const termes: Terme[] = [[a, S.l], [b, ""]];
-        const E = ecrire(termes);
-        const v = S.valeur(a, b);
-        const res = a * v + b;
-        return {
-          text: randomChoice([
-            `${S.decrire(a, b)} L’expression ${E} donne ${S.grandeur}, où ${S.l} est ${S.quoi}. ${S.question(v)}`,
-            `${cap(S.grandeur)} s’écrit ${E}, où ${S.l} désigne ${S.quoi}. ${S.question(v)}`,
-          ]),
-          format: "short",
-          expected: [String(res)],
-          comparator: "number_equal",
-          explanation:
-            DEF_SUBST +
-            `Méthode : on remplace ${S.l} par ${v} dans ${E}.\n\n` +
-            `Calcul : ${detailSubstitution(termes, { [S.l]: v })}.\n\n` +
-            `Conclusion : ${S.grandeur} vaut ${res} ${S.unite}.`,
-        };
-      }
-      const l = randomChoice(LETTRES);
-      const a = randomInt(2, 9);
-      const v = randomInt(2, 9);
-      const b = randomInt(1, 12);
-      const formes: Terme[][] = [
-        [[a, l], [b, ""]],
-        [[b, ""], [a, l]],
-        [[a, l], [-Math.min(b, a * v - 1), ""]],
-        [[1, l], [b, ""]],
-        [[a, l]],
-        [[a * v + b, ""], [-a, l]],
-        [[1, `${l}²`], [b, ""]],
-      ];
-      const termes = randomChoice(formes);
-      const E = ecrire(termes);
-      const res = valeurTermes(termes, { [l]: v });
-      return {
-        text: randomChoice(CONSIGNES_SUBST)(E, l, v),
-        format: "short",
-        expected: [String(res)],
-        comparator: "number_equal",
-        explanation:
-          DEF_SUBST +
-          `Méthode : on remplace ${l} par ${v} ; la multiplication passe avant l’addition.\n\n` +
-          `Calcul : ${detailSubstitution(termes, { [l]: v })}.\n\n` +
-          `Conclusion : pour ${l} = ${v}, l’expression vaut ${res}.`,
-      };
-    },
+    // ⛔⛔ 03/11/2026 : à ★1-★2, sans situation de vie (voir genSubstituer1).
+    generate: () => genSubstituer1(false),
+  },
+  {
+    // 03/11/2026 : la même question, portée par une situation de vie (montée de ★1-★2 à ★3).
+    kind: "template",
+    id: "litteral_expression_substituer_tpl_6_situation",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_expression",
+    microId: "litteral_expression_substituer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Remplace la lettre par la valeur donnée, puis calcule.",
+    tags: ["substitution", "situation", "template"],
+    generate: () => genSubstituer1(true),
   },
 
   // ---------- RÉDUIRE ★1 : deux termes semblables ----------
@@ -2241,59 +2433,22 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Les termes ont la même lettre : on additionne (ou on soustrait) leurs coefficients. x, c’est 1x.",
     tags: ["reduction", "termes-semblables", "template"],
-    generate: () => {
-      const l = randomChoice(LETTRES);
-      const a = randomInt(2, 12);
-      const b0 = randomInt(1, 9);
-      const b = b0 === a ? 1 : b0; // jamais deux coefficients égaux (un « rectangle » 4y sur 4y serait un carré)
-      const c3 = randomInt(Math.abs(a - b) + 1, a + b - 1); // troisième côté d’un triangle qui existe
-      if (Math.random() < 0.3) {
-        const ctx = randomChoice([
-          // ⛔ 08/10 (relecture) : la longueur est la plus grande des deux dimensions.
-          { t: `Un rectangle a pour longueur ${Math.max(a, b)}${l} et pour largeur ${Math.min(a, b) === 1 ? l : `${Math.min(a, b)}${l}`}. Son périmètre s’écrit ${ecrire([[Math.max(a, b), l], [Math.min(a, b), l], [Math.max(a, b), l], [Math.min(a, b), l]])}. Réduis cette expression.`, T: [[a, l], [b, l], [a, l], [b, l]] as Terme[] },
-          // ⛔ 08/10 (correcteur) : « 5x, 3x et x » n'existe pas (5x > 3x + x) ; le troisième côté respecte l'inégalité triangulaire.
-          { t: `Un triangle a des côtés de longueurs ${a}${l}, ${b === 1 ? l : `${b}${l}`} et ${c3 === 1 ? l : `${c3}${l}`}. Écris son périmètre sous forme réduite.`, T: [[a, l], [b, l], [c3, l]] as Terme[] },
-          { t: `Un sac contient ${a}${l} billes rouges et ${b === 1 ? l : `${b}${l}`} billes bleues. Écris le nombre total de billes sous forme réduite.`, T: [[a, l], [b, l]] as Terme[] },
-          { t: `Une ficelle mesure ${a + b}${l} cm ; on en coupe ${b === 1 ? l : `${b}${l}`} cm. Écris la longueur restante sous forme réduite.`, T: [[a + b, l], [-b, l]] as Terme[] },
-        ]);
-        const R = ecrire(regrouper(ctx.T));
-        return {
-          text: ctx.t,
-          format: "short",
-          expected: [R],
-          comparator: "expression_developpee",
-          explanation:
-            DEF_REDUIRE +
-            `Méthode : tous les termes contiennent ${l} : on additionne ou soustrait les coefficients.\n\n` +
-            `Calcul : ${ecrire(ctx.T)} = ${R}.\n\n` +
-            `Conclusion : la forme réduite est ${R}.`,
-        };
-      }
-      const formes: Terme[][] = [
-        [[a, l], [b, l]],
-        [[a + b, l], [-b, l]],
-        [[1, l], [a, l]],
-        [[a, l], [1, l]],
-        [[a, l], [-1, l]],
-        [[a, l], [b, l], [1, l]],
-        [[b, l], [a, l]],
-      ];
-      const termes = randomChoice(formes);
-      const E = ecrire(termes);
-      const R = ecrire(regrouper(termes));
-      const coefs = termes.map(([c]) => c);
-      return {
-        text: randomChoice(CONSIGNES_REDUIRE)(E),
-        format: "short",
-        expected: [R],
-        comparator: "expression_developpee",
-        explanation:
-          DEF_REDUIRE +
-          `Méthode : les termes contiennent tous ${l} ; on calcule avec leurs coefficients (${l} = 1${l}).\n\n` +
-          `Calcul : ${coefs.map((c, i) => (i === 0 ? nbT(c) : c < 0 ? `${MOINS} ${-c}` : `+ ${c}`)).join(" ")} = ${coefs.reduce((s, c) => s + c, 0)}, donc ${E} = ${R}.\n\n` +
-          `Conclusion : la forme réduite est ${R}.`,
-      };
-    },
+    // ⛔⛔ 03/11/2026 : à ★1-★2, sans situation de vie (voir genReduireFigure).
+    generate: () => genReduireFigure(false),
+  },
+  {
+    // 03/11/2026 : la même question, portée par une situation de vie (montée de ★1-★2 à ★3).
+    kind: "template",
+    id: "litteral_expression_reduire_tpl_6_situation",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_expression",
+    microId: "litteral_expression_reduire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Regroupe les termes qui ont la même lettre.",
+    tags: ["reduction", "situation", "template"],
+    generate: () => genReduireFigure(true),
   },
 
   // ---------- RÉDUIRE ★3 : deux parties littérales, réponse à écrire ----------
