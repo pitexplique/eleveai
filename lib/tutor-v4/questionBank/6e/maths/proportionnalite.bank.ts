@@ -105,6 +105,14 @@ const SITUATIONS_PROP: readonly SitProp[] = [
   { q: (n) => nb(n, "minute", "minutes"), phrase: (n, x) => `En ${nb(n, "minute", "minutes")}, un escargot avance de ${fr(x)} cm.`, question: (m) => `De combien de centimètres avance-t-il en ${nb(m, "minute", "minutes")} ?`, u: "cm", taux: [4.5, 5, 6, 7, 8], nMax: 10 },
   { q: (n) => nb(n, "corde", "cordes"), phrase: (n, x) => `Au magasin de musique, ${nb(n, "corde", "cordes")} de guitare ${acc(n, "coûte", "coûtent")} ${fr(x)} €.`, question: (m) => `Combien ${acc(m, "coûte", "coûtent")} ${nb(m, "corde", "cordes")} ?`, u: "€", taux: [2, 2.5, 3, 4, 5], nMax: 6 },
   { q: (n) => nb(n, "rangée", "rangées"), phrase: (n, x, P) => `Dans le potager ${de(P.n)}, ${nb(n, "rangée", "rangées")} de salades ${acc(n, "compte", "comptent")} ${fr(x)} salades.`, question: (m) => `Combien de salades y a-t-il dans ${nb(m, "rangée", "rangées")} ?`, u: "", v: "salades", taux: [6, 8, 10, 12], nMax: 8 },
+  // 03/11/2026 : des métiers et des sciences (les maths sont transversales) ; ces
+  // situations ne servent plus qu'à partir de ★3.
+  { q: (n) => nb(n, "baguette", "baguettes"), phrase: (n, x) => `Pour ${nb(n, "baguette", "baguettes")}, un boulanger utilise ${fr(x)} g de farine.`, question: (m) => `Combien de grammes de farine faut-il pour ${nb(m, "baguette", "baguettes")} ?`, u: "g", taux: [150, 200, 250], nMax: 10 },
+  { q: (n) => nb(n, "flacon", "flacons"), phrase: (n, x) => `Dans une pharmacie, ${nb(n, "flacon", "flacons identiques")} ${acc(n, "contient", "contiennent")} ${fr(x)} mL de sirop.`, question: (m) => `Combien de millilitres de sirop y a-t-il dans ${nb(m, "flacon", "flacons")} ?`, u: "mL", taux: [100, 125, 150, 200], nMax: 8 },
+  { q: (n) => nb(n, "minute", "minutes"), phrase: (n, x) => `En ${nb(n, "minute", "minutes")}, une photographe de mariage prend ${fr(x)} photos.`, question: (m) => `Combien de photos prend-elle en ${nb(m, "minute", "minutes")} ?`, u: "", v: "photos", taux: [4, 5, 6, 8], nMax: 10 },
+  { q: (n) => nb(n, "massif", "massifs"), phrase: (n, x) => `Pour ${nb(n, "massif", "massifs identiques")}, une paysagiste plante ${fr(x)} fleurs.`, question: (m) => `Combien de fleurs faut-il pour ${nb(m, "massif", "massifs")} ?`, u: "", v: "fleurs", taux: [12, 15, 20, 24], nMax: 8 },
+  { q: (n) => nb(n, "seconde", "secondes"), phrase: (n, x) => `En ${nb(n, "seconde", "secondes")}, le son parcourt ${fr(x)} m dans l’air.`, question: (m) => `Combien de mètres le son parcourt-il en ${nb(m, "seconde", "secondes")} ?`, u: "m", taux: [340], nMax: 9 },
+  { q: (n) => nb(n, "mesure", "mesures"), phrase: (n, x) => `Pour ${nb(n, "mesure", "mesures")} d’un morceau, une batteuse frappe ${fr(x)} coups.`, question: (m) => `Combien de coups frappe-t-elle pour ${nb(m, "mesure", "mesures")} ?`, u: "", v: "coups", taux: [4, 8, 12, 16], nMax: 8 },
 ];
 
 /** La réponse avec son unité : « 24 € », « 120 g », « 36 ». */
@@ -249,6 +257,174 @@ function parLUnite(decimal: boolean) {
   }
 }
 
+/* ---------------------------------------------------------------------------
+   ⛔⛔ 03/11/2026 — D'ABORD DES QUESTIONS SIMPLES (Frédéric) : « le contexte est
+   réservé aux étoiles ★3 et plus ». Ses 6e lisent difficilement : à ★1 et ★2,
+   ni prénom, ni métier, ni situation (pas de croissants, pas d'euros). Des
+   NOMBRES seuls, en tableau (« 3 → 12 ; 5 → ? ») ou en phrase courte. La
+   variété vient de la consigne, de l'écriture du tableau et des nombres. Les
+   situations (SITUATIONS_PROP) servent les gabarits ★3 « _situation ».
+   ⛔ Comme plus haut : le nombre de DÉPART avant celui d'ARRIVÉE, aucun autre
+   nombre dans le texte (les correcteurs relisent les nombres dans l'ordre).
+--------------------------------------------------------------------------- */
+const TAUX_SIMPLES = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 20, 25] as const;
+const TAUX_DECIMAUX = [0.5, 1.5, 2.5, 3.5, 4.5, 1.2, 2.4, 0.4] as const;
+
+/* ⛔ 03/11/2026 (REGLES-6E.md) — DES PHRASES COURTES : ★1 en 12 mots au plus,
+   ★2 en 15 mots au plus (tout ce qui est séparé par une espace compte : « → »,
+   « ; », « ? » aussi). Chaque énoncé simple est tiré jusqu'à tenir dans la
+   limite de son étoile (`court`). */
+const LIMITE = { 1: 12, 2: 15 } as const;
+const nbMots = (t: string) => t.split(/\s+/).filter(Boolean).length;
+function court<T extends { text: string }>(lim: number, tirage: () => T): T {
+  let q = tirage();
+  for (let i = 0; i < 60 && nbMots(q.text) > lim; i++) q = tirage();
+  return q;
+}
+
+/** Les écritures d'un tableau : « 3 → 12 ; 5 → ? », « 3 donne 12, 5 donne … »… */
+type Ecriture = (paires: [number, number | null][]) => string;
+const ecriture = (fleche: string, sep: string, trou: string): Ecriture => (p) => {
+  const f = p.map(([a, b]) => `${fr(a)} ${fleche} ${b == null ? trou : fr(b)}`);
+  return sep === " et " && f.length > 1 ? `${f.slice(0, -1).join(", ")} et ${f[f.length - 1]}` : f.join(sep);
+};
+const ECRITURES: readonly Ecriture[] = [
+  ecriture("→", " ; ", "?"), ecriture("→", ", ", "?"), ecriture("→", " et ", "?"), ecriture("donne", ", ", "?"),
+  ecriture("→", " ; ", "…"), ecriture("→", ", ", "…"), ecriture("donne", ", ", "…"), ecriture("→", " et ", "…"),
+];
+/** La consigne AVANT le tableau : courte, et elle dit que c'est proportionnel. */
+const CONSIGNES_TABLEAU = [
+  "Tableau de proportionnalité :",
+  "Complète, c’est proportionnel :",
+  "Tableau proportionnel. Complète :",
+  "C’est proportionnel. Complète :",
+  "Proportionnalité. Complète :",
+  "Complète ce tableau proportionnel :",
+  "Proportionnalité. Trouve le nombre manquant :",
+  "C’est proportionnel. Trouve le nombre manquant :",
+] as const;
+/** Les phrases courtes : une donnée (n → x), on demande m. */
+const PHRASES_SIMPLES: readonly ((n: string, x: string, m: string) => string)[] = [
+  (n, x, m) => `C’est proportionnel. ${n} donne ${x}. Que donne ${m} ?`,
+  (n, x, m) => `Proportionnalité : ${n} → ${x}. Que donne ${m} ?`,
+  (n, x, m) => `${n} donne ${x}, c’est proportionnel. Que donne ${m} ?`,
+  (n, x, m) => `Pour ${n}, on a ${x}. C’est proportionnel. Et pour ${m} ?`,
+  (n, x, m) => `Deux grandeurs proportionnelles : ${n} → ${x}. Combien pour ${m} ?`,
+  (n, x, m) => `Avec ${n}, on obtient ${x}. C’est proportionnel. Et avec ${m} ?`,
+  (n, x, m) => `Proportionnalité : ${n} donne ${x}. Calcule ce que donne ${m}.`,
+];
+
+/** Des paires connues, on demande la valeur de m : tableau ou phrase courte (★2 : 15 mots). */
+function enonceSimple(connues: [number, number][], m: number, extra: readonly string[] = []): string {
+  return court(LIMITE[2], () => {
+    if (connues.length === 1 && Math.random() < 0.35) {
+      const [n, x] = connues[0];
+      return { text: randomChoice([...PHRASES_SIMPLES])(fr(n), fr(x), fr(m)) };
+    }
+    const consigne = randomChoice([...CONSIGNES_TABLEAU, ...extra]);
+    return { text: `${consigne} ${randomChoice([...ECRITURES])([...connues, [m, null]])}` };
+  }).text;
+}
+
+/** Deux paires, proportionnelles une fois sur deux (SANS situation), avec la question. */
+function deuxRelevesSimples(ks: readonly number[], lim: number) {
+  const t = randomChoice([...TAUX_SIMPLES]);
+  const k = randomChoice([...ks]);
+  const n1 = randomInt(1, 5);
+  const n2 = n1 * k;
+  const x1 = n1 * t;
+  const prop = Math.random() < 0.5;
+  const x2 = prop ? n2 * t : n2 * t + randomChoice([-1, 1]) * randomInt(1, 3);
+  const { text } = court(lim, () => {
+    const paires: [number, number][] = [[n1, x1], [n2, x2]];
+    const tableau = randomChoice([...ECRITURES.slice(0, 4)])(paires);
+    const question = randomChoice([...QUESTIONS_RECONNAITRE]);
+    return {
+      text: randomChoice([
+        () => `${tableau}. ${question}`,
+        () => `${randomChoice(["Tableau :", "Regarde :", "Observe :"])} ${tableau}. ${question}`,
+        () => `${question} ${tableau}`,
+        () => `Pour ${fr(n1)}, on a ${fr(x1)}. Pour ${fr(n2)}, on a ${fr(x2)}. ${question}`,
+      ])(),
+    };
+  });
+  const explication = prop
+    ? `On passe de ${fr(n1)} à ${fr(n2)} en multipliant par ${k}. L’autre nombre aussi : ${fr(x1)} × ${k} = ${fr(x2)}. C’est proportionnel.`
+    : `On passe de ${fr(n1)} à ${fr(n2)} en multipliant par ${k}. Mais ${fr(x1)} × ${k} = ${fr(n2 * t)}, et pas ${fr(x2)}. Ce n’est pas proportionnel.`;
+  return { text, prop, explication };
+}
+const QUESTIONS_RECONNAITRE = [
+  "Est-ce proportionnel ?",
+  "Est-ce un tableau de proportionnalité ?",
+  "Ces nombres sont-ils proportionnels ?",
+  "Ce tableau est-il proportionnel ?",
+  "Proportionnel ou non ?",
+] as const;
+
+/** Une paire connue (n1 → x1), on demande m = n1 × k : SANS situation. */
+function colonneFoisKSimple() {
+  const t = randomChoice([...TAUX_SIMPLES]);
+  const k = randomChoice([2, 3, 4, 5]);
+  const n1 = randomInt(1, 5);
+  const [x1, m] = [n1 * t, n1 * k];
+  const y = m * t;
+  return {
+    t, n1, x1, m, y,
+    text: enonceSimple([[n1, x1]], m),
+    explication: `On passe de ${fr(n1)} à ${fr(m)} en multipliant par ${k}. L’autre nombre est aussi multiplié par ${k} : ${fr(x1)} × ${k} = ${fr(y)}.`,
+  };
+}
+
+/** Le passage à l'unité (n → x, 1 → ?), SANS situation ; `decimal` : 1 → 2,5. */
+function versUniteSimple(decimal: boolean) {
+  const t = randomChoice(decimal ? [...TAUX_DECIMAUX] : [...TAUX_SIMPLES]);
+  const n = randomInt(2, 9);
+  const x = n * t;
+  return {
+    t, n, x,
+    text: enonceSimple([[n, x]], 1, ["Proportionnalité. Passe à l’unité :", "C’est proportionnel. Passe à l’unité :"]),
+    explication: `On passe à l’unité : on divise par ${fr(n)}. ${fr(x)} ÷ ${fr(n)} = ${fr(t)}.`,
+  };
+}
+
+/** n → x connu, on demande m = n ÷ k, SANS situation. */
+function colonneDiviseeKSimple(ks: readonly number[], moitie: boolean) {
+  const t = Math.random() < 0.3 ? randomChoice([...TAUX_DECIMAUX]) : randomChoice([...TAUX_SIMPLES]);
+  const k = randomChoice([...ks]);
+  const m = randomInt(1, 5);
+  const n = m * k;
+  const [x, y] = [n * t, m * t];
+  const extra = moitie ? ["C’est proportionnel. Prends la moitié :", "Proportionnalité. Prends la moitié :"] : [];
+  return {
+    n, x, m, y,
+    text: enonceSimple([[n, x]], m, extra),
+    explication: `On passe de ${fr(n)} à ${fr(m)} en divisant par ${k}. On divise aussi l’autre nombre par ${k} : ${fr(x)} ÷ ${k} = ${fr(y)}.`,
+  };
+}
+
+/** Le coefficient : n1 → x1 (et parfois n2 → x2), SANS situation. */
+function coefficientSimple() {
+  const t = randomChoice([...TAUX_SIMPLES]);
+  const n1 = randomInt(2, 9);
+  let n2 = randomInt(2, 9);
+  if (n2 === n1) n2 = n1 === 9 ? 2 : n1 + 1;
+  const paires: [number, number][] = Math.random() < 0.4 ? [[n1, n1 * t], [n2, n2 * t]] : [[n1, n1 * t]];
+  const { text } = court(LIMITE[2], () => {
+    const donnee = `${randomChoice(["Tableau de proportionnalité :", "C’est proportionnel :", "Proportionnalité :", "Tableau proportionnel :"])} ${randomChoice([...ECRITURES.slice(0, 4)])(paires)}.`;
+    const question = randomChoice([
+      "Quel est le coefficient de proportionnalité ?",
+      "Trouve le coefficient de proportionnalité.",
+      "Quel est le coefficient ?",
+      "Trouve le coefficient.",
+      "Par quel nombre multiplie-t-on ?",
+      "Par combien multiplie-t-on ?",
+      "Donne le coefficient de proportionnalité.",
+    ]);
+    return { text: `${donnee} ${question}` };
+  });
+  return { text, t, n1, x1: n1 * t, explication: `Pour 1 : ${fr(n1 * t)} ÷ ${fr(n1)} = ${fr(t)}. On multiplie toujours par ${fr(t)} : ${fr(n1)} × ${fr(t)} = ${fr(n1 * t)}. Le coefficient est ${fr(t)}.` };
+}
+
 export const proportionnaliteBank: TutorBankItemV4[] = [
   // =========================
   // PROP_RECONNAITRE
@@ -262,18 +438,18 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_reconnaitre",
     difficulty: 1,
     theme: "neutral",
-    // 08/10/2026 : précise et corrigée strictement (Frédéric).
-    text: "Un cahier coûte 2 €. Le prix payé est-il proportionnel au nombre de cahiers ?",
+    // 03/11/2026 : ★1-★2, des nombres seuls, sans situation (même réponse).
+    text: "Est-ce proportionnel ? 1 → 2, 2 → 4, 3 → 6",
     format: "qcm",
     choices: ["oui", "non"],
     expected: ["oui"],
     comparator: "mcq_exact",
-    hint: "Combien coûtent 2 cahiers ? 3 cahiers ?",
+    hint: "Multiplie-t-on toujours par le même nombre ?",
     explanation:
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
       "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
       "Calcul : " +
-      ("1 cahier coûte 2 €, 2 cahiers coûtent 4 €, 3 cahiers coûtent 6 €. On multiplie toujours le nombre de cahiers par 2. La situation est proportionnelle.") +
+      ("1 × 2 = 2, 2 × 2 = 4, 3 × 2 = 6. On multiplie toujours par 2. Le tableau est proportionnel.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["prop_proportionnalite", "reconnaitre"],
   },
@@ -286,18 +462,18 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_reconnaitre",
     difficulty: 1,
     theme: "neutral",
-    // 08/10/2026 : précise et corrigée strictement (Frédéric).
-    text: "2 pommes coûtent 4 €. 4 pommes coûtent 8 €. Le prix est-il proportionnel au nombre de pommes ?",
+    // 03/11/2026 : ★1-★2, des nombres seuls, sans situation (même réponse).
+    text: "2 → 4 et 4 → 8. Est-ce proportionnel ?",
     format: "qcm",
     choices: ["oui", "non"],
     expected: ["oui"],
     comparator: "mcq_exact",
-    hint: "Quand on double la quantité, le prix double aussi.",
+    hint: "Quand on double le nombre de départ, l’autre double-t-il aussi ?",
     explanation:
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
       "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
       "Calcul : " +
-      ("On passe de 2 pommes à 4 pommes en multipliant par 2. Le prix passe aussi de 4 € à 8 € en multipliant par 2. La situation est donc proportionnelle.") +
+      ("On passe de 2 à 4 en multipliant par 2. L’autre nombre passe aussi de 4 à 8 en multipliant par 2. C’est donc proportionnel.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["prop_proportionnalite", "reconnaitre"],
   },
@@ -310,18 +486,18 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_reconnaitre",
     difficulty: 2,
     theme: "neutral",
-    // 08/10/2026 : précise et corrigée strictement (Frédéric).
-    text: "2 billets coûtent 6 €. 4 billets coûtent 11 €. Le prix est-il proportionnel au nombre de billets ?",
+    // 03/11/2026 : ★1-★2, des nombres seuls, sans situation (même réponse).
+    text: "Voici un tableau : 2 → 6 ; 4 → 11. Est-ce proportionnel ?",
     format: "qcm",
     choices: ["oui", "non"],
     expected: ["non"],
     comparator: "mcq_exact",
-    hint: "Si on double la quantité, le prix devrait aussi doubler.",
+    hint: "Si on double le nombre de départ, l’autre devrait doubler aussi.",
     explanation:
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
       "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
       "Calcul : " +
-      ("Si la situation était proportionnelle, en passant de 2 billets à 4 billets, le prix devrait passer de 6 € à 12 €. Or ici on obtient 11 €. La situation n’est donc pas proportionnelle.") +
+      ("Si c’était proportionnel, en passant de 2 à 4 (× 2), on passerait de 6 à 12. Or ici on a 11. Ce n’est donc pas proportionnel.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["prop_proportionnalite", "reconnaitre"],
   },
@@ -361,8 +537,9 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     notionId: "prop_proportionnalite",
     microId: "prop_reconnaitre",
     difficulty: 2,
-    theme: "reunion",
-    text: "Au marché de Saint-Pierre, quelle situation est proportionnelle ?",
+    theme: "neutral",
+    // 03/11/2026 : ★2, sans le marché (les propositions, réponse attendue comprise, ne changent pas).
+    text: "Une seule de ces situations est proportionnelle. Laquelle ?",
     format: "qcm",
     choices: [
       "2 mangues coûtent 4 € et 6 mangues coûtent 12 €",
@@ -379,7 +556,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Dans la première situation, on passe de 2 à 6 mangues en multipliant par 3, et le prix passe de 4 € à 12 € en multipliant aussi par 3. C’est donc une situation proportionnelle.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["prop_proportionnalite", "reconnaitre", "reunion", "qcm"],
+    tags: ["prop_proportionnalite", "reconnaitre", "qcm"],
   },
 
   // =========================
@@ -394,16 +571,17 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_table",
     difficulty: 2,
     theme: "neutral",
-    text: "Si 2 cahiers coûtent 4 €, combien coûtent 4 cahiers ?",
+    // 03/11/2026 : ★1-★2, des nombres seuls, sans situation (même réponse).
+    text: "Complète ce tableau de proportionnalité : 2 → 4 ; 4 → ?",
     format: "short",
     expected: ["8", "8€", "8 €"],
     comparator: "number_equal",
-    hint: "Si on double, le prix double.",
+    hint: "Si on double le nombre de départ, l’autre double aussi.",
     explanation:
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
       "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
       "Calcul : " +
-      ("On passe de 2 cahiers à 4 cahiers en multipliant par 2. On multiplie donc aussi le prix par 2 : 4 € × 2 = 8 €.") +
+      ("On passe de 2 à 4 en multipliant par 2. On multiplie donc aussi l’autre nombre par 2 : 4 × 2 = 8.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["prop_proportionnalite", "tableau"],
   },
@@ -416,7 +594,8 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_table",
     difficulty: 2,
     theme: "neutral",
-    text: "Si 3 stylos coûtent 6 €, combien coûtent 9 stylos ?",
+    // 03/11/2026 : ★1-★2, des nombres seuls, sans situation (même réponse).
+    text: "C’est proportionnel : 3 donne 6. Que donne 9 ?",
     format: "short",
     expected: ["18", "18€", "18 €"],
     comparator: "number_equal",
@@ -425,7 +604,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
       "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
       "Calcul : " +
-      ("On passe de 3 stylos à 9 stylos en multipliant par 3. Le prix est donc aussi multiplié par 3 : 6 € × 3 = 18 €.") +
+      ("On passe de 3 à 9 en multipliant par 3. L’autre nombre est donc aussi multiplié par 3 : 6 × 3 = 18.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["prop_proportionnalite", "tableau"],
   },
@@ -437,19 +616,20 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     notionId: "prop_proportionnalite",
     microId: "prop_table",
     difficulty: 2,
-    theme: "reunion",
-    text: "À La Réunion, 3 samoussas coûtent 6 €. Combien coûtent 6 samoussas ?",
+    theme: "neutral",
+    // 03/11/2026 : ★1-★2, des nombres seuls, sans situation (même réponse).
+    text: "Tableau de proportionnalité : 3 → 6 ; 6 → ? Quel nombre manque ?",
     format: "short",
     expected: ["12", "12€", "12 €"],
     comparator: "number_equal",
-    hint: "Si on multiplie la quantité par 2, le prix aussi.",
+    hint: "Si on multiplie le nombre de départ par 2, l’autre aussi.",
     explanation:
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
       "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
       "Calcul : " +
-      ("On passe de 3 samoussas à 6 samoussas en multipliant par 2. Le prix passe donc de 6 € à 12 €.") +
+      ("On passe de 3 à 6 en multipliant par 2. L’autre nombre passe donc de 6 à 12.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["prop_proportionnalite", "tableau", "reunion"],
+    tags: ["prop_proportionnalite", "tableau"],
   },
   {
     kind: "fixed",
@@ -459,8 +639,9 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     notionId: "prop_proportionnalite",
     microId: "prop_table",
     difficulty: 2,
-    theme: "reunion",
-    text: "Au marché forain, 2 ananas coûtent 8 €. Combien coûtent 6 ananas ?",
+    theme: "neutral",
+    // 03/11/2026 : ★1-★2, des nombres seuls, sans situation (même réponse).
+    text: "Dans un tableau de proportionnalité, 2 correspond à 8. À quel nombre correspond 6 ?",
     format: "short",
     expected: ["24", "24€", "24 €"],
     comparator: "number_equal",
@@ -469,9 +650,9 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
       "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
       "Calcul : " +
-      ("On passe de 2 ananas à 6 ananas en multipliant par 3. Le prix passe donc de 8 € à 24 €.") +
+      ("On passe de 2 à 6 en multipliant par 3. L’autre nombre passe donc de 8 à 24.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["prop_proportionnalite", "tableau", "reunion"],
+    tags: ["prop_proportionnalite", "tableau"],
   },
   {
     kind: "fixed",
@@ -481,8 +662,9 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     notionId: "prop_proportionnalite",
     microId: "prop_table",
     difficulty: 2,
-    theme: "jeux_video",
-    text: "Dans un jeu vidéo, 2 potions coûtent 10 pièces. Combien coûtent 6 potions ?",
+    theme: "neutral",
+    // 03/11/2026 : ★1-★2, des nombres seuls, sans situation (même réponse).
+    text: "Complète ce tableau de proportionnalité : 2 → 10 ; 6 → ?",
     format: "qcm",
     choices: ["20", "25", "30", "60"],
     expected: ["30"],
@@ -492,9 +674,9 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
       "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
       "Calcul : " +
-      ("On passe de 2 potions à 6 potions en multipliant par 3. Le prix passe donc de 10 à 30 pièces.") +
+      ("On passe de 2 à 6 en multipliant par 3. L’autre nombre passe donc de 10 à 30.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["prop_proportionnalite", "tableau", "jeux_video", "qcm"],
+    tags: ["prop_proportionnalite", "tableau", "qcm"],
   },
   {
     kind: "fixed",
@@ -504,8 +686,9 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     notionId: "prop_proportionnalite",
     microId: "prop_table",
     difficulty: 2,
-    theme: "jeux_video",
-    text: "Dans un jeu vidéo, 4 coffres coûtent 12 pièces. Combien coûtent 8 coffres ?",
+    theme: "neutral",
+    // 03/11/2026 : ★1-★2, des nombres seuls, sans situation (même réponse).
+    text: "Tableau proportionnel. Complète : 4 → 12 ; 8 → ?",
     format: "qcm",
     choices: ["16", "20", "24", "48"],
     expected: ["24"],
@@ -515,9 +698,9 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
       "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
       "Calcul : " +
-      ("On passe de 4 coffres à 8 coffres en multipliant par 2. Le prix passe donc de 12 à 24 pièces.") +
+      ("On passe de 4 à 8 en multipliant par 2. L’autre nombre passe donc de 12 à 24.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["prop_proportionnalite", "tableau", "jeux_video", "qcm"],
+    tags: ["prop_proportionnalite", "tableau", "qcm"],
   },
 
   // =========================
@@ -532,16 +715,17 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_coeff",
     difficulty: 2,
     theme: "neutral",
-    text: "Si 1 cahier coûte 3 €, quel coefficient multiplie le nombre de cahiers pour obtenir le prix ?",
+    // 03/11/2026 : ★1-★2, des nombres seuls, sans situation (même réponse).
+    text: "Tableau de proportionnalité : 1 → 3. Quel est le coefficient ?",
     format: "short",
     expected: ["3"],
     comparator: "number_equal",
-    hint: "Prix = nombre de cahiers × coefficient.",
+    hint: "Par quel nombre multiplie-t-on 1 pour obtenir 3 ?",
     explanation:
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
       "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
       "Calcul : " +
-      ("Si un cahier coûte 3 €, alors le prix total s’obtient en multipliant le nombre de cahiers par 3. Le coefficient est donc 3.") +
+      ("1 × 3 = 3 : on multiplie par 3. Le coefficient est donc 3.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["prop_proportionnalite", "coefficient"],
   },
@@ -554,16 +738,17 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_coeff",
     difficulty: 2,
     theme: "neutral",
-    text: "Dans une situation où 2 stylos coûtent 8 €, quel est le coefficient de proportionnalité ?",
+    // 03/11/2026 : ★1-★2, des nombres seuls, sans situation (même réponse).
+    text: "Tableau de proportionnalité : 2 → 8. Quel est le coefficient de proportionnalité ?",
     format: "short",
     expected: ["4"],
     comparator: "number_equal",
-    hint: "Cherche le prix pour 1 stylo.",
+    hint: "Par quel nombre multiplie-t-on 2 pour obtenir 8 ?",
     explanation:
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
       "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
       "Calcul : " +
-      ("Si 2 stylos coûtent 8 €, alors 1 stylo coûte 8 ÷ 2 = 4 €. Le coefficient de proportionnalité est donc 4.") +
+      ("8 ÷ 2 = 4, et 2 × 4 = 8. Le coefficient de proportionnalité est donc 4.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["prop_proportionnalite", "coefficient"],
   },
@@ -576,7 +761,8 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_coeff",
     difficulty: 2,
     theme: "neutral",
-    text: "Si 3 objets coûtent 12 €, quel est le coefficient de proportionnalité ?",
+    // 03/11/2026 : ★1-★2, des nombres seuls, sans situation (même réponse).
+    text: "C’est proportionnel : 3 → 12. Par quel nombre multiplie-t-on ?",
     format: "qcm",
     choices: ["2", "3", "4", "12"],
     expected: ["4"],
@@ -586,7 +772,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
       "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
       "Calcul : " +
-      ("3 objets coûtent 12 €, donc 1 objet coûte 12 ÷ 3 = 4 €. Le coefficient est 4.") +
+      ("12 ÷ 3 = 4, et 3 × 4 = 12. Le coefficient est 4.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["prop_proportionnalite", "coefficient", "qcm"],
   },
@@ -598,20 +784,21 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     notionId: "prop_proportionnalite",
     microId: "prop_coeff",
     difficulty: 2,
-    theme: "reunion",
-    text: "À La Réunion, 5 mangues coûtent 15 €. Quel est le coefficient de proportionnalité ?",
+    theme: "neutral",
+    // 03/11/2026 : ★1-★2, des nombres seuls, sans situation (même réponse).
+    text: "Dans un tableau de proportionnalité, 5 donne 15. Quel est le coefficient ?",
     format: "qcm",
     choices: ["2", "3", "5", "15"],
     expected: ["3"],
     comparator: "mcq_exact",
-    hint: "Cherche le prix d’une mangue.",
+    hint: "Par quel nombre multiplie-t-on 5 pour obtenir 15 ?",
     explanation:
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
       "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
       "Calcul : " +
-      ("5 mangues coûtent 15 €, donc 1 mangue coûte 15 ÷ 5 = 3 €. Le coefficient est 3.") +
+      ("15 ÷ 5 = 3, et 5 × 3 = 15. Le coefficient est 3.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["prop_proportionnalite", "coefficient", "reunion", "qcm"],
+    tags: ["prop_proportionnalite", "coefficient", "qcm"],
   },
 
   // =========================
@@ -626,7 +813,8 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_unite",
     difficulty: 2,
     theme: "neutral",
-    text: "3 bonbons coûtent 6 €. Combien coûte 1 bonbon ?",
+    // 03/11/2026 : ★1-★2, des nombres seuls, sans situation (même réponse).
+    text: "Complète ce tableau de proportionnalité : 3 → 6 ; 1 → ?",
     format: "short",
     expected: ["2", "2€", "2 €"],
     comparator: "number_equal",
@@ -635,7 +823,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
       "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
       "Calcul : " +
-      ("Pour trouver le prix d’un bonbon, on divise 6 € par 3. On obtient 2 €. Un bonbon coûte donc 2 €.") +
+      ("Pour passer de 3 à 1, on divise par 3. On divise aussi 6 par 3 : 6 ÷ 3 = 2.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["prop_proportionnalite", "unite"],
   },
@@ -648,16 +836,17 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_unite",
     difficulty: 2,
     theme: "neutral",
-    text: "5 cahiers coûtent 15 €. Combien coûte 1 cahier ?",
+    // 03/11/2026 : ★1-★2, des nombres seuls, sans situation (même réponse).
+    text: "Passe à l’unité : 5 → 15 ; 1 → ?",
     format: "short",
     expected: ["3", "3€", "3 €"],
     comparator: "number_equal",
-    hint: "Divise le prix total par 5.",
+    hint: "Divise 15 par 5.",
     explanation:
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
       "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
       "Calcul : " +
-      ("15 € ÷ 5 = 3 €. Un cahier coûte donc 3 €.") +
+      ("15 ÷ 5 = 3. En face de 1, on écrit 3.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["prop_proportionnalite", "unite"],
   },
@@ -669,19 +858,20 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     notionId: "prop_proportionnalite",
     microId: "prop_unite",
     difficulty: 2,
-    theme: "cuisine",
-    text: "Pour une recette, 4 yaourts coûtent 8 €. Combien coûte 1 yaourt ?",
+    theme: "neutral",
+    // 03/11/2026 : ★1-★2, des nombres seuls, sans situation (même réponse).
+    text: "Dans un tableau de proportionnalité, 4 correspond à 8. À quel nombre correspond 1 ?",
     format: "short",
     expected: ["2", "2€", "2 €"],
     comparator: "number_equal",
-    hint: "Divise le prix total par le nombre de yaourts.",
+    hint: "Divise 8 par 4.",
     explanation:
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
       "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
       "Calcul : " +
-      ("8 € ÷ 4 = 2 €. Un yaourt coûte donc 2 €.") +
+      ("8 ÷ 4 = 2. À 1 correspond 2.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["prop_proportionnalite", "unite", "cuisine"],
+    tags: ["prop_proportionnalite", "unite"],
   },
   {
     kind: "fixed",
@@ -691,8 +881,9 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     notionId: "prop_proportionnalite",
     microId: "prop_unite",
     difficulty: 2,
-    theme: "cuisine",
-    text: "Pour cuisiner, 6 œufs coûtent 12 €. Combien coûte 1 œuf ?",
+    theme: "neutral",
+    // 03/11/2026 : ★1-★2, des nombres seuls, sans situation (même réponse).
+    text: "C’est proportionnel : 6 donne 12. Que donne 1 ?",
     format: "short",
     expected: ["2", "2€", "2 €"],
     comparator: "number_equal",
@@ -701,9 +892,9 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
       "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
       "Calcul : " +
-      ("12 € ÷ 6 = 2 €. Un œuf coûte donc 2 €.") +
+      ("12 ÷ 6 = 2. Donc 1 donne 2.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["prop_proportionnalite", "unite", "cuisine"],
+    tags: ["prop_proportionnalite", "unite"],
   },
   {
     kind: "fixed",
@@ -713,8 +904,9 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     notionId: "prop_proportionnalite",
     microId: "prop_unite",
     difficulty: 2,
-    theme: "reunion",
-    text: "Au marché de Saint-Pierre, 5 mangues coûtent 15 €. Combien coûte 1 mangue ?",
+    theme: "neutral",
+    // 03/11/2026 : ★2, sans le marché ; les propositions en euros (réponse attendue) restent.
+    text: "Prix proportionnel : 5 → 15 €. Quel prix pour 1 ?",
     format: "qcm",
     choices: ["2 €", "3 €", "4 €", "5 €"],
     expected: ["3 €"],
@@ -724,9 +916,9 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
       "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
       "Calcul : " +
-      ("15 € ÷ 5 = 3 €. Une mangue coûte donc 3 €.") +
+      ("15 € ÷ 5 = 3 €. Le prix pour 1 est donc 3 €.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["prop_proportionnalite", "unite", "reunion", "qcm"],
+    tags: ["prop_proportionnalite", "unite", "qcm"],
   },
   {
     kind: "fixed",
@@ -736,8 +928,9 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     notionId: "prop_proportionnalite",
     microId: "prop_unite",
     difficulty: 2,
-    theme: "reunion",
-    text: "Au snack, 4 bouchons coûtent 8 €. Combien coûte 1 bouchon ?",
+    theme: "neutral",
+    // 03/11/2026 : ★2, sans le marché ; les propositions en euros (réponse attendue) restent.
+    text: "Tableau de proportionnalité, en euros : 4 → 8 € ; 1 → ?",
     format: "qcm",
     choices: ["1 €", "2 €", "3 €", "4 €"],
     expected: ["2 €"],
@@ -747,9 +940,9 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
       "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
       "Calcul : " +
-      ("8 € ÷ 4 = 2 €. Un bouchon coûte donc 2 €.") +
+      ("8 € ÷ 4 = 2 €. En face de 1, on écrit 2 €.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["prop_proportionnalite", "unite", "reunion", "qcm"],
+    tags: ["prop_proportionnalite", "unite", "qcm"],
   },
 
   // =========================
@@ -764,16 +957,17 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_direct",
     difficulty: 2,
     theme: "neutral",
-    text: "4 cahiers coûtent 8 €. Combien coûtent 2 cahiers ?",
+    // 03/11/2026 : ★1-★2, des nombres seuls, sans situation (même réponse).
+    text: "Complète ce tableau de proportionnalité : 4 → 8 ; 2 → ?",
     format: "short",
     expected: ["4", "4€", "4 €"],
     comparator: "number_equal",
-    hint: "Si on divise par 2, le prix aussi.",
+    hint: "Si on divise le nombre de départ par 2, l’autre aussi.",
     explanation:
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
       "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
       "Calcul : " +
-      ("On passe de 4 cahiers à 2 cahiers en divisant par 2. On divise donc aussi le prix par 2 : 8 € ÷ 2 = 4 €.") +
+      ("On passe de 4 à 2 en divisant par 2. On divise donc aussi l’autre nombre par 2 : 8 ÷ 2 = 4.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["prop_proportionnalite", "direct"],
   },
@@ -786,7 +980,8 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_direct",
     difficulty: 2,
     theme: "neutral",
-    text: "8 feutres coûtent 16 €. Combien coûtent 4 feutres ?",
+    // 03/11/2026 : ★1-★2, des nombres seuls, sans situation (même réponse).
+    text: "C’est proportionnel : 8 donne 16. Que donne 4 ?",
     format: "short",
     expected: ["8", "8€", "8 €"],
     comparator: "number_equal",
@@ -795,7 +990,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
       "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
       "Calcul : " +
-      ("4 feutres, c’est la moitié de 8 feutres. Le prix est donc la moitié de 16 €, soit 8 €.") +
+      ("4, c’est la moitié de 8. On prend donc la moitié de 16, soit 8.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["prop_proportionnalite", "direct"],
   },
@@ -807,19 +1002,20 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     notionId: "prop_proportionnalite",
     microId: "prop_direct",
     difficulty: 2,
-    theme: "sport",
-    text: "Pendant un tournoi de foot, 6 bouteilles d’eau coûtent 12 €. Combien coûtent 3 bouteilles ?",
+    theme: "neutral",
+    // 03/11/2026 : ★1-★2, des nombres seuls, sans situation (même réponse).
+    text: "Tableau de proportionnalité : 6 → 12 ; 3 → ? Quel nombre manque ?",
     format: "short",
     expected: ["6", "6€", "6 €"],
     comparator: "number_equal",
-    hint: "Si on prend deux fois moins, on paie deux fois moins.",
+    hint: "3, c’est la moitié de 6.",
     explanation:
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
       "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
       "Calcul : " +
-      ("3 bouteilles, c’est la moitié de 6 bouteilles. Le prix est donc la moitié de 12 €, soit 6 €.") +
+      ("3, c’est la moitié de 6. On prend donc la moitié de 12, soit 6.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["prop_proportionnalite", "direct", "sport"],
+    tags: ["prop_proportionnalite", "direct"],
   },
   {
     kind: "fixed",
@@ -829,8 +1025,9 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     notionId: "prop_proportionnalite",
     microId: "prop_direct",
     difficulty: 2,
-    theme: "sport",
-    text: "Pour un match, 10 maillots coûtent 50 €. Combien coûtent 5 maillots ?",
+    theme: "neutral",
+    // 03/11/2026 : ★1-★2, des nombres seuls, sans situation (même réponse).
+    text: "Dans un tableau de proportionnalité, 10 correspond à 50. À quel nombre correspond 5 ?",
     format: "short",
     expected: ["25", "25€", "25 €"],
     comparator: "number_equal",
@@ -839,9 +1036,9 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
       "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
       "Calcul : " +
-      ("5 maillots, c’est la moitié de 10 maillots. Le prix est donc la moitié de 50 €, soit 25 €.") +
+      ("5, c’est la moitié de 10. On prend donc la moitié de 50, soit 25.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["prop_proportionnalite", "direct", "sport"],
+    tags: ["prop_proportionnalite", "direct"],
   },
   {
     kind: "fixed",
@@ -851,8 +1048,9 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     notionId: "prop_proportionnalite",
     microId: "prop_direct",
     difficulty: 2,
-    theme: "cuisine",
-    text: "Pour cuisiner, 8 œufs coûtent 16 €. Combien coûtent 4 œufs ?",
+    theme: "neutral",
+    // 03/11/2026 : ★2, sans la recette ; les propositions en euros (réponse attendue) restent.
+    text: "Prix proportionnel : 8 → 16 €. Quel prix pour 4 ?",
     format: "qcm",
     choices: ["4 €", "6 €", "8 €", "12 €"],
     expected: ["8 €"],
@@ -862,9 +1060,9 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
       "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
       "Calcul : " +
-      ("4 œufs, c’est la moitié de 8 œufs. Le prix est donc la moitié de 16 €, soit 8 €.") +
+      ("4, c’est la moitié de 8. Le prix est donc la moitié de 16 €, soit 8 €.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["prop_proportionnalite", "direct", "cuisine", "qcm"],
+    tags: ["prop_proportionnalite", "direct", "qcm"],
   },
   {
     kind: "fixed",
@@ -874,8 +1072,9 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     notionId: "prop_proportionnalite",
     microId: "prop_direct",
     difficulty: 2,
-    theme: "cuisine",
-    text: "Pour une recette, 6 citrons coûtent 12 €. Combien coûtent 3 citrons ?",
+    theme: "neutral",
+    // 03/11/2026 : ★2, sans la recette ; les propositions en euros (réponse attendue) restent.
+    text: "Tableau de proportionnalité, en euros : 6 → 12 € ; 3 → ?",
     format: "qcm",
     choices: ["3 €", "4 €", "6 €", "9 €"],
     expected: ["6 €"],
@@ -885,9 +1084,9 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
       "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
       "Calcul : " +
-      ("3 citrons, c’est la moitié de 6 citrons. Le prix est donc la moitié de 12 €, soit 6 €.") +
+      ("3, c’est la moitié de 6. Le prix est donc la moitié de 12 €, soit 6 €.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["prop_proportionnalite", "direct", "cuisine", "qcm"],
+    tags: ["prop_proportionnalite", "direct", "qcm"],
   },
 
   // =========================
@@ -1004,15 +1203,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Regarde si le même coefficient s’applique aux deux lignes.",
     tags: ["prop_proportionnalite", "reconnaitre", "template"],
-    // 06/10 : une situation de la table, deux relevés ; proportionnels une fois sur deux.
+    // 03/11/2026 : ★2, des nombres seuls (la situation est passée dans
+    // prop_reconnaitre_tpl_situation, ★3) ; proportionnels une fois sur deux.
     generate: () => {
-      const r = deuxReleves([2, 3, 4, 5]);
+      const r = deuxRelevesSimples([2, 3, 4, 5], LIMITE[2]);
       return {
-        text: `${r.text} ${randomChoice([
-          "Est-ce une situation de proportionnalité ?",
-          "Ces deux relevés sont-ils proportionnels ?",
-          "Est-ce proportionnel ?",
-        ])}`,
+        text: r.text,
         // 08/10/2026 : précise et corrigée strictement (Frédéric) — QCM oui / non.
         format: "qcm",
         choices: ["oui", "non"],
@@ -1033,14 +1229,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Si la quantité double, la valeur doit doubler aussi.",
     tags: ["prop_proportionnalite", "reconnaitre", "qcm", "template"],
+    // 03/11/2026 : ★1, des nombres seuls (double ou triple).
     generate: () => {
-      const r = deuxReleves([2, 3]);
+      const r = deuxRelevesSimples([2, 3], LIMITE[1]);
       return {
-        text: `${r.text} ${randomChoice([
-          "Est-ce proportionnel ?",
-          "Est-ce une situation de proportionnalité ?",
-          "La valeur suit-elle la quantité de façon proportionnelle ?",
-        ])}`,
+        text: r.text,
         format: "qcm",
         choices: ["oui", "non"],
         expected: [r.prop ? "oui" : "non"],
@@ -1060,7 +1253,79 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Cherche la situation où le prix suit exactement le même coefficient que la quantité.",
     tags: ["prop_proportionnalite", "reconnaitre", "qcm", "template"],
-    // 06/10 : quatre relevés d'une même situation, un seul proportionnel.
+    // 03/11/2026 : ★2, quatre tableaux de nombres, un seul proportionnel (les
+    // relevés d'une situation sont passés dans prop_reconnaitre_qcm_tpl_situation, ★3).
+    generate: () => {
+      const t = randomChoice([...TAUX_SIMPLES]);
+      const ecrire = randomChoice([...ECRITURES]);
+      const ligne = (n1: number, k: number, ecart: number) => ecrire([[n1, n1 * t], [n1 * k, n1 * k * t + ecart]]);
+      const n0 = randomInt(1, 5);
+      const k0 = randomChoice([2, 3, 4]);
+      const bonne = ligne(n0, k0, 0);
+      const leurres = [1, 2, 3, 4, 5, 6].map((i) => ligne(randomInt(1, 5), randomChoice([2, 3, 4]), (i % 2 ? 1 : -1) * randomInt(1, 3)));
+      return {
+        text: randomChoice([
+          "Quel tableau est proportionnel ?",
+          "Un seul de ces tableaux est proportionnel. Lequel ?",
+          "Lequel de ces tableaux est un tableau de proportionnalité ?",
+          "Choisis le tableau de proportionnalité.",
+          "Trouve le seul tableau proportionnel.",
+          "Dans quel tableau multiplie-t-on toujours par le même nombre ?",
+          "Une seule de ces listes est proportionnelle. Laquelle ?",
+          "Quelle liste de nombres est proportionnelle ?",
+        ]),
+        format: "qcm",
+        choices: makeChoices(bonne, leurres),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: expl(
+          `Dans le bon tableau, on passe de ${fr(n0)} à ${fr(n0 * k0)} en multipliant par ${k0}, et l’autre nombre aussi : ${fr(n0 * t)} × ${k0} = ${fr(n0 * k0 * t)}. ` +
+            "Dans les autres, on ne multiplie pas par le même nombre.",
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "prop_reconnaitre_tpl_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_reconnaitre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Regarde si la valeur est multipliée par le même nombre que la quantité.",
+    tags: ["prop_proportionnalite", "reconnaitre", "template"],
+    // 03/11/2026 : les situations de la vie et des métiers, réservées à ★3.
+    generate: () => {
+      const r = deuxReleves([2, 3, 4, 5]);
+      return {
+        text: `${r.text} ${randomChoice([
+          "Est-ce une situation de proportionnalité ?",
+          "Ces deux relevés sont-ils proportionnels ?",
+          "Est-ce proportionnel ?",
+          "La valeur suit-elle la quantité de façon proportionnelle ?",
+        ])}`,
+        format: "qcm",
+        choices: ["oui", "non"],
+        expected: [r.prop ? "oui" : "non"],
+        comparator: "mcq_exact",
+        explanation: expl(r.explication),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "prop_reconnaitre_qcm_tpl_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_reconnaitre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Cherche le relevé où la valeur suit exactement le même coefficient que la quantité.",
+    tags: ["prop_proportionnalite", "reconnaitre", "qcm", "template"],
+    // 06/10 : quatre relevés d'une même situation, un seul proportionnel ; ★3 depuis le 03/11/2026.
     generate: () => {
       const { s, t, P } = tirerProp();
       const ligne = (n1: number, k: number, ecart: number) =>
@@ -1103,13 +1368,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Utilise le coefficient multiplicateur.",
     tags: ["prop_proportionnalite", "tableau", "template"],
-    // 06/10 : une colonne × k — en phrase, ou en tableau décrit en ligne.
+    // 03/11/2026 : ★2, des nombres seuls (une colonne × k) ; les situations
+    // sont passées dans prop_table_tpl_situation (★3).
     generate: () => {
-      const c = colonneFoisK();
+      const c = colonneFoisKSimple();
       return {
         text: c.text,
         format: "short",
-        expected: reponses(c.y, c.s.u),
+        expected: [fr(c.y)],
         comparator: "number_equal",
         explanation: expl(c.explication),
       };
@@ -1126,8 +1392,43 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Repère par combien on multiplie la quantité.",
     tags: ["prop_proportionnalite", "tableau", "template"],
-    // 06/10 : la linéarité additive — deux colonnes connues, on cherche leur somme.
+    // 03/11/2026 : ★2, la linéarité additive avec des nombres seuls : deux
+    // colonnes connues, on cherche leur somme.
     generate: () => {
+      for (;;) {
+        const t = randomChoice([...TAUX_SIMPLES]);
+        const n1 = randomInt(1, 6);
+        const n2 = randomInt(1, 6);
+        if (n1 === n2) continue;
+        const [x1, x2, m] = [n1 * t, n2 * t, n1 + n2];
+        return {
+          text: enonceSimple([[n1, x1], [n2, x2]], m, ["Additionne deux colonnes pour compléter ce tableau de proportionnalité :", "Complète ce tableau de proportionnalité sans chercher le coefficient :"]),
+          format: "short",
+          expected: [fr(m * t)],
+          comparator: "number_equal",
+          explanation: expl(`${fr(m)} = ${fr(n1)} + ${fr(n2)}. On additionne donc les nombres d’arrivée : ${fr(x1)} + ${fr(x2)} = ${fr(m * t)}.`),
+        };
+      }
+    },
+  },
+  {
+    kind: "template",
+    id: "prop_table_tpl_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_table",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Repère par combien on multiplie la quantité, ou additionne deux colonnes.",
+    tags: ["prop_proportionnalite", "tableau", "template"],
+    // 03/11/2026 : les situations de la vie et des métiers, réservées à ★3 :
+    // une colonne × k, ou la somme de deux colonnes.
+    generate: () => {
+      if (Math.random() < 0.5) {
+        const c = colonneFoisK();
+        return { text: c.text, format: "short", expected: reponses(c.y, c.s.u), comparator: "number_equal", explanation: expl(c.explication) };
+      }
       for (;;) {
         const { s, t, P } = tirerProp();
         const n1 = randomInt(1, 5);
@@ -1158,18 +1459,19 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Multiplie aussi le prix par le même coefficient.",
     tags: ["prop_proportionnalite", "tableau", "qcm", "template"],
+    // 03/11/2026 : ★2, des nombres seuls.
     generate: () => {
-      const c = colonneFoisK();
-      const { s, x1, n1, m, y } = c;
-      // Les pièges : ajouter l'écart des quantités (erreur additive), garder la
-      // valeur de départ, ajouter une unité de trop.
-      const choices = makeChoices(avecU(y, s.u), [x1 + (m - n1), x1, y + c.t, y + m, y - c.t].filter((v) => v > 0).map((v) => avecU(v, s.u)));
+      const c = colonneFoisKSimple();
+      const { x1, n1, m, y } = c;
+      // Les pièges : ajouter l'écart (erreur additive), garder le nombre de
+      // départ, une colonne de trop ou de moins.
+      const choices = makeChoices(fr(y), [x1 + (m - n1), x1, y + c.t, y + m, y - c.t].filter((v) => v > 0).map(fr));
 
       return {
         text: c.text,
         format: "qcm",
         choices,
-        expected: [avecU(y, s.u)],
+        expected: [fr(y)],
         comparator: "mcq_exact",
         explanation: expl(c.explication),
       };
@@ -1190,9 +1492,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Cherche la valeur pour 1 objet.",
     tags: ["prop_proportionnalite", "coefficient", "template"],
-    // 06/10 : le coefficient = la valeur pour UNE unité, lu dans une phrase ou un tableau.
+    // 06/10 : le coefficient = la valeur pour UNE unité. 03/11/2026 : ★2, des
+    // nombres seuls (les situations restent à ★3 : prop_coeff_tpl_decimal, _utiliser).
     generate: () => {
-      const c = coefficient(false);
+      const c = coefficientSimple();
       return {
         text: c.text,
         format: "short",
@@ -1265,8 +1568,9 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Le coefficient est le prix d’un seul objet.",
     tags: ["prop_proportionnalite", "coefficient", "qcm", "template"],
+    // 03/11/2026 : ★2, des nombres seuls.
     generate: () => {
-      const c = coefficient(false);
+      const c = coefficientSimple();
       // Les pièges : la quantité, la valeur, l'écart (erreur additive), un de plus.
       const leurres = [c.n1, c.x1, c.x1 - c.n1, c.t + 1, c.n1 * c.x1].filter((v) => v > 0 && !egalNb(v, c.t)).map(fr);
       return {
@@ -1294,10 +1598,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Divise par le nombre d’objets.",
     tags: ["prop_proportionnalite", "unite", "template"],
-    // 06/10 : passage à l'unité, valeur entière.
+    // 06/10 : passage à l'unité, valeur entière. 03/11/2026 : ★2, des nombres seuls.
     generate: () => {
-      const c = versUnite(false);
-      return { text: c.text, format: "short", expected: reponses(c.t, c.s.u), comparator: "number_equal", explanation: expl(c.explication) };
+      const c = versUniteSimple(false);
+      return { text: c.text, format: "short", expected: [fr(c.t)], comparator: "number_equal", explanation: expl(c.explication) };
     },
   },
   {
@@ -1311,10 +1615,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Passe à l’unité.",
     tags: ["prop_proportionnalite", "unite", "template"],
-    // 06/10 : passage à l'unité, valeur décimale (2,5 € le ticket).
+    // 06/10 : passage à l'unité, valeur décimale. 03/11/2026 : ★2, des nombres seuls.
     generate: () => {
-      const c = versUnite(true);
-      return { text: c.text, format: "short", expected: reponses(c.t, c.s.u), comparator: "number_equal", explanation: expl(c.explication) };
+      const c = versUniteSimple(true);
+      return { text: c.text, format: "short", expected: [fr(c.t)], comparator: "number_equal", explanation: expl(c.explication) };
     },
   },
   {
@@ -1328,18 +1632,37 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Il faut partager le prix total par la quantité.",
     tags: ["prop_proportionnalite", "unite", "qcm", "template"],
+    // 03/11/2026 : ★2, des nombres seuls.
     generate: () => {
-      const c = versUnite(Math.random() < 0.3);
-      // Les pièges : la valeur totale, la quantité, l'écart (erreur additive), un de plus.
-      const leurres = [c.x, c.n, c.x - c.n, c.t + 1, c.x * c.n].filter((v) => v > 0 && !egalNb(v, c.t)).map((v) => avecU(v, c.s.u));
+      const c = versUniteSimple(Math.random() < 0.3);
+      // Les pièges : le nombre d'arrivée, celui de départ, l'écart (erreur additive), un de plus.
+      const leurres = [c.x, c.n, c.x - c.n, c.t + 1, c.x * c.n].filter((v) => v > 0 && !egalNb(v, c.t)).map(fr);
       return {
         text: c.text,
         format: "qcm",
-        choices: makeChoices(avecU(c.t, c.s.u), leurres),
-        expected: [avecU(c.t, c.s.u)],
+        choices: makeChoices(fr(c.t), leurres),
+        expected: [fr(c.t)],
         comparator: "mcq_exact",
         explanation: expl(c.explication),
       };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "prop_unite_tpl_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_unite",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Divise la valeur par la quantité.",
+    tags: ["prop_proportionnalite", "unite", "template"],
+    // 03/11/2026 : les situations de la vie et des métiers, réservées à ★3.
+    generate: () => {
+      const c = versUnite(Math.random() < 0.4);
+      return { text: c.text, format: "short", expected: reponses(c.t, c.s.u), comparator: "number_equal", explanation: expl(c.explication) };
     },
   },
 
@@ -1358,9 +1681,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     hint: "Si la quantité diminue, le prix diminue dans la même proportion.",
     tags: ["prop_proportionnalite", "direct", "template"],
     // 06/10 : la quantité est divisée par 2, 3 ou 4 — la valeur aussi.
+    // 03/11/2026 : ★2, des nombres seuls (situations : prop_direct_tpl_situation, ★3).
     generate: () => {
-      const c = colonneDiviseeK([2, 3, 4], false);
-      return { text: c.text, format: "short", expected: reponses(c.y, c.s.u), comparator: "number_equal", explanation: expl(c.explication) };
+      const c = colonneDiviseeKSimple([2, 3, 4], false);
+      return { text: c.text, format: "short", expected: [fr(c.y)], comparator: "number_equal", explanation: expl(c.explication) };
     },
   },
   {
@@ -1374,10 +1698,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Passe à la moitié.",
     tags: ["prop_proportionnalite", "direct", "template"],
-    // 06/10 : la moitié, en tableau ou avec une consigne qui le dit.
+    // 06/10 : la moitié, en tableau ou avec une consigne qui le dit. 03/11/2026 : ★2, des nombres seuls.
     generate: () => {
-      const c = colonneDiviseeK([2], true);
-      return { text: c.text, format: "short", expected: reponses(c.y, c.s.u), comparator: "number_equal", explanation: expl(c.explication) };
+      const c = colonneDiviseeKSimple([2], true);
+      return { text: c.text, format: "short", expected: [fr(c.y)], comparator: "number_equal", explanation: expl(c.explication) };
     },
   },
   {
@@ -1388,21 +1712,39 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     notionId: "prop_proportionnalite",
     microId: "prop_direct",
     difficulty: 2,
-    theme: "sport",
-    hint: "Si on divise la quantité par 2, on divise aussi le prix par 2.",
-    tags: ["prop_proportionnalite", "direct", "sport", "qcm", "template"],
+    theme: "neutral",
+    hint: "Si on divise le nombre de départ par 2, on divise aussi l’autre par 2.",
+    tags: ["prop_proportionnalite", "direct", "qcm", "template"],
+    // 03/11/2026 : ★2, des nombres seuls.
     generate: () => {
-      const c = colonneDiviseeK([2, 3, 4], false);
-      // Les pièges : retirer l'écart des quantités (erreur additive), garder la valeur, un de plus.
-      const leurres = [c.x - (c.n - c.m), c.x, c.y + 1, c.y * 2 === c.x ? c.y + 2 : c.y * 2].filter((v) => v > 0 && !egalNb(v, c.y)).map((v) => avecU(v, c.s.u));
+      const c = colonneDiviseeKSimple([2, 3, 4], false);
+      // Les pièges : retirer l'écart (erreur additive), garder le nombre d'arrivée, un de plus.
+      const leurres = [c.x - (c.n - c.m), c.x, c.y + 1, c.y * 2 === c.x ? c.y + 2 : c.y * 2].filter((v) => v > 0 && !egalNb(v, c.y)).map(fr);
       return {
         text: c.text,
         format: "qcm",
-        choices: makeChoices(avecU(c.y, c.s.u), leurres),
-        expected: [avecU(c.y, c.s.u)],
+        choices: makeChoices(fr(c.y), leurres),
+        expected: [fr(c.y)],
         comparator: "mcq_exact",
         explanation: expl(c.explication),
       };
+    },
+  },
+  {
+    kind: "template",
+    id: "prop_direct_tpl_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_direct",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Si la quantité est divisée, la valeur est divisée par le même nombre.",
+    tags: ["prop_proportionnalite", "direct", "template"],
+    // 03/11/2026 : les situations de la vie et des métiers, réservées à ★3.
+    generate: () => {
+      const c = colonneDiviseeK([2, 3, 4], true);
+      return { text: c.text, format: "short", expected: reponses(c.y, c.s.u), comparator: "number_equal", explanation: expl(c.explication) };
     },
   },
 
@@ -1510,27 +1852,28 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "prop_reconnaitre_topup_1", niveau: "6e", matiere: "maths",
     notionId: "prop_proportionnalite", microId: "prop_reconnaitre", difficulty: 2, theme: "neutral",
-    // 08/10/2026 : précise et corrigée strictement (Frédéric).
-    text: "3 kg de fruits coûtent 9 €. 6 kg coûtent 18 €. Le prix est-il proportionnel à la masse ?",
+    // 03/11/2026 : ★2, des nombres seuls (même réponse).
+    text: "Pour 3, on a 9. Pour 6, on a 18. Proportionnel ?",
     format: "qcm", choices: ["oui", "non"], expected: ["oui"], comparator: "mcq_exact",
-    hint: "Quand on double la quantité, le prix double aussi.",
-    explanation: expl("On passe de 3 kg à 6 kg en multipliant par 2 ; le prix passe de 9 € à 18 € en multipliant aussi par 2. La situation est proportionnelle."),
+    hint: "Quand on double le nombre de départ, l’autre double-t-il aussi ?",
+    explanation: expl("On passe de 3 à 6 en multipliant par 2 ; on passe de 9 à 18 en multipliant aussi par 2. C’est proportionnel."),
     tags: ["prop_proportionnalite", "reconnaitre"],
   },
   {
     kind: "fixed", id: "prop_reconnaitre_topup_2", niveau: "6e", matiere: "maths",
     notionId: "prop_proportionnalite", microId: "prop_reconnaitre", difficulty: 2, theme: "neutral",
-    text: "L’âge d’une personne et sa taille sont-ils des grandeurs proportionnelles ?",
+    // 03/11/2026 : ★2, des nombres seuls (même réponse).
+    text: "Est-ce proportionnel ? 1 → 3, 2 → 5, 3 → 7",
     format: "qcm", choices: ["non", "oui"], expected: ["non"], comparator: "mcq_exact",
-    hint: "Quelqu’un de 2 fois plus âgé n’est pas 2 fois plus grand.",
-    explanation: expl("Une personne de 40 ans n’est pas deux fois plus grande qu’une personne de 20 ans. On ne multiplie pas toujours par le même nombre : ce n’est pas proportionnel."),
+    hint: "Si on double 1, obtient-on le double de 3 ?",
+    explanation: expl("1 × 3 = 3, mais 2 × 3 = 6, et pas 5. On ne multiplie pas toujours par le même nombre : ce n’est pas proportionnel."),
     tags: ["prop_proportionnalite", "reconnaitre", "qcm"],
   },
   {
     kind: "fixed", id: "prop_reconnaitre_topup_3", niveau: "6e", matiere: "maths",
     notionId: "prop_proportionnalite", microId: "prop_reconnaitre", difficulty: 2, theme: "neutral",
     // 08/10/2026 : précise et corrigée strictement (Frédéric).
-    text: "Un tableau indique : 1 → 5, 2 → 10, 3 → 15. Est-ce une situation de proportionnalité ?",
+    text: "Ce tableau est-il proportionnel ? 1 → 5, 2 → 10, 3 → 15",
     format: "qcm", choices: ["oui", "non"], expected: ["oui"], comparator: "mcq_exact",
     hint: "Cherche si on multiplie toujours par le même nombre.",
     explanation: expl("On passe de chaque nombre du haut à celui du bas en multipliant par 5 (1×5=5, 2×5=10, 3×5=15). C’est donc une situation proportionnelle, de coefficient 5."),
@@ -1541,28 +1884,31 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "prop_coeff_topup_1", niveau: "6e", matiere: "maths",
     notionId: "prop_proportionnalite", microId: "prop_coeff", difficulty: 2, theme: "neutral",
-    text: "Si 1 kg de pommes coûte 2 €, quel coefficient multiplie la masse pour obtenir le prix ?",
+    // 03/11/2026 : ★2, des nombres seuls (même réponse).
+    text: "Tableau : 1 → 2 ; 5 → 10. Par combien multiplie-t-on ?",
     format: "short", expected: ["2"], comparator: "number_equal",
-    hint: "Prix = masse × coefficient.",
-    explanation: expl("Si 1 kg coûte 2 €, le prix s’obtient en multipliant la masse par 2. Le coefficient de proportionnalité est 2."),
+    hint: "1 × … = 2.",
+    explanation: expl("1 × 2 = 2 et 5 × 2 = 10. Le coefficient de proportionnalité est 2."),
     tags: ["prop_proportionnalite", "coefficient"],
   },
   {
     kind: "fixed", id: "prop_coeff_topup_2", niveau: "6e", matiere: "maths",
     notionId: "prop_proportionnalite", microId: "prop_coeff", difficulty: 2, theme: "neutral",
-    text: "3 stylos coûtent 6 €. Quel est le coefficient de proportionnalité (prix d’un stylo) ?",
+    // 03/11/2026 : ★2, des nombres seuls (même réponse).
+    text: "C’est proportionnel : 3 donne 6. Quel est le coefficient de proportionnalité ?",
     format: "short", expected: ["2"], comparator: "number_equal",
-    hint: "Cherche le prix pour 1 stylo.",
-    explanation: expl("Le prix d’un stylo est 6 ÷ 3 = 2 €. Le coefficient de proportionnalité est donc 2."),
+    hint: "Cherche ce que donne 1 : 6 ÷ 3.",
+    explanation: expl("Pour 1 : 6 ÷ 3 = 2. Le coefficient de proportionnalité est donc 2."),
     tags: ["prop_proportionnalite", "coefficient"],
   },
   {
     kind: "fixed", id: "prop_coeff_topup_3", niveau: "6e", matiere: "maths",
     notionId: "prop_proportionnalite", microId: "prop_coeff", difficulty: 2, theme: "neutral",
-    text: "Le coefficient de proportionnalité est 5. Quel est le prix de 4 objets ?",
+    // 03/11/2026 : ★2, des nombres seuls (même réponse).
+    text: "Le coefficient de proportionnalité est 5. Quel nombre correspond à 4 ?",
     format: "short", expected: ["20"], comparator: "number_equal",
-    hint: "Prix = nombre d’objets × coefficient.",
-    explanation: expl("On multiplie le nombre d’objets par le coefficient : 4 × 5 = 20. Le prix est 20 €."),
+    hint: "On multiplie par le coefficient.",
+    explanation: expl("On multiplie par le coefficient : 4 × 5 = 20."),
     tags: ["prop_proportionnalite", "coefficient"],
   },
   {

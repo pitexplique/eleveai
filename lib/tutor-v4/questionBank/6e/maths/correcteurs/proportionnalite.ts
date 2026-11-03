@@ -82,6 +82,7 @@ function uniteDeLaQuestion(t: string): string | null {
   const q = t.slice(t.lastIndexOf(".", t.length - 2) + 1);
   const table: [RegExp, string][] = [
     [/kilomètres/, "km"],
+    [/millilitres/, "mL"],
     [/mètres carrés/, "m²"],
     [/centimètres/, "cm"],
     [/mètres/, "m"],
@@ -89,7 +90,7 @@ function uniteDeLaQuestion(t: string): string | null {
     [/litres/, "L"],
     [/minutes de|Combien de minutes/, "min"],
     [/coûte|prix/, "€"],
-    [/pièces|œufs|salades/, ""],
+    [/pièces|œufs|salades|photos|fleurs|coups/, ""],
   ];
   for (const [re, u] of table) if (re.test(q)) return u;
   return null;
@@ -138,4 +139,10 @@ export const CORRECTEURS: CorrecteursMaths = avecRegleMotsCles({
   prop_reconnaitre_tpl_1: corrigerReleves,
   prop_reconnaitre_qcm_tpl_double: corrigerReleves,
   prop_reconnaitre_qcm_tpl_1: corrigerListe,
+  // 03/11/2026 : les situations passées à ★3 (les ★1-★2 n'ont plus que des nombres).
+  prop_reconnaitre_tpl_situation: corrigerReleves,
+  prop_reconnaitre_qcm_tpl_situation: corrigerListe,
+  prop_table_tpl_situation: corrigerValeur,
+  prop_unite_tpl_situation: corrigerValeur,
+  prop_direct_tpl_situation: corrigerValeur,
 });
