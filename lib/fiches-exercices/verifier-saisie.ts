@@ -22,6 +22,17 @@ export type ReponseAttendue = {
    * (sans espaces ni majuscules, × = *, ^(5) = ^5) : 6/8 ne vaut plus 3/4.
    */
   exact?: boolean;
+  /**
+   * ⭐ LYCÉE (03/11/2026) : la liste se lit DANS L'ORDRE — coordonnées
+   * « (2 ; 3 ; -1) », rangement « 1 < 4 < 9 », termes d'une suite. Sans elle,
+   * « 2 ; 5 » et « 5 ; 2 » sont la même réponse (solutions d'une équation).
+   */
+  ordre?: boolean;
+  /**
+   * ⭐ LYCÉE (03/11/2026) : juste À UNE CONSTANTE PRÈS — « une primitive » :
+   * x³/3, x³/3 + 2 et x³/3 − 7 sont toutes justes.
+   */
+  constante?: boolean;
 };
 
 type Valeurs = Record<string, number>;
@@ -213,7 +224,8 @@ function formeNormalisee(s: string): string {
 const POINTS =[0.37, 1.21, 2.73, -0.58, 3.9];
 const LETTRES = "abcdfghjklmnpqrstuvwxyz".split("");
 
-function memesValeurs(a: string, b: string, tolerance: number): boolean {
+function memesValeurs(a: string, b: string, tolerance: number, constante = false): boolean {
+  let decalage: number | null = null;
   for (const p of POINTS) {
     const vars: Valeurs = {};
     LETTRES.forEach((l, k) => (vars[l] = p + k * 0.113));
@@ -223,7 +235,9 @@ function memesValeurs(a: string, b: string, tolerance: number): boolean {
       if (Number.isNaN(va) && Number.isNaN(vb)) continue;
       return false;
     }
-    const ecart = Math.abs(va - vb);
+    // À une constante près : l'écart doit être le même en chaque point.
+    if (constante) decalage ??= va - vb;
+    const ecart = Math.abs(va - vb - (decalage ?? 0));
     if (ecart > Math.max(tolerance, 1e-9 * Math.max(1, Math.abs(vb)))) return false;
   }
   return true;
@@ -250,13 +264,15 @@ export function saisieJuste(saisie: string, attendue: ReponseAttendue): boolean 
         .trim()
         .replace(/^S\s*=\s*/i, "")
         .replace(/^\{(.*)\}$/, "$1")
-        .split(/\s*[;]\s*|\s+(?:et|ou)\s+/)
+        .replace(attendue.ordre ? /^\((.*)\)$/ : /$^/, "$1")
+        .split(attendue.ordre ? /\s*[;<>≤≥]\s*/ : /\s*[;]\s*|\s+(?:et|ou)\s+/)
         .filter(Boolean)
         .map(sansMembreGauche);
     const le = decoupe(saisie);
     const lj = decoupe(forme);
     if (lj.length > 1 || le.length > 1) {
       if (le.length !== lj.length) return false;
+      if (attendue.ordre) return le.every((x, k) => egaux(x, lj[k], attendue.tolerance ?? 0));
       const restantes = [...lj];
       return le.every((x) => {
         const k = restantes.findIndex((y) => egaux(x, y, attendue.tolerance ?? 0));
@@ -265,11 +281,11 @@ export function saisieJuste(saisie: string, attendue: ReponseAttendue): boolean 
         return true;
       });
     }
-    return egaux(eleve, juste, attendue.tolerance ?? 0);
+    return egaux(eleve, juste, attendue.tolerance ?? 0, attendue.constante);
   });
 }
 
-function egaux(a: string, b: string, tolerance: number): boolean {
+function egaux(a: string, b: string, tolerance: number, constante = false): boolean {
   if (texteNormalise(a) === texteNormalise(b)) return true;
   // La réponse ATTENDUE est lue strictement (« 3t » y est 3 × t) ; celle de
   // l'élève avec indulgence (« 3t » y est 3 tonnes).
@@ -278,7 +294,7 @@ function egaux(a: string, b: string, tolerance: number): boolean {
   if (/%\s*$/.test(a) || /%\s*$/.test(b)) essais.push([a, b]);
   return essais.some(([x, y]) => {
     try {
-      return memesValeurs(x, y, tolerance);
+      return memesValeurs(x, y, tolerance, constante);
     } catch {
       return false;
     }
