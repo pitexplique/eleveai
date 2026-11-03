@@ -342,6 +342,8 @@ function corrigerModeliser(q: Q): string[] {
 
 export const CORRECTEURS: CorrecteursMaths = avecRegleMotsCles({
   "4e_vision_reconnaitre_tpl_1_nommer": corrigerNommer,
+  // 03/11/2026 : le même dessin, en situation (★3).
+  "4e_vision_reconnaitre_tpl_4_nommer_situation": corrigerNommer,
   "4e_vision_reconnaitre_tpl_2_signature": corrigerSignature,
   "4e_vision_reconnaitre_tpl_3_bases": corrigerBases,
   "4e_vision_vues_tpl_1_forme": corrigerVue,

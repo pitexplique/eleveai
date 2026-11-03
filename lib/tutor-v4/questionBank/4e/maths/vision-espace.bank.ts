@@ -328,13 +328,70 @@ export const visionEspaceBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Regarde les bases : combien y en a-t-il, et de quelle forme ?",
     tags: ["solide", "reconnaitre", "qcm", "template", "canvas"],
+    // ⛔⛔ 03/11/2026 (Frédéric) : « d'abord des questions simples ; le contexte
+    // est réservé aux étoiles ★3 et plus ». À ★2, le dessin seul : ni prénom ni
+    // métier. Les mises en situation sont parties dans
+    // 4e_vision_reconnaitre_tpl_4_nommer_situation (★3).
+    generate: () => {
+      const s = randomChoice(SOLIDES);
+      // Le texte ne nomme JAMAIS le solide : c'est le dessin qui le montre.
+      const intro = randomChoice([
+        // (« dessin » est évité : le compteur de contexte le prend pour une situation.)
+        "Voici un solide représenté en perspective cavalière.",
+        "Voici un solide.",
+        "Observe ce solide.",
+        "Regarde bien ce solide vu en perspective.",
+        "Ce solide est représenté en perspective cavalière.",
+        "Voici la figure d'un solide.",
+        "La figure montre un solide usuel.",
+        "Sur la figure, on voit un solide.",
+        "Cette figure représente un solide de l'espace.",
+        "Compte les bases de ce solide.",
+      ]);
+      const q = randomChoice([
+        "Quel est le nom de ce solide ?",
+        "Comment s'appelle ce solide ?",
+        "Quel nom donne-t-on à ce solide ?",
+        "Reconnais-tu ce solide ? Choisis son nom.",
+        "De quel solide s'agit-il ?",
+      ]);
+      return {
+        text: `${intro} ${q}`,
+        format: "qcm",
+        choices: choixSolides(s.nom),
+        expected: [s.nom],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : chaque solide se reconnaît à ses BASES et à ses faces latérales — pas à son allure générale.\n\n" +
+          "Méthode : on compte d'abord les bases, puis on regarde leur forme, puis ce qui les relie.\n\n" +
+          `Calcul : ce solide a ${s.faces}, donc c'est ${s.nom}.\n\n` +
+          `Conclusion : ⭐ pour le retenir : ${s.objet}. Sa signature est « ${s.signe} ».`,
+        canvas: solide(s.kind),
+      };
+    },
+  },
+  {
+    // 03/11/2026 : le même dessin, porté par une situation ou un métier (★3).
+    kind: "template",
+    id: "4e_vision_reconnaitre_tpl_4_nommer_situation",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "vision_espace",
+    microId: "vision_reconnaitre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Regarde les bases : combien y en a-t-il, et de quelle forme ?",
+    tags: ["solide", "reconnaitre", "situation", "qcm", "template", "canvas"],
     generate: () => {
       const s = randomChoice(SOLIDES);
       const e = randomChoice(ELEVES);
       // Le texte ne nomme JAMAIS le solide : c'est le dessin qui le montre.
       const intro = randomChoice([
-        "Voici un solide dessiné en perspective cavalière.",
         `Sur son cahier, ${e.n} a dessiné ce solide.`,
+        "Un astronome montre la maquette d'un module spatial de cette forme.",
+        "Une céramiste façonne une pièce de cette forme.",
+        "Une animatrice 3D a modélisé ce solide pour un dessin animé.",
+        "Une professeure de physique pose ce solide en verre sur la paillasse.",
         "Un architecte montre ce solide sur son écran.",
         "Ce solide est posé sur le bureau du professeur.",
         "Dans un magasin de jouets, on trouve un jouet en bois de cette forme.",
