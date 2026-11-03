@@ -34,7 +34,12 @@ import type { TutorBankItemV4, FractionCanvasData } from "@/lib/tutor-v4/types";
 // gabarit a son correcteur dans correcteurs/fractions-calcul.ts.
 import {
   PRENOMS, PARTAGES, tirer, deuxPrenoms, il, Il, deP, egales, Maj, attendusFraction,
+  FIGURES, GESTES, partageF, ppF, nomDen, fractionEnMots,
 } from "./fractions.bank";
+// ⛔⛔ 03/11/2026 (Frédéric) : « d'abord des questions simples ; le contexte est
+// réservé aux étoiles ★3 et plus ». À ★1 et ★2 : le calcul seul, ou une figure
+// (FIGURES, GESTES de fractions.bank.ts) ; les prénoms et les situations
+// restent à ★3 et plus.
 
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
@@ -102,7 +107,8 @@ const PRODUITS: { t: (x: P, k: number, f: string) => string; u?: string }[] = [
   { t: (x, k, f) => `${x.p} remplit ${k} verres de ${f} L chacun. Combien de litres de jus faut-il ?`, u: "L" },
   { t: (x, k, f) => `${x.p} met ${f} kg de pommes dans chaque sachet. ${Il(x)} prépare ${k} sachets. Combien de kilogrammes de pommes faut-il ?`, u: "kg" },
   { t: (x, k, f) => `Dans le jardin, ${x.p} plante ${k} rangées de ${f} m de long. Quelle longueur, en mètres, cela fait-il en tout ?`, u: "m" },
-  { t: (x, k, f) => `Le vélo ${deP(x)} roule ${f} km par minute. Combien de kilomètres parcourt-il en ${k} minutes ?`, u: "km" },
+  // 03/11/2026 : « 6/7 km par minute » à vélo, c'était 50 km/h : on compte par jour.
+  { t: (x, k, f) => `${x.p} fait ${f} km à vélo chaque jour. Combien de kilomètres fait-${il(x)} en ${k} jours ?`, u: "km" },
   { t: (x, k, f) => `${x.p} calcule ${k} × ${f}. Quel résultat trouve-t-${il(x)} ?` },
   { t: (x, k, f) => `Aide ${x.p} : que vaut ${f} × ${k} ?` },
   { t: (x, k, f) => `${x.p} prend ${k} fois ${f}. Quelle fraction obtient-${il(x)} ?` },
@@ -139,6 +145,40 @@ const GROUPES: { t: (x: P, total: number, f1: string, f2: string) => string }[] 
   { t: (x, T, a, b) => `À la cantine, ${T} élèves déjeunent avec ${x.p}. ${a} choisissent le poisson, ${b} les pâtes, les autres la salade. Combien choisissent la salade ?` },
   { t: (x, T, a, b) => `L’aquarium ${deP(x)} a ${T} poissons. ${a} sont rouges, ${b} sont bleus, les autres sont jaunes. Combien de poissons sont jaunes ?` },
 ];
+/** k × n/d SANS situation (★1, ★2) : le calcul écrit, et le nom des parts
+ *  (« 3 × 2/5, c'est 3 fois deux cinquièmes ») pour varier la phrase. */
+function questionProduitSimple(k: number, n: number, d: number) {
+  const f = `${n}/${d}`;
+  const mots = fractionEnMots(n, d);
+  const pl = nomDen(d);
+  const N = k * n;
+  const g = pgcd(N, d);
+  const entier = N % d === 0;
+  // Chaque tournure dit le NOM des parts (des cinquièmes…) : la phrase change
+  // avec le dénominateur, et l'élève entend ce qu'il compte.
+  const tournures = [
+    `Calcule ${k} × ${f} (des ${pl}).`,
+    `Que vaut ${f} × ${k} ? Compte en ${pl}.`,
+    `Complète en ${pl} : ${k} × ${f} = …`,
+    `Écris ${k} × ${f} en une seule fraction (en ${pl}).`,
+    `Multiplie ${f} par ${k} : combien de ${pl} ?`,
+    `${Maj(mots)} : calcule ${k} × ${f}.`,
+    `Combien de ${pl} font ${k} × ${f} ?`,
+    `Calcule ${k} × ${f} : combien de ${pl} obtiens-tu ?`,
+    `On prend ${k} fois ${f} (${mots}). Écris le résultat en fraction.`,
+    `Le dénominateur ne change pas. Calcule ${f} × ${k} (en ${pl}).`,
+  ];
+  return {
+    text: tirer(tournures),
+    format: "short" as const,
+    expected: attendusFraction(N, d),
+    comparator: "fraction_decimal_equivalent" as const,
+    explanation: expl(
+      `${k} × ${f} = (${k} × ${n})/${d} = ${N}/${d} : ${k} fois ${mots}, ce sont ${N} ${nomDen(d, N)}. Seul le numérateur est multiplié : le dénominateur ne change pas.` +
+        (g > 1 ? ` On simplifie par ${g} : ${N}/${d} = ${N / g}/${d / g}${entier ? ` = ${N / d}` : ""}.` : ""),
+    ),
+  };
+}
 /** k × n/d en situation : la réponse en fraction (et simplifiée, et entière si elle l'est). */
 function questionProduit(k: number, n: number, d: number) {
   const x = tirer(PRENOMS);
@@ -211,7 +251,8 @@ export const fractionsCalculBank: TutorBankItemV4[] = [
     microId: "fraction_quantite",
     difficulty: 2,
     theme: "neutral",
-    text: "Un collège de 400 élèves compte 120 demi-pensionnaires. Combien font les 2/3 de 400 ?",
+    // 03/11/2026 : ★2, la question seule (la phrase sur les demi-pensionnaires n'avait rien à voir).
+    text: "Combien font les 2/3 de 400 ?",
     format: "short",
     expected: ["266,67", "266.67", "800/3"],
     comparator: "fraction_decimal_equivalent",
@@ -285,26 +326,27 @@ export const fractionsCalculBank: TutorBankItemV4[] = [
       while ((d === 4 && n === 2) || (d === 6 && n !== 5)) n = randomInt(2, d - 1);
       const part = randomInt(3, 12);
       const nombre = d * part;
-      const x = tirer(PRENOMS);
       const f = `${n}/${d}`;
+      const mots = fractionEnMots(n, d);
+      // 03/11/2026 : ★2, sans prénom ni situation (le jeu et les économies sont partis).
       const tournures = [
         `Combien font les ${f} de ${nombre} ?`,
         `Calcule ${f} de ${nombre}.`,
         `Que valent les ${f} de ${nombre} ?`,
         `Complète : ${f} × ${nombre} = …`,
         `Complète : ${f} de ${nombre} = …`,
-        `${x.p} calcule les ${f} de ${nombre}. Quel résultat doit-${il(x)} trouver ?`,
-        `Donne la valeur de ${f} × ${nombre}. Aide ${x.p}.`,
-        `${x.p} dit : « ${f} de ${nombre}, c’est ${nombre} ÷ ${d}, puis × ${n}. » Combien trouve-t-${il(x)} ?`,
-        `Dans un jeu, ${x.p} gagne les ${f} de ${nombre} points. Combien de points gagne-t-${il(x)} ?`,
-        `${x.p} a ${nombre} € d’économies et en dépense les ${f}. Combien d’euros dépense-t-${il(x)} ?`,
+        `Calcule les ${f} de ${nombre}. Commence par ${nombre} ÷ ${d}.`,
+        `Donne la valeur de ${f} × ${nombre}.`,
+        `${f} de ${nombre}, c’est ${nombre} ÷ ${d}, puis × ${n}. Combien trouves-tu ?`,
+        `Les ${f} de ${nombre}, ce sont ${mots} de ${nombre}. Combien cela fait-il ?`,
+        `Prends les ${f} de ${nombre}. Quel nombre obtiens-tu ?`,
+        `Trouve ${mots} de ${nombre} (${f} de ${nombre}).`,
+        `Combien font ${f} de ${nombre}, c’est-à-dire ${mots} de ${nombre} ?`,
       ];
-      const k = randomInt(0, tournures.length - 1);
-      const euros = k === tournures.length - 1;
       return {
-        text: tournures[k],
+        text: tirer(tournures),
         format: "short",
-        expected: euros ? [`${n * part} €`, String(n * part)] : [String(n * part)],
+        expected: [String(n * part)],
         comparator: "number_equal",
         explanation: expl(
           `Un ${d}e de ${nombre} vaut ${nombre} ÷ ${d} = ${part}, donc ${n}/${d} de ${nombre} = ${n} × ${part} = ${n * part}.`
@@ -521,16 +563,20 @@ export const fractionsCalculBank: TutorBankItemV4[] = [
       const d = randomInt(4, 12);
       const a = randomInt(1, d - 2);
       const b = randomInt(1, d - a - 1);
-      const s = tirer(PARTAGES);
-      const x = tirer(PRENOMS);
+      // 03/11/2026 : ★1, le calcul seul ou une figure, sans prénom ni situation.
+      const F = tirer(FIGURES);
+      const g = tirer(GESTES);
+      const pl = nomDen(d);
       const tournures = [
-        `${x.p} calcule ${a}/${d} + ${b}/${d}. Quel résultat trouve-t-${il(x)} ?`,
-        `Aide ${x.p} : que vaut ${a}/${d} + ${b}/${d} ?`,
-        `${x.p} écrit ${a}/${d} + ${b}/${d} en une seule fraction. Laquelle ?`,
-        `${x.p} ${s.verbe} ${a}/${d} ${s.du} le matin et ${b}/${d} l’après-midi. Quelle fraction ${s.du} a-t-${il(x)} ${s.pp}e en tout ?`,
-        `${x.p} ${s.verbe} d’abord ${a}/${d} ${s.du}, puis encore ${b}/${d}. Quelle fraction ${s.du} cela fait-il ?`,
-        `${x.p} additionne ${b}/${d} et ${a}/${d}. Quel résultat trouve-t-${il(x)} ?`,
-        `Samedi, ${x.p} ${s.verbe} ${a}/${d} ${s.du}. Dimanche, ${b}/${d}. Combien en tout, en fraction ${s.du} ?`,
+        `Calcule ${a}/${d} + ${b}/${d}. Ce sont des ${pl}.`,
+        `Que vaut ${a}/${d} + ${b}/${d} ? Compte en ${pl}.`,
+        `Écris ${a}/${d} + ${b}/${d} en une seule fraction (des ${pl}).`,
+        `Additionne ${b}/${d} et ${a}/${d} : combien de ${pl} ?`,
+        `Complète en ${pl} : ${a}/${d} + ${b}/${d} = …/${d}`,
+        `Les barres montrent ${a}/${d} et ${b}/${d}. Combien de ${pl} en tout ?`,
+        `${fractionEnMots(a, d)} plus ${fractionEnMots(b, d)} : écris le résultat. (${a}/${d} + ${b}/${d})`.replace(/^./, (c) => c.toUpperCase()),
+        `On ${g.verbe} ${a}/${d} ${F.du}, puis encore ${b}/${d}. Quelle fraction ${F.du} est ${ppF(g)} en tout ?`,
+        `${Maj(F.un)} est ${partageF(F)} en ${d} parts égales. On ${g.verbe} ${a}/${d}, puis ${b}/${d}. Quelle fraction ${F.du} est ${ppF(g)} ?`,
       ];
       return {
         text: tirer(tournures),
@@ -594,26 +640,31 @@ export const fractionsCalculBank: TutorBankItemV4[] = [
     hint: "Même dénominateur : on soustrait les numérateurs. Le tout entier, c’est d/d.",
     tags: ["fraction_calcul", "soustraction", "template"],
     generate: () => {
-      const s = tirer(PARTAGES);
-      const x = tirer(PRENOMS);
-      const d = randomInt(3, Math.min(12, s.dMax));
+      // 03/11/2026 : ★2, le calcul seul ou une figure, sans prénom ni situation.
+      const F = tirer(FIGURES);
+      const g = tirer(GESTES);
+      const d = randomInt(3, 12);
       const reste = Math.random() < 0.5; // « il en reste » : 1 − a/d
       const a = randomInt(reste ? 1 : 2, d - 1);
       const b = reste ? 0 : randomInt(1, a - 1);
       const n = reste ? d - a : a - b;
+      const pl = nomDen(d);
       const tournures = reste
         ? [
-            `${x.p} ${s.verbe} ${a}/${d} ${s.du}. Quelle fraction ${s.du} reste-t-il ?`,
-            `${x.p} calcule 1 − ${a}/${d}. Que trouve-t-${il(x)} ? (1, c’est ${d}/${d}.)`,
-            `${Maj(s.le)} ${deP(x)} a ${d} ${s.unite} ${egales(s)}. ${Il(x)} en a ${s.pp} ${a}/${d}. Quelle fraction reste-t-il ?`,
-            `Aide ${x.p} : que vaut 1 − ${a}/${d} ? (1, c’est ${d}/${d}.)`,
+            `On ${g.verbe} ${a}/${d} ${F.du}. Quelle fraction ${F.du} reste à ${g.inf} ?`,
+            `Calcule 1 − ${a}/${d}. (1, c’est ${d}/${d} : ${fractionEnMots(d, d)}.)`,
+            `${Maj(F.un)} a ${d} parts égales. On en ${g.verbe} ${a}/${d}. Quelle fraction ${F.du} reste à ${g.inf} ?`,
+            `Que vaut 1 − ${a}/${d} ? Compte en ${pl} (1, c’est ${d}/${d}).`,
+            `Complète en ${pl} : 1 − ${a}/${d} = …/${d}. (1, c’est ${d}/${d}.)`,
+            `${Maj(F.un)} est ${partageF(F)} en ${pl}. On ${g.verbe} ${a}/${d}. Quelle fraction reste ?`,
           ]
         : [
-            `${x.p} calcule ${a}/${d} − ${b}/${d}. Quel résultat trouve-t-${il(x)} ?`,
-            `Aide ${x.p} : que vaut ${a}/${d} − ${b}/${d} ?`,
-            `${x.p} avait ${a}/${d} ${s.du}. ${Il(x)} en ${s.verbe} ${b}/${d}. Quelle fraction ${s.du} lui reste-t-il ?`,
-            `${x.p} écrit ${a}/${d} − ${b}/${d} en une seule fraction. Laquelle ?`,
-            `${x.p} soustrait ${b}/${d} de ${a}/${d}. Quel résultat trouve-t-${il(x)} ?`,
+            `Calcule ${a}/${d} − ${b}/${d}. Ce sont des ${pl}.`,
+            `Que vaut ${a}/${d} − ${b}/${d} ? Compte en ${pl}.`,
+            `Écris ${a}/${d} − ${b}/${d} en une seule fraction (des ${pl}).`,
+            `On soustrait ${b}/${d} de ${a}/${d}. Combien de ${pl} reste-t-il ?`,
+            `Complète en ${pl} : ${a}/${d} − ${b}/${d} = …/${d}`,
+            `${Maj(fractionEnMots(a, d))} moins ${fractionEnMots(b, d)} : écris le résultat. (${a}/${d} − ${b}/${d})`,
           ];
       return {
         text: tirer(tournures),
@@ -886,7 +937,8 @@ export const fractionsCalculBank: TutorBankItemV4[] = [
       const k = randomInt(2, 6);
       // ⚠️ 06/10/2026 : la barre montrait le RÉSULTAT (k × n parts) : elle montre
       // désormais la fraction de départ, celle qu'on prend k fois.
-      return { ...questionProduit(k, n, d), canvas: barre(n, d) };
+      // 03/11/2026 : ★2, le calcul seul (les situations restent à ★3 et ★4).
+      return { ...questionProduitSimple(k, n, d), canvas: barre(n, d) };
     },
   },
   {
@@ -902,7 +954,8 @@ export const fractionsCalculBank: TutorBankItemV4[] = [
     tags: ["fraction_calcul", "multiplication", "template"],
     generate: () => {
       const d = randomInt(3, 10);
-      return questionProduit(randomInt(2, d - 1), 1, d);
+      // 03/11/2026 : ★1, le calcul seul (les situations restent à ★3 et ★4).
+      return questionProduitSimple(randomInt(2, d - 1), 1, d);
     },
   },
   {
