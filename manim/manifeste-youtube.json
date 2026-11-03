@@ -55433,6 +55433,748 @@
         "argent-budget",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "terminale-convexite-reconnaitre",
+      "notionId": "convexite_fonction",
+      "microId": "convexite_reconnaitre",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/analyse/convexite-reconnaitre/eleveai-maths-terminale-convexite-reconnaitre.mp4",
+      "miniature": "terminale/maths/analyse/convexite-reconnaitre/eleveai-maths-terminale-convexite-reconnaitre.png",
+      "titre": "Creux ou bosse : laquelle est convexe ? — Reconnaître la convexité · Tle spé",
+      "accroche": "Maëlle est architecte de skateparks. Pour un bowl, il lui faut une courbe en creux ; pour une bosse de saut, une courbe en dos d'âne. En maths, l'une est convexe, l'autre concave.\n\nDans cette vidéo :\n• convexe : la courbe est en creux, tournée vers le haut, sous ses cordes\n• concave : la courbe est en bosse, tournée vers le bas, au-dessus de ses cordes\n• x² et l'exponentielle sont convexes ; −x² et le logarithme sont concaves\n• x³ : concave sur ]−∞ ; 0], convexe sur [0 ; +∞[ : on parle de convexité SUR UN INTERVALLE\n• le piège : convexe ne veut pas dire croissante, la convexité dit la forme, pas le sens\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : −eˣ et x² + 3x : convexe ou concave ?\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/terminale-spe/convexite-fonction\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=convexite_fonction&microId=convexite_reconnaitre&display=simple\n\n📈 Épisode 1 sur 5 de la série Convexité d'EleveAI (terminale, spécialité maths).",
+      "chapitres": [
+        [
+          "00:00",
+          "Creux ou bosse ? Maëlle, architecte de skateparks"
+        ],
+        [
+          "00:26",
+          "Convexe, concave"
+        ],
+        [
+          "00:40",
+          "Les cordes"
+        ],
+        [
+          "00:54",
+          "x², −x², eˣ, ln x"
+        ],
+        [
+          "01:13",
+          "Question 1"
+        ],
+        [
+          "01:46",
+          "Le piège : convexe n'est pas croissante"
+        ],
+        [
+          "02:04",
+          "x³ : une courbe, deux formes"
+        ],
+        [
+          "02:22",
+          "Question 2"
+        ],
+        [
+          "02:55",
+          "À toi de jouer"
+        ],
+        [
+          "03:15",
+          "Correction"
+        ],
+        [
+          "03:31",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "convexité",
+        "fonction convexe",
+        "fonction concave",
+        "corde",
+        "skatepark",
+        "architecte",
+        "analyse",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:13",
+          "question": "Sur ]0 ; +∞[, la courbe de 1/x est :",
+          "choix": [
+            "convexe",
+            "concave",
+            "ni l'un ni l'autre"
+          ],
+          "reponse": 0,
+          "explication": "Pour x positif, la courbe de 1/x descend en se creusant : elle est convexe. B confond descendre et se bomber."
+        },
+        {
+          "t": "02:22",
+          "question": "Une fonction est convexe sur tout son intervalle. Elle est forcément :",
+          "choix": [
+            "croissante",
+            "positive",
+            "ni l'un ni l'autre"
+          ],
+          "reponse": 2,
+          "explication": "x² − 4 est convexe : elle descend, puis monte, et passe sous l'axe entre −2 et 2. Convexe dit la forme, ni le sens ni le signe."
+        }
+      ],
+      "centres": [
+        "sport",
+        "art-design"
+      ]
+    },
+    {
+      "id": "terminale-convexite-reconnaitre-short",
+      "notionId": "convexite_fonction",
+      "microId": "convexite_reconnaitre",
+      "classe": "terminale-spe",
+      "ceinture": "blanche",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-convexite-reconnaitre",
+      "fichier": "terminale/maths/analyse/convexite-reconnaitre/eleveai-maths-terminale-convexite-reconnaitre-short.mp4",
+      "miniature": "terminale/maths/analyse/convexite-reconnaitre/eleveai-maths-terminale-convexite-reconnaitre-short.png",
+      "titre": "Creux ou bosse ? Les maths ont un mot 🛹 — Tle spé #Shorts",
+      "accroche": "Un skateur dans un bowl. Dans le creux, la courbe est tournée vers le haut : convexe. Sur la bosse, tournée vers le bas : concave.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : sur ce parcours, combien de parties convexes ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=convexite_fonction&microId=convexite_reconnaitre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #convexité #terminale #bac",
+      "tags": [
+        "skate",
+        "bowl",
+        "convexe",
+        "concave",
+        "convexité",
+        "maths",
+        "terminale",
+        "lycée",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "Une arche de pont, en bosse. Sa courbe est :",
+          "choix": [
+            "convexe",
+            "concave",
+            "les deux"
+          ],
+          "reponse": 1,
+          "explication": "En bosse, tournée vers le bas : concave."
+        }
+      ],
+      "centres": [
+        "sport"
+      ]
+    },
+    {
+      "id": "terminale-convexite-derivee-seconde",
+      "notionId": "convexite_fonction",
+      "microId": "convexite_derivee_seconde",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/analyse/convexite-derivee-seconde/eleveai-maths-terminale-convexite-derivee-seconde.mp4",
+      "miniature": "terminale/maths/analyse/convexite-derivee-seconde/eleveai-maths-terminale-convexite-derivee-seconde.png",
+      "titre": "Ça monte de plus en plus vite ? — Dérivée seconde et convexité · Tle spé",
+      "accroche": "Karim est ingénieur dans une agence spatiale. Au décollage, la distance parcourue par la fusée augmente de plus en plus vite : sa courbe se creuse. Comment le prouver par le calcul ? Avec f'', la dérivée seconde.\n\nDans cette vidéo :\n• courbe en creux : les tangentes sont de plus en plus raides, f' est croissante\n• la règle : f''(x) ≥ 0 sur un intervalle, f est convexe ; f''(x) ≤ 0, f est concave\n• exemple : f(x) = x³ − 3x², f''(x) = 6x − 6 : concave sur ]−∞ ; 1], convexe sur [1 ; +∞[\n• le piège : on étudie le signe de f'', pas celui de f'\n• au bac, trois lignes : calculer f'', étudier son signe, conclure\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : étudier la convexité de f(x) = eˣ − x² (réponse : ln 2 ≈ 0,69 sépare les deux).\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/terminale-spe/convexite-fonction\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=convexite_fonction&microId=convexite_derivee_seconde&display=simple\n\n📈 Épisode 2 sur 5 de la série Convexité d'EleveAI (terminale, spécialité maths).",
+      "chapitres": [
+        [
+          "00:00",
+          "De plus en plus vite ? Karim, ingénieur spatial"
+        ],
+        [
+          "00:27",
+          "Des tangentes de plus en plus raides"
+        ],
+        [
+          "00:44",
+          "La règle : le signe de f''"
+        ],
+        [
+          "01:02",
+          "Question 1"
+        ],
+        [
+          "01:34",
+          "Exemple : x³ − 3x²"
+        ],
+        [
+          "01:58",
+          "Le piège : f'' et pas f'"
+        ],
+        [
+          "02:14",
+          "Question 2"
+        ],
+        [
+          "02:47",
+          "Rédiger au bac"
+        ],
+        [
+          "03:05",
+          "À toi de jouer"
+        ],
+        [
+          "03:21",
+          "Correction"
+        ],
+        [
+          "03:49",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "dérivée seconde",
+        "convexité",
+        "f seconde",
+        "fusée",
+        "accélération",
+        "ingénieur spatial",
+        "analyse",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:02",
+          "question": "f(x) = x³. Que vaut f''(x) ?",
+          "choix": [
+            "3x²",
+            "6x",
+            "6"
+          ],
+          "reponse": 1,
+          "explication": "On dérive deux fois : f'(x) = 3x², puis f''(x) = 6x. A s'arrête à la première dérivée."
+        },
+        {
+          "t": "02:14",
+          "question": "f''(x) = 6x − 12. Sur quel intervalle f est-elle convexe ?",
+          "choix": [
+            "]−∞ ; 2]",
+            "[2 ; +∞[",
+            "[0 ; +∞["
+          ],
+          "reponse": 1,
+          "explication": "6x − 12 est positif quand x est plus grand que 2. A, c'est là où f est concave."
+        }
+      ],
+      "centres": [
+        "espace",
+        "sciences"
+      ]
+    },
+    {
+      "id": "terminale-convexite-derivee-seconde-short",
+      "notionId": "convexite_fonction",
+      "microId": "convexite_derivee_seconde",
+      "classe": "terminale-spe",
+      "ceinture": "blanche",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-convexite-derivee-seconde",
+      "fichier": "terminale/maths/analyse/convexite-derivee-seconde/eleveai-maths-terminale-convexite-derivee-seconde-short.mp4",
+      "miniature": "terminale/maths/analyse/convexite-derivee-seconde/eleveai-maths-terminale-convexite-derivee-seconde-short.png",
+      "titre": "Tu accélères ou tu freines ? Ta courbe le sait 🚗 — Tle spé #Shorts",
+      "accroche": "La voiture accélère : la courbe de la distance se creuse, f'' est positive, convexe. Elle freine : la courbe se bombe, f'' est négative, concave.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : sur ce trajet, pendant combien de secondes la voiture accélère-t-elle ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=convexite_fonction&microId=convexite_derivee_seconde&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #convexité #terminale #bac",
+      "tags": [
+        "voiture",
+        "accélération",
+        "freinage",
+        "dérivée seconde",
+        "convexité",
+        "maths",
+        "terminale",
+        "lycée",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:18",
+          "question": "Un bus freine pour s'arrêter. Sa courbe de distance est :",
+          "choix": [
+            "convexe",
+            "concave",
+            "une droite"
+          ],
+          "reponse": 1,
+          "explication": "Il freine : f seconde est négative, la courbe se bombe."
+        }
+      ],
+      "centres": [
+        "voitures-motos",
+        "transports"
+      ]
+    },
+    {
+      "id": "terminale-convexite-point-inflexion",
+      "notionId": "convexite_fonction",
+      "microId": "convexite_point_inflexion",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/analyse/convexite-point-inflexion/eleveai-maths-terminale-convexite-point-inflexion.mp4",
+      "miniature": "terminale/maths/analyse/convexite-point-inflexion/eleveai-maths-terminale-convexite-point-inflexion.png",
+      "titre": "Quand le buzz ralentit-il ? — Le point d'inflexion · Tle spé",
+      "accroche": "Inès est chargée de promotion dans un label de musique. Les écoutes d'une chanson montent de plus en plus vite, puis de moins en moins vite : la courbe passe du creux à la bosse. Ce point de bascule, c'est le point d'inflexion.\n\nDans cette vidéo :\n• un point d'inflexion : la courbe change de convexité\n• là, la courbe traverse sa tangente\n• par le calcul : f'' s'annule EN CHANGEANT DE SIGNE\n• exemple : x³ − 3x², point d'inflexion I(1 ; −2)\n• le piège : x⁴, f''(0) = 0 mais pas de changement de signe, donc pas d'inflexion\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : le point d'inflexion de f(x) = x³ − 6x² + 5 (réponse : I(2 ; −11)).\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/terminale-spe/convexite-fonction\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=convexite_fonction&microId=convexite_point_inflexion&display=simple\n\n📈 Épisode 3 sur 5 de la série Convexité d'EleveAI (terminale, spécialité maths).",
+      "chapitres": [
+        [
+          "00:00",
+          "Inès et la chanson qui buzze"
+        ],
+        [
+          "00:30",
+          "Le point d'inflexion"
+        ],
+        [
+          "00:44",
+          "La courbe traverse sa tangente"
+        ],
+        [
+          "00:55",
+          "La méthode : f''"
+        ],
+        [
+          "01:05",
+          "Exemple : x³ − 3x²"
+        ],
+        [
+          "01:29",
+          "Question 1"
+        ],
+        [
+          "01:59",
+          "Le piège : x⁴"
+        ],
+        [
+          "02:18",
+          "Question 2"
+        ],
+        [
+          "02:49",
+          "À toi de jouer"
+        ],
+        [
+          "03:06",
+          "Correction"
+        ],
+        [
+          "03:30",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "point d'inflexion",
+        "convexité",
+        "dérivée seconde",
+        "musique",
+        "streaming",
+        "label",
+        "analyse",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:29",
+          "question": "f''(x) = 6x − 12. Quelle est l'abscisse du point d'inflexion ?",
+          "choix": [
+            "12",
+            "2",
+            "6"
+          ],
+          "reponse": 1,
+          "explication": "6x − 12 = 0 quand x = 2, et le signe change en 2. A et C lisent les nombres de la formule sans résoudre."
+        },
+        {
+          "t": "02:18",
+          "question": "f''(x) = 12x². Y a-t-il un point d'inflexion en 0 ?",
+          "choix": [
+            "oui",
+            "non",
+            "seulement si f(0) = 0"
+          ],
+          "reponse": 1,
+          "explication": "12x² ne change pas de signe en 0 : la courbe reste convexe, sans inflexion."
+        }
+      ],
+      "centres": [
+        "musique"
+      ]
+    },
+    {
+      "id": "terminale-convexite-point-inflexion-short",
+      "notionId": "convexite_fonction",
+      "microId": "convexite_point_inflexion",
+      "classe": "terminale-spe",
+      "ceinture": "blanche",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-convexite-point-inflexion",
+      "fichier": "terminale/maths/analyse/convexite-point-inflexion/eleveai-maths-terminale-convexite-point-inflexion-short.mp4",
+      "miniature": "terminale/maths/analyse/convexite-point-inflexion/eleveai-maths-terminale-convexite-point-inflexion-short.png",
+      "titre": "Le jour où le buzz d'un jeu ralentit 🎮 — Tle spé #Shorts",
+      "accroche": "Un nouveau jeu vidéo sort. Les joueurs arrivent de plus en plus vite : la courbe se creuse. Puis de moins en moins vite : elle se bombe. La bascule, c'est le point d'inflexion.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : sur ce graphique, à quel jour se trouve le point d'inflexion ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=convexite_fonction&microId=convexite_point_inflexion&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #convexité #terminale #bac",
+      "tags": [
+        "jeux vidéo",
+        "joueurs",
+        "point d'inflexion",
+        "convexité",
+        "maths",
+        "terminale",
+        "lycée",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:22",
+          "question": "Au point d'inflexion, la tangente :",
+          "choix": [
+            "traverse la courbe",
+            "reste au-dessus",
+            "reste au-dessous"
+          ],
+          "reponse": 0,
+          "explication": "Avant, la courbe est au-dessus de sa tangente ; après, elle passe au-dessous."
+        }
+      ],
+      "centres": [
+        "jeux-video"
+      ]
+    },
+    {
+      "id": "terminale-convexite-tangente",
+      "notionId": "convexite_fonction",
+      "microId": "convexite_tangente",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/analyse/convexite-tangente/eleveai-maths-terminale-convexite-tangente.mp4",
+      "miniature": "terminale/maths/analyse/convexite-tangente/eleveai-maths-terminale-convexite-tangente.png",
+      "titre": "exp(0,1) sans calculatrice ? — Convexité et tangentes · Tle spé",
+      "accroche": "Thomas est ingénieur en éclairage automobile. Dans un creux, les phares éclairent la route ; en haut d'une bosse, ils éclairent le ciel. Le faisceau, c'est la tangente : la convexité dit si la courbe est au-dessus ou au-dessous.\n\nDans cette vidéo :\n• f convexe : sa courbe est au-dessus de toutes ses tangentes ; concave : au-dessous\n• eˣ ≥ x + 1 pour tout réel x, donc exp(0,1) ≥ 1,1 (la calculatrice donne ≈ 1,105)\n• ln x ≤ x − 1 pour tout x strictement positif\n• le piège : le sens de l'inégalité dépend de la forme, et au point d'inflexion la courbe traverse sa tangente\n• au bac, deux lignes suffisent\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : montrer que x² ≥ 2x − 1 pour tout réel x, avec la tangente en 1.\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/terminale-spe/convexite-fonction\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=convexite_fonction&microId=convexite_tangente&display=simple\n\n📈 Épisode 4 sur 5 de la série Convexité d'EleveAI (terminale, spécialité maths).",
+      "chapitres": [
+        [
+          "00:00",
+          "exp(0,1) sans calculatrice ?"
+        ],
+        [
+          "00:14",
+          "Thomas et les phares la nuit"
+        ],
+        [
+          "00:35",
+          "Au-dessus ou au-dessous des tangentes"
+        ],
+        [
+          "00:49",
+          "eˣ ≥ x + 1"
+        ],
+        [
+          "01:05",
+          "Estimer exp(0,1)"
+        ],
+        [
+          "01:22",
+          "Question 1"
+        ],
+        [
+          "01:56",
+          "ln x ≤ x − 1"
+        ],
+        [
+          "02:14",
+          "Le piège : le sens de l'inégalité"
+        ],
+        [
+          "02:37",
+          "Question 2"
+        ],
+        [
+          "03:11",
+          "Rédiger au bac"
+        ],
+        [
+          "03:33",
+          "À toi de jouer"
+        ],
+        [
+          "03:57",
+          "Correction"
+        ],
+        [
+          "04:21",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "convexité",
+        "tangente",
+        "inégalité de convexité",
+        "exponentielle",
+        "logarithme",
+        "phares",
+        "ingénieur",
+        "analyse",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:22",
+          "question": "Avec la même tangente, exp(0,2) est :",
+          "choix": [
+            "≥ 1,2",
+            "≤ 1,2",
+            "= 1,2"
+          ],
+          "reponse": 0,
+          "explication": "L'exponentielle est convexe : sa courbe est au-dessus de la tangente y = x + 1. Elle vaut environ 1,221."
+        },
+        {
+          "t": "02:37",
+          "question": "ln(1,5) est :",
+          "choix": [
+            "≥ 0,5",
+            "≤ 0,5",
+            "= 0,5"
+          ],
+          "reponse": 1,
+          "explication": "Le logarithme est concave : sa courbe est au-dessous de la tangente y = x − 1. Il vaut environ 0,405."
+        }
+      ],
+      "centres": [
+        "voitures-motos",
+        "sciences"
+      ]
+    },
+    {
+      "id": "terminale-convexite-tangente-short",
+      "notionId": "convexite_fonction",
+      "microId": "convexite_tangente",
+      "classe": "terminale-spe",
+      "ceinture": "blanche",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-convexite-tangente",
+      "fichier": "terminale/maths/analyse/convexite-tangente/eleveai-maths-terminale-convexite-tangente-short.mp4",
+      "miniature": "terminale/maths/analyse/convexite-tangente/eleveai-maths-terminale-convexite-tangente-short.png",
+      "titre": "La nuit, où éclairent tes phares ? 🚘 — Tle spé #Shorts",
+      "accroche": "Dans un creux, les phares éclairent la route : la route est au-dessus du faisceau, comme une courbe convexe au-dessus de sa tangente. Sur une bosse, ils éclairent le ciel : la route passe dessous, comme une courbe concave.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : eˣ est au-dessus de x + 1 : quel minimum cette droite donne-t-elle pour exp(0,5) ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=convexite_fonction&microId=convexite_tangente&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #convexité #terminale #bac",
+      "tags": [
+        "phares",
+        "voiture",
+        "tangente",
+        "convexité",
+        "maths",
+        "terminale",
+        "lycée",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:21",
+          "question": "Au sommet d'une colline, les phares éclairent :",
+          "choix": [
+            "la route",
+            "le ciel",
+            "le bas-côté"
+          ],
+          "reponse": 1,
+          "explication": "Sur une bosse, la route passe sous le faisceau : le faisceau part vers le ciel."
+        }
+      ],
+      "centres": [
+        "voitures-motos",
+        "transports"
+      ]
+    },
+    {
+      "id": "terminale-convexite-defi",
+      "notionId": "convexite_fonction",
+      "microId": "convexite_defi",
+      "classe": "terminale-spe",
+      "ceinture": "bleue",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/analyse/convexite-defi/eleveai-maths-terminale-convexite-defi.mp4",
+      "miniature": "terminale/maths/analyse/convexite-defi/eleveai-maths-terminale-convexite-defi.png",
+      "titre": "Le vélo le moins cher n'est pas où tu crois — Sujet type bac, convexité · Tle spé",
+      "accroche": "Awa gère la production d'un atelier de vélos électriques. Coût total : C(q) = q³ − 12q² + 60q, en milliers d'euros, pour q dizaines de vélos (q entre 0 et 10). Un exercice type bac en quatre questions : C'', convexité, point d'inflexion, interprétation.\n\nDans cette vidéo :\n• C'(q) = 3q² − 24q + 60 est le coût marginal ; C''(q) = 6q − 24\n• C est concave sur [0 ; 4], convexe sur [4 ; 10]\n• point d'inflexion I(4 ; 112)\n• interprétation : à 40 vélos, le vélo en plus coûte le moins cher (1 200 €)\n• le piège : au point d'inflexion, c'est le coût MARGINAL qui est le plus bas, pas le coût total\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : une imprimerie 3D, C(q) = q³ − 9q² + 30q : point d'inflexion et coût marginal le plus bas.\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/terminale-spe/convexite-fonction\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=convexite_fonction&microId=convexite_defi&display=simple\n\n📈 Épisode 5 sur 5 de la série Convexité d'EleveAI (terminale, spécialité maths).",
+      "chapitres": [
+        [
+          "00:00",
+          "À quel moment ça bascule ?"
+        ],
+        [
+          "00:11",
+          "Awa, atelier de vélos électriques"
+        ],
+        [
+          "00:34",
+          "L'énoncé"
+        ],
+        [
+          "00:58",
+          "1. C' et C''"
+        ],
+        [
+          "01:14",
+          "Question 1"
+        ],
+        [
+          "01:40",
+          "2. La convexité de C"
+        ],
+        [
+          "01:56",
+          "3. Le point d'inflexion"
+        ],
+        [
+          "02:14",
+          "Question 2"
+        ],
+        [
+          "02:43",
+          "4. Interpréter : le coût marginal"
+        ],
+        [
+          "03:01",
+          "Le piège : coût total ou coût marginal ?"
+        ],
+        [
+          "03:14",
+          "À toi de jouer"
+        ],
+        [
+          "03:34",
+          "Correction"
+        ],
+        [
+          "04:06",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "convexité",
+        "point d'inflexion",
+        "exercice type bac",
+        "coût marginal",
+        "économie",
+        "vélo électrique",
+        "analyse",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:14",
+          "question": "C''(q) = 6q − 24. Elle s'annule en :",
+          "choix": [
+            "24",
+            "4",
+            "6"
+          ],
+          "reponse": 1,
+          "explication": "6q − 24 = 0, donc 6q = 24, donc q = 4."
+        },
+        {
+          "t": "02:14",
+          "question": "Le coût marginal C' est le plus bas quand :",
+          "choix": [
+            "q = 0",
+            "q = 4",
+            "q = 10"
+          ],
+          "reponse": 1,
+          "explication": "C' décroît tant que C'' est négative, puis croît : son minimum est en 4, au point d'inflexion."
+        }
+      ],
+      "centres": [
+        "velo",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "terminale-convexite-defi-short",
+      "notionId": "convexite_fonction",
+      "microId": "convexite_defi",
+      "classe": "terminale-spe",
+      "ceinture": "blanche",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-convexite-defi",
+      "fichier": "terminale/maths/analyse/convexite-defi/eleveai-maths-terminale-convexite-defi-short.mp4",
+      "miniature": "terminale/maths/analyse/convexite-defi/eleveai-maths-terminale-convexite-defi-short.png",
+      "titre": "Où est le vélo le moins cher de l'atelier ? 🚲 — Tle spé #Shorts",
+      "accroche": "Le vélo suivant coûte de moins en moins cher, puis de plus en plus. Les barres baissent : la courbe du coût total se bombe. Elles remontent : elle se creuse. La plus petite barre tombe pile sous le point d'inflexion.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : C''(q) = 6q − 30 : pour quel q la courbe change-t-elle de forme ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=convexite_fonction&microId=convexite_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #convexité #terminale #bac",
+      "tags": [
+        "vélo",
+        "atelier",
+        "coût",
+        "point d'inflexion",
+        "convexité",
+        "maths",
+        "terminale",
+        "lycée",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:26",
+          "question": "La plus petite barre est sous :",
+          "choix": [
+            "le point d'inflexion",
+            "le haut de la courbe",
+            "l'origine"
+          ],
+          "reponse": 0,
+          "explication": "Le coût du vélo suivant est le plus bas là où la courbe change de forme."
+        }
+      ],
+      "centres": [
+        "velo",
+        "argent-budget"
+      ]
     }
   ]
 }

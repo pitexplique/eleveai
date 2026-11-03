@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Tu accélères ou tu freines ? La courbe de ta distance le sait.",
+  "01-image": "La voiture accélère : la courbe se creuse, f seconde est positive, convexe. La voiture freine : la courbe se bombe, f seconde est négative, concave.",
+  "02-question": "Question ! Un bus freine pour s'arrêter. Sa courbe de distance est : A : convexe. B : concave. C : une droite. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B. Il freine : f seconde est négative, la courbe se bombe.",
+  "03-commentaire": "À toi : sur ce trajet, pendant combien de secondes la voiture accélère-t-elle ? Réponds en commentaire !",
+  "04-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

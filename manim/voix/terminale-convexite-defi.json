@@ -1,0 +1,18 @@
+{
+  "00-garde": "Convexité : un exercice de bac. Fabriquer un vélo de plus coûte de moins en moins… puis de plus en plus. À quel moment ça bascule ?",
+  "01-situation": "Voici Awa. Elle gère la production d'un atelier de vélos électriques. Au début, plus l'atelier produit, mieux il s'organise : chaque vélo en plus coûte moins cher. Mais au-delà d'un certain nombre, il faut des heures supplémentaires, plus de stock, plus de place : chaque vélo en plus coûte plus cher.",
+  "02-enonce": "L'énoncé. Le coût total est C de q égale q au cube moins 12 q au carré plus 60 q, en milliers d'euros, pour q dizaines de vélos, avec q entre 0 et 10. Un : calcule C seconde. Deux : étudie la convexité de C. Trois : trouve le point d'inflexion. Quatre : interprète.",
+  "03-derivees": "Question un. C prime de q égale 3 q au carré moins 24 q plus 60. C prime, c'est le coût marginal : le coût d'un vélo en plus. Puis C seconde de q égale 6 q moins 24.",
+  "04-question": "Question ! C seconde de q égale 6 q moins 24. Elle s'annule en : A : 24. B : 4. C : 6. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 6 q moins 24 égale 0, donc 6 q égale 24, donc q égale 4.",
+  "05-convexite": "Question deux. 6 q moins 24 est négatif pour q entre 0 et 4, positif pour q entre 4 et 10. Donc C est concave sur l'intervalle de 0 à 4, et convexe sur l'intervalle de 4 à 10.",
+  "06-inflexion": "Question trois. C seconde s'annule en 4 en changeant de signe. C de 4 égale 64 moins 192 plus 240, égale 112. Le point d'inflexion est I, de coordonnées 4 et 112.",
+  "07-question": "Question ! Le coût marginal C prime est le plus bas quand : A : q égale 0. B : q égale 4. C : q égale 10. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. C prime décroît tant que C seconde est négative, puis croît : son minimum est en 4, au point d'inflexion.",
+  "08-interpreter": "Question quatre. À 40 vélos, le vélo en plus coûte le moins cher : C prime de 4 égale 12, soit 12 000 euros pour dix vélos de plus, 1 200 euros par vélo. Avant 40 vélos, le coût marginal baisse ; après, il remonte.",
+  "08b-piege": "Voilà le piège ! Le point d'inflexion n'est pas là où le coût total est le plus bas. Le coût total monte tout le temps. C'est le coût d'un vélo en plus qui est le plus bas.",
+  "09-defi": "À toi de jouer ! Une imprimerie 3D a un coût total C de q égale q au cube moins 9 q au carré plus 30 q. Trouve le point d'inflexion, et le coût marginal le plus bas. Mets pause, et cherche !",
+  "09b-correction": "Correction. C prime de q égale 3 q au carré moins 18 q plus 30. C seconde de q égale 6 q moins 18 : elle s'annule en 3 en changeant de signe. C de 3 égale 27 moins 81 plus 90, égale 36. Le point d'inflexion est I, de coordonnées 3 et 36. Et le coût marginal le plus bas vaut C prime de 3, égale 27 moins 54 plus 30, égale 3.",
+  "10-finale": "Ce que tu as appris. Dans un exercice de bac : C seconde, son signe, la convexité, puis le point d'inflexion. Et en économie, le point d'inflexion du coût total, c'est là où le coût marginal est le plus bas.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

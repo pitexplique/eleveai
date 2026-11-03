@@ -1,0 +1,17 @@
+{
+  "00-garde": "Dérivée seconde et convexité. Ça monte. Mais est-ce que ça monte de plus en plus vite ?",
+  "01-situation": "Voici Karim. Il est ingénieur dans une agence spatiale. Au décollage d'une fusée, il suit la distance parcourue. Elle augmente, et elle augmente de plus en plus vite : la fusée accélère. La courbe de la distance se creuse vers le haut.",
+  "02-idee": "Courbe en creux : les tangentes deviennent de plus en plus raides. Leur pente, c'est f prime. Donc f est convexe quand f prime est croissante. Et f prime croît quand sa dérivée, f seconde, est positive.",
+  "03-theoreme": "La règle. Si f seconde de x est positive ou nulle sur un intervalle, f est convexe sur cet intervalle. Si f seconde de x est négative ou nulle, f est concave. Pour Karim, f seconde, c'est l'accélération.",
+  "04-question": "Question ! f de x égale x au cube. Que vaut f seconde de x ? A : 3 x au carré. B : 6 x. C : 6. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. On dérive deux fois : f prime de x égale 3 x au carré, puis f seconde de x égale 6 x. A s'arrête à la première dérivée.",
+  "05-appliquer": "Appliquons. f de x égale x au cube moins 3 x au carré. f prime de x égale 3 x au carré moins 6 x. f seconde de x égale 6 x moins 6. 6 x moins 6 est négatif avant 1, positif après 1. Donc f est concave sur moins l'infini, 1, et convexe sur 1, plus l'infini.",
+  "06-piege": "Voilà le piège ! On étudie le signe de f seconde, pas celui de f prime. Le signe de f prime dit si la courbe monte ou descend. Le signe de f seconde dit si elle se creuse ou se bombe.",
+  "07-question": "Question ! f seconde de x égale 6 x moins 12. Sur quel intervalle f est-elle convexe ? A : de moins l'infini à 2. B : de 2 à plus l'infini. C : de 0 à plus l'infini. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. 6 x moins 12 est positif quand x est plus grand que 2. A, c'est là où f est concave.",
+  "08-rediger": "Au bac, trois lignes. Un : f est deux fois dérivable, et on calcule f seconde de x. Deux : on étudie le signe de f seconde de x. Trois : on conclut : convexe là où f seconde est positive, concave là où elle est négative.",
+  "09-defi": "À toi de jouer ! f de x égale exponentielle de x moins x au carré. Étudie la convexité de f. Mets pause, et cherche !",
+  "09b-correction": "Correction. f prime de x égale exponentielle de x moins 2 x. f seconde de x égale exponentielle de x moins 2. Elle est positive quand exponentielle de x est plus grande que 2, donc quand x est plus grand que logarithme de 2, environ 0,69. f est concave sur moins l'infini, logarithme de 2, et convexe sur logarithme de 2, plus l'infini.",
+  "10-finale": "Ce que tu as appris. f seconde positive : f est convexe. f seconde négative : f est concave. Et on étudie le signe de f seconde, pas celui de f prime.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

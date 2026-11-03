@@ -1,0 +1,17 @@
+{
+  "00-garde": "Convexité. Une courbe en creux, une courbe en bosse : laquelle est convexe ?",
+  "01-situation": "Voici Maëlle. Elle est architecte de skateparks. Pour dessiner un bowl, elle a besoin d'une courbe en creux : le skateur descend, remonte, et la piste le renvoie vers le haut. Pour une bosse de saut, il lui faut l'inverse : une courbe en dos d'âne.",
+  "02-definition": "En maths, une courbe en creux, tournée vers le haut, comme une vallée, est celle d'une fonction convexe. Une courbe en bosse, tournée vers le bas, comme une colline, est celle d'une fonction concave.",
+  "03-cordes": "Pour le vérifier, relie deux points de la courbe par un segment : une corde. Si la courbe est convexe, la corde passe au-dessus de la courbe. Si elle est concave, la corde passe au-dessous.",
+  "04-catalogue": "Les fonctions que tu connais. x au carré : un creux, convexe. Moins x au carré : une bosse, concave. L'exponentielle : elle se creuse vers le haut, convexe. Le logarithme : il se bombe, concave.",
+  "05-question": "Question ! Sur l'intervalle de 0 à plus l'infini, la courbe de 1 sur x est : A : convexe. B : concave. C : ni l'un ni l'autre. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. Pour x positif, la courbe de 1 sur x descend en se creusant, comme une piste de bowl : elle est convexe. B confond descendre et se bomber.",
+  "06-piege": "Voilà le piège ! Convexe ne veut pas dire croissante. La courbe de x au carré descend, puis monte : elle est convexe partout. Elle descend en creux, c'est tout. Ce qui compte, c'est la forme, pas le sens.",
+  "07-mixte": "Une même courbe peut changer de forme. x au cube : en bosse à gauche de 0, en creux à droite de 0. Concave sur moins l'infini, 0 ; convexe sur 0, plus l'infini. On dit toujours : convexe sur un intervalle.",
+  "08-question": "Question ! Une fonction est convexe sur tout son intervalle. Elle est forcément : A : croissante. B : positive. C : ni l'un ni l'autre. Mets pause, et choisis !",
+  "08b-reponse": "Réponse C. x au carré moins 4 est convexe : elle descend, puis monte, et passe sous l'axe entre moins 2 et 2. Convexe dit la forme, ni le sens ni le signe.",
+  "09-defi": "À toi de jouer ! Maëlle dessine une rampe avec la courbe de moins exponentielle de x. Convexe ou concave ? Et la courbe de x au carré plus 3 x ? Mets pause, et cherche !",
+  "09b-correction": "Moins exponentielle de x, c'est la courbe de l'exponentielle retournée. Le creux devient une bosse : concave. x au carré plus 3 x : une parabole tournée vers le haut, comme x au carré : convexe.",
+  "10-finale": "Ce que tu as appris. Convexe : la courbe est en creux, sous ses cordes. Concave : la courbe est en bosse, au-dessus de ses cordes. Et la convexité dit la forme, pas le sens de variation.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -1,0 +1,17 @@
+{
+  "00-garde": "Point d'inflexion. Une chanson qui buzze : à quel moment le buzz commence-t-il à ralentir ?",
+  "01-situation": "Voici Inès. Elle est chargée de promotion dans un label de musique. Elle suit les écoutes d'une chanson, jour après jour. Au début, chaque jour apporte plus de nouvelles écoutes que la veille : la courbe se creuse. Puis les écoutes montent encore, mais de moins en moins vite : la courbe se bombe.",
+  "02-definition": "Le point où la courbe passe du creux à la bosse s'appelle un point d'inflexion. Pour Inès, c'est le jour où la chanson gagne le plus d'écoutes nouvelles. Juste après, le buzz ralentit.",
+  "03-tangente": "Au point d'inflexion, il se passe une chose étonnante : la courbe traverse sa tangente. D'un côté, elle est au-dessous ; de l'autre, elle est au-dessus.",
+  "04-methode": "Pour le trouver par le calcul, on regarde f seconde. Un point d'inflexion, c'est là où f seconde s'annule en changeant de signe.",
+  "05-appliquer": "f de x égale x au cube moins 3 x au carré. f seconde de x égale 6 x moins 6. Elle s'annule en x égale 1. Avant 1, elle est négative ; après 1, positive : elle change de signe. f de 1 égale 1 moins 3, égale moins 2. Le point d'inflexion est I, de coordonnées 1 et moins 2.",
+  "06-question": "Question ! f seconde de x égale 6 x moins 12. Quelle est l'abscisse du point d'inflexion ? A : 12. B : 2. C : 6. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. 6 x moins 12 égale 0 quand x égale 2, et le signe change en 2. A et C lisent les nombres de la formule sans résoudre.",
+  "07-piege": "Voilà le piège ! f seconde nulle ne suffit pas. f de x égale x puissance 4. f seconde de x égale 12 x au carré : elle s'annule en 0, mais elle reste positive des deux côtés. La courbe reste en creux : pas de point d'inflexion.",
+  "08-question": "Question ! f seconde de x égale 12 x au carré. Y a-t-il un point d'inflexion en 0 ? A : oui. B : non. C : seulement si f de 0 égale 0. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. 12 x au carré ne change pas de signe en 0 : la courbe reste convexe, sans inflexion.",
+  "09-defi": "À toi de jouer ! f de x égale x au cube moins 6 x au carré plus 5. Trouve les coordonnées du point d'inflexion. Mets pause, et cherche !",
+  "09b-correction": "Correction. f prime de x égale 3 x au carré moins 12 x. f seconde de x égale 6 x moins 12. Elle s'annule en 2 et change de signe : négative avant, positive après. f de 2 égale 8 moins 24 plus 5, égale moins 11. Le point d'inflexion est I, de coordonnées 2 et moins 11.",
+  "10-finale": "Ce que tu as appris. Un point d'inflexion, c'est là où la courbe change de convexité. Par le calcul : f seconde s'annule et change de signe. Et là, la courbe traverse sa tangente.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

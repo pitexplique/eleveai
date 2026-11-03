@@ -1,0 +1,8 @@
+{
+  "00-accroche": "La nuit, sur une route qui monte et qui descend, où éclairent tes phares ?",
+  "01-image": "Dans un creux, les phares éclairent la route : la route est au-dessus de leur faisceau, comme une courbe convexe au-dessus de sa tangente. Sur une bosse, ils éclairent le ciel : la route passe dessous, comme une courbe concave sous sa tangente.",
+  "02-question": "Question ! Au sommet d'une colline, les phares éclairent : A : la route. B : le ciel. C : le bas-côté. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B. Sur une bosse, la route passe sous le faisceau : le faisceau part vers le ciel.",
+  "03-commentaire": "À toi : exponentielle de x est au-dessus de x plus 1. Quel minimum cette droite donne-t-elle pour exponentielle de 0,5 ? Réponds en commentaire !",
+  "04-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

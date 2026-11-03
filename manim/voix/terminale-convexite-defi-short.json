@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Dans un atelier de vélos, le vélo suivant coûte de moins en moins cher… puis de plus en plus. Où est le vélo le moins cher ?",
+  "01-image": "Chaque barre, c'est le coût du vélo suivant. Les barres baissent : la courbe du coût total se bombe, concave. Les barres remontent : elle se creuse, convexe. La plus petite barre tombe pile sous le point d'inflexion.",
+  "02-question": "Question ! La plus petite barre est sous : A : le point d'inflexion. B : le haut de la courbe. C : l'origine. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A. Le coût du vélo suivant est le plus bas là où la courbe change de forme.",
+  "03-commentaire": "À toi : C seconde de q égale 6 q moins 30. Pour quel q la courbe change-t-elle de forme ? Réponds en commentaire !",
+  "04-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

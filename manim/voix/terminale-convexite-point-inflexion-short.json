@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Un nouveau jeu vidéo sort. Le nombre de joueurs explose… puis ralentit. Où est la bascule ?",
+  "01-image": "Au début, ça monte de plus en plus vite : la courbe se creuse. Ensuite, ça monte encore, mais de moins en moins vite : elle se bombe. La bascule, c'est le point d'inflexion.",
+  "02-question": "Question ! Au point d'inflexion, la tangente : A : traverse la courbe. B : reste au-dessus. C : reste au-dessous. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A. Avant, la courbe est au-dessus de sa tangente ; après, elle passe au-dessous.",
+  "03-commentaire": "À toi : sur ce graphique, à quel jour se trouve le point d'inflexion ? Réponds en commentaire !",
+  "04-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

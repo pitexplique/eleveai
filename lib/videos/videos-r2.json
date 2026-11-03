@@ -10559,6 +10559,96 @@
   "youtube": null,
   "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=continuite_tvi&microId=tvi_unicite&display=simple"
  },
+ "terminale-convexite-defi": {
+  "fichier": "terminale/maths/analyse/convexite-defi/eleveai-maths-terminale-convexite-defi.mp4",
+  "poster": "terminale/maths/analyse/convexite-defi/eleveai-maths-terminale-convexite-defi.png",
+  "vignette": "terminale/maths/analyse/convexite-defi/eleveai-maths-terminale-convexite-defi.vignette.webp",
+  "titre": "Le vélo le moins cher n'est pas où tu crois — Sujet type bac, convexité · Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=convexite_fonction&microId=convexite_defi&display=simple"
+ },
+ "terminale-convexite-defi-short": {
+  "fichier": "terminale/maths/analyse/convexite-defi/eleveai-maths-terminale-convexite-defi-short.mp4",
+  "poster": "terminale/maths/analyse/convexite-defi/eleveai-maths-terminale-convexite-defi-short.png",
+  "vignette": "terminale/maths/analyse/convexite-defi/eleveai-maths-terminale-convexite-defi-short.vignette.webp",
+  "titre": "Où est le vélo le moins cher de l'atelier ? 🚲 — Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=convexite_fonction&microId=convexite_defi&display=simple"
+ },
+ "terminale-convexite-derivee-seconde": {
+  "fichier": "terminale/maths/analyse/convexite-derivee-seconde/eleveai-maths-terminale-convexite-derivee-seconde.mp4",
+  "poster": "terminale/maths/analyse/convexite-derivee-seconde/eleveai-maths-terminale-convexite-derivee-seconde.png",
+  "vignette": "terminale/maths/analyse/convexite-derivee-seconde/eleveai-maths-terminale-convexite-derivee-seconde.vignette.webp",
+  "titre": "Ça monte de plus en plus vite ? — Dérivée seconde et convexité · Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=convexite_fonction&microId=convexite_derivee_seconde&display=simple"
+ },
+ "terminale-convexite-derivee-seconde-short": {
+  "fichier": "terminale/maths/analyse/convexite-derivee-seconde/eleveai-maths-terminale-convexite-derivee-seconde-short.mp4",
+  "poster": "terminale/maths/analyse/convexite-derivee-seconde/eleveai-maths-terminale-convexite-derivee-seconde-short.png",
+  "vignette": "terminale/maths/analyse/convexite-derivee-seconde/eleveai-maths-terminale-convexite-derivee-seconde-short.vignette.webp",
+  "titre": "Tu accélères ou tu freines ? Ta courbe le sait 🚗 — Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=convexite_fonction&microId=convexite_derivee_seconde&display=simple"
+ },
+ "terminale-convexite-point-inflexion": {
+  "fichier": "terminale/maths/analyse/convexite-point-inflexion/eleveai-maths-terminale-convexite-point-inflexion.mp4",
+  "poster": "terminale/maths/analyse/convexite-point-inflexion/eleveai-maths-terminale-convexite-point-inflexion.png",
+  "vignette": "terminale/maths/analyse/convexite-point-inflexion/eleveai-maths-terminale-convexite-point-inflexion.vignette.webp",
+  "titre": "Quand le buzz ralentit-il ? — Le point d'inflexion · Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=convexite_fonction&microId=convexite_point_inflexion&display=simple"
+ },
+ "terminale-convexite-point-inflexion-short": {
+  "fichier": "terminale/maths/analyse/convexite-point-inflexion/eleveai-maths-terminale-convexite-point-inflexion-short.mp4",
+  "poster": "terminale/maths/analyse/convexite-point-inflexion/eleveai-maths-terminale-convexite-point-inflexion-short.png",
+  "vignette": "terminale/maths/analyse/convexite-point-inflexion/eleveai-maths-terminale-convexite-point-inflexion-short.vignette.webp",
+  "titre": "Le jour où le buzz d'un jeu ralentit 🎮 — Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=convexite_fonction&microId=convexite_point_inflexion&display=simple"
+ },
+ "terminale-convexite-reconnaitre": {
+  "fichier": "terminale/maths/analyse/convexite-reconnaitre/eleveai-maths-terminale-convexite-reconnaitre.mp4",
+  "poster": "terminale/maths/analyse/convexite-reconnaitre/eleveai-maths-terminale-convexite-reconnaitre.png",
+  "vignette": "terminale/maths/analyse/convexite-reconnaitre/eleveai-maths-terminale-convexite-reconnaitre.vignette.webp",
+  "titre": "Creux ou bosse : laquelle est convexe ? — Reconnaître la convexité · Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=convexite_fonction&microId=convexite_reconnaitre&display=simple"
+ },
+ "terminale-convexite-reconnaitre-short": {
+  "fichier": "terminale/maths/analyse/convexite-reconnaitre/eleveai-maths-terminale-convexite-reconnaitre-short.mp4",
+  "poster": "terminale/maths/analyse/convexite-reconnaitre/eleveai-maths-terminale-convexite-reconnaitre-short.png",
+  "vignette": "terminale/maths/analyse/convexite-reconnaitre/eleveai-maths-terminale-convexite-reconnaitre-short.vignette.webp",
+  "titre": "Creux ou bosse ? Les maths ont un mot 🛹 — Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=convexite_fonction&microId=convexite_reconnaitre&display=simple"
+ },
+ "terminale-convexite-tangente": {
+  "fichier": "terminale/maths/analyse/convexite-tangente/eleveai-maths-terminale-convexite-tangente.mp4",
+  "poster": "terminale/maths/analyse/convexite-tangente/eleveai-maths-terminale-convexite-tangente.png",
+  "vignette": "terminale/maths/analyse/convexite-tangente/eleveai-maths-terminale-convexite-tangente.vignette.webp",
+  "titre": "exp(0,1) sans calculatrice ? — Convexité et tangentes · Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=convexite_fonction&microId=convexite_tangente&display=simple"
+ },
+ "terminale-convexite-tangente-short": {
+  "fichier": "terminale/maths/analyse/convexite-tangente/eleveai-maths-terminale-convexite-tangente-short.mp4",
+  "poster": "terminale/maths/analyse/convexite-tangente/eleveai-maths-terminale-convexite-tangente-short.png",
+  "vignette": "terminale/maths/analyse/convexite-tangente/eleveai-maths-terminale-convexite-tangente-short.vignette.webp",
+  "titre": "La nuit, où éclairent tes phares ? 🚘 — Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=convexite_fonction&microId=convexite_tangente&display=simple"
+ },
  "terminale-proba-arbre": {
   "fichier": "terminale/maths/probabilites/01-arbre-pondere/eleveai-maths-terminale-proba-arbre.mp4",
   "poster": "terminale/maths/probabilites/01-arbre-pondere/eleveai-maths-terminale-proba-arbre.png",

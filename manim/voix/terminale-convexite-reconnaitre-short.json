@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Un skateur dans un bowl. Creux ou bosse : les maths ont un mot pour chacun.",
+  "01-image": "Il descend dans le creux : la courbe est tournée vers le haut, elle est convexe. Il passe sur la bosse : la courbe est tournée vers le bas, elle est concave.",
+  "02-question": "Question ! Une arche de pont, en bosse. Sa courbe est : A : convexe. B : concave. C : les deux. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B. En bosse, tournée vers le bas : concave.",
+  "03-commentaire": "À toi : sur ce parcours, combien de parties convexes ? Réponds en commentaire !",
+  "04-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

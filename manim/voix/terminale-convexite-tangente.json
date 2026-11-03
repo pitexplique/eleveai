@@ -1,0 +1,18 @@
+{
+  "00-garde": "Convexité et tangentes. Sans calculatrice, combien vaut exponentielle de 0,1 ? Les maths, ça sert à rien… sauf à donner une réponse sûre avec une simple droite.",
+  "01-situation": "Voici Thomas. Il est ingénieur en éclairage automobile. La nuit, au fond d'une cuvette, les phares d'une voiture éclairent la route devant elle. Mais en haut d'une bosse, ils éclairent le ciel : la route plonge sous le faisceau. Le faisceau des phares, c'est la tangente à la route.",
+  "02-propriete": "En maths, c'est pareil. Si f est convexe, sa courbe est au-dessus de toutes ses tangentes. Si f est concave, sa courbe est au-dessous de toutes ses tangentes.",
+  "03-exponentielle": "L'exponentielle est convexe. Sa tangente au point d'abscisse 0 a pour équation y égale x plus 1. La courbe est au-dessus : pour tout réel x, exponentielle de x est supérieure ou égale à x plus 1.",
+  "04-estimer": "Retour à la question. Exponentielle de 0,1 est supérieure ou égale à 0,1 plus 1, donc à 1,1. La calculatrice donne environ 1,105 : la tangente avait vu juste, et de très près.",
+  "05-question": "Question ! Avec la même tangente, exponentielle de 0,2 est : A : supérieure ou égale à 1,2. B : inférieure ou égale à 1,2. C : égale à 1,2. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. L'exponentielle est convexe : sa courbe est au-dessus de la tangente y égale x plus 1. Elle vaut environ 1,221.",
+  "06-logarithme": "Le logarithme, lui, est concave. Sa tangente au point d'abscisse 1 a pour équation y égale x moins 1. La courbe est au-dessous : pour tout x strictement positif, logarithme de x est inférieur ou égal à x moins 1.",
+  "07-piege": "Voilà le piège ! Le sens de l'inégalité dépend de la forme. Convexe : la courbe est au-dessus, f de x est supérieur ou égal à la tangente. Concave : au-dessous, inférieur ou égal. Et au point d'inflexion, la courbe traverse sa tangente : aucune inégalité ne tient des deux côtés.",
+  "08-question": "Question ! Logarithme de 1,5 est : A : supérieur ou égal à 0,5. B : inférieur ou égal à 0,5. C : égal à 0,5. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. Le logarithme est concave : sa courbe est au-dessous de la tangente y égale x moins 1. Il vaut environ 0,405.",
+  "09-rediger": "Au bac, deux lignes suffisent. La fonction exponentielle est convexe sur R, donc sa courbe est au-dessus de chacune de ses tangentes, en particulier de sa tangente en 0, d'équation y égale x plus 1. Donc, pour tout réel x, exponentielle de x est supérieure ou égale à x plus 1.",
+  "10-defi": "À toi de jouer ! f de x égale x au carré. Sa tangente au point d'abscisse 1 a pour équation y égale 2 x moins 1. Montre que, pour tout réel x, x au carré est supérieur ou égal à 2 x moins 1. Mets pause, et cherche !",
+  "10b-correction": "Correction. f seconde de x égale 2, positif : f est convexe sur R. Sa courbe est donc au-dessus de sa tangente au point d'abscisse 1. Donc x au carré est supérieur ou égal à 2 x moins 1. Vérification : x au carré moins 2 x plus 1, c'est x moins 1 au carré, toujours positif ou nul.",
+  "11-finale": "Ce que tu as appris. Convexe : la courbe est au-dessus de ses tangentes. Concave : au-dessous. Une tangente donne alors une inégalité, et une estimation sûre sans calculatrice.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}
