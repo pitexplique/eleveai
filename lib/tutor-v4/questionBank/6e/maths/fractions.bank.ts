@@ -2032,6 +2032,8 @@ export const fractionsBank: TutorBankItemV4[] = [
         canvas: fractionCanvas({
           model: "grid",
           grid: { rows: s.rows, cols: s.cols, shaded: s.shaded },
+          // Sans quoi la grille écrit « colorées/total » dessous : la réponse.
+          display: { showFraction: false },
         }),
       };
     },

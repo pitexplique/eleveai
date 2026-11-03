@@ -222,7 +222,11 @@ function GridFraction({
         );
       })}
 
-      {showFraction !== false ? (
+      {/* 03/11/2026 : la grille n'écrit plus « colorées/total » PAR DÉFAUT.
+          Presque toutes ses questions demandent de lire cette fraction
+          (4e, 5e, 6e, CM2, pourcentages) : l'écrire donnait la réponse.
+          Une question qui la veut passe `showFraction: true`. */}
+      {showFraction === true ? (
         <text
           x={width / 2}
           y={height - 14}
@@ -288,7 +292,7 @@ export default function FractionCanvas({ figure }: Props) {
             shaded={figure.grid.shaded}
             width={width}
             height={height}
-            showFraction={showFraction}
+            showFraction={figure.display?.showFraction}
           />
         ) : null}
 
