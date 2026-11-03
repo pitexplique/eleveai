@@ -90,8 +90,8 @@ export const exercicesAleaConditionnelleCalculPremiere: FicheExercicesData = {
             "Dans une ville, on note $A$ : « il pleut le matin » et $B$ : « il pleut l'après-midi », pour un jour choisi au hasard. Le tableau donne des probabilités (modèle). Calculer $P_A(B)$ et $P_{\\overline{A}}(B)$.",
           figure: tableauProba(["", "B", "non B", "Total"], [["A", "0,24", "0,06", "0,3"], ["non A", "0,14", "0,56", "0,7"], ["Total", "0,38", "0,62", "1"]]),
           reponses: [
-            { question: "P_A(B)", attendu: "0,8" },
-            { question: "P_nonA(B)", attendu: "0,2" },
+            { question: "P(B sachant A)", attendu: "0,8" },
+            { question: "P(B sachant Ā)", attendu: "0,2" },
           ],
           correction:
             "On lit $P(A \\cap B) = 0{,}24$ dans la case, et $P(A) = 0{,}3$ dans le total de la ligne.\n$P_A(B) = \\dfrac{0{,}24}{0{,}3} = 0{,}8$.\nDe même : $P_{\\overline{A}}(B) = \\dfrac{P(\\overline{A} \\cap B)}{P(\\overline{A})} = \\dfrac{0{,}14}{0{,}7} = 0{,}2$.\n⭐ Dans un tableau de probabilités, la formule se lit comme une division « case sur total de la ligne ».",
@@ -189,7 +189,7 @@ export const exercicesAleaConditionnelleCalculPremiere: FicheExercicesData = {
             "Une usine fabrique des résistances électriques. $4$ % sont hors tolérance ($D$). Un banc de mesure rejette ($R$) $90$ % des résistances hors tolérance, mais aussi, à cause des incertitudes de mesure, $5$ % des résistances conformes. On admet que $P(R) = 0{,}084$.\na) Calculer $P(D \\cap R)$ et $P(\\overline{D} \\cap R)$.\nb) Calculer $P_R(D)$, au centième près.\nc) Interpréter : que penser des résistances rejetées ?",
           reponses: [
             { question: "a) P(D ∩ R)", attendu: "0,036" },
-            { question: "a) P(non D ∩ R)", attendu: "0,048" },
+            { question: "a) P(D̄ ∩ R)", attendu: "0,048" },
             { question: "b)", attendu: "3/7", tolerance: 0.01 },
           ],
           correction:
@@ -206,8 +206,8 @@ export const exercicesAleaConditionnelleCalculPremiere: FicheExercicesData = {
             "En $1854$, à Londres, le médecin John Snow relie une épidémie de choléra à une pompe à eau de Broad Street. On reprend son raisonnement avec des chiffres d'un modèle. On choisit un habitant du quartier au hasard ; $E$ : « buvait l'eau de la pompe », $C$ : « a eu le choléra ».\na) Calculer $P_E(C)$ et $P_{\\overline{E}}(C)$.\nb) Combien de fois le risque est-il plus grand pour ceux qui buvaient à la pompe ?\nc) Calculer $P_C(E)$, au centième près, et l'interpréter.",
           figure: tableauProba(["", "Malade", "Pas malade", "Total"], [["Pompe", "0,05", "0,15", "0,2"], ["Autre eau", "0,008", "0,792", "0,8"], ["Total", "0,058", "0,942", "1"]]),
           reponses: [
-            { question: "a) P_E(C)", attendu: "0,25" },
-            { question: "a) P_nonE(C)", attendu: "0,01" },
+            { question: "a) P(C sachant E)", attendu: "0,25" },
+            { question: "a) P(C sachant Ē)", attendu: "0,01" },
             { question: "b)", attendu: "25" },
             { question: "c)", attendu: "25/29", tolerance: 0.01 },
           ],
@@ -254,7 +254,7 @@ export const exercicesAleaConditionnelleCalculPremiere: FicheExercicesData = {
           ]),
           reponses: [
             { question: "a) P(S ∩ I)", attendu: "0,2" },
-            { question: "a) P(non S ∩ I)", attendu: "0,06" },
+            { question: "a) P(S̄ ∩ I)", attendu: "0,06" },
             { question: "b)", attendu: "10/13", tolerance: 0.01 },
           ],
           correction:
@@ -319,7 +319,7 @@ export const exercicesAleaConditionnelleCalculPremiere: FicheExercicesData = {
             { question: "a) malades positifs", attendu: "400" },
             { question: "a) faux positifs", attendu: "190" },
             { question: "b) P(T)", attendu: "0,059" },
-            { question: "b) P_T(M)", attendu: "40/59", tolerance: 0.01 },
+            { question: "b) P(M sachant T)", attendu: "40/59", tolerance: 0.01 },
             { question: "c)", attendu: "40/239", tolerance: 0.01 },
             { question: "d)", attendu: ["non", "faux"] },
           ],
@@ -345,8 +345,8 @@ export const exercicesAleaConditionnelleCalculPremiere: FicheExercicesData = {
             { question: "a) P(S8)", attendu: "0,5" },
             { question: "a) P(S16)", attendu: "0,25" },
             { question: "a) P(S24)", attendu: "0,125" },
-            { question: "c) P_S8(S16)", attendu: "0,5" },
-            { question: "c) P_S16(S24)", attendu: "0,5" },
+            { question: "c) P(S16 sachant S8)", attendu: "0,5" },
+            { question: "c) P(S24 sachant S16)", attendu: "0,5" },
             { question: "d)", attendu: ["non", "faux"] },
           ],
           correction:
@@ -359,7 +359,7 @@ export const exercicesAleaConditionnelleCalculPremiere: FicheExercicesData = {
             "Pour un poste, une entreprise reçoit des candidatures (modèle). $20$ % des candidats sont ingénieurs ($I$). Un ingénieur est embauché ($E$) avec la probabilité $0{,}3$ ; un autre candidat avec la probabilité $0{,}05$.\na) Calculer $P(I \\cap E)$ et $P(\\overline{I} \\cap E)$.\nb) Compléter le tableau des probabilités, et lire $P(E)$.\nc) Calculer $P_E(I)$.\nd) Un journaliste écrit : « dans cette entreprise, on embauche surtout des ingénieurs ». Un autre : « un ingénieur n'y est embauché que trois fois sur dix ». Qui a raison ?",
           reponses: [
             { question: "a) P(I ∩ E)", attendu: "0,06" },
-            { question: "a) P(non I ∩ E)", attendu: "0,04" },
+            { question: "a) P(Ī ∩ E)", attendu: "0,04" },
             { question: "b) P(E)", attendu: "0,1" },
             { question: "c)", attendu: "0,6" },
             { question: "d)", attendu: ["les deux", "les deux ont raison"] },

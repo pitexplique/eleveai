@@ -72,7 +72,7 @@ export const exercicesAleaArbreCalculPremiere: FicheExercicesData = {
           ]),
           reponses: [
             { question: "P(A ∩ B)", attendu: "0,2" },
-            { question: "P(non A ∩ non B)", attendu: "0,1" },
+            { question: "P(Ā ∩ B̄)", attendu: "0,1" },
           ],
           correction:
             "$A \\cap B$, c'est le chemin « $A$ puis $B$ » : on multiplie ses deux branches.\n$P(A \\cap B) = 0{,}8 \\times 0{,}25 = 0{,}2$.\nDe même : $P(\\overline{A} \\cap \\overline{B}) = 0{,}2 \\times 0{,}5 = 0{,}1$.\n⚠️ Le piège : répondre $0{,}25$. C'est la branche seule, $P_A(B)$ ; il faut encore passer par $A$.",
@@ -163,9 +163,9 @@ export const exercicesAleaArbreCalculPremiere: FicheExercicesData = {
             "On donne $P(A) = 0{,}3$, $P_A(B) = 0{,}6$ et $P_{\\overline{A}}(B) = 0{,}2$. Calculer la probabilité de chacun des quatre chemins de l'arbre, puis vérifier le résultat.",
           reponses: [
             { question: "P(A ∩ B)", attendu: "0,18" },
-            { question: "P(A ∩ non B)", attendu: "0,12" },
-            { question: "P(non A ∩ B)", attendu: "0,14" },
-            { question: "P(non A ∩ non B)", attendu: "0,56" },
+            { question: "P(A ∩ B̄)", attendu: "0,12" },
+            { question: "P(Ā ∩ B)", attendu: "0,14" },
+            { question: "P(Ā ∩ B̄)", attendu: "0,56" },
           ],
           correction:
             "$P(A \\cap B) = 0{,}3 \\times 0{,}6 = 0{,}18$ et $P(A \\cap \\overline{B}) = 0{,}3 \\times 0{,}4 = 0{,}12$.\n$P(\\overline{A} \\cap B) = 0{,}7 \\times 0{,}2 = 0{,}14$ et $P(\\overline{A} \\cap \\overline{B}) = 0{,}7 \\times 0{,}8 = 0{,}56$.\nVérification : $0{,}18 + 0{,}12 + 0{,}14 + 0{,}56 = 1$.\n⭐ Les chemins d'un arbre décrivent TOUTES les issues, sans en répéter : leur somme vaut toujours $1$.",
@@ -343,7 +343,7 @@ export const exercicesAleaArbreCalculPremiere: FicheExercicesData = {
             "Un radar mesure la vitesse des voitures grâce à l'effet Doppler, avec une petite incertitude. Sur une route (modèle), $10$ % des voitures sont en excès de vitesse ($E$). Le radar flashe ($F$) $95$ % des voitures en excès, et, à cause de l'incertitude, $1$ % des voitures en règle.\na) Construire l'arbre pondéré.\nb) Calculer $P(E \\cap F)$ et $P(\\overline{E} \\cap F)$, puis $P(F)$.\nc) Compléter un tableau croisé pour $10\\,000$ voitures.\nd) Parmi les voitures flashées, quelle part était vraiment en excès ?",
           reponses: [
             { question: "b) P(E ∩ F)", attendu: "0,095" },
-            { question: "b) P(non E ∩ F)", attendu: "0,009" },
+            { question: "b) P(Ē ∩ F)", attendu: "0,009" },
             { question: "b) P(F)", attendu: "0,104" },
             { question: "d)", attendu: "950/1040", tolerance: 0.01 },
           ],

@@ -93,8 +93,8 @@ export const exercicesAleaConditionnellePremiere: FicheExercicesData = {
         {
           enonce: "Avec le tableau de l'exercice 3, calculer $P_M(F)$, puis $P_R(M)$, où $R$ : « résineux ».",
           reponses: [
-            { question: "P_M(F)", attendu: "3/7", tolerance: 0.01 },
-            { question: "P_R(M)", attendu: "0,2" },
+            { question: "P(F sachant M)", attendu: "3/7", tolerance: 0.01 },
+            { question: "P(M sachant R)", attendu: "0,2" },
           ],
           correction:
             "$P_M(F)$ : on se place PARMI les $28$ arbres malades (la colonne Malade). $12$ sont des feuillus.\n$P_M(F) = \\dfrac{12}{28} = \\dfrac{3}{7} \\approx 0{,}43$.\n$P_R(M)$ : parmi les $80$ résineux, $16$ sont malades. $P_R(M) = \\dfrac{16}{80} = 0{,}2$.\nLes résineux sont deux fois plus souvent malades que les feuillus ($0{,}2$ contre $0{,}1$).\n⛔ $P_F(M) = 0{,}1$ et $P_M(F) \\approx 0{,}43$ : même case, $12$ arbres, mais deux dénominateurs.",
@@ -114,8 +114,8 @@ export const exercicesAleaConditionnellePremiere: FicheExercicesData = {
             "Une station de baguage a capturé $220$ oiseaux. On choisit un oiseau au hasard ; $J$ : « c'est un jeune de l'année », $M$ : « c'est une mésange ».\nCalculer $P_J(M)$ et $P_M(J)$.",
           figure: tableauProba(["", "Adultes", "Jeunes", "Total"], [["Mésanges", "60", "90", "150"], ["Rouges-gorges", "40", "30", "70"], ["Total", "100", "120", "220"]]),
           reponses: [
-            { question: "P_J(M)", attendu: "0,75" },
-            { question: "P_M(J)", attendu: "0,6" },
+            { question: "P(M sachant J)", attendu: "0,75" },
+            { question: "P(J sachant M)", attendu: "0,6" },
           ],
           correction:
             "$P_J(M)$ : parmi les $120$ jeunes (colonne Jeunes), $90$ sont des mésanges.\n$P_J(M) = \\dfrac{90}{120} = \\dfrac{3}{4} = 0{,}75$.\n$P_M(J)$ : parmi les $150$ mésanges (ligne Mésanges), $90$ sont des jeunes.\n$P_M(J) = \\dfrac{90}{150} = \\dfrac{3}{5} = 0{,}6$.\n⭐ Même case ($90$), deux dénominateurs : la colonne pour « sachant $J$ », la ligne pour « sachant $M$ ».",
@@ -166,7 +166,7 @@ export const exercicesAleaConditionnellePremiere: FicheExercicesData = {
           figure: tableauProba(["", "Gobelet", "Jetable", "Total"], [["Train", "180", "20", "200"], ["Voiture", "150", "150", "300"], ["Total", "330", "170", "500"]]),
           reponses: [
             { question: "a)", attendu: "0,66" },
-            { question: "b) P_T(G)", attendu: "0,9" },
+            { question: "b) P(G sachant T)", attendu: "0,9" },
             { question: "b) sachant voiture", attendu: "0,5" },
             { question: "c)", attendu: "6/11", tolerance: 0.01 },
           ],
@@ -179,8 +179,8 @@ export const exercicesAleaConditionnellePremiere: FicheExercicesData = {
           enonce:
             "Un apiculteur suit $400$ ruches pendant un hiver (modèle). $160$ sont dans une zone sans pesticide, et $144$ d'entre elles survivent. Les $240$ autres sont en zone de grandes cultures, et $180$ survivent. On choisit une ruche au hasard ; $B$ : « zone sans pesticide », $S$ : « la colonie survit ».\na) Construire le tableau croisé des effectifs.\nb) Calculer $P_B(S)$ et $P_{\\overline{B}}(S)$.\nc) Calculer $P_S(B)$. Pourquoi est-elle plus petite que $\\dfrac{1}{2}$, alors qu'on survit mieux en zone sans pesticide ?",
           reponses: [
-            { question: "b) P_B(S)", attendu: "0,9" },
-            { question: "b) P_nonB(S)", attendu: "0,75" },
+            { question: "b) P(S sachant B)", attendu: "0,9" },
+            { question: "b) P(S sachant B̄)", attendu: "0,75" },
             { question: "c)", attendu: "4/9", tolerance: 0.01 },
           ],
           correction:
@@ -203,10 +203,10 @@ export const exercicesAleaConditionnellePremiere: FicheExercicesData = {
             "L'entraîneur d'un gardien de but a noté $60$ tirs au but qu'il a affrontés : tir à sa gauche ou à sa droite, arrêté ou marqué. On choisit un tir au hasard ; $G$ : « tir à gauche du gardien », $A$ : « tir arrêté ».\na) Calculer $P_G(A)$ et $P_D(A)$, où $D$ : « tir à droite ».\nb) Un tireur veut marquer. De quel côté doit-il tirer ?\nc) Calculer $P_A(G)$. Un commentateur en conclut : « il arrête presque tout à gauche, il faut tirer à droite ». Son raisonnement est-il bon ?",
           figure: tableauProba(["", "Arrêté", "Marqué", "Total"], [["Gauche", "9", "27", "36"], ["Droite", "3", "21", "24"], ["Total", "12", "48", "60"]]),
           reponses: [
-            { question: "a) P_G(A)", attendu: "0,25" },
-            { question: "a) P_D(A)", attendu: "0,125" },
+            { question: "a) P(A sachant G)", attendu: "0,25" },
+            { question: "a) P(A sachant D)", attendu: "0,125" },
             { question: "b)", attendu: ["droite", "à droite"] },
-            { question: "c) P_A(G)", attendu: "0,75" },
+            { question: "c) P(G sachant A)", attendu: "0,75" },
           ],
           correction:
             "a) Parmi les $36$ tirs à gauche : $P_G(A) = \\dfrac{9}{36} = 0{,}25$.\nParmi les $24$ tirs à droite : $P_D(A) = \\dfrac{3}{24} = 0{,}125$.\nb) À droite, le gardien arrête un tir sur huit ; à gauche, un sur quatre. Il faut tirer à droite.\nc) Parmi les $12$ tirs arrêtés : $P_A(G) = \\dfrac{9}{12} = 0{,}75$.\nLa conclusion est la bonne, mais pas le raisonnement. $P_A(G)$ est grand aussi parce que les tireurs visent plus souvent sa gauche ($36$ tirs sur $60$).\n⛔ Pour choisir un côté, il faut « arrêté SACHANT le côté », pas « le côté SACHANT arrêté ».",
@@ -217,8 +217,8 @@ export const exercicesAleaConditionnellePremiere: FicheExercicesData = {
           enonce:
             "Une entreprise compte $250$ salariés : $60$ cadres, dont $45$ en télétravail au moins un jour par semaine, et $190$ non-cadres, dont $38$ en télétravail. On choisit un salarié au hasard ; $C$ : « être cadre », $T$ : « télétravailler ».\na) Calculer $P_C(T)$ et $P_{\\overline{C}}(T)$.\nb) Calculer $P_T(C)$, arrondie au centième.\nc) Écrire chaque résultat par une phrase.",
           reponses: [
-            { question: "a) P_C(T)", attendu: "0,75" },
-            { question: "a) P_nonC(T)", attendu: "0,2" },
+            { question: "a) P(T sachant C)", attendu: "0,75" },
+            { question: "a) P(T sachant C̄)", attendu: "0,2" },
             { question: "b)", attendu: "45/83", tolerance: 0.01 },
           ],
           correction:
@@ -231,8 +231,8 @@ export const exercicesAleaConditionnellePremiere: FicheExercicesData = {
           enonce:
             "Un laboratoire de physique achète $200$ capteurs de température : $120$ chez le fournisseur $A$ et $80$ chez le fournisseur $B$. Au contrôle, on compare chaque capteur à un thermomètre de référence : $6$ capteurs de $A$ et $12$ capteurs de $B$ donnent une mesure hors tolérance. On choisit un capteur au hasard ; $D$ : « le capteur est défaillant ».\na) Calculer $P_A(D)$ et $P_B(D)$. Quel fournisseur est le plus fiable ?\nb) Un capteur est défaillant. Quelle est la probabilité qu'il vienne de $A$ ?",
           reponses: [
-            { question: "a) P_A(D)", attendu: "0,05" },
-            { question: "a) P_B(D)", attendu: "0,15" },
+            { question: "a) P(D sachant A)", attendu: "0,05" },
+            { question: "a) P(D sachant B)", attendu: "0,15" },
             { question: "a) le plus fiable", attendu: ["A", "le fournisseur A"] },
             { question: "b)", attendu: "1/3" },
           ],
@@ -246,8 +246,8 @@ export const exercicesAleaConditionnellePremiere: FicheExercicesData = {
           enonce:
             "Une infirmière scolaire interroge $300$ élèves (modèle). $180$ gardent leur téléphone dans la chambre la nuit, et $108$ d'entre eux se disent fatigués le matin. Parmi les $120$ autres, $36$ se disent fatigués. On choisit un élève au hasard ; $T$ : « téléphone dans la chambre », $F$ : « fatigué le matin ».\na) Calculer $P_T(F)$ et $P_{\\overline{T}}(F)$.\nb) Calculer $P_F(T)$.\nc) Peut-on dire que le téléphone CAUSE la fatigue ?",
           reponses: [
-            { question: "a) P_T(F)", attendu: "0,6" },
-            { question: "a) P_nonT(F)", attendu: "0,3" },
+            { question: "a) P(F sachant T)", attendu: "0,6" },
+            { question: "a) P(F sachant T̄)", attendu: "0,3" },
             { question: "b)", attendu: "0,75" },
             { question: "c)", attendu: ["non", "faux"] },
           ],
@@ -302,8 +302,8 @@ export const exercicesAleaConditionnellePremiere: FicheExercicesData = {
             "Au départ d'un sentier de haute montagne, un gardien de refuge interroge $500$ randonneurs (modèle) : ont-ils lu le bulletin météo avant de partir ? ont-ils fait demi-tour ? On choisit un randonneur au hasard ; $M$ : « a lu la météo », $D$ : « a fait demi-tour ».\na) Calculer $P_M(D)$ et $P_{\\overline{M}}(D)$. Comparer.\nb) Calculer $P_D(M)$ et l'écrire par une phrase.\nc) Le gardien affirme : « plus de la moitié des demi-tours sont faits par des randonneurs qui n'ont pas lu la météo ». A-t-il raison ?",
           figure: tableauProba(["", "Demi-tour", "Continue", "Total"], [["Météo lue", "35", "315", "350"], ["Pas lue", "45", "105", "150"], ["Total", "80", "420", "500"]]),
           reponses: [
-            { question: "a) P_M(D)", attendu: "0,1" },
-            { question: "a) P_nonM(D)", attendu: "0,3" },
+            { question: "a) P(D sachant M)", attendu: "0,1" },
+            { question: "a) P(D sachant M̄)", attendu: "0,3" },
             { question: "b)", attendu: "7/16", tolerance: 0.01 },
             { question: "c)", attendu: ["oui", "vrai"] },
           ],
@@ -317,8 +317,8 @@ export const exercicesAleaConditionnellePremiere: FicheExercicesData = {
             "Un concessionnaire a vendu $2\\,000$ voitures neuves en un an (modèle), à des clients des villes ou des campagnes. On choisit une vente au hasard ; $V$ : « client de la ville », $E$ : « voiture électrique ».\na) Calculer $P_V(E)$ et $P_{\\overline{V}}(E)$.\nb) Calculer $P_E(V)$.\nc) Le concessionnaire veut lancer une publicité pour l'électrique. Un conseiller lui dit : « visez la campagne, c'est là qu'on en vend le moins, il y a de la marge ». Un autre : « visez la ville, trois électriques sur quatre y sont vendues ». Quelles probabilités chacun utilise-t-il ?",
           figure: tableauProba(["", "Électrique", "Thermique", "Total"], [["Ville", "360", "840", "1200"], ["Campagne", "120", "680", "800"], ["Total", "480", "1520", "2000"]]),
           reponses: [
-            { question: "a) P_V(E)", attendu: "0,3" },
-            { question: "a) P_nonV(E)", attendu: "0,15" },
+            { question: "a) P(E sachant V)", attendu: "0,3" },
+            { question: "a) P(E sachant V̄)", attendu: "0,15" },
             { question: "b)", attendu: "0,75" },
           ],
           correction:
@@ -336,11 +336,11 @@ export const exercicesAleaConditionnellePremiere: FicheExercicesData = {
           enonce:
             "Sur une plage de ponte, une association surveille $200$ nids de tortues marines (modèle). $120$ nids sont protégés par un grillage contre les prédateurs, et $102$ d'entre eux éclosent. Parmi les $80$ nids non protégés, $48$ éclosent. On choisit un nid au hasard ; $P$ : « nid protégé », $E$ : « le nid éclot ».\na) Construire le tableau croisé des effectifs.\nb) Calculer $P_P(E)$ et $P_{\\overline{P}}(E)$. Le grillage semble-t-il utile ?\nc) Calculer $P_E(P)$ et $P_{\\overline{E}}(P)$, et les écrire par une phrase.",
           reponses: [
-            { question: "b) P_P(E)", attendu: "0,85" },
-            { question: "b) P_nonP(E)", attendu: "0,6" },
+            { question: "b) P(E sachant P)", attendu: "0,85" },
+            { question: "b) P(E sachant P̄)", attendu: "0,6" },
             { question: "b) utile ?", attendu: ["oui", "vrai"] },
-            { question: "c) P_E(P)", attendu: "0,68" },
-            { question: "c) P_nonE(P)", attendu: "0,36" },
+            { question: "c) P(P sachant E)", attendu: "0,68" },
+            { question: "c) P(P sachant Ē)", attendu: "0,36" },
           ],
           correction:
             "a) Protégés : $102$ éclosent, $18$ non. Non protégés : $48$ éclosent, $32$ non. Éclos : $150$ ; pas éclos : $50$.\nb) Parmi les $120$ nids protégés : $P_P(E) = \\dfrac{102}{120} = 0{,}85$.\nParmi les $80$ autres : $P_{\\overline{P}}(E) = \\dfrac{48}{80} = 0{,}6$.\nOui : $85$ % d'éclosions avec grillage, $60$ % sans.\nc) Parmi les $150$ nids éclos : $P_E(P) = \\dfrac{102}{150} = 0{,}68$. « $68$ % des nids éclos étaient protégés. »\nParmi les $50$ nids qui n'ont pas éclos : $P_{\\overline{E}}(P) = \\dfrac{18}{50} = 0{,}36$. « $36$ % des échecs étaient protégés. »\n⭐ C'est b) qui juge le grillage : on compare deux groupes de nids, chacun sur son propre total.",
@@ -352,8 +352,8 @@ export const exercicesAleaConditionnellePremiere: FicheExercicesData = {
           enonce:
             "Une joueuse de tennis a servi $200$ points pendant un tournoi (modèle). Sa première balle est passée $120$ fois, et elle a gagné $90$ de ces points. Les $80$ autres fois, elle a dû jouer une seconde balle, et elle a gagné $40$ points. On choisit un point au hasard ; $R$ : « première balle réussie », $G$ : « point gagné ».\na) Calculer $P_R(G)$ et $P_{\\overline{R}}(G)$.\nb) Calculer $P(G)$.\nc) Calculer $P_G(R)$, arrondie au centième, et l'écrire par une phrase.\nd) Son entraîneur dit : « quand ta première balle passe, tu gagnes le point une fois et demie plus souvent ». A-t-il raison ?",
           reponses: [
-            { question: "a) P_R(G)", attendu: "0,75" },
-            { question: "a) P_nonR(G)", attendu: "0,5" },
+            { question: "a) P(G sachant R)", attendu: "0,75" },
+            { question: "a) P(G sachant R̄)", attendu: "0,5" },
             { question: "b)", attendu: "0,65" },
             { question: "c)", attendu: "9/13", tolerance: 0.01 },
             { question: "d)", attendu: ["oui", "vrai"] },

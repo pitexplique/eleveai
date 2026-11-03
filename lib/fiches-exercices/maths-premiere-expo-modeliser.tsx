@@ -106,8 +106,8 @@ export const exercicesExpoModeliserPremiere: FicheExercicesData = {
         {
           enonce: "Un appareil vaut $800$ € neuf et perd $25$ % de sa valeur chaque année. Modéliser sa valeur $u_n$ au bout de $n$ années, puis calculer $u_3$.",
           reponses: [
-            { question: "u_n", attendu: "800×0,75^n" },
-            { question: "u_3", attendu: "337,5" },
+            { question: "uₙ", attendu: "800×0,75^n" },
+            { question: "u₃", attendu: "337,5" },
           ],
           correction:
             "Perdre $25$ %, c'est multiplier par $0{,}75$ : suite géométrique, $u_n = 800 \\times 0{,}75^n$.\n$u_3 = 800 \\times 0{,}421875 = 337{,}5$ €.\n⚠️ Pas $800 - 3 \\times 200 = 200$ € : chaque année, les $25$ % portent sur une valeur plus petite.\nSur le dessin, en centaines : les points rouges du modèle, la droite orange du « $-200$ € par an » qui se trompe.",
@@ -266,7 +266,7 @@ export const exercicesExpoModeliserPremiere: FicheExercicesData = {
             "En 1859, $24$ lapins sont relâchés dans une ferme d'Australie, où ils n'ont presque aucun prédateur. Supposons (modèle) que leur nombre soit multiplié par $4$ chaque année.\na) Est-ce une croissance linéaire ou exponentielle ? Modéliser le nombre $L_n$ de lapins $n$ années après 1859.\nb) Calculer $L_1$ et $L_2$, puis donner un ordre de grandeur de $L_{10}$, en utilisant $4^{10} = 2^{20}$.\nc) Pourquoi ce modèle ne peut-il pas durer ?",
           reponses: [
             { question: "a)", attendu: ["exponentielle", "exponentiel"] },
-            { question: "a) L_n", attendu: "24×4^n" },
+            { question: "a) Lₙ", attendu: "24×4^n" },
             { question: "b) L1", attendu: "96" },
             { question: "b) L2", attendu: "384" },
             { question: "b) L10", attendu: "25 165 824", tolerance: 1500000 },

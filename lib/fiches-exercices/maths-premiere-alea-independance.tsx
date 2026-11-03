@@ -209,8 +209,8 @@ export const exercicesAleaIndependancePremiere: FicheExercicesData = {
           figure: tableauProba(["", "Vote A", "Autre", "Total"], [["Nord", "180", "220", "400"], ["Sud", "270", "330", "600"], ["Total", "450", "550", "1000"]]),
           reponses: [
             { question: "a) P(A)", attendu: "0,45" },
-            { question: "a) P_N(A)", attendu: "0,45" },
-            { question: "a) P_nonN(A)", attendu: "0,45" },
+            { question: "a) P(A sachant N)", attendu: "0,45" },
+            { question: "a) P(A sachant N̄)", attendu: "0,45" },
             { question: "b)", attendu: ["oui", "vrai"] },
           ],
           correction:
@@ -224,7 +224,7 @@ export const exercicesAleaIndependancePremiere: FicheExercicesData = {
           figure: tableauProba(["", "Bonne vente", "Faible", "Total"], [["Beau temps", "48", "12", "60"], ["Mauvais", "8", "32", "40"], ["Total", "56", "44", "100"]]),
           reponses: [
             { question: "a) P(V)", attendu: "0,56" },
-            { question: "a) P_B(V)", attendu: "0,8" },
+            { question: "a) P(V sachant B)", attendu: "0,8" },
             { question: "b)", attendu: ["non", "faux"] },
           ],
           correction:
@@ -284,8 +284,8 @@ export const exercicesAleaIndependancePremiere: FicheExercicesData = {
           figure: tableauProba(["", "Signe", "Ne signe pas", "Total"], [["Hommes", "160", "40", "200"], ["Femmes", "120", "80", "200"], ["Total", "280", "120", "400"]]),
           reponses: [
             { question: "a) P(S)", attendu: "0,7" },
-            { question: "a) P_F(S)", attendu: "0,6" },
-            { question: "a) P_nonF(S)", attendu: "0,8" },
+            { question: "a) P(S sachant F)", attendu: "0,6" },
+            { question: "a) P(S sachant F̄)", attendu: "0,8" },
             { question: "b)", attendu: ["non", "faux"] },
           ],
           correction:
@@ -349,8 +349,8 @@ export const exercicesAleaIndependancePremiere: FicheExercicesData = {
             { question: "a) P(C)", attendu: "0,2" },
             { question: "a) cadres urbains", attendu: "120" },
             { question: "b)", attendu: ["non", "faux"] },
-            { question: "c) P_U(C)", attendu: "0,25" },
-            { question: "c) P_nonU(C)", attendu: "0,125" },
+            { question: "c) P(C sachant U)", attendu: "0,25" },
+            { question: "c) P(C sachant Ū)", attendu: "0,125" },
           ],
           correction:
             "a) $P(U) = \\dfrac{600}{1\\,000} = 0{,}6$ et $P(C) = \\dfrac{200}{1\\,000} = 0{,}2$.\nSi indépendants : $P(U \\cap C) = 0{,}6 \\times 0{,}2 = 0{,}12$, soit $120$ cadres urbains sur $1\\,000$.\nb) On en compte $150$, pas $120$ : $U$ et $C$ ne sont pas indépendants.\nc) $P_U(C) = \\dfrac{150}{600} = 0{,}25$ et $P_{\\overline{U}}(C) = \\dfrac{50}{400} = 0{,}125$.\nUn urbain est deux fois plus souvent cadre qu'un rural.\n⭐ Les géographes parlent de métropolisation : les emplois les plus qualifiés se concentrent dans les grandes villes.",

@@ -72,9 +72,9 @@ export const exercicesAleaArbrePremiere: FicheExercicesData = {
           ]),
           reponses: [
             { question: "P(A)", attendu: "0,7" },
-            { question: "P(non A)", attendu: "0,3" },
-            { question: "P_A(B)", attendu: "0,4" },
-            { question: "P_nonA(non B)", attendu: "0,1" },
+            { question: "P(Ā)", attendu: "0,3" },
+            { question: "P(B sachant A)", attendu: "0,4" },
+            { question: "P(B̄ sachant Ā)", attendu: "0,1" },
           ],
           correction:
             "Premier niveau : $P(A) = 0{,}7$ et $P(\\overline{A}) = 0{,}3$.\nLa branche de $A$ vers $B$ : $P_A(B) = 0{,}4$. En bus, Tom arrive avant $8$ h $4$ fois sur $10$.\nLa branche de $\\overline{A}$ vers $\\overline{B}$ : $P_{\\overline{A}}(\\overline{B}) = 0{,}1$. À vélo, il n'arrive après $8$ h qu'une fois sur dix.\n⭐ Le nœud d'où part la branche donne l'INDICE.",
@@ -87,9 +87,9 @@ export const exercicesAleaArbrePremiere: FicheExercicesData = {
             { label: "non A", proba: "?", enfants: [{ label: "B", proba: "?" }, { label: "non B", proba: "0,45" }] },
           ]),
           reponses: [
-            { question: "P(non A)", attendu: "0,65" },
-            { question: "A → non B", attendu: "0,8" },
-            { question: "non A → B", attendu: "0,55" },
+            { question: "P(Ā)", attendu: "0,65" },
+            { question: "A → B̄", attendu: "0,8" },
+            { question: "Ā → B", attendu: "0,55" },
           ],
           correction:
             "Au départ, les deux branches font $1$ : $P(\\overline{A}) = 1 - 0{,}35 = 0{,}65$.\nAu nœud $A$ : $P_A(\\overline{B}) = 1 - 0{,}2 = 0{,}8$.\nAu nœud $\\overline{A}$ : $P_{\\overline{A}}(B) = 1 - 0{,}45 = 0{,}55$.\n⚠️ Le piège : faire $1 - 0{,}2$ pour la branche $\\overline{A} \\to B$. On complète NŒUD PAR NŒUD, avec les branches qui partent du même point.",
@@ -132,9 +132,9 @@ export const exercicesAleaArbrePremiere: FicheExercicesData = {
           ]),
           reponses: [
             { question: "Vert", attendu: "0,2" },
-            { question: "Rouge → non G", attendu: "0,9" },
+            { question: "Rouge → Ḡ", attendu: "0,9" },
             { question: "Bleu → G", attendu: "0,4" },
-            { question: "Vert → non G", attendu: "0,3" },
+            { question: "Vert → Ḡ", attendu: "0,3" },
           ],
           correction:
             "Au départ, TROIS branches, qui font $1$ : $P(\\text{Vert}) = 1 - 0{,}5 - 0{,}3 = 0{,}2$.\nDerrière Rouge : $1 - 0{,}1 = 0{,}9$.\nDerrière Bleu : $1 - 0{,}6 = 0{,}4$.\nDerrière Vert : $1 - 0{,}7 = 0{,}3$.\n⭐ Un nœud peut avoir plus de deux branches : la règle reste la même, leur somme vaut $1$.",
@@ -246,7 +246,7 @@ export const exercicesAleaArbrePremiere: FicheExercicesData = {
           ]),
           reponses: [
             { question: "Loin", attendu: "0,45" },
-            { question: "Près → non R", attendu: "0,1" },
+            { question: "Près → R̄", attendu: "0,1" },
             { question: "Loin → R", attendu: "0,5" },
           ],
           correction:
@@ -317,9 +317,9 @@ export const exercicesAleaArbrePremiere: FicheExercicesData = {
           ]),
           reponses: [
             { question: "Voiture", attendu: "0,6" },
-            { question: "Pied → non J", attendu: "0,2" },
+            { question: "Pied → J̄", attendu: "0,2" },
             { question: "Vélo → J", attendu: "0,6" },
-            { question: "Voiture → non J", attendu: "0,7" },
+            { question: "Voiture → J̄", attendu: "0,7" },
             { question: "moyen d'arrivée", attendu: ["pied", "à pied"] },
           ],
           correction:
@@ -390,9 +390,9 @@ export const exercicesAleaArbrePremiere: FicheExercicesData = {
           ]),
           reponses: [
             { question: "a) Centre", attendu: "0,15" },
-            { question: "a) Gauche → non A", attendu: "0,7" },
+            { question: "a) Gauche → Ā", attendu: "0,7" },
             { question: "a) Centre → A", attendu: "0,4" },
-            { question: "a) Droite → non A", attendu: "0,75" },
+            { question: "a) Droite → Ā", attendu: "0,75" },
             { question: "b)", attendu: ["droite", "à droite"] },
           ],
           correction:

@@ -66,8 +66,8 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
         {
           enonce: "Soit $(u_n)$ la suite géométrique de premier terme $u_0 = 3$ et de raison $q = 2$. Exprimer $u_n$ en fonction de $n$, puis calculer $u_5$.",
           reponses: [
-            { question: "u_n", attendu: "3×2^n" },
-            { question: "u_5", attendu: "96" },
+            { question: "uₙ", attendu: "3×2^n" },
+            { question: "u₅", attendu: "96" },
           ],
           correction:
             "$u_n = u_0 \\times q^n = 3 \\times 2^n$.\n$u_5 = 3 \\times 2^5 = 3 \\times 32 = 96$.\n⚠️ $3 \\times 2^5$ n'est pas $6^5$ : on calcule d'abord la puissance, puis on multiplie par $3$.\n⭐ La formule évite de calculer $u_1$, $u_2$, $u_3$, $u_4$ : on saute directement au rang voulu.",
@@ -77,8 +77,8 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
         {
           enonce: "On donne $u_0 = 5\\,000$ et $q = 0{,}8$. Exprimer $u_n$ en fonction de $n$, puis calculer $u_3$.",
           reponses: [
-            { question: "u_n", attendu: "5 000×0,8^n" },
-            { question: "u_3", attendu: "2 560" },
+            { question: "uₙ", attendu: "5 000×0,8^n" },
+            { question: "u₃", attendu: "2 560" },
           ],
           correction:
             "$u_n = 5\\,000 \\times 0{,}8^n$.\n$u_3 = 5\\,000 \\times 0{,}8^3 = 5\\,000 \\times 0{,}512 = 2\\,560$.\n⚠️ $0{,}8^3$ n'est pas $0{,}8 \\times 3 = 2{,}4$ : c'est $0{,}8 \\times 0{,}8 \\times 0{,}8$.\nSur le dessin, les termes en milliers : chaque point est à $0{,}8$ fois la hauteur du précédent.",
@@ -88,9 +88,9 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
         {
           enonce: "On donne $u_n = 7 \\times 1{,}5^n$. Donner le premier terme $u_0$ et la raison, puis calculer $u_2$.",
           reponses: [
-            { question: "u_0", attendu: "7" },
+            { question: "u₀", attendu: "7" },
             { question: "raison", attendu: "1,5" },
-            { question: "u_2", attendu: "15,75" },
+            { question: "u₂", attendu: "15,75" },
           ],
           correction:
             "$u_0 = 7 \\times 1{,}5^0 = 7 \\times 1 = 7$.\nLa raison est le nombre élevé à la puissance $n$ : $q = 1{,}5$.\n$u_2 = 7 \\times 1{,}5^2 = 7 \\times 2{,}25 = 15{,}75$.\n⚠️ $1{,}5^0 = 1$, et pas $0$ : un nombre non nul à la puissance $0$ vaut toujours $1$.",
@@ -113,7 +113,7 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
           enonce: "On donne $u_n = 400 \\times 0{,}9^n$. Quel est le sens de variation de $(u_n)$ ? Le vérifier sur $u_0$, $u_1$ et $u_2$.",
           reponses: [
             { question: "sens", attendu: "décroissante" },
-            { question: "u_0 ; u_1 ; u_2", attendu: "400 ; 360 ; 324", ordre: true },
+            { question: "u₀ ; u₁ ; u₂", attendu: "400 ; 360 ; 324", ordre: true },
           ],
           correction:
             "$u_0 = 400 > 0$ et la raison $q = 0{,}9$ est entre $0$ et $1$ : la suite est décroissante.\n$u_0 = 400$ ; $u_1 = 400 \\times 0{,}9 = 360$ ; $u_2 = 400 \\times 0{,}81 = 324$ : les termes baissent bien.\n⭐ $q = 0{,}9$, c'est une baisse de $10$ % à chaque étape.\nSur le dessin, les termes en centaines : ils descendent.",
@@ -123,9 +123,9 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
         {
           enonce: "Une suite géométrique vérifie $u_1 = 6$ et a pour raison $q = 3$. Calculer $u_0$, exprimer $u_n$ en fonction de $n$, puis calculer $u_4$.",
           reponses: [
-            { question: "u_0", attendu: "2" },
-            { question: "u_n", attendu: "2×3^n" },
-            { question: "u_4", attendu: "162" },
+            { question: "u₀", attendu: "2" },
+            { question: "uₙ", attendu: "2×3^n" },
+            { question: "u₄", attendu: "162" },
           ],
           correction:
             "On recule d'un rang en divisant par la raison : $u_0 = \\dfrac{6}{3} = 2$.\nDonc $u_n = 2 \\times 3^n$.\n$u_4 = 2 \\times 3^4 = 2 \\times 81 = 162$.\n⚠️ Écrire $u_n = 6 \\times 3^n$ serait faux : la formule part de $u_0$, pas de $u_1$. Elle donnerait $u_1 = 18$, au lieu de $6$.",
@@ -135,7 +135,7 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
         {
           enonce: "On donne $u_n = 6 \\times 0{,}5^n$. Calculer $u_0$, $u_1$, $u_2$, $u_3$ et $u_4$, puis placer les points $(n ; u_n)$ dans un repère.",
           reponses: [
-            { question: "u_0 à u_4", attendu: "6 ; 3 ; 1,5 ; 0,75 ; 0,375", ordre: true },
+            { question: "u₀ à u₄", attendu: "6 ; 3 ; 1,5 ; 0,75 ; 0,375", ordre: true },
           ],
           correction:
             "$u_0 = 6$ ; $u_1 = 3$ ; $u_2 = 1{,}5$ ; $u_3 = 0{,}75$ ; $u_4 = 0{,}375$.\nOn place les points $(0 ; 6)$, $(1 ; 3)$, $(2 ; 1{,}5)$, $(3 ; 0{,}75)$ et $(4 ; 0{,}375)$.\n⭐ Les points ne sont pas alignés : ils descendent de moins en moins vite, et s'approchent de l'axe sans jamais le toucher.\n⚠️ On ne relie pas les points : une suite n'a de valeurs qu'aux rangs entiers.",
@@ -194,8 +194,8 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: "12×0,9^n" },
             { question: "b)", attendu: "décroissante" },
-            { question: "c) U_3", attendu: "8,75", tolerance: 0.01 },
-            { question: "c) U_5", attendu: "7,09", tolerance: 0.01 },
+            { question: "c) U₃", attendu: "8,75", tolerance: 0.01 },
+            { question: "c) U₅", attendu: "7,09", tolerance: 0.01 },
           ],
           correction:
             "a) Baisser de $10$ %, c'est multiplier par $0{,}9$ : $U_n = 12 \\times 0{,}9^n$.\nb) $U_0 = 12 > 0$ et $0 < 0{,}9 < 1$ : la suite est décroissante. La tension baisse à chaque seconde.\nc) $U_3 = 12 \\times 0{,}9^3 = 12 \\times 0{,}729 = 8{,}748$, soit environ $8{,}75$ V.\n$U_5 = 12 \\times 0{,}9^5 \\approx 7{,}09$ V : c'est la tension au bout de $5$ secondes.\n⚠️ En $5$ secondes, la tension n'a pas perdu $50$ % : il reste plus de la moitié des $12$ V.\nSur le dessin, les points descendent de moins en moins vite.",
@@ -222,10 +222,10 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
           ]),
           reponses: [
             { question: "a)", attendu: "3×1,02^n" },
-            { question: "b) p_10", attendu: "3,66", tolerance: 0.01 },
-            { question: "b) année de p_10", attendu: "1970" },
-            { question: "b) p_40", attendu: "6,62", tolerance: 0.01 },
-            { question: "b) année de p_40", attendu: "2000" },
+            { question: "b) p₁₀", attendu: "3,66", tolerance: 0.01 },
+            { question: "b) année de p₁₀", attendu: "1970" },
+            { question: "b) p₄₀", attendu: "6,62", tolerance: 0.01 },
+            { question: "b) année de p₄₀", attendu: "2000" },
             { question: "c)", attendu: ["trop", "trop d'habitants"] },
           ],
           correction:
@@ -289,12 +289,12 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
           enonce:
             "Dans une culture, on compte $1\\,000$ bactéries. Sans traitement, leur nombre augmente de $10$ % par heure ; avec un traitement, il baisse de $30$ % par heure (modèles). On note $v_n$ et $u_n$ le nombre de bactéries au bout de $n$ heures, sans et avec traitement.\na) Exprimer $v_n$ et $u_n$ en fonction de $n$.\nb) Donner le sens de variation de chaque suite.\nc) Calculer $v_3$ et $u_3$. Représenter les termes de $n = 0$ à $n = 4$, en centaines.",
           reponses: [
-            { question: "a) v_n", attendu: "1 000×1,1^n" },
-            { question: "a) u_n", attendu: "1 000×0,7^n" },
-            { question: "b) v_n", attendu: "croissante" },
-            { question: "b) u_n", attendu: "décroissante" },
-            { question: "c) v_3", attendu: "1 331" },
-            { question: "c) u_3", attendu: "343" },
+            { question: "a) vₙ", attendu: "1 000×1,1^n" },
+            { question: "a) uₙ", attendu: "1 000×0,7^n" },
+            { question: "b) vₙ", attendu: "croissante" },
+            { question: "b) uₙ", attendu: "décroissante" },
+            { question: "c) v₃", attendu: "1 331" },
+            { question: "c) u₃", attendu: "343" },
           ],
           correction:
             "a) $v_n = 1\\,000 \\times 1{,}1^n$ et $u_n = 1\\,000 \\times 0{,}7^n$.\nb) $1{,}1 > 1$ : $(v_n)$ est croissante. $0 < 0{,}7 < 1$ : $(u_n)$ est décroissante.\nc) $v_3 = 1\\,000 \\times 1{,}331 = 1\\,331$ bactéries ; $u_3 = 1\\,000 \\times 0{,}343 = 343$ bactéries.\nSur le dessin, en centaines : les points rouges sont ceux de $v_n$, les points reliés en orange ceux de $u_n$. Les deux partent de $10$ centaines, puis s'écartent.\n⭐ Même départ, deux raisons : c'est la raison, et elle seule, qui décide du sens.",
@@ -313,7 +313,7 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
             "La surface boisée d'une région, en milliers d'hectares, est modélisée par $f_n = 250 \\times 0{,}98^n$, où $n$ est le nombre d'années après 2020.\na) Que représentent $250$ et $0{,}98$ ?\nb) Quel est le sens de variation de $(f_n)$ ? Que traduit-il ?\nc) Calculer $f_{10}$ au dixième. Quelle surface la région aura-t-elle perdue en dix ans ?",
           reponses: [
             { question: "b)", attendu: "décroissante" },
-            { question: "c) f_10", attendu: "204,3", tolerance: 0.1 },
+            { question: "c) f₁₀", attendu: "204,3", tolerance: 0.1 },
             { question: "c) perte", attendu: "45,7", tolerance: 0.1 },
           ],
           correction:
@@ -362,10 +362,10 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
           enonce:
             "Un café à $80$ °C est posé dans une pièce à $20$ °C. L'écart de température entre le café et la pièce diminue de $20$ % chaque minute (modèle). On note $E_n$ cet écart, en °C, au bout de $n$ minutes, et $T_n$ la température du café.\na) Calculer $E_0$. Exprimer $E_n$ en fonction de $n$.\nb) En déduire $T_n$ en fonction de $n$, puis la température du café au bout de $5$ minutes (au dixième).\nc) La suite $(T_n)$ est-elle géométrique ? Quel est son sens de variation ?\nd) Représenter $E_0$ à $E_5$. Selon le modèle, le café atteindra-t-il $20$ °C ?",
           reponses: [
-            { question: "a) E_0", attendu: "60" },
-            { question: "a) E_n", attendu: "60×0,8^n" },
-            { question: "b) T_n", attendu: "20 + 60×0,8^n" },
-            { question: "b) T_5", attendu: "39,7", tolerance: 0.1 },
+            { question: "a) E₀", attendu: "60" },
+            { question: "a) Eₙ", attendu: "60×0,8^n" },
+            { question: "b) Tₙ", attendu: "20 + 60×0,8^n" },
+            { question: "b) T₅", attendu: "39,7", tolerance: 0.1 },
             { question: "c) géométrique ?", attendu: ["non", "faux"] },
             { question: "c) sens", attendu: "décroissante" },
             { question: "d)", attendu: ["non", "faux"] },
@@ -387,11 +387,11 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
           enonce:
             "Un salarié gagne $2\\,000$ € par mois en 2025. Son salaire augmente de $1{,}5$ % par an ; les prix, eux, augmentent de $2$ % par an (modèles). On note $s_n$ son salaire en l'année $2025 + n$, et $p_n$ le prix d'un « panier » de dépenses qui coûte $2\\,000$ € en 2025.\na) Exprimer $s_n$ et $p_n$ en fonction de $n$. Quel est le sens de variation de chaque suite ?\nb) Calculer $s_{20}$ et $p_{20}$ à l'euro près. À quelle année correspondent-ils ?\nc) En 2045, son salaire lui permettra-t-il d'acheter le panier ? Que dire de son pouvoir d'achat ?",
           reponses: [
-            { question: "a) s_n", attendu: "2 000×1,015^n" },
-            { question: "a) p_n", attendu: "2 000×1,02^n" },
+            { question: "a) sₙ", attendu: "2 000×1,015^n" },
+            { question: "a) pₙ", attendu: "2 000×1,02^n" },
             { question: "a) sens", attendu: ["croissantes", "croissante"] },
-            { question: "b) s_20", attendu: "2 694", tolerance: 1 },
-            { question: "b) p_20", attendu: "2 972", tolerance: 1 },
+            { question: "b) s₂₀", attendu: "2 694", tolerance: 1 },
+            { question: "b) p₂₀", attendu: "2 972", tolerance: 1 },
             { question: "b) année", attendu: "2045" },
             { question: "c)", attendu: ["non", "faux"] },
           ],
@@ -411,7 +411,7 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: "5 000×1,2^n" },
             { question: "a) sens", attendu: "croissante" },
-            { question: "b) a_1 à a_5", attendu: "6 000 ; 7 200 ; 8 640 ; 10 368 ; 12 442", ordre: true, tolerance: 1 },
+            { question: "b) a₁ à a₅", attendu: "6 000 ; 7 200 ; 8 640 ; 10 368 ; 12 442", ordre: true, tolerance: 1 },
             { question: "c)", attendu: "4" },
           ],
           correction:

@@ -145,8 +145,8 @@ export const exercicesLinSeuilPremiere: FicheExercicesData = {
         {
           enonce: "Une suite est définie par $u_n = 1\\,000 + 250n$. Déterminer le plus petit entier $n$ tel que $u_n \\geq 3\\,000$, puis le plus petit entier $n$ tel que $u_n > 3\\,000$.",
           reponses: [
-            { question: "u_n ≥ 3 000", attendu: "8" },
-            { question: "u_n > 3 000", attendu: "9" },
+            { question: "uₙ ≥ 3 000", attendu: "8" },
+            { question: "uₙ > 3 000", attendu: "9" },
           ],
           correction:
             "$1\\,000 + 250n \\geq 3\\,000$ donne $250n \\geq 2\\,000$, donc $n \\geq 8$ : le plus petit entier est $n = 8$, car $u_8 = 1\\,000 + 250 \\times 8 = 3\\,000$ exactement.\nAvec une inégalité STRICTE, $u_n > 3\\,000$ : $n > 8$, et le plus petit entier est $n = 9$.\n⚠️ « Au moins » ($\\geq$) et « plus de » ($>$) ne donnent pas la même réponse quand le seuil tombe pile sur un terme. Le tableau le montre : $u_8$ vaut exactement $3\\,000$.",

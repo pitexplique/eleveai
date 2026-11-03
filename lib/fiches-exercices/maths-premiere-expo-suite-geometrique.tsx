@@ -87,9 +87,9 @@ export const exercicesExpoSuiteGeometriquePremiere: FicheExercicesData = {
         {
           enonce: "La suite $(u_n)$ est définie par $u_0 = 4$ et $u_{n+1} = 3 \\times u_n$. Calculer $u_1$, $u_2$ et $u_3$.",
           reponses: [
-            { question: "u_1", attendu: "12" },
-            { question: "u_2", attendu: "36" },
-            { question: "u_3", attendu: "108" },
+            { question: "u₁", attendu: "12" },
+            { question: "u₂", attendu: "36" },
+            { question: "u₃", attendu: "108" },
           ],
           correction:
             "La relation dit : pour avoir le terme suivant, on multiplie par $3$.\n$u_1 = 3 \\times u_0 = 3 \\times 4 = 12$.\n$u_2 = 3 \\times u_1 = 3 \\times 12 = 36$.\n$u_3 = 3 \\times u_2 = 3 \\times 36 = 108$.\n⚠️ Entre $u_0$ et $u_3$, il y a TROIS multiplications par $3$, pas une seule.",
@@ -121,10 +121,10 @@ export const exercicesExpoSuiteGeometriquePremiere: FicheExercicesData = {
         {
           enonce: "On donne $u_0 = 800$, et chaque terme est la moitié du précédent. Écrire la relation de récurrence, puis calculer $u_1$, $u_2$, $u_3$ et $u_4$.",
           reponses: [
-            { question: "u_1", attendu: "400" },
-            { question: "u_2", attendu: "200" },
-            { question: "u_3", attendu: "100" },
-            { question: "u_4", attendu: "50" },
+            { question: "u₁", attendu: "400" },
+            { question: "u₂", attendu: "200" },
+            { question: "u₃", attendu: "100" },
+            { question: "u₄", attendu: "50" },
           ],
           correction:
             "« La moitié », c'est multiplier par $0{,}5$ : $u_{n+1} = 0{,}5 \\times u_n$.\n$u_1 = 0{,}5 \\times 800 = 400$ ; $u_2 = 0{,}5 \\times 400 = 200$ ; $u_3 = 0{,}5 \\times 200 = 100$ ; $u_4 = 0{,}5 \\times 100 = 50$.\n⭐ Les termes diminuent, mais restent strictement positifs : diviser par $2$ n'atteint jamais $0$.\n⚠️ Diviser par $2$, ce n'est pas « enlever $2$ » : $u_1$ ne vaut pas $798$.\nSur le dessin, les termes sont en centaines.",
@@ -155,8 +155,8 @@ export const exercicesExpoSuiteGeometriquePremiere: FicheExercicesData = {
           enonce: "Une suite géométrique vérifie $u_2 = 45$ et $u_3 = 54$. Calculer sa raison, puis $u_4$ et $u_1$.",
           reponses: [
             { question: "raison", attendu: "1,2" },
-            { question: "u_4", attendu: "64,8" },
-            { question: "u_1", attendu: "37,5" },
+            { question: "u₄", attendu: "64,8" },
+            { question: "u₁", attendu: "37,5" },
           ],
           correction:
             "La raison est le quotient de deux termes CONSÉCUTIFS : $q = \\dfrac{u_3}{u_2} = \\dfrac{54}{45} = 1{,}2$.\n$u_4 = 1{,}2 \\times 54 = 64{,}8$.\nPour reculer d'un rang, on DIVISE par la raison : $u_1 = \\dfrac{45}{1{,}2} = 37{,}5$.\n✔️ Vérification : $1{,}2 \\times 37{,}5 = 45$.\n⚠️ $54 - 45 = 9$ n'est pas la raison : dans une suite géométrique, on divise, on ne soustrait pas.\nSur le dessin, les termes $u_1$ à $u_4$, en dizaines : chaque point est $1{,}2$ fois plus haut que le précédent.",
@@ -184,9 +184,9 @@ export const exercicesExpoSuiteGeometriquePremiere: FicheExercicesData = {
             "Léa place $2\\,500$ € sur un livret qui rapporte $2$ % par an, les intérêts restant sur le livret (modèle). On note $u_n$ le capital au bout de $n$ années ; $u_0 = 2\\,500$.\na) Justifier que la suite $(u_n)$ est géométrique ; donner sa raison.\nb) Écrire la relation de récurrence.\nc) Calculer $u_1$, $u_2$ et $u_3$, au centime près.",
           reponses: [
             { question: "a)", attendu: "1,02" },
-            { question: "c) u_1", attendu: "2 550" },
-            { question: "c) u_2", attendu: "2 601" },
-            { question: "c) u_3", attendu: "2 653,02" },
+            { question: "c) u₁", attendu: "2 550" },
+            { question: "c) u₂", attendu: "2 601" },
+            { question: "c) u₃", attendu: "2 653,02" },
           ],
           correction:
             "a) Chaque année, le capital augmente de $2$ % : il est multiplié par $1{,}02$. La suite est géométrique, de raison $q = 1{,}02$.\nb) $u_{n+1} = 1{,}02 \\times u_n$.\nc) $u_1 = 1{,}02 \\times 2\\,500 = 2\\,550$ €.\n$u_2 = 1{,}02 \\times 2\\,550 = 2\\,601$ €.\n$u_3 = 1{,}02 \\times 2\\,601 = 2\\,653{,}02$ €.\n⭐ La deuxième année rapporte $51$ €, plus que la première ($50$ €) : les intérêts rapportent à leur tour des intérêts.",
@@ -199,10 +199,10 @@ export const exercicesExpoSuiteGeometriquePremiere: FicheExercicesData = {
             "Dans l'eau d'un lac, chaque mètre de profondeur absorbe $20$ % de la lumière qui l'atteint (modèle). À la surface, l'intensité vaut $100$ (en pourcentage de la lumière du jour). On note $u_n$ l'intensité à $n$ mètres de profondeur.\na) Quelle est la raison de la suite géométrique $(u_n)$ ?\nb) Calculer $u_1$, $u_2$, $u_3$ et $u_4$.\nc) Une plante aquatique a besoin d'au moins $50$ % de la lumière du jour (modèle). Peut-elle vivre à $3$ m ? à $4$ m ?",
           reponses: [
             { question: "a)", attendu: "0,8" },
-            { question: "b) u_1", attendu: "80" },
-            { question: "b) u_2", attendu: "64" },
-            { question: "b) u_3", attendu: "51,2" },
-            { question: "b) u_4", attendu: "40,96" },
+            { question: "b) u₁", attendu: "80" },
+            { question: "b) u₂", attendu: "64" },
+            { question: "b) u₃", attendu: "51,2" },
+            { question: "b) u₄", attendu: "40,96" },
             { question: "c) 3 m", attendu: ["oui", "vrai"] },
             { question: "c) 4 m", attendu: ["non", "faux"] },
           ],
@@ -259,9 +259,9 @@ export const exercicesExpoSuiteGeometriquePremiere: FicheExercicesData = {
             "Dans une commune, chaque habitant produisait $500$ kg de déchets en 2024. Grâce au tri et au compost, la commune vise une baisse de $4$ % par an (modèle). On note $d_n$ la masse de déchets par habitant, en kg, en l'année $2024 + n$.\na) Quelle est la raison de la suite $(d_n)$ ? Écrire la relation de récurrence.\nb) Calculer $d_1$, $d_2$ et $d_3$ (au dixième).\nc) À quelle année correspond $d_3$ ? La baisse sur trois ans est-elle de $12$ % ?",
           reponses: [
             { question: "a)", attendu: "0,96" },
-            { question: "b) d_1", attendu: "480" },
-            { question: "b) d_2", attendu: "460,8" },
-            { question: "b) d_3", attendu: "442,4", tolerance: 0.1 },
+            { question: "b) d₁", attendu: "480" },
+            { question: "b) d₂", attendu: "460,8" },
+            { question: "b) d₃", attendu: "442,4", tolerance: 0.1 },
             { question: "c) année", attendu: "2027" },
             { question: "c) 12 % ?", attendu: ["non", "faux"] },
           ],
@@ -288,13 +288,13 @@ export const exercicesExpoSuiteGeometriquePremiere: FicheExercicesData = {
             { x: 3, y: 6.75 },
           ]),
           reponses: [
-            { question: "a) u_0", attendu: "2" },
-            { question: "a) u_1", attendu: "3" },
-            { question: "a) u_2", attendu: "4,5" },
+            { question: "a) u₀", attendu: "2" },
+            { question: "a) u₁", attendu: "3" },
+            { question: "a) u₂", attendu: "4,5" },
             { question: "b) raison", attendu: "1,5" },
             { question: "b) taux", attendu: ["+50 %", "50 %"] },
-            { question: "c) u_3", attendu: "6,75" },
-            { question: "c) u_4", attendu: "10,125" },
+            { question: "c) u₃", attendu: "6,75" },
+            { question: "c) u₄", attendu: "10,125" },
           ],
           correction:
             "a) $u_0 = 2$ ; $u_1 = 3$ ; $u_2 = 4{,}5$ hectares.\nb) $\\dfrac{3}{2} = 1{,}5$ et $\\dfrac{4{,}5}{3} = 1{,}5$ : le même quotient. Raison $q = 1{,}5$, soit $+50$ % par semaine.\nc) $u_3 = 1{,}5 \\times 4{,}5 = 6{,}75$ : sur le graphique, le point d'abscisse $3$ est bien entre $6$ et $7$, aux trois quarts.\n$u_4 = 1{,}5 \\times 6{,}75 = 10{,}125$ hectares.\n⭐ Les points ne sont pas alignés : ils montent de plus en plus vite. C'est l'allure d'une suite géométrique de raison plus grande que $1$.",
@@ -305,9 +305,9 @@ export const exercicesExpoSuiteGeometriquePremiere: FicheExercicesData = {
           enonce:
             "Un patient reçoit une dose de $200$ mg d'un médicament. Chaque heure, son organisme en élimine $30$ % (modèle). On note $m_n$ la masse restante, en mg, au bout de $n$ heures.\na) Écrire la relation entre $m_{n+1}$ et $m_n$.\nb) Calculer $m_1$, $m_2$ et $m_3$.\nc) Au bout de $3$ heures, a-t-il éliminé $90$ % du médicament ?",
           reponses: [
-            { question: "b) m_1", attendu: "140" },
-            { question: "b) m_2", attendu: "98" },
-            { question: "b) m_3", attendu: "68,6" },
+            { question: "b) m₁", attendu: "140" },
+            { question: "b) m₂", attendu: "98" },
+            { question: "b) m₃", attendu: "68,6" },
             { question: "c)", attendu: ["non", "faux"] },
           ],
           correction:
@@ -359,11 +359,11 @@ export const exercicesExpoSuiteGeometriquePremiere: FicheExercicesData = {
           enonce:
             "Un pays compte $40$ millions d'habitants en 2000. On fait l'hypothèse (modèle) que sa population augmente de $2$ % par an. On note $p_n$ la population, en millions, en l'année $2000 + n$.\na) Justifier que $(p_n)$ est une suite géométrique ; donner $p_0$ et la raison.\nb) Calculer $p_1$, $p_2$ et $p_3$ (au centième).\nc) Un autre modèle ajoute $0{,}8$ million d'habitants par an. Donner ses valeurs pour 2001, 2002 et 2003.\nd) Lequel des deux modèles est géométrique ? Pourquoi l'écart entre eux grandit-il ?",
           reponses: [
-            { question: "a) p_0", attendu: "40" },
+            { question: "a) p₀", attendu: "40" },
             { question: "a) raison", attendu: "1,02" },
-            { question: "b) p_1", attendu: "40,8" },
-            { question: "b) p_2", attendu: "41,62", tolerance: 0.01 },
-            { question: "b) p_3", attendu: "42,45", tolerance: 0.01 },
+            { question: "b) p₁", attendu: "40,8" },
+            { question: "b) p₂", attendu: "41,62", tolerance: 0.01 },
+            { question: "b) p₃", attendu: "42,45", tolerance: 0.01 },
             { question: "c)", attendu: "40,8 ; 41,6 ; 42,4", ordre: true },
           ],
           correction:
@@ -384,13 +384,13 @@ export const exercicesExpoSuiteGeometriquePremiere: FicheExercicesData = {
             { x: 5, y: 1.6384 },
           ]),
           reponses: [
-            { question: "a) h_0", attendu: "5" },
-            { question: "a) h_1", attendu: "4" },
+            { question: "a) h₀", attendu: "5" },
+            { question: "a) h₁", attendu: "4" },
             { question: "a) raison", attendu: "0,8" },
             { question: "a) perte", attendu: ["20 %", "-20 %"] },
-            { question: "b) h_2", attendu: "3,2" },
-            { question: "b) h_3", attendu: "2,56" },
-            { question: "b) h_4", attendu: "2,048" },
+            { question: "b) h₂", attendu: "3,2" },
+            { question: "b) h₃", attendu: "2,56" },
+            { question: "b) h₄", attendu: "2,048" },
           ],
           correction:
             "a) $h_0 = 5$ et $h_1 = 4$. $q = \\dfrac{4}{5} = 0{,}8$ : chaque rebond garde $80$ % de la hauteur, il en fait perdre $20$ %.\nb) $h_2 = 0{,}8 \\times 4 = 3{,}2$ m ; $h_3 = 0{,}8 \\times 3{,}2 = 2{,}56$ m ; $h_4 = 0{,}8 \\times 2{,}56 = 2{,}048$ m. Les points du graphique sont bien à ces hauteurs.\nc) La perte n'est pas de $1$ m à chaque fois : $1$ m au premier rebond, puis $4 - 3{,}2 = 0{,}8$ m, puis $3{,}2 - 2{,}56 = 0{,}64$ m. Elle diminue, car elle vaut $20$ % d'une hauteur de plus en plus petite.\nDans le modèle, la hauteur reste strictement positive : elle n'atteint jamais $0$.\n⭐ En vrai, la balle finit par s'arrêter : le modèle est bon pour les premiers rebonds.\nSur le dessin, la droite orange est l'idée du joueur : elle touche $0$ au $5$e rebond.",
@@ -410,11 +410,11 @@ export const exercicesExpoSuiteGeometriquePremiere: FicheExercicesData = {
           enonce:
             "Un smartphone neuf coûte $800$ €. On estime (modèle) qu'il perd $25$ % de sa valeur chaque année. On note $v_n$ sa valeur, en euros, au bout de $n$ années.\na) Donner $v_0$, la raison de la suite $(v_n)$ et la relation de récurrence.\nb) Calculer $v_1$, $v_2$ et $v_3$.\nc) Un vendeur dit : « Au bout de $4$ ans, il ne vaut plus rien, puisque $4 \\times 25 = 100$ %. » Calculer $v_4$ au centime et conclure.\nd) Au bout de combien d'années vaut-il moins de la moitié de son prix neuf ?",
           reponses: [
-            { question: "a) v_0", attendu: "800" },
+            { question: "a) v₀", attendu: "800" },
             { question: "a) raison", attendu: "0,75" },
-            { question: "b) v_1", attendu: "600" },
-            { question: "b) v_2", attendu: "450" },
-            { question: "b) v_3", attendu: "337,5" },
+            { question: "b) v₁", attendu: "600" },
+            { question: "b) v₂", attendu: "450" },
+            { question: "b) v₃", attendu: "337,5" },
             { question: "c)", attendu: "253,13", tolerance: 0.01 },
             { question: "d)", attendu: "3" },
           ],
@@ -436,10 +436,10 @@ export const exercicesExpoSuiteGeometriquePremiere: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: ["géométrique", "suite géométrique"] },
             { question: "a) raison", attendu: "1,25" },
-            { question: "b) c_1", attendu: "50" },
-            { question: "b) c_2", attendu: "62,5" },
-            { question: "b) c_3", attendu: "78,125" },
-            { question: "b) c_4", attendu: "97,65625" },
+            { question: "b) c₁", attendu: "50" },
+            { question: "b) c₂", attendu: "62,5" },
+            { question: "b) c₃", attendu: "78,125" },
+            { question: "b) c₄", attendu: "97,65625" },
             { question: "c) 2028", attendu: ["non", "faux"] },
             { question: "c) 2029", attendu: ["oui", "vrai"] },
           ],
