@@ -214,6 +214,7 @@ const supportLinks: Record<string, string[]> = {
   va_loi_probabilite: ["va_definition"],
   va_esperance: ["va_loi_probabilite"],
   va_variance_ecart_type: ["va_esperance"],
+  va_somme: ["va_variance_ecart_type", "va_esperance"],
   va_interpreter: ["va_variance_ecart_type"],
   va_defi: [
     "va_interpreter",
@@ -232,6 +233,7 @@ const supportLinks: Record<string, string[]> = {
   binomiale_esperance_variance: [
     "binomiale_calculer",
     "va_variance_ecart_type",
+    "va_somme",
   ],
   binomiale_intervalle: ["binomiale_calculer"],
   binomiale_defi: [

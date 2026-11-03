@@ -7,6 +7,8 @@
 //   va_loi_probabilite     — Déterminer la loi d'une variable aléatoire
 //   va_esperance           — Calculer une espérance (et E(aX + b))
 //   va_variance_ecart_type — Calculer une variance, un écart-type (et V(aX + b))
+//   va_somme               — Additionner des variables aléatoires (E(X + Y),
+//                            V(X + Y) si indépendantes, Bernoulli → binomiale, Sₙ)
 //   va_interpreter         — Interpréter espérance, écart-type, jeu équitable
 //   va_defi                — Exercice type bac
 //
@@ -1680,12 +1682,659 @@ function defiSigmaMise(): Q {
 }
 
 /* =========================================================================
+   VA_SOMME — Additionner des variables aléatoires (03/11/2026).
+   BO Tle spé « Sommes de variables aléatoires » :
+     · E(X + Y) = E(X) + E(Y) et E(aX) = aE(X), TOUJOURS ;
+     · V(X + Y) = V(X) + V(Y) si X et Y sont INDÉPENDANTES ; V(aX) = a²V(X) ;
+     · binomiale = somme de n Bernoulli indépendantes : E = np, V = np(1 − p) ;
+     · Sₙ = X₁ + … + Xₙ (indépendantes, même loi) : E(Sₙ) = nE(X),
+       V(Sₙ) = nV(X), σ(Sₙ) = √n σ(X).
+   La moyenne Mₙ est dans concentration_echantillonnage : pas ici.
+   Leurres : a·V au lieu de a²·V, V(X − Y) = V(X) − V(Y), E(XY) = E(X)E(Y),
+   oubli du n, n²V (c'est V(nX), pas V(Sₙ)), écarts-types additionnés.
+========================================================================= */
+const LETTRES_S: [string, string][] = [["X", "Y"], ["A", "B"], ["U", "W"], ["L", "M"], ["G", "H"], ["X", "Z"]];
+/** Un nombre tiré : entier, ou au dixième si `dec`. */
+const tirR = (lo: number, hi: number, dec = false): R => (dec ? r(ri(Math.round(lo * 10), Math.round(hi * 10)), 10) : r(ri(lo, hi)));
+/** Un écart-type tiré dont le carré tombe dans [v0 ; v1]. */
+function tirSigma(v0: number, v1: number, dec = false): R {
+  const k = dec ? 10 : 1;
+  const lo = Math.max(1, Math.ceil(Math.sqrt(v0) * k));
+  const hi = Math.max(lo, Math.floor(Math.sqrt(v1) * k));
+  return r(ri(lo, hi), k);
+}
+const absR = (a: R) => r(Math.abs(a.n), a.d);
+const carre = (a: R) => mul(a, a);
+/** « (-3) » quand c'est négatif (dans un calcul). */
+const par = (a: R) => (a.n < 0 ? `(${tx(a)})` : tx(a));
+/** « 3A + 2B - 5 » (coefficients entiers non nuls pour a). */
+function comb(a: number, A: string, b: number, B: string, c = 0): string {
+  const t1 = a === 1 ? A : a === -1 ? `-${A}` : `${a}${A}`;
+  const t2 = b === 0 ? "" : ` ${b < 0 ? "-" : "+"} ${Math.abs(b) === 1 ? "" : Math.abs(b)}${B}`;
+  const t3 = c === 0 ? "" : ` ${c < 0 ? "-" : "+"} ${Math.abs(c)}`;
+  return t1 + t2 + t3;
+}
+/** Réponse courte NUMÉRIQUE (la valeur tombe juste en décimal). */
+const court = (bon: R): Pick<Q, "format" | "expected" | "comparator"> => ({ format: "short", expected: [brut(bon)], comparator: "number_equal" });
+/** QCM aux vrais leurres, ou (4 fois sur 10 si `courtOk`) réponse courte numérique. */
+function qcmOuCourt(bon: R, pieges: R[], courtOk = false): Pick<Q, "format" | "choices" | "expected" | "comparator"> {
+  if (courtOk && estDecimal(bon) && Math.random() < 0.4) return court(bon);
+  return { format: "qcm", ...qcmR(bon, pieges), comparator: "mcq_exact" };
+}
+const qcmArr = (bon: number, pieges: number[]): Pick<Q, "format" | "choices" | "expected" | "comparator"> => ({ format: "qcm", ...qcmN(bon, pieges), comparator: "mcq_exact" });
+const a2 = (x: number) => arr2(x).slice(1, -1);
+const DEF_SE = "Linéarité de l'espérance : $E(X + Y) = E(X) + E(Y)$ et $E(aX) = a\\,E(X)$, que $X$ et $Y$ soient indépendantes ou non.";
+const DEF_SV = "Si $X$ et $Y$ sont INDÉPENDANTES : $V(X + Y) = V(X) + V(Y)$. Pour tout réel $a$ : $V(aX) = a^2\\,V(X)$.";
+const DEF_SN = "Si $X_1, \\dots, X_n$ sont indépendantes et de même loi que $X$, et $S_n = X_1 + \\dots + X_n$ : $E(S_n) = n\\,E(X)$, $V(S_n) = n\\,V(X)$, $\\sigma(S_n) = \\sqrt{n}\\,\\sigma(X)$.";
+const DEF_SB = "Une variable de Bernoulli de paramètre $p$ a pour espérance $p$ et pour variance $p(1 - p)$. Si $S = X_1 + \\dots + X_n$ (Bernoulli indépendantes), $S$ suit $\\mathcal{B}(n\\,;p)$, $E(S) = np$ et $V(S) = np(1 - p)$.";
+const indep = () => pick(["On suppose que $X$ et $Y$ sont indépendantes.", "Les variables $X$ et $Y$ sont supposées indépendantes.", "On admet que $X$ et $Y$ sont indépendantes."]);
+
+/* ---------- Les situations « deux grandeurs qui s'ajoutent » (métiers) ---------- */
+type DuoS = { ctx: string; X: string; Y: string; T: string; u: string; e: [number, number]; v: [number, number]; dec?: boolean; reunion?: boolean };
+const DUOS_S: DuoS[] = [
+  { ctx: "Une boulangère étudie ses ventes de baguettes.", X: "le nombre de baguettes vendues le matin", Y: "le nombre de baguettes vendues l'après-midi", T: "le nombre de baguettes vendues dans la journée", u: "", e: [80, 220], v: [40, 400] },
+  { ctx: "Un livreur compte ses colis.", X: "le nombre de colis livrés le matin", Y: "le nombre de colis livrés l'après-midi", T: "le nombre de colis livrés dans la journée", u: "", e: [20, 70], v: [9, 80] },
+  { ctx: "Un infirmier à domicile chronomètre ses tournées.", X: "la durée de sa tournée du matin, en minutes", Y: "la durée de sa tournée du soir, en minutes", T: "sa durée totale de tournée, en minutes", u: " min", e: [60, 180], v: [100, 900] },
+  { ctx: "Une plombière intervient chez un client.", X: "la durée du diagnostic, en minutes", Y: "la durée de la réparation, en minutes", T: "la durée totale de l'intervention, en minutes", u: " min", e: [10, 90], v: [16, 400] },
+  { ctx: "Un chef de restaurant prévoit ses commandes.", X: "le nombre de couverts servis le midi", Y: "le nombre de couverts servis le soir", T: "le nombre de couverts servis dans la journée", u: "", e: [30, 120], v: [25, 300] },
+  { ctx: "Un pharmacien compte les ordonnances qu'il reçoit.", X: "le nombre d'ordonnances du matin", Y: "le nombre d'ordonnances de l'après-midi", T: "le nombre d'ordonnances de la journée", u: "", e: [20, 90], v: [16, 200] },
+  { ctx: "Une électricienne établit le coût d'un chantier.", X: "le coût du matériel, en euros", Y: "le coût de la main-d'œuvre, en euros", T: "le coût total du chantier, en euros", u: " €", e: [80, 600], v: [400, 3600] },
+  { ctx: "Un technicien contrôle des flacons de parfum.", X: "la masse du flacon vide, en grammes", Y: "la masse du parfum versé, en grammes", T: "la masse du flacon rempli, en grammes", u: " g", e: [40, 150], v: [0.5, 4], dec: true },
+  { ctx: "Un chocolatier fabrique des bonbons fourrés.", X: "la masse de la coque en chocolat, en grammes", Y: "la masse de la ganache, en grammes", T: "la masse d'un bonbon, en grammes", u: " g", e: [3, 9], v: [0.1, 0.5], dec: true },
+  { ctx: "Une développeuse teste une application.", X: "le nombre de bugs trouvés par les tests automatiques", Y: "le nombre de bugs trouvés en relisant le code", T: "le nombre total de bugs trouvés", u: "", e: [5, 30], v: [4, 25] },
+  { ctx: "Une vétérinaire compte ses consultations de la semaine.", X: "le nombre de consultations pour des chiens", Y: "le nombre de consultations pour des chats", T: "le nombre total de consultations", u: "", e: [20, 80], v: [16, 100] },
+  { ctx: "Une chauffeuse de bus relève ses temps de trajet.", X: "la durée du trajet aller, en minutes", Y: "la durée du trajet retour, en minutes", T: "la durée de l'aller-retour, en minutes", u: " min", e: [25, 70], v: [4, 64] },
+  { ctx: "Une agricultrice récolte des tomates sur deux parcelles.", X: "la masse récoltée sur la première parcelle, en kg", Y: "la masse récoltée sur la seconde parcelle, en kg", T: "la masse totale récoltée, en kg", u: " kg", e: [50, 300], v: [100, 900] },
+  { ctx: "Un DJ enchaîne deux morceaux.", X: "la durée du premier morceau, en secondes", Y: "la durée du second morceau, en secondes", T: "la durée des deux morceaux enchaînés, en secondes", u: " s", e: [150, 300], v: [100, 900] },
+  { ctx: "Une gardienne de handball compte ses arrêts.", X: "le nombre d'arrêts en première mi-temps", Y: "le nombre d'arrêts en seconde mi-temps", T: "le nombre d'arrêts sur le match", u: "", e: [3, 12], v: [1, 9] },
+  { ctx: "Un basketteur compte ses points.", X: "le nombre de points marqués en première mi-temps", Y: "le nombre de points marqués en seconde mi-temps", T: "le nombre de points marqués sur le match", u: "", e: [4, 20], v: [4, 25] },
+  { ctx: "Un libraire suit ses ventes de la semaine.", X: "le nombre de livres vendus en magasin", Y: "le nombre de livres vendus en ligne", T: "le nombre total de livres vendus", u: "", e: [40, 200], v: [25, 400] },
+  { ctx: "Une standardiste compte les appels reçus.", X: "le nombre d'appels du matin", Y: "le nombre d'appels de l'après-midi", T: "le nombre d'appels de la journée", u: "", e: [30, 120], v: [25, 300] },
+  { ctx: "Un contrôleur aérien étudie les retards d'un vol.", X: "le retard au décollage, en minutes", Y: "le retard pris pendant le vol, en minutes", T: "le retard à l'arrivée, en minutes", u: " min", e: [5, 30], v: [4, 100] },
+  { ctx: "Un couturier confectionne une veste.", X: "le temps de coupe, en minutes", Y: "le temps de couture, en minutes", T: "le temps total de confection, en minutes", u: " min", e: [20, 180], v: [25, 400] },
+  { ctx: "Une coiffeuse compte les clients de son salon.", X: "le nombre de clients le vendredi", Y: "le nombre de clients le samedi", T: "le nombre de clients sur ces deux jours", u: "", e: [8, 30], v: [4, 25] },
+  { ctx: "Un garagiste répare une voiture.", X: "la durée du diagnostic, en minutes", Y: "la durée du changement de pièce, en minutes", T: "la durée totale de l'intervention, en minutes", u: " min", e: [15, 120], v: [25, 400] },
+  { ctx: "Une biologiste compte des colonies de bactéries dans deux boîtes de culture.", X: "le nombre de colonies de la boîte A", Y: "le nombre de colonies de la boîte B", T: "le nombre total de colonies", u: "", e: [20, 150], v: [16, 300] },
+  { ctx: "Une cycliste chronomètre une sortie.", X: "la durée de la montée, en minutes", Y: "la durée de la descente, en minutes", T: "la durée totale de la sortie, en minutes", u: " min", e: [20, 90], v: [4, 100] },
+  { ctx: "Un apiculteur récolte le miel de deux ruches.", X: "la masse de miel de la première ruche, en kg", Y: "la masse de miel de la seconde ruche, en kg", T: "la masse totale de miel, en kg", u: " kg", e: [8, 30], v: [1, 16] },
+  { ctx: "Une photographe garde les meilleures photos de deux séances.", X: "le nombre de photos gardées à la première séance", Y: "le nombre de photos gardées à la seconde séance", T: "le nombre total de photos gardées", u: "", e: [10, 60], v: [4, 64] },
+  { ctx: "Un maçon commande du ciment pour deux chantiers.", X: "le nombre de sacs utilisés sur le premier chantier", Y: "le nombre de sacs utilisés sur le second chantier", T: "le nombre total de sacs utilisés", u: "", e: [20, 100], v: [9, 144] },
+  { ctx: "Un planteur de canne de Saint-Benoît coupe deux parcelles.", X: "la masse de canne coupée sur la parcelle du haut, en tonnes", Y: "la masse de canne coupée sur la parcelle du bas, en tonnes", T: "la masse totale coupée, en tonnes", u: " t", e: [20, 80], v: [4, 64], reunion: true },
+  { ctx: "Un informaticien installe un logiciel.", X: "la durée du téléchargement, en secondes", Y: "la durée de l'installation, en secondes", T: "la durée totale, en secondes", u: " s", e: [30, 240], v: [25, 900] },
+  { ctx: "Un pâtissier suit ses ventes de gâteaux.", X: "le nombre de gâteaux vendus en vitrine", Y: "le nombre de gâteaux vendus sur commande", T: "le nombre total de gâteaux vendus", u: "", e: [10, 60], v: [9, 100] },
+  { ctx: "Un ambulancier chronomètre une intervention.", X: "le temps pour arriver sur place, en minutes", Y: "le temps pour rejoindre l'hôpital, en minutes", T: "la durée totale du trajet, en minutes", u: " min", e: [5, 25], v: [1, 25] },
+];
+
+/* ---------- Les situations « coût = aX + bY + c » ---------- */
+const frais = (c: number, plus: string, moins: string) => (c > 0 ? `, plus $${c}$ € ${plus}` : c < 0 ? `, moins $${-c}$ € ${moins}` : "");
+type Cout = { f: (a: number, b: number, c: number) => string; X: string; Y: string; T: string; A: number[]; B: number[]; C: number[]; eX: [number, number]; eY: [number, number]; v: [number, number] };
+const COUTS: Cout[] = [
+  { f: (a, b, c) => `Un plombier facture $${a}$ € l'heure de travail et $${b}$ € par pièce changée${frais(c, "de déplacement", "")}.`, X: "le nombre d'heures de travail d'une intervention", Y: "le nombre de pièces changées", T: "Le montant de la facture, en euros,", A: [40, 45, 50, 55, 60], B: [8, 10, 12, 15, 20], C: [20, 25, 30, 35, 40], eX: [1, 4], eY: [1, 5], v: [1, 4] },
+  { f: (a, b, c) => `Un taxi facture $${a}$ € par kilomètre et $${b}$ € par minute d'attente${frais(c, "de prise en charge", "")}.`, X: "le nombre de kilomètres d'une course", Y: "le nombre de minutes d'attente", T: "Le prix de la course, en euros,", A: [2, 3], B: [2, 3], C: [3, 4, 5], eX: [5, 30], eY: [2, 15], v: [4, 36] },
+  { f: (a, b, c) => `Un traiteur vend le plateau-repas $${a}$ € et le dessert $${b}$ €${frais(c, "de livraison", "")}.`, X: "le nombre de plateaux d'une commande", Y: "le nombre de desserts de la commande", T: "Le montant d'une commande, en euros,", A: [12, 15, 18, 20], B: [3, 4, 5, 6], C: [10, 15, 20], eX: [10, 40], eY: [5, 30], v: [4, 49] },
+  { f: (a, b, c) => `Une imprimerie facture $${a}$ € l'affiche grand format et $${b}$ € l'affiche petit format${frais(c, "de frais de dossier", "")}.`, X: "le nombre d'affiches grand format d'une commande", Y: "le nombre d'affiches petit format", T: "Le montant de la commande, en euros,", A: [8, 10, 12], B: [2, 3, 4], C: [5, 10, 15], eX: [5, 30], eY: [10, 60], v: [4, 36] },
+  { f: (a, b, c) => `Un loueur de vélos encaisse $${a}$ € par heure de vélo électrique et $${b}$ € par heure de vélo classique${frais(c, "de frais fixes", "de frais d'entretien")}.`, X: "le nombre d'heures de location de vélos électriques dans la journée", Y: "le nombre d'heures de location de vélos classiques", T: "La recette de la journée, en euros,", A: [8, 10, 12], B: [4, 5, 6], C: [0, -20, -30, -40], eX: [10, 40], eY: [10, 50], v: [9, 64] },
+  { f: (a, b, c) => `Une fleuriste vend le bouquet $${a}$ € et la plante en pot $${b}$ €${frais(c, "", "de frais de livraison")}.`, X: "le nombre de bouquets vendus dans la journée", Y: "le nombre de plantes vendues", T: "Sa recette de la journée, en euros,", A: [15, 20, 25, 30], B: [6, 8, 10, 12], C: [0, -10, -15, -25], eX: [5, 30], eY: [5, 25], v: [4, 25] },
+  { f: (a, b, c) => `Un hôtel facture $${a}$ € la nuit et $${b}$ € le repas${frais(c, "de taxe de séjour", "")}.`, X: "le nombre de nuits d'un séjour", Y: "le nombre de repas pris", T: "Le montant du séjour, en euros,", A: [60, 80, 90, 120], B: [12, 15, 18, 20], C: [5, 10], eX: [2, 7], eY: [2, 10], v: [1, 4] },
+  { f: (a, b, c) => `Un garagiste facture $${a}$ € l'heure de main-d'œuvre et $${b}$ € le litre d'huile${frais(c, "de forfait", "")}.`, X: "le nombre d'heures de main-d'œuvre d'une révision", Y: "le nombre de litres d'huile utilisés", T: "Le montant de la révision, en euros,", A: [50, 60, 70], B: [8, 10, 12], C: [15, 20, 30], eX: [1, 4], eY: [3, 6], v: [1, 4] },
+  { f: (a, b) => `Une cantine encaisse $${a}$ € par repas d'élève et $${b}$ € par repas d'adulte.`, X: "le nombre de repas d'élèves servis dans la journée", Y: "le nombre de repas d'adultes", T: "La recette de la journée, en euros,", A: [3, 4], B: [6, 7, 8], C: [0], eX: [150, 400], eY: [10, 40], v: [25, 400] },
+  { f: (a, b, c) => `Un musée vend le billet plein tarif $${a}$ € et le billet réduit $${b}$ €${frais(c, "", "de frais de billetterie")}.`, X: "le nombre de billets plein tarif vendus dans la journée", Y: "le nombre de billets réduits", T: "La recette de la journée, en euros,", A: [12, 15, 18], B: [6, 8, 9], C: [0, -30, -50], eX: [50, 300], eY: [30, 200], v: [25, 400] },
+  { f: (a, b) => `Une salle de sport vend l'abonnement mensuel $${a}$ € et la séance à l'unité $${b}$ €.`, X: "le nombre d'abonnements vendus dans le mois", Y: "le nombre de séances à l'unité vendues", T: "La recette du mois, en euros,", A: [30, 35, 40], B: [6, 8, 10], C: [0], eX: [20, 80], eY: [30, 150], v: [16, 144] },
+  { f: (a, b, c) => `Un électricien facture $${a}$ € l'heure et $${b}$ € le mètre de câble${frais(c, "de déplacement", "")}.`, X: "le nombre d'heures d'un chantier", Y: "le nombre de mètres de câble posés", T: "Le montant de la facture, en euros,", A: [45, 50, 55], B: [2, 3], C: [25, 30, 40], eX: [2, 8], eY: [10, 60], v: [1, 25] },
+  { f: (a, b, c) => `Une coopérative vend les pommes $${a}$ € le kilo et les mangues $${b}$ € le kilo${frais(c, "", "de frais de transport")}.`, X: "la masse de pommes vendue dans la journée, en kg", Y: "la masse de mangues vendue, en kg", T: "La recette de la journée, en euros,", A: [2, 3], B: [4, 5, 6], C: [-20, -30], eX: [50, 200], eY: [20, 100], v: [25, 225] },
+  { f: (a, b, c) => `Une agence de voyages vend le billet adulte $${a}$ € et le billet enfant $${b}$ €${frais(c, "de frais de dossier", "")}.`, X: "le nombre de billets adultes d'une réservation de groupe", Y: "le nombre de billets enfants", T: "Le montant de la réservation, en euros,", A: [200, 250, 300], B: [100, 120, 150], C: [15, 20, 25], eX: [4, 20], eY: [2, 15], v: [1, 9] },
+];
+
+/* ---------- Les situations « n fois la même grandeur » ---------- */
+type Repet = { ctx: string; Xi: string; S: string; u: string; e: [number, number]; v: [number, number]; dec?: boolean };
+const REPETS: Repet[] = [
+  { ctx: "Une machine remplit des paquets de riz ; un carton contient $n$ paquets.", Xi: "la masse du $i$-ième paquet, en grammes", S: "la masse totale du carton (sans l'emballage)", u: " g", e: [490, 510], v: [4, 25] },
+  { ctx: "Une caissière voit passer $n$ clients d'affilée.", Xi: "la durée de passage du $i$-ième client, en minutes", S: "la durée totale de passage", u: " min", e: [2, 6], v: [0.5, 3], dec: true },
+  { ctx: "Un ascenseur transporte $n$ personnes.", Xi: "la masse de la $i$-ième personne, en kg", S: "la charge totale", u: " kg", e: [60, 80], v: [100, 225] },
+  { ctx: "Une serveuse s'occupe de $n$ tables dans la soirée.", Xi: "le pourboire laissé à la $i$-ième table, en euros", S: "le total des pourboires", u: " €", e: [2, 6], v: [1, 4], dec: true },
+  { ctx: "Un serveur informatique traite $n$ requêtes à la suite.", Xi: "la durée de traitement de la $i$-ième requête, en millisecondes", S: "la durée totale de traitement", u: " ms", e: [20, 80], v: [16, 100] },
+  { ctx: "Un livreur effectue $n$ livraisons dans sa tournée.", Xi: "la durée de la $i$-ième livraison, en minutes", S: "la durée totale des livraisons", u: " min", e: [5, 15], v: [4, 16] },
+  { ctx: "Une électricienne installe $n$ prises dans un bâtiment.", Xi: "la longueur de câble utilisée pour la $i$-ième prise, en mètres", S: "la longueur totale de câble", u: " m", e: [5, 15], v: [1, 4], dec: true },
+  { ctx: "Un boulanger façonne $n$ pains.", Xi: "la masse de pâte du $i$-ième pain, en grammes", S: "la masse totale de pâte", u: " g", e: [250, 400], v: [25, 100] },
+  { ctx: "Une infirmière fait $n$ soins dans sa matinée.", Xi: "la durée du $i$-ième soin, en minutes", S: "la durée totale des soins", u: " min", e: [10, 25], v: [4, 25] },
+  { ctx: "Un producteur de bananes charge $n$ régimes dans un camion.", Xi: "la masse du $i$-ième régime, en kg", S: "la masse totale chargée", u: " kg", e: [25, 45], v: [9, 36] },
+  { ctx: "Une traductrice traduit un document de $n$ pages.", Xi: "le nombre de mots de la $i$-ième page", S: "le nombre total de mots", u: "", e: [250, 400], v: [400, 1600] },
+  { ctx: "Un carreleur aligne $n$ carreaux le long d'un mur.", Xi: "la largeur du $i$-ième carreau posé (joint compris), en mm", S: "la longueur totale de la rangée", u: " mm", e: [200, 300], v: [1, 4] },
+  { ctx: "Une joueuse de bowling fait $n$ lancers.", Xi: "le nombre de quilles renversées au $i$-ième lancer", S: "le nombre total de quilles renversées", u: "", e: [5, 9], v: [1, 6], dec: true },
+  { ctx: "Un testeur lance $n$ tests automatiques à la suite.", Xi: "la durée du $i$-ième test, en secondes", S: "la durée totale des tests", u: " s", e: [10, 60], v: [4, 49] },
+  { ctx: "Une DJ prépare une playlist de $n$ titres.", Xi: "la durée du $i$-ième titre, en secondes", S: "la durée totale de la playlist", u: " s", e: [180, 260], v: [400, 900] },
+  { ctx: "Une archiviste range $n$ dossiers dans une boîte.", Xi: "l'épaisseur du $i$-ième dossier, en mm", S: "l'épaisseur totale", u: " mm", e: [8, 20], v: [1, 9] },
+  { ctx: "Un vigneron remplit $n$ bouteilles.", Xi: "le volume versé dans la $i$-ième bouteille, en mL", S: "le volume total versé", u: " mL", e: [745, 755], v: [1, 9] },
+];
+
+/* ---------- Les situations « on compte les succès » (Bernoulli) ---------- */
+type Binom = { ctx: string; ev: string; S: string; p?: number[] };
+const BINOMS: Binom[] = [
+  { ctx: "Une contrôleuse qualité prélève $n$ pièces dans une très grande production ; chaque pièce est défectueuse avec la probabilité $p$, indépendamment des autres.", ev: "la $i$-ième pièce est défectueuse", S: "le nombre de pièces défectueuses" },
+  { ctx: "Une pharmacienne reçoit $n$ ordonnances ; chacune comporte un médicament générique avec la probabilité $p$, indépendamment des autres.", ev: "la $i$-ième ordonnance comporte un générique", S: "le nombre d'ordonnances avec un générique" },
+  { ctx: "Une basketteuse tire $n$ lancers francs ; elle réussit chaque lancer avec la probabilité $p$, indépendamment des autres.", ev: "le $i$-ième lancer est réussi", S: "le nombre de lancers réussis" },
+  { ctx: "Un biologiste sème $n$ graines ; chacune germe avec la probabilité $p$, indépendamment des autres.", ev: "la $i$-ième graine germe", S: "le nombre de graines qui germent" },
+  { ctx: "Un institut de sondage interroge $n$ personnes au hasard ; chacune est favorable au projet avec la probabilité $p$, indépendamment des autres.", ev: "la $i$-ième personne est favorable", S: "le nombre de personnes favorables" },
+  { ctx: "Une compagnie aérienne enregistre $n$ réservations sur un vol ; chaque passager ne se présente pas avec la probabilité $p$, indépendamment des autres.", ev: "le $i$-ième passager ne se présente pas", S: "le nombre de passagers absents" },
+  { ctx: "Un technicien réseau envoie $n$ paquets de données ; chacun est perdu avec la probabilité $p$, indépendamment des autres.", ev: "le $i$-ième paquet est perdu", S: "le nombre de paquets perdus" },
+  { ctx: "Une archère tire $n$ flèches ; chacune atteint le centre de la cible avec la probabilité $p$, indépendamment des autres.", ev: "la $i$-ième flèche atteint le centre", S: "le nombre de flèches au centre" },
+  { ctx: "Un élève répond au hasard aux $n$ questions d'un QCM ; chaque réponse est juste avec la probabilité $p$, indépendamment des autres.", ev: "la $i$-ième réponse est juste", S: "le nombre de bonnes réponses", p: [0.25, 0.2, 0.5] },
+  { ctx: "Un électricien installe $n$ ampoules ; chacune est défectueuse avec la probabilité $p$, indépendamment des autres.", ev: "la $i$-ième ampoule est défectueuse", S: "le nombre d'ampoules défectueuses" },
+  { ctx: "Une horticultrice plante $n$ boutures ; chacune prend racine avec la probabilité $p$, indépendamment des autres.", ev: "la $i$-ième bouture prend racine", S: "le nombre de boutures qui prennent" },
+  { ctx: "Un hôtel enregistre $n$ réservations ; chacune est annulée avec la probabilité $p$, indépendamment des autres.", ev: "la $i$-ième réservation est annulée", S: "le nombre de réservations annulées" },
+  { ctx: "Une agricultrice ramasse $n$ œufs ; chacun est fêlé avec la probabilité $p$, indépendamment des autres.", ev: "le $i$-ième œuf est fêlé", S: "le nombre d'œufs fêlés" },
+  { ctx: "Un médecin suit $n$ patients sous traitement ; chacun ressent un effet secondaire avec la probabilité $p$, indépendamment des autres.", ev: "le $i$-ième patient ressent un effet secondaire", S: "le nombre de patients concernés" },
+  { ctx: "Un footballeur tire $n$ penalties ; il marque chacun avec la probabilité $p$, indépendamment des autres.", ev: "le $i$-ième penalty est marqué", S: "le nombre de penalties marqués" },
+];
+const PS = [0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.6, 0.7, 0.75, 0.8, 0.9, 0.95];
+const sN = (n: number) => `S = X_1 + X_2 + \\dots + X_{${n}}`;
+
+/** ★1 — E(A + B), E(B) à partir de E(A + B), E(kA). Direct, sans contexte. */
+function sommeE1(): Q {
+  const [A, B] = pick(LETTRES_S);
+  const dec = Math.random() < 0.3;
+  const ea = tirR(-10, 40, dec);
+  const eb = tirR(-10, 40, dec && Math.random() < 0.5);
+  const mode = ri(0, 2);
+  if (mode === 0) {
+    const bon = add(ea, eb);
+    return {
+      text: pick([
+        `Soient $${A}$ et $${B}$ deux variables aléatoires telles que $E(${A}) = ${tx(ea)}$ et $E(${B}) = ${tx(eb)}$. Que vaut $E(${A} + ${B})$ ?`,
+        `On sait que $E(${A}) = ${tx(ea)}$ et $E(${B}) = ${tx(eb)}$. Calcule $E(${A} + ${B})$.`,
+        `$${A}$ et $${B}$ sont deux variables aléatoires d'espérances $E(${A}) = ${tx(ea)}$ et $E(${B}) = ${tx(eb)}$. Quelle est l'espérance de $${A} + ${B}$ ?`,
+      ]),
+      ...qcmOuCourt(bon, [mul(ea, eb), sub(ea, eb), mul(bon, r(1, 2))], true),
+      explanation: exp(DEF_SE, "On additionne les deux espérances (pas besoin d'indépendance).", `$E(${A} + ${B}) = ${tx(ea)} + ${par(eb)} = ${tx(bon)}$.`, `$E(${A} + ${B}) = ${tx(bon)}$.`),
+    };
+  }
+  if (mode === 1) {
+    const s = add(ea, eb);
+    return {
+      text: pick([
+        `On sait que $E(${A} + ${B}) = ${tx(s)}$ et $E(${A}) = ${tx(ea)}$. Que vaut $E(${B})$ ?`,
+        `Deux variables aléatoires $${A}$ et $${B}$ vérifient $E(${A} + ${B}) = ${tx(s)}$ et $E(${A}) = ${tx(ea)}$. Calcule $E(${B})$.`,
+      ]),
+      ...qcmOuCourt(eb, [add(s, ea), sub(ea, s), mul(s, r(1, 2))], true),
+      explanation: exp(DEF_SE, `$E(${A} + ${B}) = E(${A}) + E(${B})$, donc $E(${B}) = E(${A} + ${B}) - E(${A})$.`, `$E(${B}) = ${tx(s)} - ${par(ea)} = ${tx(eb)}$.`, `$E(${B}) = ${tx(eb)}$.`),
+    };
+  }
+  const k = pick([2, 3, 4, 5, 10, -2, -3]);
+  const bon = mul(r(k), ea);
+  return {
+    text: pick([
+      `Soit $${A}$ une variable aléatoire telle que $E(${A}) = ${tx(ea)}$. Que vaut $E(${k}${A})$ ?`,
+      `On sait que $E(${A}) = ${tx(ea)}$. Calcule l'espérance de $${k}${A}$.`,
+    ]),
+    ...qcmOuCourt(bon, [mul(r(k * k), ea), add(ea, r(k)), ea], true),
+    explanation: exp(DEF_SE, `$E(a${A}) = a\\,E(${A})$ avec $a = ${k}$ (pas de carré pour l'espérance).`, `$E(${k}${A}) = ${k} \\times ${par(ea)} = ${tx(bon)}$.`, `$E(${k}${A}) = ${tx(bon)}$.`),
+  };
+}
+
+/** ★1 — V(A + B) (indépendantes), V(B) à partir de V(A + B), V(kA). Direct. */
+function sommeV1(): Q {
+  const [A, B] = pick(LETTRES_S);
+  const dec = Math.random() < 0.3;
+  const va = tirR(1, 40, dec);
+  let vb = tirR(1, 40, dec && Math.random() < 0.5);
+  if (val(vb) === val(va)) vb = add(vb, r(1));
+  const ind = pick([`$${A}$ et $${B}$ sont deux variables aléatoires indépendantes`, `Soient $${A}$ et $${B}$ deux variables aléatoires indépendantes`]);
+  const mode = ri(0, 2);
+  if (mode === 0) {
+    const bon = add(va, vb);
+    return {
+      text: `${ind}, avec $V(${A}) = ${tx(va)}$ et $V(${B}) = ${tx(vb)}$. ${pick([`Que vaut $V(${A} + ${B})$ ?`, `Calcule $V(${A} + ${B})$.`, `Quelle est la variance de $${A} + ${B}$ ?`])}`,
+      ...qcmOuCourt(bon, [absR(sub(va, vb)), mul(va, vb), mul(bon, r(2))], true),
+      explanation: exp(DEF_SV, "Les variables sont indépendantes : on additionne les variances.", `$V(${A} + ${B}) = ${tx(va)} + ${tx(vb)} = ${tx(bon)}$.`, `$V(${A} + ${B}) = ${tx(bon)}$.`),
+    };
+  }
+  if (mode === 1) {
+    const s = add(va, vb);
+    return {
+      text: `${ind}. On sait que $V(${A} + ${B}) = ${tx(s)}$ et $V(${A}) = ${tx(va)}$. ${pick([`Que vaut $V(${B})$ ?`, `Calcule $V(${B})$.`])}`,
+      ...qcmOuCourt(vb, [add(s, va), mul(s, r(1, 2)), va], true),
+      explanation: exp(DEF_SV, `Indépendantes : $V(${A} + ${B}) = V(${A}) + V(${B})$, donc $V(${B}) = V(${A} + ${B}) - V(${A})$.`, `$V(${B}) = ${tx(s)} - ${tx(va)} = ${tx(vb)}$.`, `$V(${B}) = ${tx(vb)}$.`),
+    };
+  }
+  const k = pick([2, 3, 4, 5, 10, -2, -3]);
+  const bon = mul(r(k * k), va);
+  return {
+    text: pick([
+      `Soit $${A}$ une variable aléatoire telle que $V(${A}) = ${tx(va)}$. Que vaut $V(${k}${A})$ ?`,
+      `On sait que $V(${A}) = ${tx(va)}$. Calcule la variance de $${k}${A}$.`,
+    ]),
+    ...qcmOuCourt(bon, [mul(r(k), va), mul(r(Math.abs(k)), va), va, add(va, r(k * k))], true),
+    explanation: exp(DEF_SV, `$V(a${A}) = a^2\\,V(${A})$ avec $a = ${k}$, donc $a^2 = ${k * k}$.`, `$V(${k}${A}) = ${k * k} \\times ${tx(va)} = ${tx(bon)}$.`, `$V(${k}${A}) = ${tx(bon)}$ (le coefficient passe AU CARRÉ).`),
+  };
+}
+
+/** ★2 — E(aA + bB + c) ou V(aA + bB + c) (indépendantes). Direct. */
+function sommeComb2(): Q {
+  const [A, B] = pick(LETTRES_S);
+  const a = pick([2, 3, 4, 5, -2, -3]);
+  const b = pick([2, 3, 4, 5, -1, -2, -4]);
+  const c = pick([0, 0, 1, 3, 10, -5, -2]);
+  const Z = comb(a, A, b, B, c);
+  if (Math.random() < 0.5) {
+    const ea = tirR(-10, 20);
+    const eb = tirR(-10, 20);
+    const bon = add(add(mul(r(a), ea), mul(r(b), eb)), r(c));
+    return {
+      text: `${pick([`On sait que $E(${A}) = ${tx(ea)}$ et $E(${B}) = ${tx(eb)}$.`, `Soient $${A}$ et $${B}$ deux variables aléatoires d'espérances $${tx(ea)}$ et $${tx(eb)}$.`])} ${pick([`Que vaut $E(${Z})$ ?`, `Calcule $E(${Z})$.`])}`,
+      ...qcmOuCourt(bon, [add(add(ea, eb), r(c)), add(mul(r(a), ea), mul(r(b), eb)), add(add(mul(r(a * a), ea), mul(r(b * b), eb)), r(c)), mul(r(a + b), add(ea, eb))], true),
+      explanation: exp(DEF_SE, `$E(${Z}) = ${a}\\,E(${A}) ${b < 0 ? "-" : "+"} ${Math.abs(b)}\\,E(${B})${c ? ` ${c < 0 ? "-" : "+"} ${Math.abs(c)}` : ""}$.`, `$${a} \\times ${par(ea)} ${b < 0 ? "-" : "+"} ${Math.abs(b)} \\times ${par(eb)}${c ? ` ${c < 0 ? "-" : "+"} ${Math.abs(c)}` : ""} = ${tx(bon)}$.`, `$E(${Z}) = ${tx(bon)}$.`),
+    };
+  }
+  const va = tirR(1, 20);
+  const vb = tirR(1, 20);
+  const bon = add(mul(r(a * a), va), mul(r(b * b), vb));
+  return {
+    text: `$${A}$ et $${B}$ sont deux variables aléatoires indépendantes, avec $V(${A}) = ${tx(va)}$ et $V(${B}) = ${tx(vb)}$. ${pick([`Que vaut $V(${Z})$ ?`, `Calcule $V(${Z})$.`])}`,
+    ...qcmOuCourt(bon, [add(mul(r(a), va), mul(r(b), vb)), sub(mul(r(a * a), va), mul(r(b * b), vb)), add(bon, r(c || 1)), add(mul(r(Math.abs(a)), va), mul(r(Math.abs(b)), vb))], true),
+    explanation: exp(DEF_SV, `Indépendantes : $V(${Z}) = ${a * a}\\,V(${A}) + ${b * b}\\,V(${B})$ (coefficients au carré, toujours un « + », la constante disparaît).`, `$${a * a} \\times ${tx(va)} + ${b * b} \\times ${tx(vb)} = ${tx(bon)}$.`, `$V(${Z}) = ${tx(bon)}$.`),
+  };
+}
+
+/** ★2 — La binomiale, somme de n variables de Bernoulli. Direct. */
+function sommeBernoulli2(): Q {
+  const n = ri(5, 80);
+  const p = r(Math.round(pick(PS) * 100), 100);
+  const q1 = sub(r(1), p);
+  const np = mul(r(n), p);
+  const v = mul(np, q1);
+  const intro = pick([
+    `Les variables $X_1, X_2, \\dots, X_{${n}}$ sont indépendantes et suivent toutes la loi de Bernoulli de paramètre $${tx(p)}$. On pose $${sN(n)}$.`,
+    `On répète $${n}$ fois, de façon indépendante, une épreuve de Bernoulli de probabilité de succès $${tx(p)}$ ; $X_i$ vaut $1$ si la $i$-ième épreuve est un succès, $0$ sinon. On pose $${sN(n)}$.`,
+  ]);
+  const mode = ri(0, 2);
+  if (mode === 0) {
+    return {
+      text: `${intro} ${pick(["Que vaut $E(S)$ ?", "Calcule l'espérance de $S$."])}`,
+      ...qcmOuCourt(np, [p, add(r(n), p), v], true),
+      explanation: exp(DEF_SB, "Chaque $X_i$ a pour espérance $p$ ; on additionne les $n$ espérances.", `$E(S) = ${n} \\times ${tx(p)} = ${tx(np)}$.`, `$E(S) = ${tx(np)}$.`),
+    };
+  }
+  if (mode === 1) {
+    return {
+      text: `${intro} ${pick(["Que vaut $V(S)$ ?", "Calcule la variance de $S$."])}`,
+      ...qcmOuCourt(v, [np, mul(p, q1), mul(r(n * n), mul(p, q1))], true),
+      explanation: exp(DEF_SB, "Chaque $X_i$ a pour variance $p(1 - p)$ ; les $X_i$ sont indépendantes, on additionne les $n$ variances.", `$V(S) = ${n} \\times ${tx(p)} \\times ${tx(q1)} = ${tx(v)}$.`, `$V(S) = ${tx(v)}$.`),
+    };
+  }
+  const bon = `$\\mathcal{B}(${n}\\,;${tx(p)})$`;
+  return {
+    text: `${intro} ${pick(["Quelle est la loi de $S$ ?", "Quelle loi suit $S$ ?"])}`,
+    format: "qcm",
+    ...qcmS(bon, [`$\\mathcal{B}(1\\,;${tx(p)})$`, `$\\mathcal{B}(${n}\\,;${tx(q1)})$`, `$\\mathcal{B}(${2 * n}\\,;${tx(mul(p, r(1, 2)))})$`, `La loi de Bernoulli de paramètre $${tx(np)}$`]),
+    comparator: "mcq_exact",
+    explanation: exp(DEF_SB, "$S$ compte les succès parmi $n$ épreuves de Bernoulli indépendantes de même paramètre $p$.", `Ici $n = ${n}$ et $p = ${tx(p)}$.`, `$S$ suit la loi binomiale ${bon}.`),
+  };
+}
+
+/** ★2 — Ce qui est toujours vrai, ce qui demande l'indépendance. */
+function sommeVraiFaux2(): Q {
+  const [A, B] = pick(LETTRES_S);
+  const k = pick([2, 3, 4, 5, -2, -3]);
+  const EV = `$E(${A} + ${B}) = E(${A}) + E(${B})$`;
+  const VV = `$V(${A} + ${B}) = V(${A}) + V(${B})$`;
+  const VM = `$V(${A} - ${B}) = V(${A}) - V(${B})$`;
+  const VMB = `$V(${A} - ${B}) = V(${A}) + V(${B})$`;
+  const EP = `$E(${A}${B}) = E(${A}) \\times E(${B})$`;
+  const VK = `$V(${k}${A}) = ${k * k}\\,V(${A})$`;
+  const VKF = `$V(${k}${A}) = ${k}\\,V(${A})$`;
+  const EK = `$E(${k}${A}) = ${k}\\,E(${A})$`;
+  const SG = `$\\sigma(${A} + ${B}) = \\sigma(${A}) + \\sigma(${B})$`;
+  const mode = ri(0, 3);
+  if (mode === 0) {
+    return {
+      text: `$${A}$ et $${B}$ sont deux variables aléatoires, ${pick(["pas forcément indépendantes", "dont on ne sait pas si elles sont indépendantes"])}. ${pick(["Quelle égalité est toujours vraie ?", "Laquelle de ces égalités est vraie à coup sûr ?"])}`,
+      format: "qcm",
+      ...qcmS(EV, [VV, EP, VM, VKF]),
+      comparator: "mcq_exact",
+      explanation: exp(DEF_SE, "La linéarité de l'espérance ne demande AUCUNE hypothèse ; l'additivité des variances demande l'indépendance.", `${EV} est toujours vraie ; ${VV} peut être fausse si $${A}$ et $${B}$ sont liées.`, `La bonne réponse : ${EV}.`),
+    };
+  }
+  if (mode === 1) {
+    return {
+      text: `$${A}$ et $${B}$ sont deux variables aléatoires indépendantes. ${pick(["Quelle égalité est vraie ?", "Laquelle de ces égalités est juste ?"])}`,
+      format: "qcm",
+      ...qcmS(VMB, [VM, VKF, SG]),
+      comparator: "mcq_exact",
+      explanation: exp(DEF_SV, `$${A} - ${B} = ${A} + (-1)${B}$ et $V(-${B}) = (-1)^2\\,V(${B}) = V(${B})$.`, `$V(${A} - ${B}) = V(${A}) + V(-${B}) = V(${A}) + V(${B})$.`, `La bonne réponse : ${VMB} (les variances s'ajoutent toujours, une variance n'est jamais négative).`),
+    };
+  }
+  if (mode === 2) {
+    return {
+      text: `Soit $${A}$ une variable aléatoire. ${pick(["Quelle égalité est vraie ?", "Laquelle de ces égalités est juste ?"])}`,
+      format: "qcm",
+      ...qcmS(VK, [VKF, `$V(${k}${A}) = ${Math.abs(k)}\\,V(${A})$`, `$E(${k}${A}) = ${k * k}\\,E(${A})$`, `$V(${A} + ${Math.abs(k)}) = V(${A}) + ${Math.abs(k)}$`]),
+      comparator: "mcq_exact",
+      explanation: exp(DEF_SV, "Multiplier par $a$ multiplie les écarts par $a$, donc la variance (un carré) par $a^2$.", `$V(${k}${A}) = (${k})^2\\,V(${A}) = ${k * k}\\,V(${A})$.`, `La bonne réponse : ${VK}.`),
+    };
+  }
+  return {
+    text: `Soient $${A}$ et $${B}$ deux variables aléatoires. ${pick([`Laquelle de ces égalités demande que $${A}$ et $${B}$ soient indépendantes ?`, "Pour laquelle de ces égalités faut-il l'indépendance ?"])}`,
+    format: "qcm",
+    ...qcmS(VV, [EV, EK, VK]),
+    comparator: "mcq_exact",
+    explanation: exp(DEF_SV, "La linéarité de l'espérance et $V(aX) = a^2V(X)$ sont toujours vraies.", `Seule ${VV} demande l'indépendance.`, `La bonne réponse : ${VV}.`),
+  };
+}
+
+/** ★3 — En contexte : E(T), V(T) par les variances, V(T) par les écarts-types. */
+function sommeContexte3(): Q {
+  const d = pick(DUOS_S);
+  const intro = `${d.ctx} On note $X$ ${d.X}, $Y$ ${d.Y}, et $T = X + Y$ ${d.T}.`;
+  const mode = ri(0, 2);
+  if (mode === 0) {
+    const ea = tirR(d.e[0], d.e[1], d.dec);
+    const eb = tirR(d.e[0], d.e[1], d.dec);
+    const bon = add(ea, eb);
+    const doute = Math.random() < 0.3 ? " On ne sait pas si $X$ et $Y$ sont indépendantes." : "";
+    return {
+      text: `${intro}${doute} On sait que $E(X) = ${tx(ea)}$${d.u} et $E(Y) = ${tx(eb)}$${d.u}. ${pick(["Que vaut $E(T)$ ?", "Quelle est l'espérance de $T$ ?", "Calcule $E(T)$."])}`,
+      ...qcmOuCourt(bon, [absR(sub(ea, eb)), mul(bon, r(1, 2)), mul(ea, eb)], true),
+      explanation: exp(DEF_SE, "L'espérance d'une somme est la somme des espérances, même sans indépendance.", `$E(T) = E(X) + E(Y) = ${tx(ea)} + ${tx(eb)} = ${tx(bon)}$.`, `$E(T) = ${tx(bon)}$${d.u}.`),
+    };
+  }
+  if (mode === 1) {
+    const va = tirR(d.v[0], d.v[1], d.dec);
+    let vb = tirR(d.v[0], d.v[1], d.dec);
+    if (val(vb) === val(va)) vb = add(vb, r(1));
+    const bon = add(va, vb);
+    return {
+      text: `${intro} ${indep()} On sait que $V(X) = ${tx(va)}$ et $V(Y) = ${tx(vb)}$. ${pick(["Que vaut $V(T)$ ?", "Quelle est la variance de $T$ ?", "Calcule $V(T)$."])}`,
+      ...qcmOuCourt(bon, [absR(sub(va, vb)), mul(va, vb), mul(bon, r(1, 2))], true),
+      explanation: exp(DEF_SV, "$X$ et $Y$ sont indépendantes : on additionne les variances.", `$V(T) = V(X) + V(Y) = ${tx(va)} + ${tx(vb)} = ${tx(bon)}$.`, `$V(T) = ${tx(bon)}$.`),
+    };
+  }
+  const sa = tirSigma(d.v[0], d.v[1], d.dec);
+  let sb = tirSigma(d.v[0], d.v[1], d.dec);
+  if (val(sb) === val(sa)) sb = add(sb, r(1, d.dec ? 10 : 1));
+  const bon = add(carre(sa), carre(sb));
+  return {
+    text: `${intro} ${indep()} On sait que $\\sigma(X) = ${tx(sa)}$${d.u} et $\\sigma(Y) = ${tx(sb)}$${d.u}. ${pick(["Que vaut $V(T)$ ?", "Quelle est la variance de $T$ ?"])}`,
+    format: "qcm",
+    ...qcmR(bon, [carre(add(sa, sb)), add(sa, sb), absR(sub(carre(sa), carre(sb)))]),
+    comparator: "mcq_exact",
+    explanation: exp(DEF_SV, "On ADDITIONNE LES VARIANCES (pas les écarts-types) : $V = \\sigma^2$.", `$V(X) = ${tx(sa)}^2 = ${tx(carre(sa))}$ et $V(Y) = ${tx(sb)}^2 = ${tx(carre(sb))}$, donc $V(T) = ${tx(carre(sa))} + ${tx(carre(sb))} = ${tx(bon)}$.`, `$V(T) = ${tx(bon)}$ (et non $(${tx(sa)} + ${tx(sb)})^2$).`),
+  };
+}
+
+/** ★3 — La différence D = X − Y : E(D) = E(X) − E(Y) mais V(D) = V(X) + V(Y). */
+function sommeDifference3(): Q {
+  const d = pick(DUOS_S);
+  const intro = `${d.ctx} On note $X$ ${d.X}, $Y$ ${d.Y}, et ${pick(["$D = X - Y$ la différence entre les deux", "on s'intéresse à la différence $D = X - Y$"])}.`;
+  if (Math.random() < 0.35) {
+    const ea = tirR(d.e[0], d.e[1], d.dec);
+    let eb = tirR(d.e[0], d.e[1], d.dec);
+    if (val(eb) === val(ea)) eb = add(eb, r(1));
+    const bon = sub(ea, eb);
+    return {
+      text: `${intro} On sait que $E(X) = ${tx(ea)}$${d.u} et $E(Y) = ${tx(eb)}$${d.u}. ${pick(["Que vaut $E(D)$ ?", "Calcule l'espérance de $D$."])}`,
+      ...qcmOuCourt(bon, [add(ea, eb), sub(eb, ea), mul(add(ea, eb), r(1, 2))], true),
+      explanation: exp(DEF_SE, "$E(X - Y) = E(X) - E(Y)$ (linéarité, avec $a = -1$).", `$E(D) = ${tx(ea)} - ${par(eb)} = ${tx(bon)}$.`, `$E(D) = ${tx(bon)}$${d.u}.`),
+    };
+  }
+  const va = tirR(d.v[0], d.v[1], d.dec);
+  let vb = tirR(d.v[0], d.v[1], d.dec);
+  if (val(vb) === val(va)) vb = add(vb, r(1));
+  const bon = add(va, vb);
+  return {
+    text: `${intro} ${indep()} On sait que $V(X) = ${tx(va)}$ et $V(Y) = ${tx(vb)}$. ${pick(["Que vaut $V(D)$ ?", "Calcule la variance de $D$.", "Quelle est la variance de $D$ ?"])}`,
+    ...qcmOuCourt(bon, [sub(va, vb), absR(sub(va, vb)), mul(bon, r(1, 2))], true),
+    explanation: exp(DEF_SV, "$X - Y = X + (-1)Y$ et $V(-Y) = (-1)^2\\,V(Y) = V(Y)$ : les variances S'AJOUTENT encore.", `$V(D) = V(X) + V(Y) = ${tx(va)} + ${tx(vb)} = ${tx(bon)}$.`, `$V(D) = ${tx(bon)}$ (retrancher $Y$ ajoute de la dispersion, n'en enlève pas).`),
+  };
+}
+
+const TRIPLETS: [number, number, number][] = [[3, 4, 5], [5, 12, 13], [8, 15, 17], [7, 24, 25], [20, 21, 29], [9, 40, 41], [12, 35, 37]];
+/** ★3 — σ(X + Y) : on passe par les variances (jamais σ(X) + σ(Y)). */
+function sommeSigma3(): Q {
+  for (let essai = 0; essai < 50; essai++) {
+    const d = pick(DUOS_S);
+    const intro = `${d.ctx} On note $X$ ${d.X}, $Y$ ${d.Y}, et $T = X + Y$ ${d.T}. ${indep()}`;
+    if (Math.random() < 0.6) {
+      const ks = (d.dec ? [0.1, 0.2, 0.5, 1] : [1, 2, 3, 4, 5]).flatMap((k) => TRIPLETS.map((t) => ({ k, t })));
+      const ok = ks.filter(({ k, t }) => (t[0] * k) ** 2 >= d.v[0] / 4 && (t[1] * k) ** 2 <= d.v[1] * 4);
+      if (!ok.length) continue;
+      const { k, t } = pick(ok);
+      const kk = d.dec ? r(Math.round(k * 10), 10) : r(k);
+      const [p1, p2] = Math.random() < 0.5 ? [t[0], t[1]] : [t[1], t[0]];
+      const sa = mul(r(p1), kk);
+      const sb = mul(r(p2), kk);
+      const bon = mul(r(t[2]), kk);
+      return {
+        text: `${intro} On sait que $\\sigma(X) = ${tx(sa)}$${d.u} et $\\sigma(Y) = ${tx(sb)}$${d.u}. ${pick(["Que vaut l'écart-type $\\sigma(T)$ ?", "Quel est l'écart-type de $T$ ?", "Calcule $\\sigma(T)$."])}`,
+        format: "qcm",
+        ...qcmR(bon, [add(sa, sb), add(carre(sa), carre(sb)), absR(sub(sa, sb))]),
+        comparator: "mcq_exact",
+        explanation: exp(DEF_SV + " Et $\\sigma = \\sqrt{V}$.", "Les écarts-types NE s'additionnent PAS : on additionne les variances, puis on prend la racine.", `$V(T) = ${tx(sa)}^2 + ${tx(sb)}^2 = ${tx(carre(sa))} + ${tx(carre(sb))} = ${tx(add(carre(sa), carre(sb)))}$, donc $\\sigma(T) = \\sqrt{${tx(add(carre(sa), carre(sb)))}} = ${tx(bon)}$.`, `$\\sigma(T) = ${tx(bon)}$${d.u} (et non $${tx(add(sa, sb))}$).`),
+      };
+    }
+    const sa = tirSigma(d.v[0], d.v[1], d.dec);
+    let sb = tirSigma(d.v[0], d.v[1], d.dec);
+    if (val(sb) === val(sa)) sb = add(sb, r(1, d.dec ? 10 : 1));
+    const vt = add(carre(sa), carre(sb));
+    const bon = Math.sqrt(val(vt));
+    if (Math.abs(bon - Math.round(bon * 100) / 100) < 1e-9) continue; // tombe juste : le cas exact s'en charge
+    return {
+      text: `${intro} On sait que $\\sigma(X) = ${tx(sa)}$${d.u} et $\\sigma(Y) = ${tx(sb)}$${d.u}. ${pick(["Que vaut $\\sigma(T)$, arrondi au centième ?", "Quel est l'écart-type de $T$, arrondi au centième ?"])}`,
+      ...qcmArr(bon, [val(add(sa, sb)), val(vt), Math.abs(val(sub(sa, sb))), Math.sqrt(val(add(sa, sb)))]),
+      explanation: exp(DEF_SV + " Et $\\sigma = \\sqrt{V}$.", "On additionne les VARIANCES, puis on prend la racine carrée.", `$V(T) = ${tx(sa)}^2 + ${tx(sb)}^2 = ${tx(vt)}$, donc $\\sigma(T) = \\sqrt{${tx(vt)}} \\approx ${a2(bon)}$.`, `$\\sigma(T) \\approx ${a2(bon)}$${d.u} (additionner les écarts-types donnerait $${tx(add(sa, sb))}$ : faux).`),
+    };
+  }
+  return sommeContexte3();
+}
+
+/** ★4 — Sₙ = X₁ + … + Xₙ : E(Sₙ) = nE(X), V(Sₙ) = nV(X), σ(Sₙ) = √n σ(X). */
+function sommeRepet4(): Q {
+  const d = pick(REPETS);
+  const n = pick([4, 5, 6, 8, 9, 10, 12, 15, 16, 20, 24, 25, 30, 36, 40, 49, 50, 64, 100]);
+  const ctx = d.ctx.replace("$n$", `$${n}$`);
+  const e = tirR(d.e[0], d.e[1], d.dec);
+  const intro = `${ctx} On note $X_i$ ${d.Xi} ($i$ de $1$ à $${n}$) : ces variables sont indépendantes et de même loi. On pose $${sN(n)}$, ${d.S}.`;
+  const mode = pick([0, 1, 1, 2, 2, 3]);
+  if (mode === 0 || mode === 1) {
+    const v = tirR(d.v[0], d.v[1], d.dec);
+    const donnees = `Chaque $X_i$ a pour espérance $${tx(e)}$${d.u} et pour variance $${tx(v)}$.`;
+    if (mode === 0) {
+      const bon = mul(r(n), e);
+      return {
+        text: `${intro} ${donnees} ${pick(["Que vaut $E(S)$ ?", "Calcule l'espérance de $S$."])}`,
+        ...qcmOuCourt(bon, [e, mul(r(n), v), add(e, r(n))], true),
+        explanation: exp(DEF_SN, "On additionne $n$ fois la même espérance.", `$E(S) = ${n} \\times ${tx(e)} = ${tx(bon)}$.`, `$E(S) = ${tx(bon)}$${d.u}.`),
+      };
+    }
+    const bon = mul(r(n), v);
+    return {
+      text: `${intro} ${donnees} ${pick(["Que vaut $V(S)$ ?", "Calcule la variance de $S$.", "Quelle est la variance de $S$ ?"])}`,
+      ...qcmOuCourt(bon, [mul(r(n * n), v), v, mul(r(n), e)], true),
+      explanation: exp(DEF_SN, "Les $X_i$ sont indépendantes : on additionne $n$ fois la même variance (ATTENTION : $V(nX) = n^2V(X)$, c'est une autre variable).", `$V(S) = ${n} \\times ${tx(v)} = ${tx(bon)}$.`, `$V(S) = ${tx(bon)}$ (et non $${n}^2 \\times ${tx(v)}$).`),
+    };
+  }
+  const sg = tirSigma(d.v[0], d.v[1], d.dec);
+  const donnees = `Chaque $X_i$ a pour espérance $${tx(e)}$${d.u} et pour écart-type $${tx(sg)}$${d.u}.`;
+  if (mode === 3) {
+    const bon = mul(r(n), carre(sg));
+    return {
+      text: `${intro} ${donnees} ${pick(["Que vaut $V(S)$ ?", "Calcule la variance de $S$."])}`,
+      format: "qcm",
+      ...qcmR(bon, [mul(r(n), sg), carre(mul(r(n), sg)), carre(sg)]),
+      comparator: "mcq_exact",
+      explanation: exp(DEF_SN, "On passe par la variance de chaque $X_i$ : $V(X_i) = \\sigma^2$.", `$V(X_i) = ${tx(sg)}^2 = ${tx(carre(sg))}$, donc $V(S) = ${n} \\times ${tx(carre(sg))} = ${tx(bon)}$.`, `$V(S) = ${tx(bon)}$.`),
+    };
+  }
+  const rac = Math.sqrt(n);
+  const bonV = mul(r(n), carre(sg));
+  if (Number.isInteger(rac)) {
+    const bon = mul(r(rac), sg);
+    return {
+      text: `${intro} ${donnees} ${pick(["Que vaut l'écart-type $\\sigma(S)$ ?", "Quel est l'écart-type de $S$ ?"])}`,
+      format: "qcm",
+      ...qcmR(bon, [mul(r(n), sg), sg, bonV]),
+      comparator: "mcq_exact",
+      explanation: exp(DEF_SN, "On passe par la variance : $V(S) = n\\,\\sigma^2$, puis la racine : $\\sigma(S) = \\sqrt{n}\\,\\sigma$.", `$V(S) = ${n} \\times ${tx(carre(sg))} = ${tx(bonV)}$, donc $\\sigma(S) = \\sqrt{${tx(bonV)}} = ${tx(bon)}$.`, `$\\sigma(S) = ${tx(bon)}$${d.u} (et non $${n} \\times ${tx(sg)}$).`),
+    };
+  }
+  const bon = rac * val(sg);
+  return {
+    text: `${intro} ${donnees} ${pick(["Que vaut $\\sigma(S)$, arrondi au centième ?", "Quel est l'écart-type de $S$, arrondi au centième ?"])}`,
+    ...qcmArr(bon, [n * val(sg), val(sg), val(bonV), Math.sqrt(n * val(sg))]),
+    explanation: exp(DEF_SN, "On passe par la variance : $V(S) = n\\,\\sigma^2$, puis la racine : $\\sigma(S) = \\sqrt{n}\\,\\sigma$.", `$V(S) = ${n} \\times ${tx(carre(sg))} = ${tx(bonV)}$, donc $\\sigma(S) = \\sqrt{${tx(bonV)}} \\approx ${a2(bon)}$.`, `$\\sigma(S) \\approx ${a2(bon)}$${d.u} (l'écart-type grandit comme $\\sqrt{n}$, pas comme $n$).`),
+  };
+}
+
+/** ★4 — Un coût T = aX + bY + c : E(T) ou V(T) (indépendantes). */
+function sommeCout4(): Q {
+  const d = pick(COUTS);
+  const a = pick(d.A);
+  const b = pick(d.B);
+  const c = pick(d.C);
+  const ea = tirR(d.eX[0], d.eX[1]);
+  const eb = tirR(d.eY[0], d.eY[1]);
+  const va = tirR(d.v[0], d.v[1]);
+  const vb = tirR(d.v[0], d.v[1]);
+  const Z = comb(a, "X", b, "Y", c);
+  const text0 = `${d.f(a, b, c)} On note $X$ ${d.X} et $Y$ ${d.Y} ; on les suppose indépendantes, avec $E(X) = ${tx(ea)}$, $V(X) = ${tx(va)}$, $E(Y) = ${tx(eb)}$ et $V(Y) = ${tx(vb)}$. ${d.T} est alors $T = ${Z}$.`;
+  if (Math.random() < 0.4) {
+    const bon = add(add(mul(r(a), ea), mul(r(b), eb)), r(c));
+    return {
+      text: `${text0} ${pick(["Que vaut $E(T)$ ?", "Calcule l'espérance de $T$."])}`,
+      ...qcmOuCourt(bon, [add(mul(r(a), ea), mul(r(b), eb)), add(add(ea, eb), r(c)), add(add(mul(r(a), va), mul(r(b), vb)), r(c))], true),
+      explanation: exp(DEF_SE, `$E(T) = ${a}\\,E(X) + ${b}\\,E(Y)${c ? ` ${c < 0 ? "-" : "+"} ${Math.abs(c)}` : ""}$.`, `$E(T) = ${a} \\times ${tx(ea)} + ${b} \\times ${tx(eb)}${c ? ` ${c < 0 ? "-" : "+"} ${Math.abs(c)}` : ""} = ${tx(bon)}$.`, `$E(T) = ${tx(bon)}$ € en moyenne.`),
+    };
+  }
+  const bon = add(mul(r(a * a), va), mul(r(b * b), vb));
+  return {
+    text: `${text0} ${pick(["Que vaut $V(T)$ ?", "Calcule la variance de $T$.", "Quelle est la variance de $T$ ?"])}`,
+    ...qcmOuCourt(bon, [add(mul(r(a), va), mul(r(b), vb)), add(bon, r(Math.abs(c) || 10)), add(va, vb), mul(r((a + b) * (a + b)), add(va, vb))], true),
+    explanation: exp(DEF_SV, `$X$ et $Y$ indépendantes : $V(T) = ${a}^2\\,V(X) + ${b}^2\\,V(Y)$ ; la constante ne change pas la dispersion.`, `$V(T) = ${a * a} \\times ${tx(va)} + ${b * b} \\times ${tx(vb)} = ${tx(bon)}$.`, `$V(T) = ${tx(bon)}$ (coefficients AU CARRÉ).`),
+  };
+}
+
+/** ★4 — La binomiale en contexte, vue comme somme de Bernoulli. */
+function sommeBinomContexte4(): Q {
+  const d = pick(BINOMS);
+  const n = ri(10, 200);
+  const p = r(Math.round(pick(d.p ?? PS) * 100), 100);
+  const q1 = sub(r(1), p);
+  const np = mul(r(n), p);
+  const v = mul(np, q1);
+  const ctx = d.ctx.replace("$n$", `$${n}$`).replace("$p$", `$${tx(p)}$`);
+  const intro = `${ctx} Pour $i$ de $1$ à $${n}$, $X_i$ vaut $1$ si ${d.ev}, $0$ sinon ; $${sN(n)}$ est ${d.S}.`;
+  const mode = ri(0, 2);
+  if (mode === 0) {
+    return {
+      text: `${intro} ${pick(["Que vaut $E(S)$ ?", "Combien vaut l'espérance de $S$ ?"])}`,
+      ...qcmOuCourt(np, [p, v, mul(r(n), q1)], true),
+      explanation: exp(DEF_SB, "Chaque $X_i$ suit la loi de Bernoulli de paramètre $p$, donc $E(X_i) = p$ ; on additionne.", `$E(S) = ${n} \\times ${tx(p)} = ${tx(np)}$.`, `$E(S) = ${tx(np)}$ : c'est ${d.S} attendu en moyenne.`),
+    };
+  }
+  if (mode === 1) {
+    return {
+      text: `${intro} ${pick(["Que vaut $V(S)$ ?", "Calcule la variance de $S$."])}`,
+      ...qcmOuCourt(v, [np, mul(p, q1), mul(r(n), mul(p, p)), mul(r(n * n), mul(p, q1))], true),
+      explanation: exp(DEF_SB, "$V(X_i) = p(1 - p)$ et les $X_i$ sont indépendantes : on additionne les $n$ variances.", `$V(S) = ${n} \\times ${tx(p)} \\times ${tx(q1)} = ${tx(v)}$.`, `$V(S) = ${tx(v)}$.`),
+    };
+  }
+  const bon = Math.sqrt(val(v));
+  if (Math.abs(bon - Math.round(bon * 100) / 100) < 1e-9) {
+    const exact = r(Math.round(bon * 100), 100);
+    return {
+      text: `${intro} ${pick(["Que vaut l'écart-type $\\sigma(S)$ ?", "Quel est l'écart-type de $S$ ?"])}`,
+      format: "qcm",
+      ...qcmR(exact, [v, np, r(Math.round(Math.sqrt(val(np)) * 100), 100)]),
+      comparator: "mcq_exact",
+      explanation: exp(DEF_SB + " Et $\\sigma(S) = \\sqrt{V(S)}$.", "On calcule $V(S) = np(1 - p)$, puis sa racine carrée.", `$V(S) = ${n} \\times ${tx(p)} \\times ${tx(q1)} = ${tx(v)}$, donc $\\sigma(S) = \\sqrt{${tx(v)}} = ${tx(exact)}$.`, `$\\sigma(S) = ${tx(exact)}$.`),
+    };
+  }
+  return {
+    text: `${intro} ${pick(["Que vaut $\\sigma(S)$, arrondi au centième ?", "Quel est l'écart-type de $S$, arrondi au centième ?"])}`,
+    ...qcmArr(bon, [val(v), Math.sqrt(val(np)), n * Math.sqrt(val(mul(p, q1))), Math.sqrt(n) * val(mul(p, q1))]),
+    explanation: exp(DEF_SB + " Et $\\sigma(S) = \\sqrt{V(S)}$.", "On calcule $V(S) = np(1 - p)$, puis sa racine carrée.", `$V(S) = ${n} \\times ${tx(p)} \\times ${tx(q1)} = ${tx(v)}$, donc $\\sigma(S) = \\sqrt{${tx(v)}} \\approx ${a2(bon)}$.`, `$\\sigma(S) \\approx ${a2(bon)}$.`),
+  };
+}
+
+/** Une situation à variance décimale, La Réunion 1 fois sur 25 au plus (règle du 31/10). */
+const LIEUX_974 = /Réunion|Saint-|Sainte-|Cilaos|Tampon|\bPort\b|letchis|Piton|Leconte|Maïdo|coco/;
+function sitVarNeutre(): Sit {
+  if (Math.random() < 0.04) return sitVarDecimale();
+  for (let k = 0; k < 60; k++) {
+    const s = sitVarDecimale();
+    if (s.theme === "neutral" && !LIEUX_974.test(s.intro)) return s;
+  }
+  return sitVarDecimale();
+}
+
+/** ★5 — On répète n fois l'expérience d'une loi donnée : E(S), V(S), σ(S). */
+function sommeLoiRepet5(): Q {
+  const s = sitVarNeutre();
+  const e = E(s);
+  const e2 = E2(s);
+  const v = V(s);
+  const n = pick([3, 4, 5, 6, 8, 10, 12, 20, 25, 50, 100]);
+  const intro = `${pres(s, { loi: true })} On répète l'expérience $${n}$ fois de façon indépendante ; on note $X_i$ la valeur de $X$ obtenue à la $i$-ième fois et $${sN(n)}$.`;
+  const base = `$E(X) = ${sommeTx(s)} = ${tx(e)}$ ; $E(X^2) = ${tx(e2)}$ ; $V(X) = ${tx(e2)} - ${tx(mul(e, e))} = ${tx(v)}$`;
+  const mode = ri(0, 2);
+  if (mode === 0) {
+    const bon = mul(r(n), e);
+    return {
+      text: `${intro} ${pick(["Que vaut $E(S)$ ?", "Calcule l'espérance de $S$."])}`,
+      canvas: tableau(s),
+      ...qcmOuCourt(bon, [e, mul(r(n), moyValeurs(s)), mul(r(n * n), e), mul(r(n), e2)]),
+      explanation: exp(DEF_SN, "On calcule $E(X)$ avec la loi, puis $E(S) = n\\,E(X)$.", `$E(X) = ${sommeTx(s)} = ${tx(e)}$ ; $E(S) = ${n} \\times ${tx(e)} = ${tx(bon)}$.`, `$E(S) = ${tx(bon)}$.`),
+    };
+  }
+  if (mode === 1) {
+    const bon = mul(r(n), v);
+    return {
+      text: `${intro} ${pick(["Que vaut $V(S)$ ?", "Calcule la variance de $S$."])}`,
+      canvas: tableau(s),
+      ...qcmOuCourt(bon, [v, mul(r(n * n), v), mul(r(n), e2), mul(r(n), sub(e2, e))]),
+      explanation: exp(DEF_SN, "On calcule $V(X)$ avec la loi (König-Huygens), puis $V(S) = n\\,V(X)$ (indépendance).", `${base} ; $V(S) = ${n} \\times ${tx(v)} = ${tx(bon)}$.`, `$V(S) = ${tx(bon)}$.`),
+    };
+  }
+  const vs = mul(r(n), v);
+  const bon = Math.sqrt(val(vs));
+  return {
+    text: `${intro} ${pick(["Que vaut $\\sigma(S)$, arrondi au centième ?", "Quel est l'écart-type de $S$, arrondi au centième ?"])}`,
+    canvas: tableau(s),
+    ...qcmArr(bon, [n * Math.sqrt(val(v)), val(vs), Math.sqrt(val(v)), Math.sqrt(n * val(e2))]),
+    explanation: exp(DEF_SN, "$V(X)$ avec la loi, puis $V(S) = n\\,V(X)$, puis la racine.", `${base} ; $V(S) = ${n} \\times ${tx(v)} = ${tx(vs)}$ ; $\\sigma(S) = \\sqrt{${tx(vs)}} \\approx ${a2(bon)}$.`, `$\\sigma(S) \\approx ${a2(bon)}$ (et non $${n}\\,\\sigma(X)$).`),
+  };
+}
+
+/** ★5 — σ(aX + bY + c) arrondi, à partir des écarts-types. */
+function sommeCoutSigma5(): Q {
+  const d = pick(COUTS);
+  const a = pick(d.A);
+  const b = pick(d.B);
+  const c = pick(d.C);
+  const sa = tirSigma(d.v[0], d.v[1]);
+  const sb = tirSigma(d.v[0], d.v[1]);
+  const ea = tirR(d.eX[0], d.eX[1]);
+  const eb = tirR(d.eY[0], d.eY[1]);
+  const Z = comb(a, "X", b, "Y", c);
+  const vt = add(mul(r(a * a), carre(sa)), mul(r(b * b), carre(sb)));
+  const bon = Math.sqrt(val(vt));
+  const exact = Math.abs(bon - Math.round(bon * 100) / 100) < 1e-9;
+  return {
+    text: `${d.f(a, b, c)} On note $X$ ${d.X} et $Y$ ${d.Y}, supposés indépendants : $E(X) = ${tx(ea)}$, $\\sigma(X) = ${tx(sa)}$, $E(Y) = ${tx(eb)}$ et $\\sigma(Y) = ${tx(sb)}$. ${d.T} est $T = ${Z}$. ${pick([`Que vaut $\\sigma(T)$${exact ? "" : ", arrondi au centième"} ?`, `Quel est l'écart-type de $T$${exact ? "" : ", arrondi au centième"} ?`])}`,
+    format: "qcm",
+    ...qcmN(bon, [a * val(sa) + b * val(sb), val(vt), Math.sqrt(a * val(carre(sa)) + b * val(carre(sb))), bon + Math.abs(c)], exact ? dec : arr2),
+    comparator: "mcq_exact",
+    explanation: exp(DEF_SV + " Et $\\sigma = \\sqrt{V}$.", `$V(T) = ${a}^2\\,V(X) + ${b}^2\\,V(Y)$ (la constante disparaît), puis la racine carrée.`, `$V(T) = ${a * a} \\times ${tx(carre(sa))} + ${b * b} \\times ${tx(carre(sb))} = ${tx(vt)}$, donc $\\sigma(T) = \\sqrt{${tx(vt)}} ${exact ? "=" : "\\approx"} ${a2(bon)}$.`, `$\\sigma(T) ${exact ? "=" : "\\approx"} ${a2(bon)}$ € (et non $${a} \\times ${tx(sa)} + ${b} \\times ${tx(sb)}$).`),
+  };
+}
+
+/* =========================================================================
    LA BANQUE — les ids d'origine sont gardés (figés devenus gabarits).
 ========================================================================= */
 const D_ = "va_definition";
 const L_ = "va_loi_probabilite";
 const E_ = "va_esperance";
 const V_ = "va_variance_ecart_type";
+const S_ = "va_somme";
 const I_ = "va_interpreter";
 const F_ = "va_defi";
 const id = (s: string) => `terminale_spe_${s}`;
@@ -1738,6 +2387,21 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
   gab(id("va_variance_fixed_10"), V_, 4, "$b$ décale les valeurs sans changer leur dispersion.", ["variance", "linearite", "qcm"], varLineaire),
   gab(id("va_variance_fixed_7"), V_, 5, "Loi, $E(X)$, $E(X^2)$, $V(X)$, puis la racine carrée.", ["ecart_type", "qcm"], varSigmaArrondi),
   gab(id("va_variance_fixed_9"), V_, 5, "N'oublie pas la racine carrée à la fin.", ["ecart_type", "qcm"], varSigmaArrondi),
+
+  // VA_SOMME (03/11/2026) — BO « Sommes de variables aléatoires »
+  gab(id("va_somme_tpl_1"), S_, 1, "$E(X + Y) = E(X) + E(Y)$ et $E(aX) = a\\,E(X)$.", ["somme", "esperance", "linearite"], sommeE1),
+  gab(id("va_somme_tpl_2"), S_, 1, "Indépendantes : $V(X + Y) = V(X) + V(Y)$ ; et $V(aX) = a^2\\,V(X)$.", ["somme", "variance", "independance"], sommeV1),
+  gab(id("va_somme_tpl_3"), S_, 2, "Espérance : coefficients tels quels ; variance : coefficients AU CARRÉ.", ["somme", "linearite", "qcm"], sommeComb2),
+  gab(id("va_somme_tpl_4"), S_, 2, "Une binomiale est une somme de $n$ Bernoulli : $E = np$, $V = np(1 - p)$.", ["somme", "bernoulli", "binomiale"], sommeBernoulli2),
+  gab(id("va_somme_tpl_5"), S_, 2, "L'espérance s'ajoute toujours ; la variance seulement si indépendance.", ["somme", "independance", "qcm"], sommeVraiFaux2),
+  gab(id("va_somme_tpl_6"), S_, 3, "$E(T) = E(X) + E(Y)$ ; si indépendantes, $V(T) = V(X) + V(Y)$.", ["somme", "contexte"], sommeContexte3),
+  gab(id("va_somme_tpl_7"), S_, 3, "$V(X - Y) = V(X) + V(Y)$ : les variances s'ajoutent toujours.", ["somme", "difference", "contexte"], sommeDifference3),
+  gab(id("va_somme_tpl_8"), S_, 3, "On additionne les VARIANCES, puis on prend la racine.", ["somme", "ecart_type", "contexte", "qcm"], sommeSigma3),
+  gab(id("va_somme_tpl_9"), S_, 4, "$V(S_n) = n\\,V(X)$ et $\\sigma(S_n) = \\sqrt{n}\\,\\sigma(X)$.", ["somme", "repetition", "contexte"], sommeRepet4),
+  gab(id("va_somme_tpl_10"), S_, 4, "$V(aX + bY + c) = a^2V(X) + b^2V(Y)$ si indépendantes.", ["somme", "linearite", "contexte"], sommeCout4),
+  gab(id("va_somme_tpl_11"), S_, 4, "Chaque $X_i$ : Bernoulli, $E = p$, $V = p(1 - p)$ ; on additionne.", ["somme", "bernoulli", "binomiale", "contexte"], sommeBinomContexte4),
+  gab(id("va_somme_tpl_12"), S_, 5, "Loi → $E(X)$, $V(X)$ ; puis $E(S_n) = nE(X)$, $V(S_n) = nV(X)$.", ["somme", "repetition", "canvas", "qcm"], sommeLoiRepet5),
+  gab(id("va_somme_tpl_13"), S_, 5, "Variance d'abord ($a^2$, $b^2$), racine ensuite.", ["somme", "ecart_type", "linearite", "qcm"], sommeCoutSigma5),
 
   // VA_INTERPRETER
   gab(id("va_interpreter_fixed_1"), I_, 2, "L'espérance est une moyenne sur un grand nombre de répétitions.", ["interpreter", "esperance", "qcm"], intE),

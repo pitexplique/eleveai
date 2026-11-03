@@ -559,6 +559,15 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["va_esperance"],
   },
   {
+    // BO Tle spé « Sommes de variables aléatoires » : E(X + Y), V(X + Y) si
+    // indépendantes, binomiale = somme de Bernoulli, Sₙ = X₁ + … + Xₙ.
+    // (La moyenne Mₙ est dans concentration_echantillonnage.)
+    id: "va_somme",
+    label: "Additionner des variables aléatoires",
+    notionId: "variable_aleatoire",
+    prerequis: ["va_variance_ecart_type"],
+  },
+  {
     id: "va_interpreter",
     label: "Interpréter espérance, variance ou écart-type",
     notionId: "variable_aleatoire",
