@@ -1,5 +1,6 @@
 import type { CorrecteursMaths } from "./types";
 import type { TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
+import { PRENOMS } from "../entiers.bank";
 
 // Correcteurs des gabarits de angles.bank.ts (06/10/2026, voir types.ts).
 // Chaque correcteur RELIT le texte (mesures en degrés, noms de points), refait
@@ -85,6 +86,12 @@ function corrigerReconnaitre(q: Q): string[] {
     return [...qcm(q, `[${s}${g}) et [${s}${d})`), ...canvasAngle(q)];
   }
   if (/point commun|point de départ/.test(t)) return qcm(q, "le sommet");
+  // ★1 nu (03/11/2026) : « Comment s’appelle le point S de l’angle GSD ? »
+  const pt = t.match(/le point ([A-Z])\b/);
+  if (pt && noms.length && !/sommet/.test(t)) {
+    if (noms[0][1] !== pt[1]) return [`le point ${pt[1]} n’est pas le sommet de ${noms[0]} : la réponse « le sommet » serait fausse`];
+    return [...qcm(q, "le sommet"), ...canvasAngle(q)];
+  }
   const dd = t.match(/\[([A-Z])([A-Z])\) et \[([A-Z])([A-Z])\)/);
   if (dd) {
     if (dd[1] !== dd[3]) return ["les deux demi-droites n’ont pas la même origine"];
@@ -101,7 +108,7 @@ function corrigerReconnaitre(q: Q): string[] {
 function corrigerReconnaitreQcm(q: Q): string[] {
   const t = q.text;
   const noms = nomsAngles(t);
-  if (/est formé par :|Que trace|de quoi est fait/.test(t)) {
+  if (/est formé par :|Que trace|de quoi est fait|De quoi est fait/.test(t)) {
     const s = noms[0][1];
     return [...qcm(q, `deux demi-droites d’origine ${s}`), ...canvasAngle(q)];
   }
@@ -144,7 +151,7 @@ function corrigerDroitCode(q: Q): string[] {
   return [...p, ...canvasAngle(q)];
 }
 function corrigerDroitListe(q: Q): string[] {
-  const paires = [...q.text.matchAll(/([A-Z]{3}) mesure (\d+)°/g)].map((m) => ({ n: m[1], v: Number(m[2]) }));
+  const paires = [...q.text.matchAll(/([A-Z]{3})(?: mesure| =) (\d+)°/g)].map((m) => ({ n: m[1], v: Number(m[2]) }));
   if (paires.length !== 4) return [`quatre angles attendus, lus : ${paires.length}`];
   const droits = paires.filter((x) => x.v === 90);
   if (droits.length !== 1) return [`${droits.length} angles droits dans la liste`];
@@ -173,7 +180,7 @@ function corrigerDeux(q: Q): string[] {
   return p;
 }
 function corrigerQuatre(q: Q): string[] {
-  const paires = [...q.text.matchAll(/([A-Z]{3}) mesure (\d+)°/g)].map((m) => ({ n: m[1], v: Number(m[2]) }));
+  const paires = [...q.text.matchAll(/([A-Z]{3})(?: mesure| =) (\d+)°/g)].map((m) => ({ n: m[1], v: Number(m[2]) }));
   if (paires.length !== 4) return [`quatre angles attendus, lus : ${paires.length}`];
   if (new Set(paires.map((x) => x.v)).size !== 4) return ["deux angles ont la même mesure"];
   const grand = /plus grand|plus ouvert/.test(q.text);
@@ -187,6 +194,29 @@ function corrigerAuDroit(q: Q): string[] {
   const juste = v[0] < 90 ? "plus petit qu’un angle droit" : v[0] > 90 ? "plus grand qu’un angle droit" : "égal à un angle droit";
   return [...qcm(q, juste), ...plausible(q.text, v[0]), ...canvasAngle(q, v[0])];
 }
+
+/** ★2 dessiné (03/11/2026) : pas de mesure écrite, on lit l'angle sur la figure, loin de 90°. */
+function corrigerAuDroitDessine(q: Q): string[] {
+  if (degres(q.text).length) return ["une mesure est écrite : ce n’est plus une comparaison à l’œil"];
+  const c = q.canvas as any;
+  if (c?.kind !== "angle") return ["pas de figure"];
+  if (c.angle.display?.showMeasure) return ["la figure affiche la mesure"];
+  const v = c.angle.angleDeg;
+  if (Math.abs(v - 90) < 25) return [`angle de ${v}° trop proche de 90° pour juger à l’œil`];
+  const juste = v < 90 ? "plus petit qu’un angle droit" : "plus grand qu’un angle droit";
+  return [...qcm(q, juste), ...canvasAngle(q)];
+}
+
+/** Énoncé ★1-★2 : aucun prénom (REGLES-6E.md, 03/11/2026). */
+const aPrenom = (t: string) => PRENOMS.some((x) => new RegExp(`(^|[^\\p{L}])${x.nom}(?![\\p{L}])`, "u").test(t));
+function nu(f: (q: Q) => string[]) {
+  return (q: Q) => [...f(q), ...(aPrenom(q.text) ? ["prénom dans un énoncé nu (★1-★2)"] : [])];
+}
+/** ★3 en situation : un prénom ou un objet est attendu. */
+function enSituation(f: (q: Q) => string[]) {
+  return (q: Q) => [...f(q), ...(aPrenom(q.text) || /ouvre|coupe|déplie|pose|grimpe|monte|règle|écarte|photographie|lève|regarde|arrive/.test(q.text) ? [] : ["gabarit ★3 sans situation"])];
+}
+const nombrePaires = (t: string) => [...t.matchAll(/([A-Z]{3})(?: mesure| =) (\d+)°/g)].length;
 
 // ----- ANGLE_MESURER
 function corrigerInstrument(q: Q): string[] {
@@ -241,7 +271,7 @@ function corrigerTracer(q: Q): string[] {
     if (!(q.choices ?? []).includes(`${180 - v[0]}°`)) p.push("le piège de l’autre graduation manque");
     return p;
   }
-  if (/sorte d’angle|cet angle sera/.test(t)) return qcm(q, nature(v[0]));
+  if (/sorte d’angle|cet angle sera/i.test(t)) return qcm(q, nature(v[0]));
   return ["tournure inconnue du correcteur"];
 }
 function corrigerEtapes(q: Q): string[] {
@@ -278,7 +308,7 @@ function corrigerDefi(q: Q): string[] {
   return corrigerAuDroit(q);
 }
 function corrigerDefiQcm(q: Q): string[] {
-  const paires = [...q.text.matchAll(/([A-Z]{3}) mesure (\d+)°/g)].map((m) => ({ n: m[1], v: Number(m[2]) }));
+  const paires = [...q.text.matchAll(/([A-Z]{3})(?: mesure| =) (\d+)°/g)].map((m) => ({ n: m[1], v: Number(m[2]) }));
   if (paires.length !== 4) return [`quatre angles attendus, lus : ${paires.length}`];
   const veutAigu = /plus petit|aigu/.test(q.text);
   const ok = paires.filter((x) => (veutAigu ? nature(x.v) === "aigu" : nature(x.v) === "obtus"));
@@ -377,24 +407,35 @@ export const CORRECTEURS: CorrecteursMaths = {
   angle_defi_tpl_adjacents: corrigerAdjacents,
   angle_defi_tpl_opposes_par_le_sommet: corrigerOpposes,
   angle_defi_tpl_angle_plein: corrigerPlein,
-  angle_tracer_tpl_1: corrigerTracer,
-  angle_tracer_qcm_tpl_1: corrigerEtapes,
-  angle_mesurer_tpl_1: corrigerInstrument,
-  angle_mesurer_qcm_tpl_1: corrigerMethode,
+  angle_tracer_tpl_1: nu(corrigerTracer),
+  angle_tracer_qcm_tpl_1: nu(corrigerEtapes),
+  angle_tracer_tpl_ctx3: enSituation((q) => (/étape/.test(q.text) ? corrigerEtapes(q) : corrigerTracer(q))),
+  angle_mesurer_tpl_1: nu(corrigerInstrument),
+  angle_mesurer_qcm_tpl_1: nu(corrigerMethode),
+  angle_mesurer_tpl_ctx3: enSituation((q) => (/instrument|outil|Avec quoi|unité/.test(q.text) ? corrigerInstrument(q) : corrigerMethode(q))),
   angle_mesurer_qcm_tpl_rapporteur: corrigerRapporteur,
-  angle_comparer_tpl_1: corrigerDeux,
-  angle_comparer_tpl_2: corrigerDeux,
-  angle_comparer_tpl_3: corrigerAuDroit,
-  angle_comparer_tpl_4: corrigerAuDroit,
-  angle_comparer_qcm_tpl_1: corrigerQuatre,
-  angle_comparer_qcm_tpl_2: corrigerQuatre,
-  angle_comparer_qcm_tpl_3: corrigerAuDroit,
-  angle_comparer_qcm_tpl_4: corrigerAuDroit,
-  angle_droit_tpl_1: corrigerDroitCoin,
-  angle_droit_tpl_2: corrigerDroitCode,
-  angle_droit_qcm_tpl_1: corrigerDroitListe,
-  angle_droit_qcm_tpl_2: corrigerDroitOuiNon,
-  angle_reconnaitre_tpl_1: corrigerReconnaitre,
-  angle_reconnaitre_qcm_tpl_1: corrigerReconnaitreQcm,
+  angle_comparer_tpl_1: nu(corrigerDeux),
+  angle_comparer_tpl_2: nu(corrigerDeux),
+  angle_comparer_tpl_3: nu(corrigerAuDroit),
+  angle_comparer_tpl_4: nu(corrigerAuDroit),
+  angle_comparer_qcm_tpl_1: nu(corrigerQuatre),
+  angle_comparer_qcm_tpl_2: nu(corrigerQuatre),
+  angle_comparer_qcm_tpl_3: nu(corrigerAuDroitDessine),
+  angle_comparer_qcm_tpl_4: nu(corrigerAuDroitDessine),
+  angle_comparer_tpl_ctx3: enSituation((q) =>
+    nombrePaires(q.text) === 4 ? corrigerQuatre(q) : degres(q.text).length === 2 ? corrigerDeux(q) : corrigerAuDroit(q),
+  ),
+  angle_droit_tpl_1: nu(corrigerDroitCoin),
+  angle_droit_tpl_2: nu(corrigerDroitCode),
+  angle_droit_qcm_tpl_1: nu(corrigerDroitListe),
+  angle_droit_qcm_tpl_2: nu(corrigerDroitOuiNon),
+  angle_droit_tpl_ctx3: enSituation((q) =>
+    nombrePaires(q.text) === 4 ? corrigerDroitListe(q) : q.format === "qcm" ? corrigerDroitOuiNon(q) : corrigerDroitCoin(q),
+  ),
+  angle_reconnaitre_tpl_1: nu(corrigerReconnaitre),
+  angle_reconnaitre_qcm_tpl_1: nu(corrigerReconnaitreQcm),
+  angle_reconnaitre_tpl_ctx3: enSituation((q) =>
+    (q.choices ?? []).includes("aigu") || /demi-droites d’origine/.test((q.choices ?? []).join()) ? corrigerReconnaitreQcm(q) : corrigerReconnaitre(q),
+  ),
   angle_reconnaitre_qcm_tpl_nature: corrigerNature,
 };

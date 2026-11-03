@@ -1,4 +1,4 @@
-import type { TutorBankItemV4, AngleCanvasData, DroitesCanvasData } from "@/lib/tutor-v4/types";
+import type { TutorBankItemV4, TutorGeneratedQuestionV4, AngleCanvasData, DroitesCanvasData } from "@/lib/tutor-v4/types";
 import { PRENOMS, de, type Prenom } from "./entiers.bank";
 
 function shuffle<T>(arr: T[]): T[] {
@@ -109,7 +109,7 @@ const OBJETS_ANGLE: ObjetAngle[] = [
   { phrase: (p) => `${p.nom} écarte les bras pour danser.`, cotes: "ses deux bras", min: 30, max: 180 },
   { phrase: (p) => `${p.nom} photographie un oiseau en vol.`, cotes: "les deux ailes de l’oiseau", min: 60, max: 170 },
   { phrase: (p) => `${p.nom} monte sur une rampe de skate.`, cotes: "la rampe et le sol", min: 10, max: 45 },
-  { phrase: (p) => `${p.nom} lève le bras de sa grue en jouet.`, cotes: "le bras de la grue et le sol", min: 10, max: 80 },
+  { phrase: (p) => `${p.nom} joue avec une grue.`, cotes: "le bras de la grue et le sol", min: 10, max: 80 },
   { phrase: (p) => `${p.nom} regarde l’horloge de la cuisine.`, cotes: "les deux aiguilles de l’horloge", min: 0, max: 180 },
   { phrase: (p) => `${p.nom} arrive à vélo à un carrefour.`, cotes: "les deux routes", min: 30, max: 150 },
 ];
@@ -158,10 +158,15 @@ const OUVRABLES = [
   { son: "la porte de sa chambre", sien: "la sienne", min: 20, max: 120 },
 ];
 
-/** Comparer DEUX angles (★1) : la réponse est la mesure du plus grand ou du plus petit. */
-function comparerDeux(plusGrand: boolean) {
+// ⭐ 03/11/2026 (REGLES-6E.md) : à ★1-★2, des énoncés NUS — pas de prénom,
+// pas d'objet, ★1 ≤ 12 mots, ★2 ≤ 15 mots. Les situations (compas, ciseaux,
+// porte, prénoms…) ne sont pas jetées : elles passent dans les gabarits
+// « _ctx3 » (★3), avec les mêmes correcteurs.
+
+/** Comparer DEUX angles : la réponse est la mesure du plus grand ou du plus petit. */
+function comparerDeux(plusGrand: boolean, ctx = false) {
   const [p, q] = deuxPrenoms();
-  const cas = randomInt(0, 3);
+  const cas = ctx ? randomInt(0, 2) : 3;
   const obj = pick(OUVRABLES);
   const [lo, hi] = cas === 2 ? [obj.min, obj.max] : [20, 170];
   const a = 10 * randomInt(Math.ceil(lo / 10), Math.floor(hi / 10));
@@ -173,8 +178,8 @@ function comparerDeux(plusGrand: boolean) {
   let text: string;
   if (cas === 0)
     text = pick([
-      `L’angle ${n1.nom} mesure ${a}° et l’angle ${n2.nom} mesure ${b}°. Quel angle est le plus ${mot} ? Donne sa mesure.`,
-      `Quelle est la mesure du plus ${mot} des deux angles : ${n1.nom} = ${a}° ou ${n2.nom} = ${b}° ?`,
+      `${p.nom} mesure l’angle ${n1.nom} : ${a}°, puis l’angle ${n2.nom} : ${b}°. Quel angle est le plus ${mot} ? Donne sa mesure.`,
+      `${p.nom} compare un angle de ${a}° et un angle de ${b}°. Quelle est la mesure du plus ${mot} ?`,
     ]);
   else if (cas === 1)
     text = pick([
@@ -184,10 +189,12 @@ function comparerDeux(plusGrand: boolean) {
   else if (cas === 2)
     text = `${p.nom} ouvre ${obj.son} à ${a}°. ${q.nom} ouvre ${obj.sien} à ${b}°. ${plusGrand ? "Quel est le plus grand angle d’ouverture" : "Quel est le plus petit angle d’ouverture"} ? Donne sa mesure.`;
   else
+    // ★1 nu : 12 mots au plus.
     text = pick([
-      `Range dans ta tête ces deux angles : ${a}° et ${b}°. Quel est le plus ${mot} ?`,
-      `Entre un angle de ${a}° et un angle de ${b}°, lequel est le plus ${mot} ?`,
-      `${p.nom} compare un angle de ${a}° et un angle de ${b}°. Quelle est la mesure du plus ${mot} ?`,
+      `Quel angle est le plus ${mot} : ${a}° ou ${b}° ?`,
+      `Deux angles mesurent ${a}° et ${b}°. Écris la mesure du plus ${mot}.`,
+      `${n1.nom} = ${a}° et ${n2.nom} = ${b}°. Donne la mesure du plus ${mot}.`,
+      `Écris la mesure du plus ${mot} angle : ${a}° ou ${b}°.`,
     ]);
   return {
     text,
@@ -200,8 +207,8 @@ function comparerDeux(plusGrand: boolean) {
   };
 }
 
-/** Comparer QUATRE angles nommés (★2) : la réponse est un nom d'angle. */
-function comparerQuatre(plusGrand: boolean) {
+/** Comparer QUATRE angles nommés : la réponse est un nom d'angle. */
+function comparerQuatre(plusGrand: boolean, ctx = false) {
   const ls = lettres(12);
   const noms = [0, 1, 2, 3].map((k) => ls.slice(3 * k, 3 * k + 3).join(""));
   const ms: number[] = [];
@@ -213,15 +220,20 @@ function comparerQuatre(plusGrand: boolean) {
   const bon = noms[ms.indexOf(r)];
   const p = pick(PRENOMS);
   const mot = plusGrand ? "le plus grand" : "le plus petit";
-  const liste = noms.map((n, k) => `${n} mesure ${ms[k]}°`).join(", ");
-  const text = pick([
-    `${liste}. Quel est ${mot} angle ?`,
-    `${p.nom} a mesuré quatre angles : ${liste}. Lequel est ${mot} ?`,
-    `Voici quatre angles : ${liste}. Choisis ${mot}.`,
-    `Dans la figure ${de(p.nom)}, ${liste}. Quel angle est ${plusGrand ? "le plus ouvert" : "le moins ouvert"} ?`,
-  ]);
+  let text: string;
+  if (ctx) {
+    const liste = noms.map((n, k) => `${n} mesure ${ms[k]}°`).join(", ");
+    text = pick([
+      `${p.nom} a mesuré quatre angles : ${liste}. Quel angle est ${mot} ?`,
+      `Dans la figure ${de(p.nom)}, ${liste}. Quel angle est ${plusGrand ? "le plus ouvert" : "le moins ouvert"} ?`,
+    ]);
+  } else {
+    // ★2 nu : « ABC = 40° », la liste se lit d'un coup d'œil.
+    const liste = noms.map((n, k) => `${n} = ${ms[k]}°`).join(", ");
+    text = pick([`Quel angle est ${mot} ? ${liste}.`, `Choisis ${mot} angle : ${liste}.`]);
+  }
   return {
-    text: text[0].toUpperCase() + text.slice(1),
+    text,
     format: "qcm" as const,
     choices: noms.map((n) => `l’angle ${n}`),
     expected: [`l’angle ${bon}`],
@@ -230,7 +242,7 @@ function comparerQuatre(plusGrand: boolean) {
   };
 }
 
-/** Comparer un angle à l'angle droit (★2), avec les lettres ou en situation. */
+/** Comparer un angle à l'angle droit, avec les lettres ou en situation (★3). */
 const PETIT = "plus petit qu’un angle droit";
 const GRAND = "plus grand qu’un angle droit";
 const EGAL = "égal à un angle droit";
@@ -244,13 +256,13 @@ function comparerAuDroit(v: number, enSituation: boolean, intrus: string) {
       `${o.phrase(p)} L’angle entre ${o.cotes} mesure ${v}°. Cet angle est :`,
       `${o.phrase(p)} ${o.cotes[0].toUpperCase()}${o.cotes.slice(1)} font un angle de ${v}°. Compare-le à un angle droit.`,
       `${o.phrase(p)} ${p.f ? "Elle" : "Il"} mesure ${v}° entre ${o.cotes}. Que peut-on dire de cet angle ?`,
+      `${p.nom} a tracé l’angle ${n.nom} de ${v}°. Cet angle est :`,
     ]);
   } else
     text = pick([
       `L’angle ${n.nom} mesure ${v}°. Compare-le à un angle droit.`,
       `Un angle de ${v}° est :`,
-      `${p.nom} a tracé l’angle ${n.nom} de ${v}°. Cet angle est :`,
-      `Sans rapporteur : l’angle ${n.nom} de ${v}° est-il plus petit ou plus grand qu’un angle droit ?`,
+      `Compare un angle de ${v}° à un angle droit.`,
     ]);
   const juste = v < 90 ? PETIT : v > 90 ? GRAND : EGAL;
   return {
@@ -262,6 +274,455 @@ function comparerAuDroit(v: number, enSituation: boolean, intrus: string) {
     explanation: expl(`Un angle droit mesure 90°. ${v} ${v < 90 ? "<" : ">"} 90 : l’angle de ${v}° est ${juste}.`),
     ...(!enSituation && text.includes(n.nom) ? { canvas: figureAngle(v, n, { mesure: true }) } : {}),
   };
+}
+
+/** ★2 nu et dessiné : on compare À L'ŒIL l'angle de la figure à un angle droit (pas de mesure écrite). */
+function comparerAuDroitDessine(petit: boolean) {
+  const n = nomAngle();
+  const v = petit ? mesure5(15, 65) : mesure5(115, 170);
+  const text = pick([
+    `Observe l’angle ${n.nom}. Compare-le à un angle droit.`,
+    `Regarde la figure. L’angle ${n.nom} est :`,
+    `Sans mesurer, compare l’angle ${n.nom} à un angle droit.`,
+  ]);
+  const juste = petit ? PETIT : GRAND;
+  return {
+    text,
+    format: "qcm" as const,
+    choices: shuffle([PETIT, EGAL, GRAND]),
+    expected: [juste],
+    comparator: "mcq_exact" as const,
+    explanation: expl(
+      `Un angle droit a la forme du coin d’une équerre. L’angle ${n.nom} est ${petit ? "plus fermé" : "plus ouvert"} que ce coin : il est ${juste}.`,
+    ),
+    canvas: figureAngle(v, n),
+  };
+}
+
+type G = TutorGeneratedQuestionV4;
+
+// ----- Générateurs des gabarits ★1-★2 (nus) et ★3 (_ctx3, en situation).
+
+/** Sommet, côtés, nom d'un angle (★1 nu) ; en situation : l'objet réel (★3). */
+function genReconnaitre(ctx: boolean): G {
+  const n = nomAngle();
+  const v = mesure5(25, 155, [90]);
+  const p = pick(PRENOMS);
+  const cas = ctx ? pick([0, 1, 2, 2, 3]) : randomInt(0, 3);
+  if (cas === 0) {
+    const t = ctx
+      ? `${p.nom} a tracé l’angle ${n.nom}. Quel point est son sommet ?`
+      : pick([`Quel point est le sommet de l’angle ${n.nom} ?`, `Observe l’angle ${n.nom}. Quel est son sommet ?`]);
+    return {
+      text: t,
+      format: "qcm",
+      choices: shuffle([`le point ${n.s}`, `le point ${n.g}`, `le point ${n.d}`, "aucun de ces points"]),
+      expected: [`le point ${n.s}`],
+      comparator: "mcq_exact",
+      explanation: expl(`Dans le nom ${n.nom}, la lettre du milieu est le sommet : c’est ${n.s}. Les deux côtés partent de ${n.s}.`),
+      canvas: figureAngle(v, n),
+    };
+  }
+  if (cas === 1) {
+    const t = ctx
+      ? `${p.nom} repasse en rouge les côtés de l’angle ${n.nom}. Lesquels ?`
+      : pick([`Quels sont les côtés de l’angle ${n.nom} ?`, `L’angle ${n.nom} a pour côtés :`]);
+    return {
+      text: t,
+      format: "qcm",
+      choices: shuffle([
+        `[${n.s}${n.g}) et [${n.s}${n.d})`,
+        `[${n.g}${n.s}) et [${n.g}${n.d})`,
+        `[${n.d}${n.g}) et [${n.d}${n.s})`,
+        `[${n.g}${n.d}) et [${n.d}${n.g})`,
+      ]),
+      expected: [`[${n.s}${n.g}) et [${n.s}${n.d})`],
+      comparator: "mcq_exact",
+      explanation: expl(`Les côtés d’un angle sont deux demi-droites qui partent du sommet. Le sommet de ${n.nom} est ${n.s} : les côtés sont [${n.s}${n.g}) et [${n.s}${n.d}).`),
+      canvas: figureAngle(v, n),
+    };
+  }
+  if (cas === 2) {
+    if (ctx) {
+      const o = objetPour(v);
+      const t = pick([
+        `${o.phrase(p)} ${o.cotes[0].toUpperCase()}${o.cotes.slice(1)} forment un angle. Leur point commun s’appelle :`,
+        `${o.phrase(p)} On regarde l’angle formé par ${o.cotes}. Comment s’appelle le point de départ commun ?`,
+      ]);
+      return {
+        text: t,
+        format: "qcm",
+        choices: shuffle(["le sommet", "le centre", "le milieu", "la graduation"]),
+        expected: ["le sommet"],
+        comparator: "mcq_exact",
+        explanation: expl("Les deux côtés d’un angle partent d’un même point : c’est le sommet de l’angle."),
+      };
+    }
+    // Nu : le point du milieu, montré sur la figure.
+    return {
+      text: pick([`Comment s’appelle le point ${n.s} de l’angle ${n.nom} ?`, `Dans l’angle ${n.nom}, le point ${n.s} est :`]),
+      format: "qcm",
+      choices: shuffle(["le sommet", "le centre", "le milieu", "un côté"]),
+      expected: ["le sommet"],
+      comparator: "mcq_exact",
+      explanation: expl(`${n.s} est la lettre du milieu de ${n.nom} : les deux côtés partent de ${n.s}. C’est le sommet.`),
+      canvas: figureAngle(v, n),
+    };
+  }
+  const t = ctx
+    ? `${p.nom} trace [${n.s}${n.g}) et [${n.s}${n.d}). Quel nom donne-t-${il(p)} à l’angle obtenu ?`
+    : pick([
+        `Les demi-droites [${n.s}${n.g}) et [${n.s}${n.d}) forment un angle. Comment le nomme-t-on ?`,
+        `Nomme l’angle formé par [${n.s}${n.g}) et [${n.s}${n.d}).`,
+      ]);
+  return {
+    text: t,
+    format: "qcm",
+    choices: shuffle([n.nom, `${n.s}${n.g}${n.d}`, `${n.g}${n.d}${n.s}`, `${n.s}${n.d}${n.g}`]),
+    expected: [n.nom],
+    comparator: "mcq_exact",
+    explanation: expl(`Le sommet s’écrit au MILIEU du nom. Le sommet est ${n.s} : l’angle s’appelle ${n.nom} (ou ${n.d}${n.s}${n.g}).`),
+    canvas: figureAngle(v, n),
+  };
+}
+
+/** De quoi est fait un angle, et sa nature d'après sa mesure (★2 nu ; ★3 en situation). */
+function genReconnaitreQcm(ctx: boolean): G {
+  const n = nomAngle();
+  const p = pick(PRENOMS);
+  if (Math.random() < 0.3) {
+    const t = ctx
+      ? `${p.nom} dessine l’angle ${n.nom}. Que trace-t-${il(p)} ?`
+      : pick([`L’angle ${n.nom} est formé par :`, `De quoi est fait l’angle ${n.nom} ?`]);
+    const v = mesure5(25, 155, [90]);
+    return {
+      text: t,
+      format: "qcm",
+      choices: shuffle([
+        `deux demi-droites d’origine ${n.s}`,
+        `deux demi-droites d’origine ${n.g}`,
+        `trois segments [${n.g}${n.s}], [${n.s}${n.d}] et [${n.g}${n.d}]`,
+        `un cercle de centre ${n.s}`,
+      ]),
+      expected: [`deux demi-droites d’origine ${n.s}`],
+      comparator: "mcq_exact",
+      explanation: expl(`Un angle est formé par deux demi-droites de même origine. Ici, l’origine commune est le sommet ${n.s} : [${n.s}${n.g}) et [${n.s}${n.d}).`),
+      canvas: figureAngle(v, n),
+    };
+  }
+  // Nature d'après une mesure franche (loin de 90°) : le piège fin est à ★3.
+  const v = pick([mesure5(15, 70), mesure5(15, 70), mesure5(110, 170), mesure5(110, 170), 90, 180]);
+  const nature = natureAngle(v);
+  const o = objetPour(v);
+  const t = ctx
+    ? pick([
+        `${o.phrase(p)} L’angle ${n.nom} formé par ${o.cotes} mesure ${v}°. C’est un angle :`,
+        `${o.phrase(p)} ${p.f ? "Elle" : "Il"} mesure l’angle entre ${o.cotes} : ${v}°. Cet angle est :`,
+        `${p.nom} lit ${v}° sur son rapporteur pour l’angle ${n.nom}. Cet angle est :`,
+      ])
+    : pick([
+        `L’angle ${n.nom} mesure ${v}°. Comment s’appelle cet angle ?`,
+        `L’angle ${n.nom} mesure ${v}°. C’est un angle :`,
+        `Un angle mesure ${v}°. Est-il aigu, droit, obtus ou plat ?`,
+      ]);
+  const regle: Record<string, string> = {
+    aigu: `${v}° est plus petit que 90° : l’angle est aigu.`,
+    droit: "90° : c’est un angle droit.",
+    obtus: `${v}° est entre 90° et 180° : l’angle est obtus.`,
+    plat: "180° : les deux côtés sont alignés, c’est un angle plat.",
+  };
+  return {
+    text: t,
+    format: "qcm",
+    choices: shuffle(["aigu", "droit", "obtus", "plat"]),
+    expected: [nature],
+    comparator: "mcq_exact",
+    explanation: expl(regle[nature]),
+    ...(v < 180 && t.includes(n.nom) ? { canvas: figureAngle(v, n, { mesure: true, droit: v === 90 }) } : {}),
+  };
+}
+
+/** Le coin d'une figure est droit : 90° (★1 nu) ; le coin d'un objet réel (★3). */
+function genDroitCoin(ctx: boolean): G {
+  let text: string;
+  if (ctx) {
+    const p = pick(PRENOMS);
+    const coin = pick([
+      "le coin d’une feuille de papier", "le coin d’un carreau de la cuisine", "le coin d’une porte",
+      "le coin du tableau de la classe", "le coin d’un écran de téléphone", "le coin d’un terrain de foot",
+      "le coin d’une boîte à chaussures", "le coin de son cahier", "le coin d’une fenêtre",
+      "le coin d’une table rectangulaire", "le coin d’une carte postale", "le coin d’un échiquier",
+      "le coin d’un panneau de basket", "le coin d’une tablette de chocolat",
+    ]);
+    const debut = pick([
+      `${p.nom} pose son équerre sur ${coin} : elle colle parfaitement.`,
+      `${p.nom} observe ${coin}. C’est un angle droit.`,
+      `${coin[0].toUpperCase()}${coin.slice(1)} forme un angle droit, vérifie ${p.nom} avec son équerre.`,
+    ]);
+    const fin = pick(["Combien mesure cet angle ?", "Quelle est la mesure de cet angle, en degrés ?", "Complète : cet angle mesure … °.", "Donne la mesure de cet angle."]);
+    text = `${debut} ${fin}`;
+  } else {
+    const coin = pick(["Le coin d’un carré", "Le coin d’un rectangle"]);
+    text = pick([
+      `${coin} est un angle droit. Combien mesure-t-il ?`,
+      `${coin} forme un angle droit. Donne sa mesure.`,
+      `${coin} est un angle droit. Complète : il mesure … °.`,
+    ]);
+  }
+  return {
+    text,
+    format: "short",
+    expected: ["90°", "90"],
+    comparator: "number_equal",
+    explanation: expl("Un angle droit mesure toujours 90°, quelle que soit la taille de la figure."),
+  };
+}
+
+/** Quatre angles nommés, un seul droit : la réponse est un NOM d'angle. */
+function genDroitListe(ctx: boolean): G {
+  const ls = lettres(12);
+  const noms = [0, 1, 2, 3].map((k) => ls.slice(3 * k, 3 * k + 3).join(""));
+  const m1 = mesure5(20, 80);
+  const m2 = mesure5(100, 175);
+  const mesures = shuffle([90, m1, m2, mesure5(20, 175, [90, m1, m2])]);
+  const droit = noms[mesures.indexOf(90)];
+  const p = pick(PRENOMS);
+  let t: string;
+  if (ctx) {
+    const liste = noms.map((n, k) => `${n} mesure ${mesures[k]}°`).join(", ");
+    t = pick([
+      `${p.nom} a mesuré quatre angles : ${liste}. Quel angle est droit ?`,
+      `Dans la figure ${de(p.nom)}, ${liste}. Où dessine-t-${il(p)} le petit carré ?`,
+    ]);
+  } else {
+    const liste = noms.map((n, k) => `${n} = ${mesures[k]}°`).join(", ");
+    t = pick([`Quel angle est droit ? ${liste}.`, `Choisis l’angle droit : ${liste}.`]);
+  }
+  return {
+    text: t,
+    format: "qcm",
+    choices: noms.map((n) => `l’angle ${n}`),
+    expected: [`l’angle ${droit}`],
+    comparator: "mcq_exact",
+    explanation: expl(`Un angle droit mesure exactement 90°. Ici, c’est l’angle ${droit}.`),
+  };
+}
+
+/** Cet angle est-il droit ? (★2 nu ; ★3 en situation) */
+function genDroitOuiNon(ctx: boolean): G {
+  const n = nomAngle();
+  const p = pick(PRENOMS);
+  const v = Math.random() < 0.4 ? 90 : mesure5(40, 140, [90]);
+  const o = objetPour(v);
+  const t = ctx
+    ? pick([
+        `${p.nom} mesure l’angle ${n.nom} : ${v}°. Cet angle est-il droit ?`,
+        `${o.phrase(p)} L’angle entre ${o.cotes} mesure ${v}°. Est-ce un angle droit ?`,
+        `${p.nom} lit ${v}° sur son rapporteur. A-t-${il(p)} mesuré un angle droit ?`,
+      ])
+    : pick([
+        `L’angle ${n.nom} mesure ${v}°. Est-ce un angle droit ?`,
+        `Un angle mesure ${v}°. Est-il droit ?`,
+        `Observe l’angle ${n.nom} de ${v}°. Est-il droit ?`,
+      ]);
+  const juste = v === 90 ? "oui, il mesure 90°" : v < 90 ? "non, il est plus petit qu’un angle droit" : "non, il est plus grand qu’un angle droit";
+  return {
+    text: t,
+    format: "qcm",
+    choices: shuffle(["oui, il mesure 90°", "non, il est plus petit qu’un angle droit", "non, il est plus grand qu’un angle droit"]),
+    expected: [juste],
+    comparator: "mcq_exact",
+    explanation: expl(v === 90 ? "90° pile : c’est un angle droit." : `${v}° n’est pas 90°. ${v < 90 ? `${v} < 90 : l’angle est plus petit` : `${v} > 90 : l’angle est plus grand`} qu’un angle droit.`),
+    ...(t.includes(n.nom) ? { canvas: figureAngle(v, n, { mesure: true, droit: v === 90 }) } : {}),
+  };
+}
+
+/** L'instrument ou l'unité pour mesurer un angle (★1 nu, figure dessinée ; ★3 en situation). */
+function genMesurerInstrument(ctx: boolean): G {
+  const p = pick(PRENOMS);
+  const n = nomAngle();
+  const instrument = Math.random() < 0.5;
+  let t: string;
+  if (ctx) {
+    const o = pick(OBJETS_ANGLE);
+    const quoi = pick([`l’angle ${n.nom} de sa figure`, `l’angle entre ${o.cotes}`, `l’angle ${n.nom} dessiné au tableau`]);
+    const intro = quoi.includes("entre") ? `${o.phrase(p)} ${p.f ? "Elle" : "Il"} veut mesurer ${quoi}.` : `${p.nom} veut mesurer ${quoi}.`;
+    t = instrument
+      ? pick([`${intro} Quel instrument prend-${il(p)} ?`, `${intro} Avec quoi peut-${il(p)} le faire ?`, `${intro} Quel outil faut-il ?`])
+      : pick([`${intro} Dans quelle unité va-t-${il(p)} écrire le résultat ?`, `${intro} En quelle unité s’exprime la mesure ?`]);
+  } else
+    t = instrument
+      ? pick([`Avec quel instrument mesures-tu l’angle ${n.nom} ?`, `Mesure l’angle ${n.nom}. Quel instrument prends-tu ?`])
+      : pick([`En quelle unité mesures-tu l’angle ${n.nom} ?`, `La mesure de l’angle ${n.nom} s’écrit dans quelle unité ?`]);
+  const canvas = ctx ? {} : { canvas: figureAngle(mesure5(30, 150, [90]), n) };
+  if (instrument)
+    return {
+      text: t,
+      format: "qcm",
+      choices: shuffle(["un rapporteur", "une règle graduée", "un compas", "une équerre"]),
+      expected: ["un rapporteur"],
+      comparator: "mcq_exact",
+      explanation: expl("Le rapporteur est gradué en degrés : il sert à mesurer les angles. L’équerre ne vérifie que l’angle droit, la règle mesure des longueurs."),
+      ...canvas,
+    };
+  return {
+    text: t,
+    format: "qcm",
+    choices: shuffle(["en degrés", "en centimètres", "en mètres", "en grammes"]),
+    expected: ["en degrés"],
+    comparator: "mcq_exact",
+    explanation: expl("Un angle se mesure en degrés (symbole °). La taille des côtés ne compte pas."),
+    ...canvas,
+  };
+}
+
+/** La méthode du rapporteur, avec les noms de points de l'angle (★2 nu ; ★3 avec un prénom). */
+function genMesurerMethode(ctx: boolean): G {
+  const p = pick(PRENOMS);
+  const n = nomAngle();
+  const cas = randomInt(0, 2);
+  if (cas === 0) {
+    const t = ctx
+      ? pick([
+          `Pour mesurer l’angle ${n.nom}, où ${p.nom} place-t-${il(p)} le centre du rapporteur ?`,
+          `${p.nom} mesure l’angle ${n.nom}. Sur quel point pose-t-${il(p)} le centre du rapporteur ?`,
+        ])
+      : pick([
+          `Pour mesurer l’angle ${n.nom}, où poses-tu le centre du rapporteur ?`,
+          `On mesure l’angle ${n.nom}. Où met-on le centre du rapporteur ?`,
+        ]);
+    return {
+      text: t,
+      format: "qcm",
+      choices: shuffle([`sur le point ${n.s}`, `sur le point ${n.g}`, `sur le point ${n.d}`, `au milieu de [${n.g}${n.d}]`]),
+      expected: [`sur le point ${n.s}`],
+      comparator: "mcq_exact",
+      explanation: expl(`Le centre du rapporteur se pose sur le sommet. Le sommet de ${n.nom} est la lettre du milieu : ${n.s}.`),
+      canvas: figureAngle(mesure5(30, 150, [90]), n),
+    };
+  }
+  if (cas === 1) {
+    const t = ctx
+      ? `${p.nom} mesure l’angle ${n.nom}. ${p.f ? "Elle" : "Il"} pose le centre du rapporteur sur ${n.s} et le 0 sur [${n.s}${n.d}). Sur quel côté lit-${il(p)} la mesure ?`
+      : pick([
+          `Le 0 du rapporteur est sur [${n.s}${n.d}). Où lis-tu la mesure de l’angle ${n.nom} ?`,
+          `Angle ${n.nom} : le 0 du rapporteur est sur [${n.s}${n.d}). Où lis-tu la mesure ?`,
+        ]);
+    return {
+      text: t,
+      format: "qcm",
+      choices: shuffle([`sur [${n.s}${n.g})`, `sur [${n.s}${n.d})`, `sur [${n.g}${n.d}]`, `sur [${n.d}${n.g})`]),
+      expected: [`sur [${n.s}${n.g})`],
+      comparator: "mcq_exact",
+      explanation: expl(`Le 0 est sur un côté, [${n.s}${n.d}). On lit la mesure là où passe l’AUTRE côté : [${n.s}${n.g}).`),
+      canvas: figureAngle(mesure5(30, 150, [90]), n),
+    };
+  }
+  // Les deux graduations : aigu ou obtus tranche.
+  const v = pick([20, 30, 40, 50, 60, 70, 80, 100, 110, 120, 130, 140, 150, 160]);
+  const w = 180 - v;
+  const nat = v < 90 ? "aigu" : "obtus";
+  const [x, y] = shuffle([v, w]);
+  const t = ctx
+    ? pick([
+        `L’angle ${n.nom} est ${nat}. Sur le rapporteur, ${p.nom} lit ${x}° sur une graduation et ${y}° sur l’autre. Quelle est sa mesure ?`,
+        `${p.nom} hésite pour l’angle ${n.nom}, qui est ${nat} : ${x}° ou ${y}° ? Quelle est la bonne mesure ?`,
+      ])
+    : pick([
+        `L’angle ${n.nom} est ${nat}. Le rapporteur indique ${x}° et ${y}°. Quelle est sa mesure ?`,
+        `L’angle ${n.nom} est ${nat} : ${x}° ou ${y}° ? Choisis sa mesure.`,
+      ]);
+  return {
+    text: t,
+    format: "qcm",
+    choices: shuffle([`${v}°`, `${w}°`]),
+    expected: [`${v}°`],
+    comparator: "mcq_exact",
+    explanation: expl(`Un angle ${nat} mesure ${nat === "aigu" ? "moins" : "plus"} de 90°. Entre ${v}° et ${w}°, c’est donc ${v}°.`),
+    canvas: figureAngle(v, n),
+  };
+}
+
+/** Tracer un angle : l'instrument, la graduation, la nature prévue (★2 nu ; ★3 avec un prénom). */
+function genTracer(ctx: boolean): G {
+  const p = pick(PRENOMS);
+  const n = nomAngle();
+  const v = mesure5(20, 160, [90]);
+  const cas = randomInt(0, 2);
+  if (cas === 0) {
+    const t = ctx
+      ? pick([
+          `${p.nom} doit tracer l’angle ${n.nom} de ${v}°. Quel instrument lui faut-il ?`,
+          `Pour tracer un angle de ${v}°, ${p.nom} sort sa trousse. Que prend-${il(p)} ?`,
+        ])
+      : pick([`Quel instrument faut-il pour tracer un angle de ${v}° ?`, `Tu traces l’angle ${n.nom} de ${v}°. Quel instrument prends-tu ?`]);
+    return {
+      text: t,
+      format: "qcm",
+      choices: shuffle(["un rapporteur", "une équerre", "un compas", "une gomme"]),
+      expected: ["un rapporteur"],
+      comparator: "mcq_exact",
+      explanation: expl(`Pour obtenir ${v}°, il faut un instrument gradué en degrés : le rapporteur. L’équerre ne donne que 90°.`),
+    };
+  }
+  if (cas === 1) {
+    const t = ctx
+      ? `${p.nom} trace l’angle ${n.nom} de ${v}°. ${p.f ? "Elle" : "Il"} pose le 0 du rapporteur sur [${n.s}${n.d}). À quelle graduation fait-${il(p)} son repère ?`
+      : `Angle ${n.nom} de ${v}° : le 0 du rapporteur est sur [${n.s}${n.d}). Quelle graduation prends-tu ?`;
+    const w = 180 - v;
+    const leurres = [...new Set([w, v + 10, v - 10, v + 20])].filter((x) => x !== v).slice(0, 3);
+    return {
+      text: t,
+      format: "qcm",
+      choices: shuffle([`${v}°`, ...leurres.map((x) => `${x}°`)]),
+      expected: [`${v}°`],
+      comparator: "mcq_exact",
+      explanation: expl(`On compte à partir du 0 posé sur [${n.s}${n.d}) jusqu’à ${v}. Contrôle : ${v < 90 ? "l’angle sera aigu" : "l’angle sera obtus"}, donc ${w}° est la lecture sur la mauvaise graduation.`),
+      canvas: figureAngle(v, n, { mesure: true }),
+    };
+  }
+  const t = ctx
+    ? `${p.nom} trace au rapporteur un angle ${n.nom} de ${v}°. Quelle sorte d’angle obtient-${il(p)} ?`
+    : pick([`Tu traces un angle de ${v}°. Cet angle sera :`, `On trace l’angle ${n.nom} de ${v}°. Cet angle sera :`]);
+  return {
+    text: t,
+    format: "qcm",
+    choices: shuffle(["aigu", "droit", "obtus", "plat"]),
+    expected: [v < 90 ? "aigu" : "obtus"],
+    comparator: "mcq_exact",
+    explanation: expl(`${v}° est ${v < 90 ? "plus petit" : "plus grand"} que 90° : l’angle sera ${v < 90 ? "aigu" : "obtus"}.`),
+  };
+}
+
+/** L'ordre des étapes, avec les lettres de l'angle à tracer. */
+function genEtapes(ctx: boolean): G {
+  const p = pick(PRENOMS);
+  const n = nomAngle();
+  const v = mesure5(20, 160, [90]);
+  const etapes = [
+    `tracer [${n.s}${n.d})`,
+    `poser le centre du rapporteur sur ${n.s} et le 0 sur [${n.s}${n.d})`,
+    `faire un repère à ${v}°`,
+    `tracer [${n.s}${n.g}) en passant par le repère`,
+  ];
+  const k = randomInt(0, 3);
+  const mot = ["la première", "la deuxième", "la troisième", "la dernière"][k];
+  const t = ctx
+    ? `${p.nom} trace l’angle ${n.nom} de ${v}°. Quelle est ${mot} étape ?`
+    : pick([`Pour tracer l’angle ${n.nom} de ${v}° au rapporteur, quelle est ${mot} étape ?`, `Tu traces l’angle ${n.nom} de ${v}°. Quelle est ${mot} étape ?`]);
+  return {
+    text: t,
+    format: "qcm",
+    choices: shuffle([...etapes]),
+    expected: [etapes[k]],
+    comparator: "mcq_exact",
+    explanation: expl(`Dans l’ordre : 1) ${etapes[0]} ; 2) ${etapes[1]} ; 3) ${etapes[2]} ; 4) ${etapes[3]}.`),
+  };
+}
+
+/** Un gabarit de la notion angle_mesure. */
+function gabarit(id: string, microId: string, difficulty: number, hint: string, tags: string[], generate: () => G): TutorBankItemV4 {
+  return { kind: "template", id, niveau: "6e", matiere: "maths", notionId: "angle_mesure", microId, difficulty, theme: "neutral", hint, tags, generate } as TutorBankItemV4;
 }
 
 export const anglesBank: TutorBankItemV4[] = [
@@ -446,7 +907,7 @@ export const anglesBank: TutorBankItemV4[] = [
     microId: "angle_droit",
     difficulty: 2,
     theme: "neutral",
-    text: "Parmi ces mesures, laquelle correspond à un angle droit ?",
+    text: "Coche la mesure d’un angle droit.",
     format: "qcm",
     choices: ["45°", "90°", "100°", "180°"],
     expected: ["90°"],
@@ -1121,201 +1582,13 @@ export const anglesBank: TutorBankItemV4[] = [
   },
 
   // =========================
-  // TEMPLATES - ANGLE_RECONNAITRE
+  // TEMPLATES (★1-★2 nus, 03/11/2026 ; les situations sont dans les « _ctx3 » plus bas)
   // =========================
-  {
-    kind: "template",
-    id: "angle_reconnaitre_tpl_1",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "angle_mesure",
-    microId: "angle_reconnaitre",
-    difficulty: 1,
-    theme: "neutral",
-    hint: "Un angle a deux côtés et un sommet : le sommet est la lettre du MILIEU.",
-    tags: ["angle_mesure", "reconnaitre", "template"],
-    // ⭐ 06/10 : était une question ouverte « 2 / deux » à mot-clé (toute
-    // réponse contenant un 2 passait). Devient un QCM sur le sommet et les côtés.
-    generate: () => {
-      const n = nomAngle();
-      const v = mesure5(25, 155, [90]);
-      const p = pick(PRENOMS);
-      const cas = randomInt(0, 3);
-      if (cas === 0) {
-        const t = pick([
-          `Quel point est le sommet de l’angle ${n.nom} ?`,
-          `Observe l’angle ${n.nom}. Quel est son sommet ?`,
-          `${p.nom} a tracé l’angle ${n.nom}. Quel point est son sommet ?`,
-        ]);
-        return {
-          text: t,
-          format: "qcm",
-          choices: shuffle([`le point ${n.s}`, `le point ${n.g}`, `le point ${n.d}`, "aucun de ces points"]),
-          expected: [`le point ${n.s}`],
-          comparator: "mcq_exact",
-          explanation: expl(`Dans le nom ${n.nom}, la lettre du milieu est le sommet : c’est ${n.s}. Les deux côtés partent de ${n.s}.`),
-          canvas: figureAngle(v, n),
-        };
-      }
-      if (cas === 1) {
-        const t = pick([
-          `Quels sont les côtés de l’angle ${n.nom} ?`,
-          `L’angle ${n.nom} a pour côtés :`,
-          `${p.nom} repasse en rouge les côtés de l’angle ${n.nom}. Lesquels ?`,
-        ]);
-        return {
-          text: t,
-          format: "qcm",
-          choices: shuffle([
-            `[${n.s}${n.g}) et [${n.s}${n.d})`,
-            `[${n.g}${n.s}) et [${n.g}${n.d})`,
-            `[${n.d}${n.g}) et [${n.d}${n.s})`,
-            `[${n.g}${n.d}) et [${n.d}${n.g})`,
-          ]),
-          expected: [`[${n.s}${n.g}) et [${n.s}${n.d})`],
-          comparator: "mcq_exact",
-          explanation: expl(`Les côtés d’un angle sont deux demi-droites qui partent du sommet. Le sommet de ${n.nom} est ${n.s} : les côtés sont [${n.s}${n.g}) et [${n.s}${n.d}).`),
-          canvas: figureAngle(v, n),
-        };
-      }
-      if (cas === 2) {
-        const o = objetPour(v);
-        const t = pick([
-          `${o.phrase(p)} ${o.cotes[0].toUpperCase()}${o.cotes.slice(1)} forment un angle. Le point commun à ses deux côtés s’appelle :`,
-          `${o.phrase(p)} On regarde l’angle formé par ${o.cotes}. Comment s’appelle le point de départ commun ?`,
-        ]);
-        return {
-          text: t,
-          format: "qcm",
-          choices: shuffle(["le sommet", "le centre", "le milieu", "la graduation"]),
-          expected: ["le sommet"],
-          comparator: "mcq_exact",
-          explanation: expl("Les deux côtés d’un angle partent d’un même point : c’est le sommet de l’angle."),
-        };
-      }
-      const t = pick([
-        `Les demi-droites [${n.s}${n.g}) et [${n.s}${n.d}) forment un angle. Comment le nomme-t-on ?`,
-        `${p.nom} trace [${n.s}${n.g}) et [${n.s}${n.d}). Quel nom donne-t-${il(p)} à l’angle obtenu ?`,
-        `Un angle a pour sommet ${n.s} et pour côtés [${n.s}${n.g}) et [${n.s}${n.d}). Quel est son nom ?`,
-      ]);
-      return {
-        text: t,
-        format: "qcm",
-        choices: shuffle([n.nom, `${n.s}${n.g}${n.d}`, `${n.g}${n.d}${n.s}`, `${n.s}${n.d}${n.g}`]),
-        expected: [n.nom],
-        comparator: "mcq_exact",
-        explanation: expl(`Le sommet s’écrit au MILIEU du nom. Le sommet est ${n.s} : l’angle s’appelle ${n.nom} (ou ${n.d}${n.s}${n.g}).`),
-        canvas: figureAngle(v, n),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "angle_reconnaitre_qcm_tpl_1",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "angle_mesure",
-    microId: "angle_reconnaitre",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Aigu : moins de 90°. Droit : 90°. Obtus : entre 90° et 180°. Plat : 180°.",
-    tags: ["angle_mesure", "reconnaitre", "qcm", "template"],
-    generate: () => {
-      const n = nomAngle();
-      const p = pick(PRENOMS);
-      if (Math.random() < 0.3) {
-        const t = pick([
-          `L’angle ${n.nom} est formé par :`,
-          `${p.nom} dessine l’angle ${n.nom}. Que trace-t-${il(p)} ?`,
-          `Sur la figure, de quoi est fait l’angle ${n.nom} ?`,
-        ]);
-        const v = mesure5(25, 155, [90]);
-        return {
-          text: t,
-          format: "qcm",
-          choices: shuffle([
-            `deux demi-droites d’origine ${n.s}`,
-            `deux demi-droites d’origine ${n.g}`,
-            `trois segments [${n.g}${n.s}], [${n.s}${n.d}] et [${n.g}${n.d}]`,
-            `un cercle de centre ${n.s}`,
-          ]),
-          expected: [`deux demi-droites d’origine ${n.s}`],
-          comparator: "mcq_exact",
-          explanation: expl(`Un angle est formé par deux demi-droites de même origine. Ici, l’origine commune est le sommet ${n.s} : [${n.s}${n.g}) et [${n.s}${n.d}).`),
-          canvas: figureAngle(v, n),
-        };
-      }
-      // Nature d'après une mesure franche (loin de 90°) : le piège fin est à ★3.
-      const v = pick([mesure5(15, 70), mesure5(15, 70), mesure5(110, 170), mesure5(110, 170), 90, 180]);
-      const nature = natureAngle(v);
-      const o = objetPour(v);
-      const t = pick([
-        `${o.phrase(p)} L’angle ${n.nom} formé par ${o.cotes} mesure ${v}°. C’est un angle :`,
-        `${o.phrase(p)} ${p.f ? "Elle" : "Il"} mesure l’angle entre ${o.cotes} : ${v}°. Quelle est la nature de cet angle ?`,
-        `L’angle ${n.nom} mesure ${v}°. Comment s’appelle cet angle ?`,
-        `${p.nom} lit ${v}° sur son rapporteur pour l’angle ${n.nom}. Cet angle est :`,
-      ]);
-      const regle: Record<string, string> = {
-        aigu: `${v}° est plus petit que 90° : l’angle est aigu.`,
-        droit: "90° : c’est un angle droit.",
-        obtus: `${v}° est entre 90° et 180° : l’angle est obtus.`,
-        plat: "180° : les deux côtés sont alignés, c’est un angle plat.",
-      };
-      return {
-        text: t,
-        format: "qcm",
-        choices: shuffle(["aigu", "droit", "obtus", "plat"]),
-        expected: [nature],
-        comparator: "mcq_exact",
-        explanation: expl(regle[nature]),
-        ...(v < 180 && t.includes(n.nom) ? { canvas: figureAngle(v, n, { mesure: true, droit: v === 90 }) } : {}),
-      };
-    },
-  },
-
-  // =========================
-  // TEMPLATES - ANGLE_DROIT
-  // =========================
-  {
-    kind: "template",
-    id: "angle_droit_tpl_1",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "angle_mesure",
-    microId: "angle_droit",
-    difficulty: 1,
-    theme: "neutral",
-    hint: "Toujours 90°.",
-    tags: ["angle_mesure", "angle_droit", "template"],
-    generate: () => {
-      const p = pick(PRENOMS);
-      const coin = pick([
-        "le coin d’une feuille de papier", "le coin d’un carreau de la cuisine", "le coin d’une porte",
-        "le coin du tableau de la classe", "le coin d’un écran de téléphone", "le coin d’un terrain de foot",
-        "le coin d’une boîte à chaussures", "le coin de son cahier", "le coin d’une fenêtre",
-        "le coin d’une table rectangulaire", "le coin d’une carte postale", "le coin d’un échiquier",
-        "le coin d’un panneau de basket", "le coin d’une tablette de chocolat",
-      ]);
-      const debut = pick([
-        `${p.nom} pose son équerre sur ${coin} : elle colle parfaitement.`,
-        `${p.nom} observe ${coin}. C’est un angle droit.`,
-        `${coin[0].toUpperCase()}${coin.slice(1)} forme un angle droit, vérifie ${p.nom} avec son équerre.`,
-      ]);
-      const fin = pick([
-        "Combien mesure cet angle ?",
-        "Quelle est la mesure de cet angle, en degrés ?",
-        "Complète : cet angle mesure … °.",
-        "Donne la mesure de cet angle.",
-      ]);
-      return {
-        text: `${debut} ${fin}`,
-        format: "short",
-        expected: ["90°", "90"],
-        comparator: "number_equal",
-        explanation: expl("Un angle droit mesure toujours 90°, quelle que soit la taille de l’objet."),
-      };
-    },
-  },
+  gabarit("angle_reconnaitre_tpl_1", "angle_reconnaitre", 1, "Un angle a deux côtés et un sommet : le sommet est la lettre du MILIEU.",
+    ["angle_mesure", "reconnaitre", "template"], () => genReconnaitre(false)),
+  gabarit("angle_reconnaitre_qcm_tpl_1", "angle_reconnaitre", 2, "Aigu : moins de 90°. Droit : 90°. Obtus : entre 90° et 180°. Plat : 180°.",
+    ["angle_mesure", "reconnaitre", "qcm", "template"], () => genReconnaitreQcm(false)),
+  gabarit("angle_droit_tpl_1", "angle_droit", 1, "Toujours 90°.", ["angle_mesure", "angle_droit", "template"], () => genDroitCoin(false)),
   {
     kind: "template",
     id: "angle_droit_tpl_2",
@@ -1329,13 +1602,11 @@ export const anglesBank: TutorBankItemV4[] = [
     tags: ["angle_mesure", "angle_droit", "template", "canvas"],
     generate: () => {
       const n = nomAngle();
-      const p = pick(PRENOMS);
       const t = pick([
-        `Sur la figure, l’angle ${n.nom} est codé par un petit carré. Combien mesure-t-il ?`,
+        `Un petit carré code l’angle ${n.nom}. Combien mesure-t-il ?`,
         `L’angle ${n.nom} est un angle droit. Quelle est sa mesure ?`,
-        `${p.nom} a codé l’angle ${n.nom} avec un petit carré. Donne sa mesure en degrés.`,
         `Complète : l’angle droit ${n.nom} mesure … °.`,
-        `Le codage montre que l’angle ${n.nom} est droit. Combien de degrés mesure-t-il ?`,
+        `Observe le codage de l’angle ${n.nom}. Combien mesure-t-il ?`,
       ]);
       return {
         text: t,
@@ -1347,404 +1618,47 @@ export const anglesBank: TutorBankItemV4[] = [
       };
     },
   },
-  {
-    kind: "template",
-    id: "angle_droit_qcm_tpl_1",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "angle_mesure",
-    microId: "angle_droit",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Un angle droit mesure 90°.",
-    tags: ["angle_mesure", "angle_droit", "qcm", "template"],
-    generate: () => {
-      // Quatre angles nommés, un seul droit : la réponse est un NOM d'angle.
-      const ls = lettres(12);
-      const noms = [0, 1, 2, 3].map((k) => ls.slice(3 * k, 3 * k + 3).join(""));
-      const m1 = mesure5(20, 80);
-      const m2 = mesure5(100, 175);
-      const mesures = shuffle([90, m1, m2, mesure5(20, 175, [90, m1, m2])]);
-      const droit = noms[mesures.indexOf(90)];
-      const p = pick(PRENOMS);
-      const liste = noms.map((n, k) => `${n} mesure ${mesures[k]}°`).join(", ");
-      const t = pick([
-        `${p.nom} a mesuré quatre angles : ${liste}. Lequel est un angle droit ?`,
-        `Voici quatre angles : ${liste}. Quel angle est droit ?`,
-        `Dans la figure ${de(p.nom)}, ${liste}. Où ${p.f ? "doit-elle" : "doit-il"} dessiner le petit carré de l’angle droit ?`,
-        `Quel angle peut-on coder avec un petit carré ? ${liste}.`,
-      ]);
-      return {
-        text: t,
-        format: "qcm",
-        choices: noms.map((n) => `l’angle ${n}`),
-        expected: [`l’angle ${droit}`],
-        comparator: "mcq_exact",
-        explanation: expl(`Un angle droit mesure exactement 90°. Ici, c’est l’angle ${droit}.`),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "angle_droit_qcm_tpl_2",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "angle_mesure",
-    microId: "angle_droit",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Droit : 90° pile. Moins : plus petit. Plus : plus grand.",
-    tags: ["angle_mesure", "angle_droit", "qcm", "template"],
-    generate: () => {
-      const n = nomAngle();
-      const p = pick(PRENOMS);
-      const v = Math.random() < 0.4 ? 90 : mesure5(40, 140, [90]);
-      const o = objetPour(v);
-      const t = pick([
-        `L’angle ${n.nom} mesure ${v}°. Est-ce un angle droit ?`,
-        `${p.nom} mesure l’angle ${n.nom} : ${v}°. Cet angle est-il droit ?`,
-        `${o.phrase(p)} L’angle entre ${o.cotes} mesure ${v}°. Est-ce un angle droit ?`,
-        `${p.nom} lit ${v}° sur son rapporteur. A-t-${il(p)} mesuré un angle droit ?`,
-      ]);
-      const juste = v === 90 ? "oui, il mesure 90°" : v < 90 ? "non, il est plus petit qu’un angle droit" : "non, il est plus grand qu’un angle droit";
-      return {
-        text: t,
-        format: "qcm",
-        choices: shuffle(["oui, il mesure 90°", "non, il est plus petit qu’un angle droit", "non, il est plus grand qu’un angle droit"]),
-        expected: [juste],
-        comparator: "mcq_exact",
-        explanation: expl(v === 90 ? "90° pile : c’est un angle droit." : `${v}° n’est pas 90°. ${v < 90 ? `${v} < 90 : l’angle est plus petit` : `${v} > 90 : l’angle est plus grand`} qu’un angle droit.`),
-        ...(t.includes(n.nom) ? { canvas: figureAngle(v, n, { mesure: true, droit: v === 90 }) } : {}),
-      };
-    },
-  },
+  gabarit("angle_droit_qcm_tpl_1", "angle_droit", 2, "Un angle droit mesure 90°.", ["angle_mesure", "angle_droit", "qcm", "template"], () => genDroitListe(false)),
+  gabarit("angle_droit_qcm_tpl_2", "angle_droit", 2, "Droit : 90° pile. Moins : plus petit. Plus : plus grand.",
+    ["angle_mesure", "angle_droit", "qcm", "template"], () => genDroitOuiNon(false)),
+  gabarit("angle_comparer_tpl_1", "angle_comparer", 1, "L’angle le plus grand a la plus grande mesure.", ["angle_mesure", "comparaison", "template"], () => comparerDeux(true)),
+  gabarit("angle_comparer_tpl_2", "angle_comparer", 1, "L’angle le plus petit a la plus petite mesure.", ["angle_mesure", "comparaison", "template"], () => comparerDeux(false)),
+  gabarit("angle_comparer_tpl_3", "angle_comparer", 2, "Compare à 90°.", ["angle_mesure", "comparaison", "template", "angle_droit"],
+    () => comparerAuDroit(mesure5(15, 85), false, "plat")),
+  gabarit("angle_comparer_tpl_4", "angle_comparer", 2, "Compare à 90°.", ["angle_mesure", "comparaison", "template", "angle_droit"],
+    () => comparerAuDroit(mesure5(95, 175), false, "nul")),
+  gabarit("angle_comparer_qcm_tpl_1", "angle_comparer", 2, "Compare toutes les mesures proposées.", ["angle_mesure", "comparaison", "qcm", "template"], () => comparerQuatre(true)),
+  gabarit("angle_comparer_qcm_tpl_2", "angle_comparer", 2, "Cherche la plus petite mesure.", ["angle_mesure", "comparaison", "qcm", "template"], () => comparerQuatre(false)),
+  // ★2 dessinés : l'angle de la figure, comparé à l'œil au coin de l'équerre.
+  gabarit("angle_comparer_qcm_tpl_3", "angle_comparer", 2, "Imagine le coin de ton équerre posé sur le sommet.",
+    ["angle_mesure", "comparaison", "qcm", "template", "angle_droit", "canvas"], () => comparerAuDroitDessine(true)),
+  gabarit("angle_comparer_qcm_tpl_4", "angle_comparer", 2, "Imagine le coin de ton équerre posé sur le sommet.",
+    ["angle_mesure", "comparaison", "qcm", "template", "angle_droit", "canvas"], () => comparerAuDroitDessine(false)),
+  gabarit("angle_mesurer_tpl_1", "angle_mesurer", 1, "C’est l’instrument gradué en degrés.", ["angle_mesure", "mesure", "template"], () => genMesurerInstrument(false)),
+  gabarit("angle_mesurer_qcm_tpl_1", "angle_mesurer", 2, "Centre sur le sommet, 0 sur un côté, lecture sur l’autre côté.",
+    ["angle_mesure", "mesure", "qcm", "template"], () => genMesurerMethode(false)),
+  gabarit("angle_tracer_tpl_1", "angle_tracer", 2, "On utilise l’instrument gradué en degrés.", ["angle_mesure", "tracer", "template"], () => genTracer(false)),
+  gabarit("angle_tracer_qcm_tpl_1", "angle_tracer", 2, "L’angle part d’un point commun aux deux côtés.", ["angle_mesure", "tracer", "qcm", "template"], () => genEtapes(false)),
 
   // =========================
-  // TEMPLATES - ANGLE_COMPARE
+  // ★3 EN SITUATION (03/11/2026) : les objets, les prénoms, les tournures
+  // qui étaient à ★1-★2 — le geste est su, le contexte arrive.
   // =========================
-  {
-    kind: "template",
-    id: "angle_comparer_tpl_1",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "angle_mesure",
-    microId: "angle_comparer",
-    difficulty: 1,
-    theme: "neutral",
-    hint: "L’angle le plus grand a la plus grande mesure.",
-    tags: ["angle_mesure", "comparaison", "template"],
-    generate: () => comparerDeux(true),
-  },
-  {
-    kind: "template",
-    id: "angle_comparer_tpl_2",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "angle_mesure",
-    microId: "angle_comparer",
-    difficulty: 1,
-    theme: "neutral",
-    hint: "L’angle le plus petit a la plus petite mesure.",
-    tags: ["angle_mesure", "comparaison", "template"],
-    generate: () => comparerDeux(false),
-  },
-  {
-    kind: "template",
-    id: "angle_comparer_tpl_3",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "angle_mesure",
-    microId: "angle_comparer",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Compare à 90°.",
-    tags: ["angle_mesure", "comparaison", "template", "angle_droit"],
-    // ⭐ 06/10 : était une réponse libre à mot-clé (« plus petit ») ; QCM.
-    generate: () => comparerAuDroit(mesure5(15, 85), false, "plat"),
-  },
-  {
-    kind: "template",
-    id: "angle_comparer_tpl_4",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "angle_mesure",
-    microId: "angle_comparer",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Compare à 90°.",
-    tags: ["angle_mesure", "comparaison", "template", "angle_droit"],
-    generate: () => comparerAuDroit(mesure5(95, 175), false, "nul"),
-  },
-  {
-    kind: "template",
-    id: "angle_comparer_qcm_tpl_1",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "angle_mesure",
-    microId: "angle_comparer",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Compare toutes les mesures proposées.",
-    tags: ["angle_mesure", "comparaison", "qcm", "template"],
-    generate: () => comparerQuatre(true),
-  },
-  {
-    kind: "template",
-    id: "angle_comparer_qcm_tpl_2",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "angle_mesure",
-    microId: "angle_comparer",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Cherche la plus petite mesure.",
-    tags: ["angle_mesure", "comparaison", "qcm", "template"],
-    generate: () => comparerQuatre(false),
-  },
-  {
-    kind: "template",
-    id: "angle_comparer_qcm_tpl_3",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "angle_mesure",
-    microId: "angle_comparer",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Tous les angles inférieurs à 90° sont plus petits qu’un angle droit.",
-    tags: ["angle_mesure", "comparaison", "qcm", "template", "angle_droit"],
-    generate: () => comparerAuDroit(mesure5(15, 85), true, "plat"),
-  },
-  {
-    kind: "template",
-    id: "angle_comparer_qcm_tpl_4",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "angle_mesure",
-    microId: "angle_comparer",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Tous les angles supérieurs à 90° sont plus grands qu’un angle droit.",
-    tags: ["angle_mesure", "comparaison", "qcm", "template", "angle_droit"],
-    generate: () => comparerAuDroit(mesure5(95, 170), true, "nul"),
-  },
-
-  // =========================
-  // TEMPLATES - ANGLE_MESURER
-  // =========================
-  {
-    kind: "template",
-    id: "angle_mesurer_tpl_1",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "angle_mesure",
-    microId: "angle_mesurer",
-    difficulty: 1,
-    theme: "neutral",
-    hint: "C’est l’instrument gradué en degrés.",
-    tags: ["angle_mesure", "mesure", "template"],
-    // ⭐ 06/10 : réponse libre à mot-clé → QCM en situation (instrument ou unité).
-    generate: () => {
-      const p = pick(PRENOMS);
-      const n = nomAngle();
-      const o = pick(OBJETS_ANGLE);
-      const quoi = pick([`l’angle ${n.nom} de sa figure`, `l’angle entre ${o.cotes}`, `l’angle ${n.nom} dessiné au tableau`]);
-      const intro = quoi.includes("entre") ? `${o.phrase(p)} ${p.f ? "Elle" : "Il"} veut mesurer ${quoi}.` : `${p.nom} veut mesurer ${quoi}.`;
-      if (Math.random() < 0.5) {
-        const t = pick([`${intro} Quel instrument prend-${il(p)} ?`, `${intro} Avec quoi peut-${il(p)} le faire ?`, `${intro} Quel outil faut-il ?`]);
-        return {
-          text: t,
-          format: "qcm",
-          choices: shuffle(["un rapporteur", "une règle graduée", "un compas", "une équerre"]),
-          expected: ["un rapporteur"],
-          comparator: "mcq_exact",
-          explanation: expl("Le rapporteur est gradué en degrés : il sert à mesurer les angles. L’équerre ne vérifie que l’angle droit, la règle mesure des longueurs."),
-        };
-      }
-      const t = pick([`${intro} Dans quelle unité va-t-${il(p)} écrire le résultat ?`, `${intro} En quelle unité s’exprime la mesure ?`]);
-      return {
-        text: t,
-        format: "qcm",
-        choices: shuffle(["en degrés", "en centimètres", "en mètres", "en grammes"]),
-        expected: ["en degrés"],
-        comparator: "mcq_exact",
-        explanation: expl("Un angle se mesure en degrés (symbole °). La taille des côtés ne compte pas."),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "angle_mesurer_qcm_tpl_1",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "angle_mesure",
-    microId: "angle_mesurer",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Centre sur le sommet, 0 sur un côté, lecture sur l’autre côté.",
-    tags: ["angle_mesure", "mesure", "qcm", "template"],
-    // ⭐ 06/10 : la méthode du rapporteur, avec les noms de points de l'angle.
-    generate: () => {
-      const p = pick(PRENOMS);
-      const n = nomAngle();
-      const cas = randomInt(0, 2);
-      if (cas === 0) {
-        const t = pick([
-          `Pour mesurer l’angle ${n.nom}, où ${p.nom} place-t-${il(p)} le centre du rapporteur ?`,
-          `${p.nom} mesure l’angle ${n.nom}. Sur quel point pose-t-${il(p)} le centre du rapporteur ?`,
-          `On mesure l’angle ${n.nom} au rapporteur. Où met-on le centre du rapporteur ?`,
-        ]);
-        return {
-          text: t,
-          format: "qcm",
-          choices: shuffle([`sur le point ${n.s}`, `sur le point ${n.g}`, `sur le point ${n.d}`, `au milieu de [${n.g}${n.d}]`]),
-          expected: [`sur le point ${n.s}`],
-          comparator: "mcq_exact",
-          explanation: expl(`Le centre du rapporteur se pose sur le sommet. Le sommet de ${n.nom} est la lettre du milieu : ${n.s}.`),
-          canvas: figureAngle(mesure5(30, 150, [90]), n),
-        };
-      }
-      if (cas === 1) {
-        const t = pick([
-          `${p.nom} mesure l’angle ${n.nom}. ${p.f ? "Elle" : "Il"} pose le centre du rapporteur sur ${n.s} et le 0 sur [${n.s}${n.d}). Sur quel côté lit-${il(p)} la mesure ?`,
-          `Le rapporteur est centré sur ${n.s}, son 0 est sur [${n.s}${n.d}). Où lit-on la mesure de l’angle ${n.nom} ?`,
-          `Pour l’angle ${n.nom}, le 0 du rapporteur est aligné sur [${n.s}${n.d}). Quel côté donne la mesure ?`,
-        ]);
-        return {
-          text: t,
-          format: "qcm",
-          choices: shuffle([`sur [${n.s}${n.g})`, `sur [${n.s}${n.d})`, `sur [${n.g}${n.d}]`, `sur [${n.d}${n.g})`]),
-          expected: [`sur [${n.s}${n.g})`],
-          comparator: "mcq_exact",
-          explanation: expl(`Le 0 est sur un côté, [${n.s}${n.d}). On lit la mesure là où passe l’AUTRE côté : [${n.s}${n.g}).`),
-          canvas: figureAngle(mesure5(30, 150, [90]), n),
-        };
-      }
-      // Les deux graduations : aigu ou obtus tranche.
-      const v = pick([20, 30, 40, 50, 60, 70, 80, 100, 110, 120, 130, 140, 150, 160]);
-      const w = 180 - v;
-      const nat = v < 90 ? "aigu" : "obtus";
-      const t = pick([
-        `L’angle ${n.nom} est ${nat}. Sur le rapporteur, ${p.nom} lit ${v}° sur une graduation et ${w}° sur l’autre. Quelle est sa mesure ?`,
-        `${p.nom} hésite pour l’angle ${n.nom}, qui est ${nat} : ${w}° ou ${v}° ? Quelle est la bonne mesure ?`,
-      ]);
-      return {
-        text: t,
-        format: "qcm",
-        choices: shuffle([`${v}°`, `${w}°`]),
-        expected: [`${v}°`],
-        comparator: "mcq_exact",
-        explanation: expl(`Un angle ${nat} mesure ${nat === "aigu" ? "moins" : "plus"} de 90°. Entre ${v}° et ${w}°, c’est donc ${v}°.`),
-        canvas: figureAngle(v, n),
-      };
-    },
-  },
-
-  // =========================
-  // TEMPLATES - ANGLE_TRACER
-  // =========================
-  {
-    kind: "template",
-    id: "angle_tracer_tpl_1",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "angle_mesure",
-    microId: "angle_tracer",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "On utilise l’instrument gradué en degrés.",
-    tags: ["angle_mesure", "tracer", "template"],
-    // ⭐ 06/10 : réponse libre à mot-clé → QCM : instrument, repère sur la
-    // bonne graduation, nature de l'angle obtenu ; noms de points et prénoms.
-    generate: () => {
-      const p = pick(PRENOMS);
-      const n = nomAngle();
-      const v = mesure5(20, 160, [90]);
-      const cas = randomInt(0, 2);
-      if (cas === 0) {
-        const t = pick([
-          `${p.nom} doit tracer l’angle ${n.nom} de ${v}°. Quel instrument lui faut-il ?`,
-          `Quel instrument est utile pour tracer un angle ${n.nom} de ${v}° ?`,
-          `Pour tracer un angle de ${v}°, ${p.nom} sort sa trousse. Que prend-${il(p)} ?`,
-        ]);
-        return {
-          text: t,
-          format: "qcm",
-          choices: shuffle(["un rapporteur", "une équerre", "un compas", "une gomme"]),
-          expected: ["un rapporteur"],
-          comparator: "mcq_exact",
-          explanation: expl(`Pour obtenir ${v}°, il faut un instrument gradué en degrés : le rapporteur. L’équerre ne donne que 90°.`),
-        };
-      }
-      if (cas === 1) {
-        const t = pick([
-          `${p.nom} trace l’angle ${n.nom} de ${v}°. ${p.f ? "Elle" : "Il"} a tracé [${n.s}${n.d}), posé le centre du rapporteur sur ${n.s} et le 0 sur [${n.s}${n.d}). À quelle graduation fait-${il(p)} son repère ?`,
-          `Pour tracer l’angle ${n.nom} de ${v}°, le rapporteur est centré sur ${n.s}, son 0 sur [${n.s}${n.d}). Où place-t-on le repère du point ${n.g} ?`,
-        ]);
-        const w = 180 - v;
-        const leurres = [...new Set([w, v + 10, v - 10, v + 20])].filter((x) => x !== v).slice(0, 3);
-        return {
-          text: t,
-          format: "qcm",
-          choices: shuffle([`${v}°`, ...leurres.map((x) => `${x}°`)]),
-          expected: [`${v}°`],
-          comparator: "mcq_exact",
-          explanation: expl(`On compte à partir du 0 posé sur [${n.s}${n.d}) jusqu’à ${v}. Contrôle : ${v < 90 ? "l’angle sera aigu" : "l’angle sera obtus"}, donc ${w}° est la lecture sur la mauvaise graduation.`),
-          canvas: figureAngle(v, n, { mesure: true }),
-        };
-      }
-      const t = pick([
-        `${p.nom} trace au rapporteur un angle ${n.nom} de ${v}°. Quelle sorte d’angle obtient-${il(p)} ?`,
-        `On trace l’angle ${n.nom} de ${v}°. Avant de tracer, prévois : cet angle sera…`,
-      ]);
-      return {
-        text: t,
-        format: "qcm",
-        choices: shuffle(["aigu", "droit", "obtus", "plat"]),
-        expected: [v < 90 ? "aigu" : "obtus"],
-        comparator: "mcq_exact",
-        explanation: expl(`${v}° est ${v < 90 ? "plus petit" : "plus grand"} que 90° : l’angle sera ${v < 90 ? "aigu" : "obtus"}.`),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "angle_tracer_qcm_tpl_1",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "angle_mesure",
-    microId: "angle_tracer",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "L’angle part d’un point commun aux deux côtés.",
-    tags: ["angle_mesure", "tracer", "qcm", "template"],
-    // ⭐ 06/10 : l'ordre des étapes, avec les lettres de l'angle à tracer.
-    generate: () => {
-      const p = pick(PRENOMS);
-      const n = nomAngle();
-      const v = mesure5(20, 160, [90]);
-      const etapes = [
-        `tracer [${n.s}${n.d})`,
-        `poser le centre du rapporteur sur ${n.s} et le 0 sur [${n.s}${n.d})`,
-        `faire un repère à ${v}°`,
-        `tracer [${n.s}${n.g}) en passant par le repère`,
-      ];
+  gabarit("angle_reconnaitre_tpl_ctx3", "angle_reconnaitre", 3, "Le sommet est le point d’où partent les deux côtés.",
+    ["angle_mesure", "reconnaitre", "qcm", "template", "contexte"], () => (Math.random() < 0.5 ? genReconnaitre(true) : genReconnaitreQcm(true))),
+  gabarit("angle_droit_tpl_ctx3", "angle_droit", 3, "Un angle droit mesure toujours 90°.", ["angle_mesure", "angle_droit", "template", "contexte"],
+    () => pick([genDroitCoin, genDroitListe, genDroitOuiNon])(true)),
+  gabarit("angle_comparer_tpl_ctx3", "angle_comparer", 3, "Compare les nombres de degrés, ou compare à 90°.", ["angle_mesure", "comparaison", "template", "contexte"],
+    () => {
       const k = randomInt(0, 3);
-      const mot = ["la première", "la deuxième", "la troisième", "la dernière"][k];
-      const t = pick([
-        `${p.nom} trace l’angle ${n.nom} de ${v}°. Quelle est ${mot} étape ?`,
-        `Pour tracer l’angle ${n.nom} de ${v}° au rapporteur, quelle est ${mot} étape ?`,
-        `Construire l’angle ${n.nom} de ${v}° : que fait-on à ${mot} étape ?`,
-      ]);
-      return {
-        text: t,
-        format: "qcm",
-        choices: shuffle([...etapes]),
-        expected: [etapes[k]],
-        comparator: "mcq_exact",
-        explanation: expl(`Dans l’ordre : 1) ${etapes[0]} ; 2) ${etapes[1]} ; 3) ${etapes[2]} ; 4) ${etapes[3]}.`),
-      };
-    },
-  },
+      if (k === 0) return comparerDeux(Math.random() < 0.5, true);
+      if (k === 1) return comparerQuatre(Math.random() < 0.5, true);
+      return Math.random() < 0.5 ? comparerAuDroit(mesure5(15, 85), true, "plat") : comparerAuDroit(mesure5(95, 170), true, "nul");
+    }),
+  gabarit("angle_mesurer_tpl_ctx3", "angle_mesurer", 3, "Le rapporteur : centre sur le sommet, 0 sur un côté.", ["angle_mesure", "mesure", "template", "contexte"],
+    () => (Math.random() < 0.4 ? genMesurerInstrument(true) : genMesurerMethode(true))),
+  gabarit("angle_tracer_tpl_ctx3", "angle_tracer", 3, "On trace d’abord un côté, puis on utilise le rapporteur.", ["angle_mesure", "tracer", "template", "contexte"],
+    () => (Math.random() < 0.6 ? genTracer(true) : genEtapes(true))),
 
   // =========================
   // TEMPLATES - ANGLE_DEFIS
@@ -1881,7 +1795,7 @@ export const anglesBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "angle_reconnaitre_topup_3", niveau: "6e", matiere: "maths",
     notionId: "angle_mesure", microId: "angle_reconnaitre", difficulty: 2, theme: "neutral",
-    text: "Comment s’appelle un angle qui mesure plus de 90° mais moins de 180° ?",
+    text: "Comment s’appelle un angle entre 90° et 180° ?",
     format: "qcm", choices: ["un angle obtus", "un angle aigu", "un angle droit", "un angle plat"],
     expected: ["un angle obtus"], comparator: "mcq_exact",
     hint: "Plus grand que l’angle droit.",
@@ -1891,7 +1805,7 @@ export const anglesBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "angle_reconnaitre_topup_4", niveau: "6e", matiere: "maths",
     notionId: "angle_mesure", microId: "angle_reconnaitre", difficulty: 2, theme: "neutral",
-    text: "Comment s’appelle un angle qui mesure exactement 180° (ses deux côtés sont alignés) ?",
+    text: "Comment s’appelle un angle de 180° ?",
     format: "qcm", choices: ["un angle plat", "un angle droit", "un angle aigu", "un angle obtus"],
     expected: ["un angle plat"], comparator: "mcq_exact",
     hint: "Les deux demi-droites forment une droite.",
@@ -1921,7 +1835,7 @@ export const anglesBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "angle_mesurer_topup_3", niveau: "6e", matiere: "maths",
     notionId: "angle_mesure", microId: "angle_mesurer", difficulty: 1, theme: "neutral",
-    text: "Sur un rapporteur, en quelle unité sont graduées les mesures d’angles ?",
+    text: "Le rapporteur est gradué dans quelle unité ?",
     format: "qcm", choices: ["en degrés", "en centimètres", "en grammes", "en litres"],
     expected: ["en degrés"], comparator: "mcq_exact",
     hint: "Le symbole est °.",
@@ -1953,7 +1867,7 @@ export const anglesBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "angle_tracer_topup_2", niveau: "6e", matiere: "maths",
     notionId: "angle_mesure", microId: "angle_tracer", difficulty: 2, theme: "neutral",
-    text: "Quel instrument permet de tracer rapidement un angle droit (90°) ?",
+    text: "Quel instrument sert à tracer vite un angle droit ?",
     format: "qcm", choices: ["une équerre", "une balance", "un compas seul", "un chronomètre"],
     expected: ["une équerre"], comparator: "mcq_exact",
     hint: "Son coin forme un angle droit.",

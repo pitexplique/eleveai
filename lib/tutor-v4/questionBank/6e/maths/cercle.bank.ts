@@ -26,7 +26,7 @@
 //
 // Valeur approchée retenue partout : π ≈ 3,14 (convention 6e).
 
-import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type { TutorBankItemV4, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
 import { PRENOMS, de, pick, type Prenom } from "./entiers.bank";
 
 function randomInt(min: number, max: number) {
@@ -241,8 +241,13 @@ function figureCercle(
   };
 }
 
-/** Le périmètre d'un disque dont on donne le diamètre (★2) ou le rayon (★3). */
-function perimetreDepuis(donne: "diametre" | "rayon") {
+/**
+ * Le périmètre d'un disque dont on donne le diamètre (★2) ou le rayon (★3).
+ * ★2 nu (03/11/2026, REGLES-6E.md) : « Calcule le périmètre d’un disque de
+ * diamètre 6 cm (π ≈ 3,14). » ; les objets ronds et les prénoms passent à ★3.
+ */
+function perimetreDepuis(donne: "diametre" | "rayon", ctx = true, objet = false): TutorGeneratedQuestionV4 {
+  if (!ctx) return perimetreNu();
   const p = pick(PRENOMS);
   const fin = pick([
     "Calcule son périmètre (π ≈ 3,14).",
@@ -250,7 +255,7 @@ function perimetreDepuis(donne: "diametre" | "rayon") {
     "Combien mesure son périmètre ? Prends π ≈ 3,14.",
   ]);
   const motDonne = donne === "diametre" ? "diamètre" : "rayon";
-  if (Math.random() < 0.45) {
+  if (!objet && Math.random() < 0.45) {
     const [C, A, B] = lettres(3);
     const v = donne === "diametre" ? randomInt(2, 20) : randomInt(2, 12);
     const d = donne === "diametre" ? v : 2 * v;
@@ -304,6 +309,243 @@ function perimetreDepuis(donne: "diametre" | "rayon") {
         : `d = 2 × ${r} = ${d} ${o.u}, puis P = π × d = 3,14 × ${d} = ${fr(P)} ${o.u}.`,
     ),
   };
+}
+
+/** ★2 nu : le diamètre est donné, sans objet ni prénom ; une figure quand les points sont nommés. */
+function perimetreNu(): TutorGeneratedQuestionV4 {
+  const u = Math.random() < 0.8 ? "cm" : "m";
+  const d = randomInt(2, 20);
+  const P = Number((d * 3.14).toFixed(2));
+  const [A, B] = lettres(2);
+  const k = randomInt(0, 2);
+  const text = [
+    `Calcule le périmètre d’un disque de diamètre ${d} ${u} (π ≈ 3,14).`,
+    `Un disque a un diamètre de ${d} ${u}. Calcule son périmètre (π ≈ 3,14).`,
+    `Le diamètre [${A}${B}] mesure ${d} ${u}. Calcule le périmètre du cercle (π ≈ 3,14).`,
+  ][k];
+  const a = randomInt(0, 50);
+  return {
+    text,
+    format: "short",
+    expected: [`${fr(P)} ${u}`, fr(P)],
+    comparator: "number_equal",
+    explanation: expl(`P = π × d = 3,14 × ${d} = ${fr(P)} ${u}.`),
+    ...(k === 2
+      ? { canvas: figureCercle("_0", [{ id: A, angle: a + 180 }, { id: B, angle: a }], [{ kind: "diametre", from: A, to: B, label: `${d} ${u}` }]) }
+      : {}),
+  };
+}
+
+/** Rayon → diamètre (★2 nu) ; avec un objet rond ou un prénom (★3). */
+function genRayonVersDiametre(ctx: boolean): TutorGeneratedQuestionV4 {
+  const p = pick(PRENOMS);
+  if (!ctx || Math.random() < 0.3) {
+    const [C, A0] = lettres(2);
+    const r = randomInt(2, 12);
+    if (ctx) {
+      const t = `${p.nom} trace un cercle de centre ${C} avec un écart de compas de ${r} cm. Quel est le diamètre du cercle ?`;
+      return {
+        text: t,
+        format: "short",
+        expected: [`${2 * r} cm`, String(2 * r)],
+        comparator: "number_equal",
+        explanation: expl(`L’écart du compas est le rayon. Le diamètre vaut deux rayons : d = 2 × ${r} = ${2 * r} cm.`),
+        canvas: figureCercle(C, [{ id: "_1", angle: randomInt(0, 60) }], [{ kind: "rayon", from: C, to: "_1", label: `${r} cm` }]),
+      };
+    }
+    const u = Math.random() < 0.8 ? "cm" : "m";
+    const k = randomInt(0, 4);
+    const t = [
+      `Le cercle de centre ${C} a un rayon de ${r} ${u}. Combien mesure son diamètre ?`,
+      `Le rayon [${C}${A0}] mesure ${r} ${u}. Combien mesure le diamètre ?`,
+      `Le compas est écarté de ${r} ${u}. Quel est le diamètre du cercle ?`,
+      `Complète : un cercle de rayon ${r} ${u} a un diamètre de … ${u}.`,
+      `Un cercle a un rayon de ${r} ${u}. Calcule son diamètre.`,
+    ][k];
+    // Sur la figure, seuls les points nommés par l'énoncé portent un nom.
+    const centre = k === 0 || k === 1 ? C : "_0";
+    const A = k === 1 ? A0 : "_1";
+    return {
+      text: t,
+      format: "short",
+      expected: [`${2 * r} ${u}`, String(2 * r)],
+      comparator: "number_equal",
+      explanation: expl(`Le diamètre vaut deux rayons : d = 2 × r = 2 × ${r} = ${2 * r} ${u}.`),
+      // La figure dit les mêmes nombres ET les mêmes lettres que l'énoncé.
+      canvas: figureCercle(centre, [{ id: A, angle: randomInt(0, 60) }], [{ kind: "rayon", from: centre, to: A, label: `${r} ${u}` }]),
+    };
+  }
+  const { o, r } = rondEtRayon();
+  const t = pick([
+    `${maj(o.nom)} a un rayon de ${r} ${o.u}. Quel est son diamètre ?`,
+    `${p.nom} mesure le rayon ${dUn(o.nom)} : ${r} ${o.u}. Combien mesure son diamètre ?`,
+    `Le rayon ${dUn(o.nom)} mesure ${r} ${o.u}. Calcule son diamètre.`,
+  ]);
+  return {
+    text: t,
+    format: "short",
+    expected: [`${2 * r} ${o.u}`, String(2 * r)],
+    comparator: "number_equal",
+    explanation: expl(`Le diamètre vaut deux rayons : 2 × ${r} = ${2 * r} ${o.u}.`),
+  };
+}
+
+/** Diamètre → rayon (★2 nu) ; avec un objet rond ou un prénom (★3). */
+function genDiametreVersRayon(ctx: boolean): TutorGeneratedQuestionV4 {
+  const p = pick(PRENOMS);
+  if (!ctx || Math.random() < 0.3) {
+    const [C0, A0, B0] = lettres(3);
+    const r = randomInt(2, 12);
+    const d = 2 * r;
+    const a = randomInt(0, 50);
+    if (ctx) {
+      return {
+        text: `${p.nom} veut tracer au compas un cercle de diamètre ${d} cm. De combien écarte-t-${il(p)} son compas ?`,
+        format: "short",
+        expected: [`${r} cm`, String(r)],
+        comparator: "number_equal",
+        explanation: expl(`L’écart du compas est le rayon, la moitié du diamètre : ${d} ÷ 2 = ${r} cm.`),
+        canvas: figureCercle("_0", [{ id: "_1", angle: a + 180 }, { id: "_2", angle: a }], [{ kind: "diametre", from: "_1", to: "_2", label: `${d} cm` }]),
+      };
+    }
+    const u = Math.random() < 0.8 ? "cm" : "m";
+    const k = randomInt(0, 4);
+    const t = [
+      `Le cercle de centre ${C0} a un diamètre de ${d} ${u}. Combien mesure son rayon ?`,
+      `Le diamètre [${A0}${B0}] du cercle de centre ${C0} mesure ${d} ${u}. Combien mesure ${C0}${A0} ?`,
+      `Pour tracer un cercle de diamètre ${d} ${u}, de combien écartes-tu le compas ?`,
+      `Complète : un cercle de diamètre ${d} ${u} a un rayon de … ${u}.`,
+      `Un cercle a un diamètre de ${d} ${u}. Calcule son rayon.`,
+    ][k];
+    const [C, A, B] = k === 1 ? [C0, A0, B0] : k === 0 ? [C0, "_1", "_2"] : ["_0", "_1", "_2"];
+    return {
+      text: t,
+      format: "short",
+      expected: [`${r} ${u}`, String(r)],
+      comparator: "number_equal",
+      explanation: expl(`Le rayon est la moitié du diamètre : r = d ÷ 2 = ${d} ÷ 2 = ${r} ${u}.`),
+      canvas: figureCercle(C, [{ id: A, angle: a + 180 }, { id: B, angle: a }], [{ kind: "diametre", from: A, to: B, label: `${d} ${u}` }]),
+    };
+  }
+  const { o, r } = rondEtRayon();
+  const d = 2 * r;
+  const t = pick([
+    `${maj(o.nom)} a un diamètre de ${d} ${o.u}. Quel est son rayon ?`,
+    `${p.nom} mesure le diamètre ${dUn(o.nom)} : ${d} ${o.u}. Combien mesure son rayon ?`,
+    `Le diamètre ${dUn(o.nom)} mesure ${d} ${o.u}. Calcule son rayon.`,
+  ]);
+  return {
+    text: t,
+    format: "short",
+    expected: [`${r} ${o.u}`, String(r)],
+    comparator: "number_equal",
+    explanation: expl(`Le rayon est la moitié du diamètre : ${d} ÷ 2 = ${r} ${o.u}.`),
+  };
+}
+
+/** Rayon, diamètre, corde, cercle ou disque (★1 nu, sur la figure) ; le contour d'un objet rond (★3). */
+function genNommer(ctx: boolean): TutorGeneratedQuestionV4 {
+  const [C, A, B] = lettres(3);
+  const p = pick(PRENOMS);
+  const cas = ctx ? pick([0, 1, 2, 3, 3, 3]) : randomInt(0, 3);
+  const a = randomInt(0, 60);
+  const NOMS = ["un rayon", "un diamètre", "une corde", "le centre"];
+  if (cas === 3) {
+    if (ctx) {
+      const o = pick(RONDS);
+      const t = pick([
+        `${p.nom} dessine le contour ${dUn(o.nom)}. Ce trait rond est :`,
+        `${p.nom} colorie tout l’intérieur ${dUn(o.nom)} dessiné(e) sur sa feuille. La partie coloriée est :`,
+      ]);
+      const contour = t.includes("contour");
+      return {
+        text: t.replace(/dessiné\(e\)/, o.nom.startsWith("une") ? "dessinée" : "dessiné"),
+        format: "qcm",
+        choices: shuffle(["un cercle", "un disque", "un rayon", "un diamètre"]),
+        expected: [contour ? "un cercle" : "un disque"],
+        comparator: "mcq_exact",
+        explanation: expl("Le cercle est la ligne, le tour. Le disque est la surface : le tour ET tout l’intérieur."),
+      };
+    }
+    // Nu : la figure montre le trait seul, ou la surface coloriée.
+    const disque = Math.random() < 0.5;
+    return {
+      text: disque ? "Observe la figure. La partie coloriée est :" : "Observe la figure. Le trait rond est :",
+      format: "qcm",
+      choices: shuffle(["un cercle", "un disque", "un rayon", "un diamètre"]),
+      expected: [disque ? "un disque" : "un cercle"],
+      comparator: "mcq_exact",
+      explanation: expl("Le cercle est la ligne, le tour. Le disque est la surface : le tour ET tout l’intérieur."),
+      canvas: figureCercle("_0", [], [], { disque }),
+    };
+  }
+  const seg = cas === 0 ? "rayon" : cas === 1 ? "diametre" : "corde";
+  const nom = seg === "rayon" ? `[${C}${A}]` : `[${A}${B}]`;
+  const t = ctx
+    ? `${p.nom} a tracé le segment ${nom} sur le cercle de centre ${C}. C’est :`
+    : pick([`Le centre est ${C}. Comment s’appelle le segment ${nom} ?`, `Dans le cercle de centre ${C}, le segment ${nom} est :`]);
+  const juste = seg === "rayon" ? "un rayon" : seg === "diametre" ? "un diamètre" : "une corde";
+  const pts =
+    seg === "rayon"
+      ? [{ id: A, angle: a }]
+      : seg === "diametre"
+        ? [{ id: A, angle: a + 180 }, { id: B, angle: a }]
+        : [{ id: A, angle: a + 110 }, { id: B, angle: a }];
+  return {
+    text: t,
+    format: "qcm",
+    choices: shuffle(NOMS),
+    expected: [juste],
+    comparator: "mcq_exact",
+    explanation: expl(
+      seg === "rayon"
+        ? `${nom} va du centre ${C} à un point du cercle : c’est un rayon.`
+        : seg === "diametre"
+          ? `${nom} relie deux points du cercle en passant par le centre ${C} : c’est un diamètre.`
+          : `${nom} relie deux points du cercle sans passer par le centre ${C} : c’est une corde.`,
+    ),
+    canvas: figureCercle(C, pts, [{ kind: seg, from: seg === "rayon" ? C : A, to: seg === "rayon" ? A : B }]),
+  };
+}
+
+/** Le tour d'après le tableau « diamètre → tour » (★2 nu) ; le tour d'un objet rond (★3). */
+function genTableau(ctx: boolean): TutorGeneratedQuestionV4 {
+  let u: "cm" | "m";
+  let d: number;
+  let t: string;
+  if (ctx) {
+    const p = pick(PRENOMS);
+    const o = pick(RONDS);
+    u = o.u;
+    d = randomInt(o.dMin, o.dMax);
+    t = pick([
+      `Complète le tableau : quel est le tour ${dUn(o.nom)} de diamètre ${d} ${u} ?`,
+      `${p.nom} mesure ${o.nom} : ${d} ${u} de diamètre. Avec le tableau, trouve son tour.`,
+      `${maj(o.nom)} a un diamètre de ${d} ${u}. Avec le tableau, trouve son tour.`,
+    ]);
+  } else {
+    u = Math.random() < 0.75 ? "cm" : "m";
+    d = randomInt(2, u === "cm" ? 30 : 12);
+    t = pick([
+      `Complète le tableau : quel est le tour d’un disque de diamètre ${d} ${u} ?`,
+      `Un disque a un diamètre de ${d} ${u}. Avec le tableau, trouve son tour.`,
+      `Avec le tableau, calcule le tour d’un disque de diamètre ${d} ${u}.`,
+    ]);
+  }
+  const tour = Number((d * 3.14).toFixed(2));
+  return {
+    text: t,
+    format: "short",
+    expected: [`${fr(tour)} ${u}`, fr(tour)],
+    comparator: "number_equal",
+    explanation: expl(`Dans le tableau, on passe du diamètre au tour en multipliant par 3,14 : ${d} × 3,14 = ${fr(tour)} ${u}.`),
+    canvas: tableauTour([1, d], 1, u),
+  };
+}
+
+/** Un gabarit de la notion cercle_disque. */
+function gabarit(id: string, microId: string, difficulty: number, hint: string, tags: string[], generate: () => TutorGeneratedQuestionV4): TutorBankItemV4 {
+  return { kind: "template", id, niveau: "6e", matiere: "maths", notionId: "cercle_disque", microId, difficulty, theme: "neutral", hint, tags, generate } as TutorBankItemV4;
 }
 
 export const cercleBank: TutorBankItemV4[] = [
@@ -398,12 +640,12 @@ export const cercleBank: TutorBankItemV4[] = [
     text: "Quelle est la différence entre un cercle et un disque ?",
     format: "qcm",
     choices: [
-      "le cercle est le tour, le disque est le tour et tout l’intérieur",
-      "le disque est le tour, le cercle est le tour et tout l’intérieur",
+      "le cercle est le bord, le disque est toute la surface",
+      "le disque est le bord, le cercle est toute la surface",
       "ce sont deux mots pour la même chose",
       "le cercle est plat, le disque est en relief",
     ],
-    expected: ["le cercle est le tour, le disque est le tour et tout l’intérieur"],
+    expected: ["le cercle est le bord, le disque est toute la surface"],
     comparator: "mcq_exact",
     hint: "Une pièce de monnaie, c’est un disque ; son bord, c’est un cercle.",
     explanation: expl(
@@ -456,176 +698,17 @@ export const cercleBank: TutorBankItemV4[] = [
     ),
     tags: ["cercle_disque", "vocabulaire", "qcm"],
   },
-  {
-    kind: "template",
-    id: "cercle_vocabulaire_tpl_1",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "cercle_disque",
-    microId: "cercle_vocabulaire",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Le diamètre vaut deux fois le rayon.",
-    tags: ["cercle_disque", "vocabulaire", "template"],
-    // ⭐ 06/10 : noms de points, objets ronds, prénoms, tournures.
-    generate: () => {
-      const p = pick(PRENOMS);
-      if (Math.random() < 0.5) {
-        const [C, A0] = lettres(2);
-        const r = randomInt(2, 12);
-        const k = randomInt(0, 3);
-        const t = [
-          `Le cercle de centre ${C} a un rayon de ${r} cm. Combien mesure son diamètre ?`,
-          `[${C}${A0}] est un rayon du cercle de centre ${C}, et ${C}${A0} = ${r} cm. Combien mesure un diamètre ?`,
-          `${p.nom} trace un cercle de centre ${C} avec un écart de compas de ${r} cm. Quel est le diamètre du cercle ?`,
-          `Complète : le cercle de centre ${C} et de rayon ${r} cm a un diamètre de … cm.`,
-        ][k];
-        // Le point du cercle n'a de nom sur la figure que si l'énoncé le nomme.
-        const A = k === 1 ? A0 : "_1";
-        return {
-          text: t,
-          format: "short",
-          expected: [`${2 * r} cm`, String(2 * r)],
-          comparator: "number_equal",
-          explanation: expl(`Le diamètre vaut deux rayons : d = 2 × r = 2 × ${r} = ${2 * r} cm.`),
-          // Le dessin naît DANS le generate : la figure doit dire les mêmes
-          // nombres ET les mêmes lettres que l'énoncé, sinon elle ment.
-          canvas: figureCercle(C, [{ id: A, angle: randomInt(0, 60) }], [{ kind: "rayon", from: C, to: A, label: `${r} cm` }]),
-        };
-      }
-      const { o, r } = rondEtRayon();
-      const t = pick([
-        `${maj(o.nom)} a un rayon de ${r} ${o.u}. Quel est son diamètre ?`,
-        `${p.nom} mesure le rayon ${dUn(o.nom)} : ${r} ${o.u}. Combien mesure son diamètre ?`,
-        `Le rayon ${dUn(o.nom)} mesure ${r} ${o.u}. Calcule son diamètre.`,
-      ]);
-      return {
-        text: t,
-        format: "short",
-        expected: [`${2 * r} ${o.u}`, String(2 * r)],
-        comparator: "number_equal",
-        explanation: expl(`Le diamètre vaut deux rayons : 2 × ${r} = ${2 * r} ${o.u}.`),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "cercle_vocabulaire_tpl_2",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "cercle_disque",
-    microId: "cercle_vocabulaire",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Le rayon est la moitié du diamètre.",
-    tags: ["cercle_disque", "vocabulaire", "template"],
-    generate: () => {
-      const p = pick(PRENOMS);
-      if (Math.random() < 0.5) {
-        const [C0, A0, B0] = lettres(3);
-        const r = randomInt(2, 12);
-        const d = 2 * r;
-        const k = randomInt(0, 3);
-        const t = [
-          `Le cercle de centre ${C0} a un diamètre de ${d} cm. Combien mesure son rayon ?`,
-          `[${A0}${B0}] est un diamètre du cercle de centre ${C0}, et ${A0}${B0} = ${d} cm. Combien mesure ${C0}${A0} ?`,
-          `${p.nom} veut tracer au compas un cercle de diamètre ${d} cm. De combien écarte-t-${il(p)} son compas ?`,
-          `Complète : le cercle de centre ${C0} et de diamètre ${d} cm a un rayon de … cm.`,
-        ][k];
-        // Sur la figure, seuls les points nommés par l'énoncé portent un nom.
-        const [C, A, B] = k === 1 ? [C0, A0, B0] : k === 2 ? ["_0", "_1", "_2"] : [C0, "_1", "_2"];
-        const a = randomInt(0, 50);
-        return {
-          text: t,
-          format: "short",
-          expected: [`${r} cm`, String(r)],
-          comparator: "number_equal",
-          explanation: expl(`Le rayon est la moitié du diamètre : r = d ÷ 2 = ${d} ÷ 2 = ${r} cm.`),
-          canvas: figureCercle(C, [{ id: A, angle: a + 180 }, { id: B, angle: a }], [{ kind: "diametre", from: A, to: B, label: `${d} cm` }]),
-        };
-      }
-      const { o, r } = rondEtRayon();
-      const d = 2 * r;
-      const t = pick([
-        `${maj(o.nom)} a un diamètre de ${d} ${o.u}. Quel est son rayon ?`,
-        `${p.nom} mesure le diamètre ${dUn(o.nom)} : ${d} ${o.u}. Combien mesure son rayon ?`,
-        `Le diamètre ${dUn(o.nom)} mesure ${d} ${o.u}. Calcule son rayon.`,
-      ]);
-      return {
-        text: t,
-        format: "short",
-        expected: [`${r} ${o.u}`, String(r)],
-        comparator: "number_equal",
-        explanation: expl(`Le rayon est la moitié du diamètre : ${d} ÷ 2 = ${r} ${o.u}.`),
-      };
-    },
-  },
-  {
-    // ⭐ 06/10/2026 : le ★1 n'avait AUCUN générateur (4 items figés, revus en
-    // boucle). Centre, rayon, diamètre, corde — et cercle ou disque.
-    kind: "template",
-    id: "cercle_vocabulaire_tpl_nommer",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "cercle_disque",
-    microId: "cercle_vocabulaire",
-    difficulty: 1,
-    theme: "neutral",
-    hint: "Rayon : du centre au cercle. Diamètre : passe par le centre. Corde : deux points du cercle.",
-    tags: ["cercle_disque", "vocabulaire", "template", "qcm"],
-    generate: () => {
-      const [C, A, B] = lettres(3);
-      const p = pick(PRENOMS);
-      const cas = randomInt(0, 3);
-      const a = randomInt(0, 60);
-      const NOMS = ["un rayon", "un diamètre", "une corde", "le centre"];
-      if (cas === 3) {
-        const o = pick(RONDS);
-        const t = pick([
-          `${p.nom} dessine le contour ${dUn(o.nom)}. Ce trait rond est :`,
-          `${p.nom} colorie tout l’intérieur ${dUn(o.nom)} dessiné(e) sur sa feuille. La partie coloriée est :`,
-        ]);
-        const contour = t.includes("contour");
-        return {
-          text: t.replace(/dessiné\(e\)/, o.nom.startsWith("une") ? "dessinée" : "dessiné"),
-          format: "qcm",
-          choices: shuffle(["un cercle", "un disque", "un rayon", "un diamètre"]),
-          expected: [contour ? "un cercle" : "un disque"],
-          comparator: "mcq_exact",
-          explanation: expl("Le cercle est la ligne, le tour. Le disque est la surface : le tour ET tout l’intérieur."),
-        };
-      }
-      const seg = cas === 0 ? "rayon" : cas === 1 ? "diametre" : "corde";
-      const nom = seg === "rayon" ? `[${C}${A}]` : `[${A}${B}]`;
-      const t = pick([
-        `Sur la figure, le cercle a pour centre ${C}. Comment s’appelle le segment ${nom} ?`,
-        `${p.nom} a tracé le segment ${nom} sur le cercle de centre ${C}. C’est :`,
-        `Dans le cercle de centre ${C}, le segment ${nom} est :`,
-      ]);
-      const juste = seg === "rayon" ? "un rayon" : seg === "diametre" ? "un diamètre" : "une corde";
-      const pts =
-        seg === "rayon"
-          ? [{ id: A, angle: a }]
-          : seg === "diametre"
-            ? [{ id: A, angle: a + 180 }, { id: B, angle: a }]
-            : [{ id: A, angle: a + 110 }, { id: B, angle: a }];
-      return {
-        text: t,
-        format: "qcm",
-        choices: shuffle(NOMS),
-        expected: [juste],
-        comparator: "mcq_exact",
-        explanation: expl(
-          seg === "rayon"
-            ? `${nom} va du centre ${C} à un point du cercle : c’est un rayon.`
-            : seg === "diametre"
-              ? `${nom} relie deux points du cercle en passant par le centre ${C} : c’est un diamètre.`
-              : `${nom} relie deux points du cercle sans passer par le centre ${C} : c’est une corde.`,
-        ),
-        canvas: figureCercle(C, pts, [{ kind: seg, from: seg === "rayon" ? C : A, to: seg === "rayon" ? A : B }]),
-      };
-    },
-  },
+  // ★1-★2 nus (03/11/2026) ; les objets ronds et les prénoms sont dans les « _ctx3 ».
+  gabarit("cercle_vocabulaire_tpl_1", "cercle_vocabulaire", 2, "Le diamètre vaut deux fois le rayon.",
+    ["cercle_disque", "vocabulaire", "template"], () => genRayonVersDiametre(false)),
+  gabarit("cercle_vocabulaire_tpl_2", "cercle_vocabulaire", 2, "Le rayon est la moitié du diamètre.",
+    ["cercle_disque", "vocabulaire", "template"], () => genDiametreVersRayon(false)),
+  gabarit("cercle_vocabulaire_tpl_nommer", "cercle_vocabulaire", 1,
+    "Rayon : du centre au cercle. Diamètre : passe par le centre. Corde : deux points du cercle.",
+    ["cercle_disque", "vocabulaire", "template", "qcm"], () => genNommer(false)),
+  // ★3 en situation : les objets ronds (roue, assiette, rond-point…), les prénoms.
+  gabarit("cercle_vocabulaire_tpl_ctx3", "cercle_vocabulaire", 3, "Rayon = la moitié du diamètre ; diamètre = deux rayons.",
+    ["cercle_disque", "vocabulaire", "template", "contexte"], () => pick([genRayonVersDiametre, genDiametreVersRayon, genNommer])(true)),
 
   // =========================
   // CERCLE_PROPORTIONNEL
@@ -639,7 +722,7 @@ export const cercleBank: TutorBankItemV4[] = [
     microId: "cercle_proportionnel",
     difficulty: 1,
     theme: "neutral",
-    text: "On double le diamètre d’un disque. Que devient le tour du disque ?",
+    text: "Le diamètre d’un disque double. Que devient son tour ?",
     format: "qcm",
     choices: ["il double", "il ne change pas", "il augmente de 2 cm", "il est multiplié par 4"],
     expected: ["il double"],
@@ -659,7 +742,7 @@ export const cercleBank: TutorBankItemV4[] = [
     microId: "cercle_proportionnel",
     difficulty: 2,
     theme: "neutral",
-    text: "Un disque de diamètre 1 m a un tour de 3,14 m. Quel est le tour d’un disque de diamètre 3 m ?",
+    text: "Complète le tableau : quel est le tour d’un disque de diamètre 3 m ?",
     format: "short",
     expected: ["9,42", "9.42", "9,42 m"],
     comparator: "number_equal",
@@ -667,7 +750,8 @@ export const cercleBank: TutorBankItemV4[] = [
     explanation: expl(
       "Le tour est proportionnel au diamètre : 3 × 3,14 = 9,42 m. On n’a même pas besoin de la formule, seulement de la proportionnalité."
     ),
-    tags: ["cercle_disque", "proportionnalite", "short"],
+    tags: ["cercle_disque", "proportionnalite", "short", "canvas"],
+    canvas: tableauTour([1, 3], 1, "m"),
   },
   {
     kind: "fixed",
@@ -678,7 +762,7 @@ export const cercleBank: TutorBankItemV4[] = [
     microId: "cercle_proportionnel",
     difficulty: 2,
     theme: "neutral",
-    text: "Pour tous les disques, on divise le tour par le diamètre. Que trouve-t-on ?",
+    text: "Divise le tour de n’importe quel disque par son diamètre. Que trouves-tu ?",
     format: "qcm",
     choices: [
       "toujours le même nombre, environ 3,14",
@@ -703,7 +787,7 @@ export const cercleBank: TutorBankItemV4[] = [
     microId: "cercle_proportionnel",
     difficulty: 2,
     theme: "neutral",
-    text: "Le tableau est un tableau de proportionnalité. Quel est le tour d’un disque de diamètre 4 cm ?",
+    text: "Complète le tableau : quel est le tour d’un disque de diamètre 4 cm ?",
     format: "short",
     expected: ["12,56", "12.56", "12,56 cm"],
     comparator: "number_equal",
@@ -822,40 +906,11 @@ export const cercleBank: TutorBankItemV4[] = [
       };
     },
   },
-  {
-    kind: "template",
-    id: "cercle_proportionnel_tpl_2",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "cercle_disque",
-    microId: "cercle_proportionnel",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Dans le tableau, on passe du diamètre au tour en multipliant par 3,14.",
-    tags: ["cercle_disque", "proportionnalite", "template"],
-    // ⭐ 06/10 : objets ronds réels, prénoms, tournures.
-    generate: () => {
-      const p = pick(PRENOMS);
-      const o = pick(RONDS);
-      const u = o.u;
-      const d = randomInt(o.dMin, o.dMax);
-      const tour = Number((d * 3.14).toFixed(2));
-      const t = pick([
-        `Complète le tableau : quel est le tour ${dUn(o.nom)} de diamètre ${d} ${u} ?`,
-        `Un disque de diamètre 1 ${u} a un tour de 3,14 ${u}. ${p.nom} mesure ${o.nom} : ${d} ${u} de diamètre. Quel est son tour ?`,
-        `Le tour d’un disque est proportionnel à son diamètre : 1 ${u} de diamètre donne 3,14 ${u} de tour. Calcule le tour ${dUn(o.nom)} de ${d} ${u} de diamètre.`,
-        `${maj(o.nom)} a un diamètre de ${d} ${u}. Avec le tableau, trouve son tour.`,
-      ]);
-      return {
-        text: t,
-        format: "short",
-        expected: [`${fr(tour)} ${u}`, fr(tour)],
-        comparator: "number_equal",
-        explanation: expl(`Dans le tableau, on passe du diamètre au tour en multipliant par 3,14 : ${d} × 3,14 = ${fr(tour)} ${u}.`),
-        canvas: tableauTour([1, d], 1, u),
-      };
-    },
-  },
+  gabarit("cercle_proportionnel_tpl_2", "cercle_proportionnel", 2,
+    "Dans le tableau, on passe du diamètre au tour en multipliant par 3,14.",
+    ["cercle_disque", "proportionnalite", "template"], () => genTableau(false)),
+  gabarit("cercle_proportionnel_tpl_ctx3", "cercle_proportionnel", 3, "Dans le tableau, on passe du diamètre au tour en multipliant par 3,14.",
+    ["cercle_disque", "proportionnalite", "template", "contexte"], () => genTableau(true)),
 
   // =========================
   // CERCLE_PERIMETRE
@@ -1000,9 +1055,11 @@ export const cercleBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "P = π × d, avec π ≈ 3,14.",
     tags: ["cercle_disque", "calcul", "template"],
-    // ⭐ 06/10 : noms de points ou objet rond réel, prénoms, tournures.
-    generate: () => perimetreDepuis("diametre"),
+    // ⭐ 03/11 : nu à ★2 (diamètre donné) ; objets ronds et prénoms dans le _ctx3.
+    generate: () => perimetreDepuis("diametre", false),
   },
+  gabarit("cercle_perimetre_tpl_ctx3", "cercle_perimetre", 3, "P = π × d, avec π ≈ 3,14.",
+    ["cercle_disque", "calcul", "template", "contexte"], () => perimetreDepuis("diametre", true, true)),
   {
     kind: "template",
     id: "cercle_perimetre_tpl_2",
@@ -1459,15 +1516,15 @@ export const cercleBank: TutorBankItemV4[] = [
     microId: "cercle_ensemble",
     difficulty: 2,
     theme: "neutral",
-    text: "Un point M vérifie OM = 5 cm. Le cercle de centre O et de rayon 5 cm passe-t-il par M ?",
+    text: "OM = 5 cm. M est-il sur le cercle de centre O de rayon 5 cm ?",
     format: "qcm",
     choices: [
-      "oui, car M est à exactement 5 cm de O",
-      "non, il faudrait connaître la position de M",
-      "non, car M pourrait être à l'intérieur",
-      "seulement si M est sur un rayon tracé",
+      "oui, car OM = 5 cm",
+      "non, on ne sait pas où est M",
+      "non, M est dans le disque",
+      "seulement si [OM] est tracé",
     ],
-    expected: ["oui, car M est à exactement 5 cm de O"],
+    expected: ["oui, car OM = 5 cm"],
     comparator: "mcq_exact",
     hint: "La seule chose qui compte est la distance à O.",
     explanation: expl(

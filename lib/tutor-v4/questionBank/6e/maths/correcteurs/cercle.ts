@@ -1,5 +1,6 @@
 import type { CorrecteursMaths } from "./types";
 import type { TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
+import { PRENOMS } from "../entiers.bank";
 
 // Correcteurs des gabarits de cercle.bank.ts (06/10/2026, voir types.ts).
 // Chaque correcteur RELIT les longueurs écrites (nombre + unité), les lettres
@@ -100,6 +101,12 @@ function corrigerNommer(q: Q): string[] {
   const t = q.text;
   if (/contour/.test(t)) return qcm(q, "un cercle");
   if (/intérieur/.test(t)) return qcm(q, "un disque");
+  // ★1 nu (03/11/2026) : la figure montre le trait seul, ou la surface coloriée.
+  if (/partie coloriée|trait rond/.test(t)) {
+    const disque = !!(q.canvas as any)?.display?.showDisk;
+    if (/partie coloriée/.test(t) !== disque) return ["la figure ne colorie pas ce que dit l’énoncé"];
+    return qcm(q, disque ? "un disque" : "un cercle");
+  }
   const s = t.match(/segment \[([A-Z])([A-Z])\]/);
   if (!s) return ["segment illisible"];
   const n = natureSegment(q, s[1], s[2]);
@@ -129,7 +136,7 @@ function corrigerTableau(q: Q): string[] {
   const L = longueurs(q.text).filter((x) => !egal(x.v, 1) && !egal(x.v, 3.14));
   if (L.length !== 1) return [`un seul diamètre attendu, lu : ${L.map((x) => x.v).join(", ")}`];
   const { v: d, u } = L[0];
-  if (/1 (cm|m) de diamètre|diamètre 1 (cm|m)/.test(q.text) && !/3,14 (cm|m)/.test(q.text)) return ["le tour de 3,14 pour 1 de diamètre manque"];
+  if (/(?<![\d,])1 (cm|m) de diamètre|diamètre 1 (cm|m)/.test(q.text) && !/3,14 (cm|m)/.test(q.text)) return ["le tour de 3,14 pour 1 de diamètre manque"];
   return [...attendu(q, tour(d), u), ...plausibleDiametre(q.text, d, u), ...canvasTableau(q, [1, d], u, { row: 1, col: 1 })];
 }
 function corrigerPetitGrand(q: Q): string[] {
@@ -345,6 +352,21 @@ function corrigerZone(q: Q): string[] {
   return [...p, ...qcm(q, `dans le disque de centre ${P} et de rayon ${L} m`)];
 }
 
+/** Énoncé ★1-★2 : aucun prénom, aucun objet rond (REGLES-6E.md, 03/11/2026). */
+const aPrenom = (t: string) => PRENOMS.some((x) => new RegExp(`(^|[^\\p{L}])${x.nom}(?![\\p{L}])`, "u").test(t));
+const aObjet = (t: string) => RONDS.some(([re]) => re.test(t));
+function nu(f: (q: Q) => string[]) {
+  return (q: Q) => [
+    ...f(q),
+    ...(aPrenom(q.text) ? ["prénom dans un énoncé nu (★1-★2)"] : []),
+    ...(aObjet(q.text) ? ["objet de la vie courante dans un énoncé nu (★1-★2)"] : []),
+  ];
+}
+function enSituation(f: (q: Q) => string[]) {
+  return (q: Q) => [...f(q), ...(aPrenom(q.text) || aObjet(q.text) ? [] : ["gabarit ★3 sans situation"])];
+}
+const demandeLeRayon = (t: string) => /(rayon|compas) \?$|son rayon\.$/.test(t);
+
 export const CORRECTEURS: CorrecteursMaths = {
   cercle_distance_tpl_1: corrigerPortee,
   cercle_distance_tpl_ouverte: corrigerDeuxCercles,
@@ -354,11 +376,16 @@ export const CORRECTEURS: CorrecteursMaths = {
   cercle_defi_tpl_1: corrigerToursOuInverse,
   cercle_defi_tpl_comparer: corrigerComparerTours,
   cercle_defi_tpl_2: corrigerDefi5,
-  cercle_perimetre_tpl_1: corrigerPerimetre,
+  cercle_perimetre_tpl_1: nu(corrigerPerimetre),
+  cercle_perimetre_tpl_ctx3: enSituation(corrigerPerimetre),
   cercle_perimetre_tpl_2: corrigerPerimetre,
   cercle_proportionnel_tpl_1: corrigerPetitGrand,
-  cercle_proportionnel_tpl_2: corrigerTableau,
-  cercle_vocabulaire_tpl_1: corrigerRayonVersDiametre,
-  cercle_vocabulaire_tpl_2: corrigerDiametreVersRayon,
-  cercle_vocabulaire_tpl_nommer: corrigerNommer,
+  cercle_proportionnel_tpl_2: nu(corrigerTableau),
+  cercle_proportionnel_tpl_ctx3: enSituation(corrigerTableau),
+  cercle_vocabulaire_tpl_1: nu(corrigerRayonVersDiametre),
+  cercle_vocabulaire_tpl_2: nu(corrigerDiametreVersRayon),
+  cercle_vocabulaire_tpl_nommer: nu(corrigerNommer),
+  cercle_vocabulaire_tpl_ctx3: enSituation((q) =>
+    q.format === "qcm" ? corrigerNommer(q) : demandeLeRayon(q.text) ? corrigerDiametreVersRayon(q) : corrigerRayonVersDiametre(q),
+  ),
 };
