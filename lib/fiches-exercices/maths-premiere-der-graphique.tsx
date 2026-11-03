@@ -63,6 +63,10 @@ export const exercicesDerGraphiquePremiere: FicheExercicesData = {
         {
           enonce: "La droite orange est la tangente à la courbe de $f$ au point $A$ d'abscisse $2$. Lire $f(2)$ et $f'(2)$.",
           figure: repere([-1, 4, -3, 4], [{ q: [0.5, 0, -2] }, { q: [0, 2, -4], couleur: ORANGE }], [{ x: 2, y: 0, label: "A" }]),
+          reponses: [
+            { question: "f(2)", attendu: "0" },
+            { question: "f'(2)", attendu: "2" },
+          ],
           correction:
             "$f(2)$ est l'ordonnée de $A$ : $f(2) = 0$.\n$f'(2)$ est le coefficient directeur de la tangente. On part de $A(2 ; 0)$ et on avance de $1$ : la tangente passe par $(3 ; 2)$. Elle est montée de $2$.\nDonc $f'(2) = 2$.\n⛔ Ne pas confondre les deux : $f(2)$ se lit sur l'axe vertical, $f'(2)$ est une PENTE, elle se lit sur la tangente.\n⚠️ $f(2) = 0$ n'empêche pas $f'(2)$ d'être positif : la courbe traverse l'axe en montant.",
           micros: ["der_tangente_lire"],
@@ -74,6 +78,11 @@ export const exercicesDerGraphiquePremiere: FicheExercicesData = {
             { x: 0, y: 0, label: "B" },
             { x: 1, y: -2, label: "C" },
           ]),
+          reponses: [
+            { question: "f'(-2)", attendu: ["positif", "> 0", "+", "strictement positif"] },
+            { question: "f'(0)", attendu: ["négatif", "< 0", "-", "strictement négatif"] },
+            { question: "f'(1)", attendu: ["0", "nul"] },
+          ],
           correction:
             "On regarde si la courbe MONTE ou DESCEND quand on la parcourt de gauche à droite.\nEn $A$ (abscisse $-2$), la courbe monte : $f'(-2) > 0$.\nEn $B$ (abscisse $0$), elle descend : $f'(0) < 0$.\nEn $C$ (abscisse $1$), elle est au fond d'un creux : la tangente est horizontale, $f'(1) = 0$.\n⚠️ Le signe de $f'(a)$ ne dépend pas du signe de $f(a)$ : en $A$, la courbe est sous l'axe, et pourtant elle monte.",
           schema: ecranSeulement(
@@ -97,6 +106,13 @@ export const exercicesDerGraphiquePremiere: FicheExercicesData = {
         {
           enonce: "Voici la courbe d'une fonction $f$. En quels points la tangente est-elle horizontale ? Que valent $f'$ et $f$ en ces points ?",
           figure: repere([-1, 5, -2, 6], [{ p: [1, -6, 9, 0] }]),
+          reponses: [
+            { question: "abscisses", attendu: "1 ; 3" },
+            { question: "f'(1)", attendu: "0" },
+            { question: "f(1)", attendu: "4" },
+            { question: "f'(3)", attendu: "0" },
+            { question: "f(3)", attendu: "0" },
+          ],
           correction:
             "La tangente est horizontale au sommet d'une bosse et au fond d'un creux.\nEn $x = 1$, la courbe atteint un sommet : $f'(1) = 0$ et $f(1) = 4$. C'est un MAXIMUM local.\nEn $x = 3$, elle touche le fond d'un creux : $f'(3) = 0$ et $f(3) = 0$. C'est un MINIMUM local.\n⚠️ En $x = 3$, $f(3) = 0$ ET $f'(3) = 0$ : ces deux zéros n'ont pas le même sens. Le premier dit où est le point, le second dit que la tangente est plate.",
           schema: ecranSeulement(
@@ -110,6 +126,10 @@ export const exercicesDerGraphiquePremiere: FicheExercicesData = {
         {
           enonce:
             "Le point $A(2 ; 2)$ est sur la courbe d'une fonction $f$. La tangente à la courbe en $A$ passe aussi par le point $B(3 ; 0)$.\nPlacer $A$ et $B$ dans un repère, tracer la tangente, puis lire $f'(2)$. La courbe monte-t-elle ou descend-elle en $A$ ?",
+          reponses: [
+            { question: "f'(2)", attendu: "-2" },
+            { question: "en A", attendu: ["descend", "elle descend"] },
+          ],
           correction:
             "On part de $A(2 ; 2)$ et on avance de $1$ : on arrive en $B(3 ; 0)$. La tangente est DESCENDUE de $2$.\nDonc $f'(2) = -2$.\nLe nombre dérivé est négatif : la courbe descend en $A$.\n⚠️ Une descente se compte en NÉGATIF : on écrit $f'(2) = -2$, pas $2$.\n⭐ Sur le dessin, une courbe possible : elle passe par $A$ et colle à la droite $(AB)$ tout près de $A$.",
           schema: ecranSeulement(
@@ -126,12 +146,20 @@ export const exercicesDerGraphiquePremiere: FicheExercicesData = {
             { x: 1, y: 1, label: "A" },
             { x: 3, y: 2, label: "" },
           ]),
+          reponses: [
+            { attendu: "0,5" },
+          ],
           correction:
             "Quand on avance de $1$ à partir de $A$, la tangente monte d'un demi-carreau : difficile à lire.\nOn avance donc de $2$ : la tangente passe par $(3 ; 2)$. Elle est montée de $1$.\nMonter de $1$ pour $2$ pas, c'est monter de $0{,}5$ pour $1$ pas : $f'(1) = \\dfrac{1}{2} = 0{,}5$.\n⭐ Quand le point d'arrivée tombe entre deux carreaux, on avance de $2$, de $3$ ou de $4$, jusqu'à tomber sur un nœud du quadrillage, puis on divise.",
           micros: ["der_tangente_lire"],
         },
         {
           enonce: "La courbe d'une fonction $f$ a pour point le plus haut $S(3 ; 5)$.\na) Que vaut $f'(3)$ ?\nb) Que vaut $f(3)$ ?\nc) Donner l'équation de la tangente en $S$.",
+          reponses: [
+            { question: "a)", attendu: "0" },
+            { question: "b)", attendu: "5" },
+            { question: "c)", attendu: "y = 5" },
+          ],
           correction:
             "a) Au sommet d'une bosse, la tangente est horizontale : $f'(3) = 0$.\nb) $S$ est sur la courbe : $f(3) = 5$.\nc) La tangente est horizontale et passe par $S$ : c'est la droite $y = 5$.\n⚠️ $f'(3) = 0$ ne veut pas dire que la courbe passe par $0$ : c'est sa PENTE qui est nulle, pas sa hauteur.",
           schema: ecranSeulement(repere([-1, 6, -2, 7], [{ q: [-1, 6, -4] }, { q: [0, 0, 5], couleur: ORANGE }], [{ x: 3, y: 5, label: "S" }])),
@@ -139,6 +167,11 @@ export const exercicesDerGraphiquePremiere: FicheExercicesData = {
         },
         {
           enonce: "La courbe d'une fonction $f$ monte sur $[0 ; 4]$, puis descend sur $[4 ; 7]$. Donner le signe de $f'(2)$, la valeur de $f'(4)$ et le signe de $f'(6)$.",
+          reponses: [
+            { question: "f'(2)", attendu: ["positif", "> 0", "+", "strictement positif"] },
+            { question: "f'(4)", attendu: "0" },
+            { question: "f'(6)", attendu: ["négatif", "< 0", "-", "strictement négatif"] },
+          ],
           correction:
             "Sur $[0 ; 4]$, la courbe monte : $f'(2) > 0$.\nEn $4$, elle passe d'une montée à une descente : c'est un sommet, la tangente y est horizontale, $f'(4) = 0$.\nSur $[4 ; 7]$, elle descend : $f'(6) < 0$.\n⭐ On n'a pas besoin de la courbe : le sens de variation suffit pour connaître le signe du nombre dérivé.",
           schema: ecranSeulement(
@@ -158,6 +191,11 @@ export const exercicesDerGraphiquePremiere: FicheExercicesData = {
             { x: 0, y: 0, label: "B" },
             { x: 2, y: 2, label: "C" },
           ]),
+          reponses: [
+            { question: "a) f'(-2)", attendu: "-2" },
+            { question: "a) f'(0)", attendu: "0" },
+            { question: "a) f'(2)", attendu: "2" },
+          ],
           correction:
             "a) En $A(-2 ; 2)$, on avance de $1$ : la tangente passe par $(-1 ; 0)$, elle descend de $2$. Donc $f'(-2) = -2$.\nEn $B$, la tangente est horizontale : $f'(0) = 0$.\nEn $C(2 ; 2)$, la tangente passe par $(3 ; 4)$ : elle monte de $2$. Donc $f'(2) = 2$.\nDans l'ordre croissant : $f'(-2) < f'(0) < f'(2)$.\nb) La courbe est aussi raide en $A$ qu'en $C$ : les deux tangentes font $2$ carreaux de montée ou de descente par pas.\n⚠️ Le plus petit nombre dérivé n'est pas la courbe la « moins raide » : $-2$ est plus petit que $0$, et pourtant la courbe est bien plus raide en $A$ qu'en $B$. La raideur, c'est le nombre dérivé sans son signe.",
           micros: ["der_tangente_lire", "der_comparer_vitesses"],
@@ -191,6 +229,11 @@ export const exercicesDerGraphiquePremiere: FicheExercicesData = {
             undefined,
             true,
           ),
+          reponses: [
+            { question: "a) h'(1)", attendu: "4" },
+            { question: "a) h'(2)", attendu: "2" },
+            { question: "b)", attendu: ["1", "le jour 1", "jour 1"] },
+          ],
           correction:
             "a) En $A(1 ; 5)$, on avance d'un jour sur la tangente : elle passe par $(2 ; 9)$. Elle monte de $4$, donc $h'(1) = 4$.\nEn $B(2 ; 8)$, la tangente passe par $(3 ; 10)$ : elle monte de $2$, donc $h'(2) = 2$.\nb) $h'(1) = 4 > h'(2) = 2$ : la rivière monte plus vite le jour $1$, à $4$ mètres par jour, contre $2$ mètres par jour le jour $2$.\n⚠️ Le jour $2$, l'eau est plus HAUTE ($8$ m contre $5$ m), mais elle monte moins VITE. La hauteur, c'est $h$ ; la vitesse, c'est $h'$.",
           micros: ["der_comparer_vitesses", "der_tangente_lire"],
@@ -203,6 +246,12 @@ export const exercicesDerGraphiquePremiere: FicheExercicesData = {
             { x: 2, y: 2, label: "A" },
             { x: 4, y: 8, label: "B" },
           ]),
+          reponses: [
+            { question: "a) d'(2)", attendu: "2" },
+            { question: "a) m/s", attendu: "20" },
+            { question: "a) km/h", attendu: "72" },
+            { question: "b)", attendu: ["plus vite"] },
+          ],
           correction:
             "a) On part de $A(2 ; 2)$ et on avance d'une seconde : la tangente passe par $(3 ; 4)$. Elle monte de $2$.\nDonc $d'(2) = 2$ dizaines de mètres par seconde, soit $20$ m/s.\nPour passer en km/h, on multiplie par $3{,}6$ : $20 \\times 3{,}6 = 72$ km/h.\nb) En $B$, la courbe est bien plus raide qu'en $A$ : la voiture roule plus vite.\n⭐ En physique, la vitesse instantanée est le nombre dérivé de la distance : c'est ce qu'affiche le compteur.\n⚠️ L'unité de $d'(2)$ est celle de $d$ divisée par celle de $t$ : des dizaines de mètres PAR seconde.",
           micros: ["der_tangente_lire", "der_comparer_vitesses"],
@@ -215,6 +264,13 @@ export const exercicesDerGraphiquePremiere: FicheExercicesData = {
             { x: 2, y: 6, label: "A" },
             { x: 4, y: 7, label: "S" },
           ]),
+          reponses: [
+            { question: "a) a'(2)", attendu: "1" },
+            { question: "a) m par km", attendu: "100" },
+            { question: "a) %", attendu: "10 %" },
+            { question: "b) a'(4)", attendu: "0" },
+            { question: "c)", attendu: ["négatif", "< 0", "-", "strictement négatif"] },
+          ],
           correction:
             "a) On part de $A(2 ; 6)$ et on avance d'un kilomètre : la tangente passe par $(3 ; 7)$. Elle monte de $1$.\nDonc $a'(2) = 1$ centaine de mètres par kilomètre : la route monte de $100$ m par kilomètre.\nPour $1\\,000$ m à l'horizontale, elle monte de $100$ m : c'est une pente de $10$ %.\nb) En $S$, la tangente est horizontale : $a'(4) = 0$. C'est le col, le point le plus haut de la route, à $700$ m d'altitude.\nc) Après le col, la route redescend : $a'(6) < 0$.\n⚠️ Les deux unités ne sont pas les mêmes : l'altitude est en centaines de mètres, la distance en kilomètres. On convertit tout en mètres avant de parler de pourcentage.",
           micros: ["der_tangente_lire", "der_tangente_horizontale", "der_tangente_signe"],
@@ -223,6 +279,13 @@ export const exercicesDerGraphiquePremiere: FicheExercicesData = {
           titre: "Le prix du pot de miel",
           enonce:
             "Un apiculteur vend ses pots de miel $x$ euros pièce. Son bénéfice, en centaines d'euros, est $B(x)$. Sur la courbe de $B$, on a tracé trois tangentes :\n• en $x = 3$, elle passe par $(3 ; 4)$ et par $(4 ; 6)$ ;\n• en $x = 5$, elle est horizontale, au point $(5 ; 6)$ ;\n• en $x = 7$, elle passe par $(7 ; 4)$ et par $(8 ; 2)$.\na) Donner $B'(3)$, $B'(5)$ et $B'(7)$.\nb) À quel prix l'apiculteur fait-il le plus grand bénéfice ?\nc) Il vend aujourd'hui ses pots $3$ euros. A-t-il intérêt à augmenter un peu son prix ?",
+          reponses: [
+            { question: "a) B'(3)", attendu: "2" },
+            { question: "a) B'(5)", attendu: "0" },
+            { question: "a) B'(7)", attendu: "-2" },
+            { question: "b)", attendu: "5" },
+            { question: "c)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) En $x = 3$, la tangente avance de $1$ et monte de $6 - 4 = 2$ : $B'(3) = 2$.\nEn $x = 5$, elle est horizontale : $B'(5) = 0$.\nEn $x = 7$, elle avance de $1$ et descend de $4 - 2 = 2$ : $B'(7) = -2$.\nb) La courbe monte en $3$, est plate en $5$, descend en $7$ : le sommet est en $x = 5$. Le bénéfice le plus grand est obtenu pour un pot à $5$ euros, et il vaut $6$ centaines d'euros, soit $600$ euros.\nc) $B'(3) = 2 > 0$ : à $3$ euros, la courbe monte. Augmenter un peu le prix fait augmenter le bénéfice.\n⚠️ Un prix plus élevé ne rapporte pas toujours plus : au-delà de $5$ euros, $B'$ est négatif, les clients achètent moins et le bénéfice baisse.",
           schema: ecranSeulement(
@@ -247,6 +310,12 @@ export const exercicesDerGraphiquePremiere: FicheExercicesData = {
             { x: 2, y: 4, label: "S" },
             { x: 4, y: 2, label: "P" },
           ]),
+          reponses: [
+            { question: "a) h'(0)", attendu: "2" },
+            { question: "a) h'(4)", attendu: "-2" },
+            { question: "b)", attendu: "0" },
+            { question: "c)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) En $D(0 ; 2)$, on avance de $1$ : la tangente passe par $(1 ; 4)$, elle monte de $2$. Donc $h'(0) = 2$.\nEn $P(4 ; 2)$, la tangente passe par $(5 ; 0)$ : elle descend de $2$. Donc $h'(4) = -2$.\n$h'(0) > 0$ : au départ, le ballon monte. $h'(4) < 0$ : en $P$, il redescend.\nb) Au sommet $S$, la tangente est horizontale : $h'(2) = 0$. Le ballon est au plus haut, à $4$ m.\nc) Oui : en $D$ et en $P$, les tangentes sont aussi raides l'une que l'autre, $2$ carreaux par pas. Seul le signe change.\n⭐ Ici, $h'(x)$ n'est pas une vitesse : c'est la PENTE de la trajectoire, car $x$ est une distance et non un temps.",
           micros: ["der_tangente_signe", "der_tangente_horizontale", "der_tangente_lire"],
@@ -265,6 +334,12 @@ export const exercicesDerGraphiquePremiere: FicheExercicesData = {
             undefined,
             true,
           ),
+          reponses: [
+            { question: "a) P'(2)", attendu: "-2" },
+            { question: "b) année", attendu: "1960" },
+            { question: "b) P'(6)", attendu: "0" },
+            { question: "c)", attendu: ["positif", "> 0", "+", "strictement positif"] },
+          ],
           correction:
             "a) On part de $A(2 ; 6)$ et on avance d'une décennie : la tangente passe par $(3 ; 4)$. Elle descend de $2$.\nDonc $P'(2) = -2$ : en 1920, le village perd environ $200$ habitants par décennie. Ce sont les départs de l'exode rural.\nb) Le point le plus bas est $M(6 ; 2)$ : $t = 6$, soit en 1960, avec $200$ habitants. La tangente y est horizontale : $P'(6) = 0$.\nc) Après $M$, la courbe remonte : $P'(9) > 0$. Dans les années 1990, le village regagne des habitants.\n⚠️ En 1960, $P'(6) = 0$ ne veut pas dire que le village est vide : c'est la VITESSE qui est nulle, la population, elle, vaut $200$ habitants.",
           micros: ["der_tangente_lire", "der_tangente_horizontale", "der_tangente_signe"],
@@ -273,6 +348,12 @@ export const exercicesDerGraphiquePremiere: FicheExercicesData = {
           titre: "Deux forêts replantées",
           enonce:
             "Deux forêts ont été replantées après un incendie. On suit la hauteur moyenne de leurs arbres, en mètres, en fonction de leur âge, en années. À $4$ ans :\n• forêt $A$ : les arbres mesurent $6$ m, et la tangente à la courbe passe par le point $(6 ; 7)$ ;\n• forêt $B$ : les arbres mesurent $3$ m, et la tangente passe par le point $(5 ; 4)$.\na) Calculer le coefficient directeur de chaque tangente.\nb) Quelle forêt a les arbres les plus hauts à $4$ ans ? Laquelle pousse le plus vite ?",
+          reponses: [
+            { question: "a) A", attendu: "0,5" },
+            { question: "a) B", attendu: "1" },
+            { question: "b) plus hauts", attendu: ["A", "forêt A", "la forêt A"] },
+            { question: "b) plus vite", attendu: ["B", "forêt B", "la forêt B"] },
+          ],
           correction:
             "a) Forêt $A$ : la tangente passe par $(4 ; 6)$ et $(6 ; 7)$. Elle monte de $1$ quand on avance de $2$ : son coefficient directeur vaut $\\dfrac{7 - 6}{6 - 4} = 0{,}5$.\nForêt $B$ : elle passe par $(4 ; 3)$ et $(5 ; 4)$. Elle monte de $1$ quand on avance de $1$ : son coefficient directeur vaut $1$.\nb) À $4$ ans, les arbres de $A$ sont les plus hauts : $6$ m contre $3$ m.\nMais ceux de $B$ poussent le plus vite : $1$ m par an, contre $0{,}5$ m par an pour $A$.\n⚠️ Être en avance ne veut pas dire aller plus vite : la hauteur se lit sur la courbe, la vitesse sur la tangente.",
           schema: ecranSeulement(
@@ -291,6 +372,11 @@ export const exercicesDerGraphiquePremiere: FicheExercicesData = {
           titre: "Une journée d'été",
           enonce:
             "Pendant une journée d'été, $T(t)$ est la température, en °C, à l'heure $t$. Des mesures donnent : $T'(9) = 2{,}4$ ; $T'(15) = 0$ ; $T'(19) = -1{,}6$, en °C par heure.\na) À $9$ h, la température monte-t-elle ou baisse-t-elle ? Et à $19$ h ?\nb) Sachant que la température monte toute la matinée et baisse toute la soirée, que se passe-t-il à $15$ h ?\nc) Parmi ces trois heures, quand la température change-t-elle le plus vite ?",
+          reponses: [
+            { question: "a) 9 h", attendu: ["monte", "elle monte"] },
+            { question: "a) 19 h", attendu: ["baisse", "elle baisse", "descend"] },
+            { question: "c)", attendu: "9" },
+          ],
           correction:
             "a) $T'(9) = 2{,}4 > 0$ : à $9$ h, la température monte, d'environ $2{,}4$ °C par heure.\n$T'(19) = -1{,}6 < 0$ : à $19$ h, elle baisse.\nb) À $15$ h, la tangente est horizontale, entre une montée et une descente : c'est le maximum de la journée, l'heure la plus chaude.\nc) On compare les vitesses SANS leur signe : $2{,}4$ à $9$ h, $0$ à $15$ h, $1{,}6$ à $19$ h.\nC'est à $9$ h que la température change le plus vite.\n⚠️ $-1{,}6$ est plus petit que $0$, mais la température bouge davantage à $19$ h qu'à $15$ h : pour comparer des vitesses, on oublie le signe.",
           schema: ecranSeulement(tableauSignes(["9", "15", "19"], [["$T'(t)$", ["+", "-"], ["0"]]], "t")),
@@ -324,6 +410,14 @@ export const exercicesDerGraphiquePremiere: FicheExercicesData = {
             undefined,
             true,
           ),
+          reponses: [
+            { question: "a) h'(2)", attendu: "3" },
+            { question: "a) m par km", attendu: "300" },
+            { question: "a) %", attendu: "30 %" },
+            { question: "b)", attendu: "0" },
+            { question: "c)", attendu: ["négatif", "< 0", "-", "strictement négatif"] },
+            { question: "d)", attendu: ["moins raide", "moins"] },
+          ],
           correction:
             "a) La tangente en $A(2 ; 6)$ passe par $(3 ; 9)$ : quand on avance de $1$, elle monte de $3$. Donc $h'(2) = 3$.\nL'unité de $h'$ est celle de $h$ divisée par celle de $x$ : des centaines de mètres PAR kilomètre. Le sentier monte de $300$ m par kilomètre.\nPour $1\\,000$ m parcourus, il monte de $300$ m : c'est une pente de $30$ %.\nb) En $S$, la tangente est horizontale : $h'(4) = 0$. Le randonneur est au SOMMET, à $1\\,000$ m d'altitude.\nc) Après $S$, la courbe descend : $h'(x) < 0$ entre $4$ et $6$. Le sentier redescend.\nd) De $A$ à $S$, les tangentes s'aplatissent : la pente passe de $3$ à $0$. Le sentier devient MOINS raide à l'approche du sommet.\n⭐ Le plus raide n'est pas le plus haut : en $A$, on est à $600$ m et ça grimpe fort ; au sommet $S$, la pente est nulle.",
           micros: ["der_tangente_lire", "der_tangente_horizontale", "der_tangente_signe", "der_comparer_vitesses"],
@@ -343,6 +437,15 @@ export const exercicesDerGraphiquePremiere: FicheExercicesData = {
             undefined,
             true,
           ),
+          reponses: [
+            { question: "a) T'(0)", attendu: "-2" },
+            { question: "a) T'(4)", attendu: "-1" },
+            { question: "a) T'(0) en °C/min", attendu: "-2" },
+            { question: "a) T'(4) en °C/min", attendu: "-1" },
+            { question: "b)", attendu: ["au début", "début"] },
+            { question: "c)", attendu: "0" },
+            { question: "d)", attendu: ["négatif", "< 0", "-", "strictement négatif", "≤ 0", "négatif ou nul"] },
+          ],
           correction:
             "a) En $A(0 ; 10)$, la tangente passe par $(1 ; 8)$ : elle descend de $2$. Donc $T'(0) = -2$.\nEn $B(4 ; 4)$, la tangente passe par $(5 ; 3)$ : elle descend de $1$. Donc $T'(4) = -1$.\n$T'(0) = -2$ se lit « moins $2$ dizaines de degrés par dizaine de minutes » : $-20$ °C en $10$ minutes, soit $-2$ °C par minute.\nDe même, $T'(4) = -1$ donne $-1$ °C par minute.\nb) La tangente en $A$ est plus raide : le thé refroidit plus vite au début, $2$ °C par minute contre $1$ °C par minute.\nc) En $C$, la tangente est horizontale : $T'(8) = 0$. Le thé est à $20$ °C, la température de la pièce : il ne refroidit plus.\nd) Entre $0$ et $8$, la courbe descend : $T'(t) < 0$ (et $T'(8) = 0$ au bout). La température baisse de moins en moins vite.\n⭐ En physique, un objet chaud refroidit d'autant plus vite qu'il est loin de la température de la pièce.",
           micros: ["der_tangente_lire", "der_comparer_vitesses", "der_tangente_horizontale", "der_tangente_signe"],
@@ -362,6 +465,15 @@ export const exercicesDerGraphiquePremiere: FicheExercicesData = {
             undefined,
             true,
           ),
+          reponses: [
+            { question: "a) points", attendu: "M ; N" },
+            { question: "a) heures", attendu: "11 ; 13" },
+            { question: "a) visiteurs", attendu: "1000 ; 800" },
+            { question: "b) [0 ; 2]", attendu: ["positif", "> 0", "+", "strictement positif", "≥ 0", "positif ou nul"] },
+            { question: "b) [2 ; 4]", attendu: ["négatif", "< 0", "-", "strictement négatif", "≤ 0", "négatif ou nul"] },
+            { question: "b) [4 ; 5]", attendu: ["positif", "> 0", "+", "strictement positif", "≥ 0", "positif ou nul"] },
+            { question: "c)", attendu: "-1,5" },
+          ],
           correction:
             "a) La tangente est horizontale en $M(2 ; 10)$ et en $N(4 ; 8)$.\n$M$ : $2$ h après l'ouverture, à $11$ h, il y a $1\\,000$ visiteurs. C'est un maximum local : la matinée bat son plein.\n$N$ : à $13$ h, il y a $800$ visiteurs. C'est un minimum local : la pause de midi.\nb) Sur $[0 ; 2]$, la courbe monte : $f'(x) \\geqslant 0$. Sur $[2 ; 4]$, elle descend : $f'(x) \\leqslant 0$. Sur $[4 ; 5]$, elle remonte : $f'(x) \\geqslant 0$.\nc) En $C(3 ; 9)$, on avance de $2$ : la tangente passe par $(5 ; 6)$, elle descend de $3$.\nDonc $f'(3) = \\dfrac{-3}{2} = -1{,}5$.\nÀ midi, le parc perd environ $1{,}5$ centaine de visiteurs par heure, soit $150$ visiteurs par heure.\n⚠️ Un minimum LOCAL n'est pas forcément le plus bas de la journée : à l'ouverture, il n'y avait personne.",
           micros: ["der_tangente_horizontale", "der_tangente_signe", "der_tangente_lire"],
@@ -370,6 +482,15 @@ export const exercicesDerGraphiquePremiere: FicheExercicesData = {
           titre: "Deux marathoniennes",
           enonce:
             "Nadia et Kenza courent un marathon ($42{,}195$ km). On note $N(t)$ et $K(t)$ les distances qu'elles ont parcourues, en km, au bout de $t$ minutes. À $t = 60$ :\n• la tangente à la courbe de Nadia passe par $(60 ; 20)$ et $(80 ; 26)$ ;\n• la tangente à la courbe de Kenza passe par $(60 ; 18)$ et $(80 ; 25)$.\na) Qui est en tête à $t = 60$ ?\nb) Calculer $N'(60)$ et $K'(60)$, en km par minute, puis en km/h. Qui court le plus vite ?\nc) Si chacune gardait sa vitesse, au bout de combien de minutes Kenza rattraperait-elle Nadia ?",
+          reponses: [
+            { question: "a)", attendu: ["Nadia"] },
+            { question: "b) N'(60)", attendu: "0,3" },
+            { question: "b) Nadia km/h", attendu: "18" },
+            { question: "b) K'(60)", attendu: "0,35" },
+            { question: "b) Kenza km/h", attendu: "21" },
+            { question: "b) plus vite", attendu: ["Kenza"] },
+            { question: "c)", attendu: "40" },
+          ],
           correction:
             "a) À $t = 60$, Nadia a couru $20$ km et Kenza $18$ km : Nadia est en tête, avec $2$ km d'avance.\nb) Nadia : $N'(60) = \\dfrac{26 - 20}{80 - 60} = \\dfrac{6}{20} = 0{,}3$ km par minute. En une heure : $0{,}3 \\times 60 = 18$ km/h.\nKenza : $K'(60) = \\dfrac{25 - 18}{80 - 60} = \\dfrac{7}{20} = 0{,}35$ km par minute, soit $0{,}35 \\times 60 = 21$ km/h.\nKenza court plus vite.\nc) Chaque minute, Kenza reprend $0{,}35 - 0{,}3 = 0{,}05$ km à Nadia.\nPour reprendre $2$ km : $2 \\div 0{,}05 = 40$ minutes. Elle la rattraperait vers $t = 100$ minutes.\n⚠️ Être devant ne veut pas dire aller plus vite : l'avance se lit sur les courbes, la vitesse sur les tangentes.\n⭐ Ce n'est qu'une prévision : si Kenza se fatigue, sa tangente s'aplatit.",
           schema: ecranSeulement(tableau(["t (min)", "60", "80", "100"], ["avance de Nadia (km)", 2, 1, 0])),

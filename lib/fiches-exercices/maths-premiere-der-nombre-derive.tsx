@@ -63,6 +63,9 @@ export const exercicesDerNombreDerivePremiere: FicheExercicesData = {
       exercices: [
         {
           enonce: "La tangente à la courbe de $f$ au point $A(0 ; 1)$ passe aussi par le point $B(2 ; 7)$. Calculer $f'(0)$.",
+          reponses: [
+            { attendu: "3" },
+          ],
           correction:
             "$f'(0)$ est le coefficient directeur de la tangente $(AB)$ :\n$f'(0) = \\dfrac{7 - 1}{2 - 0} = \\dfrac{6}{2} = 3$.\nSur le dessin, l'escalier vert : on avance de $2$, on monte de $6$. Pour un pas de $1$, on monte donc de $3$.\n⚠️ En haut les ordonnées, en bas les abscisses, et DANS LE MÊME ORDRE : $B$ moins $A$ en haut comme en bas.",
           schema: repere([-1, 4, -1, 8], [{ q: [0, 3, 1], couleur: ORANGE }, { pts: [[0, 1], [2, 1], [2, 7]], couleur: VERT }], [
@@ -73,6 +76,10 @@ export const exercicesDerNombreDerivePremiere: FicheExercicesData = {
         },
         {
           enonce: "La tangente à la courbe de $g$ au point $A(1 ; 5)$ passe aussi par le point $B(4 ; -1)$.\na) Calculer $g'(1)$.\nb) Donner l'équation réduite de cette tangente.",
+          reponses: [
+            { question: "a)", attendu: "-2" },
+            { question: "b)", attendu: "y = -2x + 7" },
+          ],
           correction:
             "a) $g'(1) = \\dfrac{-1 - 5}{4 - 1} = \\dfrac{-6}{3} = -2$.\nb) La tangente a une équation de la forme $y = -2x + p$. Elle passe par $A(1 ; 5)$ : $5 = -2 \\times 1 + p$, donc $p = 7$.\nC'est la droite $y = -2x + 7$. ✔️ Avec $B$ : $-2 \\times 4 + 7 = -1$.\n⚠️ $-1 - 5 = -6$ : on garde le signe moins. Sur l'escalier, on avance de $3$ et on DESCEND de $6$.",
           schema: repere([-1, 5, -2, 7], [{ q: [0, -2, 7], couleur: ORANGE }, { pts: [[1, 5], [4, 5], [4, -1]], couleur: VERT }], [
@@ -90,6 +97,10 @@ export const exercicesDerNombreDerivePremiere: FicheExercicesData = {
         },
         {
           enonce: "On sait que $f(3) = 10$ et $f'(3) = 4$. Donner une valeur approchée de $f(3{,}1)$, puis de $f(2{,}9)$.",
+          reponses: [
+            { question: "f(3,1)", attendu: "10,4" },
+            { question: "f(2,9)", attendu: "9,6" },
+          ],
           correction:
             "Près de $3$, la courbe se confond presque avec sa tangente : quand $x$ varie de $h$, $f(x)$ varie d'environ $f'(3) \\times h$.\n$f(3{,}1) \\approx 10 + 4 \\times 0{,}1 = 10{,}4$.\nPour $2{,}9$, on RECULE de $0{,}1$ : $h = -0{,}1$, et $f(2{,}9) \\approx 10 + 4 \\times (-0{,}1) = 9{,}6$.\n⚠️ Ce sont des valeurs APPROCHÉES : on écrit $\\approx$, pas $=$.",
           schema: ecranSeulement(tableau(["x", "2,9", "3", "3,1"], ["f(x) environ", 9.6, 10, 10.4])),
@@ -101,12 +112,22 @@ export const exercicesDerNombreDerivePremiere: FicheExercicesData = {
             { x: 2, y: 2, label: "A" },
             { x: 3, y: 4, label: "B" },
           ]),
+          reponses: [
+            { question: "a) A", attendu: "(2 ; 2)", ordre: true },
+            { question: "a) B", attendu: "(3 ; 4)", ordre: true },
+            { question: "b)", attendu: "2" },
+            { question: "c)", attendu: "y = 2x - 2" },
+          ],
           correction:
             "a) $A(2 ; 2)$ et $B(3 ; 4)$.\nb) $f'(2) = \\dfrac{4 - 2}{3 - 2} = 2$.\nc) $y = 2x + p$, et $A$ est sur la tangente : $2 = 2 \\times 2 + p$, donc $p = -2$. La tangente a pour équation $y = 2x - 2$.\n✔️ Avec $B$ : $2 \\times 3 - 2 = 4$.\n⭐ On choisit des points sur des NŒUDS du quadrillage : là, la lecture est exacte.",
           micros: ["der_tangente_coefficient"],
         },
         {
           enonce: "La tangente à la courbe de $f$ au point d'abscisse $4$ a pour équation $y = -0{,}5x + 3$. Que valent $f'(4)$ et $f(4)$ ?",
+          reponses: [
+            { question: "f'(4)", attendu: "-0,5" },
+            { question: "f(4)", attendu: "1" },
+          ],
           correction:
             "Le coefficient directeur de la tangente est $-0{,}5$ : $f'(4) = -0{,}5$.\nLe point de contact est à la fois sur la courbe et sur la tangente : $f(4) = -0{,}5 \\times 4 + 3 = -2 + 3 = 1$.\n⚠️ $f'(4)$ n'est pas $3$ : $3$ est l'ordonnée à l'origine de la tangente, pas sa pente.",
           schema: ecranSeulement(
@@ -123,6 +144,9 @@ export const exercicesDerNombreDerivePremiere: FicheExercicesData = {
         },
         {
           enonce: "La masse d'un bébé, en kilogrammes, est $m(t)$, où $t$ est son âge en semaines. On sait que $m(6) = 5$ et $m'(6) = 0{,}2$.\na) Que signifie $m'(6)$ ?\nb) Estimer sa masse à $7$ semaines.",
+          reponses: [
+            { question: "b)", attendu: "5,2" },
+          ],
           correction:
             "a) $m'(6)$ est en kg PAR semaine : à $6$ semaines, le bébé prend environ $0{,}2$ kg, soit $200$ g, par semaine.\nb) Une semaine plus tard : $m(7) \\approx 5 + 0{,}2 \\times 1 = 5{,}2$ kg.\n⚠️ $m'(6)$ n'est pas une masse : $0{,}2$ kg, c'est ce que le bébé GAGNE par semaine, pas ce qu'il pèse.",
           schema: ecranSeulement(tableau(["âge (semaines)", "6", "7", "8"], ["masse environ (kg)", 5, 5.2, 5.4])),
@@ -146,6 +170,13 @@ export const exercicesDerNombreDerivePremiere: FicheExercicesData = {
           titre: "Un village pendant l'exode rural",
           enonce:
             "Pendant l'exode rural, les campagnes françaises se vident au profit des villes. La population d'un village de montagne, en centaines d'habitants, est $P(t)$, où $t$ est le nombre de décennies écoulées depuis 1940. On sait que $P(2) = 5$ et $P'(2) = -3$.\na) En quelle année est-on quand $t = 2$ ? Combien le village a-t-il d'habitants ?\nb) Que vaut le coefficient directeur de la tangente au point d'abscisse $2$ ? La population augmente-t-elle ou diminue-t-elle ?\nc) Entre $t = 2$ et $t = 2{,}1$, c'est-à-dire en un an, de combien d'habitants environ la population varie-t-elle ?",
+          reponses: [
+            { question: "a) année", attendu: "1960" },
+            { question: "a) habitants", attendu: "500" },
+            { question: "b) coefficient", attendu: "-3" },
+            { question: "b) sens", attendu: ["diminue", "elle diminue", "baisse"] },
+            { question: "c)", attendu: ["-30", "30"] },
+          ],
           correction:
             "a) $t = 2$ : deux décennies après 1940, soit en 1960. $P(2) = 5$ centaines : le village a $500$ habitants.\nb) Le coefficient directeur de la tangente, c'est le nombre dérivé : $-3$. Il est négatif : la population DIMINUE.\nc) Près de $2$, la courbe se confond presque avec sa tangente : quand $t$ augmente de $0{,}1$, $P(t)$ varie d'environ $-3 \\times 0{,}1 = -0{,}3$ centaine.\nLe village perd donc environ $30$ habitants en un an : ils partent pour la ville.\n⭐ C'est le sens du nombre dérivé : une VITESSE. $P'(2) = -3$ se lit « moins $300$ habitants par décennie », au rythme de 1960.\n⚠️ Ce n'est qu'une approximation : plus on s'éloigne de 1960, moins la tangente colle à la courbe.",
           schema: ecranSeulement(repere([-1, 5, -1, 8], [{ q: [0, -3, 11], couleur: ORANGE }], [{ x: 2, y: 5, label: "1960" }])),
@@ -159,6 +190,11 @@ export const exercicesDerNombreDerivePremiere: FicheExercicesData = {
             { x: 1, y: 3, label: "A" },
             { x: 3, y: 7, label: "B" },
           ]),
+          reponses: [
+            { question: "a)", attendu: "2" },
+            { question: "b)", attendu: "y = 2x + 1" },
+            { question: "c)", attendu: "2000" },
+          ],
           correction:
             "a) $R'(1)$ est le coefficient directeur de la tangente, qui passe par $A$ et $B$ :\n$R'(1) = \\dfrac{7 - 3}{3 - 1} = \\dfrac{4}{2} = 2$.\nb) La tangente a une équation de la forme $y = 2x + p$. Elle passe par $A(1 ; 3)$ : $3 = 2 \\times 1 + p$, donc $p = 1$.\nC'est la droite $y = 2x + 1$. ✔️ Avec $B$ : $2 \\times 3 + 1 = 7$.\nc) $R'(1) = 2$ milliers d'euros par centaine de sacs : une centaine de sacs de plus rapporte environ $2\\,000$ euros, soit $20$ euros par sac.\n⚠️ Dans le quotient, les ordonnées en haut, les abscisses en bas, DANS LE MÊME ORDRE : $\\dfrac{7 - 3}{3 - 1}$, pas $\\dfrac{7 - 3}{1 - 3}$.",
           micros: ["der_tangente_coefficient", "der_modele_interpreter"],
@@ -171,6 +207,13 @@ export const exercicesDerNombreDerivePremiere: FicheExercicesData = {
             { x: 2, y: 2, label: "A" },
             { x: 3, y: 4, label: "B" },
           ]),
+          reponses: [
+            { question: "a) d'(2)", attendu: "2" },
+            { question: "a) m/s", attendu: "20" },
+            { question: "a) km/h", attendu: "72" },
+            { question: "b) coefficient", attendu: "1" },
+            { question: "b) m/s", attendu: "10" },
+          ],
           correction:
             "a) $A(2 ; 2)$ et $B(3 ; 4)$ : $d'(2) = \\dfrac{4 - 2}{3 - 2} = 2$ dizaines de mètres par seconde, soit $20$ m/s.\nEn km/h : $20 \\times 3{,}6 = 72$ km/h.\nb) La corde va de $(0 ; 0)$ à $A(2 ; 2)$ : son coefficient directeur vaut $\\dfrac{2 - 0}{2 - 0} = 1$ dizaine de mètres par seconde, soit $10$ m/s.\nÀ $2$ s, la pierre va DEUX fois plus vite que sa vitesse moyenne depuis le départ : elle accélère.\n⭐ Vitesse moyenne : la pente de la corde. Vitesse instantanée : la pente de la tangente.\n⚠️ La pierre a parcouru $20$ m en $2$ s, mais elle ne va pas à $10$ m/s à l'instant $2$ : elle va déjà à $20$ m/s.",
           micros: ["der_nombre_derive_sens", "der_tangente_coefficient"],
@@ -190,6 +233,12 @@ export const exercicesDerNombreDerivePremiere: FicheExercicesData = {
             undefined,
             true,
           ),
+          reponses: [
+            { question: "a)", attendu: "3" },
+            { question: "b) centaine", attendu: "3000" },
+            { question: "b) un vélo", attendu: "30" },
+            { question: "c)", attendu: "3,5" },
+          ],
           correction:
             "a) $A(2 ; 6)$ et $B(3 ; 9)$ : $C'(2) = \\dfrac{9 - 6}{3 - 2} = 3$.\nb) $C'(2) = 3$ milliers d'euros par centaine de vélos : une centaine de plus coûte environ $3\\,000$ €, soit $30$ € par vélo.\nc) $C(3) - C(2) = 9{,}5 - 6 = 3{,}5$ : la centaine supplémentaire coûte en réalité $3\\,500$ €.\nLe coût marginal en est une APPROXIMATION : sur le dessin, en $x = 3$, la courbe passe un peu au-dessus de sa tangente.\n⭐ Plus l'écart est petit, meilleure est l'approximation : pour un seul vélo de plus, elle est excellente.",
           micros: ["der_modele_interpreter", "der_tangente_coefficient"],
@@ -198,6 +247,10 @@ export const exercicesDerNombreDerivePremiere: FicheExercicesData = {
           titre: "Le marathonien",
           enonce:
             "La distance parcourue par un marathonien, en km, est $d(t)$, où $t$ est le temps en heures. On sait que $d(1) = 12$ et $d'(1) = 12$.\na) Que signifie $d'(1)$ ?\nb) Estimer la distance parcourue au bout d'$1$ h $15$ min.\nc) Donner l'équation réduite de la tangente au point $(1 ; 12)$. Que remarque-t-on ?",
+          reponses: [
+            { question: "b)", attendu: "15" },
+            { question: "c)", attendu: "y = 12t" },
+          ],
           correction:
             "a) $d'(1) = 12$ km/h : au bout d'une heure, le coureur court à $12$ km/h.\nb) $1$ h $15$ min $= 1{,}25$ h : on avance de $0{,}25$.\n$d(1{,}25) \\approx 12 + 12 \\times 0{,}25 = 15$ km.\nc) La tangente a pour équation $y = 12t + p$ et passe par $(1 ; 12)$ : $12 = 12 \\times 1 + p$, donc $p = 0$.\nC'est la droite $y = 12t$ : elle passe par l'ORIGINE. C'est la course d'un coureur qui aurait tenu $12$ km/h depuis le départ.\n⚠️ $1$ h $15$ min ne fait pas $1{,}15$ h : un quart d'heure, c'est $0{,}25$ h.",
           schema: ecranSeulement(tableau(["t (h)", "1", "1,25", "1,5"], ["d(t) environ (km)", 12, 15, 18])),
@@ -207,6 +260,9 @@ export const exercicesDerNombreDerivePremiere: FicheExercicesData = {
           titre: "Le CO₂ de l'atmosphère",
           enonce:
             "Dans un modèle arrondi, la concentration de CO₂ dans l'air est $C(t)$ ppm (parties par million), où $t$ est l'année. On prend $C(2020) = 415$ et $C'(2020) = 2{,}5$.\na) Quelle est l'unité de $C'(2020)$ ? Que signifie ce nombre ?\nb) Estimer $C(2024)$.\nc) Un article affirme : « en 2020, la concentration augmente de $2{,}5$ % par an ». Qu'en penser ?",
+          reponses: [
+            { question: "b)", attendu: "425" },
+          ],
           correction:
             "a) $C'(2020)$ est en ppm PAR AN : en 2020, la concentration augmente d'environ $2{,}5$ ppm chaque année.\nb) Quatre ans plus tard : $C(2024) \\approx 415 + 2{,}5 \\times 4 = 425$ ppm.\nc) L'article confond deux choses : $2{,}5$ ppm n'est pas $2{,}5$ %.\nEn pourcentage : $\\dfrac{2{,}5}{415} \\approx 0{,}006$, soit environ $0{,}6$ % par an.\n⚠️ Le nombre dérivé a l'unité de la grandeur (des ppm) par unité de temps : ce n'est pas un pourcentage.",
           schema: ecranSeulement(tableau(["année", "2020", "2022", "2024"], ["C environ (ppm)", 415, 420, 425])),
@@ -220,6 +276,12 @@ export const exercicesDerNombreDerivePremiere: FicheExercicesData = {
             { x: 2, y: 7, label: "A" },
             { x: 4, y: 4, label: "B" },
           ]),
+          reponses: [
+            { question: "a) L'(2)", attendu: "-1" },
+            { question: "a) L'(4)", attendu: "-2" },
+            { question: "b) 1970", attendu: ["10", "-10"] },
+            { question: "b) 1990", attendu: ["20", "-20"] },
+          ],
           correction:
             "a) $L'(2) = \\dfrac{6 - 7}{3 - 2} = -1$ et $L'(4) = \\dfrac{2 - 4}{5 - 4} = -2$.\nb) $L'(2) = -1$ centaine de mètres par décennie : en 1970, le glacier recule de $100$ m en dix ans, soit $10$ m par an.\n$L'(4) = -2$ : en 1990, il recule de $200$ m par décennie, soit $20$ m par an.\nc) Le recul s'ACCÉLÈRE : en vingt ans, sa vitesse a doublé.\n⚠️ Les deux nombres dérivés sont négatifs : le glacier RACCOURCIT. Plus le nombre est négatif, plus il recule vite.",
           micros: ["der_tangente_coefficient", "der_nombre_derive_sens", "der_modele_interpreter"],
@@ -228,6 +290,10 @@ export const exercicesDerNombreDerivePremiere: FicheExercicesData = {
           titre: "La puissance d'un radiateur",
           enonce:
             "L'énergie consommée par un radiateur électrique, en kWh, est $E(t)$ au bout de $t$ heures. La tangente à la courbe de $E$ au point $A(2 ; 3)$ passe par $B(4 ; 6)$.\na) Calculer $E'(2)$. En physique, $E'(t)$ est la PUISSANCE du radiateur, en kilowatts (kW).\nb) Dans ce modèle, le kWh coûte $0{,}20$ €. Combien coûte, environ, une heure de chauffage de plus à ce moment-là ?",
+          reponses: [
+            { question: "a)", attendu: "1,5" },
+            { question: "b)", attendu: "0,30" },
+          ],
           correction:
             "a) $E'(2) = \\dfrac{6 - 3}{4 - 2} = \\dfrac{3}{2} = 1{,}5$.\n$E'(2)$ est en kWh PAR heure, c'est-à-dire en kilowatts : à cet instant, la puissance du radiateur est $1{,}5$ kW.\nb) En une heure, il consomme environ $1{,}5$ kWh, qui coûtent $1{,}5 \\times 0{,}20 = 0{,}30$ €.\n⭐ La puissance est la vitesse à laquelle l'énergie est consommée : c'est le nombre dérivé de l'énergie.\n⚠️ Le kW mesure une puissance, le kWh une énergie : ce sont deux grandeurs différentes.",
           schema: ecranSeulement(
@@ -266,6 +332,15 @@ export const exercicesDerNombreDerivePremiere: FicheExercicesData = {
             undefined,
             true,
           ),
+          reponses: [
+            { question: "a) x'(2)", attendu: "1" },
+            { question: "a) x'(2) en km/h", attendu: "60" },
+            { question: "a) x'(4)", attendu: "2" },
+            { question: "a) x'(4) en km/h", attendu: "120" },
+            { question: "b)", attendu: ["1", "60 km/h"] },
+            { question: "c)", attendu: "y = 2t - 4" },
+            { question: "d)", attendu: "5" },
+          ],
           correction:
             "a) En $A(2 ; 1)$, la tangente passe par $(3 ; 2)$ : $x'(2) = 1$ km par minute. En une heure : $1 \\times 60 = 60$ km/h.\nEn $B(4 ; 4)$, elle passe par $(5 ; 6)$ : $x'(4) = 2$ km par minute, soit $2 \\times 60 = 120$ km/h.\nb) Entre $0$ et $4$ min, le train parcourt $4$ km : sa vitesse moyenne est $\\dfrac{4}{4} = 1$ km par minute, soit $60$ km/h.\nC'est exactement $x'(2)$ : ici, la vitesse moyenne sur $[0 ; 4]$ est la vitesse instantanée au milieu.\nc) $y = 2t + p$ passe par $B(4 ; 4)$ : $4 = 2 \\times 4 + p$, donc $p = -4$. La tangente a pour équation $y = 2t - 4$.\nd) Près de $4$, la courbe colle à sa tangente : $x(4{,}5) \\approx 2 \\times 4{,}5 - 4 = 5$ km.\n⚠️ La vitesse moyenne ($60$ km/h) cache l'accélération : à $t = 4$, le train roule déjà deux fois plus vite.\n⭐ Pour passer des km par minute aux km/h, on multiplie par $60$.",
           micros: ["der_nombre_derive_sens", "der_tangente_coefficient", "der_modele_interpreter"],
@@ -274,6 +349,13 @@ export const exercicesDerNombreDerivePremiere: FicheExercicesData = {
           titre: "L'atelier de vélos",
           enonce:
             "Un atelier fabrique et vend $q$ vélos par mois. Chaque vélo est vendu $500$ € : la recette marginale vaut $R'(q) = 500$ euros. Le coût marginal est $C'(q) = 4q + 400$ euros.\na) Calculer $C'(20)$ et $C'(40)$. Que signifient ces nombres ?\nb) Pour $q = 20$, puis pour $q = 40$, fabriquer un vélo de plus fait-il gagner ou perdre de l'argent ? Combien, environ ?\nc) Pour quelle production le coût marginal est-il égal à la recette marginale ? Les économistes disent que le bénéfice y est maximal.",
+          reponses: [
+            { question: "a) C'(20)", attendu: "480" },
+            { question: "a) C'(40)", attendu: "560" },
+            { question: "b) q = 20", attendu: "20" },
+            { question: "b) q = 40", attendu: ["-60", "60"] },
+            { question: "c)", attendu: "25" },
+          ],
           correction:
             "a) $C'(20) = 4 \\times 20 + 400 = 480$ et $C'(40) = 4 \\times 40 + 400 = 560$.\nQuand l'atelier fabrique $20$ vélos, un vélo de plus coûte environ $480$ € ; à $40$ vélos, environ $560$ €.\nb) À $20$ vélos : le vélo de plus rapporte $500$ € et coûte environ $480$ € : on GAGNE environ $500 - 480 = 20$ €.\nÀ $40$ vélos : il rapporte $500$ € et coûte environ $560$ € : $500 - 560 = -60$, on PERD environ $60$ €.\nc) $4q + 400 = 500$ donne $4q = 100$, donc $q = 25$.\nÀ $25$ vélos par mois, le vélo suivant ne rapporte plus rien : c'est la production qui rend le bénéfice maximal.\n⚠️ Le coût marginal AUGMENTE avec la production (heures supplémentaires, machines usées) : c'est lui qui finit par manger le gain.\n⭐ Le tableau le résume : le gain d'un vélo de plus passe de positif à négatif, et il s'annule à $25$.",
           schema: tableau(["vélos par mois", "20", "25", "40"], ["gain d'un vélo de plus (€)", 20, 0, -60]),
@@ -283,6 +365,12 @@ export const exercicesDerNombreDerivePremiere: FicheExercicesData = {
           titre: "La température en montagne",
           enonce:
             "En montagne, la température baisse quand on monte. Un ballon-sonde mesure la température $T(z)$, en °C, à l'altitude $z$, en km. La tangente à la courbe de $T$ au point $A(2 ; 7)$ passe par $B(4 ; -6)$.\na) Calculer $T'(2)$. Quelle est son unité ?\nb) Donner l'équation réduite de cette tangente.\nc) En déduire une estimation de la température à $2{,}4$ km d'altitude.\nd) Les météorologues retiennent une baisse moyenne d'environ $6{,}5$ °C par kilomètre d'altitude. La mesure est-elle cohérente ?",
+          reponses: [
+            { question: "a)", attendu: "-6,5" },
+            { question: "b)", attendu: "y = -6,5z + 20" },
+            { question: "c)", attendu: "4,4" },
+            { question: "d)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) $T'(2) = \\dfrac{-6 - 7}{4 - 2} = \\dfrac{-13}{2} = -6{,}5$ °C par km.\nÀ $2$ km d'altitude, la température baisse d'environ $6{,}5$ °C par kilomètre de montée.\nb) $y = -6{,}5z + p$ passe par $A(2 ; 7)$ : $7 = -6{,}5 \\times 2 + p$, soit $7 = -13 + p$, donc $p = 20$.\nLa tangente a pour équation $y = -6{,}5z + 20$.\nc) $T(2{,}4) \\approx -6{,}5 \\times 2{,}4 + 20 = 4{,}4$ °C.\nd) Oui : $-6{,}5$ °C par km, c'est exactement la baisse moyenne retenue.\n⚠️ $-6 - 7 = -13$, pas $-1$ : les deux ordonnées sont de part et d'autre de $0$.\n⭐ C'est pourquoi il peut neiger au sommet quand il pleut dans la vallée.\n⭐ Sur le dessin, l'escalier vert : on avance de $2$ km, on DESCEND de $13$ °C.",
           schema: ecranSeulement(
@@ -313,6 +401,12 @@ export const exercicesDerNombreDerivePremiere: FicheExercicesData = {
             undefined,
             true,
           ),
+          reponses: [
+            { question: "a) V'(2)", attendu: "-2" },
+            { question: "a) V'(2) en L/min", attendu: "-200" },
+            { question: "a) V'(4)", attendu: "-1" },
+            { question: "a) V'(4) en L/min", attendu: "-100" },
+          ],
           correction:
             "a) En $A(2 ; 4)$, la tangente passe par $(3 ; 2)$ : $V'(2) = -2$ hL par minute, soit $-200$ L par minute.\nEn $B(4 ; 1)$, elle passe par $(5 ; 0)$ : $V'(4) = -1$ hL par minute, soit $-100$ L par minute.\nb) Ils sont négatifs parce que la cuve se VIDE : le volume diminue.\nLe débit, lui, baisse : $200$ L par minute à $t = 2$, puis $100$ L par minute à $t = 4$. Moins il reste d'eau, moins elle pousse.\nc) Le jardinier suit la TANGENTE en $A$ : elle coupe l'axe des abscisses en $t = 4$.\nMais la courbe s'aplatit : l'eau coule de moins en moins vite, et la cuve n'est vide qu'à $t = 6$.\n⚠️ Une tangente prolonge la vitesse d'un instant : elle ne prévoit bien que tout près du point de contact.",
           micros: ["der_nombre_derive_sens", "der_tangente_coefficient", "der_modele_interpreter"],
