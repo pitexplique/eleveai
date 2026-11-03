@@ -123,6 +123,8 @@ function decomposer(q: TutorGeneratedQuestionV4): string[] {
 export const CORRECTEURS: CorrecteursMaths = {
   fraction_decimal_tpl_lire: (q) => lire(q, false),
   fraction_decimal_tpl_lire_sup1: (q) => lire(q, true),
+  // 03/11/2026 : la lecture en métier (★3), d'un côté ou de l'autre de 1.
+  fraction_decimal_tpl_lire_metier: (q) => lire(q, (pointsDe(q)[0]?.value ?? 0) > 1),
   fraction_decimal_tpl_sous: sous,
   fraction_decimal_tpl_placer: placer,
   fraction_decimal_tpl_vers_decimal: (q) => versDecimal(q, false),

@@ -20,6 +20,12 @@
 //   · passer d'une écriture à l'autre sans figure : dixièmes, centièmes, et le
 //     piège 7/100 = 0,07 (pas 0,7) ; décomposer 13/10 = 1 + 3/10.
 // Chaque situation est portée par un MÉTIER (les maths sont transversales).
+//
+// ⛔⛔ 03/11/2026 (Frédéric) : « d'abord des questions simples ; le contexte est
+// réservé aux étoiles ★3 et plus ». À ★1 et ★2 : la droite seule, ni prénom ni
+// métier (« La droite représente le plan de cuisine de l'architecte Mei… » est
+// parti). Les métiers restent à ★3 (fraction_decimal_tpl_lire_metier et les
+// conversions en centièmes).
 
 import type { TutorBankItemV4, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
 
@@ -64,13 +70,20 @@ const METIERS: Metier[] = [
   { u: "L", qui: (p) => `${p.f ? "la pharmacienne" : "le pharmacien"} ${p.nom}`, objet: "le flacon gradué", marque: "le niveau du sirop" },
   { u: "km", qui: (p) => `${p.f ? "l'entraîneuse" : "l'entraîneur"} ${p.nom}`, objet: "le parcours de course", marque: "le point de ravitaillement" },
   { u: "kg", qui: (p) => `${p.f ? "la pâtissière" : "le pâtissier"} ${p.nom}`, objet: "le cadran de sa balance", marque: "la masse de farine" },
-  { u: "m", qui: (p) => `${p.f ? "la géologue" : "le géologue"} ${p.nom}`, objet: "la carotte de roche du Piton de la Fournaise", marque: "une couche de cendres" },
+  // La Réunion ≈ 4 % des contextes : le sentier du Maïdo seul, parmi 18 métiers.
+  { u: "m", qui: (p) => `${p.f ? "la géologue" : "le géologue"} ${p.nom}`, objet: "la carotte de roche du volcan", marque: "une couche de cendres" },
   { u: "L", qui: (p) => `${p.f ? "la chimiste" : "le chimiste"} ${p.nom}`, objet: "l'éprouvette", marque: "le niveau du mélange" },
   { u: "km", qui: (p) => `${p.f ? "la maître-nageuse" : "le maître-nageur"} ${p.nom}`, objet: "le couloir de nage en mer", marque: "la bouée jaune" },
   { u: "m", qui: (p) => `l'architecte ${p.nom}`, objet: "le plan de cuisine", marque: "le bord de la fenêtre" },
   { u: "kg", qui: (p) => `${p.f ? "la vétérinaire" : "le vétérinaire"} ${p.nom}`, objet: "la balance des chatons", marque: "la masse du chaton" },
   { u: "km", qui: (p) => `${p.f ? "la guide de randonnée" : "le guide de randonnée"} ${p.nom}`, objet: "le sentier du Maïdo", marque: "le belvédère" },
   { u: "L", qui: (p) => `${p.f ? "la barista" : "le barista"} ${p.nom}`, objet: "le pichet à lait gradué", marque: "le niveau du lait" },
+  { u: "L", qui: (p) => `${p.f ? "l'infirmière" : "l'infirmier"} ${p.nom}`, objet: "le verre doseur", marque: "la dose d'eau" },
+  { u: "km", qui: (p) => `${p.f ? "la cycliste" : "le cycliste"} ${p.nom}`, objet: "le parcours du contre-la-montre", marque: "le premier pointage" },
+  { u: "m", qui: (p) => `${p.f ? "la jardinière" : "le jardinier"} ${p.nom}`, objet: "la rangée de semis", marque: "la dernière graine" },
+  { u: "kg", qui: (p) => `${p.f ? "la factrice" : "le facteur"} ${p.nom}`, objet: "le cadran de la balance à colis", marque: "la masse du colis" },
+  { u: "km", qui: (p) => `${p.f ? "la conductrice de bus" : "le conducteur de bus"} ${p.nom}`, objet: "la ligne de bus", marque: "l'arrêt de l'école" },
+  { u: "m", qui: (p) => `${p.f ? "la régisseuse" : "le régisseur"} ${p.nom}`, objet: "le bord de la scène du théâtre", marque: "la place du micro" },
 ];
 const Maj = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 /** « le couturier Lucas » → « du couturier Lucas » ; « la … », « l'… » → « de la … », « de l'… ». */
@@ -104,10 +117,52 @@ const DEF_DIXIEME =
   "l'unité est partagée en 10 parts égales : chaque part est un dixième, 1/10, qui s'écrit aussi 0,1.";
 
 // ─── 1. Lire l'abscisse d'un point, en dixièmes ─────────────────────────────
+/** ★1 et ★2 : la droite seule, sans prénom ni métier. */
 function genLire(etoile: 1 | 2): TutorGeneratedQuestionV4 {
+  const n = dixiemes(etoile === 2);
+  const enFraction = Math.random() < 0.5;
+  const L = choix(["A", "B", "C", "D", "E", "M", "P", "R", "T"]);
+  const dec = decimalDe(n, 10);
+  const intro = choix([
+    "La droite est graduée en dixièmes : chaque unité est partagée en 10.",
+    "Sur cette droite, chaque unité est partagée en 10 parts égales.",
+    "Chaque unité de la droite est partagée en 10.",
+    "Regarde la droite : l'unité est partagée en 10 petits intervalles.",
+    `Le point ${L} est sur une droite graduée. Chaque unité est partagée en 10.`,
+  ]);
+  const consigne = enFraction
+    ? choix([
+        `Écris l'abscisse du point ${L} sous forme de fraction de dénominateur 10.`,
+        `Combien de dixièmes y a-t-il de 0 jusqu'au point ${L} ? Écris la fraction (… / 10).`,
+        `Quelle fraction de dénominateur 10 est au point ${L} ?`,
+      ])
+    : choix([
+        `Écris l'abscisse du point ${L} avec une virgule.`,
+        `Quel nombre décimal est au point ${L} ?`,
+        `Quel nombre à virgule est au point ${L} ?`,
+      ]);
+  return {
+    text: `${intro} ${consigne}`,
+    format: "short",
+    expected: enFraction ? [`${n}/10`] : [dec],
+    comparator: enFraction ? "exact_text" : "number_equal",
+    explanation: expl(
+      DEF_DIXIEME,
+      `on compte les petits intervalles depuis 0 jusqu'au point ${L}.`,
+      n > 10
+        ? `De 0 à 1, il y a 10 dixièmes ; de 1 à ${L}, encore ${n - 10}. En tout ${n} dixièmes : ${n}/10 = 1 + ${n - 10}/10 = ${dec}.`
+        : `On compte ${n} dixièmes de 0 à ${L} : ${n}/10 = ${dec}.`,
+      `${L} a pour abscisse ${enFraction ? `${n}/10 (c'est-à-dire ${dec})` : `${dec} (c'est-à-dire ${n}/10)`}.`,
+    ),
+    canvas: droiteDixiemes(maxPour(n), [{ value: n / 10, label: L }]),
+  };
+}
+
+/** ★3 : la même lecture, portée par un métier (l'ancienne version de ★1–★2). */
+function genLireMetier(): TutorGeneratedQuestionV4 {
   const p = choix(PRENOMS);
   const m = choix(METIERS);
-  const n = dixiemes(etoile === 2);
+  const n = dixiemes(Math.random() < 0.5);
   const enFraction = Math.random() < 0.5;
   const L = choix(["A", "M", "P", "R", "T"]);
   const dec = decimalDe(n, 10);
@@ -146,16 +201,18 @@ function pieges(n: number, d: number): string[] {
   return [...new Set(t)].filter((x) => x !== bon && Number(x.replace(",", ".")) !== n / d);
 }
 function genSous(): TutorGeneratedQuestionV4 {
-  const p = choix(PRENOMS);
-  const m = choix(METIERS);
   const n = dixiemes(Math.random() < 0.6);
   const bon = decimalDe(n, 10);
   const fausses = melange(pieges(n, 10)).slice(0, 3);
   return {
+    // 03/11/2026 : ★2, la droite seule, sans métier.
     text: choix([
-      `Sur ${m.objet}, ${m.qui(p)} a écrit ${n}/10 au-dessus d'un point. Quel nombre décimal faut-il écrire en dessous ?`,
-      `${Maj(m.qui(p))} lit ${n}/10 ${m.u} sur ${m.objet}. Quelle écriture décimale va sous le point ?`,
       `Au-dessus du point, on lit ${n}/10. Sous la droite, on écrit le même nombre avec une virgule. Lequel ?`,
+      `Au-dessus d'un point, on a écrit ${n}/10. Quel nombre décimal faut-il écrire en dessous ?`,
+      `Quelle écriture décimale va sous le point ${n}/10 ?`,
+      `Sous le point ${n}/10, quel nombre à virgule faut-il écrire ?`,
+      `La droite est graduée en dixièmes. Quel nombre décimal correspond au point ${n}/10 ?`,
+      `Le point porte la fraction ${n}/10. Écris le même nombre avec une virgule.`,
     ]),
     format: "qcm",
     choices: melange([bon, ...fausses]),
@@ -175,8 +232,6 @@ function genSous(): TutorGeneratedQuestionV4 {
 
 // ─── 3. Trouver le point d'abscisse 1,3 (ou 13/10) ──────────────────────────
 function genPlacer(): TutorGeneratedQuestionV4 {
-  const p = choix(PRENOMS);
-  const m = choix(METIERS);
   const noms = choix([["A", "B", "C"], ["E", "F", "G"], ["R", "S", "T"], ["K", "L", "M"]]);
   const cible = dixiemes(Math.random() < 0.6);
   // Le leurre le plus parlant : 1,3 confondu avec 0,3 (ou 0,7 avec 1,7).
@@ -191,10 +246,13 @@ function genPlacer(): TutorGeneratedQuestionV4 {
   const enFraction = Math.random() < 0.5;
   const ecrit = enFraction ? `${cible}/10` : decimalDe(cible, 10);
   return {
+    // 03/11/2026 : ★2, la droite seule, sans métier.
     text: choix([
-      `Sur ${m.objet}, ${m.qui(p)} a placé trois points. Lequel a pour abscisse ${ecrit} ?`,
-      `${Maj(m.qui(p))} cherche ${ecrit} ${m.u} sur ${m.objet}, graduée en dixièmes. Quel point est-ce ?`,
       `La droite est graduée en dixièmes. Quel point est à ${ecrit} ?`,
+      `Trois points sont placés sur la droite. Lequel a pour abscisse ${ecrit} ?`,
+      `On cherche ${ecrit} sur la droite graduée en dixièmes. Quel point est-ce ?`,
+      `Quel point a pour abscisse ${ecrit} ?`,
+      `Sur la droite graduée, quel point est à ${ecrit} ?`,
     ]),
     format: "qcm",
     choices: [...noms],
@@ -220,17 +278,30 @@ function genVersDecimal(etoile: 2 | 3): TutorGeneratedQuestionV4 {
   let n = d === 10 ? entre(11, 39) : d === 100 ? choix([entre(1, 9), entre(11, 99), entre(101, 350)]) : choix([entre(1, 99), entre(101, 999)]);
   if (n % 10 === 0) n += 1;
   const bon = decimalDe(n, d);
+  // 03/11/2026 : ★2 sans métier ; les métiers restent à ★3.
+  const simples = [
+    `Complète : ${n}/${d} = … (écris un nombre décimal).`,
+    `${n}/${d}, c'est ${n} ${MOT_DEN[d]}. Écris ce nombre avec une virgule.`,
+    `Écris ${n}/${d} sous forme de nombre décimal.`,
+    `Écris ${n}/${d} avec une virgule.`,
+    `Quel nombre décimal est égal à ${n}/${d} ?`,
+    `Combien vaut ${n}/${d} écrit avec une virgule ?`,
+  ];
   return {
-    text: choix([
-      `${Maj(m.qui(p))} note ${n}/${d} ${m.u} dans son carnet. Écris ce nombre avec une virgule.`,
-      `Complète : ${n}/${d} = … (écris un nombre décimal).`,
-      `${n}/${d}, c'est ${n} ${MOT_DEN[d]}. Écris ce nombre avec une virgule.`,
-      `Sur ${m.objet}, ${m.qui(p)} relève ${n}/${d} ${m.u}. Quel nombre décimal doit-${p.f ? "elle" : "il"} noter ?`,
-      `${p.nom} recopie ${n}/${d} dans un tableur, qui n'accepte que les virgules. Que tape-t-${p.f ? "elle" : "il"} ?`,
-      `Écris ${n}/${d} sous forme de nombre décimal.`,
-    ]),
+    text: choix(
+      etoile === 2
+        ? simples
+        : [
+            `${Maj(m.qui(p))} note ${n}/${d} ${m.u} dans son carnet. Écris ce nombre avec une virgule.`,
+            `Complète : ${n}/${d} = … (écris un nombre décimal).`,
+            `${n}/${d}, c'est ${n} ${MOT_DEN[d]}. Écris ce nombre avec une virgule.`,
+            `Sur ${m.objet}, ${m.qui(p)} relève ${n}/${d} ${m.u}. Quel nombre décimal doit-${p.f ? "elle" : "il"} noter ?`,
+            `${p.nom} recopie ${n}/${d} dans un tableur, qui n'accepte que les virgules. Que tape-t-${p.f ? "elle" : "il"} ?`,
+            `Écris ${n}/${d} sous forme de nombre décimal.`,
+          ],
+    ),
     format: "short",
-    expected: [bon, `${bon} ${m.u}`],
+    expected: etoile === 2 ? [bon] : [bon, `${bon} ${m.u}`],
     comparator: "number_equal",
     explanation: expl(
       `${n}/${d}, c'est ${n} ${MOT_DEN[d]} : le dénominateur ${d} dit combien de chiffres viennent après la virgule (${String(d).length - 1}).`,
@@ -250,14 +321,26 @@ function genVersFraction(etoile: 2 | 3): TutorGeneratedQuestionV4 {
   const p = choix(PRENOMS);
   const m = choix(METIERS);
   return {
-    text: choix([
-      `Complète : ${dec} = … / ${d}.`,
-      `${Maj(m.qui(p))} lit ${dec} ${m.u}. Complète la fraction : ${dec} = … / ${d}.`,
-      `Combien de ${MOT_DEN[d]} y a-t-il dans ${dec} ? Complète : ${dec} = … / ${d}.`,
-      `${p.nom} veut écrire ${dec} sous forme de fraction décimale. Complète : ${dec} = … / ${d}.`,
-      `Sur ${m.objet}, ${m.qui(p)} relève ${dec} ${m.u}. En ${MOT_DEN[d]}, complète : ${dec} = … / ${d}.`,
-      `Enlève la virgule pour compter les ${MOT_DEN[d]}. Complète : ${dec} = … / ${d}.`,
-    ]),
+    // 03/11/2026 : ★2 sans métier ; les métiers restent à ★3.
+    text: choix(
+      etoile === 2
+        ? [
+            `Complète : ${dec} = … / ${d}.`,
+            `Combien de ${MOT_DEN[d]} y a-t-il dans ${dec} ? Complète : ${dec} = … / ${d}.`,
+            `Écris ${dec} sous forme de fraction décimale. Complète : ${dec} = … / ${d}.`,
+            `Enlève la virgule pour compter les ${MOT_DEN[d]}. Complète : ${dec} = … / ${d}.`,
+            `Quel numérateur manque ? ${dec} = … / ${d}.`,
+            `En ${MOT_DEN[d]}, complète : ${dec} = … / ${d}.`,
+          ]
+        : [
+            `Complète : ${dec} = … / ${d}.`,
+            `${Maj(m.qui(p))} lit ${dec} ${m.u}. Complète la fraction : ${dec} = … / ${d}.`,
+            `Combien de ${MOT_DEN[d]} y a-t-il dans ${dec} ? Complète : ${dec} = … / ${d}.`,
+            `${p.nom} veut écrire ${dec} sous forme de fraction décimale. Complète : ${dec} = … / ${d}.`,
+            `Sur ${m.objet}, ${m.qui(p)} relève ${dec} ${m.u}. En ${MOT_DEN[d]}, complète : ${dec} = … / ${d}.`,
+            `Enlève la virgule pour compter les ${MOT_DEN[d]}. Complète : ${dec} = … / ${d}.`,
+          ],
+    ),
     format: "short",
     expected: [String(n)],
     comparator: "number_equal",
@@ -422,6 +505,8 @@ export const fractionDecimalBank: TutorBankItemV4[] = [
 
   // ----- les gabarits -----
   { ...base, kind: "template", id: "fraction_decimal_tpl_lire", difficulty: 1, hint: "Chaque petit intervalle vaut un dixième : compte-les depuis 0.", tags: ["fraction_nombre", "decimal", "canvas", "template"], generate: () => genLire(1) },
+  // 03/11/2026 : la lecture portée par un métier, montée de ★1–★2 à ★3.
+  { ...base, kind: "template", id: "fraction_decimal_tpl_lire_metier", difficulty: 3, hint: "Chaque petit intervalle vaut un dixième : compte-les depuis 0.", tags: ["fraction_nombre", "decimal", "canvas", "situation", "template"], generate: genLireMetier },
   { ...base, kind: "template", id: "fraction_decimal_tpl_lire_sup1", difficulty: 2, hint: "Passe 1 (10 dixièmes), puis compte les dixièmes qui restent.", tags: ["fraction_nombre", "decimal", "canvas", "template"], generate: () => genLire(2) },
   { ...base, kind: "template", id: "fraction_decimal_tpl_sous", difficulty: 2, hint: "La fraction et le décimal désignent le même point.", tags: ["fraction_nombre", "decimal", "canvas", "qcm", "template"], generate: genSous },
   { ...base, kind: "template", id: "fraction_decimal_tpl_placer", difficulty: 2, hint: "Situe d'abord le nombre : avant 1 ou après 1 ?", tags: ["fraction_nombre", "decimal", "canvas", "qcm", "template"], generate: genPlacer },
