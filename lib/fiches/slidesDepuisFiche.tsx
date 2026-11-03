@@ -151,14 +151,21 @@ export function slidesDepuisFiche(fiche: FicheCoursData): ClasseSlide[] {
 
   // 7. Les usages : vue d'ensemble, puis chacun illustré.
   if (fiche.usages.length) {
-    slides.push({
-      titre: "Selon ce que l'on cherche",
-      badge: "Usages",
-      teinte: "reel",
-      section: {
-        type: "cartes",
-        cartes: fiche.usages.map((u) => ({ titre: u.titre, texte: u.detail })),
-      },
+    // Avec des groupes (Pythagore : le théorème, puis la réciproque), une vue
+    // d'ensemble PAR groupe — pour projeter l'un puis l'autre (Frédéric, 03/11).
+    const groupes = [...new Set(fiche.usages.map((u) => u.groupe))];
+    groupes.forEach((groupe) => {
+      slides.push({
+        titre: groupe ? `Selon ce que l'on cherche : ${groupe}` : "Selon ce que l'on cherche",
+        badge: "Usages",
+        teinte: "reel",
+        section: {
+          type: "cartes",
+          cartes: fiche.usages
+            .filter((u) => u.groupe === groupe)
+            .map((u) => ({ titre: u.titre, texte: u.detail })),
+        },
+      });
     });
     fiche.usages.forEach((u, i) => {
       if (!u.schema) return;

@@ -5,8 +5,8 @@
 //   pythagore_reconnaitre         → Définition, figure, méthode « Repérer », usage 1
 //   pythagore_calculer_hypotenuse → Propriété « L'égalité », formule, usage 1, exemple 1
 //   pythagore_calculer_cote       → Propriété « Retrouver un côté », usage 2, exemple 2
-//   pythagore_reciproque_verifier → Propriété « La réciproque », exemple 3, exercice 3
-//   pythagore_reciproque_conclure → Usage 3, exemple 3
+//   pythagore_reciproque_verifier → Propriétés « La réciproque » et « Si l'égalité est fausse », usage 4, exemple 3, exercices 6-7
+//   pythagore_reciproque_conclure → Propriété « La réciproque », usage 3, exemple 3, exercice 7
 //   pythagore_rediger             → Méthode « Rédiger », exemple 1, piège 3
 //   pythagore_defi                → Exercice 4
 //
@@ -281,7 +281,7 @@ const pieges = [
 const aRetenir = [
   "Dans un triangle rectangle, le carré de l'hypoténuse est égal à la somme des carrés des deux autres côtés.",
   "L'hypoténuse est le côté opposé à l'angle droit, et c'est toujours le plus long des trois.",
-  "La réciproque fait le chemin inverse : si l'égalité est vraie, alors le triangle est rectangle ; si elle est fausse, il ne l'est pas.",
+  "La réciproque : si, dans un triangle ABC, BC² = AB² + AC², alors ce triangle est rectangle en A. Si l'égalité est fausse, il n'est pas rectangle.",
 ];
 
 export const fichePythagore4e: FicheCoursData = {
@@ -330,10 +330,22 @@ export const fichePythagore4e: FicheCoursData = {
       schema: tableauDesCarres,
     },
     {
-      titre: "La réciproque, et ce qu'elle refuse",
+      // L'ÉNONCÉ, ÉCRIT EN TOUTES LETTRES (demande de Frédéric, 03/11) : la fiche
+      // ne montrait la réciproque qu'à travers son contre-exemple. Le dessin est
+      // le cas où elle CONCLUT : on part des trois longueurs, on finit par l'angle droit.
+      titre: "La réciproque du théorème",
+      micros: ["pythagore_reciproque_verifier", "pythagore_reciproque_conclure"],
+      texte:
+        "Si, dans un triangle ABC, BC² = AB² + AC², alors ce triangle est rectangle en A. Ici, 5² = 25 et 4² + 3² = 16 + 9 = 25 : l'angle droit est en A.",
+      schema: triangleRectangle({
+        sideLabels: { AB: "4", CA: "3", BC: "5" },
+      }),
+    },
+    {
+      titre: "Si l'égalité est fausse",
       micros: ["pythagore_reciproque_verifier"],
       texte:
-        "Ici 4² + 5² = 41, alors que 6² = 36. L'égalité est fausse, donc le triangle n'est pas rectangle : la réciproque conclut dans les deux sens.",
+        "Ici 4² + 5² = 41, alors que 6² = 36. L'égalité est fausse, donc le triangle n'est pas rectangle.",
       schema: trianglePasRectangle,
     },
   ],
@@ -375,7 +387,7 @@ export const fichePythagore4e: FicheCoursData = {
       // tableau a été essayé ici, puis retiré — il ne faisait que redire les trois
       // lignes du texte. Un dessin qui répète n'apprend rien.
       // ⭐ La règle générale ne bouge pas pour autant : « les élèves ont besoin de
-      // dessins ». Onze visuels sur les douze blocs de cette fiche.
+      // dessins ». Douze visuels sur les treize blocs de cette fiche.
       texte:
         "Trois lignes, toujours les mêmes. 1) « Dans le triangle ABC rectangle en A… » — on annonce l'angle droit. 2) « …d'après le théorème de Pythagore, BC² = AB² + AC² » — on écrit l'égalité avant de calculer. 3) On calcule, puis on conclut par une phrase avec l'unité.",
     },
@@ -383,21 +395,31 @@ export const fichePythagore4e: FicheCoursData = {
   usages: [
     {
       titre: "Calculer l'hypoténuse",
+      groupe: "le théorème de Pythagore",
       micros: ["pythagore_reconnaitre", "pythagore_calculer_hypotenuse"],
       detail:
         "Les deux côtés de l'angle droit sont connus. On élève chacun au carré, on additionne, et la racine carrée du résultat donne l'hypoténuse.",
     },
     {
       titre: "Calculer un côté de l'angle droit",
+      groupe: "le théorème de Pythagore",
       micros: ["pythagore_calculer_cote"],
       detail:
         "L'hypoténuse et un côté sont connus. On soustrait le carré du côté connu au carré de l'hypoténuse, puis on prend la racine carrée.",
     },
     {
-      titre: "Démontrer qu'un angle est droit",
+      titre: "Démontrer qu'un triangle est rectangle",
+      groupe: "la réciproque",
       micros: ["pythagore_reciproque_conclure"],
       detail:
-        "Les trois longueurs sont connues. On calcule séparément le carré du plus grand côté et la somme des carrés des deux autres : si les deux résultats sont égaux, le triangle est rectangle.",
+        "Les trois longueurs sont connues. On calcule séparément le carré du plus grand côté et la somme des carrés des deux autres. S'ils sont égaux, d'après la réciproque du théorème de Pythagore, le triangle est rectangle.",
+    },
+    {
+      titre: "Démontrer qu'il n'est pas rectangle",
+      groupe: "la réciproque",
+      micros: ["pythagore_reciproque_verifier"],
+      detail:
+        "Même calcul. Si le carré du plus grand côté n'est pas égal à la somme des carrés des deux autres, le triangle n'est pas rectangle.",
     },
   ],
   exemples: [
@@ -454,6 +476,27 @@ export const fichePythagore4e: FicheCoursData = {
       correction:
         "Dans le triangle MNP rectangle en M, d'après le théorème de Pythagore : NP² = MN² + MP². Donc NP² = 6² + 8² = 36 + 64 = 100. Or 100 = 10², donc NP = 10 cm.",
       micros: ["pythagore_calculer_hypotenuse", "pythagore_rediger"],
+    },
+    {
+      question:
+        "Une rampe de skate monte de 5 dm sur une longueur au sol de 12 dm. Le triangle RST est rectangle en S, avec RS = 12 dm et ST = 5 dm. Combien mesure la pente RT ?",
+      correction:
+        "Dans le triangle RST rectangle en S, d'après le théorème de Pythagore : RT² = RS² + ST². Donc RT² = 12² + 5² = 144 + 25 = 169. Or 169 = 13², donc RT = 13 dm.",
+      micros: ["pythagore_calculer_hypotenuse", "pythagore_rediger"],
+    },
+    {
+      question:
+        "Un triangle EFG est rectangle en E. L'hypoténuse FG mesure 10 cm et EF = 6 cm. Combien mesure EG ?",
+      correction:
+        "Dans le triangle EFG rectangle en E, d'après le théorème de Pythagore : FG² = EF² + EG². Donc 10² = 6² + EG², c'est-à-dire 100 = 36 + EG². On soustrait : EG² = 100 − 36 = 64. Or 64 = 8², donc EG = 8 cm.",
+      micros: ["pythagore_calculer_cote", "pythagore_rediger"],
+    },
+    {
+      question:
+        "Un câble de 17 m tient un mât vertical. Il est accroché au sol à 8 m du pied du mât. Le triangle est rectangle au pied du mât. À quelle hauteur le câble est-il accroché ?",
+      correction:
+        "Le câble est l'hypoténuse : 17² = 8² + h², c'est-à-dire 289 = 64 + h². On soustrait : h² = 289 − 64 = 225. Or 225 = 15², donc le câble est accroché à 15 m de hauteur.",
+      micros: ["pythagore_calculer_cote"],
     },
     {
       question:
@@ -535,7 +578,7 @@ export const slidesPythagore4e: ClasseSlide[] = [
         {
           titre: "La réciproque",
           texte:
-            "On CONNAÎT les trois longueurs, on CHERCHE si l'angle est droit. On compare le carré du plus grand côté à la somme des deux autres.",
+            "Si BC² = AB² + AC², alors ABC est rectangle en A. On CONNAÎT les trois longueurs, on CHERCHE si l'angle est droit.",
         },
       ],
     },

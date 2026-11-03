@@ -72,7 +72,14 @@ export type FicheMicros = { micros?: string[] };
 
 export type FichePropriete = { titre: string; texte: string; schema?: ReactNode } & FicheMicros;
 export type FicheMethode = { titre: string; texte: string; schema?: ReactNode } & FicheMicros;
-export type FicheUsage = { titre: string; detail: string; schema?: ReactNode } & FicheMicros;
+export type FicheUsage = {
+  titre: string;
+  detail: string;
+  schema?: ReactNode;
+  /** Range l'usage sous un titre (ex. « Le théorème », « La réciproque ») : le
+   *  mode classe fait alors une diapo « Selon ce que l'on cherche » par groupe. */
+  groupe?: string;
+} & FicheMicros;
 export type FicheExemple = {
   titre: string;
   donnees: string;
