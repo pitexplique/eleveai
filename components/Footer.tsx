@@ -168,6 +168,7 @@ const espaces = [
   { label: "Espace élèves", href: "/espace-eleves" },
   { label: "Espace parents", href: "/espace-parents" },
   { label: "Enseignants", href: "/espace-profs" },
+  { label: "Profs : rejoindre l'aventure", href: "/rejoindre-l-aventure" },
   { label: "Français de l'étranger", href: "/francais-de-l-etranger" },
   { label: "Connexion élève / prof", href: "/auth/signin-eleve" },
 ];

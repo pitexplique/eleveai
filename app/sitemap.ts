@@ -490,6 +490,8 @@ const ROUTES: RouteConfig[] = [
   // 11/08 : les 50 places de la bêta 2026-2027. Priorité haute pour la rentrée,
   // puis elle retombera d'elle-même quand les places seront prises.
   { path: "/devenir-beta-testeur", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-08-11") },
+  // 03/11 : les profs des 8 pays — la page des réseaux sociaux et des descriptions YouTube.
+  { path: "/rejoindre-l-aventure", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-11-03") },
 
   // ── BLOG INDEX ─────────────────────────────────────────────────────────────
   { path: "/blog", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },

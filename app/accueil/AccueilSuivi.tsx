@@ -303,6 +303,14 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
             <Link href="/prof/classes" className="mt-4 inline-flex items-center gap-2 font-black text-teal-800 hover:underline">
               Ouvrir « Mes classes » <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
+            {/* 03/11 : l'appel aux profs des 8 pays, une ligne, pas un bandeau :
+                l'accueil parle d'abord aux élèves et aux parents. */}
+            <p className="mt-3 text-sm font-bold text-slate-600">
+              🌍 Professeur en France, Andorre, Suisse, Belgique, Luxembourg, Côte d&apos;Ivoire, au Sénégal ou au Maroc ?{" "}
+              <Link href="/rejoindre-l-aventure" className="text-teal-800 underline">
+                Votre classe offerte : rejoignez l&apos;aventure
+              </Link>
+            </p>
           </div>
           <figure className="overflow-x-auto rounded-2xl bg-white p-4 shadow-sm">
             <figcaption className="mb-2 text-sm font-bold text-slate-500">Exemple — 6e, nombres décimaux</figcaption>

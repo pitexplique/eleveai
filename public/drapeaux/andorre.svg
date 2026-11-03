@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480">
+  <path fill="#10069f" d="M0 0h213.3v480H0z"/>
+  <path fill="#fedf00" d="M213.3 0h213.4v480H213.3z"/>
+  <path fill="#d50032" d="M426.7 0H640v480H426.7z"/>
+  <!-- Les armoiries, simplifiées : sans elles, le drapeau est celui du Tchad. -->
+  <path fill="#c7b37f" stroke="#703d29" stroke-width="6" d="M262 170h116v90c0 40-26 62-58 74-32-12-58-34-58-74z"/>
+  <path fill="#d50032" d="M276 184h38v56h-38z"/>
+  <path fill="#fedf00" d="M326 184h38v56h-38z"/>
+</svg>

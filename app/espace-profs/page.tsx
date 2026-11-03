@@ -126,6 +126,12 @@ export default function EnseignantsPage() {
             Un tableau de bord en temps réel et des outils à lancer en cours —
             les résultats remontent, validés, sans saisie. Vous restez la référence.
           </p>
+          <p className="mt-3 text-sm font-bold text-slate-600">
+            🌍 Professeur dans l’un de nos 8 pays francophones ?{" "}
+            <Link href="/rejoindre-l-aventure" className="text-emerald-700 underline">
+              Votre classe offerte toute l’année : rejoignez l’aventure
+            </Link>
+          </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
               href="/dashboard-prof"
