@@ -216,8 +216,16 @@ function texteNormalise(s: string): string {
     .replace(/̸/g, "¬")
     .replace(/[̀-ͯ]/g, "")
     .toLowerCase()
-    .replace(/[\s.!]/g, "")
-    .replace(/,/g, ".");
+    // ⛔ La virgule devient un point AVANT d'effacer les points de fin de
+    // phrase, et seul un point qui n'est pas suivi d'un chiffre s'efface :
+    // sinon « 2.5 » devenait « 25 », et l'élève qui tapait 25 avait juste
+    // (terminale, 03/11).
+    .replace(/,/g, ".")
+    .replace(/[\s!]/g, "")
+    .replace(/\.(?!\d)/g, "")
+    // Le moins et l'apostrophe typographiques (copier-coller) : − et ’.
+    .replace(/[−–]/g, "-")
+    .replace(/[’‘]/g, "'");
 }
 
 /** Pour `exact` : la même écriture, aux variantes de clavier près. */
