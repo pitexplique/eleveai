@@ -86,7 +86,7 @@ export const exercicesEquationDifferentielleTerminale: FicheExercicesData = {
           enonce:
             "On considère l'équation $(E)$ : $y' = 0{,}5y$. Le dessin montre, en gris, la pente imposée par $(E)$ en quelques points : en $(x ; y)$, une solution doit avoir une tangente de pente $0{,}5y$.\nParmi les fonctions suivantes, lesquelles sont solutions de $(E)$ sur $\\mathbb{R}$ ?\n$f_1(x) = \\mathrm{e}^{0{,}5x}$ ; $f_2(x) = -3\\mathrm{e}^{0{,}5x}$ ; $f_3(x) = \\mathrm{e}^{2x}$ ; $f_4(x) = 0{,}5\\mathrm{e}^{x}$ ; $f_5(x) = 0$.",
           reponses: [
-            { attendu: ["f1 ; f2 ; f5", "f_1 ; f_2 ; f_5"] },
+            { attendu: ["f1 ; f2 ; f5", "f_1 ; f_2 ; f_5", "f1, f2, f5", "f1, f2 et f5"] },
           ],
           figure: repere(
             [-4, 4, -4, 4],
@@ -322,7 +322,8 @@ export const exercicesEquationDifferentielleTerminale: FicheExercicesData = {
           enonce:
             "Après un accident, un polluant se déverse dans un étang. On modélise la masse $q(t)$ de polluant dans l'étang, en kg, $t$ jours après, par $q' + q = 10\\mathrm{e}^{-t}$ et $q(0) = 0$.\na) Vérifier que $g(t) = 10t\\,\\mathrm{e}^{-t}$ est solution de l'équation.\nb) En déduire toutes les solutions, puis $q(t)$.\nc) Quand la masse de polluant est-elle maximale ? Quelle est cette masse ?",
           reponses: [
-            { question: "b)", attendu: "10te^(-t)" },
+            { question: "b) solutions", attendu: ["Ce^(-t)+10te^(-t)", "10te^(-t)+Ce^(-t)", "(C+10t)e^(-t)", "(10t+C)e^(-t)"] },
+            { question: "b) q(t)", attendu: "10te^(-t)" },
             { question: "c) temps", attendu: "1" },
             { question: "c) masse", attendu: "10e^(-1)", tolerance: 0.011 },
           ],
@@ -408,8 +409,8 @@ export const exercicesEquationDifferentielleTerminale: FicheExercicesData = {
             { question: "a)", attendu: "20(1-e^(-0.2t))" },
             { question: "b)", attendu: "5ln(4)", tolerance: 0.011 },
             { question: "c) q(10)", attendu: "20(1-e^(-2))", tolerance: 0.011 },
-            { question: "c) q(t)", attendu: "20(1-e^(-2))e^(-0.2(t-10))" },
-            { question: "d)", attendu: "3.78", tolerance: 0.011 },
+            { question: "c) q(t)", attendu: "20(1-e^(-2))e^(-0.2(t-10))", tolerance: 0.05 },
+            { question: "d)", attendu: ["3.78", "3h47", "3h47min"], tolerance: 0.011 },
           ],
           correction:
             "a) $-\\dfrac{b}{a} = \\dfrac{4}{0{,}2} = 20$ : $q(t) = C\\mathrm{e}^{-0{,}2t} + 20$. $q(0) = C + 20 = 0$, donc $q(t) = 20(1 - \\mathrm{e}^{-0{,}2t})$.\nb) $q(t) = 15$ équivaut à $\\mathrm{e}^{-0{,}2t} = 0{,}25$, soit $t = 5\\ln 4 \\approx 6{,}93$ h.\nc) $q(10) = 20(1 - \\mathrm{e}^{-2}) \\approx 17{,}29$ mg.\nPour $t \\geqslant 10$ : $q(t) = K\\mathrm{e}^{-0{,}2t}$, et la condition en $10$ donne $K\\mathrm{e}^{-2} = q(10)$.\nDonc $q(t) = q(10)\\,\\mathrm{e}^{-0{,}2(t - 10)}$.\nd) Pour $t \\geqslant 10$, $q(t) = 15$ équivaut à $\\mathrm{e}^{-0{,}2(t - 10)} = \\dfrac{15}{q(10)}$, soit $t = 10 + 5\\ln\\left(\\dfrac{q(10)}{15}\\right) \\approx 10{,}71$ h.\nLe médicament est efficace de $6{,}93$ h à $10{,}71$ h : environ $3{,}78$ h, soit $3$ h $47$ min.\n⚠️ Après l'arrêt, la condition initiale est en $t = 10$, pas en $0$ : on n'écrit pas $q(t) = q(10)\\mathrm{e}^{-0{,}2t}$.\n⭐ Sur le dessin (une graduation verticale vaut $5$ mg) : la courbe monte vers $20$ mg, puis redescend après $10$ h. La partie au-dessus de la droite $y = 3$ ($15$ mg) est la période efficace, entre les deux points rouges.",
@@ -431,7 +432,7 @@ export const exercicesEquationDifferentielleTerminale: FicheExercicesData = {
             "Un enquêteur trouve un corps dans une pièce à $20$ °C. À $8$ h, la température du corps est de $30$ °C ; à $9$ h, elle est de $28$ °C. On admet que la température $\\theta(t)$, $t$ heures après $8$ h, vérifie $\\theta' = -k(\\theta - 20)$, avec $k > 0$, et qu'elle valait $37$ °C au moment du décès.\na) Montrer que $\\theta(t) = 20 + 10\\mathrm{e}^{-kt}$.\nb) Déterminer $k$.\nc) À quelle heure le décès a-t-il eu lieu, à la minute près ?",
           reponses: [
             { question: "b)", attendu: "ln(1.25)", tolerance: 0.0011 },
-            { question: "c)", attendu: ["5 h 37", "5h37", "5:37"] },
+            { question: "c)", attendu: ["5 h 37", "5h37", "5:37", "5h37min"] },
           ],
           correction:
             "a) $\\theta' = -k\\theta + 20k$ : $-\\dfrac{b}{a} = \\dfrac{20k}{k} = 20$, et $\\theta(t) = C\\mathrm{e}^{-kt} + 20$.\n$\\theta(0) = C + 20 = 30$ donne $C = 10$.\nb) $\\theta(1) = 28$ : $10\\mathrm{e}^{-k} = 8$, soit $\\mathrm{e}^{-k} = 0{,}8$ et $k = -\\ln(0{,}8) = \\ln(1{,}25) \\approx 0{,}223$.\nc) On cherche $t$ tel que $\\theta(t) = 37$ : $10\\mathrm{e}^{-kt} = 17$, soit $-kt = \\ln(1{,}7)$.\n$t = -\\dfrac{\\ln(1{,}7)}{\\ln(1{,}25)} \\approx -2{,}38$ h, soit environ $2$ h $23$ min AVANT $8$ h.\nLe décès a eu lieu vers $5$ h $37$.\n⚠️ $t$ est négatif : c'est normal, le décès a eu lieu avant la première mesure. Le modèle se prolonge aux $t < 0$.\n⚠️ Sur le dessin, on a tracé l'écart à la pièce, $\\theta - 20$, et une graduation verticale vaut $2$ °C.\n⭐ Sur le dessin : les mesures de $8$ h et $9$ h sont les points en $0$ et en $1$. En remontant le temps vers la gauche, la courbe atteint la droite $y = 8{,}5$ (un écart de $17$ °C, donc $37$ °C) au point rouge, vers $-2{,}4$.",
@@ -455,7 +456,7 @@ export const exercicesEquationDifferentielleTerminale: FicheExercicesData = {
           reponses: [
             { question: "b)", attendu: "12e^(-0.5t)+t+8" },
             { question: "c) minimum", attendu: "10+2ln(6)", tolerance: 0.05 },
-            { question: "c) heure", attendu: ["9 h 35", "9h35", "9:35"] },
+            { question: "c) heure", attendu: ["9 h 35", "9h35", "9:35", "9h35min"] },
           ],
           correction:
             "a) $g'(t) = 1$. Et $-0{,}5\\big(t + 8 - 10 - t\\big) = -0{,}5 \\times (-2) = 1$ : $g$ est solution.\nb) L'équation s'écrit $\\theta' = -0{,}5\\theta + 5 + 0{,}5t$. Les solutions sont $g$ plus celles de $y' = -0{,}5y$ : $\\theta(t) = C\\mathrm{e}^{-0{,}5t} + t + 8$.\n$\\theta(0) = C + 8 = 20$ donne $C = 12$ : $\\theta(t) = 12\\mathrm{e}^{-0{,}5t} + t + 8$.\nc) $\\theta'(t) = -6\\mathrm{e}^{-0{,}5t} + 1$. $\\theta'(t) \\geqslant 0$ équivaut à $\\mathrm{e}^{-0{,}5t} \\leqslant \\dfrac{1}{6}$, soit $t \\geqslant 2\\ln 6 \\approx 3{,}58$.\n$\\theta$ décroît sur $[0 ; 2\\ln 6]$, puis croît. Le minimum vaut $\\theta(2\\ln 6) = 2 + 2\\ln 6 + 8 \\approx 13{,}6$ °C, vers $9$ h $35$.\nd) $\\theta(t) - (t + 8) = 12\\mathrm{e}^{-0{,}5t} \\to 0$ : la température intérieure finit par valoir la température extérieure moins $2$ °C. La maison suit le dehors avec deux heures de retard.\n⚠️ Le second membre dépend de $t$ : il n'y a PAS de solution constante, et la formule $-\\dfrac{b}{a}$ ne s'applique pas. On passe par $g$.\n⭐ Sur le dessin (une graduation verticale vaut $2$ °C) : la courbe bleue de l'intérieur descend jusqu'au point rouge, puis rejoint la droite orange $y = \\dfrac{t + 8}{2}$, juste sous la droite grise de l'extérieur.",

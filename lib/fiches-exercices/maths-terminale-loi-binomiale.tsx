@@ -161,9 +161,9 @@ export const exercicesLoiBinomialeTerminale: FicheExercicesData = {
           enonce:
             "Dans chaque cas, $X$ suit-elle une loi binomiale ? Si oui, donner ses paramètres.\na) On lance $10$ fois un dé équilibré ; $X$ compte les $6$.\nb) On tire $3$ cartes SANS remise dans un jeu de $32$ cartes ; $X$ compte les as.\nc) On tire $5$ boules AVEC remise dans une urne de $3$ rouges et $7$ vertes ; $X$ compte les rouges.\nd) On lance une pièce jusqu'à obtenir pile ; $X$ compte les lancers.",
           reponses: [
-            { question: "a)", attendu: ["B(10 ; 1/6)", "oui B(10 ; 1/6)"] },
+            { question: "a)", attendu: ["B(10 ; 1/6)", "oui B(10 ; 1/6)", "10 ; 1/6", "n = 10 ; p = 1/6"], ordre: true },
             { question: "b)", attendu: ["non", "faux"] },
-            { question: "c)", attendu: ["B(5 ; 0.3)", "B(5 ; 3/10)", "oui B(5 ; 0.3)", "B(5 ; 0,3)", "oui B(5 ; 0,3)"] },
+            { question: "c)", attendu: ["B(5 ; 0.3)", "B(5 ; 3/10)", "oui B(5 ; 0.3)", "B(5 ; 0,3)", "oui B(5 ; 0,3)", "5 ; 0.3", "n = 5 ; p = 0.3"], ordre: true },
             { question: "d)", attendu: ["non", "faux"] },
           ],
           correction:
@@ -223,9 +223,9 @@ export const exercicesLoiBinomialeTerminale: FicheExercicesData = {
         {
           enonce: "$X$ suit la loi $\\mathcal{B}(6 ; 0{,}4)$. Calculer :\na) $P(X \\leqslant 2)$ ;\nb) $P(X > 2)$ ;\nc) $P(2 \\leqslant X \\leqslant 4)$.",
           reponses: [
-            { question: "a)", attendu: "0.54432" },
-            { question: "b)", attendu: "0.45568" },
-            { question: "c)", attendu: "0.72576" },
+            { question: "a)", attendu: "0.54432", tolerance: 0.0006 },
+            { question: "b)", attendu: "0.45568", tolerance: 0.0006 },
+            { question: "c)", attendu: "0.72576", tolerance: 0.0006 },
           ],
           correction:
             "a) $P(X \\leqslant 2) = P(X = 0) + P(X = 1) + P(X = 2)$.\nCela fait $0{,}046656 + 0{,}186624 + 0{,}31104 = 0{,}54432$.\nb) $P(X > 2) = 1 - P(X \\leqslant 2) = 0{,}45568$.\nc) $P(2 \\leqslant X \\leqslant 4) = P(X \\leqslant 4) - P(X \\leqslant 1)$.\n$P(X \\leqslant 4) = 0{,}95904$ et $P(X \\leqslant 1) = 0{,}23328$ : on obtient $0{,}72576$.\n⚠️ $P(2 \\leqslant X \\leqslant 4) \\neq P(X \\leqslant 4) - P(X \\leqslant 2)$ : il faut garder la valeur $2$, on retire donc $P(X \\leqslant 1)$.\n⭐ Sur le dessin : $P(X \\leqslant 2)$, ce sont les trois barres de gauche, jusqu'à celle en couleur.",
@@ -261,6 +261,7 @@ export const exercicesLoiBinomialeTerminale: FicheExercicesData = {
           enonce:
             "Démonstration du cours. On répète $n$ fois, de façon indépendante, une épreuve de Bernoulli de paramètre $p$ ; on note $q = 1 - p$ et $X$ le nombre de succès.\na) Pour $n = 4$, écrire les chemins qui comptent exactement $2$ succès. Quelle est la probabilité de chacun ?\nb) Dans le cas général, justifier que $P(X = k) = \\binom{n}{k}p^kq^{n-k}$.\nc) Application : $n = 4$ et $p = 0{,}5$. Calculer $P(X = 2)$.",
           reponses: [
+            { question: "a)", attendu: ["p^2q^2", "p^2(1-p)^2"] },
             { question: "c)", attendu: "0.375" },
           ],
           correction:
@@ -272,7 +273,7 @@ export const exercicesLoiBinomialeTerminale: FicheExercicesData = {
           enonce:
             "Un traitement guérit $80$ % des patients. On le donne à $12$ patients, qui réagissent indépendamment les uns des autres. $X$ compte les patients guéris.\na) Justifier que $X$ suit une loi binomiale et donner ses paramètres.\nb) Calculer $P(X = 12)$.\nc) Calculer $P(X \\geqslant 10)$.\nd) Calculer $E(X)$ et l'interpréter.",
           reponses: [
-            { question: "a)", attendu: ["B(12 ; 0.8)", "B(12 ; 0,8)"] },
+            { question: "a)", attendu: ["B(12 ; 0.8)", "B(12 ; 0,8)", "12 ; 0.8", "n = 12 ; p = 0.8"], ordre: true },
             { question: "b)", attendu: ["0.8^12", "0.0687"], tolerance: 0.00011 },
             { question: "c)", attendu: "0.558", tolerance: 0.0011 },
             { question: "d)", attendu: "9.6" },
@@ -376,7 +377,7 @@ export const exercicesLoiBinomialeTerminale: FicheExercicesData = {
           enonce:
             "Un QCM compte $20$ questions à $4$ réponses, dont une seule est juste. Un candidat répond à tout au hasard. $X$ compte ses bonnes réponses.\na) Justifier que $X$ suit une loi binomiale et préciser ses paramètres.\nb) Calculer $E(X)$ et $\\sigma(X)$.\nc) Il faut $10$ bonnes réponses pour réussir. Calculer $P(X \\geqslant 10)$.\nd) Une bonne réponse rapporte $1$ point, une mauvaise en retire $a$. Exprimer la note $N$ en fonction de $X$, puis choisir $a$ pour que $E(N) = 0$.",
           reponses: [
-            { question: "a)", attendu: ["B(20 ; 0.25)", "B(20 ; 1/4)", "B(20 ; 0,25)"] },
+            { question: "a)", attendu: ["B(20 ; 0.25)", "B(20 ; 1/4)", "B(20 ; 0,25)", "20 ; 0.25", "n = 20 ; p = 0.25"], ordre: true },
             { question: "b)", attendu: "5 ; √(3.75)", ordre: true, tolerance: 0.011 },
             { question: "c)", attendu: "0.0139", tolerance: 0.00011 },
             { question: "d)", attendu: "1/3" },
@@ -406,7 +407,7 @@ export const exercicesLoiBinomialeTerminale: FicheExercicesData = {
             "Une usine a deux ateliers. L'atelier $A$ fait $60$ % des pièces, dont $3$ % sont défectueuses ; l'atelier $B$ fait les autres, dont $5{,}5$ % sont défectueuses.\na) Montrer que la probabilité qu'une pièce soit défectueuse vaut $0{,}04$.\nb) Un client prélève $25$ pièces dans un stock très grand ; on assimile ce prélèvement à un tirage avec remise. $X$ compte les pièces défectueuses. Quelle est la loi de $X$ ?\nc) Calculer $P(X = 0)$, $P(X \\leqslant 2)$ et $E(X)$.\nd) Le client refuse le lot s'il y trouve au moins $3$ pièces défectueuses. Quelle est la probabilité qu'il le refuse ?",
           reponses: [
             { question: "a)", attendu: "0.04" },
-            { question: "b)", attendu: ["B(25 ; 0.04)", "B(25 ; 0,04)"] },
+            { question: "b)", attendu: ["B(25 ; 0.04)", "B(25 ; 0,04)", "25 ; 0.04", "n = 25 ; p = 0.04"], ordre: true },
             { question: "c)", attendu: "0.96^25 ; 0.924 ; 1", ordre: true, tolerance: 0.0011 },
             { question: "d)", attendu: "0.076", tolerance: 0.0011 },
           ],

@@ -125,7 +125,10 @@ export const exercicesSuiteNumeriqueTerminale: FicheExercicesData = {
         },
         {
           enonce: "Soit $u_n = n^2 - 6n$ pour $n \\geqslant 0$.\na) Calculer $u_{n+1} - u_n$.\nb) En déduire le sens de variation de $(u_n)$.",
-          reponses: [{ question: "a)", attendu: "2n-5" }],
+          reponses: [
+            { question: "a)", attendu: "2n-5" },
+            { question: "b) croissante à partir du rang", attendu: ["3", "n ≥ 3", "n ⩾ 3", "n>=3"] },
+          ],
           correction:
             "a) $u_{n+1} - u_n = (n + 1)^2 - 6(n + 1) - n^2 + 6n$.\nOn développe : $n^2 + 2n + 1 - 6n - 6 - n^2 + 6n = 2n - 5$.\nb) $2n - 5 \\geqslant 0$ quand $n \\geqslant 2{,}5$, c'est-à-dire, pour un entier, $n \\geqslant 3$.\nPour $n \\geqslant 3$ : $u_{n+1} \\geqslant u_n$. La suite est croissante à partir du rang $3$.\nPour $n \\leqslant 2$ : $u_{n+1} < u_n$. Les premiers termes descendent : $u_0 = 0$, $u_1 = -5$, $u_2 = -8$, $u_3 = -9$.\n⚠️ La suite n'est pas croissante : elle l'est seulement « à partir du rang $3$ ». Il faut dire le rang.\n⭐ Sur le dessin : les points descendent jusqu'au plus bas, $u_3 = -9$, puis remontent.",
           schema: repere([-1, 7, -10, 1], [], termes(0, [0, -5, -8, -9, -8, -5, 0]), undefined, true),
@@ -134,7 +137,7 @@ export const exercicesSuiteNumeriqueTerminale: FicheExercicesData = {
         {
           enonce:
             "Soit $u_n = n \\times 0{,}7^n$ pour $n \\geqslant 1$. Ses termes sont strictement positifs.\na) Montrer que $\\dfrac{u_{n+1}}{u_n} = 0{,}7 \\times \\dfrac{n + 1}{n}$.\nb) Pour quels $n$ ce quotient est-il inférieur ou égal à $1$ ? Conclure sur les variations.",
-          reponses: [{ question: "b)", attendu: ["n ≥ 3", "n ⩾ 3", "n>=3"] }],
+          reponses: [{ question: "b)", attendu: ["3", "n ≥ 3", "n ⩾ 3", "n>=3"] }],
           correction:
             "a) $\\dfrac{u_{n+1}}{u_n} = \\dfrac{(n + 1) \\times 0{,}7^{n+1}}{n \\times 0{,}7^n}$. On simplifie par $0{,}7^n$ : il reste $0{,}7 \\times \\dfrac{n + 1}{n}$.\nb) On multiplie par $n > 0$ : $0{,}7(n + 1) \\leqslant n$ équivaut à $0{,}7 \\leqslant 0{,}3n$, soit $n \\geqslant \\dfrac{7}{3} \\approx 2{,}33$.\nPour $n \\geqslant 3$, le quotient est $\\leqslant 1$. Comme $u_n > 0$, cela donne $u_{n+1} \\leqslant u_n$ : la suite est décroissante à partir du rang $3$.\nPour $n = 1$ et $n = 2$, le quotient dépasse $1$ : $u_1 < u_2 < u_3$.\n⚠️ On compare le quotient à $1$ SEULEMENT pour des termes strictement positifs. Pour des termes négatifs, la conclusion s'inverserait.\n⭐ Sur le dessin : les points montent jusqu'à $u_3 \\approx 1{,}03$, puis redescendent.",
           schema: ecranSeulement(repere([-1, 9, -1, 2], [], termes(1, [0.7, 0.98, 1.03, 0.96, 0.84, 0.71, 0.58, 0.46]))),

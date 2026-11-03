@@ -107,7 +107,7 @@ export const exercicesConcentrationEchantillonnageTerminale: FicheExercicesData 
             "Soit $X$ une variable aléatoire d'espérance $\\mu$ et d'écart type $\\sigma > 0$, et $k > 0$.\na) Montrer que $P(|X - \\mu| \\geqslant k\\sigma) \\leqslant \\dfrac{1}{k^2}$.\nb) Que donne cette inégalité pour $k = 2$ ? Pour $k = 3$ ? Pour $k = 1$ ?",
           reponses: [
             { question: "b) k = 2", attendu: "1/4" },
-            { question: "b) k = 3", attendu: "1/9" },
+            { question: "b) k = 3", attendu: "1/9", tolerance: 0.0012 },
             { question: "b) k = 1", attendu: "1" },
           ],
           correction:
@@ -157,6 +157,7 @@ export const exercicesConcentrationEchantillonnageTerminale: FicheExercicesData 
           enonce:
             "On lance $n$ fois une pièce équilibrée ; $F_n$ est la fréquence de pile. Le dessin donne, pour $n = 10$, $20$, …, $100$ (abscisse : $n$ en dizaines), la probabilité EXACTE que $F_n$ s'écarte de $0{,}5$ d'au moins $0{,}1$, calculée avec la loi binomiale.\na) Que montre le dessin ? Quel théorème l'annonce ?\nb) Vrai ou faux : « après $5$ piles de suite, face est plus probable au lancer suivant ».\nc) Vrai ou faux : « pour $n$ grand, $F_n$ vaut exactement $0{,}5$ ».",
           reponses: [
+            { question: "a) théorème", attendu: ["la loi des grands nombres", "loi des grands nombres"] },
             { question: "b)", attendu: ["faux", "non"] },
             { question: "c)", attendu: ["faux", "non"] },
           ],
@@ -199,8 +200,8 @@ export const exercicesConcentrationEchantillonnageTerminale: FicheExercicesData 
           reponses: [
             { question: "a) E", attendu: "200" },
             { question: "a) σ", attendu: "5" },
-            { question: "b)", attendu: "1/9" },
-            { question: "c)", attendu: "1/9" },
+            { question: "b)", attendu: "1/9", tolerance: 0.0012 },
+            { question: "c)", attendu: "1/9", tolerance: 0.0012 },
           ],
           correction:
             "a) $E(M) = 200$ ms et $V(M) = \\dfrac{40^2}{64} = 25$, donc $\\sigma(M) = 5$ ms.\nb) Inégalité de concentration : $P(|M - 200| \\geqslant 15) \\leqslant \\dfrac{1\\,600}{64 \\times 15^2} = \\dfrac{1}{9} \\approx 0{,}11$.\nc) Si $M \\geqslant 215$, alors $M - 200 \\geqslant 15$, donc $|M - 200| \\geqslant 15$.\nL'événement « alerte » est inclus dans celui du b) : sa probabilité est au plus $\\dfrac{1}{9}$.\n⚠️ L'inégalité majore l'écart des DEUX côtés. Pour un seul côté, elle reste vraie, mais elle est encore plus large.\n⭐ Sur la droite : $M$ tombe entre $185$ et $215$ ms avec une probabilité d'au moins $\\dfrac{8}{9}$ ; l'alerte est au-delà de $215$.",
@@ -211,7 +212,7 @@ export const exercicesConcentrationEchantillonnageTerminale: FicheExercicesData 
           enonce:
             "Démonstration du cours. $X_1$, …, $X_n$ sont indépendantes, de même loi, d'espérance $\\mu$ et de variance $V$, et $M_n$ est leur moyenne.\na) Montrer que $E(M_n) = \\mu$ et $V(M_n) = \\dfrac{V}{n}$.\nb) En appliquant l'inégalité de Bienaymé-Tchebychev à $M_n$, démontrer l'inégalité de concentration.\nc) En déduire la loi des grands nombres.\nd) Application : on lance $50$ fois un dé équilibré, pour lequel $\\mu = 3{,}5$ et $V = \\dfrac{35}{12}$. Minorer la probabilité que la moyenne des résultats soit strictement comprise entre $3$ et $4$.",
           reponses: [
-            { question: "d)", attendu: "23/30" },
+            { question: "d)", attendu: "23/30", tolerance: 0.004 },
           ],
           correction:
             "a) Par linéarité, $E(M_n) = \\dfrac{1}{n} \\times n\\mu = \\mu$.\nPar indépendance, $V(X_1 + \\cdots + X_n) = nV$ ; puis $V(M_n) = \\dfrac{1}{n^2} \\times nV = \\dfrac{V}{n}$.\nb) Bienaymé-Tchebychev appliquée à $M_n$ : $P(|M_n - E(M_n)| \\geqslant \\delta) \\leqslant \\dfrac{V(M_n)}{\\delta^2}$.\nOn remplace : $P(|M_n - \\mu| \\geqslant \\delta) \\leqslant \\dfrac{V}{n\\delta^2}$.\nc) $\\delta$ est fixé : $\\dfrac{V}{n\\delta^2}$ tend vers $0$ quand $n$ tend vers $+\\infty$. Une probabilité est positive : par le théorème des gendarmes, $P(|M_n - \\mu| \\geqslant \\delta)$ tend vers $0$.\nd) Avec $\\delta = 0{,}5$ : $P(|M_{50} - 3{,}5| \\geqslant 0{,}5)$ $\\leqslant \\dfrac{35}{12 \\times 50 \\times 0{,}25} = \\dfrac{7}{30} \\approx 0{,}23$.\nPar passage au contraire, $P(3 < M_{50} < 4) \\geqslant 1 - \\dfrac{7}{30} = \\dfrac{23}{30} \\approx 0{,}77$.\n⚠️ La loi des grands nombres dit que les écarts deviennent RARES, pas qu'ils disparaissent : $M_n$ reste une variable aléatoire.\n⭐ Sur la droite : la moyenne des $50$ lancers tombe entre $3$ et $4$ avec une probabilité d'au moins $77$ %.",
@@ -249,7 +250,7 @@ export const exercicesConcentrationEchantillonnageTerminale: FicheExercicesData 
           reponses: [
             { question: "b) E", attendu: "1/6" },
             { question: "b) V", attendu: "5/(36n)" },
-            { question: "c)", attendu: "1/72" },
+            { question: "c)", attendu: "1/72", tolerance: 0.0011 },
           ],
           figure: programme(["from random import randint", "", "def freq(n):", "    k = 0", "    for i in range(n):", "        if randint(1, 6) == 6:", "            k = k + 1", "    return k / n"]),
           correction:
@@ -286,8 +287,8 @@ export const exercicesConcentrationEchantillonnageTerminale: FicheExercicesData 
           enonce:
             "À la roulette d'un casino, il y a $37$ cases : $18$ rouges, $18$ noires et le zéro. Un joueur mise $1$ € sur « rouge » : il gagne $1$ € si la bille tombe sur une case rouge, sinon il perd sa mise. On note $G$ son gain.\na) Donner la loi de $G$ ; calculer $E(G)$ et $V(G)$.\nb) Le casino voit passer $n$ mises indépendantes, de gains $G_1$, …, $G_n$. Que dit la loi des grands nombres du gain moyen $M_n$ des joueurs ?\nc) Majorer $P\\left(\\left|M_n + \\dfrac{1}{37}\\right| \\geqslant 0{,}02\\right)$ pour $n = 10\\,000$, puis pour $n = 100\\,000$. Interpréter pour le casino.",
           reponses: [
-            { question: "a) E", attendu: "-1/37" },
-            { question: "a) V", attendu: "1-1/37^2" },
+            { question: "a) E", attendu: "-1/37", tolerance: 0.0005 },
+            { question: "a) V", attendu: "1-1/37^2", tolerance: 0.0005 },
             { question: "c) 10 000", attendu: "0.25", tolerance: 0.0011 },
             { question: "c) 100 000", attendu: "0.025", tolerance: 0.0011 },
           ],

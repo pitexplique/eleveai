@@ -114,7 +114,7 @@ export const exercicesFonctionLogarithmeTerminale: FicheExercicesData = {
         {
           enonce: "Résoudre :\na) $\\ln x < 2$\nb) $\\ln(3 - x) \\geqslant 0$",
           reponses: [
-            { question: "a)", attendu: ["]0 ; e^2[", "]0 ; e²["] },
+            { question: "a)", attendu: ["]0 ; e^2[", "]0 ; e²[", "]0 ; e^(2)["] },
             { question: "b)", attendu: "]-∞ ; 2]" },
           ],
           correction:
@@ -257,7 +257,7 @@ export const exercicesFonctionLogarithmeTerminale: FicheExercicesData = {
           enonce: "Résoudre :\na) $\\ln(x + 1) - \\ln x \\leqslant \\ln 2$\nb) $(\\ln x)^2 - \\ln x - 2 > 0$",
           reponses: [
             { question: "a)", attendu: "[1 ; +∞[" },
-            { question: "b)", attendu: ["]0 ; e^(-1)[ ∪ ]e^2 ; +∞[", "]0 ; e^-1[ ∪ ]e^2 ; +∞[", "]0 ; 1/e[ ∪ ]e^2 ; +∞[", "]0 ; e^(-1)[ ∪ ]e² ; +∞[", "]0 ; 1/e[ ∪ ]e² ; +∞["] },
+            { question: "b)", attendu: ["]0 ; e^(-1)[ ∪ ]e^2 ; +∞[", "]0 ; e^-1[ ∪ ]e^2 ; +∞[", "]0 ; 1/e[ ∪ ]e^2 ; +∞[", "]0 ; e^(-1)[ ∪ ]e² ; +∞[", "]0 ; 1/e[ ∪ ]e² ; +∞[", "]0 ; e^(-1)[ ∪ ]e^(2) ; +∞[", "]0 ; 1/e[ ∪ ]e^(2) ; +∞["] },
           ],
           correction:
             "a) Ensemble : $x + 1 > 0$ et $x > 0$, soit $x > 0$.\n$\\ln\\dfrac{x + 1}{x} \\leqslant \\ln 2 \\iff \\dfrac{x + 1}{x} \\leqslant 2 \\iff x + 1 \\leqslant 2x$ (car $x > 0$) $\\iff x \\geqslant 1$.\n$S = [1 ; +\\infty[$.\nb) Ensemble : $x > 0$. On pose $X = \\ln x$ : $X^2 - X - 2 > 0$, soit $(X - 2)(X + 1) > 0$.\nC'est vrai pour $X < -1$ ou $X > 2$. Donc $\\ln x < -1$ ou $\\ln x > 2$.\n$S = ]0 ; \\mathrm{e}^{-1}[ \\cup ]\\mathrm{e}^2 ; +\\infty[$, avec $\\mathrm{e}^{-1} \\approx 0{,}37$ et $\\mathrm{e}^2 \\approx 7{,}39$.\n⚠️ En a), on multiplie par $x$ parce qu'il est POSITIF : l'inégalité garde son sens.\n⭐ Sur le dessin : la courbe de $(\\ln x)^2 - \\ln x - 2$ est au-dessus de l'axe avant le premier point rouge et après le second.",
@@ -297,9 +297,9 @@ export const exercicesFonctionLogarithmeTerminale: FicheExercicesData = {
             "Un atelier fabrique $x$ centaines d'objets, avec $x \\in ]0 ; 13]$. Son bénéfice, en milliers d'euros, est $B(x) = 10x - 4x\\ln x$.\na) Déterminer la limite de $B$ en $0$.\nb) Montrer que $B'(x) = 6 - 4\\ln x$.\nc) Étudier les variations de $B$. Quelle production donne le bénéfice maximal ? Combien vaut-il ?\nd) À partir de quelle production l'atelier perd-il de l'argent ?",
           reponses: [
             { question: "a)", attendu: "0" },
-            { question: "c) production", attendu: "e^(1.5)", tolerance: 0.011 },
-            { question: "c) maximum", attendu: "4e^(1.5)", tolerance: 0.011 },
-            { question: "d)", attendu: "e^(2.5)", tolerance: 0.011 },
+            { question: "c) production (en centaines)", attendu: "e^(1.5)", tolerance: 0.011 },
+            { question: "c) maximum (en milliers d'€)", attendu: "4e^(1.5)", tolerance: 0.011 },
+            { question: "d) (en centaines)", attendu: "e^(2.5)", tolerance: 0.011 },
           ],
           correction:
             "a) $10x \\to 0$ et, par croissance comparée, $x\\ln x \\to 0$. Donc $B(x) \\to 0$.\nb) $(x\\ln x)' = \\ln x + 1$, donc $B'(x) = 10 - 4(\\ln x + 1) = 6 - 4\\ln x$.\nc) $B'(x) \\geqslant 0 \\iff \\ln x \\leqslant 1{,}5 \\iff x \\leqslant \\mathrm{e}^{1{,}5} \\approx 4{,}48$.\n$B$ croît sur $]0 ; \\mathrm{e}^{1{,}5}]$ et décroît sur $[\\mathrm{e}^{1{,}5} ; 13]$.\nMaximum : $B(\\mathrm{e}^{1{,}5}) = \\mathrm{e}^{1{,}5}(10 - 4 \\times 1{,}5)$ $= 4\\mathrm{e}^{1{,}5} \\approx 17{,}93$, soit environ $17\\,930$ € pour $448$ objets.\nd) $B(x) = x(10 - 4\\ln x)$ et $x > 0$ : $B(x) < 0 \\iff \\ln x > 2{,}5 \\iff x > \\mathrm{e}^{2{,}5} \\approx 12{,}18$.\nAu-delà de $1\\,218$ objets environ, l'atelier perd de l'argent.\n⚠️ En c), le maximum se calcule avec la valeur EXACTE $\\mathrm{e}^{1{,}5}$, où $\\ln x = 1{,}5$ : c'est ce qui simplifie le calcul.\n⭐ Sur le dessin, une graduation vaut $2$ milliers d'euros : les points rouges sont le sommet $(4{,}48 ; 8{,}96)$ et le passage à zéro en $12{,}18$.",
@@ -313,7 +313,7 @@ export const exercicesFonctionLogarithmeTerminale: FicheExercicesData = {
           reponses: [
             { question: "b) un", attendu: "400+600*0.85^n" },
             { question: "b) limite", attendu: "400" },
-            { question: "c)", attendu: "2041" },
+            { question: "c)", attendu: ["2041", "en 2041"] },
             { question: "d)", attendu: "16" },
           ],
           figure: programme(["def seuil():", "    n = 0", "    u = 1000", "    while u >= 450:", "        u = 0.85*u + 60", "        n = n + 1", "    return n"]),

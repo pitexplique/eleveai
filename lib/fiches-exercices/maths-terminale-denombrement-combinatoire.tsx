@@ -163,8 +163,8 @@ export const exercicesDenombrementCombinatoireTerminale: FicheExercicesData = {
           enonce:
             "a) Construire le triangle de Pascal jusqu'à la ligne $n = 6$, avec la relation $\\dbinom{n+1}{k+1} = \\dbinom{n}{k} + \\dbinom{n}{k+1}$.\nb) Lire $\\dbinom{6}{2}$ et $\\dbinom{6}{3}$.\nc) En déduire $\\dbinom{7}{3}$ sans factorielle.",
           reponses: [
-            { question: "b) (6 parmi 2)", attendu: "15" },
-            { question: "b) (6 parmi 3)", attendu: "20" },
+            { question: "b) (2 parmi 6)", attendu: "15" },
+            { question: "b) (3 parmi 6)", attendu: "20" },
             { question: "c)", attendu: "35" },
           ],
           correction:
@@ -283,8 +283,8 @@ export const exercicesDenombrementCombinatoireTerminale: FicheExercicesData = {
             "Une archère tire $5$ flèches. Chaque flèche atteint la cible avec la probabilité $0{,}8$, indépendamment des autres. $X$ est le nombre de flèches dans la cible.\na) Combien de suites de $5$ tirs (S pour succès, E pour échec) comportent exactement $3$ succès ?\nb) En déduire $P(X = 3)$.\nc) Calculer $P(X \\geqslant 4)$.",
           reponses: [
             { question: "a)", attendu: "10" },
-            { question: "b)", attendu: "0.2048" },
-            { question: "c)", attendu: "0.73728" },
+            { question: "b)", attendu: "0.2048", tolerance: 0.0005 },
+            { question: "c)", attendu: "0.73728", tolerance: 0.0005 },
           ],
           correction:
             "a) Une telle suite est déterminée par les places des $3$ succès parmi les $5$ tirs : $\\dbinom{5}{3} = 10$ suites (SSSEE, SSESE, …).\nb) Chaque suite avec $3$ S et $2$ E a la probabilité $0{,}8^3 \\times 0{,}2^2$, par indépendance.\n$P(X = 3) = 10 \\times 0{,}512 \\times 0{,}04 = 0{,}2048$.\nc) $P(X = 4) = \\dbinom{5}{4} \\times 0{,}8^4 \\times 0{,}2$ $= 5 \\times 0{,}4096 \\times 0{,}2 = 0{,}4096$.\n$P(X = 5) = 0{,}8^5 = 0{,}32768$.\n$P(X \\geqslant 4) = 0{,}4096 + 0{,}32768 = 0{,}73728$.\n⭐ C'est ici que le coefficient binomial entre dans la loi binomiale : il compte les chemins de l'arbre qui mènent à $k$ succès.\n⚠️ Oublier le facteur $\\dbinom{5}{3}$, c'est ne compter qu'UN chemin (SSSEE) au lieu de dix.\n⭐ Sur le dessin : la loi de $X$. La barre $3$ vaut $0{,}205$, les barres $4$ et $5$ font à elles deux près des trois quarts.",

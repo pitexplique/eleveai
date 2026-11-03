@@ -153,7 +153,7 @@ export const exercicesPrimitiveIntegraleTerminale: FicheExercicesData = {
             { question: "a)", attendu: "e^(x^2)", constante: true },
             { question: "b)", attendu: "ln(x^3+1)", constante: true },
             { question: "c)", attendu: "(x^2+x)^4/4", constante: true },
-            { question: "d)", attendu: ["(sin(x))^2/2", "sin^2(x)/2", "sin²(x)/2"], constante: true },
+            { question: "d)", attendu: ["(sin(x))^2/2", "sin^2(x)/2", "sin²(x)/2", "-cos²(x)/2", "-cos^2(x)/2"], constante: true },
           ],
           correction:
             "a) Avec $u(x) = x^2$ : $u'(x) = 2x$, et $f = u'\\mathrm{e}^{u}$. Une primitive est $F(x) = \\mathrm{e}^{x^2}$.\nb) Avec $u(x) = x^3 + 1$, strictement positif sur $]0 ; +\\infty[$ : $u'(x) = 3x^2$, et $g = \\dfrac{u'}{u}$. Donc $G(x) = \\ln(x^3 + 1)$.\nc) Avec $u(x) = x^2 + x$ : $u'(x) = 2x + 1$, et $h = u'u^3$. Donc $H(x) = \\dfrac{(x^2 + x)^4}{4}$.\nd) Avec $u(x) = \\sin(x)$ : $u'(x) = \\cos(x)$, et $k = u'u$. Donc $K(x) = \\dfrac{\\sin^2(x)}{2}$.\n⚠️ En c), ne pas oublier le $\\dfrac{1}{4}$ : la dérivée de $u^4$ est $4u'u^3$, pas $u'u^3$.\n⚠️ En b), le logarithme demande $u > 0$ : c'est pourquoi l'intervalle est précisé.\n⭐ Le tableau résume : on cherche d'abord $u$, puis on vérifie que $u'$ est bien là, en facteur.",
@@ -177,8 +177,8 @@ export const exercicesPrimitiveIntegraleTerminale: FicheExercicesData = {
           enonce:
             "Le domaine hachuré est limité par la courbe de $f(x) = -x^2 + 4x$, l'axe des abscisses, et les droites $x = 0$ et $x = 4$.\na) Justifier que son aire, en unités d'aire, est $\\displaystyle\\int_0^4 f(x)\\,\\mathrm{d}x$.\nb) Calculer cette aire.\nc) Sur le dessin d'un élève, une unité mesure $2$ cm sur chaque axe. Donner l'aire en cm².",
           reponses: [
-            { question: "b)", attendu: "32/3" },
-            { question: "c)", attendu: "128/3" },
+            { question: "b)", attendu: "32/3", tolerance: 0.011 },
+            { question: "c)", attendu: "128/3", tolerance: 0.011 },
           ],
           figure: repere([-1, 5, -1, 5], [{ q: [-1, 4, 0] }, { pts: bande((x) => -x * x + 4 * x, () => 0, 0, 4), couleur: ORANGE }]),
           correction:
@@ -275,7 +275,7 @@ export const exercicesPrimitiveIntegraleTerminale: FicheExercicesData = {
           reponses: [
             { question: "b)", attendu: ["f", "la courbe de f", "celle de f", "Cf"] },
             { question: "c) en unités d'aire", attendu: "4/3" },
-            { question: "c) en cm²", attendu: "100/3" },
+            { question: "c) en cm²", attendu: "100/3", tolerance: 0.05 },
           ],
           figure: repere(
             [-1, 3, -1, 3],
@@ -294,7 +294,7 @@ export const exercicesPrimitiveIntegraleTerminale: FicheExercicesData = {
             "On pose $G(x) = \\displaystyle\\int_0^x \\mathrm{e}^{-t^2}\\,\\mathrm{d}t$. La courbe de $t \\mapsto \\mathrm{e}^{-t^2}$ est la « courbe en cloche » des statisticiens ; on ne sait pas écrire de primitive de cette fonction avec les fonctions usuelles.\na) Justifier que $G$ est dérivable sur $\\mathbb{R}$ et donner $G'(x)$. En déduire le sens de variation de $G$.\nb) On admet que $\\mathrm{e}^{u} \\geqslant 1 + u$ pour tout réel $u$. Montrer que, pour $t \\in [0 ; 1]$ : $1 - t^2 \\leqslant \\mathrm{e}^{-t^2} \\leqslant 1$.\nc) En déduire un encadrement de $G(1)$.",
           reponses: [
             { question: "a)", attendu: ["e^(-x^2)", "G'(x) = e^(-x^2)"] },
-            { question: "c)", attendu: ["2/3 ≤ G(1) ≤ 1", "2/3 ; 1"], ordre: true },
+            { question: "c)", attendu: ["2/3 ≤ G(1) ≤ 1", "2/3 ; 1", "[2/3 ; 1]"], ordre: true },
           ],
           correction:
             "a) $t \\mapsto \\mathrm{e}^{-t^2}$ est continue sur $\\mathbb{R}$ : $G$ est sa primitive qui s'annule en $0$. Donc $G$ est dérivable et $G'(x) = \\mathrm{e}^{-x^2}$.\nUne exponentielle est strictement positive : $G' > 0$, et $G$ est strictement croissante sur $\\mathbb{R}$.\nb) Avec $u = -t^2$ : $\\mathrm{e}^{-t^2} \\geqslant 1 - t^2$.\nEt $-t^2 \\leqslant 0$, donc $\\mathrm{e}^{-t^2} \\leqslant \\mathrm{e}^{0} = 1$, car l'exponentielle est croissante.\nc) On intègre l'encadrement sur $[0 ; 1]$ : les inégalités se conservent, car les bornes sont dans l'ordre ($0 < 1$).\n$\\displaystyle\\int_0^1 (1 - t^2)\\,\\mathrm{d}t = 1 - \\dfrac{1}{3} = \\dfrac{2}{3}$ et $\\displaystyle\\int_0^1 1\\,\\mathrm{d}t = 1$.\nDonc $\\dfrac{2}{3} \\leqslant G(1) \\leqslant 1$. La calculatrice donne $G(1) \\approx 0{,}747$.\n⚠️ Pas besoin de primitive pour dériver $G$ : $G'(x)$ s'obtient en remplaçant $t$ par $x$ dans la fonction intégrée, c'est tout.\n⭐ Sur le dessin : l'aire hachurée, $G(1)$, est plus grande que l'aire sous la parabole grise $y = 1 - t^2$, et plus petite que celle du carré de côté $1$, sous la droite $y = 1$.",
@@ -357,6 +357,7 @@ export const exercicesPrimitiveIntegraleTerminale: FicheExercicesData = {
           enonce:
             "Démonstration du cours. Soit $f$ continue, positive et croissante sur $[a ; b]$, et $F(x) = \\displaystyle\\int_a^x f(t)\\,\\mathrm{d}t$, l'aire sous la courbe entre $a$ et $x$.\na) Soit $x \\in [a ; b[$ et $h > 0$ tel que $x + h \\leqslant b$. Montrer que $h f(x) \\leqslant F(x + h) - F(x) \\leqslant h f(x + h)$.\nb) En déduire que $\\dfrac{F(x + h) - F(x)}{h}$ tend vers $f(x)$ quand $h$ tend vers $0$ par valeurs positives.\nc) Exemple : $f(t) = 1 + \\dfrac{t^2}{4}$, $x = 2$ et $h = 0{,}5$. Écrire l'encadrement de a) et le comparer à la valeur exacte.",
           reponses: [
+            { question: "c) encadrement", attendu: "1 ; 1.28125", ordre: true, tolerance: 0.002 },
             { question: "c) valeur exacte", attendu: "2.5+2.5^3/12-(2+2^3/12)", tolerance: 0.0011 },
           ],
           correction:
@@ -408,8 +409,8 @@ export const exercicesPrimitiveIntegraleTerminale: FicheExercicesData = {
             { question: "b) I1", attendu: "1-ln(2)" },
             { question: "b) I2", attendu: "ln(2)-1/2" },
             { question: "c)", attendu: "0" },
-            { question: "e) approx(4)", attendu: "7/12" },
-            { question: "e) n", attendu: "999" },
+            { question: "e) approx(4)", attendu: "7/12", tolerance: 0.001 },
+            { question: "e) n", attendu: ["999", "1000"] },
           ],
           figure: programme(["def approx(n):", "    s = 0", "    for k in range(1, n + 1):", "        s = s + (-1)**(k+1)/k", "    return s"]),
           correction:
@@ -446,8 +447,8 @@ export const exercicesPrimitiveIntegraleTerminale: FicheExercicesData = {
             { question: "a) L(0)", attendu: "0" },
             { question: "a) L(1)", attendu: "1" },
             { question: "a) L(0,5)", attendu: "(√(e)-1)/(e-1)", tolerance: 0.0011 },
-            { question: "b)", attendu: "(e-2)/(e-1)" },
-            { question: "c)", attendu: "(3-e)/(e-1)" },
+            { question: "b)", attendu: "(e-2)/(e-1)", tolerance: 0.0011 },
+            { question: "c)", attendu: "(3-e)/(e-1)", tolerance: 0.0011 },
             { question: "d)", attendu: "0" },
           ],
           correction:

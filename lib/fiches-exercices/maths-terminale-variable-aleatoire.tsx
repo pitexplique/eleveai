@@ -86,7 +86,7 @@ export const exercicesVariableAleatoireTerminale: FicheExercicesData = {
           enonce:
             "Dans une boulangerie, on note $X$ le nombre de baguettes et $Y$ le nombre de croissants vendus entre $7$ h et $8$ h. On sait que $E(X) = 30$ et $E(Y) = 18$. Une baguette coûte $1{,}20$ € et un croissant $1{,}50$ €. On note $R$ la recette de cette heure, en euros.\na) Exprimer $R$ en fonction de $X$ et $Y$.\nb) Calculer $E(R)$.\nc) Les ventes de baguettes et de croissants sont sans doute liées. Cela change-t-il le résultat du b) ?",
           reponses: [
-            { question: "a)", attendu: ["1.2X + 1.5Y", "1.5Y + 1.2X", "1,2X + 1,5Y", "1,5Y + 1,2X"] },
+            { question: "a)", attendu: ["1.2X + 1.5Y", "1.5Y + 1.2X", "1,2X + 1,5Y", "1,5Y + 1,2X", "1.2x + 1.5y"] },
             { question: "b)", attendu: "63" },
             { question: "c)", attendu: ["non", "faux"] },
           ],
@@ -195,6 +195,7 @@ export const exercicesVariableAleatoireTerminale: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: "1/4 ; 1/2 ; 3/4", ordre: true },
             { question: "c)", attendu: "3/16 ; 1/4 ; 11/16", ordre: true },
+            { question: "c) égalité ?", attendu: ["non", "faux"] },
           ],
           correction:
             "a) Il y a $13$ cœurs et $26$ cartes rouges : $E(X) = P(X = 1) = \\dfrac{1}{4}$ et $E(Y) = \\dfrac{1}{2}$.\nPar linéarité : $E(S) = \\dfrac{1}{4} + \\dfrac{1}{2} = \\dfrac{3}{4}$.\nb) Carte noire : $S = 0$. Carreau : $S = 0 + 1 = 1$. Cœur : $S = 1 + 1 = 2$.\n$P(S = 0) = \\dfrac{1}{2}$, $P(S = 1) = \\dfrac{1}{4}$, $P(S = 2) = \\dfrac{1}{4}$.\n$E(S) = \\dfrac{1}{4} + 2 \\times \\dfrac{1}{4} = \\dfrac{3}{4}$ : même résultat.\nc) Une variable qui vaut $1$ avec la probabilité $p$, et $0$ sinon, a pour variance $p(1 - p)$ : $V(X) = \\dfrac{3}{16}$ et $V(Y) = \\dfrac{1}{4} = \\dfrac{4}{16}$.\n$E(S^2) = 1 \\times \\dfrac{1}{4} + 4 \\times \\dfrac{1}{4} = \\dfrac{5}{4}$, donc $V(S) = \\dfrac{5}{4} - \\dfrac{9}{16} = \\dfrac{11}{16}$.\nOr $V(X) + V(Y) = \\dfrac{7}{16}$ : l'égalité est FAUSSE.\nC'est que $X$ et $Y$ ne sont pas indépendantes : un cœur est toujours rouge, donc $X = 1$ entraîne $Y = 1$. Les deux variables grandissent ensemble, et leur somme se disperse davantage.\n⚠️ La linéarité de l'espérance marche toujours ; l'addition des variances demande l'indépendance.\n⭐ Le tableau donne $S$ pour chaque couleur : deux couleurs sur quatre donnent $0$.",
@@ -232,6 +233,7 @@ export const exercicesVariableAleatoireTerminale: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: "0.1 ; 10.29 ; √(10.29)", ordre: true, tolerance: 0.011 },
             { question: "b)", attendu: "10 ; √(1029)", ordre: true, tolerance: 0.051 },
+            { question: "c) 100 parties", attendu: ["non", "faux"] },
           ],
           figure: diagramme("batons", [{ label: "−2 €", value: 70 }, { label: "5 €", value: 30 }]),
           correction:
@@ -281,6 +283,7 @@ export const exercicesVariableAleatoireTerminale: FicheExercicesData = {
           enonce:
             "À la sortie d'un vestiaire, $n$ personnes récupèrent leur manteau, mais les manteaux sont rendus au hasard : toutes les répartitions sont équiprobables. $X$ est le nombre de personnes qui récupèrent LEUR manteau.\na) Pour $n = 3$, lister les $6$ répartitions, puis donner la loi de $X$ et $E(X)$.\nb) Pour $n$ quelconque, $X_i$ vaut $1$ si la personne $i$ récupère son manteau, $0$ sinon. Calculer $E(X_i)$, puis $E(X)$.\nc) Les $X_i$ sont-elles indépendantes ? Est-ce gênant ?",
           reponses: [
+            { question: "a) E(X)", attendu: "1" },
             { question: "b)", attendu: "1/n ; 1", ordre: true },
             { question: "c)", attendu: ["non", "faux"] },
           ],

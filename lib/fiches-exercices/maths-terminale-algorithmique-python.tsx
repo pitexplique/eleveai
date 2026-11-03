@@ -81,6 +81,7 @@ export const exercicesAlgorithmiquePythonTerminale: FicheExercicesData = {
           enonce:
             "On considère la fonction Python suivante : « def u(n): », puis, en retrait, « v = 1 », « for k in range(n): », « v = 0.5 * v + 3 » (en double retrait) et « return v ».\na) Quelle suite $(u_n)$ cette fonction calcule-t-elle ? Donner $u_0$ et la relation de récurrence.\nb) Faire la trace de u(3).\nc) Que renvoie u(0) ? Pourquoi ?",
           reponses: [
+            { question: "a) u0", attendu: "1" },
             { question: "b)", attendu: "5.375" },
             { question: "c)", attendu: "1" },
           ],
@@ -117,7 +118,7 @@ export const exercicesAlgorithmiquePythonTerminale: FicheExercicesData = {
           enonce:
             "On considère la fonction X ci-dessous.\na) Que simule le test « random() < p » ?\nb) Quelle loi suit le nombre renvoyé par X(5, 0.3) ? Justifier.\nc) Calculer la probabilité que X(5, 0.3) renvoie $2$, et l'espérance de cette loi.",
           reponses: [
-            { question: "c) P", attendu: "0.3087" },
+            { question: "c) P", attendu: "0.3087", tolerance: 0.0015 },
             { question: "c) E", attendu: "1.5" },
           ],
           figure: programme(["from random import random", "", "def X(n, p):", "    s = 0", "    for k in range(n):", "        if random() < p:", "            s = s + 1", "    return s"]),
@@ -140,7 +141,7 @@ export const exercicesAlgorithmiquePythonTerminale: FicheExercicesData = {
             "On considère la fonction : « def termes(N): », puis, en retrait, « L = [1] », « for k in range(N): », « L.append((L[-1] + 6)**0.5) » (en double retrait) et « return L ».\na) Quelle suite $(u_n)$ la liste contient-elle ?\nb) Combien d'éléments contient termes(3) ? Donner-les, arrondis au millième.\nc) On admet que la suite converge. Trouver sa limite.",
           reponses: [
             { question: "b) nb", attendu: "4" },
-            { question: "b) termes", attendu: "1 ; 2.646 ; 2.940 ; 2.990", ordre: true, tolerance: 0.0011 },
+            { question: "b) termes", attendu: ["1 ; 2.646 ; 2.940 ; 2.990", "[1, 2.646, 2.94, 2.99]", "[1, 2.646, 2.940, 2.990]"], ordre: true, tolerance: 0.0011 },
             { question: "c)", attendu: "3" },
           ],
           correction:
@@ -167,7 +168,7 @@ export const exercicesAlgorithmiquePythonTerminale: FicheExercicesData = {
           enonce:
             "La fonction mc tire N points au hasard dans le carré $[0 ; 1] \\times [0 ; 1]$.\na) Quand le compteur c augmente-t-il ? Le dire avec la courbe de $y = x^2$.\nb) Vers quel nombre mc(N) se rapproche-t-il quand N est grand ? Le calculer par une intégrale.",
           reponses: [
-            { attendu: "1/3" },
+            { attendu: "1/3", tolerance: 0.001 },
           ],
           figure: programme(["from random import random", "", "def mc(N):", "    c = 0", "    for k in range(N):", "        x = random()", "        y = random()", "        if y < x**2:", "            c = c + 1", "    return c / N"]),
           correction:
@@ -206,7 +207,7 @@ export const exercicesAlgorithmiquePythonTerminale: FicheExercicesData = {
           enonce:
             "Après une prise de médicament, la concentration dans le sang (en mg/L) au bout de $t$ heures est modélisée par $C(t) = 10t\\mathrm{e}^{-t}$. Le médicament est efficace tant que $C(t) \\geqslant 2$.\na) Étudier les variations de $C$ sur $[1 ; 5]$, et montrer que $C(t) = 2$ a une unique solution $\\alpha$ dans cet intervalle.\nb) Faire la trace de dicho(1, 5, 0.5). Que renvoie cet appel ? Interpréter.\nc) Combien de tours faut-il pour dicho(1, 5, 0.001) ?",
           reponses: [
-            { question: "b)", attendu: "(2.5 ; 3)", ordre: true },
+            { question: "b)", attendu: ["(2.5 ; 3)", "(2.5, 3.0)", "(2.5, 3)"], ordre: true },
             { question: "c)", attendu: "12" },
           ],
           figure: programme(["from math import exp", "", "def C(t):", "    return 10 * t * exp(-t)", "", "def dicho(a, b, e):", "    while b - a > e:", "        m = (a + b) / 2", "        if C(m) > 2:", "            a = m", "        else:", "            b = m", "    return a, b"]),
@@ -237,6 +238,7 @@ export const exercicesAlgorithmiquePythonTerminale: FicheExercicesData = {
             "On charge un condensateur. La tension $u$ (en volts) à ses bornes vérifie $u' = 4 - 2u$ et $u(0) = 0$, le temps $t$ étant en secondes.\na) Vérifier que $u(t) = 2 - 2\\mathrm{e}^{-2t}$ est la solution.\nb) Faire la trace de euler(0.25, 1). Comparer à la valeur exacte $u(1)$.\nc) Montrer que, pour $h = 0{,}25$, la méthode calcule $y_{k+1} = 0{,}5y_k + 1$. Vers quoi tendent ces valeurs ?",
           reponses: [
             { question: "b)", attendu: "1.875" },
+            { question: "b) u(1)", attendu: "2-2e^(-2)", tolerance: 0.0011 },
             { question: "c)", attendu: "2" },
           ],
           figure: programme(["def euler(h, T):", "    t = 0", "    u = 0", "    while t < T:", "        u = u + h*(4 - 2*u)", "        t = t + h", "    return u"]),
@@ -275,7 +277,7 @@ export const exercicesAlgorithmiquePythonTerminale: FicheExercicesData = {
             { question: "b) V(S)", attendu: "35/6" },
             { question: "c) E(M)", attendu: "7" },
             { question: "c) V(M)", attendu: "35/6000" },
-            { question: "c) majorant", attendu: "35/1500" },
+            { question: "c) majorant", attendu: "35/1500", tolerance: 0.0005 },
           ],
           figure: programme(["from random import randint", "", "def moyenne(N):", "    t = 0", "    for k in range(N):", "        a = randint(1, 6)", "        b = randint(1, 6)", "        t = t + a + b", "    return t / N"]),
           correction:
@@ -302,8 +304,8 @@ export const exercicesAlgorithmiquePythonTerminale: FicheExercicesData = {
             "Une puce part de $0$ sur une droite graduée. Chaque seconde, elle saute de $+1$ ou de $-1$, avec la même probabilité, indépendamment. On simule $10$ sauts : « x = 0 », puis « for k in range(10): » suivi, en retrait, de « if random() < 0.5: x = x + 1 » et « else: x = x - 1 ». On affiche enfin x.\na) Quelles valeurs le programme peut-il afficher ?\nb) On note $D$ le nombre de sauts vers la droite. Donner la loi de $D$, et exprimer x en fonction de $D$.\nc) Calculer la probabilité que la puce revienne en $0$.\nd) Calculer l'espérance et la variance de la position finale.",
           reponses: [
             { question: "a)", attendu: "-10 ; -8 ; -6 ; -4 ; -2 ; 0 ; 2 ; 4 ; 6 ; 8 ; 10" },
-            { question: "b) x", attendu: "2D-10" },
-            { question: "c)", attendu: "252/1024" },
+            { question: "b) x", attendu: ["2D-10", "-10+2D"] },
+            { question: "c)", attendu: "252/1024", tolerance: 0.0011 },
             { question: "d) E", attendu: "0" },
             { question: "d) V", attendu: "10" },
           ],
@@ -345,6 +347,7 @@ export const exercicesAlgorithmiquePythonTerminale: FicheExercicesData = {
             { question: "a) n = 1", attendu: "2" },
             { question: "a) n = 2", attendu: "2.25" },
             { question: "a) n = 12", attendu: "2.613", tolerance: 0.0011 },
+            { question: "b) s", attendu: "2.718279", tolerance: 0.0000015 },
           ],
           correction:
             "a) $n = 1$ : $2$ €. $n = 2$ : $1{,}5^2 = 2{,}25$ €. $n = 12$ : $\\left(\\dfrac{13}{12}\\right)^{12} \\approx 2{,}613$ €.\nb) f est multiplié par k à chaque tour : à la fin du tour k, f vaut $k!$.\ns vaut $1 + \\dfrac{1}{1!} + \\dfrac{1}{2!} + \\cdots + \\dfrac{1}{8!} \\approx 2{,}718279$.\nc) Avec $n = 365$ : $\\left(1 + \\dfrac{1}{365}\\right)^{365} \\approx 2{,}7146$, encore à $0{,}004$ de $\\mathrm{e} \\approx 2{,}718282$.\nLa somme s, avec seulement $8$ tours, est à $3 \\times 10^{-6}$ de $\\mathrm{e}$ : elle est bien plus rapide.\n⚠️ On ne recalcule pas $k!$ à chaque tour : on garde f et on le multiplie par k. C'est le même geste que pour une suite, $u_k = k \\times u_{k-1}$.\n⭐ Pourquoi $\\mathrm{e}$ ? $\\ln\\left(\\left(1 + \\dfrac{1}{n}\\right)^n\\right) = n\\ln\\left(1 + \\dfrac{1}{n}\\right)$, qui tend vers $1$ : c'est la limite de $\\dfrac{\\ln(1 + x)}{x}$ en $0$.\n⭐ Sur le dessin : le capital monte avec n, mais de moins en moins : il plafonne sous $\\mathrm{e}$.",
@@ -421,7 +424,7 @@ export const exercicesAlgorithmiquePythonTerminale: FicheExercicesData = {
           enonce:
             "La section d'un canal a pour profil la courbe de $f(x) = \\mathrm{e}^{-x^2}$. On veut l'aire $I = \\displaystyle\\int_0^1 \\mathrm{e}^{-x^2}\\,\\mathrm{d}x$, mais on ne sait pas écrire de primitive de $f$ avec les fonctions usuelles.\na) Étudier les variations de $f$ sur $[0 ; 1]$.\nb) Que calculent g et d dans encadre(n) ? Justifier que $d \\leqslant I \\leqslant g$.\nc) Calculer encadre(4), à $10^{-3}$ près.\nd) Montrer que $g - d = \\dfrac{1 - \\mathrm{e}^{-1}}{n}$. Quelle valeur de n garantit une amplitude $\\leqslant 0{,}01$ ?",
           reponses: [
-            { question: "c)", attendu: "(0.664 ; 0.822)", ordre: true, tolerance: 0.0011 },
+            { question: "c)", attendu: ["(0.664 ; 0.822)", "(0.664, 0.822)"], ordre: true, tolerance: 0.0011 },
             { question: "d)", attendu: "64" },
           ],
           figure: programme(["from math import exp", "", "def f(x):", "    return exp(-x**2)", "", "def encadre(n):", "    h = 1 / n", "    g = 0", "    d = 0", "    for k in range(n):", "        g = g + h * f(k*h)", "        d = d + h * f(k*h + h)", "    return d, g"]),

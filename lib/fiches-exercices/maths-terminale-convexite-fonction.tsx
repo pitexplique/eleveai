@@ -66,7 +66,7 @@ export const exercicesConvexiteFonctionTerminale: FicheExercicesData = {
             { question: "a) convexe sur", attendu: ["[0 ; +∞[", "[0 ; ∞["] },
             { question: "a) concave sur", attendu: "]-∞ ; 0]" },
             { question: "b) f''(x)", attendu: ["6x", "f''(x) = 6x"] },
-            { question: "c)", attendu: ["point d'inflexion", "c'est un point d'inflexion", "un point d'inflexion"] },
+            { question: "c)", attendu: ["point d'inflexion", "c'est un point d'inflexion", "un point d'inflexion", "point d’inflexion", "inflexion"] },
           ],
           figure: repere([-3, 3, -3, 3], [{ p: [1, 0, -3, 0] }, { q: [0, -3, 0], couleur: ORANGE }]),
           correction:
@@ -192,8 +192,8 @@ export const exercicesConvexiteFonctionTerminale: FicheExercicesData = {
             { question: "a) concave sur", attendu: "[0 ; 1]" },
             { question: "a) convexe sur", attendu: "[1 ; 3]" },
             { question: "a) point I", attendu: "(1 ; 4)", ordre: true },
-            { question: "b) tangente T", attendu: "y = q+3" },
-            { question: "c) production (objets)", attendu: "100" },
+            { question: "b) tangente T", attendu: ["y = q+3", "y = x+3"] },
+            { question: "c) production (objets)", attendu: ["100", "1"] },
           ],
           correction:
             "a) $C'(q) = 3q^2 - 6q + 4$ et $C''(q) = 6q - 6$.\n$C''(q) \\leqslant 0$ sur $[0 ; 1]$ et $C''(q) \\geqslant 0$ sur $[1 ; 3]$ : $C$ est concave, puis convexe.\n$C''$ change de signe en $1$, et $C(1) = 1 - 3 + 4 + 2 = 4$ : $I(1 ; 4)$.\nb) $C'(1) = 3 - 6 + 4 = 1$. Donc $T : y = 1 \\times (q - 1) + 4$, soit $y = q + 3$.\n$C(q) - (q + 3) = q^3 - 3q^2 + 3q - 1 = (q - 1)^3$.\nC'est négatif avant $1$, positif après : la courbe est sous $T$ sur $[0 ; 1]$, au-dessus sur $[1 ; 3]$. Elle traverse sa tangente en $I$.\nc) $C'$ décroît sur $[0 ; 1]$ (car $C'' \\leqslant 0$), puis croît. Son minimum est $C'(1) = 1$.\nLe coût marginal est le plus faible pour $100$ objets par jour : $1\\,000$ € par centaine supplémentaire.\n⭐ Sur le dessin : la droite orange $T$ traverse la courbe au point rouge $I$.\n⚠️ Le coût est toujours CROISSANT ($C'(q) = 3(q - 1)^2 + 1 > 0$). C'est sa façon de croître qui change en $I$.",
@@ -227,9 +227,9 @@ export const exercicesConvexiteFonctionTerminale: FicheExercicesData = {
             "Pour un réel $a$, on pose $f(x) = x^4 + ax^3 + 6x^2$.\na) Calculer $f''(x)$.\nb) Pour quelles valeurs de $a$ la fonction $f$ est-elle convexe sur $\\mathbb{R}$ ?\nc) Pour $a = 5$, étudier la convexité de $f$.",
           reponses: [
             { question: "a)", attendu: ["12x^2+6ax+12", "f''(x) = 12x^2+6ax+12"] },
-            { question: "b)", attendu: ["[-4 ; 4]", "-4 ≤ a ≤ 4"], ordre: true },
-            { question: "c) convexe sur", attendu: ["]-∞ ; -2] ∪ [-1/2 ; +∞[", "]-∞ ; -2] ∪ [-1/2 ; ∞[", "]-∞ ; -2] ∪ [-0.5 ; +∞[", "]-∞ ; -2] ∪ [-0.5 ; ∞["] },
-            { question: "c) concave sur", attendu: ["[-2 ; -1/2]", "[-2 ; -0.5]"] },
+            { question: "b)", attendu: ["[-4 ; 4]", "-4 ≤ a ≤ 4", "-4 ⩽ a ⩽ 4", "-4 <= a <= 4", "a ∈ [-4 ; 4]"], exact: true },
+            { question: "c) convexe sur", attendu: ["]-∞ ; -2] ∪ [-1/2 ; +∞[", "]-∞ ; -2] ∪ [-1/2 ; ∞[", "]-∞ ; -2] ∪ [-0.5 ; +∞[", "]-∞ ; -2] ∪ [-0.5 ; ∞[", "]-∞ ; -2] ∪ [-0,5 ; +∞[", "]-∞ ; -2] ∪ [-0,5 ; ∞["] },
+            { question: "c) concave sur", attendu: ["[-2 ; -1/2]", "[-2 ; -0.5]", "[-2 ; -0,5]"] },
           ],
           correction:
             "a) $f'(x) = 4x^3 + 3ax^2 + 12x$, puis $f''(x) = 12x^2 + 6ax + 12$.\nb) $f$ est convexe sur $\\mathbb{R}$ si et seulement si $f''(x) \\geqslant 0$ pour tout $x$.\nLe trinôme a un coefficient $12 > 0$ : il faut $\\Delta \\leqslant 0$. Or $\\Delta = 36a^2 - 4 \\times 12 \\times 12 = 36a^2 - 576$.\n$36a^2 \\leqslant 576 \\iff a^2 \\leqslant 16 \\iff -4 \\leqslant a \\leqslant 4$.\nc) Pour $a = 5$ : $f''(x) = 12x^2 + 30x + 12$, soit $f''(x) = 6(2x^2 + 5x + 2) = 6(2x + 1)(x + 2)$.\n$f$ est convexe sur $]-\\infty ; -2]$ et sur $\\left[-\\dfrac{1}{2} ; +\\infty\\right[$, concave sur $\\left[-2 ; -\\dfrac{1}{2}\\right]$. Deux points d'inflexion.\n⚠️ $\\Delta = 0$ est permis : pour $a = 4$, $f''(x) = 12(x + 1)^2$ s'annule en $-1$ sans changer de signe. $f$ reste convexe.",
@@ -275,7 +275,7 @@ export const exercicesConvexiteFonctionTerminale: FicheExercicesData = {
         {
           enonce:
             "Une population de bactéries double chaque heure : au temps $t$ (en heures), elle compte $N(t) = 2^t$ milliers, où $2^t = \\mathrm{e}^{t\\ln 2}$. Un technicien mesure $N(0) = 1$ et $N(1) = 2$, puis estime $N(0{,}5)$ en traçant la droite qui relie ces deux mesures.\na) Montrer que $N$ est convexe.\nb) En déduire que $2^t \\leqslant 1 + t$ pour $t \\in [0 ; 1]$.\nc) L'estimation du technicien est-elle trop forte ou trop faible ?",
-          reponses: [{ question: "c)", attendu: ["trop forte", "trop fort"] }],
+          reponses: [{ question: "c)", attendu: ["trop forte", "trop fort", "surestimée", "surestime", "trop grande"] }],
           correction:
             "a) $N(t) = \\mathrm{e}^{t\\ln 2}$, donc $N'(t) = \\ln 2 \\times \\mathrm{e}^{t\\ln 2}$ et $N''(t) = (\\ln 2)^2\\,\\mathrm{e}^{t\\ln 2} > 0$. $N$ est convexe.\nb) La corde qui relie $(0 ; 1)$ et $(1 ; 2)$ a pour équation $y = 1 + t$.\nUne courbe convexe est SOUS ses cordes entre les deux points : $2^t \\leqslant 1 + t$ sur $[0 ; 1]$.\nc) Le technicien estime $N(0{,}5) \\approx 1{,}5$. Or $N(0{,}5) = \\sqrt{2} \\approx 1{,}41$ : l'estimation est trop forte.\n⚠️ En dehors de $[0 ; 1]$, c'est l'inverse : à $t = 3$, $2^3 = 8$ alors que la droite donne $4$. Prolonger la droite sous-estime la croissance.\n⭐ Sur le dessin : entre les deux points rouges, le segment orange passe au-dessus de la courbe.",
           schema: repere([-1, 3, -1, 5], [{ pts: echantillon((t) => 2 ** t, -1, 3, -1, 5) }, { q: [0, 1, 1], couleur: ORANGE }], [{ x: 0, y: 1, label: "" }, { x: 1, y: 2, label: "" }]),
@@ -319,6 +319,7 @@ export const exercicesConvexiteFonctionTerminale: FicheExercicesData = {
             { question: "a) taux maximal", attendu: ["2/e", "0.74"], tolerance: 0.011 },
             { question: "b) concave sur", attendu: "[0 ; 2]" },
             { question: "b) convexe sur", attendu: ["[2 ; +∞[", "[2 ; ∞["] },
+            { question: "b) point d'inflexion", attendu: "(2 ; 4e^(-2))", ordre: true, tolerance: 0.011 },
             { question: "d) limite", attendu: "0" },
             { question: "e) durée (h)", attendu: ["1.8", "1 h 48 min", "1 h 48"], tolerance: 0.011 },
           ],
@@ -333,7 +334,7 @@ export const exercicesConvexiteFonctionTerminale: FicheExercicesData = {
             "Une banque imaginaire offre un taux de $100$ % par an. Si les intérêts sont versés en $n$ fois dans l'année (au taux $\\dfrac{100}{n}$ % à chaque fois), $1$ € devient $\\left(1 + \\dfrac{1}{n}\\right)^n$ € au bout d'un an.\na) Montrer que $g(x) = \\ln(1 + x)$ est concave sur $]-1 ; +\\infty[$.\nb) Donner sa tangente en $0$. En déduire que $\\ln(1 + x) \\leqslant x$ pour $x > -1$.\nc) En déduire que $\\left(1 + \\dfrac{1}{n}\\right)^n \\leqslant \\mathrm{e}$ pour tout $n \\geqslant 1$.\nd) Calculer le capital pour $n = 1$, $n = 12$ et $n = 365$. Conclure.",
           reponses: [
             { question: "b) tangente", attendu: "y = x" },
-            { question: "d) capitaux (n = 1 ; 12 ; 365)", attendu: "2 ; 2.613 ; 2.715", ordre: true, tolerance: 0.0011 },
+            { question: "d) capitaux (n = 1 ; 12 ; 365)", attendu: "2 ; 2.613 ; 2.715", ordre: true, tolerance: 0.005 },
           ],
           correction:
             "a) $g'(x) = \\dfrac{1}{1 + x}$ et $g''(x) = -\\dfrac{1}{(1 + x)^2} < 0$ : $g$ est concave.\nb) $g(0) = 0$ et $g'(0) = 1$ : la tangente en $0$ est $y = x$.\n$g$ est concave, donc sa courbe est sous ses tangentes : $\\ln(1 + x) \\leqslant x$.\nc) On écrit $\\left(1 + \\dfrac{1}{n}\\right)^n = \\mathrm{e}^{n\\ln(1 + 1/n)}$.\nAvec $x = \\dfrac{1}{n}$ : $n\\ln\\left(1 + \\dfrac{1}{n}\\right) \\leqslant n \\times \\dfrac{1}{n} = 1$.\nL'exponentielle est croissante : $\\left(1 + \\dfrac{1}{n}\\right)^n \\leqslant \\mathrm{e}^{1} = \\mathrm{e}$.\nd) $n = 1$ : $2$ €. $n = 12$ : environ $2{,}613$ €. $n = 365$ : environ $2{,}715$ €.\nVerser plus souvent rapporte un peu plus, mais le capital ne dépassera jamais $\\mathrm{e} \\approx 2{,}718$ €.\n⚠️ En c), il faut la croissance de l'exponentielle pour passer de l'inégalité sur l'exposant à l'inégalité sur les puissances.\n⭐ Sur le dessin : la droite orange $y = x$ touche la courbe de $\\ln(1 + x)$ en $O$, et reste au-dessus.",
@@ -358,7 +359,7 @@ export const exercicesConvexiteFonctionTerminale: FicheExercicesData = {
           enonce:
             "Pour approcher la solution de $\\mathrm{e}^{x} = 3$, on utilise la fonction convexe $f(x) = \\mathrm{e}^{x} - 3$ et la méthode de Newton : on part de $x_0 = 2$ ; la tangente à la courbe au point d'abscisse $x_n$ coupe l'axe des abscisses en $x_{n+1}$.\na) Montrer que la tangente au point d'abscisse $a$ coupe l'axe des abscisses en $a - 1 + 3\\mathrm{e}^{-a}$.\nb) Calculer $x_1$.\nc) Justifier, par la convexité, que $f(x_1) \\geqslant 0$, donc que $x_1 \\geqslant \\ln 3$.\nd) La fonction Python ci-dessous calcule $x_n$. Que renvoie newton(4) ?",
           reponses: [
-            { question: "b) x1", attendu: ["1+3e^(-2)", "1.406"], tolerance: 0.0011 },
+            { question: "b) x1", attendu: ["1+3e^(-2)", "1.406"], tolerance: 0.005 },
             { question: "d) newton(4)", attendu: "1.098613", tolerance: 0.0000011 },
           ],
           figure: programme(["from math import exp", "", "def newton(n):", "    x = 2", "    for k in range(n):", "        x = x-1+3*exp(-x)", "    return x"]),

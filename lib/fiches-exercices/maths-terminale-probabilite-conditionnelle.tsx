@@ -163,8 +163,8 @@ export const exercicesProbabiliteConditionnelleTerminale: FicheExercicesData = {
           enonce:
             "Une urne contient $5$ boules rouges et $3$ boules vertes. On tire successivement trois boules, SANS remise. On note $R_k$ l'événement « la $k$-ième boule est rouge ».\na) Calculer $P(R_1 \\cap R_2)$.\nb) Calculer la probabilité de tirer trois boules rouges.",
           reponses: [
-            { question: "a)", attendu: "5/14" },
-            { question: "b)", attendu: "5/28" },
+            { question: "a)", attendu: "5/14", tolerance: 0.0011 },
+            { question: "b)", attendu: "5/28", tolerance: 0.0011 },
           ],
           correction:
             "a) $P(R_1) = \\dfrac{5}{8}$. Une rouge est partie : il reste $4$ rouges sur $7$ boules, donc $P_{R_1}(R_2) = \\dfrac{4}{7}$.\n$P(R_1 \\cap R_2) = \\dfrac{5}{8} \\times \\dfrac{4}{7} = \\dfrac{20}{56} = \\dfrac{5}{14}$.\nb) Sachant deux rouges tirées, il reste $3$ rouges sur $6$ boules : $P_{R_1 \\cap R_2}(R_3) = \\dfrac{3}{6}$.\n$P(R_1 \\cap R_2 \\cap R_3) = \\dfrac{5}{8} \\times \\dfrac{4}{7} \\times \\dfrac{3}{6} = \\dfrac{60}{336} = \\dfrac{5}{28} \\approx 0{,}179$.\n⚠️ Sans remise, les tirages ne sont PAS indépendants : la composition de l'urne change à chaque tirage, et les probabilités de l'arbre avec elle.\n⭐ Sur le dessin : on ne trace que les branches utiles. Le chemin rouge-rouge-rouge porte $\\dfrac{5}{8}$, puis $\\dfrac{4}{7}$, puis $\\dfrac{3}{6}$.",
@@ -340,7 +340,7 @@ export const exercicesProbabiliteConditionnelleTerminale: FicheExercicesData = {
             "Un filtre anti-spam repère le mot « gratuit ». Dans une messagerie, $30$ % des courriels sont des spams ($S$). Le mot apparaît dans $40$ % des spams et dans $2$ % des autres courriels. $G$ : « le courriel contient le mot ».\na) Calculer $P(G)$, puis $P_G(S)$.\nb) On note maintenant $x$ la part des spams. Montrer que $P_G(S) = \\dfrac{0{,}4x}{0{,}38x + 0{,}02}$.\nc) Pour quelles valeurs de $x$ a-t-on $P_G(S) \\geqslant 0{,}99$ ?",
           reponses: [
             { question: "a)", attendu: "0.134 ; 0.12/0.134", ordre: true, tolerance: 0.0011 },
-            { question: "c)", attendu: ["x ≥ 0.832", "x ≥ 99/119", "x ≥ 0,832", "[0.832 ; 1]", "[0,832 ; 1]"] },
+            { question: "c)", attendu: ["x ≥ 0.832", "x ≥ 99/119", "x ≥ 0,832", "x >= 0,832", "x >= 0.832", "[0.832 ; 1]", "[0,832 ; 1]", "[99/119 ; 1]", "0,832 ≤ x ≤ 1", "0.832 ≤ x ≤ 1"] },
           ],
           correction:
             "a) $P(G) = 0{,}3 \\times 0{,}4 + 0{,}7 \\times 0{,}02$ $= 0{,}12 + 0{,}014 = 0{,}134$.\n$P_G(S) = \\dfrac{0{,}12}{0{,}134} \\approx 0{,}896$.\nb) $P(S \\cap G) = 0{,}4x$ et $P(G) = 0{,}4x + 0{,}02(1 - x) = 0{,}38x + 0{,}02$. On divise.\nc) Le dénominateur est positif : on peut multiplier sans changer le sens.\n$0{,}4x \\geqslant 0{,}99(0{,}38x + 0{,}02)$ équivaut à $0{,}4x \\geqslant 0{,}3762x + 0{,}0198$, soit $0{,}0238x \\geqslant 0{,}0198$.\nDonc $x \\geqslant \\dfrac{0{,}0198}{0{,}0238} \\approx 0{,}832$.\nIl faudrait plus de $83$ % de spams pour que le mot suffise à conclure à $99$ %.\n⚠️ La probabilité « sachant $G$ » dépend de la part des spams : le même filtre est plus ou moins fiable selon la messagerie.\n⭐ Sur le dessin (question a) : sur les deux chemins qui mènent à $G$, celui du spam pèse $0{,}12$, l'autre $0{,}014$.",

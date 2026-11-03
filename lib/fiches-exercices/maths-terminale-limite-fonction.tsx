@@ -281,7 +281,7 @@ export const exercicesLimiteFonctionTerminale: FicheExercicesData = {
             "Un condensateur se charge à travers une résistance. La tension à ses bornes, en volts, au temps $t$ en secondes, est $u(t) = 6\\left(1 - \\mathrm{e}^{-0{,}5t}\\right)$ pour $t \\geqslant 0$.\na) Déterminer $\\lim_{t \\to +\\infty} u(t)$. Interpréter graphiquement et physiquement.\nb) Montrer que $u$ est croissante sur $[0 ; +\\infty[$.\nc) À la calculatrice, entre quelles secondes entières la tension dépasse-t-elle $99$ % de sa valeur limite ?",
           reponses: [
             { question: "a)", attendu: "6" },
-            { question: "c)", attendu: "9 ; 10", ordre: true },
+            { question: "c)", attendu: ["9 ; 10", "9 < t < 10"], ordre: true },
           ],
           correction:
             "a) On pose $X = -0{,}5t$. Quand $t \\to +\\infty$, $X \\to -\\infty$, donc $\\mathrm{e}^{X} \\to 0$.\nAlors $1 - \\mathrm{e}^{-0{,}5t} \\to 1$ et $\\lim_{t \\to +\\infty} u(t) = 6$.\nLa droite $y = 6$ est asymptote horizontale. Physiquement : la tension se rapproche de $6$ V, la tension de charge complète.\nb) $u'(t) = 6 \\times 0{,}5\\,\\mathrm{e}^{-0{,}5t} = 3\\mathrm{e}^{-0{,}5t} > 0$ : $u$ est croissante.\nc) $99$ % de $6$ V, c'est $5{,}94$ V. $u(9) \\approx 5{,}933$ (pas encore) et $u(10) \\approx 5{,}960$.\nLa tension dépasse $99$ % de sa valeur limite entre $9$ et $10$ secondes.\n⚠️ La tension n'atteint JAMAIS $6$ V : $\\mathrm{e}^{-0{,}5t}$ reste strictement positif. Une asymptote se rapproche, elle ne se touche pas forcément.\n⭐ Sur le dessin : la courbe monte vite, puis se couche sous la droite $y = 6$.",
@@ -456,7 +456,7 @@ export const exercicesLimiteFonctionTerminale: FicheExercicesData = {
             { question: "d) en +∞", attendu: "y = 100" },
             { question: "d) en -∞", attendu: "y = 0" },
             { question: "e)", attendu: ["croissante"] },
-            { question: "f)", attendu: "9" },
+            { question: "f)", attendu: ["9", "9e", "9e année", "9ème année", "la 9e année"] },
           ],
           correction:
             "a) $f(0) = \\dfrac{100}{1 + 9} = 10$ : $10$ % des foyers à la sortie.\nb) On pose $X = -0{,}5t$. Quand $t \\to +\\infty$, $X \\to -\\infty$ et $\\mathrm{e}^X \\to 0$.\nLe dénominateur tend vers $1$ : $\\lim_{t \\to +\\infty} f(t) = 100$. À long terme, presque tous les foyers sont équipés.\nc) Quand $t \\to -\\infty$, $X = -0{,}5t \\to +\\infty$ et $\\mathrm{e}^X \\to +\\infty$.\nLe dénominateur tend vers $+\\infty$ : $\\lim_{t \\to -\\infty} f(t) = 0$.\nd) Deux asymptotes horizontales : $y = 100$ en $+\\infty$, et $y = 0$ (l'axe des abscisses) en $-\\infty$.\ne) $f = \\dfrac{100}{u}$ avec $u(t) = 1 + 9\\mathrm{e}^{-0{,}5t}$ et $u'(t) = -4{,}5\\mathrm{e}^{-0{,}5t}$.\n$f' = -\\dfrac{100u'}{u^2}$, ce qui donne la formule. Une exponentielle est positive : $f'(t) > 0$, $f$ est croissante.\nf) $f(8) \\approx 85{,}8$ et $f(9) \\approx 90{,}9$. La part dépasse $90$ % pendant la $9$e année, entre $t = 8$ et $t = 9$.\n⚠️ En b) et c), c'est la même exponentielle, mais son argument part dans des sens opposés : on refait le raisonnement à chaque bout.\n⚠️ $100$ % n'est jamais atteint dans le modèle : $9\\mathrm{e}^{-0{,}5t}$ reste strictement positif.\n⭐ Sur le dessin (une graduation verticale vaut $10$ %) : la courbe en S part de l'axe à gauche, passe par $(0 ; 1)$, soit $10$ %, et se couche sous la droite $y = 10$, soit $100$ %.",

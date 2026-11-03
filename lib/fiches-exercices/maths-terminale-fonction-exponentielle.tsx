@@ -130,7 +130,7 @@ export const exercicesFonctionExponentielleTerminale: FicheExercicesData = {
             "Pour tout entier $n$, on pose $u_n = \\mathrm{e}^{-0{,}5n}$.\na) Montrer que $(u_n)$ est une suite géométrique.\nb) En déduire sa limite, et la limite de $S_n = u_0 + u_1 + \\cdots + u_n$.",
           reponses: [
             { question: "b) lim un", attendu: "0" },
-            { question: "b) lim Sn", attendu: "1/(1-e^(-0.5))" },
+            { question: "b) lim Sn", attendu: "1/(1-e^(-0.5))", tolerance: 0.011 },
           ],
           correction:
             "a) $u_{n+1} = \\mathrm{e}^{-0{,}5(n + 1)}$ $= \\mathrm{e}^{-0{,}5n} \\times \\mathrm{e}^{-0{,}5}$, car $\\mathrm{e}^{a + b} = \\mathrm{e}^{a}\\,\\mathrm{e}^{b}$.\nDonc $u_{n+1} = \\mathrm{e}^{-0{,}5}\\,u_n$ : suite géométrique de raison $q = \\mathrm{e}^{-0{,}5} \\approx 0{,}61$, de premier terme $u_0 = 1$.\nb) $0 < q < 1$, donc $\\lim u_n = 0$.\n$S_n = \\dfrac{1 - q^{n+1}}{1 - q}$, et $q^{n+1} \\to 0$ : $\\lim S_n = \\dfrac{1}{1 - \\mathrm{e}^{-0{,}5}} \\approx 2{,}54$.\n⚠️ $\\mathrm{e}^{-0{,}5} < 1$ parce que $-0{,}5 < 0$ : c'est la croissance de l'exponentielle, $\\mathrm{e}^{-0{,}5} < \\mathrm{e}^{0}$.\n⭐ Sur le dessin : les termes $1$ ; $0{,}61$ ; $0{,}37$… sont multipliés par $0{,}61$ à chaque pas.",
@@ -148,7 +148,7 @@ export const exercicesFonctionExponentielleTerminale: FicheExercicesData = {
         {
           enonce: "Résoudre dans $\\mathbb{R}$ :\na) $\\mathrm{e}^{x}(x - 2) > 0$\nb) $(\\mathrm{e}^{x} - 1)(x + 3) \\leqslant 0$",
           reponses: [
-            { question: "a)", attendu: "]2 ; +∞[" },
+            { question: "a)", attendu: ["]2 ; +∞[", "x > 2"] },
             { question: "b)", attendu: "[-3 ; 0]" },
           ],
           correction:
@@ -301,7 +301,7 @@ export const exercicesFonctionExponentielleTerminale: FicheExercicesData = {
             "Pour un prix de vente de $x$ euros, les producteurs proposent $O(x) = \\mathrm{e}^{0{,}5x} - 1$ milliers d'objets, et les clients en demandent $D(x) = 5\\,\\mathrm{e}^{-0{,}5x}$ milliers, pour $x \\geqslant 0$.\na) Étudier les variations de $O$ et de $D$, puis leurs limites en $+\\infty$. Interpréter.\nb) Le prix d'équilibre vérifie $O(x) = D(x)$. En posant $X = \\mathrm{e}^{0{,}5x}$, montrer que $X^2 - X - 5 = 0$.\nc) En déduire le prix d'équilibre et la quantité échangée.\nd) À partir de quel prix la demande passe-t-elle sous $1\\,000$ objets ?",
           reponses: [
             { question: "c) prix", attendu: "2ln((1+√(21))/2)", tolerance: 0.011 },
-            { question: "c) quantité", attendu: "5/((1+√(21))/2)", tolerance: 0.011 },
+            { question: "c) quantité (en milliers)", attendu: "5/((1+√(21))/2)", tolerance: 0.011 },
             { question: "d)", attendu: "2ln(5)", tolerance: 0.011 },
           ],
           correction:
@@ -321,7 +321,7 @@ export const exercicesFonctionExponentielleTerminale: FicheExercicesData = {
             { question: "a) instant", attendu: "2.5" },
             { question: "a) maximum", attendu: "12.5e^(-1)", tolerance: 0.011 },
             { question: "b)", attendu: "0" },
-            { question: "c)", attendu: "0.84 ; 5.57", tolerance: 0.011 },
+            { question: "c)", attendu: ["0.84 ; 5.57", "]0.84 ; 5.57[", "]0,84 ; 5,57[", "[0.84 ; 5.57]", "[0,84 ; 5,57]"], tolerance: 0.011 },
             { question: "d)", attendu: "9.8" },
           ],
           figure: programme(["from math import exp", "", "def C(t):", "    return 5*t*exp(-0.4*t)", "", "def attente():", "    t = 2.5", "    while C(t) >= 1:", "        t = t + 0.1", "    return round(t, 1)"]),
@@ -335,8 +335,8 @@ export const exercicesFonctionExponentielleTerminale: FicheExercicesData = {
           enonce:
             "Un patient reçoit une dose de médicament toutes les $12$ heures. Juste après la première dose, la concentration vaut $2$ mg/L ; entre deux doses, elle est multipliée par $\\mathrm{e}^{-1}$, puis la dose suivante ajoute $2$ mg/L. On note $u_n$ la concentration juste après la dose $n + 1$ : $u_0 = 2$ et $u_{n+1} = \\mathrm{e}^{-1}u_n + 2$.\na) On pose $\\ell = \\dfrac{2}{1 - \\mathrm{e}^{-1}}$ et $v_n = u_n - \\ell$. Montrer que $(v_n)$ est géométrique de raison $\\mathrm{e}^{-1}$.\nb) En déduire que $u_n = \\ell - (\\ell - 2)\\,\\mathrm{e}^{-n}$, puis la limite de $(u_n)$.\nc) Vérifier que $\\dfrac{\\ell}{\\ell - 2} = \\mathrm{e}$. À partir de quelle dose la concentration dépasse-t-elle $99$ % de $\\ell$ ?",
           reponses: [
-            { question: "b)", attendu: "2/(1-e^(-1))" },
-            { question: "c)", attendu: ["5", "5e", "cinquième", "la cinquième dose", "cinquième dose"] },
+            { question: "b)", attendu: "2/(1-e^(-1))", tolerance: 0.011 },
+            { question: "c)", attendu: ["5", "5e", "5ème", "5eme", "cinquième", "la cinquième dose", "cinquième dose"] },
           ],
           correction:
             "a) $\\ell$ vérifie $\\ell = \\mathrm{e}^{-1}\\ell + 2$, car $\\ell(1 - \\mathrm{e}^{-1}) = 2$.\n$v_{n+1} = \\mathrm{e}^{-1}u_n + 2 - \\ell$ $= \\mathrm{e}^{-1}u_n + 2 - (\\mathrm{e}^{-1}\\ell + 2)$.\nSoit $v_{n+1} = \\mathrm{e}^{-1}(u_n - \\ell) = \\mathrm{e}^{-1}v_n$.\n$(v_n)$ est géométrique de raison $\\mathrm{e}^{-1}$, de premier terme $v_0 = 2 - \\ell$.\nb) $v_n = (2 - \\ell)(\\mathrm{e}^{-1})^n = (2 - \\ell)\\,\\mathrm{e}^{-n}$, donc $u_n = \\ell - (\\ell - 2)\\,\\mathrm{e}^{-n}$.\n$\\mathrm{e}^{-n} \\to 0$ : $\\lim u_n = \\ell \\approx 3{,}16$ mg/L. La concentration se stabilise.\nc) $\\ell - 2 = \\dfrac{2 - 2(1 - \\mathrm{e}^{-1})}{1 - \\mathrm{e}^{-1}}$ $= \\dfrac{2\\mathrm{e}^{-1}}{1 - \\mathrm{e}^{-1}}$, donc $\\dfrac{\\ell}{\\ell - 2} = \\dfrac{1}{\\mathrm{e}^{-1}} = \\mathrm{e}$.\n$u_n \\geqslant 0{,}99\\ell \\iff (\\ell - 2)\\,\\mathrm{e}^{-n} \\leqslant 0{,}01\\ell$ $\\iff \\mathrm{e}^{-n} \\leqslant 0{,}01\\,\\mathrm{e}$.\nSoit $\\mathrm{e}^{-n-1} \\leqslant 0{,}01$, donc $-n - 1 \\leqslant \\ln 0{,}01$, soit $n \\geqslant \\ln 100 - 1 \\approx 3{,}6$.\nDonc $n = 4$ : à partir de la cinquième dose.\n⚠️ $(\\mathrm{e}^{-1})^n = \\mathrm{e}^{-n}$ : on multiplie les exposants.\n⭐ Sur le dessin : les termes $2$ ; $2{,}74$ ; $3{,}01$ ; $3{,}11$… montent vers la droite $y = \\ell \\approx 3{,}16$.",

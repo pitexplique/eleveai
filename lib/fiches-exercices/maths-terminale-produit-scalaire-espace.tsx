@@ -458,7 +458,7 @@ export const exercicesProduitScalaireEspaceTerminale: FicheExercicesData = {
           enonce:
             "Un pan de toit est le rectangle $ABCD$, avec $A(0 ; 0 ; 3)$, $B(8 ; 0 ; 3)$, $C(8 ; 4 ; 6)$ et $D(0 ; 4 ; 6)$ (unité : le mètre ; l'axe des cotes est vertical). On y pose des panneaux solaires.\na) Montrer que $\\vec{n}(0 ; -3 ; 4)$ est normal au plan $(ABD)$, et en déduire une équation de ce plan. Vérifier que $C$ y est.\nb) Montrer que le point $E(4 ; 2 ; 4{,}5)$ est le centre du rectangle.\nc) Calculer l'angle entre $\\vec{n}$ et le vecteur vertical $\\vec{k}(0 ; 0 ; 1)$ : c'est l'inclinaison du toit, au dixième de degré.\nd) À midi, le soleil est dans la direction $\\vec{s}(1 ; -2 ; 2)$. On admet que la puissance reçue par un panneau est proportionnelle au cosinus de l'angle entre $\\vec{n}$ et $\\vec{s}$. Quelle part de sa puissance maximale le panneau reçoit-il ?",
           reponses: [
-            { question: "a) équation", attendu: ["-3y + 4z - 12 = 0", "3y - 4z + 12 = 0", "4z - 3y - 12 = 0", "-3y+4z=12"] },
+            { question: "a) équation", attendu: ["-3y + 4z - 12 = 0", "3y - 4z + 12 = 0", "4z - 3y - 12 = 0", "-3y+4z=12", "4z-3y=12"] },
             { question: "c)", attendu: "36.9", tolerance: 0.051 },
             { question: "d)", attendu: "14/15", tolerance: 0.011 },
           ],
@@ -494,7 +494,7 @@ export const exercicesProduitScalaireEspaceTerminale: FicheExercicesData = {
             "Un réservoir est installé en $R(4 ; 8 ; 5)$, au-dessus du versant d'une colline modélisé par le plan $\\mathscr{P}$ d'équation $x + 2y + 2z - 12 = 0$ (unité : la dizaine de mètres). On veut le relier au versant par la conduite la plus courte possible.\na) Déterminer le projeté orthogonal $H$ de $R$ sur $\\mathscr{P}$, et la longueur $RH$.\nb) Démonstration. Soit $N$ un point quelconque de $\\mathscr{P}$. Justifier que $\\overrightarrow{RH} \\cdot \\overrightarrow{HN} = 0$, puis que $RN^2 = RH^2 + HN^2$. Conclure.\nc) Un technicien propose de raccorder le réservoir au point $N(12 ; 0 ; 0)$. Vérifier que $N \\in \\mathscr{P}$, calculer $RN$ et $HN$, puis contrôler l'égalité du b).",
           reponses: [
             { question: "a) H", attendu: "(2 ; 4 ; 1)", ordre: true },
-            { question: "a) RH", attendu: "6" },
+            { question: "a) RH (en dizaines de m)", attendu: ["6", "60 m"] },
             { question: "c) RN", attendu: "√(153)", tolerance: 0.011 },
             { question: "c) HN", attendu: "√(117)", tolerance: 0.011 },
           ],

@@ -164,9 +164,9 @@ export const exercicesGeometrieEspaceTerminale: FicheExercicesData = {
           enonce:
             "$ABCDEFGH$ est un cube : $ABCD$ est la face du bas, et $E$, $F$, $G$, $H$ sont au-dessus de $A$, $B$, $C$, $D$. Simplifier :\na) $\\overrightarrow{AB} + \\overrightarrow{CG}$\nb) $\\overrightarrow{AD} + \\overrightarrow{FE}$\nc) $\\overrightarrow{AB} + \\overrightarrow{AD} + \\overrightarrow{AE}$",
           reponses: [
-            { question: "a)", attendu: ["AF", "vecteur AF"] },
-            { question: "b)", attendu: ["BD", "vecteur BD"] },
-            { question: "c)", attendu: ["AG", "vecteur AG"] },
+            { question: "a)", attendu: ["AF", "vecteur AF", "vec AF", "→AF"] },
+            { question: "b)", attendu: ["BD", "vecteur BD", "vec BD", "→BD"] },
+            { question: "c)", attendu: ["AG", "vecteur AG", "vec AG", "→AG"] },
           ],
           correction:
             "a) $\\overrightarrow{CG} = \\overrightarrow{BF}$ : deux arêtes verticales, même sens, même longueur.\nDonc $\\overrightarrow{AB} + \\overrightarrow{CG} = \\overrightarrow{AB} + \\overrightarrow{BF} = \\overrightarrow{AF}$, par la relation de Chasles.\nb) $\\overrightarrow{FE} = \\overrightarrow{BA}$. Donc $\\overrightarrow{AD} + \\overrightarrow{FE} = \\overrightarrow{BA} + \\overrightarrow{AD} = \\overrightarrow{BD}$.\nc) $\\overrightarrow{AD} = \\overrightarrow{BC}$ et $\\overrightarrow{AE} = \\overrightarrow{CG}$.\nDonc la somme vaut $\\overrightarrow{AB} + \\overrightarrow{BC} + \\overrightarrow{CG} = \\overrightarrow{AG}$.\n⚠️ Chasles demande que chaque flèche PARTE de l'arrivée de la précédente : on remplace d'abord un vecteur par un vecteur égal bien placé.\n⭐ Sur le dessin : les flèches orange $\\overrightarrow{AB}$, $\\overrightarrow{BC}$, $\\overrightarrow{CG}$ mises bout à bout mènent de $A$ à $G$, au bout de la grande diagonale.",
@@ -243,6 +243,7 @@ export const exercicesGeometrieEspaceTerminale: FicheExercicesData = {
             { question: "b) axe des abscisses", attendu: "(2 ; 0 ; 0)", ordre: true },
             { question: "b) axe des ordonnées", attendu: "(0 ; 4 ; 0)", ordre: true },
             { question: "b) axe des cotes", attendu: "(0 ; 0 ; 2)", ordre: true },
+            { question: "c)", attendu: ["(2 ; 1 ; 2)", "(4 ; 2 ; 4)", "(-2 ; -1 ; -2)"], ordre: true },
           ],
           correction:
             "a) On remplace les coordonnées dans l'équation.\n$A$ : $2 + 2 + 0 - 4 = 0$, donc $A \\in \\mathscr{P}$.\n$B$ : $0 + 2 + 2 - 4 = 0$, donc $B \\in \\mathscr{P}$.\n$C$ : $2 + 1 + 2 - 4 = 1 \\neq 0$, donc $C \\notin \\mathscr{P}$.\nb) Sur l'axe des abscisses, $y = z = 0$ : $2x - 4 = 0$, donc $x = 2$. C'est le point $I(2 ; 0 ; 0)$.\nDe même : $J(0 ; 4 ; 0)$ sur l'axe des ordonnées, et $K(0 ; 0 ; 2)$ sur l'axe des cotes.\nc) On lit les coefficients de $x$, $y$ et $z$ : $\\vec{n}(2 ; 1 ; 2)$.\n⚠️ Le nombre $-4$ ne fait pas partie du vecteur normal : il fixe seulement la position du plan.\n⭐ Sur le dessin : le triangle $IJK$ est le morceau du plan coupé par les axes ; $A$ et $B$ sont les milieux de deux de ses côtés.",
@@ -259,7 +260,7 @@ export const exercicesGeometrieEspaceTerminale: FicheExercicesData = {
             { question: "a)", attendu: ["parallèles", "parallèle", "parallèles et distinctes", "strictement parallèles"] },
             { question: "b)", attendu: ["non coplanaires", "non coplanaire"] },
             { question: "c)", attendu: ["sécantes", "sécante"] },
-            { question: "d)", attendu: ["parallèle", "parallèles", "parallèle au plan", "strictement parallèle"] },
+            { question: "d)", attendu: ["parallèle", "parallèles", "parallèle au plan", "strictement parallèle", "strictement parallèle au plan"] },
           ],
           figure: cavaliere(
             { A: [0, 0, 0, "so"], B: [1, 0, 0, "se"], C: [1, 1, 0, "e"], D: [0, 1, 0, "no"], E: [0, 0, 1, "o"], F: [1, 0, 1, "se"], G: [1, 1, 1, "ne"], H: [0, 1, 1, "no"] },
@@ -385,9 +386,9 @@ export const exercicesGeometrieEspaceTerminale: FicheExercicesData = {
           enonce:
             "Un menuisier scie un cube de bois $ABCDEFGH$ d'arête $1$ dm selon le plan $\\mathscr{P}$ d'équation $x + y + z - \\dfrac{3}{2} = 0$, dans le repère $(A ; \\overrightarrow{AB}, \\overrightarrow{AD}, \\overrightarrow{AE})$.\na) Soit $I$ le milieu de $[BC]$. Vérifier que $I \\in \\mathscr{P}$.\nb) Même question pour les milieux $J$ de $[CD]$, $K$ de $[DH]$, $L$ de $[HE]$, $M$ de $[EF]$ et $N$ de $[FB]$.\nc) Calculer $IJ$ et $JK$. On admet que les six côtés sont égaux, ainsi que les six angles. Quelle est la forme de la coupe ?",
           reponses: [
-            { question: "c) IJ", attendu: "√(2)/2" },
-            { question: "c) JK", attendu: "√(2)/2" },
-            { question: "c) forme", attendu: ["hexagone régulier", "un hexagone régulier"] },
+            { question: "c) IJ", attendu: "√(2)/2", tolerance: 0.0051 },
+            { question: "c) JK", attendu: "√(2)/2", tolerance: 0.0051 },
+            { question: "c) forme", attendu: ["hexagone régulier", "un hexagone régulier", "hexagone"] },
           ],
           correction:
             "a) $B(1 ; 0 ; 0)$ et $C(1 ; 1 ; 0)$, donc $I\\left(1 ; \\dfrac{1}{2} ; 0\\right)$. Et $1 + \\dfrac{1}{2} + 0 - \\dfrac{3}{2} = 0$ : $I \\in \\mathscr{P}$.\nb) $J\\left(\\dfrac{1}{2} ; 1 ; 0\\right)$, $K\\left(0 ; 1 ; \\dfrac{1}{2}\\right)$, $L\\left(0 ; \\dfrac{1}{2} ; 1\\right)$, $M\\left(\\dfrac{1}{2} ; 0 ; 1\\right)$ et $N\\left(1 ; 0 ; \\dfrac{1}{2}\\right)$.\nPour chacun, la somme des coordonnées vaut $1 + \\dfrac{1}{2} = \\dfrac{3}{2}$ : les six milieux sont dans $\\mathscr{P}$.\nc) $\\overrightarrow{IJ}\\left(-\\dfrac{1}{2} ; \\dfrac{1}{2} ; 0\\right)$, donc $IJ = \\sqrt{\\dfrac{1}{4} + \\dfrac{1}{4}} = \\dfrac{\\sqrt{2}}{2}$.\n$\\overrightarrow{JK}\\left(-\\dfrac{1}{2} ; 0 ; \\dfrac{1}{2}\\right)$, donc $JK = \\dfrac{\\sqrt{2}}{2}$ aussi.\nLa coupe est un hexagone régulier, de côté $\\dfrac{\\sqrt{2}}{2} \\approx 0{,}71$ dm.\n⚠️ On attend un triangle ou un carré : c'est un hexagone. Seul le calcul des points le montre.\n⭐ Sur le dessin : l'hexagone orange touche six des douze arêtes, chacune en son milieu.",
@@ -473,7 +474,7 @@ export const exercicesGeometrieEspaceTerminale: FicheExercicesData = {
             { question: "a) I", attendu: "(1 ; 0,5 ; 1,5)", ordre: true },
             { question: "a) J", attendu: "(-1 ; 0,5 ; 1,5)", ordre: true },
             { question: "a) K", attendu: "(0 ; -1 ; 1,5)", ordre: true },
-            { question: "c) équation", attendu: ["z - 1,5 = 0", "z - 1.5 = 0", "z = 1,5", "z = 1.5", "2z - 3 = 0"] },
+            { question: "c) équation", attendu: ["z - 1,5 = 0", "z - 1.5 = 0", "z = 1,5", "z = 1.5", "2z - 3 = 0", "z - 3/2 = 0"] },
             { question: "d) point", attendu: "(0 ; 0 ; 1,5)", ordre: true },
           ],
           figure: cavaliere(

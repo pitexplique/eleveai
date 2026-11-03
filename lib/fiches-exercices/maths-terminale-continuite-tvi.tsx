@@ -190,8 +190,8 @@ export const exercicesContinuiteTviTerminale: FicheExercicesData = {
           enonce:
             "On admet que l'équation $x^3 - 3x + 1 = 0$ a une unique solution $\\alpha$ dans $[0 ; 1]$. On note $f(x) = x^3 - 3x + 1$ ; le tableau donne quelques valeurs de $f$, arrondies au millième.\na) Encadrer $\\alpha$ entre deux nombres qui diffèrent de $0{,}1$.\nb) Puis entre deux nombres qui diffèrent de $0{,}01$.",
           reponses: [
-            { question: "a)", attendu: ["0.3 < α < 0.4", "0.3 ; 0.4"], ordre: true },
-            { question: "b)", attendu: ["0.34 < α < 0.35", "0.34 ; 0.35"], ordre: true },
+            { question: "a)", attendu: ["0.3 < α < 0.4", "0.3 < x < 0.4", "0.3 ; 0.4"], ordre: true },
+            { question: "b)", attendu: ["0.34 < α < 0.35", "0.34 < x < 0.35", "0.34 ; 0.35"], ordre: true },
           ],
           figure: tableau(["x", "0,3", "0,34", "0,35", "0,4"], ["f(x)", "0,127", "0,019", "−0,007", "−0,136"]),
           correction:
@@ -201,7 +201,7 @@ export const exercicesContinuiteTviTerminale: FicheExercicesData = {
         {
           enonce:
             "On cherche une valeur approchée de $\\sqrt{2}$, la solution positive de $x^2 - 2 = 0$, par dichotomie sur $[1 ; 2]$. On note $f(x) = x^2 - 2$. Faire trois étapes, et donner l'encadrement obtenu.",
-          reponses: [{ attendu: ["1.375 < √(2) < 1.5", "1.375 ; 1.5"], ordre: true }],
+          reponses: [{ attendu: ["1.375 < √(2) < 1.5", "1.375 < x < 1.5", "1.375 ; 1.5"], ordre: true }],
           correction:
             "Au départ : $f(1) = -1 < 0$ et $f(2) = 2 > 0$.\nÉtape 1 : le milieu est $m = 1{,}5$, et $f(1{,}5) = 0{,}25 > 0$. Le changement de signe est entre $1$ et $1{,}5$ : on garde $[1 ; 1{,}5]$.\nÉtape 2 : $m = 1{,}25$, et $f(1{,}25) = -0{,}4375 < 0$. On garde $[1{,}25 ; 1{,}5]$.\nÉtape 3 : $m = 1{,}375$, et $f(1{,}375) = -0{,}109375 < 0$. On garde $[1{,}375 ; 1{,}5]$.\nDonc $1{,}375 < \\sqrt{2} < 1{,}5$ : un encadrement d'amplitude $0{,}125$, soit $\\dfrac{1}{2^3}$.\n⚠️ On garde la moitié où $f$ CHANGE de signe, pas la moitié où $f$ est positive.\n⭐ Dans la trace : à chaque ligne, l'intervalle est deux fois plus court. $\\sqrt{2} \\approx 1{,}414$ y reste toujours.",
           schema: ecranSeulement(
@@ -250,7 +250,7 @@ export const exercicesContinuiteTviTerminale: FicheExercicesData = {
           reponses: [
             { question: "a) limite en -∞", attendu: "-∞" },
             { question: "a) limite en +∞", attendu: ["+∞", "∞"] },
-            { question: "c)", attendu: ["-0.57 < α < -0.56", "-0.57 ; -0.56"], ordre: true },
+            { question: "c)", attendu: ["-0.57 < α < -0.56", "-0.57 < x < -0.56", "-0.57 ; -0.56"], ordre: true },
           ],
           correction:
             "a) $f'(x) = \\mathrm{e}^{x} + 1 > 0$ : $f$ est strictement croissante sur $\\mathbb{R}$.\nEn $-\\infty$ : $\\mathrm{e}^{x} \\to 0$ et $x \\to -\\infty$, donc $\\lim f = -\\infty$.\nEn $+\\infty$ : les deux termes tendent vers $+\\infty$, donc $\\lim f = +\\infty$.\nb) $\\mathrm{e}^{x} = -x$ équivaut à $f(x) = 0$.\n$f$ est dérivable donc continue sur $\\mathbb{R}$, strictement croissante, et $0$ est compris entre $-\\infty$ et $+\\infty$.\nD'après le corollaire du TVI, l'équation $f(x) = 0$ admet une unique solution $\\alpha$ dans $\\mathbb{R}$.\nc) À la calculatrice : $f(-0{,}57) \\approx -0{,}0045 < 0$ et $f(-0{,}56) \\approx 0{,}0112 > 0$.\nDonc $-0{,}57 < \\alpha < -0{,}56$.\n⚠️ Sur $\\mathbb{R}$, il n'y a pas de bornes $a$ et $b$ où calculer $f$ : ce sont les LIMITES qui encadrent $0$.\n⚠️ On ne sait pas résoudre $\\mathrm{e}^{x} = -x$ par le calcul : le théorème donne l'existence, la calculatrice donne un encadrement.\n⭐ Dans le tableau : une seule flèche, de $-\\infty$ à $+\\infty$. Elle passe forcément une fois, et une seule, par $0$.",
@@ -279,7 +279,7 @@ export const exercicesContinuiteTviTerminale: FicheExercicesData = {
           enonce:
             "On reprend $f(x) = x^3 + x - 1$, qui s'annule une seule fois sur $[0 ; 1]$, en $\\alpha$ (exercice 5). On utilise la fonction Python ci-dessous.\na) Que teste la ligne du if ? Pourquoi garde-t-on alors l'intervalle $[a ; m]$ ?\nb) Faire tourner dicho(0, 1, 0.1) à la main. Que renvoie-t-elle ?\nc) Combien de passages dans la boucle faut-il pour obtenir un intervalle de longueur inférieure à $0{,}001$ ?",
           reponses: [
-            { question: "b)", attendu: ["(0.625 ; 0.6875)", "0.625 < α < 0.6875"], ordre: true },
+            { question: "b)", attendu: ["(0.625 ; 0.6875)", "0.625 < α < 0.6875", "0.625 < x < 0.6875", "0.625 ; 0.6875"], ordre: true },
             { question: "c)", attendu: "10" },
           ],
           figure: programme([
@@ -315,8 +315,8 @@ export const exercicesContinuiteTviTerminale: FicheExercicesData = {
           enonce:
             "Après une injection, la concentration d'un médicament dans le sang est modélisée par $C(t) = 20t\\mathrm{e}^{-t}$, en mg/L, où $t$ est le temps en heures, $0 \\leqslant t \\leqslant 5$. Le médicament est efficace quand sa concentration dépasse $5$ mg/L.\na) Montrer que $C'(t) = 20(1 - t)\\mathrm{e}^{-t}$, puis dresser le tableau de variations de $C$.\nb) Montrer que l'équation $C(t) = 5$ a exactement deux solutions $t_1 < t_2$ dans $[0 ; 5]$.\nc) Encadrer $t_1$ et $t_2$ au centième. Pendant combien de temps, environ, le médicament est-il efficace ?",
           reponses: [
-            { question: "c) t1", attendu: ["0.35 < t1 < 0.36", "0.35 ; 0.36"], ordre: true },
-            { question: "c) t2", attendu: ["2.15 < t2 < 2.16", "2.15 ; 2.16"], ordre: true },
+            { question: "c) t1", attendu: ["0.35 < t1 < 0.36", "0.35 < t₁ < 0.36", "0.35 < t < 0.36", "0.35 < x < 0.36", "0.35 ; 0.36"], ordre: true },
+            { question: "c) t2", attendu: ["2.15 < t2 < 2.16", "2.15 < t₂ < 2.16", "2.15 < t < 2.16", "2.15 < x < 2.16", "2.15 ; 2.16"], ordre: true },
             { question: "c) durée (h)", attendu: ["1.8", "1 h 48 min", "1 h 48"], tolerance: 0.011 },
           ],
           correction:
@@ -350,7 +350,7 @@ export const exercicesContinuiteTviTerminale: FicheExercicesData = {
         {
           enonce:
             "Dans un modèle, une population de bactéries compte $P(t) = 2\\mathrm{e}^{0{,}3t}$ milliers d'individus au bout de $t$ heures. Le milieu de culture, enrichi en continu, peut en nourrir $R(t) = 10 + 2t$ milliers. On pose $h(t) = P(t) - R(t)$ pour $t \\in [0 ; 15]$.\na) Montrer que $h(t) < 0$ pour tout $t \\in [0 ; 5]$.\nb) Montrer que $h$ est strictement croissante sur $[5 ; 15]$.\nc) En déduire qu'il existe un unique instant $T$ de $[0 ; 15]$ où la population rattrape les ressources, et l'encadrer au dixième.",
-          reponses: [{ question: "c)", attendu: ["8.7 < T < 8.8", "8.7 ; 8.8"], ordre: true }],
+          reponses: [{ question: "c)", attendu: ["8.7 < T < 8.8", "8.7 < t < 8.8", "8.7 < x < 8.8", "8.7 ; 8.8"], ordre: true }],
           correction:
             "a) Pour $t \\in [0 ; 5]$, l'exponentielle est croissante : $\\mathrm{e}^{0{,}3t} \\leqslant \\mathrm{e}^{1{,}5}$.\nDonc $P(t) \\leqslant 2\\mathrm{e}^{1{,}5} \\approx 8{,}96$, alors que $R(t) \\geqslant 10$. Ainsi $h(t) < 0$.\nb) $h'(t) = 0{,}6\\mathrm{e}^{0{,}3t} - 2$.\nPour $t \\geqslant 5$ : $\\mathrm{e}^{0{,}3t} \\geqslant \\mathrm{e}^{1{,}5} \\approx 4{,}48$, donc $h'(t) \\geqslant 0{,}6 \\times 4{,}48 - 2 \\approx 0{,}69 > 0$.\n$h$ est strictement croissante sur $[5 ; 15]$.\nc) Sur $[5 ; 15]$, $h$ est continue et strictement croissante, avec $h(5) \\approx -11{,}04 < 0$ et $h(15) \\approx 140{,}03 > 0$.\nLe corollaire donne un unique $T$ dans $[5 ; 15]$ tel que $h(T) = 0$. Et d'après a), il n'y en a aucun dans $[0 ; 5]$.\nÀ la calculatrice : $h(8{,}7) \\approx -0{,}20$ et $h(8{,}8) \\approx 0{,}43$, donc $8{,}7 < T < 8{,}8$.\nAu bout d'environ $8$ h $45$ min, la population dépasse ce que le milieu peut nourrir.\n⚠️ On ne peut pas appliquer le corollaire directement sur $[0 ; 15]$ : $h$ commence par décroître, car $h'(0) = -1{,}4$. D'où le découpage en deux morceaux.\n⭐ Dans le tableau : sur $[5 ; 15]$, une seule flèche montante, de $-11{,}04$ à $140{,}03$. Elle croise $0$ une seule fois.",
           schema: ecranSeulement(tabVar(["5", "15"], ["+"], ["−11,04", "140,03"], "h", "t")),
@@ -359,7 +359,7 @@ export const exercicesContinuiteTviTerminale: FicheExercicesData = {
         {
           enonce:
             "a) Soit $f$ une fonction continue sur $[0 ; 1]$, dont toutes les valeurs sont dans $[0 ; 1]$. En étudiant $g(x) = f(x) - x$, montrer qu'il existe un réel $c$ de $[0 ; 1]$ tel que $f(c) = c$.\nb) Application : montrer que l'équation $\\cos x = x$ a une unique solution dans $[0 ; 1]$, et l'encadrer au centième.",
-          reponses: [{ question: "b)", attendu: ["0.73 < c < 0.74", "0.73 ; 0.74"], ordre: true }],
+          reponses: [{ question: "b)", attendu: ["0.73 < c < 0.74", "0.73 < x < 0.74", "0.73 ; 0.74"], ordre: true }],
           correction:
             "a) $g$ est continue sur $[0 ; 1]$, comme différence de deux fonctions continues.\n$g(0) = f(0) \\geqslant 0$, car $f(0)$ est dans $[0 ; 1]$. Et $g(1) = f(1) - 1 \\leqslant 0$, car $f(1) \\leqslant 1$.\nDonc $0$ est compris entre $g(1)$ et $g(0)$. D'après le TVI, il existe $c \\in [0 ; 1]$ tel que $g(c) = 0$, c'est-à-dire $f(c) = c$.\nb) Le cosinus est continu et décroissant sur $[0 ; 1]$ : ses valeurs vont de $\\cos 1 \\approx 0{,}54$ à $1$. Elles sont dans $[0 ; 1]$.\nD'après a), l'équation $\\cos x = x$ a au moins une solution $c$ dans $[0 ; 1]$.\nUnicité : $g(x) = \\cos x - x$ a pour dérivée $-\\sin x - 1 < 0$ sur $[0 ; 1]$. $g$ est strictement décroissante : la solution est unique.\n$\\cos 0{,}73 \\approx 0{,}745 > 0{,}73$ et $\\cos 0{,}74 \\approx 0{,}738 < 0{,}74$ : $0{,}73 < c < 0{,}74$.\n⚠️ En a), $g(0)$ peut être nul : alors $c = 0$ convient. Le TVI accepte que $k$ soit égal à l'une des deux valeurs aux bornes.\n⭐ Sur le dessin : la courbe du cosinus coupe la droite orange $y = x$ en un seul point, rouge, vers $(0{,}74 ; 0{,}74)$.",
           schema: repere([-1, 2, -1, 2], [{ pts: echantillon(Math.cos, -1, 2) }, { q: [0, 1, 0], couleur: ORANGE }], [{ x: 0.74, y: 0.74, label: "" }]),
@@ -422,10 +422,10 @@ export const exercicesContinuiteTviTerminale: FicheExercicesData = {
           enonce:
             "Une cuve a la forme d'une boule de rayon $2$ m. Quand l'eau y monte à la hauteur $h$ (en m, avec $0 \\leqslant h \\leqslant 4$), on admet que le volume d'eau vaut $V(h) = \\dfrac{\\pi h^2(6 - h)}{3}$, en m³.\na) Calculer $V(2)$ et $V(4)$. Interpréter.\nb) Montrer que $V$ est strictement croissante sur $[0 ; 4]$.\nc) On veut graduer une jauge verticale. Montrer que, pour tout volume $v$ compris entre $0$ et $V(4)$, il existe une unique hauteur $h$ telle que $V(h) = v$.\nd) Encadrer au centimètre la hauteur du trait « $10$ m³ », puis celle du trait « $20$ m³ ».\ne) Les traits de la jauge sont-ils régulièrement espacés ?",
           reponses: [
-            { question: "a) V(2)", attendu: "16π/3" },
-            { question: "a) V(4)", attendu: "32π/3" },
-            { question: "d) trait 10 m³", attendu: ["1.44 < h < 1.45", "1.44 ; 1.45"], ordre: true },
-            { question: "d) trait 20 m³", attendu: ["2.25 < h < 2.26", "2.25 ; 2.26"], ordre: true },
+            { question: "a) V(2)", attendu: "16π/3", tolerance: 0.011 },
+            { question: "a) V(4)", attendu: "32π/3", tolerance: 0.011 },
+            { question: "d) trait 10 m³", attendu: ["1.44 < h < 1.45", "1.44 < x < 1.45", "1.44 ; 1.45"], ordre: true },
+            { question: "d) trait 20 m³", attendu: ["2.25 < h < 2.26", "2.25 < x < 2.26", "2.25 ; 2.26"], ordre: true },
             { question: "e)", attendu: ["non", "faux"] },
           ],
           figure: cuve(1.45),
@@ -437,7 +437,7 @@ export const exercicesContinuiteTviTerminale: FicheExercicesData = {
           titre: "Le randonneur et son bivouac",
           enonce:
             "Un randonneur part à $8$ h du refuge, à $500$ m d'altitude, et arrive au sommet, à $2000$ m, à $18$ h. Il bivouaque, et redescend le lendemain par le même sentier, de $8$ h à $18$ h. Le sentier monte sans cesse : un point du sentier est repéré par son altitude.\na) On note $a(t)$ et $d(t)$ ses altitudes $t$ heures après $8$ h, à la montée et à la descente. Démontrer qu'il existe une heure où il se trouve au même endroit les deux jours.\nb) On modélise, pour $0 \\leqslant t \\leqslant 10$ : $a(t) = 500 + 1500\\sin\\left(\\dfrac{\\pi t}{20}\\right)$ et $d(t) = 2000 - 15t^2$. Vérifier les altitudes de départ et d'arrivée.\nc) Dans ce modèle, montrer que cette heure est unique, et la donner à la minute près.",
-          reponses: [{ question: "c)", attendu: ["13 h 12", "13 h 12 min"] }],
+          reponses: [{ question: "c)", attendu: ["13 h 12", "13 h 12 min", "13:12"], exact: true }],
           correction:
             "a) Une altitude varie sans sauter : $a$ et $d$ sont continues sur $[0 ; 10]$. Donc $g = a - d$ l'est aussi.\n$g(0) = 500 - 2000 = -1500 < 0$ et $g(10) = 2000 - 500 = 1500 > 0$.\nD'après le TVI, il existe $t_0$ dans $[0 ; 10]$ tel que $g(t_0) = 0$ : à l'heure $8 + t_0$, il est à la même altitude, donc au même endroit, les deux jours.\nb) $a(0) = 500$ et $a(10) = 500 + 1500\\sin\\left(\\dfrac{\\pi}{2}\\right) = 2000$.\n$d(0) = 2000$ et $d(10) = 2000 - 1500 = 500$.\nc) $g(t) = 1500\\sin\\left(\\dfrac{\\pi t}{20}\\right) + 15t^2 - 1500$.\nPar la dérivée d'une composée : $g'(t) = 75\\pi\\cos\\left(\\dfrac{\\pi t}{20}\\right) + 30t$.\nPour $t \\in [0 ; 10]$, $\\dfrac{\\pi t}{20}$ est dans $\\left[0 ; \\dfrac{\\pi}{2}\\right]$ : le cosinus y est positif, et ne s'annule qu'en $t = 10$, où $30t = 300 > 0$. Donc $g'(t) > 0$.\n$g$ est strictement croissante : $t_0$ est unique.\nÀ la calculatrice : $g(5{,}20) \\approx -0{,}95 < 0$ et $g(5{,}21) \\approx 2{,}2 > 0$, donc $5{,}20 < t_0 < 5{,}21$.\nOr $0{,}20$ h $= 12$ min et $0{,}21$ h $\\approx 12{,}6$ min : il est à $13$ h $12$, vers $1\\,594$ m d'altitude.\n⚠️ La question a) ne demande AUCUN modèle : quels que soient ses pauses et son rythme, la continuité suffit. C'est la force du TVI.\n⚠️ La dérivée de $\\sin\\left(\\dfrac{\\pi t}{20}\\right)$ est $\\dfrac{\\pi}{20}\\cos\\left(\\dfrac{\\pi t}{20}\\right)$ : ne pas oublier le facteur $\\dfrac{\\pi}{20}$.\n⭐ Sur le dessin, en kilomètres : la montée (bleue) et la descente (orange) se croisent une seule fois, au point rouge.",
           schema: repere(
@@ -458,7 +458,7 @@ export const exercicesContinuiteTviTerminale: FicheExercicesData = {
             "Un parachutiste saute d'un avion. Pendant la chute libre, on modélise sa vitesse par $v(t) = 50(1 - \\mathrm{e}^{-0{,}2t})$, en m/s, et la distance parcourue par $d(t) = 50t - 250(1 - \\mathrm{e}^{-0{,}2t})$, en m, où $t \\geqslant 0$ est le temps en secondes.\na) Vérifier que $d'(t) = v(t)$. En déduire que $d$ est strictement croissante sur $[0 ; +\\infty[$.\nb) Montrer que $d(t) \\geqslant 50t - 250$, puis donner la limite de $d$ en $+\\infty$.\nc) Il ouvre sa voile après $1000$ m de chute. Montrer qu'il existe un unique instant $T$ tel que $d(T) = 1000$.\nd) À l'aide du tableau de valeurs arrondies, encadrer $T$ au dixième de seconde.",
           reponses: [
             { question: "b) limite", attendu: ["+∞", "∞"] },
-            { question: "d)", attendu: ["24.9 < T < 25", "24.9 ; 25"], ordre: true },
+            { question: "d)", attendu: ["24.9 < T < 25", "24.9 < t < 25", "24.9 < x < 25", "24.9 ; 25"], ordre: true },
           ],
           figure: tableau(["t", "24", "24,9", "25", "26"], ["d(t)", "952,1", "996,7", "1001,7", "1051,4"]),
           correction:

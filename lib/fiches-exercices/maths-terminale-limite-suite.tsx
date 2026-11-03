@@ -91,8 +91,8 @@ export const exercicesLimiteSuiteTerminale: FicheExercicesData = {
             "On a placé les premiers termes de la suite $u_n = 3 - \\dfrac{2}{n + 1}$.\na) Vers quel nombre semblent-ils se rapprocher ?\nb) À partir de quel rang a-t-on $2{,}9 < u_n < 3{,}1$ ?\nc) Même question pour $2{,}99 < u_n < 3{,}01$.",
           reponses: [
             { question: "a)", attendu: "3" },
-            { question: "b)", attendu: "20" },
-            { question: "c)", attendu: "200" },
+            { question: "b)", attendu: ["20", "n ≥ 20", "n ⩾ 20", "n>=20", "n > 19"] },
+            { question: "c)", attendu: ["200", "n ≥ 200", "n ⩾ 200", "n>=200", "n > 199"] },
           ],
           figure: repere([-1, 9, -1, 4], [], termes(0, [1, 2, 2.33, 2.5, 2.6, 2.67, 2.71, 2.75, 2.78]), 3),
           correction:
@@ -248,7 +248,7 @@ export const exercicesLimiteSuiteTerminale: FicheExercicesData = {
         {
           enonce:
             "Démonstration du cours. Soit $a > 0$.\na) Montrer par récurrence que, pour tout entier $n$, $(1 + a)^n \\geqslant 1 + na$.\nb) En déduire que, si $q > 1$, alors $\\lim q^n = +\\infty$.\nc) D'après cette inégalité, à partir de quel rang est-on sûr que $1{,}5^n > 100$ ?",
-          reponses: [{ question: "c)", attendu: "199" }],
+          reponses: [{ question: "c)", attendu: ["199", "n ≥ 199", "n ⩾ 199", "n>=199", "n > 198"] }],
           correction:
             "a) Initialisation : pour $n = 0$, $(1 + a)^0 = 1$ et $1 + 0 \\times a = 1$. On a bien $1 \\geqslant 1$.\nHérédité : on suppose $(1 + a)^n \\geqslant 1 + na$. On multiplie par $1 + a$, qui est POSITIF : l'inégalité garde son sens.\n$(1 + a)^{n+1} \\geqslant (1 + na)(1 + a) = 1 + a + na + na^2$.\nOr $na^2 \\geqslant 0$, donc $(1 + a)^{n+1} \\geqslant 1 + (n + 1)a$. La propriété est vraie au rang $n + 1$.\nb) Si $q > 1$, on pose $a = q - 1 > 0$. Alors $q^n = (1 + a)^n \\geqslant 1 + na$.\nComme $a > 0$, $\\lim (1 + na) = +\\infty$. Par comparaison, $\\lim q^n = +\\infty$.\nc) Ici $a = 0{,}5$ : $1{,}5^n \\geqslant 1 + 0{,}5n$. On veut $1 + 0{,}5n > 100$, soit $n > 198$ : à partir du rang $199$.\n⭐ L'inégalité est grossière : en réalité, $1{,}5^{12} \\approx 129{,}7$ dépasse déjà $100$. Mais elle suffit pour la limite.\n⚠️ La démonstration demande $a > 0$ : c'est pourquoi on pose $a = q - 1$, positif parce que $q > 1$.\n⭐ Sur le dessin : les points $1{,}5^n$ décollent au-dessus de la droite orange $y = 1 + 0{,}5n$, qui tend déjà vers $+\\infty$.",
           schema: ecranSeulement(repere([-1, 7, -1, 12], [{ q: [0, 0.5, 1], couleur: ORANGE }], termes(0, [1, 1.5, 2.25, 3.38, 5.06, 7.59, 11.39]), undefined, true)),
@@ -350,7 +350,7 @@ export const exercicesLimiteSuiteTerminale: FicheExercicesData = {
             { question: "a) longueur", attendu: "3/3^n" },
             { question: "a) P_n", attendu: "9×(4/3)^n" },
             { question: "b)", attendu: ["+∞", "∞"] },
-            { question: "c)", attendu: ["8/5 A_0", "8/5 A0", "(8/5)A_0", "(8/5)A0", "8A_0/5", "8A0/5", "1.6A_0", "1.6A0"] },
+            { question: "c)", attendu: ["8/5 A_0", "8/5 A0", "(8/5)A_0", "(8/5)A0", "8A_0/5", "8A0/5", "1.6A_0", "1.6A0", "8/5×A_0", "8/5×A0", "8/5*A_0", "8/5*A0", "1,6A_0", "1,6A0", "1,6×A0", "1.6×A0"] },
           ],
           figure: repere([-3, 3, -3, 3], [{ pts: koch(2) }]),
           correction:

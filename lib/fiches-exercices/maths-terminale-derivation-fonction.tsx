@@ -284,7 +284,7 @@ export const exercicesDerivationFonctionTerminale: FicheExercicesData = {
             { question: "a) P(0)", attendu: "1" },
             { question: "a) limite", attendu: "10" },
             { question: "b) sens de variation", attendu: ["strictement croissante", "croissante"] },
-            { question: "c)", attendu: "y = 0.45t+1" },
+            { question: "c)", attendu: ["y = 0.45t+1", "y = 0.45x+1"] },
           ],
           correction:
             "a) $P(0) = \\dfrac{10}{1 + 9} = 1$ : au départ, $1\\,000$ personnes sont au courant.\n$\\mathrm{e}^{-0{,}5t} \\to 0$, donc $\\lim P = 10$ : à long terme, $10\\,000$ personnes la connaîtront.\nb) $P = \\dfrac{10}{u}$, avec $u = 1 + 9\\mathrm{e}^{-0{,}5t}$ et $u' = 9 \\times (-0{,}5)\\mathrm{e}^{-0{,}5t} = -4{,}5\\mathrm{e}^{-0{,}5t}$.\n$P' = -\\dfrac{10u'}{u^2} = \\dfrac{45\\mathrm{e}^{-0{,}5t}}{u^2}$ : c'est bien la formule annoncée.\nUne exponentielle et un carré sont positifs : $P'(t) > 0$, et $P$ est strictement croissante.\nc) $P'(0) = \\dfrac{45}{10^2} = 0{,}45$ et $P(0) = 1$ : la tangente a pour équation $y = 0{,}45t + 1$.\nAu départ, l'information gagne environ $450$ personnes par jour.\n⚠️ $\\left(\\dfrac{1}{u}\\right)' = -\\dfrac{u'}{u^2}$ : ici $u'$ est négatif, les deux signes moins s'annulent.\n⭐ Sur le dessin : la courbe en S monte vers la droite $y = 10$ ; la tangente orange montre la vitesse de départ, bien plus lente qu'au milieu.",
@@ -329,10 +329,10 @@ export const exercicesDerivationFonctionTerminale: FicheExercicesData = {
             { question: "a) u'(t)", attendu: ["6e^(-t/2)", "u'(t) = 6e^(-t/2)"] },
             { question: "a) sens de variation", attendu: ["strictement croissante", "croissante"] },
             { question: "a) limite", attendu: "12" },
-            { question: "b)", attendu: "y = 6t" },
+            { question: "b)", attendu: ["y = 6t", "y = 6x"] },
             { question: "c)", attendu: "2" },
             { question: "d) u(2)", attendu: ["12(1-e^(-1))", "7.59"], tolerance: 0.011 },
-            { question: "d) pourcentage", attendu: "63 %", tolerance: 0.6 },
+            { question: "d) pourcentage", attendu: "63", tolerance: 0.6 },
           ],
           correction:
             "a) La dérivée de $\\mathrm{e}^{-\\frac{t}{2}}$ est $-\\dfrac{1}{2}\\mathrm{e}^{-\\frac{t}{2}}$. Donc $u'(t) = 12 \\times \\dfrac{1}{2}\\mathrm{e}^{-\\frac{t}{2}} = 6\\mathrm{e}^{-\\frac{t}{2}}$.\n$u'(t) > 0$ : la tension croît. Comme $\\mathrm{e}^{-\\frac{t}{2}} \\to 0$, $\\lim u = 12$ : elle tend vers $12$ V.\nb) $u(0) = 0$ et $u'(0) = 6$ : la tangente est $y = 6t$.\nc) $6t = 12$ donne $t = 2$ ms.\nd) $u(2) = 12(1 - \\mathrm{e}^{-1}) \\approx 7{,}59$ V. Or $1 - \\mathrm{e}^{-1} \\approx 0{,}632$ : la tension atteint environ $63$ % de $12$ V.\n⭐ Ce nombre $2$ s'appelle la constante de temps du circuit : la tangente au départ la montre sur le dessin, et au bout de ce temps, la tension a fait $63$ % du chemin.\n⚠️ Deux signes moins se rencontrent dans $u'$ : celui de $-\\dfrac{t}{2}$ et celui devant l'exponentielle. Ils donnent un $u'$ positif.\n⭐ Sur le dessin : la tangente orange part de l'origine et coupe la droite $y = 12$ au point rouge $(2 ; 12)$.",
@@ -421,8 +421,8 @@ export const exercicesDerivationFonctionTerminale: FicheExercicesData = {
             { question: "b) date du pic (h)", attendu: "2" },
             { question: "b) valeur du pic", attendu: ["20e^(-2)", "2.71"], tolerance: 0.011 },
             { question: "c) C'(4)", attendu: ["-40e^(-4)", "-0.73"], tolerance: 0.011 },
-            { question: "d) t1", attendu: ["1.09 < t1 < 1.10", "1.09 ; 1.10"], ordre: true },
-            { question: "d) t2", attendu: ["3.31 < t2 < 3.32", "3.31 ; 3.32"], ordre: true },
+            { question: "d) t1", attendu: ["1.09 < t1 < 1.10", "1.09 < t₁ < 1.10", "1.09 < t < 1.10", "1.09 < x < 1.10", "1.09 ; 1.10"], ordre: true },
+            { question: "d) t2", attendu: ["3.31 < t2 < 3.32", "3.31 < t₂ < 3.32", "3.31 < t < 3.32", "3.31 < x < 3.32", "3.31 ; 3.32"], ordre: true },
             { question: "d) durée (h)", attendu: ["2.21", "2.23", "2 h 13 min", "2 h 13"], tolerance: 0.011 },
           ],
           correction:
@@ -440,8 +440,8 @@ export const exercicesDerivationFonctionTerminale: FicheExercicesData = {
           enonce:
             "Une entreprise fabrique $x$ centaines d'objets par jour, avec $x \\in ]0 ; 6]$. Le coût de fabrication, en milliers d'euros, est $C(x) = \\mathrm{e}^{0{,}5x} + 2$. Le coût moyen d'une centaine d'objets est $M(x) = \\dfrac{C(x)}{x}$.\na) Montrer que $M'(x) = \\dfrac{g(x)}{x^2}$, avec $g(x) = (0{,}5x - 1)\\mathrm{e}^{0{,}5x} - 2$.\nb) Étudier les variations de $g$ sur $[0 ; 6]$. Montrer que l'équation $g(x) = 0$ a une unique solution $\\alpha$, et l'encadrer au centième.\nc) En déduire les variations de $M$. Quelle production rend le coût moyen le plus bas ?\nd) Montrer qu'en $\\alpha$, le coût marginal $C'(\\alpha)$ est égal au coût moyen $M(\\alpha)$.",
           reponses: [
-            { question: "b) encadrement de α", attendu: ["2.92 < α < 2.93", "2.92 ; 2.93"], ordre: true },
-            { question: "c) production (objets)", attendu: "293" },
+            { question: "b) encadrement de α", attendu: ["2.92 < α < 2.93", "2.92 < x < 2.93", "2.92 ; 2.93"], ordre: true },
+            { question: "c) production (objets)", attendu: ["293", "2.93"] },
           ],
           correction:
             "a) Quotient : $M'(x) = \\dfrac{C'(x) \\times x - C(x)}{x^2}$, avec $C'(x) = 0{,}5\\mathrm{e}^{0{,}5x}$.\nEn haut : $0{,}5x\\mathrm{e}^{0{,}5x} - \\mathrm{e}^{0{,}5x} - 2$, c'est-à-dire $(0{,}5x - 1)\\mathrm{e}^{0{,}5x} - 2 = g(x)$.\nb) $g'(x) = 0{,}5\\mathrm{e}^{0{,}5x}$ $+ (0{,}5x - 1) \\times 0{,}5\\mathrm{e}^{0{,}5x}$, soit $g'(x) = 0{,}25x\\mathrm{e}^{0{,}5x}$.\n$g'(x) \\geqslant 0$ sur $[0 ; 6]$, nul seulement en $0$ : $g$ est strictement croissante.\n$g(0) = -1 - 2 = -3 < 0$ et $g(6) = 2\\mathrm{e}^{3} - 2 \\approx 38{,}17 > 0$. $g$ est continue.\nD'après le corollaire du théorème des valeurs intermédiaires, $g(x) = 0$ a une unique solution $\\alpha$ dans $[0 ; 6]$.\n$g(2{,}92) \\approx -0{,}019 < 0$ et $g(2{,}93) \\approx 0{,}012 > 0$ : $2{,}92 < \\alpha < 2{,}93$.\nc) $x^2 > 0$ : $M'(x)$ a le signe de $g(x)$, négatif avant $\\alpha$, positif après.\n$M$ décroît sur $]0 ; \\alpha]$, puis croît sur $[\\alpha ; 6]$. Le coût moyen est le plus bas pour environ $293$ objets par jour.\nIl vaut alors $M(\\alpha) \\approx 2{,}16$ milliers d'euros par centaine, soit environ $21{,}60$ € par objet.\nd) $g(\\alpha) = 0$ s'écrit $0{,}5\\alpha\\mathrm{e}^{0{,}5\\alpha} = \\mathrm{e}^{0{,}5\\alpha} + 2$, c'est-à-dire $\\alpha C'(\\alpha) = C(\\alpha)$.\nOn divise par $\\alpha > 0$ : $C'(\\alpha) = \\dfrac{C(\\alpha)}{\\alpha} = M(\\alpha)$.\n⚠️ $\\alpha$ ne se calcule pas exactement : on garde la lettre $\\alpha$ dans les calculs, et on n'arrondit qu'à la fin.\n⚠️ Le signe de $M'$ est celui de $g$ parce que $x^2 > 0$ : on n'étudie jamais le signe d'un quotient « en bloc ».\n⭐ Sur le dessin : le coût moyen descend, puis remonte ; son point le plus bas est le point rouge, vers $(2{,}93 ; 2{,}16)$.",
@@ -462,7 +462,7 @@ export const exercicesDerivationFonctionTerminale: FicheExercicesData = {
             { question: "a) cos θ", attendu: "h/√(h^2+1)" },
             { question: "d) hauteur", attendu: "√(2)/2" },
             { question: "d) éclairement maximal", attendu: "20√(3)/9" },
-            { question: "e)", attendu: "8 %", tolerance: 0.6 },
+            { question: "e)", attendu: "8", tolerance: 0.6 },
           ],
           figure: lampe(1.2),
           correction:
@@ -479,7 +479,7 @@ export const exercicesDerivationFonctionTerminale: FicheExercicesData = {
           reponses: [
             { question: "a) date du maximum", attendu: "1/k" },
             { question: "a) valeur du maximum", attendu: ["10/(ke)", "10e^(-1)/k"] },
-            { question: "c) tangente", attendu: "y = 10t" },
+            { question: "c) tangente", attendu: ["y = 10t", "y = 10x"] },
             { question: "d) k = 0,5 (date ; hauteur)", attendu: "2 ; 20/e", ordre: true, tolerance: 0.011 },
             { question: "d) k = 1 (date ; hauteur)", attendu: "1 ; 10/e", ordre: true, tolerance: 0.011 },
             { question: "d) k = 2 (date ; hauteur)", attendu: "0.5 ; 5/e", ordre: true, tolerance: 0.011 },
