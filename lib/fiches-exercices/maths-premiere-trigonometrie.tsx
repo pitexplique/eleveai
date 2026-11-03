@@ -118,6 +118,13 @@ export const exercicesTrigonometriePremiere: FicheExercicesData = {
       exercices: [
         {
           enonce: "a) Convertir en radians : $30°$, $135°$, $270°$.\nb) Convertir en degrés : $\\dfrac{5\\pi}{6}$ et $\\dfrac{7\\pi}{4}$.",
+          reponses: [
+            { question: "a) 30°", attendu: "π/6" },
+            { question: "a) 135°", attendu: "3π/4" },
+            { question: "a) 270°", attendu: "3π/2" },
+            { question: "b) 5π/6", attendu: "150°" },
+            { question: "b) 7π/4", attendu: "315°" },
+          ],
           correction:
             "a) On multiplie par $\\dfrac{\\pi}{180}$, puis on simplifie la fraction.\n$30° = \\dfrac{30\\pi}{180} = \\dfrac{\\pi}{6}$.\n$135° = \\dfrac{135\\pi}{180} = \\dfrac{3\\pi}{4}$ (on divise $135$ et $180$ par $45$).\n$270° = \\dfrac{270\\pi}{180} = \\dfrac{3\\pi}{2}$.\nb) On remplace $\\pi$ par $180°$.\n$\\dfrac{5\\pi}{6} = \\dfrac{5 \\times 180°}{6} = 150°$.\n$\\dfrac{7\\pi}{4} = \\dfrac{7 \\times 180°}{4} = 315°$.\n⭐ Un repère utile : $\\dfrac{\\pi}{6} = 30°$, et tous les autres en sont des multiples ou des moitiés.",
           micros: ["trig_radian"],
@@ -125,6 +132,10 @@ export const exercicesTrigonometriePremiere: FicheExercicesData = {
         {
           enonce:
             "a) Sur un cercle de rayon $1$, quelle est la longueur de l'arc intercepté par un angle de $\\dfrac{\\pi}{3}$ radian ?\nb) Une piste d'athlétisme a un virage en demi-cercle de rayon $36{,}5$ m. Quelle distance parcourt un coureur dans ce virage ? (arrondir au dixième)",
+          reponses: [
+            { question: "a)", attendu: "π/3", tolerance: 0.01 },
+            { question: "b)", attendu: ["114,7", "36,5π"], tolerance: 0.1 },
+          ],
           correction:
             "Sur un cercle de rayon $r$, un angle de $\\theta$ radians intercepte un arc de longueur $r \\times \\theta$. C'est la définition même du radian.\na) $r = 1$ : l'arc mesure exactement $\\dfrac{\\pi}{3} \\approx 1{,}05$.\nb) Un demi-cercle, c'est un angle de $\\pi$ radians.\nLongueur $= 36{,}5 \\times \\pi \\approx 114{,}7$ m.\n⚠️ La formule $r \\times \\theta$ ne marche qu'avec $\\theta$ en RADIANS. Avec $180$ (degrés), on trouverait $6570$ m.",
           micros: ["trig_arc"],
@@ -147,6 +158,11 @@ export const exercicesTrigonometriePremiere: FicheExercicesData = {
         },
         {
           enonce: "Le point $M$ est le point image de $\\dfrac{\\pi}{3}$. Lire ses coordonnées sur la figure, puis donner $\\cos\\dfrac{\\pi}{3}$ et $\\sin\\dfrac{\\pi}{3}$.",
+          reponses: [
+            { question: "M", attendu: "(1/2 ; √(3)/2)", ordre: true },
+            { question: "cos π/3", attendu: "1/2" },
+            { question: "sin π/3", attendu: "√(3)/2" },
+          ],
           figure: cercle([{ angle: { n: 1, d: 3 }, label: "M" }], { reperes: "quarts", valeursAxes: true }),
           correction:
             "On projette $M$ sur les deux axes.\nSur l'axe des abscisses, le pied de la projection tombe sur $\\dfrac{1}{2}$.\nSur l'axe des ordonnées, il tombe sur $\\dfrac{\\sqrt{3}}{2}$.\nDonc $M\\left(\\dfrac{1}{2} ; \\dfrac{\\sqrt{3}}{2}\\right)$, et par définition $\\cos\\dfrac{\\pi}{3} = \\dfrac{1}{2}$, $\\sin\\dfrac{\\pi}{3} = \\dfrac{\\sqrt{3}}{2}$.\n⭐ Le cosinus se lit à l'horizontale, le sinus à la verticale : « cos couché, sin debout ».",
@@ -156,6 +172,10 @@ export const exercicesTrigonometriePremiere: FicheExercicesData = {
         {
           enonce:
             "$M$ est le point image d'un réel $x$ de $\\left]0 ; \\dfrac{\\pi}{2}\\right[$, et $H$ son projeté sur l'axe des abscisses.\na) Dans le triangle $OHM$ rectangle en $H$, exprimer $\\cos x$ et $\\sin x$ avec les longueurs du triangle.\nb) En déduire $OH$ et $HM$ pour $x = \\dfrac{\\pi}{6}$.",
+          reponses: [
+            { question: "b) OH", attendu: "√(3)/2", tolerance: 0.01 },
+            { question: "b) HM", attendu: "1/2" },
+          ],
           correction:
             "a) Au collège : $\\cos x = \\dfrac{\\text{côté adjacent}}{\\text{hypoténuse}} = \\dfrac{OH}{OM}$ et $\\sin x = \\dfrac{HM}{OM}$.\nOr $OM = 1$, puisque $M$ est sur le cercle de rayon $1$.\nDonc $\\cos x = OH$ et $\\sin x = HM$ : ce sont exactement l'abscisse et l'ordonnée de $M$.\nb) $OH = \\cos\\dfrac{\\pi}{6} = \\dfrac{\\sqrt{3}}{2} \\approx 0{,}87$ et $HM = \\sin\\dfrac{\\pi}{6} = \\dfrac{1}{2}$.\n⭐ Le cosinus du cercle PROLONGE celui du collège : pour un angle aigu, c'est le même nombre. Le cercle permet en plus de parler d'angles obtus ou négatifs.",
           schema: cercle([{ angle: { n: 1, d: 6 }, projections: true, label: "M" }], { reperes: "quarts" }),
@@ -163,6 +183,13 @@ export const exercicesTrigonometriePremiere: FicheExercicesData = {
         },
         {
           enonce: "Donner sans calculatrice : $\\cos\\dfrac{\\pi}{4}$, $\\sin\\dfrac{\\pi}{6}$, $\\cos\\dfrac{\\pi}{2}$, $\\sin\\dfrac{\\pi}{3}$ et $\\cos\\pi$.",
+          reponses: [
+            { question: "cos π/4", attendu: "√(2)/2" },
+            { question: "sin π/6", attendu: "1/2" },
+            { question: "cos π/2", attendu: "0" },
+            { question: "sin π/3", attendu: "√(3)/2" },
+            { question: "cos π", attendu: "-1" },
+          ],
           correction:
             "On place chaque réel sur le cercle, puis on lit l'abscisse (cos) ou l'ordonnée (sin).\n$\\cos\\dfrac{\\pi}{4} = \\dfrac{\\sqrt{2}}{2}$ : le point est sur la diagonale, abscisse et ordonnée sont égales.\n$\\sin\\dfrac{\\pi}{6} = \\dfrac{1}{2}$ : le point est encore bas, son ordonnée est petite.\n$\\cos\\dfrac{\\pi}{2} = 0$ : le point est en haut, sur l'axe des ordonnées.\n$\\sin\\dfrac{\\pi}{3} = \\dfrac{\\sqrt{3}}{2}$ : le point est déjà haut, son ordonnée est grande.\n$\\cos\\pi = -1$ : le point est tout à gauche, en $(-1 ; 0)$.\n⚠️ Pour ne pas échanger $\\dfrac{1}{2}$ et $\\dfrac{\\sqrt{3}}{2}$, regarde la figure : $\\dfrac{\\pi}{6}$ est près de l'axe horizontal, donc son sinus est le petit.",
           schema: cercle(
@@ -176,6 +203,10 @@ export const exercicesTrigonometriePremiere: FicheExercicesData = {
         },
         {
           enonce: "On donne $\\cos\\dfrac{\\pi}{5} \\approx 0{,}809$ et $\\sin\\dfrac{\\pi}{5} \\approx 0{,}588$. Donner $\\cos\\left(-\\dfrac{\\pi}{5}\\right)$ et $\\sin\\left(-\\dfrac{\\pi}{5}\\right)$.",
+          reponses: [
+            { question: "cos", attendu: "0,809", tolerance: 0.001 },
+            { question: "sin", attendu: "-0,588", tolerance: 0.001 },
+          ],
           correction:
             "Les points images de $x$ et de $-x$ sont symétriques par rapport à l'axe des abscisses.\nIls ont la même abscisse : $\\cos(-x) = \\cos x$. Le cosinus est PAIR.\nIls ont des ordonnées opposées : $\\sin(-x) = -\\sin x$. Le sinus est IMPAIR.\nDonc $\\cos\\left(-\\dfrac{\\pi}{5}\\right) \\approx 0{,}809$ et $\\sin\\left(-\\dfrac{\\pi}{5}\\right) \\approx -0{,}588$.\n⭐ Pas besoin de connaître $\\dfrac{\\pi}{5}$ par cœur : la symétrie suffit.",
           schema: cercle(
@@ -189,6 +220,11 @@ export const exercicesTrigonometriePremiere: FicheExercicesData = {
         },
         {
           enonce: "Calculer $\\cos\\left(2\\pi + \\dfrac{\\pi}{3}\\right)$, $\\sin\\left(\\dfrac{\\pi}{4} + 2\\pi\\right)$ et $\\cos\\left(\\dfrac{\\pi}{6} - 2\\pi\\right)$.",
+          reponses: [
+            { question: "cos(2π+π/3)", attendu: "1/2" },
+            { question: "sin(π/4+2π)", attendu: "√(2)/2" },
+            { question: "cos(π/6-2π)", attendu: "√(3)/2" },
+          ],
           correction:
             "Ajouter ou retirer $2\\pi$, c'est faire un tour complet : on revient au même point.\nDonc $\\cos(x + 2\\pi) = \\cos x$ et $\\sin(x + 2\\pi) = \\sin x$ : cosinus et sinus sont PÉRIODIQUES de période $2\\pi$.\n$\\cos\\left(2\\pi + \\dfrac{\\pi}{3}\\right) = \\cos\\dfrac{\\pi}{3} = \\dfrac{1}{2}$.\n$\\sin\\left(\\dfrac{\\pi}{4} + 2\\pi\\right) = \\sin\\dfrac{\\pi}{4} = \\dfrac{\\sqrt{2}}{2}$.\n$\\cos\\left(\\dfrac{\\pi}{6} - 2\\pi\\right) = \\cos\\dfrac{\\pi}{6} = \\dfrac{\\sqrt{3}}{2}$.\n⚠️ Seul un tour COMPLET ($2\\pi$) ramène au même point. Un demi-tour ($\\pi$) mène au point opposé.",
           schema: cercle([{ angle: { n: 7, d: 3 }, projections: true, arc: true }], {
@@ -214,6 +250,12 @@ export const exercicesTrigonometriePremiere: FicheExercicesData = {
       exercices: [
         {
           enonce: "Calculer $\\cos\\dfrac{5\\pi}{6}$, $\\sin\\dfrac{5\\pi}{6}$, $\\cos\\dfrac{7\\pi}{6}$ et $\\sin\\left(-\\dfrac{2\\pi}{3}\\right)$.",
+          reponses: [
+            { question: "cos 5π/6", attendu: "-√(3)/2" },
+            { question: "sin 5π/6", attendu: "1/2" },
+            { question: "cos 7π/6", attendu: "-√(3)/2" },
+            { question: "sin(-2π/3)", attendu: "-√(3)/2" },
+          ],
           correction:
             "On relie chaque réel à un réel du premier quadrant par une symétrie.\n$\\dfrac{5\\pi}{6} = \\pi - \\dfrac{\\pi}{6}$ : symétrique de $\\dfrac{\\pi}{6}$ par rapport à l'axe des ordonnées.\nDonc $\\cos\\dfrac{5\\pi}{6} = -\\cos\\dfrac{\\pi}{6} = -\\dfrac{\\sqrt{3}}{2}$ et $\\sin\\dfrac{5\\pi}{6} = \\sin\\dfrac{\\pi}{6} = \\dfrac{1}{2}$.\n$\\dfrac{7\\pi}{6} = \\pi + \\dfrac{\\pi}{6}$ : symétrique de $\\dfrac{\\pi}{6}$ par rapport au centre $O$.\nDonc $\\cos\\dfrac{7\\pi}{6} = -\\cos\\dfrac{\\pi}{6} = -\\dfrac{\\sqrt{3}}{2}$.\n$-\\dfrac{2\\pi}{3}$ : le sinus est impair, $\\sin\\left(-\\dfrac{2\\pi}{3}\\right) = -\\sin\\dfrac{2\\pi}{3}$.\nOr $\\dfrac{2\\pi}{3} = \\pi - \\dfrac{\\pi}{3}$, donc $\\sin\\dfrac{2\\pi}{3} = \\sin\\dfrac{\\pi}{3} = \\dfrac{\\sqrt{3}}{2}$.\nFinalement $\\sin\\left(-\\dfrac{2\\pi}{3}\\right) = -\\dfrac{\\sqrt{3}}{2}$.\n✔️ Vérification des signes : $\\dfrac{5\\pi}{6}$ est en haut à gauche (cos négatif, sin positif), $-\\dfrac{2\\pi}{3}$ en bas à gauche (sin négatif).",
           schema: cercle(
@@ -228,6 +270,7 @@ export const exercicesTrigonometriePremiere: FicheExercicesData = {
         },
         {
           enonce: "On sait que $\\cos x = \\dfrac{3}{5}$ et que $x \\in [-\\pi ; 0]$. Calculer $\\sin x$.",
+          reponses: [{ attendu: "-4/5" }],
           correction:
             "On utilise $\\cos^2 x + \\sin^2 x = 1$.\n$\\sin^2 x = 1 - \\left(\\dfrac{3}{5}\\right)^2 = 1 - \\dfrac{9}{25} = \\dfrac{16}{25}$.\nDonc $\\sin x = \\dfrac{4}{5}$ ou $\\sin x = -\\dfrac{4}{5}$.\nComme $x \\in [-\\pi ; 0]$, le point image est sous l'axe des abscisses : son ordonnée est négative.\nDonc $\\sin x = -\\dfrac{4}{5}$.\n⛔ $1 - \\dfrac{3}{5} = \\dfrac{2}{5}$ est faux : ce sont les CARRÉS qui s'ajoutent, pas les nombres.\n⚠️ Sans l'intervalle, on ne pourrait pas choisir entre les deux valeurs.",
           schema: cercle([{ angle: { n: -2952, d: 10000 }, projections: true, arc: true, label: "M" }], { reperes: "quarts" }),
@@ -235,6 +278,11 @@ export const exercicesTrigonometriePremiere: FicheExercicesData = {
         },
         {
           enonce: "Calculer $\\cos\\dfrac{31\\pi}{3}$, $\\sin\\left(-\\dfrac{17\\pi}{4}\\right)$ et $\\cos(2027\\pi)$.",
+          reponses: [
+            { question: "cos 31π/3", attendu: "1/2" },
+            { question: "sin(-17π/4)", attendu: "-√(2)/2" },
+            { question: "cos 2027π", attendu: "-1" },
+          ],
           correction:
             "On retire (ou on ajoute) des tours complets. Un tour vaut $2\\pi$.\n$\\dfrac{31\\pi}{3}$ : un tour vaut $\\dfrac{6\\pi}{3}$, et $31 = 5 \\times 6 + 1$. Donc $\\dfrac{31\\pi}{3} = \\dfrac{\\pi}{3} + 5 \\times 2\\pi$.\n$\\cos\\dfrac{31\\pi}{3} = \\cos\\dfrac{\\pi}{3} = \\dfrac{1}{2}$.\n$-\\dfrac{17\\pi}{4}$ : un tour vaut $\\dfrac{8\\pi}{4}$. On AJOUTE deux tours : $-\\dfrac{17\\pi}{4} + \\dfrac{16\\pi}{4} = -\\dfrac{\\pi}{4}$.\n$\\sin\\left(-\\dfrac{17\\pi}{4}\\right) = \\sin\\left(-\\dfrac{\\pi}{4}\\right) = -\\dfrac{\\sqrt{2}}{2}$.\n$2027\\pi = \\pi + 2026\\pi = \\pi + 1013 \\times 2\\pi$ : on retire $1013$ tours.\n$\\cos(2027\\pi) = \\cos\\pi = -1$.\n⭐ Pour $k\\pi$, il suffit de savoir si $k$ est pair (on est en $I$, $\\cos = 1$) ou impair (point opposé, $\\cos = -1$).",
           schema: cercle([{ angle: { n: 31, d: 3 }, projections: true, arc: true }], {
@@ -248,6 +296,10 @@ export const exercicesTrigonometriePremiere: FicheExercicesData = {
         {
           titre: "⭐ Défi : remonter du cosinus au réel",
           enonce: "Pour aller plus loin que le programme.\na) Trouver tous les réels $x$ de $[0 ; 2\\pi[$ tels que $\\cos x = \\dfrac{1}{2}$.\nb) Même question pour $\\sin x = -\\dfrac{\\sqrt{2}}{2}$.",
+          reponses: [
+            { question: "a)", attendu: "π/3 ; 5π/3" },
+            { question: "b)", attendu: "5π/4 ; 7π/4" },
+          ],
           correction:
             "a) On cherche les points du cercle d'abscisse $\\dfrac{1}{2}$ : on trace la droite verticale $x = \\dfrac{1}{2}$.\nElle coupe le cercle en DEUX points, symétriques par rapport à l'axe des abscisses.\nLe premier est l'image de $\\dfrac{\\pi}{3}$. Le second, celle de $-\\dfrac{\\pi}{3}$, soit $2\\pi - \\dfrac{\\pi}{3} = \\dfrac{5\\pi}{3}$ dans $[0 ; 2\\pi[$.\nSolutions : $x = \\dfrac{\\pi}{3}$ ou $x = \\dfrac{5\\pi}{3}$.\nb) On cherche les points d'ordonnée $-\\dfrac{\\sqrt{2}}{2}$ : la droite horizontale coupe le cercle sous l'axe, en deux points.\nCe sont les images de $\\pi + \\dfrac{\\pi}{4} = \\dfrac{5\\pi}{4}$ et de $2\\pi - \\dfrac{\\pi}{4} = \\dfrac{7\\pi}{4}$.\nSolutions : $x = \\dfrac{5\\pi}{4}$ ou $x = \\dfrac{7\\pi}{4}$.\n⛔ L'oubli classique : ne donner qu'une solution. Une droite coupe le cercle deux fois (sauf en $\\pm 1$).",
           schema: cercle(
@@ -264,6 +316,12 @@ export const exercicesTrigonometriePremiere: FicheExercicesData = {
         {
           enonce:
             "Voici la courbe de la fonction cosinus.\na) Lire $\\cos 0$ et $\\cos\\pi$ (on prendra $\\pi \\approx 3{,}14$).\nb) Sur $[0 ; 2\\pi]$, pour quelles valeurs de $x$ a-t-on $\\cos x = 0$ ?\nc) La courbe se répète. Au bout de combien ? Pourquoi ?",
+          reponses: [
+            { question: "a) cos 0", attendu: "1" },
+            { question: "a) cos π", attendu: "-1" },
+            { question: "b)", attendu: "π/2 ; 3π/2", tolerance: 0.01 },
+            { question: "c)", attendu: "2π", tolerance: 0.01 },
+          ],
           figure: courbeCosinus(),
           correction:
             "a) La courbe passe par $(0 ; 1)$ : $\\cos 0 = 1$. En $x \\approx 3{,}14$, elle est à son plus bas : $\\cos\\pi = -1$.\nb) La courbe coupe l'axe des abscisses deux fois sur $[0 ; 2\\pi]$ : vers $1{,}57$ et vers $4{,}71$.\nCe sont $\\dfrac{\\pi}{2}$ et $\\dfrac{3\\pi}{2}$. Sur le cercle, ce sont les points du haut et du bas, d'abscisse nulle.\nc) Le motif recommence au bout de $2\\pi \\approx 6{,}28$.\nC'est la périodicité : $x$ et $x + 2\\pi$ ont le même point image, donc le même cosinus.\n⭐ La courbe « déroule » le cercle : quand le point fait un tour, la courbe dessine une vague complète.",
@@ -279,6 +337,10 @@ export const exercicesTrigonometriePremiere: FicheExercicesData = {
         {
           enonce:
             "Une échelle de $5$ m est posée contre un mur vertical. Elle fait avec le sol un angle de $\\dfrac{\\pi}{3}$ radian.\na) À quelle hauteur touche-t-elle le mur ? (valeur exacte, puis au centimètre)\nb) À quelle distance du mur est son pied ?",
+          reponses: [
+            { question: "a)", attendu: "5√(3)/2", tolerance: 0.01 },
+            { question: "b)", attendu: "2,5" },
+          ],
           correction:
             "Le mur, le sol et l'échelle forment un triangle rectangle ; l'échelle en est l'hypoténuse.\na) La hauteur est le côté OPPOSÉ à l'angle : $h = 5 \\times \\sin\\dfrac{\\pi}{3} = 5 \\times \\dfrac{\\sqrt{3}}{2} = \\dfrac{5\\sqrt{3}}{2} \\approx 4{,}33$ m.\nb) La distance au mur est le côté ADJACENT : $d = 5 \\times \\cos\\dfrac{\\pi}{3} = 5 \\times \\dfrac{1}{2} = 2{,}5$ m.\n✔️ Vérification par Pythagore : $2{,}5^2 + \\left(\\dfrac{5\\sqrt{3}}{2}\\right)^2 = 6{,}25 + 18{,}75 = 25 = 5^2$.\n⭐ C'est le cercle trigonométrique agrandi 5 fois : l'échelle joue le rôle du rayon.",
           schema: cercle([{ angle: { n: 1, d: 3 }, projections: true, arc: true, label: "E" }], { reperes: "quarts" }),
@@ -320,6 +382,12 @@ export const exercicesTrigonometriePremiere: FicheExercicesData = {
           titre: "La grande roue",
           enonce:
             "Une grande roue a un rayon de $60$ m ; son centre est à $70$ m du sol. Une nacelle part du point le plus à droite (à $70$ m) et tourne dans le sens inverse des aiguilles d'une montre.\nQuand la roue a tourné d'un angle $x$ (en radians), la hauteur de la nacelle est $h(x) = 70 + 60\\sin x$.\na) Quelle est sa hauteur après un quart de tour ?\nb) Après avoir tourné de $\\dfrac{7\\pi}{6}$ ?\nc) Après avoir tourné de $\\dfrac{13\\pi}{6}$ ?\nd) Pour quels angles $x$ de $[0 ; 2\\pi[$ la nacelle est-elle à $100$ m ?",
+          reponses: [
+            { question: "a)", attendu: "130" },
+            { question: "b)", attendu: "40" },
+            { question: "c)", attendu: "100" },
+            { question: "d)", attendu: "π/6 ; 5π/6" },
+          ],
           correction:
             "a) Un quart de tour, c'est $x = \\dfrac{\\pi}{2}$ : $h = 70 + 60 \\times \\sin\\dfrac{\\pi}{2} = 70 + 60 \\times 1 = 130$ m. C'est le sommet.\nb) $\\dfrac{7\\pi}{6} = \\pi + \\dfrac{\\pi}{6}$ : $\\sin\\dfrac{7\\pi}{6} = -\\sin\\dfrac{\\pi}{6} = -\\dfrac{1}{2}$.\n$h = 70 + 60 \\times \\left(-\\dfrac{1}{2}\\right) = 70 - 30 = 40$ m.\nc) $\\dfrac{13\\pi}{6} = \\dfrac{\\pi}{6} + 2\\pi$ : la roue a fait un tour complet, puis $\\dfrac{\\pi}{6}$.\n$h = 70 + 60 \\times \\sin\\dfrac{\\pi}{6} = 70 + 30 = 100$ m.\nd) $70 + 60\\sin x = 100$ donne $60\\sin x = 30$, soit $\\sin x = \\dfrac{1}{2}$.\nSur le cercle, deux points ont pour ordonnée $\\dfrac{1}{2}$ : les images de $\\dfrac{\\pi}{6}$ et de $\\pi - \\dfrac{\\pi}{6} = \\dfrac{5\\pi}{6}$.\nLa nacelle est à $100$ m pour $x = \\dfrac{\\pi}{6}$ (en montant) et pour $x = \\dfrac{5\\pi}{6}$ (en redescendant).\n⭐ La roue EST un cercle trigonométrique, agrandi 60 fois et posé à 70 m du sol.",
           schema: cercle(
@@ -336,6 +404,10 @@ export const exercicesTrigonometriePremiere: FicheExercicesData = {
           titre: "Approcher π comme Archimède",
           enonce:
             "On inscrit des polygones réguliers dans un cercle de rayon $1$.\na) Un hexagone régulier inscrit a des côtés de longueur $1$. En déduire que $3 < \\pi$.\nb) $[AB]$ est un côté d'un polygone régulier à $n$ côtés. Montrer que $AB = 2\\sin\\dfrac{\\pi}{n}$. (Couper le triangle $OAB$ par sa hauteur issue de $O$.)\nc) Calculer le demi-périmètre $n\\sin\\dfrac{\\pi}{n}$ pour $n = 12$, à $10^{-4}$ près.\nd) Archimède est allé jusqu'à $n = 96$. Avec aussi les polygones circonscrits ($n\\tan\\dfrac{\\pi}{n}$), il obtient l'encadrement ci-dessous. Combien de décimales de $\\pi$ garantit-il ?\n$3{,}1410 < 96\\sin\\dfrac{\\pi}{96} < \\pi < 96\\tan\\dfrac{\\pi}{96} < 3{,}1428$",
+          reponses: [
+            { question: "c)", attendu: "3,1058", tolerance: 0.0001 },
+            { question: "d)", attendu: ["2", "deux"] },
+          ],
           correction:
             "a) Le périmètre de l'hexagone vaut $6$, son demi-périmètre $3$.\nChaque côté est un segment, plus court que l'arc de cercle qu'il joint. Donc le demi-périmètre de l'hexagone est plus petit que celui du cercle, qui vaut $\\pi$ : $3 < \\pi$.\nb) Le triangle $OAB$ est isocèle en $O$ ($OA = OB = 1$). Son angle en $O$ vaut $\\dfrac{2\\pi}{n}$, car les $n$ angles au centre font un tour.\nLa hauteur issue de $O$ coupe $[AB]$ en son milieu $K$ et l'angle en deux : $\\widehat{AOK} = \\dfrac{\\pi}{n}$.\nDans le triangle $OAK$ rectangle en $K$, d'hypoténuse $OA = 1$ : $AK = \\sin\\dfrac{\\pi}{n}$.\nDonc $AB = 2\\,AK = 2\\sin\\dfrac{\\pi}{n}$.\nc) Pour $n = 12$ : $12\\sin\\dfrac{\\pi}{12} \\approx 12 \\times 0{,}258819 \\approx 3{,}1058$. (Calculatrice en mode RADIAN.)\nd) Les deux bornes commencent par $3{,}14$, puis diffèrent ($3{,}1410$ et $3{,}1428$). L'encadrement garantit deux décimales : $\\pi \\approx 3{,}14$.\n⭐ Plus $n$ est grand, plus le polygone colle au cercle : c'est l'idée d'une limite, 2 200 ans avant qu'on la nomme.",
           micros: ["trig_archimede", "trig_triangle_rectangle"],
@@ -344,6 +416,14 @@ export const exercicesTrigonometriePremiere: FicheExercicesData = {
           titre: "La marée",
           enonce:
             "Dans un port de Bretagne, on modélise la hauteur d'eau (en mètres) par $h(t) = 5 + 3\\cos\\dfrac{\\pi t}{6}$, où $t$ est le temps en heures depuis la marée haute.\na) Calculer $h(0)$, $h(6)$ et $h(12)$. Interpréter.\nb) Montrer que $h(t + 12) = h(t)$. Que signifie ce résultat ?\nc) Calculer $h(2)$ et $h(8)$.\nd) Quelle est la hauteur d'eau au bout de $30$ heures ?",
+          reponses: [
+            { question: "a) h(0)", attendu: "8" },
+            { question: "a) h(6)", attendu: "2" },
+            { question: "a) h(12)", attendu: "8" },
+            { question: "c) h(2)", attendu: "6,5" },
+            { question: "c) h(8)", attendu: "3,5" },
+            { question: "d)", attendu: "2" },
+          ],
           correction:
             "a) $h(0) = 5 + 3\\cos 0 = 5 + 3 = 8$ m : c'est la marée haute.\n$h(6) = 5 + 3\\cos\\pi = 5 - 3 = 2$ m : la marée basse, six heures plus tard.\n$h(12) = 5 + 3\\cos(2\\pi) = 8$ m : de nouveau la marée haute.\nb) $h(t + 12) = 5 + 3\\cos\\dfrac{\\pi(t + 12)}{6} = 5 + 3\\cos\\left(\\dfrac{\\pi t}{6} + 2\\pi\\right)$.\nAjouter $2\\pi$ ne change pas le cosinus : $h(t + 12) = 5 + 3\\cos\\dfrac{\\pi t}{6} = h(t)$.\nLa hauteur d'eau se répète toutes les $12$ heures : $h$ est périodique de période $12$.\nc) $h(2) = 5 + 3\\cos\\dfrac{\\pi}{3} = 5 + 3 \\times \\dfrac{1}{2} = 6{,}5$ m.\n$h(8) = 5 + 3\\cos\\dfrac{4\\pi}{3}$. Or $\\dfrac{4\\pi}{3} = \\pi + \\dfrac{\\pi}{3}$, donc $\\cos\\dfrac{4\\pi}{3} = -\\dfrac{1}{2}$ et $h(8) = 5 - 1{,}5 = 3{,}5$ m.\nd) $h(30) = 5 + 3\\cos(5\\pi)$. $5\\pi = \\pi + 2 \\times 2\\pi$ : $\\cos(5\\pi) = \\cos\\pi = -1$.\n$h(30) = 2$ m : c'est une marée basse.\n⚠️ Un modèle simplifié : la vraie période d'une marée est d'environ $12$ h $25$ min.",
           schema: cercle(
@@ -359,6 +439,15 @@ export const exercicesTrigonometriePremiere: FicheExercicesData = {
           titre: "Le réel de l'année",
           enonce:
             "Soit $x = \\dfrac{2026\\pi}{6}$.\na) Écrire $x$ sous la forme $a + k \\times 2\\pi$, avec $a \\in [0 ; 2\\pi[$ et $k$ entier.\nb) Dans quel quadrant se trouve le point image de $x$ ?\nc) Calculer $\\cos x$ et $\\sin x$.\nd) En déduire $\\cos(x + \\pi)$ et $\\sin(-x)$.",
+          reponses: [
+            { question: "a) a", attendu: "5π/3" },
+            { question: "a) k", attendu: "168" },
+            { question: "b)", attendu: ["4", "4e", "quatrième", "le quatrième", "quatrieme"] },
+            { question: "c) cos x", attendu: "1/2" },
+            { question: "c) sin x", attendu: "-√(3)/2" },
+            { question: "d) cos(x+π)", attendu: "-1/2" },
+            { question: "d) sin(-x)", attendu: "√(3)/2" },
+          ],
           correction:
             "a) On simplifie d'abord : $\\dfrac{2026\\pi}{6} = \\dfrac{1013\\pi}{3}$.\nUn tour vaut $2\\pi = \\dfrac{6\\pi}{3}$. On divise $1013$ par $6$ : $1013 = 6 \\times 168 + 5$.\nDonc $x = \\dfrac{5\\pi}{3} + 168 \\times 2\\pi$, avec $a = \\dfrac{5\\pi}{3}$ et $k = 168$.\nb) $\\dfrac{5\\pi}{3} = 2\\pi - \\dfrac{\\pi}{3}$ : le point image est le symétrique de celui de $\\dfrac{\\pi}{3}$ par rapport à l'axe des abscisses. Il est dans le quatrième quadrant (en bas à droite).\nc) Même abscisse que $\\dfrac{\\pi}{3}$, ordonnée opposée : $\\cos x = \\dfrac{1}{2}$ et $\\sin x = -\\dfrac{\\sqrt{3}}{2}$.\nd) $x + \\pi$ mène au point diamétralement opposé : $\\cos(x + \\pi) = -\\cos x = -\\dfrac{1}{2}$.\nLe sinus est impair : $\\sin(-x) = -\\sin x = \\dfrac{\\sqrt{3}}{2}$.\n✔️ Signes : bas à droite, cosinus positif et sinus négatif. C'est cohérent.",
           schema: cercle([{ angle: { n: 2026, d: 6 }, projections: true, arc: true }], {

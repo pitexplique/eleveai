@@ -117,6 +117,7 @@ export const exercicesVariationsPremiere: FicheExercicesData = {
       exercices: [
         {
           enonce: "Soit $f$ dérivable sur $\\mathbb{R}$, avec $f'(x) = 2x - 6$. Sur quel intervalle $f$ est-elle décroissante ?",
+          reponses: [{ attendu: ["]-∞ ; 3]", "x ≤ 3", "x <= 3"] }],
           correction:
             "$f$ décroît là où sa dérivée est négative : on résout $f'(x) \\leqslant 0$.\n$2x - 6 \\leqslant 0$ donne $2x \\leqslant 6$, donc $x \\leqslant 3$.\n$f$ est décroissante sur $]-\\infty \\,;\\, 3]$, et croissante sur $[3 \\,;\\, +\\infty[$.\n⚠️ On répond par un INTERVALLE de $x$, jamais par un nombre seul : « $f$ décroît en $3$ » ne veut rien dire.",
           schema: tableauSignes(["−∞", 3, "+∞"], "f ′(x)", ["-", "+"]),
@@ -124,6 +125,7 @@ export const exercicesVariationsPremiere: FicheExercicesData = {
         },
         {
           enonce: "Soit $f(x) = x^2 - 8x + 1$ sur $\\mathbb{R}$. Donner les variations de $f$, et la valeur de son minimum.",
+          reponses: [{ question: "minimum", attendu: "-15" }],
           correction:
             "On dérive : $f'(x) = 2x - 8$, qui s'annule pour $x = 4$.\n$a = 2 > 0$ : $f'$ est négative avant $4$, positive après. Donc $f$ décroît sur $]-\\infty \\,;\\, 4]$ puis croît sur $[4 \\,;\\, +\\infty[$.\nLe minimum est atteint en $x = 4$ et vaut $f(4) = 16 - 32 + 1 = -15$.\n⚠️ Le minimum VAUT $-15$ ; il est ATTEINT en $4$. Donner l'abscisse quand on demande la valeur est l'erreur la plus fréquente du chapitre.",
           schema: tableauVariations(["−∞", 4, "+∞"], ["-", "+"], ["+∞", -15, "+∞"]),
@@ -131,18 +133,24 @@ export const exercicesVariationsPremiere: FicheExercicesData = {
         },
         {
           enonce: "Soit $f$ dérivable sur $\\mathbb{R}$, avec $f'(x) = 3x^2 + 2$. Que peut-on dire de $f$ ?",
+          reponses: [{ attendu: ["croissante", "strictement croissante", "croissante sur R", "strictement croissante sur R"] }],
           correction:
             "On cherche le signe de $f'$, sans rien résoudre.\n$3x^2 \\geqslant 0$ pour tout $x$, donc $3x^2 + 2 \\geqslant 2 > 0$ : la dérivée est strictement positive PARTOUT.\n$f$ est donc strictement croissante sur $\\mathbb{R}$, sans aucun extremum.\n⭐ Un carré ne peut pas être négatif : c'est ce qui règle la question sans calcul.",
           micros: ["var_signe_derivee"],
         },
         {
           enonce: "Soit $f$ dérivable sur $\\mathbb{R}$, avec $f'(x) = (x - 2)^2$. $f$ admet-elle un extremum en $2$ ?",
+          reponses: [{ attendu: ["non", "faux"] }],
           correction:
             "$f'(2) = 0$ : la courbe de $f$ a bien une tangente horizontale au point d'abscisse $2$.\nMais un carré est toujours positif ou nul : $f'$ reste $\\geqslant 0$ de part et d'autre de $2$. Elle s'annule SANS CHANGER DE SIGNE.\n$f$ est donc croissante sur $\\mathbb{R}$ tout entier, et n'admet AUCUN extremum.\n⛔ « $f'(a) = 0$ » ne suffit jamais à conclure à un extremum : il faut que $f'$ change de signe. C'est exactement le cas de $x \\mapsto x^3$ en $0$.",
           micros: ["var_extremum_tangente"],
         },
         {
           enonce: "Donner les variations de $f(x) = 5$ et de $g(x) = -4x + 7$ sur $\\mathbb{R}$.",
+          reponses: [
+            { question: "f", attendu: "constante" },
+            { question: "g", attendu: ["décroissante", "strictement décroissante"] },
+          ],
           correction:
             "$f$ est constante : sa dérivée est nulle partout, $f'(x) = 0$. Sa courbe est une droite horizontale, elle ne monte ni ne descend.\n$g$ est affine : $g'(x) = -4$, strictement négative partout. $g$ est donc strictement décroissante sur $\\mathbb{R}$.\n⚠️ Une dérivée nulle EN UN POINT ne dit rien ; une dérivée nulle SUR TOUT UN INTERVALLE dit que la fonction y est constante. Ce sont deux énoncés différents.",
           micros: ["var_constante"],
@@ -150,12 +158,17 @@ export const exercicesVariationsPremiere: FicheExercicesData = {
         {
           enonce:
             "Le tableau de variations de $f$ sur $[-4 \\,;\\, 6]$ indique : $f$ croît de $-3$ à $8$ sur $[-4 \\,;\\, 1]$, puis décroît de $8$ à $-2$ sur $[1 \\,;\\, 6]$.\na) Quel est le maximum de $f$ sur $[-4 \\,;\\, 6]$ ?\nb) Combien l'équation $f(x) = 0$ a-t-elle de solutions ?",
+          reponses: [
+            { question: "a)", attendu: "8" },
+            { question: "b)", attendu: ["2", "deux"] },
+          ],
           correction:
             "a) Le maximum est la plus grande valeur atteinte : $8$, atteint en $x = 1$, là où la flèche cesse de monter.\nb) Sur $[-4 \\,;\\, 1]$, $f$ passe de $-3$ à $8$ : elle est continue et croissante, elle traverse donc $0$ une fois et une seule.\nSur $[1 \\,;\\, 6]$, elle passe de $8$ à $-2$ : elle traverse encore $0$ une fois.\nL'équation $f(x) = 0$ a donc exactement DEUX solutions.\n⭐ On ne calcule rien : un tableau de variations suffit à compter les solutions, parce qu'il dit que la fonction est monotone sur chaque morceau.",
           micros: ["var_tableau"],
         },
         {
           enonce: "Sans dériver, donner les variations de $f(x) = -2x^2 + 8x$ sur $\\mathbb{R}$, et son maximum.",
+          reponses: [{ question: "maximum", attendu: "8" }],
           correction:
             "C'est un trinôme : sa courbe est une parabole, et son sommet est en $\\alpha = -\\dfrac{b}{2a} = -\\dfrac{8}{-4} = 2$.\n$a = -2 < 0$ : la parabole est tournée vers le BAS. $f$ croît donc sur $]-\\infty \\,;\\, 2]$, puis décroît sur $[2 \\,;\\, +\\infty[$.\nLe maximum vaut $f(2) = -8 + 16 = 8$.\n⚠️ Quand $a$ est négatif, tout s'inverse : le sommet est un maximum, pas un minimum.",
           micros: ["var_second_degre"],
@@ -185,6 +198,10 @@ export const exercicesVariationsPremiere: FicheExercicesData = {
       exercices: [
         {
           enonce: "Soit $f(x) = x^3 - 3x^2 - 9x + 5$ sur $\\mathbb{R}$. Dresser le tableau de variations de $f$, images comprises.",
+          reponses: [
+            { question: "f(-1)", attendu: "10" },
+            { question: "f(3)", attendu: "-22" },
+          ],
           correction:
             "On dérive : $f'(x) = 3x^2 - 6x - 9$.\nOn factorise : $f'(x) = 3(x^2 - 2x - 3) = 3(x - 3)(x + 1)$. La dérivée s'annule en $-1$ et en $3$.\nSon coefficient dominant $3$ est positif : $f'$ est positive à l'extérieur des racines, négative entre elles.\nDonc $f$ croît sur $]-\\infty \\,;\\, -1]$, décroît sur $[-1 \\,;\\, 3]$, puis croît sur $[3 \\,;\\, +\\infty[$.\nImages : $f(-1) = -1 - 3 + 9 + 5 = 10$ et $f(3) = 27 - 27 - 27 + 5 = -22$.\n$f$ admet un maximum local de $10$ en $-1$, et un minimum local de $-22$ en $3$.\n⚠️ Ces extremums sont LOCAUX : $f(x)$ dépasse $10$ pour $x$ assez grand.",
           schema: tableauVariations(["−∞", -1, 3, "+∞"], ["+", "-", "+"], ["−∞", 10, -22, "+∞"]),
@@ -192,6 +209,10 @@ export const exercicesVariationsPremiere: FicheExercicesData = {
         },
         {
           enonce: "Soit $f(x) = 2x^3 - 9x^2 + 12x$ sur $\\mathbb{R}$. Déterminer les extremums locaux de $f$, et justifier leur nature.",
+          reponses: [
+            { question: "maximum local (valeur)", attendu: "5" },
+            { question: "minimum local (valeur)", attendu: "4" },
+          ],
           correction:
             "$f'(x) = 6x^2 - 18x + 12 = 6(x^2 - 3x + 2) = 6(x - 1)(x - 2)$.\n$f'$ s'annule en $1$ et en $2$, et son coefficient dominant $6$ est positif : elle est positive, puis négative sur $]1 \\,;\\, 2[$, puis positive.\nEn $x = 1$, $f'$ passe du PLUS au MOINS : $f$ monte puis descend, c'est un MAXIMUM local. Il vaut $f(1) = 2 - 9 + 12 = 5$.\nEn $x = 2$, $f'$ passe du MOINS au PLUS : c'est un MINIMUM local, valant $f(2) = 16 - 36 + 24 = 4$.\n⭐ La nature de l'extremum ne se devine pas : elle se lit dans l'ORDRE des signes de $f'$.",
           micros: ["var_extremum"],
@@ -204,6 +225,10 @@ export const exercicesVariationsPremiere: FicheExercicesData = {
         },
         {
           enonce: "Soit $f(x) = x^3 - 12x$ sur l'intervalle $[-3 \\,;\\, 4]$. Dresser son tableau de variations, puis donner son maximum et son minimum sur cet intervalle.",
+          reponses: [
+            { question: "maximum", attendu: "16" },
+            { question: "minimum", attendu: "-16" },
+          ],
           correction:
             "$f'(x) = 3x^2 - 12 = 3(x^2 - 4) = 3(x - 2)(x + 2)$, qui s'annule en $-2$ et $2$.\n$f'$ est positive à l'extérieur de $[-2 \\,;\\, 2]$, négative à l'intérieur.\nSur $[-3 \\,;\\, 4]$ : $f$ croît sur $[-3 \\,;\\, -2]$, décroît sur $[-2 \\,;\\, 2]$, puis croît sur $[2 \\,;\\, 4]$.\nImages : $f(-3) = -27 + 36 = 9$, $f(-2) = -8 + 24 = 16$, $f(2) = 8 - 24 = -16$, $f(4) = 64 - 48 = 16$.\nLe maximum sur $[-3 \\,;\\, 4]$ vaut $16$ — et il est atteint DEUX fois, en $-2$ et en $4$. Le minimum vaut $-16$, atteint en $2$.\n⚠️ Sur un intervalle FERMÉ, il faut toujours calculer les images aux BORNES : ici, la borne $4$ égale le maximum local. Les oublier fait rater la réponse.",
           schema: tableauVariations([-3, -2, 2, 4], ["+", "-", "+"], [9, 16, -16, 16]),
@@ -248,6 +273,12 @@ export const exercicesVariationsPremiere: FicheExercicesData = {
           titre: "La boîte sans couvercle",
           enonce:
             "D'une plaque carrée de $12$ cm de côté, on découpe aux quatre coins un carré de côté $x$, puis on relève les bords pour former une boîte sans couvercle.\na) Entre quelles valeurs $x$ peut-il varier ?\nb) Exprimer le volume $V(x)$ de la boîte en fonction de $x$.\nc) Déterminer la valeur de $x$ qui rend ce volume maximal, et donner ce volume.",
+          reponses: [
+            { question: "a)", attendu: ["]0 ; 6[", "0 < x < 6"] },
+            { question: "b) V(x)", attendu: "x(12-2x)^2" },
+            { question: "c) x", attendu: "2" },
+            { question: "c) volume (cm³)", attendu: "128" },
+          ],
           correction:
             "a) Le côté découpé est positif : $x > 0$. Sur chaque côté on retire $x$ à CHAQUE extrémité, soit $2x$ : il faut $12 - 2x > 0$, donc $x < 6$. Ainsi $x \\in \\,]0 \\,;\\, 6[$.\nb) La hauteur de la boîte est la profondeur du pli, c'est-à-dire $x$. Le fond est un carré de côté $12 - 2x$.\nDonc $V(x) = x(12 - 2x)^2$.\n⛔ Écrire $12 - x$ reviendrait à ne couper qu'un seul coin par côté : le croquis le montre tout de suite.\nc) On développe pour dériver : $V(x) = x(144 - 48x + 4x^2) = 4x^3 - 48x^2 + 144x$.\n$V'(x) = 12x^2 - 96x + 144 = 12(x^2 - 8x + 12) = 12(x - 2)(x - 6)$.\nSur $]0 \\,;\\, 6[$, $V'$ s'annule seulement en $x = 2$, et elle y passe du PLUS au MOINS : c'est bien un maximum.\n$V(2) = 2 \\times (12 - 4)^2 = 2 \\times 64 = 128$.\nLe volume est maximal pour un carré de $2$ cm de côté, et vaut alors $128$ cm³.",
           micros: ["var_optimisation", "var_extremum"],
@@ -256,6 +287,12 @@ export const exercicesVariationsPremiere: FicheExercicesData = {
           titre: "L'enclos contre le mur",
           enonce:
             "Un enclos rectangulaire est adossé à un mur : le mur forme un côté, et l'on dispose de $40$ m de grillage pour les trois autres. On note $x$ la largeur, c'est-à-dire la longueur de chacun des deux côtés perpendiculaires au mur.\na) Exprimer l'aire $A(x)$ de l'enclos en fonction de $x$, et préciser l'intervalle d'étude.\nb) Déterminer les dimensions qui rendent l'aire maximale.",
+          reponses: [
+            { question: "a) A(x)", attendu: "x(40-2x)" },
+            { question: "a) intervalle", attendu: ["]0 ; 20[", "0 < x < 20"] },
+            { question: "b) largeur (m)", attendu: "10" },
+            { question: "b) longueur (m)", attendu: "20" },
+          ],
           correction:
             "a) Le grillage couvre les deux largeurs et la longueur : il en part $2x$ pour les largeurs, donc la longueur vaut $40 - 2x$.\nL'aire est donc $A(x) = x(40 - 2x)$.\nIl faut $x > 0$ et $40 - 2x > 0$, soit $x < 20$ : on étudie sur $]0 \\,;\\, 20[$.\n⛔ Écrire $x(40 - x)$ serait supposer que le grillage ne sert qu'à deux côtés : le mur en remplace UN, pas deux.\nb) $A(x) = 40x - 2x^2$, donc $A'(x) = 40 - 4x$.\n$A'(x) = 0$ donne $x = 10$ ; $A'$ est positive avant $10$ et négative après : c'est un maximum.\nLa largeur vaut alors $10$ m, la longueur $40 - 20 = 20$ m, et l'aire $A(10) = 10 \\times 20 = 200$ m².\n⚠️ On répond par les DIMENSIONS et l'aire, avec leurs unités : « $x = 10$ » ne répond pas à la question posée.",
           micros: ["var_optimisation", "var_extremum"],
@@ -264,6 +301,12 @@ export const exercicesVariationsPremiere: FicheExercicesData = {
           titre: "Le bénéfice de l'association",
           enonce:
             "Une association vend des tee-shirts. Produire $x$ tee-shirts coûte $C(x) = x^2 + 20x + 300$ euros, et chaque tee-shirt est vendu $80$ euros. On suppose $0 \\leqslant x \\leqslant 60$.\na) Exprimer le bénéfice $B(x)$ en fonction de $x$.\nb) Combien faut-il en vendre pour que le bénéfice soit maximal ? Quel est alors ce bénéfice ?\nc) À partir de combien de tee-shirts l'association gagne-t-elle de l'argent ?",
+          reponses: [
+            { question: "a) B(x)", attendu: "-x^2+60x-300" },
+            { question: "b) nombre de tee-shirts", attendu: "30" },
+            { question: "b) bénéfice (€)", attendu: "600" },
+            { question: "c)", attendu: "6" },
+          ],
           correction:
             "a) Le bénéfice est la recette moins le coût. La recette vaut $80x$.\n$B(x) = 80x - (x^2 + 20x + 300) = -x^2 + 60x - 300$.\n⛔ Le piège est d'oublier la parenthèse : le signe moins porte sur TOUT le coût, pas seulement sur son premier terme.\nb) $B'(x) = -2x + 60$, qui s'annule en $x = 30$. $B'$ est positive avant, négative après : c'est un maximum.\n$B(30) = -900 + 1800 - 300 = 600$. Il faut vendre $30$ tee-shirts, pour un bénéfice de $600$ euros.\nc) L'association gagne de l'argent quand $B(x) > 0$, soit $-x^2 + 60x - 300 > 0$.\n$\\Delta = 60^2 - 4 \\times (-1) \\times (-300) = 3600 - 1200 = 2400$, et $\\sqrt{2400} \\approx 49$.\nLes racines valent environ $\\dfrac{-60 + 49}{-2} \\approx 5{,}5$ et $\\dfrac{-60 - 49}{-2} \\approx 54{,}5$.\n$a < 0$ : le trinôme est positif ENTRE ses racines. Il faut donc vendre au moins $6$ tee-shirts (et pas plus de $54$).\n⚠️ Le nombre de tee-shirts est entier : on arrondit vers le haut pour la borne basse, vers le bas pour la borne haute.",
           micros: ["var_optimisation", "var_second_degre"],
@@ -272,6 +315,9 @@ export const exercicesVariationsPremiere: FicheExercicesData = {
           titre: "Une courbe et sa tangente",
           enonce:
             "Soit $f(x) = x^3 - 6x^2 + 9x$ et la droite $d$ d'équation $y = 9x$.\na) Dresser le tableau de variations de $f$ sur $\\mathbb{R}$.\nb) Étudier la position de la courbe $\\mathcal{C}_f$ par rapport à $d$.\nc) En quels points se rencontrent-elles ?",
+          reponses: [
+            { question: "c)", attendu: ["(0 ; 0) ; (6 ; 54)", "(6 ; 54) ; (0 ; 0)"], ordre: true },
+          ],
           correction:
             "a) $f'(x) = 3x^2 - 12x + 9 = 3(x^2 - 4x + 3) = 3(x - 1)(x - 3)$, qui s'annule en $1$ et $3$.\nLe coefficient $3$ est positif : $f'$ est positive, puis négative sur $]1 \\,;\\, 3[$, puis positive.\n$f$ croît sur $]-\\infty \\,;\\, 1]$, décroît sur $[1 \\,;\\, 3]$, puis croît sur $[3 \\,;\\, +\\infty[$.\nImages : $f(1) = 1 - 6 + 9 = 4$ (maximum local) et $f(3) = 27 - 54 + 27 = 0$ (minimum local).\nb) On pose $h(x) = f(x) - 9x = x^3 - 6x^2 = x^2(x - 6)$.\n\n$x^2 \\geqslant 0$ toujours : le signe de $h$ est celui de $(x - 6)$.\n$\\mathcal{C}_f$ est donc en dessous de $d$ sur $]-\\infty \\,;\\, 6]$, et au-dessus sur $[6 \\,;\\, +\\infty[$.\nc) Elles se rencontrent là où $h(x) = 0$, c'est-à-dire en $x = 0$ et $x = 6$.\nEn $x = 6$, $h$ change de signe : les courbes se CROISENT, au point $(6 \\,;\\, 54)$.\nEn $x = 0$, $h$ s'annule sans changer de signe : elles se TOUCHENT seulement, au point $(0 \\,;\\, 0)$ — la droite $d$ y est tangente à la courbe.\n⭐ Une racine double de la différence, c'est une tangence ; une racine simple, une traversée.",
           schema: tableauVariations(["−∞", 1, 3, "+∞"], ["+", "-", "+"], ["−∞", 4, 0, "+∞"]),
@@ -281,6 +327,10 @@ export const exercicesVariationsPremiere: FicheExercicesData = {
           titre: "Lire la courbe de la dérivée",
           enonce:
             "On donne la courbe de la DÉRIVÉE $f'$ d'une fonction $f$ définie sur $[-4 \\,;\\, 6]$. C'est une parabole tournée vers le haut, qui coupe l'axe des abscisses en $-2$ et en $4$, et dont le sommet est le point $(1 \\,;\\, -9)$.\na) Donner le signe de $f'$ sur $[-4 \\,;\\, 6]$.\nb) En déduire les variations de $f$.\nc) $f$ admet-elle un extremum en $x = 1$ ?\nd) On sait de plus que $f(-2) = 5$. Que vaut $f$ au point le plus haut de son tableau ?",
+          reponses: [
+            { question: "c)", attendu: ["non", "faux"] },
+            { question: "d)", attendu: "5" },
+          ],
           correction:
             "a) On lit la POSITION par rapport à l'axe, pas le sens de variation de la parabole.\n$f'$ est positive sur $[-4 \\,;\\, -2]$, négative sur $[-2 \\,;\\, 4]$, positive sur $[4 \\,;\\, 6]$.\nb) $f$ croît sur $[-4 \\,;\\, -2]$, décroît sur $[-2 \\,;\\, 4]$, puis croît sur $[4 \\,;\\, 6]$.\nc) NON. En $x = 1$, on lit $f'(1) = -9$, qui n'est pas nul : la dérivée ne s'annule pas là, donc $f$ n'y a pas d'extremum.\n⛔ Le point $(1 \\,;\\, -9)$ est le sommet de la courbe de $f'$ : c'est l'endroit où $f'$ cesse de décroître. C'est une information sur $f'$, pas sur $f$. Confondre les deux est LA faute du chapitre.\nd) $f$ croît jusqu'en $-2$ puis décroît : le maximum local est atteint en $x = -2$, et vaut $f(-2) = 5$.\n⚠️ On ne peut rien dire de plus sans autre information : la courbe de $f'$ donne les VARIATIONS de $f$, jamais ses valeurs. Il faut une image de départ, et elle est toujours donnée dans l'énoncé.",
           // ⛔ Pas de tableau de VARIATIONS ici : le corrigé dit justement qu'on

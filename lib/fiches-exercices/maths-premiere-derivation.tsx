@@ -67,6 +67,7 @@ export const exercicesDerivationPremiereSpe: FicheExercicesData = {
       exercices: [
         {
           enonce: "Soit $f(x) = x^2 - 3x$. Calculer le taux de variation de $f$ entre $1$ et $4$.",
+          reponses: [{ attendu: "2" }],
           correction:
             "On calcule les deux images : $f(1) = 1 - 3 = -2$ et $f(4) = 16 - 12 = 4$.\nTaux $= \\dfrac{f(4) - f(1)}{4 - 1} = \\dfrac{4 - (-2)}{3} = \\dfrac{6}{3} = 2$.\nLa sécante qui passe par $A(1 ; -2)$ et $B(4 ; 4)$ a donc une pente de $2$ : entre $1$ et $4$, $f$ augmente en moyenne de $2$ quand $x$ augmente de $1$.\n⚠️ Attention au signe moins : $4 - (-2) = 6$, pas $2$.",
           schema: repere([-1, 5, -4, 6], [{ q: [1, -3, 0] }, { q: [0, 2, -4], couleur: ORANGE }], [
@@ -77,6 +78,7 @@ export const exercicesDerivationPremiereSpe: FicheExercicesData = {
         },
         {
           enonce: "Soit $f(x) = x^2$. En revenant à la définition, calculer $f'(3)$.",
+          reponses: [{ attendu: "6" }],
           correction:
             "$f(3 + h) = (3 + h)^2 = 9 + 6h + h^2$.\n$\\dfrac{f(3 + h) - f(3)}{h} = \\dfrac{9 + 6h + h^2 - 9}{h} = \\dfrac{6h + h^2}{h} = 6 + h$, pour $h \\neq 0$.\nQuand $h$ tend vers $0$, $6 + h$ tend vers $6$. Donc $f$ est dérivable en $3$ et $f'(3) = 6$.\n⭐ On simplifie par $h$ AVANT de faire tendre $h$ vers $0$ : sinon on obtient $\\dfrac{0}{0}$, qui ne veut rien dire.\n⚠️ $(3 + h)^2$ n'est pas $9 + h^2$ : il manque le double produit $6h$.\n⭐ Sur le dessin : la sécante entre $3$ et $4$ (en vert) a une pente de $7 = 6 + 1$. Quand $h$ rétrécit, elle pivote autour de $A$ et vient se coucher sur la tangente (en orange), de pente $6$.",
           schema: repere([-1, 5, -2, 12], [{ q: [1, 0, 0] }, { q: [0, 7, -12], couleur: VERT }, { q: [0, 6, -9], couleur: ORANGE }], [
@@ -86,6 +88,10 @@ export const exercicesDerivationPremiereSpe: FicheExercicesData = {
         },
         {
           enonce: "La droite orange est la tangente à la courbe de $f$ au point $A$ d'abscisse $1$. Lire $f(1)$ et $f'(1)$.",
+          reponses: [
+            { question: "f(1)", attendu: "2" },
+            { question: "f'(1)", attendu: "2" },
+          ],
           figure: repere([-1, 4, -2, 5], [{ q: [-1, 4, -1] }, { q: [0, 2, 0], couleur: ORANGE }], [{ x: 1, y: 2, label: "A" }]),
           correction:
             "$f(1)$ est l'ORDONNÉE du point $A$ : on lit $f(1) = 2$.\n$f'(1)$ est la PENTE de la tangente en $A$. On part de $A(1 ; 2)$ et on avance de $1$ vers la droite : la tangente passe par $(2 ; 4)$. Elle est montée de $2$.\nDonc $f'(1) = \\dfrac{4 - 2}{2 - 1} = 2$.\n⛔ On lit la pente sur la TANGENTE, pas sur la courbe : en $x = 2$, la courbe n'est qu'à $3$.",
@@ -94,24 +100,39 @@ export const exercicesDerivationPremiereSpe: FicheExercicesData = {
         {
           enonce:
             "Donner la dérivée, puis la valeur demandée :\na) $f(x) = x^3$ ; calculer $f'(2)$.\nb) $g(x) = \\dfrac{1}{x}$ ; calculer $g'(-1)$.\nc) $h(x) = \\sqrt{x}$ ; calculer $h'(9)$.",
+          reponses: [
+            { question: "a) f'(x)", attendu: "3x^2" },
+            { question: "a) f'(2)", attendu: "12" },
+            { question: "b) g'(x)", attendu: "-1/x^2" },
+            { question: "b) g'(-1)", attendu: "-1" },
+            { question: "c) h'(x)", attendu: "1/(2√(x))" },
+            { question: "c) h'(9)", attendu: "1/6" },
+          ],
           correction:
             "a) $f'(x) = 3x^2$, donc $f'(2) = 3 \\times 4 = 12$.\nb) $g'(x) = -\\dfrac{1}{x^2}$, donc $g'(-1) = -\\dfrac{1}{1} = -1$.\n⚠️ $(-1)^2 = 1$ : le carré efface le signe de $x$, mais PAS le signe moins de la formule. $g'$ est négative partout : la fonction inverse décroît sur chacun de ses deux intervalles.\nc) $h'(x) = \\dfrac{1}{2\\sqrt{x}}$, donc $h'(9) = \\dfrac{1}{2 \\times 3} = \\dfrac{1}{6}$.\n⚠️ $\\sqrt{x}$ n'est dérivable que pour $x > 0$ : en $0$, sa tangente est verticale.",
           micros: ["der_usuelles"],
         },
         {
           enonce: "Dériver, pour $x \\neq 0$ : $f(x) = x^5$ ; $g(x) = \\dfrac{1}{x^2}$ ; $h(x) = \\dfrac{3}{x^4}$.",
+          reponses: [
+            { question: "f'(x)", attendu: "5x^4" },
+            { question: "g'(x)", attendu: "-2/x^3" },
+            { question: "h'(x)", attendu: "-12/x^5" },
+          ],
           correction:
             "La règle $(x^n)' = n\\,x^{n-1}$ vaut pour tout entier $n$, négatif compris.\n$f'(x) = 5x^4$.\nOn écrit $g(x) = x^{-2}$. Alors $g'(x) = -2x^{-3} = -\\dfrac{2}{x^3}$.\nOn écrit $h(x) = 3x^{-4}$. Alors $h'(x) = 3 \\times (-4)x^{-5} = -\\dfrac{12}{x^5}$.\n⚠️ L'exposant DIMINUE de $1$ : $-2 - 1 = -3$, et non $-1$. C'est l'erreur la plus fréquente avec les exposants négatifs.",
           micros: ["der_puissance"],
         },
         {
           enonce: "Dériver $f(x) = 4x^3 - 5x^2 + 7x - 2$.",
+          reponses: [{ attendu: "12x^2-10x+7" }],
           correction:
             "La dérivée d'une somme est la somme des dérivées, et un nombre qui multiplie reste devant.\n$(4x^3)' = 4 \\times 3x^2 = 12x^2$.\n$(-5x^2)' = -5 \\times 2x = -10x$.\n$(7x)' = 7$, et $(-2)' = 0$.\nDonc $f'(x) = 12x^2 - 10x + 7$.\n⚠️ La constante $-2$ DISPARAÎT : une constante ne varie pas, sa dérivée est nulle.",
           micros: ["der_operations"],
         },
         {
           enonce: "Soit $f(x) = x^2 - 3x + 1$. Déterminer l'équation de la tangente à la courbe de $f$ au point d'abscisse $2$.",
+          reponses: [{ attendu: "y = x - 3" }],
           correction:
             "Il faut deux nombres : $f(2)$ et $f'(2)$.\n$f(2) = 4 - 6 + 1 = -1$.\n$f'(x) = 2x - 3$, donc $f'(2) = 1$.\nTangente : $y = f'(2)(x - 2) + f(2) = 1 \\times (x - 2) - 1$, soit $y = x - 3$.\n✔️ Vérification : en $x = 2$, la droite donne $2 - 3 = -1 = f(2)$. Elle passe bien par le point de la courbe.\n⚠️ On n'oublie pas le « $+ f(2)$ » : sans lui, la droite a la bonne pente mais passe à côté du point.",
           schema: repere([-1, 5, -4, 4], [{ q: [1, -3, 1] }, { q: [0, 1, -3], couleur: ORANGE }], [{ x: 2, y: -1, label: "A" }]),
@@ -120,6 +141,11 @@ export const exercicesDerivationPremiereSpe: FicheExercicesData = {
         {
           enonce:
             "Soit $f(x) = |x|$. Calculer $\\dfrac{f(0 + h) - f(0)}{h}$ pour $h > 0$, puis pour $h < 0$. $f$ est-elle dérivable en $0$ ?",
+          reponses: [
+            { question: "h > 0", attendu: "1" },
+            { question: "h < 0", attendu: "-1" },
+            { question: "dérivable ?", attendu: ["non", "faux"] },
+          ],
           correction:
             "$\\dfrac{f(h) - f(0)}{h} = \\dfrac{|h|}{h}$.\nSi $h > 0$ : $|h| = h$, le quotient vaut $1$.\nSi $h < 0$ : $|h| = -h$, le quotient vaut $-1$.\nQuand $h$ tend vers $0$, le quotient vaut $1$ d'un côté et $-1$ de l'autre : il n'a PAS de limite.\n$f$ n'est donc pas dérivable en $0$. Sur la courbe, on voit un POINT ANGULEUX : aucune droite ne peut y être la tangente.\n⭐ $f$ est pourtant bien définie en $0$ : être définie ne suffit pas pour être dérivable.",
           schema: repere([-3, 3, -1, 3], [{ pts: [[-3, 3], [0, 0], [3, 3]] }], [{ x: 0, y: 0, label: "O" }]),
@@ -142,12 +168,17 @@ export const exercicesDerivationPremiereSpe: FicheExercicesData = {
       exercices: [
         {
           enonce: "Dériver $f(x) = (2x + 1)(x^2 - 3)$.",
+          reponses: [{ attendu: "6x^2+2x-6" }],
           correction:
             "On pose $u(x) = 2x + 1$ et $v(x) = x^2 - 3$. Alors $u'(x) = 2$ et $v'(x) = 2x$.\n$f'(x) = u'v + uv' = 2(x^2 - 3) + (2x + 1) \\times 2x$\n$= 2x^2 - 6 + 4x^2 + 2x = 6x^2 + 2x - 6$.\n✔️ Vérification : en développant d'abord, $f(x) = 2x^3 + x^2 - 6x - 3$, dont la dérivée est bien $6x^2 + 2x - 6$.\n⛔ La dérivée d'un produit n'est PAS le produit des dérivées : $u' \\times v' = 4x$ est faux.",
           micros: ["der_operations"],
         },
         {
           enonce: "Soit $f(x) = x\\sqrt{x}$ sur $]0 ; +\\infty[$. Calculer $f'(x)$ et l'écrire le plus simplement possible, puis calculer $f'(4)$.",
+          reponses: [
+            { question: "f'(x)", attendu: ["(3/2)√(x)", "3√(x)/2"] },
+            { question: "f'(4)", attendu: "3" },
+          ],
           correction:
             "$u(x) = x$, $u'(x) = 1$ ; $v(x) = \\sqrt{x}$, $v'(x) = \\dfrac{1}{2\\sqrt{x}}$.\n$f'(x) = 1 \\times \\sqrt{x} + x \\times \\dfrac{1}{2\\sqrt{x}}$.\nOr $\\dfrac{x}{\\sqrt{x}} = \\sqrt{x}$ : le second terme vaut $\\dfrac{\\sqrt{x}}{2}$.\nDonc $f'(x) = \\sqrt{x} + \\dfrac{\\sqrt{x}}{2} = \\dfrac{3}{2}\\sqrt{x}$.\n$f'(4) = \\dfrac{3}{2} \\times 2 = 3$.\n⭐ Simplifier $\\dfrac{x}{\\sqrt{x}}$ en $\\sqrt{x}$ rend le résultat lisible : c'est le réflexe à prendre.\nSur le dessin, la tangente au point $(4 ; 8)$ a bien une pente de $3$ : $y = 3x - 4$.",
           schema: repere(
@@ -159,6 +190,10 @@ export const exercicesDerivationPremiereSpe: FicheExercicesData = {
         },
         {
           enonce: "Soit $f(x) = \\dfrac{2x - 1}{x + 3}$ pour $x \\neq -3$. Calculer $f'(x)$, puis donner son signe.",
+          reponses: [
+            { question: "f'(x)", attendu: "7/(x+3)^2" },
+            { question: "signe", attendu: ["positif", "positive", "strictement positif", "strictement positive", "> 0", "+"] },
+          ],
           correction:
             "$u(x) = 2x - 1$, $u'(x) = 2$ ; $v(x) = x + 3$, $v'(x) = 1$.\n$f'(x) = \\dfrac{u'v - uv'}{v^2} = \\dfrac{2(x + 3) - (2x - 1) \\times 1}{(x + 3)^2}$.\nNumérateur : $2x + 6 - 2x + 1 = 7$.\nDonc $f'(x) = \\dfrac{7}{(x + 3)^2}$.\nUn carré non nul est strictement positif : $f'(x) > 0$ pour tout $x \\neq -3$.\n⚠️ La parenthèse autour de $(2x - 1)$ est indispensable : sans elle, on écrit $- 2x - 1$ et on trouve $5$ au lieu de $7$.\n⚠️ On ne développe pas le dénominateur $(x + 3)^2$ : sous forme de carré, son signe se lit tout de suite.\n⭐ Sur le dessin : $f$ n'est pas définie en $-3$, sa courbe est en deux morceaux, et chacun MONTE — c'est ce que dit $f' > 0$.",
           schema: repere(
@@ -172,6 +207,11 @@ export const exercicesDerivationPremiereSpe: FicheExercicesData = {
         },
         {
           enonce: "Soit $g(x) = \\dfrac{1}{x^2 + 1}$ sur $\\mathbb{R}$. Calculer $g'(x)$, puis $g'(0)$ et $g'(1)$.",
+          reponses: [
+            { question: "g'(x)", attendu: "-2x/(x^2+1)^2" },
+            { question: "g'(0)", attendu: "0" },
+            { question: "g'(1)", attendu: "-1/2" },
+          ],
           correction:
             "$v(x) = x^2 + 1$ ne s'annule jamais (elle vaut au moins $1$) : $g$ est dérivable sur $\\mathbb{R}$.\n$v'(x) = 2x$, et $\\left(\\dfrac{1}{v}\\right)' = -\\dfrac{v'}{v^2}$.\nDonc $g'(x) = -\\dfrac{2x}{(x^2 + 1)^2}$.\n$g'(0) = 0$ : la tangente en $0$ est horizontale.\n$g'(1) = -\\dfrac{2}{2^2} = -\\dfrac{1}{2}$.\n⛔ $\\left(\\dfrac{1}{v}\\right)'$ n'est pas $\\dfrac{1}{v'}$ : ici, $\\dfrac{1}{2x}$ serait faux, et même pas défini en $0$.",
           schema: repere(
@@ -191,6 +231,12 @@ export const exercicesDerivationPremiereSpe: FicheExercicesData = {
         {
           enonce:
             "Dériver, en précisant où c'est possible :\na) $f(x) = (3x - 2)^4$\nb) $g(x) = \\sqrt{2x + 6}$, puis calculer $g'(5)$\nc) $h(x) = \\dfrac{1}{5 - x}$",
+          reponses: [
+            { question: "a) f'(x)", attendu: "12(3x-2)^3" },
+            { question: "b) g'(x)", attendu: "1/√(2x+6)" },
+            { question: "b) g'(5)", attendu: "1/4" },
+            { question: "c) h'(x)", attendu: "1/(5-x)^2" },
+          ],
           correction:
             "La règle : la dérivée de $u(ax + b)$ est $a \\times u'(ax + b)$.\na) Ici $u(X) = X^4$ et $ax + b = 3x - 2$, donc $a = 3$. $f'(x) = 3 \\times 4(3x - 2)^3 = 12(3x - 2)^3$.\nb) $g$ est dérivable là où $2x + 6 > 0$, soit $x > -3$. $g'(x) = 2 \\times \\dfrac{1}{2\\sqrt{2x + 6}} = \\dfrac{1}{\\sqrt{2x + 6}}$.\n$g'(5) = \\dfrac{1}{\\sqrt{16}} = \\dfrac{1}{4}$.\nc) $h(x) = \\dfrac{1}{X}$ avec $X = 5 - x$, donc $a = -1$. $h'(x) = -1 \\times \\left(-\\dfrac{1}{(5 - x)^2}\\right) = \\dfrac{1}{(5 - x)^2}$, pour $x \\neq 5$.\n⚠️ Le facteur $a$ vaut ici $-1$ : il change le signe. L'oublier donne $h'$ négative, alors que $h$ est croissante.",
           micros: ["der_composee_affine"],
@@ -198,6 +244,11 @@ export const exercicesDerivationPremiereSpe: FicheExercicesData = {
         {
           enonce:
             "Soit $f(x) = x^3 - 2x$.\na) Déterminer l'équation de la tangente $T$ au point d'abscisse $1$.\nb) En quels points la courbe a-t-elle une tangente parallèle à la droite $y = 10x$ ?",
+          reponses: [
+            { question: "a) T", attendu: "y = x - 2" },
+            { question: "b) point d'abscisse 2", attendu: "(2 ; 4)", ordre: true },
+            { question: "b) point d'abscisse -2", attendu: "(-2 ; -4)", ordre: true },
+          ],
           correction:
             "a) $f(1) = 1 - 2 = -1$ ; $f'(x) = 3x^2 - 2$, donc $f'(1) = 1$.\n$T : y = 1 \\times (x - 1) - 1$, soit $y = x - 2$.\nb) Parallèle à $y = 10x$ veut dire : même pente, $10$. On résout $f'(x) = 10$.\n$3x^2 - 2 = 10$ donne $x^2 = 4$, donc $x = 2$ ou $x = -2$.\n$f(2) = 8 - 4 = 4$ et $f(-2) = -8 + 4 = -4$.\nCe sont les points $(2 ; 4)$ et $(-2 ; -4)$, où les tangentes ont pour équations $y = 10x - 16$ et $y = 10x + 16$.\n⚠️ On résout $f'(x) = 10$, et non $f(x) = 10x$ : on cherche une PENTE, pas un point d'intersection.",
           schema: repere(
@@ -218,6 +269,7 @@ export const exercicesDerivationPremiereSpe: FicheExercicesData = {
         },
         {
           enonce: "Soit $f(x) = \\dfrac{1}{x}$. En revenant à la définition, montrer que $f$ est dérivable en $2$ et calculer $f'(2)$.",
+          reponses: [{ question: "f'(2)", attendu: "-1/4" }],
           correction:
             "$f(2 + h) - f(2) = \\dfrac{1}{2 + h} - \\dfrac{1}{2}$. On réduit au même dénominateur :\n$= \\dfrac{2 - (2 + h)}{2(2 + h)} = \\dfrac{-h}{2(2 + h)}$.\nOn divise par $h$ (avec $h \\neq 0$) : $\\dfrac{f(2 + h) - f(2)}{h} = \\dfrac{-1}{2(2 + h)}$.\nQuand $h$ tend vers $0$, $2(2 + h)$ tend vers $4$ : le quotient tend vers $-\\dfrac{1}{4}$.\nDonc $f$ est dérivable en $2$ et $f'(2) = -\\dfrac{1}{4}$.\n✔️ C'est bien ce que donne la formule : $-\\dfrac{1}{x^2}$ vaut $-\\dfrac{1}{4}$ en $2$.\n⚠️ Diviser par $h$, c'est multiplier le dénominateur par $h$ : le $h$ du numérateur disparaît, et c'est tout le but.\nSur le dessin, la tangente au point $\\left(2 ; \\dfrac{1}{2}\\right)$ descend de $1$ quand on avance de $4$ : $y = -\\dfrac{1}{4}x + 1$.",
           schema: repere(
@@ -230,6 +282,12 @@ export const exercicesDerivationPremiereSpe: FicheExercicesData = {
         {
           enonce:
             "On a tracé la courbe de $f(x) = x^3 - 3x$ et ses tangentes aux points d'abscisses $-1$, $0$ et $1$.\na) Lire $f'(-1)$, $f'(0)$ et $f'(1)$ sur le dessin.\nb) Retrouver ces valeurs par le calcul.\nc) Donner l'équation de la tangente en $0$.",
+          reponses: [
+            { question: "a) f'(-1)", attendu: "0" },
+            { question: "a) f'(0)", attendu: "-3" },
+            { question: "a) f'(1)", attendu: "0" },
+            { question: "c)", attendu: "y = -3x" },
+          ],
           figure: repere(
             [-3, 3, -4, 4],
             [
@@ -267,6 +325,13 @@ export const exercicesDerivationPremiereSpe: FicheExercicesData = {
           titre: "La pierre qui tombe de la falaise",
           enonce:
             "Une pierre se détache du haut d'une falaise de $80$ m. On néglige la résistance de l'air : au bout de $t$ secondes, elle est tombée de $d(t) = 5t^2$ mètres.\na) Calculer sa vitesse moyenne entre $t = 1$ et $t = 3$.\nb) En revenant à la définition, calculer sa vitesse à l'instant $t = 2$.\nc) Au bout de combien de temps touche-t-elle le sol, et à quelle vitesse ? Donner cette vitesse en km/h.",
+          reponses: [
+            { question: "a)", attendu: "20" },
+            { question: "b)", attendu: "20" },
+            { question: "c) temps", attendu: "4" },
+            { question: "c) vitesse (m/s)", attendu: "40" },
+            { question: "c) vitesse (km/h)", attendu: "144" },
+          ],
           correction:
             "a) $d(1) = 5$ et $d(3) = 45$. Vitesse moyenne : $\\dfrac{45 - 5}{3 - 1} = \\dfrac{40}{2} = 20$ m/s.\nb) $d(2 + h) = 5(4 + 4h + h^2) = 20 + 20h + 5h^2$, et $d(2) = 20$.\n$\\dfrac{d(2 + h) - d(2)}{h} = \\dfrac{20h + 5h^2}{h} = 20 + 5h$, qui tend vers $20$ quand $h$ tend vers $0$.\nÀ $t = 2$ s, la pierre tombe à $20$ m/s.\n⭐ Même nombre qu'en a), et ce n'est pas un hasard : pour une fonction du second degré, la vitesse au MILIEU d'un intervalle égale la vitesse moyenne sur cet intervalle.\nc) Elle touche le sol quand $d(t) = 80$ : $5t^2 = 80$, $t^2 = 16$, donc $t = 4$ s (un temps est positif).\n$d'(t) = 10t$, donc $d'(4) = 40$ m/s.\nEn km/h : $40 \\times 3{,}6 = 144$ km/h.\n⚠️ $d'(t)$ est en mètres PAR SECONDE : pour passer en km/h, on multiplie par $3{,}6$, on ne divise pas.",
           // Pas de courbe : le repère gradue chaque entier, et 80 m en demandent 80.
@@ -277,6 +342,12 @@ export const exercicesDerivationPremiereSpe: FicheExercicesData = {
           titre: "Une planche de skate de plus",
           enonce:
             "Un atelier fabrique des planches de skate. Fabriquer $q$ planches par jour coûte $C(q) = q^2 + 50q + 1000$ euros.\na) Calculer $C'(q)$, puis $C'(20)$.\nb) Calculer le coût réel de la 21ᵉ planche, $C(21) - C(20)$. Comparer.\nc) Chaque planche est vendue $130$ euros. Tant qu'une planche de plus coûte moins qu'elle ne rapporte, l'atelier a intérêt à produire davantage. Jusqu'à combien de planches par jour ?",
+          reponses: [
+            { question: "a) C'(q)", attendu: "2q+50" },
+            { question: "a) C'(20)", attendu: "90" },
+            { question: "b)", attendu: "91" },
+            { question: "c)", attendu: "40" },
+          ],
           correction:
             "a) $C'(q) = 2q + 50$, donc $C'(20) = 90$. Le coût marginal à $20$ planches est de $90$ euros par planche.\nb) $C(20) = 400 + 1000 + 1000 = 2400$ et $C(21) = 441 + 1050 + 1000 = 2491$.\nLa 21ᵉ planche coûte donc $2491 - 2400 = 91$ euros : presque exactement $C'(20)$.\n⭐ C'est le sens du nombre dérivé en économie : $C'(q)$ donne, à peu près, le coût d'UNE planche de plus.\nc) On veut $C'(q) < 130$ : $2q + 50 < 130$, soit $2q < 80$, donc $q < 40$.\nEn dessous de $40$ planches par jour, une planche de plus rapporte plus qu'elle ne coûte : l'atelier a intérêt à monter jusqu'à $40$ planches par jour.\n⚠️ On compare le coût d'une planche DE PLUS au prix de vente, pas le coût TOTAL : $2400$ euros pour $20$ planches ne se compare pas à $130$.",
           schema: tableau(["q", "20", "21", "40"], ["C'(q) (€)", 90, 92, 130]),
@@ -286,6 +357,12 @@ export const exercicesDerivationPremiereSpe: FicheExercicesData = {
           titre: "Les deux tangentes issues d'un point",
           enonce:
             "Soit $\\mathcal{P}$ la parabole d'équation $y = x^2$ et le point $A(1 ; -3)$, situé sous la parabole.\na) Écrire l'équation de la tangente à $\\mathcal{P}$ au point d'abscisse $a$.\nb) Pour quelles valeurs de $a$ cette tangente passe-t-elle par $A$ ?\nc) En déduire les équations des deux tangentes à $\\mathcal{P}$ qui passent par $A$.",
+          reponses: [
+            { question: "a)", attendu: "y = 2ax - a^2" },
+            { question: "b)", attendu: "3 ; -1" },
+            { question: "c) a = 3", attendu: "y = 6x - 9" },
+            { question: "c) a = -1", attendu: "y = -2x - 1" },
+          ],
           correction:
             "a) $f(x) = x^2$, $f'(x) = 2x$. Au point d'abscisse $a$ : $y = 2a(x - a) + a^2$, soit $y = 2ax - a^2$.\nb) La tangente passe par $A(1 ; -3)$ si ses coordonnées vérifient l'équation : $-3 = 2a \\times 1 - a^2$.\nOn obtient $a^2 - 2a - 3 = 0$. $\\Delta = 4 + 12 = 16$, donc $a = \\dfrac{2 + 4}{2} = 3$ ou $a = \\dfrac{2 - 4}{2} = -1$.\nc) Pour $a = 3$ : $y = 6x - 9$. Pour $a = -1$ : $y = -2x - 1$.\n✔️ Vérification avec $A$ : $6 - 9 = -3$ et $-2 - 1 = -3$. Les deux droites passent bien par $A$.\n⭐ L'inconnue n'est pas $x$ mais $a$, l'abscisse du point de contact : c'est ce changement de regard qui fait l'exercice.",
           schema: repere(
@@ -303,6 +380,13 @@ export const exercicesDerivationPremiereSpe: FicheExercicesData = {
           titre: "Un médicament dans le sang",
           enonce:
             "Après une injection, la concentration d'un médicament dans le sang est $C(t) = \\dfrac{10t}{t^2 + 1}$ (en mg/L), où $t \\geqslant 0$ est le temps en heures.\na) Montrer que $C'(t) = \\dfrac{10(1 - t^2)}{(t^2 + 1)^2}$.\nb) Calculer $C'(0)$ et donner l'équation de la tangente à l'origine. Que signifie ce nombre ?\nc) Calculer $C'(1)$ et $C(1)$. Que se passe-t-il au bout d'une heure ?\nd) Calculer $C'(2)$ et l'interpréter.",
+          reponses: [
+            { question: "b) C'(0)", attendu: "10" },
+            { question: "b) tangente", attendu: "y = 10t" },
+            { question: "c) C'(1)", attendu: "0" },
+            { question: "c) C(1)", attendu: "5" },
+            { question: "d) C'(2)", attendu: "-1,2" },
+          ],
           correction:
             "a) $u(t) = 10t$, $u'(t) = 10$ ; $v(t) = t^2 + 1$, $v'(t) = 2t$.\n$C'(t) = \\dfrac{10(t^2 + 1) - 10t \\times 2t}{(t^2 + 1)^2} = \\dfrac{10 - 10t^2}{(t^2 + 1)^2} = \\dfrac{10(1 - t^2)}{(t^2 + 1)^2}$.\nb) $C'(0) = \\dfrac{10}{1} = 10$. Comme $C(0) = 0$, la tangente à l'origine est $y = 10t$.\nJuste après l'injection, la concentration monte à la vitesse de $10$ mg/L par heure.\nc) $C'(1) = 0$ et $C(1) = \\dfrac{10}{2} = 5$ mg/L. La tangente est horizontale : la concentration cesse de monter. Elle atteint $5$ mg/L au bout d'une heure, puis commence à baisser.\nd) $C'(2) = \\dfrac{10(1 - 4)}{25} = -\\dfrac{30}{25} = -1{,}2$.\nDeux heures après l'injection, la concentration BAISSE, à la vitesse de $1{,}2$ mg/L par heure : le corps élimine le médicament.\n⚠️ Un nombre dérivé négatif ne veut pas dire que la concentration est négative : elle vaut $C(2) = 4$ mg/L. Il dit qu'elle DIMINUE.",
           schema: repere(

@@ -60,6 +60,12 @@ export const exercicesAnalyseGraphiquePremiereSpe: FicheExercicesData = {
       exercices: [
         {
           enonce: "Voici la courbe d'une fonction $f$ définie sur $[-4\\,;\\,5]$.\nLire $f(-3)$, $f(-1)$, $f(2)$ et $f(5)$.",
+          reponses: [
+            { question: "f(-3)", attendu: "1" },
+            { question: "f(-1)", attendu: "-1" },
+            { question: "f(2)", attendu: "2" },
+            { question: "f(5)", attendu: "-1" },
+          ],
           figure: courbe("P1", [-5, 6, -2, 3]),
           correction:
             "On part de chaque abscisse, on rejoint la courbe, on lit l'ordonnée.\n$f(-3) = 1$, $f(-1) = -1$ (le creux), $f(2) = 2$ (le sommet), $f(5) = -1$ (le bord droit).\n⛔ Le piège : lire $f(5)$ « hors du dessin ». La courbe s'arrête en $5$ : son dernier point a pour ordonnée $-1$.",
@@ -67,6 +73,12 @@ export const exercicesAnalyseGraphiquePremiereSpe: FicheExercicesData = {
         },
         {
           enonce: "Avec la courbe de $f$ de l'exercice 1, donner les antécédents de :\na) $1$\nb) $2$\nc) $-1$\nd) $3$",
+          reponses: [
+            { question: "a)", attendu: "-3 ; 1 ; 3" },
+            { question: "b)", attendu: "-4 ; 2" },
+            { question: "c)", attendu: "-1 ; 5" },
+            { question: "d)", attendu: ["aucun", "aucun antécédent", "∅"] },
+          ],
           figure: courbe("P1", [-5, 6, -2, 3]),
           correction:
             "On trace chaque droite horizontale et on relève TOUTES les abscisses de rencontre.\na) $y = 1$ coupe la courbe trois fois : $-3$, $1$ et $3$.\nb) $y = 2$ : en $-4$ (le bord gauche) et en $2$ (le sommet).\nc) $y = -1$ : en $-1$ (le creux) et en $5$ (le bord droit).\nd) $y = 3$ ne rencontre pas la courbe : aucun antécédent.\n⛔ Le piège au a) : s'arrêter à deux antécédents. Avec trois sommets, une droite peut couper la courbe trois fois.",
@@ -75,6 +87,12 @@ export const exercicesAnalyseGraphiquePremiereSpe: FicheExercicesData = {
         },
         {
           enonce: "Voici la courbe d'une fonction $g$ définie sur $[-3\\,;\\,5]$. Résoudre graphiquement :\na) $g(x) = 0$\nb) $g(x) = -1$\nc) $g(x) = 2$\nd) $g(x) = 1$",
+          reponses: [
+            { question: "a)", attendu: "-1 ; 3" },
+            { question: "b)", attendu: "-2 ; 0 ; 2" },
+            { question: "c)", attendu: "5" },
+            { question: "d)", attendu: "4" },
+          ],
           figure: courbe("P2", [-4, 6, -3, 3]),
           correction:
             "a) La courbe TOUCHE l'axe en $-1$ et le COUPE en $3$ : $S = \\{-1\\,;\\,3\\}$.\nb) $y = -1$ coupe la courbe en $-2$, $0$ et $2$ : $S = \\{-2\\,;\\,0\\,;\\,2\\}$.\nc) $y = 2$ : seulement au bord droit, $S = \\{5\\}$.\nd) $y = 1$ : $S = \\{4\\}$.\n⛔ Le piège au a) : oublier $-1$. Un point où la courbe touche l'axe sans le traverser est bien une solution.",
@@ -98,6 +116,10 @@ export const exercicesAnalyseGraphiquePremiereSpe: FicheExercicesData = {
         },
         {
           enonce: "Avec la courbe de $f$ de l'exercice 1, résoudre graphiquement :\na) $f(x) \\geqslant 1$\nb) $f(x) < 0$",
+          reponses: [
+            { question: "a)", attendu: ["[-4 ; -3] ∪ [1 ; 3]", "[1 ; 3] ∪ [-4 ; -3]"] },
+            { question: "b)", attendu: ["]-2 ; 0[ ∪ ]4 ; 5]", "]4 ; 5] ∪ ]-2 ; 0["] },
+          ],
           figure: courbe("P1", [-5, 6, -2, 3]),
           correction:
             "a) $y = 1$ coupe la courbe en $-3$, $1$ et $3$. La courbe est sur ou au-dessus de la droite de $-4$ à $-3$, puis de $1$ à $3$. Inégalité large : $S = [-4\\,;\\,-3] \\,\\cup\\, [1\\,;\\,3]$.\nb) Sous l'axe : entre $-2$ et $0$, et après $4$. Strict : on exclut les zéros, mais on garde la borne $5$ où $f(5) = -1 < 0$.\n$S = ]-2\\,;\\,0[ \\,\\cup\\, ]4\\,;\\,5]$.",
@@ -114,6 +136,12 @@ export const exercicesAnalyseGraphiquePremiereSpe: FicheExercicesData = {
         },
         {
           enonce: "Avec la courbe de $g$ de l'exercice 3 :\na) Quel est le maximum de $g$ sur $[-3\\,;\\,5]$ ? En quelle valeur est-il atteint ?\nb) Quel est le minimum de $g$ ? En combien de valeurs est-il atteint ?",
+          reponses: [
+            { question: "a) maximum", attendu: "2" },
+            { question: "a) atteint en", attendu: "5" },
+            { question: "b) minimum", attendu: "-2" },
+            { question: "b) nombre de valeurs", attendu: ["2", "deux"] },
+          ],
           figure: courbe("P2", [-4, 6, -3, 3]),
           correction:
             "a) Le sommet intérieur vaut $0$, mais au bord droit $g(5) = 2$. Le maximum est $2$, atteint en $5$.\nb) Le minimum est $-2$ : il est atteint DEUX fois, en $-3$ (le bord gauche) et en $1$ (le creux). Les antécédents de $-2$ sont $-3$ et $1$.\n⛔ Le piège au a) : répondre $0$, la valeur du sommet. Un extremum se cherche aussi aux BORNES.",
@@ -135,6 +163,11 @@ export const exercicesAnalyseGraphiquePremiereSpe: FicheExercicesData = {
       exercices: [
         {
           enonce: "Avec la courbe de $f$ de l'exercice 1 :\na) Résoudre $f(x) = 0$, $f(x) = 2$ et $f(x) = -1$.\nb) Dresser le tableau de variations de $f$.",
+          reponses: [
+            { question: "a) f(x) = 0", attendu: "-2 ; 0 ; 4" },
+            { question: "a) f(x) = 2", attendu: "-4 ; 2" },
+            { question: "a) f(x) = -1", attendu: "-1 ; 5" },
+          ],
           figure: courbe("P1", [-5, 6, -2, 3]),
           correction:
             "a) $f(x) = 0$ : $S = \\{-2\\,;\\,0\\,;\\,4\\}$. $f(x) = 2$ : $S = \\{-4\\,;\\,2\\}$. $f(x) = -1$ : $S = \\{-1\\,;\\,5\\}$.\nb) Sommets : creux en $-1$ ($f(-1) = -1$), bosse en $2$ ($f(2) = 2$). Bornes : $f(-4) = 2$, $f(5) = -1$.\nPremière ligne : $-4$, $-1$, $2$, $5$ ; flèches : descend, monte, descend.",
@@ -150,6 +183,10 @@ export const exercicesAnalyseGraphiquePremiereSpe: FicheExercicesData = {
         },
         {
           enonce: "Avec la courbe de $g$ de l'exercice 3, résoudre :\na) $g(x) \\geqslant 0$\nb) $g(x) < 0$",
+          reponses: [
+            { question: "a)", attendu: ["{-1} ∪ [3 ; 5]", "[3 ; 5] ∪ {-1}"] },
+            { question: "b)", attendu: ["[-3 ; -1[ ∪ ]-1 ; 3[", "]-1 ; 3[ ∪ [-3 ; -1["] },
+          ],
           figure: courbe("P2", [-4, 6, -3, 3]),
           correction:
             "a) La courbe est sur ou au-dessus de l'axe en $-1$ (elle le touche) et de $3$ à $5$. $S = \\{-1\\} \\,\\cup\\, [3\\,;\\,5]$.\nb) C'est le reste : de $-3$ à $3$, PRIVÉ de $-1$. $S = [-3\\,;\\,-1[ \\,\\cup\\, ]-1\\,;\\,3[$.\n⛔ Le piège : oublier le point isolé $\\{-1\\}$ au a), ou répondre $[-3\\,;\\,3[$ au b). En $-1$, $g(-1) = 0$ : ni strictement négatif, mais bien positif ou nul.",
@@ -157,6 +194,12 @@ export const exercicesAnalyseGraphiquePremiereSpe: FicheExercicesData = {
         },
         {
           enonce: "Une fonction $h$ est définie sur $[-2\\,;\\,6]$. On ne connaît que son tableau de variations : en première ligne $-2$, $1$, $4$, $6$ ; $h$ descend de $3$ à $-2$, monte de $-2$ à $1$, puis descend de $1$ à $-1$.\na) Combien de fois $h$ s'annule-t-elle ?\nb) On note $\\alpha < \\beta < \\gamma$ ces zéros. Dans quels intervalles se trouvent-ils ?\nc) Dresser le tableau de signes de $h$, avec $\\alpha$, $\\beta$, $\\gamma$.",
+          reponses: [
+            { question: "a)", attendu: ["3", "trois"] },
+            { question: "b) α ∈", attendu: "]-2 ; 1[" },
+            { question: "b) β ∈", attendu: "]1 ; 4[" },
+            { question: "b) γ ∈", attendu: "]4 ; 6[" },
+          ],
           figure: tableauVariations([-2, 1, 4, 6], [3, -2, 1, -1], "h"),
           correction:
             "a) Chaque flèche passe d'un signe à l'autre : de $3$ à $-2$, de $-2$ à $1$, de $1$ à $-1$. Elle croise $0$ une fois chacune : $h$ s'annule TROIS fois.\nb) $\\alpha \\in\\, ]-2\\,;\\,1[$, $\\beta \\in\\, ]1\\,;\\,4[$, $\\gamma \\in\\, ]4\\,;\\,6[$.\nc) Première ligne : $-2$, $\\alpha$, $\\beta$, $\\gamma$, $6$. Signes : $+$ (on part de $3$), $0$, $-$, $0$, $+$, $0$, $-$ (on finit à $-1$).\n⭐ Le tableau de variations SUFFIT pour le tableau de signes, même sans connaître les zéros : on les nomme.",
@@ -165,6 +208,10 @@ export const exercicesAnalyseGraphiquePremiereSpe: FicheExercicesData = {
         },
         {
           enonce: "Avec la courbe de $f$ de l'exercice 1, résoudre :\na) $f(x) \\leqslant -1$\nb) $f(x) > -1$",
+          reponses: [
+            { question: "a)", attendu: ["{-1} ∪ {5}", "{-1 ; 5}", "-1 ; 5"] },
+            { question: "b)", attendu: ["[-4 ; -1[ ∪ ]-1 ; 5[", "]-1 ; 5[ ∪ [-4 ; -1["] },
+          ],
           figure: courbe("P1", [-5, 6, -2, 3]),
           correction:
             "a) La droite $y = -1$ ne touche la courbe qu'en deux points : le creux $-1$ et le bord $5$. Ailleurs, la courbe est au-dessus. $S = \\{-1\\} \\,\\cup\\, \\{5\\}$ : deux solutions isolées.\nb) Tout le reste : $S = [-4\\,;\\,-1[ \\,\\cup\\, ]-1\\,;\\,5[$.\n⛔ Le piège : écrire $[-1\\,;\\,5]$ au a). Entre $-1$ et $5$, la courbe remonte jusqu'à $2$ : elle n'est pas sous la droite.",
@@ -172,6 +219,10 @@ export const exercicesAnalyseGraphiquePremiereSpe: FicheExercicesData = {
         },
         {
           enonce: "On note $S(t)$ le solde commercial d'un pays (exportations moins importations), en milliards d'euros, au trimestre $t$ ($0 \\leqslant t \\leqslant 8$).\na) Sur quelle période le pays est-il en excédent ($S(t) > 0$) ?\nb) Dresser le tableau de signes de $S$.\nc) Dresser le tableau de variations de $S$. Quel a été le pire déficit ?",
+          reponses: [
+            { question: "a)", attendu: "]3 ; 5[" },
+            { question: "c) pire déficit", attendu: "-3" },
+          ],
           figure: courbe("SOLDE", [-1, 9, -4, 2]),
           correction:
             "a) La courbe est au-dessus de l'axe entre $3$ et $5$, exclus : $S = ]3\\,;\\,5[$. Le pays est en excédent entre le 3e et le 5e trimestre.\nb) Première ligne : $0$, $3$, $5$, $8$. Signes : $-$, $0$, $+$, $0$, $-$.\nc) Sommets : bosse en $4$ ($S(4) = 1$), creux en $7$ ($S(7) = -2$). Bornes : $S(0) = -3$, $S(8) = -1$.\nPremière ligne : $0$, $4$, $7$, $8$.\nLe pire déficit est $-3$ milliards, au départ ($t = 0$) — pas au creux en $7$.\n⛔ Le piège au c) : prendre le creux pour le minimum. On compare avec la borne $0$.",
@@ -185,6 +236,12 @@ export const exercicesAnalyseGraphiquePremiereSpe: FicheExercicesData = {
         },
         {
           enonce: "Avec le tableau de variations de $f$ (exercice 9), sans calcul, comparer :\na) $f(-3)$ et $f(-2)$\nb) $f(0)$ et $f(1)$\nc) $f(-1)$ et $f(4,5)$",
+          // Sans `ordre` : la comparaison se lit au texte, le signe compte.
+          reponses: [
+            { question: "a)", attendu: ["f(-3) > f(-2)", "f(-2) < f(-3)"] },
+            { question: "b)", attendu: ["f(0) < f(1)", "f(1) > f(0)"] },
+            { question: "c)", attendu: ["f(-1) < f(4,5)", "f(4,5) > f(-1)"] },
+          ],
           figure: tableauVariations([-4, -1, 2, 5], [2, -1, 2, -1], "f"),
           correction:
             "a) $-3$ et $-2$ sont dans $[-4\\,;\\,-1]$, où $f$ DÉCROÎT : l'ordre est renversé. $-3 < -2$ donc $f(-3) > f(-2)$.\nb) $0$ et $1$ sont dans $[-1\\,;\\,2]$, où $f$ CROÎT : l'ordre est conservé. $f(0) < f(1)$.\nc) $-1$ et $4,5$ ne sont pas sur le même morceau : la règle ne s'applique pas directement. Mais $f(-1) = -1$ est le minimum de $f$ sur $[-4\\,;\\,2]$, et sur $[2\\,;\\,5]$ $f$ ne descend jusqu'à $-1$ qu'en $5$. Donc $f(4,5) > -1 = f(-1)$.\n⛔ Le piège au c) : appliquer « croissante donc conserve l'ordre » à deux nombres pris sur deux morceaux différents.",
@@ -192,6 +249,10 @@ export const exercicesAnalyseGraphiquePremiereSpe: FicheExercicesData = {
         },
         {
           enonce: "On reprend $g$ (exercice 3).\na) Résoudre $g(x) \\leqslant -1$.\nb) Résoudre $g(x) > -2$.",
+          reponses: [
+            { question: "a)", attendu: ["[-3 ; -2] ∪ [0 ; 2]", "[0 ; 2] ∪ [-3 ; -2]"] },
+            { question: "b)", attendu: ["]-3 ; 1[ ∪ ]1 ; 5]", "]1 ; 5] ∪ ]-3 ; 1["] },
+          ],
           figure: courbe("P2", [-4, 6, -3, 3]),
           correction:
             "a) $y = -1$ coupe la courbe en $-2$, $0$ et $2$. Sous la droite (ou dessus) : de $-3$ à $-2$, puis de $0$ à $2$. $S = [-3\\,;\\,-2] \\,\\cup\\, [0\\,;\\,2]$.\nb) La courbe est au-dessus de $y = -2$ partout, sauf en $-3$ et en $1$ où elle la touche. $S = ]-3\\,;\\,1[ \\,\\cup\\, ]1\\,;\\,5]$.\n⛔ Le piège au b) : laisser $-3$ dans l'ensemble. $g(-3) = -2$, et $-2 > -2$ est faux.",
@@ -214,6 +275,13 @@ export const exercicesAnalyseGraphiquePremiereSpe: FicheExercicesData = {
         {
           titre: "Le seuil de rentabilité",
           enonce: "Un artisan fabrique des objets en bois. On note $B(q)$ son bénéfice mensuel, en centaines d'euros, quand il fabrique $q$ dizaines d'objets ($0 \\leqslant q \\leqslant 7$).\na) Lire $B(0)$ et l'interpréter.\nb) Déterminer le seuil de rentabilité : la production à partir de laquelle le bénéfice devient positif.\nc) Dresser le tableau de signes et le tableau de variations de $B$.\nd) Quelle production rapporte le plus ? Combien ?\ne) L'artisan vise un bénéfice d'au moins $200$ euros. Quelles productions conviennent ?",
+          reponses: [
+            { question: "a) B(0)", attendu: "-2" },
+            { question: "b) seuil (en objets)", attendu: ["20", "2"] },
+            { question: "d) production (en objets)", attendu: ["50", "5"] },
+            { question: "d) bénéfice (en euros)", attendu: ["300", "3"] },
+            { question: "e)", attendu: "[4 ; 6]" },
+          ],
           figure: courbe("ARTISAN", [-1, 8, -3, 4]),
           correction:
             "a) $B(0) = -2$ : sans rien produire, il perd $200$ euros (loyer de l'atelier, assurance).\nb) $B(q) = 0$ pour $q = 2$, et la courbe est au-dessus de l'axe ensuite. Le seuil de rentabilité est $20$ objets.\nc) Signes : première ligne $0$, $2$, $7$ ; $-$, $0$, $+$. Variations : première ligne $0$, $5$, $7$ ; $B$ monte de $-2$ à $3$, puis descend jusqu'à $1$.\nd) Le maximum est $3$, atteint en $q = 5$ : $50$ objets rapportent $300$ euros.\ne) On résout $B(q) \\geqslant 2$ : $y = 2$ coupe la courbe en $4$ et en $6$. $S = [4\\,;\\,6]$ : entre $40$ et $60$ objets.\n⛔ Le piège au d) : produire « le plus possible ». Au-delà de $50$ objets, le bénéfice baisse (heures supplémentaires, bois plus cher).",
@@ -228,6 +296,11 @@ export const exercicesAnalyseGraphiquePremiereSpe: FicheExercicesData = {
         {
           titre: "La montgolfière",
           enonce: "On note $v(t)$ la vitesse VERTICALE d'une montgolfière, en m/s, $t$ minutes après le décollage ($0 \\leqslant t \\leqslant 8$). Quand $v(t) > 0$, elle monte ; quand $v(t) < 0$, elle descend.\na) Pendant quelles périodes la montgolfière monte-t-elle ?\nb) Dresser le tableau de signes de $v$.\nc) En déduire le tableau de variations de son ALTITUDE. À quel instant est-elle la plus haute (sur les 6 premières minutes) ?\nd) Lire $v(4)$. Que se passe-t-il à cet instant ?",
+          reponses: [
+            { question: "a)", attendu: ["[0 ; 2[ ∪ ]6 ; 8]", "]6 ; 8] ∪ [0 ; 2["] },
+            { question: "c) la plus haute à t =", attendu: "2" },
+            { question: "d) v(4)", attendu: "-2" },
+          ],
           figure: courbe("BALLON", [-1, 9, -3, 3]),
           correction:
             "a) $v(t) > 0$ quand la courbe est au-dessus de l'axe : $S = [0\\,;\\,2[ \\,\\cup\\, ]6\\,;\\,8]$. Elle monte pendant les 2 premières minutes, puis après la 6e.\nb) Première ligne : $0$, $2$, $6$, $8$. Signes : $+$, $0$, $-$, $0$, $+$.\nc) Le signe de la vitesse donne le sens de l'altitude : l'altitude MONTE sur $[0\\,;\\,2]$, DESCEND sur $[2\\,;\\,6]$, remonte sur $[6\\,;\\,8]$. Elle est la plus haute (sur les 6 premières minutes) en $t = 2$, quand la vitesse passe de $+$ à $-$.\nd) $v(4) = -2$ : la montgolfière descend le plus vite, à $2$ m/s.\n⛔ Le piège au c) : chercher le point le plus haut de la courbe de $v$. Le sommet de la VITESSE ($t = 0$ ou $t = 8$) n'est pas le sommet de l'ALTITUDE.\n⭐ C'est exactement le lien entre $f'$ et $f$ : le signe de la dérivée donne les variations.",
@@ -237,6 +310,12 @@ export const exercicesAnalyseGraphiquePremiereSpe: FicheExercicesData = {
         {
           titre: "Le barrage",
           enonce: "On note $N(t)$ l'écart entre le niveau d'un lac de barrage et sa cote d'alerte, en mètres, $t$ mois après le 1er janvier ($0 \\leqslant t \\leqslant 12$). Quand $N(t) > 0$, le niveau dépasse la cote d'alerte.\na) Résoudre $N(t) > 0$. Pendant combien de mois au total le niveau dépasse-t-il la cote d'alerte ?\nb) Dresser le tableau de variations de $N$.\nc) Combien de fois dans l'année l'écart vaut-il exactement $1$ mètre ? Quand ?",
+          reponses: [
+            { question: "a) N(t) > 0", attendu: ["]3 ; 7[ ∪ ]11 ; 12]", "]11 ; 12] ∪ ]3 ; 7["] },
+            { question: "a) durée (mois)", attendu: "5" },
+            { question: "c) combien de fois", attendu: ["3", "trois"] },
+            { question: "c) quand (t =)", attendu: "4 ; 6 ; 12" },
+          ],
           figure: courbe("BARRAGE", [-1, 13, -4, 3], true),
           correction:
             "a) La courbe est au-dessus de l'axe entre $3$ et $7$, puis après $11$. $S = ]3\\,;\\,7[ \\,\\cup\\, ]11\\,;\\,12]$. Durée : $(7 - 3) + (12 - 11) = 4 + 1 = 5$ mois.\nb) Sommets : bosse en $5$ ($N(5) = 2$), creux en $9$ ($N(9) = -2$). Bornes : $N(0) = -3$, $N(12) = 1$.\nPremière ligne : $0$, $5$, $9$, $12$ ; monte, descend, monte.\nc) $y = 1$ coupe la courbe en $4$, $6$ et $12$ : trois fois, fin avril, fin juin et fin décembre.\n⛔ Le piège au a) : oublier le morceau $]11\\,;\\,12]$ en fin d'année.",
@@ -246,6 +325,13 @@ export const exercicesAnalyseGraphiquePremiereSpe: FicheExercicesData = {
         {
           titre: "Exactement une solution",
           enonce: "On reprend la fonction $g$ de l'exercice 3, définie sur $[-3\\,;\\,5]$.\na) Combien de solutions ont $g(x) = -2$, $g(x) = -1$, $g(x) = 0$ et $g(x) = 1$ ?\nb) Pour quelles valeurs du réel $k$ l'équation $g(x) = k$ a-t-elle exactement UNE solution ?",
+          reponses: [
+            { question: "a) g(x) = -2", attendu: "2" },
+            { question: "a) g(x) = -1", attendu: "3" },
+            { question: "a) g(x) = 0", attendu: "2" },
+            { question: "a) g(x) = 1", attendu: "1" },
+            { question: "b)", attendu: ["]0 ; 2]", "0 < k ≤ 2"] },
+          ],
           figure: tableauVariations([-3, -1, 1, 5], [-2, 0, -2, 2], "g"),
           correction:
             "a) $g(x) = -2$ : en $-3$ et en $1$, deux solutions. $g(x) = -1$ : en $-2$, $0$ et $2$, trois solutions. $g(x) = 0$ : en $-1$ et en $3$, deux solutions. $g(x) = 1$ : en $4$, une solution.\nb) On fait monter la droite $y = k$ :\n— $k < -2$ ou $k > 2$ : aucune solution ;\n— $k = -2$ : deux ; $-2 < k < 0$ : trois (une sur chaque flèche) ; $k = 0$ : deux (le sommet $-1$ et le point $3$) ;\n— $0 < k \\leqslant 2$ : seule la dernière flèche (de $-2$ à $2$) atteint ces hauteurs : UNE solution.\nExactement une solution pour $0 < k \\leqslant 2$.\n⛔ Le piège : oublier $k = 2$ (atteint au bord, en $5$) ou ajouter $k = 0$ (deux solutions).",
