@@ -148,7 +148,7 @@ const POSE_DIV: Situ2[] = [
  * Une opération posée : en situation (une fois sur deux, si une situation
  * plausible existe) ou en calcul, avec le canvas de l'opération, résultat caché.
  */
-function genPose(op: Op, a: number, b: number, explication: string, opts: { probleme?: boolean } = {}) {
+function genPose(op: Op, a: number, b: number, explication: string, opts: { probleme?: boolean; situation?: number } = {}) {
   // Un « problème » : toujours en situation, et sans canvas (il donnerait l'opération).
   const sansCanvas = !!opts.probleme;
   const rep = op === "addition" ? a + b : op === "soustraction" ? a - b : op === "multiplication" ? a * b : a / b;
@@ -161,7 +161,8 @@ function genPose(op: Op, a: number, b: number, explication: string, opts: { prob
   );
   const situations = choix.map((c) => c.s);
   const canvas = sansCanvas ? {} : { canvas: canvasPose(op, a, b) };
-  if ((opts.probleme || Math.random() < 0.6) && situations.length) {
+  // ⛔⛔ 03/11/2026 : `situation` = 0 à ★1-★2 (le calcul seul), 1 au ★3 « en situation ».
+  if ((opts.probleme || Math.random() < (opts.situation ?? 0.6)) && situations.length) {
     const { s, x, y } = pick(choix);
     return {
       text: s.t(pick(PRENOMS), nb(x), nb(y)),
@@ -473,8 +474,41 @@ function genVerifierDivision(A: number, D: number) {
   };
 }
 
-/** QCM : l'opération inverse qui vérifie a + b = s, a × b = p ou D ÷ d = q (division exacte). */
-function genVerifierInverse(grand: boolean) {
+/** × 10, × 100, × 1 000 : par la valeur des chiffres (pas de canvas : on ne pose pas). */
+function genParDixCent(situation: boolean) {
+  const a = randomInt(12, 999);
+  const k = pick([10, 100, 1000]);
+  const rep = a * k;
+  const explication = cpe(
+    `multiplier par ${nb(k)} rend chaque chiffre ${nb(k)} fois plus grand.`,
+    `les unités deviennent des ${k === 10 ? "dizaines" : k === 100 ? "centaines" : "milliers"}, les dizaines des ${k === 10 ? "centaines" : k === 100 ? "milliers" : "dizaines de mille"}, et ainsi de suite.`,
+    `${nb(a)} × ${nb(k)} = ${nb(rep)}.`,
+    `le résultat est ${nb(rep)}.`,
+  );
+  if (situation) {
+    const p = pick(PRENOMS);
+    const t = pick([
+      `Un paquet contient ${nb(a)} feuilles. Le collège commande ${nb(k)} paquets.\nCombien de feuilles reçoit-il ?`,
+      `Une place de cinéma coûte ${nb(a)} €. La mairie achète ${nb(k)} places.\nCombien paie-t-elle ?`,
+      `${p.nom} fait ${nb(a)} m à chaque tour de parc. ${Il(p)} fait ${nb(k)} tours en un mois.\nQuelle distance parcourt-${il(p)}, en mètres ?`,
+      `Une boîte contient ${nb(a)} trombones. Le magasin reçoit ${nb(k)} boîtes.\nCombien de trombones reçoit-il ?`,
+      `Un carton pèse ${nb(a)} g. On empile ${nb(k)} cartons.\nQuelle masse cela fait-il, en grammes ?`,
+      `Un carnet a ${nb(a)} pages. Une imprimerie fabrique ${nb(k)} carnets.\nCombien de pages imprime-t-elle ?`,
+    ]);
+    const u = /€/.test(t) ? "€" : /en mètres/.test(t) ? "m" : /en grammes/.test(t) ? "g" : undefined;
+    return { text: t, format: "short" as const, expected: attendus(rep, u), comparator: "number_equal" as const, explanation: explication };
+  }
+  const text = pick([`Calcule ${nb(a)} × ${nb(k)}.`, `Que vaut ${nb(a)} × ${nb(k)} ?`, `Multiplie ${nb(a)} par ${nb(k)}.`, `Complète : ${nb(a)} × ${nb(k)} = …`, `Complète : ${nb(a)} × … = ${nb(rep)}`, `Écris le résultat de ${nb(k)} × ${nb(a)}.`]);
+  // « a × … = résultat » : c'est le multiplicateur qui manque.
+  return { text, format: "short" as const, expected: attendus(text.includes("× … =") ? k : rep), comparator: "number_equal" as const, explanation: explication };
+}
+
+/**
+ * QCM : l'opération inverse qui vérifie a + b = s, a × b = p ou D ÷ d = q (division exacte).
+ * ⛔⛔ 03/11/2026 : `contexte` = false à ★1-★2 (énoncés nus, ≤ 15 mots) ;
+ * true au ★3 (« Léa a calculé… », « Au tableau… »).
+ */
+function genVerifierInverse(grand: boolean, contexte = true) {
   const p = pick(PRENOMS);
   const op = pick(["addition", "multiplication", "division", "soustraction"] as const);
   let e: string;
@@ -512,17 +546,20 @@ function genVerifierInverse(grand: boolean) {
     pieges = [`${nb(q)} ÷ ${d} = ${nb(D)}`, `${nb(D)} × ${d} = ${nb(q)}`, `${nb(q)} + ${d} = ${nb(D)}`];
     canvas = canvasPose("division", D, d);
   }
+  const nus = [
+    `Quelle égalité permet de vérifier ${e} ?`,
+    `Vérifie ${e} par l’opération inverse.\nQuelle égalité choisis-tu ?`,
+    `Choisis l’égalité qui vérifie ${e}.`,
+    `Quelle opération inverse vérifie ${e} ?`,
+  ];
   return {
-    text: pick([
+    text: pick(contexte ? [
       `${p.nom} a calculé ${e}.\nQuelle égalité permet de vérifier son calcul ?`,
-      `Pour vérifier ${e}, quelle opération inverse faut-il faire ?`,
-      `On affirme que ${e}.\nQuelle égalité permet de le contrôler ?`,
-      `Vérifie ${e} avec l’opération inverse.\nQuelle égalité choisis-tu ?`,
       `Sur son cahier, ${p.nom} écrit ${e}.\nComment peut-${il(p)} vérifier ?`,
       `${p.nom} veut être sûr${p.f ? "e" : ""} que ${e}.\nQuelle égalité doit-${il(p)} contrôler ?`,
       `Au tableau, ${p.nom} a écrit ${e}.\nQuelle opération inverse prouve que c’est juste ?`,
       `Le professeur demande à ${p.nom} de vérifier ${e}.\nQuelle égalité doit-${il(p)} écrire ?`,
-    ]),
+    ] : nus),
     format: "qcm" as const,
     choices: shuffle([good, ...shuffle(distincts(good, pieges)).slice(0, 3)]),
     expected: [good],
@@ -773,7 +810,7 @@ export const calculPoseBank: TutorBankItemV4[] = [
     theme: "neutral",
     // 08/10/2026 : « pourquoi aligner ? » (leurre : « pour que l’opération soit
     // plus jolie ») devient un geste : où écrire le chiffre. Pas de canvas : il montrerait la réponse.
-    text: "On pose l’addition 1 247 + 35.\nSous quel chiffre de 1 247 faut-il écrire le 5 de 35 ?",
+    text: "Pose 1 247 + 35.\nSous quel chiffre va le 5 de 35 ?",
     format: "qcm",
     choices: ["sous le 7", "sous le 1", "sous le 2", "sous le 4"],
     expected: ["sous le 7"],
@@ -812,6 +849,36 @@ export const calculPoseBank: TutorBankItemV4[] = [
           `${nb(a)} + ${nb(b)} = ${nb(a + b)} (aucune colonne ne dépasse 9).`,
           `le résultat est ${nb(a + b)}.`,
         ),
+        { situation: 0 },
+      );
+    },
+  },
+  {
+    kind: "template",
+    id: "6e_entier_addition_posee_tpl_6_situation_simple",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "entier_calcul_pose",
+    microId: "entier_addition_posee",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Additionne colonne par colonne.",
+    tags: ["situation", "entier_calcul_pose", "addition", "template", "canvas"],
+    // 03/11/2026 : l'addition sans retenue en situation (★3).
+    generate: () => {
+      // ★1 : sans retenue (chaque colonne fait 9 au plus).
+      const [a, b] = sansRetenueAdd(Math.random() < 0.7 ? 3 : 4);
+      return genPose(
+        "addition",
+        a,
+        b,
+        cpe(
+          "une addition posée permet d’additionner des nombres en colonnes.",
+          "on aligne les unités sous les unités, puis on additionne les unités, les dizaines, les centaines…",
+          `${nb(a)} + ${nb(b)} = ${nb(a + b)} (aucune colonne ne dépasse 9).`,
+          `le résultat est ${nb(a + b)}.`,
+        ),
+        { situation: 1 },
       );
     },
   },
@@ -843,6 +910,39 @@ export const calculPoseBank: TutorBankItemV4[] = [
           `${nb(a)} + ${nb(b)} = ${nb(a + b)}.`,
           `le résultat est ${nb(a + b)}.`,
         ),
+        { situation: 0 },
+      );
+    },
+  },
+  {
+    kind: "template",
+    id: "6e_entier_addition_posee_tpl_5_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "entier_calcul_pose",
+    microId: "entier_addition_posee",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Attention à la retenue.",
+    tags: ["situation", "entier_calcul_pose", "addition", "retenue", "template", "canvas"],
+    // 06/10/2026 : le canvas affichait le RÉSULTAT (showResult par défaut) et
+    // des retenues écrites à la main ["", "1", "1"], fausses pour d'autres nombres.
+    // 03/11/2026 : la même addition, portée par une situation de vie (montée de ★1-★2 à ★3).
+    generate: () => {
+      // ★2 : au moins une retenue ; 3 + 3, 4 + 3 ou 3 + 2 chiffres.
+      const [ka, kb] = pick([[3, 3], [3, 3], [4, 3], [3, 2], [4, 4]]);
+      const [a, b] = avecRetenueAdd(ka, kb);
+      return genPose(
+        "addition",
+        a,
+        b,
+        cpe(
+          "dans une addition posée, une retenue apparaît quand une colonne dépasse 9.",
+          "on additionne colonne par colonne, en commençant par les unités, et on reporte la retenue dans la colonne suivante.",
+          `${nb(a)} + ${nb(b)} = ${nb(a + b)}.`,
+          `le résultat est ${nb(a + b)}.`,
+        ),
+        { situation: 1 },
       );
     },
   },
@@ -895,7 +995,7 @@ export const calculPoseBank: TutorBankItemV4[] = [
     microId: "entier_soustraction_posee",
     difficulty: 1,
     theme: "neutral",
-    text: "On pose la soustraction 584 − 31.\nSous quel chiffre de 584 faut-il écrire le 3 de 31 ?",
+    text: "Pose 584 − 31.\nSous quel chiffre va le 3 de 31 ?",
     format: "qcm",
     choices: ["sous le 8", "sous le 5", "sous le 4"],
     expected: ["sous le 8"],
@@ -934,6 +1034,36 @@ export const calculPoseBank: TutorBankItemV4[] = [
           `${nb(a)} − ${nb(b)} = ${nb(a - b)}.`,
           `le résultat est ${nb(a - b)}.`,
         ),
+        { situation: 0 },
+      );
+    },
+  },
+  {
+    kind: "template",
+    id: "6e_entier_soustraction_posee_tpl_5_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "entier_calcul_pose",
+    microId: "entier_soustraction_posee",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Soustrais colonne par colonne.",
+    tags: ["situation", "entier_calcul_pose", "soustraction", "template", "canvas"],
+    // 03/11/2026 : la même soustraction, portée par une situation de vie (★3).
+    generate: () => {
+      // ★2 : sans retenue (chaque chiffre du haut est plus grand).
+      const [a, b] = sansRetenueSous(Math.random() < 0.7 ? 3 : 4);
+      return genPose(
+        "soustraction",
+        a,
+        b,
+        cpe(
+          "une soustraction posée permet de soustraire en colonnes.",
+          "on aligne les unités, puis on soustrait les unités, les dizaines, les centaines…",
+          `${nb(a)} − ${nb(b)} = ${nb(a - b)}.`,
+          `le résultat est ${nb(a - b)}.`,
+        ),
+        { situation: 1 },
       );
     },
   },
@@ -1008,7 +1138,7 @@ export const calculPoseBank: TutorBankItemV4[] = [
     microId: "entier_multiplication_posee",
     difficulty: 1,
     theme: "neutral",
-    text: "On pose 124 × 23. La 2e ligne, c’est 124 × 20.\nQuel nombre écrit-on sur la 2e ligne ?",
+    text: "Pose 124 × 23.\nQue vaut la 2e ligne, 124 × 20 ?",
     format: "qcm",
     choices: ["2 480", "248", "24 800", "372"],
     expected: ["2 480"],
@@ -1057,6 +1187,37 @@ export const calculPoseBank: TutorBankItemV4[] = [
           `${nb(a)} × ${b} = ${nb(a * b)}.`,
           `le résultat est ${nb(a * b)}.`,
         ),
+        { situation: 0 },
+      );
+    },
+  },
+  {
+    kind: "template",
+    id: "6e_entier_multiplication_posee_tpl_5_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "entier_calcul_pose",
+    microId: "entier_multiplication_posee",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Multiplie chaque chiffre du nombre par le chiffre du bas.",
+    tags: ["situation", "entier_calcul_pose", "multiplication", "template", "canvas"],
+    // 03/11/2026 : la même multiplication, portée par une situation de vie (★3).
+    generate: () => {
+      // Un nombre de 2 ou 3 chiffres × un chiffre (au-delà, aucune situation ne convient).
+      const a = randomInt(21, 999);
+      const b = randomInt(2, 9);
+      return genPose(
+        "multiplication",
+        a,
+        b,
+        cpe(
+          "une multiplication posée permet de multiplier en colonnes.",
+          `on multiplie chaque chiffre de ${nb(a)} par ${b}, en commençant par les unités, et on reporte les retenues.`,
+          `${nb(a)} × ${b} = ${nb(a * b)}.`,
+          `le résultat est ${nb(a * b)}.`,
+        ),
+        { situation: 1 },
       );
     },
   },
@@ -1191,6 +1352,37 @@ export const calculPoseBank: TutorBankItemV4[] = [
           `${d} × ${nb(q)} = ${nb(d * q)}, donc ${nb(d * q)} ÷ ${d} = ${nb(q)}.`,
           `le quotient est ${nb(q)}.`,
         ),
+        { situation: 0 },
+      );
+    },
+  },
+  {
+    kind: "template",
+    id: "6e_entier_division_posee_tpl_5_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "entier_calcul_pose",
+    microId: "entier_division_posee",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Cherche combien de fois le diviseur rentre dans le dividende.",
+    tags: ["situation", "entier_calcul_pose", "division", "template", "canvas"],
+    // 03/11/2026 : le même partage exact, porté par une situation de vie (★3).
+    generate: () => {
+      // ★2 : division exacte par un chiffre, quotient de 2 ou 3 chiffres.
+      const d = randomInt(2, 9);
+      const q = randomInt(12, Math.random() < 0.6 ? 99 : 450);
+      return genPose(
+        "division",
+        d * q,
+        d,
+        cpe(
+          "diviser, c’est chercher combien de fois le diviseur est contenu dans le dividende.",
+          "on pose la division et on cherche le quotient chiffre par chiffre, en commençant par la gauche.",
+          `${d} × ${nb(q)} = ${nb(d * q)}, donc ${nb(d * q)} ÷ ${d} = ${nb(q)}.`,
+          `le quotient est ${nb(q)}.`,
+        ),
+        { situation: 1 },
       );
     },
   },
@@ -1250,7 +1442,7 @@ export const calculPoseBank: TutorBankItemV4[] = [
     microId: "entier_calcul_verifier",
     difficulty: 2,
     theme: "neutral",
-    text: "Quelle égalité permet de vérifier la division euclidienne : 37 ÷ 5 = 7 reste 2 ?",
+    text: "Quelle égalité vérifie la division 37 ÷ 5 = 7 reste 2 ?",
     format: "qcm",
     choices: [
       "37 = 5 × 7 + 2",
@@ -1309,7 +1501,22 @@ export const calculPoseBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Fais l’opération inverse : tu dois retrouver le nombre de départ.",
     tags: ["entier_calcul_pose", "verification", "operation_inverse", "template"],
-    generate: () => genVerifierInverse(false),
+    // 03/11/2026 : ★2 = l'égalité seule, sans prénom (les situations : tpl_5 ★3).
+    generate: () => genVerifierInverse(false, false),
+  },
+  {
+    kind: "template",
+    id: "6e_entier_calcul_verifier_tpl_5_inverse_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "entier_calcul_pose",
+    microId: "entier_calcul_verifier",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Fais l’opération inverse : tu dois retrouver le nombre de départ.",
+    tags: ["situation", "entier_calcul_pose", "verification", "operation_inverse", "template"],
+    // 03/11/2026 : les mêmes vérifications, portées par un élève qui a calculé (★3).
+    generate: () => genVerifierInverse(false, true),
   },
   {
     kind: "template",
@@ -1575,34 +1782,22 @@ export const calculPoseBank: TutorBankItemV4[] = [
     // ⛔ Frédéric : jamais « on ajoute un zéro » — la valeur des chiffres.
     hint: "Multiplier par 10, c’est rendre chaque chiffre 10 fois plus grand : les unités deviennent des dizaines.",
     tags: ["entier_calcul_pose", "multiplication", "10_100", "template"],
-    generate: () => {
-      // × 10, × 100, × 1 000 : par la valeur des chiffres (pas de canvas : on ne pose pas).
-      const a = randomInt(12, 999);
-      const k = pick([10, 100, 1000]);
-      const rep = a * k;
-      const explication = cpe(
-        `multiplier par ${nb(k)} rend chaque chiffre ${nb(k)} fois plus grand.`,
-        `les unités deviennent des ${k === 10 ? "dizaines" : k === 100 ? "centaines" : "milliers"}, les dizaines des ${k === 10 ? "centaines" : k === 100 ? "milliers" : "dizaines de mille"}, et ainsi de suite.`,
-        `${nb(a)} × ${nb(k)} = ${nb(rep)}.`,
-        `le résultat est ${nb(rep)}.`,
-      );
-      if (Math.random() < 0.5) {
-        const p = pick(PRENOMS);
-        const t = pick([
-          `Un paquet contient ${nb(a)} feuilles. Le collège commande ${nb(k)} paquets.\nCombien de feuilles reçoit-il ?`,
-          `Une place de cinéma coûte ${nb(a)} €. Pour une fête, la mairie en achète ${nb(k)}.\nCombien paie-t-elle ?`,
-          `${p.nom} fait ${nb(a)} m à chaque tour de parc. ${Il(p)} fait ${nb(k)} tours en un mois.\nQuelle distance parcourt-${il(p)}, en mètres ?`,
-          `Une boîte contient ${nb(a)} trombones. Le magasin en reçoit ${nb(k)} boîtes.\nCombien de trombones reçoit-il ?`,
-          `Un carton pèse ${nb(a)} g. On en empile ${nb(k)}.\nQuelle masse cela fait-il, en grammes ?`,
-          `Un carnet a ${nb(a)} pages. L’imprimerie où travaille la mère ${de(p.nom)} en fabrique ${nb(k)}.\nCombien de pages imprime-t-elle ?`,
-        ]);
-        const u = /€/.test(t) ? "€" : /en mètres/.test(t) ? "m" : /en grammes|grammes de miel/.test(t) ? "g" : undefined;
-        return { text: t, format: "short", expected: attendus(rep, u), comparator: "number_equal", explanation: explication };
-      }
-      const text = pick([`Calcule : ${nb(a)} × ${nb(k)}`, `Que vaut ${nb(a)} × ${nb(k)} ?`, `Multiplie ${nb(a)} par ${nb(k)}.`, `Complète : ${nb(a)} × ${nb(k)} = …`, `Complète : ${nb(a)} × … = ${nb(rep)}`, `Écris le résultat de ${nb(k)} × ${nb(a)}.`]);
-      // « a × … = résultat » : c'est le multiplicateur qui manque.
-      return { text, format: "short", expected: attendus(text.includes("× … =") ? k : rep), comparator: "number_equal", explanation: explication };
-    },
+    // 03/11/2026 : ★2 = le calcul seul (les situations : tpl_6 ★3).
+    generate: () => genParDixCent(false),
+  },
+  {
+    kind: "template",
+    id: "6e_entier_multiplication_posee_tpl_6_par_10_100_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "entier_calcul_pose",
+    microId: "entier_multiplication_posee",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Multiplier par 10, c’est rendre chaque chiffre 10 fois plus grand : les unités deviennent des dizaines.",
+    tags: ["situation", "entier_calcul_pose", "multiplication", "10_100", "template"],
+    // 03/11/2026 : × 10, × 100, × 1 000 portés par une situation de vie (★3).
+    generate: () => genParDixCent(true),
   },
 
   {
@@ -1990,7 +2185,7 @@ export const calculPoseBank: TutorBankItemV4[] = [
     choices: ["non", "oui"], expected: ["non"], comparator: "mcq_exact",
     hint: "Recalcule la somme.", explanation: cpe("on vérifie une addition en recalculant.", "on additionne colonne par colonne.", "234 + 158 = 392, et non 382.", "le résultat de l’élève est faux : c’est 392."), tags: ["entier_calcul_pose", "verifier", "qcm"] },
   { kind: "fixed", id: "6e_entier_calcul_verifier_topup_4", niveau: "6e", matiere: "maths", notionId: "entier_calcul_pose", microId: "entier_calcul_verifier", difficulty: 2, theme: "neutral",
-    text: "Pour vérifier le résultat d’une soustraction, on peut...", format: "qcm",
+    text: "Comment vérifier le résultat d’une soustraction ?", format: "qcm",
     choices: ["additionner le résultat et le nombre enlevé", "multiplier les deux nombres", "diviser par 2", "compter les chiffres"],
     expected: ["additionner le résultat et le nombre enlevé"], comparator: "mcq_exact",
     hint: "L’addition est l’opération inverse de la soustraction.", explanation: cpe("la soustraction se vérifie par l’addition inverse.", "on additionne le résultat trouvé et le nombre que l’on a enlevé.", "si on retombe sur le nombre de départ, le calcul est juste.", "on additionne le résultat et le nombre enlevé."), tags: ["entier_calcul_pose", "verifier", "qcm"] },

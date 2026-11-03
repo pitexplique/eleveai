@@ -150,6 +150,18 @@ export const CORRECTEURS: CorrecteursMaths = {
   entier_division_mentale_tpl_1: corrigerCalcul("quotient", { entier: true }),
   entier_division_mentale_tpl_2: corrigerCalcul("quotient"),
   entier_division_mentale_tpl_3_etoile_2: corrigerCalcul("quotient", { entier: true }),
+  // 03/11/2026 : ★2 du défi sans contexte, et les situations montées à ★3.
+  entier_calcul_mental_defi_tpl_3_somme_nue: corrigerCalcul("somme", { entier: true }),
+  entier_calcul_mental_defi_tpl_4_produit_nu: corrigerCalcul("produit", { entier: true }),
+  entier_calcul_mental_defi_tpl_5_addition_nue: corrigerCalcul("somme", { entier: true }),
+  entier_calcul_mental_defi_tpl_6_soustraction_nue: corrigerCalcul("difference", { entier: true }),
+  entier_addition_mentale_tpl_3_situation: corrigerCalcul("somme", { entier: true }),
+  entier_soustraction_mentale_tpl_3_situation: corrigerCalcul("difference", { entier: true }),
+  entier_multiplication_mentale_tpl_3_situation: corrigerCalcul("produit", { entier: true }),
+  entier_division_mentale_tpl_4_situation: corrigerCalcul("quotient", { entier: true }),
+  entier_strategie_mentale_tpl_4_mots_situation: corrigerStrategie,
+  entier_strategie_mentale_tpl_5_fois_dix_situation: corrigerStrategie,
+  entier_strategie_mentale_tpl_6_astuces_situation: corrigerCalcul("produit", { entier: true }),
 };
 
 // Pour les tests : nombresDuTexte reste celui des entiers.

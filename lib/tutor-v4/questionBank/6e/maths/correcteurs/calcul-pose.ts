@@ -190,4 +190,12 @@ export const CORRECTEURS: CorrecteursMaths = {
   "6e_entier_multiplication_posee_tpl_3_par_10_100": corrigerPose("produit"),
   "6e_entier_multiplication_posee_tpl_4_probleme_repetition": corrigerPose("produit"),
   "6e_entier_addition_posee_tpl_4_nombre_decimal_simples": corrigerPose("somme", false),
+  // 03/11/2026 : les mêmes opérations en situation, montées à ★3 (★1-★2 = calcul nu).
+  "6e_entier_addition_posee_tpl_6_situation_simple": et(corrigerPose("somme"), retenue("addition", false)),
+  "6e_entier_addition_posee_tpl_5_situation": et(corrigerPose("somme"), retenue("addition", true)),
+  "6e_entier_soustraction_posee_tpl_5_situation": et(corrigerPose("difference"), retenue("soustraction", false)),
+  "6e_entier_multiplication_posee_tpl_5_situation": corrigerPose("produit"),
+  "6e_entier_division_posee_tpl_5_situation": corrigerPose("quotient"),
+  "6e_entier_calcul_verifier_tpl_5_inverse_situation": corrigerInverse,
+  "6e_entier_multiplication_posee_tpl_6_par_10_100_situation": corrigerPose("produit"),
 };

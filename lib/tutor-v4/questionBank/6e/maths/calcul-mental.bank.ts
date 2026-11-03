@@ -39,6 +39,24 @@ export function nb(n: number) {
 export const il = (p: Prenom) => (p.f ? "elle" : "il");
 export const Il = (p: Prenom) => (p.f ? "Elle" : "Il");
 
+// ⛔⛔ 03/11/2026 (REGLES-6E.md) : à ★1-★2, AUCUN contexte — le calcul nu
+// (« Calcule 5 + 3 + 26. »). Les générateurs ci-dessous tirent une situation
+// avec la probabilité `pSitu(défaut)` ; `nu(…)` la force à 0 (gabarits ★1-★2),
+// `enContexte(…)` à 1 (gabarits ★3 « _situation »).
+let FORCE_SITU: number | null = null;
+const pSitu = (defaut: number) => FORCE_SITU ?? defaut;
+function avecSitu<T>(p: number, f: () => T): T {
+  const avant = FORCE_SITU;
+  FORCE_SITU = p;
+  try {
+    return f();
+  } finally {
+    FORCE_SITU = avant;
+  }
+}
+const nu = <T,>(f: () => T): T => avecSitu(0, f);
+const enContexte = <T,>(f: () => T): T => avecSitu(1, f);
+
 /** Une expression à calculer, posée sous une forme tirée au hasard. */
 function formeCalcul(expr: string, enMots: string[] = []) {
   return pick([
@@ -99,8 +117,7 @@ const SITU_ADD: Situ2[] = [
 function genAddition(a: number, b: number) {
   const s = a + b;
   const situations = SITU_ADD.filter((x) => x.max >= s);
-  const r = Math.random();
-  if (r < 0.55 && situations.length) {
+  if (Math.random() < pSitu(0.55) && situations.length) {
     const sit = pick(situations);
     const p = pick(PRENOMS);
     return {
@@ -111,7 +128,7 @@ function genAddition(a: number, b: number) {
       explanation: expl(`On ajoute : ${nb(a)} + ${nb(b)} = ${nb(s)}.`),
     };
   }
-  if (r < 0.7) {
+  if (Math.random() < 0.33) {
     // L'inconnue ailleurs : a + … = s ou … + b = s.
     const gauche = Math.random() < 0.5;
     return {
@@ -183,8 +200,7 @@ const SITU_SOUS: Situ2[] = [
 function genSoustraction(a: number, b: number) {
   const d = a - b;
   const situations = SITU_SOUS.filter((x) => x.max >= a);
-  const r = Math.random();
-  if (r < 0.55 && situations.length) {
+  if (Math.random() < pSitu(0.55) && situations.length) {
     const sit = pick(situations);
     const p = pick(PRENOMS);
     return {
@@ -195,7 +211,7 @@ function genSoustraction(a: number, b: number) {
       explanation: expl(`On enlève : ${nb(a)} − ${nb(b)} = ${nb(d)}.`),
     };
   }
-  if (r < 0.7) {
+  if (Math.random() < 0.33) {
     const premier = Math.random() < 0.5;
     return {
       text: `${pick(["Complète :", "Trouve le nombre qui manque :", "Quel nombre manque ?"])} ${premier ? `… − ${nb(b)}` : `${nb(a)} − …`} = ${nb(d)}`,
@@ -246,8 +262,7 @@ const SITU_MUL: Situ2[] = [
 function genMultiplication(a: number, b: number) {
   const pr = a * b;
   const situations = SITU_MUL.filter((x) => situOk(x, pr, b) && a <= 50);
-  const r = Math.random();
-  if (r < 0.55 && situations.length) {
+  if (Math.random() < pSitu(0.55) && situations.length) {
     const sit = pick(situations);
     const p = pick(PRENOMS);
     return {
@@ -258,7 +273,7 @@ function genMultiplication(a: number, b: number) {
       explanation: expl(`${nb(a)} groupes de ${nb(b)} : ${nb(a)} × ${nb(b)} = ${nb(pr)}.`),
     };
   }
-  if (r < 0.7) {
+  if (Math.random() < 0.33) {
     const premier = Math.random() < 0.5;
     return {
       text: `${pick(["Complète :", "Trouve le nombre qui manque :", "Quel nombre manque ?"])} ${premier ? `… × ${nb(b)}` : `${nb(a)} × …`} = ${nb(pr)}`,
@@ -310,8 +325,7 @@ function genDivision(a: number, b: number) {
   const entier = Number.isInteger(q);
   // Un quotient décimal n'a de sens que pour une grandeur qui se coupe (cm, g, m…).
   const situations = SITU_DIV.filter((x) => situOk(x, a, b) && (entier || !!x.unite));
-  const r = Math.random();
-  if (r < 0.55 && situations.length) {
+  if (Math.random() < pSitu(0.55) && situations.length) {
     const sit = pick(situations);
     const p = pick(PRENOMS);
     return {
@@ -322,7 +336,7 @@ function genDivision(a: number, b: number) {
       explanation: expl(`On partage : ${nb(a)} ÷ ${nb(b)} = ${nb(q)}, car ${nb(b)} × ${nb(q)} = ${nb(a)}.`),
     };
   }
-  if (r < 0.7 && entier) {
+  if (Math.random() < 0.33 && entier) {
     const forme = randomInt(0, 2);
     const blanc = forme === 0 ? `… ÷ ${nb(b)} = ${nb(q)}` : forme === 1 ? `${nb(a)} ÷ … = ${nb(q)}` : `${nb(b)} × … = ${nb(a)}`;
     const rep = forme === 0 ? a : forme === 1 ? b : q;
@@ -364,7 +378,7 @@ const SITU_MOTS: SituMot[] = [
   { max: 600, unite: "g", t: (p, n, art, mot) => `La recette de ${p.nom} demande ${n} g de farine. ${Il(p)} fait ${art} ${mot} de la recette.\nCombien de grammes de farine utilise-t-${il(p)} ?` },
   { max: 500, t: (p, n, art, mot) => `Au jeu, ${p.nom} a ${n} points. ${Il(p)} gagne une carte qui donne ${art} ${mot} de ses points.\nCombien de points donne cette carte ?` },
   { max: 300, t: (_p, n, art, mot) => `Un livre a ${n} pages. Un autre livre en a ${art} ${mot}.\nCombien de pages a l’autre livre ?` },
-  { max: 200, unite: "min", t: (p, n, art, mot) => `Le trajet ${de(p.nom)} pour aller au club dure ${n} minutes. Celui de son ami dure ${art} ${mot} de ce temps.\nCombien de minutes dure le trajet de son ami ?` },
+  { max: 200, unite: "min", t: (p, n, art, mot) => `Le trajet ${de(p.nom)} dure ${n} minutes. Son ami met ${art} ${mot} de ce temps.\nCombien de minutes met son ami ?` },
   { max: 200, unite: "L", t: (_p, n, art, mot) => `Un bassin contient ${n} L d’eau. Un autre bassin en contient ${art} ${mot}.\nCombien de litres contient l’autre bassin ?` },
 ];
 
@@ -380,7 +394,7 @@ function genMotOperation(n: number) {
     : op.mot === "moitié" ? `La moitié, c’est ÷ 2 : ${nb(n)} ÷ 2 = ${nb(rep)}.`
     : `Le quart, c’est la moitié de la moitié : ${nb(n)} ÷ 4 = ${nb(rep)}.`,
   );
-  if (Math.random() < 0.55 && situations.length) {
+  if (Math.random() < pSitu(0.55) && situations.length) {
     const s = pick(situations);
     // « le double de cette distance » se dit, « la moitié de ce prix » aussi.
     return { text: s.t(pick(PRENOMS), nb(n), op.art, op.mot), format: "short" as const, expected: attendus(rep, s.unite), comparator: "number_equal" as const, explanation: explication };
@@ -409,7 +423,7 @@ function genFoisDix() {
     const x = randomInt(11, 999) / 100; // 0,11 à 9,99
     const rep = Math.round(x * k * 100) / 100;
     const explication = expl(`Chaque chiffre prend une valeur ${k} fois plus grande : ${nb(x)} × ${k} = ${nb(rep)}.`);
-    if (Math.random() < 0.45) {
+    if (Math.random() < pSitu(0.45)) {
       const s = pick([
         { u: "€", t: `Un stylo coûte ${nb(x)} €. ${p.nom} en achète ${k} pour la classe.\nCombien paie-t-${il(p)} ?` },
         { u: "kg", t: `Un sac de billes pèse ${nb(x)} kg. ${p.nom} empile ${k} sacs identiques.\nQuelle masse cela fait-il, en kilogrammes ?` },
@@ -423,7 +437,7 @@ function genFoisDix() {
   const a = randomInt(k + 1, 999); // le nombre partagé reste plus grand que le diviseur
   const rep = Math.round((a / k) * 1000) / 1000;
   const explication = expl(`Chaque chiffre prend une valeur ${k} fois plus petite : ${nb(a)} ÷ ${k} = ${nb(rep)}.`);
-  if (Math.random() < 0.45) {
+  if (Math.random() < pSitu(0.45)) {
     const s = pick([
       { u: "€", t: `${k} amis se partagent ${nb(a)} € à parts égales.\nCombien reçoit chacun ?` },
       { u: "cm", t: `${p.nom} coupe une bande de ${nb(a)} cm en ${k} morceaux égaux.\nQuelle est la longueur d’un morceau, en centimètres ?` },
@@ -436,9 +450,10 @@ function genFoisDix() {
 }
 
 /** ★2 « calcule astucieusement » : regrouper, arrondir puis corriger. */
-function genAstuce() {
+function genAstuce(regroupement = false) {
   const n = randomInt(3, 19);
-  const t = pick([0, 0, 1, 1, 2, 3, 4, 5, 6]);
+  // `regroupement` : seulement les produits à trois facteurs (les seuls qui ont une situation).
+  const t = regroupement ? pick([0, 1]) : pick([0, 0, 1, 1, 2, 3, 4, 5, 6]);
   let expr: string;
   let rep: number;
   let astuce: string;
@@ -448,7 +463,7 @@ function genAstuce() {
     expr = ordre.map(nb).join(" × ");
     rep = ordre[0] * ordre[1] * ordre[2];
     astuce = `On regroupe ${u} × ${v} = ${u * v}, puis ${u * v} × ${n} = ${nb(rep)}.`;
-    if (Math.random() < 0.6) {
+    if (Math.random() < pSitu(0.6)) {
       // En situation : trois niveaux de regroupement (cartons de boîtes de crayons).
       const p = pick(PRENOMS);
       const [a, b, c] = ordre.map(nb);
@@ -458,7 +473,7 @@ function genAstuce() {
         `Un camion livre ${a} palettes. Chaque palette porte ${b} packs de ${c} bouteilles.\nCombien de bouteilles livre-t-il ?`,
         `${p.nom} range ses billes : ${a} sacs, chacun avec ${b} pochettes de ${c} billes.\nCombien de billes a-t-${il(p)} ?`,
         `Le pâtissier remplit ${a} plateaux. Sur chaque plateau, il fait ${b} rangées de ${c} macarons.\nCombien de macarons prépare-t-il ?`,
-        `Pour la fête ${de(p.nom)}, on prépare ${a} tables. Sur chaque table, il y a ${b} assiettes de ${c} biscuits.\nCombien de biscuits y a-t-il ?`,
+        `Pour la fête ${de(p.nom)}, il y a ${a} tables. Chaque table a ${b} assiettes de ${c} biscuits.\nCombien de biscuits y a-t-il ?`,
         `Un hôtel a ${a} étages. Chaque étage a ${b} chambres de ${c} lits.\nCombien de lits y a-t-il dans l’hôtel ?`,
       ]);
       return { text, format: "short" as const, expected: attendus(rep), comparator: "number_equal" as const, explanation: expl(astuce) };
@@ -554,6 +569,32 @@ function genAchats() {
     expected: attendus(total, "€"),
     comparator: "number_equal" as const,
     explanation: expl(`On additionne les prix : ${prix.join(" + ")} = ${total}. Le total est ${total} €.`),
+  };
+}
+
+/** ★2 du défi, sans contexte : trois petits nombres à additionner (« Calcule 5 + 3 + 26. »). */
+function genSommeNue() {
+  let termes: number[];
+  let methode: string;
+  if (Math.random() < 0.5) {
+    // Deux termes qui font 10 (ou 20), séparés : on peut les regrouper.
+    const u = randomInt(1, 9);
+    const v = (Math.random() < 0.7 ? 10 : 20) - u;
+    const w = randomInt(11, 48);
+    termes = Math.random() < 0.5 ? [u, w, v] : [w, u, v];
+    methode = `On regroupe ${u} + ${v} = ${u + v}, puis ${u + v} + ${w} = ${u + v + w}.`;
+  } else {
+    termes = shuffle([randomInt(2, 9), randomInt(2, 9), randomInt(11, 39)]);
+    methode = `On additionne de gauche à droite : ${termes[0]} + ${termes[1]} = ${termes[0] + termes[1]}, puis ${termes[0] + termes[1]} + ${termes[2]} = ${termes[0] + termes[1] + termes[2]}.`;
+  }
+  const expr = termes.join(" + ");
+  const s = termes.reduce((a, b) => a + b, 0);
+  return {
+    text: pick([`Calcule ${expr}.`, `Que vaut ${expr} ?`, `Complète : ${expr} = …`, `Combien font ${expr} ?`, `Calcule de tête : ${expr}`]),
+    format: "short" as const,
+    expected: attendus(s),
+    comparator: "number_equal" as const,
+    explanation: expl(methode),
   };
 }
 
@@ -1090,9 +1131,10 @@ export const calculMentalBank: TutorBankItemV4[] = [
     matiere: "maths",
     notionId: "entier_calcul_mental",
     microId: "entier_calcul_mental_defi",
-    difficulty: 2,
+    // 03/11/2026 : ★2 → ★3 (une situation ; le ★2 nu : « Calcule 5 + 3 + 26. », defi_tpl_3_somme_nue).
+    difficulty: 3,
     theme: "neutral",
-    text: "À la boulangerie, Léa achète une tarte à 5 €, un jus à 3 € ainsi qu’un gâteau à 26 €. Combien Léa va-t-elle payer en tout ?",
+    text: "À la boulangerie, Léa achète une tarte à 5 €, un jus à 3 € et un gâteau à 26 €.\nCombien paie-t-elle en tout ?",
     format: "short",
     // 08/10/2026 : correction stricte (contains_keyword acceptait 134 pour 34). « 34 € » passe (unité).
     expected: ["34", "34 €", "34 euros"],
@@ -1113,18 +1155,19 @@ export const calculMentalBank: TutorBankItemV4[] = [
     matiere: "maths",
     notionId: "entier_calcul_mental",
     microId: "entier_calcul_mental_defi",
-    difficulty: 2,
+    // 03/11/2026 : ★2 → ★3 (une situation).
+    difficulty: 3,
     theme: "neutral",
-    text: "Un album contient 87 pages. Tu en as déjà lu 39. Combien de pages te reste-t-il à lire ?",
+    text: "Un album contient 87 pages. Tu en as déjà lu 39.\nCombien de pages te reste-t-il à lire ?",
     format: "short",
     expected: ["48"],
     comparator: "number_equal",
-    hint: "Fais 87 - 39.",
+    hint: "Fais 87 − 39.",
     explanation:
       "Définition : le calcul mental permet de trouver un résultat sans poser l’opération.\n\n" +
       "Méthode : on choisit une décomposition simple pour calculer plus vite.\n\n" +
       "Calcul : " +
-      ("Le nombre de pages restantes se calcule par une soustraction : 87 - 39 = 48. Il reste donc 48 pages à lire.") +
+      ("Le nombre de pages restantes se calcule par une soustraction : 87 − 39 = 48. Il reste donc 48 pages à lire.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["entier_calcul_mental", "probleme", "soustraction"],
   },
@@ -1135,7 +1178,8 @@ export const calculMentalBank: TutorBankItemV4[] = [
     matiere: "maths",
     notionId: "entier_calcul_mental",
     microId: "entier_calcul_mental_defi",
-    difficulty: 2,
+    // 03/11/2026 : ★2 → ★3 (une situation).
+    difficulty: 3,
     theme: "reunion",
     text: "63 mangues sont partagées entre 9 enfants. Combien chaque enfant reçoit-il de mangues ?",
     format: "short",
@@ -1180,9 +1224,10 @@ export const calculMentalBank: TutorBankItemV4[] = [
     matiere: "maths",
     notionId: "entier_calcul_mental",
     microId: "entier_calcul_mental_defi",
-    difficulty: 2,
+    // 03/11/2026 : ★2 → ★3 (une situation).
+    difficulty: 3,
     theme: "reunion",
-    text: "Dans un jardin à Saint-Pierre, il y a 9 rangées de 7 fleurs. Combien de fleurs y a-t-il en tout ?",
+    text: "Dans un jardin à Saint-Pierre, il y a 9 rangées de 7 fleurs.\nCombien de fleurs y a-t-il en tout ?",
     format: "short",
     expected: ["63"],
     comparator: "number_equal",
@@ -1210,7 +1255,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Passe par la dizaine suivante.",
     tags: ["entier_calcul_mental", "addition", "template"],
-    generate: () => {
+    generate: () => nu(() => {
       // ★1 : passage de la dizaine (47 + 8), dizaines entières (340 + 60, 45 + 30).
       const t = Math.random();
       if (t < 0.5) {
@@ -1224,7 +1269,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
         return genAddition(randomInt(1, 9) * 100 + (100 - d), d);
       }
       return genAddition(randomInt(12, 69), randomInt(1, 3) * 10);
-    },
+    }),
   },
   {
     kind: "template",
@@ -1237,13 +1282,13 @@ export const calculMentalBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Tu peux ajouter 10 puis corriger.",
     tags: ["entier_calcul_mental", "addition", "template"],
-    generate: () => {
+    generate: () => nu(() => {
       // ★2 : trois chiffres + deux chiffres, + 9 / + 19 / + 99, trois termes.
       const t = Math.random();
       if (t < 0.2) return genAdditionTrois();
       if (t < 0.45) return genAddition(randomInt(105, 880), pick([9, 19, 29, 99, 49]));
       return genAddition(randomInt(104, 789), randomInt(12, 89));
-    },
+    }),
   },
 
   // =========================
@@ -1260,7 +1305,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Retire d’abord jusqu’à la dizaine.",
     tags: ["entier_calcul_mental", "soustraction", "template"],
-    generate: () => {
+    generate: () => nu(() => {
       // ★1 : passage de la dizaine (83 − 7), dizaines entières (150 − 40).
       if (Math.random() < 0.6) {
         const u = randomInt(0, 6);
@@ -1269,7 +1314,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
       }
       const a = randomInt(6, 30) * 10;
       return genSoustraction(a, randomInt(1, Math.min(9, a / 10 - 1)) * 10);
-    },
+    }),
   },
   {
     kind: "template",
@@ -1282,13 +1327,13 @@ export const calculMentalBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Enlève les dizaines puis les unités.",
     tags: ["entier_calcul_mental", "soustraction", "template"],
-    generate: () => {
+    generate: () => nu(() => {
       // ★2 : trois chiffres − deux chiffres, − 9 / − 19 / − 99, complément à 100 ou 1 000.
       const t = Math.random();
       if (t < 0.25) return genSoustraction(randomInt(120, 900), pick([9, 19, 29, 99]));
       if (t < 0.4) return Math.random() < 0.5 ? genSoustraction(100, randomInt(11, 89)) : genSoustraction(1000, randomInt(11, 89) * 10);
       return genSoustraction(randomInt(102, 800), randomInt(12, 89));
-    },
+    }),
   },
 
   // =========================
@@ -1305,11 +1350,11 @@ export const calculMentalBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Utilise les tables.",
     tags: ["entier_calcul_mental", "multiplication", "template"],
-    generate: () => {
+    generate: () => nu(() => {
       // ★1 : les tables, et une dizaine entière (6 × 50).
       if (Math.random() < 0.7) return genMultiplication(randomInt(3, 9), randomInt(3, 9));
       return genMultiplication(randomInt(2, 9), randomInt(2, 9) * 10);
-    },
+    }),
   },
   {
     kind: "template",
@@ -1322,13 +1367,13 @@ export const calculMentalBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Multiplier par 5, c’est parfois faire ×10 puis ÷2.",
     tags: ["entier_calcul_mental", "multiplication", "template"],
-    generate: () => {
+    generate: () => nu(() => {
       // ★2 : × 5 (× 10 puis moitié), × 11, × 9, deux chiffres × un chiffre (23 × 4 = 80 + 12).
       const t = Math.random();
       if (t < 0.3) return genMultiplication(randomInt(6, 24) * 2, 5);
       if (t < 0.45) return genMultiplication(randomInt(12, 45), pick([9, 11]));
       return genMultiplication(randomInt(12, 49), randomInt(3, 8));
-    },
+    }),
   },
 
   // =========================
@@ -1345,11 +1390,11 @@ export const calculMentalBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Cherche la table inverse.",
     tags: ["entier_calcul_mental", "division", "template"],
-    generate: () => {
+    generate: () => nu(() => {
       // ★1 : la table à l'envers (56 ÷ 8).
       const b = randomInt(2, 9);
       return genDivision(b * randomInt(2, 10), b);
-    },
+    }),
   },
   {
     kind: "template",
@@ -1362,12 +1407,12 @@ export const calculMentalBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Décompose : 96 ÷ 8, c’est 80 ÷ 8 puis 16 ÷ 8.",
     tags: ["entier_calcul_mental", "division", "template"],
-    generate: () => {
+    generate: () => nu(() => {
       // ★2 : deux ou trois chiffres ÷ un chiffre, quotient entier (96 ÷ 8, 150 ÷ 5, 360 ÷ 4).
       const b = randomInt(2, 9);
       const q = Math.random() < 0.65 ? randomInt(11, 25) : randomInt(2, 9) * 10;
       return genDivision(b * q, b);
-    },
+    }),
   },
   {
     kind: "template",
@@ -1380,11 +1425,11 @@ export const calculMentalBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Avec ÷10, la virgule se déplace.",
     tags: ["entier_calcul_mental", "division", "template", "decimal_nombre"],
-    generate: () => {
+    generate: () => nu(() => {
       // ÷ 10 et ÷ 100 : chaque chiffre prend une valeur 10 (ou 100) fois plus petite.
       if (Math.random() < 0.6) return genDivision(randomInt(101, 999), 10);
       return genDivision(randomInt(11, 99) * 100, pick([10, 100]));
-    },
+    }),
   },
 
   // =========================
@@ -1403,7 +1448,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     tags: ["entier_calcul_mental", "strategie", "template"],
     // Double, moitié, triple, quart — jamais « Donne le double de … », la
     // consigne des items figés.
-    generate: () => genMotOperation(randomInt(6, 99) * (Math.random() < 0.3 ? 10 : 1)),
+    generate: () => nu(() => genMotOperation(randomInt(6, 99) * (Math.random() < 0.3 ? 10 : 1))),
   },
   {
     kind: "template",
@@ -1418,7 +1463,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     tags: ["entier_calcul_mental", "strategie", "template", "decimal_nombre"],
     // ⛔ Frédéric : × 10 par la VALEUR des chiffres (pas « on décale la
     // virgule », jamais « on ajoute un zéro »).
-    generate: () => genFoisDix(),
+    generate: () => nu(genFoisDix),
   },
   {
     kind: "template",
@@ -1431,7 +1476,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Cherche un nombre rond : regroupe, ou arrondis puis corrige.",
     tags: ["entier_calcul_mental", "strategie", "template"],
-    generate: () => genAstuce(),
+    generate: () => nu(() => genAstuce()),
   },
 
   // =========================
@@ -1444,10 +1489,11 @@ export const calculMentalBank: TutorBankItemV4[] = [
     matiere: "maths",
     notionId: "entier_calcul_mental",
     microId: "entier_calcul_mental_defi",
-    difficulty: 2,
+    // 03/11/2026 : ★2 → ★3 (une situation) ; le ★2 nu : defi_tpl_3_somme_nue.
+    difficulty: 3,
     theme: "neutral",
-    hint: "Additionne les deux prix.",
-    tags: ["entier_calcul_mental", "probleme", "template"],
+    hint: "Additionne les prix.",
+    tags: ["situation", "entier_calcul_mental", "probleme", "template"],
     // 06/10/2026 : `contains_keyword` sur une réponse numérique (« 1 » passait
     // pour 21) → `number_equal`, l'unité dans les réponses acceptées.
     generate: () => genAchats(),
@@ -1459,15 +1505,73 @@ export const calculMentalBank: TutorBankItemV4[] = [
     matiere: "maths",
     notionId: "entier_calcul_mental",
     microId: "entier_calcul_mental_defi",
-    difficulty: 2,
+    // 03/11/2026 : ★2 → ★3 (une situation) ; le ★2 nu : defi_tpl_4_produit_nu.
+    difficulty: 3,
     theme: "neutral",
     hint: "Des groupes égaux : multiplie le nombre de groupes par la taille d’un groupe.",
-    tags: ["entier_calcul_mental", "probleme", "template"],
+    tags: ["situation", "entier_calcul_mental", "probleme", "template"],
     // Groupes égaux : situations variées (le verger de La Réunion n'est plus seul).
     generate: () => {
       const a = randomInt(3, 9);
       const b = randomInt(4, 12);
       return enSituation(SITU_MUL, a, b, a * b, `${a} groupes de ${b} : ${a} × ${b} = ${a * b}.`, a * b);
+    },
+  },
+  // ⛔⛔ 03/11/2026 : les ★2 du défi, SANS contexte (« Calcule 5 + 3 + 26. ») ;
+  // les mêmes calculs en situation sont les gabarits ★3 ci-dessus et ci-dessous.
+  {
+    kind: "template",
+    id: "entier_calcul_mental_defi_tpl_3_somme_nue",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "entier_calcul_mental",
+    microId: "entier_calcul_mental_defi",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Additionne deux nombres, puis ajoute le troisième.",
+    tags: ["entier_calcul_mental", "addition", "template"],
+    generate: () => genSommeNue(),
+  },
+  {
+    kind: "template",
+    id: "entier_calcul_mental_defi_tpl_4_produit_nu",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "entier_calcul_mental",
+    microId: "entier_calcul_mental_defi",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Utilise les tables de multiplication.",
+    tags: ["entier_calcul_mental", "multiplication", "template"],
+    generate: () => nu(() => genMultiplication(randomInt(3, 9), randomInt(4, 12))),
+  },
+  {
+    kind: "template",
+    id: "entier_calcul_mental_defi_tpl_5_addition_nue",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "entier_calcul_mental",
+    microId: "entier_calcul_mental_defi",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Ajoute d’abord les centaines, puis les dizaines, puis les unités.",
+    tags: ["entier_calcul_mental", "addition", "template"],
+    generate: () => nu(() => genAddition(randomInt(19, 450), randomInt(12, 450))),
+  },
+  {
+    kind: "template",
+    id: "entier_calcul_mental_defi_tpl_6_soustraction_nue",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "entier_calcul_mental",
+    microId: "entier_calcul_mental_defi",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Enlève d’abord les centaines, puis les dizaines, puis les unités.",
+    tags: ["entier_calcul_mental", "soustraction", "template"],
+    generate: () => {
+      const a = randomInt(60, 900);
+      return nu(() => genSoustraction(a, randomInt(Math.ceil(a / 8), Math.floor((a * 2) / 3))));
     },
   },
   // =========================
@@ -1480,10 +1584,11 @@ export const calculMentalBank: TutorBankItemV4[] = [
   matiere: "maths",
   notionId: "entier_calcul_mental",
   microId: "entier_calcul_mental_defi",
-  difficulty: 2,
+  // 03/11/2026 : ★2 → ★3 (une situation) ; le ★2 nu : defi_tpl_5_addition_nue.
+  difficulty: 3,
   theme: "neutral",
   hint: "Additionne les longueurs.",
-  tags: ["entier_calcul_mental", "probleme", "template", "aire_longueur"],
+  tags: ["situation", "entier_calcul_mental", "probleme", "template", "aire_longueur"],
   generate: () => {
     // Longueurs bout à bout ; nombres tirés selon l'unité de la situation.
     const s = pick(SITU_LONG_SOMME);
@@ -1499,10 +1604,11 @@ export const calculMentalBank: TutorBankItemV4[] = [
   matiere: "maths",
   notionId: "entier_calcul_mental",
   microId: "entier_calcul_mental_defi",
-  difficulty: 2,
+  // 03/11/2026 : ★2 → ★3 (une situation) ; le ★2 nu : defi_tpl_6_soustraction_nue.
+  difficulty: 3,
   theme: "cuisine",
   hint: "Soustrais la partie utilisée.",
-  tags: ["entier_calcul_mental", "probleme", "template", "aire_longueur"],
+  tags: ["situation", "entier_calcul_mental", "probleme", "template", "aire_longueur"],
   generate: () => {
     // Ce qui reste : un total, une partie enlevée.
     const s = pick(SITU_SOUS);
@@ -1565,6 +1671,134 @@ export const calculMentalBank: TutorBankItemV4[] = [
   tags: ["entier_calcul_mental", "probleme", "template", "aire_longueur"],
   generate: () => genDeuxEtapes(),
 },
+
+  // =========================
+  // ★3 — LES MÊMES CALCULS EN SITUATION
+  // ⛔⛔ 03/11/2026 (REGLES-6E.md) : les situations des ★1-★2 montent ici ;
+  // `enContexte` force la situation (les nombres restent ceux des ★1-★2).
+  // =========================
+  {
+    kind: "template",
+    id: "entier_addition_mentale_tpl_3_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "entier_calcul_mental",
+    microId: "entier_addition_mentale",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Passe par la dizaine ou la centaine suivante.",
+    tags: ["situation", "entier_calcul_mental", "addition", "template"],
+    generate: () =>
+      enContexte(() => {
+        const t = Math.random();
+        if (t < 0.35) {
+          const u = randomInt(3, 9);
+          return genAddition(randomInt(2, 9) * 10 + u, randomInt(11 - u, 9));
+        }
+        if (t < 0.6) return genAddition(randomInt(105, 380), pick([9, 19, 29, 99, 49]));
+        return genAddition(randomInt(104, 389), randomInt(12, 89));
+      }),
+  },
+  {
+    kind: "template",
+    id: "entier_soustraction_mentale_tpl_3_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "entier_calcul_mental",
+    microId: "entier_soustraction_mentale",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Enlève les dizaines puis les unités.",
+    tags: ["situation", "entier_calcul_mental", "soustraction", "template"],
+    generate: () =>
+      enContexte(() => {
+        const t = Math.random();
+        if (t < 0.35) {
+          const u = randomInt(0, 6);
+          return genSoustraction(randomInt(3, 12) * 10 + u, randomInt(u + 1, 9));
+        }
+        if (t < 0.6) return genSoustraction(randomInt(120, 400), pick([9, 19, 29, 99]));
+        return genSoustraction(randomInt(102, 400), randomInt(12, 89));
+      }),
+  },
+  {
+    kind: "template",
+    id: "entier_multiplication_mentale_tpl_3_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "entier_calcul_mental",
+    microId: "entier_multiplication_mentale",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Utilise les tables ; × 5, c’est × 10 puis la moitié.",
+    tags: ["situation", "entier_calcul_mental", "multiplication", "template"],
+    generate: () =>
+      enContexte(() => {
+        const t = Math.random();
+        if (t < 0.5) return genMultiplication(randomInt(3, 9), randomInt(3, 9));
+        if (t < 0.75) return genMultiplication(randomInt(6, 24) * 2, 5);
+        return genMultiplication(randomInt(12, 49), randomInt(3, 8));
+      }),
+  },
+  {
+    kind: "template",
+    id: "entier_division_mentale_tpl_4_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "entier_calcul_mental",
+    microId: "entier_division_mentale",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Cherche dans la table : combien de fois le diviseur ?",
+    tags: ["situation", "entier_calcul_mental", "division", "template"],
+    generate: () =>
+      enContexte(() => {
+        const b = randomInt(2, 9);
+        const q = Math.random() < 0.6 ? randomInt(2, 10) : randomInt(11, 25);
+        return genDivision(b * q, b);
+      }),
+  },
+  {
+    kind: "template",
+    id: "entier_strategie_mentale_tpl_4_mots_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "entier_calcul_mental",
+    microId: "entier_strategie_mentale",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Double, moitié, triple ou quart.",
+    tags: ["situation", "entier_calcul_mental", "strategie", "template"],
+    // Jusqu'à 99 : le double reste dans les situations (au-delà, le calcul nu revenait).
+    generate: () => enContexte(() => genMotOperation(randomInt(6, 99))),
+  },
+  {
+    kind: "template",
+    id: "entier_strategie_mentale_tpl_5_fois_dix_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "entier_calcul_mental",
+    microId: "entier_strategie_mentale",
+    difficulty: 3,
+    theme: "neutral",
+    // ⛔ Frédéric : × 10 par la VALEUR des chiffres.
+    hint: "Multiplier par 10, c’est rendre chaque chiffre 10 fois plus grand.",
+    tags: ["situation", "entier_calcul_mental", "strategie", "template", "decimal_nombre"],
+    generate: () => enContexte(genFoisDix),
+  },
+  {
+    kind: "template",
+    id: "entier_strategie_mentale_tpl_6_astuces_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "entier_calcul_mental",
+    microId: "entier_strategie_mentale",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Regroupe d’abord deux nombres qui donnent un nombre rond.",
+    tags: ["situation", "entier_calcul_mental", "strategie", "template"],
+    generate: () => enContexte(() => genAstuce(true)),
+  },
 
   // ===== TOP-UP — ADDITION =====
   { kind: "fixed", id: "entier_addition_mentale_topup_1", niveau: "6e", matiere: "maths", notionId: "entier_calcul_mental", microId: "entier_addition_mentale", difficulty: 1, theme: "neutral",
