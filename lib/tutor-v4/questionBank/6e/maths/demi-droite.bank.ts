@@ -138,10 +138,39 @@ const SITUATIONS_DROITE: { u: string; lettre: string; texte: (p: Prenom, L: stri
   { u: "cm", lettre: "H", texte: (p, L) => `La demi-droite représente la toise de la classe, graduée en cm. Le haut de la plante ${de(p)} est au point ${L}.`, question: () => "Quelle hauteur indique la toise ?" },
 ];
 
+// ⛔⛔ 03/11/2026 (Frédéric) : « d'abord des questions simples ; le contexte est
+// réservé aux étoiles ★3 et plus ». À ★2, la demi-droite seule : ni prénom, ni
+// sentier, ni balance. Les situations ci-dessus restent à ★3 et ★4.
+const LETTRES_SIMPLES = ["A", "B", "C", "D", "E", "M", "N", "P", "R", "T"];
+// ⛔ 03/11/2026 : ★2 en 15 mots au plus (REGLES-6E.md) — intro ≤ 9, question ≤ 6.
+const LIRE_INTRO_SIMPLE: ((L: string) => string)[] = [
+  (L) => `Le point ${L} est sur la demi-droite graduée.`,
+  (L) => `Regarde le point ${L}.`,
+  (L) => `Le point ${L} est entre deux graduations.`,
+  (L) => `Observe le point ${L}.`,
+  (L) => `Le point ${L} est au milieu de deux graduations.`,
+  (L) => `Voici le point ${L}.`,
+];
+const LIRE_QUESTION_SIMPLE: ((L: string) => string)[] = [
+  () => "Quelle est son abscisse ?",
+  (L) => `Lis l'abscisse de ${L}.`,
+  (L) => `Quel nombre repère ${L} ?`,
+  (L) => `Écris l'abscisse de ${L}.`,
+  (L) => `Quel nombre est en ${L} ?`,
+];
+
 /** Petites unités : la lecture se fait sur des pas de 1, 2, 5, 10 ou en dixièmes selon la situation. */
 function genLire(etoile: 2 | 3 | 4): TutorGeneratedQuestionV4 {
   const p = prenom();
-  const s = choix(SITUATIONS_DROITE);
+  const s0 = choix(SITUATIONS_DROITE);
+  // ★2 : la demi-droite seule (03/11/2026).
+  const Ls = choix(LETTRES_SIMPLES);
+  const intro = choix(LIRE_INTRO_SIMPLE);
+  const quest = choix(LIRE_QUESTION_SIMPLE);
+  const s =
+    etoile === 2
+      ? { u: "", lettre: Ls, texte: () => intro(Ls), question: () => quest(Ls) }
+      : s0;
   const e = echelle(etoile);
   const k = Math.floor(Math.random() * e.nb);
   const v = milieu(e, k);
@@ -199,9 +228,21 @@ const SITUATIONS_PLACER: { u: string; intro: (p: Prenom, l: string[]) => string;
   { u: "", intro: (p, l) => `Le professeur ${de(p)} a placé les points ${l.join(", ")}.`, question: (p, x) => `${p.nom} doit trouver le point d'abscisse ${x}. Lequel est-ce ?` },
 ];
 
+// ★2 : la demi-droite seule (03/11/2026). L'abscisse cherchée est le DERNIER
+// nombre de l'énoncé (le correcteur la relit là).
+const SITUATIONS_PLACER_SIMPLES: typeof SITUATIONS_PLACER = [
+  { u: "", intro: () => "", question: (p, x) => `Quel point a pour abscisse ${x} ?` },
+  { u: "", intro: () => "Trois points sont sur la demi-droite graduée.", question: (p, x) => `Lequel a pour abscisse ${x} ?` },
+  { u: "", intro: (p, l) => `Les points ${l.join(", ")} sont sur la droite.`, question: (p, x) => `Lequel est en ${x} ?` },
+  { u: "", intro: () => "Regarde les trois points.", question: (p, x) => `Où se trouve le nombre ${x} ?` },
+  { u: "", intro: () => "Observe la demi-droite graduée.", question: (p, x) => `Quel point correspond à ${x} ?` },
+  { u: "", intro: () => "", question: (p, x) => `Sur la demi-droite graduée, quel point est à ${x} ?` },
+  { u: "", intro: (p, l) => `On a placé ${l.join(", ")}.`, question: (p, x) => `Quel point a pour abscisse ${x} ?` },
+];
+
 function genPlacer(etoile: 2 | 3 | 4): TutorGeneratedQuestionV4 {
   const p = prenom();
-  const s = choix(SITUATIONS_PLACER);
+  const s = choix(etoile === 2 ? SITUATIONS_PLACER_SIMPLES : SITUATIONS_PLACER);
   const noms = choix(LETTRES_PLACER);
   const e = echelle(etoile);
   const creux: number[] = [];
@@ -247,6 +288,17 @@ const FRACTIONS_INTRO: ((p: Prenom, d: number, L: string) => string)[] = [
   (p, d, L) => `Le professeur ${de(p)} a partagé l'unité en ${d} parts égales et a placé le point ${L}. Quelle fraction a-t-il placée ?`,
 ];
 
+// ★2 : la demi-droite seule (03/11/2026). Le correcteur relit « en d parts » et « point L ».
+const FRACTIONS_INTRO_SIMPLES: ((d: number, L: string) => string)[] = [
+  (d, L) => `L'unité est partagée en ${d} parts égales. Quelle fraction repère le point ${L} ?`,
+  (d, L) => `L'unité est coupée en ${d} parts égales. Écris l'abscisse du point ${L}.`,
+  (d, L) => `Chaque unité est coupée en ${d} parts égales. Quelle fraction est au point ${L} ?`,
+  (d, L) => `L'unité est partagée en ${d} parts. Quelle est l'abscisse du point ${L} ?`,
+  (d, L) => `Écris l'abscisse du point ${L}. L'unité est partagée en ${d} parts égales.`,
+  (d, L) => `Quelle fraction repère le point ${L} ? L'unité est coupée en ${d} parts.`,
+  (d, L) => `L'unité est coupée en ${d} parts. Écris l'abscisse du point ${L} en fraction.`,
+];
+
 function genFraction(etoile: 2 | 3 | 4 | 5): TutorGeneratedQuestionV4 {
   const p = prenom();
   const L = choix(["A", "B", "C", "D", "M", "P"]);
@@ -259,7 +311,7 @@ function genFraction(etoile: 2 | 3 | 4 | 5): TutorGeneratedQuestionV4 {
     const [min, max] = n <= d ? [0, 1] : d === 2 ? [0, 2] : [1, 2];
     const v = rond(n / d);
     return {
-      text: choix(FRACTIONS_INTRO)(p, d, L),
+      text: etoile === 2 ? choix(FRACTIONS_INTRO_SIMPLES)(d, L) : choix(FRACTIONS_INTRO)(p, d, L),
       format: "short",
       expected: [`${n}/${d}`, virgule(v)],
       comparator: "fraction_decimal_equivalent",
@@ -406,8 +458,41 @@ function genGraduer(etoile: 2 | 3 | 4): TutorGeneratedQuestionV4 {
   const pas = pasEntier ? 1 + Math.floor(Math.random() * 6) : choix([0.5, 1.5, 2.5]);
   const L = rond(parts * pas);
   const mots = Math.random() < 0.5 && PARTS_MOTS[parts] ? PARTS_MOTS[parts] : `en ${parts} parts égales`;
-  const debut = `${s.objet(p, virgule(L))} et ${il(p)} ${s.pron} partage ${mots}.`;
   const forme = choix(etoile === 2 ? ["pas", "pas", "traits"] : etoile === 3 ? ["pas", "distance", "traits", "total"] : ["distance", "traits", "total", "nbParts"]);
+
+  // ★2 : un segment, sans prénom ni objet (03/11/2026). Le correcteur relit la
+  // longueur (premier nombre), l'unité et « partage en … ».
+  if (etoile === 2) {
+    const u = choix(["cm", "cm", "cm", "m"]);
+    const Lx = virgule(L);
+    // 15 mots au plus : début ≤ 9, question ≤ 6. Le correcteur lit la
+    // longueur (le nombre suivi de son unité) et « en quarts » / « en 6 parts ».
+    const m2 = Math.random() < 0.5 && PARTS_MOTS[parts] ? PARTS_MOTS[parts] : `en ${parts} parts`;
+    const debutSimple = choix([
+      `Gradue un segment de ${Lx} ${u} ${m2}.`,
+      `Partage un segment de ${Lx} ${u} ${m2}.`,
+      `On partage ${Lx} ${u} ${m2}.`,
+      `[AB] mesure ${Lx} ${u}. Partage-le ${m2}.`,
+    ]);
+    if (forme === "pas") {
+      return {
+        text: `${debutSimple} ${choix(["Combien mesure une part ?", "Quelle longueur fait une part ?", "Combien vaut une part ?"])}`,
+        format: "short",
+        expected: [`${virgule(pas)} ${u}`, virgule(pas)],
+        comparator: "number_equal",
+        explanation: explDroite(`Partager en ${parts} parts égales, c'est diviser la longueur par ${parts} : ${Lx} ÷ ${parts} = ${virgule(pas)} ${u}. Vérification : ${parts} × ${virgule(pas)} = ${Lx}.`),
+      };
+    }
+    return {
+      text: `${debutSimple} ${choix(["Combien de traits à l'intérieur ?", "Combien de marques à l'intérieur ?", "Combien de coupures à l'intérieur ?"])}`,
+      format: "short",
+      expected: [String(parts - 1)],
+      comparator: "number_equal",
+      explanation: explDroite(`Pour ${parts} parts, il faut ${parts - 1} séparations : les deux bouts existent déjà. C'est comme les poteaux d'une clôture : un de moins que de parts à l'intérieur.`),
+    };
+  }
+
+  const debut = `${s.objet(p, virgule(L))} et ${il(p)} ${s.pron} partage ${mots}.`;
 
   if (forme === "pas") {
     return {
@@ -721,7 +806,8 @@ export const demiDroiteBank: TutorBankItemV4[] = [
     microId: "abscisse_fraction",
     difficulty: 2,
     theme: "neutral",
-    text: "L'unité est partagée en quatre parts égales. Quelle fraction a pour abscisse le point A ?",
+    // 03/11/2026 : 15 mots au plus à ★2.
+    text: "L'unité est partagée en 4 parts égales. Quelle est l'abscisse du point A ?",
     format: "short",
     expected: ["3/4", "0,75", "0.75"],
     comparator: "fraction_decimal_equivalent",
@@ -870,7 +956,8 @@ export const demiDroiteBank: TutorBankItemV4[] = [
     microId: "abscisse_graduer",
     difficulty: 2,
     theme: "neutral",
-    text: "Tu dois graduer un segment de 12 cm en quarts. Tous les combien de centimètres places-tu une graduation ?",
+    // 03/11/2026 : 15 mots au plus à ★2.
+    text: "Partage un segment de 12 cm en quarts. Combien mesure une part, en cm ?",
     format: "short",
     expected: ["3"],
     comparator: "number_equal",

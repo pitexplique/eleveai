@@ -107,9 +107,12 @@ function corrigerFraction(q: TutorGeneratedQuestionV4): string[] {
 
 function corrigerGraduer(q: TutorGeneratedQuestionV4): string[] {
   const t = q.text;
-  const L = nombres(t)[0];
-  const u = t.match(/\d (cm|m)\b/)?.[1] ?? "";
-  const motParts = Object.keys(MOTS_PARTS).find((k) => t.includes(`partage ${k}`));
+  // 03/11/2026 : la longueur est le nombre suivi de son unité (« Gradue un
+  // segment de 24 cm en 6 parts » : 24, pas 6) ; « en quarts » peut suivre la longueur.
+  const mL = t.match(/(\d+(?:,\d+)?) (cm|m)\b/);
+  const L = mL ? lireNombre(mL[1])! : nombres(t)[0];
+  const u = mL?.[2] ?? "";
+  const motParts = Object.keys(MOTS_PARTS).find((k) => t.includes(`partage ${k}`) || t.includes(` ${k}.`));
   const parts = Number(t.match(/en (\d+) parts/)?.[1]) || (motParts ? MOTS_PARTS[motParts] : NaN);
   let rep: number;
   let avecUnite = false;
