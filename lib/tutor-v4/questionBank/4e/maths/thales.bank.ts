@@ -180,7 +180,13 @@ const SUPPORTS: { intro: string; f: Famille }[] = [
 ];
 
 /** Une situation, ou aucune (une fois sur quatre) : la figure nue reste un exercice. */
-function tireSupport(): { intro: string | null; f: Famille } {
+/* ⛔⛔ 03/11/2026 — D'ABORD DES QUESTIONS SIMPLES (Frédéric) : à ★1-★2, la
+   figure nue, sans situation (charpente, voile, tente…), et des phrases
+   courtes (★1 en 12 mots, ★2 en 15, autant que possible en 4e). Les situations
+   passent dans les gabarits ★3 « _tpl_situation ». `situation = false` : jamais
+   d'objet ; la famille reste petite (cm). */
+function tireSupport(situation = true): { intro: string | null; f: Famille } {
+  if (!situation) return { intro: null, f: randomChoice<Famille>(["petit", "moyen"]) };
   if (Math.random() < 0.25) return { intro: null, f: randomChoice<Famille>(["petit", "moyen"]) };
   return randomChoice(SUPPORTS);
 }
@@ -208,9 +214,32 @@ function cadre(n: Noms, intro: string | null, style = randomInt(0, 3)): string {
     : `Dans le triangle ${tri}, ${hyp(n, style)}.`;
 }
 
+/** La configuration en symboles, la plus courte possible (★1-★2). */
+function cadreCourt(n: Noms): string {
+  const tri = L(n, "ABC"), AB = L(n, "AB"), AC = L(n, "AC"), MN = L(n, "MN"), BC = L(n, "BC");
+  return randomChoice([
+    `Triangle ${tri} : ${n.M} ∈ [${AB}], ${n.N} ∈ [${AC}], (${MN}) // (${BC}).`,
+    `Triangle ${tri} : ${n.M} ∈ [${AB}], ${n.N} ∈ [${AC}] et (${MN}) // (${BC}).`,
+    `Dans le triangle ${tri}, ${hyp(n, 1)}.`,
+    `${n.M} ∈ [${AB}], ${n.N} ∈ [${AC}] et (${MN}) // (${BC}).`,
+  ]);
+}
+/** Les mots d'un énoncé (« ∈ », « // », « : » ne comptent pas). */
+const nbMots = (t: string) => t.trim().split(/\s+/).filter((w) => /[\p{L}\d]/u.test(w)).length;
+/** Tire l'énoncé jusqu'à tenir dans `lim` mots (sinon le plus court des essais). */
+function court(lim: number, tirage: () => TutorGeneratedQuestionV4): TutorGeneratedQuestionV4 {
+  let q = tirage();
+  for (let i = 0; i < 40 && nbMots(q.text) > lim; i++) {
+    const r = tirage();
+    if (nbMots(r.text) < nbMots(q.text)) q = r;
+  }
+  return q;
+}
+
 /** La configuration SANS le parallélisme (pour la réciproque). */
 function cadreSansPara(n: Noms, intro: string | null, style = randomInt(0, 3)): string {
   const tri = L(n, "ABC"), AB = L(n, "AB"), AC = L(n, "AC");
+  if (style === -1) return randomChoice([`Triangle ${tri} : ${n.M} ∈ [${AB}] et ${n.N} ∈ [${AC}].`, `${n.M} ∈ [${AB}] et ${n.N} ∈ [${AC}].`]);
   const pos = [
     `${n.M} est sur [${AB}] et ${n.N} est sur [${AC}]`,
     `${n.M} ∈ [${AB}] et ${n.N} ∈ [${AC}]`,
@@ -328,9 +357,9 @@ function questionLongueur(T: string, u: string): string {
 --------------------------------------------------------------------------- */
 
 /** ★1 — reconnaître les éléments de la configuration. */
-function genConfigElements(): TutorGeneratedQuestionV4 {
+function genConfigElements(situation = false): TutorGeneratedQuestionV4 {
   const n = randomChoice(NOMS_THALES);
-  const s = tireSupport();
+  const s = tireSupport(situation);
   const tri = L(n, "ABC"), petit = L(n, "AMN");
   const AB = L(n, "AB"), AC = L(n, "AC"), MN = L(n, "MN"), BC = L(n, "BC");
   const genres = [
@@ -338,6 +367,7 @@ function genConfigElements(): TutorGeneratedQuestionV4 {
       q: randomChoice([
         `Quel est le sommet commun aux triangles ${petit} et ${tri} ?`,
         `Quel point est un sommet à la fois du triangle ${petit} et du triangle ${tri} ?`,
+        `Quel est le sommet commun ?`,
       ]),
       bon: n.A,
       pieges: [n.B, n.C, n.M, n.N],
@@ -356,6 +386,7 @@ function genConfigElements(): TutorGeneratedQuestionV4 {
       q: randomChoice([
         `Sur quel côté du triangle ${tri} se trouve le point ${n.M} ?`,
         `À quel segment le point ${n.M} appartient-il ?`,
+        `Où est le point ${n.M} ?`,
       ]),
       bon: `[${AB}]`,
       pieges: [`[${AC}]`, `[${BC}]`, `[${MN}]`],
@@ -365,6 +396,7 @@ function genConfigElements(): TutorGeneratedQuestionV4 {
       q: randomChoice([
         `Quel est le petit triangle de cette configuration ?`,
         `Quel triangle est une réduction du triangle ${tri} ?`,
+        `Quelle est la réduction de ${tri} ?`,
       ]),
       bon: petit,
       pieges: [L(n, "MBC"), L(n, "BMN"), L(n, "ABN"), L(n, "MNC")],
@@ -374,6 +406,7 @@ function genConfigElements(): TutorGeneratedQuestionV4 {
       q: randomChoice([
         `Dans le triangle ${petit}, quel côté correspond au côté [${BC}] du triangle ${tri} ?`,
         `Quel côté du petit triangle ${petit} est associé à [${BC}] ?`,
+        `Quel côté est associé à [${BC}] ?`,
       ]),
       bon: `[${MN}]`,
       pieges: [`[${L(n, "AM")}]`, `[${L(n, "AN")}]`, `[${L(n, "MB")}]`],
@@ -382,7 +415,7 @@ function genConfigElements(): TutorGeneratedQuestionV4 {
   ];
   const g = randomChoice(genres);
   return {
-    text: `${cadre(n, s.intro)} ${g.q}`,
+    text: `${situation ? cadre(n, s.intro) : cadreCourt(n)} ${g.q}`,
     format: "qcm",
     choices: makeChoices(g.bon, g.pieges),
     expected: [g.bon],
@@ -397,6 +430,13 @@ function genConfigElements(): TutorGeneratedQuestionV4 {
   };
 }
 
+/** ★1-★2 : courtes (03/11/2026). */
+const QUESTIONS_SIMPLES = [
+  "Peut-on utiliser Thalès ?",
+  "Est-ce une configuration de Thalès ?",
+  "Peut-on utiliser le théorème de Thalès ?",
+  "Thalès est-il utilisable ici ?",
+];
 const QUESTIONS_APPLIQUER = [
   "Peut-on utiliser le théorème de Thalès ?",
   "Est-on dans une configuration de Thalès ?",
@@ -405,10 +445,10 @@ const QUESTIONS_APPLIQUER = [
 ];
 
 /** ★2 — parallélisme donné ou non. */
-function genConfigOuiNon(): TutorGeneratedQuestionV4 {
+function genConfigOuiNon(situation = false): TutorGeneratedQuestionV4 {
   const parallel = randomChoice([true, false]);
   const n = randomChoice(NOMS_THALES);
-  const s = tireSupport();
+  const s = tireSupport(situation);
   const tri = L(n, "ABC"), AB = L(n, "AB"), AC = L(n, "AC"), MN = L(n, "MN"), BC = L(n, "BC");
   const manque = randomChoice([
     `mais on ne sait pas si (${MN}) est parallèle à (${BC})`,
@@ -416,9 +456,13 @@ function genConfigOuiNon(): TutorGeneratedQuestionV4 {
     `mais l'énoncé ne dit rien de la position de (${MN}) par rapport à (${BC})`,
   ]);
   const debut = s.intro ? `${s.intro}, on repère le triangle ${tri} : ` : `Dans le triangle ${tri}, `;
-  const text = parallel
-    ? `${cadre(n, s.intro)} ${randomChoice(QUESTIONS_APPLIQUER)}`
-    : `${debut}${n.M} est sur [${AB}] et ${n.N} est sur [${AC}], ${manque}. ${randomChoice(QUESTIONS_APPLIQUER)}`;
+  const text = !situation
+    ? parallel
+      ? `${cadreCourt(n)} ${randomChoice(QUESTIONS_SIMPLES)}`
+      : `${n.M} ∈ [${AB}] et ${n.N} ∈ [${AC}], mais on ne sait pas si (${MN}) // (${BC}). ${randomChoice(QUESTIONS_SIMPLES)}`
+    : parallel
+      ? `${cadre(n, s.intro)} ${randomChoice(QUESTIONS_APPLIQUER)}`
+      : `${debut}${n.M} est sur [${AB}] et ${n.N} est sur [${AC}], ${manque}. ${randomChoice(QUESTIONS_APPLIQUER)}`;
   return {
     text,
     format: "qcm",
@@ -440,25 +484,27 @@ function genConfigOuiNon(): TutorGeneratedQuestionV4 {
 }
 
 /** ★2 — codé sur la figure, ou seulement « à l'air » parallèle. */
-function genConfigCodage(): TutorGeneratedQuestionV4 {
+function genConfigCodage(situation = false): TutorGeneratedQuestionV4 {
   const parallel = randomChoice([true, false]);
   const n = randomChoice(NOMS_THALES);
-  const s = tireSupport();
+  const s = tireSupport(situation);
   const tri = L(n, "ABC"), AB = L(n, "AB"), AC = L(n, "AC"), MN = L(n, "MN"), BC = L(n, "BC");
-  const debut = s.intro ? `${s.intro}, dans le triangle ${tri}` : `Dans le triangle ${tri}`;
-  const pos = `${n.M} est sur [${AB}] et ${n.N} est sur [${AC}]`;
+  const debut = s.intro ? `${s.intro}, dans le triangle ${tri}` : situation ? `Dans le triangle ${tri}` : `Triangle ${tri}`;
+  const pos = situation ? `${n.M} est sur [${AB}] et ${n.N} est sur [${AC}]` : `${n.M} ∈ [${AB}], ${n.N} ∈ [${AC}]`;
   const phrase = parallel
     ? randomChoice([
         `${debut}, ${pos} ; la droite (${MN}) est codée parallèle à (${BC}).`,
         `${debut}, ${pos}, et le codage indique que (${MN}) // (${BC}).`,
+        ...(situation ? [] : [`${debut}, ${pos} ; (${MN}) est codée parallèle à (${BC}).`]),
       ])
     : randomChoice([
         `${debut}, ${pos} ; (${MN}) semble parallèle à (${BC}) sur le dessin, mais aucun codage ne l'indique.`,
         `${debut}, ${pos} ; aucune droite n'est codée parallèle à un côté.`,
         `${debut}, ${pos} ; à l'œil, (${MN}) a l'air parallèle à (${BC}), sans aucun codage.`,
+        ...(situation ? [] : [`${debut}, ${pos} ; aucun codage de parallèles.`, `${debut}, ${pos} ; (${MN}) semble parallèle à (${BC}).`]),
       ]);
   return {
-    text: `${phrase} ${randomChoice(QUESTIONS_APPLIQUER)}`,
+    text: `${phrase} ${randomChoice(situation ? QUESTIONS_APPLIQUER : QUESTIONS_SIMPLES)}`,
     format: "qcm",
     choices: ["oui", "non"],
     expected: [parallel ? "oui" : "non"],
@@ -478,15 +524,15 @@ function genConfigCodage(): TutorGeneratedQuestionV4 {
 }
 
 /** ★2 — les points sont-ils bien placés ? (pas de canvas : la figure les placerait toujours bien) */
-function genConfigPosition(): TutorGeneratedQuestionV4 {
+function genConfigPosition(situation = false): TutorGeneratedQuestionV4 {
   const n = randomChoice(NOMS_THALES);
-  const s = tireSupport();
+  const s = tireSupport(situation);
   const tri = L(n, "ABC"), AB = L(n, "AB"), AC = L(n, "AC"), MN = L(n, "MN"), BC = L(n, "BC");
-  const debut = s.intro ? `${s.intro}, on repère le triangle ${tri} : ` : `Dans le triangle ${tri}, `;
+  const debut = s.intro ? `${s.intro}, on repère le triangle ${tri} : ` : situation ? `Dans le triangle ${tri}, ` : `Triangle ${tri} : `;
   const cas = randomChoice(["ok", "ok", "surBC", "perp", "coupe"] as const);
   const phrase =
     cas === "ok"
-      ? cadre(n, s.intro)
+      ? situation ? cadre(n, s.intro) : cadreCourt(n)
       : cas === "surBC"
         ? `${debut}${n.M} est sur [${AB}] et ${n.N} est sur [${BC}] (et non sur [${AC}]).`
         : cas === "perp"
@@ -502,7 +548,7 @@ function genConfigPosition(): TutorGeneratedQuestionV4 {
           ? `(${MN}) est perpendiculaire à (${BC}), pas parallèle`
           : `deux droites qui se coupent ne sont pas parallèles`;
   return {
-    text: `${phrase} ${randomChoice(QUESTIONS_APPLIQUER)}`,
+    text: `${phrase} ${randomChoice(situation ? QUESTIONS_APPLIQUER : QUESTIONS_SIMPLES)}`,
     format: "qcm",
     choices: ["oui", "non"],
     expected: [ok ? "oui" : "non"],
@@ -521,9 +567,9 @@ function genConfigPosition(): TutorGeneratedQuestionV4 {
 --------------------------------------------------------------------------- */
 
 /** ★2 — compléter une égalité de rapports. */
-function genRapportCompleter(): TutorGeneratedQuestionV4 {
+function genRapportCompleter(situation = false): TutorGeneratedQuestionV4 {
   const n = randomChoice(NOMS_THALES);
-  const s = tireSupport();
+  const s = tireSupport(situation);
   const i = randomInt(0, 2);
   const j = randomChoice([0, 1, 2].filter((x) => x !== i));
   const [ni, di] = RAPPORTS[i], [nj, dj] = RAPPORTS[j];
@@ -540,7 +586,7 @@ function genRapportCompleter(): TutorGeneratedQuestionV4 {
     `On écrit ${gauche} = … Quel rapport faut-il mettre ?`,
   ]);
   return {
-    text: `${cadre(n, s.intro)} ${q}`,
+    text: `${situation ? cadre(n, s.intro) : cadreCourt(n)} ${q}`,
     format: "qcm",
     choices: makeChoices(bon, pieges),
     expected: [bon],
@@ -556,9 +602,9 @@ function genRapportCompleter(): TutorGeneratedQuestionV4 {
 }
 
 /** ★2 — quelle égalité est juste (lettres seulement) ? */
-function genRapportEgalite(): TutorGeneratedQuestionV4 {
+function genRapportEgalite(situation = false): TutorGeneratedQuestionV4 {
   const n = randomChoice(NOMS_THALES);
-  const s = tireSupport();
+  const s = tireSupport(situation);
   const [i, j] = randomChoice([[0, 1], [0, 2], [1, 2]] as const);
   const [ni, di] = RAPPORTS[i], [nj, dj] = RAPPORTS[j];
   const r = (x: string, y: string) => `${L(n, x)} / ${L(n, y)}`;
@@ -575,9 +621,10 @@ function genRapportEgalite(): TutorGeneratedQuestionV4 {
     "Quelle égalité donne le théorème de Thalès ?",
     "Parmi ces égalités, laquelle est juste ?",
     "Quelle égalité peut-on écrire ?",
+    "Quelle égalité est juste ?",
   ]);
   return {
-    text: `${cadre(n, s.intro)} ${q}`,
+    text: `${situation ? cadre(n, s.intro) : cadreCourt(n)} ${q}`,
     format: "qcm",
     choices: makeChoices(bon, pieges),
     expected: [bon],
@@ -677,16 +724,19 @@ function genCalcul(
   cibles: Seg[],
   simple: boolean,
   qcm = false,
+  situation = true,
 ): TutorGeneratedQuestionV4 {
   const n = randomChoice(NOMS_THALES);
-  const s = tireSupport();
+  const s = tireSupport(situation);
   const lg = tireLongueurs(s.f, simple);
   const cible = randomChoice(cibles);
   const r = resoudre(n, lg, cible);
   const T = L(n, cible);
   const sides: Partial<Record<Seg, string>> = { [cible]: "?" };
   for (const x of r.connus) sides[x] = `${fr(lg.v[x])} ${lg.u}`;
-  const text = `${cadre(n, s.intro)} ${donnees(n, lg, r.connus)} ${questionLongueur(T, lg.u)}`;
+  const text = situation
+    ? `${cadre(n, s.intro)} ${donnees(n, lg, r.connus)} ${questionLongueur(T, lg.u)}`
+    : `${cadreCourt(n)} ${r.connus.map((x) => `${L(n, x)} = ${fr(lg.v[x])} ${lg.u}`).join(", ")}. ${randomChoice([`Calcule ${T}.`, `Combien mesure ${T} ?`, `Trouve ${T}.`])}`;
   const explanation = expl(
     DEF_THALES,
     `dans le triangle ${L(n, "ABC")}, (${L(n, "MN")}) // (${L(n, "BC")}), donc ${CHAINE(n)}. On garde ${r.egalite}.`,
@@ -720,9 +770,10 @@ function genCalcul(
 --------------------------------------------------------------------------- */
 
 /** ★2 — quels rapports comparer, ou calculer un rapport. */
-function genRecipRapports(): TutorGeneratedQuestionV4 {
+function genRecipRapports(situation = false): TutorGeneratedQuestionV4 {
   const n = randomChoice(NOMS_THALES);
-  const s = tireSupport();
+  const s = tireSupport(situation);
+  const cadreR = () => (situation ? cadreSansPara(n, s.intro) : cadreSansPara(n, null, randomChoice([-1, -1, 1])));
   const AM = L(n, "AM"), AB = L(n, "AB"), AN = L(n, "AN"), AC = L(n, "AC"), MN = L(n, "MN"), BC = L(n, "BC");
   if (Math.random() < 0.5) {
     const bon = `${AM}/${AB} et ${AN}/${AC}`;
@@ -730,9 +781,12 @@ function genRecipRapports(): TutorGeneratedQuestionV4 {
       "Quels rapports faut-il comparer ?",
       "Quels quotients compare-t-on avec la réciproque du théorème de Thalès ?",
       "Quelle paire de rapports doit-on comparer ?",
+      "Quels rapports compare-t-on ?",
     ]);
     return {
-      text: `${cadreSansPara(n, s.intro)} On veut savoir si (${MN}) est parallèle à (${BC}). ${q}`,
+      text: situation
+        ? `${cadreR()} On veut savoir si (${MN}) est parallèle à (${BC}). ${q}`
+        : `${cadreR()} On veut savoir si (${MN}) // (${BC}). ${randomChoice(["Quels rapports comparer ?", "Quels rapports compare-t-on ?", q])}`,
       format: "qcm",
       choices: makeChoices(bon, [
         `${AM}/${AB} et ${AC}/${AN}`,
@@ -766,9 +820,12 @@ function genRecipRapports(): TutorGeneratedQuestionV4 {
     `Calcule le rapport ${AM}/${AB}, en écriture décimale.`,
     `Donne la valeur décimale du quotient ${AM}/${AB}.`,
     `Que vaut ${AM}/${AB} ? Donne un nombre décimal.`,
+    ...(situation ? [] : [`Que vaut ${AM}/${AB} ?`, `Calcule le rapport ${AM}/${AB}.`]),
   ]);
   return {
-    text: `${cadreSansPara(n, s.intro)} On a ${AM} = ${fr(am)} ${u} et ${AB} = ${fr(ab)} ${u}. ${q}`,
+    text: situation
+      ? `${cadreR()} On a ${AM} = ${fr(am)} ${u} et ${AB} = ${fr(ab)} ${u}. ${q}`
+      : `${cadreR()} ${AM} = ${fr(am)} ${u} et ${AB} = ${fr(ab)} ${u}. ${q}`,
     format: "short",
     expected: [fr(rapport)],
     comparator: "number_equal",
@@ -1447,7 +1504,7 @@ export const thalesBank: TutorBankItemV4[] = [
     microId: "thales_configuration",
     difficulty: 1,
     theme: "neutral",
-    text: "Sur la figure, si (MN) est parallèle à (BC), peut-on reconnaître une configuration de Thalès ?",
+    text: "Si (MN) // (BC) sur la figure, est-ce une configuration de Thalès ?",
     format: "qcm",
     choices: ["oui", "non"],
     expected: ["oui"],
@@ -1488,7 +1545,22 @@ export const thalesBank: TutorBankItemV4[] = [
     // des LETTRES au lieu de la configuration, et se bloque dès qu'un exercice
     // nomme les points autrement.
     // 03/10/2026 : situation + tournure de la question (genConfigOuiNon).
-    generate: genConfigOuiNon,
+    // 03/11/2026 : la figure nue, en symboles (les situations : configuration_tpl_situation, ★3).
+    generate: () => court(15, () => genConfigOuiNon(false)),
+  },
+  {
+    kind: "template",
+    id: "thales_theoreme_configuration_tpl_situation",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "thales_theoreme",
+    microId: "thales_configuration",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Thalès demande deux points sur deux côtés issus d'un même sommet, et une droite parallèle au troisième côté.",
+    tags: ["thales_theoreme_theoreme", "configuration", "template", "canvas"],
+    // 03/11/2026 : les situations (charpente, voile, tente…), réservées à ★3.
+    generate: () => randomChoice([genConfigOuiNon, genConfigCodage, genConfigPosition, genConfigElements])(true),
   },
 
   /* =========================
@@ -1504,7 +1576,7 @@ export const thalesBank: TutorBankItemV4[] = [
     microId: "thales_rapport",
     difficulty: 2,
     theme: "neutral",
-    text: "Dans le triangle ABC, avec M sur [AB], N sur [AC] et (MN) parallèle à (BC), quelle égalité de rapports est correcte ?",
+    text: "Triangle ABC : M ∈ [AB], N ∈ [AC], (MN) // (BC). Quelle égalité de rapports est correcte ?",
     format: "qcm",
     choices: [
       "AM / AB = AN / AC",
@@ -1543,7 +1615,21 @@ export const thalesBank: TutorBankItemV4[] = [
     hint: "Associe les petites longueurs avec les grandes longueurs correspondantes.",
     tags: ["thales_theoreme_theoreme", "rapport", "template"],
     // 03/10/2026 : ne fabriquait qu'UN énoncé. Nommage + situation + tournure.
-    generate: genRapportCompleter,
+    generate: () => court(15, () => genRapportCompleter(false)), // 03/11/2026 : sans situation
+  },
+  {
+    kind: "template",
+    id: "thales_theoreme_rapport_tpl_situation",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "thales_theoreme",
+    microId: "thales_rapport",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Chaque rapport met une longueur du petit triangle sur la longueur correspondante du grand.",
+    tags: ["thales_theoreme_theoreme", "rapport", "qcm", "template", "canvas"],
+    // 03/11/2026 : les situations, réservées à ★3.
+    generate: () => randomChoice([genRapportCompleter, genRapportEgalite])(true),
   },
 
   {
@@ -1576,7 +1662,7 @@ export const thalesBank: TutorBankItemV4[] = [
     microId: "thales_calculer_longueur",
     difficulty: 2,
     theme: "neutral",
-    text: "Dans une configuration de Thalès, AM = 3 cm, AB = 6 cm et AN = 4 cm. Quelle est la longueur AC ?",
+    text: "Configuration de Thalès : AM = 3 cm, AB = 6 cm, AN = 4 cm. Calcule AC.",
     format: "qcm",
     choices: ["2 cm", "6 cm", "8 cm", "12 cm"],
     expected: ["8 cm"],
@@ -1930,7 +2016,7 @@ export const thalesBank: TutorBankItemV4[] = [
     microId: "thales_configuration",
     difficulty: 2,
     theme: "neutral",
-    text: "Dans le triangle ABC, M ∈ [AB] et N ∈ [AC]. Quelle information manque pour appliquer Thalès ?",
+    text: "Triangle ABC : M ∈ [AB] et N ∈ [AC]. Quelle information manque pour utiliser Thalès ?",
     format: "qcm",
     choices: [
       "savoir que (MN) est parallèle à (BC)",
@@ -1984,7 +2070,7 @@ export const thalesBank: TutorBankItemV4[] = [
     microId: "thales_configuration",
     difficulty: 2,
     theme: "neutral",
-    text: "Dans le triangle ABC, M ∈ [AB], N ∈ [AC] et (MN) // (BC). Quel sommet est commun aux deux triangles AMN et ABC ?",
+    text: "Triangle ABC : M ∈ [AB], N ∈ [AC], (MN) // (BC). Quel sommet est commun à AMN et ABC ?",
     format: "qcm",
     choices: ["A", "B", "C", "M"],
     expected: ["A"],
@@ -2012,7 +2098,7 @@ export const thalesBank: TutorBankItemV4[] = [
     hint: "Thalès demande une parallèle à un côté.",
     tags: ["thales_theoreme_theoreme", "configuration", "template", "canvas"],
     // 03/10/2026 : codé, ou seulement « à l'air » parallèle (genConfigCodage).
-    generate: genConfigCodage,
+    generate: () => court(15, () => genConfigCodage(false)), // 03/11/2026 : sans situation
   },
   {
     kind: "template",
@@ -2026,7 +2112,7 @@ export const thalesBank: TutorBankItemV4[] = [
     hint: "Les points doivent être sur les côtés issus du même sommet.",
     tags: ["thales_theoreme_theoreme", "configuration", "template"],
     // 03/10/2026 : points mal placés, droite perpendiculaire ou sécante (genConfigPosition).
-    generate: genConfigPosition,
+    generate: () => court(15, () => genConfigPosition(false)), // 03/11/2026 : sans situation
   },
   {
     kind: "fixed",
@@ -2135,7 +2221,7 @@ export const thalesBank: TutorBankItemV4[] = [
     hint: "Associe les longueurs correspondantes.",
     tags: ["thales_theoreme_theoreme", "rapport", "template"],
     // 03/10/2026 : ne fabriquait qu'UN énoncé. Quelle égalité est juste (genRapportEgalite).
-    generate: genRapportEgalite,
+    generate: () => court(15, () => genRapportEgalite(false)), // 03/11/2026 : sans situation
   },
   {
     kind: "template",
@@ -2204,7 +2290,7 @@ export const thalesBank: TutorBankItemV4[] = [
     microId: "thales_calculer_longueur",
     difficulty: 2,
     theme: "neutral",
-    text: "Dans une configuration de Thalès, AM = 2 cm, AB = 6 cm et AN = 3 cm. Quelle est AC ?",
+    text: "Configuration de Thalès : AM = 2 cm, AB = 6 cm, AN = 3 cm. Calcule AC.",
     format: "qcm",
     choices: ["9 cm", "6 cm", "12 cm", "4 cm"],
     expected: ["9 cm"],
@@ -2388,7 +2474,7 @@ export const thalesBank: TutorBankItemV4[] = [
     microId: "thales_reciproque_verifier",
     difficulty: 2,
     theme: "neutral",
-    text: "Pour appliquer la réciproque de Thalès, quels rapports compare-t-on ?",
+    text: "Avec la réciproque de Thalès, quels rapports compare-t-on ?",
     format: "qcm",
     choices: ["AM/AB et AN/AC", "AM/AN et AB/AC", "AB/MN et AC/BC", "AM/MN et AN/BC"],
     expected: ["AM/AB et AN/AC"],
@@ -2897,7 +2983,7 @@ export const thalesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Repère le sommet commun, les deux points sur les côtés et les deux droites parallèles.",
     tags: ["thales_theoreme_theoreme", "configuration", "template", "canvas"],
-    generate: genConfigElements,
+    generate: () => court(12, () => genConfigElements(false)), // 03/11/2026 : sans situation
   },
   {
     kind: "template",
@@ -2910,7 +2996,7 @@ export const thalesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Écris l’égalité des rapports (petite longueur sur grande longueur), puis utilise le coefficient.",
     tags: ["thales_theoreme_theoreme", "calculer_longueur", "qcm", "template", "canvas"],
-    generate: () => genCalcul(["AC", "AB", "AN", "AM"], true, true),
+    generate: () => court(15, () => genCalcul(["AC", "AB", "AN", "AM"], true, true, false)), // 03/11/2026 : sans situation
   },
   {
     kind: "template",
@@ -2923,7 +3009,7 @@ export const thalesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Le côté parallèle du petit triangle correspond au côté parallèle du grand.",
     tags: ["thales_theoreme_theoreme", "calculer_longueur", "qcm", "template", "canvas"],
-    generate: () => genCalcul(["BC", "MN"], true, true),
+    generate: () => court(15, () => genCalcul(["BC", "MN"], true, true, false)), // 03/11/2026 : sans situation
   },
   {
     kind: "template",
@@ -2936,7 +3022,21 @@ export const thalesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "On compare les longueurs prises sur chacune des deux demi-droites issues du sommet commun.",
     tags: ["thales_theoreme_theoreme", "reciproque", "verifier", "template", "canvas"],
-    generate: genRecipRapports,
+    generate: () => court(15, () => genRecipRapports(false)), // 03/11/2026 : sans situation
+  },
+  {
+    kind: "template",
+    id: "thales_theoreme_reciproque_verifier_tpl_situation",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "thales_theoreme",
+    microId: "thales_reciproque_verifier",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On compare les longueurs prises sur chacune des deux demi-droites issues du sommet commun.",
+    tags: ["thales_theoreme_theoreme", "reciproque", "verifier", "template", "canvas"],
+    // 03/11/2026 : les situations, réservées à ★3.
+    generate: () => genRecipRapports(true),
   },
   {
     kind: "template",

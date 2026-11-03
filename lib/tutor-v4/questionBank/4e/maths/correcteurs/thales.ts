@@ -35,7 +35,7 @@ function positions(t: string): [string, string][] {
 
 /** La configuration de Thalès lue dans le texte (null si les points ne sont pas sur deux côtés issus d'un même sommet). */
 function lireConfig(t: string): { c: Config | null; pb: string[] } {
-  const nomme = t.match(/triangle ([A-Z]{3})\b/)?.[1];
+  const nomme = t.match(/[Tt]riangle ([A-Z]{3})\b/)?.[1];
   const pos = positions(t);
   const uniques = [...new Map(pos.map((x) => [x[0], x])).values()];
   if (uniques.length !== 2) return { c: null, pb: [`deux points placés attendus, lus : ${uniques.map((x) => `${x[0]}∈[${x[1]}]`).join(", ")}`] };
@@ -273,6 +273,7 @@ function corrigerOuiNon(q: Q): string[] {
   const { c, pb } = lireConfig(q.text);
   if (!c) return pb;
   const manque = /mais (?:on ne sait pas si|rien n'indique que|l'énoncé ne dit rien)/.test(q.text);
+  // « on ne sait pas si (MN) // (BC) » : la phrase sans le « mais… » pour le parallélisme.
   const p = manque ? pb : cadreTheoreme(q).p;
   return [...p, ...qcmUnique(q, (x) => x === (manque ? "non" : "oui")), ...verifierFigure(q, c, { parallele: !manque })];
 }
@@ -283,6 +284,7 @@ function corrigerCodage(q: Q): string[] {
   if (!c) return pb;
   const code = /(?<!n')est codée parallèle|le codage indique/.test(q.text);
   const air = /semble parallèle|aucun codage|aucune droite n'est codée|a l'air parallèle/.test(q.text);
+  // 03/11/2026 : « aucun codage de parallèles » (énoncé court de ★2).
   if (code === air) return [...pb, "codage illisible"];
   return [...pb, ...qcmUnique(q, (x) => x === (code ? "oui" : "non")), ...verifierFigure(q, c, { parallele: code })];
 }
@@ -551,7 +553,22 @@ function corrigerCoefficient(q: Q): string[] {
   return [...p, ...verifierReponse(q, juste, ""), ...verifierFigure(q, c, { parallele: true, brut: lg.brut })];
 }
 
+/** ★3 « _tpl_situation » (03/11/2026) : le même gabarit tire l'un des quatre genres de configuration. */
+function corrigerConfigSituation(q: Q): string[] {
+  if (q.format === "qcm" && !(q.choices ?? []).includes("oui")) return corrigerElements(q);
+  if (!q.canvas) return corrigerPosition(q);
+  if (/codée|codage|semble parallèle|a l'air parallèle/.test(q.text)) return corrigerCodage(q);
+  return corrigerOuiNon(q);
+}
+/** ★3 « _tpl_situation » : compléter un rapport, ou l'égalité juste. */
+function corrigerRapportSituation(q: Q): string[] {
+  return /(?:Complète : |À quel rapport |Quel rapport est égal à |On écrit )[A-Z]{2} \/ [A-Z]{2}/.test(q.text) ? corrigerCompleter(q) : corrigerEgalite(q);
+}
+
 export const CORRECTEURS: CorrecteursMaths = avecRegleMotsCles({
+  thales_theoreme_configuration_tpl_situation: corrigerConfigSituation,
+  thales_theoreme_rapport_tpl_situation: corrigerRapportSituation,
+  thales_theoreme_reciproque_verifier_tpl_situation: corrigerRecipRapports,
   // Configuration
   thales_theoreme_configuration_tpl_1: corrigerOuiNon,
   thales_theoreme_configuration_tpl_2: corrigerCodage,
