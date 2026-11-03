@@ -65,6 +65,10 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
       exercices: [
         {
           enonce: "Soit $(u_n)$ la suite géométrique de premier terme $u_0 = 3$ et de raison $q = 2$. Exprimer $u_n$ en fonction de $n$, puis calculer $u_5$.",
+          reponses: [
+            { question: "u_n", attendu: "3×2^n" },
+            { question: "u_5", attendu: "96" },
+          ],
           correction:
             "$u_n = u_0 \\times q^n = 3 \\times 2^n$.\n$u_5 = 3 \\times 2^5 = 3 \\times 32 = 96$.\n⚠️ $3 \\times 2^5$ n'est pas $6^5$ : on calcule d'abord la puissance, puis on multiplie par $3$.\n⭐ La formule évite de calculer $u_1$, $u_2$, $u_3$, $u_4$ : on saute directement au rang voulu.",
           schema: ecranSeulement(tableau(["n", "0", "1", "2", "5"], ["uₙ", 3, 6, 12, 96])),
@@ -72,6 +76,10 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
         },
         {
           enonce: "On donne $u_0 = 5\\,000$ et $q = 0{,}8$. Exprimer $u_n$ en fonction de $n$, puis calculer $u_3$.",
+          reponses: [
+            { question: "u_n", attendu: "5 000×0,8^n" },
+            { question: "u_3", attendu: "2 560" },
+          ],
           correction:
             "$u_n = 5\\,000 \\times 0{,}8^n$.\n$u_3 = 5\\,000 \\times 0{,}8^3 = 5\\,000 \\times 0{,}512 = 2\\,560$.\n⚠️ $0{,}8^3$ n'est pas $0{,}8 \\times 3 = 2{,}4$ : c'est $0{,}8 \\times 0{,}8 \\times 0{,}8$.\nSur le dessin, les termes en milliers : chaque point est à $0{,}8$ fois la hauteur du précédent.",
           schema: ecranSeulement(repere([-1, 5, -1, 6], [], [{ x: 0, y: 5 }, { x: 1, y: 4 }, { x: 2, y: 3.2 }, { x: 3, y: 2.56 }])),
@@ -79,6 +87,11 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
         },
         {
           enonce: "On donne $u_n = 7 \\times 1{,}5^n$. Donner le premier terme $u_0$ et la raison, puis calculer $u_2$.",
+          reponses: [
+            { question: "u_0", attendu: "7" },
+            { question: "raison", attendu: "1,5" },
+            { question: "u_2", attendu: "15,75" },
+          ],
           correction:
             "$u_0 = 7 \\times 1{,}5^0 = 7 \\times 1 = 7$.\nLa raison est le nombre élevé à la puissance $n$ : $q = 1{,}5$.\n$u_2 = 7 \\times 1{,}5^2 = 7 \\times 2{,}25 = 15{,}75$.\n⚠️ $1{,}5^0 = 1$, et pas $0$ : un nombre non nul à la puissance $0$ vaut toujours $1$.",
           schema: ecranSeulement(tableau(["n", "0", "1", "2"], ["uₙ", 7, 10.5, 15.75])),
@@ -86,6 +99,11 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
         },
         {
           enonce: "Donner le sens de variation de chaque suite géométrique.\na) $u_0 = 10$ et $q = 1{,}3$.\nb) $v_0 = 50$ et $q = 0{,}6$.\nc) $w_0 = 8$ et $q = 1$.",
+          reponses: [
+            { question: "a)", attendu: "croissante" },
+            { question: "b)", attendu: "décroissante" },
+            { question: "c)", attendu: "constante" },
+          ],
           correction:
             "Les termes sont strictement positifs : c'est la raison, comparée à $1$, qui décide.\na) $1{,}3 > 1$ : $(u_n)$ est croissante.\nb) $0 < 0{,}6 < 1$ : $(v_n)$ est décroissante.\nc) $q = 1$ : on multiplie par $1$, rien ne change. $(w_n)$ est constante, égale à $8$.\n⚠️ Ce n'est pas le premier terme qui décide : $v_0 = 50$ est grand, et pourtant la suite décroît.\nSur le dessin, les trois suites divisées par $5$ : $(u_n)$ en bleu monte, $(v_n)$ en orange descend, $(w_n)$ en vert reste plate.",
           schema: ecranSeulement(repere([-1, 4, -1, 11], [{ pts: [[0, 2], [1, 2.6], [2, 3.38], [3, 4.39]] }, { pts: [[0, 10], [1, 6], [2, 3.6], [3, 2.16]], couleur: ORANGE }, { pts: [[0, 1.6], [3, 1.6]], couleur: "#16a34a" }], [], undefined, true)),
@@ -93,6 +111,10 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
         },
         {
           enonce: "On donne $u_n = 400 \\times 0{,}9^n$. Quel est le sens de variation de $(u_n)$ ? Le vérifier sur $u_0$, $u_1$ et $u_2$.",
+          reponses: [
+            { question: "sens", attendu: "décroissante" },
+            { question: "u_0 ; u_1 ; u_2", attendu: "400 ; 360 ; 324", ordre: true },
+          ],
           correction:
             "$u_0 = 400 > 0$ et la raison $q = 0{,}9$ est entre $0$ et $1$ : la suite est décroissante.\n$u_0 = 400$ ; $u_1 = 400 \\times 0{,}9 = 360$ ; $u_2 = 400 \\times 0{,}81 = 324$ : les termes baissent bien.\n⭐ $q = 0{,}9$, c'est une baisse de $10$ % à chaque étape.\nSur le dessin, les termes en centaines : ils descendent.",
           schema: ecranSeulement(repere([-1, 5, -1, 5], [], [{ x: 0, y: 4 }, { x: 1, y: 3.6 }, { x: 2, y: 3.24 }, { x: 3, y: 2.92 }])),
@@ -100,6 +122,11 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
         },
         {
           enonce: "Une suite géométrique vérifie $u_1 = 6$ et a pour raison $q = 3$. Calculer $u_0$, exprimer $u_n$ en fonction de $n$, puis calculer $u_4$.",
+          reponses: [
+            { question: "u_0", attendu: "2" },
+            { question: "u_n", attendu: "2×3^n" },
+            { question: "u_4", attendu: "162" },
+          ],
           correction:
             "On recule d'un rang en divisant par la raison : $u_0 = \\dfrac{6}{3} = 2$.\nDonc $u_n = 2 \\times 3^n$.\n$u_4 = 2 \\times 3^4 = 2 \\times 81 = 162$.\n⚠️ Écrire $u_n = 6 \\times 3^n$ serait faux : la formule part de $u_0$, pas de $u_1$. Elle donnerait $u_1 = 18$, au lieu de $6$.",
           schema: ecranSeulement(tableau(["n", "0", "1", "2", "3", "4"], ["uₙ", 2, 6, 18, 54, 162])),
@@ -107,6 +134,9 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
         },
         {
           enonce: "On donne $u_n = 6 \\times 0{,}5^n$. Calculer $u_0$, $u_1$, $u_2$, $u_3$ et $u_4$, puis placer les points $(n ; u_n)$ dans un repère.",
+          reponses: [
+            { question: "u_0 à u_4", attendu: "6 ; 3 ; 1,5 ; 0,75 ; 0,375", ordre: true },
+          ],
           correction:
             "$u_0 = 6$ ; $u_1 = 3$ ; $u_2 = 1{,}5$ ; $u_3 = 0{,}75$ ; $u_4 = 0{,}375$.\nOn place les points $(0 ; 6)$, $(1 ; 3)$, $(2 ; 1{,}5)$, $(3 ; 0{,}75)$ et $(4 ; 0{,}375)$.\n⭐ Les points ne sont pas alignés : ils descendent de moins en moins vite, et s'approchent de l'axe sans jamais le toucher.\n⚠️ On ne relie pas les points : une suite n'a de valeurs qu'aux rangs entiers.",
           schema: repere([-1, 5, -1, 7], [], [
@@ -120,6 +150,9 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
         },
         {
           enonce: "Le nombre d'habitants d'une ville, $n$ années après 2020, est modélisé par $u_n = 12\\,000 \\times 1{,}05^n$.\na) Que représentent $12\\,000$ et $1{,}05$ ?\nb) Calculer $u_2$. Que représente ce nombre ?",
+          reponses: [
+            { question: "b)", attendu: "13 230" },
+          ],
           correction:
             "a) $12\\,000 = u_0$ : la population en 2020. $1{,}05$ est la raison : la population augmente de $5$ % par an.\nb) $u_2 = 12\\,000 \\times 1{,}05^2 = 12\\,000 \\times 1{,}1025 = 13\\,230$.\nC'est la population prévue en $2020 + 2 = 2022$ : $13\\,230$ habitants.\n⚠️ Le rang $n$ n'est pas l'année : $u_2$ parle de 2022, pas de l'an $2$.",
           schema: ecranSeulement(diagramme("barres", [{ label: "2020", value: 12000 }, { label: "2021", value: 12600 }, { label: "2022", value: 13230 }])),
@@ -144,6 +177,11 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
           titre: "Un capital qui dort",
           enonce:
             "Samir place $5\\,000$ € à intérêts composés, au taux de $3$ % par an (modèle). On note $u_n$ le capital au bout de $n$ années.\na) Exprimer $u_n$ en fonction de $n$.\nb) Calculer le capital au bout de $5$ ans, puis de $10$ ans (au centime).\nc) Le capital a-t-il augmenté de $30$ % en $10$ ans ?",
+          reponses: [
+            { question: "a)", attendu: "5 000×1,03^n" },
+            { question: "b) 5 ans", attendu: "5 796,37", tolerance: 0.01 },
+            { question: "b) 10 ans", attendu: "6 719,58", tolerance: 0.01 },
+          ],
           correction:
             "a) $+3$ % par an : raison $1{,}03$, et $u_0 = 5\\,000$. Donc $u_n = 5\\,000 \\times 1{,}03^n$.\nb) $u_5 = 5\\,000 \\times 1{,}03^5 \\approx 5\\,796{,}37$ €.\n$u_{10} = 5\\,000 \\times 1{,}03^{10} \\approx 6\\,719{,}58$ €.\nc) $\\dfrac{6\\,719{,}58}{5\\,000} \\approx 1{,}344$ : une hausse d'environ $34{,}4$ %, plus que $30$ %.\n⭐ Chaque année, les $3$ % portent sur un capital plus gros : dix hausses de $3$ % font plus que $30$ %.",
           schema: tableau(["année", "0", "5", "10"], ["capital (€)", 5000, 5796.37, 6719.58]),
@@ -153,6 +191,12 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
           titre: "Un condensateur qui se décharge",
           enonce:
             "Un condensateur chargé sous $12$ V se décharge dans une résistance. Chaque seconde, sa tension baisse de $10$ % (modèle). On note $U_n$ la tension, en volts, au bout de $n$ secondes.\na) Exprimer $U_n$ en fonction de $n$.\nb) Donner le sens de variation de la suite $(U_n)$.\nc) Calculer $U_3$ et $U_5$ (au centième). Que représente $U_5$ ?",
+          reponses: [
+            { question: "a)", attendu: "12×0,9^n" },
+            { question: "b)", attendu: "décroissante" },
+            { question: "c) U_3", attendu: "8,75", tolerance: 0.01 },
+            { question: "c) U_5", attendu: "7,09", tolerance: 0.01 },
+          ],
           correction:
             "a) Baisser de $10$ %, c'est multiplier par $0{,}9$ : $U_n = 12 \\times 0{,}9^n$.\nb) $U_0 = 12 > 0$ et $0 < 0{,}9 < 1$ : la suite est décroissante. La tension baisse à chaque seconde.\nc) $U_3 = 12 \\times 0{,}9^3 = 12 \\times 0{,}729 = 8{,}748$, soit environ $8{,}75$ V.\n$U_5 = 12 \\times 0{,}9^5 \\approx 7{,}09$ V : c'est la tension au bout de $5$ secondes.\n⚠️ En $5$ secondes, la tension n'a pas perdu $50$ % : il reste plus de la moitié des $12$ V.\nSur le dessin, les points descendent de moins en moins vite.",
           schema: repere([-1, 6, -1, 13], [], [
@@ -176,6 +220,14 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
             { x: 3, y: 5.43 },
             { x: 4, y: 6.62 },
           ]),
+          reponses: [
+            { question: "a)", attendu: "3×1,02^n" },
+            { question: "b) p_10", attendu: "3,66", tolerance: 0.01 },
+            { question: "b) année de p_10", attendu: "1970" },
+            { question: "b) p_40", attendu: "6,62", tolerance: 0.01 },
+            { question: "b) année de p_40", attendu: "2000" },
+            { question: "c)", attendu: ["trop", "trop d'habitants"] },
+          ],
           correction:
             "a) $p_n = 3 \\times 1{,}02^n$.\nb) $p_{10} = 3 \\times 1{,}02^{10} \\approx 3{,}66$ milliards : c'est 1970.\n$p_{40} = 3 \\times 1{,}02^{40} \\approx 6{,}62$ milliards : c'est 2000.\nSur le graphique, l'abscisse compte les DÉCENNIES : le point d'abscisse $4$ est $p_{40}$, pas $p_4$.\nc) Le modèle donne $6{,}62$ milliards, la réalité environ $6{,}1$ : le modèle en prévoit trop.\nLa croissance réelle a ralenti : le taux annuel n'est pas resté à $2$ %.\n⭐ Un modèle géométrique suppose un taux CONSTANT. Quand le taux change, le modèle s'éloigne de la réalité.",
           micros: ["expo_suite_explicite", "expo_suite_graphique", "expo_suite_interpreter"],
@@ -190,6 +242,10 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
             { label: "2024", value: 180 },
             { label: "2025", value: 216 },
           ]),
+          reponses: [
+            { question: "b)", attendu: "125×1,2^n" },
+            { question: "c)", attendu: "373", tolerance: 1 },
+          ],
           correction:
             "a) $\\dfrac{150}{125} = 1{,}2$ ; $\\dfrac{180}{150} = 1{,}2$ ; $\\dfrac{216}{180} = 1{,}2$ : quotient constant, suite géométrique de raison $1{,}2$.\nb) $a_n = 125 \\times 1{,}2^n$.\nc) 2028, c'est le rang $n = 2028 - 2022 = 6$. $a_6 = 125 \\times 1{,}2^6 \\approx 373{,}2$ : environ $373$ adhérents.\n⚠️ Le rang de 2028 est $6$ : ni $2028$, ni $4$. La quatrième barre, 2025, est le rang $3$.",
           micros: ["expo_suite_explicite", "expo_suite_interpreter"],
@@ -198,6 +254,12 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
           titre: "Réduire ses émissions de CO₂",
           enonce:
             "Une entreprise émettait $800$ tonnes de CO₂ en 2025. Elle s'engage à réduire ses émissions de $5$ % par an (modèle). On note $E_n$ ses émissions, en tonnes, en l'année $2025 + n$.\na) Exprimer $E_n$ en fonction de $n$ ; donner le sens de variation de la suite.\nb) Calculer $E_{10}$ à la tonne près. Que représente-t-il ?\nc) L'entreprise annonce : « En dix ans, nous aurons divisé nos émissions par deux. » Est-ce vrai ?",
+          reponses: [
+            { question: "a)", attendu: "800×0,95^n" },
+            { question: "a) sens", attendu: "décroissante" },
+            { question: "b)", attendu: "479", tolerance: 1 },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $E_n = 800 \\times 0{,}95^n$. La raison est entre $0$ et $1$, le premier terme est positif : la suite est décroissante.\nb) $E_{10} = 800 \\times 0{,}95^{10} \\approx 479$ tonnes : les émissions prévues en 2035.\nc) La moitié de $800$, c'est $400$. Or $479 > 400$ : non. La baisse est d'environ $40$ %, pas de $50$ %.\n⚠️ Dix baisses de $5$ % ne font pas $-50$ % : on perd $5$ % d'une quantité de plus en plus petite.",
           schema: ecranSeulement(tableau(["année", "2025", "2030", "2035"], ["émissions (t)", 800, 619.02, 478.99])),
@@ -213,6 +275,11 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
             { x: 2, y: 4 },
             { x: 3, y: 8 },
           ]),
+          reponses: [
+            { question: "a)", attendu: "2^n" },
+            { question: "b)", attendu: "1 024" },
+            { question: "c)", attendu: "19" },
+          ],
           correction:
             "a) On lit $1$ ; $2$ ; $4$ ; $8$ : la surface double chaque jour. $u_n = 2^n$ convient : $2^0 = 1$, $2^1 = 2$, $2^2 = 4$, $2^3 = 8$.\n$1 + n$ donne $1$ ; $2$ ; $3$ ; $4$ : non. $2n$ donne $0$ au rang $0$ : non.\nb) $u_{10} = 2^{10} = 1\\,024$ m² : la surface couverte le jour $10$.\nc) La surface double chaque jour : la veille du jour $20$, elle valait la moitié. C'est le jour $19$.\n⚠️ Pas le jour $10$ ! Le jour $10$, les nénuphars couvrent à peine un millième de l'étang : $\\dfrac{2^{10}}{2^{20}} = \\dfrac{1}{1\\,024}$.",
           micros: ["expo_suite_graphique", "expo_suite_explicite", "expo_suite_interpreter"],
@@ -221,6 +288,14 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
           titre: "Avec ou sans traitement",
           enonce:
             "Dans une culture, on compte $1\\,000$ bactéries. Sans traitement, leur nombre augmente de $10$ % par heure ; avec un traitement, il baisse de $30$ % par heure (modèles). On note $v_n$ et $u_n$ le nombre de bactéries au bout de $n$ heures, sans et avec traitement.\na) Exprimer $v_n$ et $u_n$ en fonction de $n$.\nb) Donner le sens de variation de chaque suite.\nc) Calculer $v_3$ et $u_3$. Représenter les termes de $n = 0$ à $n = 4$, en centaines.",
+          reponses: [
+            { question: "a) v_n", attendu: "1 000×1,1^n" },
+            { question: "a) u_n", attendu: "1 000×0,7^n" },
+            { question: "b) v_n", attendu: "croissante" },
+            { question: "b) u_n", attendu: "décroissante" },
+            { question: "c) v_3", attendu: "1 331" },
+            { question: "c) u_3", attendu: "343" },
+          ],
           correction:
             "a) $v_n = 1\\,000 \\times 1{,}1^n$ et $u_n = 1\\,000 \\times 0{,}7^n$.\nb) $1{,}1 > 1$ : $(v_n)$ est croissante. $0 < 0{,}7 < 1$ : $(u_n)$ est décroissante.\nc) $v_3 = 1\\,000 \\times 1{,}331 = 1\\,331$ bactéries ; $u_3 = 1\\,000 \\times 0{,}343 = 343$ bactéries.\nSur le dessin, en centaines : les points rouges sont ceux de $v_n$, les points reliés en orange ceux de $u_n$. Les deux partent de $10$ centaines, puis s'écartent.\n⭐ Même départ, deux raisons : c'est la raison, et elle seule, qui décide du sens.",
           schema: repere([-1, 5, -1, 15], [{ pts: [[0, 10], [1, 7], [2, 4.9], [3, 3.43], [4, 2.4]], couleur: ORANGE }], [
@@ -236,6 +311,11 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
           titre: "Une forêt qui recule",
           enonce:
             "La surface boisée d'une région, en milliers d'hectares, est modélisée par $f_n = 250 \\times 0{,}98^n$, où $n$ est le nombre d'années après 2020.\na) Que représentent $250$ et $0{,}98$ ?\nb) Quel est le sens de variation de $(f_n)$ ? Que traduit-il ?\nc) Calculer $f_{10}$ au dixième. Quelle surface la région aura-t-elle perdue en dix ans ?",
+          reponses: [
+            { question: "b)", attendu: "décroissante" },
+            { question: "c) f_10", attendu: "204,3", tolerance: 0.1 },
+            { question: "c) perte", attendu: "45,7", tolerance: 0.1 },
+          ],
           correction:
             "a) $250$ : la surface en 2020, $250$ milliers d'hectares, soit $250\\,000$ ha. $0{,}98 = 1 - 0{,}02$ : la forêt perd $2$ % de sa surface par an.\nb) $0 < 0{,}98 < 1$ : suite décroissante. La forêt recule chaque année.\nc) $f_{10} = 250 \\times 0{,}98^{10} \\approx 204{,}3$ milliers d'hectares.\nPerte : $250 - 204{,}3 = 45{,}7$ milliers d'hectares.\n⚠️ Pas $20$ % de $250$, soit $50$ : chaque année, on perd $2$ % d'une forêt déjà réduite.",
           schema: ecranSeulement(tableau(["année", "2020", "2025", "2030"], ["forêt (milliers d'ha)", 250, 225.98, 204.27])),
@@ -259,6 +339,12 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
           titre: "Une ville de l'ère industrielle",
           enonce:
             "Au XIXe siècle, l'exode rural fait grandir les villes industrielles. Une ville compte $20\\,000$ habitants en 1850 ; on suppose (modèle) que sa population augmente de $3$ % par an. On note $u_n$ la population en l'année $1850 + n$.\na) Exprimer $u_n$ en fonction de $n$ et donner son sens de variation.\nb) Calculer la population tous les dix ans, de 1860 à 1900, à la centaine près, puis représenter ces valeurs.\nc) Par combien la population a-t-elle été multipliée entre 1850 et 1900 ?\nd) Dans ce modèle d'exercice, on suppose que les archives donnent $80\\,000$ habitants en 1900. Que dire du modèle ?",
+          reponses: [
+            { question: "a)", attendu: "20 000×1,03^n" },
+            { question: "a) sens", attendu: "croissante" },
+            { question: "b) 1860 à 1900", attendu: "26 900 ; 36 100 ; 48 500 ; 65 200 ; 87 700", ordre: true, tolerance: 100 },
+            { question: "c)", attendu: "4,38", tolerance: 0.01 },
+          ],
           correction:
             "a) $u_n = 20\\,000 \\times 1{,}03^n$. Raison $1{,}03 > 1$ : la suite est croissante.\nb) 1860 : $u_{10} \\approx 26\\,900$ ; 1870 : $u_{20} \\approx 36\\,100$ ; 1880 : $u_{30} \\approx 48\\,500$ ; 1890 : $u_{40} \\approx 65\\,200$ ; 1900 : $u_{50} \\approx 87\\,700$ habitants.\nSur le dessin, l'abscisse compte les décennies et la population est en dizaines de milliers.\nc) $1{,}03^{50} \\approx 4{,}38$ : la population a été multipliée par plus de $4$.\nd) Le modèle donne environ $87\\,700$, les archives $80\\,000$ : il surestime d'environ $10$ %. La croissance a sans doute ralenti en fin de siècle.\n⭐ Chaque décennie, la population est multipliée par le même nombre, $1{,}03^{10} \\approx 1{,}34$ : les points montent de plus en plus vite.",
           schema: repere([-1, 6, -1, 10], [], [
@@ -275,6 +361,15 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
           titre: "Le café qui refroidit",
           enonce:
             "Un café à $80$ °C est posé dans une pièce à $20$ °C. L'écart de température entre le café et la pièce diminue de $20$ % chaque minute (modèle). On note $E_n$ cet écart, en °C, au bout de $n$ minutes, et $T_n$ la température du café.\na) Calculer $E_0$. Exprimer $E_n$ en fonction de $n$.\nb) En déduire $T_n$ en fonction de $n$, puis la température du café au bout de $5$ minutes (au dixième).\nc) La suite $(T_n)$ est-elle géométrique ? Quel est son sens de variation ?\nd) Représenter $E_0$ à $E_5$. Selon le modèle, le café atteindra-t-il $20$ °C ?",
+          reponses: [
+            { question: "a) E_0", attendu: "60" },
+            { question: "a) E_n", attendu: "60×0,8^n" },
+            { question: "b) T_n", attendu: "20 + 60×0,8^n" },
+            { question: "b) T_5", attendu: "39,7", tolerance: 0.1 },
+            { question: "c) géométrique ?", attendu: ["non", "faux"] },
+            { question: "c) sens", attendu: "décroissante" },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $E_0 = 80 - 20 = 60$ °C. Baisse de $20$ % par minute : $E_n = 60 \\times 0{,}8^n$.\nb) La température du café, c'est celle de la pièce plus l'écart : $T_n = 20 + 60 \\times 0{,}8^n$.\n$T_5 = 20 + 60 \\times 0{,}8^5 = 20 + 60 \\times 0{,}32768 \\approx 39{,}7$ °C.\nc) $T_0 = 80$, $T_1 = 68$, $T_2 = 58{,}4$. $\\dfrac{68}{80} = 0{,}85$ mais $\\dfrac{58{,}4}{68} \\approx 0{,}86$ : les quotients changent, $(T_n)$ n'est PAS géométrique. C'est l'écart $(E_n)$ qui l'est.\n$(E_n)$ est décroissante, donc $(T_n)$ aussi : le café refroidit.\nd) Sur le dessin, les écarts sont en dizaines de degrés. $E_n$ reste strictement positif : selon le modèle, le café s'approche de $20$ °C sans jamais l'atteindre.\n⚠️ Écrire $T_n = 80 \\times 0{,}8^n$ serait faux : le café descendrait vers $0$ °C, plus froid que la pièce !",
           schema: repere([-1, 6, -1, 7], [], [
@@ -291,6 +386,15 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
           titre: "Le salaire et les prix",
           enonce:
             "Un salarié gagne $2\\,000$ € par mois en 2025. Son salaire augmente de $1{,}5$ % par an ; les prix, eux, augmentent de $2$ % par an (modèles). On note $s_n$ son salaire en l'année $2025 + n$, et $p_n$ le prix d'un « panier » de dépenses qui coûte $2\\,000$ € en 2025.\na) Exprimer $s_n$ et $p_n$ en fonction de $n$. Quel est le sens de variation de chaque suite ?\nb) Calculer $s_{20}$ et $p_{20}$ à l'euro près. À quelle année correspondent-ils ?\nc) En 2045, son salaire lui permettra-t-il d'acheter le panier ? Que dire de son pouvoir d'achat ?",
+          reponses: [
+            { question: "a) s_n", attendu: "2 000×1,015^n" },
+            { question: "a) p_n", attendu: "2 000×1,02^n" },
+            { question: "a) sens", attendu: ["croissantes", "croissante"] },
+            { question: "b) s_20", attendu: "2 694", tolerance: 1 },
+            { question: "b) p_20", attendu: "2 972", tolerance: 1 },
+            { question: "b) année", attendu: "2045" },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $s_n = 2\\,000 \\times 1{,}015^n$ et $p_n = 2\\,000 \\times 1{,}02^n$. Les deux raisons sont plus grandes que $1$ : les deux suites sont croissantes.\nb) $s_{20} = 2\\,000 \\times 1{,}015^{20} \\approx 2\\,694$ € et $p_{20} = 2\\,000 \\times 1{,}02^{20} \\approx 2\\,972$ €. C'est l'année $2025 + 20 = 2045$.\nc) Non : il lui manque environ $278$ € par mois.\n$\\dfrac{2\\,694}{2\\,972} \\approx 0{,}906$ : avec son salaire, il n'achète plus qu'environ $90{,}6$ % du panier. Son pouvoir d'achat a baissé d'environ $9$ %.\n⚠️ Un écart de « seulement » $0{,}5$ point par an finit par peser lourd : sur vingt ans, les puissances creusent l'écart.",
           schema: diagramme("barres", [
@@ -304,6 +408,12 @@ export const exercicesExpoSuiteTermeGeneralPremiere: FicheExercicesData = {
           titre: "Une colonie d'abeilles",
           enonce:
             "Au printemps, une colonie compte $5\\,000$ abeilles. Pendant quelques semaines, sa population augmente de $20$ % par semaine (modèle). On note $a_n$ le nombre d'abeilles au bout de $n$ semaines.\na) Exprimer $a_n$ en fonction de $n$ ; donner son sens de variation.\nb) Calculer $a_1$, $a_2$, $a_3$, $a_4$ et $a_5$ (à l'unité), et représenter les points $(n ; a_n)$ en milliers.\nc) Au bout de combien de semaines la colonie a-t-elle doublé ?\nd) Pourquoi ce modèle ne peut-il pas durer toute l'année ?",
+          reponses: [
+            { question: "a)", attendu: "5 000×1,2^n" },
+            { question: "a) sens", attendu: "croissante" },
+            { question: "b) a_1 à a_5", attendu: "6 000 ; 7 200 ; 8 640 ; 10 368 ; 12 442", ordre: true, tolerance: 1 },
+            { question: "c)", attendu: "4" },
+          ],
           correction:
             "a) $a_n = 5\\,000 \\times 1{,}2^n$. Raison $1{,}2 > 1$ : suite croissante.\nb) $a_1 = 6\\,000$ ; $a_2 = 7\\,200$ ; $a_3 = 8\\,640$ ; $a_4 = 10\\,368$ ; $a_5 = 12\\,441{,}6$, soit environ $12\\,442$ abeilles.\nc) Doubler, c'est atteindre $10\\,000$. $a_3 = 8\\,640 < 10\\,000$ et $a_4 = 10\\,368 > 10\\,000$ : au bout de $4$ semaines. Sur le dessin, c'est le premier point au-dessus de la ligne en pointillés.\nd) Au bout de $52$ semaines, le modèle donnerait $5\\,000 \\times 1{,}2^{52}$ : plus de $60$ millions d'abeilles dans une seule ruche ! La place et la nourriture manquent bien avant.\n⭐ Une croissance géométrique ne dure jamais indéfiniment dans la nature : le modèle ne vaut que sur une courte période.",
           schema: repere([-1, 6, -1, 14], [], [

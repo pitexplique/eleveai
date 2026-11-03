@@ -69,12 +69,19 @@ export const exercicesExpoTauxMoyenPremiere: FicheExercicesData = {
       exercices: [
         {
           enonce: "Sur deux ans, un prix a été multiplié par $1{,}21$. Quel est le coefficient multiplicateur moyen par an ? le taux moyen ?",
+          reponses: [
+            { question: "coefficient", attendu: "1,1" },
+            { question: "taux", attendu: ["+10 %", "10 %"] },
+          ],
           correction:
             "On cherche $c$ tel que $c^2 = 1{,}21$ : $c = 1{,}21^{\\frac{1}{2}} = \\sqrt{1{,}21} = 1{,}1$.\nTaux moyen : $1{,}1 - 1 = 0{,}1$, soit $+10$ % par an.\n✔️ $1{,}1 \\times 1{,}1 = 1{,}21$.\n⭐ Deux hausses de $10$ % font $+21$ % : le taux moyen, lui, retrouve les $10$ %.",
           micros: ["expo_taux_moyen_calculer"],
         },
         {
           enonce: "Sur trois ans, une quantité a été multipliée par $8$. Quel est le taux d'évolution moyen annuel ?",
+          reponses: [
+            { attendu: ["+100 %", "100 %"] },
+          ],
           correction:
             "$c^3 = 8$, donc $c = 8^{\\frac{1}{3}} = 2$, car $2^3 = 8$.\nTaux moyen : $2 - 1 = 1$, soit $+100$ % par an : la quantité double, en moyenne, chaque année.\n⚠️ Pas « multipliée par $\\dfrac{8}{3}$ chaque année » : $\\left(\\dfrac{8}{3}\\right)^3$ ferait bien plus que $8$.\nSur le tableau, avec $1$ au départ : $\\times 2$ chaque année donne bien $8$.",
           schema: ecranSeulement(tableau(["année", "0", "1", "2", "3"], ["quantité", 1, 2, 4, 8])),
@@ -82,12 +89,19 @@ export const exercicesExpoTauxMoyenPremiere: FicheExercicesData = {
         },
         {
           enonce: "Une population a augmenté de $44$ % en deux ans. Un élève affirme : « C'est $+22$ % par an en moyenne. » Vérifier.",
+          reponses: [
+            { question: "+22 % ?", attendu: ["non", "faux"] },
+            { question: "taux moyen", attendu: ["+20 %", "20 %"] },
+          ],
           correction:
             "Avec $+22$ % deux fois : $1{,}22 \\times 1{,}22 = 1{,}4884$, soit $+48{,}84$ %, et non $+44$ %.\nLe bon coefficient moyen : $c^2 = 1{,}44$, donc $c = \\sqrt{1{,}44} = 1{,}2$, soit $+20$ % par an.\n⭐ Pour des hausses, le taux moyen est toujours un peu plus PETIT que le taux global divisé par $n$ : les hausses se composent.",
           micros: ["expo_taux_moyen_sens", "expo_taux_moyen_calculer"],
         },
         {
           enonce: "Une quantité augmente en moyenne de $5$ % par an pendant $4$ ans. Quel est le taux d'évolution global ?",
+          reponses: [
+            { attendu: ["+21,55 %", "21,55 %"] },
+          ],
           correction:
             "Le coefficient moyen est $1{,}05$. Sur $4$ ans : $1{,}05^4 = 1{,}21550625$.\nTaux global : environ $+21{,}55$ %.\n⚠️ Pas $+20$ % ($4 \\times 5$) : chaque hausse porte sur une quantité déjà augmentée.",
           schema: ecranSeulement(diagramme("barres", [{ label: "départ", value: 100 }, { label: "an 1", value: 105 }, { label: "an 2", value: 110.25 }, { label: "an 3", value: 115.76 }, { label: "an 4", value: 121.55 }])),
@@ -95,18 +109,29 @@ export const exercicesExpoTauxMoyenPremiere: FicheExercicesData = {
         },
         {
           enonce: "Un prix augmente de $20$ %, puis baisse de $20$ %. Le taux moyen est-il nul ? Le calculer au centième de %.",
+          reponses: [
+            { question: "nul ?", attendu: ["non", "faux"] },
+            { question: "taux moyen", attendu: "-2,02 %" },
+          ],
           correction:
             "Coefficient global : $1{,}2 \\times 0{,}8 = 0{,}96$ : une baisse de $4$ % au total.\nCoefficient moyen : $c = \\sqrt{0{,}96} \\approx 0{,}9798$, soit un taux moyen d'environ $-2{,}02$ % par période.\n⚠️ La moyenne des taux, $\\dfrac{20 + (-20)}{2} = 0$, fait croire que rien n'a changé. Le taux moyen dit la vérité : l'ensemble est une baisse.",
           micros: ["expo_taux_moyen_sens", "expo_taux_moyen_global"],
         },
         {
           enonce: "La valeur d'un objet a été multipliée par $0{,}64$ en deux ans. Quel est le taux d'évolution moyen annuel ?",
+          reponses: [
+            { attendu: "-20 %" },
+          ],
           correction:
             "$c^2 = 0{,}64$, donc $c = \\sqrt{0{,}64} = 0{,}8$.\nTaux moyen : $0{,}8 - 1 = -0{,}2$, soit $-20$ % par an.\n⭐ Pour une baisse, le coefficient moyen est entre $0$ et $1$, et le taux moyen est négatif.",
           micros: ["expo_taux_moyen_calculer"],
         },
         {
           enonce: "Le taux d'évolution moyen d'une population est de $+2$ % par an sur $10$ ans.\na) A-t-elle forcément augmenté de $2$ % chaque année ?\nb) Quelle est son évolution globale sur les $10$ ans ?",
+          reponses: [
+            { question: "a)", attendu: ["non", "faux"] },
+            { question: "b)", attendu: ["+21,9 %", "21,9 %"] },
+          ],
           correction:
             "a) Non : le taux moyen résume l'ensemble. Certaines années ont pu monter de $5$ %, d'autres baisser.\nb) Coefficient global : $1{,}02^{10} \\approx 1{,}219$, soit environ $+21{,}9$ %.\n⚠️ Pas $+20$ % : les hausses se composent, elles ne s'additionnent pas.",
           schema: ecranSeulement(tableau(["année", "0", "5", "10"], ["population (base 100)", 100, 110.41, 121.9])),
@@ -114,6 +139,10 @@ export const exercicesExpoTauxMoyenPremiere: FicheExercicesData = {
         },
         {
           enonce: "En $5$ ans, le prix d'un produit a augmenté de $30$ %. Calculer le taux moyen annuel au centième de %. Est-ce $6$ % ?",
+          reponses: [
+            { question: "taux moyen", attendu: ["+5,39 %", "5,39 %"] },
+            { question: "6 % ?", attendu: ["non", "faux"] },
+          ],
           correction:
             "Coefficient global : $1{,}3$. Coefficient moyen : $c = 1{,}3^{\\frac{1}{5}} \\approx 1{,}0539$ (à la calculatrice, $1{,}3$ puissance $0{,}2$).\nTaux moyen : environ $+5{,}39$ % par an, et non $6$ %.\n✔️ $1{,}0539^5 \\approx 1{,}30$.\nSur le tableau, au taux moyen de $5{,}39$ % chaque année, on arrive bien à $130$.",
           schema: ecranSeulement(tableau(["année", "0", "1", "2", "3", "4", "5"], ["prix (base 100)", 100, 105.39, 111.07, 117.05, 123.36, 130], true)),
@@ -144,6 +173,15 @@ export const exercicesExpoTauxMoyenPremiere: FicheExercicesData = {
             { label: "2022", value: 242 },
             { label: "2023", value: 266.2 },
           ]),
+          reponses: [
+            { question: "a) 2021", attendu: ["+25 %", "25 %"] },
+            { question: "a) 2022", attendu: "-3,2 %" },
+            { question: "a) 2023", attendu: ["+10 %", "10 %"] },
+            { question: "b) coefficient", attendu: "1,331" },
+            { question: "b) taux moyen", attendu: ["+10 %", "10 %"] },
+            { question: "c) année", attendu: "2023" },
+            { question: "c) chaque année ?", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) 2020 → 2021 : $\\dfrac{250}{200} = 1{,}25$, soit $+25$ %. 2021 → 2022 : $\\dfrac{242}{250} = 0{,}968$, soit $-3{,}2$ %. 2022 → 2023 : $\\dfrac{266{,}2}{242} = 1{,}1$, soit $+10$ %.\nb) $C = \\dfrac{266{,}2}{200} = 1{,}331$, sur $3$ ans : on compte les passages, pas les barres.\n$c = 1{,}331^{\\frac{1}{3}} = 1{,}1$, car $1{,}1^3 = 1{,}331$. Taux moyen : $+10$ % par an.\nc) Seul le passage 2022 → 2023 a connu $+10$ %. Les autres : $+25$ % et $-3{,}2$ %.\n⭐ Le taux moyen est le taux RÉGULIER qui mènerait au même résultat. Il lisse les à-coups.",
           micros: ["expo_taux_moyen_calculer", "expo_taux_moyen_global", "expo_taux_moyen_interpreter"],
@@ -156,6 +194,11 @@ export const exercicesExpoTauxMoyenPremiere: FicheExercicesData = {
             { label: "sans filtre", value: 100 },
             { label: "4 filtres", value: 40.96 },
           ]),
+          reponses: [
+            { question: "a)", attendu: "0,4096" },
+            { question: "b) coefficient", attendu: "0,8" },
+            { question: "b) absorbé", attendu: "20 %" },
+          ],
           correction:
             "a) $C = \\dfrac{40{,}96}{100} = 0{,}4096$.\nb) $c^4 = 0{,}4096$, donc $c = 0{,}4096^{\\frac{1}{4}} = 0{,}8$, car $0{,}8^4 = 0{,}4096$.\nChaque filtre laisse passer $80$ % de la lumière : il en absorbe $20$ %.\nc) L'élève divise le taux global par $4$ : $59{,}04 \\div 4 = 14{,}76$. Avec $-14{,}76$ % quatre fois, il resterait $0{,}8524^4 \\approx 0{,}528$, soit environ $52{,}8$ % de la lumière, et non $40{,}96$ %.\n⚠️ Chaque filtre absorbe $20$ % de ce qui lui ARRIVE, pas de la lumière de départ.",
           micros: ["expo_taux_moyen_calculer", "expo_taux_moyen_sens"],
@@ -164,6 +207,10 @@ export const exercicesExpoTauxMoyenPremiere: FicheExercicesData = {
           titre: "La population mondiale",
           enonce:
             "La population mondiale a atteint environ $1$ milliard d'habitants vers 1800, $2$ milliards vers 1927, et $8$ milliards en 2022.\na) Calculer le taux d'évolution moyen annuel de 1800 à 1927, au centième de %.\nb) Même question de 1927 à 2022.\nc) Que disent ces deux taux de l'histoire de la population mondiale ?",
+          reponses: [
+            { question: "a)", attendu: ["+0,55 %", "0,55 %"] },
+            { question: "b)", attendu: ["+1,47 %", "1,47 %"] },
+          ],
           correction:
             "a) Coefficient global $2$ en $1927 - 1800 = 127$ ans. $c = 2^{\\frac{1}{127}} \\approx 1{,}00547$ : environ $+0{,}55$ % par an.\nb) Coefficient global $\\dfrac{8}{2} = 4$ en $2022 - 1927 = 95$ ans. $c = 4^{\\frac{1}{95}} \\approx 1{,}0147$ : environ $+1{,}47$ % par an.\nc) Le taux moyen a presque triplé : la croissance s'est fortement accélérée au XXe siècle, avec la baisse de la mortalité.\n⭐ De $1$ à $2$ milliards : $127$ ans. De $2$ à $8$ milliards : $95$ ans seulement.\n⚠️ Ces taux moyens lissent de fortes variations : le taux annuel a atteint environ $2$ % dans les années 1960, puis il a baissé.",
           schema: diagramme("barres", [
@@ -178,6 +225,12 @@ export const exercicesExpoTauxMoyenPremiere: FicheExercicesData = {
           enonce:
             "Le tableau donne le temps d'une coureuse sur $10$ km, une fois par an.\na) Calculer le taux d'évolution de chaque année, au centième de %.\nb) Calculer le taux d'évolution moyen annuel entre 2023 et 2025.\nc) Si elle garde ce taux moyen, quel temps peut-elle espérer en 2026 ? Est-ce réaliste longtemps ?",
           figure: tableau(["année", "2023", "2024", "2025"], ["temps (min)", 50, 44, 40.5]),
+          reponses: [
+            { question: "a) 2024", attendu: "-12 %" },
+            { question: "a) 2025", attendu: "-7,95 %" },
+            { question: "b)", attendu: "-10 %" },
+            { question: "c)", attendu: "36,45" },
+          ],
           correction:
             "a) $\\dfrac{44}{50} = 0{,}88$ : $-12$ %. $\\dfrac{40{,}5}{44} \\approx 0{,}9205$ : environ $-7{,}95$ %.\nb) $C = \\dfrac{40{,}5}{50} = 0{,}81$, sur $2$ ans. $c = \\sqrt{0{,}81} = 0{,}9$ : $-10$ % par an en moyenne.\nc) $40{,}5 \\times 0{,}9 = 36{,}45$ minutes. Mais on ne peut pas progresser de $10$ % par an indéfiniment : le modèle ne vaut que sur une courte période.\n⭐ Ni $-12$ %, ni $-7{,}95$ % : le taux moyen, $-10$ %, est le rythme régulier qui mène au même temps final.",
           micros: ["expo_taux_moyen_calculer", "expo_taux_moyen_interpreter"],
@@ -186,6 +239,10 @@ export const exercicesExpoTauxMoyenPremiere: FicheExercicesData = {
           titre: "Réduire les émissions",
           enonce:
             "Une ville a réduit ses émissions de gaz à effet de serre de $20$ % en $5$ ans. Elle vise maintenant une baisse totale de $55$ % en $10$ ans, par rapport au départ (modèle).\na) Quel a été le taux moyen annuel sur les $5$ premières années, au centième de % ?\nb) Pour atteindre $-55$ % en $10$ ans, quel taux moyen faudra-t-il sur les $5$ années suivantes ?\nc) Comparer les deux rythmes.",
+          reponses: [
+            { question: "a)", attendu: "-4,36 %" },
+            { question: "b)", attendu: "-10,87 %" },
+          ],
           correction:
             "a) Coefficient global $0{,}8$ en $5$ ans. $c = 0{,}8^{\\frac{1}{5}} \\approx 0{,}9564$ : environ $-4{,}36$ % par an.\nb) En tout, il faut multiplier par $1 - 0{,}55 = 0{,}45$. Il reste à multiplier par $\\dfrac{0{,}45}{0{,}8} = 0{,}5625$ en $5$ ans.\n$c = 0{,}5625^{\\frac{1}{5}} \\approx 0{,}8913$ : environ $-10{,}87$ % par an.\nc) Il faudra baisser environ $2{,}5$ fois plus vite chaque année : un effort bien plus grand.\n⚠️ Il ne reste pas « $55 - 20 = 35$ % à faire » : les baisses se multiplient, et elles partent d'émissions déjà réduites.",
           schema: diagramme("barres", [
@@ -206,6 +263,15 @@ export const exercicesExpoTauxMoyenPremiere: FicheExercicesData = {
             { x: 3, y: 3.8 },
             { x: 4, y: 4.5 },
           ]),
+          reponses: [
+            { question: "a) départ", attendu: "20" },
+            { question: "a) 4 ans", attendu: "45" },
+            { question: "a) coefficient", attendu: "2,25" },
+            { question: "b)", attendu: ["+22,5 %", "22,5 %"] },
+            { question: "c) taux annuels", attendu: "30 % ; 15,4 % ; 26,7 % ; 18,4 %", ordre: true },
+            { question: "c) moyenne", attendu: "22,6 %" },
+            { question: "c) taux moyen ?", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $20$ castors au départ, $45$ au bout de $4$ ans. $C = \\dfrac{45}{20} = 2{,}25$.\nb) $c = 2{,}25^{\\frac{1}{4}} \\approx 1{,}2247$ : environ $+22{,}5$ % par an.\nc) $\\dfrac{26}{20} = 1{,}3$, soit $+30$ % ; $\\dfrac{30}{26} \\approx 1{,}1538$, soit environ $+15{,}4$ % ; $\\dfrac{38}{30} \\approx 1{,}2667$, soit environ $+26{,}7$ % ; $\\dfrac{45}{38} \\approx 1{,}1842$, soit environ $+18{,}4$ %.\nLeur moyenne vaut environ $22{,}6$ % : proche du taux moyen, $22{,}5$ %, mais différente.\n⚠️ Le taux moyen n'est PAS la moyenne des taux : c'est le taux constant qui mène au même résultat.\n⭐ Astuce : $2{,}25 = 1{,}5^2$, donc $c = \\sqrt{1{,}5}$.",
           micros: ["expo_taux_moyen_sens", "expo_taux_moyen_calculer", "expo_taux_moyen_global"],
@@ -215,6 +281,12 @@ export const exercicesExpoTauxMoyenPremiere: FicheExercicesData = {
           enonce:
             "Le tableau donne la hausse des prix (l'inflation) dans un pays, quatre années de suite (modèle).\na) Calculer le coefficient global et le taux global sur les $4$ ans.\nb) En déduire le taux moyen annuel, au centième de %.\nc) Un panier de courses coûtait $100$ € au début. Combien coûte-t-il à la fin ?",
           figure: tableau(["année", "1", "2", "3", "4"], ["inflation (%)", 2, 5, 6, 3]),
+          reponses: [
+            { question: "a) coefficient", attendu: "1,1693", tolerance: 0.0001 },
+            { question: "a) taux global", attendu: ["+16,93 %", "16,93 %"] },
+            { question: "b)", attendu: ["+3,99 %", "3,99 %"] },
+            { question: "c)", attendu: "116,93", tolerance: 0.01 },
+          ],
           correction:
             "a) $C = 1{,}02 \\times 1{,}05 \\times 1{,}06 \\times 1{,}03 \\approx 1{,}1693$ : environ $+16{,}93$ % en quatre ans.\nb) $c = 1{,}1693^{\\frac{1}{4}} \\approx 1{,}0399$ : environ $+3{,}99$ % par an.\nc) $100 \\times 1{,}1693 \\approx 116{,}93$ €.\n⭐ Ici, la moyenne des taux, $4$ %, est proche du taux moyen, car les taux sont petits et proches. Ce n'est pourtant pas la même chose.\n⚠️ Pas $2 + 5 + 6 + 3 = 16$ % : les hausses se composent.",
           micros: ["expo_taux_moyen_global", "expo_taux_moyen_calculer"],
@@ -223,6 +295,11 @@ export const exercicesExpoTauxMoyenPremiere: FicheExercicesData = {
           titre: "Un médicament éliminé",
           enonce:
             "La concentration d'un médicament dans le sang est divisée par $4$ en $6$ heures (modèle).\na) Quel est le coefficient global ? le coefficient moyen par heure, au millième ?\nb) Quel pourcentage du médicament l'organisme élimine-t-il, en moyenne, chaque heure ?\nc) Une infirmière dit : « divisée par $4$ en $6$ heures, c'est $-12{,}5$ % par heure ». Qu'en penser ?",
+          reponses: [
+            { question: "a) global", attendu: "0,25" },
+            { question: "a) moyen", attendu: "0,794", tolerance: 0.001 },
+            { question: "b)", attendu: "20,6 %" },
+          ],
           correction:
             "a) Diviser par $4$, c'est multiplier par $0{,}25$ : $C = 0{,}25$. $c = 0{,}25^{\\frac{1}{6}} \\approx 0{,}794$.\nb) $1 - 0{,}794 = 0{,}206$ : environ $20{,}6$ % éliminés chaque heure, en moyenne.\nc) $-12{,}5$ %, c'est $\\dfrac{75}{6}$ : le taux global divisé par $6$. Avec $0{,}875^6 \\approx 0{,}449$, il resterait environ $45$ % du médicament au bout de $6$ heures, et non $25$ %.\n⭐ Au bout de $3$ heures, il en reste la moitié : $0{,}25^{\\frac{1}{2}} = 0{,}5$.",
           schema: ecranSeulement(tableau(["heures", "0", "3", "6"], ["concentration (%)", 100, 50, 25])),
@@ -246,6 +323,15 @@ export const exercicesExpoTauxMoyenPremiere: FicheExercicesData = {
           titre: "Deux métropoles",
           enonce:
             "Deux métropoles (modèles) : la ville $A$ passe de $1$ à $5$ millions d'habitants entre 1960 et 2020 ; la ville $B$, de $6$ à $12$ millions sur la même période.\na) Calculer le coefficient global de chaque ville.\nb) Calculer leurs taux d'évolution moyens annuels, au centième de %.\nc) Laquelle a grandi le plus vite ? Laquelle a gagné le plus d'habitants ?\nd) Au rythme moyen de $A$, en combien d'années environ sa population double-t-elle ? Tester des valeurs.",
+          reponses: [
+            { question: "a) A", attendu: "5" },
+            { question: "a) B", attendu: "2" },
+            { question: "b) A", attendu: ["+2,72 %", "2,72 %"] },
+            { question: "b) B", attendu: ["+1,16 %", "1,16 %"] },
+            { question: "c) le plus vite", attendu: ["A", "ville A"] },
+            { question: "c) le plus d'habitants", attendu: ["B", "ville B"] },
+            { question: "d)", attendu: "26" },
+          ],
           correction:
             "a) $A$ : $\\dfrac{5}{1} = 5$. $B$ : $\\dfrac{12}{6} = 2$. Les deux sur $60$ ans.\nb) $A$ : $c = 5^{\\frac{1}{60}} \\approx 1{,}02719$, soit environ $+2{,}72$ % par an. $B$ : $c = 2^{\\frac{1}{60}} \\approx 1{,}01162$, soit environ $+1{,}16$ % par an.\nc) $A$ a grandi le plus vite : son taux moyen est plus du double de celui de $B$. Mais $B$ a gagné le plus d'habitants : $6$ millions, contre $4$ pour $A$.\n⭐ Deux questions, deux outils : le taux moyen mesure la VITESSE, la différence mesure le GAIN.\nd) $1{,}02719^{25} \\approx 1{,}96$ et $1{,}02719^{26} \\approx 2{,}01$ : la population de $A$ double en environ $26$ ans.",
           schema: diagramme("barres", [
@@ -260,6 +346,14 @@ export const exercicesExpoTauxMoyenPremiere: FicheExercicesData = {
           titre: "Le four du potier",
           enonce:
             "Un four de potier est éteint. L'écart entre sa température et celle de l'atelier passe de $200$ °C à $50$ °C en $2$ heures ; on suppose que cet écart baisse à un taux constant (modèle).\na) Quel est le coefficient global ? le coefficient moyen par heure ?\nb) Quel est le coefficient moyen par demi-heure ? En déduire l'écart au bout de $30$ minutes, puis d'une heure et demie (au dixième).\nc) Par quart d'heure, quel pourcentage de l'écart disparaît en moyenne ?",
+          reponses: [
+            { question: "a) global", attendu: "0,25" },
+            { question: "a) par heure", attendu: "0,5" },
+            { question: "b) par demi-heure", attendu: "0,7071", tolerance: 0.0001 },
+            { question: "b) 30 min", attendu: "141,4", tolerance: 0.1 },
+            { question: "b) 1 h 30", attendu: "70,7", tolerance: 0.1 },
+            { question: "c)", attendu: "15,9 %" },
+          ],
           correction:
             "a) $C = \\dfrac{50}{200} = 0{,}25$. En $2$ heures : $c = \\sqrt{0{,}25} = 0{,}5$ par heure. L'écart est divisé par $2$ chaque heure.\nb) Il y a $4$ demi-heures en $2$ heures : $c = 0{,}25^{\\frac{1}{4}} = \\sqrt{0{,}5} \\approx 0{,}7071$.\nAu bout de $30$ minutes : $200 \\times 0{,}7071 \\approx 141{,}4$ °C. Au bout d'une heure et demie : $100 \\times 0{,}7071 \\approx 70{,}7$ °C.\nc) Il y a $8$ quarts d'heure : $c = 0{,}25^{\\frac{1}{8}} \\approx 0{,}8409$. Environ $15{,}9$ % de l'écart disparaît chaque quart d'heure.\n⚠️ En une demi-heure, l'écart ne perd pas $25$ %, la moitié des $50$ % d'une heure : il en perd environ $29{,}3$ %.",
           schema: tableau(["temps (h)", "0", "0,5", "1", "1,5", "2"], ["écart (°C)", 200, 141.4, 100, 70.7, 50]),
@@ -269,6 +363,13 @@ export const exercicesExpoTauxMoyenPremiere: FicheExercicesData = {
           titre: "Deux placements",
           enonce:
             "Deux placements sur deux ans (modèles). Placement $A$ : $+8$ % la première année, $+2$ % la deuxième. Placement $B$ : $+5$ % chaque année.\na) Un client dit : « $A$ fait $+5$ % par an en moyenne, comme $B$. » Calculer le coefficient global de chaque placement.\nb) Calculer le taux moyen annuel de $A$, au centième de %.\nc) Pour $10\\,000$ € placés, quel est le meilleur placement, et de combien ?\nd) Pourquoi la moyenne des taux trompe-t-elle le client ?",
+          reponses: [
+            { question: "a) A", attendu: "1,1016" },
+            { question: "a) B", attendu: "1,1025" },
+            { question: "b)", attendu: ["+4,96 %", "4,96 %"] },
+            { question: "c) meilleur", attendu: ["B", "placement B"] },
+            { question: "c) écart", attendu: "9" },
+          ],
           correction:
             "a) $A$ : $1{,}08 \\times 1{,}02 = 1{,}1016$. $B$ : $1{,}05 \\times 1{,}05 = 1{,}1025$.\nb) $c = \\sqrt{1{,}1016} \\approx 1{,}0496$ : environ $+4{,}96$ % par an, un peu moins que $5$ %.\nc) $A$ donne $11\\,016$ €, $B$ donne $11\\,025$ € : $B$ rapporte $9$ € de plus.\nd) La moyenne des taux, $\\dfrac{8 + 2}{2} = 5$ %, ne tient pas compte de la composition. Le taux moyen, lui, vient du coefficient global.\n⭐ Le calcul le montre : $1{,}08 \\times 1{,}02 = (1{,}05 + 0{,}03)(1{,}05 - 0{,}03) = 1{,}05^2 - 0{,}03^2$. Pour la même moyenne des taux, des taux irréguliers rapportent un peu moins.",
           schema: diagramme("barres", [
@@ -281,6 +382,12 @@ export const exercicesExpoTauxMoyenPremiere: FicheExercicesData = {
           titre: "La vidéo d'un but",
           enonce:
             "La vidéo d'un but spectaculaire est vue $1\\,000$ fois le jour de sa mise en ligne (jour $0$), et elle a atteint $1\\,000\\,000$ de vues au jour $10$ (modèle).\na) Quel est le coefficient global ? le coefficient moyen par jour, au millième ?\nb) Montrer qu'en moyenne, le nombre de vues a presque doublé chaque jour. Pourquoi $2^{10} = 1\\,024$ le confirme-t-il ?\nc) Si ce rythme moyen continuait $10$ jours de plus, combien de vues ? Est-ce réaliste ?",
+          reponses: [
+            { question: "a) global", attendu: "1 000" },
+            { question: "a) moyen", attendu: "1,995", tolerance: 0.001 },
+            { question: "c) vues", attendu: "1 000 000 000" },
+            { question: "c) réaliste ?", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $C = \\dfrac{1\\,000\\,000}{1\\,000} = 1\\,000$, en $10$ jours. $c = 1\\,000^{\\frac{1}{10}} \\approx 1{,}995$.\nb) $1{,}995$, c'est presque $2$ : en moyenne, les vues doublent presque chaque jour.\nEt doubler $10$ fois, c'est multiplier par $2^{10} = 1\\,024$, à peine plus que $1\\,000$.\nc) Dix jours de plus : encore multiplié par $1\\,000$, soit $1\\,000\\,000\\,000$ de vues, un milliard. Très peu de vidéos y parviennent : le rythme ralentit forcément.\n⭐ C'est l'ordre de grandeur à retenir : doubler dix fois, c'est multiplier par environ mille.\nSur le tableau, au jour $5$, la moitié du chemin en temps : $1\\,000 \\times 1\\,000^{\\frac{1}{2}} \\approx 31\\,623$ vues seulement.",
           schema: tableau(["jour", "0", "5", "10"], ["vues", "1 000", "31 623", "1 000 000"]),
