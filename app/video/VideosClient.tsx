@@ -292,6 +292,23 @@ export default function VideosClient({
         </label>
       </div>
 
+      {/* ⭐ 03/11/2026 — le cahier d'écriture à imprimer, à côté des vidéos
+          du geste (élève de 6e en attente d'ULIS : pas de cahier acheté). */}
+      {classe === "cp" ? (
+        <Link
+          href="/fiches-ecriture/mon-cahier"
+          className="mt-4 flex items-center gap-4 rounded-2xl border-2 border-amber-300 bg-amber-50 p-4 transition hover:border-amber-400 hover:bg-amber-100"
+        >
+          <span className="text-4xl" aria-hidden="true">✏️</span>
+          <span>
+            <span className="block text-lg font-black text-slate-900">Mon cahier d&apos;écriture à imprimer</span>
+            <span className="block text-sm text-slate-700">
+              Les 10 chiffres puis les lettres en cursive, une page A4 chacun, avec smileys et étoiles à colorier.
+            </span>
+          </span>
+        </Link>
+      ) : null}
+
       {!lu ? (
         <div className="mt-6 h-[60vh]" aria-hidden="true" />
       ) : facon === "netflix" ? (

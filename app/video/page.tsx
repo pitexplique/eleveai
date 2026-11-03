@@ -30,7 +30,12 @@ function une(cle: string): VideoUne | null {
 
 export default function ListeVideos() {
   // Seulement ce qu'affiche la liste : pas les chemins de fichiers.
-  const videos: VideoListe[] = toutesLesVideos().map((v) => ({
+  // ⛔ 03/11/2026 — Frédéric : le coach est en français, les vidéos d'écriture
+  // en anglais (dossiers gb/, « english cursive… », « Writing cursive… »)
+  // passaient EN PREMIER au CP. Elles restent sur R2, elles sortent de la liste.
+  const videos: VideoListe[] = toutesLesVideos()
+    .filter((v) => !/\/(gb|en)\//.test(v.fichier) && !/^(english|writing)\b/i.test(v.titre))
+    .map((v) => ({
     id: v.id,
     titre: v.titre,
     classe: v.fichier.split("/")[0],
