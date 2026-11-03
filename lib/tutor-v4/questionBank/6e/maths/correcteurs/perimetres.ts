@@ -48,8 +48,9 @@ function verifierLongueur(q: Q, justeM: number, p: string[]) {
 }
 
 // ----- COMPRENDRE
-const TOUR = /clôture|ruban|bordure|galon|haie|le tour|guirlande|grillage/;
-const SURFACE = /peindre|gazon|moquette|carreler|vernir|surface/;
+// 03/11/2026 : ★1 sans histoire — « le contour », « le bord », « l’intérieur » d'une figure.
+const TOUR = /clôture|ruban|bordure|galon|haie|le tour|guirlande|grillage|contour|\bbord\b/i;
+const SURFACE = /peindre|gazon|moquette|carreler|vernir|surface|intérieur/i;
 function corrigerComprendre(q: Q): string[] {
   const p = communes(q);
   const t = q.text;
@@ -241,6 +242,9 @@ export const CORRECTEURS: CorrecteursMaths = {
   aire_perimetre_comprendre_tpl_1: corrigerComprendre,
   aire_perimetre_comprendre_tpl_2: corrigerComprendre,
   aire_perimetre_comprendre_tpl_3: corrigerComprendre,
+  aire_perimetre_comprendre_tpl_situation: corrigerComprendre,
+  aire_perimetre_carre_tpl_situation: corrigerCarre,
+  aire_perimetre_figure_tpl_situation: corrigerFigure,
   aire_perimetre_carre_tpl_1: corrigerCarre,
   aire_perimetre_carre_tpl_2: corrigerCarre,
   aire_perimetre_carre_qcm_tpl_1: corrigerCarre,

@@ -101,22 +101,66 @@ const leNom = (nom: string) =>
 const du = (nom: string) =>
   /^une? [aeiouéèêh]/i.test(nom) ? nom.replace(/^une? /, "de l’") : nom.replace(/^un /, "du ").replace(/^une /, "de la ");
 
+/* ⛔⛔ 03/11/2026 — D'ABORD DES QUESTIONS SIMPLES (Frédéric, REGLES-6E.md) :
+   à ★1 et ★2, ni prénom, ni objet de la vie, ni situation — « un carré de côté
+   7 cm », 12 mots au plus à ★1, 15 à ★2, verbe d'action ou question directe.
+   Les objets de la vie (CARRES, RECTANGLES, TRIANGLES…) servent à partir de ★3. */
+const UNITES_SIMPLES: { u: U; min: number; max: number }[] = [
+  { u: "mm", min: 12, max: 60 }, { u: "cm", min: 3, max: 40 }, { u: "cm", min: 5, max: 90 },
+  { u: "m", min: 2, max: 30 }, { u: "m", min: 5, max: 120 }, { u: "km", min: 2, max: 15 },
+];
+
+/** La variété des étoiles basses vient du verbe, du nom de la figure et de la tournure,
+ *  jamais d'une histoire : « Trouve le périmètre du carré EFGH de côté 7 cm. » */
+const VERBES = ["Calcule", "Trouve", "Donne", "Écris", "Cherche", "Détermine"];
+const NOMMER: Record<string, string[]> = {
+  carré: ["", "", "ABCD", "EFGH", "MNOP", "RSTU"],
+  rectangle: ["", "", "ABCD", "EFGH", "IJKL", "MNOP"],
+  triangle: ["", "", "ABC", "EFG", "MNP", "RST"],
+};
+/** [« un carré » / « le carré ABCD », « d’un carré » / « du carré ABCD »]. */
+function figureNommee(f: "carré" | "rectangle" | "triangle"): [string, string] {
+  const x = pick(NOMMER[f]);
+  return x ? [`le ${f} ${x}`, `du ${f} ${x}`] : [`un ${f}`, `d’un ${f}`];
+}
+function texteCarreSimple(C: string): string {
+  const V = pick(VERBES);
+  const [un, dun] = figureNommee("carré");
+  return pick([
+    `${V} le périmètre ${dun} de côté ${C}.`,
+    `${V} le périmètre ${dun} de ${C} de côté.`,
+    `${maj(un)} a pour côté ${C}. ${V} son périmètre.`,
+    `${maj(un)} mesure ${C} de côté. Quel est son périmètre ?`,
+    `Quel est le périmètre ${dun} de côté ${C} ?`,
+    `Côté ${dun} : ${C}. ${V} son périmètre.`,
+  ]);
+}
+function texteRectangleSimple(A: string, B: string): string {
+  const V = pick(VERBES);
+  const [un, dun] = figureNommee("rectangle");
+  return pick([
+    `${V} le périmètre ${dun} de ${A} sur ${B}.`,
+    `${maj(un)} mesure ${A} sur ${B}. ${V} son périmètre.`,
+    `${maj(un)} de ${A} sur ${B} : ${V.toLowerCase()} son périmètre.`,
+    `Longueur ${A}, largeur ${B} : ${V.toLowerCase()} le périmètre ${dun}.`,
+  ]);
+}
+
 // ----- CARRÉ
-function genCarre(etoile: 1 | 2, qcm = false) {
-  const o = pick(CARRES);
+function genCarre(etoile: 1 | 2 | 3, qcm = false) {
+  const o = etoile <= 2 ? { ...pick(UNITES_SIMPLES), nom: "", tour: "" } : pick(CARRES);
   const p = pick(PRENOMS);
   const c = tirer(o.min, o.max, 0);
   const per = 4 * c;
   const C = L(c, o.u);
-  const situation = qcm || Math.random() < 0.75;
-  const text = situation
-    ? pick([
+  const text = etoile <= 2
+    ? texteCarreSimple(C)
+    : pick([
         `${p.nom} a ${o.nom} de ${C} de côté.\nQuel est son périmètre ?`,
         `${maj(o.nom)} a un côté de ${C}.\n${p.nom} veut faire le tour avec ${o.tour}. Quelle longueur lui faut-il ?`,
         `Le côté ${du(o.nom)} mesure ${C}.\nCalcule le périmètre ${du(o.nom)}.`,
         `${p.nom} mesure ${o.nom} : ${C} de côté.\nQuel est le périmètre de ce carré ?`,
-      ])
-    : pick([`Quel est le périmètre d’un carré de côté ${C} ?`, `Un carré a un côté de ${C}. Calcule son périmètre.`, `Calcule le périmètre d’un carré de ${C} de côté.`]);
+      ]);
   const explication = expl(`Un carré a 4 côtés égaux : ${C} + ${C} + ${C} + ${C} = 4 × ${C} = ${L(per, o.u)}.`);
   if (qcm || etoile === 2) {
     const faux = [...new Set([2 * c, 3 * c, c + 4, per + c])].filter((x) => x !== per).map((x) => L(x, o.u));
@@ -135,7 +179,9 @@ function genCarre(etoile: 1 | 2, qcm = false) {
 
 // ----- RECTANGLE (★1 : entiers ; ★2 : QCM ; ★3 : décimaux ou deux unités)
 function genRectangle(etoile: 1 | 2 | 3, qcm = false) {
-  const o = pick(RECTANGLES);
+  // 03/11/2026 : ★1-★2, un rectangle nu (pas d'objet de la vie).
+  const us = pick(UNITES_SIMPLES);
+  const o: ObjRect = etoile <= 2 ? { nom: "", u: us.u, L: [Math.max(3, Math.round(us.max / 3)), us.max], l: [Math.max(2, Math.round(us.min / 2)), Math.max(3, Math.round(us.max / 2))], tour: "" } : pick(RECTANGLES);
   const p = pick(PRENOMS);
   let Lg = tirer(o.L[0], o.L[1]);
   let lg = tirer(o.l[0], o.l[1]);
@@ -158,7 +204,9 @@ function genRectangle(etoile: 1 | 2 | 3, qcm = false) {
   const A = uL === "m" && o.u === "cm" ? L(Lg / 100, "m") : L(Lg, uL);
   const B = L(lg, ul);
   const pron = /^une /.test(o.nom) ? "Elle" : "Il";
-  const text = Math.random() < 0.75 || qcm || etoile === 3
+  const text = etoile <= 2
+    ? texteRectangleSimple(A, B)
+    : Math.random() < 0.75 || qcm || etoile === 3
     ? pick([
         `${maj(o.nom)} mesure ${A} de long et ${B} de large.\nQuel est son périmètre ?`,
         `${p.nom} veut poser ${o.tour} autour ${du(o.nom)}. ${pron} mesure ${A} sur ${B}.\nQuelle longueur lui faut-il ?`,
@@ -204,9 +252,36 @@ const LIEUX_COMPRENDRE = [
   ["de l’enclos des lapins", "l’enclos des lapins"], ["de la terrasse", "la terrasse"], ["du potager", "le potager"],
   ["de la scène du théâtre", "la scène du théâtre"], ["du bac à sable", "le bac à sable"], ["de la piste de danse", "la piste de danse"],
 ];
-function genComprendre(etoile: 1 | 2 | 3) {
+/** ★1 (03/11/2026) : une figure nue ; le tour (périmètre) ou l'intérieur (aire). */
+const FIGURES_NUES = ["un carré", "un rectangle", "un triangle", "un disque", "un losange", "un polygone", "une figure", "un hexagone"];
+function genComprendreSimple() {
+  const f = pick(FIGURES_NUES);
+  const tour = Math.random() < 0.55;
+  const quoi = tour ? pick(["le tour", "le contour", "le bord"]) : pick(["la surface", "l’intérieur", "toute la surface"]);
+  const deux = Math.random() < 0.4;
+  const text = deux
+    ? pick([`On mesure ${quoi} d’${f}. Périmètre ou aire ?`, `${maj(quoi)} d’${f} : périmètre ou aire ?`])
+    : pick([
+        `On mesure ${quoi} d’${f}. Quelle grandeur est-ce ?`,
+        `Pour mesurer ${quoi} d’${f}, que calcule-t-on ?`,
+        `Quelle grandeur mesure ${quoi} d’${f} ?`,
+        `${maj(quoi)} d’${f} : quelle grandeur faut-il calculer ?`,
+      ]);
+  return {
+    text,
+    format: "qcm" as const,
+    choices: deux ? shuffle(["le périmètre", "l’aire"]) : shuffle(["le périmètre", "l’aire", "le volume", "la masse"]),
+    expected: [tour ? "le périmètre" : "l’aire"],
+    comparator: "mcq_exact" as const,
+    explanation: expl(tour
+      ? "On s’occupe du TOUR, du bord : c’est une longueur, le périmètre."
+      : "On s’occupe de toute la SURFACE, de l’intérieur : c’est l’aire, pas le périmètre."),
+  };
+}
+function genComprendre(etoile: 1 | 2 | 3 | 4) {
   const p = pick(PRENOMS);
-  if (etoile === 1) {
+  if (etoile === 1) return genComprendreSimple();
+  if (etoile === 4) {
     const a = pick(ACTIONS);
     const [deLieu] = pick(LIEUX_COMPRENDRE);
     const deux = Math.random() < 0.4;
@@ -229,17 +304,17 @@ function genComprendre(etoile: 1 | 2 | 3) {
     };
   }
   if (etoile === 2) {
-    const rect = Math.random() < 0.5;
-    const o = rect ? pick(RECTANGLES) : pick(CARRES);
+    // 03/11/2026 : ★2, une figure nue (plus d'objet ni de prénom).
+    const o = { nom: pick(FIGURES_NUES), u: pick(["mm", "cm", "m", "km"] as U[]) };
     const n = randomInt(12, 90);
     const quoi = Math.random() < 0.75 ? "périmètre" : "aire";
     const bon = quoi === "périmètre" ? `${n} ${o.u}` : `${n} ${o.u}²`;
     if (Math.random() < 0.5) {
       return {
         text: pick([
-          `${p.nom} calcule ${quoi === "aire" ? "l’aire" : "le périmètre"} ${du(o.nom)}.\nQuelle écriture peut convenir ?`,
-          `Quelle écriture peut désigner ${quoi === "aire" ? "l’aire" : "le périmètre"} ${du(o.nom)} ?`,
-          `${p.nom} écrit ${quoi === "aire" ? "l’aire" : "le périmètre"} ${du(o.nom)} dans son cahier.\nQue peut-${il(p)} écrire ?`,
+          `Quelle écriture peut convenir pour ${quoi === "aire" ? "l’aire" : "le périmètre"} d’${o.nom} ?`,
+          `Quelle écriture peut désigner ${quoi === "aire" ? "l’aire" : "le périmètre"} d’${o.nom} ?`,
+          `Choisis une écriture possible pour ${quoi === "aire" ? "l’aire" : "le périmètre"} d’${o.nom}.`,
         ]),
         format: "qcm" as const,
         choices: shuffle([`${n} ${o.u}`, `${n} ${o.u}²`, `${n} ${o.u}³`, `${n} kg`]),
@@ -250,8 +325,9 @@ function genComprendre(etoile: 1 | 2 | 3) {
     }
     return {
       text: pick([
-        `Dans quelle unité ${p.nom} peut-${il(p)} donner ${quoi === "aire" ? "l’aire" : "le périmètre"} ${du(o.nom)} ?`,
-        `${p.nom} mesure ${quoi === "aire" ? "l’aire" : "le périmètre"} ${du(o.nom)}.\nQuelle unité choisir ?`,
+        `Dans quelle unité donner ${quoi === "aire" ? "l’aire" : "le périmètre"} d’${o.nom} ?`,
+        `Quelle unité choisir pour ${quoi === "aire" ? "l’aire" : "le périmètre"} d’${o.nom} ?`,
+        `Choisis l’unité pour ${quoi === "aire" ? "l’aire" : "le périmètre"} d’${o.nom}.`,
       ]),
       format: "qcm" as const,
       choices: shuffle([o.u, `${o.u}²`, `${o.u}³`, "kg"]),
@@ -314,9 +390,54 @@ const ENCLOS: { nom: string; u: U; min: number; max: number }[] = [
   { nom: "un champ de lavande", u: "m", min: 30, max: 90 },
 ];
 const listeCotes = (vals: string[]) => `${vals.slice(0, -1).join(", ")} et ${vals[vals.length - 1]}`;
-function genFigure(etoile: 1 | 2 | 3) {
+function genFigure(etoile: 1 | 2 | 3 | 4) {
   const p = pick(PRENOMS);
+  // 03/11/2026 : ★1 un triangle nu, ★2 un polygone régulier nu ; ★4 = les objets de la vie (servi à ★3).
   if (etoile === 1) {
+    const o = pick(UNITES_SIMPLES.map((x) => ({ ...x, min: Math.max(2, x.min), max: Math.min(x.max, 60) })));
+    let a: number, b: number, c: number;
+    do {
+      a = tirer(o.min, o.max);
+      b = tirer(o.min, o.max);
+      c = tirer(o.min, o.max);
+    } while (a + b <= c || a + c <= b || b + c <= a);
+    const s = [a, b, c].map((x) => L(x, o.u));
+    const per = a + b + c;
+    return {
+      text: pick([
+        ...(() => {
+          // Nommé (ABC), la liste perd son « et » pour rester à 12 mots.
+          const x = pick(NOMMER.triangle);
+          const liste = x ? s.join(", ") : listeCotes(s);
+          const t = x ? `triangle ${x}` : "triangle";
+          return [`${pick(VERBES)} le périmètre du ${t} : ${liste}.`, `Additionne les côtés du ${t} : ${liste}.`];
+        })(),
+      ]),
+      format: "short" as const,
+      expected: avecUnite(per, o.u),
+      comparator: "number_equal" as const,
+      explanation: expl(`On additionne les trois côtés : ${s.join(" + ")} = ${L(per, o.u)}.`),
+    };
+  }
+  if (etoile === 2) {
+    const f = pick(POLYGONES);
+    const o = pick(UNITES_SIMPLES);
+    const c = tirer(o.min, Math.min(o.max, 40));
+    const per = f.n * c;
+    return {
+      text: pick([
+        `Calcule le périmètre d’un ${f.nom} de côté ${L(c, o.u)}.`,
+        `Un ${f.nom} a pour côté ${L(c, o.u)}. Calcule son périmètre.`,
+        `Quel est le périmètre d’un ${f.nom} de côté ${L(c, o.u)} ?`,
+        `Trouve le périmètre d’un ${f.nom} de ${L(c, o.u)} de côté.`,
+      ]),
+      format: "short" as const,
+      expected: avecUnite(per, o.u),
+      comparator: "number_equal" as const,
+      explanation: expl(`Un ${f.nom} a ${f.n} côtés de même longueur : ${f.n} × ${L(c, o.u)} = ${L(per, o.u)}.`),
+    };
+  }
+  if (etoile === 4 && Math.random() < 0.5) {
     const o = pick(TRIANGLES);
     let a: number, b: number, c: number;
     do {
@@ -338,7 +459,7 @@ function genFigure(etoile: 1 | 2 | 3) {
       explanation: expl(`On additionne les trois côtés : ${s.join(" + ")} = ${L(per, o.u)}.`),
     };
   }
-  if (etoile === 2) {
+  if (etoile === 4) {
     const f = pick(POLYGONES);
     const o = pick(OBJETS_POLYGONE);
     const c = tirer(o.min, o.max);
@@ -421,10 +542,10 @@ function genFigureQuadrillage(etoile: 4 | 5) {
 const OUVERTURES = ["un portail", "une entrée", "une barrière qui s’ouvre", "un passage"];
 function genProbleme(etoile: 2 | 3 | 4 | 5) {
   const p = pick(PRENOMS);
-  const carre = etoile === 2 || (etoile === 4 && Math.random() < 0.3);
+  const carre = (etoile === 2 && Math.random() < 0.6) || (etoile === 4 && Math.random() < 0.3);
   let a: number, b: number, u: U, nom: string, tour: string;
   if (carre) {
-    const o = pick(CARRES.filter((x) => (x.u === "m" && x.max >= 10) || etoile === 2));
+    const o = etoile === 2 ? { ...pick(UNITES_SIMPLES), nom: "", tour: "" } : pick(CARRES.filter((x) => x.u === "m" && x.max >= 10));
     a = tirer(o.min, o.max);
     b = a;
     u = o.u;
@@ -432,7 +553,10 @@ function genProbleme(etoile: 2 | 3 | 4 | 5) {
     tour = o.tour;
   } else {
     // À ★4 et ★5 (portail, tours en courant) : des terrains en mètres.
-    const o = pick(RECTANGLES.filter((x) => etoile <= 3 || x.u === "m"));
+    const us = pick(UNITES_SIMPLES);
+    const o: ObjRect = etoile === 2
+      ? { nom: "", u: us.u, L: [Math.max(3, Math.round(us.max / 3)), us.max], l: [Math.max(2, Math.round(us.min / 2)), Math.max(3, Math.round(us.max / 2))], tour: "" }
+      : pick(RECTANGLES.filter((x) => etoile <= 3 || x.u === "m"));
     a = tirer(o.L[0], o.L[1], etoile >= 4 && o.L[1] < 100 ? pick([0, 1]) : 0);
     b = tirer(o.l[0], o.l[1], etoile >= 4 && o.l[1] < 100 ? pick([0, 1]) : 0);
     if (b >= a) a = b + randomInt(1, 5);
@@ -443,6 +567,25 @@ function genProbleme(etoile: 2 | 3 | 4 | 5) {
   const per = carre ? 4 * a : 2 * (a + b);
   const dims = carre ? `${L(a, u)} de côté` : `${L(a, u)} sur ${L(b, u)}`;
   const calcul = carre ? `4 × ${L(a, u)} = ${L(per, u)}` : `2 × (${L(a, u)} + ${L(b, u)}) = ${L(per, u)}`;
+  if (etoile === 2) {
+    // 03/11/2026 : ★2, faire le tour d'une figure nue (le carré ou le rectangle est dit, pas d'objet).
+    const fig = carre ? "carré" : "rectangle";
+    return {
+      text: pick([
+        `On fait le tour d’un ${fig} de ${dims}. Quelle distance parcourt-on ?`,
+        `Quelle longueur faut-il pour entourer un ${fig} de ${dims} ?`,
+        `Un fil entoure un ${fig} de ${dims}. Quelle est sa longueur ?`,
+        `Combien mesure le tour d’un ${fig} de ${dims} ?`,
+        `Un trait fait le tour d’un ${fig} de ${dims}. Combien mesure-t-il ?`,
+        `${pick(VERBES)} la longueur du tour d’un ${fig} de ${dims}.`,
+        `${pick(VERBES)} la longueur d’un fil qui entoure un ${fig} de ${dims}.`,
+      ]),
+      format: "short" as const,
+      expected: avecUnite(per, u),
+      comparator: "number_equal" as const,
+      explanation: expl(`Faire le tour, c’est calculer le périmètre : ${calcul}.`),
+    };
+  }
   if (etoile <= 3) {
     return {
       text: pick([
@@ -661,8 +804,8 @@ export const perimetresBank: TutorBankItemV4[] = [
     notionId: "aire_perimetre",
     microId: "aire_perimetre_comprendre",
     difficulty: 2,
-    theme: "reunion",
-    text: "Pour mesurer le tour d’un petit jardin à La Réunion, on parle de…",
+    theme: "neutral",
+    text: "Le tour d’une figure s’appelle…",
     format: "qcm",
     choices: ["aire", "volume", "périmètre", "masse"],
     expected: ["périmètre"],
@@ -672,9 +815,9 @@ export const perimetresBank: TutorBankItemV4[] = [
       "Définition : un périmètre mesure la longueur du contour d’une figure.\n\n" +
       "Méthode : on repère tous les côtés du contour et on additionne les longueurs utiles.\n\n" +
       "Calcul : " +
-      ("Le tour d’un jardin correspond à son contour. On mesure donc son périmètre.") +
+      ("Le tour d’une figure est son contour : c’est son périmètre.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aire_perimetre", "comprendre", "reunion", "qcm"],
+    tags: ["aire_perimetre", "comprendre", "qcm"],
   },
   {
     kind: "fixed",
@@ -872,7 +1015,7 @@ export const perimetresBank: TutorBankItemV4[] = [
     microId: "aire_perimetre_rectangle",
     difficulty: 1,
     theme: "neutral",
-    text: "Un rectangle mesure 4 cm de largeur et 8 cm de longueur. Quel est son périmètre ?",
+    text: "Calcule le périmètre d’un rectangle de 8 cm sur 4 cm.",
     format: "short",
     expected: ["24 cm", "24cm"],
     comparator: "number_equal",
@@ -1669,6 +1812,21 @@ export const perimetresBank: TutorBankItemV4[] = [
     generate: () => genComprendre(3),
   },
 
+  // 03/11/2026 : les situations de ★1 (clôture, gazon…) montées à ★3.
+  {
+    kind: "template",
+    id: "aire_perimetre_comprendre_tpl_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_comprendre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le tour, le bord : périmètre. Toute la surface : aire.",
+    tags: ["aire_perimetre", "comprendre", "template"],
+    generate: () => genComprendre(4),
+  },
+
   // =========================
   // TEMPLATES - PERIM_SQUARE
   // =========================
@@ -1710,6 +1868,20 @@ export const perimetresBank: TutorBankItemV4[] = [
     hint: "Le périmètre n’est pas l’aire.",
     tags: ["aire_perimetre", "carre", "qcm", "template"],
     generate: () => genCarre(2, true),
+  },
+  // 03/11/2026 : les objets carrés de la vie (napperon, potager…) montés à ★3.
+  {
+    kind: "template",
+    id: "aire_perimetre_carre_tpl_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_carre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le carré a 4 côtés égaux : côté × 4.",
+    tags: ["aire_perimetre", "carre", "template"],
+    generate: () => genCarre(3),
   },
 
   // =========================
@@ -1809,6 +1981,20 @@ export const perimetresBank: TutorBankItemV4[] = [
     hint: "Tous les côtés ont la même longueur : compte-les, puis multiplie.",
     tags: ["aire_perimetre", "figure", "polygone", "template"],
     generate: () => genFigure(2),
+  },
+  // 03/11/2026 : les objets de la vie (voile, fanion, kiosque…) montés à ★3.
+  {
+    kind: "template",
+    id: "aire_perimetre_figure_tpl_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "aire_perimetre",
+    microId: "aire_perimetre_figure",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Additionne tous les côtés ; s’ils sont égaux, multiplie.",
+    tags: ["aire_perimetre", "figure", "template"],
+    generate: () => genFigure(4),
   },
   {
     kind: "template",
@@ -1962,9 +2148,9 @@ export const perimetresBank: TutorBankItemV4[] = [
     text: "Dans quelle unité exprime-t-on un périmètre ?", format: "qcm", choices: ["en cm", "en cm²", "en cm³", "en kg"], expected: ["en cm"], comparator: "mcq_exact",
     hint: "Un périmètre est une longueur.", explanation: expl("Un périmètre est une longueur (celle du contour). On l’exprime en unités de longueur, comme le cm (le cm² mesure une aire)."), tags: ["aire_perimetre", "comprendre", "unite", "qcm"] },
   { kind: "fixed", id: "aire_perimetre_comprendre_topup_3", niveau: "6e", matiere: "maths", notionId: "aire_perimetre", microId: "aire_perimetre_comprendre", difficulty: 2, theme: "neutral",
-    text: "On veut poser une clôture tout autour d’un jardin. Quelle grandeur faut-il calculer ?", format: "qcm",
+    text: "On mesure le tour d’un rectangle. Quelle grandeur faut-il calculer ?", format: "qcm",
     choices: ["le périmètre", "l’aire", "le volume", "la masse"], expected: ["le périmètre"], comparator: "mcq_exact",
-    hint: "La clôture suit le contour.", explanation: expl("La clôture entoure le jardin : elle suit son contour. Il faut donc calculer le périmètre."), tags: ["aire_perimetre", "comprendre", "qcm"] },
+    hint: "Le tour, c’est le contour.", explanation: expl("Le tour du rectangle est son contour. Il faut donc calculer le périmètre."), tags: ["aire_perimetre", "comprendre", "qcm"] },
   { kind: "fixed", id: "aire_perimetre_comprendre_topup_4", niveau: "6e", matiere: "maths", notionId: "aire_perimetre", microId: "aire_perimetre_comprendre", difficulty: 2, theme: "neutral",
     text: "Quelle est la formule du périmètre d’un carré ?", format: "qcm", choices: ["côté × 4", "côté × côté", "côté + 4", "côté × 2"], expected: ["côté × 4"], comparator: "mcq_exact",
     hint: "Un carré a 4 côtés égaux.", explanation: expl("Un carré a 4 côtés égaux. Son périmètre est donc côté × 4."), tags: ["aire_perimetre", "comprendre", "carre", "qcm"] },
@@ -1982,10 +2168,10 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   // ===== TOP-UP — AIRE_PERIMETRE_PROBLEME =====
   { kind: "fixed", id: "aire_perimetre_probleme_topup_1", niveau: "6e", matiere: "maths", notionId: "aire_perimetre", microId: "aire_perimetre_probleme", difficulty: 2, theme: "neutral",
-    text: "Un terrain carré mesure 10 m de côté. Quelle longueur de clôture faut-il pour en faire le tour ?", format: "short", expected: ["40 m"], comparator: "number_equal",
-    hint: "Périmètre = côté × 4.", explanation: expl("La clôture suit le périmètre : côté × 4 = 10 × 4 = 40, donc 40 m."), tags: ["aire_perimetre", "probleme", "carre"] },
+    text: "Combien mesure le tour d’un carré de 10 m de côté ?", format: "short", expected: ["40 m"], comparator: "number_equal",
+    hint: "Périmètre = côté × 4.", explanation: expl("Le tour, c’est le périmètre : côté × 4 = 10 × 4 = 40, donc 40 m."), tags: ["aire_perimetre", "probleme", "carre"] },
   { kind: "fixed", id: "aire_perimetre_probleme_topup_2", niveau: "6e", matiere: "maths", notionId: "aire_perimetre", microId: "aire_perimetre_probleme", difficulty: 2, theme: "neutral",
-    text: "Un jardin rectangulaire mesure 8 m sur 5 m. Quel est son périmètre ?", format: "short", expected: ["26 m"], comparator: "number_equal",
+    text: "Un rectangle mesure 8 m sur 5 m. Quel est son périmètre ?", format: "short", expected: ["26 m"], comparator: "number_equal",
     hint: "2 × (8 + 5).", explanation: expl("Périmètre = 2 × (L + l) = 2 × (8 + 5) = 2 × 13 = 26, donc 26 m."), tags: ["aire_perimetre", "probleme", "rectangle"] },
   { kind: "fixed", id: "aire_perimetre_probleme_topup_3", niveau: "6e", matiere: "maths", notionId: "aire_perimetre", microId: "aire_perimetre_probleme", difficulty: 3, theme: "neutral",
     text: "On entoure un champ rectangulaire de 12 m sur 7 m avec du grillage. Combien de mètres de grillage faut-il ?", format: "short", expected: ["38 m"], comparator: "number_equal",
