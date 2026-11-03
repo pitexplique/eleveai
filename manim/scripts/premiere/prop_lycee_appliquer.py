@@ -202,7 +202,23 @@ class PropLyceeAppliquerBase(PropPourcentageCoefficientBase):
             if d > 0:
                 for m in (cartes, pause, ph):
                     m.shift(DOWN * d)
-        return tete, q, cartes, pause, rebours, ph
+        # ⭐ 03/11 (défauts) : la phrase de réponse en 34 à GAUCHE, sous la figure
+        # (à droite, sous les cartes et contre Ti-Margo, elle tombait à ~25).
+        ph2 = VGroup(*[self.t(x, 34, VERT_OK) for x in phrase]).arrange(DOWN, aligned_edge=LEFT, buff=0.16)
+        if ph2.width > 6.6:
+            ph2.scale_to_fit_width(6.6)
+        ph2.align_to(P(-6.15, 0), LEFT).align_to(P(0, self.Y_PH), UP)
+        self.ph_q = ph2
+        return tete, q, cartes, pause, rebours, ph2
+
+    Y_PH = -0.85   # le haut de la phrase de réponse (à gauche, sous la figure)
+
+    def ligne_rep(self, i, morceaux, fs=34):
+        ref = self.ph_q[i]
+        lg = self.ligne([(m, VERT_OK) for m in morceaux], fs, buff=0.14)
+        if lg.width > 6.6:
+            lg.scale_to_fit_width(6.6)
+        return lg.move_to(ref).align_to(ref, LEFT)
 
     # ── 00 : page de garde ──────────────────────────────────────────────────
     def page_de_garde(self):
@@ -332,7 +348,7 @@ class PropLyceeAppliquerBase(PropPourcentageCoefficientBase):
             sc.play(FadeIn(si, shift=UP * 0.2), run_time=0.4)
 
         def apres(sc):
-            b = BarreCent("", largeur=5.0, h=0.65, centre=P(-3.6, -1.3))
+            b = BarreCent("", largeur=5.0, h=0.65, centre=P(-3.6, 0.55))
             p = sc.part_barre(b, 1.5, EAU)
             ap, tp = b.dessous(p, "12 kg", VERT_OK, fs=28)
             tp.align_to(b.bp.piste, LEFT)
@@ -384,6 +400,7 @@ class PropLyceeAppliquerBase(PropPourcentageCoefficientBase):
 
     # ── 07 : QUESTION 2 (le sang, 7 % de 60 kg → 4,2 kg) ───────────────────
     def ecran_question2(self):
+        self.Y_PH = -1.1
         self.clear()
         self.add_mascotte()
         gt = pas_audit(goutte(1.3)).move_to(P(-4.4, 1.6))
@@ -392,14 +409,14 @@ class PropLyceeAppliquerBase(PropPourcentageCoefficientBase):
             sc.play(FadeIn(gt, scale=0.6), run_time=0.4)
 
         def apres(sc):
-            b = BarreCent("", largeur=5.0, h=0.65, centre=P(-3.6, -1.3))
+            b = BarreCent("", largeur=5.0, h=0.65, centre=P(-3.6, 0.2))
             p = sc.part_barre(b, 0.7, SANG)
             ap, tp = b.dessous(p, "4,2 kg", VERT_OK, fs=28)
             tp.align_to(b.bp.piste, LEFT)
             a6, t6 = sc.accolade(b.bp.piste, "60 kg", JAUNE_TITRE, fs=28)
             l0 = sc.ligne_rep(0, ["0,07 ×", "60", "= 4,2 kg."])
             l1 = sc.ligne_rep(1, ["B : 0,7 ;", "C : 0,007."])
-            t7 = VGroup(gras("7 % =", 40, SANG), gras("0,07", 40, AMBRE)).arrange(RIGHT, buff=0.2).move_to(P(-3.6, 0.7))
+            t7 = VGroup(gras("7 % =", 40, SANG), gras("0,07", 40, AMBRE)).arrange(RIGHT, buff=0.2).move_to(P(-3.6, 2.2))
             sc.montre("7 %, c'est", FadeOut(gt), FadeIn(t7[0], shift=UP * 0.15), FadeIn(b, shift=UP * 0.2), rt=0.4)
             sc.montre("0,07. 0,07", FadeIn(t7[1], scale=1.3), rt=0.35)
             sc.montre(("0,07 fois", 1), FadeIn(l0[0], shift=UP * 0.15), rt=0.3)

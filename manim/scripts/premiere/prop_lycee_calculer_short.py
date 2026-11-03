@@ -84,12 +84,44 @@ class PropLyceeCalculerShort(ShortProp):
     fichier_marques = "prop_lycee_calculer_short_marques.json"
     ceinture = "blanche"
 
+    # Défauts repris le 03/11 : la phrase de réponse de la question-pause en
+    # 28 (au lieu de 26, réduite), lisible depuis le fond de la classe.
+    def question_pause(self, *a, **k):
+        self._en_q = True
+        try:
+            return super().question_pause(*a, **k)
+        finally:
+            self._en_q = False
+
+    def bloc(self, lignes, fs=30, color=WHITE, buff=0.1):
+        if getattr(self, "_en_q", False):
+            fs = max(fs, 28)
+        return super().bloc(lignes, fs, color, buff)
+
+    def _disposer_q(self, question, choix, phrase):
+        """Cartes moins hautes (0,66) : la place d'une 3e ligne d'énoncé, en 28."""
+        tete, q, cartes, pause, rebours, ph = super()._disposer_q(question, choix, phrase)
+        for c in cartes:
+            c[0].stretch_to_fit_height(0.66)
+            c[1].move_to(c[0]).align_to(c[0].get_left() + RIGHT * 0.2, LEFT)
+        q[0].sans_synchro = True  # « 80 s de refrain » posé à « 80 secondes », sans attendre « refrain »
+        cartes.arrange(DOWN, buff=0.1).next_to(q, DOWN, buff=0.18).set_x(0)
+        pause.next_to(cartes, DOWN, buff=0.15).set_x(0)
+        ph.next_to(cartes, DOWN, buff=0.12).set_x(0)
+        return tete, q, cartes, pause, rebours, ph
+
+    def ligne_rep(self, i, morceaux, fs=None):
+        lg = self.ligne([(m, VERT_OK) for m in morceaux], fs or 28, buff=0.14)
+        if lg.width > config.frame_width - 0.4:
+            lg.scale_to_fit_width(config.frame_width - 0.4)
+        return lg.move_to(self.ph_q[i])
+
     def sauter(self, notes):
         return LaggedStart(*[n.animate(rate_func=there_and_back).shift(UP * 0.25) for n in notes], lag_ratio=0.2,
                            run_time=0.8)
 
     def _rep_q(self, sc):
-        lg = sc.ligne_rep(0, ["80 ÷", "200 =", "0,4", "= 40 %"])
+        lg = VGroup(*sc.ligne_rep(0, ["80 ÷", "200 =", "0,4"]), *sc.ligne_rep(1, ["= 40 %"]))
         for m, mot in zip(lg, ["80 divisé", "par 200", "0,4", "40 %"]):
             sc.au_mot(mot)
             sc.play(FadeIn(m, shift=UP * 0.12), run_time=0.25)
@@ -144,9 +176,9 @@ class PropLyceeCalculerShort(ShortProp):
         for r in self.mini.refrains:
             r.set_fill(REFRAIN, 1)
         self.play(FadeIn(self.mini), run_time=0.3)
-        self.question_pause("02-question", "02b-reponse", ["80 s de refrain sur 200 s.", "Quelle proportion ?"],
+        self.question_pause("02-question", "02b-reponse", ["80 s de refrain", "sur 200 s.", "Quelle proportion ?"],
                             [self.t("80 %", 30), self.t("40 %", 30), self.t("2,5", 30)], 1,
-                            ["80 ÷ 200 = 0,4 = 40 %"], mot_q="80 secondes", autres_r=self._rep_q)
+                            ["80 ÷ 200 = 0,4", "= 40 %"], mot_q="80 secondes", autres_r=self._rep_q)
         self.play(*[FadeOut(m) for m in self.mobjects if all(m is not k for k in garder)], run_time=0.4)
 
         # ── 03 : la question en commentaire ──

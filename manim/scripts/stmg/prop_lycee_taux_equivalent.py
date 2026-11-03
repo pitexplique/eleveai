@@ -168,6 +168,7 @@ class Frise(VGroup):
         noms = noms or [str(i + 1) for i in range(n)]
         self.noms = pas_audit(VGroup(*[Text(s, font_size=fs_nom, color=GREY_B).move_to(c)
                                        for s, c in zip(noms, self.cases)]))
+        self.noms.set_z_index(2)  # 03/11 : les numéros restent AU-DESSUS quand une case s'anime
         self.add(self.cases, self.noms)
         self.move_to(centre)
 
@@ -207,6 +208,19 @@ class PropLyceeTauxEquivalentBase(PropPourcentageCoefficientBase):
         if lg.get_right()[0] > droite:
             lg.scale_to_fit_width(droite - xl).align_to(P(xl, 0), LEFT)
         return lg
+
+    Y_PH = -1.0   # le haut de la phrase de réponse, à GAUCHE sous la figure
+
+    def _disposer_q(self, question, choix, phrase):
+        """03/11 : la phrase de réponse en 34 à GAUCHE, sous la figure (à droite,
+        sous les cartes et à côté de Ti-Margo, elle tombait à ~20)."""
+        tete, q, cartes, pause, rebours, ph = super()._disposer_q(question, choix, phrase)
+        ph2 = self.bloc(phrase, 34, VERT_OK)
+        if ph2.width > 6.2:
+            ph2.scale_to_fit_width(6.2)
+        ph2.align_to(P(-6.15, 0), LEFT).align_to(P(0, self.Y_PH), UP)
+        self.ph_q = ph2
+        return tete, q, cartes, pause, rebours, ph2
 
     def source(self, lignes):
         """La source, discrète, en bas à gauche (lue, jamais dite)."""
@@ -292,10 +306,16 @@ class PropLyceeTauxEquivalentBase(PropPourcentageCoefficientBase):
         self.ecran("03-test")
         self.titre_haut("Testons-le", "Testons", couleur=JAUNE_TITRE)
         fr = Frise(12, largeur=11.0, h=0.7, centre=P(-0.3, 1.1))
-        self.montre("Chaque mois", FadeIn(fr, shift=UP * 0.2), rt=0.5)
+        # 03/11 : « chaque mois » entre au mot « Chaque mois », « × 1,0025 » au mot « 1,0025 »
         br, et = fr.dessous("× 1,0025 chaque mois", fs=34)
+        et1 = Text("× 1,0025", font_size=34, color=AMBRE, weight=BOLD)
+        et2 = Text("chaque mois", font_size=34, color=AMBRE, weight=BOLD)
+        VGroup(et1, et2).arrange(RIGHT, buff=0.22).move_to(et)
+        et2.align_to(et1, DOWN)
+        self.montre("Chaque mois", FadeIn(fr, shift=UP * 0.2), GrowFromCenter(br), FadeIn(et2, shift=DOWN * 0.1),
+                    rt=0.5)
         self.au_mot("1,0025")
-        self.play(GrowFromCenter(br), FadeIn(et, shift=DOWN * 0.1),
+        self.play(FadeIn(et1, shift=DOWN * 0.1),
                   LaggedStart(*[Indicate(c, color=AMBRE) for c in fr.cases], lag_ratio=0.08), run_time=1.2)
         arc, ta = fr.fleche("× 1,0304", fs=34, couleur=EQUI)
         L1 = self.lcp([("Sur 12 mois :", WHITE), ("1,0025", "12", AMBRE), ("≈", WHITE), ("1,0304", EQUI)], -0.75,
@@ -369,27 +389,29 @@ class PropLyceeTauxEquivalentBase(PropPourcentageCoefficientBase):
             sc.play(FadeIn(lv, shift=DOWN * 0.2), run_time=0.4)
 
         def apres(sc):
-            fr = Frise(12, largeur=5.8, h=0.55, centre=P(-3.4, -1.0), fs_nom=16)
+            fr = Frise(12, largeur=5.8, h=0.55, centre=P(-3.4, 0.05), fs_nom=16)
             a, t = sc.accolade(fr.cases, "6 %", AMBRE, fs=28)
             pas_audit(t)
             a1, t1 = sc.accolade(fr.cases[0], "0,5 %", VERT_OK, DOWN, fs=26)
             t1.align_to(fr.cases[0], LEFT)
-            l0 = sc.ligne_rep(0, ["6 % ÷ 12", "= 0,5 %", "par mois."])
-            l1 = sc.ligne_rep(1, ["B multiplie par 12"])
-            l1b = sc.ligne_rep(2, ["au lieu de diviser."])
+            l0 = sc.ligne_rep(0, ["6 % ÷ 12", "= 0,5 %"], fs=34)
+            l0b = sc.ligne_rep(1, ["par mois."], fs=34)
+            l1 = sc.ligne_rep(2, ["B multiplie par 12"], fs=34)
+            l1b = sc.ligne_rep(3, ["au lieu de diviser."], fs=34)
             sc.montre("6 divisé", FadeIn(l0[0], shift=UP * 0.15), FadeIn(fr, shift=UP * 0.2), GrowFromCenter(a),
                       FadeIn(t), rt=0.4)
             sc.montre("égale 0,5", FadeIn(l0[1], scale=1.3),
                       *[c.animate.set_fill("#14532d", 1) for c in fr.cases], GrowFromCenter(a1), FadeIn(t1), rt=0.45)
-            sc.montre("par mois", FadeIn(l0[2], shift=UP * 0.15), rt=0.3)
+            sc.montre("par mois", FadeIn(l0b[0], shift=UP * 0.15), rt=0.3)
             sc.montre("B multiplie", FadeIn(l1[0], shift=UP * 0.15), Create(sc.barrer_choix(1)), rt=0.4)
             sc.montre("au lieu", FadeIn(l1b, shift=UP * 0.15), rt=0.35)
             sc.rep_fini()
 
+        self.Y_PH = -1.3
         self.question_pause("05-question", "05b-reponse",
-                            ["Un taux annuel de 6 %.", "Quel est le taux mensuel", "proportionnel ?"],
+                            ["Un taux annuel de 6 %.", "Quel est le taux", "mensuel", "proportionnel ?"],
                             [self.t("0,5 %", 36), self.t("72 %", 36), self.t("6 %", 36)], 0,
-                            ["6 % ÷ 12 = 0,5 % par mois.", "B multiplie par 12", "au lieu de diviser."],
+                            ["6 % ÷ 12 = 0,5 %", "par mois.", "B multiplie par 12", "au lieu de diviser."],
                             mot_q="Un taux", avant_q=avant, autres_r=apres)
 
     # ── 06 : le taux équivalent : (1 + t)^12 = 1,03 → t ≈ 0,247 % ───────────
@@ -442,13 +464,13 @@ class PropLyceeTauxEquivalentBase(PropPourcentageCoefficientBase):
             sc.play(FadeIn(lv, shift=DOWN * 0.2), run_time=0.4)
 
         def apres(sc):
-            fr = Frise(12, largeur=5.8, h=0.55, centre=P(-3.4, -1.3), fs_nom=16)
+            fr = Frise(12, largeur=5.8, h=0.55, centre=P(-3.4, -0.3), fs_nom=16)
             arc, ta = fr.fleche("× 1,03", fs=28, couleur=VERT_OK)
             ref = sc.ph_q[0]
-            l0 = ligne_p([("1,002466", "12", VERT_OK), ("= 1,03.", VERT_OK)], fs=32)
+            l0 = ligne_p([("1,002466", "12", VERT_OK), ("= 1,03.", VERT_OK)], fs=34)
             l0.move_to(ref).align_to(ref, LEFT)
-            l1 = sc.ligne_rep(1, ["A : le taux proportionnel,"])
-            l1b = sc.ligne_rep(2, ["il donne 3,04 %."])
+            l1 = sc.ligne_rep(1, ["A : le taux proportionnel,"], fs=34)
+            l1b = sc.ligne_rep(2, ["il donne 3,04 %."], fs=34)
             sc.montre("1,002466", FadeIn(l0[0], shift=UP * 0.15), FadeIn(fr, shift=UP * 0.2), rt=0.4)
             sc.montre("puissance 12", FadeIn(l0[1], scale=1.3), rt=0.3)
             sc.montre("égale 1,03", FadeIn(l0[2], scale=1.2), Create(arc), FadeIn(ta), rt=0.45)
@@ -456,8 +478,9 @@ class PropLyceeTauxEquivalentBase(PropPourcentageCoefficientBase):
             sc.montre("3,04", FadeIn(l1b, shift=UP * 0.15), rt=0.35)
             sc.rep_fini()
 
+        self.Y_PH = -1.05
         self.question_pause("08-question", "08b-reponse",
-                            ["Quel taux mensuel redonne", "exactement 3 % sur l'année ?"],
+                            ["Quel taux mensuel", "redonne exactement", "3 %", "sur l'année ?"],
                             [self.t("0,25 %", 36), self.t("≈ 0,247 %", 36), self.t("3 %", 36)], 1,
                             ["1,002466^12 = 1,03.", "A : le taux proportionnel,", "il donne 3,04 %."],
                             mot_q="Quel taux", avant_q=avant, autres_r=apres)

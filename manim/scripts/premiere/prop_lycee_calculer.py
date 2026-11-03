@@ -193,6 +193,33 @@ class PropLyceeCalculerBase(PropTableauBase4e):
             print(f"T {self.renderer.time - getattr(self, '_debut_voix', 0):.2f} {a[0] if a else ''}"[:90], flush=True)
         return super().play(*a, **k)
 
+    # Défauts repris le 03/11 : les questions-pauses dans une colonne plus
+    # large (bord gauche XL_Q au lieu de 0,95) et resserrée en hauteur, pour
+    # que l'énoncé (36) et les explications sous les choix (34) ne soient plus réduits.
+    XL_Q = -2.0
+
+    def question_pause(self, *a, **k):
+        xl, self.XL, self._en_q = self.XL, self.XL_Q, True
+        try:
+            return super().question_pause(*a, **k)
+        finally:
+            self.XL, self._en_q = xl, False
+
+    def bloc(self, lignes, fs=38, color=WHITE, buff=0.14):
+        if getattr(self, "_en_q", False):
+            fs, buff = max(fs, 34), 0.1
+        return super().bloc(lignes, fs, color, buff)
+
+    def _disposer_q(self, question, choix, phrase):
+        tete, q, cartes, pause, rebours, ph = super()._disposer_q(question, choix, phrase)
+        cartes.arrange(DOWN, buff=0.13).next_to(q, DOWN, buff=0.25).align_to(P(self.XL, 0), LEFT)
+        pause.next_to(cartes, DOWN, buff=0.3).align_to(P(self.XL, 0), LEFT)
+        ph.next_to(cartes, DOWN, buff=0.2).align_to(P(self.XL, 0), LEFT)
+        return tete, q, cartes, pause, rebours, ph
+
+    def ligne_rep(self, i, morceaux, fs=None):
+        return super().ligne_rep(i, morceaux, fs or 34)
+
     def montre(self, mot, *anims, rt=0.4):
         if mot:
             self.au_mot(*mot) if isinstance(mot, tuple) else self.au_mot(mot)
@@ -297,14 +324,15 @@ class PropLyceeCalculerBase(PropTableauBase4e):
     def ecran_calcul(self):
         self.ecran("03-calcul")
         bar, nuc = self.barre_nuc(9.0, 0.8, centre=P(-0.4, 2.45))
-        ln = sans(self.t("nucléaire", 26, NUC)).next_to(nuc, DOWN, buff=0.12)
+        x_mil = bar.cadre.get_left()[0] + bar.cadre.width / 2  # entre les pointillés 1/3 et 2/3 (03/11)
+        ln = sans(self.t("nucléaire", 26, NUC)).next_to(nuc, DOWN, buff=0.12).set_x(x_mil)
         self.add(bar, nuc, ln)
         l1 = self.lc([("361,7 ÷", NUC), ("539", WHITE), ("≈ 0,671", VERT_OK)], 1.05, fs=48, x=-0.4)
         self.jouer(l1, ["361,7", "par 539", "environ 0,671"])
         self.insister(l1[2], 1.12, 0.2)
         l2 = self.lc([("0,671 ×", WHITE), ("100 =", AMBRE), ("67,1 %", VERT_OK)], -0.05, fs=48, x=-0.4)
         self.jouer(l2, ["on multiplie", "par 100", "67,1 %"])
-        p = self.t("67,1 %", 34, NUIT).move_to(nuc)
+        p = self.t("67,1 %", 34, NUIT).move_to(nuc).set_x(x_mil)
         self.play(FadeIn(p, scale=1.3), run_time=0.3)
         cad = SurroundingRectangle(l2[2], color=VERT_OK, buff=0.15, corner_radius=0.1)
         self.play(Create(cad), run_time=0.4)
@@ -370,7 +398,7 @@ class PropLyceeCalculerBase(PropTableauBase4e):
             sans(l1[1])
             sc.montre("B recopie", FadeIn(l1[0]), rt=0.25)
             sc.montre("sans la", FadeIn(l1[1], shift=UP * 0.12), rt=0.3)
-            l2 = sc.ligne_rep(2, ["C :", "le tout ÷ la partie : l'inverse."])
+            l2 = sc.ligne_rep(2, ["C :", "tout ÷ partie (l'inverse)."])
             sans(l2[1])
             sc.montre("C divise", FadeIn(l2[0]), rt=0.25)
             sc.montre("l'inverse", FadeIn(l2[1], shift=UP * 0.12), rt=0.3)
@@ -380,7 +408,7 @@ class PropLyceeCalculerBase(PropTableauBase4e):
                             ["L'hydraulique : 75,1 TWh sur 539.", "Quelle proportion ?"],
                             [self.t("13,9 %", 34), self.t("75,1 %", 34), self.t("7,2", 34)], 0,
                             ["75,1 ÷ 539 ≈ 0,139 = 13,9 %.", "B : la partie, sans diviser.",
-                             "C : le tout ÷ la partie : l'inverse."], mot_q="L'hydraulique",
+                             "C : tout ÷ partie (l'inverse)."], mot_q="L'hydraulique",
                             avant_q=avant, autres_r=apres)
 
     # ── 06 : le piège : diviser par le reste (204 %) ────────────────────────
@@ -438,16 +466,17 @@ class PropLyceeCalculerBase(PropTableauBase4e):
                 sc.montre(mot, FadeIn(m, shift=UP * 0.12), rt=0.3)
             p = sc.t("8,7 %", 26, EOL).next_to(seg, UP, buff=0.12)
             sc.play(GrowFromEdge(seg, LEFT), FadeIn(p, scale=1.3), run_time=0.5)
-            l1 = sc.ligne_rep(1, ["C : ÷ le reste,", "492,2,", "au lieu du total."])
+            l1 = sc.ligne_rep(1, ["C : ÷ le reste,", "492,2,"])
+            l2 = sc.ligne_rep(2, ["au lieu du total."])
             sc.montre("C divise", FadeIn(l1[0]), rt=0.25)
             sc.montre("492,2", FadeIn(l1[1], scale=1.2), rt=0.3)
-            sc.montre("au lieu", FadeIn(l1[2], shift=UP * 0.12), rt=0.3)
+            sc.montre("au lieu", FadeIn(l2[0], shift=UP * 0.12), rt=0.3)
             sc.rep_fini()
 
         self.question_pause("07-question", "07b-reponse",
                             ["L'éolien : 46,8 TWh sur 539.", "Quelle proportion ?"],
                             [self.t("8,7 %", 34), self.t("46,8 %", 34), self.t("9,5 %", 34)], 0,
-                            ["46,8 ÷ 539 ≈ 0,087 = 8,7 %.", "C : ÷ le reste, 492,2, au lieu du total."],
+                            ["46,8 ÷ 539 ≈ 0,087 = 8,7 %.", "C : ÷ le reste, 492,2,", "au lieu du total."],
                             mot_q="L'éolien", avant_q=avant, autres_r=apres)
 
     # ── 08 : défi (solaire ; nucléaire + hydraulique) ───────────────────────

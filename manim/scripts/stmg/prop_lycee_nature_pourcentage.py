@@ -162,8 +162,8 @@ class PropLyceeNaturePourcentageBase(PropPourcentageCoefficientBase):
         sous les cartes et au-dessus de Ti-Margo, elle était réduite à ~20."""
         tete, q, cartes, pause, rebours, ph = super()._disposer_q(question, choix, phrase)
         ph2 = self.bloc(phrase, 34, VERT_OK)
-        if ph2.width > 5.4:
-            ph2.scale_to_fit_width(5.4)
+        if ph2.width > 6.2:  # 03/11 : 6,2 (à 5,4, « Entre deux proportions, » passait sous 34)
+            ph2.scale_to_fit_width(6.2)
         ph2.align_to(P(-6.15, 0), LEFT).align_to(P(0, self.Y_PH), UP)
         self.ph_q = ph2
         return tete, q, cartes, pause, rebours, ph2
@@ -338,7 +338,7 @@ class PropLyceeNaturePourcentageBase(PropPourcentageCoefficientBase):
 
         self.Y_PH = -1.0
         self.question_pause("05-question", "05b-reponse",
-                            ["« Les ventes ont progressé", "de 32 % en un an. »", "Ce pourcentage est :"],
+                            ["« Les ventes ont", "progressé de 32 %", "en un an. »", "Ce pourcentage est :"],
                             [self.t("une proportion", 34), self.t("une évolution", 34), self.t("les deux", 34)], 1,
                             ["On compare les ventes", "à deux dates :", "c'est une évolution."],
                             mot_q="Les ventes", avant_q=avant, autres_r=apres)
@@ -368,10 +368,13 @@ class PropLyceeNaturePourcentageBase(PropPourcentageCoefficientBase):
         self.montre("60 %", GrowArrow(fo.fleche), FadeIn(fo.haut, scale=1.3), rt=0.45)
         self.montre("de 10 à", FadeIn(g10, scale=0.8), FadeIn(lo), rt=0.3)
         self.montre("16 médailles", FadeIn(g16, scale=0.8), rt=0.3)
-        L3 = self.lc([("et pourtant sa part", WHITE), ("a baissé !", ROUGE_ERREUR)], y, fs=38, xl=xl)
+        # 03/11 : sur deux lignes, en taille normale (sur une ligne, lc la réduisait)
+        L3 = self.lc([("et pourtant sa part", WHITE)], y + 0.1, fs=38, xl=xl)
+        L3b = self.lc([("a baissé !", ROUGE_ERREUR)], y - 0.55, fs=38, xl=xl)
         bas = Arrow(P(0.2, 2.0), P(0.2, 0.45), buff=0, color=ROUGE_ERREUR, stroke_width=8,
                     max_tip_length_to_length_ratio=0.25)
-        self.jouer(L3, ["pourtant", "a baissé"], {1: [GrowArrow(bas), Indicate(VGroup(pt, pp), color=ROUGE_ERREUR)]})
+        self.jouer(L3, ["pourtant"])
+        self.jouer(L3b, ["a baissé"], {0: [GrowArrow(bas), Indicate(VGroup(pt, pp), color=ROUGE_ERREUR)]})
         f = self.tampon("Elles ne s'additionnent pas, ne se comparent pas !", ROUGE_ERREUR, 28).move_to(P(-0.4, -2.3))
         self.montre("Une proportion et", FadeIn(f, scale=1.15), rt=0.5)
         self.insister(f, 1.06, 0.2)
@@ -398,11 +401,13 @@ class PropLyceeNaturePourcentageBase(PropPourcentageCoefficientBase):
             sc.montre("Entre deux", FadeIn(sc.ph_q[0], shift=UP * 0.12), rt=0.35)
             sc.montre("la différence", FadeIn(sc.ph_q[1], shift=UP * 0.12), FadeIn(b1), FadeIn(p1), FadeIn(t1),
                       FadeIn(b2), FadeIn(p2), FadeIn(t2), rt=0.4)
-            l0 = sc.ligne_rep(2, ["en points :", "30 −", "25", "= 5 points."])
+            # 03/11 : la réponse en 34 sur quatre lignes (« en points : » seul, puis le calcul)
+            l0 = sc.ligne_rep(2, ["en points :"], fs=34)
+            l1 = sc.ligne_rep(3, ["30 −", "25", "= 5 points."], fs=34)
             sc.montre("en points", FadeIn(l0[0], shift=UP * 0.12), rt=0.3)
-            sc.montre("30 moins", FadeIn(l0[1], shift=UP * 0.12), rt=0.3)
-            sc.montre("moins 25", FadeIn(l0[2], shift=UP * 0.12), rt=0.3)
-            sc.montre("égale 5", FadeIn(l0[3], scale=1.3), FadeIn(gap), GrowFromCenter(ag), FadeIn(tg, scale=1.3),
+            sc.montre("30 moins", FadeIn(l1[0], shift=UP * 0.12), rt=0.3)
+            sc.montre("moins 25", FadeIn(l1[1], shift=UP * 0.12), rt=0.3)
+            sc.montre("égale 5", FadeIn(l1[2], scale=1.3), FadeIn(gap), GrowFromCenter(ag), FadeIn(tg, scale=1.3),
                       rt=0.45)
             sc.rep_fini()
 
@@ -410,7 +415,7 @@ class PropLyceeNaturePourcentageBase(PropPourcentageCoefficientBase):
         self.question_pause("07-question", "07b-reponse",
                             ["La part de l'or passe", "de 30 % à 25 %.", "Elle a baissé de :"],
                             [self.t("5 %", 34), self.t("5 points", 34), self.t("25 %", 34)], 1,
-                            ["Entre deux proportions,", "la différence se compte", "en points : 30 − 25 = 5 points."],
+                            ["Entre deux proportions,", "la différence se compte", "en points :", "30 − 25 = 5 points."],
                             mot_q="La part", avant_q=avant, autres_r=apres)
 
     # ── 08 : défi : « 45 % du stock est importé » / « le CA a chuté de 45 % »
@@ -474,19 +479,27 @@ class PropLyceeNaturePourcentageBase(PropPourcentageCoefficientBase):
     # ── 09 : ce que tu as appris ────────────────────────────────────────────
     def ecran_finale(self):
         self.ecran("09-finale", 0.65)
-        b = BarreCent("", largeur=4.0, h=0.55, centre=P(-4.2, 0.9))
+        # 03/11 : la figure plus grande (barre 4,6 × 0,75, boîtes 1,4 × 0,8, libellés en 32), poussée à
+        # gauche ; les lignes reprennent leur taille (36) à côté
+        b = BarreCent("", largeur=4.6, h=0.75, centre=P(-4.2, 1.0))
         p = self.part_barre(b, 2.5, OR)
-        lp = sans(self.t("proportion", 26, PROP)).next_to(b, DOWN, buff=0.12)
-        ba = boite("", PROP, l=1.1, h=0.6).move_to(P(-5.5, -0.8))
-        bb = boite("", EVO, l=1.1, h=0.6).move_to(P(-2.9, -0.8))
-        fl = Arrow(ba.get_right(), bb.get_left(), buff=0.1, color=EVO, stroke_width=6)
-        le = sans(self.t("évolution", 26, EVO)).next_to(VGroup(ba, bb), DOWN, buff=0.12)
+        lp = sans(self.t("proportion", 32, PROP)).next_to(b, DOWN, buff=0.14)
+        ba = boite("", PROP, l=1.4, h=0.8).move_to(P(-5.6, -1.0))
+        bb = boite("", EVO, l=1.4, h=0.8).move_to(P(-2.8, -1.0))
+        fl = Arrow(ba.get_right(), bb.get_left(), buff=0.1, color=EVO, stroke_width=7)
+        le = sans(self.t("évolution", 32, EVO)).next_to(VGroup(ba, bb), DOWN, buff=0.14)
         fig = VGroup(b, p, lp, ba, bb, fl, le)
         self.add(fig)
         lignes = self.finale_colonne(figure=fig, textes=[
             ("Une proportion compare une partie", "à un tout, au même moment."),
             ("Une évolution compare deux valeurs", "à deux dates."),
             ("Avant de calculer, demande-toi", "lequel des deux tu lis.")], fs=36)
+        fig.align_to(P(-6.45, 0), LEFT)
+        ref = lignes[0][1][0]
+        k = ref.height / self.t("Une proportion compare une partie", 36).height  # réduction subie
+        xl = fig.get_right()[0] + 0.45
+        lignes.scale_to_fit_width(min(lignes.width / k, self.BORD_X - 0.05 - xl))
+        lignes.align_to(P(xl, 0), LEFT).align_to(P(0, 2.45), UP)
         self.au_mot("Une proportion")
         self.montrer_ligne(lignes[0], Indicate(VGroup(b, p), color=PROP))
         self.au_mot("Une évolution")

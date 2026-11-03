@@ -86,6 +86,26 @@ class PropLyceeProportionShort(ShortProp):
     fichier_marques = "prop_lycee_proportion_short_marques.json"
     ceinture = "blanche"
 
+    # Défauts repris le 03/11 : la phrase de réponse de la question-pause en
+    # 28 (au lieu de 26, réduite), lisible depuis le fond de la classe.
+    def question_pause(self, *a, **k):
+        self._en_q = True
+        try:
+            return super().question_pause(*a, **k)
+        finally:
+            self._en_q = False
+
+    def bloc(self, lignes, fs=30, color=WHITE, buff=0.1):
+        if getattr(self, "_en_q", False):
+            fs = max(fs, 28)
+        return super().bloc(lignes, fs, color, buff)
+
+    def ligne_rep(self, i, morceaux, fs=None):
+        lg = self.ligne([(m, VERT_OK) for m in morceaux], fs or 28, buff=0.14)
+        if lg.width > config.frame_width - 0.4:
+            lg.scale_to_fit_width(config.frame_width - 0.4)
+        return lg.move_to(self.ph_q[i])
+
     def fraction_v(self, num, den, fs=44, c_num=ROSE):
         n = self.t(num, fs, c_num)
         d = self.t(den, fs, WHITE)
@@ -103,9 +123,10 @@ class PropLyceeProportionShort(ShortProp):
         return cv, ca
 
     def _rep_q(self, sc):
-        lg = sc.ligne_rep(0, ["40 ÷", "500 =", "0,08,", "soit 8 %."])
-        b = barre100(2.3, 0.28, 0.08)
-        b.move_to(P(-0.8, -2.75))
+        lg = VGroup(*sc.ligne_rep(0, ["40 ÷", "500 =", "0,08,"]), *sc.ligne_rep(1, ["soit 8 %."]))
+        b = barre100(1.9, 0.28, 0.08)
+        y2 = lg[3].get_y()
+        VGroup(lg[3], b).arrange(RIGHT, buff=0.3).move_to(P(0, y2))  # la barre à côté de « soit 8 % »
         sc.au_mot("40 divisé")
         sc.play(FadeIn(lg[0], shift=UP * 0.12), FadeIn(b.piste), run_time=0.3)
         sc.au_mot("par 500")
@@ -171,7 +192,7 @@ class PropLyceeProportionShort(ShortProp):
         # ── 02 : la question-pause (3 s) ──
         self.question_pause("02-question", "02b-reponse", ["500 vues, 40 j'aime.", "Quel taux ?"],
                             [self.t("8 %", 30), self.t("40 %", 30), self.t("12,5", 30)], 0,
-                            ["40 ÷ 500 = 0,08, soit 8 %."], mot_q="500 vues", autres_r=self._rep_q)
+                            ["40 ÷ 500 = 0,08,", "soit 8 %."], mot_q="500 vues", autres_r=self._rep_q)
         self.play(*[FadeOut(m) for m in self.mobjects if all(m is not k for k in garder)], run_time=0.4)
 
         # ── 03 : la question en commentaire ──

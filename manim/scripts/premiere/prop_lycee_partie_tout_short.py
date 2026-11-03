@@ -95,6 +95,26 @@ class PropLyceePartieToutShort(ShortProp):
     fichier_marques = "prop_lycee_partie_tout_short_marques.json"
     ceinture = "blanche"
 
+    # Défauts repris le 03/11 : la phrase de réponse de la question-pause en
+    # 28 (au lieu de 26, réduite), lisible depuis le fond de la classe.
+    def question_pause(self, *a, **k):
+        self._en_q = True
+        try:
+            return super().question_pause(*a, **k)
+        finally:
+            self._en_q = False
+
+    def bloc(self, lignes, fs=30, color=WHITE, buff=0.1):
+        if getattr(self, "_en_q", False):
+            fs = max(fs, 28)
+        return super().bloc(lignes, fs, color, buff)
+
+    def ligne_rep(self, i, morceaux, fs=None):
+        lg = self.ligne([(m, VERT_OK) for m in morceaux], fs or 28, buff=0.14)
+        if lg.width > config.frame_width - 0.4:
+            lg.scale_to_fit_width(config.frame_width - 0.4)
+        return lg.move_to(self.ph_q[i])
+
     def mini_barre(self, k, y=-2.75, largeur=3.6):
         """La barre de téléchargement seule (pendant la question), remplie à k."""
         piste = RoundedRectangle(width=largeur, height=0.36, corner_radius=0.08, fill_color=PISTE, fill_opacity=1,

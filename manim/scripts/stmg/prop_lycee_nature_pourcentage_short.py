@@ -112,24 +112,37 @@ class PropLyceeNaturePourcentageShort(ShortProp):
             out.append(t)
         return out
 
+    def _disposer_q(self, question, choix, phrase):
+        """03/11 : la phrase de réponse en 28 (au lieu de 26), même place."""
+        tete, q, cartes, pause, rebours, ph = super()._disposer_q(question, choix, phrase)
+        ph2 = self.bloc(phrase, 28, VERT_OK).next_to(cartes, DOWN, buff=0.12).set_x(0)
+        self.ph_q = ph2
+        return tete, q, cartes, pause, rebours, ph2
+
     def _rep_q(self, sc):
         piste, r, li = self.mb
         g = Rectangle(width=li * 0.1, height=0.28, stroke_width=0, fill_color=GAIN, fill_opacity=1)
         g.next_to(r, RIGHT, buff=0)
-        l0 = sc.ligne_rep(0, ["30 −", "20", "= 10 points."])
+        # 03/11 : trois lignes en 28 (à deux, ligne_rep les réduisait à ~25 et ~22) ; le choix C
+        # (pâli) laisse sa place à l'explication, comme dans le short « La tirelire »
+        c = sc.cartes_q[2]
+        dy = c.get_top()[1] - 0.1 - sc.ph_q[0].get_top()[1]
+        sc.ph_q.shift(UP * dy)
+        l0 = sc.ligne([("30 −", VERT_OK), ("20", VERT_OK), ("= 10 points.", VERT_OK)], 28, buff=0.14).move_to(sc.ph_q[0])
         sc.au_mot("30 moins")
-        sc.play(FadeIn(l0[0], shift=UP * 0.12), run_time=0.3)
+        sc.play(FadeIn(l0[0], shift=UP * 0.12), FadeOut(c), run_time=0.3)
         sc.au_mot("moins 20")
         sc.play(FadeIn(l0[1], shift=UP * 0.12), run_time=0.3)
         sc.au_mot("égale 10")
         sc.play(FadeIn(l0[2], scale=1.3), GrowFromEdge(g, LEFT), run_time=0.4)
-        l1 = sc.ligne_rep(1, ["10 ÷ 20", "= 0,5 :", "+ 50 %."])
+        l1 = sc.ligne_rep(1, ["10 ÷ 20", "= 0,5 :"], fs=28)
+        l1b = sc.ligne_rep(2, ["+ 50 %."], fs=28)
         sc.au_mot("10 divisé")
         sc.play(FadeIn(l1[0], shift=UP * 0.12), Indicate(r, color=WHITE), run_time=0.35)
         sc.au_mot("égale 0,5")
         sc.play(FadeIn(l1[1], shift=UP * 0.12), run_time=0.3)
         sc.au_mot("plus 50")
-        sc.play(FadeIn(l1[2], scale=1.3), Indicate(g, color=GAIN, scale_factor=1.4), run_time=0.4)
+        sc.play(FadeIn(l1b[0], scale=1.3), Indicate(g, color=GAIN, scale_factor=1.4), run_time=0.4)
         sc.rep_fini()
 
     def construct(self):
@@ -147,9 +160,12 @@ class PropLyceeNaturePourcentageShort(ShortProp):
         tout = pas_audit(self.t("le tout : commerce de détail", 16, GREY_B)).next_to(VGroup(b1, b2), UP, buff=0.1).set_x(-0.3)
         p1, p2 = b1.part(0.10), b2.part(0.10)
         g2 = b2.part(0.11, GAIN, depuis=0.10)
-        t1 = Text("10 %", font_size=24, color=PART, weight=BOLD).next_to(p1, UP, buff=0.12)
-        t2 = Text("11 %", font_size=24, color=PART, weight=BOLD).next_to(p2, UP, buff=0.12)
-        src = pas_audit(Text("Source : Fevad, 2024", font_size=10, color=GREY_B)).move_to(P(1.15, -2.75))
+        t1 = Text("10 %", font_size=24, color=PART, weight=BOLD).next_to(p1, UP, buff=0.42)
+        t2 = Text("11 %", font_size=24, color=PART, weight=BOLD).next_to(p2, UP, buff=0.42)
+        # 03/11 : la source sur deux lignes, en bas à droite, loin de l'étiquette « 2024 »
+        src = VGroup(Text("Source :", font_size=12, color=GREY_B), Text("Fevad, 2024", font_size=12, color=GREY_B))
+        src.arrange(DOWN, aligned_edge=RIGHT, buff=0.05)
+        pas_audit(src).align_to(P(2.0, 0), RIGHT).set_y(-2.95)
 
         # ── 00 : l'accroche : 10 % en 2023, 11 % en 2024 : + 1 % ? ──
         self.dire("00-accroche")
@@ -188,7 +204,8 @@ class PropLyceeNaturePourcentageShort(ShortProp):
         bleu.move_to(loupe.get_center() + DOWN * 0.3)
         ambre = Rectangle(width=0.9, height=0.4, fill_color=GAIN, fill_opacity=1, stroke_width=0)
         ambre.next_to(bleu, UP, buff=0)
-        lien = Line(petit.get_right(), loupe.get_left(), color=GAIN, stroke_width=3)
+        u = (loupe.get_center() - petit.get_center()) / np.linalg.norm(loupe.get_center() - petit.get_center())
+        lien = Line(petit.get_center() + u * 0.22, loupe.get_center() - u * 0.62, color=GAIN, stroke_width=3)
         tp = Text("+ 1 point", font_size=20, color=GAIN, weight=BOLD).next_to(loupe, DOWN, buff=0.1)
         self.au_mot("1 point")
         self.play(FadeIn(l1[1], scale=1.3), Create(petit), Create(lien), GrowFromCenter(loupe), FadeIn(bleu),
@@ -217,7 +234,7 @@ class PropLyceeNaturePourcentageShort(ShortProp):
         self.question_pause("02-question", "02b-reponse", ["Une part passe de 20 % à 30 %.",
                                                            "Elle a augmenté de :"],
                             self.choix_figes(["10 %", "10 points, soit 50 %", "30 %"]), 1,
-                            ["30 − 20 = 10 points.", "10 ÷ 20 = 0,5 : + 50 %."], mot_q="Une part",
+                            ["30 − 20 = 10 points.", "10 ÷ 20 = 0,5 :", "+ 50 %."], mot_q="Une part",
                             avant_q=avant, autres_r=self._rep_q)
         self.play(*[FadeOut(m) for m in self.mobjects if all(m is not k for k in garder)], run_time=0.4)
 

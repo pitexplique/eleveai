@@ -66,6 +66,24 @@ class PropLyceeFormesShort(ShortProp):
     def fr_(self, n, d, fs=40, couleur=WHITE):
         return EcritureFraction(n, d, fs=fs, couleur=couleur)
 
+    # ⭐ 03/11 (défauts) : la phrase de réponse en 28 (et non 26), sous les cartes.
+    def _disposer_q(self, question, choix, phrase):
+        tete, q, cartes, pause, rebours, ph = super()._disposer_q(question, choix, phrase)
+        ph2 = self.bloc(phrase, 28, VERT_OK).next_to(cartes, DOWN, buff=0.14).set_x(0)
+        self.ph_q = ph2
+        return tete, q, cartes, pause, rebours, ph2
+
+    def ligne_rep(self, i, morceaux, fs=28):
+        return super().ligne_rep(i, morceaux, fs)
+
+    def poser_fraction(self, k, mot_num, mot_den):
+        """Une carte-fraction : cadre, numérateur et trait au mot du numérateur,
+        dénominateur au sien (0,15 s + 0,15 s, la durée d'une carte)."""
+        self.au_mot(mot_num)
+        self.play(FadeIn(k.cadre, scale=0.8), FadeIn(k.contenu.num, scale=1.3), Create(k.contenu.trait), run_time=0.15)
+        self.au_mot(mot_den)
+        self.play(FadeIn(k.contenu.den, scale=1.3), run_time=0.15)
+
     def _rep_q(self, sc):
         l0 = sc.ligne_rep(0, ["3/4 =", "0,75", "= 75 %."])
         l1 = sc.ligne_rep(1, ["7,5 % =", "0,075."])
@@ -99,7 +117,10 @@ class PropLyceeFormesShort(ShortProp):
             if c.width > 1.45:
                 c.scale_to_fit_width(1.45)
         cartes = [carte_jeu(c, p) for c, p in zip(contenus, pos)]
-        for k, mot in zip(cartes, ["2. 0,5", "0,5", "5 %", "50 %"]):  # la fraction au « 2 »
+        for k, mot in zip(cartes, ["2. 0,5", "0,5", "5 %", "50 %"]):
+            if mot == "2. 0,5":  # la fraction : le 1 au « 1 sur », le 2 au « 2 » (03/11)
+                self.poser_fraction(k, "1 sur 2", mot)
+                continue
             self.au_mot(mot)
             self.play(FadeIn(k.cadre, scale=0.8), FadeIn(k.contenu, scale=1.3), run_time=0.3)
         self.play(*[Wiggle(k, scale_value=1.06, rotation_angle=0.04) for k in cartes], run_time=0.6)
@@ -156,6 +177,9 @@ class PropLyceeFormesShort(ShortProp):
             if c.width > 1.0:
                 c.scale_to_fit_width(1.0)
             k = carte_jeu(c, p, l=1.2, h=0.95)
+            if mot in ("5. 0,2", "10. Réponds"):  # la fraction : numérateur puis dénominateur, au mot
+                self.poser_fraction(k, "1 sur 5" if mot == "5. 0,2" else "2 sur 10", mot)
+                continue
             self.au_mot(mot)
             self.play(FadeIn(k.cadre, scale=0.8), FadeIn(k.contenu, scale=1.3), run_time=0.3)
         self.appel_commentaire(y=-1.5)

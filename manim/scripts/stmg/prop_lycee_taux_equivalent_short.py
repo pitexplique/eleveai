@@ -107,6 +107,11 @@ def ligne_p(items, fs=30, buff=0.12):
     return VGroup(*out)
 
 
+def garder_q(sc):
+    """Ce qui ne bouge jamais pendant la réponse (Ti-Margo, titre, ceintures)."""
+    return getattr(sc, "_garder", [])
+
+
 class PropLyceeTauxEquivalentShort(ShortProp):
     nom_voix = "stmg-prop-taux-equivalent-short"
     fichier_marques = "prop_lycee_taux_equivalent_short_marques.json"
@@ -123,21 +128,36 @@ class PropLyceeTauxEquivalentShort(ShortProp):
         return p, Succession(FadeIn(p, run_time=0.1), p.animate(run_time=0.3).move_to(fente),
                              FadeOut(p, run_time=0.1))
 
+    def _disposer_q(self, question, choix, phrase):
+        """03/11 : la phrase de réponse en 28 (au lieu de 26), même place."""
+        tete, q, cartes, pause, rebours, ph = super()._disposer_q(question, choix, phrase)
+        ph2 = self.bloc(phrase, 28, VERT_OK).next_to(cartes, DOWN, buff=0.12).set_x(0)
+        self.ph_q = ph2
+        return tete, q, cartes, pause, rebours, ph2
+
     def _rep_q(self, sc):
         ref = sc.ph_q[0]
         l0 = ligne_p([("1,01", "12", VERT_OK), ("≈ 1,1268 :", VERT_OK)], fs=30)
         if l0.width > config.frame_width - 0.9:
             l0.scale_to_fit_width(config.frame_width - 0.9)
         l0.move_to(ref)
-        l0b = sc.ligne_rep(1, ["≈ 12,7 %."])
-        l1 = sc.ligne_rep(2, ["Les intérêts rapportent"])
-        l1b = sc.ligne_rep(3, ["des intérêts."])
-        # le choix C (barré par l'opacité) laisse sa place à l'explication : rien sur Ti-Margo
-        c = sc.cartes_q[2]
-        dy = c.get_top()[1] - 0.1 - l0.get_top()[1]
-        for m in (l0, l0b, l1, l1b):
+        l0b = sc.ligne_rep(1, ["≈ 12,7 %."], fs=28)
+        # 03/11 : tout en 28 ; « Les intérêts rapportent » tient sur deux lignes (4,6 de large en 28) :
+        # les choix A et C (faux, pâlis) s'effacent, la carte B (et sa coche) monte à la place de A
+        l1 = sc.ligne_rep(2, ["Les intérêts"], fs=28)
+        l1c = sc.ligne_rep(3, ["rapportent"], fs=28)
+        l1b = sc.ligne_rep(4, ["des intérêts."], fs=28)
+        ca, cb, c = sc.cartes_q
+        coche = [m for m in sc.mobjects if len(m.get_all_points()) and cb not in m.get_family()
+                 and m not in garder_q(sc)
+                 and cb.get_left()[0] < m.get_center()[0] < cb.get_right()[0]
+                 and abs(m.get_y() - cb.get_y()) < cb.height / 2]
+        dyb = ca.get_top()[1] - cb.get_top()[1]
+        dy = cb.get_bottom()[1] + dyb - 0.12 - l0.get_top()[1]
+        for m in (l0, l0b, l1, l1c, l1b):
             m.shift(UP * dy)
-        sc.play(FadeOut(c), run_time=0.2)
+        sc.play(FadeOut(c), FadeOut(ca), cb.animate.shift(UP * dyb), *[m.animate.shift(UP * dyb) for m in coche],
+                run_time=0.2)
         sc.au_mot("1,01")
         sc.play(FadeIn(l0[0], shift=UP * 0.12), run_time=0.3)
         sc.au_mot("puissance 12")
@@ -148,6 +168,8 @@ class PropLyceeTauxEquivalentShort(ShortProp):
         sc.play(FadeIn(l0b, scale=1.3), run_time=0.35)
         sc.au_mot("Les intérêts")
         sc.play(FadeIn(l1, shift=UP * 0.12), run_time=0.3)
+        sc.au_mot("rapportent")
+        sc.play(FadeIn(l1c, shift=UP * 0.12), run_time=0.3)
         sc.au_mot("des intérêts")
         sc.play(FadeIn(l1b, shift=UP * 0.12), run_time=0.3)
         sc.rep_fini()
@@ -158,6 +180,7 @@ class PropLyceeTauxEquivalentShort(ShortProp):
         titre.sans_synchro = True  # le titre de la vidéo : posé d'un bloc
         self.add(badge)
         garder = [margo, titre, badge]
+        self._garder = garder
         co = tirelire(0.8).move_to(P(0, 1.45))
 
         # ── 00 : l'accroche : 1 % par mois = 12 % par an ? ──
@@ -218,7 +241,7 @@ class PropLyceeTauxEquivalentShort(ShortProp):
         # ── 02 : la question-pause (3 s) ──
         self.question_pause("02-question", "02b-reponse", ["1 % par mois pendant 12 mois.", "Combien sur l'année ?"],
                             [self.t("12 %", 30), self.t("≈ 12,7 %", 30), self.t("1 %", 30)], 1,
-                            ["1,01^12 ≈ 1,1268 :", "≈ 12,7 %.", "Les intérêts rapportent", "des intérêts."],
+                            ["1,01^12 ≈ 1,1268 :", "≈ 12,7 %.", "Les intérêts", "rapportent", "des intérêts."],
                             mot_q="1 % par mois", autres_r=self._rep_q)
         self.play(*[FadeOut(m) for m in self.mobjects if all(m is not k for k in garder)], run_time=0.4)
 

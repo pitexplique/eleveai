@@ -199,13 +199,23 @@ class PropLyceeToutPartieBase(PropPourcentageCoefficientBase):
         q2.align_to(P(0, tete.get_bottom()[1] - 0.2), UP)
         cartes.align_to(P(0, q2.get_bottom()[1] - 0.25), UP)
         pause.align_to(P(0, cartes.get_bottom()[1] - 0.3), UP)
-        ph2 = self.col(self.bloc(phrase, 34, VERT_OK), 0)
-        ph2.align_to(P(0, cartes.get_bottom()[1] - 0.25), UP)
-        if ph2.get_right()[0] > 5.2:  # Ti-Margo, en bas à droite
-            g = ph2.get_left()[0]
-            ph2.scale_to_fit_width(5.2 - g).align_to(P(g, 0), LEFT)
+        # ⭐ 03/11 (défauts) : la phrase de réponse en 34 à GAUCHE, sous la barre
+        # (à droite, sous les cartes et contre Ti-Margo, elle tombait à ~24).
+        ph2 = VGroup(*[self.t(x, 34, VERT_OK) for x in phrase]).arrange(DOWN, aligned_edge=LEFT, buff=0.16)
+        if ph2.width > 6.0:
+            ph2.scale_to_fit_width(6.0)
+        ph2.align_to(P(-6.45, 0), LEFT).align_to(P(0, self.Y_PH), UP)
         self.ph_q = ph2
         return tete, q2, cartes, pause, rebours, ph2
+
+    Y_PH = -1.45  # le haut de la phrase de réponse (à gauche, sous la barre)
+
+    def ligne_rep(self, i, morceaux, fs=34):
+        ref = self.ph_q[i]
+        lg = self.ligne([(m, VERT_OK) for m in morceaux], fs, buff=0.14)
+        if lg.width > 6.0:
+            lg.scale_to_fit_width(6.0)
+        return lg.move_to(ref).align_to(ref, LEFT)
 
     def colonne_large(self, xl=-0.3):
         """Pour un écran question : la colonne de droite démarre à xl."""
@@ -371,8 +381,8 @@ class PropLyceeToutPartieBase(PropPourcentageCoefficientBase):
         self.clear()
         self.add_mascotte()
         self.colonne_large()
-        ma = masques(1.0).move_to(P(-4.1, 1.55))
-        b = BarreTout(0.18, largeur=4.8, h=0.7, centre=P(-3.9, -0.55))
+        ma = masques(1.0).move_to(P(-4.1, 2.15))
+        b = BarreTout(0.18, largeur=4.8, h=0.7, centre=P(-3.9, 0.0))
 
         def avant(sc):
             sc.play(FadeIn(ma, scale=0.7), FadeIn(b.reste), FadeIn(b.part), FadeIn(b.q), run_time=0.4)
@@ -387,7 +397,8 @@ class PropLyceeToutPartieBase(PropPourcentageCoefficientBase):
         def apres(sc):
             a2, v2 = sc.accolade(VGroup(b.part, b.reste), "250 élèves", TOUT_C, UP, fs=30)
             l0 = sc.ligne_rep(0, ["45 ÷", "0,18 =", "250 élèves."])
-            l1 = sc.ligne_rep(1, ["B : 45 ×", "0,18 ;", "C : + 18 %", "à 45."])
+            l1 = sc.ligne_rep(1, ["B : 45 ×", "0,18 ;"])
+            l1 = VGroup(*l1, *sc.ligne_rep(2, ["C : + 18 %", "à 45."]))
             sc.montre("45 divisé", FadeIn(l0[0], shift=UP * 0.15), rt=0.3)
             sc.montre("par 0,18", FadeIn(l0[1], shift=UP * 0.15), rt=0.3)
             sc.montre("égale 250", FadeIn(l0[2], scale=1.3), FadeIn(b.plein), FadeOut(b.q), GrowFromCenter(a2),
@@ -402,7 +413,7 @@ class PropLyceeToutPartieBase(PropPourcentageCoefficientBase):
         self.question_pause("05-question", "05b-reponse",
                             ["18 % des élèves d'un lycée", "font du théâtre : 45 élèves.", "Combien d'élèves en tout ?"],
                             [self.t("250", 34), self.t("8,1", 34), self.t("53,1", 34)], 0,
-                            ["45 ÷ 0,18 = 250 élèves.", "B : 45 × 0,18 ; C : + 18 % à 45."],
+                            ["45 ÷ 0,18 = 250 élèves.", "B : 45 × 0,18 ;", "C : + 18 % à 45."],
                             mot_q="18 %", avant_q=avant, autres_q=pendant, autres_r=apres)
         self.XL = 0.95
 
@@ -444,9 +455,9 @@ class PropLyceeToutPartieBase(PropPourcentageCoefficientBase):
         self.clear()
         self.add_mascotte()
         self.colonne_large()
-        vo = voiture(0.8).move_to(P(-5.0, 1.55))
-        ca = camion(0.8).move_to(P(-2.9, 1.65))
-        b = BarreTout(0.331, largeur=4.8, h=0.7, centre=P(-3.9, -0.55))
+        vo = voiture(0.8).move_to(P(-5.0, 2.15))
+        ca = camion(0.8).move_to(P(-2.9, 2.25))
+        b = BarreTout(0.331, largeur=4.8, h=0.7, centre=P(-3.9, 0.0))
 
         def avant(sc):
             sc.play(FadeIn(vo, shift=RIGHT * 0.3), FadeIn(ca, shift=LEFT * 0.3), FadeIn(b.reste), FadeIn(b.part),
@@ -461,7 +472,7 @@ class PropLyceeToutPartieBase(PropPourcentageCoefficientBase):
         def apres(sc):
             a2, v2 = sc.accolade(VGroup(b.part, b.reste), "≈ 396 Mt", TOUT_C, UP, fs=30)
             l0 = sc.ligne_rep(0, ["131,2 ÷", "0,331 ≈", "396 Mt."])
-            l1 = sc.ligne_rep(1, ["B multiplie ;", "C ajoute", "33,1 %."])
+            l1 = VGroup(*sc.ligne_rep(1, ["B multiplie ;"]), *sc.ligne_rep(2, ["C ajoute", "33,1 %."]))
             sc.montre("131,2 divisé", FadeIn(l0[0], shift=UP * 0.15), rt=0.3)
             sc.montre("par 0,331", FadeIn(l0[1], shift=UP * 0.15), rt=0.3)
             sc.montre("environ 396", FadeIn(l0[2], scale=1.3), FadeIn(b.plein), FadeOut(b.q), GrowFromCenter(a2),
@@ -474,7 +485,7 @@ class PropLyceeToutPartieBase(PropPourcentageCoefficientBase):
         self.question_pause("07-question", "07b-reponse",
                             ["En 2022 : 131,2 Mt,", "soit 33,1 % du total.", "Quel était le total ?"],
                             [self.t("396 Mt", 34), self.t("43 Mt", 34), self.t("175 Mt", 34)], 0,
-                            ["131,2 ÷ 0,331 ≈ 396 Mt.", "B multiplie ; C ajoute 33,1 %."],
+                            ["131,2 ÷ 0,331 ≈ 396 Mt.", "B multiplie ;", "C ajoute 33,1 %."],
                             mot_q="En 2022", avant_q=avant, autres_q=pendant, autres_r=apres)
         self.XL = 0.95
 

@@ -196,6 +196,25 @@ class PropLyceeFormesBase(PropPourcentageCoefficientBase):
         s._bloc = True
         return sans(s).to_corner(DL, buff=0.45)
 
+    # ⭐ 03/11 (défauts) : la phrase de réponse des questions-pauses en 34
+    # (lisible du fond de la classe), à GAUCHE sous la figure : à droite,
+    # sous les cartes, elle butait sur Ti-Margo.
+    Y_PH = -1.35
+
+    def _disposer_q(self, question, choix, phrase):
+        tete, q, cartes, pause, rebours, ph = super()._disposer_q(question, choix, phrase)
+        ph2 = VGroup(*[self.t(x, 34, VERT_OK) for x in phrase]).arrange(DOWN, aligned_edge=LEFT, buff=0.16)
+        if ph2.width > 6.6:
+            ph2.scale_to_fit_width(6.6)
+        ph2.align_to(P(-6.15, 0), LEFT).align_to(P(0, self.Y_PH), UP)
+        self.ph_q = ph2
+        return tete, q, cartes, pause, rebours, ph2
+
+    def ligne_rep(self, i, morceaux, fs=34):
+        ref = self.ph_q[i]
+        lg = self.ligne([(m, VERT_OK) for m in morceaux], fs, buff=0.14)
+        return lg.move_to(ref).align_to(ref, LEFT)
+
     @staticmethod
     def frac(num, den, fs=56, couleur=WHITE):
         return EcritureFraction(num, den, fs=fs, couleur=couleur)
@@ -268,7 +287,8 @@ class PropLyceeFormesBase(PropPourcentageCoefficientBase):
         f = self.frac(3, 100, 58, JAUNE_TITRE).move_to(P(-1.0, Y))
         f_, nf = carte_ecriture(f, "fraction", JAUNE_TITRE)
         self.montre("En fraction", FadeIn(nf), rt=0.3)
-        self.montre(("3 sur 100", 2), FadeIn(f, scale=1.3), rt=0.45)
+        self.montre(("3 sur 100", 2), FadeIn(f.num, scale=1.3), Create(f.trait), rt=0.2)
+        self.montre("100. En nombre", FadeIn(f.den, scale=1.3), rt=0.25)  # le « 100 » à son mot
         d = gras("0,03", 60, AMBRE).move_to(P(1.95, Y))
         d_, nd = carte_ecriture(d, "nombre décimal", AMBRE)
         self.montre("En nombre", FadeIn(nd), rt=0.3)
@@ -355,10 +375,12 @@ class PropLyceeFormesBase(PropPourcentageCoefficientBase):
         self.montre("glaciers", FadeIn(gl, shift=UP * 0.2), rt=0.4)
         self.montre("calottes", FadeIn(cp, shift=UP * 0.2), rt=0.4)
         L3 = self.lc([("2 ÷ 3", WHITE), ("≈ 0,67", AMBRE)], 0.6, fs=46, xl=xl)
-        self.jouer(L3, ["2 divisé", "0,67"])
-        L4 = self.lc([("soit ≈", WHITE), ("67 %", VERT_OK)], -0.3, fs=46, xl=xl)
         f23 = self.frac(2, 3, 34, GLACE).next_to(tg, RIGHT, buff=0.3)
-        self.jouer(L4, ["soit environ", "67 %"], {1: [FadeIn(f23, scale=1.3)]})
+        self.jouer(VGroup(L3[0]), ["2 divisé"], {0: [FadeIn(f23.num, scale=1.3), Create(f23.trait)]})
+        self.montre("3, égale", FadeIn(f23.den, scale=1.3), rt=0.2)  # 2/3 au « 2 », au « 3 » (plus 5 s après)
+        self.jouer(VGroup(L3[1]), ["0,67"])
+        L4 = self.lc([("soit ≈", WHITE), ("67 %", VERT_OK)], -0.3, fs=46, xl=xl)
+        self.jouer(L4, ["soit environ", "67 %"])
         self.play(Create(self.cadre(L4[1])), run_time=0.3)
         self.insister(L4[1], 1.2, 0.2)
         self.attendre_voix()
@@ -373,7 +395,7 @@ class PropLyceeFormesBase(PropPourcentageCoefficientBase):
             sc.play(FadeIn(b4, shift=UP * 0.2), run_time=0.4)
 
         def apres(sc):
-            gr = Grille100(0.22, centre=P(-3.7, -1.05))
+            gr = Grille100(0.17, centre=P(-3.7, -0.1))
             l0 = sc.ligne_rep(0, ["3 ÷ 4 =", "0,75 ;"])
             l0b = sc.ligne_rep(1, ["× 100 :", "75 %."])
             l1 = sc.ligne_rep(2, ["A, C :", "chiffres collés."])
@@ -415,22 +437,22 @@ class PropLyceeFormesBase(PropPourcentageCoefficientBase):
         L3 = self.lc([("= 30 %", TRENTE)], 0.5, fs=40, xl=xl + 0.85)
         self.jouer(L3, ["donc 30"], {0: [FadeIn(e30, scale=1.3)]})
         L4 = self.lc([("3 % =", DOUCE), ("0,03", AMBRE)], -0.35, fs=40, xl=xl)
+        # la virgule recule de deux rangs : 3, → 0,03 (le « 3, » posé au « 3 % » qui le dit)
+        Yv, xs = -2.45, (-4.4, -3.6, -2.8)
+        trois = gras("3", 54, AMBRE).move_to(P(xs[2], Yv))
+        vg = gras(",", 54, AMBRE).move_to(P(xs[2] + 0.4, Yv - 0.15))
         self.au_mot("3 %", 2)
         self.play(FadeIn(L4[0], shift=RIGHT * 0.15), FadeIn(g3, scale=0.9), *g3.colorer(range(3), DOUCE),
-                  FadeIn(e3, scale=1.3), run_time=0.45)
+                  FadeIn(e3, scale=1.3), FadeIn(trois), FadeIn(vg), run_time=0.45)
         self.au_mot("0,03")
         self.play(FadeIn(L4[1], scale=1.3), run_time=0.35)
         L5 = self.lc([("dix fois moins !", VERT_OK)], -1.1, fs=40, xl=xl)
         self.jouer(L5, ["dix fois"], {0: [Indicate(g30.cases_de(range(30)), color=TRENTE, scale_factor=1.05),
                                           Indicate(g3.cases_de(range(3)), color=AMBRE, scale_factor=1.6)]})
-        # la virgule recule de deux rangs : 3, → 0,03
-        Yv, xs = -2.45, (-4.4, -3.6, -2.8)
         z0 = sans(gras("0", 54, WHITE)).move_to(P(xs[0], Yv))
         z1 = sans(gras("0", 54, WHITE)).move_to(P(xs[1], Yv))
-        trois = gras("3", 54, AMBRE).move_to(P(xs[2], Yv))
-        vg = gras(",", 54, AMBRE).move_to(P(xs[2] + 0.4, Yv - 0.15))
         dv = gras("÷ 100", 36, VERT_OK).move_to(P(-5.75, Yv))
-        self.montre("Diviser par 100", FadeIn(dv, shift=RIGHT * 0.15), FadeIn(trois), FadeIn(vg), rt=0.4)
+        self.montre("Diviser par 100", FadeIn(dv, shift=RIGHT * 0.15), rt=0.4)
         arcs = VGroup(*[ArcBetweenPoints(P(x0 + 0.4, Yv + 0.5), P(x0 - 0.4, Yv + 0.5), angle=-PI * 0.7,
                                          color=VERT_OK, stroke_width=5) for x0 in (xs[2], xs[1])])
         self.au_mot("décaler")
@@ -447,13 +469,13 @@ class PropLyceeFormesBase(PropPourcentageCoefficientBase):
     def ecran_question2(self):
         self.clear()
         self.add_mascotte()
-        g = goutte(0.5).move_to(P(-3.7, 1.75))
+        g = goutte(0.5).move_to(P(-3.7, 2.0))
 
         def avant(sc):
             sc.play(FadeIn(g, shift=DOWN * 0.3), run_time=0.4)
 
         def apres(sc):
-            gr = Grille100(0.22, centre=P(-3.7, -1.05))
+            gr = Grille100(0.17, centre=P(-3.7, -0.1))
             l0 = sc.ligne_rep(0, ["8 ÷ 100 =", "0,08."])
             l1 = sc.ligne_rep(1, ["A : 80 % ;", "C : 800 %."])
             sc.montre("8 divisé", FadeIn(l0[0], shift=UP * 0.15), FadeIn(gr, scale=0.9), rt=0.4)
@@ -479,17 +501,19 @@ class PropLyceeFormesBase(PropPourcentageCoefficientBase):
         self.jouer(L1, ["Un :", "1 sur 8"], {1: [FadeIn(b8, shift=UP * 0.2)]})
         L2 = self.lc([("en décimal ?", AMBRE), ("en % ?", DOUCE)], 1.35, fs=40, xl=xl + 0.5)
         self.jouer(L2, ["décimal", "pourcentage"])
-        L3 = self.lc([("Deux :", AMBRE), ("l'intrus de", WHITE), ("2 sur 5 ?", WHITE)], 0.25, fs=42, xl=xl)
-        self.jouer(L3, ["Deux", "laquelle", "2 sur 5"], {2: [FadeIn(b5, shift=UP * 0.2)]})
+        # 03/11 : sur deux lignes (sur une seule, elle était réduite à ~28)
+        L3 = self.lc([("Deux :", AMBRE), ("l'intrus de", WHITE)], 0.35, fs=42, xl=xl)
+        L3b = self.lc([("2 sur 5 ?", WHITE)], -0.35, fs=42, xl=xl + 1.45)
+        self.jouer(VGroup(L3[0], L3[1], L3b[0]), ["Deux", "laquelle", "2 sur 5"], {2: [FadeIn(b5, shift=UP * 0.2)]})
         cartes = VGroup()
         for s, x, mot in (("0,4", 1.2, "0,4"), ("40 %", 3.1, "40 %"), ("2,5 %", 5.0, "2,5 %")):
             t = gras(s, 34, WHITE)
             c = RoundedRectangle(width=1.75, height=0.85, corner_radius=0.12, stroke_color=GREY_B, stroke_width=3,
-                                 fill_color="#0f172a", fill_opacity=1).move_to(P(x, -0.75))
+                                 fill_color="#0f172a", fill_opacity=1).move_to(P(x, -1.2))
             t.move_to(c)
             cartes.add(VGroup(c, t))
             self.montre(mot, FadeIn(c), FadeIn(t, scale=1.3), rt=0.35)
-        self.pause_defi(y=-2.0)
+        self.pause_defi(y=-2.2)
 
     def ecran_correction(self):
         self.ecran("08b-correction", 0.65)

@@ -163,6 +163,36 @@ class PropLyceePartieToutBase(PropPourcentageCoefficientBase):
     XB = -2.7      # le centre des barres (largeur 6) ; la colonne de calcul à droite
     XC = 1.3
 
+    # Défauts repris le 03/11 : les questions-pauses dans une colonne plus
+    # large (bord gauche XL_Q au lieu de 0,95) et resserrée en hauteur, pour
+    # que l'énoncé (36) et la phrase de réponse (34) ne soient plus réduits.
+    XL_Q = -1.3
+
+    def question_pause(self, *a, **k):
+        xl, self.XL, self._en_q = self.XL, self.XL_Q, True
+        try:
+            return super().question_pause(*a, **k)
+        finally:
+            self.XL, self._en_q = xl, False
+
+    def bloc(self, lignes, fs=38, color=WHITE, buff=0.14):
+        if getattr(self, "_en_q", False):
+            fs, buff = max(fs, 34), 0.1
+        return super().bloc(lignes, fs, color, buff)
+
+    def _disposer_q(self, question, choix, phrase):
+        tete, q, cartes, pause, rebours, ph = super()._disposer_q(question, choix, phrase)
+        for c in cartes:  # cartes moins hautes (0,66) : la place des 4 lignes de la question 2
+            c[0].stretch_to_fit_height(0.66)
+            c[1].move_to(c[0]).align_to(c[0].get_left() + RIGHT * 0.2, LEFT)
+        cartes.arrange(DOWN, buff=0.1).next_to(q, DOWN, buff=0.2).align_to(P(self.XL, 0), LEFT)
+        pause.next_to(cartes, DOWN, buff=0.3).align_to(P(self.XL, 0), LEFT)
+        ph.next_to(cartes, DOWN, buff=0.2).align_to(P(self.XL, 0), LEFT)
+        return tete, q, cartes, pause, rebours, ph
+
+    def ligne_rep(self, i, morceaux, fs=None):
+        return super().ligne_rep(i, morceaux, fs or 34)
+
     # ── les outils de l'épisode ─────────────────────────────────────────────
     @staticmethod
     def part_barre(b, k, couleur=BLEU_C):
@@ -307,7 +337,13 @@ class PropLyceePartieToutBase(PropPourcentageCoefficientBase):
         u = np.array([np.cos(ang), np.sin(ang), 0])
         st = station(0.5).move_to(c + 2.35 * u)
         f_st = fleche_force(c + 2.35 * u, -u * 0.9)
-        t_st = gras("720 N", 28, FORCE).next_to(st, UP, buff=0.12)
+        t_st = gras("720 N", 28, FORCE)
+
+        def suivre(m):  # « 720 N » suit la station, devant elle, côté Terre (03/11)
+            v = st.get_center() - c
+            r = v / np.linalg.norm(v)
+            m.move_to(st.get_center() + 1.05 * np.array([-r[1], r[0], 0]) - 0.3 * r)
+        suivre(t_st)
         L1 = self.lc([("720 N :", FORCE)], 2.6, fs=44, xl=1.1)
         self.jouer(L1, ["720 newtons"], {0: [FadeIn(st, scale=0.7), GrowArrow(f_st), FadeIn(t_st, scale=1.3)]})
         L2 = self.lc([("presque autant", WHITE), ("qu'au sol !", WHITE)], 1.85, fs=40, xl=1.1)
@@ -320,11 +356,13 @@ class PropLyceePartieToutBase(PropPourcentageCoefficientBase):
         L6 = self.lc([("de la Terre !", VERT_OK)], -1.65, fs=40, xl=1.1)
         self.jouer(L4, ["la station"])
         self.au_mot("tombe")
-        self.play(FadeOut(t_st), FadeIn(L5, shift=RIGHT * 0.15),
+        t_st.add_updater(suivre)
+        self.play(FadeIn(L5, shift=RIGHT * 0.15),
                   Rotate(VGroup(st, f_st), angle=PI, about_point=c, rate_func=linear), run_time=1.0)
         self.au_mot("de la Terre")
         self.play(FadeIn(L6, shift=RIGHT * 0.15),
                   Rotate(VGroup(st, f_st), angle=PI, about_point=c, rate_func=linear), run_time=1.0)
+        t_st.clear_updaters()
         self.attendre_voix()
 
     # ── 05 : QUESTION 1 (Mars, 38 % de 800 N → 304 N) ───────────────────────
@@ -338,7 +376,7 @@ class PropLyceePartieToutBase(PropPourcentageCoefficientBase):
             sc.play(FadeIn(ma, scale=0.7), FadeIn(nm), run_time=0.4)
 
         def apres(sc):
-            b = BarreCent("", largeur=5.0, h=0.65, centre=P(-3.6, -1.3))
+            b = BarreCent("", largeur=4.4, h=0.65, centre=P(-4.0, -1.3))
             p = sc.part_barre(b, 3.8, MARS_C)
             ap, tp = b.dessous(p, "304 N", VERT_OK, fs=28)
             a8, t8 = sc.accolade(b.bp.piste, "800 N", JAUNE_TITRE, fs=28)
@@ -392,35 +430,36 @@ class PropLyceePartieToutBase(PropPourcentageCoefficientBase):
     def ecran_question2(self):
         self.clear()
         self.add_mascotte()
-        lu = planete(0.8, LUNE_C, "#6b7280").move_to(P(-5.0, 1.75))
+        lu = planete(0.8, LUNE_C, "#6b7280").move_to(P(-5.3, 1.75))
         nl = sans(self.t("la Lune", 30, LUNE_C)).next_to(lu, DOWN, buff=0.15)
-        rb = robot(0.85).move_to(P(-2.6, 1.6))
+        rb = robot(0.85).move_to(P(-3.0, 1.6))
 
         def avant(sc):
             sc.play(FadeIn(lu, scale=0.7), FadeIn(nl), FadeIn(rb, shift=LEFT * 0.3), run_time=0.4)
 
         def apres(sc):
-            b = BarreCent("", largeur=5.0, h=0.65, centre=P(-3.6, -1.3))
+            b = BarreCent("", largeur=4.4, h=0.65, centre=P(-4.0, -1.3))
             p = sc.part_barre(b, 1.65, LUNE_C)
             a1, t1 = sc.accolade(b.bp.piste, "10 000 N", JAUNE_TITRE, fs=28)
             ap, tp = b.dessous(p, "1 650 N", VERT_OK, fs=28)
             tp.align_to(b.bp.piste, LEFT)
             l0 = sc.ligne_rep(0, ["0,165 ×", "10 000 =", "1 650 N."])
-            l1 = sc.ligne_rep(1, ["B : la virgule ;", "C : ce qui manque,", "83,5 %."])
+            l1 = sc.ligne_rep(1, ["B : la virgule ;"])
+            l2 = sc.ligne_rep(2, ["C : ce qui manque,", "83,5 %."])
             sc.montre("0,165 fois", FadeIn(l0[0], shift=UP * 0.15), FadeIn(b, shift=UP * 0.2), rt=0.4)
             sc.montre("fois 10 000", FadeIn(l0[1], shift=UP * 0.15), GrowFromCenter(a1), FadeIn(t1), rt=0.35)
             sc.montre("égale 1 650", FadeIn(l0[2], scale=1.3), FadeIn(p), GrowFromCenter(ap), FadeIn(tp, scale=1.3),
                       rt=0.45)
             sc.montre("B se trompe", FadeIn(l1[0], shift=UP * 0.15), Create(sc.barrer_choix(1)), rt=0.4)
-            sc.montre("C calcule", FadeIn(l1[1], shift=UP * 0.15), rt=0.35)
-            sc.montre("83,5", FadeIn(l1[2], shift=UP * 0.15), Create(sc.barrer_choix(2)), rt=0.4)
+            sc.montre("C calcule", FadeIn(l2[0], shift=UP * 0.15), rt=0.35)
+            sc.montre("83,5", FadeIn(l2[1], shift=UP * 0.15), Create(sc.barrer_choix(2)), rt=0.4)
             sc.rep_fini()
 
         self.question_pause("07-question", "07b-reponse",
                             ["Sur la Lune : environ 16,5 %", "de la force sur Terre.",
-                             "Un robot : 10 000 N au sol. Sur la Lune ?"],
+                             "Un robot : 10 000 N au sol.", "Sur la Lune ?"],
                             [self.t("1 650 N", 34), self.t("165 N", 34), self.t("8 350 N", 34)], 0,
-                            ["0,165 × 10 000 = 1 650 N.", "B : la virgule ; C : ce qui manque, 83,5 %."],
+                            ["0,165 × 10 000 = 1 650 N.", "B : la virgule ;", "C : ce qui manque, 83,5 %."],
                             mot_q="Sur la Lune", avant_q=avant, autres_r=apres)
 
     # ── 08 : défi : une lycéenne de 60 kg (≈ 600 N) sur Mars et sur la Lune ─
@@ -508,18 +547,14 @@ class PropLyceePartieToutBase(PropPourcentageCoefficientBase):
         self.attendre_voix(marge=1.0)
 
     def construct(self):
-        self.page_de_garde()
-        self.ecran_situation()
-        self.ecran_tout()
-        self.ecran_calcul()
-        self.ecran_surprise()
-        self.ecran_question1()
-        self.ecran_piege()
-        self.ecran_question2()
-        self.ecran_defi()
-        self.ecran_correction()
-        self.ecran_finale()
-        self.page_abonnement("10-abonne")
+        import os
+        ecrans = ["page_de_garde", "ecran_situation", "ecran_tout", "ecran_calcul", "ecran_surprise", "ecran_question1", "ecran_piege", "ecran_question2", "ecran_defi", "ecran_correction", "ecran_finale"]
+        seuls = os.environ.get("ECRANS")  # mise au point : ECRANS=ecran_question1,ecran_question2
+        for e in ecrans:
+            if not seuls or e in seuls.split(","):
+                getattr(self, e)()
+        if not seuls:
+            self.page_abonnement("10-abonne")
 
 
 class PropLyceePartieToutPremiere(PropLyceePartieToutBase):

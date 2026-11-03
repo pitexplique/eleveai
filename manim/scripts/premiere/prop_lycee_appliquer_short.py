@@ -80,17 +80,33 @@ class PropLyceeAppliquerShort(ShortProp):
     fichier_marques = "prop_lycee_appliquer_short_marques.json"
     ceinture = "blanche"
 
+    # ⭐ 03/11 (défauts) : la phrase de réponse en 28 (et non 26), sous les cartes.
+    def _disposer_q(self, question, choix, phrase):
+        tete, q, cartes, pause, rebours, ph = super()._disposer_q(question, choix, phrase)
+        ph2 = VGroup(*[self.t(x, 28, VERT_OK) for x in phrase]).arrange(DOWN, buff=0.12)
+        if ph2.width > 4.1:
+            ph2.scale_to_fit_width(4.1)
+        ph2.next_to(cartes[0], DOWN, buff=0.3).set_x(0)  # à la place des cartes B et C, retirées à la réponse
+        self.ph_q = ph2
+        return tete, q, cartes, pause, rebours, ph2
+
+    def ligne_rep(self, i, morceaux, fs=28):
+        lg = self.ligne([(m, VERT_OK) for m in morceaux], fs, buff=0.14)
+        if lg.width > 4.1:
+            lg.scale_to_fit_width(4.1)
+        return lg.move_to(self.ph_q[i])
+
     def _rep_q(self, sc):
-        l0 = sc.ligne_rep(0, ["12 % de 25", "= 25 % de 12 :"])
-        l1 = sc.ligne_rep(1, ["le quart de 12", "= 3."])
-        bl = billes(4, 3).move_to(P(0, -1.0))  # à la place des cartes B et C (éteintes)
+        # 03/11 : la phrase sur trois lignes en 28, à la place des cartes B et C ; les billes dessous
+        l0 = VGroup(*sc.ligne_rep(0, ["12 % de 25"]), *sc.ligne_rep(1, ["= 25 % de 12 :"]))
+        l1 = sc.ligne_rep(2, ["le quart de 12", "= 3."])
+        bl = billes(4, 3).move_to(P(0, -2.15))
         sc.au_mot("12 % de 25")
-        sc.play(FadeIn(l0[0], shift=UP * 0.12), run_time=0.3)
+        sc.play(FadeIn(l0[0], shift=UP * 0.12), FadeOut(sc.cartes_q[1]), FadeOut(sc.cartes_q[2]), run_time=0.3)
         sc.au_mot("25 % de 12")
         sc.play(FadeIn(l0[1], shift=UP * 0.12), run_time=0.3)
         sc.au_mot("le quart")
-        sc.play(FadeIn(l1[0], shift=UP * 0.12), FadeOut(sc.cartes_q[1]), FadeOut(sc.cartes_q[2]), FadeIn(bl, scale=0.8),
-                run_time=0.35)
+        sc.play(FadeIn(l1[0], shift=UP * 0.12), FadeIn(bl, scale=0.8), run_time=0.35)
         sc.play(*[b.animate.set_fill(ALLUME, 1) for b in bl[0]], Circumscribe(bl[0], color=ALLUME, buff=0.08),
                 run_time=0.5)
         sc.au_mot("égale 3")
@@ -135,10 +151,13 @@ class PropLyceeAppliquerShort(ShortProp):
         self.au_mot("c'est pareil")
         self.play(FadeIn(egal, shift=DOWN * 0.1), run_time=0.35)
         L2 = self.ligne([("50", JAUNE_TITRE), ("%", EAU), ("de", WHITE), ("8", EAU)], 64, buff=0.32).move_to(P(0, -0.3))
+        k2 = min(1.0, 3.55 / L2.width)  # 03/11 : à 3 % des bords, même agrandie × 1,12 (BORD)
+        L2.scale(k2)
         n8, n50 = L1[0].copy(), L1[3].copy()
         self.add(n8, n50)
         self.au_mot("que 50")
-        self.play(n50.animate(path_arc=PI * 0.8).move_to(L2[0]), n8.animate(path_arc=PI * 0.8).move_to(L2[3]),
+        self.play(n50.animate(path_arc=PI * 0.8).scale(k2).move_to(L2[0]),
+                  n8.animate(path_arc=PI * 0.8).scale(k2).move_to(L2[3]),
                   run_time=1.0)
         self.play(FadeIn(VGroup(L2[1], L2[2]), shift=UP * 0.1), run_time=0.3)
         self.insister(VGroup(n50, L2[1], L2[2], n8), 1.12)
@@ -158,7 +177,7 @@ class PropLyceeAppliquerShort(ShortProp):
         # ── 02 : la question-pause (3 s) : 12 % de 25 ──
         self.question_pause("02-question", "02b-reponse", ["Combien font", "12 % de 25 ?"],
                             [self.t("3", 34), self.t("13", 34), self.t("0,3", 34)], 0,
-                            ["12 % de 25 = 25 % de 12 :", "le quart de 12 = 3."], mot_q="Combien font",
+                            ["12 % de 25", "= 25 % de 12 :", "le quart de 12 = 3."], mot_q="Combien font",
                             autres_r=self._rep_q)
         self.play(*[FadeOut(m) for m in self.mobjects if all(m is not k for k in garder)], run_time=0.4)
 

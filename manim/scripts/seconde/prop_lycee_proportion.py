@@ -118,6 +118,33 @@ class PropLyceeProportionBase(PropTableauBase4e):
     nom_voix = "seconde-prop-proportion"
     fichier_marques = "prop_lycee_proportion_marques.json"
 
+    # Défauts repris le 03/11 : les questions-pauses dans une colonne plus
+    # large (bord gauche XL_Q au lieu de 0,95), pour que l'énoncé (36) et la
+    # phrase de réponse (34) ne soient plus réduits ; lisibles du fond de la classe.
+    XL_Q = -1.3
+
+    def question_pause(self, *a, **k):
+        xl, self.XL, self._en_q = self.XL, self.XL_Q, True
+        try:
+            return super().question_pause(*a, **k)
+        finally:
+            self.XL, self._en_q = xl, False
+
+    def bloc(self, lignes, fs=38, color=WHITE, buff=0.14):
+        if getattr(self, "_en_q", False):
+            fs, buff = max(fs, 34), 0.1
+        return super().bloc(lignes, fs, color, buff)
+
+    def _disposer_q(self, question, choix, phrase):
+        tete, q, cartes, pause, rebours, ph = super()._disposer_q(question, choix, phrase)
+        cartes.arrange(DOWN, buff=0.1).next_to(q, DOWN, buff=0.15).align_to(P(self.XL, 0), LEFT)
+        pause.next_to(cartes, DOWN, buff=0.3).align_to(P(self.XL, 0), LEFT)
+        ph.next_to(cartes, DOWN, buff=0.14).align_to(P(self.XL, 0), LEFT)
+        return tete, q, cartes, pause, rebours, ph
+
+    def ligne_rep(self, i, morceaux, fs=None):
+        return super().ligne_rep(i, morceaux, fs or 34)
+
     def montre(self, mot, *anims, rt=0.4):
         """Au mot de la voix (str ou (str, n)), joue les animations."""
         if mot:
@@ -363,11 +390,11 @@ class PropLyceeProportionBase(PropTableauBase4e):
     def ecran_question2(self):
         self.clear()
         self.add_mascotte()
-        f = figure_terr(4.2, 2.4, centre=P(-3.85, 0.6))
+        f = figure_terr(4.2, 2.4, centre=P(-4.2, 0.6))
         f.foret.set_opacity(0.35)
         lt = sans(self.t("Territoire : 55 Mha", 24, TERR_B)).next_to(f.terr, DOWN, buff=0.15)
         n44 = sans(self.t("4,4", 22, NUIT)).move_to(f.pub)
-        lp = sans(self.t("forêt publique", 24, PUB)).next_to(f.terr, UP, buff=0.12).align_to(f.terr, LEFT)
+        lp = sans(self.t("forêt publique : 4,4 Mha", 26, PUB)).next_to(f.terr, UP, buff=0.15).align_to(f.terr, LEFT)
 
         def avant(sc):
             sc.play(FadeIn(f), FadeIn(lt), FadeIn(n44), FadeIn(lp), run_time=0.4)
@@ -461,18 +488,14 @@ class PropLyceeProportionBase(PropTableauBase4e):
         self.attendre_voix(marge=1.0)
 
     def construct(self):
-        self.page_de_garde()
-        self.ecran_situation()
-        self.ecran_calcul()
-        self.ecran_sous_population()
-        self.ecran_question1()
-        self.ecran_reference()
-        self.ecran_piege()
-        self.ecran_question2()
-        self.ecran_defi()
-        self.ecran_correction()
-        self.ecran_finale()
-        self.page_abonnement("10-abonne")
+        import os
+        ecrans = ["page_de_garde", "ecran_situation", "ecran_calcul", "ecran_sous_population", "ecran_question1", "ecran_reference", "ecran_piege", "ecran_question2", "ecran_defi", "ecran_correction", "ecran_finale"]
+        seuls = os.environ.get("ECRANS")  # mise au point : ECRANS=ecran_question1,ecran_question2
+        for e in ecrans:
+            if not seuls or e in seuls.split(","):
+                getattr(self, e)()
+        if not seuls:
+            self.page_abonnement("10-abonne")
 
 
 class PropLyceeProportionSeconde(PropLyceeProportionBase):
