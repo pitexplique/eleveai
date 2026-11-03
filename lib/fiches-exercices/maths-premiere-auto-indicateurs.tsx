@@ -58,6 +58,9 @@ export const exercicesAutoIndicateursPremiere: FicheExercicesData = {
           enonce: "Températures relevées à midi pendant cinq jours, en °C : $12$, $15$, $9$, $14$, $10$. Calculer la température moyenne.",
           correction:
             "On additionne les cinq valeurs : $12 + 15 + 9 + 14 + 10 = 60$.\nOn divise par leur nombre, $5$ : $\\dfrac{60}{5} = 12$ °C.\n⚠️ Le piège : faire la moyenne de la plus petite et de la plus grande, $\\dfrac{9 + 15}{2} = 12$. Ici on tombe juste par hasard ; en général, c'est faux.",
+          reponses: [
+            { attendu: "12" },
+          ],
           micros: ["auto_stat_moyenne"],
         },
         {
@@ -65,12 +68,18 @@ export const exercicesAutoIndicateursPremiere: FicheExercicesData = {
           correction:
             "On RANGE d'abord : $2$ ; $2$ ; $3$ ; $3$ ; $4$ ; $5$.\n$6$ valeurs, un nombre pair : la médiane est la moyenne des $3^e$ et $4^e$ valeurs.\n$\\dfrac{3 + 3}{2} = 3$. La médiane est $3$.\n⛔ Le piège : prendre les $3^e$ et $4^e$ valeurs SANS ranger, $5$ et $4$, et répondre $4{,}5$.",
           schema: tableau(["Rang", "1", "2", "3", "4", "5", "6"], ["Valeur", 2, 2, 3, 3, 4, 5]),
+          reponses: [
+            { attendu: "3" },
+          ],
           micros: ["auto_stat_mediane"],
         },
         {
           enonce: "Déterminer la médiane de la série : $8$, $13$, $5$, $11$, $16$, $7$, $10$.",
           correction:
             "On range : $5$, $7$, $8$, $10$, $11$, $13$, $16$.\n$7$ valeurs, un nombre impair : la médiane est la valeur du milieu, la $4^e$.\nLa médiane est $10$ : trois valeurs en dessous, trois au-dessus.\n⛔ Le piège : prendre la $4^e$ valeur de la liste telle qu'elle arrive, $11$.",
+          reponses: [
+            { attendu: "10" },
+          ],
           micros: ["auto_stat_mediane"],
         },
         {
@@ -78,6 +87,10 @@ export const exercicesAutoIndicateursPremiere: FicheExercicesData = {
           correction:
             "$Q_1$ : $\\dfrac{8}{4} = 2$. C'est la $2^e$ valeur : $Q_1 = 5$.\n$Q_3$ : $\\dfrac{3 \\times 8}{4} = 6$. C'est la $6^e$ valeur : $Q_3 = 11$.\n⭐ Au moins un quart des valeurs sont inférieures ou égales à $5$, au moins trois quarts à $11$.\n✔️ Au passage, la médiane : $\\dfrac{8 + 9}{2} = 8{,}5$.",
           schema: boite([{ min: 3, q1: 5, mediane: 8.5, q3: 11, max: 15 }], { min: 2, max: 16, step: 1 }),
+          reponses: [
+            { question: "Q1", attendu: "5" },
+            { question: "Q3", attendu: "11" },
+          ],
           micros: ["auto_stat_quartiles"],
         },
         {
@@ -85,6 +98,10 @@ export const exercicesAutoIndicateursPremiere: FicheExercicesData = {
           correction:
             "On range : $4$, $6$, $7$, $8$, $9$, $10$, $11$, $12$, $13$, $15$.\n$Q_1$ : $\\dfrac{10}{4} = 2{,}5$, arrondi à $3$. La $3^e$ valeur : $Q_1 = 7$.\n$Q_3$ : $\\dfrac{3 \\times 10}{4} = 7{,}5$, arrondi à $8$. La $8^e$ valeur : $Q_3 = 12$.\n⛔ Le piège : arrondir $2{,}5$ à $2$. Le rang d'un quartile s'arrondit TOUJOURS à l'entier supérieur.",
           schema: tableau(["Rang", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], ["Valeur", 4, 6, 7, 8, 9, 10, 11, 12, 13, 15], "ecran"),
+          reponses: [
+            { question: "Q1", attendu: "7" },
+            { question: "Q3", attendu: "12" },
+          ],
           micros: ["auto_stat_quartiles"],
         },
         {
@@ -93,6 +110,9 @@ export const exercicesAutoIndicateursPremiere: FicheExercicesData = {
           correction:
             "Effectif total : $2 + 5 + 2 + 1 = 10$ élèves.\nChaque note compte autant de fois que son effectif : $8 \\times 2 + 10 \\times 5 + 12 \\times 2 + 15 \\times 1 = 16 + 50 + 24 + 15 = 105$.\nMoyenne : $\\dfrac{105}{10} = 10{,}5$.\n⛔ Le piège : la moyenne des quatre notes, $\\dfrac{8 + 10 + 12 + 15}{4} = 11{,}25$. Elle compte autant le seul $15$ que les cinq $10$.",
           schema: tableau(["Note", "8", "10", "12", "15"], ["Note × effectif", 16, 50, 24, 15]),
+          reponses: [
+            { attendu: "10,5" },
+          ],
           micros: ["auto_stat_moyenne"],
         },
         {
@@ -100,12 +120,22 @@ export const exercicesAutoIndicateursPremiere: FicheExercicesData = {
           figure: boite([{ min: 5, q1: 8, mediane: 10, q3: 14, max: 20 }], { min: 4, max: 21, step: 1 }),
           correction:
             "Les bouts des moustaches : minimum $5$, maximum $20$.\nLes bords de la boîte : $Q_1 = 8$ et $Q_3 = 14$. Le trait dans la boîte : la médiane, $10$.\nÉcart interquartile : $Q_3 - Q_1 = 14 - 8 = 6$, la largeur de la boîte.\nÉtendue : $20 - 5 = 15$, d'un bout à l'autre.\n⛔ Le piège : prendre le trait de la boîte pour la MOYENNE. C'est la médiane ; la moyenne n'apparaît pas sur une boîte.",
+          reponses: [
+            { question: "min ; Q1 ; méd. ; Q3 ; max", attendu: "5 ; 8 ; 10 ; 14 ; 20", ordre: true },
+            { question: "écart interquartile", attendu: "6" },
+            { question: "étendue", attendu: "15" },
+          ],
           micros: ["auto_stat_boites"],
         },
         {
           enonce: "Dans une entreprise, le salaire MOYEN est de $2\\,800$ € et le salaire MÉDIAN de $2\\,100$ €. Vrai ou faux ?\na) La moitié des salariés gagnent au moins $2\\,800$ €.\nb) Au moins la moitié des salariés gagnent $2\\,100$ € ou moins.\nc) Quelques salaires très élevés tirent la moyenne vers le haut.",
           correction:
             "a) Faux. C'est la MÉDIANE qui coupe les salariés en deux moitiés, pas la moyenne.\nb) Vrai : c'est la définition de la médiane.\nc) Vrai : la moyenne dépasse la médiane de $700$ €. Il faut quelques gros salaires pour la faire monter si haut.\n⭐ C'est pour cela qu'on publie souvent le salaire MÉDIAN : il résiste aux valeurs extrêmes.",
+          reponses: [
+            { question: "a)", attendu: ["non", "faux"] },
+            { question: "b)", attendu: ["oui", "vrai"] },
+            { question: "c)", attendu: ["oui", "vrai"] },
+          ],
           micros: ["auto_stat_interpreter_indicateurs"],
         },
       ],
@@ -130,6 +160,9 @@ export const exercicesAutoIndicateursPremiere: FicheExercicesData = {
           correction:
             "On prend le CENTRE de chaque classe : $5$, $15$, $25$ et $35$ minutes.\nOn multiplie par les effectifs : $5 \\times 10 + 15 \\times 20 + 25 \\times 15 + 35 \\times 5 = 50 + 300 + 375 + 175 = 900$.\nOn divise par l'effectif total : $\\dfrac{900}{50} = 18$ minutes.\n⭐ C'est une ESTIMATION : on fait comme si chaque salarié était pile au centre de sa classe.\n⛔ Le piège : la moyenne des quatre centres, $\\dfrac{5 + 15 + 25 + 35}{4} = 20$. Elle oublie que $20$ salariés sont dans la classe $[10\\,;\\,20[$.",
           schema: tableau(["Centre (min)", "5", "15", "25", "35"], ["Centre × effectif", 50, 300, 375, 175]),
+          reponses: [
+            { attendu: "18" },
+          ],
           micros: ["auto_stat_moyenne"],
         },
         {
@@ -137,6 +170,9 @@ export const exercicesAutoIndicateursPremiere: FicheExercicesData = {
           enonce: "Une petite entreprise compte $20$ salariés, payés en moyenne $2\\,000$ € par mois. Elle embauche un ingénieur à $2\\,420$ €. Quel est le nouveau salaire moyen ?",
           correction:
             "On retrouve la masse salariale : $20 \\times 2\\,000 = 40\\,000$ €.\nOn ajoute le nouveau salaire : $40\\,000 + 2\\,420 = 42\\,420$ €.\nOn divise par le nouvel effectif, $21$ : $\\dfrac{42\\,420}{21} = 2\\,020$ €.\n✔️ Vérification : $21 \\times 2\\,020 = 42\\,000 + 420 = 42\\,420$.\n⛔ Le piège : $\\dfrac{2\\,000 + 2\\,420}{2} = 2\\,210$ €. Le nouveau venu ne pèse qu'un salaire sur $21$.",
+          reponses: [
+            { attendu: "2020 €" },
+          ],
           micros: ["auto_stat_moyenne"],
         },
         {
@@ -153,6 +189,11 @@ export const exercicesAutoIndicateursPremiere: FicheExercicesData = {
             { label: "6", value: 720 },
             { label: "7", value: 2460 },
           ], 6),
+          reponses: [
+            { question: "a) moyenne", attendu: "900 €" },
+            { question: "a) médiane", attendu: "650 €" },
+            { question: "b)", attendu: ["la médiane", "médiane"] },
+          ],
           micros: ["auto_stat_moyenne", "auto_stat_mediane", "auto_stat_interpreter_indicateurs"],
         },
         {
@@ -161,6 +202,12 @@ export const exercicesAutoIndicateursPremiere: FicheExercicesData = {
           correction:
             "On range : $3$, $4$, $4$, $5$, $5$, $6$, $7$, $8$, $9$, $10$, $12$, $15$.\na) $12$ valeurs : la médiane est la moyenne des $6^e$ et $7^e$, $\\dfrac{6 + 7}{2} = 6{,}5$ minutes.\n$\\dfrac{12}{4} = 3$ : $Q_1$ est la $3^e$ valeur, $Q_1 = 4$. $\\dfrac{3 \\times 12}{4} = 9$ : $Q_3$ est la $9^e$ valeur, $Q_3 = 9$.\nb) $Q_3 - Q_1 = 9 - 4 = 5$ minutes : la moitié centrale des appels dure entre $4$ et $9$ minutes.\nLa boîte va de $4$ à $9$, les moustaches de $3$ à $15$.\n⚠️ La moustache de droite est longue : quelques appels durent beaucoup plus que les autres.",
           schema: boite([{ min: 3, q1: 4, mediane: 6.5, q3: 9, max: 15 }], { min: 2, max: 16, step: 1 }),
+          reponses: [
+            { question: "a) médiane", attendu: "6,5" },
+            { question: "a) Q1", attendu: "4" },
+            { question: "a) Q3", attendu: "9" },
+            { question: "b)", attendu: "5" },
+          ],
           micros: ["auto_stat_quartiles", "auto_stat_boites"],
         },
         {
@@ -175,6 +222,13 @@ export const exercicesAutoIndicateursPremiere: FicheExercicesData = {
           ),
           correction:
             "a) On lit le trait dans chaque boîte : $18$ pour A, $22$ pour B. Médianes : $1\\,800$ € et $2\\,200$ €. C'est B.\nb) A : $22 - 16 = 6$, soit $600$ €. B : $24 - 20 = 4$, soit $400$ €. Les salaires du milieu sont plus resserrés dans B.\nc) Dans B : $Q_1 = 20$. Au plus un quart des salariés gagnent moins de $2\\,000$ €, donc au moins $75$ % gagnent $2\\,000$ € ou plus.\nd) Dans A : sa moustache va jusqu'à $40$, soit $4\\,000$ €.\n⭐ A a le plus haut salaire, mais B paie mieux la plupart de ses salariés. Deux indicateurs, deux réponses.\n⚠️ On traduit l'unité : « $22$ » veut dire $2\\,200$ €.",
+          reponses: [
+            { question: "a)", attendu: "B" },
+            { question: "b) A", attendu: ["6", "600 €"] },
+            { question: "b) B", attendu: ["4", "400 €"] },
+            { question: "c)", attendu: "B" },
+            { question: "d)", attendu: "A" },
+          ],
           micros: ["auto_stat_boites", "auto_stat_interpreter_indicateurs"],
         },
         {
@@ -183,6 +237,12 @@ export const exercicesAutoIndicateursPremiere: FicheExercicesData = {
           figure: tableau(["Jours d'absence", "0", "1", "2", "3", "4"], ["Effectif", 8, 6, 5, 4, 2]),
           correction:
             "On cumule les effectifs : $8$, $14$, $19$, $23$, $25$.\na) $25$ valeurs : la médiane est la $13^e$. Les rangs $9$ à $14$ valent $1$ : la médiane est $1$ jour.\n$\\dfrac{25}{4} = 6{,}25$, arrondi à $7$ : la $7^e$ valeur est $0$, donc $Q_1 = 0$.\n$\\dfrac{3 \\times 25}{4} = 18{,}75$, arrondi à $19$ : les rangs $15$ à $19$ valent $2$, donc $Q_3 = 2$.\nb) $0 \\times 8 + 1 \\times 6 + 2 \\times 5 + 3 \\times 4 + 4 \\times 2 = 0 + 6 + 10 + 12 + 8 = 36$ jours en tout.\nMoyenne : $\\dfrac{36}{25} = \\dfrac{144}{100} = 1{,}44$ jour.\n⛔ Le piège au a) : prendre la valeur du milieu du TABLEAU, $2$. On cherche le salarié du milieu, pas la colonne du milieu.",
+          reponses: [
+            { question: "a) médiane", attendu: "1" },
+            { question: "a) Q1", attendu: "0" },
+            { question: "a) Q3", attendu: "2" },
+            { question: "b)", attendu: "1,44" },
+          ],
           micros: ["auto_stat_mediane", "auto_stat_quartiles", "auto_stat_moyenne"],
         },
         {
@@ -190,6 +250,9 @@ export const exercicesAutoIndicateursPremiere: FicheExercicesData = {
           enonce: "Dans un pays (modèle), le patrimoine MÉDIAN des ménages est de $180\\,000$ € et le patrimoine MOYEN de $300\\,000$ €.\na) Que signifie la médiane, en une phrase ?\nb) Pourquoi la moyenne est-elle beaucoup plus grande ?\nc) Un article écrit : « le ménage typique possède $300\\,000$ € ». Est-ce juste ?",
           correction:
             "a) La moitié des ménages possèdent $180\\,000$ € ou moins, l'autre moitié $180\\,000$ € ou plus.\nb) Quelques ménages très riches ont des patrimoines énormes : ils tirent la moyenne vers le haut, pas la médiane.\nc) Non. Plus de la moitié des ménages possèdent moins de $300\\,000$ € (la médiane est bien en dessous). Le ménage « typique » est mieux décrit par la médiane.\n⭐ Quand la moyenne dépasse nettement la médiane, c'est le signe de quelques valeurs très grandes : les inégalités se lisent dans cet écart.",
+          reponses: [
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           micros: ["auto_stat_interpreter_indicateurs"],
         },
         {
@@ -198,6 +261,13 @@ export const exercicesAutoIndicateursPremiere: FicheExercicesData = {
           correction:
             "a) Somme : $144$. Moyenne : $\\dfrac{144}{12} = 12$ °C.\nb) On range : $4$, $4$, $5$, $8$, $8$, $11$, $13$, $15$, $17$, $18$, $20$, $21$.\nMédiane : $\\dfrac{11 + 13}{2} = 12$ °C. $Q_1$ : rang $3$, $Q_1 = 5$ °C. $Q_3$ : rang $9$, $Q_3 = 17$ °C.\nc) Les valeurs de rang $9$ à $12$ sont au moins égales à $Q_3$ : au moins un quart des mois ont au moins $17$ °C.\n⭐ Ici moyenne et médiane coïncident, $12$ °C : aucune valeur extrême ne tire la moyenne.\n⚠️ On range AVANT de chercher les rangs : l'ordre des mois n'est pas l'ordre des températures.",
           schema: boite([{ min: 4, q1: 5, mediane: 12, q3: 17, max: 21 }], { min: 2, max: 22, step: 2 }),
+          reponses: [
+            { question: "a)", attendu: "12" },
+            { question: "b) médiane", attendu: "12" },
+            { question: "b) Q1", attendu: "5" },
+            { question: "b) Q3", attendu: "17" },
+            { question: "c)", attendu: "17" },
+          ],
           micros: ["auto_stat_moyenne", "auto_stat_mediane", "auto_stat_quartiles", "auto_stat_interpreter_indicateurs"],
         },
       ],
@@ -222,6 +292,16 @@ export const exercicesAutoIndicateursPremiere: FicheExercicesData = {
           // ⛔ Axe de 2 000 en 2 000 (5 étiquettes) : à 375 px, les nombres
           // serrés autour de la boîte se touchaient (mesuré le 28/09).
           schema: boite([{ min: 1600, q1: 1700, mediane: 1900, q3: 2100, max: 7300 }], { min: 0, max: 8000, step: 2000 }),
+          reponses: [
+            { question: "a) moyenne", attendu: "2500 €" },
+            { question: "a) médiane", attendu: "1900 €" },
+            { question: "b)", attendu: "8" },
+            { question: "c) Q1", attendu: "1700 €" },
+            { question: "c) Q3", attendu: "2100 €" },
+            { question: "c) écart", attendu: "400 €" },
+            { question: "d) moyenne", attendu: "2600 €" },
+            { question: "d) médiane", attendu: "1900 €" },
+          ],
           micros: ["auto_stat_moyenne", "auto_stat_mediane", "auto_stat_quartiles", "auto_stat_interpreter_indicateurs", "auto_stat_boites"],
         },
         {
@@ -236,6 +316,14 @@ export const exercicesAutoIndicateursPremiere: FicheExercicesData = {
           ),
           correction:
             "a) Même médiane, $12$ € le m² : la moitié des appartements de chaque quartier sont à $12$ € ou moins.\nb) Écarts interquartiles : Nord $13 - 10 = 3$, Sud $16 - 11 = 5$. Au centre, le Sud est plus dispersé.\nÉtendues : Nord $20 - 8 = 12$, Sud $18 - 9 = 9$. Aux extrêmes, c'est le Nord.\nc) Au Nord, $Q_3 = 13$ : au moins $75$ % des appartements sont à $13$ € ou moins.\nAu Sud, $13$ est entre la médiane et $Q_3$ : on est sûr d'au moins $50$ % seulement. C'est le Nord.\nd) Non : une boîte donne cinq nombres, jamais la moyenne.\n⭐ Même médiane, deux quartiers très différents : un seul nombre ne suffit pas.",
+          reponses: [
+            { question: "b) EI Nord", attendu: "3" },
+            { question: "b) EI Sud", attendu: "5" },
+            { question: "b) étendue Nord", attendu: "12" },
+            { question: "b) étendue Sud", attendu: "9" },
+            { question: "c)", attendu: ["Nord", "le Nord"] },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           micros: ["auto_stat_boites", "auto_stat_quartiles", "auto_stat_interpreter_indicateurs"],
         },
         {
@@ -249,6 +337,12 @@ export const exercicesAutoIndicateursPremiere: FicheExercicesData = {
           ]),
           correction:
             "a) Centres : $25$, $35$, $45$ et $55$ ans.\n$25 \\times 12 + 35 \\times 18 + 45 \\times 14 + 55 \\times 6 = 300 + 630 + 630 + 330 = 1\\,890$.\n$\\dfrac{1\\,890}{50} = 37{,}8$ ans (diviser par $50$, c'est multiplier par $2$ puis diviser par $100$).\nb) $50$ salariés : la médiane est entre le $25^e$ et le $26^e$. Effectifs cumulés : $12$, puis $30$. Ils sont dans la classe $[30\\,;\\,40[$.\nc) Chacun a $10$ ans de plus : la moyenne augmente aussi de $10$, soit environ $47{,}8$ ans.\nd) $\\dfrac{6}{50} = \\dfrac{12}{100} = 12$ %. Ce sont les prochains départs à la retraite : il faudra recruter ou former pour les remplacer.\n⚠️ Au a), c'est une ESTIMATION : on a remplacé chaque âge par le centre de sa classe.",
+          reponses: [
+            { question: "a)", attendu: "37,8" },
+            { question: "b)", attendu: ["[30 ; 40["] },
+            { question: "c)", attendu: "47,8" },
+            { question: "d)", attendu: "12 %" },
+          ],
           micros: ["auto_stat_moyenne", "auto_stat_mediane", "auto_stat_interpreter_indicateurs"],
         },
         {
@@ -268,6 +362,15 @@ export const exercicesAutoIndicateursPremiere: FicheExercicesData = {
             { label: "D9", value: 130 },
             { label: "D10", value: 1000 },
           ], 9),
+          reponses: [
+            { question: "a) moyenne", attendu: "140 €" },
+            { question: "a) médiane", attendu: "40 €" },
+            { question: "b) Q1", attendu: "20 €" },
+            { question: "b) Q3", attendu: "60 €" },
+            { question: "b) écart", attendu: "40 €" },
+            { question: "c) moyenne", attendu: "44 €", tolerance: 0.5 },
+            { question: "c) médiane", attendu: "40 €" },
+          ],
           micros: ["auto_stat_moyenne", "auto_stat_mediane", "auto_stat_quartiles", "auto_stat_interpreter_indicateurs"],
         },
       ],

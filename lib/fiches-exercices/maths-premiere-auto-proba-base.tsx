@@ -70,12 +70,18 @@ export const exercicesAutoProbaBasePremiere: FicheExercicesData = {
           enonce: "Parmi ces nombres, lesquels peuvent être des probabilités ?\n$0{,}7$ ; $1{,}2$ ; $-0{,}1$ ; $\\dfrac{3}{4}$ ; $\\dfrac{5}{4}$ ; $0$ ; $1$ ; $120$ %.",
           correction:
             "Une probabilité doit être comprise entre $0$ et $1$, bornes comprises.\nOui : $0{,}7$ ; $\\dfrac{3}{4} = 0{,}75$ ; $0$ (évènement impossible) ; $1$ (évènement certain).\nNon : $1{,}2$ et $\\dfrac{5}{4} = 1{,}25$ dépassent $1$ ; $-0{,}1$ est négatif ; $120$ % $= 1{,}2$ dépasse $1$.\n⚠️ Une fraction dont le numérateur dépasse le dénominateur est plus grande que $1$ : ce n'est jamais une probabilité.",
+          reponses: [
+            { attendu: "0,7 ; 3/4 ; 0 ; 1" },
+          ],
           micros: ["auto_proba_encadrement"],
         },
         {
           enonce: "La probabilité qu'un train arrive en retard est $0{,}15$. On suppose qu'un train est soit en retard, soit à l'heure. Quelle est la probabilité qu'il arrive à l'heure ?",
           correction:
             "« À l'heure » est l'évènement CONTRAIRE de « en retard » : l'un ou l'autre arrive, jamais les deux.\n$P(\\text{à l'heure}) = 1 - 0{,}15 = 0{,}85$.\n⭐ En pourcentage : $15$ % de retards, donc $85$ % de trains à l'heure.",
+          reponses: [
+            { attendu: "0,85" },
+          ],
           micros: ["auto_proba_contraire"],
         },
         {
@@ -83,6 +89,9 @@ export const exercicesAutoProbaBasePremiere: FicheExercicesData = {
           figure: tableau(["Face", "1", "2", "3", "4"], ["Probabilité", "0,1", "0,3", "0,2", "?"]),
           correction:
             "Les quatre faces sont TOUTES les issues : leurs probabilités font $1$.\n$0{,}1 + 0{,}3 + 0{,}2 = 0{,}6$.\n$P(4) = 1 - 0{,}6 = 0{,}4$.\n⭐ C'est la question tombée au sujet d'Asie, en juin 2026.\n⚠️ Le dé est truqué : on ne peut PAS répondre $\\dfrac{1}{4}$ « parce qu'il y a quatre faces ».",
+          reponses: [
+            { attendu: "0,4" },
+          ],
           micros: ["auto_proba_somme_issues"],
         },
         {
@@ -90,6 +99,9 @@ export const exercicesAutoProbaBasePremiere: FicheExercicesData = {
           correction:
             "Le dé est équilibré : les $6$ faces ont la même probabilité.\nLes multiples de $3$ entre $1$ et $6$ sont $3$ et $6$ : $2$ issues favorables.\n$P = \\dfrac{2}{6} = \\dfrac{1}{3}$.\n⚠️ Le piège : oublier $6$, qui est aussi un multiple de $3$ ($6 = 2 \\times 3$).",
           schema: de([3, 6]),
+          reponses: [
+            { attendu: "1/3" },
+          ],
           micros: ["auto_proba_equiprobabilite"],
         },
         {
@@ -101,6 +113,10 @@ export const exercicesAutoProbaBasePremiere: FicheExercicesData = {
           ]),
           correction:
             "Il y a $3 + 5 + 2 = 10$ billes, et chacune a la même chance d'être tirée.\na) $5$ billes bleues sur $10$ : $P(\\text{bleue}) = \\dfrac{5}{10} = \\dfrac{1}{2}$.\nb) $P(\\text{verte}) = \\dfrac{2}{10} = 0{,}2$, donc par le contraire $P(\\text{pas verte}) = 1 - 0{,}2 = 0{,}8$.\n✔️ Autre chemin : $3 + 5 = 8$ billes non vertes, et $\\dfrac{8}{10} = 0{,}8$.\n⭐ « Indiscernables » : c'est ce mot qui autorise l'équiprobabilité.",
+          reponses: [
+            { question: "a)", attendu: "1/2" },
+            { question: "b)", attendu: "0,8" },
+          ],
           micros: ["auto_proba_equiprobabilite", "auto_proba_contraire"],
         },
         {
@@ -112,18 +128,30 @@ export const exercicesAutoProbaBasePremiere: FicheExercicesData = {
           ]),
           correction:
             "a) Les $8$ secteurs sont égaux : chacun a la probabilité $\\dfrac{1}{8}$.\n$P(10\\text{ €}) = \\dfrac{1}{8}$, $P(2\\text{ €}) = \\dfrac{3}{8}$, $P(\\text{Perdu}) = \\dfrac{4}{8} = \\dfrac{1}{2}$.\n✔️ $\\dfrac{1}{8} + \\dfrac{3}{8} + \\dfrac{4}{8} = 1$.\nb) Gagner de l'argent, c'est « $10$ € » ou « $2$ € » : on additionne, $\\dfrac{1}{8} + \\dfrac{3}{8} = \\dfrac{4}{8} = \\dfrac{1}{2}$.\n⚠️ Le piège : $P(10\\text{ €}) = \\dfrac{1}{3}$ « parce qu'il y a trois issues ». Les trois issues n'ont pas la même taille.",
+          reponses: [
+            { question: "a)", attendu: "1/8 ; 3/8 ; 1/2", ordre: true },
+            { question: "b)", attendu: "1/2" },
+          ],
           micros: ["auto_proba_somme_issues", "auto_proba_equiprobabilite"],
         },
         {
           enonce: "Un élève écrit : « $P(A) = 0{,}4$ et $P(\\overline{A}) = 0{,}5$ ». Est-ce possible ?",
           correction:
             "$A$ et $\\overline{A}$ se partagent toutes les issues : $P(A) + P(\\overline{A}) = 1$.\nIci $0{,}4 + 0{,}5 = 0{,}9$, pas $1$ : c'est impossible.\nSi $P(A) = 0{,}4$, alors $P(\\overline{A}) = 1 - 0{,}4 = 0{,}6$.\n⭐ Deux nombres entre $0$ et $1$ ne suffisent pas : un évènement et son contraire doivent faire $1$ ensemble.",
+          reponses: [
+            { attendu: ["non", "faux", "impossible"] },
+          ],
           micros: ["auto_proba_contraire", "auto_proba_encadrement"],
         },
         {
           enonce: "On tire une carte au hasard dans un jeu de $32$ cartes ($4$ couleurs de $8$ cartes, un roi par couleur). Quelle est la probabilité de tirer un roi ? un cœur ? le roi de cœur ?",
           correction:
             "Les $32$ cartes ont la même chance d'être tirées.\nRoi : $4$ cartes favorables, $\\dfrac{4}{32} = \\dfrac{1}{8}$.\nCœur : $8$ cartes, $\\dfrac{8}{32} = \\dfrac{1}{4}$.\nRoi de cœur : $1$ seule carte, $\\dfrac{1}{32}$.\n⚠️ Le roi de cœur est à la fois roi ET cœur : sa probabilité est bien plus petite que chacune des deux autres.",
+          reponses: [
+            { question: "roi", attendu: "1/8" },
+            { question: "cœur", attendu: "1/4" },
+            { question: "roi de cœur", attendu: "1/32" },
+          ],
           micros: ["auto_proba_equiprobabilite"],
         },
       ],
@@ -152,6 +180,11 @@ export const exercicesAutoProbaBasePremiere: FicheExercicesData = {
               { label: "65 ans et +", value: 22 },
             ], 2),
           ),
+          reponses: [
+            { question: "a)", attendu: "0,22" },
+            { question: "b)", attendu: "0,78" },
+            { question: "c)", attendu: "0,77" },
+          ],
           micros: ["auto_proba_somme_issues", "auto_proba_contraire"],
         },
         {
@@ -171,6 +204,12 @@ export const exercicesAutoProbaBasePremiere: FicheExercicesData = {
             ],
             [[0, 6], [1, 5], [2, 4], [3, 3], [4, 2], [5, 1]],
           ),
+          reponses: [
+            { question: "a)", attendu: "36" },
+            { question: "b) somme 7", attendu: "1/6" },
+            { question: "b) somme 12", attendu: "1/36" },
+            { question: "c)", attendu: "7" },
+          ],
           micros: ["auto_proba_equiprobabilite"],
         },
         {
@@ -178,6 +217,10 @@ export const exercicesAutoProbaBasePremiere: FicheExercicesData = {
           enonce: "Une entreprise de $250$ salariés compte $40$ cadres. Elle tire au sort un salarié pour gagner un voyage.\na) Quelle est la probabilité que ce soit un cadre ?\nb) Que ce ne soit pas un cadre ?",
           correction:
             "Le tirage est au sort : les $250$ salariés ont la même chance.\na) $P(\\text{cadre}) = \\dfrac{40}{250} = \\dfrac{4}{25} = \\dfrac{16}{100} = 0{,}16$.\nb) Par le contraire : $1 - 0{,}16 = 0{,}84$.\n✔️ Autre chemin : $250 - 40 = 210$ non-cadres, et $\\dfrac{210}{250} = \\dfrac{84}{100}$.\n⭐ Pour passer d'une fraction sur $25$ à un pourcentage, on multiplie en haut et en bas par $4$.",
+          reponses: [
+            { question: "a)", attendu: "0,16" },
+            { question: "b)", attendu: "0,84" },
+          ],
           micros: ["auto_proba_equiprobabilite", "auto_proba_contraire"],
         },
         {
@@ -185,6 +228,10 @@ export const exercicesAutoProbaBasePremiere: FicheExercicesData = {
           enonce: "Avant le second tour d'une élection à trois candidats, un commentateur annonce : « A a une probabilité $0{,}5$ de gagner, B une probabilité $0{,}4$, et C une probabilité $0{,}2$ ». Il n'y aura qu'un seul élu.\na) Ces trois probabilités sont-elles possibles ensemble ?\nb) Si les deux premières sont justes, quelle est la probabilité que C gagne ?",
           correction:
             "a) Un seul élu : « A gagne », « B gagne », « C gagne » sont toutes les issues, sans chevauchement. Leurs probabilités doivent faire $1$.\n$0{,}5 + 0{,}4 + 0{,}2 = 1{,}1$ : c'est plus que $1$, impossible.\nb) $P(C) = 1 - 0{,}5 - 0{,}4 = 0{,}1$.\n⭐ Chaque nombre était, seul, une probabilité acceptable. C'est leur SOMME qui trahit l'erreur.",
+          reponses: [
+            { question: "a)", attendu: ["non", "faux", "impossible"] },
+            { question: "b)", attendu: "0,1" },
+          ],
           micros: ["auto_proba_somme_issues", "auto_proba_encadrement"],
         },
         {
@@ -196,6 +243,9 @@ export const exercicesAutoProbaBasePremiere: FicheExercicesData = {
             { label: "P", proba: "1/2", enfants: [{ label: "P → PP", proba: "1/2" }, { label: "F → PF", proba: "1/2" }] },
             { label: "F", proba: "1/2", enfants: [{ label: "P → FP", proba: "1/2" }, { label: "F → FF", proba: "1/2" }] },
           ]),
+          reponses: [
+            { question: "b)", attendu: "3/4" },
+          ],
           micros: ["auto_proba_contraire", "auto_proba_equiprobabilite"],
         },
         {
@@ -203,6 +253,11 @@ export const exercicesAutoProbaBasePremiere: FicheExercicesData = {
           enonce: "Une roulette de casino européenne compte $37$ cases : $18$ rouges, $18$ noires, et le zéro, vert. La bille tombe au hasard dans une case.\na) Quelle est la probabilité que la bille tombe sur une case rouge ?\nb) Qu'elle ne tombe pas sur une case rouge ?\nc) Un joueur pense avoir « une chance sur deux » en misant sur le rouge. Est-ce exact ?",
           correction:
             "a) $37$ cases équiprobables, dont $18$ rouges : $P(\\text{rouge}) = \\dfrac{18}{37}$.\nb) Par le contraire : $1 - \\dfrac{18}{37} = \\dfrac{19}{37}$ ($18$ noires et le zéro).\nc) Non : $\\dfrac{18}{37}$ est un peu moins que $\\dfrac{18}{36} = \\dfrac{1}{2}$.\n⭐ C'est le zéro qui fait pencher la balance du côté du casino, à chaque partie.",
+          reponses: [
+            { question: "a)", attendu: "18/37" },
+            { question: "b)", attendu: "19/37" },
+            { question: "c)", attendu: ["non", "faux", "impossible"] },
+          ],
           micros: ["auto_proba_equiprobabilite", "auto_proba_contraire"],
         },
         {
@@ -211,6 +266,11 @@ export const exercicesAutoProbaBasePremiere: FicheExercicesData = {
           correction:
             "a) Les six faces font $1$ : $5p + 3p = 1$, donc $8p = 1$ et $p = \\dfrac{1}{8}$.\nb) $P(6) = 3 \\times \\dfrac{1}{8} = \\dfrac{3}{8}$.\nPair, c'est $2$, $4$ ou $6$ : $\\dfrac{1}{8} + \\dfrac{1}{8} + \\dfrac{3}{8} = \\dfrac{5}{8}$.\n⚠️ Le dé est truqué : $P(\\text{pair})$ n'est pas $\\dfrac{3}{6}$. On additionne les probabilités des issues, on ne les compte pas.",
           schema: ecranSeulement(tableau(["Face", "1", "2", "3", "4", "5", "6"], ["Probabilité", "1/8", "1/8", "1/8", "1/8", "1/8", "3/8"])),
+          reponses: [
+            { question: "a)", attendu: "1/8" },
+            { question: "b) P(6)", attendu: "3/8" },
+            { question: "b) pair", attendu: "5/8" },
+          ],
           micros: ["auto_proba_somme_issues", "auto_proba_encadrement"],
         },
         {
@@ -218,6 +278,11 @@ export const exercicesAutoProbaBasePremiere: FicheExercicesData = {
           enonce: "La France métropolitaine compte $96$ départements, dont $12$ en Nouvelle-Aquitaine et $4$ en Bretagne. On tire un département au hasard.\na) Quelle est la probabilité qu'il soit en Nouvelle-Aquitaine ?\nb) Qu'il ne soit pas en Nouvelle-Aquitaine ?\nc) Qu'il soit en Bretagne ?",
           correction:
             "Les $96$ départements ont la même chance d'être tirés.\na) $\\dfrac{12}{96} = \\dfrac{1}{8}$ (car $8 \\times 12 = 96$).\nb) Par le contraire : $1 - \\dfrac{1}{8} = \\dfrac{7}{8}$.\nc) $\\dfrac{4}{96} = \\dfrac{1}{24}$.\n⚠️ Tirer un DÉPARTEMENT au hasard n'est pas tirer un HABITANT au hasard : la Bretagne a $1$ chance sur $24$ ici, mais sa part de la population est différente.",
+          reponses: [
+            { question: "a)", attendu: "1/8" },
+            { question: "b)", attendu: "7/8" },
+            { question: "c)", attendu: "1/24" },
+          ],
           micros: ["auto_proba_equiprobabilite", "auto_proba_contraire"],
         },
       ],
@@ -244,6 +309,14 @@ export const exercicesAutoProbaBasePremiere: FicheExercicesData = {
           ]),
           correction:
             "a) $P(\\text{retraité}) = 0{,}3$.\nb) En emploi OU au chômage : on additionne, $0{,}45 + 0{,}05 = 0{,}5$.\nc) Par le contraire : $1 - 0{,}3 = 0{,}7$.\n✔️ $0{,}45 + 0{,}05 + 0{,}2 = 0{,}7$.\nd) $5$ % de $20\\,000$ : $1\\,000$ chômeurs. $P(\\text{chômeur}) = 0{,}05$, une chance sur vingt.\ne) Les actifs sont $50$ % de $20\\,000$, soit $10\\,000$. Taux de chômage : $\\dfrac{1\\,000}{10\\,000} = 10$ %.\n⭐ $5$ % ou $10$ % : ce n'est pas la même population de référence. Ce « parmi les actifs » est une probabilité CONDITIONNELLE, le sujet de la feuille suivante.",
+          reponses: [
+            { question: "a)", attendu: "0,3" },
+            { question: "b)", attendu: "0,5" },
+            { question: "c)", attendu: "0,7" },
+            { question: "d) nombre de chômeurs", attendu: "1 000" },
+            { question: "d) probabilité", attendu: "0,05" },
+            { question: "e)", attendu: "10 %" },
+          ],
           micros: ["auto_proba_somme_issues", "auto_proba_contraire"],
         },
         {
@@ -257,6 +330,12 @@ export const exercicesAutoProbaBasePremiere: FicheExercicesData = {
           ]),
           correction:
             "a) Chaque inscrit a la même chance : on divise chaque effectif par $2\\,000$.\n$\\dfrac{300}{2\\,000} = 0{,}15$ ; $\\dfrac{700}{2\\,000} = 0{,}35$ ; $\\dfrac{500}{2\\,000} = 0{,}25$ ; $\\dfrac{500}{2\\,000} = 0{,}25$.\n✔️ $0{,}15 + 0{,}35 + 0{,}25 + 0{,}25 = 1$.\nb) Contraire de « moins de $30$ ans » : $1 - 0{,}15 = 0{,}85$.\nc) On additionne deux tranches : $0{,}35 + 0{,}25 = 0{,}6$.\nd) Non : les deux groupes comptent $500$ inscrits, ils ont la même probabilité, $0{,}25$.\n⭐ Un tirage au sort est équitable entre PERSONNES : un groupe a d'autant plus de chances qu'il est nombreux.",
+          reponses: [
+            { question: "a)", attendu: "0,15 ; 0,35 ; 0,25 ; 0,25", ordre: true },
+            { question: "b)", attendu: "0,85" },
+            { question: "c)", attendu: "0,6" },
+            { question: "d)", attendu: ["non", "faux", "impossible"] },
+          ],
           micros: ["auto_proba_equiprobabilite", "auto_proba_somme_issues", "auto_proba_contraire"],
         },
         {
@@ -271,6 +350,12 @@ export const exercicesAutoProbaBasePremiere: FicheExercicesData = {
           ]),
           correction:
             "a) On divise par $200$ (diviser par $2$, puis par $100$) : $0{,}75$ ; $0{,}18$ ; $0{,}05$ ; $0{,}02$.\n✔️ $0{,}75 + 0{,}18 + 0{,}05 + 0{,}02 = 1$.\nb) Contraire de « supprimé » : $1 - 0{,}02 = 0{,}98$.\nc) $0{,}18 + 0{,}05 = 0{,}23$.\nd) Contraire de « à l'heure » : $1 - 0{,}75 = 0{,}25$.\n✔️ En additionnant : $0{,}18 + 0{,}05 + 0{,}02 = 0{,}25$.\ne) $98$ %, c'est la part des trains qui ont CIRCULÉ, pas de ceux qui étaient à l'heure : ceux-là ne font que $75$ %.\n⭐ Même série, deux chiffres très différents : tout dépend de l'évènement qu'on choisit d'afficher.",
+          reponses: [
+            { question: "a)", attendu: "0,75 ; 0,18 ; 0,05 ; 0,02", ordre: true },
+            { question: "b)", attendu: "0,98" },
+            { question: "c)", attendu: "0,23" },
+            { question: "d)", attendu: "0,25" },
+          ],
           micros: ["auto_proba_somme_issues", "auto_proba_contraire", "auto_proba_equiprobabilite"],
         },
         {
@@ -278,6 +363,14 @@ export const exercicesAutoProbaBasePremiere: FicheExercicesData = {
           enonce: "Une association vend $400$ billets de tombola à $2$ € pièce. Un seul billet gagne un vélo, $4$ billets gagnent un bon d'achat, $15$ billets gagnent une place de cinéma. On achète un billet.\na) Quelle est la probabilité de gagner le vélo ?\nb) De gagner un lot, quel qu'il soit ?\nc) De ne rien gagner ?\nd) Julie achète $10$ billets. Quelle probabilité a-t-elle de gagner le vélo ?\ne) Combien faudrait-il acheter de billets pour avoir une chance sur deux de gagner le vélo ? Combien cela coûterait-il ?",
           correction:
             "Les $400$ billets ont la même chance d'être tirés.\na) $P(\\text{vélo}) = \\dfrac{1}{400} = 0{,}0025$.\nb) $1 + 4 + 15 = 20$ billets gagnants : $\\dfrac{20}{400} = \\dfrac{1}{20} = 0{,}05$.\nc) Par le contraire : $1 - 0{,}05 = 0{,}95$.\nd) $10$ billets sur $400$ portent sa chance : $\\dfrac{10}{400} = \\dfrac{1}{40}$.\ne) Une chance sur deux, c'est $\\dfrac{200}{400}$ : il faut $200$ billets, soit $400$ €.\n⭐ L'association, elle, récolte $400 \\times 2 = 800$ € : c'est pour cela qu'une tombola rapporte.\n⚠️ Une probabilité si petite ($0{,}0025$) reste une probabilité : elle est bien entre $0$ et $1$.",
+          reponses: [
+            { question: "a)", attendu: ["1/400", "0,0025"] },
+            { question: "b)", attendu: "0,05" },
+            { question: "c)", attendu: "0,95" },
+            { question: "d)", attendu: "1/40" },
+            { question: "e) billets", attendu: "200" },
+            { question: "e) coût", attendu: "400 €" },
+          ],
           micros: ["auto_proba_equiprobabilite", "auto_proba_contraire", "auto_proba_encadrement"],
         },
       ],

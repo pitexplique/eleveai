@@ -71,6 +71,9 @@ export const exercicesAutoProbaLecturePremiere: FicheExercicesData = {
           figure: tableauProba(["", "Espoir", "Élite", "Total"], [["Judo", "36", "12", "48"], ["Natation", "48", "24", "72"], ["Total", "84", "36", "120"]]),
           correction:
             "« Judo ET élite » : c'est UNE case, au croisement de la ligne Judo et de la colonne Élite. Elle contient $12$ sportifs.\nOn divise par le TOTAL, puisqu'on choisit parmi tous les sportifs : $P(J \\cap E) = \\dfrac{12}{120} = \\dfrac{1}{10}$.\n⚠️ Le piège : diviser par $48$ (les judokas) ou par $36$ (les élites). Ce seraient des probabilités « sachant », pas « et ».",
+          reponses: [
+            { attendu: "1/10" },
+          ],
           micros: ["auto_proba_intersection_tableau"],
         },
         {
@@ -78,6 +81,9 @@ export const exercicesAutoProbaLecturePremiere: FicheExercicesData = {
           correction:
             "« Parmi les judokas » : on se place sur la ligne Judo, qui compte $48$ sportifs.\nParmi eux, $12$ sont élites : $P_J(E) = \\dfrac{12}{48} = \\dfrac{1}{4}$.\n⭐ Le dénominateur est le total de la LIGNE, pas le total général.",
           schema: ecranSeulement(tableauProba(["", "Espoir", "Élite", "Total"], [["Judo", "36", "12", "48"], ["Natation", "48", "24", "72"], ["Total", "84", "36", "120"]], [[0, 2], [0, 3]])),
+          reponses: [
+            { attendu: "1/4" },
+          ],
           micros: ["auto_proba_conditionnelle_lecture"],
         },
         {
@@ -85,6 +91,9 @@ export const exercicesAutoProbaLecturePremiere: FicheExercicesData = {
           correction:
             "« Parmi les élites » : on se place dans la colonne Élite, qui compte $36$ sportifs.\nParmi eux, $12$ font du judo : $P_E(J) = \\dfrac{12}{36} = \\dfrac{1}{3}$.\nÀ l'exercice 2, $P_J(E) = \\dfrac{1}{4}$.\n⛔ Même case, $12$ sportifs, mais deux questions et deux réponses : $P_E(J) \\neq P_J(E)$. Ce qui est APRÈS « sachant » donne le dénominateur.",
           schema: tableauProba(["", "Espoir", "Élite", "Total"], [["Judo", "36", "12", "48"], ["Natation", "48", "24", "72"], ["Total", "84", "36", "120"]], [[0, 2], [2, 2]]),
+          reponses: [
+            { attendu: "1/3" },
+          ],
           micros: ["auto_proba_conditionnelle_lecture", "auto_proba_distinguer"],
         },
         {
@@ -92,6 +101,12 @@ export const exercicesAutoProbaLecturePremiere: FicheExercicesData = {
           figure: tableauProba(["", "B", "non B", "Total"], [["A", "0,12", "0,28", "0,4"], ["non A", "0,24", "0,36", "0,6"], ["Total", "0,36", "0,64", "1"]]),
           correction:
             "a) $P(A \\cap B)$ est la case au croisement de $A$ et de $B$ : $0{,}12$. $P(A)$ est le total de la ligne $A$ : $0{,}4$.\nb) $P_A(B) = \\dfrac{P(A \\cap B)}{P(A)} = \\dfrac{0{,}12}{0{,}4} = 0{,}3$.\n$P_B(A) = \\dfrac{P(A \\cap B)}{P(B)} = \\dfrac{0{,}12}{0{,}36} = \\dfrac{1}{3}$.\n⭐ Dans un tableau de probabilités, le total général vaut $1$ : la case se lit donc directement comme $P(A \\cap B)$.",
+          reponses: [
+            { question: "a) P(A ∩ B)", attendu: "0,12" },
+            { question: "a) P(A)", attendu: "0,4" },
+            { question: "b) P_A(B)", attendu: "0,3" },
+            { question: "b) P_B(A)", attendu: "1/3" },
+          ],
           micros: ["auto_proba_intersection_tableau", "auto_proba_conditionnelle_lecture", "auto_proba_distinguer"],
         },
         {
@@ -102,6 +117,12 @@ export const exercicesAutoProbaLecturePremiere: FicheExercicesData = {
           ]),
           correction:
             "Le premier niveau porte $P(A) = 0{,}6$ et $P(\\overline{A}) = 0{,}4$.\nLa branche qui part de $A$ vers $B$ porte $P_A(B) = 0{,}3$ : c'est une probabilité SACHANT $A$.\nLa branche qui part de $\\overline{A}$ vers $\\overline{B}$ porte $P_{\\overline{A}}(\\overline{B}) = 0{,}5$.\n⚠️ Le piège : lire $0{,}3$ comme $P(B)$. Une branche du deuxième niveau dépend toujours du nœud d'où elle part.",
+          reponses: [
+            { question: "P(A)", attendu: "0,6" },
+            { question: "P_A(B)", attendu: "0,3" },
+            { question: "P(non A)", attendu: "0,4" },
+            { question: "P_nonA(non B)", attendu: "0,5" },
+          ],
           micros: ["auto_proba_conditionnelle_lecture"],
         },
         {
@@ -114,6 +135,10 @@ export const exercicesAutoProbaLecturePremiere: FicheExercicesData = {
               { label: "non A", proba: "0,4", enfants: [{ label: "B → 0,2", proba: "0,5" }, { label: "non B", proba: "0,5" }] },
             ]),
           ),
+          reponses: [
+            { question: "P(A ∩ B)", attendu: "0,18" },
+            { question: "P(non A ∩ B)", attendu: "0,2" },
+          ],
           micros: ["auto_proba_intersection_tableau", "auto_proba_distinguer"],
         },
         {
@@ -127,6 +152,11 @@ export const exercicesAutoProbaLecturePremiere: FicheExercicesData = {
           correction:
             "On range les effectifs dans un tableau : latinistes $9$ filles et $3$ garçons ; non-latinistes $9$ filles et $9$ garçons.\n$P(L \\cap F) = \\dfrac{9}{30} = 0{,}3$ : on divise par TOUTE la classe.\n$P_L(F) = \\dfrac{9}{12} = \\dfrac{3}{4}$ : parmi les $12$ latinistes.\n$P_F(L) = \\dfrac{9}{18} = \\dfrac{1}{2}$ : parmi les $18$ filles.\n⭐ Trois quarts des latinistes sont des filles, mais seule une fille sur deux fait du latin.",
           schema: ecranSeulement(tableauProba(["", "Filles", "Garçons", "Total"], [["Latin", "9", "3", "12"], ["Pas latin", "9", "9", "18"], ["Total", "18", "12", "30"]], [[0, 1]])),
+          reponses: [
+            { question: "P(L ∩ F)", attendu: "0,3" },
+            { question: "P_L(F)", attendu: "3/4" },
+            { question: "P_F(L)", attendu: "1/2" },
+          ],
           micros: ["auto_proba_distinguer", "auto_proba_conditionnelle_lecture"],
         },
       ],
@@ -149,6 +179,13 @@ export const exercicesAutoProbaLecturePremiere: FicheExercicesData = {
           figure: tableauProba(["", "Satisfait", "Non satisfait", "Total"], [["Agence", "160", "40", "200"], ["Internet", "560", "240", "800"], ["Total", "720", "280", "1000"]]),
           correction:
             "a) La case Internet × Satisfait : $\\dfrac{560}{1\\,000} = 0{,}56$.\nb) Internet : $\\dfrac{560}{800} = 0{,}7$. Agence : $\\dfrac{160}{200} = 0{,}8$.\nc) L'agence : $80$ % de satisfaits contre $70$ %.\n⚠️ Pourtant il y a bien plus de satisfaits sur internet ($560$ contre $160$) : c'est un NOMBRE, pas une proportion. Internet a quatre fois plus de clients.\nd) Parmi les $720$ satisfaits : $P_S(I) = \\dfrac{560}{720} = \\dfrac{7}{9} \\approx 0{,}78$.\n⭐ b) et d) utilisent la même case, $560$, avec deux dénominateurs : $800$ et $720$.",
+          reponses: [
+            { question: "a)", attendu: "0,56" },
+            { question: "b) internet", attendu: "0,7" },
+            { question: "b) agence", attendu: "0,8" },
+            { question: "c)", attendu: ["l'agence", "agence", "en agence"] },
+            { question: "d)", attendu: "7/9", tolerance: 0.01 },
+          ],
           micros: ["auto_proba_intersection_tableau", "auto_proba_conditionnelle_lecture", "auto_proba_distinguer"],
         },
         {
@@ -157,6 +194,12 @@ export const exercicesAutoProbaLecturePremiere: FicheExercicesData = {
           correction:
             "a) Moins de $35$ ans : $110$ votent, $200 - 110 = 90$ non. $35$ ans et plus : $240$ votent, $60$ non. Votants : $350$ ; abstentionnistes : $150$.\nb) $P(J \\cap V) = \\dfrac{110}{500} = 0{,}22$.\n$P_J(V) = \\dfrac{110}{200} = 0{,}55$ et $P_{\\overline{J}}(V) = \\dfrac{240}{300} = 0{,}8$.\nLes moins de $35$ ans déclarent moins souvent aller voter : $55$ % contre $80$ %.\nc) Parmi les $350$ votants : $P_V(J) = \\dfrac{110}{350} = \\dfrac{11}{35} \\approx 0{,}31$.\n⛔ Le piège : confondre $P_J(V) = 0{,}55$ (la participation des jeunes) et $P_V(J) \\approx 0{,}31$ (la part des jeunes parmi les votants).",
           schema: ecranSeulement(tableauProba(["", "Vote", "Ne vote pas", "Total"], [["Moins de 35 ans", "110", "90", "200"], ["35 ans et plus", "240", "60", "300"], ["Total", "350", "150", "500"]], [[0, 1], [0, 3], [2, 1]])),
+          reponses: [
+            { question: "b) P(J ∩ V)", attendu: "0,22" },
+            { question: "b) P_J(V)", attendu: "0,55" },
+            { question: "b) P_nonJ(V)", attendu: "0,8" },
+            { question: "c)", attendu: "11/35", tolerance: 0.01 },
+          ],
           micros: ["auto_proba_conditionnelle_lecture", "auto_proba_intersection_tableau", "auto_proba_distinguer"],
         },
         {
@@ -168,6 +211,11 @@ export const exercicesAutoProbaLecturePremiere: FicheExercicesData = {
             { label: "S", proba: "0,6", enfants: [{ label: "E → 0,54", proba: "0,9" }, { label: "non E", proba: "0,1" }] },
             { label: "non S", proba: "0,4", enfants: [{ label: "E → 0,28", proba: "0,7" }, { label: "non E", proba: "0,3" }] },
           ]),
+          reponses: [
+            { question: "b) P_S(E)", attendu: "0,9" },
+            { question: "b) P(S ∩ E)", attendu: "0,54" },
+            { question: "b) P(non S ∩ E)", attendu: "0,28" },
+          ],
           micros: ["auto_proba_conditionnelle_lecture", "auto_proba_distinguer"],
         },
         {
@@ -176,6 +224,10 @@ export const exercicesAutoProbaLecturePremiere: FicheExercicesData = {
           correction:
             "a) Supérieur : $600$ jeunes, dont $0{,}9 \\times 600 = 540$ en emploi et $60$ sans. Autres : $400$, dont $0{,}7 \\times 400 = 280$ en emploi et $120$ sans. En emploi : $540 + 280 = 820$ ; sans emploi : $180$.\nb) La case Supérieur × Emploi, sur le total : $\\dfrac{540}{1\\,000} = 0{,}54$. C'est bien le résultat de l'arbre.\nc) Parmi les $820$ jeunes en emploi, $540$ sont diplômés du supérieur : $P_E(S) = \\dfrac{540}{820}$.\nLes deux tiers de $820$ font environ $547$ : $P_E(S)$ vaut environ $\\dfrac{2}{3}$.\n⭐ L'arbre donnait $P_S(E) = 0{,}9$ ; le tableau donne l'autre sens, $P_E(S) \\approx 0{,}66$.",
           schema: ecranSeulement(tableauProba(["Sur 1000", "Emploi", "Sans emploi", "Total"], [["Supérieur", "540", "60", "600"], ["Autres", "280", "120", "400"], ["Total", "820", "180", "1000"]], [[0, 1], [2, 1]])),
+          reponses: [
+            { question: "b)", attendu: "0,54" },
+            { question: "c)", attendu: ["540/820", "2/3"], tolerance: 0.01 },
+          ],
           micros: ["auto_proba_intersection_tableau", "auto_proba_distinguer"],
         },
         {
@@ -183,6 +235,10 @@ export const exercicesAutoProbaLecturePremiere: FicheExercicesData = {
           enonce: "Un sondage réalisé à la sortie des urnes (modèle) donne trois phrases. On choisit un votant au hasard ; $J$ : « avoir moins de $35$ ans », $A$ : « avoir voté pour la candidate A ».\n« $30$ % des votants ont moins de $35$ ans. » « Parmi les moins de $35$ ans, $40$ % ont voté A. » « $25$ % des électeurs de A ont moins de $35$ ans. »\na) Traduire chaque phrase par une probabilité.\nb) Calculer $P(J \\cap A)$, puis en déduire $P(A)$.",
           correction:
             "a) $P(J) = 0{,}3$ ; « parmi les moins de $35$ ans » : $P_J(A) = 0{,}4$ ; « des électeurs de A » : $P_A(J) = 0{,}25$.\nb) $P(J \\cap A) = P(J) \\times P_J(A) = 0{,}3 \\times 0{,}4 = 0{,}12$.\nOr $P_A(J) = \\dfrac{P(J \\cap A)}{P(A)}$, donc $P(A) = \\dfrac{0{,}12}{0{,}25} = 0{,}48$.\nLa candidate A a obtenu environ $48$ % des voix.\n⭐ Les deux phrases conditionnelles ont servi DANS LES DEUX SENS : l'une pour trouver $P(J \\cap A)$, l'autre pour remonter à $P(A)$.",
+          reponses: [
+            { question: "b) P(J ∩ A)", attendu: "0,12" },
+            { question: "b) P(A)", attendu: "0,48" },
+          ],
           micros: ["auto_proba_distinguer"],
         },
         {
@@ -191,6 +247,12 @@ export const exercicesAutoProbaLecturePremiere: FicheExercicesData = {
           correction:
             "a) $8$ actifs sont diplômés ET au chômage : $P(D \\cap C) = \\dfrac{8}{400} = 0{,}02$.\nb) Parmi les $160$ diplômés : $P_D(C) = \\dfrac{8}{160} = 0{,}05$. Parmi les $240$ autres : $\\dfrac{24}{240} = 0{,}1$.\nLe taux de chômage est deux fois plus faible chez les diplômés du supérieur.\nc) Chômeurs : $8 + 24 = 32$. Parmi eux, $8$ diplômés : $P_C(D) = \\dfrac{8}{32} = 0{,}25$.\n⛔ Le piège : $0{,}02$, $0{,}05$ et $0{,}25$ ont tous le même numérateur, $8$. Seul le dénominateur dit de qui on parle.",
           schema: ecranSeulement(tableauProba(["", "En emploi", "Chômage", "Total"], [["Diplômés", "152", "8", "160"], ["Autres", "216", "24", "240"], ["Total", "368", "32", "400"]], [[0, 2], [0, 3], [2, 2]])),
+          reponses: [
+            { question: "a)", attendu: "0,02" },
+            { question: "b) diplômés", attendu: "0,05" },
+            { question: "b) autres", attendu: "0,1" },
+            { question: "c)", attendu: "0,25" },
+          ],
           micros: ["auto_proba_intersection_tableau", "auto_proba_conditionnelle_lecture", "auto_proba_distinguer"],
         },
         {
@@ -202,6 +264,12 @@ export const exercicesAutoProbaLecturePremiere: FicheExercicesData = {
           ]),
           correction:
             "Premier niveau : $P(V) = 0{,}7$. Branche $V \\to L$ : $P_V(L) = 0{,}8$, « parmi les trajets en voiture, $80$ % dépassent $10$ km ».\n$P(V \\cap L) = 0{,}7 \\times 0{,}8 = 0{,}56$.\n$P(\\overline{V} \\cap L) = 0{,}3 \\times 0{,}25 = 0{,}075$.\n⚠️ $0{,}8$ n'est pas la part des trajets longs : c'est leur part PARMI les trajets en voiture.\n⭐ Les longs trajets se font presque tous en voiture : $0{,}56$ contre $0{,}075$. C'est là que se jouent les politiques de transport.",
+          reponses: [
+            { question: "P(V)", attendu: "0,7" },
+            { question: "P_V(L)", attendu: "0,8" },
+            { question: "P(V ∩ L)", attendu: "0,56" },
+            { question: "P(non V ∩ L)", attendu: "0,075" },
+          ],
           micros: ["auto_proba_conditionnelle_lecture", "auto_proba_distinguer"],
         },
         {
@@ -210,6 +278,10 @@ export const exercicesAutoProbaLecturePremiere: FicheExercicesData = {
           correction:
             "a) Fraudes : $18$ signalées, $2$ non. Paiements honnêtes : $9\\,980$, dont $180$ signalés et $9\\,800$ non. Signalés : $18 + 180 = 198$.\nb) Parmi les $20$ fraudes : $P_F(S) = \\dfrac{18}{20} = 0{,}9$. Le détecteur attrape $90$ % des fraudes.\nc) Parmi les $198$ paiements signalés : $P_S(F) = \\dfrac{18}{198} = \\dfrac{1}{11} \\approx 0{,}09$.\nUne alerte sur onze seulement est une vraie fraude.\n⛔ Le piège : répondre $0{,}9$ au c). Les paiements honnêtes sont si NOMBREUX que leurs fausses alertes noient les vraies.",
           schema: tableauProba(["Sur 10000", "Signalé", "Non signalé", "Total"], [["Fraude", "18", "2", "20"], ["Honnête", "180", "9800", "9980"], ["Total", "198", "9802", "10000"]], [[0, 1], [2, 1]]),
+          reponses: [
+            { question: "b)", attendu: "0,9" },
+            { question: "c)", attendu: "1/11", tolerance: 0.01 },
+          ],
           micros: ["auto_proba_distinguer", "auto_proba_conditionnelle_lecture"],
         },
       ],
@@ -232,6 +304,13 @@ export const exercicesAutoProbaLecturePremiere: FicheExercicesData = {
           figure: tableauProba(["", "Favorable", "Défavorable", "Total"], [["Seconde", "240", "110", "350"], ["Première", "200", "150", "350"], ["Terminale", "160", "140", "300"], ["Total", "600", "400", "1000"]]),
           correction:
             "a) La case Première × Favorable, sur le total : $\\dfrac{200}{1\\,000} = 0{,}2$.\nb) Parmi les $300$ terminales : $P_T(F) = \\dfrac{160}{300} = \\dfrac{8}{15} \\approx 0{,}53$.\nParmi les $600$ favorables : $P_F(T) = \\dfrac{160}{600} = \\dfrac{4}{15} \\approx 0{,}27$.\nc) Non : $P(F) = \\dfrac{600}{1\\,000} = 0{,}6$ pour tout le lycée, mais $P_T(F) \\approx 0{,}53$ chez les terminales. La moyenne du lycée ne s'applique pas à chaque niveau.\nd) Seconde : $\\dfrac{240}{350} = \\dfrac{24}{35} \\approx 0{,}69$. Première : $\\dfrac{200}{350} = \\dfrac{4}{7} \\approx 0{,}57$. Terminale : $\\approx 0{,}53$. C'est en seconde.\n⭐ Pour comparer des groupes de tailles différentes, on compare des probabilités « sachant », jamais des cases brutes.",
+          reponses: [
+            { question: "a)", attendu: "0,2" },
+            { question: "b) P_T(F)", attendu: "8/15", tolerance: 0.01 },
+            { question: "b) P_F(T)", attendu: "4/15", tolerance: 0.01 },
+            { question: "c)", attendu: ["non", "faux", "impossible"] },
+            { question: "d)", attendu: ["seconde", "en seconde", "la seconde"] },
+          ],
           micros: ["auto_proba_intersection_tableau", "auto_proba_conditionnelle_lecture", "auto_proba_distinguer"],
         },
         {
@@ -243,6 +322,12 @@ export const exercicesAutoProbaLecturePremiere: FicheExercicesData = {
             { label: "J", proba: "0,2", enfants: [{ label: "C → 0,04", proba: "0,2" }, { label: "non C", proba: "0,8" }] },
             { label: "non J", proba: "0,8", enfants: [{ label: "C → 0,04", proba: "0,05" }, { label: "non C", proba: "0,95" }] },
           ]),
+          reponses: [
+            { question: "b) P(J ∩ C)", attendu: "0,04" },
+            { question: "b) P(non J ∩ C)", attendu: "0,04" },
+            { question: "c)", attendu: "0,08" },
+            { question: "d)", attendu: "0,5" },
+          ],
           micros: ["auto_proba_conditionnelle_lecture", "auto_proba_distinguer"],
         },
         {
@@ -251,6 +336,11 @@ export const exercicesAutoProbaLecturePremiere: FicheExercicesData = {
           correction:
             "a) Vêtements : $400$ commandes, dont $0{,}25 \\times 400 = 100$ renvoyées et $300$ gardées. Autres : $600$, dont $0{,}05 \\times 600 = 30$ renvoyées et $570$ gardées. Retours : $130$.\nb) $P(V \\cap R) = \\dfrac{100}{1\\,000} = 0{,}1$ et $P_V(R) = \\dfrac{100}{400} = 0{,}25$.\nc) Parmi les $130$ retours : $P_R(V) = \\dfrac{100}{130} = \\dfrac{10}{13} \\approx 0{,}77$.\nd) Il a confondu $P_V(R) = 0{,}25$ (« un vêtement sur quatre est renvoyé ») et $P_R(V) \\approx 0{,}77$ (« plus de trois retours sur quatre sont des vêtements »).\n⭐ Pour la boutique, c'est la seconde qui compte : c'est sur les vêtements qu'il faut agir pour réduire les retours.",
           schema: ecranSeulement(tableauProba(["", "Renvoyée", "Gardée", "Total"], [["Vêtements", "100", "300", "400"], ["Autres", "30", "570", "600"], ["Total", "130", "870", "1000"]], [[0, 1], [2, 1]])),
+          reponses: [
+            { question: "b) P(V ∩ R)", attendu: "0,1" },
+            { question: "b) P_V(R)", attendu: "0,25" },
+            { question: "c)", attendu: "10/13", tolerance: 0.01 },
+          ],
           micros: ["auto_proba_intersection_tableau", "auto_proba_conditionnelle_lecture", "auto_proba_distinguer"],
         },
         {
@@ -259,6 +349,12 @@ export const exercicesAutoProbaLecturePremiere: FicheExercicesData = {
           correction:
             "a) $P(D) = 0{,}55$, $P_D(V) = 0{,}8$ ; $P(\\overline{D}) = 0{,}45$, $P_{\\overline{D}}(V) = 0{,}1$.\nSur $1\\,000$ : $550$ l'annoncent, dont $0{,}8 \\times 550 = 440$ votent A et $110$ non. $450$ ne l'annoncent pas, dont $45$ votent A et $405$ non. Votes pour A : $485$.\nb) $P(D \\cap V) = \\dfrac{440}{1\\,000} = 0{,}44$ et $P(V) = \\dfrac{485}{1\\,000} = 0{,}485$.\nNon : $48{,}5$ % $< 50$ %, alors que $55$ % l'annonçaient.\nc) $P_V(D) = \\dfrac{440}{485}$. Or $90$ % de $485$ font $436{,}5$, et $440 > 436{,}5$ : oui, un peu plus de $90$ %.\n⭐ $P_D(V) = 0{,}8$ et $P_V(D) > 0{,}9$ : les électeurs de A l'avaient presque tous annoncé, mais tous ceux qui l'annonçaient ne l'ont pas voté.",
           schema: tableauProba(["Sur 1000", "Vote A", "Autre vote", "Total"], [["Annonce A", "440", "110", "550"], ["N'annonce pas", "45", "405", "450"], ["Total", "485", "515", "1000"]], [[0, 1], [2, 1]]),
+          reponses: [
+            { question: "b) P(D ∩ V)", attendu: "0,44" },
+            { question: "b) P(V)", attendu: "0,485" },
+            { question: "b) majorité ?", attendu: ["non", "faux", "impossible"] },
+            { question: "c)", attendu: ["oui", "vrai"] },
+          ],
           micros: ["auto_proba_conditionnelle_lecture", "auto_proba_intersection_tableau", "auto_proba_distinguer"],
         },
       ],

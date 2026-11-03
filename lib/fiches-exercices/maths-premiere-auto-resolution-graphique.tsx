@@ -77,6 +77,11 @@ export const exercicesAutoResolutionGraphiquePremiere: FicheExercicesData = {
             { x: 0, y: -3, label: "0" },
             { x: 2, y: -3, label: "2" },
           ], -3, true)),
+          reponses: [
+            { question: "f(x) = 0", attendu: "-1 ; 3" },
+            { question: "f(x) = -3", attendu: "0 ; 2" },
+            { question: "f(x) = -5", attendu: ["∅", "aucune solution", "aucune"] },
+          ],
           micros: ["auto_fct_resoudre_graphiquement"],
         },
         {
@@ -87,6 +92,10 @@ export const exercicesAutoResolutionGraphiquePremiere: FicheExercicesData = {
             { x: -2, y: 5, label: "−2" },
             { x: 4, y: 5, label: "4" },
           ], 5, true)),
+          reponses: [
+            { question: "f(x) < 0", attendu: "]-1 ; 3[" },
+            { question: "f(x) ≥ 5", attendu: ["[-3 ; -2] ∪ [4 ; 5]", "[-3 ; -2] U [4 ; 5]"] },
+          ],
           micros: ["auto_fct_resoudre_graphiquement"],
         },
         {
@@ -118,6 +127,14 @@ export const exercicesAutoResolutionGraphiquePremiere: FicheExercicesData = {
             { x: 6, y: 7, label: "" },
             { x: 6, y: 10, label: "" },
           ], undefined, true)),
+          reponses: [
+            { question: "a) bleue, de 0 à 2", attendu: "2" },
+            { question: "a) bleue, de 4 à 6", attendu: "2" },
+            { question: "a) orange, de 0 à 2", attendu: "1" },
+            { question: "a) orange, de 4 à 6", attendu: "5" },
+            { question: "b) vitesse constante", attendu: ["la bleue", "bleue"] },
+            { question: "b) accélère", attendu: ["l'orange", "orange"] },
+          ],
           micros: ["auto_fct_lire_croissance"],
         },
         {
@@ -132,6 +149,9 @@ export const exercicesAutoResolutionGraphiquePremiere: FicheExercicesData = {
           correction:
             "La courbe descend jusqu'à son point le plus bas, $(1 ; -4)$, puis remonte.\n$f(-3) = 9 + 6 - 3 = 12$ et $f(5) = 25 - 10 - 3 = 12$ : ces valeurs sortent du dessin, on les calcule.\n$f$ est décroissante sur $[-3 ; 1]$ et croissante sur $[1 ; 5]$. Son minimum est $-4$, atteint en $x = 1$.\n⚠️ Le minimum est $-4$, une ordonnée ; il est atteint EN $1$, une abscisse. Deux nombres, deux rôles.",
           schema: tableauVariations(["−3", "1", "5"], [12, -4, 12]),
+          reponses: [
+            { question: "minimum", attendu: "-4" },
+          ],
           micros: ["auto_fct_variations_graphique"],
         },
         {
@@ -144,6 +164,11 @@ export const exercicesAutoResolutionGraphiquePremiere: FicheExercicesData = {
             { x: -2, y: -2, label: "−2" },
             { x: 1, y: -2, label: "1" },
           ], [2, -2])),
+          reponses: [
+            { question: "f(x) = 2", attendu: "-1 ; 2" },
+            { question: "f(x) ≤ -2", attendu: "-2 ; 1" },
+            { question: "f(x) > 2", attendu: ["∅", "aucune solution", "aucune"] },
+          ],
           micros: ["auto_fct_resoudre_graphiquement"],
         },
       ],
@@ -168,6 +193,9 @@ export const exercicesAutoResolutionGraphiquePremiere: FicheExercicesData = {
           correction:
             "a) La courbe coupe l'axe des abscisses en $x = 3$ et en $x = 7$. Elle est en dessous avant $3$, au-dessus entre $3$ et $7$, en dessous après $7$.\nb) $T(x) < 0$ pour $x$ dans $[0 ; 3[$ et dans $]7 ; 8]$. En heures : de minuit à $9$ h, puis de $21$ h à minuit.\nc) L'horizontale d'ordonnée $3$ coupe la courbe en $x = 4$ et en $x = 5{,}5$, au milieu de $5$ et $6$. $S = [4 ; 5{,}5]$ : de $12$ h à $16$ h $30$.\n⚠️ On convertit : $x = 3$, ce n'est pas $3$ h, c'est $3 \\times 3 = 9$ h.",
           schema: tableauSignes(["0", "3", "7", "8"], [["$T(x)$", ["-", "+", "-"], ["0", "0"]]]),
+          reponses: [
+            { question: "c)", attendu: "[4 ; 5,5]" },
+          ],
           micros: ["auto_fct_signe_graphique", "auto_fct_resoudre_graphiquement"],
         },
         {
@@ -183,6 +211,10 @@ export const exercicesAutoResolutionGraphiquePremiere: FicheExercicesData = {
             { x: 2, y: 3, label: "2" },
             { x: 4, y: 3, label: "4" },
           ], 3, true)),
+          reponses: [
+            { question: "a)", attendu: "]1 ; 5[" },
+            { question: "b)", attendu: "[2 ; 4]" },
+          ],
           micros: ["auto_fct_resoudre_graphiquement", "auto_fct_signe_graphique"],
         },
         {
@@ -193,6 +225,11 @@ export const exercicesAutoResolutionGraphiquePremiere: FicheExercicesData = {
           correction:
             "a) La courbe monte de 1900 à 1960, descend de 1960 à 2000, puis remonte jusqu'en 2020.\nb) Au sommet, en 1960 ($x = 6$) : $8$ dizaines de milliers, soit $80\\,000$ habitants.\nc) $50\\,000$ habitants, c'est $5$. L'horizontale d'ordonnée $5$ coupe la courbe trois fois : en $x = 3$, $x = 9$ et $x = 12$, soit en 1930, 1990 et 2020.\n⭐ Ce modèle raconte une ville qui grandit avec ses usines, décline quand elles ferment, puis repart un peu.\n⚠️ Une équation lue sur une courbe peut avoir trois solutions : on suit l'horizontale jusqu'au bout.",
           schema: tableauVariations(["1900", "1960", "2000", "2020"], ["20 000", "80 000", "40 000", "50 000"], "P", "année"),
+          reponses: [
+            { question: "b) année", attendu: "1960" },
+            { question: "b) habitants", attendu: "80 000" },
+            { question: "c)", attendu: "1930 ; 1990 ; 2020" },
+          ],
           micros: ["auto_fct_variations_graphique", "auto_fct_resoudre_graphiquement"],
         },
         {
@@ -206,6 +243,10 @@ export const exercicesAutoResolutionGraphiquePremiere: FicheExercicesData = {
             { x: 2, y: 4, label: "année 2" },
             { x: 3, y: 8, label: "" },
           ], undefined, true)),
+          reponses: [
+            { question: "a) A", attendu: "1" },
+            { question: "c)", attendu: "2" },
+          ],
           micros: ["auto_fct_lire_croissance"],
         },
         {
@@ -216,6 +257,9 @@ export const exercicesAutoResolutionGraphiquePremiere: FicheExercicesData = {
           correction:
             "a) La courbe touche l'axe en $x = 2$ et en $x = 5$. Le solde est positif avant $2$, négatif entre $2$ et $5$, positif après $5$.\nb) Déficit pour $x$ dans $]2 ; 5[$ : entre l'année $2$ et l'année $5$, le pays importe plus qu'il n'exporte.\n⭐ Solde positif : un excédent, le pays vend plus qu'il n'achète. Solde négatif : un déficit.\n⚠️ En $x = 4$, le solde remonte, mais il reste négatif : monter n'est pas être positif.",
           schema: tableauSignes(["0", "2", "5", "6"], [["solde", ["+", "-", "+"], ["0", "0"]]]),
+          reponses: [
+            { question: "b)", attendu: "]2 ; 5[" },
+          ],
           micros: ["auto_fct_signe_graphique"],
         },
         {
@@ -233,6 +277,12 @@ export const exercicesAutoResolutionGraphiquePremiere: FicheExercicesData = {
               { label: "année 4", value: 1 },
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: ["croissant", "croissante"] },
+            { question: "b)", attendu: "4 ; 3 ; 2 ; 1", ordre: true },
+            { question: "c)", attendu: ["ralentit", "elle ralentit"] },
+            { question: "d)", attendu: "2" },
+          ],
           micros: ["auto_fct_lire_croissance", "auto_fct_variations_graphique"],
         },
         {
@@ -248,6 +298,9 @@ export const exercicesAutoResolutionGraphiquePremiere: FicheExercicesData = {
             { x: 6, y: 5, label: "18 h" },
             { x: 7.5, y: 5, label: "22 h 30" },
           ], 5)),
+          reponses: [
+            { question: "a)", attendu: ["]2 ; 4[ ∪ ]6 ; 7,5[", "]2 ; 4[ U ]6 ; 7,5["] },
+          ],
           micros: ["auto_fct_resoudre_graphiquement"],
         },
         {
@@ -258,6 +311,11 @@ export const exercicesAutoResolutionGraphiquePremiere: FicheExercicesData = {
           correction:
             "a) La hauteur monte de $2$ à $8$ entre $0$ et $3$ h, descend de $8$ à $2$ entre $3$ h et $6$ h, remonte de $2$ à $8$ entre $6$ h et $9$ h.\nb) Pleine mer à $3$ h et à $9$ h ($8$ m) ; basse mer à $6$ h ($2$ m).\nc) La courbe est à $5$ m au milieu de chaque montée ou descente : en $1{,}5$, $4{,}5$ et $7{,}5$. $S = [1{,}5 ; 4{,}5] \\cup [7{,}5 ; 9]$ : de $1$ h $30$ à $4$ h $30$, puis à partir de $7$ h $30$.\n⭐ Environ six heures entre une pleine mer et une basse mer : c'est le rythme des marées sur les côtes de la Manche et de l'Atlantique.\n⚠️ $1{,}5$ h, c'est $1$ h $30$ min, pas $1$ h $50$.",
           schema: tableauVariations(["0", "3", "6", "9"], [2, 8, 2, 8], "h", "t"),
+          reponses: [
+            { question: "b) mer haute", attendu: "3 ; 9" },
+            { question: "b) mer basse", attendu: "6" },
+            { question: "c)", attendu: ["[1,5 ; 4,5] ∪ [7,5 ; 9]", "[1,5 ; 4,5] U [7,5 ; 9]"] },
+          ],
           micros: ["auto_fct_variations_graphique", "auto_fct_resoudre_graphiquement"],
         },
       ],
@@ -287,6 +345,11 @@ export const exercicesAutoResolutionGraphiquePremiere: FicheExercicesData = {
             { x: 1, y: 2, label: "" },
             { x: 3, y: 8, label: "" },
           ], 4, true)),
+          reponses: [
+            { question: "c)", attendu: "[2 ; 3]" },
+            { question: "d) dix ans", attendu: ["L", "le placement L"] },
+            { question: "d) trente ans", attendu: ["E", "le placement E"] },
+          ],
           micros: ["auto_fct_lire_croissance", "auto_fct_variations_graphique", "auto_fct_resoudre_graphiquement"],
         },
         {
@@ -302,6 +365,10 @@ export const exercicesAutoResolutionGraphiquePremiere: FicheExercicesData = {
               {tableauSignes(["0", "2", "6", "8"], [["$B(x)$", ["-", "+", "-"], ["0", "0"]]])}
             </>
           ),
+          reponses: [
+            { question: "c)", attendu: "[3 ; 5]" },
+            { question: "d)", attendu: "4" },
+          ],
           micros: ["auto_fct_variations_graphique", "auto_fct_signe_graphique", "auto_fct_resoudre_graphiquement"],
         },
         {
@@ -316,6 +383,10 @@ export const exercicesAutoResolutionGraphiquePremiere: FicheExercicesData = {
             { x: 5, y: 5, label: "1950" },
             { x: 7, y: 5, label: "1970" },
           ], 5, true)),
+          reponses: [
+            { question: "b)", attendu: "1960" },
+            { question: "c)", attendu: ["{3} ∪ [5 ; 7]", "{3} U [5 ; 7]"] },
+          ],
           micros: ["auto_fct_variations_graphique", "auto_fct_resoudre_graphiquement"],
         },
         {
@@ -329,6 +400,9 @@ export const exercicesAutoResolutionGraphiquePremiere: FicheExercicesData = {
             { x: 3, y: 8, label: "2006" },
             { x: 7, y: 8, label: "2014" },
           ], 8, true)),
+          reponses: [
+            { question: "b)", attendu: ["{0} ∪ [3 ; 7]", "{0} U [3 ; 7]"] },
+          ],
           micros: ["auto_fct_resoudre_graphiquement", "auto_fct_variations_graphique", "auto_fct_lire_croissance"],
         },
       ],

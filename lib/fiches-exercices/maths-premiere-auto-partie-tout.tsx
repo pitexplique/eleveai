@@ -101,6 +101,9 @@ export const exercicesAutoPartieToutPremiere: FicheExercicesData = {
           enonce: "Un lycée compte $800$ élèves, dont $35$ % sont en terminale. Combien d'élèves de terminale y a-t-il ?",
           correction:
             "On connaît le tout ($800$) et la proportion ($35$ %) : on cherche la partie, on multiplie.\n$10$ % de $800$ font $80$ ; $30$ % font $240$ ; $5$ % font $40$.\n$35$ % $= 240 + 40 = 280$ élèves.\n✔️ Autre chemin : $800 \\times 0{,}35 = 280$.",
+          reponses: [
+            { attendu: "280" },
+          ],
           micros: ["auto_prop_partie_connaissant_tout"],
         },
         {
@@ -117,6 +120,9 @@ export const exercicesAutoPartieToutPremiere: FicheExercicesData = {
             ],
             "20 % = 80 élèves, donc 100 % = 400",
           ),
+          reponses: [
+            { attendu: "400" },
+          ],
           micros: ["auto_prop_tout_connaissant_partie"],
         },
         {
@@ -134,12 +140,18 @@ export const exercicesAutoPartieToutPremiere: FicheExercicesData = {
             },
             { label: "Autres", proba: "0,6" },
           ]),
+          reponses: [
+            { attendu: "10 %" },
+          ],
           micros: ["auto_prop_pourcentage_de_pourcentage"],
         },
         {
           enonce: "Calculer les $\\dfrac{3}{5}$ de $45$.",
           correction:
             "Prendre les $\\dfrac{3}{5}$, c'est partager en $5$, puis prendre $3$ parts.\nUne part : $45 \\div 5 = 9$.\nTrois parts : $3 \\times 9 = 27$.\n⭐ On divise d'abord : les nombres restent petits.",
+          reponses: [
+            { attendu: "27" },
+          ],
           micros: ["auto_prop_partie_connaissant_tout"],
         },
         {
@@ -147,12 +159,18 @@ export const exercicesAutoPartieToutPremiere: FicheExercicesData = {
           correction:
             "On cherche le tout. On redescend d'abord à $10$ % : $30$ % $\\div 3$, donc $12 \\div 3 = 4$.\nPuis on remonte à $100$ % : $10 \\times 4 = 40$.\nLe nombre est $40$.\n✔️ Vérification : $30$ % de $40$ $= 12$.",
           schema: tableau(["pourcentage", "10 %", "30 %", "100 %"], ["valeur", 4, 12, 40]),
+          reponses: [
+            { attendu: "40" },
+          ],
           micros: ["auto_prop_tout_connaissant_partie"],
         },
         {
           enonce: "Combien font $50$ % de $60$ % ?",
           correction:
             "On multiplie les deux proportions : $0{,}5 \\times 0{,}6 = 0{,}3$, soit $30$ %.\nDe tête : $50$ %, c'est la moitié ; la moitié de $60$ %, c'est $30$ %.\n⚠️ Pas $110$ %, pas $10$ % : on ne fait ni la somme ni la différence.",
+          reponses: [
+            { attendu: "30 %" },
+          ],
           micros: ["auto_prop_pourcentage_de_pourcentage"],
         },
         {
@@ -170,12 +188,18 @@ export const exercicesAutoPartieToutPremiere: FicheExercicesData = {
               "3 quarts = 18, donc 1 quart = 6",
             ),
           ),
+          reponses: [
+            { attendu: "24" },
+          ],
           micros: ["auto_prop_tout_connaissant_partie"],
         },
         {
           enonce: "Calculer $15$ % de $240$.",
           correction:
             "$10$ % de $240$ font $24$ ; $5$ %, la moitié, font $12$.\n$15$ % $= 24 + 12 = 36$.\n⭐ $15$ % $= 10$ % $+ 5$ % : le geste le plus utile du calcul de tête.",
+          reponses: [
+            { attendu: "36" },
+          ],
           micros: ["auto_prop_partie_connaissant_tout"],
         },
       ],
@@ -198,6 +222,9 @@ export const exercicesAutoPartieToutPremiere: FicheExercicesData = {
           correction:
             "Le loyer est une PARTIE du salaire : on cherche le tout, on divise.\n$10$ % du salaire : $750 \\div 3 = 250$ €.\n$100$ % : $10 \\times 250 = 2\\,500$ €.\n✔️ $30$ % de $2\\,500$ € $= 750$ €.\n⚠️ $30$ % de $750$ € ($225$ €) ne répond pas à la question : ce n'est pas le bon tout.",
           schema: ecranSeulement(barre([{ label: "30 %", value: 750 }, { label: "70 %", value: 1750 }], "loyer 750 € ; salaire 2 500 €")),
+          reponses: [
+            { attendu: "2500 €" },
+          ],
           micros: ["auto_prop_tout_connaissant_partie"],
         },
         {
@@ -205,6 +232,9 @@ export const exercicesAutoPartieToutPremiere: FicheExercicesData = {
           enonce: "À une élection (modèle), la liste $A$ a obtenu $45$ % des suffrages exprimés, soit $900$ voix. Combien y a-t-il eu de suffrages exprimés ?",
           correction:
             "On connaît une partie ($900$ voix) et sa proportion ($45$ %) : on cherche le tout.\n$\\dfrac{900}{0{,}45} = \\dfrac{90\\,000}{45} = 2\\,000$ suffrages exprimés.\nDe tête : $45$ % valent $900$, donc $5$ % valent $100$, et $100$ % valent $2\\,000$.\n✔️ $45$ % de $2\\,000$ $= 900$.",
+          reponses: [
+            { attendu: "2000" },
+          ],
           micros: ["auto_prop_tout_connaissant_partie"],
         },
         {
@@ -223,6 +253,9 @@ export const exercicesAutoPartieToutPremiere: FicheExercicesData = {
             },
             { label: "Hors ville", proba: "0,4" },
           ]),
+          reponses: [
+            { attendu: "15 %" },
+          ],
           micros: ["auto_prop_pourcentage_de_pourcentage"],
         },
         {
@@ -231,6 +264,10 @@ export const exercicesAutoPartieToutPremiere: FicheExercicesData = {
           correction:
             "La TVA s'ajoute au prix HT : le TTC vaut $100$ % $+ 20$ % $= 120$ % du prix HT.\nLe prix HT est le tout : on divise. $\\dfrac{120}{1{,}2} = 100$ €.\nLa TVA : $120 - 100 = 20$ €.\n⚠️ Le piège : $20$ % de $120$ € $= 24$ €, puis $120 - 24 = 96$ €. Faux : les $20$ % portent sur le HT, pas sur le TTC.",
           schema: ecranSeulement(barre([{ label: "HT : 100 €", value: 100 }, { label: "TVA", value: 20 }], "TTC : 120 € = 120 % du HT")),
+          reponses: [
+            { question: "HT", attendu: "100 €" },
+            { question: "TVA", attendu: "20 €" },
+          ],
           micros: ["auto_prop_tout_connaissant_partie"],
         },
         {
@@ -253,6 +290,10 @@ export const exercicesAutoPartieToutPremiere: FicheExercicesData = {
               { label: "Culture", value: 450 },
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: ["3000000 €", "3"] },
+            { question: "b)", attendu: "450000 €" },
+          ],
           micros: ["auto_prop_tout_connaissant_partie", "auto_prop_partie_connaissant_tout"],
         },
         {
@@ -274,6 +315,10 @@ export const exercicesAutoPartieToutPremiere: FicheExercicesData = {
               { label: "Autre sol", proba: "0,65" },
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: "7 %" },
+            { question: "b)", attendu: "420 km²" },
+          ],
           micros: ["auto_prop_pourcentage_de_pourcentage", "auto_prop_partie_connaissant_tout"],
         },
         {
@@ -282,6 +327,9 @@ export const exercicesAutoPartieToutPremiere: FicheExercicesData = {
           correction:
             "Les chômeurs sont une PARTIE de la population active : on cherche le tout.\n$1$ % : $3{,}6 \\div 12 = 0{,}3$ million.\n$100$ % : $100 \\times 0{,}3 = 30$ millions.\n✔️ $12$ % de $30$ millions $= 3{,}6$ millions.\n⭐ Le taux de chômage se calcule sur les ACTIFS (ceux qui travaillent ou cherchent un emploi), pas sur toute la population.",
           schema: tableau(["part des actifs", "1 %", "12 %", "100 %"], ["millions", "0,3", "3,6", 30]),
+          reponses: [
+            { attendu: ["30", "30000000"] },
+          ],
           micros: ["auto_prop_tout_connaissant_partie"],
         },
         {
@@ -290,6 +338,10 @@ export const exercicesAutoPartieToutPremiere: FicheExercicesData = {
             "Une enquête (modèle) interroge $1\\,000$ lycéens. $70$ % ont un smartphone depuis le collège, et parmi eux, $40$ % l'utilisent plus de trois heures par jour.\na) Quel pourcentage de TOUS les lycéens interrogés cela représente-t-il ?\nb) Combien de lycéens ?",
           correction:
             "a) Une partie d'une partie : $0{,}7 \\times 0{,}4 = 0{,}28$, soit $28$ %.\nb) $28$ % de $1\\,000$ $= 280$ lycéens.\n✔️ Autre chemin : $70$ % de $1\\,000$ $= 700$, puis $40$ % de $700$ $= 280$.\n⚠️ $40$ % n'est pas la réponse : c'est une part des $700$, pas des $1\\,000$.",
+          reponses: [
+            { question: "a)", attendu: "28 %" },
+            { question: "b)", attendu: "280" },
+          ],
           micros: ["auto_prop_pourcentage_de_pourcentage", "auto_prop_partie_connaissant_tout"],
         },
       ],
@@ -317,6 +369,12 @@ export const exercicesAutoPartieToutPremiere: FicheExercicesData = {
             { label: "Exprimés", value: 27000 },
             { label: "Voix A", value: 10800 },
           ]),
+          reponses: [
+            { question: "a) votants", attendu: "30000" },
+            { question: "a) exprimés", attendu: "27000" },
+            { question: "a) voix A", attendu: "10800" },
+            { question: "b)", attendu: "27 %" },
+          ],
           micros: ["auto_prop_partie_connaissant_tout", "auto_prop_pourcentage_de_pourcentage"],
         },
         {
@@ -330,6 +388,11 @@ export const exercicesAutoPartieToutPremiere: FicheExercicesData = {
             { label: "Écoles (k€)", value: 450 },
             { label: "Cantine (k€)", value: 180 },
           ]),
+          reponses: [
+            { question: "a)", attendu: "1500000 €" },
+            { question: "b)", attendu: "450000 €" },
+            { question: "c)", attendu: "40 %" },
+          ],
           micros: ["auto_prop_tout_connaissant_partie", "auto_prop_pourcentage_de_pourcentage"],
         },
         {
@@ -342,6 +405,12 @@ export const exercicesAutoPartieToutPremiere: FicheExercicesData = {
             { label: "65 ans et + (avant)", value: 9.6 },
             { label: "65 ans et + (après)", value: 16 },
           ]),
+          reponses: [
+            { question: "a) avant", attendu: ["9,6", "9600000"] },
+            { question: "a) après", attendu: ["16", "16000000"] },
+            { question: "b) %", attendu: "10 %" },
+            { question: "b) personnes", attendu: ["6,4", "6400000"] },
+          ],
           micros: ["auto_prop_partie_connaissant_tout", "auto_prop_pourcentage_de_pourcentage"],
         },
         {
@@ -351,6 +420,12 @@ export const exercicesAutoPartieToutPremiere: FicheExercicesData = {
           correction:
             "a) Après une remise de $25$ %, on paie $75$ % du prix de départ : $90$ € sont une PARTIE.\n$25$ % du prix de départ : $90 \\div 3 = 30$ €. Le prix de départ : $4 \\times 30 = 120$ € TTC.\nb) $90$ € TTC $= 120$ % du prix HT : le HT est le tout. $\\dfrac{90}{1{,}2} = \\dfrac{900}{12} = 75$ € HT.\nLa TVA : $90 - 75 = 15$ €.\nc) $90 + 22{,}50 = 112{,}50$ €. Faux : les $25$ % se prennent sur le prix de DÉPART ($120$ €), pas sur le prix soldé.\n⚠️ Retrouver un prix d'avant, c'est toujours chercher un tout : on divise.",
           schema: tableau(["manteau soldé", "TTC (€)", "HT (€)", "TVA (€)"], ["montant", 90, 75, 15]),
+          reponses: [
+            { question: "a)", attendu: "120 €" },
+            { question: "b) HT", attendu: "75 €" },
+            { question: "b) TVA", attendu: "15 €" },
+            { question: "c)", attendu: "112,50 €" },
+          ],
           micros: ["auto_prop_tout_connaissant_partie"],
         },
       ],

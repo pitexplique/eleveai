@@ -69,6 +69,11 @@ export const exercicesAutoLectureGraphiquePremiere: FicheExercicesData = {
             { x: 1, y: 4, label: "f(1)" },
             { x: 3, y: 0, label: "f(3)" },
           ], undefined, true)),
+          reponses: [
+            { question: "f(0)", attendu: "3" },
+            { question: "f(1)", attendu: "4" },
+            { question: "f(3)", attendu: "0" },
+          ],
           micros: ["auto_fct_image_antecedent"],
         },
         {
@@ -85,6 +90,12 @@ export const exercicesAutoLectureGraphiquePremiere: FicheExercicesData = {
               { x: 4, y: 5, label: "4" },
             ], [-3, 5], true),
           ),
+          reponses: [
+            { question: "-3", attendu: "0 ; 2" },
+            { question: "5", attendu: "-2 ; 4" },
+            { question: "-4", attendu: "1" },
+            { question: "-6", attendu: ["aucun", "aucun antécédent", "∅"] },
+          ],
           micros: ["auto_fct_image_antecedent"],
         },
         {
@@ -92,12 +103,20 @@ export const exercicesAutoLectureGraphiquePremiere: FicheExercicesData = {
           correction:
             "On remplace $x$ par l'abscisse du point, et on compare le résultat à son ordonnée.\nPour $A$ : $2^2 + 3 = 4 + 3 = 7$. On trouve l'ordonnée de $A$ : $A$ est sur la courbe.\nPour $B$ : $(-1)^2 + 3 = 1 + 3 = 4$, et non $2$ : $B$ n'est pas sur la courbe.\n⚠️ $(-1)^2 = 1$ et non $-1$ : le carré d'un nombre négatif est positif.",
           schema: ecranSeulement(repere([-3, 3, -1, 13], [{ q: [1, 0, 3] }], [{ x: 2, y: 7, label: "A" }], undefined, true)),
+          reponses: [
+            { question: "A", attendu: ["oui", "vrai"] },
+            { question: "B", attendu: ["non", "faux"] },
+          ],
           micros: ["auto_fct_appartenance_courbe"],
         },
         {
           enonce: "On considère la courbe d'équation $y = 2x^2 - 1$.\na) Calculer l'ordonnée de son point d'abscisse $-2$.\nb) Trouver ses points d'ordonnée $1$.",
           correction:
             "a) $2 \\times (-2)^2 - 1 = 2 \\times 4 - 1 = 7$ : le point est $(-2 ; 7)$.\nb) On cherche $x$ tel que $2x^2 - 1 = 1$, soit $2x^2 = 2$, donc $x^2 = 1$.\nDeux solutions : $x = 1$ ou $x = -1$. Les points sont $(1 ; 1)$ et $(-1 ; 1)$.\n⚠️ $(-2)^2 = 4$ : le signe moins est DANS la parenthèse, il disparaît au carré.",
+          reponses: [
+            { question: "a)", attendu: "7" },
+            { question: "b) abscisses", attendu: "1 ; -1" },
+          ],
           micros: ["auto_fct_appartenance_courbe"],
         },
         {
@@ -111,6 +130,10 @@ export const exercicesAutoLectureGraphiquePremiere: FicheExercicesData = {
             { x: 4, y: 4, label: "14 h" },
             { x: 5, y: 3, label: "16 h" },
           ], 3)),
+          reponses: [
+            { question: "b)", attendu: "20 °" },
+            { question: "c)", attendu: "12 h ; 16 h" },
+          ],
           micros: ["auto_fct_reperer_graphique", "auto_fct_image_antecedent"],
         },
         {
@@ -119,6 +142,13 @@ export const exercicesAutoLectureGraphiquePremiere: FicheExercicesData = {
           correction:
             "$A(2) = \\dfrac{4}{4} + 1 = 2$ ; $A(3) = \\dfrac{9}{4} + 1 = 3{,}25$ ; $A(4) = \\dfrac{16}{4} + 1 = 5$ ; $A(5) = \\dfrac{25}{4} + 1 = 7{,}25$.\nLe nombre d'abonnés augmente : le seuil de $5$ milliers est atteint au mois $4$, puis dépassé.\n⚠️ $5\\,000$ abonnés, c'est $A(x) = 5$ : on travaille dans l'unité de la fonction, les milliers.",
           schema: ecranSeulement(tableau(["mois", "2", "3", "4", "5"], ["abonnés (milliers)", 2, "3,25", 5, "7,25"])),
+          reponses: [
+            { question: "A(2)", attendu: "2" },
+            { question: "A(3)", attendu: "3,25" },
+            { question: "A(4)", attendu: "5" },
+            { question: "A(5)", attendu: "7,25" },
+            { question: "mois", attendu: "4" },
+          ],
           micros: ["auto_fct_estimer_seuil"],
         },
         {
@@ -131,6 +161,10 @@ export const exercicesAutoLectureGraphiquePremiere: FicheExercicesData = {
               { x: 2, y: 2, label: "2" },
             ], 2, true),
           ),
+          reponses: [
+            { question: "a)", attendu: "2" },
+            { question: "b)", attendu: "2 ; -2" },
+          ],
           micros: ["auto_fct_image_antecedent"],
         },
         {
@@ -141,6 +175,10 @@ export const exercicesAutoLectureGraphiquePremiere: FicheExercicesData = {
             { x: 0, y: 0, label: "O" },
             { x: 4, y: 0, label: "4" },
           ], undefined, true)),
+          reponses: [
+            { question: "origine", attendu: ["oui", "vrai"] },
+            { question: "abscisses", attendu: "0 ; 4" },
+          ],
           micros: ["auto_fct_appartenance_courbe"],
         },
       ],
@@ -169,6 +207,12 @@ export const exercicesAutoLectureGraphiquePremiere: FicheExercicesData = {
             { x: 6, y: 10, label: "km 6" },
             { x: 4, y: 12, label: "sommet" },
           ], 10, true)),
+          reponses: [
+            { question: "a) départ", attendu: "400 m" },
+            { question: "a) sommet", attendu: "1200 m" },
+            { question: "b)", attendu: "3 km ; 6 km" },
+            { question: "c)", attendu: "800 m" },
+          ],
           micros: ["auto_fct_reperer_graphique", "auto_fct_image_antecedent"],
         },
         {
@@ -183,6 +227,12 @@ export const exercicesAutoLectureGraphiquePremiere: FicheExercicesData = {
             { x: 2, y: 3, label: "" },
             { x: 3, y: 4, label: "max" },
           ], undefined, true)),
+          reponses: [
+            { question: "a)", attendu: "3000 €" },
+            { question: "b)", attendu: "100" },
+            { question: "c) bénéfice", attendu: "4000 €" },
+            { question: "c) objets", attendu: "300" },
+          ],
           micros: ["auto_fct_estimer_seuil", "auto_fct_image_antecedent"],
         },
         {
@@ -196,6 +246,10 @@ export const exercicesAutoLectureGraphiquePremiere: FicheExercicesData = {
             { x: 2, y: 6, label: "A" },
             { x: 3, y: 11, label: "C(3)" },
           ], undefined, true)),
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: ["non", "faux"] },
+          ],
           micros: ["auto_fct_appartenance_courbe"],
         },
         {
@@ -210,6 +264,12 @@ export const exercicesAutoLectureGraphiquePremiere: FicheExercicesData = {
             { x: 10, y: 7, label: "octobre" },
             { x: 7, y: 12, label: "juillet" },
           ], 7, true)),
+          reponses: [
+            { question: "a)", attendu: "14 °" },
+            { question: "b)", attendu: ["avril ; octobre"] },
+            { question: "c) mois", attendu: ["juillet"] },
+            { question: "c) température", attendu: "24 °" },
+          ],
           micros: ["auto_fct_image_antecedent", "auto_fct_reperer_graphique"],
         },
         {
@@ -223,6 +283,11 @@ export const exercicesAutoLectureGraphiquePremiere: FicheExercicesData = {
             { x: 2, y: 10, label: "alerte" },
             { x: 4, y: 4, label: "crise" },
           ], [10, 4], true)),
+          reponses: [
+            { question: "a)", attendu: "12" },
+            { question: "b)", attendu: "2" },
+            { question: "c)", attendu: "4" },
+          ],
           micros: ["auto_fct_estimer_seuil", "auto_fct_appartenance_courbe"],
         },
         {
@@ -236,6 +301,11 @@ export const exercicesAutoLectureGraphiquePremiere: FicheExercicesData = {
             { x: 2, y: 6, label: "2010" },
             { x: 4, y: 8, label: "2020" },
           ], undefined, true)),
+          reponses: [
+            { question: "a)", attendu: "600 €" },
+            { question: "b)", attendu: "2020" },
+            { question: "c)", attendu: "100 €" },
+          ],
           micros: ["auto_fct_reperer_graphique", "auto_fct_image_antecedent"],
         },
         {
@@ -249,6 +319,12 @@ export const exercicesAutoLectureGraphiquePremiere: FicheExercicesData = {
             { x: 4, y: 8, label: "R" },
             { x: 6, y: 0, label: "sol" },
           ], 6, true)),
+          reponses: [
+            { question: "a) R", attendu: ["oui", "vrai"] },
+            { question: "a) (2 ; 7)", attendu: ["non", "faux"] },
+            { question: "b)", attendu: ["oui", "vrai"] },
+            { question: "c)", attendu: "60 m" },
+          ],
           micros: ["auto_fct_appartenance_courbe", "auto_fct_image_antecedent"],
         },
         {
@@ -262,6 +338,12 @@ export const exercicesAutoLectureGraphiquePremiere: FicheExercicesData = {
             { x: 2, y: 8, label: "800 €" },
             { x: 6, y: 5, label: "500 €" },
           ], 5, true)),
+          reponses: [
+            { question: "a)", attendu: "1000 €" },
+            { question: "b)", attendu: "2" },
+            { question: "c)", attendu: "6" },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           micros: ["auto_fct_estimer_seuil"],
         },
       ],
@@ -291,6 +373,14 @@ export const exercicesAutoLectureGraphiquePremiere: FicheExercicesData = {
             { x: 4, y: 2, label: "" },
             { x: 8, y: 10, label: "2000" },
           ], 4, true),
+          reponses: [
+            { question: "a)", attendu: "1000" },
+            { question: "b)", attendu: "400" },
+            { question: "c) année", attendu: "1960" },
+            { question: "c) habitants", attendu: "200" },
+            { question: "d)", attendu: "1940 ; 1980" },
+            { question: "e)", attendu: ["oui", "vrai"] },
+          ],
           micros: ["auto_fct_reperer_graphique", "auto_fct_image_antecedent", "auto_fct_appartenance_courbe"],
         },
         {
@@ -305,6 +395,11 @@ export const exercicesAutoLectureGraphiquePremiere: FicheExercicesData = {
             { x: 6, y: 6, label: "60 €" },
             { x: 4, y: 8, label: "max" },
           ], 6, true),
+          reponses: [
+            { question: "b)", attendu: "6000 €" },
+            { question: "c)", attendu: "20 € ; 60 €" },
+            { question: "d)", attendu: "40 €" },
+          ],
           micros: ["auto_fct_reperer_graphique", "auto_fct_image_antecedent", "auto_fct_estimer_seuil", "auto_fct_appartenance_courbe"],
         },
         {
@@ -319,6 +414,13 @@ export const exercicesAutoLectureGraphiquePremiere: FicheExercicesData = {
             { x: 11, y: 6, label: "novembre" },
             { x: 8, y: 1, label: "août" },
           ], [6, 2], true)),
+          reponses: [
+            { question: "a)", attendu: "400" },
+            { question: "b)", attendu: ["avril ; novembre"] },
+            { question: "c) mois", attendu: ["août", "aout"] },
+            { question: "c) débit", attendu: "100" },
+            { question: "d)", attendu: ["de juillet à septembre", "juillet à septembre", "juillet ; août ; septembre"] },
+          ],
           micros: ["auto_fct_reperer_graphique", "auto_fct_image_antecedent", "auto_fct_estimer_seuil"],
         },
         {
@@ -332,6 +434,12 @@ export const exercicesAutoLectureGraphiquePremiere: FicheExercicesData = {
             { x: 3.5, y: 10, label: "10 €" },
             { x: 4, y: 11, label: "" },
           ], 10, true),
+          reponses: [
+            { question: "a)", attendu: "7 €" },
+            { question: "b) (4 ; 11)", attendu: ["oui", "vrai"] },
+            { question: "b) (3 ; 8)", attendu: ["non", "faux"] },
+            { question: "d)", attendu: ["3,5 h", "3 h 30 min", "3 h 30"] },
+          ],
           micros: ["auto_fct_image_antecedent", "auto_fct_appartenance_courbe", "auto_fct_reperer_graphique", "auto_fct_estimer_seuil"],
         },
       ],

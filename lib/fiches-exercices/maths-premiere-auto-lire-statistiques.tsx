@@ -66,6 +66,11 @@ export const exercicesAutoLireStatistiquesPremiere: FicheExercicesData = {
           ]),
           correction:
             "a) On repère la barre de mars, puis on lit sa hauteur : $90$ trottinettes.\nb) La barre la plus haute est celle d'avril : $240$ trottinettes.\nc) On fait la différence des deux hauteurs : $240 - 120 = 120$ trottinettes de plus.\n⭐ Avril a vendu exactement deux fois plus que janvier : $240 = 2 \\times 120$.\n⚠️ On vérifie l'unité avant de répondre : des trottinettes, pas des euros.",
+          reponses: [
+            { question: "a)", attendu: "90" },
+            { question: "b)", attendu: ["avril"] },
+            { question: "c)", attendu: "120" },
+          ],
           micros: ["auto_stat_lire_graphique"],
         },
         {
@@ -73,6 +78,10 @@ export const exercicesAutoLireStatistiquesPremiere: FicheExercicesData = {
             "Sur l'axe vertical d'un diagramme en barres, on lit $0$ puis $200$, et il y a $5$ intervalles égaux entre les deux.\na) Que vaut une graduation ?\nb) Une barre s'arrête $3$ graduations au-dessus du $200$. Quelle valeur représente-t-elle ?",
           correction:
             "a) On partage $200$ en $5$ parts égales : $200 \\div 5 = 40$. Une graduation vaut $40$.\nb) Trois graduations au-dessus de $200$ : $200 + 3 \\times 40 = 200 + 120 = 320$.\n⚠️ Le piège : croire qu'une graduation vaut $1$, ou $10$. On ne la devine pas, on la CALCULE à partir de deux nombres écrits sur l'axe.",
+          reponses: [
+            { question: "a)", attendu: "40" },
+            { question: "b)", attendu: "320" },
+          ],
           micros: ["auto_stat_lire_graphique"],
         },
         {
@@ -84,6 +93,9 @@ export const exercicesAutoLireStatistiquesPremiere: FicheExercicesData = {
             { label: "2023", value: 102 },
             { label: "2024", value: 104 },
           ]),
+          reponses: [
+            { attendu: ["non", "faux"] },
+          ],
           micros: ["auto_stat_lire_graphique"],
         },
         {
@@ -98,6 +110,11 @@ export const exercicesAutoLireStatistiquesPremiere: FicheExercicesData = {
           ]),
           correction:
             "a) Le bâton au-dessus de $2$ a pour hauteur $6$ : $6$ familles.\nb) Au moins $2$, c'est $2$, $3$ ou $4$ enfants : $6 + 2 + 1 = 9$ familles.\nc) Chaque famille compte autant d'enfants que l'indique son abscisse.\n$0 \\times 4 + 1 \\times 7 + 2 \\times 6 + 3 \\times 2 + 4 \\times 1 = 0 + 7 + 12 + 6 + 4 = 29$ enfants.\n⛔ Le piège au c) : répondre $20$. La HAUTEUR compte des familles ; l'ABSCISSE, des enfants.",
+          reponses: [
+            { question: "a)", attendu: "6" },
+            { question: "b)", attendu: "9" },
+            { question: "c)", attendu: "29" },
+          ],
           micros: ["auto_stat_graphiques_usuels", "auto_stat_graphique_donnees"],
         },
         {
@@ -117,6 +134,9 @@ export const exercicesAutoLireStatistiquesPremiere: FicheExercicesData = {
             { label: "À pied", value: 60 },
             { label: "Vélo", value: 40 },
           ], 2),
+          reponses: [
+            { attendu: "60" },
+          ],
           micros: ["auto_stat_graphique_donnees"],
         },
         {
@@ -129,6 +149,11 @@ export const exercicesAutoLireStatistiquesPremiere: FicheExercicesData = {
             { label: "Tom", value: 9 },
             { label: "Sami", value: 3 },
           ]),
+          reponses: [
+            { question: "Inès", attendu: "180°" },
+            { question: "Tom", attendu: "135°" },
+            { question: "Sami", attendu: "45°" },
+          ],
           micros: ["auto_stat_graphique_donnees"],
         },
         {
@@ -141,6 +166,11 @@ export const exercicesAutoLireStatistiquesPremiere: FicheExercicesData = {
             { label: "Voiture (%)", value: 36 },
             { label: "Avion (%)", value: 24 },
           ]),
+          reponses: [
+            { question: "train", attendu: "40 %" },
+            { question: "voiture", attendu: "36 %" },
+            { question: "avion", attendu: "24 %" },
+          ],
           micros: ["auto_stat_graphique_donnees"],
         },
         {
@@ -148,6 +178,10 @@ export const exercicesAutoLireStatistiquesPremiere: FicheExercicesData = {
             "Dans un diagramme en barres, $1$ cm de hauteur représente $50$ élèves.\na) Quelle hauteur donner à une barre de $175$ élèves ?\nb) Combien d'élèves représente une barre de $4{,}4$ cm ?",
           correction:
             "a) On cherche combien de fois $50$ il y a dans $175$ : $175 \\div 50 = 3{,}5$. La barre mesure $3{,}5$ cm.\nb) On fait le chemin inverse : $4{,}4 \\times 50 = 220$ élèves.\n⭐ L'échelle se lit dans les deux sens : on divise pour dessiner, on multiplie pour lire.\n⚠️ Le piège : croire que la hauteur en cm EST le nombre d'élèves.",
+          reponses: [
+            { question: "a)", attendu: "3,5 cm" },
+            { question: "b)", attendu: "220" },
+          ],
           micros: ["auto_stat_lire_graphique"],
         },
       ],
@@ -177,6 +211,11 @@ export const exercicesAutoLireStatistiquesPremiere: FicheExercicesData = {
           ]),
           correction:
             "a) On additionne les cinq barres : $16 + 16 + 17 + 15 + 4 = 68$ millions d'habitants.\nb) $60$ ans ou plus, ce sont les deux dernières barres : $15 + 4 = 19$ millions.\nc) Un quart de $68$ millions, c'est $68 \\div 4 = 17$ millions.\n$19 > 17$ : les $60$ ans ou plus représentent PLUS d'un quart de la population.\n⭐ Comparer à une fraction simple (un quart) évite une division difficile.\n⚠️ On lit des MILLIONS : $19$ millions de personnes, pas $19$ personnes.",
+          reponses: [
+            { question: "a)", attendu: "68" },
+            { question: "b)", attendu: "19" },
+            { question: "c)", attendu: ["plus", "plus d'un quart"] },
+          ],
           micros: ["auto_stat_lire_graphique", "auto_stat_graphiques_usuels"],
         },
         {
@@ -190,6 +229,13 @@ export const exercicesAutoLireStatistiquesPremiere: FicheExercicesData = {
           ]),
           correction:
             "a) $1$ % de $2\\,000$, c'est $20$ voix.\nListe A : $45 \\times 20 = 900$ voix. Liste B : $35 \\times 20 = 700$ voix. Liste C : $20 \\times 20 = 400$ voix.\n✔️ Vérification : $900 + 700 + 400 = 2\\,000$.\nb) $45$ % de $360°$ : $0{,}45 \\times 360 = 162°$ (la moitié de $360$ fait $180$, on retire $5$ %, soit $18$).\nc) La majorité absolue demande plus de $50$ %, soit plus de $1\\,000$ voix. A n'a que $45$ % : non.\nA est pourtant EN TÊTE : $900$ voix, plus que chacune des deux autres listes.\n⭐ « En tête » et « majorité absolue » sont deux choses différentes.",
+          reponses: [
+            { question: "a) A", attendu: "900" },
+            { question: "a) B", attendu: "700" },
+            { question: "a) C", attendu: "400" },
+            { question: "b)", attendu: "162°" },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           micros: ["auto_stat_graphique_donnees", "auto_stat_graphiques_usuels"],
         },
         {
@@ -205,6 +251,13 @@ export const exercicesAutoLireStatistiquesPremiere: FicheExercicesData = {
           ]),
           correction:
             "a) C'est la barre « $2$ à $2{,}5$ » : $70$ salariés.\nb) Moins de $2\\,500$ €, ce sont les deux premières barres : $60 + 70 = 130$ salariés.\nEn pourcentage : $\\dfrac{130}{200} = \\dfrac{65}{100} = 65$ %.\nc) Au moins $3\\,000$ €, ce sont les deux dernières barres : $20 + 10 = 30$ salariés, soit $\\dfrac{30}{200} = 15$ %.\nd) Non. Le graphique REGROUPE les salaires par classes : on sait que $70$ salariés sont entre $2\\,000$ et $2\\,500$ €, pas comment ils s'y répartissent.\n⚠️ Un graphique par classes perd le détail des valeurs : on ne peut pas le « dé-regrouper ».",
+          reponses: [
+            { question: "a)", attendu: "70" },
+            { question: "b) salariés", attendu: "130" },
+            { question: "b) %", attendu: "65 %" },
+            { question: "c)", attendu: "15 %" },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           micros: ["auto_stat_lire_graphique", "auto_stat_graphique_donnees"],
         },
         {
@@ -223,6 +276,11 @@ export const exercicesAutoLireStatistiquesPremiere: FicheExercicesData = {
             { label: "T. contre", value: 20 },
             { label: "Contre", value: 35 },
           ]),
+          reponses: [
+            { question: "a)", attendu: "540" },
+            { question: "b)", attendu: ["oui", "vrai"] },
+            { question: "c)", attendu: "72°" },
+          ],
           micros: ["auto_stat_graphique_donnees", "auto_stat_graphiques_usuels"],
         },
         {
@@ -238,6 +296,12 @@ export const exercicesAutoLireStatistiquesPremiere: FicheExercicesData = {
           ]),
           correction:
             "a) $40$ m², c'est $4$ dizaines : le point d'abscisse $4$ a pour ordonnée $8$. Le loyer est de $8$ centaines d'euros, soit $800$ €.\nb) Oui : plus on va à droite, plus les points montent. Les deux grandeurs varient dans le même sens.\nc) $20$ m² : le point $(2\\,;\\,5)$, donc $500$ €, et $\\dfrac{500}{20} = 25$ € le m².\n$60$ m² : le point $(6\\,;\\,12)$, donc $1\\,200$ €, et $\\dfrac{1\\,200}{60} = 20$ € le m².\nLe petit appartement coûte PLUS CHER au m².\n⚠️ On traduit les unités des axes avant de répondre : « $8$ » veut dire $800$ €.",
+          reponses: [
+            { question: "a)", attendu: "800 €" },
+            { question: "b)", attendu: ["oui", "vrai"] },
+            { question: "c) 20 m²", attendu: "25 €" },
+            { question: "c) 60 m²", attendu: "20 €" },
+          ],
           micros: ["auto_stat_graphiques_usuels", "auto_stat_graphique_donnees"],
         },
         {
@@ -246,6 +310,12 @@ export const exercicesAutoLireStatistiquesPremiere: FicheExercicesData = {
             "Pour chaque situation, quel graphique choisir : diagramme circulaire, diagramme en barres, ou nuage de points ?\na) La répartition des sièges d'une assemblée entre les partis.\nb) Le nombre de touristes accueillis dans un pays chaque année, de 2015 à 2024.\nc) Pour $30$ pays, le revenu moyen par habitant et l'espérance de vie.\nd) Les budgets des cinq ministères les mieux dotés.",
           correction:
             "a) Circulaire : les sièges forment un TOUT, qu'on partage entre les partis.\nb) Barres : on compare des valeurs, année après année, et on voit l'évolution.\nc) Nuage de points : chaque pays porte DEUX nombres, un point par pays.\nd) Barres : on compare cinq valeurs.\n⛔ Le piège au d) : un diagramme circulaire. Cinq ministères ne font pas TOUT le budget de l'État : leurs parts ne forment pas un tout.",
+          reponses: [
+            { question: "a)", attendu: ["circulaire", "diagramme circulaire", "camembert"] },
+            { question: "b)", attendu: ["barres", "diagramme en barres"] },
+            { question: "c)", attendu: ["nuage de points", "nuage"] },
+            { question: "d)", attendu: ["barres", "diagramme en barres"] },
+          ],
           micros: ["auto_stat_graphiques_usuels"],
         },
         {
@@ -259,6 +329,15 @@ export const exercicesAutoLireStatistiquesPremiere: FicheExercicesData = {
             { label: "Renouvelables", value: 25 },
             { label: "Fossiles", value: 10 },
           ]),
+          reponses: [
+            { question: "a)", attendu: "36°" },
+            { question: "b) nucléaire", attendu: "65 %" },
+            { question: "b) renouvelables", attendu: "25 %" },
+            { question: "b) fossiles", attendu: "10 %" },
+            { question: "c) nucléaire", attendu: "325" },
+            { question: "c) renouvelables", attendu: "125" },
+            { question: "c) fossiles", attendu: "50" },
+          ],
           micros: ["auto_stat_graphique_donnees"],
         },
         {
@@ -271,6 +350,9 @@ export const exercicesAutoLireStatistiquesPremiere: FicheExercicesData = {
             { label: "Cadres en 2000", value: 10 },
             { label: "Cadres en 2020", value: 30 },
           ]),
+          reponses: [
+            { attendu: ["non", "faux"] },
+          ],
           micros: ["auto_stat_graphiques_usuels", "auto_stat_graphique_donnees"],
         },
       ],
@@ -305,6 +387,13 @@ export const exercicesAutoLireStatistiquesPremiere: FicheExercicesData = {
               {tableau(["Âge", "0-19", "20-59", "60 et +"], ["2025 (hab.)", "13 200", "30 000", "16 800"])}
             </div>
           ),
+          reponses: [
+            { question: "a) 1975", attendu: "17500 ; 25000 ; 7500", ordre: true },
+            { question: "a) 2025", attendu: "13200 ; 30000 ; 16800", ordre: true },
+            { question: "b)", attendu: ["oui", "vrai"] },
+            { question: "c)", attendu: ["non", "faux"] },
+            { question: "d)", attendu: ["barres", "diagramme en barres"] },
+          ],
           micros: ["auto_stat_graphique_donnees", "auto_stat_graphiques_usuels"],
         },
         {
@@ -317,6 +406,16 @@ export const exercicesAutoLireStatistiquesPremiere: FicheExercicesData = {
             { label: "Candidat A (%)", value: 26 },
             { label: "Candidat B (%)", value: 24 },
           ]),
+          reponses: [
+            { question: "a) A", attendu: "4 cm" },
+            { question: "a) B", attendu: "2 cm" },
+            { question: "b)", attendu: "2" },
+            { question: "c) A", attendu: "13000" },
+            { question: "c) B", attendu: "12000" },
+            { question: "c) écart", attendu: "1000" },
+            { question: "d)", attendu: ["non", "faux"] },
+            { question: "d) %", attendu: ["8 %", "1/12"] },
+          ],
           micros: ["auto_stat_lire_graphique", "auto_stat_graphiques_usuels", "auto_stat_graphique_donnees"],
         },
         {
@@ -335,6 +434,18 @@ export const exercicesAutoLireStatistiquesPremiere: FicheExercicesData = {
           ]),
           correction:
             "a) $1$ % de $2\\,500$ €, c'est $25$ €.\nLogement $28 \\times 25 = 700$ €, alimentation $400$ €, transports $350$ €, loisirs $300$ €, épargne $250$ €, autres $500$ €.\n✔️ $700 + 400 + 350 + 300 + 250 + 500 = 2\\,500$ €.\nb) Logement : $800$ €, soit $\\dfrac{800}{2\\,500} = \\dfrac{32}{100} = 32$ %. Loisirs : $200$ €, soit $\\dfrac{200}{2\\,500} = 8$ %.\nc) La part passe de $28$ % à $32$ % : $4$ points. Un point vaut $3{,}6°$, donc le secteur grandit de $4 \\times 3{,}6 = 14{,}4°$.\nd) $\\dfrac{1\\,000}{5\\,000} = 20$ %. Le loyer est plus élevé en euros, mais pèse MOINS dans le budget.\n⭐ Même dépense, poids différent : tout dépend du total. C'est pourquoi une hausse des loyers touche davantage les petits budgets.",
+          reponses: [
+            { question: "a) logement", attendu: "700 €" },
+            { question: "a) alimentation", attendu: "400 €" },
+            { question: "a) transports", attendu: "350 €" },
+            { question: "a) loisirs", attendu: "300 €" },
+            { question: "a) épargne", attendu: "250 €" },
+            { question: "a) autres", attendu: "500 €" },
+            { question: "b) logement", attendu: "32 %" },
+            { question: "b) loisirs", attendu: "8 %" },
+            { question: "c)", attendu: "14,4°" },
+            { question: "d)", attendu: "20 %" },
+          ],
           micros: ["auto_stat_graphique_donnees", "auto_stat_graphiques_usuels"],
         },
         {
@@ -351,6 +462,13 @@ export const exercicesAutoLireStatistiquesPremiere: FicheExercicesData = {
           correction:
             "a) La barre « 2000 » : $30$ jours. Une décennie compte $10$ ans : $30 \\div 10 = 3$ jours par an en moyenne.\nb) On calcule les écarts d'une barre à la suivante : $10 - 10 = 0$, $20 - 10 = 10$, $30 - 20 = 10$, $50 - 30 = 20$.\nNon : l'augmentation n'est pas régulière, et elle s'ACCÉLÈRE à la fin.\nc) $\\dfrac{50}{10} = 5$ : cinq fois plus.\nd) Total : $10 + 10 + 20 + 30 + 50 = 120$ jours. Un tiers de $120$, c'est $40$, et $50 > 40$ : oui, plus d'un tiers.\n⭐ Une seule décennie sur cinq concentre plus du tiers des jours de forte chaleur.",
           schema: tableau(["Décennie", "1980", "1990", "2000", "2010"], ["Écart avec la précédente", 0, 10, 10, 20]),
+          reponses: [
+            { question: "a) jours", attendu: "30" },
+            { question: "a) par an", attendu: "3" },
+            { question: "b)", attendu: ["non", "faux"] },
+            { question: "c)", attendu: "5" },
+            { question: "d)", attendu: ["oui", "vrai"] },
+          ],
           micros: ["auto_stat_lire_graphique", "auto_stat_graphiques_usuels", "auto_stat_graphique_donnees"],
         },
       ],

@@ -121,6 +121,11 @@ export const exercicesAutoProportionPremiere: FicheExercicesData = {
           correction:
             "La partie : $10$ élèves. Le tout : $25$ élèves.\nProportion : $\\dfrac{10}{25}$. On simplifie par $5$ : $\\dfrac{2}{5}$.\nEn décimal : $\\dfrac{2}{5} = \\dfrac{4}{10} = 0{,}4$.\nEn pourcentage : $0{,}4 \\times 100 = 40$ %.\n⚠️ Le piège : $\\dfrac{25}{10}$. On divise la PARTIE par le TOUT, jamais l'inverse : une proportion ne dépasse pas $1$.",
           schema: barre([{ label: "40 %", value: 10 }, { label: "60 %", value: 15 }], "25 élèves : 10 demi-pensionnaires"),
+          reponses: [
+            { question: "fraction", attendu: "2/5" },
+            { question: "décimal", attendu: "0,4" },
+            { question: "pourcentage", attendu: "40 %" },
+          ],
           micros: ["auto_prop_calculer"],
         },
         {
@@ -128,18 +133,32 @@ export const exercicesAutoProportionPremiere: FicheExercicesData = {
           correction:
             "a) $\\dfrac{3}{4} = \\dfrac{75}{100} = 0{,}75$, soit $75$ %.\nb) $0{,}05 = \\dfrac{5}{100} = \\dfrac{1}{20}$, soit $5$ %.\nc) $12$ % $= \\dfrac{12}{100} = 0{,}12$. On simplifie par $4$ : $\\dfrac{3}{25}$.\n⭐ Le passage par « sur $100$ » relie les trois écritures : un pourcentage EST une fraction de dénominateur $100$.",
           schema: tableau(["fraction", "3/4", "1/20", "3/25"], ["pourcentage", "75 %", "5 %", "12 %"]),
+          reponses: [
+            { question: "a) décimal", attendu: "0,75" },
+            { question: "a) pourcentage", attendu: "75 %" },
+            { question: "b) fraction irréductible", attendu: "1/20", exact: true },
+            { question: "b) pourcentage", attendu: "5 %" },
+            { question: "c) décimal", attendu: "0,12" },
+            { question: "c) fraction irréductible", attendu: "3/25", exact: true },
+          ],
           micros: ["auto_prop_formes"],
         },
         {
           enonce: "Parmi $0{,}6$ ; $60$ % ; $\\dfrac{6}{10}$ et $60$, quelle écriture n'est PAS égale à $\\dfrac{3}{5}$ ?",
           correction:
             "$\\dfrac{3}{5} = \\dfrac{6}{10} = 0{,}6$.\n$60$ % $= \\dfrac{60}{100} = 0{,}6$ : égal aussi.\nMais $60$ tout seul, SANS le symbole %, vaut $60$ : c'est $100$ fois trop.\nL'intruse est $60$.\n⚠️ Le symbole % fait partie du nombre : il veut dire « divisé par $100$ ».",
+          reponses: [
+            { attendu: "60" },
+          ],
           micros: ["auto_prop_formes"],
         },
         {
           enonce: "Calculer $30$ % de $150$.",
           correction:
             "De tête : $10$ % de $150$, c'est $150 \\div 10 = 15$.\n$30$ %, c'est trois fois plus : $3 \\times 15 = 45$.\nAutre chemin : $150 \\times 0{,}3 = 45$.\n⭐ C'est la question du sujet de Métropole, en juin 2026.",
+          reponses: [
+            { attendu: "45" },
+          ],
           micros: ["auto_prop_appliquer"],
         },
         {
@@ -157,18 +176,29 @@ export const exercicesAutoProportionPremiere: FicheExercicesData = {
               "250 = 4 parts de 62,5",
             ),
           ),
+          reponses: [
+            { attendu: "62,5" },
+          ],
           micros: ["auto_prop_appliquer"],
         },
         {
           enonce: "Sur $60$ salariés d'une entreprise, $18$ viennent au travail à vélo. Quel pourcentage cela représente-t-il ?",
           correction:
             "Proportion : $\\dfrac{18}{60}$.\nOn simplifie par $6$ : $\\dfrac{3}{10} = 0{,}3$.\nEn pourcentage : $30$ %.\n⭐ Simplifier la fraction d'abord rend le calcul de tête facile.",
+          reponses: [
+            { attendu: "30 %" },
+          ],
           micros: ["auto_prop_calculer"],
         },
         {
           enonce: "Calculer : a) $5$ % de $80$ ; b) $1$ % de $350$ ; c) $150$ % de $40$.",
           correction:
             "a) $10$ % de $80$ vaut $8$ ; $5$ %, c'est la moitié : $4$.\nb) $1$ %, c'est diviser par $100$ : $350 \\div 100 = 3{,}5$.\nc) $150$ % $= 1{,}5$ : $40 \\times 1{,}5 = 60$. Autre chemin : $100$ % de $40$ plus $50$ % de $40$, soit $40 + 20 = 60$.\n⚠️ Un pourcentage au-dessus de $100$ % donne PLUS que la quantité de départ : c'est normal.",
+          reponses: [
+            { question: "a)", attendu: "4" },
+            { question: "b)", attendu: "3,5" },
+            { question: "c)", attendu: "60" },
+          ],
           micros: ["auto_prop_appliquer"],
         },
         {
@@ -181,6 +211,9 @@ export const exercicesAutoProportionPremiere: FicheExercicesData = {
             { value: 0.28, label: "28 %" },
             { value: 0.3, label: "0,3" },
           ]),
+          reponses: [
+            { attendu: "1/5 < 1/4 < 28 % < 0,3", ordre: true },
+          ],
           micros: ["auto_prop_formes"],
         },
       ],
@@ -207,6 +240,10 @@ export const exercicesAutoProportionPremiere: FicheExercicesData = {
             { label: "Votants", value: 75 },
             { label: "Abstention", value: 25 },
           ]),
+          reponses: [
+            { question: "a)", attendu: "75 %" },
+            { question: "b)", attendu: "25 %" },
+          ],
           micros: ["auto_prop_calculer", "auto_prop_formes"],
         },
         {
@@ -224,6 +261,13 @@ export const exercicesAutoProportionPremiere: FicheExercicesData = {
               { label: "Reste", value: 860 },
             ]),
           ),
+          reponses: [
+            { question: "a) logement", attendu: "600 €" },
+            { question: "a) alimentation", attendu: "300 €" },
+            { question: "a) transports", attendu: "240 €" },
+            { question: "b) reste", attendu: "860 €" },
+            { question: "b) pourcentage", attendu: "43 %" },
+          ],
           micros: ["auto_prop_appliquer"],
         },
         {
@@ -232,6 +276,9 @@ export const exercicesAutoProportionPremiere: FicheExercicesData = {
           correction:
             "On cherche $35$ % de $6\\,000$ km².\n$10$ % : $600$ km². Donc $30$ % : $1\\,800$ km².\n$5$ %, la moitié de $10$ % : $300$ km².\n$35$ % $= 1\\,800 + 300 = 2\\,100$ km².\n⭐ Décomposer $35$ % en $30$ % $+ 5$ % : c'est le geste du calcul de tête.",
           schema: ecranSeulement(barre([{ label: "Forêt 35 %", value: 2100 }, { label: "65 %", value: 3900 }], "6 000 km²")),
+          reponses: [
+            { attendu: "2 100 km²" },
+          ],
           micros: ["auto_prop_appliquer"],
         },
         {
@@ -254,6 +301,10 @@ export const exercicesAutoProportionPremiere: FicheExercicesData = {
               { label: "À pied", value: 15 },
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: "45 %" },
+            { question: "b)", attendu: "30 %" },
+          ],
           micros: ["auto_prop_calculer", "auto_prop_formes"],
         },
         {
@@ -262,6 +313,10 @@ export const exercicesAutoProportionPremiere: FicheExercicesData = {
           correction:
             "La remise : $30$ % de $80$ €. $10$ % font $8$ €, donc $30$ % font $24$ €.\nLe prix payé : $80 - 24 = 56$ €.\n✔️ Autre chemin : on paie $70$ % du prix, $80 \\times 0{,}7 = 56$ €.\n⚠️ $-30$ % n'est pas $-30$ € : la remise dépend du prix de départ.",
           schema: barre([{ label: "Payé : 70 %", value: 56 }, { label: "−30 %", value: 24 }], "80 € = 56 € payés + 24 € de remise"),
+          reponses: [
+            { question: "remise", attendu: "24 €" },
+            { question: "prix payé", attendu: "56 €" },
+          ],
           micros: ["auto_prop_appliquer"],
         },
         {
@@ -276,6 +331,11 @@ export const exercicesAutoProportionPremiere: FicheExercicesData = {
               { label: "Cadres (%)", value: 30 },
             ]),
           ),
+          reponses: [
+            { question: "a) entreprise", attendu: "40 %" },
+            { question: "a) cadres", attendu: "30 %" },
+            { question: "b)", attendu: ["non", "faux", "impossible"] },
+          ],
           micros: ["auto_prop_calculer"],
         },
         {
@@ -289,6 +349,12 @@ export const exercicesAutoProportionPremiere: FicheExercicesData = {
             { label: "Contre", value: 40 },
             { label: "Sans avis", value: 15 },
           ]),
+          reponses: [
+            { question: "a)", attendu: "45 % ; 40 % ; 15 %", ordre: true },
+            { question: "c) pour", attendu: "540" },
+            { question: "c) contre", attendu: "480" },
+            { question: "c) sans avis", attendu: "180" },
+          ],
           micros: ["auto_prop_formes", "auto_prop_appliquer"],
         },
         {
@@ -297,6 +363,10 @@ export const exercicesAutoProportionPremiere: FicheExercicesData = {
           correction:
             "La TVA : $20$ % de $45$ €. $10$ % font $4{,}50$ €, donc $20$ % font $9$ €.\nLe prix TTC : $45 + 9 = 54$ €.\n✔️ Autre chemin : $45 \\times 1{,}2 = 54$ €.\n⚠️ La TVA se calcule sur le prix HORS taxes.",
           schema: ecranSeulement(barre([{ label: "HT : 45 €", value: 45 }, { label: "TVA", value: 9 }], "prix TTC : 54 €")),
+          reponses: [
+            { question: "TVA", attendu: "9 €" },
+            { question: "prix TTC", attendu: "54 €" },
+          ],
           micros: ["auto_prop_appliquer"],
         },
       ],
@@ -324,6 +394,16 @@ export const exercicesAutoProportionPremiere: FicheExercicesData = {
             { label: "Exprimés", value: 1140 },
             { label: "Liste A", value: 627 },
           ]),
+          reponses: [
+            { question: "a)", attendu: "1 200" },
+            { question: "b) blancs ou nuls", attendu: "60" },
+            { question: "b) exprimés", attendu: "1 140" },
+            { question: "c) pourcentage de C", attendu: "15 %" },
+            { question: "c) voix de A", attendu: "627" },
+            { question: "c) voix de B", attendu: "342" },
+            { question: "c) voix de C", attendu: "171" },
+            { question: "d)", attendu: ["31 %", "0,3135"], tolerance: 0.01 },
+          ],
           micros: ["auto_prop_appliquer", "auto_prop_calculer", "auto_prop_formes"],
         },
         {
@@ -338,6 +418,15 @@ export const exercicesAutoProportionPremiere: FicheExercicesData = {
             { label: "Maison", value: 2 },
             { label: "Achats", value: 2.5 },
           ]),
+          reponses: [
+            { question: "a) transports", attendu: "3 t" },
+            { question: "a) alimentation", attendu: "2,5 t" },
+            { question: "a) logement", attendu: "2 t" },
+            { question: "a) biens et services", attendu: "2,5 t" },
+            { question: "b) pourcentage", attendu: "20 %" },
+            { question: "b) réduction", attendu: "80 %" },
+            { question: "c)", attendu: ["non", "faux", "impossible"] },
+          ],
           micros: ["auto_prop_appliquer"],
         },
         {
@@ -352,6 +441,12 @@ export const exercicesAutoProportionPremiere: FicheExercicesData = {
               {barre([{ label: "25 %", value: 15 }, { label: "75 %", value: 45 }], "50 ans après : 15 M de jeunes sur 60 M")}
             </>
           ),
+          reponses: [
+            { question: "a) au départ", attendu: "30 %" },
+            { question: "a) cinquante ans plus tard", attendu: "25 %" },
+            { question: "b)", attendu: ["non", "faux", "impossible"] },
+            { question: "c)", attendu: "18" },
+          ],
           micros: ["auto_prop_calculer"],
         },
         {
@@ -370,6 +465,17 @@ export const exercicesAutoProportionPremiere: FicheExercicesData = {
               "taxes, production, distribution",
             ),
           ),
+          reponses: [
+            { question: "a) taxes : fraction", attendu: "1/2", exact: true },
+            { question: "a) taxes : montant", attendu: "0,90 €" },
+            { question: "a) production : fraction", attendu: "3/10", exact: true },
+            { question: "a) production : montant", attendu: "0,54 €" },
+            { question: "a) distribution : fraction", attendu: "1/5", exact: true },
+            { question: "a) distribution : montant", attendu: "0,36 €" },
+            { question: "b) plein", attendu: "72 €" },
+            { question: "b) taxes", attendu: "36 €" },
+            { question: "c)", attendu: "45 %" },
+          ],
           micros: ["auto_prop_formes", "auto_prop_appliquer", "auto_prop_calculer"],
         },
       ],
