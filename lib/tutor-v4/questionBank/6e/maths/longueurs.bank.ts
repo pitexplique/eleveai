@@ -75,6 +75,11 @@ function phraseConversion(v: number, de_: Unite, vers: Unite) {
 
 // ----- MESURER : l'unité adaptée à un objet (★1), une mesure vraisemblable (★2).
 type ObjetMesure = { obj: string; u: Unite; min: number; max: number };
+/* ⛔ 03/11/2026 — À ★1 ET ★2, AUCUNE SITUATION (Frédéric : « le contexte est
+   réservé aux trois étoiles »). Ces deux gabarits ne servent qu'à ★1-★2 : on
+   garde l'OBJET à mesurer (c'est la question elle-même), sans prénom, sans
+   « exposé » ni « cours de sciences », et sans objet qui raconte une scène
+   (piscine, bus, marathon, Tour de France…). Le correcteur a sa propre table. */
 const OBJETS_MESURE: ObjetMesure[] = [
   { obj: "l’épaisseur d’une pièce de monnaie", u: "mm", min: 2, max: 3 },
   { obj: "la longueur d’une fourmi", u: "mm", min: 3, max: 9 },
@@ -82,40 +87,37 @@ const OBJETS_MESURE: ObjetMesure[] = [
   { obj: "la longueur d’un grain de riz", u: "mm", min: 5, max: 8 },
   { obj: "le diamètre d’une perle de bracelet", u: "mm", min: 4, max: 9 },
   { obj: "la longueur d’une coccinelle", u: "mm", min: 5, max: 9 },
-  { obj: "l’épaisseur d’un téléphone", u: "mm", min: 7, max: 9 },
-  { obj: "la longueur d’un crayon", u: "cm", min: 12, max: 19 },
-  { obj: "la largeur d’un cahier", u: "cm", min: 17, max: 24 },
-  { obj: "la longueur d’une banane", u: "cm", min: 15, max: 22 },
-  { obj: "la longueur d’une chaussure de sport", u: "cm", min: 22, max: 29 },
-  { obj: "la hauteur d’un verre", u: "cm", min: 9, max: 14 },
-  { obj: "la largeur d’un livre de bibliothèque", u: "cm", min: 14, max: 21 },
-  { obj: "la longueur d’une raquette de ping-pong", u: "cm", min: 25, max: 28 },
+  { obj: "la longueur d’une graine de tournesol", u: "mm", min: 7, max: 9 },
+  { obj: "la longueur d’une fourchette", u: "cm", min: 17, max: 21 },
+  { obj: "la longueur d’une chaussure", u: "cm", min: 22, max: 29 },
+  { obj: "la largeur d’une assiette", u: "cm", min: 20, max: 27 },
+  { obj: "la longueur d’une main", u: "cm", min: 15, max: 20 },
+  { obj: "la longueur d’une règle graduée", u: "cm", min: 20, max: 30 },
   { obj: "la hauteur d’une plante en pot", u: "cm", min: 20, max: 60 },
-  { obj: "la longueur d’une piscine", u: "m", min: 25, max: 50 },
+  { obj: "la longueur d’une feuille de papier", u: "cm", min: 21, max: 29 },
   { obj: "la hauteur d’un immeuble", u: "m", min: 15, max: 60 },
-  { obj: "la longueur d’un terrain de foot", u: "m", min: 90, max: 110 },
-  { obj: "la longueur d’un bus", u: "m", min: 10, max: 14 },
+  { obj: "la longueur d’un camion", u: "m", min: 10, max: 18 },
   { obj: "la hauteur d’un grand arbre", u: "m", min: 12, max: 35 },
   { obj: "la longueur d’une baleine", u: "m", min: 12, max: 25 },
-  { obj: "la longueur d’un couloir de l’école", u: "m", min: 20, max: 60 },
+  { obj: "la longueur d’un pont", u: "m", min: 50, max: 120 },
+  { obj: "la hauteur d’un phare", u: "m", min: 20, max: 60 },
+  { obj: "la longueur d’un diplodocus", u: "m", min: 20, max: 30 },
   { obj: "la distance entre deux villes", u: "km", min: 20, max: 400 },
-  { obj: "la longueur d’une étape du Tour de France", u: "km", min: 150, max: 220 },
   { obj: "la longueur d’un fleuve", u: "km", min: 200, max: 900 },
-  { obj: "la longueur d’un marathon", u: "km", min: 42, max: 42 },
-  { obj: "la distance parcourue par un avion", u: "km", min: 500, max: 9000 },
-  { obj: "la longueur d’une randonnée d’une journée", u: "km", min: 12, max: 25 },
   { obj: "la longueur d’une autoroute", u: "km", min: 100, max: 800 },
+  { obj: "la longueur d’un tunnel sous-marin", u: "km", min: 30, max: 50 },
+  { obj: "la largeur d’un océan", u: "km", min: 3000, max: 8000 },
 ];
 
 function genMesurerUnite() {
   const o = pick(OBJETS_MESURE);
-  const p = pick(PRENOMS);
   const text = pick([
-    `${p.nom} veut mesurer ${o.obj}. Quelle unité est la plus adaptée ?`,
-    `Quelle unité choisir pour mesurer ${o.obj} ?`,
-    `Pour un exposé, ${p.nom} doit donner ${o.obj}. Dans quelle unité ?`,
-    `${p.nom} mesure ${o.obj}. Quelle unité doit-${il(p)} utiliser ?`,
-    `Quelle est la meilleure unité pour exprimer ${o.obj} ?`,
+    // 03/11/2026 (règle des longueurs) : ★1 en 12 mots au plus.
+    `Quelle unité pour mesurer ${o.obj} ?`,
+    `Quelle unité choisir pour ${o.obj} ?`,
+    `Dans quelle unité mesure-t-on ${o.obj} ?`,
+    `Pour ${o.obj}, quelle unité prendre ?`,
+    `Meilleure unité pour ${o.obj} ?`,
   ]);
   return {
     text,
@@ -129,14 +131,13 @@ function genMesurerUnite() {
 
 function genMesurerVraisemblable() {
   const o = pick(OBJETS_MESURE);
-  const p = pick(PRENOMS);
   const v = randomInt(o.min, o.max);
   const text = pick([
     `Quelle mesure est possible pour ${o.obj} ?`,
-    `${p.nom} a mesuré ${o.obj}. Quel résultat est le bon ?`,
-    `Une seule de ces mesures est réaliste pour ${o.obj}. Laquelle ?`,
-    `${p.nom} cherche ${o.obj}. Quelle longueur est vraisemblable ?`,
-    `En sciences, ${p.nom} note ${o.obj}. Que peut-${il(p)} écrire ?`,
+    `Quelle mesure est réaliste pour ${o.obj} ?`,
+    `Quelle longueur est vraisemblable pour ${o.obj} ?`,
+    `Laquelle de ces mesures convient pour ${o.obj} ?`,
+    `Choisis la bonne mesure pour ${o.obj}.`,
   ]);
   return {
     text,
@@ -150,16 +151,11 @@ function genMesurerVraisemblable() {
 
 // ----- UNITÉS : combien de petites unités dans une grande.
 const singulier = (u: Unite) => NOM_UNITE[u].replace(/s$/, "");
-const OUVERTURES_UNITE: ((p: Prenom) => string)[] = [
-  (p) => `${p.nom} révise les unités de longueur.`,
-  (p) => `En sciences, ${p.nom} mesure avec un mètre ruban.`,
-  (p) => `${p.nom} prépare une affiche sur les unités pour la classe.`,
-  (p) => `Au bricolage, ${p.nom} lit une règle graduée.`,
-  (p) => `${p.nom} joue à un jeu de cartes sur les mesures.`,
-  (p) => `En randonnée, ${p.nom} lit les panneaux du sentier.`,
-  (p) => `Au magasin de tissu, ${p.nom} achète du ruban.`,
-  (p) => `${p.nom} explique les unités à ${p.f ? "son petit frère" : "sa petite sœur"}.`,
-  (p) => `À la piscine, ${p.nom} regarde le panneau des distances.`,
+// 03/11/2026 : genUnite ne sert qu'à ★1-★2 : des ouvertures SANS situation.
+const OUVERTURES_UNITE: (() => string)[] = [
+  () => "Unités de longueur.",
+  () => "Révise les unités.",
+  () => "",
   () => "",
 ];
 const PAIRES_UNITE: Record<1 | 2, [Unite, Unite][]> = {
@@ -168,9 +164,8 @@ const PAIRES_UNITE: Record<1 | 2, [Unite, Unite][]> = {
 };
 function genUnite(etoile: 1 | 2) {
   const [g, pt] = pick(PAIRES_UNITE[etoile]);
-  const p = pick(PRENOMS);
   const k = convertir(1, g, pt);
-  const ouverture = pick(OUVERTURES_UNITE)(p);
+  const ouverture = pick(OUVERTURES_UNITE)();
   const explication = expl(`Dans le tableau km, hm, dam, m, dm, cm, mm, chaque unité vaut 10 fois l’unité juste à sa droite. Donc 1 ${g} = ${L(k, pt)}.`);
   if (Math.random() < 0.25) {
     const faux = [-1, 1, 2, -2].map((d) => convertir(1, g, pt) * 10 ** d).filter((x) => x >= 1);
@@ -188,8 +183,8 @@ function genUnite(etoile: 1 | 2) {
     `Combien y a-t-il de ${NOM_UNITE[pt]} dans 1 ${singulier(g)} ?`,
     `Complète : 1 ${g} = … ${pt}`,
     `1 ${singulier(g)}, c’est combien de ${NOM_UNITE[pt]} ?`,
-    `Combien de ${NOM_UNITE[pt]} faut-il mettre bout à bout pour faire 1 ${singulier(g)} ?`,
-    `Quel est le nombre de ${NOM_UNITE[pt]} dans 1 ${g} ?`,
+    `Écris 1 ${g} en ${NOM_UNITE[pt]}.`,
+    `Combien de ${NOM_UNITE[pt]} dans 1 ${g} ?`,
   ]);
   return {
     text: `${ouverture ? ouverture + "\n" : ""}${question}`,
@@ -257,7 +252,8 @@ function genConvertir(etoile: 2 | 3, qcm = false) {
   const { c, t, v, r } = tirerConversion(etoile);
   const p = pick(PRENOMS);
   const l = L(v, c.u);
-  const situation = qcm || Math.random() < 0.75;
+  // 03/11/2026 : à ★2, jamais de situation (le contexte commence à ★3).
+  const situation = etoile === 3 && (qcm || Math.random() < 0.75);
   const text = situation
     ? `${c.phrase(p, l)}\n${pick([
         `Combien cela fait-il en ${NOM_UNITE[t]} ?`,
@@ -266,7 +262,17 @@ function genConvertir(etoile: 2 | 3, qcm = false) {
         `Quelle est cette longueur en ${t} ?`,
         `Combien de ${NOM_UNITE[t]} cela représente-t-il ?`,
       ])}`
-    : pick([`Convertis ${l} en ${t}.`, `Complète : ${l} = … ${t}`, `${l}, c’est combien de ${NOM_UNITE[t]} ?`, `Écris ${l} en ${NOM_UNITE[t]}.`]);
+    : pick([
+        `Convertis ${l} en ${t}.`,
+        `Complète : ${l} = … ${t}`,
+        `${l}, c’est combien de ${NOM_UNITE[t]} ?`,
+        `Écris ${l} en ${NOM_UNITE[t]}.`,
+        `Exprime ${l} en ${NOM_UNITE[t]}.`,
+        `Combien font ${l} en ${NOM_UNITE[t]} ?`,
+        `Quelle est la mesure de ${l} en ${t} ?`,
+        `Une longueur mesure ${l}. Écris-la en ${NOM_UNITE[t]}.`,
+        `Un segment mesure ${l}. Combien cela fait-il en ${NOM_UNITE[t]} ?`,
+      ]);
   const explication = expl(phraseConversion(v, c.u, t));
   if (qcm) {
     const faux = [r * 10, r / 10, r * 100, r / 100].map(arrondi).filter((x) => arrondi(x * 100) === Math.round(x * 100) && x !== r);
@@ -337,7 +343,8 @@ function genComparer(etoile: 2 | 3) {
   const gagne = plus ? (a > b ? "a" : "b") : (a < b ? "a" : "b");
   const enPetit = `${A} = ${L(a, c.base)}. On compare ${L(a, c.base)} et ${B}.`;
   const methode = `On écrit les deux longueurs dans la même unité. ${phraseConversion(a / f, c.grande, c.base)} On compare ${L(a, c.base)} et ${B}.`;
-  const r = Math.random();
+  // 03/11/2026 : à ★2, pas de prénoms (le « Qui ? » reste à ★3).
+  const r = etoile === 2 ? 0.45 + Math.random() * 0.55 : Math.random();
   if (r < 0.45) {
     // Qui ? Les deux prénoms en propositions ; l'ordre des longueurs varie.
     const premierA = Math.random() < 0.5;
@@ -359,8 +366,10 @@ function genComparer(etoile: 2 | 3) {
     const text = pick([
       `Quelle est ${plus ? "la plus grande" : "la plus petite"} longueur : ${x} ou ${y} ?`,
       `Entre ${x} et ${y}, laquelle est ${sens} ?`,
-      `${p.nom} hésite entre ${x} et ${y}. Laquelle est ${sens} ?`,
+      etoile === 2 ? `Compare ${x} et ${y}. Laquelle est ${sens} ?` : `${p.nom} hésite entre ${x} et ${y}. Laquelle est ${sens} ?`,
       `Écris ${sens} de ces deux longueurs : ${x} ; ${y}.`,
+      `Deux segments mesurent ${x} et ${y}. Écris ${sens}.`,
+      `Compare ${x} et ${y}. Écris ${sens}.`,
     ]);
     // L'autre écriture n'est acceptée que si elle reste exacte (deux décimales au plus).
     const rep = gagne === "a"
@@ -386,7 +395,13 @@ function genComparer(etoile: 2 | 3) {
   const cible = plus ? Math.max(...vs) : Math.min(...vs);
   const sens = plus ? "la plus grande" : "la plus petite";
   return {
-    text: pick([`Quelle est ${sens} de ces longueurs ?`, `${p.nom} range des longueurs. Laquelle est ${sens} ?`, `Parmi ces longueurs, laquelle est ${sens} ?`]),
+    text: pick([
+      `Quelle est ${sens} de ces longueurs ?`,
+      etoile === 2 ? `Range ces longueurs. Laquelle est ${sens} ?` : `${p.nom} range des longueurs. Laquelle est ${sens} ?`,
+      `Parmi ces longueurs, laquelle est ${sens} ?`,
+      `Voici quatre longueurs. Laquelle est ${sens} ?`,
+      `Attention aux unités. Quelle est ${sens} de ces longueurs ?`,
+    ]),
     format: "qcm" as const,
     choices: shuffle(choix),
     expected: [choix[vs.indexOf(cible)]],
@@ -544,8 +559,9 @@ const CTX_DEUX_UNITES: CtxDeux[] = [
   { grande: "m", base: "cm", gMin: 2, gMax: 9, bMax: 99, phrase: (_p, l) => `La guirlande du sapin mesure ${l}.` },
 ];
 function genDefiDeuxUnites() {
+  // 03/11/2026 : ★2, sans situation : la longueur seule, en deux unités
+  // (les phrases de CTX_DEUX_UNITES ne servent plus que pour leurs nombres).
   const c = pick(CTX_DEUX_UNITES);
-  const p = pick(PRENOMS);
   const g = randomInt(c.gMin, c.gMax);
   const b = randomInt(1, c.bMax);
   const f = 10 ** (EXPOSANT[c.grande] - EXPOSANT[c.base]);
@@ -554,10 +570,16 @@ function genDefiDeuxUnites() {
   const t: Unite = versBase ? c.base : c.grande;
   const r = versBase ? total : total / f;
   return {
-    text: `${defi(c.phrase(p, `${L(g, c.grande)} ${L(b, c.base)}`))}\n${pick([
+    text: `${defi(pick([
+      (l: string) => `Une longueur mesure ${l}.`,
+      (l: string) => `Un segment mesure ${l}.`,
+      (l: string) => `On a mesuré ${l}.`,
+      (l: string) => `Une distance vaut ${l}.`,
+      (l: string) => `Un trait mesure ${l}.`,
+    ])(`${L(g, c.grande)} ${L(b, c.base)}`))}\n${pick([
       `Écris cette longueur en ${NOM_UNITE[t]}.`,
       `Combien cela fait-il en ${NOM_UNITE[t]} ?`,
-      `Quelle est cette longueur en ${t} ?`,
+      `Convertis-la en ${t}.`,
     ])}`,
     format: "short" as const,
     expected: attendu(r, t),
@@ -683,17 +705,17 @@ export const longueursBank: TutorBankItemV4[] = [
     microId: "aire_longueur_mesurer",
     difficulty: 1,
     theme: "neutral",
-    text: "Quelle unité est la plus adaptée pour mesurer la longueur d’un crayon ?",
+    text: "Quelle unité choisir pour la longueur d’une fourchette ?",
     format: "qcm",
     choices: ["km", "m", "cm", "hm"],
     expected: ["cm"],
     comparator: "mcq_exact",
-    hint: "Un crayon mesure environ quelques dizaines de centimètres.",
+    hint: "Une fourchette mesure une vingtaine de centimètres.",
     explanation:
       "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
       "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
       "Calcul : " +
-      ("Un crayon est un objet de petite taille. L’unité la plus adaptée est donc le centimètre.") +
+      ("Une fourchette est un objet de petite taille. L’unité la plus adaptée est donc le centimètre.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aire_longueur", "mesure", "unite"],
   },
@@ -706,7 +728,7 @@ export const longueursBank: TutorBankItemV4[] = [
     microId: "aire_longueur_mesurer",
     difficulty: 1,
     theme: "neutral",
-    text: "Quelle unité est la plus adaptée pour mesurer la distance entre deux villes ?",
+    text: "Quelle unité choisir pour la distance entre deux villes ?",
     format: "qcm",
     choices: ["cm", "mm", "km", "dm"],
     expected: ["km"],
@@ -729,7 +751,7 @@ export const longueursBank: TutorBankItemV4[] = [
     microId: "aire_longueur_mesurer",
     difficulty: 1,
     theme: "neutral",
-    text: "Quelle unité est la plus adaptée pour mesurer l’épaisseur d’une pièce ?",
+    text: "Quelle unité choisir pour l’épaisseur d’une pièce ?",
     format: "qcm",
     choices: ["km", "m", "cm", "mm"],
     expected: ["mm"],
@@ -752,17 +774,18 @@ export const longueursBank: TutorBankItemV4[] = [
     microId: "aire_longueur_mesurer",
     difficulty: 2,
     theme: "neutral",
-    text: "Quelle unité est la plus adaptée pour mesurer la longueur d’une salle de classe ?",
+    // 03/11/2026 : ★2, sans situation (la salle de classe est partie).
+    text: "Quelle unité est la plus adaptée pour mesurer la longueur d’un couloir ?",
     format: "qcm",
     choices: ["mm", "cm", "m", "km"],
     expected: ["m"],
     comparator: "mcq_exact",
-    hint: "Une salle de classe mesure plusieurs mètres.",
+    hint: "Un couloir mesure plusieurs mètres.",
     explanation:
       "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
       "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
       "Calcul : " +
-      ("Une salle de classe a une longueur de quelques mètres. L’unité la plus adaptée est donc le mètre.") +
+      ("Un couloir a une longueur de quelques mètres. L’unité la plus adaptée est donc le mètre.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aire_longueur", "mesure", "unite"],
   },
@@ -775,17 +798,17 @@ export const longueursBank: TutorBankItemV4[] = [
     microId: "aire_longueur_mesurer",
     difficulty: 2,
     theme: "neutral",
-    text: "Quelle unité est la plus adaptée pour mesurer la taille d’un élève ?",
+    text: "Quelle unité est la plus adaptée pour mesurer la taille d’un adulte ?",
     format: "qcm",
     choices: ["mm", "cm", "km", "hm"],
     expected: ["cm"],
     comparator: "mcq_exact",
-    hint: "La taille d’un élève est souvent exprimée en centimètres.",
+    hint: "La taille d’un adulte est souvent exprimée en centimètres.",
     explanation:
       "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
       "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
       "Calcul : " +
-      ("La taille d’un élève est généralement comprise entre 100 cm et 200 cm. L’unité adaptée est donc le centimètre.") +
+      ("La taille d’un adulte est généralement comprise entre 150 cm et 200 cm. L’unité adaptée est donc le centimètre.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["aire_longueur", "mesure", "unite"],
   },
@@ -797,20 +820,21 @@ export const longueursBank: TutorBankItemV4[] = [
     notionId: "aire_longueur",
     microId: "aire_longueur_mesurer",
     difficulty: 2,
-    theme: "reunion",
-    text: "Quelle unité est la plus adaptée pour mesurer la longueur d’un sentier de randonnée à La Réunion ?",
+    // 03/11/2026 : ★2, sans situation (le sentier de La Réunion est parti).
+    theme: "neutral",
+    text: "Quelle unité est la plus adaptée pour mesurer la longueur d’un fleuve ?",
     format: "qcm",
     choices: ["mm", "cm", "m", "km"],
     expected: ["km"],
     comparator: "mcq_exact",
-    hint: "Un sentier se mesure sur une grande distance.",
+    hint: "Un fleuve se mesure sur une grande distance.",
     explanation:
       "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
       "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
       "Calcul : " +
-      ("Un sentier de randonnée mesure souvent plusieurs milliers de mètres. L’unité adaptée est donc le kilomètre.") +
+      ("Un fleuve mesure souvent des centaines de kilomètres. L’unité adaptée est donc le kilomètre.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aire_longueur", "mesure", "reunion"],
+    tags: ["aire_longueur", "mesure", "unite"],
   },
 
   // =========================
@@ -1779,14 +1803,14 @@ export const longueursBank: TutorBankItemV4[] = [
 
   // ===== TOP-UP — AIRE_LONGUEUR_UNITE =====
   { kind: "fixed", id: "aire_longueur_unite_topup_1", niveau: "6e", matiere: "maths", notionId: "aire_longueur", microId: "aire_longueur_unite", difficulty: 1, theme: "neutral",
-    text: "Quelle unité est la plus adaptée pour mesurer la distance entre deux villes ?", format: "qcm", choices: ["km", "m", "cm", "mm"], expected: ["km"], comparator: "mcq_exact",
+    text: "Quelle unité choisir pour la distance entre deux villes ?", format: "qcm", choices: ["km", "m", "cm", "mm"], expected: ["km"], comparator: "mcq_exact",
     hint: "C’est une grande distance.", explanation: expl("La distance entre deux villes est grande : on la mesure en kilomètres (km)."), tags: ["aire_longueur", "unite", "qcm"] },
   { kind: "fixed", id: "aire_longueur_unite_topup_2", niveau: "6e", matiere: "maths", notionId: "aire_longueur", microId: "aire_longueur_unite", difficulty: 2, theme: "neutral",
     text: "Quelle unité est la plus adaptée pour mesurer l’épaisseur d’une pièce de monnaie ?", format: "qcm", choices: ["mm", "cm", "m", "km"], expected: ["mm"], comparator: "mcq_exact",
     hint: "C’est très fin.", explanation: expl("Une pièce de monnaie est très fine : on mesure son épaisseur en millimètres (mm)."), tags: ["aire_longueur", "unite", "qcm"] },
   { kind: "fixed", id: "aire_longueur_unite_topup_3", niveau: "6e", matiere: "maths", notionId: "aire_longueur", microId: "aire_longueur_unite", difficulty: 1, theme: "neutral",
-    text: "Quelle unité est la plus adaptée pour mesurer la hauteur d’une porte ?", format: "qcm", choices: ["m", "km", "mm", "cm uniquement"], expected: ["m"], comparator: "mcq_exact",
-    hint: "Une porte mesure environ 2 m.", explanation: expl("Une porte mesure environ 2 mètres : l’unité adaptée est le mètre (m)."), tags: ["aire_longueur", "unite", "qcm"] },
+    text: "Quelle unité choisir pour la hauteur d’une armoire ?", format: "qcm", choices: ["m", "km", "mm", "cm uniquement"], expected: ["m"], comparator: "mcq_exact",
+    hint: "Une armoire mesure environ 2 m.", explanation: expl("Une armoire mesure environ 2 mètres : l’unité adaptée est le mètre (m)."), tags: ["aire_longueur", "unite", "qcm"] },
 
   // ===== TOP-UP — AIRE_LONGUEUR_MESURER =====
   { kind: "fixed", id: "aire_longueur_mesurer_topup_1", niveau: "6e", matiere: "maths", notionId: "aire_longueur", microId: "aire_longueur_mesurer", difficulty: 1, theme: "neutral",

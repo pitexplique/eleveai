@@ -51,11 +51,12 @@ function communes(q: Q): string[] {
 
 // ----- MESURER
 // Ma propre table, écrite à partir des mots de l'objet (pas celle du gabarit).
+// 03/11/2026 : objets sans scène pour ★1-★2 (fourchette, pont, océan…).
 const TAILLES: [RegExp, string][] = [
-  [/épaisseur|fourmi|grain de riz|perle|coccinelle/, "mm"],
-  [/crayon|cahier|banane|chaussure|verre|livre|raquette|plante en pot/, "cm"],
-  [/piscine|immeuble|terrain de foot|bus|arbre|baleine|couloir/, "m"],
-  [/villes|Tour de France|fleuve|marathon|avion|randonnée|autoroute/, "km"],
+  [/épaisseur|fourmi|grain de riz|perle|coccinelle|graine de tournesol/, "mm"],
+  [/crayon|cahier|banane|chaussure|verre|livre|raquette|plante en pot|fourchette|assiette|d’une main|règle graduée|feuille de papier/, "cm"],
+  [/piscine|immeuble|terrain de foot|bus|arbre|baleine|couloir|camion|pont|phare|diplodocus/, "m"],
+  [/villes|Tour de France|fleuve|marathon|avion|randonnée|autoroute|tunnel sous la mer|tunnel sous-marin|océan/, "km"],
 ];
 function uniteDeLObjet(t: string) {
   return TAILLES.find(([re]) => re.test(t))?.[1] ?? null;
