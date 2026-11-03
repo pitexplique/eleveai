@@ -168,15 +168,18 @@ function introAngle(n: ReturnType<typeof nomsAngle>, a: AngleReel, mesure: numbe
 }
 
 // ----- BISSECTRICE_DEFINITION
+// ⛔ 03/11/2026 — ★1-★2 = questions SIMPLES (Frédéric : « le contexte est
+// réservé aux trois étoiles ») : ni prénom, ni éventail, ni ciseaux ; un angle
+// nommé, sa mesure, une phrase courte. Les situations restent à ★3 et plus.
 function genBisConnaitre(): Q {
   const n = nomsAngle();
-  const P = prenom();
   const mode = pick(["definition", "symetrie", "unique"] as const);
-  const intro = pick([`${P.nom} trace la bissectrice de l’angle ${n.nom}.`, `Sur le cahier ${de(P.nom)}, il y a un angle ${n.nom}.`, `${P.nom} étudie l’angle ${n.nom}, de sommet ${n.s}.`]);
+  // ★1 : 12 mots au plus (REGLES-6E.md) — une intro de 3 mots au plus.
+  const intro = pick([`Voici l’angle ${n.nom}.`, `Soit l’angle ${n.nom}.`, `Regarde l’angle ${n.nom}.`, ""]);
   if (mode === "definition") {
     const juste = `la droite qui partage l’angle ${n.nom} en deux angles égaux`;
     return {
-      text: `${intro} ${pick([`Qu’est-ce que la bissectrice de l’angle ${n.nom} ?`, `Quelle est la définition de la bissectrice de l’angle ${n.nom} ?`])}`,
+      text: `${intro}${intro ? " " : ""}${pick([`Qu’est-ce que la bissectrice de l’angle ${n.nom} ?`, `Donne la définition de la bissectrice de l’angle ${n.nom}.`])}`,
       format: "qcm",
       choices: shuffle([juste, `la droite qui passe par le sommet ${n.s}`, `la droite perpendiculaire au côté [${n.s}${n.u})`, `le segment [${n.u}${n.v}]`]),
       expected: [juste],
@@ -187,7 +190,7 @@ function genBisConnaitre(): Q {
   if (mode === "symetrie") {
     const juste = "son axe de symétrie";
     return {
-      text: `${intro} ${pick([`Que représente aussi la bissectrice de l’angle ${n.nom} ?`, `La bissectrice de l’angle ${n.nom} est aussi…`])}`,
+      text: `${intro}${intro ? " " : ""}${pick([`Que représente aussi la bissectrice de l’angle ${n.nom} ?`, `La bissectrice de l’angle ${n.nom} est aussi…`])}`,
       format: "qcm",
       choices: shuffle([juste, "un de ses côtés", "la perpendiculaire à un côté", `la médiatrice de [${n.u}${n.v}], toujours`]),
       expected: [juste],
@@ -197,7 +200,7 @@ function genBisConnaitre(): Q {
   }
   const juste = "une seule";
   return {
-    text: `${intro} ${pick([`Combien de bissectrices l’angle ${n.nom} a-t-il ?`, `L’angle ${n.nom} a combien de bissectrices ?`])}`,
+    text: `${intro}${intro ? " " : ""}${pick([`Combien de bissectrices l’angle ${n.nom} a-t-il ?`, `L’angle ${n.nom} a combien de bissectrices ?`])}`,
     format: "qcm",
     choices: shuffle([juste, "deux", "une infinité", "aucune"]),
     expected: [juste],
@@ -205,7 +208,38 @@ function genBisConnaitre(): Q {
     explanation: expl("Une seule demi-droite partage l’angle en deux parts égales : si on la tourne un peu, une part grandit et l’autre rétrécit."),
   };
 }
+/** La phrase qui pose l'angle USV, SANS situation (★1-★2). */
+function introAngleSimple(n: ReturnType<typeof nomsAngle>, mesure: number) {
+  // 7 mots au plus : l'énoncé ★2 entier tient en 15 mots (REGLES-6E.md).
+  return pick([
+    `L’angle ${n.nom} mesure ${fr(mesure)}°.`,
+    `Voici un angle ${n.nom} de ${fr(mesure)}°.`,
+    `Soit un angle ${n.nom} de ${fr(mesure)}°.`,
+    `On trace un angle ${n.nom} de ${fr(mesure)}°.`,
+  ]);
+}
 function genBisMoitie(): Q {
+  const n = nomsAngle();
+  const m = randomInt(20, 170);
+  const moitie = m / 2;
+  return {
+    text: `${introAngleSimple(n, m)} ${pick([
+      `[${n.s}${n.w}) est sa bissectrice. Combien mesure l’angle ${n.w}${n.s}${n.v} ?`,
+      `[${n.s}${n.w}) est sa bissectrice. Calcule l’angle ${n.u}${n.s}${n.w}.`,
+      `Sa bissectrice est [${n.s}${n.w}). Calcule l’angle ${n.u}${n.s}${n.w}.`,
+      `Sa bissectrice est [${n.s}${n.w}). Combien mesure l’angle ${n.w}${n.s}${n.v} ?`,
+      `Trace sa bissectrice [${n.s}${n.w}). Calcule l’angle ${n.w}${n.s}${n.v}.`,
+      `Trace sa bissectrice [${n.s}${n.w}). Combien mesure l’angle ${n.u}${n.s}${n.w} ?`,
+    ])}`,
+    format: "short",
+    expected: [`${fr(moitie)}°`],
+    comparator: "number_equal",
+    explanation: expl(`La bissectrice partage l’angle en deux angles égaux : ${fr(m)} ÷ 2 = ${fr(moitie)}°.`),
+    canvas: angleSeul(m, `${fr(m)}°`, { s: n.s, u: n.u, v: n.v }),
+  };
+}
+/** ★3 (03/11/2026) : la même moitié, posée dans un angle de la vie. */
+function genBisMoitieSituation(): Q {
   const n = nomsAngle();
   const P = prenom();
   const a = angleReel();
@@ -285,11 +319,11 @@ function genBisRaisons(): Q {
 // ----- BISSECTRICE_CONSTRUIRE
 function genBisRapporteurQcm(): Q {
   const n = nomsAngle();
-  const P = prenom();
   if (Math.random() < 0.3) {
     const juste = `la bissectrice de l’angle ${n.nom}`;
     return {
-      text: `${P.nom} plie sa feuille pour amener le côté [${n.s}${n.u}) exactement sur le côté [${n.s}${n.v}). Que représente le pli ?`,
+      // 03/11/2026 : ★2, sans personnage.
+      text: `On plie la feuille : [${n.s}${n.u}) ${pick(["va", "vient", "arrive"])} sur [${n.s}${n.v}). ${pick(["Que représente le pli ?", "Que trace le pli ?"])}`,
       format: "qcm",
       choices: shuffle([juste, `la médiatrice de [${n.u}${n.v}]`, `la perpendiculaire à [${n.s}${n.u})`, `un nouveau côté de l’angle`]),
       expected: [juste],
@@ -297,12 +331,16 @@ function genBisRapporteurQcm(): Q {
       explanation: expl("Le pli amène un côté sur l’autre : les deux parts de l’angle se superposent, elles sont égales. Le pli est la bissectrice."),
     };
   }
-  const a = angleReel();
-  const m = mesureDe(a);
+  const m = randomInt(20, 170);
   const moitie = m / 2;
   const pieges = [45, m, Math.min(180, 2 * m), moitie + 10, moitie - 10, 90].filter((x) => x > 0 && x <= 180 && x !== moitie);
   return {
-    text: `${introAngle(n, a, m, P)} ${P.nom} veut tracer sa bissectrice au rapporteur, le zéro sur le côté [${n.s}${n.v}). ${pick(["À quelle graduation doit-" + il(P) + " marquer un point ?", "Quelle graduation faut-il viser ?"])}`,
+    text: `${introAngleSimple(n, m)} ${pick([
+      "Quelle graduation viser pour sa bissectrice ?",
+      "À quelle graduation marquer sa bissectrice ?",
+      "Quelle graduation marquer pour la bissectrice ?",
+      "Où marquer sa bissectrice au rapporteur ?",
+    ])}`,
     format: "qcm",
     choices: shuffle([`${fr(moitie)}°`, ...shuffle([...new Set(pieges)]).slice(0, 3).map((x) => `${fr(x)}°`)]),
     expected: [`${fr(moitie)}°`],
@@ -657,6 +695,20 @@ export const bissectriceBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
+    id: "bissectrice_definition_tpl_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "bissectrice_angle",
+    microId: "bissectrice_definition",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "La bissectrice coupe l'angle en deux moitiés.",
+    tags: ["bissectrice_angle", "definition", "template"],
+    // 03/11/2026 : les situations de `…_tpl_1` (éventail, ciseaux…), montées à ★3.
+    generate: () => genBisMoitieSituation(),
+  },
+  {
+    kind: "template",
     id: "bissectrice_definition_tpl_figure",
     niveau: "6e",
     matiere: "maths",
@@ -694,7 +746,8 @@ export const bissectriceBank: TutorBankItemV4[] = [
     microId: "bissectrice_construire",
     difficulty: 2,
     theme: "neutral",
-    text: "On plie une feuille de façon à amener un côté de l'angle exactement sur l'autre. Que représente le pli ?",
+    // 03/11/2026 : ★2 en 15 mots au plus.
+    text: "On plie l'angle pour amener un côté sur l'autre. Que représente le pli ?",
     format: "qcm",
     choices: [
       "la bissectrice de l'angle",

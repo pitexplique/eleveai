@@ -114,7 +114,7 @@ function corrigerRaisonsBis(q: Q): string[] {
 function corrigerRapporteurQcm(q: Q): string[] {
   const p: string[] = [];
   const t = q.text;
-  if (/plie sa feuille/.test(t)) {
+  if (/plie (?:sa|une|la) feuille/.test(t)) {
     uneSeuleJuste(q, (c) => /^la bissectrice de l’angle/.test(c), p);
     return p;
   }
@@ -240,6 +240,7 @@ function corrigerDefiRaisonsBis(q: Q): string[] {
 export const CORRECTEURS: CorrecteursMaths = {
   bissectrice_definition_tpl_connaitre: corrigerConnaitre,
   bissectrice_definition_tpl_1: corrigerMoitie,
+  bissectrice_definition_tpl_situation: corrigerMoitie,
   bissectrice_definition_tpl_figure: corrigerFigureBis,
   bissectrice_definition_tpl_ouverte: corrigerRaisonsBis,
   bissectrice_construire_tpl_rapporteur: corrigerRapporteurQcm,
