@@ -60,6 +60,13 @@ export const exercicesLogiqueSeconde: FicheExercicesData = {
       exercices: [
         {
           enonce: "Compléter avec $\\in$ ou $\\notin$ :\na) $3 \\,\\ldots\\, \\mathbb{N}$  b) $-2 \\,\\ldots\\, \\mathbb{N}$  c) $0{,}5 \\,\\ldots\\, \\mathbb{Q}$  d) $\\sqrt{2} \\,\\ldots\\, \\mathbb{Q}$  e) $\\pi \\,\\ldots\\, \\mathbb{R}$\nf) Compléter avec $\\subset$ : $\\mathbb{N} \\,\\ldots\\, \\mathbb{Z} \\,\\ldots\\, \\mathbb{D} \\,\\ldots\\, \\mathbb{Q} \\,\\ldots\\, \\mathbb{R}$.",
+          reponses: [
+            { question: "a)", attendu: ["∈", "appartient"] },
+            { question: "b)", attendu: ["∉", "n'appartient pas"] },
+            { question: "c)", attendu: ["∈", "appartient"] },
+            { question: "d)", attendu: ["∉", "n'appartient pas"] },
+            { question: "e)", attendu: ["∈", "appartient"] },
+          ],
           correction:
             "a) $3 \\in \\mathbb{N}$, un entier naturel.\nb) $-2 \\notin \\mathbb{N}$ : il est négatif. Mais $-2 \\in \\mathbb{Z}$.\nc) $0{,}5 = \\dfrac{1}{2} \\in \\mathbb{Q}$.\nd) $\\sqrt{2} \\notin \\mathbb{Q}$ : il est irrationnel.\ne) $\\pi \\in \\mathbb{R}$ (mais $\\pi \\notin \\mathbb{Q}$).\nf) $\\mathbb{N} \\subset \\mathbb{Z} \\subset \\mathbb{D} \\subset \\mathbb{Q} \\subset \\mathbb{R}$ : chaque ensemble est contenu dans le suivant.\n⛔ Le piège : écrire $3 \\subset \\mathbb{N}$. $\\subset$ relie deux ENSEMBLES ; entre un élément et un ensemble, c'est $\\in$. (On écrirait $\\{3\\} \\subset \\mathbb{N}$.)",
           schema: tableauProba(["Nombre", "ℕ", "ℤ", "ℚ", "ℝ"], [["3", "oui", "oui", "oui", "oui"], ["−2", "non", "oui", "oui", "oui"], ["0,5", "non", "non", "oui", "oui"], ["√2", "non", "non", "non", "oui"], ["π", "non", "non", "non", "oui"]], [[0, 1], [1, 2], [2, 3], [3, 4], [4, 4]]),

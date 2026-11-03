@@ -169,7 +169,7 @@ export const exercicesEchantillonnageSeconde: FicheExercicesData = {
         {
           enonce: "Avant une élection à deux candidats, un sondage auprès de $1\\,000$ personnes tirées au hasard donne $52$ % pour le candidat A. Le journal titre : « A va gagner ». On suppose que les deux candidats sont en réalité à égalité ($p = 0{,}5$).\na) Calculer l'intervalle de fluctuation pour $n = 1\\,000$.\nb) Le résultat du sondage est-il compatible avec une égalité ? Le titre est-il justifié ?",
           reponses: [
-            { question: "a)", attendu: "[0,468 ; 0,532]" },
+            { question: "a)", attendu: "[0,468 ; 0,532]", tolerance: 0.006 },
             { question: "b) compatible ?", attendu: ["oui", "vrai"] },
             { question: "b) titre justifié ?", attendu: ["non", "faux"] },
           ],
@@ -182,7 +182,7 @@ export const exercicesEchantillonnageSeconde: FicheExercicesData = {
           enonce: "En France, la probabilité qu'une naissance soit celle d'une fille est d'environ $0{,}49$. Ce programme simule $1\\,000$ naissances et renvoie la fréquence des filles. Lancé trois fois, il a affiché $0{,}484$, $0{,}504$ et $0{,}533$.\na) Expliquer la ligne « if random() < 0.49 ».\nb) Ces trois résultats sont-ils dans l'intervalle de fluctuation ? Commenter.",
           figure: programme(["from random import random", "", "def filles(n):", "    f = 0", "    for i in range(n):", "        if random() < 0.49:", "            f = f + 1", "    return f / n"]),
           reponses: [
-            { question: "b) intervalle", attendu: "[0,458 ; 0,522]" },
+            { question: "b) intervalle", attendu: "[0,458 ; 0,522]", tolerance: 0.006 },
           ],
           correction:
             "a) « random() » tombe sous $0{,}49$ dans $49$ % des cas : c'est une naissance de fille avec la probabilité $0{,}49$.\nb) $\\dfrac{1}{\\sqrt{1\\,000}} \\approx 0{,}032$ : l'intervalle est environ $[0{,}458\\,;\\,0{,}522]$.\n$0{,}484$ et $0{,}504$ y sont ; $0{,}533$ en sort, de peu.\nCe n'est pas une erreur du programme : environ un échantillon sur vingt sort de l'intervalle, et nous venons d'en voir un sur trois essais. Il faudrait beaucoup plus d'essais pour juger.",
@@ -192,7 +192,7 @@ export const exercicesEchantillonnageSeconde: FicheExercicesData = {
         {
           enonce: "On simule quatre séries de $1\\,000$ lancers d'un dé équilibré. Fréquences du $6$ obtenues : $0{,}177$ ; $0{,}153$ ; $0{,}158$ ; $0{,}155$.\na) Calculer l'intervalle de fluctuation autour de $p = \\dfrac{1}{6}$.\nb) Les quatre fréquences y sont-elles ? Que montre cette expérience ?",
           reponses: [
-            { question: "a)", attendu: "[0,135 ; 0,198]" },
+            { question: "a)", attendu: "[0,135 ; 0,198]", tolerance: 0.006 },
             { question: "b)", attendu: ["oui", "vrai"] },
           ],
           correction:
@@ -214,7 +214,7 @@ export const exercicesEchantillonnageSeconde: FicheExercicesData = {
           enonce: "Un joueur soupçonne un dé d'être truqué. Il le lance $600$ fois et obtient $130$ fois le $6$.\na) Calculer la fréquence du $6$.\nb) Calculer l'intervalle de fluctuation pour un dé équilibré ($p = \\dfrac{1}{6}$, $n = 600$).\nc) Que peut-il conclure ?",
           reponses: [
             { question: "a)", attendu: "0,217", tolerance: 0.001 },
-            { question: "b)", attendu: "[0,126 ; 0,207]" },
+            { question: "b)", attendu: "[0,126 ; 0,207]", tolerance: 0.006 },
           ],
           correction:
             "a) $f = \\dfrac{130}{600} \\approx 0{,}217$.\nb) $\\dfrac{1}{\\sqrt{600}} \\approx 0{,}041$ et $\\dfrac{1}{6} \\approx 0{,}167$ : l'intervalle est environ $[0{,}126\\,;\\,0{,}207]$.\nc) $0{,}217$ est AU-DESSUS de l'intervalle : un dé équilibré donnerait rarement autant de $6$. Le joueur a de bonnes raisons de penser que le dé favorise le $6$.\n⛔ Le piège : conclure dès $130 > 100$ (« on attendait $100$ six »). Un écart à l'attendu est normal ; c'est sa TAILLE, comparée à l'intervalle, qui compte.",

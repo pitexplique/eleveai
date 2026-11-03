@@ -97,6 +97,11 @@ export const exercicesDroitesSeconde: FicheExercicesData = {
         },
         {
           enonce: "Donner un vecteur directeur de chaque droite :\na) $d_1 : y = 3x - 2$\nb) $d_2 : 2x - 5y + 1 = 0$\nc) $d_3 = (AB)$, avec $A(-3\\,;\\,3)$ et $B(3\\,;\\,0)$.",
+          reponses: [
+            { question: "a)", attendu: "(1 ; 3)", colineaire: true },
+            { question: "b)", attendu: "(5 ; 2)", colineaire: true },
+            { question: "c)", attendu: "(6 ; -3)", colineaire: true },
+          ],
           correction:
             "a) Quand $x$ avance de $1$, $y$ augmente de $3$ : $\\vec{u}\\,(1\\,;\\,3)$ dirige $d_1$.\nb) Pour $ax + by + c = 0$, le vecteur $(-b\\,;\\,a)$ convient : ici $a = 2$, $b = -5$, donc $\\vec{v}\\,(5\\,;\\,2)$.\nc) Deux points de la droite donnent un vecteur directeur : $\\vec{AB}\\,(6\\,;\\,-3)$.\n⭐ Un vecteur directeur n'est pas unique : $(2\\,;\\,-1)$, deux fois plus court, dirige aussi $d_3$.\n⛔ Le piège au b) : prendre $(a\\,;\\,b) = (2\\,;\\,-5)$. On ÉCHANGE et on change un signe : $(-b\\,;\\,a)$.",
           schema: droites([-4, 5], [{ a: 3, b: -1, c: -2 }, { a: 1, b: 2, c: -3, couleur: ORANGE }], [{ x: -3, y: 3, label: "A" }, { x: 3, y: 0, label: "B" }], [{ de: [0, -2], vers: [1, 1], couleur: VERT }, { de: [-3, 3], vers: [3, 0], couleur: VERT }]),
