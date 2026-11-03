@@ -49,8 +49,9 @@ function corrigerComparerQuatre(q: TutorGeneratedQuestionV4): string[] {
   const p = reglesEcriture(q);
   const c = (q.choices ?? []).map(val);
   if (c.length !== 4) p.push("il faut quatre propositions");
+  // ★2 : les nombres ne sont écrits que dans les propositions ; ★3 : aussi dans le texte.
   const lus = nombresDuTexte(q.text);
-  if ([...lus].sort((x, y) => x - y).join() !== [...c].sort((x, y) => x - y).join())
+  if (lus.length && [...lus].sort((x, y) => x - y).join() !== [...c].sort((x, y) => x - y).join())
     p.push(`les propositions (${c.join(", ")}) ne sont pas les nombres du texte (${lus.join(", ")})`);
   if (new Set(c).size !== c.length) p.push("deux nombres égaux");
   const grand = /plus grand/.test(q.text);
@@ -323,4 +324,11 @@ export const CORRECTEURS: CorrecteursMaths = {
   entier_comparer_tpl_1: corrigerComparerDeux,
   entier_comparer_tpl_2_etoile_1: corrigerComparerDeux,
   entier_comparer_qcm_tpl_1: corrigerComparerQuatre,
+  entier_comparer_qcm_tpl_2_ctx3: corrigerComparerQuatre,
+  entier_comparer_tpl_3_ctx3: corrigerComparerDeux,
+  entier_rang_tpl_3_ctx3: corrigerRang,
+  entier_decomposer_tpl_3_ctx3: corrigerDecomposer,
+  entier_encadrer_tpl_2_etoile_1: corrigerEncadrer,
+  entier_encadrer_tpl_3_ctx3: corrigerEncadrer,
+  entier_defi_tpl_2_complement_ctx3: corrigerComplement,
 };

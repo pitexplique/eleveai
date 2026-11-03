@@ -125,19 +125,24 @@ const QUESTIONS_COMPARER: { q: string; sens: "grand" | "petit" }[] = [
   { q: "Quel est le plus petit de ces deux nombres ?", sens: "petit" },
   { q: "Écris le plus grand des deux nombres.", sens: "grand" },
   { q: "Écris le plus petit des deux nombres.", sens: "petit" },
-  { q: "Lequel de ces deux nombres est le plus grand ?", sens: "grand" },
 ];
 
-/** Comparer deux entiers : situation (3 fois sur 4) ou calcul pur ; réponse écrite ou signe < / >. */
-function genComparer(proches: boolean) {
-  const ctx = pick(CTX_COMPARER);
+/* ⛔⛔ 03/11/2026 — D'ABORD LE GESTE NU (Frédéric, ../REGLES-6E.md) : à ★1 et
+   ★2, ni prénom, ni situation, 12 mots au plus à ★1, 15 à ★2, verbe d'action
+   en tête. Les situations (CTX_COMPARER, CTX_UN, compléments) restent, mais
+   seulement dans les gabarits « _ctx3 » (★3). Chaque générateur prend donc un
+   drapeau `contexte` : false pour ★1-★2, true pour ★3. */
+
+/** Comparer deux entiers : en situation (★3) ou nu (★1-★2) ; réponse écrite ou signe < / >. */
+function genComparer(proches: boolean, contexte = false) {
+  const ctx: CtxComparer = contexte ? pick(CTX_COMPARER) : { min: proches ? 1000 : 100, max: proches ? 16000 : 9999, phrase: () => "" };
   const [p, q] = deuxPrenoms();
   const [a, b] = deuxNombres(ctx.min, ctx.max, proches);
   const A = fmt(a);
   const B = fmt(b);
   const grand = Math.max(a, b);
   const petit = Math.min(a, b);
-  const situation = Math.random() < 0.75;
+  const situation = contexte;
   const methode = proches
     ? "Les deux nombres ont le même nombre de chiffres : on compare chiffre par chiffre, de gauche à droite, jusqu’au premier chiffre différent."
     : "On compare d’abord le nombre de chiffres, puis les chiffres de gauche à droite.";
@@ -145,7 +150,7 @@ function genComparer(proches: boolean) {
   if (Math.random() < 0.3) {
     // Le signe < ou >.
     const signe = a < b ? "<" : ">";
-    const consigne = pick(["Complète avec < ou > :", "Quel signe faut-il mettre ?", "Choisis le bon signe :"]);
+    const consigne = pick(["Complète avec < ou > :", "Écris < ou > :", "Choisis le bon signe :"]);
     return {
       text: `${situation ? ctx.phrase(p, q, A, B) + "\n" : ""}${consigne} ${A} … ${B}`,
       format: "qcm" as const,
@@ -161,14 +166,80 @@ function genComparer(proches: boolean) {
   const text = situation
     ? `${ctx.phrase(p, q, A, B)}\n${tour.q}`
     : tour.sens === "grand"
-      ? pick([`Quel nombre est le plus grand : ${A} ou ${B} ?`, `Entre ${A} et ${B}, lequel est le plus grand ?`])
-      : pick([`Quel nombre est le plus petit : ${A} ou ${B} ?`, `Entre ${A} et ${B}, lequel est le plus petit ?`]);
+      ? pick([`Quel nombre est le plus grand : ${A} ou ${B} ?`, `Écris le plus grand : ${A} ou ${B}.`, `Quel est le plus grand nombre : ${A} ou ${B} ?`])
+      : pick([`Quel nombre est le plus petit : ${A} ou ${B} ?`, `Écris le plus petit : ${A} ou ${B}.`, `Quel est le plus petit nombre : ${A} ou ${B} ?`]);
   return {
     text,
     format: "short" as const,
     expected: [String(rep), fmt(rep)],
     comparator: "number_equal" as const,
     explanation: expl(`${methode} ${fmt(petit)} < ${fmt(grand)}. Le plus ${tour.sens} est donc ${fmt(rep)}.`),
+  };
+}
+
+/** Quatre nombres proches (même longueur, un chiffre change) : l'élève lit
+ *  chiffre par chiffre. Nus à ★2 ; quatre personnes et une unité à ★3.
+ *  Nombres distincts, sinon « le plus grand » n'a plus de réponse unique. */
+function genComparerQuatre(contexte: boolean) {
+  const ctx = contexte
+    ? pick([
+        { intro: "Quatre amis jouent aux fléchettes. Voici leurs points.", unite: "points", min: 100, max: 999 },
+        { intro: "Quatre cyclistes notent leurs kilomètres de l’année.", unite: "km", min: 1000, max: 3000 },
+        { intro: "Quatre enfants comptent leurs pas de la journée.", unite: "pas", min: 4000, max: 9999 },
+        { intro: "Quatre amis pèsent leur récolte de tomates.", unite: "g", min: 1000, max: 2500 },
+        { intro: "Quatre lecteurs comptent les pages lues cette année.", unite: "pages", min: 1000, max: 5000 },
+        { intro: "Quatre joueurs comparent leurs scores au jeu vidéo.", unite: "points", min: 1000, max: 9999 },
+        { intro: "Quatre amis comptent leurs timbres.", unite: "timbres", min: 100, max: 999 },
+        { intro: "Quatre élèves mesurent leur saut en longueur.", unite: "cm", min: 250, max: 480 },
+        { intro: "Quatre amis comptent leurs perles pour faire des bracelets.", unite: "perles", min: 100, max: 999 },
+        { intro: "Quatre musiciens comptent leurs minutes de piano de l’année.", unite: "minutes", min: 1000, max: 4000 },
+        { intro: "Quatre jardiniers comptent les graines de leur sachet.", unite: "graines", min: 100, max: 999 },
+        { intro: "Quatre amis comptent les bouchons collectés pour le recyclage.", unite: "bouchons", min: 1000, max: 9999 },
+      ])
+    : pick([
+        { intro: "", unite: "", min: 100, max: 999 },
+        { intro: "", unite: "", min: 1000, max: 9999 },
+        { intro: "", unite: "", min: 10000, max: 19999 },
+      ]);
+  const base = randomInt(ctx.min, ctx.max);
+  const nums: number[] = [base];
+  while (nums.length < 4) {
+    const n = voisinProche(base, true);
+    if (!nums.includes(n)) nums.push(n);
+  }
+  const sens = Math.random() < 0.5 ? "grand" : "petit";
+  const rep = sens === "grand" ? Math.max(...nums) : Math.min(...nums);
+  const ordre = [...nums].sort((x, y) => x - y).map(fmt).join(" < ");
+  let text: string;
+  if (contexte) {
+    const noms: string[] = [];
+    while (noms.length < 4) {
+      const n = pick(PRENOMS).nom;
+      if (!noms.includes(n)) noms.push(n);
+    }
+    const question = pick(
+      sens === "grand"
+        ? ["Quel est le plus grand de ces quatre nombres ?", "Choisis le plus grand nombre.", "Qui a le plus grand nombre ? Choisis ce nombre."]
+        : ["Quel est le plus petit de ces quatre nombres ?", "Choisis le plus petit nombre.", "Qui a le plus petit nombre ? Choisis ce nombre."],
+    );
+    const lignes = nums.map((n, i) => `${noms[i]} : ${fmt(n)} ${ctx.unite}`).join("\n");
+    text = `${ctx.intro}\n${lignes}\n${question}`;
+  } else {
+    text = pick(
+      sens === "grand"
+        ? ["Choisis le plus grand nombre.", "Quel est le plus grand nombre ?", "Trouve le plus grand nombre."]
+        : ["Choisis le plus petit nombre.", "Quel est le plus petit nombre ?", "Trouve le plus petit nombre."],
+    );
+  }
+  return {
+    text,
+    format: "qcm" as const,
+    choices: shuffle(nums.map(fmt)),
+    expected: [fmt(rep)],
+    comparator: "mcq_exact" as const,
+    explanation: expl(
+      `Les nombres ont le même nombre de chiffres : on compare de gauche à droite. ${ordre}. Le plus ${sens} est ${fmt(rep)}.`,
+    ),
   };
 }
 
@@ -196,8 +267,16 @@ const CTX_UN: CtxUn[] = [
   { min: 100, max: 999, phrase: (p, n) => `Dans sa recette de crêpes, ${p.nom} met ${n} g de farine.` },
   { min: 1000, max: 99999, phrase: (_p, n) => `Le parc national compte ${n} arbres.` },
 ];
-/** Une situation compatible avec [lo, hi] et un nombre tiré dans l'intersection. */
-function situationUn(lo: number, hi: number, tirer?: (a: number, b: number) => number) {
+/** Une situation compatible avec [lo, hi] et un nombre tiré dans l'intersection.
+ *  Sans contexte (★1-★2) : pas de phrase, et un nombre de chiffres tiré au hasard
+ *  entre ceux de lo et de hi (sinon presque tout tombait à 6 chiffres). */
+function situationUn(lo: number, hi: number, tirer?: (a: number, b: number) => number, contexte = true) {
+  if (!contexte) {
+    const k = randomInt(String(lo).length, String(hi).length);
+    const a = Math.max(lo, 10 ** (k - 1));
+    const b = Math.min(hi, 10 ** k - 1);
+    return { n: tirer ? tirer(a, b) : randomInt(a, b), phrase: "" };
+  }
   // Une intersection d'au moins 50 nombres : sinon le tirage filtré (« pas un
   // multiple de 1 000 ») pouvait tourner sans fin sur [2 000 ; 2 000].
   const ok = CTX_UN.filter((c) => Math.min(hi, c.max) - Math.max(lo, c.min) >= 50);
@@ -213,9 +292,9 @@ function situationUn(lo: number, hi: number, tirer?: (a: number, b: number) => n
 const RANGS = ["unités", "dizaines", "centaines", "unités de mille", "dizaines de mille", "centaines de mille"];
 
 /** « Quel est le chiffre des … ? » ou « À quel rang est le chiffre … ? ». */
-function genRang(lo: number, hi: number, qcm: boolean) {
-  const situation = Math.random() < 0.7;
-  const s = situationUn(lo, hi);
+function genRang(lo: number, hi: number, qcm: boolean, contexte = false) {
+  const situation = contexte;
+  const s = situationUn(lo, hi, undefined, contexte);
   const n = s.n;
   const chiffres = String(n).split("").reverse(); // chiffres[0] = unités
   const intro = situation ? `${s.phrase}\n` : "";
@@ -230,7 +309,7 @@ function genRang(lo: number, hi: number, qcm: boolean) {
     return {
       text: situation
         ? `${intro}Dans ${N}, à quel rang est le chiffre ${u.c} ?`
-        : pick([`Dans le nombre ${N}, à quel rang est le chiffre ${u.c} ?`, `Dans ${N}, le chiffre ${u.c} est le chiffre des… ?`]),
+        : pick([`Dans le nombre ${N}, à quel rang est le chiffre ${u.c} ?`, `Dans ${N}, à quel rang est le chiffre ${u.c} ?`, `Dans ${N}, trouve le rang du chiffre ${u.c}.`]),
       format: "qcm" as const,
       choices: makeChoices(bon, autres),
       expected: [bon],
@@ -244,7 +323,12 @@ function genRang(lo: number, hi: number, qcm: boolean) {
   const rep = chiffres[i];
   const text = situation
     ? `${intro}${pick([`Quel est le chiffre des ${rang} de ce nombre ?`, `Dans ${N}, quel est le chiffre des ${rang} ?`, `Écris le chiffre des ${rang} de ${N}.`])}`
-    : pick([`Dans le nombre ${N}, quel est le chiffre des ${rang} ?`, `Quel est le chiffre des ${rang} de ${N} ?`, `Écris le chiffre des ${rang} du nombre ${N}.`]);
+    : pick([
+        `Dans ${N}, quel est le chiffre des ${rang} ?`,
+        // « des unités de mille de 4 518 » se lit mal : la tournure « de N » seulement pour un rang court.
+        rang.includes("mille") ? `Dans ${N}, écris le chiffre des ${rang}.` : `Quel est le chiffre des ${rang} de ${N} ?`,
+        `Écris le chiffre des ${rang} de ${N}.`,
+      ]);
   if (qcm) {
     const pieges = [
       ...chiffres.filter((c) => c !== rep),
@@ -284,14 +368,14 @@ const NOMS_PUISSANCES: Record<number, string> = { 10: "dizaines", 100: "centaine
  * « Complète : N = … + … » (inconnue à une place au hasard), « Quel nombre vaut a + b + c ? »
  * (en situation : des cartes de points), « valeur du chiffre d », « combien de centaines en tout ».
  */
-function genDecomposerCourt(lo: number, hi: number, avecEnTout: boolean) {
-  const situation = Math.random() < 0.6;
+function genDecomposerCourt(lo: number, hi: number, avecEnTout: boolean, contexte = false) {
+  const situation = contexte;
   const s = situationUn(lo, hi, (a, b) => {
     for (;;) {
       const n = randomInt(a, b);
       if (termes(n).length >= 2) return n;
     }
-  });
+  }, contexte);
   const n = s.n;
   const N = fmt(n);
   const t = termes(n);
@@ -303,7 +387,7 @@ function genDecomposerCourt(lo: number, hi: number, avecEnTout: boolean) {
     const k = randomInt(0, t.length - 1);
     const rep = t[k];
     const droite = t.map((x, i) => (i === k ? "…" : fmt(x))).join(" + ");
-    const consigne = pick(["Complète :", "Trouve le nombre qui manque :", "Quel nombre manque ?"]);
+    const consigne = pick(["Complète :", "Trouve le nombre qui manque :", "Écris le nombre qui manque :"]);
     return {
       text: `${intro}${consigne} ${N} = ${droite}`,
       format: "short" as const,
@@ -315,7 +399,7 @@ function genDecomposerCourt(lo: number, hi: number, avecEnTout: boolean) {
   if (forme === "recompose") {
     const ordre = lo >= 1000 && Math.random() < 0.4 ? shuffle(t) : t;
     const somme = ordre.map(fmt).join(" + ");
-    if (Math.random() < 0.5) {
+    if (contexte && Math.random() < 0.5) {
       const p = pick(PRENOMS);
       const pron = p.f ? "elle" : "il";
       const jeu = pick(["Au jeu de société", "Au jeu vidéo", "À la kermesse", "Au jeu de piste", "Au concours de tir à l’arc"]);
@@ -330,7 +414,7 @@ function genDecomposerCourt(lo: number, hi: number, avecEnTout: boolean) {
       };
     }
     return {
-      text: pick([`Quel nombre est égal à ${somme} ?`, `Écris en un seul nombre : ${somme}`, `Calcule : ${somme}`, `Que vaut ${somme} ?`]),
+      text: pick([`Quel nombre est égal à ${somme} ?`, `Écris en un seul nombre : ${somme}`, `Calcule : ${somme}`, `Écris le nombre égal à ${somme}.`]),
       format: "short" as const,
       expected: [String(n), N],
       comparator: "number_equal" as const,
@@ -343,7 +427,7 @@ function genDecomposerCourt(lo: number, hi: number, avecEnTout: boolean) {
     if (uniques.length) {
       const u = pick(uniques);
       return {
-        text: `${intro}${pick([`Dans ${N}, quelle est la valeur du chiffre ${u.c} ?`, `Que vaut le chiffre ${u.c} dans ${N} ?`])}`,
+        text: `${intro}${pick([`Dans ${N}, quelle est la valeur du chiffre ${u.c} ?`, `Dans ${N}, que vaut le chiffre ${u.c} ?`])}`,
         format: "short" as const,
         expected: [String(u.v), fmt(u.v)],
         comparator: "number_equal" as const,
@@ -355,7 +439,7 @@ function genDecomposerCourt(lo: number, hi: number, avecEnTout: boolean) {
     const puiss = pick([10, 100, 1000].filter((x) => x * 10 <= n));
     const rep = Math.floor(n / puiss);
     return {
-      text: `${intro}Combien y a-t-il de ${NOMS_PUISSANCES[puiss]} en tout dans ${N} ?`,
+      text: `${intro}${pick([`Combien y a-t-il de ${NOMS_PUISSANCES[puiss]} en tout dans ${N} ?`, `Écris le nombre de ${NOMS_PUISSANCES[puiss]} en tout dans ${N}.`])}`,
       format: "short" as const,
       expected: [String(rep), fmt(rep)],
       comparator: "number_equal" as const,
@@ -374,19 +458,20 @@ function genDecomposerCourt(lo: number, hi: number, avecEnTout: boolean) {
 }
 
 /** QCM : la bonne décomposition (avec ou sans « × 100 »). Chaque leurre a une AUTRE valeur. */
-function genDecomposerQcm(lo: number, hi: number) {
-  const situation = Math.random() < 0.6;
-  const s = situationUn(lo, hi, (a, b) => {
+function genDecomposerQcm(lo: number, hi: number, contexte = false) {
+  const situation = contexte;
+  const s = situationUn(Math.max(lo, 100), hi, (a, b) => {
     for (;;) {
       const n = randomInt(a, b);
       if (termes(n).length >= 3) return n;
     }
-  });
+  }, contexte);
   const n = s.n;
   const N = fmt(n);
   const ch = String(n).split("").map(Number);
   const L = ch.length;
-  const avecFois = Math.random() < 0.5;
+  // « 3 × 100 000 + … » : des propositions plus longues que la question. Seulement jusqu'à 4 chiffres.
+  const avecFois = L <= 4 && Math.random() < 0.5;
   const ecrire = (puissances: number[]) =>
     ch
       .map((c, i) => ({ c, p: puissances[i] }))
@@ -414,7 +499,7 @@ function genDecomposerQcm(lo: number, hi: number) {
     const e = t.filter((_, i) => i !== k).map(fmt).join(" + ");
     if (!avecFois && e !== good && !pieges.includes(e)) pieges.push(e);
   }
-  const question = pick([`Quelle est la bonne décomposition de ${N} ?`, `Quelle écriture est égale à ${N} ?`, `Choisis la décomposition juste de ${N}.`]);
+  const question = pick([`Quelle est la bonne décomposition de ${N} ?`, `Quelle écriture est égale à ${N} ?`, `Choisis la bonne décomposition de ${N}.`]);
   return {
     text: `${situation ? s.phrase + "\n" : ""}${question}`,
     format: "qcm" as const,
@@ -436,15 +521,15 @@ const UNITES_ENCADRER = [
  * Le nombre n'est jamais un multiple de l'unité (sinon l'encadrement n'est pas
  * strict) ni pile au milieu (l'arrondi serait ambigu pour un élève de 6e).
  */
-function genEncadrer(lo: number, hi: number, qcm: boolean) {
-  const U = pick(UNITES_ENCADRER.filter((x) => x.u * 10 <= hi));
-  const situation = Math.random() < 0.65;
+function genEncadrer(lo: number, hi: number, qcm: boolean, contexte = false, unites: number[] = [10, 100, 1000]) {
+  const U = pick(UNITES_ENCADRER.filter((x) => unites.includes(x.u) && x.u * 10 <= hi));
+  const situation = contexte;
   const s = situationUn(Math.max(lo, U.u * 2), hi, (a, b) => {
     for (;;) {
       const n = randomInt(a, b);
       if (n % U.u !== 0 && n % U.u !== U.u / 2) return n;
     }
-  });
+  }, contexte);
   const n = s.n;
   const N = fmt(n);
   const bas = Math.floor(n / U.u) * U.u;
@@ -464,7 +549,7 @@ function genEncadrer(lo: number, hi: number, qcm: boolean) {
       text: `${intro}${pick([
         `Entre quels nombres se trouve ${N} ? Choisis deux ${consecutifs}.`,
         `Encadre ${N} entre deux ${consecutifs}.`,
-        `${N} est compris entre deux ${consecutifs}. Lesquel${U.fem ? "le" : ""}s ?`,
+        `Choisis les deux ${consecutifs} autour de ${N}.`,
       ])}`,
       format: "qcm" as const,
       choices: makeChoices(good, pieges),
@@ -614,7 +699,7 @@ function genChiffresDonnes(qcm: boolean, avecZero: boolean) {
 }
 
 /** Combien manque-t-il pour atteindre la dizaine, la centaine ou le millier suivant ? */
-function genComplement() {
+function genComplement(contexte = false) {
   const U = pick([10, 100, 100, 1000]);
   const cible = U * randomInt(U === 1000 ? 2 : 3, U === 10 ? 99 : 9) ;
   const a = cible - randomInt(1, U - 1);
@@ -625,11 +710,12 @@ function genComplement() {
   const lui = "lui";
   const Il = p.f ? "Elle" : "Il";
   const text =
-    Math.random() < 0.15
+    !contexte
       ? pick([
           `Quel nombre faut-il ajouter à ${A} pour obtenir ${T} ?`,
           `Complète : ${A} + … = ${T}`,
-          `Combien manque-t-il à ${A} pour aller jusqu’à ${T} ?`,
+          `Combien manque-t-il à ${A} pour faire ${T} ?`,
+          `Écris le nombre qui manque : ${A} + … = ${T}`,
         ])
       : U === 1000
       ? // Des milliers : seulement les situations où c'est plausible.
@@ -1055,12 +1141,12 @@ export const entiersBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["890"],
     comparator: "number_equal",
-    hint: "Compare les dizaines après les centaines.",
+    hint: "Compare d’abord les centaines.",
     explanation:
       "Définition : un nombre entier sert à compter ou à ranger des quantités.\n\n" +
       "Méthode : on lit bien les chiffres et leur position, puis on applique la règle demandée.\n\n" +
       "Calcul : " +
-      ("Les deux nombres ont 8 ou 9 centaines ? En réalité, 908 a 9 centaines et 890 a 8 centaines. Comme 8 centaines est plus petit que 9 centaines, 890 est le plus petit.") +
+      ("908 a 9 centaines et 890 a 8 centaines. Comme 8 centaines est plus petit que 9 centaines, 890 est le plus petit.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["entiers", "comparaison"],
   },
@@ -1117,8 +1203,8 @@ export const entiersBank: TutorBankItemV4[] = [
     notionId: "entier_nombre",
     microId: "entier_comparer",
     difficulty: 2,
-    theme: "reunion",
-    text: "Quel nombre est le plus petit : 1 480 visiteurs ou 1 408 visiteurs ?",
+    theme: "neutral",
+    text: "Quel nombre est le plus petit : 1 480 ou 1 408 ?",
     format: "qcm",
     choices: ["1 480", "1 408"],
     expected: ["1 408"],
@@ -1130,7 +1216,7 @@ export const entiersBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Les deux nombres ont 1 millier et 4 centaines. On compare alors les dizaines : 0 dizaine est plus petit que 8 dizaines. Donc 1 408 est plus petit que 1 480.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["entiers", "comparaison", "reunion", "qcm"],
+    tags: ["entiers", "comparaison", "qcm"],
   },
 
   // =========================
@@ -1336,16 +1422,16 @@ export const entiersBank: TutorBankItemV4[] = [
     microId: "entier_defi",
     difficulty: 1,
     theme: "neutral",
-    text: "Je pense à un nombre de trois chiffres. Son chiffre des centaines est 4, son chiffre des dizaines est 2 et son chiffre des unités est 7. Quel est ce nombre ?",
+    text: "Écris le nombre : 4 centaines, 2 dizaines et 7 unités.",
     format: "short",
     expected: ["427"],
     comparator: "number_equal",
-    hint: "Assemble les chiffres dans l’ordre.",
+    hint: "Écris les chiffres dans l’ordre : centaines, dizaines, unités.",
     explanation:
       "Définition : un nombre entier sert à compter ou à ranger des quantités.\n\n" +
       "Méthode : on lit bien les chiffres et leur position, puis on applique la règle demandée.\n\n" +
       "Calcul : " +
-      ("Le chiffre des centaines est 4, celui des dizaines est 2 et celui des unités est 7. Le nombre est donc 427.") +
+      ("4 centaines, c’est le chiffre 4 au rang des centaines. 2 dizaines : le chiffre 2 au rang des dizaines. 7 unités : le chiffre 7 au rang des unités. Le nombre est donc 427.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["entiers", "defi"],
   },
@@ -1534,6 +1620,19 @@ export const entiersBank: TutorBankItemV4[] = [
     // complétés par les chiffres suivants (voir genRang).
     generate: () => genRang(1000, 999999, true),
   },
+  {
+    kind: "template",
+    id: "entier_rang_tpl_3_ctx3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "entier_nombre",
+    microId: "entier_rang",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "De droite à gauche : unités, dizaines, centaines, unités de mille…",
+    tags: ["entiers", "rang", "template", "contexte"],
+    generate: () => genRang(100, 999999, Math.random() < 0.4, true),
+  },
 
   // =========================
   // TEMPLATES - COMPARER
@@ -1575,56 +1674,33 @@ export const entiersBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Regarde d’abord le nombre de chiffres, puis la valeur des chiffres.",
     tags: ["entiers", "comparaison", "qcm", "template"],
-    generate: () => {
-      // Quatre personnes, quatre nombres proches (même longueur, un chiffre
-      // change) : l'élève doit lire chiffre par chiffre. Nombres distincts,
-      // sinon « le plus grand » n'a plus de réponse unique.
-      const ctx = pick([
-        { intro: "Quatre amis jouent aux fléchettes. Voici leurs points.", unite: "points", min: 100, max: 999 },
-        { intro: "Quatre cyclistes notent leurs kilomètres de l’année.", unite: "km", min: 1000, max: 3000 },
-        { intro: "Quatre enfants comptent leurs pas de la journée.", unite: "pas", min: 4000, max: 9999 },
-        { intro: "Quatre amis pèsent leur récolte de tomates.", unite: "g", min: 1000, max: 2500 },
-        { intro: "Quatre lecteurs comptent les pages lues cette année.", unite: "pages", min: 1000, max: 5000 },
-        { intro: "Quatre joueurs comparent leurs scores au jeu vidéo.", unite: "points", min: 1000, max: 9999 },
-        { intro: "Quatre amis comptent leurs timbres.", unite: "timbres", min: 100, max: 999 },
-        { intro: "Quatre élèves mesurent leur saut en longueur.", unite: "cm", min: 250, max: 480 },
-        { intro: "Quatre amis comptent leurs perles pour faire des bracelets.", unite: "perles", min: 100, max: 999 },
-        { intro: "Quatre musiciens comptent leurs minutes de piano de l’année.", unite: "minutes", min: 1000, max: 4000 },
-        { intro: "Quatre jardiniers comptent les graines de leur sachet.", unite: "graines", min: 100, max: 999 },
-        { intro: "Quatre amis comptent les bouchons collectés pour le recyclage.", unite: "bouchons", min: 1000, max: 9999 },
-      ]);
-      const base = randomInt(ctx.min, ctx.max);
-      const nums: number[] = [base];
-      while (nums.length < 4) {
-        const n = voisinProche(base, true);
-        if (!nums.includes(n)) nums.push(n);
-      }
-      const noms: string[] = [];
-      while (noms.length < 4) {
-        const n = pick(PRENOMS).nom;
-        if (!noms.includes(n)) noms.push(n);
-      }
-      const sens = Math.random() < 0.5 ? "grand" : "petit";
-      const rep = sens === "grand" ? Math.max(...nums) : Math.min(...nums);
-      const question = pick(
-        sens === "grand"
-          ? ["Quel est le plus grand de ces quatre nombres ?", "Choisis le plus grand nombre.", "Qui a le plus grand nombre ? Choisis ce nombre."]
-          : ["Quel est le plus petit de ces quatre nombres ?", "Choisis le plus petit nombre.", "Qui a le plus petit nombre ? Choisis ce nombre."],
-      );
-      const lignes = nums.map((n, i) => `${noms[i]} : ${fmt(n)} ${ctx.unite}`).join("\n");
-      const ordre = [...nums].sort((x, y) => x - y).map(fmt).join(" < ");
-
-      return {
-        text: `${ctx.intro}\n${lignes}\n${question}`,
-        format: "qcm",
-        choices: shuffle(nums.map(fmt)),
-        expected: [fmt(rep)],
-        comparator: "mcq_exact",
-        explanation: expl(
-          `Les nombres ont le même nombre de chiffres : on compare de gauche à droite. ${ordre}. Le plus ${sens} est ${fmt(rep)}.`,
-        ),
-      };
-    },
+    generate: () => genComparerQuatre(false),
+  },
+  {
+    kind: "template",
+    id: "entier_comparer_qcm_tpl_2_ctx3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "entier_nombre",
+    microId: "entier_comparer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Regarde d’abord le nombre de chiffres, puis la valeur des chiffres.",
+    tags: ["entiers", "comparaison", "qcm", "template", "contexte"],
+    generate: () => genComparerQuatre(true),
+  },
+  {
+    kind: "template",
+    id: "entier_comparer_tpl_3_ctx3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "entier_nombre",
+    microId: "entier_comparer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Compare chiffre par chiffre de gauche à droite.",
+    tags: ["entiers", "comparaison", "template", "contexte"],
+    generate: () => genComparer(Math.random() < 0.6, true),
   },
 
   // =========================
@@ -1643,7 +1719,7 @@ export const entiersBank: TutorBankItemV4[] = [
     tags: ["entiers", "decomposition", "template"],
     // 06/10/2026 : « Décompose 345 » attendait 300, 40, 5 en `contains_keyword`
     // (« 5 » seul passait). Réponse numérique unique désormais.
-    generate: () => genDecomposerCourt(1000, 999999, true),
+    generate: () => genDecomposerCourt(1000, 99999, true),
   },
   {
     kind: "template",
@@ -1671,7 +1747,20 @@ export const entiersBank: TutorBankItemV4[] = [
     tags: ["entiers", "decomposition", "qcm", "template"],
     // 06/10/2026 : le leurre « à l'envers » (5 + 40 + 300) valait AUSSI le
     // nombre — deux bonnes réponses. Chaque leurre a maintenant une autre valeur.
-    generate: () => genDecomposerQcm(1000, 999999),
+    generate: () => genDecomposerQcm(1000, 99999),
+  },
+  {
+    kind: "template",
+    id: "entier_decomposer_tpl_3_ctx3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "entier_nombre",
+    microId: "entier_decomposer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Chaque chiffre vaut selon son rang.",
+    tags: ["entiers", "decomposition", "template", "contexte"],
+    generate: () => (Math.random() < 0.3 ? genDecomposerQcm(100, 99999, true) : genDecomposerCourt(100, 999999, true, true)),
   },
 
   // =========================
@@ -1701,9 +1790,35 @@ export const entiersBank: TutorBankItemV4[] = [
     microId: "entier_encadrer",
     difficulty: 2,
     theme: "neutral",
-    hint: "Cherche les centaines juste autour du nombre.",
+    hint: "Cherche le nombre rond juste avant et juste après.",
     tags: ["entiers", "encadrement", "qcm", "template"],
     generate: () => genEncadrer(100, 99999, true),
+  },
+  {
+    kind: "template",
+    id: "entier_encadrer_tpl_2_etoile_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "entier_nombre",
+    microId: "entier_encadrer",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Cherche la dizaine juste avant et juste après.",
+    tags: ["entiers", "encadrement", "template"],
+    generate: () => genEncadrer(11, 999, Math.random() < 0.3, false, [10]),
+  },
+  {
+    kind: "template",
+    id: "entier_encadrer_tpl_3_ctx3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "entier_nombre",
+    microId: "entier_encadrer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Cherche le nombre rond juste avant et juste après.",
+    tags: ["entiers", "encadrement", "template", "contexte"],
+    generate: () => genEncadrer(100, 99999, Math.random() < 0.3, true),
   },
 
   // =========================
@@ -1733,7 +1848,20 @@ export const entiersBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Compte ce qui manque pour arriver au nombre rond.",
     tags: ["entiers", "defi", "complement", "template"],
-    generate: () => genComplement(),
+    generate: () => genComplement(false),
+  },
+  {
+    kind: "template",
+    id: "entier_defi_tpl_2_complement_ctx3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "entier_nombre",
+    microId: "entier_defi",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Compte ce qui manque pour arriver au nombre rond.",
+    tags: ["entiers", "defi", "complement", "template", "contexte"],
+    generate: () => genComplement(true),
   },
   {
     kind: "template",
@@ -1822,10 +1950,10 @@ export const entiersBank: TutorBankItemV4[] = [
 
   // ===== TOP-UP — ENTIER_DEFI =====
   { kind: "fixed", id: "entier_defi_topup_1", niveau: "6e", matiere: "maths", notionId: "entier_nombre", microId: "entier_defi", difficulty: 2, theme: "neutral",
-    text: "Défi : quel est le plus grand nombre que l’on peut écrire avec 3 chiffres ?", format: "short", expected: ["999"], comparator: "number_equal",
+    text: "Écris le plus grand nombre de 3 chiffres.", format: "short", expected: ["999"], comparator: "number_equal",
     hint: "Utilise le plus grand chiffre partout.", explanation: expl("Le plus grand chiffre est 9. Avec 3 chiffres, le plus grand nombre est 999."), tags: ["entiers", "defi"] },
   { kind: "fixed", id: "entier_defi_topup_2", niveau: "6e", matiere: "maths", notionId: "entier_nombre", microId: "entier_defi", difficulty: 2, theme: "neutral",
-    text: "Défi : quel est le plus petit nombre que l’on peut écrire avec 4 chiffres ?", format: "short", expected: ["1000", "1 000"], comparator: "number_equal",
+    text: "Écris le plus petit nombre de 4 chiffres.", format: "short", expected: ["1000", "1 000"], comparator: "number_equal",
     hint: "Il ne peut pas commencer par 0.", explanation: expl("Un nombre à 4 chiffres ne peut pas commencer par 0. Le plus petit est donc 1 000."), tags: ["entiers", "defi"] },
   { kind: "fixed", id: "entier_defi_topup_3", niveau: "6e", matiere: "maths", notionId: "entier_nombre", microId: "entier_defi", difficulty: 3, theme: "neutral",
     text: "Défi : avec les chiffres 3, 1 et 8, quel est le plus grand nombre à 3 chiffres ?", format: "short", expected: ["831"], comparator: "number_equal",
