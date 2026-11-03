@@ -2,7 +2,7 @@
 //
 // Notion : Dénombrement et combinatoire (denombrement_combinatoire)
 //
-// microSkills couverts (~10 items chacun, difficultés étalées 1→5) :
+// microSkills couverts (générateurs de denombrement-renfort.ts, 4 questions de cours figées) :
 //   denombrement_reconnaitre               — Reconnaître une situation de dénombrement
 //   denombrement_produit_somme             — Principes additif et multiplicatif
 //   denombrement_arrangement_combinaison   — Ordre compte (arrangement) ou non (combinaison)
@@ -16,6 +16,7 @@
 // - Coefficient binomial : $\binom{n}{k}$. Triangle de Pascal affiché en tableau.
 
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
+import { renfortDenombrement } from "./denombrement-renfort";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -65,7 +66,7 @@ const pascalC42Canvas: CanvasFigure = {
   },
 };
 
-export const denombrementBank: TutorBankItemV4[] = [
+const anciens: TutorBankItemV4[] = [
   /* =========================================================
      DENOMBREMENT_RECONNAITRE
   ========================================================= */
@@ -1592,4 +1593,48 @@ export const denombrementBank: TutorBankItemV4[] = [
     ),
     tags: ["terminale-spe", "denombrement", "type_bac", "short"],
   },
+];
+
+/* 03/11/2026 — Frédéric : « enlève les questions fixes sauf pour des cas
+   spéciaux ». Les générateurs de denombrement-renfort.ts remplacent tout ; on
+   ne garde que quatre questions de cours : 0! = 1 (convention), la différence
+   arrangement / combinaison, la formule de C(n,k) par les factorielles et la
+   relation de Pascal. Un figé (ou ancien gabarit) remplacé passe son id au
+   gabarit de la même micro et de la même étoile (sinon la plus proche) : les
+   statistiques déjà enregistrées sous cet id restent rattachées. */
+const CAS_SPECIAUX = new Set([
+  "terminale_spe_denbr_reco_fixed_6",
+  "terminale_spe_denbr_ac_fixed_1",
+  "terminale_spe_denbr_coef_fixed_8",
+  "terminale_spe_denbr_pascal_fixed_1",
+]);
+
+function reprendreLesIds(remplaces: TutorBankItemV4[], gabarits: TutorBankItemV4[]): TutorBankItemV4[] {
+  const sortie = gabarits.map((g) => ({ ...g }));
+  const pris = new Set<number>();
+  for (const vieux of remplaces) {
+    let meilleur = -1;
+    let ecart = Infinity;
+    sortie.forEach((g, i) => {
+      if (pris.has(i) || g.microId !== vieux.microId) return;
+      const e = Math.abs(g.difficulty - vieux.difficulty);
+      if (e < ecart) {
+        ecart = e;
+        meilleur = i;
+      }
+    });
+    if (meilleur >= 0) {
+      pris.add(meilleur);
+      sortie[meilleur].id = vieux.id;
+    }
+  }
+  return sortie;
+}
+
+export const denombrementBank: TutorBankItemV4[] = [
+  ...anciens.filter((i) => CAS_SPECIAUX.has(i.id)),
+  ...reprendreLesIds(
+    anciens.filter((i) => !CAS_SPECIAUX.has(i.id)),
+    renfortDenombrement
+  ),
 ];
