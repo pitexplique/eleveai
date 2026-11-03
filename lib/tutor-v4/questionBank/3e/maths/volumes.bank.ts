@@ -209,7 +209,7 @@ export const volumesBank: TutorBankItemV4[] = [
           canvas: solideCanvas({
           solide: "assemblage_cubes",
           cubes,
-          display: { showLabels: true },
+          display: { showLabels: false },
         }),
       };
     },

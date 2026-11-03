@@ -341,7 +341,7 @@ export const volumesBank: TutorBankItemV4[] = [
         expected: [`${n} ${u}³`],
         comparator: "number_equal",
         explanation: expl(`Un étage contient ${a} × ${b} = ${a * b} cubes ; avec ${etages} : ${a * b} × ${c} = ${n} cubes de 1 ${u}³. Le volume est ${n} ${u}³.`),
-        canvas: solideCanvas({ solide: "assemblage_cubes", cubes: cubesPave(a, b, c), display: { showLabels: true } }),
+        canvas: solideCanvas({ solide: "assemblage_cubes", cubes: cubesPave(a, b, c), display: { showLabels: false } }),
       };
     },
   },

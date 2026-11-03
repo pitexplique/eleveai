@@ -186,7 +186,7 @@ function assemblageCubesCanvas(): Solide3DCanvasData {
       { x: 1, y: 0, z: 1 },
     ],
     display: {
-      showLabels: true,
+      showLabels: false,
       showDimensions: false,
       showFormulaHint: false,
     },
@@ -3099,7 +3099,7 @@ export const solidesBank: TutorBankItemV4[] = [
           solide: "assemblage_cubes",
           cubes,
           display: {
-            showLabels: true,
+            showLabels: false,
             showDimensions: false,
             showFormulaHint: false,
           },
