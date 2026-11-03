@@ -209,11 +209,12 @@ const ORD = ["première", "deuxième", "troisième", "quatrième", "cinquième",
 /** « Quelle est la troisième instruction ? », « juste après « … » », « la dernière » : la ligne visée. */
 function ligneVisee(lignes: string[], qu: string): string | null {
   let m: RegExpMatchArray | null;
-  if ((m = qu.match(/juste après « (.+) »/))) {
+  // 03/11/2026 : « Après « … », que fait-on ? » (★1-★2, sans « juste »).
+  if ((m = qu.match(/(?:(?:juste a|A|a)près|suit) « (.+) »/))) {
     const k = lignes.indexOf(m[1]);
     return k >= 0 && k + 1 < lignes.length ? lignes[k + 1] : null;
   }
-  if ((m = qu.match(/juste avant « (.+) »/))) {
+  if ((m = qu.match(/(?:(?:juste a|A|a)vant|précède) « (.+) »/))) {
     const k = lignes.indexOf(m[1]);
     return k >= 1 ? lignes[k - 1] : null;
   }
@@ -238,7 +239,8 @@ function verifierRang(q: Q, lignes: string[]): string[] {
 
 /** L'orientation finale, depuis « Au départ, … regarde vers le Nord. ». */
 function orientation(q: Q): string[] {
-  const m = q.text.match(/Au départ, .+ regarde vers (?:le |l’)(Nord|Est|Sud|Ouest)\./);
+  // 03/11/2026 : à ★1, « Au départ, le lutin regarde l’Est. » (sans « vers »).
+  const m = q.text.match(/ regarde (?:vers )?(?:le |l’)(Nord|Est|Sud|Ouest)\./);
   if (!m) return ["direction de départ illisible"];
   const { prog } = programme(q);
   const e = executer(prog, CAPS[m[1]]);
@@ -316,6 +318,8 @@ export const CORRECTEURS: CorrecteursMaths = {
     return [...verifierRang(q, lignes), ...canvasCoherent(q, prog), ...plausible(prog)];
   },
   "6e_algo_sequence_tpl_3_etapes_routine": (q) => verifierRang(q, programme(q).lignes),
+  // 03/11/2026 : les routines de la vie, montées à ★3 (même vérification).
+  "6e_algo_sequence_tpl_7_routine_situation": (q) => verifierRang(q, programme(q).lignes),
   "6e_algo_sequence_tpl_4_ordre_change_resultat": (q) => {
     const ps = programmes(q.text);
     const p: string[] = [];
@@ -426,6 +430,13 @@ export const CORRECTEURS: CorrecteursMaths = {
     return [...attendu(q, executer(prog).angle, "°"), ...canvasCoherent(q, prog), ...plausible(prog)];
   },
   "6e_algo_repetition_tpl_5_combien_de_fois": (q) => {
+    const { prog } = programme(q);
+    const p: string[] = [];
+    if (prog.length !== 1 || prog[0].t !== "rep") p.push("une seule boucle attendue");
+    return [...p, ...attendu(q, compter(question(q), prog)), ...plausible(prog)];
+  },
+  // 03/11/2026 : les situations de tpl_5, montées à ★3 : même vérification.
+  "6e_algo_repetition_tpl_7_situation": (q) => {
     const { prog } = programme(q);
     const p: string[] = [];
     if (prog.length !== 1 || prog[0].t !== "rep") p.push("une seule boucle attendue");

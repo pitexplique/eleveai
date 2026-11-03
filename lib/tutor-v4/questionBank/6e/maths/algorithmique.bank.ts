@@ -231,6 +231,25 @@ function intro(p: Prenom, a: Acteur) {
   ]);
 }
 
+/* ⛔⛔ 03/11/2026 — D'ABORD DES QUESTIONS SIMPLES (Frédéric) : « le contexte est
+   réservé aux étoiles ★3 et plus ». À ★1 et ★2 : ni prénom, ni lieu, ni
+   situation de la vie. Le programme est exécuté par un personnage de logiciel
+   (lutin, tortue, robot, pion), dit en une phrase courte. Les situations
+   (drone au-dessus du stade, robot ramasseur de balles…) restent aux gabarits ★3+. */
+const ACTEURS_SIMPLES: Acteur[] = [
+  { nom: "le lutin", f: false, u: "pas", lieu: "" },
+  { nom: "la tortue", f: true, u: "pas", lieu: "" },
+  { nom: "le robot", f: false, u: "cm", lieu: "" },
+  { nom: "le drone", f: false, u: "m", lieu: "" },
+  { nom: "le pion", f: false, u: "cases", lieu: "" },
+  { nom: "la fourmi", f: true, u: "pas", lieu: "" },
+];
+/** Une ouverture simple, sans prénom ni lieu. */
+function introSimple(a: Acteur) {
+  // 03/11/2026 : 12 mots (★1) / 15 mots (★2) au plus, programme compris : l'ouverture tient en 3 ou 4 mots.
+  return randomChoice(["Lis ce programme.", "Voici un programme.", `${maj(a.nom)} suit ce programme.`, `Programme ${duA(a)}.`]);
+}
+
 const ORDINAUX = ["première", "deuxième", "troisième", "quatrième", "cinquième", "sixième", "septième", "huitième"];
 
 /** Un programme de calcul de `nbOps` opérations, sans nombre négatif ni division qui tombe mal. */
@@ -336,6 +355,52 @@ function introCalcul(p: Prenom) {
     `${p.nom} programme une calculatrice en carton pour son petit frère.`,
   ]);
 }
+/** ★1-★2 (03/11/2026) : le programme de calcul, sans prénom ni situation. */
+function introCalculSimple() {
+  return randomChoice(["Programme de calcul.", "Lis ce programme.", "Voici un programme.", "Fais ce calcul."]);
+}
+/** ★1 (03/11/2026) : des programmes de CONSTRUCTION (géométrie pure), étapes
+ *  distinctes dans l'ordre — à la place des routines de la vie (montées à ★3).
+ *  Les lettres changent à chaque tirage. */
+function construction(): string[] {
+  const L = shuffle(["A", "B", "C", "D", "E", "F", "M", "N", "R", "S", "T", "K"]);
+  const [a, b, c, d] = L;
+  const n = randomChoice([3, 4, 5, 6, 7, 8]);
+  // 03/11/2026 : des étapes de 2 à 4 mots, pour un énoncé court.
+  const progs: string[][] = [
+    [`placer ${a}`, `placer ${b}`, `tracer [${a}${b}]`, `placer le milieu ${c}`],
+    [`tracer [${a}${b}]`, `placer ${c}`, `tracer [${b}${c}]`, `tracer [${a}${c}]`],
+    [`placer ${a} et ${b}`, `tracer (${a}${b})`, `placer ${c}`],
+    [`placer ${a}`, `tracer un cercle de centre ${a}`, `placer ${b} sur le cercle`],
+    [`tracer [${a}${b}]`, `placer ${c}`, `tracer le triangle ${a}${b}${c}`],
+    [`tracer un carré ${a}${b}${c}${d}`, `tracer [${a}${c}]`, `tracer [${b}${d}]`],
+    [`tracer une droite (d)`, `placer ${a} sur (d)`, `placer ${b} ailleurs`],
+    [`écrire ${n}`, `le multiplier par 2`, `lui ajouter 1`, `écrire le résultat`],
+    [`placer ${a}`, `tracer [${a}x)`, `tracer [${a}y)`, `marquer l’angle`],
+  ];
+  return randomChoice(progs);
+}
+/** ★1 (03/11/2026) : une action répétée, sans situation. `question` : la question posée. */
+// 03/11/2026 : `lutin` = l'action ne va qu'au lutin de Scratch (un pion ne tape pas des mains).
+const REPETES_SIMPLES: Array<{ act: string; lutin?: boolean; question: (a: Acteur) => string }> = [
+  { act: "sauter", lutin: true, question: (a) => `Combien de fois ${a.nom} saute-t-${ilA(a)} ?` },
+  { act: "taper des mains", lutin: true, question: (a) => `Combien de fois ${a.nom} tape-t-${ilA(a)} des mains ?` },
+  { act: "placer un point", question: () => "Combien de points sont placés ?" },
+  { act: "colorier une case", question: () => "Combien de cases sont coloriées ?" },
+  { act: "écrire le chiffre 7", question: () => "Combien de 7 sont écrits ?" },
+  { act: "tracer un trait", question: () => "Combien de traits sont tracés ?" },
+  { act: "lever le bras", lutin: true, question: (a) => `Combien de fois ${a.nom} lève-t-${ilA(a)} le bras ?` },
+  { act: "faire un pas", question: () => "Combien de pas sont faits ?" },
+  { act: "tracer un cercle", question: () => "Combien de cercles sont tracés ?" },
+];
+/** ★2 (03/11/2026) : ceux qui dessinent, sans lieu ni situation. */
+const DESSINATEURS_SIMPLES: Acteur[] = [
+  { nom: "le lutin", f: false, u: "pas", lieu: "" },
+  { nom: "la tortue", f: true, u: "pas", lieu: "" },
+  { nom: "le robot", f: false, u: "cm", lieu: "" },
+  { nom: "le robot traceur", f: false, u: "m", lieu: "" },
+  { nom: "la fourmi", f: true, u: "pas", lieu: "" },
+];
 /** Le déroulé d'un programme de calcul : « 7 + 3 = 10 ; 10 × 2 = 20 ». */
 function derouleCalcul(prog: Ins[]) {
   let v = 0;
@@ -398,9 +463,10 @@ const POINTS = ["Nord", "Est", "Sud", "Ouest"];
 const VERS: Record<string, string> = { Nord: "le Nord", Est: "l’Est", Sud: "le Sud", Ouest: "l’Ouest" };
 
 /** Orientation : un départ (Nord, Est…), des quarts et des demi-tours à droite ou à gauche, quelques pas. */
-function questionOrientation(nbTg: number, nbAv: number, titre: string) {
+function questionOrientation(nbTg: number, nbAv: number, titre: string, simple = false) {
   const p = pick(PRENOMS);
-  const a = randomChoice(ACTEURS);
+  // 03/11/2026 : `simple` (★1) — ni prénom ni lieu.
+  const a = randomChoice(simple ? ACTEURS_SIMPLES : ACTEURS);
   const cap0 = randomInt(0, 3) * 90;
   const prog: Ins[] = [];
   for (let k = 0; k < nbTg; k++)
@@ -417,8 +483,8 @@ function questionOrientation(nbTg: number, nbAv: number, titre: string) {
   const il = ilA(a);
   return {
     text:
-      `${intro(p, a)}\nAu départ, ${a.nom} regarde vers ${VERS[POINTS[cap0 / 90]]}.\n${progTxt(prog, a.u)}\n` +
-      randomChoice([
+      `${simple ? "" : `${intro(p, a)}\n`}${simple ? maj(a.nom) : `Au départ, ${a.nom}`} regarde vers ${VERS[POINTS[cap0 / 90]]}.\n${progTxt(prog, a.u)}\n` +
+      randomChoice(simple ? [`Vers où regarde-t-${il} à la fin ?`, `Où regarde-t-${il} à la fin ?`] : [
         `Vers où ${a.nom} regarde-t-${il} à la fin ?`,
         `À la fin, dans quelle direction ${a.nom} regarde-t-${il} ?`,
         `Quelle est la direction ${duA(a)} à la fin du programme ?`,
@@ -439,13 +505,14 @@ function questionOrientation(nbTg: number, nbAv: number, titre: string) {
 }
 
 /** La question « quelle instruction… » sur une liste de lignes distinctes : la question et la bonne ligne. */
-function questionRang(lignes: string[]): { question: string; juste: string } {
+/** `court` (★1-★2, 03/11/2026) : des questions de 6 mots environ. */
+function questionRang(lignes: string[], court = false): { question: string; juste: string } {
   const n = lignes.length;
   const genre = randomChoice(["rang", "apres", "avant", "derniere"] as const);
   if (genre === "apres") {
     const k = randomInt(0, n - 2);
     return {
-      question: randomChoice([
+      question: court ? `Quelle ligne suit « ${lignes[k]} » ?` : randomChoice([
         `Quelle instruction vient juste après « ${lignes[k]} » ?`,
         `Que faut-il faire juste après « ${lignes[k]} » ?`,
       ]),
@@ -455,7 +522,7 @@ function questionRang(lignes: string[]): { question: string; juste: string } {
   if (genre === "avant") {
     const k = randomInt(1, n - 1);
     return {
-      question: randomChoice([
+      question: court ? `Quelle ligne précède « ${lignes[k]} » ?` : randomChoice([
         `Quelle instruction vient juste avant « ${lignes[k]} » ?`,
         `Qu’est-ce qui est fait juste avant « ${lignes[k]} » ?`,
       ]),
@@ -574,9 +641,8 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     hint: "Compte les blocs d’action après le départ.",
     tags: ["algo_programmation", "sequence", "scratch", "template", "canvas"],
     generate: () => {
-      const p = pick(PRENOMS);
-      const a = randomChoice(ACTEURS);
-      const prog = programmeSimple(a.u, randomInt(3, 6));
+      const a = randomChoice(ACTEURS_SIMPLES);
+      const prog = programmeSimple(a.u, randomInt(3, 4));
       const nAv = prog.filter((i) => i.t === "av").length;
       const nTg = prog.filter((i) => i.t === "tg").length;
       const genre = randomChoice(["tout", "tout", "avance", "tourne"] as const);
@@ -584,9 +650,9 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         genre === "tout"
           ? [
               randomChoice([
-                "Combien d’instructions ce programme contient-il ?",
-                "Combien d’instructions y a-t-il dans ce programme ?",
-                "Compte les instructions de ce programme. Combien y en a-t-il ?",
+                "Combien d’instructions y a-t-il ?",
+                "Compte les instructions.",
+                "Combien de lignes compte ce programme ?",
               ]),
               prog.length,
               "toutes les lignes du programme",
@@ -594,7 +660,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
           : genre === "avance"
             ? [
                 randomChoice([
-                  "Combien d’instructions « avancer » ce programme contient-il ?",
+                  "Combien de lignes « avancer » y a-t-il ?",
                   `Combien de fois ${a.nom} avance-t-${ilA(a)} ?`,
                 ]),
                 nAv,
@@ -602,7 +668,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
               ]
             : [
                 randomChoice([
-                  "Combien d’instructions « tourner » ce programme contient-il ?",
+                  "Combien de lignes « tourner » y a-t-il ?",
                   `Combien de fois ${a.nom} tourne-t-${ilA(a)} ?`,
                 ]),
                 nTg,
@@ -610,7 +676,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
               ];
 
       return {
-        text: `${intro(p, a)}\n${progTxt(prog, a.u)}\n${question}`,
+        text: `${introSimple(a)}\n${progTxt(prog, a.u)}\n${question}`,
         format: "short",
         expected: [String(n)],
         comparator: "number_equal",
@@ -637,14 +703,13 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     hint: "Lis le premier bloc placé sous le drapeau vert.",
     tags: ["algo_programmation", "sequence", "ordre", "template", "canvas"],
     generate: () => {
-      const p = pick(PRENOMS);
-      const a = randomChoice(ACTEURS);
-      const prog = programmeSimple(a.u, randomInt(4, 5));
+      const a = randomChoice(ACTEURS_SIMPLES);
+      const prog = programmeSimple(a.u, 3, false);
       const lignes = prog.map((i) => ligne(i, a.u));
-      const { question, juste } = questionRang(lignes);
+      const { question, juste } = questionRang(lignes, true);
 
       return {
-        text: `${intro(p, a)}\n${progTxt(prog, a.u)}\n${question}`,
+        text: `${introSimple(a)}\n${progTxt(prog, a.u)}\n${question}`,
         format: "qcm",
         choices: makeChoices(juste, lignes),
         expected: [juste],
@@ -672,6 +737,67 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     hint: "Lis les étapes de haut en bas, dans l’ordre.",
     tags: ["algo_programmation", "sequence", "ordre", "template"],
     generate: () => {
+      // 03/11/2026 : ★1 = un programme de construction, sans situation (les
+      // routines de la vie sont montées à ★3 : 6e_algo_sequence_tpl_7_routine_situation).
+      const E = construction();
+      const ouverture = randomChoice([
+        "Les étapes :",
+        "Algorithme :",
+        "Programme :",
+        "Lis l’algorithme.",
+      ]);
+      const texte = `${ouverture}\n${E.map((e) => `– ${e}`).join("\n")}\n`;
+      if (Math.random() < 0.2) {
+        return {
+          text:
+            texte +
+            randomChoice([
+              "Combien d’étapes y a-t-il ?",
+              "Combien de lignes compte-t-on ?",
+              "Combien d’instructions y a-t-il ?",
+            ]),
+          format: "short",
+          expected: [String(E.length)],
+          comparator: "number_equal",
+          explanation: ae(
+            "un algorithme est une suite d’instructions, une par ligne.",
+            "on compte les lignes.",
+            `il y a ${E.length} lignes.`,
+            `l’algorithme compte ${E.length} instructions.`,
+          ),
+        };
+      }
+      const { question, juste } = questionRang(E, true);
+      return {
+        text: texte + question,
+        format: "qcm",
+        choices: makeChoices(juste, E),
+        expected: [juste],
+        comparator: "mcq_exact",
+        explanation: ae(
+          "un algorithme est une suite d’instructions faites dans un ordre précis.",
+          "on lit les lignes de haut en bas.",
+          `la bonne ligne est ${cite(juste)}.`,
+          `la réponse est ${cite(juste)}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "6e_algo_sequence_tpl_7_routine_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_sequence",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Lis les étapes de haut en bas, dans l’ordre.",
+    tags: ["algo_programmation", "sequence", "ordre", "template"],
+    generate: () => {
+      // 03/11/2026 : les algorithmes de la vie (cuisine, jardin, sciences,
+      // musique…), montés de ★1 à ★3.
       const p = pick(PRENOMS);
       const r = randomChoice(ROUTINES);
       const E = r.etapes;
@@ -944,10 +1070,9 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     hint: "Additionne uniquement les blocs “avancer”.",
     tags: ["algo_programmation", "deplacement", "distance", "template", "canvas"],
     generate: () => {
-      const p = pick(PRENOMS);
-      const a = randomChoice(ACTEURS);
+      const a = randomChoice(ACTEURS_SIMPLES);
       let prog: Ins[];
-      do prog = programmeSimple(a.u, randomInt(3, 6), false);
+      do prog = programmeSimple(a.u, 3, false);
       while (prog.filter((i) => i.t === "av").length < 2);
       const avs = prog.filter((i): i is { t: "av"; n: number } => i.t === "av").map((i) => i.n);
       const total = avs.reduce((s, x) => s + x, 0);
@@ -955,12 +1080,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
       return {
         text:
-          `${intro(p, a)}\n${progTxt(prog, a.u)}\n` +
+          `${introSimple(a)}\n${progTxt(prog, a.u)}\n` +
           randomChoice([
-            `Quelle distance ${a.nom} parcourt-${il} en tout ?`,
-            `Combien de ${UNITE_MOT[a.u]} ${a.nom} parcourt-${il} au total ?`,
-            `Calcule la distance totale parcourue par ${a.nom}.`,
+            `Quelle distance ${a.nom} parcourt-${il} ?`,
+            `Calcule la distance parcourue.`,
             `De combien ${a.nom} avance-t-${il} en tout ?`,
+            `Calcule la distance totale.`,
           ]),
         format: "short",
         expected: [uTxt(total, a.u)],
@@ -988,10 +1113,9 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     hint: "Additionne les angles des blocs “tourner”.",
     tags: ["algo_programmation", "deplacement", "angle", "template", "canvas"],
     generate: () => {
-      const p = pick(PRENOMS);
-      const a = randomChoice(ACTEURS);
+      const a = randomChoice(ACTEURS_SIMPLES);
       let prog: Ins[];
-      do prog = programmeSimple(a.u, randomInt(3, 6), false);
+      do prog = programmeSimple(a.u, 3, false);
       while (prog.filter((i) => i.t === "tg").length < 2);
       const angles = prog.filter((i): i is { t: "tg"; a: number } => i.t === "tg").map((i) => i.a);
       const total = angles.reduce((s, x) => s + x, 0);
@@ -999,12 +1123,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
       return {
         text:
-          `${intro(p, a)}\n${progTxt(prog, a.u)}\n` +
+          `${introSimple(a)}\n${progTxt(prog, a.u)}\n` +
           randomChoice([
-            `De combien de degrés ${a.nom} tourne-t-${il} en tout ?`,
-            `Calcule l’angle total dont ${a.nom} a tourné.`,
-            `Additionne les angles : de combien ${a.nom} a-t-${il} tourné au total ?`,
-            `Quel est l’angle total des rotations ${duA(a)} ?`,
+            `De combien ${a.nom} tourne-t-${il} en tout ?`,
+            `Calcule l’angle total.`,
+            `Additionne les angles. Combien de degrés ?`,
+            `Quel est l’angle total ?`,
           ]),
         format: "short",
         expected: [`${total}°`],
@@ -1116,7 +1240,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Un quart de tour à droite : Nord → Est → Sud → Ouest.",
     tags: ["algo_programmation", "deplacement", "orientation", "template", "canvas"],
-    generate: () => questionOrientation(randomInt(1, 2), randomInt(0, 1), "Tourner"),
+    generate: () => questionOrientation(randomInt(1, 2), randomInt(0, 1), "Tourner", true),
   },
 
   {
@@ -1131,11 +1255,10 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     hint: "« avancer » change la place ; « tourner » change la direction.",
     tags: ["algo_programmation", "deplacement", "template", "canvas", "qcm"],
     generate: () => {
-      const p = pick(PRENOMS);
-      const a = randomChoice(ACTEURS);
+      const a = randomChoice(ACTEURS_SIMPLES);
       const direction = Math.random() < 0.5;
       const autres: Ins[] = [];
-      const nb = randomInt(2, 3);
+      const nb = randomInt(1, 2);
       while (autres.length < nb) {
         const i: Ins =
           Math.random() < 0.5
@@ -1150,13 +1273,13 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       const juste = ligne(cle, a.u);
       return {
         text:
-          `${intro(p, a)}\n${progTxt(prog, a.u)}\n` +
+          `${introSimple(a)}\n${progTxt(prog, a.u)}\n` +
           (direction
             ? randomChoice([
-                `Quelle instruction change la direction ${duA(a)} ?`,
-                `Quelle ligne fait tourner ${a.nom} ?`,
+                `Quelle ligne change la direction ?`,
+                `Quelle ligne fait tourner ?`,
               ])
-            : randomChoice([`Quelle instruction change la place ${duA(a)} ?`, `Quelle ligne fait avancer ${a.nom} ?`])),
+            : randomChoice([`Quelle ligne change la place ?`, `Quelle ligne fait avancer ?`])),
         format: "qcm",
         choices: makeChoices(juste, prog.map((i) => ligne(i, a.u))),
         expected: [juste],
@@ -1367,23 +1490,21 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     hint: "Multiplie le nombre de répétitions par la distance avancée.",
     tags: ["algo_programmation", "repetition", "distance", "template", "canvas"],
     generate: () => {
-      const p = pick(PRENOMS);
-      const a = randomChoice(ACTEURS);
+      const a = randomChoice(ACTEURS_SIMPLES);
       const k = randomInt(2, 8);
       const d = longueur(a.u);
       const corps: Ins[] = [{ t: "av", n: d }];
       if (Math.random() < 0.5) corps.push({ t: "tg", a: randomChoice([45, 60, 90, 120]) });
-      if (Math.random() < 0.3) corps.unshift({ t: "dire", s: randomChoice(PAROLES) });
       const prog: Ins[] = [{ t: "rep", k, corps }];
       const total = k * d;
       const il = ilA(a);
       return {
         text:
-          `${intro(p, a)}\n${progTxt(prog, a.u)}\n` +
+          `${introSimple(a)}\n${progTxt(prog, a.u)}\n` +
           randomChoice([
-            `Quelle distance ${a.nom} parcourt-${il} en tout ?`,
-            `Combien de ${UNITE_MOT[a.u]} ${a.nom} parcourt-${il} au total ?`,
-            `Calcule la distance totale parcourue par ${a.nom}.`,
+            `Quelle distance ${a.nom} parcourt-${il} ?`,
+            `Combien de ${UNITE_MOT[a.u]} en tout ?`,
+            `Calcule la distance totale.`,
           ]),
         format: "short",
         expected: [uTxt(total, a.u)],
@@ -1411,13 +1532,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     hint: "Chaque instruction dans la boucle est répétée le même nombre de fois.",
     tags: ["algo_programmation", "repetition", "actions", "template", "canvas"],
     generate: () => {
-      const p = pick(PRENOMS);
-      const a = randomChoice(ACTEURS);
+      const a = randomChoice(ACTEURS_SIMPLES);
       const k = randomInt(2, 6);
       const corps: Ins[] = shuffle([
         { t: "av", n: longueur(a.u) } as Ins,
         { t: "tg", a: randomChoice([45, 60, 90, 120]) } as Ins,
-        ...(Math.random() < 0.5 ? [{ t: "dire", s: randomChoice(PAROLES) } as Ins] : []),
       ]);
       const prog: Ins[] = [{ t: "rep", k, corps }];
       const il = ilA(a);
@@ -1426,8 +1545,8 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         genre === "tout"
           ? [
               randomChoice([
-                "Combien d’instructions sont exécutées en tout ?",
-                "En tout, combien d’instructions le programme exécute-t-il ?",
+                "Combien d’instructions sont exécutées ?",
+                "Compte les instructions exécutées.",
               ]),
               corps.length,
             ]
@@ -1436,7 +1555,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
             : [`Combien de fois ${a.nom} avance-t-${il} ?`, 1];
       const total = k * parTour;
       return {
-        text: `${intro(p, a)}\n${progTxt(prog, a.u)}\n${question}`,
+        text: `${introSimple(a)}\n${progTxt(prog, a.u)}\n${question}`,
         format: "short",
         expected: [String(total)],
         comparator: "number_equal",
@@ -1599,6 +1718,41 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     hint: "Le nombre écrit dans « répéter … fois » dit combien de fois on refait l’action.",
     tags: ["algo_programmation", "repetition", "template"],
     generate: () => {
+      // 03/11/2026 : ★1 sans situation (les situations : 6e_algo_repetition_tpl_7_situation, ★3).
+      const s = randomChoice(REPETES_SIMPLES);
+      const a = s.lutin ? ACTEURS_SIMPLES[0] : randomChoice(ACTEURS_SIMPLES);
+      const k = randomInt(2, 10);
+      const sansBoucle = Math.random() < 0.25;
+      return {
+        text:
+          `${introSimple(a)}\n– répéter ${k} fois : ${s.act}\n` +
+          (sansBoucle ? "Sans boucle, combien de lignes faut-il ?" : s.question(a)),
+        format: "short",
+        expected: [String(k)],
+        comparator: "number_equal",
+        explanation: ae(
+          "« répéter … fois » refait l’action le nombre de fois indiqué.",
+          "on lit le nombre écrit dans la boucle.",
+          `la boucle refait « ${s.act} » ${k} fois.`,
+          `la réponse est ${k}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "6e_algo_repetition_tpl_7_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_repetition",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le nombre écrit dans « répéter … fois » dit combien de fois on refait l’action.",
+    tags: ["algo_programmation", "repetition", "template"],
+    generate: () => {
+      // 03/11/2026 : les situations de la vie (vélo, musique, jardin, sport…), montées de ★1 à ★3.
       const p = pick(PRENOMS);
       const s = randomChoice(REPETES);
       const k = randomInt(2, 10);
@@ -1759,8 +1913,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     hint: "Additionne les blocs avancer, en tenant compte de la boucle.",
     tags: ["algo_programmation", "lire_programme", "distance", "boucle", "template", "canvas"],
     generate: () => {
-      const p = pick(PRENOMS);
-      const a = randomChoice(ACTEURS);
+      const a = randomChoice(ACTEURS_SIMPLES);
       const debut = longueur(a.u);
       const k = randomInt(2, 5);
       const pas = longueur(a.u);
@@ -1773,11 +1926,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       const il = ilA(a);
       return {
         text:
-          `${intro(p, a)}\n${progTxt(prog, a.u)}\n` +
+          `${introSimple(a)}\n${progTxt(prog, a.u)}\n` +
           randomChoice([
-            `Quelle distance ${a.nom} parcourt-${il} en tout ?`,
-            `Lis le programme : combien de ${UNITE_MOT[a.u]} ${a.nom} parcourt-${il} au total ?`,
-            `Prévois la distance totale parcourue par ${a.nom}.`,
+            `Quelle distance ${a.nom} parcourt-${il} ?`,
+            `Combien de ${UNITE_MOT[a.u]} en tout ?`,
+            `Calcule la distance totale.`,
           ]),
         format: "short",
         expected: [uTxt(total, a.u)],
@@ -1931,17 +2084,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     hint: "Pars du nombre choisi, puis fais le calcul de la ligne suivante.",
     tags: ["algo_programmation", "lire_programme", "programme_calcul", "template"],
     generate: () => {
-      const p = pick(PRENOMS);
       const prog = programmeCalcul(1);
       const v = executer(prog).valeur;
       return {
         text:
-          `${introCalcul(p)}\n${progTxt(prog)}\n` +
+          `${introCalculSimple()}\n${progTxt(prog)}\n` +
           randomChoice([
-            "Quel nombre obtient-on à la fin ?",
-            "Quel est le résultat du programme ?",
+            "Quel nombre obtient-on ?",
+            "Quel est le résultat ?",
             "Calcule le résultat.",
-            `Quel nombre ${p.nom} trouve-t-${p.f ? "elle" : "il"} ?`,
           ]),
         format: "short",
         expected: [String(v)],
@@ -1968,17 +2119,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     hint: "Fais les calculs un par un, dans l’ordre des lignes.",
     tags: ["algo_programmation", "lire_programme", "programme_calcul", "template"],
     generate: () => {
-      const p = pick(PRENOMS);
       const prog = programmeCalcul(randomInt(2, 3));
       const v = executer(prog).valeur;
       return {
         text:
-          `${introCalcul(p)}\n${progTxt(prog)}\n` +
+          `${introCalculSimple()}\n${progTxt(prog)}\n` +
           randomChoice([
-            "Quel nombre obtient-on à la fin ?",
-            "Quel est le résultat du programme ?",
-            "Calcule le résultat, ligne par ligne.",
-            `Quel nombre ${p.nom} trouve-t-${p.f ? "elle" : "il"} à la fin ?`,
+            "Quel nombre obtient-on ?",
+            "Quel est le résultat ?",
+            "Calcule le résultat.",
           ]),
         format: "short",
         expected: [String(v)],
@@ -2174,7 +2323,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_figure",
     difficulty: 2,
     theme: "neutral",
-    text: "Ce programme alterne avancer de 80 puis avancer de 40, avec des rotations de 90°. Quelle figure peut-il tracer ?",
+    text: "Lis les blocs. Quelle figure ce programme peut-il tracer ?",
     format: "qcm",
     choices: ["un rectangle", "un triangle équilatéral", "un cercle", "un segment"],
     expected: ["un rectangle"],
@@ -2342,18 +2491,17 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     hint: "Le nombre de tours donne le nombre de côtés ; l’angle dit comment on tourne.",
     tags: ["algo_programmation", "figures", "template", "canvas", "qcm"],
     generate: () => {
-      const p = pick(PRENOMS);
-      const a = randomChoice(DESSINATEURS);
+      const a = randomChoice(DESSINATEURS_SIMPLES);
       const f = programmeFigure(a.u, ["un carré", "un carré", "un rectangle", "un triangle équilatéral", "un triangle équilatéral", "un hexagone"]);
       // Un carré EST un rectangle : jamais les deux dans les propositions quand c'est un carré.
       const leurres = FIGURES_LEURRES.filter((x) => x !== f.nom && !(f.nom === "un carré" && x === "un rectangle"));
       return {
         text:
-          `${intro(p, a)}\n${progTxt(f.prog, a.u)}\n` +
+          `${introSimple(a)}\n${progTxt(f.prog, a.u)}\n` +
           randomChoice([
             `Quelle figure ${a.nom} trace-t-${ilA(a)} ?`,
-            "Quelle figure ce programme dessine-t-il ?",
-            `Que dessine ${a.nom} ?`,
+            "Quelle figure est tracée ?",
+            `Que trace ${a.nom} ?`,
           ]),
         format: "qcm",
         choices: makeChoices(f.nom, leurres),
@@ -2857,7 +3005,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "6e_algo_sequence_topup_2", niveau: "6e", matiere: "maths",
     notionId: "algo_programmation", microId: "algo_sequence", difficulty: 1, theme: "neutral",
-    text: "Programme : (1) Avancer (2) Tourner (3) Avancer. Quelle est la 2ᵉ instruction ?",
+    text: "(1) Avancer (2) Tourner (3) Avancer. Quelle est la 2ᵉ instruction ?",
     format: "qcm", choices: ["Tourner", "Avancer", "Reculer", "S’arrêter"], expected: ["Tourner"], comparator: "mcq_exact",
     hint: "Compte dans l’ordre.",
     explanation: ae("chaque instruction a une position dans la séquence.", "on compte les instructions dans l’ordre.", "la 2ᵉ instruction est « Tourner ».", "la réponse est Tourner."),
@@ -2866,7 +3014,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "6e_algo_sequence_topup_3", niveau: "6e", matiere: "maths",
     notionId: "algo_programmation", microId: "algo_sequence", difficulty: 1, theme: "neutral",
-    text: "Combien d’instructions contient ce programme : (1) Avancer (2) Tourner (3) Sauter (4) Dire ?",
+    text: "(1) Avancer (2) Tourner (3) Sauter (4) Dire. Combien d’instructions ?",
     format: "short", expected: ["4"], comparator: "number_equal",
     hint: "Compte les lignes numérotées.",
     explanation: ae("une séquence est composée de plusieurs instructions.", "on compte les instructions numérotées.", "il y a 4 instructions de 1 à 4.", "le programme contient 4 instructions."),
@@ -2877,7 +3025,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "6e_algo_deplacement_topup_1", niveau: "6e", matiere: "maths",
     notionId: "algo_programmation", microId: "algo_deplacement", difficulty: 1, theme: "neutral",
-    text: "Un robot regarde vers le Nord. Il tourne à droite (quart de tour). Vers où regarde-t-il ?",
+    text: "Un robot regarde vers le Nord. Il tourne à droite. Où regarde-t-il ?",
     format: "qcm", choices: ["Est", "Ouest", "Sud", "Nord"], expected: ["Est"], comparator: "mcq_exact",
     hint: "Un quart de tour à droite depuis le Nord.",
     explanation: ae("tourner à droite fait un quart de tour dans le sens des aiguilles d’une montre.", "on part du Nord.", "Nord → quart de tour à droite → Est.", "le robot regarde vers l’Est."),
@@ -2886,7 +3034,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "6e_algo_deplacement_topup_2", niveau: "6e", matiere: "maths",
     notionId: "algo_programmation", microId: "algo_deplacement", difficulty: 1, theme: "neutral",
-    text: "Un robot regarde vers l’Est. Il fait un demi-tour. Vers où regarde-t-il ?",
+    text: "Un robot regarde vers l’Est. Il fait demi-tour. Où regarde-t-il ?",
     format: "qcm", choices: ["Ouest", "Est", "Nord", "Sud"], expected: ["Ouest"], comparator: "mcq_exact",
     hint: "Un demi-tour = direction opposée.",
     explanation: ae("un demi-tour amène vers la direction opposée.", "on cherche l’opposé de l’Est.", "l’opposé de l’Est est l’Ouest.", "le robot regarde vers l’Ouest."),
@@ -2895,7 +3043,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "6e_algo_deplacement_topup_3", niveau: "6e", matiere: "maths",
     notionId: "algo_programmation", microId: "algo_deplacement", difficulty: 2, theme: "neutral",
-    text: "Un robot avance de 3 cases, puis avance encore de 2 cases. Combien de cases a-t-il parcourues ?",
+    text: "Un robot avance de 3 cases, puis de 2 cases. Combien de cases ?",
     format: "short", expected: ["5"], comparator: "number_equal",
     hint: "Additionne les déplacements.",
     explanation: ae("les déplacements successifs s’additionnent.", "on additionne les cases.", "3 + 2 = 5.", "le robot a parcouru 5 cases."),
@@ -2906,7 +3054,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "6e_algo_figure_topup_1", niveau: "6e", matiere: "maths",
     notionId: "algo_programmation", microId: "algo_figure", difficulty: 2, theme: "neutral",
-    text: "Pour dessiner un carré en répétant « Avancer · Tourner de 90° », combien de répétitions faut-il ?",
+    text: "Pour un carré, combien de fois répéter « Avancer · Tourner de 90° » ?",
     format: "short", expected: ["4"], comparator: "number_equal",
     hint: "Un carré a 4 côtés.",
     explanation: ae("on répète autant de fois qu’il y a de côtés.", "un carré possède 4 côtés.", "il faut donc 4 répétitions.", "on répète 4 fois."),
@@ -2935,7 +3083,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "6e_algo_repetition_topup_1", niveau: "6e", matiere: "maths",
     notionId: "algo_programmation", microId: "algo_repetition", difficulty: 2, theme: "neutral",
-    text: "Programme : Répéter 4 fois « Avancer de 10 pas ». Combien de pas au total ?",
+    text: "Répéter 4 fois « Avancer de 10 pas ». Combien de pas en tout ?",
     format: "short", expected: ["40"], comparator: "number_equal",
     hint: "4 × 10.",
     explanation: ae("une boucle répète l’instruction plusieurs fois.", "on multiplie le nombre de pas par le nombre de répétitions.", "4 × 10 = 40.", "le robot avance de 40 pas."),
@@ -3003,7 +3151,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "6e_algo_lire_programme_topup_4", niveau: "6e", matiere: "maths",
     notionId: "algo_programmation", microId: "algo_lire_programme", difficulty: 2, theme: "neutral",
-    text: "Combien d’instructions (sans le déclencheur) contient ce programme ?",
+    text: "Sans compter le drapeau vert, combien d’instructions y a-t-il ?",
     format: "short", expected: ["3"], comparator: "number_equal",
     hint: "Ne compte pas le bloc « Quand 🚩 est cliqué ».",
     explanation: ae("on compte les instructions après le déclencheur.", "on ne compte pas le bloc de départ.", "il reste Avancer, Tourner et Dire : 3 instructions.", "il y a 3 instructions."),

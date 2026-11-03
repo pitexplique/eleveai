@@ -164,8 +164,10 @@ const questionVolume = (quoi: string) =>
 function genVolumeCompterEtages() {
   const c = pick(CONSTRUCTIONS);
   const p = pick(PRENOMS);
-  const n = randomInt(2, 4);
-  const k = Array.from({ length: n }, () => randomInt(1, 9));
+  // 03/11/2026 (★3) : 2 ou 3 étages, jamais plus de cubes en haut qu'en bas (texte plus court, solide qui tient).
+  const n = randomInt(2, 3);
+  const k: number[] = [];
+  for (let i = 0; i < n; i++) k.push(randomInt(1, i === 0 ? 9 : k[i - 1]));
   const morceaux = k.map((x, i) => (i === 0 ? `${x} cube${x > 1 ? "s" : ""} ${ETAGES[i]}` : `${x} ${ETAGES[i]}`));
   const liste = morceaux.slice(0, -1).join(", ") + " et " + morceaux[morceaux.length - 1];
   const total = k.reduce((a, b) => a + b, 0);
@@ -217,7 +219,8 @@ const MORCEAUX = ["l’un", "le deuxième", "le troisième"];
 function genVolumeAssembler() {
   const c = pick(CONSTRUCTIONS);
   const p = pick(PRENOMS);
-  const n = pick([2, 2, 3]);
+  // 03/11/2026 (★3) : deux morceaux, pour rester vers 25 mots.
+  const n: number = 2;
   const k = Array.from({ length: n }, () => randomInt(2, 12));
   const total = k.reduce((a, b) => a + b, 0);
   const liste =
@@ -620,6 +623,170 @@ function genVolumeDefiInverse() {
   };
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// ⛔⛔ 03/11/2026 — À ★1-★2 : LE GESTE NU (lib/tutor-v4/questionBank/6e/REGLES-6E.md).
+// Ni prénom, ni situation, ni histoire ; ★1 ≤ 12 mots, ★2 ≤ 15 mots, verbe
+// d'action ou question directe. Les cubes sont DESSINÉS quand il faut compter.
+// Les situations (cartons, aquariums, cabanes…) passent aux gabarits ★3.
+// ═══════════════════════════════════════════════════════════════════════════
+
+/** ★1 : l'unité d'un objet, sans prénom. */
+function genVolumeUniteSimple() {
+  const grand = Math.random() < 0.5;
+  const o = pick(grand ? SOLIDES_GRANDS : SOLIDES_PETITS);
+  const u = grand ? "m" : "cm";
+  const autre = pick(["kg", "g"]);
+  if (Math.random() < 0.5) {
+    return {
+      text: pick([`Quelle unité choisir pour le volume ${o.de} ?`, `Choisis l’unité du volume ${o.de}.`]),
+      format: "qcm" as const,
+      choices: shuffle([`${u}³`, `${u}²`, u, autre]),
+      expected: [`${u}³`],
+      comparator: "mcq_exact" as const,
+      explanation: expl(
+        `Un volume s’écrit avec une unité CUBE. ${u} mesure une longueur, ${u}² une aire, ${autre} une masse. Ici on choisit ${u}³.`
+      ),
+    };
+  }
+  const N = nf(randomInt(o.min, o.max));
+  return {
+    text: pick([`Quelle mesure peut être le volume ${o.de} ?`, `Choisis la mesure du volume ${o.de}.`]),
+    format: "qcm" as const,
+    choices: shuffle([`${N} ${u}³`, `${N} ${u}²`, `${N} ${u}`, `${N} ${autre}`]),
+    expected: [`${N} ${u}³`],
+    comparator: "mcq_exact" as const,
+    explanation: expl(`Un volume s’écrit avec une unité cube. ${N} ${u} est une longueur, ${N} ${u}² une aire. Le volume est donc ${N} ${u}³.`),
+  };
+}
+
+/** ★2 : remplir, couvrir ou faire le tour — sans personnage. */
+const ACTIONS_SIMPLES: { phrase: string; rep: "le volume" | "l’aire" | "le périmètre" }[] = [
+  { phrase: "remplir une boîte de sable", rep: "le volume" },
+  { phrase: "remplir un aquarium d’eau", rep: "le volume" },
+  { phrase: "remplir un carton de cubes", rep: "le volume" },
+  { phrase: "remplir une jardinière de terre", rep: "le volume" },
+  { phrase: "remplir un seau d’eau", rep: "le volume" },
+  { phrase: "recouvrir le dessus d’une boîte", rep: "l’aire" },
+  { phrase: "peindre le couvercle d’un coffre", rep: "l’aire" },
+  { phrase: "recouvrir une table d’une nappe", rep: "l’aire" },
+  { phrase: "coller un ruban tout autour d’un couvercle", rep: "le périmètre" },
+  { phrase: "poser une bordure tout autour d’un tapis", rep: "le périmètre" },
+];
+function genVolumeGrandeurSimple() {
+  const a = pick(ACTIONS_SIMPLES);
+  const pourquoi =
+    a.rep === "le volume"
+      ? "Remplir, c’est occuper un espace : c’est le volume."
+      : a.rep === "l’aire"
+        ? "Couvrir une surface plate, c’est l’aire."
+        : "Faire le tour d’une surface, c’est le périmètre.";
+  return {
+    text: pick([`Pour ${a.phrase}, que faut-il connaître ?`, `Pour ${a.phrase}, quelle grandeur compte ?`]),
+    format: "qcm" as const,
+    choices: shuffle(["le volume", "l’aire", "le périmètre", "la masse"]),
+    expected: [a.rep],
+    comparator: "mcq_exact" as const,
+    explanation: expl(pourquoi),
+  };
+}
+
+/** ★2 : des cubes DESSINÉS, en escalier (une rangée de face) ou en une couche à plat : aucun cube caché. */
+function genVolumeCompterFigure() {
+  const u = pick(["cm³", "cm³", "dm³", "m³"]);
+  const nEtages = randomInt(1, 3);
+  const k: number[] = [];
+  for (let i = 0; i < nEtages; i++) k.push(randomInt(1, i === 0 ? 6 : k[i - 1]));
+  if (k.reduce((a, b) => a + b, 0) < 3) k[0] = randomInt(3, 6);
+  const cubes: { x: number; y: number; z: number }[] = [];
+  if (Math.random() < 0.35) {
+    // Une seule couche posée à plat (2 ou 3 rangées) : tous les dessus se voient.
+    const L = randomInt(2, 5);
+    const l = randomInt(2, 3);
+    k.length = 0;
+    for (let y = 0; y < l; y++) {
+      k.push(L);
+      for (let x = 0; x < L; x++) cubes.push({ x, y, z: 0 });
+    }
+  } else
+    k.forEach((n, z) => {
+      for (let x = 0; x < n; x++) cubes.push({ x, y: 0, z });
+    });
+  const total = cubes.length;
+  return {
+    text: pick([
+      `Chaque cube mesure 1 ${u}. Quel est le volume du solide ?`,
+      `Un cube mesure 1 ${u}. Compte les cubes. Quel est le volume ?`,
+      `Les cubes font 1 ${u}. Calcule le volume du solide.`,
+    ]),
+    format: "short" as const,
+    expected: avecUnite(total, u),
+    comparator: "number_equal" as const,
+    explanation: expl(
+      `Chaque cube a un volume de 1 ${u}. On compte les cubes${k.length > 1 ? `, ${cubes.some((c) => c.y > 0) ? "rangée par rangée" : "étage par étage"} : ${k.join(" + ")} = ${total}` : ` : il y en a ${total}`}. Le volume est ${total} ${u}.`
+    ),
+    canvas: { kind: "solide_3d" as const, solide: "assemblage_cubes" as const, cubes, display: { showLabels: false } },
+  };
+}
+
+/** ★2 : comparer deux volumes de même unité, sans histoire. */
+function genVolumeComparerSimple() {
+  const ctx = pick(CTX_DEUX_VOLUMES);
+  const a = randomInt(ctx.min, ctx.max);
+  let b = randomInt(ctx.min, ctx.max);
+  while (b === a) b = randomInt(ctx.min, ctx.max);
+  const grand = Math.random() < 0.5;
+  const A = `${nf(a)} ${ctx.u}`;
+  const B = `${nf(b)} ${ctx.u}`;
+  const mot = grand ? "grand" : "petit";
+  const r = grand ? Math.max(a, b) : Math.min(a, b);
+  return {
+    text: pick([`Écris le plus ${mot} : ${A} ou ${B}.`, `Quel volume est le plus ${mot} : ${A} ou ${B} ?`, `Écris le volume le plus ${mot} : ${A} ou ${B}.`]),
+    format: "short" as const,
+    expected: avecUnite(r, ctx.u),
+    comparator: "number_equal" as const,
+    explanation: expl(
+      `Les deux volumes sont dans la même unité (${ctx.u}) : on compare les nombres. ${nf(Math.min(a, b))} < ${nf(Math.max(a, b))}. Le plus ${mot} est ${nf(r)} ${ctx.u}.`
+    ),
+  };
+}
+
+/** ★2 : assembler des morceaux de cubes, sans histoire. */
+function genVolumeAssemblerSimple() {
+  const u = pick(["cm³", "cm³", "dm³", "m³"]);
+  const n = pick([2, 2, 3]);
+  const k = Array.from({ length: n }, () => randomInt(2, 12));
+  const total = k.reduce((a, b) => a + b, 0);
+  // 03/11/2026 : 13-14 mots ; « 7 et 5 cubes » plutôt que « 7 cubes et 5 cubes ».
+  const liste = n === 2 ? `${k[0]} et ${k[1]} cubes` : `${k[0]}, ${k[1]} et ${k[2]} cubes`;
+  return {
+    text: pick([
+      `Un cube mesure 1 ${u}. On assemble ${liste}. Calcule le volume.`,
+      `Les cubes font 1 ${u}. On assemble ${liste}. Quel est le volume ?`,
+      `Un cube mesure 1 ${u}. On colle ${liste}. Calcule le volume.`,
+    ]),
+    format: "short" as const,
+    expected: avecUnite(total, u),
+    comparator: "number_equal" as const,
+    explanation: expl(`Assembler ne change pas le nombre de cubes : on additionne. ${k.join(" + ")} = ${total}. Le volume est ${total} ${u}.`),
+  };
+}
+
+/** ★1 (2 mesures) / ★2 (4 mesures) : trouver le volume parmi des mesures, sans objet ni prénom. */
+function genVolumeLireSimple(combien: 2 | 4) {
+  const f = pick(FICHES);
+  const vol = tirerMesure(f.volume);
+  const autres = shuffle([tirerMesure(f.longueur), tirerMesure(f.aire), tirerMesure(f.masse)]).slice(0, combien - 1);
+  const toutes = shuffle([vol, ...autres]);
+  const liste = toutes.slice(0, -1).join(", ") + " ou " + toutes[toutes.length - 1];
+  return {
+    text: pick([`Quelle mesure est un volume : ${liste} ?`, `Écris la mesure de volume : ${liste}.`]),
+    format: "short" as const,
+    expected: avecUnite(Number(vol.split(" ").slice(0, -1).join("").replace(",", ".")), vol.split(" ").pop()!),
+    comparator: "number_equal" as const,
+    explanation: expl(`Un volume s’écrit avec une unité cube (cm³, dm³, m³). La seule mesure de ce genre est ${vol}. Les autres sont une longueur, une aire ou une masse.`),
+  };
+}
+
 export const volumesBank: TutorBankItemV4[] = [
   // =========================
   // VOLUME_UNITE
@@ -723,7 +890,8 @@ export const volumesBank: TutorBankItemV4[] = [
     matiere: "maths",
     notionId: "volume_solide",
     microId: "volume_unite",
-    difficulty: 2,
+    // 03/11/2026 : un lieu = un contexte → ★3 (règle 6e).
+    difficulty: 3,
     theme: "reunion",
     text: "Pour mesurer le volume d’un grand bac à poissons à La Réunion, quelle unité peut-on utiliser ?",
     format: "qcm",
@@ -752,7 +920,9 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_compter",
     difficulty: 2,
     theme: "neutral",
-    text: "Un solide est formé de 6 petits cubes identiques. Quel est son volume en cubes unités ?",
+    // 03/11/2026 : 9 mots, les 6 cubes dessinés.
+    text: "Compte les cubes unités. Quel est le volume du solide ?",
+    canvas: { kind: "solide_3d", solide: "assemblage_cubes", cubes: [0, 1, 2].flatMap((x) => [{ x, y: 0, z: 0 }, { x, y: 0, z: 1 }]), display: { showLabels: false } },
     format: "short",
     expected: ["6"],
     comparator: "number_equal",
@@ -1101,7 +1271,7 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_lire",
     difficulty: 2,
     theme: "neutral",
-    text: "Le solide a un volume de 24 cm³. Combien cela représente-t-il de cubes unités de 1 cm³ ?",
+    text: "Un solide fait 24 cm³. Combien de cubes de 1 cm³ contient-il ?",
     format: "short",
     expected: ["24 cubes"],
     comparator: "number_equal",
@@ -1299,7 +1469,7 @@ export const volumesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Un volume se mesure en unités cubes.",
     tags: ["volume_solide", "unite", "template"],
-    generate: () => genVolumeUnite(),
+    generate: () => genVolumeUniteSimple(),
   },
   {
     kind: "template",
@@ -1312,7 +1482,21 @@ export const volumesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Remplir, c’est le volume ; couvrir, c’est l’aire. Un volume s’écrit avec l’exposant 3.",
     tags: ["volume_solide", "unite", "template"],
-    generate: () => (Math.random() < 0.7 ? genVolumeGrandeur() : genVolumeUnite()),
+    generate: () => (Math.random() < 0.7 ? genVolumeGrandeurSimple() : genVolumeUniteSimple()),
+  },
+  {
+    kind: "template",
+    id: "volume_unite_tpl_3_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_unite",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Remplir, c’est le volume ; couvrir, c’est l’aire. Un volume s’écrit avec l’exposant 3.",
+    tags: ["volume_solide", "unite", "template"],
+    // 03/11/2026 : les situations avec un prénom, montées de ★1-★2 à ★3.
+    generate: () => (Math.random() < 0.6 ? genVolumeGrandeur() : genVolumeUnite()),
   },
 
   // =========================
@@ -1329,6 +1513,20 @@ export const volumesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Le volume correspond au nombre de cubes unités.",
     tags: ["volume_solide", "compter", "template"],
+    generate: () => genVolumeCompterFigure(),
+  },
+  {
+    kind: "template",
+    id: "volume_compter_tpl_3_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_compter",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le volume correspond au nombre de cubes unités.",
+    tags: ["volume_solide", "compter", "template"],
+    // 03/11/2026 : les constructions (tour, cabane, caisses du port…), montées de ★2 à ★3.
     generate: () => genVolumeCompterEtages(),
   },
   {
@@ -1377,6 +1575,20 @@ export const volumesBank: TutorBankItemV4[] = [
     tags: ["volume_solide", "comparer", "template"],
     // ⛔ 06/10/2026 — était en contains_keyword avec « 15 » comme mot-clé
     // (« 150 » passait). Comparateur numérique, unité comprise.
+    generate: () => genVolumeComparerSimple(),
+  },
+  {
+    kind: "template",
+    id: "volume_comparer_tpl_2_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_comparer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Compare les deux nombres.",
+    tags: ["volume_solide", "comparer", "template"],
+    // 03/11/2026 : les cartons, aquariums, chambres…, montés de ★2 à ★3.
     generate: () => genVolumeComparerDeux(),
   },
   {
@@ -1407,6 +1619,20 @@ export const volumesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Assembler ne change pas le nombre de cubes : additionne.",
     tags: ["volume_solide", "assemblage", "template"],
+    generate: () => genVolumeAssemblerSimple(),
+  },
+  {
+    kind: "template",
+    id: "volume_assemblage_tpl_2_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_assemblage",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Assembler ne change pas le nombre de cubes : additionne.",
+    tags: ["volume_solide", "assemblage", "template"],
+    // 03/11/2026 : les constructions avec un prénom, montées de ★2 à ★3.
     generate: () => genVolumeAssembler(),
   },
   {
@@ -1450,7 +1676,7 @@ export const volumesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Un volume s’écrit avec une unité cube : cm³, dm³, m³.",
     tags: ["volume_solide", "lire", "template"],
-    generate: () => genVolumeLireMesures(2),
+    generate: () => genVolumeLireSimple(2),
   },
   {
     kind: "template",
@@ -1463,7 +1689,21 @@ export const volumesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Cherche la mesure avec le petit 3 : cm³, dm³ ou m³.",
     tags: ["volume_solide", "lire", "template"],
-    generate: () => genVolumeLireMesures(4),
+    generate: () => genVolumeLireSimple(4),
+  },
+  {
+    kind: "template",
+    id: "volume_lire_tpl_2_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_lire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Cherche la mesure avec le petit 3 : cm³, dm³ ou m³.",
+    tags: ["volume_solide", "lire", "template"],
+    // 03/11/2026 : les fiches d'objets (valise, aquarium…), montées de ★1-★2 à ★3.
+    generate: () => genVolumeLireMesures(Math.random() < 0.5 ? 2 : 4),
   },
   {
     kind: "template",
@@ -1544,26 +1784,26 @@ export const volumesBank: TutorBankItemV4[] = [
     text: "Dans l’écriture 25 cm³, quel est le volume ?", format: "short", expected: ["25 cm³"], comparator: "number_equal",
     hint: "Lis le nombre avant l’unité.", explanation: expl("Dans 25 cm³, le nombre 25 indique la quantité de volume. Le volume vaut 25 cm³."), tags: ["volume_solide", "lire"] },
   { kind: "fixed", id: "volume_lire_topup_2", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_lire", difficulty: 1, theme: "neutral",
-    text: "Un petit cube unité mesure 1 cm de côté. Quel est son volume ?", format: "short", expected: ["1 cm³"], comparator: "number_equal",
+    text: "Un cube a 1 cm de côté. Quel est son volume ?", format: "short", expected: ["1 cm³"], comparator: "number_equal",
     hint: "C’est le cube unité.", explanation: expl("Un cube de 1 cm de côté est le cube unité : son volume est 1 cm³."), tags: ["volume_solide", "lire", "cube_unite"] },
   { kind: "fixed", id: "volume_lire_topup_3", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_lire", difficulty: 2, theme: "neutral",
     text: "Un solide est formé de 14 cubes unités. Quel est son volume ?", format: "short", expected: ["14"], comparator: "number_equal",
     hint: "Chaque cube vaut 1 cm³.", explanation: expl("Chaque cube unité vaut 1 cm³. Un solide de 14 cubes a donc un volume de 14 cm³."), tags: ["volume_solide", "lire"] },
 
   // ===== TOP-UP — VOLUME_COMPARER =====
-  { kind: "fixed", id: "volume_comparer_topup_1", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_comparer", difficulty: 1, theme: "neutral",
-    text: "Le solide A est fait de 12 cubes, le solide B de 9 cubes. Lequel a le plus grand volume ?", format: "qcm", choices: ["le solide A", "le solide B", "ils sont égaux"], expected: ["le solide A"], comparator: "mcq_exact",
+  { kind: "fixed", id: "volume_comparer_topup_1", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_comparer", difficulty: 2, theme: "neutral",
+    text: "Solide A : 12 cubes. Solide B : 9 cubes. Quel solide a le plus grand volume ?", format: "qcm", choices: ["le solide A", "le solide B", "ils sont égaux"], expected: ["le solide A"], comparator: "mcq_exact",
     hint: "Compare le nombre de cubes.", explanation: expl("On compte les cubes : A = 12, B = 9. Comme 12 > 9, le solide A a le plus grand volume."), tags: ["volume_solide", "comparer", "qcm"] },
   { kind: "fixed", id: "volume_comparer_topup_2", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_comparer", difficulty: 2, theme: "neutral",
     text: "Deux solides sont faits chacun de 8 cubes. Ont-ils le même volume ?", format: "qcm", choices: ["oui", "non"], expected: ["oui"], comparator: "mcq_exact",
     hint: "Compte les cubes de chacun.", explanation: expl("Les deux solides ont 8 cubes, donc le même volume : 8 cm³. La forme peut être différente, mais le volume est identique."), tags: ["volume_solide", "comparer", "qcm"] },
   { kind: "fixed", id: "volume_comparer_topup_3", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_comparer", difficulty: 2, theme: "neutral",
-    text: "Un solide a 15 cubes, un autre 9 cubes. Combien de cubes de plus a le premier ?", format: "short", expected: ["6 cubes"], comparator: "number_equal",
+    text: "Calcule l’écart entre 15 cubes et 9 cubes.", format: "short", expected: ["6 cubes"], comparator: "number_equal",
     hint: "Calcule 15 − 9.", explanation: expl("On calcule l’écart : 15 - 9 = 6. Le premier solide a 6 cubes de plus."), tags: ["volume_solide", "comparer"] },
 
   // ===== TOP-UP — VOLUME_ASSEMBLAGE =====
   { kind: "fixed", id: "volume_assemblage_topup_1", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_assemblage", difficulty: 2, theme: "neutral",
-    text: "On assemble un solide de 5 cubes et un solide de 6 cubes. Quel est le volume total ?", format: "short", expected: ["11"], comparator: "number_equal",
+    text: "On assemble 5 cubes et 6 cubes. Combien de cubes en tout ?", format: "short", expected: ["11"], comparator: "number_equal",
     hint: "Additionne les cubes.", explanation: expl("On additionne les volumes : 5 + 6 = 11 cubes, soit 11 cm³."), tags: ["volume_solide", "assemblage"] },
   { kind: "fixed", id: "volume_assemblage_topup_2", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_assemblage", difficulty: 2, theme: "neutral",
     text: "Un pavé est formé de 2 couches de 6 cubes. Combien de cubes contient-il ?", format: "short", expected: ["12 cubes"], comparator: "number_equal",
@@ -1583,7 +1823,7 @@ export const volumesBank: TutorBankItemV4[] = [
     text: "Défi : quel est le volume (en cm³) d’un cube d’arête 3 cm ?", format: "short", expected: ["27 cm³"], comparator: "number_equal",
     hint: "3 × 3 × 3.", explanation: expl("Le volume d’un cube est arête × arête × arête : 3 × 3 × 3 = 27, donc 27 cm³."), tags: ["volume_solide", "defi", "cube"] },
   { kind: "fixed", id: "volume_defi_topup_3", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_defi", difficulty: 2, theme: "neutral",
-    text: "Défi : un pavé droit mesure 5 cm × 2 cm × 1 cm. Quel est son volume en cm³ ?", format: "short", expected: ["10 cm³"], comparator: "number_equal",
+    text: "Calcule le volume d’un pavé droit de 5 cm × 2 cm × 1 cm.", format: "short", expected: ["10 cm³"], comparator: "number_equal",
     hint: "5 × 2 × 1.", explanation: expl("Volume = 5 × 2 × 1 = 10, donc 10 cm³."), tags: ["volume_solide", "defi", "pave"] },
   { kind: "fixed", id: "volume_defi_topup_4", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_defi", difficulty: 3, theme: "neutral",
     text: "Défi : combien de cubes de 1 cm³ faut-il pour remplir entièrement une boîte de 2 cm × 3 cm × 2 cm ?", format: "short", expected: ["12 cubes"], comparator: "number_equal",

@@ -52,7 +52,9 @@ function corrigerGrandeur(q: Q): string[] {
   return [...p, ...accordPronom(t)];
 }
 
-const corrigerUniteOuGrandeur = (q: Q) => (/unité|mesures|écritures/.test(q.text) ? corrigerUnite(q) : corrigerGrandeur(q));
+// 03/11/2026 : le genre se lit dans les propositions (une unité cube = question
+// d'unité) : les énoncés ★1-★2 disent « mesure » ou « unité » sans « mesures ».
+const corrigerUniteOuGrandeur = (q: Q) => ((q.choices ?? []).some((c) => /³/.test(c)) ? corrigerUnite(q) : corrigerGrandeur(q));
 
 // ─── volume_compter, volume_assemblage ──────────────────────────────────────
 
@@ -98,6 +100,28 @@ function corrigerCubes(q: Q): string[] {
   p.push(...verifierReponse(q, l.total, l.u));
   if (q.format === "qcm") p.push(...verifierQcm(q, l.total, l.u));
   return [...p, ...accordPronom(q.text)];
+}
+
+/** 03/11/2026 : ★2, les cubes DESSINÉS. On compte la figure, on vérifie qu'aucun
+ *  cube ne flotte ni ne se cache (une seule rangée de face), que le texte ne dit
+ *  aucun nombre hors du cube unité, et que l'étiquette ne donne pas le compte. */
+function corrigerCubesFigure(q: Q): string[] {
+  const c = q.canvas as { kind?: string; cubes?: { x: number; y: number; z: number }[]; display?: { showLabels?: boolean } } | undefined;
+  if (!c || c.kind !== "solide_3d" || !c.cubes?.length) return ["figure de cubes absente"];
+  const unite = new RegExp(`\\b1 (${VOLUME})`, "g");
+  const unites = [...q.text.matchAll(unite)].map((m) => m[1]);
+  if (unites.length !== 1) return ["le cube unité (« 1 cm³ ») est absent ou en double"];
+  const p: string[] = [];
+  if (/\d/.test(q.text.replace(unite, ""))) p.push("un nombre en trop dans le texte");
+  if (c.display?.showLabels !== false) p.push("l'étiquette de la figure donne le compte");
+  const cle = (x: number, y: number, z: number) => `${x},${y},${z}`;
+  const ici = new Set(c.cubes.map((k) => cle(k.x, k.y, k.z)));
+  if (ici.size !== c.cubes.length) p.push("deux cubes à la même place");
+  if (c.cubes.some((k) => k.y !== 0) && c.cubes.some((k) => k.z !== 0)) p.push("un cube peut être caché derrière un autre");
+  if (c.cubes.some((k) => k.z > 0 && !ici.has(cle(k.x, k.y, k.z - 1)))) p.push("un cube flotte");
+  if (c.cubes.length > 18) p.push("trop de cubes à compter");
+  p.push(...verifierReponse(q, c.cubes.length, unites[0]));
+  return p;
 }
 
 // ─── volume_comparer ────────────────────────────────────────────────────────
@@ -155,7 +179,8 @@ function corrigerLireMesures(q: Q): string[] {
   const v = mesures(q.text, VOLUME);
   if (v.length !== 1) return [`il faut une seule mesure de volume dans le texte, lu : ${v.length}`];
   const toutes = mesures(q.text, `${VOLUME}|dm²|cm²|m²|kg|g|${LONGUEUR}`);
-  const annonce = /deux mesures/.test(q.text) ? 2 : /quatre mesures/.test(q.text) ? 4 : 0;
+  // 03/11/2026 : à ★1-★2, la liste n'est pas annoncée (« Quelle mesure est un volume : … ou … ? ») : 2 ou 4.
+  const annonce = /deux mesures/.test(q.text) ? 2 : /quatre mesures/.test(q.text) ? 4 : toutes.length === 2 || toutes.length === 4 ? toutes.length : -1;
   const p: string[] = [];
   if (toutes.length !== annonce) p.push(`le texte annonce ${annonce} mesures, il y en a ${toutes.length}`);
   p.push(...verifierReponse(q, v[0].v, v[0].u));
@@ -273,7 +298,13 @@ export const CORRECTEURS: CorrecteursMaths = {
   volume_defi_tpl_e3: corrigerPave,
   volume_defi_tpl_1: corrigerDefiQcm,
   volume_defi_tpl_2: corrigerDefiInverse,
-  volume_compter_tpl_1: corrigerCubes,
+  volume_compter_tpl_1: corrigerCubesFigure,
+  // 03/11/2026 : les situations montées de ★1-★2 à ★3 (mêmes correcteurs).
+  volume_compter_tpl_3_situation: corrigerCubes,
+  volume_comparer_tpl_2_situation: corrigerComparerDeux,
+  volume_assemblage_tpl_2_situation: corrigerCubes,
+  volume_lire_tpl_2_situation: corrigerLireMesures,
+  volume_unite_tpl_3_situation: corrigerUniteOuGrandeur,
   volume_compter_tpl_2: corrigerCubes,
   volume_compter_qcm_tpl_1: corrigerCubes,
   volume_assemblage_tpl_e2: corrigerCubes,
