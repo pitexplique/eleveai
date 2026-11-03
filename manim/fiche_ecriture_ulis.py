@@ -247,6 +247,119 @@ def construire(glyphe, rang):
     return img
 
 
+def _enregistrer(img, base):
+    SORTIE.mkdir(parents=True, exist_ok=True)
+    img.save(SORTIE / f"{base}.pdf", "PDF", resolution=300)
+    img.resize((W // 3, H // 3), Image.LANCZOS).save(SORTIE / f"{base}.png", "PNG")
+    print(SORTIE / f"{base}.pdf")
+    return img
+
+
+def _glyphe(d, g, cx, base_y, il, couleur, ep, haut_max=None):
+    """Un chiffre ou une lettre CURSIVE (le tracé des vidéos), centré sur cx.
+
+    `haut_max` (px) : la lettre entière tient dedans — le « f » (5,33 interlignes
+    de haut) sortait de sa case du tableau de réussite. `base_y` est alors le
+    CENTRE vertical voulu, et non plus la ligne de base.
+    """
+    spec = spec_chiffre(int(g)) if g.isdigit() else spec_lettre(g)
+    ys = [y for t in spec["traits"] for _, y in t]
+    if haut_max:
+        il = min(il, haut_max / (max(ys) - min(ys)))
+        base_y = base_y + (max(ys) + min(ys)) / 2 * il
+    xs = [x for t in spec["traits"] for x, _ in t]
+    bx = cx - (min(xs) + max(xs)) / 2 * il
+    tracer_lettre(d, spec, bx, base_y, il, couleur, ep)
+
+
+def couverture(glyphes):
+    """⭐ LA COUVERTURE À SON NOM + LE TABLEAU DE RÉUSSITE.
+
+    Frédéric, 03/11 : « je veux qu'à la fin, elle se sente valorisée ». Un
+    cahier qui porte son prénom est À ELLE ; le tableau lui montre, page après
+    page, tout ce qu'elle sait déjà faire — une étoile coloriée par tracé appris.
+    """
+    img = Image.new("RGB", (W, H), (255, 255, 255))
+    d = ImageDraw.Draw(img)
+    d.rounded_rectangle([MARGE, 160, W - MARGE, 1180], radius=60, fill=JAUNE_CLAIR,
+                        outline=JAUNE_BORD, width=8)
+    f = police("ariblk.ttf", 120)
+    t = "Mon cahier"
+    d.text(((W - d.textlength(t, font=f)) / 2, 230), t, font=f, fill=ORANGE)
+    f2 = police("ariblk.ttf", 90)
+    t = "d'écriture"
+    d.text(((W - d.textlength(t, font=f2)) / 2, 380), t, font=f2, fill=NAVY)
+    m = Image.open(TI_MARGO).convert("RGBA")
+    mh = 420
+    m = m.resize((int(m.width * mh / m.height), mh), Image.LANCZOS)
+    img.paste(m, (W - MARGE - m.width - 40, 640), m)
+    d.text((MARGE + 80, 640), "Ce cahier appartient à :", font=police("arialbd.ttf", 60), fill=NAVY)
+    d.line([(MARGE + 80, 860), (W - MARGE - m.width - 90, 860)], fill=NAVY, width=6)
+    d.text((MARGE + 80, 920), "J'apprends à écrire, doucement, et je progresse !",
+           font=police("arialbd.ttf", 46), fill=(20, 110, 60))
+
+    d.text((MARGE, 1290), "Mon tableau de réussite", font=police("ariblk.ttf", 70), fill=NAVY)
+    d.text((MARGE, 1390), "Quand je sais écrire un chiffre ou une lettre, je colorie son étoile.",
+           font=police("arialbd.ttf", 44), fill=BLEU)
+    # Une grille : 6 colonnes, une case = le glyphe cursif + une étoile.
+    cols, cw, ch = 6, (W - 2 * MARGE) / 6, 290
+    y0 = 1500
+    for k, g in enumerate(glyphes):
+        r, c = divmod(k, cols)
+        x = MARGE + c * cw
+        y = y0 + r * ch
+        d.rounded_rectangle([x + 12, y, x + cw - 12, y + ch - 24], radius=26, outline=GRIS_LIGNE, width=4)
+        _glyphe(d, g, x + cw * 0.36, y + 133, 62 if g.isdigit() else 58, BLEU, 7, haut_max=200)
+        etoile(d, x + cw * 0.76, y + 130, 46, largeur=6)
+    _enregistrer(img, "cahier-ecriture-couverture")
+    return img
+
+
+def diplome(titre, glyphes, base):
+    """⭐ LE DIPLÔME : la fin d'une étape se FÊTE, elle ne se coche pas."""
+    img = Image.new("RGB", (W, H), (255, 255, 255))
+    d = ImageDraw.Draw(img)
+    for k, c in enumerate([ORANGE, JAUNE_BORD, VERT]):
+        o = 70 + k * 34
+        d.rounded_rectangle([o, o, W - o, H - o], radius=70, outline=c, width=14)
+    f = police("ariblk.ttf", 150)
+    t = "DIPLÔME"
+    d.text(((W - d.textlength(t, font=f)) / 2, 330), t, font=f, fill=ORANGE)
+    f2 = police("ariblk.ttf", 70)
+    t = "de la belle écriture"
+    d.text(((W - d.textlength(t, font=f2)) / 2, 530), t, font=f2, fill=NAVY)
+    for k in range(5):
+        etoile(d, W / 2 + (k - 2) * 200, 760, 70 if k == 2 else 52, largeur=10)
+    f3 = police("arialbd.ttf", 62)
+    t = "Bravo"
+    d.text(((W - d.textlength(t, font=f3)) / 2, 920), t, font=f3, fill=NAVY)
+    d.line([(W / 2 - 700, 1130), (W / 2 + 700, 1130)], fill=NAVY, width=6)
+    f4 = police("ariblk.ttf", 72)
+    d.text(((W - d.textlength(titre, font=f4)) / 2, 1220), titre, font=f4, fill=(20, 110, 60))
+    # Tout ce qu'il ou elle sait écrire, en cursive, en couleur.
+    par_ligne = 10
+    for k, g in enumerate(glyphes):
+        r, c = divmod(k, par_ligne)
+        n_l = min(par_ligne, len(glyphes) - r * par_ligne)
+        cx = W / 2 + (c - (n_l - 1) / 2) * 190
+        # ⭐ Même LIGNE DE BASE pour toutes : c'est une ligne d'écriture.
+        _glyphe(d, g, cx, 1560 + r * 300, 80 if g.isdigit() else 55,
+                [ORANGE, BLEU, VERT, ROSE][k % 4], 10)
+    m = Image.open(TI_MARGO).convert("RGBA")
+    mh = 760
+    m = m.resize((int(m.width * mh / m.height), mh), Image.LANCZOS)
+    img.paste(m, (int(W / 2 - m.width / 2), H - 1420), m)
+    f5 = police("arialbd.ttf", 50)
+    d.text((MARGE + 120, H - 560), "Le", font=f5, fill=NAVY)
+    d.line([(MARGE + 210, H - 510), (MARGE + 900, H - 510)], fill=GRIS_LIGNE, width=5)
+    d.text((W - MARGE - 880, H - 560), "Mon prof :", font=f5, fill=NAVY)
+    d.line([(W - MARGE - 600, H - 510), (W - MARGE - 120, H - 510)], fill=GRIS_LIGNE, width=5)
+    f6 = police("arialbd.ttf", 46)
+    t = "Je suis fier de toi. Continue, tu progresses chaque jour !"
+    d.text(((W - d.textlength(t, font=f6)) / 2, H - 400), t, font=f6, fill=(20, 110, 60))
+    return _enregistrer(img, base)
+
+
 def lettres_presentes():
     scenes = RACINE / "manim" / "scripts" / "cp"
     return sorted(f.stem.removeprefix("lettre_") for f in scenes.glob("lettre_[a-z].py"))
@@ -254,11 +367,24 @@ def lettres_presentes():
 
 if __name__ == "__main__":
     filtre = sys.argv[1] if len(sys.argv) > 1 else None
+    lettres = lettres_presentes()
     pages = []
-    for rang, g in enumerate(CHIFFRES + lettres_presentes()):
+    if not filtre or filtre == "couverture":
+        pages.append(couverture(CHIFFRES + lettres))
+    for rang, g in enumerate(CHIFFRES + lettres):
         if filtre and filtre != g:
             continue
         pages.append(construire(g, rang))
+        # ⭐ Un diplôme à chaque étape : après les chiffres, puis à la fin.
+        if not filtre and g == CHIFFRES[-1]:
+            pages.append(diplome("Je sais écrire les 10 chiffres !", CHIFFRES,
+                                 "cahier-ecriture-diplome-chiffres"))
+    if filtre == "diplomes" or not filtre:
+        d_l = diplome("Je sais écrire les lettres !", lettres, "cahier-ecriture-diplome-lettres")
+        if not filtre:
+            pages.append(d_l)
+        else:
+            diplome("Je sais écrire les 10 chiffres !", CHIFFRES, "cahier-ecriture-diplome-chiffres")
     # ⭐ LE CAHIER ENTIER EN UN PDF : un seul fichier à imprimer pour l'année.
     # ⚠️ À 300 dpi il pesait 13 Mo (et une palette réduite, essayée, fait un PDF
     # NON compressé de 500 Mo). 200 dpi suffisent à l'imprimante du collège.

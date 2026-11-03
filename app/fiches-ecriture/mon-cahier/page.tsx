@@ -98,7 +98,7 @@ export default function MonCahier() {
             rel="noopener"
             className="rounded-2xl bg-amber-500 px-6 py-4 text-lg font-black text-white shadow transition hover:bg-amber-600"
           >
-            🖨️ Imprimer tout le cahier ({liste.length} pages)
+            🖨️ Imprimer tout le cahier ({liste.length + 3} pages)
           </a>
           <Link
             href="/video?classe=cp"
@@ -121,6 +121,31 @@ export default function MonCahier() {
               </li>
             ))}
           </ul>
+        </section>
+
+        {/* ⭐ « Je veux qu'à la fin, elle se sente valorisée » (Frédéric, 03/11) :
+            le cahier à son nom, le tableau de réussite, un diplôme par étape. */}
+        <section className="mt-10">
+          <h2 className="text-xl font-black text-slate-900">Pour se sentir fier : la couverture et les diplômes</h2>
+          <div className="mt-3 grid grid-cols-3 gap-4 sm:grid-cols-5 lg:grid-cols-6">
+            {[
+              ["cahier-ecriture-couverture", "Couverture + tableau de réussite"],
+              ["cahier-ecriture-diplome-chiffres", "Diplôme des chiffres"],
+              ["cahier-ecriture-diplome-lettres", "Diplôme des lettres"],
+            ].map(([base, nom]) => (
+              <a
+                key={base}
+                href={`${DOSSIER}/${base}.pdf`}
+                target="_blank"
+                rel="noopener"
+                className="group block rounded-xl bg-white p-2 shadow-sm ring-1 ring-slate-200 transition hover:shadow-lg hover:ring-amber-400"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={`${DOSSIER}/${base}.png`} alt={nom} loading="lazy" className="aspect-[210/297] w-full rounded object-cover" />
+                <span className="mt-1 block text-center text-sm font-black text-slate-800 group-hover:text-amber-600">{nom}</span>
+              </a>
+            ))}
+          </div>
         </section>
 
         {grille("Les chiffres", chiffres)}

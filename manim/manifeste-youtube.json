@@ -56175,6 +56175,876 @@
         "velo",
         "argent-budget"
       ]
+    },
+    {
+      "id": "cp-pas-a-pas-chiffre-0",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "La belle écriture",
+      "type": "longue",
+      "fichier": "cp/francais/paysage/fr/pas-a-pas/chiffre-0/eleveai-francais-cp-pas-a-pas-chiffre-0.mp4",
+      "titre": "Écrire le chiffre 0 pas à pas, tout doucement — La belle écriture",
+      "accroche": "On apprend à écrire le chiffre zéro, lentement, morceau par morceau. D'abord la méthode : je pose mon crayon sur le point vert, je suis la flèche, et je colorie mon étoile. Puis on trace avec le doigt en l'air, on répond à trois petites questions, et on prend sa fiche.\n\nPour les élèves qui apprennent à écrire : CP, ULIS, ou plus tard, avec leur AESH.\n🖨️ Le cahier d'écriture à imprimer : https://www.eleveai.fr/fiches-ecriture/mon-cahier\n\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "Le chiffre zéro"
+        ],
+        [
+          "00:15",
+          "Ma méthode"
+        ],
+        [
+          "00:34",
+          "Question : le point vert"
+        ],
+        [
+          "01:01",
+          "Le tracé, morceau par morceau"
+        ],
+        [
+          "01:34",
+          "À toi, avec le doigt"
+        ],
+        [
+          "02:02",
+          "Question : lequel est le zéro ?"
+        ],
+        [
+          "02:27",
+          "Zéro, c'est combien ?"
+        ],
+        [
+          "02:59",
+          "À ta fiche !"
+        ]
+      ],
+      "tags": [
+        "écriture",
+        "chiffre 0",
+        "cursive",
+        "apprendre à écrire",
+        "CP",
+        "ULIS",
+        "maternelle",
+        "belle écriture",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:34",
+          "question": "Pour commencer, où je pose mon crayon ?",
+          "choix": [
+            "sur le point vert",
+            "sur le point rouge"
+          ],
+          "reponse": 0,
+          "explication": "On part toujours du point vert."
+        },
+        {
+          "t": "02:02",
+          "question": "Lequel est le chiffre zéro ?",
+          "choix": [
+            "4",
+            "0"
+          ],
+          "reponse": 1,
+          "explication": "Le zéro s'écrit comme on vient de le tracer."
+        },
+        {
+          "t": "02:37",
+          "question": "Combien de pommes dans l'assiette ?",
+          "choix": [
+            "0",
+            "2"
+          ],
+          "reponse": 0,
+          "explication": "L'assiette est vide : zéro."
+        }
+      ]
+    },
+    {
+      "id": "cp-pas-a-pas-chiffre-1",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "La belle écriture",
+      "type": "longue",
+      "fichier": "cp/francais/paysage/fr/pas-a-pas/chiffre-1/eleveai-francais-cp-pas-a-pas-chiffre-1.mp4",
+      "titre": "Écrire le chiffre 1 pas à pas, tout doucement — La belle écriture",
+      "accroche": "On apprend à écrire le chiffre un, lentement, morceau par morceau. D'abord la méthode : je pose mon crayon sur le point vert, je suis la flèche, et je colorie mon étoile. Puis on trace avec le doigt en l'air, on répond à trois petites questions, et on prend sa fiche.\n\nPour les élèves qui apprennent à écrire : CP, ULIS, ou plus tard, avec leur AESH.\n🖨️ Le cahier d'écriture à imprimer : https://www.eleveai.fr/fiches-ecriture/mon-cahier\n\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "Le chiffre un"
+        ],
+        [
+          "00:15",
+          "Ma méthode"
+        ],
+        [
+          "00:34",
+          "Question : le point vert"
+        ],
+        [
+          "01:01",
+          "Le tracé, morceau par morceau"
+        ],
+        [
+          "01:32",
+          "À toi, avec le doigt"
+        ],
+        [
+          "02:00",
+          "Question : lequel est le un ?"
+        ],
+        [
+          "02:24",
+          "Un, c'est combien ?"
+        ],
+        [
+          "03:02",
+          "À ta fiche !"
+        ]
+      ],
+      "tags": [
+        "écriture",
+        "chiffre 1",
+        "cursive",
+        "apprendre à écrire",
+        "CP",
+        "ULIS",
+        "maternelle",
+        "belle écriture",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:34",
+          "question": "Pour commencer, où je pose mon crayon ?",
+          "choix": [
+            "sur le point vert",
+            "sur le point rouge"
+          ],
+          "reponse": 0,
+          "explication": "On part toujours du point vert."
+        },
+        {
+          "t": "02:00",
+          "question": "Lequel est le chiffre un ?",
+          "choix": [
+            "1",
+            "8"
+          ],
+          "reponse": 0,
+          "explication": "Le un s'écrit comme on vient de le tracer."
+        },
+        {
+          "t": "02:40",
+          "question": "Combien d'étoiles ?",
+          "choix": [
+            "4",
+            "1"
+          ],
+          "reponse": 1,
+          "explication": "On compte : il y en a un."
+        }
+      ]
+    },
+    {
+      "id": "cp-pas-a-pas-chiffre-2",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "La belle écriture",
+      "type": "longue",
+      "fichier": "cp/francais/paysage/fr/pas-a-pas/chiffre-2/eleveai-francais-cp-pas-a-pas-chiffre-2.mp4",
+      "titre": "Écrire le chiffre 2 pas à pas, tout doucement — La belle écriture",
+      "accroche": "On apprend à écrire le chiffre deux, lentement, morceau par morceau. D'abord la méthode : je pose mon crayon sur le point vert, je suis la flèche, et je colorie mon étoile. Puis on trace avec le doigt en l'air, on répond à trois petites questions, et on prend sa fiche.\n\nPour les élèves qui apprennent à écrire : CP, ULIS, ou plus tard, avec leur AESH.\n🖨️ Le cahier d'écriture à imprimer : https://www.eleveai.fr/fiches-ecriture/mon-cahier\n\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "Le chiffre deux"
+        ],
+        [
+          "00:15",
+          "Ma méthode"
+        ],
+        [
+          "00:34",
+          "Question : le point vert"
+        ],
+        [
+          "01:01",
+          "Le tracé, morceau par morceau"
+        ],
+        [
+          "01:38",
+          "À toi, avec le doigt"
+        ],
+        [
+          "02:06",
+          "Question : lequel est le deux ?"
+        ],
+        [
+          "02:31",
+          "Deux, c'est combien ?"
+        ],
+        [
+          "03:08",
+          "À ta fiche !"
+        ]
+      ],
+      "tags": [
+        "écriture",
+        "chiffre 2",
+        "cursive",
+        "apprendre à écrire",
+        "CP",
+        "ULIS",
+        "maternelle",
+        "belle écriture",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:34",
+          "question": "Pour commencer, où je pose mon crayon ?",
+          "choix": [
+            "sur le point vert",
+            "sur le point rouge"
+          ],
+          "reponse": 0,
+          "explication": "On part toujours du point vert."
+        },
+        {
+          "t": "02:06",
+          "question": "Lequel est le chiffre deux ?",
+          "choix": [
+            "0",
+            "2"
+          ],
+          "reponse": 1,
+          "explication": "Le deux s'écrit comme on vient de le tracer."
+        },
+        {
+          "t": "02:45",
+          "question": "Combien d'étoiles ?",
+          "choix": [
+            "2",
+            "5"
+          ],
+          "reponse": 0,
+          "explication": "On compte : il y en a deux."
+        }
+      ]
+    },
+    {
+      "id": "cp-pas-a-pas-chiffre-3",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "La belle écriture",
+      "type": "longue",
+      "fichier": "cp/francais/paysage/fr/pas-a-pas/chiffre-3/eleveai-francais-cp-pas-a-pas-chiffre-3.mp4",
+      "titre": "Écrire le chiffre 3 pas à pas, tout doucement — La belle écriture",
+      "accroche": "On apprend à écrire le chiffre trois, lentement, morceau par morceau. D'abord la méthode : je pose mon crayon sur le point vert, je suis la flèche, et je colorie mon étoile. Puis on trace avec le doigt en l'air, on répond à trois petites questions, et on prend sa fiche.\n\nPour les élèves qui apprennent à écrire : CP, ULIS, ou plus tard, avec leur AESH.\n🖨️ Le cahier d'écriture à imprimer : https://www.eleveai.fr/fiches-ecriture/mon-cahier\n\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "Le chiffre trois"
+        ],
+        [
+          "00:15",
+          "Ma méthode"
+        ],
+        [
+          "00:34",
+          "Question : le point vert"
+        ],
+        [
+          "01:01",
+          "Le tracé, morceau par morceau"
+        ],
+        [
+          "01:38",
+          "À toi, avec le doigt"
+        ],
+        [
+          "02:06",
+          "Question : lequel est le trois ?"
+        ],
+        [
+          "02:31",
+          "Trois, c'est combien ?"
+        ],
+        [
+          "03:07",
+          "À ta fiche !"
+        ]
+      ],
+      "tags": [
+        "écriture",
+        "chiffre 3",
+        "cursive",
+        "apprendre à écrire",
+        "CP",
+        "ULIS",
+        "maternelle",
+        "belle écriture",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:34",
+          "question": "Pour commencer, où je pose mon crayon ?",
+          "choix": [
+            "sur le point vert",
+            "sur le point rouge"
+          ],
+          "reponse": 0,
+          "explication": "On part toujours du point vert."
+        },
+        {
+          "t": "02:06",
+          "question": "Lequel est le chiffre trois ?",
+          "choix": [
+            "3",
+            "1"
+          ],
+          "reponse": 0,
+          "explication": "Le trois s'écrit comme on vient de le tracer."
+        },
+        {
+          "t": "02:44",
+          "question": "Combien d'étoiles ?",
+          "choix": [
+            "6",
+            "3"
+          ],
+          "reponse": 1,
+          "explication": "On compte : il y en a trois."
+        }
+      ]
+    },
+    {
+      "id": "cp-pas-a-pas-chiffre-4",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "La belle écriture",
+      "type": "longue",
+      "fichier": "cp/francais/paysage/fr/pas-a-pas/chiffre-4/eleveai-francais-cp-pas-a-pas-chiffre-4.mp4",
+      "titre": "Écrire le chiffre 4 pas à pas, tout doucement — La belle écriture",
+      "accroche": "On apprend à écrire le chiffre quatre, lentement, morceau par morceau. D'abord la méthode : je pose mon crayon sur le point vert, je suis la flèche, et je colorie mon étoile. Puis on trace avec le doigt en l'air, on répond à trois petites questions, et on prend sa fiche.\n\nPour les élèves qui apprennent à écrire : CP, ULIS, ou plus tard, avec leur AESH.\n🖨️ Le cahier d'écriture à imprimer : https://www.eleveai.fr/fiches-ecriture/mon-cahier\n\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "Le chiffre quatre"
+        ],
+        [
+          "00:15",
+          "Ma méthode"
+        ],
+        [
+          "00:34",
+          "Question : le point vert"
+        ],
+        [
+          "01:01",
+          "Le tracé, morceau par morceau"
+        ],
+        [
+          "01:45",
+          "À toi, avec le doigt"
+        ],
+        [
+          "02:14",
+          "Question : lequel est le quatre ?"
+        ],
+        [
+          "02:39",
+          "Quatre, c'est combien ?"
+        ],
+        [
+          "03:17",
+          "À ta fiche !"
+        ]
+      ],
+      "tags": [
+        "écriture",
+        "chiffre 4",
+        "cursive",
+        "apprendre à écrire",
+        "CP",
+        "ULIS",
+        "maternelle",
+        "belle écriture",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:34",
+          "question": "Pour commencer, où je pose mon crayon ?",
+          "choix": [
+            "sur le point vert",
+            "sur le point rouge"
+          ],
+          "reponse": 0,
+          "explication": "On part toujours du point vert."
+        },
+        {
+          "t": "02:14",
+          "question": "Lequel est le chiffre quatre ?",
+          "choix": [
+            "0",
+            "4"
+          ],
+          "reponse": 1,
+          "explication": "Le quatre s'écrit comme on vient de le tracer."
+        },
+        {
+          "t": "02:54",
+          "question": "Combien d'étoiles ?",
+          "choix": [
+            "4",
+            "1"
+          ],
+          "reponse": 0,
+          "explication": "On compte : il y en a quatre."
+        }
+      ]
+    },
+    {
+      "id": "cp-pas-a-pas-chiffre-5",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "La belle écriture",
+      "type": "longue",
+      "fichier": "cp/francais/paysage/fr/pas-a-pas/chiffre-5/eleveai-francais-cp-pas-a-pas-chiffre-5.mp4",
+      "titre": "Écrire le chiffre 5 pas à pas, tout doucement — La belle écriture",
+      "accroche": "On apprend à écrire le chiffre cinq, lentement, morceau par morceau. D'abord la méthode : je pose mon crayon sur le point vert, je suis la flèche, et je colorie mon étoile. Puis on trace avec le doigt en l'air, on répond à trois petites questions, et on prend sa fiche.\n\nPour les élèves qui apprennent à écrire : CP, ULIS, ou plus tard, avec leur AESH.\n🖨️ Le cahier d'écriture à imprimer : https://www.eleveai.fr/fiches-ecriture/mon-cahier\n\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "Le chiffre cinq"
+        ],
+        [
+          "00:15",
+          "Ma méthode"
+        ],
+        [
+          "00:34",
+          "Question : le point vert"
+        ],
+        [
+          "01:01",
+          "Le tracé, morceau par morceau"
+        ],
+        [
+          "01:37",
+          "À toi, avec le doigt"
+        ],
+        [
+          "02:05",
+          "Question : lequel est le cinq ?"
+        ],
+        [
+          "02:30",
+          "Cinq, c'est combien ?"
+        ],
+        [
+          "03:14",
+          "À ta fiche !"
+        ]
+      ],
+      "tags": [
+        "écriture",
+        "chiffre 5",
+        "cursive",
+        "apprendre à écrire",
+        "CP",
+        "ULIS",
+        "maternelle",
+        "belle écriture",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:34",
+          "question": "Pour commencer, où je pose mon crayon ?",
+          "choix": [
+            "sur le point vert",
+            "sur le point rouge"
+          ],
+          "reponse": 0,
+          "explication": "On part toujours du point vert."
+        },
+        {
+          "t": "02:05",
+          "question": "Lequel est le chiffre cinq ?",
+          "choix": [
+            "5",
+            "1"
+          ],
+          "reponse": 0,
+          "explication": "Le cinq s'écrit comme on vient de le tracer."
+        },
+        {
+          "t": "02:51",
+          "question": "Combien d'étoiles ?",
+          "choix": [
+            "2",
+            "5"
+          ],
+          "reponse": 1,
+          "explication": "On compte : il y en a cinq."
+        }
+      ]
+    },
+    {
+      "id": "cp-pas-a-pas-chiffre-6",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "La belle écriture",
+      "type": "longue",
+      "fichier": "cp/francais/paysage/fr/pas-a-pas/chiffre-6/eleveai-francais-cp-pas-a-pas-chiffre-6.mp4",
+      "titre": "Écrire le chiffre 6 pas à pas, tout doucement — La belle écriture",
+      "accroche": "On apprend à écrire le chiffre six, lentement, morceau par morceau. D'abord la méthode : je pose mon crayon sur le point vert, je suis la flèche, et je colorie mon étoile. Puis on trace avec le doigt en l'air, on répond à trois petites questions, et on prend sa fiche.\n\nPour les élèves qui apprennent à écrire : CP, ULIS, ou plus tard, avec leur AESH.\n🖨️ Le cahier d'écriture à imprimer : https://www.eleveai.fr/fiches-ecriture/mon-cahier\n\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "Le chiffre six"
+        ],
+        [
+          "00:15",
+          "Ma méthode"
+        ],
+        [
+          "00:34",
+          "Question : le point vert"
+        ],
+        [
+          "01:01",
+          "Le tracé, morceau par morceau"
+        ],
+        [
+          "01:35",
+          "À toi, avec le doigt"
+        ],
+        [
+          "02:03",
+          "Question : lequel est le six ?"
+        ],
+        [
+          "02:28",
+          "Six, c'est combien ?"
+        ],
+        [
+          "03:10",
+          "À ta fiche !"
+        ]
+      ],
+      "tags": [
+        "écriture",
+        "chiffre 6",
+        "cursive",
+        "apprendre à écrire",
+        "CP",
+        "ULIS",
+        "maternelle",
+        "belle écriture",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:34",
+          "question": "Pour commencer, où je pose mon crayon ?",
+          "choix": [
+            "sur le point vert",
+            "sur le point rouge"
+          ],
+          "reponse": 0,
+          "explication": "On part toujours du point vert."
+        },
+        {
+          "t": "02:03",
+          "question": "Lequel est le chiffre six ?",
+          "choix": [
+            "4",
+            "6"
+          ],
+          "reponse": 1,
+          "explication": "Le six s'écrit comme on vient de le tracer."
+        },
+        {
+          "t": "02:47",
+          "question": "Combien d'étoiles ?",
+          "choix": [
+            "6",
+            "3"
+          ],
+          "reponse": 0,
+          "explication": "On compte : il y en a six."
+        }
+      ]
+    },
+    {
+      "id": "cp-pas-a-pas-chiffre-7",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "La belle écriture",
+      "type": "longue",
+      "fichier": "cp/francais/paysage/fr/pas-a-pas/chiffre-7/eleveai-francais-cp-pas-a-pas-chiffre-7.mp4",
+      "titre": "Écrire le chiffre 7 pas à pas, tout doucement — La belle écriture",
+      "accroche": "On apprend à écrire le chiffre sept, lentement, morceau par morceau. D'abord la méthode : je pose mon crayon sur le point vert, je suis la flèche, et je colorie mon étoile. Puis on trace avec le doigt en l'air, on répond à trois petites questions, et on prend sa fiche.\n\nPour les élèves qui apprennent à écrire : CP, ULIS, ou plus tard, avec leur AESH.\n🖨️ Le cahier d'écriture à imprimer : https://www.eleveai.fr/fiches-ecriture/mon-cahier\n\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "Le chiffre sept"
+        ],
+        [
+          "00:15",
+          "Ma méthode"
+        ],
+        [
+          "00:34",
+          "Question : le point vert"
+        ],
+        [
+          "01:01",
+          "Le tracé, morceau par morceau"
+        ],
+        [
+          "01:45",
+          "À toi, avec le doigt"
+        ],
+        [
+          "02:14",
+          "Question : lequel est le sept ?"
+        ],
+        [
+          "02:39",
+          "Sept, c'est combien ?"
+        ],
+        [
+          "03:23",
+          "À ta fiche !"
+        ]
+      ],
+      "tags": [
+        "écriture",
+        "chiffre 7",
+        "cursive",
+        "apprendre à écrire",
+        "CP",
+        "ULIS",
+        "maternelle",
+        "belle écriture",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:34",
+          "question": "Pour commencer, où je pose mon crayon ?",
+          "choix": [
+            "sur le point vert",
+            "sur le point rouge"
+          ],
+          "reponse": 0,
+          "explication": "On part toujours du point vert."
+        },
+        {
+          "t": "02:14",
+          "question": "Lequel est le chiffre sept ?",
+          "choix": [
+            "7",
+            "3"
+          ],
+          "reponse": 0,
+          "explication": "Le sept s'écrit comme on vient de le tracer."
+        },
+        {
+          "t": "03:00",
+          "question": "Combien d'étoiles ?",
+          "choix": [
+            "4",
+            "7"
+          ],
+          "reponse": 1,
+          "explication": "On compte : il y en a sept."
+        }
+      ]
+    },
+    {
+      "id": "cp-pas-a-pas-chiffre-8",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "La belle écriture",
+      "type": "longue",
+      "fichier": "cp/francais/paysage/fr/pas-a-pas/chiffre-8/eleveai-francais-cp-pas-a-pas-chiffre-8.mp4",
+      "titre": "Écrire le chiffre 8 pas à pas, tout doucement — La belle écriture",
+      "accroche": "On apprend à écrire le chiffre huit, lentement, morceau par morceau. D'abord la méthode : je pose mon crayon sur le point vert, je suis la flèche, et je colorie mon étoile. Puis on trace avec le doigt en l'air, on répond à trois petites questions, et on prend sa fiche.\n\nPour les élèves qui apprennent à écrire : CP, ULIS, ou plus tard, avec leur AESH.\n🖨️ Le cahier d'écriture à imprimer : https://www.eleveai.fr/fiches-ecriture/mon-cahier\n\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "Le chiffre huit"
+        ],
+        [
+          "00:15",
+          "Ma méthode"
+        ],
+        [
+          "00:34",
+          "Question : le point vert"
+        ],
+        [
+          "01:01",
+          "Le tracé, morceau par morceau"
+        ],
+        [
+          "01:43",
+          "À toi, avec le doigt"
+        ],
+        [
+          "02:11",
+          "Question : lequel est le huit ?"
+        ],
+        [
+          "02:36",
+          "Huit, c'est combien ?"
+        ],
+        [
+          "03:22",
+          "À ta fiche !"
+        ]
+      ],
+      "tags": [
+        "écriture",
+        "chiffre 8",
+        "cursive",
+        "apprendre à écrire",
+        "CP",
+        "ULIS",
+        "maternelle",
+        "belle écriture",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:34",
+          "question": "Pour commencer, où je pose mon crayon ?",
+          "choix": [
+            "sur le point vert",
+            "sur le point rouge"
+          ],
+          "reponse": 0,
+          "explication": "On part toujours du point vert."
+        },
+        {
+          "t": "02:11",
+          "question": "Lequel est le chiffre huit ?",
+          "choix": [
+            "1",
+            "8"
+          ],
+          "reponse": 1,
+          "explication": "Le huit s'écrit comme on vient de le tracer."
+        },
+        {
+          "t": "02:59",
+          "question": "Combien d'étoiles ?",
+          "choix": [
+            "8",
+            "5"
+          ],
+          "reponse": 0,
+          "explication": "On compte : il y en a huit."
+        }
+      ]
+    },
+    {
+      "id": "cp-pas-a-pas-chiffre-9",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "La belle écriture",
+      "type": "longue",
+      "fichier": "cp/francais/paysage/fr/pas-a-pas/chiffre-9/eleveai-francais-cp-pas-a-pas-chiffre-9.mp4",
+      "titre": "Écrire le chiffre 9 pas à pas, tout doucement — La belle écriture",
+      "accroche": "On apprend à écrire le chiffre neuf, lentement, morceau par morceau. D'abord la méthode : je pose mon crayon sur le point vert, je suis la flèche, et je colorie mon étoile. Puis on trace avec le doigt en l'air, on répond à trois petites questions, et on prend sa fiche.\n\nPour les élèves qui apprennent à écrire : CP, ULIS, ou plus tard, avec leur AESH.\n🖨️ Le cahier d'écriture à imprimer : https://www.eleveai.fr/fiches-ecriture/mon-cahier\n\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "Le chiffre neuf"
+        ],
+        [
+          "00:15",
+          "Ma méthode"
+        ],
+        [
+          "00:34",
+          "Question : le point vert"
+        ],
+        [
+          "01:01",
+          "Le tracé, morceau par morceau"
+        ],
+        [
+          "01:34",
+          "À toi, avec le doigt"
+        ],
+        [
+          "02:02",
+          "Question : lequel est le neuf ?"
+        ],
+        [
+          "02:26",
+          "Neuf, c'est combien ?"
+        ],
+        [
+          "03:14",
+          "À ta fiche !"
+        ]
+      ],
+      "tags": [
+        "écriture",
+        "chiffre 9",
+        "cursive",
+        "apprendre à écrire",
+        "CP",
+        "ULIS",
+        "maternelle",
+        "belle écriture",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:34",
+          "question": "Pour commencer, où je pose mon crayon ?",
+          "choix": [
+            "sur le point vert",
+            "sur le point rouge"
+          ],
+          "reponse": 0,
+          "explication": "On part toujours du point vert."
+        },
+        {
+          "t": "02:02",
+          "question": "Lequel est le chiffre neuf ?",
+          "choix": [
+            "9",
+            "2"
+          ],
+          "reponse": 0,
+          "explication": "Le neuf s'écrit comme on vient de le tracer."
+        },
+        {
+          "t": "02:51",
+          "question": "Combien d'étoiles ?",
+          "choix": [
+            "6",
+            "9"
+          ],
+          "reponse": 1,
+          "explication": "On compte : il y en a neuf."
+        }
+      ]
     }
   ]
 }
