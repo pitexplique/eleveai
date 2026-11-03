@@ -55,8 +55,10 @@ const TITRE = "EleveAI — exercices, coach et cahiers gratuits, du CP au Bac";
 // ⭐ 31/10/2026 : nouvel accueil « le coach de maths qui suit chaque élève » → la
 // promesse le suit, et « vérifiées par un professeur » tombe (l'accueil ne le
 // promet plus).
+// ⭐ 03/11/2026 : le projet en quatre phrases (coach, vidéos, 8 pays puis 40,
+// gratuit pour l'élève) → la promesse le suit.
 const PROMESSE =
-  "EleveAI : le coach de maths qui suit chaque élève, micro-compétence par micro-compétence. Exercices, vidéos et résultats gardés, du CP à la Terminale.";
+  "EleveAI : le coach de maths avec ses vidéos, du CP à la Terminale, adapté à 8 pays francophones et bientôt 40. Gratuit pour chaque élève.";
 
 export const metadata: Metadata = {
   // ⭐ `absolute` ET NON une simple chaîne. Le layout applique le gabarit

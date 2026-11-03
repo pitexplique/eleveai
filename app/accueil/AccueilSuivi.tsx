@@ -37,6 +37,7 @@ import {
   ClipboardList,
   Eye,
   FileText,
+  Globe2,
   GraduationCap,
   Mail,
   Building2,
@@ -281,6 +282,28 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
       </section>
 
       <main className="mx-auto max-w-6xl px-4 pb-16">
+        {/* 1 bis. LE PROJET EN QUATRE CASES — ⭐ 03/11, Frédéric : « il faut
+            vraiment que les gens comprennent » : un coach, avec des vidéos,
+            8 pays puis 40, gratuit pour l'élève, payé par les familles et les
+            établissements. */}
+        <section className="mt-10 rounded-3xl bg-teal-50 p-5 sm:p-8">
+          <h2 className="text-center text-2xl font-black sm:text-3xl">Le projet EleveAI, en quatre phrases</h2>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { Icone: Target, titre: "Un coach de maths", texte: "Il trouve ce qui manque à chaque élève et l'entraîne là-dessus, du CP à la Terminale." },
+              { Icone: PlayCircle, titre: "Avec ses vidéos", texte: "Chaque micro-compétence a sa vidéo, avec des questions-pauses, pour comprendre avant de s'entraîner." },
+              { Icone: Globe2, titre: "8 pays, puis 40", texte: "Adapté au programme de 8 pays francophones aujourd'hui, et demain de 40." },
+              { Icone: Users, titre: "Gratuit pour l'élève", texte: "Chaque élève étudie gratuitement. Les familles qui veulent le suivi paient, les établissements paient pour leurs élèves." },
+            ].map(({ Icone, titre, texte }) => (
+              <div key={titre} className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-teal-100">
+                <Icone className="h-7 w-7 text-teal-700" aria-hidden="true" />
+                <h3 className="mt-2 text-lg font-black">{titre}</h3>
+                <p className="mt-1 text-slate-600">{texte}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* 2. CE QUE L'IA NE FAIT PAS */}
         <section className="mt-12">
           <h2 className="text-center text-2xl font-black sm:text-3xl">
