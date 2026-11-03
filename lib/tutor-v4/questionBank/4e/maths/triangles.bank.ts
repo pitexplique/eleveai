@@ -40,7 +40,7 @@
 // Mesure : scripts/mesurer-squelettes-coach.ts 4e triangle_figure.
 // La Réunion reste UN décor parmi vingt.
 
-import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type { TutorBankItemV4, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
 import type {
   TriangleCanvasData,
   TriangleCanvasPointLabel,
@@ -323,24 +323,15 @@ function troisAngles(): [number, number, number] {
   return [a, b, 180 - a - b];
 }
 
-export const trianglesBank: TutorBankItemV4[] = [
-  /* =========================================================================
-     TRIANGLE_INEGALITE — réactivation 5e, énoncés de 4e
-  ========================================================================= */
-  {
-    kind: "template",
-    id: "4e_triangle_inegalite_tpl_1_constructible",
-    niveau: "4e",
-    matiere: "maths",
-    notionId: "triangle_figure",
-    microId: "triangle_inegalite",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Compare le plus grand côté à la somme des deux autres.",
-    tags: ["triangle", "inegalite", "qcm", "template"],
-    generate: () => {
+/* ---------------------------------------------------------------------------
+   ⛔⛔ 03/11/2026 — ★2 SANS CONTEXTE. `simple` : le triangle seul ; sinon un
+   projet ou un décor (★3).
+--------------------------------------------------------------------------- */
+function genConstructible(simple: boolean): TutorGeneratedQuestionV4 {
       const t = tri();
-      const p = randomChoice(PROJETS);
+      // ★2 : une unité de géométrie, sans projet (le facteur reste 1 ou 2).
+      const proj = randomChoice(PROJETS);
+      const p = simple ? randomChoice([{ u: "cm", f: 1 }, { u: "cm", f: 2 }, { u: "m", f: 1 }, { u: "km", f: 1 }] as const) : proj;
       const possible = Math.random() < 0.5;
       const a0 = randomInt(3, 9);
       const b0 = randomInt(4, 10);
@@ -350,11 +341,23 @@ export const trianglesBank: TutorBankItemV4[] = [
       const max = Math.max(x, y, z);
       const reste = x + y + z - max;
       const correct = possible ? "oui, il est constructible" : "non, il est impossible";
-      const text = randomChoice([
-        `Pour ${p.but}, on prévoit un triangle ${t.n} de côtés ${x} ${u}, ${y} ${u} et ${z} ${u}. Ce triangle peut-il exister ?`,
-        `On veut ${p.but} avec un triangle ${t.n} tel que ${t.A}${t.B} = ${x} ${u}, ${t.B}${t.C} = ${y} ${u} et ${t.A}${t.C} = ${z} ${u}. Est-ce possible ?`,
-        `Un élève veut ${p.but}. Il prévoit le triangle ${t.n} avec des côtés de ${x} ${u}, ${y} ${u} et ${z} ${u}. Peut-il le construire ?`,
-        `Peut-on construire un triangle ${t.n} de côtés ${x} ${u}, ${y} ${u} et ${z} ${u} ? C'est le projet d'un élève qui veut ${p.but}.`,
+      // 03/11/2026 : ★2 en 15 mots au plus.
+      const text = simple
+        ? randomChoice([
+            `Peut-on construire un triangle ${t.n} de côtés ${x} ${u}, ${y} ${u} et ${z} ${u} ?`,
+            `Un triangle ${t.n} a pour côtés ${x} ${u}, ${y} ${u} et ${z} ${u}. Existe-t-il ?`,
+            `Trois côtés : ${x} ${u}, ${y} ${u} et ${z} ${u}. Le triangle ${t.n} existe-t-il ?`,
+            `Côtés de ${x} ${u}, ${y} ${u} et ${z} ${u} : le triangle ${t.n} est-il constructible ?`,
+            `Les longueurs ${x} ${u}, ${y} ${u} et ${z} ${u} forment-elles un triangle ?`,
+            `${t.A}${t.B} = ${x} ${u}, ${t.B}${t.C} = ${y} ${u} et ${t.A}${t.C} = ${z} ${u}. Le triangle ${t.n} existe-t-il ?`,
+            `Avec des côtés de ${x} ${u}, ${y} ${u} et ${z} ${u}, le triangle ${t.n} existe-t-il ?`,
+            `Peut-on tracer le triangle ${t.n} de côtés ${x} ${u}, ${y} ${u} et ${z} ${u} ?`,
+          ])
+        : randomChoice([
+        `Pour ${proj.but}, on prévoit un triangle ${t.n} de côtés ${x} ${u}, ${y} ${u} et ${z} ${u}. Ce triangle peut-il exister ?`,
+        `On veut ${proj.but} avec un triangle ${t.n} tel que ${t.A}${t.B} = ${x} ${u}, ${t.B}${t.C} = ${y} ${u} et ${t.A}${t.C} = ${z} ${u}. Est-ce possible ?`,
+        `Un élève veut ${proj.but}. Il prévoit le triangle ${t.n} avec des côtés de ${x} ${u}, ${y} ${u} et ${z} ${u}. Peut-il le construire ?`,
+        `Peut-on construire un triangle ${t.n} de côtés ${x} ${u}, ${y} ${u} et ${z} ${u} ? C'est le projet d'un élève qui veut ${proj.but}.`,
       ]);
       return {
         text,
@@ -370,7 +373,88 @@ export const trianglesBank: TutorBankItemV4[] = [
             : `Calcul : le plus grand vaut ${max} ${u}, et les deux autres font ${reste} ${u}. Or ${max} > ${reste} : le chemin par le sommet serait plus court que le côté direct.\n\n`) +
           `Conclusion : ⭐ c'est la même idée que « le chemin le plus court est la ligne droite » — passer par un troisième point rallonge toujours.`,
       };
-    },
+    }
+
+function genManquant(simple: boolean): TutorGeneratedQuestionV4 {
+      const t = tri();
+      const d = decor(t);
+      const [k1, k2, k3] = shuffle<K>(["A", "B", "C"]);
+      const [P1, P2, P3] = [t[k1], t[k2], t[k3]];
+      const a = randomInt(25, 80);
+      const b = randomInt(25, 170 - a);
+      const c = 180 - a - b;
+      // 03/11/2026 : ★2 en 15 mots au plus.
+      const text = simple
+        ? randomChoice([
+            `Le triangle ${t.n} a ${a}° en ${P1} et ${b}° en ${P2}. Trouve l'angle en ${P3}.`,
+            `Le triangle ${t.n} a ${a}° en ${P1} et ${b}° en ${P2}. Calcule l'angle en ${P3}.`,
+            `Calcule l'angle en ${P3}. Le triangle ${t.n} a ${a}° en ${P1} et ${b}° en ${P2}.`,
+            `Angles du triangle ${t.n} : ${a}° en ${P1} et ${b}° en ${P2}. Trouve l'angle en ${P3}.`,
+            `Dans le triangle ${t.n}, ${a}° en ${P1} et ${b}° en ${P2}. Trouve l'angle en ${P3}.`,
+            `Trouve l'angle en ${P3} du triangle ${t.n} : ${a}° en ${P1}, ${b}° en ${P2}.`,
+          ])
+        : randomChoice([
+        `${d} L'angle en ${P1} mesure ${a}° et l'angle en ${P2} mesure ${b}°. Combien mesure l'angle en ${P3} ?`,
+        `${d} On a mesuré deux de ses angles : ${a}° en ${P1} et ${b}° en ${P2}. Quelle est la mesure de l'angle en ${P3} ?`,
+        `${d} Calcule la mesure de l'angle en ${P3}, sachant que les angles en ${P1} et en ${P2} mesurent ${a}° et ${b}°.`,
+        `${d} Que vaut l'angle en ${P3} si l'angle en ${P1} vaut ${a}° et l'angle en ${P2} vaut ${b}° ?`,
+      ]);
+      return {
+        text,
+        format: "short",
+        expected: [`${c}°`],
+        comparator: "number_equal",
+        explanation:
+          "Définition : la somme des trois angles d'un triangle vaut toujours 180°.\n\n" +
+          "Méthode : on additionne les deux angles connus, puis on retire de 180.\n\n" +
+          `Calcul : ${a} + ${b} = ${a + b}, et 180 − ${a + b} = ${c}. L'angle en ${P3} mesure ${c}°.\n\n` +
+          `Conclusion : ⭐ cette propriété se DÉMONTRE avec les angles alternes internes — on trace la parallèle à un côté passant par le sommet opposé.`,
+        canvas: triangle({
+          labels: lettres(t),
+          display: { showPoints: true, showLabels: true, showSides: false, showAngles: true },
+          angleLabels: parSommet([
+            [k1, `${a}°`],
+            [k2, `${b}°`],
+            [k3, "?"],
+          ]),
+        }),
+      };
+    }
+
+export const trianglesBank: TutorBankItemV4[] = [
+  /* =========================================================================
+     TRIANGLE_INEGALITE — réactivation 5e, énoncés de 4e
+  ========================================================================= */
+  {
+    kind: "template",
+    id: "4e_triangle_inegalite_tpl_1_constructible",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_inegalite",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Compare le plus grand côté à la somme des deux autres.",
+    tags: ["triangle", "inegalite", "qcm", "template"],
+    // ⛔⛔ 03/11/2026 (Frédéric) : « d'abord des questions simples ; le contexte
+    // est réservé aux étoiles ★3 et plus ». À ★2, trois longueurs et la
+    // question, sans projet ; les projets sont partis dans
+    // 4e_triangle_inegalite_tpl_3_constructible_projet (★3).
+    generate: () => genConstructible(true),
+  },
+  {
+    // 03/11/2026 : la même question, portée par un projet (voile, fanion, charpente…).
+    kind: "template",
+    id: "4e_triangle_inegalite_tpl_3_constructible_projet",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_inegalite",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Compare le plus grand côté à la somme des deux autres.",
+    tags: ["triangle", "inegalite", "situation", "qcm", "template"],
+    generate: () => genConstructible(false),
   },
   {
     kind: "template",
@@ -466,41 +550,23 @@ export const trianglesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Les trois angles font 180° en tout.",
     tags: ["triangle", "angle", "template", "canvas"],
-    generate: () => {
-      const t = tri();
-      const d = decor(t);
-      const [k1, k2, k3] = shuffle<K>(["A", "B", "C"]);
-      const [P1, P2, P3] = [t[k1], t[k2], t[k3]];
-      const a = randomInt(25, 80);
-      const b = randomInt(25, 170 - a);
-      const c = 180 - a - b;
-      const text = randomChoice([
-        `${d} L'angle en ${P1} mesure ${a}° et l'angle en ${P2} mesure ${b}°. Combien mesure l'angle en ${P3} ?`,
-        `${d} On a mesuré deux de ses angles : ${a}° en ${P1} et ${b}° en ${P2}. Quelle est la mesure de l'angle en ${P3} ?`,
-        `${d} Calcule la mesure de l'angle en ${P3}, sachant que les angles en ${P1} et en ${P2} mesurent ${a}° et ${b}°.`,
-        `${d} Que vaut l'angle en ${P3} si l'angle en ${P1} vaut ${a}° et l'angle en ${P2} vaut ${b}° ?`,
-      ]);
-      return {
-        text,
-        format: "short",
-        expected: [`${c}°`],
-        comparator: "number_equal",
-        explanation:
-          "Définition : la somme des trois angles d'un triangle vaut toujours 180°.\n\n" +
-          "Méthode : on additionne les deux angles connus, puis on retire de 180.\n\n" +
-          `Calcul : ${a} + ${b} = ${a + b}, et 180 − ${a + b} = ${c}. L'angle en ${P3} mesure ${c}°.\n\n` +
-          `Conclusion : ⭐ cette propriété se DÉMONTRE avec les angles alternes internes — on trace la parallèle à un côté passant par le sommet opposé.`,
-        canvas: triangle({
-          labels: lettres(t),
-          display: { showPoints: true, showLabels: true, showSides: false, showAngles: true },
-          angleLabels: parSommet([
-            [k1, `${a}°`],
-            [k2, `${b}°`],
-            [k3, "?"],
-          ]),
-        }),
-      };
-    },
+    // ⛔⛔ 03/11/2026 : à ★2, le triangle seul ; les décors (voile, pignon…)
+    // sont partis dans 4e_triangle_somme_angle_tpl_3_manquant_decor (★3).
+    generate: () => genManquant(true),
+  },
+  {
+    // 03/11/2026 : l'angle manquant, dans un décor (voile, pignon, charpente…).
+    kind: "template",
+    id: "4e_triangle_somme_angle_tpl_3_manquant_decor",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_somme_angle",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Les trois angles font 180° en tout.",
+    tags: ["triangle", "angle", "situation", "template", "canvas"],
+    generate: () => genManquant(false),
   },
   {
     kind: "template",

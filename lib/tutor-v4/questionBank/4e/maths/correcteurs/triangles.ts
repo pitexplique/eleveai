@@ -166,7 +166,8 @@ const angles = (t: string) => [...t.matchAll(/(\d+)°/g)].map((m) => Number(m[1]
 function corrManquant(q: Q): string[] {
   const n = nomsTriangles(q.text)[0];
   const a = angles(q.text);
-  const cible = q.text.match(/(?:mesure de l'angle en|l'angle en) ([A-Z])(?= \?|,| si)/)?.[1];
+  // 03/11/2026 : les énoncés courts de ★2 finissent aussi par « l'angle en U. » ou « l'angle en U du triangle ».
+  const cible = q.text.match(/(?:mesure de l'angle en|l'angle en) ([A-Z])(?= \?|,| si|\.| du)/)?.[1];
   if (!n || a.length !== 2 || !cible) return ["deux angles et l'angle demandé attendus"];
   const juste = 180 - a[0] - a[1];
   const p: string[] = [];
@@ -495,8 +496,12 @@ function corrDemontrer(q: Q): string[] {
 
 export const CORRECTEURS: CorrecteursMaths = avecRegleMotsCles({
   "4e_triangle_inegalite_tpl_1_constructible": corrConstructible,
+  // 03/11/2026 : la même question, portée par un projet (★3).
+  "4e_triangle_inegalite_tpl_3_constructible_projet": corrConstructible,
   "4e_triangle_inegalite_tpl_2_troisieme_cote": corrEncadrer,
   "4e_triangle_somme_angle_tpl_1_manquant": corrManquant,
+  // 03/11/2026 : angle manquant dans un décor (★3).
+  "4e_triangle_somme_angle_tpl_3_manquant_decor": corrManquant,
   "4e_triangle_somme_angle_tpl_2_impossible": corrSommeImpossible,
   "4e_triangle_droites_tpl_1_hauteur": corrHauteur,
   "4e_triangle_droites_tpl_2_distinguer": corrDistinguer,
