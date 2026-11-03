@@ -162,7 +162,7 @@ const corrPoint: CorrecteurMaths = (q) => {
 /** Le nombre d'axes de figures connues (table du correcteur). */
 const AXES: [RegExp, number][] = [
   [/(?<!pas )un carré(?![\wé])/, 4], [/rectangle qui n’est pas un carré/, 2], [/losange qui n’est pas un carré/, 2],
-  [/triangle équilatéral/, 3], [/triangle isocèle qui n’est pas équilatéral/, 1], [/trois côtés sont de longueurs différentes/, 0],
+  [/triangle équilatéral/, 3], [/triangle isocèle qui n’est pas équilatéral/, 1], [/trois côtés sont de longueurs différentes|trois côtés différents/, 0],
   [/lettre [HXI]\b/, 2], [/lettre [AMTVBED]\b/, 1], [/lettre [FLPR]\b/, 0],
 ];
 const direAxes = (k: number) => (k === 0 ? "aucun axe" : `${k} axe${k > 1 ? "s" : ""}`);

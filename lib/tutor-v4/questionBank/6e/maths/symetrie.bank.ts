@@ -169,6 +169,24 @@ const CTX_SYM: ((p: Prenom) => string)[] = [
   (p) => `Pour un jeu vidéo, ${p.nom} crée un vaisseau et son double de l’autre côté de (d).`,
   (p) => `${p.nom} colle des gommettes de part et d’autre d’un trait (d).`,
   (p) => `Sur le quadrillage de son cahier, ${p.nom} trace une figure et la droite (d).`,
+  // 03/11/2026 : des métiers (vocations), aux étoiles ★3 et plus seulement.
+  () => `Une architecte dessine la moitié d’une façade, puis l’autre moitié de l’autre côté de l’axe (d).`,
+  () => `Un styliste trace la moitié d’un patron de veste ; la droite (d) est le milieu du dos.`,
+  () => `Une graphiste prépare un logo : la droite (d) sépare les deux moitiés.`,
+];
+/* ⛔ 03/11/2026 — À ★1 ET ★2, AUCUNE SITUATION (Frédéric : « le contexte est
+   réservé aux trois étoiles »). Ni prénom, ni papillon, ni vitrail : la figure,
+   la droite (d), une phrase courte. Les débuts « avec une histoire » (CTX_SYM,
+   CTX_POINT, CTX_AXE, CTX_PROP) ne servent qu'à partir de ★3. */
+// 03/11/2026 (règle des longueurs : ★1 ≤ 12 mots, ★2 ≤ 15) : un début de
+// 3 mots au plus, une question de 9 mots au plus.
+const CTX_SYM_SIMPLE = ["", "", "Regarde l’axe (d).", "Compte les carreaux.", "Observe les sommets.", "Vérifie chaque sommet."];
+const QUESTIONS_IMAGE_SIMPLE = [
+  "La figure rouge est-elle l’image de la bleue ?",
+  "Le rouge est-il le symétrique du bleu ?",
+  "Est-ce le bon symétrique par rapport à (d) ?",
+  "La figure rouge est-elle bien construite ?",
+  "Le rouge est-il l’image du bleu par (d) ?",
 ];
 const QUESTIONS_IMAGE = [
   "La figure rouge est-elle l’image de la figure bleue par la symétrie d’axe (d) ?",
@@ -176,17 +194,17 @@ const QUESTIONS_IMAGE = [
   "A-t-on bien construit l’image de la figure bleue par la symétrie d’axe (d) ?",
 ];
 /** Une figure bleue, une figure rouge : est-ce son image ? Pourquoi ? */
-function genImageCanvas(types: Axe["type"][], defauts: Defaut[], choixDefauts: Defaut[]): QS {
+function genImageCanvas(types: Axe["type"][], defauts: Defaut[], choixDefauts: Defaut[], simple = false): QS {
   for (;;) {
     const { src, axe, n, m } = tirerFigure(types);
     const defaut = pick(defauts);
     const img = imageDessinee(src, axe, defaut, n, m);
     if (!img) continue;
     const p = pick(PRENOMS);
-    const question = pick(QUESTIONS_IMAGE);
+    const question = simple ? pick(QUESTIONS_IMAGE_SIMPLE) : pick(QUESTIONS_IMAGE);
     const reponses = choixDefauts.map((d) => VERDICTS[d]);
     return {
-      text: `${pick(CTX_SYM)(p)} ${question}`,
+      text: `${simple ? pick(CTX_SYM_SIMPLE) : pick(CTX_SYM)(p)} ${question}`.trim(),
       format: "qcm",
       choices: shuffle(reponses),
       expected: [VERDICTS[defaut]],
@@ -210,8 +228,8 @@ function genImageCanvas(types: Axe["type"][], defauts: Defaut[], choixDefauts: D
 
 // ─── SYM_RECONNAITRE et SYM_FIGURE (canvas : image juste ou fausse) ────────
 function genSymReconnaitre(etoile: 1 | 2 | 3 | 4): QS {
-  if (etoile === 1) return genImageCanvas(["vertical"], ["aucun", "glisse"], ["aucun", "glisse", "distance"]);
-  if (etoile === 2) return genImageCanvas(["vertical", "horizontal"], ["aucun", "glisse", "distance"], ["aucun", "glisse", "distance"]);
+  if (etoile === 1) return genImageCanvas(["vertical"], ["aucun", "glisse"], ["aucun", "glisse", "distance"], true);
+  if (etoile === 2) return genImageCanvas(["vertical", "horizontal"], ["aucun", "glisse", "distance"], ["aucun", "glisse", "distance"], true);
   if (etoile === 3) return genImageCanvas(["vertical", "horizontal"], ["aucun", "glisse", "distance", "distance"], ["aucun", "glisse", "distance"]);
   return genImageCanvas(["diag", "antidiag"], ["aucun", "glisse", "distance"], ["aucun", "glisse", "distance"]);
 }
@@ -274,11 +292,12 @@ function genSymFigure(etoile: 2 | 3 | 4 | 5): QS {
     const i = randomIntS(0, poly.n - 1);
     const [X, Y] = [L[i], L[(i + 1) % poly.n]];
     const autre = L[(i + 2) % poly.n];
+    // 03/11/2026 : ★2, sans prénom.
     return {
-      text: `${p.nom} construit l’image du ${poly.nom} ${nom} par la symétrie d’axe (d). ${pick([
-        `Quelle est l’image du côté [${X}${Y}] ?`,
-        `Le côté [${X}${Y}] devient quel segment ?`,
-        `Par quel segment ${ilS(p)} remplace-t-${ilS(p)} [${X}${Y}] ?`,
+      text: `${pick(["On construit", "On cherche", "Construis"])} l’image du ${poly.nom} ${nom} par (d). ${pick([
+        `Quelle est l’image de [${X}${Y}] ?`,
+        `[${X}${Y}] devient quel segment ?`,
+        `Quel segment est l’image de [${X}${Y}] ?`,
       ])}`,
       format: "qcm",
       choices: shuffle([`[${X}'${Y}']`, `[${X}${Y}']`, `[${X}'${Y}]`, `[${Y}'${autre}']`]),
@@ -294,11 +313,11 @@ function genSymFigure(etoile: 2 | 3 | 4 | 5): QS {
   }
   const tous = listeP(primes);
   return {
-    text: `${p.nom} veut construire l’image du ${poly.nom} ${nom} par la symétrie d’axe (d). ${pick([
-      "Quels points doit-${il} construire ?",
-      "Quels points faut-il construire avant de tracer l’image ?",
-      "Que doit-${il} construire d’abord ?",
-    ]).replace(/\$\{il\}/g, ilS(p))}`,
+    text: `${pick(["On construit", "On cherche", "Construis"])} l’image du ${poly.nom} ${nom} par (d). ${pick([
+      "Quels points faut-il construire ?",
+      "Que construit-on d’abord ?",
+      "Quels points construit-on ?",
+    ])}`,
     format: "qcm",
     choices: shuffle([tous, `seulement ${primes[0]}`, listeP(primes.slice(0, poly.n - 1)), "aucun : on recopie la figure à côté"]),
     expected: [tous],
@@ -322,6 +341,13 @@ const CTX_POINT: ((p: Prenom, M: string) => string)[] = [
   (p, M) => `${p.nom} colle une gommette en ${M} sur un carrelage ; un joint suit la droite (d).`,
   (p, M) => `Au bord de la piscine, ${p.nom} lance une balle qui se pose en ${M} ; la ligne d’eau est (d).`,
   (p, M) => `Sur une carte au trésor, ${p.nom} marque le point ${M} ; la rivière suit la droite (d).`,
+];
+const CTX_POINT_SIMPLE: ((M: string) => string)[] = [
+  (M) => `Regarde le point ${M}.`,
+  (M) => `Observe le point ${M}.`,
+  (M) => `Voici le point ${M}.`,
+  (M) => `Le point ${M} est placé.`,
+  (M) => `Construis le symétrique du point ${M}.`,
 ];
 const car = (k: number) => `${k} carreau${k > 1 ? "x" : ""}`;
 function genSymPoint(etoile: 2 | 3 | 4): QS {
@@ -379,12 +405,18 @@ function genSymPoint(etoile: 2 | 3 | 4): QS {
     source: { label: M, points: [pt] },
     axis: axeCanvas(axe, n),
   });
-  const debut = pick(CTX_POINT)(p, M);
+  // 03/11/2026 : ★2, sans situation (CTX_POINT_SIMPLE).
+  const debut = etoile === 2 ? pick(CTX_POINT_SIMPLE)(M) : pick(CTX_POINT)(p, M);
   const ici = vertical ? (sens < 0 ? "à gauche" : "à droite") : sens < 0 ? "au-dessus" : "au-dessous";
   const la = vertical ? (sens < 0 ? "à droite" : "à gauche") : sens < 0 ? "au-dessous" : "au-dessus";
   if (cas === "distance" || cas === "entre") {
     const v = cas === "distance" ? d : 2 * d;
-    const question = cas === "distance"
+    // 03/11/2026 : ★2 en 15 mots au plus (début court + question courte).
+    const question = etoile === 2
+      ? cas === "distance"
+        ? pick([`À combien de carreaux de (d) est ${M}' ?`, `${M}' est à combien de carreaux de (d) ?`, `Compte les carreaux de (d) à ${M}'.`])
+        : pick([`Combien de carreaux séparent ${M} et ${M}' ?`, `Quelle distance en carreaux entre ${M} et ${M}' ?`])
+      : cas === "distance"
       ? pick([`À combien de carreaux de (d) sera son symétrique ${M}' ?`, `Son symétrique ${M}' est à combien de carreaux de la droite (d) ?`])
       : pick([`Combien de carreaux séparent ${M} de son symétrique ${M}' ?`, `Quelle distance, en carreaux, y a-t-il entre ${M} et ${M}' ?`]);
     return {
@@ -488,6 +520,15 @@ const CTX_AXE: ((p: Prenom) => string)[] = [
   (p) => `En arts plastiques, ${p.nom} prépare un pochoir et trace un trait (d).`,
   (p) => `${p.nom} dessine un cerf-volant et sa baguette (d).`,
   (p) => `Sur le quadrillage, ${p.nom} trace une figure et une droite (d).`,
+  () => `Une architecte vérifie si la façade dessinée est symétrique par rapport à la droite (d).`,
+  () => `Un menuisier veut découper cette pièce de bois en deux moitiés pareilles le long de (d).`,
+];
+const CTX_AXE_SIMPLE = ["", "", "Observe la figure.", "Regarde bien.", "Imagine un pliage."];
+const QUESTIONS_AXE_SIMPLE = [
+  "(d) est-elle un axe de symétrie ?",
+  "La droite (d) est-elle un axe de symétrie ?",
+  "(d) est-elle un axe de la figure ?",
+  "Est-ce un axe de symétrie ?",
 ];
 const CTX_AXE5: ((p: Prenom) => string)[] = [
   (p) => `${p.nom} découpe cette figure dans du papier pour la plier.`,
@@ -509,7 +550,7 @@ const AXES_CONNUS: { quoi: string; n: number; pq: string }[] = [
   { quoi: "un losange qui n’est pas un carré", n: 2, pq: "ses 2 diagonales" },
   { quoi: "un triangle équilatéral", n: 3, pq: "les 3 droites qui passent par un sommet et le milieu du côté opposé" },
   { quoi: "un triangle isocèle qui n’est pas équilatéral", n: 1, pq: "la droite qui passe par le sommet principal et le milieu de la base" },
-  { quoi: "un triangle dont les trois côtés sont de longueurs différentes", n: 0, pq: "aucune droite : en pliant, rien ne se superpose" },
+  { quoi: "un triangle aux trois côtés différents", n: 0, pq: "aucune droite : en pliant, rien ne se superpose" },
   { quoi: "la lettre H", n: 2, pq: "une droite verticale et une droite horizontale, au milieu" },
   { quoi: "la lettre X", n: 2, pq: "une droite verticale et une droite horizontale, au milieu" },
   { quoi: "la lettre I", n: 2, pq: "une droite verticale et une droite horizontale, au milieu" },
@@ -530,10 +571,12 @@ function genSymAxe(etoile: 1 | 2 | 3 | 4 | 5): QS {
   const p = pick(PRENOMS);
   if (etoile === 2) {
     const c = pick(AXES_CONNUS);
+    // 03/11/2026 : ★2, sans prénom (« ${c.quoi} » reste en minuscules : le correcteur le relit).
     const question = pick([
       `Combien d’axes de symétrie a ${c.quoi} ?`,
-      `${p.nom} cherche les axes de symétrie de ${c.quoi}. Combien en trouve-t-${ilS(p)} ?`,
-      `Pour son exposé, ${p.nom} doit dire combien ${c.quoi} a d’axes de symétrie. Que doit-${ilS(p)} répondre ?`,
+      `Combien d’axes de symétrie possède ${c.quoi} ?`,
+      `Pour ${c.quoi}, compte les axes de symétrie.`,
+      `Combien d’axes trouves-tu pour ${c.quoi} ?`,
     ]);
     return {
       text: question,
@@ -577,7 +620,7 @@ function genSymAxe(etoile: 1 | 2 | 3 | 4 | 5): QS {
     const vraiAxe = vrais.length > 0 && (etoile === 1 ? pick([true, true, false]) : pick([true, false]));
     const axis = vraiAxe ? pick(vrais) : pick(faux);
     return {
-      text: `${pick(CTX_AXE)(p)} ${pick(QUESTIONS_AXE)}`,
+      text: (etoile === 1 ? `${pick(CTX_AXE_SIMPLE)} ${pick(QUESTIONS_AXE_SIMPLE)}` : `${pick(CTX_AXE)(p)} ${pick(QUESTIONS_AXE)}`).trim(),
       format: "qcm",
       choices: shuffle([OUI_AXE, NON_AXE]),
       expected: [vraiAxe ? OUI_AXE : NON_AXE],
@@ -603,15 +646,19 @@ const CTX_PROP: ((p: Prenom) => string)[] = [
   (p) => `Dans un jeu vidéo, ${p.nom} crée un personnage et son reflet dans un miroir.`,
   (p) => `${p.nom} trace une figure sur son cahier, puis son image par une symétrie axiale.`,
   (p) => `Au bord d’un lac, ${p.nom} dessine un voilier et son reflet dans l’eau.`,
+  () => `Une architecte dessine une façade symétrique par rapport à un axe.`,
+  () => `Un styliste trace un patron, puis son symétrique par rapport à un pli.`,
 ];
+const CTX_PROP_SIMPLE = ["", "", "Symétrie d’axe (d).", "Par symétrie axiale."];
 const CONSERVE = ["les longueurs", "les angles", "l’aire", "le périmètre", "l’alignement des points"];
 const CHANGE = ["la position de la figure", "le sens de la figure (elle est retournée)"];
 function genSymPropriete(etoile: 2 | 3 | 4 | 5): QS {
   const p = pick(PRENOMS);
-  const ctx = pick(CTX_PROP)(p);
+  // 03/11/2026 : ★2, sans situation (CTX_PROP_SIMPLE).
+  const ctx = etoile === 2 ? pick(CTX_PROP_SIMPLE) : pick(CTX_PROP)(p);
   const L = lettres(3);
   const num = (text: string, v: number, u: string, obs: string, ccl: string): QS => ({
-    text: `${ctx} ${text}`,
+    text: `${ctx} ${text}`.trim(),
     format: "short",
     expected: [`${nfS(v)} ${u}`.replace(" °", "°")],
     comparator: "number_equal",
@@ -624,11 +671,11 @@ function genSymPropriete(etoile: 2 | 3 | 4 | 5): QS {
     : pick(["grandAire", "grandPerimetre"] as const);
   if (famille === "segment") {
     const v = randomIntS(15, 120) / 10;
-    return num(`Le segment [${L[0]}${L[1]}] mesure ${nfS(v)} cm. ${pick([`Quelle est la longueur de son image [${L[0]}'${L[1]}'] ?`, `Combien mesure [${L[0]}'${L[1]}'], son symétrique ?`])}`, v, "cm", `[${L[0]}'${L[1]}'] est l’image de [${L[0]}${L[1]}] : même longueur.`, `[${L[0]}'${L[1]}'] mesure ${nfS(v)} cm.`);
+    return num(`Le segment [${L[0]}${L[1]}] mesure ${nfS(v)} cm. ${pick([`Combien mesure son image [${L[0]}'${L[1]}'] ?`, `Donne la longueur de [${L[0]}'${L[1]}'].`, `Combien mesure [${L[0]}'${L[1]}'] ?`])}`, v, "cm", `[${L[0]}'${L[1]}'] est l’image de [${L[0]}${L[1]}] : même longueur.`, `[${L[0]}'${L[1]}'] mesure ${nfS(v)} cm.`);
   }
   if (famille === "angle") {
     const v = randomIntS(15, 165);
-    return num(`L’angle ${L.join("")} mesure ${v}°. ${pick([`Combien mesure son image, l’angle ${L.map((x) => `${x}'`).join("")} ?`, `Quelle est la mesure de l’angle symétrique ${L.map((x) => `${x}'`).join("")} ?`])}`, v, "°", "L’angle image a la même ouverture.", `L’angle ${L.map((x) => `${x}'`).join("")} mesure ${v}°.`);
+    return num(`L’angle ${L.join("")} mesure ${v}°. ${pick([`Combien mesure l’angle ${L.map((x) => `${x}'`).join("")} ?`, `Combien mesure l’angle image ${L.map((x) => `${x}'`).join("")} ?`, `Et son image ${L.map((x) => `${x}'`).join("")} ?`])}`, v, "°", "L’angle image a la même ouverture.", `L’angle ${L.map((x) => `${x}'`).join("")} mesure ${v}°.`);
   }
   if (famille === "perimetre") {
     const v = randomIntS(8, 60);
@@ -1946,7 +1993,7 @@ export const symetrieBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "6e_sym_propriete_topup_2", niveau: "6e", matiere: "maths",
     notionId: "sym_axiale", microId: "sym_propriete", difficulty: 2, theme: "neutral",
-    text: "Un segment mesure 7 cm. Quelle est la longueur de son image par symétrie axiale ?",
+    text: "Un segment mesure 7 cm. Combien mesure son image par symétrie ?",
     format: "short", expected: ["7 cm"], comparator: "number_equal",
     hint: "La symétrie conserve les longueurs.",
     explanation: pe("une symétrie axiale conserve les longueurs.", "on identifie le segment et son image.", "le segment mesure 7 cm, donc son image aussi.", "l’image mesure 7 cm."),
