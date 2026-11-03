@@ -33,6 +33,11 @@ export type ReponseAttendue = {
    * x³/3, x³/3 + 2 et x³/3 − 7 sont toutes justes.
    */
   constante?: boolean;
+  /**
+   * ⭐ LYCÉE (03/11/2026) : juste À UN FACTEUR PRÈS — « un vecteur directeur » :
+   * (2 ; -1), (-4 ; 2) et (1 ; -0,5) sont tous justes, (0 ; 0) non.
+   */
+  colineaire?: boolean;
 };
 
 type Valeurs = Record<string, number>;
@@ -179,7 +184,7 @@ const UNITE =
 function sansUnite(s: string, strict = false): string {
   // Côté élève, un MOT après un nombre se lit comme une unité : « 36 cubes »,
   // « 12 élèves », « 5 paniers » (vu sur la fiche 4e « volumes »).
-  const mot = /^(\s*[-−]?[\d\s.,]*\d)\s+\p{L}{2,}[\p{L}\s'’-]*$/u.exec(s);
+  const mot = /^(\s*[-−+]?[\d\s.,]*\d)\s+\p{L}{2,}[\p{L}\s'’-]*$/u.exec(s);
   if (!strict && mot) return mot[1];
   const m = UNITE.exec(s);
   if (!m) return s;
@@ -187,7 +192,8 @@ function sansUnite(s: string, strict = false): string {
   // espace — « 3t » collé est un produit.
   if (strict && /^\p{L}$/u.test(m[1]) && !/^\s/.test(m[0])) return s;
   const reste = s.slice(0, m.index);
-  return /^\s*[-−]?[\d\s.,]+(\/[\d\s.,]+)?π?\s*$/.test(reste) ? reste : s;
+  // « +50,6 % » : le signe d'une hausse fait partie du nombre (seconde, 03/11).
+  return /^\s*[-−+]?[\d\s.,]+(\/[\d\s.,]+)?π?\s*$/.test(reste) ? reste : s;
 }
 
 /** « g(2) = 7 » → « g(2) » ; « 7 » → null. Le membre de gauche d'une réponse. */
@@ -202,7 +208,12 @@ function membreGauche(s: string): string | null {
 
 function texteNormalise(s: string): string {
   return s
+    // « ]1 ; 2] U ]5 ; 7] » : le U du clavier ordinaire est la réunion.
+    .replace(/([\][])\s*[uU]\s*(?=[\][])/g, "$1∪")
     .normalize("NFD")
+    // ⛔ ∉ et ≠ se décomposent en ∈ et = + une barre (U+0338) : sans ce « ¬ »,
+    // effacer les accents effaçait la barre, et ∉ valait ∈ (seconde, 03/11).
+    .replace(/̸/g, "¬")
     .replace(/[̀-ͯ]/g, "")
     .toLowerCase()
     .replace(/[\s.!]/g, "")
@@ -257,6 +268,24 @@ export function saisieJuste(saisie: string, attendue: ReponseAttendue): boolean 
     const juste = sansMembreGauche(forme);
     if (attendue.exact) return formeNormalisee(eleve) === formeNormalisee(juste);
     if (texteNormalise(eleve) === texteNormalise(juste)) return true;
+    if (attendue.colineaire) return colineaires(saisie, forme);
+    // Une ÉQUATION attendue (« 2x - y + 3 = 0 ») : toute équation équivalente
+    // est juste, -4x + 2y - 6 = 0 comme y = 2x + 3 (seconde, droites, 03/11).
+    // ⛔ Pas « g(-3) = 0 » : une lettre suivie d'une parenthèse est une fonction.
+    if (juste.includes("=") && saisie.includes("=") && !/\p{L}\s*\(/u.test(forme + saisie)) return equivalentes(saisie, forme);
+    // Des intervalles : mêmes crochets, bornes comparées en valeur (et à la
+    // tolérance près) — [0,47 ; 0,53] pour [0,468 ; 0,532] au centième.
+    const ie = intervalles(saisie);
+    const ij = intervalles(forme);
+    if (ie && ij) {
+      return (
+        ie.length === ij.length &&
+        ie.every((p, k) => {
+          const q = ij[k];
+          return p.g === q.g && p.d === q.d && bornesEgales(p.a, q.a, attendue.tolerance ?? 0) && bornesEgales(p.b, q.b, attendue.tolerance ?? 0);
+        })
+      );
+    }
     // Plusieurs valeurs (« 2 ; 5 », solutions d'une équation) : même liste, tout ordre.
     // « x = 4 ou x = -1 » : le « x = » s'enlève dans CHAQUE élément.
     const decoupe = (t: string) =>
@@ -272,7 +301,20 @@ export function saisieJuste(saisie: string, attendue: ReponseAttendue): boolean 
     const lj = decoupe(forme);
     if (lj.length > 1 || le.length > 1) {
       if (le.length !== lj.length) return false;
-      if (attendue.ordre) return le.every((x, k) => egaux(x, lj[k], attendue.tolerance ?? 0));
+      if (attendue.ordre) {
+        // ⛔ Un encadrement : le SENS des signes compte. « 6 > √30 > 5 » (le
+        // miroir) est juste, « 5 > √30 > 6 » non. Une liste sans signes « 5 ; 6 »
+        // reste acceptée.
+        const signesJ = forme.match(/[<>≤≥]/g) ?? [];
+        const signesE = saisie.match(/[<>≤≥]/g) ?? [];
+        let liste = le;
+        if (signesJ.length && signesE.length) {
+          const miroir = [...signesJ].reverse().map((c) => ({ "<": ">", ">": "<", "≤": "≥", "≥": "≤" })[c] ?? c);
+          if (signesE.join("") === miroir.join("") && signesE.join("") !== signesJ.join("")) liste = [...le].reverse();
+          else if (signesE.join("") !== signesJ.join("")) return false;
+        }
+        return liste.every((x, k) => egaux(x, lj[k], attendue.tolerance ?? 0));
+      }
       const restantes = [...lj];
       return le.every((x) => {
         const k = restantes.findIndex((y) => egaux(x, y, attendue.tolerance ?? 0));
@@ -289,14 +331,98 @@ function egaux(a: string, b: string, tolerance: number, constante = false): bool
   if (texteNormalise(a) === texteNormalise(b)) return true;
   // La réponse ATTENDUE est lue strictement (« 3t » y est 3 × t) ; celle de
   // l'élève avec indulgence (« 3t » y est 3 tonnes).
-  const essais: [string, string][] = [[sansUnite(a), sansUnite(b, true)]];
-  // « 22,5 % » = 0,225 : le pourcentage compté en centièmes.
-  if (/%\s*$/.test(a) || /%\s*$/.test(b)) essais.push([a, b]);
-  return essais.some(([x, y]) => {
+  const essais: [string, string, number][] = [[sansUnite(a), sansUnite(b, true), tolerance]];
+  // « 22,5 % » = 0,225 : le pourcentage compté en centièmes. ⛔ La tolérance
+  // aussi (03/11) : 0,1 point sur « 50,6 % », c'est 0,001 sur 0,506 — sinon
+  // 0,45 passait.
+  if (/%\s*$/.test(a) || /%\s*$/.test(b)) essais.push([a, b, tolerance / 100]);
+  return essais.some(([x, y, t]) => {
     try {
-      return memesValeurs(x, y, tolerance, constante);
+      return memesValeurs(x, y, t, constante);
     } catch {
       return false;
     }
   });
+}
+
+/** Les valeurs de x, y… en un point de test (les mêmes que `memesValeurs`). */
+function valeursAuPoint(p: number): Valeurs {
+  const vars: Valeurs = {};
+  LETTRES.forEach((l, k) => (vars[l] = p + k * 0.113));
+  return vars;
+}
+
+/** « 2x - y + 3 = 0 » et « y = 2x + 3 » : (gauche − droite) proportionnels. */
+function equivalentes(a: string, b: string): boolean {
+  const ecart = (t: string) => {
+    const [g, d, ...reste] = t.split("=");
+    if (reste.length || !g.trim() || !d.trim()) throw new Error("équation");
+    return (v: Valeurs) => evaluer(g, v) - evaluer(d, v);
+  };
+  try {
+    const fa = ecart(a);
+    const fb = ecart(b);
+    let rapport: number | null = null;
+    for (const p of POINTS) {
+      const va = fa(valeursAuPoint(p));
+      const vb = fb(valeursAuPoint(p));
+      if (Math.abs(vb) < 1e-9) {
+        if (Math.abs(va) > 1e-9) return false;
+        continue;
+      }
+      const r = va / vb;
+      if (Math.abs(r) < 1e-9) return false;
+      rapport ??= r;
+      if (Math.abs(r - rapport) > 1e-9 * Math.max(1, Math.abs(rapport))) return false;
+    }
+    return rapport !== null;
+  } catch {
+    return false;
+  }
+}
+
+/** « (2 ; -1) » et « (-4 ; 2) » : coordonnées proportionnelles, non nulles. */
+function colineaires(a: string, b: string): boolean {
+  const lire = (t: string) =>
+    t
+      .trim()
+      .replace(/^[\p{L}→⃗\s]*(?=\()/u, "")
+      .replace(/^\((.*)\)$/, "$1")
+      .split(/\s*;\s*/)
+      .map((x) => evaluer(x, {}));
+  try {
+    const u = lire(a);
+    const v = lire(b);
+    if (u.length !== v.length || u.length < 2 || u.every((x) => Math.abs(x) < 1e-12)) return false;
+    return u.every((ui, i) => v.every((vj, j) => Math.abs(ui * vj - u[j] * v[i]) < 1e-9 * Math.max(1, Math.abs(ui * vj))));
+  } catch {
+    return false;
+  }
+}
+
+type Intervalle = { g: string; a: string; b: string; d: string };
+
+/** « ]-∞ ; 2] ∪ [5 ; +∞[ » → ses morceaux ; null si ce n'est pas un intervalle. */
+function intervalles(t: string): Intervalle[] | null {
+  const morceaux = t
+    .trim()
+    .replace(/^S\s*=\s*/i, "")
+    .replace(/([\][])\s*[uU∪]\s*(?=[\][])/g, "$1∪")
+    .split("∪");
+  const lus: Intervalle[] = [];
+  for (const m of morceaux) {
+    const r = /^\s*([\][])(.+);(.+)([\][])\s*$/.exec(m);
+    if (!r) return null;
+    lus.push({ g: r[1], a: r[2].trim(), b: r[3].trim(), d: r[4] });
+  }
+  return lus;
+}
+
+function bornesEgales(a: string, b: string, tolerance: number): boolean {
+  const infini = (s: string) => {
+    const t = s.replace(/\s/g, "").replace(/[−–]/g, "-");
+    return /^\+?∞$/.test(t) ? "+∞" : t === "-∞" ? "-∞" : null;
+  };
+  if (infini(a) || infini(b)) return infini(a) === infini(b);
+  return egaux(a, b, tolerance);
 }
