@@ -919,6 +919,36 @@ const INDEPENDANCES: Couple[] = [
   { intro: "Dans un jeu de société.", x: "la couleur d'un pion", xf: true, y: "le nombre de cases qu'il avance au prochain tour", yf: false, court: "le nombre de cases avancées par un pion selon sa couleur", pourquoi: "c'est le dé qui décide, pas la couleur du pion" },
 ];
 
+/* ---------------------------------------------------------------------------
+   ⛔⛔ 03/11/2026 (Frédéric) : « d'abord des questions simples ; le contexte est
+   réservé aux étoiles ★3 et plus ». À ★2, des couples de grandeurs PUREMENT
+   MATHÉMATIQUES (figures, nombres), en phrases courtes. Les situations de vie
+   restent à ★3 (l'intruse, la proportionnalité). Les intros sont uniques : le
+   correcteur y lit la réponse.
+--------------------------------------------------------------------------- */
+const LEURRES_FIGURE = ["sa couleur", "sa position sur la feuille", "le nom de ses sommets"];
+const LEURRES_NOMBRE = ["la couleur de l'encre", "le jour du calcul", "l'heure du calcul"];
+const DEPENDANCES_MATHS: Couple[] = [
+  { intro: "Soit un carré.", x: "son côté", xf: false, y: "son aire", yf: true, court: "", pourquoi: "un côté donné fixe une seule aire, côté × côté", leurres: LEURRES_FIGURE },
+  { intro: "Soit un carré de papier.", x: "son côté", xf: false, y: "son périmètre", yf: false, court: "", pourquoi: "un côté donné fixe un seul périmètre, 4 × côté", leurres: LEURRES_FIGURE },
+  { intro: "Soit un cube.", x: "son arête", xf: true, y: "son volume", yf: false, court: "", pourquoi: "une arête donnée fixe un seul volume", leurres: ["sa couleur", "la matière dont il est fait", "l'endroit où il est posé"] },
+  { intro: "Soit un cercle.", x: "son rayon", xf: false, y: "son périmètre", yf: false, court: "", pourquoi: "un rayon donné fixe le périmètre, 2 × π × rayon", leurres: ["la couleur du trait", "la position du centre", "le nom du centre"] },
+  { intro: "Soit un disque.", x: "son rayon", xf: false, y: "son aire", yf: true, court: "", pourquoi: "un rayon donné fixe l'aire, π × rayon × rayon", leurres: ["la couleur du trait", "la position du centre", "le nom du centre"] },
+  { intro: "Soit un rectangle de largeur 5 cm.", x: "sa longueur", xf: true, y: "son périmètre", yf: false, court: "", pourquoi: "la largeur étant fixée, une longueur donnée fixe le périmètre", leurres: LEURRES_FIGURE },
+  { intro: "Soit un triangle équilatéral.", x: "son côté", xf: false, y: "son périmètre", yf: false, court: "", pourquoi: "un côté donné fixe le périmètre, 3 × côté", leurres: LEURRES_FIGURE },
+  { intro: "Soit un nombre.", x: "ce nombre", xf: false, y: "son double", yf: false, court: "", pourquoi: "un nombre n'a qu'un seul double", leurres: LEURRES_NOMBRE },
+  { intro: "Soit un nombre positif.", x: "ce nombre", xf: false, y: "son carré", yf: false, court: "", pourquoi: "un nombre n'a qu'un seul carré", leurres: LEURRES_NOMBRE },
+];
+const INDEPENDANCES_MATHS: Couple[] = [
+  { intro: "Soit un rectangle quelconque.", x: "son périmètre", xf: false, y: "son aire", yf: true, court: "", pourquoi: "un rectangle de 1 sur 5 et un de 2 sur 4 ont le même périmètre, 12, mais des aires de 5 et de 8" },
+  { intro: "Soit un rectangle sans mesure.", x: "son aire", xf: true, y: "son périmètre", yf: false, court: "", pourquoi: "un rectangle de 1 sur 12 et un de 3 sur 4 ont la même aire, 12, mais des périmètres de 26 et de 14" },
+  { intro: "Soit un grand rectangle.", x: "sa longueur", xf: true, y: "son aire", yf: true, court: "", pourquoi: "sans la largeur, l'aire peut prendre beaucoup de valeurs" },
+  { intro: "On prend deux nombres.", x: "leur somme", xf: true, y: "leur produit", yf: false, court: "", pourquoi: "2 + 6 = 8 et 4 + 4 = 8, mais 2 × 6 = 12 et 4 × 4 = 16" },
+  { intro: "Soit un nombre entier.", x: "son chiffre des unités", xf: false, y: "ce nombre", yf: false, court: "", pourquoi: "13 et 23 ont le même chiffre des unités" },
+  { intro: "Soit un entier.", x: "son nombre de chiffres", xf: false, y: "cet entier", yf: false, court: "", pourquoi: "12 et 57 ont tous les deux 2 chiffres" },
+  { intro: "Soit un triangle quelconque.", x: "son périmètre", xf: false, y: "son aire", yf: true, court: "", pourquoi: "deux triangles de même périmètre peuvent avoir des aires très différentes" },
+];
+
 /** Des situations PROPORTIONNELLES : zéro donne zéro, le double donne le double. */
 const PROPORTIONNELLES: {
   regle: (a: number) => string;
@@ -1045,6 +1075,15 @@ function presenterProgramme(ops: Op[], style: "tu" | "il" | "liste" | "machine",
   return `Une machine à calculer reçoit un nombre. Elle doit ${joinPuis(ops.map(infinitif))}.`;
 }
 
+/** ★2 (03/11/2026) : le programme en phrases courtes, sans prénom (le correcteur relit les étapes). */
+function programmeCourt(ops: Op[], style: "tu" | "liste" | "machine", X: string): string {
+  if (style === "tu")
+    return `Programme : choisis un nombre, ${joinPuis(ops.map((o, i) => imperatif(o, i === 0)))}. ${randomChoice([`Que donne-t-il pour ${X} ?`, `Calcule le résultat pour ${X}.`, `Pars de ${X}. Que trouves-tu ?`])}`;
+  if (style === "liste")
+    return `Programme : ${RONDS[0]} choisir un nombre ; ${ops.map((o, i) => `${RONDS[i + 1]} ${infinitif(o)}`).join(" ; ")}. ${randomChoice([`Résultat pour ${X} ?`, `Que donne-t-il pour ${X} ?`])}`;
+  return `Une machine reçoit un nombre. Elle doit ${joinPuis(ops.map(infinitif))}. ${randomChoice([`Que rend-elle pour ${X} ?`, `On lui donne ${X}. Que rend-elle ?`])}`;
+}
+
 const chaine = (debut: string, ops: Op[], fin: string) => `${debut} → ${ops.map(symbole).join(" → ")} → ${fin}`;
 
 function questionAller(style: "tu" | "il" | "liste" | "machine", X: string, qui: { n: string; f: boolean }) {
@@ -1095,6 +1134,19 @@ function remontee(ops: Op[], resultat: number): string {
 
 const STYLES = ["tu", "il", "liste", "machine"] as const;
 
+/** ★2 (03/11/2026) : un tableau « x → y » nu, règle × a puis + b, sans situation. */
+/** 03/11/2026 : les lettres du tableau nu, pour varier sans situation de vie. */
+const LETTRES_TABLEAU: [string, string][] = [["x", "y"], ["x", "y"], ["a", "b"], ["n", "m"], ["t", "d"], ["u", "v"]];
+
+function tableauNu() {
+  const a = randomInt(2, 6);
+  let b = randomInt(1, 9);
+  if (b === a) b += 1;
+  const pas = randomChoice([1, 1, 2]);
+  const xs = Array.from({ length: randomInt(4, 6) }, (_, k) => (k + 1) * pas);
+  return { a, b, xs, ys: xs.map((x) => a * x + b) };
+}
+
 export const fonctionsBank: TutorBankItemV4[] = [
   /* =========================================================================
      FONCTION_RECONNAITRE — une grandeur en détermine-t-elle une autre ?
@@ -1111,8 +1163,9 @@ export const fonctionsBank: TutorBankItemV4[] = [
     hint: "Si je connais la première, puis-je en déduire la seconde à coup sûr ?",
     tags: ["dependance", "reconnaitre", "qcm", "template"],
     generate: () => {
+      // 03/11/2026 : ★2 sans situation de vie (DEPENDANCES_MATHS…), phrases courtes.
       const depend = Math.random() < 0.5;
-      const cas = depend ? randomChoice(DEPENDANCES) : randomChoice(INDEPENDANCES);
+      const cas = depend ? randomChoice(DEPENDANCES_MATHS) : randomChoice(INDEPENDANCES_MATHS);
       const correct = depend
         ? "oui : connaître la première suffit à trouver la seconde"
         : "non : la première ne détermine pas la seconde";
@@ -1120,10 +1173,10 @@ export const fonctionsBank: TutorBankItemV4[] = [
       // des réponses est donc bien celle qu'on connaît.
       const question = randomChoice([
         `Connaître ${cas.x} suffit-il pour connaître ${cas.y} ?`,
-        `Si l'on connaît ${cas.x}, peut-on en déduire ${cas.y} à coup sûr ?`,
+        `Si on connaît ${cas.x}, connaît-on ${cas.y} ?`,
         `${cap(cas.x)} détermine-t-${il(cas.xf)} ${cas.y} ?`,
-        `Quand on fixe ${cas.x}, ${cas.y} est-${il(cas.yf)} fixé${fe(cas.yf)} du même coup ?`,
-        `${cap(cas.x)} étant connu${fe(cas.xf)}, peut-on trouver ${cas.y} sans hésiter ?`,
+        `${cap(cas.x)} fixe-t-${il(cas.xf)} ${cas.y} ?`,
+        `Avec ${cas.x}, trouve-t-on ${cas.y} à coup sûr ?`,
       ]);
       return {
         text: `${cas.intro} ${question}`,
@@ -1156,11 +1209,12 @@ export const fonctionsBank: TutorBankItemV4[] = [
     hint: "Laquelle, si on la connaît, fixe la réponse sans hésitation ?",
     tags: ["dependance", "reconnaitre", "qcm", "template"],
     generate: () => {
-      const cas = randomChoice(DEPENDANCES);
+      // 03/11/2026 : ★2 sans situation de vie, phrases courtes.
+      const cas = randomChoice(DEPENDANCES_MATHS);
       const question = randomChoice([
-        `Laquelle de ces grandeurs suffit à connaître ${cas.y} ?`,
-        `Pour trouver ${cas.y} à coup sûr, quelle grandeur faut-il connaître ?`,
-        `${cap(cas.y)} dépend d'une seule de ces grandeurs. Laquelle ?`,
+        `Quelle grandeur suffit à connaître ${cas.y} ?`,
+        `Pour trouver ${cas.y}, que faut-il connaître ?`,
+        `${cap(cas.y)} dépend d'une de ces grandeurs. Laquelle ?`,
         `Quelle grandeur détermine ${cas.y} ?`,
       ]);
       return {
@@ -1363,11 +1417,12 @@ export const fonctionsBank: TutorBankItemV4[] = [
     generate: () => {
       const x = randomInt(2, 15);
       const { ops, vals, resultat } = tirerOps(2, x, { carre: Math.random() < 0.3, positif: true });
-      const style = randomChoice(["tu", "il", "liste"] as const);
+      // 03/11/2026 : ★2 sans prénom (le style « il » reste aux étoiles suivantes).
+      const style = randomChoice(["tu", "liste", "machine"] as const);
       const qui = randomChoice(PRENOMS);
       const inverse = appliquerOp(appliquerOp(x, ops[1]), ops[0]);
       return {
-        text: `${presenterProgramme(ops, style, qui)} ${questionAller(style, fr(x), qui)}`,
+        text: programmeCourt(ops, style, fr(x)),
         format: "short",
         expected: [String(resultat)],
         comparator: "number_equal",
@@ -1402,7 +1457,7 @@ export const fonctionsBank: TutorBankItemV4[] = [
         `Quel nombre sort au bout de cette chaîne ? ${c}`,
         `On fait passer ${x} dans ces étapes. Quel est le résultat ? ${c}`,
         `Suis les flèches et trouve le nombre d'arrivée : ${c}`,
-        `Dans un jeu de calcul mental, on lit : ${c}. Que faut-il écrire à la place du point d'interrogation ?`,
+        `Calcule le nombre d'arrivée : ${c}`,
       ]);
       return {
         text,
@@ -1598,34 +1653,39 @@ export const fonctionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "On cherche la colonne, puis on lit la ligne du dessous.",
     tags: ["dependance", "tableau", "template", "canvas"],
+    // ⛔⛔ 03/11/2026 : à ★2, le tableau nu (x et y), en phrases courtes ; les
+    // situations (taxi, forfait…) restent aux étoiles suivantes.
     generate: () => {
-      const { s, a, b } = tirerSituation(SITUATIONS);
-      const xs = abscisses(s, a, b, randomInt(4, 6));
-      const ys = xs.map((x) => a * x + b);
+      const { xs, ys } = tableauNu();
       const i = randomInt(1, xs.length - 1);
       const n = xs[i];
+      const [X, Y] = randomChoice(LETTRES_TABLEAU);
       const text = randomChoice([
-        `Le tableau donne ${s.y.nom} selon ${s.x.nom}. ${quelEst(s.y)} pour ${s.x.u(n)} ?`,
-        `D'après le tableau, combien vaut ${s.y.nom} pour ${s.x.u(n)} ?`,
-        `${s.regle(a, b)} Le tableau en donne quelques valeurs. ${randomChoice(s.direct(n))}`,
-        `Lis dans le tableau ${s.y.nom} qui correspond à ${s.x.u(n)}.`,
-        `${randomChoice(s.direct(n))} Lis la réponse dans le tableau.`,
+        `Lis dans le tableau la valeur de ${Y} pour ${X} = ${n}.`,
+        `D'après le tableau, que vaut ${Y} pour ${X} = ${n} ?`,
+        `Quelle valeur de ${Y} correspond à ${X} = ${n} ?`,
+        `Le tableau donne ${Y} selon ${X}. Que vaut ${Y} pour ${X} = ${n} ?`,
+        `Pour ${X} = ${n}, quelle est la valeur de ${Y} ?`,
+        `Donne ${Y} lorsque ${X} = ${n}.`,
+        `Trouve ${Y} pour ${X} = ${n}.`,
+        `Lis ${Y} dans la colonne surlignée, où ${X} = ${n}.`,
+        `Quel est le nombre ${Y} associé à ${X} = ${n} ?`,
       ]);
       return {
         text,
         format: "short",
-        expected: avecUnite(ys[i], s.y.u),
+        expected: [fr(ys[i])],
         comparator: "number_equal",
         explanation:
           "Définition : un tableau de valeurs est l'un des modes de représentation d'une dépendance.\n\n" +
           "Méthode : on repère la valeur de départ dans la ligne du haut, puis on lit juste en dessous.\n\n" +
           `Calcul : sous ${fr(n)}, on lit ${fr(ys[i])}.\n\n` +
-          `Conclusion : pour ${s.x.u(n)}, ${s.y.nom} vaut ${s.y.u(ys[i])}.`,
+          `Conclusion : pour x = ${fr(n)}, y vaut ${fr(ys[i])}.`,
         canvas: tableauValeurs({
           xValues: xs,
           yValues: ys,
           highlightIndex: i,
-          etiquettes: { x: s.x.col, y: s.y.col },
+          etiquettes: { x: X, y: Y },
         }),
       };
     },
@@ -1642,29 +1702,34 @@ export const fonctionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Trouve la bonne colonne dans la première ligne.",
     tags: ["dependance", "tableau", "template", "canvas"],
+    // 03/11/2026 : à ★2, le tableau nu, sans situation.
     generate: () => {
-      const { s, a, b } = tirerSituation(SITUATIONS);
-      const xs = abscisses(s, a, b, randomInt(4, 6));
-      const ys = xs.map((x) => a * x + b);
+      const { xs, ys } = tableauNu();
       const i = randomInt(0, xs.length - 1);
       const n = xs[i];
+      const [X, Y] = randomChoice(LETTRES_TABLEAU);
       const text = randomChoice([
-        `Voici un relevé ${de(s.y.nom)} selon ${s.x.nom}. Que vaut ${s.y.nom} pour ${s.x.u(n)} ?`,
-        `${s.direct(n)[0]} Cherche la réponse dans le tableau.`,
-        `${s.direct(n)[1]} Le tableau donne la réponse.`,
-        `Dans ce tableau, repère la colonne « ${fr(n)} » : combien vaut ${s.y.nom} ?`,
+        `Que vaut ${Y} quand ${X} vaut ${n} ?`,
+        `Lis la valeur de ${Y} sous ${n}.`,
+        `Cherche la colonne de ${X} = ${n}. Que vaut ${Y} ?`,
+        `Quel nombre est sous ${n} dans ce tableau ?`,
+        `Repère ${X} = ${n}. Lis ${Y} juste en dessous.`,
+        `Combien vaut ${Y} pour ${X} égal à ${n} ?`,
+        `Écris la valeur de ${Y} associée à ${n}.`,
+        `Donne la valeur de ${Y} pour ${X} = ${n}.`,
+        `Lis ce tableau : que vaut ${Y} si ${X} = ${n} ?`,
       ]);
       return {
         text,
         format: "short",
-        expected: avecUnite(ys[i], s.y.u),
+        expected: [fr(ys[i])],
         comparator: "number_equal",
         explanation:
           "Définition : chaque colonne du tableau associe une valeur de départ à une valeur d'arrivée.\n\n" +
           "Méthode : on cherche la valeur de départ dans la première ligne, puis on descend dans la même colonne.\n\n" +
           `Calcul : dans la colonne ${fr(n)}, on lit ${fr(ys[i])}.\n\n` +
-          `Conclusion : ${s.y.nom} vaut ${s.y.u(ys[i])}.`,
-        canvas: tableau([s.x.col, ...xs.map(fr)], [{ values: [s.y.col, ...ys.map(fr)] }], `${s.y.nom} selon ${s.x.nom}`),
+          `Conclusion : y vaut ${fr(ys[i])}.`,
+        canvas: tableau([X, ...xs.map(fr)], [{ values: [Y, ...ys.map(fr)] }], `${Y} selon ${X}`),
       };
     },
   },

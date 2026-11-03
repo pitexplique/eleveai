@@ -547,16 +547,20 @@ function accords(t: string): string[] {
   return p;
 }
 
+// 03/11/2026 : les couples purement mathématiques de ★2 (DEPENDANCES_MATHS, INDEPENDANCES_MATHS).
+const INTROS_DEP_MATHS = /^Soit un (carré|carré de papier|cube|cercle|disque|rectangle de largeur 5 cm|triangle équilatéral|nombre|nombre positif)\./;
+const INTROS_INDEP_MATHS = /^(Soit un rectangle quelconque|Soit un rectangle sans mesure|Soit un grand rectangle|On prend deux nombres|Soit un nombre entier|Soit un entier|Soit un triangle quelconque)\./;
+
 function corrigerDepend(q: Q): string[] {
-  const indep = INTROS_INDEPENDANCE.test(q.text);
-  const dep = INTROS_DEPENDANCE.test(q.text);
+  const indep = INTROS_INDEPENDANCE.test(q.text) || INTROS_INDEP_MATHS.test(q.text);
+  const dep = INTROS_DEPENDANCE.test(q.text) || INTROS_DEP_MATHS.test(q.text);
   if (indep === dep) return ["situation inconnue du correcteur"];
   const p = qcmUnique(q, (c) => (dep ? c.startsWith("oui") : c.startsWith("non")));
   return [...p, ...accords(q.text)];
 }
 
 function corrigerLaquelle(q: Q): string[] {
-  if (!INTROS_DEPENDANCE.test(q.text)) return ["situation inconnue du correcteur"];
+  if (!INTROS_DEPENDANCE.test(q.text) && !INTROS_DEP_MATHS.test(q.text)) return ["situation inconnue du correcteur"];
   return qcmUnique(q, (c) => !SANS_EFFET.test(c));
 }
 
