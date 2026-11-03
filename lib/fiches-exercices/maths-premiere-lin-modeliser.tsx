@@ -67,6 +67,9 @@ export const exercicesLinModeliserPremiere: FicheExercicesData = {
       exercices: [
         {
           enonce: "Parmi ces situations, lesquelles sont des croissances (ou décroissances) linéaires ?\na) Une plante grandit de $3$ cm par mois.\nb) Une population augmente de $3$ % par an.\nc) Un compte perd $50$ € chaque mois.\nd) Le nombre de bactéries double chaque heure.",
+          reponses: [
+            { attendu: ["a ; c", "a) ; c)"] },
+          ],
           correction:
             "a) On ajoute toujours $3$ cm : linéaire.\nb) $3$ % d'une population qui grandit, c'est chaque année un peu plus d'habitants : pas linéaire. On multiplie par $1{,}03$.\nc) On retire toujours $50$ € : linéaire, et décroissante.\nd) Doubler, c'est multiplier par $2$ : pas linéaire.\n⚠️ Le piège est b) : un pourcentage constant ne donne pas une croissance linéaire.\nSur le dessin, en partant de $1$ : ajouter $1$ à chaque étape donne des points alignés (droite bleue) ; doubler donne $1$ ; $2$ ; $4$ ; $8$, une ligne orange qui se redresse.",
           schema: ecranSeulement(repere([-1, 4, -1, 9], [{ q: [0, 1, 1] }, { pts: [[0, 1], [1, 2], [2, 4], [3, 8]], couleur: ORANGE }], [
@@ -81,6 +84,12 @@ export const exercicesLinModeliserPremiere: FicheExercicesData = {
         },
         {
           enonce: "Pour chaque situation, dire si l'on modélise plutôt par une suite (discret) ou par une fonction (continu).\na) Le nombre d'adhérents d'un club, compté le $1$er septembre de chaque année.\nb) La hauteur d'eau dans une baignoire qui se remplit à débit constant.\nc) Le nombre de places de parking construites chaque année.\nd) La distance parcourue par un train qui roule à vitesse constante.",
+          reponses: [
+            { question: "a)", attendu: ["suite", "discret"] },
+            { question: "b)", attendu: ["fonction", "continu"] },
+            { question: "c)", attendu: ["suite", "discret"] },
+            { question: "d)", attendu: ["fonction", "continu"] },
+          ],
           correction:
             "a) On compte une fois par an : une suite $u_n$, avec $n$ le nombre d'années. Discret.\nb) La hauteur change à chaque instant : une fonction $h(t)$ du temps. Continu.\nc) Un bilan chaque année : une suite. Discret.\nd) La distance existe à tout instant : une fonction $d(t)$. Continu.\n⭐ La question à se poser : la grandeur a-t-elle un sens ENTRE deux mesures ? Si oui, c'est du continu.\nSur le dessin : une suite, ce sont les seuls points rouges ; une fonction, c'est toute la droite, entre les points aussi.",
           schema: ecranSeulement(repere([-1, 5, -1, 6], [{ q: [0, 1, 1] }], [
@@ -93,6 +102,10 @@ export const exercicesLinModeliserPremiere: FicheExercicesData = {
         },
         {
           enonce: "Une bibliothèque possède $3\\,000$ livres et en achète $150$ chaque année. Modéliser le nombre de livres par une suite, puis calculer ce nombre au bout de $8$ ans.",
+          reponses: [
+            { question: "modèle", attendu: "3000 + 150n" },
+            { question: "au bout de 8 ans", attendu: "4200" },
+          ],
           correction:
             "On compte les livres une fois par an : une suite. On note $u_n$ le nombre de livres au bout de $n$ années.\nOn ajoute toujours $150$ : suite arithmétique de premier terme $u_0 = 3\\,000$ et de raison $150$, donc $u_n = 3\\,000 + 150n$.\n$u_8 = 3\\,000 + 150 \\times 8 = 4\\,200$ : au bout de $8$ ans, la bibliothèque possède $4\\,200$ livres.\n⚠️ Ne pas échanger les rôles : $3\\,000$ est le départ, $150$ la raison.\nSur le dessin (en milliers de livres, un point tous les deux ans), des points isolés : on compte les livres une fois par an.",
           schema: repere([-1, 9, -1, 5], [], [
@@ -106,6 +119,10 @@ export const exercicesLinModeliserPremiere: FicheExercicesData = {
         },
         {
           enonce: "Un réservoir contient $500$ L d'eau et se vide de $20$ L par minute. Modéliser le volume par une fonction du temps, puis dire quand le réservoir est vide.",
+          reponses: [
+            { question: "modèle", attendu: "V(t) = 500 - 20t" },
+            { question: "vide au bout de (min)", attendu: "25" },
+          ],
           correction:
             "Le volume change à chaque instant : une fonction $V(t)$, avec $t$ en minutes.\nIl perd toujours $20$ L par minute : $V(t) = 500 - 20t$, une fonction affine décroissante.\n$500 - 20t = 0$ donne $t = \\dfrac{500}{20} = 25$ : le réservoir est vide au bout de $25$ minutes.\n⭐ Le modèle ne vaut que pour $t$ entre $0$ et $25$ : ensuite, le volume ne devient pas négatif.\nSur le dessin (en dizaines de minutes et en centaines de litres), une droite continue qui touche l'axe horizontal en $2{,}5$, soit $25$ minutes.",
           schema: repere([-1, 3, -1, 6], [{ q: [0, -2, 5] }], [{ x: 2.5, y: 0, label: "" }]),
@@ -113,6 +130,9 @@ export const exercicesLinModeliserPremiere: FicheExercicesData = {
         },
         {
           enonce: "Le modèle $u_n = 3\\,500 + 100n$ donne le nombre d'abonnés d'un journal local $n$ mois après janvier. On calcule $u_8 = 4\\,300$. Quelle phrase répond correctement ?\na) « En $8$ mois, le journal a gagné $4\\,300$ abonnés. »\nb) « En septembre, le journal compte $4\\,300$ abonnés. »\nc) « Il faut $4\\,300$ mois pour avoir $8$ abonnés. »",
+          reponses: [
+            { attendu: ["b", "b)"] },
+          ],
           correction:
             "$u_8$ est le nombre TOTAL d'abonnés $8$ mois après janvier, c'est-à-dire en septembre.\nLa bonne phrase est b).\na) est fausse : en $8$ mois, le journal a gagné $100 \\times 8 = 800$ abonnés, pas $4\\,300$.\nc) confond le rang et la valeur.\n⚠️ Janvier est le rang $0$ : $8$ mois plus tard, c'est septembre. Le tableau le montre : février est le rang $1$.",
           schema: ecranSeulement(tableau(["mois n (0 = janvier)", "0", "1", "8"], ["abonnés", "3 500", "3 600", "4 300"])),
@@ -121,6 +141,11 @@ export const exercicesLinModeliserPremiere: FicheExercicesData = {
         {
           enonce: "Le tableau donne le nombre de visiteurs d'un petit musée, en centaines, chaque année depuis son ouverture. La croissance est-elle linéaire ? Si oui, proposer un modèle et dire combien de visiteurs il y a eu l'année $3$.",
           figure: tableau(["année n", "0", "1", "2", "3"], ["visiteurs (centaines)", 100, 130, 160, 190]),
+          reponses: [
+            { question: "linéaire ?", attendu: ["oui"] },
+            { question: "modèle", attendu: "100 + 30n" },
+            { question: "visiteurs l'année 3", attendu: ["19000", "190"] },
+          ],
           correction:
             "Écarts : $130 - 100 = 30$, $160 - 130 = 30$, $190 - 160 = 30$. Toujours $30$ : la croissance est linéaire.\nOn compte une fois par an : suite arithmétique, $u_n = 100 + 30n$, en centaines de visiteurs.\n✔️ $u_3 = 100 + 30 \\times 3 = 190$ : c'est la dernière valeur du tableau.\nL'année $3$, le musée a reçu $190$ centaines de visiteurs, soit $19\\,000$ visiteurs.",
           micros: ["lin_modele_reconnaitre", "lin_modele_choisir"],
@@ -138,6 +163,9 @@ export const exercicesLinModeliserPremiere: FicheExercicesData = {
             { x: 3, y: 4.5, label: "" },
             { x: 4, y: 8.5, label: "" },
           ], undefined, true),
+          reponses: [
+            { attendu: ["A", "la série A"] },
+          ],
           correction:
             "A : les points sont alignés ; d'un point au suivant, on monte toujours de $2$. C'est une croissance linéaire.\nB : les écarts valent $0{,}5$, puis $1$, puis $2$, puis $4$ : ils doublent. La ligne se redresse : ce n'est pas une croissance linéaire.\n⭐ Une croissance linéaire se VOIT : des points alignés.",
           micros: ["lin_modele_reconnaitre"],
@@ -167,6 +195,11 @@ export const exercicesLinModeliserPremiere: FicheExercicesData = {
           titre: "Le covoiturage",
           enonce:
             "Une application de covoiturage compte $2\\,400$ inscrits dans une ville et en gagne $180$ par mois (chiffres d'un modèle).\na) Justifier qu'une suite arithmétique convient. Donner son premier terme et sa raison.\nb) Combien d'inscrits un an plus tard ?\nc) Rédiger la réponse par une phrase.",
+          reponses: [
+            { question: "a) premier terme", attendu: "2400" },
+            { question: "a) raison", attendu: "180" },
+            { question: "b)", attendu: "4560" },
+          ],
           correction:
             "a) Les inscrits se comptent chaque mois, et on en ajoute toujours $180$ : une suite arithmétique, $u_n = 2\\,400 + 180n$, avec $n$ le nombre de mois, $u_0 = 2\\,400$ et $r = 180$.\nb) Un an, c'est $n = 12$ : $u_{12} = 2\\,400 + 180 \\times 12 = 4\\,560$.\nc) « Un an plus tard, l'application compterait $4\\,560$ inscrits dans cette ville. »\nSur le dessin (en milliers d'inscrits, un point tous les deux mois), les points montent régulièrement.\n⚠️ Le conditionnel « compterait » rappelle que c'est une prévision du modèle.",
           schema: repere([-1, 13, -1, 5], [], [
@@ -184,6 +217,12 @@ export const exercicesLinModeliserPremiere: FicheExercicesData = {
           titre: "Le remplissage d'un bassin",
           enonce:
             "Un bassin de jardin contient $4$ m³ d'eau. On le remplit avec un débit constant de $1{,}5$ m³ par heure.\na) Suite ou fonction ? Justifier, puis écrire le modèle.\nb) Quel volume au bout de $6$ heures ?\nc) Le bassin contient au plus $13$ m³. Rédiger une phrase qui dit quand il est plein.",
+          reponses: [
+            { question: "a) suite ou fonction", attendu: ["fonction", "continu"] },
+            { question: "a) modèle", attendu: "V(t) = 1,5t + 4" },
+            { question: "b)", attendu: "13" },
+            { question: "c) heures", attendu: "6" },
+          ],
           correction:
             "a) Le volume change à chaque instant : une fonction du temps. $V(t) = 1{,}5t + 4$, avec $t$ en heures et $V$ en m³.\nb) $V(6) = 1{,}5 \\times 6 + 4 = 13$ m³.\nc) « Le bassin est plein au bout de $6$ heures de remplissage. »\nSur le dessin, la droite est tracée d'un trait continu, jusqu'à l'horizontale du bassin plein : le volume existe à tout instant, pas seulement toutes les heures.\n⭐ Continu : une droite. Discret : des points.",
           schema: repere([-1, 8, -1, 15], [{ q: [0, 1.5, 4] }], [{ x: 6, y: 13, label: "" }], 13, true),
@@ -199,6 +238,11 @@ export const exercicesLinModeliserPremiere: FicheExercicesData = {
             { label: "2021", value: 1800 },
             { label: "2022", value: 2100 },
           ]),
+          reponses: [
+            { question: "a)", attendu: ["oui"] },
+            { question: "b)", attendu: "1200 + 300n" },
+            { question: "c)", attendu: "3300" },
+          ],
           correction:
             "a) $1\\,500 - 1\\,200 = 300$, $1\\,800 - 1\\,500 = 300$, $2\\,100 - 1\\,800 = 300$ : on ajoute toujours $300$. Oui, la croissance est linéaire.\nb) Une mesure par an : une suite arithmétique, $u_n = 1\\,200 + 300n$.\nc) 2026, c'est $n = 7$ : $u_7 = 1\\,200 + 300 \\times 7 = 3\\,300$.\n« Si la tendance se poursuit, $3\\,300$ cyclistes par jour emprunteront la piste en 2026. »\n⚠️ 2026, c'est le rang $7$ : on compte les années APRÈS 2019.",
           micros: ["lin_modele_reconnaitre", "lin_modele_choisir", "lin_modele_conclure"],
@@ -208,6 +252,11 @@ export const exercicesLinModeliserPremiere: FicheExercicesData = {
           enonce:
             "Un capital de $1\\,000$ € est placé à $4$ % par an. Le tableau donne son évolution.\na) La croissance est-elle linéaire ?\nb) Un élève propose le modèle $u_n = 1\\,000 + 40n$. Que prévoit-il pour $n = 2$ ? Est-ce juste ?\nc) Conclure : pourquoi ce modèle ne convient-il pas ?",
           figure: tableau(["année n", "0", "1", "2"], ["capital (€)", "1 000", "1 040", "1 081,60"]),
+          reponses: [
+            { question: "a)", attendu: ["non"] },
+            { question: "b) u₂", attendu: "1080" },
+            { question: "b) juste ?", attendu: ["non"] },
+          ],
           correction:
             "a) Écarts : $1\\,040 - 1\\,000 = 40$, puis $1\\,081{,}60 - 1\\,040 = 41{,}60$. Ils ne sont pas égaux : la croissance n'est PAS linéaire.\nb) $u_2 = 1\\,000 + 40 \\times 2 = 1\\,080$ €, au lieu de $1\\,081{,}60$ € : le modèle se trompe, de peu pour l'instant.\nc) Chaque année, les $4$ % s'appliquent à un capital plus grand : les intérêts grandissent. Le bon calcul multiplie par $1{,}04$ chaque année : $1\\,000 \\times 1{,}04 \\times 1{,}04 = 1\\,081{,}60$.\n« Le modèle linéaire ne convient pas, car le capital augmente d'un pourcentage fixe, et non d'une somme fixe. »\n⚠️ Un pourcentage constant donne une croissance exponentielle, pas linéaire.",
           micros: ["lin_modele_reconnaitre", "lin_modele_choisir", "lin_modele_conclure"],
@@ -216,6 +265,12 @@ export const exercicesLinModeliserPremiere: FicheExercicesData = {
           titre: "Le recul d'une falaise",
           enonce:
             "Sur une côte, une falaise recule sous l'effet de l'érosion. En 2025, son bord est à $50$ m d'un phare, et il recule de $0{,}3$ m par an (chiffres d'un modèle). On mesure la distance une fois par an.\na) Suite ou fonction ? Écrire le modèle.\nb) Quelle distance en 2055 ? Répondre par une phrase.\nc) Au bout de combien d'années le bord atteindrait-il le phare ? Ce modèle est-il fiable si loin ?",
+          reponses: [
+            { question: "a) suite ou fonction", attendu: ["suite", "discret"] },
+            { question: "a) modèle", attendu: "50 - 0,3n" },
+            { question: "b)", attendu: "41" },
+            { question: "c) années", attendu: "167", tolerance: 0.5 },
+          ],
           correction:
             "a) Une mesure par an : une suite. $u_n = 50 - 0{,}3n$, avec $n$ le nombre d'années après 2025 : suite arithmétique de raison $-0{,}3$.\nb) 2055, c'est $n = 30$ : $u_{30} = 50 - 0{,}3 \\times 30 = 41$. « En 2055, le bord de la falaise serait à $41$ m du phare. »\nc) $50 - 0{,}3n = 0$ donne $n = \\dfrac{50}{0{,}3} \\approx 167$ : dans environ $167$ ans. Si loin, le modèle n'est pas fiable : une tempête peut arracher plusieurs mètres d'un coup.\n⭐ En géographie, ce recul s'appelle le recul du trait de côte.",
           schema: ecranSeulement(tableau(["année", "2025", "2035", "2045", "2055"], ["distance (m)", 50, 47, 44, 41])),
@@ -234,6 +289,11 @@ export const exercicesLinModeliserPremiere: FicheExercicesData = {
           titre: "Une coureuse à allure constante",
           enonce:
             "En physique, un mouvement est uniforme quand la vitesse est constante. Une coureuse part de la borne du $2$e kilomètre d'une piste et court à $250$ m par minute.\na) Suite ou fonction ? Écrire la distance $d(t)$, en mètres, entre elle et le début de la piste au bout de $t$ minutes.\nb) Où est-elle au bout de $20$ minutes ? Répondre par une phrase.\nc) Pourquoi dit-on que c'est une croissance linéaire ?",
+          reponses: [
+            { question: "a) suite ou fonction", attendu: ["fonction", "continu"] },
+            { question: "a) d(t)", attendu: "d(t) = 250t + 2000" },
+            { question: "b) en mètres", attendu: "7000" },
+          ],
           correction:
             "a) La distance existe à tout instant : une fonction. Elle part de $2\\,000$ m et ajoute $250$ m chaque minute : $d(t) = 250t + 2\\,000$.\nb) $d(20) = 250 \\times 20 + 2\\,000 = 7\\,000$. « Au bout de $20$ minutes, elle est à la borne du $7$e kilomètre. »\nc) Chaque minute ajoute la même distance, $250$ m : c'est une croissance linéaire. $250$ m par minute est sa vitesse, soit $15$ km/h.\nSur le dessin (en dizaines de minutes et en km), la droite part de $2$.\n⚠️ En $20$ minutes, elle a couru $5$ km, pas $7$ : elle était partie de la borne $2$.",
           schema: repere([-1, 3, -1, 8], [{ q: [0, 2.5, 2] }], [{ x: 2, y: 7, label: "" }]),
@@ -243,6 +303,10 @@ export const exercicesLinModeliserPremiere: FicheExercicesData = {
           titre: "Un parking à vélos agrandi",
           enonce:
             "Un parking à vélos compte $120$ places en 2025 ; chaque année, on en ajoute $40$ (chiffres d'un modèle).\na) Modéliser le nombre de places. Pourquoi une suite plutôt qu'une fonction ?\nb) Représenter les termes de 2025 à 2030.\nc) Combien de places en 2030 ? Répondre par une phrase.",
+          reponses: [
+            { question: "a) modèle", attendu: "120 + 40n" },
+            { question: "c)", attendu: "320" },
+          ],
           correction:
             "a) Les places sont ajoutées une fois par an, par paquets : entre deux années, rien ne change. C'est une suite : $u_n = 120 + 40n$, avec $n$ le nombre d'années après 2025.\nb) Termes : $120$ ; $160$ ; $200$ ; $240$ ; $280$ ; $320$. Sur le dessin (en centaines), on place des POINTS, sans les relier.\nc) 2030, c'est $n = 5$ : $u_5 = 120 + 40 \\times 5 = 320$. « En 2030, le parking compterait $320$ places. »\n⚠️ Relier les points ferait croire qu'il y a $140$ places au milieu de l'année 2025, ce qui est faux.",
           schema: repere([-1, 6, -1, 4], [], [
@@ -273,6 +337,13 @@ export const exercicesLinModeliserPremiere: FicheExercicesData = {
           titre: "Un troupeau de chèvres",
           enonce:
             "Une fromagerie possède $45$ chèvres en 2025 et en ajoute $5$ chaque année. Chaque chèvre donne environ $800$ L de lait par an (chiffres d'un modèle).\na) Le nombre de chèvres suit-il une croissance linéaire ? Choisir un modèle et le justifier.\nb) Montrer que la production de lait, en litres, vaut $L_n = 36\\,000 + 4\\,000n$. Est-ce aussi une suite arithmétique ?\nc) En quelle année le troupeau atteindra-t-il $80$ chèvres ? Quelle production de lait cette année-là ?\nd) Rédiger une phrase de conclusion pour l'éleveur.",
+          reponses: [
+            { question: "a) linéaire ?", attendu: ["oui"] },
+            { question: "a) modèle", attendu: "45 + 5n" },
+            { question: "b) arithmétique ?", attendu: ["oui"] },
+            { question: "c) année", attendu: "2032" },
+            { question: "c) production (L)", attendu: "64000" },
+          ],
           correction:
             "a) On ajoute toujours $5$ chèvres par an : croissance linéaire. On compte les chèvres une fois par an : une suite, $u_n = 45 + 5n$, avec $n$ le nombre d'années après 2025.\nb) $L_n = 800 \\times u_n = 800 \\times (45 + 5n) = 36\\,000 + 4\\,000n$. Oui : c'est une suite arithmétique de raison $4\\,000$ L.\nc) $45 + 5n = 80$ donne $5n = 35$, donc $n = 7$ : en 2032. Production : $L_7 = 36\\,000 + 4\\,000 \\times 7 = 64\\,000$ L.\nd) « Si le troupeau grandit de $5$ chèvres par an, il comptera $80$ chèvres en 2032, qui produiront environ $64\\,000$ litres de lait. »\nSur le dessin (en dizaines de chèvres), huit points alignés, de 2025 à 2032.\n⭐ Multiplier une suite arithmétique par un nombre donne encore une suite arithmétique.",
           schema: repere([-1, 8, -1, 9], [], [
@@ -291,6 +362,12 @@ export const exercicesLinModeliserPremiere: FicheExercicesData = {
           titre: "La charge d'un vélo électrique",
           enonce:
             "La batterie d'un vélo électrique est chargée à $20$ %. Branchée sur le secteur, elle gagne $15$ points de pourcentage par heure (chiffres d'un modèle).\na) Suite ou fonction ? Écrire le modèle $B(t)$, avec $t$ en heures.\nb) Quelle charge au bout de $2$ heures ?\nc) Au bout de combien de temps est-elle pleine ? Donner la réponse en heures et minutes, dans une phrase.\nd) Que devient le modèle ensuite ?",
+          reponses: [
+            { question: "a) suite ou fonction", attendu: ["fonction", "continu"] },
+            { question: "a) B(t)", attendu: "B(t) = 15t + 20" },
+            { question: "b)", attendu: "50" },
+            { question: "c)", attendu: ["5 h 20 min", "5 h 20", "5h20"] },
+          ],
           correction:
             "a) La charge augmente à chaque instant : une fonction. $B(t) = 15t + 20$, en %.\nb) $B(2) = 15 \\times 2 + 20 = 50$ %.\nc) $15t + 20 = 100$ donne $15t = 80$, donc $t = \\dfrac{80}{15} \\approx 5{,}33$ h. $0{,}33$ h, c'est un tiers d'heure, soit $20$ minutes.\n« La batterie est pleine au bout d'environ $5$ h $20$ min de charge. »\nd) Ensuite, la charge reste à $100$ % : sur le dessin (en dizaines de %), la droite franchit l'horizontale des $100$ %, et au-delà elle n'a plus de sens. Le modèle affine ne vaut que tant que la batterie n'est pas pleine.\n⚠️ $5{,}33$ h ne font pas $5$ h $33$ min : un tiers d'heure, ce sont $20$ minutes.",
           schema: repere([-1, 7, -1, 12], [{ q: [0, 1.5, 2] }], [{ x: 2, y: 5, label: "" }], 10, true),
@@ -300,6 +377,15 @@ export const exercicesLinModeliserPremiere: FicheExercicesData = {
           titre: "Deux façons de réviser un loyer",
           enonce:
             "Un loyer de $750$ € par mois peut être révisé chaque année de deux façons (chiffres d'un modèle) : contrat A, $15$ € de plus par an ; contrat B, $2$ % de plus par an.\na) Lequel des deux contrats donne une croissance linéaire ? Écrire son modèle.\nb) Calculer les loyers des deux contrats au bout de $1$ an, puis de $2$ ans. Que remarque-t-on ?\nc) Au bout de $10$ ans, le contrat B donne $750 \\times 1{,}02^{10} \\approx 914{,}25$ €. Comparer avec A et conclure par une phrase.",
+          reponses: [
+            { question: "a) contrat linéaire", attendu: ["A", "contrat A"] },
+            { question: "a) modèle", attendu: "750 + 15n" },
+            { question: "b) A, 1 an", attendu: "765" },
+            { question: "b) B, 1 an", attendu: "765" },
+            { question: "b) A, 2 ans", attendu: "780" },
+            { question: "b) B, 2 ans", attendu: "780,30" },
+            { question: "c) A, 10 ans", attendu: "900" },
+          ],
           correction:
             "a) A ajoute toujours $15$ € : croissance linéaire, $a_n = 750 + 15n$. B ajoute $2$ % d'un loyer qui grandit : pas linéaire.\nb) Au bout de $1$ an : A donne $750 + 15 = 765$ €, B donne $750 \\times 1{,}02 = 765$ € : égalité.\nAu bout de $2$ ans : A donne $750 + 15 \\times 2 = 780$ €, B donne $765 \\times 1{,}02 = 780{,}30$ €. B dépasse A de $0{,}30$ €.\nc) A : $750 + 15 \\times 10 = 900$ €, contre environ $914{,}25$ € pour B.\n« Au bout de $10$ ans, le contrat B coûterait environ $14$ € de plus par mois que le contrat A. »\n⭐ Au début, les deux modèles se confondent : c'est sur la durée qu'on voit la différence. Le tableau donne l'écart entre B et A.",
           schema: tableau(["années n", "1", "2", "10"], ["écart B − A (€)", 0, 0.3, 14.25]),
@@ -309,6 +395,12 @@ export const exercicesLinModeliserPremiere: FicheExercicesData = {
           titre: "L'ascension d'un sommet",
           enonce:
             "Un randonneur part d'un refuge à $1\\,200$ m d'altitude à 8 h et monte vers un sommet à $2\\,800$ m. Il s'élève de $400$ m par heure (chiffres d'un modèle).\na) Modéliser l'altitude $h(t)$, en mètres, $t$ heures après le départ. Suite ou fonction ?\nb) À quelle heure atteint-il le sommet ?\nc) À quelle altitude est-il à 10 h 30 ?\nd) Rédiger une phrase pour prévenir le refuge de son heure d'arrivée au sommet.",
+          reponses: [
+            { question: "a) h(t)", attendu: "h(t) = 400t + 1200" },
+            { question: "a) suite ou fonction", attendu: ["fonction", "continu"] },
+            { question: "b)", attendu: ["12 h", "midi"] },
+            { question: "c)", attendu: "2200" },
+          ],
           correction:
             "a) L'altitude change à chaque instant : une fonction. $h(t) = 400t + 1\\,200$.\nb) $400t + 1\\,200 = 2\\,800$ donne $400t = 1\\,600$, donc $t = 4$ : il arrive à midi.\nc) 10 h 30, c'est $t = 2{,}5$ : $h(2{,}5) = 400 \\times 2{,}5 + 1\\,200 = 2\\,200$ m.\nd) « Parti à 8 h, j'atteindrai le sommet vers midi, après $4$ heures de montée. »\nSur le dessin (en milliers de mètres), la droite rejoint l'horizontale du sommet à $t = 4$.\n⚠️ $t = 4$ ne veut pas dire 4 h du matin : c'est $4$ heures APRÈS le départ de 8 h.",
           schema: repere([-1, 5, -1, 4], [{ q: [0, 0.4, 1.2] }], [
