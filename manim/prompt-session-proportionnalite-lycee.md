@@ -58,3 +58,9 @@ Questions en commentaire : calculer 90/180 = 50 % ; formes l'intrus 0,5 ; appliq
 4. Passe finale comme `e9b19c20` / `b8564150` : miniatures, manifeste (chapitres par dry run), `python scripts/fiches-youtube.py`, R2 (seulement nos fichiers, `rclone check`), table R2 + bilans, `node scripts/brancher-videos-coach.mjs --id … --ecrire`. Outils de la passe CM-A : scratchpad `7a13429e-…` (`miniatures_cma.py`, `construire_cma.py`, `appliquer_manifeste.py`, `appliquer_r2_bilans.mjs`, `temps/lancer.sh`). Manifeste, `lib/videos/videos-r2.json` et `bilans-videos.json` ont des lignes non commitées d'autres sessions : index = HEAD + nos ajouts (`git hash-object -w` + `git update-index --cacheinfo`).
 
 Ne pousse rien sans le signal du soir de Frédéric.
+
+## ⏳ 03/11 : reprise des DÉFAUTS MINEURS (demande de Frédéric : « reprends les défauts même mineurs »)
+- Brief : `manim/brief-agent-defauts-lycee.md` (temps inchangés : voix, marques, durées ; seulement tailles/positions).
+- 3 agents lancés le 03/11 depuis la session 8004c6a9 : defauts-a (2de 01 proportion, 1re 04 partie-tout, 01 calculer), defauts-b (02 formes, 03 appliquer, 1re 05 tout-partie), defauts-c (STMG 05, STMG 06, pourcentage de pourcentage). Ils écrivent leur rapport dans `side-session-notes/local_ffe0b8f1-eecf-4810-98b6-d50f665c9a36/rapport-defauts-<a|b|c>.md`. NE PAS les relancer.
+- À faire à chaque rapport : `python scripts/verifier-bords-video.py` sur chaque mp4, planche des écrans corrigés regardée, durée ±0,1 s et débuts des « Question ! » ±0,5 s identiques (sinon recalculer chapitres/questions au manifeste) ; puis committer les scripts par chemin.
+- À la fin : renvoyer les 14 dossiers sur R2 (`r2.sh` du scratchpad 8004c6a9 : rclone copy + check par dossier ; même noms, donc rien à changer au manifeste, à la table R2 ni au coach), puis mettre ce prompt à jour. Ne rien pousser.
