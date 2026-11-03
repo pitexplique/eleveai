@@ -154,7 +154,7 @@ export const exercicesAutoSigneExpressionPremiere: FicheExercicesData = {
             "Être bénéficiaire, c'est avoir $B(x) > 0$ : c'est une question de SIGNE.\nRacine : $4x - 200 = 0$ donne $x = \\dfrac{200}{4} = 50$.\nLe coefficient $4$ est positif : $B(x)$ est négatif avant $50$, positif après.\nÀ $50$ bols, elle ne gagne rien et ne perd rien. Elle est bénéficiaire à partir de $51$ bols.\n⭐ Ce nombre $50$ s'appelle le SEUIL DE RENTABILITÉ : tout commerçant le calcule avant d'ouvrir.",
           schema: tableauSignes(["0", "50", "+∞"], [["$4x - 200$", ["-", "+"], ["0"]]]),
           reponses: [
-            { attendu: "51" },
+            { attendu: ["51", "x > 50", "x ≥ 51"] },
           ],
           micros: ["auto_alg_signe_premier_degre"],
         },
@@ -166,7 +166,7 @@ export const exercicesAutoSigneExpressionPremiere: FicheExercicesData = {
             "« Il gèle » veut dire « la température est négative » : c'est une question de signe.\nRacine : $9 - 6h = 0$ donne $6h = 9$, soit $h = \\dfrac{9}{6} = 1{,}5$.\nLe coefficient de $h$ est $-6$, négatif : $T(h)$ est positive avant $1{,}5$, négative après.\nIl gèle à partir de $1{,}5$ km au-dessus du pied, soit $1\\,500$ m.\n⚠️ En résolvant $9 - 6h < 0$ comme une inéquation, on divise par $-6$ : le sens de l'inégalité se RETOURNE. La règle du signe de $a$ évite ce piège.",
           schema: tableauSignes(["0", "1,5", "+∞"], [["$9 - 6h$", ["+", "-"], ["0"]]], "h"),
           reponses: [
-            { attendu: ["1,5 km", "1 500 m"] },
+            { attendu: ["1,5 km", "1 500 m", "h > 1,5"] },
           ],
           micros: ["auto_alg_signe_premier_degre"],
         },
@@ -329,6 +329,7 @@ export const exercicesAutoSigneExpressionPremiere: FicheExercicesData = {
             { question: "b) A(x)", attendu: "150 + 0,2x" },
             { question: "b) B(x)", attendu: "90 + 0,25x" },
             { question: "b) D(x)", attendu: "60 - 0,05x" },
+            { question: "c) D(x) s'annule en", attendu: "1 200" },
           ],
           micros: ["auto_alg_signe_premier_degre"],
         },

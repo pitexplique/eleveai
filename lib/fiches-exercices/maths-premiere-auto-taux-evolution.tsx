@@ -89,7 +89,7 @@ export const exercicesAutoTauxEvolutionPremiere: FicheExercicesData = {
           correction:
             "Coefficient : $\\dfrac{1\\,200}{800} = \\dfrac{12}{8} = 1{,}5$.\nTaux : $1{,}5 - 1 = 0{,}5$, soit $+50$ %.\n⭐ Les deux chemins, l'écart divisé par le départ ou le coefficient moins $1$, donnent le même taux : $\\dfrac{1\\,200 - 800}{800} = 0{,}5$.",
           reponses: [
-            { question: "coefficient", attendu: "1,5" },
+            { question: "coefficient", attendu: ["1,5", "× 1,5"] },
             { question: "taux", attendu: "50 %" },
           ],
           micros: ["auto_evo_calculer_taux"],
@@ -132,7 +132,7 @@ export const exercicesAutoTauxEvolutionPremiere: FicheExercicesData = {
           correction:
             "La hausse a multiplié par $1{,}25$. Pour l'annuler : $\\dfrac{1}{1{,}25} = \\dfrac{100}{125} = 0{,}8$.\n$0{,}8 = 1 - 0{,}2$ : une baisse de $20$ %.\nVérification sur $100$ € : $100 \\times 1{,}25 = 125$, puis $125 \\times 0{,}8 = 100$. ✔️\n⚠️ Pas $-25$ % : $125 \\times 0{,}75 = 93{,}75$.",
           reponses: [
-            { question: "nombre", attendu: "0,8" },
+            { question: "nombre", attendu: ["0,8", "× 0,8"] },
             { question: "baisse", attendu: ["20 %", "-20 %"] },
           ],
           micros: ["auto_evo_reciproque"],
@@ -338,7 +338,7 @@ export const exercicesAutoTauxEvolutionPremiere: FicheExercicesData = {
             { question: "b) ville A (milliers)", attendu: "62,5" },
             { question: "b) ville B (milliers)", attendu: "48,6" },
             { question: "c)", attendu: "56,25 %" },
-            { question: "d)", attendu: ["11 %", "11,1 %"], tolerance: 0.005 },
+            { question: "d)", attendu: ["11 %", "11,1 %"], tolerance: 0.002 },
           ],
           micros: ["auto_evo_calculer_taux", "auto_evo_successives", "auto_evo_reciproque"],
         },
@@ -356,7 +356,7 @@ export const exercicesAutoTauxEvolutionPremiere: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: "840" },
             { question: "b)", attendu: "-16 %" },
-            { question: "c)", attendu: ["66,7 %", "67 %"], tolerance: 0.005 },
+            { question: "c)", attendu: ["66,7 %", "67 %"], tolerance: 0.002 },
           ],
           micros: ["auto_evo_piege_compensation", "auto_evo_successives", "auto_evo_reciproque"],
         },
@@ -375,7 +375,7 @@ export const exercicesAutoTauxEvolutionPremiere: FicheExercicesData = {
             ]),
           ),
           reponses: [
-            { question: "a) coefficient", attendu: "1,331" },
+            { question: "a) coefficient", attendu: ["1,331", "× 1,331"] },
             { question: "a) taux", attendu: "33,1 %" },
             { question: "b)", attendu: "665,5 €" },
             { question: "c)", attendu: "15,5 €" },

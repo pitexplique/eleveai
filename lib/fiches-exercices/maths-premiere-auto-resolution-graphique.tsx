@@ -80,7 +80,7 @@ export const exercicesAutoResolutionGraphiquePremiere: FicheExercicesData = {
           reponses: [
             { question: "f(x) = 0", attendu: "-1 ; 3" },
             { question: "f(x) = -3", attendu: "0 ; 2" },
-            { question: "f(x) = -5", attendu: ["∅", "aucune solution", "aucune"] },
+            { question: "f(x) = -5", attendu: ["∅", "{}", "aucune solution", "aucune", "pas de solution"] },
           ],
           micros: ["auto_fct_resoudre_graphiquement"],
         },
@@ -167,7 +167,7 @@ export const exercicesAutoResolutionGraphiquePremiere: FicheExercicesData = {
           reponses: [
             { question: "f(x) = 2", attendu: "-1 ; 2" },
             { question: "f(x) ≤ -2", attendu: "-2 ; 1" },
-            { question: "f(x) > 2", attendu: ["∅", "aucune solution", "aucune"] },
+            { question: "f(x) > 2", attendu: ["∅", "{}", "aucune solution", "aucune", "pas de solution"] },
           ],
           micros: ["auto_fct_resoudre_graphiquement"],
         },

@@ -147,9 +147,6 @@ export const exercicesAutoProportionPremiere: FicheExercicesData = {
           enonce: "Parmi $0{,}6$ ; $60$ % ; $\\dfrac{6}{10}$ et $60$, quelle écriture n'est PAS égale à $\\dfrac{3}{5}$ ?",
           correction:
             "$\\dfrac{3}{5} = \\dfrac{6}{10} = 0{,}6$.\n$60$ % $= \\dfrac{60}{100} = 0{,}6$ : égal aussi.\nMais $60$ tout seul, SANS le symbole %, vaut $60$ : c'est $100$ fois trop.\nL'intruse est $60$.\n⚠️ Le symbole % fait partie du nombre : il veut dire « divisé par $100$ ».",
-          reponses: [
-            { attendu: "60" },
-          ],
           micros: ["auto_prop_formes"],
         },
         {
@@ -402,7 +399,7 @@ export const exercicesAutoProportionPremiere: FicheExercicesData = {
             { question: "c) voix de A", attendu: "627" },
             { question: "c) voix de B", attendu: "342" },
             { question: "c) voix de C", attendu: "171" },
-            { question: "d)", attendu: ["31 %", "0,3135"], tolerance: 0.01 },
+            { question: "d)", attendu: ["31 %", "0,3135"], tolerance: 0.006 },
           ],
           micros: ["auto_prop_appliquer", "auto_prop_calculer", "auto_prop_formes"],
         },
@@ -445,7 +442,7 @@ export const exercicesAutoProportionPremiere: FicheExercicesData = {
             { question: "a) au départ", attendu: "30 %" },
             { question: "a) cinquante ans plus tard", attendu: "25 %" },
             { question: "b)", attendu: ["non", "faux", "impossible"] },
-            { question: "c)", attendu: "18" },
+            { question: "c)", attendu: ["18", "18 000 000"] },
           ],
           micros: ["auto_prop_calculer"],
         },
