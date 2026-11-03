@@ -141,7 +141,7 @@ export const exercicesAutoEquationsPremiere: FicheExercicesData = {
             "$5 > 0$ : l'équation a deux solutions.\n$x = \\sqrt{5}$ ou $x = -\\sqrt{5}$.\n$S = \\{-\\sqrt{5}\\,;\\,\\sqrt{5}\\}$.\n⭐ Sur le dessin, la droite horizontale $y = 5$ coupe la parabole $y = x^2$ en DEUX points, symétriques.\n⚠️ Le piège : oublier la solution négative. $(-\\sqrt{5})^2 = 5$ aussi.\n⭐ Question tombée à l'épreuve anticipée de juin 2026 (Asie).",
           schema: repere([-4, 4, -1, 7], [{ q: [1, 0, 0] }], [{ x: -2.236, y: 5, label: "−√5" }, { x: 2.236, y: 5, label: "√5" }], 5, true),
           reponses: [
-            { attendu: "-√(5) ; √(5)" },
+            { attendu: ["-√(5) ; √(5)", "±√(5)", "±√5"] },
           ],
           micros: ["auto_alg_equation_carre"],
         },
@@ -150,8 +150,8 @@ export const exercicesAutoEquationsPremiere: FicheExercicesData = {
           correction:
             "a) $49 = 7^2$ : $x = 7$ ou $x = -7$.\nb) Un carré n'est jamais négatif : aucune solution. $S = \\varnothing$.\nc) Seul $0$ a pour carré $0$ : $x = 0$.\n⚠️ Le piège au b) : répondre $x = -2$. Or $(-2)^2 = 4$, pas $-4$.\n⭐ Trois cas, trois nombres de solutions : deux, aucune, une.",
           reponses: [
-            { question: "a)", attendu: "-7 ; 7" },
-            { question: "b)", attendu: ["∅", "aucune", "aucune solution"] },
+            { question: "a)", attendu: ["-7 ; 7", "±7"] },
+            { question: "b)", attendu: ["∅", "aucune", "aucune solution", "pas de solution"] },
             { question: "c)", attendu: "0" },
           ],
           micros: ["auto_alg_equation_carre"],
@@ -196,7 +196,7 @@ export const exercicesAutoEquationsPremiere: FicheExercicesData = {
           correction:
             "On retire $x$ des deux côtés : $2x - 5 \\leqslant 1$.\nOn ajoute $5$ : $2x \\leqslant 6$.\nOn divise par $2$, un nombre POSITIF : le sens ne change pas. $x \\leqslant 3$.\n$S = \\left]-\\infty\\,;\\,3\\right]$ : le crochet est fermé en $3$, car $3$ est solution.\n⚠️ Le piège : un crochet ouvert en $3$. Avec $\\leqslant$, la borne est comprise.",
           reponses: [
-            { attendu: ["]-∞ ; 3]", "x ≤ 3"] },
+            { attendu: ["]-∞ ; 3]", "x ≤ 3", "x <= 3"] },
           ],
           micros: ["auto_alg_inequation"],
         },
@@ -237,7 +237,7 @@ export const exercicesAutoEquationsPremiere: FicheExercicesData = {
           schema: repere([-1, 11, -1, 14], [{ q: [0, 2, -4] }, { q: [0, -1, 20], couleur: ORANGE }], [{ x: 8, y: 12, label: "8 ; 12" }], undefined, true),
           reponses: [
             { question: "a)", attendu: "8 €" },
-            { question: "b)", attendu: "12" },
+            { question: "b)", attendu: ["12", "12 000"] },
           ],
           micros: ["auto_alg_equation_premier_degre"],
         },
@@ -287,7 +287,7 @@ export const exercicesAutoEquationsPremiere: FicheExercicesData = {
             ],
           ),
           reponses: [
-            { attendu: "6" },
+            { attendu: ["6", "x ≥ 6", "x >= 6", "à partir de 6"] },
           ],
           micros: ["auto_alg_inequation", "auto_alg_equation_premier_degre"],
         },
@@ -299,7 +299,7 @@ export const exercicesAutoEquationsPremiere: FicheExercicesData = {
             "On cherche $h$ tel que $18 - 6h < 0$.\nOn retire $18$ des deux côtés : $-6h < -18$.\nOn divise par $-6$, NÉGATIF : le sens s'inverse. $h > 3$.\nLa température est négative au-dessus de $3$ km d'altitude, soit $3\\,000$ m.\n✔️ À $h = 4$ : $18 - 24 = -6$ °C.\n⚠️ Le piège : oublier d'inverser, et conclure « en dessous de $3$ km »… là où il fait le plus chaud !",
           schema: droite(0, 6, { de: 3, deInclus: false }),
           reponses: [
-            { attendu: ["h > 3", "au-dessus de 3 km", "3 km"] },
+            { attendu: ["h > 3", "au-dessus de 3 km", "3 km", "3 000 m"] },
           ],
           micros: ["auto_alg_inequation"],
         },
@@ -338,7 +338,7 @@ export const exercicesAutoEquationsPremiere: FicheExercicesData = {
           reponses: [
             { question: "a) années", attendu: "20" },
             { question: "a) population", attendu: "70 000" },
-            { question: "b)", attendu: ["n > 20", "après 20 ans"] },
+            { question: "b)", attendu: ["n > 20", "après 20 ans", "plus de 20 ans", "au-delà de 20 ans"] },
           ],
           micros: ["auto_alg_equation_premier_degre", "auto_alg_inequation"],
         },
@@ -353,7 +353,7 @@ export const exercicesAutoEquationsPremiere: FicheExercicesData = {
             { question: "a)", attendu: "50 €" },
             { question: "b)", attendu: "50" },
             { question: "c)", attendu: "40" },
-            { question: "d)", attendu: ["40", "x ≥ 40"] },
+            { question: "d)", attendu: ["40", "x ≥ 40", "x >= 40", "au moins 40"] },
           ],
           micros: ["auto_alg_equation_quotient", "auto_alg_inequation"],
         },
@@ -393,7 +393,7 @@ export const exercicesAutoEquationsPremiere: FicheExercicesData = {
           ),
           reponses: [
             { question: "a)", attendu: "13 km" },
-            { question: "b)", attendu: ["x < 6", "moins de 6 km"] },
+            { question: "b)", attendu: ["x < 6", "moins de 6 km", "moins de 6"] },
             { question: "c)", attendu: "6 km" },
           ],
           micros: ["auto_alg_inequation"],

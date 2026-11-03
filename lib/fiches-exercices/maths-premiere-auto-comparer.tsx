@@ -93,7 +93,7 @@ export const exercicesAutoComparerPremiere: FicheExercicesData = {
           correction:
             "Les deux nombres sont positifs : on peut comparer par le quotient.\n$\\dfrac{0{,}6^2}{0{,}6} = 0{,}6$, qui est plus petit que $1$.\nDonc $0{,}6^2 < 0{,}6$.\n✔️ Vérification : $0{,}6^2 = 0{,}36$.\n⚠️ Élever au carré n'agrandit pas toujours : pour un nombre entre $0$ et $1$, le carré est PLUS PETIT que le nombre.",
           reponses: [
-            { attendu: ["0,6", "0,6 > 0,6^2", "0,6^2 < 0,6"] },
+            { attendu: ["0,6", "0,6 > 0,6^2", "0,6^2 < 0,6", "0,6 > 0,6²", "0,6² < 0,6", "0,6 > 0,36", "0,36 < 0,6"] },
           ],
           micros: ["auto_num_comparer_quotient"],
         },
@@ -149,7 +149,7 @@ export const exercicesAutoComparerPremiere: FicheExercicesData = {
             { x: 1, y: 1, label: "" },
           ]),
           reponses: [
-            { attendu: ["x^2 < x", "x > x^2"] },
+            { attendu: ["x^2 < x", "x > x^2", "x² < x", "x > x²"] },
           ],
           micros: ["auto_num_comparer_difference"],
         },
@@ -158,7 +158,7 @@ export const exercicesAutoComparerPremiere: FicheExercicesData = {
           correction:
             "Tout sur $12$ : $A = \\dfrac{4}{12} + \\dfrac{3}{12} = \\dfrac{7}{12}$ et $B = \\dfrac{6}{12} + \\dfrac{1}{12} = \\dfrac{7}{12}$.\n$A - B = 0$ : les deux nombres sont ÉGAUX.\n⚠️ Une comparaison a trois réponses possibles : plus grand, plus petit… ou égal.",
           reponses: [
-            { attendu: ["égaux", "égales", "A = B", "B = A"] },
+            { attendu: ["égaux", "égales", "A = B"] },
           ],
           micros: ["auto_num_fractions_comparer", "auto_num_comparer_difference"],
         },
@@ -253,7 +253,7 @@ export const exercicesAutoComparerPremiere: FicheExercicesData = {
           reponses: [
             { question: "pays", attendu: ["Allemagne", "l'Allemagne"] },
             { question: "densité France", attendu: "120" },
-            { question: "densité Allemagne", attendu: "235", tolerance: 1 },
+            { question: "densité Allemagne", attendu: "235", tolerance: 0.5 },
           ],
           micros: ["auto_num_comparer_quotient"],
         },
@@ -328,9 +328,9 @@ export const exercicesAutoComparerPremiere: FicheExercicesData = {
             { label: "B (millions)", value: 1410 },
           ]),
           reponses: [
-            { question: "a)", attendu: "20 millions" },
-            { question: "b) quotient", attendu: "1,014", tolerance: 0.001 },
-            { question: "b) pourcentage", attendu: "1,4 %", tolerance: 0.001 },
+            { question: "a)", attendu: ["20 millions", "20", "20 000 000"] },
+            { question: "b) quotient", attendu: "1,014", tolerance: 0.0005 },
+            { question: "b) pourcentage", attendu: "1,4 %", tolerance: 0.0003 },
             { question: "c)", attendu: ["les deux", "tous les deux"] },
           ],
           micros: ["auto_num_comparer_difference", "auto_num_comparer_quotient"],

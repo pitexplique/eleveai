@@ -70,7 +70,7 @@ export const exercicesAutoDroitesPremiere: FicheExercicesData = {
           correction:
             "Affine : de la forme $ax + b$, sans carré et sans $x$ au dénominateur.\n$f$ est affine ($a = 3$, $b = -2$). $g$ est affine ET linéaire ($b = 0$). $u(x) = \\dfrac{x}{2} + 4 = 0{,}5x + 4$ est affine.\n$l(x) = 7$ est affine aussi, avec $a = 0$ : sa droite est horizontale.\n$h$ (un carré) et $k$ ($x$ au dénominateur) ne sont pas affines : leurs courbes ne sont pas des droites.\n⚠️ $\\dfrac{x}{2}$ est affine, $\\dfrac{1}{x}$ ne l'est pas : tout dépend de la place du $x$.",
           reponses: [
-            { question: "affines", attendu: "f ; g ; l ; u" },
+            { question: "affines", attendu: ["f ; g ; l ; u", "f, g, l, u", "f, g, l et u"] },
             { question: "linéaires", attendu: "g" },
           ],
           micros: ["auto_fct_lineaire_affine"],
@@ -193,7 +193,7 @@ export const exercicesAutoDroitesPremiere: FicheExercicesData = {
             { question: "a) T1(x)", attendu: "x + 3" },
             { question: "a) T2(x)", attendu: "2x" },
             { question: "a) linéaire", attendu: ["T2", "T_2"] },
-            { question: "c)", attendu: ["moins de 3 km", "x < 3"] },
+            { question: "c)", attendu: ["moins de 3 km", "moins de 3", "x < 3"] },
           ],
           micros: ["auto_fct_lineaire_affine", "auto_fct_tracer_droite"],
         },
@@ -311,7 +311,7 @@ export const exercicesAutoDroitesPremiere: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: "0,5x + 4" },
             { question: "b) premier point", attendu: "(0 ; 4)", ordre: true },
-            { question: "c)", attendu: "2026" },
+            { question: "c)", attendu: ["2026", "en 2026"] },
           ],
           micros: ["auto_fct_tracer_droite", "auto_fct_lire_equation_reduite"],
         },
@@ -364,7 +364,7 @@ export const exercicesAutoDroitesPremiere: FicheExercicesData = {
             { question: "a) par an", attendu: "0,2" },
             { question: "a) par décennie", attendu: "2" },
             { question: "b)", attendu: "y = 2x" },
-            { question: "d)", attendu: "2040" },
+            { question: "d)", attendu: ["2040", "en 2040"] },
           ],
           micros: ["auto_fct_coefficient_directeur", "auto_fct_lire_equation_reduite", "auto_fct_tracer_droite"],
         },

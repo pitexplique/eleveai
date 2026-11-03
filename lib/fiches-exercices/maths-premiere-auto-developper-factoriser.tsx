@@ -139,7 +139,7 @@ export const exercicesAutoDevelopperFactoriserPremiere: FicheExercicesData = {
             ]),
           ),
           reponses: [
-            { attendu: ["(x+5)^2", "(5+x)^2"], exact: true },
+            { attendu: ["(x+5)^2", "(5+x)^2", "(x+5)(x+5)"], exact: true },
           ],
           micros: ["auto_alg_factoriser_identite"],
         },
@@ -148,7 +148,7 @@ export const exercicesAutoDevelopperFactoriserPremiere: FicheExercicesData = {
           correction:
             "Le facteur commun est une parenthèse entière : $(x + 1)$.\nOn le sort, et on garde ce qui reste de chaque terme : $(x + 1)\\left[(2x - 3) + (x + 4)\\right]$.\nOn réduit le crochet : $2x - 3 + x + 4 = 3x + 1$.\nDonc l'expression vaut $(x + 1)(3x + 1)$.\n⚠️ Le piège : tout développer. Ce serait juste, mais on voulait un PRODUIT.",
           reponses: [
-            { attendu: ["(x+1)(3x+1)", "(3x+1)(x+1)", "(1+x)(3x+1)", "(x+1)(1+3x)"], exact: true },
+            { attendu: ["(x+1)(3x+1)", "(3x+1)(x+1)", "(1+x)(3x+1)", "(x+1)(1+3x)", "(3x+1)(1+x)", "(1+3x)(x+1)"], exact: true },
           ],
           micros: ["auto_alg_factoriser_commun"],
         },
@@ -179,7 +179,7 @@ export const exercicesAutoDevelopperFactoriserPremiere: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: ["x^2+6x+9", "9+6x+x^2"], exact: true },
             { question: "b) gain d'aire", attendu: "6x + 9" },
-            { question: "c)", attendu: "39 ha" },
+            { question: "c)", attendu: ["39 ha", "39 hm²"] },
           ],
           micros: ["auto_alg_identites", "auto_alg_developper"],
         },
@@ -288,7 +288,7 @@ export const exercicesAutoDevelopperFactoriserPremiere: FicheExercicesData = {
           correction:
             "a) Deux carrés, $4x^2 = (2x)^2$ et $9 = 3^2$, et un terme du milieu négatif : on pense à $(a - b)^2$.\nLe double produit vaut $2 \\times 2x \\times 3 = 12x$ : c'est bien lui.\n$4x^2 - 12x + 9 = (2x - 3)^2$.\nb) Une différence de deux carrés : $(x + 3)^2 - 5^2$, avec $a = x + 3$ et $b = 5$.\n$(a - b)(a + b) = (x + 3 - 5)(x + 3 + 5) = (x - 2)(x + 8)$.\n✔️ Test en $x = 0$ : $3^2 - 25 = -16$, et $(-2) \\times 8 = -16$.\n⚠️ Le piège au b) : oublier que $a$ est TOUTE la parenthèse $x + 3$.",
           reponses: [
-            { question: "a)", attendu: ["(2x-3)^2", "(3-2x)^2"], exact: true },
+            { question: "a)", attendu: ["(2x-3)^2", "(3-2x)^2", "(2x-3)(2x-3)"], exact: true },
             { question: "b)", attendu: ["(x-2)(x+8)", "(x+8)(x-2)"], exact: true },
           ],
           micros: ["auto_alg_factoriser_identite"],
@@ -353,7 +353,7 @@ export const exercicesAutoDevelopperFactoriserPremiere: FicheExercicesData = {
           correction:
             "a) $(a + b)^2 - (a - b)^2 = (a^2 + 2ab + b^2) - (a^2 - 2ab + b^2) = 4ab$.\nb) Avec $A = a + b$ et $B = a - b$ : $A - B = 2b$ et $A + B = 2a$. L'expression vaut $2b \\times 2a = 4ab$. Même résultat.\nc) On pose $a = 23$ et $b = 17$ : $a + b = 40$ et $a - b = 6$.\n$4 \\times 23 \\times 17 = 40^2 - 6^2 = 1\\,600 - 36 = 1\\,564$.\nDonc $23 \\times 17 = 1\\,564 \\div 4 = 391$.\nd) La recette est de $391$ €.\n⭐ Une multiplication devient une soustraction de deux carrés, lus dans une table, puis une division par $4$.\n⚠️ Le piège au a) : oublier les parenthèses autour de $(a - b)^2$. Le signe moins porte sur ses trois termes.",
           reponses: [
-            { question: "a)", attendu: "4ab" },
+            { question: "a)", attendu: ["4ab", "4ba", "4×a×b", "4a×b"], exact: true },
             { question: "c)", attendu: "391" },
             { question: "d)", attendu: "391 €" },
           ],
@@ -374,7 +374,7 @@ export const exercicesAutoDevelopperFactoriserPremiere: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: ["-x^2+6x-5", "-5+6x-x^2"], exact: true },
             { question: "b)", attendu: ["(5-x)(x-1)", "(x-1)(5-x)", "(-x+5)(x-1)", "(x-1)(-x+5)"], exact: true },
-            { question: "c)", attendu: "1 ; 5" },
+            { question: "c)", attendu: ["1 ; 5", "100 ; 500"] },
             { question: "d) bénéfice maximal", attendu: ["4 000 €", "4"] },
             { question: "d) production", attendu: ["300 objets", "3"] },
           ],

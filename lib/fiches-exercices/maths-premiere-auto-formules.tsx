@@ -91,7 +91,7 @@ export const exercicesAutoFormulesPremiere: FicheExercicesData = {
           correction:
             "On remplace chaque lettre par sa valeur : $R = \\dfrac{20^2}{80}$.\nLe carré d'abord : $20^2 = 20 \\times 20 = 400$.\nLa division ensuite : $\\dfrac{400}{80} = 5$.\nLa résistance vaut $5$ ohms.\n⚠️ $20^2$ veut dire $20 \\times 20$, et non $20 \\times 2$.\n⭐ C'est la question du sujet des Antilles, en juin 2026.",
           reponses: [
-            { attendu: "5" },
+            { attendu: ["5", "5 Ω"] },
           ],
           micros: ["auto_alg_application_formule"],
         },
@@ -112,7 +112,7 @@ export const exercicesAutoFormulesPremiere: FicheExercicesData = {
           schema: tableau(["durée", "1 h", "2 h", "2 h 30"], ["distance (km)", 60, 120, 150]),
           reponses: [
             { question: "t", attendu: "d/v" },
-            { question: "durée", attendu: ["2,5 h", "2 h 30"] },
+            { question: "durée", attendu: ["2,5 h", "2 h 30", "2 h 30 min"] },
           ],
           micros: ["auto_alg_isoler_variable", "auto_alg_application_formule"],
         },
@@ -170,9 +170,9 @@ export const exercicesAutoFormulesPremiere: FicheExercicesData = {
             "a) $1{,}8 \\times 20 + 32 = 36 + 32 = 68$ °F.\n$1{,}8 \\times 0 + 32 = 32$ °F : l'eau gèle à $32$ °F.\n$1{,}8 \\times (-10) + 32 = -18 + 32 = 14$ °F.\nb) D'abord on retire $32$ : $F - 32 = 1{,}8 \\times C$. Puis on divise par $1{,}8$ : $C = \\dfrac{F - 32}{1{,}8}$.\nc) $C = \\dfrac{50 - 32}{1{,}8} = \\dfrac{18}{1{,}8} = 10$ °C. Il fait frais.\n⚠️ Le piège : diviser $50$ par $1{,}8$ avant de retirer $32$. On défait les opérations dans l'ordre INVERSE.",
           schema: tableau(["°C", "−10", "0", "10", "20"], ["°F", 14, 32, 50, 68]),
           reponses: [
-            { question: "a) 20 °C ; 0 °C ; -10 °C", attendu: "68 ; 32 ; 14", ordre: true },
+            { question: "a) 20 °C ; 0 °C ; -10 °C", attendu: ["68 ; 32 ; 14", "68 °F ; 32 °F ; 14 °F"], ordre: true },
             { question: "b)", attendu: ["(F-32)/1,8", "(F-32)÷1,8"], exact: true },
-            { question: "c)", attendu: ["10", "10 °C"] },
+            { question: "c)", attendu: ["10", "10 °C", "non"] },
           ],
           micros: ["auto_alg_application_formule", "auto_alg_isoler_variable"],
         },

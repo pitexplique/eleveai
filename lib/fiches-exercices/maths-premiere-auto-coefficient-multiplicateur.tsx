@@ -94,10 +94,10 @@ export const exercicesAutoCoefficientMultiplicateurPremiere: FicheExercicesData 
           correction:
             "On compare le coefficient à $1$ : plus grand que $1$, c'est une hausse ; plus petit, une baisse.\n$1{,}08 = 1 + 0{,}08$ : hausse de $8$ %.\n$0{,}92 = 1 - 0{,}08$ : baisse de $8$ %.\n$1{,}5 = 1 + 0{,}5$ : hausse de $50$ %.\n$0{,}6 = 1 - 0{,}4$ : baisse de $40$ %.\n⚠️ $\\times 0{,}6$ n'est pas « $-60$ % » : on GARDE $60$ %, on perd $40$ %.",
           reponses: [
-            { question: "× 1,08", attendu: ["8 %", "+8 %", "hausse de 8 %"] },
-            { question: "× 0,92", attendu: ["-8 %", "baisse de 8 %"] },
-            { question: "× 1,5", attendu: ["50 %", "+50 %", "hausse de 50 %"] },
-            { question: "× 0,6", attendu: ["-40 %", "baisse de 40 %"] },
+            { question: "× 1,08", attendu: ["8 %", "+8 %", "hausse de 8 %", "hausse de 8"] },
+            { question: "× 0,92", attendu: ["-8 %", "baisse de 8 %", "baisse de 8"] },
+            { question: "× 1,5", attendu: ["50 %", "+50 %", "hausse de 50 %", "hausse de 50"] },
+            { question: "× 0,6", attendu: ["-40 %", "baisse de 40 %", "baisse de 40"] },
           ],
           micros: ["auto_evo_additif_multiplicatif", "auto_evo_diminution"],
         },
@@ -147,9 +147,9 @@ export const exercicesAutoCoefficientMultiplicateurPremiere: FicheExercicesData 
           correction:
             "$1{,}005 = 1 + 0{,}005$ : hausse de $0{,}5$ %.\n$0{,}995 = 1 - 0{,}005$ : baisse de $0{,}5$ %.\n$3 = 1 + 2$ : hausse de $200$ %.\n⚠️ Tripler, c'est $+200$ %, et non $+300$ % : on garde le prix entier, et on en ajoute deux fois autant.\n⭐ $0{,}005 = \\dfrac{0{,}5}{100}$ : un demi pour cent.",
           reponses: [
-            { question: "× 1,005", attendu: ["0,5 %", "+0,5 %", "hausse de 0,5 %"] },
-            { question: "× 0,995", attendu: ["-0,5 %", "baisse de 0,5 %"] },
-            { question: "× 3", attendu: ["200 %", "+200 %", "hausse de 200 %"] },
+            { question: "× 1,005", attendu: ["0,5 %", "+0,5 %", "hausse de 0,5 %", "hausse de 0,5"] },
+            { question: "× 0,995", attendu: ["-0,5 %", "baisse de 0,5 %", "baisse de 0,5"] },
+            { question: "× 3", attendu: ["200 %", "+200 %", "hausse de 200 %", "hausse de 200"] },
           ],
           micros: ["auto_evo_additif_multiplicatif", "auto_evo_diminution"],
         },
