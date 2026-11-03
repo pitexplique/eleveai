@@ -88,8 +88,30 @@ const ouiNon = (q: Q, vrai: boolean) =>
 
 // ─── Proportionnalité : relevés, tableaux, coefficient, quatrième ──────────
 
+/** Le tableau du canvas (2 lignes, sans case vide), en nombres ; null sinon. */
+function tableauLu(q: Q): number[][] | null {
+  const c = q.canvas as { kind?: string; values?: string[][] } | undefined;
+  if (c?.kind !== "tableau_proportionnalite" || !c.values || c.values.length !== 2) return null;
+  if (c.values.flat().includes("?")) return null;
+  return c.values.map((r) => r.map(num));
+}
+
+/**
+ * ★1-★2 sans histoire (03/11/2026) : les égalités « x = 4 », « y = 12 » du
+ * texte, dans l'ordre (une lettre seule devant « = »).
+ */
+function egalites(t: string): { l: string; v: number }[] {
+  return [...t.matchAll(/(?<![\wÀ-ÿ])([A-Za-z]) = (\d+(?:,\d+)?)/g)].map((m) => ({ l: m[1], v: num(m[2]) }));
+}
+
 /** Reconnaître : les relevés (n → m) ont-ils tous le même quotient ? */
 function cReconnaitre(q: Q): string[] {
+  const tab = tableauLu(q);
+  if (tab) {
+    const [A, B] = tab;
+    const p: string[] = new Set(A).size !== A.length ? ["deux colonnes pour la même valeur"] : [];
+    return [...p, ...ouiNon(q, A.every((a, i) => egal(B[i] * A[0], B[0] * a)))];
+  }
   const ns = nombres(q.text);
   if (ns.length < 4 || ns.length % 2) return [`relevés illisibles : ${ns.join(", ")}`];
   const h = ns.length / 2;
@@ -144,6 +166,13 @@ function convertir(a: { v: number; u: string }, b: { v: number; u: string }, t: 
 /** Quatrième proportionnelle (texte ou tableau). */
 function cQuatrieme(q: Q): string[] {
   if (q.canvas) return cTableau(q);
+  // ★2 sans histoire : « Pour x = 3, y = 12. Que vaut y pour x = 5 ? »
+  const eg = egalites(q.text);
+  if (eg.length === 3 && eg[0].l !== eg[1].l) {
+    const [a, b, c] = eg;
+    const juste = c.l === a.l ? (c.v * b.v) / a.v : c.l === b.l ? (c.v * a.v) / b.v : null;
+    return verifierReponse(q, juste, "", "quatrième proportionnelle");
+  }
   const gs = grandeurs(q.text);
   if (gs.length !== 3) return [`trois données attendues, lues : ${gs.map((x) => `${x.v} ${x.u}`).join(", ")}`];
   const r = convertir(gs[0], gs[1], gs[2]);
@@ -168,6 +197,20 @@ function cProbleme(q: Q): string[] {
 /** Le coefficient (valeur pour une unité), ou son usage. */
 function cCoeff(q: Q): string[] {
   const t = q.text;
+  // ★2 sans histoire : un tableau de nombres, toutes les colonnes ont le même quotient.
+  const tab = tableauLu(q);
+  if (tab) {
+    const ks = tab[0].map((a, j) => tab[1][j] / a);
+    const p = ks.every((k) => egal(k, ks[0])) ? [] : ["le tableau n'est pas un tableau de proportionnalité"];
+    return [...p, ...verifierReponse(q, ks[0], "", "coefficient du tableau")];
+  }
+  // ★1-★2 sans histoire : « x = 4 … y = 20 ».
+  const eg = egalites(t);
+  if (eg.length === 2 && eg[0].l !== eg[1].l) {
+    // « y = 20 quand x = 4 » : l'ordre change, le coefficient (≥ 2) est le grand ÷ le petit.
+    const k = Math.max(eg[0].v, eg[1].v) / Math.min(eg[0].v, eg[1].v);
+    return [...(entier(k) ? [] : [`coefficient ${k} pas entier`]), ...verifierReponse(q, k, "", "coefficient")];
+  }
   const gs = grandeurs(t);
   // « … le prix d’un kilogramme est de 3 €. Calcule le prix de 5 kg » : on l'applique.
   if (/est de \d+ [^.]*\. Calcule/.test(t)) {
@@ -303,6 +346,12 @@ function formuleVraie(f: string, couples: Record<string, number>[]): boolean | n
   return null;
 }
 
+/** Les lettres de la bonne formule « y = 3 × x » : [y, x]. */
+function lettresFormule(q: Q): [string, string] {
+  const m = String(q.expected?.[0] ?? "").match(/^(\w) = \d+ × (\w)$/);
+  return m ? [m[1], m[2]] : ["y", "x"];
+}
+
 function couplesDuTableau(q: Q): Record<string, number>[] | null {
   const c = q.canvas as { kind?: string; rowLabels?: string[]; values?: string[][] } | undefined;
   if (c?.kind !== "tableau_proportionnalite" || !c.values || !c.rowLabels) return null;
@@ -318,9 +367,13 @@ function cFormules(q: Q, couples: Record<string, number>[] | null): string[] {
 }
 
 function cRelationPaire(q: Q): string[] {
-  const x = q.text.match(/x = (\d+)/)?.[1];
-  const y = q.text.match(/y = (\d+)/)?.[1];
-  if (!x || !y) return ["x et y illisibles"];
+  // « Complète la relation : b = … × a » : les lettres ne sont pas toujours x et y (03/11/2026).
+  const rel = q.text.match(/(\w) = … × (\w)/);
+  const [Y, X] = rel ? [rel[1], rel[2]] : ["y", "x"];
+  const eg = egalites(q.text);
+  const x = eg.find((e) => e.l === X)?.v;
+  const y = eg.find((e) => e.l === Y)?.v;
+  if (!x || !y) return [`${X} et ${Y} illisibles`];
   const k = Number(y) / Number(x);
   return [...(entier(k) ? [] : [`k = ${k} pas entier`]), ...verifierReponse(q, k, "", "coefficient y ÷ x")];
 }
@@ -328,7 +381,8 @@ function cRelationPaire(q: Q): string[] {
 function cRelationTableau(q: Q): string[] {
   const c = couplesDuTableau(q);
   if (!c) return ["tableau absent"];
-  const ks = c.map((col) => col.y / col.x);
+  const lignes = (q.canvas as { rowLabels?: string[] }).rowLabels ?? ["x", "y"];
+  const ks = c.map((col) => col[lignes[1]] / col[lignes[0]]);
   const p = ks.every((k) => egal(k, ks[0])) ? [] : ["le tableau n'est pas un tableau de proportionnalité"];
   if (q.format === "qcm") return [...p, ...cFormules(q, c)];
   return [...p, ...verifierReponse(q, ks[0], "", "coefficient du tableau")];
@@ -337,7 +391,8 @@ function cRelationTableau(q: Q): string[] {
 function cRelationGraphique(q: Q): string[] {
   const r = repere(q);
   if (!r) return ["graphique absent"];
-  return cFormules(q, r.pts.map((pt) => ({ x: pt.x, y: pt.y })));
+  const [Y, X] = lettresFormule(q);
+  return cFormules(q, r.pts.map((pt) => ({ [X]: pt.x, [Y]: pt.y })));
 }
 
 // ─── Pourcentages ──────────────────────────────────────────────────────────
@@ -607,6 +662,8 @@ export const CORRECTEURS: CorrecteursMaths = avecRegleMotsCles({
   prop_relation_tpl_4_graphique: cRelationGraphique,
   prop_relation_tpl_5_piege: (q) => cFormules(q, couplesDuTableau(q)),
   prop_relation_tpl_6_piege_bis: (q) => cFormules(q, couplesDuTableau(q)),
+  prop_relation_tpl_7_contexte_paire: cRelationPaire,
+  prop_relation_tpl_8_contexte_graphique: cRelationGraphique,
   // Problèmes
   prop_probleme_tpl_1: cProbleme,
   prop_probleme_tpl_2: cProbleme,

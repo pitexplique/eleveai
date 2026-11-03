@@ -2316,8 +2316,8 @@ function troisAbscisses(xmax: number) {
 }
 
 /** Les formules fausses d'une table y = k × x dont la 1re colonne est (n ; m). */
-function formulesFausses(k: number, n: number, m: number) {
-  return [`y = x + ${m - n}`, `x = ${k} × y`, `y = ${k + 1} × x`, `y = x ÷ ${k}`];
+function formulesFausses(k: number, n: number, m: number, X = "x", Y = "y") {
+  return [`${Y} = ${X} + ${m - n}`, `${X} = ${k} × ${Y}`, `${Y} = ${k + 1} × ${X}`, `${Y} = ${X} ÷ ${k}`];
 }
 
 /**
@@ -2326,9 +2326,9 @@ function formulesFausses(k: number, n: number, m: number) {
  * « y = 3*x » étaient comptés faux). Les espaces sont ignorés, et « 3*x »,
  * « 3 × x » valent « 3x » pour le correcteur (lib/answerMatch.ts).
  */
-function relationAcceptee(k: number) {
-  const formes = [`${k}x`, `${k}.x`, `x*${k}`, `x×${k}`];
-  return [String(k), ...formes, ...formes.map((f) => `y=${f}`)];
+function relationAcceptee(k: number, X = "x", Y = "y") {
+  const formes = [`${k}${X}`, `${k}.${X}`, `${X}*${k}`, `${X}×${k}`];
+  return [String(k), ...formes, ...formes.map((f) => `${Y}=${f}`)];
 }
 
 /** ★1 — Une seule paire (n ; m) : compléter y = … × x. */
@@ -2502,6 +2502,714 @@ function genRelationPiege() {
   };
 }
 
+/* =========================================================
+   ★1-★2 : DES QUESTIONS SIMPLES, SANS HISTOIRE — 03/11/2026
+   ---------------------------------------------------------
+   ⛔ Frédéric (03/11, en testant ses élèves) : « d'abord des questions
+   simples, le contexte est réservé aux trois étoiles ». Aux étoiles 1 et 2,
+   plus de pommes, de cycliste ni de recette : un tableau de nombres, une
+   paire x → y, un graphique « y selon x », un pourcentage d'un nombre (ou
+   d'une longueur, d'une masse…). Les situations restent à partir de ★3
+   (mêmes générateurs qu'avant, appelés par les gabarits ★3 et plus).
+   Variété (scripts/mesurer-squelettes-coach.ts) : ce sont les LETTRES des
+   grandeurs (x/y, a/b, n/p…), les UNITÉS et les TOURNURES qui changent.
+   ⚠️ Les générateurs « avec contexte » sont aussi importés par la 3e
+   (proportionnalite-renfort.ts) et la seconde : on ne les touche pas, on
+   écrit ici des versions simples à part.
+   ⚠️ Les correcteurs relisent le TABLEAU (canvas) ou les égalités
+   « x = 4 », « y = 12 » du texte : garder cette écriture.
+   ========================================================= */
+
+const LETTRES: Array<[string, string]> = [
+  ["x", "y"],
+  ["a", "b"],
+  ["n", "p"],
+  ["u", "v"],
+  ["t", "d"],
+  ["A", "B"],
+  ["r", "s"],
+];
+
+/**
+ * ⭐ 03/11/2026 — LONGUEUR (REGLES-6E.md, visée aussi en 4e) : ★1 en 12 mots
+ * au plus, ★2 en 15 mots au plus. On écrit plusieurs tournures et on ne tire
+ * que celles qui tiennent, une fois les nombres posés.
+ */
+const nbMots = (t: string) => t.trim().split(/\s+/).length;
+const MOTS_MAX = { 1: 12, 2: 15 } as const;
+function courte(cands: string[], niveau: 1 | 2) {
+  const ok = cands.filter((c) => nbMots(c) <= MOTS_MAX[niveau]);
+  return randomChoice(ok.length ? ok : cands);
+}
+
+/** ★1-★2 — Reconnaître un tableau de proportionnalité (oui / non), sans histoire. */
+export function genReconnaitreSimple(niveau: 1 | 2) {
+  const [X, Y] = randomChoice(LETTRES);
+  const k = randomChoice(niveau === 1 ? [2, 3, 4, 5, 10] : [2, 3, 4, 5, 6, 7, 8, 9]);
+  const prop = Math.random() < 0.5;
+  let ns: number[];
+  if (niveau === 1) {
+    const n1 = randomInt(1, 6);
+    ns = [n1, n1 * randomChoice([2, 3])];
+  } else {
+    ns = shuffle([2, 3, 4, 5, 6, 7, 8, 9, 10, 12])
+      .slice(0, randomChoice([2, 3]))
+      .sort((a, b) => a - b);
+  }
+  const ms = ns.map((n) => n * k);
+  if (!prop) {
+    // on fausse une valeur (pas la première) d'un petit écart
+    const i = randomInt(1, ns.length - 1);
+    ms[i] += randomChoice([1, 2, 3]) * (Math.random() < 0.5 && ms[i] > 6 ? -1 : 1);
+  }
+  const text = courte(
+    [
+      "Ce tableau est-il un tableau de proportionnalité ?",
+      `Ce tableau de ${X} et ${Y} est-il proportionnel ?`,
+      `La grandeur ${Y} est-elle proportionnelle à ${X} ?`,
+      `Multiplie-t-on toujours ${X} par le même nombre pour obtenir ${Y} ?`,
+      `Calcule ${Y} ÷ ${X} pour chaque colonne. Est-ce proportionnel ?`,
+      `Observe ce tableau. La grandeur ${Y} est-elle proportionnelle à ${X} ?`,
+      `Ce tableau donne ${Y} selon ${X}. Est-ce proportionnel ?`,
+    ],
+    niveau,
+  );
+  const calculs = ns.map((n, i) => rapportTexte(ms[i], n)).join(" ; ");
+  return {
+    text,
+    format: "qcm" as const,
+    choices: ["oui", "non"],
+    expected: [prop ? "oui" : "non"],
+    comparator: "mcq_exact" as const,
+    explanation: expl(
+      DEF_PROP,
+      `on calcule ${Y} ÷ ${X} pour chaque colonne.`,
+      `${calculs}.`,
+      prop
+        ? `le quotient vaut toujours ${k} : c’est un tableau de proportionnalité.`
+        : "les quotients ne sont pas tous égaux : ce n’est pas un tableau de proportionnalité.",
+    ),
+    canvas: tableauProportionnaliteCanvas({
+      rowLabels: [X, Y],
+      values: [ns.map(String), ms.map(String)],
+      missing: [],
+    }),
+  };
+}
+
+/** Une paire de valeurs de x et un coefficient, sans histoire. */
+function paireSimple(niveau: 1 | 2) {
+  const k = randomChoice(niveau === 1 ? [2, 3, 4, 5, 10] : [2, 3, 4, 5, 6, 7, 8, 9, 12, 15]);
+  let n1: number;
+  let n2: number;
+  if (niveau === 1) {
+    n1 = randomInt(1, 6);
+    n2 = n1 * randomChoice([2, 3]);
+  } else {
+    n1 = randomInt(2, 12);
+    do {
+      n2 = randomInt(2, 15);
+    } while (n2 === n1);
+  }
+  return { k, n1, n2, m1: n1 * k, m2: n2 * k };
+}
+
+/** ★1-★2 — Compléter un tableau de proportionnalité de nombres. */
+export function genTableauSimple(niveau: 1 | 2) {
+  const [X, Y] = randomChoice(LETTRES);
+  const { k, n1, n2, m1, m2 } = paireSimple(niveau);
+  // ★1 : la case vide est toujours en bas ; ★2 : une fois sur deux en haut.
+  const enHaut = niveau === 2 && Math.random() < 0.5;
+  const Z = enHaut ? X : Y;
+  const text = courte(
+    [
+      `Complète ce tableau de proportionnalité : quelle valeur de ${Z} manque ?`,
+      `Tableau de ${X} et ${Y} proportionnel : que vaut la case vide ?`,
+      `La grandeur ${Y} est proportionnelle à ${X}. Calcule la case vide.`,
+      `Ici ${X} = ${n1} donne ${Y} = ${m1}. Calcule la case vide.`,
+      `Trouve le nombre caché par « ? » sur la ligne ${Z}.`,
+      `Même coefficient de ${X} à ${Y} : calcule la case vide.`,
+      `Calcule la case vide des lignes ${X} et ${Y}.`,
+      `Quel nombre remplace « ? » sur la ligne ${Z} ?`,
+    ],
+    niveau,
+  );
+  const rep = enHaut ? n2 : m2;
+  const caseVide = enHaut ? { row: 0, col: 1 } : { row: 1, col: 1 };
+  return {
+    text,
+    format: "short" as const,
+    expected: attendu(rep),
+    comparator: "number_equal" as const,
+    explanation: expl(
+      `dans un tableau de proportionnalité, on passe de ${X} à ${Y} en multipliant toujours par le même coefficient.`,
+      `coefficient = ${m1} ÷ ${n1} = ${k}.`,
+      enHaut ? `on remonte en divisant : ${m2} ÷ ${k} = ${n2}.` : `${n2} × ${k} = ${m2}.`,
+      `la valeur manquante est ${rep}.`,
+    ),
+    canvas: tableauProportionnaliteCanvas({
+      rowLabels: [X, Y],
+      values: enHaut
+        ? [
+            [String(n1), "?"],
+            [String(m1), String(m2)],
+          ]
+        : [
+            [String(n1), String(n2)],
+            [String(m1), "?"],
+          ],
+      missing: [caseVide],
+      highlightedCells: [caseVide],
+    }),
+  };
+}
+
+/** ★1-★2 — Le coefficient de proportionnalité d'une paire (★1) ou d'un tableau (★2). */
+export function genCoeffSimple(niveau: 1 | 2) {
+  const [X, Y] = randomChoice(LETTRES);
+  const { k, n1: n, n2, m1: m, m2 } = paireSimple(niveau);
+  const enTexte = [
+    `Ici ${X} = ${n} donne ${Y} = ${m}. Quel est le coefficient ?`,
+    `${X} = ${n} et ${Y} = ${m}. Par quel nombre multiplie-t-on ${X} ?`,
+    `Pour ${X} = ${n}, ${Y} = ${m}. Trouve le coefficient de proportionnalité.`,
+    `${X} = ${n} correspond à ${Y} = ${m}. Calcule ${Y} ÷ ${X}.`,
+    `Calcule le coefficient : ${X} = ${n} donne ${Y} = ${m}.`,
+    `${Y} = ${m} quand ${X} = ${n}. Quel est le coefficient ?`,
+    `Coefficient de proportionnalité : ${X} = ${n} donne ${Y} = ${m}. Lequel ?`,
+    `On passe de ${X} = ${n} à ${Y} = ${m}. Par quel nombre multiplie-t-on ?`,
+    `Si ${X} = ${n}, ${Y} = ${m}. Complète : ${Y} = … × ${X}.`,
+    `${X} = ${n}, ${Y} = ${m}. Quel est le coefficient de proportionnalité ?`,
+    `Proportionnalité : ${X} = ${n} donne ${Y} = ${m}. Coefficient ?`,
+    `Par quel nombre passer de ${X} = ${n} à ${Y} = ${m} ?`,
+    `${X} = ${n} donne ${Y} = ${m}. Combien vaut ${Y} ÷ ${X} ?`,
+    `Quel coefficient transforme ${X} = ${n} en ${Y} = ${m} ?`,
+    `Avec ${X} = ${n} et ${Y} = ${m}, trouve le coefficient.`,
+    `Si ${X} = ${n}, ${Y} = ${m} : quel est le coefficient ?`,
+  ];
+  const enTableau = [
+    `Par quel nombre multiplie-t-on ${X} pour obtenir ${Y} ?`,
+    `Quel est le coefficient de ce tableau, de ${X} vers ${Y} ?`,
+    `Trouve le coefficient qui fait passer de ${X} à ${Y}.`,
+  ];
+  const tableau = niveau === 2 && Math.random() < 0.4;
+  return {
+    text: courte(tableau ? enTableau : enTexte, niveau),
+    format: "short" as const,
+    expected: attendu(k),
+    comparator: "number_equal" as const,
+    explanation: expl(
+      DEF_PROP,
+      `le coefficient s’obtient en divisant ${Y} par ${X}.`,
+      `${m} ÷ ${n} = ${k}.`,
+      `le coefficient de proportionnalité est ${k} : ${Y} = ${k} × ${X}.`,
+    ),
+    ...(tableau
+      ? {
+          canvas: tableauProportionnaliteCanvas({
+            rowLabels: [X, Y],
+            values: [
+              [String(n), String(n2)],
+              [String(m), String(m2)],
+            ],
+            missing: [],
+          }),
+        }
+      : {}),
+  };
+}
+
+/** ★2 — Quatrième proportionnelle, sans histoire (dans les deux sens, ou en tableau). */
+export function genQuatriemeSimple() {
+  const [X, Y] = randomChoice(LETTRES);
+  const { k, n1, n2, m1, m2 } = paireSimple(2);
+  const t = randomInt(0, 6);
+  const inverse = t === 3 || t === 4;
+  let text: string;
+  let canvas: TableauProportionnaliteCanvasData | undefined;
+  if (t === 0) text = `Pour ${X} = ${n1}, ${Y} = ${m1}. Que vaut ${Y} pour ${X} = ${n2} ?`;
+  else if (t === 1) text = `${X} = ${n1} donne ${Y} = ${m1}. Calcule ${Y} quand ${X} = ${n2}.`;
+  else if (t === 2) text = `Quatrième proportionnelle : ${X} = ${n1} donne ${Y} = ${m1}. Et ${X} = ${n2} ?`;
+  else if (t === 3)
+    text = `Pour ${X} = ${n1}, ${Y} = ${m1}. Pour quel ${X} a-t-on ${Y} = ${m2} ?`;
+  else if (t === 4) text = `${X} = ${n1} donne ${Y} = ${m1}. Trouve ${X} quand ${Y} = ${m2}.`;
+  else {
+    text =
+      t === 5
+        ? `Complète ce tableau de proportionnalité de ${X} et ${Y}.`
+        : `Produit en croix : quel nombre remplace « ? » sur la ligne ${Y} ?`;
+    canvas = tableauProportionnaliteCanvas({
+      rowLabels: [X, Y],
+      values: [
+        [String(n1), String(n2)],
+        [String(m1), "?"],
+      ],
+      missing: [{ row: 1, col: 1 }],
+      highlightedCells: [{ row: 1, col: 1 }],
+    });
+  }
+  const rep = inverse ? n2 : m2;
+  return {
+    text,
+    format: "short" as const,
+    expected: attendu(rep),
+    comparator: "number_equal" as const,
+    explanation: inverse
+      ? expl(DEF_PROP, `coefficient = ${m1} ÷ ${n1} = ${k} : ${Y} = ${k} × ${X}.`, `${m2} ÷ ${k} = ${n2}.`, `${X} = ${n2}.`)
+      : expl(
+          DEF_PROP,
+          `coefficient = ${m1} ÷ ${n1} = ${k} (ou produit en croix : ${m1} × ${n2} ÷ ${n1}).`,
+          `${n2} × ${k} = ${m2}.`,
+          `la valeur cherchée est ${m2}.`,
+        ),
+    ...(canvas ? { canvas } : {}),
+  };
+}
+
+/** Le repère « y selon x », sans unité ni histoire. */
+function situationGraphSimple(X: string, Y: string): SituationGraph {
+  return {
+    titre: `${Y} selon ${X}`,
+    x: X,
+    y: Y,
+    ux: "",
+    uy: "",
+    ks: [2, 3, 4, 5],
+    xmax: 8,
+    qLire: () => "",
+    qInverse: () => "",
+    qUnite: "",
+  };
+}
+
+/** ★1 — Reconnaître la proportionnalité sur un graphique « y selon x ». */
+function genGraphReconnaitreSimple() {
+  for (let essai = 0; essai < 200; essai++) {
+    const [X, Y] = randomChoice(LETTRES);
+    const s = situationGraphSimple(X, Y);
+    const k = randomChoice(s.ks);
+    const forme = randomChoice(["prop", "prop", "affine", "courbe"] as const);
+    const b = randomChoice([2, 3, 4]);
+    const n = 5;
+    let pts: { x: number; y: number }[];
+    if (forme === "prop") pts = Array.from({ length: n + 1 }, (_, x) => ({ x, y: k * x }));
+    else if (forme === "affine") pts = Array.from({ length: n }, (_, x) => ({ x, y: k * x + b }));
+    else pts = [0, 1, 2, 3, 4].map((x) => ({ x, y: (k * x * (x + 1)) / 2 }));
+    if (Math.max(...pts.map((p) => p.y)) > 30) continue;
+    const text = randomChoice([
+      `Ce graphique représente ${Y} selon ${X}. Est-ce proportionnel ?`,
+      `Observe le graphique. La grandeur ${Y} est-elle proportionnelle à ${X} ?`,
+      `Les points (${X} ; ${Y}) traduisent-ils une proportionnalité ?`,
+      `Peut-on dire, avec ce graphique, que ${Y} est proportionnel à ${X} ?`,
+      `Ces points traduisent-ils une situation de proportionnalité entre ${X} et ${Y} ?`,
+      `D’après le graphique, les grandeurs ${X} et ${Y} sont-elles proportionnelles ?`,
+    ]);
+    return {
+      text,
+      format: "qcm" as const,
+      choices: shuffle(Object.values(RAISONS_GRAPH)),
+      expected: [RAISONS_GRAPH[forme]],
+      comparator: "mcq_exact" as const,
+      explanation: expl(
+        "deux grandeurs sont proportionnelles quand leurs points sont ALIGNÉS AVEC L'ORIGINE du repère.",
+        "je regarde deux choses : les points sont-ils sur une même droite ? Cette droite passe-t-elle par le point (0 ; 0) ?",
+        forme === "prop"
+          ? `les points sont alignés et la droite passe par l'origine : ${Y} vaut toujours ${k} fois ${X}.`
+          : forme === "affine"
+            ? `les points sont alignés, mais pour ${X} = 0 on lit ${b}, pas 0 : la droite ne passe pas par l'origine.`
+            : "les points ne sont pas sur une même droite : les écarts entre deux points voisins grandissent.",
+        forme === "prop" ? "c'est une situation de proportionnalité." : "ce n'est pas une situation de proportionnalité.",
+      ),
+      canvas: repereProp(s, pts),
+    };
+  }
+  return genGraphReconnaitre();
+}
+
+/** ★2 — Lire une valeur de y (sens = "x") ou de x (sens = "y") sur un graphique « y selon x ». */
+function genGraphLireSimple(sens: "x" | "y") {
+  const [X, Y] = randomChoice(LETTRES);
+  const s = situationGraphSimple(X, Y);
+  const k = randomChoice(s.ks);
+  const xm = Math.min(s.xmax, Math.floor(30 / k));
+  const x = randomInt(2, xm - 1);
+  const y = k * x;
+  const pts = Array.from({ length: xm + 1 }, (_, i) => ({ x: i, y: k * i }));
+  const text =
+    sens === "x"
+      ? randomChoice([
+          `D’après le graphique, que vaut ${Y} pour ${X} = ${x} ?`,
+          `Lis sur le graphique la valeur de ${Y} quand ${X} = ${x}.`,
+          `Le graphique donne ${Y} selon ${X}. Combien vaut ${Y} si ${X} = ${x} ?`,
+          `Sur le graphique, pars de ${X} = ${x} : quelle valeur de ${Y} lis-tu ?`,
+          `Grâce au trait rouge, lis ${Y} pour ${X} = ${x}.`,
+          `Sur ce graphique, quelle est l’ordonnée du point d’abscisse ${x} ?`,
+        ])
+      : randomChoice([
+          `D’après le graphique, pour quelle valeur de ${X} a-t-on ${Y} = ${y} ?`,
+          `Lis sur le graphique la valeur de ${X} qui donne ${Y} = ${y}.`,
+          `Le graphique donne ${Y} selon ${X}. Que vaut ${X} quand ${Y} = ${y} ?`,
+          `Sur le graphique, pars de ${Y} = ${y} : quelle valeur de ${X} lis-tu ?`,
+          `Grâce au trait rouge, trouve ${X} pour ${Y} = ${y}.`,
+          `Sur ce graphique, quelle est l’abscisse du point d’ordonnée ${y} ?`,
+        ]);
+  return {
+    text,
+    format: "short" as const,
+    expected: attendu(sens === "x" ? y : x),
+    comparator: "number_equal" as const,
+    explanation:
+      sens === "x"
+        ? expl(
+            "sur le graphique, chaque point donne une valeur de chaque grandeur.",
+            `je pars de ${x} sur l'axe horizontal, je monte jusqu'au point, puis je lis l'axe vertical.`,
+            `on lit ${y}.`,
+            `pour ${X} = ${x}, ${Y} = ${y}.`,
+          )
+        : expl(
+            "on peut lire un graphique dans les deux sens.",
+            `je pars de ${y} sur l'axe vertical, je vais jusqu'au point, puis je descends lire l'axe horizontal.`,
+            `on lit ${x}.`,
+            `pour ${Y} = ${y}, ${X} = ${x}.`,
+          ),
+    canvas: repereProp(s, pts, { a: k, b: 0 }, sens === "x" ? { x } : { y }),
+  };
+}
+
+/** ★1 — Une paire (n ; m) : compléter Y = … × X, sans histoire. */
+function genRelationPaireSimple() {
+  const [X, Y] = randomChoice(LETTRES);
+  const k = randomChoice([2, 3, 4, 5, 6, 10]);
+  const n = randomInt(2, 9);
+  const m = k * n;
+  // ⚠️ Les « = », « … » et « × » comptent pour des mots : on va à l'essentiel.
+  const text = courte(
+    [
+      `${X} = ${n}, ${Y} = ${m}. Complète ${Y} = … × ${X}.`,
+      `${Y} = ${m} quand ${X} = ${n}. Complète ${Y} = … × ${X}.`,
+      `Proportionnalité : ${X} = ${n}, ${Y} = ${m}. Complète ${Y} = … × ${X}.`,
+      `${X} = ${n} et ${Y} = ${m} : complète ${Y} = … × ${X}.`,
+      `Pour ${X} = ${n}, ${Y} = ${m}. Écris ${Y} = … × ${X}.`,
+      `${X} = ${n}, ${Y} = ${m}. Écris ${Y} = … × ${X}.`,
+      `${X} = ${n}, ${Y} = ${m}. ${Y} = … × ${X} ?`,
+      `${X} = ${n}, ${Y} = ${m}. Relation : ${Y} = … × ${X}.`,
+      `${X} = ${n}, ${Y} = ${m}. Donc ${Y} = … × ${X}.`,
+      `${X} = ${n}, ${Y} = ${m}. Formule : ${Y} = … × ${X}.`,
+    ],
+    1,
+  );
+  return {
+    text,
+    format: "short" as const,
+    expected: relationAcceptee(k, X, Y),
+    comparator: "number_equal" as const,
+    explanation: expl(
+      `deux grandeurs proportionnelles sont reliées par une relation ${Y} = k × ${X}, où k est le coefficient de proportionnalité.`,
+      `je divise ${Y} par ${X}.`,
+      `${m} ÷ ${n} = ${k}.`,
+      `la relation est ${Y} = ${k} × ${X}.`,
+    ),
+  };
+}
+
+/** ★1 — Un tableau de nombres : choisir la bonne formule parmi quatre. */
+function genRelationTableauQcmSimple() {
+  const [X, Y] = randomChoice(LETTRES);
+  const k = randomChoice([2, 3, 4, 5]);
+  const xs = troisAbscisses(8);
+  const ys = xs.map((x) => k * x);
+  const text = courte(
+    ["Tableau de proportionnalité.", "Voici un tableau.", `Tableau de ${X} et ${Y}.`, "Ce tableau est proportionnel.", "Observe le tableau."].flatMap((intro) =>
+      [
+        `Quelle relation relie ${Y} à ${X} ?`,
+        `Quelle formule donne ${Y} à partir de ${X} ?`,
+        "Quelle formule correspond au tableau ?",
+        `Quelle formule calcule ${Y} ?`,
+      ].map((q) => `${intro} ${q}`),
+    ),
+    1,
+  );
+  const juste = `${Y} = ${k} × ${X}`;
+  return {
+    text,
+    format: "qcm" as const,
+    choices: makeChoices(juste, formulesFausses(k, xs[0], ys[0], X, Y)),
+    expected: [juste],
+    comparator: "mcq_exact" as const,
+    explanation: expl(
+      `dans un tableau de proportionnalité, on passe de ${X} à ${Y} en multipliant toujours par le même nombre k : ${Y} = k × ${X}.`,
+      `je divise chaque ${Y} par son ${X}.`,
+      xs.map((x, i) => `${ys[i]} ÷ ${x} = ${k}`).join(" ; ") + ".",
+      `on multiplie toujours par ${k} : ${juste}.`,
+    ),
+    canvas: tableauProportionnaliteCanvas({
+      rowLabels: [X, Y],
+      values: [xs.map(String), ys.map(String)],
+      missing: [],
+    }),
+  };
+}
+
+/** ★2 — Un tableau de nombres : trouver k soi-même (réponse courte). */
+function genRelationTableauCourtSimple() {
+  const [X, Y] = randomChoice(LETTRES);
+  const k = randomChoice([2, 3, 4, 5, 6, 7]);
+  const xs = troisAbscisses(8);
+  const ys = xs.map((x) => k * x);
+  const text = courte([
+    `Ce tableau est un tableau de proportionnalité. Complète la relation : ${Y} = … × ${X}.`,
+    `D’après ce tableau de proportionnalité, par quel nombre multiplie-t-on ${X} pour obtenir ${Y} ?`,
+    `Dans ce tableau, ${Y} est proportionnel à ${X}. Quel nombre manque dans ${Y} = … × ${X} ?`,
+    `Trouve le coefficient k tel que ${Y} = k × ${X} dans ce tableau.`,
+  ], 2);
+  return {
+    text,
+    format: "short" as const,
+    expected: relationAcceptee(k, X, Y),
+    comparator: "number_equal" as const,
+    explanation: expl(
+      `deux grandeurs proportionnelles sont reliées par ${Y} = k × ${X}.`,
+      `je divise un ${Y} par son ${X}, puis je vérifie sur une autre colonne.`,
+      `${ys[0]} ÷ ${xs[0]} = ${k} ; contrôle : ${ys[2]} ÷ ${xs[2]} = ${k}.`,
+      `${Y} = ${k} × ${X}.`,
+    ),
+    canvas: tableauProportionnaliteCanvas({
+      rowLabels: [X, Y],
+      values: [xs.map(String), ys.map(String)],
+      missing: [],
+    }),
+  };
+}
+
+/** ★2 — Un graphique « y selon x » (droite par l'origine) : choisir la bonne formule. */
+function genRelationGraphiqueSimple() {
+  const [X, Y] = randomChoice(LETTRES);
+  const s = situationGraphSimple(X, Y);
+  const k = randomChoice(s.ks);
+  const xm = Math.min(s.xmax, Math.floor(30 / k));
+  const pts = Array.from({ length: xm + 1 }, (_, i) => ({ x: i, y: k * i }));
+  const juste = `${Y} = ${k} × ${X}`;
+  const text = courte([
+    `Le graphique montre une situation de proportionnalité. Quelle relation relie ${Y} à ${X} ?`,
+    `Les points sont alignés avec l'origine. Quelle formule donne ${Y} en fonction de ${X} ?`,
+    `Ce graphique donne ${Y} selon ${X}. Quelle relation les relie ?`,
+    `Lis la valeur de ${Y} pour ${X} = 1 sur le graphique, puis choisis la bonne formule.`,
+  ], 2);
+  return {
+    text,
+    format: "qcm" as const,
+    choices: makeChoices(juste, [`${Y} = ${X} + ${k}`, `${X} = ${k} × ${Y}`, `${Y} = ${k + 1} × ${X}`]),
+    expected: [juste],
+    comparator: "mcq_exact" as const,
+    explanation: expl(
+      `une droite qui passe par l'origine représente une relation ${Y} = k × ${X} ; k est la valeur de ${Y} pour ${X} = 1.`,
+      "je pars de 1 sur l'axe horizontal, je monte jusqu'au point, je lis l'axe vertical.",
+      `pour ${X} = 1, on lit ${Y} = ${k}. Contrôle : pour ${X} = 2, on lit ${2 * k} = ${k} × 2.`,
+      `${juste}.`,
+    ),
+    canvas: repereProp(s, pts, { a: k, b: 0 }),
+  };
+}
+
+/** Un nombre seul, ou une mesure sans histoire (« 80 cm », « 300 g »). */
+const UNITES_SIMPLES = ["", "", "", "cm", "m", "km", "g", "kg", "L", "min", "m²"];
+const avecUnite = (v: number, u: string) => (u ? `${v} ${u}` : `${v}`);
+
+/** ★1-★2 — Pourcentages sans histoire : p % de N, avec l'aide, quel pourcentage, quelle fraction. */
+export function genPourcentageSimple(types: Array<"partie" | "aide" | "taux" | "fraction">, taux: number[], niveau: 1 | 2 = 2) {
+  const type = randomChoice(types);
+  const tauxUtiles = type === "aide" || type === "fraction" ? taux.filter((p) => FRACTIONS_POURCENT[p]) : taux;
+  const ps = tauxUtiles.length ? tauxUtiles : [10, 25, 50];
+  let p = 10;
+  let N = 80;
+  for (let essai = 0; essai < 300; essai++) {
+    p = randomChoice(ps);
+    N = randomChoice([20, 40, 60, 80, 100, 120, 160, 200, 240, 300, 400, 500, 600, 800]);
+    if ((N * p) % 100 === 0) break;
+  }
+  const x = (N * p) / 100;
+  const u = randomChoice(UNITES_SIMPLES);
+  const Nd = avecUnite(N, u);
+  const xd = avecUnite(x, u);
+  const defPct = "un pourcentage est une proportion rapportée à 100 : p % d’une quantité N, c’est N × p ÷ 100.";
+  if (type === "fraction") {
+    const correct = FRACTIONS_POURCENT[p];
+    const autres = Object.values(FRACTIONS_POURCENT).filter((f) => f !== correct);
+    return {
+      text: courte([
+        `Quelle fraction est égale à ${p} % ?`,
+        `Écris ${p} % en fraction simplifiée.`,
+        `Quelle fraction simplifiée vaut ${p} % ?`,
+        `Convertis ${p} % en fraction.`,
+        `${p} % = ${p}/100 = ? Simplifie.`,
+        `${p} %, c’est quelle fraction ?`,
+        `Écris ${p} % sous la forme d’une fraction simplifiée.`,
+        `Prendre ${p} % d’un nombre, c’est en prendre quelle fraction ?`,
+        ...[
+          ["d’une longueur", "cette longueur"],
+          ["d’une masse", "cette masse"],
+          ["d’un nombre", "ce nombre"],
+          ["d’une quantité", "cette quantité"],
+          ["d’une aire", "cette aire"],
+          ["d’une durée", "cette durée"],
+        ].flatMap(([de, ce]) => [
+          `${p} % ${de}, c’est quelle fraction de ${ce} ?`,
+          `Prendre ${p} % ${de}, c’est prendre quelle fraction de ${ce} ?`,
+          `${p} % ${de}, c’est quelle fraction ?`,
+        ]),
+        `À quelle fraction correspond ${p} % ?`,
+        `${p} % = ${p}/100. Quelle est la fraction simplifiée ?`,
+        `Parmi ces fractions, laquelle vaut ${p} % ?`,
+      ], niveau),
+      format: "qcm" as const,
+      choices: makeChoices(correct, [`1/${p}`, ...shuffle(autres).slice(0, 3)]),
+      expected: [correct],
+      comparator: "mcq_exact" as const,
+      explanation: expl(defPct, `${p} % = ${p}/100, que l’on simplifie.`, `${p}/100 = ${correct}.`, `${p} %, c’est ${correct}.`),
+    };
+  }
+  if (type === "taux") {
+    return {
+      text: courte([
+        `Quel pourcentage de ${Nd} représente ${xd} ?`,
+        `Sur ${Nd}, que représente ${xd} en pourcentage ?`,
+        `Sur un total de ${Nd}, ${xd} représentent quel pourcentage ?`,
+        `Dans ${Nd}, la part ${xd} fait combien de pour cent ?`,
+      ], niveau),
+      format: "short" as const,
+      expected: attendu(p, "%"),
+      comparator: "number_equal" as const,
+      explanation: expl(defPct, "pourcentage = partie ÷ total × 100.", `${x} ÷ ${N} × 100 = ${p}.`, `cela représente ${p} %.`),
+    };
+  }
+  const text =
+    type === "aide"
+      ? courte([
+          `Sachant que ${p} % = ${FRACTIONS_POURCENT[p]}, calcule ${p} % de ${Nd}.`,
+          `Sachant que ${p} % = ${FRACTIONS_POURCENT[p]}, que vaut ${p} % de ${Nd} ?`,
+          `Sachant que ${p} % = ${FRACTIONS_POURCENT[p]}, complète : ${p} % de ${Nd} = …`,
+        ], niveau)
+      : courte([
+          `Calcule ${p} % de ${Nd}.`,
+          `Combien vaut ${p} % de ${Nd} ?`,
+          `Que vaut ${p} % de ${Nd} ?`,
+          `Complète : ${p} % de ${Nd} = …`,
+          `Prends ${p} % de ${Nd} : combien obtiens-tu ?`,
+          `Quel résultat donne ${p} % de ${Nd} ?`,
+        ], niveau);
+  return {
+    text,
+    format: "short" as const,
+    expected: attendu(x, u),
+    comparator: "number_equal" as const,
+    explanation: expl(defPct, `${p} % de ${N} = ${N} × ${p} ÷ 100.`, `${N} × ${p} ÷ 100 = ${x}.`, `${p} % de ${Nd} = ${xd}.`),
+  };
+}
+
+/** ★1-★2 — Calcul mental d'un pourcentage d'un nombre ou d'une mesure, sans histoire. */
+export function genMentalSimple(taux: MentalP[]) {
+  const p = randomChoice(taux);
+  const N = randomChoice(p === 5 ? [20, 40, 60, 80, 120, 140, 160, 180, 240, 300] : [30, 40, 50, 60, 70, 80, 90, 120, 150, 250, 300, 450]);
+  const x = (N * p) / 100;
+  const u = randomChoice(UNITES_SIMPLES);
+  const Nd = avecUnite(N, u);
+  const text = randomChoice([
+    `Calcule de tête ${p} % de ${Nd}.`,
+    `Combien vaut ${p} % de ${Nd} ? Réponds sans poser d’opération.`,
+    `Sans calculatrice, donne ${p} % de ${Nd}.`,
+    `Complète de tête : ${p} % de ${Nd} = …`,
+    `Trouve mentalement ${p} % de ${Nd}.`,
+    `Quel est ${p} % de ${Nd} ? Calcule-le de tête.`,
+    `En partant de 10 %, calcule mentalement ${p} % de ${Nd}.`,
+    `Calcul mental : que vaut ${p} % de ${Nd} ?`,
+  ]);
+  const c = cheminMental(p, N);
+  return {
+    text,
+    format: "short" as const,
+    expected: attendu(x, u),
+    comparator: "number_equal" as const,
+    explanation: expl(DEF_MENTAL, c.methode, c.calcul, `${p} % de ${Nd} = ${avecUnite(x, u)}.`),
+  };
+}
+
+/** Des grandeurs sans histoire, pour les évolutions. */
+const OBJETS_EVOL = ["un nombre", "une quantité", "une longueur", "une masse", "un volume", "une aire", "une durée", "une distance"];
+
+/** ★2 — Coefficient multiplicateur d'une hausse ou d'une baisse (QCM), sans histoire. */
+export function genCoeffMultSimple(taux: number[]) {
+  const p = randomChoice(taux);
+  const hausse = Math.random() < 0.5;
+  const w = mots(hausse);
+  const c = (hausse ? 100 + p : 100 - p) / 100;
+  const objet = randomChoice(OBJETS_EVOL);
+  const fem = objet.startsWith("une ");
+  const text = randomChoice([
+    `Une ${w.nomEvol} de ${p} % d’${objet} : par quel nombre multiplie-t-on ?`,
+    `Pour ${hausse ? "augmenter" : "diminuer"} de ${p} % ${objet}, par quel nombre faut-il ${fem ? "la" : "le"} multiplier ?`,
+    `Quel est le coefficient multiplicateur d’une ${w.nomEvol} de ${p} % ?`,
+    `${cap(objet)} ${w.verbe} de ${p} %. Par quel nombre multiplie-t-on sa valeur de départ ?`,
+    `Une ${w.nomEvol} de ${p} % : quel coefficient multiplicateur lui correspond ?`,
+    `Après une ${w.nomEvol} de ${p} %, ${objet} est ${fem ? "multipliée" : "multiplié"} par…`,
+  ]);
+  const correct = fr(c);
+  return {
+    text,
+    format: "qcm" as const,
+    choices: makeChoices(correct, [
+      fr(p / 100),
+      String(p),
+      fr((hausse ? 100 - p : 100 + p) / 100),
+      fr((hausse ? 1000 + p : 1000 - p) / 1000),
+    ]),
+    expected: [correct],
+    comparator: "mcq_exact" as const,
+    explanation: expl(
+      `${hausse ? "augmenter" : "diminuer"} de p %, c’est multiplier par ${hausse ? "1 + p ÷ 100" : "1 − p ÷ 100"}.`,
+      hausse ? `on garde 100 % et on ajoute ${p} % : 100 % + ${p} % = ${100 + p} %.` : `il reste 100 % − ${p} % = ${100 - p} %.`,
+      `${hausse ? 100 + p : 100 - p} % = ${hausse ? 100 + p : 100 - p} ÷ 100 = ${fr(c)}.`,
+      `le coefficient multiplicateur est ${fr(c)}.`,
+    ),
+  };
+}
+
+/** ★2 — Nouvelle valeur après une hausse ou une baisse, sans histoire. */
+export function genNouvelleValeurSimple(taux: number[]) {
+  let v = 80;
+  let p = 10;
+  let hausse = true;
+  for (let essai = 0; essai < 300; essai++) {
+    v = randomChoice([40, 60, 80, 100, 120, 150, 200, 240, 300, 400, 500, 600, 800, 1000]);
+    p = randomChoice(taux);
+    hausse = Math.random() < 0.5;
+    if ((v * (hausse ? 100 + p : 100 - p)) % 100 === 0) break;
+  }
+  const c = (hausse ? 100 + p : 100 - p) / 100;
+  const res = Math.round(v * c * 100) / 100;
+  const w = mots(hausse);
+  const u = randomChoice(UNITES_SIMPLES);
+  const Nd = avecUnite(v, u);
+  const text = randomChoice([
+    `Une valeur de ${Nd} ${w.verbe} de ${p} %. Quelle est la nouvelle valeur ?`,
+    `Calcule ${Nd} après une ${w.nomEvol} de ${p} %.`,
+    `Effectue une ${w.nomEvol} de ${p} % sur ${Nd}. Quel résultat obtiens-tu ?`,
+    `On part de ${Nd}. Après une ${w.nomEvol} de ${p} %, combien obtient-on ?`,
+    `Que devient ${Nd} si on ${hausse ? "l’augmente" : "le diminue"} de ${p} % ?`,
+    `Complète : ${Nd} après une ${w.nomEvol} de ${p} %, cela donne …`,
+  ]);
+  return {
+    text,
+    format: "short" as const,
+    expected: attendu(res, u),
+    comparator: "number_equal" as const,
+    explanation: expl(
+      `une ${w.nomEvol} de p % revient à multiplier par ${hausse ? "1 + p ÷ 100" : "1 − p ÷ 100"}.`,
+      `une ${w.nomEvol} de ${p} % revient à multiplier par ${fr(c)} (${hausse ? `100 % + ${p} %` : `100 % − ${p} %`} = ${hausse ? 100 + p : 100 - p} %).`,
+      `${v} × ${fr(c)} = ${fr(res)}.`,
+      `${Nd} devient ${avecUnite(res, u).replace(".", ",")}.`,
+    ),
+  };
+}
+
 export const proportionnaliteBank: TutorBankItemV4[] = [
   // =========================
   // PROP_RECONNAITRE
@@ -2569,7 +3277,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Compare les deux coefficients.",
     tags: ["prop_proportionnalite", "reconnaitre", "template"],
-    generate: () => genReconnaitre(2),
+    generate: () => genReconnaitreSimple(2),
   },
   {
     kind: "template",
@@ -2579,10 +3287,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     notionId: "prop_proportionnalite",
     microId: "prop_reconnaitre",
     difficulty: 2,
-    theme: "reunion",
-    hint: "Vérifie si le prix par kg reste le même.",
-    tags: ["prop_proportionnalite", "reunion", "prix", "template"],
-    generate: () => genReconnaitre(2),
+    theme: "neutral",
+    hint: "Vérifie si le quotient y ÷ x reste le même.",
+    tags: ["prop_proportionnalite", "prix", "template"],
+    generate: () => genReconnaitreSimple(2),
   },
   {
     kind: "fixed",
@@ -2625,7 +3333,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_table",
     difficulty: 1,
     theme: "neutral",
-    text: "Dans un tableau de proportionnalité, si 2 → 10, alors 4 → ?",
+    text: "Tableau de proportionnalité : 2 → 10, donc 4 → ?",
     format: "qcm",
     choices: ["12", "14", "20", "40"],
     expected: ["20"],
@@ -2648,7 +3356,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Utilise le coefficient multiplicatif.",
     tags: ["prop_proportionnalite", "tableau", "template", "canvas"],
-    generate: () => genTableau(2),
+    generate: () => genTableauSimple(2),
   },
   {
     kind: "template",
@@ -2661,7 +3369,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Cherche le passage d’une colonne à l’autre.",
     tags: ["prop_proportionnalite", "tableau", "template"],
-    generate: () => genTableau(2),
+    generate: () => genTableauSimple(2),
   },
   {
     kind: "template",
@@ -2712,7 +3420,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Coefficient = deuxième grandeur ÷ première grandeur.",
     tags: ["prop_proportionnalite", "coefficient", "template"],
-    generate: () => genCoeff(2),
+    generate: () => genCoeffSimple(2),
   },
   {
     kind: "template",
@@ -2722,10 +3430,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     notionId: "prop_proportionnalite",
     microId: "prop_coeff",
     difficulty: 2,
-    theme: "reunion",
-    hint: "Calcule le prix pour 1 kg.",
-    tags: ["prop_proportionnalite", "coefficient", "reunion", "template"],
-    generate: () => genCoeff(2),
+    theme: "neutral",
+    hint: "Divise la deuxième valeur par la première.",
+    tags: ["prop_proportionnalite", "coefficient", "template"],
+    generate: () => genCoeffSimple(2),
   },
   {
     kind: "template",
@@ -2801,9 +3509,9 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_quatrieme",
     difficulty: 2,
     theme: "neutral",
-    hint: "Passe par le prix d’une unité.",
+    hint: "Passe par la valeur pour 1, ou par le coefficient.",
     tags: ["prop_proportionnalite", "quatrieme_proportionnelle", "template"],
-    generate: () => genQuatrieme(1),
+    generate: () => genQuatriemeSimple(),
   },
   {
     kind: "template",
@@ -2841,28 +3549,28 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     notionId: "prop_proportionnalite", microId: "prop_graphique", difficulty: 1, theme: "neutral",
     hint: "Les points sont-ils alignés ? La droite passe-t-elle par l'origine ?",
     tags: ["prop_proportionnalite", "graphique", "qcm", "template", "canvas"],
-    generate: () => genGraphReconnaitre(),
+    generate: () => genGraphReconnaitreSimple(),
   },
   {
     kind: "template", id: "prop_graphique_tpl_2_reconnaitre_bis", niveau: "4e", matiere: "maths",
     notionId: "prop_proportionnalite", microId: "prop_graphique", difficulty: 1, theme: "neutral",
     hint: "Proportionnel : alignés AVEC l'origine.",
     tags: ["prop_proportionnalite", "graphique", "qcm", "template", "canvas"],
-    generate: () => genGraphReconnaitre(),
+    generate: () => genGraphReconnaitreSimple(),
   },
   {
     kind: "template", id: "prop_graphique_tpl_3_lire", niveau: "4e", matiere: "maths",
     notionId: "prop_proportionnalite", microId: "prop_graphique", difficulty: 2, theme: "neutral",
     hint: "Monte jusqu'au point, puis lis l'axe vertical.",
     tags: ["prop_proportionnalite", "graphique", "lecture", "template", "canvas"],
-    generate: () => genGraphLire(),
+    generate: () => genGraphLireSimple("x"),
   },
   {
     kind: "template", id: "prop_graphique_tpl_4_inverse", niveau: "4e", matiere: "maths",
     notionId: "prop_proportionnalite", microId: "prop_graphique", difficulty: 2, theme: "neutral",
     hint: "Va jusqu'au point, puis descends lire l'axe horizontal.",
     tags: ["prop_proportionnalite", "graphique", "lecture", "template", "canvas"],
-    generate: () => genGraphInverse(),
+    generate: () => genGraphLireSimple("y"),
   },
   {
     kind: "template", id: "prop_graphique_tpl_5_coefficient", niveau: "4e", matiere: "maths",
@@ -2888,28 +3596,28 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     notionId: "prop_proportionnalite", microId: "prop_relation", difficulty: 1, theme: "neutral",
     hint: "Divise y par x.",
     tags: ["prop_proportionnalite", "relation", "formule", "template"],
-    generate: () => genRelationPaire(),
+    generate: () => genRelationPaireSimple(),
   },
   {
     kind: "template", id: "prop_relation_tpl_2_tableau_qcm", niveau: "4e", matiere: "maths",
     notionId: "prop_proportionnalite", microId: "prop_relation", difficulty: 1, theme: "neutral",
     hint: "Par quel nombre multiplie-t-on x pour obtenir y ?",
     tags: ["prop_proportionnalite", "relation", "qcm", "template", "canvas"],
-    generate: () => genRelationTableauQcm(),
+    generate: () => genRelationTableauQcmSimple(),
   },
   {
     kind: "template", id: "prop_relation_tpl_3_tableau_court", niveau: "4e", matiere: "maths",
     notionId: "prop_proportionnalite", microId: "prop_relation", difficulty: 2, theme: "neutral",
     hint: "Divise un y par son x, puis vérifie sur une autre colonne.",
     tags: ["prop_proportionnalite", "relation", "formule", "template", "canvas"],
-    generate: () => genRelationTableauCourt(),
+    generate: () => genRelationTableauCourtSimple(),
   },
   {
     kind: "template", id: "prop_relation_tpl_4_graphique", niveau: "4e", matiere: "maths",
     notionId: "prop_proportionnalite", microId: "prop_relation", difficulty: 2, theme: "neutral",
     hint: "Lis y pour x = 1.",
     tags: ["prop_proportionnalite", "relation", "graphique", "qcm", "template", "canvas"],
-    generate: () => genRelationGraphique(),
+    generate: () => genRelationGraphiqueSimple(),
   },
   {
     kind: "template", id: "prop_relation_tpl_5_piege", niveau: "4e", matiere: "maths",
@@ -2924,6 +3632,22 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     hint: "Teste la dernière colonne.",
     tags: ["prop_proportionnalite", "relation", "piege", "qcm", "template", "canvas"],
     generate: () => genRelationPiege(),
+  },
+  // ⭐ 03/11/2026 — ★1-★2 sans histoire : les situations (abonnement, vélo,
+  // planches…) passent ici, à ★3.
+  {
+    kind: "template", id: "prop_relation_tpl_7_contexte_paire", niveau: "4e", matiere: "maths",
+    notionId: "prop_proportionnalite", microId: "prop_relation", difficulty: 3, theme: "neutral",
+    hint: "Divise y par x.",
+    tags: ["prop_proportionnalite", "relation", "formule", "contexte", "template"],
+    generate: () => genRelationPaire(),
+  },
+  {
+    kind: "template", id: "prop_relation_tpl_8_contexte_graphique", niveau: "4e", matiere: "maths",
+    notionId: "prop_proportionnalite", microId: "prop_relation", difficulty: 3, theme: "neutral",
+    hint: "Lis y pour x = 1.",
+    tags: ["prop_proportionnalite", "relation", "graphique", "contexte", "qcm", "template", "canvas"],
+    generate: () => genRelationGraphique(),
   },
 
   // =========================
@@ -2982,7 +3706,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "p % de N = N × p / 100.",
     tags: ["prop_proportionnalite", "pourcentage", "template"],
-    generate: () => genPourcentage(["partie", "taux"], [5, 10, 20, 25, 30, 40, 50, 75]),
+    generate: () => genPourcentageSimple(["partie", "taux"], [5, 10, 20, 25, 30, 40, 50, 75]),
   },
   {
     kind: "template",
@@ -3041,7 +3765,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "10 %, c’est diviser par 10.",
     tags: ["pourcentage", "calcul_mental", "template"],
-    generate: () => genMental([10], ["nu", "partie", "partie", "comparaison"]),
+    generate: () => genMentalSimple([10]),
   },
   {
     kind: "template",
@@ -3054,7 +3778,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "100 %, c’est tout ; 200 %, c’est le double.",
     tags: ["pourcentage", "calcul_mental", "template"],
-    generate: () => genMental([100, 200], ["nu", "comparaison", "comparaison"]),
+    generate: () => genMentalSimple([100, 200]),
   },
   {
     kind: "template",
@@ -3067,7 +3791,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Commence par 10 % : double-le, triple-le ou prends sa moitié.",
     tags: ["pourcentage", "calcul_mental", "template"],
-    generate: () => genMental([20, 30, 5], ["nu", "partie", "partie", "comparaison"]),
+    generate: () => genMentalSimple([20, 30, 5]),
   },
   {
     kind: "template",
@@ -3080,7 +3804,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Tout part de 10 %.",
     tags: ["pourcentage", "calcul_mental", "template"],
-    generate: () => genMental([10, 20, 30, 5, 100, 200], ["comparaison", "comparaison", "nu"]),
+    generate: () => genMentalSimple([10, 20, 30, 5, 100, 200]),
   },
   {
     kind: "template",
@@ -3649,7 +4373,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Vérifie si le rapport y/x est le même partout.",
     tags: ["prop_proportionnalite", "reconnaitre", "template"],
-    generate: () => genReconnaitre(2),
+    generate: () => genReconnaitreSimple(2),
   },
   {
     kind: "fixed",
@@ -3733,7 +4457,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Trouve le coefficient, puis complète.",
     tags: ["prop_proportionnalite", "table", "template", "canvas"],
-    generate: () => genTableau(2),
+    generate: () => genTableauSimple(2),
   },
   {
     kind: "template",
@@ -3820,16 +4544,16 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_coeff",
     difficulty: 2,
     theme: "neutral",
-    text: "3 kg de fruits coûtent 12 €. Quel est le prix d’un kg (coefficient) ?",
+    text: "Tableau de proportionnalité : 3 correspond à 12. Quel est le coefficient ?",
     format: "short",
     expected: ["4"],
     comparator: "number_equal",
     hint: "12 ÷ 3.",
     explanation:
-      "Définition : le coefficient est le prix d’une unité.\n\n" +
-      "Méthode : on divise le prix total par la quantité.\n\n" +
+      "Définition : le coefficient est le nombre par lequel on multiplie pour passer d’une ligne à l’autre.\n\n" +
+      "Méthode : on divise la valeur du bas par celle du haut.\n\n" +
       "Calcul : 12 ÷ 3 = 4.\n\n" +
-      "Conclusion : un kg coûte 4 € (coefficient = 4).",
+      "Conclusion : le coefficient de proportionnalité est 4.",
     tags: ["prop_proportionnalite", "coeff"],
   },
   {
@@ -3843,7 +4567,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Coefficient = total ÷ quantité.",
     tags: ["prop_proportionnalite", "coeff", "template"],
-    generate: () => genCoeff(2),
+    generate: () => genCoeffSimple(2),
   },
   {
     kind: "template",
@@ -3917,16 +4641,16 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_quatrieme",
     difficulty: 2,
     theme: "neutral",
-    text: "4 stylos coûtent 6 €. Combien coûtent 6 stylos ?",
+    text: "Dans un tableau de proportionnalité, 4 correspond à 6. À quoi correspond 6 ?",
     format: "short",
     expected: ["9"],
     comparator: "number_equal",
     hint: "Produit en croix : 6 × 6 ÷ 4.",
     explanation:
       "Définition : la quatrième proportionnelle se trouve par produit en croix.\n\n" +
-      "Méthode : prix = 6 × 6 ÷ 4.\n\n" +
+      "Méthode : valeur cherchée = 6 × 6 ÷ 4.\n\n" +
       "Calcul : 36 ÷ 4 = 9.\n\n" +
-      "Conclusion : 6 stylos coûtent 9 €.",
+      "Conclusion : 6 correspond à 9.",
     tags: ["prop_proportionnalite", "quatrieme"],
   },
   {
@@ -4050,7 +4774,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Pourcentage de N = N × p ÷ 100.",
     tags: ["prop_proportionnalite", "pourcentage", "template"],
-    generate: () => genPourcentage(["partie", "taux"], [5, 10, 20, 25, 30, 40, 50, 75]),
+    generate: () => genPourcentageSimple(["partie", "taux"], [5, 10, 20, 25, 30, 40, 50, 75]),
   },
   {
     kind: "template",
@@ -4457,7 +5181,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Si une grandeur double, l’autre doit doubler aussi.",
     tags: ["prop_proportionnalite", "reconnaitre", "template"],
-    generate: () => genReconnaitre(1),
+    generate: () => genReconnaitreSimple(1),
   },
   {
     kind: "template",
@@ -4483,7 +5207,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Regarde par combien on multiplie dans la première ligne.",
     tags: ["prop_proportionnalite", "tableau", "template", "canvas"],
-    generate: () => genTableau(1),
+    generate: () => genTableauSimple(1),
   },
   {
     kind: "template",
@@ -4496,7 +5220,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Coefficient = deuxième grandeur ÷ première grandeur.",
     tags: ["prop_proportionnalite", "coefficient", "template"],
-    generate: () => genCoeff(1),
+    generate: () => genCoeffSimple(1),
   },
   {
     kind: "template",
@@ -4535,7 +5259,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "10 %, c’est diviser par 10 ; 50 %, c’est la moitié ; 25 %, c’est le quart.",
     tags: ["prop_proportionnalite", "pourcentage", "template"],
-    generate: () => genPourcentage(["partie", "aide"], [10, 20, 25, 50]),
+    generate: () => genPourcentageSimple(["partie", "aide"], [10, 20, 25, 50], 1),
   },
   {
     kind: "template",
@@ -4548,7 +5272,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "p % = p/100, puis on simplifie la fraction.",
     tags: ["prop_proportionnalite", "pourcentage", "qcm", "template"],
-    generate: () => genPourcentage(["fraction"], [10, 20, 25, 50, 75]),
+    generate: () => genPourcentageSimple(["fraction"], [10, 20, 25, 50, 75], 1),
   },
   {
     kind: "template",
@@ -4561,7 +5285,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Hausse : 100 % + p % ; baisse : 100 % − p %. Puis divise par 100.",
     tags: ["prop_proportionnalite", "coefficient_multiplicateur", "qcm", "template"],
-    generate: () => genCoeffMult("qcm", "mixte", [10, 20, 25, 30, 40, 50]),
+    generate: () => genCoeffMultSimple([10, 20, 25, 30, 40, 50]),
   },
   {
     kind: "template",
@@ -4574,6 +5298,6 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Calcule d’abord p % de la valeur, puis ajoute-le ou retire-le.",
     tags: ["prop_proportionnalite", "evolution", "template"],
-    generate: () => genNouvelleValeur([10, 20, 25, 50]),
+    generate: () => genNouvelleValeurSimple([10, 20, 25, 50]),
   },
 ];
