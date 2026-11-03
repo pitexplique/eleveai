@@ -72,6 +72,9 @@ export const exercicesInfoPointMoyenPremiere: FicheExercicesData = {
           ),
           correction:
             "Il y a $4$ points : on divise chaque somme par $4$.\n$\\overline{x} = \\dfrac{2 + 4 + 6 + 8}{4} = \\dfrac{20}{4} = 5$.\n$\\overline{y} = \\dfrac{1 + 1 + 3 + 3}{4} = \\dfrac{8}{4} = 2$.\nDonc $G(5 ; 2)$ : en moyenne, $5$ tirs cadrés et $2$ buts par match.\n⚠️ On divise par le nombre de POINTS ($4$), pas par la plus grande valeur.",
+          reponses: [
+            { attendu: "(5 ; 2)", ordre: true },
+          ],
           micros: ["info_point_moyen_calculer"],
         },
         {
@@ -94,6 +97,9 @@ export const exercicesInfoPointMoyenPremiere: FicheExercicesData = {
               { x: 3, y: 4, label: "G" },
             ]),
           ),
+          reponses: [
+            { question: "b)", attendu: "(3 ; 4)", ordre: true },
+          ],
           micros: ["info_point_moyen_calculer", "info_point_moyen_placer"],
         },
         {
@@ -111,6 +117,9 @@ export const exercicesInfoPointMoyenPremiere: FicheExercicesData = {
               { x: 3, y: 3, label: "G" },
             ]),
           ),
+          reponses: [
+            { attendu: ["B", "(3 ; 3)"], ordre: true },
+          ],
           micros: ["info_point_moyen_placer", "info_point_moyen_calculer"],
         },
         {
@@ -119,6 +128,9 @@ export const exercicesInfoPointMoyenPremiere: FicheExercicesData = {
           correction:
             "On remplace $x$ par $3$ dans chaque équation, et on regarde si l'on trouve $7$.\n$y = 2x + 1$ : $2 \\times 3 + 1 = 7$. Elle passe par $G$.\n$y = 3x - 1$ : $3 \\times 3 - 1 = 8$. Elle ne passe pas par $G$.\nC'est la droite $y = 2x + 1$.\n⭐ Une droite d'ajustement passe toujours par le point moyen.",
           schema: ecranSeulement(repere([-1, 5, -1, 10], [{ q: [0, 2, 1] }], [{ x: 3, y: 7, label: "G" }], undefined, true)),
+          reponses: [
+            { attendu: ["y = 2x + 1"] },
+          ],
           micros: ["info_point_moyen_droite"],
         },
         {
@@ -133,6 +145,9 @@ export const exercicesInfoPointMoyenPremiere: FicheExercicesData = {
               [[0, 6]],
             ),
           ),
+          reponses: [
+            { attendu: "(3 ; 15)", ordre: true },
+          ],
           micros: ["info_point_moyen_calculer"],
         },
         {
@@ -147,6 +162,9 @@ export const exercicesInfoPointMoyenPremiere: FicheExercicesData = {
             { x: 4, y: 11 },
             { x: 2.5, y: 8, label: "G" },
           ], undefined, true),
+          reponses: [
+            { attendu: "9 km" },
+          ],
           micros: ["info_point_moyen_calculer"],
         },
         {
@@ -155,6 +173,9 @@ export const exercicesInfoPointMoyenPremiere: FicheExercicesData = {
           correction:
             "La droite passe par $G$ : on remplace $x$ par $4$ et $y$ par $5$.\n$5 = 0{,}5 \\times 4 + b$, soit $5 = 2 + b$.\nDonc $b = 3$, et la droite a pour équation $y = 0{,}5x + 3$.\n⭐ C'est le moyen le plus rapide de compléter une équation : le point moyen en donne un point.",
           schema: ecranSeulement(repere([-1, 7, -1, 7], [{ q: [0, 0.5, 3] }], [{ x: 4, y: 5, label: "G" }])),
+          reponses: [
+            { attendu: "3" },
+          ],
           micros: ["info_point_moyen_droite"],
         },
         {
@@ -177,6 +198,9 @@ export const exercicesInfoPointMoyenPremiere: FicheExercicesData = {
               { x: 3, y: 3, label: "G" },
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: "(3 ; 3)", ordre: true },
+          ],
           micros: ["info_point_moyen_calculer", "info_point_moyen_placer"],
         },
       ],
@@ -217,6 +241,10 @@ export const exercicesInfoPointMoyenPremiere: FicheExercicesData = {
               { x: 3, y: 4, label: "G" },
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: "(3 ; 4)", ordre: true },
+            { question: "b)", attendu: ["non", "faux"] },
+          ],
           micros: ["info_point_moyen_calculer", "info_point_moyen_placer"],
         },
         {
@@ -232,6 +260,10 @@ export const exercicesInfoPointMoyenPremiere: FicheExercicesData = {
           ]),
           correction:
             "a) $\\overline{x} = \\dfrac{1 + 2 + 3 + 4 + 5}{5} = 3$ ; $\\overline{y} = \\dfrac{1 + 2 + 3 + 6 + 8}{5} = \\dfrac{20}{5} = 4$. Donc $G(3 ; 4)$.\nb) Bleue : $2 \\times 3 - 2 = 4$. Elle passe par $G$.\nOrange : $3 + 2 = 5 \\neq 4$. Elle ne passe pas par $G$.\nLa droite bleue est la bonne candidate.\n⚠️ À l'œil, les deux droites « traversent le nuage » : c'est le calcul en $G$ qui tranche.",
+          reponses: [
+            { question: "a)", attendu: "(3 ; 4)", ordre: true },
+            { question: "b)", attendu: ["bleue", "la bleue", "y = 2x - 2"] },
+          ],
           micros: ["info_point_moyen_droite", "info_point_moyen_calculer"],
         },
         {
@@ -255,6 +287,9 @@ export const exercicesInfoPointMoyenPremiere: FicheExercicesData = {
               { x: 3, y: 5, label: "G" },
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: "(3 ; 5)", ordre: true },
+          ],
           micros: ["info_point_moyen_calculer", "info_point_moyen_placer"],
         },
         {
@@ -272,6 +307,9 @@ export const exercicesInfoPointMoyenPremiere: FicheExercicesData = {
               { x: 4, y: 6, label: "G" },
             ]),
           ),
+          reponses: [
+            { attendu: "(6 ; 8)", ordre: true },
+          ],
           micros: ["info_point_moyen_calculer", "info_point_moyen_placer"],
         },
         {
@@ -288,6 +326,11 @@ export const exercicesInfoPointMoyenPremiere: FicheExercicesData = {
             { x: 4, y: 12 },
             { x: 2, y: 8, label: "G" },
           ], undefined, true),
+          reponses: [
+            { question: "a)", attendu: "(2 ; 8)", ordre: true },
+            { question: "b)", attendu: "y = 2x + 4" },
+            { question: "c)", attendu: "2 cm" },
+          ],
           micros: ["info_point_moyen_calculer", "info_point_moyen_droite"],
         },
         {
@@ -303,6 +346,10 @@ export const exercicesInfoPointMoyenPremiere: FicheExercicesData = {
           ], undefined, true),
           correction:
             "a) $\\overline{x} = \\dfrac{1 + 2 + 3 + 4 + 5}{5} = 3$ ; $\\overline{y} = \\dfrac{2 + 3 + 4 + 5 + 11}{5} = \\dfrac{25}{5} = 5$. Donc $G(3 ; 5)$.\nb) $\\overline{x} = \\dfrac{1 + 2 + 3 + 4}{4} = 2{,}5$ ; $\\overline{y} = \\dfrac{2 + 3 + 4 + 5}{4} = \\dfrac{14}{4} = 3{,}5$. Donc $G'(2{,}5 ; 3{,}5)$.\nc) Un seul point exceptionnel fait monter $G$ de $3{,}5$ à $5$ : $50$ kg au lieu de $35$ kg en moyenne.\n⚠️ Comme toute moyenne, le point moyen est sensible aux valeurs extrêmes.",
+          reponses: [
+            { question: "a)", attendu: "(3 ; 5)", ordre: true },
+            { question: "b)", attendu: "(2,5 ; 3,5)", ordre: true },
+          ],
           micros: ["info_point_moyen_calculer", "info_point_moyen_placer"],
         },
         {
@@ -318,6 +365,11 @@ export const exercicesInfoPointMoyenPremiere: FicheExercicesData = {
               [[0, 3], [0, 6]],
             ),
           ),
+          reponses: [
+            { question: "a) G", attendu: "(2 ; 25)", ordre: true },
+            { question: "a) point du nuage ?", attendu: ["non", "faux"] },
+            { question: "b)", attendu: ["oui", "vrai"] },
+          ],
           micros: ["info_point_moyen_calculer", "info_point_moyen_droite"],
         },
         {
@@ -343,6 +395,11 @@ export const exercicesInfoPointMoyenPremiere: FicheExercicesData = {
               { x: 4, y: 6, label: "G" },
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: "(4 ; 6)", ordre: true },
+            { question: "b)", attendu: ["non", "faux"] },
+            { question: "c)", attendu: "y = x + 2" },
+          ],
           micros: ["info_point_moyen_droite", "info_point_moyen_placer"],
         },
       ],
@@ -373,6 +430,12 @@ export const exercicesInfoPointMoyenPremiere: FicheExercicesData = {
             { x: 4, y: 5 },
             { x: 2, y: 3, label: "G" },
           ]),
+          reponses: [
+            { question: "a)", attendu: "(2 ; 3)", ordre: true },
+            { question: "c)", attendu: ["Inès", "la droite d'Inès", "y = 1,2x + 0,6"] },
+            { question: "d) en cinq ans", attendu: "1,2 cm" },
+            { question: "d) en un an", attendu: "2,4 mm" },
+          ],
           micros: ["info_point_moyen_calculer", "info_point_moyen_placer", "info_point_moyen_droite"],
         },
         {
@@ -385,6 +448,11 @@ export const exercicesInfoPointMoyenPremiere: FicheExercicesData = {
           ),
           correction:
             "a) $\\overline{x} = \\dfrac{6 + 8 + 8 + 10 + 12 + 16}{6} = \\dfrac{60}{6} = 10$ ; $\\overline{y} = \\dfrac{5 + 8 + 9 + 11 + 15 + 24}{6} = \\dfrac{72}{6} = 12$.\n$G(10 ; 12)$ : en moyenne, un mât de $100$ m et une puissance de $1\\,200$ kW.\nb) $1{,}5 \\times 10 - 3 = 12$ : la première passe par $G$. $2 \\times 10 - 7 = 13 \\neq 12$ : la seconde non.\nOn garde $y = 1{,}5x - 3$.\nc) $10$ m, c'est $1$ unité en abscisse : la puissance gagne $1{,}5$ centaine de kW, soit $150$ kW.\n⭐ En hauteur, le vent est plus fort et plus régulier : d'où des mâts de plus en plus hauts.",
+          reponses: [
+            { question: "a)", attendu: "(10 ; 12)", ordre: true },
+            { question: "b)", attendu: "y = 1,5x - 3" },
+            { question: "c)", attendu: "150 kW" },
+          ],
           micros: ["info_point_moyen_calculer", "info_point_moyen_droite"],
         },
         {
@@ -398,6 +466,12 @@ export const exercicesInfoPointMoyenPremiere: FicheExercicesData = {
             { x: 7, y: 8, label: "B" },
             { x: 5, y: 6, label: "G" },
           ]),
+          reponses: [
+            { question: "a) groupe A", attendu: "8" },
+            { question: "a) groupe B", attendu: "42" },
+            { question: "b)", attendu: "(5 ; 6)", ordre: true },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           micros: ["info_point_moyen_calculer", "info_point_moyen_placer"],
         },
         {
@@ -414,6 +488,11 @@ export const exercicesInfoPointMoyenPremiere: FicheExercicesData = {
             { x: 8, y: 13 },
             { x: 4, y: 8, label: "G" },
           ], undefined, true),
+          reponses: [
+            { question: "a)", attendu: "(4 ; 8)", ordre: true },
+            { question: "c) le plus cher", attendu: ["50", "50 Go", "(5 ; 10)"], ordre: true },
+            { question: "c) le plus avantageux", attendu: ["40", "40 Go", "(4 ; 7)"], ordre: true },
+          ],
           micros: ["info_point_moyen_calculer", "info_point_moyen_placer", "info_point_moyen_droite"],
         },
       ],

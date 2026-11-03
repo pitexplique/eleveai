@@ -78,6 +78,10 @@ export const exercicesInfoNuagePremiere: FicheExercicesData = {
           ]),
           correction:
             "a) On descend de $A$ vers l'axe horizontal : $x = 5$. On va vers l'axe vertical : $y = 4$. Donc $A(5 ; 4)$.\nb) Ce chêne a $5$ dizaines d'années, soit $50$ ans, et un tronc de $4$ dizaines de cm, soit $40$ cm de diamètre.\nc) « Plus de $50$ cm », c'est $y > 5$ : les points d'ordonnées $6$ et $7$. Deux chênes.\n⚠️ Les unités d'abord : « $5$ » sur l'axe veut dire $50$ ans.",
+          reponses: [
+            { question: "a)", attendu: ["(5 ; 4)", "A(5 ; 4)"], ordre: true },
+            { question: "c)", attendu: "2" },
+          ],
           micros: ["info_nuage_lire"],
         },
         {
@@ -92,6 +96,11 @@ export const exercicesInfoNuagePremiere: FicheExercicesData = {
           ], undefined, true),
           correction:
             "a) Le point d'abscisse $3$ a pour ordonnée $6$ : $6$ centaines, soit $600$ bouteilles.\nb) $200$ bouteilles, ce sont $2$ centaines : le point d'ordonnée $2$ a pour abscisse $5$. Au prix de $5$ €.\nc) Quand le prix augmente, les ventes diminuent : le nuage est décroissant, et ses points sont presque alignés.\n⭐ C'est la loi de la demande : plus c'est cher, moins on vend.",
+          reponses: [
+            { question: "a)", attendu: "600" },
+            { question: "b)", attendu: "5 €" },
+            { question: "c)", attendu: ["décroissante", "décroissant"] },
+          ],
           micros: ["info_nuage_lire", "info_nuage_tendance"],
         },
         {
@@ -126,6 +135,10 @@ export const exercicesInfoNuagePremiere: FicheExercicesData = {
           ], undefined, true),
           correction:
             "a) Quand l'altitude augmente, la température diminue : le nuage est décroissant, et ses points sont presque alignés.\nb) À $100$ m (abscisse $1$) : $12$ °C. À $900$ m (abscisse $9$) : $6$ °C. La baisse est de $12 - 6 = 6$ °C.\n⭐ Plus on monte, plus il fait frais : les randonneurs en montagne le savent bien.",
+          reponses: [
+            { question: "a)", attendu: ["décroissante", "décroissant"] },
+            { question: "b)", attendu: "6 °C" },
+          ],
           micros: ["info_nuage_tendance", "info_nuage_lire"],
         },
         {
@@ -134,6 +147,9 @@ export const exercicesInfoNuagePremiere: FicheExercicesData = {
           correction:
             "L'abscisse est la distance : $x = 8$.\nL'ordonnée est le temps en dizaines de minutes : $40$ minutes, ce sont $4$ dizaines, donc $y = 4$.\nLe point est $(8 ; 4)$.\n⚠️ $(4 ; 8)$ inverse les deux caractères ; $(8 ; 40)$ oublie l'unité de l'axe.",
           schema: ecranSeulement(repere([-1, 9, -1, 6], [], [{ x: 8, y: 4, label: "P" }])),
+          reponses: [
+            { attendu: ["(8 ; 4)"], ordre: true },
+          ],
           micros: ["info_nuage_construire"],
         },
         {
@@ -151,6 +167,9 @@ export const exercicesInfoNuagePremiere: FicheExercicesData = {
           ]),
           correction:
             "Quand le nombre de spectateurs augmente, les points ne montent pas et ne descendent pas : ils oscillent entre $1$ et $4$ buts.\nLe nuage n'a aucune tendance.\nDans ce modèle, le nombre de buts ne semble pas lié au nombre de spectateurs.\n⭐ « Aucune tendance » est une vraie réponse : tous les nuages ne montent pas.",
+          reponses: [
+            { attendu: ["non", "aucune tendance", "aucune"] },
+          ],
           micros: ["info_nuage_tendance"],
         },
         {
@@ -166,6 +185,11 @@ export const exercicesInfoNuagePremiere: FicheExercicesData = {
           ], undefined, true),
           correction:
             "a) Le point d'abscisse $6$ a pour ordonnée $5$ : $500$ glaces.\nb) « Plus de $600$ », c'est $y > 6$ : les points d'ordonnées $7$ et $9$. Deux jours.\n⚠️ Le jour à exactement $600$ glaces ne compte pas : $6$ n'est pas plus grand que $6$.\nc) Plus il y a de soleil, plus il vend de glaces : le nuage est croissant, presque aligné.",
+          reponses: [
+            { question: "a)", attendu: "500" },
+            { question: "b)", attendu: "2" },
+            { question: "c)", attendu: ["croissante", "croissant"] },
+          ],
           micros: ["info_nuage_lire", "info_nuage_tendance"],
         },
         {
@@ -180,6 +204,10 @@ export const exercicesInfoNuagePremiere: FicheExercicesData = {
           ]),
           correction:
             "On traduit chaque mesure en point : $(1 ; 1)$, $(2 ; 2)$, $(3 ; 4)$, $(4 ; 6)$, $(5 ; 8)$.\nOn compare au dessin, point par point : à la semaine $3$, le point est à $5$, soit $50$ cm.\nOr la semaine $3$, le tournesol mesurait $40$ cm : le bon point est $(3 ; 4)$.\n⭐ Vérifier un nuage, c'est relire le tableau colonne par colonne.",
+          reponses: [
+            { question: "Point mal placé", attendu: "(3 ; 5)", ordre: true },
+            { question: "Point corrigé", attendu: "(3 ; 4)", ordre: true },
+          ],
           micros: ["info_nuage_construire", "info_nuage_lire"],
         },
       ],
@@ -212,6 +240,9 @@ export const exercicesInfoNuagePremiere: FicheExercicesData = {
               { x: 5, y: 11 },
             ], undefined, true),
           ),
+          reponses: [
+            { question: "c)", attendu: ["croissante", "croissant"] },
+          ],
           micros: ["info_nuage_construire", "info_nuage_tendance"],
         },
         {
@@ -228,6 +259,10 @@ export const exercicesInfoNuagePremiere: FicheExercicesData = {
           ], undefined, true),
           correction:
             "a) Plus on descend, plus l'eau est froide : le nuage est décroissant, presque aligné… sauf un point.\nb) Le point $P(4 ; 3)$ : à $40$ m de profondeur, l'eau serait à $3$ °C.\nc) Ses voisins donnent $10$ °C à $30$ m et $8$ °C à $50$ m : on attendrait environ $9$ °C à $40$ m.\nC'est très probablement une erreur de mesure (capteur, recopie), à vérifier avant d'utiliser les données.\n⚠️ On ne supprime pas un point isolé sans raison : on le signale, et on cherche pourquoi.",
+          reponses: [
+            { question: "a)", attendu: ["décroissante", "décroissant"] },
+            { question: "b)", attendu: ["(4 ; 3)", "P(4 ; 3)", "P"], ordre: true },
+          ],
           micros: ["info_nuage_tendance", "info_nuage_lire"],
         },
         {
@@ -246,6 +281,10 @@ export const exercicesInfoNuagePremiere: FicheExercicesData = {
               { x: 6, y: 5 },
             ]),
           ),
+          reponses: [
+            { question: "b)", attendu: "300 €" },
+            { question: "c)", attendu: ["croissante", "croissant"] },
+          ],
           micros: ["info_nuage_construire", "info_nuage_lire", "info_nuage_tendance"],
         },
         {
@@ -262,6 +301,11 @@ export const exercicesInfoNuagePremiere: FicheExercicesData = {
           ], undefined, true),
           correction:
             "a) « Plus de $6$ » : les points d'ordonnées $9$, $8$ et $12$. Trois pays.\nb) Oui : le point le plus à droite, $(6 ; 12)$, est aussi le plus haut.\nc) Le pays d'abscisse $5$ est plus riche que celui d'abscisse $4$, mais il émet moins : $8$ tonnes contre $9$.\nUne tendance n'est pas une règle : elle vaut pour l'ensemble, pas pour chaque pays.\nd) Plus un pays est riche, plus il a tendance à émettre de CO₂ par habitant : le nuage est croissant.",
+          reponses: [
+            { question: "a)", attendu: "3" },
+            { question: "b)", attendu: ["oui", "vrai"] },
+            { question: "d)", attendu: ["croissante", "croissant"] },
+          ],
           micros: ["info_nuage_lire", "info_nuage_tendance"],
         },
         {
@@ -280,6 +324,12 @@ export const exercicesInfoNuagePremiere: FicheExercicesData = {
           ], undefined, true),
           correction:
             "a) De $10$ à $30$ ans : de $2$ à $8$ m, soit $6$ m. De $50$ à $80$ ans : de $11$ à $13$ m, soit $2$ m seulement, en plus de temps.\nb) Plus l'arbre est vieux, plus il est grand : le nuage est croissant.\nMais il n'est pas aligné : il monte vite au début, puis de moins en moins. Le nuage se courbe.\n⭐ « Croissant » ne veut pas dire « aligné » : un bon commentaire dit les deux choses.",
+          reponses: [
+            { question: "a) de 10 à 30 ans", attendu: "6 m" },
+            { question: "a) de 50 à 80 ans", attendu: "2 m" },
+            { question: "b) tendance", attendu: ["croissante", "croissant"] },
+            { question: "b) alignés ?", attendu: ["non", "faux"] },
+          ],
           micros: ["info_nuage_tendance", "info_nuage_lire"],
         },
         {
@@ -315,6 +365,11 @@ export const exercicesInfoNuagePremiere: FicheExercicesData = {
               { x: 10, y: 2 },
             ], undefined, true),
           ),
+          reponses: [
+            { question: "b)", attendu: ["(2 ; 6)"], ordre: true },
+            { question: "c)", attendu: ["décroissante", "décroissant"] },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           micros: ["info_nuage_construire", "info_nuage_lire", "info_nuage_tendance"],
         },
         {
@@ -332,6 +387,10 @@ export const exercicesInfoNuagePremiere: FicheExercicesData = {
               { x: 13, y: 9 },
             ], undefined, true),
           ),
+          reponses: [
+            { question: "b)", attendu: ["croissante", "croissant"] },
+            { question: "c)", attendu: "10 L" },
+          ],
           micros: ["info_nuage_construire", "info_nuage_lire", "info_nuage_tendance"],
         },
       ],
@@ -365,6 +424,12 @@ export const exercicesInfoNuagePremiere: FicheExercicesData = {
             { x: 3, y: 8 },
             { x: 4, y: 7 },
           ], undefined, true),
+          reponses: [
+            { question: "a)", attendu: "3" },
+            { question: "c)", attendu: ["décroissante", "décroissant"] },
+            { question: "d) recul total", attendu: "5 km" },
+            { question: "d) par décennie", attendu: "1,25 km" },
+          ],
           micros: ["info_nuage_construire", "info_nuage_lire", "info_nuage_tendance"],
         },
         {
@@ -383,6 +448,12 @@ export const exercicesInfoNuagePremiere: FicheExercicesData = {
           ], undefined, true),
           correction:
             "a) Le point d'abscisse $4$ a pour ordonnée $7$ : $7$ ruches actives.\nb) « Au moins $6$ » : les ordonnées $10$, $9$, $9$, $7$, $6$, $6$. Six champs.\nc) Plus l'indice de pesticides est fort, moins il reste de ruches actives : le nuage est décroissant, presque aligné.\nd) Non : il montre un lien fort, pas une preuve. D'autres causes peuvent jouer (les fleurs disponibles, les maladies, le climat).\nPour prouver une cause, il faut une expérience où l'on ne change QU'UNE chose à la fois.\n⭐ Un nuage est un signal d'alerte, qui pousse à chercher la cause.",
+          reponses: [
+            { question: "a)", attendu: "7" },
+            { question: "b)", attendu: "6" },
+            { question: "c)", attendu: ["décroissante", "décroissant"] },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           micros: ["info_nuage_lire", "info_nuage_tendance"],
         },
         {
@@ -408,6 +479,10 @@ export const exercicesInfoNuagePremiere: FicheExercicesData = {
               { x: 8, y: 9 },
             ], undefined, true),
           ),
+          reponses: [
+            { question: "b)", attendu: ["croissante", "croissant"] },
+            { question: "c)", attendu: ["(2 ; 9)"], ordre: true },
+          ],
           micros: ["info_nuage_construire", "info_nuage_tendance", "info_nuage_lire"],
         },
         {
@@ -426,6 +501,11 @@ export const exercicesInfoNuagePremiere: FicheExercicesData = {
               { x: 12, y: 12 },
             ], undefined, true),
           ),
+          reponses: [
+            { question: "b) tendance", attendu: ["croissante", "croissant"] },
+            { question: "b) médecins pour 1 000 hab.", attendu: "1" },
+            { question: "c)", attendu: ["5 000", "5000 habitants", "(5 ; 3)"], ordre: true },
+          ],
           micros: ["info_nuage_construire", "info_nuage_lire", "info_nuage_tendance"],
         },
       ],

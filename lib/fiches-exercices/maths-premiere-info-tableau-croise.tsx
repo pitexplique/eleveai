@@ -72,6 +72,11 @@ export const exercicesInfoTableauCroisePremiere: FicheExercicesData = {
           ),
           correction:
             "a) On se place sur la ligne « Moins de 40 ans », puis dans la colonne « Trie le verre » : la case contient $70$.\n$70$ personnes de moins de $40$ ans trient le verre.\nb) « En tout » : c'est une marge. On lit le total de la colonne « Ne trie pas », tout en bas : $45$ personnes.\nc) C'est le total de la ligne « 40 ans et plus », à droite : $100$ personnes.\n⚠️ Une case répond à « à la fois … et … » ; une marge répond à « en tout ».",
+          reponses: [
+            { question: "a)", attendu: "70" },
+            { question: "b)", attendu: "45" },
+            { question: "c)", attendu: "100" },
+          ],
           micros: ["info_tab_lire"],
         },
         {
@@ -88,6 +93,11 @@ export const exercicesInfoTableauCroisePremiere: FicheExercicesData = {
           ),
           correction:
             "a) Ligne « Natation », colonne « Filles » : $36$ filles font de la natation.\n⚠️ Pas $60$ : $60$ est le total de la ligne, filles et garçons ensemble.\nb) On compare les deux cases de chaque ligne. Au basket : $30$ filles et $30$ garçons.\nc) Total de la ligne « Football » : $80$ licenciés.\n✔️ Contrôle : $80 + 60 + 60 = 200$, le total général.",
+          reponses: [
+            { question: "a)", attendu: "36" },
+            { question: "b)", attendu: ["basket", "le basket"] },
+            { question: "c)", attendu: "80" },
+          ],
           micros: ["info_tab_lire"],
         },
         {
@@ -103,6 +113,10 @@ export const exercicesInfoTableauCroisePremiere: FicheExercicesData = {
           ),
           correction:
             "On commence par la ligne où il ne manque qu'UN nombre : la ligne « Femmes ».\n$80 - 60 = 20$ : $20$ femmes travaillent à temps partiel.\nPuis la colonne « Temps partiel » : $20 + 10 = 30$.\n✔️ Contrôle par l'autre chemin : $180 - 150 = 30$. Les deux calculs donnent le même nombre.\n⭐ Un tableau complété se vérifie TOUJOURS dans les deux sens.",
+          reponses: [
+            { question: "Femmes à temps partiel", attendu: "20" },
+            { question: "Total temps partiel", attendu: "30" },
+          ],
           micros: ["info_tab_completer"],
         },
         {
@@ -128,6 +142,13 @@ export const exercicesInfoTableauCroisePremiere: FicheExercicesData = {
               ],
             ),
           ),
+          reponses: [
+            { question: "Total parcelle nord", attendu: "200" },
+            { question: "Total parcelle sud", attendu: "200" },
+            { question: "Total feuillus", attendu: "180" },
+            { question: "Total résineux", attendu: "220" },
+            { question: "Total général", attendu: "400" },
+          ],
           micros: ["info_tab_completer"],
         },
         {
@@ -160,6 +181,9 @@ export const exercicesInfoTableauCroisePremiere: FicheExercicesData = {
               ],
             ),
           ),
+          reponses: [
+            { question: "a)", attendu: "6" },
+          ],
           micros: ["info_tab_construire"],
         },
         {
@@ -175,6 +199,11 @@ export const exercicesInfoTableauCroisePremiere: FicheExercicesData = {
           ),
           correction:
             "a) Ligne « Première », colonne « 3 h ou plus » : $70$ élèves.\nb) « Toutes classes confondues » : on lit la marge du bas de la colonne « 3 h ou plus » : $140$ élèves.\nc) Marge de droite de la ligne « Seconde » : $130$ élèves.\n⚠️ Aux a) et b), la même colonne, mais pas la même case : la question dit si l'on veut une case (a) ou une marge (b).",
+          reponses: [
+            { question: "a)", attendu: "70" },
+            { question: "b)", attendu: "140" },
+            { question: "c)", attendu: "130" },
+          ],
           micros: ["info_tab_lire"],
         },
         {
@@ -200,6 +229,13 @@ export const exercicesInfoTableauCroisePremiere: FicheExercicesData = {
               ],
             ),
           ),
+          reponses: [
+            { question: "Électriques en panne", attendu: "15" },
+            { question: "Mécaniques (total)", attendu: "60" },
+            { question: "Mécaniques en service", attendu: "45" },
+            { question: "En panne (total)", attendu: "30" },
+            { question: "Mécaniques en panne", attendu: "15" },
+          ],
           micros: ["info_tab_completer"],
         },
       ],
@@ -233,6 +269,10 @@ export const exercicesInfoTableauCroisePremiere: FicheExercicesData = {
               ],
             ),
           ),
+          reponses: [
+            { question: "a)", attendu: "120" },
+            { question: "c)", attendu: "120" },
+          ],
           micros: ["info_tab_construire", "info_tab_completer"],
         },
         {
@@ -259,6 +299,13 @@ export const exercicesInfoTableauCroisePremiere: FicheExercicesData = {
               ],
             ),
           ),
+          reponses: [
+            { question: "Femmes, 1 h 45 à 2 h 15", attendu: "110" },
+            { question: "Hommes (total)", attendu: "300" },
+            { question: "Hommes, < 1 h 45", attendu: "120" },
+            { question: "Hommes, > 2 h 15", attendu: "30" },
+            { question: "Total, 1 h 45 à 2 h 15", attendu: "260" },
+          ],
           micros: ["info_tab_completer"],
         },
         {
@@ -277,6 +324,10 @@ export const exercicesInfoTableauCroisePremiere: FicheExercicesData = {
               ],
             ),
           ),
+          reponses: [
+            { question: "b)", attendu: "560" },
+            { question: "c)", attendu: "120" },
+          ],
           micros: ["info_tab_construire", "info_tab_completer"],
         },
         {
@@ -293,6 +344,9 @@ export const exercicesInfoTableauCroisePremiere: FicheExercicesData = {
           ),
           correction:
             "On vérifie chaque ligne : $45 + 30 + 25 = 100$ ✔️ ; $35 + 50 + 15 = 100$ ✔️.\nChaque colonne : $45 + 35 = 80$ ✔️ ; $30 + 50 = 80$ ✔️ ; $25 + 15 = 40$ ✔️.\nLe total général : par les lignes, $100 + 100 = 200$ ; par les colonnes, $80 + 80 + 40 = 200$.\nL'erreur est le total général : il vaut $200$, et non $210$.\n⭐ Toutes les cases s'accordaient entre elles : seul le contrôle dans les deux sens trahit l'erreur.",
+          reponses: [
+            { attendu: "200" },
+          ],
           micros: ["info_tab_completer", "info_tab_lire"],
         },
         {
@@ -309,6 +363,11 @@ export const exercicesInfoTableauCroisePremiere: FicheExercicesData = {
           ),
           correction:
             "a) $150$ est à la ligne « Moins de 8 h » et à la colonne « Fatigué » : $150$ lycéens dorment moins de $8$ h ET se disent fatigués.\nb) Marge de la colonne « Pas fatigué » : $210$ lycéens.\nc) Une case : ligne « 8 h ou plus », colonne « Pas fatigué » : $120$ lycéens.\nd) Marge de la ligne « Moins de 8 h » : $240$ lycéens.\n⭐ Le mot « ET » annonce une case ; « en tout », une marge.",
+          reponses: [
+            { question: "b)", attendu: "210" },
+            { question: "c)", attendu: "120" },
+            { question: "d)", attendu: "240" },
+          ],
           micros: ["info_tab_lire"],
         },
         {
@@ -327,6 +386,9 @@ export const exercicesInfoTableauCroisePremiere: FicheExercicesData = {
               ],
             ),
           ),
+          reponses: [
+            { question: "b)", attendu: "19" },
+          ],
           micros: ["info_tab_construire", "info_tab_completer"],
         },
         {
@@ -345,6 +407,10 @@ export const exercicesInfoTableauCroisePremiere: FicheExercicesData = {
               ],
             ),
           ),
+          reponses: [
+            { question: "a)", attendu: "300" },
+            { question: "c)", attendu: "60" },
+          ],
           micros: ["info_tab_construire", "info_tab_completer"],
         },
         {
@@ -361,6 +427,12 @@ export const exercicesInfoTableauCroisePremiere: FicheExercicesData = {
           ),
           correction:
             "a) Marge de la colonne « Voiture » : $230$ salariés.\nb) Case « Moins de 10 km » et « Voiture » : $80$ salariés.\nc) « La plupart » veut dire plus de la moitié. La moitié de $180$, c'est $90$, et $80 < 90$.\nElle a tort : $40 + 60 = 100$ salariés proches viennent autrement qu'en voiture.\nd) Case « 10 km ou plus » et « Vélo, marche » : $10$ salariés.\n⚠️ Au c), on compare à la ligne « Moins de 10 km » ($180$), pas aux $400$ salariés.",
+          reponses: [
+            { question: "a)", attendu: "230" },
+            { question: "b)", attendu: "80" },
+            { question: "c)", attendu: ["non", "faux"] },
+            { question: "d)", attendu: "10" },
+          ],
           micros: ["info_tab_lire"],
         },
       ],
@@ -392,6 +464,11 @@ export const exercicesInfoTableauCroisePremiere: FicheExercicesData = {
               ["Total", "330", "870", "1200"],
             ],
           ),
+          reponses: [
+            { question: "a)", attendu: "300" },
+            { question: "c)", attendu: "870" },
+            { question: "d)", attendu: ["25 à 50 ans", "de 25 à 50 ans", "25 à 50"] },
+          ],
           micros: ["info_tab_construire", "info_tab_completer"],
         },
         {
@@ -408,6 +485,11 @@ export const exercicesInfoTableauCroisePremiere: FicheExercicesData = {
               ["Total", "1100", "900", "2000"],
             ],
           ),
+          reponses: [
+            { question: "b)", attendu: "400" },
+            { question: "c)", attendu: "256 000 €" },
+            { question: "d)", attendu: ["semaine adulte", "forfait semaine adulte", "adultes semaine", "adulte semaine"] },
+          ],
           micros: ["info_tab_construire", "info_tab_completer", "info_tab_lire"],
         },
         {
@@ -426,6 +508,10 @@ export const exercicesInfoTableauCroisePremiere: FicheExercicesData = {
               ],
             ),
           ),
+          reponses: [
+            { question: "b)", attendu: "45" },
+            { question: "c)", attendu: "12" },
+          ],
           micros: ["info_tab_construire", "info_tab_completer"],
         },
         {
@@ -444,6 +530,12 @@ export const exercicesInfoTableauCroisePremiere: FicheExercicesData = {
               ],
             ),
           ),
+          reponses: [
+            { question: "a) voiture seule", attendu: "2 000" },
+            { question: "a) covoiturage", attendu: "1 500" },
+            { question: "c)", attendu: "1 000" },
+            { question: "d)", attendu: "20" },
+          ],
           micros: ["info_tab_construire", "info_tab_completer", "info_tab_lire"],
         },
       ],
