@@ -70,6 +70,12 @@ export const exercicesAleaArbrePremiere: FicheExercicesData = {
             { label: "A", proba: "0,7", enfants: [{ label: "B", proba: "0,4" }, { label: "non B", proba: "0,6" }] },
             { label: "non A", proba: "0,3", enfants: [{ label: "B", proba: "0,9" }, { label: "non B", proba: "0,1" }] },
           ]),
+          reponses: [
+            { question: "P(A)", attendu: "0,7" },
+            { question: "P(non A)", attendu: "0,3" },
+            { question: "P_A(B)", attendu: "0,4" },
+            { question: "P_nonA(non B)", attendu: "0,1" },
+          ],
           correction:
             "Premier niveau : $P(A) = 0{,}7$ et $P(\\overline{A}) = 0{,}3$.\nLa branche de $A$ vers $B$ : $P_A(B) = 0{,}4$. En bus, Tom arrive avant $8$ h $4$ fois sur $10$.\nLa branche de $\\overline{A}$ vers $\\overline{B}$ : $P_{\\overline{A}}(\\overline{B}) = 0{,}1$. À vélo, il n'arrive après $8$ h qu'une fois sur dix.\n⭐ Le nœud d'où part la branche donne l'INDICE.",
           micros: ["alea_arbre_lire"],
@@ -80,6 +86,11 @@ export const exercicesAleaArbrePremiere: FicheExercicesData = {
             { label: "A", proba: "0,35", enfants: [{ label: "B", proba: "0,2" }, { label: "non B", proba: "?" }] },
             { label: "non A", proba: "?", enfants: [{ label: "B", proba: "?" }, { label: "non B", proba: "0,45" }] },
           ]),
+          reponses: [
+            { question: "P(non A)", attendu: "0,65" },
+            { question: "A → non B", attendu: "0,8" },
+            { question: "non A → B", attendu: "0,55" },
+          ],
           correction:
             "Au départ, les deux branches font $1$ : $P(\\overline{A}) = 1 - 0{,}35 = 0{,}65$.\nAu nœud $A$ : $P_A(\\overline{B}) = 1 - 0{,}2 = 0{,}8$.\nAu nœud $\\overline{A}$ : $P_{\\overline{A}}(B) = 1 - 0{,}45 = 0{,}55$.\n⚠️ Le piège : faire $1 - 0{,}2$ pour la branche $\\overline{A} \\to B$. On complète NŒUD PAR NŒUD, avec les branches qui partent du même point.",
           schema: ecranSeulement(
@@ -119,6 +130,12 @@ export const exercicesAleaArbrePremiere: FicheExercicesData = {
             { label: "Bleu", proba: "0,3", enfants: [{ label: "G", proba: "?" }, { label: "non G", proba: "0,6" }] },
             { label: "Vert", proba: "?", enfants: [{ label: "G", proba: "0,7" }, { label: "non G", proba: "?" }] },
           ]),
+          reponses: [
+            { question: "Vert", attendu: "0,2" },
+            { question: "Rouge → non G", attendu: "0,9" },
+            { question: "Bleu → G", attendu: "0,4" },
+            { question: "Vert → non G", attendu: "0,3" },
+          ],
           correction:
             "Au départ, TROIS branches, qui font $1$ : $P(\\text{Vert}) = 1 - 0{,}5 - 0{,}3 = 0{,}2$.\nDerrière Rouge : $1 - 0{,}1 = 0{,}9$.\nDerrière Bleu : $1 - 0{,}6 = 0{,}4$.\nDerrière Vert : $1 - 0{,}7 = 0{,}3$.\n⭐ Un nœud peut avoir plus de deux branches : la règle reste la même, leur somme vaut $1$.",
           micros: ["alea_arbre_completer"],
@@ -178,6 +195,9 @@ export const exercicesAleaArbrePremiere: FicheExercicesData = {
           titre: "Le centre de tri",
           enonce:
             "Un centre de tri reçoit des bouteilles : $70$ % en plastique ($P$), les autres en verre. Parmi les bouteilles en plastique, $90$ % sont bien triées par les habitants ($T$) ; parmi celles en verre, $95$ %.\na) Construire l'arbre pondéré.\nb) Lire $P_{\\overline{P}}(\\overline{T})$ et l'écrire par une phrase.",
+          reponses: [
+            { question: "b)", attendu: "0,05" },
+          ],
           correction:
             "a) Premier niveau : $P$ avec $0{,}7$, $\\overline{P}$ (verre) avec $0{,}3$.\nDerrière $P$ : $T$ avec $0{,}9$, $\\overline{T}$ avec $0{,}1$. Derrière $\\overline{P}$ : $T$ avec $0{,}95$, $\\overline{T}$ avec $0{,}05$.\nb) $P_{\\overline{P}}(\\overline{T}) = 0{,}05$ : « parmi les bouteilles en verre, $5$ % sont mal triées ».\n⚠️ Ce n'est pas « $5$ % des bouteilles sont du verre mal trié » : ce serait tout un chemin, pas une branche.",
           schema: ecranSeulement(
@@ -192,6 +212,9 @@ export const exercicesAleaArbrePremiere: FicheExercicesData = {
           titre: "Le signal binaire",
           enonce:
             "Un émetteur envoie des bits dans un câble : $60$ % de « $1$ », $40$ % de « $0$ ». À cause du bruit électrique, un « $1$ » est bien reçu comme « $1$ » avec la probabilité $0{,}95$, et un « $0$ » est bien reçu comme « $0$ » avec la probabilité $0{,}9$.\na) Construire l'arbre : bit émis, puis bit reçu.\nb) Quelles branches représentent une ERREUR de transmission ? Quelles probabilités portent-elles ?\nc) Écrire par une phrase la probabilité portée par la branche « Émis 0 » vers « Reçu 1 ».",
+          reponses: [
+            { question: "b) probabilités des erreurs", attendu: "0,05 ; 0,1" },
+          ],
           correction:
             "a) Premier niveau : « Émis 1 » avec $0{,}6$, « Émis 0 » avec $0{,}4$.\nDerrière « Émis 1 » : « Reçu 1 » avec $0{,}95$, « Reçu 0 » avec $1 - 0{,}95 = 0{,}05$.\nDerrière « Émis 0 » : « Reçu 0 » avec $0{,}9$, « Reçu 1 » avec $0{,}1$.\nb) Une erreur, c'est recevoir l'autre bit : « Émis 1 » vers « Reçu 0 » ($0{,}05$), et « Émis 0 » vers « Reçu 1 » ($0{,}1$).\nc) « Quand l'émetteur envoie un $0$, il est reçu comme un $1$ une fois sur dix. »\n⭐ Les ingénieurs ajoutent des bits de contrôle pour repérer ces erreurs : c'est ce qui rend nos échanges numériques fiables.",
           schema: arbre([
@@ -221,6 +244,11 @@ export const exercicesAleaArbrePremiere: FicheExercicesData = {
             { label: "Près", proba: "0,55", enfants: [{ label: "R", proba: "0,9" }, { label: "non R", proba: "?" }] },
             { label: "Loin", proba: "?", enfants: [{ label: "R", proba: "?" }, { label: "non R", proba: "0,5" }] },
           ]),
+          reponses: [
+            { question: "Loin", attendu: "0,45" },
+            { question: "Près → non R", attendu: "0,1" },
+            { question: "Loin → R", attendu: "0,5" },
+          ],
           correction:
             "Au départ : $P(\\text{Loin}) = 1 - 0{,}55 = 0{,}45$.\nDerrière « Près » : $P_{\\text{Près}}(\\overline{R}) = 1 - 0{,}9 = 0{,}1$.\nDerrière « Loin » : $P_{\\text{Loin}}(R) = 1 - 0{,}5 = 0{,}5$.\nLe $0{,}5$ de l'énoncé est $P_{\\text{Loin}}(\\overline{R})$ : « de loin, le buteur manque une pénalité sur deux ».\n⚠️ Ce n'est pas « la moitié des pénalités sont des échecs de loin » : la branche ne parle que des tirs de loin.",
           schema: ecranSeulement(
@@ -253,6 +281,10 @@ export const exercicesAleaArbrePremiere: FicheExercicesData = {
             { label: "Panier", proba: "0,2", enfants: [{ label: "Achat", proba: "0,4" }, { label: "non Achat", proba: "0,6" }] },
             { label: "non Panier", proba: "0,8" },
           ]),
+          reponses: [
+            { question: "a)", attendu: "0,2" },
+            { question: "b)", attendu: "0,4" },
+          ],
           correction:
             "a) Premier niveau : $P(\\text{Panier}) = 0{,}2$. Un visiteur sur cinq remplit un panier.\nb) La branche de « Panier » vers « Achat » : $P_{\\text{Panier}}(\\text{Achat}) = 0{,}4$.\n« Parmi les visiteurs qui ont rempli un panier, $40$ % achètent. »\nc) Sans panier, pas d'achat : l'histoire s'arrête.\n⚠️ $0{,}4$ n'est pas la part des visiteurs qui achètent : c'est leur part PARMI ceux qui ont rempli un panier. Les $60$ % d'abandons s'appellent, dans le commerce en ligne, des « paniers abandonnés ».",
           micros: ["alea_arbre_lire"],
@@ -261,6 +293,9 @@ export const exercicesAleaArbrePremiere: FicheExercicesData = {
           titre: "La grippe et le vaccin",
           enonce:
             "Dans une entreprise (modèle), $40$ % des salariés se sont fait vacciner contre la grippe ($V$). Pendant l'hiver, $5$ % des vaccinés attrapent la grippe ($G$), contre $20$ % des non-vaccinés.\na) Construire l'arbre pondéré.\nb) Écrire par une phrase la probabilité portée par la branche $\\overline{V} \\to \\overline{G}$.",
+          reponses: [
+            { question: "b)", attendu: "0,8" },
+          ],
           correction:
             "a) Premier niveau : $V$ avec $0{,}4$, $\\overline{V}$ avec $0{,}6$.\nDerrière $V$ : $G$ avec $0{,}05$, $\\overline{G}$ avec $0{,}95$.\nDerrière $\\overline{V}$ : $G$ avec $0{,}2$, $\\overline{G}$ avec $0{,}8$.\nb) $P_{\\overline{V}}(\\overline{G}) = 0{,}8$ : « parmi les salariés non vaccinés, $80$ % n'attrapent pas la grippe ».\n⭐ Le premier niveau est ce qui vient AVANT dans le temps : on se vaccine à l'automne, la grippe arrive l'hiver.",
           schema: ecranSeulement(
@@ -280,6 +315,13 @@ export const exercicesAleaArbrePremiere: FicheExercicesData = {
             { label: "Vélo", proba: "0,15", enfants: [{ label: "J", proba: "?" }, { label: "non J", proba: "0,4" }] },
             { label: "Voiture", proba: "?", enfants: [{ label: "J", proba: "0,3" }, { label: "non J", proba: "?" }] },
           ]),
+          reponses: [
+            { question: "Voiture", attendu: "0,6" },
+            { question: "Pied → non J", attendu: "0,2" },
+            { question: "Vélo → J", attendu: "0,6" },
+            { question: "Voiture → non J", attendu: "0,7" },
+            { question: "moyen d'arrivée", attendu: ["pied", "à pied"] },
+          ],
           correction:
             "Au départ : $P(\\text{Voiture}) = 1 - 0{,}25 - 0{,}15 = 0{,}6$.\nDerrière « Pied » : $1 - 0{,}8 = 0{,}2$. Derrière « Vélo » : $1 - 0{,}4 = 0{,}6$. Derrière « Voiture » : $1 - 0{,}3 = 0{,}7$.\nOn compare les branches qui vont vers $J$ : $0{,}8$ à pied, $0{,}6$ à vélo, $0{,}3$ en voiture.\nCe sont les visiteurs à pied qui restent le plus souvent la journée.\n⚠️ On compare des probabilités SACHANT le moyen d'arrivée, pas les nombres de visiteurs : les automobilistes sont les plus nombreux.",
           schema: ecranSeulement(
@@ -309,6 +351,10 @@ export const exercicesAleaArbrePremiere: FicheExercicesData = {
           titre: "Le contrôle des lentilles",
           enonce:
             "Un atelier d'optique contrôle des lentilles. Premier test, la distance focale : $90$ % des lentilles le réussissent ($F$). Une lentille qui réussit ce test est ensuite acceptée ($C$) avec la probabilité $0{,}95$ (contrôle des rayures). Une lentille qui échoue est repolie, puis acceptée avec la probabilité $0{,}6$.\na) Construire l'arbre pondéré.\nb) Écrire par une phrase la probabilité $P_{\\overline{F}}(C)$.\nc) Peut-on LIRE sur l'arbre la probabilité qu'une lentille acceptée ait réussi le premier test ?",
+          reponses: [
+            { question: "b)", attendu: "0,6" },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) Premier niveau : $F$ avec $0{,}9$, $\\overline{F}$ avec $0{,}1$.\nDerrière $F$ : $C$ avec $0{,}95$, $\\overline{C}$ avec $0{,}05$.\nDerrière $\\overline{F}$ : $C$ avec $0{,}6$, $\\overline{C}$ avec $0{,}4$.\nb) $P_{\\overline{F}}(C) = 0{,}6$ : « parmi les lentilles qui ont échoué au premier test, $60$ % sont acceptées après polissage ».\nc) Non. Cette probabilité est $P_C(F)$ : on SAIT que la lentille est acceptée. L'arbre ne porte que des probabilités « sachant $F$ » ou « sachant $\\overline{F}$ ».\n⛔ $P_C(F)$ n'est pas $P_F(C) = 0{,}95$. Il faudra la calculer (chapitre suivant).",
           schema: arbre([
@@ -321,6 +367,9 @@ export const exercicesAleaArbrePremiere: FicheExercicesData = {
           titre: "L'émigration vers les Amériques",
           enonce:
             "Au XIXᵉ siècle, des millions d'Européens émigrent vers les Amériques. On imagine un émigrant choisi au hasard dans un registre (modèle). Il embarque au Havre avec la probabilité $0{,}5$, à Brême avec la probabilité $0{,}3$, dans un autre port sinon. Parmi ceux du Havre, $90$ % vont aux États-Unis ($E$) ; parmi ceux de Brême, $80$ % ; parmi les autres, $60$ %. Les autres vont ailleurs en Amérique.\na) Construire l'arbre pondéré.\nb) Vérifier l'arbre nœud par nœud.\nc) Écrire par une phrase le nombre porté par la branche « Autre » vers « non E ».",
+          reponses: [
+            { question: "c)", attendu: "0,4" },
+          ],
           correction:
             "a) Premier niveau : « Le Havre » $0{,}5$, « Brême » $0{,}3$, « Autre » $1 - 0{,}5 - 0{,}3 = 0{,}2$.\nDerrière chacun : $E$ et $\\overline{E}$, avec $0{,}9$ et $0{,}1$ ; $0{,}8$ et $0{,}2$ ; $0{,}6$ et $0{,}4$.\nb) $0{,}5 + 0{,}3 + 0{,}2 = 1$, puis $0{,}9 + 0{,}1 = 1$, $0{,}8 + 0{,}2 = 1$, $0{,}6 + 0{,}4 = 1$. L'arbre est cohérent.\nc) $P_{\\text{Autre}}(\\overline{E}) = 0{,}4$ : « parmi les émigrants partis d'un autre port, $40$ % vont ailleurs qu'aux États-Unis ».\n⭐ Trois branches au premier niveau, deux au second : l'arbre suit les étapes du voyage, le port puis la destination.",
           schema: arbre([
@@ -339,6 +388,13 @@ export const exercicesAleaArbrePremiere: FicheExercicesData = {
             { label: "Centre", proba: "?", enfants: [{ label: "A", proba: "?" }, { label: "non A", proba: "0,6" }] },
             { label: "Droite", proba: "0,45", enfants: [{ label: "A", proba: "0,25" }, { label: "non A", proba: "?" }] },
           ]),
+          reponses: [
+            { question: "a) Centre", attendu: "0,15" },
+            { question: "a) Gauche → non A", attendu: "0,7" },
+            { question: "a) Centre → A", attendu: "0,4" },
+            { question: "a) Droite → non A", attendu: "0,75" },
+            { question: "b)", attendu: ["droite", "à droite"] },
+          ],
           correction:
             "a) Au départ : $P(\\text{Centre}) = 1 - 0{,}4 - 0{,}45 = 0{,}15$.\nDerrière « Gauche » : $1 - 0{,}3 = 0{,}7$. Derrière « Centre » : $1 - 0{,}6 = 0{,}4$. Derrière « Droite » : $1 - 0{,}25 = 0{,}75$.\nb) Marquer, c'est « non $A$ ». On lit : $0{,}7$ à gauche, $0{,}6$ au centre, $0{,}75$ à droite. C'est à droite qu'il marque le plus souvent.\nc) Le raisonnement mélange deux choses. $0{,}15$ dit combien de fois il tire au centre ; $0{,}6$ dit comment le tir finit, SACHANT qu'il est au centre.\nC'est vrai ici, il marque moins souvent au centre, mais pour une autre raison : $0{,}6$ est la plus petite des trois branches « non $A$ ».",
           schema: ecranSeulement(
@@ -354,6 +410,11 @@ export const exercicesAleaArbrePremiere: FicheExercicesData = {
           titre: "Les déchets du littoral",
           enonce:
             "Lors d'un ramassage sur une plage (modèle), on classe chaque déchet : plastique ($60$ %), verre ($10$ %) ou autre. Puis on regarde s'il est recyclable ($R$) : c'est le cas de la moitié des plastiques, de $90$ % du verre et de $20$ % des autres déchets.\na) Construire l'arbre pondéré.\nb) Écrire par une phrase la probabilité portée par la branche « Plastique » vers « non R ».\nc) Quelle famille de déchets est la mieux recyclable ? La plus présente ?",
+          reponses: [
+            { question: "b)", attendu: "0,5" },
+            { question: "c) mieux recyclable", attendu: ["verre", "le verre"] },
+            { question: "c) plus présente", attendu: ["plastique", "le plastique"] },
+          ],
           correction:
             "a) Premier niveau : « Plastique » $0{,}6$, « Verre » $0{,}1$, « Autre » $1 - 0{,}6 - 0{,}1 = 0{,}3$.\nDerrière chacun, $R$ et $\\overline{R}$ : $0{,}5$ et $0{,}5$ ; $0{,}9$ et $0{,}1$ ; $0{,}2$ et $0{,}8$.\nb) $P_{\\text{Plastique}}(\\overline{R}) = 0{,}5$ : « parmi les déchets en plastique, la moitié ne sont pas recyclables ».\nc) Le mieux recyclable : le verre, avec $0{,}9$ sur sa branche $R$. Le plus présent : le plastique, avec $0{,}6$ au premier niveau.\n⭐ Les deux questions se lisent à deux niveaux différents de l'arbre : le premier dit « combien », le second dit « comment ».",
           schema: arbre([

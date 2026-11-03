@@ -160,6 +160,10 @@ export const exercicesAleaBernoulliCalculPremiere: FicheExercicesData = {
         },
         {
           enonce: "Avec l'arbre de l'exercice 1, calculer la probabilité de deux succès, puis celle de deux échecs.",
+          reponses: [
+            { question: "deux succès", attendu: "0,09" },
+            { question: "deux échecs", attendu: "0,49" },
+          ],
           correction:
             "Deux succès : un seul chemin, $SS$. $P(SS) = 0{,}3 \\times 0{,}3 = 0{,}09$.\nDeux échecs : le chemin $EE$. $P(EE) = 0{,}7 \\times 0{,}7 = 0{,}49$.\n⚠️ Le piège : $0{,}3 + 0{,}3$. Le long d'un chemin, on MULTIPLIE.",
           schema: ecranSeulement(arbre([{ label: "S", proba: "0,3", enfants: [{ label: "S → 0,09", proba: "0,3" }, { label: "E", proba: "0,7" }] }, { label: "E", proba: "0,7", enfants: [{ label: "S", proba: "0,3" }, { label: "E → 0,49", proba: "0,7" }] }])),
@@ -167,6 +171,9 @@ export const exercicesAleaBernoulliCalculPremiere: FicheExercicesData = {
         },
         {
           enonce: "Toujours avec $p = 0{,}3$ et deux épreuves : calculer la probabilité d'obtenir exactement un succès. Vérifier que les trois résultats (zéro, un, deux succès) font $1$.",
+          reponses: [
+            { attendu: "0,42" },
+          ],
           correction:
             "Exactement un succès : DEUX chemins, $SE$ et $ES$.\n$P(SE) = 0{,}3 \\times 0{,}7 = 0{,}21$ et $P(ES) = 0{,}7 \\times 0{,}3 = 0{,}21$.\nOn additionne : $0{,}21 + 0{,}21 = 0{,}42$.\nVérification : $0{,}49 + 0{,}42 + 0{,}09 = 1$.\n⛔ Le piège : ne compter que $SE$ et répondre $0{,}21$. Le succès peut venir en premier OU en second.",
           schema: ecranSeulement(
@@ -179,6 +186,9 @@ export const exercicesAleaBernoulliCalculPremiere: FicheExercicesData = {
         },
         {
           enonce: "Toujours avec $p = 0{,}3$ et deux épreuves : calculer la probabilité d'obtenir au moins un succès, en passant par l'évènement contraire.",
+          reponses: [
+            { attendu: "0,51" },
+          ],
           correction:
             "« Au moins un succès » : un ou deux succès. Son contraire : « aucun succès », c'est-à-dire le chemin $EE$.\n$P(EE) = 0{,}7^2 = 0{,}49$.\nDonc $P(\\text{au moins un succès}) = 1 - 0{,}49 = 0{,}51$.\n✔️ Par les chemins : $0{,}42 + 0{,}09 = 0{,}51$.\n⭐ Le contraire ne demande qu'UN chemin ; c'est ce qui le rend si pratique.",
           schema: ecranSeulement(arbre([{ label: "S", proba: "0,3", enfants: [{ label: "S", proba: "0,3" }, { label: "E", proba: "0,7" }] }, { label: "E", proba: "0,7", enfants: [{ label: "S", proba: "0,3" }, { label: "E → 0,49", proba: "0,7" }] }])),
@@ -186,6 +196,11 @@ export const exercicesAleaBernoulliCalculPremiere: FicheExercicesData = {
         },
         {
           enonce: "On lance trois fois une pièce équilibrée. Le succès est « pile ». Construire l'arbre, compter ses chemins, et donner la probabilité de chacun. Quelle est la probabilité d'obtenir exactement deux « pile » ?",
+          reponses: [
+            { question: "nombre de chemins", attendu: "8" },
+            { question: "probabilité d'un chemin", attendu: "0,125" },
+            { question: "exactement deux pile", attendu: "0,375" },
+          ],
           correction:
             "Chaque lancer : $S$ (pile) avec $0{,}5$, $E$ (face) avec $0{,}5$. On recopie ces deux branches à chaque niveau.\nL'arbre a $2 \\times 2 \\times 2 = 8$ chemins, chacun de probabilité $0{,}5^3 = 0{,}125$.\nExactement deux « pile » : $SSE$, $SES$, $ESS$, soit trois chemins.\n$P = 3 \\times 0{,}125 = 0{,}375$.\n⭐ Quand $p = 0{,}5$, tous les chemins ont la même probabilité : il suffit de les compter.",
           schema: arbreRepete([
@@ -202,6 +217,10 @@ export const exercicesAleaBernoulliCalculPremiere: FicheExercicesData = {
         },
         {
           enonce: "On répète trois fois une épreuve de Bernoulli de paramètre $p = 0{,}4$. Calculer la probabilité de trois succès, puis celle de trois échecs.",
+          reponses: [
+            { question: "trois succès", attendu: "0,064" },
+            { question: "trois échecs", attendu: "0,216" },
+          ],
           correction:
             "Trois succès : le chemin $SSS$. $P = 0{,}4 \\times 0{,}4 \\times 0{,}4 = 0{,}4^3 = 0{,}064$.\nTrois échecs : le chemin $EEE$, avec $1 - p = 0{,}6$. $P = 0{,}6^3 = 0{,}216$.\n⚠️ Pour les échecs, on multiplie les $0{,}6$, pas les $0{,}4$.",
           schema: ecranSeulement(arbreRepete([{ label: "S", proba: "0,4", vu: true, enfants: [{ label: "S", proba: "0,4", vu: true, enfants: [{ label: "SSS → 0,064", proba: "0,4", vu: true }, { label: "SSE → 0,096", proba: "0,6" }] }, { label: "E", proba: "0,6", enfants: [{ label: "SES → 0,096", proba: "0,4" }, { label: "SEE → 0,144", proba: "0,6" }] }] }, { label: "E", proba: "0,6", vu: true, enfants: [{ label: "S", proba: "0,4", enfants: [{ label: "ESS → 0,096", proba: "0,4" }, { label: "ESE → 0,144", proba: "0,6" }] }, { label: "E", proba: "0,6", vu: true, enfants: [{ label: "EES → 0,144", proba: "0,4" }, { label: "EEE → 0,216", proba: "0,6", vu: true }] }] }])),
@@ -210,12 +229,19 @@ export const exercicesAleaBernoulliCalculPremiere: FicheExercicesData = {
         {
           enonce: "On lance trois fois un dé équilibré. Quelle est la probabilité d'obtenir au moins un $6$ ? Arrondir au centième.",
           figure: de([6]),
+          reponses: [
+            { attendu: "91/216", tolerance: 0.01 },
+          ],
           correction:
             "Le succès : « obtenir $6$ », $p = \\dfrac{1}{6}$. L'échec : $\\dfrac{5}{6}$.\nContraire de « au moins un $6$ » : « aucun $6$ », le chemin $EEE$. $P(EEE) = \\left(\\dfrac{5}{6}\\right)^3 = \\dfrac{125}{216}$.\nDonc $P(\\text{au moins un } 6) = 1 - \\dfrac{125}{216} = \\dfrac{91}{216} \\approx 0{,}42$.\n⛔ Le piège : $\\dfrac{1}{6} + \\dfrac{1}{6} + \\dfrac{1}{6} = \\dfrac{1}{2}$. Ce calcul compte deux fois les lancers avec plusieurs $6$ : avec six lancers, il donnerait $1$, la certitude, ce qui est faux.",
           micros: ["alea_bern_au_moins_un"],
         },
         {
           enonce: "On répète trois fois une épreuve de Bernoulli de paramètre $p = 0{,}4$. Combien de chemins donnent exactement deux succès ? Calculer la probabilité d'exactement deux succès.",
+          reponses: [
+            { question: "nombre de chemins", attendu: "3" },
+            { question: "probabilité", attendu: "0,288" },
+          ],
           correction:
             "Les chemins avec deux $S$ et un $E$ : $SSE$, $SES$, $ESS$. Il y en a trois : l'échec peut être en première, deuxième ou troisième position.\nChacun a la même probabilité : $0{,}4 \\times 0{,}4 \\times 0{,}6 = 0{,}096$ (l'ordre des facteurs ne change rien).\n$P = 3 \\times 0{,}096 = 0{,}288$.\n⭐ Trois chemins, un seul calcul, multiplié par trois.",
           schema: ecranSeulement(
@@ -260,6 +286,11 @@ export const exercicesAleaBernoulliCalculPremiere: FicheExercicesData = {
               { label: "E", proba: "0,2", enfants: [{ label: "EES", proba: "0,8" }, { label: "EEE", proba: "0,2" }] },
             ] },
           ]),
+          reponses: [
+            { question: "a)", attendu: "0,512" },
+            { question: "b)", attendu: "0,384" },
+            { question: "c)", attendu: "0,992" },
+          ],
           correction:
             "a) Le chemin $SSS$ : $0{,}8^3 = 0{,}512$.\nb) Trois chemins : $SSE$, $SES$, $ESS$, chacun de probabilité $0{,}8 \\times 0{,}8 \\times 0{,}2 = 0{,}128$.\n$P = 3 \\times 0{,}128 = 0{,}384$.\nc) Contraire : « aucun réussi », le chemin $EEE$, $0{,}2^3 = 0{,}008$. Donc $1 - 0{,}008 = 0{,}992$.\n⭐ Une joueuse à $80$ % rate ses trois lancers moins d'une fois sur cent.",
           micros: ["alea_bern_arbre", "alea_bern_calculer", "alea_bern_au_moins_un"],
@@ -268,6 +299,9 @@ export const exercicesAleaBernoulliCalculPremiere: FicheExercicesData = {
           titre: "Le signal répété trois fois",
           enonce:
             "Pour transmettre un bit dans un câble bruité, on l'envoie trois fois. Chaque copie arrive juste ($J$) avec la probabilité $0{,}9$, faussée ($F$) sinon, indépendamment des autres. Le récepteur garde la valeur majoritaire : il se trompe seulement si au moins deux copies sont faussées.\na) Construire l'arbre des trois copies.\nb) Calculer la probabilité que le récepteur trouve le bon bit.\nc) Comparer à un envoi unique.",
+          reponses: [
+            { question: "b)", attendu: "0,972" },
+          ],
           correction:
             "a) À chaque niveau : $J$ avec $0{,}9$, $F$ avec $0{,}1$. Huit chemins.\nb) Le récepteur a raison si AUCUNE copie n'est faussée, ou une seule.\nAucune : $JJJ$, $0{,}9^3 = 0{,}729$. Une seule : $JJF$, $JFJ$, $FJJ$, chacun $0{,}9 \\times 0{,}9 \\times 0{,}1 = 0{,}081$, soit $3 \\times 0{,}081 = 0{,}243$.\n$P = 0{,}729 + 0{,}243 = 0{,}972$.\nc) Envoi unique : $0{,}9$. En triplant, l'erreur passe de $10$ % à $2{,}8$ %.\n⭐ C'est le principe des codes correcteurs d'erreurs : un peu de répétition rend la transmission bien plus fiable.",
           schema: ecranSeulement(
@@ -288,6 +322,11 @@ export const exercicesAleaBernoulliCalculPremiere: FicheExercicesData = {
           titre: "Quatre électeurs",
           enonce:
             "Dans une grande ville (modèle), $40$ % des électeurs votent pour la liste A. Un journaliste interroge $4$ électeurs au hasard ; la ville est assez grande pour considérer les réponses comme indépendantes.\na) Calculer la probabilité qu'aucun des quatre ne vote A.\nb) En déduire la probabilité qu'au moins un vote A.\nc) Calculer la probabilité que les quatre votent A.",
+          reponses: [
+            { question: "a)", attendu: "0,1296" },
+            { question: "b)", attendu: "0,8704" },
+            { question: "c)", attendu: "0,0256" },
+          ],
           correction:
             "Épreuve : interroger un électeur ; succès : « il vote A », $p = 0{,}4$ ; $n = 4$.\na) Aucun : le seul chemin $EEEE$, $0{,}6^4 = 0{,}1296$.\nb) $1 - 0{,}1296 = 0{,}8704$.\nc) Le chemin $SSSS$ : $0{,}4^4 = 0{,}0256$.\n⭐ Plus d'une fois sur huit ($0{,}13$), le journaliste ne trouverait AUCUN électeur de A, alors que la liste fait $40$ % : quatre personnes, c'est bien trop peu pour un sondage.",
           schema: ecranSeulement(tableau(["", "aucun A", "au moins un", "tous A"], ["probabilité", "0,1296", "0,8704", "0,0256"])),
@@ -297,6 +336,11 @@ export const exercicesAleaBernoulliCalculPremiere: FicheExercicesData = {
           titre: "Trois graines",
           enonce:
             "Un jardinier sème $3$ graines de tomate ; chacune germe avec la probabilité $0{,}8$, indépendamment.\na) Calculer la probabilité qu'aucune ne germe.\nb) Calculer la probabilité qu'au moins une germe.\nc) Calculer la probabilité qu'exactement une germe.",
+          reponses: [
+            { question: "a)", attendu: "0,008" },
+            { question: "b)", attendu: "0,992" },
+            { question: "c)", attendu: "0,096" },
+          ],
           correction:
             "Succès : « la graine germe », $p = 0{,}8$ ; échec : $0{,}2$ ; $n = 3$.\na) $EEE$ : $0{,}2^3 = 0{,}008$.\nb) $1 - 0{,}008 = 0{,}992$.\nc) Trois chemins : $SEE$, $ESE$, $EES$, chacun $0{,}8 \\times 0{,}2 \\times 0{,}2 = 0{,}032$. $P = 3 \\times 0{,}032 = 0{,}096$.\n⭐ Semer trois graines par trou, c'est presque s'assurer qu'au moins une lève.",
           schema: ecranSeulement(arbreRepete([{ label: "S", proba: "0,8", vu: true, enfants: [{ label: "S", proba: "0,8", enfants: [{ label: "SSS → 0,512", proba: "0,8" }, { label: "SSE → 0,128", proba: "0,2" }] }, { label: "E", proba: "0,2", vu: true, enfants: [{ label: "SES → 0,128", proba: "0,8" }, { label: "SEE → 0,032", proba: "0,2", vu: true }] }] }, { label: "E", proba: "0,2", vu: true, enfants: [{ label: "S", proba: "0,8", vu: true, enfants: [{ label: "ESS → 0,128", proba: "0,8" }, { label: "ESE → 0,032", proba: "0,2", vu: true }] }, { label: "E", proba: "0,2", vu: true, enfants: [{ label: "EES → 0,032", proba: "0,8", vu: true }, { label: "EEE → 0,008", proba: "0,2" }] }] }])),
@@ -306,6 +350,10 @@ export const exercicesAleaBernoulliCalculPremiere: FicheExercicesData = {
           titre: "Les appels du commercial",
           enonce:
             "Un commercial conclut une vente à chaque appel avec la probabilité $0{,}2$, indépendamment. Il passe trois appels.\na) Construire l'arbre.\nb) Calculer la probabilité d'exactement une vente.\nc) Calculer la probabilité d'au moins une vente.",
+          reponses: [
+            { question: "b)", attendu: "0,384" },
+            { question: "c)", attendu: "0,488" },
+          ],
           correction:
             "a) À chaque niveau : $S$ (vente) $0{,}2$, $E$ $0{,}8$. Huit chemins.\nb) Une vente : $SEE$, $ESE$, $EES$, chacun $0{,}2 \\times 0{,}8 \\times 0{,}8 = 0{,}128$. $P = 3 \\times 0{,}128 = 0{,}384$.\nc) Aucune : $0{,}8^3 = 0{,}512$. Au moins une : $1 - 0{,}512 = 0{,}488$.\n⚠️ Même avec trois appels, il y a plus d'une chance sur deux de ne rien vendre : $0{,}512$.",
           schema: arbreRepete([
@@ -324,6 +372,11 @@ export const exercicesAleaBernoulliCalculPremiere: FicheExercicesData = {
           titre: "Les conteneurs frigorifiques",
           enonce:
             "À l'arrivée au port, on ouvre des conteneurs de marchandises réfrigérées pour vérifier que la chaîne du froid a tenu. Chaque conteneur a une rupture du froid avec la probabilité $0{,}1$, indépendamment des autres. On en contrôle $1$, $2$, $3$ ou $4$.\na) Calculer la probabilité de trouver au moins un conteneur en rupture quand on en contrôle $4$.\nb) Le diagramme donne cette probabilité pour $n = 1$ à $4$. Vérifier les valeurs pour $n = 2$ et $n = 3$.",
+          reponses: [
+            { question: "a)", attendu: "0,3439" },
+            { question: "b) n = 2", attendu: "0,19" },
+            { question: "b) n = 3", attendu: "0,271" },
+          ],
           correction:
             "a) Contraire : aucun conteneur en rupture, $0{,}9^4 = 0{,}6561$. Donc $1 - 0{,}6561 = 0{,}3439 \\approx 34$ %.\nb) $n = 2$ : $1 - 0{,}9^2 = 1 - 0{,}81 = 0{,}19$. $n = 3$ : $1 - 0{,}9^3 = 1 - 0{,}729 = 0{,}271 \\approx 27$ %.\n⭐ Chaque conteneur de plus fait monter les chances de repérer un problème, mais de moins en moins : environ $+10$, $+9$, $+8$, $+7$ points.\n⚠️ Avec $n = 4$, on ne dessine pas les seize chemins : un seul compte, celui où tout va bien.",
           schema: diagramme("barres", [
@@ -338,6 +391,10 @@ export const exercicesAleaBernoulliCalculPremiere: FicheExercicesData = {
           titre: "La guirlande de LED",
           enonce:
             "Une petite guirlande compte $3$ LED montées en série : elle ne s'allume que si les trois fonctionnent. Chaque LED fonctionne ($M$) avec la probabilité $0{,}9$, indépendamment ; sinon elle est grillée ($G$).\na) Construire l'arbre et calculer la probabilité que la guirlande s'allume.\nb) Calculer la probabilité qu'exactement une LED soit grillée.",
+          reponses: [
+            { question: "a)", attendu: "0,729" },
+            { question: "b)", attendu: "0,243" },
+          ],
           correction:
             "a) À chaque niveau : $M$ $0{,}9$, $G$ $0{,}1$. La guirlande s'allume sur le seul chemin $MMM$ : $0{,}9^3 = 0{,}729$.\nElle reste éteinte avec la probabilité $1 - 0{,}729 = 0{,}271$.\nb) Trois chemins : $MMG$, $MGM$, $GMM$, chacun $0{,}9 \\times 0{,}9 \\times 0{,}1 = 0{,}081$. $P = 3 \\times 0{,}081 = 0{,}243$.\n⭐ En série, une seule LED grillée éteint tout : plus il y a de LED, plus la guirlande est fragile.",
           schema: arbreRepete([
@@ -356,6 +413,11 @@ export const exercicesAleaBernoulliCalculPremiere: FicheExercicesData = {
           titre: "Le QCM au hasard",
           enonce:
             "Un élève répond au hasard aux $4$ questions d'un QCM ; chaque question a quatre propositions, dont une seule est juste.\na) Calculer la probabilité qu'il réponde juste aux quatre questions.\nb) Calculer la probabilité qu'il réponde faux partout.\nc) En déduire la probabilité qu'il ait au moins une bonne réponse. Arrondir au centième.",
+          reponses: [
+            { question: "a)", attendu: "0,00390625", tolerance: 0.0001 },
+            { question: "b)", attendu: "0,31640625", tolerance: 0.01 },
+            { question: "c)", attendu: "0,68359375", tolerance: 0.01 },
+          ],
           correction:
             "Succès : « répondre juste », $p = 0{,}25$ ; $n = 4$ épreuves identiques et indépendantes.\na) $0{,}25^4 = 0{,}00390625 \\approx 0{,}004$ : moins d'une chance sur deux cents.\nb) $0{,}75^4 = 0{,}31640625 \\approx 0{,}32$.\nc) $1 - 0{,}31640625 = 0{,}68359375 \\approx 0{,}68$.\n⭐ Répondre au hasard donne souvent UN point, presque jamais les quatre.",
           schema: ecranSeulement(tableau(["", "4 justes", "tout faux", "au moins 1"], ["probabilité", "≈ 0,004", "≈ 0,32", "≈ 0,68"])),
@@ -378,6 +440,11 @@ export const exercicesAleaBernoulliCalculPremiere: FicheExercicesData = {
           titre: "Les disettes d'un village médiéval",
           enonce:
             "Dans un village du Moyen Âge (modèle), une année est une année de disette ($D$) avec la probabilité $0{,}2$, indépendamment d'une année à l'autre ; sinon, c'est une bonne année ($B$). On étudie trois années de suite.\na) Construire l'arbre.\nb) Calculer la probabilité de n'avoir aucune disette, puis au moins une.\nc) Deux disettes en trois ans épuisent les réserves du village. Calculer la probabilité d'au moins deux disettes.",
+          reponses: [
+            { question: "b) aucune", attendu: "0,512" },
+            { question: "b) au moins une", attendu: "0,488" },
+            { question: "c)", attendu: "0,104" },
+          ],
           correction:
             "a) À chaque niveau : $D$ $0{,}2$, $B$ $0{,}8$. Huit chemins.\nb) Aucune : $BBB$, $0{,}8^3 = 0{,}512$. Au moins une : $1 - 0{,}512 = 0{,}488$.\nc) Deux disettes : $DDB$, $DBD$, $BDD$, chacun $0{,}2 \\times 0{,}2 \\times 0{,}8 = 0{,}032$, soit $0{,}096$. Trois : $DDD$, $0{,}2^3 = 0{,}008$.\nAu moins deux : $0{,}096 + 0{,}008 = 0{,}104$.\nEnviron une période de trois ans sur dix épuise les réserves.\n⭐ Dans ce modèle, une disette sur cinq ans suffit à rendre les crises graves assez fréquentes : de quoi comprendre l'importance des greniers.",
           schema: arbreRepete([
@@ -396,6 +463,13 @@ export const exercicesAleaBernoulliCalculPremiere: FicheExercicesData = {
           titre: "Les relais de secours",
           enonce:
             "Un refuge de montagne communique par radio grâce à des relais. Un jour d'orage, chaque relais tombe en panne avec la probabilité $0{,}2$, indépendamment. La liaison tient si au moins un relais fonctionne.\na) Avec un seul relais, quelle est la probabilité que la liaison tienne ?\nb) Calculer cette probabilité avec $2$, $3$ puis $4$ relais.\nc) Combien de relais faut-il pour que la liaison tienne avec une probabilité d'au moins $0{,}99$ ?",
+          reponses: [
+            { question: "a)", attendu: "0,8" },
+            { question: "b) 2 relais", attendu: "0,96" },
+            { question: "b) 3 relais", attendu: "0,992" },
+            { question: "b) 4 relais", attendu: "0,9984" },
+            { question: "c)", attendu: "3" },
+          ],
           correction:
             "a) Un relais : la liaison tient s'il fonctionne, $1 - 0{,}2 = 0{,}8$.\nb) Contraire : tous les relais en panne, $0{,}2^n$.\n$n = 2$ : $1 - 0{,}04 = 0{,}96$. $n = 3$ : $1 - 0{,}008 = 0{,}992$. $n = 4$ : $1 - 0{,}0016 = 0{,}9984$.\nc) $0{,}96 < 0{,}99$ mais $0{,}992 \\geqslant 0{,}99$ : il faut $3$ relais.\n⭐ Doubler ou tripler un équipement critique s'appelle la redondance : c'est un principe de sécurité, en aviation par exemple.",
           schema: tableau(["relais", "1", "2", "3", "4"], ["liaison", "0,8", "0,96", "0,992", "0,9984"]),
@@ -405,6 +479,11 @@ export const exercicesAleaBernoulliCalculPremiere: FicheExercicesData = {
           titre: "Le parc éolien",
           enonce:
             "Un petit parc compte $3$ éoliennes. Un jour donné, chacune fonctionne ($M$) avec la probabilité $0{,}95$, indépendamment ; sinon elle est en panne ($P$). Le parc remplit son contrat de production si au moins deux éoliennes fonctionnent.\na) Construire l'arbre.\nb) Calculer la probabilité que les trois fonctionnent.\nc) Calculer la probabilité que le contrat soit rempli. Arrondir au millième.\nd) Calculer la probabilité qu'au moins une éolienne soit en panne.",
+          reponses: [
+            { question: "b)", attendu: "0,857375", tolerance: 0.001 },
+            { question: "c)", attendu: "0,99275", tolerance: 0.001 },
+            { question: "d)", attendu: "0,142625", tolerance: 0.001 },
+          ],
           correction:
             "a) À chaque niveau : $M$ $0{,}95$, $P$ $0{,}05$.\nb) $MMM$ : $0{,}95^3 = 0{,}857375$.\nc) Au moins deux fonctionnent : $MMM$, et les trois chemins avec une seule panne ($MMP$, $MPM$, $PMM$), chacun $0{,}95^2 \\times 0{,}05 = 0{,}045125$.\n$P = 0{,}857375 + 3 \\times 0{,}045125 = 0{,}857375 + 0{,}135375 = 0{,}99275 \\approx 0{,}993$.\nd) Contraire de « les trois fonctionnent » : $1 - 0{,}857375 = 0{,}142625 \\approx 0{,}143$.\n⭐ Une panne quelque part arrive environ un jour sur sept, mais le contrat n'échoue que moins d'un jour sur cent : c'est tout l'intérêt d'avoir plusieurs machines.",
           schema: arbreRepete([
@@ -433,6 +512,11 @@ export const exercicesAleaBernoulliCalculPremiere: FicheExercicesData = {
               { label: "P", proba: "0,4", enfants: [{ label: "PPG", proba: "0,6" }, { label: "PPP", proba: "0,4" }] },
             ] },
           ]),
+          reponses: [
+            { question: "a)", attendu: "GGG ; GGP ; GPG ; PGG" },
+            { question: "b)", attendu: "0,648" },
+            { question: "c)", attendu: "0,36" },
+          ],
           correction:
             "a) Elle gagne si elle remporte au moins deux sets sur trois : $GGG$, $GGP$, $GPG$, $PGG$.\nb) $GGG$ : $0{,}6^3 = 0{,}216$. Les trois autres : $0{,}6 \\times 0{,}6 \\times 0{,}4 = 0{,}144$ chacun.\n$P = 0{,}216 + 3 \\times 0{,}144 = 0{,}216 + 0{,}432 = 0{,}648$.\nc) Deux sets seulement : les deux premiers gagnés, $0{,}6 \\times 0{,}6 = 0{,}36$.\nd) Un set à $60$ %, un match à environ $65$ % : le format « deux sets gagnants » AVANTAGE la meilleure joueuse.\n⭐ Les matchs masculins des tournois du Grand Chelem se jouent en trois sets gagnants : la surprise y est encore plus rare.",
           schema: ecranSeulement(
