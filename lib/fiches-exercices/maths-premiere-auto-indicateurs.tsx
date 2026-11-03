@@ -192,7 +192,7 @@ export const exercicesAutoIndicateursPremiere: FicheExercicesData = {
           reponses: [
             { question: "a) moyenne", attendu: "900 €" },
             { question: "a) médiane", attendu: "650 €" },
-            { question: "b)", attendu: ["la médiane", "médiane"] },
+            { question: "b)", attendu: ["la médiane", "médiane", "le loyer médian", "loyer médian"] },
           ],
           micros: ["auto_stat_moyenne", "auto_stat_mediane", "auto_stat_interpreter_indicateurs"],
         },
@@ -223,11 +223,11 @@ export const exercicesAutoIndicateursPremiere: FicheExercicesData = {
           correction:
             "a) On lit le trait dans chaque boîte : $18$ pour A, $22$ pour B. Médianes : $1\\,800$ € et $2\\,200$ €. C'est B.\nb) A : $22 - 16 = 6$, soit $600$ €. B : $24 - 20 = 4$, soit $400$ €. Les salaires du milieu sont plus resserrés dans B.\nc) Dans B : $Q_1 = 20$. Au plus un quart des salariés gagnent moins de $2\\,000$ €, donc au moins $75$ % gagnent $2\\,000$ € ou plus.\nd) Dans A : sa moustache va jusqu'à $40$, soit $4\\,000$ €.\n⭐ A a le plus haut salaire, mais B paie mieux la plupart de ses salariés. Deux indicateurs, deux réponses.\n⚠️ On traduit l'unité : « $22$ » veut dire $2\\,200$ €.",
           reponses: [
-            { question: "a)", attendu: "B" },
+            { question: "a)", attendu: ["B", "entreprise B", "l'entreprise B"] },
             { question: "b) A", attendu: ["6", "600 €"] },
             { question: "b) B", attendu: ["4", "400 €"] },
-            { question: "c)", attendu: "B" },
-            { question: "d)", attendu: "A" },
+            { question: "c)", attendu: ["B", "entreprise B", "l'entreprise B"] },
+            { question: "d)", attendu: ["A", "entreprise A", "l'entreprise A"] },
           ],
           micros: ["auto_stat_boites", "auto_stat_interpreter_indicateurs"],
         },
@@ -317,6 +317,7 @@ export const exercicesAutoIndicateursPremiere: FicheExercicesData = {
           correction:
             "a) Même médiane, $12$ € le m² : la moitié des appartements de chaque quartier sont à $12$ € ou moins.\nb) Écarts interquartiles : Nord $13 - 10 = 3$, Sud $16 - 11 = 5$. Au centre, le Sud est plus dispersé.\nÉtendues : Nord $20 - 8 = 12$, Sud $18 - 9 = 9$. Aux extrêmes, c'est le Nord.\nc) Au Nord, $Q_3 = 13$ : au moins $75$ % des appartements sont à $13$ € ou moins.\nAu Sud, $13$ est entre la médiane et $Q_3$ : on est sûr d'au moins $50$ % seulement. C'est le Nord.\nd) Non : une boîte donne cinq nombres, jamais la moyenne.\n⭐ Même médiane, deux quartiers très différents : un seul nombre ne suffit pas.",
           reponses: [
+            { question: "a) médiane", attendu: "12 €" },
             { question: "b) EI Nord", attendu: "3" },
             { question: "b) EI Sud", attendu: "5" },
             { question: "b) étendue Nord", attendu: "12" },
@@ -339,7 +340,7 @@ export const exercicesAutoIndicateursPremiere: FicheExercicesData = {
             "a) Centres : $25$, $35$, $45$ et $55$ ans.\n$25 \\times 12 + 35 \\times 18 + 45 \\times 14 + 55 \\times 6 = 300 + 630 + 630 + 330 = 1\\,890$.\n$\\dfrac{1\\,890}{50} = 37{,}8$ ans (diviser par $50$, c'est multiplier par $2$ puis diviser par $100$).\nb) $50$ salariés : la médiane est entre le $25^e$ et le $26^e$. Effectifs cumulés : $12$, puis $30$. Ils sont dans la classe $[30\\,;\\,40[$.\nc) Chacun a $10$ ans de plus : la moyenne augmente aussi de $10$, soit environ $47{,}8$ ans.\nd) $\\dfrac{6}{50} = \\dfrac{12}{100} = 12$ %. Ce sont les prochains départs à la retraite : il faudra recruter ou former pour les remplacer.\n⚠️ Au a), c'est une ESTIMATION : on a remplacé chaque âge par le centre de sa classe.",
           reponses: [
             { question: "a)", attendu: "37,8" },
-            { question: "b)", attendu: ["[30 ; 40["] },
+            { question: "b)", attendu: ["[30 ; 40[", "entre 30 et 40 ans", "entre 30 et 40", "de 30 à 40 ans", "30 à 40 ans"] },
             { question: "c)", attendu: "47,8" },
             { question: "d)", attendu: "12 %" },
           ],

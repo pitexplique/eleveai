@@ -392,6 +392,7 @@ export const exercicesAutoPartieToutPremiere: FicheExercicesData = {
             { question: "a)", attendu: "1500000 €" },
             { question: "b)", attendu: "450000 €" },
             { question: "c)", attendu: "40 %" },
+            { question: "d)", attendu: "12 %" },
           ],
           micros: ["auto_prop_tout_connaissant_partie", "auto_prop_pourcentage_de_pourcentage"],
         },
