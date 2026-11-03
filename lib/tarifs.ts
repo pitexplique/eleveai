@@ -354,6 +354,21 @@ export const ETABLISSEMENT_ETRANGER = {
 };
 
 /**
+ * ⭐ 03/11/2026 — Frédéric : l'offre établissement de l'accueil « suivant les
+ * pays ». Les pays de l'aventure (lib/aventure/pays.ts), France exclue. Le
+ * Maroc suit le Maghreb du suivi famille : moitié du prix européen.
+ */
+export const PRIX_ETABLISSEMENT_PAR_PAYS: { slug: string; prix: string }[] = [
+  { slug: "andorre", prix: "2 €" },
+  { slug: "suisse", prix: "2 CHF" },
+  { slug: "belgique", prix: "2 €" },
+  { slug: "luxembourg", prix: "2 €" },
+  { slug: "cote-divoire", prix: ETABLISSEMENT_ETRANGER.parEleveEtParAnAfrique },
+  { slug: "senegal", prix: ETABLISSEMENT_ETRANGER.parEleveEtParAnAfrique },
+  { slug: "maroc", prix: "1 €" },
+];
+
+/**
  * ⭐ LES OFFRES DU SÉNÉGAL ET DE LA CÔTE D'IVOIRE (02/11/2026, /offre/<pays>).
  * Wave et Orange Money ne prélèvent pas chaque mois : on vend des DURÉES
  * PRÉPAYÉES, comme un forfait téléphone, avec un rappel avant la fin.

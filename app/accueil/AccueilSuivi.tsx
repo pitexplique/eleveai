@@ -17,8 +17,9 @@
 //     visio. ⏸ RIEN NE S'ENCAISSE avant l'accord écrit du rectorat (cumul,
 //     art. L123-7 et R123-8 2° « enseignement et formation » du CGFP) : les
 //     prix sont « envisagés », aucun bouton de paiement.
-// ⛔ Aucune vente aux établissements (31/10 : l'inspecteur refuse le logiciel
-// dans un collège) : la page ne leur parle plus.
+// ⛔ Aucune vente aux établissements EN FRANCE (31/10 : l'inspecteur refuse le
+// logiciel dans un collège). ⭐ 03/11 : l'offre établissement hors de France,
+// prix par pays, remplace les cours en visio sur l'accueil.
 // ⛔ Avis du collège de déontologie (04/04/2023) : le coach utilisé en classe ne
 // renvoie JAMAIS vers une offre payante. Les offres ne vivent qu'ici et sur une
 // future page « Familles », jamais dans le coach ni le mode classe.
@@ -38,7 +39,7 @@ import {
   FileText,
   GraduationCap,
   Mail,
-  MonitorPlay,
+  Building2,
   PlayCircle,
   Save,
   Sparkles,
@@ -50,7 +51,7 @@ import {
 import { PROGRAMME_CLASSES, listerToutesLesNotions } from "@/lib/programme";
 import { toutesLesVideos } from "@/lib/videos/r2";
 import RechercheEntete from "@/components/accueil/RechercheEntete";
-import { PRIX_MENSUEL, PRIX_VISIO, montant } from "@/lib/tarifs";
+import { ETABLISSEMENT_ETRANGER, PRIX_ETABLISSEMENT_PAR_PAYS, PRIX_MENSUEL, montant } from "@/lib/tarifs";
 import { PAYS_AVENTURE } from "@/lib/aventure/pays";
 
 /** La classe du coach → son dossier de vidéos sur R2 (et la clé de /video). */
@@ -128,12 +129,18 @@ const SUIVI_FAMILLE = [
   { Icone: Bell, texte: "Une alerte quand il décroche sur une notion" },
   { Icone: Sparkles, texte: "L'aide de l'IA sans limite pour réexpliquer et corriger" },
 ];
-const VISIO = [
-  "Des cours collectifs en direct, 1 h 30, avec un professeur de maths",
-  "Les grands rendez-vous : brevet, épreuve anticipée de 1re, bac, entrée en 6e, CRPE",
-  "Le replay et la fiche de la séance, gardés",
-  "Pas besoin de caméra ni de micro pour l'élève",
+/* ⭐ 03/11 — Frédéric : « enlève les cours en visio et remplace par une offre
+   établissement », « suivant les pays ». ⛔ Hors de France seulement. */
+const ETABLISSEMENT = [
+  "Tous les élèves et tous les professeurs de l'établissement",
+  "Toute la vidéothèque et le suivi famille pour chaque élève",
+  "Le bilan par micro-compétence, classe par classe",
+  "Vos professeurs signalent ce qui ne va pas : le coach est corrigé chaque semaine",
 ];
+const PRIX_ETABLISSEMENT = PRIX_ETABLISSEMENT_PAR_PAYS.map((e) => ({
+  ...e,
+  nom: PAYS_AVENTURE.find((p) => p.slug === e.slug)?.nom ?? e.slug,
+}));
 
 // Le titre et les nuages en lettres à empattements fines, plus douces que le gras.
 const slab = Roboto_Slab({ subsets: ["latin"], weight: ["300", "700"], display: "swap" });
@@ -406,23 +413,40 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
             </div>
 
             <div className="rounded-3xl border border-slate-200 p-6">
-              <p className="text-sm font-black uppercase tracking-wide text-violet-700">À partir de janvier 2027</p>
+              <p className="text-sm font-black uppercase tracking-wide text-amber-700">Écoles, collèges et lycées hors de France</p>
               <h3 className="mt-1 flex items-center gap-2 text-2xl font-black">
-                <MonitorPlay className="h-6 w-6 text-violet-700" aria-hidden="true" /> Les cours en visio
+                <Building2 className="h-6 w-6 text-amber-700" aria-hidden="true" /> L&apos;offre établissement
               </h3>
-              <p className="mt-1 text-slate-600">Pour préparer un examen ou une rentrée, en groupe, depuis chez soi.</p>
+              <p className="mt-1 text-slate-600">Pour les établissements qui enseignent en français, du CP à la Terminale.</p>
               <ul className="mt-4 space-y-2 text-slate-800">
-                {VISIO.map((v) => <Puce key={v}>{v}</Puce>)}
+                {ETABLISSEMENT.map((t) => <Puce key={t}>{t}</Puce>)}
               </ul>
-              <p className="mt-5 text-lg font-black">{montant(PRIX_VISIO)} la séance en France</p>
-              <p className="text-sm text-slate-500">Un prix adapté à chaque pays.</p>
+              <p className="mt-5 font-black">Par élève et par an, selon le pays :</p>
+              <ul className="mt-2 divide-y divide-slate-100 text-sm">
+                {PRIX_ETABLISSEMENT.map((p) => (
+                  <li key={p.slug} className="flex items-center justify-between gap-2 py-1">
+                    <span className="flex items-center gap-2">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={`/drapeaux/${p.slug}.svg`} alt="" width={20} height={15} className="h-[15px] w-5 rounded-[3px] object-cover ring-1 ring-black/10" />
+                      {p.nom}
+                    </span>
+                    <span className="font-black">{p.prix}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-2 text-sm text-slate-500">
+                À partir de {ETABLISSEMENT_ETRANGER.minimumEleves} élèves, professeurs inclus.
+              </p>
+              <Link href="/tarifs#etablissements" className="mt-3 inline-flex items-center gap-2 font-black text-amber-800 hover:underline">
+                Écrire pour votre établissement <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
             </div>
               </>
             )}
           </div>
           {offresFamille && (
             <p className="mt-4 text-sm text-slate-500">
-            Le suivi famille ouvre fin décembre 2026, les cours en visio en janvier. Ces offres ne s&apos;adressent ni aux établissements, ni aux élèves de son professeur.
+            Le suivi famille et l&apos;offre établissement ouvrent fin décembre 2026. Ces offres ne s&apos;adressent ni aux établissements situés en France, ni aux élèves de son professeur.
           </p>
           )}
         </section>
