@@ -42,7 +42,7 @@
 // (`queueBinomiale`) avant de servir la question : un « c'est le hasard » ne
 // doit jamais être servi sur un tirage qui n'arriverait qu'une fois sur cent.
 
-import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type { TutorBankItemV4, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
 import type {
   CanvasProbabilitesData,
   StatGraphCanvasData,
@@ -310,7 +310,7 @@ const CONTEXTES_PROBA: (() => Ctx)[] = [
   () => {
     const v = randomInt(2, 4);
     return {
-      action: (n) => `tire ${n} fois, avec remise, une boule dans un sac de ${v} boules vertes et ${10 - v} boules jaunes`,
+      action: (n) => `tire ${n} fois, avec remise, une boule dans une urne de ${v} boules vertes et ${10 - v} boules jaunes`,
       res: (k) => `une boule verte sort ${k} fois`,
       resNom: (k) => `une boule verte est sortie ${k} fois`,
       essais: "tirages",
@@ -322,8 +322,8 @@ const CONTEXTES_PROBA: (() => Ctx)[] = [
       plage: autour(v, 10, 8),
       maxN: 100000,
       proba: { num: v, den: 10 },
-      truque: "le sac n'a pas la composition annoncée",
-      aucun: (k) => `en tirant avec remise dans un sac de ${v} boules vertes et ${10 - v} boules jaunes, aucune boule verte n'est sortie lors des ${k} derniers tirages`,
+      truque: "l'urne n'a pas la composition annoncée",
+      aucun: (k) => `en tirant avec remise dans une urne de ${v} boules vertes et ${10 - v} boules jaunes, aucune boule verte n'est sortie lors des ${k} derniers tirages`,
       canvas: billes(v, "#16a34a", 10 - v, "#facc15"),
     };
   },
@@ -570,6 +570,39 @@ const CONTEXTES_MESURE: (() => Ctx)[] = [
 
 const CONTEXTES = [...CONTEXTES_PROBA, ...CONTEXTES_MESURE];
 
+// ⛔⛔ 03/11/2026 (Frédéric) : « d'abord des questions simples ; le contexte est
+// réservé aux étoiles ★3 et plus ». À ★1 et ★2 : « On » à la place d'un prénom,
+// et les seules expériences de hasard « de classe » (dé, pièce, roue, urne,
+// cartes, jetons, tableur, punaise, gobelet) — ni jeu vidéo, ni basket, ni
+// météo, ni usine. Les situations de vie restent à ★3
+// (4e_proba_frequence_calculer_tpl_7_situations_vie et _tpl_8_effectif_vie).
+// ⛔ 03/11/2026 : énoncés COURTS (★1 ≈ 12 mots, ★2 ≈ 15) : des expériences
+// écrites en une ligne. Les phrases de résultat suivent celles que relit le
+// correcteur (« le 3 sort 9 fois », « une boule verte sort… »).
+const court = (o: Omit<Ctx, "essai" | "autre" | "maxN"> & { autre?: string }): Ctx => ({ essai: "essai", autre: "« autre issue »", maxN: 100000, ...o });
+const CONTEXTES_SIMPLES: (() => Ctx)[] = [
+  () => {
+    const f = randomInt(1, 6) as Face;
+    return court({ action: (n) => `lance un dé ${n} fois`, res: (k) => `le ${f} sort ${k} fois`, resNom: (k) => `le ${f} est sorti ${k} fois`, essais: "lancers", freq: `du ${f}`, evt: `« ${f} »`, combien: `Combien de fois le ${f} est-il sorti ?`, plage: [10, 24], canvas: de([1, 2, 3, 4, 5, 6], [f]) });
+  },
+  () => court({ action: (n) => `lance un dé ${n} fois`, res: (k) => `un nombre pair sort ${k} fois`, resNom: (k) => `un nombre pair est sorti ${k} fois`, essais: "lancers", freq: "des nombres pairs", evt: "« nombre pair »", combien: "Combien de fois un nombre pair est-il sorti ?", plage: [40, 60], canvas: de([1, 2, 3, 4, 5, 6], [2, 4, 6]) }),
+  () => court({ action: (n) => `lance une pièce ${n} fois`, res: (k) => `elle tombe ${k} fois sur « pile »`, resNom: (k) => `la pièce est tombée ${k} fois sur « pile »`, essais: "lancers", freq: "de « pile »", evt: "« pile »", combien: "Combien de « pile » a-t-on obtenus ?", plage: [40, 60] }),
+  () => court({ action: (n) => `tourne une roue ${n} fois`, res: (k) => `la roue s'arrête ${k} fois sur le rouge`, resNom: (k) => `la roue s'est arrêtée ${k} fois sur le rouge`, essais: "tours", freq: "du rouge", evt: "« rouge »", combien: "Combien de fois sur le rouge ?", plage: [15, 35] }),
+  () => court({ action: (n) => `tire ${n} fois une boule`, res: (k) => `une boule verte sort ${k} fois`, resNom: (k) => `une boule verte est sortie ${k} fois`, essais: "tirages", freq: "des boules vertes", evt: "« boule verte »", combien: "Combien de boules vertes sont sorties ?", plage: [20, 40] }),
+  () => {
+    const f = randomInt(1, 5);
+    return court({ action: (n) => `tire ${n} fois un jeton`, res: (k) => `le jeton n° ${f} sort ${k} fois`, resNom: (k) => `le jeton n° ${f} est sorti ${k} fois`, essais: "tirages", freq: `du jeton n° ${f}`, evt: `« jeton n° ${f} »`, combien: `Combien de fois le jeton n° ${f} est-il sorti ?`, plage: [15, 30] });
+  },
+  () => court({ action: (n) => `tire ${n} fois une carte`, res: (k) => `un cœur sort ${k} fois`, resNom: (k) => `un cœur est sorti ${k} fois`, essais: "tirages", freq: "des cœurs", evt: "« cœur »", combien: "Combien de cœurs sont sortis ?", plage: [17, 33] }),
+  () => {
+    const m = randomInt(1, 10);
+    return court({ action: (n) => `fait ${n} tirages au tableur`, res: (k) => `le ${m} sort ${k} fois`, resNom: (k) => `le ${m} est sorti ${k} fois`, essais: "tirages", freq: `du ${m}`, evt: `« ${m} »`, combien: `Combien de fois le ${m} est-il sorti ?`, plage: [4, 16] });
+  },
+  () => court({ action: (n) => `lance une punaise ${n} fois`, res: (k) => `elle retombe ${k} fois pointe en haut`, resNom: (k) => `la punaise est retombée ${k} fois pointe en haut`, essais: "lancers", freq: "de « pointe en haut »", evt: "« pointe en haut »", combien: "Combien de « pointe en haut » ?", plage: [30, 70] }),
+  () => court({ action: (n) => `lance un gobelet ${n} fois`, res: (k) => `il retombe ${k} fois debout`, resNom: (k) => `le gobelet est retombé ${k} fois debout`, essais: "lancers", freq: "de « debout »", evt: "« debout »", combien: "Combien de fois debout ?", plage: [10, 30] }),
+];
+const ON = "On";
+
 const PRENOMS = [
   "Léa", "Nathan", "Inès", "Hugo", "Chloé", "Yanis", "Jade", "Malo", "Sofia", "Adam",
   "Lina", "Noah", "Emma", "Rayan", "Zoé", "Tom", "Maëlys", "Kylian", "Rose", "Sacha",
@@ -621,6 +654,8 @@ const TAILLES = [20, 25, 40, 50, 80, 100, 200, 250, 400, 500];
 function raconter(c: Ctx, qui: string, n: number, k: number): string {
   const N = fr(n);
   const K = fr(k);
+  // 03/11/2026 : ★1-★2 (« On ») en deux phrases courtes.
+  if (qui === ON) return randomChoice([`${cap(c.resNom(K))} sur ${N} ${c.essais}.`, `${cap(c.res(K))} sur ${N} ${c.essais}.`]);
   return randomChoice([
     `${qui} ${c.action(N)} : ${c.res(K)}.`,
     `${qui} ${c.action(N)}. Sur ces ${N} ${c.essais}, ${c.resNom(K)}.`,
@@ -654,6 +689,94 @@ const SONDAGES: Sondage[] = [
   { pop: "cyclistes de la ville", verbe: "portent un casque", unite: "cyclistes", f: false, enquete: (n) => `observe ${n} cyclistes de la ville` },
   { pop: "lecteurs de la médiathèque", verbe: "empruntent des bandes dessinées", unite: "lecteurs", f: false, enquete: (n) => `interroge ${n} lecteurs de la médiathèque` },
 ];
+
+/** ★2 : `simple` → « On » et les expériences de classe ; sinon prénom et situations de vie (★3). */
+function genSituations(simple: boolean): TutorGeneratedQuestionV4 {
+      const c = tirerCtx(simple ? CONTEXTES_SIMPLES : CONTEXTES);
+      const { n, k, p } = tirerSerie(c, TAILLES);
+      const qui = simple ? ON : randomChoice(PRENOMS);
+      const forme = randomChoice(["pct", "dec", "frac"] as const);
+      // 03/11/2026 : à ★2, des questions courtes.
+      const qCourte =
+        forme === "pct"
+          ? randomChoice([`Donne la fréquence ${c.freq} en pourcentage.`, `Quelle est la fréquence ${c.freq} en pourcentage ?`])
+          : forme === "dec"
+            ? randomChoice([`Donne la fréquence ${c.freq} en écriture décimale.`, `Quelle est la fréquence ${c.freq} en décimal ?`])
+            : randomChoice([`Donne la fréquence ${c.freq} en fraction irréductible.`, `Écris la fréquence ${c.freq} en fraction irréductible.`]);
+      const q = simple
+        ? qCourte
+        : forme === "pct"
+          ? randomChoice([
+              `Quelle est la fréquence ${c.freq}, en pourcentage ?`,
+              `Exprime en pourcentage la fréquence ${c.freq}.`,
+              `Calcule la fréquence ${c.freq} et donne-la en pourcentage.`,
+            ])
+          : forme === "dec"
+            ? randomChoice([
+                `Quelle est la fréquence ${c.freq}, sous forme décimale ?`,
+                `Donne la fréquence ${c.freq} sous forme d'un nombre décimal.`,
+                `Calcule la fréquence ${c.freq} en écriture décimale.`,
+              ])
+            : randomChoice([
+                `Quelle est la fréquence ${c.freq}, sous forme de fraction irréductible ?`,
+                `Écris la fréquence ${c.freq} sous forme d'une fraction irréductible.`,
+              ]);
+      const dec = p / 100;
+      const irr = fracIrr(k, n);
+      const expected =
+        forme === "pct"
+          ? [`${p} %`, String(p)]
+          : forme === "dec"
+            ? [fr(dec), irr, `${k}/${n}`]
+            : [irr];
+      return {
+        text: `${raconter(c, qui, n, k)} ${q}`,
+        format: "short",
+        expected,
+        comparator: "number_equal",
+        explanation:
+          "Définition : fréquence = nombre de fois où l'issue s'est produite ÷ nombre total d'essais.\n\n" +
+          `Méthode : l'issue ${c.evt} : ${fr(k)} fois ; total : ${fr(n)} ${c.essais}.\n\n` +
+          `Calcul : ${fr(k)}/${fr(n)}${irr !== `${fr(k)}/${fr(n)}` ? ` = ${irr}` : ""} = ${fr(dec)} = ${p} %.\n\n` +
+          `Conclusion : la fréquence ${c.freq} vaut ${forme === "pct" ? `${p} %` : forme === "dec" ? fr(dec) : irr}. Les trois écritures disent la même chose ; on donne celle qui est demandée.`,
+        canvas: c.canvas,
+      };
+}
+
+/** De la fréquence à l'effectif ; `simple` comme ci-dessus. */
+function genEffectif(simple: boolean): TutorGeneratedQuestionV4 {
+      const c = tirerCtx(simple ? CONTEXTES_SIMPLES : CONTEXTES);
+      const { n, k, p } = tirerSerie(c, TAILLES);
+      const qui = simple ? ON : randomChoice(PRENOMS);
+      const N = fr(n);
+      const text = simple
+        ? randomChoice([
+            `On ${c.action(N)}. La fréquence ${c.freq} est de ${p} %. ${c.combien}`,
+            `On ${c.action(N)}. La fréquence ${c.freq} vaut ${fr(p / 100)}. ${c.combien}`,
+            `On ${c.action(N)} ; la fréquence ${c.freq} est égale à ${fracIrr(k, n)}. ${c.combien}`,
+            `Sur ${N} ${c.essais}, la fréquence ${c.freq} est de ${p} %. ${c.combien}`,
+          ])
+        : randomChoice([
+        `${qui} ${c.action(N)}. La fréquence ${c.freq} est de ${p} %. ${c.combien}`,
+        `${qui} ${c.action(N)}. La fréquence ${c.freq} vaut ${fr(p / 100)}. ${c.combien}`,
+        // ⛔ 08/10 : plus de parenthèse autour de l'action — « (Malo ouvre 25 coffres
+        // dans un jeu vidéo (le jeu annonce…)) » faisait deux parenthèses imbriquées.
+        `Sur ${N} ${c.essais}, la fréquence ${c.freq} a été de ${p} % : c'est le relevé ${deQui(qui)}, qui ${c.action(N)}. ${c.combien}`,
+        `${qui} ${c.action(N)} ; la fréquence ${c.freq} est égale à ${fracIrr(k, n)}. ${c.combien}`,
+      ]);
+      return {
+        text,
+        format: "short",
+        expected: [fr(k), String(k)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : fréquence = effectif ÷ total, donc effectif = fréquence × total.\n\n" +
+          `Méthode : on multiplie la fréquence par les ${N} ${c.essais}.\n\n` +
+          `Calcul : ${p} % de ${N}, c'est ${fr(p / 100)} × ${N} = ${fr(k)}.\n\n` +
+          `Conclusion : l'issue ${c.evt} s'est produite ${fr(k)} fois. Vérification : ${fr(k)} ÷ ${N} = ${fr(p / 100)}.`,
+        canvas: c.canvas,
+      };
+}
 
 export const frequencesBank: TutorBankItemV4[] = [
   /* =========================================================================
@@ -701,14 +824,15 @@ export const frequencesBank: TutorBankItemV4[] = [
     hint: "Fréquence = nombre de fois où l'issue sort ÷ nombre total d'essais.",
     tags: ["frequence", "fraction", "template"],
     generate: () => {
-      const c = tirerCtx(CONTEXTES);
+      // 03/11/2026 : ★1 sans prénom ni situation de vie.
+      const c = tirerCtx(CONTEXTES_SIMPLES);
       const { n, k } = tirerSerie(c, [10, 20, 25, 40, 50]);
-      const qui = randomChoice(PRENOMS);
+      const qui = ON;
       const q = randomChoice([
-        `Écris la fréquence ${c.freq} sous forme d'une fraction.`,
-        `Quelle est la fréquence ${c.freq} ? Donne-la sous forme de fraction.`,
-        `Donne, sous forme de fraction, la fréquence ${c.freq}.`,
-        `Quelle fraction des ${c.essais} correspond à l'issue ${c.evt} ?`,
+        `Écris la fréquence ${c.freq} en fraction.`,
+        `Donne la fréquence ${c.freq} en fraction.`,
+        `Quelle fraction donne la fréquence ${c.freq} ?`,
+        `Écris en fraction la fréquence ${c.freq}.`,
       ]);
       const irr = fracIrr(k, n);
       return {
@@ -738,14 +862,15 @@ export const frequencesBank: TutorBankItemV4[] = [
     hint: "En haut : l'issue qui nous intéresse. En bas : TOUS les essais.",
     tags: ["frequence", "fraction", "qcm", "template"],
     generate: () => {
-      const c = tirerCtx(CONTEXTES);
+      // 03/11/2026 : ★1 sans prénom ni situation de vie.
+      const c = tirerCtx(CONTEXTES_SIMPLES);
       const { n, k } = tirerSerie(c, [10, 20, 25, 40, 50]);
-      const qui = randomChoice(PRENOMS);
+      const qui = ON;
       const q = randomChoice([
-        `Laquelle de ces écritures donne la fréquence ${c.freq} ?`,
+        `Choisis la fréquence ${c.freq}.`,
         `Quelle est la fréquence ${c.freq} ?`,
         `Que vaut la fréquence ${c.freq} ?`,
-        `Quelle écriture correspond à la fréquence ${c.freq} ?`,
+        `Coche la fréquence ${c.freq}.`,
       ]);
       const correct = `${k}/${n}`;
       return {
@@ -787,25 +912,19 @@ export const frequencesBank: TutorBankItemV4[] = [
       do {
         succes = (total * randomInt(10, 25)) / 100;
       } while (!Number.isInteger(succes) || succes === 0);
-      const qui = randomChoice(PRENOMS);
-      const objet = randomChoice([
-        { a: "un dé cubique", de: "d'un dé cubique" },
-        { a: "un dé à six faces", de: "d'un dé à six faces" },
-        { a: "le dé d'un jeu de société", de: "du dé d'un jeu de société" },
-        { a: "un dé équilibré", de: "d'un dé équilibré" },
-      ]);
+      // 03/11/2026 : ★2 sans prénom.
       const T = fr(total);
       const S = fr(succes);
+      // 03/11/2026 : ★2 court, sans prénom.
       const recit = randomChoice([
-        `${qui} lance ${objet.a} ${T} fois. Le ${face} sort ${S} fois.`,
-        `Sur ${T} lancers ${objet.de}, le ${face} est sorti ${S} fois.`,
-        `Le ${face} est sorti ${S} fois quand ${qui} a lancé ${objet.a} ${T} fois.`,
+        `On lance un dé ${T} fois. Le ${face} sort ${S} fois.`,
+        `Sur ${T} lancers d'un dé, le ${face} est sorti ${S} fois.`,
+        `Le ${face} sort ${S} fois sur ${T} lancers.`,
       ]);
       const q = randomChoice([
-        `Quelle est la fréquence observée du ${face}, en pourcentage ?`,
-        `Calcule la fréquence du ${face} et exprime-la en pourcentage.`,
-        `En pourcentage, quelle est la fréquence de sortie du ${face} ?`,
-        `Exprime en pourcentage la fréquence du ${face}.`,
+        `Quelle est la fréquence du ${face} en % ?`,
+        `Donne la fréquence du ${face} en %.`,
+        `Écris la fréquence du ${face} en %.`,
       ]);
       // ⛔ 08/10 : (7 ÷ 50) × 100 valait 14,000000000000002 dans les réponses acceptées.
       const v = Math.round((succes * 1000) / total) / 10;
@@ -846,7 +965,6 @@ export const frequencesBank: TutorBankItemV4[] = [
         { pl: "jetons", f: false },
         { pl: "boules", f: true },
         { pl: "perles", f: true },
-        { pl: "bonbons", f: false },
         { pl: "cubes", f: false },
       ]);
       const [c1, c2] = shuffle([
@@ -859,18 +977,17 @@ export const frequencesBank: TutorBankItemV4[] = [
       ]);
       const coul1 = obj.f ? c1.f : c1.m;
       const coul2 = obj.f ? c2.f : c2.m;
-      const contenant = randomChoice(["Un sac", "Une boîte", "Une urne", "Un bocal"]);
-      const tous = obj.f ? "toutes" : "tous";
-      const un = obj.f ? "une" : "un";
+      const contenant = randomChoice(["Une boîte", "Une urne", "Un bocal"]);
+      // 03/11/2026 : ★2 court (≈ 15 mots).
       const recit = randomChoice([
-        `${contenant} contient ${rouges} ${obj.pl} ${coul1} et ${autres} ${coul2}. On les sort ${tous}, ${un} par ${un}, en notant la couleur.`,
-        `On vide ${contenant.toLowerCase()} de ${total} ${obj.pl} en notant la couleur de chacun${obj.f ? "e" : ""} : ${rouges} sont ${coul1}, les autres sont ${coul2}.`,
-        `Dans ${contenant.toLowerCase()}, il y a ${autres} ${obj.pl} ${coul2} et ${rouges} ${coul1}. On les tire ${tous}, ${un} par ${un}.`,
+        `${contenant} contient ${rouges} ${obj.pl} ${coul1} et ${autres} ${coul2}.`,
+        `Sur un lot de ${total} ${obj.pl}, ${rouges} sont ${coul1}, les autres sont ${coul2}.`,
+        `On tire ${autres} ${obj.pl} ${coul2} et ${rouges} ${coul1}.`,
       ]);
       const q = randomChoice([
-        `Quelle est la fréquence des ${obj.pl} ${coul1}, en pourcentage ?`,
-        `En pourcentage, quelle est la fréquence de la couleur ${c1.s} ?`,
-        `Quelle part des ${obj.pl} sont ${coul1} ? Donne la fréquence en pourcentage.`,
+        `Quelle est la fréquence des ${coul1} en % ?`,
+        `Quelle fréquence ont les ${coul1}, en % ?`,
+        `En %, quelle est la fréquence des ${coul1} ?`,
       ]);
       const correct = pct(rouges, total);
       return {
@@ -906,49 +1023,22 @@ export const frequencesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Divise le nombre de fois où l'issue sort par le nombre TOTAL d'essais.",
     tags: ["frequence", "template"],
-    generate: () => {
-      const c = tirerCtx(CONTEXTES);
-      const { n, k, p } = tirerSerie(c, TAILLES);
-      const qui = randomChoice(PRENOMS);
-      const forme = randomChoice(["pct", "dec", "frac"] as const);
-      const q =
-        forme === "pct"
-          ? randomChoice([
-              `Quelle est la fréquence ${c.freq}, en pourcentage ?`,
-              `Exprime en pourcentage la fréquence ${c.freq}.`,
-              `Calcule la fréquence ${c.freq} et donne-la en pourcentage.`,
-            ])
-          : forme === "dec"
-            ? randomChoice([
-                `Quelle est la fréquence ${c.freq}, sous forme décimale ?`,
-                `Donne la fréquence ${c.freq} sous forme d'un nombre décimal.`,
-                `Calcule la fréquence ${c.freq} en écriture décimale.`,
-              ])
-            : randomChoice([
-                `Quelle est la fréquence ${c.freq}, sous forme de fraction irréductible ?`,
-                `Écris la fréquence ${c.freq} sous forme d'une fraction irréductible.`,
-              ]);
-      const dec = p / 100;
-      const irr = fracIrr(k, n);
-      const expected =
-        forme === "pct"
-          ? [`${p} %`, String(p)]
-          : forme === "dec"
-            ? [fr(dec), irr, `${k}/${n}`]
-            : [irr];
-      return {
-        text: `${raconter(c, qui, n, k)} ${q}`,
-        format: "short",
-        expected,
-        comparator: "number_equal",
-        explanation:
-          "Définition : fréquence = nombre de fois où l'issue s'est produite ÷ nombre total d'essais.\n\n" +
-          `Méthode : l'issue ${c.evt} : ${fr(k)} fois ; total : ${fr(n)} ${c.essais}.\n\n` +
-          `Calcul : ${fr(k)}/${fr(n)}${irr !== `${fr(k)}/${fr(n)}` ? ` = ${irr}` : ""} = ${fr(dec)} = ${p} %.\n\n` +
-          `Conclusion : la fréquence ${c.freq} vaut ${forme === "pct" ? `${p} %` : forme === "dec" ? fr(dec) : irr}. Les trois écritures disent la même chose ; on donne celle qui est demandée.`,
-        canvas: c.canvas,
-      };
-    },
+    generate: () => genSituations(true),
+  },
+  {
+    // ★3 (03/11/2026) — la même fréquence, dans une situation de vie (basket,
+    // graines, météo, usine…) racontée par un prénom.
+    kind: "template",
+    id: "4e_proba_frequence_calculer_tpl_7_situations_vie",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "proba_frequence",
+    microId: "proba_frequence_calculer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Divise le nombre de fois où l'issue sort par le nombre TOTAL d'essais.",
+    tags: ["frequence", "situation", "template"],
+    generate: () => genSituations(false),
   },
   {
     // ★2 — le chemin inverse : de la fréquence à l'effectif.
@@ -962,32 +1052,21 @@ export const frequencesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Effectif = fréquence × nombre total d'essais.",
     tags: ["frequence", "effectif", "template"],
-    generate: () => {
-      const c = tirerCtx(CONTEXTES);
-      const { n, k, p } = tirerSerie(c, TAILLES);
-      const qui = randomChoice(PRENOMS);
-      const N = fr(n);
-      const text = randomChoice([
-        `${qui} ${c.action(N)}. La fréquence ${c.freq} est de ${p} %. ${c.combien}`,
-        `${qui} ${c.action(N)}. La fréquence ${c.freq} vaut ${fr(p / 100)}. ${c.combien}`,
-        // ⛔ 08/10 : plus de parenthèse autour de l'action — « (Malo ouvre 25 coffres
-        // dans un jeu vidéo (le jeu annonce…)) » faisait deux parenthèses imbriquées.
-        `Sur ${N} ${c.essais}, la fréquence ${c.freq} a été de ${p} % : c'est le relevé ${deQui(qui)}, qui ${c.action(N)}. ${c.combien}`,
-        `${qui} ${c.action(N)} ; la fréquence ${c.freq} est égale à ${fracIrr(k, n)}. ${c.combien}`,
-      ]);
-      return {
-        text,
-        format: "short",
-        expected: [fr(k), String(k)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : fréquence = effectif ÷ total, donc effectif = fréquence × total.\n\n" +
-          `Méthode : on multiplie la fréquence par les ${N} ${c.essais}.\n\n` +
-          `Calcul : ${p} % de ${N}, c'est ${fr(p / 100)} × ${N} = ${fr(k)}.\n\n` +
-          `Conclusion : l'issue ${c.evt} s'est produite ${fr(k)} fois. Vérification : ${fr(k)} ÷ ${N} = ${fr(p / 100)}.`,
-        canvas: c.canvas,
-      };
-    },
+    generate: () => genEffectif(true),
+  },
+  {
+    // ★3 (03/11/2026) — de la fréquence à l'effectif, dans une situation de vie.
+    kind: "template",
+    id: "4e_proba_frequence_calculer_tpl_8_effectif_vie",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "proba_frequence",
+    microId: "proba_frequence_calculer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Effectif = fréquence × nombre total d'essais.",
+    tags: ["frequence", "effectif", "situation", "template"],
+    generate: () => genEffectif(false),
   },
 
   /* =========================================================================

@@ -69,7 +69,8 @@ function reponse(q: Q, juste: number | null, quoi: string, opts: { pct?: boolean
 function probaExperience(t: string): number | null {
   let m: RegExpMatchArray | null;
   if (/punaise|bouchon|gobelet|tartine|lancers francs|graines|ampoules|feu tricolore|dauphins|tirs au but|météo/.test(t)) return null;
-  if ((m = t.match(/sac de (\d+) boules vertes et (\d+) boules jaunes/))) return Number(m[1]) / (Number(m[1]) + Number(m[2]));
+  // 03/11/2026 : « une urne » remplace « un sac » (le sac passait pour une situation de vie).
+  if ((m = t.match(/(?:sac|urne) de (\d+) boules vertes et (\d+) boules jaunes/))) return Number(m[1]) / (Number(m[1]) + Number(m[2]));
   if ((m = t.match(/partagée en (\d+) secteurs égaux/))) return 1 / Number(m[1]);
   if ((m = t.match(/jetons numérotés de 1 à (\d+)/))) return 1 / Number(m[1]);
   if ((m = t.match(/une chance sur (\d+)/))) return 1 / Number(m[1]);
@@ -548,7 +549,10 @@ const BASE: CorrecteursMaths = avecRegleMotsCles({
   "4e_proba_frequence_calculer_tpl_1_de": cDe,
   "4e_proba_frequence_calculer_tpl_2_billes": cBilles,
   "4e_proba_frequence_calculer_tpl_3_situations": cSituations,
+  // 03/11/2026 : les situations de vie, montées à ★3.
+  "4e_proba_frequence_calculer_tpl_7_situations_vie": cSituations,
   "4e_proba_frequence_calculer_tpl_6_effectif": cEffectif,
+  "4e_proba_frequence_calculer_tpl_8_effectif_vie": cEffectif,
 });
 
 export const CORRECTEURS: CorrecteursMaths = Object.fromEntries(
