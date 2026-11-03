@@ -329,7 +329,40 @@ const GRILLES: { intro: string; obj: string; sq: string; cotes: [number, string]
   { intro: "Voici une piscine dessinée sur un plan quadrillé", obj: "la piscine", sq: "chaque carreau du plan", cotes: [[1, "m"], [2, "m"]] },
 ];
 
+// 03/11/2026 (règle des longueurs) : à ★1-★2, une figure sur quadrillage, sans
+// objet, en 15 mots au plus ; les terrasses, potagers… restent à ★3+.
+const COTES_SIMPLES: [number, string][] = [[1, "cm"], [5, "mm"], [2, "cm"], [1, "m"], [3, "cm"], [2, "m"]];
+
 function questionGrille(niveau: number): Q {
+  if (niveau <= 2) {
+    const [v0, u0] = randomChoice(COTES_SIMPLES);
+    const f0 = formeGrille(niveau);
+    const n0 = computeGridPerimeter(f0.cells);
+    const total0 = n0 * v0;
+    const intro0 = "";
+    const enonce0 = randomChoice([`Un carreau mesure ${q(v0, u0)} de côté.`, `Chaque carreau mesure ${q(v0, u0)} de côté.`, `Un petit carreau mesure ${q(v0, u0)} de côté.`]);
+    const question0 = randomChoice([
+      `Périmètre de la figure en ${u0} ?`,
+      `Calcule son périmètre, en ${u0}.`,
+      `Combien de ${UMOT[u0]} mesure son contour ?`,
+      `Longueur du contour, en ${u0} ?`,
+      `Quel est son périmètre en ${u0} ?`,
+      `Donne son périmètre en ${u0}.`,
+    ]);
+    return {
+      text: `${intro0} ${enonce0} ${question0}`.trim(),
+      format: "short",
+      expected: rep(total0, u0),
+      comparator: "number_equal",
+      explanation: E(
+        DEF_P,
+        "on suit le bord extérieur et on compte les côtés de carreau ; les traits intérieurs ne comptent pas.",
+        `le contour compte $${n0}$ côtés de carreau, chacun de ${q(v0, u0)} : $${n0} \\times ${T(v0)} = ${T(total0)}$ ${u0}.`,
+        `le périmètre de la figure est ${q(total0, u0)}.`
+      ),
+      canvas: figureLibreFromCells(f0.rows, f0.cols, f0.cells, true),
+    };
+  }
   const g = randomChoice(GRILLES);
   const [v, u] = randomChoice(g.cotes);
   const f = formeGrille(niveau);
@@ -588,9 +621,62 @@ const SITUATIONS: { s: string; g: "p" | "a" }[] = [
   { s: "repeindre la porte d’un garage", g: "a" },
 ];
 
-function compGrandeur(): Q {
+// 03/11/2026 (règle des longueurs) : ★1 SANS situation de vie, en 12 mots au
+// plus ; les situations (clôturer, carreler…) passent au gabarit ★3.
+const SITUATIONS_SIMPLES: { s: string; g: "p" | "a" }[] = [
+  { s: "faire le tour d’un rectangle", g: "p" },
+  { s: "mesurer le bord d’un carré", g: "p" },
+  { s: "suivre le contour d’un triangle", g: "p" },
+  { s: "repasser le contour d’une figure", g: "p" },
+  { s: "entourer une figure d’un trait", g: "p" },
+  { s: "additionner les côtés d’un polygone", g: "p" },
+  { s: "mesurer le tour d’un disque", g: "p" },
+  { s: "colorier l’intérieur d’un rectangle", g: "a" },
+  { s: "compter les carreaux dans un carré", g: "a" },
+  { s: "hachurer la surface d’un triangle", g: "a" },
+  { s: "paver un rectangle de carreaux", g: "a" },
+  { s: "remplir une figure de petits carrés", g: "a" },
+  { s: "couvrir l’intérieur d’un disque", g: "a" },
+];
+const METIERS = [
+  { p: "Une paysagiste", f: true },
+  { p: "Un menuisier", f: false },
+  { p: "Une couturière", f: true },
+  { p: "Un agriculteur", f: false },
+  { p: "Une décoratrice", f: true },
+  { p: "Un encadreur", f: false },
+  { p: "Une architecte", f: true },
+  { p: "Un électricien", f: false },
+] as const;
+/** ★3 : un prénom ou un métier. */
+const quiCtx = (): { p: string; f: boolean } => (Math.random() < 0.5 ? randomChoice(PRENOMS) : randomChoice(METIERS));
+
+function compGrandeur(simple = true): Q {
+  if (simple) {
+    const { s: s0, g: g0 } = randomChoice(SITUATIONS_SIMPLES);
+    const peri0 = g0 === "p";
+    const f0 = randomChoice([
+      () => ({ text: `${cap(s0)} : périmètre ou aire ?`, ok: peri0 ? "un périmètre" : "une aire", faux: [peri0 ? "une aire" : "un périmètre", "un volume", "une durée"] }),
+      () => ({ text: `Quelle grandeur pour ${s0} ?`, ok: peri0 ? "le périmètre" : "l’aire", faux: [peri0 ? "l’aire" : "le périmètre", "le volume", "la masse"] }),
+      () => ({ text: `${cap(s0)} : que mesure-t-on ?`, ok: peri0 ? "la longueur du contour" : "la surface", faux: [peri0 ? "la surface" : "la longueur du contour", "le volume", "la hauteur seulement"] }),
+      () => ({ text: `${cap(s0)}, c’est calculer quoi ?`, ok: peri0 ? "le périmètre" : "l’aire", faux: [peri0 ? "l’aire" : "le périmètre", "le volume", "un angle"] }),
+    ])();
+    return {
+      text: f0.text,
+      format: "qcm",
+      choices: makeChoices(f0.ok, f0.faux),
+      expected: [f0.ok],
+      comparator: "mcq_exact",
+      explanation: E(
+        peri0 ? DEF_P : "l’aire mesure la surface occupée par une figure.",
+        `pour ${s0}, on s’intéresse ${peri0 ? "au bord, au tour complet" : "à toute la surface, pas seulement au bord"}.`,
+        `le résultat s’exprimera ${peri0 ? "en m ou en cm (une longueur)" : "en m² ou en cm² (une aire)"}.`,
+        `il faut calculer ${peri0 ? "le périmètre" : "l’aire"}.`
+      ),
+    };
+  }
   const { s, g } = randomChoice(SITUATIONS);
-  const p = randomChoice(PRENOMS);
+  const p = quiCtx();
   const peri = g === "p";
   const formes = [
     () => ({
@@ -599,7 +685,7 @@ function compGrandeur(): Q {
       faux: [peri ? "une aire" : "un périmètre", "un volume", "une durée"],
     }),
     () => ({
-      text: `${p.p} veut ${s}. Quelle grandeur doit-${il(p)} calculer ?`,
+      text: `${p.p} veut ${s}. Quelle grandeur doit-${p.f ? "elle" : "il"} calculer ?`,
       ok: peri ? "le périmètre" : "l’aire",
       faux: [peri ? "l’aire" : "le périmètre", "le volume", "la masse"],
     }),
@@ -641,7 +727,6 @@ const OBJ_UNITE: { gn: string; u: string }[] = [
   { gn: "un cadre photo", u: "cm" },
   { gn: "une feuille de papier", u: "cm" },
   { gn: "une table", u: "cm" },
-  { gn: "un écran de téléphone", u: "mm" },
   { gn: "une chambre", u: "m" },
   { gn: "un terrain de football", u: "m" },
   { gn: "un champ", u: "m" },
@@ -656,12 +741,12 @@ const OBJ_UNITE: { gn: string; u: string }[] = [
 function compUnite(): Q {
   const { gn, u } = randomChoice(OBJ_UNITE);
   const peri = Math.random() < 0.55;
-  const p = randomChoice(PRENOMS);
   const gr = peri ? "le périmètre" : "l’aire";
+  // 03/11/2026 : ★1 sans prénom, en 12 mots au plus.
   const text = randomChoice([
     `${cap(gr)} ${de(gn)} s’exprime en…`,
     `On mesure ${peri ? "le tour" : "la surface"} ${de(gn)}. Quelle unité convient ?`,
-    `${p.p} calcule ${gr} ${de(gn)}. Dans quelle unité donne-t-${il(p)} son résultat ?`,
+    `${cap(gr)} ${de(gn)} : quelle unité ?`,
     `Quelle unité choisir pour ${gr} ${de(gn)} ?`,
   ]);
   const ok = peri ? u : `${u}²`;
@@ -700,13 +785,15 @@ const LIEUX_POLY = [
   { un: "un bassin", le: "le bassin", u: "m", r: [2, 9] },
 ] as const;
 
-function compPolygone(): Q {
-  const poly = randomChoice(POLYS);
+function compPolygone(simple = true): Q {
+  // 03/11/2026 : à ★2, surtout des quadrilatères et des pentagones (moins de mesures à lire).
+  const poly = simple ? randomChoice([POLYS[0], POLYS[0], POLYS[1]]) : randomChoice(POLYS);
   const lieu = randomChoice(LIEUX_POLY);
-  const u = lieu.u;
+  const u = simple ? randomChoice(["mm", "cm", "m"]) : lieu.u;
+  const r = simple ? [3, 20] : lieu.r;
   let cotes: number[] = [];
   for (let k = 0; k < 100; k++) {
-    cotes = Array.from({ length: poly.n }, () => randomInt(lieu.r[0], lieu.r[1]));
+    cotes = Array.from({ length: poly.n }, () => randomInt(r[0], r[1]));
     const m = Math.max(...cotes);
     if (cotes.reduce((s, x) => s + x, 0) - m > m) break;
   }
@@ -714,13 +801,20 @@ function compPolygone(): Q {
   const nom = randomChoice(POLY_NOMS).slice(0, poly.n);
   const mes = cotes.map((c) => q(c, u));
   const segs = cotes.map((c, i) => `${nom[i]}${nom[(i + 1) % poly.n]} $=$ ${q(c, u)}`);
-  const text = randomChoice([
+  const du = poly.n === 6 ? "de l’" : "du ";
+  const text = simple ? randomChoice([
+    `Côtés ${du}${poly.nom} : ${liste(mes)}. Périmètre en ${u} ?`,
+    `Périmètre d’un ${poly.nom} de côtés ${liste(mes)}, en ${u} ?`,
+    `Un ${poly.nom} a pour côtés ${liste(mes)}. Périmètre en ${u} ?`,
+    `Additionne les côtés ${du}${poly.nom} : ${liste(mes)}, en ${u}.`,
+  ]) : randomChoice([
     `${poly.n === 6 ? "L’" : "Le "}${poly.nom} ${nom} a des côtés de ${liste(mes)}. Quel est son périmètre ?`,
     `Calcule le périmètre d’un ${poly.nom} dont les côtés mesurent ${liste(mes)}.`,
     `${cap(lieu.un)} a la forme d’un ${poly.nom} dont les côtés mesurent ${liste(mes)}. Quelle est la longueur de son contour ?`,
     `On fait une fois le tour ${de(lieu.le)}, un ${poly.nom} de côtés ${liste(mes)}. Quelle distance parcourt-on ?`,
     `Dans ${poly.n === 6 ? "l’" : "le "}${poly.nom} ${nom} : ${liste(segs)}. Calcule son périmètre.`,
   ]);
+  void segs;
   return {
     text,
     format: "short",
@@ -759,12 +853,19 @@ const OBJ_REGULIERS: { gn: string; k: number; u: string; r: [number, number] }[]
   { gn: "une boîte à bijoux pentagonale (vue de dessus)", k: 2, u: "cm", r: [6, 12] },
 ];
 
-function compRegulier(): Q {
+function compRegulier(simple = true): Q {
   const o = randomChoice(OBJ_REGULIERS);
-  const fig = REGULIERS[o.k];
-  const c = randomInt(o.r[0], o.r[1]);
+  const fig = simple ? randomChoice(REGULIERS) : REGULIERS[o.k];
+  const u = simple ? randomChoice(["mm", "cm", "m"]) : o.u;
+  const c = simple ? randomInt(2, 25) : randomInt(o.r[0], o.r[1]);
   const P = fig.n * c;
-  const text = randomChoice([
+  // 03/11/2026 : ★2 sur la figure seule, en 15 mots au plus ; les objets passent à ★3.
+  const text = simple ? randomChoice([
+    `Calcule le périmètre ${de(fig.fig)} de côté ${q(c, u)}, en ${u}.`,
+    `${cap(fig.fig)} a ${q(c, u)} de côté. Son périmètre en ${u} ?`,
+    `Tous les côtés ${de(fig.fig)} mesurent ${q(c, u)}. Périmètre en ${u} ?`,
+    `Périmètre ${de(fig.fig)} de ${q(c, u)} de côté, en ${u} ?`,
+  ]) : randomChoice([
     `Calcule le périmètre ${de(fig.fig)} de côté ${q(c, o.u)}.`,
     `${cap(fig.fig)} a tous ses côtés égaux à ${q(c, o.u)}. Quel est son périmètre ?`,
     `${cap(o.gn)} a la forme ${de(fig.fig)} de ${q(c, o.u)} de côté. Quelle est la longueur de son contour ?`,
@@ -773,13 +874,13 @@ function compRegulier(): Q {
   return {
     text,
     format: "short",
-    expected: rep(P, o.u),
+    expected: rep(P, u),
     comparator: "number_equal",
     explanation: E(
       DEF_P,
       `${fig.fig} a ${fig.n} côtés de même longueur : on multiplie le côté par ${fig.n}.`,
       `$${fig.n} \\times ${T(c)} = ${T(P)}$.`,
-      `le périmètre est ${q(P, o.u)}.`
+      `le périmètre est ${q(P, u)}.`
     ),
   };
 }
@@ -847,12 +948,16 @@ function rectFigure(decimaux: boolean): Q {
   const P = 2 * (L + l);
   const ab = nom[0] + nom[1];
   const bc = nom[1] + nom[2];
+  // 03/11/2026 (règle des longueurs) : les mesures sont sur la figure ; ★1 en 12 mots au plus.
+  void ab;
+  void bc;
   const text = randomChoice([
-    `Calcule le périmètre du rectangle ${nom} ci-dessous, en ${u}.`,
-    `Quel est le périmètre du rectangle ${nom} représenté (en ${u}) ?`,
-    `Le rectangle ${nom} a pour longueur ${ab} $=$ ${q(L, u)} et pour largeur ${bc} $=$ ${q(l, u)}. Quel est son périmètre ?`,
-    `${nom} est un rectangle tel que ${ab} $=$ ${q(L, u)} et ${bc} $=$ ${q(l, u)}. Calcule son périmètre.`,
-    `Sur la figure, ${nom} est un rectangle. Quelle est la longueur de son contour, en ${u} ?`,
+    `Calcule le périmètre du rectangle ${nom}, en ${u}.`,
+    `Quel est le périmètre du rectangle ${nom}, en ${u} ?`,
+    `Lis la figure. Périmètre du rectangle ${nom}, en ${u} ?`,
+    `${nom} est un rectangle. Calcule son périmètre en ${u}.`,
+    `Donne la longueur du contour de ${nom}, en ${u}.`,
+    `Combien de ${UMOT[u]} mesure le tour de ${nom} ?`,
   ]);
   return {
     text,
@@ -876,13 +981,13 @@ function rectTexte(): Q {
   if (Math.random() < 0.4) L += 0.5;
   if (Math.random() < 0.3) l += 0.5;
   const P = 2 * (L + l);
+  // 03/11/2026 (règle des longueurs) : ★2 en 15 mots au plus.
   const text = randomChoice([
-    `Calcule le périmètre d’un rectangle de longueur ${q(L, u)} et de largeur ${q(l, u)}.`,
-    `Un rectangle mesure ${q(L, u)} sur ${q(l, u)}. Quel est son périmètre ?`,
-    `Quel est le périmètre d’un rectangle dont la largeur vaut ${q(l, u)} et la longueur ${q(L, u)} ?`,
-    `Longueur : ${q(L, u)}. Largeur : ${q(l, u)}. Donne le périmètre de ce rectangle.`,
-    `Un rectangle a deux côtés de ${q(L, u)} et deux côtés de ${q(l, u)}. Que vaut son périmètre ?`,
-    `Que vaut le périmètre d’un rectangle de ${q(L, u)} de long et ${q(l, u)} de large ?`,
+    `Calcule le périmètre d’un rectangle de ${q(L, u)} sur ${q(l, u)}, en ${u}.`,
+    `Un rectangle mesure ${q(L, u)} sur ${q(l, u)}. Son périmètre en ${u} ?`,
+    `Longueur ${q(L, u)}, largeur ${q(l, u)}. Périmètre du rectangle en ${u} ?`,
+    `Rectangle de ${q(L, u)} sur ${q(l, u)} : quel est son périmètre en ${u} ?`,
+    `Que vaut le périmètre d’un rectangle de ${q(L, u)} sur ${q(l, u)}, en ${u} ?`,
   ]);
   return {
     text,
@@ -921,7 +1026,32 @@ const OBJ_RECT: { gn: string; u: string; L: [number, number]; l: [number, number
   { gn: "une boîte à chaussures (son couvercle)", u: "cm", L: [30, 35], l: [18, 22] },
 ];
 
-function rectObjet(): Q {
+function rectObjet(simple = true): Q {
+  if (simple) {
+    // 03/11/2026 : ★2 sur un rectangle nommé, sans objet, en 15 mots au plus.
+    const nom0 = randomChoice(RECT_NOMS);
+    const u0 = randomChoice(["mm", "cm", "m", "dm"]);
+    const L0 = randomInt(12, 60);
+    const l0 = randomInt(5, L0 - 3);
+    const P0 = 2 * (L0 + l0);
+    return {
+      text: randomChoice([
+        `${nom0} est un rectangle de ${q(L0, u0)} sur ${q(l0, u0)}. Périmètre en ${u0} ?`,
+        `Le rectangle ${nom0} mesure ${q(L0, u0)} sur ${q(l0, u0)}. Son périmètre en ${u0} ?`,
+        `Calcule en ${u0} le périmètre du rectangle ${nom0} : ${q(L0, u0)} sur ${q(l0, u0)}.`,
+        `Rectangle ${nom0}, ${q(L0, u0)} sur ${q(l0, u0)}. Combien de ${UMOT[u0]} pour son tour ?`,
+      ]),
+      format: "short",
+      expected: rep(P0, u0),
+      comparator: "number_equal",
+      explanation: E(
+        DEF_P,
+        "pour un rectangle, $P = 2 \\times (L + l)$.",
+        `$2 \\times (${T(L0)} + ${T(l0)}) = 2 \\times ${T(L0 + l0)} = ${T(P0)}$.`,
+        `le périmètre du rectangle ${nom0} est ${q(P0, u0)}.`
+      ),
+    };
+  }
   const o = randomChoice(OBJ_RECT);
   const L = randomInt(o.L[0], o.L[1]);
   const l = randomInt(o.l[0], o.l[1]);
@@ -953,16 +1083,42 @@ function rectObjet(): Q {
   };
 }
 
-function rectMateriau(): Q {
+function rectMateriau(simple = true): Q {
+  if (simple) {
+    // 03/11/2026 : ★2 « faire le tour » d’un rectangle, sans situation, en 15 mots au plus.
+    const u0 = randomChoice(["cm", "m", "dm"]);
+    let L0 = randomInt(4, 30);
+    const l0 = randomInt(2, L0 - 1);
+    if (Math.random() < 0.3) L0 += 0.5;
+    const P0 = 2 * (L0 + l0);
+    return {
+      text: randomChoice([
+        `Longueur du contour d’un rectangle de ${q(L0, u0)} sur ${q(l0, u0)}, en ${u0} ?`,
+        `Le tour d’un rectangle de ${q(L0, u0)} sur ${q(l0, u0)} fait combien de ${UMOT[u0]} ?`,
+        `Tour d’un rectangle de ${q(L0, u0)} sur ${q(l0, u0)}, en ${u0} ?`,
+        `Tour complet d’un rectangle de ${q(L0, u0)} sur ${q(l0, u0)} : combien de ${UMOT[u0]} ?`,
+        `Rectangle de ${q(L0, u0)} sur ${q(l0, u0)} : son tour en ${u0} ?`,
+      ]),
+      format: "short",
+      expected: rep(P0, u0),
+      comparator: "number_equal",
+      explanation: E(
+        "faire le tour d’un rectangle, c’est parcourir son périmètre.",
+        "$P = 2 \\times (L + l)$.",
+        `$2 \\times (${T(L0)} + ${T(l0)}) = 2 \\times ${T(L0 + l0)} = ${T(P0)}$.`,
+        `le tour mesure ${q(P0, u0)}.`
+      ),
+    };
+  }
   const c = randomChoice(CONTOURS);
   const { L, l } = dims(c);
   const P = 2 * (L + l);
   const u = c.u;
-  const p = randomChoice(PRENOMS);
+  const p = quiCtx();
   const text = randomChoice([
     `${cap(c.un)} rectangulaire mesure ${q(L, u)} sur ${q(l, u)}. Quelle longueur ${deNu(c.mat)} faut-il pour ${pour(c.but, c.le)} ?`,
     `Pour ${pour(c.but, c.le)}, un rectangle de ${q(L, u)} de long et ${q(l, u)} de large, combien de ${UMOT[u]} ${deNu(c.mat)} faut-il ?`,
-    `${p.p} veut ${pour(c.but, c.le)}, un rectangle de ${q(L, u)} par ${q(l, u)}. Quelle longueur ${deNu(c.mat)} doit-${il(p)} prévoir ?`,
+    `${p.p} veut ${pour(c.but, c.le)}, un rectangle de ${q(L, u)} par ${q(l, u)}. Quelle longueur ${deNu(c.mat)} doit-${p.f ? "elle" : "il"} prévoir ?`,
     `${cap(c.le)} est rectangulaire : longueur ${q(L, u)}, largeur ${q(l, u)}. Calcule la longueur ${deNu(c.mat)} nécessaire pour en faire le tour.`,
     `Combien de ${UMOT[u]} ${deNu(c.mat)} faut-il acheter pour ${pour(c.but, c.un)} rectangulaire de ${q(l, u)} sur ${q(L, u)} ?`,
   ]);
@@ -1058,12 +1214,14 @@ function carreFigure(): Q {
   const c = randomInt(2, 15);
   const P = 4 * c;
   const s = nom[0] + nom[1];
+  // 03/11/2026 (règle des longueurs) : ★1 en 12 mots au plus.
+  void s;
   const text = randomChoice([
-    `Calcule le périmètre du carré ${nom} représenté (en ${u}).`,
-    `${nom} est un carré de côté ${q(c, u)}. Quel est son périmètre ?`,
-    `Le carré ${nom} a un côté ${s} $=$ ${q(c, u)}. Calcule son périmètre.`,
-    `Sur la figure, ${nom} est un carré. Quelle est la longueur de son contour, en ${u} ?`,
-    `Quel est le périmètre du carré ${nom}, sachant que ${s} $=$ ${q(c, u)} ?`,
+    `Calcule le périmètre du carré ${nom}, en ${u}.`,
+    `Carré ${nom} de côté ${q(c, u)} : périmètre en ${u} ?`,
+    `Le carré ${nom} a ${q(c, u)} de côté. Périmètre en ${u} ?`,
+    `Périmètre du carré ${nom} représenté, en ${u} ?`,
+    `Quel est le périmètre du carré ${nom}, en ${u} ?`,
   ]);
   return {
     text,
@@ -1099,7 +1257,25 @@ const OBJ_CARRE: { gn: string; u: string; r: [number, number] }[] = [
   { gn: "un post-it", u: "mm", r: [50, 76] },
 ];
 
-function carreObjet(): Q {
+function carreObjet(simple = true): Q {
+  if (simple) {
+    // 03/11/2026 : ★1 sur un carré, sans objet, en 12 mots au plus.
+    const u0 = randomChoice(["mm", "cm", "m", "dm"]);
+    const c0 = randomInt(3, 60);
+    const P0 = 4 * c0;
+    return {
+      text: randomChoice([
+        `Un carré a ${q(c0, u0)} de côté. Son périmètre en ${u0} ?`,
+        `Calcule le périmètre d’un carré de côté ${q(c0, u0)}, en ${u0}.`,
+        `Côté du carré : ${q(c0, u0)}. Son périmètre en ${u0} ?`,
+        `Tour d’un carré de ${q(c0, u0)} de côté, en ${u0} ?`,
+      ]),
+      format: "short",
+      expected: rep(P0, u0),
+      comparator: "number_equal",
+      explanation: E(DEF_P, "un carré a 4 côtés égaux : $P = 4 \\times c$.", `$4 \\times ${T(c0)} = ${T(P0)}$.`, `le périmètre est ${q(P0, u0)}.`),
+    };
+  }
   const o = randomChoice(OBJ_CARRE);
   const c = randomInt(o.r[0], o.r[1]);
   const P = 4 * c;
@@ -1119,7 +1295,31 @@ function carreObjet(): Q {
   };
 }
 
-function carreMateriau(): Q {
+function carreMateriau(simple = true): Q {
+  if (simple) {
+    // 03/11/2026 : ★2 « faire le tour » d’un carré, sans situation, en 15 mots au plus.
+    const u0 = randomChoice(["mm", "cm", "m", "dm"]);
+    let c0 = randomInt(3, 40);
+    if (u0 === "m" && Math.random() < 0.4) c0 += 0.5;
+    const P0 = 4 * c0;
+    return {
+      text: randomChoice([
+        `Longueur du contour d’un carré de ${q(c0, u0)} de côté, en ${u0} ?`,
+        `On fait le tour d’un carré de côté ${q(c0, u0)}. Distance en ${u0} ?`,
+        `Un carré a ${q(c0, u0)} de côté. Combien de ${UMOT[u0]} pour son tour ?`,
+        `Le côté d’un carré vaut ${q(c0, u0)}. Son contour mesure combien de ${UMOT[u0]} ?`,
+        `Calcule le tour d’un carré de côté ${q(c0, u0)}, en ${u0}.`,
+        `Carré de ${q(c0, u0)} de côté : longueur de son contour en ${u0} ?`,
+        `Quelle distance pour faire le tour d’un carré de ${q(c0, u0)}, en ${u0} ?`,
+        `Un carré mesure ${q(c0, u0)} de côté. Longueur de son tour en ${u0} ?`,
+        `Fais le tour d’un carré de côté ${q(c0, u0)}. Combien de ${UMOT[u0]} ?`,
+      ]),
+      format: "short",
+      expected: rep(P0, u0),
+      comparator: "number_equal",
+      explanation: E(DEF_P, "on fait le tour d’un carré : $P = 4 \\times c$.", `$4 \\times ${T(c0)} = ${T(P0)}$.`, `le tour mesure ${q(P0, u0)}.`),
+    };
+  }
   const ctx = randomChoice(CONTOURS_CARRES);
   let c = randomInt(ctx.l[0], ctx.l[1]);
   if (ctx.u === "cm" && c >= 100) c = Math.round(c / 5) * 5;
@@ -1127,11 +1327,11 @@ function carreMateriau(): Q {
   const P = 4 * c;
   const u = ctx.u;
   const adj = adjCarre(ctx.un);
-  const p = randomChoice(PRENOMS);
+  const p = quiCtx();
   const text = randomChoice([
     `${cap(ctx.un)} ${adj} a ${q(c, u)} de côté. Quelle longueur ${deNu(ctx.mat)} faut-il pour ${pour(ctx.but, ctx.le)} ?`,
     `Pour ${pour(ctx.but, ctx.le)}, un carré de ${q(c, u)} de côté, combien de ${UMOT[u]} ${deNu(ctx.mat)} faut-il ?`,
-    `${p.p} veut ${pour(ctx.but, ctx.un)} ${adj} de côté ${q(c, u)}. Quelle longueur ${deNu(ctx.mat)} doit-${il(p)} acheter ?`,
+    `${p.p} veut ${pour(ctx.but, ctx.un)} ${adj} de côté ${q(c, u)}. Quelle longueur ${deNu(ctx.mat)} doit-${p.f ? "elle" : "il"} acheter ?`,
     `${cap(ctx.le)} est un carré de ${q(c, u)} de côté. Calcule la longueur ${deNu(ctx.mat)} nécessaire pour en faire le tour.`,
     `Combien de ${UMOT[u]} ${deNu(ctx.mat)} faut-il pour ${pour(ctx.but, ctx.un)} ${adj} dont le côté mesure ${q(c, u)} ?`,
   ]);
@@ -1308,14 +1508,16 @@ function triTexte(): Q {
   const s2 = nom[1] + nom[2];
   const s3 = nom[2] + nom[0];
   const egal = `${s1} $=$ ${q(a, u)}, ${s2} $=$ ${q(b, u)} et ${s3} $=$ ${q(c, u)}`;
-  const t = randomInt(0, 4);
-  const text = [
-    `Le triangle ${nom} a pour côtés ${egal}. Calcule son périmètre.`,
-    `Quel est le périmètre d’un triangle dont les côtés mesurent ${q(a, u)}, ${q(b, u)} et ${q(c, u)} ?`,
-    `Dans le triangle ${nom}, ${egal}. Quelle est la longueur de son contour ?`,
-    `Calcule le périmètre du triangle ${nom} représenté (en ${u}).`,
-    `Les trois côtés du triangle ${nom} mesurent ${q(a, u)}, ${q(b, u)} et ${q(c, u)}. Que vaut son périmètre ?`,
-  ][t];
+  // 03/11/2026 (règle des longueurs) : ★1 en 12 mots au plus ; les côtés sont sur la figure.
+  void egal;
+  const t: number = 3;
+  const text = randomChoice([
+    `Calcule le périmètre du triangle ${nom}, en ${u}.`,
+    `Quel est le périmètre du triangle ${nom}, en ${u} ?`,
+    `Lis les côtés de ${nom}. Son périmètre en ${u} ?`,
+    `Additionne les côtés du triangle ${nom}. Résultat en ${u} ?`,
+    `Le tour du triangle ${nom} mesure combien de ${UMOT[u]} ?`,
+  ]);
   return {
     text,
     format: "short",
@@ -1341,19 +1543,26 @@ const OBJ_TRI: { gn: string; u: string; r: [number, number] }[] = [
   { gn: "une prairie", u: "m", r: [50, 150] },
 ];
 
-function triFigure(): Q {
-  const o = randomChoice(OBJ_TRI);
+function triFigure(simple = true): Q {
+  const o0 = randomChoice(OBJ_TRI);
+  // 03/11/2026 : ★2 sur le triangle seul, en 15 mots au plus ; les objets passent à ★3.
+  const o = simple ? { ...o0, u: randomChoice(["mm", "cm", "m"]), r: [8, 40] as [number, number] } : o0;
   const nom = randomChoice(TRI_NOMS);
   const [a, b, c] = cotesTriangle(o.r[0], o.r[1]);
   const P = a + b + c;
-  const intro = randomChoice([
+  const intro = simple ? randomChoice([
+    `Voici le triangle ${nom}.`,
+    `La figure montre le triangle ${nom}.`,
+    `Observe le triangle ${nom}.`,
+    `${nom} est un triangle.`,
+  ]) : randomChoice([
     `La figure représente ${o.gn} en forme de triangle, noté ${nom}.`,
     `Voici le plan ${de(o.gn)} triangulaire ${nom}.`,
     `On a dessiné ${o.gn} triangulaire ; ses sommets sont ${nom[0]}, ${nom[1]} et ${nom[2]}.`,
   ]);
   const question = randomChoice([
     `Quel est son périmètre, en ${o.u} ?`,
-    `Quelle longueur faut-il pour en faire le tour ?`,
+    simple ? `Longueur de son tour, en ${o.u} ?` : `Quelle longueur faut-il pour en faire le tour ?`,
     `Calcule la longueur de son contour, en ${o.u}.`,
     `Combien de ${UMOT[o.u]} mesure son contour ?`,
   ]);
@@ -1380,13 +1589,20 @@ const OBJ_EQUI: { gn: string; u: string; r: [number, number] }[] = [
   { gn: "un pare-feu de cheminée (vu de face)", u: "cm", r: [50, 80] },
 ];
 
-function triEquilateral(): Q {
-  const o = randomChoice(OBJ_EQUI);
+function triEquilateral(simple = true): Q {
+  const o0 = randomChoice(OBJ_EQUI);
+  const o = simple ? { ...o0, u: randomChoice(["mm", "cm", "m"]), r: [3, 40] as [number, number] } : o0;
   let c = randomInt(o.r[0], o.r[1]);
   if (o.u === "m" && Math.random() < 0.4) c += 0.5;
   const P = 3 * c;
   const nom = randomChoice(TRI_NOMS);
-  const text = randomChoice([
+  // 03/11/2026 : ★2 sur la figure seule, en 15 mots au plus ; les objets passent à ★3.
+  const text = simple ? randomChoice([
+    `Calcule le périmètre d’un triangle équilatéral de côté ${q(c, o.u)}, en ${o.u}.`,
+    `Un triangle équilatéral a ${q(c, o.u)} de côté. Son périmètre en ${o.u} ?`,
+    `Les côtés d’un triangle mesurent chacun ${q(c, o.u)}. Périmètre en ${o.u} ?`,
+    `Le triangle ${nom} est équilatéral et ${nom[0]}${nom[1]} $=$ ${q(c, o.u)}. Son périmètre en ${o.u} ?`,
+  ]) : randomChoice([
     `Calcule le périmètre d’un triangle équilatéral de côté ${q(c, o.u)}.`,
     `${cap(o.gn)} a la forme d’un triangle équilatéral de ${q(c, o.u)} de côté. Quelle est la longueur de son contour ?`,
     `Les trois côtés ${de(o.gn)} mesurent chacun ${q(c, o.u)}. Quel est son périmètre ?`,
@@ -1409,11 +1625,12 @@ function triIsoceleFigure(): Q {
   if (s === base) s += 1; // isocèle, mais pas équilatéral
   const P = 2 * s + base;
   const apex = nom[2];
+  // 03/11/2026 (règle des longueurs) : ★2 en 15 mots au plus ; les mesures sont sur la figure.
   const text = randomChoice([
-    `Le triangle ${nom} est isocèle en ${apex}. Calcule son périmètre (en ${u}).`,
-    `Sur la figure, ${nom} est isocèle en ${apex} : les codages indiquent deux côtés égaux. Quel est son périmètre, en ${u} ?`,
-    `Quel est le périmètre du triangle isocèle ${nom} représenté, en ${u} ?`,
-    `${nom} est un triangle isocèle en ${apex} avec ${nom[0]}${nom[1]} $=$ ${q(base, u)} et ${nom[2]}${nom[0]} $=$ ${q(s, u)}. Calcule son périmètre.`,
+    `Le triangle ${nom} est isocèle en ${apex}. Son périmètre en ${u} ?`,
+    `${nom} est isocèle en ${apex}. Lis la figure. Périmètre en ${u} ?`,
+    `Quel est le périmètre du triangle isocèle ${nom}, en ${u} ?`,
+    `${nom} est isocèle en ${apex}. Calcule son périmètre, en ${u}.`,
   ]);
   return {
     text,
@@ -2542,7 +2759,7 @@ const ITEMS: TutorBankItemV4[] = [
     difficulty: 1,
     hint: "Le périmètre fait le TOUR ; l’aire REMPLIT la surface.",
     tags: ["aire_perimetre", "comprendre", "qcm", "template"],
-    generate: compGrandeur,
+    generate: () => compGrandeur(),
   },
   {
     ...base,
@@ -2577,7 +2794,7 @@ const ITEMS: TutorBankItemV4[] = [
     microId: "aire_perimetre_rectangle",
     difficulty: 1,
     theme: "neutral",
-    text: "Calcule le périmètre d’un rectangle de longueur 8 cm et de largeur 3 cm. Donne la réponse en cm.",
+    text: "Périmètre d’un rectangle de 8 cm sur 3 cm, en cm ?",
     format: "short",
     expected: ["22 cm"],
     comparator: "number_equal",
@@ -2623,7 +2840,7 @@ const ITEMS: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "On fait le tour complet : c’est le périmètre.",
     tags: ["aire_perimetre", "rectangle", "probleme", "template"],
-    generate: rectMateriau,
+    generate: () => rectMateriau(),
   },
 
   // =========================
@@ -2638,7 +2855,7 @@ const ITEMS: TutorBankItemV4[] = [
     microId: "aire_perimetre_carre",
     difficulty: 1,
     theme: "neutral",
-    text: "Calcule le périmètre d’un carré de côté 6 cm. Donne la réponse en cm.",
+    text: "Calcule le périmètre d’un carré de côté 6 cm, en cm.",
     format: "short",
     expected: ["24 cm"],
     comparator: "number_equal",
@@ -2670,7 +2887,7 @@ const ITEMS: TutorBankItemV4[] = [
     difficulty: 2,
     hint: "Le tour d’un carré : $4 \\times$ côté.",
     tags: ["aire_perimetre", "carre", "probleme", "template"],
-    generate: carreMateriau,
+    generate: () => carreMateriau(),
   },
 
   // =========================
@@ -2685,7 +2902,7 @@ const ITEMS: TutorBankItemV4[] = [
     microId: "aire_perimetre_triangle",
     difficulty: 1,
     theme: "neutral",
-    text: "Calcule le périmètre d’un triangle dont les côtés mesurent 5 cm, 7 cm et 8 cm. Donne la réponse en cm.",
+    text: "Triangle : 5 cm, 7 cm, 8 cm. Périmètre en cm ?",
     format: "short",
     expected: ["20 cm"],
     comparator: "number_equal",
@@ -2707,7 +2924,7 @@ const ITEMS: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Additionne les trois longueurs du triangle.",
     tags: ["aire_perimetre", "triangle", "canvas", "template"],
-    generate: triFigure,
+    generate: () => triFigure(),
   },
 
   // =========================
@@ -2935,7 +3152,7 @@ const ITEMS: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Additionne tous les côtés.",
     tags: ["aire_perimetre", "comprendre", "template"],
-    generate: compPolygone,
+    generate: () => compPolygone(),
   },
   {
     kind: "fixed",
@@ -2972,7 +3189,7 @@ const ITEMS: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Côtés tous égaux : on multiplie le côté par le nombre de côtés.",
     tags: ["aire_perimetre", "comprendre", "template"],
-    generate: compRegulier,
+    generate: () => compRegulier(),
   },
 
   /* ===== RECTANGLE (compléments) ===== */
@@ -2987,7 +3204,7 @@ const ITEMS: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "$P = 2 \\times (L + l)$.",
     tags: ["aire_perimetre", "rectangle", "template"],
-    generate: rectObjet,
+    generate: () => rectObjet(),
   },
   {
     kind: "template",
@@ -3011,7 +3228,7 @@ const ITEMS: TutorBankItemV4[] = [
     microId: "aire_perimetre_rectangle",
     difficulty: 2,
     theme: "neutral",
-    text: "Un rectangle a une longueur de $7$ cm et une largeur de $5$ cm. Quel est son périmètre (en cm) ?",
+    text: "Rectangle de $7$ cm sur $5$ cm : quel est son périmètre en cm ?",
     format: "short",
     expected: ["24 cm"],
     comparator: "number_equal",
@@ -3096,7 +3313,7 @@ const ITEMS: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "$P = 4 \\times c$.",
     tags: ["aire_perimetre", "carre", "template"],
-    generate: carreObjet,
+    generate: () => carreObjet(),
   },
   {
     kind: "template",
@@ -3120,7 +3337,7 @@ const ITEMS: TutorBankItemV4[] = [
     microId: "aire_perimetre_carre",
     difficulty: 2,
     theme: "neutral",
-    text: "Un carré a un côté de $9$ cm. Quel est son périmètre (en cm) ?",
+    text: "Un carré a $9$ cm de côté. Quel est son périmètre en cm ?",
     format: "short",
     expected: ["36 cm"],
     comparator: "number_equal",
@@ -3201,7 +3418,7 @@ const ITEMS: TutorBankItemV4[] = [
     microId: "aire_perimetre_carre",
     difficulty: 1,
     theme: "neutral",
-    text: "Un carré a un côté de $12$ cm. Quel est son périmètre (en cm) ?",
+    text: "Un carré a $12$ cm de côté. Son périmètre en cm ?",
     format: "short",
     expected: ["48 cm"],
     comparator: "number_equal",
@@ -3236,7 +3453,7 @@ const ITEMS: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Triangle équilatéral : $3 \\times$ côté.",
     tags: ["aire_perimetre", "triangle", "equilateral", "template"],
-    generate: triEquilateral,
+    generate: () => triEquilateral(),
   },
   {
     kind: "template",
@@ -3625,6 +3842,68 @@ const ITEMS: TutorBankItemV4[] = [
       "Calcul : un carré 5×5 et un rectangle 7×3 ont tous deux un périmètre de 20 cm.\n\n" +
       "Conclusion : un même périmètre peut correspondre à des formes différentes.",
     tags: ["aire_perimetre", "defi", "open"],
+  },
+  // 03/11/2026 (règle du coach : simple à ★1-★2, contexte à ★3) : les
+  // situations, objets, prénoms et métiers retirés des gabarits ★1-★2 sont ici.
+  {
+    ...base,
+    kind: "template",
+    id: "4e_aire_perimetre_comprendre_tpl_grandeur_situation",
+    microId: "aire_perimetre_comprendre",
+    difficulty: 3,
+    hint: "Le périmètre fait le TOUR ; l’aire REMPLIT la surface.",
+    tags: ["aire_perimetre", "comprendre", "qcm", "contexte", "template"],
+    generate: () => compGrandeur(false),
+  },
+  {
+    ...base,
+    kind: "template",
+    id: "4e_aire_perimetre_comprendre_x6_situation",
+    microId: "aire_perimetre_comprendre",
+    difficulty: 3,
+    hint: "On additionne tous les côtés du contour.",
+    tags: ["aire_perimetre", "comprendre", "contexte", "template"],
+    generate: () => compPolygone(false),
+  },
+  {
+    ...base,
+    kind: "template",
+    id: "4e_aire_perimetre_comprendre_x8_situation",
+    microId: "aire_perimetre_comprendre",
+    difficulty: 3,
+    hint: "Côtés égaux : nombre de côtés × longueur d’un côté.",
+    tags: ["aire_perimetre", "comprendre", "contexte", "template"],
+    generate: () => compRegulier(false),
+  },
+  {
+    ...base,
+    kind: "template",
+    id: "4e_aire_perimetre_rectangle_tpl_situation",
+    microId: "aire_perimetre_rectangle",
+    difficulty: 3,
+    hint: "Le tour d’un rectangle : $P = 2 \\times (L + l)$.",
+    tags: ["aire_perimetre", "rectangle", "probleme", "contexte", "template"],
+    generate: () => (Math.random() < 0.5 ? rectMateriau(false) : rectObjet(false)),
+  },
+  {
+    ...base,
+    kind: "template",
+    id: "4e_aire_perimetre_carre_tpl_situation",
+    microId: "aire_perimetre_carre",
+    difficulty: 3,
+    hint: "Le tour d’un carré : $4 \\times$ côté.",
+    tags: ["aire_perimetre", "carre", "probleme", "contexte", "template"],
+    generate: () => (Math.random() < 0.5 ? carreMateriau(false) : carreObjet(false)),
+  },
+  {
+    ...base,
+    kind: "template",
+    id: "4e_aire_perimetre_triangle_tpl_situation",
+    microId: "aire_perimetre_triangle",
+    difficulty: 3,
+    hint: "On additionne les trois côtés.",
+    tags: ["aire_perimetre", "triangle", "contexte", "template"],
+    generate: () => (Math.random() < 0.5 ? triFigure(false) : triEquilateral(false)),
   },
 ];
 

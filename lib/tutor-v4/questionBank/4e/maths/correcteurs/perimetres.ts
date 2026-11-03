@@ -117,8 +117,9 @@ function uniteUnique(ms: { u: string }[]): string | null {
 // ─── aire_perimetre_comprendre ─────────────────────────────────────────────
 
 // Table propre au correcteur : les mots qui disent « on suit le bord » ou « on couvre ».
-const BORD = /autour|tour d|le tour|bord|contour|clôturer|border|entourer|plinthes|haie|fil électrique/;
-const SURFACE = /peindre|semer|carreler|moquette|recouvrir|couvrir|vernir|papier peint|engrais|panneaux solaires|goudronner/;
+// 03/11/2026 : ★1 sur des figures (« additionner les côtés », « colorier l’intérieur », « paver »…).
+const BORD = /autour|tour d|le tour|bord|contour|clôturer|border|entourer|plinthes|haie|fil électrique|les côtés/;
+const SURFACE = /peindre|semer|carreler|moquette|recouvrir|couvrir|vernir|papier peint|engrais|panneaux solaires|goudronner|colorier|hachurer|remplir|paver|carreaux|intérieur|surface/;
 const MOTS_P = ["un périmètre", "le périmètre", "la longueur du contour", "de contour, donc de périmètre"];
 const MOTS_A = ["une aire", "l’aire", "la surface", "de surface, donc d’aire"];
 
@@ -795,6 +796,13 @@ const CORRIGER: CorrecteursMaths = {
   "4e_aire_perimetre_comprendre_tpl_echelle": corrigerEchelle,
   "4e_aire_perimetre_comprendre_x6_tpl": corrigerPolygone,
   "4e_aire_perimetre_comprendre_x8_tpl": corrigerRegulier,
+  // 03/11/2026 : les gabarits ★3 en situation.
+  "4e_aire_perimetre_comprendre_tpl_grandeur_situation": corrigerGrandeur,
+  "4e_aire_perimetre_comprendre_x6_situation": corrigerPolygone,
+  "4e_aire_perimetre_comprendre_x8_situation": corrigerRegulier,
+  "4e_aire_perimetre_rectangle_tpl_situation": corrigerRectangle,
+  "4e_aire_perimetre_carre_tpl_situation": corrigerCarre,
+  "4e_aire_perimetre_triangle_tpl_situation": (q) => (/équilatéral|chacun/.test(plat(q.text)) ? corrigerEquilateral(q) : corrigerTriangle(q)),
 };
 
 export const CORRECTEURS: CorrecteursMaths = avecRegleMotsCles(CORRIGER);
