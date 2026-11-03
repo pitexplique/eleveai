@@ -424,7 +424,7 @@ class ConvexiteTangenteBase(AuditSynchro, MotsCales, Notion6e):
         # la nuit : étoiles, lune, la route, le sol
         rng = np.random.default_rng(5)
         etoiles = VGroup(*[Dot(P(x, y), radius=0.025 + 0.02 * rng.random(), color=WHITE).set_opacity(0.8)
-                           for x, y in zip(rng.uniform(2.9, 5.2, 16), rng.uniform(2.0, 3.35, 16))])
+                           for x, y in zip(rng.uniform(3.3, 5.2, 16), rng.uniform(2.0, 3.35, 16))])
         lune = Circle(radius=0.3, fill_color="#FEF9C3", fill_opacity=1, stroke_width=0).move_to(P(5.75, 3.0))
         sol = Polygon(*[P(x, route(x)) for x in np.linspace(-6.2, 6.2, 80)], P(6.2, -2.3), P(-6.2, -2.3),
                       fill_color="#14261a", fill_opacity=1, stroke_width=0)
@@ -694,7 +694,7 @@ class ConvexiteTangenteBase(AuditSynchro, MotsCales, Notion6e):
         self.play(FadeIn(p1, scale=2.5), FadeIn(g1), FadeIn(l2, shift=RIGHT * 0.1), run_time=0.4)
         self.au_nb("x moins 1", "1")
         tg = g.droite(1, 1, 0, -0.3, 4.4, FAISCEAU, 5)
-        lt = self.t("y = x − 1", 30, FAISCEAU).next_to(g.G(4.0, 3.0), LEFT, buff=0.25)
+        lt = self.t("y = x − 1", 30, FAISCEAU).next_to(g.G(3.6, 2.6), UL, buff=0.15)  # au-dessus de la droite, pas dessus
         l3 = self.ligne(self.t("y = x − 1", 44, FAISCEAU), y=1.0)
         self.play(Create(tg), FadeIn(lt), FadeIn(l3, scale=1.3), run_time=0.6)
         self.au_mot("La courbe est au-dessous")
@@ -766,7 +766,7 @@ class ConvexiteTangenteBase(AuditSynchro, MotsCales, Notion6e):
         self.au_mot("traverse")
         gauche = g3.courbe(lambda x: x ** 3, -1.2, 0, ROUGE_ERREUR, 7)
         droite = g3.courbe(lambda x: x ** 3, 0, 1.2, ROUGE_ERREUR, 7)
-        r3 = self.t("la courbe traverse", 28, ROUGE_ERREUR).move_to(P(xs[2] - 0.6, -2.1))
+        r3 = self.t("la courbe traverse", 26, ROUGE_ERREUR).move_to(P(xs[2] - 0.45, -2.1))  # décollé de r2
         self.play(Create(gauche), run_time=0.5)
         self.play(Create(droite), FadeIn(r3), Flash(t3[1], color=ROUGE_ERREUR), run_time=0.6)
         self.au_mot("aucune inégalité")
@@ -813,7 +813,7 @@ class ConvexiteTangenteBase(AuditSynchro, MotsCales, Notion6e):
         self.play(LaggedStart(*[GrowArrow(f) for f in fl], lag_ratio=0.2), FadeIn(p_t, scale=2), FadeIn(p_c, scale=2),
                   run_time=0.5)
         self.au_nb("x moins 1", "1")
-        lt = self.t("y = x − 1", 30, FAISCEAU).next_to(g.G(2.3, 1.3), LEFT, buff=0.2)
+        lt = self.t("y = x − 1", 30, FAISCEAU).next_to(g.G(2.3, 1.3), UL, buff=0.15)
         self.play(FadeIn(lt, scale=1.3), run_time=0.35)
         self.au_mot("0,405")
         ln15 = self.t("ln(1,5)", 40, VERT_OK, audit=False)  # rappel de la question

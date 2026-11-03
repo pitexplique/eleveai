@@ -180,19 +180,19 @@ class ConvexiteReconnaitreShort(AuditSynchro, MotsCales, Short6e):
         fh = Arrow(gb.G(0.5, -0.95), gb.G(0.5, 0.15), buff=0, color=CONVEXE, stroke_width=5)
         self.play(u.animate.set_value(0.8), GrowArrow(fh), run_time=0.6, rate_func=linear)
         self.au_mot("convexe")
-        lv = self.t("convexe", 34, CONVEXE).move_to(gb.G(0.78, 0.72))
+        lv = self.t("convexe", 30, CONVEXE).move_to(gb.G(0.62, 0.95))  # loin de la bosse orange
         self.play(u.animate.set_value(1.0), FadeIn(lv, scale=1.4), run_time=0.4, rate_func=linear)
-        self.insister(lv, 1.25)
+        self.insister(lv, 1.15)
         self.au_mot("Il passe")
         self.play(u.animate.set_value(1.45), run_time=1.0, rate_func=linear)
         self.au_mot("tournée vers le bas")
         fb = Arrow(gb.G(1.5, 0.95), gb.G(1.5, -0.15), buff=0, color=CONCAVE, stroke_width=5)
         self.play(u.animate.set_value(1.8), GrowArrow(fb), run_time=0.6, rate_func=linear)
         self.au_mot("concave")
-        lc = self.t("concave", 34, CONCAVE).move_to(gb.G(1.5, -0.65))
+        lc = self.t("concave", 30, CONCAVE).move_to(gb.G(1.62, -0.68))  # loin de la montée bleue
         self.play(u.animate.set_value(2.15), FadeIn(lc, scale=1.4), run_time=0.6,
                   rate_func=rate_functions.ease_out_quad)
-        self.insister(lc, 1.25)
+        self.insister(lc, 1.15)
         self.attendre_voix(marge=0.3)
         for m in (sk, tr1, tr2, lien, point):
             m.clear_updaters()

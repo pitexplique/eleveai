@@ -407,7 +407,7 @@ class ConvexitePointInflexionBase(AuditSynchro, MotsCales, Notion6e):
         lh = self.t("écoutes cumulées", 26, GREY_A).next_to(gh.G(0, 1.12), RIGHT, buff=0.15)
         lb = self.t("écoutes du jour", 26, GREY_A).next_to(gb.G(0, 0.112), RIGHT, buff=0.15)
         jh = self.t("jours", 24, GREY_A).next_to(gh.G(21, 0), UP, buff=0.1).align_to(gh.G(21, 0), RIGHT)
-        jb = self.t("jours", 24, GREY_A).next_to(gb.G(21, 0), UP, buff=0.1).align_to(gb.G(21, 0), RIGHT)
+        jb = self.t("jours", 24, GREY_A).next_to(gb.G(21, 0), DOWN, buff=0.1).align_to(gb.G(21, 0), RIGHT)  # sous l'axe : pas sur les barres
         self.au_mot("Elle suit les écoutes")
         self.play(Create(axh), Create(axb), FadeIn(lh), FadeIn(lb), run_time=0.6)
         self.au_mot("jour après jour")
@@ -423,14 +423,14 @@ class ConvexitePointInflexionBase(AuditSynchro, MotsCales, Notion6e):
                   LaggedStart(*[GrowFromEdge(b, DOWN) for b in barres[:10]], lag_ratio=0.5), run_time=2.6)
         self.au_mot("la courbe se creuse")
         lc = VGroup(bol(0.24), self.t("se creuse", 32, CONVEXE)).arrange(RIGHT, buff=0.15)
-        lc.move_to(gh.G(3.2, 0.42))
+        lc.move_to(gh.G(4.6, 0.5))  # le bol ne touche pas l'axe
         self.play(FadeIn(lc, shift=UP * 0.1), Indicate(creux, color=CONVEXE, scale_factor=1.04), run_time=0.6)
         self.au_mot("Puis les écoutes")
         self.play(Create(bosse, rate_func=linear),
                   LaggedStart(*[GrowFromEdge(b, DOWN) for b in barres[10:]], lag_ratio=0.5), run_time=2.6)
         self.au_mot("la courbe se bombe")
         lbo = VGroup(dome(0.24), self.t("se bombe", 32, CONCAVE)).arrange(RIGHT, buff=0.15)
-        lbo.move_to(gh.G(15.6, 0.5))
+        lbo.move_to(gh.G(17.5, 0.62))
         self.play(FadeIn(lbo, shift=UP * 0.1), Indicate(bosse, color=CONCAVE, scale_factor=1.04), run_time=0.6)
         self.attendre_voix(marge=0.4)
 
@@ -442,7 +442,7 @@ class ConvexitePointInflexionBase(AuditSynchro, MotsCales, Notion6e):
         self.play(Indicate(lbo, scale_factor=1.25), run_time=0.45)
         I = Dot(gh.G(10, 0.5), radius=0.12, color=POINT_I)
         self.au_mot("point d'inflexion")
-        lpi = self.t("point d'inflexion", 30, POINT_I).next_to(I, UL, buff=0.1)
+        lpi = self.t("point d'inflexion", 30, POINT_I).next_to(I, DR, buff=0.15)  # sous la bosse, loin de « se creuse »
         pi2 = self.col(self.t("point d'inflexion", 38, POINT_I), -0.45)
         self.play(FadeIn(I, scale=2.5), FadeIn(lpi), FadeOut(VGroup(met1, met2)), FadeIn(pi2, shift=UP * 0.1),
                   run_time=0.5)

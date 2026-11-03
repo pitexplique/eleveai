@@ -608,12 +608,12 @@ class ConvexiteReconnaitreBase(AuditSynchro, MotsCales, Notion6e):
         self.play(Create(ax), Create(c), FadeIn(lx), run_time=0.8)
         self.au_mot("descend")
         fd = Arrow(g.G(-2.15, 2.9), g.G(-1.05, 0.2), buff=0, color=WHITE, stroke_width=5)
-        ld = self.t("descend", 30, WHITE).next_to(fd.get_end(), LEFT, buff=0.15)
+        ld = self.t("descend", 30, WHITE).next_to(g.G(-1.6, 0), DOWN, buff=0.18)  # sous l'axe, loin de la flèche
         sk = self.rouler(g, f, df, -2.1, 0, run_time=0.7, rate_func=rate_functions.ease_in_quad,
                          extra=[GrowArrow(fd), FadeIn(ld)])
         self.au_mot("puis monte")
         fm = Arrow(g.G(1.05, 0.2), g.G(2.15, 2.9), buff=0, color=WHITE, stroke_width=5)
-        lm = self.t("monte", 30, WHITE).next_to(fm.get_start(), RIGHT, buff=0.15)
+        lm = self.t("monte", 30, WHITE).next_to(g.G(1.6, 0), DOWN, buff=0.18)
         self.remove(sk)
         sk = self.rouler(g, f, df, 0, 2.1, run_time=0.7, rate_func=rate_functions.ease_out_quad,
                          extra=[GrowArrow(fm), FadeIn(lm)])

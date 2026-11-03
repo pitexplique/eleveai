@@ -252,13 +252,14 @@ class ConvexitePointInflexionShort(AuditSynchro, MotsCales, Short6e):
         self.play(u.animate.set_value(9.6), run_time=2.2, rate_func=rate_functions.ease_in_sine)
         self.au_mot("la courbe se creuse")
         b1 = VGroup(Arc(radius=0.15, start_angle=PI, angle=PI, stroke_color=CONVEXE, stroke_width=5),
-                    self.t("se creuse", 26, CONVEXE)).arrange(RIGHT, buff=0.1).move_to(G(4.3, 0.78))
+                    self.t("se creuse", 22, CONVEXE)).arrange(DOWN, buff=0.06).move_to(G(4, 0.8))
+        b1.align_to(G(0.6, 0), LEFT)  # ni sur l'axe, ni sous la tangente qui glisse
         self.play(c1.animate.set_color(CONVEXE), FadeIn(b1, shift=UP * 0.1), run_time=0.45)
         self.au_mot("Ensuite")
         self.play(u.animate.set_value(18.5), run_time=2.6, rate_func=rate_functions.ease_out_sine)
         self.au_mot("elle se bombe")
         b2 = VGroup(Arc(radius=0.15, start_angle=0, angle=PI, stroke_color=CONCAVE, stroke_width=5),
-                    self.t("se bombe", 26, CONCAVE)).arrange(RIGHT, buff=0.1).move_to(G(15.3, 0.33))
+                    self.t("se bombe", 24, CONCAVE)).arrange(DOWN, buff=0.06).move_to(G(16, 0.42))  # loin de « jours »
         self.play(c2.animate.set_color(CONCAVE), FadeIn(b2, shift=UP * 0.1), FadeOut(tg), FadeOut(contact),
                   run_time=0.45)
         tg.clear_updaters()
@@ -325,13 +326,13 @@ class ConvexitePointInflexionShort(AuditSynchro, MotsCales, Short6e):
         z1 = zone(4.5, 10, CONVEXE)
         self.play(FadeIn(z1), FadeOut(b1), run_time=0.35)
         self.au_mot("au-dessus")
-        l1 = self.t("au-dessus", 26, CONVEXE).move_to(G(4.3, 0.78))
+        l1 = self.t("au-dessus", 26, CONVEXE).move_to(G(4, 0.8)).align_to(G(0.6, 0), LEFT)
         self.play(FadeIn(l1, shift=DOWN * 0.1), Indicate(z1, color=CONVEXE, scale_factor=1.04), run_time=0.45)
         self.au_mot("après")
         z2 = zone(10, 15.5, CONCAVE)
         self.play(FadeIn(z2), FadeOut(b2), run_time=0.35)
         self.au_mot("au-dessous")
-        l2 = self.t("au-dessous", 26, CONCAVE).move_to(G(15.3, 0.33))
+        l2 = self.t("au-dessous", 24, CONCAVE).move_to(G(15.8, 0.4))
         self.play(FadeIn(l2, shift=UP * 0.1), Indicate(z2, color=CONCAVE, scale_factor=1.04), run_time=0.45)
         self.attendre_voix(marge=0.3)
 

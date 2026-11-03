@@ -184,12 +184,16 @@ class ConvexiteDefiShort(AuditSynchro, MotsCales, Short6e):
         self.play(FadeIn(lc), qv.animate.set_value(4), run_time=0.8, rate_func=linear)
         self.au_mot("concave")
         lcc = self.t("concave", 30, CONCAVE).move_to(G.G(2.0, 230))
-        lcc.shift(RIGHT * max(0, G.G(0, 0)[0] + 0.12 - lcc.get_left()[0]))  # pas sur l'axe vertical
+        # entre l'axe vertical et le fil jaune du point d'inflexion (q = 4)
+        x0, x1 = G.G(0, 0)[0] + 0.12, G.G(4, 0)[0] - 0.18
+        if lcc.width > x1 - x0:
+            lcc.scale_to_fit_width(x1 - x0)
+        lcc.set_x((x0 + x1) / 2)
         self.play(FadeIn(lcc, scale=1.3), run_time=0.3)
         self.au_mot("Les barres remontent")
         self.play(qv.animate.set_value(10), run_time=1.6, rate_func=linear)
         self.au_mot("convexe")
-        lcv = self.t("convexe", 30, CONVEXE).move_to(G.G(7.2, 85))
+        lcv = self.t("convexe", 30, CONVEXE).move_to(G.G(8.0, 72))  # sous la courbe, sans la toucher
         self.play(FadeIn(lcv, scale=1.3), run_time=0.3)
         barres.clear_updaters()
         courbe.clear_updaters()

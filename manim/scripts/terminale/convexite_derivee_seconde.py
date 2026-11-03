@@ -410,8 +410,8 @@ class ConvexiteDeriveeSecondeBase(AuditSynchro, MotsCales, Notion6e):
         point.clear_updaters()
         self.remove(lien)
         self.au_mot("se creuse")
-        lc = VGroup(bol(0.26), self.t("la courbe se creuse", 28, CONVEXE)).arrange(RIGHT, buff=0.18)
-        lc.move_to(P(0, -1.15)).align_to(P(1.4, 0), LEFT)
+        lc = VGroup(bol(0.26), self.t("la courbe se creuse", 26, CONVEXE)).arrange(RIGHT, buff=0.18)
+        lc.move_to(P(0, -1.45)).align_to(P(2.15, 0), LEFT)  # à droite de la courbe, sans la toucher
         self.play(trace.animate.set_color(CONVEXE), FadeIn(lc, shift=UP * 0.1), run_time=0.5)
         self.play(Indicate(trace, color=CONVEXE, scale_factor=1.04), run_time=0.7)
         self.attendre_voix(marge=0.6)

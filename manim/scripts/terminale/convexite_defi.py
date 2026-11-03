@@ -433,7 +433,7 @@ class ConvexiteDefiBase(AuditSynchro, MotsCales, Notion6e):
         self.au_mot("chaque vélo en plus coûte plus")
         self.play(LaggedStart(*[GrowFromEdge(b[k], DOWN) for k in range(5, 11)], lag_ratio=0.2), run_time=1.1)
         fl2 = Arrow(P(3.6, -0.6), P(5.0, 0.9), buff=0, color=CONVEXE, stroke_width=5)
-        m2 = self.t("plus cher", 30, CONVEXE).move_to(P(2.75, -0.2))
+        m2 = self.t("plus cher", 30, CONVEXE).move_to(P(4.0, 1.45))  # au-dessus de la flèche, loin de « moins cher »
         self.au_mot("plus cher")
         self.play(GrowArrow(fl2), FadeIn(m2, shift=UP * 0.1), run_time=0.4)
         self.attendre_voix(marge=0.6)
@@ -918,8 +918,8 @@ class ConvexiteDefiBase(AuditSynchro, MotsCales, Notion6e):
         v = self._texte_voix
         self.au_mot("Correction")
         tit = self.t("Correction", 44, VERT_OK).move_to(P(0, 3.25)).align_to(P(-6.2, 0), LEFT)
-        gh = Graphe((0, 6.6), (0, 90), (2.2, 0.45), (6.3, 2.95))
-        gb = Graphe((0, 6.6), (0, 40), (2.2, -1.95), (6.3, -0.15))
+        gh = Graphe((0, 6.6), (0, 90), (2.2, 0.45), (5.6, 2.95))  # 5,6 : le « q » ne touche pas Ti-Margo
+        gb = Graphe((0, 6.6), (0, 40), (2.2, -1.95), (5.6, -0.15))
         rh = self.repere(gh, ny="C", fs=24)
         rb = self.repere(gb, ny="C'", fs=24)
         self.play(Write(tit), FadeIn(rh), FadeIn(rb), run_time=0.5)
@@ -950,6 +950,7 @@ class ConvexiteDefiBase(AuditSynchro, MotsCales, Notion6e):
         self.play(FadeIn(e, scale=1.2), Create(cad), run_time=0.4)
         f = self.lg(self.t("C'(3) =", fs, BLEU_CALCUL), self.t("27", fs), self.t("− 54", fs), self.t("+ 30", fs),
                     self.t("= 3", fs + 4, VERT_OK), y=-1.45, x=x)
+        f[-1].shift(RIGHT * 0.2)  # le cadre de « = 3 » ne colle pas au « 30 »
         lf = self.lg(self.t("le coût marginal le plus bas", 30, VERT_OK), y=-2.1, x=x)
         self.au_mot("Et le coût marginal")
         cp = gb.courbe(Dp, 0, 6.3, WHITE, 5)
