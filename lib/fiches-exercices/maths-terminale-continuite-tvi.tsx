@@ -112,6 +112,14 @@ export const exercicesContinuiteTviTerminale: FicheExercicesData = {
         {
           enonce:
             "La fonction partie entière $E$ associe à tout réel $x$ le plus grand entier inférieur ou égal à $x$ : $E(2{,}7) = 2$ et $E(-0{,}5) = -1$. Sa courbe est tracée sur $[-1 ; 4[$.\na) Quand $x$ tend vers $2$, quelle est la limite de $E(x)$ par valeurs inférieures ? Par valeurs supérieures ?\nb) $E$ est-elle continue en $2$ ? Sur $[0 ; 1[$ ? Sur $[0 ; 3]$ ?\nc) On a $E(0) = 0$ et $E(3) = 3$. L'équation $E(x) = 1{,}5$ a-t-elle une solution dans $[0 ; 3]$ ?",
+          reponses: [
+            { question: "a) à gauche", attendu: "1" },
+            { question: "a) à droite", attendu: "2" },
+            { question: "b) en 2", attendu: ["non", "faux"] },
+            { question: "b) sur [0 ; 1[", attendu: ["oui", "vrai"] },
+            { question: "b) sur [0 ; 3]", attendu: ["non", "faux"] },
+            { question: "c)", attendu: ["non", "faux"] },
+          ],
           figure: repere(
             [-2, 5, -2, 5],
             [{ pts: [[-1, -1], [0, -1]] }, { pts: [[0, 0], [1, 0]] }, { pts: [[1, 1], [2, 1]] }, { pts: [[2, 2], [3, 2]] }, { pts: [[3, 3], [4, 3]] }],
@@ -125,6 +133,12 @@ export const exercicesContinuiteTviTerminale: FicheExercicesData = {
         {
           enonce:
             "Chaque fonction est-elle continue sur l'intervalle indiqué ? Justifier.\na) $f(x) = x^3 - 2x + 1$ sur $\\mathbb{R}$\nb) $g(x) = x\\mathrm{e}^{x}$ sur $\\mathbb{R}$\nc) $h(x) = \\sqrt{x - 1}$ sur $[1 ; +\\infty[$\nd) $k(x) = \\dfrac{1}{x - 3}$ sur $[0 ; 5]$",
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: ["oui", "vrai"] },
+            { question: "c)", attendu: ["oui", "vrai"] },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $f$ est un polynôme : elle est continue sur $\\mathbb{R}$.\nb) $g$ est le produit de $x \\mapsto x$ et de l'exponentielle, toutes deux continues sur $\\mathbb{R}$ : $g$ est continue sur $\\mathbb{R}$.\nc) Pour $x \\geqslant 1$, $x - 1 \\geqslant 0$. $h$ est la composée de $x \\mapsto x - 1$, continue, et de la racine carrée, continue sur $[0 ; +\\infty[$ : $h$ est continue sur $[1 ; +\\infty[$.\nd) $k$ n'est pas définie en $3$, qui est dans $[0 ; 5]$ : elle n'est pas continue sur $[0 ; 5]$. Elle l'est sur $[0 ; 3[$ et sur $]3 ; 5]$.\n⚠️ « Dérivable » entraîne « continue », mais pas l'inverse : la racine carrée est continue en $0$ sans y être dérivable.\n⭐ Sur le dessin : la courbe de $k$ est coupée en deux morceaux de part et d'autre de $x = 3$. On ne peut pas la tracer sans lever le crayon.",
           schema: ecranSeulement(
@@ -135,6 +149,11 @@ export const exercicesContinuiteTviTerminale: FicheExercicesData = {
         {
           enonce:
             "Soit $f$ une fonction continue sur $[1 ; 3]$, avec $f(1) = -2$ et $f(3) = 4$.\na) L'équation $f(x) = 0$ a-t-elle au moins une solution dans $[1 ; 3]$ ?\nb) Et l'équation $f(x) = 3$ ?\nc) Et l'équation $f(x) = 5$ ?",
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: ["oui", "vrai"] },
+            { question: "c)", attendu: ["on ne peut pas conclure", "on ne sait pas", "on ne peut pas savoir"] },
+          ],
           correction:
             "a) $f$ est continue sur $[1 ; 3]$, et $0$ est compris entre $f(1) = -2$ et $f(3) = 4$.\nD'après le TVI, l'équation $f(x) = 0$ a au moins une solution dans $[1 ; 3]$.\nb) $3$ est aussi compris entre $-2$ et $4$ : au moins une solution.\nc) $5$ n'est pas compris entre $-2$ et $4$ : le TVI ne permet pas de conclure.\n⚠️ « On ne peut pas conclure » ne veut pas dire « pas de solution ». Entre $1$ et $3$, $f$ peut très bien monter au-dessus de $5$, puis redescendre.\n⭐ Sur le dessin : deux fonctions possibles, avec $f(1) = -2$ et $f(3) = 4$. Les deux coupent la droite $y = 3$. La bleue ne coupe jamais $y = 5$, l'orange la coupe deux fois.",
           schema: ecranSeulement(
@@ -150,6 +169,11 @@ export const exercicesContinuiteTviTerminale: FicheExercicesData = {
         {
           enonce:
             "Voici le tableau de variations d'une fonction $f$ continue sur $[-2 ; 4]$. Combien de solutions chaque équation a-t-elle dans $[-2 ; 4]$ ?\na) $f(x) = 0$\nb) $f(x) = 3$\nc) $f(x) = -4$",
+          reponses: [
+            { question: "a)", attendu: "2" },
+            { question: "b)", attendu: "1" },
+            { question: "c)", attendu: "0" },
+          ],
           figure: tableauVariations(["−2", "1", "4"], ["5", "−3", "2"]),
           correction:
             "On découpe $[-2 ; 4]$ en deux morceaux où $f$ est strictement monotone.\na) Sur $[-2 ; 1]$, $f$ est continue, strictement décroissante, de $5$ à $-3$. Comme $0$ est entre $-3$ et $5$, le corollaire donne UNE solution.\nSur $[1 ; 4]$, $f$ est continue, strictement croissante, de $-3$ à $2$. $0$ est entre $-3$ et $2$ : encore UNE solution.\nAu total : deux solutions.\nb) Sur $[-2 ; 1]$ : $3$ est entre $-3$ et $5$, une solution. Sur $[1 ; 4]$ : $f(x) \\leqslant 2 < 3$, aucune.\nAu total : une solution.\nc) Le minimum de $f$ est $-3$, et $-4 < -3$ : aucune solution.\n⚠️ On applique le corollaire sur CHAQUE morceau, jamais sur $[-2 ; 4]$ en entier : $f$ n'y est pas monotone.\n⭐ Dans le tableau : $0$ se trouve sous les deux flèches, $3$ sous la première seulement, et $-4$ sous aucune.",
@@ -165,6 +189,10 @@ export const exercicesContinuiteTviTerminale: FicheExercicesData = {
         {
           enonce:
             "On admet que l'équation $x^3 - 3x + 1 = 0$ a une unique solution $\\alpha$ dans $[0 ; 1]$. On note $f(x) = x^3 - 3x + 1$ ; le tableau donne quelques valeurs de $f$, arrondies au millième.\na) Encadrer $\\alpha$ entre deux nombres qui diffèrent de $0{,}1$.\nb) Puis entre deux nombres qui diffèrent de $0{,}01$.",
+          reponses: [
+            { question: "a)", attendu: ["0.3 < α < 0.4", "0.3 ; 0.4"], ordre: true },
+            { question: "b)", attendu: ["0.34 < α < 0.35", "0.34 ; 0.35"], ordre: true },
+          ],
           figure: tableau(["x", "0,3", "0,34", "0,35", "0,4"], ["f(x)", "0,127", "0,019", "−0,007", "−0,136"]),
           correction:
             "a) $f(0{,}3) > 0$ et $f(0{,}4) < 0$ : $f$ change de signe entre $0{,}3$ et $0{,}4$.\nComme $f$ est continue, elle s'annule entre les deux. La solution étant unique, c'est $\\alpha$ : $0{,}3 < \\alpha < 0{,}4$.\nb) $f(0{,}34) > 0$ et $f(0{,}35) < 0$ : $0{,}34 < \\alpha < 0{,}35$.\n⚠️ Ici $f$ est décroissante sur $[0 ; 1]$ : elle passe du positif au négatif. On cherche le CHANGEMENT de signe, dans un sens ou dans l'autre.\n⭐ Dans le tableau : le signe bascule entre la colonne $0{,}34$ et la colonne $0{,}35$. C'est là que se cache $\\alpha$.",
@@ -173,6 +201,7 @@ export const exercicesContinuiteTviTerminale: FicheExercicesData = {
         {
           enonce:
             "On cherche une valeur approchée de $\\sqrt{2}$, la solution positive de $x^2 - 2 = 0$, par dichotomie sur $[1 ; 2]$. On note $f(x) = x^2 - 2$. Faire trois étapes, et donner l'encadrement obtenu.",
+          reponses: [{ attendu: ["1.375 < √(2) < 1.5", "1.375 ; 1.5"], ordre: true }],
           correction:
             "Au départ : $f(1) = -1 < 0$ et $f(2) = 2 > 0$.\nÉtape 1 : le milieu est $m = 1{,}5$, et $f(1{,}5) = 0{,}25 > 0$. Le changement de signe est entre $1$ et $1{,}5$ : on garde $[1 ; 1{,}5]$.\nÉtape 2 : $m = 1{,}25$, et $f(1{,}25) = -0{,}4375 < 0$. On garde $[1{,}25 ; 1{,}5]$.\nÉtape 3 : $m = 1{,}375$, et $f(1{,}375) = -0{,}109375 < 0$. On garde $[1{,}375 ; 1{,}5]$.\nDonc $1{,}375 < \\sqrt{2} < 1{,}5$ : un encadrement d'amplitude $0{,}125$, soit $\\dfrac{1}{2^3}$.\n⚠️ On garde la moitié où $f$ CHANGE de signe, pas la moitié où $f$ est positive.\n⭐ Dans la trace : à chaque ligne, l'intervalle est deux fois plus court. $\\sqrt{2} \\approx 1{,}414$ y reste toujours.",
           schema: ecranSeulement(
@@ -191,6 +220,10 @@ export const exercicesContinuiteTviTerminale: FicheExercicesData = {
         {
           enonce:
             "Soit $f$ définie sur $\\mathbb{R}$ par $f(x) = \\dfrac{x^2 - 1}{x - 1}$ si $x \\neq 1$, et $f(1) = a$, où $a$ est un réel.\na) Simplifier $f(x)$ pour $x \\neq 1$.\nb) Quelle valeur faut-il donner à $a$ pour que $f$ soit continue en $1$ ?",
+          reponses: [
+            { question: "a)", attendu: "x+1" },
+            { question: "b)", attendu: "2" },
+          ],
           correction:
             "a) $x^2 - 1 = (x - 1)(x + 1)$. Pour $x \\neq 1$, on simplifie par $x - 1$ : $f(x) = x + 1$.\nb) Quand $x$ tend vers $1$, $f(x) = x + 1$ tend vers $2$.\n$f$ est continue en $1$ si $f(1) = \\lim_{x \\to 1} f(x)$, c'est-à-dire si $a = 2$.\n⚠️ La simplification par $x - 1$ n'est permise que pour $x \\neq 1$ : c'est pour cela que $f(1)$ doit être défini à part.\n⭐ Sur le dessin : la droite $y = x + 1$ a un « trou » en $x = 1$. Le point rouge $(1 ; 2)$ le bouche : c'est le seul choix qui rend la courbe d'un seul tenant.",
           schema: ecranSeulement(repere([-2, 3, -1, 4], [{ q: [0, 1, 1] }], [{ x: 1, y: 2, label: "" }])),
@@ -214,6 +247,11 @@ export const exercicesContinuiteTviTerminale: FicheExercicesData = {
         {
           enonce:
             "Soit $f(x) = \\mathrm{e}^{x} + x$, définie sur $\\mathbb{R}$.\na) Étudier les variations de $f$, puis ses limites en $-\\infty$ et en $+\\infty$.\nb) Montrer que l'équation $\\mathrm{e}^{x} = -x$ admet une unique solution $\\alpha$ dans $\\mathbb{R}$.\nc) Encadrer $\\alpha$ entre deux nombres qui diffèrent de $0{,}01$.",
+          reponses: [
+            { question: "a) limite en -∞", attendu: "-∞" },
+            { question: "a) limite en +∞", attendu: ["+∞", "∞"] },
+            { question: "c)", attendu: ["-0.57 < α < -0.56", "-0.57 ; -0.56"], ordre: true },
+          ],
           correction:
             "a) $f'(x) = \\mathrm{e}^{x} + 1 > 0$ : $f$ est strictement croissante sur $\\mathbb{R}$.\nEn $-\\infty$ : $\\mathrm{e}^{x} \\to 0$ et $x \\to -\\infty$, donc $\\lim f = -\\infty$.\nEn $+\\infty$ : les deux termes tendent vers $+\\infty$, donc $\\lim f = +\\infty$.\nb) $\\mathrm{e}^{x} = -x$ équivaut à $f(x) = 0$.\n$f$ est dérivable donc continue sur $\\mathbb{R}$, strictement croissante, et $0$ est compris entre $-\\infty$ et $+\\infty$.\nD'après le corollaire du TVI, l'équation $f(x) = 0$ admet une unique solution $\\alpha$ dans $\\mathbb{R}$.\nc) À la calculatrice : $f(-0{,}57) \\approx -0{,}0045 < 0$ et $f(-0{,}56) \\approx 0{,}0112 > 0$.\nDonc $-0{,}57 < \\alpha < -0{,}56$.\n⚠️ Sur $\\mathbb{R}$, il n'y a pas de bornes $a$ et $b$ où calculer $f$ : ce sont les LIMITES qui encadrent $0$.\n⚠️ On ne sait pas résoudre $\\mathrm{e}^{x} = -x$ par le calcul : le théorème donne l'existence, la calculatrice donne un encadrement.\n⭐ Dans le tableau : une seule flèche, de $-\\infty$ à $+\\infty$. Elle passe forcément une fois, et une seule, par $0$.",
           schema: ecranSeulement(tabVar(["−∞", "+∞"], ["+"], ["−∞", "+∞"])),
@@ -222,6 +260,12 @@ export const exercicesContinuiteTviTerminale: FicheExercicesData = {
         {
           enonce:
             "Le profil d'un toboggan est modélisé, en mètres, par $h(x) = 3 - 0{,}5x^2$ pour $0 \\leqslant x \\leqslant 2$, et par $h(x) = a(x - 4)^2$ pour $2 < x \\leqslant 4$, où $a$ est un réel.\na) Déterminer $a$ pour que $h$ soit continue en $2$ : le toboggan ne doit pas avoir de marche.\nb) Avec cette valeur, comparer la pente juste avant $2$ et juste après $2$. Le raccord se fait-il sans coude ?",
+          reponses: [
+            { question: "a)", attendu: "0.25" },
+            { question: "b) pente avant 2", attendu: "-2" },
+            { question: "b) pente après 2", attendu: "-1" },
+            { question: "b) sans coude ?", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) À gauche : $h(2) = 3 - 0{,}5 \\times 4 = 1$.\nÀ droite : quand $x$ tend vers $2$, $a(x - 4)^2$ tend vers $a \\times (-2)^2 = 4a$.\n$h$ est continue en $2$ si $4a = 1$, soit $a = 0{,}25$.\nb) Avant $2$ : la dérivée de $3 - 0{,}5x^2$ est $-x$, qui vaut $-2$ en $2$.\nAprès $2$ : la dérivée de $0{,}25(x - 4)^2$ est $0{,}5(x - 4)$, qui vaut $-1$ en $2$.\nLes deux pentes sont différentes : le toboggan n'a pas de marche, mais il a un coude en $2$. $h$ est continue en $2$ sans y être dérivable.\n⚠️ Continue ne veut pas dire dérivable : pas de saut ne veut pas dire pas d'angle.\n⭐ Sur le dessin : les deux morceaux se rejoignent au point rouge $(2 ; 1)$, mais la pente passe brusquement de $-2$ à $-1$.",
           schema: repere(
@@ -234,6 +278,10 @@ export const exercicesContinuiteTviTerminale: FicheExercicesData = {
         {
           enonce:
             "On reprend $f(x) = x^3 + x - 1$, qui s'annule une seule fois sur $[0 ; 1]$, en $\\alpha$ (exercice 5). On utilise la fonction Python ci-dessous.\na) Que teste la ligne du if ? Pourquoi garde-t-on alors l'intervalle $[a ; m]$ ?\nb) Faire tourner dicho(0, 1, 0.1) à la main. Que renvoie-t-elle ?\nc) Combien de passages dans la boucle faut-il pour obtenir un intervalle de longueur inférieure à $0{,}001$ ?",
+          reponses: [
+            { question: "b)", attendu: ["(0.625 ; 0.6875)", "0.625 < α < 0.6875"], ordre: true },
+            { question: "c)", attendu: "10" },
+          ],
           figure: programme([
             "def f(x):",
             "    return x**3 + x - 1",
@@ -266,6 +314,11 @@ export const exercicesContinuiteTviTerminale: FicheExercicesData = {
         {
           enonce:
             "Après une injection, la concentration d'un médicament dans le sang est modélisée par $C(t) = 20t\\mathrm{e}^{-t}$, en mg/L, où $t$ est le temps en heures, $0 \\leqslant t \\leqslant 5$. Le médicament est efficace quand sa concentration dépasse $5$ mg/L.\na) Montrer que $C'(t) = 20(1 - t)\\mathrm{e}^{-t}$, puis dresser le tableau de variations de $C$.\nb) Montrer que l'équation $C(t) = 5$ a exactement deux solutions $t_1 < t_2$ dans $[0 ; 5]$.\nc) Encadrer $t_1$ et $t_2$ au centième. Pendant combien de temps, environ, le médicament est-il efficace ?",
+          reponses: [
+            { question: "c) t1", attendu: ["0.35 < t1 < 0.36", "0.35 ; 0.36"], ordre: true },
+            { question: "c) t2", attendu: ["2.15 < t2 < 2.16", "2.15 ; 2.16"], ordre: true },
+            { question: "c) durée (h)", attendu: ["1.8", "1 h 48 min", "1 h 48"], tolerance: 0.011 },
+          ],
           correction:
             "a) C'est un produit : $C'(t) = 20\\mathrm{e}^{-t} + 20t \\times (-\\mathrm{e}^{-t})$, soit $C'(t) = 20(1 - t)\\mathrm{e}^{-t}$.\nComme $\\mathrm{e}^{-t} > 0$, $C'(t)$ a le signe de $1 - t$ : $C$ croît sur $[0 ; 1]$ et décroît sur $[1 ; 5]$.\n$C(0) = 0$, $C(1) = 20\\mathrm{e}^{-1} \\approx 7{,}36$ et $C(5) = 100\\mathrm{e}^{-5} \\approx 0{,}67$.\nb) Sur $[0 ; 1]$, $C$ est continue et strictement croissante, et $5$ est entre $0$ et $7{,}36$ : une unique solution $t_1$.\nSur $[1 ; 5]$, $C$ est continue et strictement décroissante, et $5$ est entre $0{,}67$ et $7{,}36$ : une unique solution $t_2$.\nL'équation a donc exactement deux solutions.\nc) À la calculatrice : $C(0{,}35) \\approx 4{,}93$ et $C(0{,}36) \\approx 5{,}02$, donc $0{,}35 < t_1 < 0{,}36$.\n$C(2{,}15) \\approx 5{,}01$ et $C(2{,}16) \\approx 4{,}98$, donc $2{,}15 < t_2 < 2{,}16$.\nLe médicament est efficace pendant $t_2 - t_1$, entre $1{,}79$ h et $1{,}81$ h : environ $1$ h $48$ min.\n⚠️ Sur $[0 ; 5]$ entier, $C$ n'est pas monotone : le corollaire s'applique morceau par morceau, de part et d'autre du maximum.\n⭐ Sur le dessin : la droite $y = 5$ coupe la courbe deux fois, une fois à la montée, une fois à la descente. Entre les deux, le médicament agit.",
           schema: (
@@ -288,6 +341,7 @@ export const exercicesContinuiteTviTerminale: FicheExercicesData = {
         {
           enonce:
             "Léa verse $100$ € au début de chaque année, pendant trois ans, sur un placement à taux annuel fixe $t$. À la fin de la troisième année, elle récupère $330$ €. On pose $x = 1 + t$.\na) Expliquer pourquoi $100x^3 + 100x^2 + 100x = 330$.\nb) On pose $f(x) = x^3 + x^2 + x - 3{,}3$. Montrer que l'équation $f(x) = 0$ a une unique solution dans $[1 ; 1{,}1]$.\nc) À l'aide du tableau de valeurs arrondies, encadrer le taux $t$.",
+          reponses: [{ question: "c)", attendu: ["4 % < t < 5 %", "4 % ; 5 %"], ordre: true }],
           figure: tableau(["x", "1", "1,04", "1,05", "1,1"], ["f(x)", "−0,3", "−0,054", "0,010", "0,341"]),
           correction:
             "a) Placés à un taux $t$, $100$ € deviennent $100x$ au bout d'un an. Le premier versement est placé trois ans : il devient $100x^3$.\nLe deuxième est placé deux ans : $100x^2$. Le troisième, un an : $100x$. La somme vaut $330$.\nb) $f$ est un polynôme, donc continue sur $[1 ; 1{,}1]$.\n$f'(x) = 3x^2 + 2x + 1$, positive pour $x \\geqslant 1$ : $f$ est strictement croissante sur $[1 ; 1{,}1]$.\n$f(1) = -0{,}3 < 0$ et $f(1{,}1) = 0{,}341 > 0$.\nD'après le corollaire du TVI, l'équation $f(x) = 0$ a une unique solution dans $[1 ; 1{,}1]$.\nc) $f(1{,}04) < 0 < f(1{,}05)$, donc $1{,}04 < x < 1{,}05$.\nComme $t = x - 1$, le taux est compris entre $4$ % et $5$ %.\n⚠️ Le taux est $t = x - 1$, pas $x$ : un taux de $1{,}04$ voudrait dire $104$ %.\n⭐ Dans le tableau : le signe bascule entre $1{,}04$ et $1{,}05$. En affinant à la calculatrice, $x \\approx 1{,}0484$ : un taux d'environ $4{,}8$ %.",
@@ -296,6 +350,7 @@ export const exercicesContinuiteTviTerminale: FicheExercicesData = {
         {
           enonce:
             "Dans un modèle, une population de bactéries compte $P(t) = 2\\mathrm{e}^{0{,}3t}$ milliers d'individus au bout de $t$ heures. Le milieu de culture, enrichi en continu, peut en nourrir $R(t) = 10 + 2t$ milliers. On pose $h(t) = P(t) - R(t)$ pour $t \\in [0 ; 15]$.\na) Montrer que $h(t) < 0$ pour tout $t \\in [0 ; 5]$.\nb) Montrer que $h$ est strictement croissante sur $[5 ; 15]$.\nc) En déduire qu'il existe un unique instant $T$ de $[0 ; 15]$ où la population rattrape les ressources, et l'encadrer au dixième.",
+          reponses: [{ question: "c)", attendu: ["8.7 < T < 8.8", "8.7 ; 8.8"], ordre: true }],
           correction:
             "a) Pour $t \\in [0 ; 5]$, l'exponentielle est croissante : $\\mathrm{e}^{0{,}3t} \\leqslant \\mathrm{e}^{1{,}5}$.\nDonc $P(t) \\leqslant 2\\mathrm{e}^{1{,}5} \\approx 8{,}96$, alors que $R(t) \\geqslant 10$. Ainsi $h(t) < 0$.\nb) $h'(t) = 0{,}6\\mathrm{e}^{0{,}3t} - 2$.\nPour $t \\geqslant 5$ : $\\mathrm{e}^{0{,}3t} \\geqslant \\mathrm{e}^{1{,}5} \\approx 4{,}48$, donc $h'(t) \\geqslant 0{,}6 \\times 4{,}48 - 2 \\approx 0{,}69 > 0$.\n$h$ est strictement croissante sur $[5 ; 15]$.\nc) Sur $[5 ; 15]$, $h$ est continue et strictement croissante, avec $h(5) \\approx -11{,}04 < 0$ et $h(15) \\approx 140{,}03 > 0$.\nLe corollaire donne un unique $T$ dans $[5 ; 15]$ tel que $h(T) = 0$. Et d'après a), il n'y en a aucun dans $[0 ; 5]$.\nÀ la calculatrice : $h(8{,}7) \\approx -0{,}20$ et $h(8{,}8) \\approx 0{,}43$, donc $8{,}7 < T < 8{,}8$.\nAu bout d'environ $8$ h $45$ min, la population dépasse ce que le milieu peut nourrir.\n⚠️ On ne peut pas appliquer le corollaire directement sur $[0 ; 15]$ : $h$ commence par décroître, car $h'(0) = -1{,}4$. D'où le découpage en deux morceaux.\n⭐ Dans le tableau : sur $[5 ; 15]$, une seule flèche montante, de $-11{,}04$ à $140{,}03$. Elle croise $0$ une seule fois.",
           schema: ecranSeulement(tabVar(["5", "15"], ["+"], ["−11,04", "140,03"], "h", "t")),
@@ -304,6 +359,7 @@ export const exercicesContinuiteTviTerminale: FicheExercicesData = {
         {
           enonce:
             "a) Soit $f$ une fonction continue sur $[0 ; 1]$, dont toutes les valeurs sont dans $[0 ; 1]$. En étudiant $g(x) = f(x) - x$, montrer qu'il existe un réel $c$ de $[0 ; 1]$ tel que $f(c) = c$.\nb) Application : montrer que l'équation $\\cos x = x$ a une unique solution dans $[0 ; 1]$, et l'encadrer au centième.",
+          reponses: [{ question: "b)", attendu: ["0.73 < c < 0.74", "0.73 ; 0.74"], ordre: true }],
           correction:
             "a) $g$ est continue sur $[0 ; 1]$, comme différence de deux fonctions continues.\n$g(0) = f(0) \\geqslant 0$, car $f(0)$ est dans $[0 ; 1]$. Et $g(1) = f(1) - 1 \\leqslant 0$, car $f(1) \\leqslant 1$.\nDonc $0$ est compris entre $g(1)$ et $g(0)$. D'après le TVI, il existe $c \\in [0 ; 1]$ tel que $g(c) = 0$, c'est-à-dire $f(c) = c$.\nb) Le cosinus est continu et décroissant sur $[0 ; 1]$ : ses valeurs vont de $\\cos 1 \\approx 0{,}54$ à $1$. Elles sont dans $[0 ; 1]$.\nD'après a), l'équation $\\cos x = x$ a au moins une solution $c$ dans $[0 ; 1]$.\nUnicité : $g(x) = \\cos x - x$ a pour dérivée $-\\sin x - 1 < 0$ sur $[0 ; 1]$. $g$ est strictement décroissante : la solution est unique.\n$\\cos 0{,}73 \\approx 0{,}745 > 0{,}73$ et $\\cos 0{,}74 \\approx 0{,}738 < 0{,}74$ : $0{,}73 < c < 0{,}74$.\n⚠️ En a), $g(0)$ peut être nul : alors $c = 0$ convient. Le TVI accepte que $k$ soit égal à l'une des deux valeurs aux bornes.\n⭐ Sur le dessin : la courbe du cosinus coupe la droite orange $y = x$ en un seul point, rouge, vers $(0{,}74 ; 0{,}74)$.",
           schema: repere([-1, 2, -1, 2], [{ pts: echantillon(Math.cos, -1, 2) }, { q: [0, 1, 0], couleur: ORANGE }], [{ x: 0.74, y: 0.74, label: "" }]),
@@ -327,6 +383,13 @@ export const exercicesContinuiteTviTerminale: FicheExercicesData = {
           titre: "Le prix d'équilibre",
           enonce:
             "Sur un marché, quand un produit coûte $p$ euros, avec $0 \\leqslant p \\leqslant 10$, les producteurs en proposent $O(p) = \\mathrm{e}^{0{,}2p} - 1$ milliers (l'offre), et les clients en demandent $D(p) = \\dfrac{10}{p + 1}$ milliers (la demande). Le prix d'équilibre est celui où l'offre égale la demande.\na) Étudier le sens de variation de $O$ et de $D$ sur $[0 ; 10]$.\nb) On pose $g(p) = O(p) - D(p)$. Montrer qu'il existe un unique prix d'équilibre $p_0$ dans $[0 ; 10]$.\nc) La fonction Python ci-dessous cherche $p_0$ par balayage. Qu'affiche-t-elle pour balayage(0.1) ? Pour balayage(0.01) ? Qu'en déduit-on ?\nd) Environ combien d'unités s'échangent au prix d'équilibre ?",
+          reponses: [
+            { question: "a) offre O", attendu: ["croissante", "strictement croissante"] },
+            { question: "a) demande D", attendu: ["décroissante", "strictement décroissante"] },
+            { question: "c) balayage(0.1)", attendu: "5" },
+            { question: "c) balayage(0.01)", attendu: "4.94" },
+            { question: "d)", attendu: ["1680", "1690"], tolerance: 5.1 },
+          ],
           figure: programme([
             "from math import exp",
             "",
@@ -358,6 +421,13 @@ export const exercicesContinuiteTviTerminale: FicheExercicesData = {
           titre: "La jauge de la cuve",
           enonce:
             "Une cuve a la forme d'une boule de rayon $2$ m. Quand l'eau y monte à la hauteur $h$ (en m, avec $0 \\leqslant h \\leqslant 4$), on admet que le volume d'eau vaut $V(h) = \\dfrac{\\pi h^2(6 - h)}{3}$, en m³.\na) Calculer $V(2)$ et $V(4)$. Interpréter.\nb) Montrer que $V$ est strictement croissante sur $[0 ; 4]$.\nc) On veut graduer une jauge verticale. Montrer que, pour tout volume $v$ compris entre $0$ et $V(4)$, il existe une unique hauteur $h$ telle que $V(h) = v$.\nd) Encadrer au centimètre la hauteur du trait « $10$ m³ », puis celle du trait « $20$ m³ ».\ne) Les traits de la jauge sont-ils régulièrement espacés ?",
+          reponses: [
+            { question: "a) V(2)", attendu: "16π/3" },
+            { question: "a) V(4)", attendu: "32π/3" },
+            { question: "d) trait 10 m³", attendu: ["1.44 < h < 1.45", "1.44 ; 1.45"], ordre: true },
+            { question: "d) trait 20 m³", attendu: ["2.25 < h < 2.26", "2.25 ; 2.26"], ordre: true },
+            { question: "e)", attendu: ["non", "faux"] },
+          ],
           figure: cuve(1.45),
           correction:
             "a) $V(2) = \\dfrac{\\pi \\times 4 \\times 4}{3} = \\dfrac{16\\pi}{3} \\approx 16{,}76$ m³ : c'est la moitié de la boule.\n$V(4) = \\dfrac{\\pi \\times 16 \\times 2}{3} = \\dfrac{32\\pi}{3} \\approx 33{,}51$ m³ : la cuve est pleine. C'est bien le volume d'une boule de rayon $2$, $\\dfrac{4}{3}\\pi \\times 2^3$.\nb) $V(h) = \\dfrac{\\pi}{3}(6h^2 - h^3)$, donc $V'(h) = \\dfrac{\\pi}{3}(12h - 3h^2) = \\pi h(4 - h)$.\nSur $[0 ; 4]$, $V'(h) \\geqslant 0$, et ne s'annule qu'en $0$ et en $4$ : $V$ est strictement croissante.\nc) $V$ est un polynôme, donc continue. Elle est strictement croissante sur $[0 ; 4]$, avec $V(0) = 0$ et $V(4) = \\dfrac{32\\pi}{3}$.\nD'après le corollaire du TVI, pour tout $v$ entre $0$ et $\\dfrac{32\\pi}{3}$, l'équation $V(h) = v$ a une unique solution dans $[0 ; 4]$.\nd) $V(1{,}44) \\approx 9{,}90$ et $V(1{,}45) \\approx 10{,}02$ : le trait « $10$ m³ » est entre $1{,}44$ m et $1{,}45$ m.\n$V(2{,}25) \\approx 19{,}88$ et $V(2{,}26) \\approx 20{,}00$ (un peu plus) : le trait « $20$ m³ » est entre $2{,}25$ m et $2{,}26$ m.\ne) Non. Les $10$ premiers m³ occupent environ $1{,}45$ m de hauteur, les $10$ suivants seulement $0{,}81$ m : la cuve est plus large au milieu qu'au fond.\n⚠️ $V'$ s'annule en $0$ et en $4$ : cela n'empêche pas $V$ d'être strictement croissante, car ce sont des points isolés.\n⚠️ Un trait « $40$ m³ » n'existe pas : $40$ n'est pas entre $0$ et $33{,}51$.\n⭐ Sur le dessin : la cuve remplie jusqu'au trait des $10$ m³. L'eau n'y monte qu'à $h \\approx 1{,}45$ m, moins que le rayon.",
@@ -367,6 +437,7 @@ export const exercicesContinuiteTviTerminale: FicheExercicesData = {
           titre: "Le randonneur et son bivouac",
           enonce:
             "Un randonneur part à $8$ h du refuge, à $500$ m d'altitude, et arrive au sommet, à $2000$ m, à $18$ h. Il bivouaque, et redescend le lendemain par le même sentier, de $8$ h à $18$ h. Le sentier monte sans cesse : un point du sentier est repéré par son altitude.\na) On note $a(t)$ et $d(t)$ ses altitudes $t$ heures après $8$ h, à la montée et à la descente. Démontrer qu'il existe une heure où il se trouve au même endroit les deux jours.\nb) On modélise, pour $0 \\leqslant t \\leqslant 10$ : $a(t) = 500 + 1500\\sin\\left(\\dfrac{\\pi t}{20}\\right)$ et $d(t) = 2000 - 15t^2$. Vérifier les altitudes de départ et d'arrivée.\nc) Dans ce modèle, montrer que cette heure est unique, et la donner à la minute près.",
+          reponses: [{ question: "c)", attendu: ["13 h 12", "13 h 12 min"] }],
           correction:
             "a) Une altitude varie sans sauter : $a$ et $d$ sont continues sur $[0 ; 10]$. Donc $g = a - d$ l'est aussi.\n$g(0) = 500 - 2000 = -1500 < 0$ et $g(10) = 2000 - 500 = 1500 > 0$.\nD'après le TVI, il existe $t_0$ dans $[0 ; 10]$ tel que $g(t_0) = 0$ : à l'heure $8 + t_0$, il est à la même altitude, donc au même endroit, les deux jours.\nb) $a(0) = 500$ et $a(10) = 500 + 1500\\sin\\left(\\dfrac{\\pi}{2}\\right) = 2000$.\n$d(0) = 2000$ et $d(10) = 2000 - 1500 = 500$.\nc) $g(t) = 1500\\sin\\left(\\dfrac{\\pi t}{20}\\right) + 15t^2 - 1500$.\nPar la dérivée d'une composée : $g'(t) = 75\\pi\\cos\\left(\\dfrac{\\pi t}{20}\\right) + 30t$.\nPour $t \\in [0 ; 10]$, $\\dfrac{\\pi t}{20}$ est dans $\\left[0 ; \\dfrac{\\pi}{2}\\right]$ : le cosinus y est positif, et ne s'annule qu'en $t = 10$, où $30t = 300 > 0$. Donc $g'(t) > 0$.\n$g$ est strictement croissante : $t_0$ est unique.\nÀ la calculatrice : $g(5{,}20) \\approx -0{,}95 < 0$ et $g(5{,}21) \\approx 2{,}2 > 0$, donc $5{,}20 < t_0 < 5{,}21$.\nOr $0{,}20$ h $= 12$ min et $0{,}21$ h $\\approx 12{,}6$ min : il est à $13$ h $12$, vers $1\\,594$ m d'altitude.\n⚠️ La question a) ne demande AUCUN modèle : quels que soient ses pauses et son rythme, la continuité suffit. C'est la force du TVI.\n⚠️ La dérivée de $\\sin\\left(\\dfrac{\\pi t}{20}\\right)$ est $\\dfrac{\\pi}{20}\\cos\\left(\\dfrac{\\pi t}{20}\\right)$ : ne pas oublier le facteur $\\dfrac{\\pi}{20}$.\n⭐ Sur le dessin, en kilomètres : la montée (bleue) et la descente (orange) se croisent une seule fois, au point rouge.",
           schema: repere(
@@ -385,6 +456,10 @@ export const exercicesContinuiteTviTerminale: FicheExercicesData = {
           titre: "Le parachutiste",
           enonce:
             "Un parachutiste saute d'un avion. Pendant la chute libre, on modélise sa vitesse par $v(t) = 50(1 - \\mathrm{e}^{-0{,}2t})$, en m/s, et la distance parcourue par $d(t) = 50t - 250(1 - \\mathrm{e}^{-0{,}2t})$, en m, où $t \\geqslant 0$ est le temps en secondes.\na) Vérifier que $d'(t) = v(t)$. En déduire que $d$ est strictement croissante sur $[0 ; +\\infty[$.\nb) Montrer que $d(t) \\geqslant 50t - 250$, puis donner la limite de $d$ en $+\\infty$.\nc) Il ouvre sa voile après $1000$ m de chute. Montrer qu'il existe un unique instant $T$ tel que $d(T) = 1000$.\nd) À l'aide du tableau de valeurs arrondies, encadrer $T$ au dixième de seconde.",
+          reponses: [
+            { question: "b) limite", attendu: ["+∞", "∞"] },
+            { question: "d)", attendu: ["24.9 < T < 25", "24.9 ; 25"], ordre: true },
+          ],
           figure: tableau(["t", "24", "24,9", "25", "26"], ["d(t)", "952,1", "996,7", "1001,7", "1051,4"]),
           correction:
             "a) La dérivée de $\\mathrm{e}^{-0{,}2t}$ est $-0{,}2\\mathrm{e}^{-0{,}2t}$.\nDonc $d'(t) = 50 - 250 \\times 0{,}2\\mathrm{e}^{-0{,}2t}$, soit $d'(t) = 50 - 50\\mathrm{e}^{-0{,}2t} = v(t)$.\nPour $t > 0$, $\\mathrm{e}^{-0{,}2t} < 1$, donc $v(t) > 0$ : $d$ est strictement croissante sur $[0 ; +\\infty[$.\nb) $\\mathrm{e}^{-0{,}2t} > 0$, donc $1 - \\mathrm{e}^{-0{,}2t} < 1$, et $250(1 - \\mathrm{e}^{-0{,}2t}) < 250$.\nAinsi $d(t) \\geqslant 50t - 250$. Comme $\\lim (50t - 250) = +\\infty$, par comparaison, $\\lim_{t \\to +\\infty} d(t) = +\\infty$.\nc) $d$ est dérivable, donc continue, et strictement croissante sur $[0 ; +\\infty[$, avec $d(0) = 0$ et une limite $+\\infty$.\n$1000$ est compris entre $0$ et $+\\infty$ : d'après le corollaire du TVI, il existe un unique $T \\geqslant 0$ tel que $d(T) = 1000$.\nd) $d(24{,}9) \\approx 996{,}7 < 1000$ et $d(25) \\approx 1001{,}7 > 1000$, donc $24{,}9 < T < 25$.\nIl ouvre sa voile au bout d'environ $25$ secondes. Il tombe alors à $v(25) = 50(1 - \\mathrm{e}^{-5}) \\approx 49{,}7$ m/s, près de $180$ km/h.\n⚠️ On ne sait pas résoudre $d(t) = 1000$ par le calcul : $t$ est à la fois dans un terme simple et dans une exponentielle.\n⚠️ Sur $[0 ; +\\infty[$, la borne de droite n'a pas de valeur : c'est la LIMITE $+\\infty$ qui garantit que $1000$ est atteint.\n⭐ Dans le tableau : la distance passe les $1000$ m entre $24{,}9$ s et $25$ s. Le tableau de variations de $d$ n'a qu'une flèche, de $0$ à $+\\infty$.",
