@@ -319,8 +319,25 @@ export function pourcent(valeur: number): string {
 export const OUVERTURE_SUIVI = "fin décembre 2026";
 export const OUVERTURE_VISIO = "janvier 2027";
 
-/** La séance de visio en groupe (1 h 30), en France. */
+/** La séance de visio en groupe, en France. */
 export const PRIX_VISIO = 12;
+
+/**
+ * ⭐ LES VISIOS « MATHS RÉELLES » (03/11/2026) — Frédéric : pas des cours de
+ * Tle/1re « faciles » (l'IA démontre tout), mais « à quoi ça sert les maths »,
+ * et répondre au malaise de la jeunesse. Première formule : « Vrai ou faux ? »,
+ * une phrase entendue, on vote, on vérifie avec les maths. La formule et les 10
+ * premières séances : docs/visio-maths-reelles.md.
+ * ⛔ On montre comment vérifier, jamais quoi penser : aucun camp politique.
+ */
+export const NOM_VISIO = "Maths réelles";
+export const VISIO_MATHS_REELLES = [
+  "« Vrai ou faux ? » : une phrase entendue à la télé ou sur les réseaux, on vote, puis on vérifie avec les maths",
+  "Pourcentages, sondages, graphiques qui trompent, hasard : ne plus se faire avoir",
+  "1 heure en direct, du collège au lycée, avec des élèves de 8 pays",
+  "Pas besoin de caméra ni de micro : on vote et on écrit dans le fil",
+  "Le replay et la fiche de la séance, gardés",
+];
 
 /** Le rapport qui fait vendre la vidéothèque. */
 export const VIDEOS_SITE = 3500;

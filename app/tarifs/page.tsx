@@ -20,7 +20,7 @@ const url = "https://www.eleveai.fr/tarifs";
 // il suit le texte visible, et ses prix viennent des constantes.
 const resume =
   `Le coach de maths reste ouvert à tous. Le suivi famille (${montant(PRIX_MENSUEL)} par mois en France, un prix adapté à chaque pays) ouvre ${OUVERTURE_SUIVI} : ` +
-  `${VIDEOS_SITE} vidéos, un bilan chaque semaine, les cours en visio. Offre aux établissements hors de France : ${ETABLISSEMENT_ETRANGER.parEleveEtParAn} par élève et par an.`;
+  `${VIDEOS_SITE} vidéos, un bilan chaque semaine, et les visios « Maths réelles ». Offre aux établissements hors de France : ${ETABLISSEMENT_ETRANGER.parEleveEtParAn} par élève et par an.`;
 
 export const metadata: Metadata = {
   title: "Offres — le suivi famille, la visio, les établissements hors de France",

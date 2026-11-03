@@ -40,6 +40,7 @@ import {
   Globe2,
   GraduationCap,
   Mail,
+  MonitorPlay,
   Building2,
   PlayCircle,
   Save,
@@ -52,7 +53,7 @@ import {
 import { PROGRAMME_CLASSES, listerToutesLesNotions } from "@/lib/programme";
 import { toutesLesVideos } from "@/lib/videos/r2";
 import RechercheEntete from "@/components/accueil/RechercheEntete";
-import { ETABLISSEMENT_ETRANGER, PRIX_ETABLISSEMENT_PAR_PAYS, PRIX_MENSUEL, montant } from "@/lib/tarifs";
+import { ETABLISSEMENT_ETRANGER, NOM_VISIO, OUVERTURE_VISIO, PRIX_ETABLISSEMENT_PAR_PAYS, PRIX_MENSUEL, PRIX_VISIO, montant } from "@/lib/tarifs";
 import { PAYS_AVENTURE } from "@/lib/aventure/pays";
 
 /** La classe du coach → son dossier de vidéos sur R2 (et la clé de /video). */
@@ -467,9 +468,27 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
               </>
             )}
           </div>
+          {/* ⭐ 03/11 : les visios reviennent, mais plus comme des cours :
+              « Maths réelles », à quoi servent les maths (lib/tarifs.ts,
+              docs/visio-maths-reelles.md). Une bande, pas une 4e carte. */}
+          {offresFamille && (
+            <div className="mt-5 flex flex-col gap-4 rounded-3xl border border-violet-200 bg-violet-50/60 p-6 sm:flex-row sm:items-center">
+              <MonitorPlay className="h-10 w-10 shrink-0 text-violet-700" aria-hidden="true" />
+              <div className="flex-1">
+                <p className="text-sm font-black uppercase tracking-wide text-violet-700">Les visios, à partir de {OUVERTURE_VISIO}</p>
+                <h3 className="mt-1 text-2xl font-black">« {NOM_VISIO} » : vrai ou faux ?</h3>
+                <p className="mt-1 text-slate-700">
+                  Une phrase entendue à la télé ou sur les réseaux. On vote, puis on vérifie avec les maths : pourcentages,
+                  sondages, graphiques qui trompent, hasard. Pour ne plus se faire avoir. 1 heure en direct, du collège au
+                  lycée, avec des élèves de 8 pays.
+                </p>
+              </div>
+              <p className="shrink-0 text-lg font-black">{montant(PRIX_VISIO)} la séance en France</p>
+            </div>
+          )}
           {offresFamille && (
             <p className="mt-4 text-sm text-slate-500">
-            Le suivi famille et l&apos;offre établissement ouvrent fin décembre 2026. Ces offres ne s&apos;adressent ni aux établissements situés en France, ni aux élèves de son professeur.
+            Le suivi famille et l&apos;offre établissement ouvrent fin décembre 2026, les visios en janvier. Ces offres ne s&apos;adressent ni aux établissements situés en France, ni aux élèves de son professeur.
           </p>
           )}
         </section>

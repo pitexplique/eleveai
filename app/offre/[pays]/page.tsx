@@ -24,6 +24,7 @@ import {
   VIDEOS_SITE,
   VIDEOS_YOUTUBE,
   VISIO_FCFA,
+  NOM_VISIO,
 } from "@/lib/tarifs";
 import { programmesDuPays } from "@/lib/programmes-pays/pays";
 
@@ -114,10 +115,11 @@ export default async function OffrePays({ params }: { params: Promise<{ pays: st
         {/* 3. LA VISIO */}
         <section className="rounded-3xl border border-slate-200 p-6 sm:p-8">
           <h2 className="flex items-center gap-2 text-2xl font-black">
-            <MonitorPlay className="h-6 w-6 text-violet-700" aria-hidden="true" /> Les cours en visio
+            <MonitorPlay className="h-6 w-6 text-violet-700" aria-hidden="true" /> Les visios « {NOM_VISIO} »
           </h2>
           <p className="mt-2 text-slate-700">
-            En petit groupe, 1 h 30 avec un professeur de maths, pour préparer {o.examens}. Le replay reste. Pas besoin
+            « Vrai ou faux ? » : une phrase entendue à la télé ou sur les réseaux, on vote, puis on vérifie avec les
+            maths. 1 heure en direct avec un professeur de maths et des élèves de 8 pays. Le replay reste. Pas besoin
             de caméra pour l&apos;élève, et une connexion téléphone suffit.
           </p>
           <p className="mt-3 text-2xl font-black">

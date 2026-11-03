@@ -25,6 +25,8 @@ import {
   PRIX_MENSUEL,
   PRIX_PAR_PAYS,
   PRIX_VISIO,
+  NOM_VISIO,
+  VISIO_MATHS_REELLES,
   VIDEOS_SITE,
   VIDEOS_YOUTUBE,
   montant,
@@ -49,12 +51,8 @@ const SUIVI = [
   "Un seul abonnement pour tous les enfants de la maison",
 ];
 
-const VISIO = [
-  "Des cours collectifs en direct, 1 h 30, avec un professeur de maths",
-  "Les grands rendez-vous : entrée en 6e, brevet, épreuve anticipée de 1re, bac, CRPE",
-  "Le replay et la fiche de la séance, gardés",
-  "Pas besoin de caméra ni de micro pour l'élève",
-];
+// ⭐ 03/11 : « Maths réelles », la liste vit dans lib/tarifs.ts.
+const VISIO = VISIO_MATHS_REELLES;
 
 const ETABLISSEMENT = [
   "Un compte pour chaque professeur et chaque élève, avec « Mes classes » et le bilan par micro-compétence",
@@ -75,7 +73,7 @@ const faq = [
   },
   {
     q: "Quand est-ce que ça ouvre ?",
-    a: `Le suivi famille ouvre ${OUVERTURE_SUIVI}, les cours en visio en ${OUVERTURE_VISIO}. Rien n'est encaissé avant l'ouverture.`,
+    a: `Le suivi famille ouvre ${OUVERTURE_SUIVI}, les visios « ${NOM_VISIO} » en ${OUVERTURE_VISIO}. Rien n'est encaissé avant l'ouverture.`,
   },
   {
     q: "Le prix est-il le même dans tous les pays ?",
@@ -150,12 +148,12 @@ export default function TarifsClient() {
           <div className="flex flex-col rounded-3xl border border-slate-200 p-6">
             <p className="text-sm font-black uppercase tracking-wide text-violet-700">À partir de {OUVERTURE_VISIO}</p>
             <h2 className="mt-1 flex items-center gap-2 text-2xl font-black">
-              <MonitorPlay className="h-6 w-6 text-violet-700" aria-hidden="true" /> Les cours en visio
+              <MonitorPlay className="h-6 w-6 text-violet-700" aria-hidden="true" /> Les visios « {NOM_VISIO} »
             </h2>
             <p className="mt-3 text-3xl font-black">
               {montant(PRIX_VISIO)} <span className="text-base font-bold text-slate-500">la séance</span>
             </p>
-            <p className="text-sm text-slate-500">En petit groupe. Prix de la France.</p>
+            <p className="text-sm text-slate-500">À quoi servent les maths, pour de vrai. Prix de la France.</p>
             <ul className="mt-4 flex-1 space-y-2 text-sm text-slate-800">
               {VISIO.map((t) => <Puce key={t} couleur="text-violet-600">{t}</Puce>)}
             </ul>
