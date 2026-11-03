@@ -87,8 +87,8 @@ function corrigerDefinition(q: Q): string[] {
   let juste: (c: string) => boolean;
   if (/Qu’est-ce que la médiatrice|Quelle droite est la médiatrice|définition de la médiatrice/.test(t))
     juste = (c) => c.includes(`perpendiculaire à [${E}${F}]`) && /passe par son milieu/.test(c) && !/parallèle/.test(c) && !new RegExp(`passe par [${E}${F}]$`).test(c);
-  else if (/Que sait-on de cette droite|Comment cette droite coupe/.test(t)) juste = (c) => /milieu/.test(c) && /angle droit/.test(c) && !/biais/.test(c);
-  else if (/Combien de médiatrices|plusieurs médiatrices/.test(t)) juste = (c) => c === "une seule";
+  else if (/Que sait-on de (?:cette droite|la médiatrice)|Comment (?:cette droite|la médiatrice de \[..\]) coupe|Où la médiatrice coupe/.test(t)) juste = (c) => /milieu/.test(c) && /angle droit/.test(c) && !/biais/.test(c);
+  else if (/Combien de médiatrices|plusieurs médiatrices|a-t-il de médiatrices/.test(t)) juste = (c) => c === "une seule";
   else return ["question non reconnue"];
   uneSeuleJuste(q, juste, p);
   return p;
@@ -151,7 +151,7 @@ function corrigerDistance(q: Q): string[] {
   const t = q.text;
   decimalesOk(t, p);
   const s = t.match(/médiatrice de \[([A-Z])([A-Z])\]/)?.slice(1, 3);
-  const K = t.match(/(?:point|au point) ([A-Z])(?: est)?,? sur la médiatrice/)?.[1];
+  const K = t.match(/\b([A-Z])(?: est)?,? sur la médiatrice/)?.[1];
   if (!s || !K) return ["segment ou point illisible"];
   const ls = longueursNommees(t);
   const ks = Object.keys(ls);
@@ -210,11 +210,11 @@ function corrigerSens(q: Q): string[] {
 function corrigerCompas(q: Q): string[] {
   const p: string[] = [];
   const t = q.text;
-  if (/plie sa feuille/.test(t)) {
+  if (/[Pp]lie (?:sa|une|la) feuille/.test(t)) {
     uneSeuleJuste(q, (c) => /^la médiatrice de/.test(c), p);
     return p;
   }
-  const L = t.match(/Il mesure (\d+(?:,\d+)?) cm/)?.[1];
+  const L = t.match(/mesure (\d+(?:,\d+)?) cm/)?.[1];
   if (!L) return ["longueur illisible"];
   uneSeuleJuste(
     q,
@@ -336,6 +336,7 @@ function corrigerDefiRaisons(q: Q): string[] {
 
 export const CORRECTEURS: CorrecteursMaths = {
   mediatrice_propriete_tpl_distance: corrigerDistance,
+  mediatrice_propriete_tpl_distance_situation: corrigerDistance,
   mediatrice_propriete_tpl_1: corrigerTrajet,
   mediatrice_propriete_tpl_2: corrigerReciproque,
   mediatrice_propriete_tpl_ouverte: corrigerSens,

@@ -223,16 +223,29 @@ function introSegment(E: string, F: string, P: Prenom) {
   ]);
 }
 
+/* ⛔⛔ 03/11/2026 — D'ABORD DES QUESTIONS SIMPLES (Frédéric) : « le contexte est
+   réservé aux étoiles ★3 et plus ». À ★1-★2 : ni prénom, ni métier, ni situation
+   de la vie ; la figure reste, la phrase va droit au but. */
+// Et COURTE (REGLES-6E.md) : ★1 en 12 mots au plus, ★2 en 15, ponctuation comprise.
+function introSimple(E: string, F: string) {
+  return pick([`Voici le segment [${E}${F}].`, `Observe le segment [${E}${F}].`, ``]);
+}
+const motsM = (t: string) => t.trim().split(/\s+/).length;
+/** Une intro et une question qui tiennent ensemble dans `max` mots (sinon la plus courte, sans intro). */
+function courtM(intros: string[], questions: string[], max: number) {
+  const paires = intros.flatMap((i) => questions.map((q) => (i ? `${i} ${q}` : q))).filter((t) => motsM(t) <= max);
+  return paires.length ? pick(paires) : [...questions].sort((x, y) => motsM(x) - motsM(y))[0];
+}
+
 // ----- MEDIATRICE_DEFINITION
 function genMedDefinition(): Q {
   const [E, F] = lettres(2);
-  const P = prenom();
   const s = `[${E}${F}]`;
   const mode = pick(["definition", "conditions", "unique"] as const);
   if (mode === "definition") {
     const juste = `la droite perpendiculaire à ${s} qui passe par son milieu`;
     return {
-      text: `${introSegment(E, F, P)} ${pick([`Qu’est-ce que la médiatrice de ${s} ?`, `Quelle droite est la médiatrice de ${s} ?`, `Choisis la définition de la médiatrice de ${s}.`])}`,
+      text: courtM([introSimple(E, F)], [`Qu’est-ce que la médiatrice de ${s} ?`, `Quelle droite est la médiatrice de ${s} ?`, `Choisis la définition de la médiatrice de ${s}.`], 12),
       format: "qcm",
       choices: shuffle([juste, `la droite qui passe par le milieu de ${s}`, `la droite perpendiculaire à ${s} qui passe par ${E}`, `la droite parallèle à ${s} qui passe par son milieu`]),
       expected: [juste],
@@ -243,7 +256,7 @@ function genMedDefinition(): Q {
   if (mode === "conditions") {
     const juste = `elle coupe ${s} en son milieu, à angle droit`;
     return {
-      text: `${P.nom} trace la médiatrice de ${s}. ${pick(["Que sait-on de cette droite ?", `Comment cette droite coupe-t-elle ${s} ?`])}`,
+      text: courtM([introSimple(E, F)], [`Que sait-on de la médiatrice de ${s} ?`, `Comment la médiatrice de ${s} coupe-t-elle ${s} ?`, `Où la médiatrice coupe-t-elle ${s} ?`], 12),
       format: "qcm",
       choices: shuffle([juste, `elle coupe ${s} en ${E}, à angle droit`, `elle coupe ${s} en son milieu, en biais`, `elle ne coupe pas ${s}`]),
       expected: [juste],
@@ -253,7 +266,7 @@ function genMedDefinition(): Q {
   }
   const juste = "une seule";
   return {
-    text: `${introSegment(E, F, P)} ${pick([`Combien de médiatrices le segment ${s} a-t-il ?`, `${P.nom} peut-${il(P)} tracer plusieurs médiatrices de ${s} ? Combien y en a-t-il ?`])}`,
+    text: courtM([introSimple(E, F)], [`Combien de médiatrices le segment ${s} a-t-il ?`, `Combien de médiatrices peut-on tracer pour ${s} ?`, `Combien ${s} a-t-il de médiatrices ?`], 12),
     format: "qcm",
     choices: shuffle([juste, "deux", "une infinité", "aucune"]),
     expected: [juste],
@@ -272,14 +285,13 @@ function choixMediatrice(s: string) {
 }
 function genMedFigure(): Q {
   const [E, F, M] = lettres(3);
-  const P = prenom();
   const s = `[${E}${F}]`;
   const perpendiculaire = Math.random() < 0.6;
   const parMilieu = Math.random() < 0.6;
   const c = choixMediatrice(s);
   const rep = perpendiculaire && parMilieu ? c.oui : perpendiculaire ? c.pasMilieu : parMilieu ? c.pasPerp : c.aucune;
   return {
-    text: `${pick([`${P.nom} a tracé la droite (d) et le segment ${s}.`, `Sur la figure ${de(P.nom)}, ${M} est le milieu de ${s}.`, `Observe la droite (d) et le segment ${s}.`])} ${pick([`La droite (d) est-elle la médiatrice de ${s} ?`, `(d) est-elle la médiatrice de ${s} ?`])}`,
+    text: courtM([`Observe la figure.`, `Regarde la figure.`, `${M} est le milieu de ${s}.`, `Sur la figure, ${M} est le milieu de ${s}.`, ``], [`La droite (d) est-elle la médiatrice de ${s} ?`, `(d) est-elle la médiatrice de ${s} ?`], 15),
     format: "qcm",
     choices: shuffle(Object.values(c)),
     expected: [rep],
@@ -357,15 +369,27 @@ function situationLieux() {
   const P = prenom();
   return { E, F, K, l, P, s: `[${E}${F}]` };
 }
-function genMedDistance(): Q {
+/** Qui place l'objet : un prénom ou un métier (vocations), ★3 seulement. */
+const QUI_PLACE: ((P: Prenom) => string)[] = [
+  (P) => P.nom,
+  (P) => P.nom,
+  () => "une urbaniste",
+  () => "un paysagiste",
+  () => "une ingénieure",
+  () => "un jardinier",
+  () => "une architecte",
+  () => "un géomètre",
+];
+function genMedDistance(situation = false): Q {
   const { E, F, K, l, P, s } = situationLieux();
-  const enSituation = Math.random() < 0.7;
+  // 03/11/2026 : ★2 sans situation ; la situation (lieux, métiers) monte à ★3.
+  const enSituation = situation;
   const d = enSituation ? distanceLieux(l) : randomInt(3, 14) + (Math.random() < 0.3 ? 0.5 : 0);
   const u = enSituation ? l.u : "cm";
   const [X, Y] = Math.random() < 0.5 ? [E, F] : [F, E];
   const text = enSituation
-    ? `${cap(l.entre)} sont aux points ${E} et ${F}. ${P.nom} place ${l.quoi} au point ${K}, sur la médiatrice de ${s}. On mesure ${K}${X} = ${fr(d)} ${u}. ${pick([`Combien mesure ${K}${Y} ?`, `À quelle distance de ${Y} se trouve le point ${K} ?`])}`
-    : `Le point ${K} est sur la médiatrice de ${s} et ${K}${X} = ${fr(d)} ${u}. ${pick([`Combien mesure ${K}${Y} ?`, `Quelle est la longueur ${K}${Y} ?`])}`;
+    ? `${cap(l.entre)} sont aux points ${E} et ${F}. ${cap(pick(QUI_PLACE)(P))} place ${l.quoi} au point ${K}, sur la médiatrice de ${s}. On mesure ${K}${X} = ${fr(d)} ${u}. ${pick([`Combien mesure ${K}${Y} ?`, `À quelle distance de ${Y} se trouve le point ${K} ?`])}`
+    : courtM([`${K} est sur la médiatrice de ${s}. ${K}${X} = ${fr(d)} ${u}.`, `Le point ${K} est sur la médiatrice de ${s}. ${K}${X} = ${fr(d)} ${u}.`], [`Combien mesure ${K}${Y} ?`, `Que vaut ${K}${Y} ?`, `Trouve ${K}${Y}.`, `Calcule ${K}${Y}.`, `Donne la longueur ${K}${Y}.`], 15);
   return {
     text,
     format: "short",
@@ -463,12 +487,11 @@ function genMedSens(): Q {
 // ----- MEDIATRICE_CONSTRUIRE
 function genMedCompas(): Q {
   const [E, F] = lettres(2);
-  const P = prenom();
   const s = `[${E}${F}]`;
   if (Math.random() < 0.35) {
     const juste = `la médiatrice de ${s}`;
     return {
-      text: `${P.nom} plie sa feuille pour amener le point ${E} exactement sur le point ${F}. ${pick(["Que représente le pli ?", "Quelle droite le pli dessine-t-il ?"])}`,
+      text: courtM([`On plie la feuille : ${E} vient sur ${F}.`, `Plie la feuille pour poser ${E} sur ${F}.`], ["Que représente le pli ?", "Quelle droite trace le pli ?", "Quelle droite forme le pli ?"], 15),
       format: "qcm",
       choices: shuffle([juste, `le segment ${s}`, `la perpendiculaire à ${s} passant par ${E}`, `une parallèle à ${s}`]),
       expected: [juste],
@@ -481,7 +504,7 @@ function genMedCompas(): Q {
   const juste = Math.min(L, Math.floor(demi) + randomInt(1, 3));
   const fausses = [...new Set([demi, Math.max(1, Math.floor(demi) - 1), Math.max(1, Math.floor(demi / 2))])].filter((x) => x <= demi && x !== juste);
   return {
-    text: `${introSegment(E, F, P)} Il mesure ${fr(L)} cm. ${P.nom} veut tracer sa médiatrice au compas. ${pick(["Quel écartement de compas convient ?", `Quel écartement peut-${il(P)} prendre ?`])}`,
+    text: courtM([`${s} mesure ${fr(L)} cm.`, `Le segment ${s} mesure ${fr(L)} cm.`], ["Quel écartement de compas convient pour sa médiatrice ?", "Quelle ouverture de compas pour tracer sa médiatrice ?", "Choisis l’écartement du compas pour tracer sa médiatrice.", "Quel écartement choisir pour tracer sa médiatrice ?"], 15),
     format: "qcm",
     choices: shuffle([`${fr(juste)} cm`, ...fausses.slice(0, 3).map((x) => `${fr(x)} cm`)]),
     expected: [`${fr(juste)} cm`],
@@ -1000,7 +1023,7 @@ export const mediatriceBank: TutorBankItemV4[] = [
     microId: "mediatrice_propriete",
     difficulty: 2,
     theme: "neutral",
-    text: "Le point P est sur la médiatrice de [AB] et PA = 7 cm. Combien mesure PB ?",
+    text: "P est sur la médiatrice de [AB]. PA = 7 cm. Combien mesure PB ?",
     format: "short",
     expected: ["7 cm"],
     comparator: "number_equal",
@@ -1058,6 +1081,20 @@ export const mediatriceBank: TutorBankItemV4[] = [
     hint: "Sur la médiatrice, on est à égale distance des deux extrémités.",
     tags: ["mediatrice_segment", "propriete", "template"],
     generate: () => genMedDistance(),
+  },
+  {
+    kind: "template",
+    id: "mediatrice_propriete_tpl_distance_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "mediatrice_segment",
+    microId: "mediatrice_propriete",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un point de la médiatrice est à la même distance des deux extrémités.",
+    tags: ["mediatrice_segment", "propriete", "template", "situation"],
+    // 03/11/2026 : les lieux de la vie (fontaine, antenne…) et les métiers montent à ★3.
+    generate: () => genMedDistance(true),
   },
   {
     kind: "template",
@@ -1150,7 +1187,7 @@ export const mediatriceBank: TutorBankItemV4[] = [
     microId: "mediatrice_construire",
     difficulty: 2,
     theme: "neutral",
-    text: "On plie une feuille de façon à amener le point A exactement sur le point B. Que représente le pli obtenu ?",
+    text: "Plie la feuille pour poser A sur B. Que représente le pli ?",
     format: "qcm",
     choices: [
       "la médiatrice de [AB]",
