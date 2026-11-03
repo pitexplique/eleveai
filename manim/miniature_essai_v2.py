@@ -824,6 +824,31 @@ def acc_rediger_4e(d):
     centre(d, 1150, 172, "ceinture jaune", police("arialbd.ttf", 20), NAVY)
 
 
+def acc_loi_normale_escalier_tle(d):
+    """⭐ 02/11/2026 : « L'escalier et la cloche ». Les marches de B(16 ; 1/2)
+    centrée réduite, la cloche orange par-dessus ; ceinture NOIRE."""
+    import math
+    from miniature_short_signes import ceinture
+    orange, bleu = (249, 115, 22), (37, 99, 175)
+    n, x0, x1, base, ky = 16, 60, 500, 560, 520
+    pas = (x1 - x0) / (n + 1)
+    for k in range(n + 1):
+        h = math.comb(n, k) / 2 ** n / (2 / math.sqrt(n)) * ky
+        d.rectangle([x0 + k * pas, base - h, x0 + (k + 1) * pas, base], fill=(147, 197, 253), outline=bleu, width=2)
+    pts = []
+    for i in range(161):
+        x = -4.2 + 8.4 * i / 160
+        pts.append(((x0 + x1) / 2 + x * pas * math.sqrt(n) / 2, base - math.exp(-x * x / 2) / math.sqrt(2 * math.pi) * ky))
+    d.line(pts, fill=orange, width=7, joint="curve")
+    d.line([(x0 - 10, base), (x1 + 10, base)], fill=NAVY, width=4)
+    f = police("ariblk.ttf", 46)
+    d.text((540, 370), "l'escalier", font=f, fill=bleu)
+    d.text((540, 430), "devient", font=f, fill=NAVY)
+    d.text((540, 490), "une cloche", font=f, fill=orange)
+    ceinture(d, 900, 395, larg=110, couleur=(26, 26, 26))
+    centre(d, 900, 495, "ceinture noire", police("arialbd.ttf", 24), NAVY)
+
+
 def _cube_pil(d, ox, oy, a, triangle=None, lw=6):
     """Un cube ABCDEFGH en perspective cavalière (PIL), un triangle rouge éventuel."""
     S = {"A": (0, 0, 0), "B": (1, 0, 0), "C": (1, 1, 0), "D": (0, 1, 0),
@@ -1191,6 +1216,13 @@ ESSAIS = {
         "titre": ["COMPRENDRE LE CARRÉ", "ET LA RACINE CARRÉE"],
         "accroche": acc_carre_racine_4e,
         "dossier": "4e/maths/pythagore/02-carre-racine",
+    },
+    # 02/11/2026 — « L'escalier et la cloche », Tle, CEINTURE NOIRE (3:45 → « 4 min »).
+    "eleveai-maths-terminale-loi-normale-escalier": {
+        "badge": "MATHS · TLE", "duree": "EN 4 MIN",
+        "titre": ["COMPRENDRE", "LA LOI NORMALE"],
+        "accroche": acc_loi_normale_escalier_tle,
+        "dossier": "terminale/maths/probabilites/loi-normale-escalier",
     },
     # 12/10/2026 — Pythagore épisode 1 : l'hypoténuse, 4e, CEINTURE JAUNE (2:10 → « 2 min »).
     "eleveai-maths-4e-pythagore-reconnaitre": {
@@ -1949,6 +1981,37 @@ for _cl, _dos, _k, _cle, _c, _duree in [
     ESSAIS[f"eleveai-maths-{_cl}-stats-{_k}"] = {
         "badge": f"MATHS · {_cl.upper()}", "duree": f"EN {_duree} MIN", "titre": _titre,
         "accroche": _piege_test(_c, _haut, _bas), "dossier": f"{_cl}/maths/statistiques/{_dos}",
+    }
+
+
+# ⭐ 03/11/2026 — « Écrire le chiffre N pas à pas » (CP, ULIS, AESH), CEINTURE
+# BLANCHE, 3:26 à 3:50 → « 4 min ». L'image à 1 s de la vidéo (petit chiffre
+# sur fond bleu) ne se lit pas en miniature : un grand chiffre sur les lignes
+# du cahier, la flèche du tracé, l'étoile à colorier.
+def _acc_chiffre(n):
+    def acc(d):
+        from miniature_short_signes import ceinture
+        orange, vert = (234, 106, 20), (34, 160, 80)
+        for k, y in enumerate(range(330, 600, 30)):
+            d.line([(60, y), (520, y)], fill=(200, 80, 90) if k in (2, 6) else (170, 200, 235), width=3 if k in (2, 6) else 2)
+        f = police("ariblk.ttf", 300)
+        l = d.textlength(str(n), font=f)
+        d.text((290 - l / 2, 250), str(n), font=f, fill=orange)
+        g = police("ariblk.ttf", 46)
+        d.text((570, 360), "pas à pas,", font=g, fill=NAVY)
+        d.text((570, 420), "tout", font=g, fill=NAVY)
+        d.text((570, 480), "doucement", font=g, fill=vert)
+        ceinture(d, 700, 565, larg=100)
+        d.text((770, 590), "ceinture blanche", font=police("arialbd.ttf", 24), fill=NAVY)
+    return acc
+
+
+for _n in range(10):
+    ESSAIS[f"eleveai-francais-cp-pas-a-pas-chiffre-{_n}"] = {
+        "badge": "BELLE ÉCRITURE · CP", "duree": "EN 4 MIN",
+        "titre": ["ÉCRIRE LE", f"CHIFFRE {_n}"],
+        "accroche": _acc_chiffre(_n),
+        "dossier": f"cp/francais/paysage/fr/pas-a-pas/chiffre-{_n}",
     }
 
 

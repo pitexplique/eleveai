@@ -37,7 +37,7 @@
   "vignette": "3e/maths/paysage/fr/equation-resolution/eleveai-maths-3e-equation-resolution.vignette.webp",
   "titre": "Équations : le produit nul et x² = a — Maths 3e",
   "short": false,
-  "youtube": null,
+  "youtube": "A4_qcpz0WKE",
   "coach": "/coach/serie?classe=3e&matiere=maths&notion=equation_resolution&display=simple"
  },
  "3e-expression-comprendre": {
@@ -3401,7 +3401,7 @@
   "vignette": "6e/maths/proportionnalite/01-reconnaitre/eleveai-maths-6e-prop-reconnaitre.vignette.webp",
   "titre": "Deux fois plus, deux fois plus cher ? — Reconnaître la proportionnalité — épisode 1 · Maths 6e",
   "short": false,
-  "youtube": null,
+  "youtube": "M-yJwc2m764",
   "coach": "/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&microId=prop_reconnaitre&display=simple"
  },
  "6e-prop-reconnaitre-short": {
@@ -3410,7 +3410,7 @@
   "vignette": "6e/maths/proportionnalite/01-reconnaitre/eleveai-maths-6e-prop-reconnaitre-short.vignette.webp",
   "titre": "Et si ta taille était proportionnelle à ton âge ? 🦒 — 6e #Shorts",
   "short": true,
-  "youtube": null,
+  "youtube": "mEMLhXZ8NQQ",
   "coach": "/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&microId=prop_reconnaitre&display=simple"
  },
  "6e-prop-resoudre": {
@@ -3733,7 +3733,7 @@
   "vignette": "actu/maths/shorts/fr/ia-maths/eleveai-maths-actu-ia-maths-short.vignette.webp",
   "titre": "L'IA est médaille d'or en maths : alors, à quoi ça sert d'apprendre ? 🤖 #Shorts",
   "short": true,
-  "youtube": null,
+  "youtube": "DLNc84RLJ_0",
   "coach": null
  },
  "annonce-probabilites": {
@@ -3867,7 +3867,7 @@
   "vignette": "bases/maths/shorts/fr/fractions/eleveai-maths-bases-fractions-short-definition.vignette.webp",
   "titre": "C'est quoi une fraction ? (il y a deux réponses)",
   "short": true,
-  "youtube": null,
+  "youtube": "67uwQUPoY_4",
   "coach": null
  },
  "bases-fractions-ecritures": {
@@ -5105,7 +5105,7 @@
  },
  "cp-pas-a-pas-chiffre-0": {
   "fichier": "cp/francais/paysage/fr/pas-a-pas/chiffre-0/eleveai-francais-cp-pas-a-pas-chiffre-0.mp4",
-  "poster": null,
+  "poster": "cp/francais/paysage/fr/pas-a-pas/chiffre-0/eleveai-francais-cp-pas-a-pas-chiffre-0.png",
   "vignette": "cp/francais/paysage/fr/pas-a-pas/chiffre-0/eleveai-francais-cp-pas-a-pas-chiffre-0.vignette.webp",
   "titre": "Écrire le chiffre 0 pas à pas, tout doucement — La belle écriture",
   "short": false,
@@ -5114,7 +5114,7 @@
  },
  "cp-pas-a-pas-chiffre-1": {
   "fichier": "cp/francais/paysage/fr/pas-a-pas/chiffre-1/eleveai-francais-cp-pas-a-pas-chiffre-1.mp4",
-  "poster": null,
+  "poster": "cp/francais/paysage/fr/pas-a-pas/chiffre-1/eleveai-francais-cp-pas-a-pas-chiffre-1.png",
   "vignette": "cp/francais/paysage/fr/pas-a-pas/chiffre-1/eleveai-francais-cp-pas-a-pas-chiffre-1.vignette.webp",
   "titre": "Écrire le chiffre 1 pas à pas, tout doucement — La belle écriture",
   "short": false,
@@ -5123,7 +5123,7 @@
  },
  "cp-pas-a-pas-chiffre-2": {
   "fichier": "cp/francais/paysage/fr/pas-a-pas/chiffre-2/eleveai-francais-cp-pas-a-pas-chiffre-2.mp4",
-  "poster": null,
+  "poster": "cp/francais/paysage/fr/pas-a-pas/chiffre-2/eleveai-francais-cp-pas-a-pas-chiffre-2.png",
   "vignette": "cp/francais/paysage/fr/pas-a-pas/chiffre-2/eleveai-francais-cp-pas-a-pas-chiffre-2.vignette.webp",
   "titre": "Écrire le chiffre 2 pas à pas, tout doucement — La belle écriture",
   "short": false,
@@ -5132,7 +5132,7 @@
  },
  "cp-pas-a-pas-chiffre-3": {
   "fichier": "cp/francais/paysage/fr/pas-a-pas/chiffre-3/eleveai-francais-cp-pas-a-pas-chiffre-3.mp4",
-  "poster": null,
+  "poster": "cp/francais/paysage/fr/pas-a-pas/chiffre-3/eleveai-francais-cp-pas-a-pas-chiffre-3.png",
   "vignette": "cp/francais/paysage/fr/pas-a-pas/chiffre-3/eleveai-francais-cp-pas-a-pas-chiffre-3.vignette.webp",
   "titre": "Écrire le chiffre 3 pas à pas, tout doucement — La belle écriture",
   "short": false,
@@ -5141,7 +5141,7 @@
  },
  "cp-pas-a-pas-chiffre-4": {
   "fichier": "cp/francais/paysage/fr/pas-a-pas/chiffre-4/eleveai-francais-cp-pas-a-pas-chiffre-4.mp4",
-  "poster": null,
+  "poster": "cp/francais/paysage/fr/pas-a-pas/chiffre-4/eleveai-francais-cp-pas-a-pas-chiffre-4.png",
   "vignette": "cp/francais/paysage/fr/pas-a-pas/chiffre-4/eleveai-francais-cp-pas-a-pas-chiffre-4.vignette.webp",
   "titre": "Écrire le chiffre 4 pas à pas, tout doucement — La belle écriture",
   "short": false,
@@ -5150,7 +5150,7 @@
  },
  "cp-pas-a-pas-chiffre-5": {
   "fichier": "cp/francais/paysage/fr/pas-a-pas/chiffre-5/eleveai-francais-cp-pas-a-pas-chiffre-5.mp4",
-  "poster": null,
+  "poster": "cp/francais/paysage/fr/pas-a-pas/chiffre-5/eleveai-francais-cp-pas-a-pas-chiffre-5.png",
   "vignette": "cp/francais/paysage/fr/pas-a-pas/chiffre-5/eleveai-francais-cp-pas-a-pas-chiffre-5.vignette.webp",
   "titre": "Écrire le chiffre 5 pas à pas, tout doucement — La belle écriture",
   "short": false,
@@ -5159,7 +5159,7 @@
  },
  "cp-pas-a-pas-chiffre-6": {
   "fichier": "cp/francais/paysage/fr/pas-a-pas/chiffre-6/eleveai-francais-cp-pas-a-pas-chiffre-6.mp4",
-  "poster": null,
+  "poster": "cp/francais/paysage/fr/pas-a-pas/chiffre-6/eleveai-francais-cp-pas-a-pas-chiffre-6.png",
   "vignette": "cp/francais/paysage/fr/pas-a-pas/chiffre-6/eleveai-francais-cp-pas-a-pas-chiffre-6.vignette.webp",
   "titre": "Écrire le chiffre 6 pas à pas, tout doucement — La belle écriture",
   "short": false,
@@ -5168,7 +5168,7 @@
  },
  "cp-pas-a-pas-chiffre-7": {
   "fichier": "cp/francais/paysage/fr/pas-a-pas/chiffre-7/eleveai-francais-cp-pas-a-pas-chiffre-7.mp4",
-  "poster": null,
+  "poster": "cp/francais/paysage/fr/pas-a-pas/chiffre-7/eleveai-francais-cp-pas-a-pas-chiffre-7.png",
   "vignette": "cp/francais/paysage/fr/pas-a-pas/chiffre-7/eleveai-francais-cp-pas-a-pas-chiffre-7.vignette.webp",
   "titre": "Écrire le chiffre 7 pas à pas, tout doucement — La belle écriture",
   "short": false,
@@ -5177,7 +5177,7 @@
  },
  "cp-pas-a-pas-chiffre-8": {
   "fichier": "cp/francais/paysage/fr/pas-a-pas/chiffre-8/eleveai-francais-cp-pas-a-pas-chiffre-8.mp4",
-  "poster": null,
+  "poster": "cp/francais/paysage/fr/pas-a-pas/chiffre-8/eleveai-francais-cp-pas-a-pas-chiffre-8.png",
   "vignette": "cp/francais/paysage/fr/pas-a-pas/chiffre-8/eleveai-francais-cp-pas-a-pas-chiffre-8.vignette.webp",
   "titre": "Écrire le chiffre 8 pas à pas, tout doucement — La belle écriture",
   "short": false,
@@ -5186,7 +5186,7 @@
  },
  "cp-pas-a-pas-chiffre-9": {
   "fichier": "cp/francais/paysage/fr/pas-a-pas/chiffre-9/eleveai-francais-cp-pas-a-pas-chiffre-9.mp4",
-  "poster": null,
+  "poster": "cp/francais/paysage/fr/pas-a-pas/chiffre-9/eleveai-francais-cp-pas-a-pas-chiffre-9.png",
   "vignette": "cp/francais/paysage/fr/pas-a-pas/chiffre-9/eleveai-francais-cp-pas-a-pas-chiffre-9.vignette.webp",
   "titre": "Écrire le chiffre 9 pas à pas, tout doucement — La belle écriture",
   "short": false,
@@ -7899,7 +7899,7 @@
   "vignette": "premiere/maths/paysage/fr/degre2-forme-factorisee/eleveai-maths-premiere-degre2-forme-factorisee.vignette.webp",
   "titre": "Le second degré par la forme factorisée — Maths 1re et STMG",
   "short": false,
-  "youtube": null,
+  "youtube": "u6gMwAQVOmg",
   "coach": "/coach/serie?classe=premiere&matiere=maths&notion=quad_racines_signe&display=simple"
  },
  "premiere-proba-arbre": {
@@ -8448,7 +8448,7 @@
   "vignette": "seconde/maths/paysage/fr/racine-carree-2de/eleveai-maths-seconde-racine-carree-2de.vignette.webp",
   "titre": "Maths seconde · La racine carrée — EleveAI",
   "short": false,
-  "youtube": null,
+  "youtube": "xRteidtlHd8",
   "coach": "/coach/serie?classe=seconde&matiere=maths&notion=racine_carree_2de&display=simple"
  },
  "racine-negatif": {
@@ -8475,7 +8475,7 @@
   "vignette": "seconde/maths/shorts/fr/racine-carree-2de/eleveai-maths-seconde-racine-carree-2de-short-somme.vignette.webp",
   "titre": "√9 + √16 = √25 ? La faute que presque tout le monde fait",
   "short": true,
-  "youtube": null,
+  "youtube": "FCwhbfznGK4",
   "coach": "/coach/serie?classe=seconde&matiere=maths&notion=racine_carree_2de&microId=racine_somme&display=simple"
  },
  "reels-0999": {
@@ -9087,7 +9087,7 @@
   "vignette": "actu/maths/shorts/fr/sondages/eleveai-maths-actu-sondages-short-mille.vignette.webp",
   "titre": "Pourquoi 1 000 personnes suffisent pour 48 millions",
   "short": true,
-  "youtube": null,
+  "youtube": "bDhqO9-ZG5o",
   "coach": null
  },
  "sondages-racine": {
@@ -10662,7 +10662,7 @@
   "vignette": "terminale/maths/shorts/fr/continuite-tvi/eleveai-maths-terminale-continuite-tvi-short-continuite.vignette.webp",
   "titre": "De −1 à 1, une fonction touche forcément 0 ? (le piège)",
   "short": true,
-  "youtube": null,
+  "youtube": "C2-N1I4CzHE",
   "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=continuite_tvi&microId=continuite_reconnaitre&display=simple"
  },
  "terminale-continuite-tvi-short-defi": {
@@ -10788,7 +10788,7 @@
   "vignette": "terminale/maths/probabilites/loi-normale-escalier/eleveai-maths-terminale-loi-normale-escalier.vignette.webp",
   "titre": "L'escalier et la cloche : comment la loi binomiale devient la loi normale · Maths Tle spé",
   "short": false,
-  "youtube": null,
+  "youtube": "Q0uBTeVLalE",
   "coach": null
  },
  "terminale-loi-normale-escalier-short": {
@@ -10797,7 +10797,7 @@
   "vignette": "terminale/maths/probabilites/loi-normale-escalier/eleveai-maths-terminale-loi-normale-escalier-short.vignette.webp",
   "titre": "300 rangées de clous : l'escalier devient… quoi ? 🔔 — Tle #Shorts",
   "short": true,
-  "youtube": null,
+  "youtube": "lzReDCpEC0E",
   "coach": null
  },
  "terminale-proba-arbre": {
