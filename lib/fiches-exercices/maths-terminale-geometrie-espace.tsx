@@ -145,6 +145,13 @@ export const exercicesGeometrieEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "Dans le cube $ABCDEFGH$ ci-dessous, on se place dans le repère $(A ; \\overrightarrow{AB}, \\overrightarrow{AD}, \\overrightarrow{AE})$. $I$ est le milieu de l'arête $[FG]$.\na) Donner les coordonnées de $C$, $G$ et $H$.\nb) Donner les coordonnées de $I$.\nc) Donner les coordonnées du vecteur $\\overrightarrow{EC}$.",
+          reponses: [
+            { question: "a) C", attendu: "(1 ; 1 ; 0)", ordre: true },
+            { question: "a) G", attendu: "(1 ; 1 ; 1)", ordre: true },
+            { question: "a) H", attendu: "(0 ; 1 ; 1)", ordre: true },
+            { question: "b) I", attendu: "(1 ; 1/2 ; 1)", ordre: true },
+            { question: "c) EC", attendu: "(1 ; 1 ; -1)", ordre: true },
+          ],
           figure: cavaliere(
             { A: [0, 0, 0, "so"], B: [1, 0, 0, "se"], C: [1, 1, 0, "e"], D: [0, 1, 0, "no"], E: [0, 0, 1, "o"], F: [1, 0, 1, "se"], G: [1, 1, 1, "ne"], H: [0, 1, 1, "no"], I: [1, 0.5, 1, "no"] },
             { pleins: "A-B B-C C-G G-F F-B E-F G-H H-E A-E", caches: "A-D D-C D-H" },
@@ -156,6 +163,11 @@ export const exercicesGeometrieEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "$ABCDEFGH$ est un cube : $ABCD$ est la face du bas, et $E$, $F$, $G$, $H$ sont au-dessus de $A$, $B$, $C$, $D$. Simplifier :\na) $\\overrightarrow{AB} + \\overrightarrow{CG}$\nb) $\\overrightarrow{AD} + \\overrightarrow{FE}$\nc) $\\overrightarrow{AB} + \\overrightarrow{AD} + \\overrightarrow{AE}$",
+          reponses: [
+            { question: "a)", attendu: ["AF", "vecteur AF"] },
+            { question: "b)", attendu: ["BD", "vecteur BD"] },
+            { question: "c)", attendu: ["AG", "vecteur AG"] },
+          ],
           correction:
             "a) $\\overrightarrow{CG} = \\overrightarrow{BF}$ : deux arêtes verticales, même sens, même longueur.\nDonc $\\overrightarrow{AB} + \\overrightarrow{CG} = \\overrightarrow{AB} + \\overrightarrow{BF} = \\overrightarrow{AF}$, par la relation de Chasles.\nb) $\\overrightarrow{FE} = \\overrightarrow{BA}$. Donc $\\overrightarrow{AD} + \\overrightarrow{FE} = \\overrightarrow{BA} + \\overrightarrow{AD} = \\overrightarrow{BD}$.\nc) $\\overrightarrow{AD} = \\overrightarrow{BC}$ et $\\overrightarrow{AE} = \\overrightarrow{CG}$.\nDonc la somme vaut $\\overrightarrow{AB} + \\overrightarrow{BC} + \\overrightarrow{CG} = \\overrightarrow{AG}$.\n⚠️ Chasles demande que chaque flèche PARTE de l'arrivée de la précédente : on remplace d'abord un vecteur par un vecteur égal bien placé.\n⭐ Sur le dessin : les flèches orange $\\overrightarrow{AB}$, $\\overrightarrow{BC}$, $\\overrightarrow{CG}$ mises bout à bout mènent de $A$ à $G$, au bout de la grande diagonale.",
           schema: ecranSeulement(
@@ -169,6 +181,10 @@ export const exercicesGeometrieEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "On donne $\\vec{u}(2 ; -1 ; 3)$, $\\vec{v}(-6 ; 3 ; -9)$ et $\\vec{w}(4 ; -2 ; 5)$.\na) $\\vec{u}$ et $\\vec{v}$ sont-ils colinéaires ?\nb) $\\vec{u}$ et $\\vec{w}$ sont-ils colinéaires ?",
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) On cherche un réel $k$ tel que $\\vec{v} = k\\vec{u}$. Première coordonnée : $-6 = 2k$, donc $k = -3$.\nOn vérifie les deux autres : $-3 \\times (-1) = 3$ et $-3 \\times 3 = -9$. Tout colle : $\\vec{v} = -3\\vec{u}$, les vecteurs sont colinéaires.\nb) Première coordonnée : $4 = 2k$, donc $k = 2$. Deuxième : $2 \\times (-1) = -2$, ça colle. Troisième : $2 \\times 3 = 6 \\neq 5$.\nLes vecteurs $\\vec{u}$ et $\\vec{w}$ ne sont pas colinéaires.\n⚠️ Deux coordonnées proportionnelles ne suffisent pas : dans l'espace, on vérifie les TROIS.\n⭐ Le tableau le montre : les trois quotients des coordonnées de $\\vec{v}$ par celles de $\\vec{u}$ valent tous $-3$.",
           schema: ecranSeulement(tableau(["coordonnée", "x", "y", "z"], ["v ÷ u", "−3", "−3", "−3"])),
@@ -177,6 +193,11 @@ export const exercicesGeometrieEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "Dans un repère orthonormé, on donne $A(1 ; 4 ; 1)$ et $B(3 ; 0 ; 5)$.\na) Donner les coordonnées de $\\overrightarrow{AB}$.\nb) Donner les coordonnées du milieu $K$ de $[AB]$.\nc) Calculer la longueur $AB$.",
+          reponses: [
+            { question: "a)", attendu: "(2 ; -4 ; 4)", ordre: true },
+            { question: "b)", attendu: "(2 ; 2 ; 3)", ordre: true },
+            { question: "c)", attendu: "6" },
+          ],
           correction:
             "a) $\\overrightarrow{AB}(3 - 1 ; 0 - 4 ; 5 - 1)$, soit $\\overrightarrow{AB}(2 ; -4 ; 4)$.\nb) $K\\left(\\dfrac{1 + 3}{2} ; \\dfrac{4 + 0}{2} ; \\dfrac{1 + 5}{2}\\right)$, soit $K(2 ; 2 ; 3)$.\nc) $AB = \\sqrt{2^2 + (-4)^2 + 4^2} = \\sqrt{36} = 6$.\n⚠️ $(-4)^2 = 16$, pas $-16$ : les parenthèses sont indispensables.\n⚠️ La formule de la distance ne vaut que dans un repère ORTHONORMÉ.\n⭐ Sur le dessin : $K$ est au milieu du segment orange ; $A$ est loin derrière (grande ordonnée), $B$ est haut (grande cote).",
           schema: ecranSeulement(
@@ -190,6 +211,10 @@ export const exercicesGeometrieEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "On donne $A(1 ; 0 ; 2)$ et $B(3 ; -1 ; 5)$.\na) Donner une représentation paramétrique de la droite $(AB)$.\nb) Le point $C(5 ; -2 ; 8)$ est-il sur $(AB)$ ? Et le point $E(7 ; -3 ; 10)$ ?",
+          reponses: [
+            { question: "b) C", attendu: ["oui", "vrai"] },
+            { question: "b) E", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $\\overrightarrow{AB}(2 ; -1 ; 3)$ dirige la droite, qui passe par $A$ :\n$x = 1 + 2t$, $y = -t$, $z = 2 + 3t$, avec $t \\in \\mathbb{R}$.\nb) Pour $C$ : $5 = 1 + 2t$ donne $t = 2$. Alors $y = -2$ et $z = 2 + 6 = 8$ : ce sont les coordonnées de $C$. Donc $C \\in (AB)$.\nPour $E$ : $7 = 1 + 2t$ donne $t = 3$. Alors $y = -3$, ça colle, mais $z = 2 + 9 = 11 \\neq 10$. Donc $E \\notin (AB)$.\n⚠️ On trouve $t$ avec UNE équation, puis on vérifie les DEUX autres avec ce même $t$. Si l'une est fausse, le point n'est pas sur la droite.\n⭐ Sur le dessin : $C$ est sur la droite orange, deux pas de $\\overrightarrow{AB}$ après $A$ ; $E$ est juste en dessous du point de paramètre $3$, hors de la droite.",
           schema: ecranSeulement(
@@ -211,6 +236,14 @@ export const exercicesGeometrieEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "Soit $\\mathscr{P}$ le plan d'équation $2x + y + 2z - 4 = 0$.\na) Les points $A(1 ; 2 ; 0)$, $B(0 ; 2 ; 1)$ et $C(1 ; 1 ; 1)$ sont-ils dans $\\mathscr{P}$ ?\nb) En quels points $\\mathscr{P}$ coupe-t-il les trois axes ?\nc) Donner un vecteur normal à $\\mathscr{P}$.",
+          reponses: [
+            { question: "a) A", attendu: ["oui", "vrai"] },
+            { question: "a) B", attendu: ["oui", "vrai"] },
+            { question: "a) C", attendu: ["non", "faux"] },
+            { question: "b) axe des abscisses", attendu: "(2 ; 0 ; 0)", ordre: true },
+            { question: "b) axe des ordonnées", attendu: "(0 ; 4 ; 0)", ordre: true },
+            { question: "b) axe des cotes", attendu: "(0 ; 0 ; 2)", ordre: true },
+          ],
           correction:
             "a) On remplace les coordonnées dans l'équation.\n$A$ : $2 + 2 + 0 - 4 = 0$, donc $A \\in \\mathscr{P}$.\n$B$ : $0 + 2 + 2 - 4 = 0$, donc $B \\in \\mathscr{P}$.\n$C$ : $2 + 1 + 2 - 4 = 1 \\neq 0$, donc $C \\notin \\mathscr{P}$.\nb) Sur l'axe des abscisses, $y = z = 0$ : $2x - 4 = 0$, donc $x = 2$. C'est le point $I(2 ; 0 ; 0)$.\nDe même : $J(0 ; 4 ; 0)$ sur l'axe des ordonnées, et $K(0 ; 0 ; 2)$ sur l'axe des cotes.\nc) On lit les coefficients de $x$, $y$ et $z$ : $\\vec{n}(2 ; 1 ; 2)$.\n⚠️ Le nombre $-4$ ne fait pas partie du vecteur normal : il fixe seulement la position du plan.\n⭐ Sur le dessin : le triangle $IJK$ est le morceau du plan coupé par les axes ; $A$ et $B$ sont les milieux de deux de ses côtés.",
           schema: cavaliere(
@@ -222,6 +255,12 @@ export const exercicesGeometrieEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "Dans le cube $ABCDEFGH$ ci-dessous, donner la position relative :\na) des droites $(EG)$ et $(AC)$ ;\nb) des droites $(EG)$ et $(BD)$ ;\nc) des droites $(AG)$ et $(EC)$ ;\nd) de la droite $(EG)$ et du plan $(ABC)$.",
+          reponses: [
+            { question: "a)", attendu: ["parallèles", "parallèle", "parallèles et distinctes", "strictement parallèles"] },
+            { question: "b)", attendu: ["non coplanaires", "non coplanaire"] },
+            { question: "c)", attendu: ["sécantes", "sécante"] },
+            { question: "d)", attendu: ["parallèle", "parallèles", "parallèle au plan", "strictement parallèle"] },
+          ],
           figure: cavaliere(
             { A: [0, 0, 0, "so"], B: [1, 0, 0, "se"], C: [1, 1, 0, "e"], D: [0, 1, 0, "no"], E: [0, 0, 1, "o"], F: [1, 0, 1, "se"], G: [1, 1, 1, "ne"], H: [0, 1, 1, "no"] },
             { pleins: "A-B B-C C-G G-F F-B E-F G-H H-E A-E", caches: "A-D D-C D-H", orange: "E-G", orangeCaches: "A-C B-D A-G E-C" },
@@ -248,6 +287,14 @@ export const exercicesGeometrieEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "Pour poser une plaque plane, un géomètre a planté quatre piquets. Leurs sommets, en mètres, sont $A(1 ; 0 ; 1)$, $B(2 ; 2 ; 0)$, $C(3 ; -1 ; 2)$ et $D(5 ; 3 ; 0)$.\na) Calculer les coordonnées de $\\overrightarrow{AB}$, $\\overrightarrow{AC}$ et $\\overrightarrow{AD}$.\nb) Trouver deux réels $a$ et $b$ tels que $\\overrightarrow{AD} = a\\overrightarrow{AB} + b\\overrightarrow{AC}$.\nc) La plaque peut-elle reposer sur les quatre sommets à la fois ?",
+          reponses: [
+            { question: "a) AB", attendu: "(1 ; 2 ; -1)", ordre: true },
+            { question: "a) AC", attendu: "(2 ; -1 ; 1)", ordre: true },
+            { question: "a) AD", attendu: "(4 ; 3 ; -1)", ordre: true },
+            { question: "b) a", attendu: "2" },
+            { question: "b) b", attendu: "1" },
+            { question: "c)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) $\\overrightarrow{AB}(1 ; 2 ; -1)$, $\\overrightarrow{AC}(2 ; -1 ; 1)$ et $\\overrightarrow{AD}(4 ; 3 ; -1)$.\nb) On écrit l'égalité coordonnée par coordonnée : $a + 2b = 4$, $2a - b = 3$ et $-a + b = -1$.\nOn ajoute la première au double de la deuxième : $5a = 10$, donc $a = 2$, puis $b = 1$.\nOn vérifie la troisième : $-2 + 1 = -1$. Elle est vraie.\nDonc $\\overrightarrow{AD} = 2\\overrightarrow{AB} + \\overrightarrow{AC}$.\nc) Les trois vecteurs sont coplanaires : les quatre points sont dans un même plan, et la plaque peut reposer sur les quatre sommets.\n⚠️ Deux équations suffisent pour trouver $a$ et $b$, mais c'est la TROISIÈME qui décide. Si elle était fausse, les points ne seraient pas coplanaires.\n⭐ Sur le dessin : partir de $A$, faire deux fois le pas $\\overrightarrow{AB}$, puis un pas $\\overrightarrow{AC}$ : on arrive exactement en $D$.",
           schema: cavaliere(
@@ -259,6 +306,14 @@ export const exercicesGeometrieEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "$ABCDEFGH$ est un cube, et on se place dans le repère $(A ; \\overrightarrow{AB}, \\overrightarrow{AD}, \\overrightarrow{AE})$. Le point $M$ est défini par $\\overrightarrow{AM} = \\dfrac{1}{3}\\overrightarrow{AG}$.\na) Donner les coordonnées de $B$, $D$, $E$, $G$, puis de $M$.\nb) Calculer les coordonnées du centre de gravité $K$ du triangle $BDE$ : ce sont les moyennes de celles de $B$, $D$ et $E$.\nc) Que peut-on dire de la diagonale $(AG)$ et du plan $(BDE)$ ?",
+          reponses: [
+            { question: "a) B", attendu: "(1 ; 0 ; 0)", ordre: true },
+            { question: "a) D", attendu: "(0 ; 1 ; 0)", ordre: true },
+            { question: "a) E", attendu: "(0 ; 0 ; 1)", ordre: true },
+            { question: "a) G", attendu: "(1 ; 1 ; 1)", ordre: true },
+            { question: "a) M", attendu: "(1/3 ; 1/3 ; 1/3)", ordre: true },
+            { question: "b) K", attendu: "(1/3 ; 1/3 ; 1/3)", ordre: true },
+          ],
           figure: cavaliere(
             { A: [0, 0, 0, "so"], B: [1, 0, 0, "se"], C: [1, 1, 0, "e"], D: [0, 1, 0, "o"], E: [0, 0, 1, "o"], F: [1, 0, 1, "se"], G: [1, 1, 1, "ne"], H: [0, 1, 1, "no"], M: [1 / 3, 1 / 3, 1 / 3, "e"] },
             { pleins: "A-B B-C C-G G-F F-B E-F G-H H-E A-E", caches: "A-D D-C D-H B-D D-E", face: "B-D-E", orange: "A-G" },
@@ -270,6 +325,10 @@ export const exercicesGeometrieEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "Deux drones volent en ligne droite. Leurs positions, en hectomètres, à l'instant $t$ en minutes, sont :\ndrone 1 : $x = 1 + t$, $y = 2 - t$, $z = 2t$ ;\ndrone 2 : $x = t$, $y = -1 + t$, $z = 4 - t$.\na) Montrer que leurs trajectoires $d_1$ et $d_2$ se coupent en un point $P$ à déterminer.\nb) Les deux drones risquent-ils de se heurter ?\nc) Un troisième drone suit la droite $d_3$ : $x = 1 + 2k$, $y = k$, $z = k$, avec $k \\in \\mathbb{R}$. Montrer que $d_1$ et $d_3$ sont non coplanaires.",
+          reponses: [
+            { question: "a) P", attendu: "(2 ; 1 ; 2)", ordre: true },
+            { question: "b)", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) Un point commun est atteint à l'instant $t$ par le drone 1, et à un instant $s$, peut-être différent, par le drone 2 :\n$1 + t = s$, $2 - t = -1 + s$ et $2t = 4 - s$.\nLes deux premières donnent $s = 1 + t$ et $s = 3 - t$, donc $1 + t = 3 - t$ : $t = 1$ et $s = 2$.\nTroisième équation : $2 \\times 1 = 2$ et $4 - 2 = 2$. Elle est vraie.\nLes trajectoires se coupent en $P(2 ; 1 ; 2)$.\nb) Le drone 1 passe en $P$ à la minute $1$, le drone 2 à la minute $2$ : ils ne se heurtent pas.\nc) $\\vec{u_1}(1 ; -1 ; 2)$ et $\\vec{u_3}(2 ; 1 ; 1)$ ne sont pas colinéaires ($2 = 2 \\times 1$ mais $1 \\neq 2 \\times (-1)$) : pas parallèles.\nPoint commun ? $1 + t = 1 + 2k$, $2 - t = k$ et $2t = k$. La première donne $t = 2k$ ; la deuxième, $2 - 2k = k$, soit $k = \\dfrac{2}{3}$ et $t = \\dfrac{4}{3}$.\nTroisième : $2t = \\dfrac{8}{3}$ mais $k = \\dfrac{2}{3}$. Elle est fausse : aucun point commun.\nNi parallèles, ni sécantes : $d_1$ et $d_3$ sont non coplanaires.\n⚠️ Pour couper deux droites, on prend deux paramètres DIFFÉRENTS. Avec le même $t$, on chercherait les deux drones au même endroit au même instant : c'est la question b), pas la a).\n⭐ Sur le dessin : les trajectoires partent de $D_1$ et $D_2$ (positions à l'instant $0$) et se croisent en $P$.",
           schema: cavaliere(
@@ -281,6 +340,9 @@ export const exercicesGeometrieEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "Une verrière est portée par le plan $\\mathscr{P}$ d'équation $2x + 2y + z - 4 = 0$ (unité : le mètre).\na) Un rayon laser part de $A(2 ; 2 ; 2)$ et suit la droite $d$ : $x = 2 - t$, $y = 2 - t$, $z = 2 - 2t$. Montrer que $d$ coupe $\\mathscr{P}$, et trouver le point d'impact $I$.\nb) Une tringle suit la droite $d'$ : $x = t$, $y = -t$, $z = 4$. Montrer qu'elle est tout entière dans $\\mathscr{P}$.\nc) Un câble suit la droite $d''$ : $x = 1 + t$, $y = 1 - t$, $z = 1$. Montrer qu'il ne touche jamais $\\mathscr{P}$.",
+          reponses: [
+            { question: "a) I", attendu: "(1 ; 1 ; 0)", ordre: true },
+          ],
           correction:
             "a) On remplace $x$, $y$, $z$ par leurs expressions en $t$ :\n$2(2 - t) + 2(2 - t) + (2 - 2t) - 4 = 0$, soit $6 - 6t = 0$, donc $t = 1$.\nUne seule solution : $d$ coupe $\\mathscr{P}$ en un seul point. Avec $t = 1$ : $I(1 ; 1 ; 0)$.\nb) $2t + 2(-t) + 4 - 4 = 0$ pour TOUT réel $t$ : chaque point de $d'$ est dans $\\mathscr{P}$. La droite est contenue dans le plan.\nc) $2(1 + t) + 2(1 - t) + 1 - 4 = 1$, qui ne vaut jamais $0$. Aucun point commun : $d''$ est strictement parallèle à $\\mathscr{P}$.\n⚠️ L'équation en $t$ a trois issues : une solution, toutes, ou aucune. « $0 = 0$ » n'est pas une erreur de calcul : c'est le cas où la droite est dans le plan.\n⭐ Sur le dessin : le triangle est le morceau de la verrière coupé par les axes ; le rayon orange descend de $A$ et la touche en $I$, au milieu du bord du bas.",
           schema: cavaliere(
@@ -292,6 +354,9 @@ export const exercicesGeometrieEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "Le toit d'un pavillon est une pyramide de sommet $S(4 ; 4 ; 3)$, posée sur le carré $ABCD$ : $A(0 ; 0 ; 0)$, $B(8 ; 0 ; 0)$, $C(8 ; 8 ; 0)$ et $D(0 ; 8 ; 0)$ (unité : le mètre).\na) Vérifier que le pan $SBC$ est dans le plan $\\mathscr{P}_1$ d'équation $3x + 4z - 24 = 0$, et le pan $SCD$ dans le plan $\\mathscr{P}_2$ d'équation $3y + 4z - 24 = 0$.\nb) Justifier que $\\mathscr{P}_1$ et $\\mathscr{P}_2$ sont sécants.\nc) L'arêtier $[SC]$ est la ligne où les deux pans se rejoignent. Donner une représentation paramétrique de $(SC)$, puis vérifier qu'elle est dans les deux plans.\nd) À quelle hauteur est le point de l'arêtier situé à la verticale de $(6 ; 6 ; 0)$ ?",
+          reponses: [
+            { question: "d) hauteur (m)", attendu: "1,5" },
+          ],
           figure: cavaliere(
             { A: [0, 0, 0, "so"], B: [8, 0, 0, "se"], C: [8, 8, 0, "e"], D: [0, 8, 0, "o"], S: [4, 4, 3, "n"] },
             { pleins: "A-B B-C D-A S-A S-B S-D", caches: "C-D", face: "S-B-C", orange: "S-C" },
@@ -303,6 +368,9 @@ export const exercicesGeometrieEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "Une voile d'ombrage triangulaire est tendue entre trois points : $A(4 ; 0 ; 0)$ et $B(0 ; -2 ; 0)$ au sol, et $C(0 ; 0 ; 4)$ en haut d'un mât planté en $O$ (unité : le mètre).\na) Montrer que $A$, $B$, $C$ ne sont pas alignés.\nb) Vérifier que $x - 2y + z - 4 = 0$ est une équation du plan $(ABC)$.\nc) Un fil tendu part de $O$ en suivant la droite $\\Delta$ : $x = t$, $y = -t$, $z = t$. En quel point $K$ touche-t-il la voile ?",
+          reponses: [
+            { question: "c) K", attendu: "(1 ; -1 ; 1)", ordre: true },
+          ],
           correction:
             "a) $\\overrightarrow{AB}(-4 ; -2 ; 0)$ et $\\overrightarrow{AC}(-4 ; 0 ; 4)$. La deuxième coordonnée de $\\overrightarrow{AC}$ est nulle, pas celle de $\\overrightarrow{AB}$ : ils ne sont pas colinéaires. $A$, $B$, $C$ ne sont pas alignés.\nb) Ils définissent donc un plan. On vérifie l'équation : $A$ donne $4 - 0 + 0 - 4 = 0$, $B$ donne $0 + 4 + 0 - 4 = 0$, et $C$ donne $0 - 0 + 4 - 4 = 0$.\nUne équation de plan vérifiée par trois points non alignés est une équation de LEUR plan.\nc) On remplace : $t - 2(-t) + t - 4 = 0$, soit $4t = 4$, donc $t = 1$. Le fil touche la voile en $K(1 ; -1 ; 1)$.\n⚠️ Sans la question a), la b) ne prouve rien : trois points alignés sont dans une infinité de plans.\n⚠️ $-2 \\times (-t) = +2t$ : le signe de $y$ se retourne.\n⭐ Sur le dessin : le mât et le fil sont derrière la voile (en pointillé) ; le fil orange part du pied du mât et touche la voile en $K$.",
           schema: ecranSeulement(
@@ -316,6 +384,11 @@ export const exercicesGeometrieEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "Un menuisier scie un cube de bois $ABCDEFGH$ d'arête $1$ dm selon le plan $\\mathscr{P}$ d'équation $x + y + z - \\dfrac{3}{2} = 0$, dans le repère $(A ; \\overrightarrow{AB}, \\overrightarrow{AD}, \\overrightarrow{AE})$.\na) Soit $I$ le milieu de $[BC]$. Vérifier que $I \\in \\mathscr{P}$.\nb) Même question pour les milieux $J$ de $[CD]$, $K$ de $[DH]$, $L$ de $[HE]$, $M$ de $[EF]$ et $N$ de $[FB]$.\nc) Calculer $IJ$ et $JK$. On admet que les six côtés sont égaux, ainsi que les six angles. Quelle est la forme de la coupe ?",
+          reponses: [
+            { question: "c) IJ", attendu: "√(2)/2" },
+            { question: "c) JK", attendu: "√(2)/2" },
+            { question: "c) forme", attendu: ["hexagone régulier", "un hexagone régulier"] },
+          ],
           correction:
             "a) $B(1 ; 0 ; 0)$ et $C(1 ; 1 ; 0)$, donc $I\\left(1 ; \\dfrac{1}{2} ; 0\\right)$. Et $1 + \\dfrac{1}{2} + 0 - \\dfrac{3}{2} = 0$ : $I \\in \\mathscr{P}$.\nb) $J\\left(\\dfrac{1}{2} ; 1 ; 0\\right)$, $K\\left(0 ; 1 ; \\dfrac{1}{2}\\right)$, $L\\left(0 ; \\dfrac{1}{2} ; 1\\right)$, $M\\left(\\dfrac{1}{2} ; 0 ; 1\\right)$ et $N\\left(1 ; 0 ; \\dfrac{1}{2}\\right)$.\nPour chacun, la somme des coordonnées vaut $1 + \\dfrac{1}{2} = \\dfrac{3}{2}$ : les six milieux sont dans $\\mathscr{P}$.\nc) $\\overrightarrow{IJ}\\left(-\\dfrac{1}{2} ; \\dfrac{1}{2} ; 0\\right)$, donc $IJ = \\sqrt{\\dfrac{1}{4} + \\dfrac{1}{4}} = \\dfrac{\\sqrt{2}}{2}$.\n$\\overrightarrow{JK}\\left(-\\dfrac{1}{2} ; 0 ; \\dfrac{1}{2}\\right)$, donc $JK = \\dfrac{\\sqrt{2}}{2}$ aussi.\nLa coupe est un hexagone régulier, de côté $\\dfrac{\\sqrt{2}}{2} \\approx 0{,}71$ dm.\n⚠️ On attend un triangle ou un carré : c'est un hexagone. Seul le calcul des points le montre.\n⭐ Sur le dessin : l'hexagone orange touche six des douze arêtes, chacune en son milieu.",
           schema: cavaliere(
@@ -330,6 +403,10 @@ export const exercicesGeometrieEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "Dans un logiciel de modélisation 3D, un vecteur est une liste de trois nombres, et la fonction ci-dessous teste si deux vecteurs sont colinéaires.\na) Que renvoie colineaires([2, -1, 3], [-6, 3, -9]) ? Détailler a, b et c.\nb) Même question avec [1, 2, 3] et [2, 4, 5].\nc) Démontrer que si $\\vec{v} = k\\vec{u}$, la fonction renvoie True.\nd) Pourquoi ce test est-il plus sûr que le calcul des quotients des coordonnées ? Essayer avec [0, 0, 1] et [0, 0, -4].",
+          reponses: [
+            { question: "a)", attendu: ["True", "vrai", "oui"] },
+            { question: "b)", attendu: ["False", "faux", "non"] },
+          ],
           figure: programme(["def colineaires(u, v):", "    a = u[1]*v[2] - u[2]*v[1]", "    b = u[2]*v[0] - u[0]*v[2]", "    c = u[0]*v[1] - u[1]*v[0]", "    return a == b == c == 0"]),
           correction:
             "a) $a = (-1) \\times (-9) - 3 \\times 3 = 0$, $b = 3 \\times (-6) - 2 \\times (-9) = 0$ et $c = 2 \\times 3 - (-1) \\times (-6) = 0$.\nLes trois sont nuls : la fonction renvoie True. En effet, $\\vec{v} = -3\\vec{u}$.\nb) $a = 2 \\times 5 - 3 \\times 4 = -2$. Déjà $a \\neq 0$ : la fonction renvoie False.\nc) Si $\\vec{u}(x ; y ; z)$ et $\\vec{v} = k\\vec{u}$, alors v[1] vaut $ky$ et v[2] vaut $kz$ : $a = y \\times kz - z \\times ky = 0$.\nDe même, $b = 0$ et $c = 0$ : la fonction renvoie True.\nd) Avec les quotients, on diviserait par $0$ : le quotient des premières coordonnées, $\\dfrac{0}{0}$, fait planter le programme.\nLes produits en croix donnent $a = b = c = 0$, donc True. C'est juste : $[0, 0, -4]$ vaut $-4$ fois $[0, 0, 1]$.\n⚠️ En Python, u[0] est la PREMIÈRE coordonnée : les indices commencent à 0.\n⭐ Le programme compare les coordonnées deux à deux par produits en croix, comme on teste la proportionnalité à la main.",
@@ -353,6 +430,16 @@ export const exercicesGeometrieEspaceTerminale: FicheExercicesData = {
           titre: "Les câbles de l'entrepôt",
           enonce:
             "Un entrepôt a la forme d'un pavé droit $ABCDEFGH$. Dans un repère orthonormé d'origine $A$ (unité : le mètre), $B(6 ; 0 ; 0)$, $D(0 ; 4 ; 0)$ et $E(0 ; 0 ; 3)$. $I$ est le milieu de $[BC]$.\na) Donner les coordonnées de $C$, $F$, $G$, $H$ et $I$.\nb) Un câble est tendu de $A$ à $G$, un autre de $E$ à $I$. Donner une représentation paramétrique des droites $(AG)$ et $(EI)$.\nc) Les deux câbles se touchent-ils ?\nd) Un troisième câble va de $D$ à $F$. Montrer qu'il croise le câble $[AG]$, et donner le point de croisement $\\Omega$.\ne) Vérifier que le plan $(BDE)$ a pour équation $2x + 3y + 4z - 12 = 0$. En quel point le câble $[AG]$ traverse-t-il ce plan ?",
+          reponses: [
+            { question: "a) C", attendu: "(6 ; 4 ; 0)", ordre: true },
+            { question: "a) F", attendu: "(6 ; 0 ; 3)", ordre: true },
+            { question: "a) G", attendu: "(6 ; 4 ; 3)", ordre: true },
+            { question: "a) H", attendu: "(0 ; 4 ; 3)", ordre: true },
+            { question: "a) I", attendu: "(6 ; 2 ; 0)", ordre: true },
+            { question: "c)", attendu: ["non", "faux"] },
+            { question: "d) Ω", attendu: "(3 ; 2 ; 1,5)", ordre: true },
+            { question: "e) point", attendu: "(2 ; 4/3 ; 1)", ordre: true },
+          ],
           figure: cavaliere(
             { A: [0, 0, 0, "so"], B: [6, 0, 0, "se"], C: [6, 4, 0, "e"], D: [0, 4, 0, "no"], E: [0, 0, 3, "o"], F: [6, 0, 3, "se"], G: [6, 4, 3, "ne"], H: [0, 4, 3, "no"], I: [6, 2, 0, "e"] },
             { pleins: "A-B B-C C-G G-F F-B E-F G-H H-E A-E", caches: "A-D D-C D-H", orange: "A-G E-I D-F" },
@@ -365,6 +452,11 @@ export const exercicesGeometrieEspaceTerminale: FicheExercicesData = {
           titre: "L'ombre du mât",
           enonce:
             "Un mât vertical $[OS]$ se dresse sur un sol plat, avec $O(0 ; 0 ; 0)$ et $S(0 ; 0 ; 6)$ (unité : le mètre). Le sol est plat ($z = 0$) jusqu'à la ligne $x + y = 3$ ; au-delà, le terrain monte selon le plan $\\mathscr{P}$ d'équation $x + y - z - 3 = 0$. Les rayons du soleil suivent le vecteur $\\vec{u}(2 ; 1 ; -3)$.\na) Donner une représentation paramétrique du rayon $\\Delta$ qui passe par $S$.\nb) Si le sol était plat partout, où serait l'ombre $S_0$ du sommet ? Vérifier qu'elle serait au-delà de la ligne $x + y = 3$.\nc) Montrer que $\\Delta$ coupe $\\mathscr{P}$ en un point $T$ à déterminer : c'est la vraie ombre du sommet.\nd) Vérifier que $T$ est sur la partie montante du terrain, puis calculer la longueur $ST$ du rayon, au centimètre près.",
+          reponses: [
+            { question: "b) S0", attendu: "(4 ; 2 ; 0)", ordre: true },
+            { question: "c) T", attendu: "(3 ; 1,5 ; 1,5)", ordre: true },
+            { question: "d) ST (m)", attendu: "1,5√(14)", tolerance: 0.011 },
+          ],
           correction:
             "a) $\\Delta$ passe par $S(0 ; 0 ; 6)$, dirigée par $\\vec{u}$ : $x = 2t$, $y = t$, $z = 6 - 3t$.\nb) Sur un sol plat, $z = 0$ : $6 - 3t = 0$, donc $t = 2$ et $S_0(4 ; 2 ; 0)$.\nMais $4 + 2 = 6 > 3$ : ce point est au-delà de la ligne, là où le terrain monte. Le rayon ne l'atteint pas : il rencontre la pente avant.\nc) On remplace dans l'équation de $\\mathscr{P}$ : $2t + t - (6 - 3t) - 3 = 0$, soit $6t - 9 = 0$, donc $t = 1{,}5$.\nAlors $T(3 ; 1{,}5 ; 1{,}5)$.\nd) $3 + 1{,}5 = 4{,}5 \\geqslant 3$ : $T$ est bien sur la pente, à $1{,}5$ m de haut.\n$\\overrightarrow{ST} = 1{,}5\\,\\vec{u}$, donc $ST = 1{,}5 \\times \\sqrt{4 + 1 + 9} = 1{,}5\\sqrt{14} \\approx 5{,}61$ m.\n⚠️ Attention au signe : $-(6 - 3t) = -6 + 3t$.\n⚠️ Le point $S_0$ du b) est sous la pente : un point d'un plan n'est pas forcément un point du terrain. On vérifie toujours que le point trouvé est sur la bonne partie.\n⭐ Sur le dessin : le rayon orange part du sommet $S$ et s'arrête sur la pente en $T$ ; son prolongement en pointillé irait jusqu'à $S_0$, caché sous le terrain.",
           schema: cavaliere(
@@ -377,6 +469,13 @@ export const exercicesGeometrieEspaceTerminale: FicheExercicesData = {
           titre: "Le trépied",
           enonce:
             "Un trépied d'appareil photo a son sommet en $S(0 ; 0 ; 3)$ et ses pieds au sol en $A(2 ; 1 ; 0)$, $B(-2 ; 1 ; 0)$ et $C(0 ; -2 ; 0)$ (unité : le décimètre). Des barres de renfort relient les milieux $I$, $J$, $K$ des pieds $[SA]$, $[SB]$ et $[SC]$.\na) Donner les coordonnées de $I$, $J$ et $K$.\nb) Montrer que $\\overrightarrow{IJ} = \\dfrac{1}{2}\\overrightarrow{AB}$ et $\\overrightarrow{IK} = \\dfrac{1}{2}\\overrightarrow{AC}$.\nc) En déduire que le plan $(IJK)$ des renforts est parallèle au sol $(ABC)$. Donner une équation de $(IJK)$.\nd) Un fil à plomb pend de $S$ le long de la droite $(SO)$, où $O$ est l'origine. Montrer que $O$ est le centre de gravité du triangle $ABC$, puis trouver le point où le fil traverse le plan des renforts.",
+          reponses: [
+            { question: "a) I", attendu: "(1 ; 0,5 ; 1,5)", ordre: true },
+            { question: "a) J", attendu: "(-1 ; 0,5 ; 1,5)", ordre: true },
+            { question: "a) K", attendu: "(0 ; -1 ; 1,5)", ordre: true },
+            { question: "c) équation", attendu: ["z - 1,5 = 0", "z - 1.5 = 0", "z = 1,5", "z = 1.5", "2z - 3 = 0"] },
+            { question: "d) point", attendu: "(0 ; 0 ; 1,5)", ordre: true },
+          ],
           figure: cavaliere(
             { S: [0, 0, 3, "n"], A: [2, 1, 0, "e"], B: [-2, 1, 0, "o"], C: [0, -2, 0, "s"], O: [0, 0, 0, "e"], I: [1, 0.5, 1.5, "ne"], J: [-1, 0.5, 1.5, "no"], K: [0, -1, 1.5, "o"] },
             { pleins: "S-A S-B S-C", caches: "A-B B-C C-A", orange: "I-J J-K K-I", orangeCaches: "S-O" },
@@ -389,6 +488,12 @@ export const exercicesGeometrieEspaceTerminale: FicheExercicesData = {
           titre: "Les deux équipes du tunnel",
           enonce:
             "Deux équipes creusent un tunnel sous une colline, chacune depuis une entrée (unité : la dizaine de mètres). La première part de $A(0 ; 0 ; 0)$ et creuse selon $\\vec{u}(4 ; 2 ; 1)$. La seconde part de $B(12 ; 0 ; 4)$ et creuse selon $\\vec{v}(-2 ; 2 ; a)$, où $a$ est un réel à régler.\na) Écrire une représentation paramétrique de chaque trajectoire : $d_1$ (paramètre $t$) et $d_2$ (paramètre $s$).\nb) On prend $a = 0$. Montrer que les trajectoires sont non coplanaires.\nc) Déterminer $a$ pour que les deux équipes se rejoignent. Donner le point de jonction $P$.\nd) Quelle longueur de tunnel chaque équipe creuse-t-elle, au mètre près ?",
+          reponses: [
+            { question: "c) a", attendu: "-1" },
+            { question: "c) P", attendu: "(8 ; 4 ; 2)", ordre: true },
+            { question: "d) première équipe (m)", attendu: "20√(21)", tolerance: 0.6 },
+            { question: "d) seconde équipe (m)", attendu: "60" },
+          ],
           correction:
             "a) $d_1$ : $x = 4t$, $y = 2t$, $z = t$. Et $d_2$ : $x = 12 - 2s$, $y = 2s$, $z = 4 + as$.\nb) Avec $a = 0$, $\\vec{v}(-2 ; 2 ; 0)$ n'est pas colinéaire à $\\vec{u}$ : sa troisième coordonnée est nulle, pas celle de $\\vec{u}$.\nPoint commun ? $2t = 2s$ donne $t = s$ ; puis $4t = 12 - 2t$ donne $t = 2$. Mais $z$ vaut $2$ d'un côté et $4$ de l'autre.\nAucun point commun, pas parallèles : les trajectoires sont non coplanaires.\nc) Les deux premières équations ne contiennent pas $a$ : elles donnent toujours $t = s = 2$.\nLa troisième demande $2 = 4 + 2a$, donc $a = -1$. Les équipes se rejoignent en $P(8 ; 4 ; 2)$.\nd) $\\overrightarrow{AP} = 2\\vec{u}$ et $\\|\\vec{u}\\| = \\sqrt{16 + 4 + 1} = \\sqrt{21}$, donc $AP = 2\\sqrt{21} \\approx 9{,}165$ : environ $92$ m.\n$\\overrightarrow{BP} = 2\\vec{v}$ avec $\\vec{v}(-2 ; 2 ; -1)$, de norme $3$ : $BP = 6$, soit $60$ m.\n⚠️ Si $a \\neq -1$, les tunnels passent l'un près de l'autre sans jamais se rencontrer : une petite erreur de pente suffit à tout rater.\n⚠️ L'unité est la dizaine de mètres : $9{,}165$ unités font environ $92$ m, pas $9$ m.\n⭐ Sur le dessin : avec $a = 0$ (pointillé gris), la seconde équipe passerait $20$ m au-dessus de $P$.",
           schema: cavaliere(

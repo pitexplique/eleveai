@@ -148,6 +148,12 @@ export const exercicesProduitScalaireEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "Dans un repère orthonormé, on donne $\\vec{u}(1 ; -2 ; 3)$ et $\\vec{v}(4 ; 1 ; -1)$.\na) Calculer $\\vec{u} \\cdot \\vec{v}$.\nb) Calculer $\\vec{u} \\cdot \\vec{u}$, puis $\\|\\vec{u}\\|$.\nc) En déduire $(2\\vec{u}) \\cdot (\\vec{v} - \\vec{u})$ sans recalculer de coordonnées.",
+          reponses: [
+            { question: "a)", attendu: "-1" },
+            { question: "b) u·u", attendu: "14" },
+            { question: "b) norme", attendu: "√(14)" },
+            { question: "c)", attendu: "-30" },
+          ],
           correction:
             "a) On multiplie coordonnée par coordonnée, puis on additionne : $\\vec{u} \\cdot \\vec{v} = 1 \\times 4 + (-2) \\times 1 + 3 \\times (-1)$.\nSoit $4 - 2 - 3 = -1$.\nb) $\\vec{u} \\cdot \\vec{u} = 1 + 4 + 9 = 14$, donc $\\|\\vec{u}\\| = \\sqrt{14}$.\nc) Le produit scalaire se développe comme un produit : $(2\\vec{u}) \\cdot (\\vec{v} - \\vec{u}) = 2(\\vec{u} \\cdot \\vec{v} - \\vec{u} \\cdot \\vec{u})$.\nSoit $2(-1 - 14) = -30$.\n⚠️ Un produit scalaire est un NOMBRE, pas un vecteur : on n'écrit jamais $\\vec{u} \\cdot \\vec{v} = (4 ; -2 ; -3)$.\n⭐ Le tableau pose les trois produits avant de les additionner.",
           schema: ecranSeulement(tableau(["coordonnée", "x", "y", "z", "somme"], ["produit", "4", "−2", "−3", "−1"])),
@@ -156,6 +162,11 @@ export const exercicesProduitScalaireEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "$ABCDEFGH$ est un cube d'arête $1$ : $ABCD$ est la face du bas, et $E$, $F$, $G$, $H$ sont au-dessus de $A$, $B$, $C$, $D$. Sans coordonnées, en projetant, calculer :\na) $\\overrightarrow{AB} \\cdot \\overrightarrow{AG}$\nb) $\\overrightarrow{AE} \\cdot \\overrightarrow{BC}$\nc) $\\overrightarrow{AB} \\cdot \\overrightarrow{GH}$",
+          reponses: [
+            { question: "a)", attendu: "1" },
+            { question: "b)", attendu: "0" },
+            { question: "c)", attendu: "-1" },
+          ],
           correction:
             "a) Le projeté orthogonal de $G$ sur la droite $(AB)$ est $B$ : $G$ est au-dessus de $C$, et $C$ se projette en $B$.\nDonc $\\overrightarrow{AB} \\cdot \\overrightarrow{AG} = \\overrightarrow{AB} \\cdot \\overrightarrow{AB} = AB^2 = 1$.\nb) $\\overrightarrow{BC} = \\overrightarrow{AD}$, et $(AE)$ est perpendiculaire à $(AD)$ : $\\overrightarrow{AE} \\cdot \\overrightarrow{BC} = \\overrightarrow{AE} \\cdot \\overrightarrow{AD} = 0$.\nc) $\\overrightarrow{GH} = \\overrightarrow{BA} = -\\overrightarrow{AB}$, donc $\\overrightarrow{AB} \\cdot \\overrightarrow{GH} = -AB^2 = -1$.\n⚠️ En a), $AG = \\sqrt{3}$, mais on ne multiplie pas $1 \\times \\sqrt{3}$ : seule compte la part de $\\overrightarrow{AG}$ dans la direction de $\\overrightarrow{AB}$.\n⚠️ En c), les vecteurs sont de sens contraires : le produit est NÉGATIF.\n⭐ Sur le dessin : de $G$, on descend en $C$, puis on glisse en $B$ ; le trajet orange pointillé mène au projeté de $G$ sur $(AB)$.",
           schema: ecranSeulement(
@@ -169,6 +180,10 @@ export const exercicesProduitScalaireEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "a) Les vecteurs $\\vec{u}(2 ; -1 ; 3)$ et $\\vec{v}(1 ; 5 ; 1)$ sont-ils orthogonaux ?\nb) Pour quelle valeur du réel $m$ les vecteurs $\\vec{a}(1 ; m ; 2)$ et $\\vec{b}(3 ; 1 ; -3)$ sont-ils orthogonaux ?",
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: "3" },
+          ],
           correction:
             "a) $\\vec{u} \\cdot \\vec{v} = 2 - 5 + 3 = 0$ : les vecteurs sont orthogonaux.\nb) $\\vec{a} \\cdot \\vec{b} = 3 + m - 6 = m - 3$. Il est nul si et seulement si $m = 3$.\n⚠️ Orthogonaux ne veut pas dire « qui se coupent » : un vecteur n'a pas de position. Ce sont leurs DIRECTIONS qui forment un angle droit.\n⭐ Le tableau montre les trois produits du a) : $2$, $-5$ et $3$, de somme nulle.",
           schema: ecranSeulement(tableau(["coordonnée", "x", "y", "z", "somme"], ["produit", "2", "−5", "3", "0"])),
@@ -177,6 +192,11 @@ export const exercicesProduitScalaireEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "Dans un repère orthonormé :\na) Calculer la norme de $\\vec{u}(6 ; 2 ; 3)$.\nb) Calculer la distance $AB$, avec $A(1 ; 2 ; -1)$ et $B(3 ; 0 ; 0)$.\nc) Donner un vecteur de norme $1$, colinéaire à $\\vec{u}$ et de même sens.",
+          reponses: [
+            { question: "a)", attendu: "7" },
+            { question: "b)", attendu: "3" },
+            { question: "c)", attendu: "(6/7 ; 2/7 ; 3/7)", ordre: true },
+          ],
           correction:
             "a) $\\|\\vec{u}\\|^2 = 6^2 + 2^2 + 3^2 = 36 + 4 + 9 = 49$, donc $\\|\\vec{u}\\| = 7$.\nb) $\\overrightarrow{AB}(2 ; -2 ; 1)$, donc $AB = \\sqrt{4 + 4 + 1} = 3$.\nc) On divise par la norme : $\\dfrac{1}{7}\\vec{u}$, de coordonnées $\\left(\\dfrac{6}{7} ; \\dfrac{2}{7} ; \\dfrac{3}{7}\\right)$.\n⚠️ La norme n'est pas la somme des coordonnées ($6 + 2 + 3 = 11$) : on passe par les carrés.\n⭐ Sur le dessin : $\\vec{u} = \\overrightarrow{OM}$ est la grande diagonale d'un pavé de côtés $6$, $2$ et $3$. Pythagore dans la face du bas donne $\\sqrt{40}$ (pointillé), puis dans le rectangle vertical, $\\sqrt{40 + 9} = 7$.",
           schema: cavaliere(
@@ -191,6 +211,13 @@ export const exercicesProduitScalaireEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "Dans le cube $ABCDEFGH$ d'arête $1$ ci-dessous, muni du repère $(A ; \\overrightarrow{AB}, \\overrightarrow{AD}, \\overrightarrow{AE})$, on cherche l'angle $\\widehat{FAC}$.\na) Calculer $\\overrightarrow{AF} \\cdot \\overrightarrow{AC}$.\nb) Calculer $AF$ et $AC$, puis $\\cos \\widehat{FAC}$.\nc) En déduire l'angle $\\widehat{FAC}$.",
+          reponses: [
+            { question: "a)", attendu: "1" },
+            { question: "b) AF", attendu: "√(2)" },
+            { question: "b) AC", attendu: "√(2)" },
+            { question: "b) cos", attendu: "1/2" },
+            { question: "c)", attendu: "60" },
+          ],
           figure: cavaliere(
             { A: [0, 0, 0, "so"], B: [1, 0, 0, "se"], C: [1, 1, 0, "e"], D: [0, 1, 0, "no"], E: [0, 0, 1, "o"], F: [1, 0, 1, "nno"], G: [1, 1, 1, "ne"], H: [0, 1, 1, "no"] },
             { pleins: "A-B B-C C-G G-F F-B E-F G-H H-E A-E", caches: "A-D D-C D-H", face: "A-F-C", orange: "A-F A-C F-C" },
@@ -202,6 +229,9 @@ export const exercicesProduitScalaireEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "Déterminer une équation cartésienne du plan $\\mathscr{P}$ qui passe par $A(1 ; 2 ; 3)$ et qui admet $\\vec{n}(2 ; -1 ; 1)$ pour vecteur normal.",
+          reponses: [
+            { attendu: ["2x - y + z - 3 = 0", "2x-y+z=3", "-2x + y - z + 3 = 0"] },
+          ],
           correction:
             "Méthode 1. Un point $M(x ; y ; z)$ est dans $\\mathscr{P}$ si et seulement si $\\overrightarrow{AM} \\cdot \\vec{n} = 0$.\n$\\overrightarrow{AM}(x - 1 ; y - 2 ; z - 3)$, donc $2(x - 1) - (y - 2) + (z - 3) = 0$.\nOn développe : $2x - 2 - y + 2 + z - 3 = 0$, soit $2x - y + z - 3 = 0$.\nMéthode 2. L'équation est de la forme $2x - y + z + d = 0$, et $A$ la vérifie : $2 - 2 + 3 + d = 0$, donc $d = -3$.\n⚠️ Le vecteur normal donne $a$, $b$, $c$ ; c'est le POINT qui donne $d$. L'oublier, c'est écrire un plan parallèle au bon.\n⭐ Sur le dessin : le vecteur $\\vec{n}$, planté en $A$, sort du plan ; le vecteur $\\overrightarrow{AM}$, vers un autre point du plan, reste couché dedans.",
           schema: ecranSeulement(
@@ -215,6 +245,9 @@ export const exercicesProduitScalaireEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "On donne les plans $\\mathscr{P}$ : $2x - y + z - 3 = 0$, $\\mathscr{Q}$ : $x + y - z + 5 = 0$ et $\\mathscr{R}$ : $-4x + 2y - 2z + 1 = 0$.\na) Donner un vecteur normal à chacun.\nb) Montrer que $\\mathscr{P}$ et $\\mathscr{Q}$ sont perpendiculaires.\nc) Montrer que $\\mathscr{P}$ et $\\mathscr{R}$ sont parallèles. Sont-ils confondus ?",
+          reponses: [
+            { question: "c) confondus ?", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $\\vec{n}(2 ; -1 ; 1)$, $\\vec{n'}(1 ; 1 ; -1)$ et $\\vec{n''}(-4 ; 2 ; -2)$.\nb) $\\vec{n} \\cdot \\vec{n'} = 2 - 1 - 1 = 0$ : les vecteurs normaux sont orthogonaux, donc les plans sont perpendiculaires.\nc) $\\vec{n''} = -2\\vec{n}$ : les vecteurs normaux sont colinéaires, les plans sont parallèles.\n$A(0 ; 0 ; 3)$ est dans $\\mathscr{P}$ ($0 - 0 + 3 - 3 = 0$), mais pas dans $\\mathscr{R}$ ($0 + 0 - 6 + 1 = -5$). Les plans sont strictement parallèles.\n⚠️ On raisonne sur les NORMALES : normales orthogonales, plans perpendiculaires ; normales colinéaires, plans parallèles.\n⭐ Le tableau compare $\\vec{n''}$ et $\\vec{n}$ : le quotient vaut $-2$ sur les trois coordonnées.",
           schema: ecranSeulement(tableau(["coordonnée", "x", "y", "z"], ["n'' ÷ n", "−2", "−2", "−2"])),
@@ -223,6 +256,12 @@ export const exercicesProduitScalaireEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "Soit $\\mathscr{P}$ le plan d'équation $2x - y + z = 0$.\na) La droite $d$ : $x = 2t$, $y = -t$, $z = t$ est-elle orthogonale à $\\mathscr{P}$ ? En quel point le coupe-t-elle ?\nb) La droite $d'$ : $x = 1 + t$, $y = 1 + t$, $z = 5 - t$ est-elle parallèle à $\\mathscr{P}$ ? Est-elle contenue dans $\\mathscr{P}$ ?",
+          reponses: [
+            { question: "a) orthogonale ?", attendu: ["oui", "vrai"] },
+            { question: "a) point", attendu: "(0 ; 0 ; 0)", ordre: true },
+            { question: "b) parallèle ?", attendu: ["oui", "vrai"] },
+            { question: "b) contenue ?", attendu: ["non", "faux"] },
+          ],
           correction:
             "a) $d$ est dirigée par $\\vec{u}(2 ; -1 ; 1)$, et $\\vec{n}(2 ; -1 ; 1)$ est normal à $\\mathscr{P}$.\n$\\vec{u} = \\vec{n}$ : la droite est dirigée par un vecteur normal, elle est orthogonale au plan.\nOn remplace : $4t + t + t = 0$, donc $t = 0$ : elle coupe $\\mathscr{P}$ en $O(0 ; 0 ; 0)$.\nb) $\\vec{u'}(1 ; 1 ; -1)$ et $\\vec{n} \\cdot \\vec{u'} = 2 - 1 - 1 = 0$ : $d'$ est parallèle à $\\mathscr{P}$.\nLe point $(1 ; 1 ; 5)$ de $d'$ donne $2 - 1 + 5 = 6 \\neq 0$ : il n'est pas dans $\\mathscr{P}$. $d'$ est strictement parallèle au plan.\n⚠️ Piège classique : $\\vec{u} \\cdot \\vec{n} = 0$ veut dire que la droite est PARALLÈLE au plan, pas orthogonale. Orthogonale, c'est $\\vec{u}$ colinéaire à $\\vec{n}$.\n⭐ Sur le dessin : $d$ traverse le plan en $O$, comme un clou planté droit.",
           schema: ecranSeulement(
@@ -251,6 +290,10 @@ export const exercicesProduitScalaireEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "Deux balises émettent depuis $A(1 ; 0 ; 2)$ et $B(3 ; 4 ; 0)$ (unité : le kilomètre). Un drone doit toujours rester à égale distance des deux balises.\na) Montrer qu'un point $M(x ; y ; z)$ vérifie $MA = MB$ si et seulement si $x + 2y - z - 5 = 0$.\nb) Quel est cet ensemble de points ? Vérifier que le milieu $I$ de $[AB]$ en fait partie, et que $\\overrightarrow{AB}$ lui est normal.\nc) Le drone peut-il passer par $C(4 ; 1 ; 1)$ ?",
+          reponses: [
+            { question: "b)", attendu: ["plan médiateur", "le plan médiateur", "plan médiateur de [AB]", "le plan médiateur de [AB]"] },
+            { question: "c)", attendu: ["oui", "vrai"] },
+          ],
           correction:
             "a) $MA = MB$ équivaut à $MA^2 = MB^2$, car les distances sont positives.\n$MA^2 = (x - 1)^2 + y^2 + (z - 2)^2$ et $MB^2 = (x - 3)^2 + (y - 4)^2 + z^2$.\nOn développe ; $x^2$, $y^2$ et $z^2$ sont des deux côtés et s'en vont :\n$-2x + 1 - 4z + 4 = -6x + 9 - 8y + 16$.\nSoit $4x + 8y - 4z - 20 = 0$ ; on divise par $4$ : $x + 2y - z - 5 = 0$.\nb) C'est l'équation d'un plan : le plan médiateur de $[AB]$.\n$I(2 ; 2 ; 1)$, et $2 + 4 - 1 - 5 = 0$ : $I$ est dans le plan.\n$\\overrightarrow{AB}(2 ; 4 ; -2) = 2 \\times (1 ; 2 ; -1)$ : il est colinéaire au vecteur normal $\\vec{n}(1 ; 2 ; -1)$ lu sur l'équation.\nc) $4 + 2 - 1 - 5 = 0$ : oui. Contrôle : $CA^2 = 9 + 1 + 1 = 11$ et $CB^2 = 1 + 9 + 1 = 11$.\n⚠️ On passe aux carrés pour se débarrasser des racines ; c'est permis parce que $MA$ et $MB$ sont positifs.\n⭐ Sur le dessin : le plan passe par le milieu $I$, et le segment $[AB]$ le traverse à angle droit ; $C$ est dans le plan.",
           schema: cavaliere(
@@ -262,6 +305,12 @@ export const exercicesProduitScalaireEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "Une caméra est fixée en $M(4 ; 4 ; 2)$. Elle filme un câble tendu le long de la droite $d$ : $x = 1 + t$, $y = t$, $z = t$ (unité : le mètre), dirigée par $\\vec{u}(1 ; 1 ; 1)$.\na) Soit $H$ le point de $d$ de paramètre $t$. Exprimer $\\overrightarrow{MH}$ en fonction de $t$.\nb) Trouver $t$ pour que $\\overrightarrow{MH}$ soit orthogonal à $\\vec{u}$. En déduire $H$ et la distance $MH$.\nc) Démontrer que, pour tout point $N$ de $d$, $MN \\geqslant MH$. Que représente $H$ pour la caméra ?",
+          reponses: [
+            { question: "a)", attendu: "(t-3 ; t-4 ; t-2)", ordre: true },
+            { question: "b) t", attendu: "3" },
+            { question: "b) H", attendu: "(4 ; 3 ; 3)", ordre: true },
+            { question: "b) MH", attendu: "√(2)", tolerance: 0.011 },
+          ],
           correction:
             "a) $H(1 + t ; t ; t)$, donc $\\overrightarrow{MH}(t - 3 ; t - 4 ; t - 2)$.\nb) $\\overrightarrow{MH} \\cdot \\vec{u} = (t - 3) + (t - 4) + (t - 2) = 3t - 9$. Il est nul pour $t = 3$.\nAlors $H(4 ; 3 ; 3)$, $\\overrightarrow{MH}(0 ; -1 ; 1)$ et $MH = \\sqrt{2} \\approx 1{,}41$ m.\nc) Soit $N$ un point de $d$. $\\overrightarrow{HN}$ est colinéaire à $\\vec{u}$, donc orthogonal à $\\overrightarrow{MH}$ : le triangle $MHN$ est rectangle en $H$.\nPythagore : $MN^2 = MH^2 + HN^2 \\geqslant MH^2$, donc $MN \\geqslant MH$, avec égalité seulement si $N = H$.\n$H$ est le point du câble le plus proche de la caméra.\n⚠️ Le point le plus proche n'est pas celui de paramètre $t = 0$ : c'est celui où $\\overrightarrow{MH}$ fait un angle droit avec le câble.\n⭐ Sur le dessin : le segment orange $[MH]$ est perpendiculaire au câble ; le point $N$ du câble (ici $t = 4$) est plus loin de $M$ que $H$.",
           schema: cavaliere(
@@ -273,6 +322,10 @@ export const exercicesProduitScalaireEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "Soit $\\mathscr{P}$ le plan d'équation $2x - y + 2z - 3 = 0$, et le point $M(4 ; 0 ; 2)$.\na) Donner une représentation paramétrique de la droite $\\Delta$ qui passe par $M$ et qui est orthogonale à $\\mathscr{P}$.\nb) En déduire le projeté orthogonal $H$ de $M$ sur $\\mathscr{P}$.\nc) Calculer la distance du point $M$ au plan $\\mathscr{P}$.",
+          reponses: [
+            { question: "b) H", attendu: "(2 ; 1 ; 0)", ordre: true },
+            { question: "c)", attendu: "3" },
+          ],
           correction:
             "a) $\\Delta$ est dirigée par un vecteur normal au plan, $\\vec{n}(2 ; -1 ; 2)$ : $x = 4 + 2t$, $y = -t$, $z = 2 + 2t$.\nb) $H$ est le point commun à $\\Delta$ et $\\mathscr{P}$ : $2(4 + 2t) - (-t) + 2(2 + 2t) - 3 = 0$.\nSoit $9t + 9 = 0$, donc $t = -1$, et $H(2 ; 1 ; 0)$.\nContrôle : $4 - 1 + 0 - 3 = 0$, $H$ est bien dans $\\mathscr{P}$.\nc) $\\overrightarrow{MH}(-2 ; 1 ; -2)$, donc $MH = \\sqrt{4 + 1 + 4} = 3$. La distance de $M$ à $\\mathscr{P}$ vaut $3$.\n⚠️ $-(-t) = +t$ : c'est l'erreur de signe la plus fréquente de ce calcul.\n⚠️ La distance à un plan se mesure le long de la normale, pas en « descendant à la verticale ».\n⭐ Sur le dessin : $[MH]$ est perpendiculaire au plan, et $H$ est à son pied.",
           schema: cavaliere(
@@ -284,6 +337,11 @@ export const exercicesProduitScalaireEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "Dans une molécule de méthane, l'atome de carbone est au centre d'un tétraèdre régulier dont les sommets sont les quatre atomes d'hydrogène. On modélise : $C(0 ; 0 ; 0)$, $H_1(1 ; 1 ; 1)$, $H_2(1 ; -1 ; -1)$, $H_3(-1 ; 1 ; -1)$ et $H_4(-1 ; -1 ; 1)$.\na) Vérifier que les quatre hydrogènes sont à la même distance de $C$, et que $H_1H_2 = H_1H_3 = H_1H_4$.\nb) Calculer $\\overrightarrow{CH_1} \\cdot \\overrightarrow{CH_2}$, puis le cosinus de l'angle $\\widehat{H_1CH_2}$.\nc) En déduire cet angle au dixième de degré.",
+          reponses: [
+            { question: "b) produit scalaire", attendu: "-1" },
+            { question: "b) cos", attendu: "-1/3" },
+            { question: "c)", attendu: "109.5", tolerance: 0.051 },
+          ],
           figure: cavaliere(
             {
               g1: [-1, -1, -1, ""], H2: [1, -1, -1, "se", "H₂"], g2: [1, 1, -1, ""], H3: [-1, 1, -1, "s", "H₃"],
@@ -304,6 +362,12 @@ export const exercicesProduitScalaireEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "$ABCDEFGH$ est un cube d'arête $1$, muni du repère $(A ; \\overrightarrow{AB}, \\overrightarrow{AD}, \\overrightarrow{AE})$.\na) Calculer $\\overrightarrow{EC} \\cdot \\overrightarrow{BD}$ et $\\overrightarrow{EC} \\cdot \\overrightarrow{BG}$.\nb) En déduire que la droite $(EC)$ est orthogonale au plan $(BDG)$.\nc) En déduire une équation cartésienne du plan $(BDG)$.\nd) Déterminer le point d'intersection $K$ de $(EC)$ et de $(BDG)$.",
+          reponses: [
+            { question: "a) EC·BD", attendu: "0" },
+            { question: "a) EC·BG", attendu: "0" },
+            { question: "c)", attendu: ["x + y - z - 1 = 0", "x+y-z=1", "-x - y + z + 1 = 0"] },
+            { question: "d) K", attendu: "(2/3 ; 2/3 ; 1/3)", ordre: true },
+          ],
           figure: cavaliere(
             { A: [0, 0, 0, "so"], B: [1, 0, 0, "se"], C: [1, 1, 0, "e"], D: [0, 1, 0, "no"], E: [0, 0, 1, "o"], F: [1, 0, 1, "se"], G: [1, 1, 1, "ne"], H: [0, 1, 1, "no"], K: [2 / 3, 2 / 3, 1 / 3, "nno"] },
             { pleins: "A-B B-C C-G G-F F-B E-F G-H H-E A-E B-G", caches: "A-D D-C D-H B-D D-G", face: "B-D-G", orange: "E-C" },
@@ -315,6 +379,12 @@ export const exercicesProduitScalaireEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "Un escalator monte de $A(0 ; 0 ; 0)$ à $B(6 ; 8 ; 5)$ (unité : le mètre ; l'axe des cotes est vertical). On note $B'(6 ; 8 ; 0)$ le point du sol à la verticale de $B$.\na) Calculer $\\overrightarrow{AB} \\cdot \\overrightarrow{AB'}$, puis $AB$ et $AB'$.\nb) En déduire l'angle $\\widehat{BAB'}$ que fait l'escalator avec le sol, au dixième de degré.\nc) Retrouver ce résultat avec la trigonométrie du triangle $ABB'$.",
+          reponses: [
+            { question: "a) produit scalaire", attendu: "100" },
+            { question: "a) AB", attendu: "5√(5)" },
+            { question: "a) AB'", attendu: "10" },
+            { question: "b)", attendu: "26.6", tolerance: 0.051 },
+          ],
           correction:
             "a) $\\overrightarrow{AB}(6 ; 8 ; 5)$ et $\\overrightarrow{AB'}(6 ; 8 ; 0)$ : $\\overrightarrow{AB} \\cdot \\overrightarrow{AB'} = 36 + 64 + 0 = 100$.\n$AB = \\sqrt{36 + 64 + 25} = \\sqrt{125} = 5\\sqrt{5}$ et $AB' = \\sqrt{100} = 10$.\nb) $\\cos \\widehat{BAB'} = \\dfrac{100}{5\\sqrt{5} \\times 10} = \\dfrac{2}{\\sqrt{5}} \\approx 0{,}894$, donc $\\widehat{BAB'} \\approx 26{,}6^\\circ$.\nc) Le triangle est rectangle en $B'$ : $\\tan \\widehat{BAB'} = \\dfrac{BB'}{AB'} = \\dfrac{5}{10} = 0{,}5$, et on retrouve $26{,}6^\\circ$.\n⚠️ L'angle avec le sol se mesure entre $\\overrightarrow{AB}$ et sa projection $\\overrightarrow{AB'}$ sur le sol, pas avec un axe du repère.\n⭐ Sur le dessin : le triangle $ABB'$ est vertical, rectangle en $B'$ ; l'escalator orange en est l'hypoténuse.",
           schema: ecranSeulement(
@@ -328,6 +398,13 @@ export const exercicesProduitScalaireEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "Dans l'angle d'une pièce, on ferme un coffre en forme de tétraèdre $OABC$ par une plaque triangulaire $ABC$. Dans un repère orthonormé d'origine le coin $O$ (unité : le décimètre) : $A(4 ; 0 ; 0)$, $B(0 ; -4 ; 0)$ et $C(0 ; 0 ; 2)$.\na) Calculer le volume du coffre, en prenant le triangle $OAB$ pour base.\nb) Montrer que $\\vec{n}(1 ; -1 ; 2)$ est normal au plan $(ABC)$, et en déduire une équation de ce plan.\nc) Déterminer le projeté orthogonal $H$ de $O$ sur $(ABC)$, puis la distance $OH$.\nd) En écrivant le volume avec la base $ABC$, en déduire l'aire de la plaque.",
+          reponses: [
+            { question: "a) volume", attendu: "16/3", tolerance: 0.011 },
+            { question: "b) équation", attendu: ["x - y + 2z - 4 = 0", "x-y+2z=4", "-x + y - 2z + 4 = 0"] },
+            { question: "c) H", attendu: "(2/3 ; -2/3 ; 4/3)", ordre: true },
+            { question: "c) OH", attendu: "2√(6)/3", tolerance: 0.011 },
+            { question: "d) aire", attendu: "4√(6)", tolerance: 0.011 },
+          ],
           correction:
             "a) $OAB$ est rectangle en $O$, d'aire $\\dfrac{4 \\times 4}{2} = 8$ ; la hauteur est $OC = 2$. Donc $V = \\dfrac{1}{3} \\times 8 \\times 2 = \\dfrac{16}{3} \\approx 5{,}33$ dm³.\nb) $\\overrightarrow{AB}(-4 ; -4 ; 0)$ et $\\overrightarrow{AC}(-4 ; 0 ; 2)$, non colinéaires.\n$\\vec{n} \\cdot \\overrightarrow{AB} = -4 + 4 + 0 = 0$ et $\\vec{n} \\cdot \\overrightarrow{AC} = -4 + 0 + 4 = 0$ : $\\vec{n}$ est normal au plan.\nÉquation $x - y + 2z + d = 0$ ; avec $A$ : $4 + d = 0$, d'où $x - y + 2z - 4 = 0$.\nc) La droite $(OH)$ est dirigée par $\\vec{n}$ : $x = t$, $y = -t$, $z = 2t$. On remplace : $t + t + 4t - 4 = 0$, donc $t = \\dfrac{2}{3}$.\n$H\\left(\\dfrac{2}{3} ; -\\dfrac{2}{3} ; \\dfrac{4}{3}\\right)$ et $OH = \\dfrac{2}{3}\\|\\vec{n}\\| = \\dfrac{2\\sqrt{6}}{3} \\approx 1{,}63$ dm.\nd) $V = \\dfrac{1}{3} \\times \\mathcal{A} \\times OH$, donc $\\mathcal{A} = \\dfrac{3V}{OH} = \\dfrac{16}{\\dfrac{2\\sqrt{6}}{3}}$.\nSoit $\\mathcal{A} = \\dfrac{24}{\\sqrt{6}} = 4\\sqrt{6} \\approx 9{,}80$ dm².\n⚠️ La hauteur relative à la base $ABC$ n'est pas $OC$ : c'est $OH$, mesurée perpendiculairement à la plaque.\n⭐ Sur le dessin : le coin $O$ est derrière la plaque ; la hauteur orange $[OH]$ tombe perpendiculairement sur elle.",
           schema: cavaliere(
@@ -339,6 +416,11 @@ export const exercicesProduitScalaireEspaceTerminale: FicheExercicesData = {
         {
           enonce:
             "Un moteur de jeu vidéo 3D calcule des angles avec les fonctions ci-dessous.\na) Que calcule ps(u, v) ? Que vaut ps([1, -2, 3], [4, 1, -1]) ?\nb) Expliquer la fonction angle. Que renvoie angle([1, 1, 0], [1, 0, 1]) ?\nc) Que renvoie angle([1, 2, 2], [2, -2, 1]) ? Interpréter.\nd) Que se passe-t-il si l'un des vecteurs est nul ?",
+          reponses: [
+            { question: "a)", attendu: "-1" },
+            { question: "b)", attendu: "60" },
+            { question: "c)", attendu: "90" },
+          ],
           figure: programme([
             "from math import sqrt, acos",
             "from math import degrees",
@@ -375,6 +457,11 @@ export const exercicesProduitScalaireEspaceTerminale: FicheExercicesData = {
           titre: "Les panneaux solaires du toit",
           enonce:
             "Un pan de toit est le rectangle $ABCD$, avec $A(0 ; 0 ; 3)$, $B(8 ; 0 ; 3)$, $C(8 ; 4 ; 6)$ et $D(0 ; 4 ; 6)$ (unité : le mètre ; l'axe des cotes est vertical). On y pose des panneaux solaires.\na) Montrer que $\\vec{n}(0 ; -3 ; 4)$ est normal au plan $(ABD)$, et en déduire une équation de ce plan. Vérifier que $C$ y est.\nb) Montrer que le point $E(4 ; 2 ; 4{,}5)$ est le centre du rectangle.\nc) Calculer l'angle entre $\\vec{n}$ et le vecteur vertical $\\vec{k}(0 ; 0 ; 1)$ : c'est l'inclinaison du toit, au dixième de degré.\nd) À midi, le soleil est dans la direction $\\vec{s}(1 ; -2 ; 2)$. On admet que la puissance reçue par un panneau est proportionnelle au cosinus de l'angle entre $\\vec{n}$ et $\\vec{s}$. Quelle part de sa puissance maximale le panneau reçoit-il ?",
+          reponses: [
+            { question: "a) équation", attendu: ["-3y + 4z - 12 = 0", "3y - 4z + 12 = 0", "4z - 3y - 12 = 0", "-3y+4z=12"] },
+            { question: "c)", attendu: "36.9", tolerance: 0.051 },
+            { question: "d)", attendu: "14/15", tolerance: 0.011 },
+          ],
           figure: cavaliere(
             { a0: [0, 0, 0, ""], b0: [8, 0, 0, ""], c0: [8, 4, 0, ""], d0: [0, 4, 0, ""], A: [0, 0, 3, "o"], B: [8, 0, 3, "e"], C: [8, 4, 6, "e"], D: [0, 4, 6, "o"], E: [4, 2, 4.5, "s"], n: [4, 0.5, 6.5, "o"] },
             { pleins: "a0-b0 b0-B B-A A-a0 b0-c0 c0-C C-B A-D D-C", caches: "a0-d0 d0-c0 d0-D", face: "A-B-C-D", fleches: "E-n" },
@@ -387,6 +474,12 @@ export const exercicesProduitScalaireEspaceTerminale: FicheExercicesData = {
           titre: "Le bloc de pierre",
           enonce:
             "Un sculpteur taille un bloc de pierre en forme de tétraèdre $ABCD$ : $A(2 ; 1 ; 0)$, $B(4 ; -1 ; 1)$, $C(3 ; 3 ; 2)$ et $D(1 ; 0 ; 3)$ (unité : le décimètre).\na) Montrer que le triangle $ABC$ est rectangle en $A$, et calculer son aire.\nb) Montrer que $\\vec{n}(2 ; 1 ; -2)$ est normal au plan $(ABC)$, puis que ce plan a pour équation $2x + y - 2z - 5 = 0$.\nc) Déterminer le projeté orthogonal $H$ de $D$ sur $(ABC)$. Vérifier que $H$ est le centre de gravité du triangle $ABC$.\nd) Calculer le volume du bloc. La pierre pèse $2{,}5$ kg par décimètre cube : quelle est la masse du bloc ?",
+          reponses: [
+            { question: "a) aire", attendu: "4,5" },
+            { question: "c) H", attendu: "(3 ; 1 ; 1)", ordre: true },
+            { question: "d) volume", attendu: "4,5" },
+            { question: "d) masse", attendu: "11,25" },
+          ],
           correction:
             "a) $\\overrightarrow{AB}(2 ; -2 ; 1)$ et $\\overrightarrow{AC}(1 ; 2 ; 2)$ : $\\overrightarrow{AB} \\cdot \\overrightarrow{AC} = 2 - 4 + 2 = 0$. Le triangle est rectangle en $A$.\n$AB = \\sqrt{4 + 4 + 1} = 3$ et $AC = \\sqrt{1 + 4 + 4} = 3$ : l'aire vaut $\\dfrac{3 \\times 3}{2} = 4{,}5$ dm².\nb) $\\vec{n} \\cdot \\overrightarrow{AB} = 4 - 2 - 2 = 0$ et $\\vec{n} \\cdot \\overrightarrow{AC} = 2 + 2 - 4 = 0$.\n$\\overrightarrow{AB}$ et $\\overrightarrow{AC}$, orthogonaux et non nuls, ne sont pas colinéaires : $\\vec{n}$ est normal au plan.\nÉquation $2x + y - 2z + d = 0$ ; avec $A$ : $4 + 1 + d = 0$, donc $d = -5$.\nc) La droite passant par $D$ dirigée par $\\vec{n}$ : $x = 1 + 2t$, $y = t$, $z = 3 - 2t$.\nOn remplace : $2(1 + 2t) + t - 2(3 - 2t) - 5 = 0$, soit $9t - 9 = 0$, donc $t = 1$ et $H(3 ; 1 ; 1)$.\nCentre de gravité : $\\left(\\dfrac{2 + 4 + 3}{3} ; \\dfrac{1 - 1 + 3}{3} ; \\dfrac{0 + 1 + 2}{3}\\right) = (3 ; 1 ; 1)$. C'est $H$.\nd) $\\overrightarrow{DH} = \\vec{n}$, donc $DH = \\sqrt{4 + 1 + 4} = 3$.\n$V = \\dfrac{1}{3} \\times 4{,}5 \\times 3 = 4{,}5$ dm³, et la masse vaut $4{,}5 \\times 2{,}5 = 11{,}25$ kg.\n⚠️ Deux vecteurs orthogonaux et non nuls ne sont jamais colinéaires : c'est ce qui permet de conclure en b).\n⭐ Sur le dessin : la hauteur orange $[DH]$ tombe sur la face $ABC$, en son centre de gravité.",
           schema: cavaliere(
@@ -399,6 +492,12 @@ export const exercicesProduitScalaireEspaceTerminale: FicheExercicesData = {
           titre: "La conduite la plus courte",
           enonce:
             "Un réservoir est installé en $R(4 ; 8 ; 5)$, au-dessus du versant d'une colline modélisé par le plan $\\mathscr{P}$ d'équation $x + 2y + 2z - 12 = 0$ (unité : la dizaine de mètres). On veut le relier au versant par la conduite la plus courte possible.\na) Déterminer le projeté orthogonal $H$ de $R$ sur $\\mathscr{P}$, et la longueur $RH$.\nb) Démonstration. Soit $N$ un point quelconque de $\\mathscr{P}$. Justifier que $\\overrightarrow{RH} \\cdot \\overrightarrow{HN} = 0$, puis que $RN^2 = RH^2 + HN^2$. Conclure.\nc) Un technicien propose de raccorder le réservoir au point $N(12 ; 0 ; 0)$. Vérifier que $N \\in \\mathscr{P}$, calculer $RN$ et $HN$, puis contrôler l'égalité du b).",
+          reponses: [
+            { question: "a) H", attendu: "(2 ; 4 ; 1)", ordre: true },
+            { question: "a) RH", attendu: "6" },
+            { question: "c) RN", attendu: "√(153)", tolerance: 0.011 },
+            { question: "c) HN", attendu: "√(117)", tolerance: 0.011 },
+          ],
           correction:
             "a) La droite passant par $R$ dirigée par $\\vec{n}(1 ; 2 ; 2)$ : $x = 4 + t$, $y = 8 + 2t$, $z = 5 + 2t$.\nOn remplace : $(4 + t) + 2(8 + 2t) + 2(5 + 2t) - 12 = 0$, soit $9t + 18 = 0$, donc $t = -2$.\n$H(2 ; 4 ; 1)$, et $\\overrightarrow{RH} = -2\\vec{n}$, donc $RH = 2 \\times 3 = 6$ : la conduite mesure $60$ m.\nb) $H$ et $N$ sont dans $\\mathscr{P}$ : $\\overrightarrow{HN}$ est un vecteur du plan, orthogonal à $\\vec{n}$. Or $\\overrightarrow{RH}$ est colinéaire à $\\vec{n}$ : $\\overrightarrow{RH} \\cdot \\overrightarrow{HN} = 0$.\n$RN^2 = \\|\\overrightarrow{RH} + \\overrightarrow{HN}\\|^2$ $= RH^2 + 2\\,\\overrightarrow{RH} \\cdot \\overrightarrow{HN} + HN^2$, soit $RN^2 = RH^2 + HN^2$.\nDonc $RN \\geqslant RH$, avec égalité seulement si $N = H$ : $H$ est le point du versant le plus proche de $R$.\nc) $12 + 0 + 0 - 12 = 0$ : $N \\in \\mathscr{P}$.\n$\\overrightarrow{RN}(8 ; -8 ; -5)$, donc $RN = \\sqrt{153} \\approx 12{,}37$ ; $\\overrightarrow{HN}(10 ; -4 ; -1)$, donc $HN = \\sqrt{117} \\approx 10{,}82$.\nContrôle : $36 + 117 = 153$. La conduite vers $N$ mesurerait environ $124$ m, au lieu de $60$ m.\n⚠️ Le point le plus proche n'est pas « le point du versant juste en dessous » : la verticale de $R$ ne tombe pas en $H$, car le versant est incliné.\n⭐ Sur le dessin : $[RH]$, en orange, est perpendiculaire au versant ; $[RN]$, en pointillé, est l'hypoténuse du triangle $RHN$, rectangle en $H$.",
           schema: cavaliere(
@@ -411,6 +510,16 @@ export const exercicesProduitScalaireEspaceTerminale: FicheExercicesData = {
           titre: "Les haubans de l'antenne",
           enonce:
             "Une antenne $[OS]$ est tenue par trois haubans $[SA]$, $[SB]$ et $[SC]$. Dans un repère orthonormé (unité : le mètre), $O(0 ; 0 ; 0)$, $S(0 ; 0 ; 8)$, $A(6 ; 0 ; 0)$, $B(0 ; 6 ; 0)$ et $C(-3{,}6 ; -4{,}8 ; 0)$ ; le sol est le plan d'équation $z = 0$.\na) Calculer la longueur de chaque hauban.\nb) Démontrer que l'antenne est perpendiculaire au sol.\nc) Calculer l'angle $\\widehat{SAO}$ entre le hauban $[SA]$ et le sol, au dixième de degré. Est-il le même pour les trois haubans ?\nd) Calculer $\\widehat{ASB}$ et $\\widehat{ASC}$ au dixième de degré. L'installateur affirme : « des haubans de même longueur font entre eux des angles égaux ». A-t-il raison ?",
+          reponses: [
+            { question: "a) SA", attendu: "10" },
+            { question: "a) SB", attendu: "10" },
+            { question: "a) SC", attendu: "10" },
+            { question: "c)", attendu: "53.1", tolerance: 0.051 },
+            { question: "c) le même ?", attendu: ["oui", "vrai"] },
+            { question: "d) ASB", attendu: "50.2", tolerance: 0.051 },
+            { question: "d) ASC", attendu: "64.9", tolerance: 0.051 },
+            { question: "d) a-t-il raison ?", attendu: ["non", "faux"] },
+          ],
           figure: cavaliere(
             { O: [0, 0, 0, "s"], S: [0, 0, 8, "n"], A: [6, 0, 0, "e"], B: [0, 6, 0, "e"], C: [-3.6, -4.8, 0, "s"] },
             { pleins: "S-A S-B S-C", orange: "O-S", caches: "O-A O-B O-C" },
