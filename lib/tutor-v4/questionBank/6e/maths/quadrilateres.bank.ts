@@ -75,7 +75,23 @@ const CONTEXTES_QUAD: ((p: Prenom, N: string) => string)[] = [
   (p, N) => `${p.nom} dessine le panneau ${N} d’un jeu de piste.`,
   (p, N) => `Sur la nappe de pique-nique ${de(p.nom)}, un motif forme le quadrilatère ${N}.`,
 ];
-function ctxQuad(N: string, p: Prenom = pick(PRENOMS)): string {
+/* ⛔⛔ 03/11/2026 — D'ABORD DES QUESTIONS SIMPLES (Frédéric) : « le contexte est
+   réservé aux étoiles ★3 et plus ». Ses 6e lisent difficilement : à ★1 et ★2,
+   ni prénom, ni logo, ni mosaïque. Une phrase courte pose la figure ; la
+   variété vient des noms des sommets (EFGH, RSTU…) et des tournures.
+   ⛔ UNE seule phrase, terminée par un point (le correcteur des paires de
+   segments saute la première phrase), sans nature (carré, rectangle…). */
+const CONTEXTES_SIMPLES: ((N: string) => string)[] = [
+  (N) => `Voici le quadrilatère ${N}.`,
+  (N) => `On trace le quadrilatère ${N}.`,
+  (N) => `On considère le quadrilatère ${N}.`,
+  (N) => `Regarde le quadrilatère ${N}.`,
+  (N) => `${N} est un quadrilatère.`,
+  (N) => `Observe le quadrilatère ${N}.`,
+];
+/** La phrase qui pose N : simple à ★1-★2, une situation à partir de ★3. */
+function ctxQuad(N: string, p: Prenom = pick(PRENOMS), etoile = 3): string {
+  if (etoile <= 2) return Math.random() < 0.7 ? "" : pick(CONTEXTES_SIMPLES)(N);
   return pick(CONTEXTES_QUAD)(p, N);
 }
 /** Les sommets du tour, en partant du k-ième, dans un sens ou dans l'autre. */
@@ -102,9 +118,19 @@ function nomsFaux(s: readonly string[]): string[] {
   perm([...s], "");
   return r;
 }
+/* ⛔ 03/11/2026 (REGLES-6E.md) — DES PHRASES COURTES : ★1 en 12 mots au plus,
+   ★2 en 15 au plus. Les gabarits ★1-★2 tirent leur énoncé jusqu'à tenir dans
+   la limite (`court`) ; à ★1-★2 la figure n'a plus de phrase d'introduction
+   la plupart du temps (le nom EFGH suffit). */
+const nbMots = (t: string) => t.trim().split(/\s+/).filter((w) => /[\p{L}\d]/u.test(w)).length;
+function court(lim: number, tirage: () => QG): QG {
+  let q = tirage();
+  for (let i = 0; i < 80 && nbMots(q.text) > lim; i++) q = tirage();
+  return q;
+}
 function qcmQ(text: string, bonne: string, leurres: string[], explication: string, canvas?: QuadrilatereCanvasData): QG {
   return {
-    text,
+    text: text.trim(),
     format: "qcm",
     choices: shuffle([bonne, ...leurres]),
     expected: [bonne],
@@ -114,7 +140,7 @@ function qcmQ(text: string, bonne: string, leurres: string[], explication: strin
   };
 }
 function mesureQ(text: string, v: number, u: string, explication: string): QG {
-  return { text, format: "short", expected: [`${v} ${u}`], comparator: "number_equal", explanation: expl(explication) };
+  return { text: text.trim(), format: "short", expected: [`${v} ${u}`], comparator: "number_equal", explanation: expl(explication) };
 }
 /** « E, F, G et H » */
 function listeEt(s: readonly string[]) {
@@ -160,6 +186,7 @@ function genQuadVocabulaire(etoile: 1 | 2 | 3 | 4): QG {
   const s = sommetsQuadrilatere();
   const N = s.join("");
   const p = pick(PRENOMS);
+  const ctx = (N: string) => ctxQuad(N, undefined, etoile);
   const famille = pick(
     etoile === 1 ? (["compter", "nommer"] as const)
       : etoile === 2 ? (["oppose", "paire", "sommet"] as const)
@@ -169,24 +196,30 @@ function genQuadVocabulaire(etoile: 1 | 2 | 3 | 4): QG {
   const [P, Q, R, T] = tour(s, randomInt(0, 3), pick([1, -1] as const));
   if (famille === "compter") {
     const c = pick(COMPTES);
+    const de = /^[aeiou]/.test(c.quoi) ? "d’" : "de "; // « combien d’angles »
     const question = pick([
-      `Combien de ${c.quoi} a ${N} ?`,
-      `${N} a combien de ${c.quoi} ?`,
-      `Combien de ${c.quoi} compte le quadrilatère ${N} ?`,
+      `Combien ${de}${c.quoi} a ${N} ?`,
+      `${N} a combien ${de}${c.quoi} ?`,
+      `Combien ${de}${c.quoi} compte le quadrilatère ${N} ?`,
       `Compte les ${c.quoi} de ${N}. Combien y en a-t-il ?`,
     ]);
     const autres = ["2", "3", "4", "5", "6"].filter((x) => x !== String(c.n));
-    return qcmQ(`${ctxQuad(N)} ${question}`, `${c.n} ${c.quoi}`, shuffle(autres).slice(0, 3).map((x) => `${x} ${c.quoi}`), c.pourquoi);
+    return qcmQ(`${ctx(N)} ${question}`, `${c.n} ${c.quoi}`, shuffle(autres).slice(0, 3).map((x) => `${x} ${c.quoi}`), c.pourquoi);
   }
   if (famille === "nommer") {
     const ordre = tour(s, randomInt(0, 3), pick([1, -1] as const));
     const juste = pick(nomsJustes(ordre).filter((x) => x !== ordre.join("")));
+    // 03/11/2026 : ★1, sans prénom ni objet (plus de tapis ni de carte au trésor).
+    const sommets = `${ordre[0]}, ${ordre[1]}, ${ordre[2]} puis ${ordre[3]}`;
     const intro = pick([
-      `${p.nom} trace un quadrilatère. En tournant autour, ${ilQ(p)} passe par les sommets ${ordre[0]}, ${ordre[1]}, ${ordre[2]} puis ${ordre[3]}.`,
-      `Les sommets d’un tapis, dans l’ordre du tour, sont ${ordre[0]}, ${ordre[1]}, ${ordre[2]} puis ${ordre[3]}.`,
-      `Sur la carte au trésor ${de(p.nom)}, on fait le tour d’un champ par les sommets ${ordre[0]}, ${ordre[1]}, ${ordre[2]} puis ${ordre[3]}.`,
+      `Le tour passe par ${sommets}.`,
+      `On tourne par ${sommets}.`,
+      `Sommets dans l’ordre : ${sommets}.`,
+      `On fait le tour : ${sommets}.`,
+      `Ordre du tour : ${sommets}.`,
+      `Le quadrilatère a pour sommets ${sommets}.`,
     ]);
-    const question = pick(["Quel nom convient à ce quadrilatère ?", "Comment peut-on nommer ce quadrilatère ?", "Quel est un nom correct de ce quadrilatère ?"]);
+    const question = pick(["Quel nom convient ?", "Quel est un nom correct ?", "Choisis un nom correct.", "Quel nom lui donner ?", "Quel nom convient à ce quadrilatère ?"]);
     return qcmQ(
       `${intro} ${question}`,
       juste,
@@ -201,7 +234,7 @@ function genQuadVocabulaire(etoile: 1 | 2 | 3 | 4): QG {
       `Dans le quadrilatère ${N}, quel est le côté opposé à [${P}${Q}] ?`,
     ]);
     return qcmQ(
-      `${ctxQuad(N)} ${question}`,
+      `${ctx(N)} ${question}`,
       seg(R, T),
       [seg(Q, R), seg(T, P), seg(P, R)],
       `${seg(Q, R)} et ${seg(T, P)} touchent ${seg(P, Q)} : ce sont des côtés consécutifs. ${seg(P, R)} est une diagonale. Le côté qui ne touche pas ${seg(P, Q)} est ${seg(R, T)} : c’est le côté opposé.`,
@@ -214,7 +247,7 @@ function genQuadVocabulaire(etoile: 1 | 2 | 3 | 4): QG {
       `Dans le quadrilatère ${N}, quel est le sommet opposé à ${P} ?`,
     ]);
     return qcmQ(
-      `${ctxQuad(N)} ${question}`,
+      `${ctx(N)} ${question}`,
       R,
       [Q, T],
       `${Q} et ${T} sont les voisins de ${P} dans le nom ${N} : ce sont des sommets consécutifs. Le sommet opposé est celui qui n’est pas voisin : ${R}.`,
@@ -233,13 +266,13 @@ function genQuadVocabulaire(etoile: 1 | 2 | 3 | 4): QG {
       `${cas.a} et ${cas.b} sont deux segments de ${N}. Que sont-ils ?`,
     ]);
     const tous = ["deux côtés consécutifs", "deux côtés opposés", "les deux diagonales", "un côté et une diagonale"];
-    return qcmQ(`${ctxQuad(N)} ${question}`, cas.rep, tous.filter((x) => x !== cas.rep), cas.pq);
+    return qcmQ(`${ctx(N)} ${question}`, cas.rep, tous.filter((x) => x !== cas.rep), cas.pq);
   }
   if (famille === "diagonales") {
     const bonne = `${seg(P, R)} et ${seg(Q, T)}`;
     const question = pick([`Quelles sont les diagonales de ${N} ?`, `Quels segments sont les diagonales du quadrilatère ${N} ?`, `On trace les diagonales de ${N}. Lesquelles ?`]);
     return qcmQ(
-      `${ctxQuad(N)} ${question}`,
+      `${ctx(N)} ${question}`,
       bonne,
       [`${seg(P, Q)} et ${seg(R, T)}`, `${seg(Q, R)} et ${seg(T, P)}`, `${seg(P, Q)} et ${seg(Q, R)}`],
       `Une diagonale relie deux sommets OPPOSÉS (non voisins dans le nom ${N}). Les diagonales sont ${bonne}.`,
@@ -250,7 +283,7 @@ function genQuadVocabulaire(etoile: 1 | 2 | 3 | 4): QG {
     const question = pick([`Quel segment est une diagonale de ${N} ?`, `Lequel de ces segments est une diagonale du quadrilatère ${N} ?`, `${p.nom} veut tracer une diagonale de ${N}. Laquelle ?`]);
     const d = pick([seg(P, R), seg(Q, T)]);
     return qcmQ(
-      `${ctxQuad(N)} ${question}`,
+      `${ctx(N)} ${question}`,
       d,
       [seg(P, Q), seg(Q, R), seg(R, T), seg(T, P)].sort(() => Math.random() - 0.5).slice(0, 3),
       `Une diagonale relie deux sommets opposés. ${d} relie deux sommets qui ne se suivent pas dans ${N} : c’est une diagonale. Les autres segments sont des côtés.`,
@@ -261,7 +294,7 @@ function genQuadVocabulaire(etoile: 1 | 2 | 3 | 4): QG {
     const bons = shuffle(nomsJustes(s).filter((n) => n !== N)).slice(0, 3);
     const question = pick([`Parmi ces noms, lequel ne désigne PAS ${N} ?`, `Quel nom est FAUX pour le quadrilatère ${N} ?`, `Un seul de ces noms ne convient pas à ${N}. Lequel ?`]);
     return qcmQ(
-      `${ctxQuad(N)} ${question}`,
+      `${ctx(N)} ${question}`,
       faux,
       bons,
       `On nomme un quadrilatère en tournant autour, dans un sens ou dans l’autre. Dans ${faux}, deux sommets opposés se suivent : ce nom ne fait pas le tour de ${N}.`,
@@ -270,7 +303,7 @@ function genQuadVocabulaire(etoile: 1 | 2 | 3 | 4): QG {
   const juste = pick(nomsJustes(s).filter((n) => n !== N));
   const question = pick([`Quel autre nom désigne aussi ${N} ?`, `Parmi ces noms, lequel désigne le même quadrilatère que ${N} ?`, `${p.nom} veut renommer ${N} sans changer de figure. Quel nom peut-${ilQ(p)} choisir ?`]);
   return qcmQ(
-    `${ctxQuad(N)} ${question}`,
+    `${ctx(N)} ${question}`,
     juste,
     shuffle(nomsFaux(s)).slice(0, 3),
     `${juste} fait le tour de la figure, dans un sens ou dans l’autre : c’est le même quadrilatère que ${N}. Dans les autres noms, deux sommets opposés se suivent.`,
@@ -285,7 +318,7 @@ const QUESTIONS_NATURE = [
   (N: string) => `Observe les codages de ${N}. Quelle est sa nature ?`,
   (N: string) => `D’après les codages, quelle est la nature de ${N} ?`,
   (N: string) => `Regarde la figure ${N} et ses codages. Quel est son nom ?`,
-  (N: string) => `Quelle est la nature du quadrilatère ${N} dessiné ?`,
+  (N: string) => `Quelle est la nature du quadrilatère ${N} de la figure ?`,
 ];
 const QUESTIONS_AFFIRMER = [
   (N: string) => `Que peut-on AFFIRMER sur ${N}, d’après ses codages ?`,
@@ -295,7 +328,7 @@ const QUESTIONS_AFFIRMER = [
 function genQuadNature(etoile: 1 | 2 | 3 | 4): QG {
   const s = sommetsQuadrilatere();
   const N = s.join("");
-  const ctx = ctxQuad(N);
+  const ctx = ctxQuad(N, undefined, etoile);
   if (etoile <= 2) {
     const nature = pick(["carré", "rectangle", "losange", "quelconque"] as const);
     const canvas = dessinQuad(nature, s, etoile === 2);
@@ -349,7 +382,7 @@ const DIT: Record<Prop, string[]> = {
   DE: ["des diagonales de même longueur"],
   DP: ["des diagonales perpendiculaires"],
   M: ["des diagonales qui se coupent en leur milieu"],
-  DEM: ["des diagonales de même longueur qui se coupent en leur milieu"],
+  DEM: ["des diagonales de même longueur qui se coupent en leur milieu", "des diagonales égales qui se coupent en leur milieu"],
   DPM: ["des diagonales perpendiculaires qui se coupent en leur milieu"],
   DEPM: ["des diagonales perpendiculaires de même longueur qui se coupent en leur milieu"],
   CO: ["des côtés opposés de même longueur"],
@@ -413,11 +446,15 @@ const raisons = (props: Prop[]) => props.map((p) => RAISONS[p]).filter(Boolean).
 
 // ─── QUADRILATERE_LIEN_PROPRIETE : des propriétés à la nature ──────────────
 const DONNEES_LIEN: Prop[][][] = [
-  [["R"], ["L"], ["R", "L"], ["L", "NR"], ["R", "NL"]],
+  [["R"], ["L"], ["R", "L"], ["L", "NR"]],
   [["DEM"], ["DPM"], ["R", "C2"], ["L", "A1"], ["R", "CO"], ["L", "PA"], ["R", "NL"], ["L", "NR"]],
   [["DEPM"], ["R", "DP"], ["L", "DE"], ["DEM", "NL"], ["DPM", "NR"], ["DEM", "C2"], ["DPM", "A1"]],
 ];
 const QUESTIONS_LIEN = [
+  (N: string) => `Quelle est la nature de ${N} ?`,
+  (N: string) => `${N} est forcément…`,
+  (N: string) => `Quelle est sa nature ?`,
+  (N: string) => `Quel est son nom précis ?`,
   (N: string) => `Quelle est la nature de ${N}, à coup sûr ?`,
   (N: string) => `Quel est le nom le plus précis que l’on peut donner à ${N} ?`,
   (N: string) => `Que peut-on affirmer ? ${N} est forcément…`,
@@ -429,7 +466,7 @@ function genQuadLien(etoile: 1 | 2 | 3): QG {
   const props = pick(DONNEES_LIEN[etoile - 1]);
   const rep = natureForcee(props) as Nat;
   return qcmQ(
-    `${ctxQuad(N)} ${N} a ${dire(props)}. ${pick(QUESTIONS_LIEN)(N)}`,
+    `${ctxQuad(N, undefined, etoile)} ${N} a ${dire(props)}. ${pick(QUESTIONS_LIEN)(N)}`,
     rep,
     ["carré", "rectangle", "losange", "quadrilatère quelconque"].filter((x) => x !== rep),
     `${raisons(props)} ${POURQUOI_NAT[rep]}`,
@@ -475,7 +512,16 @@ const DONNEES_CONCLUSION: { props: Prop[]; affirme: Nat }[][] = [
     { props: ["R", "DE"], affirme: "carré" }, { props: ["L", "C2"], affirme: "carré" }, { props: ["DEM", "PA"], affirme: "losange" },
   ],
 ];
-function questionVerdict(p: Prenom, N: string, affirme: Nat): string {
+function questionVerdict(p: Prenom, N: string, affirme: Nat, simple = false): string {
+  // 03/11/2026 : à ★2, personne n'affirme rien : la question est posée directement.
+  if (simple)
+    return pick([
+      `Peut-on affirmer que ${N} est un ${affirme} ?`,
+      `Est-on sûr que ${N} est un ${affirme} ?`,
+      `${N} est-il forcément un ${affirme} ?`,
+      `Peut-on être sûr que ${N} est un ${affirme} ?`,
+      `Est-ce que ${N} est forcément un ${affirme} ?`,
+    ]);
   return pick([
     `Peut-on affirmer que ${N} est un ${affirme} ?`,
     `${p.nom} affirme : « ${N} est forcément un ${affirme}. » A-t-${ilQ(p)} raison ?`,
@@ -489,7 +535,7 @@ function genQuadConclusion(etoile: 2 | 3 | 4): QG {
   const [p, p2] = [pick(PRENOMS), pick(PRENOMS)];
   const d = pick(DONNEES_CONCLUSION[etoile - 2]);
   const v = verdict(d.props, d.affirme);
-  return qcmQ(`${ctxQuad(N, p2)} ${N} a ${dire(d.props)}. ${questionVerdict(p, N, d.affirme)}`, v.bonne, v.leurres, v.pq);
+  return qcmQ(`${ctxQuad(N, p2, etoile)} ${N} a ${dire(d.props)}. ${questionVerdict(p, N, d.affirme, etoile <= 2)}`, v.bonne, v.leurres, v.pq);
 }
 
 // ─── QUADRILATERE_PROPRIETE_DEFI : inclusions, départ + propriété en plus ──
@@ -566,13 +612,27 @@ const QUESTIONS_LONGUEUR = [
   (S: string) => `Sans mesurer, trouve la longueur de ${S}.`,
   (S: string) => `Donne la longueur de ${S}.`,
 ];
+/** 03/11/2026 : à ★1-★2, la figure sans situation (« Voici le carré EFGH. »).
+ *  ⛔ « nature NOM » dans la phrase (le correcteur y lit la nature) ; jamais
+ *  « trace » avec des mètres (le correcteur l'attend en centimètres). */
+const INTROS_SIMPLES: ((nat: Nat, N: string) => string)[] = [
+  (nat, N) => `Voici le ${nat} ${N}.`,
+  (nat, N) => `${N} est un ${nat}.`,
+  (nat, N) => `${nat[0].toUpperCase()}${nat.slice(1)} ${N} :`,
+  (nat, N) => `Regarde le ${nat} ${N}.`,
+  (nat, N) => `Observe le ${nat} ${N}.`,
+];
+const OBJET_SIMPLE = (): (typeof OBJETS_MESURE)[number] => {
+  const u = pick(["cm", "cm", "cm", "m"] as const);
+  return { dit: (_p, nat, N) => pick(INTROS_SIMPLES)(nat, N), u, lo: 2, hi: u === "cm" ? 15 : 20 };
+};
 /** Un côté donné, un autre demandé (opposé dans un rectangle, n'importe lequel sinon). */
-function genLongueurCote(nat: Nat, intro?: (p: Prenom, nat: Nat, N: string) => string): QG {
+function genLongueurCote(nat: Nat, intro?: (p: Prenom, nat: Nat, N: string) => string, simple = false): QG {
   const s = sommetsQuadrilatere();
   const N = s.join("");
   const p = pick(PRENOMS);
   // Une construction se fait sur le cahier : en centimètres.
-  const o = intro ? OBJETS_MESURE[0] : pick(OBJETS_MESURE);
+  const o = intro ? OBJETS_MESURE[0] : simple ? OBJET_SIMPLE() : pick(OBJETS_MESURE);
   const [P, Q, R, T] = tour(s, randomInt(0, 3), pick([1, -1] as const));
   const debut = (intro ?? o.dit)(p, nat, N);
   if (nat === "rectangle") {
@@ -646,10 +706,11 @@ function genQuadLire(etoile: 1 | 2 | 4): QG {
   const p = pick(PRENOMS);
   if (etoile === 1 && pick([true, false])) {
     const nat = pick(["carré", "rectangle", "losange"] as const);
-    const o = pick(OBJETS_MESURE);
+    const o = OBJET_SIMPLE(); // 03/11/2026 : ★1, sans situation
     const quoi = nat === "rectangle" ? "angles droits" : nat === "losange" ? "côtés de même longueur" : pick(["angles droits", "côtés de même longueur"] as const);
     const dire4 = (k: number) => (quoi === "angles droits" ? (k === 0 ? "aucun angle droit" : `${k} angle${k > 1 ? "s" : ""} droit${k > 1 ? "s" : ""}`) : k === 0 ? "aucun" : `${k} côtés`);
-    const question = pick([`Combien de ${quoi} a ${N} ?`, `${N} a combien de ${quoi} ?`, `Combien de ${quoi} compte ${N} ?`]);
+    const de = /^[aeiou]/.test(quoi) ? "d’" : "de "; // « combien d’angles droits »
+    const question = pick([`Combien ${de}${quoi} a ${N} ?`, `${N} a combien ${de}${quoi} ?`, `Combien ${de}${quoi} compte ${N} ?`]);
     const pq = quoi === "angles droits" ? `Un ${nat} a 4 angles droits.` : `Les 4 côtés d’un ${nat} ont la même longueur.`;
     const leurres = (quoi === "angles droits" ? [0, 1, 2] : [0, 2, 3]).map(dire4);
     return qcmQ(`${o.dit(p, nat, N)} ${question}`, dire4(4), leurres, pq);
@@ -673,7 +734,7 @@ function genQuadLire(etoile: 1 | 2 | 4): QG {
         : "Les diagonales d’un losange sont perpendiculaires et se coupent en leur milieu. Elles n’ont la même longueur que si c’est un carré.",
     );
   }
-  return genLongueurCote(etoile === 1 ? pick(["carré", "losange"] as const) : pick(["carré", "rectangle", "losange", "rectangle"] as const));
+  return genLongueurCote(etoile === 1 ? pick(["carré", "losange"] as const) : pick(["carré", "rectangle", "losange", "rectangle"] as const), undefined, true);
 }
 
 // ─── QUADRILATERE_COMPLETER_CONSTRUIRE ──────────────────────────────────────
@@ -706,11 +767,14 @@ function genQuadCompleter(etoile: 1 | 2 | 3): QG {
   const p = pick(PRENOMS);
   if (etoile === 1) {
     const nat = pick(["carré", "rectangle", "losange"] as const);
-    return genLongueurCote(nat, (pp, nn, NN) =>
+    // 03/11/2026 : ★1, sans prénom (la construction reste sur le cahier, en cm).
+    return genLongueurCote(nat, (_pp, nn, NN) =>
       pick([
-        `${pp.nom} veut construire le ${nn} ${NN}.`,
-        `Pour un exposé, ${pp.nom} doit tracer le ${nn} ${NN}.`,
-        `${pp.nom} commence à tracer le ${nn} ${NN}.`,
+        `Construis le ${nn} ${NN}.`,
+        `Trace le ${nn} ${NN}.`,
+        `Tu traces le ${nn} ${NN}.`,
+        `Tu construis le ${nn} ${NN}.`,
+        `On construit le ${nn} ${NN}.`,
       ]),
     );
   }
@@ -721,15 +785,20 @@ function genQuadCompleter(etoile: 1 | 2 | 3): QG {
     const debut = c.depart === "M" ? `${N} a ${dire(["M"])}.` : `${N} est un ${c.depart}.`;
     const question = pick([
       `Que faut-il savoir de plus pour être sûr que c’est un ${c.cible} ?`,
+      `Que faut-il ajouter pour un ${c.cible} ?`,
+      `Quoi de plus pour que ce soit un ${c.cible} ?`,
+      `Que faut-il en plus pour un ${c.cible} ?`,
       `Quelle propriété suffit, en plus, pour que ${N} soit un ${c.cible} ?`,
-      `${p.nom} veut que ${N} soit un ${c.cible}. Quelle propriété doit-${ilQ(p)} imposer en plus ?`,
+      // 03/11/2026 : ★2, sans prénom.
+      `On veut que ${N} soit un ${c.cible}. Quelle propriété faut-il imposer en plus ?`,
+      `Quelle propriété faut-il ajouter pour être sûr que c’est un ${c.cible} ?`,
     ]);
     const pourquoi =
       c.depart === "rectangle" ? `Un rectangle qui a aussi ${bonTexte} est aussi un losange : rectangle ET losange, c’est un carré.`
       : c.depart === "losange" ? `Un losange qui a aussi ${bonTexte} est aussi un rectangle : losange ET rectangle, c’est un carré.`
       : (RAISONS[({ DE: "DEM", DP: "DPM" } as Partial<Record<Prop, Prop>>)[bon] ?? bon] ?? "");
     return qcmQ(
-      `${ctxQuad(N)} ${debut} ${question}`,
+      `${ctxQuad(N, undefined, etoile)} ${debut} ${question}`,
       bonTexte,
       shuffle(c.mauvais).slice(0, 3).map((m) => pick(DIT[m])),
       `${pourquoi} Les autres propriétés, ${N} pourrait les avoir sans être un ${c.cible}.`,
@@ -775,19 +844,23 @@ function genQuadDistinguer(etoile: 2 | 3 | 5): QG {
     const question = enCommun
       ? pick([
           `${N} est soit un ${x}, soit un ${y}. Quelle propriété a-t-il dans les deux cas ?`,
+          `${N} est un ${x} ou un ${y}. Qu’a-t-il dans les deux cas ?`,
+          `${N} : ${x} ou ${y}. Qu’a-t-il dans les deux cas ?`,
           `Qu’il soit un ${x} ou un ${y}, qu’a forcément ${N} ? Les deux figures l’ont en commun.`,
         ])
       : pick([
-          `${p.nom} hésite : ${N} est-il un ${x} ou un ${y} ? Que doit-${ilQ(p)} vérifier ?`,
+          etoile <= 2 ? `On hésite : ${N} est-il un ${x} ou un ${y} ? Que faut-il vérifier ?` : `${p.nom} hésite : ${N} est-il un ${x} ou un ${y} ? Que doit-${ilQ(p)} vérifier ?`,
           `Pour savoir si ${N} est un ${x} ou un ${y}, que faut-il vérifier ?`,
-          `Quelle vérification permet de distinguer un ${x} d’un ${y} ?`,
+          `Quelle vérification dit si ${N} est un ${x} ou un ${y} ?`,
+          `${N} est-il un ${x} ou un ${y} ? Que faut-il vérifier pour le savoir ?`,
+          `${N} : ${x} ou ${y} ? Que faut-il vérifier ?`,
         ]);
     const pq = enCommun
       ? `Un ${x} et un ${y} ont tous les deux ${pick(DIT[bonne])}. Les autres propriétés, l’un les a et l’autre pas toujours.`
       : `Un ${ax.includes(bonne) ? x : y} a toujours ${pick(DIT[bonne])}, un ${ax.includes(bonne) ? y : x} pas forcément. Les autres propriétés, ils les ont tous les deux : elles ne permettent pas de choisir.`;
     // « Que vérifier ? » appelle « si ses diagonales… » ; « qu'a-t-il ? » appelle « des diagonales… ».
     const dit = (k: Prop) => (enCommun ? DIT[k][0] : SI[k]!);
-    return qcmQ(`${ctxQuad(N)} ${question}`, dit(bonne), leurres.map(dit), pq);
+    return qcmQ(`${ctxQuad(N, undefined, etoile)} ${question}`, dit(bonne), leurres.map(dit), pq);
   }
   const ctx = pick(CONTEXTES_DESSIN)(pick(PRENOMS), N);
   const question = pick([
@@ -836,7 +909,7 @@ function genQuadDefi(etoile: 2 | 3 | 4 | 5, forcer?: "perimetre" | "eleve"): QG 
       etoile === 2
         ? ([
             [`4 angles droits et 4 côtés de ${c} cm`, "carré", "Quatre angles droits ET quatre côtés égaux : c’est un carré."],
-            [`4 angles droits, deux côtés de ${L} cm et deux côtés de ${c} cm`, "rectangle", `Quatre angles droits, mais des côtés de ${L} cm et de ${c} cm : c’est un rectangle, pas un carré.`],
+            [`4 angles droits, des côtés de ${L} cm et de ${c} cm`, "rectangle", `Quatre angles droits, mais des côtés de ${L} cm et de ${c} cm : c’est un rectangle, pas un carré.`],
             [`4 côtés de ${c} cm et aucun angle droit`, "losange", "Quatre côtés égaux et aucun angle droit : c’est un losange, pas un carré."],
           ])
         : ([
@@ -846,9 +919,11 @@ function genQuadDefi(etoile: 2 | 3 | 4 | 5, forcer?: "perimetre" | "eleve"): QG 
             [`3 angles droits, deux côtés de ${L} cm et deux côtés de ${c} cm`, "rectangle", `Trois angles droits : c’est un rectangle. Ses côtés mesurent ${L} cm et ${c} cm : ce n’est pas un carré.`],
           ]),
     );
-    const question = pick([`Quelle est la nature de ${N} ?`, `Quel est le nom le plus précis de ${N} ?`, `${N} est…`]);
+    const question = pick([`Quelle est la nature de ${N} ?`, `Quel est le nom le plus précis de ${N} ?`, `${N} est…`, `Quelle figure est ${N} ?`, `Quelle est sa nature ?`, `Quel est son nom précis ?`, `Donne la nature de ${N}.`]);
+    // 03/11/2026 : ★2, sans situation.
+    const intro = etoile <= 2 ? ctxQuad(N, undefined, etoile) : pick(CONTEXTES_DESSIN)(pick(PRENOMS), N);
     return qcmQ(
-      `${pick(CONTEXTES_DESSIN)(pick(PRENOMS), N)} ${N} a ${cas[0]}. ${question}`,
+      `${intro} ${N} a ${cas[0]}. ${question}`,
       cas[1],
       ["carré", "rectangle", "losange", "quadrilatère quelconque"].filter((z) => z !== cas[1]),
       cas[2],
@@ -1087,7 +1162,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Relis bien le vocabulaire : sommets, côtés, diagonales.",
     tags: ["quadrilatere", "template", "vocabulaire"],
-    generate: () => genQuadVocabulaire(2),
+    generate: () => court(15, () => genQuadVocabulaire(2)),
   },
   {
     kind: "template",
@@ -1100,7 +1175,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Un quadrilatère a 4 côtés. On le nomme en tournant autour de la figure.",
     tags: ["quadrilatere", "template", "vocabulaire", "nommer"],
-    generate: () => genQuadVocabulaire(1),
+    generate: () => court(12, () => genQuadVocabulaire(1)),
   },
 
   // =========================
@@ -1389,7 +1464,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Observe les codages : angles droits ? côtés égaux ?",
     tags: ["quadrilatere", "template", "nature"],
-    generate: () => genQuadNature(2),
+    generate: () => court(15, () => genQuadNature(2)),
   },
   {
     kind: "template",
@@ -1402,7 +1477,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Observe les codages : angles droits ? côtés égaux ?",
     tags: ["quadrilatere", "template", "nature", "canvas"],
-    generate: () => genQuadNature(1),
+    generate: () => court(12, () => genQuadNature(1)),
   },
   {
     kind: "template",
@@ -1618,7 +1693,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Lis les codages : angles droits, côtés égaux, côtés parallèles.",
     tags: ["quadrilatere", "template", "proprietes"],
-    generate: () => genQuadLire(2),
+    generate: () => court(15, () => genQuadLire(2)),
   },
   {
     kind: "template",
@@ -1631,7 +1706,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Carré et losange : 4 côtés de même longueur. Rectangle et carré : 4 angles droits.",
     tags: ["quadrilatere", "template", "proprietes"],
-    generate: () => genQuadLire(1),
+    generate: () => court(12, () => genQuadLire(1)),
   },
   {
     kind: "template",
@@ -1728,7 +1803,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     microId: "quadrilatere_lien_propriete",
     difficulty: 2,
     theme: "neutral",
-    text: "Un quadrilatère a 2 paires de côtés parallèles et 4 angles droits. Quelle est sa nature ?",
+    text: "Quelle figure a 4 angles droits et 2 paires de côtés parallèles ?",
     format: "qcm",
     choices: ["rectangle", "losange", "carré", "quadrilatère quelconque"],
     expected: ["rectangle"],
@@ -1753,7 +1828,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Fais le lien entre la propriété donnée et la nature de la figure.",
     tags: ["quadrilatere", "template", "proprietes"],
-    generate: () => genQuadLien(2),
+    generate: () => court(15, () => genQuadLien(2)),
   },
   {
     kind: "template",
@@ -1766,7 +1841,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "4 angles droits : rectangle. 4 côtés égaux : losange. Les deux : carré.",
     tags: ["quadrilatere", "template", "proprietes"],
-    generate: () => genQuadLien(1),
+    generate: () => court(12, () => genQuadLien(1)),
   },
   {
     kind: "template",
@@ -1943,7 +2018,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Cherche ce que l’une des deux figures a toujours, et l’autre pas forcément.",
     tags: ["quadrilatere", "template", "distinguer"],
-    generate: () => genQuadDistinguer(2),
+    generate: () => court(15, () => genQuadDistinguer(2)),
   },
 
   // =========================
@@ -2120,7 +2195,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Une figure qui a ces propriétés sans être celle annoncée existe-t-elle ?",
     tags: ["quadrilatere", "template", "conclusion"],
-    generate: () => genQuadConclusion(2),
+    generate: () => court(15, () => genQuadConclusion(2)),
   },
   {
     kind: "template",
@@ -2330,7 +2405,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Carré et losange : 4 côtés de même longueur. Rectangle : côtés opposés de même longueur.",
     tags: ["quadrilatere", "template", "completer", "construire"],
-    generate: () => genQuadCompleter(1),
+    generate: () => court(12, () => genQuadCompleter(1)),
   },
   {
     kind: "template",
@@ -2343,7 +2418,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Un carré est à la fois un rectangle et un losange : que manque-t-il à la figure de départ ?",
     tags: ["quadrilatere", "template", "completer"],
-    generate: () => genQuadCompleter(2),
+    generate: () => court(15, () => genQuadCompleter(2)),
   },
 
   // =========================
@@ -2714,7 +2789,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     niveau: "6e", matiere: "maths",
     notionId: "quadrilatere_propriete", microId: "quadrilatere_lien_propriete",
     difficulty: 2, theme: "neutral",
-    text: "Un quadrilatère a 4 angles droits mais ses côtés ne sont pas tous égaux. Quelle est sa nature ?",
+    text: "Un quadrilatère a 4 angles droits et des côtés inégaux. Quelle est sa nature ?",
     format: "qcm",
     choices: ["rectangle", "carré", "losange", "trapèze"],
     expected: ["rectangle"],
@@ -2897,7 +2972,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     niveau: "6e", matiere: "maths",
     notionId: "quadrilatere_propriete", microId: "quadrilatere_conclusion",
     difficulty: 2, theme: "neutral",
-    text: "Un quadrilatère a 4 angles droits ET 4 côtés égaux. Peut-on être sûr que c’est un carré ?",
+    text: "Un quadrilatère a 4 angles droits et 4 côtés égaux. Est-ce sûrement un carré ?",
     format: "qcm",
     choices: ["oui", "non"],
     expected: ["oui"],
@@ -3039,7 +3114,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Regarde d'abord les angles droits, ensuite les côtés égaux.",
     tags: ["quadrilatere_figure", "defi", "template"],
-    generate: () => genQuadDefi(2),
+    generate: () => court(15, () => genQuadDefi(2)),
   },
   {
     kind: "template",

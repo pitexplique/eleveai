@@ -72,7 +72,8 @@ const corrVocabulaire: CorrecteurMaths = (q) => {
   const e = q.expected[0];
   const ch = q.choices ?? [];
   let m: RegExpMatchArray | null;
-  if ((m = t.match(/(?:Combien de|combien de|Compte les) (sommets|côtés|angles|diagonales)/))) {
+  // 03/11/2026 : « combien d’angles » (élision) aussi.
+  if ((m = t.match(/(?:[Cc]ombien de |[Cc]ombien d’|Compte les )(sommets|côtés|angles|diagonales)/))) {
     const n = COMPTE[m[1]];
     p.push(...uneSeule(q, (x) => x === `${n} ${m![1]}`, `le nombre de ${m[1]}`));
     for (const x of ch) if (!x.endsWith(` ${m[1]}`)) p.push(`proposition sans le mot « ${m[1]} » : ${x}`);
@@ -89,7 +90,10 @@ const corrVocabulaire: CorrecteurMaths = (q) => {
   } else if ((m = t.match(/(?:opposé au sommet|sommet opposé à|pas voisin de) ([A-Z])/))) {
     p.push(...uneSeule(q, (s) => s === oppose(c, m![1]), `le sommet opposé à ${m[1]}`));
   } else if (/que sont|comment appelle-t-on|Que sont-ils/.test(t)) {
-    const [a, b] = segs(t.replace(/^[^.]*\./, ""));
+    // La première phrase (la situation) est sautée, sauf si c'est elle qui cite
+    // les segments (03/11/2026 : à ★1-★2, souvent plus d'introduction).
+    const apres = t.replace(/^[^.]*\./, "");
+    const [a, b] = segs(segs(apres).length >= 2 ? apres : t);
     if (!a || !b) return [`deux segments attendus : ${t}`];
     const commun = a.split("").some((x) => b.includes(x));
     const nature =
@@ -169,7 +173,7 @@ function classer(phrase: string): Fait[] | null {
   const c = phrase.toLowerCase().trim();
   const f: Fait[] = [];
   if (/diagonales/.test(c)) {
-    if (/même longueur/.test(c)) f.push("DE");
+    if (/même longueur|égales/.test(c)) f.push("DE");
     if (/perpendiculaires/.test(c)) f.push("DP");
     if (/milieu/.test(c) && !/sans se couper|ne se coupent pas/.test(c)) f.push("M");
     return f.length ? f : null;
@@ -403,13 +407,15 @@ const corrFigureNommee: CorrecteurMaths = (q) => {
   const c = nomDuTexte(t);
   if (!c) return [`nom du quadrilatère introuvable : ${t}`];
   const p = [...nomsCoherents(t, c)];
-  const nm = t.match(/(carré|rectangle|losange) [A-Z]{4}/);
+  // 03/11/2026 : « EFGH est un carré. » et « Carré EFGH : » (énoncés courts de ★1-★2) aussi.
+  const nm0 = t.match(/(?:[Cc]arré|[Rr]ectangle|[Ll]osange) [A-Z]{4}/) ?? t.match(/[A-Z]{4} est un (?:carré|rectangle|losange)/);
+  const nm = nm0 ? ["", nm0[0].toLowerCase().match(/carré|rectangle|losange/)![0]] : null;
   if (q.format !== "qcm") {
     if (!nm) return [...p, `nature de la figure introuvable : ${t}`];
     return [...p, ...corrigerLongueur(q, t, c, nm[1])];
   }
   let m: RegExpMatchArray | null;
-  if ((m = t.match(/(?:Combien de|combien de) (angles droits|côtés de même longueur)/))) {
+  if ((m = t.match(/[Cc]ombien (?:de |d’)(angles droits|côtés de même longueur)/))) {
     if (!nm) return [...p, `nature de la figure introuvable : ${t}`];
     const a = m[1] === "angles droits" ? A_TOUJOURS[nm[1]].includes("R") : A_TOUJOURS[nm[1]].includes("L");
     if (!a) p.push(`un ${nm[1]} n'a pas forcément 4 ${m[1]} : la question n'a pas de réponse sûre`);
@@ -429,7 +435,7 @@ const corrFigureNommee: CorrecteurMaths = (q) => {
   // Propriété à ajouter pour obtenir la cible.
   const { faits, depart, problemes } = faitsDuTexte(t);
   p.push(...problemes);
-  const cb = t.match(/(?:c’est|soit) un (carré|rectangle|losange)/);
+  const cb = t.match(/(?:c’est|soit|pour) un (carré|rectangle|losange)/);
   if (!cb) return [...p, `question non reconnue : ${t}`];
   const atteint = (f: Set<Fait>) => {
     const n = deduire(f, depart).nature;
@@ -510,7 +516,7 @@ const corrDefi: CorrecteurMaths = (q) => {
     if (/aucun angle droit/.test(d[1])) f.add("NR");
     else if (/(^|\s)un angle droit/.test(d[1])) f.add("A1");
     if (/4 côtés de \d+ cm/.test(d[1])) f.add("L");
-    const deux = d[1].match(/deux côtés de (\d+) cm et deux côtés de (\d+) cm/);
+    const deux = d[1].match(/deux côtés de (\d+) cm et deux côtés de (\d+) cm/) ?? d[1].match(/des côtés de (\d+) cm et de (\d+) cm/);
     if (deux && deux[1] !== deux[2]) f.add("NL");
     const { nature, contradiction } = deduire(f);
     if (contradiction) p.push("la description se contredit");
