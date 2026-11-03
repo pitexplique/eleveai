@@ -165,6 +165,18 @@ export default async function AdminDashboardPage() {
         </Link>
 
         <Link
+          href="/admin/aventure"
+          className="block rounded-xl border border-amber-700 bg-amber-900/30 p-4 transition hover:bg-amber-900/50"
+        >
+          <p className="font-bold text-amber-300">🌍 Profs de l&apos;aventure</p>
+          <p className="mt-1 text-sm text-slate-400">
+            Les demandes de{" "}
+            <span className="font-semibold">/rejoindre-l-aventure</span>, avec le
+            nombre de classes par pays (deux visées par pays).
+          </p>
+        </Link>
+
+        <Link
           href="/admin/newsletter"
           className="block rounded-xl border border-teal-700 bg-teal-900/30 p-4 transition hover:bg-teal-900/50"
         >

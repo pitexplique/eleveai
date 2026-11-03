@@ -7,7 +7,8 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { createHash } from "node:crypto";
-import { ANNEE_AVENTURE, SLUGS_AVENTURE } from "@/lib/aventure/pays";
+import { Resend } from "resend";
+import { ANNEE_AVENTURE, PAYS_AVENTURE, SLUGS_AVENTURE } from "@/lib/aventure/pays";
 
 export const dynamic = "force-dynamic";
 
@@ -27,6 +28,48 @@ function empreinteDe(req: Request): string {
   const ua = req.headers.get("user-agent") ?? "";
   const sel = process.env.SUPABASE_SERVICE_ROLE_KEY ?? "eleveai";
   return createHash("sha256").update(`${sel}|${ip}|${ua}`).digest("hex").slice(0, 24);
+}
+
+/**
+ * Prévient Frédéric par e-mail (CONTACT_TO). « Répondre » écrit directement au
+ * prof. Un e-mail qui échoue ne fait pas échouer l'inscription : elle est déjà
+ * dans la table, et /admin/aventure la montre.
+ */
+async function prevenir(d: {
+  prenom: string | null;
+  email: string;
+  pays: string;
+  niveaux: string | null;
+  etablissement: string | null;
+  message: string | null;
+}) {
+  const cle = process.env.RESEND_API_KEY;
+  const to = process.env.CONTACT_TO;
+  if (!cle || !to) return;
+  const nomPays = PAYS_AVENTURE.find((p) => p.slug === d.pays)?.nom ?? d.pays;
+  const lignes = [
+    `Pays : ${nomPays}`,
+    `Prénom : ${d.prenom ?? "—"}`,
+    `E-mail : ${d.email}`,
+    `Classe : ${d.niveaux ?? "—"}`,
+    `Établissement : ${d.etablissement ?? "—"}`,
+    "",
+    d.message ?? "(pas de message)",
+    "",
+    "Accepter ou refuser : https://www.eleveai.fr/admin/aventure",
+  ];
+  try {
+    const { error } = await new Resend(cle).emails.send({
+      from: process.env.NEWSLETTER_FROM || "EleveAI <contact@eleveai.fr>",
+      to,
+      replyTo: d.email,
+      subject: `🌍 Aventure : un prof de ${nomPays} veut rejoindre`,
+      text: lignes.join("\n"),
+    });
+    if (error) console.error("aventure e-mail :", error.message);
+  } catch (e) {
+    console.error("aventure e-mail :", e);
+  }
 }
 
 export async function POST(req: Request) {
@@ -63,13 +106,16 @@ export async function POST(req: Request) {
       return NextResponse.json({ ok: false, erreur: "trop-de-candidatures" }, { status: 429 });
     }
 
-    const { error } = await supabase.from("profs_aventure").insert({
+    const demande = {
       prenom: texte(body?.prenom, 40),
       email,
       pays,
       niveaux: texte(body?.niveaux, 80),
       etablissement: texte(body?.etablissement, 120),
       message: texte(body?.message, MAX_MESSAGE),
+    };
+    const { error } = await supabase.from("profs_aventure").insert({
+      ...demande,
       annee: ANNEE_AVENTURE,
       statut: "candidat",
       empreinte,
@@ -84,6 +130,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ ok: false }, { status: 500 });
     }
 
+    await prevenir(demande);
     return NextResponse.json({ ok: true });
   } catch {
     return NextResponse.json({ ok: false }, { status: 500 });
