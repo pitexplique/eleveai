@@ -153,6 +153,27 @@ function explDecimal(calcul: string) {
   );
 }
 
+/* ⛔⛔ 03/11/2026 — D'ABORD DES QUESTIONS SIMPLES (Frédéric) : « le contexte est
+   réservé aux étoiles ★3 et plus ». Ses 6e lisent difficilement : à ★1 et ★2,
+   ni prénom, ni métier, ni situation de la vie (pas de pizza, de course, de
+   magasin…). Une mesure avec son unité (« une longueur de 3,45 m ») n'est pas
+   du contexte. Les situations restent aux gabarits ★3 et plus. */
+/** Une mesure dite simplement, sans situation (★1-★2). Unités sans € ni °C. */
+const MESURE_SIMPLE: Record<string, ((n: string) => string)[]> = {
+  m: [(n) => `Une longueur mesure ${n} m.`, (n) => `Un segment mesure ${n} m.`, (n) => `Une distance vaut ${n} m.`],
+  cm: [(n) => `Un segment mesure ${n} cm.`, (n) => `Une longueur vaut ${n} cm.`],
+  km: [(n) => `Une distance vaut ${n} km.`, (n) => `Une longueur est de ${n} km.`],
+  kg: [(n) => `Une masse vaut ${n} kg.`, (n) => `Une masse est de ${n} kg.`],
+  L: [(n) => `Un volume vaut ${n} L.`, (n) => `Une contenance est de ${n} L.`],
+  s: [(n) => `Une durée vaut ${n} s.`, (n) => `Une durée est de ${n} s.`],
+};
+const mesureSimple = (u: string, n: string) => choix(MESURE_SIMPLE[u])(n);
+/** ★1-★2 : une unité ou rien, pour varier les énoncés sans histoire (« la moitié de 7 kg »). */
+const UNITES_SIMPLES = ["", "", "", "m", "cm", "mm", "km", "kg", "g", "L", "s"];
+const avecUnite = (n: string, u: string) => (u ? `${n} ${u}` : n);
+/** Une unité seulement si le nombre a au plus deux chiffres après la virgule (règle du 06/10). */
+const uniteSiCourt = (...ns: number[]) => (ns.every((x) => (String(rond(x)).split(".")[1] ?? "").length <= 2) ? choix(UNITES_SIMPLES) : "");
+
 function entierAleatoire(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -216,7 +237,8 @@ const MESURES_MOTS = [
   { u: "cm", mot: "centimètres", debut: (p: Prenom) => `La plante ${de(p)} mesure` },
 ];
 
-function genLireEcrire(etoile: 1 | 2, enQcm = false): TutorGeneratedQuestionV4 {
+/** `ctx` (★3, 03/11/2026) : les situations (pizza, gourde, saut…) ; sinon, aucune. */
+function genLireEcrire(etoile: 1 | 2, enQcm = false, ctx = false): TutorGeneratedQuestionV4 {
   const p = prenom();
   if (enQcm) {
     const forme = choix(["fraction", "fraction", "lire"]);
@@ -229,11 +251,11 @@ function genLireEcrire(etoile: 1 | 2, enQcm = false): TutorGeneratedQuestionV4 {
       const leurres = den === 10 ? [virg(n / 100), virg(n), `${n},10`] : [virg(n / 10), virg(n / 1000), `${n},100`];
       const intro = choix([
         `Quel nombre à virgule est égal à ${f} ?`,
-        `${p.nom} hésite entre plusieurs écritures de ${f}. Laquelle est juste ?`,
-        `Le professeur ${de(p)} écrit ${f} au tableau. Quel nombre à virgule ${p.nom} doit-${il(p)} écrire ?`,
+        `Quelle écriture de ${f} est juste ?`,
+        `Quelle est l'écriture décimale de ${f} ?`,
         `Choisis l'écriture à virgule de ${f}.`,
         `${f} est égal à :`,
-        `${p.nom} doit écrire ${f} avec une virgule. Que doit-${il(p)} écrire ?`,
+        `Écris ${f} avec une virgule. Quelle réponse est juste ?`,
       ]);
       return qcm(
         intro,
@@ -259,7 +281,7 @@ function genLireEcrire(etoile: 1 | 2, enQcm = false): TutorGeneratedQuestionV4 {
     ];
     const intro = choix([
       `Comment se lit le nombre ${virg(nombre)} ?`,
-      `${p.nom} lit le nombre ${virg(nombre)} à voix haute. Que dit-${il(p)} ?`,
+      `On lit le nombre ${virg(nombre)} à voix haute. Que dit-on ?`,
       `Quelle phrase décrit le nombre ${virg(nombre)} ?`,
       `Le nombre ${virg(nombre)} est formé de :`,
     ]);
@@ -275,7 +297,8 @@ function genLireEcrire(etoile: 1 | 2, enQcm = false): TutorGeneratedQuestionV4 {
     );
   }
 
-  const forme = choix(etoile === 1 ? ["fraction", "lettres", "situation"] : ["fraction", "lettres", "decomposition", "mesure"]);
+  // 03/11/2026 : les situations (et les mesures d'un prénom) sont montées à ★3 (`ctx`).
+  const forme = ctx ? choix(["situation", "mesure"]) : choix(etoile === 1 ? ["fraction", "lettres"] : ["fraction", "lettres", "decomposition", "mesure"]);
 
   if (forme === "fraction") {
     let n: number, den: number;
@@ -294,10 +317,16 @@ function genLireEcrire(etoile: 1 | 2, enQcm = false): TutorGeneratedQuestionV4 {
       `Quelle est l'écriture décimale de ${f} ?`,
       `Complète : ${f} = …`,
       `Donne ${f} sous la forme d'un nombre à virgule.`,
-      `${p.nom} lit ${f} au tableau. Écris ce nombre avec une virgule.`,
-      `Aide ${p.nom} : quelle est l'écriture décimale de ${f} ?`,
-      `${p.nom} a trouvé ${f} dans son exercice. Comment l'écrire avec une virgule ?`,
-      `Le professeur ${de(p)} lui demande d'écrire ${f} avec une virgule. Que doit-${il(p)} écrire ?`,
+      `Écris le nombre ${f} avec une virgule.`,
+      `Transforme ${f} en nombre à virgule.`,
+      `Comment écrire ${f} avec une virgule ?`,
+      `Quel nombre à virgule est égal à ${f} ?`,
+      `Écris ${f} en nombre décimal.`,
+      `Écris ${f} sous forme décimale.`,
+      `Convertis ${f} en nombre à virgule.`,
+      `Trouve l'écriture à virgule de ${f}.`,
+      `Que vaut ${f} avec une virgule ?`,
+      `Complète avec une virgule : ${f} = …`,
     ]);
     const rangNom = den === 10 ? "dixièmes" : "centièmes";
     const detail =
@@ -321,10 +350,10 @@ function genLireEcrire(etoile: 1 | 2, enQcm = false): TutorGeneratedQuestionV4 {
     const text = choix([
       `Écris en chiffres : ${mots}.`,
       `Quel nombre s'écrit « ${mots} » ?`,
-      `${p.nom} pense au nombre « ${mots} ». Écris-le avec une virgule.`,
-      `Écris avec une virgule le nombre formé de ${mots}.`,
-      `${p.nom} entend « ${mots} » à la radio. Écris ce nombre en chiffres.`,
-      `Dans une dictée de nombres, ${p.nom} entend « ${mots} ». Que doit-${il(p)} écrire ?`,
+      `Écris en chiffres : « ${mots} ».`,
+      `Écris ce nombre avec une virgule : ${mots}.`,
+      `Écris en chiffres : ${mots}.`,
+      `« ${mots} » : écris ce nombre.`,
     ]);
     return courte(
       text,
@@ -357,8 +386,8 @@ function genLireEcrire(etoile: 1 | 2, enQcm = false): TutorGeneratedQuestionV4 {
       `Écris avec une virgule : ${somme}.`,
       `Quel nombre est égal à ${somme} ?`,
       `Complète : ${somme} = …`,
-      `${p.nom} a décomposé un nombre : ${somme}. Quel est ce nombre ?`,
-      `Retrouve le nombre ${de(p)} : ${somme}.`,
+      `Écris ce nombre : ${somme}.`,
+      `Retrouve le nombre : ${somme}.`,
     ]);
     return courte(
       text,
@@ -374,10 +403,19 @@ function genLireEcrire(etoile: 1 | 2, enQcm = false): TutorGeneratedQuestionV4 {
   const k = rangMot === "dixièmes" ? entierAleatoire(2, 9) : choix([entierAleatoire(2, 9), entierAleatoire(11, 99)]);
   if (rangMot === "centièmes" && k % 10 === 0) return genLireEcrire(etoile);
   const v = rond(a + k / (rangMot === "dixièmes" ? 10 : 100));
-  const text = `${m.debut(p)} ${a} ${m.mot} et ${k} ${rangMot}. ${choix([
-    `Écris cette mesure en ${m.mot} avec une virgule.`,
-    `Quelle est cette mesure, écrite avec une virgule ?`,
-  ])}`;
+  // ★2 : la mesure seule, dite simplement ; ★3 (`ctx`) : la mesure d'un prénom.
+  const DEBUTS: Record<string, string[]> = {
+    m: ["Une longueur mesure", "Un segment mesure"],
+    cm: ["Un segment mesure", "Une longueur mesure"],
+    km: ["Une distance vaut", "Une longueur est de"],
+    kg: ["Une masse vaut", "Une masse est de"],
+    L: ["Un volume vaut", "Une contenance est de"],
+    s: ["Une durée vaut", "Une durée est de"],
+  };
+  const debut = ctx ? m.debut(p) : choix(DEBUTS[m.u]);
+  const text = `${debut} ${a} ${m.mot} et ${k} ${rangMot}. ${choix(
+    ctx ? [`Écris cette mesure en ${m.mot} avec une virgule.`, `Quelle est cette mesure, écrite avec une virgule ?`] : ["Écris-la avec une virgule.", `Écris-la en ${m.u}.`],
+  )}`;
   return courte(
     text,
     v,
@@ -427,8 +465,11 @@ function tirerSansDoublon(min: number, max: number, dec: number) {
 
 function genRang(etoile: 1 | 2 | 3): TutorGeneratedQuestionV4 {
   const p = prenom();
-  const enSituation = Math.random() < 0.55;
-  const m = choix(MESURES_RANG);
+  // 03/11/2026 : à ★1, le nombre seul ; à ★2, parfois une mesure dite simplement (pas d'€ ni de °C).
+  const enSituation = etoile > 1 && Math.random() < 0.55;
+  const simple = etoile < 3;
+  const m = choix(simple ? MESURES_RANG.filter((x) => x.u in MESURE_SIMPLE) : MESURES_RANG);
+  const debutM = (n: string) => (simple ? mesureSimple(m.u, n) : m.debut(p, n));
   const ecrit = enSituation
     ? tirerSansDoublon(m.min, m.max, m.dec)
     : tirerSansDoublon(etoile === 1 ? 1 : 10, etoile === 1 ? 9.99 : 99.999, etoile === 1 ? choix([1, 2]) : choix([2, 3]));
@@ -472,19 +513,26 @@ function genRang(etoile: 1 | 2 | 3): TutorGeneratedQuestionV4 {
     );
   }
 
+  // 03/11/2026 : à ★1, le nombre porte parfois une unité (variété sans histoire).
+  const E = etoile === 1 ? avecUnite(ecrit, choix(UNITES_SIMPLES)) : ecrit;
   const text = enSituation
-    ? `${m.debut(p, ecrit)} ${choix([
+    ? `${debutM(ecrit)} ${choix([
         `Quel est le chiffre des ${rang} ?`,
         `Quel chiffre est au rang des ${rang} ?`,
         `Donne le chiffre des ${rang} de ce nombre.`,
-        `${p.nom} cherche le chiffre des ${rang}. Lequel est-ce ?`,
+        simple ? `Écris son chiffre des ${rang}.` : `${p.nom} cherche le chiffre des ${rang}. Lequel est-ce ?`,
       ])}`
     : choix([
-        `Dans ${ecrit}, quel chiffre est au rang des ${rang} ?`,
-        `Quel est le chiffre des ${rang} de ${ecrit} ?`,
+        `Dans ${E}, quel chiffre est au rang des ${rang} ?`,
+        `Quel est le chiffre des ${rang} de ${E} ?`,
         `Donne le chiffre des ${rang} du nombre ${ecrit}.`,
-        `${p.nom} écrit ${ecrit}. Quel chiffre a-t-${il(p)} écrit au rang des ${rang} ?`,
-        `Repère le chiffre des ${rang} de ${ecrit}. Quel est-il ?`,
+        `On écrit ${ecrit}. Quel chiffre est au rang des ${rang} ?`,
+        `Repère le chiffre des ${rang} de ${E}. Quel est-il ?`,
+        `Écris le chiffre des ${rang} de ${E}.`,
+        `Trouve le chiffre des ${rang} de ${E}.`,
+        `Dans ${E}, écris le chiffre des ${rang}.`,
+        `Dans le nombre ${ecrit}, quel chiffre occupe le rang des ${rang} ?`,
+        `Voici le nombre ${ecrit}. Écris son chiffre des ${rang}.`,
       ]);
   return { ...courte(text, Number(chiffre), expl) };
 }
@@ -581,8 +629,11 @@ function genComparer(etoile: 1 | 2 | 3, enQcm = false): TutorGeneratedQuestionV4
     const text = choix([
       `Complète avec <, > ou = : ${virg(a)} … ${yEcrit}`,
       `Quel signe faut-il écrire entre ${virg(a)} et ${yEcrit} ?`,
-      `${p.nom} compare ${virg(a)} et ${yEcrit}. Quel signe doit-${il(p)} écrire entre les deux ?`,
+      etoile === 3
+        ? `${p.nom} compare ${virg(a)} et ${yEcrit}. Quel signe doit-${il(p)} écrire entre les deux ?`
+        : `Compare ${virg(a)} et ${yEcrit}. Choisis <, > ou =.`,
       `Choisis le bon signe : ${virg(a)} … ${yEcrit}`,
+      `Compare : ${virg(a)} … ${yEcrit}. Quel signe convient ?`,
     ]);
     return qcm(
       text,
@@ -591,6 +642,10 @@ function genComparer(etoile: 1 | 2 | 3, enQcm = false): TutorGeneratedQuestionV4
       egalite ? `${virg(a)} et ${yEcrit} sont le même nombre : un zéro à la fin de la partie décimale ne change pas la valeur. On écrit ${virg(a)} = ${yEcrit}.` : explComparer(a, y),
     );
   }
+
+  // 03/11/2026 : à ★1-★2, le « duel » se joue entre deux segments ou deux mesures,
+  // sans prénom ni sport (les duels de la vie restent à ★3).
+  if ((forme === "duel" || forme === "duelNombre") && etoile < 3) return comparerSimple(etoile as 1 | 2, forme === "duel");
 
   if (forme === "duel" || forme === "duelNombre") {
     const d = choix(DUELS);
@@ -625,13 +680,54 @@ function genComparer(etoile: 1 | 2 | 3, enQcm = false): TutorGeneratedQuestionV4
   const sens = choix(["grand", "petit"]);
   const rep = sens === "grand" ? Math.max(a, b) : Math.min(a, b);
   const text = choix([
-    `Entre ${virg(a)} et ${virg(b)}, lequel est le plus ${sens} ?`,
+    `Écris le plus ${sens} : ${virg(a)} ou ${virg(b)}.`,
     `Compare ${virg(a)} et ${virg(b)}. Écris le plus ${sens}.`,
-    `${p.nom} hésite entre ${virg(a)} et ${virg(b)}. Lequel est le plus ${sens} ?`,
+    `Quel est le plus ${sens} : ${virg(a)} ou ${virg(b)} ?`,
     `Donne le plus ${sens} de ces deux nombres : ${virg(a)} ; ${virg(b)}.`,
-    `${p.nom} affirme que ${virg(a)} est plus ${sens} que ${virg(b)}. Écris le nombre qui est vraiment le plus ${sens}.`,
+    etoile === 3
+      ? `${p.nom} affirme que ${virg(a)} est plus ${sens} que ${virg(b)}. Écris le nombre qui est vraiment le plus ${sens}.`
+      : `Quel nombre est le plus ${sens} : ${virg(a)} ou ${virg(b)} ?`,
   ]);
   return courte(text, rep, `${explComparer(a, b)} Le plus ${sens} est ${virg(rep)}.`);
+}
+
+/** ★1-★2 (03/11/2026) : deux segments ([EF] et [GH]) ou deux mesures, sans situation.
+ *  `enQcm` : on choisit le segment (le correcteur lit le nombre écrit après son nom). */
+function comparerSimple(etoile: 1 | 2, enQcm: boolean): TutorGeneratedQuestionV4 {
+  const u = choix(["cm", "m", "km", "kg", "L", "s"]);
+  const base = u === "cm" ? entierAleatoire(2, 30) : u === "s" ? entierAleatoire(9, 59) : entierAleatoire(1, 9);
+  let [x, y] = paireAComparer(base, 1);
+  if (etoile === 2) {
+    x = tirerDecimal(base, base + 0.99, 2);
+    y = rond(Math.floor(rond(x * 10)) / 10 + (Math.random() < 0.4 ? 0 : entierAleatoire(0, 9) / 100));
+    if (x === y) [x, y] = paireAComparer(base, 1);
+    if (Math.random() < 0.5) [x, y] = [y, x];
+  }
+  const max = Math.random() < 0.5;
+  const valeur = max ? Math.max(x, y) : Math.min(x, y);
+  if (enQcm) {
+    const [A, B] = choix([["[EF]", "[GH]"], ["[MN]", "[RS]"], ["[AB]", "[CD]"], ["[TU]", "[VW]"], ["[IJ]", "[KL]"]]);
+    const uL = choix(["cm", "m"]);
+    // 03/11/2026 : 15 mots au plus à ★2.
+    const PG = max ? "plus grand" : "plus petit";
+    const text = choix([
+      `${A} = ${virg(x)} ${uL}. ${B} = ${virg(y)} ${uL}. Le ${PG} ?`,
+      etoile === 2 ? `${A} = ${virg(x)} ${uL}, ${B} = ${virg(y)} ${uL}. Quel segment est le ${PG} ?` : `${A} : ${virg(x)} ${uL}. ${B} : ${virg(y)} ${uL}. Le ${PG} ?`,
+      etoile === 2 ? `${A} mesure ${virg(x)} ${uL}. ${B} mesure ${virg(y)} ${uL}. Le ${PG} ?` : `${A} = ${virg(x)} ${uL}, ${B} = ${virg(y)} ${uL}. Le ${PG} ?`,
+    ]);
+    const bonne = (max ? x > y : x < y) ? A : B;
+    return qcm(text, bonne, [bonne === A ? B : A], `${explComparer(x, y)} La réponse est donc ${bonne}.`);
+  }
+  const [mx, my] = [`${virg(x)} ${u}`, `${virg(y)} ${u}`];
+  const sens = max ? "la plus grande" : "la plus petite";
+  // 03/11/2026 : 12 mots au plus à ★1.
+  const text = choix([
+    `Compare ${mx} et ${my}. Écris ${sens}.`,
+    `Écris ${sens} : ${mx} ou ${my}.`,
+    `Écris ${sens} mesure : ${mx} ou ${my}.`,
+    `Entre ${mx} et ${my}, écris ${sens}.`,
+  ]);
+  return courte(text, valeur, `${explComparer(x, y)} ${sens === "la plus grande" ? "La plus grande" : "La plus petite"} mesure est ${virg(valeur)} ${u}.`, u);
 }
 
 // ─── DECIMAL_DEFI ────────────────────────────────────────────────────────────
@@ -647,9 +743,19 @@ const INTROS_DEVINETTE = [
   (p: Prenom) => `Au jeu du « qui suis-je ? », ${p.nom} donne ces indices.`,
 ];
 
+/** ★1 (03/11/2026) : la devinette sans prénom ni classe. */
+const INTROS_DEVINETTE_SIMPLES = [
+  "Voici une devinette.",
+  "Trouve le nombre mystère.",
+  "Un nombre est caché.",
+  "Devine le nombre.",
+  "Voici les indices d'un nombre.",
+  "Qui suis-je ?",
+];
+
 function genDefi(etoile: 1 | 2 | 3 | 4 | 5): TutorGeneratedQuestionV4 {
   const p = prenom();
-  const intro = choix(INTROS_DEVINETTE)(p);
+  const intro = etoile === 1 ? choix(INTROS_DEVINETTE_SIMPLES) : choix(INTROS_DEVINETTE)(p);
 
   if (etoile === 1) {
     const rangs: NomRang[] = choix([
@@ -660,14 +766,15 @@ function genDefi(etoile: 1 | 2 | 3 | 4 | 5): TutorGeneratedQuestionV4 {
     ] as NomRang[][]);
     const chiffres = rangs.map((r) => (r === "dizaines" || r === "centièmes" ? entierAleatoire(1, 9) : entierAleatoire(r === "dixièmes" && !rangs.includes("centièmes") ? 1 : 0, 9)));
     const val = rangs.reduce((s, r, i) => s + chiffres[i] * { dizaines: 10, unités: 1, dixièmes: 0.1, centièmes: 0.01, millièmes: 0.001 }[r], 0);
-    const indices = shuffle(rangs.map((r, i) => `son chiffre des ${r} est ${chiffres[i]}`));
-    const absents = rangs.includes("dixièmes") ? "" : " Il n'a pas de dixièmes.";
-    const text = `${intro} Indices : ${indices.join(", ")}.${absents} ${choix(["Quel est ce nombre ?", "Écris ce nombre.", "Retrouve ce nombre."])}`;
+    // 03/11/2026 : 12 mots au plus — « Écris le nombre. Unités : 4. Dixièmes : 2. »
+    const indices = shuffle(rangs.map((r, i) => `${r.charAt(0).toUpperCase()}${r.slice(1)} : ${chiffres[i]}.`));
+    const absents = rangs.includes("dixièmes") ? "" : " Dixièmes : 0.";
+    const text = `${choix(["Écris le nombre.", "Trouve le nombre.", "Écris ce nombre.", "Forme le nombre.", "Retrouve le nombre.", "Trouve ce nombre."])} ${indices.join(" ")}${absents}`;
     return courte(text, rond(val), `On place chaque chiffre à son rang : les unités juste avant la virgule, les dixièmes juste après, puis les centièmes.${absents ? " Sans dixièmes, on écrit 0 au rang des dixièmes." : ""} On obtient ${virg(rond(val))}.`);
   }
 
   if (etoile === 2) {
-    const nb = choix([3, 4]);
+    const nb = 3; // 03/11/2026 : trois étiquettes, pour un énoncé court (15 mots au plus).
     const chiffres: number[] = [];
     while (chiffres.length < nb) {
       const c = entierAleatoire(1, 9);
@@ -679,9 +786,16 @@ function genDefi(etoile: 1 | 2 | 3 | 4 | 5): TutorGeneratedQuestionV4 {
     const s = tri.join("");
     const ecrit = `${s.slice(0, nb - apres)},${s.slice(nb - apres)}`;
     const liste = shuffle(chiffres).join(", ").replace(/, (\d)$/, " et $1");
-    const text = `${p.nom} a des étiquettes : ${liste}, et une virgule. ${Il(p)} utilise chaque étiquette une fois et veut ${apres === 1 ? "un seul chiffre" : `${LETTRES[apres]} chiffres`} après la virgule. ${choix([
-      `Quel est le plus ${grand ? "grand" : "petit"} nombre qu'${il(p)} peut écrire ?`,
-      `Écris le plus ${grand ? "grand" : "petit"} nombre possible.`,
+    // 03/11/2026 : ★2 sans prénom.
+    // 03/11/2026 : court — « Chiffres : 4, 6, 7. Écris le plus grand nombre, 2 chiffres après la virgule. »
+    const n2 = `${apres} chiffre${apres > 1 ? "s" : ""} après la virgule`;
+    const PG = `plus ${grand ? "grand" : "petit"}`;
+    const text = `${choix(["Chiffres", "Étiquettes", "Jetons"])} : ${shuffle(chiffres).join(", ")}. ${choix([
+      `Écris le ${PG} nombre, ${n2}.`,
+      `Forme le ${PG} nombre, ${n2}.`,
+      `Le ${PG} nombre, ${n2} ?`,
+      `Trouve le ${PG} nombre, ${n2}.`,
+      `Compose le ${PG} nombre, ${n2}.`,
     ])}`;
     return courte(
       text,
@@ -817,7 +931,10 @@ function explArrondi(n: number, dec: number, nomRang: string) {
 
 function genArrondir(etoile: 2 | 3 | 4): TutorGeneratedQuestionV4 {
   const p = prenom();
-  const m = choix(MESURES_ARRONDI);
+  // 03/11/2026 : à ★2, la mesure est dite simplement (pas d'€ ni de °C, pas de prénom).
+  const simple = etoile === 2;
+  const m = choix(simple ? MESURES_ARRONDI.filter((x) => x.u in MESURE_SIMPLE) : MESURES_ARRONDI);
+  const phraseM = (n: string) => (simple ? mesureSimple(m.u, n) : m.phrase(p, n));
   const enSituation = Math.random() < 0.6;
   // ⛔ 06/10/2026 (Frédéric) : une mesure en situation n'a jamais plus de deux
   // chiffres après la virgule. En situation, on arrondit donc à l'unité ou au
@@ -867,20 +984,25 @@ function genArrondir(etoile: 2 | 3 | 4): TutorGeneratedQuestionV4 {
     return qcm(text, virg(bon), leurres.map((x) => virg(x)), explArrondi(n, dec, rang.nom));
   }
 
+  // 03/11/2026 : à ★2, le nombre nu porte parfois une unité (variété sans histoire).
+  const uN = simple && !enSituation ? uniteSiCourt(n) : "";
+  const ecritN = avecUnite(ecrit, uN);
   const text = enSituation
-    ? `${m.phrase(p, ecrit)} ${choix([
+    ? `${phraseM(ecrit)} ${choix([
         `Arrondis ce nombre ${nomRang}.`,
         `Quelle est sa valeur arrondie ${nomRang} ?`,
-        `${p.nom} veut l'arrondir ${nomRang}. Que trouve-t-${il(p)} ?`,
+        simple ? `Arrondis cette mesure ${nomRang}.` : `${p.nom} veut l'arrondir ${nomRang}. Que trouve-t-${il(p)} ?`,
       ])}`
     : choix([
-        `Arrondis ${ecrit} ${nomRang}.`,
-        `Que donne ${ecrit} arrondi ${nomRang} ?`,
-        `${p.nom} arrondit ${ecrit} ${nomRang}. Que trouve-t-${il(p)} ?`,
-        `Écris l'arrondi de ${ecrit} ${nomRang}.`,
+        `Arrondis ${ecritN} ${nomRang}.`,
+        `Que donne ${ecritN} arrondi ${nomRang} ?`,
+        simple ? `Quel est l'arrondi de ${ecritN} ${nomRang} ?` : `${p.nom} arrondit ${ecrit} ${nomRang}. Que trouve-t-${il(p)} ?`,
+        `Écris l'arrondi de ${ecritN} ${nomRang}.`,
+        `Donne la valeur arrondie de ${ecritN} ${nomRang}.`,
+        ...(simple ? [`Arrondis ${nomRang} : ${ecritN}.`, `Cherche l'arrondi de ${ecritN} ${nomRang}.`] : []),
       ]);
   return {
-    ...courte(text, r, explArrondi(n, dec, nomRang), enSituation ? m.u : ""),
+    ...courte(text, r, explArrondi(n, dec, nomRang), enSituation ? m.u : uN),
     canvas: droiteZoom(bas, haut, rond(1 / f / 2), [{ value: n, label: enSituation ? "M" : "A" }]),
   };
 }
@@ -889,7 +1011,10 @@ function genArrondir(etoile: 2 | 3 | 4): TutorGeneratedQuestionV4 {
 
 function genEncadrer(etoile: 2 | 3 | 4): TutorGeneratedQuestionV4 {
   const p = prenom();
-  const m = choix(MESURES_ARRONDI);
+  // 03/11/2026 : à ★2, la mesure est dite simplement (voir genArrondir).
+  const simple = etoile === 2;
+  const m = choix(simple ? MESURES_ARRONDI.filter((x) => x.u in MESURE_SIMPLE) : MESURES_ARRONDI);
+  const phraseM = (n: string) => (simple ? mesureSimple(m.u, n) : m.phrase(p, n));
   const enSituation = Math.random() < 0.55;
   // ⛔ 06/10/2026 : en situation, deux chiffres après la virgule au plus (voir genArrondir).
   const dec = enSituation ? choix(etoile === 2 ? [0] : m.rangs.filter((r) => r < 2).concat(m.rangs[0] < 2 ? [] : [1])) : choix(etoile === 2 ? [0, 0, 1] : [0, 1, 2]);
@@ -942,14 +1067,16 @@ function genEncadrer(etoile: 2 | 3 | 4): TutorGeneratedQuestionV4 {
   const manqueHaut = Math.random() < 0.5;
   const trou = manqueHaut ? `${B} < ${ecrit} < …` : `… < ${ecrit} < ${H}`;
   const text = enSituation
-    ? `${m.phrase(p, ecrit)} ${choix([
-        `Encadre ce nombre ${rang.nom} : ${trou}. Quel nombre remplace les points ?`,
-        `${p.nom} l'encadre ${rang.nom} : ${trou}. Complète.`,
-        `Complète cet encadrement ${rang.nom} : ${trou}.`,
+    ? `${phraseM(ecrit)} ${choix([
+        simple ? `Complète ${rang.nom} : ${trou}` : `Encadre ce nombre ${rang.nom} : ${trou}. Quel nombre remplace les points ?`,
+        simple ? `Encadre ${rang.nom} : ${trou}` : `${p.nom} l'encadre ${rang.nom} : ${trou}. Complète.`,
+        simple ? `Encadre-la ${rang.nom} : ${trou}` : `Complète cet encadrement ${rang.nom} : ${trou}.`,
       ])}`
     : choix([
         `Complète l'encadrement de ${ecrit} ${rang.nom} : ${trou}`,
-        `${p.nom} encadre ${ecrit} ${rang.nom} : ${trou}. Que doit-${il(p)} écrire à la place des points ?`,
+        simple
+          ? `Encadre ${ecrit} ${rang.nom} : ${trou}`
+          : `${p.nom} encadre ${ecrit} ${rang.nom} : ${trou}. Que doit-${il(p)} écrire à la place des points ?`,
         `Encadrement ${rang.nom} : ${trou}. Quel nombre faut-il écrire ?`,
         `Trouve le nombre qui manque dans l'encadrement ${rang.nom} : ${trou}`,
       ]);
@@ -1004,7 +1131,8 @@ const explAddition = (termes: number[], s: number) =>
 function genAddition(etoile: 2 | 3 | 4 | 5): TutorGeneratedQuestionV4 {
   const p = prenom();
   const forme = choix(
-    etoile === 2 ? ["pur", "situation", "situation", "situation"] : etoile === 3 ? ["pur", "trou", "situation", "situation"] : etoile === 4 ? ["pur3", "situation", "situation", "trou"] : ["manque", "manque", "trou", "pense"],
+    // 03/11/2026 : ★2 sans situation (des mesures dites simplement).
+    etoile === 2 ? ["pur", "pur", "mesure", "mesure"] : etoile === 3 ? ["pur", "trou", "situation", "situation"] : etoile === 4 ? ["pur3", "situation", "situation", "trou"] : ["manque", "manque", "trou", "pense"],
   );
   const decs = etoile === 2 ? [1, 1] : etoile === 3 ? shuffle([1, 2]) : shuffle([choix([0, 1]), 2]);
 
@@ -1016,6 +1144,32 @@ function genAddition(etoile: 2 | 3 | 4 | 5): TutorGeneratedQuestionV4 {
     const somme = rond(a + b);
     const text = `${s.phrase(p, f(a), f(b))} ${choix(s.questions)(p)}`;
     return courte(text, somme, explAddition([a, b], somme), s.u, s.u === "€" ? 2 : undefined);
+  }
+
+  if (forme === "mesure") {
+    const u = choix(["m", "cm", "km", "kg", "L", "g", "mm", "s"]);
+    const a = tirerDecimal(0.5, u === "cm" || u === "km" ? 40 : 9, 1);
+    const b = tirerDecimal(0.5, u === "cm" || u === "km" ? 40 : 9, choix([1, 2]));
+    const somme = rond(a + b);
+    const [A, B] = [`${virg(a)} ${u}`, `${virg(b)} ${u}`];
+    const text = choix(
+      u === "m" || u === "cm" || u === "km"
+        ? [
+            `On met bout à bout ${A} et ${B}. Quelle longueur obtient-on ?`,
+            `Additionne ${A} et ${B}.`,
+            `Calcule ${A} + ${B}.`,
+            `Quelle est la somme de ${A} et de ${B} ?`,
+          ]
+        : [
+            `Additionne ${A} et ${B}.`,
+            `Calcule ${A} + ${B}.`,
+            `Quelle est la somme de ${A} et de ${B} ?`,
+            `Que vaut ${A} + ${B} ?`,
+            `Ajoute ${B} à ${A}.`,
+            `Trouve la somme de ${A} et ${B}.`,
+          ],
+    );
+    return courte(text, somme, explAddition([a, b], somme), u);
   }
 
   if (forme === "manque") {
@@ -1054,16 +1208,20 @@ function genAddition(etoile: 2 | 3 | 4 | 5): TutorGeneratedQuestionV4 {
   const termes = forme === "pur3" ? [tirerDecimal(1, 40, 2), tirerDecimal(1, 40, choix([0, 1])), tirerDecimal(0.1, 9, choix([1, 2]))] : [tirerDecimal(0.1, etoile === 2 ? 9 : 30, decs[0]), tirerDecimal(0.1, etoile === 2 ? 9 : 30, decs[1] || 1)];
   const ordre = shuffle(termes);
   const somme = rond(ordre.reduce((s, x) => s + x, 0));
-  const expr = ordre.map((x) => virg(x)).join(" + ");
+  // 03/11/2026 : à ★2, une unité de temps en temps (variété sans histoire).
+  const uA = etoile === 2 ? uniteSiCourt(...ordre, somme) : "";
+  const expr = ordre.map((x) => avecUnite(virg(x), uA)).join(" + ");
   const text = choix([
     `Donne la valeur de ${expr}.`,
     `Que vaut ${expr} ?`,
     `Complète : ${expr} = …`,
     `Effectue l'addition ${expr}.`,
-    `${p.nom} calcule ${expr}. Quel résultat doit-${il(p)} trouver ?`,
+    etoile === 2 ? `Calcule ${expr}.` : `${p.nom} calcule ${expr}. Quel résultat doit-${il(p)} trouver ?`,
     `Pose et calcule ${expr}.`,
+    `Quel est le résultat de ${expr} ?`,
+    ...(etoile === 2 ? [`Additionne : ${expr}.`, `Trouve la somme ${expr}.`, `Écris le résultat de ${expr}.`] : []),
   ]);
-  return courte(text, somme, explAddition(ordre, somme));
+  return courte(text, somme, explAddition(ordre, somme), uA);
 }
 
 // ─── DECIMAL_MULTIPLIER ──────────────────────────────────────────────────────
@@ -1347,18 +1505,54 @@ function genCalculDefi(etoile: 1 | 2 | 3 | 4): TutorGeneratedQuestionV4 {
     const r = s.mot === "double" ? rond(n * 2) : s.mot === "moitié" ? rond(n / 2) : rond(n / 4);
     const f = (x: number) => (s.u === "€" ? virg(x, x % 1 ? 2 : 0) : virg(x));
     const calcul = s.mot === "double" ? `${virg(n)} × 2 = ${virg(r)}` : s.mot === "moitié" ? `${virg(n)} ÷ 2 = ${virg(r)}` : `${virg(n)} ÷ 4 = ${virg(r)} (la moitié de la moitié)`;
+    // 03/11/2026 : ★1 sans situation — « la moitié de 7 », un seul nombre dans le texte.
+    const u = uniteSiCourt(n, r);
+    const N = avecUnite(virg(n), u);
+    const le = s.mot === "moitié" ? "la moitié" : `le ${s.mot}`;
+    const Le = s.mot === "moitié" ? "La moitié" : `Le ${s.mot}`;
+    const simple = choix([
+      `${s.mot === "moitié" ? "Quelle est" : "Quel est"} ${le} de ${N} ?`,
+      `Calcule ${le} de ${N}.`,
+      `${Le} de ${N}, c'est combien ?`,
+      `Trouve ${le} de ${N}.`,
+      `Combien vaut ${le} de ${N} ?`,
+      `Écris ${le} de ${N}.`,
+      `Donne ${le} de ${N}.`,
+      `Cherche ${le} de ${N}.`,
+    ]);
     return courte(
-      s.phrase(p, f(n)),
+      simple,
       r,
       `${s.mot === "double" ? "Le double, c'est × 2" : s.mot === "moitié" ? "La moitié, c'est ÷ 2" : "Le quart, c'est ÷ 4"} : ${calcul}.${s.mot === "double" ? " On double les unités et les dixièmes, sans oublier la retenue." : " Le partage ne tombe pas juste en nombres entiers : le résultat est un nombre décimal."}`,
-      s.u,
-      s.u === "€" ? 2 : undefined,
+      u,
     );
   }
 
-  if (etoile === 2 || etoile === 3) {
+  if (etoile === 2) {
+    // 03/11/2026 : ★2 sans situation — « 25 % de 44 ».
+    const t = choix([10, 50, 25]);
+    const b = entierAleatoire(10, 120);
+    const r = rond((b * t) / 100);
+    const methode =
+      t === 50 ? `50 %, c'est la moitié : ${b} ÷ 2 = ${virg(r)}.` : t === 25 ? `25 %, c'est le quart : ${b} ÷ 4 = ${virg(r)}.` : `10 %, c'est le dixième : ${b} ÷ 10 = ${virg(r)}.`;
+    const u = uniteSiCourt(r);
+    const B = avecUnite(String(b), u);
+    const text = choix([
+      `Calcule ${t} % de ${B}.`,
+      `Combien vaut ${t} % de ${B} ?`,
+      `Que vaut ${t} % de ${B} ?`,
+      `${t} % de ${B}, c'est combien ?`,
+      `Trouve ${t} % de ${B}.`,
+      `Donne ${t} % de ${B}.`,
+      `Cherche ${t} % de ${B}.`,
+      `Écris ${t} % de ${B}.`,
+    ]);
+    return courte(text, r, methode, u);
+  }
+
+  if (etoile === 3) {
     const s = choix(POURCENTAGES);
-    const t = choix(etoile === 2 ? [10, 50, 25] : [10, 20, 25, 50, 5, 30]);
+    const t = choix([10, 20, 25, 50, 5, 30]);
     const b = entierAleatoire(s.min, s.max);
     const r = rond((b * t) / 100);
     const apres = etoile === 3 && /réduction|remise/.test(s.phrase(p, "1", 1)) && Math.random() < 0.6;
@@ -1420,7 +1614,8 @@ function explFois01(n: number, F: (typeof FACTEURS_01)[number]) {
 
 function genFois01(etoile: 2 | 3 | 4): TutorGeneratedQuestionV4 {
   const p = prenom();
-  const forme = choix(etoile === 2 ? ["pur", "situation", "situation"] : etoile === 3 ? ["pur", "situation", "facteur", "situation"] : ["compare", "equivalent", "situation", "facteur"]);
+  // 03/11/2026 : ★2 sans situation (calcul nu seulement).
+  const forme = choix(etoile === 2 ? ["pur"] : etoile === 3 ? ["pur", "situation", "facteur", "situation"] : ["compare", "equivalent", "situation", "facteur"]);
   const F = choix(etoile === 2 ? FACTEURS_01.slice(0, 2) : FACTEURS_01);
 
   if (forme === "situation") {
@@ -1477,16 +1672,22 @@ function genFois01(etoile: 2 | 3 | 4): TutorGeneratedQuestionV4 {
     );
   }
 
-  const [x, y] = Math.random() < 0.7 ? [virg(n), F.ecrit] : [F.ecrit, virg(n)];
+  // 03/11/2026 : à ★2, une unité de temps en temps (variété sans histoire).
+  const uF = etoile === 2 ? uniteSiCourt(n, r) : "";
+  const [x, y] = Math.random() < 0.7 || uF ? [avecUnite(virg(n), uF), F.ecrit] : [F.ecrit, virg(n)];
   const text = choix([
     `Que vaut ${x} × ${y} ?`,
     `Complète : ${x} × ${y} = …`,
     `Calcule ${x} × ${y} de tête.`,
-    `${p.nom} prend ${F.nom} de ${virg(n)} : ${virg(n)} × ${F.ecrit} = … Que trouve-t-${il(p)} ?`,
+    etoile === 2
+      ? `Prends ${F.nom} de ${avecUnite(virg(n), uF)} : ${avecUnite(virg(n), uF)} × ${F.ecrit} = …`
+      : `${p.nom} prend ${F.nom} de ${virg(n)} : ${virg(n)} × ${F.ecrit} = … Que trouve-t-${il(p)} ?`,
     `Donne le résultat de ${x} × ${y}.`,
-    `${p.nom} calcule ${x} × ${y}. Quel résultat doit-${il(p)} trouver ?`,
+    etoile === 2 ? `Quel est le résultat de ${x} × ${y} ?` : `${p.nom} calcule ${x} × ${y}. Quel résultat doit-${il(p)} trouver ?`,
+    `Effectue ${x} × ${y}.`,
+    `Combien font ${x} × ${y} ?`,
   ]);
-  return courte(text, r, explFois01(n, F));
+  return courte(text, r, explFois01(n, F), uF);
 }
 
 export const decimauxBank: TutorBankItemV4[] = [
@@ -2500,7 +2701,7 @@ export const decimauxBank: TutorBankItemV4[] = [
     microId: "decimal_calcul_defi",
     difficulty: 2,
     theme: "neutral",
-    text: "Comment partager un gâteau en 6 parts parfaitement égales ?",
+    text: "Comment partager un disque en 6 parts parfaitement égales ?",
     format: "qcm",
     choices: [
       "couper au hasard",
@@ -2686,6 +2887,22 @@ export const decimauxBank: TutorBankItemV4[] = [
     hint: "Repère le rang de chaque chiffre : dixièmes juste après la virgule, puis centièmes.",
     tags: ["decimal_nombre", "ecriture", "qcm", "template"],
     generate: () => genLireEcrire(2, true),
+  },
+
+  {
+    kind: "template",
+    // 03/11/2026 : les situations de lire/écrire (pizza, gourde, saut, colis…),
+    // montées de ★1-★2 à ★3.
+    id: "decimal_lire_ecrire_tpl_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "decimal_nombre",
+    microId: "decimal_lire_ecrire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Les dixièmes se placent juste après la virgule, les centièmes au deuxième rang.",
+    tags: ["decimal_nombre", "ecriture", "template"],
+    generate: () => genLireEcrire(2, false, true),
   },
 
   // =========================

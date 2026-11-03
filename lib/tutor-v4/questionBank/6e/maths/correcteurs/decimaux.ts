@@ -187,6 +187,18 @@ const r6 = (x: number) => Math.round(x * 1e6) / 1e6;
 function valeurDefi(t: string): number | boolean | string {
   const indices = [...t.matchAll(/chiffre des (dizaines|unités|dixièmes|centièmes) est (\d)/g)];
   if (indices.length) return r6(indices.reduce((s, m) => s + POIDS[m[1]] * Number(m[2]), 0));
+  // 03/11/2026 : la forme courte de ★1 — « Écris le nombre. Unités : 4. Dixièmes : 2. »
+  const courts = [...t.matchAll(/(Dizaines|Unités|Dixièmes|Centièmes) : (\d)\./g)];
+  if (courts.length) return r6(courts.reduce((s, m) => s + POIDS[m[1].toLowerCase()] * Number(m[2]), 0));
+  // 03/11/2026 : la forme courte de ★2 — « Chiffres : 4, 6, 7. Écris le plus grand nombre, 2 chiffres après la virgule. »
+  const ch = t.match(/^(?:Chiffres|Étiquettes|Jetons) :([\d, ]+)\. .*?(\d) chiffres? après la virgule/);
+  if (ch) {
+    const chiffres = nombres(ch[1]);
+    const apres = Number(ch[2]);
+    const grand = /plus grand/.test(t);
+    const s = [...chiffres].sort((a, b) => (grand ? b - a : a - b)).join("");
+    return lv(`${s.slice(0, s.length - apres)},${s.slice(s.length - apres)}`);
+  }
 
   const etiq = t.match(/étiquettes : ([\d, et]+), et une virgule/);
   if (etiq) {
@@ -276,7 +288,7 @@ function corrigerArrondir(q: TutorGeneratedQuestionV4): string[] {
   if (q.format === "qcm") return qcmUnique(q, (c) => egal(lireNombre(c), r));
   const p: string[] = [];
   if (!egal(attendu(q), r)) p.push(`l'arrondi de ${n} est ${r}, pas ${q.expected[0]}`);
-  const u = t.match(/\d (€|km|s|m|kg|L|°C|cm)(?![a-z])/)?.[1] ?? "";
+  const u = t.match(/\d (€|km|kg|mm|cm|s|m|g|L|°C)(?![a-z])/)?.[1] ?? "";
   if (u !== uniteAttendue(q)) p.push(`unité « ${uniteAttendue(q)} » au lieu de « ${u} »`);
   return [...p, ...verifierZoom(q, n, dec)];
 }
@@ -474,7 +486,8 @@ function corrigerFois01(q: TutorGeneratedQuestionV4): string[] {
       return qcmUnique(q, (c) => c.startsWith(v < n ? "plus petit" : v > n ? "plus grand" : "égal"));
     return qcmUnique(q, (c) => egal(evaluer(c), v));
   }
-  const produit = t.match(new RegExp(`${NB} × ${NB}`));
+  // 03/11/2026 : « 37 kg × 0,1 » (★2) — une unité peut suivre le premier nombre.
+  const produit = t.match(new RegExp(`${NB}(?: (?:mm|cm|km|kg|m|g|L|s))? × ${NB}`));
   const ns = produit ? [lireNombre(produit[1])!, lireNombre(produit[2])!] : nombres(t);
   if (ns.length !== 2) return [`${ns.length} nombres dans l'énoncé`];
   if (![0.1, 0.01, 0.001].some((f) => ns.includes(f))) return ["aucun facteur 0,1 · 0,01 · 0,001 dans l'énoncé"];
@@ -522,6 +535,7 @@ const BASE: CorrecteursMaths = {
   decimal_lire_ecrire_tpl_1: corrigerLireEcrire,
   decimal_lire_ecrire_tpl_2: corrigerLireEcrire,
   decimal_lire_ecrire_qcm_tpl_1: corrigerLireEcrire,
+  decimal_lire_ecrire_tpl_situation: corrigerLireEcrire, // 03/11/2026 : situations montées à ★3
 };
 
 /**
