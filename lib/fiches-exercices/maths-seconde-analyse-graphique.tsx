@@ -65,6 +65,12 @@ export const exercicesAnalyseGraphiqueSeconde: FicheExercicesData = {
       exercices: [
         {
           enonce: "Voici la courbe d'une fonction $f$ définie sur $[-3\\,;\\,4]$.\nLire graphiquement $f(-2)$, $f(0)$, $f(1)$ et $f(4)$.",
+          reponses: [
+            { question: "f(-2)", attendu: "-1" },
+            { question: "f(0)", attendu: "1" },
+            { question: "f(1)", attendu: "2" },
+            { question: "f(4)", attendu: "-1" },
+          ],
           figure: courbe("C1", [-4, 5, -3, 3]),
           correction:
             "Pour chaque nombre, on part de l'axe horizontal, on va jusqu'à la courbe, puis on lit l'ordonnée.\n$f(-2) = -1$ : au-dessus de $-2$, la courbe est à la hauteur $-1$.\n$f(0) = 1$, $f(1) = 2$ (le sommet de la courbe), $f(4) = -1$.\n⛔ Le piège : répondre $f(0) = 0$ en regardant l'origine. On lit la HAUTEUR de la courbe au-dessus de $0$, ici $1$.",
@@ -72,6 +78,12 @@ export const exercicesAnalyseGraphiqueSeconde: FicheExercicesData = {
         },
         {
           enonce: "Voici la courbe d'une fonction $g$ définie sur $[-4\\,;\\,3]$.\nDonner les antécédents par $g$ de :\na) $1$\nb) $0$\nc) $-2$\nd) $3$",
+          reponses: [
+            { question: "a)", attendu: "-3 ; 3" },
+            { question: "b)", attendu: "-2 ; 2" },
+            { question: "c)", attendu: "0" },
+            { question: "d)", attendu: ["aucun", "aucun antécédent", "pas d'antécédent"] },
+          ],
           figure: courbe("C2", [-5, 4, -3, 3]),
           correction:
             "Pour chaque nombre $k$, on trace la droite horizontale $y = k$ et on lit les abscisses des points où elle coupe la courbe.\na) $y = 1$ coupe la courbe en $x = -3$ et en $x = 3$ : deux antécédents, $-3$ et $3$.\nb) $y = 0$ (l'axe horizontal) : $-2$ et $2$.\nc) $y = -2$ touche la courbe en un seul point, le bas du creux : $0$ est le seul antécédent.\nd) $y = 3$ passe au-dessus de toute la courbe : $3$ n'a AUCUN antécédent.\n⭐ Une image est unique ; des antécédents, il peut y en avoir deux, un… ou aucun.",
@@ -80,6 +92,12 @@ export const exercicesAnalyseGraphiqueSeconde: FicheExercicesData = {
         },
         {
           enonce: "Voici la courbe d'une fonction $h$ définie sur $[-2\\,;\\,5]$. Résoudre graphiquement :\na) $h(x) = 1$\nb) $h(x) = 2$\nc) $h(x) = -1$\nd) $h(x) = 3$",
+          reponses: [
+            { question: "a)", attendu: "-1 ; 3 ; 5" },
+            { question: "b)", attendu: "-2 ; 4" },
+            { question: "c)", attendu: "1" },
+            { question: "d)", attendu: ["aucune", "aucune solution", "pas de solution", "∅"] },
+          ],
           figure: courbe("C3", [-3, 6, -2, 3]),
           correction:
             "Résoudre $h(x) = k$, c'est chercher les abscisses des points de la courbe à la hauteur $k$.\na) La droite $y = 1$ coupe la courbe TROIS fois : $S = \\{-1\\,;\\,3\\,;\\,5\\}$.\nb) $y = 2$ : en $-2$ (le bord gauche) et en $4$ (le sommet) : $S = \\{-2\\,;\\,4\\}$.\nc) $y = -1$ touche le creux en $1$ : $S = \\{1\\}$.\nd) $y = 3$ ne rencontre jamais la courbe : $S = \\varnothing$.\n⛔ Le piège au a) : s'arrêter à deux solutions. On balaie la droite jusqu'au BOUT du domaine : le point d'abscisse $5$ compte.",
@@ -104,6 +122,10 @@ export const exercicesAnalyseGraphiqueSeconde: FicheExercicesData = {
         },
         {
           enonce: "Voici la courbe d'une fonction $h$ définie sur $[-2\\,;\\,5]$. Résoudre graphiquement :\na) $h(x) > 0$\nb) $h(x) < 1$",
+          reponses: [
+            { question: "a)", attendu: "[-2 ; 0[ ∪ ]2 ; 5]" },
+            { question: "b)", attendu: "]-1 ; 3[" },
+          ],
           figure: courbe("C3", [-3, 6, -2, 3]),
           correction:
             "a) On garde les abscisses des points AU-DESSUS de l'axe horizontal. La courbe coupe l'axe en $0$ et en $2$ ; elle est au-dessus avant $0$ et après $2$.\nInégalité STRICTE : $0$ et $2$ sont exclus (là, $h$ vaut $0$, pas plus). Les bornes $-2$ et $5$ sont incluses.\n$S = [-2\\,;\\,0[ \\,\\cup\\, ]2\\,;\\,5]$.\nb) On trace $y = 1$ : elle coupe la courbe en $-1$, $3$ et $5$. La courbe est SOUS la droite entre $-1$ et $3$ seulement (en $5$, elle la touche sans passer dessous).\n$S = ]-1\\,;\\,3[$.\n⛔ Le piège au b) : ajouter $5$. En $5$, $h(5) = 1$, et $1 < 1$ est faux.",
@@ -112,6 +134,9 @@ export const exercicesAnalyseGraphiqueSeconde: FicheExercicesData = {
         },
         {
           enonce: "On reprend la fonction $g$ de l'exercice 2.\nLéa doit lire $g(2)$. Elle trace la droite $y = 2$, trouve le point de la courbe d'abscisse $-4$, et répond $g(2) = -4$.\na) Quelle est sa confusion ?\nb) Que vaut vraiment $g(2)$ ?\nc) Que signifie, en fait, le nombre $-4$ qu'elle a trouvé ?",
+          reponses: [
+            { question: "b)", attendu: "0" },
+          ],
           figure: courbe("C2", [-5, 4, -3, 3]),
           correction:
             "a) Léa a lu sur le MAUVAIS AXE : elle est partie de $2$ sur l'axe vertical, alors que $g(2)$ se lit en partant de $2$ sur l'axe horizontal.\nb) Au-dessus de $x = 2$, la courbe coupe l'axe : $g(2) = 0$.\nc) Elle a trouvé un ANTÉCÉDENT de $2$ : $g(-4) = 2$. C'est d'ailleurs le seul, car la courbe ne remonte jamais à $2$ ensuite.\n⭐ L'image se lit sur l'axe VERTICAL, l'antécédent sur l'axe HORIZONTAL.",
@@ -142,6 +167,12 @@ export const exercicesAnalyseGraphiqueSeconde: FicheExercicesData = {
       exercices: [
         {
           enonce: "Voici la courbe d'une fonction $u$ définie sur $[-5\\,;\\,3]$.\na) Lire $u(-3)$ et $u(2)$.\nb) Donner les antécédents de $1$.\nc) Dresser le tableau de signes de $u$.\nd) Dresser le tableau de variations de $u$.\ne) Résoudre graphiquement $u(x) \\geqslant 1$.",
+          reponses: [
+            { question: "a) u(-3)", attendu: "1" },
+            { question: "a) u(2)", attendu: "-2" },
+            { question: "b)", attendu: "-3 ; -1" },
+            { question: "e)", attendu: "[-3 ; -1]" },
+          ],
           figure: courbe("C4", [-6, 4, -3, 3]),
           correction:
             "a) $u(-3) = 1$ et $u(2) = -2$ (le bas du creux).\nb) La droite $y = 1$ coupe la courbe en $-3$ et en $-1$ : les antécédents de $1$ sont $-3$ et $-1$.\nc) Zéros : $-4$ et $0$. La courbe est sous l'axe avant $-4$, au-dessus entre $-4$ et $0$, sous l'axe après $0$ : $-$, $0$, $+$, $0$, $-$.\nd) Sommets : $-2$ (en haut, $u(-2) = 2$) et $2$ (en bas, $u(2) = -2$). Aux bornes : $u(-5) = -1$, $u(3) = -1$. Flèches : monte, descend, monte.\ne) On garde la partie de la courbe sur ou au-dessus de $y = 1$ : de $-3$ à $-1$, bornes comprises (inégalité large). $S = [-3\\,;\\,-1]$.",
@@ -155,6 +186,12 @@ export const exercicesAnalyseGraphiqueSeconde: FicheExercicesData = {
         },
         {
           enonce: "Un food-truck ouvre en janvier. On note $B(t)$ son bénéfice mensuel, en centaines d'euros, $t$ mois après l'ouverture ($0 \\leqslant t \\leqslant 8$).\na) Lire $B(0)$ et l'interpréter.\nb) Résoudre $B(t) = 0$. Que se passe-t-il ce mois-là ?\nc) Dresser le tableau de signes de $B$ et l'interpréter.\nd) Dresser le tableau de variations de $B$. Quel est le meilleur mois, et combien rapporte-t-il ?",
+          reponses: [
+            { question: "a)", attendu: "-3" },
+            { question: "b)", attendu: "3" },
+            { question: "d) mois", attendu: "6" },
+            { question: "d) bénéfice", attendu: "300" },
+          ],
           figure: courbe("FOOD", [-1, 9, -4, 4]),
           correction:
             "a) $B(0) = -3$ : le premier mois, le food-truck PERD $300$ euros (le matériel, le stock…).\nb) La courbe coupe l'axe en $t = 3$ : $S = \\{3\\}$. Au 3e mois, le food-truck ne gagne ni ne perd rien : c'est le « point mort ».\nc) Première ligne : $0$, $3$, $8$. Signes : $-$ avant $3$, $0$ en $3$, $+$ après. Le food-truck perd de l'argent les trois premiers mois, puis en gagne.\nd) La courbe monte jusqu'en $t = 6$ puis redescend. Valeurs : $B(0) = -3$, $B(6) = 3$, $B(8) = 1$.\nLe meilleur mois est le 6e : $300$ euros de bénéfice.\n⛔ Le piège au c) : écrire « $-$ » après $6$ parce que la courbe descend. Elle descend, mais reste au-dessus de l'axe : le bénéfice baisse, il reste POSITIF.",
@@ -168,6 +205,11 @@ export const exercicesAnalyseGraphiqueSeconde: FicheExercicesData = {
         },
         {
           enonce: "On reprend la fonction $g$ de l'exercice 2. Résoudre graphiquement :\na) $g(x) < 0$\nb) $g(x) \\geqslant 0$\nc) $g(x) > -2$",
+          reponses: [
+            { question: "a)", attendu: "]-2 ; 2[" },
+            { question: "b)", attendu: "[-4 ; -2] ∪ [2 ; 3]" },
+            { question: "c)", attendu: "[-4 ; 0[ ∪ ]0 ; 3]" },
+          ],
           figure: courbe("C2", [-5, 4, -3, 3]),
           correction:
             "a) La courbe est sous l'axe entre ses zéros $-2$ et $2$. Strict : on les exclut. $S = ]-2\\,;\\,2[$.\nb) C'est le contraire, zéros compris (inégalité large) : $S = [-4\\,;\\,-2] \\,\\cup\\, [2\\,;\\,3]$.\nc) La courbe est au-dessus de $y = -2$ PARTOUT, sauf en $0$ où elle la touche. On retire donc ce seul point : $S = [-4\\,;\\,0[ \\,\\cup\\, ]0\\,;\\,3]$.\n⛔ Le piège au c) : répondre $[-4\\,;\\,3]$. En $0$, $g(0) = -2$, et $-2 > -2$ est faux.",
@@ -176,6 +218,14 @@ export const exercicesAnalyseGraphiqueSeconde: FicheExercicesData = {
         },
         {
           enonce: "On ne connaît pas la courbe de $f$, seulement son tableau de variations sur $[-3\\,;\\,5]$ :\nen première ligne $-3$, $0$, $3$, $5$ ; $f$ monte de $-1$ à $4$, descend de $4$ à $-2$, puis monte de $-2$ à $1$.\na) Quels sont le maximum et le minimum de $f$ ?\nb) Combien de solutions a l'équation $f(x) = 0$ ? Et $f(x) = 3$ ? Et $f(x) = 5$ ?\nc) Comparer $f(1)$ et $f(2)$, sans les connaître.",
+          reponses: [
+            { question: "a) max", attendu: "4" },
+            { question: "a) min", attendu: "-2" },
+            { question: "b) f(x) = 0", attendu: "3" },
+            { question: "b) f(x) = 3", attendu: "2" },
+            { question: "b) f(x) = 5", attendu: ["0", "aucune"] },
+            { question: "c)", attendu: ["f(1) > f(2)", "f(2) < f(1)"] },
+          ],
           figure: tableauVariations([-3, 0, 3, 5], [-1, 4, -2, 1], "f"),
           correction:
             "a) Le maximum est $4$, atteint en $0$. Le minimum est $-2$, atteint en $3$ (on compare aussi les bornes : $-1$ et $1$ ne sont pas plus petits).\nb) $f(x) = 0$ : sur $[-3\\,;\\,0]$, $f$ passe de $-1$ à $4$, donc par $0$ une fois ; sur $[0\\,;\\,3]$, de $4$ à $-2$, une fois ; sur $[3\\,;\\,5]$, de $-2$ à $1$, une fois. TROIS solutions.\n$f(x) = 3$ : une fois sur $[-3\\,;\\,0]$, une fois sur $[0\\,;\\,3]$, jamais sur $[3\\,;\\,5]$ où $f$ ne dépasse pas $1$. DEUX solutions.\n$f(x) = 5$ : $5$ dépasse le maximum $4$. AUCUNE solution.\nc) $1$ et $2$ sont dans $[0\\,;\\,3]$, où $f$ DESCEND : quand $x$ augmente, $f(x)$ diminue. Donc $f(1) > f(2)$.\n⭐ Une fonction qui descend renverse l'ordre ; une fonction qui monte le conserve.",
@@ -183,6 +233,9 @@ export const exercicesAnalyseGraphiqueSeconde: FicheExercicesData = {
         },
         {
           enonce: "Voici la courbe d'une fonction $k$ définie sur $[-3\\,;\\,4]$.\na) En quelles valeurs $k$ s'annule-t-elle ?\nb) Dresser le tableau de signes de $k$.\nc) Dresser le tableau de variations de $k$.",
+          reponses: [
+            { question: "a)", attendu: "-1 ; 3" },
+          ],
           figure: courbe("C5", [-4, 5, -2, 3]),
           correction:
             "a) La courbe touche l'axe en $-1$ et le coupe en $3$ : $k$ s'annule en $-1$ et en $3$.\nb) Première ligne : $-3$, $-1$, $3$, $4$. Avant $-1$, la courbe est au-dessus : $+$. En $-1$, elle TOUCHE l'axe sans le traverser : un $0$, puis de nouveau $+$. Après $3$ : $-$.\nLigne : $+$, $0$, $+$, $0$, $-$.\nc) Les sommets : le creux en $-1$ ($k(-1) = 0$) et la bosse en $1$ ($k(1) = 2$). Aux bornes : $k(-3) = 2$, $k(4) = -1$.\n⛔ Le piège au b) : croire qu'un zéro change toujours le signe. Ici, en $-1$, la courbe rebondit sur l'axe : le signe reste $+$ des deux côtés.",
@@ -196,6 +249,12 @@ export const exercicesAnalyseGraphiqueSeconde: FicheExercicesData = {
         },
         {
           enonce: "À Saint-Malo, on note $H(t)$ la hauteur de la mer par rapport à son niveau moyen, en mètres, $t$ heures après minuit ($0 \\leqslant t \\leqslant 12$).\na) À quelle heure la marée est-elle basse ? Quelle est alors la hauteur ?\nb) Résoudre $H(t) < 0$ et l'interpréter.\nc) Dresser le tableau de signes de $H$.\nd) Un voilier ne peut quitter le port que si $H(t) \\geqslant 1$. Pendant quelles heures le peut-il ?",
+          reponses: [
+            { question: "a) heure", attendu: "7" },
+            { question: "a) hauteur", attendu: "-3" },
+            { question: "b)", attendu: "]4 ; 10[" },
+            { question: "d)", attendu: "[0 ; 3] ∪ [11 ; 12]" },
+          ],
           figure: courbe("MAREE", [-1, 13, -4, 5], true),
           correction:
             "a) Le point le plus bas de la courbe est en $t = 7$ : marée basse à 7 h, avec $H(7) = -3$, soit 3 mètres SOUS le niveau moyen.\nb) La courbe est sous l'axe entre $4$ et $10$, exclus : $S = ]4\\,;\\,10[$. De 4 h à 10 h, la mer est sous son niveau moyen.\nc) Première ligne : $0$, $4$, $10$, $12$. Signes : $+$, $0$, $-$, $0$, $+$.\nd) On trace $y = 1$ : elle coupe la courbe en $3$ et en $11$. On garde la courbe sur ou au-dessus : $S = [0\\,;\\,3] \\,\\cup\\, [11\\,;\\,12]$. Le voilier peut sortir de minuit à 3 h, puis de 11 h à midi.\n⛔ Le piège au d) : oublier le morceau $[11\\,;\\,12]$, au bout du graphique.",
@@ -209,6 +268,12 @@ export const exercicesAnalyseGraphiqueSeconde: FicheExercicesData = {
         },
         {
           enonce: "On reprend la fonction $f$ de l'exercice 1. Vrai ou faux ? Justifier par une lecture.\na) $f(0) = 1$.\nb) Le nombre $-1$ a un seul antécédent.\nc) $f(x) \\geqslant 0$ pour tout $x$ de $[-1\\,;\\,3]$.\nd) $f$ est négative sur $[1\\,;\\,3]$, car elle y descend.",
+          reponses: [
+            { question: "a)", attendu: ["vrai", "oui"] },
+            { question: "b)", attendu: ["faux", "non"] },
+            { question: "c)", attendu: ["vrai", "oui"] },
+            { question: "d)", attendu: ["faux", "non"] },
+          ],
           figure: courbe("C1", [-4, 5, -3, 3]),
           correction:
             "a) VRAI : au-dessus de $0$, la courbe est à la hauteur $1$.\nb) FAUX : la droite $y = -1$ coupe la courbe en $-2$ et en $4$. Deux antécédents.\nc) VRAI : entre $-1$ et $3$, la courbe est sur ou au-dessus de l'axe. L'ensemble des solutions de $f(x) \\geqslant 0$ est exactement $[-1\\,;\\,3]$.\nd) FAUX : sur $[1\\,;\\,3]$, $f$ descend de $2$ à $0$, mais elle reste au-dessus de l'axe : elle est POSITIVE.\n⛔ Le piège au d) : confondre le SENS de la courbe (elle descend) et son SIGNE (elle est au-dessus de l'axe).",
@@ -216,6 +281,10 @@ export const exercicesAnalyseGraphiqueSeconde: FicheExercicesData = {
         },
         {
           enonce: "On reprend la fonction $u$ de l'exercice 9. Résoudre graphiquement, en soignant les crochets :\na) $u(x) < 0$\nb) $u(x) \\leqslant 0$",
+          reponses: [
+            { question: "a)", attendu: "[-5 ; -4[ ∪ ]0 ; 3]" },
+            { question: "b)", attendu: "[-5 ; -4] ∪ [0 ; 3]" },
+          ],
           figure: courbe("C4", [-6, 4, -3, 3]),
           correction:
             "La courbe est sous l'axe avant $-4$ et après $0$ ; elle le coupe en $-4$ et en $0$.\na) Strict : on exclut $-4$ et $0$. Mais la borne $-5$ est incluse, car $u(-5) = -1 < 0$, et la borne $3$ aussi. $S = [-5\\,;\\,-4[ \\,\\cup\\, ]0\\,;\\,3]$.\nb) Large : on inclut $-4$ et $0$. $S = [-5\\,;\\,-4] \\,\\cup\\, [0\\,;\\,3]$.\n⛔ Le piège : ouvrir aussi les crochets en $-5$ et en $3$. Ce ne sont pas des zéros, ce sont les bords du domaine, et $u$ y est bien négative.",
@@ -238,6 +307,11 @@ export const exercicesAnalyseGraphiqueSeconde: FicheExercicesData = {
         {
           titre: "Une maison solaire",
           enonce: "Une maison a des panneaux solaires. On note $B(t)$ la production moins la consommation, en kilowatts, $t$ heures après 6 h ($0 \\leqslant t \\leqslant 12$). Quand $B(t) > 0$, la maison produit plus qu'elle ne consomme.\na) Lire $B(6)$ et l'interpréter.\nb) Résoudre $B(t) = 0$. À quelles heures cela correspond-il ?\nc) Dresser le tableau de signes de $B$ et l'interpréter.\nd) Dresser le tableau de variations de $B$.\ne) Le chauffe-eau se met en marche quand le surplus atteint au moins $2$ kW. Pendant combien de temps fonctionne-t-il ?",
+          reponses: [
+            { question: "a)", attendu: "4" },
+            { question: "b)", attendu: "2 ; 10" },
+            { question: "e)", attendu: "4" },
+          ],
           figure: courbe("SOLAIRE", [-1, 13, -3, 5], true),
           correction:
             "a) $B(6) = 4$ : à midi, la maison produit $4$ kW de plus qu'elle ne consomme.\nb) La courbe coupe l'axe en $t = 2$ et $t = 10$ : $S = \\{2\\,;\\,10\\}$, c'est-à-dire 8 h et 16 h.\nc) Première ligne : $0$, $2$, $10$, $12$. Signes : $-$, $0$, $+$, $0$, $-$. Entre 8 h et 16 h, la maison produit plus qu'elle ne consomme ; le matin tôt et le soir, elle consomme plus.\nd) La courbe monte jusqu'en $t = 6$, puis redescend. Valeurs : $B(0) = -2$, $B(6) = 4$, $B(12) = -2$.\ne) On résout $B(t) \\geqslant 2$ : la droite $y = 2$ coupe la courbe en $4$ et en $8$. $S = [4\\,;\\,8]$, de 10 h à 14 h : le chauffe-eau fonctionne pendant $4$ heures.",
@@ -252,6 +326,13 @@ export const exercicesAnalyseGraphiqueSeconde: FicheExercicesData = {
         {
           titre: "Une crue",
           enonce: "Après de fortes pluies, on note $N(t)$ l'écart entre le niveau d'une rivière et son niveau habituel, en mètres, $t$ jours plus tard ($0 \\leqslant t \\leqslant 9$).\na) Quel est le niveau le plus haut atteint, et quel jour ?\nb) La vigilance « crue » est déclenchée tant que $N(t) \\geqslant 2$. Résoudre cette inéquation. Combien de jours dure la vigilance ?\nc) Quels jours l'écart vaut-il exactement $3$ mètres ?\nd) Dresser le tableau de variations de $N$.",
+          reponses: [
+            { question: "a) niveau", attendu: "4" },
+            { question: "a) jour", attendu: "5" },
+            { question: "b) S", attendu: "[3 ; 7]" },
+            { question: "b) durée", attendu: "4" },
+            { question: "c)", attendu: "4 ; 6" },
+          ],
           figure: courbe("CRUE", [-1, 10, -2, 5]),
           correction:
             "a) Le sommet de la courbe est en $t = 5$ : $N(5) = 4$. Le 5e jour, la rivière est $4$ mètres au-dessus de son niveau habituel.\nb) La droite $y = 2$ coupe la courbe en $3$ et en $7$ ; entre les deux, la courbe est au-dessus. Inégalité large : $S = [3\\,;\\,7]$. La vigilance dure du jour 3 au jour 7, soit $4$ jours.\nc) On cherche les antécédents de $3$ : la droite $y = 3$ coupe la courbe en $4$ et en $6$. Le 4e jour en montant, le 6e en redescendant.\nd) Première ligne : $0$, $5$, $9$. Valeurs : $N(0) = -1$, $N(5) = 4$, $N(9) = 0$. La courbe monte, puis descend.\n⛔ Le piège au b) : compter $5$ jours en comptant les nombres $3$, $4$, $5$, $6$, $7$. La DURÉE est la longueur de l'intervalle : $7 - 3 = 4$.",
@@ -261,6 +342,12 @@ export const exercicesAnalyseGraphiqueSeconde: FicheExercicesData = {
         {
           titre: "Le compte d'un étudiant",
           enonce: "Une étudiante suit son compte en banque. On note $S(t)$ le solde, en centaines d'euros, $t$ mois après le 1er septembre ($0 \\leqslant t \\leqslant 10$).\na) Lire $S(0)$.\nb) Le compte est « à découvert » quand $S(t) < 0$. Pendant combien de mois l'est-il ?\nc) Dresser le tableau de variations de $S$. Quel est le découvert le plus profond ?\nd) La banque facture des frais quand le découvert atteint au moins $100$ euros, c'est-à-dire quand $S(t) \\leqslant -1$. Résoudre cette inéquation.",
+          reponses: [
+            { question: "a)", attendu: "3" },
+            { question: "b)", attendu: "4" },
+            { question: "c)", attendu: ["-2", "200"] },
+            { question: "d)", attendu: "[4 ; 6]" },
+          ],
           figure: courbe("COMPTE", [-1, 11, -3, 4], true),
           correction:
             "a) $S(0) = 3$ : $300$ euros au 1er septembre.\nb) La courbe est sous l'axe entre $3$ et $7$, exclus (le solde y vaut $0$) : $S = ]3\\,;\\,7[$. Le découvert dure $7 - 3 = 4$ mois.\nc) Première ligne : $0$, $5$, $10$. Valeurs : $3$, $-2$, $3$. La courbe descend jusqu'en $t = 5$, puis remonte.\nLe découvert le plus profond est $-2$, soit $200$ euros, au 5e mois (en février).\nd) La droite $y = -1$ coupe la courbe en $4$ et en $6$ ; entre les deux, la courbe est en dessous. Inégalité large : $[4\\,;\\,6]$. Les frais tombent de janvier à mars.",
@@ -270,6 +357,13 @@ export const exercicesAnalyseGraphiqueSeconde: FicheExercicesData = {
         {
           titre: "Combien de solutions ?",
           enonce: "On reprend la fonction $h$ de l'exercice 3, définie sur $[-2\\,;\\,5]$.\na) Combien de solutions ont les équations $h(x) = 0$, $h(x) = 1$, $h(x) = 2$ et $h(x) = -1$ ?\nb) Dresser le tableau de variations de $h$ (voir l'exercice 8).\nc) Pour quelles valeurs du nombre $k$ l'équation $h(x) = k$ a-t-elle exactement DEUX solutions ?",
+          reponses: [
+            { question: "a) h(x) = 0", attendu: "2" },
+            { question: "a) h(x) = 1", attendu: "3" },
+            { question: "a) h(x) = 2", attendu: "2" },
+            { question: "a) h(x) = -1", attendu: "1" },
+            { question: "c)", attendu: "]-1 ; 1[ ∪ {2}" },
+          ],
           figure: courbe("C3", [-3, 6, -2, 3]),
           correction:
             "a) $h(x) = 0$ : en $0$ et en $2$, deux solutions. $h(x) = 1$ : en $-1$, $3$ et $5$, trois solutions. $h(x) = 2$ : en $-2$ et en $4$, deux solutions. $h(x) = -1$ : en $1$ seulement, une solution.\nb) Première ligne $-2$, $1$, $4$, $5$ ; $h$ descend de $2$ à $-1$, monte de $-1$ à $2$, descend de $2$ à $1$.\nc) On fait monter une droite horizontale $y = k$ et on compte ses rencontres avec la courbe :\n— sous $-1$ ou au-dessus de $2$ : aucune ;\n— $k = -1$ : une (le creux) ;\n— $k$ strictement entre $-1$ et $1$ : deux (une sur la descente, une sur la montée) ;\n— $k = 1$ et $k$ entre $1$ et $2$ : trois (la dernière descente compte aussi) ;\n— $k = 2$ : deux (en $-2$ et au sommet $4$).\nDeux solutions exactement pour $-1 < k < 1$, et pour $k = 2$.\n⭐ C'est le tableau de variations qui permet de compter, sans tracer chaque droite.",

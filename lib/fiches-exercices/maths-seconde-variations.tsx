@@ -74,6 +74,10 @@ export const exercicesVariationsSeconde: FicheExercicesData = {
       exercices: [
         {
           enonce: "Voici la courbe d'une fonction $f$ définie sur $[-4\\,;\\,2]$.\na) Sur quel intervalle $f$ est-elle décroissante ? croissante ?\nb) Dresser son tableau de variations.",
+          reponses: [
+            { question: "a) décroissante", attendu: "[-4 ; -1]" },
+            { question: "a) croissante", attendu: "[-1 ; 2]" },
+          ],
           figure: repere([-4, 2, -5, 6], COURBE_1),
           correction:
             "a) On lit la courbe de gauche à droite : elle descend de $x = -4$ à $x = -1$, puis monte jusqu'à $x = 2$.\n$f$ est décroissante sur $[-4\\,;\\,-1]$ et croissante sur $[-1\\,;\\,2]$.\nb) En haut, les abscisses $-4$, $-1$ et $2$. En bas, les valeurs $f(-4) = 5$, $f(-1) = -4$ et $f(2) = 5$, reliées par une flèche qui descend puis une flèche qui monte.\n⛔ Le piège : écrire les ORDONNÉES dans la ligne du haut. En haut, ce sont les $x$ ; en bas, ce que vaut $f$.",
@@ -82,6 +86,14 @@ export const exercicesVariationsSeconde: FicheExercicesData = {
         },
         {
           enonce: "Voici le tableau de variations d'une fonction $g$ définie sur $[-4\\,;\\,5]$.\na) Sur quel(s) intervalle(s) $g$ est-elle croissante ? décroissante ?\nb) Quel est le maximum de $g$ ? son minimum ? Où sont-ils atteints ?",
+          reponses: [
+            { question: "a) croissante", attendu: "[0 ; 3]" },
+            { question: "a) décroissante", attendu: ["[-4 ; 0] ∪ [3 ; 5]", "[-4 ; 0] et [3 ; 5]"] },
+            { question: "b) max", attendu: "4" },
+            { question: "b) x du max", attendu: "3" },
+            { question: "b) min", attendu: "-3" },
+            { question: "b) x du min", attendu: "0" },
+          ],
           figure: tableauVariations([-4, 0, 3, 5], [1, -3, 4, 2], "g"),
           correction:
             "a) Une flèche qui monte : $g$ est croissante sur $[0\\,;\\,3]$.\nDes flèches qui descendent : $g$ est décroissante sur $[-4\\,;\\,0]$ et sur $[3\\,;\\,5]$.\nb) La plus grande valeur du tableau est $4$ : le maximum vaut $4$, atteint en $x = 3$. La plus petite est $-3$ : le minimum vaut $-3$, atteint en $x = 0$.\n⛔ Le piège : répondre « le maximum est $3$ ». $3$ dit OÙ (l'abscisse), $4$ dit COMBIEN (la valeur).",
@@ -89,12 +101,22 @@ export const exercicesVariationsSeconde: FicheExercicesData = {
         },
         {
           enonce: "a) $f$ est croissante sur $[-5\\,;\\,5]$. Comparer $f(-3)$ et $f(1)$, puis $f(2{,}5)$ et $f(2{,}05)$.\nb) $g$ est décroissante sur $[0\\,;\\,10]$. Comparer $g(\\sqrt{2})$ et $g(1{,}5)$.",
+          reponses: [
+            { question: "a) f(-3), f(1)", attendu: ["f(-3) < f(1)", "f(1) > f(-3)"] },
+            { question: "a) f(2,5), f(2,05)", attendu: ["f(2,05) < f(2,5)", "f(2,5) > f(2,05)"] },
+            { question: "b)", attendu: ["g(√(2)) > g(1,5)", "g(√2) > g(1,5)", "g(1,5) < g(√(2))", "g(1,5) < g(√2)"] },
+          ],
           correction:
             "a) $-3 < 1$, et $f$ croissante conserve l'ordre : $f(-3) < f(1)$.\n$2{,}05 < 2{,}5$ (on compare $2{,}05$ et $2{,}50$), donc $f(2{,}05) < f(2{,}5)$.\nb) $\\sqrt{2} \\approx 1{,}414$, donc $\\sqrt{2} < 1{,}5$. Mais $g$ décroissante INVERSE l'ordre : $g(\\sqrt{2}) > g(1{,}5)$.\n⛔ Le piège au a) : croire que $2{,}05 > 2{,}5$ parce que « $05$ » s'écrit avec plus de chiffres.",
           micros: ["variation_croissance"],
         },
         {
           enonce: "Voici le tableau de variations d'une fonction $h$ définie sur $[-3\\,;\\,6]$.\na) Quel est le maximum de $h$, et où est-il atteint ?\nb) Quel est son minimum ?",
+          reponses: [
+            { question: "a) max", attendu: "7" },
+            { question: "a) x du max", attendu: "1" },
+            { question: "b)", attendu: "-4" },
+          ],
           figure: tableauVariations([-3, 1, 6], [2, 7, -4], "h"),
           correction:
             "a) $h$ monte jusqu'en $x = 1$, puis redescend : le maximum vaut $7$, atteint en $x = 1$.\nb) Le tableau n'a pas de « creux » : le minimum est à l'un des deux bords. On compare $h(-3) = 2$ et $h(6) = -4$.\nLe minimum vaut $-4$, atteint en $x = 6$, au BORD de l'intervalle.\n⛔ Le piège : chercher le minimum seulement là où la flèche change de sens. Les bords comptent aussi.",
@@ -102,6 +124,12 @@ export const exercicesVariationsSeconde: FicheExercicesData = {
         },
         {
           enonce: "Sans tracer, donner le sens de variation sur $\\mathbb{R}$ de :\na) $f(x) = 4x - 7$\nb) $g(x) = -2x + 5$\nc) $h(x) = 3 - \\dfrac{x}{2}$\nd) $k(x) = 6$",
+          reponses: [
+            { question: "a)", attendu: "croissante" },
+            { question: "b)", attendu: "décroissante" },
+            { question: "c)", attendu: "décroissante" },
+            { question: "d)", attendu: "constante" },
+          ],
           correction:
             "Pour une fonction affine $ax + b$, c'est le signe de $a$ qui décide : $a > 0$, croissante ; $a < 0$, décroissante ; $a = 0$, constante.\na) $a = 4 > 0$ : $f$ est croissante sur $\\mathbb{R}$.\nb) $a = -2 < 0$ : $g$ est décroissante sur $\\mathbb{R}$.\nc) $h(x) = -\\dfrac{1}{2}x + 3$ : $a = -\\dfrac{1}{2} < 0$, $h$ est décroissante.\nd) $a = 0$ : $k$ est constante, sa courbe est une droite horizontale.\n⛔ Le piège au c) : lire $a = 3$, le premier nombre écrit. Le coefficient de $x$ est $-\\dfrac{1}{2}$.",
           // f en bleu qui monte, g en orange qui descend.
@@ -110,6 +138,10 @@ export const exercicesVariationsSeconde: FicheExercicesData = {
         },
         {
           enonce: "La fonction $u$ est définie sur $[0\\,;\\,8]$. Elle est décroissante sur $[0\\,;\\,3]$ et croissante sur $[3\\,;\\,8]$, avec $u(0) = 5$, $u(3) = -1$ et $u(8) = 7$.\na) Dresser le tableau de variations de $u$.\nb) Quel est le minimum de $u$ ? son maximum ?",
+          reponses: [
+            { question: "b) min", attendu: "-1" },
+            { question: "b) max", attendu: "7" },
+          ],
           correction:
             "a) Trois abscisses en haut : $0$, $3$ et $8$. En bas, les valeurs $5$, $-1$ et $7$, avec une flèche qui descend puis une flèche qui monte.\nb) Le minimum vaut $-1$, atteint en $x = 3$, au fond du creux.\nPour le maximum, on compare les deux bords : $u(0) = 5$ et $u(8) = 7$. Le maximum vaut $7$, atteint en $x = 8$.\n⛔ Le piège au b) : oublier un des deux bords, et répondre $5$.",
           schema: tableauVariations([0, 3, 8], [5, -1, 7], "u"),
@@ -117,6 +149,11 @@ export const exercicesVariationsSeconde: FicheExercicesData = {
         },
         {
           enonce: "Voici le tableau de variations d'une fonction $f$ définie sur $[-2\\,;\\,6]$.\na) Comparer $f(-1)$ et $f(1)$.\nb) Comparer $f(3)$ et $f(5)$.\nc) Peut-on comparer $f(0)$ et $f(4)$ ?",
+          reponses: [
+            { question: "a)", attendu: ["f(-1) < f(1)", "f(1) > f(-1)"] },
+            { question: "b)", attendu: ["f(3) > f(5)", "f(5) < f(3)"] },
+            { question: "c)", attendu: ["non"] },
+          ],
           figure: tableauVariations([-2, 2, 6], [0, 5, 1]),
           correction:
             "a) $-1$ et $1$ sont tous deux dans $[-2\\,;\\,2]$, où $f$ croît : l'ordre est conservé, $f(-1) < f(1)$.\nb) $3$ et $5$ sont dans $[2\\,;\\,6]$, où $f$ décroît : l'ordre s'inverse, $f(3) > f(5)$.\nc) Non. $0$ et $4$ ne sont pas sur le même morceau : entre les deux, $f$ monte puis redescend.\nLes deux courbes dessinées ont TOUTES LES DEUX ce tableau. Sur la bleue, $f(0) < f(4)$ ; sur l'orange, $f(0) > f(4)$.\n⛔ Le piège au c) : conclure $f(0) < f(4)$ parce que $0 < 4$. On ne compare que sur un intervalle où le sens ne change pas.",
@@ -128,6 +165,12 @@ export const exercicesVariationsSeconde: FicheExercicesData = {
         },
         {
           enonce: "Voici le tableau de variations d'une fonction $f$ définie sur $[-4\\,;\\,4]$. Vrai ou faux ? Justifier.\na) $f(-3) > f(-2)$.\nb) $f$ est positive sur $[-1\\,;\\,4]$.\nc) Le minimum de $f$ sur $[-4\\,;\\,4]$ est $-1$.\nd) L'équation $f(x) = 4$ a exactement une solution.",
+          reponses: [
+            { question: "a)", attendu: ["vrai", "oui"] },
+            { question: "b)", attendu: ["faux", "non"] },
+            { question: "c)", attendu: ["faux", "non"] },
+            { question: "d)", attendu: ["vrai", "oui"] },
+          ],
           figure: tableauVariations([-4, -1, 4], [3, -2, 8]),
           correction:
             "a) VRAI. $-3$ et $-2$ sont dans $[-4\\,;\\,-1]$, où $f$ décroît, et $-3 < -2$ : l'ordre s'inverse, $f(-3) > f(-2)$.\nb) FAUX. $f(-1) = -2$ est négatif. Une fonction peut monter en étant négative.\nc) FAUX. Le minimum VAUT $-2$ ; il est ATTEINT en $-1$. Le nombre $-1$ est une abscisse.\nd) VRAI. Sur $[-4\\,;\\,-1]$, $f$ va de $3$ à $-2$ : elle ne passe jamais par $4$. Sur $[-1\\,;\\,4]$, elle monte de $-2$ à $8$ : elle passe par $4$ une seule fois.\n⭐ Ci-dessous, UNE courbe possible : l'horizontale $y = 4$ la coupe une seule fois.",
@@ -151,6 +194,11 @@ export const exercicesVariationsSeconde: FicheExercicesData = {
       exercices: [
         {
           enonce: "Soit $f(x) = -3x + 2$. On prend deux nombres $a < b$.\na) Calculer $f(b) - f(a)$, et l'écrire sous la forme $k(b - a)$.\nb) Quel est le signe de $f(b) - f(a)$ ?\nc) En déduire le sens de variation de $f$ sur $\\mathbb{R}$.",
+          reponses: [
+            { question: "a)", attendu: "-3(b-a)", exact: true },
+            { question: "b)", attendu: ["négatif", "strictement négatif", "< 0"] },
+            { question: "c)", attendu: "décroissante" },
+          ],
           correction:
             "a) $f(b) - f(a) = (-3b + 2) - (-3a + 2) = -3b + 3a = -3(b - a)$.\nb) $a < b$, donc $b - a > 0$. On multiplie par $-3$, négatif : $-3(b - a) < 0$.\nc) Pour tous $a < b$, on a $f(b) - f(a) < 0$, c'est-à-dire $f(a) > f(b)$ : l'ordre s'inverse, $f$ est décroissante sur $\\mathbb{R}$.\n⭐ C'est la DÉFINITION qui démontre : on ne regarde pas un dessin, on prouve pour tous les $a < b$ à la fois.\n⛔ Le piège au a) : oublier la parenthèse, et écrire $-3b + 2 - 3a + 2$.",
           schema: repere([-2, 3, -5, 7], [{ q: [0, -3, 2] }], [{ x: -1, y: 5 }, { x: 2, y: -4 }]),
@@ -158,6 +206,10 @@ export const exercicesVariationsSeconde: FicheExercicesData = {
         },
         {
           enonce: "Soit $f(x) = x^2 - 6x + 11$.\na) Vérifier que $f(x) = (x - 3)^2 + 2$.\nb) En déduire que $f(x) \\geqslant 2$ pour tout nombre $x$.\nc) Quel est le minimum de $f$, et où est-il atteint ?",
+          reponses: [
+            { question: "c) min", attendu: "2" },
+            { question: "c) x du min", attendu: "3" },
+          ],
           correction:
             "a) $(x - 3)^2 + 2 = x^2 - 6x + 9 + 2 = x^2 - 6x + 11$. ✓\nb) Un carré est toujours positif ou nul : $(x - 3)^2 \\geqslant 0$. On ajoute $2$ des deux côtés : $(x - 3)^2 + 2 \\geqslant 2$, soit $f(x) \\geqslant 2$.\nc) La valeur $2$ est atteinte quand le carré est nul, pour $x = 3$ : $f(3) = 0 + 2 = 2$. Le minimum de $f$ vaut $2$, atteint en $x = 3$.\n⛔ Le piège au c) : s'arrêter à « $f(x) \\geqslant 2$ ». Un minimum doit être ATTEINT : il faut le $x$ qui donne $2$.",
           schema: repere([-1, 6, -1, 8], [{ q: [1, -6, 11] }], [{ x: 3, y: 2 }], 2),
@@ -165,6 +217,13 @@ export const exercicesVariationsSeconde: FicheExercicesData = {
         },
         {
           enonce: "Voici la courbe d'une fonction $f$ définie sur $[-1\\,;\\,3]$.\na) Dresser son tableau de variations.\nb) Donner le maximum et le minimum de $f$ sur $[-1\\,;\\,3]$, et où ils sont atteints.\nc) Combien l'équation $f(x) = 1$ a-t-elle de solutions ?",
+          reponses: [
+            { question: "b) max", attendu: "2" },
+            { question: "b) x du max", attendu: "0 ; 3" },
+            { question: "b) min", attendu: "-2" },
+            { question: "b) x du min", attendu: "-1 ; 2" },
+            { question: "c)", attendu: "3" },
+          ],
           figure: repere([-1, 3, -3, 4], COURBE_11),
           correction:
             "a) La courbe monte de $x = -1$ à $x = 0$, descend jusqu'à $x = 2$, puis remonte jusqu'à $x = 3$. Les valeurs : $f(-1) = -2$, $f(0) = 2$, $f(2) = -2$ et $f(3) = 2$.\nb) Le maximum vaut $2$, et il est atteint DEUX fois : en $x = 0$ et en $x = 3$. Le minimum vaut $-2$, atteint en $x = -1$ et en $x = 2$.\nc) Sur chacun des trois morceaux, $f$ va de $-2$ à $2$ ou de $2$ à $-2$ : elle passe par $1$ une fois sur chacun. L'équation $f(x) = 1$ a TROIS solutions.\n⭐ Le tableau suffit pour COMPTER les solutions, sans les calculer.",
@@ -178,6 +237,11 @@ export const exercicesVariationsSeconde: FicheExercicesData = {
         },
         {
           enonce: "Une fonction $f$ est décroissante sur $[-6\\,;\\,-2]$ et croissante sur $[-2\\,;\\,4]$, avec $f(-2) = -5$.\na) Comparer $f(-5)$ et $f(-3)$.\nb) Comparer $f(0)$ et $f(3)$.\nc) Montrer que $f(x) \\geqslant -5$ pour tout $x$ de $[-6\\,;\\,4]$.\nd) Peut-on comparer $f(-4)$ et $f(2)$ ?",
+          reponses: [
+            { question: "a)", attendu: ["f(-5) > f(-3)", "f(-3) < f(-5)"] },
+            { question: "b)", attendu: ["f(0) < f(3)", "f(3) > f(0)"] },
+            { question: "d)", attendu: ["non"] },
+          ],
           correction:
             "a) $-5 < -3$, dans $[-6\\,;\\,-2]$ où $f$ décroît : l'ordre s'inverse, $f(-5) > f(-3)$.\nb) $0 < 3$, dans $[-2\\,;\\,4]$ où $f$ croît : $f(0) < f(3)$.\nc) Sur $[-6\\,;\\,-2]$, $f$ descend jusqu'à $f(-2) = -5$ : toutes ses valeurs y sont supérieures ou égales à $-5$. Sur $[-2\\,;\\,4]$, elle monte à partir de $-5$ : encore supérieures ou égales à $-5$.\nDonc $f(x) \\geqslant -5$ partout : $-5$ est le minimum de $f$, atteint en $-2$.\nd) Non : $-4$ et $2$ sont de part et d'autre de $-2$, là où le sens change. Il faudrait connaître les valeurs.\n⭐ Ci-dessous, UNE courbe possible. D'autres respectent le même énoncé.\n⛔ Le piège au a) : penser « $-5$ est plus petit, donc $f(-5)$ aussi ». Sur un morceau décroissant, c'est l'inverse.",
           schema: repere([-6, 4, -6, 4], [{ pts: [[-6, 3], [-2, -5], [4, 4]] }], [{ x: -5, y: 1 }, { x: -3, y: -3 }, { x: -2, y: -5 }]),
@@ -185,6 +249,15 @@ export const exercicesVariationsSeconde: FicheExercicesData = {
         },
         {
           enonce: "Voici le tableau de variations d'une fonction $g$ définie sur $[-5\\,;\\,4]$.\na) Combien l'équation $g(x) = 2$ a-t-elle de solutions ?\nb) Et l'équation $g(x) = 5$ ?\nc) Et l'équation $g(x) = -4$ ?\nd) Donner le maximum et le minimum de $g$ sur $[-5\\,;\\,4]$.",
+          reponses: [
+            { question: "a)", attendu: "3" },
+            { question: "b)", attendu: "1" },
+            { question: "c)", attendu: ["0", "aucune"] },
+            { question: "d) max", attendu: "6" },
+            { question: "d) x du max", attendu: "4" },
+            { question: "d) min", attendu: "-3" },
+            { question: "d) x du min", attendu: "-5" },
+          ],
           figure: tableauVariations([-5, -2, 1, 4], [-3, 4, 0, 6], "g"),
           correction:
             "On regarde, flèche par flèche, si la valeur cherchée est entre les deux bouts.\na) De $-3$ à $4$ : $2$ est entre les deux, une solution. De $4$ à $0$ : encore une. De $0$ à $6$ : encore une. TROIS solutions.\nb) $5$ n'est atteint que sur la dernière flèche, de $0$ à $6$ : UNE solution.\nc) La plus petite valeur du tableau est $-3$ : $g$ ne descend jamais jusqu'à $-4$. AUCUNE solution.\nd) Le maximum vaut $6$, atteint en $x = 4$. Le sommet $4$, en $x = -2$, n'est qu'un maximum LOCAL. Le minimum vaut $-3$, atteint en $x = -5$.\n⛔ Le piège au d) : prendre le premier sommet pour le maximum. On compare TOUTES les valeurs du haut, bords compris.",
@@ -193,6 +266,13 @@ export const exercicesVariationsSeconde: FicheExercicesData = {
         },
         {
           enonce: "Pendant une crue, on mesure la hauteur d'eau $h(t)$ d'une rivière sous un pont, en mètres, $t$ heures après le début des fortes pluies.\na) Dresser le tableau de variations de $h$ sur $[0\\,;\\,10]$.\nb) Quelle a été la hauteur maximale, et à quel moment ?\nc) La vigilance crue est déclenchée quand l'eau dépasse $4$ m. Combien de temps a-t-elle duré ?\nd) Sans lire les valeurs, comparer $h(1)$ et $h(3)$, puis $h(5)$ et $h(9)$.",
+          reponses: [
+            { question: "b) max", attendu: "6" },
+            { question: "b) instant", attendu: "4" },
+            { question: "c)", attendu: "3" },
+            { question: "d) h(1), h(3)", attendu: ["h(1) < h(3)", "h(3) > h(1)"] },
+            { question: "d) h(5), h(9)", attendu: ["h(5) > h(9)", "h(9) < h(5)"] },
+          ],
           figure: repere([0, 10, -1, 7], CRUE_14),
           correction:
             "a) L'eau monte de $t = 0$ à $t = 4$, puis redescend jusqu'à $t = 10$. Les valeurs : $h(0) = 1$, $h(4) = 6$ et $h(10) = 1{,}5$.\nb) Le maximum vaut $6$ m, atteint au bout de $4$ heures : c'est le pic de crue.\nc) L'horizontale $y = 4$ coupe la courbe en $t = 3$ et en $t = 6$ : l'eau dépasse $4$ m de $3$ h à $6$ h, soit pendant $3$ heures.\nd) $1$ et $3$ sont dans $[0\\,;\\,4]$, où $h$ croît : $h(1) < h(3)$. $5$ et $9$ sont dans $[4\\,;\\,10]$, où $h$ décroît : $h(5) > h(9)$.\n⛔ Le piège au c) : répondre « $4$ heures », l'instant du pic. On demande une DURÉE : de $3$ h à $6$ h.",
@@ -206,6 +286,12 @@ export const exercicesVariationsSeconde: FicheExercicesData = {
         },
         {
           enonce: "Soit $g(x) = 2 - (x + 1)^2$, définie sur $[-4\\,;\\,2]$.\na) Montrer que $g(x) \\leqslant 2$ pour tout $x$, et en déduire le maximum de $g$.\nb) Calculer $g(-4)$ et $g(2)$.\nc) On admet que $g$ est croissante sur $[-4\\,;\\,-1]$ et décroissante sur $[-1\\,;\\,2]$. Dresser son tableau de variations, et donner son minimum.",
+          reponses: [
+            { question: "a) max", attendu: "2" },
+            { question: "b) g(-4)", attendu: "-7" },
+            { question: "b) g(2)", attendu: "-7" },
+            { question: "c) min", attendu: "-7" },
+          ],
           correction:
             "a) $(x + 1)^2 \\geqslant 0$, donc $-(x + 1)^2 \\leqslant 0$, et $2 - (x + 1)^2 \\leqslant 2$.\nLa valeur $2$ est atteinte quand le carré s'annule, en $x = -1$ : $g(-1) = 2$. Le maximum vaut $2$, atteint en $x = -1$.\nb) $g(-4) = 2 - (-3)^2 = 2 - 9 = -7$ et $g(2) = 2 - 3^2 = 2 - 9 = -7$.\nc) En haut : $-4$, $-1$, $2$. En bas : $-7$, $2$, $-7$. Le minimum vaut $-7$, atteint deux fois, en $x = -4$ et en $x = 2$.\n⛔ Le piège au a) : écrire $-(x + 1)^2 \\geqslant 0$. Multiplier par $-1$ retourne l'inégalité.",
           schema: (
@@ -218,6 +304,11 @@ export const exercicesVariationsSeconde: FicheExercicesData = {
         },
         {
           enonce: "Une fonction $f$ est croissante sur $[0\\,;\\,4]$, avec $f(0) = 1$ et $f(4) = 5$.\na) Que peut-on dire de $f(2)$ ?\nb) Vérifier que $u(x) = x + 1$ et $v(x) = 0{,}25x^2 + 1$ prennent les mêmes valeurs que $f$ en $0$ et en $4$. On admet qu'elles sont croissantes sur $[0\\,;\\,4]$.\nc) Calculer $u(2)$ et $v(2)$. Que peut-on en conclure ?",
+          reponses: [
+            { question: "a)", attendu: ["1 < f(2) < 5", "]1 ; 5["] },
+            { question: "c) u(2)", attendu: "3" },
+            { question: "c) v(2)", attendu: "2" },
+          ],
           correction:
             "a) $0 < 2 < 4$ et $f$ croît : $f(0) < f(2) < f(4)$, soit $1 < f(2) < 5$. C'est TOUT ce qu'on peut dire.\nb) $u(0) = 1$ et $u(4) = 5$. De même $v(0) = 1$ et $v(4) = 0{,}25 \\times 16 + 1 = 5$.\nc) $u(2) = 3$ et $v(2) = 0{,}25 \\times 4 + 1 = 2$. Les deux fonctions ont le MÊME tableau de variations, et pas la même image de $2$.\nUn tableau de variations ne donne pas les valeurs entre ses bornes : il ne dit que le sens.\n⛔ Le piège au a) : répondre $f(2) = 3$, « au milieu ». Rien n'oblige la fonction à monter régulièrement.",
           schema: (
@@ -245,6 +336,11 @@ export const exercicesVariationsSeconde: FicheExercicesData = {
         {
           titre: "Le 100 m de Usain Bolt",
           enonce: "Berlin, 2009 : Usain Bolt court le 100 m en $9{,}58$ s, record du monde toujours en vigueur. Le tableau donne le temps mis pour chaque tranche de $10$ m.\na) Calculer sa vitesse moyenne, en m/s, sur la première tranche, puis sur la tranche de $60$ à $70$ m. Arrondir au centième.\nb) Sur quelles tranches sa vitesse augmente-t-elle ? Justifier à partir des temps, sans tout calculer.\nc) Quelle est sa vitesse maximale, en km/h ?\nd) Que se passe-t-il sur les $30$ derniers mètres ?",
+          reponses: [
+            { question: "a) 1re tranche", attendu: "5,29", tolerance: 0.01 },
+            { question: "a) 60 à 70 m", attendu: "12,35", tolerance: 0.01 },
+            { question: "c)", attendu: "44,4", tolerance: 0.1 },
+          ],
           figure: tableau(
             ["Tranche (m)", "0 à 10", "10 à 20", "20 à 30", "30 à 40", "40 à 50", "50 à 60", "60 à 70", "70 à 80", "80 à 90", "90 à 100"],
             ["Temps (s)", "1,89", "0,99", "0,90", "0,86", "0,83", "0,82", "0,81", "0,82", "0,83", "0,83"],
@@ -259,6 +355,10 @@ export const exercicesVariationsSeconde: FicheExercicesData = {
         {
           titre: "Le plus grand potager",
           enonce: "Avec $36$ m de grillage, on veut clôturer un potager rectangulaire. On note $x$ sa largeur, en mètres.\na) Montrer que sa longueur vaut $18 - x$, et que $x$ est entre $0$ et $18$.\nb) Montrer que son aire est $A(x) = 81 - (x - 9)^2$.\nc) En déduire l'aire maximale, et les dimensions du potager.\nd) Dresser le tableau de variations de $A$ sur $[0\\,;\\,18]$. On admet que $A$ croît jusqu'à $9$, puis décroît.",
+          reponses: [
+            { question: "c) aire", attendu: "81" },
+            { question: "c) dimensions", attendu: "9 ; 9" },
+          ],
           correction:
             "a) Le périmètre vaut $2x + 2L = 36$, donc $x + L = 18$ et la longueur vaut $L = 18 - x$. Les deux longueurs sont positives : $0 < x < 18$.\nb) $A(x) = x(18 - x) = 18x - x^2$. Et $81 - (x - 9)^2 = 81 - x^2 + 18x - 81 = 18x - x^2$. ✓\nc) $(x - 9)^2 \\geqslant 0$, donc $A(x) \\leqslant 81$, et $A(9) = 81$. L'aire maximale vaut $81$ m², pour $x = 9$ ; la longueur vaut alors $18 - 9 = 9$ m. Le meilleur rectangle est un CARRÉ.\nd) $A(0) = 0$, $A(9) = 81$ et $A(18) = 0$ : une flèche qui monte de $0$ à $81$, puis une flèche qui redescend à $0$.\n⛔ Le piège au c) : répondre « $9$ » à la question de l'aire. $9$ m est la largeur ; l'aire vaut $81$ m².",
           schema: tableauVariations([0, 9, 18], [0, 81, 0], "A"),
@@ -267,6 +367,13 @@ export const exercicesVariationsSeconde: FicheExercicesData = {
         {
           titre: "L'éolienne",
           enonce: "La courbe donne la puissance $P(v)$ produite par une éolienne, en mégawatts (MW), selon la vitesse du vent $v$, en m/s. Au-delà de $25$ m/s (90 km/h), l'éolienne s'arrête pour ne pas casser.\na) Dresser le tableau de variations de $P$ sur $[0\\,;\\,25]$.\nb) Quelle est la puissance maximale ? Pour quelles vitesses du vent est-elle atteinte ?\nc) Comparer $P(5)$ et $P(8)$, puis $P(14)$ et $P(22)$.\nd) Quand le vent passe de $6$ à $12$ m/s, sa vitesse double. Que devient la puissance ?",
+          reponses: [
+            { question: "b) max", attendu: "3" },
+            { question: "b) vitesses", attendu: "[12 ; 25]" },
+            { question: "c) P(5), P(8)", attendu: ["P(5) < P(8)", "P(8) > P(5)"] },
+            { question: "c) P(14), P(22)", attendu: ["P(14) = P(22)", "P(22) = P(14)"] },
+            { question: "d)", attendu: ["6", "multipliée par 6"] },
+          ],
           figure: repere([0, 25, -1, 4], EOLIENNE_19),
           correction:
             "a) $P$ est constante, et nulle, sur $[0\\,;\\,3]$ : le vent est trop faible pour faire tourner les pales. Elle est croissante sur $[3\\,;\\,12]$, puis constante sur $[12\\,;\\,25]$, où elle vaut $3$ MW.\nb) Le maximum vaut $3$ MW, et il est atteint pour TOUTES les vitesses de $[12\\,;\\,25]$, pas en un seul point.\nc) $5$ et $8$ sont dans $[3\\,;\\,12]$, où $P$ croît : $P(5) < P(8)$. $14$ et $22$ sont dans $[12\\,;\\,25]$, où $P$ est constante : $P(14) = P(22) = 3$.\nd) $P(6) = 0{,}5$ et $P(12) = 3$ : la vitesse double, et la puissance est multipliée par $6$. Un vent deux fois plus fort donne bien plus que deux fois plus d'énergie.\n⛔ Le piège au b) : « le maximum est atteint en $12$ ». Il l'est en $12$, mais aussi en $20$ ou en $25$ : sur tout un intervalle.",
@@ -276,6 +383,14 @@ export const exercicesVariationsSeconde: FicheExercicesData = {
         {
           titre: "La Terre et le Soleil",
           enonce: "La distance entre la Terre et le Soleil change au cours de l'année. On note $d(t)$ cette distance, en millions de km, $t$ jours après le 3 janvier. Voici le tableau de variations de $d$ sur $[0\\,;\\,365]$.\na) Quand la Terre est-elle au plus près du Soleil ? au plus loin ?\nb) Comparer $d(30)$ et $d(90)$, puis $d(200)$ et $d(300)$.\nc) De combien la distance varie-t-elle au cours de l'année ? Et en pourcentage de la plus petite ?\nd) En France, c'est en janvier qu'il fait le plus froid. Qu'en conclure sur l'origine des saisons ?",
+          reponses: [
+            { question: "a) au plus près", attendu: ["0 ; 365", "3 janvier", "le 3 janvier"] },
+            { question: "a) au plus loin", attendu: ["183", "5 juillet", "le 5 juillet"] },
+            { question: "b) d(30), d(90)", attendu: ["d(30) < d(90)", "d(90) > d(30)"] },
+            { question: "b) d(200), d(300)", attendu: ["d(200) > d(300)", "d(300) < d(200)"] },
+            { question: "c) écart", attendu: "5" },
+            { question: "c) %", attendu: "3,4", tolerance: 0.05 },
+          ],
           figure: tableauVariations([0, 183, 365], ["147,1", "152,1", "147,1"], "d", "t"),
           correction:
             "a) $d$ croît sur $[0\\,;\\,183]$, puis décroît. Le minimum, $147{,}1$ millions de km, est atteint en $t = 0$ (le 3 janvier) et en $t = 365$. Le maximum, $152{,}1$ millions de km, en $t = 183$, le 5 juillet.\nb) $30$ et $90$ sont dans $[0\\,;\\,183]$, où $d$ croît : $d(30) < d(90)$. $200$ et $300$ sont dans $[183\\,;\\,365]$, où $d$ décroît : $d(200) > d(300)$.\nc) $152{,}1 - 147{,}1 = 5$ millions de km. Rapporté à la plus petite distance : $\\dfrac{5}{147{,}1} \\approx 0{,}034$, soit environ $3{,}4$ %.\nd) C'est au début de janvier que la Terre est le PLUS PRÈS du Soleil, en plein hiver en France. La distance ne fait donc pas les saisons : elle ne varie que de $3$ %. Les saisons viennent de l'inclinaison de l'axe de la Terre.\n⭐ En Australie, janvier est l'été : le même jour, deux saisons opposées, à la même distance du Soleil.",
