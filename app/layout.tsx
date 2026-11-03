@@ -14,6 +14,7 @@ import { Analytics } from "@vercel/analytics/next";
 import DevBanner from "@/components/DevBanner";
 import Header from "@/components/Header";
 import BanniereCrpe from "@/components/accueil/BanniereCrpe";
+import BanderoleRealisations from "@/components/BanderoleRealisations";
 import Footer from "@/components/Footer";
 import MasqueSurEmbed from "@/components/MasqueSurEmbed";
 import { EleveProvider } from "@/context/EleveContext";
@@ -434,6 +435,9 @@ export default function RootLayout({
               l'habillage du site — seul le contenu embarqué s'affiche. */}
           <MasqueSurEmbed>
             <DevBanner />
+            {/* 03/11/2026 : la banderole rouge de ce qui a été fait, tout en
+                haut de TOUTES les pages (contenu dans Supabase). */}
+            <BanderoleRealisations />
             {/* 17/10/2026 : la bannière CRPE, en haut sur TÉLÉPHONE seulement
                 (sur ordinateur, elle est au-dessus des colonnes de l'accueil). */}
             <BanniereCrpe place="haut" />

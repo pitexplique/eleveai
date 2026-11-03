@@ -59,6 +59,21 @@ body {
   animation-play-state: paused;
 }
 
+/* La banderole rouge des réalisations (components/BanderoleRealisations.tsx).
+   La durée est posée par le composant, selon la longueur du texte. */
+.banderole-piste {
+  animation: ticker 60s linear infinite;
+  will-change: transform;
+}
+.banderole-realisations:hover .banderole-piste,
+.banderole-realisations:focus-within .banderole-piste {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .banderole-piste { animation: none; }
+  .banderole-realisations { overflow-x: auto; }
+}
+
 /* Accueil — demandes des élèves testeurs (12/06/2026) :
    dégradé animé doux en fond du hero et halo néon sur le bouton principal. */
 @keyframes gradient-shift {
