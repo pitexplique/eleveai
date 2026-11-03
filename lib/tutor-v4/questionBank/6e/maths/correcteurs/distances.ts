@@ -215,5 +215,6 @@ export const CORRECTEURS: CorrecteursMaths = {
   distance_defi_tpl_1: corrigerMilieu,
   distance_defi_tpl_ouverte: corrigerOuverte,
   distance_definition_tpl_1: corrigerNotation,
+  distance_definition_tpl_situation: corrigerNotation,
   distance_definition_tpl_ouverte: corrigerOuverte,
 };

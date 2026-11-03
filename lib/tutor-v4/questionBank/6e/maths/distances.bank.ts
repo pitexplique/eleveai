@@ -142,14 +142,24 @@ function lettres(n: number, exclure: string[] = []): string[] {
 
 // ─── distance_definition ────────────────────────────────────────────────────
 
-function genDistanceNotation() {
+/* ⛔⛔ 03/11/2026 — D'ABORD DES QUESTIONS SIMPLES ET COURTES (Frédéric,
+   lib/tutor-v4/questionBank/6e/REGLES-6E.md) : à ★1-★2, ni prénom ni
+   situation, 12 mots au plus à ★1, 15 à ★2. `simple` : la donnée seule
+   (« Le segment [PQ] mesure 7 cm. ») ; les situations restent à ★3. */
+function genDistanceNotation(simple = false) {
   const [P, Q] = lettres(2);
   const n = pick(PRENOMS);
   const u = pick(["cm", "cm", "cm", "m", "km"]);
   const d = u === "km" ? randomInt(2, 40) : u === "m" ? randomInt(2, 30) : randomInt(2, 15) + pick([0, 0, 0.5]);
   const D = `${nf(d)} ${u}`;
-  const situation =
-    u === "cm"
+  const situation = simple
+    ? pick([
+        `Le segment [${P}${Q}] mesure ${D}.`,
+        `La distance entre ${P} et ${Q} est ${D}.`,
+        `On mesure le segment [${P}${Q}] : ${D}.`,
+        `${P} et ${Q} sont à ${D} l’un de l’autre.`,
+      ])
+    : u === "cm"
       ? pick([
           `Sur son cahier, ${n.nom} trace le segment [${P}${Q}]. Il mesure ${D}.`,
           `${n.nom} mesure la distance entre les points ${P} et ${Q} : ${D}.`,
@@ -167,7 +177,7 @@ function genDistanceNotation() {
   if (Math.random() < 0.6) {
     const bonne = `${P}${Q} = ${D}`;
     return {
-      text: `${situation} ${pick(["Quelle écriture est correcte ?", "Comment écrire cette information ?", "Laquelle de ces égalités est juste ?"])}`,
+      text: `${situation} ${pick(simple ? ["Quelle écriture est correcte ?", "Comment l’écrire ?", "Quelle égalité est juste ?", "Choisis la bonne écriture."] : ["Quelle écriture est correcte ?", "Comment écrire cette information ?", "Laquelle de ces égalités est juste ?"])}`,
       format: "qcm" as const,
       choices: shuffle([bonne, `[${P}${Q}] = ${D}`, `(${P}${Q}) = ${D}`, `${P}${Q} = [${D}]`]),
       expected: [bonne],
@@ -184,7 +194,9 @@ function genDistanceNotation() {
   ];
   const s = pick(sens);
   return {
-    text: `${n.nom} lit l’écriture « ${s.ecr} » dans son cahier. ${pick(["Que désigne cette écriture ?", "Que veut dire cette écriture ?", "Quel objet, ou quelle mesure, cette écriture désigne-t-elle ?"])}`,
+    text: simple
+      ? pick([`Que désigne l’écriture « ${s.ecr} » ?`, `Que veut dire « ${s.ecr} » ?`, `Que représente « ${s.ecr} » ?`, `On lit « ${s.ecr} ». Que désigne cette écriture ?`])
+      : `${n.nom} lit l’écriture « ${s.ecr} » dans son cahier. ${pick(["Que désigne cette écriture ?", "Que veut dire cette écriture ?", "Quel objet, ou quelle mesure, cette écriture désigne-t-elle ?"])}`,
     format: "qcm" as const,
     choices: shuffle(sens.map((x) => x.rep)),
     expected: [s.rep],
@@ -260,8 +272,19 @@ const SITUATIONS_MILIEU: { u: string; lo: number; hi: number; phrase: (n: Prenom
   { u: "m", lo: 6, hi: 40, phrase: (n, A, B, M) => `Dans le jardin, une allée droite va du portail ${A} à la porte ${B}. ${n.nom} plante un arbre en ${M}, le milieu de [${A}${B}].` },
 ];
 
-function genDistanceMilieu(etoile: 1 | 2) {
-  const s = pick(SITUATIONS_MILIEU);
+/** À ★1-★2 (`simple`) : « M est le milieu de [AB]. AB = 12 cm. Combien mesure AM ? »
+ *  ⛔ « milieu de [AB] », jamais « milieu du segment [AB] » (le correcteur lit la première). */
+const MILIEU_SIMPLE: typeof SITUATIONS_MILIEU = [
+  { u: "cm", lo: 4, hi: 24, phrase: (_n, A, B, M) => `${M} est le milieu de [${A}${B}].` },
+  { u: "cm", lo: 4, hi: 24, phrase: (_n, A, B, M) => `Le point ${M} est le milieu de [${A}${B}].` },
+  { u: "m", lo: 4, hi: 40, phrase: (_n, A, B, M) => `${M} est le milieu de [${A}${B}].` },
+  { u: "mm", lo: 10, hi: 80, phrase: (_n, A, B, M) => `${M} est le milieu de [${A}${B}].` },
+  { u: "km", lo: 6, hi: 40, phrase: (_n, A, B, M) => `Le point ${M} est le milieu de [${A}${B}].` },
+  { u: "dm", lo: 6, hi: 30, phrase: (_n, A, B, M) => `${M} est le milieu de [${A}${B}].` },
+];
+function genDistanceMilieu(etoile: 1 | 2, simple = false) {
+  // « Le point M… » coûte deux mots : seulement à ★2.
+  const s = pick(simple ? MILIEU_SIMPLE.filter((x) => etoile === 2 || !/Le point/.test(x.phrase(PRENOMS[0], "A", "B", "M"))) : SITUATIONS_MILIEU);
   const n = pick(PRENOMS);
   const [A, B] = lettres(2);
   const M = pick(LETTRES_MILIEU);
@@ -274,9 +297,10 @@ function genDistanceMilieu(etoile: 1 | 2) {
   const donnee = versLeTout ? `${x}${y} = ${nf(demi)} ${s.u}` : `${A}${B} = ${nf(total)} ${s.u}`;
   const cherche = versLeTout ? `${A}${B}` : pick([`${A}${M}`, `${M}${B}`, `${M}${A}`, `${B}${M}`]);
   const r = versLeTout ? total : demi;
-  const question = pick([`Combien mesure ${cherche} ?`, `Quelle est la longueur ${cherche} ?`, `Calcule ${cherche}.`]);
+  // 03/11/2026 : à ★1-★2, des questions courtes (12 / 15 mots au plus).
+  const question = pick(simple ? [`Combien mesure ${cherche} ?`, `Calcule ${cherche}.`, `Trouve ${cherche}.`, `Donne ${cherche}.`] : [`Combien mesure ${cherche} ?`, `Quelle est la longueur ${cherche} ?`, `Calcule ${cherche}.`]);
   return {
-    text: `${s.phrase(n, A, B, M)} On sait que ${donnee}. ${question}`,
+    text: simple ? `${s.phrase(n, A, B, M)} ${donnee}. ${question}` : `${s.phrase(n, A, B, M)} On sait que ${donnee}. ${question}`,
     format: "short" as const,
     expected: avecUnite(r, s.u),
     comparator: "number_equal" as const,
@@ -541,7 +565,7 @@ export const distancesBank: TutorBankItemV4[] = [
     microId: "distance_definition",
     difficulty: 2,
     theme: "neutral",
-    text: "Un élève écrit : « [AB] = 5 cm ». Cette écriture est-elle correcte ?",
+    text: "On écrit « [AB] = 5 cm ». Cette écriture est-elle correcte ?", // 03/11/2026 : sans « un élève »
     format: "qcm",
     choices: [
       "non : il faut écrire AB = 5 cm, sans crochets",
@@ -593,7 +617,22 @@ export const distancesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Une distance est un nombre : on l'écrit sans crochets.",
     tags: ["distance_segment", "definition", "template"],
-    generate: () => genDistanceNotation(),
+    // 03/11/2026 : ★2, la donnée seule (les situations : distance_definition_tpl_situation, ★3).
+    generate: () => genDistanceNotation(true),
+  },
+  {
+    kind: "template",
+    id: "distance_definition_tpl_situation",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "distance_segment",
+    microId: "distance_definition",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une distance est un nombre : on l'écrit sans crochets.",
+    tags: ["distance_segment", "definition", "template"],
+    // 03/11/2026 : les situations (cahier, cour, stade, carte…), réservées à ★3.
+    generate: () => genDistanceNotation(false),
   },
   {
     kind: "template",
@@ -649,7 +688,7 @@ export const distancesBank: TutorBankItemV4[] = [
     microId: "distance_milieu",
     difficulty: 1,
     theme: "neutral",
-    text: "M est le milieu de [AB] et AB = 12 cm. Combien mesure AM ?",
+    text: "M est le milieu de [AB]. AB = 12 cm. Calcule AM.", // 03/11/2026 : 12 mots au plus
     format: "short",
     expected: ["6 cm"],
     comparator: "number_equal",
@@ -737,7 +776,7 @@ export const distancesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Le milieu coupe le segment en deux morceaux égaux.",
     tags: ["distance_segment", "milieu", "template"],
-    generate: () => genDistanceMilieu(1),
+    generate: () => genDistanceMilieu(1, true), // 03/11/2026 : sans situation
   },
   {
     kind: "template",
@@ -751,7 +790,7 @@ export const distancesBank: TutorBankItemV4[] = [
     hint: "Le milieu coupe le segment en deux morceaux égaux.",
     tags: ["distance_segment", "milieu", "template"],
     // Le canvas porte les lettres du texte (pas toujours A, B, M).
-    generate: () => genDistanceMilieu(2),
+    generate: () => genDistanceMilieu(2, true), // 03/11/2026 : sans situation (elles restent à ★3)
   },
   {
     kind: "template",
