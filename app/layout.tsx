@@ -436,7 +436,7 @@ export default function RootLayout({
           <MasqueSurEmbed>
             <DevBanner />
             {/* 03/11/2026 : la banderole rouge de ce qui a été fait, tout en
-                haut de TOUTES les pages (contenu dans Supabase). */}
+                haut de l'ACCUEIL seulement (04/11 ; contenu dans Supabase). */}
             <BanderoleRealisations />
             {/* 17/10/2026 : la bannière CRPE, en haut sur TÉLÉPHONE seulement
                 (sur ordinateur, elle est au-dessus des colonnes de l'accueil). */}

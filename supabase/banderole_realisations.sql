@@ -1,7 +1,7 @@
 -- LA BANDEROLE DES RÉALISATIONS (03/11/2026).
 -- Frédéric : « une banderole au-dessus du site qui affiche tout ce qui a été
 -- fait […] que ça défile, que les gens voient le travail qui est fait ».
--- Rouge, écriture blanche, au-dessus de l'en-tête, sur toutes les pages.
+-- Rouge, écriture blanche, au-dessus de l'en-tête, sur /accueil seulement (04/11).
 --
 -- ⭐ UNE LIGNE = UNE ANNONCE. On ajoute, on modifie, on masque directement dans
 -- l'éditeur de tables de Supabase, sans redéployer le site :

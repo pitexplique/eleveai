@@ -18,6 +18,7 @@
 // qui a demandé moins d'animations au système (prefers-reduced-motion).
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 type Ligne = { texte: string; lien?: string | null };
@@ -34,16 +35,22 @@ const SECOURS: Ligne[] = [
 ];
 
 export default function BanderoleRealisations() {
+  // ⛔ ACCUEIL SEULEMENT (Frédéric, 04/11 : « il faut mettre le bandeau que dans
+  // la page d'accueil »). Le layout la rend partout ; elle s'efface ailleurs.
+  const surAccueil = usePathname() === "/accueil";
   const [lignes, setLignes] = useState<Ligne[]>(SECOURS);
 
   useEffect(() => {
+    if (!surAccueil) return;
     fetch("/api/banderole")
       .then((r) => r.json())
       .then((d: { lignes?: Ligne[] }) => {
         if (d.lignes && d.lignes.length > 0) setLignes(d.lignes);
       })
       .catch(() => {});
-  }, []);
+  }, [surAccueil]);
+
+  if (!surAccueil) return null;
 
   // Vitesse constante, quelle que soit la longueur : ~ 7 signes par seconde.
   const signes = lignes.reduce((n, l) => n + l.texte.length + 6, 0);
