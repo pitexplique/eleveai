@@ -12,6 +12,7 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 import { nombresRationnelsBank } from "./nombres_rationnels.bank";
 import { puissancesBank } from "./puissances.bank";
+import { puissancesCanvas3e } from "@/lib/tutor-v4/questionBank/puissances-canvas-items";
 import { racineCarreeBank } from "./racine_carree.bank";
 import { arithmetiqueBank } from "./arithmetique.bank";
 
@@ -49,6 +50,7 @@ import { algorithmiqueBank } from "./algorithmique.bank";
 export const maths3eQuestionBank: TutorBankItemV4[] = [
   ...nombresRationnelsBank,
   ...puissancesBank,
+  ...puissancesCanvas3e, // 04/11 : carré, cube, arbre, table des 10ⁿ
   ...racineCarreeBank,
   ...arithmetiqueBank,
 

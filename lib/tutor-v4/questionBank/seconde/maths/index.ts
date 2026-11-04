@@ -4,6 +4,7 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { reelsIntervallesBank } from "./reels-intervalles.bank";
 import { arithmetiqueEntiersBank } from "./arithmetique-entiers.bank";
 import { puissancesBank } from "./puissances.bank";
+import { puissancesCanvas2de } from "@/lib/tutor-v4/questionBank/puissances-canvas-items";
 import { racineCarreeBank } from "./racine-carree.bank";
 import { developpementFactorisationBank } from "./developpement-factorisation.bank";
 import { identitesRemarquablesBank } from "./identites-remarquables.bank";
@@ -32,6 +33,7 @@ export const mathsSecondeQuestionBank: TutorBankItemV4[] = [
   ...reelsIntervallesBank,
   ...arithmetiqueEntiersBank,
   ...puissancesBank,
+  ...puissancesCanvas2de, // 04/11 : carré, cube, arbre, table des 10ⁿ
   ...racineCarreeBank,
   ...developpementFactorisationBank,
   ...identitesRemarquablesBank,

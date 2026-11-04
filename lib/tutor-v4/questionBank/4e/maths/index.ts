@@ -34,6 +34,7 @@ import { statistiquesBank} from "./statistiques.bank"
 import { algorithmiqueBank } from "./algorithmique.bank";
 import { cosinusBank } from "./cosinus.bank";
 import { puissancesBank } from "./puissances.bank";
+import { puissancesCanvas4e } from "@/lib/tutor-v4/questionBank/puissances-canvas-items";
 import { ratiosBank } from "./ratios.bank";
 import { echellesBank } from "./echelles.bank";
 import { frequencesBank } from "./frequences.bank";
@@ -71,6 +72,7 @@ export const maths4eQuestionBank: TutorBankItemV4[] = [
   ...fractionsBank,
   ...operationsRelatifsBank,
   ...puissancesBank,
+  ...puissancesCanvas4e, // 04/11 : carré, cube, arbre, table des 10ⁿ
   ...identitesRemarquablesBank,
   ...factorisationBank,
   ...proportionnaliteBank,
