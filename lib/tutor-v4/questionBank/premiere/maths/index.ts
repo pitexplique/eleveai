@@ -47,6 +47,7 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { automatismesCalculBank } from "./automatismes-calcul.bank";
+import { puissancesAutomatismesPremiere } from "@/lib/tutor-v4/questionBank/puissances-automatismes-lycee";
 import { automatismesAlgebreBank } from "./automatismes-algebre.bank";
 import { automatismesProportionsStatsBank } from "./automatismes-proportions-stats.bank";
 import { automatismesProbabilitesBank } from "./automatismes-probabilites.bank";
@@ -68,6 +69,7 @@ import { bernoulliBank } from "./bernoulli.bank";
 export const mathsPremiereQuestionBank: TutorBankItemV4[] = [
   // === AUTOMATISMES ===
   ...automatismesCalculBank, // comparer · fractions et puissances · ordres et unités
+  ...puissancesAutomatismesPremiere, // 04/11 : auto_num_puissances renforcé
   ...automatismesAlgebreBank, // développer-factoriser · équations · signe · formules
   ...automatismesProportionsStatsBank, // proportions · partie et tout · stats · probabilités
   ...automatismesProbabilitesBank, // probabilités : encadrement · somme · contraire · équiprobabilité · lecture d'un tableau

@@ -1,6 +1,7 @@
 // lib/tutor-v4/question-banks/maths/3e/puissances.bank.ts
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { puissancesRenfort3e } from "./puissances-renfort";
 
 // Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
 // finissent par coïncider dès qu'un paramètre tombe sur une valeur particulière
@@ -27,7 +28,7 @@ function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
 }
 
-export const puissancesBank: TutorBankItemV4[] = [
+const puissancesAnciens: TutorBankItemV4[] = [
   /* =========================
      PUISSANCE_COMPRENDRE
   ========================= */
@@ -1550,4 +1551,17 @@ export const puissancesBank: TutorBankItemV4[] = [
       "Conclusion : il y a $16$ bactéries.",
     tags: ["entier_puissance", "defi", "short"],
   },
+];
+
+// ⛔⛔ 04/11/2026 — mesuré : 6 à 12 squelettes par micro, 15 à 18 répétitions
+// sur 20. Les anciens GABARITS (une seule phrase chacun, réponses « 2^5 » en
+// texte exact) et les figés à l'explication passe-partout (« l’écriture obtenue
+// est la réponse attendue ») sont retirés ; les figés soignés restent (a¹,
+// vocabulaire, carré, bactérie…). Le gros vient de ./puissances-renfort.ts.
+const PASSE_PARTOUT = "l’écriture obtenue est la réponse attendue";
+export const puissancesBank: TutorBankItemV4[] = [
+  ...puissancesAnciens.filter(
+    (i) => i.kind === "fixed" && !(i.explanation ?? "").includes(PASSE_PARTOUT)
+  ),
+  ...puissancesRenfort3e,
 ];

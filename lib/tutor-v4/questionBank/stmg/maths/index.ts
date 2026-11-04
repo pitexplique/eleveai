@@ -101,6 +101,7 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 import { proportionsEvolutionsBank } from "./proportions-evolutions.bank";
 import { automatismesCalculBank } from "./automatismes-calcul.bank";
+import { puissancesAutomatismesStmg } from "@/lib/tutor-v4/questionBank/puissances-automatismes-lycee";
 import { automatismesAlgebreBank } from "./automatismes-algebre.bank";
 import { automatismesGraphiquesBank } from "./automatismes-graphiques.bank";
 import { automatismesTerminaleBank } from "./automatismes-terminale.bank";
@@ -121,6 +122,7 @@ import { algorithmiqueBank } from "./algorithmique.bank";
 export const mathsStmgQuestionBank: TutorBankItemV4[] = [
   ...proportionsEvolutionsBank,
   ...automatismesCalculBank,
+  ...puissancesAutomatismesStmg, // 04/11 : auto_num_puissances renforcé
   ...automatismesAlgebreBank,
   ...automatismesGraphiquesBank,
   ...automatismesTerminaleBank,

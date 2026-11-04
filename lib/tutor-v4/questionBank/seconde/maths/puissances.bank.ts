@@ -16,6 +16,7 @@
 //   puiss_exposant_negatif     — Exposant negatif (a^-n = 1/a^n)
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { puissancesRenfort2de } from "./puissances-renfort";
 
 function shuffle<T>(arr: readonly T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
@@ -47,7 +48,7 @@ function exp(definition: string, methode: string, calcul: string, conclusion: st
   );
 }
 
-export const puissancesBank: TutorBankItemV4[] = [
+const puissancesAnciens: TutorBankItemV4[] = [
   /* ===================== PUISS_CALCUL ===================== */
 
   // fixed : valeurs remarquables / definition
@@ -1517,4 +1518,13 @@ export const puissancesBank: TutorBankItemV4[] = [
     ),
     tags: ["seconde", "maths", "puissances", "notation_scientifique", "reel", "qcm"],
   },
+];
+
+// ⛔⛔ 04/11/2026 — mesuré : 5 à 9 squelettes par micro, 15 à 19 répétitions
+// sur 20. Les anciens gabarits (une phrase chacun) sont retirés ; les figés
+// (valeurs remarquables, définitions, l'erreur a^{15/2}…) restent. Le gros
+// vient de ./puissances-renfort.ts (générateurs communs 3e → 1re).
+export const puissancesBank: TutorBankItemV4[] = [
+  ...puissancesAnciens.filter((i) => i.kind === "fixed"),
+  ...puissancesRenfort2de,
 ];
