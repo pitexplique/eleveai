@@ -565,6 +565,22 @@ async function main() {
   const remplacer = args.includes("--remplacer");
   const token = await jeton();
 
+  // --miniatures id1,id2 : repose la miniature de vidéos déjà en ligne (04/11 :
+  // deux shorts publiés à la main montraient une image de la vidéo).
+  const aReposer = lire("--miniatures", null);
+  if (aReposer) {
+    for (const id of aReposer.split(",")) {
+      const v = m.videos.find((x) => x.id === id);
+      const videoId = v?.url?.match(/(?:youtu\.be\/|v=|shorts\/)([\w-]{11})/)?.[1];
+      if (!videoId) {
+        console.log(`  ${id} : pas en ligne`);
+        continue;
+      }
+      console.log(`  ${id} (${videoId}) : miniature ${await poserMiniature(token, videoId, v.miniature)}`);
+    }
+    return;
+  }
+
   // Une centaine de vidéos publiées à la main n'ont pas d'`url` dans le
   // manifeste : on les reconnaît sur la chaîne par leur nom de fichier d'origine.
   // Retrouvées, leur `url` est écrite dans le manifeste (une fois pour toutes).
@@ -588,7 +604,14 @@ async function main() {
     .filter((v) => fs.existsSync(path.join(SORTIES, v.fichier)))
     // Frédéric, 01/11 : « fais attention de bien mettre les miniatures dans les
     // shorts ». Un short sans sa miniature n'est jamais envoyé.
-    .filter((v) => v.type !== "short" || cheminMiniature(v.miniature));
+    .filter((v) => v.type !== "short" || cheminMiniature(v.miniature))
+    // YouTube refuse un titre de plus de 100 caractères ou avec < > : le 04/11,
+    // Pythagore ép. 5 (112) a bloqué tout l'envoi du jour.
+    .filter((v) => {
+      const ok = [...(v.titre || "")].length <= 100 && !/[<>]/.test(v.titre || "");
+      if (!ok) console.log(`  ⚠ titre refusé par YouTube (> 100 caractères ou < >) : ${v.id}`);
+      return ok;
+    });
 
   // --du-jour : Frédéric, 01/11/2026 : « on va varier les vidéos et niveaux ».
   // Une seule classe à la fois, en commençant par celles publiées il y a le

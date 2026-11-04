@@ -1708,7 +1708,7 @@
   "fichier": "4e/maths/pythagore/06-reciproque/eleveai-maths-4e-pythagore-reciproque.mp4",
   "poster": "4e/maths/pythagore/06-reciproque/eleveai-maths-4e-pythagore-reciproque.png",
   "vignette": "4e/maths/pythagore/06-reciproque/eleveai-maths-4e-pythagore-reciproque.vignette.webp",
-  "titre": "La réciproque de Pythagore (2/2) : conclure et rédiger, la dalle du maçon — Pythagore, épisode 6 · Maths 4e",
+  "titre": "Réciproque de Pythagore (2/2) : conclure et rédiger, la dalle du maçon — épisode 6 · Maths 4e",
   "short": false,
   "youtube": "IV4gWGe597Q",
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=pythagore_theoreme&microId=pythagore_reciproque_conclure&display=simple"
@@ -1762,9 +1762,9 @@
   "fichier": "4e/maths/pythagore/05-verifier/eleveai-maths-4e-pythagore-verifier.mp4",
   "poster": "4e/maths/pythagore/05-verifier/eleveai-maths-4e-pythagore-verifier.png",
   "vignette": "4e/maths/pythagore/05-verifier/eleveai-maths-4e-pythagore-verifier.vignette.webp",
-  "titre": "La réciproque de Pythagore (1/2) : vérifier l'égalité avec la corde à 13 nœuds — Pythagore, épisode 5 · Maths 4e",
+  "titre": "Réciproque de Pythagore (1/2) : vérifier l'égalité avec la corde à 13 nœuds — épisode 5 · Maths 4e",
   "short": false,
-  "youtube": "82Vbm0B3lWQ",
+  "youtube": "fLyr5Nmjtm8",
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=pythagore_theoreme&microId=pythagore_reciproque_verifier&display=simple"
  },
  "4e-pythagore-verifier-short": {
@@ -1773,7 +1773,7 @@
   "vignette": "4e/maths/pythagore/05-verifier/eleveai-maths-4e-pythagore-verifier-short.vignette.webp",
   "titre": "La corde à 13 nœuds : 3, 4, 5 et un angle droit sans équerre 🪢 — Pythagore 4e #Shorts",
   "short": true,
-  "youtube": "nQNFxJqmOFQ",
+  "youtube": "kBF71CcBHqQ",
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=pythagore_theoreme&microId=pythagore_reciproque_verifier&display=simple"
  },
  "4e-stats-defi": {
@@ -3736,6 +3736,15 @@
   "youtube": "DLNc84RLJ_0",
   "coach": null
  },
+ "actu-maths-reelles-short": {
+  "fichier": "actu/maths/shorts/fr/maths-reelles/eleveai-maths-actu-maths-reelles-short.mp4",
+  "poster": "actu/maths/shorts/fr/maths-reelles/eleveai-maths-actu-maths-reelles-short.png",
+  "vignette": "actu/maths/shorts/fr/maths-reelles/eleveai-maths-actu-maths-reelles-short.vignette.webp",
+  "titre": "−30 % puis +30 % : le jean revient à 100 € ? Vrai ou faux 🤔 #Shorts",
+  "short": true,
+  "youtube": "ifn2_ZscfV8",
+  "coach": null
+ },
  "annonce-probabilites": {
   "fichier": "annonce/probabilites/eleveai-annonce-probabilites.mp4",
   "poster": "annonce/probabilites/eleveai-annonce-probabilites.png",
@@ -5109,7 +5118,7 @@
   "vignette": "cp/francais/paysage/fr/pas-a-pas/chiffre-0/eleveai-francais-cp-pas-a-pas-chiffre-0.vignette.webp",
   "titre": "Écrire le chiffre 0 pas à pas, tout doucement — La belle écriture",
   "short": false,
-  "youtube": null,
+  "youtube": "oHAA2NfQSxw",
   "coach": null
  },
  "cp-pas-a-pas-chiffre-1": {
@@ -6659,6 +6668,22 @@
   "youtube": "uVs9h6561zU",
   "coach": "/coach/serie?classe=seconde&matiere=maths&notion=identites_remarquables_2de&microId=ir_carre_somme&display=simple"
  },
+ "maths-4e-puissance-calculer": {
+  "fichier": "4e/maths/puissances/02-calculer/eleveai-maths-4e-puissance-calculer.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths 4e puissance calculer",
+  "short": false,
+  "youtube": null
+ },
+ "maths-4e-puissance-comprendre-short": {
+  "fichier": "4e/maths/puissances/01-comprendre/eleveai-maths-4e-puissance-comprendre-short.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths 4e puissance comprendre short",
+  "short": true,
+  "youtube": null
+ },
  "maths-cp-chiffre-0-droitier-portrait": {
   "fichier": "cp/maths/shorts/fr/chiffre-0/eleveai-maths-cp-chiffre-0-droitier-portrait.mp4",
   "poster": null,
@@ -7393,7 +7418,7 @@
   "fichier": "premiere-commun/maths/probabilites/16-indep-incompatible/eleveai-maths-premiere-commun-proba-indep-incompatible.mp4",
   "poster": "premiere-commun/maths/probabilites/16-indep-incompatible/eleveai-maths-premiere-commun-proba-indep-incompatible.png",
   "vignette": "premiere-commun/maths/probabilites/16-indep-incompatible/eleveai-maths-premiere-commun-proba-indep-incompatible.vignette.webp",
-  "titre": "Incompatibles = indépendants ? Presque le CONTRAIRE ! — Indépendants ou incompatibles · Maths 1re · STMG",
+  "titre": "Incompatibles = indépendants ? Presque le CONTRAIRE ! — Indépendants ou incompatibles · 1re · STMG",
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=premiere&matiere=maths&notion=alea_independance&microId=alea_indep_incompatible&display=simple"
@@ -7447,7 +7472,7 @@
   "fichier": "premiere-commun/maths/probabilites/05-interpreter/eleveai-maths-premiere-commun-proba-interpreter.mp4",
   "poster": "premiere-commun/maths/probabilites/05-interpreter/eleveai-maths-premiere-commun-proba-interpreter.png",
   "vignette": "premiere-commun/maths/probabilites/05-interpreter/eleveai-maths-premiere-commun-proba-interpreter.vignette.webp",
-  "titre": "75 % dans l'autre sens ? NON : une sur deux ! — Dire une proba conditionnelle en phrase · Maths 1re · STMG",
+  "titre": "75 % dans l'autre sens ? NON : une sur deux ! — Dire une proba conditionnelle · Maths 1re · STMG",
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=premiere&matiere=maths&notion=alea_conditionnelle_calcul&microId=alea_cond_interpreter&display=simple"
@@ -8212,7 +8237,7 @@
   "fichier": "premiere/maths/probabilites/27-va-moyenne/eleveai-maths-premiere-proba-va-moyenne.mp4",
   "poster": "premiere/maths/probabilites/27-va-moyenne/eleveai-maths-premiere-proba-va-moyenne.png",
   "vignette": "premiere/maths/probabilites/27-va-moyenne/eleveai-maths-premiere-proba-va-moyenne.vignette.webp",
-  "titre": "E(X) = 1,6 €… mais on ne gagne JAMAIS 1,6 € ! — L'espérance, une moyenne à long terme · Maths 1re spé · STMG",
+  "titre": "E(X) = 1,6 €… mais on ne gagne JAMAIS 1,6 € ! — L'espérance, moyenne à long terme · 1re spé · STMG",
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_echantillon&display=simple"
@@ -9634,7 +9659,7 @@
   "fichier": "stmg/maths/probabilites/16-indep-incompatible/eleveai-maths-stmg-proba-indep-incompatible.mp4",
   "poster": "stmg/maths/probabilites/16-indep-incompatible/eleveai-maths-stmg-proba-indep-incompatible.png",
   "vignette": "stmg/maths/probabilites/16-indep-incompatible/eleveai-maths-stmg-proba-indep-incompatible.vignette.webp",
-  "titre": "Incompatibles = indépendants ? Presque le CONTRAIRE ! — Indépendants ou incompatibles · Maths 1re · STMG",
+  "titre": "Incompatibles = indépendants ? Presque le CONTRAIRE ! — Indépendants ou incompatibles · 1re · STMG",
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=stmg&matiere=maths&notion=proba_independance&microId=probaT_indep_incompatible&display=simple"
@@ -9688,7 +9713,7 @@
   "fichier": "stmg/maths/probabilites/05-interpreter/eleveai-maths-stmg-proba-interpreter.mp4",
   "poster": "stmg/maths/probabilites/05-interpreter/eleveai-maths-stmg-proba-interpreter.png",
   "vignette": "stmg/maths/probabilites/05-interpreter/eleveai-maths-stmg-proba-interpreter.vignette.webp",
-  "titre": "75 % dans l'autre sens ? NON : une sur deux ! — Dire une proba conditionnelle en phrase · Maths 1re · STMG",
+  "titre": "75 % dans l'autre sens ? NON : une sur deux ! — Dire une proba conditionnelle · Maths 1re · STMG",
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=stmg&matiere=maths&notion=proba_conditionnelle_distinguer&microId=probaC_interpreter_phrase&display=simple"
@@ -9922,7 +9947,7 @@
   "fichier": "stmg/maths/probabilites/27-va-moyenne/eleveai-maths-stmg-proba-va-moyenne.mp4",
   "poster": "stmg/maths/probabilites/27-va-moyenne/eleveai-maths-stmg-proba-va-moyenne.png",
   "vignette": "stmg/maths/probabilites/27-va-moyenne/eleveai-maths-stmg-proba-va-moyenne.vignette.webp",
-  "titre": "E(X) = 1,6 €… mais on ne gagne JAMAIS 1,6 € ! — L'espérance, une moyenne à long terme · Maths 1re spé · STMG",
+  "titre": "E(X) = 1,6 €… mais on ne gagne JAMAIS 1,6 € ! — L'espérance, une moyenne à long terme · 1re · STMG",
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=stmg&matiere=maths&notion=va_esperance&microId=va_esp_interpreter&display=simple"
@@ -10689,7 +10714,7 @@
   "vignette": "terminale/maths/shorts/fr/continuite-tvi/eleveai-maths-terminale-continuite-tvi-short-unicite.vignette.webp",
   "titre": "TVI : au moins une solution, ou une seule ? (le piège du bac)",
   "short": true,
-  "youtube": null,
+  "youtube": "X1jaQJDlnq4",
   "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=continuite_tvi&microId=tvi_unicite&display=simple"
  },
  "terminale-convexite-defi": {

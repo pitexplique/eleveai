@@ -6154,7 +6154,8 @@
         "spécialité maths",
         "Shorts"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtube.com/shorts/X1jaQJDlnq4"
     },
     {
       "id": "terminale-continuite-tvi-short-rediger",
@@ -6864,7 +6865,7 @@
       "duree": "04:49",
       "fichier": "4e/maths/pythagore/05-verifier/eleveai-maths-4e-pythagore-verifier.mp4",
       "miniature": "4e/maths/pythagore/05-verifier/eleveai-maths-4e-pythagore-verifier.png",
-      "titre": "La réciproque de Pythagore (1/2) : vérifier l'égalité avec la corde à 13 nœuds — Pythagore, épisode 5 · Maths 4e",
+      "titre": "Réciproque de Pythagore (1/2) : vérifier l'égalité avec la corde à 13 nœuds — épisode 5 · Maths 4e",
       "accroche": "Une corde à 13 nœuds, tendue en triangle de 3, 4 et 5 intervalles. Pourquoi les bâtisseurs s'en servent-ils ? Avec trois longueurs, on vérifie l'égalité de Pythagore en trois étapes.\n\nDans cette vidéo :\n• étape 1 : repérer le plus grand côté\n• étapes 2 et 3 : deux calculs séparés, puis on compare (5² = 25 et 3² + 4² = 25)\n• le piège : écrire « = » avant d'avoir calculé\n• quand ce n'est pas égal : 4, 5 et 6 (36 et 41)\n• les longueurs dans le désordre : AB = 8, BC = 17, AC = 15\n• des triplets à connaître : 3-4-5, 6-8-10, 5-12-13, 8-15-17\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nUn défi en fin de vidéo, avec sa correction : 5, 12 et 13 cm.\n\nL'épisode 4, calculer un côté de l'angle droit : https://youtu.be/h3b8PvZDaEk\n\nPour s'entraîner :\n• les devoirs de la série (5 exercices par épisode) : https://www.eleveai.fr/fiches-exercices/maths/4e/pythagore-theoreme/devoirs\n• la feuille d'exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/pythagore-theoreme\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/pythagore-theoreme\n• la série du coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=pythagore_theoreme&microId=pythagore_reciproque_verifier&display=simple",
       "chapitres": [
         [
@@ -6954,8 +6955,8 @@
           "explication": "Le plus grand est AB : 8² = 64 ; 5² + 6² = 25 + 36 = 61."
         }
       ],
-      "url": "https://youtu.be/82Vbm0B3lWQ",
-      "a_remplacer": true
+      "url": "https://youtu.be/fLyr5Nmjtm8",
+      "ancienne_url": "https://youtu.be/82Vbm0B3lWQ"
     },
     {
       "id": "4e-pythagore-verifier-short",
@@ -6995,8 +6996,8 @@
           "explication": "13² = 13 × 13 = 169, et pas 13 × 2."
         }
       ],
-      "url": "https://youtube.com/shorts/nQNFxJqmOFQ",
-      "a_remplacer": true
+      "url": "https://youtube.com/shorts/kBF71CcBHqQ",
+      "ancienne_url": "https://youtube.com/shorts/nQNFxJqmOFQ"
     },
     {
       "id": "4e-pythagore-reciproque",
@@ -7007,7 +7008,7 @@
       "duree": "04:32",
       "fichier": "4e/maths/pythagore/06-reciproque/eleveai-maths-4e-pythagore-reciproque.mp4",
       "miniature": "4e/maths/pythagore/06-reciproque/eleveai-maths-4e-pythagore-reciproque.png",
-      "titre": "La réciproque de Pythagore (2/2) : conclure et rédiger, la dalle du maçon — Pythagore, épisode 6 · Maths 4e",
+      "titre": "Réciproque de Pythagore (2/2) : conclure et rédiger, la dalle du maçon — épisode 6 · Maths 4e",
       "accroche": "Un maçon coule une dalle : deux bords de 60 cm et 80 cm, une diagonale de 100 cm. Sans équerre, son coin est-il vraiment droit ? La réciproque du théorème de Pythagore permet de le prouver, à condition de bien rédiger.\n\nDans cette vidéo :\n• la réciproque : si l'égalité est vérifiée, alors le triangle est rectangle\n• la rédaction modèle, ligne par ligne : « d'une part… d'autre part… donc… d'après la réciproque du théorème de Pythagore… »\n• le bon sommet : l'angle droit est en face du plus grand côté\n• quand la réponse est non : 60, 80 et 98 cm (9 604 ≠ 10 000), le triangle n'est pas rectangle\n• les deux erreurs de rédaction : écrire « = » trop tôt, citer le théorème au lieu de la réciproque\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nUn défi en fin de vidéo, avec sa correction rédigée : KL = 9 cm, LM = 12 cm, KM = 15 cm.\n\nLa réciproque de Pythagore (1/2), vérifier l'égalité : https://youtu.be/82Vbm0B3lWQ\n\nPour s'entraîner :\n• les devoirs de la série (5 exercices par épisode) : https://www.eleveai.fr/fiches-exercices/maths/4e/pythagore-theoreme/devoirs\n• la feuille d'exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/pythagore-theoreme\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/pythagore-theoreme\n• la série du coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=pythagore_theoreme&microId=pythagore_reciproque_conclure&display=simple",
       "chapitres": [
         [
@@ -14363,7 +14364,7 @@
       "type": "longue",
       "fichier": "stmg/maths/probabilites/05-interpreter/eleveai-maths-stmg-proba-interpreter.mp4",
       "miniature": "stmg/maths/probabilites/05-interpreter/eleveai-maths-stmg-proba-interpreter.png",
-      "titre": "75 % dans l'autre sens ? NON : une sur deux ! — Dire une proba conditionnelle en phrase · Maths 1re · STMG",
+      "titre": "75 % dans l'autre sens ? NON : une sur deux ! — Dire une proba conditionnelle · Maths 1re · STMG",
       "accroche": "Dans une commune, 40 % des maisons ont des panneaux solaires. Leur facture d'électricité a-t-elle baissé ?\n\nDans cette vidéo :\n• l'arbre pondéré : S 0,4, puis B 0,75 après S et 0,5 après S barre\n• P_S(B) = 0,75 se dit « parmi les maisons équipées, 75 % ont vu leur facture baisser »\n• un chemin : 0,4 × 0,75 = 0,3 = P(S ∩ B), « avec panneaux ET facture en baisse »\n• le piège : retourner la phrase, 0,3 sur 0,6 = 0,5, une maison sur deux\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : écris en phrase le 0,5 de la branche qui va de S barre à B.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_conditionnelle_distinguer&microId=probaC_interpreter_phrase&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
       "chapitres": [
         [
@@ -14462,7 +14463,7 @@
       "meme_video_que": "stmg-proba-interpreter",
       "fichier": "premiere-commun/maths/probabilites/05-interpreter/eleveai-maths-premiere-commun-proba-interpreter.mp4",
       "miniature": "premiere-commun/maths/probabilites/05-interpreter/eleveai-maths-premiere-commun-proba-interpreter.png",
-      "titre": "75 % dans l'autre sens ? NON : une sur deux ! — Dire une proba conditionnelle en phrase · Maths 1re · STMG",
+      "titre": "75 % dans l'autre sens ? NON : une sur deux ! — Dire une proba conditionnelle · Maths 1re · STMG",
       "accroche": "Dans une commune, 40 % des maisons ont des panneaux solaires. Leur facture d'électricité a-t-elle baissé ?\n\nDans cette vidéo :\n• l'arbre pondéré : S 0,4, puis B 0,75 après S et 0,5 après S barre\n• P_S(B) = 0,75 se dit « parmi les maisons équipées, 75 % ont vu leur facture baisser »\n• un chemin : 0,4 × 0,75 = 0,3 = P(S ∩ B), « avec panneaux ET facture en baisse »\n• le piège : retourner la phrase, 0,3 sur 0,6 = 0,5, une maison sur deux\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : écris en phrase le 0,5 de la branche qui va de S barre à B.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_conditionnelle_calcul&microId=alea_cond_interpreter&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
       "chapitres": [
         [
@@ -16606,7 +16607,7 @@
       "type": "longue",
       "fichier": "stmg/maths/probabilites/16-indep-incompatible/eleveai-maths-stmg-proba-indep-incompatible.mp4",
       "miniature": "stmg/maths/probabilites/16-indep-incompatible/eleveai-maths-stmg-proba-indep-incompatible.png",
-      "titre": "Incompatibles = indépendants ? Presque le CONTRAIRE ! — Indépendants ou incompatibles · Maths 1re · STMG",
+      "titre": "Incompatibles = indépendants ? Presque le CONTRAIRE ! — Indépendants ou incompatibles · 1re · STMG",
       "accroche": "Une roue de 10 cases numérotées de 1 à 10. A : « pair ». C : « 1 ou 3 ». B : « 4 ou moins ». Qui est incompatible, qui est indépendant ?\n\nDans cette vidéo :\n• incompatibles : impossible ensemble, P(A ∩ C) = 0\n• indépendants : 0,5 × 0,4 = 0,2 = P(A ∩ B)\n• A et C : 0 et 0,1, pas indépendants\n• pourquoi : savoir A, c'est savoir que ce n'est ni 1 ni 3\n• le piège : confondre les deux mots\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : D : « le numéro est 10 » : A et D sont-ils incompatibles ? indépendants ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=proba_independance&microId=probaT_indep_incompatible&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
       "chapitres": [
         [
@@ -16705,7 +16706,7 @@
       "meme_video_que": "stmg-proba-indep-incompatible",
       "fichier": "premiere-commun/maths/probabilites/16-indep-incompatible/eleveai-maths-premiere-commun-proba-indep-incompatible.mp4",
       "miniature": "premiere-commun/maths/probabilites/16-indep-incompatible/eleveai-maths-premiere-commun-proba-indep-incompatible.png",
-      "titre": "Incompatibles = indépendants ? Presque le CONTRAIRE ! — Indépendants ou incompatibles · Maths 1re · STMG",
+      "titre": "Incompatibles = indépendants ? Presque le CONTRAIRE ! — Indépendants ou incompatibles · 1re · STMG",
       "accroche": "Une roue de 10 cases numérotées de 1 à 10. A : « pair ». C : « 1 ou 3 ». B : « 4 ou moins ». Qui est incompatible, qui est indépendant ?\n\nDans cette vidéo :\n• incompatibles : impossible ensemble, P(A ∩ C) = 0\n• indépendants : 0,5 × 0,4 = 0,2 = P(A ∩ B)\n• A et C : 0 et 0,1, pas indépendants\n• pourquoi : savoir A, c'est savoir que ce n'est ni 1 ni 3\n• le piège : confondre les deux mots\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : D : « le numéro est 10 » : A et D sont-ils incompatibles ? indépendants ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=alea_independance&microId=alea_indep_incompatible&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
       "chapitres": [
         [
@@ -18762,7 +18763,7 @@
       "type": "longue",
       "fichier": "stmg/maths/probabilites/27-va-moyenne/eleveai-maths-stmg-proba-va-moyenne.mp4",
       "miniature": "stmg/maths/probabilites/27-va-moyenne/eleveai-maths-stmg-proba-va-moyenne.png",
-      "titre": "E(X) = 1,6 €… mais on ne gagne JAMAIS 1,6 € ! — L'espérance, une moyenne à long terme · Maths 1re spé · STMG",
+      "titre": "E(X) = 1,6 €… mais on ne gagne JAMAIS 1,6 € ! — L'espérance, une moyenne à long terme · 1re · STMG",
       "accroche": "La roue de la kermesse a une espérance de 1,6 €, mais à chaque partie on gagne 0, 2 ou 10 €.\n\nDans cette vidéo :\n• 10 parties : moyenne 1,6, un coup de chance\n• 10 autres parties : moyenne 0,4\n• sur 1 000 parties, la moyenne se rapproche de 1,6\n• le piège : attendre 1,6 € à chaque partie\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : l'organisateur prévoit 500 parties : combien d'euros de gains doit-il prévoir, environ ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=va_esperance&microId=va_esp_interpreter&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
       "chapitres": [
         [
@@ -18859,7 +18860,7 @@
       "meme_video_que": "stmg-proba-va-moyenne",
       "fichier": "premiere/maths/probabilites/27-va-moyenne/eleveai-maths-premiere-proba-va-moyenne.mp4",
       "miniature": "premiere/maths/probabilites/27-va-moyenne/eleveai-maths-premiere-proba-va-moyenne.png",
-      "titre": "E(X) = 1,6 €… mais on ne gagne JAMAIS 1,6 € ! — L'espérance, une moyenne à long terme · Maths 1re spé · STMG",
+      "titre": "E(X) = 1,6 €… mais on ne gagne JAMAIS 1,6 € ! — L'espérance, moyenne à long terme · 1re spé · STMG",
       "accroche": "La roue de la kermesse a une espérance de 1,6 €, mais à chaque partie on gagne 0, 2 ou 10 €.\n\nDans cette vidéo :\n• 10 parties : moyenne 1,6, un coup de chance\n• 10 autres parties : moyenne 0,4\n• sur 1 000 parties, la moyenne se rapproche de 1,6\n• le piège : attendre 1,6 € à chaque partie\n\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : l'organisateur prévoit 500 parties : combien d'euros de gains doit-il prévoir, environ ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=variables_aleatoires&microId=va_echantillon&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
       "chapitres": [
         [
@@ -56357,7 +56358,8 @@
         }
       ],
       "miniature": "cp/francais/paysage/fr/pas-a-pas/chiffre-0/eleveai-francais-cp-pas-a-pas-chiffre-0.png",
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtu.be/oHAA2NfQSxw"
     },
     {
       "id": "cp-pas-a-pas-chiffre-1",
