@@ -16,11 +16,12 @@ import {
   genQuotientMemeBase,
   genVraiFaux,
 } from "./puissances-regles-commun";
+import { genPuissanceZero } from "./puissances-canvas-commun";
 
 const L = { niveau: "lycee" as const };
 const LN = { niveau: "lycee" as const, negatifs: true };
 const LNC = { niveau: "lycee" as const, negatifs: true, contexte: true };
-const HINT = "aᵐ × aⁿ = aᵐ⁺ⁿ ; aᵐ ÷ aⁿ = aᵐ⁻ⁿ ; (aᵐ)ⁿ = aᵐˣⁿ ; a⁻ⁿ = 1/aⁿ.";
+const HINT = "aᵐ × aⁿ = aᵐ⁺ⁿ ; aᵐ ÷ aⁿ = aᵐ⁻ⁿ ; (aᵐ)ⁿ = aᵐˣⁿ ; a⁰ = 1 ; a⁻ⁿ = 1/aⁿ.";
 
 type Spec = [number, () => any];
 
@@ -50,6 +51,7 @@ export const puissancesAutomatismesPremiere: TutorBankItemV4[] = construire("pre
   [3, () => genQuotientMemeBase(LN)],
   [3, () => genExposantNegatif(LN)],
   [3, () => genVraiFaux(LN)],
+  [3, () => genPuissanceZero({ regles: true })],
   [4, () => genPuissanceDePuissance(LN)],
   [4, () => genEnchainement(LN)],
   [4, () => genCalculScientifique(LNC)],
@@ -65,6 +67,7 @@ export const puissancesAutomatismesStmg: TutorBankItemV4[] = construire("stmg", 
   [2, () => genVraiFaux(L)],
   [2, () => genPuissanceDePuissance(L)],
   [2, () => genCalculScientifique(L)],
+  [2, () => genPuissanceZero({ regles: true })],
   [3, () => genPuissanceDePuissance(LN)],
   [3, () => genEnchainement(L)],
   [3, () => genCalculScientifique(LNC)],

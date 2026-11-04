@@ -219,3 +219,150 @@ export function genTableDix(o: { negatifs?: boolean } = {}): TutorGeneratedQuest
     explanation,
   };
 }
+
+/* ------------------- 5. LA PUISSANCE ZÉRO : a⁰ = 1, et POURQUOI (04/11) */
+// Frédéric : « as-tu pensé aux puissances zéro ? » — il n'y avait que trois
+// figés (7⁰, 10⁰, 3⁰), aucun en 3e, et aucun ne disait pourquoi. Ici :
+//   - la table qui DESCEND (b³, b², b¹, b⁰) : à chaque ligne on divise par b,
+//     donc b⁰ = b ÷ b = 1 — sans formule, dès la 4e ;
+//   - avec les règles (`regles`, 3e et lycée) : bⁿ ÷ bⁿ = 1 et = b⁰ ;
+//   - le piège a⁰ = 0 ou a⁰ = a, en vrai/faux et en QCM ;
+//   - un petit calcul qui mêle a⁰, a¹ et a².
+
+export function genPuissanceZero(o: { regles?: boolean } = {}): TutorGeneratedQuestionV4 {
+  const p = randomChoice(PRENOMS);
+  const modes = ["table", "table", "valeur", "vraifaux", "calcul", ...(o.regles ? (["quotient", "quotient"] as const) : [])] as const;
+  const mode = randomChoice(modes as readonly string[]);
+  const DEF0 = "Pour tout nombre a non nul, a⁰ = 1. Ce n’est ni 0 ni a : quand on descend d’une puissance à la suivante, on DIVISE par a, et a¹ ÷ a = 1.";
+
+  if (mode === "table") {
+    const b = randomChoice([2, 3, 4, 5, 10, 10, 6, 7]);
+    const rows = [3, 2, 1, 0].map((k) => ({ values: [P(b, k), k === 0 ? "?" : fr(b ** k)] }));
+    return {
+      text: randomChoice([
+        `Observe le tableau : d’une ligne à la suivante, on divise par ${b}. Quel nombre remplace « ? » ?`,
+        `Complète le tableau des puissances de ${b} : que vaut ${P(b, 0)} ?`,
+        `${p} a écrit les puissances de ${b} en descendant. Quel nombre doit-on lire à la place de « ? » ?`,
+        `En continuant la régularité du tableau, que vaut ${P(b, 0)} ?`,
+        `Le tableau descend de ${P(b, 3)} à ${P(b, 0)}. Quelle valeur manque ?`,
+      ]),
+      format: "short",
+      expected: ["1"],
+      comparator: "number_equal",
+      canvas: {
+        kind: "tableau_donnees",
+        headers: [`Puissance de ${b}`, "Valeur"],
+        rows,
+        highlight: { cell: { row: 3, col: 1 } },
+      } as any,
+      explanation: expl(
+        DEF0,
+        `Quand l’exposant baisse de 1, on divise par ${b} : ${fr(b ** 3)} ÷ ${b} = ${fr(b ** 2)}, puis ${fr(b ** 2)} ÷ ${b} = ${b}.`,
+        `Ligne suivante : ${b} ÷ ${b} = 1. Donc ${P(b, 0)} = 1.`,
+        `${P(b, 0)} = 1 — et pas 0 : la suite des valeurs ne tombe jamais à 0.`
+      ),
+    };
+  }
+
+  if (mode === "quotient") {
+    const b = randomChoice(["2", "3", "5", "7", "10", "x", "a"]);
+    const n = randomInt(2, 6);
+    const e = `${P(b, n)} ÷ ${P(b, n)}`;
+    if (Math.random() < 0.5)
+      return {
+        text: randomChoice([
+          `Écris ${e} sous la forme d’une puissance de ${b}.`,
+          `Avec la règle du quotient, ${e} est égal à :`,
+          `${p} applique la règle des exposants à ${e}. Quelle puissance obtient-on ?`,
+        ]),
+        format: "qcm",
+        choices: makeChoices(P(b, 0), [P(b, 1), P(b, n), P(b, 2 * n), "0"]),
+        expected: [P(b, 0)],
+        comparator: "mcq_exact",
+        explanation: expl(
+          "Même base, quotient : aᵐ ÷ aⁿ = aᵐ⁻ⁿ.",
+          `On soustrait les exposants : ${n} − ${n} = 0.`,
+          `${e} = ${b} puissance (${n} − ${n}) = ${P(b, 0)}. Et un nombre divisé par lui-même vaut 1 : ${P(b, 0)} = 1.`,
+          `${e} = ${P(b, 0)} = 1.`
+        ),
+      };
+    return {
+      text: randomChoice([
+        `Un nombre divisé par lui-même vaut 1, donc ${e} = 1. La règle du quotient donne aussi ${e} = ${P(b, 0)}. Que vaut ${P(b, 0)} ?`,
+        `Calcule ${e} de deux façons — directement, puis avec la règle des exposants. Que vaut alors ${P(b, 0)} ?`,
+        `Sachant que ${e} = ${P(b, 0)}, que vaut ${P(b, 0)} ?`,
+      ]),
+      format: "short",
+      expected: ["1"],
+      comparator: "number_equal",
+      explanation: expl(
+        DEF0,
+        `${e} est un nombre divisé par lui-même : il vaut 1. Avec la règle, ${n} − ${n} = 0.`,
+        `${e} = 1 et ${e} = ${P(b, 0)}, donc ${P(b, 0)} = 1.`,
+        `${P(b, 0)} = 1 : c’est pour que la règle du quotient reste vraie qu’on pose a⁰ = 1.`
+      ),
+    };
+  }
+
+  if (mode === "vraifaux") {
+    const b = randomChoice(["7", "10", "2", "25", "x", "1 000", "0,5", "3"]);
+    const aff = randomChoice([
+      { eg: `${b}⁰ = 0`, vrai: false, why: `${b}⁰ = 1, pas 0.` },
+      { eg: `${b}⁰ = ${b}`, vrai: false, why: `c’est ${b}¹ qui vaut ${b} ; ${b}⁰ = 1.` },
+      { eg: `${b}⁰ = 1`, vrai: true, why: `tout nombre non nul à la puissance 0 vaut 1.` },
+      { eg: `${b}¹ = 1`, vrai: b === "1", why: `${b}¹ = ${b} : un seul facteur. C’est ${b}⁰ qui vaut 1.` },
+      { eg: `${b}¹ = ${b}`, vrai: true, why: `un seul facteur ${b}.` },
+      { eg: `${b}⁰ = ${b}¹`, vrai: false, why: `${b}⁰ = 1 et ${b}¹ = ${b}.` },
+    ]);
+    return {
+      text: randomChoice([
+        `Vrai ou faux : ${aff.eg}.`,
+        `${p} affirme que ${aff.eg}. Est-ce vrai ?`,
+        `Sur une copie, on lit : ${aff.eg}. Vrai ou faux ?`,
+        `L’égalité ${aff.eg} est-elle vraie ?`,
+      ]),
+      format: "qcm",
+      choices: ["Vrai", "Faux"],
+      expected: [aff.vrai ? "Vrai" : "Faux"],
+      comparator: "mcq_exact",
+      explanation: expl(DEF0, "On compare avec a⁰ = 1 et a¹ = a.", `${aff.vrai ? "Vrai" : "Faux"} : ${aff.why}`, `L’égalité ${aff.eg} est ${aff.vrai ? "vraie" : "fausse"}.`),
+    };
+  }
+
+  if (mode === "valeur") {
+    const bases = ["7", "10", "2026", "x", "1 000 000", "0,3", "(−4)", "y", "13", "99"];
+    const b = randomChoice(bases);
+    const nu = b.replace(/[()]/g, "");
+    return {
+      text: randomChoice([
+        `Que vaut ${b}⁰ ?`,
+        `Combien vaut ${b}⁰${/[xy]/.test(b) ? ` (avec ${b} ≠ 0)` : ""} ?`,
+        `${b}⁰ est égal à :`,
+        `${p} pense que ${b}⁰ vaut ${nu}. Quelle est la bonne valeur ?`,
+        `Parmi ces réponses, laquelle est égale à ${b}⁰ ?`,
+        `Sans calculatrice : ${b}⁰ = ?`,
+      ]),
+      format: "qcm",
+      choices: makeChoices("1", ["0", nu, "10", "impossible", "−1"]),
+      expected: ["1"],
+      comparator: "mcq_exact",
+      explanation: expl(DEF0, "Peu importe le nombre (non nul) : grand, petit, négatif ou lettre.", `${b}⁰ = 1.`, `${b}⁰ = 1.`),
+    };
+  }
+
+  // calcul : a⁰, a¹, a² mélangés
+  const a = randomInt(2, 9), c = randomInt(2, 9);
+  const forme = randomInt(0, 3);
+  let e = "", v = 0, detail = "";
+  if (forme === 0) { e = `${P(a, 0)} + ${P(c, 1)}`; v = 1 + c; detail = `${P(a, 0)} = 1 et ${P(c, 1)} = ${c}`; }
+  else if (forme === 1) { e = `${P(10, 0)} + ${P(10, 1)} + ${P(10, 2)}`; v = 111; detail = `1 + 10 + 100`; }
+  else if (forme === 2) { e = `${c} × ${P(a, 0)}`; v = c; detail = `${P(a, 0)} = 1, donc ${c} × 1`; }
+  else { e = `${P(a, 2)} − ${P(a, 0)}`; v = a * a - 1; detail = `${a * a} − 1`; }
+  return {
+    text: randomChoice([`Calcule ${e}.`, `Que vaut ${e} ?`, `Donne la valeur de ${e}.`, `${p} doit calculer ${e}. Quel résultat faut-il trouver ?`]),
+    format: "short",
+    expected: [String(v)],
+    comparator: "number_equal",
+    explanation: expl(DEF0, "On remplace chaque puissance par sa valeur, puis on calcule.", `${detail} = ${v}.`, `${e} = ${v}.`),
+  };
+}
