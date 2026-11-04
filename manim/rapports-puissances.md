@@ -127,3 +127,65 @@
 - Contrôles : dry runs AUDIT=1 BORDS=1 (60 im/s) : 0 AUDIT-AVANCE, 0 RETARD, 0 BORD pour les 4 vidéos (reste AUDIT-ABSENT « 974 » de l'écran de fin commun). `verifier-bords-video.py` : « 0 instants qui touchent un bord » sur les 4 mp4.
 - Planches : basse déf puis HD. Corrigé et re-rendu : textes plus larges que prévu (polices, retours à la ligne), cartes trop près de Ti-Margo, silhouettes mal placées sur le planisphère, contour de la Chine refait (lon/lat), « 7,mètre » collé, étiquettes « entre 1 et 10 » / « puissance de 10 » qui se chevauchaient, trou dans « 1, 4 », lignes de base décalées entre morceaux posés au mot (« vaut bien 45 000, », « plus petit que 1 », « Réponse B : »…, aligné partout par `ligne_base`), « la Terre » sans majuscule dans le short. Planches HD finales : rien qui chevauche ni ne déborde.
 - Soucis restants : aucun défaut visuel. Rien de commité ; pas de miniature, manifeste ni R2.
+- Contrôle de la session principale (04/11, 18 h) : planches paysage 4e + 2de et short regardées. Short : textes de la carte finale (« La Terre pèse environ », « 6 suivi de 24 zéros ») et du « 8 000 000 000 » trop près des bords de la carte → largeur bornée 3,6 au lieu de 3,9, interligne de « Écris-le en notation / scientifique. » élargi ; dry run AUDIT=1 BORDS=1 = 0 ; short RE-RENDU en HD, `verifier-bords-video.py` = 0 instants.
+
+## Épisode 08 « produit-quotient » — PAYSAGE 2de (verte) et SHORT 2de (blanche) (05/11)
+- Fichiers : `manim/scripts/4e/puissance_produit_quotient.py` (base `PuissanceProduitQuotientBase` + `PuissanceProduitQuotient2de`), `puissance_produit_quotient_short.py` (`PuissanceProduitQuotientShort`), marques `puissance_produit_quotient[_short]_marques.json` (+ `.cues.tsv`, marques_dump + cues2marques, relues mot à mot : aucun mot répété perdu), WAV `public/sons/2de-puissance-produit-quotient[-short]/` (débit −6). Outils importés sans modification : `6e/prop_commun.py`, et `OutilsNotation` / `puiss` / `T` de `puissance_notation_scientifique.py`. Voix : AUCUN changement.
+- Sorties : `manim/sorties/seconde/maths/puissances/08-produit-quotient/eleveai-maths-seconde-puissance-produit-quotient.mp4` (4:23, 1920 × 1080) et `…/eleveai-maths-seconde-puissance-produit-quotient-short.mp4` (1:10, 1080 × 1920). Media : `manim/scripts/4e/media-puiss-08-seconde`, `media-puiss-08-short`.
+- Ceintures : paysage VERTE, short BLANCHE (échelle entière sous le titre). Identité « Maths 2de — EleveAI ».
+- Micro : 2de `puiss_produit_quotient` (notion `puissances_2de`). Centres : paysage `technologie-ia`, `jeux-defis` ; short `technologie-ia`. Métier : ingénieure en cybersécurité (clés secrètes en bits).
+- Dessins de la paysage :
+  - 01 l'ingénieure, le cadenas, la clé, les cases de bits qui défilent (3 bleues puis 4 orange) ;
+  - 02 2³ × 2⁴ se déplie en 3 puis 4 facteurs 2 (accolades), les deux groupes se rejoignent, compteur 1…7 orange, les 7 facteurs se regroupent en 2⁷ = 128 clés ; aᵐ × aⁿ = aᵐ⁺ⁿ encadré ;
+  - 03 3⁷/3² déplié, deux paires de 3 barrées en haut et en bas, « il en reste cinq » (compteur), les 5 facteurs se regroupent en 3⁵ ; aᵐ/aⁿ = aᵐ⁻ⁿ ;
+  - 04 5³/5³ : les trois paires barrées = 1 « un nombre divisé par lui-même », puis 5³⁻³ = 5⁰ et a⁰ = 1 encadré ;
+  - 05 2³/2⁵ : trois paires barrées, « 2 facteurs en bas » orange → 2³⁻⁵ = 2⁻² = 1/4 (un quart) ;
+  - 06 le piège 2³ × 3² : bases rouges, la règle barrée en rouge, points 2 × 4 et 3 × 3 → 8 × 9 = 72 ;
+  - 07 défi (4⁵ × 4⁻²)/4³ avec cadenas fermé, 07b 5 + (−2) = 3 → 4³/4³ = 4³⁻³ = 4⁰ = 1, la clé ouvre le cadenas.
+- Short : en haut la clé et ses cases de bits (3 bleues, puis 4 orange) ; en bas, sous chaque groupe et au même instant, 2³ (8 clés) et × 2⁴, puis 2³ × 2⁴ = 2³⁺⁴ = 2⁷ = 128 clés ; fin sur la clé de 128 bits (128 petites cases) et « 2^? », réponse en commentaire, puis la fin standard.
+- Paysage, questions (t mesuré au rendu = début de l'écran « Question ! ») :
+```json
+[{"t": "00:46", "question": "5² × 5⁶ ?", "choix": ["5¹²", "25⁸", "5⁸"], "reponse": 2, "explication": "La base reste 5, on additionne les exposants. 25⁸ : le piège, la base ne se multiplie pas."},
+ {"t": "02:13", "question": "7⁴ ÷ 7⁶ ?", "choix": ["7²", "7⁻²", "1⁻²"], "reponse": 1, "explication": "4 − 6 = −2. La base 7 ne change pas."},
+ {"t": "02:57", "question": "2³ × 3² ?", "choix": ["6⁵", "72", "6⁶"], "reponse": 1, "explication": "Les bases sont différentes : on calcule 8 × 9 = 72."}]
+```
+- Short, questions :
+```json
+[{"t": "00:25", "question": "2⁵ × 2⁵ ?", "choix": ["2¹⁰", "4¹⁰", "2²⁵"], "reponse": 0, "explication": "La base reste 2 : 5 + 5 = 10. 1 024 clés."}]
+```
+- Chapitres paysage (ECRAN du rendu HD) : 00:00 Produit et quotient de puissances · 00:10 Les clés de l'ingénieure en cybersécurité · 00:29 2³ × 2⁴ = 2⁷ · 00:46 Question : 5² × 5⁶ · 01:20 Pour diviser : 3⁷ ÷ 3² · 01:39 Un rappel : 5⁰ = 1 · 01:57 Exposant du bas plus grand : 2⁻² · 02:13 Question : 7⁴ ÷ 7⁶ · 02:44 Le piège : deux bases différentes · 02:57 Question : 2³ × 3² · 03:25 À toi de jouer · 03:40 Correction · 03:55 Ce que tu as appris · 04:16 Fin.
+- Contrôles : dry runs AUDIT=1 BORDS=1 : 0 AUDIT-AVANCE, 0 RETARD, 0 BORD (paysage et short ; restent « TARD 5 » = chiffre du compte à rebours, « 974 » de l'écran de fin, « 1024 » écrit « 1 024 »). `verifier-bords-video.py` : « 0 instants qui touchent un bord » sur la paysage et sur le short.
+- Planches : deux passes basse déf + planches HD. Corrigé avant le rendu final : titre du défi trop large (sur deux lignes), facteurs « 2×2×2 » trop serrés, phrase de réponse de la question 1 trop petite (4 lignes), règle barrée qui touchait le titre du piège et « On calcule : » collé aux points, « = 1 » collé à son cadre (correction), dernière ligne du bilan trop réduite (sur deux lignes) ; short : clé sur l'échelle des ceintures, lignes qui débordaient de la carte, phrase de réponse trop petite, « 128clés » collé (re-rendu HD du short).
+- Contrôle de la session principale (05/11), corrigé puis RE-RENDU en HD sous verrou (paysage et short) : (1) short : la ligne « 2³ × 2⁴ = 2³⁺⁴ » bornée à 3,4 (≈ 85 % de la carte) et centrée, « = 2⁷ = 128 clés » encadrée en entier et bornée à 3,3 ; (2) paysage : explications des trois questions-pauses à UNE seule taille (28, `rep_ligne` sans réduction ligne par ligne), chacune sur 4 lignes bien espacées à gauche de Ti-Margo (Q1 « Réponse C : 5⁸. / La base reste 5 : / on additionne / les exposants. », Q2 « Réponse B : 7⁻². / 4 − 6 = −2. / La base 7 / ne change pas. », Q3 « Réponse B : 72. / Les bases sont / différentes : / on calcule 8 × 9. »). Dry runs propres (0 AUDIT-AVANCE, 0 RETARD, 0 BORD, 0 ligne trop large), `verifier-bords-video.py` = 0 instant sur les deux mp4, mêmes temps de questions et de chapitres, planches HD regardées.
+- Soucis restants : aucun défaut visuel.
+
+## Épisode 06 « comparer » — PAYSAGE 4e (verte) et SHORT 4e (blanche) (05/11)
+- Fichiers : `manim/scripts/4e/puissance_comparer.py` (`PuissanceComparerBase` + `PuissanceComparer4e`), `puissance_comparer_short.py` (`PuissanceComparerShort`), marques `puissance_comparer_marques.json` / `…_short_marques.json` (+ `.cues.tsv`), WAV `public/sons/4e-puissance-comparer[-short]/`. Aucun module commun modifié : T / puiss / notation / ligne_base / OutilsNotation sont IMPORTÉS de l'épisode 05. Voix : AUCUN changement.
+- Marques : `cues2marques.py` perdait les mots répétés (« 10 puissance » doublé). J'ai donc converti PAR PAIRES (cue doublée « 9 fois » = le 9 puis le « fois » ; un nombre à espaces reste un seul mot), avec un script à part dans mon dossier temporaire.
+- Sorties : `manim/sorties/4e/maths/puissances/06-comparer/eleveai-maths-4e-puissance-comparer.mp4` (1920 × 1080, 3:37) et `…/eleveai-maths-4e-puissance-comparer-short.mp4` (1080 × 1920, 1:01). Media : `manim/scripts/4e/media-puiss-06-4e`, `media-puiss-06-short`.
+- Ceintures : paysage VERTE ; short BLANCHE (échelle entière sous le titre).
+- Micro : 4e `puissance_comparer`.
+- Centres : paysage `sciences`, `nature-ecologie`, `animaux` ; short `sport`, `jeux-defis`.
+- Dessins de la paysage : une géologue (casque, marteau) et deux volcans qui fument, avec des coulées de lave à l'échelle (0,9 contre 2). Le 9 et le 2 sont entourés avec « ? », et « Attention ! » s'affiche. En entier : deux barres de lave à l'échelle, puis deux copies de la petite barre posées sur la grande (« plus de deux fois »). La règle en deux marches : 1) les exposants (orange), 2) les nombres devant (bleu), seulement si égalité ; Ti-Margo monte d'une marche à l'autre et l'exposant ⁿ puis le « a » sont entourés. 3,7 × 10⁸ contre 3,2 × 10⁸ : les exposants sont grisés, les nombres devant encadrés en bleu et placés sur une droite de 3 à 4. Une droite des exposants −9 … −3 montre « à droite » ; une bactérie et un virus sont dessinés à l'échelle relative (× 20). Défi : baleine bleue, éléphant et camion en silhouettes. Correction : les gros exposants 3, 4, 5 s'affichent, puis les animaux descendent à leur place, avec 6 000 / 40 000 / 150 000 kg et une flèche.
+- Short : sur un ring en haut, deux jauges-boxeurs (gant au sommet) « 9 × 10⁵ » VS « 2 × 10⁶ ». En bas, au même instant : 900 000 sous la jauge de gauche, 2 000 000 sous celle de droite, puis « L'exposant décide d'abord : 6 bat 5 ». Le gant de droite frappe et la jauge de gauche pâlit. La question-pause dure 3 s. La question finale (9,9 × 10⁻⁴ contre 1 × 10⁻³, réponds en commentaire) précède 03-abonne.
+- Paysage, questions (t mesuré sur le rendu HD) :
+```json
+[{"t": "00:55", "question": "Lequel est le plus grand ?", "choix": ["8 × 10³", "1,2 × 10⁴", "9,9 × 10³"], "reponse": 1, "explication": "Son exposant, 4, est le plus grand : 12 000, contre 8 000 et 9 900."},
+ {"t": "01:56", "question": "Lequel est le plus petit ?", "choix": ["5 × 10⁻³", "5 × 10⁻⁴", "1 × 10⁻³"], "reponse": 1, "explication": "5 × 10⁻⁴, soit 0,000 5. Son exposant, −4, est le plus petit."}]
+```
+- Short :
+```json
+[{"t": "00:17", "question": "7 × 10² contre 1 × 10³ ?", "choix": ["7 × 10²", "1 × 10³", "égalité"], "reponse": 1, "explication": "1 000 contre 700. L'exposant 3 bat l'exposant 2."}]
+```
+- Chapitres de la paysage (lignes ECRAN du rendu HD) : 00:00 Comparer en notation scientifique · 00:09 La géologue et les deux volcans · 00:27 En entier · 00:42 La règle en deux marches · 00:55 Question : le plus grand · 01:25 Même exposant · 01:41 Exposants négatifs · 01:56 Question : le plus petit · 02:29 À toi de jouer · 02:53 Correction · 03:08 Ce que tu as appris · 03:30 Fin.
+- Contrôles : dry runs AUDIT=1 BORDS=1 à 60 im/s : 0 AUDIT-AVANCE, 0 RETARD, 0 BORD pour la paysage et le short (il reste seulement l'AUDIT-ABSENT « 974 » de l'écran de fin commun). `verifier-bords-video.py` : « 0 instants qui touchent un bord » sur les deux mp4.
+- Planches : basse déf puis HD, regardées écran par écran. Corrigé et re-rendu :
+  - fumée sur les étiquettes des volcans ;
+  - textes des deux marches qui débordaient (marches agrandies, polices réduites) ;
+  - phrases de réponse trop serrées ou rapetissées (lignes plus courtes, interligne élargi, nombres posés sur les barres) ;
+  - « = » entre exposants grisés supprimé ;
+  - titre du défi collé à la consigne ;
+  - « −6 », « −7 », « 9,9 », « 10 » qui s'affichaient avant la voix ;
+  - short : « 10⁵VS2 » collés (VS descendu), trait parasite dans les gants, pointillés qui barraient « Écrits en entier », question cachée sous les cartes (bug de ligne de base corrigé), réponse qui touchait Ti-Margo (cartes réduites, « Réponse B » porté par la carte allumée), « Qui gagne ? » sur le VS et « 2 000 000 » au bord de la carte.
+- Soucis restants : aucun défaut visuel. Rien de commité ; pas de miniature, de manifeste ni de R2.
+- Contrôle de la session principale (05/11, 1 h) : planches paysage + short regardées. Paysage, écran « La règle » : le cercle orange autour de l'exposant n de « a × 10ⁿ » mordait sur le « 0 » → remplacé par une flèche orange qui pointe l'exposant ; paysage RE-RENDUE en HD (audit 60 im/s = 0, `verifier-bords-video.py` = 0 instants). Short : rien à corriger.

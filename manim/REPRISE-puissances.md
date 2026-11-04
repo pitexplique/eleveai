@@ -1,4 +1,4 @@
-# Reprise — série PUISSANCES (état au 04/11/2026, session « voix + rendus »)
+# Reprise — série PUISSANCES (état au 04/11/2026 soir, session « rendus 5 → 10 »)
 
 Lire d'abord `manim/prompt-session-puissances.md` (découpage, ordre de travail) et `manim/brief-agent-puissances.md` (brief des agents de rendu, ⛔ « corrige toujours les défauts mineurs »).
 
@@ -6,15 +6,15 @@ Lire d'abord `manim/prompt-session-puissances.md` (découpage, ordre de travail)
 | Ép. | Slug | Ceintures | Voix | Rendu |
 |---|---|---|---|---|
 | 1 | comprendre | 4e/3e blanche, short blanche | VALIDÉE | ✅ FINI (paysage 4e + 3e, short), revu |
-| 2 | calculer | 4e/3e jaune, short blanche | VALIDÉE | agent en cours (paysage puis short) |
-| 3 | dix | 4e/3e jaune, short blanche | VALIDÉE | agent en cours |
+| 2 | calculer | 4e/3e jaune, short blanche | VALIDÉE | ✅ FINI, revu |
+| 3 | dix | 4e/3e jaune, short blanche | VALIDÉE | ✅ FINI, revu |
 | 4 | zero-negatif | 4e orange / 2de jaune (écran 04b 2de seulement), short blanche | VALIDÉE | ✅ FINI (4e, seconde, short), revu |
-| 5 | notation-scientifique | 4e/3e/2de (4e verte, 3e/2de jaune), short blanche | VALIDÉE | agent en cours |
-| 6 | comparer | 4e verte, short blanche | VALIDÉE | À LANCER |
-| 7 | calcul | 4e/3e verte, short blanche | VALIDÉE | À LANCER |
-| 8 | produit-quotient | 2de verte, short blanche (voix 2de-puissance-…) | VALIDÉE | À LANCER |
-| 9 | puissance-puissance | 2de verte, PAYSAGE SEULE (voix 2de-puissance-puissance-puissance) | VALIDÉE | À LANCER |
-| 10 | enchainer | 2de orange, short blanche (voix 2de-puissance-enchainer) | VALIDÉE | À LANCER |
+| 5 | notation-scientifique | 4e/3e/2de (4e verte, 3e/2de jaune), short blanche | VALIDÉE | ✅ FINI (4e, 3e, seconde, short), revu ; short corrigé (marges) et re-rendu 04/11 18 h |
+| 6 | comparer | 4e verte, short blanche | VALIDÉE | ✅ FINI (4e, short), revu ; paysage corrigée (flèche sur l'exposant) et re-rendue 05/11 1 h |
+| 7 | calcul | 4e/3e verte, short blanche | VALIDÉE | agent lancé (nuit du 04/11) |
+| 8 | produit-quotient | 2de verte, short blanche (voix 2de-puissance-…) | VALIDÉE | ✅ FINI (seconde, short), revu ; corrigé (ligne du short dans la carte, une taille par explication) et re-rendu 05/11 1 h 20 |
+| 9 | puissance-puissance | 2de verte, PAYSAGE SEULE (voix 2de-puissance-puissance-puissance) | VALIDÉE | agent lancé 05/11 0 h 57 |
+| 10 | enchainer | 2de orange, short blanche (voix 2de-puissance-enchainer) | VALIDÉE | agent lancé 05/11 1 h 30 |
 | 11 → 13 | | | à écrire | — |
 
 Sorties : `manim/sorties/<classe>/maths/puissances/NN-<slug>/`. Rapports des agents : `manim/rapports-puissances.md`.
