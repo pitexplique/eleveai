@@ -1,0 +1,17 @@
+{
+  "00-garde": "Comprendre une puissance. Une vidéo partagée à 3 amis, puis encore à 3 amis : combien de personnes la reçoivent ?",
+  "01-partage": "Inès publie une vidéo de son chat. Elle l'envoie à 3 amis. Chacun de ces amis l'envoie à 3 nouveaux amis. Et ainsi de suite. Au quatrième envoi, combien de personnes la reçoivent ?",
+  "02-arbre": "Dessinons l'arbre. Envoi 1 : 3 personnes. Envoi 2 : chacune en touche 3. 3 fois 3 : 9. Envoi 3 : 9 fois 3 : 27. Envoi 4 : 27 fois 3 : 81. 81 personnes ! Pas 3 fois 4, 12. C'est ce que calculent les analystes de données des réseaux sociaux : une vidéo qui se partage ainsi devient virale très vite.",
+  "03-ecriture": "3 fois 3 fois 3 fois 3 : quatre fois le même facteur. Pour l'écrire vite, on écrit 3 puissance 4. Le 3, en bas, c'est la base : le nombre qu'on multiplie. Le petit 4, en haut, c'est l'exposant : il compte les facteurs.",
+  "03q-question": "Question ! Comment écrire 5 fois 5 fois 5 avec une puissance ? A : 5 puissance 3. B : 3 puissance 5. C : 5 fois 3. Mets pause, et choisis !",
+  "03r-reponse": "Réponse A : 5 puissance 3. La base, c'est 5, le nombre répété. L'exposant, 3, compte les facteurs.",
+  "04-carre": "Une icône d'application : 4 pixels sur 4 pixels. Combien de pixels ? 4 rangées de 4 : 4 fois 4, 16. On écrit 4 puissance 2, et on dit 4 au carré. Les graphistes qui dessinent les icônes comptent comme ça. Attention : 4 fois 2, 8, ne compte que deux rangées.",
+  "05-cube": "Un casse-tête en forme de cube : 3 petits cubes sur chaque arête. 3 fois 3 fois 3 : 27 petits cubes. On écrit 3 puissance 3, et on dit 3 au cube.",
+  "06-piege": "Le piège : lire l'exposant comme un fois. 2 puissance 5, ce n'est pas 2 fois 5, 10. C'est 2 fois 2 fois 2 fois 2 fois 2 : 32. Autre piège : échanger la base et l'exposant. 2 puissance 3, c'est 8. 3 puissance 2, c'est 9. Ce n'est pas le même nombre.",
+  "06q-question": "Question ! Combien vaut 2 puissance 4 ? A : 8. B : 16. C : 6. Mets pause, et choisis !",
+  "06r-reponse": "Réponse B : 16. 2 fois 2 fois 2 fois 2. 8, c'est 2 fois 4 : le piège.",
+  "07-defi": "À toi de jouer. Au laboratoire, une biologiste observe une bactérie. Elle se divise en 2 toutes les 20 minutes. Après 5 divisions, combien y a-t-il de bactéries ? Écris-le avec une puissance, puis calcule. Mets pause, et cherche !",
+  "07b-correction": "Correction. À chaque division, le nombre de bactéries est multiplié par 2. 5 divisions : 2 fois 2 fois 2 fois 2 fois 2, soit 2 puissance 5. 2, 4, 8, 16, 32 : 32 bactéries. Pas 2 fois 5, 10.",
+  "08-finale": "Ce que tu as appris. a puissance n, c'est a écrit n fois en facteur. La base est le nombre répété, l'exposant compte les facteurs. a puissance n, ce n'est pas a fois n. Alors l'épisode 2 t'attend : calculer une puissance, même avec un nombre négatif.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

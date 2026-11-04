@@ -1,0 +1,16 @@
+{
+  "00-garde": "Les puissances de 10. Combien de zéros dans 100 milliards ?",
+  "01-astronome": "Une astronome compte les étoiles. Notre galaxie en contient environ 100 milliards : un 1 suivi de 11 zéros. Écrire tous ces zéros, c'est long, et on se trompe vite. Une puissance de 10 l'écrit en deux caractères.",
+  "02-table": "10 puissance 1 : 10. 10 puissance 2 : 10 fois 10, 100. 10 puissance 3 : 1 000. 10 puissance 6 : un million. L'exposant compte les zéros : 10 puissance n, c'est 1 suivi de n zéros.",
+  "03-galaxie": "Les étoiles de la galaxie : un 1 suivi de 11 zéros. Donc 10 puissance 11 étoiles.",
+  "03q-question": "Question ! Combien vaut 10 puissance 4 ? A : 40. B : 10 000. C : 1 000. Mets pause, et choisis !",
+  "03r-reponse": "Réponse B : 10 000, un 1 suivi de 4 zéros. 40, c'est 10 fois 4 : le piège.",
+  "04-ecrire": "Dans l'autre sens. Un ingénieur réseau lit qu'un serveur reçoit un million de demandes par seconde. Un million : 1 000 000. Je compte les zéros : 6. Un million égale 10 puissance 6. Un milliard : 9 zéros, 10 puissance 9.",
+  "05-piege": "Le piège : compter les chiffres au lieu des zéros. 1 000 a quatre chiffres, mais trois zéros. C'est 10 puissance 3, pas 10 puissance 4.",
+  "05q-question": "Question ! Comment écrire 100 000 avec une puissance de 10 ? A : 10 puissance 6. B : 10 puissance 5. C : 10 fois 5. Mets pause, et choisis !",
+  "05r-reponse": "Réponse B : 10 puissance 5. 100 000, c'est un 1 et cinq zéros. 6, c'est le nombre de chiffres : le piège.",
+  "06-defi": "À toi de jouer. Une technicienne installe un disque dur d'un téraoctet : mille milliards d'octets. Écris ce nombre avec une puissance de 10. Mets pause, et cherche !",
+  "06b-correction": "Correction. Mille : 3 zéros. Un milliard : 9 zéros. Mille milliards : 3 plus 9, 12 zéros. 1 000 000 000 000 égale 10 puissance 12 octets.",
+  "07-finale": "Ce que tu as appris. 10 puissance n, c'est 1 suivi de n zéros. Pour écrire un grand nombre, je compte les zéros, pas les chiffres. Alors l'épisode 4 t'attend : 10 puissance 0, et les exposants négatifs.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

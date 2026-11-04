@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Ma calculatrice dit : moins 2 puissance 4, égale moins 16. Elle est cassée ?",
+  "01-explication": "Non ! Sans parenthèses, la puissance passe d'abord : 2 puissance 4, 16, puis le moins devant : moins 16. Avec des parenthèses : moins 2 fois moins 2 fois moins 2 fois moins 2 : 16.",
+  "01q-question": "Question ! Moins 3, entre parenthèses, au carré ? A : moins 9. B : 9. C : 6. Mets pause, et choisis !",
+  "01r-reponse": "Réponse B : 9. Deux signes moins : le résultat est positif.",
+  "02-question": "Et moins 1 puissance 100, sans parenthèses ? Réponds en commentaire !",
+  "03-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -1,0 +1,19 @@
+{
+  "00-garde": "Calculer une puissance. Deux calculatrices, deux résultats : qui a raison ?",
+  "01-calculatrices": "Léo et Maya pensent taper le même calcul. Léo trouve moins 16. Maya trouve 16. Qui a raison ? Les deux ! Ils n'ont pas tapé le même calcul. Pour le voir, il faut d'abord savoir calculer une puissance.",
+  "02-patissiere": "Une cheffe pâtissière prépare une pâte feuilletée. Elle plie sa pâte en 3, quatre fois de suite. Combien de couches ? 3 puissance 4. On calcule pas à pas : 3, fois 3, 9. Fois 3, 27. Fois 3, 81. 81 couches de pâte.",
+  "02q-question": "Question ! Combien vaut 4 puissance 3 ? A : 12. B : 64. C : 81. Mets pause, et choisis !",
+  "02r-reponse": "Réponse B : 64. 4 fois 4, 16. Fois 4, 64. 12, c'est 4 fois 3 : le piège.",
+  "03-parentheses": "Avec un nombre négatif, les parenthèses décident. Moins 2, entre parenthèses, puissance 4 : la base est moins 2. Moins 2 fois moins 2 fois moins 2 fois moins 2. Quatre signes moins : le résultat est positif, 16. C'est le calcul de Maya.",
+  "04-sans": "Sans parenthèses, moins 2 puissance 4 : l'exposant ne touche que le 2. On calcule 2 puissance 4, 16, et on garde le signe moins devant : moins 16. C'est le calcul de Léo.",
+  "05-signes": "La règle des signes. Avec une base négative entre parenthèses, un exposant pair donne un résultat positif, un exposant impair donne un résultat négatif. Moins 2, entre parenthèses, puissance 3 : moins 8. Puissance 4 : 16.",
+  "05q-question": "Question ! Combien vaut moins 3, entre parenthèses, au carré ? A : moins 9. B : 9. C : moins 6. Mets pause, et choisis !",
+  "05r-reponse": "Réponse B : 9. Moins 3 fois moins 3 : deux signes moins, le résultat est positif.",
+  "06-calculatrice": "Le conseil de la calculatrice : pour élever un nombre négatif à une puissance, tape les parenthèses. Sinon, elle calcule moins 2 puissance 4 : moins 16.",
+  "06q-question": "Question ! Combien vaut moins 5 au carré, sans parenthèses ? A : 25. B : moins 25. C : moins 10. Mets pause, et choisis !",
+  "06r-reponse": "Réponse B : moins 25. Sans parenthèses, on calcule 5 au carré, 25, et le moins reste devant.",
+  "07-defi": "À toi de jouer. Calcule moins 2, entre parenthèses, puissance 5. Puis moins 2 puissance 5, sans parenthèses. Mets pause, et cherche !",
+  "07b-correction": "Correction. Moins 2, entre parenthèses, puissance 5 : cinq signes moins, l'exposant est impair, le résultat est négatif : moins 32. Moins 2 puissance 5 : 2 puissance 5, 32, et le moins devant : moins 32. Le même résultat ! Avec un exposant impair, les parenthèses ne changent rien.",
+  "08-finale": "Ce que tu as appris. Calculer une puissance pas à pas. Avec des parenthèses, la base négative est multipliée : exposant pair, résultat positif ; exposant impair, résultat négatif. Sans parenthèses, le moins reste devant. Alors l'épisode 3 t'attend : les puissances de 10.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

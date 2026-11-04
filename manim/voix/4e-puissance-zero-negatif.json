@@ -1,0 +1,19 @@
+{
+  "00-garde": "Puissance zéro et exposant négatif. Que vaut 10 puissance 0 ? Et 10 puissance moins 3 ?",
+  "01-puce": "Une ingénieure en microélectronique dessine les puces des téléphones. Ses traits sont minuscules : quelques milliardièmes de mètre. Pour écrire des nombres aussi petits, les puissances de 10 descendent sous zéro.",
+  "02-table": "Regarde la table qui descend. 10 puissance 3 : 1 000. 10 puissance 2 : 100. 10 puissance 1 : 10. À chaque ligne, l'exposant baisse de 1, et on divise par 10.",
+  "03-zero": "Continuons. 10 divisé par 10 : 1. Donc 10 puissance 0 égale 1. Pas 0 : 1 !",
+  "04-base2": "Avec 2, c'est pareil. 2 puissance 3 : 8. 2 puissance 2 : 4. 2 puissance 1 : 2. On divise par 2 : 2 puissance 0 égale 1. Quelle que soit la base, a puissance 0 égale 1.",
+  "04q-question": "Question ! Combien vaut 7 puissance 0 ? A : 0. B : 7. C : 1. Mets pause, et choisis !",
+  "04r-reponse": "Réponse C : 1. Une puissance d'exposant 0 vaut toujours 1.",
+  "04b-quotient-2de": "En seconde, une autre preuve. 5 puissance 3 divisé par 5 puissance 3 : un nombre divisé par lui-même, 1. Et la règle des exposants donne 5 puissance 3 moins 3 : 5 puissance 0. Donc 5 puissance 0 égale 1.",
+  "05-negatif": "Et sous zéro ? On continue de diviser par 10. 10 puissance moins 1 : 1 divisé par 10, 0,1. 10 puissance moins 2 : 0,01. 10 puissance moins 3 : 0,001.",
+  "06-rang": "Pour lire 10 puissance moins n : le 1 est à la n-ième place après la virgule. 0,001 : le 1 est à la troisième place. C'est 10 puissance moins 3.",
+  "07-regle": "Avec une autre base. 2 puissance moins 1, c'est 1 divisé par 2 : 0,5. En général, a puissance moins n égale 1 sur a puissance n. 2 puissance moins 3 : 1 sur 2 puissance 3, 1 sur 8.",
+  "07q-question": "Question ! Combien vaut 10 puissance moins 2 ? A : moins 100. B : 0,01. C : moins 20. Mets pause, et choisis !",
+  "07r-reponse": "Réponse B : 0,01. Un exposant négatif ne rend pas le nombre négatif : il le rend petit.",
+  "08-defi": "À toi de jouer. Le trait d'une puce mesure 10 puissance moins 9 mètre. Écris ce nombre en décimal. Puis calcule 4 puissance moins 1. Mets pause, et cherche !",
+  "08b-correction": "Correction. 10 puissance moins 9 : le 1 est à la neuvième place après la virgule. 0,000 000 001 mètre : un milliardième de mètre. 4 puissance moins 1 : 1 sur 4, 0,25.",
+  "09-finale": "Ce que tu as appris. a puissance 0 égale 1, jamais 0. 10 puissance moins n : le 1 est à la n-ième place après la virgule. a puissance moins n égale 1 sur a puissance n. Alors l'épisode 5 t'attend : la notation scientifique.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

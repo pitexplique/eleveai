@@ -1,0 +1,18 @@
+{
+  "00-garde": "Enchaîner les règles. Comment réduire une longue expression en une seule puissance ?",
+  "01-pilote": "Avant de décoller, une pilote de ligne suit sa check-list : une étape à la fois, dans l'ordre, sans en sauter. Pour une longue expression de puissances, on fait pareil.",
+  "02-enonce": "Voici B : 7 puissance 4 fois 7 puissance moins 5, le tout divisé par 7 puissance 3, le tout puissance 4. On veut écrire B sous la forme 7 puissance n.",
+  "03-checklist": "La check-list. Un : les puissances de puissances. Deux : les produits. Trois : le quotient.",
+  "04-etape1": "Étape un. En bas, 7 puissance 3, le tout puissance 4 : on multiplie, 3 fois 4, 12. 7 puissance 12.",
+  "05-etape2": "Étape deux. En haut, 7 puissance 4 fois 7 puissance moins 5 : on additionne, 4 plus moins 5, moins 1. 7 puissance moins 1.",
+  "06-etape3": "Étape trois. 7 puissance moins 1 divisé par 7 puissance 12 : on soustrait, moins 1 moins 12, moins 13. B égale 7 puissance moins 13.",
+  "06q-question": "Question ! 2 puissance 5 fois 2 puissance 3, divisé par 2 puissance 6 ? A : 2 puissance 2. B : 2 puissance 9. C : 2 puissance 14. Mets pause, et choisis !",
+  "06r-reponse": "Réponse A : 2 puissance 2. 5 plus 3, 8. Puis 8 moins 6, 2.",
+  "07-piege": "Le piège le plus courant : moins 1 moins 12. Ce n'est pas 11, ni moins 11 : c'est moins 13. Écris le calcul des exposants à côté, sans te presser.",
+  "07q-question": "Question ! 3 puissance moins 2 divisé par 3 puissance 4 ? A : 3 puissance 2. B : 3 puissance moins 6. C : 3 puissance moins 2. Mets pause, et choisis !",
+  "07r-reponse": "Réponse B : 3 puissance moins 6. Moins 2 moins 4, moins 6.",
+  "08-defi": "À toi de jouer. Écris C sous la forme 5 puissance n. C égale 5 puissance 2, le tout au cube, fois 5 puissance moins 4, le tout divisé par 5 puissance 3. Mets pause, et cherche !",
+  "08b-correction": "Correction. Étape un : 5 puissance 2, au cube : 2 fois 3, 6. Étape deux : 5 puissance 6 fois 5 puissance moins 4 : 6 plus moins 4, 2. Étape trois : 5 puissance 2 divisé par 5 puissance 3 : 2 moins 3, moins 1. C égale 5 puissance moins 1.",
+  "09-finale": "Ce que tu as appris. Réduire dans l'ordre : les puissances de puissances, puis les produits, puis le quotient. Écrire le calcul des exposants à côté. Vérifier les signes moins. Alors les défis t'attendent.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -35,7 +35,7 @@ Ses classes sont la 6e et la 4e : la série commence par la 4e.
 5. La notation scientifique — 4e/3e/2de
 6. Comparer en notation scientifique : l'exposant décide d'abord, la mantisse ensuite — 4e
 7. Calculer avec des puissances de 10 — 4e/3e
-8. Produit et quotient de même base — 2de
+8. Produit et quotient de même base — 2de (rappel : 5³ ÷ 5³ = 1 et 5³⁻³ = 5⁰, donc 5⁰ = 1)
 9. Puissance d'une puissance — 2de (short existant gardé : seulement la paysage)
 10. Enchaîner les règles : (7⁴ × 7⁻⁵)/(7³)⁴ — 2de, orange
 11. Défi 4e
